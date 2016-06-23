@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>evolsetup.hh</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>evolsetup.hh</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="colorfactors.html">
+                    colorfactors.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="dgauss.html">
+                    dgauss.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="distribution.html">
+                    distribution.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="evolinit.html">
+                    evolinit.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="evolsetup.html">
+                    evolsetup.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="grid.html">
+                    grid.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="hardoperator.html">
+                    hardoperator.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="splittings.html">
+                    splittings.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="subgrid.html">
+                    subgrid.hh
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        <p>The <strong>evolsetup</strong> class contains all the parameters needed to perform the DGLAP evolution.
+The constructor initializes a set of default parameters which correspond to the LH
+benchmark parameters at NNLO.</p>
+
+        
+      
+        
+        <p>Include only once</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span></pre></div>
+        
+      
+        
+        <p>Standard libraries</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</pre></div>
+        
+      
+        
+        <p>All classes are namespaced in <strong>apfel::</strong></p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">namespace</span> apfel {</pre></div>
+        
+      
+        
+        <p>Enumerators to facilitate the interpretation</p>
+
+        
+      
+        
+        <p>Flavour scheme</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">enum</span> flavourscheme {
+    VFNS,
+    FFNS
+  };</pre></div>
+        
+      
+        
+        <p>Evolution theory</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">enum</span> theory {
+    QCD,
+    QED,
+    QUniD
+  };</pre></div>
+        
+      
+        
+        <p>Logarithmic accuracy od the small-x resummed evolution (inactive is the small-x evolution is not enabled)</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">enum</span> logaccuracy {
+    LL,
+    NLL
+  };</pre></div>
+        
+      
+        
+        <p>Solution of the coupling RG equations</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">enum</span> alphaevolution {
+    exact,
+    expanded,
+    lambda
+  };</pre></div>
+        
+      
+        
+        <p>Solution of the DGLAP equation</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">enum</span> pdfevolution {
+    exactmu,
+    exactalpha,
+    exapandalpha,
+    truncated
+  };</pre></div>
+        
+      
+        
+        <p>Renormalization scheme used for the heavy quark masses</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">enum</span> massrenscheme {
+    POLE,
+    MSBAR
+  };</pre></div>
+        
+      
+        
+        <p>Structure for the <strong>subgrid</strong> parameters</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">struct</span> gridparams {
+    <span class="hljs-keyword">int</span>    nx;      <span class="hljs-comment">// Number of nodes</span>
+    <span class="hljs-keyword">double</span> xmin;    <span class="hljs-comment">// Minimum value of x</span>
+    <span class="hljs-keyword">int</span>    id;      <span class="hljs-comment">// Interpolation degree</span>
+    <span class="hljs-keyword">double</span> *xgext;  <span class="hljs-comment">// External grid (if any)</span>
+  };</pre></div>
+        
+      
+        
+        <p>Begin of the class <strong>evolsetup</strong></p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">class</span> evolsetup {
+  <span class="hljs-keyword">private</span>:</pre></div>
+        
+      
+        
+        <p>Attributes of the class</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-keyword">bool</span>               _WelcomeMessage;      <span class="hljs-comment">// Welcome message (ON, OFF)</span>
+    <span class="hljs-keyword">double</span>             _Qmin;                <span class="hljs-comment">// Lower bound of the evolution range</span>
+    <span class="hljs-keyword">double</span>             _Qmax;                <span class="hljs-comment">// Upper bound of the evolution range</span>
+    <span class="hljs-keyword">int</span>                _PerturbativeOrder;   <span class="hljs-comment">// Perturbative order of the evolution (LO, NLO, NNLO)</span>
+    flavourscheme      _FlavourScheme;       <span class="hljs-comment">// Flavour scheme (FFNS, VFNS)</span>
+    <span class="hljs-keyword">int</span>                _Nf_FF;               <span class="hljs-comment">// Numeber of active flavours in the FFNS</span>
+    theory             _Theory;              <span class="hljs-comment">// Evolution theory (QCD, QED, QUniD)</span>
+    <span class="hljs-keyword">bool</span>               _FastEvolution;       <span class="hljs-comment">// Fast evolution (ON, OFF)</span>
+    <span class="hljs-keyword">bool</span>               _TimeLikeEvolution;   <span class="hljs-comment">// Time-like evolution (ON, OFF)</span>
+    <span class="hljs-keyword">bool</span>               _PolarizedEvolution;  <span class="hljs-comment">// Polarized evolution (ON, OFF)</span>
+    <span class="hljs-keyword">bool</span>               _SmallxResummation;   <span class="hljs-comment">// Small-x resummation (ON, OFF)</span>
+    logaccuracy        _LogAccuracy;         <span class="hljs-comment">// Logarithmic accuracy of the small-x resummation (LL, NLL)</span>
+    <span class="hljs-keyword">double</span>             _AlphaQCDRef;         <span class="hljs-comment">// Reference value of the QCD coupling</span>
+    <span class="hljs-keyword">double</span>             _QQCDRef;             <span class="hljs-comment">// reference scale of the QCD coupling</span>
+    <span class="hljs-keyword">double</span>             _AlphaQEDRef;         <span class="hljs-comment">// Reference value of the QED coupling</span>
+    <span class="hljs-keyword">double</span>             _QQEDRef;             <span class="hljs-comment">// Reference scale of the QCD coupling</span>
+    <span class="hljs-keyword">double</span>             _LambdaQCDRef;        <span class="hljs-comment">// Value of LambdaQCD</span>
+    <span class="hljs-keyword">int</span>                _nLambdaQCDRef;       <span class="hljs-comment">// Number of flavours of LambdaQCD</span>
+    <span class="hljs-keyword">double</span>             _EpsilonTruncation;   <span class="hljs-comment">// Value of the (small) parameter to compute the numerical derivatives</span>
+    alphaevolution     _AlphaEvolution;      <span class="hljs-comment">// Solution of the RGE of the couplings</span>
+    pdfevolution       _PDFEvolution;        <span class="hljs-comment">// Solution of the DGLAP equations</span>
+    <span class="hljs-keyword">double</span>             _RenFacRatio;         <span class="hljs-comment">// ratio muF / muR</span>
+    massrenscheme      _MassRenScheme;       <span class="hljs-comment">// Renormalization scheme for the heavy quark masses</span>
+    <span class="hljs-keyword">double</span>             _MCharm;              <span class="hljs-comment">// Reference value of the charm mass</span>
+    <span class="hljs-keyword">double</span>             _MBottom;             <span class="hljs-comment">// Reference value of the bottom mass</span>
+    <span class="hljs-keyword">double</span>             _MTop;                <span class="hljs-comment">// Reference value of the top mass</span>
+    <span class="hljs-keyword">double</span>             _kThCharm;            <span class="hljs-comment">// Displacement of the charm threshold</span>
+    <span class="hljs-keyword">double</span>             _kThBottom;           <span class="hljs-comment">// Displacement of the bottom threshold</span>
+    <span class="hljs-keyword">double</span>             _kThTop;              <span class="hljs-comment">// Displacement of the top threshold</span>
+    <span class="hljs-keyword">double</span>             _QRefMCharm;          <span class="hljs-comment">// Reference scale of the charm mass</span>
+    <span class="hljs-keyword">double</span>             _QRefMBottom;         <span class="hljs-comment">// Reference scale of the bottom mass</span>
+    <span class="hljs-keyword">double</span>             _QRefMTop;            <span class="hljs-comment">// Reference scale of the top mass</span>
+    <span class="hljs-keyword">double</span>             _TauMass;             <span class="hljs-comment">// Mass of the tau lepton</span>
+    <span class="hljs-keyword">bool</span>               _MassRunning;         <span class="hljs-comment">// Running of the heavy quark masses (ON, OFF)</span>
+    <span class="hljs-keyword">int</span>                _MaxFlavourPDFs;      <span class="hljs-comment">// Maximum number of flavours allowed in the PDF evolution</span>
+    <span class="hljs-keyword">int</span>                _MaxFlavourAlpha;     <span class="hljs-comment">// Maximum number of flavours allowed in the coupling evolution</span>
+    <span class="hljs-built_in">string</span>             _PDFSet;              <span class="hljs-comment">// Name of the input PDF set</span>
+    <span class="hljs-keyword">int</span>                _Replica;             <span class="hljs-comment">// PDF replica/member</span>
+    <span class="hljs-keyword">bool</span>               _EvolutionOperator;   <span class="hljs-comment">// Compute evolution operator (ON, OFF)</span>
+    <span class="hljs-keyword">bool</span>               _LeptonEvolution;     <span class="hljs-comment">// Lepton evolution (ON, OFF)</span>
+    <span class="hljs-keyword">double</span>             _Q2minLHA;            <span class="hljs-comment">// Parametes of the LHAPDF (x,Q^2) grid</span>
+    <span class="hljs-keyword">double</span>             _Q2maxLHA;
+    <span class="hljs-keyword">double</span>             _xminLHA;
+    <span class="hljs-keyword">double</span>             _xmLHA;
+    <span class="hljs-keyword">double</span>             _xmaxLHA;
+    <span class="hljs-keyword">int</span>                _nxLHA;
+    <span class="hljs-keyword">int</span>                _nxmLHA;
+    <span class="hljs-keyword">int</span>                _nQ2LHA;
+    <span class="hljs-keyword">double</span>             _Lambda2LHA;
+    <span class="hljs-keyword">int</span>                _nQ2g;                <span class="hljs-comment">// Number of Q^2 intervals for the PDF chaching</span>
+    <span class="hljs-keyword">int</span>                _InterDegreeQ;        <span class="hljs-comment">// Interpolation degree on the Q^2 grid</span>
+    <span class="hljs-keyword">bool</span>               _Locked;              <span class="hljs-comment">// Subgrid locked (ON, OFF)</span>
+    <span class="hljs-built_in">vector</span>&lt;gridparams&gt; _GridParams;          <span class="hljs-comment">// Vector of the parameters of the subgrids</span>
+    <span class="hljs-keyword">int</span>                _GaussPoints;         <span class="hljs-comment">// Number of points used for the Gauss integrations</span>
+
+  <span class="hljs-keyword">public</span>:</pre></div>
+        
+      
+        
+        <p>Constructor</p>
+
+        
+          <div class='highlight'><pre>    evolsetup():
+      _WelcomeMessage(<span class="hljs-literal">true</span>),
+      _Qmin(<span class="hljs-number">1</span>), _Qmax(<span class="hljs-number">10000</span>),
+      _PerturbativeOrder(<span class="hljs-number">0</span>),
+      _FlavourScheme(VFNS),
+      _Nf_FF(<span class="hljs-number">3</span>),
+      _Theory(QCD),
+      _FastEvolution(<span class="hljs-literal">true</span>),
+      _TimeLikeEvolution(<span class="hljs-literal">false</span>),
+      _PolarizedEvolution(<span class="hljs-literal">false</span>),
+      _SmallxResummation(<span class="hljs-literal">false</span>), _LogAccuracy(NLL),
+      _AlphaQCDRef(<span class="hljs-number">0.35</span>), _QQCDRef(<span class="hljs-built_in">sqrt</span>(<span class="hljs-number">2</span>)),
+      _AlphaQEDRef(<span class="hljs-number">7.496252e-3</span>), _QQEDRef(<span class="hljs-number">1.777</span>),
+      _LambdaQCDRef(<span class="hljs-number">0.220</span>), _nLambdaQCDRef(<span class="hljs-number">5</span>),
+      _EpsilonTruncation(<span class="hljs-number">1e-2</span>),
+      _AlphaEvolution(exact),
+      _PDFEvolution(exactalpha),
+      _RenFacRatio(<span class="hljs-number">1</span>),
+      _MassRenScheme(POLE),
+      _MCharm(<span class="hljs-built_in">sqrt</span>(<span class="hljs-number">2</span>)), _MBottom(<span class="hljs-number">4.5</span>), _MTop(<span class="hljs-number">175</span>),
+      _kThCharm(<span class="hljs-number">1</span>), _kThBottom(<span class="hljs-number">1</span>), _kThTop(<span class="hljs-number">1</span>),
+      _QRefMCharm(_MCharm), _QRefMBottom(_MTop), _QRefMTop(_MTop),
+      _TauMass(<span class="hljs-number">1.777</span>),
+      _MassRunning(<span class="hljs-literal">true</span>),
+      _MaxFlavourPDFs(<span class="hljs-number">6</span>),
+      _MaxFlavourAlpha(<span class="hljs-number">6</span>),
+      _PDFSet(<span class="hljs-string">"ToyLH"</span>),
+      _Replica(<span class="hljs-number">0</span>),
+      _EvolutionOperator(<span class="hljs-literal">false</span>),
+      _LeptonEvolution(<span class="hljs-literal">false</span>),
+      _Q2minLHA(<span class="hljs-number">1</span>), _Q2maxLHA(<span class="hljs-number">1e10</span>),
+      _xminLHA(<span class="hljs-number">1e-9</span>), _xmLHA(<span class="hljs-number">1e-1</span>), _xmaxLHA(<span class="hljs-number">1</span>),
+      _nxLHA(<span class="hljs-number">100</span>), _nxmLHA(<span class="hljs-number">50</span>), _nQ2LHA(<span class="hljs-number">50</span>),
+      _Lambda2LHA(<span class="hljs-number">0.0625</span>),
+      _nQ2g(<span class="hljs-number">70</span>), _InterDegreeQ(<span class="hljs-number">3</span>),
+      _Locked(<span class="hljs-literal">true</span>),
+      _GaussPoints(<span class="hljs-number">3</span>)
+    {</pre></div>
+        
+      
+        
+        <p>Assign parameters to the subgrids</p>
+
+        
+          <div class='highlight'><pre>      gridparams gp1 = {<span class="hljs-number">80</span>, <span class="hljs-number">1e-5</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">NULL</span>};
+      gridparams gp2 = {<span class="hljs-number">50</span>, <span class="hljs-number">1e-1</span>, <span class="hljs-number">5</span>, <span class="hljs-literal">NULL</span>};
+      gridparams gp3 = {<span class="hljs-number">40</span>, <span class="hljs-number">8e-1</span>, <span class="hljs-number">5</span>, <span class="hljs-literal">NULL</span>};
+      _GridParams.push_back(gp1);
+      _GridParams.push_back(gp2);
+      _GridParams.push_back(gp3);
+    }</pre></div>
+        
+      
+        
+        <p>Setter functions</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EnableWelcomeMessage</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; WelcomeMessage_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetQLimits</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; Qmin_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; Qmax_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetPerturbativeOrder</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; PerturbativeOrder_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetVFNS</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetFFNS</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; Nf_FF_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetTheory</span><span class="hljs-params">(theory <span class="hljs-keyword">const</span>&amp; Theory_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetFastEvolution</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; FastEvolution_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetTimeLikeEvolution</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; TimeLikeEvolution_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetPolarizedEvolution</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; PolarizedEvolution_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetSmallxResummation</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; SmallxResummation_, logaccuracy <span class="hljs-keyword">const</span>&amp; LogAccuracy_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetAlphaQCDRef</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; AlphaQCDRef_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; QQCDRef_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetAlphaQEDRef</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; AlphaQEDRef_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; QQEDRef_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetLambdaQCDRef</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; LambdaQCDRef_, <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nLambdaQCDRef_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetEpsilonTruncation</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; EpsilonTruncation_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetAlphaEvolution</span><span class="hljs-params">(alphaevolution <span class="hljs-keyword">const</span>&amp; AlphaEvolution_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetPDFEvolution</span><span class="hljs-params">(pdfevolution <span class="hljs-keyword">const</span>&amp; PDFEvolution_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetRenFacRatio</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; RenFacRatio_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetPoleMasses</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MCharm_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MBottom_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MTop_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetMSBarMasses</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MCharm_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MBottom_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MTop_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetMassMatchingScales</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; kThCharm_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; kThBottom_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; kThTop_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetMassScaleReference</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MCharm_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MBottom_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; MTop_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetTauMass</span><span class="hljs-params">(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; TauMass_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EnableMassRunning</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; MassRunning_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetMaxFlavourPDFs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; MaxFlavourPDFs_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetMaxFlavourAlpha</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; MaxFlavourAlpha_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetPDFSet</span><span class="hljs-params">(<span class="hljs-built_in">string</span> <span class="hljs-keyword">const</span>&amp; PDFSet_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetReplica</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; Replica_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EnableEvolutionOperator</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; EvolutionOperator_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EnableLeptonEvolution</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; LeptonEvolution_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetLHgridParameters</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nxLHA_, <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nxmLHA_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; xminLHA_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; xmLHA_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; xmaxLHA_,
+			     <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nQ2LHA_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; Q2minLHA_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; Q2maxLHA_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetQGridParameters</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nQ2g_, <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; InterDegreeQ_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LockGrids</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> <span class="hljs-keyword">const</span>&amp; Locked_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetGridParameters</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nx_, <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; id_, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; xmin_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetGridParameters</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; nx_, <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; id_, <span class="hljs-keyword">double</span> *xgext_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetGaussPoints</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>&amp; GaussPoints_)</span></span>;</pre></div>
+        
+      
+        
+        <p>Getter functions</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">WelcomeMessage</span><span class="hljs-params">()</span>       </span>{ return _WelcomeMessage; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">Qmin</span><span class="hljs-params">()</span>                 </span>{ return _Qmin; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">Qmax</span><span class="hljs-params">()</span>                 </span>{ return _Qmax; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">PerturbativeOrder</span><span class="hljs-params">()</span>    </span>{ return _PerturbativeOrder; }
+    <span class="hljs-function">flavourscheme  <span class="hljs-title">FlavourScheme</span><span class="hljs-params">()</span>        </span>{ return _FlavourScheme; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">Nf_FF</span><span class="hljs-params">()</span>                </span>{ return _Nf_FF; }
+    <span class="hljs-function">theory         <span class="hljs-title">Theory</span><span class="hljs-params">()</span>               </span>{ return _Theory; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">FastEvolution</span><span class="hljs-params">()</span>        </span>{ return _FastEvolution; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">TimeLikeEvolution</span><span class="hljs-params">()</span>    </span>{ return _TimeLikeEvolution; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">PolarizedEvolution</span><span class="hljs-params">()</span>   </span>{ return _PolarizedEvolution; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">SmallxResummation</span><span class="hljs-params">()</span>    </span>{ return _SmallxResummation; }
+    <span class="hljs-function">logaccuracy    <span class="hljs-title">LogAccuracy</span><span class="hljs-params">()</span>          </span>{ return _LogAccuracy; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">AlphaQCDRef</span><span class="hljs-params">()</span>          </span>{ return _AlphaQCDRef; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">QQCDRef</span><span class="hljs-params">()</span>              </span>{ return _QQCDRef; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">AlphaQEDRef</span><span class="hljs-params">()</span>          </span>{ return _AlphaQEDRef; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">QQEDRef</span><span class="hljs-params">()</span>              </span>{ return _QQEDRef; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">LambdaQCDRef</span><span class="hljs-params">()</span>         </span>{ return _LambdaQCDRef; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nLambdaQCDRef</span><span class="hljs-params">()</span>        </span>{ return _nLambdaQCDRef; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">EpsilonTruncation</span><span class="hljs-params">()</span>    </span>{ return _EpsilonTruncation; }
+    <span class="hljs-function">alphaevolution <span class="hljs-title">AlphaEvolution</span><span class="hljs-params">()</span>       </span>{ return _AlphaEvolution; }
+    <span class="hljs-function">pdfevolution   <span class="hljs-title">PDFEvolution</span><span class="hljs-params">()</span>         </span>{ return _PDFEvolution; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">RenFacRatio</span><span class="hljs-params">()</span>          </span>{ return _RenFacRatio; }
+    <span class="hljs-function">massrenscheme  <span class="hljs-title">MassRenScheme</span><span class="hljs-params">()</span>        </span>{ return _MassRenScheme; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">MCharm</span><span class="hljs-params">()</span>               </span>{ return _MCharm; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">MBottom</span><span class="hljs-params">()</span>              </span>{ return _MBottom; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">MTop</span><span class="hljs-params">()</span>                 </span>{ return _MTop; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">MuCharm</span><span class="hljs-params">()</span>              </span>{ return _kThCharm * _MCharm; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">MuBottom</span><span class="hljs-params">()</span>             </span>{ return _kThBottom * _MBottom; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">MuTop</span><span class="hljs-params">()</span>                </span>{ return _kThTop * _MTop; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">QRefMCharm</span><span class="hljs-params">()</span>           </span>{ return _QRefMCharm; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">QRefMBottom</span><span class="hljs-params">()</span>          </span>{ return _QRefMBottom; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">QRefMTop</span><span class="hljs-params">()</span>             </span>{ return _QRefMTop; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">TauMass</span><span class="hljs-params">()</span>              </span>{ return _TauMass; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">MassRunning</span><span class="hljs-params">()</span>          </span>{ return _MassRunning; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">MaxFlavourPDFs</span><span class="hljs-params">()</span>       </span>{ return _MaxFlavourPDFs; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">MaxFlavourAlpha</span><span class="hljs-params">()</span>      </span>{ return _MaxFlavourAlpha; }
+    <span class="hljs-function"><span class="hljs-built_in">string</span>         <span class="hljs-title">PDFSet</span><span class="hljs-params">()</span>               </span>{ return _PDFSet; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">Replica</span><span class="hljs-params">()</span>              </span>{ return _Replica; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">EvolutionOperator</span><span class="hljs-params">()</span>    </span>{ return _EvolutionOperator; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">LeptonEvolution</span><span class="hljs-params">()</span>      </span>{ return _LeptonEvolution; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nxLHA</span><span class="hljs-params">()</span>                </span>{ return _nxLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nxmLHA</span><span class="hljs-params">()</span>               </span>{ return _nxmLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">xminLHA</span><span class="hljs-params">()</span>              </span>{ return _xminLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">xmLHA</span><span class="hljs-params">()</span>                </span>{ return _xmLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">xmaxLHA</span><span class="hljs-params">()</span>              </span>{ return _xmaxLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nQ2LHA</span><span class="hljs-params">()</span>               </span>{ return _nQ2LHA; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">Q2minLHA</span><span class="hljs-params">()</span>             </span>{ return _Q2minLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">Q2maxLHA</span><span class="hljs-params">()</span>             </span>{ return _Q2maxLHA; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nQ2g</span><span class="hljs-params">()</span>                 </span>{ return _nQ2g; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">InterDegreeQ</span><span class="hljs-params">()</span>         </span>{ return _InterDegreeQ; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>           <span class="hljs-title">Locked</span><span class="hljs-params">()</span>               </span>{ return _Locked; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nGrids</span><span class="hljs-params">()</span>               </span>{ return _GridParams.size(); }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">GaussPoints</span><span class="hljs-params">()</span>          </span>{ return _GaussPoints; }
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">nx</span><span class="hljs-params">(<span class="hljs-keyword">int</span> ig_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">InterDegree</span><span class="hljs-params">(<span class="hljs-keyword">int</span> ig_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">double</span>         <span class="hljs-title">xMin</span><span class="hljs-params">(<span class="hljs-keyword">int</span> ig_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">NfFinPDF</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">NfIniPDF</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">NfFinAlpha</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span>            <span class="hljs-title">NfIniAlpha</span><span class="hljs-params">()</span></span>;</pre></div>
+        
+      
+        
+        <p>Copy objects</p>
+
+        
+          <div class='highlight'><pre>  };
+
+}</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

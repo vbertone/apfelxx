@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>distribution.hh</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>distribution.hh</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="colorfactors.html">
+                    colorfactors.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="dgauss.html">
+                    dgauss.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="distribution.html">
+                    distribution.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="evolinit.html">
+                    evolinit.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="evolsetup.html">
+                    evolsetup.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="grid.html">
+                    grid.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="hardoperator.html">
+                    hardoperator.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="splittings.html">
+                    splittings.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="subgrid.html">
+                    subgrid.hh
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-comment">/*
+  distribution.hh:
+
+  Author: Valerio Bertone
+*/</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">"grid.hh"</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">namespace</span> apfel {</pre></div>
+        
+      
+        
+        <p>Forward declaration
+void LHToyPDFs(const double&amp; x, const double&amp; InitialScale, double* xfx);</p>
+
+        
+          <div class='highlight'><pre>
+  <span class="hljs-comment">/**
+   * class distribution:
+   * Class for the management of the distributions (PDFs, FFs, atc.).
+   **/</span>
+  <span class="hljs-keyword">class</span> distribution {
+  <span class="hljs-keyword">private</span>:</pre></div>
+        
+      
+        
+        <p>Attributes</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-built_in">string</span> _Name;
+    grid   _GlobalGrid;
+    <span class="hljs-keyword">double</span> _InitialScale;
+    <span class="hljs-keyword">void</span>   (*_DistributionFunction)(<span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp;, <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp;, <span class="hljs-keyword">double</span>*);  <span class="hljs-comment">// Assumed to be in the physical base</span>
+
+  <span class="hljs-keyword">public</span>:</pre></div>
+        
+      
+        
+        <p>Constructors</p>
+
+        
+          <div class='highlight'><pre>    distribution(<span class="hljs-built_in">string</span> <span class="hljs-keyword">const</span>&amp; Name_,
+		 grid <span class="hljs-keyword">const</span>&amp; GlobalGrid_,
+		 <span class="hljs-keyword">double</span> <span class="hljs-keyword">const</span>&amp; InitialScale_,
+		 <span class="hljs-keyword">void</span> (*DistributionFunction_)(const double&amp; x, const double&amp; InitialScale, double* xfx));</pre></div>
+        
+      
+        
+        <p>Destructor</p>
+
+        
+          <div class='highlight'><pre>    ~distribution() {};</pre></div>
+        
+      
+        
+        <p>Getters</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Name</span><span class="hljs-params">()</span>         <span class="hljs-keyword">const</span> </span>{ return _Name; }
+    <span class="hljs-function">grid   <span class="hljs-title">GlobalGrid</span><span class="hljs-params">()</span>   <span class="hljs-keyword">const</span> </span>{ return _GlobalGrid; }
+    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">InitialScale</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ return _InitialScale; }</pre></div>
+        
+      
+        
+        <p>Actual distributions on the grid</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-keyword">double</span> ***Distribution;
+  };
+
+}</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

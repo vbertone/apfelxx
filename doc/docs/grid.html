@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>grid.hh</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>grid.hh</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="colorfactors.html">
+                    colorfactors.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="dgauss.html">
+                    dgauss.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="distribution.html">
+                    distribution.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="evolinit.html">
+                    evolinit.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="evolsetup.html">
+                    evolsetup.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="grid.html">
+                    grid.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="hardoperator.html">
+                    hardoperator.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="splittings.html">
+                    splittings.hh
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="subgrid.html">
+                    subgrid.hh
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-comment">/*
+  grid.hh:
+
+  Author: Valerio Bertone
+*/</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">"subgrid.hh"</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">namespace</span> apfel {
+
+  <span class="hljs-comment">/**
+   * class grid:
+   * class for the global x-grid object.
+   * This class defines the "grid" object which is essentially a collection of
+   * "subgrid" objects plus other global parameters. This class also includes
+   * all the relevant methods for the manipulation of the subgrids.
+   */</span>
+  <span class="hljs-keyword">class</span> grid {
+  <span class="hljs-keyword">private</span>:</pre></div>
+        
+      
+        
+        <p>Attributes</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-built_in">vector</span> &lt;subgrid&gt; _GlobalGrid;
+    <span class="hljs-keyword">bool</span> _Locked;
+    <span class="hljs-keyword">bool</span> _ExtGrids;
+
+  <span class="hljs-keyword">public</span>:</pre></div>
+        
+      
+        
+        <p>Constructors</p>
+
+        
+          <div class='highlight'><pre>    grid();</pre></div>
+        
+      
+        
+        <p>Destructor</p>
+
+        
+          <div class='highlight'><pre>    ~grid();</pre></div>
+        
+      
+        
+        <p>Setters</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LockGrids</span><span class="hljs-params">()</span> </span>{ _Locked = <span class="hljs-literal">true</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AddGrid</span><span class="hljs-params">(subgrid <span class="hljs-keyword">const</span>&amp; sgrid_)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CreateGrid</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EraseGrid</span><span class="hljs-params">()</span></span>;</pre></div>
+        
+      
+        
+        <p>Getters</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">int</span>     <span class="hljs-title">nGrids</span><span class="hljs-params">()</span>        <span class="hljs-keyword">const</span> </span>{ return _GlobalGrid.size() - <span class="hljs-number">1</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>    <span class="hljs-title">Locked</span><span class="hljs-params">()</span>        <span class="hljs-keyword">const</span> </span>{ return _Locked; }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span>    <span class="hljs-title">ExtGrids</span><span class="hljs-params">()</span>      <span class="hljs-keyword">const</span> </span>{ return _ExtGrids; }
+    <span class="hljs-function">subgrid <span class="hljs-title">SubGrid</span><span class="hljs-params">(<span class="hljs-keyword">int</span> ig)</span> <span class="hljs-keyword">const</span></span>;</pre></div>
+        
+      
+        
+        <p>Check whether subgrids are equal</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span> == (grid const&amp; g);
+  };
+
+}</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
