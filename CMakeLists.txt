@@ -29,5 +29,8 @@ include_directories(${PROJECT_SOURCE_DIR}/inc)
 # build target library
 add_subdirectory(src)
 
-add_executable(test1 tests/test1.cc)
-target_link_libraries(test1 apfel-static)
+option(BUILD_TESTS "Build tests code" ON)
+if(BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif(BUILD_TESTS)
