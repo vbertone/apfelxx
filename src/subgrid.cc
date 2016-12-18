@@ -1,8 +1,9 @@
 /*
-  subgrid.cc:
-
-  Author: Valerio Bertone
-*/
+ * APFEL++ 2017
+ *
+ * Authors: Valerio Bertone
+ *          Stefano Carrazza
+ */
 
 #include <iostream>
 #include <cmath>
@@ -10,12 +11,9 @@
 
 #include "apfel/subgrid.h"
 
-using namespace std;
-
 namespace apfel {
 
-  // ================================================================================
-  // Standard subgrid constructor
+  //_________________________________________________________________________________
   subgrid::subgrid(int const& nx_, double const& xMin_, int const& InterDegree_):
     _nx(nx_),
     _xMin(xMin_),
@@ -34,8 +32,7 @@ namespace apfel {
     _xsg[_nx] = 1;
   }
 
-  // ================================================================================
-  // External subgrid constructor
+  //_________________________________________________________________________________
   subgrid::subgrid(int const& nx_, double *xsg_, int const& InterDegree_):
     _nx(nx_-1),
     _xMin(xsg_[0]),
@@ -46,7 +43,7 @@ namespace apfel {
   {
     // Check that the last point of the user-given grid is equal to one
     double eps = 1e-12;
-    if(abs(xsg_[_nx]-1) >= eps) throw runtime_error("The upper value of the external grid does not coincide with 1.");
+    if(abs(xsg_[_nx]-1) >= eps) throw std::runtime_error("The upper value of the external grid does not coincide with 1.");
     else                        xsg_[_nx] = 1;
 
     // Import grid
@@ -63,8 +60,7 @@ namespace apfel {
     _Step = 0;
   }
 
-  // ================================================================================
-  // Constructor to copy an existing subgrid
+  //_________________________________________________________________________________
   subgrid::subgrid(subgrid const& in_):
     _nx(in_._nx),
     _xMin(in_._xMin),
@@ -76,16 +72,14 @@ namespace apfel {
     _xsg(in_._xsg)
   { }
 
-  // ================================================================================
-  // Retrieve value of the subgrid in the "ix"-th point
+  //_________________________________________________________________________________
   double subgrid::xg(int const& ix) const
   {
-    if(ix < 0 || ix >= _xsize) throw runtime_error("Grid index out of range.");
+    if(ix < 0 || ix >= _xsize) throw std::runtime_error("Grid index out of range.");
     return _xsg[ix];
   }
 
-  // ================================================================================
-  // Interpolation functions
+  //_________________________________________________________________________________
   double subgrid::Interpolant(int const& beta, double const& x) const
   {
     double w_int = 0;
@@ -114,8 +108,7 @@ namespace apfel {
     return w_int;
   }
 
-  // ================================================================================
-  // Check whether subgrids are equal
+  //_________________________________________________________________________________
   bool subgrid::operator == (subgrid const& sg)
   {
     // Are both external or internal grids?
@@ -138,5 +131,4 @@ namespace apfel {
     }
     return true;
   }
-
 }

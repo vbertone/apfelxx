@@ -1,25 +1,77 @@
 /*
-  subgrid.hh:
-
-  Author: Valerio Bertone
-*/
-
+ * APFEL++ 2017
+ *
+ * Authors: Valerio Bertone
+ *          Stefano Carrazza
+ */
 #pragma once
 
-using namespace std;
-
-namespace apfel {
-
+namespace apfel
+{
   /**
-   * class subgrid:
-   * Class for the x-space interpolation subgrids.
+   * @brief Class for the x-space interpolation subgrids.
+   *
    * Subgrids are the building blocks of the interpolation procedure.
    * This class defines the "subgrid" object that includes, apart from the
    * grid itself, also the relevant parameters.
-   **/
-  class subgrid {
+   *
+   */
+  class subgrid
+  {
+  public:
+    /**
+     * @brief Standard subgrid constructor
+     * @param nx_
+     * @param xMin_
+     * @param InterDegree_
+     */
+    subgrid(int const& nx_, double const& xMin_, int const& InterDegree_); // Standard internal grid
+
+    /**
+     * @brief External subgrid constructor
+     * @param nx_
+     * @param xsg_
+     * @param InterDegree_
+     */
+    subgrid(int const& nx_, double *xsg_, int const& InterDegree_); // External grid
+
+    /**
+     * @brief Constructor to copy an existing subgrid
+     * @param in_
+     */
+    subgrid(subgrid const& in_);
+
+    // Getters
+    int    nx()              const { return _nx; }
+    int    InterDegree()     const { return _InterDegree; }
+    bool   IsExt()           const { return _IsExt; }
+    double xMin()            const { return _xMin; }
+    double xMax()            const { return _xMax; }
+    double Step()            const { return _Step; }
+
+    /**
+     * @brief Retrieve value of the subgrid in the "ix"-th point
+     * @param ix
+     * @return
+     */
+    double xg(int const& ix) const;
+
+    /**
+     * @brief Interpolant
+     * @param beta
+     * @param x
+     * @return
+     */
+    double Interpolant(int const& beta, double const& x) const;
+
+    /**
+     * @brief Check whether subgrids are equal
+     * @param sg
+     * @return
+     */
+    bool operator == (subgrid const& sg);
+
   private:
-    // Attributes
     int    _nx;           // Number intervals
     double _xMin;         // Minumim value of x
     double _xMax;         // Maximum value of x (should always be 1)
@@ -28,27 +80,5 @@ namespace apfel {
     bool   _IsExt;        // Is external
     double _Step;         // Step pf the logarthmically spaced grid
     double *_xsg;         // Actual grid
-
-  public:
-    // Constructors
-    subgrid(int const& nx_, double const& xMin_, int const& InterDegree_); // Standard internal grid
-    subgrid(int const& nx_, double *xsg_, int const& InterDegree_); // External grid
-    subgrid(subgrid const& in_);
-
-    // Getters
-    int    nx()              const { return _nx; }
-    int    InterDegree()     const { return _InterDegree; }
-    double xMin()            const { return _xMin; }
-    double xMax()            const { return _xMax; }
-    bool   IsExt()           const { return _IsExt; }
-    double Step()            const { return _Step; }
-    double xg(int const& ix) const;
-
-    // Interpolation functions
-    double Interpolant(int const& beta, double const& x) const;
-
-    // Check whether subgrids are equal 
-    bool operator == (subgrid const& sg);
   };
-
 }
