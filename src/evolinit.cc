@@ -8,14 +8,14 @@
 #include <stdexcept>
 #include <ctime>
 
-#include "../inc/evolinit.hh"
-#include "../inc/splittings.hh"
+#include "apfel/evolinit.h"
+#include "apfel/splittings.h"
 
 using namespace std;
 
 namespace apfel {
 
-  // ================================================================================ 
+  // ================================================================================
   // Initializer function
   void evolinit::Initializer(evolsetup Setup_)
   {

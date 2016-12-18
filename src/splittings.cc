@@ -7,8 +7,8 @@
 #include <iostream>
 #include <cmath>
 
-#include "../inc/colorfactors.hh"
-#include "../inc/splittings.hh"
+#include "apfel/colorfactors.h"
+#include "apfel/splittings.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ namespace apfel {
   /**
    * Unpolarized space-like splitting functions.
    **/
-  // ================================================================================ 
+  // ================================================================================
   // Splitting function
   double QCD_space_unpol::OperatorFunction(int const& member, behaviour const& behaviour, int const& nf, double const& x) const
   {
@@ -46,7 +46,7 @@ namespace apfel {
     return sf;
   };
 
-  // ================================================================================ 
+  // ================================================================================
   // LO splitting functions
   double QCD_space_unpol::P0ns(behaviour const& behaviour, int const& nf, double const& x) const
   {

@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include "subgrid.hh"
+#include "subgrid.h"
 
 using namespace std;
 

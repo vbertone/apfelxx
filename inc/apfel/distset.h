@@ -8,8 +8,8 @@
 
 #include <string>
 
-#include "grid.hh"
-#include "opset.hh"
+#include <apfel/grid.h>
+#include <apfel/opset.h>
 
 using namespace std;
 

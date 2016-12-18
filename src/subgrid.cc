@@ -8,7 +8,7 @@
 #include <cmath>
 #include <stdexcept>
 
-#include "../inc/subgrid.hh"
+#include "apfel/subgrid.h"
 
 using namespace std;
 
@@ -48,7 +48,7 @@ namespace apfel {
     double eps = 1e-12;
     if(abs(xsg_[_nx]-1) >= eps) throw runtime_error("The upper value of the external grid does not coincide with 1.");
     else                        xsg_[_nx] = 1;
-      
+
     // Import grid
     _xsg = new double[_xsize];
     for(int ix=0; ix<_nx; ix++) _xsg[ix] = xsg_[ix];
@@ -118,10 +118,10 @@ namespace apfel {
   // Check whether subgrids are equal
   bool subgrid::operator == (subgrid const& sg)
   {
-    // Are both external or internal grids?                                                                                                                       
+    // Are both external or internal grids?
     if(_IsExt != sg._IsExt) return false;
 
-    // In case they are external ...                                                                                                                              
+    // In case they are external ...
     if(_IsExt) {
       if(_nx != sg._nx)                   return false;
       for(int ix=0; ix<_nx; ix++) {
@@ -129,7 +129,7 @@ namespace apfel {
       }
       if(_InterDegree != sg._InterDegree) return false;
     }
-    // In case they are internal ...                                                                                                                              
+    // In case they are internal ...
     else {
 
       if(_xMin != sg._xMin)               return false;

@@ -2,18 +2,18 @@
 #include <fstream>
 #include <cmath>
 #include <vector>
-#include <stdexcept> 
+#include <stdexcept>
 #include <algorithm>
 #include <iomanip>
 
-#include "./inc/subgrid.hh"
-#include "./inc/grid.hh"
-#include "./inc/evolsetup.hh"
-#include "./inc/evolinit.hh"
-#include "./inc/distset.hh"
-#include "./inc/opset.hh"
-#include "./inc/splittings.hh"
-#include "./inc/utils.hh"
+#include <apfel/subgrid.h>
+#include <apfel/grid.h>
+#include <apfel/evolsetup.h>
+#include <apfel/evolinit.h>
+#include <apfel/distset.h>
+#include <apfel/opset.h>
+#include <apfel/splittings.h>
+#include <apfel/utils.h>
 
 using namespace std;
 
@@ -88,7 +88,7 @@ void LHToyPDFsPhys(double const& x, double const& Q, double* xfx)
   double bdb  = 6;
   double fs   = 0.2;
 
-  // Construct PDFs                                                                                                                                            
+  // Construct PDFs
   double xuv   = N_uv * pow(x,auv) * pow(1-x,buv);
   double xdv   = N_dv * pow(x,adv) * pow(1-x,bdv);
   double xg    = N_g  * pow(x,ag)  * pow(1-x,bg);

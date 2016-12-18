@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "grid.hh"
+#include <apfel/grid.h>
 
 using namespace std;
 

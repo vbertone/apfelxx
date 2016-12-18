@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "opset.hh"
-#include "grid.hh"
+#include <apfel/opset.h>
+#include <apfel/grid.h>
 
 using namespace std;
 

@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include "evolsetup.hh"
-#include "grid.hh"
-#include "opset.hh"
+#include <apfel/evolsetup.h>
+#include <apfel/grid.h>
+#include <apfel/opset.h>
 
 using namespace std;
 

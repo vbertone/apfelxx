@@ -7,13 +7,13 @@
 #include <cmath>
 #include <stdexcept>
 
-#include "../inc/distset.hh"
+#include "apfel/distset.h"
 
 using namespace std;
 
 namespace apfel {
 
-  // ================================================================================ 
+  // ================================================================================
   // Constructor
   distset::distset(grid   const& GlobalGrid_,
 		   double const& Scale_,
@@ -120,7 +120,7 @@ namespace apfel {
 
       // Number of distributions at isc
       int NDist = dist->NDistributions()[iscd];
-      
+
       // Loop over the operator mass scales
       for(int isco=0; isco<NScales; isco++) {
 
@@ -160,7 +160,7 @@ namespace apfel {
 	      _Distributions[iscf][idist][ig][alpha] += op->Operators()[jm][ig][alpha][gamma] dist->Distributions()[iscd][idist][ig][gamma];
 		}
 
-	  
+
 
 	  }
 	}

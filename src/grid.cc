@@ -5,43 +5,43 @@
 */
 
 #include <iostream>
-#include <stdexcept> 
+#include <stdexcept>
 #include <algorithm>
 
-#include "../inc/subgrid.hh"
-#include "../inc/grid.hh"
+#include "apfel/subgrid.h"
+#include "apfel/grid.h"
 
 using namespace std;
 
 namespace apfel {
 
-  // ================================================================================ 
+  // ================================================================================
   // Constructor
   grid::grid():
     _Locked(false),
     _ExtGrids(false)
   { }
 
-  // ================================================================================ 
+  // ================================================================================
   // Destructor
   grid::~grid()
   {
     _GlobalGrid.erase(_GlobalGrid.begin(), _GlobalGrid.end());
   }
 
-  // ================================================================================ 
+  // ================================================================================
   // Add a subgrid
   void grid::AddGrid(subgrid const& sgrid_) { _GlobalGrid.push_back(sgrid_); return; }
 
-  // ================================================================================ 
-  // Function needed to sort the subgrids 
+  // ================================================================================
+  // Function needed to sort the subgrids
   static bool ComparexMin(subgrid const& sg1, subgrid const& sg2)
   {
     if(sg1.xMin() == sg2.xMin()) throw runtime_error("There are subgrids with the same lower bound.");
     return sg1.xMin() < sg2.xMin();
   }
 
-  // ================================================================================ 
+  // ================================================================================
   // Create the global grid
   void grid::CreateGrid()
   {
@@ -131,7 +131,7 @@ namespace apfel {
     return;
   }
 
-  // ================================================================================ 
+  // ================================================================================
   // Erase the global grid
   void grid::EraseGrid()
   {
@@ -139,7 +139,7 @@ namespace apfel {
     return;
   }
 
-  // ================================================================================ 
+  // ================================================================================
   // Function to retrieve the ig-th subrid
   subgrid grid::SubGrid(int ig) const
   {

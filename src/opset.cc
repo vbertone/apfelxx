@@ -7,14 +7,14 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "../inc/opset.hh"
-#include "../inc/dgauss.hh"
+#include <apfel/opset.h>
+#include <apfel/dgauss.h>
 
 using namespace std;
 
 namespace apfel {
 
-  // ================================================================================ 
+  // ================================================================================
   // Create the the convolution operator by integrating the operator
   // with interpolation functions.
   void opset::CreateOperators(int const& imass)
@@ -104,7 +104,7 @@ namespace apfel {
   }
 
 
-  // ================================================================================ 
+  // ================================================================================
   // Multiplication constructor
   opset::opset(int const& im1, opset const* op1, int const& im2, opset const* op2)
   {
@@ -158,7 +158,7 @@ namespace apfel {
 
   }
 
-  // ================================================================================ 
+  // ================================================================================
   // Destructor
   opset::~opset()
   {
@@ -178,7 +178,7 @@ namespace apfel {
   }
 
 
-  // ================================================================================ 
+  // ================================================================================
   // Constructor to join two operators
   opset::opset(opset const* op1, opset const* op2)
   {

@@ -6,13 +6,13 @@
 
 #include <stdexcept>
 
-#include "../inc/evolsetup.hh"
+#include "apfel/evolsetup.h"
 
 using namespace std;
 
 namespace apfel {
 
-  // ================================================================================ 
+  // ================================================================================
   // Setters
   void evolsetup::EnableWelcomeMessage(bool const& WelcomeMessage_)
   {
@@ -251,9 +251,9 @@ namespace apfel {
     return;
   }
 
-  // ================================================================================ 
+  // ================================================================================
   // Getters
-  int evolsetup::nx(int const& ig_) const 
+  int evolsetup::nx(int const& ig_) const
   {
     if(ig_ < 0 || ig_ > _GridParams.size() ) throw runtime_error("Index out of range.");
     return _GridParams[ig_].nx;
@@ -280,7 +280,7 @@ namespace apfel {
       else if(_Qmax > _kThBottom * _MBottom) nf = 5;
       else if(_Qmax > _kThCharm * _MCharm)   nf = 4;
       else                                   nf = 3;
-      // Limit to maximum number of flavours allowed                                                                                                                                 
+      // Limit to maximum number of flavours allowed
       if(nf > _MaxFlavourPDFs)               nf = _MaxFlavourPDFs;
     }
     return nf;
@@ -295,7 +295,7 @@ namespace apfel {
       else if(_Qmin > _kThBottom * _MBottom) nf = 5;
       else if(_Qmin > _kThCharm * _MCharm)   nf = 4;
       else                                   nf = 3;
-      // Limit to maximum number of flavours allowed                                                                                                                                 
+      // Limit to maximum number of flavours allowed
       if(nf > _MaxFlavourPDFs)               nf = _MaxFlavourPDFs;
     }
     return nf;
@@ -310,7 +310,7 @@ namespace apfel {
       else if(_Qmax > _RenFacRatio * _kThBottom * _MBottom) nf = 5;
       else if(_Qmax > _RenFacRatio * _kThCharm * _MCharm)   nf = 4;
       else                                                  nf = 3;
-      // Limit to maximum number of flavours allowed                                                                                                                                 
+      // Limit to maximum number of flavours allowed
       if(nf > _MaxFlavourPDFs)                              nf = _MaxFlavourAlpha;
     }
     return nf;
@@ -325,7 +325,7 @@ namespace apfel {
       else if(_Qmin > _RenFacRatio * _kThBottom * _MBottom) nf = 5;
       else if(_Qmin > _RenFacRatio * _kThCharm * _MCharm)   nf = 4;
       else                                                  nf = 3;
-      // Limit to maximum number of flavours allowed                                                                                                                                 
+      // Limit to maximum number of flavours allowed
       if(nf > _MaxFlavourPDFs)                              nf = _MaxFlavourAlpha;
     }
     return nf;
