@@ -57,7 +57,7 @@ namespace apfel {
     MSBAR
   };
 
-  // Structure for the **subgrid** parameters
+  // Structure for the **SubGrid** parameters
   struct gridparams {
     int    nx;      // Number of nodes
     double xmin;    // Minimum value of x
@@ -121,7 +121,7 @@ namespace apfel {
     int                _nQ2g;                // Number of Q^2 intervals for the PDF chaching
     int                _InterDegreeQ;        // Interpolation degree on the Q^2 grid
     bool               _Locked;              // Subgrid locked (ON, OFF)
-    vector<gridparams> _GridParams;          // Vector of the parameters of the subgrids
+    vector<gridparams> _GridParams;          // Vector of the parameters of the SubGrids
     int                _GaussPoints;         // Number of points used for the Gauss integrations
 
   public:
@@ -164,7 +164,7 @@ namespace apfel {
       _Locked(true),
       _GaussPoints(3)
     {
-      // Assign parameters to the subgrids
+      // Assign parameters to the SubGrids
       gridparams gp1 = {80, 1e-5, 3, NULL};
       gridparams gp2 = {50, 1e-1, 5, NULL};
       gridparams gp3 = {40, 8e-1, 5, NULL};

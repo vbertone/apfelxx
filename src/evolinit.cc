@@ -22,13 +22,13 @@ namespace apfel {
     // Timer
     std::clock_t start = clock();
 
-    // Create subgrids
+    // Create SubGrids
     for(int ig=0; ig<Setup_.nGrids(); ig++) {
-      subgrid sg(Setup_.nx(ig), Setup_.xMin(ig), Setup_.InterDegree(ig));
+      SubGrid sg(Setup_.nx(ig), Setup_.xMin(ig), Setup_.InterDegree(ig));
       _GlobalGrid.AddGrid(sg);
     }
 
-    // Lock subgrids if required
+    // Lock SubGrids if required
     if(Setup_.Locked()) _GlobalGrid.LockGrids();
 
     // Create global x-space grid

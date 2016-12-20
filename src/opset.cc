@@ -19,7 +19,7 @@ namespace apfel {
   // with interpolation functions.
   void opset::CreateOperators(int const& imass)
   {
-    // Get number of subgrids
+    // Get number of SubGrids
     int ng = _GlobalGrid.nGrids();
 
     // Check that the grid has been initialized
@@ -28,10 +28,10 @@ namespace apfel {
     // Loop over the member functions
     for(int im=0; im<NumberOfMembers(); im++) {
 
-      // Loop over the subgrids
+      // Loop over the SubGrids
       _Operators.push_back(new double**[ng]);
       for(int ig=0; ig<ng; ig++) {
-	subgrid sg = _GlobalGrid.SubGrid(ig);
+        SubGrid sg = _GlobalGrid.GetSubGrid(ig);
 
 	// Interpolation degree
 	int id = sg.InterDegree();
@@ -122,15 +122,15 @@ namespace apfel {
       _GaussPoints = op1->GaussPoints();
 
     // Start the multiplication.
-    // Get number of subgrids
+    // Get number of SubGrids
     int ng = _GlobalGrid.nGrids();
 
     // Allocate operators
     _Operators.push_back(new double**[ng]);
 
-    // Loop over the subgrids
+    // Loop over the SubGrids
     for(int ig=0; ig<ng; ig++) {
-      subgrid sg = _GlobalGrid.SubGrid(ig);
+      SubGrid sg = _GlobalGrid.GetSubGrid(ig);
 
       // Number of grid points
       int nx = sg.nx();
@@ -165,7 +165,7 @@ namespace apfel {
     int ng = _GlobalGrid.nGrids();
     for(int im=0; im<_Operators.size(); im++) {
       for(int ig=0; ig<ng; ig++) {
-	subgrid sg = _GlobalGrid.SubGrid(ig);
+        SubGrid sg = _GlobalGrid.GetSubGrid(ig);
 	int nx = sg.nx();
 	int gbound = 1;
 	if(sg.IsExt()) gbound = nx;

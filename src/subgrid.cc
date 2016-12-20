@@ -14,7 +14,7 @@
 namespace apfel {
 
   //_________________________________________________________________________________
-  subgrid::subgrid(int const& nx_, double const& xMin_, int const& InterDegree_):
+  SubGrid::SubGrid(int const& nx_, double const& xMin_, int const& InterDegree_):
     _nx(nx_),
     _xMin(xMin_),
     _xMax(1),
@@ -33,7 +33,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  subgrid::subgrid(int const& nx_, double *xsg_, int const& InterDegree_):
+  SubGrid::SubGrid(int const& nx_, double *xsg_, int const& InterDegree_):
     _nx(nx_-1),
     _xMin(xsg_[0]),
     _xMax(1),
@@ -61,7 +61,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  subgrid::subgrid(subgrid const& in_):
+  SubGrid::SubGrid(SubGrid const& in_):
     _nx(in_._nx),
     _xMin(in_._xMin),
     _xMax(in_._xMax),
@@ -73,14 +73,14 @@ namespace apfel {
   { }
 
   //_________________________________________________________________________________
-  double subgrid::xg(int const& ix) const
+  double SubGrid::xg(int const& ix) const
   {
     if(ix < 0 || ix >= _xsize) throw std::runtime_error("Grid index out of range.");
     return _xsg[ix];
   }
 
   //_________________________________________________________________________________
-  double subgrid::Interpolant(int const& beta, double const& x) const
+  double SubGrid::Interpolant(int const& beta, double const& x) const
   {
     double w_int = 0;
 
@@ -109,7 +109,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  bool subgrid::operator == (subgrid const& sg)
+  bool SubGrid::operator == (SubGrid const& sg)
   {
     // Are both external or internal grids?
     if(_IsExt != sg._IsExt) return false;

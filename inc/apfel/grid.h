@@ -7,10 +7,8 @@
 #pragma once
 
 #include <vector>
-
-#include "subgrid.h"
-
-using namespace std;
+#include <apfel/subgrid.h>
+using std::vector;
 
 namespace apfel {
 
@@ -18,13 +16,14 @@ namespace apfel {
    * class grid:
    * class for the global x-grid object.
    * This class defines the "grid" object which is essentially a collection of
-   * "subgrid" objects plus other global parameters. This class also includes
-   * all the relevant methods for the manipulation of the subgrids.
+   * "SubGrid" objects plus other global parameters. This class also includes
+   * all the relevant methods for the manipulation of the SubGrids.
    */
-  class grid {
+  class grid
+  {
   private:
     // Attributes
-    vector <subgrid> _GlobalGrid;
+    vector<SubGrid> _GlobalGrid;
     bool _Locked;
     bool _ExtGrids;
 
@@ -37,15 +36,15 @@ namespace apfel {
 
     // Setters
     void LockGrids() { _Locked = true; }
-    void AddGrid(subgrid const& sgrid_);
+    void AddGrid(SubGrid const& sgrid_);
     void CreateGrid();
     void EraseGrid();
 
     // Getters
-    int     nGrids()        const { return _GlobalGrid.size() - 1; }
+    int     nGrids() const;
     bool    Locked()        const { return _Locked; }
     bool    ExtGrids()      const { return _ExtGrids; }
-    subgrid SubGrid(int ig) const;
+    SubGrid const& GetSubGrid(int ig) const;
 
     // Check whether grids are equal
     bool operator == (grid const& g);

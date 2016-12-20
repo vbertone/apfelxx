@@ -28,7 +28,7 @@ namespace apfel {
     // Push back number of distributions
     _NDistributions.push_back(NDistributions_);
 
-    // Number of subgrids
+    // Number of SubGrids
     int ng = _GlobalGrid.nGrids();
 
     // Check that the grid has been initialized
@@ -39,19 +39,19 @@ namespace apfel {
     for(int ifl=0; ifl<NDistributions_; ifl++) {
       _Distributions[0][ifl] = new double*[ng];
       for(int ig=0; ig<ng; ig++) {
-	int nx = _GlobalGrid.SubGrid(ig).nx();
+        int nx = _GlobalGrid.GetSubGrid(ig).nx();
 	_Distributions[0][ifl][ig] = new double[nx];
 	for(int alpha=0; alpha<nx; alpha++) _Distributions[0][ifl][ig][alpha] = 0;
       }
     }
 
-    // Loop over the subgrids
+    // Loop over the SubGrids
     for(int ig=0; ig<ng; ig++) {
       // Number of grid points
-      int nx = _GlobalGrid.SubGrid(ig).nx();
+      int nx = _GlobalGrid.GetSubGrid(ig).nx();
       // Loop over the grid points
       for(int alpha=0; alpha<nx; alpha++) {
-	double x = _GlobalGrid.SubGrid(ig).xg(alpha);
+        double x = _GlobalGrid.GetSubGrid(ig).xg(alpha);
 	double xfx[NDistributions_];
 	DistributionFunction_(x, Scale_, xfx);
 	for(int ifl=0; ifl<NDistributions_; ifl++) _Distributions[0][ifl][ig][alpha] = xfx[ifl];
@@ -112,7 +112,7 @@ namespace apfel {
     // of operators divided by the number of members.
     int NScale = op->Operators().size() / NMembers;
 
-    // Number of subgrids
+    // Number of SubGrids
     int ng = _GlobalGrid.nGrids();
     /*
     // Loop over the distribution scales
@@ -141,13 +141,13 @@ namespace apfel {
 
 	  _Distributions[iscf][idist] = new double*[ng];
 
-	  // Loop over the subgrids
+	  // Loop over the SubGrids
 	  for(int ig=0; ig<ng; ig++) {
 
 	    int nx = _GlobalGrid.SubGrid(ig).nx();
 	    _Distributions[iscf][idist][ig] = new double[nx];
 
-	    // Loop over the nodes of the subgrid
+	    // Loop over the nodes of the SubGrid
 	    for(int alpha=0; alpha<nx; alpha++) {
 
 	  // Loop over the map to construct the derived distributions

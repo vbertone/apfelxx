@@ -8,8 +8,8 @@
 #include <stdexcept>
 #include <algorithm>
 
-#include "apfel/subgrid.h"
 #include "apfel/grid.h"
+#include "apfel/subgrid.h"
 
 using namespace std;
 
@@ -30,14 +30,14 @@ namespace apfel {
   }
 
   // ================================================================================
-  // Add a subgrid
-  void grid::AddGrid(subgrid const& sgrid_) { _GlobalGrid.push_back(sgrid_); return; }
+  // Add a SubGrid
+  void grid::AddGrid(SubGrid const& sgrid_) { _GlobalGrid.push_back(sgrid_); return; }
 
   // ================================================================================
-  // Function needed to sort the subgrids
-  static bool ComparexMin(subgrid const& sg1, subgrid const& sg2)
+  // Function needed to sort the SubGrids
+  static bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {
-    if(sg1.xMin() == sg2.xMin()) throw runtime_error("There are subgrids with the same lower bound.");
+    if(sg1.xMin() == sg2.xMin()) throw runtime_error("There are SubGrids with the same lower bound.");
     return sg1.xMin() < sg2.xMin();
   }
 
@@ -53,18 +53,18 @@ namespace apfel {
     if(_ExtGrids && _Locked) {
       cout << endl;
       cout << "WARNING: External grids found." << endl;
-      cout << "         ... unlocking subgrids" << endl << endl;
+      cout << "         ... unlocking SubGrids" << endl << endl;
       _Locked = false;
     }
 
-    // Now oder the subgrids in such a way that they start with that having the lowest value of xMin
+    // Now oder the SubGrids in such a way that they start with that having the lowest value of xMin
     // (only if there is more than one grid).
     if(ng > 1) sort(_GlobalGrid.begin(), _GlobalGrid.end(), ComparexMin);
 
     // In case there grids have been locked ...
     if(_Locked) {
 
-      // Find the point of the "(ig-1)"-th subgrid such that "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]",
+      // Find the point of the "(ig-1)"-th SubGrid such that "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]",
       // and replace "xMin[ig]" with "x[ig-1][ix]"
       for(int ig=1; ig<ng; ig++) {
 
@@ -90,8 +90,8 @@ namespace apfel {
 	int DensityFactor = _GlobalGrid[ig].nx() / nx_new;
 	nx_new *= DensityFactor;
 
-	// Compute the new subgrid and replace it in the global grid
-	subgrid sgrid(nx_new, xmin_new, id_new);
+	// Compute the new SubGrid and replace it in the global grid
+	SubGrid sgrid(nx_new, xmin_new, id_new);
 	_GlobalGrid[ig] = sgrid;
       }
     }
@@ -118,14 +118,14 @@ namespace apfel {
     }
 
     // Copy the vector "xg_joint_vect" into the "xg_joint" and then
-    // to initialize another subgrid.
+    // to initialize another SubGrid.
     double xg_joint[nx_joint];
     copy(xg_joint_vect.begin(), xg_joint_vect.end(), xg_joint);
-    subgrid grid_joint(nx_joint+1, xg_joint, id_joint);
+    SubGrid grid_joint(nx_joint+1, xg_joint, id_joint);
 
-    //// insert the joint subgrid at the beginning of "_GlobalGrid"
+    //// insert the joint SubGrid at the beginning of "_GlobalGrid"
     //_GlobalGrid.insert(_GlobalGrid.begin(), grid_joint);
-    // Push the joint subgrid at the end of "_GlobalGrid"
+    // Push the joint SubGrid at the end of "_GlobalGrid"
     _GlobalGrid.push_back(grid_joint);
 
     return;
@@ -139,9 +139,14 @@ namespace apfel {
     return;
   }
 
+  int grid::nGrids() const
+  {
+    return _GlobalGrid.size() - 1;
+  }
+
   // ================================================================================
   // Function to retrieve the ig-th subrid
-  subgrid grid::SubGrid(int ig) const
+  SubGrid const& grid::GetSubGrid(int ig) const
   {
     if(ig < 0 || ig >= _GlobalGrid.size()) throw runtime_error("Grid index out of range.");
     return _GlobalGrid[ig];
@@ -151,7 +156,7 @@ namespace apfel {
   // Check whether grids are equal
   bool grid::operator == (grid const& g)
   {
-    vector<subgrid> _GlobalGrid;
+    vector<SubGrid> _GlobalGrid;
     if(_Locked != g._Locked)                       return false;
     if(_ExtGrids != g._ExtGrids)                   return false;
     if(_GlobalGrid.size() != g._GlobalGrid.size()) return false;
