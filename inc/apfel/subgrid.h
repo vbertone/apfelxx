@@ -1,7 +1,7 @@
 /*
  * APFEL++ 2017
  *
- * Authors: Valerio Bertone: valerio.bertone@vu.nl
+ * Authors: Valerio Bertone: valerio.bertone@cern.ch
  *          Stefano Carrazza: stefano.carrazza@cern.ch
  */
 #pragma once
@@ -41,52 +41,36 @@ namespace apfel
     SubGrid(vector<double> const& xsg, int const& InterDegree);
 
     /**
-     * @brief Retrieve value of the SubGrid in the "ix"-th point
-     * @param ix
-     * @return
-     */
-    double xg(int const& ix) const;
-
-    /**
-     * @brief Interpolant
-     * @param beta
-     * @param x
-     * @return
-     */
-    double Interpolant(int const& beta, double const& x) const;
-
-    /**
      * @brief Check whether SubGrids are equal
-     * @param sg
-     * @return
+     * @param sg the SubGrid to be compared
+     * @return true/false
      */
-    bool operator == (SubGrid const& sg);
+    bool operator == (SubGrid const& sg) const;
+    bool operator != (SubGrid const& sg) const;
 
     // Getters
     int    nx()          const { return _nx; }          //!< return the number of x points
-    int    InterDegree() const { return _InterDegree; } //!<
-    bool   IsExternal()  const { return _IsExternal; }  //!<
-    double xMin()        const { return _xMin; }        //!<
-    double xMax()        const { return _xMax; }        //!<
+    int    InterDegree() const { return _InterDegree; } //!< return the interpolation degree
+    bool   IsExternal()  const { return _IsExternal; }  //!< return external status of sub-grid
+    double xMin()        const { return _xMin; }        //!< return the minimum node value
+    double xMax()        const { return _xMax; }        //!< return the maximum node value
     double Step()        const { return _Step; }        //!< return the step size of the log grid
+    vector<double> const& GetGrid() const { return _xsg; } //!< return the grid setup.
 
   private:
-    int    _nx;           // Number intervals
-    double _xMin;         // Minumim value of x
-    double _xMax;         // Maximum value of x (should always be 1)
-    int    _InterDegree;  // Interpolation degree
-    bool   _IsExternal;   // Is external
-    double _Step;         // Step pf the logarthmically spaced grid
-    vector<double> _xsg;  // Actual grid
+    int    _nx;           //!< Number intervals
+    int    _InterDegree;  //!< Interpolation degree
+    bool   _IsExternal;   //!< Is external
+    double _xMin;         //!< Minumim value of x
+    double _xMax;         //!< Maximum value of x (should always be 1)
+    double _Step;         //!< Step pf the logarthmically spaced grid
+    vector<double> _xsg;  //!< Actual grid
 
     friend std::ostream& operator<<(std::ostream& os, const SubGrid& dt);
   };
 
   /**
-   * @brief operator <<
-   * @param os
-   * @param dt
-   * @return
+   * @brief Method which prints SugGrid with cout <<.
    */
-  std::ostream& operator<<(std::ostream& os, const SubGrid& dt);
+  std::ostream& operator<<(std::ostream& os, const SubGrid& sg);
 }

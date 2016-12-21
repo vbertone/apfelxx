@@ -18,6 +18,7 @@ namespace apfel {
   /**
     * Some general tools for the output and exception traitment.
     */
+  const double eps12 = 1e-12;
 
   //! enumerator for code warning
   enum code { red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
