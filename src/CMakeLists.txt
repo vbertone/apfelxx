@@ -1,12 +1,12 @@
 set(apfel_source
   subgrid.cc
-  grid.cc
-  utils.cc
-  splittings.cc
-  opset.cc
-  evolinit.cc
-  evolsetup.cc
-  distset.cc
+  #grid.cc
+  #utils.cc
+  #splittings.cc
+  #opset.cc
+  #evolinit.cc
+  #evolsetup.cc
+  #distset.cc
 )
 
 option(SHARED "Build shared-libray instead of static-libray" OFF)
