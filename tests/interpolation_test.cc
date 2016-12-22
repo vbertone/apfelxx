@@ -46,7 +46,7 @@ int main()
     {SubGrid{10,1e-5,3}, SubGrid{20,1e-1,3}}
   };
 
-  const Parton xgluon(g);
+  const Parton xgluon{g};
 
   vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7};
   cout << "x, original function, interpolated function, ratio" << endl;
