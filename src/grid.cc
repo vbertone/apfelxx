@@ -136,8 +136,10 @@ namespace apfel {
   {
     os << "Grid: " << &gr << "\n";
     os << "Locked = " << gr._Locked << "\n";
-    os << "ExtGrids =" << gr._ExtGrids << "\n";
-    os << "JointGrid =" << &gr._JointGrid << "\n";
+    os << "ExtGrids = " << gr._ExtGrids << "\n";
+    os << "JointGrid = " << &gr._JointGrid << "\n";
+    for (const auto &v: gr._JointGrid->GetGrid()) os << v << " ";
+
     return os;
   }
 

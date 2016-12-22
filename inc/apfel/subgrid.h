@@ -56,6 +56,7 @@ namespace apfel
     double xMax()        const { return _xMax; }        //!< return the maximum node value
     double Step()        const { return _Step; }        //!< return the step size of the log grid
     vector<double> const& GetGrid() const { return _xsg; } //!< return the grid setup.
+    vector<double> const& GetLogGrid() const { return _lxsg; } //!< return the log grid obj.
 
   private:
     int    _nx;           //!< Number intervals

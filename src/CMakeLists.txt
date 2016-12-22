@@ -1,6 +1,7 @@
 set(apfel_source
   subgrid.cc
   grid.cc
+  interpolator.cc
   #utils.cc
   #splittings.cc
   #opset.cc
