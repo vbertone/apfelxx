@@ -33,7 +33,7 @@ namespace apfel {
      * @param grs vector of subgrids
      * @param lockgrids flag to enable-disable the locking.
      */
-    Grid(vector<SubGrid> const& grs, bool const& lockgrids);
+    Grid(vector<SubGrid> const& grs, bool const& lockgrids = true);
 
     // Getters
     int     nGrids()   const { return _GlobalGrid.size(); } //!< return the number of subgrids
@@ -53,12 +53,12 @@ namespace apfel {
      * @brief Takes the input SubGrids, apply the locking and
      * fill the \c _JointedGrid object with the appropriate grid nodes.
      */
-    void CreateJointedGrid();
+    void CreateJointGrid();
 
     bool _Locked;                     //!< Flag for locking the grids.
     bool _ExtGrids;                   //!< Contains external sub-grids.
     vector<SubGrid> _GlobalGrid;      //!< Vector with sub-grids.
-    unique_ptr<SubGrid> _JointedGrid; //!< Container for the Jointed grid.
+    unique_ptr<SubGrid> _JointGrid;    //!< Container for the join grid.
 
     friend std::ostream& operator<<(std::ostream& os, const Grid& gr);
   };

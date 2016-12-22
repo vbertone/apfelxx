@@ -65,6 +65,7 @@ namespace apfel
     double _xMax;         //!< Maximum value of x (should always be 1)
     double _Step;         //!< Step pf the logarthmically spaced grid
     vector<double> _xsg;  //!< Actual grid
+    vector<double> _lxsg; //!< The log of the actual grid
 
     friend std::ostream& operator<<(std::ostream& os, const SubGrid& dt);
   };

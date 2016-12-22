@@ -33,7 +33,10 @@ namespace apfel {
     _xsg[0] = _xMin;
     const double exps = exp(_Step);
     for(auto ix = 1; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
-    _xsg[_nx] = 1;
+    _xsg[_nx] = 1;    
+
+    _lxsg.resize(_xsg.size());
+    for (auto ix = 0; ix < (int) _xsg.size(); ix++) _lxsg[ix] = log(_xsg[ix]);
   }
 
   //_________________________________________________________________________________
@@ -42,7 +45,8 @@ namespace apfel {
     _InterDegree(InterDegree),
     _IsExternal(true),
     _xMin(xsg[0]),
-    _xMax(1)
+    _xMax(1),
+    _Step(0)
   {
     _xsg.resize(_nx+InterDegree+1, 0);
     copy(xsg.begin(), xsg.end(), _xsg.begin());
@@ -59,9 +63,8 @@ namespace apfel {
     const double exps = exp(step);
     for(auto ix = _nx; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
 
-    // In case on external grid the logarithmic step is not constant.
-    // Set it to zero.
-    _Step = 0;
+    _lxsg.resize(_xsg.size());
+    for (auto ix = 0; ix < (int) _xsg.size(); ix++) _lxsg[ix] = log(_xsg[ix]);
   }
 
   //_________________________________________________________________________________

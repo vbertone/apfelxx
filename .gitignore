@@ -1,3 +1,22 @@
+# cmake related
+CMakeCache.txt
+CMakeFiles
+CTestTestfile.cmake
+Makefile
+Testing/
+apfelxx.*
+cmake_install.cmake
+doc/html/
+src/Makefile
+src/cmake_install.cmake
+tests/CTestTestfile.cmake
+tests/Makefile
+tests/cmake_install.cmake
+tests/grid_test
+tests/memcheck.tmp
+tests/memcheck.xml
+tests/subgrid_test
+
 # Compiled Object files
 *.slo
 *.lo
