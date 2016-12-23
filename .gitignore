@@ -16,6 +16,8 @@ tests/grid_test
 tests/memcheck.tmp
 tests/memcheck.xml
 tests/subgrid_test
+tests/interpolation_test
+tests/test1
 
 # Compiled Object files
 *.slo

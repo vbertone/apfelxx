@@ -8,6 +8,8 @@
 
 #include <vector>
 using std::vector;
+#include <utility>
+using std::pair;
 
 namespace apfel {
 
@@ -32,44 +34,42 @@ namespace apfel {
     Interpolator(Grid const& gr);
 
     /**
-     * @brief Evaluate the interpolated function by the grid.
+     * @brief Evaluate the interpolated function on the joint grid.
      * @param x the requested support value.
      * @return the interpolated result.
      */
     double Evaluate(double const& x) const;
 
     /**
+     * @brief Evaluate the interpolated function on the subgrid with index ig.
+     * @param x  the requested support value.
+     * @param ig the requested support value.
+     * @return the interpolated result.
+     */
+    double Evaluate(double const& x, int const& ig) const;
+
+    /**
      * @brief Pure virtual method to be defined in the inherited class.
      * @param beta the grid index
      * @param x the value of the required interpolation
-     * @param sg the subgrid object.
+     * @param sg SubGrid on which the interpolant is defined
      * @return the interpolation weights.
      */
     virtual double Interpolant(int const& beta, double const& x, SubGrid const& sg) const = 0;
 
+    /**
+     * @brief Computes the lower and upper bounds on which the the sum over interpolants is limited
+     * @param beta the grid index
+     * @param x the value of the required interpolation
+     * @param sg SubGrid on which the interpolant is defined
+     * @return the lower and upper bounds of beta.
+     */
+    virtual pair<int,int> SumBounds(double const& x, SubGrid const& sg) const = 0;
+
   protected:
-    Grid const& _grid;            //!< The stored grid reference
-    vector<double> _distribution; //!< The array with the distribution values for the joint grid.
+    Grid const&             _grid;                  //!< The stored grid reference
+    vector<double>          _distributionJointGrid; //!< The array with the distribution values for the joint grid.
+    vector<vector<double> > _distributionSubGrid;   //!< The array with the distribution values for the joint grid.
   };
 
-  /**
-   * @brief The LagrangeInterpolator class.
-   *
-   * A specialization example of the Interpolator
-   * class using the lagrange interpolation.
-   */
-  class LagrangeInterpolator: public Interpolator
-  {
-  public:
-
-    /**
-     * @see Interpolator::Interpolator
-     */
-    LagrangeInterpolator(Grid const& gr);
-
-    /**
-     * @see Interpolator::Interpolant
-     */
-    double Interpolant(int const& beta, const double &x, SubGrid const& sg) const;
-  };
 }

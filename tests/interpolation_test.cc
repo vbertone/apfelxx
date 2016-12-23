@@ -10,6 +10,7 @@
 #include <apfel/grid.h>
 #include <apfel/subgrid.h>
 #include <apfel/interpolator.h>
+#include <apfel/LagrangeInterpolator.h>
 using namespace apfel;
 using namespace std;
 
@@ -18,7 +19,8 @@ using namespace std;
  */
 double xg(double const& x)
 {
-  return x*(1-x);
+  if(x < 1) return x * ( 1 - x );
+  else      return 0;
 }
 
 /**
@@ -34,7 +36,15 @@ public:
   Parton(Grid const& gr): LagrangeInterpolator(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distribution.push_back(xg(ix));
+      _distributionJointGrid.push_back(xg(ix));
+
+    for (auto ig=0; ig<_grid.nGrids(); ig++)
+      {
+	vector<double> sg;
+	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
+	  sg.push_back(xg(ix));
+	_distributionSubGrid.push_back(sg);
+      }
   }
 };
 
@@ -49,7 +59,8 @@ int main()
   const Parton xgluon{g};
 
   vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7};
-  cout << "x, original function, interpolated function, ratio" << endl;
+
+  cout << "x, original function, interpolated function (joint), ratio" << endl;
   for (auto const& ix: x)
     {
       const auto original = xg(ix);
@@ -59,6 +70,31 @@ int main()
            << interpol << " "
            << original/interpol<< endl;
     }
+  cout << endl;
+
+  cout << "x, original function, interpolated function (first subgrid), ratio" << endl;
+  for (auto const& ix: x)
+    {
+      const auto original = xg(ix);
+      const auto interpol = xgluon.Evaluate(ix,0);
+      cout << ix << " "
+           << original << " "
+           << interpol << " "
+           << original/interpol<< endl;
+    }
+  cout << endl;
+
+  cout << "x, original function, interpolated function (second subgrid), ratio" << endl;
+  for (auto const& ix: x)
+    {
+      const auto original = xg(ix);
+      const auto interpol = xgluon.Evaluate(ix,1);
+      cout << ix << " "
+           << original << " "
+           << interpol << " "
+           << original/interpol<< endl;
+    }
+  cout << endl;
 
   return 0;
 }
