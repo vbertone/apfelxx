@@ -64,12 +64,15 @@ namespace apfel {
     auto const  n   = sg.nx();
     auto const  id  = sg.InterDegree();
 
-    pair<int,int> bounds;
-    for (auto beta = 1; beta <= n; beta++)
+    pair<int,int> bounds (0,0);
+    if (x < xsg[0] - eps12 || x > xsg[n] + eps12)
+      return bounds;
+
+    for (auto beta = 0; beta <= n; beta++)
       {
         // If "x" coincides with "xsg[beta]" within a certain accuracy, the interpolation
         // function is delta e thus it is enough to sum only over one value of "beta"...
-        if (fabs(x - xsg[beta]) < eps12)
+        if (fabs(x - xsg[beta]) <= eps12)
           {
             bounds.first  = beta;
             bounds.second = beta + 1;
