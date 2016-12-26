@@ -32,7 +32,7 @@ namespace apfel
     _xsg.resize(_nx+_InterDegree+1, 0);
 
     _xsg[0] = _xMin;
-    const double exps = exp(_Step);
+    double const exps = exp(_Step);
     for(auto ix = 1; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
     _xsg[_nx] = 1;    
 
@@ -60,8 +60,8 @@ namespace apfel
 
     // Extend the grid for x > 1 for interpolation reasons using the same
     // width of the last bin in log scale
-    const double step = log( xsg[_nx-1] / xsg[_nx-2] );
-    const double exps = exp(step);
+    double const step = log( xsg[_nx-1] / xsg[_nx-2] );
+    double const exps = exp(step);
     for(auto ix = _nx; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
 
     _lxsg.resize(_xsg.size());
@@ -98,17 +98,17 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::ostream& operator<<(std::ostream& os, const SubGrid& sg)
+  std::ostream& operator<<(std::ostream& os, SubGrid const& sg)
   {
     os << "SubGrid: " << &sg << "\n";
-    os << "nx = " << sg._nx << "\n";
-    os << "xMin = " << sg._xMin << "\n";
-    os << "xMax = " << sg._xMax << "\n";
+    os << "nx          = " << sg._nx << "\n";
+    os << "xMin        = " << sg._xMin << "\n";
+    os << "xMax        = " << sg._xMax << "\n";
     os << "InterDegree = " << sg._InterDegree << "\n";
-    os << "xsize = " << sg._xsg.size() << "\n";
-    os << "IsExternal = " << sg._IsExternal << "\n";
-    os << "Step = " << sg._Step << "\n";
-    os << "xsg = ";
+    os << "xsize       = " << sg._xsg.size() << "\n";
+    os << "IsExternal  = " << sg._IsExternal << "\n";
+    os << "Step        = " << sg._Step << "\n";
+    os << "xsg         = ";
     for (const auto &v: sg._xsg) os << v << " ";
     os << "\n\n";
     return os;

@@ -23,7 +23,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  Grid::Grid(const vector<SubGrid> &grs, const bool &lockgrids):
+  Grid::Grid(vector<SubGrid> const& grs, bool const& lockgrids):
     _Locked(lockgrids),
     _ExtGrids(false),
     _GlobalGrid(grs)
@@ -35,7 +35,7 @@ namespace apfel {
   void Grid::CreateJointGrid()
   {
     // Number of grids
-    const double ng = _GlobalGrid.size();
+    double const ng = _GlobalGrid.size();
 
     // Check if there are extenal grids and if so disable the locking
     for(int ig=0; ig<ng; ig++)
@@ -59,17 +59,17 @@ namespace apfel {
         // and replace "xMin[ig]" with "x[ig-1][ix]"
         for(auto ig = 1; ig < ng; ig++)
           {
-            const int nxg     = _GlobalGrid[ig-1].nx();
-            const double xmin = _GlobalGrid[ig].xMin();
+            int const nxg     = _GlobalGrid[ig-1].nx();
+            double const xmin = _GlobalGrid[ig].xMin();
 
             // Parameters of the adjusted grid
             int nx_new = -1;
             double xmin_new = -1;
-            const int id_new = _GlobalGrid[ig].InterDegree();
+            int const id_new = _GlobalGrid[ig].InterDegree();
 
             for(auto ix = 0; ix < nxg; ix++)
               {
-                const double x = _GlobalGrid[ig-1].GetGrid()[ix];
+                double const x = _GlobalGrid[ig-1].GetGrid()[ix];
                 if(x > xmin)
                   {
                     xmin_new = x;
@@ -100,13 +100,13 @@ namespace apfel {
 
     for(auto ig = 0; ig < ng; ig++)
       {
-        const int nxg = _GlobalGrid[ig].nx();
+        int const nxg = _GlobalGrid[ig].nx();
         double xtrans;
         if(ig < ng-1) xtrans = _GlobalGrid[ig+1].xMin();
         else          xtrans = 1 + 2 * eps12;
         for(auto ix = 0; ix <= nxg; ix++)
           {
-            const double x = _GlobalGrid[ig].GetGrid()[ix];
+            double const x = _GlobalGrid[ig].GetGrid()[ix];
             if(xtrans - x < eps12) break;
             nx_joint++;
             xg_joint_vect.push_back(x);
@@ -132,14 +132,14 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  std::ostream& operator<<(std::ostream& os, const Grid& gr)
+  std::ostream& operator<<(std::ostream& os, Grid const& gr)
   {
     os << "Grid: " << &gr << "\n";
-    os << "Locked = " << gr._Locked << "\n";
-    os << "ExtGrids = " << gr._ExtGrids << "\n";
+    os << "Locked    = " << gr._Locked << "\n";
+    os << "ExtGrids  = " << gr._ExtGrids << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
     for (const auto &v: gr._JointGrid->GetGrid()) os << v << " ";
-
+    os << "\n\n";
     return os;
   }
 

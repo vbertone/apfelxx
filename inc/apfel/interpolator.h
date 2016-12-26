@@ -56,7 +56,7 @@ namespace apfel {
      * @param sg SubGrid on which the interpolant is defined
      * @return the interpolation weights.
      */
-    virtual double Interpolant(int const& beta, double const& x, SubGrid const& sg) const = 0;
+    virtual double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const = 0;
 
     /**
      * @brief Computes the lower and upper bounds on which the the sum over interpolants is limited
@@ -68,9 +68,9 @@ namespace apfel {
     virtual pair<int,int> SumBounds(double const& x, SubGrid const& sg) const = 0;
 
   protected:
-    Grid const&             _grid;                  //!< The stored grid reference
-    vector<double>          _distributionJointGrid; //!< The array with the distribution values for the joint grid.
-    vector<vector<double> > _distributionSubGrid;   //!< The array with the distribution values for the joint grid.
+    Grid                    const& _grid;                  //!< The stored grid reference
+    vector<double>                 _distributionJointGrid; //!< The array with the distribution values for the joint grid.
+    vector<vector<double> >        _distributionSubGrid;   //!< The array with the distribution values for the joint grid.
   };
 
 }

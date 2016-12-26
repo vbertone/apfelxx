@@ -50,30 +50,30 @@ namespace apfel
     bool operator != (SubGrid const& sg) const;
 
     // Getters
-    int    nx()          const { return _nx; }          //!< return the number of x points
-    int    InterDegree() const { return _InterDegree; } //!< return the interpolation degree
-    bool   IsExternal()  const { return _IsExternal; }  //!< return external status of sub-grid
-    double xMin()        const { return _xMin; }        //!< return the minimum node value
-    double xMax()        const { return _xMax; }        //!< return the maximum node value
-    double Step()        const { return _Step; }        //!< return the step size of the log grid
-    vector<double> const& GetGrid() const { return _xsg; } //!< return the grid setup.
-    vector<double> const& GetLogGrid() const { return _lxsg; } //!< return the log grid obj.
+    int                   nx()          const { return _nx; }          //!< return the number of x points
+    int                   InterDegree() const { return _InterDegree; } //!< return the interpolation degree
+    bool                  IsExternal()  const { return _IsExternal; }  //!< return external status of sub-grid
+    double                xMin()        const { return _xMin; }        //!< return the minimum node value
+    double                xMax()        const { return _xMax; }        //!< return the maximum node value
+    double                Step()        const { return _Step; }        //!< return the step size of the log grid
+    vector<double> const& GetGrid()     const { return _xsg; }         //!< return the grid setup.
+    vector<double> const& GetLogGrid()  const { return _lxsg; }        //!< return the log grid obj.
 
   private:
-    int    _nx;           //!< Number intervals
-    int    _InterDegree;  //!< Interpolation degree
-    bool   _IsExternal;   //!< Is external
-    double _xMin;         //!< Minumim value of x
-    double _xMax;         //!< Maximum value of x (should always be 1)
-    double _Step;         //!< Step pf the logarthmically spaced grid
-    vector<double> _xsg;  //!< Actual grid
-    vector<double> _lxsg; //!< The log of the actual grid
+    int            _nx;           //!< Number intervals
+    int            _InterDegree;  //!< Interpolation degree
+    bool           _IsExternal;   //!< Is external
+    double         _xMin;         //!< Minumim value of x
+    double         _xMax;         //!< Maximum value of x (should always be 1)
+    double         _Step;         //!< Step pf the logarthmically spaced grid
+    vector<double> _xsg;          //!< Actual grid
+    vector<double> _lxsg;         //!< The log of the actual grid
 
-    friend std::ostream& operator<<(std::ostream& os, const SubGrid& dt);
+    friend std::ostream& operator<<(std::ostream& os, SubGrid const& dt);
   };
 
   /**
    * @brief Method which prints SugGrid with cout <<.
    */
-  std::ostream& operator<<(std::ostream& os, const SubGrid& sg);
+  std::ostream& operator<<(std::ostream& os, SubGrid const& sg);
 }

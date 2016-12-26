@@ -97,14 +97,31 @@ int main()
     }
   cout << endl;
 
-  cout << "Performance test..." << endl;
+  int nint = 1000000;
   const SubGrid test_grid{1000000, 1e-5, 1};
-
   Timer t;
+
+  cout << "Performance test ("<< nint << " interpolations) ..." << endl;
+
+  cout << "(Joint Grid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r);
   t.printTime(t.stop());
+
+  cout << "(First SubGrid) ";
+  t.start();
+  for (auto const& r: test_grid.GetGrid())
+    xgluon.Evaluate(r,0);
+  t.printTime(t.stop());
+
+  cout << "(Second SubGrid) ";
+  t.start();
+  for (auto const& r: test_grid.GetGrid())
+    xgluon.Evaluate(r,1);
+  t.printTime(t.stop());
+
+  cout << "\n";
 
   return 0;
 }

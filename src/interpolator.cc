@@ -23,9 +23,11 @@ namespace apfel {
   double Interpolator::Evaluate(double const& x) const
   {
     auto const bounds = SumBounds(x, _grid.GetJointGrid());
+    auto const lnx    = log(x);
+
     double result = 0;
     for (auto beta = bounds.first; beta < bounds.second; beta++)
-      result += Interpolant(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+      result += Interpolant(beta, lnx, _grid.GetJointGrid()) * _distributionJointGrid[beta];
     return result;
   }
 
@@ -33,9 +35,11 @@ namespace apfel {
   double Interpolator::Evaluate(double const& x, int const& ig) const
   {
     auto const bounds = SumBounds(x, _grid.GetSubGrid(ig));
+    auto const lnx    = log(x);
+
     double result = 0;
     for (auto beta = bounds.first; beta < bounds.second; beta++)
-      result += Interpolant(beta, x, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
+      result += Interpolant(beta, lnx, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
     return result;
   }
 

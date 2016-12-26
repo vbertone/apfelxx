@@ -29,7 +29,7 @@ namespace apfel {
     /**
      * @see Interpolator::Interpolant
      */
-    double Interpolant(int const& beta, double const& x, SubGrid const& sg) const;
+    double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const;
 
     /**
      * @see Interpolator::SumBounds
