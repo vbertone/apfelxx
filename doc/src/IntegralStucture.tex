@@ -1,0 +1,178 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+
+\usepackage{listings}
+
+\begin{document}
+
+\section{Structure of the integrals}
+
+The general structure of the quantities to be computed in {\tt APFEL}
+is the combination of terms $I$ that have the form of Mellin
+convolutions between an operator $O$ and distribution function $d$,
+that is:
+\begin{equation}\label{eq:ZMconv}
+I(x) = x\int_0^1dz\int_0^1dy\, O(z)d(y)\delta(x-yz) = x\int_x^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z) = x\int_x^1\frac{dz}{z} O(z)d\left(\frac{x}{z}\right)\,.
+\end{equation}
+However, very often, typically in the presence of mass effects, the
+integration phase space is modified and the convolution in
+eq.~(\ref{eq:ZMconv}), limiting ourselves to the leftmost identity, is
+generalised as:
+\begin{equation}\label{eq:Genconv}
+I(x,\eta) = x\int_{x/\eta}^1\frac{dz}{z} O(z,\eta)d\left(\frac{x}{\eta
+    z}\right)\,.
+\end{equation}
+where $\eta\leq1$, with $\eta = 1$ reproducing
+eq.~(\ref{eq:ZMconv}). However, for purposes that will become clear
+later, we want to write the integral in eq.~(\ref{eq:Genconv}) in the
+form of eq.~(\ref{eq:ZMconv}), that is in such a way that lower bound
+of the integral is not the rescaled variable $x/\eta$ but the physical
+Bjorken $x$. To do so, one needs to perform the change of variable
+$y =\eta z$, so that:
+\begin{equation}\label{eq:Genconv1}
+  I(x,\eta)= \int_x^\eta dy\,
+  O\left(\frac{y}{\eta},\eta\right)\,\frac{x}{y}d\left(\frac{x}{y}\right)\,.
+\end{equation}
+
+In order to precompute the expensive part of the integral in
+eq.~(\ref{eq:Genconv1}), we use the standard interpolation formula to
+the distribution $d$:
+\begin{equation}\label{eq:Interpolation}
+\frac{x}{y} d\left(\frac{x}{y}\right) = \sum_{\alpha=0}^{N_x} x_\alpha
+d(x_\alpha) w_{\alpha}^{(k)}\left(\frac{x}{y}\right)\,,
+\end{equation}
+where $\alpha$ runs over the node of a give grid in $x$ space and the
+weights $w_{\alpha}$ are typically polynomials of degree $k$
+($i.e.$ Laplace interpolants). Now we use eq.~(\ref{eq:Interpolation})
+in eq.~(\ref{eq:Genconv1}) and at the same time we limit the
+computation of the integral $I$ to the point $x_\beta$ of the grid
+used in eq.~(\ref{eq:Interpolation}). This way we get:
+\begin{equation}\label{eq:Genconv1}
+  I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\eta dy\,
+  O\left(\frac{y}{\eta},\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\,.
+\end{equation}
+where we have defined $\overline{d}_\alpha = x_\alpha d(x_\alpha)$.
+In the particular case of the Laplace interpolants (in the {\tt APFEL}
+procedure), one can show that:
+\begin{equation}
+w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\neq 0\quad\mbox{for}\quad c < y < d\,,
+\end{equation}
+with:
+\begin{equation}
+  c =
+  \mbox{max}(x_\beta,x_\beta/x_{\alpha+1}) \quad\mbox{and}\quad d =
+  \mbox{min}(\eta,x_\beta/x_{\alpha-k}) \,,
+\end{equation}
+and thus eq.~(\ref{eq:Genconv1}) can be adjusted as:
+\begin{equation}\label{eq:Genconv2}
+  I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_c^d dy\,
+  O\left(\frac{y}{\eta},\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\,.
+\end{equation}
+Finally, we change back the integration variable $z=y/\eta$ so that
+eq.~(\ref{eq:Genconv2}) becomes:
+\begin{equation}\label{eq:Genconv3}
+  I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha \underbrace{\left[\eta\int_{c/\eta}^{d/\eta} dz\,
+  O\left(z,\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)\right]}_{\Gamma_{\alpha\beta}}\,.
+\end{equation}
+The quantity in squared brackets is the interesting bit.
+
+The expressions for the operator $O$ that we have to deal with have
+this general form:
+\begin{equation}\label{eq:CoeffFuncs}
+O(z,\eta) = R(z,\eta)+\sum_{i=0}^{n}\left[\frac{\ln^i(1-z)}{1-z}\right]_+ S^{(i)}(z,\eta)+ L(\eta)\delta(1-z)\,,
+\end{equation}
+where $R$ and $S^{(i)}$ is a regular function in $z=1$, that is:
+\begin{equation}
+R(1,\eta) =  \lim_{z\rightarrow 1} R(z,\eta) = K(\eta)\quad\mbox{and}\quad S^{(i)}(1,\eta) =  \lim_{z\rightarrow 1} S^{(i)}(z,\eta) = J^{(i)}(\eta)\,,
+\end{equation}
+being $K$, $J^{(i)}$, and $L$ a finite function of $\eta$. Notice that
+the sum over $i$ in eq.~(\ref{eq:CoeffFuncs}) is between zero and $n$
+where $n$ is typically not bigger than two as it depends on the
+perturbative order of the expressions. Plugging
+eq.~(\ref{eq:CoeffFuncs}) into the definition of
+$\Gamma_{\alpha\beta}$ in eq.~(\ref{eq:Genconv3}) and making use of
+the definition of plus-prescription, we obtain:
+\begin{equation}\label{eq:FinalExpression}
+\begin{array}{rcl}
+\Gamma_{\beta\alpha} &=& \eta\displaystyle \int_{c/\eta}^{d/\eta} dz\left\{R\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)+\sum_{i=0}^{n}\frac{\ln^i(1-z)}{1-z}\left[S^{(i)}\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)-S^{(i)}(1,\eta)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\right]\right\}\\
+\\
+&+&\displaystyle \eta\left[\sum_{i=0}^{n} \frac1{(i+1)!}S^{(i)}(1,\eta)\ln^{i+1}\left(1-\frac{c}{\eta}\right)+L(\eta) \right]w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\,.
+\end{array}
+\end{equation}
+
+Eq.~(\ref{eq:FinalExpression}) expresses the full complexity of the
+task. However, there are a few remarks that apply is some particular
+cases and that reduce the complexity. In the case of the
+($\overline{\mbox{MS}}$) splitting functions, there are two main
+simplications: the first is that $\eta=1$, the second is that $n=0$ in
+the sums. Considering that:
+\begin{equation}
+w_\alpha^{(k)}(x_\beta) = \delta_{\alpha\beta}\,,
+\end{equation}
+and that the expressions can be manipulated in such a way that the
+coefficient of the plus-prescripted term $S$ is a constant, we have that:
+\begin{equation}\label{eq:FinalExpression}
+\Gamma_{\beta\alpha} = \int_{c}^{d} dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S^{(0)}}{1-z}\left[w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)-\delta_{\alpha\beta}\right]\right\}+\displaystyle \left[S^{(0)}\ln\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
