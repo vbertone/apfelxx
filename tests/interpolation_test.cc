@@ -97,8 +97,8 @@ int main()
     }
   cout << endl;
 
-  int nint = 1000000;
-  const SubGrid test_grid{1000000, 1e-5, 1};
+  const int nint = 1000000;
+  const SubGrid test_grid{nint, 1e-5, 1};
   Timer t;
 
   cout << "Performance test ("<< nint << " interpolations) ..." << endl;
