@@ -1,9 +1,9 @@
-/*
- * APFEL++ 2017
- *
- * Authors: Valerio Bertone: valerio.bertone@cern.ch
- *          Stefano Carrazza: stefano.carrazza@cern.ch
- */
+//
+// APFEL++ 2017
+//
+// Authors: Valerio Bertone: valerio.bertone@cern.ch
+//          Stefano Carrazza: stefano.carrazza@cern.ch
+//
 
 #include <iostream>
 #include <cmath>
@@ -13,7 +13,8 @@
 #include "apfel/subgrid.h"
 #include "apfel/tools.h"
 
-namespace apfel {
+namespace apfel
+{
 
   //_________________________________________________________________________________
   SubGrid::SubGrid(int const& nx, double const& xMin, int const& InterDegree):

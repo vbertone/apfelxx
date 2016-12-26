@@ -2,7 +2,7 @@ set(apfel_source
   subgrid.cc
   grid.cc
   interpolator.cc
-  LagrangeInterpolator.cc
+  lagrangeinterpolator.cc
   #utils.cc
   #splittings.cc
   #opset.cc

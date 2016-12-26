@@ -1,14 +1,14 @@
-/*
- * APFEL++ 2017
- *
- * Authors: Valerio Bertone: valerio.bertone@cern.ch
- *          Stefano Carrazza: stefano.carrazza@cern.ch
- */
+//
+// APFEL++ 2017
+//
+// Authors: Valerio Bertone: valerio.bertone@cern.ch
+//          Stefano Carrazza: stefano.carrazza@cern.ch
+//
 
 #include <cmath>
 #include <iostream>
 
-#include "apfel/LagrangeInterpolator.h"
+#include "apfel/lagrangeinterpolator.h"
 #include "apfel/grid.h"
 #include "apfel/subgrid.h"
 #include "apfel/tools.h"
@@ -73,29 +73,30 @@ namespace apfel {
   //_________________________________________________________________________________
   pair<int,int> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
   {
-    const auto xsg = sg.GetGrid();
-    const auto id  = sg.InterDegree();
+    const auto xsg = sg.GetGrid();    
     const auto n   = sg.nx();
+    const auto id = sg.InterDegree();
 
     pair<int,int> bounds;
     for (auto beta = 1; beta <= n; beta++)
       {
-	// If "x" coincides with "xsg[beta]" within a certain accuracy, the interpolation
-	// function is delta e thus it is enough to sum only over one value of "beta"...
-	if (abs(x - xsg[beta]) < eps12)
-	  { 
-	    bounds.first  = beta;
-	    bounds.second = beta + 1;
-	  }
-	// ... othewise if the range extends from the lower neighbor of "x" on the grid
-	// to "id" more nodes on the right of "x".
-	else if (xsg[beta] > x)
-	  {
-	    bounds.first  = beta - 1;
-	    bounds.second = beta + id;
-	    break;
-	  }
+        // If "x" coincides with "xsg[beta]" within a certain accuracy, the interpolation
+        // function is delta e thus it is enough to sum only over one value of "beta"...
+        if (fabs(x - xsg[beta]) < eps12)
+          {
+            bounds.first  = beta;
+            bounds.second = beta + 1;
+          }
+        // ... othewise if the range extends from the lower neighbor of "x" on the grid
+        // to "id" more nodes on the right of "x".
+        else if (xsg[beta] > x)
+          {
+            bounds.first  = beta - 1;
+            bounds.second = beta + id;
+            break;
+          }
       }
+
     return bounds;
   }
 

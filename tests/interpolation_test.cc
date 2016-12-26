@@ -1,16 +1,17 @@
-/*
- * APFEL++ 2017
- *
- * Authors: Valerio Bertone: valerio.bertone@cern.ch
- *          Stefano Carrazza: stefano.carrazza@cern.ch
- */
+//
+// APFEL++ 2017
+//
+// Authors: Valerio Bertone: valerio.bertone@cern.ch
+//          Stefano Carrazza: stefano.carrazza@cern.ch
+//
 
 #include <iostream>
 #include <iomanip>
 #include <apfel/grid.h>
 #include <apfel/subgrid.h>
 #include <apfel/interpolator.h>
-#include <apfel/LagrangeInterpolator.h>
+#include <apfel/lagrangeinterpolator.h>
+#include <apfel/timer.h>
 using namespace apfel;
 using namespace std;
 
@@ -95,6 +96,15 @@ int main()
            << original/interpol<< endl;
     }
   cout << endl;
+
+  cout << "Performance test..." << endl;
+  const SubGrid test_grid{1000000, 1e-5, 1};
+
+  Timer t;
+  t.start();
+  for (auto const& r: test_grid.GetGrid())
+    xgluon.Evaluate(r);
+  t.printTime(t.stop());
 
   return 0;
 }

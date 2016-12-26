@@ -1,9 +1,9 @@
-/*
- * APFEL++ 2017
- *
- * Authors: Valerio Bertone: valerio.bertone@vu.nl
- *          Stefano Carrazza: stefano.carrazza@cern.ch
- */
+//
+// APFEL++ 2017
+//
+// Authors: Valerio Bertone: valerio.bertone@cern.ch
+//          Stefano Carrazza: stefano.carrazza@cern.ch
+//
 
 #pragma once
 
@@ -13,7 +13,8 @@
 #include <string>
 #include <sstream>
 
-namespace apfel {
+namespace apfel
+{
 
   /**
     * Some general tools for the output and exception traitment.
