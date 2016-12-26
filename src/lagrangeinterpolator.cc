@@ -27,7 +27,7 @@ namespace apfel {
   double LagrangeInterpolator::Interpolant(const int &beta, double const& x, SubGrid const& sg) const
   {
     // Compute interpolant
-    const auto xsg  = sg.GetGrid();
+    const auto& xsg  = sg.GetGrid();
 
     // Return immediately 1 is "x" coincides with "xg[beta]".
     if (abs(x - xsg[beta]) < eps12) return 1;
@@ -49,7 +49,7 @@ namespace apfel {
       if (x >= xsg[beta-j] && x < xsg[beta-j+1])
 	break;
 
-    const auto lxsg = sg.GetLogGrid();
+    const auto& lxsg = sg.GetLogGrid();
     double lnx = log(x);
 
     // If the grid is external ...
@@ -67,15 +67,15 @@ namespace apfel {
           if(delta != j)
             w_int *= ( fact / ( j - delta ) + 1 );
       }
-    return w_int;
+    return w_int;   
   }
 
   //_________________________________________________________________________________
   pair<int,int> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
   {
-    const auto xsg = sg.GetGrid();    
+    const auto& xsg = sg.GetGrid();
     const auto n   = sg.nx();
-    const auto id = sg.InterDegree();
+    const auto id  = sg.InterDegree();
 
     pair<int,int> bounds;
     for (auto beta = 1; beta <= n; beta++)
