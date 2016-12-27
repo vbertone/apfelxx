@@ -3,6 +3,7 @@ set(apfel_source
   grid.cc
   interpolator.cc
   lagrangeinterpolator.cc
+  integrator.cc
   #utils.cc
   #splittings.cc
   #opset.cc
