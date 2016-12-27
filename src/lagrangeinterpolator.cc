@@ -61,31 +61,22 @@ namespace apfel {
   pair<int,int> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
   {
     auto const& xsg = sg.GetGrid();
-    auto const  n   = sg.nx();
-    auto const  id  = sg.InterDegree();
 
     pair<int,int> bounds (0,0);
-    if (x < xsg[0] - eps12 || x > xsg[n] + eps12)
+    if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 
-    for (auto beta = 0; beta <= n; beta++)
+    const auto low = lower_bound(xsg.begin()+1, xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
+    bounds = {low, low};
+
+    if (fabs(x - xsg[low]) <= eps12)
+          bounds.second += 1;
+    else
       {
-        // If "x" coincides with "xsg[beta]" within a certain accuracy, the interpolation
-        // function is delta e thus it is enough to sum only over one value of "beta"...
-        if (fabs(x - xsg[beta]) <= eps12)
-          {
-            bounds.first  = beta;
-            bounds.second = beta + 1;
-          }
-        // ... othewise if the range extends from the lower neighbor of "x" on the grid
-        // to "id" more nodes on the right of "x".
-        else if (xsg[beta] > x)
-          {
-            bounds.first  = beta - 1;
-            bounds.second = beta + id;
-            break;
-          }
+        bounds.first -= 1;
+        bounds.second += sg.InterDegree();
       }
+
     return bounds;
   }
 
