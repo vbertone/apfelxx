@@ -151,14 +151,33 @@ w_\alpha^{(k)}(x_\beta) = \delta_{\alpha\beta}\,,
 \end{equation}
 and that the expressions can be manipulated in such a way that the
 coefficient of the plus-prescripted term $S$ is a constant, we have that:
-\begin{equation}\label{eq:FinalExpression}
-\Gamma_{\beta\alpha} = \int_{c}^{d} dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S^{(0)}}{1-z}\left[w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)-\delta_{\alpha\beta}\right]\right\}+\displaystyle \left[S^{(0)}\ln\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
+\begin{equation}\label{eq:SplittingFunctions}
+\Gamma_{\beta\alpha} = \int_{c}^{d} dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S}{1-z}\left[w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)-\delta_{\alpha\beta}\right]\right\}+\displaystyle \left[S\ln\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
 \end{equation}
 
+The same kind of simplifications apply to the case of the Zero-Mass
+(ZM) coefficient functions with the only exception that the sum over
+$i$ extends to $n$'s larger than zero. In particular, since we will
+use exact expressions only up to $\mathcal{O}(\alpha_s)$, $i.e.$ NLO,
+we have $n=1$ so that:
+\begin{equation}\label{eq:ZMCoeffFunctions}
+\begin{array}{rcl}
+  \Gamma_{\beta\alpha} &=&\displaystyle \int_{c}^{d}
+                           dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)
+  + \frac{S^{(0)}+S^{(1)}\ln(1-z)}{1-z}\left[w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)-\delta_{\alpha\beta}\right]\right\}\\
+\\
+&+&\displaystyle
+    \left[S^{(0)}\ln\left(1-c\right)+\frac12
+    S^{(1)}\ln^2\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
+\end{array}
+\end{equation}
 
-
-
-
+As far as the massive coefficient functions up to
+$\mathcal{O}(\alpha_s^2)$ things can be more complicated and we will
+discuss later. In the next section we will consider the case of
+hadronic observables in the ZM scheme showing how to pre-compute the
+integral for the double-differential distributions in Drell-Yan
+production.
 
 
 
