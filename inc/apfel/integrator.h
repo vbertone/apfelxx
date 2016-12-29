@@ -36,8 +36,18 @@ namespace apfel
      * @param eps the required relative error.
      * @return the integral value.
      */
-    double integrate(double const& xmin, double const& xmax,
-                     double const& eps = 1E-4) const;
+    double integrate(double const& xmin, double const& xmax, double const& eps) const;
+
+    /**
+     * @brief Integrates the integrand passed during initialization
+     * between xmin and xmax with m points.
+     *
+     * @param xmin the lower bound integration value.
+     * @param xmax the upper bound integration value.
+     * @param m the number of points of the Gauss quadrature.
+     * @return the integral value.
+     */
+    double integrate(double const& xmin, double const& xmax, int const& m) const;
 
   protected:
     /**
@@ -48,19 +58,5 @@ namespace apfel
      */
     virtual double integrand(double const& x) const = 0;
 
-    /**
-     * @brief The dgauss integrator from cernlib.
-     *
-     * @param a the lower integration bound.
-     * @param b the upper integratio bound.
-     * @param eps the required accuracy.
-     * @return the integral from a to b.
-     */
-    double dgauss(double const& a, double const& b, double const& eps) const;
-
-  private:
-    double _cst;         //!< param for dgauss
-    array<double,12> _w; //!< param for dgauss
-    array<double,12> _x; //!< param for dgauss
   };
 }

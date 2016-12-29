@@ -4,6 +4,8 @@ set(apfel_source
   interpolator.cc
   lagrangeinterpolator.cc
   integrator.cc
+  operator.cc
+  expression.cc
   #utils.cc
   #splittings.cc
   #opset.cc

@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <cmath>
 #include <apfel/integrator.h>
 using namespace apfel;
 using namespace std;
@@ -16,7 +17,7 @@ public:
   MyFunction(): Integrator() {}
   double integrand(double const& x) const
   {
-    return x*x*x;
+    return log(x);
   }
 
 };
@@ -24,10 +25,12 @@ public:
 int main()
 { 
   const MyFunction f;
-  const double res = f.integrate(0, 1);
+  // Integrate using dgauss with a given accuracy
+  const double res1 = f.integrate(0, 2, 1e-5);
+  // integrate using dgauss with a given number of nodes
+  const double res2 = f.integrate(0, 2, 4);
 
-  if (res != 1/3.)
-    return -1;
+  cout << res1 << "  " << res2 << endl;
 
   return 0;
 }

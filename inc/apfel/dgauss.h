@@ -15,13 +15,14 @@
 
 #pragma once
 
-#include <cmath>
+#include <vector>
 
 using namespace std;
 
 namespace apfel {
 
-  const double gq_x[5][32] = {
+  const double cst = 1e-25;
+  const vector<vector<double> > gq_x = {
     {0.3399810435848562,
      0.8611363115940525},
     {0.1834346424956498,
@@ -84,16 +85,16 @@ namespace apfel {
      0.9910133714767443,
      0.9963401167719552,
      0.9993050417357721}};
-  const double gq_w[5][32] = {
-  // 4-point integration (2^1 entries)
+  const vector<vector<double> > gq_w = {
+  // 4-point integration
     {0.6521451548625461,
      0.3478548451374538},
-  // 8-point integration (2^2 entries)
+  // 8-point integration
     {0.3626837833783619,
      0.3137066458778872,
      0.2223810344533744,
      0.1012285362903762},
-  // 16-point integration (2^3 entries)
+  // 16-point integration
     {0.1894506104550684,
      0.1826034150449235,
      0.1691565193950025,
@@ -102,7 +103,7 @@ namespace apfel {
      0.0951585116824927,
      0.0622535239386478,
      0.0271524594117540},
-  // 32-point integration (2^4 entries)
+  // 32-point integration
     {0.0965400885147278,
      0.0956387200792748,
      0.0938443990808045,
@@ -119,7 +120,7 @@ namespace apfel {
      0.0253920653092620,
      0.0162743947309056,
      0.0070186100094700},
-  // 64-point integration (2^5 entries)
+  // 64-point integration
     {0.0486909570091397,
      0.0485754674415034,
      0.0483447622348029,
@@ -152,16 +153,4 @@ namespace apfel {
      0.0065044579689783,
      0.0041470332605624,
      0.0017832807216964}};
-
-  // Integrating function
-  inline double dgauss(double (*f)(double), double const& a, double const& b, int const& n = 1) {
-    double I = 0;
-    double k1 = ( b - a ) / 2;
-    double k2 = ( b + a ) / 2;
-    int m = pow(2,n+1);
-    for(int i=0; i<m; i++) I += gq_w[n][i] * ( f( k2 + gq_x[n][i] * k1 ) + f( k2 - gq_x[n][i] * k1 ) );
-    I *= k1;
-    return I;
-  };
-
 }

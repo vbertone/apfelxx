@@ -15,9 +15,11 @@ tests/cmake_install.cmake
 tests/grid_test
 tests/memcheck.tmp
 tests/memcheck.xml
+tests/test1
 tests/subgrid_test
 tests/interpolation_test
-tests/test1
+tests/integrator_test
+tests/operator_test
 
 # Compiled Object files
 *.slo

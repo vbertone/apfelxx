@@ -9,7 +9,6 @@
 #include "apfel/grid.h"
 #include "apfel/subgrid.h"
 #include <cmath>
-#include <iostream>
 
 namespace apfel {
 

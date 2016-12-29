@@ -21,3 +21,9 @@ add_executable(integrator_test integrator_test.cc)
 target_link_libraries(integrator_test apfel)
 add_test(performance_integrator_test grid_test)
 add_test(memcheck_integrator_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/integrator_test)
+
+# build tests
+add_executable(operator_test operator_test.cc)
+target_link_libraries(operator_test apfel)
+add_test(performance_operator_test grid_test)
+add_test(memcheck_operator_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/operator_test)
