@@ -7,13 +7,6 @@
 
 #pragma once
 
-#include <functional>
-#include <array>
-#include <vector>
-using std::function;
-using std::array;
-using std::vector;
-
 namespace apfel
 {
   /**

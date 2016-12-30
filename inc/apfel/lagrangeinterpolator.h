@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "apfel/interpolator.h"
+#include <apfel/interpolator.h>
 
-namespace apfel {
-
+namespace apfel
+{
   /**
    * @brief The LagrangeInterpolator class.
    *

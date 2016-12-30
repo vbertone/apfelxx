@@ -17,44 +17,45 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  Operator::Operator(Grid const& gr, Expression const& expr, Interpolator const& inter, double const& eps):
+  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
+    Integrator{},
+    LagrangeInterpolator{gr},
     _grid(gr),
     _expr(expr),
-    _inter(inter),
     _eps(eps)
   {
     // Number of grids
-    auto ng = _grid.nGrids();
+    const int ng = _grid.nGrids();
 
-    // Loop over the subgrids
-    _Operator = new double**[ng];
+    // Loop over the subgrids    
+    _Operator.resize(ng);
     for (_ig = 0; _ig < ng; _ig++)
       {
 	// Define the global subgrid
-	auto sg = _grid.GetSubGrid(_ig);
+	const auto& sg = _grid.GetSubGrid(_ig);
 
 	// Get vector with the grid nodes
-	auto xg = sg.GetGrid();
+	const auto& xg = sg.GetGrid();
 
 	// Number of grid points
 	auto nx = sg.nx();
 
 	// Interpolation degree
-	auto id = sg.InterDegree();
+	const int id = sg.InterDegree();
 
 	// Limit the loop over "_beta" according to whether "sg" is external
-	int gbound = ( sg.IsExternal() ? nx : 1 );
+	const int gbound = ( sg.IsExternal() ? nx : 1 );
 
-	_Operator[_ig] = new double*[gbound];
+	_Operator[_ig].resize(gbound);
 	for (_beta = 0; _beta < gbound; _beta++)
 	  {
-	    auto xbeta  = xg[_beta];
-	    auto lxbeta = log(xbeta);
-	    _Operator[_ig][_beta] = new double[nx];
+	    const auto xbeta  = xg[_beta];
+	    const auto lxbeta = log(xbeta);
+	    _Operator[_ig][_beta].resize(nx, 0);
 	    for (_alpha = _beta; _alpha < nx; _alpha++)
 	      {
 		// Weight of the subtraction term (independent of x)
-		_ws = _inter.Interpolant(_alpha, lxbeta, sg);
+		_ws = Interpolant(_alpha, lxbeta, sg);
 
 		/*
 		double c = fmax(xbeta, xbeta / xg[_alpha+1]);
@@ -75,14 +76,14 @@ namespace apfel
 
 		// Integral
 		double I = 0;
-		for(int jint=0; jint<nint; jint++)
+		for(int jint = 0; jint < nint; jint++)
 		  {
 		    // Define integration bounds of the first iteration
-		    double c = xbeta / xg[_alpha-jint+1];
-		    double d = xbeta / xg[_alpha-jint];
+		    const double c = xbeta / xg[_alpha-jint+1];
+		    const double d = xbeta / xg[_alpha-jint];
 
 		    // Compute the integral
-		    I += this->integrate(c, d, _eps);
+		    I += integrate(c, d, _eps);
 		  }
 		_Operator[_ig][_beta][_alpha] = I;
 	      }
@@ -95,7 +96,7 @@ namespace apfel
   //_________________________________________________________________________
   double Operator::integrand(double const& x) const
   {
-    double wr = _inter.Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
+    const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
     return _expr.Regular(x) * wr + _expr.Singular(x) * ( wr - _ws );
   }
 

@@ -7,7 +7,8 @@
 
 #pragma once
 
-namespace apfel {
+namespace apfel
+{
 
   /**
    * @brief The Expression class for the manipulation of the splitting and coeffient functions.
@@ -62,7 +63,5 @@ namespace apfel {
   protected:
     double _MassIndex; //<! Mass index to be used in the epressions
     double _FlavNumb;  //<! Number of active flavours
-
   };
-
 }

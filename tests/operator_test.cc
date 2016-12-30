@@ -7,13 +7,13 @@
 
 #include <cmath>
 
-#include "apfel/colorfactors.h"
-#include "apfel/expression.h"
-#include "apfel/lagrangeinterpolator.h"
-#include "apfel/grid.h"
-#include "apfel/subgrid.h"
-#include "apfel/operator.h"
-#include "apfel/timer.h"
+#include <apfel/tools.h>
+#include <apfel/expression.h>
+#include <apfel/lagrangeinterpolator.h>
+#include <apfel/grid.h>
+#include <apfel/subgrid.h>
+#include <apfel/operator.h>
+#include <apfel/timer.h>
 
 using namespace apfel;
 using namespace std;
@@ -31,15 +31,14 @@ int main()
 {
   // Grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
-  // Interpolator
-  const LagrangeInterpolator w(g);
+
   // Expression
   const p0qq p;
 
   Timer t;
   t.start();
   // Construct the operator
-  const Operator op(g, p, w);
+  const Operator op(g, p);
   t.printTime(t.stop());
 
   return 0;

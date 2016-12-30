@@ -12,8 +12,8 @@ using std::vector;
 #include <utility>
 using std::pair;
 
-namespace apfel {
-
+namespace apfel
+{
   class Grid;
   class SubGrid;
 
