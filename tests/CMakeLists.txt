@@ -13,17 +13,23 @@ add_test(memcheck_grid_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRE
 # build tests
 add_executable(interpolation_test interpolation_test.cc)
 target_link_libraries(interpolation_test apfel)
-add_test(performance_interpolation_test grid_test)
+add_test(performance_interpolation_test interpolation_test)
 add_test(memcheck_interpolation_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/interpolation_test)
 
 # build tests
 add_executable(integrator_test integrator_test.cc)
 target_link_libraries(integrator_test apfel)
-add_test(performance_integrator_test grid_test)
+add_test(performance_integrator_test integrator_test)
 add_test(memcheck_integrator_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/integrator_test)
 
 # build tests
 add_executable(operator_test operator_test.cc)
 target_link_libraries(operator_test apfel)
-add_test(performance_operator_test grid_test)
+add_test(performance_operator_test operator_test)
 add_test(memcheck_operator_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/operator_test)
+
+# build tests
+add_executable(distribution_test distribution_test.cc)
+target_link_libraries(distribution_test apfel)
+add_test(performance_distribution_test distribution_test)
+add_test(memcheck_distribution_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/distribution_test)

@@ -6,6 +6,7 @@ set(apfel_source
   integrator.cc
   operator.cc
   expression.cc
+  distribution.cc
   #utils.cc
   #splittings.cc
   #opset.cc
