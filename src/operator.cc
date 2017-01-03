@@ -13,6 +13,8 @@
 #include "apfel/subgrid.h"
 #include "apfel/expression.h"
 #include "apfel/interpolator.h"
+#include "apfel/distribution.h"
+#include "apfel/tools.h"
 
 namespace apfel
 {
@@ -91,6 +93,58 @@ namespace apfel
 	    _Operator[_ig][_beta][_beta] += _expr.Local(xbeta/xg[_beta+1]);
 	  }
       }
+  }
+
+  //_________________________________________________________________________
+  Operator::Operator(Operator const& obj, vector3d<double> const& op):
+    Integrator{},
+    LagrangeInterpolator{obj._grid},
+    _grid(obj._grid),
+    _expr(obj._expr),
+    _eps(obj._eps),
+    _Operator(op)
+  {
+  }
+
+  //_________________________________________________________________________
+  Distribution Operator::operator*(Distribution const& d) const
+  {
+    // fast method to check that we are using the same Grid
+    if (&this->_grid != &d.GetGrid())
+      throw runtime_exception("Operator::operator*", "Operator and Distribution grid does not match");
+
+    const auto& original = d.GetDistributionSubGrid();
+
+    vector<vector<double>> v(original);
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      for (size_t i = 0; i < _Operator[ig].size(); i++)
+        {
+          v[ig][i] = 0;
+          for (size_t j = 0; j < _Operator[ig][i].size(); j++)
+            v[ig][i] += _Operator[ig][i][j]*original[ig][j];
+        }
+
+    return Distribution{d, v};
+  }
+
+  //_________________________________________________________________________
+  Operator Operator::operator*(Operator const& o) const
+  {
+    // fast method to check that we are using the same Grid
+    if (&this->_grid != &o.GetGrid())
+      throw runtime_exception("Operator::operator*", "Operators grid does not match");
+
+    auto v = _Operator;
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      for (size_t i = 0; i < _Operator[ig].size(); i++)
+        for (size_t j = 0; j < _Operator[ig][i].size(); j++)
+          {
+            v[ig][i][j] = 0;
+            for (size_t k = 0; k < _Operator[ig].size(); k++)
+              v[ig][i][j] += _Operator[ig][i][k]*o._Operator[ig][k][j];
+          }
+
+    return Operator{*this, v};
   }
 
   //_________________________________________________________________________

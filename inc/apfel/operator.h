@@ -14,6 +14,7 @@ namespace apfel
 {
   class Grid;
   class Expression;
+  class Distribution;
   template<class T> using vector3d = vector<vector<vector<T>>>;
 
   /**
@@ -36,6 +37,18 @@ namespace apfel
      */
     Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
 
+    /**
+     * @brief Copy constructor with precomputed operator
+     * @param obj the input copy object
+     * @param op the precomputed operator
+     */
+    Operator(Operator const& obj, vector3d<double> const& op);
+
+    // operators
+    Distribution operator*(Distribution const& d) const; //!< Operator*Distribution
+    Operator operator*(Operator const& o) const;         //!< Operator*Operator
+
+
   protected:
     /**
      * @see Integrator::integrand
@@ -52,6 +65,5 @@ namespace apfel
     int     _alpha, _beta;
     int     _ig;
     double  _ws;
-
   };
 }

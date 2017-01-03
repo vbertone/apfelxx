@@ -8,7 +8,11 @@
 #include <apfel/distribution.h>
 #include <apfel/grid.h>
 #include <apfel/subgrid.h>
+#include <apfel/operator.h>
+#include <apfel/expression.h>
 #include <apfel/timer.h>
+#include <apfel/tools.h>
+#include <cmath>
 
 using namespace apfel;
 using namespace std;
@@ -47,15 +51,32 @@ public:
   }
 };
 
+class p0qq: public Expression
+{
+public:
+  p0qq(): Expression() {}
+  double Regular(double const& x)  const { return - 2 * CF * ( 1 + x ); }
+  double Singular(double const& x) const { return 4 * CF / ( 1 - x ); }
+  double Local(double const& x)    const { return 4 * CF * log( 1 - x ) + 3 * CF; }
+};
+
+
 int main()
 {
   Timer t;
   t.start();
 
-  const Grid g{
-    {SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false
-  };
-  const myPDF p{g};
+  // Grid
+  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
+
+  // Expression
+  const p0qq p;
+
+  const myPDF d{g};
+  const Operator op(g, p);
+
+  auto new_d = op*d;
+  auto new_o = op*op;
 
   t.printTime(t.stop());
 

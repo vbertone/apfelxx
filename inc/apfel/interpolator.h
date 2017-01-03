@@ -67,10 +67,14 @@ namespace apfel
      */
     virtual pair<int,int> SumBounds(double const& x, SubGrid const& sg) const = 0;
 
+    // Getters
+    Grid const& GetGrid() const { return _grid; } //!< return the grid
+    vector<vector<double>> const& GetDistributionSubGrid() const { return _distributionSubGrid; } //!< return the distribution
+
   protected:
     Grid                    const& _grid;                  //!< The stored grid reference
     vector<double>                 _distributionJointGrid; //!< The array with the distribution values for the joint grid.
-    vector<vector<double> >        _distributionSubGrid;   //!< The array with the distribution values for the joint grid.
+    vector<vector<double>>         _distributionSubGrid;   //!< The array with the distribution values for the joint grid.
   };
 
 }

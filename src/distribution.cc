@@ -16,4 +16,11 @@ namespace apfel
     LagrangeInterpolator{gr}
   {
   }
+
+  //_________________________________________________________________________
+  Distribution::Distribution(const Distribution &obj, vector<vector<double>> const& distsubgrid):
+    LagrangeInterpolator{obj._grid}
+  {
+    _distributionSubGrid = distsubgrid;
+  }
 }
