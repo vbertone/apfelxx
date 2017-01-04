@@ -30,8 +30,9 @@ namespace apfel
      * @brief Distribution constructors.
      * @param gr the Grid object
      * @param distsubgrid a 2d vector with the distribution values for each subgrid.
+     * @param distjointgrid a vector with the distribution values on the joint grid.
      */
-    Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid);
+    Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
   };
 
 }

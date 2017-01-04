@@ -28,7 +28,7 @@ namespace apfel
     _Step = log(_xMax / _xMin) / _nx;
 
     // building log spaced grid in x
-    // number of points in x +1 (bins) + extra nodes for rhs interpolation.
+    // number of points in x + 1 (bins) + extra nodes for rhs interpolation.
     _xsg.resize(_nx+_InterDegree+1, 0);
 
     _xsg[0] = _xMin;
@@ -53,14 +53,14 @@ namespace apfel
     copy(xsg.begin(), xsg.end(), _xsg.begin());
 
     // Check that the last point of the user-given grid is equal to one
-    if(fabs(_xsg[_nx]-1) >= eps12)
+    if(fabs(_xsg[_nx]-1) >= eps11)
       throw runtime_exception("SubGrid::SubGrid","The upper value of the external grid does not coincide with 1.");
     else
       _xsg[_nx] = 1;
 
     // Extend the grid for x > 1 for interpolation reasons using the same
     // width of the last bin in log scale
-    double const step = log( xsg[_nx-1] / xsg[_nx-2] );
+    double const step = - log( xsg[_nx-1] );
     double const exps = exp(step);
     for(auto ix = _nx; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
 

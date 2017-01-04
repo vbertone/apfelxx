@@ -46,26 +46,17 @@ namespace apfel
 	const int id = sg.InterDegree();
 
 	// Limit the loop over "_beta" according to whether "sg" is external
-	const int gbound = ( sg.IsExternal() ? nx : 1 );
+	const int gbound = ( sg.IsExternal() ? nx : 0 );
 
-	_Operator[_ig].resize(gbound);
-	for (_beta = 0; _beta < gbound; _beta++)
+	_Operator[_ig].resize(gbound+1);
+	for (_beta = 0; _beta <= gbound; _beta++)
 	  {
 	    const auto xbeta  = xg[_beta];
-	    const auto lxbeta = log(xbeta);
-	    _Operator[_ig][_beta].resize(nx, 0);
-	    for (_alpha = _beta; _alpha < nx; _alpha++)
+	    _Operator[_ig][_beta].resize(nx+1, 0);
+	    for (_alpha = _beta; _alpha <= nx; _alpha++)
 	      {
 		// Weight of the subtraction term (independent of x)
-		_ws = Interpolant(_alpha, lxbeta, sg);
-
-		/*
-		double c = fmax(xbeta, xbeta / xg[_alpha+1]);
-		double d = fmin(1, xbeta / xg[fmax(_alpha-id,_beta)]);
-
-		// Compute the integral
-		double I = this->integrate(c, d, _eps);
-		*/
+		_ws = ( _alpha == _beta ? 1 : 0 );
 
 		// Given that the interpolation functions have discontinuos derivative
 		// on the nodes and are wiggly, it turns out that it is conveniente to
@@ -74,11 +65,12 @@ namespace apfel
 		// integrator converges faster.
 
 		// Number of grid intervals we need to integrate over.
-		auto nint = fmin(id,_alpha)+1;
+		int nmax = fmin(id,_alpha-_beta) + 1;
+		int nmin = fmax(0,_alpha+1-nx);
 
 		// Integral
 		double I = 0;
-		for(int jint = 0; jint < nint; jint++)
+		for(auto jint = nmin; jint < nmax; jint++)
 		  {
 		    // Define integration bounds of the first iteration
 		    const double c = xbeta / xg[_alpha-jint+1];
@@ -109,22 +101,71 @@ namespace apfel
   //_________________________________________________________________________
   Distribution Operator::operator*(Distribution const& d) const
   {
-    // fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &d.GetGrid())
-      throw runtime_exception("Operator::operator*", "Operator and Distribution grid does not match");
+      throw runtime_exception("Operator::operator*", "Operator and Distribution grids do not match");
 
-    const auto& original = d.GetDistributionSubGrid();
 
-    vector<vector<double>> v(original);
-    for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t i = 0; i < _Operator[ig].size(); i++)
-        {
-          v[ig][i] = 0;
-          for (size_t j = 0; j < _Operator[ig][i].size(); j++)
-            v[ig][i] += _Operator[ig][i][j]*original[ig][j];
-        }
+    // Compute the the distribution on the subgrids
+    const auto& sg = d.GetDistributionSubGrid();
+    vector<vector<double>> s(sg);
 
-    return Distribution{d, v};
+    int const ng = sg.size();
+    for (auto ig = 0; ig < ng; ig++)
+      {
+	int const nx = this->_grid.GetSubGrid(ig).nx();
+
+	// If the grid is external the product between the operator and the distribution
+	// has to be done in a standard way.
+	if (this->_grid.GetSubGrid(ig).IsExternal())
+	  {
+	    for (auto alpha = 0; alpha <= nx; alpha++)
+	      {
+		s[ig][alpha] = 0;
+		for (auto beta = alpha; beta <= nx; beta++)
+		  s[ig][alpha] += _Operator[ig][alpha][beta] * sg[ig][beta];
+	      }
+	  }
+	// If the grid is internal the product between the operator and the distribution
+	// has to be done exploiting the symmetry of the operator.
+	else
+	  {
+	    for (auto alpha = 0; alpha <= nx; alpha++)
+	      {
+		s[ig][alpha] = 0;
+		for (auto beta = alpha; beta <= nx; beta++)
+		  s[ig][alpha] += _Operator[ig][0][beta-alpha] * sg[ig][beta];
+	      }
+	  }
+
+	// Set to zero the values above one
+	for (auto alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
+	  s[ig][alpha] = 0;
+      }
+
+    // Compute the the distribution on the joint grid
+    vector<double> j;
+    for(auto ig = 0; ig < ng; ig++)
+      {
+	int const nx = this->_grid.GetSubGrid(ig).nx();
+
+        double xtrans;
+        if(ig < ng-1) xtrans = this->_grid.GetSubGrid(ig+1).xMin();
+        else          xtrans = 1 + 2 * eps12;
+
+        for(auto alpha = 0; alpha <= nx; alpha++)
+          {
+            double const x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
+            if(xtrans - x < eps12) break;
+            j.push_back(s[ig][alpha]);
+          }
+      }
+
+    // Set to zero the values above one
+    for (auto alpha = 0; alpha < this->_grid.GetJointGrid().InterDegree(); alpha++)
+      j.push_back(0);
+
+    return Distribution{d, s, j};
   }
 
   //_________________________________________________________________________

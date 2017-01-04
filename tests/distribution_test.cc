@@ -22,8 +22,7 @@ using namespace std;
  */
 double xg(double const& x)
 {
-  if(x < 1) return x * ( 1 - x );
-  else      return 0;
+  return 1 - x;
 }
 
 /**
@@ -39,13 +38,15 @@ public:
   myPDF(Grid const& gr): Distribution(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distributionJointGrid.push_back(xg(ix));
+      if (ix < 1) _distributionJointGrid.push_back(xg(ix));
+      else        _distributionJointGrid.push_back(0);
 
     for (auto ig=0; ig<_grid.nGrids(); ig++)
       {
         vector<double> sg;
         for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          sg.push_back(xg(ix));
+          if (ix < 1) sg.push_back(xg(ix));
+	  else        sg.push_back(0);
         _distributionSubGrid.push_back(sg);
       }
   }
@@ -63,22 +64,33 @@ public:
 
 int main()
 {
-  Timer t;
-  t.start();
-
   // Grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
+  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,5}}};
+
+  // Distribution
+  const myPDF d{g};
 
   // Expression
   const p0qq p;
 
-  const myPDF d{g};
-  const Operator op(g, p);
+  // Operator
+  const Operator op{g, p};
 
-  auto new_d = op*d;
-  auto new_o = op*op;
+  // Multiply operator by the distribution to create a new distribution
+  auto new_d = op * d;
 
-  t.printTime(t.stop());
+  // Check the numerical accuracy of "new_d" by comparing with the analytical result
+  cout << scientific;
+  for (auto ix = 0; ix <= g.GetJointGrid().nx(); ix++)
+    {
+      double x = g.GetJointGrid().GetGrid()[ix];
+      // Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
+      double Ix = CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
+      cout << x << "\t\t" << new_d.Evaluate(x) << "\t\t" << Ix << "\t\t" << new_d.Evaluate(x) / Ix << endl;
+    }
+
+  // Multiply operator by itself to create a new operator
+  auto new_o = op * op;
 
   return 0;
 }

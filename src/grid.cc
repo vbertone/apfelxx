@@ -44,7 +44,7 @@ namespace apfel {
 
     if(_ExtGrids && _Locked)
       {
-        warning("Grid::CreateJointedGrid", "External grids found... unlocking grids");
+        warning("Grid::CreateJointGrid", "External grids found... unlocking grids");
         _Locked = false;
       }
 
@@ -79,7 +79,7 @@ namespace apfel {
               }
 
             if (nx_new < 0 || xmin_new < 0)
-              throw logic_exception("Grid::CreateJointedGrid", "SubGrids do not overlap.");
+              throw logic_exception("Grid::CreateJointGrid", "SubGrids do not overlap.");
 
             // Find the closest multiple of "nx - ix + 1" to "nx",
             // i.e. "DensityFactor", and replace "nx" accordingly.
@@ -94,7 +94,6 @@ namespace apfel {
 
     // Compute the joint grid.
     // Parameters of the joint grid
-    int nx_joint = -1;
     int id_joint = _GlobalGrid[0].InterDegree(); // Use the interpolation degree of the first grid
     vector<double> xg_joint_vect;
 
@@ -108,12 +107,11 @@ namespace apfel {
           {
             double const x = _GlobalGrid[ig].GetGrid()[ix];
             if(xtrans - x < eps12) break;
-            nx_joint++;
             xg_joint_vect.push_back(x);
           }
       }
 
-    // initialize another SubGrid for the jointed grid.
+    // initialize another SubGrid for the joint grid.
     _JointGrid = unique_ptr<SubGrid>(new SubGrid{xg_joint_vect, id_joint});
   }
 

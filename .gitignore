@@ -20,6 +20,7 @@ tests/subgrid_test
 tests/interpolation_test
 tests/integrator_test
 tests/operator_test
+tests/distribution_test
 
 # Compiled Object files
 *.slo

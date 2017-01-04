@@ -45,9 +45,8 @@ namespace apfel
     Operator(Operator const& obj, vector3d<double> const& op);
 
     // operators
-    Distribution operator*(Distribution const& d) const; //!< Operator*Distribution
-    Operator operator*(Operator const& o) const;         //!< Operator*Operator
-
+    Distribution operator*(Distribution const& d) const; //!< Operator * Distribution
+    Operator     operator*(Operator const& o)     const; //!< Operator * Operator
 
   protected:
     /**
@@ -56,14 +55,14 @@ namespace apfel
     double integrand(double const& x) const;
 
   private:    
-    Grid         const& _grid;         //!< Grid on which to compute the operator
-    Expression   const& _expr;         //!< Expression to be commuted into an operator
-    double       const& _eps;          //!< precision of the dgauss integration
-    vector3d<double> _Operator;        //!< the operator values.
+    Grid             const& _grid;         //!< Grid on which to compute the operator
+    Expression       const& _expr;         //!< Expression to be commuted into an operator
+    double           const& _eps;          //!< Precision of the dgauss integration
+    vector3d<double>        _Operator;     //!< Operator values.
 
     // Global variables
-    int     _alpha, _beta;
-    int     _ig;
-    double  _ws;
+    int    _alpha, _beta;
+    int    _ig;
+    double _ws;
   };
 }

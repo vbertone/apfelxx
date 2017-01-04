@@ -20,8 +20,7 @@ using namespace std;
  */
 double xg(double const& x)
 {
-  if(x < 1) return x * ( 1 - x );
-  else      return 0;
+  return x * ( 1 - x );
 }
 
 /**
@@ -37,13 +36,15 @@ public:
   Parton(Grid const& gr): LagrangeInterpolator(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distributionJointGrid.push_back(xg(ix));
+      if (ix < 1) _distributionJointGrid.push_back(xg(ix));
+      else        _distributionJointGrid.push_back(0);
 
     for (auto ig=0; ig<_grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-	  sg.push_back(xg(ix));
+	  if (ix < 1) sg.push_back(xg(ix));
+	  else        sg.push_back(0);
 	_distributionSubGrid.push_back(sg);
       }
   }
