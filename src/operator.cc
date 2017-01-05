@@ -51,7 +51,7 @@ namespace apfel
 	_Operator[_ig].resize(gbound+1);
 	for (_beta = 0; _beta <= gbound; _beta++)
 	  {
-	    const auto xbeta  = xg[_beta];
+	    const auto xbeta = xg[_beta];
 	    _Operator[_ig][_beta].resize(nx+1, 0);
 	    for (_alpha = _beta; _alpha <= nx; _alpha++)
 	      {
@@ -105,12 +105,11 @@ namespace apfel
     if (&this->_grid != &d.GetGrid())
       throw runtime_exception("Operator::operator*", "Operator and Distribution grids do not match");
 
-
     // Compute the the distribution on the subgrids
     const auto& sg = d.GetDistributionSubGrid();
     vector<vector<double>> s(sg);
 
-    int const ng = sg.size();
+    int const ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
 	int const nx = this->_grid.GetSubGrid(ig).nx();
@@ -176,14 +175,41 @@ namespace apfel
       throw runtime_exception("Operator::operator*", "Operators grid does not match");
 
     auto v = _Operator;
-    for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t i = 0; i < _Operator[ig].size(); i++)
-        for (size_t j = 0; j < _Operator[ig][i].size(); j++)
-          {
-            v[ig][i][j] = 0;
-            for (size_t k = 0; k < _Operator[ig].size(); k++)
-              v[ig][i][j] += _Operator[ig][i][k]*o._Operator[ig][k][j];
-          }
+
+    int const ng = _grid.nGrids(); //sg.size();
+    for (auto ig = 0; ig < ng; ig++)
+      {
+	int const nx = this->_grid.GetSubGrid(ig).nx();
+
+	// If the grid is external the product between the operators
+	// has to be done in a standard way.
+	if (this->_grid.GetSubGrid(ig).IsExternal())
+	  {
+	    for (auto alpha = 0; alpha <= nx; alpha++)
+	      for (auto beta = alpha; beta <= nx; beta++)
+		{
+		  v[ig][alpha][beta] = 0;
+		  for (auto gamma = alpha; gamma <= beta; gamma++)
+		    v[ig][alpha][beta] += _Operator[ig][alpha][gamma] * o._Operator[ig][gamma][beta];
+		}
+	  }
+	// If the grid is internal the product between the operators
+	// has to be done exploiting the symmetry of the operators.
+	else
+	  {
+	    v[ig].resize(nx+1);
+	    for (auto alpha = 0; alpha <= nx; alpha++)
+	      {
+		v[ig][alpha].resize(nx+1, 0);
+		for (auto beta = alpha; beta <= nx; beta++)
+		  {
+		    v[ig][alpha][beta] = 0;
+		    for (auto gamma = alpha; gamma <= beta; gamma++)
+		      v[ig][alpha][beta] += _Operator[ig][0][gamma-alpha] * o._Operator[ig][0][beta-gamma];
+		  }
+	      }
+	  }
+      }
 
     return Operator{*this, v};
   }
