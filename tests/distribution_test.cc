@@ -62,7 +62,7 @@ public:
   double Local(double const& x)    const { return 4 * CF * log( 1 - x ) + 3 * CF; }
 };
 
-// Class to define the analytical expression of the squared of the LO splitting function P0qq
+// Class to define the analytical expression of the squared LO splitting function P0qq
 class p0qq2: public Expression
 {
 public:

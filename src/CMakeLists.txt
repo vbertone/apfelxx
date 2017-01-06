@@ -7,6 +7,7 @@ set(apfel_source
   operator.cc
   expression.cc
   distribution.cc
+  coupling.cc
   #utils.cc
   #splittings.cc
   #opset.cc

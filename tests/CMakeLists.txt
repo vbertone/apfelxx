@@ -33,3 +33,9 @@ add_executable(distribution_test distribution_test.cc)
 target_link_libraries(distribution_test apfel)
 add_test(performance_distribution_test distribution_test)
 add_test(memcheck_distribution_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/distribution_test)
+
+# build tests
+add_executable(coupling_test coupling_test.cc)
+target_link_libraries(coupling_test apfel)
+add_test(performance_coupling_test coupling_test)
+add_test(memcheck_coupling_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/coupling_test)
