@@ -42,11 +42,11 @@ namespace apfel
      * @param obj the input copy object
      * @param op the precomputed operator
      */
-    Operator(Operator const& obj, vector3d<double> const& op);
+    Operator(Operator const& obj);
 
     // operators
-    Distribution operator*(Distribution const& d) const; //!< Operator * Distribution
-    Operator     operator*(Operator const& o)     const; //!< Operator * Operator
+    Distribution operator*=(Distribution const& d) const; //!< this *= Distribution
+    Operator&    operator*=(Operator const& o);           //!< this *= Operator
 
   protected:
     /**
@@ -54,9 +54,9 @@ namespace apfel
      */
     double integrand(double const& x) const;
 
-  private:    
+  private:
     Grid             const& _grid;         //!< Grid on which to compute the operator
-    Expression       const& _expr;         //!< Expression to be commuted into an operator
+    Expression       const* _expr;         //!< Expression to be commuted into an operator
     double           const& _eps;          //!< Precision of the dgauss integration
     vector3d<double>        _Operator;     //!< Operator values.
 
@@ -65,4 +65,8 @@ namespace apfel
     int    _ig;
     double _ws;
   };
+
+  // Extra operation definitions where Operator is at the left hand side (lhs).
+  Distribution operator*(Operator lhs, Distribution const& rhs); //!< Operator*Distribution
+  Operator     operator*(Operator lhs, Operator const& rhs);     //!< Operator*Operator
 }

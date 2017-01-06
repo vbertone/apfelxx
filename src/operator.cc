@@ -23,7 +23,7 @@ namespace apfel
     Integrator{},
     LagrangeInterpolator{gr},
     _grid(gr),
-    _expr(expr),
+    _expr(&expr),
     _eps(eps)
   {
     // Number of grids
@@ -82,24 +82,24 @@ namespace apfel
 		_Operator[_ig][_beta][_alpha] = I;
 	      }
 	    // Add local part
-	    _Operator[_ig][_beta][_beta] += _expr.Local(xbeta/xg[_beta+1]);
+	    _Operator[_ig][_beta][_beta] += _expr->Local(xbeta/xg[_beta+1]);
 	  }
       }
   }
 
   //_________________________________________________________________________
-  Operator::Operator(Operator const& obj, vector3d<double> const& op):
+  Operator::Operator(Operator const& obj):
     Integrator{},
     LagrangeInterpolator{obj._grid},
     _grid(obj._grid),
-    _expr(obj._expr),
+    _expr(nullptr),
     _eps(obj._eps),
-    _Operator(op)
+    _Operator(obj._Operator)
   {
   }
 
   //_________________________________________________________________________
-  Distribution Operator::operator*(Distribution const& d) const
+  Distribution Operator::operator*=(Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid
     if (&this->_grid != &d.GetGrid())
@@ -112,7 +112,7 @@ namespace apfel
     int const ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
-	int const nx = this->_grid.GetSubGrid(ig).nx();
+        int const nx = this->_grid.GetSubGrid(ig).nx();
 
 	// If the grid is external the product between the operator and the distribution
 	// has to be done in a standard way.
@@ -146,7 +146,7 @@ namespace apfel
     vector<double> j;
     for(auto ig = 0; ig < ng; ig++)
       {
-	int const nx = this->_grid.GetSubGrid(ig).nx();
+        int const nx = this->_grid.GetSubGrid(ig).nx();
 
         double xtrans;
         if(ig < ng-1) xtrans = this->_grid.GetSubGrid(ig+1).xMin();
@@ -168,7 +168,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator Operator::operator*(Operator const& o) const
+  Operator& Operator::operator*=(Operator const& o)
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
@@ -179,7 +179,7 @@ namespace apfel
     int const ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
-	int const nx = this->_grid.GetSubGrid(ig).nx();
+        int const nx = this->_grid.GetSubGrid(ig).nx();
 
 	// If the grid is external the product between the operators
 	// has to be done in a standard way.
@@ -188,37 +188,48 @@ namespace apfel
 	    for (auto alpha = 0; alpha <= nx; alpha++)
 	      for (auto beta = alpha; beta <= nx; beta++)
 		{
-		  v[ig][alpha][beta] = 0;
+		  _Operator[ig][alpha][beta] = 0;
 		  for (auto gamma = alpha; gamma <= beta; gamma++)
-		    v[ig][alpha][beta] += _Operator[ig][alpha][gamma] * o._Operator[ig][gamma][beta];
+		    _Operator[ig][alpha][beta] += v[ig][alpha][gamma] * o._Operator[ig][gamma][beta];
 		}
 	  }
 	// If the grid is internal the product between the operators
 	// has to be done exploiting the symmetry of the operators.
 	else
 	  {
-	    v[ig].resize(nx+1);
+	    _Operator[ig].resize(nx+1);
 	    for (auto alpha = 0; alpha <= nx; alpha++)
 	      {
-		v[ig][alpha].resize(nx+1, 0);
+		_Operator[ig][alpha].resize(nx+1, 0);
 		for (auto beta = alpha; beta <= nx; beta++)
 		  {
-		    v[ig][alpha][beta] = 0;
+		    _Operator[ig][alpha][beta] = 0;
 		    for (auto gamma = alpha; gamma <= beta; gamma++)
-		      v[ig][alpha][beta] += _Operator[ig][0][gamma-alpha] * o._Operator[ig][0][beta-gamma];
+		      _Operator[ig][alpha][beta] += v[ig][0][gamma-alpha] * o._Operator[ig][0][beta-gamma];
 		  }
 	      }
 	  }
       }
-
-    return Operator{*this, v};
+    return *this;
   }
 
   //_________________________________________________________________________
   double Operator::integrand(double const& x) const
   {
     const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
-    return _expr.Regular(x) * wr + _expr.Singular(x) * ( wr - _ws );
+    return _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
+  }
+
+  //_________________________________________________________________________
+  Distribution operator*(Operator lhs, Distribution const& rhs)
+  {
+    return lhs *= rhs;
+  }
+
+  //_________________________________________________________________________
+  Operator operator*(Operator lhs, Operator const& rhs)
+  {
+    return lhs *= rhs;
   }
 
 }
