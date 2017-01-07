@@ -6,6 +6,7 @@
 //
 
 #include <apfel/coupling.h>
+#include <apfel/tools.h>
 #include <cmath>
 #include <vector>
 #include <iostream>
@@ -56,7 +57,7 @@ public:
 	  c1 = 2. / 3. * LogKth;
 	else
 	  c1 = - 2. / 3. * LogKth;
-	return Coup * ( 1 + c1 * Coup / ( 4 * M_PI ) );
+	return Coup * ( 1 + c1 * Coup / FourPi );
       }
     else if (_pt == 2)
       {
@@ -71,14 +72,14 @@ public:
 	    c1 = - 2. / 3. * LogKth;
 	    c2 = 4. / 9. * pow(LogKth,2) - 38. / 3. * LogKth - 14. / 3.;
 	  }
-	return Coup * ( 1 + c1 * Coup / ( 4 * M_PI ) + c2 * pow(Coup / ( 4 * M_PI ),2) );
+	return Coup * ( 1 + c1 * Coup / FourPi + c2 * pow(Coup / FourPi,2) );
       }
     else return 0;
   }
 
-  double beta0(int const& nf) const { return ( 33. - 2. * nf ) / 3. / ( 4. * M_PI ); }
-  double beta1(int const& nf) const { return ( 102. - 38. / 3. * nf ) / pow(( 4. * M_PI ),2); }
-  double beta2(int const& nf) const { return ( 2857. / 2. - 5033. / 18. * nf + 325. / 54. * pow(nf,2) )/ pow(( 4. * M_PI ),3); }
+  double beta0(int const& nf) const { return ( 33. - 2. * nf ) / 3. / FourPi; }
+  double beta1(int const& nf) const { return ( 102. - 38. / 3. * nf ) / pow(FourPi,2); }
+  double beta2(int const& nf) const { return ( 2857. / 2. - 5033. / 18. * nf + 325. / 54. * pow(nf,2) ) / pow(FourPi,3); }
   double fbeta(double const& as, int const& nf) const
   {
     auto bt = - pow(as,2) * beta0(nf);
@@ -88,7 +89,7 @@ public:
   }
 
 private:
-  int const& _pt;
+  int const _pt;
 };
 
 int main()

@@ -13,6 +13,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cmath>
 
 namespace apfel
 {
@@ -40,6 +41,9 @@ namespace apfel
   const double TR = 0.5;
   const double CF = 4./3.;
   const double CA = 3.;
+
+  // Common factors
+  const double FourPi = 4 * M_PI;
 
   //! enumerator for code warning
   enum code { red = 31, green = 32, yellow = 33, blue = 34, normal = 39};

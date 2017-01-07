@@ -71,7 +71,7 @@ namespace apfel
 	asf  = MatchCoupling(sgn, asf, _LogTh2M2[inf]);
 	asi  = asf;
 	mui2 = muf2;
-	muf2 = _Thresholds2[fmin(inf+1,nff)];
+	muf2 = _Thresholds2[fmin(inf+1,nff-1)];
       }
     return Coup(nff, asf, mui2, mu2);
   }
