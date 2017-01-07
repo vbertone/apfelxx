@@ -21,14 +21,16 @@ namespace apfel
    * a continous memory allocation. Elements are accessible
    * throught the (i,j) operator.
    */
-  template<typename type>
+  template<typename T>
   class matrix
   {
   public:
     /**
      * @brief matrix constructor
+     * @param row number of rows
+     * @param col number of columns
      */
-    matrix();
+    matrix(size_t const& row = 0, size_t const& col = 0);
 
     /**
      * @brief Resizes object and set default value
@@ -36,7 +38,7 @@ namespace apfel
      * @param col number of columns
      * @param v the default value
      */
-    void resize(int const& row, int const& col, double const& v = 0);
+    void resize(size_t const& row, size_t const& col, T const& v = 0);
 
     /**
      * @brief Returns the (row,col) size pair.
@@ -44,11 +46,11 @@ namespace apfel
     pair<size_t,size_t> const& size() const { return _size; }
 
     //operators
-    type&       operator()(size_t const& i, size_t const& j)       { return _data[i+_size.first*j]; }
-    type const& operator()(size_t const& i, size_t const& j) const { return _data[i+_size.first*j]; }
+    T&       operator()(size_t const& i, size_t const& j)       { return _data[i+_size.first*j]; }
+    T const& operator()(size_t const& i, size_t const& j) const { return _data[i+_size.first*j]; }
 
   private:
     pair<size_t,size_t> _size; //!< the dimension pair
-    vector<type> _data;        //!< the data array
+    vector<T> _data;        //!< the data array
   };
 }

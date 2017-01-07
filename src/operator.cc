@@ -100,8 +100,13 @@ namespace apfel
   //_________________________________________________________________________
   double Operator::integrand(double const& x) const
   {
-    const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
-    return _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
+    double res = 0;
+    if (_expr)
+      {
+        const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
+        res = _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
+      }
+    return res;
   }
 
   //_________________________________________________________________________

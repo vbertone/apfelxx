@@ -11,14 +11,16 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  matrix<T>::matrix():
-    _size{0,0}
+  matrix<T>::matrix(const std::size_t &row, const std::size_t &col):
+    _size{row,col}
   {
+    if (row*col != 0)
+      _data.resize(row*col);
   }
 
   //_________________________________________________________________________
   template<class T>
-  void matrix<T>::resize(int const& row, int const& col, double const& v)
+  void matrix<T>::resize(const std::size_t &row, const std::size_t &col, T const& v)
   {
     _size = {row,col};
     _data.resize(row*col, v);
