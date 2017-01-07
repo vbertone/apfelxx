@@ -53,30 +53,21 @@ namespace apfel
    * @param tag
    * @param what
    */
-  inline void info(std::string const& tag, std::string const &what)
-  {
-    std::cout << code::blue << "[" << tag << "] info: " << what << code::normal << "\n";
-  }
+  void info(std::string const& tag, std::string const &what);
 
   /**
    * @brief warning
    * @param tag
    * @param what
    */
-  inline void warning(std::string const& tag, std::string const &what)
-  {
-    std::cout << code::yellow << "[" << tag << "] warning: " << what << code::normal << "\n";
-  }
+  void warning(std::string const& tag, std::string const &what);
 
   /**
    * @brief success
    * @param tag
    * @param what
    */
-  inline void success(std::string const& tag, std::string const &what)
-  {
-    std::cout << code::green << "[" << tag << "] success: " << what << code::normal << "\n";
-  }
+  void success(std::string const& tag, std::string const &what);
 
   /**
    * @brief error
@@ -84,12 +75,7 @@ namespace apfel
    * @param what
    * @return
    */
-  inline std::string error(std::string const& tag, std::string const &what)
-  {
-    std::stringstream ss("");
-    ss << code::red << "[" << tag << "] error: " << what << code::normal << "\n";
-    return ss.str();
-  }
+  std::string error(std::string const& tag, std::string const &what);
 
   /**
    * @brief The runtime_exception class
@@ -112,4 +98,11 @@ namespace apfel
                     const std::string &what):
       std::logic_error(error(tag,what)) {}
   };
+}
+
+namespace std {
+  /**
+   * @brief implementation of operator<< for apfel::code
+   */
+  std::ostream& operator<<(std::ostream& os, apfel::code code);
 }

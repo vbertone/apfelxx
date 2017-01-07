@@ -8,6 +8,7 @@ set(apfel_source
   expression.cc
   distribution.cc
   coupling.cc
+  tools.cc
   #utils.cc
   #splittings.cc
   #opset.cc
