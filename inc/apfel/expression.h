@@ -20,21 +20,9 @@ namespace apfel
   {
   public:
     /**
-     * @brief The default constructor, assumes that the expression does not depend on any mass index of flavour number.
+     * @brief The default constructor
      */
     Expression();
-
-    /**
-     * @brief "Massive" constructor that depends on the mass index.
-     * @param MassIndex mass index.
-     */
-    Expression(double const& MassIndex);
-
-    /**
-     * @brief "Massless" constructor that depends on the number of active flabours.
-     * @param FlavNumb number of flavours.
-     */
-    Expression(int const& FlavNumb);
 
     /**
      * @brief Virtual regular term.
@@ -56,12 +44,5 @@ namespace apfel
      * @return the local term at x.
      */
     virtual double Local(double const& x) const = 0;
-
-    double MassIndex()     const { return _MassIndex; } //<! Return the mass index
-    double FlavourNumber() const { return _FlavNumb; }  //<! Return the Number of flavours
-
-  protected:
-    double _MassIndex; //<! Mass index to be used in the epressions
-    double _FlavNumb;  //<! Number of active flavours
   };
 }

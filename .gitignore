@@ -22,6 +22,7 @@ tests/integrator_test
 tests/operator_test
 tests/distribution_test
 tests/coupling_test
+tests/structurefunction_test
 
 # Compiled Object files
 *.slo

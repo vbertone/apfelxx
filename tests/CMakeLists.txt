@@ -39,3 +39,9 @@ add_executable(coupling_test coupling_test.cc)
 target_link_libraries(coupling_test apfel)
 add_test(performance_coupling_test coupling_test)
 add_test(memcheck_coupling_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/coupling_test)
+
+# build tests
+add_executable(structurefunction_test structurefunction_test.cc)
+target_link_libraries(structurefunction_test apfel)
+add_test(performance_structurefunction_test structurefunction_test)
+add_test(memcheck_structurefunction_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/structurefunction_test)
