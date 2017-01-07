@@ -42,8 +42,13 @@ namespace apfel
   const double CF = 4./3.;
   const double CA = 3.;
 
-  // Common factors
+  // Useful constants
   const double FourPi = 4 * M_PI;
+  const double emc    = 0.5772156649;
+  const double zeta2  = 1.644934067;
+  const double zeta3  = 1.2020569031;
+  const double zeta4  = 1.0823232337;
+  const double zeta5  = 1.0369277551;
 
   //! enumerator for code warning
   enum code { red = 31, green = 32, yellow = 33, blue = 34, normal = 39};

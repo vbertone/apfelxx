@@ -21,6 +21,8 @@ namespace apfel
   {
   public:
 
+    LagrangeInterpolator() = delete;
+
     /**
      * @see Interpolator::Interpolator
      */
@@ -35,6 +37,5 @@ namespace apfel
      * @see Interpolator::SumBounds
      */
     pair<int,int> SumBounds(double const& x, SubGrid const& sg) const;
-
   };
 }

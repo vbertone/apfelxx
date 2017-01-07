@@ -28,6 +28,9 @@ namespace apfel
   class Interpolator
   {
   public:
+
+    Interpolator() = delete;
+
     /**
      * @brief Interpolator constructor.
      * @param gr the reference to the input grid object
@@ -77,5 +80,4 @@ namespace apfel
     vector<vector<double>>        _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
     vector<double>                _distributionJointGrid; //!< The array with the distribution values on the joint grid.
   };
-
 }

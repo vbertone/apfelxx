@@ -9,6 +9,7 @@ set(apfel_source
   distribution.cc
   coupling.cc
   tools.cc
+  alphaqcd.cc
   #utils.cc
   #splittings.cc
   #opset.cc
