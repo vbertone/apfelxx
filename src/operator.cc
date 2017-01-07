@@ -48,11 +48,10 @@ namespace apfel
 	// Limit the loop over "_beta" according to whether "sg" is external
 	const int gbound = ( sg.IsExternal() ? nx : 0 );
 
-	_Operator[_ig].resize(gbound+1);
+	_Operator[_ig].resize(gbound+1, nx+1, 0);
 	for (_beta = 0; _beta <= gbound; _beta++)
 	  {
 	    const auto xbeta = xg[_beta];
-	    _Operator[_ig][_beta].resize(nx+1, 0);
 	    for (_alpha = _beta; _alpha <= nx; _alpha++)
 	      {
 		// Weight of the subtraction term (independent of x)
@@ -79,10 +78,10 @@ namespace apfel
 		    // Compute the integral
 		    I += integrate(c, d, _eps);
 		  }
-		_Operator[_ig][_beta][_alpha] = I;
+		_Operator[_ig](_beta,_alpha) = I;
 	      }
 	    // Add local part
-	    _Operator[_ig][_beta][_beta] += _expr->Local(xbeta/xg[_beta+1]);
+	    _Operator[_ig](_beta,_beta) += _expr->Local(xbeta/xg[_beta+1]);
 	  }
       }
   }
@@ -96,6 +95,13 @@ namespace apfel
     _eps(obj._eps),
     _Operator(obj._Operator)
   {
+  }
+
+  //_________________________________________________________________________
+  double Operator::integrand(double const& x) const
+  {
+    const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
+    return _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
   }
 
   //_________________________________________________________________________
@@ -122,7 +128,7 @@ namespace apfel
 	      {
 		s[ig][alpha] = 0;
 		for (auto beta = alpha; beta <= nx; beta++)
-		  s[ig][alpha] += _Operator[ig][alpha][beta] * sg[ig][beta];
+		  s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
 	      }
 	  }
 	// If the grid is internal the product between the operator and the distribution
@@ -133,7 +139,7 @@ namespace apfel
 	      {
 		s[ig][alpha] = 0;
 		for (auto beta = alpha; beta <= nx; beta++)
-		  s[ig][alpha] += _Operator[ig][0][beta-alpha] * sg[ig][beta];
+		  s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
 	      }
 	  }
 
@@ -188,26 +194,23 @@ namespace apfel
 	    for (auto alpha = 0; alpha <= nx; alpha++)
 	      for (auto beta = alpha; beta <= nx; beta++)
 		{
-		  _Operator[ig][alpha][beta] = 0;
+		  _Operator[ig](alpha,beta) = 0;
 		  for (auto gamma = alpha; gamma <= beta; gamma++)
-		    _Operator[ig][alpha][beta] += v[ig][alpha][gamma] * o._Operator[ig][gamma][beta];
+		    _Operator[ig](alpha,beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
 		}
 	  }
 	// If the grid is internal the product between the operators
 	// has to be done exploiting the symmetry of the operators.
 	else
 	  {
-	    _Operator[ig].resize(nx+1);
+	    _Operator[ig].resize(nx+1, nx+1, 0);
 	    for (auto alpha = 0; alpha <= nx; alpha++)
-	      {
-		_Operator[ig][alpha].resize(nx+1, 0);
-		for (auto beta = alpha; beta <= nx; beta++)
-		  {
-		    _Operator[ig][alpha][beta] = 0;
-		    for (auto gamma = alpha; gamma <= beta; gamma++)
-		      _Operator[ig][alpha][beta] += v[ig][0][gamma-alpha] * o._Operator[ig][0][beta-gamma];
-		  }
-	      }
+	      for (auto beta = alpha; beta <= nx; beta++)
+		{
+		  _Operator[ig](alpha,beta) = 0;
+		  for (auto gamma = alpha; gamma <= beta; gamma++)
+		    _Operator[ig](alpha,beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
+		}
 	  }
       }
     return *this;
@@ -217,9 +220,9 @@ namespace apfel
   Operator& Operator::operator*=(double const& s)
   {
     for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-        for (size_t beta = alpha; beta < _Operator[ig][alpha].size(); beta++)
-          _Operator[ig][alpha][beta] *= s;
+      for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+          _Operator[ig](alpha,beta) *= s;
 
     return *this;
   }
@@ -232,9 +235,9 @@ namespace apfel
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-        for (size_t beta = alpha; beta < _Operator[ig][alpha].size(); beta++)
-          _Operator[ig][alpha][beta] += o._Operator[ig][alpha][beta];
+      for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+          _Operator[ig](alpha,beta) += o._Operator[ig](alpha,beta);
 
     return *this;
   }
@@ -247,18 +250,11 @@ namespace apfel
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-        for (size_t beta = alpha; beta < _Operator[ig][alpha].size(); beta++)
-          _Operator[ig][alpha][beta] -= o._Operator[ig][alpha][beta];
+      for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+          _Operator[ig](alpha,beta) -= o._Operator[ig](alpha,beta);
 
     return *this;
-  }
-
-  //_________________________________________________________________________
-  double Operator::integrand(double const& x) const
-  {
-    const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
-    return _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
   }
 
   //_________________________________________________________________________

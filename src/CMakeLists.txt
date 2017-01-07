@@ -10,6 +10,7 @@ set(apfel_source
   coupling.cc
   tools.cc
   alphaqcd.cc
+  matrix.cc
   #utils.cc
   #splittings.cc
   #opset.cc

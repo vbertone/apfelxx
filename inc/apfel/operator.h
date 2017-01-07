@@ -9,6 +9,7 @@
 
 #include <apfel/integrator.h>
 #include <apfel/lagrangeinterpolator.h>
+#include <apfel/matrix.h>
 
 namespace apfel
 {
@@ -61,7 +62,7 @@ namespace apfel
     Grid             const& _grid;         //!< Grid on which to compute the operator
     Expression       const* _expr;         //!< Expression to be commuted into an operator
     double           const& _eps;          //!< Precision of the dgauss integration
-    vector3d<double>        _Operator;     //!< Operator values.
+    vector<matrix<double>>  _Operator;     //!< Operator values.
 
     // Global variables
     int    _alpha, _beta;
