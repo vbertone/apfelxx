@@ -103,7 +103,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&this->_grid != &d.GetGrid())
-      throw runtime_exception("Operator::operator*", "Operator and Distribution grids do not match");
+      throw runtime_exception("Operator::operator*=", "Operator and Distribution grids do not match");
 
     // Compute the the distribution on the subgrids
     const auto& sg = d.GetDistributionSubGrid();
@@ -172,7 +172,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
-      throw runtime_exception("Operator::operator*", "Operators grid does not match");
+      throw runtime_exception("Operator::operator*=", "Operators grid does not match");
 
     auto v = _Operator;
 
@@ -214,6 +214,56 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Operator& Operator::operator*=(double const& s)
+  {
+    int const ng = _grid.nGrids(); //sg.size();
+    for (auto ig = 0; ig < ng; ig++)
+      {
+        const int nx = this->_grid.GetSubGrid(ig).nx();
+        for (auto alpha = 0; alpha <= nx; alpha++)
+          for (auto beta = alpha; beta <= nx; beta++)
+            _Operator[ig][alpha][beta] *= s;
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  Operator& Operator::operator+=(Operator const& o)
+  {
+    // fast method to check that we are using the same Grid
+    if (&this->_grid != &o.GetGrid())
+      throw runtime_exception("Operator::operator+=", "Operators grid does not match");
+
+    int const ng = _grid.nGrids(); //sg.size();
+    for (auto ig = 0; ig < ng; ig++)
+      {
+        const int nx = this->_grid.GetSubGrid(ig).nx();
+        for (auto alpha = 0; alpha <= nx; alpha++)
+          for (auto beta = alpha; beta <= nx; beta++)
+            _Operator[ig][alpha][beta] += o._Operator[ig][alpha][beta];
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  Operator& Operator::operator-=(Operator const& o)
+  {
+    // fast method to check that we are using the same Grid
+    if (&this->_grid != &o.GetGrid())
+      throw runtime_exception("Operator::operator+=", "Operators grid does not match");
+
+    int const ng = _grid.nGrids(); //sg.size();
+    for (auto ig = 0; ig < ng; ig++)
+      {
+        const int nx = this->_grid.GetSubGrid(ig).nx();
+        for (auto alpha = 0; alpha <= nx; alpha++)
+          for (auto beta = alpha; beta <= nx; beta++)
+            _Operator[ig][alpha][beta] -= o._Operator[ig][alpha][beta];
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
   double Operator::integrand(double const& x) const
   {
     const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
@@ -232,4 +282,27 @@ namespace apfel
     return lhs *= rhs;
   }
 
+  //_________________________________________________________________________
+  Operator operator*(double const& s, Operator rhs)
+  {
+    return rhs *= s;
+  }
+
+  //_________________________________________________________________________
+  Operator operator*(Operator lhs, double const& s)
+  {
+    return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  Operator operator+(Operator lhs, Operator const& rhs)
+  {
+    return lhs += rhs;
+  }
+
+  //_________________________________________________________________________
+  Operator operator-(Operator lhs, Operator const& rhs)
+  {
+    return lhs -= rhs;
+  }
 }

@@ -33,6 +33,16 @@ namespace apfel
      * @param distjointgrid a vector with the distribution values on the joint grid.
      */
     Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
+
+    // operators
+    Distribution& operator*=(double const& s);       //!< this *= Scalar
+    Distribution& operator+=(Distribution const& d); //!< this += Distribution
+    Distribution& operator-=(Distribution const& d); //!< this -= Distribution
   };
 
+  // Extra operation definitions where Distribution is at the left hand side (lhs).
+  Distribution operator*(double const& s, Distribution rhs);         //!< Scalar*Distribution
+  Distribution operator*(Distribution lhs, double const& s);         //!< Distribution*Scalar
+  Distribution operator+(Distribution lhs, Distribution const& rhs); //!< Distribution+Distribution
+  Distribution operator-(Distribution lhs, Distribution const& rhs); //!< Distribution-Distribution
 }
