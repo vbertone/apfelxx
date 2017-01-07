@@ -216,14 +216,11 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator*=(double const& s)
   {
-    int const ng = _grid.nGrids(); //sg.size();
-    for (auto ig = 0; ig < ng; ig++)
-      {
-        const int nx = this->_grid.GetSubGrid(ig).nx();
-        for (auto alpha = 0; alpha <= nx; alpha++)
-          for (auto beta = alpha; beta <= nx; beta++)
-            _Operator[ig][alpha][beta] *= s;
-      }
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig][alpha].size(); beta++)
+          _Operator[ig][alpha][beta] *= s;
+
     return *this;
   }
 
@@ -234,14 +231,11 @@ namespace apfel
     if (&this->_grid != &o.GetGrid())
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
-    int const ng = _grid.nGrids(); //sg.size();
-    for (auto ig = 0; ig < ng; ig++)
-      {
-        const int nx = this->_grid.GetSubGrid(ig).nx();
-        for (auto alpha = 0; alpha <= nx; alpha++)
-          for (auto beta = alpha; beta <= nx; beta++)
-            _Operator[ig][alpha][beta] += o._Operator[ig][alpha][beta];
-      }
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig][alpha].size(); beta++)
+          _Operator[ig][alpha][beta] += o._Operator[ig][alpha][beta];
+
     return *this;
   }
 
@@ -252,14 +246,11 @@ namespace apfel
     if (&this->_grid != &o.GetGrid())
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
-    int const ng = _grid.nGrids(); //sg.size();
-    for (auto ig = 0; ig < ng; ig++)
-      {
-        const int nx = this->_grid.GetSubGrid(ig).nx();
-        for (auto alpha = 0; alpha <= nx; alpha++)
-          for (auto beta = alpha; beta <= nx; beta++)
-            _Operator[ig][alpha][beta] -= o._Operator[ig][alpha][beta];
-      }
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig][alpha].size(); beta++)
+          _Operator[ig][alpha][beta] -= o._Operator[ig][alpha][beta];
+
     return *this;
   }
 
