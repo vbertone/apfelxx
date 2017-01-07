@@ -69,10 +69,10 @@ namespace apfel
     double GetCoupling(double const& mu) const;
 
   protected:
-    double         const& _AlphaRef;     //<! Reference value of the coupling
-    double                _MuRef2;       //<! Squared reference scale of the coupling
-    vector<double>        _Thresholds2;  //<! Squared quark threholds
-    vector<double>        _LogTh2M2;     //<! Log of the squared threholds over squared masses
+    double         _AlphaRef;     //<! Reference value of the coupling
+    double         _MuRef2;       //<! Squared reference scale of the coupling
+    vector<double> _Thresholds2;  //<! Squared quark threholds
+    vector<double> _LogTh2M2;     //<! Log of the squared threholds over squared masses
 
   };
 }
