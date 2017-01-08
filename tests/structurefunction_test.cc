@@ -14,6 +14,7 @@
 #include <apfel/tools.h>
 #include <apfel/alphaqcd.h>
 #include <cmath>
+#include <map>
 
 using namespace apfel;
 using namespace std;
@@ -64,8 +65,24 @@ public:
   }
 };
 
+// The structure function class
+class StructureFunction: public Distribution
+{
+public:
+  StructureFunction(Grid const& gr): Distribution(gr)
+  {
+    _distributionJointGrid.resize(_grid.GetJointGrid().GetGrid().size());
+
+    for (auto ig=0; ig<_grid.nGrids(); ig++)
+      {
+        vector<double> sg(_grid.GetSubGrid(ig).GetGrid().size(),0);
+        _distributionSubGrid.push_back(sg);
+      }
+  }
+};
+
 // Enumerator to identify the cf. component
-enum comp { Q = 0, G = 1 };
+enum comp { G = 0, PS = 1, NSP = 2, NSM = 3, V = 4 };
 
 // The coefficient function class
 class f2cf: public Expression
@@ -78,28 +95,28 @@ public:
   {}
   double Regular(double const& x) const
   {
-    if (_cmp == Q)
-	if(_pt == 0) return 0;
-	else         return C2qR(x);
+    if (_cmp == NSP)
+      if(_pt == 0) return 0;
+      else         return C2qR(x);
     else if (_cmp == G)
-	if(_pt == 0) return 0;
-	else         return C2gR(x);
+      if(_pt == 0) return 0;
+      else         return C2gR(x);
     else
       return 0;
   }
   double Singular(double const& x) const
   {
-    if (_cmp == Q)
-	if(_pt == 0) return 0;
-	else         return C2qS(x);
+    if (_cmp == NSP)
+      if(_pt == 0) return 0;
+      else         return C2qS(x);
     else
       return 0;
   }
   double Local(double const& x)    const
   {
-    if (_cmp == Q)
-	if(_pt == 0) return 1;
-	else         return C2qL(x);
+    if (_cmp == NSP)
+      if(_pt == 0) return 1;
+      else         return C2qL(x);
     else
       return 0;
   }
@@ -108,18 +125,19 @@ private:
   int  const _pt;
 };
 
-
 int main()
 {
+  // Time counter
   Timer t;
+
+  // Define the scale
+  const auto Q = sqrt(2);
+
+  // ========== Initialization phase ==========
   t.start();
 
-  // Define x and scale
-  const auto x  = 0.1;
-  const auto Mu = sqrt(2);
-
   // Grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}, false};
+  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
 
   // PDFs
   vector<PDF> pdfs;
@@ -130,30 +148,49 @@ int main()
     }
 
   // Alphas
-  const AlphaQCD Coup(0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 1);
-  const auto as = Coup.GetCoupling(Mu) / FourPi;
+  const AlphaQCD Coup{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 1};
+  const auto as = Coup.GetCoupling(Q) / FourPi;
 
   // Coefficient functions
-  const f2cf C2qLO(Q, 0);
-  const f2cf C2qNLO(Q, 1);
-  const f2cf C2gNLO(G, 1);
+  const f2cf C2qLO{NSP, 0};
+  const f2cf C2qNLO{NSP, 1};
+  const f2cf C2gNLO{G, 1};
 
   // Construct operators
   const Operator OqLO{g, C2qLO};
   const Operator OqNLO{g, C2qNLO};
   const Operator OgNLO{g, C2gNLO};
 
-  // Combine operators with alphas
-  const auto Oq = OqLO + as * OqNLO;
-  const auto Og =        as * OgNLO;
+  // Combine operators with alphas and put it in a map
+  const map<comp, Operator> O = { { G, as * OgNLO }, { NSP, OqLO + as * OqNLO } };
+
+  cout << "Initialization ..." << endl;
+  t.printTime(t.stop());
 
   // Construct the structure function as a combination of distributions and operators
+  // ========== Computation phase ==========
+  t.start();
+
+  // Define map
   const auto eu2 = 4. / 9.;
   const auto ed2 = 1. / 9.;
-  const auto F2 = Oq * ( ed2 * ( pdfs[3] + pdfs[9] + pdfs[5] + pdfs[7] ) + eu2 * ( pdfs[4] + pdfs[8] ) ) + 2 * ( ed2 + eu2 ) * Og * pdfs[6];
+  map <comp, map<int,double>> Map;
+  Map[G][6]   = 2 * ed2 + 2 * eu2;
+  Map[NSP][3] = Map[NSP][9] = Map[NSP][5] = Map[NSP][7] = ed2;
+  Map[NSP][4] = Map[NSP][8] = eu2;
 
-  cout << "\nF2(x = " << x << ", Q = " << Mu << ") = " << F2.Evaluate(x) << "\n" << endl;
+  // Combine distributions and operators according to the map a produce a StructureFunction object
+  StructureFunction F2map{g};
+  for (auto const& iO : Map)
+    for (auto const& id : iO.second)
+      F2map += id.second * O.at(iO.first) * pdfs[id.first];
 
+  // Print the results
+  cout << scientific;
+  const vector<double> xlha = { 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1 };
+  for (auto i = 2; i < (int) xlha.size(); i++)
+    cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2map.Evaluate(xlha[i]) << endl;
+  cout << "Computation ..." << endl;
   t.printTime(t.stop());
 
   return 0;
