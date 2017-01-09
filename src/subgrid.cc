@@ -77,13 +77,13 @@ namespace apfel
     // In case they are external ...
     if(_IsExternal)
       {
-        if(_nx != sg._nx)                   return false;
         if(_xsg.size() != sg._xsg.size())   return false;
         if(_xsg != sg._xsg)                 return false;
         if(_InterDegree != sg._InterDegree) return false;
       }
     else // In case they are internal ...
       {
+        if(_nx != sg._nx)                   return false;
         if(_xMin != sg._xMin)               return false;
         if(_xMax != sg._xMax)               return false;
         if(_InterDegree != sg._InterDegree) return false;
@@ -91,6 +91,7 @@ namespace apfel
     return true;
   }
 
+  //_________________________________________________________________________________
   bool SubGrid::operator != (SubGrid const& sg) const
   {
     if (*this == sg) return false;

@@ -73,7 +73,7 @@ namespace apfel
   };
 
   /**
-   * @brief Method which prints SugGrid with cout <<.
+   * @brief Method which prints SubGrid with cout <<.
    */
   std::ostream& operator<<(std::ostream& os, SubGrid const& sg);
 }

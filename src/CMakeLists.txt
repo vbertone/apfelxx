@@ -11,6 +11,7 @@ set(apfel_source
   tools.cc
   alphaqcd.cc
   matrix.cc
+  qgrid.cc
   #utils.cc
   #splittings.cc
   #opset.cc
