@@ -16,7 +16,8 @@ namespace apfel {
   AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt):
     Coupling(AlphaRef, MuRef, Masses),
     _pt(pt)
-  {}
+  {
+  }
 
   //_________________________________________________________________________________
   double AlphaQCD::Coup(int const& nf, double const& as0, double const& mu02, double const& mu2) const
@@ -44,7 +45,7 @@ namespace apfel {
   //_________________________________________________________________________________
   double AlphaQCD::MatchCoupling(bool const& Up, double const& Coup, double const& LogKth) const
   {
-    const auto sgn = ( Up ? 1 : -1);    
+    const auto sgn = ( Up ? 1 : -1);
     const auto ep = Coup / FourPi;
     const double c[] = { 1, sgn * 2. / 3. * LogKth, 4. / 9. * pow(LogKth,2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3. };
     double match = 0;

@@ -19,16 +19,16 @@ namespace apfel
   Coupling::Coupling(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, vector<double> const& Thresholds):
     _AlphaRef(AlphaRef)
   {
+    // Check that "Masses" and "Thresholds" have the same size
+    if (Masses.size() != Thresholds.size())
+      throw logic_exception("Coupling::Coupling", "Masses and Thresholds vectors have diffrent sizes.");
+
     // Compute squared final scale
     _MuRef2 = pow(MuRef,2);
 
     // Compute squared thresholds
     for (auto &th : Thresholds)
       _Thresholds2.push_back(pow(th,2));
-
-    // Check that "Masses" and "Thresholds" have the same size
-    if (Masses.size() != Thresholds.size())
-      throw logic_exception("Coupling::Coupling", "Masses and Thresholds vectors have diffrent sizes.");
 
     // Compute logs of muth2 / m2
     for (auto im = 0; im < (int) Thresholds.size(); im++)
@@ -71,7 +71,7 @@ namespace apfel
 	asf  = MatchCoupling(sgn, asf, _LogTh2M2[inf]);
 	asi  = asf;
 	mui2 = muf2;
-	muf2 = _Thresholds2[fmin(inf+1,nff-1)];
+	muf2 = _Thresholds2[min(inf+1,nff-1)];
       }
     return Coup(nff, asf, mui2, mu2);
   }

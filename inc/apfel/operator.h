@@ -16,7 +16,6 @@ namespace apfel
   class Grid;
   class Expression;
   class Distribution;
-  template<class T> using vector3d = vector<vector<vector<T>>>;
 
   /**
    * @brief The Operator class.
