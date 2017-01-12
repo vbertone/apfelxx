@@ -68,9 +68,21 @@ namespace apfel
      */
     double GetCoupling(double const& mu) const;
 
+    /**
+     * @brief Function that returns the values of the thresholds.
+     */
+    vector<double> const& GetThresholds() const { return _Thresholds; }
+
+    /**
+     * @brief Function that returns the values of the masses.
+     */
+    vector<double> const& GetMasses() const { return _Masses; }
+
   protected:
     double         _AlphaRef;     //<! Reference value of the coupling
     double         _MuRef2;       //<! Squared reference scale of the coupling
+    vector<double> _Masses;       //<! Values of the masses
+    vector<double> _Thresholds;   //<! Values of the thresholds
     vector<double> _Thresholds2;  //<! Squared quark threholds
     vector<double> _LogTh2M2;     //<! Log of the squared threholds over squared masses
 

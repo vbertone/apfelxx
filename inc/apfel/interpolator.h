@@ -55,7 +55,7 @@ namespace apfel
     /**
      * @brief Pure virtual method to be defined in the inherited class.
      * @param beta the grid index
-     * @param x the value of the required interpolation
+     * @param lnx the value (of the log) ofthe required interpolation
      * @param sg SubGrid on which the interpolant is defined
      * @return the interpolation weights.
      */
@@ -63,7 +63,6 @@ namespace apfel
 
     /**
      * @brief Computes the lower and upper bounds on which the the sum over interpolants is limited
-     * @param beta the grid index
      * @param x the value of the required interpolation
      * @param sg SubGrid on which the interpolant is defined
      * @return the lower and upper bounds of beta.

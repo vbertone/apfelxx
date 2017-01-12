@@ -17,7 +17,9 @@ namespace apfel
 {
   //_________________________________________________________________________
   Coupling::Coupling(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, vector<double> const& Thresholds):
-    _AlphaRef(AlphaRef)
+    _AlphaRef(AlphaRef),
+    _Masses(Masses),
+    _Thresholds(Thresholds)
   {
     // Check that "Masses" and "Thresholds" have the same size
     if (Masses.size() != Thresholds.size())

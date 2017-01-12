@@ -26,10 +26,10 @@ namespace apfel {
   //_________________________________________________________________________________
   double LagrangeInterpolator::Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const
   {
-    // Compute interpolant
+    // Get the logarithmic grid
     auto const& lxsg = sg.GetLogGrid();
 
-    // Return immediately 1 is "x" coincides with "xg[beta]".
+    // Return immediately 1 if "x" coincides with "xg[beta]".
     if (fabs(lnx - lxsg[beta]) < eps12) return 1;
 
     // Return 0 if "x" is outside the range in which the interpolant is different from zero.
@@ -52,9 +52,9 @@ namespace apfel {
     // Compute the interpolant
     for (auto delta = 0; delta <= id; delta++)
       if(delta != j)
-	w_int *= ( lnx - lxsg[beta-j+delta] )  / ( lxsg[beta] - lxsg[beta-j+delta] );
+	w_int *= ( lnx - lxsg[beta-j+delta] ) / ( lxsg[beta] - lxsg[beta-j+delta] );
 
-    return w_int;   
+    return w_int;
   }
 
   //_________________________________________________________________________________
