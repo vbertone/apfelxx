@@ -51,7 +51,7 @@ int main()
   auto Qmax = 999.;
   auto Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
   auto Q = Qmin;
-  cout << setprecision(8);
+  cout << setprecision(8) << scientific;
   cout << "Q       \t\tDirect  \t\tInterpolated\t\tRatio" << endl;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
