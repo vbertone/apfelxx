@@ -45,10 +45,10 @@ int main()
   const AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
   const GridAlphaQCD gas{as, 50, 1, 1000, 3};
 
-  // Precision test
+  cout << "Precision test ..." << endl;
   auto nQ   = 20;
-  auto Qmin = 1.;
-  auto Qmax = 1000.;
+  auto Qmin = 1.1;
+  auto Qmax = 999.;
   auto Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
   auto Q = Qmin;
   cout << setprecision(8);
@@ -59,16 +59,14 @@ int main()
       Q *=Step;
     }
 
-  // Speed test
+  cout << "\nSpeed test ..." << endl;
   Timer t;
   nQ   = 1000000;
-  Qmin = 1.1;
-  Qmax = 999.;
   Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
 
-  cout << "\nDirect calculation of " << nQ << " points ..." << endl;
-  Q = Qmin;
   t.start();
+  cout << "Direct calculation of " << nQ << " points ..." << endl;
+  Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
       as.GetCoupling(Q);
@@ -76,9 +74,9 @@ int main()
     }
   t.printTime(t.stop());
 
-  cout << "\nInterpolated calculation of " << nQ << " points ..." << endl;
-  Q = Qmin;
   t.start();
+  cout << "Interpolated calculation of " << nQ << " points ..." << endl;
+  Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
       gas.Evaluate(Q);
