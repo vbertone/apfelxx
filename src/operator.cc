@@ -101,11 +101,16 @@ namespace apfel
   double Operator::integrand(double const& x) const
   {
     double res = 0;
-    if (_expr)
+    try
       {
         const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
         res = _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
       }
+    catch (std::exception &e)
+      {
+        throw runtime_exception("Operator::integrand",  "Operator Expression not defined.");
+      }
+
     return res;
   }
 
