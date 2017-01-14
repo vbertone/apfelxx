@@ -12,6 +12,7 @@ using std::vector;
 #include <tuple>
 using std::tuple;
 using std::get;
+#include <iostream>
 
 namespace apfel
 {
@@ -22,7 +23,11 @@ namespace apfel
    * This class defines the "QGrid" object that includes, apart from the
    * grid itself, also the relevant parameters.
    *
+   * This template class accepts fixed types:
+   * - double
+   *
    */
+  template<class T>
   class QGrid
   {
   public:
@@ -90,13 +95,33 @@ namespace apfel
     vector<double> _llQ2g;        //!< Actual grid in ln(ln(Q^2/Lambda^2))
     vector<int>    _nQg;          //!< Indices of the nodes on which there is either a bound or a threshold
 
-    vector<double> _GridValues;   //!< Vector of values to be interpolated on the grid
+    vector<T> _GridValues;   //!< Vector of values to be interpolated on the grid
 
-    friend std::ostream& operator<<(std::ostream& os, QGrid const& dt);
+    template<class U>
+    friend std::ostream& operator<<(std::ostream& os, QGrid<U> const& dt);
   };
 
   /**
    * @brief Method which prints QGrid with cout <<.
    */
-  std::ostream& operator<<(std::ostream& os, QGrid const& sg);
+  template<class T>
+  std::ostream& operator<<(std::ostream& os, QGrid<T> const& Qg)
+  {
+    os << "QGrid: " << &Qg << "\n";
+    os << "nQ                = " << Qg._nQ << "\n";
+    os << "QMin              = " << Qg._QMin << "\n";
+    os << "QMax              = " << Qg._QMax << "\n";
+    os << "InterDegree       = " << Qg._InterDegree << "\n";
+    os << "Lambda            = " << Qg._Lambda << "\n";
+    os << "Thresholds        = ";
+    for (const auto &v: Qg._Thresholds) os << v << " ";
+    os << "\n";
+    os << "Threshold indices = ";
+    for (const auto &v: Qg._nQg) os << v << " ";
+    os << "\n";
+    os << "Qg                = ";
+    for (const auto &v: Qg._Qg) os << v << " ";
+    os << "\n";
+    return os;
+  }
 }

@@ -19,7 +19,7 @@ using namespace std;
 /**
  * @brief Alpha_s on a QGrid
  */
-class GridAlphaQCD: public QGrid
+class GridAlphaQCD: public QGrid<double>
 {
 public:
   GridAlphaQCD(AlphaQCD const& as,
@@ -27,7 +27,7 @@ public:
 	       double const& QMin,
 	       double const& QMax,
 	       int const& InterDegree):
-    QGrid(nQ, QMin, QMax, InterDegree, as.GetThresholds())
+    QGrid<double>(nQ, QMin, QMax, InterDegree, as.GetThresholds())
   {
     for (auto const& iQ : _Qg)
       _GridValues.push_back(as.GetCoupling(iQ));
@@ -37,7 +37,7 @@ public:
 int main()
 {
   // Constructor of QGrid
-  const QGrid qg{50, 1, 1000, 3, {0, 0, 0, sqrt(2), 4.5, 175.}};
+  const QGrid<double> qg{50, 1, 1000, 3, {0, 0, 0, sqrt(2), 4.5, 175.}};
 
   cout << qg << endl;
 

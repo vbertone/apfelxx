@@ -12,9 +12,9 @@
 
 namespace apfel
 {
-
   //_________________________________________________________________________________
-  QGrid::QGrid(int const& nQ, double const& QMin, double const& QMax, int const& InterDegree, vector<double> const& Thresholds, double const& Lambda):
+  template<class T>
+  QGrid<T>::QGrid(int const& nQ, double const& QMin, double const& QMax, int const& InterDegree, vector<double> const& Thresholds, double const& Lambda):
     _nQ(nQ),
     _InterDegree(InterDegree),
     _QMin(QMin),
@@ -85,7 +85,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double QGrid::Interpolant(int const& tQ, int const& tau, double const& lnln2ql) const
+  template<class T>
+  double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& lnln2ql) const
   {
     // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless tau coincides
     // with the a threshold index. In that case return zero.
@@ -119,7 +120,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  tuple<int,int,int> QGrid::SumBounds(double const& Q) const
+  template<class T>
+  tuple<int,int,int> QGrid<T>::SumBounds(double const& Q) const
   {
     tuple<int,int,int> bounds (0,0,0);
 
@@ -169,7 +171,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double QGrid::Evaluate(double const& Q) const
+  template<class T>
+  double QGrid<T>::Evaluate(double const& Q) const
   {
     auto const bounds = SumBounds(Q);
     auto const ll2ql  = log( 2 * log( Q / _Lambda ) );
@@ -181,7 +184,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  bool QGrid::operator == (QGrid const& Qg) const
+  template<class T>
+  bool QGrid<T>::operator == (QGrid const& Qg) const
   {
     if(_nQ != Qg._nQ)                   return false;
     if(_QMin != Qg._QMin)               return false;
@@ -193,31 +197,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  bool QGrid::operator != (QGrid const& Qg) const
+  template<class T>
+  bool QGrid<T>::operator != (QGrid const& Qg) const
   {
     if (*this == Qg) return false;
     else return true;
   }
 
-  //_________________________________________________________________________________
-  std::ostream& operator<<(std::ostream& os, QGrid const& Qg)
-  {
-    os << "QGrid: " << &Qg << "\n";
-    os << "nQ                = " << Qg._nQ << "\n";
-    os << "QMin              = " << Qg._QMin << "\n";
-    os << "QMax              = " << Qg._QMax << "\n";
-    os << "InterDegree       = " << Qg._InterDegree << "\n";
-    os << "Lambda            = " << Qg._Lambda << "\n";
-    os << "Thresholds        = ";
-    for (const auto &v: Qg._Thresholds) os << v << " ";
-    os << "\n";
-    os << "Threshold indices = ";
-    for (const auto &v: Qg._nQg) os << v << " ";
-    os << "\n";
-    os << "Qg                = ";
-    for (const auto &v: Qg._Qg) os << v << " ";
-    os << "\n";
-    return os;
-  }
-
+  // template fixed types
+  template class QGrid<double>;
 }
