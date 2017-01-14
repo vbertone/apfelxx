@@ -108,9 +108,9 @@ namespace apfel
       }
     catch (std::exception &e)
       {
-        throw runtime_exception("Operator::integrand",  "Operator Expression not defined.");
+        throw runtime_exception("Operator::integrand",  e.what());
       }
-
+    
     return res;
   }
 
