@@ -48,6 +48,7 @@ double C2gR(double const& x) { return 4. * TR * ( ( pow(( 1. - x ),2) + pow(x,2)
 class PDF: public Distribution
 {
 public:
+  // Standard constructor
   PDF(int const& ipdf, Grid const& gr): Distribution(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
@@ -60,6 +61,17 @@ public:
         for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
           if (ix < 1) sg.push_back(LHToyPDFs(ipdf,ix));
 	  else        sg.push_back(0);
+        _distributionSubGrid.push_back(sg);
+      }
+  }
+  // Void constructor
+  PDF(Grid const& gr): Distribution(gr)
+  {
+    _distributionJointGrid.resize(_grid.GetJointGrid().GetGrid().size());
+    for (auto ig=0; ig<_grid.nGrids(); ig++)
+      {
+        vector<double> sg;
+	sg.resize(_grid.GetSubGrid(ig).GetGrid().size());
         _distributionSubGrid.push_back(sg);
       }
   }
@@ -162,20 +174,26 @@ int main()
   const Operator OgNLO{g, C2gNLO};
 
   // Combine operators with alphas and put it in a map
-  const map<comp, Operator> O = { { G, as * OgNLO }, { NSP, OqLO + as * OqNLO } };
+  const map<comp, Operator> Om = { { G, as * OgNLO }, { NSP, OqLO + as * OqNLO } };
+
+  // Combine operators with alphas and put it in a vector
+  const vector<Operator> Ov = { OqLO + as * OqNLO, as * OgNLO };
 
   cout << "Initialization ..." << endl;
   t.printTime(t.stop());
+
+  // Charges
+  const auto eu2 = 4. / 9.;
+  const auto ed2 = 1. / 9.;
+  const auto eg2 = 2 * ed2 + 2 * eu2;
 
   // Construct the structure function as a combination of distributions and operators
   // ========== Computation phase ==========
   t.start();
 
   // Define map
-  const auto eu2 = 4. / 9.;
-  const auto ed2 = 1. / 9.;
   map <comp, map<int,double>> Map;
-  Map[G][6]   = 2 * ed2 + 2 * eu2;
+  Map[G][6]   = eg2;
   Map[NSP][3] = Map[NSP][9] = Map[NSP][5] = Map[NSP][7] = ed2;
   Map[NSP][4] = Map[NSP][8] = eu2;
 
@@ -183,13 +201,52 @@ int main()
   StructureFunction F2map{g};
   for (auto const& iO : Map)
     for (auto const& id : iO.second)
-      F2map += id.second * O.at(iO.first) * pdfs[id.first];
+      F2map += id.second * Om.at(iO.first) * pdfs[id.first];
 
   // Print the results
   cout << scientific;
   const vector<double> xlha = { 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1 };
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2map.Evaluate(xlha[i]) << endl;
+
+  cout << "Computation ..." << endl;
+  t.printTime(t.stop());
+
+  // Alterantive (and more optimal) way to combine Operators and distributions
+  // ========== Computation phase ==========
+  t.start();
+
+  // Define multimap bewteen operators and distributions
+  multimap<int,int> MMap;
+  MMap.insert(pair<int,int>(0,3)); // sbar
+  MMap.insert(pair<int,int>(0,4)); // ubar
+  MMap.insert(pair<int,int>(0,5)); // dbar
+  MMap.insert(pair<int,int>(1,6)); // gluon
+  MMap.insert(pair<int,int>(0,7)); // d
+  MMap.insert(pair<int,int>(0,8)); // u
+  MMap.insert(pair<int,int>(0,9)); // s
+
+  // Charges
+  vector<double> ch2 = { eu2, ed2, eu2, ed2, eu2, ed2, eg2, ed2, eu2, ed2, eu2, ed2, eu2 };
+
+  // Construct sturcture functions
+  StructureFunction F2vec{g};
+  for (auto i = 0; i< (int) Ov.size(); i++)
+    {
+      // Combine distributions according to charges
+      PDF pdfcomb{g};
+      pair <multimap<int,int>::iterator, multimap<int,int>::iterator> ret;
+      ret = MMap.equal_range(i);
+      for (multimap<int,int>::iterator it = ret.first; it != ret.second; ++it)
+	pdfcomb += ch2[it->second] * pdfs[it->second];
+
+      // Multiply combined distribution with the appropriate operator and sum it to the structure function
+      F2vec += Ov[i] * pdfcomb;
+    }
+
+  for (auto i = 2; i < (int) xlha.size(); i++)
+    cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2vec.Evaluate(xlha[i]) << endl;
+
   cout << "Computation ..." << endl;
   t.printTime(t.stop());
 
