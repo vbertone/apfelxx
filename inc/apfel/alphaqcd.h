@@ -30,7 +30,7 @@ namespace apfel
      * @param Masses vector of masses.
      * @param Thresholds vector of thresholds.
      */
-    AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt = 0);
+    AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep = 10);
 
     /**
      * @brief Function for the computation of the coupling given nf. This function can be overriden.
@@ -40,7 +40,7 @@ namespace apfel
      * @param mu2 final squared scale.
      * @return value of the coupling at mu2.
      */
-    virtual double Coup(int const& nf, double const& as0, double const& mu02, double const& mu2) const;
+    double Coup(int const& nf, double const& as0, double const& mu02, double const& mu2) const;
 
     /**
      * @brief Function for the computation of the matching. This function can be overriden.
@@ -49,7 +49,7 @@ namespace apfel
      * @param LogKth value of ln( muth2 / m2 ).
      * @return the matched value of the coupling.
      */
-    virtual double MatchCoupling(bool const& Up, double const& Coup, double const& LogKth) const;
+    double MatchCoupling(bool const& Up, double const& Coup, double const& LogKth) const;
 
     /**
      * @brief Function for the computation of the terms of the QCD beta function.
@@ -68,6 +68,7 @@ namespace apfel
     double fbeta(double const& as, int const& nf) const;
 
   private:
-    int const _pt;
+    const int _pt;
+    const int _nstep;
   };
 }

@@ -13,9 +13,10 @@ using namespace std;
 namespace apfel {
 
   //_________________________________________________________________________________
-  AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt):
+  AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep):
     Coupling(AlphaRef, MuRef, Masses),
-    _pt(pt)
+    _pt(pt),
+    _nstep(nstep)
   {
   }
 
@@ -26,12 +27,11 @@ namespace apfel {
     if (mu02 == mu2) return as0;
 
     // Numerical solution of the evolution equation with fourth-order Runge-Kutta.
-    // Use "nstep" steps for the evolution.
+    // Use "_nstep" steps for the evolution.
     const auto lrrat = log(mu2/mu02);
-    const auto nstep = 10;
-    const auto dlr   = lrrat / nstep;
+    const auto dlr   = lrrat / _nstep;
     auto as          = as0 / FourPi;
-    for (auto k = 0; k < nstep; k++)
+    for (auto k = 0; k < _nstep; k++)
       {
 	auto xk0 = dlr * fbeta(as            ,nf);
 	auto xk1 = dlr * fbeta(as + 0.5 * xk0,nf);

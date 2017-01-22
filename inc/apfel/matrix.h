@@ -51,6 +51,6 @@ namespace apfel
 
   private:
     pair<size_t,size_t> _size; //!< the dimension pair
-    vector<T> _data;        //!< the data array
+    vector<T>           _data; //!< the data array
   };
 }

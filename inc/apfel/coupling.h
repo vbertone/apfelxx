@@ -78,6 +78,18 @@ namespace apfel
      */
     vector<double> const& GetMasses() const { return _Masses; }
 
+    /**
+     * @brief Function that sets the reference value of the coupling
+     * @param AlphaRef
+     */
+    void SetAlphaRef(double const& AlphaRef) { _AlphaRef = AlphaRef; }
+
+    /**
+     * @brief Function that sets the reference scale
+     * @param MuRef
+     */
+    void SetMuRef(double const& MuRef) { _MuRef2 = MuRef * MuRef; }
+
   protected:
     double         _AlphaRef;     //<! Reference value of the coupling
     double         _MuRef2;       //<! Squared reference scale of the coupling
