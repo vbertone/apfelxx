@@ -59,7 +59,7 @@ namespace apfel
 
   private:
     Grid             const& _grid;         //!< Grid on which to compute the operator
-    Expression       const* _expr;         //!< Expression to be commuted into an operator
+    Expression const* const _expr;         //!< Expression to be commuted into an operator
     double           const& _eps;          //!< Precision of the dgauss integration
     vector<matrix<double>>  _Operator;     //!< Operator values.
 
