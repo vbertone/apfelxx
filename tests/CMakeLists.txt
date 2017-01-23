@@ -51,3 +51,9 @@ add_executable(qgrid_test qgrid_test.cc)
 target_link_libraries(qgrid_test apfel)
 add_test(performance_qgrid_test qgrid_test)
 add_test(memcheck_qgrid_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/qgrid_test)
+
+# build tests
+add_executable(set_test set_test.cc)
+target_link_libraries(set_test apfel)
+add_test(performance_set_test set_test)
+add_test(memcheck_set_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/set_test)
