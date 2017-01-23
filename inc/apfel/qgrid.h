@@ -48,7 +48,7 @@ namespace apfel
      * @param Q the value of the required interpolation
      * @return the interpolated value.
      */
-    double Evaluate(double const& Q) const;
+    T Evaluate(double const& Q) const;
 
     /**
      * @brief Check whether QGrids are equal

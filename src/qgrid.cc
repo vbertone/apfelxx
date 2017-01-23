@@ -9,6 +9,7 @@
 
 #include "apfel/qgrid.h"
 #include "apfel/tools.h"
+#include "apfel/distribution.h"
 
 namespace apfel
 {
@@ -172,14 +173,19 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<class T>
-  double QGrid<T>::Evaluate(double const& Q) const
+  T QGrid<T>::Evaluate(double const& Q) const
   {
     auto const bounds = SumBounds(Q);
     auto const ll2ql  = log( 2 * log( Q / _Lambda ) );
 
-    double result = 0;
-    for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
+    // first create a copy of template object with the first component
+    auto tau = get<1>(bounds);
+    T result = Interpolant(get<0>(bounds), tau, ll2ql) * _GridValues[tau];
+
+    // then loop and add the extra terms
+    for (tau = tau+1; tau < get<2>(bounds); tau++)
       result += Interpolant(get<0>(bounds), tau, ll2ql) * _GridValues[tau];
+
     return result;
   }
 
@@ -206,4 +212,5 @@ namespace apfel
 
   // template fixed types
   template class QGrid<double>;
+  template class QGrid<Distribution>;
 }
