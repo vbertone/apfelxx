@@ -31,13 +31,17 @@ namespace apfel {
     const auto lrrat = log(mu2/mu02);
     const auto dlr   = lrrat / _nstep;
     auto as          = as0 / FourPi;
+
+    array<double,3> bQCD = {0,0,0};
+    for (auto i = 0; i <= _pt; i++) bQCD[i] = betaQCD(i, nf);
+
     for (auto k = 0; k < _nstep; k++)
       {
-	auto xk0 = dlr * fbeta(as            ,nf);
-	auto xk1 = dlr * fbeta(as + 0.5 * xk0,nf);
-	auto xk2 = dlr * fbeta(as + 0.5 * xk1,nf);
-	auto xk3 = dlr * fbeta(as +       xk2,nf);
-	as      += ( xk0 + 2 * xk1 + 2 * xk2 + xk3 ) / 6.;
+        const auto xk0 = dlr * fbeta(as            , bQCD);
+        const auto xk1 = dlr * fbeta(as + 0.5 * xk0, bQCD);
+        const auto xk2 = dlr * fbeta(as + 0.5 * xk1, bQCD);
+        const auto xk3 = dlr * fbeta(as +       xk2, bQCD);
+        as += ( xk0 + 2 * xk1 + 2 * xk2 + xk3 ) / 6.;
       }
     return FourPi * as;
   }
@@ -56,17 +60,22 @@ namespace apfel {
   //_________________________________________________________________________________
   double AlphaQCD::betaQCD(int const& pt, int const& nf) const
   {
-    if      ( pt == 0 ) return ( 33. - 2. * nf ) / 3.;
-    else if ( pt == 1 ) return 102. - 38. / 3. * nf;
-    else if ( pt == 2 ) return 2857. / 2. - 5033. / 18. * nf + 325. / 54. * pow(nf,2);
-    else                return 0;
+    double res = 0;
+    if      ( pt == 0 ) res = ( 33. - 2. * nf ) / 3.;
+    else if ( pt == 1 ) res = 102. - 38. / 3. * nf;
+    else if ( pt == 2 ) res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
+    return res;
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::fbeta(double const& as, int const& nf) const
+  double AlphaQCD::fbeta(double const& as, array<double,3> const& bQCD) const
   {
-    double bt = 0;
-    for (auto i = 0; i <= _pt; i++) bt -= pow(as,i+2) * betaQCD(i,nf);
+    double bt = 0, powas = as*as;
+    for (auto i = 0; i <= _pt; i++)
+      {
+        bt -= powas * bQCD[i];
+        powas *= as;
+      }
     return bt;
   }
 

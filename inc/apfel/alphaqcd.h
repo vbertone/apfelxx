@@ -7,7 +7,9 @@
 
 #pragma once
 
+#include <array>
 #include <apfel/coupling.h>
+using std::array;
 
 namespace apfel
 {
@@ -65,7 +67,7 @@ namespace apfel
      * @param nf number of active flavours.
      * @return the value of the beta function.
      */
-    double fbeta(double const& as, int const& nf) const;
+    double fbeta(double const& as, array<double,3> const& bQCD) const;
 
   private:
     const int _pt;
