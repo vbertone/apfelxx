@@ -64,6 +64,7 @@ namespace apfel {
     if      ( pt == 0 ) res = ( 33. - 2. * nf ) / 3.;
     else if ( pt == 1 ) res = 102. - 38. / 3. * nf;
     else if ( pt == 2 ) res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
+    else throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
     return res;
   }
 
