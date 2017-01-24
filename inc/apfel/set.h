@@ -27,47 +27,31 @@ namespace apfel
    * - there is no real necessity of allocating U
    * - missing operators.
    */
-  template<class T, class U>
+  template<class T>
   class Set
   {        
   public:
     /**
      * @brief The Set class constructor.
-     * @param the input map.
+     * @param the input map, in this case it makes a copy
      */
-    Set(unordered_map<int, T> const& in):
-      _objects(in)
-    {
-      _map = unique_ptr<U>(new U{});
-    }
+    Set(BasisMap const& map, unordered_map<int, T> const& in);
 
     /**
      * @brief operator *= product object
      * @param d left hand side object
      * @return a new object of type V and base U
      */
-    template<class V>
-    Set<V,U> operator*=(Set<V,U> const& d) const
-    {
-      unordered_map<int,V> mmap;
-      for (auto const& item: _map->GetRules())
-        {
-          auto o = std::begin(item.second);
-          V result = (*o).operation*_objects.at((*o).splitting)*d.GetObjects().at((*o).distribution);
-          o++;
-          for (auto end = std::end(item.second); o != end; o++)
-            result += (*o).operation*_objects.at((*o).splitting)*d.GetObjects().at((*o).distribution);
-          mmap.insert({item.first,result});
-        }
-      return Set<V,U>{mmap};
-    }
+    template<class V> Set<V> operator*=(Set<V> const& d) const;
 
     // Get methods
+    T const& at(int const& id)    const { return _objects.at(id); }
+    BasisMap  const& GetMap()     const { return _map; }
     unordered_map<int, T> const& GetObjects() const { return _objects; }
 
   private:
-    unordered_map<int, T> const& _objects; //!< The container for the unordered_map
-    shared_ptr<U> _map;                    //!< the shared pointer containin the flavor map
+    BasisMap const& _map;                    //!< the shared pointer containin the flavor map
+    unordered_map<int, T> _objects; //!< The container for the unordered_map
   };
 
   /**
@@ -76,11 +60,6 @@ namespace apfel
    * @param rhs the right object
    * @return a Set of type B, C.
    */
-  template<class A, class B, class C>
-  Set<B,C> operator*(Set<A,C> lhs, Set<B,C> const& rhs)
-  {
-    return lhs *= rhs;
-  }
-
-
+  template<class A, class B>
+  inline Set<B> operator*(Set<A> lhs, Set<B> const& rhs) { return lhs *= rhs; }
 }

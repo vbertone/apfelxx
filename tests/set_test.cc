@@ -150,14 +150,20 @@ int main()
                                           {FlvrBasis::S,    s}
                                         };
 
+  FlvrBasis basis;
+
   // allocating operators following the flavor basis
-  Set<Operator,FlvrBasis> splittings(omap);
+  Set<Operator> splittings(basis, omap);
 
   // allocating PDFs following the flavor basis
-  Set<Distribution,FlvrBasis> pdfs(dmap);
+  Set<Distribution> pdfs(basis, dmap);
 
   // testing product
   auto product = splittings * pdfs;
+
+  // getting new distribution
+  cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
+       << product.at(FlvrBasis::GLU).Evaluate(0.1) << endl;
 
   t.printTime(t.stop());
 

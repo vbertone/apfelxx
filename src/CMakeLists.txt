@@ -13,6 +13,7 @@ set(apfel_source
   matrix.cc
   qgrid.cc
   basismap.cc
+  set.cc
   #utils.cc
   #splittings.cc
   #opset.cc

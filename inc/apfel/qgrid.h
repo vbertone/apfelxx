@@ -105,7 +105,7 @@ namespace apfel
    * @brief Method which prints QGrid with cout <<.
    */
   template<class T>
-  std::ostream& operator<<(std::ostream& os, QGrid<T> const& Qg)
+  inline std::ostream& operator<<(std::ostream& os, QGrid<T> const& Qg)
   {
     os << "QGrid: " << &Qg << "\n";
     os << "nQ                = " << Qg._nQ << "\n";
