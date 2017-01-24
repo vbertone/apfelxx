@@ -133,30 +133,27 @@ int main()
   const Operator pgq{grid, p0gq{}};
   const Operator pqg{grid, p0qg{}};
 
-  unordered_map<int,Operator> omap = {
-                                      {FlvrBasis::PGG, pgg},
-                                      {FlvrBasis::PQQ, pqq},
-                                      {FlvrBasis::PQG, pqg},
-                                      {FlvrBasis::PGQ, pgq}
-                                     };
-
-  unordered_map<int,Distribution> dmap = {
-                                          {FlvrBasis::SBAR, sbar},
-                                          {FlvrBasis::UBAR, ubar},
-                                          {FlvrBasis::DBAR, dbar},
-                                          {FlvrBasis::GLU,  g},
-                                          {FlvrBasis::D,    d},
-                                          {FlvrBasis::U,    u},
-                                          {FlvrBasis::S,    s}
-                                        };
-
+  // allocate your favorite basis
   FlvrBasis basis;
 
   // allocating operators following the flavor basis
-  Set<Operator> splittings(basis, omap);
+  Set<Operator> splittings(basis, {
+                                   {FlvrBasis::PGG, pgg},
+                                   {FlvrBasis::PQQ, pqq},
+                                   {FlvrBasis::PQG, pqg},
+                                   {FlvrBasis::PGQ, pgq}
+                                  });
 
   // allocating PDFs following the flavor basis
-  Set<Distribution> pdfs(basis, dmap);
+  Set<Distribution> pdfs(basis, {
+                                 {FlvrBasis::SBAR, sbar},
+                                 {FlvrBasis::UBAR, ubar},
+                                 {FlvrBasis::DBAR, dbar},
+                                 {FlvrBasis::GLU,  g},
+                                 {FlvrBasis::D,    d},
+                                 {FlvrBasis::U,    u},
+                                 {FlvrBasis::S,    s}
+                                });
 
   // testing product
   auto product = splittings * pdfs;
