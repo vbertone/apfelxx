@@ -56,7 +56,8 @@ namespace apfel
     /**
      * @brief The Basis enum
      */
-    enum Basis: int {SBAR, UBAR, DBAR, GLU, D, U, S, PGG, PQQ, PGQ, PQG};
+    enum Basis: int {SBAR, UBAR, DBAR, GLU, D, U, S};
+    enum Split: int {PGG, PQQ, PGQ, PQG};
 
     /**
      * @brief The class constructor

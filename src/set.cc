@@ -14,7 +14,7 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>::Set(BasisMap const& map, const unordered_map<int,T> &in):
+  Set<T>::Set(BasisMap const& map, unordered_map<int,T> const& in):
     _map(map),
     _objects(in)
   {
