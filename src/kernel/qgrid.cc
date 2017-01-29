@@ -28,8 +28,8 @@ namespace apfel
       throw runtime_exception("QGrid::QGrid","QMax must be larger than QMin");
 
     // Find initial and final number of flavours
-    const auto nfin = lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMin) - _Thresholds.begin();
-    const auto nffi = lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMax) - _Thresholds.begin();
+    const auto nfin = ( _Thresholds.empty() ? 0 : lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMin) - _Thresholds.begin() );
+    const auto nffi = ( _Thresholds.empty() ? 0 : lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMax) - _Thresholds.begin() );
 
     // Compute a temporary grid constant in ln(ln(Q^2/Lambda^2)
     // without taking into account the threholds
