@@ -1,24 +1,9 @@
-set(apfel_source
-  subgrid.cc
-  grid.cc
-  interpolator.cc
-  lagrangeinterpolator.cc
-  integrator.cc
-  operator.cc
-  expression.cc
-  distribution.cc
-  coupling.cc
-  tools.cc
-  alphaqcd.cc
-  matrix.cc
-  qgrid.cc
-  basismap.cc
-  set.cc
-)
+add_subdirectory(kernel)
+add_subdirectory(evolution_module)
 
 option(SHARED "Build shared-libray instead of static-libray" OFF)
 if(SHARED)
-  add_library(apfel SHARED ${apfel_source})
+  add_library(apfel SHARED $<TARGET_OBJECTS:kernel> $<TARGET_OBJECTS:evolution_module>)
 else(SHARED)
-  add_library(apfel STATIC ${apfel_source})
+  add_library(apfel STATIC $<TARGET_OBJECTS:kernel> $<TARGET_OBJECTS:evolution_module>)
 endif(SHARED)
