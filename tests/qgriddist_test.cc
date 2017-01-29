@@ -23,7 +23,7 @@ using namespace std;
  */
 double xQdist(double const& x, double const& Q)
 {
-  return ( 1 - x ) * log(Q);
+  return x * ( 1 - x ) * log(Q);
 }
 
 /**
