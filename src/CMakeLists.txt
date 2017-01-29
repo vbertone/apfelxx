@@ -14,12 +14,6 @@ set(apfel_source
   qgrid.cc
   basismap.cc
   set.cc
-  #utils.cc
-  #splittings.cc
-  #opset.cc
-  #evolinit.cc
-  #evolsetup.cc
-  #distset.cc
 )
 
 option(SHARED "Build shared-libray instead of static-libray" OFF)
