@@ -8,7 +8,7 @@
 #pragma once
 
 #include <array>
-#include <apfel/coupling.h>
+#include <apfel/matchedevolution.h>
 using std::array;
 
 namespace apfel
@@ -19,7 +19,7 @@ namespace apfel
    * A specialization class of the Coupling class
    * for the computation of the QCD coupling.
    */
-  class AlphaQCD: public Coupling
+  class AlphaQCD: public MatchedEvolution<double>
   {
   public:
 
@@ -42,7 +42,7 @@ namespace apfel
      * @param mu2 final squared scale.
      * @return value of the coupling at mu2.
      */
-    double Coup(int const& nf, double const& as0, double const& mu02, double const& mu2) const;
+    double EvolveObject(int const& nf, double const& as0, double const& mu02, double const& mu2) const;
 
     /**
      * @brief Function for the computation of the matching. This function can be overriden.
@@ -51,7 +51,7 @@ namespace apfel
      * @param LogKth value of ln( muth2 / m2 ).
      * @return the matched value of the coupling.
      */
-    double MatchCoupling(bool const& Up, double const& Coup, double const& LogKth) const;
+    double MatchObject(bool const& Up, double const& Coup, double const& LogKth) const;
 
     /**
      * @brief Function for the computation of the terms of the QCD beta function.

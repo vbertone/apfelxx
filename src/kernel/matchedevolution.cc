@@ -8,22 +8,24 @@
 #include <algorithm>
 #include <cmath>
 
-#include "apfel/coupling.h"
+#include "apfel/matchedevolution.h"
 #include "apfel/tools.h"
+#include "apfel/distribution.h"
 
 using namespace std;
 
 namespace apfel
 {
   //_________________________________________________________________________
-  Coupling::Coupling(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, vector<double> const& Thresholds):
-    _AlphaRef(AlphaRef),
+  template<class T>
+  MatchedEvolution<T>::MatchedEvolution(T const& ObjRef, double const& MuRef, vector<double> const& Masses, vector<double> const& Thresholds):
+    _ObjRef(ObjRef),
     _Masses(Masses),
     _Thresholds(Thresholds)
   {
     // Check that "Masses" and "Thresholds" have the same size
     if (Masses.size() != Thresholds.size())
-      throw logic_exception("Coupling::Coupling", "Masses and Thresholds vectors have diffrent sizes.");
+      throw logic_exception("MatchedEvolution::MatchedEvolution", "Masses and Thresholds vectors have diffrent sizes.");
 
     // Compute squared final scale
     _MuRef2 = pow(MuRef,2);
@@ -45,13 +47,15 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Coupling::Coupling(double const& AlphaRef, double const& MuRef, vector<double> const& Masses):
-    Coupling(AlphaRef, MuRef, Masses, Masses)
+  template<class T>
+  MatchedEvolution<T>::MatchedEvolution(T const& ObjRef, double const& MuRef, vector<double> const& Masses):
+    MatchedEvolution(ObjRef, MuRef, Masses, Masses)
   {
   }
 
   //_________________________________________________________________________
-  double Coupling::GetCoupling(double const& mu) const
+  template<class T>
+  T MatchedEvolution<T>::GetObject(double const& mu) const
   {
     auto const mu2 = pow(mu,2);
 
@@ -61,21 +65,25 @@ namespace apfel
     const auto sgn = signbit(nfi - nff);
 
     if ( nfi == nff )
-      return Coup(nfi, _AlphaRef, _MuRef2, mu2);
+      return EvolveObject(nfi, _ObjRef, _MuRef2, mu2);
 
-    auto asi  = _AlphaRef;
-    auto asf  = _AlphaRef;
+    auto asi  = _ObjRef;
+    auto asf  = _ObjRef;
     auto mui2 = _MuRef2;
     auto muf2 = _Thresholds2[nfi];
     for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
-	asf  = Coup(inf, asi, mui2, muf2);
-	asf  = MatchCoupling(sgn, asf, _LogTh2M2[inf]);
+	asf  = EvolveObject(inf, asi, mui2, muf2);
+	asf  = MatchObject(sgn, asf, _LogTh2M2[inf]);
 	asi  = asf;
 	mui2 = muf2;
 	muf2 = _Thresholds2[min(inf+1,nff-1)];
       }
-    return Coup(nff, asf, mui2, mu2);
+    return EvolveObject(nff, asf, mui2, mu2);
   }
+
+  // template fixed types
+  template class MatchedEvolution<double>;
+  template class MatchedEvolution<Distribution>;
 
 }

@@ -27,10 +27,22 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution& Distribution::operator=(Distribution const& rhs)
+  {
+    if(this != &rhs)
+      {
+	new(this) Distribution(rhs._grid);
+	_distributionSubGrid   = rhs._distributionSubGrid;
+	_distributionJointGrid = rhs._distributionJointGrid;
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
   Distribution& Distribution::operator*=(double const& s)
   {
     // sum objects in joint grid
-    for (size_t i = 0 ; i < _distributionJointGrid.size(); i++)
+    for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= s;
 
     // sum objects in subgrids
@@ -45,11 +57,11 @@ namespace apfel
   Distribution& Distribution::operator+=(Distribution const& d)
   {
     // fast method to check that we are using the same Grid
-    if (&this->_grid != &d.GetGrid())
+    if (&this->_grid != &d._grid)
       throw runtime_exception("Distribution::operator+=", "Distribution grids does not match");
 
     // sum objects in joint grid
-    for (size_t i = 0 ; i < _distributionJointGrid.size(); i++)
+    for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] += d._distributionJointGrid[i];
 
     // sum objects in subgrids
@@ -64,11 +76,11 @@ namespace apfel
   Distribution& Distribution::operator-=(Distribution const& d)
   {
     // fast method to check that we are using the same Grid
-    if (&this->_grid != &d.GetGrid())
+    if (&this->_grid != &d._grid)
       throw runtime_exception("Distribution::operator+=", "Distribution grids does not match");
 
     // sum objects in joint grid
-    for (size_t i = 0 ; i < _distributionJointGrid.size(); i++)
+    for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] -= d._distributionJointGrid[i];
 
     // sum objects in subgrids

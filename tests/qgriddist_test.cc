@@ -102,7 +102,6 @@ int main()
        << "Interpolated  "
        << "Direct        "
        << "Ratio         " << endl;
-
   cout << scientific;
   auto Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)

@@ -14,14 +14,14 @@ namespace apfel {
 
   //_________________________________________________________________________________
   AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep):
-    Coupling(AlphaRef, MuRef, Masses),
+    MatchedEvolution(AlphaRef, MuRef, Masses),
     _pt(pt),
     _nstep(nstep)
   {
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::Coup(int const& nf, double const& as0, double const& mu02, double const& mu2) const
+  double AlphaQCD::EvolveObject(int const& nf, double const& as0, double const& mu02, double const& mu2) const
   {
     // Return immediately "as0" if "mu02" and "mu2" are equal
     if (mu02 == mu2) return as0;
@@ -47,7 +47,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::MatchCoupling(bool const& Up, double const& Coup, double const& LogKth) const
+  double AlphaQCD::MatchObject(bool const& Up, double const& Coup, double const& LogKth) const
   {
     const auto sgn = ( Up ? 1 : -1);
     const auto ep = Coup / FourPi;

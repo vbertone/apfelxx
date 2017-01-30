@@ -35,6 +35,7 @@ namespace apfel
     Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
 
     // operators
+    Distribution& operator=(Distribution const& d);  //!< this = Distribution
     Distribution& operator*=(double const& s);       //!< this *= Scalar
     Distribution& operator+=(Distribution const& d); //!< this += Distribution
     Distribution& operator-=(Distribution const& d); //!< this -= Distribution

@@ -37,7 +37,7 @@ public:
     QGrid<double>(nQ, QMin, QMax, InterDegree, as.GetThresholds())
   {
     for (auto const& iQ : _Qg)
-      _GridValues.push_back(as.GetCoupling(iQ));
+      _GridValues.push_back(as.GetObject(iQ));
   }
 };
 
@@ -74,20 +74,20 @@ public:
     // Loop on "_Qg" below "MuRef"
     for (auto iQ = tQ; iQ >= 0; iQ--)
       {
-	auto a = as.GetCoupling(_Qg[iQ]);
+	auto a = as.GetObject(_Qg[iQ]);
 	_GridValues[iQ] = a;
-	as.SetAlphaRef(a);
+	as.SetObjectRef(a);
 	as.SetMuRef(_Qg[iQ]);
       }
 
     // Loop on "_Qg" above "MuRef"
-    as.SetAlphaRef(AlphaRef);
+    as.SetObjectRef(AlphaRef);
     as.SetMuRef(MuRef);
     for (auto iQ = tQ + 1; iQ < (int) _Qg.size(); iQ++)
       {
-	auto a = as.GetCoupling(_Qg[iQ]);
+	auto a = as.GetObject(_Qg[iQ]);
 	_GridValues[iQ] = a;
-	as.SetAlphaRef(a);
+	as.SetObjectRef(a);
 	as.SetMuRef(_Qg[iQ]);
       }
   }
@@ -116,7 +116,7 @@ int main()
   cout << "Q       \t\tDirect  \t\tInterpolated(1)\t\tInterpolated(2)\t\tRatio(1)   \t\tRatio(2)" << endl;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
-      cout << Q << "\t\t" << as.GetCoupling(Q) << "\t\t" << gas1.Evaluate(Q) << "\t\t" << gas2.Evaluate(Q) << "\t\t" << as.GetCoupling(Q) / gas1.Evaluate(Q) << "\t\t" << as.GetCoupling(Q) / gas2.Evaluate(Q) << endl;
+      cout << Q << "\t\t" << as.GetObject(Q) << "\t\t" << gas1.Evaluate(Q) << "\t\t" << gas2.Evaluate(Q) << "\t\t" << as.GetObject(Q) / gas1.Evaluate(Q) << "\t\t" << as.GetObject(Q) / gas2.Evaluate(Q) << endl;
       Q *=Step;
     }
 
@@ -130,7 +130,7 @@ int main()
   Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
-      as.GetCoupling(Q);
+      as.GetObject(Q);
       Q *=Step;
     }
   t.printTime(t.stop());
