@@ -12,7 +12,7 @@
 #include <apfel/grid.h>
 #include <apfel/subgrid.h>
 #include <apfel/qgrid.h>
-#include <apfel/Distribution.h>
+#include <apfel/distribution.h>
 #include <apfel/timer.h>
 
 using namespace apfel;
