@@ -35,12 +35,12 @@ namespace std
     //! Recursive template code derived from Matthieu M.
     template <class Tuple, size_t Index = std::tuple_size<Tuple>::value - 1>
     struct HashValueImpl
-    {
-          static void apply(size_t& seed, Tuple const& tuple)
-          {
-            HashValueImpl<Tuple, Index-1>::apply(seed, tuple);
-            hash_combine(seed, get<Index>(tuple));
-          }
+    {        
+      static void apply(size_t& seed, Tuple const& tuple)
+      {
+        HashValueImpl<Tuple, Index-1>::apply(seed, tuple);
+        hash_combine(seed, get<Index>(tuple));
+      }
     };
 
     template <class Tuple>

@@ -29,11 +29,14 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator=(Distribution const& rhs)
   {
+    // fast method to check that we are using the same Grid
+    if (&this->_grid != &rhs._grid)
+      throw runtime_exception("Distribution::operator=", "Distribution grids does not match");
+
     if(this != &rhs)
       {
-	new(this) Distribution(rhs._grid);
-	_distributionSubGrid   = rhs._distributionSubGrid;
-	_distributionJointGrid = rhs._distributionJointGrid;
+        this->_distributionSubGrid   = rhs._distributionSubGrid;
+        this->_distributionJointGrid = rhs._distributionJointGrid;
       }
     return *this;
   }
