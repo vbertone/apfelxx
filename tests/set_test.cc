@@ -162,6 +162,10 @@ int main()
   cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
        << product.at(FlvrBasis::GLU).Evaluate(0.1) << endl;
 
+  auto product2 = 2*product;
+  cout << "2*(Splitting * PDFs)[GLUON](x=0.1) = "
+       << product2.at(FlvrBasis::GLU).Evaluate(0.1) << endl;
+
   t.printTime(t.stop());
 
   return 0;

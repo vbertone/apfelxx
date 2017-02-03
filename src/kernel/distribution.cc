@@ -57,6 +57,21 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution& Distribution::operator*=(Distribution const& d)
+  {
+    // multiply objects in joint grid
+    for (size_t i = 0; i < _distributionJointGrid.size(); i++)
+      _distributionJointGrid[i] *= d._distributionJointGrid[i];
+
+    // sum objects in subgrids
+    for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
+      for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
+        _distributionSubGrid[ig][i] *= d._distributionSubGrid[ig][i];
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
   Distribution& Distribution::operator+=(Distribution const& d)
   {
     // fast method to check that we are using the same Grid

@@ -44,13 +44,18 @@ namespace apfel
      */
     template<class V> Set<V> operator*=(Set<V> const& d) const;
 
+    // other operators
+    Set<T>& operator*=(double const& s); //!< this *= scalar
+    Set<T>& operator*=(Set<T> const& d); //!< this *= Set
+    Set<T>& operator+=(Set<T> const& d); //!< this += Set
+
     // Get methods
     T const& at(int const& id)    const { return _objects.at(id); }
     BasisMap  const& GetMap()     const { return _map; }
     unordered_map<int, T> const& GetObjects() const { return _objects; }
 
   private:
-    BasisMap const& _map;                    //!< the shared pointer containin the flavor map
+    BasisMap const& _map;           //!< the shared pointer containin the flavor map
     unordered_map<int, T> _objects; //!< The container for the unordered_map
   };
 
@@ -62,4 +67,18 @@ namespace apfel
    */
   template<class A, class B>
   inline Set<B> operator*(Set<A> lhs, Set<B> const& rhs) { return lhs *= rhs; }
+
+  // other operators
+  template<class T>
+  inline Set<T> operator*(double const& s, Set<T> rhs) { return rhs *= s;}
+
+  template<class T>
+  inline Set<T> operator*(Set<T> lhs, double const& s) { return lhs *= s;}
+
+  template<class T>
+  inline Set<T> operator*(Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs;}
+
+  template<class T>
+  inline Set<T> operator+(Set<T> lhs, Set<T> const& rhs) { return lhs += rhs;}
+
 }

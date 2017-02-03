@@ -39,7 +39,7 @@ namespace apfel {
     const auto dQ2 = rk4([&](double const&, double const& y)->double{ return fbeta(y, bQCD); });
 
     for (auto k = 0; k < _nstep; k++)
-      as += dQ2(k, as, dlr);
+      as += dQ2(0, as, dlr);
 
     return FourPi * as;
   }

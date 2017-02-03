@@ -13,7 +13,6 @@ set(kernel_source
   qgrid.cc
   basismap.cc
   set.cc
-  ode.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})

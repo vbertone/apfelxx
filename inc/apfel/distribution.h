@@ -37,6 +37,7 @@ namespace apfel
     // operators
     Distribution& operator=(Distribution const& d);  //!< this = Distribution
     Distribution& operator*=(double const& s);       //!< this *= Scalar
+    Distribution& operator*=(Distribution const& d); //!< this *= Distribution
     Distribution& operator+=(Distribution const& d); //!< this += Distribution
     Distribution& operator-=(Distribution const& d); //!< this -= Distribution
   };
