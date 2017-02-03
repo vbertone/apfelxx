@@ -7,6 +7,7 @@
 
 #include "apfel/alphaqcd.h"
 #include "apfel/tools.h"
+#include "apfel/ode.h"
 
 using namespace std;
 
@@ -35,14 +36,11 @@ namespace apfel {
     array<double,3> bQCD = {0,0,0};
     for (auto i = 0; i <= _pt; i++) bQCD[i] = betaQCD(i, nf);
 
+    const auto dQ2 = rk4([&](double const&, double const& y)->double{ return fbeta(y, bQCD); });
+
     for (auto k = 0; k < _nstep; k++)
-      {
-        const auto xk0 = dlr * fbeta(as            , bQCD);
-        const auto xk1 = dlr * fbeta(as + 0.5 * xk0, bQCD);
-        const auto xk2 = dlr * fbeta(as + 0.5 * xk1, bQCD);
-        const auto xk3 = dlr * fbeta(as +       xk2, bQCD);
-        as += ( xk0 + 2 * xk1 + 2 * xk2 + xk3 ) / 6.;
-      }
+      as += dQ2(k, as, dlr);
+
     return FourPi * as;
   }
 
