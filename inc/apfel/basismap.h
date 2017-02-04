@@ -33,10 +33,15 @@ namespace apfel
     /**
      * @brief The rule struct
      */
-    struct rule { int splitting, distribution; double operation; };
+    struct rule
+    {
+      int    operand;
+      int    object;
+      double coefficient;
+    };
 
     // Get methods
-    string const& GetName()                           const { return _name; }
+    string                          const& GetName()  const { return _name; }
     unordered_map<int,vector<rule>> const& GetRules() const { return _rules; }
 
   protected:
@@ -44,24 +49,4 @@ namespace apfel
     string _name;                           //!< the name of the derived class
   };
 
-  /**
-   * @brief A very simple example of BasisMap derivation.
-   *
-   * This class, following the derivation procedure from BasisMap
-   * implements the Basis enumerator with custom tags for the objects.
-   */
-  class FlvrBasis: public BasisMap
-  {
-  public:
-    /**
-     * @brief The Basis enum
-     */
-    enum Basis: int {SBAR, UBAR, DBAR, GLU, D, U, S};
-    enum Split: int {PGG, PQQ, PGQ, PQG};
-
-    /**
-     * @brief The class constructor
-     */
-    FlvrBasis();    
-  };
 }

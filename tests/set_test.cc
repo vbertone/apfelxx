@@ -110,6 +110,48 @@ public:
   double Local(double const& x) const { return 0*x; }
 };
 
+/**
+ * @brief A very simple example of BasisMap derivation.
+ *
+ * This class, following the derivation procedure from BasisMap
+ * implements the Basis enumerator with custom tags for the objects.
+ */
+class FlavourBasis: public BasisMap
+{
+public:
+  /**
+   * @brief The Basis enum
+   */
+  enum Operand: int {PGG,  PQQ,  PGQ,  PQG};
+  enum Object:  int {SBAR, UBAR, DBAR, GLU, D, U, S};
+
+  /**
+   * @brief The class constructor
+   */
+  FlavourBasis():
+    BasisMap{"FlavourBasis"}
+  {
+    // g = Pgg * g + Sum Pgq * q
+    _rules[GLU] =
+      {
+      {PGG, GLU,  +1},
+      {PGQ, U,    +1},
+      {PGQ, D,    +1},
+      {PGQ, S,    +1},
+      {PGQ, UBAR, +1},
+      {PGQ, DBAR, +1},
+      {PGQ, SBAR, +1},
+      };
+
+    // q = Pqq * q + Pqg * g
+    for (const auto &v: {U,D,S,UBAR,DBAR,SBAR})
+      _rules[v] =
+	{
+	{PQG, GLU, +1},
+	{PQQ, v,   +1}
+	};
+  };
+};
 int main()
 {
   // Time counter
@@ -134,25 +176,25 @@ int main()
   const Operator pqg{grid, p0qg{}};
 
   // allocate your favorite basis
-  FlvrBasis basis;
+  FlavourBasis basis;
 
   // allocating operators following the flavor basis
   Set<Operator> splittings(basis, {
-                                   {FlvrBasis::PGG, pgg},
-                                   {FlvrBasis::PQQ, pqq},
-                                   {FlvrBasis::PQG, pqg},
-                                   {FlvrBasis::PGQ, pgq}
+                                   {FlavourBasis::PGG, pgg},
+                                   {FlavourBasis::PQQ, pqq},
+                                   {FlavourBasis::PQG, pqg},
+                                   {FlavourBasis::PGQ, pgq}
                                   });
 
   // allocating PDFs following the flavor basis
   Set<Distribution> pdfs(basis, {
-                                 {FlvrBasis::SBAR, sbar},
-                                 {FlvrBasis::UBAR, ubar},
-                                 {FlvrBasis::DBAR, dbar},
-                                 {FlvrBasis::GLU,  g},
-                                 {FlvrBasis::D,    d},
-                                 {FlvrBasis::U,    u},
-                                 {FlvrBasis::S,    s}
+                                 {FlavourBasis::SBAR, sbar},
+                                 {FlavourBasis::UBAR, ubar},
+                                 {FlavourBasis::DBAR, dbar},
+                                 {FlavourBasis::GLU,  g},
+                                 {FlavourBasis::D,    d},
+                                 {FlavourBasis::U,    u},
+                                 {FlavourBasis::S,    s}
                                 });
 
   // testing product
@@ -160,11 +202,15 @@ int main()
 
   // getting new distribution
   cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
-       << product.at(FlvrBasis::GLU).Evaluate(0.1) << endl;
+       << product.at(FlavourBasis::GLU).Evaluate(0.1) << endl;
 
   auto product2 = 2*product;
   cout << "2*(Splitting * PDFs)[GLUON](x=0.1) = "
-       << product2.at(FlvrBasis::GLU).Evaluate(0.1) << endl;
+       << product2.at(FlavourBasis::GLU).Evaluate(0.1) << endl;
+
+  auto sum = product.at(FlavourBasis::GLU) + product.at(FlavourBasis::GLU);
+  cout << "(Splitting * PDFs)[GLUON](x=0.1) + (Splitting * PDFs)[GLUON](x=0.1) = "
+       << sum.Evaluate(0.1) << endl;
 
   t.printTime(t.stop());
 

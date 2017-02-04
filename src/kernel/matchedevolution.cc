@@ -11,6 +11,7 @@
 #include "apfel/matchedevolution.h"
 #include "apfel/tools.h"
 #include "apfel/distribution.h"
+#include <apfel/set.h>
 
 using namespace std;
 
@@ -83,7 +84,7 @@ namespace apfel
   }
 
   // template fixed types
-  template class MatchedEvolution<double>;
-  template class MatchedEvolution<Distribution>;
+  template class MatchedEvolution<double>;               //<! Single coupling
+  template class MatchedEvolution<Distribution>;         //<! Single distribution
 
 }
