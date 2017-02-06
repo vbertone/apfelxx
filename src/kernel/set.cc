@@ -22,6 +22,21 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
+  Set<T>& Set<T>::operator=(Set<T> const& d)
+  {
+    if (&_map != &d.GetMap())
+      throw runtime_exception("Set::operator=", "Basis Map grid does not match");
+
+    if(this != &d)
+      {
+	for (auto const& item: _map.GetRules())
+	  _objects.at(item.first) = d._objects.at(item.first);
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   template<class V> Set<V> Set<T>::operator*=(Set<V> const& d) const
   {
     if (&_map != &d.GetMap())

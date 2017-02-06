@@ -115,6 +115,23 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Operator& Operator::operator=(Operator const& o)
+  {
+    // fast method to check that we are using the same Grid
+    if (&this->_grid != &o.GetGrid())
+      throw runtime_exception("Operator::operator=", "Operator grid does not match");
+
+    if(this != &o)
+      {
+	for (size_t ig = 0; ig < _Operator.size(); ig++)
+	  for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
+	    for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+	      _Operator[ig](alpha,beta) = o._Operator[ig](alpha,beta);
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
   Distribution Operator::operator*=(Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid

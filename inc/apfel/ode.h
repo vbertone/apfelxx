@@ -14,11 +14,17 @@ namespace apfel
 {
   /**
    * @brief rk4 using lambdas, this solves:
-   * y' = f(t,y)
-   * where
-   * dy = rk4(f(t,y))
-   * so differentiation between lower and upper
-   * y += dy(k,y,dlk) for k in steps
+   *
+   *    y' = f(t,y)
+   *
+   * where:
+   *
+   *    dy = rk4(f(t,y))
+   *
+   * so differentiation between lower and upper:
+   *
+   *    y += dy(t,y,dt)
+   *
    */
   template<class T>
   function<double(double const&, double const&, double const&)>

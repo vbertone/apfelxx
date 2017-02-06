@@ -31,7 +31,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &rhs._grid)
-      throw runtime_exception("Distribution::operator=", "Distribution grids does not match");
+      throw runtime_exception("Distribution::operator=", "Distribution grid does not match");
 
     if(this != &rhs)
       {

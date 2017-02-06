@@ -16,8 +16,8 @@ namespace apfel
   /**
    * @brief The AlphaQCD class.
    *
-   * A specialization class of the Coupling class
-   * for the computation of the QCD coupling.
+   * A specialization class of the MatchedEvolution class
+   * for the computation of the QCD coupling running.
    */
   class AlphaQCD: public MatchedEvolution<double>
   {
@@ -31,8 +31,23 @@ namespace apfel
      * @param MuRef the reference value of the scale.
      * @param Masses vector of masses.
      * @param Thresholds vector of thresholds.
+     * @param nsteps number of steps of the ODE solver.
      */
-    AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep = 10);
+    AlphaQCD(double         const& AlphaRef,
+	     double         const& MuRef,
+	     vector<double> const& Masses,
+	     vector<double> const& Thresholds,
+	     int            const& pt,
+	     int            const& nstep = 10);
+
+    /**
+     * @brief AlphaQCD default constructor.
+     * @param AlphaRef the reference value of the coupling.
+     * @param MuRef the reference value of the scale.
+     * @param Masses vector of masses.
+     * @param nsteps number of steps of the ODE solver.
+     */
+    AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nsteps = 10);
 
     /**
      * @brief Function for the computation of the coupling given nf. This function can be overriden.
@@ -69,8 +84,19 @@ namespace apfel
      */
     double fbeta(double const& as, array<double,3> const& bQCD) const;
 
+    /**
+     * @brief Function that returns the perturbative order.
+     */
+    int const& GetPerturbativeOrder() const { return _pt; }
+
+    /**
+     * @brief Function that returns the number of steps.
+     */
+    int const& GetNumberOfSteps()     const { return _nstep; }
+
   private:
-    const int _pt;
-    const int _nstep;
+    int                      const _pt;
+    int                      const _nstep;
+    array<array<double,3>,4>       _bQCD;
   };
 }

@@ -14,10 +14,25 @@ using namespace std;
 namespace apfel {
 
   //_________________________________________________________________________________
-  AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep):
-    MatchedEvolution(AlphaRef, MuRef, Masses),
+  AlphaQCD::AlphaQCD(double         const& AlphaRef,
+		     double         const& MuRef,
+		     vector<double> const& Masses,
+		     vector<double> const& Thresholds,
+		     int            const& pt,
+		     int            const& nstep):
+    MatchedEvolution(AlphaRef, MuRef, Masses, Thresholds),
     _pt(pt),
     _nstep(nstep)
+  {
+    // Initialize all coefficients of the QCD beta function for all numbers of flavours
+    for (auto ipt = 0; ipt <= 2; ipt++)
+	for (auto nf = 3; nf <= 6; nf++)
+	_bQCD[nf-3][ipt] = betaQCD(ipt, nf);
+  }
+
+  //_________________________________________________________________________________
+  AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep):
+    AlphaQCD(AlphaRef, MuRef, Masses, Masses, pt, nstep)
   {
   }
 
@@ -25,7 +40,8 @@ namespace apfel {
   double AlphaQCD::EvolveObject(int const& nf, double const& as0, double const& mu02, double const& mu2) const
   {
     // Return immediately "as0" if "mu02" and "mu2" are equal
-    if (mu02 == mu2) return as0;
+    if (mu02 == mu2)
+      return as0;
 
     // Numerical solution of the evolution equation with fourth-order Runge-Kutta.
     // Use "_nstep" steps for the evolution.
@@ -33,13 +49,10 @@ namespace apfel {
     const auto dlr   = lrrat / _nstep;
     auto as          = as0 / FourPi;
 
-    array<double,3> bQCD = {0,0,0};
-    for (auto i = 0; i <= _pt; i++) bQCD[i] = betaQCD(i, nf);
-
-    const auto dQ2 = rk4([&](double const&, double const& y)->double{ return fbeta(y, bQCD); });
+    const auto das = rk4([&](double const&, double const& y)->double{ return fbeta(y, _bQCD[nf-3]); });
 
     for (auto k = 0; k < _nstep; k++)
-      as += dQ2(0, as, dlr);
+      as += das(0, as, dlr);
 
     return FourPi * as;
   }
