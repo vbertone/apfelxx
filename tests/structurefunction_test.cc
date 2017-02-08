@@ -147,6 +147,7 @@ int main()
 
   // ========== Initialization phase ==========
   t.start();
+  cout << "Initialization ..." << endl;
 
   // Grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
@@ -179,7 +180,6 @@ int main()
   // Combine operators with alphas and put it in a vector
   const vector<Operator> Ov = { OqLO + as * OqNLO, as * OgNLO };
 
-  cout << "Initialization ..." << endl;
   t.printTime(t.stop());
 
   // Charges
@@ -190,6 +190,7 @@ int main()
   // Construct the structure function as a combination of distributions and operators
   // ========== Computation phase ==========
   t.start();
+  cout << "Computation ..." << endl;
 
   // Define map
   map <comp, map<int,double>> Map;
@@ -209,12 +210,12 @@ int main()
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2map.Evaluate(xlha[i]) << endl;
 
-  cout << "Computation ..." << endl;
   t.printTime(t.stop());
 
   // Alterantive (and more optimal) way to combine Operators and distributions
   // ========== Computation phase ==========
   t.start();
+  cout << "Computation ..." << endl;
 
   // Define multimap bewteen operators and distributions
   multimap<int,int> MMap;
@@ -247,7 +248,6 @@ int main()
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2vec.Evaluate(xlha[i]) << endl;
 
-  cout << "Computation ..." << endl;
   t.printTime(t.stop());
 
   return 0;

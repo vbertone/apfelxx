@@ -16,6 +16,7 @@
 #include <apfel/set.h>
 #include <cmath>
 #include <map>
+#include <functional>
 
 using namespace apfel;
 using namespace std;
@@ -148,10 +149,10 @@ class PDF: public Distribution
 {
 public:
   // Standard constructor
-  PDF(int const& ipdf, Grid const& gr): Distribution(gr)
+  PDF(Grid const& gr, function<double(int,double)> const& inPDFs, int const& ipdf): Distribution(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1) _distributionJointGrid.push_back(LHToyPDFs(ipdf,ix));
+      if (ix < 1) _distributionJointGrid.push_back(inPDFs(ipdf,ix));
       else        _distributionJointGrid.push_back(0);
 
     for (auto ig=0; ig<_grid.nGrids(); ig++)
@@ -166,76 +167,43 @@ public:
 };
 
 /**
- * @brief The LO splitting function class
+ * @brief The LO splitting function classes
  */
-class P0: public Expression
+class P0ns: public Expression
 {
 public:
-  P0(int const& iop, int const& nf):
-    Expression(),
-    _iop(iop),
-    _nf(nf)
-  {}
-  double Regular(double const& x) const
-  {
-    switch(_iop)
-      {
-	case 0:
-	  return - 2 * CF * ( 1 + x );
-	case 1:
-	  return - 2 * CF * ( 1 + x );
-	case 2:
-	  return - 2 * CF * ( 1 + x );
-	case 3:
-	  return - 2 * CF * ( 1 + x );
-	case 4:
-	  return 2 * _nf * ( 1 - 2 * x + 2 * x * x );
-	case 5:
-	  return 4 * CF * ( - 1 + 0.5 * x + 1 / x );
-	case 6:
-	  return 4 * CA * ( - 2 + x - x * x + 1 / x );
-	default:
-	  return 0.;
-      }
-  }
-  double Singular(double const& x) const
-  {
-    switch(_iop)
-      {
-	case 0:
-	  return 4 * CF / ( 1 - x );
-	case 1:
-	  return 4 * CF / ( 1 - x );
-	case 2:
-	  return 4 * CF / ( 1 - x );
-	case 3:
-	  return 4 * CF / ( 1 - x );
-	case 6:
-	  return 4 * CA / ( 1 - x );
-	default:
-	  return 0.;
-      }
-  }
-  double Local(double const& x) const
-  {
-    switch(_iop)
-      {
-	case 0:
-	  return 4 * CF * log( 1 - x ) + 3 * CF;
-	case 1:
-	  return 4 * CF * log( 1 - x ) + 3 * CF;
-	case 2:
-	  return 4 * CF * log( 1 - x ) + 3 * CF;
-	case 3:
-	  return 4 * CF * log( 1 - x ) + 3 * CF;
-	case 6:
-	  return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
-	default:
-	  return 0.;
-      }
-  }
+  P0ns(): Expression() { }
+  double Regular(double const& x)  const { return - 2 * CF * ( 1 + x ); }
+  double Singular(double const& x) const { return 4 * CF / ( 1 - x ); }
+  double Local(double const& x)    const { return 4 * CF * log( 1 - x ) + 3 * CF; }
+};
+
+class P0qg: public Expression
+{
+public:
+  P0qg(): Expression() { }
+  double Regular(double const& x)  const { return 2 * ( 1 - 2 * x + 2 * x * x ); }
+  double Singular(double const& x) const { return 0 * x; }
+  double Local(double const& x)    const { return 0 * x; }
+};
+
+class P0gq: public Expression
+{
+public:
+  P0gq(): Expression() { }
+  double Regular(double const& x)  const { return 4 * CF * ( - 1 + 0.5 * x + 1 / x ); }
+  double Singular(double const& x) const { return 0 * x; }
+  double Local(double const& x)    const { return 0 * x; }
+};
+
+class P0gg: public Expression
+{
+public:
+  P0gg(int const& nf): Expression(), _nf(nf) { }
+  double Regular(double const& x)  const { return 4 * CA * ( - 2 + x - x * x + 1 / x ); }
+  double Singular(double const& x) const { return 4 * CA / ( 1 - x ); }
+  double Local(double const& x)    const { return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA; }
 private:
-  int const _iop;
   int const _nf;
 };
 
@@ -248,26 +216,28 @@ int main()
   // Grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
 
-  // Allocate map
-  EvolutionMap basis(6);
-
-  // Allocate operators
-  // Brute force: compute all operators for all nf's.
-  // At LO, this is not optimal because most of the operators do not
-  // depend on nf. In addition most of the operators are equal.
-  // This can be optimized.
+  // ===============================================================
+  // Allocate LO splitting functions operators
   cout << "Initializing operators ..." << endl;
   t.start();
-  vector<unordered_map<int,Operator>> OpMap;
-  for (auto nf = 3; nf <= 6; nf++)
+  unordered_map<int,unordered_map<int,Operator>> OpMap;
+  const Operator O0ns{g, P0ns{}};
+  const Operator O0qg{g, P0qg{}};
+  const Operator O0gq{g, P0gq{}};
+  for (int nf = 3; nf <= 6; nf++)
     {
+      const Operator O0gg{g, P0gg{nf}};
+      const Operator O0qgnf = nf * O0qg;
       unordered_map<int,Operator> OM;
-      for (int i = EvolutionMap::PNSP; i <= EvolutionMap::PGG; i++)
-	{
-	  const Operator O{g, P0{i, nf}};
-	  OM.insert({i,O});
-	}
-      OpMap.push_back(OM);
+      OM.insert({EvolutionMap::PNSP,O0ns});
+      OM.insert({EvolutionMap::PNSM,O0ns});
+      OM.insert({EvolutionMap::PNSV,O0ns});
+      OM.insert({EvolutionMap::PQQ,O0ns});
+      OM.insert({EvolutionMap::PQQ,O0ns});
+      OM.insert({EvolutionMap::PQG,O0qgnf});
+      OM.insert({EvolutionMap::PGQ,O0gq});
+      OM.insert({EvolutionMap::PGG,O0gg});
+      OpMap.insert({nf,OM});
     }
   t.printTime(t.stop());
 
@@ -276,25 +246,30 @@ int main()
   t.start();
   unordered_map<int,Distribution> DistMap;
   for (int i = EvolutionMap::GLUON; i <= EvolutionMap::V35; i++)
-    {
-      const PDF f{i, g};
-      DistMap.insert({i,f});
-    }
+    DistMap.insert({i,PDF{g, LHToyPDFs, i}});
   t.printTime(t.stop());
 
   cout << "Initializing set of operators and distributions ..." << endl;
   t.start();
-  // Allocate set of operators
-  Set<Operator> Splittings{basis, OpMap[2]};
+  // Allocate map
+  unordered_map<int,EvolutionMap> basis;
+  for (int nf = 3; nf <= 6; nf++)
+    basis.insert({nf,EvolutionMap{nf}});
 
   // Allocate set of operators
-  Set<Distribution> PDFs{basis, DistMap};
+  unordered_map<int,Set<Operator>> Splittings;
+  for (int nf = 3; nf <= 6; nf++)
+    Splittings.insert({nf,Set<Operator>{basis.at(nf), OpMap.at(nf)}});
+
+  // Allocate set of initial distributions
+  Set<Distribution> PDFs{basis.at(5), DistMap};
   t.printTime(t.stop());
 
+  // ===============================================================
   // Test products
   cout << "\nTesting products ..." << endl;
   t.start();
-  auto Product = Splittings * PDFs;
+  auto Product = Splittings.at(5) * PDFs;
   cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
        << Product.at(EvolutionMap::GLUON).Evaluate(0.1) << endl;
 
@@ -307,6 +282,7 @@ int main()
        << Sum.Evaluate(0.1) << endl;
   t.printTime(t.stop());
 
+  // ===============================================================
   cout << "\nFull computation time:" << endl;
   ttot.printTime(ttot.stop());
 
