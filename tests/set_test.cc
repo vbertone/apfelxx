@@ -159,11 +159,11 @@ public:
       {
         vector<double> sg;
         for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          if (ix < 1) sg.push_back(LHToyPDFs(ipdf,ix));
+          if (ix < 1) sg.push_back(inPDFs(ipdf,ix));
           else        sg.push_back(0);
         _distributionSubGrid.push_back(sg);
       }
-  }  
+  }
 };
 
 /**
@@ -183,8 +183,6 @@ class P0qg: public Expression
 public:
   P0qg(): Expression() { }
   double Regular(double const& x)  const { return 2 * ( 1 - 2 * x + 2 * x * x ); }
-  double Singular(double const& x) const { return 0 * x; }
-  double Local(double const& x)    const { return 0 * x; }
 };
 
 class P0gq: public Expression
@@ -192,8 +190,6 @@ class P0gq: public Expression
 public:
   P0gq(): Expression() { }
   double Regular(double const& x)  const { return 4 * CF * ( - 1 + 0.5 * x + 1 / x ); }
-  double Singular(double const& x) const { return 0 * x; }
-  double Local(double const& x)    const { return 0 * x; }
 };
 
 class P0gg: public Expression
@@ -214,7 +210,7 @@ int main()
   ttot.start();
 
   // Grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
+  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}};
 
   // ===============================================================
   // Allocate LO splitting functions operators
@@ -232,11 +228,10 @@ int main()
       OM.insert({EvolutionMap::PNSP,O0ns});
       OM.insert({EvolutionMap::PNSM,O0ns});
       OM.insert({EvolutionMap::PNSV,O0ns});
-      OM.insert({EvolutionMap::PQQ,O0ns});
-      OM.insert({EvolutionMap::PQQ,O0ns});
-      OM.insert({EvolutionMap::PQG,O0qgnf});
-      OM.insert({EvolutionMap::PGQ,O0gq});
-      OM.insert({EvolutionMap::PGG,O0gg});
+      OM.insert({EvolutionMap::PQQ, O0ns});
+      OM.insert({EvolutionMap::PQG, O0qgnf});
+      OM.insert({EvolutionMap::PGQ, O0gq});
+      OM.insert({EvolutionMap::PGG, O0gg});
       OpMap.insert({nf,OM});
     }
   t.printTime(t.stop());
@@ -251,7 +246,7 @@ int main()
 
   cout << "Initializing set of operators and distributions ..." << endl;
   t.start();
-  // Allocate map
+  // Allocate maps
   unordered_map<int,EvolutionMap> basis;
   for (int nf = 3; nf <= 6; nf++)
     basis.insert({nf,EvolutionMap{nf}});
@@ -263,6 +258,7 @@ int main()
 
   // Allocate set of initial distributions
   Set<Distribution> PDFs{basis.at(5), DistMap};
+
   t.printTime(t.stop());
 
   // ===============================================================

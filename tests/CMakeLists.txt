@@ -69,3 +69,9 @@ add_executable(qgriddist_test qgriddist_test.cc)
 target_link_libraries(qgriddist_test apfel)
 add_test(performance_qgriddist_test qgriddist_test)
 add_test(memcheck_qgriddist_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/qgriddist_test)
+
+# build tests
+add_executable(dglapqcd_test dglapqcd_test.cc)
+target_link_libraries(dglapqcd_test apfel)
+add_test(performance_dglapqcd_test dglapqcd_test)
+add_test(memcheck_dglapqcd_test ${CMAKE_CURRENT_BINARY_DIR}/memtest.py ${CMAKE_CURRENT_BINARY_DIR}/dglapqcd_test)

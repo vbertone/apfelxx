@@ -7,9 +7,10 @@
 
 #pragma once
 
+#include <apfel/basismap.h>
+
 #include <memory>
 #include <unordered_map>
-#include <apfel/basismap.h>
 using std::unordered_map;
 using std::shared_ptr;
 

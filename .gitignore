@@ -27,6 +27,7 @@ tests/qgrid_test
 tests/set_test
 tests/cache_test
 tests/qgriddist_test
+tests/dglapqcd_test
 
 # Compiled Object files
 *.slo

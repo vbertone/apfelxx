@@ -68,19 +68,19 @@ namespace apfel
     if ( nfi == nff )
       return EvolveObject(nfi, _ObjRef, _MuRef2, mu2);
 
-    auto asi  = _ObjRef;
-    auto asf  = _ObjRef;
+    auto obji = _ObjRef;
+    auto objf = _ObjRef;
     auto mui2 = _MuRef2;
     auto muf2 = _Thresholds2[nfi];
     for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
-	asf  = EvolveObject(inf, asi, mui2, muf2);
-	asf  = MatchObject(sgn, asf, _LogTh2M2[inf]);
-	asi  = asf;
+	objf = EvolveObject(inf, obji, mui2, muf2);
+	objf = MatchObject(sgn, objf, _LogTh2M2[inf]);
+	obji = objf;
 	mui2 = muf2;
 	muf2 = _Thresholds2[min(inf+1,nff-1)];
       }
-    return EvolveObject(nff, asf, mui2, mu2);
+    return EvolveObject(nff, objf, mui2, mu2);
   }
 
   // template fixed types
