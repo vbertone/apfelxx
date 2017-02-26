@@ -7,8 +7,10 @@
 
 #pragma once
 
+#include "apfel/matchedevolution.h"
+
 #include <array>
-#include <apfel/matchedevolution.h>
+
 using std::array;
 
 namespace apfel

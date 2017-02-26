@@ -5,16 +5,11 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
+#include "apfel/operator.h"
+#include "apfel/tools.h"
+
 #include <iostream>
 #include <cmath>
-
-#include "apfel/operator.h"
-#include "apfel/grid.h"
-#include "apfel/subgrid.h"
-#include "apfel/expression.h"
-#include "apfel/interpolator.h"
-#include "apfel/distribution.h"
-#include "apfel/tools.h"
 
 namespace apfel
 {
@@ -115,24 +110,15 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator& Operator::operator=(Operator const& o)
+  Operator& Operator::operator = (Operator const& o)
   {
-    // fast method to check that we are using the same Grid
-    if (&this->_grid != &o.GetGrid())
-      throw runtime_exception("Operator::operator=", "Operator grid does not match");
-
     if(this != &o)
-      {
-	for (size_t ig = 0; ig < _Operator.size(); ig++)
-	  for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
-	    for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
-	      _Operator[ig](alpha,beta) = o._Operator[ig](alpha,beta);
-      }
+      Operator{o};
     return *this;
   }
 
   //_________________________________________________________________________
-  Distribution Operator::operator*=(Distribution const& d) const
+  Distribution Operator::operator *= (Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid
     if (&this->_grid != &d.GetGrid())
@@ -201,7 +187,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator& Operator::operator*=(Operator const& o)
+  Operator& Operator::operator *= (Operator const& o)
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
@@ -244,7 +230,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator& Operator::operator*=(double const& s)
+  Operator& Operator::operator *= (double const& s)
   {
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
@@ -255,7 +241,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator& Operator::operator+=(Operator const& o)
+  Operator& Operator::operator += (Operator const& o)
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
@@ -270,7 +256,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator& Operator::operator-=(Operator const& o)
+  Operator& Operator::operator -= (Operator const& o)
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
@@ -285,37 +271,37 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution operator*(Operator lhs, Distribution const& rhs)
+  Distribution operator * (Operator lhs, Distribution const& rhs)
   {
     return lhs *= rhs;
   }
 
   //_________________________________________________________________________
-  Operator operator*(Operator lhs, Operator const& rhs)
+  Operator operator * (Operator lhs, Operator const& rhs)
   {
     return lhs *= rhs;
   }
 
   //_________________________________________________________________________
-  Operator operator*(double const& s, Operator rhs)
+  Operator operator * (double const& s, Operator rhs)
   {
     return rhs *= s;
   }
 
   //_________________________________________________________________________
-  Operator operator*(Operator lhs, double const& s)
+  Operator operator * (Operator lhs, double const& s)
   {
     return lhs *= s;
   }
 
   //_________________________________________________________________________
-  Operator operator+(Operator lhs, Operator const& rhs)
+  Operator operator + (Operator lhs, Operator const& rhs)
   {
     return lhs += rhs;
   }
 
   //_________________________________________________________________________
-  Operator operator-(Operator lhs, Operator const& rhs)
+  Operator operator - (Operator lhs, Operator const& rhs)
   {
     return lhs -= rhs;
   }

@@ -7,16 +7,16 @@
 
 #pragma once
 
+#include "apfel/grid.h"
+
 #include <vector>
-using std::vector;
 #include <utility>
+
+using std::vector;
 using std::pair;
 
 namespace apfel
 {
-  class Grid;
-  class SubGrid;
-
   /**
    * @brief The Interpolator abstract class
    *

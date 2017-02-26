@@ -7,16 +7,15 @@
 
 #pragma once
 
-#include <apfel/integrator.h>
-#include <apfel/lagrangeinterpolator.h>
-#include <apfel/matrix.h>
+#include "apfel/grid.h"
+#include "apfel/expression.h"
+#include "apfel/distribution.h"
+#include "apfel/integrator.h"
+#include "apfel/lagrangeinterpolator.h"
+#include "apfel/matrix.h"
 
 namespace apfel
 {
-  class Grid;
-  class Expression;
-  class Distribution;
-
   /**
    * @brief The Operator class.
    *
@@ -45,12 +44,12 @@ namespace apfel
     Operator(Operator const& obj);
 
     // operators
-    Distribution operator*=(Distribution const& d) const; //!< this *= Distribution
-    Operator&    operator=(Operator const& o);            //!< this = Operator
-    Operator&    operator*=(Operator const& o);           //!< this *= Operator
-    Operator&    operator*=(double const& s);             //!< this *= Scalar
-    Operator&    operator+=(Operator const& o);           //!< this += Operator
-    Operator&    operator-=(Operator const& o);           //!< this -= Operator
+    Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
+    Operator&    operator  = (Operator const& o);            //!< this = Operator
+    Operator&    operator *= (Operator const& o);           //!< this *= Operator
+    Operator&    operator *= (double const& s);             //!< this *= Scalar
+    Operator&    operator += (Operator const& o);           //!< this += Operator
+    Operator&    operator -= (Operator const& o);           //!< this -= Operator
 
   protected:
     /**
@@ -71,10 +70,10 @@ namespace apfel
   };
 
   // Extra operation definitions where Operator is at the left hand side (lhs).
-  Distribution operator*(Operator lhs, Distribution const& rhs); //!< Operator*Distribution
-  Operator     operator*(Operator lhs, Operator const& rhs);     //!< Operator*Operator
-  Operator     operator*(double const& s, Operator rhs);         //!< Operator*Scalar
-  Operator     operator*(Operator lhs, double const& s);         //!< Scalar*Operator
-  Operator     operator+(Operator lhs, Operator const& rhs);     //!< Operator+Operator
-  Operator     operator-(Operator lhs, Operator const& rhs);     //!< Operator-Operator
+  Distribution operator * (Operator lhs, Distribution const& rhs); //!< Operator*Distribution
+  Operator     operator * (Operator lhs, Operator const& rhs);     //!< Operator*Operator
+  Operator     operator * (double const& s, Operator rhs);         //!< Operator*Scalar
+  Operator     operator * (Operator lhs, double const& s);         //!< Scalar*Operator
+  Operator     operator + (Operator lhs, Operator const& rhs);     //!< Operator+Operator
+  Operator     operator - (Operator lhs, Operator const& rhs);     //!< Operator-Operator
 }

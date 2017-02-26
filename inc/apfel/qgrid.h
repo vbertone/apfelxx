@@ -8,11 +8,12 @@
 #pragma once
 
 #include <vector>
-using std::vector;
 #include <tuple>
+#include <iostream>
+
+using std::vector;
 using std::tuple;
 using std::get;
-#include <iostream>
 
 namespace apfel
 {

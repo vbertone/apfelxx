@@ -5,15 +5,15 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <algorithm>
-#include <cmath>
-
 #include "apfel/matchedevolution.h"
 #include "apfel/tools.h"
 #include "apfel/distribution.h"
-#include <apfel/set.h>
+#include "apfel/set.h"
 
-using namespace std;
+#include <algorithm>
+#include <cmath>
+
+using std::min;
 
 namespace apfel
 {

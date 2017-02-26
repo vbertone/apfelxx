@@ -7,12 +7,14 @@
 
 #pragma once
 
+#include "apfel/tools.h"
+
 #include <algorithm>
 #include <list>
 #include <mutex>
 #include <thread>
 #include <unordered_map>
-#include <apfel/tools.h>
+
 using std::list;
 using std::mutex;
 using std::unordered_map;

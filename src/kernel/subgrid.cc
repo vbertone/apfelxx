@@ -5,17 +5,16 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
+#include "apfel/subgrid.h"
+#include "apfel/tools.h"
+
 #include <iostream>
 #include <cmath>
 #include <cassert>
 #include <algorithm>
 
-#include "apfel/subgrid.h"
-#include "apfel/tools.h"
-
 namespace apfel
 {
-
   //_________________________________________________________________________________
   SubGrid::SubGrid(int const& nx, double const& xMin, int const& InterDegree):
     _nx(nx),
@@ -77,7 +76,6 @@ namespace apfel
     // In case they are external ...
     if(_IsExternal)
       {
-        if(_xsg.size() != sg._xsg.size())   return false;
         if(_xsg != sg._xsg)                 return false;
         if(_InterDegree != sg._InterDegree) return false;
       }
@@ -95,7 +93,27 @@ namespace apfel
   bool SubGrid::operator != (SubGrid const& sg) const
   {
     if (*this == sg) return false;
-    else return true;
+    else             return true;
+  }
+
+  //_________________________________________________________________________________
+  SubGrid& SubGrid::operator = (SubGrid const& sg)
+  {
+    // Copy attributes
+    _IsExternal = sg._IsExternal;
+    if(_IsExternal)
+      {
+        _xsg         = sg._xsg;
+        _InterDegree = sg._InterDegree;
+      }
+    else
+      {
+        _nx          = sg._nx;
+        _xMin        = sg._xMin;
+        _xMax        = sg._xMax;
+        _InterDegree = sg._InterDegree;
+      }
+    return *this;
   }
 
   //_________________________________________________________________________________

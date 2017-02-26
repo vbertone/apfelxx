@@ -9,7 +9,6 @@
 
 namespace apfel
 {
-
   /**
    * @brief The Expression class for the manipulation of the splitting and coeffient functions.
    *

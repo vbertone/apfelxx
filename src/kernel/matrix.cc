@@ -8,7 +8,6 @@
 #include "apfel/matrix.h"
 
 namespace apfel {
-
   //_________________________________________________________________________
   template<class T>
   matrix<T>::matrix(const std::size_t &row, const std::size_t &col):

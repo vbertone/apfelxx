@@ -22,12 +22,12 @@ using namespace apfel;
 using namespace std;
 
 /**
- * @brief A very simple example of BasisMap derivation.
+ * @brief A very simple example of ConvolutionMap derivation.
  *
- * This class, following the derivation procedure from BasisMap
+ * This class, following the derivation procedure from ConvolutionMap
  * implements the Basis enumerator with custom tags for the objects.
  */
-class EvolutionMap: public BasisMap
+class EvolutionBasis: public ConvolutionMap
 {
 public:
   /**
@@ -39,8 +39,8 @@ public:
   /**
    * @brief The class constructor
    */
-  EvolutionMap(int const& nf):
-    BasisMap{"EvolutionMap"}
+  EvolutionBasis(int const& nf):
+    ConvolutionMap{"EvolutionBasis"}
   {
     // dg = Pgg * g + Pgq * Sigma
     _rules[GLUON] = { {PGG, GLUON, +1}, {PGQ, SIGMA, +1} };
@@ -123,24 +123,24 @@ double xsbar(double const& x) { return 0.2 * ( xdbar(x) + xubar(x) ); }
 double LHToyPDFs(int const& i, double const& x)
 {
   // Gluon
-  if      (i == EvolutionMap::GLUON    ) return xglu(x);
+  if      (i == EvolutionBasis::GLUON    ) return xglu(x);
   // Singlet, T15, T24, T35
-  else if (i == EvolutionMap::SIGMA   ||
-	   i == EvolutionMap::T15     ||
-	   i == EvolutionMap::T24     ||
-	   i == EvolutionMap::T35      ) return xdnv(x) + 2 * xdbar(x) + xupv(x) + 2 * xubar(x) + 2 * xsbar(x);
+  else if (i == EvolutionBasis::SIGMA   ||
+	   i == EvolutionBasis::T15     ||
+	   i == EvolutionBasis::T24     ||
+	   i == EvolutionBasis::T35      ) return xdnv(x) + 2 * xdbar(x) + xupv(x) + 2 * xubar(x) + 2 * xsbar(x);
   // T3
-  else if (i == EvolutionMap::T3       ) return xupv(x) + 2 * xubar(x) - xdnv(x) - 2 * xdbar(x);
+  else if (i == EvolutionBasis::T3       ) return xupv(x) + 2 * xubar(x) - xdnv(x) - 2 * xdbar(x);
   // T8
-  else if (i == EvolutionMap::T8       ) return xupv(x) + 2 * xubar(x) + xdnv(x) + 2 * xdbar(x) - 4 * xsbar(x);
+  else if (i == EvolutionBasis::T8       ) return xupv(x) + 2 * xubar(x) + xdnv(x) + 2 * xdbar(x) - 4 * xsbar(x);
   // Valence, V8, V15, V24, V35
-  else if (i == EvolutionMap::VALENCE ||
-	   i == EvolutionMap::V8      ||
-	   i == EvolutionMap::V15     ||
-	   i == EvolutionMap::V24     ||
-	   i == EvolutionMap::V35      ) return xupv(x) + xdnv(x);
+  else if (i == EvolutionBasis::VALENCE ||
+	   i == EvolutionBasis::V8      ||
+	   i == EvolutionBasis::V15     ||
+	   i == EvolutionBasis::V24     ||
+	   i == EvolutionBasis::V35      ) return xupv(x) + xdnv(x);
   // V3
-  else if (i == EvolutionMap::V3       )  return xupv(x) - xdnv(x);
+  else if (i == EvolutionBasis::V3       )  return xupv(x) - xdnv(x);
   else              return 0;
 }
 
@@ -225,13 +225,13 @@ int main()
       const Operator O0gg{g, P0gg{nf}};
       const Operator O0qgnf = nf * O0qg;
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionMap::PNSP,O0ns});
-      OM.insert({EvolutionMap::PNSM,O0ns});
-      OM.insert({EvolutionMap::PNSV,O0ns});
-      OM.insert({EvolutionMap::PQQ, O0ns});
-      OM.insert({EvolutionMap::PQG, O0qgnf});
-      OM.insert({EvolutionMap::PGQ, O0gq});
-      OM.insert({EvolutionMap::PGG, O0gg});
+      OM.insert({EvolutionBasis::PNSP,O0ns});
+      OM.insert({EvolutionBasis::PNSM,O0ns});
+      OM.insert({EvolutionBasis::PNSV,O0ns});
+      OM.insert({EvolutionBasis::PQQ, O0ns});
+      OM.insert({EvolutionBasis::PQG, O0qgnf});
+      OM.insert({EvolutionBasis::PGQ, O0gq});
+      OM.insert({EvolutionBasis::PGG, O0gg});
       OpMap.insert({nf,OM});
     }
   t.printTime(t.stop());
@@ -240,16 +240,16 @@ int main()
   cout << "Initializing distributions ..." << endl;
   t.start();
   unordered_map<int,Distribution> DistMap;
-  for (int i = EvolutionMap::GLUON; i <= EvolutionMap::V35; i++)
+  for (int i = EvolutionBasis::GLUON; i <= EvolutionBasis::V35; i++)
     DistMap.insert({i,PDF{g, LHToyPDFs, i}});
   t.printTime(t.stop());
 
   cout << "Initializing set of operators and distributions ..." << endl;
   t.start();
   // Allocate maps
-  unordered_map<int,EvolutionMap> basis;
+  unordered_map<int,EvolutionBasis> basis;
   for (int nf = 3; nf <= 6; nf++)
-    basis.insert({nf,EvolutionMap{nf}});
+    basis.insert({nf,EvolutionBasis{nf}});
 
   // Allocate set of operators
   unordered_map<int,Set<Operator>> Splittings;
@@ -267,13 +267,13 @@ int main()
   t.start();
   auto Product = Splittings.at(5) * PDFs;
   cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
-       << Product.at(EvolutionMap::GLUON).Evaluate(0.1) << endl;
+       << Product.at(EvolutionBasis::GLUON).Evaluate(0.1) << endl;
 
   auto Product2 = 2 * Product;
   cout << "(2 * Splitting * PDFs)[GLUON](x=0.1) = "
-       << Product2.at(EvolutionMap::GLUON).Evaluate(0.1) << endl;
+       << Product2.at(EvolutionBasis::GLUON).Evaluate(0.1) << endl;
 
-  auto Sum = Product.at(EvolutionMap::GLUON) + Product.at(EvolutionMap::GLUON);
+  auto Sum = Product.at(EvolutionBasis::GLUON) + Product.at(EvolutionBasis::GLUON);
   cout << "[(Splitting * PDFs)[GLUON] + (Splitting * PDFs)[GLUON]](x=0.1) = "
        << Sum.Evaluate(0.1) << endl;
   t.printTime(t.stop());

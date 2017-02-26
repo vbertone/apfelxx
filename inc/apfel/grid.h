@@ -7,15 +7,16 @@
 
 #pragma once
 
+#include "apfel/subgrid.h"
+
 #include <vector>
 #include <memory>
+
 using std::vector;
 using std::unique_ptr;
 
-namespace apfel {
-
-  class SubGrid;
-
+namespace apfel
+{
   /**
    * @brief The global x-grid object.
    *
@@ -49,6 +50,14 @@ namespace apfel {
      * @return true/false
      */
     bool operator == (Grid const& g) const;
+    bool operator != (Grid const& g) const;
+
+    /**
+     * @brief Copy a Grid
+     * @param g the Grid to be copied
+     * @return Grid
+     */
+    Grid& operator = (Grid const& g);
 
   private:
     /**
@@ -60,7 +69,7 @@ namespace apfel {
     bool                _Locked;     //!< Flag for locking the grids.
     bool                _ExtGrids;   //!< Contains external sub-grids.
     vector<SubGrid>     _GlobalGrid; //!< Vector with sub-grids.
-    unique_ptr<SubGrid> _JointGrid;  //!< Container for the join grid.
+    unique_ptr<SubGrid> _JointGrid;  //!< Container for the joint grid.
 
     friend std::ostream& operator<<(std::ostream& os, Grid const& gr);
   };

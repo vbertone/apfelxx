@@ -7,8 +7,9 @@
 
 #pragma once
 
+#include "apfel/qgrid.h"
+
 #include <array>
-#include <apfel/qgrid.h>
 
 using std::array;
 

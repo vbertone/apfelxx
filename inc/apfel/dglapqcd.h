@@ -130,12 +130,12 @@ namespace apfel
     };
 
     /**
-     * @brief A very simple example of BasisMap derivation.
+     * @brief A very simple example of ConvolutionMap derivation.
      *
-     * This class, following the derivation procedure from BasisMap
+     * This class, following the derivation procedure from ConvolutionMap
      * implements the Basis enumerator with custom tags for the objects.
      */
-    class EvolutionMap: public BasisMap
+    class EvolutionBasis: public ConvolutionMap
     {
     public:
       /**
@@ -147,8 +147,8 @@ namespace apfel
       /**
        * @brief The class constructors
        */
-    EvolutionMap();
-    EvolutionMap(int const& nf);
+    EvolutionBasis();
+    EvolutionBasis(int const& nf);
     };
 
     /**

@@ -5,12 +5,11 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
+#include "apfel/grid.h"
+#include "apfel/tools.h"
+
 #include <iostream>
 #include <algorithm>
-
-#include "apfel/grid.h"
-#include "apfel/subgrid.h"
-#include "apfel/tools.h"
 
 namespace apfel {
 
@@ -127,6 +126,24 @@ namespace apfel {
         return false;
 
     return true;
+  }
+
+  //_________________________________________________________________________________
+  bool Grid::operator != (Grid const& g) const
+  {
+    if (*this == g) return false;
+    else            return true;
+  }
+
+  //_________________________________________________________________________________
+  Grid& Grid::operator = (Grid const& g)
+  {
+    // Copy attributes
+    _Locked     = g._Locked;
+    _ExtGrids   = g._ExtGrids;
+    _GlobalGrid = g._GlobalGrid;
+    CreateJointGrid();
+    return *this;
   }
 
   //_________________________________________________________________________________

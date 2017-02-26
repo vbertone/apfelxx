@@ -5,12 +5,12 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include "apfel/basismap.h"
+#include "apfel/convolutionmap.h"
 
 namespace apfel {
 
   //_________________________________________________________________________________
-  BasisMap::BasisMap(string const& name):
+  ConvolutionMap::ConvolutionMap(string const& name):
     _name(name)
   {
   }

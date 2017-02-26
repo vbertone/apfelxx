@@ -7,9 +7,11 @@
 
 #pragma once
 
-#include <apfel/set.h>
+#include "apfel/set.h"
+#include "apfel/distribution.h"
 
 #include <functional>
+
 using std::function;
 
 namespace apfel

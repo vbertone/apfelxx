@@ -8,6 +8,7 @@
 #pragma once
 
 #include <vector>
+
 using std::vector;
 using std::size_t;
 using std::pair;

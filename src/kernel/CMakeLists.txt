@@ -11,7 +11,7 @@ set(kernel_source
   tools.cc
   matrix.cc
   qgrid.cc
-  basismap.cc
+  convolutionmap.cc
   set.cc
   )
 

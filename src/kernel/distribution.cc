@@ -6,8 +6,6 @@
 //
 
 #include "apfel/distribution.h"
-#include "apfel/grid.h"
-#include "apfel/subgrid.h"
 #include "apfel/tools.h"
 
 namespace apfel
@@ -19,7 +17,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(const Distribution &obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid):
+  Distribution::Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid):
     LagrangeInterpolator{obj._grid}
   {
     _distributionSubGrid   = distsubgrid;
@@ -27,22 +25,15 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution& Distribution::operator=(Distribution const& rhs)
+  Distribution& Distribution::operator = (Distribution const& d)
   {
-    // fast method to check that we are using the same Grid
-    if (&this->_grid != &rhs._grid)
-      throw runtime_exception("Distribution::operator=", "Distribution grid does not match");
-
-    if(this != &rhs)
-      {
-        this->_distributionSubGrid   = rhs._distributionSubGrid;
-        this->_distributionJointGrid = rhs._distributionJointGrid;
-      }
+    if(this != &d)
+      Distribution{d, d._distributionSubGrid, d._distributionJointGrid};
     return *this;
   }
 
   //_________________________________________________________________________
-  Distribution& Distribution::operator*=(double const& s)
+  Distribution& Distribution::operator *= (double const& s)
   {
     // sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
@@ -57,7 +48,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution& Distribution::operator*=(Distribution const& d)
+  Distribution& Distribution::operator *= (Distribution const& d)
   {
     // multiply objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
@@ -72,7 +63,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution& Distribution::operator+=(Distribution const& d)
+  Distribution& Distribution::operator += (Distribution const& d)
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
@@ -91,7 +82,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution& Distribution::operator-=(Distribution const& d)
+  Distribution& Distribution::operator -= (Distribution const& d)
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
@@ -110,25 +101,25 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution operator*(double const& s, Distribution rhs)
+  Distribution operator * (double const& s, Distribution rhs)
   {
     return rhs *= s;
   }
 
   //_________________________________________________________________________
-  Distribution operator*(Distribution lhs, double const& s)
+  Distribution operator * (Distribution lhs, double const& s)
   {
     return lhs *= s;
   }
 
   //_________________________________________________________________________
-  Distribution operator+(Distribution lhs, Distribution const& rhs)
+  Distribution operator + (Distribution lhs, Distribution const& rhs)
   {
     return lhs += rhs;
   }
 
   //_________________________________________________________________________
-  Distribution operator-(Distribution lhs, Distribution const& rhs)
+  Distribution operator - (Distribution lhs, Distribution const& rhs)
   {
     return lhs -= rhs;
   }

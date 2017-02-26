@@ -5,15 +5,11 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <cmath>
-#include <iostream>
-
 #include "apfel/lagrangeinterpolator.h"
-#include "apfel/grid.h"
-#include "apfel/subgrid.h"
 #include "apfel/tools.h"
 
-using namespace std;
+#include <cmath>
+#include <iostream>
 
 namespace apfel {
 

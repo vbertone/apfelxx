@@ -6,8 +6,7 @@
 //
 
 #include "apfel/interpolator.h"
-#include "apfel/grid.h"
-#include "apfel/subgrid.h"
+
 #include <cmath>
 
 namespace apfel {

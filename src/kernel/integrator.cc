@@ -7,9 +7,11 @@
 
 #include "apfel/integrator.h"
 #include "apfel/tools.h"
+
 #include <vector>
 #include <array>
 #include <cmath>
+
 using std::array;
 using std::vector;
 

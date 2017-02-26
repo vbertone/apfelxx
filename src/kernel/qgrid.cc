@@ -5,11 +5,11 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <algorithm>
-
 #include "apfel/qgrid.h"
 #include "apfel/tools.h"
 #include "apfel/distribution.h"
+
+#include <algorithm>
 
 namespace apfel
 {

@@ -14,7 +14,7 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>::Set(BasisMap const& map, unordered_map<int,T> const& in):
+  Set<T>::Set(ConvolutionMap const& map, unordered_map<int,T> const& in):
     _map(map),
     _objects(in)
   {
@@ -22,25 +22,20 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator=(Set<T> const& d)
+  Set<T>& Set<T>::operator = (Set<T> const& d)
   {
-    if (&_map != &d.GetMap())
-      throw runtime_exception("Set::operator=", "Basis Map grid does not match");
-
+    std::cout << "The problem is here!!!!!!!!!!" << std::endl;
     if(this != &d)
-      {
-	for (auto const& item: _map.GetRules())
-	  _objects.at(item.first) = d._objects.at(item.first);
-      }
+      Set<T>{d._map, d._objects};
     return *this;
   }
 
   //_________________________________________________________________________
   template<class T>
-  template<class V> Set<V> Set<T>::operator*=(Set<V> const& d) const
+  template<class V> Set<V> Set<T>::operator *= (Set<V> const& d) const
   {
     if (&_map != &d.GetMap())
-      throw runtime_exception("Set::operator*=", "Basis Map grid does not match");
+      throw runtime_exception("Set::operator *=", "Convolution Map does not match (1)");
 
     unordered_map<int,V> mmap;
     for (auto const& item: _map.GetRules())
@@ -58,7 +53,7 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator*=(double const& s)
+  Set<T>& Set<T>::operator *= (double const& s)
   {
     for (auto& v: _objects)
       v.second *= s;
@@ -67,10 +62,10 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator*=(Set<T> const& d)
+  Set<T>& Set<T>::operator *= (Set<T> const& d)
   {
     if (&_map != &d.GetMap())
-      throw runtime_exception("Set::operator*=", "Basis Map grid does not match");
+      throw runtime_exception("Set::operator *=", "Convolution Map does not match (2)");
 
     for (auto const& item: _map.GetRules())
       _objects.at(item.first) *= d.at(item.first);
@@ -80,10 +75,10 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator+=(Set<T> const& d)
+  Set<T>& Set<T>::operator += (Set<T> const& d)
   {
     if (&_map != &d.GetMap())
-      throw runtime_exception("Set::operator+=", "Basis Map grid does not match");
+      throw runtime_exception("Set::operator +=", "Convolution Map does not match");
 
     for (auto const& item: _map.GetRules())
       _objects.at(item.first) += d.at(item.first);
@@ -93,5 +88,5 @@ namespace apfel {
 
   template class Set<Distribution>;
   template class Set<Operator>;
-  template Set<Distribution> Set<Operator>::operator*=(Set<Distribution> const&) const;
+  template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
 }

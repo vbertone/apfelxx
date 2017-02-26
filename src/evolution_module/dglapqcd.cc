@@ -25,7 +25,7 @@ namespace apfel {
 		     int                          const& PertOrder,
 		     int                          const& nstep,
 		     double                       const& xi):
-    MatchedEvolution(Set<Distribution>{EvolutionMap{}, {}}, MuDistRef, Masses, Thresholds),
+    MatchedEvolution(Set<Distribution>{EvolutionBasis{}, {}}, MuDistRef, Masses, Thresholds),
     _InPDFs(InPDFs),
     _PertOrder(PertOrder),
     _nstep(nstep),
@@ -41,25 +41,25 @@ namespace apfel {
 	const Operator O0gg{g, P0gg{nf}};
 	const Operator O0qgnf = nf * O0qg;
 	unordered_map<int,Operator> OM;
-	OM.insert({EvolutionMap::PNSP,O0ns});
-	OM.insert({EvolutionMap::PNSM,O0ns});
-	OM.insert({EvolutionMap::PNSV,O0ns});
-	OM.insert({EvolutionMap::PQQ, O0ns});
-	OM.insert({EvolutionMap::PQG, O0qgnf});
-	OM.insert({EvolutionMap::PGQ, O0gq});
-	OM.insert({EvolutionMap::PGG, O0gg});
+	OM.insert({EvolutionBasis::PNSP,O0ns});
+	OM.insert({EvolutionBasis::PNSM,O0ns});
+	OM.insert({EvolutionBasis::PNSV,O0ns});
+	OM.insert({EvolutionBasis::PQQ, O0ns});
+	OM.insert({EvolutionBasis::PQG, O0qgnf});
+	OM.insert({EvolutionBasis::PGQ, O0gq});
+	OM.insert({EvolutionBasis::PGG, O0gg});
 	OpMap.insert({nf,OM});
       }
 
     // Allocate initial scale distributions
     unordered_map<int,Distribution> DistMap;
-    for (int i = EvolutionMap::GLUON; i <= EvolutionMap::V35; i++)
+    for (int i = EvolutionBasis::GLUON; i <= EvolutionBasis::V35; i++)
       DistMap.insert({i,PDF{g, InPDFs, i}});
 
     // Allocate maps
-    unordered_map<int,EvolutionMap> Bases;
+    unordered_map<int,EvolutionBasis> Bases;
     for (int nf = 3; nf <= 6; nf++)
-      Bases.insert({nf,EvolutionMap{nf}});
+      Bases.insert({nf,EvolutionBasis{nf}});
 
     // Allocate set of operators
     for (int nf = 3; nf <= 6; nf++)
@@ -69,7 +69,12 @@ namespace apfel {
     const auto nfi = lower_bound(Thresholds.begin()+1, Thresholds.end(), MuDistRef) - Thresholds.begin();
 
     // Allocate set of initial distributions.
-    SetObjectRef(Set<Distribution>{Bases.at(nfi), DistMap});
+    //SetObjectRef(Set<Distribution>{Bases.at(nfi), DistMap});
+    _ObjRef = Set<Distribution>{Bases.at(nfi), DistMap};
+
+    ///////////////////////////
+    _SplittingFunctions.at(nfi) * _ObjRef;
+    ///////////////////////////
   }
 
   //_________________________________________________________________________________
@@ -188,14 +193,14 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  DglapQCD::EvolutionMap::EvolutionMap():
-    BasisMap("EvolutionMap")
+  DglapQCD::EvolutionBasis::EvolutionBasis():
+    ConvolutionMap("EvolutionBasis")
   {
   }
 
   //_________________________________________________________________________________
-  DglapQCD::EvolutionMap::EvolutionMap(int const& nf):
-    BasisMap("EvolutionMap")
+  DglapQCD::EvolutionBasis::EvolutionBasis(int const& nf):
+    ConvolutionMap("EvolutionBasis")
   {
     // dg = Pgg * g + Pgq * Sigma
     _rules[GLUON] = { {PGG, GLUON, +1}, {PGQ, SIGMA, +1} };
