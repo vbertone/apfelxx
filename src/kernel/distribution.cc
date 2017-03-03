@@ -28,7 +28,7 @@ namespace apfel
   Distribution& Distribution::operator = (Distribution const& d)
   {
     if(this != &d)
-      Distribution{d, d._distributionSubGrid, d._distributionJointGrid};
+      *this = d;
     return *this;
   }
 

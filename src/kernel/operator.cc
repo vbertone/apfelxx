@@ -113,7 +113,7 @@ namespace apfel
   Operator& Operator::operator = (Operator const& o)
   {
     if(this != &o)
-      Operator{o};
+      *this = o;
     return *this;
   }
 

@@ -24,9 +24,8 @@ namespace apfel {
   template<class T>
   Set<T>& Set<T>::operator = (Set<T> const& d)
   {
-    std::cout << "The problem is here!!!!!!!!!!" << std::endl;
     if(this != &d)
-      Set<T>{d._map, d._objects};
+      *this = d;
     return *this;
   }
 
