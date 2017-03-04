@@ -136,17 +136,6 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  Grid& Grid::operator = (Grid const& g)
-  {
-    // Copy attributes
-    _Locked     = g._Locked;
-    _ExtGrids   = g._ExtGrids;
-    _GlobalGrid = g._GlobalGrid;
-    CreateJointGrid();
-    return *this;
-  }
-
-  //_________________________________________________________________________________
   std::ostream& operator<<(std::ostream& os, Grid const& gr)
   {
     os << "Grid: " << &gr << "\n";

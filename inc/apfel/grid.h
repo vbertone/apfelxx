@@ -52,13 +52,6 @@ namespace apfel
     bool operator == (Grid const& g) const;
     bool operator != (Grid const& g) const;
 
-    /**
-     * @brief Copy a Grid
-     * @param g the Grid to be copied
-     * @return Grid
-     */
-    Grid& operator = (Grid const& g);
-
   private:
     /**
      * @brief Takes the input SubGrids, apply the locking and

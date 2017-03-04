@@ -317,7 +317,6 @@ int main()
        << "    gluon   "
        << endl;
 
-
   for (auto i = 2; i < 11; i++)
     {
       cout.precision(1);

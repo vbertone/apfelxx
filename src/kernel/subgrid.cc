@@ -97,26 +97,6 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  SubGrid& SubGrid::operator = (SubGrid const& sg)
-  {
-    // Copy attributes
-    _IsExternal = sg._IsExternal;
-    if(_IsExternal)
-      {
-        _xsg         = sg._xsg;
-        _InterDegree = sg._InterDegree;
-      }
-    else
-      {
-        _nx          = sg._nx;
-        _xMin        = sg._xMin;
-        _xMax        = sg._xMax;
-        _InterDegree = sg._InterDegree;
-      }
-    return *this;
-  }
-
-  //_________________________________________________________________________________
   std::ostream& operator<<(std::ostream& os, SubGrid const& sg)
   {
     os << "SubGrid: " << &sg << "\n";

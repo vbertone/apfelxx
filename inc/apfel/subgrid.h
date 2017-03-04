@@ -51,13 +51,6 @@ namespace apfel
     bool operator == (SubGrid const& sg) const;
     bool operator != (SubGrid const& sg) const;
 
-    /**
-     * @brief Copy a SubGrid
-     * @param sg the SubGrid to be copied
-     * @return SubGrid
-     */
-    SubGrid& operator = (SubGrid const& sg);
-
     // Getters
     int                   nx()          const { return _nx; }          //!< return the number of x points
     int                   InterDegree() const { return _InterDegree; } //!< return the interpolation degree
