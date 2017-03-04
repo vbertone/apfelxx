@@ -35,7 +35,7 @@ namespace apfel
   rk4(T const& f)
   {
     return
-      [       f            ](double const& t, double const& y, double const& dt ) -> double{ return
+      [       f            ](double const& t, double const& y,  double const& dt) -> double{ return
       [t,y,dt,f            ](                 double const& dy1                 ) -> double{ return
       [t,y,dt,f,dy1        ](                 double const& dy2                 ) -> double{ return
       [t,y,dt,f,dy1,dy2    ](                 double const& dy3                 ) -> double{ return
@@ -52,7 +52,7 @@ namespace apfel
   rk4setd(T const& f)
   {
     return
-      [       f            ](double const& t, Set<Distribution> const& y, double const& dt ) -> Set<Distribution>{ return
+      [       f            ](double const& t, Set<Distribution> const& y,  double const& dt) -> Set<Distribution>{ return
       [t,y,dt,f            ](                 Set<Distribution> const& dy1                 ) -> Set<Distribution>{ return
       [t,y,dt,f,dy1        ](                 Set<Distribution> const& dy2                 ) -> Set<Distribution>{ return
       [t,y,dt,f,dy1,dy2    ](                 Set<Distribution> const& dy3                 ) -> Set<Distribution>{ return

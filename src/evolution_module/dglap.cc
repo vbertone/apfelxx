@@ -31,6 +31,17 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
+  DGLAP::DGLAP(function<Set<Operator>(int,double)>      const& SplittingFunctions,
+	       function<Set<Operator>(bool,int,double)> const& MatchingConditions,
+	       Set<Distribution>                        const& ObjRef,
+	       double                                   const& MuDistRef,
+	       vector<double>                           const& Masses,
+	       int                                      const& nstep):
+    DGLAP(SplittingFunctions, MatchingConditions, ObjRef, MuDistRef, Masses, Masses, nstep)
+  {
+  }
+
+  //_________________________________________________________________________________
   Set<Distribution> DGLAP::EvolveObject(int const& nf, double const& mu02, double const& mu2, Set<Distribution> const& sd0) const
   {
     // Return immediately "sd0" if "mu02" and "mu2" are equal

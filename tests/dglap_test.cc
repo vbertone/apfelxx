@@ -230,7 +230,7 @@ int main()
   cout << "Initialization ..." << endl;
   t.start();
   // Allocate grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}};
+  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}};
 
   // ===============================================================
   // Allocate LO splitting functions operators
@@ -294,12 +294,12 @@ int main()
   DGLAP evolution{
     [&] (int const& nf, double const& mu) -> Set<Operator>{ return as.GetObject(mu) / ( 4 * M_PI ) * Splittings.at(nf); },
       [&] (bool const&, int const& nf, double const&) -> Set<Operator>{ return Matching.at(nf); },
-	PDFs, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, {0, 0, 0, sqrt(2), 4.5, 175}, nsteps};
+	PDFs, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, nsteps};
   t.printTime(t.stop());
 
   double Q = 100;
   cout << scientific;
-  cout << "\nEvolution (4th order Runge-kutta with " << nsteps << " steps) to Q = " << Q << " GeV ..." << endl;
+  cout << "\nEvolution (4th order Runge-Kutta with " << nsteps << " steps) to Q = " << Q << " GeV ..." << endl;
   t.start();
   auto pdfs = evolution.GetObject(Q);
   t.printTime(t.stop());

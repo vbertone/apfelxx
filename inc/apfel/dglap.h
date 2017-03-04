@@ -41,6 +41,13 @@ namespace apfel
 	  vector<double>                           const& Thresholds,
 	  int                                      const& nstep = 10);
 
+    DGLAP(function<Set<Operator>(int,double)>      const& SplittingFunctions,
+	  function<Set<Operator>(bool,int,double)> const& MatchingConditions,
+	  Set<Distribution>                        const& ObjRef,
+	  double                                   const& MuDistRef,
+	  vector<double>                           const& Masses,
+	  int                                      const& nstep = 10);
+
     /**
      * @brief
      * @param
