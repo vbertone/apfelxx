@@ -309,46 +309,50 @@ int main()
 
   cout << "\nalpha_QCD(Q) = " << as.GetObject(Q) << endl;
   cout << "Standard evolution:" << endl;
-  cout << "     x       " 
-       << "    u-ubar    " 
-       << "    d-dbar    " 
-       << "  2(ubr+dbr)  " 
-       << "    c+cbar    " 
-       << "     gluon    "
+  cout << "   x    " 
+       << "   u-ubar   " 
+       << "   d-dbar   " 
+       << " 2(ubr+dbr) " 
+       << "   c+cbar   " 
+       << "    gluon   "
        << endl;
 
-  for (auto i = 2; i < 11; i++)
-    cout << xlha[i] 
-	 << "  " <<
-      pdfs.at(2).Evaluate(xlha[i])  / 6  +
-      pdfs.at(4).Evaluate(xlha[i])  / 2	 +
-      pdfs.at(6).Evaluate(xlha[i])  / 6	 +
-      pdfs.at(8).Evaluate(xlha[i])  / 12 +
-      pdfs.at(10).Evaluate(xlha[i]) / 20 +
-      pdfs.at(12).Evaluate(xlha[i]) / 30
-	 << "  " <<
-      pdfs.at(2).Evaluate(xlha[i])  / 6  -
-      pdfs.at(4).Evaluate(xlha[i])  / 2	 +
-      pdfs.at(6).Evaluate(xlha[i])  / 6	 +
-      pdfs.at(8).Evaluate(xlha[i])  / 12 +
-      pdfs.at(10).Evaluate(xlha[i]) / 20 +
-      pdfs.at(12).Evaluate(xlha[i]) / 30
-	 << "  " <<
-      ( pdfs.at(1).Evaluate(xlha[i])  - pdfs.at(2).Evaluate(xlha[i])  ) / 3  +
-      ( pdfs.at(5).Evaluate(xlha[i])  - pdfs.at(6).Evaluate(xlha[i])  ) / 3  +
-      ( pdfs.at(7).Evaluate(xlha[i])  - pdfs.at(8).Evaluate(xlha[i])  ) / 6  +
-      ( pdfs.at(9).Evaluate(xlha[i])  - pdfs.at(10).Evaluate(xlha[i]) ) / 10 +
-      ( pdfs.at(11).Evaluate(xlha[i]) - pdfs.at(12).Evaluate(xlha[i]) ) / 15
-	 << "  " <<
-      pdfs.at(1).Evaluate(xlha[i])  / 6  -
-      pdfs.at(7).Evaluate(xlha[i])  / 4 +
-      pdfs.at(9).Evaluate(xlha[i])  / 20 +
-      pdfs.at(11).Evaluate(xlha[i]) / 30
-	 << "  " <<
-      pdfs.at(0).Evaluate(xlha[i]) << "  "
-	 << endl;
-  cout << "      " << endl;
 
+  for (auto i = 2; i < 11; i++)
+    {
+      cout.precision(1);
+      cout << xlha[i];
+      cout.precision(4);
+      cout << "  " <<
+	pdfs.at(2).Evaluate(xlha[i])  / 6  +
+	pdfs.at(4).Evaluate(xlha[i])  / 2	 +
+	pdfs.at(6).Evaluate(xlha[i])  / 6	 +
+	pdfs.at(8).Evaluate(xlha[i])  / 12 +
+	pdfs.at(10).Evaluate(xlha[i]) / 20 +
+	pdfs.at(12).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	pdfs.at(2).Evaluate(xlha[i])  / 6  -
+	pdfs.at(4).Evaluate(xlha[i])  / 2	 +
+	pdfs.at(6).Evaluate(xlha[i])  / 6	 +
+	pdfs.at(8).Evaluate(xlha[i])  / 12 +
+	pdfs.at(10).Evaluate(xlha[i]) / 20 +
+	pdfs.at(12).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	( pdfs.at(1).Evaluate(xlha[i])  - pdfs.at(2).Evaluate(xlha[i])  ) / 3  +
+	( pdfs.at(5).Evaluate(xlha[i])  - pdfs.at(6).Evaluate(xlha[i])  ) / 3  +
+	( pdfs.at(7).Evaluate(xlha[i])  - pdfs.at(8).Evaluate(xlha[i])  ) / 6  +
+	( pdfs.at(9).Evaluate(xlha[i])  - pdfs.at(10).Evaluate(xlha[i]) ) / 10 +
+	( pdfs.at(11).Evaluate(xlha[i]) - pdfs.at(12).Evaluate(xlha[i]) ) / 15
+	   << "  " <<
+	pdfs.at(1).Evaluate(xlha[i])  / 6  -
+	pdfs.at(7).Evaluate(xlha[i])  / 4 +
+	pdfs.at(9).Evaluate(xlha[i])  / 20 +
+	pdfs.at(11).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	pdfs.at(0).Evaluate(xlha[i]) << "  "
+	   << endl;
+    }
+  cout << "      " << endl;
 
   return 0;
 }
