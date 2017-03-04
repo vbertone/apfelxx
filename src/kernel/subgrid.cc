@@ -33,7 +33,7 @@ namespace apfel
     _xsg[0] = _xMin;
     double const exps = exp(_Step);
     for(auto ix = 1; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
-    _xsg[_nx] = 1;    
+    _xsg[_nx] = 1;
 
     _lxsg.resize(_xsg.size());
     for (auto ix = 0; ix < (int) _xsg.size(); ix++) _lxsg[ix] = log(_xsg[ix]);

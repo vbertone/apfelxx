@@ -293,7 +293,7 @@ int main()
   int nsteps = 10;
   DGLAP evolution{
     [&] (int const& nf, double const& mu) -> Set<Operator>{ return as.GetObject(mu) / ( 4 * M_PI ) * Splittings.at(nf); },
-      [&] (bool const& Up, int const& nf, double const& ln) -> Set<Operator>{ return Matching.at(nf); },
+      [&] (bool const&, int const& nf, double const&) -> Set<Operator>{ return Matching.at(nf); },
 	PDFs, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, {0, 0, 0, sqrt(2), 4.5, 175}, nsteps};
   t.printTime(t.stop());
 
@@ -304,16 +304,16 @@ int main()
   auto pdfs = evolution.GetObject(Q);
   t.printTime(t.stop());
 
-  double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 
+  double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
 		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   cout << "\nalpha_QCD(Q) = " << as.GetObject(Q) << endl;
   cout << "Standard evolution:" << endl;
-  cout << "   x    " 
-       << "   u-ubar   " 
-       << "   d-dbar   " 
-       << " 2(ubr+dbr) " 
-       << "   c+cbar   " 
+  cout << "   x    "
+       << "   u-ubar   "
+       << "   d-dbar   "
+       << " 2(ubr+dbr) "
+       << "   c+cbar   "
        << "    gluon   "
        << endl;
 

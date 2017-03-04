@@ -69,7 +69,7 @@ namespace apfel
       return EvolveObject(nfi, _MuRef2, mu2, _ObjRef);
 
     // Direction of the evolution
-    const auto sgn = signbit(nfi - nff);
+    const auto sgn = std::signbit(nfi - nff);
 
     // Create a vector of objects containing the object right above each threshold
     // to make sure that every time a threshold is crossed a new object with a
