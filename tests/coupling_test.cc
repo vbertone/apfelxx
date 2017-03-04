@@ -19,9 +19,9 @@ int main()
   const auto           MuRef    = sqrt(2);
   const vector<double> Masses   = {0, 0, 0, sqrt(2), 4.5, 175};
 
-  AlphaQCD asLO(AlphaRef, MuRef, Masses, 0);
-  AlphaQCD asNLO(AlphaRef, MuRef, Masses, 1);
-  AlphaQCD asNNLO(AlphaRef, MuRef, Masses, 2);
+  AlphaQCD asLO{AlphaRef, MuRef, Masses, 0};
+  AlphaQCD asNLO{AlphaRef, MuRef, Masses, 1};
+  AlphaQCD asNNLO{AlphaRef, MuRef, Masses, 2};
 
   const auto Mu = 100.;
   cout << "\nLO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.GetObject(Mu) << endl;

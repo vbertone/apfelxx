@@ -37,7 +37,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::EvolveObject(int const& nf, double const& as0, double const& mu02, double const& mu2) const
+  double AlphaQCD::EvolveObject(int const& nf, double const& mu02, double const& mu2, double const& as0) const
   {
     // Return immediately "as0" if "mu02" and "mu2" are equal
     if (mu02 == mu2)
@@ -58,10 +58,11 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::MatchObject(bool const& Up, double const& Coup, double const& LogKth) const
+  double AlphaQCD::MatchObject(bool const& Up, int const& nf, double const& Coup) const
   {
     const auto sgn = ( Up ? 1 : -1);
     const auto ep = Coup / FourPi;
+    const auto LogKth = _LogTh2M2[nf];
     const double c[] = { 1, sgn * 2. / 3. * LogKth, 4. / 9. * pow(LogKth,2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3. };
     double match = 0;
     for (auto i = 0; i <= _pt; i++) match += c[i] * pow(ep,i);
@@ -82,7 +83,7 @@ namespace apfel {
   //_________________________________________________________________________________
   double AlphaQCD::fbeta(double const& as, array<double,3> const& bQCD) const
   {
-    double bt = 0, powas = as*as;
+    double bt = 0, powas = as * as;
     for (auto i = 0; i <= _pt; i++)
       {
         bt -= powas * bQCD[i];

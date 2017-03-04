@@ -52,16 +52,17 @@ namespace apfel
      * @param mu2 squared final scale.
      * @return the object at the scale mu2.
      */
-    virtual T EvolveObject(int const& nf, T const& Obj0, double const& mu02, double const& mu2) const = 0;
+    virtual T EvolveObject(int const& nf, double const& mu02, double const& mu2, T const& Obj0) const = 0;
 
     /**
      * @brief Virtual function for the computation of the matching.
      * @param Up direction of the matching "true" = upward, "false" = downward
+     * @param nf number of flavours
      * @param Obj object to be matched
      * @param LogKth value of ln(muth2/m2), where muth2 is the threshold and m2 the mass, both squared  
      * @return the matched object.
      */
-    virtual T MatchObject(bool const& Up, T const& Obj, double const& LogKth) const = 0;
+    virtual T MatchObject(bool const& Up, int const& nf, T const& Obj) const = 0;
 
     /**
      * @brief Function that returns the evolved Object.

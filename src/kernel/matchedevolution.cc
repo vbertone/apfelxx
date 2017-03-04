@@ -63,24 +63,28 @@ namespace apfel
     // Find initial and final number of flavours
     const auto nfi = lower_bound(_Thresholds2.begin()+1, _Thresholds2.end(), _MuRef2) - _Thresholds2.begin();
     const auto nff = lower_bound(_Thresholds2.begin()+1, _Thresholds2.end(), mu2)     - _Thresholds2.begin();
+
+    // Don't do the matching is initial and final number of flavours are equal
+    if ( nfi == nff )
+      return EvolveObject(nfi, _MuRef2, mu2, _ObjRef);
+
+    // Direction of the evolution
     const auto sgn = signbit(nfi - nff);
 
-    if ( nfi == nff )
-      return EvolveObject(nfi, _ObjRef, _MuRef2, mu2);
-
-    auto obji = _ObjRef;
-    auto objf = _ObjRef;
-    auto mui2 = _MuRef2;
-    auto muf2 = _Thresholds2[nfi];
+    // Create a vector of objects containing the object right above each threshold
+    // to make sure that every time a threshold is crossed a new object with a
+    // different convolution map is created (effective only when a "Set" object
+    // is evolved).
+    vector<T> vobj = { _ObjRef };
+    auto mui2      = _MuRef2;
+    auto muf2      = _Thresholds2[nfi];
     for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
-	objf = EvolveObject(inf, obji, mui2, muf2);
-	objf = MatchObject(sgn, objf, _LogTh2M2[inf]);
-	obji = objf;
+	vobj.push_back(MatchObject(sgn, inf, EvolveObject(inf, mui2, muf2, vobj.back())));
 	mui2 = muf2;
 	muf2 = _Thresholds2[min(inf+1,nff-1)];
       }
-    return EvolveObject(nff, objf, mui2, mu2);
+    return EvolveObject(nff, mui2, mu2, vobj.back());
   }
 
   // template fixed types

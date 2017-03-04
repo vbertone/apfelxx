@@ -59,16 +59,16 @@ namespace apfel
      * @param mu2 final squared scale.
      * @return value of the coupling at mu2.
      */
-    double EvolveObject(int const& nf, double const& as0, double const& mu02, double const& mu2) const;
+    double EvolveObject(int const& nf, double const& mu02, double const& mu2, double const& as0) const;
 
     /**
      * @brief Function for the computation of the matching. This function can be overriden.
      * @param Up tells whether the matching is upward or not (downward).
+     * @param nf number of active flavours.
      * @param Coup value of the coupling to be matched.
-     * @param LogKth value of ln( muth2 / m2 ).
      * @return the matched value of the coupling.
      */
-    double MatchObject(bool const& Up, double const& Coup, double const& LogKth) const;
+    double MatchObject(bool const& Up, int const& nf, double const& Coup) const;
 
     /**
      * @brief Function for the computation of the terms of the QCD beta function.
