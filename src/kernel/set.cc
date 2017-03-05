@@ -76,8 +76,8 @@ namespace apfel {
     if (&_map != &d.GetMap())
       throw runtime_exception("Set::operator *=", "Convolution Map does not match (2)");
 
-    for (auto const& item: _map.GetRules())
-      _objects.at(item.first) *= d.at(item.first);
+    for (auto& v: _objects)
+      v.second *= d.at(v.first);
 
     return *this;
   }
@@ -89,8 +89,8 @@ namespace apfel {
     if (&_map != &d.GetMap())
       throw runtime_exception("Set::operator +=", "Convolution Map does not match");
 
-    for (auto const& item: _map.GetRules())
-      _objects.at(item.first) += d.at(item.first);
+    for (auto& v: _objects)
+      v.second += d.at(v.first);
 
     return *this;
   }

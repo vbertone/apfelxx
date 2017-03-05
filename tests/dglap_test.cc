@@ -87,9 +87,21 @@ int main()
   // Allocate grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}};
 
+  // LO Matching conditions
+  const Operator Id{g, Identity{}};
+  const Operator Zero{g, Null{}};
+  unordered_map<int,Operator> Match;
+  Match.insert({EvolutionBasis::PNSP,Id});
+  Match.insert({EvolutionBasis::PNSM,Id});
+  Match.insert({EvolutionBasis::PNSV,Id});
+  Match.insert({EvolutionBasis::PQQ, Id});
+  Match.insert({EvolutionBasis::PQG, Zero});
+  Match.insert({EvolutionBasis::PGQ, Zero});
+  Match.insert({EvolutionBasis::PGG, Id});
+
   // ===============================================================
   // Allocate LO splitting functions operators
-  unordered_map<int,unordered_map<int,Operator>> OpMap;
+  unordered_map<int,unordered_map<int,Operator>> OpMapLO;
   const Operator O0ns{g, P0ns{}};
   const Operator O0qg{g, P0qg{}};
   const Operator O0gq{g, P0gq{}};
@@ -105,20 +117,31 @@ int main()
       OM.insert({EvolutionBasis::PQG, O0qgnf});
       OM.insert({EvolutionBasis::PGQ, O0gq});
       OM.insert({EvolutionBasis::PGG, O0gg});
-      OpMap.insert({nf,OM});
+      OpMapLO.insert({nf,OM});
     }
 
-  // LO Matching conditions
-  const Operator Id{g, Identity{}};
-  const Operator Zero{g, Null{}};
-  unordered_map<int,Operator> Match;
-  Match.insert({EvolutionBasis::PNSP,Id});
-  Match.insert({EvolutionBasis::PNSM,Id});
-  Match.insert({EvolutionBasis::PNSV,Id});
-  Match.insert({EvolutionBasis::PQQ, Id});
-  Match.insert({EvolutionBasis::PQG, Zero});
-  Match.insert({EvolutionBasis::PGQ, Zero});
-  Match.insert({EvolutionBasis::PGG, Id});
+  // ===============================================================
+  // Allocate NLO splitting functions operators
+  unordered_map<int,unordered_map<int,Operator>> OpMapNLO;
+  for (int nf = 3; nf <= 6; nf++)
+    {
+      const Operator O1nsp{g, P1nsp{nf}};
+      const Operator O1nsm{g, P1nsm{nf}};
+      const Operator O1ps{g, P1ps{nf}};
+      const Operator O1qq = O1nsp + O1ps;
+      const Operator O1qg{g, P1qg{nf}};
+      const Operator O1gq{g, P1gq{nf}};
+      const Operator O1gg{g, P1gg{nf}};
+      unordered_map<int,Operator> OM;
+      OM.insert({EvolutionBasis::PNSP,O1nsp});
+      OM.insert({EvolutionBasis::PNSM,O1nsm});
+      OM.insert({EvolutionBasis::PNSV,O1nsm});
+      OM.insert({EvolutionBasis::PQQ, O1qq});
+      OM.insert({EvolutionBasis::PQG, O1qg});
+      OM.insert({EvolutionBasis::PGQ, O1gq});
+      OM.insert({EvolutionBasis::PGG, O1gg});
+      OpMapNLO.insert({nf,OM});
+    }
 
   // Allocate distributions
   unordered_map<int,Distribution> DistMap;
@@ -131,11 +154,13 @@ int main()
     basis.insert({nf,EvolutionBasis{nf}});
 
   // Allocate set of operators
-  unordered_map<int,Set<Operator>> Splittings;
+  unordered_map<int,Set<Operator>> SplittingsLO;
+  unordered_map<int,Set<Operator>> SplittingsNLO;
   unordered_map<int,Set<Operator>> Matching;
   for (int nf = 3; nf <= 6; nf++)
     {
-      Splittings.insert({nf,Set<Operator>{basis.at(nf), OpMap.at(nf)}});
+      SplittingsLO.insert({nf,Set<Operator>{basis.at(nf), OpMapLO.at(nf)}});
+      SplittingsNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNLO.at(nf)}});
       Matching.insert({nf,Set<Operator>{basis.at(nf), Match}});
     }
 
@@ -143,11 +168,16 @@ int main()
   Set<Distribution> PDFs{basis.at(3), DistMap};
 
   // Coupling
-  AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 0};
+  AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 1};
 
   int nsteps = 10;
   DGLAP evolution{
-    [&] (int const& nf, double const& mu) -> Set<Operator>{ return as.GetObject(mu) / ( 4 * M_PI ) * Splittings.at(nf); },
+    [&] (int const& nf, double const& mu) -> Set<Operator> {
+      const double cp = as.GetObject(mu) / FourPi;
+      auto LO  = cp * SplittingsLO.at(nf);
+      auto NLO = cp * cp * SplittingsNLO.at(nf);
+      return LO + NLO;
+    },
       [&] (bool const&, int const& nf, double const&) -> Set<Operator>{ return Matching.at(nf); },
 	PDFs, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, nsteps};
   t.printTime(t.stop());
@@ -179,15 +209,15 @@ int main()
       cout.precision(4);
       cout << "  " <<
 	pdfs.at(2).Evaluate(xlha[i])  / 6  +
-	pdfs.at(4).Evaluate(xlha[i])  / 2	 +
-	pdfs.at(6).Evaluate(xlha[i])  / 6	 +
+	pdfs.at(4).Evaluate(xlha[i])  / 2  +
+	pdfs.at(6).Evaluate(xlha[i])  / 6  +
 	pdfs.at(8).Evaluate(xlha[i])  / 12 +
 	pdfs.at(10).Evaluate(xlha[i]) / 20 +
 	pdfs.at(12).Evaluate(xlha[i]) / 30
 	   << "  " <<
 	pdfs.at(2).Evaluate(xlha[i])  / 6  -
-	pdfs.at(4).Evaluate(xlha[i])  / 2	 +
-	pdfs.at(6).Evaluate(xlha[i])  / 6	 +
+	pdfs.at(4).Evaluate(xlha[i])  / 2  +
+	pdfs.at(6).Evaluate(xlha[i])  / 6  +
 	pdfs.at(8).Evaluate(xlha[i])  / 12 +
 	pdfs.at(10).Evaluate(xlha[i]) / 20 +
 	pdfs.at(12).Evaluate(xlha[i]) / 30
