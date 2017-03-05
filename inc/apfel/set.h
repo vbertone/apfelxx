@@ -49,6 +49,7 @@ namespace apfel
     // other operators
     Set<T>& operator  = (Set<T> const& d); //!< this = Set<T>
     Set<T>& operator *= (double const& s); //!< this *= scalar
+    Set<T>& operator /= (int const& s);    //!< this /= scalar
     Set<T>& operator *= (Set<T> const& d); //!< this *= Set
     Set<T>& operator += (Set<T> const& d); //!< this += Set
 
@@ -77,6 +78,12 @@ namespace apfel
 
   template<class T>
   inline Set<T> operator * (Set<T> lhs, double const& s) { return lhs *= s;}
+
+  template<class T>
+  inline Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s;}
+
+  template<class T>
+  inline Set<T> operator / (Set<T> lhs, int const& s) { return lhs /= s;}
 
   template<class T>
   inline Set<T> operator * (Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs;}

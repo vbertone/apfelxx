@@ -61,6 +61,16 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
+  Set<T>& Set<T>::operator /= (int const& s)
+  {
+    const double r = 1.0/static_cast<double>(s);
+    for (auto& v: _objects)
+      v.second *= r;
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   Set<T>& Set<T>::operator *= (Set<T> const& d)
   {
     if (&_map != &d.GetMap())

@@ -49,7 +49,7 @@ namespace apfel {
        return sd0;
 
     // Numerical solution of the evolution equation with fourth-order Runge-Kutta.
-    const auto df = rk4setd([&](double const& t, Set<Distribution> const& f)->Set<Distribution>{ return Derivative(nf, t, f); });
+    const auto df = rk4<Set<Distribution>>([&](double const& t, Set<Distribution> const& f)->Set<Distribution>{ return Derivative(nf, t, f); });
 
     // Use "_nstep" steps for the evolution.
     auto f = sd0;
