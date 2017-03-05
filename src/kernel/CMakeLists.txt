@@ -13,6 +13,7 @@ set(kernel_source
   qgrid.cc
   convolutionmap.cc
   set.cc
+  dglap.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})
