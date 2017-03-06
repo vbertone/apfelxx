@@ -143,6 +143,31 @@ int main()
       OpMapNLO.insert({nf,OM});
     }
 
+  // ===============================================================
+  // Allocate NNLO splitting functions operators
+  unordered_map<int,unordered_map<int,Operator>> OpMapNNLO;
+  for (int nf = 3; nf <= 6; nf++)
+    {
+      const Operator O2nsp{g, P2nsp{nf}};
+      const Operator O2nsm{g, P2nsm{nf}};
+      const Operator O2nss{g, P2nss{nf}};
+      const Operator O2nsv = O2nsm + O2nss;
+      const Operator O2ps{g, P2ps{nf}};
+      const Operator O2qq = O2nsp + O2ps;
+      const Operator O2qg{g, P2qg{nf}};
+      const Operator O2gq{g, P2gq{nf}};
+      const Operator O2gg{g, P2gg{nf}};
+      unordered_map<int,Operator> OM;
+      OM.insert({EvolutionBasis::PNSP,O2nsp});
+      OM.insert({EvolutionBasis::PNSM,O2nsm});
+      OM.insert({EvolutionBasis::PNSV,O2nsv});
+      OM.insert({EvolutionBasis::PQQ, O2qq});
+      OM.insert({EvolutionBasis::PQG, O2qg});
+      OM.insert({EvolutionBasis::PGQ, O2gq});
+      OM.insert({EvolutionBasis::PGG, O2gg});
+      OpMapNNLO.insert({nf,OM});
+    }
+
   // Allocate distributions
   unordered_map<int,Distribution> DistMap;
   for (int i = EvolutionBasis::GLUON; i <= EvolutionBasis::V35; i++)
@@ -156,11 +181,13 @@ int main()
   // Allocate set of operators
   unordered_map<int,Set<Operator>> SplittingsLO;
   unordered_map<int,Set<Operator>> SplittingsNLO;
+  unordered_map<int,Set<Operator>> SplittingsNNLO;
   unordered_map<int,Set<Operator>> Matching;
   for (int nf = 3; nf <= 6; nf++)
     {
       SplittingsLO.insert({nf,Set<Operator>{basis.at(nf), OpMapLO.at(nf)}});
       SplittingsNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNLO.at(nf)}});
+      SplittingsNNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNNLO.at(nf)}});
       Matching.insert({nf,Set<Operator>{basis.at(nf), Match}});
     }
 
@@ -174,9 +201,10 @@ int main()
   DGLAP evolution{
     [&] (int const& nf, double const& mu) -> Set<Operator> {
       const double cp = as.GetObject(mu) / FourPi;
-      auto LO  = cp * SplittingsLO.at(nf);
-      auto NLO = cp * cp * SplittingsNLO.at(nf);
-      return LO + NLO;
+      auto LO   = cp * SplittingsLO.at(nf);
+      auto NLO  = cp * cp * SplittingsNLO.at(nf);
+      auto NNLO = cp * cp * cp * SplittingsNNLO.at(nf);
+      return LO + NLO + NNLO;
     },
       [&] (bool const&, int const& nf, double const&) -> Set<Operator>{ return Matching.at(nf); },
 	PDFs, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, nsteps};
@@ -229,7 +257,7 @@ int main()
 	( pdfs.at(11).Evaluate(xlha[i]) - pdfs.at(12).Evaluate(xlha[i]) ) / 15
 	   << "  " <<
 	pdfs.at(1).Evaluate(xlha[i])  / 6  -
-	pdfs.at(7).Evaluate(xlha[i])  / 4 +
+	pdfs.at(7).Evaluate(xlha[i])  / 4  +
 	pdfs.at(9).Evaluate(xlha[i])  / 20 +
 	pdfs.at(11).Evaluate(xlha[i]) / 30
 	   << "  " <<

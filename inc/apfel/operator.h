@@ -45,7 +45,7 @@ namespace apfel
 
     // operators
     Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
-    Operator&    operator  = (Operator const& o);            //!< this = Operator
+    Operator&    operator  = (Operator const& o);           //!< this  = Operator
     Operator&    operator *= (Operator const& o);           //!< this *= Operator
     Operator&    operator *= (double const& s);             //!< this *= Scalar
     Operator&    operator += (Operator const& o);           //!< this += Operator
@@ -58,10 +58,10 @@ namespace apfel
     double integrand(double const& x) const;
 
   private:
-    Grid             const& _grid;         //!< Grid on which to compute the operator
-    Expression const* const _expr;         //!< Expression to be commuted into an operator
-    double           const& _eps;          //!< Precision of the dgauss integration
-    vector<matrix<double>>  _Operator;     //!< Operator values.
+    Grid                   const& _grid;         //!< Grid on which to compute the operator
+    Expression const*      const  _expr;         //!< Expression to be commuted into an operator
+    double                 const& _eps;          //!< Precision of the dgauss integration
+    vector<matrix<double>>        _Operator;     //!< Operator values.
 
     // Global variables
     int    _alpha, _beta;
