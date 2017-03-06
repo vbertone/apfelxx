@@ -82,17 +82,6 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator::Operator(Operator const& obj):
-    Integrator{},
-    LagrangeInterpolator{obj._grid},
-    _grid(obj._grid),
-    _expr(nullptr),
-    _eps(obj._eps),
-    _Operator(obj._Operator)
-  {
-  }
-
-  //_________________________________________________________________________
   double Operator::integrand(double const& x) const
   {
     double res = 0;

@@ -28,20 +28,20 @@ namespace apfel
      * @param x the integration variable.
      * @return the regular term at x.
      */
-    virtual double Regular(double const& x) const { return 0 * x; };
+    virtual double Regular(double const& x) const { return 0 * x; }
 
     /**
      * @brief Virtual singular term.
      * @param x the integration variable.
      * @return the singular term at x.
      */
-    virtual double Singular(double const& x) const { return 0 * x; };
+    virtual double Singular(double const& x) const { return 0 * x; }
 
     /**
      * @brief Virtual local term.
      * @param x the physical variable.
      * @return the local term at x.
      */
-    virtual double Local(double const& x) const { return 0 * x; };
+    virtual double Local(double const& x) const { return 0 * x; }
   };
 }

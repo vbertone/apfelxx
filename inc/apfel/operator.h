@@ -36,13 +36,6 @@ namespace apfel
      */
     Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
 
-    /**
-     * @brief Copy constructor with precomputed operator
-     * @param obj the input copy object
-     * @param op the precomputed operator
-     */
-    Operator(Operator const& obj);
-
     // operators
     Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
     Operator&    operator  = (Operator const& o);           //!< this  = Operator
@@ -60,7 +53,7 @@ namespace apfel
   private:
     Grid                   const& _grid;         //!< Grid on which to compute the operator
     Expression const*      const  _expr;         //!< Expression to be commuted into an operator
-    double                 const& _eps;          //!< Precision of the dgauss integration
+    double                        _eps;          //!< Precision of the dgauss integration
     vector<matrix<double>>        _Operator;     //!< Operator values.
 
     // Global variables

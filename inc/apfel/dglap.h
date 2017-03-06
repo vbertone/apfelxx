@@ -41,6 +41,9 @@ namespace apfel
 	  vector<double>                           const& Thresholds,
 	  int                                      const& nstep = 10);
 
+    /**
+     * @brief DGLAP
+     */
     DGLAP(function<Set<Operator>(int,double)>      const& SplittingFunctions,
 	  function<Set<Operator>(bool,int,double)> const& MatchingConditions,
 	  Set<Distribution>                        const& ObjRef,
@@ -75,9 +78,9 @@ namespace apfel
     int const& GetNumberOfSteps() const { return _nstep; }
 
   private:
-    function<Set<Operator>(int,double)>      const& _SplittingFunctions;
-    function<Set<Operator>(bool,int,double)> const& _MatchingConditions;
-    int                                      const  _nstep;
+    function<Set<Operator>(int,double)>      _SplittingFunctions;
+    function<Set<Operator>(bool,int,double)> _MatchingConditions;
+    int                               const  _nstep;
   };
 
 }

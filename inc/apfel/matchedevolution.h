@@ -38,7 +38,7 @@ namespace apfel
 
     /**
      * @brief The default constructor that takes the reference value of the object and the reference scale (assumes equal masses and thresholds).
-     * @param ObjRef reference object
+     * @param ObjRef reference objectc
      * @param MuRef reference scale
      * @param Masses vector with the heavy quark masses
      */
