@@ -61,17 +61,17 @@ class PDF: public Distribution
 {
 public:
   // Standard constructor
-  PDF(Grid const& gr, function<double(int,double)> const& inPDFs, int const& ipdf): Distribution(gr)
+  PDF(Grid const& gr, function<double(int,double)> const& InPDFsFunc, int const& ipdf): Distribution(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1) _distributionJointGrid.push_back(inPDFs(ipdf,ix));
+      if (ix < 1) _distributionJointGrid.push_back(InPDFsFunc(ipdf,ix));
       else        _distributionJointGrid.push_back(0);
 
     for (auto ig=0; ig<_grid.nGrids(); ig++)
       {
         vector<double> sg;
         for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          if (ix < 1) sg.push_back(inPDFs(ipdf,ix));
+          if (ix < 1) sg.push_back(InPDFsFunc(ipdf,ix));
           else        sg.push_back(0);
         _distributionSubGrid.push_back(sg);
       }
@@ -94,7 +94,7 @@ int main()
   AlphaQCD as{AlphaQCDRef, MuAlphaQCDRef, Masses, Thresholds, PerturbativeOrder};
 
   // Initial scale PDFs
-  function<double(int,double)> InPDFs = LHToyPDFs;
+  function<double(int,double)> InPDFsFunc = LHToyPDFs;
 
   // x-space grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}};
@@ -131,7 +131,7 @@ int main()
   // Allocate initial scale distributions
   unordered_map<int,Distribution> DistMap;
   for (int i = EvolutionBasis::GLUON; i <= EvolutionBasis::V35; i++)
-    DistMap.insert({i,PDF{g, InPDFs, i}});
+    DistMap.insert({i,PDF{g, InPDFsFunc, i}});
 
   // Compute numeber of active flavouts the the PDF initial scale and 
   // allocate set of initial distributions.
@@ -139,7 +139,7 @@ int main()
   for (auto const& v : Thresholds)
     if ( mu0 > v ) nf0++;
     else           break;
-  Set<Distribution> PDFs{basis.at(nf0), DistMap};
+  Set<Distribution> InPDFs{basis.at(nf0), DistMap};
 
   // Dgauss integration accuracy
   const double IntEps = 1e-5;
@@ -439,7 +439,7 @@ int main()
     }
 
   // Initialize DGLAP evolution
-  DGLAP EvolvedPDFs{SplittingFunctions, MatchingConditions, PDFs, mu0, Masses, Thresholds, nsteps};
+  DGLAP EvolvedPDFs{SplittingFunctions, MatchingConditions, InPDFs, mu0, Masses, Thresholds, nsteps};
 
   t.printTime(t.stop());
 
