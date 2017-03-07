@@ -11,7 +11,7 @@
 #include <apfel/operator.h>
 #include <apfel/timer.h>
 #include <apfel/tools.h>
-#include <apfel/alphaqcd.h>
+#include <apfel/gridalphaqcd.h>
 #include <apfel/set.h>
 #include <apfel/dglap.h>
 #include <apfel/evolutionbasis.h>
@@ -91,13 +91,13 @@ int main()
   // Coupling
   double AlphaQCDRef = 0.35;
   double MuAlphaQCDRef = mu0;
-  AlphaQCD as{AlphaQCDRef, MuAlphaQCDRef, Masses, Thresholds, PerturbativeOrder};
+  GridAlphaQCD as{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder, 50, 1, 1000, 3};
 
   // Initial scale PDFs
   function<double(int,double)> InPDFsFunc = LHToyPDFs;
 
   // x-space grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}};
+  const Grid g{{SubGrid{100,1e-5,3}, SubGrid{60,1e-1,3}, SubGrid{50,6e-1,3}, SubGrid{50,8e-1,3}}};
 
   // Initialize evolution according to the paramaters above
   Timer t;
@@ -118,9 +118,8 @@ int main()
   unordered_map<int,double> AlphaQCDThDown;
   for (auto nf = nfi; nf <= nff; nf++)
     {
-      const double eps = 1e-8;
-      AlphaQCDThDown.insert({nf,as.GetObject(Thresholds[nf-1])});
-      AlphaQCDThUp.insert({nf,as.GetObject(Thresholds[nf-1]+eps)});
+      AlphaQCDThDown.insert({nf,as.Evaluate(Thresholds[nf-1])});
+      AlphaQCDThUp.insert({nf,as.Evaluate(Thresholds[nf-1]+eps8)});
     }
 
   // Allocate convolution maps
@@ -407,7 +406,7 @@ int main()
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
 	{
-	  const auto cp = as.GetObject(mu) / FourPi;
+	  const auto cp = as.Evaluate(mu) / FourPi;
 	  return cp * SplittingsLO.at(nf);
 	};
       MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
@@ -419,7 +418,7 @@ int main()
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
 	{
-	  const auto cp = as.GetObject(mu) / FourPi;
+	  const auto cp = as.Evaluate(mu) / FourPi;
 	  return cp * ( SplittingsLO.at(nf) + cp * SplittingsNLO.at(nf) );
 	};
       MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
@@ -431,7 +430,7 @@ int main()
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
 	{
-	  const auto cp = as.GetObject(mu) / FourPi;
+	  const auto cp = as.Evaluate(mu) / FourPi;
 	  return cp * ( SplittingsLO.at(nf) + cp * ( SplittingsNLO.at(nf) + cp * SplittingsNNLO.at(nf) ) );
 	};
       MatchingConditions = [&] (bool const& Up, int const& nf, double const&) -> Set<Operator>
@@ -457,7 +456,7 @@ int main()
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
 		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
-  cout << "\nalpha_QCD(Q) = " << as.GetObject(mu) << endl;
+  cout << "\nalpha_QCD(Q) = " << as.Evaluate(mu) << endl;
   cout << "Standard evolution:" << endl;
   cout << "   x    "
        << "   u-ubar   "

@@ -77,8 +77,8 @@ namespace apfel
     // Displace slightly the values below and above the thresholds
     for (auto isg = 1; isg < (int) _nQg.size() - 1; isg++)
       {
-	_llQ2g[_nQg[isg]-1] *= 1 - eps12;
-	_llQ2g[_nQg[isg]]   *= 1 + eps12;
+	_llQ2g[_nQg[isg]-1] *= 1 - eps15;
+	_llQ2g[_nQg[isg]]   *= 1 + eps15;
       }
 
     // Now compute grid in Q.
@@ -90,14 +90,9 @@ namespace apfel
   double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& lnln2ql) const
   {
     // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless tau coincides
-    // with the a threshold index. In that case return zero.
+    // with a threshold index. In that case return zero.
     if (fabs(lnln2ql / _llQ2g[tau] - 1) < eps11)
-      {
-	if (find(_nQg.begin(), _nQg.end()-1, tau) != _nQg.end())
-	  return 0;
-	else
-	  return 1;
-      }
+      return 1;
 
     // Define the lower bound of the interpolation range.
     int bound = tau + tQ - _InterDegree;
