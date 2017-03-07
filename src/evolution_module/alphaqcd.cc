@@ -44,13 +44,11 @@ namespace apfel {
       return as0;
 
     // Numerical solution of the evolution equation with fourth-order Runge-Kutta.
+    const auto das = rk4([&](double const&, double const& as)->double{ return fbeta(as, _bQCD[nf-3]); });
+
     // Use "_nstep" steps for the evolution.
-    const auto lrrat = log(mu2/mu02);
-    const auto dlr   = lrrat / _nstep;
-    auto as          = as0 / FourPi;
-
-    const auto das = rk4([&](double const&, double const& y)->double{ return fbeta(y, _bQCD[nf-3]); });
-
+    auto as        = as0 / FourPi;
+    const auto dlr = log( mu2 / mu02 ) / _nstep;
     for (auto k = 0; k < _nstep; k++)
       as += das(0, as, dlr);
 

@@ -25,7 +25,7 @@ namespace apfel
     /**
      * @brief The map enums
      */
-    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG, PT3Q, PT3G, PT8Q, PT8G, PT15Q, PT15G, PT24Q, PT24G, PT35Q, PT35G};
+    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG, PT3Q, PT8Q, PT15Q, PT24Q, PT35Q, PT3G, PT8G, PT15G, PT24G, PT35G};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**

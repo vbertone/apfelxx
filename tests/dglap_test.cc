@@ -64,15 +64,19 @@ public:
   PDF(Grid const& gr, function<double(int,double)> const& InPDFsFunc, int const& ipdf): Distribution(gr)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1) _distributionJointGrid.push_back(InPDFsFunc(ipdf,ix));
-      else        _distributionJointGrid.push_back(0);
+      if (ix < 1)
+	_distributionJointGrid.push_back(InPDFsFunc(ipdf,ix));
+      else
+        _distributionJointGrid.push_back(0);
 
     for (auto ig=0; ig<_grid.nGrids(); ig++)
       {
         vector<double> sg;
         for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          if (ix < 1) sg.push_back(InPDFsFunc(ipdf,ix));
-          else        sg.push_back(0);
+          if (ix < 1)
+	    sg.push_back(InPDFsFunc(ipdf,ix));
+          else
+	    sg.push_back(0);
         _distributionSubGrid.push_back(sg);
       }
   }
@@ -91,7 +95,7 @@ int main()
   // Coupling
   double AlphaQCDRef = 0.35;
   double MuAlphaQCDRef = mu0;
-  GridAlphaQCD as{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder, 50, 1, 1000, 3};
+  GridAlphaQCD AlphaQCD{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder, 50, 1, 1000, 3};
 
   // Initial scale PDFs
   function<double(int,double)> InPDFsFunc = LHToyPDFs;
@@ -113,13 +117,16 @@ int main()
     if ( v <= 0 )
       nfi++;
 
+  // Define function for the expansion parameter
+  auto as = [&] (double const& mu) -> double{ return AlphaQCD.Evaluate(mu) / FourPi; };
+
   // Compute AlphaQCD above and below the thresholds
-  unordered_map<int,double> AlphaQCDThUp;
-  unordered_map<int,double> AlphaQCDThDown;
+  unordered_map<int,double> asThUp;
+  unordered_map<int,double> asThDown;
   for (auto nf = nfi; nf <= nff; nf++)
     {
-      AlphaQCDThDown.insert({nf,as.Evaluate(Thresholds[nf-1])});
-      AlphaQCDThUp.insert({nf,as.Evaluate(Thresholds[nf-1]+eps8)});
+      asThDown.insert({nf,as(Thresholds[nf-1])});
+      asThUp.insert({nf,as(Thresholds[nf-1]+eps8)});
     }
 
   // Allocate convolution maps
@@ -136,8 +143,10 @@ int main()
   // allocate set of initial distributions.
   int nf0 = 0;
   for (auto const& v : Thresholds)
-    if ( mu0 > v ) nf0++;
-    else           break;
+    if (mu0 > v)
+      nf0++;
+    else
+      break;
   Set<Distribution> InPDFs{basis.at(nf0), DistMap};
 
   // Dgauss integration accuracy
@@ -189,16 +198,10 @@ int main()
       OM.insert({EvolutionBasis::PQG,   O0qgnf});
       OM.insert({EvolutionBasis::PGQ,   O0gq});
       OM.insert({EvolutionBasis::PGG,   O0gg});
-      OM.insert({EvolutionBasis::PT3Q,  O0ns});
-      OM.insert({EvolutionBasis::PT3G,  O0qgnf});
-      OM.insert({EvolutionBasis::PT8Q,  O0ns});
-      OM.insert({EvolutionBasis::PT8G,  O0qgnf});
-      OM.insert({EvolutionBasis::PT15Q, O0ns});
-      OM.insert({EvolutionBasis::PT15G, O0qgnf});
-      OM.insert({EvolutionBasis::PT24Q, O0ns});
-      OM.insert({EvolutionBasis::PT24G, O0qgnf});
-      OM.insert({EvolutionBasis::PT35Q, O0ns});
-      OM.insert({EvolutionBasis::PT35G, O0qgnf});
+      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
+	OM.insert({i, O0ns});
+      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
+	OM.insert({i, O0qgnf});
       OpMapLO.insert({nf,OM});
     }
 
@@ -222,16 +225,10 @@ int main()
       OM.insert({EvolutionBasis::PQG,   O1qg});
       OM.insert({EvolutionBasis::PGQ,   O1gq});
       OM.insert({EvolutionBasis::PGG,   O1gg});
-      OM.insert({EvolutionBasis::PT3Q,  O1qq});
-      OM.insert({EvolutionBasis::PT3G,  O1qg});
-      OM.insert({EvolutionBasis::PT8Q,  O1qq});
-      OM.insert({EvolutionBasis::PT8G,  O1qg});
-      OM.insert({EvolutionBasis::PT15Q, O1qq});
-      OM.insert({EvolutionBasis::PT15G, O1qg});
-      OM.insert({EvolutionBasis::PT24Q, O1qq});
-      OM.insert({EvolutionBasis::PT24G, O1qg});
-      OM.insert({EvolutionBasis::PT35Q, O1qq});
-      OM.insert({EvolutionBasis::PT35G, O1qg});
+      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
+	OM.insert({i, O1qq});
+      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
+	OM.insert({i, O1qg});
       OpMapNLO.insert({nf,OM});
     }
 
@@ -254,97 +251,22 @@ int main()
       OM.insert({EvolutionBasis::PQG,  AS2Hg});
       OM.insert({EvolutionBasis::PGQ,  AS2gqH});
       OM.insert({EvolutionBasis::PGG,  AS2ggH});
-      if ( nf == 0 )
-	{
-	  OM.insert({EvolutionBasis::PT3Q,  AS2qqH});
-	  OM.insert({EvolutionBasis::PT3G,  AS2Hg});
-	  OM.insert({EvolutionBasis::PT8Q,  AS2qqH});
-	  OM.insert({EvolutionBasis::PT8G,  AS2Hg});
-	  OM.insert({EvolutionBasis::PT15Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT15G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT24Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT24G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT35Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT35G, AS2Hg});
-	}
-      else if ( nf == 1 )
-	{
-	  OM.insert({EvolutionBasis::PT8Q,  ANS2qqH - APS2Hq});
-	  OM.insert({EvolutionBasis::PT8G,  -1 * AS2Hg});
-	  OM.insert({EvolutionBasis::PT8Q,  AS2qqH});
-	  OM.insert({EvolutionBasis::PT8G,  AS2Hg});
-	  OM.insert({EvolutionBasis::PT15Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT15G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT24Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT24G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT35Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT35G, AS2Hg});
-	}
-      else if ( nf == 2 )
-	{
-	  OM.insert({EvolutionBasis::PT3Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT3G,  Zero});
-	  OM.insert({EvolutionBasis::PT8Q,  ANS2qqH - 2 * APS2Hq});
-	  OM.insert({EvolutionBasis::PT8G,  -2 * AS2Hg});
-	  OM.insert({EvolutionBasis::PT15Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT15G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT24Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT24G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT35Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT35G, AS2Hg});
-	}
-      else if ( nf == 3 )
-	{
-	  OM.insert({EvolutionBasis::PT3Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT3G,  Zero});
-	  OM.insert({EvolutionBasis::PT8Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT8G,  Zero});
-	  OM.insert({EvolutionBasis::PT15Q, ANS2qqH - 3 * APS2Hq});
-	  OM.insert({EvolutionBasis::PT15G, -3 * AS2Hg});
-	  OM.insert({EvolutionBasis::PT24Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT24G, AS2Hg});
-	  OM.insert({EvolutionBasis::PT35Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT35G, AS2Hg});
-	}
-      else if ( nf == 4 )
-	{
-	  OM.insert({EvolutionBasis::PT3Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT3G,  Zero});
-	  OM.insert({EvolutionBasis::PT8Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT8G,  Zero});
-	  OM.insert({EvolutionBasis::PT15Q, ANS2qqH});
-	  OM.insert({EvolutionBasis::PT15G, Zero});
-	  OM.insert({EvolutionBasis::PT24Q, ANS2qqH - 4 * APS2Hq});
-	  OM.insert({EvolutionBasis::PT24G, - 4 * AS2Hg});
-	  OM.insert({EvolutionBasis::PT35Q, AS2qqH});
-	  OM.insert({EvolutionBasis::PT35G, AS2Hg});
-	}
-      else if ( nf == 5 )
-	{
-	  OM.insert({EvolutionBasis::PT3Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT3G,  Zero});
-	  OM.insert({EvolutionBasis::PT8Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT8G,  Zero});
-	  OM.insert({EvolutionBasis::PT15Q, ANS2qqH});
-	  OM.insert({EvolutionBasis::PT15G, Zero});
-	  OM.insert({EvolutionBasis::PT24Q, ANS2qqH});
-	  OM.insert({EvolutionBasis::PT24G, Zero});
-	  OM.insert({EvolutionBasis::PT35Q, ANS2qqH - 5 * APS2Hq});
-	  OM.insert({EvolutionBasis::PT35G, -5 * AS2Hg});
-	}
-      else
-	{
-	  OM.insert({EvolutionBasis::PT3Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT3G,  Zero});
-	  OM.insert({EvolutionBasis::PT8Q,  ANS2qqH});
-	  OM.insert({EvolutionBasis::PT8G,  Zero});
-	  OM.insert({EvolutionBasis::PT15Q, ANS2qqH});
-	  OM.insert({EvolutionBasis::PT15G, Zero});
-	  OM.insert({EvolutionBasis::PT24Q, ANS2qqH});
-	  OM.insert({EvolutionBasis::PT24G, Zero});
-	  OM.insert({EvolutionBasis::PT35Q, ANS2qqH});
-	  OM.insert({EvolutionBasis::PT35G, Zero});
-	}
+      const Operator AS2TqH = ANS2qqH - nf * APS2Hq;
+      const Operator AS2Tg  = - nf * AS2Hg;
+      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
+	if (i > EvolutionBasis::PT3Q + nf - 1)
+	  OM.insert({i, AS2qqH});
+	else if (i == EvolutionBasis::PT3Q + nf - 1)
+	  OM.insert({i, AS2TqH});
+	else
+	  OM.insert({i, Zero});
+      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
+	if (i > EvolutionBasis::PT3G + nf - 1)
+	  OM.insert({i, AS2Hg});
+	else if (i == EvolutionBasis::PT3G + nf - 1)
+	  OM.insert({i, AS2Tg});
+	else
+	  OM.insert({i, Zero});
       MatchNNLO.insert({nf,OM});
     }
 
@@ -370,75 +292,52 @@ int main()
       OM.insert({EvolutionBasis::PQG,   O2qg});
       OM.insert({EvolutionBasis::PGQ,   O2gq});
       OM.insert({EvolutionBasis::PGG,   O2gg});
-      OM.insert({EvolutionBasis::PT3Q,  O2qq});
-      OM.insert({EvolutionBasis::PT3G,  O2qg});
-      OM.insert({EvolutionBasis::PT8Q,  O2qq});
-      OM.insert({EvolutionBasis::PT8G,  O2qg});
-      OM.insert({EvolutionBasis::PT15Q, O2qq});
-      OM.insert({EvolutionBasis::PT15G, O2qg});
-      OM.insert({EvolutionBasis::PT24Q, O2qq});
-      OM.insert({EvolutionBasis::PT24G, O2qg});
-      OM.insert({EvolutionBasis::PT35Q, O2qq});
-      OM.insert({EvolutionBasis::PT35G, O2qg});
+      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
+	OM.insert({i, O2qq});
+      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
+	OM.insert({i, O2qg});
       OpMapNNLO.insert({nf,OM});
     }
 
   // Allocate set of operators
-  unordered_map<int,Set<Operator>> SplittingsLO;
-  unordered_map<int,Set<Operator>> SplittingsNLO;
-  unordered_map<int,Set<Operator>> SplittingsNNLO;
-  unordered_map<int,Set<Operator>> MatchingLO;
-  unordered_map<int,Set<Operator>> MatchingNNLO;
+  unordered_map<int,Set<Operator>> P0;
+  unordered_map<int,Set<Operator>> P1;
+  unordered_map<int,Set<Operator>> P2;
+  unordered_map<int,Set<Operator>> M0;
+  unordered_map<int,Set<Operator>> M2;
   for (int nf = nfi; nf <= nff; nf++)
     {
-      SplittingsLO.insert({nf,Set<Operator>{basis.at(nf), OpMapLO.at(nf)}});
-      SplittingsNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNLO.at(nf)}});
-      SplittingsNNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNNLO.at(nf)}});
-      MatchingLO.insert({nf,Set<Operator>{basis.at(nf), MatchLO}});
-      MatchingNNLO.insert({nf,Set<Operator>{basis.at(nf), MatchNNLO.at(nf)}});
+      P0.insert({nf,Set<Operator>{basis.at(nf), OpMapLO.at(nf)}});
+      P1.insert({nf,Set<Operator>{basis.at(nf), OpMapNLO.at(nf)}});
+      P2.insert({nf,Set<Operator>{basis.at(nf), OpMapNNLO.at(nf)}});
+      M0.insert({nf,Set<Operator>{basis.at(nf), MatchLO}});
+      M2.insert({nf,Set<Operator>{basis.at(nf), MatchNNLO.at(nf)}});
     }
 
   // Create splitting functions and matching conditions lambda functions
   // according to the requested perturbative order.
-  function<Set<Operator>(int,double)> SplittingFunctions;
+  function<Set<Operator>(int,double)>      SplittingFunctions;
   function<Set<Operator>(bool,int,double)> MatchingConditions;
   if (PerturbativeOrder == 0)
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
-	{
-	  const auto cp = as.Evaluate(mu) / FourPi;
-	  return cp * SplittingsLO.at(nf);
-	};
+	{ const auto cp = as(mu); return cp * P0.at(nf); };
       MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
-	{
-	  return MatchingLO.at(nf);
-	};
+	{ return M0.at(nf); };
     }
   else if (PerturbativeOrder == 1)
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
-	{
-	  const auto cp = as.Evaluate(mu) / FourPi;
-	  return cp * ( SplittingsLO.at(nf) + cp * SplittingsNLO.at(nf) );
-	};
+	{ const auto cp = as(mu); return cp * ( P0.at(nf) + cp * P1.at(nf) ); };
       MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
-	{
-	  return MatchingLO.at(nf);
-	};
+	{ return M0.at(nf); };
     }
   else if (PerturbativeOrder == 2)
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
-	{
-	  const auto cp = as.Evaluate(mu) / FourPi;
-	  return cp * ( SplittingsLO.at(nf) + cp * ( SplittingsNLO.at(nf) + cp * SplittingsNNLO.at(nf) ) );
-	};
+	{ const auto cp = as(mu); return cp * ( P0.at(nf) + cp * ( P1.at(nf) + cp * P2.at(nf) ) ); };
       MatchingConditions = [&] (bool const& Up, int const& nf, double const&) -> Set<Operator>
-	{
-	  const auto cp = AlphaQCDThUp.at(nf+1) / FourPi;
-	  const int sgn = ( Up ? 1 : -1);
-	  return MatchingLO.at(nf) + sgn * cp * cp * MatchingNNLO.at(nf);
-	};
+	{ const auto cp = asThUp.at(nf+1); return M0.at(nf) + ( Up ? 1 : -1) * cp * cp * M2.at(nf); };
     }
 
   // Initialize DGLAP evolution
@@ -456,7 +355,7 @@ int main()
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
 		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
-  cout << "\nalpha_QCD(Q) = " << as.Evaluate(mu) << endl;
+  cout << "\nalpha_QCD(Q) = " << AlphaQCD.Evaluate(mu) << endl;
   cout << "Standard evolution:" << endl;
   cout << "   x    "
        << "   u-ubar   "

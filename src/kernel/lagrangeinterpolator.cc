@@ -36,19 +36,17 @@ namespace apfel {
     if (id > beta) bound = 0;
     if (lnx < lxsg[bound] || lnx >= lxsg[beta+1]) return 0;
 
-    // Initialize interpolant
-    double w_int = 1;
-
     // Find the the neighbors of "x" on the grid
     int j;
     for (j = 0; j <= beta-bound; j++)
-      if (lnx >= lxsg[beta-j] && lnx < lxsg[beta-j+1])
+      if (lnx >= lxsg[beta-j])
 	break;
 
     // Compute the interpolant
-    for (auto delta = 0; delta <= id; delta++)
-      if(delta != j)
-	w_int *= ( lnx - lxsg[beta-j+delta] ) / ( lxsg[beta] - lxsg[beta-j+delta] );
+    double w_int = 1;
+    for (auto delta = beta-j; delta <= beta-j+id; delta++)
+      if (delta != beta)
+        w_int *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
 
     return w_int;
   }

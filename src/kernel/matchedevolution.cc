@@ -81,7 +81,7 @@ namespace apfel
     for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
 	vobj.push_back(MatchObject(sgn, inf, EvolveObject(inf, mui2, muf2, vobj.back())));
-	mui2 = muf2 + eps8; // Add "eps8" to make sure to be above the threshold
+	mui2 = muf2 + eps8;                    // Add "eps8" to make sure to be above the threshold
 	muf2 = _Thresholds2[min(inf+1,nff-1)];
       }
     return EvolveObject(nff, mui2, mu2, vobj.back());
