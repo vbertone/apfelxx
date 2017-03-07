@@ -87,17 +87,90 @@ int main()
   // Allocate grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}};
 
-  // LO Matching conditions
+  // ===============================================================
+  // Allocate LO Matching conditions
+  unordered_map<int,Operator> MatchLO;
   const Operator Id{g, Identity{}};
   const Operator Zero{g, Null{}};
-  unordered_map<int,Operator> Match;
-  Match.insert({EvolutionBasis::PNSP,Id});
-  Match.insert({EvolutionBasis::PNSM,Id});
-  Match.insert({EvolutionBasis::PNSV,Id});
-  Match.insert({EvolutionBasis::PQQ, Id});
-  Match.insert({EvolutionBasis::PQG, Zero});
-  Match.insert({EvolutionBasis::PGQ, Zero});
-  Match.insert({EvolutionBasis::PGG, Id});
+  MatchLO.insert({EvolutionBasis::PNSP,Id});
+  MatchLO.insert({EvolutionBasis::PNSM,Id});
+  MatchLO.insert({EvolutionBasis::PNSV,Id});
+  MatchLO.insert({EvolutionBasis::PQQ, Id});
+  MatchLO.insert({EvolutionBasis::PQG, Zero});
+  MatchLO.insert({EvolutionBasis::PGQ, Zero});
+  MatchLO.insert({EvolutionBasis::PGG, Id});
+  MatchLO.insert({EvolutionBasis::PT3Q, Id});
+  MatchLO.insert({EvolutionBasis::PT3G, Zero});
+  MatchLO.insert({EvolutionBasis::PT8Q, Id});
+  MatchLO.insert({EvolutionBasis::PT8G, Zero});
+  MatchLO.insert({EvolutionBasis::PT15Q,Id});
+  MatchLO.insert({EvolutionBasis::PT15G,Zero});
+  MatchLO.insert({EvolutionBasis::PT24Q,Id});
+  MatchLO.insert({EvolutionBasis::PT24G,Zero});
+  MatchLO.insert({EvolutionBasis::PT35Q,Id});
+  MatchLO.insert({EvolutionBasis::PT35G,Zero});
+
+  // ===============================================================
+  // Allocate NNLO Matching conditions
+  unordered_map<int,unordered_map<int,Operator>> MatchNNLO;
+  const Operator APS2Hq{g, APS2Hq_0{}};
+  const Operator ANS2qqH{g, ANS2qqH_0{}};
+  const Operator AS2qqH = ANS2qqH + APS2Hq;
+  const Operator AS2Hg{g, AS2Hg_0{}};
+  const Operator AS2gqH{g, AS2gqH_0{}};
+  const Operator AS2ggH{g, AS2ggH_0{}};
+  for (int nf = 3; nf <= 6; nf++)
+    {
+      unordered_map<int,Operator> OM;
+      OM.insert({EvolutionBasis::PNSP, ANS2qqH});
+      OM.insert({EvolutionBasis::PNSM, ANS2qqH});
+      OM.insert({EvolutionBasis::PNSV, ANS2qqH});
+      OM.insert({EvolutionBasis::PQQ,  AS2qqH});
+      OM.insert({EvolutionBasis::PQG,  AS2Hg});
+      OM.insert({EvolutionBasis::PGQ,  AS2gqH});
+      OM.insert({EvolutionBasis::PGG,  AS2ggH});
+      OM.insert({EvolutionBasis::PT3Q, ANS2qqH});
+      OM.insert({EvolutionBasis::PT3G, Zero});
+      OM.insert({EvolutionBasis::PT8Q, ANS2qqH});
+      OM.insert({EvolutionBasis::PT8G, Zero});
+      if ( nf == 3 )
+	{
+	  OM.insert({EvolutionBasis::PT15Q,ANS2qqH-3*APS2Hq});
+	  OM.insert({EvolutionBasis::PT15G,-3*AS2Hg});
+	  OM.insert({EvolutionBasis::PT24Q,AS2qqH});
+	  OM.insert({EvolutionBasis::PT24G,AS2Hg});
+	  OM.insert({EvolutionBasis::PT35Q,AS2qqH});
+	  OM.insert({EvolutionBasis::PT35G,AS2Hg});
+	}
+      else if ( nf == 4 )
+	{
+	  OM.insert({EvolutionBasis::PT15Q,ANS2qqH});
+	  OM.insert({EvolutionBasis::PT15G,Zero});
+	  OM.insert({EvolutionBasis::PT24Q,ANS2qqH-4*APS2Hq});
+	  OM.insert({EvolutionBasis::PT24G,-4*AS2Hg});
+	  OM.insert({EvolutionBasis::PT35Q,AS2qqH});
+	  OM.insert({EvolutionBasis::PT35G,AS2Hg});
+	}
+      else if ( nf == 5 )
+	{
+	  OM.insert({EvolutionBasis::PT15Q,ANS2qqH});
+	  OM.insert({EvolutionBasis::PT15G,Zero});
+	  OM.insert({EvolutionBasis::PT24Q,ANS2qqH});
+	  OM.insert({EvolutionBasis::PT24G,Zero});
+	  OM.insert({EvolutionBasis::PT35Q,ANS2qqH-5*APS2Hq});
+	  OM.insert({EvolutionBasis::PT35G,-5*AS2Hg});
+	}
+      else
+	{
+	  OM.insert({EvolutionBasis::PT15Q,ANS2qqH});
+	  OM.insert({EvolutionBasis::PT15G,Zero});
+	  OM.insert({EvolutionBasis::PT24Q,ANS2qqH});
+	  OM.insert({EvolutionBasis::PT24G,Zero});
+	  OM.insert({EvolutionBasis::PT35Q,ANS2qqH});
+	  OM.insert({EvolutionBasis::PT35G,Zero});
+	}
+      MatchNNLO.insert({nf,OM});
+    }
 
   // ===============================================================
   // Allocate LO splitting functions operators
@@ -110,13 +183,23 @@ int main()
       const Operator O0gg{g, P0gg{nf}};
       const Operator O0qgnf = nf * O0qg;
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP,O0ns});
-      OM.insert({EvolutionBasis::PNSM,O0ns});
-      OM.insert({EvolutionBasis::PNSV,O0ns});
-      OM.insert({EvolutionBasis::PQQ, O0ns});
-      OM.insert({EvolutionBasis::PQG, O0qgnf});
-      OM.insert({EvolutionBasis::PGQ, O0gq});
-      OM.insert({EvolutionBasis::PGG, O0gg});
+      OM.insert({EvolutionBasis::PNSP, O0ns});
+      OM.insert({EvolutionBasis::PNSM, O0ns});
+      OM.insert({EvolutionBasis::PNSV, O0ns});
+      OM.insert({EvolutionBasis::PQQ,  O0ns});
+      OM.insert({EvolutionBasis::PQG,  O0qgnf});
+      OM.insert({EvolutionBasis::PGQ,  O0gq});
+      OM.insert({EvolutionBasis::PGG,  O0gg});
+      OM.insert({EvolutionBasis::PT3Q, O0ns});
+      OM.insert({EvolutionBasis::PT3G, O0qgnf});
+      OM.insert({EvolutionBasis::PT8Q, O0ns});
+      OM.insert({EvolutionBasis::PT8G, O0qgnf});
+      OM.insert({EvolutionBasis::PT15Q,O0ns});
+      OM.insert({EvolutionBasis::PT15G,O0qgnf});
+      OM.insert({EvolutionBasis::PT24Q,O0ns});
+      OM.insert({EvolutionBasis::PT24G,O0qgnf});
+      OM.insert({EvolutionBasis::PT35Q,O0ns});
+      OM.insert({EvolutionBasis::PT35G,O0qgnf});
       OpMapLO.insert({nf,OM});
     }
 
@@ -133,13 +216,23 @@ int main()
       const Operator O1gq{g, P1gq{nf}};
       const Operator O1gg{g, P1gg{nf}};
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP,O1nsp});
-      OM.insert({EvolutionBasis::PNSM,O1nsm});
-      OM.insert({EvolutionBasis::PNSV,O1nsm});
-      OM.insert({EvolutionBasis::PQQ, O1qq});
-      OM.insert({EvolutionBasis::PQG, O1qg});
-      OM.insert({EvolutionBasis::PGQ, O1gq});
-      OM.insert({EvolutionBasis::PGG, O1gg});
+      OM.insert({EvolutionBasis::PNSP, O1nsp});
+      OM.insert({EvolutionBasis::PNSM, O1nsm});
+      OM.insert({EvolutionBasis::PNSV, O1nsm});
+      OM.insert({EvolutionBasis::PQQ,  O1qq});
+      OM.insert({EvolutionBasis::PQG,  O1qg});
+      OM.insert({EvolutionBasis::PGQ,  O1gq});
+      OM.insert({EvolutionBasis::PGG,  O1gg});
+      OM.insert({EvolutionBasis::PT3Q, O1qq});
+      OM.insert({EvolutionBasis::PT3G, O1qg});
+      OM.insert({EvolutionBasis::PT8Q, O1qq});
+      OM.insert({EvolutionBasis::PT8G, O1qg});
+      OM.insert({EvolutionBasis::PT15Q,O1qq});
+      OM.insert({EvolutionBasis::PT15G,O1qg});
+      OM.insert({EvolutionBasis::PT24Q,O1qq});
+      OM.insert({EvolutionBasis::PT24G,O1qg});
+      OM.insert({EvolutionBasis::PT35Q,O1qq});
+      OM.insert({EvolutionBasis::PT35G,O1qg});
       OpMapNLO.insert({nf,OM});
     }
 
@@ -158,13 +251,23 @@ int main()
       const Operator O2gq{g, P2gq{nf}};
       const Operator O2gg{g, P2gg{nf}};
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP,O2nsp});
-      OM.insert({EvolutionBasis::PNSM,O2nsm});
-      OM.insert({EvolutionBasis::PNSV,O2nsv});
-      OM.insert({EvolutionBasis::PQQ, O2qq});
-      OM.insert({EvolutionBasis::PQG, O2qg});
-      OM.insert({EvolutionBasis::PGQ, O2gq});
-      OM.insert({EvolutionBasis::PGG, O2gg});
+      OM.insert({EvolutionBasis::PNSP, O2nsp});
+      OM.insert({EvolutionBasis::PNSM, O2nsm});
+      OM.insert({EvolutionBasis::PNSV, O2nsv});
+      OM.insert({EvolutionBasis::PQQ,  O2qq});
+      OM.insert({EvolutionBasis::PQG,  O2qg});
+      OM.insert({EvolutionBasis::PGQ,  O2gq});
+      OM.insert({EvolutionBasis::PGG,  O2gg});
+      OM.insert({EvolutionBasis::PT3Q, O2qq});
+      OM.insert({EvolutionBasis::PT3G, O2qg});
+      OM.insert({EvolutionBasis::PT8Q, O2qq});
+      OM.insert({EvolutionBasis::PT8G, O2qg});
+      OM.insert({EvolutionBasis::PT15Q,O2qq});
+      OM.insert({EvolutionBasis::PT15G,O2qg});
+      OM.insert({EvolutionBasis::PT24Q,O2qq});
+      OM.insert({EvolutionBasis::PT24G,O2qg});
+      OM.insert({EvolutionBasis::PT35Q,O2qq});
+      OM.insert({EvolutionBasis::PT35G,O2qg});
       OpMapNNLO.insert({nf,OM});
     }
 
@@ -182,31 +285,42 @@ int main()
   unordered_map<int,Set<Operator>> SplittingsLO;
   unordered_map<int,Set<Operator>> SplittingsNLO;
   unordered_map<int,Set<Operator>> SplittingsNNLO;
-  unordered_map<int,Set<Operator>> Matching;
+  unordered_map<int,Set<Operator>> MatchingLO;
+  unordered_map<int,Set<Operator>> MatchingNNLO;
   for (int nf = 3; nf <= 6; nf++)
     {
       SplittingsLO.insert({nf,Set<Operator>{basis.at(nf), OpMapLO.at(nf)}});
       SplittingsNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNLO.at(nf)}});
       SplittingsNNLO.insert({nf,Set<Operator>{basis.at(nf), OpMapNNLO.at(nf)}});
-      Matching.insert({nf,Set<Operator>{basis.at(nf), Match}});
+      MatchingLO.insert({nf,Set<Operator>{basis.at(nf), MatchLO}});
+      MatchingNNLO.insert({nf,Set<Operator>{basis.at(nf), MatchNNLO.at(nf)}});
     }
 
   // Allocate set of initial distributions
   Set<Distribution> PDFs{basis.at(3), DistMap};
 
   // Coupling
-  AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 1};
+  AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
+
+  // Compute alpha_s right above the thresholds
+  const auto eps = 1e-8;
+  const double asth[] = {as.GetObject(sqrt(2)+eps),as.GetObject(4.5+eps),as.GetObject(175+eps)};
 
   int nsteps = 10;
   DGLAP evolution{
-    [&] (int const& nf, double const& mu) -> Set<Operator> {
-      const double cp = as.GetObject(mu) / FourPi;
-      auto LO   = cp * SplittingsLO.at(nf);
-      auto NLO  = cp * cp * SplittingsNLO.at(nf);
-      auto NNLO = cp * cp * cp * SplittingsNNLO.at(nf);
+    [&] (int const& nf, double const& mu) -> Set<Operator>{
+      const auto cp = as.GetObject(mu) / FourPi;
+      const auto LO   = cp * SplittingsLO.at(nf);
+      const auto NLO  = cp * cp * SplittingsNLO.at(nf);
+      const auto NNLO = cp * cp * cp * SplittingsNNLO.at(nf);
       return LO + NLO + NNLO;
     },
-      [&] (bool const&, int const& nf, double const&) -> Set<Operator>{ return Matching.at(nf); },
+      [&] (bool const&, int const& nf, double const&) -> Set<Operator>{
+	const auto cp = asth[nf-3] / FourPi;
+	const auto LO = MatchingLO.at(nf);
+	const auto NNLO = cp * cp * MatchingNNLO.at(nf);
+	return LO + NNLO;
+      },
 	PDFs, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, nsteps};
   t.printTime(t.stop());
 

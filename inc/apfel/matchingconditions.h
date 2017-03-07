@@ -144,10 +144,10 @@ namespace apfel
   };
 
   // Constant term of eq (B.4)
-  class ANS2qqH: public Expression
+  class ANS2qqH_0: public Expression
   {
   public:
-  ANS2qqH(): Expression() { }
+  ANS2qqH_0(): Expression() { }
     double Regular(double const& x) const
     {
       const auto x2    = x * x;
@@ -172,10 +172,10 @@ namespace apfel
   };
 
   // Constant term of eq (B.5)
-  class AS2gqH: public Expression
+  class AS2gqH_0: public Expression
   {
   public:
-  AS2gqH(): Expression() { }
+  AS2gqH_0(): Expression() { }
     double Regular(double const& x) const
     {
       const auto ln1mx = log(1 - x);
@@ -188,10 +188,10 @@ namespace apfel
   };
 
   // Constant term of eq (B.7)
-  class AS2ggH: public Expression
+  class AS2ggH_0: public Expression
   {
   public:
-  AS2ggH(): Expression() { }
+  AS2ggH_0(): Expression() { }
     double Regular(double const& x) const
     {
       const auto x2    = x * x;

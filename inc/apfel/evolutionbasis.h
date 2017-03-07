@@ -25,7 +25,7 @@ namespace apfel
     /**
      * @brief The map enums
      */
-    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG};
+    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG, PT3Q, PT3G, PT8Q, PT8G, PT15Q, PT15G, PT24Q, PT24G, PT35Q, PT35G};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
@@ -51,7 +51,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T3] = _rules[SIGMA];
+	  _rules[T3] = { {PT3G, GLUON, +1}, {PT3Q, SIGMA, +1} };
 	  _rules[V3] = _rules[VALENCE];
 	}
 
@@ -63,7 +63,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T8] = _rules[SIGMA];
+	  _rules[T8] = { {PT8G, GLUON, +1}, {PT8Q, SIGMA, +1} };
 	  _rules[V8] = _rules[VALENCE];
 	}
 
@@ -75,7 +75,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T15] = _rules[SIGMA];
+	  _rules[T15] = { {PT15G, GLUON, +1}, {PT15Q, SIGMA, +1} };
 	  _rules[V15] = _rules[VALENCE];
 	}
 
@@ -87,7 +87,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T24] = _rules[SIGMA];
+	  _rules[T24] = { {PT24G, GLUON, +1}, {PT24Q, SIGMA, +1} };
 	  _rules[V24] = _rules[VALENCE];
 	}
 
@@ -99,7 +99,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T35] = _rules[SIGMA];
+	  _rules[T35] = { {PT35G, GLUON, +1}, {PT35Q, SIGMA, +1} };
 	  _rules[V35] = _rules[VALENCE];
 	}
     };
