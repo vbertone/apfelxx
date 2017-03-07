@@ -144,7 +144,11 @@ int main()
   // Dgauss integration accuracy
   const double IntEps = 1e-5;
 
-  // Allocate needed operators (matching conditions and splitting functions)
+  // Allocate needed operators (matching conditions and splitting functions).
+  // By now the code is fast enough to precompute everything at all available
+  // perturbative orders and the current perturbative order is accounted for
+  // only when the actual splitting functions and matching conditions (lambda)
+  // functions are defined.
   // ===============================================================
   // LO Matching conditions
   unordered_map<int,Operator> MatchLO;
@@ -395,7 +399,7 @@ int main()
       MatchingNNLO.insert({nf,Set<Operator>{basis.at(nf), MatchNNLO.at(nf)}});
     }
 
-  // Create splitting function and matching conditions lambda functions
+  // Create splitting functions and matching conditions lambda functions
   // according to the requested perturbative order.
   function<Set<Operator>(int,double)> SplittingFunctions;
   function<Set<Operator>(bool,int,double)> MatchingConditions;
