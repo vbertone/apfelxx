@@ -430,10 +430,11 @@ int main()
 	  const auto cp = as.GetObject(mu) / FourPi;
 	  return cp * ( SplittingsLO.at(nf) + cp * ( SplittingsNLO.at(nf) + cp * SplittingsNNLO.at(nf) ) );
 	};
-      MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
+      MatchingConditions = [&] (bool const& Up, int const& nf, double const&) -> Set<Operator>
 	{
 	  const auto cp = AlphaQCDThUp.at(nf+1) / FourPi;
-	  return MatchingLO.at(nf) + cp * cp * MatchingNNLO.at(nf);
+	  const int sgn = ( Up ? 1 : -1);
+	  return MatchingLO.at(nf) + sgn * cp * cp * MatchingNNLO.at(nf);
 	};
     }
 
