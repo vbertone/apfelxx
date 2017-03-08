@@ -20,9 +20,8 @@ namespace apfel {
 		     vector<double> const& Thresholds,
 		     int            const& pt,
 		     int            const& nstep):
-    MatchedEvolution(AlphaRef, MuRef, Masses, Thresholds),
-    _pt(pt),
-    _nstep(nstep)
+    MatchedEvolution(AlphaRef, MuRef, Masses, Thresholds, nstep),
+    _pt(pt)
   {
     // Initialize all coefficients of the QCD beta function for all numbers of flavours
     for (auto ipt = 0; ipt <= 2; ipt++)

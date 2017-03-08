@@ -98,6 +98,11 @@ namespace apfel
     vector<double> const& GetMasses() const { return _Masses; }
 
     /**
+     * @brief Function that returns the number of steps.
+     */
+    int const& GetNumberOfSteps()     const { return _nsteps; }
+
+    /**
      * @brief Function that sets the reference value of the object
      * @param ObjRef
      */
@@ -115,7 +120,7 @@ namespace apfel
     double         _LogMuRef2;      //<! Log of the squared reference scale of the object
     vector<double> _Masses;         //<! Values of the masses
     vector<double> _Thresholds;     //<! Values of the thresholds
-    double         _nsteps;         //<! Number of steps of the RK algorithm
+    int            _nsteps;         //<! Number of steps of the RK algorithm
     vector<double> _Thresholds2;    //<! Squared quark threholds
     vector<double> _LogThresholds2; //<! Log of the squared quark threholds
     vector<double> _LogTh2M2;       //<! Log of the squared threholds over squared masses

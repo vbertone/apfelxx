@@ -25,7 +25,7 @@ namespace apfel
   {
   public:
 
-    AlphaQCD() =  delete;
+    AlphaQCD() = delete;
 
     /**
      * @brief AlphaQCD default constructor.
@@ -84,14 +84,8 @@ namespace apfel
      */
     int const& GetPerturbativeOrder() const { return _pt; }
 
-    /**
-     * @brief Function that returns the number of steps.
-     */
-    int const& GetNumberOfSteps()     const { return _nstep; }
-
   private:
     int                      const _pt;
-    int                      const _nstep;
     array<array<double,3>,4>       _bQCD;
   };
 }
