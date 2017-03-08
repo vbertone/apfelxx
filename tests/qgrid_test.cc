@@ -39,7 +39,7 @@ int main()
   cout << "Q       \t\tDirect  \t\tInterpolated\t\tRatio" << endl;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
-      cout << Q << "\t\t" << as.GetObject(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as.GetObject(Q) / gas.Evaluate(Q) << endl;
+      cout << Q << "\t\t" << as.Evaluate(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as.Evaluate(Q) / gas.Evaluate(Q) << endl;
       Q *=Step;
     }
 
@@ -53,7 +53,7 @@ int main()
   Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
-      as.GetObject(Q);
+      as.Evaluate(Q);
       Q *=Step;
     }
   t.printTime(t.stop());

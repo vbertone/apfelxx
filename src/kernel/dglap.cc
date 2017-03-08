@@ -23,7 +23,7 @@ namespace apfel {
 	       vector<double>                           const& Masses,
 	       vector<double>                           const& Thresholds,
 	       int                                      const& nstep):
-    MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds),
+    MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds, nstep),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions),
     _nstep(nstep)
@@ -39,29 +39,6 @@ namespace apfel {
 	       int                                      const& nstep):
     Dglap(SplittingFunctions, MatchingConditions, ObjRef, MuDistRef, Masses, Masses, nstep)
   {
-  }
-
-  //_________________________________________________________________________________
-  Set<Distribution> Dglap::EvolveObject(int const& nf, double const& mu02, double const& mu2, Set<Distribution> const& sd0) const
-  {
-    // Return immediately "sd0" if "mu02" and "mu2" are equal
-    if (mu02 == mu2)
-       return sd0;
-
-    // Numerical solution of the evolution equation with fourth-order Runge-Kutta.
-    const auto df = rk4<Set<Distribution>>([&](double const& t, Set<Distribution> const& f)->Set<Distribution>{ return Derivative(nf, t, f); });
-
-    // Use "_nstep" steps for the evolution.
-    auto f = sd0;
-    const auto dt = log( mu2 / mu02 ) / _nstep;
-    auto t = log(mu02);
-    for (auto k = 0; k < _nstep; k++)
-      {
-	f += df(t, f, dt);
-	t += dt;
-      }
-
-    return f;
   }
 
   //_________________________________________________________________________________

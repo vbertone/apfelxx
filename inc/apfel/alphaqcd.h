@@ -56,16 +56,6 @@ namespace apfel
 	     int            const& nsteps = 10);
 
     /**
-     * @brief Function for the computation of the coupling given nf. This function can be overriden.
-     * @param nf number of active flavours.
-     * @param as0 starting value of the coupling.
-     * @param mu02 initial squared scale.
-     * @param mu2 final squared scale.
-     * @return value of the coupling at mu2.
-     */
-    double EvolveObject(int const& nf, double const& mu02, double const& mu2, double const& as0) const;
-
-    /**
      * @brief Function for the computation of the matching. This function can be overriden.
      * @param Up tells whether the matching is upward or not (downward).
      * @param nf number of active flavours.
@@ -88,8 +78,7 @@ namespace apfel
      * @param nf number of active flavours.
      * @return the value of the beta function.
      */
-    double fbeta(double const& as, array<double,3> const& bQCD) const;
-
+    double Derivative(int const& nf, double const&, double const& as) const;
     /**
      * @brief Function that returns the perturbative order.
      */

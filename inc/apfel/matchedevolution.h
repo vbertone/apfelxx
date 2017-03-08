@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cmath>
 #include <vector>
 
 using std::vector;
@@ -37,7 +38,8 @@ namespace apfel
     MatchedEvolution(T              const& ObjRef,
 		     double         const& MuRef,
 		     vector<double> const& Masses,
-		     vector<double> const& Thresholds);
+		     vector<double> const& Thresholds,
+		     int            const& nsteps = 10);
 
     /**
      * @brief The default constructor that takes the reference value of the object and the reference scale (assumes equal masses and thresholds).
@@ -47,7 +49,8 @@ namespace apfel
      */
     MatchedEvolution(T              const& ObjRef,
 		     double         const& MuRef,
-		     vector<double> const& Masses);
+		     vector<double> const& Masses,
+		     int            const& nsteps = 10);
 
     /**
      * @brief Virtual function for the computation of the evolution of the object with nf flavours.
@@ -57,24 +60,32 @@ namespace apfel
      * @param mu2 squared final scale.
      * @return the object at the scale mu2.
      */
-    virtual T EvolveObject(int const& nf, double const& mu02, double const& mu2, T const& Obj0) const = 0;
+    virtual T EvolveObject(int const& nf, double const& mu02, double const& mu2, T const& Obj0) const;
 
     /**
-     * @brief Virtual function for the computation of the matching.
+     * @brief Pure virtual function for the computation of the matching.
      * @param Up direction of the matching "true" = upward, "false" = downward
      * @param nf number of flavours
      * @param Obj object to be matched
-     * @param LogKth value of ln(muth2/m2), where muth2 is the threshold and m2 the mass, both squared  
      * @return the matched object.
      */
     virtual T MatchObject(bool const& Up, int const& nf, T const& Obj) const = 0;
+
+    /**
+     * @brief Pure virtual function for the computation of the derivative of the ODE.
+     * @param nf number of flavours
+     * @param Mu scale at which the derivative is computed
+     * @param Obj object to be matched
+     * @return the matched object.
+     */
+    virtual T Derivative(int const& nf, double const& Mu, T const& Obj) const = 0;
 
     /**
      * @brief Function that returns the evolved Object.
      * @param mu final scale
      * @return the evolved Object.
      */
-    T GetObject(double const& mu) const;
+    T Evaluate(double const& mu) const;
 
     /**
      * @brief Function that returns the values of the thresholds.
@@ -96,15 +107,18 @@ namespace apfel
      * @brief Function that sets the reference scale
      * @param MuRef
      */
-    void SetMuRef(double const& MuRef) { _MuRef2 = MuRef * MuRef; }
+    void SetMuRef(double const& MuRef) { _MuRef2 = MuRef * MuRef; _LogMuRef2 = log(_MuRef2); }
 
   protected:
-    T              _ObjRef;       //<! Reference value of the object
-    double         _MuRef2;       //<! Squared reference scale of the object
-    vector<double> _Masses;       //<! Values of the masses
-    vector<double> _Thresholds;   //<! Values of the thresholds
-    vector<double> _Thresholds2;  //<! Squared quark threholds
-    vector<double> _LogTh2M2;     //<! Log of the squared threholds over squared masses
+    T              _ObjRef;         //<! Reference value of the object
+    double         _MuRef2;         //<! Squared reference scale of the object
+    double         _LogMuRef2;      //<! Log of the squared reference scale of the object
+    vector<double> _Masses;         //<! Values of the masses
+    vector<double> _Thresholds;     //<! Values of the thresholds
+    double         _nsteps;         //<! Number of steps of the RK algorithm
+    vector<double> _Thresholds2;    //<! Squared quark threholds
+    vector<double> _LogThresholds2; //<! Log of the squared quark threholds
+    vector<double> _LogTh2M2;       //<! Log of the squared threholds over squared masses
 
   };
 }

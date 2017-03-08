@@ -36,7 +36,7 @@ namespace apfel {
     // Loop on "_Qg" below "MuRef"
     for (auto iQ = tQ; iQ >= 0; iQ--)
       {
-	auto a = as.GetObject(_Qg[iQ]);
+	auto a = as.Evaluate(_Qg[iQ]);
 	_GridValues[iQ] = a;
 	as.SetObjectRef(a);
 	as.SetMuRef(_Qg[iQ]);
@@ -47,7 +47,7 @@ namespace apfel {
     as.SetMuRef(MuRef);
     for (auto iQ = tQ + 1; iQ < (int) _Qg.size(); iQ++)
       {
-	auto a = as.GetObject(_Qg[iQ]);
+	auto a = as.Evaluate(_Qg[iQ]);
 	_GridValues[iQ] = a;
 	as.SetObjectRef(a);
 	as.SetMuRef(_Qg[iQ]);

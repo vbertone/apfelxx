@@ -54,13 +54,6 @@ namespace apfel
     /**
      * @brief
      * @param
-     * @return 
-     */
-    Set<Distribution> EvolveObject(int const& nf, double const& mu02, double const& mu2, Set<Distribution> const& sd0) const;
-
-    /**
-     * @brief
-     * @param
      * @return
      */
     Set<Distribution> MatchObject(bool const& Up, int const& nf, Set<Distribution> const& sd) const;

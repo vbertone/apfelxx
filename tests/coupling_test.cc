@@ -24,9 +24,9 @@ int main()
   AlphaQCD asNNLO{AlphaRef, MuRef, Masses, 2};
 
   const auto Mu = 100.;
-  cout << "\nLO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.GetObject(Mu) << endl;
-  cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.GetObject(Mu)  << endl;
-  cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.GetObject(Mu) << "\n" << endl;
+  cout << "\nLO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << endl;
+  cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu)  << endl;
+  cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << "\n" << endl;
 
   return 0;
 }

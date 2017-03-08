@@ -37,25 +37,6 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::EvolveObject(int const& nf, double const& mu02, double const& mu2, double const& as0) const
-  {
-    // Return immediately "as0" if "mu02" and "mu2" are equal
-    if (mu02 == mu2)
-      return as0;
-
-    // Numerical solution of the evolution equation with fourth-order Runge-Kutta.
-    const auto das = rk4([&](double const&, double const& as)->double{ return fbeta(as, _bQCD[nf-3]); });
-
-    // Use "_nstep" steps for the evolution.
-    auto as        = as0 / FourPi;
-    const auto dlr = log( mu2 / mu02 ) / _nstep;
-    for (auto k = 0; k < _nstep; k++)
-      as += das(0, as, dlr);
-
-    return FourPi * as;
-  }
-
-  //_________________________________________________________________________________
   double AlphaQCD::MatchObject(bool const& Up, int const& nf, double const& Coup) const
   {
     const auto sgn = ( Up ? 1 : -1);
@@ -75,16 +56,16 @@ namespace apfel {
     else if ( pt == 1 ) res = 102. - 38. / 3. * nf;
     else if ( pt == 2 ) res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
     else throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
-    return res;
+    return res / pow(FourPi,pt+1);
   }
 
   //_________________________________________________________________________________
-  double AlphaQCD::fbeta(double const& as, array<double,3> const& bQCD) const
+  double AlphaQCD::Derivative(int const& nf, double const&, double const& as) const
   {
     double bt = 0, powas = as * as;
     for (auto i = 0; i <= _pt; i++)
       {
-        bt -= powas * bQCD[i];
+        bt -= powas * _bQCD[nf-3][i];
         powas *= as;
       }
     return bt;

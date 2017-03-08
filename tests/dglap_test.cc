@@ -347,7 +347,7 @@ int main()
   t.start();
 
   // Evolve PDFs to the final Scale
-  auto pdfs = EvolvedPDFs.GetObject(mu);
+  auto pdfs = EvolvedPDFs.Evaluate(mu);
   t.printTime(t.stop());
 
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,

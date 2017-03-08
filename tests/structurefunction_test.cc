@@ -162,7 +162,7 @@ int main()
 
   // Alphas
   const AlphaQCD Coup{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 1};
-  const auto as = Coup.GetObject(Q) / FourPi;
+  const auto as = Coup.Evaluate(Q) / FourPi;
 
   // Coefficient functions
   const f2cf C2qLO{NSP, 0};
