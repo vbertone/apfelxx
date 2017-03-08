@@ -34,7 +34,10 @@ namespace apfel
      * @param Masses vector with the heavy quark masses
      * @param Thresholds vector with the heavy quark threholds
      */
-    MatchedEvolution(T const& ObjRef, double const& MuRef, vector<double> const& Masses, vector<double> const& Thresholds);
+    MatchedEvolution(T              const& ObjRef,
+		     double         const& MuRef,
+		     vector<double> const& Masses,
+		     vector<double> const& Thresholds);
 
     /**
      * @brief The default constructor that takes the reference value of the object and the reference scale (assumes equal masses and thresholds).
@@ -42,7 +45,9 @@ namespace apfel
      * @param MuRef reference scale
      * @param Masses vector with the heavy quark masses
      */
-    MatchedEvolution(T const& ObjRef, double const& MuRef, vector<double> const& Masses);
+    MatchedEvolution(T              const& ObjRef,
+		     double         const& MuRef,
+		     vector<double> const& Masses);
 
     /**
      * @brief Virtual function for the computation of the evolution of the object with nf flavours.

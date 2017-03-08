@@ -19,32 +19,32 @@ using std::function;
 namespace apfel
 {
   /**
-   * @brief The DGLAP class.
+   * @brief The Dglap class.
    *
    * A specialization class of the MatchedEvolution class
    * for the computation of the DGLAP evolution.
    */
-  class DGLAP: public MatchedEvolution<Set<Distribution>>
+  class Dglap: public MatchedEvolution<Set<Distribution>>
   {
   public:
 
-    DGLAP() =  delete;
+    Dglap() =  delete;
 
     /**
-     * @brief DGLAP default constructor.
+     * @brief Dglap default constructor.
      */
-    DGLAP(function<Set<Operator>(int,double)>      const& SplittingFunctions,
+    Dglap(function<Set<Operator>(int,double)>      const& SplittingFunctions,
 	  function<Set<Operator>(bool,int,double)> const& MatchingConditions,
 	  Set<Distribution>                        const& ObjRef,
-	  double                                   const& MuDistRef,
+	  double                                   const& MuRef,
 	  vector<double>                           const& Masses,
 	  vector<double>                           const& Thresholds,
 	  int                                      const& nstep = 10);
 
     /**
-     * @brief DGLAP
+     * @brief Dglap
      */
-    DGLAP(function<Set<Operator>(int,double)>      const& SplittingFunctions,
+    Dglap(function<Set<Operator>(int,double)>      const& SplittingFunctions,
 	  function<Set<Operator>(bool,int,double)> const& MatchingConditions,
 	  Set<Distribution>                        const& ObjRef,
 	  double                                   const& MuDistRef,

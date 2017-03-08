@@ -49,7 +49,11 @@ namespace apfel
      * @param Masses vector of masses.
      * @param nsteps number of steps of the ODE solver.
      */
-    AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nsteps = 10);
+    AlphaQCD(double         const& AlphaRef,
+	     double         const& MuRef,
+	     vector<double> const& Masses,
+	     int            const& pt,
+	     int            const& nsteps = 10);
 
     /**
      * @brief Function for the computation of the coupling given nf. This function can be overriden.

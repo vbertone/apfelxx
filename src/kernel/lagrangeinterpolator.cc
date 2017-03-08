@@ -44,8 +44,12 @@ namespace apfel {
 
     // Compute the interpolant
     double w_int = 1;
-    for (auto delta = beta-j; delta <= beta-j+id; delta++)
-      if (delta != beta)
+    //for (auto delta = beta-j; delta <= beta-j+id; delta++)
+    //  if (delta != beta)
+    //    w_int *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
+    for (auto delta = beta-j; delta < beta; delta++)
+        w_int *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
+    for (auto delta = beta+1; delta <= beta-j+id; delta++)
         w_int *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
 
     return w_int;

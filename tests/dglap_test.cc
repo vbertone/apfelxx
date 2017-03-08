@@ -86,7 +86,6 @@ int main()
 {
   // Input parameters
   int nsteps = 10;
-  double mu  = 100;
   double mu0 = sqrt(2);
   int PerturbativeOrder = 2;
   vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175}; // Check in the level above that they are ordered
@@ -105,7 +104,7 @@ int main()
 
   // Initialize evolution according to the paramaters above
   Timer t;
-  cout << "Initialization ..." << endl;
+  cout << "Initialization... ";
   t.start();
 
   // Compute initial and final number of active flavours 
@@ -162,23 +161,17 @@ int main()
   unordered_map<int,Operator> MatchLO;
   const Operator Id{g, Identity{}, IntEps};
   const Operator Zero{g, Null{}, IntEps};
-  MatchLO.insert({EvolutionBasis::PNSP,  Id});
-  MatchLO.insert({EvolutionBasis::PNSM,  Id});
-  MatchLO.insert({EvolutionBasis::PNSV,  Id});
-  MatchLO.insert({EvolutionBasis::PQQ,   Id});
-  MatchLO.insert({EvolutionBasis::PQG,   Zero});
-  MatchLO.insert({EvolutionBasis::PGQ,   Zero});
-  MatchLO.insert({EvolutionBasis::PGG,   Id});
-  MatchLO.insert({EvolutionBasis::PT3Q,  Id});
-  MatchLO.insert({EvolutionBasis::PT3G,  Zero});
-  MatchLO.insert({EvolutionBasis::PT8Q,  Id});
-  MatchLO.insert({EvolutionBasis::PT8G,  Zero});
-  MatchLO.insert({EvolutionBasis::PT15Q, Id});
-  MatchLO.insert({EvolutionBasis::PT15G, Zero});
-  MatchLO.insert({EvolutionBasis::PT24Q, Id});
-  MatchLO.insert({EvolutionBasis::PT24G, Zero});
-  MatchLO.insert({EvolutionBasis::PT35Q, Id});
-  MatchLO.insert({EvolutionBasis::PT35G, Zero});
+  MatchLO.insert({EvolutionBasis::PNSP, Id});
+  MatchLO.insert({EvolutionBasis::PNSM, Id});
+  MatchLO.insert({EvolutionBasis::PNSV, Id});
+  MatchLO.insert({EvolutionBasis::PQQ,  Id});
+  MatchLO.insert({EvolutionBasis::PQG,  Zero});
+  MatchLO.insert({EvolutionBasis::PGQ,  Zero});
+  MatchLO.insert({EvolutionBasis::PGG,  Id});
+  for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
+    MatchLO.insert({i, Id});
+  for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
+    MatchLO.insert({i, Zero});
 
   // ===============================================================
   // LO splitting functions operators
@@ -191,13 +184,13 @@ int main()
       const Operator O0gg{g, P0gg{nf}, IntEps};
       const Operator O0qgnf = nf * O0qg;
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP,  O0ns});
-      OM.insert({EvolutionBasis::PNSM,  O0ns});
-      OM.insert({EvolutionBasis::PNSV,  O0ns});
-      OM.insert({EvolutionBasis::PQQ,   O0ns});
-      OM.insert({EvolutionBasis::PQG,   O0qgnf});
-      OM.insert({EvolutionBasis::PGQ,   O0gq});
-      OM.insert({EvolutionBasis::PGG,   O0gg});
+      OM.insert({EvolutionBasis::PNSP, O0ns});
+      OM.insert({EvolutionBasis::PNSM, O0ns});
+      OM.insert({EvolutionBasis::PNSV, O0ns});
+      OM.insert({EvolutionBasis::PQQ,  O0ns});
+      OM.insert({EvolutionBasis::PQG,  O0qgnf});
+      OM.insert({EvolutionBasis::PGQ,  O0gq});
+      OM.insert({EvolutionBasis::PGG,  O0gg});
       for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
 	OM.insert({i, O0ns});
       for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
@@ -218,13 +211,13 @@ int main()
       const Operator O1gq{g, P1gq{nf}, IntEps};
       const Operator O1gg{g, P1gg{nf}, IntEps};
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP,  O1nsp});
-      OM.insert({EvolutionBasis::PNSM,  O1nsm});
-      OM.insert({EvolutionBasis::PNSV,  O1nsm});
-      OM.insert({EvolutionBasis::PQQ,   O1qq});
-      OM.insert({EvolutionBasis::PQG,   O1qg});
-      OM.insert({EvolutionBasis::PGQ,   O1gq});
-      OM.insert({EvolutionBasis::PGG,   O1gg});
+      OM.insert({EvolutionBasis::PNSP, O1nsp});
+      OM.insert({EvolutionBasis::PNSM, O1nsm});
+      OM.insert({EvolutionBasis::PNSV, O1nsm});
+      OM.insert({EvolutionBasis::PQQ,  O1qq});
+      OM.insert({EvolutionBasis::PQG,  O1qg});
+      OM.insert({EvolutionBasis::PGQ,  O1gq});
+      OM.insert({EvolutionBasis::PGG,  O1gg});
       for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
 	OM.insert({i, O1qq});
       for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
@@ -285,13 +278,13 @@ int main()
       const Operator O2gq{g, P2gq{nf}, IntEps};
       const Operator O2gg{g, P2gg{nf}, IntEps};
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP,  O2nsp});
-      OM.insert({EvolutionBasis::PNSM,  O2nsm});
-      OM.insert({EvolutionBasis::PNSV,  O2nsv});
-      OM.insert({EvolutionBasis::PQQ,   O2qq});
-      OM.insert({EvolutionBasis::PQG,   O2qg});
-      OM.insert({EvolutionBasis::PGQ,   O2gq});
-      OM.insert({EvolutionBasis::PGG,   O2gg});
+      OM.insert({EvolutionBasis::PNSP, O2nsp});
+      OM.insert({EvolutionBasis::PNSM, O2nsm});
+      OM.insert({EvolutionBasis::PNSV, O2nsv});
+      OM.insert({EvolutionBasis::PQQ,  O2qq});
+      OM.insert({EvolutionBasis::PQG,  O2qg});
+      OM.insert({EvolutionBasis::PGQ,  O2gq});
+      OM.insert({EvolutionBasis::PGG,  O2gg});
       for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
 	OM.insert({i, O2qq});
       for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
@@ -341,23 +334,27 @@ int main()
     }
 
   // Initialize DGLAP evolution
-  DGLAP EvolvedPDFs{SplittingFunctions, MatchingConditions, InPDFs, mu0, Masses, Thresholds, nsteps};
+  Dglap EvolvedPDFs{SplittingFunctions, MatchingConditions, InPDFs, mu0, Masses, Thresholds, nsteps};
 
   t.printTime(t.stop());
 
+  // Final scale
+  double mu  = 100;
+
   // Print results
   cout << scientific;
-  cout << "\nEvolution (4th order Runge-Kutta with " << nsteps << " steps) to Q = " << mu << " GeV ..." << endl;
+  cout << "Evolution (4th order Runge-Kutta with " << nsteps << " steps) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
   t.start();
+
+  // Evolve PDFs to the final Scale
   auto pdfs = EvolvedPDFs.GetObject(mu);
   t.printTime(t.stop());
 
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
 		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
-  cout << "\nalpha_QCD(Q) = " << AlphaQCD.Evaluate(mu) << endl;
-  cout << "Standard evolution:" << endl;
-  cout << "   x    "
+  cout << "\nAlphaQCD(Q) = " << AlphaQCD.Evaluate(mu) << endl;
+  cout << "\n   x    "
        << "   u-ubar   "
        << "   d-dbar   "
        << " 2(ubr+dbr) "

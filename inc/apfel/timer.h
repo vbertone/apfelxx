@@ -41,7 +41,7 @@ namespace apfel
      */
     static void printTime(double const& duration)
     {
-      printf("Elapsed Time: %5.6f seconds\n", duration);
+      printf("elapsed time: %5.6f seconds\n", duration);
     }
 
   private:
