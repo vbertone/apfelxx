@@ -42,8 +42,9 @@ namespace apfel
     // Compute squared thresholds
     for (auto &th : Thresholds)
       {
-	_Thresholds2.push_back(pow(th,2));
-	_LogThresholds2.push_back(( th > 0 ? 2 * log(th) : -100));
+	const double th2 = pow(th,2);
+	_Thresholds2.push_back(th2);
+	_LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
       }
 
     // Compute logs of muth2 / m2
