@@ -70,8 +70,8 @@ namespace apfel
       const auto pqqmx = 2 / ( 1 + x ) - 1 + x;
       const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
       const auto gqq1  =
-	+ 2 * CF * _nf * ( ( - 1.1111111111111112 - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
-	+ 4 * CA * CF * ( ( 3.7222222222222223 + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
+	+ 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
+	+ 4 * CA * CF * ( ( 67 / 18. + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
 			  + 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
 	+ 4 * CF * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - 5 * ( 1 - x )
 			  - lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
@@ -110,8 +110,8 @@ namespace apfel
       const auto pqqmx = 2 / ( 1 + x ) - 1 + x;
       const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
       const auto gqq1  =
-	+ 2 * CF * _nf * ( ( - 1.1111111111111112 - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
-	+ 4 * CA * CF * ( ( 3.7222222222222223 + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
+	+ 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
+	+ 4 * CA * CF * ( ( 67 / 18. + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
 			  + 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
 	+ 4 * CF * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - 5 * ( 1 - x )
 			  - lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
@@ -155,10 +155,10 @@ namespace apfel
       const auto x1qga =
 	+ 2 * CF * _nf * ( 4  + 4 * ln1mx + ( 10 - 4 * ( ln1mx - lnx ) + 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 2 * Pi2 / 3 ) * pqg
 			   - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) - 9 * x )
-	+ 2 * CA * _nf * ( 20.22222222222222 - 4 * ln1mx
-			   + ( - 24.22222222222222 + 4 * ln1mx - 2 * ln1mx * ln1mx + 44 * lnx / 3 - lnx2 + Pi2 / 3 ) * pqg
+	+ 2 * CA * _nf * ( 182 / 9. - 4 * ln1mx
+			   + ( - 218 / 9. + 4 * ln1mx - 2 * ln1mx * ln1mx + 44 * lnx / 3 - lnx2 + Pi2 / 3 ) * pqg
 			   + 2 * pqgmx * S2x + 40 / ( 9 * x ) + 14 * x / 9 - lnx2 * ( 2 + 8 * x )
-			   + lnx * ( - 12.666666666666666 + 136 * x / 3 ) );
+			   + lnx * ( - 38 / 3. + 136 * x / 3 ) );
       return x1qga;
     }
   private:
@@ -178,11 +178,10 @@ namespace apfel
       const auto pgqmx = - ( 1 + ( 1 + x ) * ( 1 + x ) ) / x;
       const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
       const auto x1gqa =
-	+ 2 * CF * _nf * ( - ( 2.2222222222222223 + 4 * ln1mx / 3 ) * pgq - 4 * x / 3 )
+	+ 2 * CF * _nf * ( - ( 20 / 9. + 4 * ln1mx / 3 ) * pgq - 4 * x / 3 )
 	+ 4 * CF * CF  * ( - 2.5 - ( 3 * ln1mx + ln1mx * ln1mx ) * pgq - lnx2 * ( 1 - x / 2 ) - 7 * x / 2 
 			   - 2 * ln1mx * x + lnx * ( 2 + 7 * x / 2 ) )
-	+ 4 * CA * CF  * ( 3.111111111111111
-			   + pgq * ( 0.5 + 11 * ln1mx / 3 + ln1mx * ln1mx - 2 * ln1mx * lnx + lnx2 / 2 - Pi2 / 6 ) + pgqmx * S2x 
+	+ 4 * CA * CF  * ( 28 / 9. + pgq * ( 0.5 + 11 * ln1mx / 3 + ln1mx * ln1mx - 2 * ln1mx * lnx + lnx2 / 2 - Pi2 / 6 ) + pgqmx * S2x 
 			   + 65 * x / 18 + 2 * ln1mx * x + 44 * x * x / 9 + lnx2 * ( 4 + x ) - lnx * ( 12 + 5 * x + 8 * x * x / 3 ) );
       return x1gqa;
     }
@@ -205,9 +204,9 @@ namespace apfel
       const auto ggg1  =
 	+ 2 * CF * _nf * ( - 16 + 4 / ( 3 * x ) + 8 * x + ( 20 * x * x ) / 3 - lnx2 * ( 2 + 2 * x ) - lnx * ( 6 + 10 * x ) )
 	+ 2 * CA * _nf * ( 2 - 20 * pgg / 9 - 2 * x - 4 * lnx * ( 1 + x ) / 3 + 26 * ( - 1 / x + x * x ) / 9 )
-	+ 4 * CA *  CA * ( pgg * ( 7.444444444444445 - 4 * ln1mx * lnx + lnx2 - Pi2 / 3 ) + 2 * pggmx * S2x
+	+ 4 * CA *  CA * ( pgg * ( 67 / 9. - 4 * ln1mx * lnx + lnx2 - Pi2 / 3 ) + 2 * pggmx * S2x
 			+ 27 * ( 1 - x ) / 2 + 4 * lnx2 * ( 1 + x ) + 67 * ( - 1 / x + x * x ) / 9
-			- lnx * ( 8.333333333333334 - 11 * x / 3 + 44 * x * x / 3 ) );
+			- lnx * ( 25 / 3. - 11 * x / 3 + 44 * x * x / 3 ) );
       const auto ggg1l = _a2g / ( 1 - x );
       const auto x1gga = ggg1 - ggg1l;
       return x1gga;
