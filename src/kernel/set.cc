@@ -22,18 +22,9 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator = (Set<T> const& d)
-  {
-    if(this != &d)
-      *this = d;
-    return *this;
-  }
-
-  //_________________________________________________________________________
-  template<class T>
   template<class V> Set<V> Set<T>::operator *= (Set<V> const& d) const
   {
-    if (&_map != &d.GetMap())
+    if (_map.GetName() != d.GetMap().GetName())
       throw runtime_exception("Set::operator *=", "Convolution Map does not match (1)");
 
     unordered_map<int,V> mmap;
@@ -73,7 +64,7 @@ namespace apfel {
   template<class T>
   Set<T>& Set<T>::operator *= (Set<T> const& d)
   {
-    if (&_map != &d.GetMap())
+    if (_map.GetName() != d.GetMap().GetName())
       throw runtime_exception("Set::operator *=", "Convolution Map does not match (2)");
 
     for (auto& v: _objects)
@@ -86,7 +77,7 @@ namespace apfel {
   template<class T>
   Set<T>& Set<T>::operator += (Set<T> const& d)
   {
-    if (&_map != &d.GetMap())
+    if (_map.GetName() != d.GetMap().GetName())
       throw runtime_exception("Set::operator +=", "Convolution Map does not match");
 
     for (auto& v: _objects)

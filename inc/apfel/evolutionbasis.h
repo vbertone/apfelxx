@@ -32,7 +32,7 @@ namespace apfel
      * @brief The class constructor
      */
   EvolutionBasis(int const& nf):
-    ConvolutionMap{"EvolutionBasis"}
+    ConvolutionMap{"EvolutionBasis_" + std::to_string(nf)}
     {
       // dg = Pgg * g + Pgq * Sigma
       _rules[GLUON] = { {PGG, GLUON, +1}, {PGQ, SIGMA, +1} };

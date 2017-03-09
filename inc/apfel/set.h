@@ -47,7 +47,6 @@ namespace apfel
     template<class V> Set<V> operator *= (Set<V> const& d) const;
 
     // other operators
-    Set<T>& operator  = (Set<T> const& d); //!< this = Set<T>
     Set<T>& operator *= (double const& s); //!< this *= scalar
     Set<T>& operator /= (int const& s);    //!< this /= scalar
     Set<T>& operator *= (Set<T> const& d); //!< this *= Set
@@ -59,8 +58,8 @@ namespace apfel
     unordered_map<int, T> const& GetObjects()      const { return _objects; }
 
   private:
-    ConvolutionMap        const& _map;     //!< The shared pointer containing the convolution map
-    unordered_map<int, T>        _objects; //!< The container for the unordered_map
+    ConvolutionMap        _map;     //!< The shared pointer containing the convolution map
+    unordered_map<int, T> _objects; //!< The container for the unordered_map
   };
 
   /**

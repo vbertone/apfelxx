@@ -116,16 +116,16 @@ namespace apfel
     // to make sure that every time a threshold is crossed a new object with a
     // different convolution map is created (effective only when a "Set" object
     // is evolved).
-    vector<T> vobj = { _ObjRef };
-    auto ti        = _LogMuRef2;
-    auto tf        = _LogThresholds2[nfi];
+    auto vobj = _ObjRef;
+    auto ti   = _LogMuRef2;
+    auto tf   = _LogThresholds2[nfi];
     for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
-	vobj.push_back(MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj.back())));
+        vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
 	ti = tf + eps8;                    // Add "eps8" to make sure to be above the threshold
 	tf = _LogThresholds2[min(inf+1,nff-1)];
       }
-    return EvolveObject(nff, ti, lmu2, vobj.back());
+    return EvolveObject(nff, ti, lmu2, vobj);
   }
 
   // template fixed types

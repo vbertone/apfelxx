@@ -41,9 +41,13 @@ namespace apfel {
     const auto sgn = ( Up ? 1 : -1);
     const auto ep = Coup / FourPi;
     const auto LogKth = _LogTh2M2[nf];
-    const double c[] = { 1, sgn * 2. / 3. * LogKth, 4. / 9. * pow(LogKth,2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3. };
-    double match = 0;
-    for (auto i = 0; i <= _pt; i++) match += c[i] * pow(ep,i);
+    const double c[3] = { 1, sgn * 2. / 3. * LogKth, 4. / 9. * pow(LogKth,2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3. };
+    double match = 0, powep = 1;
+    for (auto i = 0; i <= _pt; i++)
+      {
+        match += c[i] * powep;
+        powep *= ep;
+      }
     return Coup * match;
   }
 
