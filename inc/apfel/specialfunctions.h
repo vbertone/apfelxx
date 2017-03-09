@@ -114,7 +114,7 @@ namespace apfel
     int p1;
     int i,l,k,m,n1;
     double u[4],s1[5][5],c[5][5];
-    double a[30][11];
+    double a[31][11];
     double x1,h,alfa,r,q,c1,c2,b0=0,b1,b2;
     double result;
     double v[5],sk,sm;
