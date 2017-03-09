@@ -113,10 +113,11 @@ namespace apfel
     if (&this->_grid != &d.GetGrid())
       throw runtime_exception("Operator::operator*=", "Operator and Distribution grids do not match");
 
-    // Compute the the distribution on the subgrids
     const auto& sg = d.GetDistributionSubGrid();
     vector<vector<double>> s(sg);
+    vector<double> j;
 
+    // Compute the the distribution on the subgrids
     int const ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
@@ -148,22 +149,19 @@ namespace apfel
 	// Set to zero the values above one
 	for (auto alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
 	  s[ig][alpha] = 0;
-      }
 
-    // Compute the the distribution on the joint grid
-    vector<double> j;
-    for(auto ig = 0; ig < ng; ig++)
-      {
-        int const nx = this->_grid.GetSubGrid(ig).nx();
-
+	// Compute the the distribution on the joint grid
         double xtrans;
-        if(ig < ng-1) xtrans = this->_grid.GetSubGrid(ig+1).xMin();
-        else          xtrans = 1 + 2 * eps12;
+        if(ig < ng-1)
+	  xtrans = this->_grid.GetSubGrid(ig+1).xMin();
+        else
+          xtrans = 1 + 2 * eps12;
 
         for(auto alpha = 0; alpha <= nx; alpha++)
           {
-            double const x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
-            if(xtrans - x < eps12) break;
+            const double x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
+            if(xtrans - x < eps12)
+	      break;
             j.push_back(s[ig][alpha]);
           }
       }

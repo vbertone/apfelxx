@@ -42,8 +42,8 @@ namespace apfel
   const double CA = 3.;
 
   // Useful constants
-  const double FourPi = 4 * M_PI;
   const double Pi2    = M_PI * M_PI;
+  const double FourPi = 4 * M_PI;
   const double emc    = 0.5772156649;
   const double zeta2  = 1.644934067;
   const double zeta3  = 1.2020569031;

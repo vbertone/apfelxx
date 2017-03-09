@@ -31,10 +31,15 @@ namespace apfel {
     for (auto const& item: _map.GetRules())
       {
         auto o = std::begin(item.second);
-        V result = (*o).coefficient * _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+        V result = _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+	if((*o).coefficient != 1)
+	  result *= (*o).coefficient;
         o++;
         for (auto end = std::end(item.second); o != end; o++)
-          result += (*o).coefficient * _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+	  if((*o).coefficient != 1)
+	    result += (*o).coefficient * _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+	  else
+	    result += _objects.at((*o).operand) * d.GetObjects().at((*o).object);
         mmap.insert({item.first,result});
       }
 
