@@ -24,9 +24,10 @@ namespace apfel {
     _pt(pt)
   {
     // Initialize all coefficients of the QCD beta function for all numbers of flavours
+    _bQCD.resize(4,3);
     for (auto ipt = 0; ipt <= 2; ipt++)
 	for (auto nf = 3; nf <= 6; nf++)
-	_bQCD[nf-3][ipt] = betaQCD(ipt, nf);
+	_bQCD(nf-3, ipt) = betaQCD(ipt, nf);
   }
 
   //_________________________________________________________________________________
@@ -68,7 +69,7 @@ namespace apfel {
     double bt = 0, powas = as * as;
     for (auto i = 0; i <= _pt; i++)
       {
-        bt -= powas * _bQCD[nf-3][i];
+        bt -= powas * _bQCD(nf-3, i);
         powas *= as;
       }
     return bt;

@@ -7,11 +7,8 @@
 
 #pragma once
 
-#include "apfel/matchedevolution.h"
-
-#include <array>
-
-using std::array;
+#include <apfel/matchedevolution.h>
+#include <apfel/matrix.h>
 
 namespace apfel
 {
@@ -85,7 +82,7 @@ namespace apfel
     int const& GetPerturbativeOrder() const { return _pt; }
 
   private:
-    int                      const _pt;
-    array<array<double,3>,4>       _bQCD;
+    int      const _pt;
+    matrix<double> _bQCD;
   };
 }

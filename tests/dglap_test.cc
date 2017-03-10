@@ -122,7 +122,7 @@ int main()
   // Compute AlphaQCD above and below the thresholds
   unordered_map<int,double> asThUp;
   unordered_map<int,double> asThDown;
-  for (auto nf = nfi; nf <= nff; nf++)
+  for (auto nf = nfi+1; nf <= nff; nf++)
     {
       asThDown.insert({nf,as(Thresholds[nf-1])});
       asThUp.insert({nf,as(Thresholds[nf-1]+eps8)});
