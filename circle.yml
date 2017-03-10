@@ -1,0 +1,13 @@
+## Customize dependencies
+dependencies:
+  pre:
+    - sudo apt-get update
+  override:
+    - sudo apt-get install gfortran g++ gcc cmake
+  post:
+    - cmake . && make install
+
+## Customize test commands
+test:
+  override:
+    - ctest
