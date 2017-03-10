@@ -10,4 +10,4 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - ctest
+    - ctest -V
