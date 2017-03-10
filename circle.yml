@@ -5,7 +5,7 @@ dependencies:
   override:
     - sudo apt-get install gfortran g++ gcc cmake
   post:
-    - cmake . && make install
+    - cmake . && make
 
 ## Customize test commands
 test:
