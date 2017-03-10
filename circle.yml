@@ -3,9 +3,9 @@ dependencies:
   pre:
     - sudo apt-get update
   override:
-    - sudo apt-get install gfortran g++ gcc cmake
+    - sudo apt-get install gfortran g++-5 cmake
   post:
-    - cmake . && make
+    - cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address" . && make
 
 ## Customize test commands
 test:
