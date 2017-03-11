@@ -22,11 +22,11 @@ namespace apfel {
 	       double                                   const& MuDistRef,
 	       vector<double>                           const& Masses,
 	       vector<double>                           const& Thresholds,
-	       int                                      const& nstep):
-    MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds, nstep),
+	       int                                      const& nsteps):
+    MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions),
-    _nstep(nstep)
+    _nsteps(nsteps)
   {
   }
 
@@ -36,8 +36,8 @@ namespace apfel {
 	       Set<Distribution>                        const& ObjRef,
 	       double                                   const& MuDistRef,
 	       vector<double>                           const& Masses,
-	       int                                      const& nstep):
-    Dglap(SplittingFunctions, MatchingConditions, ObjRef, MuDistRef, Masses, Masses, nstep)
+	       int                                      const& nsteps):
+    Dglap(SplittingFunctions, MatchingConditions, ObjRef, MuDistRef, Masses, Masses, nsteps)
   {
   }
 

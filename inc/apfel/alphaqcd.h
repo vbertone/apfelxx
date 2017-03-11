@@ -7,8 +7,12 @@
 
 #pragma once
 
-#include <apfel/matchedevolution.h>
-#include <apfel/matrix.h>
+#include "apfel/matchedevolution.h"
+#include "apfel/matrix.h"
+
+#include <functional>
+
+using std::function;
 
 namespace apfel
 {
@@ -62,6 +66,14 @@ namespace apfel
     double MatchObject(bool const& Up, int const& nf, double const& Coup) const;
 
     /**
+     * @brief Function for the computation of the full QCD beta function.
+     * @param as value of the coupling.
+     * @param nf number of active flavours.
+     * @return the value of the beta function.
+     */
+    double Derivative(int const& nf, double const&, double const& as) const;
+
+    /**
      * @brief Function for the computation of the terms of the QCD beta function.
      * @param pt perturnative order.
      * @param nf number of active flavours.
@@ -69,20 +81,11 @@ namespace apfel
      */
     double betaQCD(int const& pt, int const& nf) const;
 
-    /**
-     * @brief Function for the computation of the full QCD beta function.
-     * @param as value of the coupling.
-     * @param nf number of active flavours.
-     * @return the value of the beta function.
-     */
-    double Derivative(int const& nf, double const&, double const& as) const;
-    /**
-     * @brief Function that returns the perturbative order.
-     */
-    int const& GetPerturbativeOrder() const { return _pt; }
-
   private:
-    int      const _pt;
-    matrix<double> _bQCD;
+    int                                                      const _pt;
+    matrix<double>                                                 _bQCD;
+    function<double(bool const&, int const&, double const&)>       _MatchingConditions;
+    function<double(int const&, double const&)>                    _BetaFunction;
+
   };
 }

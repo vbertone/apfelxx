@@ -25,10 +25,13 @@ namespace apfel {
     QGrid<double>(nQ, QMin, QMax, InterDegree, Thresholds)
   {
     // Initialze alphas
-    AlphaQCD as{AlphaRef, MuRef, Masses, Thresholds, pt, 1};
+    AlphaQCD as{AlphaRef, MuRef, Masses, Thresholds, pt};
+
+    // Set number of steps of the RK algorith to 1
+    as.SetNumberOfSteps(1);
 
     // Find the point on the QGrid right below MuRef
-    const auto tQ = lower_bound(_Qg.begin(), _Qg.end(), MuRef) - _Qg.begin() - 1;
+    const auto tQ = lower_bound(_Qg.begin(), _Qg.end(), as.GetMuRef()) - _Qg.begin() - 1;
 
     // Resize container
     _GridValues.resize(_Qg.size());

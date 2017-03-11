@@ -9,10 +9,6 @@
 
 #include "apfel/qgrid.h"
 
-#include <array>
-
-using std::array;
-
 namespace apfel
 {
   /**

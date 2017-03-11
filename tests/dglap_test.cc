@@ -86,19 +86,31 @@ public:
 int main()
 {
   // Input parameters
-  int nsteps = 10;
-  double mu0 = sqrt(2);
-  int PerturbativeOrder = 2;
-  vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175}; // Check in the level above that they are ordered
-  vector<double> Thresholds = Masses;
 
-  // Coupling
-  double AlphaQCDRef = 0.35;
-  double MuAlphaQCDRef = mu0;
-  GridAlphaQCD AlphaQCD{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder, 50, 1, 1000, 3};
+  // Dgauss integration accuracy
+  const double IntEps = 1e-5;
+
+  // Number of RK steps
+  const int nsteps = 10;
+
+  // Initial scale
+  const double mu0 = sqrt(2);
+
+  // Perturbative order
+  const int PerturbativeOrder = 2;
+
+  // Vectors of masses and thresholds
+  const vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175}; // Check in the level above that they are ordered
+  const vector<double> Thresholds = Masses;
+
+  // Running coupling
+  const double AlphaQCDRef = 0.35;
+  const double MuAlphaQCDRef = mu0;
+  const GridAlphaQCD AlphaQCD{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder, 50, 1, 1000, 3};
+  const auto as = [&] (double const& mu) -> double{ return AlphaQCD.Evaluate(mu) / FourPi; };
 
   // Initial scale PDFs
-  function<double(int,double)> InPDFsFunc = LHToyPDFs;
+  const function<double(int,double)> InPDFsFunc = LHToyPDFs;
 
   // x-space grid
   const Grid g{{SubGrid{100,1e-5,3}, SubGrid{60,1e-1,3}, SubGrid{50,6e-1,3}, SubGrid{50,8e-1,3}}};
@@ -117,9 +129,6 @@ int main()
     if ( v <= 0 )
       nfi++;
 
-  // Define function for the expansion parameter
-  auto as = [&] (double const& mu) -> double{ return AlphaQCD.Evaluate(mu) / FourPi; };
-
   // Compute AlphaQCD above and below the thresholds
   unordered_map<int,double> asThUp;
   unordered_map<int,double> asThDown;
@@ -131,7 +140,7 @@ int main()
 
   // Allocate convolution maps for the evolution and matching
   unordered_map<int,EvolutionBasisQCD> evbasis;
-  unordered_map<int,MatchingBasisQCD> matchbasis;
+  unordered_map<int,MatchingBasisQCD>  matchbasis;
   for (int nf = nfi; nf <= nff; nf++)
     {
       evbasis.insert({nf,EvolutionBasisQCD{nf}});
@@ -151,10 +160,10 @@ int main()
       nf0++;
     else
       break;
-  Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
 
-  // Dgauss integration accuracy
-  const double IntEps = 1e-5;
+  // Create set of initial distributions
+  // (assumed to be in the QCD evolution basis).
+  Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
 
   // Allocate needed operators (matching conditions and splitting functions).
   // By now the code is fast enough to precompute everything at all available
@@ -302,8 +311,8 @@ int main()
 
   // Create splitting functions and matching conditions lambda functions
   // according to the requested perturbative order.
-  function<Set<Operator>(int,double)>      SplittingFunctions;
-  function<Set<Operator>(bool,int,double)> MatchingConditions;
+  function<Set<Operator>(int const&, double const&)>              SplittingFunctions;
+  function<Set<Operator>(bool const&, int const&, double const&)> MatchingConditions;
   if (PerturbativeOrder == 0)
     {
       SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>

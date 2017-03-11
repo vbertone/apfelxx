@@ -8,6 +8,7 @@
 #include "apfel/qgrid.h"
 #include "apfel/tools.h"
 #include "apfel/distribution.h"
+#include "apfel/set.h"
 
 #include <algorithm>
 
@@ -208,4 +209,5 @@ namespace apfel
   // template fixed types
   template class QGrid<double>;
   template class QGrid<Distribution>;
+  template class QGrid<Set<Distribution>>;
 }

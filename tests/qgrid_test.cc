@@ -12,6 +12,7 @@
 #include <apfel/qgrid.h>
 #include <apfel/alphaqcd.h>
 #include <apfel/gridalphaqcd.h>
+#include <apfel/tabulateobject.h>
 #include <apfel/timer.h>
 
 using namespace apfel;
@@ -25,9 +26,11 @@ int main()
 
   // Direct AlphaQCD
   const AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
+  //AlphaQCD *asp = new AlphaQCD{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
 
   // Tabulate AlphaQCD on a QGrid
   const GridAlphaQCD gas{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2, 50, 1, 1000, 3};
+  //const TabulateObject<double> tas{asp, 50, 1, 1000, 3};
 
   cout << "Precision test ..." << endl;
   auto nQ   = 20;
@@ -40,6 +43,7 @@ int main()
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
       cout << Q << "\t\t" << as.Evaluate(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as.Evaluate(Q) / gas.Evaluate(Q) << endl;
+      //cout << Q << "\t\t" << as.Evaluate(Q) << "\t\t" << tas.Evaluate(Q) << "\t\t" << as.Evaluate(Q) / gas.Evaluate(Q) << endl;
       Q *=Step;
     }
 

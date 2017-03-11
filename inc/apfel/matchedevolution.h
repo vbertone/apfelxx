@@ -88,6 +88,16 @@ namespace apfel
     T Evaluate(double const& mu) const;
 
     /**
+     * @brief Function that returns the reference value of the object
+     */
+    T const& GetObjectRef() const { return _ObjRef; }
+
+    /**
+     * @brief Function that returns the reference scale
+     */
+    double const& GetMuRef() const { return _MuRef; }
+
+    /**
      * @brief Function that returns the values of the thresholds.
      */
     vector<double> const& GetThresholds() const { return _Thresholds; }
@@ -100,7 +110,7 @@ namespace apfel
     /**
      * @brief Function that returns the number of steps.
      */
-    int const& GetNumberOfSteps()     const { return _nsteps; }
+    int const& GetNumberOfSteps() const { return _nsteps; }
 
     /**
      * @brief Function that sets the reference value of the object
@@ -114,8 +124,15 @@ namespace apfel
      */
     void SetMuRef(double const& MuRef) { _MuRef2 = MuRef * MuRef; _LogMuRef2 = log(_MuRef2); }
 
+    /**
+     * @brief Function that sets the number of steps of the RK algorithm.
+     * @param nsteps
+     */
+    void SetNumberOfSteps(int const& nsteps) { _nsteps = nsteps; }
+
   protected:
     T              _ObjRef;         //<! Reference value of the object
+    double         _MuRef;          //<! Reference scale of the object
     double         _MuRef2;         //<! Squared reference scale of the object
     double         _LogMuRef2;      //<! Log of the squared reference scale of the object
     vector<double> _Masses;         //<! Values of the masses

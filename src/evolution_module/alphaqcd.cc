@@ -28,6 +28,34 @@ namespace apfel {
     for (auto ipt = 0; ipt <= 2; ipt++)
 	for (auto nf = 3; nf <= 6; nf++)
 	_bQCD(nf-3, ipt) = betaQCD(ipt, nf);
+
+    // Beta function lambda function
+    _BetaFunction = [&] (int const& nf, double const& as)-> double
+      {
+	double bt = 0, powas = as * as;
+	for (auto i = 0; i <= _pt; i++)
+	  {
+	    bt -= powas * _bQCD(nf-3, i);
+	    powas *= as;
+	  }
+	return bt;
+      };
+
+    // Matching condition lambda function
+    _MatchingConditions = [&] (bool const& Up, int const& nf, double const& Coup)-> double
+      {
+	const auto sgn = ( Up ? 1 : -1);
+	const auto ep = Coup / FourPi;
+	const auto LogKth = _LogTh2M2[nf];
+	const double c[3] = { 1, sgn * 2. / 3. * LogKth, 4. / 9. * pow(LogKth,2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3. };
+	double match = 0, powep = 1;
+	for (auto i = 0; i <= _pt; i++)
+	  {
+	    match += c[i] * powep;
+	    powep *= ep;
+	  }
+	return Coup * match;
+      };
   }
 
   //_________________________________________________________________________________
@@ -39,17 +67,13 @@ namespace apfel {
   //_________________________________________________________________________________
   double AlphaQCD::MatchObject(bool const& Up, int const& nf, double const& Coup) const
   {
-    const auto sgn = ( Up ? 1 : -1);
-    const auto ep = Coup / FourPi;
-    const auto LogKth = _LogTh2M2[nf];
-    const double c[3] = { 1, sgn * 2. / 3. * LogKth, 4. / 9. * pow(LogKth,2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3. };
-    double match = 0, powep = 1;
-    for (auto i = 0; i <= _pt; i++)
-      {
-        match += c[i] * powep;
-        powep *= ep;
-      }
-    return Coup * match;
+    return _MatchingConditions(Up, nf, Coup);
+  }
+
+  //_________________________________________________________________________________
+  double AlphaQCD::Derivative(int const& nf, double const&, double const& as) const
+  {
+    return _BetaFunction(nf, as);
   }
 
   //_________________________________________________________________________________
@@ -61,18 +85,6 @@ namespace apfel {
     else if ( pt == 2 ) res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
     else throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
     return res / pow(FourPi,pt+1);
-  }
-
-  //_________________________________________________________________________________
-  double AlphaQCD::Derivative(int const& nf, double const&, double const& as) const
-  {
-    double bt = 0, powas = as * as;
-    for (auto i = 0; i <= _pt; i++)
-      {
-        bt -= powas * _bQCD(nf-3, i);
-        powas *= as;
-      }
-    return bt;
   }
 
 }

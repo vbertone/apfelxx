@@ -48,6 +48,22 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution& Distribution::operator /= (int const& s)
+  {
+    const double r = 1.0/static_cast<double>(s);
+    // sum objects in joint grid
+    for (size_t i = 0; i < _distributionJointGrid.size(); i++)
+      _distributionJointGrid[i] *= r;
+
+    // sum objects in subgrids
+    for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
+      for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
+        _distributionSubGrid[ig][i] *= r;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
   Distribution& Distribution::operator *= (Distribution const& d)
   {
     // multiply objects in joint grid
@@ -110,6 +126,12 @@ namespace apfel
   Distribution operator * (Distribution lhs, double const& s)
   {
     return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  Distribution operator / (Distribution lhs, int const& s)
+  {
+    return lhs /= s;
   }
 
   //_________________________________________________________________________

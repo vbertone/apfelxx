@@ -25,6 +25,7 @@ namespace apfel
 					vector<double> const& Thresholds,
 					int            const& nsteps):
     _ObjRef(ObjRef),
+    _MuRef(MuRef),
     _Masses(Masses),
     _Thresholds(Thresholds),
     _nsteps(nsteps)
@@ -130,6 +131,7 @@ namespace apfel
 
   // template fixed types
   template class MatchedEvolution<double>;               //<! Single coupling
+  template class MatchedEvolution<Distribution>;         //<! Single distribution
   template class MatchedEvolution<Set<Distribution>>;    //<! Set of distributions
 
 }

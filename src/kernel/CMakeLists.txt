@@ -13,6 +13,7 @@ set(kernel_source
   qgrid.cc
   convolutionmap.cc
   set.cc
+  tabulateobject.cc
   dglap.cc
   )
 

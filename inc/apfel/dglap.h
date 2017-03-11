@@ -39,7 +39,7 @@ namespace apfel
 	  double                                   const& MuRef,
 	  vector<double>                           const& Masses,
 	  vector<double>                           const& Thresholds,
-	  int                                      const& nstep = 10);
+	  int                                      const& nsteps = 10);
 
     /**
      * @brief Dglap
@@ -49,7 +49,7 @@ namespace apfel
 	  Set<Distribution>                        const& ObjRef,
 	  double                                   const& MuDistRef,
 	  vector<double>                           const& Masses,
-	  int                                      const& nstep = 10);
+	  int                                      const& nsteps = 10);
 
     /**
      * @brief
@@ -68,12 +68,12 @@ namespace apfel
     /**
      * @brief Function that returns the number of steps.
      */
-    int const& GetNumberOfSteps() const { return _nstep; }
+    int const& GetNumberOfSteps() const { return _nsteps; }
 
   private:
     function<Set<Operator>(int,double)>      _SplittingFunctions;
     function<Set<Operator>(bool,int,double)> _MatchingConditions;
-    int                               const  _nstep;
+    int                               const  _nsteps;
   };
 
 }
