@@ -19,20 +19,20 @@ namespace apfel
    * This class, following the derivation procedure from ConvolutionMap
    * implements the Basis enumerator with custom tags for the objects.
    */
-  class EvolutionBasis: public ConvolutionMap
+  class EvolutionBasisQCD: public ConvolutionMap
   {
   public:
     /**
      * @brief The map enums
      */
-    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG, PT3Q, PT8Q, PT15Q, PT24Q, PT35Q, PT3G, PT8G, PT15G, PT24G, PT35G};
+    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
      * @brief The class constructor
      */
-  EvolutionBasis(int const& nf):
-    ConvolutionMap{"EvolutionBasis_" + std::to_string(nf)}
+  EvolutionBasisQCD(int const& nf):
+    ConvolutionMap{"EvolutionBasisQCD_" + std::to_string(nf)}
     {
       // dg = Pgg * g + Pgq * Sigma
       _rules[GLUON] = { {PGG, GLUON, +1}, {PGQ, SIGMA, +1} };
@@ -51,7 +51,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T3] = { {PT3G, GLUON, +1}, {PT3Q, SIGMA, +1} };
+	  _rules[T3] = _rules[SIGMA];
 	  _rules[V3] = _rules[VALENCE];
 	}
 
@@ -63,7 +63,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T8] = { {PT8G, GLUON, +1}, {PT8Q, SIGMA, +1} };
+	  _rules[T8] = _rules[SIGMA];
 	  _rules[V8] = _rules[VALENCE];
 	}
 
@@ -75,7 +75,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T15] = { {PT15G, GLUON, +1}, {PT15Q, SIGMA, +1} };
+	  _rules[T15] = _rules[SIGMA];
 	  _rules[V15] = _rules[VALENCE];
 	}
 
@@ -87,7 +87,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T24] = { {PT24G, GLUON, +1}, {PT24Q, SIGMA, +1} };
+	  _rules[T24] = _rules[SIGMA];
 	  _rules[V24] = _rules[VALENCE];
 	}
 
@@ -99,7 +99,7 @@ namespace apfel
 	}
       else
 	{
-	  _rules[T35] = { {PT35G, GLUON, +1}, {PT35Q, SIGMA, +1} };
+	  _rules[T35] = _rules[SIGMA];
 	  _rules[V35] = _rules[VALENCE];
 	}
     };

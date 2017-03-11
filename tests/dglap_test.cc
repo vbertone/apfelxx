@@ -14,7 +14,8 @@
 #include <apfel/gridalphaqcd.h>
 #include <apfel/set.h>
 #include <apfel/dglap.h>
-#include <apfel/evolutionbasis.h>
+#include <apfel/evolutionbasisqcd.h>
+#include <apfel/matchingbasisqcd.h>
 #include <apfel/splittingfunctions.h>
 #include <apfel/matchingconditions.h>
 
@@ -35,24 +36,24 @@ double xsbar(double const& x) { return 0.2 * ( xdbar(x) + xubar(x) ); }
 double LHToyPDFs(int const& i, double const& x)
 {
   // Gluon
-  if      (i == EvolutionBasis::GLUON    ) return xglu(x);
+  if      (i == EvolutionBasisQCD::GLUON    ) return xglu(x);
   // Singlet, T15, T24, T35
-  else if (i == EvolutionBasis::SIGMA   ||
-	   i == EvolutionBasis::T15     ||
-	   i == EvolutionBasis::T24     ||
-	   i == EvolutionBasis::T35      ) return xdnv(x) + 2 * xdbar(x) + xupv(x) + 2 * xubar(x) + 2 * xsbar(x);
+  else if (i == EvolutionBasisQCD::SIGMA   ||
+	   i == EvolutionBasisQCD::T15     ||
+	   i == EvolutionBasisQCD::T24     ||
+	   i == EvolutionBasisQCD::T35      ) return xdnv(x) + 2 * xdbar(x) + xupv(x) + 2 * xubar(x) + 2 * xsbar(x);
   // T3
-  else if (i == EvolutionBasis::T3       ) return xupv(x) + 2 * xubar(x) - xdnv(x) - 2 * xdbar(x);
+  else if (i == EvolutionBasisQCD::T3       ) return xupv(x) + 2 * xubar(x) - xdnv(x) - 2 * xdbar(x);
   // T8
-  else if (i == EvolutionBasis::T8       ) return xupv(x) + 2 * xubar(x) + xdnv(x) + 2 * xdbar(x) - 4 * xsbar(x);
+  else if (i == EvolutionBasisQCD::T8       ) return xupv(x) + 2 * xubar(x) + xdnv(x) + 2 * xdbar(x) - 4 * xsbar(x);
   // Valence, V8, V15, V24, V35
-  else if (i == EvolutionBasis::VALENCE ||
-	   i == EvolutionBasis::V8      ||
-	   i == EvolutionBasis::V15     ||
-	   i == EvolutionBasis::V24     ||
-	   i == EvolutionBasis::V35      ) return xupv(x) + xdnv(x);
+  else if (i == EvolutionBasisQCD::VALENCE ||
+	   i == EvolutionBasisQCD::V8      ||
+	   i == EvolutionBasisQCD::V15     ||
+	   i == EvolutionBasisQCD::V24     ||
+	   i == EvolutionBasisQCD::V35      ) return xupv(x) + xdnv(x);
   // V3
-  else if (i == EvolutionBasis::V3       )  return xupv(x) - xdnv(x);
+  else if (i == EvolutionBasisQCD::V3       )  return xupv(x) - xdnv(x);
   else              return 0;
 }
 
@@ -122,20 +123,24 @@ int main()
   // Compute AlphaQCD above and below the thresholds
   unordered_map<int,double> asThUp;
   unordered_map<int,double> asThDown;
-  for (auto nf = nfi+1; nf <= nff; nf++)
+  for (auto nf = nfi + 1; nf <= nff; nf++)
     {
       asThDown.insert({nf,as(Thresholds[nf-1])});
       asThUp.insert({nf,as(Thresholds[nf-1]+eps8)});
     }
 
-  // Allocate convolution maps
-  unordered_map<int,EvolutionBasis> basis;
+  // Allocate convolution maps for the evolution and matching
+  unordered_map<int,EvolutionBasisQCD> evbasis;
+  unordered_map<int,MatchingBasisQCD> matchbasis;
   for (int nf = nfi; nf <= nff; nf++)
-    basis.insert({nf,EvolutionBasis{nf}});
+    {
+      evbasis.insert({nf,EvolutionBasisQCD{nf}});
+      matchbasis.insert({nf,MatchingBasisQCD{nf}});
+    }
 
   // Allocate initial scale distributions
   unordered_map<int,Distribution> DistMap;
-  for (int i = EvolutionBasis::GLUON; i <= EvolutionBasis::V35; i++)
+  for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
     DistMap.insert({i,PDF{g, InPDFsFunc, i}});
 
   // Compute numeber of active flavouts the the PDF initial scale and 
@@ -146,7 +151,7 @@ int main()
       nf0++;
     else
       break;
-  Set<Distribution> InPDFs{basis.at(nf0), DistMap};
+  Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
 
   // Dgauss integration accuracy
   const double IntEps = 1e-5;
@@ -161,16 +166,16 @@ int main()
   unordered_map<int,Operator> MatchLO;
   const Operator Id{g, Identity{}, IntEps};
   const Operator Zero{g, Null{}, IntEps};
-  MatchLO.insert({EvolutionBasis::PNSP, Id});
-  MatchLO.insert({EvolutionBasis::PNSM, Id});
-  MatchLO.insert({EvolutionBasis::PNSV, Id});
-  MatchLO.insert({EvolutionBasis::PQQ,  Id});
-  MatchLO.insert({EvolutionBasis::PQG,  Zero});
-  MatchLO.insert({EvolutionBasis::PGQ,  Zero});
-  MatchLO.insert({EvolutionBasis::PGG,  Id});
-  for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
+  MatchLO.insert({MatchingBasisQCD::PNSP, Id});
+  MatchLO.insert({MatchingBasisQCD::PNSM, Id});
+  MatchLO.insert({MatchingBasisQCD::PNSV, Id});
+  MatchLO.insert({MatchingBasisQCD::PQQ,  Id});
+  MatchLO.insert({MatchingBasisQCD::PQG,  Zero});
+  MatchLO.insert({MatchingBasisQCD::PGQ,  Zero});
+  MatchLO.insert({MatchingBasisQCD::PGG,  Id});
+  for (int i = MatchingBasisQCD::PT3Q; i <= MatchingBasisQCD::PT35Q; i++)
     MatchLO.insert({i, Id});
-  for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
+  for (int i = MatchingBasisQCD::PT3G; i <= MatchingBasisQCD::PT35G; i++)
     MatchLO.insert({i, Zero});
 
   // ===============================================================
@@ -184,17 +189,13 @@ int main()
       const Operator O0gg{g, P0gg{nf}, IntEps};
       const Operator O0qgnf = nf * O0qg;
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP, O0ns});
-      OM.insert({EvolutionBasis::PNSM, O0ns});
-      OM.insert({EvolutionBasis::PNSV, O0ns});
-      OM.insert({EvolutionBasis::PQQ,  O0ns});
-      OM.insert({EvolutionBasis::PQG,  O0qgnf});
-      OM.insert({EvolutionBasis::PGQ,  O0gq});
-      OM.insert({EvolutionBasis::PGG,  O0gg});
-      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
-	OM.insert({i, O0ns});
-      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
-	OM.insert({i, O0qgnf});
+      OM.insert({EvolutionBasisQCD::PNSP, O0ns});
+      OM.insert({EvolutionBasisQCD::PNSM, O0ns});
+      OM.insert({EvolutionBasisQCD::PNSV, O0ns});
+      OM.insert({EvolutionBasisQCD::PQQ,  O0ns});
+      OM.insert({EvolutionBasisQCD::PQG,  O0qgnf});
+      OM.insert({EvolutionBasisQCD::PGQ,  O0gq});
+      OM.insert({EvolutionBasisQCD::PGG,  O0gg});
       OpMapLO.insert({nf,OM});
     }
 
@@ -211,17 +212,13 @@ int main()
       const Operator O1gq{g, P1gq{nf}, IntEps};
       const Operator O1gg{g, P1gg{nf}, IntEps};
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP, O1nsp});
-      OM.insert({EvolutionBasis::PNSM, O1nsm});
-      OM.insert({EvolutionBasis::PNSV, O1nsm});
-      OM.insert({EvolutionBasis::PQQ,  O1qq});
-      OM.insert({EvolutionBasis::PQG,  O1qg});
-      OM.insert({EvolutionBasis::PGQ,  O1gq});
-      OM.insert({EvolutionBasis::PGG,  O1gg});
-      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
-	OM.insert({i, O1qq});
-      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
-	OM.insert({i, O1qg});
+      OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
+      OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
+      OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
+      OM.insert({EvolutionBasisQCD::PQQ,  O1qq});
+      OM.insert({EvolutionBasisQCD::PQG,  O1qg});
+      OM.insert({EvolutionBasisQCD::PGQ,  O1gq});
+      OM.insert({EvolutionBasisQCD::PGG,  O1gg});
       OpMapNLO.insert({nf,OM});
     }
 
@@ -237,26 +234,26 @@ int main()
   for (int nf = nfi; nf <= nff; nf++)
     {
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP, ANS2qqH});
-      OM.insert({EvolutionBasis::PNSM, ANS2qqH});
-      OM.insert({EvolutionBasis::PNSV, ANS2qqH});
-      OM.insert({EvolutionBasis::PQQ,  AS2qqH});
-      OM.insert({EvolutionBasis::PQG,  AS2Hg});
-      OM.insert({EvolutionBasis::PGQ,  AS2gqH});
-      OM.insert({EvolutionBasis::PGG,  AS2ggH});
+      OM.insert({MatchingBasisQCD::PNSP, ANS2qqH});
+      OM.insert({MatchingBasisQCD::PNSM, ANS2qqH});
+      OM.insert({MatchingBasisQCD::PNSV, ANS2qqH});
+      OM.insert({MatchingBasisQCD::PQQ,  AS2qqH});
+      OM.insert({MatchingBasisQCD::PQG,  AS2Hg});
+      OM.insert({MatchingBasisQCD::PGQ,  AS2gqH});
+      OM.insert({MatchingBasisQCD::PGG,  AS2ggH});
       const Operator AS2TqH = ANS2qqH - nf * APS2Hq;
       const Operator AS2Tg  = - nf * AS2Hg;
-      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
-	if (i > EvolutionBasis::PT3Q + nf - 1)
+      for (int i = MatchingBasisQCD::PT3Q; i <= MatchingBasisQCD::PT35Q; i++)
+	if (i > MatchingBasisQCD::PT3Q + nf - 1)
 	  OM.insert({i, AS2qqH});
-	else if (i == EvolutionBasis::PT3Q + nf - 1)
+	else if (i == MatchingBasisQCD::PT3Q + nf - 1)
 	  OM.insert({i, AS2TqH});
 	else
 	  OM.insert({i, Zero});
-      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
-	if (i > EvolutionBasis::PT3G + nf - 1)
+      for (int i = MatchingBasisQCD::PT3G; i <= MatchingBasisQCD::PT35G; i++)
+	if (i > MatchingBasisQCD::PT3G + nf - 1)
 	  OM.insert({i, AS2Hg});
-	else if (i == EvolutionBasis::PT3G + nf - 1)
+	else if (i == MatchingBasisQCD::PT3G + nf - 1)
 	  OM.insert({i, AS2Tg});
 	else
 	  OM.insert({i, Zero});
@@ -278,17 +275,13 @@ int main()
       const Operator O2gq{g, P2gq{nf}, IntEps};
       const Operator O2gg{g, P2gg{nf}, IntEps};
       unordered_map<int,Operator> OM;
-      OM.insert({EvolutionBasis::PNSP, O2nsp});
-      OM.insert({EvolutionBasis::PNSM, O2nsm});
-      OM.insert({EvolutionBasis::PNSV, O2nsv});
-      OM.insert({EvolutionBasis::PQQ,  O2qq});
-      OM.insert({EvolutionBasis::PQG,  O2qg});
-      OM.insert({EvolutionBasis::PGQ,  O2gq});
-      OM.insert({EvolutionBasis::PGG,  O2gg});
-      for (int i = EvolutionBasis::PT3Q; i <= EvolutionBasis::PT35Q; i++)
-	OM.insert({i, O2qq});
-      for (int i = EvolutionBasis::PT3G; i <= EvolutionBasis::PT35G; i++)
-	OM.insert({i, O2qg});
+      OM.insert({EvolutionBasisQCD::PNSP, O2nsp});
+      OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
+      OM.insert({EvolutionBasisQCD::PNSV, O2nsv});
+      OM.insert({EvolutionBasisQCD::PQQ,  O2qq});
+      OM.insert({EvolutionBasisQCD::PQG,  O2qg});
+      OM.insert({EvolutionBasisQCD::PGQ,  O2gq});
+      OM.insert({EvolutionBasisQCD::PGG,  O2gg});
       OpMapNNLO.insert({nf,OM});
     }
 
@@ -300,11 +293,11 @@ int main()
   unordered_map<int,Set<Operator>> M2;
   for (int nf = nfi; nf <= nff; nf++)
     {
-      P0.insert({nf,Set<Operator>{basis.at(nf), OpMapLO.at(nf)}});
-      P1.insert({nf,Set<Operator>{basis.at(nf), OpMapNLO.at(nf)}});
-      P2.insert({nf,Set<Operator>{basis.at(nf), OpMapNNLO.at(nf)}});
-      M0.insert({nf,Set<Operator>{basis.at(nf), MatchLO}});
-      M2.insert({nf,Set<Operator>{basis.at(nf), MatchNNLO.at(nf)}});
+      P0.insert({nf,Set<Operator>{evbasis.at(nf), OpMapLO.at(nf)}});
+      P1.insert({nf,Set<Operator>{evbasis.at(nf), OpMapNLO.at(nf)}});
+      P2.insert({nf,Set<Operator>{evbasis.at(nf), OpMapNNLO.at(nf)}});
+      M0.insert({nf,Set<Operator>{matchbasis.at(nf), MatchLO}});
+      M2.insert({nf,Set<Operator>{matchbasis.at(nf), MatchNNLO.at(nf)}});
     }
 
   // Create splitting functions and matching conditions lambda functions

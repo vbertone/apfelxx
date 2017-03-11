@@ -28,19 +28,38 @@ namespace apfel {
       throw runtime_exception("Set::operator *=", "Convolution Map does not match (1)");
 
     unordered_map<int,V> mmap;
-    for (auto const& item: _map.GetRules())
+    for (auto item = _map.GetRules().begin(); item != _map.GetRules().end(); item++)
       {
-        auto o = std::begin(item.second);
+	// If an element of the map with the same rules has already been computed,
+	// retrieve it and use it.
+	bool cycle = false;
+	for (auto it = _map.GetRules().begin(); it != item; it++)
+	  if(it->second == item->second)
+	    {
+	      mmap.insert({item->first,mmap.at(it->first)});
+	      cycle = true;
+	      break;
+	    }
+	if (cycle) continue;
+
+	// Start with the first object of the vector or rules
+        auto o = std::begin(item->second);
         V result = _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+
+	// Multiply by the numerical coefficient only if it is different from one
 	if((*o).coefficient != 1)
 	  result *= (*o).coefficient;
         o++;
-        for (auto end = std::end(item.second); o != end; o++)
+
+	// Continue with the following objects of the vector of rules
+        for (auto end = std::end(item->second); o != end; o++)
+	  // Multiply by the numerical coefficient only if it is different from one
 	  if((*o).coefficient != 1)
 	    result += (*o).coefficient * _objects.at((*o).operand) * d.GetObjects().at((*o).object);
 	  else
 	    result += _objects.at((*o).operand) * d.GetObjects().at((*o).object);
-        mmap.insert({item.first,result});
+
+        mmap.insert({item->first,result});
       }
 
     return Set<V>{d.GetMap(),mmap};

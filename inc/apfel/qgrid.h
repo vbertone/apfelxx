@@ -95,8 +95,7 @@ namespace apfel
     vector<double> _Qg;           //!< Actual grid in Q
     vector<double> _llQ2g;        //!< Actual grid in ln(ln(Q^2/Lambda^2))
     vector<int>    _nQg;          //!< Indices of the nodes on which there is either a bound or a threshold
-
-    vector<T> _GridValues;   //!< Vector of values to be interpolated on the grid
+    vector<T>      _GridValues;   //!< Vector of values to be interpolated on the grid
 
     template<class U>
     friend std::ostream& operator<<(std::ostream& os, QGrid<U> const& dt);

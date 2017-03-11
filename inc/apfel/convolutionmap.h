@@ -39,6 +39,13 @@ namespace apfel
       int    operand;
       int    object;
       double coefficient;
+      bool operator == (rule const& r) const
+	{
+	  if (r.operand     != operand)     return false;
+	  if (r.object      != object)      return false;
+	  if (r.coefficient != coefficient) return false;
+	  return true;
+	}
     };
 
     // Get methods
