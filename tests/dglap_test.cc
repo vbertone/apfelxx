@@ -11,7 +11,7 @@
 #include <apfel/operator.h>
 #include <apfel/timer.h>
 #include <apfel/tools.h>
-#include <apfel/gridalphaqcd.h>
+#include <apfel/alphaqcd.h>
 #include <apfel/set.h>
 #include <apfel/dglap.h>
 #include <apfel/evolutionbasisqcd.h>
@@ -106,8 +106,8 @@ int main()
   // Running coupling
   const double AlphaQCDRef = 0.35;
   const double MuAlphaQCDRef = mu0;
-  const GridAlphaQCD AlphaQCD{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder, 50, 1, 1000, 3};
-  const auto as = [&] (double const& mu) -> double{ return AlphaQCD.Evaluate(mu) / FourPi; };
+  const AlphaQCD Alphas{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
+  const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu) / FourPi; };
 
   // Initial scale PDFs
   const function<double(int,double)> InPDFsFunc = LHToyPDFs;
@@ -355,7 +355,7 @@ int main()
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
 		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
-  cout << "\nAlphaQCD(Q) = " << AlphaQCD.Evaluate(mu) << endl;
+  cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << endl;
   cout << "\n   x    "
        << "   u-ubar   "
        << "   d-dbar   "
