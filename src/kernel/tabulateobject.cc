@@ -60,4 +60,6 @@ namespace apfel {
     Object->SetMuRef(MuRef);
   }
 
+  template class TabulateObject<double>;
+
 }
