@@ -24,7 +24,7 @@ int main()
   cout << qg << endl;
 
   // Direct AlphaQCD
-  MatchedEvolution<double> *as = new AlphaQCD{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
+  AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
 
   // Tabulate AlphaQCD on a QGrid
   const TabulateObject<double> gas{as, 50, 1, 1000, 3};
@@ -39,7 +39,7 @@ int main()
   cout << "Q       \t\tDirect  \t\tInterpolated\t\tRatio" << endl;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
-      cout << Q << "\t\t" << as->Evaluate(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as->Evaluate(Q) / gas.Evaluate(Q) << endl;
+      cout << Q << "\t\t" << as.Evaluate(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as.Evaluate(Q) / gas.Evaluate(Q) << endl;
       Q *=Step;
     }
 
@@ -53,7 +53,7 @@ int main()
   Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
-      as->Evaluate(Q);
+      as.Evaluate(Q);
       Q *=Step;
     }
   t.printTime(t.stop());

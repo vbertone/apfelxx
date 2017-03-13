@@ -22,7 +22,7 @@ namespace apfel
     /**
      * @brief TabulateObject default constructor.
      */
-    TabulateObject(MatchedEvolution<T> *Object,
+    TabulateObject(MatchedEvolution<T> &Object,
 		   int                 const& nQ,
 		   double              const& QMin,
 		   double              const& QMax,

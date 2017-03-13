@@ -107,7 +107,7 @@ int main()
   // Running coupling
   const double AlphaQCDRef = 0.35;
   const double MuAlphaQCDRef = mu0;
-  MatchedEvolution<double> *a = new AlphaQCD{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
+  AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
   const TabulateObject<double> Alphas{a, 50, 1, 1000, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu) / FourPi; };
 
