@@ -9,6 +9,8 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 
+#include <algorithm>
+
 using namespace std;
 
 namespace apfel {
