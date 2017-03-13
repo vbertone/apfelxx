@@ -26,11 +26,11 @@ int main()
 
   // Direct AlphaQCD
   const AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
-  //AlphaQCD *asp = new AlphaQCD{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
+  MatchedEvolution<double> *tas = new AlphaQCD{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
 
   // Tabulate AlphaQCD on a QGrid
-  const GridAlphaQCD gas{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2, 50, 1, 1000, 3};
-  //const TabulateObject<double> tas{asp, 50, 1, 1000, 3};
+  //const GridAlphaQCD gas{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2, 50, 1, 1000, 3};
+  const TabulateObject<double> gas{tas, 50, 1, 1000, 3};
 
   cout << "Precision test ..." << endl;
   auto nQ   = 20;

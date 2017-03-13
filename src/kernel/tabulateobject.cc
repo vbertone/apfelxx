@@ -21,6 +21,7 @@ namespace apfel {
     QGrid<T>(nQ, QMin, QMax, InterDegree, Object->GetThresholds())
   {
     // Save initial conditions
+    const auto nsteps = Object->GetNumberOfSteps();
     const auto ObjRef = Object->GetObjectRef();
     const auto MuRef  = Object->GetMuRef();
 
@@ -33,7 +34,7 @@ namespace apfel {
     // Resize container
     this->_GridValues.resize(this->_Qg.size());
 
-    // Loop on "this->_Qg" below "MuRef"
+    // Loop on "_Qg" below "MuRef"
     for (auto iQ = tQ; iQ >= 0; iQ--)
       {
 	auto o = Object->Evaluate(this->_Qg[iQ]);
@@ -42,7 +43,7 @@ namespace apfel {
 	Object->SetMuRef(this->_Qg[iQ]);
       }
 
-    // Loop on "this->_Qg" above "MuRef"
+    // Loop on "_Qg" above "MuRef"
     Object->SetObjectRef(ObjRef);
     Object->SetMuRef(MuRef);
     for (auto iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
@@ -52,6 +53,11 @@ namespace apfel {
 	Object->SetObjectRef(o);
 	Object->SetMuRef(this->_Qg[iQ]);
       }
+
+    // Reset initial conditions
+    Object->SetNumberOfSteps(nsteps);
+    Object->SetObjectRef(ObjRef);
+    Object->SetMuRef(MuRef);
   }
 
 }
