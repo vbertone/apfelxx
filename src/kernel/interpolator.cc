@@ -24,7 +24,7 @@ namespace apfel {
     auto const lnx    = log(x);
 
     double result = 0;
-    for (auto beta = bounds.first; beta < bounds.second; beta++)
+    for (auto beta = bounds[0]; beta < bounds[1]; beta++)
       result += Interpolant(beta, lnx, _grid.GetJointGrid()) * _distributionJointGrid[beta];
     return result;
   }
@@ -36,7 +36,7 @@ namespace apfel {
     auto const lnx    = log(x);
 
     double result = 0;
-    for (auto beta = bounds.first; beta < bounds.second; beta++)
+    for (auto beta = bounds[0]; beta < bounds[1]; beta++)
       result += Interpolant(beta, lnx, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
     return result;
   }

@@ -10,10 +10,11 @@
 #include "apfel/grid.h"
 
 #include <vector>
+#include <array>
 #include <utility>
 
 using std::vector;
-using std::pair;
+using std::array;
 
 namespace apfel
 {
@@ -67,7 +68,7 @@ namespace apfel
      * @param sg SubGrid on which the interpolant is defined
      * @return the lower and upper bounds of beta.
      */
-    virtual pair<int,int> SumBounds(double const& x, SubGrid const& sg) const = 0;
+    virtual array<int,2> SumBounds(double const& x, SubGrid const& sg) const = 0;
 
     // Getters
     Grid                   const& GetGrid()                  const { return _grid; }                  //!< return the grid

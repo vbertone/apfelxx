@@ -52,23 +52,23 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  pair<int,int> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
+  array<int, 2> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
   {
     auto const& xsg = sg.GetGrid();
 
-    pair<int,int> bounds (0,0);
+    array<int,2> bounds = {0, 0};
     if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 
     const auto low = lower_bound(xsg.begin()+1, xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
-    bounds = {low, low};
+    bounds[0] = bounds[1] = low;
 
     if (fabs(x - xsg[low]) <= eps12)
-          bounds.second += 1;
+          bounds[1] += 1;
     else
       {
-        bounds.first -= 1;
-        bounds.second += sg.InterDegree();
+        bounds[0] -= 1;
+        bounds[1] += sg.InterDegree();
       }
 
     return bounds;

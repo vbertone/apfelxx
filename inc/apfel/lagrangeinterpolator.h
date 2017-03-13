@@ -36,6 +36,6 @@ namespace apfel
     /**
      * @see Interpolator::SumBounds
      */
-    pair<int,int> SumBounds(double const& x, SubGrid const& sg) const;
+    array<int,2> SumBounds(double const& x, SubGrid const& sg) const;
   };
 }
