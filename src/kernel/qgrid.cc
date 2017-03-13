@@ -10,7 +10,7 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 
-#include <algorithm>
+//#include <algorithm>
 
 namespace apfel
 {
@@ -104,14 +104,14 @@ namespace apfel
 
     // Find the the neighbors of "Q" on the grid
     int j;
-    for (j = 0; j <= tau+tQ-bound; j++)
-      if (lnln2ql >= _llQ2g[tau+tQ-j] && lnln2ql < _llQ2g[tau+tQ-j+1])
+    for (j = tau+tQ-bound; j >=0 ; j--)
+      if (lnln2ql < _llQ2g[tau+tQ-j+1])
 	break;
 
     // Compute the interpolant
-    for (auto delta = 0; delta <= _InterDegree; delta++)
-      if(delta != j)
-	w_int *= ( lnln2ql - _llQ2g[tau-j+delta] ) / ( _llQ2g[tau] - _llQ2g[tau-j+delta] );
+    for (auto delta = tau-j; delta <= tau-j+_InterDegree; delta++)
+      if(delta != tau)
+	w_int *= ( lnln2ql - _llQ2g[delta] ) / ( _llQ2g[tau] - _llQ2g[delta] );
 
     return w_int;
   }

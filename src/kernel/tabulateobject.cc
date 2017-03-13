@@ -6,6 +6,8 @@
 //
 
 #include "apfel/tabulateobject.h"
+#include "apfel/distribution.h"
+#include "apfel/set.h"
 
 using namespace std;
 
@@ -31,17 +33,17 @@ namespace apfel {
     // Find the point on the QGrid right below MuRef
     const auto tQ = lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
 
-    // Resize container
-    this->_GridValues.resize(this->_Qg.size());
-
     // Loop on "_Qg" below "MuRef"
     for (auto iQ = tQ; iQ >= 0; iQ--)
       {
 	auto o = Object->Evaluate(this->_Qg[iQ]);
-	this->_GridValues[iQ] = o;
+	this->_GridValues.push_back(o);
 	Object->SetObjectRef(o);
 	Object->SetMuRef(this->_Qg[iQ]);
       }
+
+    // Reverse order of the elements
+    reverse(this->_GridValues.begin(),this->_GridValues.end());
 
     // Loop on "_Qg" above "MuRef"
     Object->SetObjectRef(ObjRef);
@@ -49,7 +51,7 @@ namespace apfel {
     for (auto iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
       {
 	auto o = Object->Evaluate(this->_Qg[iQ]);
-	this->_GridValues[iQ] = o;
+	this->_GridValues.push_back(o);
 	Object->SetObjectRef(o);
 	Object->SetMuRef(this->_Qg[iQ]);
       }
@@ -61,5 +63,7 @@ namespace apfel {
   }
 
   template class TabulateObject<double>;
+  template class TabulateObject<Distribution>;
+  template class TabulateObject<Set<Distribution>>;
 
 }
