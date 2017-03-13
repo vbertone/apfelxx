@@ -121,7 +121,7 @@ namespace apfel
     int const ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
-        int const nx = this->_grid.GetSubGrid(ig).nx();
+        int const nx = _grid.GetSubGrid(ig).nx();
 
 	// If the grid is external the product between the operator and the distribution
 	// has to be done in a standard way.
@@ -220,8 +220,8 @@ namespace apfel
   Operator& Operator::operator *= (double const& s)
   {
     for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
-        for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
           _Operator[ig](alpha,beta) *= s;
 
     return *this;
@@ -235,8 +235,8 @@ namespace apfel
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
-        for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
           _Operator[ig](alpha,beta) += o._Operator[ig](alpha,beta);
 
     return *this;
@@ -250,8 +250,8 @@ namespace apfel
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
-      for (size_t alpha = 0; alpha < _Operator[ig].size().first; alpha++)
-        for (size_t beta = alpha; beta < _Operator[ig].size().second; beta++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
           _Operator[ig](alpha,beta) -= o._Operator[ig](alpha,beta);
 
     return *this;

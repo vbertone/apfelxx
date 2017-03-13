@@ -26,6 +26,7 @@ namespace apfel {
   }
 
   // type constrain
+  template class matrix<size_t>;
   template class matrix<int>;
   template class matrix<float>;
   template class matrix<double>;
