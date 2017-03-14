@@ -26,8 +26,6 @@ namespace apfel
   {
   public:
 
-    DglapQCD() = delete;
-
     /**
      * @brief AlphaQCD default constructor.
      * @param AlphaRef the reference value of the coupling.
@@ -76,17 +74,18 @@ namespace apfel
     int                                        const& GetNumberOfSteps()        const { return _nsteps; }
     Dglap                                      const& GetDglapObject()          const { return *_DglapObj; }
 
+
   private:
     Grid                                       const& _g;
-    function<double(int const&,double const&)> const& _InPDFsFunc;
-    double                                     const& _MuRef;
-    vector<double>                             const& _Masses;
-    vector<double>                             const& _Thresholds;
-    int                                        const& _PerturbativeOrder;
-    function<double(double const&)>            const& _Alphas;
-    double                                     const& _IntEps;
-    int                                               _nsteps;
-    shared_ptr<Dglap>                                 _DglapObj;
+    function<double(int const&,double const&)> _InPDFsFunc;
+    double                                     _MuRef;
+    vector<double>                             _Masses;
+    vector<double>                             _Thresholds;
+    int                                        _PerturbativeOrder;
+    function<double(double const&)>            _Alphas;
+    double                                     _IntEps;
+    int                                        _nsteps;
+    shared_ptr<Dglap>                          _DglapObj;
   };
 
 }

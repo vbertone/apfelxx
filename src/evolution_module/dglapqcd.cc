@@ -239,28 +239,29 @@ namespace apfel {
     function<Set<Operator>(bool const&, int const&, double const&)> MatchingConditions;
     if (PerturbativeOrder == 0)
       {
-	SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
 	  { const auto cp = Alphas(mu)/FourPi; return cp * P0.at(nf); };
-	MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
+	MatchingConditions = [=] (bool const&, int const& nf, double const&) -> Set<Operator>
 	  { return M0.at(nf); };
       }
     else if (PerturbativeOrder == 1)
       {
-	SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
 	  { const auto cp = Alphas(mu)/FourPi; return cp * ( P0.at(nf) + cp * P1.at(nf) ); };
-	MatchingConditions = [&] (bool const&, int const& nf, double const&) -> Set<Operator>
+	MatchingConditions = [=] (bool const&, int const& nf, double const&) -> Set<Operator>
 	  { return M0.at(nf); };
       }
     else if (PerturbativeOrder == 2)
       {
-	SplittingFunctions = [&] (int const& nf, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
 	  { const auto cp = Alphas(mu)/FourPi; return cp * ( P0.at(nf) + cp * ( P1.at(nf) + cp * P2.at(nf) ) ); };
-	MatchingConditions = [&] (bool const& Up, int const& nf, double const&) -> Set<Operator>
+	MatchingConditions = [=] (bool const& Up, int const& nf, double const&) -> Set<Operator>
 	  { const auto cp = asThUp.at(nf+1); return M0.at(nf) + ( Up ? 1 : -1) * cp * cp * M2.at(nf); };
       }
 
     // Initialize DGLAP evolution
     _DglapObj = shared_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps});
+
     t.printTime(t.stop());
   }
 
