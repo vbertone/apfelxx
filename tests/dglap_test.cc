@@ -108,7 +108,7 @@ int main()
   const double AlphaQCDRef = 0.35;
   const double MuAlphaQCDRef = mu0;
   AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
-  const TabulateObject<double> Alphas{a, 50, 0.9, 1001, 3};
+  const TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu) / FourPi; };
 
   // Initial scale PDFs
