@@ -108,7 +108,7 @@ int main()
   const double AlphaQCDRef = 0.35;
   const double MuAlphaQCDRef = mu0;
   AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
-  const TabulateObject<double> Alphas{a, 50, 1, 1000, 3};
+  const TabulateObject<double> Alphas{a, 50, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu) / FourPi; };
 
   // Initial scale PDFs
@@ -339,7 +339,12 @@ int main()
 
   // Initialize DGLAP evolution
   Dglap EvolvedPDFs{SplittingFunctions, MatchingConditions, InPDFs, mu0, Masses, Thresholds, nsteps};
+  t.printTime(t.stop());
 
+  // Tabulate PDFs
+  cout << "Tabulation... ";
+  t.start();
+  const TabulateObject<Set<Distribution>> TabulatedPDFs{EvolvedPDFs, 50, 1, 1000, 3};
   t.printTime(t.stop());
 
   // Final scale
@@ -347,11 +352,16 @@ int main()
 
   // Print results
   cout << scientific;
-  cout << "Evolution (4th order Runge-Kutta with " << nsteps << " steps) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
-  t.start();
 
   // Evolve PDFs to the final Scale
+  cout << "Direct evolution (4th order Runge-Kutta with " << nsteps << " steps) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
+  t.start();
   auto pdfs = EvolvedPDFs.Evaluate(mu);
+  t.printTime(t.stop());
+
+  cout << "Interpolation of the tabulated PDFs... ";
+  t.start();
+  auto tpdfs = TabulatedPDFs.Evaluate(mu);
   t.printTime(t.stop());
 
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
@@ -366,6 +376,7 @@ int main()
        << "    gluon   "
        << endl;
 
+  cout << "Direct Evolution:" << endl;
   for (auto i = 2; i < 11; i++)
     {
       cout.precision(1);
@@ -401,6 +412,44 @@ int main()
 	   << endl;
     }
   cout << "      " << endl;
+
+  cout << "Interpolation on the PDF table:" << endl;
+  for (auto i = 2; i < 11; i++)
+    {
+      cout.precision(1);
+      cout << xlha[i];
+      cout.precision(4);
+      cout << "  " <<
+	tpdfs.at(2).Evaluate(xlha[i])  / 6  +
+	tpdfs.at(4).Evaluate(xlha[i])  / 2  +
+	tpdfs.at(6).Evaluate(xlha[i])  / 6  +
+	tpdfs.at(8).Evaluate(xlha[i])  / 12 +
+	tpdfs.at(10).Evaluate(xlha[i]) / 20 +
+	tpdfs.at(12).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	tpdfs.at(2).Evaluate(xlha[i])  / 6  -
+	tpdfs.at(4).Evaluate(xlha[i])  / 2  +
+	tpdfs.at(6).Evaluate(xlha[i])  / 6  +
+	tpdfs.at(8).Evaluate(xlha[i])  / 12 +
+	tpdfs.at(10).Evaluate(xlha[i]) / 20 +
+	tpdfs.at(12).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	( tpdfs.at(1).Evaluate(xlha[i])  - tpdfs.at(2).Evaluate(xlha[i])  ) / 3  +
+	( tpdfs.at(5).Evaluate(xlha[i])  - tpdfs.at(6).Evaluate(xlha[i])  ) / 3  +
+	( tpdfs.at(7).Evaluate(xlha[i])  - tpdfs.at(8).Evaluate(xlha[i])  ) / 6  +
+	( tpdfs.at(9).Evaluate(xlha[i])  - tpdfs.at(10).Evaluate(xlha[i]) ) / 10 +
+	( tpdfs.at(11).Evaluate(xlha[i]) - tpdfs.at(12).Evaluate(xlha[i]) ) / 15
+	   << "  " <<
+	tpdfs.at(1).Evaluate(xlha[i])  / 6  -
+	tpdfs.at(7).Evaluate(xlha[i])  / 4  +
+	tpdfs.at(9).Evaluate(xlha[i])  / 20 +
+	tpdfs.at(11).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	tpdfs.at(0).Evaluate(xlha[i]) << "  "
+	   << endl;
+    }
+  cout << "      " << endl;
+
 
   return 0;
 }

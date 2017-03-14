@@ -27,8 +27,9 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator = (Distribution const& d)
   {
-    if(this != &d)
-      *this = d;
+    _distributionSubGrid   = d.GetDistributionSubGrid();
+    _distributionJointGrid = d.GetDistributionJointGrid();
+
     return *this;
   }
 
