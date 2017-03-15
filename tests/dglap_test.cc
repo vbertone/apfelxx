@@ -5,13 +5,14 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <apfel/dglapqcd.h>
 #include <apfel/grid.h>
 #include <apfel/timer.h>
 #include <apfel/alphaqcd.h>
 #include <apfel/tabulateobject.h>
 #include <apfel/evolutionbasisqcd.h>
 #include <apfel/matchingbasisqcd.h>
+#include <apfel/dglap.h>
+#include <apfel/dglapbuilder.h>
 
 #include <functional>
 
@@ -51,8 +52,6 @@ double LHToyPDFs(int const& i, double const& x)
 
 int main()
 {
-  // Input parameters
-
   // x-space grid
   const Grid g{{SubGrid{100,1e-5,3}, SubGrid{60,1e-1,3}, SubGrid{50,6e-1,3}, SubGrid{50,8e-1,3}}};
 
@@ -73,8 +72,7 @@ int main()
   const TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
-  const DglapQCD QCD(g, LHToyPDFs, mu0, Masses, PerturbativeOrder, as);
-  Dglap EvolvedPDFs = QCD.GetDglapObject();
+  auto EvolvedPDFs = DglapBuildQCD(g, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
 
   Timer t;
 
@@ -91,7 +89,7 @@ int main()
   cout << scientific;
 
   // Evolve PDFs to the final Scale
-  cout << "Direct evolution (4th order Runge-Kutta with " << QCD.GetNumberOfSteps() << " steps) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
+  cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
   t.start();
   auto pdfs = EvolvedPDFs.Evaluate(mu);
   t.printTime(t.stop());
