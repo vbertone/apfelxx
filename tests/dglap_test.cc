@@ -64,7 +64,7 @@ int main()
 
   // Vectors of masses and thresholds
   const vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175}; // Check in the level above that they are ordered
-const vector<double> Thresholds = Masses;
+  const vector<double> Thresholds = Masses;
 
   // Perturbative order
   const int PerturbativeOrder = 2;
@@ -153,7 +153,7 @@ const vector<double> Thresholds = Masses;
     }
   cout << "      " << endl;
 
-  cout << "Interpolation on the PDF table:" << endl;
+  cout << "Interpolation on the PDF table (all x for each Q):" << endl;
   for (auto i = 2; i < 11; i++)
     {
       cout.precision(1);
@@ -189,6 +189,50 @@ const vector<double> Thresholds = Masses;
 	   << endl;
     }
   cout << "      " << endl;
+
+  cout << "Interpolation on the PDF table (x and Q independently):" << endl;
+  for (auto i = 2; i < 11; i++)
+    {
+      cout.precision(1);
+      cout << xlha[i];
+      cout.precision(4);
+      cout << "  " <<
+	TabulatedPDFs.EvaluatexQ(2,xlha[i],mu)  / 6  +
+	TabulatedPDFs.EvaluatexQ(4,xlha[i],mu)  / 2  +
+	TabulatedPDFs.EvaluatexQ(6,xlha[i],mu)  / 6  +
+	TabulatedPDFs.EvaluatexQ(8,xlha[i],mu)  / 12 +
+	TabulatedPDFs.EvaluatexQ(10,xlha[i],mu) / 20 +
+	TabulatedPDFs.EvaluatexQ(12,xlha[i],mu) / 30
+	   << "  " <<
+	TabulatedPDFs.EvaluatexQ(2,xlha[i],mu)  / 6  -
+	TabulatedPDFs.EvaluatexQ(4,xlha[i],mu)  / 2  +
+	TabulatedPDFs.EvaluatexQ(6,xlha[i],mu)  / 6  +
+	TabulatedPDFs.EvaluatexQ(8,xlha[i],mu)  / 12 +
+	TabulatedPDFs.EvaluatexQ(10,xlha[i],mu) / 20 +
+	TabulatedPDFs.EvaluatexQ(12,xlha[i],mu) / 30
+	   << "  " <<
+	( TabulatedPDFs.EvaluatexQ(1,xlha[i],mu)  - TabulatedPDFs.EvaluatexQ(2,xlha[i],mu)  ) / 3  +
+	( TabulatedPDFs.EvaluatexQ(5,xlha[i],mu)  - TabulatedPDFs.EvaluatexQ(6,xlha[i],mu)  ) / 3  +
+	( TabulatedPDFs.EvaluatexQ(7,xlha[i],mu)  - TabulatedPDFs.EvaluatexQ(8,xlha[i],mu)  ) / 6  +
+	( TabulatedPDFs.EvaluatexQ(9,xlha[i],mu)  - TabulatedPDFs.EvaluatexQ(10,xlha[i],mu) ) / 10 +
+	( TabulatedPDFs.EvaluatexQ(11,xlha[i],mu) - TabulatedPDFs.EvaluatexQ(12,xlha[i],mu) ) / 15
+	   << "  " <<
+	TabulatedPDFs.EvaluatexQ(1,xlha[i],mu)  / 6  -
+	TabulatedPDFs.EvaluatexQ(7,xlha[i],mu)  / 4  +
+	TabulatedPDFs.EvaluatexQ(9,xlha[i],mu)  / 20 +
+	TabulatedPDFs.EvaluatexQ(11,xlha[i],mu) / 30
+	   << "  " <<
+	TabulatedPDFs.EvaluatexQ(0,xlha[i],mu) << "  "
+	   << endl;
+    }
+  cout << "      " << endl;
+
+  const int k = 1000000;
+  cout << "Interpolating " << k << " times PDFs on the (x,Q) grid... ";
+  t.start();
+  for (auto i = 0; i < k; i++)
+      TabulatedPDFs.EvaluatexQ(0,0.05,mu);
+  t.printTime(t.stop());
 
   return 0;
 }

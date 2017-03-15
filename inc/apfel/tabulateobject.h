@@ -28,6 +28,8 @@ namespace apfel
 		   double              const& QMax,
 		   int                 const& InterDegree);
 
+    double EvaluatexQ(double const& x, double const& Q) const;
+    double EvaluatexQ(int const&, double const& x, double const& Q) const;
   };
 
 }

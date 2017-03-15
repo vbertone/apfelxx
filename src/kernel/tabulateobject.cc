@@ -8,6 +8,7 @@
 #include "apfel/tabulateobject.h"
 #include "apfel/distribution.h"
 #include "apfel/set.h"
+#include "apfel/tools.h"
 
 #include <algorithm>
 
@@ -64,8 +65,61 @@ namespace apfel {
     Object.SetMuRef(MuRef);
   }
 
+  // Specializations
+  //_________________________________________________________________________________
   template class TabulateObject<double>;
   template class TabulateObject<Distribution>;
   template class TabulateObject<Set<Distribution>>;
+
+  //_________________________________________________________________________________
+  template<>
+  double TabulateObject<double>::EvaluatexQ(double const&, double const&) const
+  {
+    throw runtime_exception("EvaluatexQ(x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
+  };
+
+  template<>
+  double TabulateObject<Distribution>::EvaluatexQ(double const& x, double const& Q) const
+  {
+    cout << ", x = " << x << ", Q = " << Q << endl;
+    return 0;
+  };
+
+  template<>
+  double TabulateObject<Set<Distribution>>::EvaluatexQ(double const&, double const&) const
+  {
+    throw runtime_exception("EvaluatexQ(x,Q)","This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
+  };
+
+  //_________________________________________________________________________________
+  template<>
+  double TabulateObject<double>::EvaluatexQ(int const&, double const&, double const&) const
+  {
+    throw runtime_exception("EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
+  };
+
+  template<>
+  double TabulateObject<Distribution>::EvaluatexQ(int const&, double const&, double const&) const
+  {
+    throw runtime_exception("EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
+  };
+
+  template<>
+  double TabulateObject<Set<Distribution>>::EvaluatexQ(int const& i, double const& x, double const& Q) const
+  {
+    const auto bounds = this->SumBounds(Q);
+    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+
+    // first create a copy of template object with the first component
+    auto tau = get<1>(bounds);
+    double result = this->Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].at(i).Evaluate(x);
+
+    // then loop and add the extra terms
+    for (tau = tau+1; tau < get<2>(bounds); tau++)
+      result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].at(i).Evaluate(x);
+
+    return result;
+  };
+
 
 }
