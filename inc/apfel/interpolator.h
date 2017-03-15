@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "apfel/grid.h"
+#include <apfel/grid.h>
 
 #include <vector>
 #include <array>

@@ -75,8 +75,8 @@ namespace apfel {
   template<>
   double TabulateObject<double>::EvaluatexQ(double const&, double const&) const
   {
-    throw runtime_exception("EvaluatexQ(x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
-  };
+    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
+  }
 
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(double const& x, double const& Q) const
@@ -88,21 +88,21 @@ namespace apfel {
   template<>
   double TabulateObject<Set<Distribution>>::EvaluatexQ(double const&, double const&) const
   {
-    throw runtime_exception("EvaluatexQ(x,Q)","This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
-  };
+    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)","This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
+  }
 
   //_________________________________________________________________________________
   template<>
   double TabulateObject<double>::EvaluatexQ(int const&, double const&, double const&) const
   {
-    throw runtime_exception("EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
-  };
+    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
+  }
 
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(int const&, double const&, double const&) const
   {
-    throw runtime_exception("EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
-  };
+    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
+  }
 
   template<>
   double TabulateObject<Set<Distribution>>::EvaluatexQ(int const& i, double const& x, double const& Q) const
@@ -119,7 +119,7 @@ namespace apfel {
       result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].at(i).Evaluate(x);
 
     return result;
-  };
+  }
 
 
 }

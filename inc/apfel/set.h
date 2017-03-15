@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "apfel/convolutionmap.h"
+#include <apfel/convolutionmap.h>
 
 #include <memory>
 #include <unordered_map>

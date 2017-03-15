@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "apfel/qgrid.h"
-#include "apfel/matchedevolution.h"
+#include <apfel/qgrid.h>
+#include <apfel/matchedevolution.h>
 
 namespace apfel
 {

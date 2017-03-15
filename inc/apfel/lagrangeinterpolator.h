@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "apfel/interpolator.h"
+#include <apfel/interpolator.h>
 
 namespace apfel
 {

@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "apfel/set.h"
-#include "apfel/distribution.h"
+#include <apfel/set.h>
+#include <apfel/distribution.h>
 
 #include <functional>
 

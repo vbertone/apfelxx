@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "apfel/grid.h"
-#include "apfel/expression.h"
-#include "apfel/distribution.h"
-#include "apfel/integrator.h"
-#include "apfel/lagrangeinterpolator.h"
-#include "apfel/matrix.h"
+#include <apfel/grid.h>
+#include <apfel/expression.h>
+#include <apfel/distribution.h>
+#include <apfel/integrator.h>
+#include <apfel/lagrangeinterpolator.h>
+#include <apfel/matrix.h>
 
 namespace apfel
 {

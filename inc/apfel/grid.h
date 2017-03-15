@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "apfel/subgrid.h"
+#include <apfel/subgrid.h>
 
 #include <vector>
 #include <memory>

@@ -56,9 +56,6 @@ int main()
   // x-space grid
   const Grid g{{SubGrid{100,1e-5,3}, SubGrid{60,1e-1,3}, SubGrid{50,6e-1,3}, SubGrid{50,8e-1,3}}};
 
-  // Initial scale PDFs
-  const function<double(int,double)> InPDFsFunc = LHToyPDFs;
-
   // Initial scale
   const double mu0 = sqrt(2);
 
@@ -76,7 +73,7 @@ int main()
   const TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
-  const DglapQCD QCD(g, InPDFsFunc, mu0, Masses, PerturbativeOrder, as);
+  const DglapQCD QCD(g, LHToyPDFs, mu0, Masses, PerturbativeOrder, as);
   Dglap EvolvedPDFs = QCD.GetDglapObject();
 
   Timer t;

@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "apfel/matchedevolution.h"
-#include "apfel/matrix.h"
+#include <apfel/matchedevolution.h>
+#include <apfel/matrix.h>
 
 #include <functional>
 

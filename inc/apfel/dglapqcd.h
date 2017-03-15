@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include "apfel/dglap.h"
-#include "apfel/grid.h"
-#include "apfel/distribution.h"
+#include <apfel/dglap.h>
+#include <apfel/grid.h>
+#include <apfel/distribution.h>
 
 #include <functional>
 #include <memory>
