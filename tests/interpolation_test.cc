@@ -120,25 +120,25 @@ int main()
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r);
-  t.printTime(t.stop());
+  t.stop();
 
   cout << "(First SubGrid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r,0);
-  t.printTime(t.stop());
+  t.stop();
 
   cout << "(Second SubGrid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r,1);
-  t.printTime(t.stop());
+  t.stop();
 
   cout << "(Third SubGrid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r,2);
-  t.printTime(t.stop());
+  t.stop();
 
   cout << "\n";
 

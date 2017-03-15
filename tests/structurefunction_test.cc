@@ -180,7 +180,7 @@ int main()
   // Combine operators with alphas and put it in a vector
   const vector<Operator> Ov = { OqLO + as * OqNLO, as * OgNLO };
 
-  t.printTime(t.stop());
+  t.stop();
 
   // Charges
   const auto eu2 = 4. / 9.;
@@ -210,7 +210,7 @@ int main()
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2map.Evaluate(xlha[i]) << endl;
 
-  t.printTime(t.stop());
+  t.stop();
 
   // Alterantive (and more optimal) way to combine Operators and distributions
   // ========== Computation phase ==========
@@ -248,7 +248,7 @@ int main()
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << "F2(x = " << xlha[i] << ", Q = " << Q << " GeV) = " << F2vec.Evaluate(xlha[i]) << endl;
 
-  t.printTime(t.stop());
+  t.stop();
 
   return 0;
 }

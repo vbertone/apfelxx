@@ -89,19 +89,19 @@ int main()
   cout << "\nInitialization ..." << endl;
   t.start();
   const Operator O{g, p};
-  t.printTime(t.stop());
+  t.stop();
 
   // Multiply operator by the distribution to create a new distribution
   cout << "\nConvolution between operator and distribution (O * d) ..." << endl;
   t.start();
   auto Od = O * d;
-  t.printTime(t.stop());
+  t.stop();
 
   // Multiply operator by itself to create a new operator
   cout << "\nConvolution between two operators (O * O) ..." << endl;
   t.start();
   auto OO = O * O;
-  t.printTime(t.stop());
+  t.stop();
 
   // Check the numerical accuracy of "Od" by comparing with the analytical result
   cout << "\nChecking the numerical accuracy of O * d ... " << endl;

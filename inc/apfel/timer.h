@@ -5,9 +5,8 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
+#include <iostream>
+#include <chrono>
 
 namespace apfel
 {
@@ -20,32 +19,20 @@ namespace apfel
 
    public:
     //! Starts the timer.
-    void start(){ gettimeofday(&startTime, NULL); }
+    void start(){  startTime = std::chrono::steady_clock::now(); }
 
     //! Stops the timer.
-    double stop()
+    void stop()
     {
-      timeval endTime;
-      long seconds, useconds;
-      double duration;
-      gettimeofday(&endTime, NULL);
-      seconds  = endTime.tv_sec  - startTime.tv_sec;
-      useconds = endTime.tv_usec - startTime.tv_usec;
-      duration = seconds + useconds/1E6f;
-      return duration;
-    }
+      auto end = std::chrono::steady_clock::now();
+      auto diff = end - startTime;
 
-    /*!
-     * \brief Prints enlapsed time
-     * \param duration input time from Timer::stop()
-     */
-    static void printTime(double const& duration)
-    {
-      printf("elapsed time: %5.6f seconds\n", duration);
+      printf("elapsed time: %5.6f seconds\n",
+             std::chrono::duration <double, std::milli> (diff).count()*1e-4);
     }
 
   private:
-   timeval startTime;
+   std::chrono::time_point<std::chrono::steady_clock> startTime;
   };
 
 }

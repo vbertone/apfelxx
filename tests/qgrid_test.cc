@@ -56,7 +56,7 @@ int main()
       as.Evaluate(Q);
       Q *=Step;
     }
-  t.printTime(t.stop());
+  t.stop();
 
   t.start();
   cout << "Interpolated calculation of " << nQ << " points ..." << endl;
@@ -66,7 +66,7 @@ int main()
       gas.Evaluate(Q);
       Q *=Step;
     }
-  t.printTime(t.stop());
+  t.stop();
 
   return 0;
 }

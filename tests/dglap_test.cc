@@ -80,7 +80,7 @@ int main()
   cout << "Tabulation... ";
   t.start();
   const TabulateObject<Set<Distribution>> TabulatedPDFs{EvolvedPDFs, 50, 1, 1000, 3};
-  t.printTime(t.stop());
+  t.stop();
 
   // Final scale
   double mu  = 100;
@@ -92,12 +92,12 @@ int main()
   cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
   t.start();
   auto pdfs = EvolvedPDFs.Evaluate(mu);
-  t.printTime(t.stop());
+  t.stop();
 
   cout << "Interpolation of the tabulated PDFs... ";
   t.start();
   auto tpdfs = TabulatedPDFs.Evaluate(mu);
-  t.printTime(t.stop());
+  t.stop();
 
   double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
 		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
@@ -227,7 +227,7 @@ int main()
   t.start();
   for (auto i = 0; i < k; i++)
       TabulatedPDFs.EvaluatexQ(0,0.05,mu);
-  t.printTime(t.stop());
+  t.stop();
 
   return 0;
 }

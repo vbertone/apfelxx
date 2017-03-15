@@ -234,7 +234,7 @@ int main()
       OM.insert({EvolutionBasis::PGG, O0gg});
       OpMap.insert({nf,OM});
     }
-  t.printTime(t.stop());
+  t.stop();
 
   // Allocate distributions
   cout << "Initializing distributions ..." << endl;
@@ -242,7 +242,7 @@ int main()
   unordered_map<int,Distribution> DistMap;
   for (int i = EvolutionBasis::GLUON; i <= EvolutionBasis::V35; i++)
     DistMap.insert({i,PDF{g, LHToyPDFs, i}});
-  t.printTime(t.stop());
+  t.stop();
 
   cout << "Initializing set of operators and distributions ..." << endl;
   t.start();
@@ -259,7 +259,7 @@ int main()
   // Allocate set of initial distributions
   Set<Distribution> PDFs{basis.at(5), DistMap};
 
-  t.printTime(t.stop());
+  t.stop();
 
   // ===============================================================
   // Test products
@@ -276,11 +276,11 @@ int main()
   auto Sum = Product.at(EvolutionBasis::GLUON) + Product.at(EvolutionBasis::GLUON);
   cout << "[(Splitting * PDFs)[GLUON] + (Splitting * PDFs)[GLUON]](x=0.1) = "
        << Sum.Evaluate(0.1) << endl;
-  t.printTime(t.stop());
+  t.stop();
 
   // ===============================================================
   cout << "\nFull computation time:" << endl;
-  ttot.printTime(ttot.stop());
+  ttot.stop();
 
   return 0;
 }

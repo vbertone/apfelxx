@@ -77,7 +77,7 @@ int main()
   cout << "result f(43) = " << f.fib(43) << endl;
   cout << "result f(42) = " << f.fib(42) << endl;
   cout << "result f(41) = " << f.fib(41) << endl;
-  t.printTime(t.stop());
+  t.stop();
 
   t.start();
   cout << "Computing fibonacci with cache..." << endl;
@@ -86,13 +86,13 @@ int main()
   cout << "result f(43) = " << f.fib_cache(43) << endl;
   cout << "result f(42) = " << f.fib_cache(42) << endl;
   cout << "result f(41) = " << f.fib_cache(41) << endl;
-  t.printTime(t.stop());
+  t.stop();
 
   Test2D t2d;
   t.start();
   cout << "Computing 2d example with cache..." << endl;
   cout << "result f(1,2) = " << t2d.fun(1,2) << endl;
-  t.printTime(t.stop());
+  t.stop();
 
   return 0;
 }

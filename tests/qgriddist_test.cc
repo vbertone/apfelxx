@@ -136,7 +136,7 @@ int main()
 	}
       Q *= Qstep;
     }
-  t.printTime(t.stop());
+  t.stop();
 
   return 0;
 }

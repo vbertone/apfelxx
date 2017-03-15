@@ -39,7 +39,7 @@ int main()
   t.start();
   // Construct the operator
   const Operator op(g, p);
-  t.printTime(t.stop());
+  t.stop();
 
   return 0;
 }

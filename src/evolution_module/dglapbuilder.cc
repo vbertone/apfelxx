@@ -285,7 +285,7 @@ namespace apfel {
 	  { const auto cp = asThUp.at(nf+1); return M0.at(nf) + ( Up ? 1 : -1) * cp * cp * M2.at(nf); };
       }
 
-    t.printTime(t.stop());
+    t.stop();
 
     // Initialize DGLAP evolution
     return Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps};
