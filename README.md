@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/vbertone/apfelxx/tree/master.svg?style=svg)](https://circleci.com/gh/vbertone/apfelxx/tree/master)
+[![CircleCI](https://circleci.com/gh/vbertone/apfelxx.svg?style=svg)](https://circleci.com/gh/vbertone/apfelxx)
 
 ![alt text](https://github.com/vbertone/apfelxx/raw/master/resources/logo.png "Logo APFEL")
 
