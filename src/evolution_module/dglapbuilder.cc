@@ -76,7 +76,7 @@ namespace apfel {
     int nfi = 0;
     int nff = Thresholds.size();
     for (auto const& v : Thresholds)
-      if ( v <= 0 )
+      if (v <= 0)
 	nfi++;
 
     // Compute AlphaQCD above and below the thresholds

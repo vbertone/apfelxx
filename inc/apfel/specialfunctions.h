@@ -452,7 +452,7 @@ namespace apfel
                 l=index[10*n1+p1-10];
                 b1=0.0;
                 b2=0.0;
-                for(i=nc[l];i>=0;l--)
+                for(i=nc[l];i>=0;i--)
 		  {
                     b0=a[i][l]+alfa*b1-b2;
                     b2=b1;

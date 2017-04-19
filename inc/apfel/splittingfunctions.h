@@ -20,6 +20,7 @@ namespace apfel
   /**
    * @brief The LO splitting function classes
    */
+  //_________________________________________________________________________________
   class P0ns: public Expression
   {
   public:
@@ -29,6 +30,7 @@ namespace apfel
     double Local(double const& x)    const { return 4 * CF * log( 1 - x ) + 3 * CF; }
   };
 
+  //_________________________________________________________________________________
   class P0qg: public Expression
   {
   public:
@@ -36,6 +38,7 @@ namespace apfel
     double Regular(double const& x)  const { return 2 * ( 1 - 2 * x + 2 * x * x ); }
   };
 
+  //_________________________________________________________________________________
   class P0gq: public Expression
   {
   public:
@@ -43,6 +46,7 @@ namespace apfel
     double Regular(double const& x)  const { return 4 * CF * ( - 1 + 0.5 * x + 1 / x ); }
   };
 
+  //_________________________________________________________________________________
   class P0gg: public Expression
   {
   public:
@@ -57,6 +61,7 @@ namespace apfel
   /**
    * @brief The NLO splitting function classes
    */
+  //_________________________________________________________________________________
   class P1nsp: public Expression
   {
   public:
@@ -97,6 +102,7 @@ namespace apfel
     double    _a2;
   };
 
+  //_________________________________________________________________________________
   class P1nsm: public P1nsp
   {
   public:
@@ -122,6 +128,7 @@ namespace apfel
     }
   };
 
+  //_________________________________________________________________________________
   class P1ps: public Expression
   {
   public:
@@ -140,6 +147,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P1qg: public Expression
   {
   public:
@@ -165,6 +173,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P1gq: public Expression
   {
   public:
@@ -189,6 +198,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P1gg: public Expression
   {
   public:
@@ -229,6 +239,7 @@ namespace apfel
   /**
    * @brief The NNLO splitting function classes (parametrized)
    */
+  //_________________________________________________________________________________
   class P2nsp: public Expression
   {
   public:
@@ -273,6 +284,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P2nsm: public Expression
   {
   public:
@@ -316,6 +328,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P2nss: public Expression
   {
   public:
@@ -341,6 +354,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P2ps: public Expression
   {
   public:
@@ -376,6 +390,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P2qg: public Expression
   {
   public:
@@ -416,6 +431,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P2gq: public Expression
   {
   public:
@@ -459,6 +475,7 @@ namespace apfel
     int const _nf;
   };
 
+  //_________________________________________________________________________________
   class P2gg: public Expression
   {
   public:

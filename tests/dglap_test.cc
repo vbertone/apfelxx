@@ -46,7 +46,7 @@ double LHToyPDFs(int const& i, double const& x)
 	   i == EvolutionBasisQCD::V24     ||
 	   i == EvolutionBasisQCD::V35      ) return xupv(x) + xdnv(x);
   // V3
-  else if (i == EvolutionBasisQCD::V3       )  return xupv(x) - xdnv(x);
+  else if (i == EvolutionBasisQCD::V3       ) return xupv(x) - xdnv(x);
   else              return 0;
 }
 
@@ -83,7 +83,7 @@ int main()
   t.stop();
 
   // Final scale
-  double mu  = 100;
+  double mu = 100;
 
   // Print results
   cout << scientific;

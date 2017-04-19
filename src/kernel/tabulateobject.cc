@@ -65,6 +65,20 @@ namespace apfel {
     Object.SetMuRef(MuRef);
   }
 
+  //_________________________________________________________________________________
+  template<class T>
+  TabulateObject<T>::TabulateObject(function<T(double)> const& Object,
+				    int                 const& nQ,
+				    double              const& QMin,
+				    double              const& QMax,
+				    int                 const& InterDegree,
+				    vector<double>      const& Thresholds):
+    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds)
+  {
+    for (auto const& iQ : this->_Qg)
+      this->_GridValues.push_back(Object(iQ));
+  }
+
   // Specializations
   //_________________________________________________________________________________
   template class TabulateObject<double>;
@@ -117,6 +131,5 @@ namespace apfel {
 
     return result;
   }
-
 
 }

@@ -48,4 +48,12 @@ namespace apfel
       dt * f( t + dt / 2, y + dy1 / 2 )     );} (
       dt * f( t         , y           )     );} ;
   }
+
+  template<class U = double, class T>
+  function<U(double const&, U const&, double const&)>
+  rk1(T const& f)
+  {
+    return [f](double const& t, U const& y,  double const& dt) -> U{ return dt * f(t, y); } ;
+  }
+
 }

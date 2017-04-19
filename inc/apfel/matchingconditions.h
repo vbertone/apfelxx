@@ -8,30 +8,14 @@
 #pragma once
 
 #include "apfel/expression.h"
+#include "apfel/tools.h"
+
+#include <cmath>
 
 using namespace std;
 
 namespace apfel
 {
-  /**
-   * @brief Identity expression (delta function)
-   */
-  class Identity: public Expression
-  {
-  public:
-  Identity(): Expression() { }
-    double Local(double const& x) const { return 1 + 0 * x; }
-  };
-
-  /**
-   * @brief Zero expression
-   */
-  class Null: public Expression
-  {
-  public:
-  Null(): Expression() { }
-  };
-
   /**
    * @notes Expressions taken from https://arxiv.org/pdf/hep-ph/9612398.pdf.
    * @notes To note that in these expressions ln(m2/mu2) appears while we need ln(mu2/m2),
@@ -222,6 +206,5 @@ namespace apfel
       return TR * ( CF * a01 + CA * a02 );
     }
   };
-
 
 }

@@ -44,4 +44,24 @@ namespace apfel
      */
     virtual double Local(double const&) const { return 0; }
   };
+
+  /**
+   * @brief Identity expression (delta function)
+   */
+  class Identity: public Expression
+  {
+  public:
+  Identity(): Expression() { }
+    double Local(double const&) const { return 1; }
+  };
+
+  /**
+   * @brief Zero expression
+   */
+  class Null: public Expression
+  {
+  public:
+  Null(): Expression() { }
+  };
+
 }

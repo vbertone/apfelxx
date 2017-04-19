@@ -57,6 +57,9 @@ namespace apfel
     ConvolutionMap        const& GetMap()          const { return _map; }
     unordered_map<int, T> const& GetObjects()      const { return _objects; }
 
+    // Method to sum all the objects of a given set.
+    T Combine() const;
+
   private:
     ConvolutionMap        _map;     //!< The shared pointer containing the convolution map
     unordered_map<int, T> _objects; //!< The container for the unordered_map
