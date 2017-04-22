@@ -83,16 +83,21 @@ int main()
   // Tabulate PDFs
   const TabulateObject<Set<Distribution>> TabulatedPDFs{EvolvedPDFs, 50, 1, 1000, 3};
 
-  // Final scale
-  const auto Q = 100;
-
   // Evolved PDFs
-  const auto PDFs = [=] (int const& i, double const& x) -> double{ return TabulatedPDFs.EvaluatexQ(i,x,Q); };
+  const auto PDFs = [=] (int const& i, double const& x, double const& Q) -> double{ return TabulatedPDFs.EvaluatexQ(i,x,Q); };
 
   // Initialize structure functions
   const auto F2 = F2BuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
   const auto FL = FLBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
   const auto F3 = F3BuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fDq);
+
+  const TabulateObject<Distribution> F2total{[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+
+  Timer t;
+  t.start();
+
+  // Final scale
+  const auto Q = 100;
 
   cout << scientific << endl;
   cout << "Alphas(Q) = " << as(Q) << endl;
@@ -113,7 +118,6 @@ int main()
 	 << F2.at(5).Evaluate(Q).Evaluate(xlha[i]) << "  "
 	 << F2.at(0).Evaluate(Q).Evaluate(xlha[i]) << "  "
 	 << endl;
-  
   cout << endl;
 
   cout << "    x   "
@@ -145,6 +149,15 @@ int main()
 	 << F3.at(0).Evaluate(Q).Evaluate(xlha[i]) << "  "
 	 << endl;
   cout << endl;
+
+  t.stop();
+
+  const int k = 1000000;
+  cout << "Interpolating " << k << " times F2 on the grid... ";
+  t.start();
+  for (auto i = 0; i < k; i++)
+      F2total.EvaluatexQ(0.05,Q);
+  t.stop();
 
   return 0;
 }

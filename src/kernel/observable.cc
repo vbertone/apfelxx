@@ -11,26 +11,17 @@ namespace apfel {
 
   //_____________________________________________________________________________
   Observable::Observable(function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-			 function<Set<Distribution>(double const&)> const& Distributions)
-  {
-    // Define observable function
-    _Observable = [=] (double const& Q) -> Distribution
-      {
-	Set<Distribution> sSF = CoefficientFunctions(Q) * Distributions(Q);
-	return sSF.Combine();
-      };
-  }
-
-  //_____________________________________________________________________________
-  Observable::Observable(function<Distribution(double const&)> const& Obs):
-    _Observable(Obs)
+			 function<Set<Distribution>(double const&)> const& Distributions):
+    _CoefficientFunctions(CoefficientFunctions),
+    _Distributions(Distributions)
   {
   }
 
   //_____________________________________________________________________________
   Distribution Observable::Evaluate(double const& Q) const
   {
-    return _Observable(Q);
+    auto sSF = _CoefficientFunctions(Q) * _Distributions(Q);
+    return sSF.Combine();
   }
 
 }

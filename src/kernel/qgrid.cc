@@ -10,8 +10,6 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 
-//#include <algorithm>
-
 namespace apfel
 {
   //_________________________________________________________________________________

@@ -34,19 +34,15 @@ namespace apfel
 	       function<Set<Distribution>(double const&)> const& Distributions);
 
     /**
-     * @brief Observable default constructor (ZM)
-     */
-    Observable(function<Distribution(double const&)> const& Obs);
-
-    /**
      * @brief Function that evaluates the the observable at the scale Q
      */
     Distribution Evaluate(double const& Q) const;
 
-    double Evaluate(double const& x, double const& Q) const { return _Observable(Q).Evaluate(x); }
+    double Evaluate(double const& x, double const& Q) const { return this->Evaluate(Q).Evaluate(x); }
 
   private:
-    function<Distribution(double const&)> _Observable;
+    function<Set<Operator>(double const&)>     _CoefficientFunctions;
+    function<Set<Distribution>(double const&)> _Distributions;
   };
 
 }

@@ -32,6 +32,14 @@ namespace apfel {
 			 function<double(int const&, double const&)> const& InPDFsFunc,
 			 int                                         const& ipdf);
 
+    /**
+     * @brief Default constructor.
+     */
+    DistributionFunction(Grid                                                       const& g,
+			 function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+			 int                                                        const& ipdf,
+			 double                                                     const& Q);
+
   };
 
 }

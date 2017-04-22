@@ -108,8 +108,15 @@ namespace apfel {
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(double const& x, double const& Q) const
   {
-    cout << ", x = " << x << ", Q = " << Q << endl;
-    return 0;
+    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+    const auto bounds = this->SumBounds(Q);
+
+    // Loop over the nodes
+    double result = 0;
+    for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
+      result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].Evaluate(x);
+
+    return result;
   };
 
   template<>

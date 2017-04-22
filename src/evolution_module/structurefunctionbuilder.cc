@@ -22,13 +22,13 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F2BuildZM(Grid                                        const& g,
-					  function<double(int const&, double const&)> const& InDistFunc,
-					  vector<double>                              const& Thresholds,
-					  int                                         const& PerturbativeOrder,
-					  function<double(double const&)>             const& Alphas,
-					  function<vector<double>(double const&)>     const& Charges,
-					  double                                      const& IntEps)
+  unordered_map<int,Observable> F2BuildZM(Grid                                                       const& g,
+					  function<double(int const&, double const&, double const&)> const& InDistFunc,
+					  vector<double>                                             const& Thresholds,
+					  int                                                        const& PerturbativeOrder,
+					  function<double(double const&)>                            const& Alphas,
+					  function<vector<double>(double const&)>                    const& Charges,
+					  double                                                     const& IntEps)
   {
     cout << "Initializing F2BuildZM... ";
     Timer t;
@@ -44,17 +44,17 @@ namespace apfel {
 	nfi++;
 
     // Allocate distributions
-    unordered_map<int,Distribution> F2Map;
-    F2Map.insert({0, DistributionFunction{g, InDistFunc, 0 }});
-    F2Map.insert({1, DistributionFunction{g, InDistFunc, 1 }});
-    F2Map.insert({2, DistributionFunction{g, InDistFunc, 3 }});
-    F2Map.insert({3, DistributionFunction{g, InDistFunc, 5 }});
-    F2Map.insert({4, DistributionFunction{g, InDistFunc, 7 }});
-    F2Map.insert({5, DistributionFunction{g, InDistFunc, 9 }});
-    F2Map.insert({6, DistributionFunction{g, InDistFunc, 11}});
+    function<unordered_map<int,Distribution>(double const&)> fF2Map = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
+      {
+	unordered_map<int,Distribution> F2Map;
+	F2Map.insert({0, DistributionFunction{g, InDistFunc, 0, Q}});
+	for (int k = 1; k <= 6; k++)
+	  F2Map.insert({k, DistributionFunction{g, InDistFunc, 2 * k - 1, Q}});
 
-    // Change sign to T3 to exchange "up" with "down"
-    F2Map.at(2) *= -1;
+	// Change sign to T3 to exchange "up" with "down"
+	F2Map.at(2) *= -1;
+	return F2Map;
+      };
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -132,7 +132,7 @@ namespace apfel {
 	function<Set<Distribution>(double const&)> DistF2 = [=] (double const& Q) -> Set<Distribution>
 	  {
 	    const auto nf = NF(Q, Thresholds);
-	    return Set<Distribution>{DISNCBasis{k,nf}, F2Map};
+	    return Set<Distribution>{DISNCBasis{k,nf}, fF2Map(Q)};
 	  };
 	// Initialize "Observable"
 	F2.insert({k,Observable{C2f, DistF2}});
@@ -176,7 +176,7 @@ namespace apfel {
     function<Set<Distribution>(double const&)> DistF2 = [=] (double const& Q) -> Set<Distribution>
       {
 	const auto nf = NF(Q, Thresholds);
-	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, F2Map};
+	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, fF2Map(Q)};
       };
     F2.insert({0,Observable{C2f, DistF2}});
 
@@ -186,13 +186,13 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> FLBuildZM(Grid                                        const& g,
-					  function<double(int const&, double const&)> const& InDistFunc,
-					  vector<double>                              const& Thresholds,
-					  int                                         const& PerturbativeOrder,
-					  function<double(double const&)>             const& Alphas,
-					  function<vector<double>(double const&)>     const& Charges,
-					  double                                      const& IntEps)
+  unordered_map<int,Observable> FLBuildZM(Grid                                                       const& g,
+					  function<double(int const&, double const&, double const&)> const& InDistFunc,
+					  vector<double>                                             const& Thresholds,
+					  int                                                        const& PerturbativeOrder,
+					  function<double(double const&)>                            const& Alphas,
+					  function<vector<double>(double const&)>                    const& Charges,
+					  double                                                     const& IntEps)
   {
     cout << "Initializing FLBuildZM... ";
     Timer t;
@@ -208,17 +208,18 @@ namespace apfel {
 	nfi++;
 
     // Allocate distributions
-    unordered_map<int,Distribution> FLMap;
-    FLMap.insert({0, DistributionFunction{g, InDistFunc, 0 }});
-    FLMap.insert({1, DistributionFunction{g, InDistFunc, 1 }});
-    FLMap.insert({2, DistributionFunction{g, InDistFunc, 3 }});
-    FLMap.insert({3, DistributionFunction{g, InDistFunc, 5 }});
-    FLMap.insert({4, DistributionFunction{g, InDistFunc, 7 }});
-    FLMap.insert({5, DistributionFunction{g, InDistFunc, 9 }});
-    FLMap.insert({6, DistributionFunction{g, InDistFunc, 11}});
+    // Allocate distributions
+    function<unordered_map<int,Distribution>(double const&)> fFLMap = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
+      {
+	unordered_map<int,Distribution> FLMap;
+	FLMap.insert({0, DistributionFunction{g, InDistFunc, 0, Q}});
+	for (int k = 1; k <= 6; k++)
+	  FLMap.insert({k, DistributionFunction{g, InDistFunc, 2 * k - 1, Q}});
 
-    // Change sign to T3 to exchange "up" with "down"
-    FLMap.at(2) *= -1;
+	// Change sign to T3 to exchange "up" with "down"
+	FLMap.at(2) *= -1;
+	return FLMap;
+      };
 
     // ===============================================================
     const Operator Zero{g, Null{},     IntEps};
@@ -293,7 +294,7 @@ namespace apfel {
 	function<Set<Distribution>(double const&)> DistFL = [=] (double const& Q) -> Set<Distribution>
 	  {
 	    const auto nf = NF(Q, Thresholds);
-	    return Set<Distribution>{DISNCBasis{k,nf}, FLMap};
+	    return Set<Distribution>{DISNCBasis{k,nf}, fFLMap(Q)};
 	  };
 	// Initialize "Observable"
 	FL.insert({k,Observable{CLf, DistFL}});
@@ -335,7 +336,7 @@ namespace apfel {
     function<Set<Distribution>(double const&)> DistFL = [=] (double const& Q) -> Set<Distribution>
       {
 	const auto nf = NF(Q, Thresholds);
-	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, FLMap};
+	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, fFLMap(Q)};
       };
     FL.insert({0,Observable{CLf, DistFL}});
 
@@ -345,13 +346,13 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F3BuildZM(Grid                                        const& g,
-					  function<double(int const&, double const&)> const& InDistFunc,
-					  vector<double>                              const& Thresholds,
-					  int                                         const& PerturbativeOrder,
-					  function<double(double const&)>             const& Alphas,
-					  function<vector<double>(double const&)>     const& Charges,
-					  double                                      const& IntEps)
+  unordered_map<int,Observable> F3BuildZM(Grid                                                       const& g,
+					  function<double(int const&, double const&, double const&)> const& InDistFunc,
+					  vector<double>                                             const& Thresholds,
+					  int                                                        const& PerturbativeOrder,
+					  function<double(double const&)>                            const& Alphas,
+					  function<vector<double>(double const&)>                    const& Charges,
+					  double                                                     const& IntEps)
   {
     cout << "Initializing F3BuildZM... ";
     Timer t;
@@ -367,17 +368,17 @@ namespace apfel {
 	nfi++;
 
     // Allocate distributions
-    unordered_map<int,Distribution> F3Map;
-    F3Map.insert({0, DistributionFunction{g, InDistFunc, 0 }});
-    F3Map.insert({1, DistributionFunction{g, InDistFunc, 2 }});
-    F3Map.insert({2, DistributionFunction{g, InDistFunc, 4 }});
-    F3Map.insert({3, DistributionFunction{g, InDistFunc, 6 }});
-    F3Map.insert({4, DistributionFunction{g, InDistFunc, 8 }});
-    F3Map.insert({5, DistributionFunction{g, InDistFunc, 10}});
-    F3Map.insert({6, DistributionFunction{g, InDistFunc, 12}});
+    function<unordered_map<int,Distribution>(double const&)> fF3Map = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
+      {
+	unordered_map<int,Distribution> F3Map;
+	F3Map.insert({0, DistributionFunction{g, InDistFunc, 0, Q}});
+	for (int k = 1; k <= 6; k++)
+	  F3Map.insert({k, DistributionFunction{g, InDistFunc, 2 * k, Q}});
 
-    // Change sign to V3 to exchange "up" with "down"
-    F3Map.at(2) *= -1;
+	// Change sign to V3 to exchange "up" with "down"
+	F3Map.at(2) *= -1;
+	return F3Map;
+      };
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -450,7 +451,7 @@ namespace apfel {
 	function<Set<Distribution>(double const&)> DistF3 = [=] (double const& Q) -> Set<Distribution>
 	  {
 	    const auto nf = NF(Q, Thresholds);
-	    return Set<Distribution>{DISNCBasis{k,nf}, F3Map};
+	    return Set<Distribution>{DISNCBasis{k,nf}, fF3Map(Q)};
 	  };
 	// Initialize "Observable"
 	F3.insert({k,Observable{C3f, DistF3}});
@@ -492,7 +493,7 @@ namespace apfel {
     function<Set<Distribution>(double const&)> DistF3 = [=] (double const& Q) -> Set<Distribution>
       {
 	const auto nf = NF(Q, Thresholds);
-	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, F3Map};
+	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, fF3Map(Q)};
       };
     F3.insert({0,Observable{C3f, DistF3}});
 
