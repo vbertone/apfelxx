@@ -9,6 +9,7 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 #include "apfel/tools.h"
+#include "apfel/timer.h"
 
 #include <algorithm>
 
@@ -25,6 +26,10 @@ namespace apfel {
 				    int                 const& InterDegree):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Object.GetThresholds())
   {
+    cout << "Tabulating object... ";
+    Timer t;
+    t.start();
+
     // Save initial conditions
     const auto nsteps = Object.GetNumberOfSteps();
     const auto ObjRef = Object.GetObjectRef();
@@ -63,6 +68,8 @@ namespace apfel {
     Object.SetNumberOfSteps(nsteps);
     Object.SetObjectRef(ObjRef);
     Object.SetMuRef(MuRef);
+
+    t.stop();
   }
 
   //_________________________________________________________________________________
@@ -75,8 +82,14 @@ namespace apfel {
 				    vector<double>      const& Thresholds):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds)
   {
+    cout << "Tabulating object... ";
+    Timer t;
+    t.start();
+
     for (auto const& iQ : this->_Qg)
       this->_GridValues.push_back(Object(iQ));
+
+    t.stop();
   }
 
   // Specializations

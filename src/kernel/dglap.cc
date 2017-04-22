@@ -7,6 +7,8 @@
 
 #include "apfel/dglap.h"
 #include "apfel/ode.h"
+#include "apfel/distributionfunction.h"
+#include "apfel/tools.h"
 
 #include <iostream>
 #include <cmath>
@@ -62,6 +64,23 @@ namespace apfel {
   Set<Distribution> Dglap::Derivative(int const& nf, double const& t, Set<Distribution> const& f) const
   {
     return _SplittingFunctions(nf, exp(t/2)) * f;
+  }
+
+
+  //_________________________________________________________________________________
+  void Dglap::SetInitialDistributions(function<double(int const&, double const&)> const& InPDFsFunc)
+  {
+    // Compute number of active flavours the the PDF initial scale
+    int nf0 = NF(_MuRef, _Thresholds);
+
+    // Allocate initial scale distributions
+    unordered_map<int,Distribution> DistMap;
+    for (int i = 0; i <= 12; i++)
+      DistMap.insert({i,DistributionFunction{_ObjRef.at(0).GetGrid(), InPDFsFunc, i}});
+
+    // Create set of initial distributions
+    // (assumed to be in the QCD evolution basis).
+    SetObjectRef(Set<Distribution>{_SplittingFunctions(nf0, 0).GetMap(), DistMap});
   }
 
 }

@@ -7,16 +7,17 @@
 
 #pragma once
 
+#include "apfel/grid.h"
+#include "apfel/dglap.h"
+
 #include <functional>
 #include <vector>
+
 using std::function;
 using std::vector;
 
 namespace apfel
 {
-  class Grid;
-  class Dglap;
-
   /**
    * @brief The DglapBuildQCD, builds the dglap object for QCD
    *

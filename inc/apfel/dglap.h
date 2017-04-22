@@ -66,6 +66,11 @@ namespace apfel
     Set<Distribution> Derivative(int const& nf, double const& mu, Set<Distribution> const& f) const;
 
     /**
+     * @brief Function that sets the reference distribution at the reference scale
+     */
+    void SetInitialDistributions(function<double(int const&, double const&)> const& InPDFsFunc);
+
+    /**
      * @brief Function that returns the number of steps.
      */
     int const& GetNumberOfSteps() const { return _nsteps; }

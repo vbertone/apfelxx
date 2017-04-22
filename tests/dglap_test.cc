@@ -74,13 +74,8 @@ int main()
 
   auto EvolvedPDFs = DglapBuildQCD(g, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
 
-  Timer t;
-
   // Tabulate PDFs
-  cout << "Tabulation... ";
-  t.start();
   const TabulateObject<Set<Distribution>> TabulatedPDFs{EvolvedPDFs, 50, 1, 1000, 3};
-  t.stop();
 
   // Final scale
   double mu = 100;
@@ -90,6 +85,7 @@ int main()
 
   // Evolve PDFs to the final Scale
   cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
+  Timer t;
   t.start();
   auto pdfs = EvolvedPDFs.Evaluate(mu);
   t.stop();
@@ -99,8 +95,7 @@ int main()
   auto tpdfs = TabulatedPDFs.Evaluate(mu);
   t.stop();
 
-  double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2,
-		   1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
+  double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << endl;
   cout << "\n   x    "

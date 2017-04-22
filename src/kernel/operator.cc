@@ -228,6 +228,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Operator& Operator::operator /= (double const& s)
+  {
+    const double r = 1 / s;
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
+        for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
+          _Operator[ig](alpha,beta) *= r;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
   Operator& Operator::operator += (Operator const& o)
   {
     // fast method to check that we are using the same Grid
@@ -279,6 +291,12 @@ namespace apfel
   Operator operator * (Operator lhs, double const& s)
   {
     return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  Operator operator / (Operator lhs, double const& s)
+  {
+    return lhs /= s;
   }
 
   //_________________________________________________________________________

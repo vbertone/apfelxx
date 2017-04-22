@@ -15,6 +15,8 @@ set(kernel_source
   set.cc
   tabulateobject.cc
   dglap.cc
+  distributionfunction.cc
+  observable.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})

@@ -41,6 +41,7 @@ namespace apfel
     Operator&    operator  = (Operator const& o);           //!< this  = Operator
     Operator&    operator *= (Operator const& o);           //!< this *= Operator
     Operator&    operator *= (double const& s);             //!< this *= Scalar
+    Operator&    operator /= (double const& s);             //!< this /= Scalar
     Operator&    operator += (Operator const& o);           //!< this += Operator
     Operator&    operator -= (Operator const& o);           //!< this -= Operator
 
@@ -65,8 +66,9 @@ namespace apfel
   // Extra operation definitions where Operator is at the left hand side (lhs).
   Distribution operator * (Operator lhs, Distribution const& rhs); //!< Operator*Distribution
   Operator     operator * (Operator lhs, Operator const& rhs);     //!< Operator*Operator
-  Operator     operator * (double const& s, Operator rhs);         //!< Operator*Scalar
-  Operator     operator * (Operator lhs, double const& s);         //!< Scalar*Operator
+  Operator     operator * (double const& s, Operator rhs);         //!< Scalar*Operator
+  Operator     operator * (Operator lhs, double const& s);         //!< Operator*Scalar
+  Operator     operator / (Operator lhs, double const& s);         //!< Operator/Scalar
   Operator     operator + (Operator lhs, Operator const& rhs);     //!< Operator+Operator
   Operator     operator - (Operator lhs, Operator const& rhs);     //!< Operator-Operator
 }

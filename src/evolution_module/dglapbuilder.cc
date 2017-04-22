@@ -16,44 +16,13 @@
 #include "apfel/matchingbasisqcd.h"
 #include "apfel/splittingfunctions.h"
 #include "apfel/matchingconditions.h"
+#include "apfel/distributionfunction.h"
 
 #include <map>
 
 using namespace std;
 
 namespace apfel {
-
-  /**
-   * @brief The PDF class
-   *
-   * Helper class for the construction of PDFs from function
-   */
-  class PDF: public Distribution
-      {
-        public:
-        PDF(Grid                                        const& g,
-            function<double(int const&, double const&)> const& InPDFsFunc,
-            int                                         const& ipdf):
-          Distribution(g)
-        {
-          for (auto const& ix: _grid.GetJointGrid().GetGrid())
-            if (ix < 1)
-              _distributionJointGrid.push_back(InPDFsFunc(ipdf,ix));
-            else
-              _distributionJointGrid.push_back(0);
-
-          for (auto ig=0; ig<_grid.nGrids(); ig++)
-            {
-              vector<double> sg;
-              for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-                if (ix < 1)
-                  sg.push_back(InPDFsFunc(ipdf,ix));
-                else
-                  sg.push_back(0);
-              _distributionSubGrid.push_back(sg);
-            }
-        }
-  };
 
   //_____________________________________________________________________________
   Dglap DglapBuildQCD(Grid                                        const& g,
@@ -66,7 +35,7 @@ namespace apfel {
                       double                                      const& IntEps,
                       int                                         const& nsteps)
   {
-    cout << "Initialization... ";
+    cout << "Initializing DglapBuildQCD... ";
     Timer t;
     t.start();
 
@@ -97,19 +66,13 @@ namespace apfel {
 	matchbasis.insert({nf,MatchingBasisQCD{nf}});
       }
 
+    // Compute number of active flavours the the PDF initial scale
+    int nf0 = NF(MuRef, Thresholds);
+
     // Allocate initial scale distributions
     unordered_map<int,Distribution> DistMap;
     for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
-      DistMap.insert({i,PDF{g, InPDFsFunc, i}});
-
-    // Compute numeber of active flavouts the the PDF initial scale and 
-    // allocate set of initial distributions.
-    int nf0 = 0;
-    for (auto const& v : Thresholds)
-      if (MuRef > v)
-	nf0++;
-      else
-	break;
+      DistMap.insert({i,DistributionFunction{g, InPDFsFunc, i}});
 
     // Create set of initial distributions
     // (assumed to be in the QCD evolution basis).
@@ -123,8 +86,8 @@ namespace apfel {
     // ===============================================================
     // LO Matching conditions
     unordered_map<int,Operator> MatchLO;
-    const Operator Id{g, Identity{}, IntEps};
-    const Operator Zero{g, Null{}, IntEps};
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::PNSP, Id});
     MatchLO.insert({MatchingBasisQCD::PNSM, Id});
     MatchLO.insert({MatchingBasisQCD::PNSV, Id});
@@ -165,11 +128,11 @@ namespace apfel {
       {
 	const Operator O1nsp{g, P1nsp{nf}, IntEps};
 	const Operator O1nsm{g, P1nsm{nf}, IntEps};
-	const Operator O1ps{g, P1ps{nf}, IntEps};
+	const Operator O1ps {g, P1ps{nf},  IntEps};
+	const Operator O1qg {g, P1qg{nf},  IntEps};
+	const Operator O1gq {g, P1gq{nf},  IntEps};
+	const Operator O1gg {g, P1gg{nf},  IntEps};
 	const Operator O1qq = O1nsp + O1ps;
-	const Operator O1qg{g, P1qg{nf}, IntEps};
-	const Operator O1gq{g, P1gq{nf}, IntEps};
-	const Operator O1gg{g, P1gg{nf}, IntEps};
 	unordered_map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
@@ -184,12 +147,12 @@ namespace apfel {
     // ===============================================================
     // Allocate NNLO Matching conditions
     unordered_map<int,unordered_map<int,Operator>> MatchNNLO;  
-    const Operator APS2Hq{g, APS2Hq_0{}, IntEps};
+    const Operator APS2Hq {g, APS2Hq_0{},  IntEps};
     const Operator ANS2qqH{g, ANS2qqH_0{}, IntEps};
+    const Operator AS2Hg  {g, AS2Hg_0{},   IntEps};
+    const Operator AS2gqH {g, AS2gqH_0{},  IntEps};
+    const Operator AS2ggH {g, AS2ggH_0{},  IntEps};
     const Operator AS2qqH = ANS2qqH + APS2Hq;
-    const Operator AS2Hg{g, AS2Hg_0{}, IntEps};
-    const Operator AS2gqH{g, AS2gqH_0{}, IntEps};
-    const Operator AS2ggH{g, AS2ggH_0{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
 	unordered_map<int,Operator> OM;
@@ -227,12 +190,12 @@ namespace apfel {
 	const Operator O2nsp{g, P2nsp{nf}, IntEps};
 	const Operator O2nsm{g, P2nsm{nf}, IntEps};
 	const Operator O2nss{g, P2nss{nf}, IntEps};
+	const Operator O2ps {g, P2ps{nf},  IntEps};
+	const Operator O2qg {g, P2qg{nf},  IntEps};
+	const Operator O2gq {g, P2gq{nf},  IntEps};
+	const Operator O2gg {g, P2gg{nf},  IntEps};
+	const Operator O2qq  = O2nsp + O2ps;
 	const Operator O2nsv = O2nsm + O2nss;
-	const Operator O2ps{g, P2ps{nf}, IntEps};
-	const Operator O2qq = O2nsp + O2ps;
-	const Operator O2qg{g, P2qg{nf}, IntEps};
-	const Operator O2gq{g, P2gq{nf}, IntEps};
-	const Operator O2gg{g, P2gg{nf}, IntEps};
 	unordered_map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O2nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
@@ -252,9 +215,9 @@ namespace apfel {
     unordered_map<int,Set<Operator>> M2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	P0.insert({nf,Set<Operator>{evbasis.at(nf), OpMapLO.at(nf)}});
-	P1.insert({nf,Set<Operator>{evbasis.at(nf), OpMapNLO.at(nf)}});
-	P2.insert({nf,Set<Operator>{evbasis.at(nf), OpMapNNLO.at(nf)}});
+	P0.insert({nf,Set<Operator>{evbasis.at(nf),    OpMapLO.at(nf)}});
+	P1.insert({nf,Set<Operator>{evbasis.at(nf),    OpMapNLO.at(nf)}});
+	P2.insert({nf,Set<Operator>{evbasis.at(nf),    OpMapNNLO.at(nf)}});
 	M0.insert({nf,Set<Operator>{matchbasis.at(nf), MatchLO}});
 	M2.insert({nf,Set<Operator>{matchbasis.at(nf), MatchNNLO.at(nf)}});
       }
