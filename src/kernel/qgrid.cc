@@ -139,6 +139,8 @@ namespace apfel
       if (Q > _Qg[_nQg[iQ]] && Q <= _Qg[_nQg[iQ+1]])
 	break;
 
+    if (iQ == (int) _nQg.size()-1) iQ--;
+
     // Determine the control parameter and put it in the first entry of the tuple
     if (Q > _Qg[_nQg[iQ+1]-_InterDegree])
       {
