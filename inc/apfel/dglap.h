@@ -33,23 +33,23 @@ namespace apfel
     /**
      * @brief Dglap default constructor.
      */
-    Dglap(function<Set<Operator>(int,double)>      const& SplittingFunctions,
-	  function<Set<Operator>(bool,int,double)> const& MatchingConditions,
-	  Set<Distribution>                        const& ObjRef,
-	  double                                   const& MuRef,
-	  vector<double>                           const& Masses,
-	  vector<double>                           const& Thresholds,
-	  int                                      const& nsteps = 10);
+    Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
+	  function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
+	  Set<Distribution>                                      const& ObjRef,
+	  double                                                 const& MuRef,
+	  vector<double>                                         const& Masses,
+	  vector<double>                                         const& Thresholds,
+	  int                                                    const& nsteps = 10);
 
     /**
      * @brief Dglap
      */
-    Dglap(function<Set<Operator>(int,double)>      const& SplittingFunctions,
-	  function<Set<Operator>(bool,int,double)> const& MatchingConditions,
-	  Set<Distribution>                        const& ObjRef,
-	  double                                   const& MuDistRef,
-	  vector<double>                           const& Masses,
-	  int                                      const& nsteps = 10);
+    Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
+	  function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
+	  Set<Distribution>                                      const& ObjRef,
+	  double                                                 const& MuDistRef,
+	  vector<double>                                         const& Masses,
+	  int                                                    const& nsteps = 10);
 
     /**
      * @brief
@@ -76,9 +76,9 @@ namespace apfel
     int const& GetNumberOfSteps() const { return _nsteps; }
 
   private:
-    function<Set<Operator>(int,double)>      _SplittingFunctions;
-    function<Set<Operator>(bool,int,double)> _MatchingConditions;
-    int                               const  _nsteps;
+    function<Set<Operator>(int const&,double const&)>      _SplittingFunctions;
+    function<Set<Operator>(bool,int const&,double const&)> _MatchingConditions;
+    int                                             const  _nsteps;
   };
 
 }

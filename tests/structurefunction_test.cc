@@ -74,8 +74,14 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Charges
-  function<vector<double>(double const&)> fBq = [] (double const&) -> vector<double>{ return QCh2; };
-  function<vector<double>(double const&)> fDq = [] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
+  function<vector<double>(double const&)> fBq = [Thresholds] (double const& Q) -> vector<double>
+    {
+      vector<double> Bq;
+      for (auto i = 0; i < (int) Thresholds.size(); i++)
+	Bq.push_back((Q > Thresholds[i] ? QCh2[i] : 0));
+      return Bq;
+    };
+  function<vector<double>(double const&)> fDq = [Thresholds] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
 
   // Initialize DGLAP evolution
   auto EvolvedPDFs = DglapBuildQCD(g, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
@@ -84,7 +90,7 @@ int main()
   const TabulateObject<Set<Distribution>> TabulatedPDFs{EvolvedPDFs, 50, 1, 1000, 3};
 
   // Evolved PDFs
-  const auto PDFs = [=] (int const& i, double const& x, double const& Q) -> double{ return TabulatedPDFs.EvaluatexQ(i,x,Q); };
+  const auto PDFs = [&] (int const& i, double const& x, double const& Q) -> double{ return TabulatedPDFs.EvaluatexQ(i,x,Q); };
 
   // Initialize structure functions
   const auto F2 = F2BuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
@@ -92,6 +98,9 @@ int main()
   const auto F3 = F3BuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fDq);
 
   const TabulateObject<Distribution> F2total{[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const TabulateObject<Distribution> F2light{[&] (double const& Q) -> Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const TabulateObject<Distribution> F2charm{[&] (double const& Q) -> Distribution{ return F2.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const TabulateObject<Distribution> F2bottom{[&] (double const& Q) -> Distribution{ return F2.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
 
   Timer t;
   t.start();
@@ -117,6 +126,15 @@ int main()
 	 << F2.at(4).Evaluate(Q).Evaluate(xlha[i]) << "  "
 	 << F2.at(5).Evaluate(Q).Evaluate(xlha[i]) << "  "
 	 << F2.at(0).Evaluate(Q).Evaluate(xlha[i]) << "  "
+	 << endl;
+  cout << endl;
+
+  for (auto i = 2; i < (int) xlha.size(); i++)
+    cout << setprecision(1) << xlha[i] << "  " << setprecision(4)
+	 << F2light.EvaluatexQ(xlha[i],Q) << "  "
+	 << F2charm.EvaluatexQ(xlha[i],Q) << "  "
+	 << F2bottom.EvaluatexQ(xlha[i],Q) << "  "
+	 << F2total.EvaluatexQ(xlha[i],Q) << "  "
 	 << endl;
   cout << endl;
 
@@ -156,7 +174,7 @@ int main()
   cout << "Interpolating " << k << " times F2 on the grid... ";
   t.start();
   for (auto i = 0; i < k; i++)
-      F2total.EvaluatexQ(0.05,Q);
+    F2total.EvaluatexQ(0.05,Q);
   t.stop();
 
   return 0;

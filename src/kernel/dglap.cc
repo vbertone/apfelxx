@@ -18,13 +18,13 @@ using namespace std;
 namespace apfel {
 
   //_________________________________________________________________________________
-  Dglap::Dglap(function<Set<Operator>(int,double)>      const& SplittingFunctions,
-	       function<Set<Operator>(bool,int,double)> const& MatchingConditions,
-	       Set<Distribution>                        const& ObjRef,
-	       double                                   const& MuDistRef,
-	       vector<double>                           const& Masses,
-	       vector<double>                           const& Thresholds,
-	       int                                      const& nsteps):
+  Dglap::Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
+	       function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
+	       Set<Distribution>                                      const& ObjRef,
+	       double                                                 const& MuDistRef,
+	       vector<double>                                         const& Masses,
+	       vector<double>                                         const& Thresholds,
+	       int                                                    const& nsteps):
     MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions),
@@ -33,12 +33,12 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  Dglap::Dglap(function<Set<Operator>(int,double)>      const& SplittingFunctions,
-	       function<Set<Operator>(bool,int,double)> const& MatchingConditions,
-	       Set<Distribution>                        const& ObjRef,
-	       double                                   const& MuDistRef,
-	       vector<double>                           const& Masses,
-	       int                                      const& nsteps):
+  Dglap::Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
+	       function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
+	       Set<Distribution>                                      const& ObjRef,
+	       double                                                 const& MuDistRef,
+	       vector<double>                                         const& Masses,
+	       int                                                    const& nsteps):
     Dglap(SplittingFunctions, MatchingConditions, ObjRef, MuDistRef, Masses, Masses, nsteps)
   {
   }

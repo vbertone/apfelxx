@@ -59,6 +59,27 @@ namespace apfel
 	  _rules[i] = { {CNS, i, 0} };
     };
 
+    /**
+     * @brief The class constructor fot the k-th structure function with no nf dependence
+     */
+  DISNCBasis(int const& k):
+    ConvolutionMap{"DISNCBasis_" + std::to_string(k)}
+    {
+      // Gluon
+      _rules[GLUON] = { {CG, GLUON, 1} };
+      // Singlet/total valence
+      _rules[DTOT] = { {CT, DTOT, 1./6.} };
+      // Non-singlet distributions
+      for (int i = D3; i <= D35; i++)
+	{
+	  double coef = 0;
+	  if (i == k)
+	    coef = - 1. / i;
+	  else if (i >= k+1)
+	    coef = 1. / i / ( i - 1 );
+	  _rules[i] = { {CNS, i, coef} };
+	}
+    };
 
     /**
      * @brief The class constructor fot the total structure function
@@ -89,6 +110,36 @@ namespace apfel
 		  coef += Ch[i-1] * ( 1 - j );
 	      coef /= j * ( j - 1 );
 	    }
+	  _rules[j] = { {CNS, j, coef} };
+	}
+    };
+
+    /**
+     * @brief The class constructor fot the total structure function independent of "nf"
+     */
+  DISNCBasis(vector<double> const& Ch):
+    ConvolutionMap{"DISNCBasis_tot"}
+    {
+      if (Ch.size() != 6)
+	throw runtime_exception("DISNCBasis", "The charge vector must have 6 entries.");
+
+      // Sum of the fist nf charges
+      const double SumCh = accumulate(Ch.begin(), Ch.end(), 0.);
+
+      // Gluon
+      _rules[GLUON] = { {CG, GLUON, SumCh} };
+      // Singlet/total valence
+      _rules[DTOT] = { {CT, DTOT, SumCh/6} };
+      // Non-singlet distributions
+      for (int j = 2; j <= 6; j++)
+	{
+	  double coef = 0;
+	  for (int i = 1; i <= j; i++)
+	    if (i < j)
+	      coef += Ch[i-1];
+	    else
+	      coef += Ch[i-1] * ( 1 - j );
+	  coef /= j * ( j - 1 );
 	  _rules[j] = { {CNS, j, coef} };
 	}
     };

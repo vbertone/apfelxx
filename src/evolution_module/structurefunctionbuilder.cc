@@ -82,7 +82,7 @@ namespace apfel {
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O22nsp{g, C22nsp{nf}, IntEps};
-	const Operator O22t = O22nsp + nf * O22ps;
+	const Operator O22t = O22nsp + 6 * O22ps;
 	unordered_map<int,Operator> C2NNLOnf;
 	C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
 	C2NNLOnf.insert({DISNCBasis::CT,  O22t});
@@ -94,14 +94,22 @@ namespace apfel {
     unordered_map<int,Observable> F2;
     for (int k = 1; k <= 6; k++)
       {
+	// Convolution basis
+	const DISNCBasis basis{k};
+
+	// Define sets of operators
+	Set<Operator> LO {basis, C2LO};
+	Set<Operator> NLO{basis, C2NLO};
+	unordered_map<int,Set<Operator>> NNLO;
+	for (int nf = nfi; nf <= nff; nf++)
+	  NNLO.insert({nf,Set<Operator>{basis, C2NNLO.at(nf)}});
+
 	// Define coefficient function functions
 	function<Set<Operator>(double const&)> C2f;
 	if (PerturbativeOrder == 0)
 	  {
 	    C2f = [=] (double const& Q) -> Set<Operator>
 	      {
-		const auto nf = NF(Q, Thresholds);
-		Set<Operator> LO{DISNCBasis{k,nf}, C2LO};
 		return Charges(Q)[k-1] * LO;
 	      };
 	  }
@@ -110,9 +118,6 @@ namespace apfel {
 	    C2f = [=] (double const& Q) -> Set<Operator>
 	      {
 		const auto cp = Alphas(Q) / FourPi;
-		const auto nf = NF(Q, Thresholds);
-		Set<Operator> LO {DISNCBasis{k,nf}, C2LO};
-		Set<Operator> NLO{DISNCBasis{k,nf}, C2NLO};
 		return Charges(Q)[k-1] * ( LO + cp * NLO );
 	      };
 	  }
@@ -122,17 +127,13 @@ namespace apfel {
 	      {
 		const auto cp = Alphas(Q) / FourPi;
 		const auto nf = NF(Q, Thresholds);
-		Set<Operator> LO  {DISNCBasis{k,nf}, C2LO};
-		Set<Operator> NLO {DISNCBasis{k,nf}, C2NLO};
-		Set<Operator> NNLO{DISNCBasis{k,nf}, C2NNLO.at(nf)};
-		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO ) );
+		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO.at(nf) ) );
 	      };
 	  }
 	// Define distribution function functions
 	function<Set<Distribution>(double const&)> DistF2 = [=] (double const& Q) -> Set<Distribution>
 	  {
-	    const auto nf = NF(Q, Thresholds);
-	    return Set<Distribution>{DISNCBasis{k,nf}, fF2Map(Q)};
+	    return Set<Distribution>{basis, fF2Map(Q)};
 	  };
 	// Initialize "Observable"
 	F2.insert({k,Observable{C2f, DistF2}});
@@ -144,8 +145,8 @@ namespace apfel {
       {
 	C2f = [=] (double const& Q) -> Set<Operator>
 	  {
-	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> LO{DISNCBasis{Charges(Q),nf}, C2LO};
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO{basis, C2LO};
 	    return LO;
 	  };
       }
@@ -154,9 +155,9 @@ namespace apfel {
 	C2f = [=] (double const& Q) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
-	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> LO {DISNCBasis{Charges(Q),nf}, C2LO};
-	    Set<Operator> NLO{DISNCBasis{Charges(Q),nf}, C2NLO};
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO {basis, C2LO};
+	    Set<Operator> NLO{basis, C2NLO};
 	    return LO + cp * NLO;
 	  };
       }
@@ -166,17 +167,17 @@ namespace apfel {
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
 	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> LO  {DISNCBasis{Charges(Q),nf}, C2LO};
-	    Set<Operator> NLO {DISNCBasis{Charges(Q),nf}, C2NLO};
-	    Set<Operator> NNLO{DISNCBasis{Charges(Q),nf}, C2NNLO.at(nf)};
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO  {basis, C2LO};
+	    Set<Operator> NLO {basis, C2NLO};
+	    Set<Operator> NNLO{basis, C2NNLO.at(nf)};
 	    return LO + cp * ( NLO +  + cp * NNLO );
 	  };
       }
     // Define distribution function functions
     function<Set<Distribution>(double const&)> DistF2 = [=] (double const& Q) -> Set<Distribution>
       {
-	const auto nf = NF(Q, Thresholds);
-	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, fF2Map(Q)};
+	return Set<Distribution>{DISNCBasis{Charges(Q)}, fF2Map(Q)};
       };
     F2.insert({0,Observable{C2f, DistF2}});
 
@@ -208,7 +209,6 @@ namespace apfel {
 	nfi++;
 
     // Allocate distributions
-    // Allocate distributions
     function<unordered_map<int,Distribution>(double const&)> fFLMap = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
       {
 	unordered_map<int,Distribution> FLMap;
@@ -222,7 +222,7 @@ namespace apfel {
       };
 
     // ===============================================================
-    const Operator Zero{g, Null{},     IntEps};
+    const Operator Zero{g, Null{}, IntEps};
 
     // Coefficient functions for FL
     // LO
@@ -246,7 +246,7 @@ namespace apfel {
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
-	const Operator OL2t = OL2nsp + nf * OL2ps;
+	const Operator OL2t = OL2nsp + 6 * OL2ps;
 	unordered_map<int,Operator> CLNNLOnf;
 	CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
 	CLNNLOnf.insert({DISNCBasis::CT,  OL2t});
@@ -258,14 +258,22 @@ namespace apfel {
     unordered_map<int,Observable> FL;
     for (int k = 1; k <= 6; k++)
       {
+	// Convolution basis
+	const DISNCBasis basis{k};
+
+	// Define sets of operators
+	Set<Operator> LO {basis, CLLO};
+	Set<Operator> NLO{basis, CLNLO};
+	unordered_map<int,Set<Operator>> NNLO;
+	for (int nf = nfi; nf <= nff; nf++)
+	  NNLO.insert({nf,Set<Operator>{basis, CLNNLO.at(nf)}});
+
 	// Define coefficient function functions
 	function<Set<Operator>(double const&)> CLf;
 	if (PerturbativeOrder == 0)
 	  {
 	    CLf = [=] (double const& Q) -> Set<Operator>
 	      {
-		const auto nf = NF(Q, Thresholds);
-		Set<Operator> LO{DISNCBasis{k,nf}, CLLO};
 		return Charges(Q)[k-1] * LO;
 	      };
 	  }
@@ -274,9 +282,7 @@ namespace apfel {
 	    CLf = [=] (double const& Q) -> Set<Operator>
 	      {
 		const auto cp = Alphas(Q) / FourPi;
-		const auto nf = NF(Q, Thresholds);
-		Set<Operator> NLO{DISNCBasis{k,nf}, CLNLO};
-		return Charges(Q)[k-1] * cp * NLO;
+		return Charges(Q)[k-1] * ( LO + cp * NLO );
 	      };
 	  }
 	else if (PerturbativeOrder == 2)
@@ -285,16 +291,13 @@ namespace apfel {
 	      {
 		const auto cp = Alphas(Q) / FourPi;
 		const auto nf = NF(Q, Thresholds);
-		Set<Operator> NLO {DISNCBasis{k,nf}, CLNLO};
-		Set<Operator> NNLO{DISNCBasis{k,nf}, CLNNLO.at(nf)};
-		return Charges(Q)[k-1] * cp * ( NLO +  + cp * NNLO );
+		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO.at(nf) ) );
 	      };
 	  }
 	// Define distribution function functions
 	function<Set<Distribution>(double const&)> DistFL = [=] (double const& Q) -> Set<Distribution>
 	  {
-	    const auto nf = NF(Q, Thresholds);
-	    return Set<Distribution>{DISNCBasis{k,nf}, fFLMap(Q)};
+	    return Set<Distribution>{basis, fFLMap(Q)};
 	  };
 	// Initialize "Observable"
 	FL.insert({k,Observable{CLf, DistFL}});
@@ -306,8 +309,8 @@ namespace apfel {
       {
 	CLf = [=] (double const& Q) -> Set<Operator>
 	  {
-	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> LO{DISNCBasis{Charges(Q),nf}, CLLO};
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO{basis, CLLO};
 	    return LO;
 	  };
       }
@@ -316,9 +319,10 @@ namespace apfel {
 	CLf = [=] (double const& Q) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
-	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> NLO{DISNCBasis{Charges(Q),nf}, CLNLO};
-	    return cp * NLO;
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO {basis, CLLO};
+	    Set<Operator> NLO{basis, CLNLO};
+	    return LO + cp * NLO;
 	  };
       }
     else if (PerturbativeOrder == 2)
@@ -327,16 +331,17 @@ namespace apfel {
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
 	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> NLO {DISNCBasis{Charges(Q),nf}, CLNLO};
-	    Set<Operator> NNLO{DISNCBasis{Charges(Q),nf}, CLNNLO.at(nf)};
-	    return cp * ( NLO +  + cp * NNLO );
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO  {basis, CLLO};
+	    Set<Operator> NLO {basis, CLNLO};
+	    Set<Operator> NNLO{basis, CLNNLO.at(nf)};
+	    return LO + cp * ( NLO +  + cp * NNLO );
 	  };
       }
     // Define distribution function functions
     function<Set<Distribution>(double const&)> DistFL = [=] (double const& Q) -> Set<Distribution>
       {
-	const auto nf = NF(Q, Thresholds);
-	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, fFLMap(Q)};
+	return Set<Distribution>{DISNCBasis{Charges(Q)}, fFLMap(Q)};
       };
     FL.insert({0,Observable{CLf, DistFL}});
 
@@ -375,7 +380,7 @@ namespace apfel {
 	for (int k = 1; k <= 6; k++)
 	  F3Map.insert({k, DistributionFunction{g, InDistFunc, 2 * k, Q}});
 
-	// Change sign to V3 to exchange "up" with "down"
+	// Change sign to T3 to exchange "up" with "down"
 	F3Map.at(2) *= -1;
 	return F3Map;
       };
@@ -415,14 +420,22 @@ namespace apfel {
     unordered_map<int,Observable> F3;
     for (int k = 1; k <= 6; k++)
       {
+	// Convolution basis
+	const DISNCBasis basis{k};
+
+	// Define sets of operators
+	Set<Operator> LO {basis, C3LO};
+	Set<Operator> NLO{basis, C3NLO};
+	unordered_map<int,Set<Operator>> NNLO;
+	for (int nf = nfi; nf <= nff; nf++)
+	  NNLO.insert({nf,Set<Operator>{basis, C3NNLO.at(nf)}});
+
 	// Define coefficient function functions
 	function<Set<Operator>(double const&)> C3f;
 	if (PerturbativeOrder == 0)
 	  {
 	    C3f = [=] (double const& Q) -> Set<Operator>
 	      {
-		const auto nf = NF(Q, Thresholds);
-		Set<Operator> LO{DISNCBasis{k,nf}, C3LO};
 		return Charges(Q)[k-1] * LO;
 	      };
 	  }
@@ -431,9 +444,7 @@ namespace apfel {
 	    C3f = [=] (double const& Q) -> Set<Operator>
 	      {
 		const auto cp = Alphas(Q) / FourPi;
-		const auto nf = NF(Q, Thresholds);
-		Set<Operator> NLO{DISNCBasis{k,nf}, C3NLO};
-		return Charges(Q)[k-1] * cp * NLO;
+		return Charges(Q)[k-1] * ( LO + cp * NLO );
 	      };
 	  }
 	else if (PerturbativeOrder == 2)
@@ -442,16 +453,13 @@ namespace apfel {
 	      {
 		const auto cp = Alphas(Q) / FourPi;
 		const auto nf = NF(Q, Thresholds);
-		Set<Operator> NLO {DISNCBasis{k,nf}, C3NLO};
-		Set<Operator> NNLO{DISNCBasis{k,nf}, C3NNLO.at(nf)};
-		return Charges(Q)[k-1] * cp * ( NLO +  + cp * NNLO );
+		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO.at(nf) ) );
 	      };
 	  }
 	// Define distribution function functions
 	function<Set<Distribution>(double const&)> DistF3 = [=] (double const& Q) -> Set<Distribution>
 	  {
-	    const auto nf = NF(Q, Thresholds);
-	    return Set<Distribution>{DISNCBasis{k,nf}, fF3Map(Q)};
+	    return Set<Distribution>{basis, fF3Map(Q)};
 	  };
 	// Initialize "Observable"
 	F3.insert({k,Observable{C3f, DistF3}});
@@ -463,8 +471,8 @@ namespace apfel {
       {
 	C3f = [=] (double const& Q) -> Set<Operator>
 	  {
-	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> LO{DISNCBasis{Charges(Q),nf}, C3LO};
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO{basis, C3LO};
 	    return LO;
 	  };
       }
@@ -473,9 +481,10 @@ namespace apfel {
 	C3f = [=] (double const& Q) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
-	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> NLO{DISNCBasis{Charges(Q),nf}, C3NLO};
-	    return cp * NLO;
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO {basis, C3LO};
+	    Set<Operator> NLO{basis, C3NLO};
+	    return LO + cp * NLO;
 	  };
       }
     else if (PerturbativeOrder == 2)
@@ -484,16 +493,17 @@ namespace apfel {
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
 	    const auto nf = NF(Q, Thresholds);
-	    Set<Operator> NLO {DISNCBasis{Charges(Q),nf}, C3NLO};
-	    Set<Operator> NNLO{DISNCBasis{Charges(Q),nf}, C3NNLO.at(nf)};
-	    return cp * ( NLO +  + cp * NNLO );
+	    const DISNCBasis basis{Charges(Q)};
+	    Set<Operator> LO  {basis, C3LO};
+	    Set<Operator> NLO {basis, C3NLO};
+	    Set<Operator> NNLO{basis, C3NNLO.at(nf)};
+	    return LO + cp * ( NLO +  + cp * NNLO );
 	  };
       }
     // Define distribution function functions
     function<Set<Distribution>(double const&)> DistF3 = [=] (double const& Q) -> Set<Distribution>
       {
-	const auto nf = NF(Q, Thresholds);
-	return Set<Distribution>{DISNCBasis{Charges(Q), nf}, fF3Map(Q)};
+	return Set<Distribution>{DISNCBasis{Charges(Q)}, fF3Map(Q)};
       };
     F3.insert({0,Observable{C3f, DistF3}});
 

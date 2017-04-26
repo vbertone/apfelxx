@@ -56,7 +56,7 @@ namespace apfel {
   {
     auto const& xsg = sg.GetGrid();
 
-    array<int,2> bounds = {0, 0};
+    array<int,2> bounds = {{0, 0}};
     if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 
