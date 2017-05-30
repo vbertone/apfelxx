@@ -7,3 +7,6 @@ if(SHARED)
 else(SHARED)
   add_library(apfel STATIC $<TARGET_OBJECTS:kernel> $<TARGET_OBJECTS:evolution_module>)
 endif(SHARED)
+
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/inc/apfel DESTINATION include)
+install(TARGETS apfel DESTINATION lib)
