@@ -93,13 +93,13 @@ int main()
   const auto PDFs = [&] (int const& i, double const& x, double const& Q) -> double{ return TabulatedPDFs.EvaluatexQ(i,x,Q); };
 
   // Initialize structure functions
-  const auto F2 = F2BuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto FL = FLBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto F3 = F3BuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fDq);
+  const auto F2 = F2NCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
+  const auto FL = FLNCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
+  const auto F3 = F3NCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fDq);
 
-  const TabulateObject<Distribution> F2total{[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const TabulateObject<Distribution> F2light{[&] (double const& Q) -> Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const TabulateObject<Distribution> F2charm{[&] (double const& Q) -> Distribution{ return F2.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const TabulateObject<Distribution> F2total {[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const TabulateObject<Distribution> F2light {[&] (double const& Q) -> Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const TabulateObject<Distribution> F2charm {[&] (double const& Q) -> Distribution{ return F2.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
   const TabulateObject<Distribution> F2bottom{[&] (double const& Q) -> Distribution{ return F2.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
 
   Timer t;

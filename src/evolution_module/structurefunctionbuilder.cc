@@ -22,15 +22,15 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F2BuildZM(Grid                                                       const& g,
-					  function<double(int const&, double const&, double const&)> const& InDistFunc,
-					  vector<double>                                             const& Thresholds,
-					  int                                                        const& PerturbativeOrder,
-					  function<double(double const&)>                            const& Alphas,
-					  function<vector<double>(double const&)>                    const& Charges,
-					  double                                                     const& IntEps)
+  unordered_map<int,Observable> F2NCBuildZM(Grid                                                       const& g,
+					    function<double(int const&, double const&, double const&)> const& InDistFunc,
+					    vector<double>                                             const& Thresholds,
+					    int                                                        const& PerturbativeOrder,
+					    function<double(double const&)>                            const& Alphas,
+					    function<vector<double>(double const&)>                    const& Charges,
+					    double                                                     const& IntEps)
   {
-    cout << "Initializing F2BuildZM... ";
+    cout << "Initializing F2NCBuildZM... ";
     Timer t;
     t.start();
 
@@ -187,15 +187,15 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> FLBuildZM(Grid                                                       const& g,
-					  function<double(int const&, double const&, double const&)> const& InDistFunc,
-					  vector<double>                                             const& Thresholds,
-					  int                                                        const& PerturbativeOrder,
-					  function<double(double const&)>                            const& Alphas,
-					  function<vector<double>(double const&)>                    const& Charges,
-					  double                                                     const& IntEps)
+  unordered_map<int,Observable> FLNCBuildZM(Grid                                                       const& g,
+					    function<double(int const&, double const&, double const&)> const& InDistFunc,
+					    vector<double>                                             const& Thresholds,
+					    int                                                        const& PerturbativeOrder,
+					    function<double(double const&)>                            const& Alphas,
+					    function<vector<double>(double const&)>                    const& Charges,
+					    double                                                     const& IntEps)
   {
-    cout << "Initializing FLBuildZM... ";
+    cout << "Initializing FLNCBuildZM... ";
     Timer t;
     t.start();
 
@@ -351,15 +351,15 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F3BuildZM(Grid                                                       const& g,
-					  function<double(int const&, double const&, double const&)> const& InDistFunc,
-					  vector<double>                                             const& Thresholds,
-					  int                                                        const& PerturbativeOrder,
-					  function<double(double const&)>                            const& Alphas,
-					  function<vector<double>(double const&)>                    const& Charges,
-					  double                                                     const& IntEps)
+  unordered_map<int,Observable> F3NCBuildZM(Grid                                                       const& g,
+					    function<double(int const&, double const&, double const&)> const& InDistFunc,
+					    vector<double>                                             const& Thresholds,
+					    int                                                        const& PerturbativeOrder,
+					    function<double(double const&)>                            const& Alphas,
+					    function<vector<double>(double const&)>                    const& Charges,
+					    double                                                     const& IntEps)
   {
-    cout << "Initializing F3BuildZM... ";
+    cout << "Initializing F3NCBuildZM... ";
     Timer t;
     t.start();
 

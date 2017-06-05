@@ -174,22 +174,356 @@ we have $n=1$ so that:
 
 As far as the massive coefficient functions up to
 $\mathcal{O}(\alpha_s^2)$ things can be more complicated and we will
-discuss later. In the next section we will consider the case of
+discuss it later. In the next section we will consider the case of
 hadronic observables in the ZM scheme showing how to pre-compute the
 integral for the double-differential distributions in Drell-Yan
 production.
 
+\subsection{Double convolution}
 
+In the case of Drell-Yan or Semi-Inclusive DIS (SIDIS), cross sections
+are the result of double convolutions between partonic cross sections
+and a pair of non-perturbative distributions. In this case the kind of
+expressions we are dealing with has the following form:
+\begin{equation}\label{eq:DoubleZMconv}
+\begin{array}{rcl}
+J(x_\delta,x_\gamma) &=&\displaystyle
+x_\delta x_\gamma\int_{x_\delta}^1\frac{dy_1}{y_1}\int_{x_\gamma}^1\frac{dy_2}{y_2}
+O(y_1,y_2) d^{(1)}\left(\frac{x_\delta}{y_1}\right)
+  d^{(2)}\left(\frac{x_\gamma}{y_2}\right)\\
+\\
+&=&\displaystyle
+\int_{x_\delta}^1dy_1\int_{x_\gamma}^1dy_2\,
+O(y_1,y_2) \left[\frac{x_\delta}{y_1}d^{(1)}\left(\frac{x_\delta}{y_1}\right)\right]
+  \left[\frac{x_\gamma}{y_2}d^{(2)}\left(\frac{x_\gamma}{y_2}\right)\right]\\
+\\
+&=&\displaystyle
+    \sum_{\alpha=0}^{N_x}\sum_{\beta=0}^{N_x} \overline{d}^{(1)}_\beta
+    \overline{d}^{(2)}_\alpha \underbrace{\left[\int_{x_\delta}^1 dy_1 \int_{x_\gamma}^1 dy_2\,
+    O(y_1,y_2)\, w_{\beta}^{(k)}\left(\frac{x_\delta}{y_1}\right) 
+    w_{\alpha}^{(k)}\left(\frac{x_\gamma}{y_2}\right)\right]}_{\Theta^{\beta\delta,\alpha\gamma}}\,.
+\end{array}
+\end{equation}
+In Eq.~(\ref{eq:DoubleZMconv}) we assume that there are no mass
+corrections and thus the convolutions take the simplest form. In the
+case of double convolutions, the partonic cross sections $O$ are functions
+of two variables, $y_1$ and $y_2$, and, as in the case of the single
+convolutions, they get three kinds of contributions in both these
+variables: local terms proportional to $\delta$-functions, singular
+terms proportional to plus-prescripted functions, and regular
+terms. The complication here is that these contributions from the two
+variables $y_1$ and $y_2$ mix and thus, for example, terms local in
+$y_1$ and singular in $y_2$ appear. It is thus necessary to identify
+the general structure of the function $O$ to see whether it is
+possible to decompose the double operator $\Theta^{\beta\delta,\alpha\gamma}$
+into products of single operators of the kind $\Gamma^{\beta\delta}$
+and $\Gamma^{\alpha\gamma}$. 
 
+In the case of the NLO corrections to SIDIS, the general structure of
+the function $O$ can be inferred looking at Eqs.~(C.2)-(C.7) of
+Ref.~\cite{deFlorian:1997zj}:
+\begin{equation}\label{eq:DoubleFuncStruct}
+\begin{array}{rclclcl}
+  O(y_1,y_2) &=&\displaystyle {\rm LL}\,\delta(1-y_1)\delta(1-y_2) &+&\displaystyle {\rm LS}\,
+                                                                       \delta(1-y_1)\left[\frac{\ln(1-y_2)}{1-y_2}\right]_+ &+&\displaystyle \delta(1-y_1)\,{\rm LR}(y_2) \\
+  \\
+             &+&\displaystyle {\rm SL}\,\left[\frac{\ln(1-y_1)}{1-y_1}\right]_+\delta(1-y_2)
+                                                                   &+&\displaystyle {\rm SS}\,\left[\frac1{1-y_1}\right]_+
+                                                                       \left[\frac1{1-y_2}\right]_+ &+&\displaystyle \left[\frac1{1-y_1}\right]_+\,{\rm
+                                                                                                        SR}(y_2)\\
+  \\
+             &+&\displaystyle {\rm RL}(y_1)\,\delta(1-y_2)   &+&\displaystyle
+                                                                 {\rm RS}(y_1)
+                                                                 \,\left[\frac1{1-y_2}\right]_+&+&\displaystyle
+                                                                                                   \sum_iK_i{\rm
+                                                                                                   R}_i^{(1)}(y_1){\rm
+                                                                                                   R}_i^{(2)}(y_2)\,.
+\end{array}
+\end{equation}
+It is clear that in Eq.~(\ref{eq:DoubleFuncStruct}) all terms
+factorise into a part only depending on $y_1$ and a part only
+depending on $y_2$. This is crucial to use the same technology
+developed above for the single convolutions. Plugging
+Eq.~(\ref{eq:DoubleFuncStruct}) into Eq.~(\ref{eq:DoubleZMconv}), one
+finds that:
+\begin{equation}\label{eq:MasterFormula}
+\begin{array}{rclclcl}
+  \Theta^{\beta\delta,\alpha\gamma} &=& C_{\rm LL} \,
+                                        \delta_{\beta\delta}\delta_{\alpha\gamma}
+  &+& \displaystyle\left[{\rm LS}+{\rm SS}\ln(1-c_{\beta\delta})\right]\,\delta_{\beta\delta}\Gamma_{\alpha\gamma}^{\rm S1}
+  &+&\displaystyle \delta_{\beta\delta} \left[\Gamma_{\alpha\gamma}^{\rm LR}+\ln(1-c_{\beta\delta})\Gamma_{\alpha\gamma}^{\rm
+                                     SR}\right]\\
+  \\
+                                    &+&\displaystyle\Gamma_{\beta\delta}^{\rm S1}\,\left[{\rm SL}+{\rm SS}\ln(1-c_{\alpha\gamma})\right]\,\delta_{\alpha\gamma} 
+  &+&
+     {\rm SS}\,\Gamma_{\beta\delta}^{\rm
+      S0}\Gamma_{\alpha\gamma}^{\rm S0}&+& \Gamma_{\beta\delta}^{\rm
+      S0}\Gamma_{\alpha\gamma}^{\rm SR}\\
+\\
+&+& \displaystyle \left[\Gamma_{\beta\delta}^{\rm RL}+\ln(1-c_{\alpha\gamma})\Gamma_{\beta\delta}^{\rm
+                                    RS}\right]\delta_{\alpha\gamma} &+& \Gamma_{\beta\delta}^{\rm RS}\Gamma_{\alpha\gamma}^{\rm
+      S0} &+& \displaystyle \sum_i K_i \Gamma_{\beta\delta}^{R_i^{(1)}}\Gamma_{\alpha\gamma}^{R_i^{(2)}}
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+C_{\rm LL} &=& \displaystyle  {\rm
+                                        LL}+{\rm
+                                        LS}\frac12\ln^2\left(1-c_{\alpha\gamma}\right)+{\rm
+                                        SL}\frac12\ln^2\left(1-c_{\beta\delta}\right)+{\rm
+                                        SS}\ln\left(1-c_{\beta\delta}\right)\ln\left(1-c_{\alpha\gamma}\right)
+\end{array}
+\end{equation}
+and:
+\begin{equation}\label{eq:PrecompOp}
+\begin{array}{rcl}
+  \Gamma_{\alpha\beta}^{{\rm S}n} &=& \displaystyle  \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
+                                       dz\frac{\ln^n(1-z)}{1-z}\left[w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)-\delta_{\alpha\beta}\right]\\
+  \\
+  \Gamma_{\alpha\beta}^{f} &=&\displaystyle \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
+                                     dz\,f(z)\,w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)
+\end{array}
+\end{equation}
+where $f$ is a regular function and the integration bounds are defined
+as:
+\begin{equation}
+  c_{\alpha\beta} =
+  \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
+  \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
+\end{equation}
 
+Despite writing the hard cross sections as in
+Eq.~(\ref{eq:DoubleFuncStruct}) requires a bit of analytical work, it
+is extremely beneficial from the numerical point of view because it
+allows us to reduce complicated expressions of two variables to a
+combination of products of functions of one single variable that can
+be treated as discussed in the previous sections. In particular, the
+pre-computation is limited to the integrals in
+Eq.~(\ref{eq:PrecompOp}). We stress however that the structure in
+Eq.~(\ref{eq:DoubleFuncStruct}) is valid only for the NLO corrections
+to SIDIS and (possibly) DY. We expect that, when going beyond NLO, the
+structure of the hard cross sections would get more complicated
+essentially for the presence of more involved plus-prescripted
+functions. However, we also expect that the same kind of
+``factorisation'' can be implemented.
 
+We now apply this technology to the specific cases of SIDIS first and
+DY second to NLO in QCD.
 
+\subsection{Semi-inclusive deep inelastic scattering (SIDIS)}
 
+the structure of the SIDIS observables of the expressions for the
+respective hard cross sections can be found in
+Ref.~\cite{deFlorian:1997zj}. Following this paper, the SIDIS differential
+cross section for the exchange of a virtual photon can be written as:
+\begin{equation}\label{eq:sidis}
+  \frac{d^3\sigma}{dx\, dy\, dz} = 
+  \frac{2\, \pi\alpha^2}{xyQ^2} 
+  \left[ (1+(1-y)^2) 2xF_1(x,z,Q^2) + 
+    2 (1-y) F_L(x,z,Q^2) \right]\,,
+\end{equation}
+with $Q^2 = - q^2$ the (negative) virtuality of the exchanged photon,
+$x$ and $z$ the momentum fractions of PDFs and FFs, and $Q^2 = xys$
+the definition of the inelasticity $y$ in terms of the squared
+collision energy in the center of mass $s$. Notice that, as compared
+to Ref.~\cite{deFlorian:1997zj}, we have absorbed into the definition
+of $F_L$ a factor $x$ as customary in the definition of the
+longitudinal structure function in inclusive DIS.
 
+We now use the Callan-Gross relation:
+\begin{equation}\label{eq:CallanGross}
+F_2 = 2xF_1 + F_L
+\end{equation}
+to replace $2xF_1$ with $F_2$ in Eq.~(\ref{eq:sidis}):
+\begin{equation}\label{eq:sidis2}
+  \frac{d^3\sigma}{dx\, dy\, dz} = 
+  \frac{2\, \pi\alpha^2}{xyQ^2} 
+  \left[ Y_+ F_2(x,z,Q^2)
+    -y^2 F_L(x,z,Q^2) \right]\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+Y_+ = 1+(1-y)^2\,.
+\end{equation}
+It is also useful to write Eq.~(\ref{eq:sidis2}) as differential in
+$x$, $Q^2$, and $z$:
+\begin{equation}\label{eq:sidis2}
+  \frac{d^3\sigma}{dx\, dQ^2\, dz} = 
+  \frac{2\, \pi\alpha^2}{xQ^4} 
+  \left[ Y_+ F_2(x,z,Q)
+    -y^2 F_L(x,z,Q) \right]\,.
+\end{equation}
+The structure functions $F_2$ and $F_L$ are given at NLO by:
+\begin{equation}\label{eq:f1sidis}
+\begin{array}{rcl}
+\displaystyle  F_{2,L}(x,z,Q) &=& \displaystyle x\sum_{q,\overline{q}} e_q^2 \bigg[ q(x,Q)
+    \otimes  C^{2,L}_{qq}(x,z) \otimes D_q(z,Q)  \\
+&+&\displaystyle q(x,Q)  \otimes  C^{2,L}_{gq}(x,z) \otimes D_g(z,Q)+  g(x,Q)  \otimes
+  C^{2,L}_{qg}(x,z) \otimes D_q(z,Q) \bigg]\,,
+\end{array}
+\end {equation}
+where $\{q,g\}$ are the quark and gluon PDFs and $\{D_q,D_g\}$ are the
+quark and gluon FFs, $e_q$ is the electric charge of the quark $q$ and
+$\{C^{2,L}_{qq},C^{2,L}_{qg},C^{2,L}_{gq}\}$ are the relevant partonic
+cross sections. The partonic cross sections allow for a perturbative
+expansion in power of $\alpha_s$:
+\begin{equation}
+C = \sum_{n=0} \left(\frac{\alpha_s}{4\pi}\right)^nC^{(n)}
+\end{equation}
+that we truncate to NLO, $i.e.$ to $n=1$. At LO ($n=0$) we have the simple
+expression:
+\begin{equation}
+C^{2,(0)}_{qq}(x,z) = \delta(1-x)\delta(1-z)\quad\mbox{and all others zero.}
+\end{equation}
 
+At NLO ($n=1$) we take the expressions from Appendix C of
+Ref.~\cite{deFlorian:1997zj} being careful to take into account an
+addition factor two due to the difference in the expansion parameter
+($\alpha_s/4\pi$ rather than $\alpha_s/4\pi$) and to combine the
+expressions for $F_1$ and $F_L$ using Eq.~(\ref{eq:CallanGross}) to
+obtain the partonic cross sections for $F_2$. We start with the
+partonic cross sections for $F_L$ that read:
+\begin{equation}\label{eq:cfFL}
+\begin{array}{rcl}
+C_{qq}^{L,(1)} &=& 8 C_F x z\,, \\
+C_{gq}^{L,(1)} &=& 8 C_F x (1-z)\,, \\
+C_{qg}^{L,(1)} &=& 8 x(1-x)\,, 
+\end{array}
+\end{equation}
+while those for $F_2$ read:
+\begin{equation}\label{eq:cfF2}
+\begin{array}{rcl}
+  \displaystyle \frac{C_{qq}^{2,(1)}}{2C_F} &=& \displaystyle -8\delta(1-x)\delta(1-z)+2\delta(1-x)
+                                  \left(\frac{\ln
+                                  (1-z)}{1-z}\right)_++ 
+                                  \delta(1-x) \left[\frac{1+z^2}{1-z}\ln z+(1-z)-(1+z)\ln(1-z)\right] \\
+  \\
+                              &+&\displaystyle 
+                                  2\left(\frac{\ln
+                                  (1-x)}{1-x}\right)_+\delta(1-z)+2\left(\frac{1}{1-x}\right)_+\left(\frac{1}{1-z}\right)_+- \left(\frac{1}{1-x}\right)_+(1+z)\\
+  \\
+                              &+& \displaystyle \left[ 
+                                  -\frac{1+x^2}{1-x}\ln x+(1-x)
+                                  -(1+x)\ln(1-x)\right]\delta(1-z) -
+                                  (1+x)\left(\frac{1}{1-z}\right)_++(2+6xz)\\
+  \\
+  \displaystyle \frac{C_{gq}^{2,(1)}}{2C_F} &=& \displaystyle \delta (1-x) \left[\frac{1+(1-z)^2}{z} \ln\left[
+                                               z(1-z)\right]+z\right]\\
+  \\
+                                            &+&\displaystyle \left(\frac{1}{1-x}\right)_+\frac{1+(1-z)^2}{z}\\
+  \\
+                              &+&  \displaystyle 2(1+3x)-6xz-(1+x)\frac{1}{z}\\
+  \\
+  C_{qg}^{2,(1)} &=& \displaystyle \left[(x^2+(1-x)^2)
+                     \ln\left(\frac{1-x}{x}\right)
+                     +2x(1-x)\right]\delta (1-z) +(x^2+(1-x)^2)
+                     \left(\frac{1}{1-z}\right)_+\\
+\\
+&+&\displaystyle 2(1+6x+2x^2) + (x^2+(1-x)^2) \frac{1}{z} 
+\end{array}
+\end{equation}
+By inspection of Eqs.~(\ref{eq:cfFL}) and~(\ref{eq:cfF2}) we can
+deduce the various coefficients of Eq.~(\ref{eq:DoubleFuncStruct}). In
+particular, as usual, $F_L$ involves only regular functions so that
+all contributions are zero but the fully regular ones:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{L,(1)}(x,z) &:& K_1 = 8 C_F\,,\quad R_1^{(1)}(x) = x\,,\quad
+                        R_1^{(2)}(z) = z\,,\\
+C_{gq}^{L,(1)}(x,z) &:& K_1 = 8 C_F\,,\quad R_1^{(1)}(x) = x\,,\quad
+                        R_1^{(2)}(z) = 1-z\,,\\
+C_{qg}^{L,(1)}(x,z) &:& K_1 = 1\,,\quad R_1^{(1)}(x) = x(1-x)\,,\quad
+                        R_1^{(2)}(z) = 1\,.\\
+\end{array}
+\end{equation}
 
+For $F_2$ the situation is more complicate but we can still identify
+the different contributions:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{2,(1)} &:& \displaystyle {\rm LL} = -16 C_F\,,\quad {\rm LS} =
+                        4C_F\,,\quad {\rm LR}(z) = 2C_F
+                        \left[\frac{1+z^2}{1-z}\ln
+                        z+(1-z)-(1+z)\ln(1-z)\right]\\
+\\
+&& \displaystyle {\rm SL} = 4C_F\,,\quad {\rm SS} = 4C_F\,,\quad {\rm
+   SR}(z) = -2C_F(1+z)\\
+\\
+&& \displaystyle {\rm RL}(x) = 2C_F \left[ 
+                                  -\frac{1+x^2}{1-x}\ln x+(1-x)
+                                  -(1+x)\ln(1-x)\right]\,,\quad {\rm
+   RS}(x) = -2C_F(1+x)\,,\\
+\\
+&& \displaystyle \left\{K_1 =  4C_F,\, R_1^{(1)}(x) = 1,\,
+   R_1^{(2)}(z) = 1\right\}\,,\\
+\\
+&& \displaystyle \left\{K_2 =  12C_F,\, R_2^{(1)}(x) = x,\,
+   R_2^{(2)}(z) = z\right\}\,,\\
+\\
+C_{gq}^{2,(1)} &:& \displaystyle {\rm LR}(z) = 2C_F\left[\frac{1+(1-z)^2}{z} \ln\left[
+                                               z(1-z)\right]+z\right]\,,\\
+  \\
+&& \displaystyle {\rm SR}(z) = 2C_F\left[\frac{1+(1-z)^2}{z}\right]\,,\\
+\\
+&& \displaystyle \left\{K_1 =  4C_F,\, R_1^{(1)}(x) = 1 + 3x,\,
+   R_1^{(2)}(z) = 1\right\}\,,\\
+\\
+&& \displaystyle \left\{K_2 =  -12C_F,\, R_2^{(1)}(x) = x,\,
+   R_2^{(2)}(z) = z\right\}\,,\\
+\\
+&& \displaystyle \left\{K_3 =  -2C_F,\, R_3^{(1)}(x) = 1+x,\,
+   R_3^{(2)}(z) = \frac1{z}\right\}\,,\\
+\\
+C_{qg}^{2,(1)} &:&\displaystyle {\rm RL}(x) = \left[x^2+(1-x)^2\right]
+                     \ln\left(\frac{1-x}{x}\right)
+                     +2x(1-x)\,,\quad  {\rm RS}(x) = x^2+(1-x)^2\,,\\
+\\
+&& \displaystyle \left\{K_1 = 2,\, R_1^{(1)}(x) = 1 + 6x+2x^2,\,
+   R_1^{(2)}(z) = 1\right\}\,,\\
+\\
+&& \displaystyle \left\{K_2 =  1,\, R_2^{(1)}(x) = x^2+(1-x)^2,\,
+   R_2^{(2)}(z) = \frac1{z}\right\}\,.
+\end{array}
+\end{equation}
+Analogously, for the only LO partonic cross sections we find that:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{2,(0)} &:& \displaystyle {\rm LL} =1 \,.
+\end{array}
+\end{equation}
+All the coefficients that are not mentioned are equal to zero. We can
+now implement explicitly Eq.~(\ref{eq:MasterFormula}). The one think
+that is left to sort out is the structure of the structure functions
+in terms of the appropriate PDF and FF combinations. Considering
+Eq.~(\ref{eq:f1sidis}), we observe that none of the coefficient
+functions depends on the particular quark flavour (this is a feature
+of the ZM scheme). Therefore, simplifying the notation, we can rewrite
+Eq.~(\ref{eq:f1sidis}) as:
+\begin{equation}\label{eq:structF2L}
+\begin{array}{rcl}
+\displaystyle  F/x &=& \displaystyle C_{qq}  \sum_{q} e_q^2 \left[q  D_q +\overline{q}  D_{\overline{q}}\right]  + C_{gq}  \sum_{q} e_q^2
+    \left[q+\overline{q}\right]\,D_g  +  C_{qg}  g \sum_{q} e_q^2
+  \left [D_q +D_{\overline{q}}\right]\,,
+\end{array}
+\end {equation}
+where now the sums run only over the quark flavours and not the antiflavours.
 
+\newpage
 
+\begin{thebibliography}{alp}
+
+%\cite{deFlorian:1997zj}
+\bibitem{deFlorian:1997zj}
+  D.~de Florian, M.~Stratmann and W.~Vogelsang,
+  %``QCD analysis of unpolarized and polarized Lambda baryon production in leading and next-to-leading order,''
+  Phys.\ Rev.\ D {\bf 57} (1998) 5811
+  doi:10.1103/PhysRevD.57.5811
+  [hep-ph/9711387].
+  %%CITATION = doi:10.1103/PhysRevD.57.5811;%%
+  %138 citations counted in INSPIRE as of 04 Jun 2017
+
+\end{thebibliography}
 
 
 
