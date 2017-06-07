@@ -1,4 +1,5 @@
 # cmake related
+install_manifest.txt
 CMakeCache.txt
 CMakeFiles
 CTestTestfile.cmake
@@ -58,3 +59,7 @@ tests/dglap_test
 *.exe
 *.out
 *.app
+
+# Generated files
+inc/apfel/version.h
+bin/apfelxx-config

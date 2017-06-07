@@ -26,7 +26,7 @@ double xglu(double const& x)  { return 1.7 * pow(x,-0.1) * pow((1-x),5); }
 double xdbar(double const& x) { return 0.1939875 * pow(x,-0.1) * pow((1-x),6); }
 double xubar(double const& x) { return xdbar(x) * (1-x); }
 double xsbar(double const& x) { return 0.2 * ( xdbar(x) + xubar(x) ); }
-double LHToyPDFs(int const& i, double const& x)
+double LHToyPDFs(int const& i, double const& x, double const&)
 {
   // Gluon
   if      (i == EvolutionBasisQCD::GLUON    ) return xglu(x);

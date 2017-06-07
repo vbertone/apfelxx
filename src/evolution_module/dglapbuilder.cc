@@ -25,15 +25,15 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  Dglap DglapBuildQCD(Grid                                        const& g,
-                      function<double(int const&, double const&)> const& InPDFsFunc,
-                      double                                      const& MuRef,
-                      vector<double>                              const& Masses,
-                      vector<double>                              const& Thresholds,
-                      int                                         const& PerturbativeOrder,
-                      function<double(double const&)>             const& Alphas,
-                      double                                      const& IntEps,
-                      int                                         const& nsteps)
+  Dglap DglapBuildQCD(Grid                                                       const& g,
+                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      double                                                     const& MuRef,
+                      vector<double>                                             const& Masses,
+                      vector<double>                                             const& Thresholds,
+                      int                                                        const& PerturbativeOrder,
+                      function<double(double const&)>                            const& Alphas,
+                      double                                                     const& IntEps,
+                      int                                                        const& nsteps)
   {
     cout << "Initializing DglapBuildQCD... ";
     Timer t;
@@ -72,7 +72,7 @@ namespace apfel {
     // Allocate initial scale distributions
     unordered_map<int,Distribution> DistMap;
     for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
-      DistMap.insert({i,DistributionFunction{g, InPDFsFunc, i}});
+      DistMap.insert({i,DistributionFunction{g, InPDFsFunc, i, MuRef}});
 
     // Create set of initial distributions
     // (assumed to be in the QCD evolution basis).

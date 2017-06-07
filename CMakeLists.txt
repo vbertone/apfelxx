@@ -24,6 +24,16 @@ configure_file(
   "${PROJECT_BINARY_DIR}/inc/apfel/version.h"
 )
 
+# Configuration script
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(exec_prefix "${prefix}")
+set(includedir "${prefix}/include")
+set(libdir "${prefix}/lib")
+configure_file(
+  "${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in"
+  "${PROJECT_SOURCE_DIR}/bin/apfelxx-config"
+)
+
 include_directories(${PROJECT_SOURCE_DIR}/inc)
 
 # build target library
@@ -34,3 +44,7 @@ if(BUILD_TESTS)
   enable_testing()
   add_subdirectory(tests)
 endif(BUILD_TESTS)
+
+install(FILES ${PROJECT_SOURCE_DIR}/bin/apfelxx-config
+	   DESTINATION bin
+	   PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
