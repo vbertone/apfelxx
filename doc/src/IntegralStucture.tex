@@ -257,11 +257,9 @@ finds that:
                                     &+&\displaystyle\Gamma_{\beta\delta}^{\rm S1}\,\left[{\rm SL}+{\rm SS}\ln(1-c_{\alpha\gamma})\right]\,\delta_{\alpha\gamma} 
   &+&
      {\rm SS}\,\Gamma_{\beta\delta}^{\rm
-      S0}\Gamma_{\alpha\gamma}^{\rm S0}&+& \Gamma_{\beta\delta}^{\rm
-      S0}\Gamma_{\alpha\gamma}^{\rm SR}\\
+      S0}\Gamma_{\alpha\gamma}^{\rm S0}&+& \Gamma_{\beta\delta}^{\rm S0}\Gamma_{\alpha\gamma}^{\rm SR}\\
 \\
-&+& \displaystyle \left[\Gamma_{\beta\delta}^{\rm RL}+\ln(1-c_{\alpha\gamma})\Gamma_{\beta\delta}^{\rm
-                                    RS}\right]\delta_{\alpha\gamma} &+& \Gamma_{\beta\delta}^{\rm RS}\Gamma_{\alpha\gamma}^{\rm
+&+& \displaystyle \left[\Gamma_{\beta\delta}^{\rm RL}+\ln(1-c_{\alpha\gamma})\Gamma_{\beta\delta}^{\rm RS}\right]\delta_{\alpha\gamma} &+& \Gamma_{\beta\delta}^{\rm RS}\Gamma_{\alpha\gamma}^{\rm
       S0} &+& \displaystyle \sum_i K_i \Gamma_{\beta\delta}^{R_i^{(1)}}\Gamma_{\alpha\gamma}^{R_i^{(2)}}
 \end{array}
 \end{equation}
@@ -292,24 +290,101 @@ as:
   \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
   \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
 \end{equation}
+In general terms, it should always be possible to write an object of
+the kind of $\Theta^{\beta\delta,\alpha\gamma}$ as series of bilinear
+terms:
+\begin{equation}\label{eq:OpSeries}
+\Theta^{\beta\delta,\alpha\gamma} = \sum_j C_j\Gamma_j^{(1),\beta\delta}\Gamma_j^{(2),\alpha\gamma}
+\end{equation}
+where $C_j$ is a scalar, and $\Gamma_j^{(1),\beta\delta}$ and
+$\Gamma_j^{(2),\alpha\gamma}$ are single operators that can be
+computed using the technology discussed in the previous
+section. Plugging Eq.~(\ref{eq:OpSeries}) into
+Eq.~(\ref{eq:DoubleZMconv}), one finds that:
+\begin{equation}\label{eq:DoubleZMconv2}
+  J(x_\delta,x_\gamma) =
+  \sum_j C_j  f_j^{(1),\delta} f_j^{(2),\gamma}\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+f_j^{(1),\delta}\equiv \sum_{\beta=0}^{N_x} \overline{d}^{(1)}_\beta\Gamma_j^{(1),\beta\delta}\quad\mbox{and}\quad f_j^{(2),\gamma}\equiv \sum_{\alpha=0}^{N_x}\overline{d}^{(2)}_\alpha \Gamma_j^{(2),\alpha\gamma}\,.
+\end{equation}
 
-Despite writing the hard cross sections as in
-Eq.~(\ref{eq:DoubleFuncStruct}) requires a bit of analytical work, it
-is extremely beneficial from the numerical point of view because it
-allows us to reduce complicated expressions of two variables to a
-combination of products of functions of one single variable that can
-be treated as discussed in the previous sections. In particular, the
-pre-computation is limited to the integrals in
-Eq.~(\ref{eq:PrecompOp}). We stress however that the structure in
-Eq.~(\ref{eq:DoubleFuncStruct}) is valid only for the NLO corrections
-to SIDIS and (possibly) DY. We expect that, when going beyond NLO, the
-structure of the hard cross sections would get more complicated
-essentially for the presence of more involved plus-prescripted
-functions. However, we also expect that the same kind of
-``factorisation'' can be implemented.
+Eq.~(\ref{eq:DoubleZMconv2}) shows that, in the hypothesis that the
+double function $O(y_1,y_2)$ can be expressed in terms of a series of
+terms where the dependence on $y_1$ and $y_2$ factorizes\footnote{This
+  is the case for SIDIS and DY up to NLO but we expect this feature to
+  hold also beyond, despite complications due to the more involved
+  plus-prescripted functions are also expected.}, the double
+convolution in Eq.~(\ref{eq:DoubleZMconv}) can be expressed as a
+series of bilinear terms of distributions ($f_j^{(1),\delta}$ and
+$f_j^{(2),\gamma}$) singularly obtained as convolutions of a limited
+number of single operators with distributions. This is a particularly
+useful achievement that allows us to compute double convolutions
+without the need of extending the integration and the interpolation
+procedures with an obvious gain in accuracy and performance. As a
+matter of fact, the same argument can be extended to a multiple
+convolution of the function $O(\{y_i\})$, which again can be expressed
+as a series of $n$-linear terms, with $i=1,\dots,n$, with $n$
+distributions:
+\begin{equation}
+J(\{x_{\alpha_i}\}) = \sum_j C_j  \prod_{i=1}^nf_j^{(i),\alpha_i}\,,
+\end{equation}
+with:
+\begin{equation}
+f_j^{(i),\alpha_i} \equiv \sum_{\beta=0}^{N_x} \overline{d}^{(i)}_\beta\Gamma_j^{(i),\beta\alpha_i}\,.
+\end{equation}
+This technology will be useful for more complicated observables, like
+cross sections in $pp$ collisions with an identified hadron in the
+final state, that requires for example three convolutions. 
 
-We now apply this technology to the specific cases of SIDIS first and
-DY second to NLO in QCD.
+The challenging part of the technology just presented resides in the
+``pre-processing'' of the function $O(y_1,y_2)$, that is the
+analytical work required to disentangle the different terms. This step
+however has to be taken only once.
+
+Before employing this procedure for any concrete application, it is
+appropriate to connect Eq.~(\ref{eq:MasterFormula}) to
+Eq.~(\ref{eq:OpSeries}) by identifying number of form of the
+coefficients and operators involved. Specifically, assuming that the
+series in the last term in the r.h.s. of Eq.~(\ref{eq:MasterFormula})
+has $r$ terms, the series in Eq.~(\ref{eq:OpSeries}) has $15+r$ terms
+at most, that is:
+\begin{equation}\label{eq:OpSeriesCon}
+\Theta^{\beta\delta,\alpha\gamma} = \sum_{j=1}^{15+r} C_j\Gamma_j^{(1),\beta\delta}\Gamma_j^{(2),\alpha\gamma}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{lclll}
+j = 1 &:& C_1 = {\rm LL}, & \Gamma_1^{(1),\beta\delta} = \delta_{\beta\delta}, & \Gamma_1^{(2),\alpha\gamma} = \delta_{\alpha\gamma},\\
+j = 2 &:& C_2 = {\rm LS}/{2}, & \Gamma_2^{(1),\beta\delta} = \delta_{\beta\delta}, & \Gamma_2^{(2),\alpha\gamma} = \ln^2\left(1-c_{\alpha\gamma}\right)\delta_{\alpha\gamma},\\
+j = 3 &:& C_3 = {\rm SL}/{2}, & \Gamma_3^{(1),\beta\delta} = \ln^2\left(1-c_{\beta\delta}\right)\delta_{\beta\delta}, & \Gamma_3^{(2),\alpha\gamma} = \delta_{\alpha\gamma},\\
+j = 4 &:& C_4 = {\rm SS}, & \Gamma_4^{(1),\beta\delta} = \ln\left(1-c_{\beta\delta}\right)\delta_{\beta\delta}, & \Gamma_4^{(2),\alpha\gamma} = \ln\left(1-c_{\alpha\gamma}\right)\delta_{\alpha\gamma},\\
+j = 5 &:& C_5 = {\rm LS}, & \Gamma_5^{(1),\beta\delta} = \delta_{\beta\delta}, & \Gamma_5^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S1},\\
+j = 6 &:& C_6 = {\rm SS}, & \Gamma_6^{(1),\beta\delta} = \ln(1-c_{\beta\delta})\delta_{\beta\delta}, & \Gamma_6^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S1},\\
+j = 7 &:& C_7 = 1, & \Gamma_7^{(1),\beta\delta} = \delta_{\beta\delta}, & \Gamma_7^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm LR},\\
+j = 8 &:& C_8 = 1, & \Gamma_8^{(1),\beta\delta} = \ln(1-c_{\beta\delta})\delta_{\beta\delta}, & \Gamma_8^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm SR},\\
+j = 9 &:& C_9 = {\rm SL}, & \Gamma_9^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S1}, & \Gamma_9^{(2),\alpha\gamma} = \delta_{\alpha\gamma},\\
+j = 10 &:& C_{10} = {\rm SS}, & \Gamma_{10}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S1}, & \Gamma_{10}^{(2),\alpha\gamma} = \ln(1-c_{\alpha\gamma})\delta_{\alpha\gamma},\\
+
+j = 11 &:& C_{11} = {\rm SS},& \Gamma_{11}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S0}, & \Gamma_{11}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S0},\\
+j = 12 &:& C_{12} = 1, & \Gamma_{12}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S0}, & \Gamma_{12}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm SR},\\
+j = 13 &:& C_{13} = 1, & \Gamma_{13}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RL}, & \Gamma_{13}^{(2),\alpha\gamma} = \delta_{\alpha\gamma},\\
+j = 14 &:& C_{14} = 1, & \Gamma_{14}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RS}, & \Gamma_{14}^{(2),\alpha\gamma} = \ln(1-c_{\alpha\gamma})\delta_{\alpha\gamma},\\
+j = 15 &:& C_{15} = 1, & \Gamma_{15}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RS}, & \Gamma_{15}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S0},\\
+j = 16 &:& C_{16} = K_1 & \Gamma_{14}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{R_1^{(1)}}, & \Gamma_{16}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{R_1^{(2)}},\\
+\vdots & & & & \\
+j = 15 + r &:& C_{15+r} = K_r & \Gamma_{15+r}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{R_r^{(1)}}, & \Gamma_{15+r}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{R_r^{(2)}}
+\end{array}
+\end{equation}
+It should be noted that, despite the large number of terms in the
+series in Eq.~(\ref{eq:OpSeriesCon}), the number of operators to be
+precomputed it pretty limited. In addition, in many cases many of the
+terms of the series are zero so the number of contributions is greatly
+reduced.
+
+We can now apply this procedure up to NLO in QCD to two specific
+cases: SIDIS first and DY second.
 
 \subsection{Semi-inclusive deep inelastic scattering (SIDIS)}
 

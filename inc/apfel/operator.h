@@ -19,9 +19,9 @@ namespace apfel
   /**
    * @brief The Operator class.
    *
-   * This class defines the basic object "Operator" which is essentially
-   * the convolution on the grid bewteen a function (i.e. a splitting function)
-   * and the inetrpolant functions.
+   * This class defines the basic object "Operator" which is
+   * essentially the convolution on the grid bewteen a function
+   * (e.g. a splitting function) and the inetrpolant functions.
    */
   class Operator: protected Integrator, protected LagrangeInterpolator
   {
@@ -63,7 +63,8 @@ namespace apfel
     double _ws;
   };
 
-  // Extra operation definitions where Operator is at the left hand side (lhs).
+  // Extra operation definitions where Operator is at the left hand
+  // side (lhs).
   Distribution operator * (Operator lhs, Distribution const& rhs); //!< Operator*Distribution
   Operator     operator * (Operator lhs, Operator const& rhs);     //!< Operator*Operator
   Operator     operator * (double const& s, Operator rhs);         //!< Scalar*Operator

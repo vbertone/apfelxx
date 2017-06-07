@@ -21,26 +21,27 @@ namespace apfel
     _expr(&expr),
     _eps(eps)
   {
-    // Number of grids
+    // Number of grids.
     const int ng = _grid.nGrids();
 
-    // Loop over the subgrids    
+    // Loop over the subgrids.
     _Operator.resize(ng);
     for (_ig = 0; _ig < ng; _ig++)
       {
-	// Define the global subgrid
+	// Define the global subgrid.
 	const auto& sg = _grid.GetSubGrid(_ig);
 
-	// Get vector with the grid nodes
+	// Get vector with the grid nodes.
 	const auto& xg = sg.GetGrid();
 
-	// Number of grid points
+	// Number of grid points.
 	auto nx = sg.nx();
 
-	// Interpolation degree
+	// Interpolation degree.
 	const int id = sg.InterDegree();
 
-	// Limit the loop over "_beta" according to whether "sg" is external
+	// Limit the loop over "_beta" according to whether "sg" is
+	// external.
 	const int gbound = ( sg.IsExternal() ? nx : 0 );
 
 	_Operator[_ig].resize(gbound+1, nx+1, 0);
@@ -49,14 +50,16 @@ namespace apfel
 	    const auto xbeta = xg[_beta];
 	    for (_alpha = _beta; _alpha <= nx; _alpha++)
 	      {
-		// Weight of the subtraction term (independent of x)
+		// Weight of the subtraction term (independent of x).
 		_ws = ( _alpha == _beta ? 1 : 0 );
 
-		// Given that the interpolation functions have discontinuos derivative
-		// on the nodes and are wiggly, it turns out that it is conveniente to
-		// split the integrals into (id+1) intervals on each of which the integrand
-		// is smooth. This way, even though more integrals have to be computed, the
-		// integrator converges faster.
+		// Given that the interpolation functions have
+		// discontinuos derivative on the nodes and are
+		// wiggly, it turns out that it is convenient to split
+		// the integrals into (id+1) intervals on each of
+		// which the integrand is smooth. This way, even
+		// though more integrals have to be computed, the
+		// integration converges faster.
 
 		// Number of grid intervals we need to integrate over.
 		int nmax = fmin(id,_alpha-_beta) + 1;
@@ -66,16 +69,17 @@ namespace apfel
 		double I = 0;
 		for(auto jint = nmin; jint < nmax; jint++)
 		  {
-		    // Define integration bounds of the first iteration
+		    // Define integration bounds of the first
+		    // iteration.
 		    const double c = xbeta / xg[_alpha-jint+1];
 		    const double d = xbeta / xg[_alpha-jint];
 
-		    // Compute the integral
+		    // Compute the integral.
 		    I += integrate(c, d, _eps);
 		  }
 		_Operator[_ig](_beta,_alpha) = I;
 	      }
-	    // Add local part
+	    // Add local part.
 	    _Operator[_ig](_beta,_beta) += _expr->Local(xbeta/xg[_beta+1]);
 	  }
       }
@@ -109,7 +113,7 @@ namespace apfel
   //_________________________________________________________________________
   Distribution Operator::operator *= (Distribution const& d) const
   {
-    // Fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same Grid.
     if (&this->_grid != &d.GetGrid())
       throw runtime_exception("Operator::operator*=", "Operator and Distribution grids do not match");
 
@@ -117,14 +121,14 @@ namespace apfel
     vector<vector<double>> s(sg);
     vector<double> j;
 
-    // Compute the the distribution on the subgrids
+    // Compute the the distribution on the subgrids.
     int const ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
         int const nx = _grid.GetSubGrid(ig).nx();
 
-	// If the grid is external the product between the operator and the distribution
-	// has to be done in a standard way.
+	// If the grid is external the product between the operator
+	// and the distribution has to be done in a standard way.
 	if (this->_grid.GetSubGrid(ig).IsExternal())
 	  {
 	    for (auto alpha = 0; alpha <= nx; alpha++)
@@ -134,8 +138,9 @@ namespace apfel
 		  s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
 	      }
 	  }
-	// If the grid is internal the product between the operator and the distribution
-	// has to be done exploiting the symmetry of the operator.
+	// If the grid is internal the product between the operator
+	// and the distribution has to be done exploiting the symmetry
+	// of the operator.
 	else
 	  {
 	    for (auto alpha = 0; alpha <= nx; alpha++)
@@ -146,11 +151,11 @@ namespace apfel
 	      }
 	  }
 
-	// Set to zero the values above one
+	// Set to zero the values above one.
 	for (auto alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
 	  s[ig][alpha] = 0;
 
-	// Compute the the distribution on the joint grid
+	// Compute the the distribution on the joint grid.
         double xtrans;
         if(ig < ng-1)
 	  xtrans = this->_grid.GetSubGrid(ig+1).xMin();
@@ -166,7 +171,7 @@ namespace apfel
           }
       }
 
-    // Set to zero the values above one
+    // Set to zero the values above one.
     for (auto alpha = 0; alpha < this->_grid.GetJointGrid().InterDegree(); alpha++)
       j.push_back(0);
 
@@ -176,7 +181,7 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator *= (Operator const& o)
   {
-    // fast method to check that we are using the same Grid
+    // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
       throw runtime_exception("Operator::operator*=", "Operators grid does not match");
 
@@ -242,7 +247,7 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator += (Operator const& o)
   {
-    // fast method to check that we are using the same Grid
+    // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 
@@ -257,7 +262,7 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator -= (Operator const& o)
   {
-    // fast method to check that we are using the same Grid
+    // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
       throw runtime_exception("Operator::operator+=", "Operators grid does not match");
 

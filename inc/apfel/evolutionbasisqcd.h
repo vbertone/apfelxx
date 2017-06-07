@@ -16,8 +16,9 @@ namespace apfel
   /**
    * @brief ConvolutionMap derivation for the QCD evolution basis.
    *
-   * This class, following the derivation procedure from ConvolutionMap
-   * implements the Basis enumerator with custom tags for the objects.
+   * This class, following the derivation procedure from
+   * ConvolutionMap implements the Basis enumerator with custom tags
+   * for the objects.
    */
   class EvolutionBasisQCD: public ConvolutionMap
   {

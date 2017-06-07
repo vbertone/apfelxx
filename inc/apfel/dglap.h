@@ -21,8 +21,8 @@ namespace apfel
   /**
    * @brief The Dglap class.
    *
-   * A specialization class of the MatchedEvolution class
-   * for the computation of the DGLAP evolution.
+   * A specialization class of the MatchedEvolution class for the
+   * computation of the DGLAP evolution.
    */
   class Dglap: public MatchedEvolution<Set<Distribution>>
   {

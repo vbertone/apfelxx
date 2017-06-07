@@ -20,9 +20,10 @@ namespace apfel
   /**
    * @brief The global x-grid object.
    *
-   * This class defines the "Grid" object which is essentially a collection of
-   * "SubGrid" objects plus other global parameters. This class also includes
-   * all the relevant methods for the manipulation of the SubGrids.
+   * This class defines the "Grid" object which is essentially a
+   * collection of "SubGrid" objects plus other global
+   * parameters. This class also includes all the relevant methods for
+   * the manipulation of the SubGrids.
    */
   class Grid
   {

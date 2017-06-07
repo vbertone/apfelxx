@@ -18,9 +18,9 @@ using std::vector;
 namespace apfel
 {
   /**
-   * @brief The ConvolutionMap class provides a common set of tools
-   * to autodiscover the combination rules between sets of
-   * operators and distributions.
+   * @brief The ConvolutionMap class provides a common set of tools to
+   * autodiscover the combination rules between sets of operators and
+   * distributions.
    */
   class ConvolutionMap
   {
@@ -39,7 +39,7 @@ namespace apfel
       int    operand;
       int    object;
       double coefficient;
-      bool operator == (rule const& r) const
+      bool   operator == (rule const& r) const
 	{
 	  if (r.operand     != operand)     return false;
 	  if (r.object      != object)      return false;

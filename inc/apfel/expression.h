@@ -12,8 +12,8 @@ namespace apfel
   /**
    * @brief The Expression class for the manipulation of the splitting and coeffient functions.
    *
-   * This class encapsulate in a proper form an analystic expressions in such a way that
-   * it can be transformed into an operator.
+   * This class encapsulate in a proper form an analystic expressions
+   * in such a way that it can be transformed into an operator.
    */
   class Expression
   {

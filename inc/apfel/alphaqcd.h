@@ -19,8 +19,8 @@ namespace apfel
   /**
    * @brief The AlphaQCD class.
    *
-   * A specialization class of the MatchedEvolution class
-   * for the computation of the QCD coupling running.
+   * A specialization class of the MatchedEvolution class for the
+   * computation of the QCD coupling running.
    */
   class AlphaQCD: public MatchedEvolution<double>
   {

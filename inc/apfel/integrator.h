@@ -12,8 +12,8 @@ namespace apfel
   /**
    * @brief The Integrator class which uses Adaptative Gaussian Quadrature.
    *
-   * This class takes as input the integrand function and provides
-   * the integrate method which performs the integration.
+   * This class takes as input the integrand function and provides the
+   * integrate method which performs the integration.
    */
   class Integrator
   {
