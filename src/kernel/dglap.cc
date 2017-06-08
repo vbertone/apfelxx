@@ -46,17 +46,19 @@ namespace apfel {
   //_________________________________________________________________________________
   Set<Distribution> Dglap::MatchObject(bool const& Up, int const& nf, Set<Distribution> const& f) const
   {
-    // Get matching conditions
+    // Get matching conditions.
     auto MC = _MatchingConditions(Up, nf, _LogTh2M2[nf]);
 
-    // Create the object 'g' with the same convolution map of the matching conditions
-    // but containing the same objects of the input set of functions 'f'.
+    // Create the object 'g' with the same convolution map of the
+    // matching conditions but containing the same objects of the
+    // input set of functions 'f'.
     Set<Distribution> g{MC.GetMap(),f.GetObjects()};
 
-    // Convolute 'MC' and 'g'
+    // Convolute 'MC' and 'g'.
     auto MO = MC * g;
 
-    // Return the convoluted object with the map on the next evolution step
+    // Return the convoluted object with the map on the next evolution
+    // step.
     return Set<Distribution>{_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap(), MO.GetObjects()};
   }
 
@@ -70,16 +72,16 @@ namespace apfel {
   //_________________________________________________________________________________
   void Dglap::SetInitialDistributions(function<double(int const&, double const&)> const& InPDFsFunc)
   {
-    // Compute number of active flavours the the PDF initial scale
+    // Compute number of active flavours the the PDF initial scale.
     int nf0 = NF(_MuRef, _Thresholds);
 
-    // Allocate initial scale distributions
+    // Allocate initial scale distributions.
     unordered_map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
       DistMap.insert({i,DistributionFunction{_ObjRef.at(0).GetGrid(), InPDFsFunc, i}});
 
-    // Create set of initial distributions
-    // (assumed to be in the QCD evolution basis).
+    // Create set of initial distributions (assumed to be in the QCD
+    // evolution basis).
     SetObjectRef(Set<Distribution>{_SplittingFunctions(nf0, 0).GetMap(), DistMap});
   }
 

@@ -84,7 +84,7 @@ int main()
   function<vector<double>(double const&)> fDq = [Thresholds] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
 
   // Initialize DGLAP evolution
-  auto EvolvedPDFs = DglapBuildQCD(g, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
+  auto EvolvedPDFs = DglapBuildQCD(g, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as, false);
 
   // Tabulate PDFs
   const TabulateObject<Set<Distribution>> TabulatedPDFs{EvolvedPDFs, 50, 1, 1000, 3};

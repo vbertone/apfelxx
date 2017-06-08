@@ -30,18 +30,18 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Save initial conditions
+    // Save initial conditions.
     const auto nsteps = Object.GetNumberOfSteps();
     const auto ObjRef = Object.GetObjectRef();
     const auto MuRef  = Object.GetMuRef();
 
-    // Set number of steps of the RK algorith to 1
+    // Set number of steps of the RK algorith to 1.
     Object.SetNumberOfSteps(1);
 
-    // Find the point on the QGrid right below MuRef
+    // Find the point on the QGrid right below MuRef.
     const auto tQ = lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
 
-    // Loop on "_Qg" below "MuRef"
+    // Loop on "_Qg" below "MuRef".
     for (auto iQ = tQ; iQ >= 0; iQ--)
       {
 	auto o = Object.Evaluate(this->_Qg[iQ]);
@@ -50,10 +50,10 @@ namespace apfel {
 	Object.SetMuRef(this->_Qg[iQ]);
       }
 
-    // Reverse order of the elements
+    // Reverse order of the elements.
     reverse(this->_GridValues.begin(),this->_GridValues.end());
 
-    // Loop on "_Qg" above "MuRef"
+    // Loop on "_Qg" above "MuRef".
     Object.SetObjectRef(ObjRef);
     Object.SetMuRef(MuRef);
     for (auto iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
@@ -64,7 +64,7 @@ namespace apfel {
 	Object.SetMuRef(this->_Qg[iQ]);
       }
 
-    // Reset initial conditions
+    // Reset initial conditions.
     Object.SetNumberOfSteps(nsteps);
     Object.SetObjectRef(ObjRef);
     Object.SetMuRef(MuRef);
@@ -86,6 +86,7 @@ namespace apfel {
     Timer t;
     t.start();
 
+    // Fill in Qgrid with the object.
     for (auto const& iQ : this->_Qg)
       this->_GridValues.push_back(Object(iQ));
 
@@ -102,7 +103,8 @@ namespace apfel {
   template<>
   double TabulateObject<double>::EvaluatexQ(double const&, double const&) const
   {
-    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
+    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)",
+			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
   }
 
   template<>
@@ -122,20 +124,23 @@ namespace apfel {
   template<>
   double TabulateObject<Set<Distribution>>::EvaluatexQ(double const&, double const&) const
   {
-    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)","This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
+    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)",
+			    "This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
   }
 
   //_________________________________________________________________________________
   template<>
   double TabulateObject<double>::EvaluatexQ(int const&, double const&, double const&) const
   {
-    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'double' of the TabulateObject class.");
+    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)",
+			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
   }
 
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(int const&, double const&, double const&) const
   {
-    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)","This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
+    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)",
+			    "This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
   }
 
   template<>

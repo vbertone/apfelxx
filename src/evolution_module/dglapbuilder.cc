@@ -32,6 +32,7 @@ namespace apfel {
                       vector<double>                                             const& Thresholds,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
+		      bool                                                       const& Rotate,
                       double                                                     const& IntEps,
                       int                                                        const& nsteps)
   {
@@ -39,16 +40,16 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Compute initial and final number of active flavours 
-    // according to the vector of thresholds (it assumes that
-    // the thresholds vector entries are ordered).
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
     for (auto const& v : Thresholds)
       if (v <= 0)
 	nfi++;
 
-    // Compute AlphaQCD above and below the thresholds
+    // Compute AlphaQCD above and below the thresholds.
     unordered_map<int,double> asThUp;
     unordered_map<int,double> asThDown;
     for (auto nf = nfi + 1; nf <= nff; nf++)
@@ -57,7 +58,7 @@ namespace apfel {
 	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
       }
 
-    // Allocate convolution maps for the evolution and matching
+    // Allocate convolution maps for the evolution and matching.
     unordered_map<int,EvolutionBasisQCD> evbasis;
     unordered_map<int,MatchingBasisQCD>  matchbasis;
     for (int nf = nfi; nf <= nff; nf++)
@@ -66,25 +67,35 @@ namespace apfel {
 	matchbasis.insert({nf,MatchingBasisQCD{nf}});
       }
 
-    // Compute number of active flavours the the PDF initial scale
+    // Compute number of active flavours the the PDF initial scale.
     int nf0 = NF(MuRef, Thresholds);
 
-    // Allocate initial scale distributions
+    // Rotate input distributions into the QCD evolution basis if
+    // required.
+    function<double(int const&, double const&, double const&)> QCDEvPDFsFunc;
+    if (Rotate)
+      QCDEvPDFsFunc = [=] (int const& i, double const& x, double const& Q) -> double
+	{ return QCDEvToPhys(i, x, Q, InPDFsFunc); };
+    else
+      QCDEvPDFsFunc = InPDFsFunc;
+
+    // Allocate initial scale distributions.
     unordered_map<int,Distribution> DistMap;
     for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
-      DistMap.insert({i,DistributionFunction{g, InPDFsFunc, i, MuRef}});
+      DistMap.insert({i,DistributionFunction{g, QCDEvPDFsFunc, i, MuRef}});
 
-    // Create set of initial distributions
-    // (assumed to be in the QCD evolution basis).
+    // Create set of initial distributions (assumed to be in the QCD
+    // evolution basis).
     Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
 
-    // Allocate needed operators (matching conditions and splitting functions).
-    // By now the code is fast enough to precompute everything at all available
-    // perturbative orders and the current perturbative order is accounted for
-    // only when the actual splitting functions and matching conditions (lambda)
-    // functions are defined.
+    // Allocate needed operators (matching conditions and splitting
+    // functions).  By now the code is fast enough to precompute
+    // everything at all available perturbative orders and the current
+    // perturbative order is accounted for only when the actual
+    // splitting functions and matching conditions (lambda) functions
+    // are defined.
     // ===============================================================
-    // LO Matching conditions
+    // LO Matching conditions.
     unordered_map<int,Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -101,7 +112,7 @@ namespace apfel {
       MatchLO.insert({i, Zero});
 
     // ===============================================================
-    // LO splitting functions operators
+    // LO splitting functions operators.
     unordered_map<int,unordered_map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0ns{}, IntEps};
     const Operator O0qg{g, P0qg{}, IntEps};
@@ -122,7 +133,7 @@ namespace apfel {
       }
 
     // ===============================================================
-    // NLO splitting functions operators
+    // NLO splitting functions operators.
     unordered_map<int,unordered_map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -145,7 +156,7 @@ namespace apfel {
       }
 
     // ===============================================================
-    // Allocate NNLO Matching conditions
+    // Allocate NNLO Matching conditions.
     unordered_map<int,unordered_map<int,Operator>> MatchNNLO;  
     const Operator APS2Hq {g, APS2Hq_0{},  IntEps};
     const Operator ANS2qqH{g, ANS2qqH_0{}, IntEps};
@@ -183,7 +194,7 @@ namespace apfel {
       }
 
     // ===============================================================
-    // Allocate NNLO splitting functions operators
+    // Allocate NNLO splitting functions operators.
     unordered_map<int,unordered_map<int,Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -207,7 +218,7 @@ namespace apfel {
 	OpMapNNLO.insert({nf,OM});
       }
 
-    // Allocate set of operators
+    // Allocate set of operators.
     unordered_map<int,Set<Operator>> P0;
     unordered_map<int,Set<Operator>> P1;
     unordered_map<int,Set<Operator>> P2;
@@ -222,8 +233,8 @@ namespace apfel {
 	M2.insert({nf,Set<Operator>{matchbasis.at(nf), MatchNNLO.at(nf)}});
       }
 
-    // Create splitting functions and matching conditions lambda functions
-    // according to the requested perturbative order.
+    // Create splitting functions and matching conditions lambda
+    // functions according to the requested perturbative order.
     function<Set<Operator>(int const&, double const&)>              SplittingFunctions;
     function<Set<Operator>(bool const&, int const&, double const&)> MatchingConditions;
     if (PerturbativeOrder == 0)
@@ -250,7 +261,7 @@ namespace apfel {
 
     t.stop();
 
-    // Initialize DGLAP evolution
+    // Initialize DGLAP evolution.
     return Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps};
   }
 
@@ -261,10 +272,109 @@ namespace apfel {
                       vector<double>                                             const& Masses,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
+		      bool                                                       const& Rotate,
                       double                                                     const& IntEps,
                       int                                                        const& nsteps)
   {
-    return DglapBuildQCD(g, InPDFsFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
+    return DglapBuildQCD(g, InPDFsFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, Rotate, IntEps, nsteps);
+  }
+
+  //_____________________________________________________________________________
+  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InPDFsFunc)
+  {
+  // Gluon
+  if      (i == 0)
+    return InPDFsFunc(0,x,Q);
+  // Singlet
+  else if (i == 1)
+    return
+      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
+      + InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q)
+      + InPDFsFunc(5,x,Q) + InPDFsFunc(-5,x,Q)
+      + InPDFsFunc(6,x,Q) + InPDFsFunc(-6,x,Q);
+  // Valence
+  else if (i == 2)
+    return
+      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
+      + InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q)
+      + InPDFsFunc(5,x,Q) - InPDFsFunc(-5,x,Q)
+      + InPDFsFunc(6,x,Q) - InPDFsFunc(-6,x,Q);
+  // T3
+  else if (i == 3)
+    return
+      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
+      - ( InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q) );
+  // V3
+  else if (i == 4)
+    return
+      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
+      - ( InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q) );
+  // T8
+  else if (i == 5)
+    return
+      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
+      - 2 * ( InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q) );
+  // V8
+  else if (i == 6)
+    return
+      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
+      - 2 * ( InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q) );
+  // T15
+  else if (i == 7)
+    return
+      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
+      - 3 * ( InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q) );
+  // V15
+  else if (i == 8)
+    return
+      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
+      - 3 * ( InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q) );
+  // T24
+  else if (i == 9)
+    return
+      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
+      + InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q)
+      - 4 * ( InPDFsFunc(5,x,Q) + InPDFsFunc(-5,x,Q) );
+  // V24
+  else if (i == 10)
+    return
+      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
+      + InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q)
+      - 4 * ( InPDFsFunc(5,x,Q) - InPDFsFunc(-5,x,Q) );
+  // T35
+  else if (i == 11)
+    return
+      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
+      + InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q)
+      + InPDFsFunc(5,x,Q) + InPDFsFunc(-5,x,Q)
+      - 5 * ( InPDFsFunc(6,x,Q) + InPDFsFunc(-6,x,Q) );
+  // V35
+  else if (i == 12)
+    return
+      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
+      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
+      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
+      + InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q)
+      + InPDFsFunc(5,x,Q) - InPDFsFunc(-5,x,Q)
+      - 5 * ( InPDFsFunc(6,x,Q) - InPDFsFunc(-6,x,Q) );
+  else
+    return 0;
   }
 
 }

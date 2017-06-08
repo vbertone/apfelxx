@@ -30,8 +30,8 @@ namespace apfel {
     unordered_map<int,V> mmap;
     for (auto item = _map.GetRules().begin(); item != _map.GetRules().end(); item++)
       {
-	// If an element of the map with the same rules has already been computed,
-	// retrieve it and use it.
+	// If an element of the map with the same rules has already
+	// been computed, retrieve it and use it.
 	bool cycle = false;
 	for (auto it = _map.GetRules().begin(); it != item; it++)
 	  if (it->second == item->second)
@@ -42,7 +42,7 @@ namespace apfel {
 	    }
 	if (cycle) continue;
 
-	// Start with the first object of the vector or rules
+	// Start with the first object of the vector or rules.
         auto o = std::begin(item->second);
         V result = _objects.at((*o).operand) * d.GetObjects().at((*o).object);
 
@@ -51,9 +51,10 @@ namespace apfel {
 	  result *= (*o).coefficient;
         o++;
 
-	// Continue with the following objects of the vector of rules
+	// Continue with the following objects of the vector of rules.
         for (auto end = std::end(item->second); o != end; o++)
-	  // Multiply by the numerical coefficient only if it is different from one
+	  // Multiply by the numerical coefficient only if it is
+	  // different from one.
 	  if((*o).coefficient == 0)
 	    continue;
 	  else if((*o).coefficient != 1)
@@ -116,14 +117,14 @@ namespace apfel {
   template<class T>
   T Set<T>::Combine() const
   {
-    // Initialize iterator on '_objects'
+    // Initialize iterator on '_objects'.
     auto it = _objects.begin();
 
-    // Initialize 'CombObj' with the first object in '_objects'
+    // Initialize 'CombObj' with the first object in '_objects'.
     T CombObj = it->second;
     it++;
 
-    // Continue with the following objects of the vector of rules
+    // Continue with the following objects of the vector of rules.
     for (auto end = _objects.end(); it != end; it++)
       CombObj += it->second;
 

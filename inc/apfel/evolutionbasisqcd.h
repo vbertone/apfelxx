@@ -35,16 +35,16 @@ namespace apfel
   EvolutionBasisQCD(int const& nf):
     ConvolutionMap{"EvolutionBasisQCD_" + std::to_string(nf)}
     {
-      // dg = Pgg * g + Pgq * Sigma
+      // dg = Pgg * g + Pgq * Sigma.
       _rules[GLUON] = { {PGG, GLUON, +1}, {PGQ, SIGMA, +1} };
 
-      // dSigma = Pqg * g + ( Pnsp + Pps ) * Sigma
+      // dSigma = Pqg * g + ( Pnsp + Pps ) * Sigma.
       _rules[SIGMA] = { {PQG, GLUON, +1}, {PQQ, SIGMA, +1} };
 
-      // dV = Pnsv * V
+      // dV = Pnsv * V.
       _rules[VALENCE] = { {PNSV, VALENCE, +1} };
 
-      // d{T,V}3 = Pns{p,m} * {T,V}3
+      // d{T,V}3 = Pns{p,m} * {T,V}3.
       if (nf > 1)
 	{
 	  _rules[T3] = { {PNSP, T3, +1} };
@@ -56,7 +56,7 @@ namespace apfel
 	  _rules[V3] = _rules[VALENCE];
 	}
 
-      // d{T,V}8 = Pns{p,m} * {T,V}8
+      // d{T,V}8 = Pns{p,m} * {T,V}8.
       if (nf > 2)
 	{
 	  _rules[T8] = { {PNSP, T8, +1} };
@@ -68,7 +68,7 @@ namespace apfel
 	  _rules[V8] = _rules[VALENCE];
 	}
 
-      // d{T,V}15 = Pns{p,m} * {T,V}15
+      // d{T,V}15 = Pns{p,m} * {T,V}15.
       if (nf > 3)
 	{
 	  _rules[T15] = { {PNSP, T15, +1} };
@@ -80,7 +80,7 @@ namespace apfel
 	  _rules[V15] = _rules[VALENCE];
 	}
 
-      // d{T,V}24 = Pns{p,m} * {T,V}24
+      // d{T,V}24 = Pns{p,m} * {T,V}24.
       if (nf > 4)
 	{
 	  _rules[T24] = { {PNSP, T24, +1} };
@@ -92,7 +92,7 @@ namespace apfel
 	  _rules[V24] = _rules[VALENCE];
 	}
 
-      // d{T,V}35 = Pns{p,m} * {T,V}35
+      // d{T,V}35 = Pns{p,m} * {T,V}35.
       if (nf > 5)
 	{
 	  _rules[T35] = { {PNSP, T35, +1} };
@@ -104,6 +104,6 @@ namespace apfel
 	  _rules[V35] = _rules[VALENCE];
 	}
     };
-  };
+  }; 
 
 }

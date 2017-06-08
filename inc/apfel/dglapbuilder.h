@@ -39,6 +39,7 @@ namespace apfel
                       vector<double>                                             const& Thresholds,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
+		      bool                                                       const& Rotate = true,
                       double                                                     const& IntEps = 1e-5,
                       int                                                        const& nsteps = 10);
 
@@ -62,6 +63,13 @@ namespace apfel
                       vector<double>                                             const& Masses,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
+		      bool                                                       const& Rotate = true,
                       double                                                     const& IntEps = 1e-5,
                       int                                                        const& nsteps = 10);
+
+  /**
+   * @brief Rotation from the physical to the QCD evolution basis
+   */
+  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InPDFsFunc);
+
 }
