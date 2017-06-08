@@ -111,7 +111,7 @@ namespace apfel
       return EvolveObject(nfi, _LogMuRef2, lmu2, _ObjRef);
 
     // Direction of the evolution
-    const auto sgn = std::signbit(nfi - nff);
+    const auto sgn = signbit(nfi - nff);
 
     // Create a vector of objects containing the object right above each threshold
     // to make sure that every time a threshold is crossed a new object with a
@@ -119,12 +119,12 @@ namespace apfel
     // is evolved).
     auto vobj = _ObjRef;
     auto ti   = _LogMuRef2;
-    auto tf   = _LogThresholds2[nfi];
+    auto tf   = _LogThresholds2[(sgn ? nfi : nfi-1)];
     for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
         vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
-	ti = tf + eps8;                    // Add "eps8" to make sure to be above the threshold
-	tf = _LogThresholds2[min(inf+1,nff-1)];
+	ti = tf + (sgn ? 1 : -1) * eps8;                    // Add "eps8" to make sure to be above the threshold
+	tf = (sgn ? _LogThresholds2[min(inf+1,nff-1)] : _LogThresholds2[max(inf-2,nff-1)]);
       }
     return EvolveObject(nff, ti, lmu2, vobj);
   }

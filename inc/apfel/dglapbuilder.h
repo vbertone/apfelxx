@@ -41,4 +41,27 @@ namespace apfel
                       function<double(double const&)>                            const& Alphas,
                       double                                                     const& IntEps = 1e-5,
                       int                                                        const& nsteps = 10);
+
+  /**
+   * @brief The DglapBuildQCD, builds the dglap object for QCD
+   *
+   * @param g the grid
+   * @param InPDFsFunc the PDF method to query flavors
+   * @param MuRef the reference scale
+   * @param Masses the masses
+   * @param Thresholds the threshold
+   * @param PerturbativeOrder the perturbative order
+   * @param Alphas the alpha strong object
+   * @param IntEps the integration accuracy
+   * @param nsteps the number of steps for RK.
+   * @return
+   */
+  Dglap DglapBuildQCD(Grid                                                       const& g,
+                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      double                                                     const& MuRef,
+                      vector<double>                                             const& Masses,
+                      int                                                        const& PerturbativeOrder,
+                      function<double(double const&)>                            const& Alphas,
+                      double                                                     const& IntEps = 1e-5,
+                      int                                                        const& nsteps = 10);
 }

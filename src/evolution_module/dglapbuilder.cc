@@ -253,4 +253,18 @@ namespace apfel {
     // Initialize DGLAP evolution
     return Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps};
   }
+
+  //_____________________________________________________________________________
+  Dglap DglapBuildQCD(Grid                                                       const& g,
+                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      double                                                     const& MuRef,
+                      vector<double>                                             const& Masses,
+                      int                                                        const& PerturbativeOrder,
+                      function<double(double const&)>                            const& Alphas,
+                      double                                                     const& IntEps,
+                      int                                                        const& nsteps)
+  {
+    return DglapBuildQCD(g, InPDFsFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
+  }
+
 }

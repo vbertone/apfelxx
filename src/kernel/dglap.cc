@@ -57,7 +57,7 @@ namespace apfel {
     auto MO = MC * g;
 
     // Return the convoluted object with the map on the next evolution step
-    return Set<Distribution>{_SplittingFunctions(nf+1, 0).GetMap(), MO.GetObjects()};
+    return Set<Distribution>{_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap(), MO.GetObjects()};
   }
 
   //_________________________________________________________________________________
