@@ -23,20 +23,22 @@ namespace apfel
     _xMin(xMin),
     _xMax(1)
   {
-    // Compute grid
+    // Compute grid.
     _Step = log(_xMax / _xMin) / _nx;
 
-    // building log spaced grid in x
-    // number of points in x + 1 (bins) + extra nodes for rhs interpolation.
+    // Building log spaced grid in x. Number of points in x + 1 (bins)
+    // + extra nodes for rhs interpolation.
     _xsg.resize(_nx+_InterDegree+1, 0);
 
     _xsg[0] = _xMin;
     double const exps = exp(_Step);
-    for(auto ix = 1; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
+    for (auto ix = 1; ix < (int) _xsg.size(); ix++)
+      _xsg[ix] = _xsg[ix-1] * exps;
     _xsg[_nx] = 1;
 
     _lxsg.resize(_xsg.size());
-    for (auto ix = 0; ix < (int) _xsg.size(); ix++) _lxsg[ix] = log(_xsg[ix]);
+    for (auto ix = 0; ix < (int) _xsg.size(); ix++)
+      _lxsg[ix] = log(_xsg[ix]);
   }
 
   //_________________________________________________________________________________
@@ -51,40 +53,51 @@ namespace apfel
     _xsg.resize(_nx+InterDegree+1, 0);
     copy(xsg.begin(), xsg.end(), _xsg.begin());
 
-    // Check that the last point of the user-given grid is equal to one
-    if(fabs(_xsg[_nx]-1) >= eps11)
+    // Check that the last point of the user-given grid is equal to
+    // one.
+    if (fabs(_xsg[_nx]-1) >= eps11)
       throw runtime_exception("SubGrid::SubGrid","The upper value of the external grid does not coincide with 1.");
     else
       _xsg[_nx] = 1;
 
-    // Extend the grid for x > 1 for interpolation reasons using the same
-    // width of the last bin in log scale
+    // Extend the grid for x > 1 for interpolation reasons using the
+    // same width of the last bin in log scale.
     double const step = - log( xsg[_nx-1] );
     double const exps = exp(step);
-    for(auto ix = _nx; ix < (int) _xsg.size(); ix++) _xsg[ix] = _xsg[ix-1] * exps;
+    for (auto ix = _nx; ix < (int) _xsg.size(); ix++)
+      _xsg[ix] = _xsg[ix-1] * exps;
 
     _lxsg.resize(_xsg.size());
-    for (auto ix = 0; ix < (int) _xsg.size(); ix++) _lxsg[ix] = log(_xsg[ix]);
+    for (auto ix = 0; ix < (int) _xsg.size(); ix++)
+      _lxsg[ix] = log(_xsg[ix]);
   }
 
   //_________________________________________________________________________________
   bool SubGrid::operator == (SubGrid const& sg) const
   {
     // Are both external or internal grids?
-    if(_IsExternal != sg._IsExternal) return false;
+    if (_IsExternal != sg._IsExternal)
+      return false;
 
     // In case they are external ...
-    if(_IsExternal)
+    if (_IsExternal)
       {
-        if(_xsg != sg._xsg)                 return false;
-        if(_InterDegree != sg._InterDegree) return false;
+        if (_xsg != sg._xsg)
+	  return false;
+        if (_InterDegree != sg._InterDegree)
+	  return false;
       }
-    else // In case they are internal ...
+    // In case they are internal ...
+    else
       {
-        if(_nx != sg._nx)                   return false;
-        if(_xMin != sg._xMin)               return false;
-        if(_xMax != sg._xMax)               return false;
-        if(_InterDegree != sg._InterDegree) return false;
+        if (_nx != sg._nx)
+	  return false;
+        if (_xMin != sg._xMin)
+	  return false;
+        if (_xMax != sg._xMax)
+	  return false;
+        if (_InterDegree != sg._InterDegree)
+	  return false;
       }
     return true;
   }
@@ -92,8 +105,10 @@ namespace apfel
   //_________________________________________________________________________________
   bool SubGrid::operator != (SubGrid const& sg) const
   {
-    if (*this == sg) return false;
-    else             return true;
+    if (*this == sg)
+      return false;
+    else
+      return true;
   }
 
   //_________________________________________________________________________________

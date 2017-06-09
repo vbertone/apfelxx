@@ -17,6 +17,7 @@ set(kernel_source
   dglap.cc
   distributionfunction.cc
   observable.cc
+  doubleobject.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})

@@ -9,12 +9,6 @@
 
 #include <apfel/convolutionmap.h>
 
-#include <memory>
-#include <unordered_map>
-
-using std::unordered_map;
-using std::shared_ptr;
-
 namespace apfel
 {
   /**
@@ -66,31 +60,31 @@ namespace apfel
   };
 
   /**
-   * @brief operator * definition
+   * @brief operator *  and / definition
    * @param lhs the left object
    * @param rhs the right object
    * @return a Set of type B, C.
    */
   template<class A, class B>
-  inline Set<B> operator * (Set<A> lhs, Set<B> const& rhs) { return lhs *= rhs; }
+  Set<B> operator * (Set<A> lhs, Set<B> const& rhs) { return lhs *= rhs; }
 
   // other operators
   template<class T>
-  inline Set<T> operator * (double const& s, Set<T> rhs) { return rhs *= s;}
+  Set<T> operator * (double const& s, Set<T> rhs) { return rhs *= s; }
 
   template<class T>
-  inline Set<T> operator * (Set<T> lhs, double const& s) { return lhs *= s;}
+  Set<T> operator * (Set<T> lhs, double const& s) { return lhs *= s; }
 
   template<class T>
-  inline Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s;}
+  Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s; }
 
   template<class T>
-  inline Set<T> operator / (Set<T> lhs, int const& s) { return lhs /= s;}
+  Set<T> operator / (Set<T> lhs, int const& s) { return lhs /= s; }
 
   template<class T>
-  inline Set<T> operator * (Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs;}
+  Set<T> operator * (Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs; }
 
   template<class T>
-  inline Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { return lhs += rhs;}
+  Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { return lhs += rhs; }
 
 }

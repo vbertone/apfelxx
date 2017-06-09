@@ -36,7 +36,7 @@ namespace apfel
      */
     Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
 
-    // operators
+    // Operators.
     Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
     Operator&    operator  = (Operator const& o);           //!< this  = Operator
     Operator&    operator *= (Operator const& o);           //!< this *= Operator

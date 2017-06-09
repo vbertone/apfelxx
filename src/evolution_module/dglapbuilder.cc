@@ -26,13 +26,13 @@ namespace apfel {
 
   //_____________________________________________________________________________
   Dglap DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      function<double(int const&, double const&, double const&)> const& InDistFunc,
                       double                                                     const& MuRef,
                       vector<double>                                             const& Masses,
                       vector<double>                                             const& Thresholds,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
-		      bool                                                       const& Rotate,
+		      bool                                                       const& RotateInput,
                       double                                                     const& IntEps,
                       int                                                        const& nsteps)
   {
@@ -73,11 +73,11 @@ namespace apfel {
     // Rotate input distributions into the QCD evolution basis if
     // required.
     function<double(int const&, double const&, double const&)> QCDEvPDFsFunc;
-    if (Rotate)
+    if (RotateInput)
       QCDEvPDFsFunc = [=] (int const& i, double const& x, double const& Q) -> double
-	{ return QCDEvToPhys(i, x, Q, InPDFsFunc); };
+	{ return QCDEvToPhys(i, x, Q, InDistFunc); };
     else
-      QCDEvPDFsFunc = InPDFsFunc;
+      QCDEvPDFsFunc = InDistFunc;
 
     // Allocate initial scale distributions.
     unordered_map<int,Distribution> DistMap;
@@ -267,112 +267,112 @@ namespace apfel {
 
   //_____________________________________________________________________________
   Dglap DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      function<double(int const&, double const&, double const&)> const& InDistFunc,
                       double                                                     const& MuRef,
                       vector<double>                                             const& Masses,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
-		      bool                                                       const& Rotate,
+		      bool                                                       const& RotateInput,
                       double                                                     const& IntEps,
                       int                                                        const& nsteps)
   {
-    return DglapBuildQCD(g, InPDFsFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, Rotate, IntEps, nsteps);
+    return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, RotateInput, IntEps, nsteps);
   }
 
   //_____________________________________________________________________________
-  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InPDFsFunc)
+  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InDistFunc)
   {
   // Gluon
   if      (i == 0)
-    return InPDFsFunc(0,x,Q);
+    return InDistFunc(0,x,Q);
   // Singlet
   else if (i == 1)
     return
-      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
-      + InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q)
-      + InPDFsFunc(5,x,Q) + InPDFsFunc(-5,x,Q)
-      + InPDFsFunc(6,x,Q) + InPDFsFunc(-6,x,Q);
+      + InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) + InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) + InDistFunc(-3,x,Q)
+      + InDistFunc(4,x,Q) + InDistFunc(-4,x,Q)
+      + InDistFunc(5,x,Q) + InDistFunc(-5,x,Q)
+      + InDistFunc(6,x,Q) + InDistFunc(-6,x,Q);
   // Valence
   else if (i == 2)
     return
-      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
-      + InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q)
-      + InPDFsFunc(5,x,Q) - InPDFsFunc(-5,x,Q)
-      + InPDFsFunc(6,x,Q) - InPDFsFunc(-6,x,Q);
+      + InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) - InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) - InDistFunc(-3,x,Q)
+      + InDistFunc(4,x,Q) - InDistFunc(-4,x,Q)
+      + InDistFunc(5,x,Q) - InDistFunc(-5,x,Q)
+      + InDistFunc(6,x,Q) - InDistFunc(-6,x,Q);
   // T3
   else if (i == 3)
     return
-      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
-      - ( InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q) );
+      + InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
+      - ( InDistFunc(2,x,Q) + InDistFunc(-2,x,Q) );
   // V3
   else if (i == 4)
     return
-      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
-      - ( InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q) );
+      + InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
+      - ( InDistFunc(2,x,Q) - InDistFunc(-2,x,Q) );
   // T8
   else if (i == 5)
     return
-      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
-      - 2 * ( InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q) );
+      + InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) + InDistFunc(-2,x,Q)
+      - 2 * ( InDistFunc(3,x,Q) + InDistFunc(-3,x,Q) );
   // V8
   else if (i == 6)
     return
-      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
-      - 2 * ( InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q) );
+      + InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) - InDistFunc(-2,x,Q)
+      - 2 * ( InDistFunc(3,x,Q) - InDistFunc(-3,x,Q) );
   // T15
   else if (i == 7)
     return
-      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
-      - 3 * ( InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q) );
+      + InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) + InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) + InDistFunc(-3,x,Q)
+      - 3 * ( InDistFunc(4,x,Q) + InDistFunc(-4,x,Q) );
   // V15
   else if (i == 8)
     return
-      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
-      - 3 * ( InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q) );
+      + InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) - InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) - InDistFunc(-3,x,Q)
+      - 3 * ( InDistFunc(4,x,Q) - InDistFunc(-4,x,Q) );
   // T24
   else if (i == 9)
     return
-      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
-      + InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q)
-      - 4 * ( InPDFsFunc(5,x,Q) + InPDFsFunc(-5,x,Q) );
+      + InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) + InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) + InDistFunc(-3,x,Q)
+      + InDistFunc(4,x,Q) + InDistFunc(-4,x,Q)
+      - 4 * ( InDistFunc(5,x,Q) + InDistFunc(-5,x,Q) );
   // V24
   else if (i == 10)
     return
-      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
-      + InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q)
-      - 4 * ( InPDFsFunc(5,x,Q) - InPDFsFunc(-5,x,Q) );
+      + InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) - InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) - InDistFunc(-3,x,Q)
+      + InDistFunc(4,x,Q) - InDistFunc(-4,x,Q)
+      - 4 * ( InDistFunc(5,x,Q) - InDistFunc(-5,x,Q) );
   // T35
   else if (i == 11)
     return
-      + InPDFsFunc(1,x,Q) + InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) + InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) + InPDFsFunc(-3,x,Q)
-      + InPDFsFunc(4,x,Q) + InPDFsFunc(-4,x,Q)
-      + InPDFsFunc(5,x,Q) + InPDFsFunc(-5,x,Q)
-      - 5 * ( InPDFsFunc(6,x,Q) + InPDFsFunc(-6,x,Q) );
+      + InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) + InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) + InDistFunc(-3,x,Q)
+      + InDistFunc(4,x,Q) + InDistFunc(-4,x,Q)
+      + InDistFunc(5,x,Q) + InDistFunc(-5,x,Q)
+      - 5 * ( InDistFunc(6,x,Q) + InDistFunc(-6,x,Q) );
   // V35
   else if (i == 12)
     return
-      + InPDFsFunc(1,x,Q) - InPDFsFunc(-1,x,Q)
-      + InPDFsFunc(2,x,Q) - InPDFsFunc(-2,x,Q)
-      + InPDFsFunc(3,x,Q) - InPDFsFunc(-3,x,Q)
-      + InPDFsFunc(4,x,Q) - InPDFsFunc(-4,x,Q)
-      + InPDFsFunc(5,x,Q) - InPDFsFunc(-5,x,Q)
-      - 5 * ( InPDFsFunc(6,x,Q) - InPDFsFunc(-6,x,Q) );
+      + InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
+      + InDistFunc(2,x,Q) - InDistFunc(-2,x,Q)
+      + InDistFunc(3,x,Q) - InDistFunc(-3,x,Q)
+      + InDistFunc(4,x,Q) - InDistFunc(-4,x,Q)
+      + InDistFunc(5,x,Q) - InDistFunc(-5,x,Q)
+      - 5 * ( InDistFunc(6,x,Q) - InDistFunc(-6,x,Q) );
   else
     return 0;
   }

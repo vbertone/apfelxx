@@ -22,7 +22,7 @@ namespace apfel
    * @brief The DglapBuildQCD, builds the dglap object for QCD
    *
    * @param g the grid
-   * @param InPDFsFunc the PDF method to query flavors
+   * @param InDistFunc the PDF method to query flavors
    * @param MuRef the reference scale
    * @param Masses the masses
    * @param Thresholds the threshold
@@ -33,13 +33,13 @@ namespace apfel
    * @return
    */
   Dglap DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      function<double(int const&, double const&, double const&)> const& InDistFunc,
                       double                                                     const& MuRef,
                       vector<double>                                             const& Masses,
                       vector<double>                                             const& Thresholds,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
-		      bool                                                       const& Rotate = true,
+		      bool                                                       const& RotateInput = true,
                       double                                                     const& IntEps = 1e-5,
                       int                                                        const& nsteps = 10);
 
@@ -47,7 +47,7 @@ namespace apfel
    * @brief The DglapBuildQCD, builds the dglap object for QCD
    *
    * @param g the grid
-   * @param InPDFsFunc the PDF method to query flavors
+   * @param InDistFunc the PDF method to query flavors
    * @param MuRef the reference scale
    * @param Masses the masses
    * @param Thresholds the threshold
@@ -58,18 +58,18 @@ namespace apfel
    * @return
    */
   Dglap DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+                      function<double(int const&, double const&, double const&)> const& InDistFunc,
                       double                                                     const& MuRef,
                       vector<double>                                             const& Masses,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
-		      bool                                                       const& Rotate = true,
+		      bool                                                       const& RotateInput = true,
                       double                                                     const& IntEps = 1e-5,
                       int                                                        const& nsteps = 10);
 
   /**
    * @brief Rotation from the physical to the QCD evolution basis
    */
-  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InPDFsFunc);
+  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InDistFunc);
 
 }
