@@ -65,6 +65,7 @@ namespace apfel
     DoubleObject<T>& operator *= (double const& s);          //!< this *= scalar
     DoubleObject<T>& operator /= (double const& s);          //!< this /= scalar
     DoubleObject<T>& operator *= (DoubleObject<T> const& o); //!< this *= DoubleObject
+    DoubleObject<T>& operator += (DoubleObject<T> const& o); //!< this += DoubleObject
 
   private:
     vector<term<T>> _terms;
@@ -91,5 +92,8 @@ namespace apfel
 
   template<class T>
   DoubleObject<T> operator * (DoubleObject<T> lhs, DoubleObject<T> const& rhs) { return lhs *= rhs; }
+
+  template<class T>
+  DoubleObject<T> operator + (DoubleObject<T> lhs, DoubleObject<T> const& rhs) { return lhs += rhs; }
 
 }
