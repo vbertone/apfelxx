@@ -17,7 +17,6 @@
 #include "apfel/splittingfunctions.h"
 #include "apfel/matchingconditions.h"
 #include "apfel/distributionfunction.h"
-#include "apfel/rotations.h"
 
 #include <map>
 
@@ -33,7 +32,6 @@ namespace apfel {
                       vector<double>                                             const& Thresholds,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
-		      bool                                                       const& RotateInput,
                       double                                                     const& IntEps,
                       int                                                        const& nsteps)
   {
@@ -71,19 +69,10 @@ namespace apfel {
     // Compute number of active flavours the the PDF initial scale.
     int nf0 = NF(MuRef, Thresholds);
 
-    // Rotate input distributions into the QCD evolution basis if
-    // required.
-    function<double(int const&, double const&, double const&)> QCDEvPDFsFunc;
-    if (RotateInput)
-      QCDEvPDFsFunc = [=] (int const& i, double const& x, double const& Q) -> double
-	{ return QCDEvToPhys(i, x, Q, InDistFunc); };
-    else
-      QCDEvPDFsFunc = InDistFunc;
-
     // Allocate initial scale distributions.
     unordered_map<int,Distribution> DistMap;
     for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
-      DistMap.insert({i,DistributionFunction{g, QCDEvPDFsFunc, i, MuRef}});
+      DistMap.insert({i,DistributionFunction{g, InDistFunc, i, MuRef}});
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
@@ -273,11 +262,10 @@ namespace apfel {
                       vector<double>                                             const& Masses,
                       int                                                        const& PerturbativeOrder,
                       function<double(double const&)>                            const& Alphas,
-		      bool                                                       const& RotateInput,
                       double                                                     const& IntEps,
                       int                                                        const& nsteps)
   {
-    return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, RotateInput, IntEps, nsteps);
+    return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
   }
 
 }

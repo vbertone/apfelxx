@@ -14,7 +14,6 @@
 #include "apfel/tools.h"
 #include "apfel/disbasis.h"
 #include "apfel/zeromasscoefficientfunctions.h"
-#include "apfel/rotations.h"
 
 #include <map>
 
@@ -29,7 +28,6 @@ namespace apfel {
 					    int                                                        const& PerturbativeOrder,
 					    function<double(double const&)>                            const& Alphas,
 					    function<vector<double>(double const&)>                    const& Charges,
-					    bool                                                       const& RotateInput,
 					    double                                                     const& IntEps)
   {
     cout << "Initializing F2NCBuildZM... ";
@@ -45,22 +43,13 @@ namespace apfel {
       if (v <= 0)
 	nfi++;
 
-    // Rotate input distributions into the QCD evolution basis if
-    // required.
-    function<double(int const&, double const&, double const&)> QCDEvPDFsFunc;
-    if (RotateInput)
-      QCDEvPDFsFunc = [=] (int const& i, double const& x, double const& Q) -> double
-	{ return QCDEvToPhys(i, x, Q, InDistFunc); };
-    else
-      QCDEvPDFsFunc = InDistFunc;
-
     // Allocate distributions.
-    function<unordered_map<int,Distribution>(double const&)> fF2Map = [&g,QCDEvPDFsFunc] (double const& Q) -> unordered_map<int,Distribution>
+    function<unordered_map<int,Distribution>(double const&)> fF2Map = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
       {
 	unordered_map<int,Distribution> F2Map;
-	F2Map.insert({0, DistributionFunction{g, QCDEvPDFsFunc, 0, Q}});
+	F2Map.insert({0, DistributionFunction{g, InDistFunc, 0, Q}});
 	for (int k = 1; k <= 6; k++)
-	  F2Map.insert({k, DistributionFunction{g, QCDEvPDFsFunc, 2 * k - 1, Q}});
+	  F2Map.insert({k, DistributionFunction{g, InDistFunc, 2 * k - 1, Q}});
 
 	// Change sign to T3 to exchange "up" with "down".
 	F2Map.at(2) *= -1;
@@ -204,7 +193,6 @@ namespace apfel {
 					    int                                                        const& PerturbativeOrder,
 					    function<double(double const&)>                            const& Alphas,
 					    function<vector<double>(double const&)>                    const& Charges,
-					    bool                                                       const& RotateInput,
 					    double                                                     const& IntEps)
   {
     cout << "Initializing FLNCBuildZM... ";
@@ -220,22 +208,13 @@ namespace apfel {
       if (v <= 0)
 	nfi++;
 
-    // Rotate input distributions into the QCD evolution basis if
-    // required.
-    function<double(int const&, double const&, double const&)> QCDEvPDFsFunc;
-    if (RotateInput)
-      QCDEvPDFsFunc = [=] (int const& i, double const& x, double const& Q) -> double
-	{ return QCDEvToPhys(i, x, Q, InDistFunc); };
-    else
-      QCDEvPDFsFunc = InDistFunc;
-
     // Allocate distributions.
-    function<unordered_map<int,Distribution>(double const&)> fFLMap = [&g,QCDEvPDFsFunc] (double const& Q) -> unordered_map<int,Distribution>
+    function<unordered_map<int,Distribution>(double const&)> fFLMap = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
       {
 	unordered_map<int,Distribution> FLMap;
-	FLMap.insert({0, DistributionFunction{g, QCDEvPDFsFunc, 0, Q}});
+	FLMap.insert({0, DistributionFunction{g, InDistFunc, 0, Q}});
 	for (int k = 1; k <= 6; k++)
-	  FLMap.insert({k, DistributionFunction{g, QCDEvPDFsFunc, 2 * k - 1, Q}});
+	  FLMap.insert({k, DistributionFunction{g, InDistFunc, 2 * k - 1, Q}});
 
 	// Change sign to T3 to exchange "up" with "down".
 	FLMap.at(2) *= -1;
@@ -378,7 +357,6 @@ namespace apfel {
 					    int                                                        const& PerturbativeOrder,
 					    function<double(double const&)>                            const& Alphas,
 					    function<vector<double>(double const&)>                    const& Charges,
-					    bool                                                       const& RotateInput,
 					    double                                                     const& IntEps)
   {
     cout << "Initializing F3NCBuildZM... ";
@@ -394,22 +372,13 @@ namespace apfel {
       if (v <= 0)
 	nfi++;
 
-    // Rotate input distributions into the QCD evolution basis if
-    // required.
-    function<double(int const&, double const&, double const&)> QCDEvPDFsFunc;
-    if (RotateInput)
-      QCDEvPDFsFunc = [=] (int const& i, double const& x, double const& Q) -> double
-	{ return QCDEvToPhys(i, x, Q, InDistFunc); };
-    else
-      QCDEvPDFsFunc = InDistFunc;
-
     // Allocate distributions.
-    function<unordered_map<int,Distribution>(double const&)> fF3Map = [&g,QCDEvPDFsFunc] (double const& Q) -> unordered_map<int,Distribution>
+    function<unordered_map<int,Distribution>(double const&)> fF3Map = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
       {
 	unordered_map<int,Distribution> F3Map;
-	F3Map.insert({0, DistributionFunction{g, QCDEvPDFsFunc, 0, Q}});
+	F3Map.insert({0, DistributionFunction{g, InDistFunc, 0, Q}});
 	for (int k = 1; k <= 6; k++)
-	  F3Map.insert({k, DistributionFunction{g, QCDEvPDFsFunc, 2 * k, Q}});
+	  F3Map.insert({k, DistributionFunction{g, InDistFunc, 2 * k, Q}});
 
 	// Change sign to T3 to exchange "up" with "down".
 	F3Map.at(2) *= -1;

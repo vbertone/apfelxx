@@ -16,6 +16,5 @@ namespace apfel
   /**
    * @brief Collection of funcitions to rotate distributions from one basis to the other
    */
-  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InDistFunc);
-
+  double PhysToQCDEv(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InDistFunc);
 }

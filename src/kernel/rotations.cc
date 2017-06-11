@@ -12,7 +12,7 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  double QCDEvToPhys(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InDistFunc)
+  double PhysToQCDEv(int const& i, double const& x, double const& Q, function<double(int const&, double const&, double const&)> const& InDistFunc)
   {
     // Gluon
     if      (i == 0)
