@@ -28,6 +28,7 @@ namespace apfel
 					    int                                                        const& PerturbativeOrder,
 					    function<double(double const&)>                            const& Alphas,
 					    function<vector<double>(double const&)>                    const& Charges,
+					    bool                                                       const& RotateInput = true,
 					    double                                                     const& IntEps = 1e-5);
 
   /**
@@ -39,6 +40,7 @@ namespace apfel
 					    int                                                        const& PerturbativeOrder,
 					    function<double(double const&)>                            const& Alphas,
 					    function<vector<double>(double const&)>                    const& Charges,
+					    bool                                                       const& RotateInput = true,
 					    double                                                     const& IntEps = 1e-5);
 
   /**
@@ -50,5 +52,6 @@ namespace apfel
 					    int                                                        const& PerturbativeOrder,
 					    function<double(double const&)>                            const& Alphas,
 					    function<vector<double>(double const&)>                    const& Charges,
+					    bool                                                       const& RotateInput = true,
 					    double                                                     const& IntEps = 1e-5);
 }

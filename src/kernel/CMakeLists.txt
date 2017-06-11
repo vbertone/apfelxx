@@ -18,6 +18,7 @@ set(kernel_source
   distributionfunction.cc
   observable.cc
   doubleobject.cc
+  rotations.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})
