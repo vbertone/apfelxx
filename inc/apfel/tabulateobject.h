@@ -43,7 +43,8 @@ namespace apfel
 		   vector<double>      const& Thresholds);
 
     double EvaluatexQ(double const& x, double const& Q) const;
-    double EvaluatexQ(int const&, double const& x, double const& Q) const;
+    double EvaluatexQ(int const& i, double const& x, double const& Q) const;
+    double EvaluatexzQ(double const& x, double const& z, double const& Q) const;
   };
 
 }

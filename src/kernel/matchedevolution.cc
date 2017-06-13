@@ -10,6 +10,7 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 #include "apfel/ode.h"
+#include "apfel/doubleobject.h"
 
 #include <algorithm>
 
@@ -133,5 +134,6 @@ namespace apfel
   template class MatchedEvolution<double>;               //<! Single coupling
   template class MatchedEvolution<Distribution>;         //<! Single distribution
   template class MatchedEvolution<Set<Distribution>>;    //<! Set of distributions
+  template class MatchedEvolution<DoubleObject<Distribution>>;    //<! Set of distributions
 
 }

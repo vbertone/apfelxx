@@ -21,7 +21,6 @@ public:
   {
     return log(x);
   }
-
 };
 
 int main()

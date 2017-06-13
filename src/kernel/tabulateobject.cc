@@ -7,6 +7,7 @@
 
 #include "apfel/tabulateobject.h"
 #include "apfel/distribution.h"
+#include "apfel/doubleobject.h"
 #include "apfel/set.h"
 #include "apfel/tools.h"
 #include "apfel/timer.h"
@@ -98,6 +99,7 @@ namespace apfel {
   template class TabulateObject<double>;
   template class TabulateObject<Distribution>;
   template class TabulateObject<Set<Distribution>>;
+  template class TabulateObject<DoubleObject<Distribution>>;
 
   //_________________________________________________________________________________
   template<>
@@ -156,5 +158,42 @@ namespace apfel {
 
     return result;
   }
+
+  //_________________________________________________________________________________
+  template<>
+  double TabulateObject<double>::EvaluatexzQ(double const&, double const&, double const&) const
+  {
+    throw runtime_exception("TabulateObject::EvaluatexzQ(x,z,Q)",
+			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
+  }
+
+  template<>
+  double TabulateObject<Distribution>::EvaluatexzQ(double const&, double const&, double const&) const
+  {
+    throw runtime_exception("TabulateObject::EvaluatexzQ(x,z,Q)",
+			    "This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
+  }
+
+  template<>
+  double TabulateObject<Set<Distribution>>::EvaluatexzQ(double const&, double const&, double const&) const
+  {
+    throw runtime_exception("TabulateObject::EvaluatexzQ(x,z,Q)",
+			    "This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
+  }
+
+  template<>
+  double TabulateObject<DoubleObject<Distribution>>::EvaluatexzQ(double const& x, double const& z, double const& Q) const
+  {
+    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+    const auto bounds = this->SumBounds(Q);
+
+    // Loop over the nodes
+    double result = 0;
+    for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
+      result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].Evaluate(x,z);
+
+    return result;
+  }
+
 
 }
