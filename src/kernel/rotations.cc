@@ -38,13 +38,13 @@ namespace apfel {
     // T3
     else if (i == 3)
       return
-	+ InDistFunc(1,x,Q) + InDistFunc(-1,x,Q)
-	- ( InDistFunc(2,x,Q) + InDistFunc(-2,x,Q) );
+	+ InDistFunc(2,x,Q) + InDistFunc(-2,x,Q)
+	- ( InDistFunc(1,x,Q) + InDistFunc(-1,x,Q) );
     // V3
     else if (i == 4)
       return
-	+ InDistFunc(1,x,Q) - InDistFunc(-1,x,Q)
-	- ( InDistFunc(2,x,Q) - InDistFunc(-2,x,Q) );
+	+ InDistFunc(2,x,Q) - InDistFunc(-2,x,Q)
+	- ( InDistFunc(1,x,Q) - InDistFunc(-1,x,Q) );
     // T8
     else if (i == 5)
       return
