@@ -25,7 +25,7 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  Dglap DglapBuildQCD(Grid                                                       const& g,
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
                       function<double(int const&, double const&, double const&)> const& InDistFunc,
                       double                                                     const& MuRef,
                       vector<double>                                             const& Masses,
@@ -252,11 +252,11 @@ namespace apfel {
     t.stop();
 
     // Initialize DGLAP evolution.
-    return Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps};
+    return unique_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps});
   }
 
   //_____________________________________________________________________________
-  Dglap DglapBuildQCD(Grid                                                       const& g,
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
                       function<double(int const&, double const&, double const&)> const& InDistFunc,
                       double                                                     const& MuRef,
                       vector<double>                                             const& Masses,

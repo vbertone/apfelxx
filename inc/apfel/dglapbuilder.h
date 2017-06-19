@@ -32,15 +32,15 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  Dglap DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InDistFunc,
-                      double                                                     const& MuRef,
-                      vector<double>                                             const& Masses,
-                      vector<double>                                             const& Thresholds,
-                      int                                                        const& PerturbativeOrder,
-                      function<double(double const&)>                            const& Alphas,
-                      double                                                     const& IntEps = 1e-5,
-                      int                                                        const& nsteps = 10);
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
+                                  function<double(int const&, double const&, double const&)> const& InDistFunc,
+                                  double                                                     const& MuRef,
+                                  vector<double>                                             const& Masses,
+                                  vector<double>                                             const& Thresholds,
+                                  int                                                        const& PerturbativeOrder,
+                                  function<double(double const&)>                            const& Alphas,
+                                  double                                                     const& IntEps = 1e-5,
+                                  int                                                        const& nsteps = 10);
 
   /**
    * @brief The DglapBuildQCD, builds the dglap object for QCD
@@ -56,13 +56,12 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  Dglap DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InDistFunc,
-                      double                                                     const& MuRef,
-                      vector<double>                                             const& Masses,
-                      int                                                        const& PerturbativeOrder,
-                      function<double(double const&)>                            const& Alphas,
-                      double                                                     const& IntEps = 1e-5,
-                      int                                                        const& nsteps = 10);
-
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
+                                  function<double(int const&, double const&, double const&)> const& InDistFunc,
+                                  double                                                     const& MuRef,
+                                  vector<double>                                             const& Masses,
+                                  int                                                        const& PerturbativeOrder,
+                                  function<double(double const&)>                            const& Alphas,
+                                  double                                                     const& IntEps = 1e-5,
+                                  int                                                        const& nsteps = 10);
 }
