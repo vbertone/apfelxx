@@ -7,59 +7,55 @@
 
 #include "apfel/distributionfunction.h"
 
-#include <functional>
-
-using std::function;
-
 namespace apfel {
 
   //_________________________________________________________________________
   DistributionFunction::DistributionFunction(Grid                                        const& g,
-					     function<double(int const&, double const&)> const& InPDFsFunc,
+					     function<double(int const&, double const&)> const& InDistFunc,
 					     int                                         const& ipdf):
     Distribution(g)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1)
-	_distributionJointGrid.push_back(InPDFsFunc(ipdf,ix));
-      else
-	_distributionJointGrid.push_back(0);
+      _distributionJointGrid.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1));
 
-    for (auto ig=0; ig<_grid.nGrids(); ig++)
+    for (auto ig = 0; ig < _grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-	  if (ix < 1)
-	    sg.push_back(InPDFsFunc(ipdf,ix));
-	  else
-	    sg.push_back(0);
+	  sg.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1));
+
 	_distributionSubGrid.push_back(sg);
       }
   }
 
   //_________________________________________________________________________
   DistributionFunction::DistributionFunction(Grid                                                       const& g,
-					     function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+					     function<double(int const&, double const&, double const&)> const& InDistFunc,
 					     int                                                        const& ipdf,
 					     double                                                     const& Q):
     Distribution(g)
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1)
-	_distributionJointGrid.push_back(InPDFsFunc(ipdf,ix,Q));
-      else
-	_distributionJointGrid.push_back(0);
+      _distributionJointGrid.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1,Q));
 
-    for (auto ig=0; ig<_grid.nGrids(); ig++)
+    for (auto ig = 0; ig < _grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-	  if (ix < 1)
-	    sg.push_back(InPDFsFunc(ipdf,ix,Q));
-	  else
-	    sg.push_back(0);
+	  sg.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1,Q));
+
 	_distributionSubGrid.push_back(sg);
       }
+  }
+
+  //_________________________________________________________________________
+  DistributionFunction::DistributionFunction(Grid                   const& g,
+					     vector<double>         const& DistJointGrid,
+					     vector<vector<double>> const& DistSubGrid):
+    Distribution(g)
+  {
+    _distributionJointGrid = DistJointGrid;
+    _distributionSubGrid   = DistSubGrid;
   }
 
 }

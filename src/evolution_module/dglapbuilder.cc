@@ -18,22 +18,20 @@
 #include "apfel/matchingconditions.h"
 #include "apfel/distributionfunction.h"
 
-#include <map>
-
 using namespace std;
 
 namespace apfel {
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InDistFunc,
-                      double                                                     const& MuRef,
-                      vector<double>                                             const& Masses,
-                      vector<double>                                             const& Thresholds,
-                      int                                                        const& PerturbativeOrder,
-                      function<double(double const&)>                            const& Alphas,
-                      double                                                     const& IntEps,
-                      int                                                        const& nsteps)
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                              const& g,
+				  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+				  double                                                            const& MuRef,
+				  vector<double>                                                    const& Masses,
+				  vector<double>                                                    const& Thresholds,
+				  int                                                               const& PerturbativeOrder,
+				  function<double(double const&)>                                   const& Alphas,
+				  double                                                            const& IntEps,
+				  int                                                               const& nsteps)
   {
     cout << "Initializing DglapBuildQCD... ";
     Timer t;
@@ -66,13 +64,47 @@ namespace apfel {
 	matchbasis.insert({nf,MatchingBasisQCD{nf}});
       }
 
-    // Compute number of active flavours the the PDF initial scale.
-    int nf0 = NF(MuRef, Thresholds);
+    // Fill in joint grid and subgrids for all distribution
+    // combinations.
+    unordered_map<int,vector<double>> DistJointGrid;
+    for (auto const& ix : g.GetJointGrid().GetGrid())
+      {
+	const auto f = InDistFunc(ix < 1 ? ix : 1,MuRef);
+	for (auto it = f.begin(); it != f.end(); ++it)
+	  // If the key does not exist, create it.
+	  if (DistJointGrid.find(it->first) == DistJointGrid.end())
+	    DistJointGrid.insert({it->first,vector<double>{it->second}});
+	  else
+	    DistJointGrid.at(it->first).push_back(it->second);
+      }
+
+    unordered_map<int,vector<vector<double>>> DistSubGrid;
+    for (auto ig = 0; ig < g.nGrids(); ig++)
+      {
+	unordered_map<int,vector<double>> sg;
+	for (auto const& ix: g.GetSubGrid(ig).GetGrid())
+	  {
+	    const auto f = InDistFunc(ix < 1 ? ix : 1,MuRef);
+	    for (auto it = f.begin(); it != f.end(); ++it)
+	      if (sg.find(it->first) == sg.end())
+		sg.insert({it->first,vector<double>{it->second}});
+	      else
+		sg.at(it->first).push_back(it->second);
+	  }
+	for (auto it = sg.begin(); it != sg.end(); ++it)
+	  if (DistSubGrid.find(it->first) == DistSubGrid.end())
+	    DistSubGrid.insert({it->first,vector<vector<double>>{it->second}});
+	  else
+	    DistSubGrid.at(it->first).push_back(it->second);
+      }
 
     // Allocate initial scale distributions.
     unordered_map<int,Distribution> DistMap;
     for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
-      DistMap.insert({i,DistributionFunction{g, InDistFunc, i, MuRef}});
+      DistMap.insert({i,DistributionFunction{g, DistJointGrid.at(i), DistSubGrid.at(i)}});
+
+    // Compute number of active flavours the the PDF initial scale.
+    int nf0 = NF(MuRef, Thresholds);
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
@@ -256,14 +288,48 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                              const& g,
+				  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+				  double                                                            const& MuRef,
+				  vector<double>                                                    const& Masses,
+				  int                                                               const& PerturbativeOrder,
+				  function<double(double const&)>                                   const& Alphas,
+				  double                                                            const& IntEps,
+				  int                                                               const& nsteps)
+  {
+    return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
+  }
+
+  //_____________________________________________________________________________
   unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
-                      function<double(int const&, double const&, double const&)> const& InDistFunc,
-                      double                                                     const& MuRef,
-                      vector<double>                                             const& Masses,
-                      int                                                        const& PerturbativeOrder,
-                      function<double(double const&)>                            const& Alphas,
-                      double                                                     const& IntEps,
-                      int                                                        const& nsteps)
+				  function<double(int const&, double const&, double const&)> const& InDistFunc,
+				  double                                                     const& MuRef,
+				  vector<double>                                             const& Masses,
+				  vector<double>                                             const& Thresholds,
+				  int                                                        const& PerturbativeOrder,
+				  function<double(double const&)>                            const& Alphas,
+				  double                                                     const& IntEps,
+				  int                                                        const& nsteps)
+  {
+    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> unordered_map<int,double>
+      {
+	unordered_map<int,double> DistMap;
+	for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
+	  DistMap.insert({i,InDistFunc(i, x, Q)});
+	return DistMap;
+      };
+    return DglapBuildQCD(g, InDistFuncMap, MuRef, Masses, Thresholds, PerturbativeOrder, Alphas, IntEps, nsteps);
+  }
+
+  //_____________________________________________________________________________
+  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
+				  function<double(int const&, double const&, double const&)> const& InDistFunc,
+				  double                                                     const& MuRef,
+				  vector<double>                                             const& Masses,
+				  int                                                        const& PerturbativeOrder,
+				  function<double(double const&)>                            const& Alphas,
+				  double                                                     const& IntEps,
+				  int                                                        const& nsteps)
   {
     return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
   }

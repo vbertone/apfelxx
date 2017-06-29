@@ -109,4 +109,106 @@ namespace apfel {
       return 0;
   }
 
+  //_____________________________________________________________________________
+  unordered_map<int,double> PhysToQCDEv(double const& x, double const& Q, function<map<int,double>(double const&, double const&)> const& InDistFunc)
+  {
+    // Call function in the physical basis.
+    map<int,double> PhysMap = InDistFunc(x,Q);
+
+    // Fill in keys that don't exist.
+    // Gluon (assumes that the ID is 21).
+    if (PhysMap.find(0) == PhysMap.end())
+      PhysMap.insert({0,PhysMap.at(21)});
+
+    // Quarks (Fill in with zero if they don't exist).
+    for (auto i = -6; i <= 6; i++)
+      if (PhysMap.find(i) == PhysMap.end())
+	PhysMap.insert({i,0});
+
+    // Define distributions in the QCD evolution basis.
+    const double Gluon = PhysMap.at(0);
+    const double Singlet =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      + PhysMap.at(4) + PhysMap.at(-4)
+      + PhysMap.at(5) + PhysMap.at(-5)
+      + PhysMap.at(6) + PhysMap.at(-6);
+    const double Valence =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      + PhysMap.at(4) - PhysMap.at(-4)
+      + PhysMap.at(5) - PhysMap.at(-5)
+      + PhysMap.at(6) - PhysMap.at(-6);
+    const double T3 =
+      + PhysMap.at(2) + PhysMap.at(-2)
+      - ( PhysMap.at(1) + PhysMap.at(-1) );
+    const double V3 =
+      + PhysMap.at(2) - PhysMap.at(-2)
+      - ( PhysMap.at(1) - PhysMap.at(-1) );
+    const double T8 =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      - 2 * ( PhysMap.at(3) + PhysMap.at(-3) );
+    const double V8 =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      - 2 * ( PhysMap.at(3) - PhysMap.at(-3) );
+    const double T15 =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      - 3 * ( PhysMap.at(4) + PhysMap.at(-4) );
+    const double V15 =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      - 3 * ( PhysMap.at(4) - PhysMap.at(-4) );
+    const double T24 =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      + PhysMap.at(4) + PhysMap.at(-4)
+      - 4 * ( PhysMap.at(5) + PhysMap.at(-5) );
+    const double V24 =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      + PhysMap.at(4) - PhysMap.at(-4)
+      - 4 * ( PhysMap.at(5) - PhysMap.at(-5) );
+    const double T35 =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      + PhysMap.at(4) + PhysMap.at(-4)
+      + PhysMap.at(5) + PhysMap.at(-5)
+      - 5 * ( PhysMap.at(6) + PhysMap.at(-6) );
+    const double V35 =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      + PhysMap.at(4) - PhysMap.at(-4)
+      + PhysMap.at(5) - PhysMap.at(-5)
+      - 5 * ( PhysMap.at(6) - PhysMap.at(-6) );
+
+    // Fill in map in the QCD evolution basis.
+    unordered_map<int,double> QCDEvMap;
+    QCDEvMap.insert({0 , Gluon});
+    QCDEvMap.insert({1 , Singlet});
+    QCDEvMap.insert({2 , Valence});
+    QCDEvMap.insert({3 , T3});
+    QCDEvMap.insert({4 , V3});
+    QCDEvMap.insert({5 , T8});
+    QCDEvMap.insert({6 , V8});
+    QCDEvMap.insert({7 , T15});
+    QCDEvMap.insert({8 , V15});
+    QCDEvMap.insert({9 , T24});
+    QCDEvMap.insert({10, V24});
+    QCDEvMap.insert({11, T35});
+    QCDEvMap.insert({12, V35});
+
+    return QCDEvMap;
+  }
+
 }

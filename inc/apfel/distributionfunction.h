@@ -11,8 +11,10 @@
 #include "apfel/distribution.h"
 
 #include <functional>
+#include <unordered_map>
 
 using std::function;
+using std::unordered_map;
 
 namespace apfel {
 
@@ -29,16 +31,24 @@ namespace apfel {
      * @brief Default constructor.
      */
     DistributionFunction(Grid                                        const& g,
-			 function<double(int const&, double const&)> const& InPDFsFunc,
+			 function<double(int const&, double const&)> const& InDistFunc,
 			 int                                         const& ipdf);
 
     /**
      * @brief Default constructor.
      */
     DistributionFunction(Grid                                                       const& g,
-			 function<double(int const&, double const&, double const&)> const& InPDFsFunc,
+			 function<double(int const&, double const&, double const&)> const& InDistFunc,
 			 int                                                        const& ipdf,
 			 double                                                     const& Q);
+
+
+    /**
+     * @brief Default constructor.
+     */
+    DistributionFunction(Grid                   const& g,
+			 vector<double>         const& DistJointGrid,
+			 vector<vector<double>> const& DistSubGrid);
 
   };
 
