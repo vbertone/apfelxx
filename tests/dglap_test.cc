@@ -217,11 +217,56 @@ int main()
     }
   cout << "      " << endl;
 
-  const int k = 1000000;
-  cout << "Interpolating " << k << " times PDFs on the (x,Q) grid... ";
+  cout << "Interpolation on the PDF table as a map (x and Q independently):" << endl;
+  for (auto i = 2; i < 11; i++)
+    {
+      const auto DistMap = TabulatedPDFs.EvaluateMapxQ(xlha[i],mu);
+      cout.precision(1);
+      cout << xlha[i];
+      cout.precision(4);
+      cout << "  " <<
+	DistMap.at(2)  / 6  +
+	DistMap.at(4)  / 2  +
+	DistMap.at(6)  / 6  +
+	DistMap.at(8)  / 12 +
+	DistMap.at(10) / 20 +
+	DistMap.at(12) / 30
+	   << "  " <<
+	DistMap.at(2)  / 6  -
+	DistMap.at(4)  / 2  +
+	DistMap.at(6)  / 6  +
+	DistMap.at(8)  / 12 +
+	DistMap.at(10) / 20 +
+	DistMap.at(12) / 30
+	   << "  " <<
+	( DistMap.at(1)  - DistMap.at(2)  ) / 3  +
+	( DistMap.at(5)  - DistMap.at(6)  ) / 3  +
+	( DistMap.at(7)  - DistMap.at(8)  ) / 6  +
+	( DistMap.at(9)  - DistMap.at(10) ) / 10 +
+	( DistMap.at(11) - DistMap.at(12) ) / 15
+	   << "  " <<
+	DistMap.at(1)  / 6  -
+	DistMap.at(7)  / 4  +
+	DistMap.at(9)  / 20 +
+	DistMap.at(11) / 30
+	   << "  " <<
+	DistMap.at(0) << "  "
+	   << endl;
+    }
+  cout << "      " << endl;
+
+  int k = 1000000;
+  cout << "Interpolating " << k << " times a single PDF on the (x,Q) grid... ";
   t.start();
   for (auto i = 0; i < k; i++)
-      TabulatedPDFs.EvaluatexQ(0,0.05,mu);
+    TabulatedPDFs.EvaluatexQ(0,0.05,mu);
+  t.stop();
+
+  k = 100000;
+  cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
+  t.start();
+  for (auto i = 0; i < k; i++)
+    TabulatedPDFs.EvaluateMapxQ(0.05,mu);
   t.stop();
 
   return 0;
