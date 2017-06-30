@@ -8,6 +8,8 @@
 #include "apfel/distribution.h"
 #include "apfel/tools.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   //_________________________________________________________________________
