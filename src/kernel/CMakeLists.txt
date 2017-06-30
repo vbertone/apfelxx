@@ -15,7 +15,6 @@ set(kernel_source
   set.cc
   tabulateobject.cc
   dglap.cc
-  distributionfunction.cc
   observable.cc
   doubleobject.cc
   rotations.cc

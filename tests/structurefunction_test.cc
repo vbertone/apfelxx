@@ -27,28 +27,41 @@ double xglu(double const& x)  { return 1.7 * pow(x,-0.1) * pow((1-x),5); }
 double xdbar(double const& x) { return 0.1939875 * pow(x,-0.1) * pow((1-x),6); }
 double xubar(double const& x) { return xdbar(x) * (1-x); }
 double xsbar(double const& x) { return 0.2 * ( xdbar(x) + xubar(x) ); }
-double LHToyPDFs(int const& i, double const& x, double const&)
+unordered_map<int,double> LHToyPDFs(double const& x, double const&)
 {
-  // Gluon
-  if      (i == 0)
-    return xglu(x);
-  // Singlet, T15, T24, T35
-  else if (i == 1 || i == 7 || i == 9 || i == 11 )
-    return xdnv(x) + 2 * xdbar(x) + xupv(x) + 2 * xubar(x) + 2 * xsbar(x);
-  // T3
-  else if (i == 3)
-    return xupv(x) + 2 * xubar(x) - xdnv(x) - 2 * xdbar(x);
-  // T8
-  else if (i == 5)
-    return xupv(x) + 2 * xubar(x) + xdnv(x) + 2 * xdbar(x) - 4 * xsbar(x);
-  // Valence, V8, V15, V24, V35
-  else if (i == 2 || i == 6 || i == 8 || i == 10 || i == 12)
-    return xupv(x) + xdnv(x);
-  // V3
-  else if (i == 4)
-    return xupv(x) - xdnv(x);
-  else
-    return 0;
+  // Call all functions once.
+  const double upv  = xupv (x);
+  const double dnv  = xdnv (x);
+  const double glu  = xglu (x);
+  const double dbar = xdbar(x);
+  const double ubar = xubar(x);
+  const double sbar = xsbar(x);
+
+  // Construct QCD evolution basis conbinations.
+  double const Gluon   = glu;
+  double const Singlet = dnv + 2 * dbar + upv + 2 * ubar + 2 * sbar;
+  double const T3      = upv + 2 * ubar - dnv - 2 * dbar;
+  double const T8      = upv + 2 * ubar + dnv + 2 * dbar - 4 * sbar;
+  double const Valence = upv + dnv;
+  double const V3      = upv - dnv;
+
+  // Fill in map in the QCD evolution basis.
+  unordered_map<int,double> QCDEvMap;
+  QCDEvMap.insert({0 , Gluon});
+  QCDEvMap.insert({1 , Singlet});
+  QCDEvMap.insert({2 , Valence});
+  QCDEvMap.insert({3 , T3});
+  QCDEvMap.insert({4 , V3});
+  QCDEvMap.insert({5 , T8});
+  QCDEvMap.insert({6 , Valence});
+  QCDEvMap.insert({7 , Singlet});
+  QCDEvMap.insert({8 , Valence});
+  QCDEvMap.insert({9 , Singlet});
+  QCDEvMap.insert({10, Valence});
+  QCDEvMap.insert({11, Singlet});
+  QCDEvMap.insert({12, Valence});
+
+  return QCDEvMap;
 }
 
 int main()
@@ -90,7 +103,7 @@ int main()
   const TabulateObject<Set<Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
   // Evolved PDFs
-  const auto PDFs = [&] (int const& i, double const& x, double const& Q) -> double{ return TabulatedPDFs.EvaluatexQ(i,x,Q); };
+  const auto PDFs = [&] (double const& x, double const& Q) -> unordered_map<int,double>{ return TabulatedPDFs.EvaluateMapxQ(x,Q); };
 
   // Initialize structure functions
   const auto F2 = F2NCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);

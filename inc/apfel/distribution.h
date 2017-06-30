@@ -7,7 +7,13 @@
 
 #pragma once
 
-#include <apfel/lagrangeinterpolator.h>
+#include "apfel/lagrangeinterpolator.h"
+
+#include <functional>
+#include <unordered_map>
+
+using std::function;
+using std::unordered_map;
 
 namespace apfel
 {
@@ -28,11 +34,51 @@ namespace apfel
 
     /**
      * @brief Distribution constructors.
-     * @param gr the Grid object
+     * @param obj Distribution object
      * @param distsubgrid a 2d vector with the distribution values for each subgrid.
      * @param distjointgrid a vector with the distribution values on the joint grid.
      */
     Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
+
+    /**
+     * @brief Distribution constructors.
+     * @param gr the Grid object
+     * @param distsubgrid a 2d vector with the distribution values for each subgrid.
+     * @param distjointgrid a vector with the distribution values on the joint grid.
+     */
+    Distribution(Grid const& g, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
+
+    /**
+     * @brief Distribution constructors.
+     * @param gr the Grid object
+     * @param InDistFunc function of ipdf and x to be tabulated.
+     * @param ipdf int to be fed to InDistFunc.
+     */
+    Distribution(Grid                                        const& g,
+		 function<double(int const&, double const&)> const& InDistFunc,
+		 int                                         const& ipdf);
+
+    /**
+     * @brief Distribution constructors.
+     * @param gr the Grid object
+     * @param InDistFunc function of ipdf, x, and Q to be tabulated.
+     * @param ipdf int to be fed to InDistFunc.
+     * @param Q double to be fed to InDistFunc.
+     */
+    Distribution(Grid                                                       const& g,
+		 function<double(int const&, double const&, double const&)> const& InDistFunc,
+		 int                                                        const& ipdf,
+		 double                                                     const& Q);
+
+    /**
+     * @brief Function to push back the values of the joint grid.
+     */
+    void PushJointGrid(double const& xi);
+
+    /**
+     * @brief Function to push back the values of the subgrid.
+     */
+    void PushSubGrid(double const& xi, bool const& next);
 
     // Operators
     Distribution& operator  = (Distribution const& d); //!< this  = Distribution
@@ -49,4 +95,10 @@ namespace apfel
   Distribution operator / (Distribution lhs, double const& s);         //!< Distribution/Scalar
   Distribution operator + (Distribution lhs, Distribution const& rhs); //!< Distribution+Distribution
   Distribution operator - (Distribution lhs, Distribution const& rhs); //!< Distribution-Distribution
+
+  //Fill in an undordered_map of distributions from a map of distributions.
+  unordered_map<int,Distribution> DistributionMap(Grid                                                              const& g,
+						  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+						  double                                                            const& Q,
+						  vector<int>                                                       const& skip = {});
 }

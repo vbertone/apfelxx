@@ -7,7 +7,6 @@
 
 #include "apfel/dglap.h"
 #include "apfel/ode.h"
-#include "apfel/distributionfunction.h"
 #include "apfel/tools.h"
 
 #include <iostream>
@@ -78,7 +77,7 @@ namespace apfel {
     // Allocate initial scale distributions.
     unordered_map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
-      DistMap.insert({i,DistributionFunction{_ObjRef.at(0).GetGrid(), InPDFsFunc, i}});
+      DistMap.insert({i,Distribution{_ObjRef.at(0).GetGrid(), InPDFsFunc, i}});
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).

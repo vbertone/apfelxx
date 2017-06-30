@@ -16,7 +16,6 @@
 #include "apfel/matchingbasisqcd.h"
 #include "apfel/splittingfunctions.h"
 #include "apfel/matchingconditions.h"
-#include "apfel/distributionfunction.h"
 
 using namespace std;
 
@@ -64,51 +63,15 @@ namespace apfel {
 	matchbasis.insert({nf,MatchingBasisQCD{nf}});
       }
 
-    // Fill in joint grid and subgrids for all distribution
-    // combinations.
-    unordered_map<int,vector<double>> DistJointGrid;
-    for (auto const& ix : g.GetJointGrid().GetGrid())
-      {
-	const auto f = InDistFunc(ix < 1 ? ix : 1,MuRef);
-	for (auto it = f.begin(); it != f.end(); ++it)
-	  // If the key does not exist, create it.
-	  if (DistJointGrid.find(it->first) == DistJointGrid.end())
-	    DistJointGrid.insert({it->first,vector<double>{it->second}});
-	  else
-	    DistJointGrid.at(it->first).push_back(it->second);
-      }
-
-    unordered_map<int,vector<vector<double>>> DistSubGrid;
-    for (auto ig = 0; ig < g.nGrids(); ig++)
-      {
-	unordered_map<int,vector<double>> sg;
-	for (auto const& ix: g.GetSubGrid(ig).GetGrid())
-	  {
-	    const auto f = InDistFunc(ix < 1 ? ix : 1,MuRef);
-	    for (auto it = f.begin(); it != f.end(); ++it)
-	      if (sg.find(it->first) == sg.end())
-		sg.insert({it->first,vector<double>{it->second}});
-	      else
-		sg.at(it->first).push_back(it->second);
-	  }
-	for (auto it = sg.begin(); it != sg.end(); ++it)
-	  if (DistSubGrid.find(it->first) == DistSubGrid.end())
-	    DistSubGrid.insert({it->first,vector<vector<double>>{it->second}});
-	  else
-	    DistSubGrid.at(it->first).push_back(it->second);
-      }
-
     // Allocate initial scale distributions.
-    unordered_map<int,Distribution> DistMap;
-    for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
-      DistMap.insert({i,DistributionFunction{g, DistJointGrid.at(i), DistSubGrid.at(i)}});
+    const unordered_map<int,Distribution> DistMap = DistributionMap(g, InDistFunc, MuRef);
 
     // Compute number of active flavours the the PDF initial scale.
-    int nf0 = NF(MuRef, Thresholds);
+    const int nf0 = NF(MuRef, Thresholds);
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
-    Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
+    const Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
 
     // Allocate needed operators (matching conditions and splitting
     // functions).  By now the code is fast enough to precompute
