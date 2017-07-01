@@ -12,45 +12,11 @@
 #include <apfel/expression.h>
 #include <apfel/timer.h>
 #include <apfel/tools.h>
+
 #include <cmath>
 
 using namespace apfel;
 using namespace std;
-
-/**
- * Prototype function for testing purproses.
- */
-double xg(double const& x)
-{
-  return 1 - x;
-}
-
-/**
- * @brief The Parton class
- */
-class myPDF: public Distribution
-{
-public:
-  /**
-   * Allocate the langrage interpolation and fill the inherited
-   * \c _distribution object with the jointed grid.
-   */
-  myPDF(Grid const& gr): Distribution(gr)
-  {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1) _distributionJointGrid.push_back(xg(ix));
-      else        _distributionJointGrid.push_back(0);
-
-    for (auto ig=0; ig<_grid.nGrids(); ig++)
-      {
-        vector<double> sg;
-        for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          if (ix < 1) sg.push_back(xg(ix));
-	  else        sg.push_back(0);
-        _distributionSubGrid.push_back(sg);
-      }
-  }
-};
 
 // Class to define the analytical expression of LO splitting function P0qq
 class p0qq: public Expression
@@ -80,7 +46,7 @@ int main()
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}, false};
 
   // Distribution
-  const myPDF d{g};
+  const Distribution d{g, [&] (double const& x)->double{ return 1 - x; }};
 
   // Expression
   const p0qq p;

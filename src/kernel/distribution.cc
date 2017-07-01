@@ -34,6 +34,42 @@ namespace apfel
     _distributionJointGrid = distjointgrid;
   }
 
+  //_________________________________________________________________________
+  Distribution::Distribution(Grid                            const& gr,
+			     function<double(double const&)> const& InDistFunc):
+    LagrangeInterpolator{gr}
+  {
+    for (auto const& ix: _grid.GetJointGrid().GetGrid())
+      _distributionJointGrid.push_back(InDistFunc(ix < 1 ? ix : 1));
+
+    for (auto ig = 0; ig < _grid.nGrids(); ig++)
+      {
+	vector<double> sg;
+	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
+	  sg.push_back(InDistFunc(ix < 1 ? ix : 1));
+
+	_distributionSubGrid.push_back(sg);
+      }
+  }
+
+  //_________________________________________________________________________
+  Distribution::Distribution(Grid                                           const& gr,
+			     function<double(double const&, double const&)> const& InDistFunc,
+			     double                                         const& Q):
+    LagrangeInterpolator{gr}
+  {
+    for (auto const& ix: _grid.GetJointGrid().GetGrid())
+      _distributionJointGrid.push_back(InDistFunc(ix < 1 ? ix : 1,Q));
+
+    for (auto ig = 0; ig < _grid.nGrids(); ig++)
+      {
+	vector<double> sg;
+	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
+	  sg.push_back(InDistFunc(ix < 1 ? ix : 1,Q));
+
+	_distributionSubGrid.push_back(sg);
+      }
+  }
 
   //_________________________________________________________________________
   Distribution::Distribution(Grid                                        const& gr,

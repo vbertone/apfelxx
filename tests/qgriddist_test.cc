@@ -5,87 +5,34 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <iostream>
-#include <cmath>
-#include <iomanip>
-
 #include <apfel/grid.h>
 #include <apfel/subgrid.h>
 #include <apfel/qgrid.h>
 #include <apfel/distribution.h>
+#include <apfel/tabulateobject.h>
 #include <apfel/timer.h>
+
+#include <iostream>
+#include <cmath>
+#include <iomanip>
 
 using namespace apfel;
 using namespace std;
-
-/**
- * Prototype function for testing purproses.
- */
-double xQdist(double const& x, double const& Q)
-{
-  return x * ( 1 - x ) * log(Q);
-}
-
-/**
- * @brief The Parton class
- */
-class Function: public Distribution
-{
-public:
-  /**
-   * Allocate the langrage interpolation and fill the inherited
-   * \c _distribution object with the jointed grid.
-   */
-  Function(Grid const& gr, double const& Q): Distribution(gr)
-  {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1) _distributionJointGrid.push_back(xQdist(ix,Q));
-      else        _distributionJointGrid.push_back(0);
-
-    for (auto ig=0; ig<_grid.nGrids(); ig++)
-      {
-        vector<double> sg;
-        for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          if (ix < 1) sg.push_back(xQdist(ix,Q));
-	  else        sg.push_back(0);
-        _distributionSubGrid.push_back(sg);
-      }
-  }
-};
-
-/**
- * @brief Distibution on the grid
- */
-class GridDistribution: public QGrid<Distribution>
-{
-public:
-  GridDistribution(Grid   const& gr,
-		   int    const& nQ,
-		   double const& QMin,
-		   double const& QMax,
-		   int    const& InterDegree):
-    QGrid<Distribution>(nQ, QMin, QMax, InterDegree, {})
-  {
-    for (auto const& iQ : _Qg)
-      {
-	const Function f{gr, iQ}; 
-	_GridValues.push_back(f);
-      }
-  }
-
-};
 
 int main()
 {
   // Grid
   Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}, false};
 
+  // Define distribution.
+  const auto xQdist = [&](double const& x, double const& Q)->double{ return x * ( 1 - x ) * log(Q); };
+  const auto d = [&](double const& Q)->Distribution{ return Distribution{g, xQdist, Q}; };
+
   // Tabulate distribution on a QGrid
-  const GridDistribution dist{g, 50, 1, 1000, 3};
+  const TabulateObject<Distribution> dist{d, 50, 1, 1000, 3, {}};
 
   // Printout Qgrid
   cout << dist << endl;
-
 
   auto nx    = 10;
   auto xmin  = 1e-5;

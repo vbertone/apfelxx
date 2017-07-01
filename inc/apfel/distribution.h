@@ -54,6 +54,25 @@ namespace apfel
      * @param InDistFunc function of ipdf and x to be tabulated.
      * @param ipdf int to be fed to InDistFunc.
      */
+    Distribution(Grid                            const& g,
+		 function<double(double const&)> const& InDistFunc);
+
+    /**
+     * @brief Distribution constructors.
+     * @param gr the Grid object
+     * @param InDistFunc function of ipdf, x, and Q to be tabulated.
+     * @param Q double to be fed to InDistFunc.
+     */
+    Distribution(Grid                                           const& g,
+		 function<double(double const&, double const&)> const& InDistFunc,
+		 double                                         const& Q);
+
+    /**
+     * @brief Distribution constructors.
+     * @param gr the Grid object
+     * @param InDistFunc function of ipdf and x to be tabulated.
+     * @param ipdf int to be fed to InDistFunc.
+     */
     Distribution(Grid                                        const& g,
 		 function<double(int const&, double const&)> const& InDistFunc,
 		 int                                         const& ipdf);

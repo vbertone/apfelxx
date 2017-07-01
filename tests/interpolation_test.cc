@@ -5,60 +5,25 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <iostream>
-#include <iomanip>
 #include <apfel/grid.h>
 #include <apfel/subgrid.h>
-#include <apfel/interpolator.h>
-#include <apfel/lagrangeinterpolator.h>
+#include <apfel/distribution.h>
 #include <apfel/timer.h>
+
+#include <iostream>
+#include <iomanip>
+
 using namespace apfel;
 using namespace std;
 
-/**
- * Prototype function for testing purproses.
- */
-double xg(double const& x)
-{
-  return x * ( 1 - x );
-}
-
-/**
- * @brief The Parton class
- */
-class Parton: public LagrangeInterpolator
-{
-public:
-  /**
-   * Allocate the langrage interpolation and fill the inherited
-   * \c _distribution object with the jointed grid.
-   */
-  Parton(Grid const& gr): LagrangeInterpolator(gr)
-  {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      if (ix < 1) _distributionJointGrid.push_back(xg(ix));
-      else        _distributionJointGrid.push_back(0);
-
-    for (auto ig=0; ig<_grid.nGrids(); ig++)
-      {
-	vector<double> sg;
-	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-	  if (ix < 1) sg.push_back(xg(ix));
-	  else        sg.push_back(0);
-	_distributionSubGrid.push_back(sg);
-      }
-  }
-};
-
 int main()
 {
-  cout << setprecision(15) << scientific;
+  cout << setprecision(12) << scientific;
 
-  const Grid g{
-    {SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false
-  };
+  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
 
-  const Parton xgluon{g};
+  const auto xg = [&] (double const& x)->double{ return x * ( 1 -x ); };
+  const Distribution xgluon{g, xg};
 
   vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
 
@@ -67,10 +32,10 @@ int main()
     {
       const auto original = xg(ix);
       const auto interpol = xgluon.Evaluate(ix);
-      cout << ix << " "
-           << original << " "
-           << interpol << " "
-           << original/interpol<< endl;
+      cout << ix << "  "
+           << original << "  "
+           << interpol << "  "
+           << original / interpol<< endl;
     }
   cout << endl;
 
@@ -79,10 +44,10 @@ int main()
     {
       const auto original = xg(ix);
       const auto interpol = xgluon.Evaluate(ix,0);
-      cout << ix << " "
-           << original << " "
-           << interpol << " "
-           << original/interpol<< endl;
+      cout << ix << "  "
+           << original << "  "
+           << interpol << "  "
+           << original / interpol<< endl;
     }
   cout << endl;
 
@@ -91,10 +56,10 @@ int main()
     {
       const auto original = xg(ix);
       const auto interpol = xgluon.Evaluate(ix,1);
-      cout << ix << " "
-           << original << " "
-           << interpol << " "
-           << original/interpol<< endl;
+      cout << ix << "  "
+           << original << "  "
+           << interpol << "  "
+           << original / interpol<< endl;
     }
   cout << endl;
 
@@ -103,10 +68,10 @@ int main()
     {
       const auto original = xg(ix);
       const auto interpol = xgluon.Evaluate(ix,2);
-      cout << ix << " "
-           << original << " "
-           << interpol << " "
-           << original/interpol<< endl;
+      cout << ix << "  "
+           << original << "  "
+           << interpol << "  "
+           << original / interpol<< endl;
     }
   cout << endl;
 

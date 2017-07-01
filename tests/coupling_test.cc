@@ -5,10 +5,10 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
+#include <apfel/alphaqcd.h>
+
 #include <cmath>
 #include <iostream>
-
-#include <apfel/alphaqcd.h>
 
 using namespace apfel;
 using namespace std;

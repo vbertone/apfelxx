@@ -5,16 +5,18 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
+#include <apfel/subgrid.h>
+
 #include <iostream>
 #include <memory>
 #include <iomanip>
-#include <apfel/subgrid.h>
+
 using namespace apfel;
 using namespace std;
 
 int main()
 {
-  cout << setprecision(15) << scientific;
+  cout << setprecision(12) << scientific;
 
   // Constructor tests
   SubGrid a{50, 1e-5, 3};
@@ -40,11 +42,10 @@ int main()
   cout << e << endl;
 
   // Check equality operator
-  if ( (a == b) == false  ||
+  if ( (a == b)  == false ||
        (a == *c) == false ||
-       (a == d) == false  ||
-       (a == e) == true
-     )
+       (a == d)  == false ||
+       (a == e)  == true )
     return -1;
 
   return 0;

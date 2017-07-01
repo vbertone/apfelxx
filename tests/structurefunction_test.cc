@@ -5,10 +5,6 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <cmath>
-#include <map>
-#include <iomanip>
-
 #include <apfel/dglapbuilder.h>
 #include <apfel/structurefunctionbuilder.h>
 #include <apfel/grid.h>
@@ -16,6 +12,10 @@
 #include <apfel/tools.h>
 #include <apfel/alphaqcd.h>
 #include <apfel/tabulateobject.h>
+
+#include <cmath>
+#include <map>
+#include <iomanip>
 
 using namespace apfel;
 using namespace std;

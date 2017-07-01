@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <functional>
+
+using std::function;
+
 namespace apfel
 {
   /**
@@ -20,10 +24,11 @@ namespace apfel
   public:
     Integrator();  //!< The class constructor
 
+    Integrator(function<double(double const&)> const& func);  //!< The class constructor
+
     /**
      * @brief Integrates the integrand passed during initialization
      * between xmin and xmax with tolerance eps.
-     *
      * @param xmin the lower bound integration value.
      * @param xmax the upper bound integration value.
      * @param eps the required relative error.
@@ -34,7 +39,6 @@ namespace apfel
     /**
      * @brief Integrates the integrand passed during initialization
      * between xmin and xmax with m points.
-     *
      * @param xmin the lower bound integration value.
      * @param xmax the upper bound integration value.
      * @param m the number of points of the Gauss quadrature.
@@ -49,7 +53,10 @@ namespace apfel
      * @param x the integration variable.
      * @return the integrand evaluated at x.
      */
-    virtual double integrand(double const& x) const = 0;
+    virtual double integrand(double const& x) const { return _func(x); };
+
+  private:
+    function<double(double const&)> _func;
 
   };
 }

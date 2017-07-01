@@ -65,6 +65,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Integrator::Integrator(function<double(double const&)> const& func):
+    _func(func)
+  {
+  }
+
+  //_________________________________________________________________________
   double Integrator::integrate(double const& a, double const& b, double const& eps) const
   {
     const double delta = eps25 * fabs(a-b);

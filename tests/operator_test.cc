@@ -5,8 +5,6 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <cmath>
-
 #include <apfel/tools.h>
 #include <apfel/expression.h>
 #include <apfel/lagrangeinterpolator.h>
@@ -14,6 +12,8 @@
 #include <apfel/subgrid.h>
 #include <apfel/operator.h>
 #include <apfel/timer.h>
+
+#include <cmath>
 
 using namespace apfel;
 using namespace std;
@@ -38,7 +38,7 @@ int main()
   Timer t;
   t.start();
   // Construct the operator
-  const Operator op(g, p);
+  const Operator op{g, p};
   t.stop();
 
   return 0;
