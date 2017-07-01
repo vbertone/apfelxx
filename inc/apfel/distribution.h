@@ -120,4 +120,9 @@ namespace apfel
 						  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
 						  double                                                            const& Q,
 						  vector<int>                                                       const& skip = {});
+
+  //Fill in an undordered_map of distributions from a map of distributions.
+  unordered_map<int,Distribution> DistributionMap(Grid                                               const& g,
+						  function<unordered_map<int,double>(double const&)> const& InDistFunc,
+						  vector<int>                                        const& skip = {});
 }

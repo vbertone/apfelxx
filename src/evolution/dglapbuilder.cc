@@ -57,21 +57,11 @@ namespace apfel {
     // Allocate convolution maps for the evolution and matching.
     unordered_map<int,EvolutionBasisQCD> evbasis;
     unordered_map<int,MatchingBasisQCD>  matchbasis;
-    for (int nf = nfi; nf <= nff; nf++)
+    for (auto nf = nfi; nf <= nff; nf++)
       {
 	evbasis.insert({nf,EvolutionBasisQCD{nf}});
 	matchbasis.insert({nf,MatchingBasisQCD{nf}});
       }
-
-    // Allocate initial scale distributions.
-    const unordered_map<int,Distribution> DistMap = DistributionMap(g, InDistFunc, MuRef);
-
-    // Compute number of active flavours the the PDF initial scale.
-    const int nf0 = NF(MuRef, Thresholds);
-
-    // Create set of initial distributions (assumed to be in the QCD
-    // evolution basis).
-    const Set<Distribution> InPDFs{evbasis.at(nf0), DistMap};
 
     // Allocate needed operators (matching conditions and splitting
     // functions).  By now the code is fast enough to precompute
@@ -243,6 +233,10 @@ namespace apfel {
 	MatchingConditions = [=] (bool const& Up, int const& nf, double const&) -> Set<Operator>
 	  { const auto cp = asThUp.at(nf+1); return M0.at(nf) + ( Up ? 1 : -1) * cp * cp * M2.at(nf); };
       }
+
+    // Create set of initial distributions (assumed to be in the QCD
+    // evolution basis).
+    const Set<Distribution> InPDFs{evbasis.at(NF(MuRef, Thresholds)), DistributionMap(g, InDistFunc, MuRef)};
 
     t.stop();
 

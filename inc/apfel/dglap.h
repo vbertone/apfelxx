@@ -13,8 +13,10 @@
 #include "apfel/operator.h"
 
 #include <functional>
+#include <unordered_map>
 
 using std::function;
+using std::unordered_map;
 
 namespace apfel
 {
@@ -66,9 +68,18 @@ namespace apfel
     Set<Distribution> Derivative(int const& nf, double const& mu, Set<Distribution> const& f) const;
 
     /**
-     * @brief Function that sets the reference distribution at the reference scale
+     * @brief Function that sets the reference distribution at the
+     * reference scale using a function of the distribution index and
+     * x.
      */
-    void SetInitialDistributions(function<double(int const&, double const&)> const& InPDFsFunc);
+    void SetInitialDistributions(function<double(int const&, double const&)> const& InDistFunc);
+
+    /**
+     * @brief Function that sets the reference distribution at the
+     * reference scale using a map of the distribution as function of
+     * x.
+     */
+    void SetInitialDistributions(function<unordered_map<int,double>(double const&)> const& InDistFunc);
 
     /**
      * @brief Function that returns the number of steps.
