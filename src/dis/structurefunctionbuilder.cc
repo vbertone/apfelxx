@@ -10,8 +10,6 @@
 #include "apfel/operator.h"
 #include "apfel/set.h"
 #include "apfel/timer.h"
-#include "apfel/tools.h"
-#include "apfel/disbasis.h"
 #include "apfel/zeromasscoefficientfunctions.h"
 
 #include <map>
@@ -21,41 +19,19 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F2NCBuildZM(Grid                                                              const& g,
-					    function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-					    vector<double>                                                    const& Thresholds,
-					    int                                                               const& PerturbativeOrder,
-					    function<double(double const&)>                                   const& Alphas,
-					    function<vector<double>(double const&)>                           const& Charges,
-					    double                                                            const& IntEps)
+  StructureFunctionObjects InitializeF2ObjectsZM(Grid const& g, double const& IntEps)
   {
-    cout << "Initializing F2NCBuildZM... ";
+    cout << "Initializing StructureFunctionObjects for F2 Zero Mass... ";
     Timer t;
     t.start();
 
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-	nfi++;
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F2Obj;
 
-    // Allocate distributions.
-    const function<unordered_map<int,Distribution>(double const&)> fF2Map = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
-      {
-	// Allocate initial scale distributions.
-	const unordered_map<int,Distribution> DistMap = DistributionMap(g, InDistFunc, Q, {2,4,6,8,10,12});
-	unordered_map<int,Distribution> F2Map;
-	F2Map.insert({0, DistMap.at(0)});
-	for (int k = 1; k <= 6; k++)
-	  F2Map.insert({k, DistMap.at(2*k-1)});
-
-	// Change sign to T3 to exchange "up" with "down".
-	F2Map.at(2) *= -1;
-	return F2Map;
-      };
+    // Set initial and final number of active flavours. Precompute
+    // objects for all numbers of flavours because it cheap enough.
+    int nfi = 1;
+    int nff = 6;
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -91,138 +67,37 @@ namespace apfel {
 	C2NNLO.insert({nf,C2NNLOnf});
       }
 
-    // Compute observables for F2.
-    unordered_map<int,Observable> F2;
+    // Allocate set of operators.
+    F2Obj.skip = {2,4,6,8,10,12};
     for (int k = 1; k <= 6; k++)
       {
-	// Convolution basis.
-	const DISNCBasis basis{k};
-
-	// Define sets of operators.
-	Set<Operator> LO {basis, C2LO};
-	Set<Operator> NLO{basis, C2NLO};
+	F2Obj.ConvBasis.insert({k,DISNCBasis{k}});
+	F2Obj.C0.insert({k,Set<Operator>{F2Obj.ConvBasis.at(k), C2LO}});
+	F2Obj.C1.insert({k,Set<Operator>{F2Obj.ConvBasis.at(k), C2NLO}});
 	unordered_map<int,Set<Operator>> NNLO;
 	for (int nf = nfi; nf <= nff; nf++)
-	  NNLO.insert({nf,Set<Operator>{basis, C2NNLO.at(nf)}});
-
-	// Define coefficient function functions.
-	function<Set<Operator>(double const&)> C2f;
-	if (PerturbativeOrder == 0)
-	  {
-	    C2f = [=] (double const& Q) -> Set<Operator>
-	      {
-		return Charges(Q)[k-1] * LO;
-	      };
-	  }
-	else if (PerturbativeOrder == 1)
-	  {
-	    C2f = [=] (double const& Q) -> Set<Operator>
-	      {
-		const auto cp = Alphas(Q) / FourPi;
-		return Charges(Q)[k-1] * ( LO + cp * NLO );
-	      };
-	  }
-	else if (PerturbativeOrder == 2)
-	  {
-	    C2f = [=] (double const& Q) -> Set<Operator>
-	      {
-		const auto cp = Alphas(Q) / FourPi;
-		const auto nf = NF(Q, Thresholds);
-		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO.at(nf) ) );
-	      };
-	  }
-	// Define distribution function functions.
-	function<Set<Distribution>(double const&)> DistF2 = [=] (double const& Q) -> Set<Distribution>
-	  {
-	    return Set<Distribution>{basis, fF2Map(Q)};
-	  };
-	// Initialize "Observable".
-	F2.insert({k,Observable{C2f, DistF2}});
+	  NNLO.insert({nf,Set<Operator>{F2Obj.ConvBasis.at(k), C2NNLO.at(nf)}});
+	F2Obj.C2.insert({k,NNLO});
       }
-
-    // Total structure function.
-    function<Set<Operator>(double const&)> C2f;
-    if (PerturbativeOrder == 0)
-      {
-	C2f = [=] (double const& Q) -> Set<Operator>
-	  {
-	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO{basis, C2LO};
-	    return LO;
-	  };
-      }
-    else if (PerturbativeOrder == 1)
-      {
-	C2f = [=] (double const& Q) -> Set<Operator>
-	  {
-	    const auto cp = Alphas(Q) / FourPi;
-	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO {basis, C2LO};
-	    Set<Operator> NLO{basis, C2NLO};
-	    return LO + cp * NLO;
-	  };
-      }
-    else if (PerturbativeOrder == 2)
-      {
-	C2f = [=] (double const& Q) -> Set<Operator>
-	  {
-	    const auto cp = Alphas(Q) / FourPi;
-	    const auto nf = NF(Q, Thresholds);
-	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO  {basis, C2LO};
-	    Set<Operator> NLO {basis, C2NLO};
-	    Set<Operator> NNLO{basis, C2NNLO.at(nf)};
-	    return LO + cp * ( NLO +  + cp * NNLO );
-	  };
-      }
-    // Define distribution function functions.
-    function<Set<Distribution>(double const&)> DistF2 = [=] (double const& Q) -> Set<Distribution>
-      {
-	return Set<Distribution>{DISNCBasis{Charges(Q)}, fF2Map(Q)};
-      };
-    F2.insert({0,Observable{C2f, DistF2}});
-
     t.stop();
 
-    return F2;
+    return F2Obj;
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> FLNCBuildZM(Grid                                                              const& g,
-					    function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-					    vector<double>                                                    const& Thresholds,
-					    int                                                               const& PerturbativeOrder,
-					    function<double(double const&)>                                   const& Alphas,
-					    function<vector<double>(double const&)>                           const& Charges,
-					    double                                                            const& IntEps)
+  StructureFunctionObjects InitializeFLObjectsZM(Grid const& g, double const& IntEps)
   {
-    cout << "Initializing FLNCBuildZM... ";
+    cout << "Initializing StructureFunctionObjects for FL Zero Mass... ";
     Timer t;
     t.start();
 
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-	nfi++;
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects FLObj;
 
-    // Allocate distributions.
-    const function<unordered_map<int,Distribution>(double const&)> fFLMap = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
-      {
-	// Allocate initial scale distributions.
-	const unordered_map<int,Distribution> DistMap = DistributionMap(g, InDistFunc, Q, {2,4,6,8,10,12});
-	unordered_map<int,Distribution> FLMap;
-	FLMap.insert({0, DistMap.at(0)});
-	for (int k = 1; k <= 6; k++)
-	  FLMap.insert({k, DistMap.at(2*k-1)});
-
-	// Change sign to T3 to exchange "up" with "down".
-	FLMap.at(2) *= -1;
-	return FLMap;
-      };
+    // Set initial and final number of active flavours. Precompute
+    // objects for all numbers of flavours because it cheap enough.
+    int nfi = 1;
+    int nff = 6;
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -257,138 +132,37 @@ namespace apfel {
 	CLNNLO.insert({nf,CLNNLOnf});
       }
 
-    // Compute observables for FL.
-    unordered_map<int,Observable> FL;
+    // Allocate set of operators.
+    FLObj.skip = {2,4,6,8,10,12};
     for (int k = 1; k <= 6; k++)
       {
-	// Convolution basis.
-	const DISNCBasis basis{k};
-
-	// Define sets of operators.
-	Set<Operator> LO {basis, CLLO};
-	Set<Operator> NLO{basis, CLNLO};
+	FLObj.ConvBasis.insert({k,DISNCBasis{k}});
+	FLObj.C0.insert({k,Set<Operator>{FLObj.ConvBasis.at(k), CLLO}});
+	FLObj.C1.insert({k,Set<Operator>{FLObj.ConvBasis.at(k), CLNLO}});
 	unordered_map<int,Set<Operator>> NNLO;
 	for (int nf = nfi; nf <= nff; nf++)
-	  NNLO.insert({nf,Set<Operator>{basis, CLNNLO.at(nf)}});
-
-	// Define coefficient function functions.
-	function<Set<Operator>(double const&)> CLf;
-	if (PerturbativeOrder == 0)
-	  {
-	    CLf = [=] (double const& Q) -> Set<Operator>
-	      {
-		return Charges(Q)[k-1] * LO;
-	      };
-	  }
-	else if (PerturbativeOrder == 1)
-	  {
-	    CLf = [=] (double const& Q) -> Set<Operator>
-	      {
-		const auto cp = Alphas(Q) / FourPi;
-		return Charges(Q)[k-1] * ( LO + cp * NLO );
-	      };
-	  }
-	else if (PerturbativeOrder == 2)
-	  {
-	    CLf = [=] (double const& Q) -> Set<Operator>
-	      {
-		const auto cp = Alphas(Q) / FourPi;
-		const auto nf = NF(Q, Thresholds);
-		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO.at(nf) ) );
-	      };
-	  }
-	// Define distribution function functions.
-	function<Set<Distribution>(double const&)> DistFL = [=] (double const& Q) -> Set<Distribution>
-	  {
-	    return Set<Distribution>{basis, fFLMap(Q)};
-	  };
-	// Initialize "Observable".
-	FL.insert({k,Observable{CLf, DistFL}});
+	  NNLO.insert({nf,Set<Operator>{FLObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+	FLObj.C2.insert({k,NNLO});
       }
-
-    // Total structure function.
-    function<Set<Operator>(double const&)> CLf;
-    if (PerturbativeOrder == 0)
-      {
-	CLf = [=] (double const& Q) -> Set<Operator>
-	  {
-	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO{basis, CLLO};
-	    return LO;
-	  };
-      }
-    else if (PerturbativeOrder == 1)
-      {
-	CLf = [=] (double const& Q) -> Set<Operator>
-	  {
-	    const auto cp = Alphas(Q) / FourPi;
-	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO {basis, CLLO};
-	    Set<Operator> NLO{basis, CLNLO};
-	    return LO + cp * NLO;
-	  };
-      }
-    else if (PerturbativeOrder == 2)
-      {
-	CLf = [=] (double const& Q) -> Set<Operator>
-	  {
-	    const auto cp = Alphas(Q) / FourPi;
-	    const auto nf = NF(Q, Thresholds);
-	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO  {basis, CLLO};
-	    Set<Operator> NLO {basis, CLNLO};
-	    Set<Operator> NNLO{basis, CLNNLO.at(nf)};
-	    return LO + cp * ( NLO +  + cp * NNLO );
-	  };
-      }
-    // Define distribution function functions.
-    function<Set<Distribution>(double const&)> DistFL = [=] (double const& Q) -> Set<Distribution>
-      {
-	return Set<Distribution>{DISNCBasis{Charges(Q)}, fFLMap(Q)};
-      };
-    FL.insert({0,Observable{CLf, DistFL}});
-
     t.stop();
 
-    return FL;
+    return FLObj;
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F3NCBuildZM(Grid                                                              const& g,
-					    function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-					    vector<double>                                                    const& Thresholds,
-					    int                                                               const& PerturbativeOrder,
-					    function<double(double const&)>                                   const& Alphas,
-					    function<vector<double>(double const&)>                           const& Charges,
-					    double                                                            const& IntEps)
+  StructureFunctionObjects InitializeF3ObjectsZM(Grid const& g, double const& IntEps)
   {
-    cout << "Initializing F3NCBuildZM... ";
+    cout << "Initializing StructureFunctionObjects for F3 Zero Mass... ";
     Timer t;
     t.start();
 
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-	nfi++;
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F3Obj;
 
-    // Allocate distributions.
-    const function<unordered_map<int,Distribution>(double const&)> fF3Map = [&g,InDistFunc] (double const& Q) -> unordered_map<int,Distribution>
-      {
-	// Allocate initial scale distributions.
-	const unordered_map<int,Distribution> DistMap = DistributionMap(g, InDistFunc, Q, {1,3,5,7,9,11});
-	unordered_map<int,Distribution> F3Map;
-	F3Map.insert({0, DistMap.at(0)});
-	for (int k = 1; k <= 6; k++)
-	  F3Map.insert({k, DistMap.at(2*k)});
-
-	// Change sign to V3 to exchange "up" with "down".
-	F3Map.at(2) *= -1;
-	return F3Map;
-      };
+    // Set initial and final number of active flavours. Precompute
+    // objects for all numbers of flavours because it cheap enough.
+    int nfi = 1;
+    int nff = 6;
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -421,110 +195,127 @@ namespace apfel {
 	C3NNLO.insert({nf,C3NNLOnf});
       }
 
-    // Compute observables for F3.
-    unordered_map<int,Observable> F3;
+    // Allocate set of operators.
+    F3Obj.skip = {1,3,5,7,9,11};
     for (int k = 1; k <= 6; k++)
       {
-	// Convolution basis.
-	const DISNCBasis basis{k};
-
-	// Define sets of operators.
-	Set<Operator> LO {basis, C3LO};
-	Set<Operator> NLO{basis, C3NLO};
+	F3Obj.ConvBasis.insert({k,DISNCBasis{k}});
+	F3Obj.C0.insert({k,Set<Operator>{F3Obj.ConvBasis.at(k), C3LO}});
+	F3Obj.C1.insert({k,Set<Operator>{F3Obj.ConvBasis.at(k), C3NLO}});
 	unordered_map<int,Set<Operator>> NNLO;
 	for (int nf = nfi; nf <= nff; nf++)
-	  NNLO.insert({nf,Set<Operator>{basis, C3NNLO.at(nf)}});
+	  NNLO.insert({nf,Set<Operator>{F3Obj.ConvBasis.at(k), C3NNLO.at(nf)}});
+	F3Obj.C2.insert({k,NNLO});
+      }
+    t.stop();
 
+    return F3Obj;
+  }
+
+  //_____________________________________________________________________________
+  unordered_map<int,Observable> StructureFunctionBuildNC(StructureFunctionObjects                                          const& FObj,
+							 function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+							 vector<double>                                                    const& Thresholds,
+							 int                                                               const& PerturbativeOrder,
+							 function<double(double const&)>                                   const& Alphas,
+							 function<vector<double>(double const&)>                           const& Charges)
+  {
+    // Get grid.
+    Grid const& g = FObj.C0.at(1).at(0).GetGrid();
+
+    // Compute observables for structure function.
+    unordered_map<int,Observable> F;
+    for (int k = 1; k <= 6; k++)
+      {
 	// Define coefficient function functions.
-	function<Set<Operator>(double const&)> C3f;
+	function<Set<Operator>(double const&)> Cf;
 	if (PerturbativeOrder == 0)
 	  {
-	    C3f = [=] (double const& Q) -> Set<Operator>
+	    Cf = [=] (double const& Q) -> Set<Operator>
 	      {
-		return Charges(Q)[k-1] * LO;
+		return Charges(Q)[k-1] * FObj.C0.at(k);
 	      };
 	  }
 	else if (PerturbativeOrder == 1)
 	  {
-	    C3f = [=] (double const& Q) -> Set<Operator>
+	    Cf = [=] (double const& Q) -> Set<Operator>
 	      {
 		const auto cp = Alphas(Q) / FourPi;
-		return Charges(Q)[k-1] * ( LO + cp * NLO );
+		return Charges(Q)[k-1] * ( FObj.C0.at(k) + cp * FObj.C1.at(k) );
 	      };
 	  }
 	else if (PerturbativeOrder == 2)
 	  {
-	    C3f = [=] (double const& Q) -> Set<Operator>
+	    Cf = [=] (double const& Q) -> Set<Operator>
 	      {
 		const auto cp = Alphas(Q) / FourPi;
 		const auto nf = NF(Q, Thresholds);
-		return Charges(Q)[k-1] * ( LO + cp * ( NLO +  + cp * NNLO.at(nf) ) );
+		return Charges(Q)[k-1] * ( FObj.C0.at(k) + cp * ( FObj.C1.at(k) +  + cp * FObj.C2.at(k).at(nf) ) );
 	      };
 	  }
+
 	// Define distribution function functions.
-	function<Set<Distribution>(double const&)> DistF3 = [=] (double const& Q) -> Set<Distribution>
+	const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
 	  {
-	    return Set<Distribution>{basis, fF3Map(Q)};
+	    return Set<Distribution>{FObj.ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, FObj.skip)};
 	  };
 	// Initialize "Observable".
-	F3.insert({k,Observable{C3f, DistF3}});
+	F.insert({k,Observable{Cf, DistF}});
       }
 
     // Total structure function.
-    function<Set<Operator>(double const&)> C3f;
+    function<Set<Operator>(double const&)> Cf;
     if (PerturbativeOrder == 0)
       {
-	C3f = [=] (double const& Q) -> Set<Operator>
+	Cf = [=] (double const& Q) -> Set<Operator>
 	  {
 	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO{basis, C3LO};
+	    Set<Operator> LO{basis, FObj.C0.at(1).GetObjects()};
 	    return LO;
 	  };
       }
     else if (PerturbativeOrder == 1)
       {
-	C3f = [=] (double const& Q) -> Set<Operator>
+	Cf = [=] (double const& Q) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
 	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO {basis, C3LO};
-	    Set<Operator> NLO{basis, C3NLO};
+	    Set<Operator> LO {basis, FObj.C0.at(1).GetObjects()};
+	    Set<Operator> NLO{basis, FObj.C1.at(1).GetObjects()};
 	    return LO + cp * NLO;
 	  };
       }
     else if (PerturbativeOrder == 2)
       {
-	C3f = [=] (double const& Q) -> Set<Operator>
+	Cf = [=] (double const& Q) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(Q) / FourPi;
 	    const auto nf = NF(Q, Thresholds);
 	    const DISNCBasis basis{Charges(Q)};
-	    Set<Operator> LO  {basis, C3LO};
-	    Set<Operator> NLO {basis, C3NLO};
-	    Set<Operator> NNLO{basis, C3NNLO.at(nf)};
+	    Set<Operator> LO  {basis, FObj.C0.at(1).GetObjects()};
+	    Set<Operator> NLO {basis, FObj.C1.at(1).GetObjects()};
+	    Set<Operator> NNLO{basis, FObj.C2.at(1).at(nf).GetObjects()};
 	    return LO + cp * ( NLO +  + cp * NNLO );
 	  };
       }
+
     // Define distribution function functions.
-    function<Set<Distribution>(double const&)> DistF3 = [=] (double const& Q) -> Set<Distribution>
+    const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
       {
-	return Set<Distribution>{DISNCBasis{Charges(Q)}, fF3Map(Q)};
+	return Set<Distribution>{DISNCBasis{Charges(Q)}, DistributionMap(g, InDistFunc, Q, FObj.skip)};
       };
-    F3.insert({0,Observable{C3f, DistF3}});
+    F.insert({0,Observable{Cf, DistF}});
 
-    t.stop();
-
-    return F3;
+    return F;
   }
 
   //_____________________________________________________________________________
-  unordered_map<int,Observable> F2NCBuildZM(Grid                                                       const& g,
-					    function<double(int const&, double const&, double const&)> const& InDistFunc,
-					    vector<double>                                             const& Thresholds,
-					    int                                                        const& PerturbativeOrder,
-					    function<double(double const&)>                            const& Alphas,
-					    function<vector<double>(double const&)>                    const& Charges,
-					    double                                                     const& IntEps)
+  unordered_map<int,Observable> StructureFunctionBuildNC(StructureFunctionObjects                                   const& FObj,
+							 function<double(int const&, double const&, double const&)> const& InDistFunc,
+							 vector<double>                                             const& Thresholds,
+							 int                                                        const& PerturbativeOrder,
+							 function<double(double const&)>                            const& Alphas,
+							 function<vector<double>(double const&)>                    const& Charges)
   {
     const auto InDistFuncMap = [=] (double const& x, double const& Q) -> unordered_map<int,double>
       {
@@ -533,45 +324,8 @@ namespace apfel {
 	  DistMap.insert({i,InDistFunc(i, x, Q)});
 	return DistMap;
       };
-    return F2NCBuildZM(g, InDistFuncMap, Thresholds, PerturbativeOrder, Alphas, Charges, IntEps);
+    return StructureFunctionBuildNC(FObj, InDistFuncMap, Thresholds, PerturbativeOrder, Alphas, Charges);
   }
 
-  //_____________________________________________________________________________
-  unordered_map<int,Observable> FLNCBuildZM(Grid                                                       const& g,
-					    function<double(int const&, double const&, double const&)> const& InDistFunc,
-					    vector<double>                                             const& Thresholds,
-					    int                                                        const& PerturbativeOrder,
-					    function<double(double const&)>                            const& Alphas,
-					    function<vector<double>(double const&)>                    const& Charges,
-					    double                                                     const& IntEps)
-  {
-    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> unordered_map<int,double>
-      {
-	unordered_map<int,double> DistMap;
-	for (int i = 0; i <= 12; i++)
-	  DistMap.insert({i,InDistFunc(i, x, Q)});
-	return DistMap;
-      };
-    return FLNCBuildZM(g, InDistFuncMap, Thresholds, PerturbativeOrder, Alphas, Charges, IntEps);
-  }
-
-  //_____________________________________________________________________________
-  unordered_map<int,Observable> F3NCBuildZM(Grid                                                       const& g,
-					    function<double(int const&, double const&, double const&)> const& InDistFunc,
-					    vector<double>                                             const& Thresholds,
-					    int                                                        const& PerturbativeOrder,
-					    function<double(double const&)>                            const& Alphas,
-					    function<vector<double>(double const&)>                    const& Charges,
-					    double                                                     const& IntEps)
-  {
-    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> unordered_map<int,double>
-      {
-	unordered_map<int,double> DistMap;
-	for (int i = 0; i <= 12; i++)
-	  DistMap.insert({i,InDistFunc(i, x, Q)});
-	return DistMap;
-      };
-    return F3NCBuildZM(g, InDistFuncMap, Thresholds, PerturbativeOrder, Alphas, Charges, IntEps);
-  }
 
 }

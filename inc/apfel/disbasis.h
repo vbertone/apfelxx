@@ -8,6 +8,7 @@
 #pragma once
 
 #include "apfel/convolutionmap.h"
+#include "apfel/tools.h"
 
 #include <vector>
 #include <numeric>
@@ -30,35 +31,7 @@ namespace apfel
      * @brief The map enums
      */
     enum Operand: int {CNS, CT, CG};
-    enum Object:  int {GLUON, DTOT, D3, D8, D15, D24, D35};
-
-    /**
-     * @brief The class constructor fot the k-th structure function
-     */
-  DISNCBasis(int const& k, int const& nf):
-    ConvolutionMap{"DISNCBasis_" + std::to_string(k) + "_" + std::to_string(nf)}
-    {
-      // Gluon
-      _rules[GLUON] = { {CG, GLUON, 1} };
-      // Singlet/total valence
-      _rules[DTOT] = { {CT, DTOT, 1./nf} };
-      // Non-singlet distributions
-      for (int i = D3; i <= D35; i++)
-	{
-	  double coef = 0;
-	  if (i == k)
-	    coef = - 1. / i;
-	  else if (i >= k+1 && i <= nf)
-	    coef = 1. / i / ( i - 1 );
-	  _rules[i] = { {CNS, i, coef} };
-	}
-
-      // Set all multiplicative coefficients to zero if "k" > "nf".
-      // This is equivalent to theta(Q^2 - mh^2).
-      if (k > nf)
-	for (int i = GLUON; i <= D35; i++)
-	  _rules[i] = { {CNS, i, 0} };
-    };
+    enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
      * @brief The class constructor fot the k-th structure function with no nf dependence
@@ -68,50 +41,25 @@ namespace apfel
     {
       // Gluon
       _rules[GLUON] = { {CG, GLUON, 1} };
-      // Singlet/total valence
-      _rules[DTOT] = { {CT, DTOT, 1./6.} };
+      // Singlet
+      _rules[SIGMA] = { {CT, SIGMA, 1./6.} };
+      // Total Valence
+      _rules[VALENCE] = { {CT, VALENCE, 1./6.} };
       // Non-singlet distributions
-      for (int i = D3; i <= D35; i++)
+      for (int i = 2; i <= 6; i++)
 	{
 	  double coef = 0;
 	  if (i == k)
 	    coef = - 1. / i;
 	  else if (i >= k+1)
 	    coef = 1. / i / ( i - 1 );
-	  _rules[i] = { {CNS, i, coef} };
-	}
-    };
 
-    /**
-     * @brief The class constructor fot the total structure function
-     */
-  DISNCBasis(vector<double> const& Ch, int const& nf):
-    ConvolutionMap{"DISNCBasis_tot_" + std::to_string(nf)}
-    {
-      if (Ch.size() != 6)
-	throw runtime_exception("DISNCBasis", "The charge vector must have 6 entries.");
+	  // Change sign to T3 and V3
+	  if (i == 2)
+	    coef *= - 1;
 
-      // Sum of the fist nf charges
-      const double SumCh = accumulate(Ch.begin(), Ch.begin() + nf, 0.);
-
-      // Gluon
-      _rules[GLUON] = { {CG, GLUON, SumCh} };
-      // Singlet/total valence
-      _rules[DTOT] = { {CT, DTOT, SumCh/nf} };
-      // Non-singlet distributions
-      for (int j = 2; j <= 6; j++)
-	{
-	  double coef = 0;
-	  if (j <= nf)
-	    {
-	      for (int i = 1; i <= j; i++)
-		if (i < j)
-		  coef += Ch[i-1];
-		else
-		  coef += Ch[i-1] * ( 1 - j );
-	      coef /= j * ( j - 1 );
-	    }
-	  _rules[j] = { {CNS, j, coef} };
+	  _rules[2*i-1] = { {CNS, 2*i-1, coef} };
+	  _rules[2*i]   = { {CNS, 2*i,   coef} };
 	}
     };
 
@@ -129,8 +77,10 @@ namespace apfel
 
       // Gluon
       _rules[GLUON] = { {CG, GLUON, SumCh} };
-      // Singlet/total valence
-      _rules[DTOT] = { {CT, DTOT, SumCh/6} };
+      // Singlet
+      _rules[SIGMA] = { {CT, SIGMA, SumCh/6} };
+      // Total Valence
+      _rules[VALENCE] = { {CT, VALENCE, SumCh/6} };
       // Non-singlet distributions
       for (int j = 2; j <= 6; j++)
 	{
@@ -141,7 +91,13 @@ namespace apfel
 	    else
 	      coef += Ch[i-1] * ( 1 - j );
 	  coef /= j * ( j - 1 );
-	  _rules[j] = { {CNS, j, coef} };
+
+	  // Change sign to T3 and V3
+	  if (j == 2)
+	    coef *= - 1;
+
+	  _rules[2*j-1] = { {CNS, 2*j-1, coef} };
+	  _rules[2*j]   = { {CNS, 2*j,   coef} };
 	}
     };
   };

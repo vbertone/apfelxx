@@ -42,9 +42,15 @@ namespace apfel {
 	    }
 	if (cycle) continue;
 
+	// Get set of distributions.
+	const auto& dist = d.GetObjects();
+
 	// Start with the first object of the vector or rules.
+	// If it does not exist, continue.
         auto o = std::begin(item->second);
-        V result = _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+	if (dist.count((*o).object) == 0)
+	  continue;
+        V result = _objects.at((*o).operand) * dist.at((*o).object);
 
 	// Multiply by the numerical coefficient only if it is different from one
 	if((*o).coefficient != 1)
@@ -53,15 +59,20 @@ namespace apfel {
 
 	// Continue with the following objects of the vector of rules.
         for (auto end = std::end(item->second); o != end; o++)
-	  // Multiply by the numerical coefficient only if it is
-	  // different from one.
-	  if((*o).coefficient == 0)
-	    continue;
-	  else if((*o).coefficient != 1)
-	    result += (*o).coefficient * _objects.at((*o).operand) * d.GetObjects().at((*o).object);
-	  else
-	    result += _objects.at((*o).operand) * d.GetObjects().at((*o).object);
+	  {
+	    // If the distribution does not exist skip it.
+	    if (dist.count((*o).object) == 0)
+	      continue;
 
+	    // Multiply by the numerical coefficient only if it is
+	    // different from one.
+	    if((*o).coefficient == 0)
+	      continue;
+	    else if((*o).coefficient != 1)
+	      result += (*o).coefficient * _objects.at((*o).operand) * dist.at((*o).object);
+	    else
+	      result += _objects.at((*o).operand) * dist.at((*o).object);
+	  }
         mmap.insert({item->first,result});
       }
 

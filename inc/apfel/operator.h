@@ -45,6 +45,8 @@ namespace apfel
     Operator&    operator += (Operator const& o);           //!< this += Operator
     Operator&    operator -= (Operator const& o);           //!< this -= Operator
 
+    Grid const& GetGrid() const { return _grid; }           //!< return the grid
+
   protected:
     /**
      * @see Integrator::integrand

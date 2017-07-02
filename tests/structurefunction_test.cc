@@ -96,8 +96,11 @@ int main()
     };
   function<vector<double>(double const&)> fDq = [Thresholds] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
 
-  // Initialize DGLAP evolution
-  auto EvolvedPDFs = DglapBuildQCD(g, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
+  // Initialize QCD evolution objects
+  const auto DglapObj = InitializeDglapObjectsQCD(g);
+
+  // Construct the DGLAP object
+  auto EvolvedPDFs = DglapBuild(DglapObj, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const TabulateObject<Set<Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
@@ -105,10 +108,15 @@ int main()
   // Evolved PDFs
   const auto PDFs = [&] (double const& x, double const& Q) -> unordered_map<int,double>{ return TabulatedPDFs.EvaluateMapxQ(x,Q); };
 
+  // Initialize coefficient functions
+  const auto F2Obj = InitializeF2ObjectsZM(g);
+  const auto FLObj = InitializeFLObjectsZM(g);
+  const auto F3Obj = InitializeF3ObjectsZM(g);
+
   // Initialize structure functions
-  const auto F2 = F2NCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto FL = FLNCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto F3 = F3NCBuildZM(g, PDFs, Thresholds, PerturbativeOrder, as, fDq);
+  const auto F2 = StructureFunctionBuildNC(F2Obj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
+  const auto FL = StructureFunctionBuildNC(FLObj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
+  const auto F3 = StructureFunctionBuildNC(F3Obj, PDFs, Thresholds, PerturbativeOrder, as, fDq);
 
   const TabulateObject<Distribution> F2total {[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
   const TabulateObject<Distribution> F2light {[&] (double const& Q) -> Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};

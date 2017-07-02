@@ -10,6 +10,7 @@
 #include "apfel/grid.h"
 #include "apfel/dglap.h"
 #include "apfel/observable.h"
+#include "apfel/disbasis.h"
 
 #include <functional>
 #include <vector>
@@ -21,68 +22,59 @@ namespace apfel
 {
 
   /**
+   * @brief Structure that contains all the precomputed quantities
+   * needed to compute the DIS structure functions, i.e. perturbative
+   * coefficients of the coefficient functions.
+   */
+  struct StructureFunctionObjects
+  {
+    vector<int> skip;
+    unordered_map<int,DISNCBasis> ConvBasis;
+    unordered_map<int,Set<Operator>> C0;
+    unordered_map<int,Set<Operator>> C1;
+    unordered_map<int,unordered_map<int,Set<Operator>>> C2;
+  };
+
+  /**
+   * @brief The InitializeF2ObjectsZM, precompute the perturbative
+   * coefficients of coefficient functions for F2 and store them in
+   * the 'StructureFunctionObjects' structure.
+   *
+   * @param g the grid
+   * @param IntEps the integration accuracy
+   * @return
+   */
+  StructureFunctionObjects InitializeF2ObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for FL.
+   */
+  StructureFunctionObjects InitializeFLObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for F3.
+   */
+  StructureFunctionObjects InitializeF3ObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
    * @brief The F2BuildZM
    */
-  unordered_map<int,Observable> F2NCBuildZM(Grid                                                              const& g,
-					    function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-					    vector<double>                                                    const& Thresholds,
-					    int                                                               const& PerturbativeOrder,
-					    function<double(double const&)>                                   const& Alphas,
-					    function<vector<double>(double const&)>                           const& Charges,
-					    double                                                            const& IntEps = 1e-5);
-
-  /**
-   * @brief The FLNCBuildZM
-   */
-  unordered_map<int,Observable> FLNCBuildZM(Grid                                                              const& g,
-					    function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-					    vector<double>                                                    const& Thresholds,
-					    int                                                               const& PerturbativeOrder,
-					    function<double(double const&)>                                   const& Alphas,
-					    function<vector<double>(double const&)>                           const& Charges,
-					    double                                                            const& IntEps = 1e-5);
-
-  /**
-   * @brief The F3NCBuildZM
-   */
-  unordered_map<int,Observable> F3NCBuildZM(Grid                                                              const& g,
-					    function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-					    vector<double>                                                    const& Thresholds,
-					    int                                                               const& PerturbativeOrder,
-					    function<double(double const&)>                                   const& Alphas,
-					    function<vector<double>(double const&)>                           const& Charges,
-					    double                                                            const& IntEps = 1e-5);
+  //_____________________________________________________________________________
+  unordered_map<int,Observable> StructureFunctionBuildNC(StructureFunctionObjects                                          const& FObj,
+							 function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+							 vector<double>                                                    const& Thresholds,
+							 int                                                               const& PerturbativeOrder,
+							 function<double(double const&)>                                   const& Alphas,
+							 function<vector<double>(double const&)>                           const& Charges);
 
   /**
    * @brief The F2BuildZM
    */
-  unordered_map<int,Observable> F2NCBuildZM(Grid                                                       const& g,
-					    function<double(int const&, double const&, double const&)> const& InDistFunc,
-					    vector<double>                                             const& Thresholds,
-					    int                                                        const& PerturbativeOrder,
-					    function<double(double const&)>                            const& Alphas,
-					    function<vector<double>(double const&)>                    const& Charges,
-					    double                                                     const& IntEps = 1e-5);
+  unordered_map<int,Observable> StructureFunctionBuildNC(StructureFunctionObjects                                   const& FObj,
+							 function<double(int const&, double const&, double const&)> const& InDistFunc,
+							 vector<double>                                             const& Thresholds,
+							 int                                                        const& PerturbativeOrder,
+							 function<double(double const&)>                            const& Alphas,
+							 function<vector<double>(double const&)>                    const& Charges);
 
-  /**
-   * @brief The FLNCBuildZM
-   */
-  unordered_map<int,Observable> FLNCBuildZM(Grid                                                       const& g,
-					    function<double(int const&, double const&, double const&)> const& InDistFunc,
-					    vector<double>                                             const& Thresholds,
-					    int                                                        const& PerturbativeOrder,
-					    function<double(double const&)>                            const& Alphas,
-					    function<vector<double>(double const&)>                    const& Charges,
-					    double                                                     const& IntEps = 1e-5);
-
-  /**
-   * @brief The F3NCBuildZM
-   */
-  unordered_map<int,Observable> F3NCBuildZM(Grid                                                       const& g,
-					    function<double(int const&, double const&, double const&)> const& InDistFunc,
-					    vector<double>                                             const& Thresholds,
-					    int                                                        const& PerturbativeOrder,
-					    function<double(double const&)>                            const& Alphas,
-					    function<vector<double>(double const&)>                    const& Charges,
-					    double                                                     const& IntEps = 1e-5);
 }

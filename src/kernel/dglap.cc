@@ -26,8 +26,7 @@ namespace apfel {
 	       int                                                    const& nsteps):
     MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
-    _MatchingConditions(MatchingConditions),
-    _nsteps(nsteps)
+    _MatchingConditions(MatchingConditions)
   {
   }
 

@@ -12,8 +12,6 @@
 #include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/tools.h"
-#include "apfel/evolutionbasisqcd.h"
-#include "apfel/matchingbasisqcd.h"
 #include "apfel/splittingfunctions.h"
 #include "apfel/matchingconditions.h"
 
@@ -22,45 +20,25 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuildQCD(Grid                                                              const& g,
-				  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-				  double                                                            const& MuRef,
-				  vector<double>                                                    const& Masses,
-				  vector<double>                                                    const& Thresholds,
-				  int                                                               const& PerturbativeOrder,
-				  function<double(double const&)>                                   const& Alphas,
-				  double                                                            const& IntEps,
-				  int                                                               const& nsteps)
+  DglapObjects InitializeDglapObjectsQCD(Grid const& g, double const& IntEps)
   {
-    cout << "Initializing DglapBuildQCD... ";
+    cout << "Initializing DglapObjects for QCD evolution... ";
     Timer t;
     t.start();
 
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-	nfi++;
+    // Define object of the structure containing the DglapObjects
+    DglapObjects DglapObj;
 
-    // Compute AlphaQCD above and below the thresholds.
-    unordered_map<int,double> asThUp;
-    unordered_map<int,double> asThDown;
-    for (auto nf = nfi + 1; nf <= nff; nf++)
-      {
-	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
-	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
-      }
+    // Set initial and final number of active flavours. Precompute
+    // objects for all numbers of flavours because it cheap enough.
+    int nfi = 1;
+    int nff = 6;
 
-    // Allocate convolution maps for the evolution and matching.
-    unordered_map<int,EvolutionBasisQCD> evbasis;
-    unordered_map<int,MatchingBasisQCD>  matchbasis;
+    // Allocate convolution maps for evolution and matching.
     for (auto nf = nfi; nf <= nff; nf++)
       {
-	evbasis.insert({nf,EvolutionBasisQCD{nf}});
-	matchbasis.insert({nf,MatchingBasisQCD{nf}});
+	DglapObj.evbasis.insert({nf,EvolutionBasisQCD{nf}});
+	DglapObj.matchbasis.insert({nf,MatchingBasisQCD{nf}});
       }
 
     // Allocate needed operators (matching conditions and splitting
@@ -194,18 +172,45 @@ namespace apfel {
       }
 
     // Allocate set of operators.
-    unordered_map<int,Set<Operator>> P0;
-    unordered_map<int,Set<Operator>> P1;
-    unordered_map<int,Set<Operator>> P2;
-    unordered_map<int,Set<Operator>> M0;
-    unordered_map<int,Set<Operator>> M2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	P0.insert({nf,Set<Operator>{evbasis.at(nf),    OpMapLO.at(nf)}});
-	P1.insert({nf,Set<Operator>{evbasis.at(nf),    OpMapNLO.at(nf)}});
-	P2.insert({nf,Set<Operator>{evbasis.at(nf),    OpMapNNLO.at(nf)}});
-	M0.insert({nf,Set<Operator>{matchbasis.at(nf), MatchLO}});
-	M2.insert({nf,Set<Operator>{matchbasis.at(nf), MatchNNLO.at(nf)}});
+	DglapObj.P0.insert({nf,Set<Operator>{DglapObj.evbasis.at(nf),    OpMapLO.at(nf)}});
+	DglapObj.P1.insert({nf,Set<Operator>{DglapObj.evbasis.at(nf),    OpMapNLO.at(nf)}});
+	DglapObj.P2.insert({nf,Set<Operator>{DglapObj.evbasis.at(nf),    OpMapNNLO.at(nf)}});
+	DglapObj.M0.insert({nf,Set<Operator>{DglapObj.matchbasis.at(nf), MatchLO}});
+	DglapObj.M2.insert({nf,Set<Operator>{DglapObj.matchbasis.at(nf), MatchNNLO.at(nf)}});
+      }
+    t.stop();
+
+    return DglapObj;
+  }
+
+  //_____________________________________________________________________________
+  unique_ptr<Dglap> DglapBuild(DglapObjects                                                      const& DglapObj,
+			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                            const& MuRef,
+			       vector<double>                                                    const& Masses,
+			       vector<double>                                                    const& Thresholds,
+			       int                                                               const& PerturbativeOrder,
+			       function<double(double const&)>                                   const& Alphas,
+			       int                                                               const& nsteps)
+  {
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+	nfi++;
+
+    // Compute coupling above and below the thresholds.
+    unordered_map<int,double> asThUp;
+    unordered_map<int,double> asThDown;
+    for (auto nf = nfi + 1; nf <= nff; nf++)
+      {
+	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
+	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
       }
 
     // Create splitting functions and matching conditions lambda
@@ -215,58 +220,53 @@ namespace apfel {
     if (PerturbativeOrder == 0)
       {
         SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
-	  { const auto cp = Alphas(mu)/FourPi; return cp * P0.at(nf); };
+	  { const auto cp = Alphas(mu)/FourPi; return cp * DglapObj.P0.at(nf); };
 	MatchingConditions = [=] (bool const&, int const& nf, double const&) -> Set<Operator>
-	  { return M0.at(nf); };
+	  { return DglapObj.M0.at(nf); };
       }
     else if (PerturbativeOrder == 1)
       {
         SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
-	  { const auto cp = Alphas(mu)/FourPi; return cp * ( P0.at(nf) + cp * P1.at(nf) ); };
+	  { const auto cp = Alphas(mu)/FourPi; return cp * ( DglapObj.P0.at(nf) + cp * DglapObj.P1.at(nf) ); };
 	MatchingConditions = [=] (bool const&, int const& nf, double const&) -> Set<Operator>
-	  { return M0.at(nf); };
+	  { return DglapObj.M0.at(nf); };
       }
     else if (PerturbativeOrder == 2)
       {
         SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
-	  { const auto cp = Alphas(mu)/FourPi; return cp * ( P0.at(nf) + cp * ( P1.at(nf) + cp * P2.at(nf) ) ); };
+	  { const auto cp = Alphas(mu)/FourPi; return cp * ( DglapObj.P0.at(nf) + cp * ( DglapObj.P1.at(nf) + cp * DglapObj.P2.at(nf) ) ); };
 	MatchingConditions = [=] (bool const& Up, int const& nf, double const&) -> Set<Operator>
-	  { const auto cp = asThUp.at(nf+1); return M0.at(nf) + ( Up ? 1 : -1) * cp * cp * M2.at(nf); };
+	  { const auto cp = asThUp.at(nf+1); return DglapObj.M0.at(nf) + ( Up ? 1 : -1) * cp * cp * DglapObj.M2.at(nf); };
       }
 
-    // Create set of initial distributions (assumed to be in the QCD
-    // evolution basis).
-    const Set<Distribution> InPDFs{evbasis.at(NF(MuRef, Thresholds)), DistributionMap(g, InDistFunc, MuRef)};
-
-    t.stop();
+    // Create set of initial distributions.
+    const Set<Distribution> InPDFs{DglapObj.evbasis.at(NF(MuRef, Thresholds)), DistributionMap(DglapObj.P0.at(nfi).at(0).GetGrid(), InDistFunc, MuRef)};
 
     // Initialize DGLAP evolution.
     return unique_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps});
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuildQCD(Grid                                                              const& g,
-				  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-				  double                                                            const& MuRef,
-				  vector<double>                                                    const& Masses,
-				  int                                                               const& PerturbativeOrder,
-				  function<double(double const&)>                                   const& Alphas,
-				  double                                                            const& IntEps,
-				  int                                                               const& nsteps)
+  unique_ptr<Dglap> DglapBuild(DglapObjects                                                      const& DglapObj,
+			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                            const& MuRef,
+			       vector<double>                                                    const& Masses,
+			       int                                                               const& PerturbativeOrder,
+			       function<double(double const&)>                                   const& Alphas,
+			       int                                                               const& nsteps)
   {
-    return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
+    return DglapBuild(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
-				  function<double(int const&, double const&, double const&)> const& InDistFunc,
-				  double                                                     const& MuRef,
-				  vector<double>                                             const& Masses,
-				  vector<double>                                             const& Thresholds,
-				  int                                                        const& PerturbativeOrder,
-				  function<double(double const&)>                            const& Alphas,
-				  double                                                     const& IntEps,
-				  int                                                        const& nsteps)
+  unique_ptr<Dglap> DglapBuild(DglapObjects                                               const& DglapObj,
+			       function<double(int const&, double const&, double const&)> const& InDistFunc,
+			       double                                                     const& MuRef,
+			       vector<double>                                             const& Masses,
+			       vector<double>                                             const& Thresholds,
+			       int                                                        const& PerturbativeOrder,
+			       function<double(double const&)>                            const& Alphas,
+			       int                                                        const& nsteps)
   {
     const auto InDistFuncMap = [=] (double const& x, double const& Q) -> unordered_map<int,double>
       {
@@ -275,20 +275,19 @@ namespace apfel {
 	  DistMap.insert({i,InDistFunc(i, x, Q)});
 	return DistMap;
       };
-    return DglapBuildQCD(g, InDistFuncMap, MuRef, Masses, Thresholds, PerturbativeOrder, Alphas, IntEps, nsteps);
+    return DglapBuild(DglapObj, InDistFuncMap, MuRef, Masses, Thresholds, PerturbativeOrder, Alphas, nsteps);
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuildQCD(Grid                                                       const& g,
-				  function<double(int const&, double const&, double const&)> const& InDistFunc,
-				  double                                                     const& MuRef,
-				  vector<double>                                             const& Masses,
-				  int                                                        const& PerturbativeOrder,
-				  function<double(double const&)>                            const& Alphas,
-				  double                                                     const& IntEps,
-				  int                                                        const& nsteps)
+  unique_ptr<Dglap> DglapBuild(DglapObjects                                               const& DglapObj,
+			       function<double(int const&, double const&, double const&)> const& InDistFunc,
+			       double                                                     const& MuRef,
+			       vector<double>                                             const& Masses,
+			       int                                                        const& PerturbativeOrder,
+			       function<double(double const&)>                            const& Alphas,
+			       int                                                        const& nsteps)
   {
-    return DglapBuildQCD(g, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, IntEps, nsteps);
+    return DglapBuild(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
   }
 
 }

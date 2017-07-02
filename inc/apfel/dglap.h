@@ -81,15 +81,9 @@ namespace apfel
      */
     void SetInitialDistributions(function<unordered_map<int,double>(double const&)> const& InDistFunc);
 
-    /**
-     * @brief Function that returns the number of steps.
-     */
-    int const& GetNumberOfSteps() const { return _nsteps; }
-
   private:
     function<Set<Operator>(int const&,double const&)>      _SplittingFunctions;
     function<Set<Operator>(bool,int const&,double const&)> _MatchingConditions;
-    int                                             const  _nsteps;
   };
 
 }
