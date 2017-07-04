@@ -41,7 +41,7 @@ namespace apfel {
     // LO
     unordered_map<int,Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
-    C2LO.insert({DISNCBasis::CT,  Id});
+    C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
@@ -49,7 +49,7 @@ namespace apfel {
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
-    C2NLO.insert({DISNCBasis::CT,  O21ns});
+    C2NLO.insert({DISNCBasis::CS,  O21ns});
     C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
@@ -62,7 +62,7 @@ namespace apfel {
 	const Operator O22t = O22nsp + 6 * O22ps;
 	unordered_map<int,Operator> C2NNLOnf;
 	C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
-	C2NNLOnf.insert({DISNCBasis::CT,  O22t});
+	C2NNLOnf.insert({DISNCBasis::CS,  O22t});
 	C2NNLOnf.insert({DISNCBasis::CG,  O22g});
 	C2NNLO.insert({nf,C2NNLOnf});
       }
@@ -106,7 +106,7 @@ namespace apfel {
     // LO
     unordered_map<int,Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
-    CLLO.insert({DISNCBasis::CT,  Zero});
+    CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
@@ -114,7 +114,7 @@ namespace apfel {
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
-    CLNLO.insert({DISNCBasis::CT,  OL1ns});
+    CLNLO.insert({DISNCBasis::CS,  OL1ns});
     CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO
@@ -127,7 +127,7 @@ namespace apfel {
 	const Operator OL2t = OL2nsp + 6 * OL2ps;
 	unordered_map<int,Operator> CLNNLOnf;
 	CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
-	CLNNLOnf.insert({DISNCBasis::CT,  OL2t});
+	CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
 	CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
 	CLNNLO.insert({nf,CLNNLOnf});
       }
@@ -172,14 +172,14 @@ namespace apfel {
     // LO
     unordered_map<int,Operator> C3LO;
     C3LO.insert({DISNCBasis::CNS, Id});
-    C3LO.insert({DISNCBasis::CT,  Id});
+    C3LO.insert({DISNCBasis::CS,  Id});
     C3LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     unordered_map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISNCBasis::CNS, O31ns});
-    C3NLO.insert({DISNCBasis::CT,  O31ns});
+    C3NLO.insert({DISNCBasis::CS,  O31ns});
     C3NLO.insert({DISNCBasis::CG,  Zero});
 
     // NNLO
@@ -190,7 +190,7 @@ namespace apfel {
 	const Operator O32t = O32nsm;
 	unordered_map<int,Operator> C3NNLOnf;
 	C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
-	C3NNLOnf.insert({DISNCBasis::CT,  O32t});
+	C3NNLOnf.insert({DISNCBasis::CS,  O32t});
 	C3NNLOnf.insert({DISNCBasis::CG,  Zero});
 	C3NNLO.insert({nf,C3NNLOnf});
       }

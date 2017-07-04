@@ -86,15 +86,55 @@ int main()
   const TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
-  // Charges
-  function<vector<double>(double const&)> fBq = [Thresholds] (double const& Q) -> vector<double>
+  // Relevant constants for the computation of the EW charges.
+  const double MZ         = 91.1876;
+  const double MZ2        = MZ * MZ;
+  const double Sin2ThetaW = 0.23126;
+  const double VD         = - 0.5 + 2 * Sin2ThetaW / 3;
+  const double VU         = + 0.5 - 4 * Sin2ThetaW / 3;
+  const vector<double> Vq = {VD, VU, VD, VU, VD, VU};
+  const double AD         = - 0.5;
+  const double AU         = + 0.5;
+  const vector<double> Aq = {AD, AU, AD, AU, AD, AU};
+
+  // Unpolarized electron target.
+  const int ie     = - 1; // Electron
+  const double Ve  = - 0.5 + 2 * Sin2ThetaW;
+  const double Ae  = - 0.5;
+  const double pol = 0;   // No polarization
+
+  // Effective charges.
+  function<vector<double>(double const&)> fBq = [=] (double const& Q) -> vector<double>
     {
+      const double Q2  = Q * Q;
+      const double PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
+      const double PZ2 = PZ * PZ;
       vector<double> Bq;
       for (auto i = 0; i < (int) Thresholds.size(); i++)
-	Bq.push_back((Q > Thresholds[i] ? QCh2[i] : 0));
+	{
+	  const double b = QCh2[i]
+	    - 2 * QCh[i] * Vq[i] * ( Ve + ie * pol * Ae ) * PZ
+	    + ( Ve * Ve + Ae * Ae + ie * pol * 2 * Ve * Ae )
+	    * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
+	  Bq.push_back((Q > Thresholds[i] ? b : 0));
+	}
       return Bq;
     };
-  function<vector<double>(double const&)> fDq = [Thresholds] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
+  function<vector<double>(double const&)> fDq = [=] (double const& Q) -> vector<double>
+    {
+      const double Q2  = Q * Q;
+      const double PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
+      const double PZ2 = PZ * PZ;
+      vector<double> Dq;
+      for (auto i = 0; i < (int) Thresholds.size(); i++)
+	{
+	  const double d = - 2 * QCh[i] * Aq[i] * ( Ae + ie * pol * Ve ) * PZ
+	    + 2 * Vq[i] * Aq[i] * ( 2 * Ve * Ae
+			    + ie * pol * ( Ve * Ve + Ae * Ae ) ) * PZ2;
+	  Dq.push_back((Q > Thresholds[i] ? d : 0));
+	}
+      return Dq;
+    };
 
   // Initialize QCD evolution objects
   const auto DglapObj = InitializeDglapObjectsQCD(g);

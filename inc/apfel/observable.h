@@ -38,7 +38,7 @@ namespace apfel
      */
     Distribution Evaluate(double const& Q) const;
 
-    double Evaluate(double const& x, double const& Q) const { return this->Evaluate(Q).Evaluate(x); }
+    double Evaluate(double const& x, double const& Q) const;
 
   private:
     function<Set<Operator>(double const&)>     _CoefficientFunctions;

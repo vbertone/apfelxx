@@ -20,8 +20,14 @@ namespace apfel {
   //_____________________________________________________________________________
   Distribution Observable::Evaluate(double const& Q) const
   {
-    auto sSF = _CoefficientFunctions(Q) * _Distributions(Q);
+    const auto sSF = _CoefficientFunctions(Q) * _Distributions(Q);
     return sSF.Combine();
+  }
+
+  //_____________________________________________________________________________
+  double Observable::Evaluate(double const& x, double const& Q) const
+  {
+    return this->Evaluate(Q).Evaluate(x);
   }
 
 }

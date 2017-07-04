@@ -30,7 +30,7 @@ namespace apfel
     /**
      * @brief The map enums
      */
-    enum Operand: int {CNS, CT, CG};
+    enum Operand: int {CNS, CS, CG};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
@@ -42,9 +42,9 @@ namespace apfel
       // Gluon
       _rules[GLUON] = { {CG, GLUON, 1} };
       // Singlet
-      _rules[SIGMA] = { {CT, SIGMA, 1./6.} };
+      _rules[SIGMA] = { {CS, SIGMA, 1./6.} };
       // Total Valence
-      _rules[VALENCE] = { {CT, VALENCE, 1./6.} };
+      _rules[VALENCE] = { {CS, VALENCE, 1./6.} };
       // Non-singlet distributions
       for (int i = 2; i <= 6; i++)
 	{
@@ -78,9 +78,9 @@ namespace apfel
       // Gluon
       _rules[GLUON] = { {CG, GLUON, SumCh} };
       // Singlet
-      _rules[SIGMA] = { {CT, SIGMA, SumCh/6} };
+      _rules[SIGMA] = { {CS, SIGMA, SumCh/6} };
       // Total Valence
-      _rules[VALENCE] = { {CT, VALENCE, SumCh/6} };
+      _rules[VALENCE] = { {CS, VALENCE, SumCh/6} };
       // Non-singlet distributions
       for (int j = 2; j <= 6; j++)
 	{
