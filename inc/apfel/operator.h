@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include <apfel/grid.h>
-#include <apfel/expression.h>
-#include <apfel/distribution.h>
-#include <apfel/integrator.h>
-#include <apfel/lagrangeinterpolator.h>
-#include <apfel/matrix.h>
+#include "apfel/grid.h"
+#include "apfel/expression.h"
+#include "apfel/distribution.h"
+#include "apfel/integrator.h"
+#include "apfel/lagrangeinterpolator.h"
+#include "apfel/matrix.h"
 
 namespace apfel
 {
@@ -30,7 +30,9 @@ namespace apfel
     Operator() = delete;
 
     /**
-     * @brief The default constructor, takes a Grid and a vector of pointers to functions.
+     * @brief The default constructor, takes a Grid and a vector of
+     * pointers to functions.
+     *
      * @param gr "Grid" object
      * @param func vector of pointers to one-dimentional functions
      */

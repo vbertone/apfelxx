@@ -28,28 +28,36 @@ namespace apfel
   public:
     /**
      * @brief Distribution constructors.
+     *
      * @param gr the Grid object
      */
     Distribution(Grid const& gr);
 
     /**
      * @brief Distribution constructors.
+     *
      * @param obj Distribution object
      * @param distsubgrid a 2d vector with the distribution values for each subgrid.
      * @param distjointgrid a vector with the distribution values on the joint grid.
      */
-    Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
+    Distribution(Distribution           const& obj,
+		 vector<vector<double>> const& distsubgrid,
+		 vector<double>         const& distjointgrid);
 
     /**
      * @brief Distribution constructors.
+     *
      * @param gr the Grid object
      * @param distsubgrid a 2d vector with the distribution values for each subgrid.
      * @param distjointgrid a vector with the distribution values on the joint grid.
      */
-    Distribution(Grid const& g, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid);
+    Distribution(Grid                   const& g,
+		 vector<vector<double>> const& distsubgrid,
+		 vector<double>         const& distjointgrid);
 
     /**
      * @brief Distribution constructors.
+     *
      * @param gr the Grid object
      * @param InDistFunc function of ipdf and x to be tabulated.
      * @param ipdf int to be fed to InDistFunc.
@@ -59,6 +67,7 @@ namespace apfel
 
     /**
      * @brief Distribution constructors.
+     *
      * @param gr the Grid object
      * @param InDistFunc function of ipdf, x, and Q to be tabulated.
      * @param Q double to be fed to InDistFunc.
@@ -69,6 +78,7 @@ namespace apfel
 
     /**
      * @brief Distribution constructors.
+     *
      * @param gr the Grid object
      * @param InDistFunc function of ipdf and x to be tabulated.
      * @param ipdf int to be fed to InDistFunc.
@@ -79,6 +89,7 @@ namespace apfel
 
     /**
      * @brief Distribution constructors.
+     *
      * @param gr the Grid object
      * @param InDistFunc function of ipdf, x, and Q to be tabulated.
      * @param ipdf int to be fed to InDistFunc.

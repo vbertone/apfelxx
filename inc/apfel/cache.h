@@ -24,7 +24,6 @@ using std::pair;
 namespace std
 {
   namespace {
-
     //! Code from boost
     //! Reciprocal of the golden ratio helps spread entropy and handles duplicates.
     //! See Mike Seymour in magic-numbers-in-boosthash-combine:
@@ -225,6 +224,5 @@ namespace apfel {
     list<pair<Key, Value>> _keys;  //!< store the key, value map
     size_t _maxsize, _maxallowed;
   };
-
 }
 

@@ -7,15 +7,15 @@
 
 #pragma once
 
-#include <apfel/interpolator.h>
+#include "apfel/interpolator.h"
 
 namespace apfel
 {
   /**
    * @brief The LagrangeInterpolator class.
    *
-   * A specialization example of the Interpolator
-   * class using the lagrange interpolation.
+   * A specialization example of the Interpolator class using the
+   * lagrange interpolation.
    */
   class LagrangeInterpolator: public Interpolator
   {

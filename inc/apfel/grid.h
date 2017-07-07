@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <apfel/subgrid.h>
+#include "apfel/subgrid.h"
 
 #include <vector>
 #include <memory>
@@ -72,5 +72,4 @@ namespace apfel
    * @brief Method which prints Grid with cout <<.
    */
   std::ostream& operator<<(std::ostream& os, Grid const& gr);
-
 }

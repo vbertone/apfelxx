@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <apfel/convolutionmap.h>
+#include "apfel/convolutionmap.h"
 
 namespace apfel
 {
@@ -86,5 +86,4 @@ namespace apfel
 
   template<class T>
   Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { return lhs += rhs; }
-
 }

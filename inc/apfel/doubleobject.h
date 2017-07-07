@@ -95,5 +95,4 @@ namespace apfel
 
   template<class T>
   DoubleObject<T> operator + (DoubleObject<T> lhs, DoubleObject<T> const& rhs) { return lhs += rhs; }
-
 }

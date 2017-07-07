@@ -141,6 +141,5 @@ namespace apfel
     vector<double> _Thresholds2;    //<! Squared quark threholds
     vector<double> _LogThresholds2; //<! Log of the squared quark threholds
     vector<double> _LogTh2M2;       //<! Log of the squared threholds over squared masses
-
   };
 }

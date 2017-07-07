@@ -16,8 +16,7 @@ namespace apfel
    * Computes the calculation time.
    */
   class Timer {
-
-   public:
+  public:
     //! Starts the timer.
     void start(){  startTime = std::chrono::steady_clock::now(); }
 
@@ -32,7 +31,6 @@ namespace apfel
     }
 
   private:
-   std::chrono::time_point<std::chrono::steady_clock> startTime;
+    std::chrono::time_point<std::chrono::steady_clock> startTime;
   };
-
 }

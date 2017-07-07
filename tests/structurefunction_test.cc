@@ -149,14 +149,18 @@ int main()
   const auto PDFs = [&] (double const& x, double const& Q) -> unordered_map<int,double>{ return TabulatedPDFs.EvaluateMapxQ(x,Q); };
 
   // Initialize coefficient functions
-  const auto F2Obj = InitializeF2ObjectsZM(g);
-  const auto FLObj = InitializeFLObjectsZM(g);
-  const auto F3Obj = InitializeF3ObjectsZM(g);
+  const auto F2Obj = InitializeF2NCObjectsZM(g);
+  const auto FLObj = InitializeFLNCObjectsZM(g);
+  const auto F3Obj = InitializeF3NCObjectsZM(g);
+
+  // Initialize coefficient functions
+  const auto F2PlusCCObj  = InitializeF2CCPlusObjectsZM(g);
+  const auto F2MinusCCObj = InitializeF2CCMinusObjectsZM(g);
 
   // Initialize structure functions
-  const auto F2 = StructureFunctionBuildNC(F2Obj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto FL = StructureFunctionBuildNC(FLObj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto F3 = StructureFunctionBuildNC(F3Obj, PDFs, Thresholds, PerturbativeOrder, as, fDq);
+  const auto F2 = BuildStructureFunctions(F2Obj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
+  const auto FL = BuildStructureFunctions(FLObj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
+  const auto F3 = BuildStructureFunctions(F3Obj, PDFs, Thresholds, PerturbativeOrder, as, fDq);
 
   const TabulateObject<Distribution> F2total {[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
   const TabulateObject<Distribution> F2light {[&] (double const& Q) -> Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};

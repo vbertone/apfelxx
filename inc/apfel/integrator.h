@@ -22,13 +22,22 @@ namespace apfel
   class Integrator
   {
   public:
-    Integrator();  //!< The class constructor
+    /**
+     * @brief The default constructor
+     */
+    Integrator();
 
-    Integrator(function<double(double const&)> const& func);  //!< The class constructor
+    /**
+     * @brief The default constructor
+     *
+      @param func the function to be integrated.
+     */
+    Integrator(function<double(double const&)> const& func);
 
     /**
      * @brief Integrates the integrand passed during initialization
      * between xmin and xmax with tolerance eps.
+     *
      * @param xmin the lower bound integration value.
      * @param xmax the upper bound integration value.
      * @param eps the required relative error.
@@ -39,6 +48,7 @@ namespace apfel
     /**
      * @brief Integrates the integrand passed during initialization
      * between xmin and xmax with m points.
+     *
      * @param xmin the lower bound integration value.
      * @param xmax the upper bound integration value.
      * @param m the number of points of the Gauss quadrature.
@@ -57,6 +67,5 @@ namespace apfel
 
   private:
     function<double(double const&)> _func;
-
   };
 }

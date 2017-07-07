@@ -206,5 +206,4 @@ namespace apfel
       return TR * ( CF * a01 + CA * a02 );
     }
   };
-
 }

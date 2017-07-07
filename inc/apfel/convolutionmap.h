@@ -56,5 +56,4 @@ namespace apfel
     unordered_map<int,vector<rule>> _rules; //!< the map container
     string                          _name;  //!< the name of the derived class
   };
-
 }

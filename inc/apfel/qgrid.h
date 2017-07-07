@@ -21,12 +21,8 @@ namespace apfel
    * @brief Class for the Q-space interpolation QGrids.
    *
    * Subgrids are the building blocks of the interpolation procedure.
-   * This class defines the "QGrid" object that includes, apart from the
-   * grid itself, also the relevant parameters.
-   *
-   * This template class accepts fixed types:
-   * - double
-   *
+   * This class defines the "QGrid" object that includes, apart from
+   * the grid itself, also the relevant parameters.
    */
   template<class T>
   class QGrid

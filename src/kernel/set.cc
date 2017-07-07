@@ -52,7 +52,8 @@ namespace apfel {
 	  continue;
         V result = _objects.at((*o).operand) * dist.at((*o).object);
 
-	// Multiply by the numerical coefficient only if it is different from one
+	// Multiply by the numerical coefficient only if it is
+	// different from one.
 	if((*o).coefficient != 1)
 	  result *= (*o).coefficient;
         o++;

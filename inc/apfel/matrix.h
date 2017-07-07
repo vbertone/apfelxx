@@ -20,9 +20,8 @@ namespace apfel
   /**
    * @brief The matrix class
    *
-   * A simple implementation of 2d arrays based on
-   * a continous memory allocation. Elements are accessible
-   * throught the (i,j) operator.
+   * A simple implementation of 2d arrays based on a continous memory
+   * allocation. Elements are accessible throught the (i,j) operator.
    */
   template<typename T>
   class matrix
@@ -30,6 +29,7 @@ namespace apfel
   public:
     /**
      * @brief matrix constructor
+     *
      * @param row number of rows
      * @param col number of columns
      */
@@ -37,6 +37,7 @@ namespace apfel
 
     /**
      * @brief Resizes object and set default value
+     *
      * @param row number of rows
      * @param col number of columns
      * @param v the default value

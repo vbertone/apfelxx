@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <apfel/set.h>
-#include <apfel/distribution.h>
+#include "apfel/set.h"
+#include "apfel/distribution.h"
 
 #include <functional>
 
@@ -17,7 +17,7 @@ using std::function;
 namespace apfel
 {
   /**
-   * @brief rk4 using lambdas, this solves:
+   * @brief rk4 fourth order RK method using lambdas, this solves:
    *
    *    dy / dt = f(t,y)
    *
@@ -49,11 +49,13 @@ namespace apfel
       dt * f( t         , y           )     );} ;
   }
 
+  /**
+   * @brief rk1 first order RK method using lambdas.
+   */
   template<class U = double, class T>
   function<U(double const&, U const&, double const&)>
   rk1(T const& f)
   {
     return [f](double const& t, U const& y,  double const& dt) -> U{ return dt * f(t, y); } ;
   }
-
 }

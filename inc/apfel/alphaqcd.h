@@ -86,6 +86,5 @@ namespace apfel
     matrix<double>                                                 _bQCD;
     function<double(bool const&, int const&, double const&)>       _MatchingConditions;
     function<double(int const&, double const&)>                    _BetaFunction;
-
   };
 }

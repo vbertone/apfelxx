@@ -20,7 +20,6 @@ using std::vector;
 
 namespace apfel
 {
-
   /**
    * @brief Structure that contains all the precomputed quantities
    * needed to perform the DGLAP evolution, i.e. perturbative
@@ -134,5 +133,4 @@ namespace apfel
 			       int                                                        const& PerturbativeOrder,
 			       function<double(double const&)>                            const& Alphas,
 			       int                                                        const& nsteps = 10);
-
 }

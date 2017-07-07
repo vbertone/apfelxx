@@ -531,6 +531,4 @@ namespace apfel
     result=(b0-h*b2)*pow(x,p)/(fct[p]*pow(p,n));
     return(result);
   };
-
 }
-

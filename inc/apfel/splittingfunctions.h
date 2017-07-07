@@ -526,5 +526,4 @@ namespace apfel
   private:
     int const _nf;
   };
-
 }

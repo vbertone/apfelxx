@@ -122,7 +122,6 @@ namespace apfel
    * @return
    */
   int NF(double const& Q, std::vector<double> const& Thresholds);
-
 }
 
 namespace std {

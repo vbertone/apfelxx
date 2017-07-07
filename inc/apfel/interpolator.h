@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <apfel/grid.h>
+#include "apfel/grid.h"
 
 #include <vector>
 #include <array>
@@ -21,10 +21,12 @@ namespace apfel
   /**
    * @brief The Interpolator abstract class
    *
-   * This class provides the evaluate interpolation method
-   * and requires the implementation of a specialized interpolant algorithm.
+   * This class provides the evaluate interpolation method and
+   * requires the implementation of a specialized interpolant
+   * algorithm.
    *
-   * The current version uses the joint grid object stored allocated by the Grid class.
+   * The current version uses the joint grid object stored allocated
+   * by the Grid class.
    */
   class Interpolator
   {

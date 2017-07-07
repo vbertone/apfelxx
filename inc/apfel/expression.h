@@ -63,5 +63,4 @@ namespace apfel
   public:
   Null(): Expression() { }
   };
-
 }

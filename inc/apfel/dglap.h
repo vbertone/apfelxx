@@ -85,5 +85,4 @@ namespace apfel
     function<Set<Operator>(int const&,double const&)>      _SplittingFunctions;
     function<Set<Operator>(bool,int const&,double const&)> _MatchingConditions;
   };
-
 }

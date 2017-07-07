@@ -1,0 +1,211 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+\usepackage{mathrsfs}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+\begin{document}
+
+\title{Computation of the charged current structure functions}
+
+\maketitle
+
+\section{The structure of the observables}
+
+The structure in terms of PDFs of the charged current (CC) structure
+functions is complicated by the mixing between down- and up-type
+quarks provided by the CKM matrix. As a first step, we write the
+$\mathcal{O}(\alpha_s)$ contribution to $F=F_2,F_L$ (we will consider
+$F_3$ later) in a convenient way as:
+\begin{equation}\label{compactNu}
+F^{\nu} = \sum_{U=u,c,t}\sum_{D=d,s,b}|V_{UD}|^2\left[C_\pm\left(D +\overline{U}\right) +2 C_gg\right]
+\end{equation}
+and:
+\begin{equation}\label{compactNub}
+F^{\overline{\nu}} = \sum_{U=u,c,t}\sum_{D=d,s,b}|V_{UD}|^2\left[C_\pm\left(\overline{D} +U\right) +2 C_gg\right] 
+\end{equation}
+where we have omitted the convolution symbol and an overall factor
+$2x$. At this order we don't have to worry about whether $C_+$ or
+$C_-$ has to be used because they coincide. However, in the following
+it will appear naturally which one has be used and where. One can
+combine the expressions above conveniently as:
+\begin{equation}
+F^{\pm} \equiv \frac{F^{\nu} \pm F^{\overline{\nu}}}2=\frac12
+\sum_{U=u,c,t}\sum_{D=d,s,b}|V_{UD}|^2\left[C_\pm\left(D^\pm
+    \pm U^\pm\right) + P^{\pm}4C_gg\right]
+\end{equation}
+where we have used the usual definition $q^{\pm} = q\pm\overline{q}$
+and defined the projector:
+\begin{equation}
+P^\pm=\frac{1\pm1}2\,.
+\end{equation}
+It should be noted that the subscript $\pm$ to the quark coefficient
+function $C_\pm$ because is now associated to each of $F^\pm$.
+
+Now we need to express these observables in terms of PDFs in the
+evolution basis. The starting point is the relation:
+\begin{equation}\label{TranformationBella}
+q_i^\pm = \sum_{j=1}^6M_{ij}d^\pm_j\,,
+\end{equation}
+where $d^\pm_j$ belong to the QCD evolution basis, that is:
+$d^+_1=\Sigma$, $d^+_2=-T_3$, $d^+_3=T_8$, $d^+_4=T_{15}$, $d^+_5=T_{24}$, and
+$d^+_6=T_{35}$ and $d^-_1=V$, $d^-_2=-V_3$, $d^-_3=V_8$, $d^-_4=V_{15}$,
+$d^-_5=V_{24}$, and $d^-_6=V_{35}$.  Note that here we are using the more
+``natural'' ordering for the distibutions $q_i=\{d,u,s,c,b,t\}$ rather
+than that where $u$ comes before $d$; this is the reason of the minus
+sign in front of $T_3$ and $V_3$. The trasformation matrix $M_{ij}$
+can be written as:
+\begin{equation}\label{TransDef}
+\begin{array}{l}
+\displaystyle M_{ij}=\theta_{ji}\frac{1-\delta_{ij}j}{j(j-1)}\quad j\geq 2\,,\\
+\\
+\displaystyle M_{i1} = \frac{1}{6}\,,
+\end{array}
+\end{equation}
+with $\theta_{ji}=1$ for $j\geq i$ and zero otherwise. In addition,
+one can show that $M_{ij}$ is such that:
+\begin{equation}\label{eq:properties}
+\sum_{j=1}^6M_{ij} = 0\,,\quad\mbox{and}\quad \sum_{i=1}^6M_{ij} = \delta_{1j}\,.
+\end{equation}
+
+Using eq.~(\ref{TranformationBella}) we can make the following
+identifications:
+\begin{equation}
+D^{\pm} = q_{2j-1}^\pm\quad\mbox{and}\quad U^{\pm} =
+q_{2j}^\pm\,,\quad j=1,2,3\,,
+\end{equation}
+so that we can write:
+\begin{equation}
+F^\pm=
+\frac12\sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2\left[C_\pm\left(q_{2j-1}^\pm
+    \pm q_{2i}^\pm\right) + 4P^{\pm} C_g g\right]\,.
+\end{equation}
+Using the definition of $M_{ij}$ in eq.~(\ref{TransDef}), we can
+rewrite $F^{\pm}$ in terms of PDFs in the evolution basis as:
+\begin{equation}\label{eq:decompF2L}
+F^\pm=
+\sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2 F_{ij}^\pm\,,
+\end{equation}
+with:
+\begin{equation}\label{F2Ldef}
+F_{ij}^\pm=
+C_g 2P^\pm g
++
+C_\pm^{\rm S} P^\pm \frac16 d_1^\pm
++ C_\pm\sum_{k=2}^6\frac{\theta_{k,2j-1}(1-\delta_{2j-1,k}k)\pm \theta_{k,2i}(1-\delta_{2i,k}k) }{2k(k-1)}d_k^\pm\,.
+\end{equation}
+
+Eq.~(\ref{F2Ldef}) is valid only for $F_2$ and $F_3$. In order to
+obtain a similar equation also for $F_3$, one needs to change sign to
+the antiquark distributions, $i.e.$
+$\overline{q}_i\rightarrow - \overline{q}_i$. In the QCD evolution
+basis, this has the consequence of exchanging the $T$-like
+distributions with the $V$-like ones, that is to say
+$d_k^+\leftrightarrow d_k^-$. It is the easy to see that:
+\begin{equation}
+F_3^\pm=
+\sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2 F_{3,ij}^\pm\,,
+\end{equation}
+with:
+\begin{equation}\label{F3def}
+F_{3,ij}^\pm=
+C_g 2P^\pm g
++
+C_\pm^{\rm S} P^\mp \frac16 d_1^\pm
++ C_\pm\sum_{k=2}^6\frac{\theta_{k,2j-1}(1-\delta_{2j-1,k}k)\mp \theta_{k,2i}(1-\delta_{2i,k}k) }{2k(k-1)}d_k^\pm\,.
+\end{equation}
+
+It is now useful to consider the inclusive structure functions and
+exploit the unitarity of the CKM matrix elements $V_{UD}$:
+\begin{equation}
+\sum_{i=1}^3|V_{2i,(2j-1)}|^2 = \sum_{j=1}^3|V_{2i,(2j-1)}|^2 = 1\quad\Rightarrow\quad \sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2 = 3\,.
+\end{equation}
+Summing over $i$ and $j$ in eq.~(\ref{eq:decompF2L}) and using
+eq.~(\ref{F2Ldef}), one obtains:
+\begin{equation}
+F^\pm=
+C_g 6P^\pm g
++
+C_\pm^{\rm S} P^\pm \frac12 d_1^\pm
++ \frac12 C_\pm\sum_{k=2}^6 d_k^\pm\sum_{l=1}^6(\pm 1)^{l+1}M_{lk}\,.
+\end{equation}
+Considering separately $F^+$ and $F^-$ and using
+eq.~(\ref{eq:properties}), one finds:
+\begin{equation}
+F^+= C_g 6g + C_+^{\rm S} \frac12 d_1^+
+\end{equation}
+and:
+\begin{equation}
+F^-= \frac12 C_-\sum_{k=2}^6\left[\frac{P^+}{k-1}-\frac{P^-}{k}\right]d_k^-\,,
+\end{equation}
+with the even/odd projectors defined as:
+\begin{equation}
+P^{\pm} = \frac{1\pm(-1)^k}{2}\,.
+\end{equation}
+
+It should be pointed out that such simple expressions (independent of
+the CMK matrix elements) is achievable only if it is possible to
+factorize the non-singlet coefficient functions as implicitly done in
+eqs.~(\ref{F2Ldef}) and~(\ref{F3def}). In fact, this is possible only
+in the ZM case in which the coefficient functions of each PDF
+combination is the same.
+
+For $F_3$ we find:
+\begin{equation}
+F_3^+= C_g 6g + C_-^{\rm S} \frac12 d_1^-
+\end{equation}
+and:
+\begin{equation}
+F_3^-= \frac12 C_+\sum_{k=2}^6\left[\frac{P^+}{k-1}-\frac{P^-}{k}\right]d_k^+\,.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

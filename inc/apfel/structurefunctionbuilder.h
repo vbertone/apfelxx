@@ -20,7 +20,6 @@ using std::vector;
 
 namespace apfel
 {
-
   /**
    * @brief Structure that contains all the precomputed quantities
    * needed to compute the DIS structure functions, i.e. perturbative
@@ -29,52 +28,84 @@ namespace apfel
   struct StructureFunctionObjects
   {
     vector<int> skip;
-    unordered_map<int,DISNCBasis> ConvBasis;
     unordered_map<int,Set<Operator>> C0;
     unordered_map<int,Set<Operator>> C1;
     unordered_map<int,unordered_map<int,Set<Operator>>> C2;
+    unordered_map<int,ConvolutionMap> ConvBasis;
+    function<ConvolutionMap(vector<double> const&)> ConvBasisTot;
   };
 
   /**
    * @brief The InitializeF2ObjectsZM, precompute the perturbative
-   * coefficients of coefficient functions for F2 and store them in
+   * coefficients of coefficient functions for NC F2 and store them in
    * the 'StructureFunctionObjects' structure.
    *
    * @param g the grid
    * @param IntEps the integration accuracy
    * @return
    */
-  StructureFunctionObjects InitializeF2ObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+  StructureFunctionObjects InitializeF2NCObjectsZM(Grid const& g, double const& IntEps = 1e-5);
 
   /**
-   * @brief Same as above for FL.
+   * @brief Same as above for FL NC.
    */
-  StructureFunctionObjects InitializeFLObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+  StructureFunctionObjects InitializeFLNCObjectsZM(Grid const& g, double const& IntEps = 1e-5);
 
   /**
-   * @brief Same as above for F3.
+   * @brief Same as above for F3 NC.
    */
-  StructureFunctionObjects InitializeF3ObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+  StructureFunctionObjects InitializeF3NCObjectsZM(Grid const& g, double const& IntEps = 1e-5);
 
   /**
-   * @brief The F2BuildZM
+   * @brief Same as above for ( F2(nu) + F2(nubar) ) / 2 CC.
+   */
+  StructureFunctionObjects InitializeF2CCPlusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for ( F2(nu) - F2(nubar) ) / 2 CC.
+   */
+  StructureFunctionObjects InitializeF2CCMinusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for ( FL(nu) + FL(nubar) ) / 2 CC.
+   */
+  StructureFunctionObjects InitializeFLCCPlusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for ( FL(nu) - FL(nubar) ) / 2 CC.
+   */
+  StructureFunctionObjects InitializeFLCCMinusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for ( F3(nu) + F3(nubar) ) / 2 CC.
+   */
+  StructureFunctionObjects InitializeF3CCPlusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above for ( F3(nu) - F3(nubar) ) / 2 CC.
+   */
+  StructureFunctionObjects InitializeF3CCMinusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
+
+  /**
+   * @brief The StructureFunctionBuildNC class construct a map of
+   * "Observable" objects.
    */
   //_____________________________________________________________________________
-  unordered_map<int,Observable> StructureFunctionBuildNC(StructureFunctionObjects                                          const& FObj,
-							 function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-							 vector<double>                                                    const& Thresholds,
-							 int                                                               const& PerturbativeOrder,
-							 function<double(double const&)>                                   const& Alphas,
-							 function<vector<double>(double const&)>                           const& Charges);
+  unordered_map<int,Observable> BuildStructureFunctions(StructureFunctionObjects                                          const& FObj,
+							function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
+							vector<double>                                                    const& Thresholds,
+							int                                                               const& PerturbativeOrder,
+							function<double(double const&)>                                   const& Alphas,
+							function<vector<double>(double const&)>                           const& Charges);
 
   /**
-   * @brief The F2BuildZM
+   * @brief Same as above but using a function of ipdf, x, and Q as an
+   * input.
    */
-  unordered_map<int,Observable> StructureFunctionBuildNC(StructureFunctionObjects                                   const& FObj,
-							 function<double(int const&, double const&, double const&)> const& InDistFunc,
-							 vector<double>                                             const& Thresholds,
-							 int                                                        const& PerturbativeOrder,
-							 function<double(double const&)>                            const& Alphas,
-							 function<vector<double>(double const&)>                    const& Charges);
-
+  unordered_map<int,Observable> BuildStructureFunctions(StructureFunctionObjects                                   const& FObj,
+							function<double(int const&, double const&, double const&)> const& InDistFunc,
+							vector<double>                                             const& Thresholds,
+							int                                                        const& PerturbativeOrder,
+							function<double(double const&)>                            const& Alphas,
+							function<vector<double>(double const&)>                    const& Charges);
 }
