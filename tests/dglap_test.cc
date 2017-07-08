@@ -89,7 +89,7 @@ int main()
   const auto DglapObj = InitializeDglapObjectsQCD(g);
 
   // Construct the DGLAP object
-  auto EvolvedPDFs = DglapBuild(DglapObj, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
+  auto EvolvedPDFs = BuildDglap(DglapObj, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const TabulateObject<Set<Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};

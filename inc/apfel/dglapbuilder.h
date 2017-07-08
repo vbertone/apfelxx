@@ -48,7 +48,7 @@ namespace apfel
   DglapObjects InitializeDglapObjectsQCD(Grid const& g, double const& IntEps = 1e-5);
 
   /**
-   * @brief The DglapBuild, builds the dglap object
+   * @brief The BuildDglap, builds the dglap object
    *
    * @param DglapObj structure with the coefs. of perturbative objects
    * @param InDistFunc the PDF method to query flavors
@@ -60,7 +60,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                                      const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
 			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                            const& MuRef,
 			       vector<double>                                                    const& Masses,
@@ -70,7 +70,7 @@ namespace apfel
 			       int                                                               const& nsteps = 10);
 
   /**
-   * @brief The DglapBuild, builds the dglap object
+   * @brief The BuildDglap, builds the dglap object
    *
    * @param DglapObj structure with the coefs. of perturbative objects
    * @param InDistFunc the PDF method to query flavors
@@ -82,7 +82,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                                      const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
 			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                            const& MuRef,
 			       vector<double>                                                    const& Masses,
@@ -92,7 +92,7 @@ namespace apfel
 
 
   /**
-   * @brief The DglapBuild, builds the dglap object
+   * @brief The BuildDglap, builds the dglap object
    *
    * @param DglapObj structure with the coefs. of perturbative objects
    * @param InDistFunc the PDF method to query flavors
@@ -104,7 +104,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,
@@ -114,7 +114,7 @@ namespace apfel
 			       int                                                        const& nsteps = 10);
 
   /**
-   * @brief The DglapBuild, builds the dglap object
+   * @brief The BuildDglap, builds the dglap object
    *
    * @param DglapObj structure with the coefs. of perturbative objects
    * @param InDistFunc the PDF method to query flavors
@@ -126,7 +126,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,

@@ -186,7 +186,7 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                                      const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
 			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                            const& MuRef,
 			       vector<double>                                                    const& Masses,
@@ -247,7 +247,7 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                                      const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
 			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                            const& MuRef,
 			       vector<double>                                                    const& Masses,
@@ -255,11 +255,11 @@ namespace apfel {
 			       function<double(double const&)>                                   const& Alphas,
 			       int                                                               const& nsteps)
   {
-    return DglapBuild(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
+    return BuildDglap(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,
@@ -275,11 +275,11 @@ namespace apfel {
 	  DistMap.insert({i,InDistFunc(i, x, Q)});
 	return DistMap;
       };
-    return DglapBuild(DglapObj, InDistFuncMap, MuRef, Masses, Thresholds, PerturbativeOrder, Alphas, nsteps);
+    return BuildDglap(DglapObj, InDistFuncMap, MuRef, Masses, Thresholds, PerturbativeOrder, Alphas, nsteps);
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> DglapBuild(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,
@@ -287,7 +287,7 @@ namespace apfel {
 			       function<double(double const&)>                            const& Alphas,
 			       int                                                        const& nsteps)
   {
-    return DglapBuild(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
+    return BuildDglap(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
   }
 
 }
