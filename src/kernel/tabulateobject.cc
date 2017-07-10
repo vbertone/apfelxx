@@ -207,7 +207,7 @@ namespace apfel {
   //_________________________________________________________________________________
   //_________________________________________________________________________________
   template<>
-  unordered_map<int,double> TabulateObject<double>::EvaluateMapxQ(double const&, double const&) const
+  map<int,double> TabulateObject<double>::EvaluateMapxQ(double const&, double const&) const
   {
     throw runtime_exception("TabulateObject::EvaluateMapxQ(i,x,Q)",
 			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
@@ -215,7 +215,7 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<>
-  unordered_map<int,double> TabulateObject<Distribution>::EvaluateMapxQ(double const&, double const&) const
+  map<int,double> TabulateObject<Distribution>::EvaluateMapxQ(double const&, double const&) const
   {
     throw runtime_exception("TabulateObject::EvaluateMapxQ(i,x,Q)",
 			    "This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
@@ -223,7 +223,7 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<>
-  unordered_map<int,double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
+  map<int,double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
   {
     const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
     const auto bounds = this->SumBounds(Q);
@@ -231,23 +231,15 @@ namespace apfel {
     const int lower   = get<1>(bounds);
     const int upper   = get<2>(bounds);
 
-    // Initialize map.
-    unordered_map<int,double> result;
-    const auto& obj = this->_GridValues[lower].GetObjects();
-    const double w = Interpolant(cp, lower, ll2ql);
-    for (auto it = obj.begin(); it != obj.end(); ++it)
-      result.insert({it->first, w * it->second.Evaluate(x)});
-
     // Fill in map.
-    for (auto tau = lower + 1; tau < upper; tau++)
+    map<int,double> result;
+    for (auto tau = lower; tau < upper; tau++)
       {
 	const auto& obj = this->_GridValues[tau].GetObjects();
 	const double w = Interpolant(cp, tau, ll2ql);
 	for (auto it = obj.begin(); it != obj.end(); ++it)
-	  result.at(it->first) += w * it->second.Evaluate(x);
+	  result[it->first] += w * it->second.Evaluate(x);
       }
-
     return result;
   }
-
 }

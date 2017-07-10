@@ -251,16 +251,16 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  unordered_map<int,Distribution> DistributionMap(Grid                                                              const& g,
-						  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-						  double                                                            const& Q,
-						  vector<int>                                                       const& skip)
+  map<int,Distribution> DistributionMap(Grid                                                    const& g,
+					function<map<int,double>(double const&, double const&)> const& InDistFunc,
+					double                                                  const& Q,
+					vector<int>                                             const& skip)
   {
     // Joint grid and subgrid vectors.
     const vector<double> jg = g.GetJointGrid().GetGrid();
 
     // Initialise output.
-    unordered_map<int,Distribution> DistMap;
+    map<int,Distribution> DistMap;
     const auto f = InDistFunc(jg[0],Q);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (find(skip.begin(), skip.end(), it->first) == skip.end())
@@ -293,15 +293,15 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  unordered_map<int,Distribution> DistributionMap(Grid                                               const& g,
-						  function<unordered_map<int,double>(double const&)> const& InDistFunc,
-						  vector<int>                                        const& skip)
+  map<int,Distribution> DistributionMap(Grid                                     const& g,
+					function<map<int,double>(double const&)> const& InDistFunc,
+					vector<int>                              const& skip)
   {
     // Joint grid and subgrid vectors.
     const vector<double> jg = g.GetJointGrid().GetGrid();
 
     // Initialise output.
-    unordered_map<int,Distribution> DistMap;
+    map<int,Distribution> DistMap;
     const auto f = InDistFunc(jg[0]);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (find(skip.begin(), skip.end(), it->first) == skip.end())
@@ -332,5 +332,4 @@ namespace apfel
 
     return DistMap;
   }
-
 }

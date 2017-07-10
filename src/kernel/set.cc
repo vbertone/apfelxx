@@ -14,8 +14,8 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>::Set(ConvolutionMap const& map, unordered_map<int,T> const& in):
-    _map(map),
+  Set<T>::Set(ConvolutionMap const& Map, map<int,T> const& in):
+    _map(Map),
     _objects(in)
   {
   }
@@ -27,7 +27,7 @@ namespace apfel {
     if (_map.GetName() != d.GetMap().GetName())
       throw runtime_exception("Set::operator *=", "Convolution Map does not match (1)");
 
-    unordered_map<int,V> mmap;
+    map<int,V> mmap;
     for (auto item = _map.GetRules().begin(); item != _map.GetRules().end(); item++)
       {
 	// If an element of the map with the same rules has already

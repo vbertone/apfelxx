@@ -49,7 +49,7 @@ namespace apfel {
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    unordered_map<int,Operator> MatchLO;
+    map<int,Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::PNSP, Id});
@@ -66,7 +66,7 @@ namespace apfel {
 
     // ===============================================================
     // LO splitting functions operators.
-    unordered_map<int,unordered_map<int,Operator>> OpMapLO;
+    map<int,map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0ns{}, IntEps};
     const Operator O0qg{g, P0qg{}, IntEps};
     const Operator O0gq{g, P0gq{}, IntEps};
@@ -74,7 +74,7 @@ namespace apfel {
       {
 	const Operator O0gg{g, P0gg{nf}, IntEps};
 	const Operator O0qgnf = nf * O0qg;
-	unordered_map<int,Operator> OM;
+	map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
@@ -87,7 +87,7 @@ namespace apfel {
 
     // ===============================================================
     // NLO splitting functions operators.
-    unordered_map<int,unordered_map<int,Operator>> OpMapNLO;
+    map<int,map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O1nsp{g, P1nsp{nf}, IntEps};
@@ -97,7 +97,7 @@ namespace apfel {
 	const Operator O1gq {g, P1gq{nf},  IntEps};
 	const Operator O1gg {g, P1gg{nf},  IntEps};
 	const Operator O1qq = O1nsp + O1ps;
-	unordered_map<int,Operator> OM;
+	map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
@@ -110,7 +110,7 @@ namespace apfel {
 
     // ===============================================================
     // Allocate NNLO Matching conditions.
-    unordered_map<int,unordered_map<int,Operator>> MatchNNLO;  
+    map<int,map<int,Operator>> MatchNNLO;  
     const Operator APS2Hq {g, APS2Hq_0{},  IntEps};
     const Operator ANS2qqH{g, ANS2qqH_0{}, IntEps};
     const Operator AS2Hg  {g, AS2Hg_0{},   IntEps};
@@ -119,7 +119,7 @@ namespace apfel {
     const Operator AS2qqH = ANS2qqH + APS2Hq;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	unordered_map<int,Operator> OM;
+	map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNSP, ANS2qqH});
 	OM.insert({MatchingBasisQCD::PNSM, ANS2qqH});
 	OM.insert({MatchingBasisQCD::PNSV, ANS2qqH});
@@ -148,7 +148,7 @@ namespace apfel {
 
     // ===============================================================
     // Allocate NNLO splitting functions operators.
-    unordered_map<int,unordered_map<int,Operator>> OpMapNNLO;
+    map<int,map<int,Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O2nsp{g, P2nsp{nf}, IntEps};
@@ -160,7 +160,7 @@ namespace apfel {
 	const Operator O2gg {g, P2gg{nf},  IntEps};
 	const Operator O2qq  = O2nsp + O2ps;
 	const Operator O2nsv = O2nsm + O2nss;
-	unordered_map<int,Operator> OM;
+	map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O2nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O2nsv});
@@ -186,14 +186,14 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
-			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-			       double                                                            const& MuRef,
-			       vector<double>                                                    const& Masses,
-			       vector<double>                                                    const& Thresholds,
-			       int                                                               const& PerturbativeOrder,
-			       function<double(double const&)>                                   const& Alphas,
-			       int                                                               const& nsteps)
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                  const& MuRef,
+			       vector<double>                                          const& Masses,
+			       vector<double>                                          const& Thresholds,
+			       int                                                     const& PerturbativeOrder,
+			       function<double(double const&)>                         const& Alphas,
+			       int                                                     const& nsteps)
   {
     // Compute initial and final number of active flavours according
     // to the vector of thresholds (it assumes that the thresholds
@@ -205,8 +205,8 @@ namespace apfel {
 	nfi++;
 
     // Compute coupling above and below the thresholds.
-    unordered_map<int,double> asThUp;
-    unordered_map<int,double> asThDown;
+    map<int,double> asThUp;
+    map<int,double> asThDown;
     for (auto nf = nfi + 1; nf <= nff; nf++)
       {
 	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
@@ -247,13 +247,13 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
-			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-			       double                                                            const& MuRef,
-			       vector<double>                                                    const& Masses,
-			       int                                                               const& PerturbativeOrder,
-			       function<double(double const&)>                                   const& Alphas,
-			       int                                                               const& nsteps)
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                  const& MuRef,
+			       vector<double>                                          const& Masses,
+			       int                                                     const& PerturbativeOrder,
+			       function<double(double const&)>                         const& Alphas,
+			       int                                                     const& nsteps)
   {
     return BuildDglap(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
   }
@@ -268,9 +268,9 @@ namespace apfel {
 			       function<double(double const&)>                            const& Alphas,
 			       int                                                        const& nsteps)
   {
-    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> unordered_map<int,double>
+    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> map<int,double>
       {
-	unordered_map<int,double> DistMap;
+	map<int,double> DistMap;
 	for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
 	  DistMap.insert({i,InDistFunc(i, x, Q)});
 	return DistMap;

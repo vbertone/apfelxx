@@ -11,7 +11,7 @@
 #include "apfel/matchedevolution.h"
 
 #include <functional>
-#include <unordered_map>
+#include <map>
 
 using namespace std;
 
@@ -46,6 +46,6 @@ namespace apfel
     double EvaluatexQ(double const& x, double const& Q) const;
     double EvaluatexQ(int const& i, double const& x, double const& Q) const;
     double EvaluatexzQ(double const& x, double const& z, double const& Q) const;
-    unordered_map<int,double> EvaluateMapxQ(double const& x, double const& Q) const;
+    map<int,double> EvaluateMapxQ(double const& x, double const& Q) const;
   };
 }

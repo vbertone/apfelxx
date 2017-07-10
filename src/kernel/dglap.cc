@@ -74,7 +74,7 @@ namespace apfel {
     int nf0 = NF(_MuRef, _Thresholds);
 
     // Allocate initial scale distributions.
-    unordered_map<int,Distribution> DistMap;
+    map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
       DistMap.insert({i,Distribution{_ObjRef.at(0).GetGrid(), InDistFunc, i}});
 
@@ -84,13 +84,13 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  void Dglap::SetInitialDistributions(function<unordered_map<int,double>(double const&)> const& InDistFunc)
+  void Dglap::SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc)
   {
     // Compute number of active flavours the the PDF initial scale.
     int nf0 = NF(_MuRef, _Thresholds);
 
     // Allocate initial scale distributions.
-    unordered_map<int,Distribution> DistMap = DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc);
+    map<int,Distribution> DistMap = DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc);
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).

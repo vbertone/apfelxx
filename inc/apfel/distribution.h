@@ -10,10 +10,10 @@
 #include "apfel/lagrangeinterpolator.h"
 
 #include <functional>
-#include <unordered_map>
+#include <map>
 
 using std::function;
-using std::unordered_map;
+using std::map;
 
 namespace apfel
 {
@@ -127,13 +127,13 @@ namespace apfel
   Distribution operator - (Distribution lhs, Distribution const& rhs); //!< Distribution-Distribution
 
   //Fill in an undordered_map of distributions from a map of distributions.
-  unordered_map<int,Distribution> DistributionMap(Grid                                                              const& g,
-						  function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-						  double                                                            const& Q,
-						  vector<int>                                                       const& skip = {});
+  map<int,Distribution> DistributionMap(Grid                                                    const& g,
+					function<map<int,double>(double const&, double const&)> const& InDistFunc,
+					double                                                  const& Q,
+					vector<int>                                             const& skip = {});
 
   //Fill in an undordered_map of distributions from a map of distributions.
-  unordered_map<int,Distribution> DistributionMap(Grid                                               const& g,
-						  function<unordered_map<int,double>(double const&)> const& InDistFunc,
-						  vector<int>                                        const& skip = {});
+  map<int,Distribution> DistributionMap(Grid                                     const& g,
+					function<map<int,double>(double const&)> const& InDistFunc,
+					vector<int>                              const& skip = {});
 }

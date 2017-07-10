@@ -7,11 +7,11 @@
 
 #pragma once
 
-#include <unordered_map>
+#include <map>
 #include <string>
 #include <vector>
 
-using std::unordered_map;
+using std::map;
 using std::string;
 using std::vector;
 
@@ -49,11 +49,11 @@ namespace apfel
     };
 
     // Get methods
-    string                          const& GetName()  const { return _name; }
-    unordered_map<int,vector<rule>> const& GetRules() const { return _rules; }
+    string                const& GetName()  const { return _name; }
+    map<int,vector<rule>> const& GetRules() const { return _rules; }
 
   protected:
-    unordered_map<int,vector<rule>> _rules; //!< the map container
-    string                          _name;  //!< the name of the derived class
+    map<int,vector<rule>> _rules; //!< the map container
+    string                _name;  //!< the name of the derived class
   };
 }

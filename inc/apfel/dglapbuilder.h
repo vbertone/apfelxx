@@ -27,14 +27,14 @@ namespace apfel
    */
   struct DglapObjects
   {
-    unordered_map<int,EvolutionBasisQCD> evbasis;
-    unordered_map<int,MatchingBasisQCD>  matchbasis;
-    unordered_map<int,Set<Operator>>     P0;
-    unordered_map<int,Set<Operator>>     P1;
-    unordered_map<int,Set<Operator>>     P2;
-    unordered_map<int,Set<Operator>>     M0;
-    unordered_map<int,Set<Operator>>     M1;
-    unordered_map<int,Set<Operator>>     M2;
+    map<int,EvolutionBasisQCD> evbasis;
+    map<int,MatchingBasisQCD>  matchbasis;
+    map<int,Set<Operator>>     P0;
+    map<int,Set<Operator>>     P1;
+    map<int,Set<Operator>>     P2;
+    map<int,Set<Operator>>     M0;
+    map<int,Set<Operator>>     M1;
+    map<int,Set<Operator>>     M2;
   };
 
   /**
@@ -60,14 +60,14 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
-			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-			       double                                                            const& MuRef,
-			       vector<double>                                                    const& Masses,
-			       vector<double>                                                    const& Thresholds,
-			       int                                                               const& PerturbativeOrder,
-			       function<double(double const&)>                                   const& Alphas,
-			       int                                                               const& nsteps = 10);
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                  const& MuRef,
+			       vector<double>                                          const& Masses,
+			       vector<double>                                          const& Thresholds,
+			       int                                                     const& PerturbativeOrder,
+			       function<double(double const&)>                         const& Alphas,
+			       int                                                     const& nsteps = 10);
 
   /**
    * @brief The BuildDglap, builds the dglap object
@@ -82,13 +82,13 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                                      const& DglapObj,
-			       function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-			       double                                                            const& MuRef,
-			       vector<double>                                                    const& Masses,
-			       int                                                               const& PerturbativeOrder,
-			       function<double(double const&)>                                   const& Alphas,
-			       int                                                               const& nsteps = 10);
+  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                  const& MuRef,
+			       vector<double>                                          const& Masses,
+			       int                                                     const& PerturbativeOrder,
+			       function<double(double const&)>                         const& Alphas,
+			       int                                                     const& nsteps = 10);
 
 
   /**

@@ -68,7 +68,7 @@ int main()
   // Allocate LO splitting functions operators
   cout << "Initializing operators ..." << endl;
   t.start();
-  unordered_map<int,unordered_map<int,Operator>> OpMap;
+  map<int,map<int,Operator>> OpMap;
   const Operator O0ns{g, P0ns{}};
   const Operator O0qg{g, P0qg{}};
   const Operator O0gq{g, P0gq{}};
@@ -76,7 +76,7 @@ int main()
     {
       const Operator O0gg{g, P0gg{nf}};
       const Operator O0qgnf = nf * O0qg;
-      unordered_map<int,Operator> OM;
+      map<int,Operator> OM;
       OM.insert({EvolutionBasisQCD::PNSP,O0ns});
       OM.insert({EvolutionBasisQCD::PNSM,O0ns});
       OM.insert({EvolutionBasisQCD::PNSV,O0ns});
@@ -91,7 +91,7 @@ int main()
   // Allocate distributions
   cout << "Initializing distributions ..." << endl;
   t.start();
-  unordered_map<int,Distribution> DistMap;
+  map<int,Distribution> DistMap;
   for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
     DistMap.insert({i,Distribution{g, LHToyPDFs, i}});
   t.stop();
@@ -99,12 +99,12 @@ int main()
   cout << "Initializing set of operators and distributions ..." << endl;
   t.start();
   // Allocate maps
-  unordered_map<int,EvolutionBasisQCD> basis;
+  map<int,EvolutionBasisQCD> basis;
   for (int nf = 3; nf <= 6; nf++)
     basis.insert({nf,EvolutionBasisQCD{nf}});
 
   // Allocate set of operators
-  unordered_map<int,Set<Operator>> Splittings;
+  map<int,Set<Operator>> Splittings;
   for (int nf = 3; nf <= 6; nf++)
     Splittings.insert({nf,Set<Operator>{basis.at(nf), OpMap.at(nf)}});
 

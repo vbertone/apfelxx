@@ -31,7 +31,7 @@ namespace apfel
      * @brief The Set class constructor.
      * @param the input map, in this case it makes a copy
      */
-    Set(ConvolutionMap const& map, unordered_map<int, T> const& in);
+    Set(ConvolutionMap const& Map, map<int, T> const& in);
 
     /**
      * @brief operator *= product object
@@ -47,16 +47,16 @@ namespace apfel
     Set<T>& operator += (Set<T> const& d); //!< this += Set
 
     // Get methods
-    T                     const& at(int const& id) const { return _objects.at(id); }
-    ConvolutionMap        const& GetMap()          const { return _map; }
-    unordered_map<int, T> const& GetObjects()      const { return _objects; }
+    T              const& at(int const& id) const { return _objects.at(id); }
+    ConvolutionMap const& GetMap()          const { return _map; }
+    map<int, T>    const& GetObjects()      const { return _objects; }
 
     // Method to sum all the objects of a given set.
     T Combine() const;
 
   private:
-    ConvolutionMap        _map;     //!< The shared pointer containing the convolution map
-    unordered_map<int, T> _objects; //!< The container for the unordered_map
+    ConvolutionMap _map;     //!< The shared pointer containing the convolution map
+    map<int, T>    _objects; //!< The container for the map
   };
 
   /**

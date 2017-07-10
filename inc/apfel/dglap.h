@@ -13,10 +13,10 @@
 #include "apfel/operator.h"
 
 #include <functional>
-#include <unordered_map>
+#include <map>
 
 using std::function;
-using std::unordered_map;
+using std::map;
 
 namespace apfel
 {
@@ -79,7 +79,7 @@ namespace apfel
      * reference scale using a map of the distribution as function of
      * x.
      */
-    void SetInitialDistributions(function<unordered_map<int,double>(double const&)> const& InDistFunc);
+    void SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc);
 
   private:
     function<Set<Operator>(int const&,double const&)>      _SplittingFunctions;

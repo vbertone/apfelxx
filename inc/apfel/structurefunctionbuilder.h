@@ -28,10 +28,10 @@ namespace apfel
   struct StructureFunctionObjects
   {
     vector<int> skip;
-    unordered_map<int,Set<Operator>> C0;
-    unordered_map<int,Set<Operator>> C1;
-    unordered_map<int,unordered_map<int,Set<Operator>>> C2;
-    unordered_map<int,ConvolutionMap> ConvBasis;
+    map<int,Set<Operator>> C0;
+    map<int,Set<Operator>> C1;
+    map<int,map<int,Set<Operator>>> C2;
+    map<int,ConvolutionMap> ConvBasis;
     function<ConvolutionMap(vector<double> const&)> ConvBasisTot;
   };
 
@@ -91,21 +91,21 @@ namespace apfel
    * "Observable" objects.
    */
   //_____________________________________________________________________________
-  unordered_map<int,Observable> BuildStructureFunctions(StructureFunctionObjects                                          const& FObj,
-							function<unordered_map<int,double>(double const&, double const&)> const& InDistFunc,
-							vector<double>                                                    const& Thresholds,
-							int                                                               const& PerturbativeOrder,
-							function<double(double const&)>                                   const& Alphas,
-							function<vector<double>(double const&)>                           const& Charges);
+  map<int,Observable> BuildStructureFunctions(StructureFunctionObjects                                const& FObj,
+					      function<map<int,double>(double const&, double const&)> const& InDistFunc,
+					      vector<double>                                          const& Thresholds,
+					      int                                                     const& PerturbativeOrder,
+					      function<double(double const&)>                         const& Alphas,
+					      function<vector<double>(double const&)>                 const& Charges);
 
   /**
    * @brief Same as above but using a function of ipdf, x, and Q as an
    * input.
    */
-  unordered_map<int,Observable> BuildStructureFunctions(StructureFunctionObjects                                   const& FObj,
-							function<double(int const&, double const&, double const&)> const& InDistFunc,
-							vector<double>                                             const& Thresholds,
-							int                                                        const& PerturbativeOrder,
-							function<double(double const&)>                            const& Alphas,
-							function<vector<double>(double const&)>                    const& Charges);
+  map<int,Observable> BuildStructureFunctions(StructureFunctionObjects                                   const& FObj,
+					      function<double(int const&, double const&, double const&)> const& InDistFunc,
+					      vector<double>                                             const& Thresholds,
+					      int                                                        const& PerturbativeOrder,
+					      function<double(double const&)>                            const& Alphas,
+					      function<vector<double>(double const&)>                    const& Charges);
 }
