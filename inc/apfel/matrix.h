@@ -50,8 +50,8 @@ namespace apfel
     size_t const& size(size_t const& dim) const { return _size[dim]; }
 
     //operators
-    T&       operator()(size_t const& i, size_t const& j)       { return _data[i+_size[0]*j]; }
-    T const& operator()(size_t const& i, size_t const& j) const { return _data[i+_size[0]*j]; }
+    T&       operator()(size_t const& i, size_t const& j)       { return _data[i*_size[1]+j]; }
+    T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
 
   private:
     array<size_t, 2> _size; //!< the dimension pair
