@@ -41,6 +41,11 @@ namespace apfel
     /**
      * @brief DoubleObject constructor
      */
+    DoubleObject();
+
+    /**
+     * @brief DoubleObject constructor
+     */
     DoubleObject(vector<term<T>> const& terms);
 
     /**
