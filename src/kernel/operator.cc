@@ -14,13 +14,15 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
+  Operator::Operator(Grid const& gr, Expression const& expr, accuracy const& eps):
     Integrator{},
     LagrangeInterpolator{gr},
     _grid(gr),
-    _expr(&expr),
-    _eps(eps)
+    _expr(&expr)
   {
+    // Scaling factor
+    _eta = _expr->eta();
+
     // Number of grids.
     const int ng = _grid.nGrids();
 
@@ -29,29 +31,33 @@ namespace apfel
     for (_ig = 0; _ig < ng; _ig++)
       {
 	// Define the global subgrid.
-	const auto& sg = _grid.GetSubGrid(_ig);
+	const SubGrid& sg = _grid.GetSubGrid(_ig);
 
 	// Get vector with the grid nodes.
-	const auto& xg = sg.GetGrid();
+	const vector<double>& xg = sg.GetGrid();
 
 	// Number of grid points.
-	auto nx = sg.nx();
+	const int nx = sg.nx();
 
 	// Interpolation degree.
 	const int id = sg.InterDegree();
 
-	// Limit the loop over "_beta" according to whether "sg" is
+	// Limit the loop over "beta" according to whether "sg" is
 	// external.
 	const int gbound = ( sg.IsExternal() ? nx : 0 );
 
 	_Operator[_ig].resize(gbound+1, nx+1, 0);
-	for (_beta = 0; _beta <= gbound; _beta++)
+	for (auto beta = 0; beta <= gbound; beta++)
 	  {
-	    const auto xbeta = xg[_beta];
-	    for (_alpha = _beta; _alpha <= nx; _alpha++)
+	    _xbeta = xg[beta];
+	    // Local function. Can be computed outside the 'alpha'
+	    // loop.
+	    const double L = _eta * _expr->Local(_xbeta / xg[beta+1] / _eta);
+	    for (_alpha = beta; _alpha <= nx; _alpha++)
 	      {
-		// Weight of the subtraction term (independent of x).
-		_ws = ( _alpha == _beta ? 1 : 0 );
+		// Weight of the subtraction term (it is a delta if
+		// _eta = 1).
+		_ws = Interpolant(_alpha, log(_xbeta / _eta), sg);
 
 		// Given that the interpolation functions have
 		// discontinuos derivative on the nodes and are
@@ -62,25 +68,24 @@ namespace apfel
 		// integration converges faster.
 
 		// Number of grid intervals we need to integrate over.
-		int nmax = fmin(id,_alpha-_beta) + 1;
-		int nmin = fmax(0,_alpha+1-nx);
+		const int nmax = fmin(id,_alpha-beta) + 1;
+		const int nmin = fmax(0,_alpha+1-nx);
 
-		// Integral
+		// Integral.
 		double I = 0;
-		for(auto jint = nmin; jint < nmax; jint++)
+		for (auto jint = nmin; jint < nmax; jint++)
 		  {
 		    // Define integration bounds of the first
 		    // iteration.
-		    const double c = xbeta / xg[_alpha-jint+1];
-		    const double d = xbeta / xg[_alpha-jint];
+		    const double c = _xbeta / xg[_alpha-jint+1];
+		    const double d = _xbeta / xg[_alpha-jint];
 
 		    // Compute the integral.
-		    I += integrate(c, d, _eps);
+		    I += integrate(c, d, eps);
 		  }
-		_Operator[_ig](_beta,_alpha) = I;
+		// Add the local part.
+		_Operator[_ig](beta,_alpha) = I + L * _ws;
 	      }
-	    // Add local part.
-	    _Operator[_ig](_beta,_beta) += _expr->Local(xbeta/xg[_beta+1]);
 	  }
       }
   }
@@ -88,24 +93,17 @@ namespace apfel
   //_________________________________________________________________________
   double Operator::integrand(double const& x) const
   {
-    double res = 0;
-    try
-      {
-        const double wr = Interpolant(_alpha, log(_grid.GetSubGrid(_ig).GetGrid()[_beta] / x), _grid.GetSubGrid(_ig));
-        res = _expr->Regular(x) * wr + _expr->Singular(x) * ( wr - _ws );
-      }
-    catch (std::exception &e)
-      {
-        throw runtime_exception("Operator::integrand",  e.what());
-      }
-    
-    return res;
+    const double z = x / _eta;
+    if (z >= 1)
+      return 0;
+    const double wr = Interpolant(_alpha, log(_xbeta / x), _grid.GetSubGrid(_ig));
+    return _expr->Regular(z) * wr + _expr->Singular(z) * ( wr - _ws );
   }
 
   //_________________________________________________________________________
   Operator& Operator::operator = (Operator const& o)
   {
-    if(this != &o)
+    if (this != &o)
       *this = o;
     return *this;
   }
@@ -117,7 +115,7 @@ namespace apfel
     if (&this->_grid != &d.GetGrid())
       throw runtime_exception("Operator::operator*=", "Operator and Distribution grids do not match");
 
-    const auto& sg = d.GetDistributionSubGrid();
+    const vector<vector<double>>& sg = d.GetDistributionSubGrid();
     vector<vector<double>> s(sg);
     vector<double> j;
 
@@ -157,15 +155,15 @@ namespace apfel
 
 	// Compute the the distribution on the joint grid.
         double xtrans;
-        if(ig < ng-1)
+        if (ig < ng-1)
 	  xtrans = this->_grid.GetSubGrid(ig+1).xMin();
         else
           xtrans = 1 + 2 * eps12;
 
-        for(auto alpha = 0; alpha <= nx; alpha++)
+        for (auto alpha = 0; alpha <= nx; alpha++)
           {
             const double x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
-            if(xtrans - x < eps12)
+            if (xtrans - x < eps12)
 	      break;
             j.push_back(s[ig][alpha]);
           }
@@ -185,12 +183,12 @@ namespace apfel
     if (&this->_grid != &o.GetGrid())
       throw runtime_exception("Operator::operator*=", "Operators grid does not match");
 
-    auto v = _Operator;
+    const auto v = _Operator;
 
-    int const ng = _grid.nGrids(); //sg.size();
+    const int ng = _grid.nGrids(); //sg.size();
     for (auto ig = 0; ig < ng; ig++)
       {
-        int const nx = this->_grid.GetSubGrid(ig).nx();
+        const int nx = this->_grid.GetSubGrid(ig).nx();
 
 	// If the grid is external the product between the operators
 	// has to be done in a standard way.

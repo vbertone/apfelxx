@@ -87,7 +87,7 @@ namespace apfel
   StructureFunctionObjects InitializeF3CCMinusObjectsZM(Grid const& g, double const& IntEps = 1e-5);
 
   /**
-   * @brief The StructureFunctionBuildNC class construct a map of
+   * @brief The StructureFunctionBuildNC class constructs a map of
    * "Observable" objects.
    */
   //_____________________________________________________________________________
@@ -108,4 +108,31 @@ namespace apfel
 					      int                                                        const& PerturbativeOrder,
 					      function<double(double const&)>                            const& Alphas,
 					      function<vector<double>(double const&)>                    const& Charges);
+
+  /**
+   * @brief The StructureFunctionBuildNC class constructs a map of
+   * "Observable" objects. As compared to the functions above, this
+   * takes as an input a function of Q as
+   * StructureFunctionObjects. This is needed for th massive structure
+   * functions.
+   */
+  //_____________________________________________________________________________
+  map<int,Observable> BuildStructureFunctions(function<StructureFunctionObjects(double const&)>       const& FObj,
+					      function<map<int,double>(double const&, double const&)> const& InDistFunc,
+					      vector<double>                                          const& Thresholds,
+					      int                                                     const& PerturbativeOrder,
+					      function<double(double const&)>                         const& Alphas,
+					      function<vector<double>(double const&)>                 const& Charges);
+
+  /**
+   * @brief Same as above but using a function of ipdf, x, and Q as an
+   * input.
+   */
+  map<int,Observable> BuildStructureFunctions(function<StructureFunctionObjects(double const&)>          const& FObj,
+					      function<double(int const&, double const&, double const&)> const& InDistFunc,
+					      vector<double>                                             const& Thresholds,
+					      int                                                        const& PerturbativeOrder,
+					      function<double(double const&)>                            const& Alphas,
+					      function<vector<double>(double const&)>                    const& Charges);
+
 }

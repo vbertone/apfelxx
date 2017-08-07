@@ -24,7 +24,7 @@ namespace apfel
   class P0ns: public Expression
   {
   public:
-  P0ns(): Expression() { }
+  P0ns(): Expression{} { }
     double Regular(double const& x)  const { return - 2 * CF * ( 1 + x ); }
     double Singular(double const& x) const { return 4 * CF / ( 1 - x ); }
     double Local(double const& x)    const { return 4 * CF * log( 1 - x ) + 3 * CF; }
@@ -34,7 +34,7 @@ namespace apfel
   class P0qg: public Expression
   {
   public:
-  P0qg(): Expression() { }
+  P0qg(): Expression{} { }
     double Regular(double const& x)  const { return 2 * ( 1 - 2 * x + 2 * x * x ); }
   };
 
@@ -42,7 +42,7 @@ namespace apfel
   class P0gq: public Expression
   {
   public:
-  P0gq(): Expression() { }
+  P0gq(): Expression{} { }
     double Regular(double const& x)  const { return 4 * CF * ( - 1 + 0.5 * x + 1 / x ); }
   };
 
@@ -50,7 +50,7 @@ namespace apfel
   class P0gg: public Expression
   {
   public:
-  P0gg(int const& nf): Expression(), _nf(nf) { }
+  P0gg(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x)  const { return 4 * CA * ( - 2 + x - x * x + 1 / x ); }
     double Singular(double const& x) const { return 4 * CA / ( 1 - x ); }
     double Local(double const& x)    const { return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA; }
@@ -65,7 +65,7 @@ namespace apfel
   class P1nsp: public Expression
   {
   public:
-  P1nsp(int const& nf): Expression(), _nf(nf) { _a2 = - 40 / 9. * CF * _nf + ( 268 / 9. - 8 * zeta2 ) * CA * CF; }
+  P1nsp(int const& nf): Expression{}, _nf(nf) { _a2 = - 40 / 9. * CF * _nf + ( 268 / 9. - 8 * zeta2 ) * CA * CF; }
     double Regular(double const& x) const
     {
       const auto lnx   = log(x);
@@ -132,7 +132,7 @@ namespace apfel
   class P1ps: public Expression
   {
   public:
-  P1ps(int const& nf): Expression(), _nf(nf) { }
+  P1ps(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto lnx  = log(x);
@@ -151,7 +151,7 @@ namespace apfel
   class P1qg: public Expression
   {
   public:
-  P1qg(int const& nf): Expression(), _nf(nf) { }
+  P1qg(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto lnx   = log(x);
@@ -177,7 +177,7 @@ namespace apfel
   class P1gq: public Expression
   {
   public:
-  P1gq(int const& nf): Expression(), _nf(nf) { }
+  P1gq(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto lnx   = log(x);
@@ -202,7 +202,7 @@ namespace apfel
   class P1gg: public Expression
   {
   public:
-  P1gg(int const& nf): Expression(), _nf(nf) { _a2g = - 40 / 9. * CA * _nf + ( 268 / 9. - 8 * zeta2 ) * CA * CA; }
+  P1gg(int const& nf): Expression{}, _nf(nf) { _a2g = - 40 / 9. * CA * _nf + ( 268 / 9. - 8 * zeta2 ) * CA * CA; }
     double Regular(double const& x) const
     {
       const auto lnx   = log(x);
@@ -243,7 +243,7 @@ namespace apfel
   class P2nsp: public Expression
   {
   public:
-  P2nsp(int const& nf): Expression(), _nf(nf) { }
+  P2nsp(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto x_2    = pow(x, 2);
@@ -288,7 +288,7 @@ namespace apfel
   class P2nsm: public Expression
   {
   public:
-  P2nsm(int const& nf): Expression(), _nf(nf) { }
+  P2nsm(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
        const auto x_2    = pow(x, 2);
@@ -332,7 +332,7 @@ namespace apfel
   class P2nss: public Expression
   {
   public:
-  P2nss(int const& nf): Expression(), _nf(nf) { }
+  P2nss(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto x_2    = pow(x,2);
@@ -358,7 +358,7 @@ namespace apfel
   class P2ps: public Expression
   {
   public:
-  P2ps(int const& nf): Expression(), _nf(nf) { }
+  P2ps(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto x_2   = pow(x,2);
@@ -394,7 +394,7 @@ namespace apfel
   class P2qg: public Expression
   {
   public:
-  P2qg(int const& nf): Expression(), _nf(nf) { }
+  P2qg(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto x_2   = pow(x,2);
@@ -435,7 +435,7 @@ namespace apfel
   class P2gq: public Expression
   {
   public:
-  P2gq(int const& nf): Expression(), _nf(nf) { }
+  P2gq(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto x_2   = pow(x,2);
@@ -479,7 +479,7 @@ namespace apfel
   class P2gg: public Expression
   {
   public:
-  P2gg(int const& nf): Expression(), _nf(nf) { }
+  P2gg(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       const auto x_2   = pow(x,2);

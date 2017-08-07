@@ -14,7 +14,6 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
-#include <vector>
 
 using namespace std;
 
@@ -69,21 +68,21 @@ namespace apfel
    * @param tag
    * @param what
    */
-  void info(std::string const& tag, std::string const &what);
+  void info(string const& tag, string const& what);
 
   /**
    * @brief warning
    * @param tag
    * @param what
    */
-  void warning(std::string const& tag, std::string const &what);
+  void warning(string const& tag, string const& what);
 
   /**
    * @brief success
    * @param tag
    * @param what
    */
-  void success(std::string const& tag, std::string const &what);
+  void success(string const& tag, string const& what);
 
   /**
    * @brief error
@@ -91,28 +90,28 @@ namespace apfel
    * @param what
    * @return
    */
-  std::string error(std::string const& tag, std::string const &what);
+  string error(string const& tag, string const& what);
 
   /**
    * @brief The runtime_exception class
    */
-  class runtime_exception: public std::runtime_error
+  class runtime_exception: public runtime_error
   {
   public:
-    runtime_exception(const std::string &tag,
-                      const std::string &what):
-      std::runtime_error(error(tag,what)) {}
+    runtime_exception(string const& tag,
+                      string const& what):
+      runtime_error(error(tag,what)) {}
   };
 
   /**
    * @brief The logic_exception class
    */
-  class logic_exception: public std::logic_error
+  class logic_exception: public logic_error
   {
   public:
-    logic_exception(const std::string &tag,
-                    const std::string &what):
-      std::logic_error(error(tag,what)) {}
+    logic_exception(string const& tag,
+                    string const& what):
+      logic_error(error(tag,what)) {}
   };
 
   /**
@@ -121,12 +120,12 @@ namespace apfel
    * @param what
    * @return
    */
-  int NF(double const& Q, std::vector<double> const& Thresholds);
+  int NF(double const& Q, vector<double> const& Thresholds);
 }
 
 namespace std {
   /**
    * @brief implementation of operator<< for apfel::code
    */
-  std::ostream& operator<<(std::ostream& os, apfel::code code);
+  ostream& operator<<(ostream& os, apfel::code code);
 }

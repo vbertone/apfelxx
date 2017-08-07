@@ -126,33 +126,58 @@ The quantity in squared brackets is the interesting bit.
 The expressions for the operator $O$ that we have to deal with have
 this general form:
 \begin{equation}\label{eq:CoeffFuncs}
-O(z,\eta) = R(z,\eta)+\sum_{i=0}^{n}\left[\frac{\ln^i(1-z)}{1-z}\right]_+ S^{(i)}(z,\eta)+ L(\eta)\delta(1-z)\,,
+  O(z,\eta) = R(z,\eta)+\sum_{i}\left[P^{(i)}(z,\eta)\right]_+ S^{(i)}(z,\eta)+ L(\eta)\delta(1-z)\,,
 \end{equation}
-where $R$ and $S^{(i)}$ is a regular function in $z=1$, that is:
+where $R$ and $S^{(i)}$ are a regular functions in $z=1$, that is:
 \begin{equation}
 R(1,\eta) =  \lim_{z\rightarrow 1} R(z,\eta) = K(\eta)\quad\mbox{and}\quad S^{(i)}(1,\eta) =  \lim_{z\rightarrow 1} S^{(i)}(z,\eta) = J^{(i)}(\eta)\,,
 \end{equation}
-being $K$, $J^{(i)}$, and $L$ a finite function of $\eta$. Notice that
-the sum over $i$ in eq.~(\ref{eq:CoeffFuncs}) is between zero and $n$
-where $n$ is typically not bigger than two as it depends on the
+being $K$, $J^{(i)}$, and $L$ a finite function of $\eta$. The
+functions $P^{(i)}$ are instead plus-prescripted functions whose
+behaviour in $z=1$ is singular in the limit $\eta\rightarrow1$. Notice
+that the sum over $i$ in eq.~(\ref{eq:CoeffFuncs}) depends on the
 perturbative order of the expressions. Plugging
 eq.~(\ref{eq:CoeffFuncs}) into the definition of
 $\Gamma_{\alpha\beta}$ in eq.~(\ref{eq:Genconv3}) and making use of
 the definition of plus-prescription, we obtain:
 \begin{equation}\label{eq:FinalExpression}
 \begin{array}{rcl}
-\Gamma_{\beta\alpha} &=& \eta\displaystyle \int_{c/\eta}^{d/\eta} dz\left\{R\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)+\sum_{i=0}^{n}\frac{\ln^i(1-z)}{1-z}\left[S^{(i)}\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)-S^{(i)}(1,\eta)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\right]\right\}\\
+\Gamma_{\beta\alpha} &=& \eta\displaystyle \int_{c/\eta}^{d/\eta} dz\left\{R\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)+\sum_{i}P^{(i)}(z,\eta)\left[S^{(i)}\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)-S^{(i)}(1,\eta)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\right]\right\}\\
 \\
-&+&\displaystyle \eta\left[\sum_{i=0}^{n} \frac1{(i+1)!}S^{(i)}(1,\eta)\ln^{i+1}\left(1-\frac{c}{\eta}\right)+L(\eta) \right]w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\,.
+&+&\displaystyle \eta\left[L(\eta)-\sum_{i}S^{(i)}(1,\eta)\int_0^{c/\eta}dz
+    P^{(i)}(z,\eta)\right]w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\,,
 \end{array}
 \end{equation}
+that can be further manipulated changing the integration variable
+back, defining $\eta z = y$:
+\begin{equation}\label{eq:FinalExpression2}
+\begin{array}{rcl}
+  \Gamma_{\beta\alpha} &=& \displaystyle \int_{c}^{d} dy\left\{R\left(\frac{y}{\eta},\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)+\sum_{i}P^{(i)}\left(\frac{y}{\eta},\eta\right)\left[S^{(i)}\left(\frac{y}{\eta},\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)-S^{(i)}(1,\eta)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\right]\right\}\\
+  \\
+                       &+&\displaystyle \eta \left[L(\eta)+\sum_{i}S^{(i)}(1,\eta)Q^{(i)}\left(\frac{c}{\eta},\eta\right)\right]w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\,.
+\end{array}
+\end{equation}
+where we have defined:
+\begin{equation}
+  Q^{(i)}(a,\eta)\equiv-\int_0^{a}dz P^{(i)}\left(z,\eta\right).
+\end{equation}
+These integrals can, most of the times, be computed analytically.
 
-Eq.~(\ref{eq:FinalExpression}) expresses the full complexity of the
-task. However, there are a few remarks that apply is some particular
-cases and that reduce the complexity. In the case of the
-($\overline{\mbox{MS}}$) splitting functions, there are two main
-simplications: the first is that $\eta=1$, the second is that $n=0$ in
-the sums. Considering that:
+Eqs.~(\ref{eq:FinalExpression})-(\ref{eq:FinalExpression2}) express
+the full complexity of the task. However, there are a few remarks that
+apply is some particular cases and that reduce the complexity. In the
+case of the ($\overline{\mbox{MS}}$) splitting functions, there are
+two main simplications: the first is that $\eta=1$, the second is that
+there is one single term in the sum over $i$ ($i=0$) and the form of
+the function $P$ is:
+\begin{equation}
+P^{(0)}(z,\eta)\rightarrow \frac1{1-z}\,,
+\end{equation}
+so that:
+\begin{equation}
+Q^{(0)}(a,\eta)=\ln(1-a)\,.
+\end{equation}
+Considering that:
 \begin{equation}
 w_\alpha^{(k)}(x_\beta) = \delta_{\alpha\beta}\,,
 \end{equation}
@@ -164,9 +189,9 @@ coefficient of the plus-prescripted term $S$ is a constant, we have that:
 
 The same kind of simplifications apply to the case of the Zero-Mass
 (ZM) coefficient functions with the only exception that the sum over
-$i$ extends to $n$'s larger than zero. In particular, since we will
-use exact expressions only up to $\mathcal{O}(\alpha_s)$, $i.e.$ NLO,
-we have $n=1$ so that:
+$i$ extends to more terms. In particular, since we will use exact
+expressions only up to $\mathcal{O}(\alpha_s)$, $i.e.$ NLO, we have
+that:
 \begin{equation}\label{eq:ZMCoeffFunctions}
 \begin{array}{rcl}
   \Gamma_{\beta\alpha} &=&\displaystyle \int_{c}^{d}

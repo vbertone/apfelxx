@@ -14,6 +14,8 @@
 #include "apfel/lagrangeinterpolator.h"
 #include "apfel/matrix.h"
 
+typedef double accuracy;
+
 namespace apfel
 {
   /**
@@ -36,7 +38,7 @@ namespace apfel
      * @param gr "Grid" object
      * @param func vector of pointers to one-dimentional functions
      */
-    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
+    Operator(Grid const& gr, Expression const& expr, accuracy const& eps = 1e-5);
 
     // Operators.
     Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
@@ -58,13 +60,14 @@ namespace apfel
   private:
     Grid                   const& _grid;         //!< Grid on which to compute the operator
     Expression const*      const  _expr;         //!< Expression to be commuted into an operator
-    double                        _eps;          //!< Precision of the dgauss integration
     vector<matrix<double>>        _Operator;     //!< Operator values.
 
     // Global variables
-    int    _alpha, _beta;
+    int    _alpha;
     int    _ig;
     double _ws;
+    double _xbeta;
+    double _eta;
   };
 
   // Extra operation definitions where Operator is at the left hand

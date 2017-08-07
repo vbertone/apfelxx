@@ -24,6 +24,11 @@ namespace apfel
     Expression();
 
     /**
+     * @brief The default constructor
+     */
+    Expression(double const& eta);
+
+    /**
      * @brief Virtual regular term.
      * @param x the integration variable.
      * @return the regular term at x.
@@ -43,6 +48,14 @@ namespace apfel
      * @return the local term at x.
      */
     virtual double Local(double const&) const { return 0; }
+
+    /**
+     * @brief Function that returns the value of the scaling parameter
+     * eta.
+     */
+    double eta() const { return _eta; }
+  protected:
+    double const _eta;
   };
 
   /**

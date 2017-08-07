@@ -23,7 +23,7 @@ namespace apfel
   class C21ns: public Expression
   {
   public:
-  C21ns(): Expression() { }
+  C21ns(): Expression{} { }
     double Regular(double const& x)  const { return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x,2) ) * log(x) / ( 1 - x ) + 3 + 2 * x ); }
     double Singular(double const& x) const { return 2 * CF * ( 2 * log( 1 - x ) - 3 / 2. ) / ( 1 - x ); }
     double Local(double const& x)    const { return 2 * CF * ( pow(log(1-x),2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) ); }
@@ -33,7 +33,7 @@ namespace apfel
   class C21g: public Expression
   {
   public:
-  C21g(): Expression() { }
+  C21g(): Expression{} { }
     double Regular(double const& x) const { return 4 * TR * ( ( pow((1-x),2) + pow(x,2) ) * log( ( 1 - x ) / x ) - 8 * x * ( x - 1 ) - 1 ); }
   };
 
@@ -44,7 +44,7 @@ namespace apfel
   class C22nsp: public Expression
   {
   public:
-  C22nsp(int const& nf): Expression(), _nf(nf) { }
+  C22nsp(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x)  const
     {
       double const dl      = log(x);
@@ -87,7 +87,7 @@ namespace apfel
   class C22nsm: public Expression
   {
   public:
-  C22nsm(int const& nf): Expression(), _nf(nf) { }
+  C22nsm(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       double const dl      = log(x);
@@ -130,7 +130,7 @@ namespace apfel
   class C22ps: public Expression
   {
   public:
-  C22ps(): Expression() { }
+  C22ps(): Expression{} { }
     double Regular(double const& x) const
     {
       double const dl     = log(x);
@@ -149,7 +149,7 @@ namespace apfel
   class C22g: public Expression
   {
   public:
-  C22g(): Expression() { }
+  C22g(): Expression{} { }
     double Regular(double const& x) const
     {
       double const dl    = log(x);
@@ -173,7 +173,7 @@ namespace apfel
   class CL1ns: public Expression
   {
   public:
-  CL1ns(): Expression() { }
+  CL1ns(): Expression{} { }
     double Regular(double const& x)  const { return 4 * CF * x; }
   };
 
@@ -181,7 +181,7 @@ namespace apfel
   class CL1g: public Expression
   {
   public:
-  CL1g(): Expression() { }
+  CL1g(): Expression{} { }
     double Regular(double const& x) const { return 16 * TR * x * ( 1 - x ); }
   };
 
@@ -192,7 +192,7 @@ namespace apfel
   class CL2nsp: public Expression
   {
   public:
-  CL2nsp(int const& nf): Expression(), _nf(nf) { }
+  CL2nsp(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x)  const
     {
       double const dl      = log(x);
@@ -213,7 +213,7 @@ namespace apfel
   class CL2nsm: public Expression
   {
   public:
-  CL2nsm(int const& nf): Expression(), _nf(nf) { }
+  CL2nsm(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       double const dl      = log(x);
@@ -234,7 +234,7 @@ namespace apfel
   class CL2ps: public Expression
   {
   public:
-  CL2ps(): Expression() { }
+  CL2ps(): Expression{} { }
     double Regular(double const& x) const
     {
       double const dl     = log(x);
@@ -253,7 +253,7 @@ namespace apfel
   class CL2g: public Expression
   {
   public:
-  CL2g(): Expression() { }
+  CL2g(): Expression{} { }
     double Regular(double const& x) const
     {
       double const dl    = log(x);
@@ -274,7 +274,7 @@ namespace apfel
   class C31ns: public Expression
   {
   public:
-  C31ns(): Expression() { }
+  C31ns(): Expression{} { }
     double Regular(double const& x)  const { return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x,2) ) * log(x) / ( 1 - x ) + 2 + x ); }
     double Singular(double const& x) const { return 2 * CF * ( 2 * log( 1 - x ) - 3 / 2. ) / ( 1 - x ); }
     double Local(double const& x)    const { return 2 * CF * ( pow(log(1-x),2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) ); }
@@ -287,7 +287,7 @@ namespace apfel
   class C32nsp: public Expression
   {
   public:
-  C32nsp(int const& nf): Expression(), _nf(nf) { }
+  C32nsp(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x)  const
     {
       double const dl      = log(x);
@@ -330,7 +330,7 @@ namespace apfel
   class C32nsm: public Expression
   {
   public:
-  C32nsm(int const& nf): Expression(), _nf(nf) { }
+  C32nsm(int const& nf): Expression{}, _nf(nf) { }
     double Regular(double const& x) const
     {
       double const dl      = log(x);

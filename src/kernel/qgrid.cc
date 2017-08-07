@@ -8,6 +8,7 @@
 #include "apfel/qgrid.h"
 #include "apfel/tools.h"
 #include "apfel/distribution.h"
+#include "apfel/operator.h"
 #include "apfel/set.h"
 #include "apfel/doubleobject.h"
 
@@ -224,5 +225,6 @@ namespace apfel
   template class QGrid<Distribution>;
   template class QGrid<Set<Distribution>>;
   template class QGrid<DoubleObject<Distribution>>;
+  template class QGrid<Operator>;
 
 }

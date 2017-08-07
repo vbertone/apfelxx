@@ -10,7 +10,14 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  Expression::Expression()
+  Expression::Expression():
+    _eta(1)
+  {
+  }
+
+  //_________________________________________________________________________
+  Expression::Expression(double const& eta):
+    _eta(eta)
   {
   }
 }

@@ -8,6 +8,10 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     "MinSizeRel" "RelWithDebInfo")
 endif()
 
+if (NOT DEFINED CMAKE_MACOSX_RPATH)
+   set(CMAKE_MACOSX_RPATH 0)
+endif()
+
 # the project name
 project(apfel)
 

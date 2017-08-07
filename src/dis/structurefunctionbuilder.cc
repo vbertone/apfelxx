@@ -711,4 +711,133 @@ namespace apfel {
       };
     return BuildStructureFunctions(FObj, InDistFuncMap, Thresholds, PerturbativeOrder, Alphas, Couplings);
   }
+
+  //_____________________________________________________________________________
+  map<int,Observable> BuildStructureFunctions(function<StructureFunctionObjects(double const&)>       const& FObj,
+					      function<map<int,double>(double const&, double const&)> const& InDistFunc,
+					      vector<double>                                          const& Thresholds,
+					      int                                                     const& PerturbativeOrder,
+					      function<double(double const&)>                         const& Alphas,
+					      function<vector<double>(double const&)>                 const& Couplings)
+  {
+    // Call FObj at zero energy to use it for those quantities that do
+    // not depend on Q.
+    const StructureFunctionObjects FObj0 = FObj(0);
+
+    // Get grid.
+    Grid const& g = FObj0.C0.at(1).at(0).GetGrid();
+
+    // Cycle over the key of the convolution basis map.
+    map<int,Observable> F;
+    for (auto it = FObj0.ConvBasis.begin(); it != FObj0.ConvBasis.end(); ++it)
+      {
+	// Structure function index.
+	const int k = it->first;
+
+	// Define coefficient function functions.
+	function<Set<Operator>(double const&)> Cf;
+	if (PerturbativeOrder == 0)
+	  {
+	    Cf = [=] (double const& Q) -> Set<Operator>
+	      {
+		return Couplings(Q)[k-1] * FObj(Q).C0.at(k);
+	      };
+	  }
+	else if (PerturbativeOrder == 1)
+	  {
+	    Cf = [=] (double const& Q) -> Set<Operator>
+	      {
+		const auto cp = Alphas(Q) / FourPi;
+		const StructureFunctionObjects FObjQ = FObj(Q);
+		return Couplings(Q)[k-1] * ( FObjQ.C0.at(k) + cp * FObjQ.C1.at(k) );
+	      };
+	  }
+	else if (PerturbativeOrder == 2)
+	  {
+	    Cf = [=] (double const& Q) -> Set<Operator>
+	      {
+		const auto cp = Alphas(Q) / FourPi;
+		const auto nf = NF(Q, Thresholds);
+		const StructureFunctionObjects FObjQ = FObj(Q);
+		return Couplings(Q)[k-1] * ( FObjQ.C0.at(k) + cp * ( FObjQ.C1.at(k) +  + cp * FObjQ.C2.at(k).at(nf) ) );
+	      };
+	  }
+
+	// Define distribution function functions.
+	const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
+	  {
+	    const StructureFunctionObjects FObjQ = FObj(Q);
+	    return Set<Distribution>{FObjQ.ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, FObjQ.skip)};
+	  };
+	// Initialize "Observable".
+	F.insert({k,Observable{Cf, DistF}});
+      }
+
+    // Total structure function.
+    function<Set<Operator>(double const&)> Cf;
+    if (PerturbativeOrder == 0)
+      {
+	Cf = [=] (double const& Q) -> Set<Operator>
+	  {
+	    const StructureFunctionObjects FObjQ = FObj(Q);
+	    const auto basis = FObjQ.ConvBasisTot(Couplings(Q));
+	    Set<Operator> LO{basis, FObjQ.C0.at(1).GetObjects()};
+	    return LO;
+	  };
+      }
+    else if (PerturbativeOrder == 1)
+      {
+	Cf = [=] (double const& Q) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(Q) / FourPi;
+	    const StructureFunctionObjects FObjQ = FObj(Q);
+	    const auto basis = FObjQ.ConvBasisTot(Couplings(Q));
+	    Set<Operator> LO {basis, FObjQ.C0.at(1).GetObjects()};
+	    Set<Operator> NLO{basis, FObjQ.C1.at(1).GetObjects()};
+	    return LO + cp * NLO;
+	  };
+      }
+    else if (PerturbativeOrder == 2)
+      {
+	Cf = [=] (double const& Q) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(Q) / FourPi;
+	    const auto nf = NF(Q, Thresholds);
+	    const StructureFunctionObjects FObjQ = FObj(Q);
+	    const auto basis = FObjQ.ConvBasisTot(Couplings(Q));
+	    Set<Operator> LO  {basis, FObjQ.C0.at(1).GetObjects()};
+	    Set<Operator> NLO {basis, FObjQ.C1.at(1).GetObjects()};
+	    Set<Operator> NNLO{basis, FObjQ.C2.at(1).at(nf).GetObjects()};
+	    return LO + cp * ( NLO +  + cp * NNLO );
+	  };
+      }
+
+    // Define distribution function functions.
+    const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
+      {
+	const StructureFunctionObjects FObjQ = FObj(Q);
+	return Set<Distribution>{FObjQ.ConvBasisTot(Couplings(Q)), DistributionMap(g, InDistFunc, Q, FObjQ.skip)};
+      };
+    F.insert({0,Observable{Cf, DistF}});
+
+    return F;
+  }
+
+  //_____________________________________________________________________________
+  map<int,Observable> BuildStructureFunctions(function<StructureFunctionObjects(double const&)>          const& FObj,
+					      function<double(int const&, double const&, double const&)> const& InDistFunc,
+					      vector<double>                                             const& Thresholds,
+					      int                                                        const& PerturbativeOrder,
+					      function<double(double const&)>                            const& Alphas,
+					      function<vector<double>(double const&)>                    const& Couplings)
+  {
+    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> map<int,double>
+      {
+	map<int,double> DistMap;
+	for (int i = 0; i <= 12; i++)
+	  DistMap.insert({i,InDistFunc(i, x, Q)});
+	return DistMap;
+      };
+    return BuildStructureFunctions(FObj, InDistFuncMap, Thresholds, PerturbativeOrder, Alphas, Couplings);
+  }
 }

@@ -31,7 +31,8 @@ namespace apfel
 		   int                 const& nQ,
 		   double              const& QMin,
 		   double              const& QMax,
-		   int                 const& InterDegree);
+		   int                 const& InterDegree,
+		   double              const& Lambda = 0.25);
 
     /**
      * @brief TabulateObject default constructor.
@@ -41,7 +42,8 @@ namespace apfel
 		   double              const& QMin,
 		   double              const& QMax,
 		   int                 const& InterDegree,
-		   vector<double>      const& Thresholds);
+		   vector<double>      const& Thresholds,
+		   double              const& Lambda = 0.25);
 
     double EvaluatexQ(double const& x, double const& Q) const;
     double EvaluatexQ(int const& i, double const& x, double const& Q) const;

@@ -7,6 +7,7 @@
 
 #include "apfel/tabulateobject.h"
 #include "apfel/distribution.h"
+#include "apfel/operator.h"
 #include "apfel/doubleobject.h"
 #include "apfel/set.h"
 #include "apfel/tools.h"
@@ -24,8 +25,9 @@ namespace apfel {
 				    int                 const& nQ,
 				    double              const& QMin,
 				    double              const& QMax,
-				    int                 const& InterDegree):
-    QGrid<T>(nQ, QMin, QMax, InterDegree, Object.GetThresholds())
+				    int                 const& InterDegree,
+				    double              const& Lambda):
+    QGrid<T>(nQ, QMin, QMax, InterDegree, Object.GetThresholds(), Lambda)
   {
     cout << "Tabulating object... ";
     Timer t;
@@ -80,8 +82,9 @@ namespace apfel {
 				    double              const& QMin,
 				    double              const& QMax,
 				    int                 const& InterDegree,
-				    vector<double>      const& Thresholds):
-    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds)
+				    vector<double>      const& Thresholds,
+				    double              const& Lambda):
+    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, Lambda)
   {
     cout << "Tabulating object... ";
     Timer t;
@@ -100,6 +103,7 @@ namespace apfel {
   template class TabulateObject<Distribution>;
   template class TabulateObject<Set<Distribution>>;
   template class TabulateObject<DoubleObject<Distribution>>;
+  template class TabulateObject<Operator>;
 
   //_________________________________________________________________________________
   template<>
