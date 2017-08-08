@@ -6,75 +6,97 @@
 *     These routines are taken from the OPENQCDRAD code by S. Alekhin
 *     included in the xFitter program.
 *
-*     Needed to rename all functions and subroutines adding the prefix
-*     APF to avoid possible conflicts with xFitter and openQCDRad itself.
-*
 ************************************************************************
 c     These are the functions that give the asymptotic dependence of the
 c     coefficient functions with the appropriate factors.
 c     xi = mq2/m2 (Q^2/m2)
 c     Longitudinal: equation (19) in PLB347 (1995) 143 - 151
-      double precision function APFasymp_l(xi)
+      double precision function asymp_l(xi)
       implicit none
-      include "../commons/consts.h"
-      double precision xi, term1, APFfii_hq, APFfjj_hq
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision xi, term1, fii_hq, fjj_hq
       term1 = 1d0/(1d0 + 0.25d0*xi)
-      APFasymp_l = 1d0/6d0/pi*(4d0/xi - 4d0/3d0*term1 
-     1     + (1d0 - 2d0/xi - 1d0/6d0*term1)*APFfjj_hq(xi)
-     1     - (3d0/xi + 0.25d0*term1)*APFfii_hq(xi))
+      asymp_l = 1d0/6d0/pi*(4d0/xi - 4d0/3d0*term1 
+     1     + (1d0 - 2d0/xi - 1d0/6d0*term1)*fjj_hq(xi)
+     1     - (3d0/xi + 0.25d0*term1)*fii_hq(xi))
       return
       end
 c     transverse: equation (20) in PLB347 (1995) 143 - 151
-      double precision function APFasymp_t(xi)
+      double precision function asymp_t(xi)
       implicit none
-      include "../commons/consts.h"
-      double precision xi, term1, APFfii_hq, APFfjj_hq
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision xi, term1, fii_hq, fjj_hq
       term1 = 1d0/(1d0 + 0.25d0*xi)
-      APFasymp_t = 1d0/6d0/pi*(-2d0/3d0/xi + 4d0/3d0*term1
-     1     + (7d0/6d0 + 1d0/3d0/xi + 1d0/6d0*term1)*APFfjj_hq(xi)
-     1     + (1d0 + 2d0/xi + 0.25d0*term1)*APFfii_hq(xi))
+      asymp_t = 1d0/6d0/pi*(-2d0/3d0/xi + 4d0/3d0*term1
+     1     + (7d0/6d0 + 1d0/3d0/xi + 1d0/6d0*term1)*fjj_hq(xi)
+     1     + (1d0 + 2d0/xi + 0.25d0*term1)*fii_hq(xi))
       return
       end
 c     longitudinal mass factorization: equation (21) in PLB347 (1995) 143 - 151
-      double precision function APFasympbar_l(xi)
+      double precision function asympbar_l(xi)
       implicit none
-      include "../commons/consts.h"
-      double precision xi, term1, APFfjj_hq
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision xi, term1, fjj_hq
       term1 = 1d0/(1d0 + 0.25d0*xi)
-      APFasympbar_l = 1d0/6d0/pi*(-6d0/xi + 0.5d0*term1
-     1     + (3d0/xi + 0.25d0*term1)*APFfjj_hq(xi))
+      asympbar_l = 1d0/6d0/pi*(-6d0/xi + 0.5d0*term1
+     1     + (3d0/xi + 0.25d0*term1)*fjj_hq(xi))
       return
       end
 c     transverse mass factorization: equation (22) in PLB347 (1995) 143 - 151
-      double precision function APFasympbar_t(xi)
+      double precision function asympbar_t(xi)
       implicit none
-      include "../commons/consts.h"
-      double precision xi, term1, APFfjj_hq
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision xi, term1, fjj_hq
       term1 = 1d0/(1d0 + 0.25d0*xi)
-      APFasympbar_t = 1d0/6d0/pi*(4d0/xi - 0.5d0*term1
-     1     - (1d0 + 2d0/xi + 0.25d0*term1)*APFfjj_hq(xi))
+      asympbar_t = 1d0/6d0/pi*(4d0/xi - 0.5d0*term1
+     1     - (1d0 + 2d0/xi + 0.25d0*term1)*fjj_hq(xi))
       return
       end
 c     equation (24) in PLB347 (1995) 143 - 151
-      double precision function APFfii_hq(xi)
+      double precision function fii_hq(xi)
       implicit none
-      include "../commons/consts.h"
-      double precision term1, term2, xi, APFdilog2
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision term1, term2, xi, dilog2
       term1 = dsqrt(xi)
       term2 = dsqrt(4d0 + xi)
-      APFfii_hq = 4d0/term1/term2*(-pi*pi/6d0 
+      fii_hq = 4d0/term1/term2*(-pi*pi/6d0 
      1      - 0.5d0*(dlog((term2 + term1)/(term2 - term1)))**2
      1      + (dlog(0.5d0*(1d0 - term1/term2)))**2 
-     1      + 2d0*APFdilog2(0.5d0*(1d0 - term1/term2)))
+     1      + 2d0*dilog2(0.5d0*(1d0 - term1/term2)))
       return
       end
 c     equation (23) in PLB347 (1995) 143 - 151
-      double precision function APFfjj_hq(xi)
+      double precision function fjj_hq(xi)
       implicit none
       double precision xi, term1, term2
       term1 = dsqrt(xi)
       term2 = dsqrt(4d0 + xi)
-      APFfjj_hq = 4d0/term1/term2*dlog((term2 + term1)/(term2 - term1))
+      fjj_hq = 4d0/term1/term2*dlog((term2 + term1)/(term2 - term1))
       return
       end
 
@@ -83,12 +105,16 @@ c     NPB392 (1993) 162 - 229.  For QCD take TR = 1d0/2d0, for QED take
 c     TR = 1d0 
 c     eta = (s - 4d0*m2)/4d0/m2, s is the gamma* gluon (gamma) CM Energy
 c     xi = Q^2/m2
-      double precision function APFctg(eta,xi)
+      double precision function ctg(eta,xi)
       implicit none
-      include "../commons/consts.h"
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi
-      APFctg = 0.5d0*pi*TR*(1d0 + eta + 0.25d0*xi)**(-3)*
+      ctg = 0.5d0*pi*TR*(1d0 + eta + 0.25d0*xi)**(-3)*
      1         (-2d0*((1d0 + eta - 0.25d0*xi)**2 + eta + 1d0)*
      1         dsqrt(eta/(1d0 + eta)) + (2d0*(1d0 + eta)**2 +
      1         0.125d0*xi**2 + 2d0*eta + 1d0)*
@@ -99,217 +125,280 @@ c     xi = Q^2/m2
 
 c     Longitudinal coefficient function, see above for additional comments
 c     Fig 6b of NPB392(1993) 162 - 229.
-      double precision function APFcllog(eta,xi)
+      double precision function cllog(eta,xi)
       implicit none
-      include "../commons/consts.h"
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi
-      APFcllog = 0.5d0*pi*TR*xi*(1d0 + eta + 0.25d0*xi)**(-3d0)*
+      cllog = 0.5d0*pi*TR*xi*(1d0 + eta + 0.25d0*xi)**(-3d0)*
      1     (2d0*dsqrt(eta*(1d0 + eta)) -
      1     dlog((dsqrt(1d0 + eta) + dsqrt(eta))/
      1     (dsqrt(1d0 + eta) - dsqrt(eta))))
       return
       end
 
-c      double precision function APFc2_1ga(y)
+c      double precision function c2_1ga(y)
 c      implicit none
 c      double precision y
-c      APFc2_1ga=2d0*((y**2+(1d0-y)**2)*log((1d0-y)/y)-1d0+8d0*y*(1d0-y))
+c      c2_1ga=2d0*((y**2+(1d0-y)**2)*log((1d0-y)/y)-1d0+8d0*y*(1d0-y))
 c      return 
 c      end
 cc-------------------
-c      double precision function APFc2_1qb(y)
+c      double precision function c2_1qb(y)
 c      implicit none
-c      include "../commons/ColorFactors.h"
+cC=======================================================================
+c      double precision pi
+c      parameter(pi=3.141592653589793d0)
+c      double precision TR,CF,CA
+c      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+cC=======================================================================
 c      double precision y
-c      APFc2_1qb=2d0*CF*((9d0+5d0*y)/4d0+(1d0+y**2)/(1d0-y)
+c      c2_1qb=2d0*CF*((9d0+5d0*y)/4d0+(1d0+y**2)/(1d0-y)
 c     1     *(log((1d0-y)/y)-0.75d0))
 c      return 
 c      end
 cc-------------------
-c      double precision function APFc2_1qc(xb)
+c      double precision function c2_1qc(xb)
 c      implicit none
-c      include "../commons/consts.h"
-c      include "../commons/ColorFactors.h"
+cC=======================================================================
+c      double precision pi
+c      parameter(pi=3.141592653589793d0)
+c      double precision TR,CF,CA
+c      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+cC=======================================================================
 c      double precision xb,dl
 c      dl=log(1-xb)
-c      APFc2_1qc=-2d0*CF*(-((2d0*dl-1d0)*xb**2+(4d0*dl-6d0)*xb
+c      c2_1qc=-2d0*CF*(-((2d0*dl-1d0)*xb**2+(4d0*dl-6d0)*xb
 c     1     +4d0*dl**2-6d0*dl)/4d0
 c     2     +((2d0*xb**2+4d0*xb)*log(xb)-xb**2-4d0*xb
-c     3     -8d0*APFdilog(sngl(1d0-xb)))/4d0+pi**2/3d0
+c     3     -8d0*dilog(sngl(1d0-xb)))/4d0+pi**2/3d0
 c     4     +3d0*(xb**2+2d0*xb+4d0*dl)/8d0+(5d0*xb**2+18d0*xb)/8d0)
 c      return 
 c      end
 c---------------------
-      double precision function APFd2nloq(eta,xi)
+      double precision function d2nloq(eta,xi)
       implicit none
       double precision eta,xi
-      double precision APFdlnloq,APFdtnloq
-      APFd2nloq=APFdlnloq(eta,xi)+APFdtnloq(eta,xi)
+      double precision dlnloq,dtnloq
+      d2nloq=dlnloq(eta,xi)+dtnloq(eta,xi)
       return
       end
 c---------------------
-      double precision function APFdtnloq(eta,xi)
+      double precision function dtnloq(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi,clq
-      call APFsclqt(eta,xi,clq)
-      APFdtnloq=CF*TR*clq
+      call sclqt(eta,xi,clq)
+      dtnloq=CF*TR*clq
       return
       end
 c---------------------
-      double precision function APFdlnloq(eta,xi)
+      double precision function dlnloq(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi,clq
-      call APFsclql(eta,xi,clq)
-      APFdlnloq=CF*TR*clq
+      call sclql(eta,xi,clq)
+      dlnloq=CF*TR*clq
       return
       end
 c---------------------
-      double precision function APFc2nlobarq(eta,xi)
+      double precision function c2nlobarq(eta,xi)
       implicit none
       double precision eta,xi
-      double precision APFclnlobarq,APFctnlobarq
-      APFc2nlobarq=APFclnlobarq(eta,xi)+APFctnlobarq(eta,xi)
+      double precision clnlobarq,ctnlobarq
+      c2nlobarq=clnlobarq(eta,xi)+ctnlobarq(eta,xi)
       return
       end
 c---------------------
-      double precision function APFclnlobarq(eta,xi)
+      double precision function clnlobarq(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
-      double precision eta,xi,beta,clq,APFasympbar_l
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision eta,xi,beta,clq,asympbar_l
       beta=sqrt(eta/(1+eta))
-      call APFsqlbar(eta,xi,clq)
-      APFclnlobarq=CF*TR*(clq + beta**3*APFasympbar_l(xi))
+      call sqlbar(eta,xi,clq)
+      clnlobarq=CF*TR*(clq + beta**3*asympbar_l(xi))
       return
       end
 c---------------------
-      double precision function APFctnlobarq(eta,xi)
+      double precision function ctnlobarq(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
-      double precision eta,xi,beta,ctq,APFasympbar_t
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision eta,xi,beta,ctq,asympbar_t
       beta=sqrt(eta/(1+eta))
-      call APFsqtbar(eta,xi,ctq)
-      APFctnlobarq=CF*TR*(ctq + beta**3*APFasympbar_t(xi))
+      call sqtbar(eta,xi,ctq)
+      ctnlobarq=CF*TR*(ctq + beta**3*asympbar_t(xi))
       return
       end
 c---------------------
-      double precision function APFc2nloq(eta,xi)
+      double precision function c2nloq(eta,xi)
       implicit none
-      double precision eta,xi,APFclnloq,APFctnloq
-      APFc2nloq=APFclnloq(eta,xi)+APFctnloq(eta,xi)
+      double precision eta,xi,clnloq,ctnloq
+      c2nloq=clnloq(eta,xi)+ctnloq(eta,xi)
       return
       end
 c---------------------
-      double precision function APFclnloq(eta,xi)
+      double precision function clnloq(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
-      double precision eta,xi,beta,clq,APFasymp_l
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision eta,xi,beta,clq,asymp_l
       beta=sqrt(eta/(1+eta))
-      call APFschql(eta,xi,clq)
-      APFclnloq=CF*TR*(clq + beta**3*APFasymp_l(xi))
+      call schql(eta,xi,clq)
+      clnloq=CF*TR*(clq + beta**3*asymp_l(xi))
       return
       end
 c---------------------
-      double precision function APFctnloq(eta,xi)
+      double precision function ctnloq(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
-      double precision eta,xi,beta,ctq,APFasymp_t
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
+      double precision eta,xi,beta,ctq,asymp_t
       beta=sqrt(eta/(1+eta))
-      call APFschqt(eta,xi,ctq)
-      APFctnloq=CF*TR*(ctq + beta**3*APFasymp_t(xi))
+      call schqt(eta,xi,ctq)
+      ctnloq=CF*TR*(ctq + beta**3*asymp_t(xi))
       return
       end
 c---------------------
-      double precision function APFc2log(eta,xi)
+      double precision function c2log(eta,xi)
       implicit none
-      double precision eta,xi,APFcllog,APFctg
-      APFc2log=APFcllog(eta,xi)+APFctg(eta,xi)
+      double precision eta,xi,cllog,ctg
+      c2log=cllog(eta,xi)+ctg(eta,xi)
       return
       end
 c---------------------
-      double precision function APFc2nlog(eta,xi)
+      double precision function c2nlog(eta,xi)
       implicit none
-      double precision eta,xi,APFclnlog,APFctnlog
-      APFc2nlog=APFclnlog(eta,xi)+APFctnlog(eta,xi)
+      double precision eta,xi,clnlog,ctnlog
+      c2nlog=clnlog(eta,xi)+ctnlog(eta,xi)
       return
       end
 c---------------------
-      double precision function APFc2nlobarg(eta,xi)
+      double precision function c2nlobarg(eta,xi)
       implicit none
-      double precision eta,xi,APFclnlobarg,APFctnlobarg
-      APFc2nlobarg=APFclnlobarg(eta,xi)+APFctnlobarg(eta,xi)
+      double precision eta,xi,clnlobarg,ctnlobarg
+      c2nlobarg=clnlobarg(eta,xi)+ctnlobarg(eta,xi)
       return
       end
 c---------------------
-      double precision function APFclnlog(eta,xi)
+      double precision function clnlog(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi,beta,rho,cla,clf
-      double precision APFasymp_l,APFthresha_l,APFthreshf_l
+      double precision asymp_l,thresha_l,threshf_l
 
       beta=sqrt(eta/(1d0+eta))
       rho=1d0/(1d0+eta)
 
-      call APFsclca(eta,xi,cla)
-      cla=CA*TR*(cla + beta*APFasymp_l(xi) + rho*APFthresha_l(eta,xi))
+      call sclca(eta,xi,cla)
+      cla=CA*TR*(cla + beta*asymp_l(xi) + rho*thresha_l(eta,xi))
 
-      call APFsclCF(eta,xi,clf)
-      clf=CF*TR*(clf + rho*APFthreshf_l(eta,xi))
+      call sclCF(eta,xi,clf)
+      clf=CF*TR*(clf + rho*threshf_l(eta,xi))
 
-      APFclnlog=cla+clf
+      clnlog=cla+clf
       return
       end
 c---------------------
-      double precision function APFctnlog(eta,xi)
+      double precision function ctnlog(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi,beta,rho,cta,ctf
-      double precision APFasymp_t,APFthresha_t,APFthreshf_t
+      double precision asymp_t,thresha_t,threshf_t
 
       beta=sqrt(eta/(1d0+eta))
       rho=1d0/(1d0+eta)
 
-      call APFsctca(eta,xi,cta)
-      cta=CA*TR*(cta + beta*APFasymp_t(xi) + rho*APFthresha_t(eta,xi))
+      call sctca(eta,xi,cta)
+      cta=CA*TR*(cta + beta*asymp_t(xi) + rho*thresha_t(eta,xi))
 
-      call APFsctCF(eta,xi,ctf)
-      ctf=CF*TR*(ctf + rho*APFthreshf_t(eta,xi))
+      call sctCF(eta,xi,ctf)
+      ctf=CF*TR*(ctf + rho*threshf_t(eta,xi))
 
-      APFctnlog=cta+ctf
+      ctnlog=cta+ctf
 
       return
       end
 c---------------------
-      double precision function APFclnlobarg(eta,xi)
+      double precision function clnlobarg(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi,beta,rho,cl
-      double precision APFasympbar_l,APFthreshbar_l
+      double precision asympbar_l,threshbar_l
 
       beta=sqrt(eta/(1d0+eta))
       rho=1d0/(1d0+eta)
 
-      call APFsclbar(eta,xi,cl)
-      APFclnlobarg=CA*TR*(cl+beta*APFasympbar_l(xi)
-     1     +rho*APFthreshbar_l(eta,xi))
+      call sclbar(eta,xi,cl)
+      clnlobarg=CA*TR*(cl+beta*asympbar_l(xi)
+     1     +rho*threshbar_l(eta,xi))
 
       return
       end
 c---------------------
-      double precision function APFctnlobarg(eta,xi)
+      double precision function ctnlobarg(eta,xi)
       implicit none
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta,xi,beta,rho,ct
-      double precision APFasympbar_t,APFthreshbar_t
+      double precision asympbar_t,threshbar_t
 
       beta=sqrt(eta/(1d0+eta))
       rho=1d0/(1d0+eta)
 
-      call APFsctbar(eta,xi,ct)
-      APFctnlobarg=CA*TR*(ct+beta*APFasympbar_t(xi)
-     1     +rho*APFthreshbar_t(eta,xi))
+      call sctbar(eta,xi,ct)
+      ctnlobarg=CA*TR*(ct+beta*asympbar_t(xi)
+     1     +rho*threshbar_t(eta,xi))
 
       return
       end
@@ -12178,7 +12267,12 @@ c system. xi = mq2/m2 (Q^2/m2)
 c Longitudinal CF group structure: equation (13) in PLB347 (1995) 143 - 151
       double precision function threshf_l(eta,xi)
       implicit none
-      include "../commons/consts.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi, beta, term1
       beta = dsqrt(eta/(1d0 + eta))
       term1 = 1d0/(1d0 + 0.25d0*xi)
@@ -12188,7 +12282,12 @@ c Longitudinal CF group structure: equation (13) in PLB347 (1995) 143 - 151
 c Transverse CF group structure: equation (14) in PLB347 (1995) 143 - 151
       double precision function threshf_t(eta,xi)
       implicit none
-      include "../commons/consts.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi, beta, term1
       beta = dsqrt(eta/(1d0 + eta))
       term1 = 1d0/(1d0 + 0.25d0*xi)
@@ -12198,7 +12297,12 @@ c Transverse CF group structure: equation (14) in PLB347 (1995) 143 - 151
 c Transverse CA group structure: equation (16) in PLB347 (1995) 143 - 151
       double precision function thresha_t(eta,xi)
       implicit none
-      include "../commons/consts.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi, beta, term1
       beta = dsqrt(eta/(1d0 + eta))
       term1 = 1d0/(1d0 + 0.25d0*xi)
@@ -12209,7 +12313,12 @@ c Transverse CA group structure: equation (16) in PLB347 (1995) 143 - 151
 c Longitudinal CA group structure: equation (15) in PLB347 (1995) 143 - 151
       double precision function thresha_l(eta,xi)
       implicit none
-      include "../commons/consts.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi, beta, term1
       beta = dsqrt(eta/(1d0 + eta))
       term1 = 1d0/(1d0 + 0.25d0*xi)
@@ -12222,7 +12331,12 @@ c Longitudinal CA group structure for the mass factorization piece:
 c equation (17) in PLB347 (1995) 143 - 151
       double precision function threshbar_l(eta,xi)
       implicit none
-      include "../commons/consts.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi, beta, term1
       beta = dsqrt(eta/(1d0 + eta))
       term1 = 1d0/(1d0 + 0.25d0*xi)
@@ -12234,7 +12348,12 @@ c Transverse CA group structure for the mass factorization piece:
 c equation (18) in PLB347 (1995) 143 - 151
       double precision function threshbar_t(eta,xi)
       implicit none
-      include "../commons/consts.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi, beta, term1
       beta = dsqrt(eta/(1d0 + eta))
       term1 = 1d0/(1d0 + 0.25d0*xi)
@@ -12250,8 +12369,12 @@ c eta = (s - 4d0*m2)/4d0/m2, s is the gamma* gluon (gamma) CM Energy
 c xi = Q^2/m2
       double precision function dborn_t(eta,xi)
       implicit none
-      include "../commons/consts.h"
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi
       double precision beta, Lbeta
       beta = dsqrt(eta/(1d0+eta));
@@ -12269,8 +12392,12 @@ c mass derivative of Longitudinal coefficient function,
 c see above for additional comments
       double precision function dborn_l(eta,xi)
       implicit none
-      include "../commons/consts.h"
-      include "../commons/ColorFactors.h"
+C=======================================================================
+      double precision pi
+      parameter(pi=3.141592653589793d0)
+      double precision TR,CF,CA
+      parameter(TR=0.5d0,CF=4d0/3d0,CA=3d0)
+C=======================================================================
       double precision eta, xi
       double precision beta, Lbeta
       beta = dsqrt(eta/(1d0+eta));

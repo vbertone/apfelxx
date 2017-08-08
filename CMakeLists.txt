@@ -13,7 +13,7 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
 endif()
 
 # the project name
-project(apfel)
+project(apfel CXX Fortran)
 
 # activating some global properties for the project
 set(apfel_VERSION 4.0.0)
