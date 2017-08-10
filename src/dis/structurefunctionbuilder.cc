@@ -11,6 +11,8 @@
 #include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/zeromasscoefficientfunctions.h"
+#include "apfel/massivecoefficientfunctions.h"
+#include "apfel/tabulateobject.h"
 
 #include <map>
 
@@ -19,14 +21,104 @@ using namespace std;
 namespace apfel {
 
   //_____________________________________________________________________________
+  function<StructureFunctionObjects(double const&)> InitializeF2NCObjectsMassive(Grid           const& g,
+										 vector<double> const& Masses,
+										 double         const& IntEps,
+										 int            const& neta,
+										 double         const& etamin,
+										 double         const& etamax,
+										 int            const& intdeg,
+										 double         const& lambda)
+  {
+    cout << "Initializing StructureFunctionObjects for F2 NC Massive... ";
+    Timer t;
+    t.start();
+
+    // ===============================================================
+    // Massive coefficient functions
+    // NLO
+    const TabulateObject<Operator> TabO21g{[=,&g] (double const& teta) -> Operator{ return Operator{g, Cm21gNC{teta}}; }, neta, etamin, etamax, intdeg, {}, lambda};
+
+    // NNLO
+    const TabulateObject<Operator> TabO22ns{[=,&g] (double const& teta) -> Operator{ return Operator{g, Cm22nsNC{teta}}; }, neta, etamin, etamax, intdeg, {}, lambda};
+    const auto fO22ps = [=,&g] (double const& teta) -> Operator
+      {
+	const Operator O22psc{g, Cm22psNC{teta}};
+	const Operator O22psl{g, Cm22barpsNC{teta}};
+	const double xi = 4 * teta / ( 1 - teta );
+	return O22psc + log(xi) * O22psl;
+      };
+    const TabulateObject<Operator> TabO22ps{fO22ps, neta, etamin, etamax, intdeg, {}, lambda};
+    const auto fO22g = [=,&g] (double const& teta) -> Operator
+      {
+	const Operator O22gc{g, Cm22gNC{teta}};
+	const Operator O22gl{g, Cm22bargNC{teta}};
+	const double xi = 4 * teta / ( 1 - teta );
+	return O22gc + log(xi) * O22gl;
+      };
+    const TabulateObject<Operator> TabO22g{fO22g, neta, etamin, etamax, intdeg, {}, lambda};
+
+    // Zero-mass coefficient functions have to be initialized anyway.
+    StructureFunctionObjects FObjZM = InitializeF2NCObjectsZM(g,IntEps);
+
+    // Null set of operators for for each component as an utility.
+    const Operator Zero{g, Null{}, IntEps};
+    map<int,Operator> None;
+    None.insert({CNS, Zero});
+    None.insert({CS,  Zero});
+    None.insert({CG,  Zero});
+    map<int,Set<Operator>> Not;
+    for (auto it = FObjZM.ConvBasis.begin(); it != FObjZM.ConvBasis.end(); ++it)
+      Not.insert({it->first,Set<Operator>{it->second, None}});
+
+    // Size of the mass vector
+    const int nm = Masses.size();
+
+    // Define object of the structure containing the DglapObjects
+    auto F2Obj = [=] (double const&) -> StructureFunctionObjects
+      {
+	StructureFunctionObjects FObj = FObjZM;
+	//FObj.skip         = FObjZM.skip;
+	//FObj.ConvBasis    = FObjZM.ConvBasis;
+	//FObj.ConvBasisTot = FObjZM.ConvBasisTot;
+	//FObj.C2           = FObjZM.C2;
+	for (int k = 1; k <= 6; k++)
+	  {
+	    // Now include the massive bits whenever needed, that is
+	    // when there is a corresponding entry in the mass vector
+	    // and if the respective value is biggere than zero.
+	    if (k <= nm && Masses[k-1] > 0)
+	      {
+		// Compute value of eta.
+		//const double Q2  = Q * Q;
+		//const double M2  = Masses[k-1] * Masses[k-1];
+		//const double eta = Q2 / ( Q2 + 4 * M2 );
+
+		// Set LO non-singlet and singlet coefficient
+		// functions to zero (gluon is already zero).
+		//FObj.C0.insert({k,Not.at(k)});
+		//FObj.C1.insert({k,Not.at(k)});
+	      }
+	    else
+	      {
+		//FObj.C0.insert({k,FObjZM.C0.at(k)});
+		//FObj.C1.insert({k,FObjZM.C1.at(k)});
+	      }
+	  }
+
+	return FObj;
+      };
+    t.stop();
+
+    return F2Obj;
+  }
+
+  //_____________________________________________________________________________
   StructureFunctionObjects InitializeF2NCObjectsZM(Grid const& g, double const& IntEps)
   {
     cout << "Initializing StructureFunctionObjects for F2 NC Zero Mass... ";
     Timer t;
     t.start();
-
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects F2Obj;
 
     // Set initial and final number of active flavours. Precompute
     // objects for all numbers of flavours because it cheap enough.
@@ -37,7 +129,6 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
-    // Coefficient functions for F2.
     // LO
     map<int,Operator> C2LO;
     C2LO.insert({CNS, Id});
@@ -67,7 +158,8 @@ namespace apfel {
 	C2NNLO.insert({nf,C2NNLOnf});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F2Obj;
     F2Obj.skip = {2,4,6,8,10,12};
     for (int k = nfi; k <= nff; k++)
       {
@@ -92,9 +184,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects FLObj;
-
     // Set initial and final number of active flavours. Precompute
     // objects for all numbers of flavours because it cheap enough.
     int nfi = 1;
@@ -103,7 +192,6 @@ namespace apfel {
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
 
-    // Coefficient functions for FL.
     // LO
     map<int,Operator> CLLO;
     CLLO.insert({CNS, Zero});
@@ -133,7 +221,8 @@ namespace apfel {
 	CLNNLO.insert({nf,CLNNLOnf});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects FLObj;
     FLObj.skip = {2,4,6,8,10,12};
     for (int k = nfi; k <= nff; k++)
       {
@@ -158,9 +247,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects F3Obj;
-
     // Set initial and final number of active flavours. Precompute
     // objects for all numbers of flavours because it cheap enough.
     int nfi = 1;
@@ -170,7 +256,6 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
-    // Coefficient functions for F3.
     // LO
     map<int,Operator> C3LO;
     C3LO.insert({CNS, Id});
@@ -197,7 +282,8 @@ namespace apfel {
 	C3NNLO.insert({nf,C3NNLOnf});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F3Obj;
     F3Obj.skip = {1,3,5,7,9,11};
     for (int k = nfi; k <= nff; k++)
       {
@@ -222,9 +308,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects F2Obj;
-
     // Set initial and final number of active channels.
     int chi = 1;
     int chf = 9;
@@ -233,7 +316,6 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
-    // Coefficient functions for F2.
     // LO
     map<int,Operator> C2LO;
     C2LO.insert({CNS, Id});
@@ -263,7 +345,8 @@ namespace apfel {
 	C2NNLO.insert({ch,C2NNLOch});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F2Obj;
     F2Obj.skip = {2,4,6,8,10,12};
     for (int k = 1; k <= 6; k++)
       {
@@ -288,9 +371,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects F2Obj;
-
     // Set initial and final number of active channels.
     int chi = 1;
     int chf = 9;
@@ -299,7 +379,6 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
-    // Coefficient functions for F2.
     // LO
     map<int,Operator> C2LO;
     C2LO.insert({CNS, Id});
@@ -325,7 +404,8 @@ namespace apfel {
 	C2NNLO.insert({ch,C2NNLOch});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F2Obj;
     F2Obj.skip = {0,1,2,3,5,7,9,11};
     for (int k = 1; k <= 6; k++)
       {
@@ -350,9 +430,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects FLObj;
-
     // Set initial and final number of active channels.
     int chi = 1;
     int chf = 9;
@@ -360,7 +437,6 @@ namespace apfel {
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
 
-    // Coefficient functions for FL.
     // LO
     map<int,Operator> CLLO;
     CLLO.insert({CNS, Zero});
@@ -390,7 +466,8 @@ namespace apfel {
 	CLNNLO.insert({ch,CLNNLOch});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects FLObj;
     FLObj.skip = {2,4,6,8,10,12};
     for (int k = 1; k <= 6; k++)
       {
@@ -415,9 +492,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects FLObj;
-
     // Set initial and final number of active channels.
     int chi = 1;
     int chf = 9;
@@ -425,7 +499,6 @@ namespace apfel {
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
 
-    // Coefficient functions for FL.
     // LO
     map<int,Operator> CLLO;
     CLLO.insert({CNS, Zero});
@@ -451,7 +524,8 @@ namespace apfel {
 	CLNNLO.insert({ch,CLNNLOch});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects FLObj;
     FLObj.skip = {0,1,2,3,5,7,9,11};
     for (int k = 1; k <= 6; k++)
       {
@@ -476,9 +550,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects F3Obj;
-
     // Set initial and final number of active channels.
     int chi = 1;
     int chf = 9;
@@ -487,7 +558,6 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
-    // Coefficient functions for F3.
     // LO
     map<int,Operator> C3LO;
     C3LO.insert({CNS, Id});
@@ -514,7 +584,8 @@ namespace apfel {
 	C3NNLO.insert({ch,C3NNLOch});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F3Obj;
     F3Obj.skip = {0,1,2,4,6,8,10,12};
     for (int k = 1; k <= 6; k++)
       {
@@ -539,9 +610,6 @@ namespace apfel {
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    StructureFunctionObjects F3Obj;
-
     // Set initial and final number of active channels.
     int chi = 1;
     int chf = 9;
@@ -550,7 +618,6 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
-    // Coefficient functions for F3.
     // LO
     map<int,Operator> C3LO;
     C3LO.insert({CNS, Id});
@@ -576,7 +643,8 @@ namespace apfel {
 	C3NNLO.insert({ch,C3NNLOch});
       }
 
-    // Allocate set of operators.
+    // Define object of the structure containing the DglapObjects
+    StructureFunctionObjects F3Obj;
     F3Obj.skip = {0,1,3,5,7,9,11};
     for (int k = 1; k <= 6; k++)
       {

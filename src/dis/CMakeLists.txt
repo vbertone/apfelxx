@@ -1,5 +1,7 @@
 set(dis_source
   structurefunctionbuilder.cc
+  zeromasscoefficientfunctions.cc
+  massivecoefficientfunctions.cc
   hqcoef.f
   )
 

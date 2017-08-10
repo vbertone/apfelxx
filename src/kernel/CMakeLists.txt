@@ -18,6 +18,7 @@ set(kernel_source
   observable.cc
   doubleobject.cc
   rotations.cc
+  specialfunctions.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})

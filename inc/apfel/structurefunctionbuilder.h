@@ -36,6 +36,26 @@ namespace apfel
   };
 
   /**
+   * @brief The InitializeF2NCObjectsMassive, precompute the
+   * perturbative coefficients of coefficient functions as functions
+   * of eta(Q) for the massive NC structure function F2 and store them
+   * in a function of eta that returns a 'StructureFunctionObjects'
+   * structure.
+   *
+   * @param g the grid
+   * @param IntEps the integration accuracy
+   * @return
+   */
+  function<StructureFunctionObjects(double const&)> InitializeF2NCObjectsMassive(Grid           const& g,
+										 vector<double> const& Masses,
+										 double         const& IntEps  = 1e-5,
+										 int            const& neta    = 100,
+										 double         const& etamin  = 0.03,
+										 double         const& etamax  = 0.9999,
+										 int            const& intde   = 3,
+										 double         const& lambda  = 0.01);
+
+  /**
    * @brief The InitializeF2ObjectsZM, precompute the perturbative
    * coefficients of coefficient functions for NC F2 and store them in
    * the 'StructureFunctionObjects' structure.
