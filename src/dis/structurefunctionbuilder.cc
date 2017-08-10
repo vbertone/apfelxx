@@ -24,39 +24,47 @@ namespace apfel {
   function<StructureFunctionObjects(double const&)> InitializeF2NCObjectsMassive(Grid           const& g,
 										 vector<double> const& Masses,
 										 double         const& IntEps,
-										 int            const& neta,
-										 double         const& etamin,
-										 double         const& etamax,
+										 int            const& nxi,
+										 double         const& ximin,
+										 double         const& ximax,
 										 int            const& intdeg,
 										 double         const& lambda)
   {
-    cout << "Initializing StructureFunctionObjects for F2 NC Massive... ";
+    cout << "Initializing StructureFunctionObjects for F2 NC Massive... \n";
     Timer t;
     t.start();
 
     // ===============================================================
     // Massive coefficient functions
     // NLO
-    const TabulateObject<Operator> TabO21g{[=,&g] (double const& teta) -> Operator{ return Operator{g, Cm21gNC{teta}}; }, neta, etamin, etamax, intdeg, {}, lambda};
+    const TabulateObject<Operator> TabO21g{[=,&g] (double const& xi) -> Operator
+	{
+	  const double teta = 1 / ( 1 + 4 / xi );
+	  return Operator{g, Cm21gNC{teta}};
+	}, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // NNLO
-    const TabulateObject<Operator> TabO22ns{[=,&g] (double const& teta) -> Operator{ return Operator{g, Cm22nsNC{teta}}; }, neta, etamin, etamax, intdeg, {}, lambda};
-    const auto fO22s = [=,&g] (double const& teta) -> Operator
+    const TabulateObject<Operator> TabO22ns{[=,&g] (double const& xi) -> Operator
+	{
+	  const double teta = 1 / ( 1 + 4 / xi );
+	  return Operator{g, Cm22nsNC{teta}};
+	}, nxi, ximin, ximax, intdeg, {}, lambda};
+    const auto fO22s = [=,&g] (double const& xi) -> Operator
       {
+	const double teta = 1 / ( 1 + 4 / xi );
 	const Operator O22psc{g, Cm22psNC{teta}};
 	const Operator O22psl{g, Cm22barpsNC{teta}};
-	const double xi = 4 * teta / ( 1 - teta );
 	return 6 * ( O22psc + log(xi) * O22psl );
       };
-    const TabulateObject<Operator> TabO22s{fO22s, neta, etamin, etamax, intdeg, {}, lambda};
-    const auto fO22g = [=,&g] (double const& teta) -> Operator
+    const TabulateObject<Operator> TabO22s{fO22s, nxi, ximin, ximax, intdeg, {}, lambda};
+    const auto fO22g = [=,&g] (double const& xi) -> Operator
       {
+	const double teta = 1 / ( 1 + 4 / xi );
 	const Operator O22gc{g, Cm22gNC{teta}};
 	const Operator O22gl{g, Cm22bargNC{teta}};
-	const double xi = 4 * teta / ( 1 - teta );
 	return O22gc + log(xi) * O22gl;
       };
-    const TabulateObject<Operator> TabO22g{fO22g, neta, etamin, etamax, intdeg, {}, lambda};
+    const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Zero-mass coefficient functions have to be initialized anyway.
     StructureFunctionObjects FObjZM = InitializeF2NCObjectsZM(g,IntEps);
@@ -90,9 +98,9 @@ namespace apfel {
 	    // and if the respective value is biggere than zero.
 	    if (k <= nm && Masses[k-1] > 0)
 	      {
-		// Compute value of eta.
-		const double M2  = Masses[k-1] * Masses[k-1];
-		const double eta = Q2 / ( Q2 + 4 * M2 );
+		// Compute value of xi.
+		const double M2 = Masses[k-1] * Masses[k-1];
+		const double xi = Q2 / M2;
 
 		// Set LO non-singlet and singlet coefficient
 		// functions to zero (gluon is already zero).
@@ -102,7 +110,7 @@ namespace apfel {
 		map<int,Operator> NLO;
 		NLO.insert({CNS, Zero});
 		NLO.insert({CS,  Zero});
-		NLO.insert({CG,  TabO21g.Evaluate(eta)});
+		NLO.insert({CG,  TabO21g.Evaluate(xi)});
 		FObj.C1.insert({k,Set<Operator>{it->second,NLO}});
 
 		// Now insert NNLO
@@ -111,8 +119,8 @@ namespace apfel {
 		  {
 		    map<int,Operator> mNNLO;
 		    mNNLO.insert({CNS, Zero});
-		    mNNLO.insert({CS,  TabO22s.Evaluate(eta)});
-		    mNNLO.insert({CG,  TabO22g.Evaluate(eta)});
+		    mNNLO.insert({CS,  TabO22s.Evaluate(xi)});
+		    mNNLO.insert({CG,  TabO22g.Evaluate(xi)});
 		    NNLO.insert({inf->first,Set<Operator>{it->second, mNNLO}});
 		  }
 		FObj.C2.insert({k,NNLO});
