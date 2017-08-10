@@ -8,6 +8,7 @@
 #include "apfel/massivecoefficientfunctions.h"
 #include "apfel/tools.h"
 #include "apfel/specialfunctions.h"
+#include "apfel/integrator.h"
 
 #include <cmath>
 
@@ -69,6 +70,10 @@ namespace apfel
   Cm22nsNC::Cm22nsNC(double const& eta):
     Expression(eta)
   {
+    // Compute integral needed to enforce the Adler sum rule. See
+    // eqs. (71) and (97) of https://arxiv.org/pdf/1001.2312.pdf.
+    const Integrator Integrand{[&] (double const& y)->double{ return Regular(y); }};
+    _adler = - Integrand.integrate(0,1,eps5);
   }
   double Cm22nsNC::Regular(double const& x) const
   {
@@ -109,6 +114,10 @@ namespace apfel
 				      + ( - 272. / 27 - 1244. / 27 * z + 718. / 27 / omz
 					  + qr * ( - 3424. / 27 + 15608. / 27 * z - 4304. / 9 * z2 + 20. / 27 / omz ) ) * sq1 );
     return cm22ns;
+  }
+  double Cm22nsNC::Local(double const&) const
+  {
+    return _adler;
   }
 
   //_________________________________________________________________________________

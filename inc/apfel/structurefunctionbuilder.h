@@ -50,7 +50,7 @@ namespace apfel
 										 vector<double> const& Masses,
 										 double         const& IntEps  = 1e-5,
 										 int            const& neta    = 100,
-										 double         const& etamin  = 0.03,
+										 double         const& etamin  = 0.02,
 										 double         const& etamax  = 0.9999,
 										 int            const& intde   = 3,
 										 double         const& lambda  = 0.01);

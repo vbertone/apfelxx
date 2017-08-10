@@ -72,6 +72,9 @@ namespace apfel
   public:
     Cm22nsNC(double const& eta);
     double Regular(double const& x) const;
+    double Local(double const&)     const;
+  private:
+    double _adler;
   };
 
   /**

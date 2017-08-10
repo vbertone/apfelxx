@@ -41,14 +41,14 @@ namespace apfel {
 
     // NNLO
     const TabulateObject<Operator> TabO22ns{[=,&g] (double const& teta) -> Operator{ return Operator{g, Cm22nsNC{teta}}; }, neta, etamin, etamax, intdeg, {}, lambda};
-    const auto fO22ps = [=,&g] (double const& teta) -> Operator
+    const auto fO22s = [=,&g] (double const& teta) -> Operator
       {
 	const Operator O22psc{g, Cm22psNC{teta}};
 	const Operator O22psl{g, Cm22barpsNC{teta}};
 	const double xi = 4 * teta / ( 1 - teta );
-	return O22psc + log(xi) * O22psl;
+	return 6 * ( O22psc + log(xi) * O22psl );
       };
-    const TabulateObject<Operator> TabO22ps{fO22ps, neta, etamin, etamax, intdeg, {}, lambda};
+    const TabulateObject<Operator> TabO22s{fO22s, neta, etamin, etamax, intdeg, {}, lambda};
     const auto fO22g = [=,&g] (double const& teta) -> Operator
       {
 	const Operator O22gc{g, Cm22gNC{teta}};
@@ -61,7 +61,7 @@ namespace apfel {
     // Zero-mass coefficient functions have to be initialized anyway.
     StructureFunctionObjects FObjZM = InitializeF2NCObjectsZM(g,IntEps);
 
-    // Null set of operators for for each component as an utility.
+    // Null set of operators for each component as an utility.
     const Operator Zero{g, Null{}, IntEps};
     map<int,Operator> None;
     None.insert({CNS, Zero});
@@ -75,37 +75,55 @@ namespace apfel {
     const int nm = Masses.size();
 
     // Define object of the structure containing the DglapObjects
-    auto F2Obj = [=] (double const&) -> StructureFunctionObjects
+    auto F2Obj = [=] (double const& Q) -> StructureFunctionObjects
       {
-	StructureFunctionObjects FObj = FObjZM;
-	//FObj.skip         = FObjZM.skip;
-	//FObj.ConvBasis    = FObjZM.ConvBasis;
-	//FObj.ConvBasisTot = FObjZM.ConvBasisTot;
-	//FObj.C2           = FObjZM.C2;
-	for (int k = 1; k <= 6; k++)
+	const double Q2  = Q * Q;
+	StructureFunctionObjects FObj;
+	FObj.skip         = FObjZM.skip;
+	FObj.ConvBasis    = FObjZM.ConvBasis;
+	FObj.ConvBasisTot = FObjZM.ConvBasisTot;
+	for (auto it = FObjZM.ConvBasis.begin(); it != FObjZM.ConvBasis.end(); ++it)
 	  {
+	    const int k = it->first;
 	    // Now include the massive bits whenever needed, that is
 	    // when there is a corresponding entry in the mass vector
 	    // and if the respective value is biggere than zero.
 	    if (k <= nm && Masses[k-1] > 0)
 	      {
 		// Compute value of eta.
-		//const double Q2  = Q * Q;
-		//const double M2  = Masses[k-1] * Masses[k-1];
-		//const double eta = Q2 / ( Q2 + 4 * M2 );
+		const double M2  = Masses[k-1] * Masses[k-1];
+		const double eta = Q2 / ( Q2 + 4 * M2 );
 
 		// Set LO non-singlet and singlet coefficient
 		// functions to zero (gluon is already zero).
-		//FObj.C0.insert({k,Not.at(k)});
-		//FObj.C1.insert({k,Not.at(k)});
+		FObj.C0.insert({k,Not.at(k)});
+
+		// Now insert NLO
+		map<int,Operator> NLO;
+		NLO.insert({CNS, Zero});
+		NLO.insert({CS,  Zero});
+		NLO.insert({CG,  TabO21g.Evaluate(eta)});
+		FObj.C1.insert({k,Set<Operator>{it->second,NLO}});
+
+		// Now insert NNLO
+		map<int,Set<Operator>> NNLO;
+		for (auto inf = FObjZM.ConvBasis.begin(); inf != FObjZM.ConvBasis.end(); ++inf)
+		  {
+		    map<int,Operator> mNNLO;
+		    mNNLO.insert({CNS, Zero});
+		    mNNLO.insert({CS,  TabO22s.Evaluate(eta)});
+		    mNNLO.insert({CG,  TabO22g.Evaluate(eta)});
+		    NNLO.insert({inf->first,Set<Operator>{it->second, mNNLO}});
+		  }
+		FObj.C2.insert({k,NNLO});
 	      }
 	    else
 	      {
-		//FObj.C0.insert({k,FObjZM.C0.at(k)});
-		//FObj.C1.insert({k,FObjZM.C1.at(k)});
+		FObj.C0.insert({k,FObjZM.C0.at(k)});
+		FObj.C1.insert({k,FObjZM.C1.at(k)});
+		FObj.C2.insert({k,FObjZM.C2.at(k)});
 	      }
 	  }
-
 	return FObj;
       };
     t.stop();
