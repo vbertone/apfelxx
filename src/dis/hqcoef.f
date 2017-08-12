@@ -8,9 +8,8 @@
 *
 ************************************************************************
 c     These are the functions that give the asymptotic dependence of the
-c     coefficient functions with the appropriate factors.
-c     xi = mq2/m2 (Q^2/m2)
-c     Longitudinal: equation (19) in PLB347 (1995) 143 - 151
+c     coefficient functions with the appropriate factors. xi = mq2/m2
+c     (Q^2/m2) Longitudinal: equation (19) in PLB347 (1995) 143 - 151
       double precision function asymp_l(xi)
       implicit none
 C=======================================================================

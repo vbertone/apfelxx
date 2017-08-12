@@ -35,6 +35,16 @@ namespace apfel
     function<ConvolutionMap(vector<double> const&)> ConvBasisTot;
   };
 
+  struct StructureFunctionObjectsNew
+  {
+    vector<int>             skip;
+    map<int,Set<Operator>>  C0;
+    map<int,Set<Operator>>  C1;
+    map<int,Set<Operator>>  C2;
+    map<int,ConvolutionMap> ConvBasis;
+    ConvolutionMap          ConvBasisTot;
+  };
+
   /**
    * @brief The InitializeF2NCObjectsMassive, precompute the
    * perturbative coefficients of coefficient functions as functions
@@ -54,6 +64,15 @@ namespace apfel
 										 double         const& ximax  = 100000,
 										 int            const& intdeg = 3,
 										 double         const& lambda = 0.0005);
+
+  function<StructureFunctionObjects(double const&)> InitializeF2NCObjectsMassiveZero(Grid           const& g,
+										     vector<double> const& Masses,
+										     double         const& IntEps = 1e-5,
+										     int            const& nxi    = 150,
+										     double         const& ximin  = 0.001,
+										     double         const& ximax  = 100000,
+										     int            const& intdeg = 3,
+										     double         const& lambda = 0.0005);
 
   /**
    * @brief The InitializeF2ObjectsZM, precompute the perturbative

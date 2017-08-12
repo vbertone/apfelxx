@@ -12,14 +12,12 @@
 #include "apfel/timer.h"
 #include "apfel/zeromasscoefficientfunctions.h"
 #include "apfel/massivecoefficientfunctions.h"
+#include "apfel/massivezerocoefficientfunctions.h"
 #include "apfel/tabulateobject.h"
-
-#include <map>
 
 using namespace std;
 
 namespace apfel {
-
   //_____________________________________________________________________________
   function<StructureFunctionObjects(double const&)> InitializeF2NCObjectsMassive(Grid           const& g,
 										 vector<double> const& Masses,
@@ -138,6 +136,164 @@ namespace apfel {
 
     return F2Obj;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //_____________________________________________________________________________
+  function<StructureFunctionObjects(double const&)> InitializeF2NCObjectsMassiveZero(Grid           const& g,
+										     vector<double> const& Masses,
+										     double         const& IntEps,
+										     int            const& nxi,
+										     double         const& ximin,
+										     double         const& ximax,
+										     int            const& intdeg,
+										     double         const& lambda)
+  {
+    cout << "Initializing StructureFunctionObjects for F2 NC Massive Zero... \n";
+    Timer t;
+    t.start();
+
+    // ===============================================================
+    // Initialize massive zero coefficient functions
+    const Operator Om021gc  {g, Cm021gNC_c{},   IntEps};
+    const Operator Om021gl  {g, Cm021gNC_l{},   IntEps};
+    const Operator Om022nsc {g, Cm022nsNC_c{},  IntEps};
+    const Operator Om022nsl {g, Cm022nsNC_l{},  IntEps};
+    const Operator Om022nsl2{g, Cm022nsNC_l2{}, IntEps};
+    const Operator Om022psc {g, Cm022psNC_c{},  IntEps};
+    const Operator Om022psl {g, Cm022psNC_l{},  IntEps};
+    const Operator Om022psl2{g, Cm022psNC_l2{}, IntEps};
+    const Operator Om022psf {g, Cm022psNC_f{},  IntEps};
+    const Operator Om022pslf{g, Cm022psNC_lf{}, IntEps};
+    const Operator Om022gc  {g, Cm022gNC_c{},   IntEps};
+    const Operator Om022gl  {g, Cm022gNC_l{},   IntEps};
+    const Operator Om022gl2 {g, Cm022gNC_l2{},  IntEps};
+    const Operator Om022gf  {g, Cm022gNC_f{},   IntEps};
+    const Operator Om022glf {g, Cm022gNC_lf{},  IntEps};
+    // NLO
+    const TabulateObject<Operator> TabO21g{[=,&g] (double const& xi) -> Operator
+	{
+	  const double lxi = log(xi);
+	  return Om021gc + lxi * Om021gl;;
+	}, nxi, ximin, ximax, intdeg, {}, lambda};
+
+    // NNLO
+    const TabulateObject<Operator> TabO22ns{[=,&g] (double const& xi) -> Operator
+	{
+	  const double lxi  = log(xi);
+	  const double lxi2 = lxi * lxi;
+	  return Om022nsc + lxi * Om022nsl + lxi2 * Om022nsl2;
+	}, nxi, ximin, ximax, intdeg, {}, lambda};
+    const auto fO22s = [=,&g] (double const& xi) -> Operator
+      {
+	const double lxi  = log(xi);
+	const double lxi2 = lxi * lxi;
+	const double lxiF = - lxi;
+	return 6 * ( Om022psc + lxi * Om022psl + lxi2 * Om022psl2 + lxiF * Om022psf + lxi * lxiF * Om022pslf );
+      };
+    const TabulateObject<Operator> TabO22s{fO22s, nxi, ximin, ximax, intdeg, {}, lambda};
+    const auto fO22g = [=,&g] (double const& xi) -> Operator
+      {
+	const double lxi  = log(xi);
+	const double lxi2 = lxi * lxi;
+	const double lxiF = - lxi;
+	return Om022gc  + lxi * Om022gl  + lxi2 * Om022gl2  + lxiF * Om022gf  + lxi * lxiF * Om022glf;
+      };
+    const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
+
+    // Zero-mass coefficient functions have to be initialized anyway.
+    StructureFunctionObjects FObjZM = InitializeF2NCObjectsZM(g,IntEps);
+
+    // Null set of operators for each component as an utility.
+    const Operator Zero{g, Null{}, IntEps};
+    map<int,Operator> None;
+    None.insert({CNS, Zero});
+    None.insert({CS,  Zero});
+    None.insert({CG,  Zero});
+    map<int,Set<Operator>> Not;
+    for (auto it = FObjZM.ConvBasis.begin(); it != FObjZM.ConvBasis.end(); ++it)
+      Not.insert({it->first,Set<Operator>{it->second, None}});
+
+    // Size of the mass vector
+    const int nm = Masses.size();
+
+    // Define object of the structure containing the DglapObjects
+    auto F2Obj = [=] (double const& Q) -> StructureFunctionObjects
+      {
+	const double Q2  = Q * Q;
+	StructureFunctionObjects FObj;
+	FObj.skip         = FObjZM.skip;
+	FObj.ConvBasis    = FObjZM.ConvBasis;
+	FObj.ConvBasisTot = FObjZM.ConvBasisTot;
+	for (auto it = FObjZM.ConvBasis.begin(); it != FObjZM.ConvBasis.end(); ++it)
+	  {
+	    const int k = it->first;
+	    // Now include the massive bits whenever needed, that is
+	    // when there is a corresponding entry in the mass vector
+	    // and if the respective value is biggere than zero.
+	    if (k <= nm && Masses[k-1] > 0)
+	      {
+		// Compute value of xi.
+		const double M2 = Masses[k-1] * Masses[k-1];
+		const double xi = Q2 / M2;
+
+		// Set LO non-singlet and singlet coefficient
+		// functions to zero (gluon is already zero).
+		FObj.C0.insert({k,Not.at(k)});
+
+		// Now insert NLO
+		map<int,Operator> NLO;
+		NLO.insert({CNS, Zero});
+		NLO.insert({CS,  Zero});
+		NLO.insert({CG,  TabO21g.Evaluate(xi)});
+		FObj.C1.insert({k,Set<Operator>{it->second,NLO}});
+
+		// Now insert NNLO
+		map<int,Set<Operator>> NNLO;
+		for (auto inf = FObjZM.ConvBasis.begin(); inf != FObjZM.ConvBasis.end(); ++inf)
+		  {
+		    map<int,Operator> mNNLO;
+		    mNNLO.insert({CNS, Zero});
+		    mNNLO.insert({CS,  TabO22s.Evaluate(xi)});
+		    mNNLO.insert({CG,  TabO22g.Evaluate(xi)});
+		    NNLO.insert({inf->first,Set<Operator>{it->second, mNNLO}});
+		  }
+		FObj.C2.insert({k,NNLO});
+	      }
+	    else
+	      {
+		FObj.C0.insert({k,FObjZM.C0.at(k)});
+		FObj.C1.insert({k,FObjZM.C1.at(k)});
+		FObj.C2.insert({k,FObjZM.C2.at(k)});
+	      }
+	  }
+	return FObj;
+      };
+    t.stop();
+
+    return F2Obj;
+  }
+
+
+
+
+
+
+
+
 
   //_____________________________________________________________________________
   StructureFunctionObjects InitializeF2NCObjectsZM(Grid const& g, double const& IntEps)
