@@ -323,7 +323,6 @@ namespace apfel
     const double dlm3   = dlm2 * dlm;
     const double dlp    = log(1+x);
     const double dlp2   = dlp * dlp;
-    const double s11    = wgplg(1,1,1-x);
     const double s121mx = wgplg(1,2,1-x);
     const double s12mx  = wgplg(1,2,-x);
     const double s211mx = wgplg(2,1,1-x);
@@ -333,7 +332,7 @@ namespace apfel
     const double z      = ( 1 - x ) / ( 1 + x );
     const double s21z   = wgplg(2,1,z);
     const double s21mz  = wgplg(2,1,-z);
-    const double a31 = dlx3 * ( 16. / 3 + 16 * x ) + 
+    const double a31 = dlx3 * ( 16. / 3 + 16 * x ) +
       dlx2 * dlm * ( - 8 + 16 * x2 - 64 * x ) + 
       dlx2 * dlp * ( 12 + 32 * x2 + 24 * x ) + 
       dlx2 * ( - 114 * x2 + 184 * x ) + 
