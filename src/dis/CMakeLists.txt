@@ -3,6 +3,7 @@ set(dis_source
   zeromasscoefficientfunctions.cc
   massivecoefficientfunctions.cc
   hqcoef.f
+  massivezerocoefficientfunctions.cc
   )
 
 add_library(dis OBJECT ${dis_source})

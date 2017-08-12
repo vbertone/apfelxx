@@ -38,7 +38,7 @@ namespace apfel
   }
   double P0qg::Regular(double const& x) const
   {
-    return 2 * ( 1 - 2 * x + 2 * x * x );
+    return 4 * TR * ( 1 - 2 * x + 2 * x * x );
   }
 
   //_________________________________________________________________________________

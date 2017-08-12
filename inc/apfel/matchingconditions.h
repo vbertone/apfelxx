@@ -12,9 +12,11 @@
 namespace apfel
 {
   /**
-   * @notes Expressions taken from https://arxiv.org/pdf/hep-ph/9612398.pdf.
-   * @notes To note that in these expressions ln(m2/mu2) appears while we need ln(mu2/m2),
-   * @notes so we need to include a sign minus in front of every term linear in this log.
+   * @notes Expressions taken from:
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf. Note that in these
+   * expressions ln(m2/mu2) appears while we need ln(mu2/m2), so we
+   * need to include a sign minus in front of every term linear in
+   * this log.
    */
 
   /**

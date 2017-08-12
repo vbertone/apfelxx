@@ -96,7 +96,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double wgplg(int const& n,int const& p,double const& x)
+  double wgplg(int const& n, int const& p, double const& x)
   {
     int p1;
     int i,l,k,m,n1;

@@ -25,5 +25,5 @@ namespace apfel
    * @note Implementation translated from CERNLIB WGPLG
    * @return \f$\mathrm{S}_{n,p}(x)\f$
    */
-  double wgplg(int const& n,int const& p,double const& x);
+  double wgplg(int const& n, int const& p, double const& x);
 }

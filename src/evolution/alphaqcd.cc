@@ -79,11 +79,15 @@ namespace apfel {
   //_________________________________________________________________________________
   double AlphaQCD::betaQCD(int const& pt, int const& nf) const
   {
-    double res = 0;
-    if      ( pt == 0 ) res = ( 33. - 2. * nf ) / 3.;
-    else if ( pt == 1 ) res = 102. - 38. / 3. * nf;
-    else if ( pt == 2 ) res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
-    else throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
+    double res;
+    if ( pt == 0 )
+      res = ( 33. - 2. * nf ) / 3.;
+    else if ( pt == 1 )
+      res = 102. - 38. / 3. * nf;
+    else if ( pt == 2 )
+      res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
+    else
+      throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
     return res / pow(FourPi,pt+1);
   }
 
