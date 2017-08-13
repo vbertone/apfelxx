@@ -87,18 +87,8 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Effective charges.
-  function<vector<double>(double const&)> fBq = [=] (double const& Q) -> vector<double>
-    {
-      vector<double> Bq;
-      for (auto i = 0; i < (int) Thresholds.size(); i++)
-	Bq.push_back((Q > Thresholds[i] ? QCh2[i] : 0));
-
-      return Bq;
-    };
-  function<vector<double>(double const&)> fDq = [=] (double const&) -> vector<double>
-    {
-      return {0, 0, 0, 0, 0, 0};
-    };
+  function<vector<double>(double const&)> fBq = [=] (double const&) -> vector<double>{ return QCh2; };
+  function<vector<double>(double const&)> fDq = [=] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
 
   // Initialize QCD evolution objects
   const auto DglapObj = InitializeDglapObjectsQCD(g);
@@ -113,14 +103,14 @@ int main()
   const auto PDFs = [&] (double const& x, double const& Q) -> map<int,double>{ return TabulatedPDFs.EvaluateMapxQ(x,Q); };
 
   // Initialize coefficient functions
-  const auto F2Obj = InitializeF2NCObjectsZM(g);
-  const auto FLObj = InitializeFLNCObjectsZM(g);
-  const auto F3Obj = InitializeF3NCObjectsZM(g);
+  const auto F2Obj = InitializeF2NCObjectsZM(g, Thresholds);
+  const auto FLObj = InitializeFLNCObjectsZM(g, Thresholds);
+  const auto F3Obj = InitializeF3NCObjectsZM(g, Thresholds);
 
   // Initialize structure functions
-  const auto F2 = BuildStructureFunctions(F2Obj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto FL = BuildStructureFunctions(FLObj, PDFs, Thresholds, PerturbativeOrder, as, fBq);
-  const auto F3 = BuildStructureFunctions(F3Obj, PDFs, Thresholds, PerturbativeOrder, as, fDq);
+  const auto F2 = BuildStructureFunctions(F2Obj, PDFs, PerturbativeOrder, as, fBq);
+  const auto FL = BuildStructureFunctions(FLObj, PDFs, PerturbativeOrder, as, fBq);
+  const auto F3 = BuildStructureFunctions(F3Obj, PDFs, PerturbativeOrder, as, fDq);
 
   const TabulateObject<Distribution> F2total {[&] (double const& Q) -> Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
   const TabulateObject<Distribution> F2light {[&] (double const& Q) -> Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
@@ -157,10 +147,10 @@ int main()
        << endl;
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << setprecision(1) << xlha[i] << "  " << setprecision(4)
-	 << F2light.EvaluatexQ(xlha[i],Q) << "  "
-	 << F2charm.EvaluatexQ(xlha[i],Q) << "  "
+	 << F2light.EvaluatexQ(xlha[i],Q)  << "  "
+	 << F2charm.EvaluatexQ(xlha[i],Q)  << "  "
 	 << F2bottom.EvaluatexQ(xlha[i],Q) << "  "
-	 << F2total.EvaluatexQ(xlha[i],Q) << "  "
+	 << F2total.EvaluatexQ(xlha[i],Q)  << "  "
 	 << endl;
   cout << endl;
 
@@ -172,10 +162,10 @@ int main()
        << endl;
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << setprecision(1) << xlha[i] << "  " << setprecision(4)
-	 << FLlight.EvaluatexQ(xlha[i],Q) << "  "
-	 << FLcharm.EvaluatexQ(xlha[i],Q) << "  "
+	 << FLlight.EvaluatexQ(xlha[i],Q)  << "  "
+	 << FLcharm.EvaluatexQ(xlha[i],Q)  << "  "
 	 << FLbottom.EvaluatexQ(xlha[i],Q) << "  "
-	 << FLtotal.EvaluatexQ(xlha[i],Q) << "  "
+	 << FLtotal.EvaluatexQ(xlha[i],Q)  << "  "
 	 << endl;
   cout << endl;
 
@@ -187,10 +177,10 @@ int main()
        << endl;
   for (auto i = 2; i < (int) xlha.size(); i++)
     cout << setprecision(1) << xlha[i] << "  " << setprecision(4)
-	 << F3light.EvaluatexQ(xlha[i],Q) << "  "
-	 << F3charm.EvaluatexQ(xlha[i],Q) << "  "
+	 << F3light.EvaluatexQ(xlha[i],Q)  << "  "
+	 << F3charm.EvaluatexQ(xlha[i],Q)  << "  "
 	 << F3bottom.EvaluatexQ(xlha[i],Q) << "  "
-	 << F3total.EvaluatexQ(xlha[i],Q) << "  "
+	 << F3total.EvaluatexQ(xlha[i],Q)  << "  "
 	 << endl;
   cout << endl;
 

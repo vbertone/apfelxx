@@ -36,15 +36,15 @@ namespace apfel
      * @brief The class constructor fot the k-th NC structure
      * function.
      */
-  DISNCBasis(int const& k):
+  DISNCBasis(int const& k, double const& fact = 1):
     ConvolutionMap{"DISNCBasis_" + std::to_string(k)}
     {
       // Gluon
-      _rules[GLUON] = { {CG, GLUON, 1} };
+      _rules[GLUON] = { {CG, GLUON, fact} };
       // Singlet
-      _rules[SIGMA] = { {CS, SIGMA, 1./6.} };
+      _rules[SIGMA] = { {CS, SIGMA, fact/6.} };
       // Total Valence
-      _rules[VALENCE] = { {CS, VALENCE, 1./6.} };
+      _rules[VALENCE] = { {CS, VALENCE, fact/6.} };
       // Non-singlet distributions
       for (int i = 2; i <= 6; i++)
 	{
@@ -57,6 +57,9 @@ namespace apfel
 	  // Change sign to T3 and V3
 	  if (i == 2)
 	    coef *= - 1;
+
+	  // Multiply the coefficient by the overall factor.
+	  coef *= fact;
 
 	  _rules[2*i-1] = { {CNS, 2*i-1, coef} };
 	  _rules[2*i]   = { {CNS, 2*i,   coef} };
@@ -135,7 +138,7 @@ namespace apfel
      * @brief The class constructor fot the (i,j)-th CC structure
      * function.
      */
-  DISCCBasis(int const& l, bool const& Is3):
+  DISCCBasis(int const& l, bool const& Is3, double const& fact = 1):
     ConvolutionMap{"DISCCBasis_" + to_string(l) + "_" + to_string(Is3)}
     {
       // Retrieve CKM matrix element.
@@ -143,11 +146,11 @@ namespace apfel
       const int j = Vij.at(l).second;
 
       // Gluon
-      _rules[GLUON] = { {CG, GLUON, 1} };
+      _rules[GLUON] = { {CG, GLUON, fact} };
       // Singlet
-      _rules[SIGMA] = { {CS, SIGMA, 1./6.} };
+      _rules[SIGMA] = { {CS, SIGMA, fact/6.} };
       // Total Valence
-      _rules[VALENCE] = { {CS, VALENCE, 1./6.} };
+      _rules[VALENCE] = { {CS, VALENCE, fact/6.} };
       // Non-singlet distributions
       for (int k = 2; k <= 6; k++)
 	{
@@ -182,6 +185,10 @@ namespace apfel
 	      coefm *= - 1;
 	    }
 
+	  // Multiply the coefficient by the overall factor.
+	  coefp *= fact;
+	  coefm *= fact;
+
 	  if (Is3)
 	    {
 	      _rules[2*k-1] = { {CNS, 2*k-1, coefm} };
@@ -206,9 +213,9 @@ namespace apfel
 	throw runtime_exception("DISCCBasis", "The CKM vector must have 9 entries.");
 
       // Initialize rules.
-	_rules[GLUON]   = { {CG, GLUON, 0} };
-	_rules[SIGMA]   = { {CS, SIGMA, 0} };
-	_rules[VALENCE] = { {CS, VALENCE, 0} };
+      _rules[GLUON]   = { {CG, GLUON, 0} };
+      _rules[SIGMA]   = { {CS, SIGMA, 0} };
+      _rules[VALENCE] = { {CS, VALENCE, 0} };
       for (int k = 3; k <= 12; k++)
 	_rules[k] = { {CNS, k, 0} };
 
