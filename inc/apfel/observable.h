@@ -36,9 +36,14 @@ namespace apfel
     /**
      * @brief Function that evaluates the the observable at the scale Q
      */
-    Distribution Evaluate(double const& Q) const;
+    Distribution Evaluate(double const& Q)                  const;
+    double       Evaluate(double const& x, double const& Q) const;
 
-    double Evaluate(double const& x, double const& Q) const;
+    /**
+     * @brief Set the set of ditributions keeping the same set of
+     * coefficient functions.
+     */
+    void SetDistributions(function<Set<Distribution>(double const&)> const& Distributions) { _Distributions = Distributions; }
 
   private:
     function<Set<Operator>(double const&)>     _CoefficientFunctions;

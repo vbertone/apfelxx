@@ -727,6 +727,27 @@ namespace apfel {
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
 
+    // Zero Mass coefficient functions
+    // LO
+    map<int,Operator> C2LO;
+    C2LO.insert({CNS, Id});
+    C2LO.insert({CS,  Id});
+    C2LO.insert({CG,  Zero});
+
+    // NLO
+    map<int,Operator> C2NLO;
+    const Operator O21ns{g, C21ns{}, IntEps};
+    const Operator O21g {g, C21g{},  IntEps};
+    C2NLO.insert({CNS, O21ns});
+    C2NLO.insert({CS,  O21ns});
+    C2NLO.insert({CG,  O21g});
+
+    // NNLO
+    const Operator O22ps {g, C22ps{}, IntEps};
+    const Operator O22g  {g, C22g{},  IntEps};
+    const Operator O22nsp{g, C22nsp{actnf}, IntEps};
+    const Operator O22t = O22nsp + 6 * O22ps;
+
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
     map<int,Operator> Not;
@@ -764,31 +785,6 @@ namespace apfel {
       };
     const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
-    // Zero Mass coefficient functions
-    // LO
-    map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Id});
-    C2LO.insert({CG,  Zero});
-
-    // NLO
-    map<int,Operator> C2NLO;
-    const Operator O21ns{g, C21ns{}, IntEps};
-    const Operator O21g {g, C21g{},  IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  O21ns});
-    C2NLO.insert({CG,  O21g});
-
-    // NNLO
-    map<int,Operator> C2NNLO;
-    const Operator O22ps {g, C22ps{}, IntEps};
-    const Operator O22g  {g, C22g{},  IntEps};
-    const Operator O22nsp{g, C22nsp{actnf}, IntEps};
-    const Operator O22t = O22nsp + 6 * O22ps;
-    C2NNLO.insert({CNS, O22nsp});
-    C2NNLO.insert({CS,  O22t});
-    C2NNLO.insert({CG,  O22g});
-
     // Vector of distributions to skip
     const vector<int> skip = {2,4,6,8,10,12};
 
@@ -799,46 +795,55 @@ namespace apfel {
 	StructureFunctionObjects FObj;
 	FObj.skip = skip;
 
-	// Single structure function components.
+	// Start with the heavy quark structure function components.
 	const double Q2  = Q * Q;
-	for (int k = 0; k <= 6; k++)
+	Operator lNNLOns = O22nsp;
+	for (int k = actnf + 1; k <= 6; k++)
+	  {
+	    // Compute value of xi.
+	    const double M2 = Masses[k-1] * Masses[k-1];
+	    const double xi = Q2 / M2;
+
+	    // Convolution Basis
+	    FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+
+	    // Set LO non-singlet and singlet coefficient
+	    // functions to zero (gluon is already zero).
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+
+	    // Now insert NLO
+	    map<int,Operator> NLO;
+	    NLO.insert({CNS, Zero});
+	    NLO.insert({CS,  Zero});
+	    NLO.insert({CG,  TabO21g.Evaluate(xi)});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+
+	    // Now insert NNLO
+	    map<int,Operator> NNLO;
+	    NNLO.insert({CNS, Zero});
+	    NNLO.insert({CS,  TabO22s.Evaluate(xi)});
+	    NNLO.insert({CG,  TabO22g.Evaluate(xi)});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+
+	    // Include the massive bit to the non-singlet coefficient
+	    // function needed for the light structure functions.
+	    for (int i = 0; i <= actnf; i++)
+	      lNNLOns += TabO22ns.Evaluate(xi);
+	  }
+
+	// Now fill in the light components. To be updated in the
+	// loop over the heavy component.
+	map<int,Operator> C2NNLO;
+	C2NNLO.insert({CNS, lNNLOns});
+	C2NNLO.insert({CS,  O22t});
+	C2NNLO.insert({CG,  O22g});
+	for (int k = 0; k <= actnf; k++)
 	  {
 	    // Convolution Basis
 	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
-
-	    // Now include the massive bits whenever needed, that is
-	    // when there is a corresponding entry in the mass vector
-	    // and if the respective value is biggere than zero.
-	    if (k > actnf)
-	      {
-		// Compute value of xi.
-		const double M2 = Masses[k-1] * Masses[k-1];
-		const double xi = Q2 / M2;
-
-		// Set LO non-singlet and singlet coefficient
-		// functions to zero (gluon is already zero).
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
-
-		// Now insert NLO
-		map<int,Operator> NLO;
-		NLO.insert({CNS, Zero});
-		NLO.insert({CS,  Zero});
-		NLO.insert({CG,  TabO21g.Evaluate(xi)});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
-
-		// Now insert NNLO
-		map<int,Operator> NNLO;
-		NNLO.insert({CNS, Zero});
-		NNLO.insert({CS,  TabO22s.Evaluate(xi)});
-		NNLO.insert({CG,  TabO22g.Evaluate(xi)});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
-	      }
-	    else
-	      {
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
-	      }
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
 	  }
 	return FObj;
       };
@@ -870,6 +875,27 @@ namespace apfel {
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
+
+    // Zero Mass coefficient functions
+    // LO
+    map<int,Operator> CLLO;
+    CLLO.insert({CNS, Zero});
+    CLLO.insert({CS,  Zero});
+    CLLO.insert({CG,  Zero});
+
+    // NLO
+    map<int,Operator> CLNLO;
+    const Operator OL1ns{g, CL1ns{}, IntEps};
+    const Operator OL1g {g, CL1g{},  IntEps};
+    CLNLO.insert({CNS, OL1ns});
+    CLNLO.insert({CS,  OL1ns});
+    CLNLO.insert({CG,  OL1g});
+
+    // NNLO
+    const Operator OL2ps {g, CL2ps{}, IntEps};
+    const Operator OL2g  {g, CL2g{},  IntEps};
+    const Operator OL2nsp{g, CL2nsp{actnf}, IntEps};
+    const Operator OL2t = OL2nsp + 6 * OL2ps;
 
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
@@ -908,31 +934,6 @@ namespace apfel {
       };
     const TabulateObject<Operator> TabOL2g{fOL2g, nxi, ximin, ximax, intdeg, {}, lambda};
 
-    // Zero Mass coefficient functions
-    // LO
-    map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
-
-    // NLO
-    map<int,Operator> CLNLO;
-    const Operator OL1ns{g, CL1ns{}, IntEps};
-    const Operator OL1g {g, CL1g{},  IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  OL1ns});
-    CLNLO.insert({CG,  OL1g});
-
-    // NNLO
-    map<int,Operator> CLNNLO;
-    const Operator OL2ps {g, CL2ps{}, IntEps};
-    const Operator OL2g  {g, CL2g{},  IntEps};
-    const Operator OL2nsp{g, CL2nsp{actnf}, IntEps};
-    const Operator OL2t = OL2nsp + 6 * OL2ps;
-    CLNNLO.insert({CNS, OL2nsp});
-    CLNNLO.insert({CS,  OL2t});
-    CLNNLO.insert({CG,  OL2g});
-
     // Vector of distributions to skip
     const vector<int> skip = {2,4,6,8,10,12};
 
@@ -943,46 +944,55 @@ namespace apfel {
 	StructureFunctionObjects FObj;
 	FObj.skip = skip;
 
-	// Single structure function components.
+	// Start with the heavy quark structure function components.
 	const double Q2  = Q * Q;
-	for (int k = 0; k <= 6; k++)
+	Operator lNNLOns = OL2nsp;
+	for (int k = actnf + 1; k <= 6; k++)
+	  {
+	    // Compute value of xi.
+	    const double M2 = Masses[k-1] * Masses[k-1];
+	    const double xi = Q2 / M2;
+
+	    // Convolution Basis
+	    FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+
+	    // Set LO non-singlet and singlet coefficient
+	    // functions to zero (gluon is already zero).
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+
+	    // Now insert NLO
+	    map<int,Operator> NLO;
+	    NLO.insert({CNS, Zero});
+	    NLO.insert({CS,  Zero});
+	    NLO.insert({CG,  TabOL1g.Evaluate(xi)});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+
+	    // Now insert NNLO
+	    map<int,Operator> NNLO;
+	    NNLO.insert({CNS, Zero});
+	    NNLO.insert({CS,  TabOL2s.Evaluate(xi)});
+	    NNLO.insert({CG,  TabOL2g.Evaluate(xi)});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+
+	    // Include the massive bit to the non-singlet coefficient
+	    // function needed for the light structure functions.
+	    for (int i = 0; i <= actnf; i++)
+	      lNNLOns += TabOL2ns.Evaluate(xi);
+	  }
+
+	// Now fill in the light components. To be updated in the
+	// loop over the heavy component.
+	map<int,Operator> CLNNLO;
+	CLNNLO.insert({CNS, lNNLOns});
+	CLNNLO.insert({CS,  OL2t});
+	CLNNLO.insert({CG,  OL2g});
+	for (int k = 0; k <= actnf; k++)
 	  {
 	    // Convolution Basis
 	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
-
-	    // Now include the massive bits whenever needed, that is
-	    // when there is a corresponding entry in the mass vector
-	    // and if the respective value is biggere than zero.
-	    if (k > actnf)
-	      {
-		// Compute value of xi.
-		const double M2 = Masses[k-1] * Masses[k-1];
-		const double xi = Q2 / M2;
-
-		// Set LO non-singlet and singlet coefficient
-		// functions to zero (gluon is already zero).
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
-
-		// Now insert NLO
-		map<int,Operator> NLO;
-		NLO.insert({CNS, Zero});
-		NLO.insert({CS,  Zero});
-		NLO.insert({CG,  TabOL1g.Evaluate(xi)});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
-
-		// Now insert NNLO
-		map<int,Operator> NNLO;
-		NNLO.insert({CNS, Zero});
-		NNLO.insert({CS,  TabOL2s.Evaluate(xi)});
-		NNLO.insert({CG,  TabOL2g.Evaluate(xi)});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
-	      }
-	    else
-	      {
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
-	      }
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
 	  }
 	return FObj;
       };
@@ -1015,6 +1025,27 @@ namespace apfel {
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
+
+    // Zero Mass coefficient functions
+    // LO
+    map<int,Operator> C2LO;
+    C2LO.insert({CNS, Id});
+    C2LO.insert({CS,  Id});
+    C2LO.insert({CG,  Zero});
+
+    // NLO
+    map<int,Operator> C2NLO;
+    const Operator O21ns{g, C21ns{}, IntEps};
+    const Operator O21g {g, C21g{},  IntEps};
+    C2NLO.insert({CNS, O21ns});
+    C2NLO.insert({CS,  O21ns});
+    C2NLO.insert({CG,  O21g});
+
+    // NNLO
+    const Operator O22ps {g, C22ps{}, IntEps};
+    const Operator O22g  {g, C22g{},  IntEps};
+    const Operator O22nsp{g, C22nsp{actnf}, IntEps};
+    const Operator O22t = O22nsp + 6 * O22ps;
 
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
@@ -1071,31 +1102,6 @@ namespace apfel {
       };
     const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
-    // Zero Mass coefficient functions
-    // LO
-    map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Id});
-    C2LO.insert({CG,  Zero});
-
-    // NLO
-    map<int,Operator> C2NLO;
-    const Operator O21ns{g, C21ns{}, IntEps};
-    const Operator O21g {g, C21g{},  IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  O21ns});
-    C2NLO.insert({CG,  O21g});
-
-    // NNLO
-    map<int,Operator> C2NNLO;
-    const Operator O22ps {g, C22ps{}, IntEps};
-    const Operator O22g  {g, C22g{},  IntEps};
-    const Operator O22nsp{g, C22nsp{actnf}, IntEps};
-    const Operator O22t = O22nsp + 6 * O22ps;
-    C2NNLO.insert({CNS, O22nsp});
-    C2NNLO.insert({CS,  O22t});
-    C2NNLO.insert({CG,  O22g});
-
     // Vector of distributions to skip
     const vector<int> skip = {2,4,6,8,10,12};
 
@@ -1106,46 +1112,55 @@ namespace apfel {
 	StructureFunctionObjects FObj;
 	FObj.skip = skip;
 
-	// Single structure function components.
+	// Start with the heavy quark structure function components.
 	const double Q2  = Q * Q;
-	for (int k = 0; k <= 6; k++)
+	Operator lNNLOns = O22nsp;
+	for (int k = actnf + 1; k <= 6; k++)
+	  {
+	    // Compute value of xi.
+	    const double M2 = Masses[k-1] * Masses[k-1];
+	    const double xi = Q2 / M2;
+
+	    // Convolution Basis
+	    FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+
+	    // Set LO non-singlet and singlet coefficient
+	    // functions to zero (gluon is already zero).
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+
+	    // Now insert NLO
+	    map<int,Operator> NLO;
+	    NLO.insert({CNS, Zero});
+	    NLO.insert({CS,  Zero});
+	    NLO.insert({CG,  TabO21g.Evaluate(xi)});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+
+	    // Now insert NNLO
+	    map<int,Operator> NNLO;
+	    NNLO.insert({CNS, Zero});
+	    NNLO.insert({CS,  TabO22s.Evaluate(xi)});
+	    NNLO.insert({CG,  TabO22g.Evaluate(xi)});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+
+	    // Include the massive bit to the non-singlet coefficient
+	    // function needed for the light structure functions.
+	    for (int i = 0; i <= actnf; i++)
+	      lNNLOns += TabO22ns.Evaluate(xi);
+	  }
+
+	// Now fill in the light components. To be updated in the
+	// loop over the heavy component.
+	map<int,Operator> C2NNLO;
+	C2NNLO.insert({CNS, lNNLOns});
+	C2NNLO.insert({CS,  O22t});
+	C2NNLO.insert({CG,  O22g});
+	for (int k = 0; k <= actnf; k++)
 	  {
 	    // Convolution Basis
 	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
-
-	    // Now include the massive bits whenever needed, that is
-	    // when there is a corresponding entry in the mass vector
-	    // and if the respective value is biggere than zero.
-	    if (k > actnf)
-	      {
-		// Compute value of xi.
-		const double M2 = Masses[k-1] * Masses[k-1];
-		const double xi = Q2 / M2;
-
-		// Set LO non-singlet and singlet coefficient
-		// functions to zero (gluon is already zero).
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
-
-		// Now insert NLO
-		map<int,Operator> NLO;
-		NLO.insert({CNS, Zero});
-		NLO.insert({CS,  Zero});
-		NLO.insert({CG,  TabO21g.Evaluate(xi)});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
-
-		// Now insert NNLO
-		map<int,Operator> NNLO;
-		NNLO.insert({CNS, Zero});
-		NNLO.insert({CS,  TabO22s.Evaluate(xi)});
-		NNLO.insert({CG,  TabO22g.Evaluate(xi)});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
-	      }
-	    else
-	      {
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
-	      }
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
 	  }
 	return FObj;
       };
@@ -1177,6 +1192,27 @@ namespace apfel {
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
+
+    // Zero Mass coefficient functions
+    // LO
+    map<int,Operator> CLLO;
+    CLLO.insert({CNS, Zero});
+    CLLO.insert({CS,  Zero});
+    CLLO.insert({CG,  Zero});
+
+    // NLO
+    map<int,Operator> CLNLO;
+    const Operator OL1ns{g, CL1ns{}, IntEps};
+    const Operator OL1g {g, CL1g{},  IntEps};
+    CLNLO.insert({CNS, OL1ns});
+    CLNLO.insert({CS,  OL1ns});
+    CLNLO.insert({CG,  OL1g});
+
+    // NNLO
+    const Operator OL2ps {g, CL2ps{}, IntEps};
+    const Operator OL2g  {g, CL2g{},  IntEps};
+    const Operator OL2nsp{g, CL2nsp{actnf}, IntEps};
+    const Operator OL2t = OL2nsp + 6 * OL2ps;
 
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
@@ -1217,31 +1253,6 @@ namespace apfel {
       };
     const TabulateObject<Operator> TabOL2g{fOL2g, nxi, ximin, ximax, intdeg, {}, lambda};
 
-    // Zero Mass coefficient functions
-    // LO
-    map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
-
-    // NLO
-    map<int,Operator> CLNLO;
-    const Operator OL1ns{g, CL1ns{}, IntEps};
-    const Operator OL1g {g, CL1g{},  IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  OL1ns});
-    CLNLO.insert({CG,  OL1g});
-
-    // NNLO
-    map<int,Operator> CLNNLO;
-    const Operator OL2ps {g, CL2ps{}, IntEps};
-    const Operator OL2g  {g, CL2g{},  IntEps};
-    const Operator OL2nsp{g, CL2nsp{actnf}, IntEps};
-    const Operator OL2t = OL2nsp + 6 * OL2ps;
-    CLNNLO.insert({CNS, OL2nsp});
-    CLNNLO.insert({CS,  OL2t});
-    CLNNLO.insert({CG,  OL2g});
-
     // Vector of distributions to skip
     const vector<int> skip = {2,4,6,8,10,12};
 
@@ -1252,46 +1263,55 @@ namespace apfel {
 	StructureFunctionObjects FObj;
 	FObj.skip = skip;
 
-	// Single structure function components.
+	// Start with the heavy quark structure function components.
 	const double Q2  = Q * Q;
-	for (int k = 0; k <= 6; k++)
+	Operator lNNLOns = OL2nsp;
+	for (int k = actnf + 1; k <= 6; k++)
+	  {
+	    // Compute value of xi.
+	    const double M2 = Masses[k-1] * Masses[k-1];
+	    const double xi = Q2 / M2;
+
+	    // Convolution Basis
+	    FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+
+	    // Set LO non-singlet and singlet coefficient
+	    // functions to zero (gluon is already zero).
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+
+	    // Now insert NLO
+	    map<int,Operator> NLO;
+	    NLO.insert({CNS, Zero});
+	    NLO.insert({CS,  Zero});
+	    NLO.insert({CG,  Om0L1g});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+
+	    // Now insert NNLO
+	    map<int,Operator> NNLO;
+	    NNLO.insert({CNS, Zero});
+	    NNLO.insert({CS,  TabOL2s.Evaluate(xi)});
+	    NNLO.insert({CG,  TabOL2g.Evaluate(xi)});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+
+	    // Include the massive bit to the non-singlet coefficient
+	    // function needed for the light structure functions.
+	    for (int i = 0; i <= actnf; i++)
+	      lNNLOns += TabOL2ns.Evaluate(xi);
+	  }
+
+	// Now fill in the light components. To be updated in the
+	// loop over the heavy component.
+	map<int,Operator> CLNNLO;
+	CLNNLO.insert({CNS, lNNLOns});
+	CLNNLO.insert({CS,  OL2t});
+	CLNNLO.insert({CG,  OL2g});
+	for (int k = 0; k <= actnf; k++)
 	  {
 	    // Convolution Basis
 	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
-
-	    // Now include the massive bits whenever needed, that is
-	    // when there is a corresponding entry in the mass vector
-	    // and if the respective value is biggere than zero.
-	    if (k > actnf)
-	      {
-		// Compute value of xi.
-		const double M2 = Masses[k-1] * Masses[k-1];
-		const double xi = Q2 / M2;
-
-		// Set LO non-singlet and singlet coefficient
-		// functions to zero (gluon is already zero).
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
-
-		// Now insert NLO
-		map<int,Operator> NLO;
-		NLO.insert({CNS, Zero});
-		NLO.insert({CS,  Zero});
-		NLO.insert({CG,  Om0L1g});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
-
-		// Now insert NNLO
-		map<int,Operator> NNLO;
-		NNLO.insert({CNS, Zero});
-		NNLO.insert({CS,  TabOL2s.Evaluate(xi)});
-		NNLO.insert({CG,  TabOL2g.Evaluate(xi)});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
-	      }
-	    else
-	      {
-		FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-		FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-		FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
-	      }
+	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
 	  }
 	return FObj;
       };
