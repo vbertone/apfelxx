@@ -837,14 +837,22 @@ namespace apfel {
 	C2NNLO.insert({CNS, lNNLOns});
 	C2NNLO.insert({CS,  O22t});
 	C2NNLO.insert({CG,  O22g});
-	for (int k = 0; k <= actnf; k++)
+	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
-	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
+	    FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
 	  }
+
+	// Total structure function set to zero for now. Need to
+	// construct it a posteriori as a sum of light and heavy
+	// components.
+	FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
+	FObj.C0.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C1.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C2.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
 	return FObj;
       };
     t.stop();
@@ -986,14 +994,22 @@ namespace apfel {
 	CLNNLO.insert({CNS, lNNLOns});
 	CLNNLO.insert({CS,  OL2t});
 	CLNNLO.insert({CG,  OL2g});
-	for (int k = 0; k <= actnf; k++)
+	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
-	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
+	    FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
 	  }
+
+	// Total structure function set to zero for now. Need to
+	// construct it a posteriori as a sum of light and heavy
+	// components.
+	FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
+	FObj.C0.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C1.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C2.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
 	return FObj;
       };
     t.stop();
@@ -1154,14 +1170,22 @@ namespace apfel {
 	C2NNLO.insert({CNS, lNNLOns});
 	C2NNLO.insert({CS,  O22t});
 	C2NNLO.insert({CG,  O22g});
-	for (int k = 0; k <= actnf; k++)
+	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
-	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
+	    FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
 	  }
+
+	// Total structure function set to zero for now. Need to
+	// construct it a posteriori as a sum of light and heavy
+	// components.
+	FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
+	FObj.C0.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C1.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C2.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
 	return FObj;
       };
     t.stop();
@@ -1305,14 +1329,22 @@ namespace apfel {
 	CLNNLO.insert({CNS, lNNLOns});
 	CLNNLO.insert({CS,  OL2t});
 	CLNNLO.insert({CG,  OL2g});
-	for (int k = 0; k <= actnf; k++)
+	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
-	    FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{Ch} : DISNCBasis{k, Ch[k-1]})});
+	    FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
 	  }
+
+	// Total structure function set to zero for now. Need to
+	// construct it a posteriori as a sum of light and heavy
+	// components.
+	FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
+	FObj.C0.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C1.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+	FObj.C2.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
 	return FObj;
       };
     t.stop();
