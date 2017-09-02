@@ -299,4 +299,103 @@ namespace apfel {
       };
     return BuildDglap(DglapObj, InDistFuncMap, MuRef, PerturbativeOrder, Alphas, nsteps);
   }
+
+  //_____________________________________________________________________________
+  unique_ptr<Dglap> BuildDglap(function<DglapObjects(double const&)>                   const& DglapObj,
+			       vector<double>                                          const& Thresholds,
+			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                  const& MuRef,
+			       int                                                     const& PerturbativeOrder,
+			       function<double(double const&)>                         const& Alphas,
+			       int                                                     const& nsteps)
+  {
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+	nfi++;
+
+    // Compute coupling above and below the thresholds.
+    map<int,double> asThUp;
+    map<int,double> asThDown;
+    for (auto nf = nfi + 1; nf <= nff; nf++)
+      {
+	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
+	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
+      }
+
+    // Create splitting functions and matching conditions lambda
+    // functions according to the requested perturbative order.
+    function<Set<Operator>(int const&, double const&)> SplittingFunctions;
+    function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
+    if (PerturbativeOrder == 0)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * DglapObj(mu).SplittingFunctions.at(0);
+	  };
+	MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
+	  {
+	    return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0);
+	  };
+      }
+    else if (PerturbativeOrder == 1)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * ( DglapObj(mu).SplittingFunctions.at(0) + cp * DglapObj(mu).SplittingFunctions.at(1) );
+	  };
+	MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
+	  {
+	    return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0);
+	  };
+      }
+    else if (PerturbativeOrder == 2)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * ( DglapObj(mu).SplittingFunctions.at(0)
+			  + cp * ( DglapObj(mu).SplittingFunctions.at(1)
+				   + cp * DglapObj(mu).SplittingFunctions.at(2) ) );
+	  };
+	MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+	  {
+	    const auto cp = asThUp.at(nf+1);
+	    return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0)
+	    + ( Up ? 1 : -1) * cp * cp * DglapObj(Thresholds[nf-1]).MatchingConditions.at(2);
+	  };
+      }
+
+    // Create set of initial distributions.
+    const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
+	DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
+
+    // Initialize DGLAP evolution.
+    return unique_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
+  }
+
+  //_____________________________________________________________________________
+  unique_ptr<Dglap> BuildDglap(function<DglapObjects(double const&)>                      const& DglapObj,
+			       vector<double>                                             const& Thresholds,
+			       function<double(int const&, double const&, double const&)> const& InDistFunc,
+			       double                                                     const& MuRef,
+			       int                                                        const& PerturbativeOrder,
+			       function<double(double const&)>                            const& Alphas,
+			       int                                                        const& nsteps)
+  {
+    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> map<int,double>
+      {
+	map<int,double> DistMap;
+	for (int i = EvolutionBasisQCD::GLUON; i <= EvolutionBasisQCD::V35; i++)
+	  DistMap.insert({i,InDistFunc(i, x, Q)});
+	return DistMap;
+      };
+    return BuildDglap(DglapObj, Thresholds, InDistFuncMap, MuRef, PerturbativeOrder, Alphas, nsteps);
+  }
 }

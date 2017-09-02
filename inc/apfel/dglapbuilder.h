@@ -90,4 +90,30 @@ namespace apfel
 			       int                                                        const& PerturbativeOrder,
 			       function<double(double const&)>                            const& Alphas,
 			       int                                                        const& nsteps = 10);
+
+  /**
+   * @brief Same as above but the DglapObjects object is a function of
+   * a variable. This is useful for applications in which the
+   * splitting functions depend on same energy scale.
+   */
+  unique_ptr<Dglap> BuildDglap(function<DglapObjects(double const&)>                   const& DglapObj,
+			       vector<double>                                          const& Thresholds,
+			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
+			       double                                                  const& MuRef,
+			       int                                                     const& PerturbativeOrder,
+			       function<double(double const&)>                         const& Alphas,
+			       int                                                     const& nsteps = 10);
+
+  /**
+   * @brief Same as above but the DglapObjects object is a function of
+   * a variable. This is useful for applications in which the
+   * splitting functions depend on same energy scale.
+   */
+  unique_ptr<Dglap> BuildDglap(function<DglapObjects(double const&)>                      const& DglapObj,
+			       vector<double>                                             const& Thresholds,
+			       function<double(int const&, double const&, double const&)> const& InDistFunc,
+			       double                                                     const& MuRef,
+			       int                                                        const& PerturbativeOrder,
+			       function<double(double const&)>                            const& Alphas,
+			       int                                                        const& nsteps = 10);
 }
