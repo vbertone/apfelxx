@@ -91,10 +91,10 @@ int main()
   function<vector<double>(double const&)> fDq = [=] (double const&) -> vector<double>{ return {0, 0, 0, 0, 0, 0}; };
 
   // Initialize QCD evolution objects
-  const auto DglapObj = InitializeDglapObjectsQCD(g);
+  const auto DglapObj = InitializeDglapObjectsQCD(g, Masses, Thresholds);
 
   // Construct the DGLAP object
-  auto EvolvedPDFs = BuildDglap(DglapObj, LHToyPDFs, mu0, Masses, Thresholds, PerturbativeOrder, as);
+  auto EvolvedPDFs = BuildDglap(DglapObj, LHToyPDFs, mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const TabulateObject<Set<Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};

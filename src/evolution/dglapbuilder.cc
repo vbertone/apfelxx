@@ -19,16 +19,32 @@ using namespace std;
 
 namespace apfel {
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid const& g, double const& IntEps)
+  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
+						  vector<double> const& Masses,
+						  vector<double> const& Thresholds,
+						  double         const& IntEps)
   {
     cout << "Initializing DglapObjects for QCD evolution... ";
     Timer t;
     t.start();
 
-    // Set initial and final number of active flavours. Precompute
-    // objects for all numbers of flavours because it cheap enough.
-    int nfi = 1;
-    int nff = 6;
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+	nfi++;
+
+    // Compute logs of muth2 / m2 needed for the the matching
+    // conditions.
+    vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      if (Thresholds[im] < eps12 || Masses[im] < eps12)
+	LogKth.push_back(0);
+      else
+	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
 
     // Allocate needed operators (matching conditions and splitting
     // functions).  By now the code is fast enough to precompute
@@ -170,6 +186,7 @@ namespace apfel {
 	const EvolutionBasisQCD evb{nf};
 	const MatchingBasisQCD  mtb{nf};
 	DglapObjects obj;
+	obj.Threshold = Thresholds[nf-1];
 	obj.SplittingFunctions.insert({0, Set<Operator>{evb, OpMapLO.at(nf)}});
 	obj.SplittingFunctions.insert({1, Set<Operator>{evb, OpMapNLO.at(nf)}});
 	obj.SplittingFunctions.insert({2, Set<Operator>{evb, OpMapNNLO.at(nf)}});
@@ -183,40 +200,35 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
+  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
+						  vector<double> const& Thresholds,
+						  double         const& IntEps)
+  {
+    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, IntEps);
+  }
+
+  //_____________________________________________________________________________
   unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
 			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                  const& MuRef,
-			       vector<double>                                          const& Masses,
-			       vector<double>                                          const& Thresholds,
 			       int                                                     const& PerturbativeOrder,
 			       function<double(double const&)>                         const& Alphas,
 			       int                                                     const& nsteps)
   {
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-	nfi++;
-
     // Compute coupling above and below the thresholds.
     map<int,double> asThUp;
     map<int,double> asThDown;
-    for (auto nf = nfi + 1; nf <= nff; nf++)
+    vector<double> Thresholds;
+    for(auto const& obj : DglapObj)
       {
-	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
-	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
+	const int    nf  = obj.first;
+	const double thr = obj.second.Threshold;
+	asThDown.insert({nf,Alphas(thr)/FourPi});
+	asThUp.insert({nf,Alphas(thr+eps8)/FourPi});
+	if ((int) Thresholds.size() < nf)
+	  Thresholds.resize(nf);
+	Thresholds[nf-1] = thr;
       }
-
-    // Compute logs of muth2 / m2 needed by the matching conditions.
-    vector<double> LogKth;
-    for (int im = 0; im < (int) Thresholds.size(); im++)
-      if (Thresholds[im] < eps12 || Masses[im] < eps12)
-	LogKth.push_back(0);
-      else
-	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
 
     // Create splitting functions and matching conditions lambda
     // functions according to the requested perturbative order.
@@ -264,30 +276,16 @@ namespace apfel {
 
     // Create set of initial distributions.
     const Set<Distribution> InPDFs{DglapObj.at(NF(MuRef, Thresholds)).SplittingFunctions.at(0).GetMap(),
-	DistributionMap(DglapObj.at(nfi).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
+	DistributionMap(DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
     // Initialize DGLAP evolution.
     return unique_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
-			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
-			       double                                                  const& MuRef,
-			       vector<double>                                          const& Masses,
-			       int                                                     const& PerturbativeOrder,
-			       function<double(double const&)>                         const& Alphas,
-			       int                                                     const& nsteps)
-  {
-    return BuildDglap(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
-  }
-
-  //_____________________________________________________________________________
   unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
-			       vector<double>                                             const& Masses,
-			       vector<double>                                             const& Thresholds,
 			       int                                                        const& PerturbativeOrder,
 			       function<double(double const&)>                            const& Alphas,
 			       int                                                        const& nsteps)
@@ -299,18 +297,6 @@ namespace apfel {
 	  DistMap.insert({i,InDistFunc(i, x, Q)});
 	return DistMap;
       };
-    return BuildDglap(DglapObj, InDistFuncMap, MuRef, Masses, Thresholds, PerturbativeOrder, Alphas, nsteps);
-  }
-
-  //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
-			       function<double(int const&, double const&, double const&)> const& InDistFunc,
-			       double                                                     const& MuRef,
-			       vector<double>                                             const& Masses,
-			       int                                                        const& PerturbativeOrder,
-			       function<double(double const&)>                            const& Alphas,
-			       int                                                        const& nsteps)
-  {
-    return BuildDglap(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
+    return BuildDglap(DglapObj, InDistFuncMap, MuRef, PerturbativeOrder, Alphas, nsteps);
   }
 }
