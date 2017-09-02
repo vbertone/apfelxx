@@ -35,23 +35,12 @@ namespace apfel
     /**
      * @brief Dglap default constructor.
      */
-    Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
-	  function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
-	  Set<Distribution>                                      const& ObjRef,
-	  double                                                 const& MuRef,
-	  vector<double>                                         const& Masses,
-	  vector<double>                                         const& Thresholds,
-	  int                                                    const& nsteps = 10);
-
-    /**
-     * @brief Dglap
-     */
-    Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
-	  function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
-	  Set<Distribution>                                      const& ObjRef,
-	  double                                                 const& MuDistRef,
-	  vector<double>                                         const& Masses,
-	  int                                                    const& nsteps = 10);
+    Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
+	  function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
+	  Set<Distribution>                                 const& ObjRef,
+	  double                                            const& MuRef,
+	  vector<double>                                    const& Thresholds,
+	  int                                               const& nsteps = 10);
 
     /**
      * @brief
@@ -82,7 +71,7 @@ namespace apfel
     void SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc);
 
   private:
-    function<Set<Operator>(int const&,double const&)>      _SplittingFunctions;
-    function<Set<Operator>(bool,int const&,double const&)> _MatchingConditions;
+    function<Set<Operator>(int const&,double const&)> _SplittingFunctions;
+    function<Set<Operator>(bool const&,int const&)>   _MatchingConditions;
   };
 }

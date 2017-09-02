@@ -27,14 +27,8 @@ namespace apfel
    */
   struct DglapObjects
   {
-    map<int,EvolutionBasisQCD> evbasis;
-    map<int,MatchingBasisQCD>  matchbasis;
-    map<int,Set<Operator>>     P0;
-    map<int,Set<Operator>>     P1;
-    map<int,Set<Operator>>     P2;
-    map<int,Set<Operator>>     M0;
-    map<int,Set<Operator>>     M1;
-    map<int,Set<Operator>>     M2;
+    map<int,Set<Operator>> SplittingFunctions;
+    map<int,Set<Operator>> MatchingConditions;
   };
 
   /**
@@ -45,7 +39,7 @@ namespace apfel
    * @param IntEps the integration accuracy
    * @return
    */
-  DglapObjects InitializeDglapObjectsQCD(Grid const& g, double const& IntEps = 1e-5);
+  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid const& g, double const& IntEps = 1e-5);
 
   /**
    * @brief The BuildDglap, builds the dglap object
@@ -60,7 +54,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
 			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                  const& MuRef,
 			       vector<double>                                          const& Masses,
@@ -82,7 +76,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
 			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                  const& MuRef,
 			       vector<double>                                          const& Masses,
@@ -104,7 +98,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,
@@ -126,7 +120,7 @@ namespace apfel
    * @param nsteps the number of steps for RK.
    * @return
    */
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,

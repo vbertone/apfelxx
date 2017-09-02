@@ -32,24 +32,11 @@ namespace apfel
      * @brief The default constructor that takes the reference object and the reference scale.
      * @param ObjRef reference object
      * @param MuRef reference scale
-     * @param Masses vector with the heavy quark masses
      * @param Thresholds vector with the heavy quark threholds
      */
     MatchedEvolution(T              const& ObjRef,
 		     double         const& MuRef,
-		     vector<double> const& Masses,
 		     vector<double> const& Thresholds,
-		     int            const& nsteps = 10);
-
-    /**
-     * @brief The default constructor that takes the reference value of the object and the reference scale (assumes equal masses and thresholds).
-     * @param ObjRef reference objectc
-     * @param MuRef reference scale
-     * @param Masses vector with the heavy quark masses
-     */
-    MatchedEvolution(T              const& ObjRef,
-		     double         const& MuRef,
-		     vector<double> const& Masses,
 		     int            const& nsteps = 10);
 
     /**
@@ -103,11 +90,6 @@ namespace apfel
     vector<double> const& GetThresholds() const { return _Thresholds; }
 
     /**
-     * @brief Function that returns the values of the masses.
-     */
-    vector<double> const& GetMasses() const { return _Masses; }
-
-    /**
      * @brief Function that returns the number of steps.
      */
     int const& GetNumberOfSteps() const { return _nsteps; }
@@ -135,11 +117,9 @@ namespace apfel
     double         _MuRef;          //<! Reference scale of the object
     double         _MuRef2;         //<! Squared reference scale of the object
     double         _LogMuRef2;      //<! Log of the squared reference scale of the object
-    vector<double> _Masses;         //<! Values of the masses
     vector<double> _Thresholds;     //<! Values of the thresholds
     int            _nsteps;         //<! Number of steps of the RK algorithm
     vector<double> _Thresholds2;    //<! Squared quark threholds
     vector<double> _LogThresholds2; //<! Log of the squared quark threholds
-    vector<double> _LogTh2M2;       //<! Log of the squared threholds over squared masses
   };
 }

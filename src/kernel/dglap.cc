@@ -17,27 +17,15 @@ using namespace std;
 namespace apfel {
 
   //_________________________________________________________________________________
-  Dglap::Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
-	       function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
-	       Set<Distribution>                                      const& ObjRef,
-	       double                                                 const& MuDistRef,
-	       vector<double>                                         const& Masses,
-	       vector<double>                                         const& Thresholds,
-	       int                                                    const& nsteps):
-    MatchedEvolution(ObjRef, MuDistRef, Masses, Thresholds, nsteps),
+  Dglap::Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
+	       function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
+	       Set<Distribution>                                 const& ObjRef,
+	       double                                            const& MuDistRef,
+	       vector<double>                                    const& Thresholds,
+	       int                                               const& nsteps):
+    MatchedEvolution(ObjRef, MuDistRef, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions)
-  {
-  }
-
-  //_________________________________________________________________________________
-  Dglap::Dglap(function<Set<Operator>(int const&,double const&)>      const& SplittingFunctions,
-	       function<Set<Operator>(bool,int const&,double const&)> const& MatchingConditions,
-	       Set<Distribution>                                      const& ObjRef,
-	       double                                                 const& MuDistRef,
-	       vector<double>                                         const& Masses,
-	       int                                                    const& nsteps):
-    Dglap(SplittingFunctions, MatchingConditions, ObjRef, MuDistRef, Masses, Masses, nsteps)
   {
   }
 
@@ -45,7 +33,7 @@ namespace apfel {
   Set<Distribution> Dglap::MatchObject(bool const& Up, int const& nf, Set<Distribution> const& f) const
   {
     // Get matching conditions.
-    auto MC = _MatchingConditions(Up, nf, _LogTh2M2[nf]);
+    auto MC = _MatchingConditions(Up, nf);
 
     // Create the object 'g' with the same convolution map of the
     // matching conditions but containing the same objects of the

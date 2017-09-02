@@ -23,19 +23,13 @@ namespace apfel
   template<class T>
   MatchedEvolution<T>::MatchedEvolution(T              const& ObjRef,
 					double         const& MuRef,
-					vector<double> const& Masses,
 					vector<double> const& Thresholds,
 					int            const& nsteps):
     _ObjRef(ObjRef),
     _MuRef(MuRef),
-    _Masses(Masses),
     _Thresholds(Thresholds),
     _nsteps(nsteps)
   {
-    // Check that "Masses" and "Thresholds" have the same size
-    if (Masses.size() != Thresholds.size())
-      throw logic_exception("MatchedEvolution::MatchedEvolution", "Masses and Thresholds vectors have diffrent sizes.");
-
     // Compute squared reference scale
     _MuRef2 = pow(MuRef,2);
 
@@ -49,29 +43,18 @@ namespace apfel
 	_Thresholds2.push_back(th2);
 	_LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
       }
-
+/*
     // Compute logs of muth2 / m2
     for (auto im = 0; im < (int) Thresholds.size(); im++)
       if (_Thresholds2[im] == 0 || Masses[im] == 0)
 	_LogTh2M2.push_back(-100);
       else
 	_LogTh2M2.push_back(log(_Thresholds2[im] / pow(Masses[im],2)));
-
+*/
     // Sort the quark thresholds and logs
     if (_Thresholds2.size() > 1)
       sort(_Thresholds2.begin(), _Thresholds2.end());
   }
-
-  //_________________________________________________________________________
-  template<class T>
-  MatchedEvolution<T>::MatchedEvolution(T              const& ObjRef,
-					double         const& MuRef,
-					vector<double> const& Masses,
-					int            const& nsteps):
-    MatchedEvolution(ObjRef, MuRef, Masses, Masses, nsteps)
-  {
-  }
-
 
   //_________________________________________________________________________________
   template<class T>

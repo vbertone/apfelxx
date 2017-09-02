@@ -18,28 +18,17 @@
 using namespace std;
 
 namespace apfel {
-
   //_____________________________________________________________________________
-  DglapObjects InitializeDglapObjectsQCD(Grid const& g, double const& IntEps)
+  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid const& g, double const& IntEps)
   {
     cout << "Initializing DglapObjects for QCD evolution... ";
     Timer t;
     t.start();
 
-    // Define object of the structure containing the DglapObjects
-    DglapObjects DglapObj;
-
     // Set initial and final number of active flavours. Precompute
     // objects for all numbers of flavours because it cheap enough.
     int nfi = 1;
     int nff = 6;
-
-    // Allocate convolution maps for evolution and matching.
-    for (auto nf = nfi; nf <= nff; nf++)
-      {
-	DglapObj.evbasis.insert({nf,EvolutionBasisQCD{nf}});
-	DglapObj.matchbasis.insert({nf,MatchingBasisQCD{nf}});
-      }
 
     // Allocate needed operators (matching conditions and splitting
     // functions).  By now the code is fast enough to precompute
@@ -171,14 +160,22 @@ namespace apfel {
 	OpMapNNLO.insert({nf,OM});
       }
 
-    // Allocate set of operators.
-    for (int nf = nfi; nf <= nff; nf++)
+    // Define object of the structure containing the DglapObjects
+    map<int,DglapObjects> DglapObj;
+
+    // Allocate convolution maps for evolution and matching, and set
+    // of operators.
+    for (auto nf = nfi; nf <= nff; nf++)
       {
-	DglapObj.P0.insert({nf,Set<Operator>{DglapObj.evbasis.at(nf),    OpMapLO.at(nf)}});
-	DglapObj.P1.insert({nf,Set<Operator>{DglapObj.evbasis.at(nf),    OpMapNLO.at(nf)}});
-	DglapObj.P2.insert({nf,Set<Operator>{DglapObj.evbasis.at(nf),    OpMapNNLO.at(nf)}});
-	DglapObj.M0.insert({nf,Set<Operator>{DglapObj.matchbasis.at(nf), MatchLO}});
-	DglapObj.M2.insert({nf,Set<Operator>{DglapObj.matchbasis.at(nf), MatchNNLO.at(nf)}});
+	const EvolutionBasisQCD evb{nf};
+	const MatchingBasisQCD  mtb{nf};
+	DglapObjects obj;
+	obj.SplittingFunctions.insert({0, Set<Operator>{evb, OpMapLO.at(nf)}});
+	obj.SplittingFunctions.insert({1, Set<Operator>{evb, OpMapNLO.at(nf)}});
+	obj.SplittingFunctions.insert({2, Set<Operator>{evb, OpMapNNLO.at(nf)}});
+	obj.MatchingConditions.insert({0, Set<Operator>{mtb, MatchLO}});
+	obj.MatchingConditions.insert({2, Set<Operator>{mtb, MatchNNLO.at(nf)}});
+	DglapObj.insert({nf,obj});
       }
     t.stop();
 
@@ -186,7 +183,7 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
 			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                  const& MuRef,
 			       vector<double>                                          const& Masses,
@@ -213,41 +210,68 @@ namespace apfel {
 	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
       }
 
+    // Compute logs of muth2 / m2 needed by the matching conditions.
+    vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      if (Thresholds[im] < eps12 || Masses[im] < eps12)
+	LogKth.push_back(0);
+      else
+	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+
     // Create splitting functions and matching conditions lambda
     // functions according to the requested perturbative order.
-    function<Set<Operator>(int const&, double const&)>              SplittingFunctions;
-    function<Set<Operator>(bool const&, int const&, double const&)> MatchingConditions;
+    function<Set<Operator>(int const&, double const&)> SplittingFunctions;
+    function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
     if (PerturbativeOrder == 0)
       {
         SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
-	  { const auto cp = Alphas(mu)/FourPi; return cp * DglapObj.P0.at(nf); };
-	MatchingConditions = [=] (bool const&, int const& nf, double const&) -> Set<Operator>
-	  { return DglapObj.M0.at(nf); };
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * DglapObj.at(nf).SplittingFunctions.at(0);
+	  };
+	MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
+	  {
+	    return DglapObj.at(nf).MatchingConditions.at(0);
+	  };
       }
     else if (PerturbativeOrder == 1)
       {
         SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
-	  { const auto cp = Alphas(mu)/FourPi; return cp * ( DglapObj.P0.at(nf) + cp * DglapObj.P1.at(nf) ); };
-	MatchingConditions = [=] (bool const&, int const& nf, double const&) -> Set<Operator>
-	  { return DglapObj.M0.at(nf); };
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * ( DglapObj.at(nf).SplittingFunctions.at(0) + cp * DglapObj.at(nf).SplittingFunctions.at(1) );
+	  };
+	MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
+	  {
+	    return DglapObj.at(nf).MatchingConditions.at(0);
+	  };
       }
     else if (PerturbativeOrder == 2)
       {
         SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
-	  { const auto cp = Alphas(mu)/FourPi; return cp * ( DglapObj.P0.at(nf) + cp * ( DglapObj.P1.at(nf) + cp * DglapObj.P2.at(nf) ) ); };
-	MatchingConditions = [=] (bool const& Up, int const& nf, double const&) -> Set<Operator>
-	  { const auto cp = asThUp.at(nf+1); return DglapObj.M0.at(nf) + ( Up ? 1 : -1) * cp * cp * DglapObj.M2.at(nf); };
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * ( DglapObj.at(nf).SplittingFunctions.at(0)
+			  + cp * ( DglapObj.at(nf).SplittingFunctions.at(1)
+				   + cp * DglapObj.at(nf).SplittingFunctions.at(2) ) );
+	  };
+	MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+	  {
+	    const auto cp = asThUp.at(nf+1);
+	    return DglapObj.at(nf).MatchingConditions.at(0) + ( Up ? 1 : -1) * cp * cp * DglapObj.at(nf).MatchingConditions.at(2);
+	  };
       }
 
     // Create set of initial distributions.
-    const Set<Distribution> InPDFs{DglapObj.evbasis.at(NF(MuRef, Thresholds)), DistributionMap(DglapObj.P0.at(nfi).at(0).GetGrid(), InDistFunc, MuRef)};
+    const Set<Distribution> InPDFs{DglapObj.at(NF(MuRef, Thresholds)).SplittingFunctions.at(0).GetMap(),
+	DistributionMap(DglapObj.at(nfi).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
     // Initialize DGLAP evolution.
-    return unique_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Masses, Thresholds, nsteps});
+    return unique_ptr<Dglap>(new Dglap{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                            const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
 			       function<map<int,double>(double const&, double const&)> const& InDistFunc,
 			       double                                                  const& MuRef,
 			       vector<double>                                          const& Masses,
@@ -259,7 +283,7 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,
@@ -279,7 +303,7 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap> BuildDglap(DglapObjects                                               const& DglapObj,
+  unique_ptr<Dglap> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
 			       function<double(int const&, double const&, double const&)> const& InDistFunc,
 			       double                                                     const& MuRef,
 			       vector<double>                                             const& Masses,
@@ -289,5 +313,4 @@ namespace apfel {
   {
     return BuildDglap(DglapObj, InDistFunc, MuRef, Masses, Masses, PerturbativeOrder, Alphas, nsteps);
   }
-
 }
