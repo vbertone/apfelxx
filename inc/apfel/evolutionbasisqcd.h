@@ -104,5 +104,5 @@ namespace apfel
 	  _rules[V35] = _rules[VALENCE];
 	}
     };
-  }; 
+  };
 }

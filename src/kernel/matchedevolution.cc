@@ -13,8 +13,6 @@
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
 
-#include <algorithm>
-
 using std::min;
 
 namespace apfel
@@ -81,11 +79,11 @@ namespace apfel
     auto const lmu2 = log(mu2);
 
     // Find initial and final number of flavours
-    const auto nfi = lower_bound(_Thresholds2.begin()+1, _Thresholds2.end(), _MuRef2) - _Thresholds2.begin();
-    const auto nff = lower_bound(_Thresholds2.begin()+1, _Thresholds2.end(),     mu2) - _Thresholds2.begin();
+    const auto nfi = NF(_MuRef2, _Thresholds2);
+    const auto nff = NF(mu2, _Thresholds2);
 
     // Don't do the matching is initial and final number of flavours are equal
-    if ( nfi == nff )
+    if (nfi == nff)
       return EvolveObject(nfi, _LogMuRef2, lmu2, _ObjRef);
 
     // Direction of the evolution
