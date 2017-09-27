@@ -13,7 +13,7 @@
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
 
-using std::min;
+#include <algorithm>
 
 namespace apfel
 {
