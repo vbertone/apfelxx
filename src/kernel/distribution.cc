@@ -152,6 +152,28 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution& Distribution::operator *= (function<double(double const&)> const& f)
+  {
+    // Get joint grid
+    const auto& jg = _grid.GetJointGrid().GetGrid();
+
+    // sum objects in joint grid
+    for (size_t i = 0; i < _distributionJointGrid.size(); i++)
+      _distributionJointGrid[i] *= f(jg[i]);
+
+    // sum objects in subgrids
+    for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
+      {
+	// Get ig-th subgrid
+	const auto& sg = _grid.GetSubGrid(ig).GetGrid();
+	for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
+	  _distributionSubGrid[ig][i] *= f(sg[i]);
+      }
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
   Distribution& Distribution::operator /= (double const& s)
   {
     const double r = 1 / s;
@@ -230,6 +252,18 @@ namespace apfel
   Distribution operator * (Distribution lhs, double const& s)
   {
     return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  Distribution operator * (function<double(double const&)> const& f, Distribution rhs)
+  {
+    return rhs *= f;
+  }
+
+  //_________________________________________________________________________
+  Distribution operator * (Distribution lhs, function<double(double const&)> const& f)
+  {
+    return lhs *= f;
   }
 
   //_________________________________________________________________________

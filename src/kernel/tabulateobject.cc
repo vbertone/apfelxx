@@ -104,14 +104,7 @@ namespace apfel {
   template class TabulateObject<Set<Distribution>>;
   template class TabulateObject<DoubleObject<Distribution>>;
   template class TabulateObject<Operator>;
-
-  //_________________________________________________________________________________
-  template<>
-  double TabulateObject<double>::EvaluatexQ(double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)",
-			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
-  }
+  template class TabulateObject<Set<Operator>>;
 
   //_________________________________________________________________________________
   template<>
@@ -130,31 +123,6 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<>
-  double TabulateObject<Set<Distribution>>::EvaluatexQ(double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexQ(x,Q)",
-			    "This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
-  }
-
-  //_________________________________________________________________________________
-  //_________________________________________________________________________________
-  template<>
-  double TabulateObject<double>::EvaluatexQ(int const&, double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)",
-			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
-  }
-
-  //_________________________________________________________________________________
-  template<>
-  double TabulateObject<Distribution>::EvaluatexQ(int const&, double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexQ(i,x,Q)",
-			    "This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
-  }
-
-  //_________________________________________________________________________________
-  template<>
   double TabulateObject<Set<Distribution>>::EvaluatexQ(int const& i, double const& x, double const& Q) const
   {
     const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
@@ -166,31 +134,6 @@ namespace apfel {
       result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].at(i).Evaluate(x);
 
     return result;
-  }
-
-  //_________________________________________________________________________________
-  //_________________________________________________________________________________
-  template<>
-  double TabulateObject<double>::EvaluatexzQ(double const&, double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexzQ(x,z,Q)",
-			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
-  }
-
-  //_________________________________________________________________________________
-  template<>
-  double TabulateObject<Distribution>::EvaluatexzQ(double const&, double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexzQ(x,z,Q)",
-			    "This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
-  }
-
-  //_________________________________________________________________________________
-  template<>
-  double TabulateObject<Set<Distribution>>::EvaluatexzQ(double const&, double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluatexzQ(x,z,Q)",
-			    "This function can't be used for the specialization 'Set<Distribution>' of the TabulateObject class.");
   }
 
   //_________________________________________________________________________________
@@ -206,23 +149,6 @@ namespace apfel {
       result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].Evaluate(x,z);
 
     return result;
-  }
-
-  //_________________________________________________________________________________
-  //_________________________________________________________________________________
-  template<>
-  map<int,double> TabulateObject<double>::EvaluateMapxQ(double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluateMapxQ(i,x,Q)",
-			    "This function can't be used for the specialization 'double' of the TabulateObject class.");
-  }
-
-  //_________________________________________________________________________________
-  template<>
-  map<int,double> TabulateObject<Distribution>::EvaluateMapxQ(double const&, double const&) const
-  {
-    throw runtime_exception("TabulateObject::EvaluateMapxQ(i,x,Q)",
-			    "This function can't be used for the specialization 'Distribution' of the TabulateObject class.");
   }
 
   //_________________________________________________________________________________

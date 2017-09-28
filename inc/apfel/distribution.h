@@ -111,20 +111,23 @@ namespace apfel
     void PushSubGrid(double const& xi, bool const& next);
 
     // Operators
-    Distribution& operator  = (Distribution const& d); //!< this  = Distribution
-    Distribution& operator *= (double const& s);       //!< this *= Scalar
-    Distribution& operator /= (double const& s);       //!< this /= Scalar
-    Distribution& operator *= (Distribution const& d); //!< this *= Distribution
-    Distribution& operator += (Distribution const& d); //!< this += Distribution
-    Distribution& operator -= (Distribution const& d); //!< this -= Distribution
+    Distribution& operator  = (Distribution const& d);                    //!< this  = Distribution
+    Distribution& operator *= (double const& s);                          //!< this *= Scalar
+    Distribution& operator *= (function<double(double const&)> const& f); //!< this *= Function of the integration variable
+    Distribution& operator /= (double const& s);                          //!< this /= Scalar
+    Distribution& operator *= (Distribution const& d);                    //!< this *= Distribution
+    Distribution& operator += (Distribution const& d);                    //!< this += Distribution
+    Distribution& operator -= (Distribution const& d);                    //!< this -= Distribution
   };
 
   // Extra operation definitions where Distribution is at the left hand side (lhs).
-  Distribution operator * (double const& s, Distribution rhs);         //!< Scalar*Distribution
-  Distribution operator * (Distribution lhs, double const& s);         //!< Distribution*Scalar
-  Distribution operator / (Distribution lhs, double const& s);         //!< Distribution/Scalar
-  Distribution operator + (Distribution lhs, Distribution const& rhs); //!< Distribution+Distribution
-  Distribution operator - (Distribution lhs, Distribution const& rhs); //!< Distribution-Distribution
+  Distribution operator * (double const& s, Distribution rhs);                          //!< Scalar*Distribution
+  Distribution operator * (Distribution lhs, double const& s);                          //!< Distribution*Scalar
+  Distribution operator * (function<double(double const&)> const& f, Distribution rhs); //!< Function*Distribution
+  Distribution operator * (Distribution lhs, function<double(double const&)> const& f); //!< Distribution*Function
+  Distribution operator / (Distribution lhs, double const& s);                          //!< Distribution/Scalar
+  Distribution operator + (Distribution lhs, Distribution const& rhs);                  //!< Distribution+Distribution
+  Distribution operator - (Distribution lhs, Distribution const& rhs);                  //!< Distribution-Distribution
 
   //Fill in an undordered_map of distributions from a map of distributions.
   map<int,Distribution> DistributionMap(Grid                                                    const& g,

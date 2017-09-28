@@ -30,7 +30,7 @@ int main()
   cout << g << endl;
   cout << gl << endl;
 
-  if (g == gl) return false;
+  if (g == gl) return 0;
 
   return 0;
 }

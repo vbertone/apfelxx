@@ -88,11 +88,11 @@ namespace apfel {
   {
     double res;
     if ( pt == 0 )
-      res = ( 33. - 2. * nf ) / 3.;
+      res = beta0(nf);
     else if ( pt == 1 )
-      res = 102. - 38. / 3. * nf;
+      res = beta1(nf);
     else if ( pt == 2 )
-      res = 2857. / 2. - 5033. / 18. * nf + 325. / 54. * nf * nf;
+      res = beta2(nf);
     else
       throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
     return res / pow(FourPi,pt+1);

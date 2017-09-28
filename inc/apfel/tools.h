@@ -60,8 +60,46 @@ namespace apfel
   const vector<double> QCh  = {ed, eu, ed, eu, ed, eu};
   const vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
 
-  //! enumerator for code warning
-  enum code { red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
+  // QCD Beta functions coefficients
+  double beta0(int const& nf);
+  double beta1(int const& nf);
+  double beta2(int const& nf);
+
+  // Cusp anomalous dimension coefficients
+  double GammaCusp0();
+  double GammaCusp1(int const& nf);
+  double GammaCusp2(int const& nf);
+
+  // Anomalous dimension gammaV coefficients
+  double gammaVq0();
+  double gammaVq1(int const& nf);
+  double gammaVq2(int const& nf);
+  double gammaVg0(int const& nf);
+  double gammaVg1(int const& nf);
+  double gammaVg2(int const& nf);
+
+  // Collins-Soper anomalous dimension coefficients
+ double CSd10();
+ double CSd11();
+ double CSd20(int const& nf);
+ double CSd21(int const& nf);
+ double CSd22(int const& nf);
+ double CSd30(int const& nf);
+ double CSd31(int const& nf);
+ double CSd32(int const& nf);
+ double CSd33(int const& nf);
+
+  /**
+   * @brief Return the number of active flavours at the scale Q given
+   * the (ordered) vector of thresholds.
+   * @param Q scale
+   * @param Thresholds
+   * @return number of active flavours
+   */
+  int NF(double const& Q, vector<double> const& Thresholds);
+
+  //! Enumerator for code warning
+  enum code {red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
 
   /**
    * @brief info
@@ -113,14 +151,6 @@ namespace apfel
                     string const& what):
       logic_error(error(tag,what)) {}
   };
-
-  /**
-   * @brief error
-   * @param tag
-   * @param what
-   * @return
-   */
-  int NF(double const& Q, vector<double> const& Thresholds);
 }
 
 namespace std {
