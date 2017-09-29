@@ -79,15 +79,25 @@ namespace apfel
   double gammaVg2(int const& nf);
 
   // Collins-Soper anomalous dimension coefficients
- double CSd10();
- double CSd11();
- double CSd20(int const& nf);
- double CSd21(int const& nf);
- double CSd22(int const& nf);
- double CSd30(int const& nf);
- double CSd31(int const& nf);
- double CSd32(int const& nf);
- double CSd33(int const& nf);
+  double CSd10();
+  double CSd11();
+  double CSd20(int const& nf);
+  double CSd21(int const& nf);
+  double CSd22(int const& nf);
+  double CSd30(int const& nf);
+  double CSd31(int const& nf);
+  double CSd32(int const& nf);
+  double CSd33(int const& nf);
+
+  // Coeffiecient of log(zeta) in the zeta-prescription scheme.
+  double Lzetaq10();
+  double Lzetaq11();
+  double Lzetaq20(int const& nf);
+  double Lzetaq22(int const& nf);
+  double Lzetag10(int const& nf);
+  double Lzetag11();
+  double Lzetag20(int const& nf);
+  double Lzetag22(int const& nf);
 
   /**
    * @brief Return the number of active flavours at the scale Q given
