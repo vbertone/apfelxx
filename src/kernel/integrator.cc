@@ -8,12 +8,11 @@
 #include "apfel/integrator.h"
 #include "apfel/tools.h"
 
-#include <vector>
 #include <array>
 #include <cmath>
+#include <algorithm>
 
 using std::array;
-using std::vector;
 
 namespace apfel
 {
@@ -113,6 +112,36 @@ namespace apfel
     if (fabs(y) > delta) goto goto2;
 
     throw runtime_exception("Integrator::dgauss", "too high accuracy required");
+
+    return dgauss;
+  }
+
+  //_________________________________________________________________________
+  double Integrator::integrate(double const& a, double const& b, vector<double> const& FixPts, double const& eps) const
+  {
+    // Create vector of fixed points including the integration bounds
+    // in ordered sequence and removing the points outside the
+    // integration range.
+    vector<double> bounds{(a < b ? a : b), (a < b ? b : a)};
+    for (auto const& ib : FixPts)
+      if(ib > bounds.front() && ib < bounds.back())
+	bounds.push_back(ib);
+
+    // Sort vector according on how the integration bounds are
+    // ordered.
+    const auto sorter = [a,b] (double const& x1, double const& x2)->bool
+      {
+	if (b > a)
+	  return x1 < x2;
+	else
+	  return x1 > x2;
+      };
+    sort(bounds.begin(),bounds.end(), sorter);
+
+    // Now compute sub-integrals and sum them.
+    double dgauss = 0;
+    for (int i = 1; i < (int) bounds.size(); i++)
+      dgauss += integrate(bounds[i-1],bounds[i],eps);
 
     return dgauss;
   }

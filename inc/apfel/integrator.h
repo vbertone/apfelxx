@@ -8,8 +8,10 @@
 #pragma once
 
 #include <functional>
+#include <vector>
 
 using std::function;
+using std::vector;
 
 namespace apfel
 {
@@ -29,8 +31,7 @@ namespace apfel
 
     /**
      * @brief The default constructor
-     *
-      @param func the function to be integrated.
+     * @param func the function to be integrated.
      */
     Integrator(function<double(double const&)> const& func);
 
@@ -44,6 +45,18 @@ namespace apfel
      * @return the integral value.
      */
     double integrate(double const& xmin, double const& xmax, double const& eps) const;
+
+    /**
+     * @brief Integrates the integrand passed during initialization
+     * between xmin and xmax with tolerance eps.
+     *
+     * @param xmin the lower bound integration value.
+     * @param xmax the upper bound integration value.
+     * @param FixPts vector of fixed points not to integrate over.
+     * @param eps the required relative error.
+     * @return the integral value.
+     */
+    double integrate(double const& xmin, double const& xmax, vector<double> const& FixPts, double const& eps) const;
 
     /**
      * @brief Integrates the integrand passed during initialization

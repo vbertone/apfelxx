@@ -346,8 +346,8 @@ namespace apfel {
 	const double zetaig = zetag(mui,b);
 
 	// Compute argument of the exponent of the evolution factors.
-	const double LRq = I1q.integrate(mui,muf,IntEps) - I2q.integrate(mu0,muf,IntEps) * log(zetaf) + I2q.integrate(mu0,mui,IntEps) * log(zetaiq);
-	const double LRg = I1g.integrate(mui,muf,IntEps) - I2g.integrate(mu0,muf,IntEps) * log(zetaf) + I2g.integrate(mu0,mui,IntEps) * log(zetaig);
+	const double LRq = I1q.integrate(mui,muf,thrs,IntEps) - I2q.integrate(mu0,muf,thrs,IntEps) * log(zetaf) + I2q.integrate(mu0,mui,thrs,IntEps) * log(zetaiq);
+	const double LRg = I1g.integrate(mui,muf,thrs,IntEps) - I2g.integrate(mu0,muf,thrs,IntEps) * log(zetaf) + I2g.integrate(mu0,mui,thrs,IntEps) * log(zetaig);
 
 	// Compute the actual evolution factors
 	const double Rq = exp( LRq - DCSq(mu0,b) * log( zetaf / zetaiq ) );
