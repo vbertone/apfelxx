@@ -196,4 +196,109 @@ namespace apfel {
     return QCDEvMap;
   }
 
+  //_____________________________________________________________________________
+  map<int,double> PhysToQCDEv(map<int,double> const& PhysMap)
+  {
+    // Fill in map in the QCD evolution basis. It attumes that the
+    // gluon has key zero and all keys from -6 to 6 exist.
+    map<int,double> QCDEvMap;
+    QCDEvMap[0] = PhysMap.at(0);
+    QCDEvMap[1] =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      + PhysMap.at(4) + PhysMap.at(-4)
+      + PhysMap.at(5) + PhysMap.at(-5)
+      + PhysMap.at(6) + PhysMap.at(-6);
+    QCDEvMap[2] =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      + PhysMap.at(4) - PhysMap.at(-4)
+      + PhysMap.at(5) - PhysMap.at(-5)
+      + PhysMap.at(6) - PhysMap.at(-6);
+    QCDEvMap[3] =
+      + PhysMap.at(2) + PhysMap.at(-2)
+      - ( PhysMap.at(1) + PhysMap.at(-1) );
+    QCDEvMap[4] =
+      + PhysMap.at(2) - PhysMap.at(-2)
+      - ( PhysMap.at(1) - PhysMap.at(-1) );
+    QCDEvMap[5] =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      - 2 * ( PhysMap.at(3) + PhysMap.at(-3) );
+    QCDEvMap[6] =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      - 2 * ( PhysMap.at(3) - PhysMap.at(-3) );
+    QCDEvMap[7] =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      - 3 * ( PhysMap.at(4) + PhysMap.at(-4) );
+    QCDEvMap[8] =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      - 3 * ( PhysMap.at(4) - PhysMap.at(-4) );
+    QCDEvMap[9] =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      + PhysMap.at(4) + PhysMap.at(-4)
+      - 4 * ( PhysMap.at(5) + PhysMap.at(-5) );
+    QCDEvMap[10] =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      + PhysMap.at(4) - PhysMap.at(-4)
+      - 4 * ( PhysMap.at(5) - PhysMap.at(-5) );
+    QCDEvMap[11] =
+      + PhysMap.at(1) + PhysMap.at(-1)
+      + PhysMap.at(2) + PhysMap.at(-2)
+      + PhysMap.at(3) + PhysMap.at(-3)
+      + PhysMap.at(4) + PhysMap.at(-4)
+      + PhysMap.at(5) + PhysMap.at(-5)
+      - 5 * ( PhysMap.at(6) + PhysMap.at(-6) );
+    QCDEvMap[12] =
+      + PhysMap.at(1) - PhysMap.at(-1)
+      + PhysMap.at(2) - PhysMap.at(-2)
+      + PhysMap.at(3) - PhysMap.at(-3)
+      + PhysMap.at(4) - PhysMap.at(-4)
+      + PhysMap.at(5) - PhysMap.at(-5)
+      - 5 * ( PhysMap.at(6) - PhysMap.at(-6) );
+
+    return QCDEvMap;
+  }
+
+  //_____________________________________________________________________________
+  map<int,double> QCDEvToPhys(map<int,double> const& QCDEvMap)
+  {
+    // Rotation matrix.
+    const double RotQCDEvToPhys[6][6] = {{1./12.,  1./4., 1./12., 1./24.,  1./40.,  1./60.},
+					 {1./12., -1./4., 1./12., 1./24.,  1./40.,  1./60.},
+					 {1./12.,     0., -1./6., 1./24.,  1./40.,  1./60.},
+					 {1./12.,     0.,     0., -1./8.,  1./40.,  1./60.},
+					 {1./12.,     0.,     0.,     0., -1./10.,  1./60.},
+					 {1./12.,     0.,     0.,     0.,      0., -1./12.}};
+
+    // Fill in map in the physical basis. It attumes that the gluon
+    // has key zero and all keys from 0 to 12 exist.
+    map<int,double> PhysMap;
+    PhysMap[0] = QCDEvMap.at(0);
+
+    // Perform the rotation.
+    for (int i = 1; i <= 6; i++)
+      {
+	PhysMap[i]  = 0;
+	PhysMap[-i] = 0;
+	  for (int j = 1; j <= 6; j++)
+	    {
+	      PhysMap[i]  += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+	      PhysMap[-i] += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+	    }
+      }
+
+    return PhysMap;
+  }
 }

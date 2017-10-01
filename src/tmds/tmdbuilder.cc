@@ -337,7 +337,7 @@ namespace apfel {
     Integrator I2g{[=] (double const& mu) -> double{ return GammaCuspg(mu) / mu; }};
 
     // Tabulate product of matching functions, PDFs, NP function, and evolution factors.
-    const auto EvolvedTMDs = [=] (double const& b,double const& muf, double const& zetaf)->Set<Distribution>
+    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf)->Set<Distribution>
       {
 	// Define relevant scales
 	const double mu0    = Mu0b(b);
@@ -346,8 +346,12 @@ namespace apfel {
 	const double zetaig = zetag(mui,b);
 
 	// Compute argument of the exponent of the evolution factors.
-	const double LRq = I1q.integrate(mui,muf,thrs,IntEps) - I2q.integrate(mu0,muf,thrs,IntEps) * log(zetaf) + I2q.integrate(mu0,mui,thrs,IntEps) * log(zetaiq);
-	const double LRg = I1g.integrate(mui,muf,thrs,IntEps) - I2g.integrate(mu0,muf,thrs,IntEps) * log(zetaf) + I2g.integrate(mu0,mui,thrs,IntEps) * log(zetaig);
+	const double LRq = I1q.integrate(mui, muf, thrs, IntEps)
+	- I2q.integrate(mu0, muf, thrs, IntEps) * log(zetaf)
+	+ I2q.integrate(mu0, mui, thrs, IntEps) * log(zetaiq);
+	const double LRg = I1g.integrate(mui, muf, thrs, IntEps)
+	- I2g.integrate(mu0, muf, thrs, IntEps) * log(zetaf)
+	+ I2g.integrate(mu0, mui, thrs, IntEps) * log(zetaig);
 
 	// Compute the actual evolution factors
 	const double Rq = exp( LRq - DCSq(mu0,b) * log( zetaf / zetaiq ) );
@@ -355,12 +359,13 @@ namespace apfel {
 
 	// Multiply PDFs by the non-perturbative function and the
 	// evolution factors.
-	const map<int,Distribution> PertPDFs = CollPDFs.Evaluate(mui).GetObjects();
+	const auto CollPDFsAtMu = CollPDFs.Evaluate(mui);
+	const map<int,Distribution> PertPDFs = CollPDFsAtMu.GetObjects();
 	map<int,Distribution> DistMap;
 	for (auto const& id : PertPDFs)
 	  DistMap.insert({id.first, (id.first == 0 ? Rg : Rq) * id.second * [=] (double const& x)->double{ return fNP(x, b); }});
 
-	Set<Distribution> EvNonPertPDFs{CollPDFs.Evaluate(mui).GetMap(), DistMap};
+	Set<Distribution> EvNonPertPDFs{CollPDFsAtMu.GetMap(), DistMap};
 
 	return MatchFunc(mui,b) * EvNonPertPDFs;
       };
