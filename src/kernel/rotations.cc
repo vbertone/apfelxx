@@ -197,8 +197,21 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,double> PhysToQCDEv(map<int,double> const& PhysMap)
+  map<int,double> PhysToQCDEv(map<int,double> const& InPhysMap)
   {
+    // Call function in the physical basis.
+    map<int,double> PhysMap = InPhysMap;
+
+    // Fill in keys that don't exist.
+    // Gluon (assumes that the ID is 21).
+    if (PhysMap.find(0) == PhysMap.end())
+      PhysMap[0] = PhysMap[21];
+
+    // Quarks (Fill in with zero if they don't exist).
+    for (auto i = -6; i <= 6; i++)
+      if (PhysMap.find(i) == PhysMap.end())
+	PhysMap[i] = 0;
+
     // Fill in map in the QCD evolution basis. It attumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
     map<int,double> QCDEvMap;
@@ -285,7 +298,8 @@ namespace apfel {
     // Fill in map in the physical basis. It attumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     map<int,double> PhysMap;
-    PhysMap[0] = QCDEvMap.at(0);
+    PhysMap[0]  = QCDEvMap.at(0);
+    PhysMap[21] = QCDEvMap.at(0);
 
     // Perform the rotation.
     for (int i = 1; i <= 6; i++)

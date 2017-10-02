@@ -54,7 +54,7 @@ namespace apfel
   //_________________________________________________________________________
   double GammaCusp1(int const& nf)
   {
-    const double coeff = ( 67. / 9. - Pi2 / 3 ) * CA - 20 * TR * nf / 3;
+    const double coeff = ( 67. / 9. - Pi2 / 3 ) * CA - 20 * TR * nf / 9;
     return coeff;
   }
 

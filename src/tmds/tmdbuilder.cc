@@ -79,12 +79,12 @@ namespace apfel {
 	obj.Beta.insert({2, beta2(nf)});
 
 	// GammaCusp
-	obj.GammaCuspq.insert({0, CF * GammaCusp0()});
-	obj.GammaCuspq.insert({1, CF * GammaCusp1(nf)});
-	obj.GammaCuspq.insert({2, CF * GammaCusp2(nf)});
-	obj.GammaCuspg.insert({0, CA * GammaCusp0()});
-	obj.GammaCuspg.insert({1, CA * GammaCusp1(nf)});
-	obj.GammaCuspg.insert({2, CA * GammaCusp2(nf)});
+	obj.GammaCuspq.insert({0, 4 * CF * GammaCusp0()});
+	obj.GammaCuspq.insert({1, 4 * CF * GammaCusp1(nf)});
+	obj.GammaCuspq.insert({2, 4 * CF * GammaCusp2(nf)});
+	obj.GammaCuspg.insert({0, 4 * CA * GammaCusp0()});
+	obj.GammaCuspg.insert({1, 4 * CA * GammaCusp1(nf)});
+	obj.GammaCuspg.insert({2, 4 * CA * GammaCusp2(nf)});
 
 	// GammaV
 	obj.GammaVq.insert({0, gammaVq0()});
@@ -145,7 +145,7 @@ namespace apfel {
 
     // Define the LX fuction as in eq. (4.9) of arXiv:1604.07869.
     const double C0 = 2 * exp(- emc);
-    const auto LX = [C0]  (double const& mu, double const& b) -> double{ return 2 * log( b * mu / C0 ); };
+    const auto LX = [C0] (double const& mu, double const& b) -> double{ return 2 * log( b * mu / C0 ); };
 
     // =================================================================
     // TMD matching on collinear distributions. What follows assume the
@@ -163,6 +163,14 @@ namespace apfel {
 	  return TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs.at(0);
 	};
     else if (PerturbativeOrder == 1)
+      MatchFunc = [=] (double const& mu, double const& b) -> Set<Operator>
+	{
+	  const double Lmu  = LX(mu,b);
+	  const double coup = Alphas(mu) / FourPi;
+	  const double nf   = NF(mu,thrs);
+	  return TmdObj.at(nf).MatchingFunctionsPDFs.at(0) + coup * ( - Lmu * DglapObj.at(nf).SplittingFunctions.at(0) + TmdObj.at(nf).MatchingFunctionsPDFs.at(1) );
+	};
+    else if (PerturbativeOrder == 2)
       MatchFunc = [=] (double const& mu, double const& b) -> Set<Operator>
 	{
 	  const double Lmu  = LX(mu,b);
@@ -247,20 +255,18 @@ namespace apfel {
 	zetaq = [=] (double const& mu, double const& b)->double
 	  {
 	    const auto lz      = TmdObj.at(NF(mu,thrs)).Lzetaq;
-	    const double coup  = Alphas(mu) / FourPi;
 	    const double Lmu   = LX(mu,b);
 	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
-	    const double lzeta = coup * lo;
-	    return 4 * exp( - lzeta + LX(mu,b) - 2 * emc ) / b / b;
+	    const double lzeta = lo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
 	  };
 	zetag = [=] (double const& mu, double const& b)->double
 	  {
 	    const auto lz      = TmdObj.at(NF(mu,thrs)).Lzetag;
-	    const double coup  = Alphas(mu) / FourPi;
 	    const double Lmu   = LX(mu,b);
 	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
-	    const double lzeta = coup * lo;
-	    return 4 * exp( - lzeta + LX(mu,b) - 2 * emc ) / b / b;
+	    const double lzeta = lo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
 	  };
       }
     // NNLL
@@ -314,9 +320,9 @@ namespace apfel {
 	    const double coup  = Alphas(mu) / FourPi;
 	    const double Lmu   = LX(mu,b);
 	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
-	    const double nlo   = lz.at(1)[0] + Lmu * ( lz.at(1)[1] + Lmu * lz.at(1)[2] );
-	    const double lzeta = coup * ( lo + coup * nlo );
-	    return 4 * exp( - lzeta + LX(mu,b) - 2 * emc ) / b / b;
+	    const double nlo   = lz.at(1)[0] + Lmu * Lmu * lz.at(1)[2];
+	    const double lzeta = lo + coup * nlo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
 	  };
 	zetag = [=] (double const& mu, double const& b)->double
 	  {
@@ -324,9 +330,9 @@ namespace apfel {
 	    const double coup  = Alphas(mu) / FourPi;
 	    const double Lmu   = LX(mu,b);
 	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
-	    const double nlo   = lz.at(1)[0] + Lmu * ( lz.at(1)[1] + Lmu * lz.at(1)[2] );
-	    const double lzeta = coup * ( lo + coup * nlo );
-	    return 4 * exp( - lzeta + LX(mu,b) - 2 * emc ) / b / b;
+	    const double nlo   = lz.at(1)[0] + Lmu * Lmu * lz.at(1)[2];
+	    const double lzeta = lo + coup * nlo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
 	  };
       }
 
@@ -336,7 +342,9 @@ namespace apfel {
     Integrator I2q{[=] (double const& mu) -> double{ return GammaCuspq(mu) / mu; }};
     Integrator I2g{[=] (double const& mu) -> double{ return GammaCuspg(mu) / mu; }};
 
-    // Tabulate product of matching functions, PDFs, NP function, and evolution factors.
+    // Construct function that returns the product of: matching
+    // functions, PDFs, NP function, and evolution factors, i.e. the
+    // set of evolved TMDs (times x).
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf)->Set<Distribution>
       {
 	// Define relevant scales
