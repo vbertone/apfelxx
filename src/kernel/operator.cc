@@ -230,6 +230,24 @@ namespace apfel
     return *this;
   }
 
+
+  //_________________________________________________________________________
+  Operator& Operator::operator *= (function<double(double const&)> f)
+  {
+    if (!_grid.ExtGrids())
+      throw runtime_exception("Operator::operator*=", "Multiplication by a function not allowed on internal grids");
+
+    for (size_t ig = 0; ig < _Operator.size(); ig++)
+      {
+	// Get ig-th subgrid
+	const auto& sg = _grid.GetSubGrid(ig).GetGrid();
+	for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
+	  for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
+	    _Operator[ig](alpha,beta) *= f(sg[alpha]);
+      }
+    return *this;
+  }
+
   //_________________________________________________________________________
   Operator& Operator::operator /= (double const& s)
   {
@@ -294,6 +312,18 @@ namespace apfel
   Operator operator * (Operator lhs, double const& s)
   {
     return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  Operator operator * (function<double(double const&)> f, Operator rhs)
+  {
+    return rhs *= f;
+  }
+
+  //_________________________________________________________________________
+  Operator operator * (Operator lhs, function<double(double const&)> f)
+  {
+    return lhs *= f;
   }
 
   //_________________________________________________________________________

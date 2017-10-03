@@ -48,18 +48,24 @@ namespace apfel {
 
     // ===============================================================
     // NLO matching functions operators.
-    map<int,Operator> MatchPDFsNLO;
+    map<int,map<int,Operator>> MatchPDFsNLO;
     const Operator O1ns{g, C1ns{}, IntEps};
     const Operator O1qg{g, C1qg{}, IntEps};
     const Operator O1gq{g, C1gq{}, IntEps};
     const Operator O1gg{g, C1gg{}, IntEps};
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PNSP, O1ns});
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PNSM, O1ns});
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PNSV, O1ns});
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PQQ,  O1ns});
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PQG,  O1qg});
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PGQ,  O1gq});
-    MatchPDFsNLO.insert({EvolutionBasisQCD::PGG,  O1gg});
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O1qgnf = nf * O1qg;
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O1ns});
+	OM.insert({EvolutionBasisQCD::PNSM, O1ns});
+	OM.insert({EvolutionBasisQCD::PNSV, O1ns});
+	OM.insert({EvolutionBasisQCD::PQQ,  O1ns});
+	OM.insert({EvolutionBasisQCD::PQG,  O1qgnf});
+	OM.insert({EvolutionBasisQCD::PGQ,  O1gq});
+	OM.insert({EvolutionBasisQCD::PGG,  O1gg});
+	MatchPDFsNLO.insert({nf,OM});
+      }
 
     // Define object of the structure containing the TmdObjects
     map<int,TmdObjects> TmdObj;
@@ -115,7 +121,7 @@ namespace apfel {
 	// Matching functions.
 	const EvolutionBasisQCD evb{nf};
 	obj.MatchingFunctionsPDFs.insert({0, Set<Operator>{evb, MatchLO}});
-	obj.MatchingFunctionsPDFs.insert({1, Set<Operator>{evb, MatchPDFsNLO}});
+	obj.MatchingFunctionsPDFs.insert({1, Set<Operator>{evb, MatchPDFsNLO.at(nf)}});
 	//obj.MatchingFunctionsPDFs.insert({2, Set<Operator>{evb, MatchPDFsNNLO}});
 
 	//obj.MatchingFunctionsFFs.insert({0, Set<Operator>{evb, MatchLO}});
@@ -165,18 +171,22 @@ namespace apfel {
     else if (PerturbativeOrder == 1)
       MatchFunc = [=] (double const& mu, double const& b) -> Set<Operator>
 	{
+	  const int nf      = NF(mu,thrs);
+	  const auto mf     = TmdObj.at(nf).MatchingFunctionsPDFs;
+	  const auto sf     = DglapObj.at(nf).SplittingFunctions;
 	  const double Lmu  = LX(mu,b);
 	  const double coup = Alphas(mu) / FourPi;
-	  const double nf   = NF(mu,thrs);
-	  return TmdObj.at(nf).MatchingFunctionsPDFs.at(0) + coup * ( - Lmu * DglapObj.at(nf).SplittingFunctions.at(0) + TmdObj.at(nf).MatchingFunctionsPDFs.at(1) );
+	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
 	};
     else if (PerturbativeOrder == 2)
       MatchFunc = [=] (double const& mu, double const& b) -> Set<Operator>
 	{
+	  const int nf      = NF(mu,thrs);
+	  const auto mf     = TmdObj.at(nf).MatchingFunctionsPDFs;
+	  const auto sf     = DglapObj.at(nf).SplittingFunctions;
 	  const double Lmu  = LX(mu,b);
 	  const double coup = Alphas(mu) / FourPi;
-	  const double nf   = NF(mu,thrs);
-	  return TmdObj.at(nf).MatchingFunctionsPDFs.at(0) + coup * ( - Lmu * DglapObj.at(nf).SplittingFunctions.at(0) + TmdObj.at(nf).MatchingFunctionsPDFs.at(1) );
+	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
 	};
 
     // =================================================================
@@ -361,21 +371,17 @@ namespace apfel {
 	- I2g.integrate(mu0, muf, thrs, IntEps) * log(zetaf)
 	+ I2g.integrate(mu0, mui, thrs, IntEps) * log(zetaig);
 
-	// Compute the actual evolution factors
+	// Compute the evolution factors.
 	const double Rq = exp( LRq - DCSq(mu0,b) * log( zetaf / zetaiq ) );
 	const double Rg = exp( LRg - DCSg(mu0,b) * log( zetaf / zetaig ) );
 
-	// Multiply PDFs by the non-perturbative function and the
-	// evolution factors.
-	const auto CollPDFsAtMu = CollPDFs.Evaluate(mui);
-	const map<int,Distribution> PertPDFs = CollPDFsAtMu.GetObjects();
-	map<int,Distribution> DistMap;
-	for (auto const& id : PertPDFs)
-	  DistMap.insert({id.first, (id.first == 0 ? Rg : Rq) * id.second * [=] (double const& x)->double{ return fNP(x, b); }});
+	// Create vector of evolution factors.
+	const vector<double> Rv{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
 
-	Set<Distribution> EvNonPertPDFs{CollPDFsAtMu.GetMap(), DistMap};
-
-	return MatchFunc(mui,b) * EvNonPertPDFs;
+	// Multiply PDFs + NP functions for the matching functions and
+	// the evolutions factor. First muplity everything for the
+	// quark evolution factor.
+	return Rv * ( MatchFunc(mui,b) * ( [&] (double const& x)->double{ return fNP(x, b); } * CollPDFs.Evaluate(mui) ) );
       };
 
     return EvolvedTMDs;

@@ -91,6 +91,24 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
+  Set<T>& Set<T>::operator *= (function<double(double const&)> f)
+  {
+    for (auto& v: _objects)
+      v.second *= f;
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  Set<T>& Set<T>::operator *= (vector<double> const& v)
+  {
+    for (auto& o: _objects)
+      o.second *= v[o.first];
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   Set<T>& Set<T>::operator /= (int const& s)
   {
     const double r = 1.0/static_cast<double>(s);
@@ -143,6 +161,7 @@ namespace apfel {
     return CombObj;
   }
 
+  // Specialisations.
   template class Set<Distribution>;
   template class Set<Operator>;
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;

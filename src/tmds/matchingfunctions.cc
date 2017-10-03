@@ -34,7 +34,7 @@ namespace apfel
   }
   double C1qg::Regular(double const& x) const
   {
-    return 4 * TR * x * ( 1 - x );
+    return 8 * TR * x * ( 1 - x );
   }
 
   //_________________________________________________________________________________

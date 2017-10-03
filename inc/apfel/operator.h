@@ -41,15 +41,16 @@ namespace apfel
     Operator(Grid const& gr, Expression const& expr, accuracy const& eps = 1e-5);
 
     // Operators.
-    Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
-    Operator&    operator  = (Operator const& o);           //!< this  = Operator
-    Operator&    operator *= (Operator const& o);           //!< this *= Operator
-    Operator&    operator *= (double const& s);             //!< this *= Scalar
-    Operator&    operator /= (double const& s);             //!< this /= Scalar
-    Operator&    operator += (Operator const& o);           //!< this += Operator
-    Operator&    operator -= (Operator const& o);           //!< this -= Operator
+    Distribution operator *= (Distribution const& d) const;       //!< this *= Distribution
+    Operator&    operator  = (Operator const& o);                 //!< this  = Operator
+    Operator&    operator *= (Operator const& o);                 //!< this *= Operator
+    Operator&    operator *= (double const& s);                   //!< this *= Scalar
+    Operator&    operator *= (function<double(double const&)> f); //!< This *= function
+    Operator&    operator /= (double const& s);                   //!< this /= Scalar
+    Operator&    operator += (Operator const& o);                 //!< this += Operator
+    Operator&    operator -= (Operator const& o);                 //!< this -= Operator
 
-    Grid const& GetGrid() const { return _grid; }           //!< return the grid
+    Grid const& GetGrid() const { return _grid; }                 //!< return the grid
 
   protected:
     /**
@@ -72,11 +73,13 @@ namespace apfel
 
   // Extra operation definitions where Operator is at the left hand
   // side (lhs).
-  Distribution operator * (Operator lhs, Distribution const& rhs); //!< Operator*Distribution
-  Operator     operator * (Operator lhs, Operator const& rhs);     //!< Operator*Operator
-  Operator     operator * (double const& s, Operator rhs);         //!< Scalar*Operator
-  Operator     operator * (Operator lhs, double const& s);         //!< Operator*Scalar
-  Operator     operator / (Operator lhs, double const& s);         //!< Operator/Scalar
-  Operator     operator + (Operator lhs, Operator const& rhs);     //!< Operator+Operator
-  Operator     operator - (Operator lhs, Operator const& rhs);     //!< Operator-Operator
+  Distribution operator * (Operator lhs, Distribution const& rhs);           //!< Operator*Distribution
+  Operator     operator * (Operator lhs, Operator const& rhs);               //!< Operator*Operator
+  Operator     operator * (double const& s, Operator rhs);                   //!< Scalar*Operator
+  Operator     operator * (Operator lhs, double const& s);                   //!< Operator*Scalar
+  Operator     operator * (function<double(double const&)> f, Operator rhs); //!< function*Operator
+  Operator     operator * (Operator lhs, function<double(double const&)> f); //!< Operator*function
+  Operator     operator / (Operator lhs, double const& s);                   //!< Operator/Scalar
+  Operator     operator + (Operator lhs, Operator const& rhs);               //!< Operator+Operator
+  Operator     operator - (Operator lhs, Operator const& rhs);               //!< Operator-Operator
 }
