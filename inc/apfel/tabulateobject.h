@@ -45,6 +45,18 @@ namespace apfel
 		   vector<double>      const& Thresholds,
 		   double              const& Lambda = 0.25);
 
+    /**
+     * @brief TabulateObject default constructor.
+     */
+    TabulateObject(function<T(double)>             const& Object,
+		   int                             const& nQ,
+		   double                          const& QMin,
+		   double                          const& QMax,
+		   int                             const& InterDegree,
+		   vector<double>                  const& Thresholds,
+		   function<double(double const&)> const& TabFunc,
+		   function<double(double const&)> const& InvTabFunc);
+
     double EvaluatexQ(double const& x, double const& Q) const;
     double EvaluatexQ(int const& i, double const& x, double const& Q) const;
     double EvaluatexzQ(double const& x, double const& z, double const& Q) const;

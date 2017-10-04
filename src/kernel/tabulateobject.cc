@@ -97,6 +97,29 @@ namespace apfel {
     t.stop();
   }
 
+  //_________________________________________________________________________________
+  template<class T>
+  TabulateObject<T>::TabulateObject(function<T(double)>             const& Object,
+				    int                             const& nQ,
+				    double                          const& QMin,
+				    double                          const& QMax,
+				    int                             const& InterDegree,
+				    vector<double>                  const& Thresholds,
+				    function<double(double const&)> const& TabFunc,
+				    function<double(double const&)> const& InvTabFunc):
+    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, TabFunc, InvTabFunc)
+  {
+    cout << "Tabulating object... ";
+    Timer t;
+    t.start();
+
+    // Fill in Qgrid with the object.
+    for (auto const& iQ : this->_Qg)
+      this->_GridValues.push_back(Object(iQ));
+
+    t.stop();
+  }
+
   // Specializations
   //_________________________________________________________________________________
   template class TabulateObject<double>;

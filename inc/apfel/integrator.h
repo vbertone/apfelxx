@@ -9,6 +9,7 @@
 
 #include <functional>
 #include <vector>
+#include <iostream>
 
 using std::function;
 using std::vector;
@@ -34,6 +35,19 @@ namespace apfel
      * @param func the function to be integrated.
      */
     Integrator(function<double(double const&)> const& func);
+
+    /**
+     * @brief This takes a function of two variables and integrates
+     * over the first keeping the second fixed to 'arg2'.
+     */
+    Integrator(function<double(double const&, double const&)> const& func2, double const& arg2);
+
+    /**
+     * @brief This takes a function of three variables and integrates
+     * over the first keeping the second and the thisrd fixed to
+     * 'arg2' and 'arg3'.
+     */
+    Integrator(function<double(double const&, double const&, double const&)> const& func3, double const& arg2, double const& arg3);
 
     /**
      * @brief Integrates the integrand passed during initialization

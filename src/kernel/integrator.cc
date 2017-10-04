@@ -70,6 +70,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Integrator::Integrator(function<double(double const&, double const&)> const& func2, double const& arg2):
+    Integrator([func2,arg2] (double const& x)->double{ return func2(x, arg2); })
+  {
+  }
+
+  //_________________________________________________________________________
+  Integrator::Integrator(function<double(double const&, double const&, double const&)> const& func3, double const& arg2, double const& arg3):
+    Integrator([func3,arg2,arg3] (double const& x)->double{ return func3(x, arg2, arg3); })
+  {
+  }
+
+  //_________________________________________________________________________
   double Integrator::integrate(double const& a, double const& b, double const& eps) const
   {
     const double delta = eps25 * fabs(a-b);
@@ -160,5 +172,4 @@ namespace apfel
     I *= k1;
     return I;
   }
-
 }
