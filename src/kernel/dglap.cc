@@ -15,7 +15,6 @@
 using namespace std;
 
 namespace apfel {
-
   //_________________________________________________________________________________
   Dglap::Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
 	       function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
@@ -84,6 +83,5 @@ namespace apfel {
     // evolution basis).
     SetObjectRef(Set<Distribution>{_SplittingFunctions(nf0, 0).GetMap(), DistMap});
   }
-
 }
 

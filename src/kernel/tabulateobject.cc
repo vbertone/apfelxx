@@ -110,13 +110,13 @@ namespace apfel {
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(double const& x, double const& Q) const
   {
-    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+    const auto fq     = this->_TabFunc(Q);
     const auto bounds = this->SumBounds(Q);
 
     // Loop over the nodes.
     double result = 0;
     for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
-      result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].Evaluate(x);
+      result += Interpolant(get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x);
 
     return result;
   };
@@ -125,13 +125,13 @@ namespace apfel {
   template<>
   double TabulateObject<Set<Distribution>>::EvaluatexQ(int const& i, double const& x, double const& Q) const
   {
-    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+    const auto fq     = this->_TabFunc(Q);
     const auto bounds = this->SumBounds(Q);
 
     // Loop over the nodes.
     double result = 0;
     for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
-      result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].at(i).Evaluate(x);
+      result += Interpolant(get<0>(bounds), tau, fq) * this->_GridValues[tau].at(i).Evaluate(x);
 
     return result;
   }
@@ -140,13 +140,13 @@ namespace apfel {
   template<>
   double TabulateObject<DoubleObject<Distribution>>::EvaluatexzQ(double const& x, double const& z, double const& Q) const
   {
-    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+    const auto fq     = this->_TabFunc(Q);
     const auto bounds = this->SumBounds(Q);
 
     // Loop over the nodes.
     double result = 0;
     for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
-      result += Interpolant(get<0>(bounds), tau, ll2ql) * this->_GridValues[tau].Evaluate(x,z);
+      result += Interpolant(get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x,z);
 
     return result;
   }
@@ -155,7 +155,7 @@ namespace apfel {
   template<>
   map<int,double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
   {
-    const auto ll2ql  = log( 2 * log( Q / this->_Lambda ) );
+    const auto fq     = this->_TabFunc(Q);
     const auto bounds = this->SumBounds(Q);
     const int cp      = get<0>(bounds);
     const int lower   = get<1>(bounds);
@@ -166,7 +166,7 @@ namespace apfel {
     for (auto tau = lower; tau < upper; tau++)
       {
 	const auto& obj = this->_GridValues[tau].GetObjects();
-	const double w = Interpolant(cp, tau, ll2ql);
+	const double w = Interpolant(cp, tau, fq);
 	for (auto it = obj.begin(); it != obj.end(); ++it)
 	  result[it->first] += w * it->second.Evaluate(x);
       }

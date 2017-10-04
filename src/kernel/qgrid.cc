@@ -16,12 +16,18 @@ namespace apfel
 {
   //_________________________________________________________________________________
   template<class T>
-  QGrid<T>::QGrid(int const& nQ, double const& QMin, double const& QMax, int const& InterDegree, vector<double> const& Thresholds, double const& Lambda):
+  QGrid<T>::QGrid(int                             const& nQ,
+		  double                          const& QMin,
+		  double                          const& QMax,
+		  int                             const& InterDegree,
+		  vector<double>                  const& Thresholds,
+		  function<double(double const&)> const& TabFunc,
+		  function<double(double const&)> const& InvTabFunc):
     _nQ(nQ),
     _InterDegree(InterDegree),
     _QMin(QMin),
     _QMax(QMax),
-    _Lambda(Lambda),
+    _TabFunc(TabFunc),
     _Thresholds(Thresholds)
   {
     // Check that QMin is actually smaller than QMax.
@@ -34,23 +40,24 @@ namespace apfel
 
     // Compute a temporary grid constant in ln(ln(Q^2/Lambda^2)
     // without taking into account the threholds.
-    vector<double> llql = { log( 2 * log( _QMin / _Lambda ) ) };
-    auto Step = log( log( _QMax / _Lambda ) / log( _QMin / _Lambda ) ) / _nQ;
-    for (auto iq = 1; iq <= _nQ; iq++) llql.push_back(llql.back()+Step);
+    vector<double> fq = {_TabFunc(_QMin)};
+    double Step = ( _TabFunc(_QMax) - _TabFunc(_QMin) ) / _nQ;
+    for (auto iq = 1; iq <= _nQ; iq++)
+      fq.push_back(fq.back()+Step);
 
     // Identify the indices of the grid points that fall right below
     // the thresholds.  This will define the number of points that
     // fall in each interval defined by the grid bounds and the
     // thresholds.
     _nQg.push_back(0);
-    vector<double> llThL = {log( 2 * log( _QMin / _Lambda ) )};
+    vector<double> fqTh = {_TabFunc(_QMin)};
     for (auto isg = nfin+1; isg <= nffi; isg++)
       {
-	llThL.push_back(log( 2 * log( _Thresholds[isg-1] / _Lambda ) ));
-	_nQg.push_back(lower_bound(llql.begin()+1, llql.end(), llThL.back()) - llql.begin());
+	fqTh.push_back(_TabFunc(_Thresholds[isg-1]));
+	_nQg.push_back(lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
       }
     _nQg.push_back(_nQ);
-    llThL.push_back(log( 2 * log( _QMax / _Lambda ) ));
+    fqTh.push_back(_TabFunc(_QMax));
 
     // Check that all intervals have at least two points. If not,
     // adjust it. Check also whether there is any subgrid whose number
@@ -67,33 +74,47 @@ namespace apfel
 
     // Now construct the actual grid in such a way that the threshold
     // concides with nodes of the grid.
-    _llQ2g.push_back(log( 2 * log( _QMin / _Lambda ) ));
+    _fQg.push_back(_TabFunc(_QMin));
     for (auto isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
-	Step = ( llThL[isg+1] - llThL[isg] ) / ( _nQg[isg+1] - _nQg[isg] - 1 );
-	for (auto iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++) _llQ2g.push_back(_llQ2g.back()+Step);
-	_llQ2g.push_back(_llQ2g.back());
+	Step = ( fqTh[isg+1] - fqTh[isg] ) / ( _nQg[isg+1] - _nQg[isg] - 1 );
+	for (auto iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++) _fQg.push_back(_fQg.back()+Step);
+	_fQg.push_back(_fQg.back());
       }
 
     // Displace slightly the values below and above the thresholds.
     for (auto isg = 1; isg < (int) _nQg.size() - 1; isg++)
       {
-	_llQ2g[_nQg[isg]-1] *= 1 - eps15;
-	_llQ2g[_nQg[isg]]   *= 1 + eps15;
+	_fQg[_nQg[isg]-1] *= 1 - eps15;
+	_fQg[_nQg[isg]]   *= 1 + eps15;
       }
 
     // Now compute grid in Q.
-    for (auto const& lq : _llQ2g)
-      _Qg.push_back(_Lambda * exp( exp(lq) / 2 ));
+    for (auto const& lq : _fQg)
+      _Qg.push_back(InvTabFunc(lq));
   }
 
   //_________________________________________________________________________________
   template<class T>
-  double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& lnln2ql) const
+  QGrid<T>::QGrid(int            const& nQ,
+		  double         const& QMin,
+		  double         const& QMax,
+		  int            const& InterDegree,
+		  vector<double> const& Thresholds,
+		  double         const& Lambda):
+    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds,
+	     [Lambda] (double const& Q)->double{ return log( 2 * log( Q / Lambda ) ); },
+	     [Lambda] (double const& fQ)->double{ return Lambda * exp( exp(fQ) / 2 ); })
+  {
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
+  double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& fq) const
   {
     // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless
     // tau coincides with a threshold index. In that case return zero.
-    if (fabs(lnln2ql / _llQ2g[tau] - 1) < eps11)
+    if (fabs(fq / _fQg[tau] - 1) < eps11)
       return 1;
 
     // Define the lower bound of the interpolation range.
@@ -107,13 +128,13 @@ namespace apfel
     // Find the the neighbors of "Q" on the grid
     int j;
     for (j = tau+tQ-bound; j >=0 ; j--)
-      if (lnln2ql < _llQ2g[tau+tQ-j+1])
+      if (fq < _fQg[tau+tQ-j+1])
 	break;
 
     // Compute the interpolant
     for (auto delta = tau-j; delta <= tau-j+_InterDegree; delta++)
       if (delta != tau)
-	w_int *= ( lnln2ql - _llQ2g[delta] ) / ( _llQ2g[tau] - _llQ2g[delta] );
+	w_int *= ( fq - _fQg[delta] ) / ( _fQg[tau] - _fQg[delta] );
 
     return w_int;
   }
@@ -177,15 +198,15 @@ namespace apfel
   T QGrid<T>::Evaluate(double const& Q) const
   {
     auto const bounds = SumBounds(Q);
-    auto const ll2ql  = log( 2 * log( Q / _Lambda ) );
+    auto const fq     = _TabFunc(Q);
 
     // first create a copy of template object with the first component
     auto tau = get<1>(bounds);
-    T result = Interpolant(get<0>(bounds), tau, ll2ql) * _GridValues[tau];
+    T result = Interpolant(get<0>(bounds), tau, fq) * _GridValues[tau];
 
     // then loop and add the extra terms
     for (tau = tau+1; tau < get<2>(bounds); tau++)
-      result += Interpolant(get<0>(bounds), tau, ll2ql) * _GridValues[tau];
+      result += Interpolant(get<0>(bounds), tau, fq) * _GridValues[tau];
 
     return result;
   }
@@ -203,8 +224,6 @@ namespace apfel
     if (_InterDegree != Qg._InterDegree)
       return false;
     if (_Thresholds != Qg._Thresholds)
-      return false;
-    if (_Lambda != Qg._Lambda)
       return false;
 
     return true;
