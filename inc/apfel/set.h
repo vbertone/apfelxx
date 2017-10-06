@@ -48,9 +48,10 @@ namespace apfel
     Set<T>& operator *= (double const& s);                   //!< this *= scalar
     Set<T>& operator *= (function<double(double const&)> f); //!< this *= function of the integration variable (for distributions only)
     Set<T>& operator *= (vector<double> const& v);           //!< this *= vector of scalars
-    Set<T>& operator /= (int const& s);                      //!< this /= scalar
+    Set<T>& operator /= (double const& s);                   //!< this /= scalar
     Set<T>& operator *= (Set<T> const& d);                   //!< this *= Set
     Set<T>& operator += (Set<T> const& d);                   //!< this += Set
+    Set<T>& operator -= (Set<T> const& d);                   //!< this -= Set
 
     // Get methods
     T              const& at(int const& id) const { return _objects.at(id); }
@@ -97,11 +98,14 @@ namespace apfel
   Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s; }
 
   template<class T>
-  Set<T> operator / (Set<T> lhs, int const& s) { return lhs /= s; }
+  Set<T> operator / (Set<T> lhs, double const& s) { return lhs /= s; }
 
   template<class T>
   Set<T> operator * (Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs; }
 
   template<class T>
   Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { return lhs += rhs; }
+
+  template<class T>
+  Set<T> operator - (Set<T> lhs, Set<T> const& rhs) { return lhs -= rhs; }
 }

@@ -64,7 +64,6 @@ namespace apfel {
     // Compute hard coefficient.
     const double ConvFact = 0.3893379e9;
     const double hcs = ConvFact * FourPi * HardCrossSectionDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), muf/Q) / 9 / pow(Vs*Q,2);
-    cout << hcs <<  endl;
 
     return [TMDLumib,hcs,Q] (double const& qT)->double
       {

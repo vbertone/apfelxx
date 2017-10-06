@@ -67,6 +67,32 @@ namespace apfel {
 	MatchPDFsNLO.insert({nf,OM});
       }
 
+    // ===============================================================
+    // NNLO matching functions operators.
+    map<int,map<int,Operator>> MatchPDFsNNLO;
+    const Operator O2Vqqb{g, C2Vqqb{}, IntEps};
+    const Operator O2ps{g, C2ps{}, IntEps};
+    const Operator O2qg{g, C2qg{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O2Vqq{g, C2Vqq{nf}, IntEps};
+	const Operator O2qgnf = nf * O2qg;
+	const Operator O2gq{g, C2gq{nf}, IntEps};
+	const Operator O2gg{g, C2gg{nf}, IntEps};
+	const Operator O2nsp = O2Vqq + O2Vqqb;
+	const Operator O2nsm = O2Vqq - O2Vqqb;
+	const Operator O2qq  = O2nsp + nf * O2ps;
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O2nsp});
+	OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
+	OM.insert({EvolutionBasisQCD::PNSV, O2nsm});
+	OM.insert({EvolutionBasisQCD::PQQ,  O2qq});
+	OM.insert({EvolutionBasisQCD::PQG,  O2qgnf});
+	OM.insert({EvolutionBasisQCD::PGQ,  O2gq});
+	OM.insert({EvolutionBasisQCD::PGG,  O2gg});
+	MatchPDFsNNLO.insert({nf,OM});
+      }
+
     // Define object of the structure containing the TmdObjects
     map<int,TmdObjects> TmdObj;
 
@@ -122,7 +148,7 @@ namespace apfel {
 	const EvolutionBasisQCD evb{nf};
 	obj.MatchingFunctionsPDFs.insert({0, Set<Operator>{evb, MatchLO}});
 	obj.MatchingFunctionsPDFs.insert({1, Set<Operator>{evb, MatchPDFsNLO.at(nf)}});
-	//obj.MatchingFunctionsPDFs.insert({2, Set<Operator>{evb, MatchPDFsNNLO}});
+	obj.MatchingFunctionsPDFs.insert({2, Set<Operator>{evb, MatchPDFsNNLO.at(nf)}});
 
 	//obj.MatchingFunctionsFFs.insert({0, Set<Operator>{evb, MatchLO}});
 	//obj.MatchingFunctionsFFs.insert({1, Set<Operator>{evb, MatchFFsNLO}});
@@ -179,15 +205,60 @@ namespace apfel {
 	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
 	};
     else if (PerturbativeOrder == 2)
-      MatchFunc = [=] (double const& mu, double const& b) -> Set<Operator>
-	{
-	  const int nf      = NF(mu,thrs);
-	  const auto mf     = TmdObj.at(nf).MatchingFunctionsPDFs;
-	  const auto sf     = DglapObj.at(nf).SplittingFunctions;
-	  const double Lmu  = LX(mu,b);
-	  const double coup = Alphas(mu) / FourPi;
-	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
-	};
+      {
+	// Precompute set of operators on the O(as^2) bit that are
+	// proportional to the different powers of Lmu (see eq. (2.37)
+	// of https://arxiv.org/pdf/1706.01473.pdf).
+	map<int,Set<Operator>> SetLcoef;
+	map<int,Set<Operator>> SetL2coef;
+	for (auto const& to : TmdObj)
+	  {
+	    const int nf    = to.first;
+	    const double b0 = to.second.Beta.at(0);
+	    const auto mf   = to.second.MatchingFunctionsPDFs;
+	    const auto sf   = DglapObj.at(nf).SplittingFunctions;
+
+	    // Construct matricial product of P0 * P0 and P0 * C1.
+	    const auto P0 = sf.at(0);
+	    const auto P1 = sf.at(1);
+	    const auto C1 = mf.at(1);
+	    const auto ConvMap = P0.GetMap();
+
+	    map<int,Operator> MapLcoef;
+	    MapLcoef.insert({EvolutionBasisQCD::PNSP, P1.at(0) + b0 * C1.at(0) - P0.at(0) * P0.at(0)});
+	    MapLcoef.insert({EvolutionBasisQCD::PNSM, P1.at(1) + b0 * C1.at(1) - P0.at(1) * P0.at(1)});
+	    MapLcoef.insert({EvolutionBasisQCD::PNSV, P1.at(2) + b0 * C1.at(2) - P0.at(2) * P0.at(2)});
+	    MapLcoef.insert({EvolutionBasisQCD::PQQ,  P1.at(3) + b0 * C1.at(3) - P0.at(3) * P0.at(3) - P0.at(4) * P0.at(5)});
+	    MapLcoef.insert({EvolutionBasisQCD::PQG,  P1.at(4) + b0 * C1.at(4) - P0.at(3) * P0.at(4) - P0.at(4) * P0.at(6)});
+	    MapLcoef.insert({EvolutionBasisQCD::PGQ,  P1.at(5) + b0 * C1.at(5) - P0.at(5) * P0.at(3) - P0.at(6) * P0.at(5)});
+	    MapLcoef.insert({EvolutionBasisQCD::PGG,  P1.at(6) + b0 * C1.at(6) - P0.at(5) * P0.at(4) - P0.at(6) * P0.at(6)});
+
+	    map<int,Operator> MapL2coef;
+	    MapL2coef.insert({EvolutionBasisQCD::PNSP, P0.at(0) * C1.at(0) - b0 * P0.at(0)});
+	    MapL2coef.insert({EvolutionBasisQCD::PNSM, P0.at(1) * C1.at(1) - b0 * P0.at(1)});
+	    MapL2coef.insert({EvolutionBasisQCD::PNSV, P0.at(2) * C1.at(2) - b0 * P0.at(2)});
+	    MapL2coef.insert({EvolutionBasisQCD::PQQ,  P0.at(3) * C1.at(3) + P0.at(4) * C1.at(5) - b0 * P0.at(3)});
+	    MapL2coef.insert({EvolutionBasisQCD::PQG,  P0.at(3) * C1.at(4) + P0.at(4) * C1.at(6) - b0 * P0.at(4)});
+	    MapL2coef.insert({EvolutionBasisQCD::PGQ,  P0.at(5) * C1.at(3) + P0.at(6) * C1.at(5) - b0 * P0.at(5)});
+	    MapL2coef.insert({EvolutionBasisQCD::PGG,  P0.at(5) * C1.at(4) + P0.at(6) * C1.at(6) - b0 * P0.at(6)});
+
+	    SetLcoef.insert({nf,Set<Operator>{ConvMap, MapLcoef}});
+	    SetL2coef.insert({nf,Set<Operator>{ConvMap, MapL2coef}});
+	  }
+
+	// Now contruct the actual matching-function function.
+	MatchFunc = [=] (double const& mu, double const& b) -> Set<Operator>
+	  {
+	    const int nf      = NF(mu,thrs);
+	    const auto mf     = TmdObj.at(nf).MatchingFunctionsPDFs;
+	    const auto sf     = DglapObj.at(nf).SplittingFunctions;
+	    const double Lmu  = LX(mu,b);
+	    const double coup = Alphas(mu) / FourPi;
+	    const auto nlo = - Lmu * sf.at(0) + mf.at(1);
+	    const auto nnlo = mf.at(2) - Lmu * ( SetLcoef.at(nf) + Lmu * SetL2coef.at(nf) );
+	    return mf.at(0) + coup * ( nlo + coup * nnlo );
+	  };
+      }
 
     // =================================================================
     // TMD evolution

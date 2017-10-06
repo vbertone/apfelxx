@@ -109,9 +109,9 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator /= (int const& s)
+  Set<T>& Set<T>::operator /= (double const& s)
   {
-    const double r = 1.0/static_cast<double>(s);
+    const double r = 1. / s;
     for (auto& v: _objects)
       v.second *= r;
     return *this;
@@ -139,6 +139,19 @@ namespace apfel {
 
     for (auto& v: _objects)
       v.second += d.at(v.first);
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  Set<T>& Set<T>::operator -= (Set<T> const& d)
+  {
+    if (_map.GetName() != d.GetMap().GetName())
+      throw runtime_exception("Set::operator -=", "Convolution Map does not match");
+
+    for (auto& v: _objects)
+      v.second -= d.at(v.first);
 
     return *this;
   }

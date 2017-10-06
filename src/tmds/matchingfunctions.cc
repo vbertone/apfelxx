@@ -7,9 +7,11 @@
 
 #include "apfel/matchingfunctions.h"
 #include "apfel/tools.h"
-//#include "apfel/specialfunctions.h"
 
 #include <cmath>
+#include <numeric>
+
+using std::inner_product;
 
 namespace apfel
 {
@@ -57,444 +59,299 @@ namespace apfel
     return - CA * zeta2;
   }
 
-  // //_________________________________________________________________________________
-  // P1nsp::P1nsp(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  //   _a2 = - 40 / 9. * CF * _nf + ( 268 / 9. - 8 * zeta2 ) * CA * CF;
-  // }
-  // double P1nsp::Regular(double const& x) const
-  // {
-  //   const auto lnx   = log(x);
-  //   const auto lnx2  = lnx * lnx;
-  //   const auto ln1mx = log(1-x);
-  //   const auto pqq   = 2 / ( 1 - x ) - 1 - x;
-  //   const auto pqqmx = 2 / ( 1 + x ) - 1 + x;
-  //   const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-  //   const auto gqq1  =
-  //     + 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
-  //     + 4 * CA * CF * ( ( 67 / 18. + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
-  // 			+ 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
-  //     + 4 * CF * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - 5 * ( 1 - x )
-  // 			- lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
-  //     + 4 * CF * ( CF - CA / 2 ) * ( 2 * pqqmx * S2x + 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) );
-  //   const auto gqq1l = _a2 / ( 1 - x );
-  //   const auto x1nspa = gqq1 - gqq1l;
-  //   return x1nspa;
-  // }
-  // double P1nsp::Singular(double const& x) const
-  // {
-  //   return _a2 / ( 1 - x );
-  // }
-  // double P1nsp::Local(double const& x) const
-  // {
-  //   const auto p1delta =
-  //     - 1 / 3. * CF * _nf + 3 / 2. * CF * CF + 17 / 6. * CA * CF + 24 * zeta3 * CF * CF - 12 * zeta3 * CA * CF
-  //     - 8 / 3. * zeta2 * CF * _nf - 12 * zeta2 * CF * CF + 44 / 3. * zeta2 * CA * CF;
-  //   const auto x1nsc = log(1-x) * _a2 + p1delta;
-  //   return x1nsc;
-  // }
+  //_________________________________________________________________________________
+  C2Vqq::C2Vqq(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+    _A2 = - 3232. / 27 + 112 * zeta3 + 448. * _nf / 81.;
+    _A3 = 0;
+  }
+  double C2Vqq::Regular(double const& x) const
+  {
+    const double fA4 = log(1-x);
+    const double fA5 = fA4 * fA4;
+    const double fA6 = fA5 * fA4;
 
-  // //_________________________________________________________________________________
-  // P1nsm::P1nsm(int const& nf):
-  //   P1nsp(nf)
-  // {
-  // }
-  // double P1nsm::Regular(double const& x) const
-  // {
-  //   const auto lnx   = log(x);
-  //   const auto lnx2  = lnx * lnx;
-  //   const auto ln1mx = log(1-x);
-  //   const auto pqq   = 2 / ( 1 - x ) - 1 - x;
-  //   const auto pqqmx = 2 / ( 1 + x ) - 1 + x;
-  //   const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-  //   const auto gqq1  =
-  //     + 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
-  //     + 4 * CA * CF * ( ( 67 / 18. + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
-  // 			+ 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
-  //     + 4 * CF * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - 5 * ( 1 - x )
-  // 			- lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
-  //     - 4 * CF * ( CF - CA / 2 ) * ( 2 * pqqmx * S2x + 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) );
-  //   const auto gqq1l = _a2 / ( 1 - x );
-  //   const auto x1nsma = gqq1 - gqq1l;
-  //   return x1nsma;
-  // }
+    const double fB1 = log(x);
+    const double fB2 = fB1 * fB1;
+    const double fB3 = fB2 * fB1;
+    const double fB4 = 1 / x;
+    const double fB5 = fB1 * fB4;
 
-  // //_________________________________________________________________________________
-  // P1ps::P1ps(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P1ps::Regular(double const& x) const
-  // {
-  //   const auto lnx  = log(x);
-  //   const auto lnx2 = lnx * lnx;
-  //   const auto x1psa =
-  //     _nf * CF * ( - 8 + 24 * x - 224 / 9. * x * x + 80 / 9. / x
-  // 		   + ( 4 + 20 * x ) * lnx + 32 / 3. * x * x * lnx
-  // 		   - ( 4 + 4 * x ) * lnx2 );
-  //   return x1psa;
-  // }
+    const double fc1 = 1;
+    const double fc2 = x;
+    const double fc3 = fc2 * fc2;
+    const double fc4 = fc3 * fc2;
+    const double fc5 = fA4 * fB1;
+    const double fc6 = fc5 * fB1;
 
-  // //_________________________________________________________________________________
-  // P1qg::P1qg(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P1qg::Regular(double const& x) const
-  // {
-  //   const auto lnx   = log(x);
-  //   const auto lnx2  = lnx * lnx;
-  //   const auto ln1mx = log(1-x);
-  //   const auto pqg   = x * x + ( 1 - x ) * ( 1 - x );
-  //   const auto pqgmx = x * x + ( 1 + x ) * ( 1 + x );
-  //   const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-  //   const auto x1qga =
-  //     + 2 * CF * _nf * ( 4  + 4 * ln1mx + ( 10 - 4 * ( ln1mx - lnx ) + 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 2 * Pi2 / 3 ) * pqg
-  // 			 - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) - 9 * x )
-  //     + 2 * CA * _nf * ( 182 / 9. - 4 * ln1mx
-  // 			 + ( - 218 / 9. + 4 * ln1mx - 2 * ln1mx * ln1mx + 44 * lnx / 3 - lnx2 + Pi2 / 3 ) * pqg
-  // 			 + 2 * pqgmx * S2x + 40 / ( 9 * x ) + 14 * x / 9 - lnx2 * ( 2 + 8 * x )
-  // 			 + lnx * ( - 38 / 3. + 136 * x / 3 ) );
-  //   return x1qga;
-  // }
+    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
+    const vector<double> CoeffReg{- 15.591812729537994 - 3.6403764478352265 * _nf,
+	- 26.19077732354684 - 4.035868117241033 * _nf,
+	61.362896852454675 - 0.6181383623814728 * _nf,
+	- 18.603456697689623 - 0.19612093929051017 * _nf,
+	200. / 9.,
+	- 64. / 9.,
+	0,
+	- 8. + 40. * _nf / 27.,
+	- 2. + 4. * _nf / 9.,
+	- 20. / 27.,
+	32.70163574653397 - 0.069575874398736 * _nf,
+	12.62916203247169 - 0.17334865938082786 * _nf,
+	0,
+	0};
 
-  // //_________________________________________________________________________________
-  // P1gq::P1gq(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P1gq::Regular(double const& x) const
-  // {
-  //   const auto lnx   = log(x);
-  //   const auto lnx2  = lnx * lnx;
-  //   const auto ln1mx = log(1-x);
-  //   const auto pgq   = ( 1 + ( 1 - x ) * ( 1 - x ) ) / x;
-  //   const auto pgqmx = - ( 1 + ( 1 + x ) * ( 1 + x ) ) / x;
-  //   const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-  //   const auto x1gqa =
-  //     + 2 * CF * _nf * ( - ( 20 / 9. + 4 * ln1mx / 3 ) * pgq - 4 * x / 3 )
-  //     + 4 * CF * CF  * ( - 2.5 - ( 3 * ln1mx + ln1mx * ln1mx ) * pgq - lnx2 * ( 1 - x / 2 ) - 7 * x / 2 
-  // 			 - 2 * ln1mx * x + lnx * ( 2 + 7 * x / 2 ) )
-  //     + 4 * CA * CF  * ( 28 / 9. + pgq * ( 0.5 + 11 * ln1mx / 3 + ln1mx * ln1mx - 2 * ln1mx * lnx + lnx2 / 2 - Pi2 / 6 ) + pgqmx * S2x 
-  // 			 + 65 * x / 18 + 2 * ln1mx * x + 44 * x * x / 9 + lnx2 * ( 4 + x ) - lnx * ( 12 + 5 * x + 8 * x * x / 3 ) );
-  //   return x1gqa;
-  // }
+    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+  }
+  double C2Vqq::Singular(double const& x) const
+  {
+    const double fA2 = 1 / ( 1 - x );
+    const double fA3 = fA2 * log(1-x);
 
-  // //_________________________________________________________________________________
-  // P1gg::P1gg(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  //   _a2g = - 40 / 9. * CA * _nf + ( 268 / 9. - 8 * zeta2 ) * CA * CA;
-  // }
-  // double P1gg::Regular(double const& x) const
-  // {
-  //   const auto lnx   = log(x);
-  //   const auto lnx2  = lnx * lnx;
-  //   const auto ln1mx = log(1-x);
-  //   const auto pgg   = ( 1 / ( 1 - x ) +  1 / x - 2 + x * ( 1 - x ) );
-  //   const auto pggmx = ( 1 / ( 1 + x ) -  1 / x - 2 - x * ( 1 + x ) );
-  //   const auto S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-  //   const auto ggg1  =
-  //     + 2 * CF * _nf * ( - 16 + 4 / ( 3 * x ) + 8 * x + ( 20 * x * x ) / 3 - lnx2 * ( 2 + 2 * x ) - lnx * ( 6 + 10 * x ) )
-  //     + 2 * CA * _nf * ( 2 - 20 * pgg / 9 - 2 * x - 4 * lnx * ( 1 + x ) / 3 + 26 * ( - 1 / x + x * x ) / 9 )
-  //     + 4 * CA *  CA * ( pgg * ( 67 / 9. - 4 * ln1mx * lnx + lnx2 - Pi2 / 3 ) + 2 * pggmx * S2x
-  // 			 + 27 * ( 1 - x ) / 2 + 4 * lnx2 * ( 1 + x ) + 67 * ( - 1 / x + x * x ) / 9
-  // 			 - lnx * ( 25 / 3. - 11 * x / 3 + 44 * x * x / 3 ) );
-  //   const auto ggg1l = _a2g / ( 1 - x );
-  //   const auto x1gga = ggg1 - ggg1l;
-  //   return x1gga;
-  // }
-  // double P1gg::Singular(double const& x) const
-  // {
-  //   return _a2g / ( 1 - x );
-  // }
-  // double P1gg::Local(double const& x) const
-  // {
-  //   const auto p1delta = ( - 2 * CF - 8 / 3. * CA ) * _nf + ( 32 / 3. + 12 * zeta3 ) * CA * CA;
-  //   const auto x1ggc = log(1-x) * _a2g + p1delta;
-  //   return x1ggc;
-  // }
+    return _A2 * fA2 + _A3 * fA3;
+  }
+  double C2Vqq::Local(double const& x) const
+  {
+    const double ln1mx  = log(1-x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    const double A1     = - 2416. / 81. - 67 * Pi2 / 9 + 448 * zeta3 / 9 + 20 * Pi2 * Pi2 / 81
+      + _nf * ( 352. / 243. + 10 * Pi2 / 27 + 56 * zeta3 / 27 );
 
-  // /**
-  //  * @brief The NNLO splitting function classes (parametrized)
-  //  */
-  // //_________________________________________________________________________________
-  // P2nsp::P2nsp(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2nsp::Regular(double const& x) const
-  // {
-  //   const auto x_2    = pow(x, 2);
-  //   const auto x_3    = x_2 * x;
-  //   const auto dl     = log(x);
-  //   const auto dl_2   = pow(dl,2);
-  //   const auto dl_3   = dl_2 * dl;
-  //   const auto dl_4   = dl_3 * dl;
-  //   const auto dl1    = log(1-x);
-  //   const auto d81    = 1. / 81.;
-  //   const auto p2nspa =
-  //     1641.1 - 3135. * x + 243.6 * x_2 - 522.1 * x_3
-  //     + 128. * d81 * dl_4 + 2400. * d81 * dl_3
-  //     + 294.9 * dl_2 + 1258. * dl
-  //     + 714.1 * dl1 + dl * dl1 * ( 563.9 + 256.8 * dl )
-  //     + _nf * ( -197.0 + 381.1 * x + 72.94 * x_2 + 44.79 * x_3
-  // 		- 192. * d81 * dl_3  - 2608. * d81 * dl_2 - 152.6 * dl
-  // 		- 5120. * d81 * dl1 - 56.66 * dl * dl1 - 1.497 * x * dl_3 )
-  //     + _nf * _nf * ( 32. * x * dl / ( 1. - x ) * ( 3. * dl + 10. ) + 64.
-  // 		      + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1. - x ) ) * d81;
-  //   return p2nspa;
-  // }
-  // double P2nsp::Singular(double const& x) const
-  // {
-  //   const auto p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1. - x );
-  //   return p2nsb;
-  // }
-  // double P2nsp::Local(double const& x) const
-  // {
-  //   const auto dl1    = log(1.-x);
-  //   const auto p2nspc =
-  //     1174.898 * dl1 + 1295.624 - 0.24
-  //     - _nf * ( 183.187 * dl1 + 173.938 - 0.011 )
-  //     + _nf * _nf * ( - 64. / 81. * dl1 + 1.13067 );
-  //   return p2nspc;
-  // }
+    return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
+  }
 
-  // //_________________________________________________________________________________
-  // P2nsm::P2nsm(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2nsm::Regular(double const& x) const
-  // {
-  //   const auto x_2    = pow(x, 2);
-  //   const auto x_3    = x_2 * x;
-  //   const auto dl     = log(x);
-  //   const auto dl_2   = pow(dl,2);
-  //   const auto dl_3   = dl_2 * dl;
-  //   const auto dl1    = log(1.-x);
-  //   const auto d81    = 1./81.;       
-  //   const auto p2nsma =
-  //     1860.2 - 3505.* x + 297.0 * x_2 - 433.2 * x_3
-  //     + 116. * d81 * dl_3 * dl + 2880. * d81 * dl_3
-  //     + 399.2 * dl_2 + 1465.2 * dl
-  //     + 714.1 * dl1 + dl * dl1 * ( 684.0 + 251.2 * dl )
-  //     + _nf * ( -216.62 + 406.5 * x + 77.89 * x_2 + 34.76 * x_3
-  // 		- 256. * d81 * dl_3  - 3216. * d81 * dl_2 - 172.69 * dl
-  // 		- 5120. * d81 * dl1 - 65.43 * dl * dl1 - 1.136 * x * dl_3 )
-  //     + _nf * _nf * ( 32.* x * dl / (1.-x) * ( 3. * dl + 10. ) + 64.
-  // 		      + ( 48.* dl_2 + 352.* dl + 384. ) * ( 1.-x ) ) * d81;
-  //   return p2nsma;
-  // }
-  // double P2nsm::Singular(double const& x) const
-  // {
-  //   const auto p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1. - x );
-  //   return p2nsb;
-  // }
-  // double P2nsm::Local(double const& x) const
-  // {
-  //   const auto dl1    = log(1.-x);
-  //   const auto p2nsmc =
-  //     1174.898 * dl1 + 1295.624 - 0.154
-  //     - _nf * ( 183.187 * dl1 + 173.938  - 0.005 )
-  //     + _nf * _nf * ( - 64./81. * dl1 + 1.13067 );
-  //   return p2nsmc;
-  // }
+  //_________________________________________________________________________________
+  C2Vqqb::C2Vqqb()
+  {
+  }
+  double C2Vqqb::Regular(double const& x) const
+  {
+    const double fA4 = log(1-x);
+    const double fA5 = fA4 * fA4;
+    const double fA6 = fA5 * fA4;
 
-  // //_________________________________________________________________________________
-  // P2nss::P2nss(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2nss::Regular(double const& x) const
-  // {
-  //   const auto x_2    = pow(x,2);
-  //   const auto d27    = 1./27.;
-  //   const auto dl     = log(x);
-  //   const auto dl_2   = pow(dl,2);
-  //   const auto dl_3   = dl_2 * dl;
-  //   const auto dl_4   = dl_3 * dl;
-  //   const auto x1     = 1.- x;
-  //   const auto dl1    = log(x1);
-  //   const auto p2nssa =
-  //     x1 * ( 151.49 + 44.51 * x - 43.12 * x_2 + 4.820 * x_2 * x )
-  //     + 40. * d27 * dl_4 - 80. * d27 * dl_3 + 6.892 * dl_2
-  //     + 178.04 * dl + dl * dl1 * ( - 173.1 + 46.18 * dl )
-  //     + x1 * dl1 * ( - 163.9 / x - 7.208 * x );
-  //   return _nf * p2nssa;
-  // }
+    const double fB1 = log(x);
+    const double fB2 = fB1 * fB1;
+    const double fB3 = fB2 * fB1;
 
-  // //_________________________________________________________________________________
-  // P2ps::P2ps(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2ps::Regular(double const& x) const
-  // {
-  //   const auto x_2   = pow(x,2);
-  //   const auto x_3   = x_2 * x;
+    const double fc1 = 1;
+    const double fc2 = x;
+    const double fc3 = fc2 * fc2;
+    const double fc4 = fc3 * fc2;
+    const double fc5 = fA4 * fB1;
+    const double fc6 = fc5 * fB1;
 
-  //   const auto dl    = log(x);
-  //   const auto dl_2  = pow(dl, 2);
-  //   const auto dl_3  = dl_2 * dl;
-  //   const auto dl_4  = dl_3 * dl;
+    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6};
 
-  //   const auto dl1   = log(1.-x);
-  //   const auto dl1_2 = pow(dl1, 2);
-  //   const auto dl1_3 = dl1_2 * dl1;
+    const vector<double> CoeffReg{- 3.329144380448291,
+	5.852825050121677,
+	- 4.796244777535505,
+	2.2557153775946435,
+	0,
+	0,
+	0,
+	- 4. / 3.,
+	0,
+	4. / 27.,
+	0.505971782717726,
+	0.08759292525297521};
 
-  //   const auto  p2ps1 =
-  //     - 3584. / ( 27. * x ) * dl - 506.0 / x + 160. / 27. * dl_4
-  //     - 400. / 9. * dl_3 + 131.4 * dl_2 - 661.6 * dl
-  //     - 5.926  * dl1_3 - 9.751 * dl1_2 - 72.11 * dl1
-  //     + 177.4 + 392.9 * x - 101.4 * x_2 - 57.04 * dl * dl1;
-  //   const auto p2ps2  =
-  //     256. / ( 81. * x ) + 32. / 27. * dl_3 + 17.89 * dl_2
-  //     + 61.75 * dl + 1.778 * dl1_2 + 5.944 * dl1 + 100.1
-  //     - 125.2 * x + 49.26 * x_2 - 12.59 * x_3
-  //     - 1.889 * dl * dl1;
-  //   const auto p2psa = ( 1. - x ) * _nf * ( p2ps1 + _nf * p2ps2 );
-  //   return p2psa;
-  // }
+    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+  }
 
-  // //_________________________________________________________________________________
-  // P2qg::P2qg(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2qg::Regular(double const& x) const
-  // {
-  //   const auto x_2   = pow(x,2);
-  //   const auto x_3   = x_2 * x;
+  //_________________________________________________________________________________
+  C2ps::C2ps():
+    Expression()
+  {
+  }
+  double C2ps::Regular(double const& x) const
+  {
+    const double fA4 = log(1-x);
+    const double fA5 = fA4 * fA4;
+    const double fA6 = fA5 * fA4;
 
-  //   const auto dl    = log(x);
-  //   const auto dl_2  = pow(dl, 2);
-  //   const auto dl_3  = dl_2 * dl;
-  //   const auto dl_4  = dl_3 * dl;
+    const double fB1 = log(x);
+    const double fB2 = fB1 * fB1;
+    const double fB3 = fB2 * fB1;
+    const double fB4 = 1 / x;
+    const double fB5 = fB1 * fB4;
 
-  //   const auto dl1   = log(1.-x);
-  //   const auto dl1_2 = pow(dl1, 2);
-  //   const auto dl1_3 = dl1_2 * dl1;
-  //   const auto dl1_4 = dl1_3 * dl1;
+    const double fc1 = 1;
+    const double fc2 = x;
+    const double fc3 = fc2 * fc2;
+    const double fc4 = fc3 * fc2;
+    const double fc5 = fA4 * fB1;
+    const double fc6 = fc5 * fB1;
 
-  //   const auto p2qg1 =
-  //     - 896. / ( 3. * x ) * dl - 1268.3 / x + 536./27. * dl_4
-  //     - 44. / 3. * dl_3 + 881.5 * dl_2 + 424.9 * dl
-  //     + 100. / 27. * dl1_4 - 70. / 9. * dl1_3
-  //     - 120.5 * dl1_2 + 104.42 * dl1
-  //     + 2522. - 3316. * x + 2126. * x_2
-  //     + dl * dl1 * ( 1823. - 25.22 * dl ) - 252.5 * x * dl_3;
-  //   const auto p2qg2 =
-  //     1112. / ( 243. * x ) - 16. / 9. * dl_4
-  //     - 376. / 27. * dl_3 - 90.8 * dl_2 - 254.0 * dl
-  //     + 20./27. * dl1_3 + 200. / 27. * dl1_2 - 5.496 * dl1
-  //     - 252.0  + 158.0 * x + 145.4 * x_2 - 139.28 * x_3
-  //     - dl * dl1 * ( 53.09  + 80.616 * dl ) - 98.07 * x * dl_2
-  //     + 11.70 * x * dl_3;
-  //   const auto p2qga = _nf * ( p2qg1 + _nf * p2qg2 );
-  //   return p2qga;      
-  // }
+    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
+    const vector<double> CoeffReg{- 3.54792360390173,
+	4.949994905325898,
+	-11.357230229521692,
+	7.2245197835090105,
+	0,
+	0,
+	0,
+	8. / 3.,
+	- 2. / 3.,
+	4. / 9.,
+	2.255041649827519,
+	0.7663091186642608,
+	688. / 81. - 32 * zeta2 / 9,
+	0};
 
-  // //_________________________________________________________________________________
-  // P2gq::P2gq(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2gq::Regular(double const& x) const
-  // {
-  //   const auto x_2   = pow(x,2);
-  //   const auto x_3   = x_2 * x;
+    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+  }
 
-  //   const auto dl    = log(x);
-  //   const auto dl_2  = pow(dl, 2);
-  //   const auto dl_3  = dl_2 * dl;
-  //   const auto dl_4  = dl_3 * dl;
+  //_________________________________________________________________________________
+  C2qg::C2qg():
+    Expression()
+  {
+  }
+  double C2qg::Regular(double const& x) const
+  {
+    const double fA4 = log(1-x);
+    const double fA5 = fA4 * fA4;
+    const double fA6 = fA5 * fA4;
 
-  //   const auto dl1   = log(1.-x);
-  //   const auto dl1_2 = pow(dl1, 2);
-  //   const auto dl1_3 = dl1_2 * dl1;
-  //   const auto dl1_4 = dl1_3 * dl1;
+    const double fB1 = log(x);
+    const double fB2 = fB1 * fB1;
+    const double fB3 = fB2 * fB1;
+    const double fB4 = 1 / x;
+    const double fB5 = fB1 * fB4;
 
-  //   const auto p2gq0 =
-  //     1189.3 * dl / x + 6163.1 / x - 4288. / 81. * dl_4
-  //     + 1568. / 9. * dl_3 - 1794. * dl_2 + 4033. * dl
-  //     + 400. / 81. * dl1_4 + 2200. / 27. * dl1_3
-  //     + 606.3 * dl1_2 + 2193. * dl1
-  //     - 4307. + 489.3 * x + 1452.* x_2 + 146.0 * x_3
-  //     - 447.3 * dl_2 * dl1 - 972.9 * x * dl_2;
-  //   const auto p2gq1 =
-  //     71.082 * dl / x  - 46.41 / x + 128. / 27. * dl_4
-  //     + 704/81. * dl_3 + 20.39 * dl_2 + 174.8 * dl
-  //     - 400./81. * dl1_3 - 68.069 * dl1_2 - 296.7 * dl1
-  //     - 183.8 + 33.35 * x - 277.9 * x * x + 108.6 * x * dl_2
-  //     - 49.68 * dl * dl1;
-  //   const auto p2gq2 =
-  //     ( 64. * ( - 1. / x + 1. + 2. * x )
-  // 	+ 320. * dl1 * ( 1. / x - 1. + 0.8 * x )
-  // 	+ 96. * dl1_2 * ( 1. / x - 1. + 0.5 * x ) ) / 27.;
-  //   const auto p2gqa = ( p2gq0 + _nf * ( p2gq1 + _nf * p2gq2 ) );
-  //   return p2gqa;
-  // }
+    const double fc1 = 1;
+    const double fc2 = x;
+    const double fc3 = fc2 * fc2;
+    const double fc4 = fc3 * fc2;
+    const double fc5 = fA4 * fB1;
+    const double fc6 = fc5 * fB1;
 
-  // //_________________________________________________________________________________
-  // P2gg::P2gg(int const& nf):
-  //   Expression(),
-  //   _nf(nf)
-  // {
-  // }
-  // double P2gg::Regular(double const& x) const
-  // {
-  //   const auto x_2   = pow(x,2);
-  //   const auto x_3   = x_2 * x;
+    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
+    const vector<double> CoeffReg{5.32456247529479,
+	- 37.8039790325823,
+	55.939541231907775,
+	- 44.592546819513025,
+	- 5. / 3.,
+	0,
+	5. / 9.,
+	34. / 3.,
+	- 7. / 6.,
+	7. / 9.,
+	- 10.961736574029366,
+	- 6.522774793663304,
+	172. / 9. - 4 * Pi2 / 3,
+	0};
 
-  //   const auto dl    = log(x);
-  //   const auto dl_2  = pow(dl, 2);
-  //   const auto dl_3  = dl_2 * dl;
-  //   const auto dl_4  = dl_3 * dl;
+    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+  }
 
-  //   const auto dl1   = log(1.-x);
+  //_________________________________________________________________________________
+  C2gq::C2gq(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C2gq::Regular(double const& x) const
+  {
+    const double fA4 = log(1-x);
+    const double fA5 = fA4 * fA4;
+    const double fA6 = fA5 * fA4;
 
-  //   const auto p2gga0 =
-  //     2675.8 * dl / x + 14214. / x - 144. * dl_4 + 72. * dl_3
-  //     - 7471. * dl_2 + 274.4 * dl + 3589. * dl1 - 20852.
-  //     + 3968. * x - 3363. * x_2 + 4848. * x_3
-  //     + dl * dl1 * ( 7305. + 8757. * dl );
-  //   const auto p2gga1 =
-  //     157.27 * dl / x + 182.96 / x + 512./27. * dl_4
-  //     + 832. / 9. * dl_3 + 491.3 * dl_2 + 1541. * dl
-  //     - 320.0 * dl1 - 350.2 + 755.7 * x - 713.8 * x_2
-  //     + 559.3 * x_3 + dl * dl1 * ( 26.15 - 808.7 * dl );
-  //   const auto p2gga2 =
-  //     - 680. / ( 243. * x ) - 32. / 27. * dl_3 + 9.680 * dl_2
-  //     - 3.422 * dl - 13.878 + 153.4 * x - 187.7 * x_2
-  //     + 52.75 * x_3 - dl * dl1 * ( 115.6 - 85.25 * x + 63.23 * dl);
-  //   const auto p2gga = p2gga0 + _nf * ( p2gga1 + _nf * p2gga2 );
-  //   return p2gga;
-  // }
-  // double P2gg::Singular(double const& x) const
-  // {
-  //   const auto p2ggb = ( 2643.521 - _nf * 412.172 - _nf * _nf * 16. / 9. ) / ( 1.- x );
-  //   return p2ggb;
-  // }
-  // double P2gg::Local(double const& x) const
-  // {
-  //   const auto dl1   = log(1.-x);
-  //   const auto p2ggc =
-  //     2643.521 * dl1 + 4425.448 + 0.446
-  //     - _nf * ( 412.172 * dl1 +  528.720 + 0.003 )
-  //     + _nf * _nf * ( - 16. / 9. * dl1 + 6.4630 );
-  //   return p2ggc;
-  // }
+    const double fB1 = log(x);
+    const double fB2 = fB1 * fB1;
+    const double fB3 = fB2 * fB1;
+    const double fB4 = 1 / x;
+    const double fB5 = fB1 * fB4;
+
+    const double fc1 = 1;
+    const double fc2 = x;
+    const double fc3 = fc2 * fc2;
+    const double fc4 = fc3 * fc2;
+    const double fc5 = fA4 * fB1;
+    const double fc6 = fc5 * fB1;
+
+    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
+    const vector<double> CoeffReg{- 43.40171996161091 - 16.984343881161237 * _nf,
+	173.18374973344203 + 9.595722778694926 * _nf,
+	-88.4323955556243 - 2.1972189030825384 * _nf,
+	-8.718852731902624 + 1.1549244843223576 * _nf,
+	- 184. / 9. + 32. * _nf / 27.,
+	- 44. / 9. + 8. * _nf / 9.,
+	- 40. / 27.,
+	- 200. / 3., // !!!!!! - 200. / 9. in the paper  !!!!!!!
+	112. / 9.,
+	- 112. / 27.,
+	- 40.28067793284879 - 0.552346106244215 * _nf,
+	- 35.36530647197912 - 0.0627184829983808 * _nf,
+	- 12640. / 27. + 352 * zeta2 / 3 + 192 * zeta3 + 896. * _nf / 81.,
+	  0};
+
+    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+  }
+
+  //_________________________________________________________________________________
+  C2gg::C2gg(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+    _A2 = - 808. / 3. + 252 * zeta3 + 112. * _nf / 9.;
+    _A3 = 0;
+  }
+  double C2gg::Regular(double const& x) const
+  {
+    const double fA4 = log(1-x);
+    const double fA5 = fA4 * fA4;
+    const double fA6 = fA5 * fA4;
+
+    const double fB1 = log(x);
+    const double fB2 = fB1 * fB1;
+    const double fB3 = fB2 * fB1;
+    const double fB4 = 1 / x;
+    const double fB5 = fB1 * fB4;
+
+    const double fc1 = 1;
+    const double fc2 = x;
+    const double fc3 = fc2 * fc2;
+    const double fc4 = fc3 * fc2;
+    const double fc5 = fA4 * fB1;
+    const double fc6 = fc5 * fB1;
+
+    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
+    // !!!!!!!! All the entries of 'CoeffReg' appear to be divided by
+    // 3 as compared to the values in the paper. !!!!!!!!!!!!!!
+    const vector<double> CoeffReg{160.3174084388 + 1.8798838185664 * _nf,
+	235.25958439812186 - 13.729196847420008 * _nf,
+	-77.67188779845978 - 0.6784851744787738 * _nf,
+	51.61266721115288 - 1.3169890096131303 * _nf,
+	2 - 2. * _nf / 3.,
+	- 12,
+	0,
+	- 293. / 3. + 74. * _nf / 9.,
+	1. + 2. * _nf,
+	- 4. + 8. * _nf / 27.,
+	24.137288673188998- 1.0158393615503878 * _nf,
+	-22.406633639406444+ 1.090527996849969 * _nf,
+	- 3160. / 9. + 264 * zeta2 / 3 + 432 * zeta3 / 3 + 226. * _nf / 27.,
+	0};
+
+    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+  }
+  double C2gg::Singular(double const& x) const
+  {
+    const double fA2 = 1 / ( 1 - x );
+    const double fA3 = fA2 * log(1-x);
+
+    return _A2 * fA2 + _A3 * fA3;
+  }
+  double C2gg::Local(double const& x) const
+  {
+    const double ln1mx  = log(1-x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    const double A1     = - 112. - 201 * zeta2 / 2 + 154 * zeta3 + 225 * zeta4 / 4
+      + _nf * ( 548. / 27. + 5 * zeta2 - 28 * zeta3 / 3 )
+      - 56.  *_nf * _nf / 81.;
+
+    return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
+  }
 }
