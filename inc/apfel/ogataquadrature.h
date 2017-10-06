@@ -9,6 +9,10 @@
 
 #include "apfel/tools.h"
 
+#include <functional>
+
+using std::function;
+
 namespace apfel
 {
   /**
