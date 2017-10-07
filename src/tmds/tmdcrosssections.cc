@@ -9,6 +9,7 @@
 #include "apfel/tabulateobject.h"
 #include "apfel/rotations.h"
 #include "apfel/ogataquadrature.h"
+#include "apfel/integrator.h"
 
 using namespace std;
 
@@ -69,6 +70,13 @@ namespace apfel {
       {
 	const double cutPref = 1 + pow(qT/Q,2) / 2;
 	return hcs * cutPref * OgataQuadrature(TMDLumib, qT);
+	// For test purposes, one can comment out the line above, in
+	// which the Ogata quadrature is used, and comment in the two
+	// lines below to use the DGauss quadrature. The second will
+	// be substantially slower but should return consistent
+	// results.
+	//const Integrator integrand{[=] (double const& bT)->double{ return TMDLumib(bT) * j0(qT * bT) * bT / 2; }};
+	//return hcs * cutPref * integrand.integrate(0.0000001,50,eps9);
       };
   }
 
