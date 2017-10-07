@@ -13,7 +13,7 @@ namespace apfel
 {
   /**
    * @brief The NLO matching function classes
-   * @brief Reference: arXiv:1604.07869
+   * @brief References: arXiv:1604.07869 and arXiv:1706.01473.
    */
   //_________________________________________________________________________________
   class C1ns: public Expression
@@ -49,7 +49,11 @@ namespace apfel
   };
 
   /**
-   * @brief The NNLO matching function classes
+   * @brief The NNLO matching function classes. In the implementation
+   * of these expressions I used the parameterization only for the
+   * regular part. The exact coefficicients of the rest are
+   * implemented explicitly as reported in appendix B.3 of
+   * https://arxiv.org/pdf/1706.01473.pdf.
    */
   //_________________________________________________________________________________
   class C2Vqq: public Expression

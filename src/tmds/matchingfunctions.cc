@@ -64,8 +64,8 @@ namespace apfel
     Expression(),
     _nf(nf)
   {
-    _A2 = - 3232. / 27 + 112 * zeta3 + 448. * _nf / 81.;
-    _A3 = 0;
+    _A2 = - 3232. / 27. + 112 * zeta3 + 448. * _nf / 81.;
+    _A3 = 0.;
   }
   double C2Vqq::Regular(double const& x) const
   {
@@ -93,14 +93,14 @@ namespace apfel
 	- 18.603456697689623 - 0.19612093929051017 * _nf,
 	200. / 9.,
 	- 64. / 9.,
-	0,
+	0.,
 	- 8. + 40. * _nf / 27.,
 	- 2. + 4. * _nf / 9.,
 	- 20. / 27.,
 	32.70163574653397 - 0.069575874398736 * _nf,
 	12.62916203247169 - 0.17334865938082786 * _nf,
-	0,
-	0};
+	0.,
+	0.};
 
     return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -148,11 +148,11 @@ namespace apfel
 	5.852825050121677,
 	- 4.796244777535505,
 	2.2557153775946435,
-	0,
-	0,
-	0,
+	0.,
+	0.,
+	0.,
 	- 4. / 3.,
-	0,
+	0.,
 	4. / 27.,
 	0.505971782717726,
 	0.08759292525297521};
@@ -187,18 +187,18 @@ namespace apfel
     const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
     const vector<double> CoeffReg{- 3.54792360390173,
 	4.949994905325898,
-	-11.357230229521692,
+	- 11.357230229521692,
 	7.2245197835090105,
-	0,
-	0,
-	0,
+	0.,
+	0.,
+	0.,
 	8. / 3.,
 	- 2. / 3.,
 	4. / 9.,
 	2.255041649827519,
 	0.7663091186642608,
 	688. / 81. - 32 * zeta2 / 9,
-	0};
+	0.};
 
     return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -233,7 +233,7 @@ namespace apfel
 	55.939541231907775,
 	- 44.592546819513025,
 	- 5. / 3.,
-	0,
+	0.,
 	5. / 9.,
 	34. / 3.,
 	- 7. / 6.,
@@ -241,7 +241,7 @@ namespace apfel
 	- 10.961736574029366,
 	- 6.522774793663304,
 	172. / 9. - 4 * Pi2 / 3,
-	0};
+	0.};
 
     return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -274,8 +274,8 @@ namespace apfel
     const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
     const vector<double> CoeffReg{- 43.40171996161091 - 16.984343881161237 * _nf,
 	173.18374973344203 + 9.595722778694926 * _nf,
-	-88.4323955556243 - 2.1972189030825384 * _nf,
-	-8.718852731902624 + 1.1549244843223576 * _nf,
+	- 88.4323955556243 - 2.1972189030825384 * _nf,
+	- 8.718852731902624 + 1.1549244843223576 * _nf,
 	- 184. / 9. + 32. * _nf / 27.,
 	- 44. / 9. + 8. * _nf / 9.,
 	- 40. / 27.,
@@ -285,7 +285,7 @@ namespace apfel
 	- 40.28067793284879 - 0.552346106244215 * _nf,
 	- 35.36530647197912 - 0.0627184829983808 * _nf,
 	- 12640. / 27. + 352 * zeta2 / 3 + 192 * zeta3 + 896. * _nf / 81.,
-	  0};
+	  0.};
 
     return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -296,7 +296,7 @@ namespace apfel
     _nf(nf)
   {
     _A2 = - 808. / 3. + 252 * zeta3 + 112. * _nf / 9.;
-    _A3 = 0;
+    _A3 = 0.;
   }
   double C2gg::Regular(double const& x) const
   {
@@ -318,24 +318,22 @@ namespace apfel
     const double fc6 = fc5 * fB1;
 
     const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
-    // !!!!!!!! All the entries of 'CoeffReg' appear to be divided by
-    // 3 as compared to the values in the paper. !!!!!!!!!!!!!!
     const vector<double> CoeffReg{160.3174084388 + 1.8798838185664 * _nf,
 	235.25958439812186 - 13.729196847420008 * _nf,
-	-77.67188779845978 - 0.6784851744787738 * _nf,
+	- 77.67188779845978 - 0.6784851744787738 * _nf,
 	51.61266721115288 - 1.3169890096131303 * _nf,
-	2 - 2. * _nf / 3.,
-	- 12,
-	0,
+	2. - 2. * _nf / 3.,
+	- 12.,
+	0.,
 	- 293. / 3. + 74. * _nf / 9.,
 	1. + 2. * _nf,
 	- 4. + 8. * _nf / 27.,
-	24.137288673188998- 1.0158393615503878 * _nf,
-	-22.406633639406444+ 1.090527996849969 * _nf,
+	24.137288673188998 - 1.0158393615503878 * _nf,
+	- 22.406633639406444 + 1.090527996849969 * _nf,
 	- 3160. / 9. + 264 * zeta2 / 3 + 432 * zeta3 / 3 + 226. * _nf / 27.,
-	0};
+	0.};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 3 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
   double C2gg::Singular(double const& x) const
   {
