@@ -46,11 +46,11 @@ namespace apfel
   // Useful constants
   const double Pi2    = M_PI * M_PI;
   const double FourPi = 4 * M_PI;
-  const double emc    = 0.5772156649;
-  const double zeta2  = 1.644934067;
-  const double zeta3  = 1.2020569031;
-  const double zeta4  = 1.0823232337;
-  const double zeta5  = 1.0369277551;
+  const double emc    = 0.5772156649015329;
+  const double zeta2  = 1.6449340668482264; // Pi2 / 6;
+  const double zeta3  = 1.2020569031595943;
+  const double zeta4  = 1.0823232337111382; // Pi2 * Pi2 / 90;
+  const double zeta5  = 1.0369277551433699;
 
   // Quark electric charges and their square
   const double ed  = - 1. / 3.;
@@ -59,6 +59,9 @@ namespace apfel
   const double eu2 =   4. / 9.;
   const vector<double> QCh  = {ed, eu, ed, eu, ed, eu};
   const vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
+
+  // Conversion factor from GeV^{-2} to pb
+  const double ConvFact = 0.389379e9;
 
   // QCD Beta functions coefficients
   double beta0(int const& nf);

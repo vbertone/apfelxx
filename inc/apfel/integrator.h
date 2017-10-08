@@ -83,7 +83,6 @@ namespace apfel
      */
     double integrate(double const& xmin, double const& xmax, int const& m) const;
 
-  protected:
     /**
      * @brief Protected virtual integrand function.
      *

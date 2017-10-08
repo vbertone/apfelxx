@@ -31,17 +31,22 @@ namespace apfel
 						    function<vector<double>(double const&)>                                  const& fEWCharges,
 						    int                                                                      const& PerturbativeOrder,
 						    vector<double>                                                           const& Thresholds,
-						    double                                                                   const& muf,
-						    double                                                                   const& zetaf);
+						    double                                                                   const& cmuf = 1,
+						    double                                                                   const& czetaf = 1);
 
   function<double(double const&)> TmdCrossSectionDY(double                                                                   const& Vs,
-						    double                                                                   const& Q,
-						    double                                                                   const& y,
+						    double                                                                   const& Qmin,
+						    double                                                                   const& Qmax,
+						    double                                                                   const& ymin,
+						    double                                                                   const& ymax,
 						    function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
 						    function<double(double const&)>                                          const& Alphas,
 						    function<vector<double>(double const&)>                                  const& fEWCharges,
 						    int                                                                      const& PerturbativeOrder,
-						    vector<double>                                                           const& Thresholds);
+						    vector<double>                                                           const& Thresholds,
+						    double                                                                   const& cmuf = 1,
+						    double                                                                   const& czetaf = 1,
+						    double                                                                   const& IntEps = 1e-3);
 
  /**
    * @brief Perturbative hard cross section for Drell-Yann.

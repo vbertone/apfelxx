@@ -23,12 +23,17 @@ namespace apfel {
 						    function<vector<double>(double const&)>                                  const& fEWCharges,
 						    int                                                                      const& PerturbativeOrder,
 						    vector<double>                                                           const& Thresholds,
-						    double                                                                   const& muf,
-						    double                                                                   const& zetaf)
+						    double                                                                   const& cmuf,
+						    double                                                                   const& czetaf)
   {
+    // Compute "muf" and "zetaf". They are assumed to be proportional
+    // to Q and Q^2, respectively, through "cmuf" and "czetaf".
+    const double muf   = cmuf * Q;
+    const double zetaf = czetaf * Q * Q;
+
     // Compute values of x1 and x2.
-    const double x1    = Q * exp(-y) / Vs;
-    const double x2    = Q * exp(y) / Vs;
+    const double x1 = Q * exp(-y) / Vs;
+    const double x2 = Q * exp(y) / Vs;
 
     // Get EW charges.
     const vector<double> Bq = fEWCharges(Q);
@@ -62,8 +67,8 @@ namespace apfel {
 	return lumi;
       };
 
-    // Compute hard coefficient.
-    const double ConvFact = 0.3893379e9;
+    // Compute hard coefficient, including the other kinematic
+    // factors.
     const double hcs = ConvFact * FourPi * HardCrossSectionDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), muf/Q) / 9 / pow(Vs*Q,2);
 
     return [TMDLumib,hcs,Q] (double const& qT)->double
@@ -82,15 +87,95 @@ namespace apfel {
 
   //_____________________________________________________________________________
   function<double(double const&)> TmdCrossSectionDY(double                                                                   const& Vs,
-						    double                                                                   const& Q,
-						    double                                                                   const& y,
+						    double                                                                   const& Qmin,
+						    double                                                                   const& Qmax,
+						    double                                                                   const& ymin,
+						    double                                                                   const& ymax,
 						    function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
 						    function<double(double const&)>                                          const& Alphas,
 						    function<vector<double>(double const&)>                                  const& fEWCharges,
 						    int                                                                      const& PerturbativeOrder,
-						    vector<double>                                                           const& Thresholds)
+						    vector<double>                                                           const& Thresholds,
+						    double                                                                   const& cmuf,
+						    double                                                                   const& czetaf,
+						    double                                                                   const& IntEps)
   {
-    return TmdCrossSectionDY(Vs, Q, y, EvolvedTMDPDFs, Alphas, fEWCharges, PerturbativeOrder, Thresholds, Q, Q * Q);
+    // Tabulation function and its inverse.
+    const auto TabFunc    = [] (double const& b)->double{ return log(b); };
+    const auto InvTabFunc = [] (double const& fb)->double{ return exp(fb); };
+
+    // If integration over Q and y is required, it is advantageous to
+    // perform these integrations before the integral over the impact
+    // parameter b (Fourier transform).
+    return [=] (double const& qT) -> double
+      {
+	const Integrator Qintegrand{
+	  [&] (double const& Q) -> double
+	    {
+	      // Compute "muf" and "zetaf". They are assumed to be
+	      // proportional to Q and Q^2, respectively, through
+	      // "cmuf" and "czetaf".
+	      const double muf   = cmuf * Q;
+	      const double zetaf = czetaf * Q * Q;
+
+	      // Get EW charges.
+	      const vector<double> Bq = fEWCharges(Q);
+
+	      // Tabulate input TMDs in the impact parameter to make the
+	      // integral faster.
+	      const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b)->Set<Distribution>
+		  { return EvolvedTMDPDFs(b, muf, zetaf); }, 100, 1e-7, 100, 3, Thresholds, TabFunc, InvTabFunc};
+
+	      const auto bintegrand = [&] (double const& b) -> double
+		{
+		  // Define y integrand.
+		  const Integrator yintegrand{
+		    [&] (double const& y) -> double
+		    {
+		      // Compute values of x1 and x2.
+		      const double x1 = Q * exp(-y) / Vs;
+		      const double x2 = Q * exp(y) / Vs;
+
+		      // Get map of the TMDs in "x1" and "x2" and
+		      // rotate them into the physical basis.
+		      map<int,double> TMD1 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x1, b));
+		      map<int,double> TMD2 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x2, b));
+
+		      // Construct the combination of TMDs weighted by
+		      // the EW charges.
+		      double lumi = 0;
+		      for (int i = 1; i <= 6; i++)
+			lumi += Bq[i-1] * ( TMD1[i] * TMD2[-i] + TMD1[-i] * TMD2[i] );
+
+		      // Divide by x1 and x2 because the
+		      // "EvolvedTMDPDFs" function returns x times the
+		      // TMDs.
+		      lumi /= x1 * x2;
+
+		      return lumi;
+		    }
+		  };
+
+		  // Integrate in y over [ymin:ymax] or return the
+		  // value if ymin = ymax.
+		  if (ymin == ymax)
+		    return yintegrand.integrand(ymin);
+		  else
+		    return yintegrand.integrate(ymin, ymax, IntEps);
+		};
+
+	      const double cutPref  = 1 + pow(qT/Q,2) / 2;
+	      const double HardFact = HardCrossSectionDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), cmuf);
+	      return cutPref * HardFact * OgataQuadrature(bintegrand, qT) / Q / Q;
+	    }
+	};
+	// Integrate in Q over [Qmin:Qmax] or return the
+	// value if Qmin = Qmax.
+	if (Qmin == Qmax)
+	  return ConvFact * FourPi * Qintegrand.integrand(Qmin) / 9 / Vs / Vs;
+	else
+	  return ConvFact * FourPi * Qintegrand.integrate(Qmin, Qmax, IntEps) / 9 / Vs / Vs;
+      };
   }
 
   //_____________________________________________________________________________
@@ -113,12 +198,12 @@ namespace apfel {
 	hxs += 2 * as * CF * ( - lQ22 - 3 * lQ2 - 8 + 7 * Pi2 / 6 );
       if (pt > 1)
 	hxs += 2 * as2 * CF *
-	  ( CF * ( lQ24 + 6 * lQ23 + ( 25 - 7 * Pi2 / 3 ) * lQ22 + ( 93. / 2. - 5 * Pi2 - 24 * zeta3 ) * lQ2 +
-		   511. / 8. - 83 * Pi2 / 6 - 30 * zeta3 + 67 * Pi2 * Pi2 / 60 ) +
-	    CA * ( - 11 * lQ23 / 9 + ( - 233 / 18 + Pi2 / 3 ) * lQ22 + ( - 2545. / 54. + 22 * Pi2 / 9 + 26 * zeta3 ) * lQ2 +
+	  ( CF * ( lQ24 + 6 * lQ23 + ( 25. - 7 * Pi2 / 3 ) * lQ22 + ( 93. / 2. - 5 * Pi2 - 24 * zeta3 ) * lQ2
+		   + 511. / 8. - 83 * Pi2 / 6 - 30 * zeta3 + 67 * Pi2 * Pi2 / 60 ) +
+	    CA * ( - 11 * lQ23 / 9 + ( - 233. / 18. + Pi2 / 3 ) * lQ22 + ( - 2545. / 54. + 22 * Pi2 / 9 + 26 * zeta3 ) * lQ2
 		   - 51157. / 648. + 1061 * Pi2 / 108 + 313 * zeta3 / 9 - 4 * Pi2 * Pi2 / 45 ) +
-	    TR * nf * ( 4 * lQ23 / 9 + 38 * lQ22 / 9 + ( 418. / 27. - 8 * Pi2 / 9 ) * lQ2 +
-			4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
+	    TR * nf * ( 4 * lQ23 / 9 + 38 * lQ22 / 9 + ( 418. / 27. - 8 * Pi2 / 9 ) * lQ2
+			+ 4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
 
       return hxs;
     };
