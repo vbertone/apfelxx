@@ -46,7 +46,7 @@ namespace apfel
 						    vector<double>                                                           const& Thresholds,
 						    double                                                                   const& cmuf = 1,
 						    double                                                                   const& czetaf = 1,
-						    double                                                                   const& IntEps = 1e-3);
+						    double                                                                   const& IntEps = 1e-5);
 
  /**
    * @brief Perturbative hard cross section for Drell-Yann.

@@ -255,8 +255,8 @@ namespace apfel {
 	    const auto sf     = DglapObj.at(nf).SplittingFunctions;
 	    const double Lmu  = LX(mu,b);
 	    const double coup = Alphas(mu) / FourPi;
-	    const auto nlo  = mf.at(1) - Lmu * sf.at(0);
-	    const auto nnlo = mf.at(2) - Lmu * ( SetLcoef.at(nf) - Lmu * SetL2coef.at(nf) );
+	    const auto nlo    = mf.at(1) - Lmu * sf.at(0);
+	    const auto nnlo   = mf.at(2) - Lmu * ( SetLcoef.at(nf) - Lmu * SetL2coef.at(nf) );
 	    return mf.at(0) + coup * ( nlo + coup * nnlo );
 	  };
       }
@@ -276,49 +276,49 @@ namespace apfel {
     // LL
     if (PerturbativeOrder == 0)
       {
-	gammaVq = [=] (double const&)->double{ return 0; };
-	gammaVg = [=] (double const&)->double{ return 0; };
-	GammaCuspq = [=] (double const& mu)->double
+	gammaVq = [=] (double const&) -> double{ return 0; };
+	gammaVg = [=] (double const&) -> double{ return 0; };
+	GammaCuspq = [=] (double const& mu) -> double
 	  {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaCuspq.at(0);
 	  };
-	GammaCuspg = [=] (double const& mu)->double
+	GammaCuspg = [=] (double const& mu) -> double
 	  {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaCuspg.at(0);
 	  };
-	DCSq = [=] (double const&, double const&)->double{ return 0; };
-	DCSg = [=] (double const&, double const&)->double{ return 0; };
-	zetaq = [=] (double const& mu, double const&)->double{ return mu * mu; };
-	zetag = [=] (double const& mu, double const&)->double{ return mu * mu; };
+	DCSq = [=] (double const&, double const&) -> double{ return 0; };
+	DCSg = [=] (double const&, double const&) -> double{ return 0; };
+	zetaq = [=] (double const& mu, double const&) -> double{ return mu * mu; };
+	zetag = [=] (double const& mu, double const&) -> double{ return mu * mu; };
       }
     // NLL
     else if (PerturbativeOrder == 1)
       {
-	gammaVq = [=] (double const& mu)->double
+	gammaVq = [=] (double const& mu) -> double
 	  {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaVq.at(0);
 	  };
-	gammaVg = [=] (double const& mu)->double
+	gammaVg = [=] (double const& mu) -> double
 	  {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaVg.at(0);
 	  };
-	GammaCuspq = [=] (double const& mu)->double
+	GammaCuspq = [=] (double const& mu) -> double
 	  {
 	    const auto gc     = TmdObj.at(NF(mu,thrs)).GammaCuspq;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * gc.at(1) );
 	  };
-	GammaCuspg = [=] (double const& mu)->double
+	GammaCuspg = [=] (double const& mu) -> double
 	  {
 	    const auto gc     = TmdObj.at(NF(mu,thrs)).GammaCuspg;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * gc.at(1) );
 	  };
-	DCSq = [=] (double const& mu, double const& b)->double
+	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
 	    const double coup = Alphas(mu) / FourPi;
@@ -326,7 +326,7 @@ namespace apfel {
 	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
 	    return coup * lo;
 	  };
-	DCSg = [=] (double const& mu, double const& b)->double
+	DCSg = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
 	    const double coup = Alphas(mu) / FourPi;
@@ -334,7 +334,7 @@ namespace apfel {
 	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
 	    return coup * lo;
 	  };
-	zetaq = [=] (double const& mu, double const& b)->double
+	zetaq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto lz      = TmdObj.at(NF(mu,thrs)).Lzetaq;
 	    const double Lmu   = LX(mu,b);
@@ -342,7 +342,7 @@ namespace apfel {
 	    const double lzeta = lo;
 	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
 	  };
-	zetag = [=] (double const& mu, double const& b)->double
+	zetag = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto lz      = TmdObj.at(NF(mu,thrs)).Lzetag;
 	    const double Lmu   = LX(mu,b);
@@ -354,31 +354,31 @@ namespace apfel {
     // NNLL
     else if (PerturbativeOrder == 2)
       {
-	gammaVq = [=] (double const& mu)->double
+	gammaVq = [=] (double const& mu) -> double
 	  {
 	    const auto gv     = TmdObj.at(NF(mu,thrs)).GammaVq;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gv.at(0) + coup * gv.at(1) );
 	  };
-	gammaVg = [=] (double const& mu)->double
+	gammaVg = [=] (double const& mu) -> double
 	  {
 	    const auto gv     = TmdObj.at(NF(mu,thrs)).GammaVg;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gv.at(0) + coup * gv.at(1) );
 	  };
-	GammaCuspq = [=] (double const& mu)->double
+	GammaCuspq = [=] (double const& mu) -> double
 	  {
 	    const auto gc     = TmdObj.at(NF(mu,thrs)).GammaCuspq;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
 	  };
-	GammaCuspg = [=] (double const& mu)->double
+	GammaCuspg = [=] (double const& mu) -> double
 	  {
 	    const auto gc     = TmdObj.at(NF(mu,thrs)).GammaCuspg;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
 	  };
-	DCSq = [=] (double const& mu, double const& b)->double
+	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
 	    const double coup = Alphas(mu) / FourPi;
@@ -387,7 +387,7 @@ namespace apfel {
 	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
 	    return coup * ( lo + coup * nlo );
 	  };
-	DCSg = [=] (double const& mu, double const& b)->double
+	DCSg = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
 	    const double coup = Alphas(mu) / FourPi;
@@ -396,7 +396,7 @@ namespace apfel {
 	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
 	    return coup * ( lo + coup * nlo );
 	  };
-	zetaq = [=] (double const& mu, double const& b)->double
+	zetaq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto lz      = TmdObj.at(NF(mu,thrs)).Lzetaq;
 	    const double coup  = Alphas(mu) / FourPi;
@@ -406,7 +406,7 @@ namespace apfel {
 	    const double lzeta = lo + coup * nlo;
 	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
 	  };
-	zetag = [=] (double const& mu, double const& b)->double
+	zetag = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto lz      = TmdObj.at(NF(mu,thrs)).Lzetag;
 	    const double coup  = Alphas(mu) / FourPi;
@@ -427,7 +427,7 @@ namespace apfel {
     // Construct function that returns the product of: matching
     // functions, PDFs, NP function, and evolution factors, i.e. the
     // set of evolved TMDs (times x).
-    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf)->Set<Distribution>
+    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
       {
 	// Define relevant scales
 	const double mu0    = Mu0b(b);
@@ -453,7 +453,7 @@ namespace apfel {
 	// Multiply PDFs + NP functions for the matching functions and
 	// the evolutions factor. First muplity everything for the
 	// quark evolution factor.
-	return Rv * ( MatchFunc(mui,b) * ( [&] (double const& x)->double{ return fNP(x, b); } * CollPDFs.Evaluate(mui) ) );
+	return Rv * ( MatchFunc(mui,b) * ( [&] (double const& x) -> double{ return fNP(x, b); } * CollPDFs.Evaluate(mui) ) );
       };
 
     return EvolvedTMDs;

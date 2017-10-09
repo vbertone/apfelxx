@@ -40,10 +40,10 @@ namespace apfel {
 
     // Tabulate input TMDs in the impact parameter to make the
     // integral faster.
-    const auto TabFunc    = [] (double const& b)->double{ return log(b); };
-    const auto InvTabFunc = [] (double const& fb)->double{ return exp(fb); };
-    const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b)->Set<Distribution>
-	{ return EvolvedTMDPDFs(b, muf, zetaf); }, 100, 1e-7, 100, 3, Thresholds, TabFunc, InvTabFunc};
+    const auto TabFunc    = [] (double const& b) -> double{ return log(b); };
+    const auto InvTabFunc = [] (double const& fb) -> double{ return exp(fb); };
+    const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b) -> Set<Distribution>
+	{ return EvolvedTMDPDFs(b, muf, zetaf); }, 50, 5e-5, 30, 3, Thresholds, TabFunc, InvTabFunc};
 
     // Construct the TMD luminosisty in b scale to be fed to be
     // trasformed in qT space.
@@ -71,7 +71,7 @@ namespace apfel {
     // factors.
     const double hcs = ConvFact * FourPi * HardCrossSectionDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), muf/Q) / 9 / pow(Vs*Q,2);
 
-    return [TMDLumib,hcs,Q] (double const& qT)->double
+    return [TMDLumib,hcs,Q] (double const& qT) -> double
       {
 	const double cutPref = 1 + pow(qT/Q,2) / 2;
 	return hcs * cutPref * OgataQuadrature(TMDLumib, qT);
@@ -80,7 +80,7 @@ namespace apfel {
 	// lines below to use the DGauss quadrature. The second will
 	// be substantially slower but should return consistent
 	// results.
-	//const Integrator integrand{[=] (double const& bT)->double{ return TMDLumib(bT) * j0(qT * bT) * bT / 2; }};
+	//const Integrator integrand{[=] (double const& bT) -> double{ return TMDLumib(bT) * j0(qT * bT) * bT / 2; }};
 	//return hcs * cutPref * integrand.integrate(0.0000001,50,eps9);
       };
   }
@@ -101,8 +101,8 @@ namespace apfel {
 						    double                                                                   const& IntEps)
   {
     // Tabulation function and its inverse.
-    const auto TabFunc    = [] (double const& b)->double{ return log(b); };
-    const auto InvTabFunc = [] (double const& fb)->double{ return exp(fb); };
+    const auto TabFunc    = [] (double const& b) -> double{ return log(b); };
+    const auto InvTabFunc = [] (double const& fb) -> double{ return exp(fb); };
 
     // If integration over Q and y is required, it is advantageous to
     // perform these integrations before the integral over the impact
@@ -110,8 +110,9 @@ namespace apfel {
     return [=] (double const& qT) -> double
       {
 	const Integrator Qintegrand{
-	  [&] (double const& Q) -> double
+	  [&] (double const& lnQ) -> double
 	    {
+	      const double Q = exp(lnQ);
 	      // Compute "muf" and "zetaf". They are assumed to be
 	      // proportional to Q and Q^2, respectively, through
 	      // "cmuf" and "czetaf".
@@ -123,18 +124,18 @@ namespace apfel {
 
 	      // Tabulate input TMDs in the impact parameter to make the
 	      // integral faster.
-	      const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b)->Set<Distribution>
-		  { return EvolvedTMDPDFs(b, muf, zetaf); }, 100, 1e-7, 100, 3, Thresholds, TabFunc, InvTabFunc};
+	      const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b) -> Set<Distribution>
+		  { return EvolvedTMDPDFs(b, muf, zetaf); }, 50, 5e-5, 30, 3, Thresholds, TabFunc, InvTabFunc};
 
 	      const auto bintegrand = [&] (double const& b) -> double
 		{
 		  // Define y integrand.
 		  const Integrator yintegrand{
-		    [&] (double const& y) -> double
+		    [&] (double const& ey) -> double
 		    {
 		      // Compute values of x1 and x2.
-		      const double x1 = Q * exp(-y) / Vs;
-		      const double x2 = Q * exp(y) / Vs;
+		      const double x1 = Q / ey / Vs;
+		      const double x2 = Q * ey / Vs;
 
 		      // Get map of the TMDs in "x1" and "x2" and
 		      // rotate them into the physical basis.
@@ -147,10 +148,9 @@ namespace apfel {
 		      for (int i = 1; i <= 6; i++)
 			lumi += Bq[i-1] * ( TMD1[i] * TMD2[-i] + TMD1[-i] * TMD2[i] );
 
-		      // Divide by x1 and x2 because the
-		      // "EvolvedTMDPDFs" function returns x times the
-		      // TMDs.
-		      lumi /= x1 * x2;
+		      // Divide by x1 and x2 because "EvolvedTMDPDFs"
+		      // returns x times the TMD PDFs.
+		      lumi /= x1 * x2 * ey;
 
 		      return lumi;
 		    }
@@ -159,22 +159,22 @@ namespace apfel {
 		  // Integrate in y over [ymin:ymax] or return the
 		  // value if ymin = ymax.
 		  if (ymin == ymax)
-		    return yintegrand.integrand(ymin);
+		    return yintegrand.integrand(exp(ymin));
 		  else
-		    return yintegrand.integrate(ymin, ymax, IntEps);
+		    return yintegrand.integrate(exp(ymin), exp(ymax), IntEps);
 		};
 
 	      const double cutPref  = 1 + pow(qT/Q,2) / 2;
 	      const double HardFact = HardCrossSectionDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), cmuf);
-	      return cutPref * HardFact * OgataQuadrature(bintegrand, qT) / Q / Q;
+	      return cutPref * HardFact * OgataQuadrature(bintegrand, qT) / Q;
 	    }
 	};
 	// Integrate in Q over [Qmin:Qmax] or return the
 	// value if Qmin = Qmax.
 	if (Qmin == Qmax)
-	  return ConvFact * FourPi * Qintegrand.integrand(Qmin) / 9 / Vs / Vs;
+	  return ConvFact * FourPi * Qintegrand.integrand(log(Qmin)) / 9 / Vs / Vs;
 	else
-	  return ConvFact * FourPi * Qintegrand.integrate(Qmin, Qmax, IntEps) / 9 / Vs / Vs;
+	  return ConvFact * FourPi * Qintegrand.integrate(log(Qmin), log(Qmax), IntEps) / 9 / Vs / Vs;
       };
   }
 

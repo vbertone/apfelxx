@@ -27,17 +27,17 @@ namespace apfel {
     for (auto const& jz : j0Zeros)
       {
 	i++;
-	const double w = y0(jz) / j1(jz);
-	const double z = jz / M_PI;
-	const double x = M_PI * psi( h * z ) / h;
-	const double f = x * func( x / qT ) / 2;
+	const double w    = y0(jz) / j1(jz);
+	const double z    = jz / M_PI;
+	const double x    = M_PI * psi( h * z ) / h;
+	const double f    = x * func( x / qT ) / 2;
 	const double term = f * j0(x) * psip( h * z );
 
 	// Break when the absolute value of the last term is less
 	// than "CutOff". This assumes that terms are increasingly
 	// small. Provided that the integrand is not badly behaved,
 	// this should be guaranteed by the Bessel function j0.
-	if (abs(term) < CutOff)
+	if (abs(term/integral) < CutOff)
 	  break;
 
 	integral += w * term;
