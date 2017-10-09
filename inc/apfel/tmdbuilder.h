@@ -27,6 +27,7 @@ namespace apfel
    */
   struct TmdObjects
   {
+    double                    Threshold;
     map<int,double>           Beta;
     map<int,double>           GammaCuspq;
     map<int,double>           GammaCuspg;
@@ -91,6 +92,5 @@ namespace apfel
 											 function<double(double const&)> const& Mub,
 											 int                             const& PerturbativeOrder,
 											 function<double(double const&)> const& Alphas,
-											 vector<double>                  const& Thresholds,
 											 double                          const& IntEps = 1e-7);
 }
