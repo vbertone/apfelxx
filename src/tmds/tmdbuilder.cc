@@ -164,7 +164,7 @@ namespace apfel {
   //_____________________________________________________________________________
   function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
 											map<int,DglapObjects>                          const& DglapObj,
-											TabulateObject<Set<Distribution>>              const& CollPDFs,
+											function<Set<Distribution>(double const&)>     const& CollPDFs,
 											function<double(double const&, double const&)> const& fNP,
 											function<double(double const&)>                const& Mu0b,
 											function<double(double const&)>                const& Mub,
@@ -172,8 +172,16 @@ namespace apfel {
 											function<double(double const&)>                const& Alphas,
 											double                                         const& IntEps)
   {
-    // Get thresholds from the tabulated PDFs.
-    const vector<double> thrs = CollPDFs.GetThresholds();
+    // Retrieve thresholds from "DglapObj".
+    vector<double> thrs;
+    for(auto const& obj : DglapObj)
+      {
+	const int    nf  = obj.first;
+	const double thr = obj.second.Threshold;
+	if ((int) thrs.size() < nf)
+	  thrs.resize(nf);
+	thrs[nf-1] = thr;
+      }
 
     // Define the LX fuction as in eq. (4.9) of arXiv:1604.07869.
     const double C0 = 2 * exp(- emc);
@@ -453,9 +461,323 @@ namespace apfel {
 	// Multiply PDFs + NP functions for the matching functions and
 	// the evolutions factor. First muplity everything for the
 	// quark evolution factor.
-	return Rv * ( MatchFunc(mui,b) * ( [&] (double const& x) -> double{ return fNP(x, b); } * CollPDFs.Evaluate(mui) ) );
+	return Rv * ( MatchFunc(mui,b) * ( [&] (double const& x) -> double{ return fNP(x, b); } * CollPDFs(mui) ) );
       };
 
     return EvolvedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
+							  map<int,DglapObjects>                          const& DglapObj,
+							  function<Set<Distribution>(double const&)>     const& CollPDFs,
+							  function<double(double const&, double const&)> const& fNP,
+							  function<double(double const&)>                const& Mub,
+							  int                                            const& PerturbativeOrder,
+							  function<double(double const&)>                const& Alphas)
+  {
+    // Retrieve thresholds from "DglapObj".
+    vector<double> thrs;
+    for(auto const& obj : DglapObj)
+      {
+	const int    nf  = obj.first;
+	const double thr = obj.second.Threshold;
+	if ((int) thrs.size() < nf)
+	  thrs.resize(nf);
+	thrs[nf-1] = thr;
+      }
+
+    // Define the LX fuction as in eq. (4.9) of arXiv:1604.07869.
+    const double C0 = 2 * exp(- emc);
+    const auto LX = [C0] (double const& mu, double const& b) -> double{ return 2 * log( b * mu / C0 ); };
+
+    // Matching functions as functions of the absolute value of the
+    // impact parameter b.
+    function<Set<Operator>(double const&)> MatchFunc;
+    if (PerturbativeOrder == 0)
+      MatchFunc = [=] (double const& b) -> Set<Operator>
+	{
+	  return TmdObj.at(NF(Mub(b),thrs)).MatchingFunctionsPDFs.at(0);
+	};
+    else if (PerturbativeOrder == 1)
+      MatchFunc = [=] (double const& b) -> Set<Operator>
+	{
+	  const double mu   = Mub(b);
+	  const int nf      = NF(mu,thrs);
+	  const auto mf     = TmdObj.at(nf).MatchingFunctionsPDFs;
+	  const auto sf     = DglapObj.at(nf).SplittingFunctions;
+	  const double Lmu  = LX(mu,b);
+	  const double coup = Alphas(mu) / FourPi;
+	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
+	};
+    else if (PerturbativeOrder == 2)
+      {
+	// Precompute set of operators on the O(as^2) bit that are
+	// proportional to the different powers of Lmu (see eq. (2.37)
+	// of https://arxiv.org/pdf/1706.01473.pdf).
+	map<int,Set<Operator>> SetLcoef;
+	map<int,Set<Operator>> SetL2coef;
+	for (auto const& to : TmdObj)
+	  {
+	    const int nf    = to.first;
+	    const double b0 = to.second.Beta.at(0);
+	    const auto mf   = to.second.MatchingFunctionsPDFs;
+	    const auto sf   = DglapObj.at(nf).SplittingFunctions;
+
+	    // Construct matricial product of P0 * P0 and C1 * P0 (see
+	    // eq. (B.15) https://arxiv.org/pdf/1706.01473.pdf).
+	    const auto P0 = sf.at(0);
+	    const auto P1 = sf.at(1);
+	    const auto C1 = mf.at(1);
+	    const auto ConvMap = P0.GetMap();
+
+	    map<int,Operator> MapL2coef;
+	    MapL2coef.insert({EvolutionBasisQCD::PNSP, ( P0.at(0) * P0.at(0)                       - b0 * P0.at(0) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PNSM, ( P0.at(1) * P0.at(1)                       - b0 * P0.at(1) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PNSV, ( P0.at(2) * P0.at(2)                       - b0 * P0.at(2) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PQQ,  ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) - b0 * P0.at(3) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PQG,  ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) - b0 * P0.at(4) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PGQ,  ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) - b0 * P0.at(5) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PGG,  ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) - b0 * P0.at(6) ) / 2});
+
+	    map<int,Operator> MapLcoef;
+	    MapLcoef.insert({EvolutionBasisQCD::PNSP, P1.at(0) + C1.at(0) * P0.at(0)                       - b0 * C1.at(0)});
+	    MapLcoef.insert({EvolutionBasisQCD::PNSM, P1.at(1) + C1.at(1) * P0.at(1)                       - b0 * C1.at(1)});
+	    MapLcoef.insert({EvolutionBasisQCD::PNSV, P1.at(2) + C1.at(2) * P0.at(2)                       - b0 * C1.at(2)});
+	    MapLcoef.insert({EvolutionBasisQCD::PQQ,  P1.at(3) + C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) - b0 * C1.at(3)});
+	    MapLcoef.insert({EvolutionBasisQCD::PQG,  P1.at(4) + C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) - b0 * C1.at(4)});
+	    MapLcoef.insert({EvolutionBasisQCD::PGQ,  P1.at(5) + C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) - b0 * C1.at(5)});
+	    MapLcoef.insert({EvolutionBasisQCD::PGG,  P1.at(6) + C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) - b0 * C1.at(6)});
+
+	    SetL2coef.insert({nf,Set<Operator>{ConvMap, MapL2coef}});
+	    SetLcoef.insert({nf,Set<Operator>{ConvMap, MapLcoef}});
+	  }
+
+	// Now contruct the actual matching-function function.
+	MatchFunc = [=] (double const& b) -> Set<Operator>
+	  {
+	    const double mu   = Mub(b);
+	    const int nf      = NF(mu,thrs);
+	    const auto mf     = TmdObj.at(nf).MatchingFunctionsPDFs;
+	    const auto sf     = DglapObj.at(nf).SplittingFunctions;
+	    const double Lmu  = LX(mu,b);
+	    const double coup = Alphas(mu) / FourPi;
+	    const auto nlo    = mf.at(1) - Lmu * sf.at(0);
+	    const auto nnlo   = mf.at(2) - Lmu * ( SetLcoef.at(nf) - Lmu * SetL2coef.at(nf) );
+	    return mf.at(0) + coup * ( nlo + coup * nnlo );
+	  };
+      }
+
+    // Construct function that returns the product of: matching
+    // functions, PDFs, NP function.
+    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
+      {
+	return MatchFunc(b) * ( [&] (double const& x) -> double{ return fNP(x, b); } * CollPDFs(Mub(b)) );
+      };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  function<vector<double>(double const&, double const&, double const&)> EvolutionFactors(map<int,TmdObjects>             const& TmdObj,
+											 function<double(double const&)> const& Mu0b,
+											 function<double(double const&)> const& Mub,
+											 int                             const& PerturbativeOrder,
+											 function<double(double const&)> const& Alphas,
+											 vector<double>                  const& Thresholds,
+											 double                          const& IntEps)
+  {
+    // Define the LX fuction as in eq. (4.9) of arXiv:1604.07869.
+    const double C0 = 2 * exp(- emc);
+    const auto LX = [C0] (double const& mu, double const& b) -> double{ return 2 * log( b * mu / C0 ); };
+
+    // Create functions needed for the TMD evolution.
+    function<double(double const&)> gammaVq;
+    function<double(double const&)> gammaVg;
+    function<double(double const&)> GammaCuspq;
+    function<double(double const&)> GammaCuspg;
+    function<double(double const&, double const&)> DCSq;
+    function<double(double const&, double const&)> DCSg;
+    function<double(double const&, double const&)> zetaq;
+    function<double(double const&, double const&)> zetag;
+    // LL
+    if (PerturbativeOrder == 0)
+      {
+	gammaVq = [=] (double const&) -> double{ return 0; };
+	gammaVg = [=] (double const&) -> double{ return 0; };
+	GammaCuspq = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,Thresholds)).GammaCuspq.at(0);
+	  };
+	GammaCuspg = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,Thresholds)).GammaCuspg.at(0);
+	  };
+	DCSq = [=] (double const&, double const&) -> double{ return 0; };
+	DCSg = [=] (double const&, double const&) -> double{ return 0; };
+	zetaq = [=] (double const& mu, double const&) -> double{ return mu * mu; };
+	zetag = [=] (double const& mu, double const&) -> double{ return mu * mu; };
+      }
+    // NLL
+    else if (PerturbativeOrder == 1)
+      {
+	gammaVq = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,Thresholds)).GammaVq.at(0);
+	  };
+	gammaVg = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,Thresholds)).GammaVg.at(0);
+	  };
+	GammaCuspq = [=] (double const& mu) -> double
+	  {
+	    const auto gc     = TmdObj.at(NF(mu,Thresholds)).GammaCuspq;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * gc.at(1) );
+	  };
+	GammaCuspg = [=] (double const& mu) -> double
+	  {
+	    const auto gc     = TmdObj.at(NF(mu,Thresholds)).GammaCuspg;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * gc.at(1) );
+	  };
+	DCSq = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto d      = TmdObj.at(NF(mu,Thresholds)).CSdq;
+	    const double coup = Alphas(mu) / FourPi;
+	    const double Lmu  = LX(mu,b);
+	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    return coup * lo;
+	  };
+	DCSg = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto d      = TmdObj.at(NF(mu,Thresholds)).CSdg;
+	    const double coup = Alphas(mu) / FourPi;
+	    const double Lmu  = LX(mu,b);
+	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    return coup * lo;
+	  };
+	zetaq = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto lz      = TmdObj.at(NF(mu,Thresholds)).Lzetaq;
+	    const double Lmu   = LX(mu,b);
+	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
+	    const double lzeta = lo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
+	  };
+	zetag = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto lz      = TmdObj.at(NF(mu,Thresholds)).Lzetag;
+	    const double Lmu   = LX(mu,b);
+	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
+	    const double lzeta = lo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
+	  };
+      }
+    // NNLL
+    else if (PerturbativeOrder == 2)
+      {
+	gammaVq = [=] (double const& mu) -> double
+	  {
+	    const auto gv     = TmdObj.at(NF(mu,Thresholds)).GammaVq;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * gv.at(1) );
+	  };
+	gammaVg = [=] (double const& mu) -> double
+	  {
+	    const auto gv     = TmdObj.at(NF(mu,Thresholds)).GammaVg;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * gv.at(1) );
+	  };
+	GammaCuspq = [=] (double const& mu) -> double
+	  {
+	    const auto gc     = TmdObj.at(NF(mu,Thresholds)).GammaCuspq;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+	  };
+	GammaCuspg = [=] (double const& mu) -> double
+	  {
+	    const auto gc     = TmdObj.at(NF(mu,Thresholds)).GammaCuspg;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+	  };
+	DCSq = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto d      = TmdObj.at(NF(mu,Thresholds)).CSdq;
+	    const double coup = Alphas(mu) / FourPi;
+	    const double Lmu  = LX(mu,b);
+	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	    return coup * ( lo + coup * nlo );
+	  };
+	DCSg = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto d      = TmdObj.at(NF(mu,Thresholds)).CSdg;
+	    const double coup = Alphas(mu) / FourPi;
+	    const double Lmu  = LX(mu,b);
+	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	    return coup * ( lo + coup * nlo );
+	  };
+	zetaq = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto lz      = TmdObj.at(NF(mu,Thresholds)).Lzetaq;
+	    const double coup  = Alphas(mu) / FourPi;
+	    const double Lmu   = LX(mu,b);
+	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
+	    const double nlo   = lz.at(1)[0] + Lmu * Lmu * lz.at(1)[2];
+	    const double lzeta = lo + coup * nlo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
+	  };
+	zetag = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto lz      = TmdObj.at(NF(mu,Thresholds)).Lzetag;
+	    const double coup  = Alphas(mu) / FourPi;
+	    const double Lmu   = LX(mu,b);
+	    const double lo    = lz.at(0)[0] + Lmu * lz.at(0)[1];
+	    const double nlo   = lz.at(1)[0] + Lmu * Lmu * lz.at(1)[2];
+	    const double lzeta = lo + coup * nlo;
+	    return 4 * exp( - lzeta + Lmu - 2 * emc ) / b / b;
+	  };
+      }
+
+    // Define the integrands.
+    Integrator I1q{[=] (double const& mu) -> double{ return ( - gammaVq(mu) + 2 * log(mu) * GammaCuspq(mu) ) / mu; }};
+    Integrator I1g{[=] (double const& mu) -> double{ return ( - gammaVg(mu) + 2 * log(mu) * GammaCuspg(mu) ) / mu; }};
+    Integrator I2q{[=] (double const& mu) -> double{ return GammaCuspq(mu) / mu; }};
+    Integrator I2g{[=] (double const& mu) -> double{ return GammaCuspg(mu) / mu; }};
+
+    // Construct function that returns the product of: matching
+    // functions, PDFs, NP function, and evolution factors, i.e. the
+    // set of evolved TMDs (times x).
+    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> vector<double>
+      {
+	// Define relevant scales
+	const double mu0    = Mu0b(b);
+	const double mui    = Mub(b);
+	const double zetaiq = zetaq(mui,b);
+	const double zetaig = zetag(mui,b);
+
+	// Compute argument of the exponent of the evolution factors.
+	const double LRq = I1q.integrate(mui, muf, Thresholds, IntEps)
+	- I2q.integrate(mu0, muf, Thresholds, IntEps) * log(zetaf)
+	+ I2q.integrate(mu0, mui, Thresholds, IntEps) * log(zetaiq);
+	const double LRg = I1g.integrate(mui, muf, Thresholds, IntEps)
+	- I2g.integrate(mu0, muf, Thresholds, IntEps) * log(zetaf)
+	+ I2g.integrate(mu0, mui, Thresholds, IntEps) * log(zetaig);
+
+	// Compute the evolution factors.
+	const double Rq = exp( LRq - DCSq(mu0,b) * log( zetaf / zetaiq ) );
+	const double Rg = exp( LRg - DCSg(mu0,b) * log( zetaf / zetaig ) );
+
+	// Return vector of evolution factors.
+	return vector<double>{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
+      };
+
+    return EvolFactors;
   }
 }

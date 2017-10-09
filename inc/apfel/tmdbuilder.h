@@ -55,17 +55,42 @@ namespace apfel
 					     double         const& IntEps = 1e-5);
 
   /**
-   * @brief Function that returns the evolved TMD PDFs in b-space as
-   * functions of the final scale and rapidity zeta. It assumes the
-   * zeta-prescription.
+   * @brief Function that returns the matched and evolved TMD PDFs in
+   * b-space as functions of the final scale and rapidity zeta. It
+   * assumes the zeta-prescription.
    */
     function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
 											  map<int,DglapObjects>                          const& DglapObj,
-											  TabulateObject<Set<Distribution>>              const& CollPDFs,
+											  function<Set<Distribution>(double const&)>     const& CollPDFs,
 											  function<double(double const&, double const&)> const& fNP,
 											  function<double(double const&)>                const& Mu0b,
 											  function<double(double const&)>                const& Mub,
 											  int                                            const& PerturbativeOrder,
 											  function<double(double const&)>                const& Alphas,
 											  double                                         const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the matched TMD PDFs in b-space as
+   * functions of the initial scale. It assumes the zeta-prescription.
+   */
+    function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
+							    map<int,DglapObjects>                          const& DglapObj,
+							    function<Set<Distribution>(double const&)>     const& CollPDFs,
+							    function<double(double const&, double const&)> const& fNP,
+							    function<double(double const&)>                const& Mub,
+							    int                                            const& PerturbativeOrder,
+							    function<double(double const&)>                const& Alphas);
+
+  /**
+   * @brief Function that returns the TMD evolution factor as a
+   * function of the impact factor, the final scale and rapidity.
+   */
+  //_____________________________________________________________________________
+  function<vector<double>(double const&, double const&, double const&)> EvolutionFactors(map<int,TmdObjects>             const& TmdObj,
+											 function<double(double const&)> const& Mu0b,
+											 function<double(double const&)> const& Mub,
+											 int                             const& PerturbativeOrder,
+											 function<double(double const&)> const& Alphas,
+											 vector<double>                  const& Thresholds,
+											 double                          const& IntEps = 1e-7);
 }

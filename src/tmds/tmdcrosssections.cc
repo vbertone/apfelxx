@@ -43,7 +43,7 @@ namespace apfel {
     const auto TabFunc    = [] (double const& b) -> double{ return log(b); };
     const auto InvTabFunc = [] (double const& fb) -> double{ return exp(fb); };
     const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b) -> Set<Distribution>
-	{ return EvolvedTMDPDFs(b, muf, zetaf); }, 50, 5e-5, 30, 3, Thresholds, TabFunc, InvTabFunc};
+	{ return EvolvedTMDPDFs(b, muf, zetaf); }, 50, 5e-5, 30, 3, {}, TabFunc, InvTabFunc};
 
     // Construct the TMD luminosisty in b scale to be fed to be
     // trasformed in qT space.
@@ -86,23 +86,28 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<double(double const&)> TmdCrossSectionDY(double                                                                   const& Vs,
-						    double                                                                   const& Qmin,
-						    double                                                                   const& Qmax,
-						    double                                                                   const& ymin,
-						    double                                                                   const& ymax,
-						    function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
-						    function<double(double const&)>                                          const& Alphas,
-						    function<vector<double>(double const&)>                                  const& fEWCharges,
-						    int                                                                      const& PerturbativeOrder,
-						    vector<double>                                                           const& Thresholds,
-						    double                                                                   const& cmuf,
-						    double                                                                   const& czetaf,
-						    double                                                                   const& IntEps)
+  function<double(double const&)> TmdCrossSectionDY(double                                                                const& Vs,
+						    double                                                                const& Qmin,
+						    double                                                                const& Qmax,
+						    double                                                                const& ymin,
+						    double                                                                const& ymax,
+						    function<Set<Distribution>(double const&)>                            const& InTMDPDFs,
+						    function<vector<double>(double const&, double const&, double const&)> const& EvolFact,
+						    function<double(double const&)>                                       const& Alphas,
+						    function<vector<double>(double const&)>                               const& fEWCharges,
+						    int                                                                   const& PerturbativeOrder,
+						    vector<double>                                                        const& Thresholds,
+						    double                                                                const& cmuf,
+						    double                                                                const& czetaf,
+						    double                                                                const& IntEps)
   {
     // Tabulation function and its inverse.
     const auto TabFunc    = [] (double const& b) -> double{ return log(b); };
     const auto InvTabFunc = [] (double const& fb) -> double{ return exp(fb); };
+
+    // Tabulate initial TMD PDFs.
+    const TabulateObject<Set<Distribution>> TabInTMDs{[&] (double const& b) -> Set<Distribution>
+	{ return InTMDPDFs(b); }, 50, 5e-5, 30, 3, {}, TabFunc, InvTabFunc};
 
     // If integration over Q and y is required, it is advantageous to
     // perform these integrations before the integral over the impact
@@ -124,8 +129,8 @@ namespace apfel {
 
 	      // Tabulate input TMDs in the impact parameter to make the
 	      // integral faster.
-	      const TabulateObject<Set<Distribution>> TabulatedTMDs{[&] (double const& b) -> Set<Distribution>
-		  { return EvolvedTMDPDFs(b, muf, zetaf); }, 50, 5e-5, 30, 3, Thresholds, TabFunc, InvTabFunc};
+	      const TabulateObject<Set<Distribution>> TabEvTMDs{[&] (double const& b) -> Set<Distribution>
+		  { return EvolFact(b, muf, zetaf) * TabInTMDs.Evaluate(b); }, 50, 5e-5, 30, 3, {}, TabFunc, InvTabFunc};
 
 	      const auto bintegrand = [&] (double const& b) -> double
 		{
@@ -139,8 +144,8 @@ namespace apfel {
 
 		      // Get map of the TMDs in "x1" and "x2" and
 		      // rotate them into the physical basis.
-		      map<int,double> TMD1 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x1, b));
-		      map<int,double> TMD2 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x2, b));
+		      map<int,double> TMD1 = QCDEvToPhys(TabEvTMDs.EvaluateMapxQ(x1, b));
+		      map<int,double> TMD2 = QCDEvToPhys(TabEvTMDs.EvaluateMapxQ(x2, b));
 
 		      // Construct the combination of TMDs weighted by
 		      // the EW charges.
@@ -150,7 +155,7 @@ namespace apfel {
 
 		      // Divide by x1 and x2 because "EvolvedTMDPDFs"
 		      // returns x times the TMD PDFs.
-		      lumi /= x1 * x2 * ey;
+		      lumi /= x1 * x2 * ey ;
 
 		      return lumi;
 		    }
