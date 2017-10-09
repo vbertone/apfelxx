@@ -164,7 +164,7 @@ namespace apfel {
 		  // Integrate in y over [ymin:ymax] or return the
 		  // value if ymin = ymax.
 		  if (ymin == ymax)
-		    return yintegrand.integrand(exp(ymin));
+		    return yintegrand.integrand(exp(ymin)) * exp(ymin);
 		  else
 		    return yintegrand.integrate(exp(ymin), exp(ymax), IntEps);
 		};
@@ -177,7 +177,7 @@ namespace apfel {
 	// Integrate in Q over [Qmin:Qmax] or return the
 	// value if Qmin = Qmax.
 	if (Qmin == Qmax)
-	  return ConvFact * FourPi * Qintegrand.integrand(log(Qmin)) / 9 / Vs / Vs;
+	  return ConvFact * FourPi * Qintegrand.integrand(log(Qmin)) / 9 / Vs / Vs / Qmin;
 	else
 	  return ConvFact * FourPi * Qintegrand.integrate(log(Qmin), log(Qmax), IntEps) / 9 / Vs / Vs;
       };
