@@ -182,7 +182,7 @@ namespace apfel {
     // Compute TMD evolution factors.
     const auto EvolFactors = EvolutionFactors(TmdObj, Mu0b, Mub, PerturbativeOrder, Alphas, IntEps);
 
-    // Construct function that returns the product.
+    // Construct the function that returns the product.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
       {
 	return EvolFactors(b, muf, zetaf) * MatchedTmdPDFs(b);
