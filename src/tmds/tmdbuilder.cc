@@ -349,8 +349,24 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaCuspg.at(0);
 	  };
-	DCSq = [=] (double const&, double const&) -> double{ return 0; };
-	DCSg = [=] (double const&, double const&) -> double{ return 0; };
+	//DCSq = [=] (double const&, double const&) -> double{ return 0; };
+	//DCSg = [=] (double const&, double const&) -> double{ return 0; };
+	DCSq = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
+	    const double coup = Alphas(mu) / FourPi;
+	    const double Lmu  = LX(mu,b);
+	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    return coup * lo;
+	  };
+	DCSg = [=] (double const& mu, double const& b) -> double
+	  {
+	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
+	    const double coup = Alphas(mu) / FourPi;
+	    const double Lmu  = LX(mu,b);
+	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    return coup * lo;
+	  };
 	zetaq = [=] (double const& mu, double const&) -> double{ return mu * mu; };
 	zetag = [=] (double const& mu, double const&) -> double{ return mu * mu; };
       }
@@ -379,13 +395,30 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * gc.at(1) );
 	  };
+	//DCSq = [=] (double const& mu, double const& b) -> double
+	//  {
+	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
+	//    const double coup = Alphas(mu) / FourPi;
+	//    const double Lmu  = LX(mu,b);
+	//   const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	//    return coup * lo;
+	//  };
+	//DCSg = [=] (double const& mu, double const& b) -> double
+	//  {
+	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
+	//    const double coup = Alphas(mu) / FourPi;
+	//    const double Lmu  = LX(mu,b);
+	//    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	//    return coup * lo;
+	//  };
 	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
 	    const double coup = Alphas(mu) / FourPi;
 	    const double Lmu  = LX(mu,b);
 	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	    return coup * lo;
+	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	    return coup * ( lo + coup * nlo );
 	  };
 	DCSg = [=] (double const& mu, double const& b) -> double
 	  {
@@ -393,7 +426,8 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    const double Lmu  = LX(mu,b);
 	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	    return coup * lo;
+	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	    return coup * ( lo + coup * nlo );
 	  };
 	zetaq = [=] (double const& mu, double const& b) -> double
 	  {
@@ -439,6 +473,24 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
 	  };
+	//DCSq = [=] (double const& mu, double const& b) -> double
+	//  {
+	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
+	//    const double coup = Alphas(mu) / FourPi;
+	//    const double Lmu  = LX(mu,b);
+	//    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	//    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	//    return coup * ( lo + coup * nlo );
+	//  };
+	//DCSg = [=] (double const& mu, double const& b) -> double
+	//  {
+	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
+	//    const double coup = Alphas(mu) / FourPi;
+	//    const double Lmu  = LX(mu,b);
+	//    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	//    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	//    return coup * ( lo + coup * nlo );
+	//  };
 	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
@@ -446,7 +498,8 @@ namespace apfel {
 	    const double Lmu  = LX(mu,b);
 	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
 	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
-	    return coup * ( lo + coup * nlo );
+	    const double nnlo = d.at(2)[0] + Lmu * ( d.at(2)[1] + Lmu * ( d.at(2)[2] + Lmu * d.at(2)[3] ) );
+	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
 	  };
 	DCSg = [=] (double const& mu, double const& b) -> double
 	  {
@@ -455,7 +508,8 @@ namespace apfel {
 	    const double Lmu  = LX(mu,b);
 	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
 	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
-	    return coup * ( lo + coup * nlo );
+	    const double nnlo = d.at(2)[0] + Lmu * ( d.at(2)[1] + Lmu * ( d.at(2)[2] + Lmu * d.at(2)[3] ) );
+	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
 	  };
 	zetaq = [=] (double const& mu, double const& b) -> double
 	  {

@@ -171,7 +171,7 @@ namespace apfel {
 
 	      const double cutPref  = 1 + pow(qT/Q,2) / 2;
 	      const double HardFact = HardCrossSectionDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), cmuf);
-	      return cutPref * HardFact * OgataQuadrature(bintegrand, qT) / Q;
+	      return 2 * cutPref * HardFact * OgataQuadrature(bintegrand, qT);
 	    }
 	};
 	// Integrate in Q over [Qmin:Qmax] or return the
