@@ -6,7 +6,8 @@
 //
 
 #include "apfel/qgrid.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
+#include "apfel/messages.h"
 #include "apfel/distribution.h"
 #include "apfel/operator.h"
 #include "apfel/set.h"
@@ -32,7 +33,7 @@ namespace apfel
   {
     // Check that QMin is actually smaller than QMax.
     if (QMax <= QMin)
-      throw runtime_exception("QGrid::QGrid","QMax must be larger than QMin");
+      throw runtime_error(error("QGrid::QGrid","QMax must be larger than QMin"));
 
     // Find initial and final number of flavours.
     const auto nfin = ( _Thresholds.empty() ? 0 : lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMin) - _Thresholds.begin() );

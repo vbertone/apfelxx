@@ -5,7 +5,7 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
-#include <apfel/tools.h>
+#include <apfel/constants.h>
 #include <apfel/expression.h>
 #include <apfel/lagrangeinterpolator.h>
 #include <apfel/grid.h>

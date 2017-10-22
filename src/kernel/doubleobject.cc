@@ -100,13 +100,6 @@ namespace apfel
     return result;
   }
 
-  template<>
-  double DoubleObject<Operator>::Evaluate(double const&, double const&) const
-  {
-    throw runtime_exception("DoubleObject::Evaluate(x,z)",
-			    "This function can't be used for the specialization 'Operator' of the DoubleObject class.");
-  }
-
   //_________________________________________________________________________
   template<>
   DoubleObject<Operator>& DoubleObject<Operator>::operator *= (DoubleObject<Operator> const& o)

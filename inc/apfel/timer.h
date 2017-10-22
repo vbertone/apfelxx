@@ -5,6 +5,8 @@
 //          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
+#pragma once
+
 #include <iostream>
 #include <chrono>
 
@@ -15,7 +17,8 @@ namespace apfel
    *
    * Computes the calculation time.
    */
-  class Timer {
+  class Timer
+  {
   public:
     //! Starts the timer.
     void start(){  startTime = std::chrono::steady_clock::now(); }

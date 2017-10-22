@@ -6,6 +6,9 @@
 //
 
 #include "apfel/ogataquadrature.h"
+#include "apfel/messages.h"
+
+#include <cmath>
 
 using namespace std;
 

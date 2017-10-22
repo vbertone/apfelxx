@@ -6,7 +6,7 @@
 //
 
 #include "apfel/distribution.h"
-#include "apfel/tools.h"
+#include "apfel/messages.h"
 
 #include <algorithm>
 
@@ -209,7 +209,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw runtime_exception("Distribution::operator+=", "Distribution grids does not match");
+      throw runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
 
     // sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
@@ -228,7 +228,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw runtime_exception("Distribution::operator+=", "Distribution grids does not match");
+      throw runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
 
     // sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)

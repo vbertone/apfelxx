@@ -6,7 +6,7 @@
 //
 
 #include "apfel/splittingfunctions.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 
 #include <cmath>

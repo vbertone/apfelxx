@@ -11,7 +11,9 @@
 #include "apfel/operator.h"
 #include "apfel/set.h"
 #include "apfel/timer.h"
+#include "apfel/constants.h"
 #include "apfel/tools.h"
+#include "apfel/messages.h"
 #include "apfel/splittingfunctions.h"
 #include "apfel/matchingconditions.h"
 

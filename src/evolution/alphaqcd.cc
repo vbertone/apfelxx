@@ -6,7 +6,9 @@
 //
 
 #include "apfel/alphaqcd.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
+#include "apfel/betaqcd.h"
+#include "apfel/messages.h"
 #include "apfel/ode.h"
 
 using namespace std;
@@ -94,7 +96,7 @@ namespace apfel {
     else if ( pt == 2 )
       res = beta2(nf);
     else
-      throw runtime_exception("AlphaQCD::betaQCD","perturbive range out-of-range.");
+      throw runtime_error(error("AlphaQCD::betaQCD","perturbive range out-of-range."));
     return res / pow(FourPi,pt+1);
   }
 }

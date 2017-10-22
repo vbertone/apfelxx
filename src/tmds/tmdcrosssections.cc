@@ -10,6 +10,8 @@
 #include "apfel/rotations.h"
 #include "apfel/ogataquadrature.h"
 #include "apfel/integrator.h"
+#include "apfel/constants.h"
+#include "apfel/tools.h"
 
 using namespace std;
 

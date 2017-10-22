@@ -8,7 +8,7 @@
 #pragma once
 
 #include "apfel/convolutionmap.h"
-#include "apfel/tools.h"
+#include "apfel/messages.h"
 
 #include <vector>
 #include <numeric>
@@ -74,7 +74,7 @@ namespace apfel
     ConvolutionMap{"DISNCBasis_tot"}
     {
       if (Ch.size() != 6)
-	throw runtime_exception("DISNCBasis", "The charge vector must have 6 entries.");
+	throw runtime_error(error("DISNCBasis", "The charge vector must have 6 entries."));
 
       // Sum of the charges
       const double SumCh = accumulate(Ch.begin(), Ch.end(), 0.);
@@ -210,7 +210,7 @@ namespace apfel
     ConvolutionMap{"DISCCBasis_tot"}
     {
       if (CKM.size() != 9)
-	throw runtime_exception("DISCCBasis", "The CKM vector must have 9 entries.");
+	throw runtime_error(error("DISCCBasis", "The CKM vector must have 9 entries."));
 
       // Initialize rules.
       _rules[GLUON]   = { {CG, GLUON, 0} };

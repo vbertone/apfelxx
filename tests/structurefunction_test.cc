@@ -9,7 +9,7 @@
 #include <apfel/structurefunctionbuilder.h>
 #include <apfel/grid.h>
 #include <apfel/timer.h>
-#include <apfel/tools.h>
+#include <apfel/constants.h>
 #include <apfel/alphaqcd.h>
 #include <apfel/tabulateobject.h>
 #include <apfel/lhtoypdfs.h>

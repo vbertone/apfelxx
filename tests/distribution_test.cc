@@ -11,7 +11,7 @@
 #include <apfel/operator.h>
 #include <apfel/expression.h>
 #include <apfel/timer.h>
-#include <apfel/tools.h>
+#include <apfel/constants.h>
 
 #include <cmath>
 

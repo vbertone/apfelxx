@@ -10,7 +10,13 @@
 #include "apfel/timer.h"
 #include "apfel/matchingfunctions.h"
 #include "apfel/evolutionbasisqcd.h"
+#include "apfel/betaqcd.h"
+#include "apfel/gammacusp.h"
+#include "apfel/gammav.h"
+#include "apfel/gammacs.h"
+#include "apfel/logzeta.h"
 #include "apfel/tools.h"
+#include "apfel/constants.h"
 
 using namespace std;
 

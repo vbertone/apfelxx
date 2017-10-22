@@ -49,11 +49,6 @@ target_link_libraries(set_test apfelxx)
 add_test(set_test set_test)
 
 # build tests
-add_executable(cache_test cache_test.cc)
-target_link_libraries(cache_test apfelxx)
-add_test(cache_test cache_test)
-
-# build tests
 add_executable(qgriddist_test qgriddist_test.cc)
 target_link_libraries(qgriddist_test apfelxx)
 add_test(qgriddist_test qgriddist_test)

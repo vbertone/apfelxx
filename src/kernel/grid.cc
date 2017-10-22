@@ -6,7 +6,8 @@
 //
 
 #include "apfel/grid.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
+#include "apfel/messages.h"
 
 #include <iostream>
 #include <algorithm>
@@ -17,7 +18,7 @@ namespace apfel {
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {
     if (sg1.xMin() == sg2.xMin())
-      throw runtime_exception("ComparexMin","There are SubGrids with the same lower bound.");
+      throw runtime_error(error("ComparexMin","There are SubGrids with the same lower bound."));
     return sg1.xMin() < sg2.xMin();
   }
 
@@ -81,7 +82,7 @@ namespace apfel {
               }
 
             if (nx_new < 0 || xmin_new < 0)
-              throw logic_exception("Grid::CreateJointGrid", "SubGrids do not overlap.");
+              throw runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
 
             // Find the closest multiple of "nx - ix + 1" to "nx",
             // i.e. "DensityFactor", and replace "nx" accordingly.

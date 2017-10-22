@@ -19,6 +19,7 @@ set(kernel_source
   doubleobject.cc
   rotations.cc
   specialfunctions.cc
+  messages.cc
   )
 
 add_library(kernel OBJECT ${kernel_source})

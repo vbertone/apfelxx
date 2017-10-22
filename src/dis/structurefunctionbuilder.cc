@@ -10,6 +10,8 @@
 #include "apfel/operator.h"
 #include "apfel/set.h"
 #include "apfel/timer.h"
+#include "apfel/tools.h"
+#include "apfel/constants.h"
 #include "apfel/zeromasscoefficientfunctions.h"
 #include "apfel/massivecoefficientfunctions.h"
 #include "apfel/massivezerocoefficientfunctions.h"

@@ -8,7 +8,7 @@
 #include "apfel/set.h"
 #include "apfel/distribution.h"
 #include "apfel/operator.h"
-#include "apfel/tools.h"
+#include "apfel/messages.h"
 
 namespace apfel {
 
@@ -25,7 +25,7 @@ namespace apfel {
   template<class V> Set<V> Set<T>::operator *= (Set<V> const& d) const
   {
     if (_map.GetName() != d.GetMap().GetName())
-      throw runtime_exception("Set::operator *=", "Convolution Map does not match (1)");
+      throw runtime_error(error("Set::operator *=", "Convolution Map does not match (1)"));
 
     map<int,V> mmap;
     for (auto item = _map.GetRules().begin(); item != _map.GetRules().end(); item++)
@@ -122,7 +122,7 @@ namespace apfel {
   Set<T>& Set<T>::operator *= (Set<T> const& d)
   {
     if (_map.GetName() != d.GetMap().GetName())
-      throw runtime_exception("Set::operator *=", "Convolution Map does not match (2)");
+      throw runtime_error(error("Set::operator *=", "Convolution Map does not match (2)"));
 
     for (auto& v: _objects)
       v.second *= d.at(v.first);
@@ -135,7 +135,7 @@ namespace apfel {
   Set<T>& Set<T>::operator += (Set<T> const& d)
   {
     if (_map.GetName() != d.GetMap().GetName())
-      throw runtime_exception("Set::operator +=", "Convolution Map does not match");
+      throw runtime_error(error("Set::operator +=", "Convolution Map does not match"));
 
     for (auto& v: _objects)
       v.second += d.at(v.first);
@@ -148,7 +148,7 @@ namespace apfel {
   Set<T>& Set<T>::operator -= (Set<T> const& d)
   {
     if (_map.GetName() != d.GetMap().GetName())
-      throw runtime_exception("Set::operator -=", "Convolution Map does not match");
+      throw runtime_error(error("Set::operator -=", "Convolution Map does not match"));
 
     for (auto& v: _objects)
       v.second -= d.at(v.first);

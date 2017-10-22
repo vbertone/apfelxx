@@ -6,7 +6,8 @@
 //
 
 #include "apfel/integrator.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
+#include "apfel/messages.h"
 
 #include <array>
 #include <cmath>
@@ -123,7 +124,7 @@ namespace apfel
     y = 0.5 * y;
     if (fabs(y) > delta) goto goto2;
 
-    throw runtime_exception("Integrator::dgauss", "too high accuracy required");
+    throw runtime_error(error("Integrator::dgauss", "too high accuracy required"));
 
     return dgauss;
   }

@@ -6,7 +6,7 @@
 //
 
 #include "apfel/lagrangeinterpolator.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
 
 #include <cmath>
 #include <iostream>

@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "apfel/tools.h"
-
+#include <vector>
 #include <functional>
 
+using std::vector;
 using std::function;
 
 namespace apfel
@@ -276,6 +276,6 @@ namespace apfel
    */
   double OgataQuadrature(function<double(double const&)> const& func,
 			 double                          const& qT,
-			 double                          const& CutOff = eps5,
+			 double                          const& CutOff = 1e-5,
 			 double                          const& h = 0.001);
 }

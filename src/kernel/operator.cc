@@ -6,7 +6,8 @@
 //
 
 #include "apfel/operator.h"
-#include "apfel/tools.h"
+#include "apfel/constants.h"
+#include "apfel/messages.h"
 
 #include <iostream>
 #include <cmath>
@@ -113,7 +114,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid.
     if (&this->_grid != &d.GetGrid())
-      throw runtime_exception("Operator::operator*=", "Operator and Distribution grids do not match");
+      throw runtime_error(error("Operator::operator*=", "Operator and Distribution grids do not match"));
 
     const vector<vector<double>>& sg = d.GetDistributionSubGrid();
     vector<vector<double>> s(sg);
@@ -181,7 +182,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
-      throw runtime_exception("Operator::operator*=", "Operators grid does not match");
+      throw runtime_error(error("Operator::operator*=", "Operators grid does not match"));
 
     const auto v = _Operator;
 
@@ -235,7 +236,7 @@ namespace apfel
   Operator& Operator::operator *= (function<double(double const&)> f)
   {
     if (!_grid.ExtGrids())
-      throw runtime_exception("Operator::operator*=", "Multiplication by a function not allowed on internal grids");
+      throw runtime_error(error("Operator::operator*=", "Multiplication by a function not allowed on internal grids"));
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       {
@@ -265,7 +266,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
-      throw runtime_exception("Operator::operator+=", "Operators grid does not match");
+      throw runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
@@ -280,7 +281,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
-      throw runtime_exception("Operator::operator+=", "Operators grid does not match");
+      throw runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
