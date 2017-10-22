@@ -10,7 +10,8 @@
 #include "apfel/operator.h"
 #include "apfel/doubleobject.h"
 #include "apfel/set.h"
-#include "apfel/tools.h"
+#include "apfel/timer.h"
+#include "apfel/messages.h"
 
 #include <algorithm>
 
@@ -28,6 +29,9 @@ namespace apfel {
 				    double              const& Lambda):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Object.GetThresholds(), Lambda)
   {
+    report("Tabulating object... ");
+    Timer t;
+
     // Save initial conditions.
     const auto nsteps = Object.GetNumberOfSteps();
     const auto ObjRef = Object.GetObjectRef();
@@ -66,6 +70,8 @@ namespace apfel {
     Object.SetNumberOfSteps(nsteps);
     Object.SetObjectRef(ObjRef);
     Object.SetMuRef(MuRef);
+
+    t.stop();
   }
 
   //_________________________________________________________________________________
@@ -79,9 +85,14 @@ namespace apfel {
 				    double              const& Lambda):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, Lambda)
   {
+    report("Tabulating object... ");
+    Timer t;
+
     // Fill in Qgrid with the object.
     for (auto const& iQ : this->_Qg)
       this->_GridValues.push_back(Object(iQ));
+
+    t.stop();
   }
 
   //_________________________________________________________________________________
@@ -96,9 +107,14 @@ namespace apfel {
 				    function<double(double const&)> const& InvTabFunc):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, TabFunc, InvTabFunc)
   {
+    report("Tabulating object... ");
+    Timer t;
+
     // Fill in Qgrid with the object.
     for (auto const& iQ : this->_Qg)
       this->_GridValues.push_back(Object(iQ));
+
+    t.stop();
   }
 
   // Specializations

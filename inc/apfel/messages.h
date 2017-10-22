@@ -26,7 +26,7 @@ namespace apfel
   /**
    * @brief Current Verbosity level
    */
-  static int VerbosityLevel = MEDIUM;
+  static int VerbosityLevel = HIGH;
 
   /**
    * @brief Set Verbosity level
@@ -40,6 +40,13 @@ namespace apfel
 
   // Enumerator for code warning
   enum code {red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
+
+  /**
+   * @brief info
+   * @param tag
+   * @param what
+   */
+  void report(string const& what);
 
   /**
    * @brief info
@@ -62,4 +69,9 @@ namespace apfel
    * @return
    */
   string error(string const& tag, string const& what);
+
+  /**
+   * @brief Banner
+   */
+  void Banner();
 }

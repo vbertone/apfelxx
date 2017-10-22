@@ -13,7 +13,6 @@
 #include <algorithm>
 
 namespace apfel {
-
   //_________________________________________________________________________________
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {

@@ -25,9 +25,8 @@ namespace apfel {
 												   vector<double> const& Thresholds,
 												   double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for F2 NC Zero Mass... ";
+    report("Initializing StructureFunctionObjects for F2 NC Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -100,9 +99,8 @@ namespace apfel {
 												   vector<double> const& Thresholds,
 												   double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for FL NC Zero Mass... ";
+    report("Initializing StructureFunctionObjects for FL NC Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -174,9 +172,8 @@ namespace apfel {
 												   vector<double> const& Thresholds,
 												   double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for F3 NC Zero Mass... ";
+    report("Initializing StructureFunctionObjects for F3 NC Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -246,9 +243,8 @@ namespace apfel {
 												       vector<double> const& Thresholds,
 												       double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for ( F2(nu) + F2(nubar) ) / 2 Zero Mass... ";
+    report("Initializing StructureFunctionObjects for ( F2(nu) + F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -326,9 +322,8 @@ namespace apfel {
 													vector<double> const& Thresholds,
 													double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for ( F2(nu) - F2(nubar) ) / 2 Zero Mass... ";
+    report("Initializing StructureFunctionObjects for ( F2(nu) - F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -402,9 +397,8 @@ namespace apfel {
 												       vector<double> const& Thresholds,
 												       double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for ( FL(nu) + FL(nubar) ) / 2 Zero Mass... ";
+    report("Initializing StructureFunctionObjects for ( FL(nu) + FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -481,9 +475,8 @@ namespace apfel {
 												       vector<double> const& Thresholds,
 												       double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for ( FL(nu) - FL(nubar) ) / 2 Zero Mass... ";
+    report("Initializing StructureFunctionObjects for ( FL(nu) - FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -556,9 +549,8 @@ namespace apfel {
 												       vector<double> const& Thresholds,
 												       double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for ( F3(nu) + F3(nubar) ) / 2 Zero Mass... ";
+    report("Initializing StructureFunctionObjects for ( F3(nu) + F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -633,9 +625,8 @@ namespace apfel {
 												       vector<double> const& Thresholds,
 												       double         const& IntEps)
   {
-    cout << "Initializing StructureFunctionObjects for ( F3(nu) - F3(nubar) ) / 2 Zero Mass... ";
+    report("Initializing StructureFunctionObjects for ( F3(nu) - F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
-    t.start();
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -715,7 +706,6 @@ namespace apfel {
 													double         const& lambda)
   {
     Timer t;
-    t.start();
 
     // Determine number of active flavours
     int actnf = 0;
@@ -723,7 +713,7 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    cout << "Initializing StructureFunctionObjects for F2 NC Massive with " << actnf << " active flavours... \n";
+    report("Initializing StructureFunctionObjects for F2 NC Massive with " + to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -873,7 +863,6 @@ namespace apfel {
 													double         const& lambda)
   {
     Timer t;
-    t.start();
 
     // Determine number of active flavours
     int actnf = 0;
@@ -881,7 +870,7 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    cout << "Initializing StructureFunctionObjects for FL NC Massive with " << actnf << " active flavours... \n";
+    report("Initializing StructureFunctionObjects for FL NC Massive with " + to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -1030,7 +1019,6 @@ namespace apfel {
 													    double         const& lambda)
   {
     Timer t;
-    t.start();
 
     // Determine number of active flavours
     int actnf = 0;
@@ -1038,7 +1026,7 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    cout << "Initializing StructureFunctionObjects for F2 NC Massive Zero with " << actnf << " active flavours... \n";
+    report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -1206,7 +1194,6 @@ namespace apfel {
 													    double         const& lambda)
   {
     Timer t;
-    t.start();
 
     // Determine number of active flavours
     int actnf = 0;
@@ -1214,7 +1201,7 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    cout << "Initializing StructureFunctionObjects for FL NC Massive Zero with " << actnf << " active flavours... \n";
+    report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};

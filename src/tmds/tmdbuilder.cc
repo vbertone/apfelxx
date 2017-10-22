@@ -26,9 +26,8 @@ namespace apfel {
 					   vector<double> const& Thresholds,
 					   double         const& IntEps)
   {
-    cout << "Initializing TMD objects for matching and evolution... ";
+    report("Initializing TMD objects for matching and evolution... ");
     Timer t;
-    t.start();
 
     // Compute initial and final number of active flavours according
     // to the vector of thresholds (it assumes that the thresholds

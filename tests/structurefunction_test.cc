@@ -85,7 +85,6 @@ int main()
   const TabulateObject<Distribution> F3bottom{[&] (double const& Q) -> Distribution{ return F3.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
 
   Timer t;
-  t.start();
 
   // Final scale
   const auto Q = 100;

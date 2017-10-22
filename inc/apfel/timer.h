@@ -7,8 +7,12 @@
 
 #pragma once
 
+#include "apfel/messages.h"
+
 #include <iostream>
 #include <chrono>
+
+using namespace std;
 
 namespace apfel
 {
@@ -20,20 +24,22 @@ namespace apfel
   class Timer
   {
   public:
-    //! Starts the timer.
-    void start(){  startTime = std::chrono::steady_clock::now(); }
+    // Constructor
+    Timer() { start(); }
 
-    //! Stops the timer.
+    // Starts the timer.
+    void start() { startTime = chrono::steady_clock::now(); }
+
+    // Stops the timer.
     void stop()
     {
-      auto end = std::chrono::steady_clock::now();
+      auto end = chrono::steady_clock::now();
       auto diff = end - startTime;
-
-      printf("time elapsed: %5.6f seconds\n",
-             std::chrono::duration <double, std::milli> (diff).count()*1e-3);
+      if (GetVerbosityLevel() > 1)
+	printf("time elapsed: %5.6f seconds\n", chrono::duration <double, milli> (diff).count() * 1e-3);
     }
 
   private:
-    std::chrono::time_point<std::chrono::steady_clock> startTime;
+    chrono::time_point<chrono::steady_clock> startTime;
   };
 }

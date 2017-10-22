@@ -70,7 +70,6 @@ int main()
   cout << "\nSpeed test ..." << endl;
   cout << "Interpolating " << nx << " x-space points for each of " << nQ << " Q-space points ..." << endl;
   Timer t;
-  t.start();
   Q = Qmin;
   for (auto iQ = 0; iQ < nQ; iQ++)
     {

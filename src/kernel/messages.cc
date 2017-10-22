@@ -6,6 +6,7 @@
 //
 
 #include "apfel/messages.h"
+#include "apfel/version.h"
 
 namespace apfel
 {
@@ -19,6 +20,13 @@ namespace apfel
   int GetVerbosityLevel()
   {
     return VerbosityLevel;
+  }
+
+  //_________________________________________________________________________
+  void report(string const& what)
+  {
+    if (VerbosityLevel > MEDIUM)
+      cout << what;
   }
 
   //_________________________________________________________________________
@@ -41,5 +49,22 @@ namespace apfel
     stringstream ss;
     ss << "\033[" << code::red << "m[" << tag << "] Error: " << what << "\033[" << code::normal << "m\n";
     return ss.str();
+  }
+
+  //_________________________________________________________________________
+  void Banner()
+  {
+    if (VerbosityLevel > MEDIUM)
+      {
+	cout << "\033[" << code::green << "m\n";
+	cout << "     _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
+	cout << "   _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
+	cout << "  _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
+	cout << " _/    _/  _/        _/        _/        _/        _/     _/\n";
+	cout << "_/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n\n";
+	cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
+	cout << "     Authors: V. Bertone, S. Carrazza\n";
+	cout << "\033[" << code::normal << "m\n";
+      }
   }
 }

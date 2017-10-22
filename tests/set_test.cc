@@ -29,7 +29,6 @@ int main()
 {
   // Time counter
   Timer t,ttot;
-  ttot.start();
 
   // Grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}};
@@ -78,7 +77,6 @@ int main()
 
   // Allocate set of initial distributions
   Set<Distribution> PDFs{basis.at(5), DistMap};
-
   t.stop();
 
   // Test products

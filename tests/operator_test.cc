@@ -36,7 +36,6 @@ int main()
   const p0qq p;
 
   Timer t;
-  t.start();
   // Construct the operator
   const Operator op{g, p};
   t.stop();

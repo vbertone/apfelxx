@@ -60,7 +60,6 @@ int main()
   // Evolve PDFs to the final Scale
   cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
   Timer t;
-  t.start();
   auto pdfs = EvolvedPDFs->Evaluate(mu);
   t.stop();
 
