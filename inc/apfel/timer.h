@@ -26,7 +26,7 @@ namespace apfel
       auto end = std::chrono::steady_clock::now();
       auto diff = end - startTime;
 
-      printf("elapsed time: %5.6f seconds\n",
+      printf("time elapsed: %5.6f seconds\n",
              std::chrono::duration <double, std::milli> (diff).count()*1e-3);
     }
 
