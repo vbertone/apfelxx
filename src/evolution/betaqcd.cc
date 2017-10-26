@@ -32,4 +32,14 @@ namespace apfel
       + ( 44 * CF / 9 + 158 * CA / 27 ) * TR * TR * nf * nf;
     return coeff;
   }
+
+  //_________________________________________________________________________
+  double beta3(int const& nf)
+  {
+    const double coeff = 149753. / 6. + 3564. * zeta3
+      + ( - 1078361. / 162. - 6508. * zeta3 / 27. ) * nf
+      + ( 50065. / 162. + 6472. * zeta3 / 81 ) * nf * nf
+      + 1093. / 729. * nf * nf * nf;
+    return coeff;
+  }
 }

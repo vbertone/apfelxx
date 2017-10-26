@@ -83,14 +83,15 @@ namespace apfel
     bool operator != (QGrid const& sg) const;
 
     // Getters
-    int                                    nQ()            const { return _nQ; }          //!< return the number of Q interval
-    int                                    InterDegree()   const { return _InterDegree; } //!< return the interpolation degree
-    double                                 QMin()          const { return _QMin; }        //!< return the minimum node value
-    double                                 QMax()          const { return _QMax; }        //!< return the maximum node value
-    function<double(double const&)> const& TabFunc()       const { return _TabFunc; }     //!< return the tabulation function
-    vector<double>                  const& GetThresholds() const { return _Thresholds;}   //!< return the heavy quark thresholds
-    vector<double>                  const& GetQGrid()      const { return _Qg; }          //!< return the grid in Q
-    vector<double>                  const& GetFQGrid()     const { return _fQg; }         //!< return the grid in _TabFunc(Q)
+    int                                    nQ()             const { return _nQ; }          //!< return the number of Q interval
+    int                                    InterDegree()    const { return _InterDegree; } //!< return the interpolation degree
+    double                                 QMin()           const { return _QMin; }        //!< return the minimum node value
+    double                                 QMax()           const { return _QMax; }        //!< return the maximum node value
+    function<double(double const&)> const& TabFunc()        const { return _TabFunc; }     //!< return the tabulation function
+    vector<double>                  const& GetThresholds()  const { return _Thresholds;}   //!< return the heavy quark thresholds
+    vector<double>                  const& GetQGrid()       const { return _Qg; }          //!< return the grid in Q
+    vector<double>                  const& GetFQGrid()      const { return _fQg; }         //!< return the grid in _TabFunc(Q)
+    vector<T>                       const& GetQGridValues() const { return _GridValues; }  //!< return the tabulated objects on the grid.
 
   protected:
     /**
@@ -125,7 +126,7 @@ namespace apfel
   };
 
   /**
-   * @brief Method which prints QGrid with cout <<.
+   * @brief Method that prints QGrid with cout <<.
    */
   template<class T>
   inline std::ostream& operator<<(std::ostream& os, QGrid<T> const& Qg)

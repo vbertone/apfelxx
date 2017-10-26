@@ -13,4 +13,5 @@ namespace apfel
   double beta0(int const& nf);
   double beta1(int const& nf);
   double beta2(int const& nf);
+  double beta3(int const& nf);
 }

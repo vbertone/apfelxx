@@ -197,4 +197,47 @@ namespace apfel
   private:
     int const _nf;
   };
+
+  /**
+   * @brief The NNNLO splitting function classes (parametrized and
+   * leading color). Only the +, -, and valence contributions have
+   * been computed so far.
+   *
+   */
+  //_________________________________________________________________________________
+  class P3nsp: public Expression
+  {
+  public:
+    P3nsp(int const& nf, int const& imod = 0);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+    int const _imod;
+  };
+
+  //_________________________________________________________________________________
+  class P3nsm: public Expression
+  {
+  public:
+    P3nsm(int const& nf, int const& imod = 0);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+    int const _imod;
+  };
+
+  //_________________________________________________________________________________
+  class P3nss: public Expression
+  {
+  public:
+    P3nss(int const& nf, int const& imod = 0);
+    double Regular(double const& x)  const;
+  private:
+    int const _nf;
+    int const _imod;
+  };
 }

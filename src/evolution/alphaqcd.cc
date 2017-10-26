@@ -26,8 +26,8 @@ namespace apfel {
   {
     // Initialize all coefficients of the QCD beta function for all
     // numbers of flavours.
-    _bQCD.resize(4,3);
-    for (auto ipt = 0; ipt <= 2; ipt++)
+    _bQCD.resize(4,4);
+    for (auto ipt = 0; ipt <= 3; ipt++)
 	for (auto nf = 3; nf <= 6; nf++)
 	_bQCD(nf-3, ipt) = betaQCD(ipt, nf);
 
@@ -56,7 +56,7 @@ namespace apfel {
       {
 	const auto sgn = ( Up ? 1 : -1);
 	const auto ep = Coup / FourPi;
-	const double c[3] = { 1, sgn * 2. / 3. * LogKth[nf-1], 4. / 9. * pow(LogKth[nf-1],2) + sgn *  38. / 3. * LogKth[nf-1] + sgn * 14. / 3. };
+	const double c[4] = { 1, sgn * 2. / 3. * LogKth[nf-1], 4. / 9. * pow(LogKth[nf-1],2) + sgn *  38. / 3. * LogKth[nf-1] + sgn * 14. / 3., 0 };
 	double match = 0, powep = 1;
 	for (auto i = 0; i <= _pt; i++)
 	  {
@@ -95,8 +95,11 @@ namespace apfel {
       res = beta1(nf);
     else if ( pt == 2 )
       res = beta2(nf);
+    else if ( pt == 3 )
+      res = beta3(nf);
     else
       throw runtime_error(error("AlphaQCD::betaQCD","perturbive range out-of-range."));
+
     return res / pow(FourPi,pt+1);
   }
 }

@@ -48,7 +48,7 @@ namespace apfel {
 	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
 
     // Allocate needed operators (matching conditions and splitting
-    // functions).  By now the code is fast enough to precompute
+    // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
     // perturbative order is accounted for only when the actual
     // splitting functions and matching conditions (lambda) functions
@@ -71,7 +71,7 @@ namespace apfel {
       MatchLO.insert({i, Zero});
 
     // ===============================================================
-    // LO splitting functions operators.
+    // LO splitting function operators.
     map<int,map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0ns{}, IntEps};
     const Operator O0qg{g, P0qg{}, IntEps};
@@ -92,7 +92,7 @@ namespace apfel {
       }
 
     // ===============================================================
-    // NLO splitting functions operators.
+    // NLO splitting function operators.
     map<int,map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -153,7 +153,7 @@ namespace apfel {
       }
 
     // ===============================================================
-    // Allocate NNLO splitting functions operators.
+    // Allocate NNLO splitting function operators.
     map<int,map<int,Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -177,6 +177,29 @@ namespace apfel {
 	OpMapNNLO.insert({nf,OM});
       }
 
+    // ===============================================================
+    // Allocate NNNLO splitting function operators. For now only the
+    // non-singlet splitting functions have been computed to leading
+    // colour even though the subleading colour part is estimated
+    // through an approximate parameterisation.
+    map<int,map<int,Operator>> OpMapNNNLO;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O3nsp{g, P3nsp{nf}, IntEps};
+	const Operator O3nsm{g, P3nsm{nf}, IntEps};
+	const Operator O3nss{g, P3nss{nf}, IntEps};
+	const Operator O3nsv = O3nsm + O3nss;
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O3nsp});
+	OM.insert({EvolutionBasisQCD::PNSM, O3nsm});
+	OM.insert({EvolutionBasisQCD::PNSV, O3nsv});
+	OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+	OM.insert({EvolutionBasisQCD::PQG,  Zero});
+	OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+	OM.insert({EvolutionBasisQCD::PGG,  Zero});
+	OpMapNNNLO.insert({nf,OM});
+      }
+
     // Define object of the structure containing the DglapObjects
     map<int,DglapObjects> DglapObj;
 
@@ -191,6 +214,7 @@ namespace apfel {
 	obj.SplittingFunctions.insert({0, Set<Operator>{evb, OpMapLO.at(nf)}});
 	obj.SplittingFunctions.insert({1, Set<Operator>{evb, OpMapNLO.at(nf)}});
 	obj.SplittingFunctions.insert({2, Set<Operator>{evb, OpMapNNLO.at(nf)}});
+	obj.SplittingFunctions.insert({3, Set<Operator>{evb, OpMapNNNLO.at(nf)}});
 	obj.MatchingConditions.insert({0, Set<Operator>{mtb, MatchLO}});
 	obj.MatchingConditions.insert({2, Set<Operator>{mtb, MatchNNLO.at(nf)}});
 	DglapObj.insert({nf,obj});
@@ -274,6 +298,22 @@ namespace apfel {
 	    return DglapObj.at(nf).MatchingConditions.at(0) + ( Up ? 1 : -1) * cp * cp * DglapObj.at(nf).MatchingConditions.at(2);
 	  };
       }
+    else if (PerturbativeOrder == 3)
+      {
+        SplittingFunctions = [=] (int const& nf, double const& mu) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    return cp * ( DglapObj.at(nf).SplittingFunctions.at(0)
+			  + cp * ( DglapObj.at(nf).SplittingFunctions.at(1)
+				   + cp * ( DglapObj.at(nf).SplittingFunctions.at(2)
+					    + cp * DglapObj.at(nf).SplittingFunctions.at(3) ) ) );
+	  };
+	MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+	  {
+	    const auto cp = asThUp.at(nf+1);
+	    return DglapObj.at(nf).MatchingConditions.at(0) + ( Up ? 1 : -1) * cp * cp * DglapObj.at(nf).MatchingConditions.at(2);
+	  };
+      }
 
     // Create set of initial distributions.
     const Set<Distribution> InPDFs{DglapObj.at(NF(MuRef, Thresholds)).SplittingFunctions.at(0).GetMap(),
@@ -349,7 +389,8 @@ namespace apfel {
         SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(mu) / FourPi;
-	    return cp * ( DglapObj(mu).SplittingFunctions.at(0) + cp * DglapObj(mu).SplittingFunctions.at(1) );
+	    const auto sf = DglapObj(mu).SplittingFunctions;
+	    return cp * ( sf.at(0) + cp * sf.at(1) );
 	  };
 	MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
 	  {
@@ -361,15 +402,29 @@ namespace apfel {
         SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
 	  {
 	    const auto cp = Alphas(mu) / FourPi;
-	    return cp * ( DglapObj(mu).SplittingFunctions.at(0)
-			  + cp * ( DglapObj(mu).SplittingFunctions.at(1)
-				   + cp * DglapObj(mu).SplittingFunctions.at(2) ) );
+	    const auto sf = DglapObj(mu).SplittingFunctions;
+	    return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
 	  };
 	MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
 	  {
 	    const auto cp = asThUp.at(nf+1);
-	    return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0)
-	    + ( Up ? 1 : -1) * cp * cp * DglapObj(Thresholds[nf-1]).MatchingConditions.at(2);
+	    const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+	    return mc.at(0) + ( Up ? 1 : -1) * cp * cp * mc.at(2);
+	  };
+      }
+    else if (PerturbativeOrder == 3)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+	  {
+	    const auto cp = Alphas(mu) / FourPi;
+	    const auto sf = DglapObj(mu).SplittingFunctions;
+	    return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
+	  };
+	MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+	  {
+	    const auto cp = asThUp.at(nf+1);
+	    const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+	    return mc.at(0) + ( Up ? 1 : -1) * cp * cp * mc.at(2);
 	  };
       }
 

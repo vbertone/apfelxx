@@ -22,11 +22,13 @@ int main()
   AlphaQCD asLO{AlphaRef, MuRef, Masses, 0};
   AlphaQCD asNLO{AlphaRef, MuRef, Masses, 1};
   AlphaQCD asNNLO{AlphaRef, MuRef, Masses, 2};
+  AlphaQCD asNNNLO{AlphaRef, MuRef, Masses, 3};
 
   const auto Mu = 100.;
   cout << "\nLO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << endl;
   cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu)  << endl;
-  cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << "\n" << endl;
+  cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << endl;
+  cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << "\n" << endl;
 
   return 0;
 }
