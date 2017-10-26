@@ -26,7 +26,8 @@ namespace apfel
    * A specialization class of the MatchedEvolution class for the
    * computation of the DGLAP evolution.
    */
-  class Dglap: public MatchedEvolution<Set<Distribution>>
+  template<class T>
+  class Dglap: public MatchedEvolution<Set<T>>
   {
   public:
 
@@ -37,7 +38,7 @@ namespace apfel
      */
     Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
 	  function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-	  Set<Distribution>                                 const& ObjRef,
+	  Set<T>                                            const& ObjRef,
 	  double                                            const& MuRef,
 	  vector<double>                                    const& Thresholds,
 	  int                                               const& nsteps = 10);
@@ -47,19 +48,18 @@ namespace apfel
      * @param
      * @return
      */
-    Set<Distribution> MatchObject(bool const& Up, int const& nf, Set<Distribution> const& sd) const;
+    Set<T> MatchObject(bool const& Up, int const& nf, Set<T> const& sd) const;
 
     /**
      * @brief
      * @param
      * @return
      */
-    Set<Distribution> Derivative(int const& nf, double const& mu, Set<Distribution> const& f) const;
+    Set<T> Derivative(int const& nf, double const& mu, Set<T> const& f) const;
 
     /**
-     * @brief Function that sets the reference distribution at the
-     * reference scale using a function of the distribution index and
-     * x.
+     * @brief Function that sets the reference object at the reference
+     * scale using a function of the index and x.
      */
     void SetInitialDistributions(function<double(int const&, double const&)> const& InDistFunc);
 

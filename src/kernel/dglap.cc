@@ -16,20 +16,22 @@ using namespace std;
 
 namespace apfel {
   //_________________________________________________________________________________
-  Dglap::Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
-	       function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-	       Set<Distribution>                                 const& ObjRef,
-	       double                                            const& MuDistRef,
-	       vector<double>                                    const& Thresholds,
-	       int                                               const& nsteps):
-    MatchedEvolution(ObjRef, MuDistRef, Thresholds, nsteps),
+  template<class T>
+  Dglap<T>::Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
+		  function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
+		  Set<T>                                            const& ObjRef,
+		  double                                            const& MuDistRef,
+		  vector<double>                                    const& Thresholds,
+		  int                                               const& nsteps):
+    MatchedEvolution<Set<T>>(ObjRef, MuDistRef, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions)
   {
   }
 
   //_________________________________________________________________________________
-  Set<Distribution> Dglap::MatchObject(bool const& Up, int const& nf, Set<Distribution> const& f) const
+  template<class T>
+  Set<T> Dglap<T>::MatchObject(bool const& Up, int const& nf, Set<T> const& f) const
   {
     // Get matching conditions.
     auto MC = _MatchingConditions(Up, nf);
@@ -37,25 +39,30 @@ namespace apfel {
     // Create the object 'g' with the same convolution map of the
     // matching conditions but containing the same objects of the
     // input set of functions 'f'.
-    Set<Distribution> g{MC.GetMap(),f.GetObjects()};
+    Set<T> g{MC.GetMap(),f.GetObjects()};
 
     // Convolute 'MC' and 'g'.
     auto MO = MC * g;
 
     // Return the convoluted object with the map on the next evolution
     // step.
-    return Set<Distribution>{_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap(), MO.GetObjects()};
+    return Set<T>{_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap(), MO.GetObjects()};
   }
 
   //_________________________________________________________________________________
-  Set<Distribution> Dglap::Derivative(int const& nf, double const& t, Set<Distribution> const& f) const
+  template<class T>
+  Set<T> Dglap<T>::Derivative(int const& nf, double const& t, Set<T> const& f) const
   {
     return _SplittingFunctions(nf, exp(t/2)) * f;
   }
 
+  // Fixed template types.
+  template class Dglap<Distribution>;
+  template class Dglap<Operator>;
 
   //_________________________________________________________________________________
-  void Dglap::SetInitialDistributions(function<double(int const&, double const&)> const& InDistFunc)
+  template<>
+  void Dglap<Distribution>::SetInitialDistributions(function<double(int const&, double const&)> const& InDistFunc)
   {
     // Compute number of active flavours the the PDF initial scale.
     int nf0 = NF(_MuRef, _Thresholds);
@@ -71,7 +78,8 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  void Dglap::SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc)
+  template<>
+  void Dglap<Distribution>::SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc)
   {
     // Compute number of active flavours the the PDF initial scale.
     int nf0 = NF(_MuRef, _Thresholds);
