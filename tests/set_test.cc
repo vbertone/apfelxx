@@ -86,13 +86,13 @@ int main()
   cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
        << Product.at(EvolutionBasisQCD::GLUON).Evaluate(0.1) << endl;
 
-  auto Product2 = 2 * Product;
-  cout << "(2 * Splitting * PDFs)[GLUON](x=0.1) = "
+  auto Product2 = 3 * Splittings.at(5) * PDFs;
+  cout << "(3 * Splitting * PDFs)[GLUON](x=0.1) = "
        << Product2.at(EvolutionBasisQCD::GLUON).Evaluate(0.1) << endl;
 
-  auto Sum = Product.at(EvolutionBasisQCD::GLUON) + Product.at(EvolutionBasisQCD::GLUON);
-  cout << "[(Splitting * PDFs)[GLUON] + (Splitting * PDFs)[GLUON]](x=0.1) = "
-       << Sum.Evaluate(0.1) << endl;
+  auto Sum = ( Splittings.at(5) + 2 * Splittings.at(5) ) * PDFs;
+  cout << "[(Splitting * PDFs)[GLUON] + 2 * (Splitting * PDFs)[GLUON]](x=0.1) = "
+       << Sum.at(EvolutionBasisQCD::GLUON).Evaluate(0.1) << endl;
   t.stop();
 
   cout << "\nTotal ";

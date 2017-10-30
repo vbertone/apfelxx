@@ -43,10 +43,11 @@ namespace apfel {
 
     // Convolute 'MC' and 'g'.
     auto MO = MC * g;
+    MO.SetMap(_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap());
 
     // Return the convoluted object with the map on the next evolution
     // step.
-    return Set<T>{_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap(), MO.GetObjects()};
+    return MO;
   }
 
   //_________________________________________________________________________________
@@ -64,9 +65,6 @@ namespace apfel {
   template<>
   void Dglap<Distribution>::SetInitialDistributions(function<double(int const&, double const&)> const& InDistFunc)
   {
-    // Compute number of active flavours the the PDF initial scale.
-    int nf0 = NF(_MuRef, _Thresholds);
-
     // Allocate initial scale distributions.
     map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
@@ -74,22 +72,16 @@ namespace apfel {
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
-    SetObjectRef(Set<Distribution>{_SplittingFunctions(nf0, 0).GetMap(), DistMap});
+    SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistMap});
   }
 
   //_________________________________________________________________________________
   template<>
   void Dglap<Distribution>::SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc)
   {
-    // Compute number of active flavours the the PDF initial scale.
-    int nf0 = NF(_MuRef, _Thresholds);
-
-    // Allocate initial scale distributions.
-    map<int,Distribution> DistMap = DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc);
-
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
-    SetObjectRef(Set<Distribution>{_SplittingFunctions(nf0, 0).GetMap(), DistMap});
+    SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc)});
   }
 }
 

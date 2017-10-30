@@ -49,7 +49,6 @@ namespace apfel
     Set<T>& operator *= (function<double(double const&)> f); //!< this *= function of the integration variable (for distributions only)
     Set<T>& operator *= (vector<double> const& v);           //!< this *= vector of scalars
     Set<T>& operator /= (double const& s);                   //!< this /= scalar
-    Set<T>& operator *= (Set<T> const& d);                   //!< this *= Set
     Set<T>& operator += (Set<T> const& d);                   //!< this += Set
     Set<T>& operator -= (Set<T> const& d);                   //!< this -= Set
 
@@ -57,6 +56,9 @@ namespace apfel
     T              const& at(int const& id) const { return _objects.at(id); }
     ConvolutionMap const& GetMap()          const { return _map; }
     map<int, T>    const& GetObjects()      const { return _objects; }
+
+    // Set methods
+    void SetMap(ConvolutionMap const& newmap) { _map = newmap; }
 
     // Method to sum all the objects of a given set.
     T Combine() const;

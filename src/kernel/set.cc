@@ -40,7 +40,8 @@ namespace apfel {
 	      cycle = true;
 	      break;
 	    }
-	if (cycle) continue;
+	if (cycle)
+	  continue;
 
 	// Get set of distributions.
 	const auto& dist = d.GetObjects();
@@ -119,19 +120,6 @@ namespace apfel {
 
   //_________________________________________________________________________
   template<class T>
-  Set<T>& Set<T>::operator *= (Set<T> const& d)
-  {
-    if (_map.GetName() != d.GetMap().GetName())
-      throw runtime_error(error("Set::operator *=", "Convolution Map does not match (2)"));
-
-    for (auto& v: _objects)
-      v.second *= d.at(v.first);
-
-    return *this;
-  }
-
-  //_________________________________________________________________________
-  template<class T>
   Set<T>& Set<T>::operator += (Set<T> const& d)
   {
     if (_map.GetName() != d.GetMap().GetName())
@@ -178,4 +166,5 @@ namespace apfel {
   template class Set<Distribution>;
   template class Set<Operator>;
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
+  template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
 }

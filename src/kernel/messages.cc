@@ -47,7 +47,7 @@ namespace apfel
   string error(string const& tag, string const& what)
   {
     stringstream ss;
-    ss << "\033[" << code::red << "m[" << tag << "] Error: " << what << "\033[" << code::normal << "m\n";
+    ss << "\n\n\033[" << code::red << "m[" << tag << "] Error: " << what << "\033[" << code::normal << "m\n";
     return ss.str();
   }
 

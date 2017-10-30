@@ -45,6 +45,7 @@ namespace apfel
   map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
 						  vector<double> const& Masses,
 						  vector<double> const& Thresholds,
+						  bool           const& OpEvol = false,
 						  double         const& IntEps = 1e-5);
 
   /**
@@ -52,9 +53,10 @@ namespace apfel
    */
   map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
 						  vector<double> const& Thresholds,
+						  bool           const& OpEvol = false,
 						  double         const& IntEps = 1e-5);
 
-
+  // ============================================================================
   /**
    * @brief The BuildDglap, builds the dglap object
    *
@@ -72,24 +74,15 @@ namespace apfel
 					     int                                                     const& PerturbativeOrder,
 					     function<double(double const&)>                         const& Alphas,
 					     int                                                     const& nsteps = 10);
-
   /**
-   * @brief The BuildDglap, builds the dglap object
-   *
-   * @param DglapObj structure with the coeffs. of perturbative objects
-   * @param InDistFunc the PDF method to query flavors
-   * @param MuRef the reference scale
-   * @param PerturbativeOrder the perturbative order
-   * @param Alphas the alpha strong object
-   * @param nsteps the number of steps for RK.
-   * @return
+   * @brief Same as above but it computes the evolution of the
+   * evolution operators.
    */
-  unique_ptr<Dglap<Distribution>> BuildDglap(map<int,DglapObjects>                                      const& DglapObj,
-					     function<double(int const&, double const&, double const&)> const& InDistFunc,
-					     double                                                     const& MuRef,
-					     int                                                        const& PerturbativeOrder,
-					     function<double(double const&)>                            const& Alphas,
-					     int                                                        const& nsteps = 10);
+  unique_ptr<Dglap<Operator>> BuildDglap(map<int,DglapObjects>           const& DglapObj,
+					 double                          const& MuRef,
+					 int                             const& PerturbativeOrder,
+					 function<double(double const&)> const& Alphas,
+					 int                             const& nsteps = 10);
 
   /**
    * @brief Same as above but the DglapObjects object is a function of
@@ -103,17 +96,4 @@ namespace apfel
 					     int                                                     const& PerturbativeOrder,
 					     function<double(double const&)>                         const& Alphas,
 					     int                                                     const& nsteps = 10);
-
-  /**
-   * @brief Same as above but the DglapObjects object is a function of
-   * a variable. This is useful for applications in which the
-   * splitting functions depend on same energy scale.
-   */
-  unique_ptr<Dglap<Distribution>> BuildDglap(function<DglapObjects(double const&)>                      const& DglapObj,
-					     vector<double>                                             const& Thresholds,
-					     function<double(int const&, double const&, double const&)> const& InDistFunc,
-					     double                                                     const& MuRef,
-					     int                                                        const& PerturbativeOrder,
-					     function<double(double const&)>                            const& Alphas,
-					     int                                                        const& nsteps = 10);
 }

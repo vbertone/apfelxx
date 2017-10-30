@@ -39,13 +39,9 @@ namespace apfel
   DISNCBasis(int const& k, double const& fact = 1):
     ConvolutionMap{"DISNCBasis_" + std::to_string(k)}
     {
-      // Gluon
-      _rules[GLUON] = { {CG, GLUON, fact} };
-      // Singlet
-      _rules[SIGMA] = { {CS, SIGMA, fact/6.} };
-      // Total Valence
-      _rules[VALENCE] = { {CS, VALENCE, fact/6.} };
-      // Non-singlet distributions
+      _rules[GLUON]   = { {CG, GLUON, fact} };
+      _rules[SIGMA]   = { {CS, SIGMA, fact / 6} };
+      _rules[VALENCE] = { {CS, VALENCE, fact / 6} };
       for (int i = 2; i <= 6; i++)
 	{
 	  double coef = 0;
@@ -79,13 +75,9 @@ namespace apfel
       // Sum of the charges
       const double SumCh = accumulate(Ch.begin(), Ch.end(), 0.);
 
-      // Gluon
-      _rules[GLUON] = { {CG, GLUON, SumCh} };
-      // Singlet
-      _rules[SIGMA] = { {CS, SIGMA, SumCh/6} };
-      // Total Valence
+      _rules[GLUON]   = { {CG, GLUON, SumCh} };
+      _rules[SIGMA]   = { {CS, SIGMA, SumCh/6} };
       _rules[VALENCE] = { {CS, VALENCE, SumCh/6} };
-      // Non-singlet distributions
       for (int j = 2; j <= 6; j++)
 	{
 	  double coef = 0;
@@ -145,13 +137,9 @@ namespace apfel
       const int i = Vij.at(l).first;
       const int j = Vij.at(l).second;
 
-      // Gluon
-      _rules[GLUON] = { {CG, GLUON, fact} };
-      // Singlet
-      _rules[SIGMA] = { {CS, SIGMA, fact/6.} };
-      // Total Valence
-      _rules[VALENCE] = { {CS, VALENCE, fact/6.} };
-      // Non-singlet distributions
+      _rules[GLUON]   = { {CG, GLUON, fact} };
+      _rules[SIGMA]   = { {CS, SIGMA, fact / 6} };
+      _rules[VALENCE] = { {CS, VALENCE, fact / 6} };
       for (int k = 2; k <= 6; k++)
 	{
 	  double coefp = 0;
@@ -212,7 +200,6 @@ namespace apfel
       if (CKM.size() != 9)
 	throw runtime_error(error("DISCCBasis", "The CKM vector must have 9 entries."));
 
-      // Initialize rules.
       _rules[GLUON]   = { {CG, GLUON, 0} };
       _rules[SIGMA]   = { {CS, SIGMA, 0} };
       _rules[VALENCE] = { {CS, VALENCE, 0} };

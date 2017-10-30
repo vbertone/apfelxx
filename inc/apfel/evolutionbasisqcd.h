@@ -35,74 +35,88 @@ namespace apfel
   EvolutionBasisQCD(int const& nf):
     ConvolutionMap{"EvolutionBasisQCD_" + std::to_string(nf)}
     {
-      // dg = Pgg * g + Pgq * Sigma.
-      _rules[GLUON] = { {PGG, GLUON, +1}, {PGQ, SIGMA, +1} };
+      _rules[GLUON]   = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1} };
+      _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
+      _rules[VALENCE] = { {PNSV, VALENCE, 1} };
+      for (int k = 1; k < 6; k++)
+	if (k < nf)
+	  {
+	    _rules[2*k+1] = { {PNSP, 2*k+1, 1} };
+	    _rules[2*k+2] = { {PNSM, 2*k+2, 1} };
+	  }
+	else
+	  {
+	    _rules[2*k+1] = _rules[SIGMA];
+	    _rules[2*k+2] = _rules[VALENCE];
+	  }
+    };
+  };
 
-      // dSigma = Pqg * g + ( Pnsp + Pps ) * Sigma.
-      _rules[SIGMA] = { {PQG, GLUON, +1}, {PQQ, SIGMA, +1} };
+  class EvolutionOperatorBasisQCD: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The map enums
+     */
+    enum Operand: int {PNSP, PNSM, PNSV, PQQ, PQG, PGQ, PGG};
+    enum Object:  int {GG, GQ, QG, QQ, VAL, T3S, T3G, V3V, T8S, T8G, V8V, T15S, T15G, V15V, T24S, T24G, V24V, T35S, T35G, V35V};
 
-      // dV = Pnsv * V.
-      _rules[VALENCE] = { {PNSV, VALENCE, +1} };
+    /**
+     * @brief The class constructor
+     */
+  EvolutionOperatorBasisQCD(int const& nf):
+    ConvolutionMap{"EvolutionOperatorBasisQCD_" + std::to_string(nf)}
+    {
+      _rules[GG]  = { {PGG, GG, 1}, {PGQ, QG, 1} };
+      _rules[GQ]  = { {PGG, GQ, 1}, {PGQ, QQ, 1} };
+      _rules[QG]  = { {PQG, GG, 1}, {PQQ, QG, 1} };
+      _rules[QQ]  = { {PQG, GQ, 1}, {PQQ, QQ, 1} };
+      _rules[VAL] = { {PNSV, VAL, 1} };
+      for (int k = 1; k < 6; k++)
+	if (k < nf)
+	  {
+	    _rules[3*k+2] = { {PNSP, 3*k+2, 1} };
+	    _rules[3*k+3] = { {PNSP, 3*k+3, 1} };
+	    _rules[3*k+4] = { {PNSM, 3*k+4, 1} };
+	  }
+	else
+	  {
+	    _rules[3*k+2] = _rules[QQ];
+	    _rules[3*k+3] = _rules[QG];
+	    _rules[3*k+4] = _rules[VAL];
+	  }
+    };
+  };
 
-      // d{T,V}3 = Pns{p,m} * {T,V}3.
-      if (nf > 1)
-	{
-	  _rules[T3] = { {PNSP, T3, +1} };
-	  _rules[V3] = { {PNSM, V3, +1} };
-	}
-      else
-	{
-	  _rules[T3] = _rules[SIGMA];
-	  _rules[V3] = _rules[VALENCE];
-	}
+  class MatchEvolOperatorBasisQCD: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The map enums
+     */
+    enum Operand: int {GG, GQ, QG, QQ, VAL, T3S, T3G, V3V, T8S, T8G, V8V, T15S, T15G, V15V, T24S, T24G, V24V, T35S, T35G, V35V};
+    enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
-      // d{T,V}8 = Pns{p,m} * {T,V}8.
-      if (nf > 2)
-	{
-	  _rules[T8] = { {PNSP, T8, +1} };
-	  _rules[V8] = { {PNSM, V8, +1} };
-	}
-      else
-	{
-	  _rules[T8] = _rules[SIGMA];
-	  _rules[V8] = _rules[VALENCE];
-	}
-
-      // d{T,V}15 = Pns{p,m} * {T,V}15.
-      if (nf > 3)
-	{
-	  _rules[T15] = { {PNSP, T15, +1} };
-	  _rules[V15] = { {PNSM, V15, +1} };
-	}
-      else
-	{
-	  _rules[T15] = _rules[SIGMA];
-	  _rules[V15] = _rules[VALENCE];
-	}
-
-      // d{T,V}24 = Pns{p,m} * {T,V}24.
-      if (nf > 4)
-	{
-	  _rules[T24] = { {PNSP, T24, +1} };
-	  _rules[V24] = { {PNSM, V24, +1} };
-	}
-      else
-	{
-	  _rules[T24] = _rules[SIGMA];
-	  _rules[V24] = _rules[VALENCE];
-	}
-
-      // d{T,V}35 = Pns{p,m} * {T,V}35.
-      if (nf > 5)
-	{
-	  _rules[T35] = { {PNSP, T35, +1} };
-	  _rules[V35] = { {PNSM, V35, +1} };
-	}
-      else
-	{
-	  _rules[T35] = _rules[SIGMA];
-	  _rules[V35] = _rules[VALENCE];
-	}
+    /**
+     * @brief The class constructor
+     */
+  MatchEvolOperatorBasisQCD(int const& nf):
+    ConvolutionMap{"MatchEvolOperatorBasisQCD_" + std::to_string(nf)}
+    {
+      _rules[GLUON]   = { {GG, GLUON, 1}, {GQ, SIGMA, 1} };
+      _rules[SIGMA]   = { {QG, GLUON, 1}, {QQ, SIGMA, 1} };
+      _rules[VALENCE] = { {VAL, VALENCE, 1} };
+      for (int k = 1; k < 6; k++)
+	if (k < nf)
+	  {
+	    _rules[2*k+1] = { {3*k+2, 2*k+1, 1} };
+	    _rules[2*k+2] = { {3*k+4, 2*k+2, 1} };
+	  }
+	else
+	  {
+	    _rules[2*k+1] = { {3*k+2, SIGMA, 1}, {3*k+3, GLUON, 1} };
+	    _rules[2*k+2] = { {3*k+4, VALENCE, 1} };
+	  }
     };
   };
 }

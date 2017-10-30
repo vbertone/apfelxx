@@ -12,6 +12,8 @@
 #include <apfel/evolutionbasisqcd.h>
 #include <apfel/matchingbasisqcd.h>
 #include <apfel/dglap.h>
+#include <apfel/tools.h>
+#include <apfel/constants.h>
 #include <apfel/dglapbuilder.h>
 #include <apfel/lhtoypdfs.h>
 
@@ -29,7 +31,7 @@ int main()
   const double mu0 = sqrt(2);
 
   // Vectors of masses and thresholds
-  const vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175}; // Check in the level above that they are ordered
+  const vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175};
   const vector<double> Thresholds = Masses;
 
   // Perturbative order
@@ -43,10 +45,12 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj = InitializeDglapObjectsQCD(g, Masses, Thresholds);
+  const auto DglapObj   = InitializeDglapObjectsQCD(g, Masses, Thresholds);
+  const auto DglapObjOp = InitializeDglapObjectsQCD(g, Masses, Thresholds, true);
 
-  // Construct the DGLAP object
+  // Construct the DGLAP objects
   auto EvolvedPDFs = BuildDglap(DglapObj, LHToyPDFs, mu0, PerturbativeOrder, as);
+  auto EvolvedOps  = BuildDglap(DglapObjOp,          mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const TabulateObject<Set<Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
@@ -68,7 +72,20 @@ int main()
   auto tpdfs = TabulatedPDFs.Evaluate(mu);
   t.stop();
 
-  double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
+  cout << "Direct evolution of the operators... ";
+  t.start();
+  auto ops = EvolvedOps->Evaluate(mu);
+  t.stop();
+
+  // Convolute evolution operators with the initial scale
+  // distributions.
+  auto InDist = EvolvedPDFs->Evaluate(mu0);
+  const MatchEvolOperatorBasisQCD matchbasis{NF(mu0, Thresholds)};
+  InDist.SetMap(matchbasis);
+  ops.SetMap(matchbasis);
+  const auto oppdfs = ops * InDist;
+
+  const double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << endl;
   cout << "\n   x    "
@@ -112,6 +129,43 @@ int main()
 	pdfs.at(11).Evaluate(xlha[i]) / 30
 	   << "  " <<
 	pdfs.at(0).Evaluate(xlha[i]) << "  "
+	   << endl;
+    }
+  cout << "      " << endl;
+
+  cout << "Direct Evolution through the evolution operators:" << endl;
+  for (auto i = 2; i < 11; i++)
+    {
+      cout.precision(1);
+      cout << xlha[i];
+      cout.precision(4);
+      cout << "  " <<
+	oppdfs.at(2).Evaluate(xlha[i])  / 6  +
+	oppdfs.at(4).Evaluate(xlha[i])  / 2  +
+	oppdfs.at(6).Evaluate(xlha[i])  / 6  +
+	oppdfs.at(8).Evaluate(xlha[i])  / 12 +
+	oppdfs.at(10).Evaluate(xlha[i]) / 20 +
+	oppdfs.at(12).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	oppdfs.at(2).Evaluate(xlha[i])  / 6  -
+	oppdfs.at(4).Evaluate(xlha[i])  / 2  +
+	oppdfs.at(6).Evaluate(xlha[i])  / 6  +
+	oppdfs.at(8).Evaluate(xlha[i])  / 12 +
+	oppdfs.at(10).Evaluate(xlha[i]) / 20 +
+	oppdfs.at(12).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	( oppdfs.at(1).Evaluate(xlha[i])  - oppdfs.at(2).Evaluate(xlha[i])  ) / 3  +
+	( oppdfs.at(5).Evaluate(xlha[i])  - oppdfs.at(6).Evaluate(xlha[i])  ) / 3  +
+	( oppdfs.at(7).Evaluate(xlha[i])  - oppdfs.at(8).Evaluate(xlha[i])  ) / 6  +
+	( oppdfs.at(9).Evaluate(xlha[i])  - oppdfs.at(10).Evaluate(xlha[i]) ) / 10 +
+	( oppdfs.at(11).Evaluate(xlha[i]) - oppdfs.at(12).Evaluate(xlha[i]) ) / 15
+	   << "  " <<
+	oppdfs.at(1).Evaluate(xlha[i])  / 6  -
+	oppdfs.at(7).Evaluate(xlha[i])  / 4  +
+	oppdfs.at(9).Evaluate(xlha[i])  / 20 +
+	oppdfs.at(11).Evaluate(xlha[i]) / 30
+	   << "  " <<
+	oppdfs.at(0).Evaluate(xlha[i]) << "  "
 	   << endl;
     }
   cout << "      " << endl;
