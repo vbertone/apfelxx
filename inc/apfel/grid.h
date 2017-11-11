@@ -65,7 +65,7 @@ namespace apfel
     vector<SubGrid>     _GlobalGrid; //!< Vector with sub-grids.
     unique_ptr<SubGrid> _JointGrid;  //!< Container for the joint grid.
 
-    friend std::ostream& operator<<(std::ostream& os, Grid const& gr);
+    friend std::ostream& operator << (std::ostream& os, Grid const& gr);
   };
 
   /**

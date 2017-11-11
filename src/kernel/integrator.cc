@@ -85,13 +85,14 @@ namespace apfel
   //_________________________________________________________________________
   double Integrator::integrate(double const& a, double const& b, double const& eps) const
   {
-    const double delta = eps25 * fabs(a-b);
+    const double delta = eps25 * abs(a-b);
     double dgauss = 0;
     double aa = a;
 
     goto5:
     double y = b - aa;
-    if (fabs(y) <= delta) return dgauss;
+    if (abs(y) <= delta)
+      return dgauss;
 
     goto2:
     double bb  = aa + y;
@@ -114,7 +115,8 @@ namespace apfel
 
     s8  *= c2;
     s16 *= c2;
-    if (fabs(s16-s8) > eps*(1+fabs(s16))) goto goto4;
+    if (abs(s16-s8) > eps*(1+abs(s16)))
+      goto goto4;
 
     dgauss += s16;
     aa = bb;
@@ -122,7 +124,8 @@ namespace apfel
 
     goto4:
     y = 0.5 * y;
-    if (fabs(y) > delta) goto goto2;
+    if (abs(y) > delta)
+      goto goto2;
 
     throw runtime_error(error("Integrator::dgauss", "too high accuracy required"));
 

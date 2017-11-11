@@ -6,6 +6,7 @@
 //
 
 #include "apfel/qgrid.h"
+#include "apfel/tools.h"
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 #include "apfel/distribution.h"
@@ -25,19 +26,30 @@ namespace apfel
 		  function<double(double const&)> const& TabFunc,
 		  function<double(double const&)> const& InvTabFunc):
     _nQ(nQ),
-    _InterDegree(InterDegree),
     _QMin(QMin),
     _QMax(QMax),
-    _TabFunc(TabFunc),
-    _Thresholds(Thresholds)
+    _InterDegree(InterDegree),
+    _Thresholds(Thresholds),
+    _TabFunc(TabFunc)
   {
     // Check that QMin is actually smaller than QMax.
     if (QMax <= QMin)
       throw runtime_error(error("QGrid::QGrid","QMax must be larger than QMin"));
 
+    // Check that "TabFunc" and "InvTabFunc" are actually the inverse
+    // function of each other. The check is done at grid bounds and in
+    // the middle.
+    const vector<double> TestPoints{_QMin, ( _QMax +  _QMin ) / 2, _QMax};
+    for (auto const& p : TestPoints)
+      {
+	const double reldiff = abs(InvTabFunc( TabFunc(p) ) / p - 1);
+	if (reldiff > eps8)
+	  throw runtime_error(error("QGrid::QGrid","TabFunc and InvTabFunc are not the inverse of each other."));
+      }
+
     // Find initial and final number of flavours.
-    const auto nfin = ( _Thresholds.empty() ? 0 : lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMin) - _Thresholds.begin() );
-    const auto nffi = ( _Thresholds.empty() ? 0 : lower_bound(_Thresholds.begin()+1, _Thresholds.end(), _QMax) - _Thresholds.begin() );
+    const int nfin = NF(_QMin, _Thresholds);
+    const int nffi = NF(_QMax, _Thresholds);
 
     // Compute a temporary grid constant in ln(ln(Q^2/Lambda^2)
     // without taking into account the threholds.
@@ -115,20 +127,22 @@ namespace apfel
   {
     // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless
     // tau coincides with a threshold index. In that case return zero.
-    if (fabs(fq / _fQg[tau] - 1) < eps11)
+    if (abs(fq / _fQg[tau] - 1) < eps11)
       return 1;
 
     // Define the lower bound of the interpolation range.
     int bound = tau + tQ - _InterDegree;
     if (_InterDegree > tau + tQ)
       bound = 0;
+    if (fq < _fQg[bound] || fq >= _fQg[tau+tQ+1])
+      return 0;
 
     // Initialize interpolant
     double w_int = 1;
 
     // Find the the neighbors of "Q" on the grid
     int j;
-    for (j = tau+tQ-bound; j >=0 ; j--)
+    for (j = tau+tQ-bound; j >=0; j--)
       if (fq < _fQg[tau+tQ-j+1])
 	break;
 
@@ -144,14 +158,15 @@ namespace apfel
   template<class T>
   tuple<int,int,int> QGrid<T>::SumBounds(double const& Q) const
   {
-    tuple<int,int,int> bounds (0,0,0);
+    tuple<int,int,int> bounds{0, 0, 0};
 
     // Return if "Q" is outside the grid range (no sum will be
     // performed).
     if (Q < _Qg.front() - eps12 || Q > _Qg.back() + eps12)
       return bounds;
 
-    // If Q falls in the tiny gap at the thresholds assume the node below
+    // If Q falls in the tiny gap at the thresholds assume the node
+    // below.
     for (auto iQ = 1; iQ < (int) _nQg.size() - 1; iQ++)
       if (Q > _Qg[_nQg[iQ]-1] && Q <= _Qg[_nQg[iQ]])
 	{
@@ -166,24 +181,23 @@ namespace apfel
       if (Q > _Qg[_nQg[iQ]] && Q <= _Qg[_nQg[iQ+1]])
 	break;
 
-    if (iQ == (int) _nQg.size()-1) iQ--;
-
-    // Determine the control parameter and put it in the first entry of the tuple
-    if (Q > _Qg[_nQg[iQ+1]-_InterDegree])
+    // Determine the control parameter and put it in the first entry
+    // of the tuple.
+    if (Q > _Qg[_nQg[iQ+1] - _InterDegree])
       {
 	int id;
 	for (id = 2; id <= _InterDegree; id++)
-	  if (Q > _Qg[_nQg[iQ+1]-id])
+	  if (Q > _Qg[_nQg[iQ+1] - id])
 	    break;
 	get<0>(bounds) = _InterDegree - id + 1;
       }
 
-    // Determine the actual bounds
+    // Determine the actual bounds.
     const auto low = lower_bound(_Qg.begin()+1, _Qg.end(), Q) - _Qg.begin();
     get<1>(bounds) = low;
     get<2>(bounds) = low;
 
-    if (fabs(Q / _Qg[low] - 1) <= eps12)
+    if (abs(Q / _Qg[low] - 1) <= eps12)
       get<2>(bounds) += 1;
     else
       {
@@ -247,5 +261,4 @@ namespace apfel
   template class QGrid<DoubleObject<Distribution>>;
   template class QGrid<Operator>;
   template class QGrid<Set<Operator>>;
-
 }

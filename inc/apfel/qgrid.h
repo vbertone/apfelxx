@@ -93,7 +93,6 @@ namespace apfel
     vector<double>                  const& GetFQGrid()      const { return _fQg; }         //!< return the grid in _TabFunc(Q)
     vector<T>                       const& GetQGridValues() const { return _GridValues; }  //!< return the tabulated objects on the grid.
 
-  protected:
     /**
      * @brief Interpolation functions on QGrid
      * @param tQ interpolation control parameter
@@ -110,12 +109,13 @@ namespace apfel
      */
     tuple<int,int,int> SumBounds(double const& Q) const;
 
+  protected:
     int            _nQ;                       //!< Number intervals
-    int            _InterDegree;              //!< Interpolation degree
     double         _QMin;                     //!< Minumim value of Q
     double         _QMax;                     //!< Maximum value of Q
-    function<double(double const&)> _TabFunc; //!< Function whose constant step is used for the tabulation
+    int            _InterDegree;              //!< Interpolation degree
     vector<double> _Thresholds;               //!< Thresholds
+    function<double(double const&)> _TabFunc; //!< Function whose constant step is used for the tabulation
     vector<double> _Qg;                       //!< Grid in Q
     vector<double> _fQg;                      //!< Grid in _TabFunc(Q)
     vector<int>    _nQg;                      //!< Indices of the nodes on which there is either a bound or a threshold

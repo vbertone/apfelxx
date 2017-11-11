@@ -77,7 +77,6 @@ namespace apfel
     function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
 							    map<int,DglapObjects>                          const& DglapObj,
 							    function<Set<Distribution>(double const&)>     const& CollPDFs,
-							    function<double(double const&, double const&)> const& fNP,
 							    function<double(double const&)>                const& Mub,
 							    int                                            const& PerturbativeOrder,
 							    function<double(double const&)>                const& Alphas);

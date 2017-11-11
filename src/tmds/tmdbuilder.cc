@@ -182,15 +182,16 @@ namespace apfel {
   {
     // Computed TMDs at the initial scale by convoluting PDFs,
     // matching functions, and non-perturbative function.
-    const auto MatchedTmdPDFs = MatchTmdPDFs(TmdObj, DglapObj, CollPDFs, fNP, Mub, PerturbativeOrder, Alphas);
+    const auto MatchedTmdPDFs = MatchTmdPDFs(TmdObj, DglapObj, CollPDFs, Mub, PerturbativeOrder, Alphas);
 
     // Compute TMD evolution factors.
     const auto EvolFactors = EvolutionFactors(TmdObj, Mu0b, Mub, PerturbativeOrder, Alphas, IntEps);
 
-    // Construct the function that returns the product.
+    // Construct the function that returns the product and includes
+    // the non perturbative function.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
       {
-	return EvolFactors(b, muf, zetaf) * MatchedTmdPDFs(b);
+	return EvolFactors(b, muf, zetaf) * ( [&] (double const& x) -> double{ return fNP(x, b); } * MatchedTmdPDFs(b) );
       };
 
     return EvolvedTMDs;
@@ -200,7 +201,6 @@ namespace apfel {
   function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
 							  map<int,DglapObjects>                          const& DglapObj,
 							  function<Set<Distribution>(double const&)>     const& CollPDFs,
-							  function<double(double const&, double const&)> const& fNP,
 							  function<double(double const&)>                const& Mub,
 							  int                                            const& PerturbativeOrder,
 							  function<double(double const&)>                const& Alphas)
@@ -301,7 +301,7 @@ namespace apfel {
     // functions, PDFs, NP function.
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
       {
-	return MatchFunc(b) * ( [&] (double const& x) -> double{ return fNP(x, b); } * CollPDFs(Mub(b)) );
+	return MatchFunc(b) * CollPDFs(Mub(b));
       };
 
     return MatchedTMDs;
@@ -354,8 +354,6 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaCuspg.at(0);
 	  };
-	//DCSq = [=] (double const&, double const&) -> double{ return 0; };
-	//DCSg = [=] (double const&, double const&) -> double{ return 0; };
 	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
@@ -400,22 +398,6 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * gc.at(1) );
 	  };
-	//DCSq = [=] (double const& mu, double const& b) -> double
-	//  {
-	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
-	//    const double coup = Alphas(mu) / FourPi;
-	//    const double Lmu  = LX(mu,b);
-	//   const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	//    return coup * lo;
-	//  };
-	//DCSg = [=] (double const& mu, double const& b) -> double
-	//  {
-	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
-	//    const double coup = Alphas(mu) / FourPi;
-	//    const double Lmu  = LX(mu,b);
-	//    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	//    return coup * lo;
-	//  };
 	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
@@ -478,24 +460,6 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
 	  };
-	//DCSq = [=] (double const& mu, double const& b) -> double
-	//  {
-	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;
-	//    const double coup = Alphas(mu) / FourPi;
-	//    const double Lmu  = LX(mu,b);
-	//    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	//    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
-	//    return coup * ( lo + coup * nlo );
-	//  };
-	//DCSg = [=] (double const& mu, double const& b) -> double
-	//  {
-	//    const auto d      = TmdObj.at(NF(mu,thrs)).CSdg;
-	//    const double coup = Alphas(mu) / FourPi;
-	//    const double Lmu  = LX(mu,b);
-	//    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	//    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
-	//    return coup * ( lo + coup * nlo );
-	//  };
 	DCSq = [=] (double const& mu, double const& b) -> double
 	  {
 	    const auto d      = TmdObj.at(NF(mu,thrs)).CSdq;

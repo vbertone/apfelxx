@@ -128,6 +128,7 @@ namespace apfel
   Distribution operator / (Distribution lhs, double const& s);                          //!< Distribution/Scalar
   Distribution operator + (Distribution lhs, Distribution const& rhs);                  //!< Distribution+Distribution
   Distribution operator - (Distribution lhs, Distribution const& rhs);                  //!< Distribution-Distribution
+  Distribution operator * (Distribution lhs, Distribution const& rhs);                  //!< Distribution*Distribution
 
   // Fill in an undordered_map of distributions from a map of distributions.
   map<int,Distribution> DistributionMap(Grid                                                    const& g,

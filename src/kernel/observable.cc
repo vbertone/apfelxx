@@ -8,7 +8,6 @@
 #include "apfel/observable.h"
 
 namespace apfel {
-
   //_____________________________________________________________________________
   Observable::Observable(function<Set<Operator>(double const&)>     const& CoefficientFunctions,
 			 function<Set<Distribution>(double const&)> const& Distributions):
@@ -29,5 +28,4 @@ namespace apfel {
   {
     return this->Evaluate(Q).Evaluate(x);
   }
-
 }

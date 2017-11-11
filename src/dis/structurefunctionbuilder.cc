@@ -1378,7 +1378,10 @@ namespace apfel {
 	  };
 
 	// Define distribution function functions.
-	const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>{ return Set<Distribution>{FObj(Q,Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)}; };
+	const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
+	  {
+	    return Set<Distribution>{FObj(Q,Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)};
+	  };
 
 	// Initialize "Observable".
 	F.insert({k,Observable{Cf, DistF}});

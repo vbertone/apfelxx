@@ -19,7 +19,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Distribution const& obj, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid):
+  Distribution::Distribution(Distribution           const& obj,
+			     vector<vector<double>> const& distsubgrid,
+			     vector<double>         const& distjointgrid):
     LagrangeInterpolator{obj._grid}
   {
     _distributionSubGrid   = distsubgrid;
@@ -27,7 +29,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Grid const& gr, vector<vector<double>> const& distsubgrid, vector<double> const& distjointgrid):
+  Distribution::Distribution(Grid                   const& gr,
+			     vector<vector<double>> const& distsubgrid,
+			     vector<double>         const& distjointgrid):
     LagrangeInterpolator{gr}
   {
     _distributionSubGrid   = distsubgrid;
@@ -282,6 +286,12 @@ namespace apfel
   Distribution operator - (Distribution lhs, Distribution const& rhs)
   {
     return lhs -= rhs;
+  }
+
+  //_________________________________________________________________________
+  Distribution operator * (Distribution lhs, Distribution const& rhs)
+  {
+    return lhs *= rhs;
   }
 
   //_________________________________________________________________________

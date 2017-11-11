@@ -156,5 +156,4 @@ namespace apfel {
     os << "\n\n";
     return os;
   }
-
 }
