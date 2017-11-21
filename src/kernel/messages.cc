@@ -24,6 +24,11 @@ namespace apfel
    */
   static int VerbosityLevel = HIGH;
 
+  /**
+   * @brief Colour codes
+   */
+  enum code {red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
+
   //_________________________________________________________________________
   void SetVerbosityLevel(int const& vl)
   {
@@ -70,12 +75,13 @@ namespace apfel
   {
     if (VerbosityLevel > MEDIUM)
       {
+	cout << "\033[1;" << code::red << "m\n";
+	cout << "       _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
+	cout << "     _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
+	cout << "    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
+	cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
+	cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
 	cout << "\033[" << code::green << "m\n";
-	cout << "     _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
-	cout << "   _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
-	cout << "  _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
-	cout << " _/    _/  _/        _/        _/        _/        _/     _/\n";
-	cout << "_/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n\n";
 	cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
 	cout << "     Authors: V. Bertone, S. Carrazza\n";
 	cout << "\033[" << code::normal << "m\n";

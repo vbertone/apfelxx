@@ -24,9 +24,6 @@ namespace apfel
    */
   int GetVerbosityLevel();
 
-  // Enumerator for code warning
-  enum code {red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
-
   /**
    * @brief info
    * @param tag
