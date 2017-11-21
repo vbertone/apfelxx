@@ -81,7 +81,7 @@ namespace apfel
 	cout << "    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
 	cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
 	cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
-	cout << "\033[" << code::green << "m\n";
+	cout << "\033[0;" << code::green << "m\n";
 	cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
 	cout << "     Authors: V. Bertone, S. Carrazza\n";
 	cout << "\033[" << code::normal << "m\n";
