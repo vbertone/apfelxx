@@ -13,6 +13,7 @@
 #include <cmath>
 #include <cassert>
 #include <algorithm>
+#include <stdexcept>
 
 namespace apfel
 {

@@ -39,6 +39,7 @@ namespace apfel
     // Check that "TabFunc" and "InvTabFunc" are actually the inverse
     // function of each other. The check is done at grid bounds and in
     // the middle.
+
     const vector<double> TestPoints{_QMin, ( _QMax +  _QMin ) / 2, _QMax};
     for (auto const& p : TestPoints)
       {
@@ -78,8 +79,10 @@ namespace apfel
     // If so, adjust the interpolation degree.
     for (auto isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
-	if (_nQg[isg+1] - _nQg[isg] < 2)                _nQg[isg+1]  = _nQg[isg] + 2;
-	if (_nQg[isg+1] - _nQg[isg] < _InterDegree + 2) _InterDegree = _nQg[isg+1] - _nQg[isg] - 1;
+	if (_nQg[isg+1] - _nQg[isg] < 2)
+	  _nQg[isg+1]  = _nQg[isg] + 2;
+	if (_nQg[isg+1] - _nQg[isg] < _InterDegree + 2)
+	  _InterDegree = _nQg[isg+1] - _nQg[isg] - 1;
       }
 
     // Adjust _nQ if needed.
