@@ -113,10 +113,8 @@ namespace apfel {
 	for (int i = MatchingBasisQCD::PT3G; i <= MatchingBasisQCD::PT35G; i++)
 	  if (i > MatchingBasisQCD::PT3G + nf - 1)
 	    OM.insert({i, AS1Hg});
-	    //OM.insert({i, Zero});
 	  else if (i == MatchingBasisQCD::PT3G + nf - 1)
 	    OM.insert({i, AS1Tg});
-	    //OM.insert({i, Zero});
 	  else
 	    OM.insert({i, Zero});
 	MatchNLO.insert({nf, OM});
@@ -356,8 +354,8 @@ namespace apfel {
     const Operator AS1ggHL{g, ATS1ggH_L{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const Operator AS1Hg  = AS1Hg0 - LogKth[nf-1] * AS1HgL;
-	const Operator AS1ggH = - LogKth[nf-1] * AS1ggHL;
+	const Operator AS1Hg  = AS1Hg0 + LogKth[nf-1] * AS1HgL;
+	const Operator AS1ggH = LogKth[nf-1] * AS1ggHL;
 	const Operator AS1Tg  = - nf * AS1Hg;
 	map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, Zero});
