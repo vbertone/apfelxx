@@ -20,7 +20,7 @@ namespace apfel
    */
 
   /**
-   * @brief O(alpha_s) mathcing conditions
+   * @brief O(alpha_s) matching conditions
    */
   // Term propotional to ln(mu2/m2) of eq. (B.2)
   class AS1Hg_L: public Expression
@@ -39,7 +39,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(alpha_s^2) mathcing conditions
+   * @brief O(alpha_s^2) matching conditions
    */
   // Constant term of eq (B.1)
   class APS2Hq_0: public Expression

@@ -13,6 +13,9 @@
 
 namespace apfel
 {
+  /**
+   * @brief The LO space-like splitting function classes
+   */
   //_________________________________________________________________________________
   P0ns::P0ns():
     Expression()
@@ -70,6 +73,9 @@ namespace apfel
     return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
+  /**
+   * @brief The NLO space-like splitting function classes
+   */
   //_________________________________________________________________________________
   P1nsp::P1nsp(int const& nf):
     Expression(),
@@ -235,7 +241,7 @@ namespace apfel
   }
 
   /**
-   * @brief The NNLO splitting function classes (parametrized)
+   * @brief The NNLO space-like splitting function classes (parametrized)
    */
   //_________________________________________________________________________________
   P2nsp::P2nsp(int const& nf):
@@ -245,10 +251,10 @@ namespace apfel
   }
   double P2nsp::Regular(double const& x) const
   {
-    const double x_2    = pow(x, 2);
+    const double x_2    = x * x;
     const double x_3    = x_2 * x;
     const double dl     = log(x);
-    const double dl_2   = pow(dl,2);
+    const double dl_2   = dl * dl;
     const double dl_3   = dl_2 * dl;
     const double dl_4   = dl_3 * dl;
     const double dl1    = log(1-x);
@@ -261,18 +267,18 @@ namespace apfel
       + _nf * ( -197.0 + 381.1 * x + 72.94 * x_2 + 44.79 * x_3
 		- 192. * d81 * dl_3  - 2608. * d81 * dl_2 - 152.6 * dl
 		- 5120. * d81 * dl1 - 56.66 * dl * dl1 - 1.497 * x * dl_3 )
-      + _nf * _nf * ( 32. * x * dl / ( 1. - x ) * ( 3. * dl + 10. ) + 64.
-		      + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1. - x ) ) * d81;
+      + _nf * _nf * ( 32. * x * dl / ( 1 - x ) * ( 3. * dl + 10. ) + 64.
+		      + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1 - x ) ) * d81;
     return p2nspa;
   }
   double P2nsp::Singular(double const& x) const
   {
-    const double p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1. - x );
+    const double p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1 - x );
     return p2nsb;
   }
   double P2nsp::Local(double const& x) const
   {
-    const double dl1    = log(1.-x);
+    const double dl1    = log(1-x);
     const double p2nspc =
       1174.898 * dl1 + 1295.624 - 0.24
       - _nf * ( 183.187 * dl1 + 173.938 - 0.011 )
@@ -288,13 +294,13 @@ namespace apfel
   }
   double P2nsm::Regular(double const& x) const
   {
-    const double x_2    = pow(x, 2);
+    const double x_2    = x * x;
     const double x_3    = x_2 * x;
     const double dl     = log(x);
-    const double dl_2   = pow(dl,2);
+    const double dl_2   = dl * dl;
     const double dl_3   = dl_2 * dl;
-    const double dl1    = log(1.-x);
-    const double d81    = 1./81.;
+    const double dl1    = log(1-x);
+    const double d81    = 1. / 81.;
     const double p2nsma =
       1860.2 - 3505.* x + 297.0 * x_2 - 433.2 * x_3
       + 116. * d81 * dl_3 * dl + 2880. * d81 * dl_3
@@ -303,22 +309,22 @@ namespace apfel
       + _nf * ( -216.62 + 406.5 * x + 77.89 * x_2 + 34.76 * x_3
 		- 256. * d81 * dl_3  - 3216. * d81 * dl_2 - 172.69 * dl
 		- 5120. * d81 * dl1 - 65.43 * dl * dl1 - 1.136 * x * dl_3 )
-      + _nf * _nf * ( 32.* x * dl / (1.-x) * ( 3. * dl + 10. ) + 64.
+      + _nf * _nf * ( 32.* x * dl / ( 1 - x ) * ( 3. * dl + 10. ) + 64.
 		      + ( 48.* dl_2 + 352.* dl + 384. ) * ( 1.-x ) ) * d81;
     return p2nsma;
   }
   double P2nsm::Singular(double const& x) const
   {
-    const double p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1. - x );
+    const double p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1 - x );
     return p2nsb;
   }
   double P2nsm::Local(double const& x) const
   {
-    const double dl1    = log(1.-x);
+    const double dl1    = log(1-x);
     const double p2nsmc =
       1174.898 * dl1 + 1295.624 - 0.154
       - _nf * ( 183.187 * dl1 + 173.938  - 0.005 )
-      + _nf * _nf * ( - 64./81. * dl1 + 1.13067 );
+      + _nf * _nf * ( - 64. / 81. * dl1 + 1.13067 );
     return p2nsmc;
   }
 
@@ -330,13 +336,13 @@ namespace apfel
   }
   double P2nss::Regular(double const& x) const
   {
-    const double x_2    = pow(x,2);
-    const double d27    = 1./27.;
+    const double x_2    = x * x;
+    const double d27    = 1. / 27.;
     const double dl     = log(x);
-    const double dl_2   = pow(dl,2);
+    const double dl_2   = dl * dl;
     const double dl_3   = dl_2 * dl;
     const double dl_4   = dl_3 * dl;
-    const double x1     = 1.- x;
+    const double x1     = 1 - x;
     const double dl1    = log(x1);
     const double p2nssa =
       x1 * ( 151.49 + 44.51 * x - 43.12 * x_2 + 4.820 * x_2 * x )
@@ -354,18 +360,15 @@ namespace apfel
   }
   double P2ps::Regular(double const& x) const
   {
-    const double x_2   = pow(x,2);
+    const double x_2   = x * x;
     const double x_3   = x_2 * x;
-
     const double dl    = log(x);
-    const double dl_2  = pow(dl, 2);
+    const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-
-    const double dl1   = log(1.-x);
-    const double dl1_2 = pow(dl1, 2);
+    const double dl1   = log(1-x);
+    const double dl1_2 = dl1 * dl1;
     const double dl1_3 = dl1_2 * dl1;
-
     const double  p2ps1 =
       - 3584. / ( 27. * x ) * dl - 506.0 / x + 160. / 27. * dl_4
       - 400. / 9. * dl_3 + 131.4 * dl_2 - 661.6 * dl
@@ -376,7 +379,7 @@ namespace apfel
       + 61.75 * dl + 1.778 * dl1_2 + 5.944 * dl1 + 100.1
       - 125.2 * x + 49.26 * x_2 - 12.59 * x_3
       - 1.889 * dl * dl1;
-    const double p2psa = ( 1. - x ) * _nf * ( p2ps1 + _nf * p2ps2 );
+    const double p2psa = ( 1 - x ) * _nf * ( p2ps1 + _nf * p2ps2 );
     return p2psa;
   }
 
@@ -388,19 +391,16 @@ namespace apfel
   }
   double P2qg::Regular(double const& x) const
   {
-    const double x_2   = pow(x,2);
+    const double x_2   = x * x;
     const double x_3   = x_2 * x;
-
     const double dl    = log(x);
-    const double dl_2  = pow(dl, 2);
+    const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-
-    const double dl1   = log(1.-x);
-    const double dl1_2 = pow(dl1, 2);
+    const double dl1   = log(1-x);
+    const double dl1_2 = dl1 * dl1;
     const double dl1_3 = dl1_2 * dl1;
     const double dl1_4 = dl1_3 * dl1;
-
     const double p2qg1 =
       - 896. / ( 3. * x ) * dl - 1268.3 / x + 536./27. * dl_4
       - 44. / 3. * dl_3 + 881.5 * dl_2 + 424.9 * dl
@@ -427,19 +427,16 @@ namespace apfel
   }
   double P2gq::Regular(double const& x) const
   {
-    const double x_2   = pow(x,2);
+    const double x_2   = x * x;
     const double x_3   = x_2 * x;
-
     const double dl    = log(x);
-    const double dl_2  = pow(dl, 2);
+    const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-
-    const double dl1   = log(1.-x);
-    const double dl1_2 = pow(dl1, 2);
+    const double dl1   = log(1-x);
+    const double dl1_2 = dl1 * dl1;
     const double dl1_3 = dl1_2 * dl1;
     const double dl1_4 = dl1_3 * dl1;
-
     const double p2gq0 =
       1189.3 * dl / x + 6163.1 / x - 4288. / 81. * dl_4
       + 1568. / 9. * dl_3 - 1794. * dl_2 + 4033. * dl
@@ -469,16 +466,13 @@ namespace apfel
   }
   double P2gg::Regular(double const& x) const
   {
-    const double x_2   = pow(x,2);
+    const double x_2   = x * x;
     const double x_3   = x_2 * x;
-
     const double dl    = log(x);
-    const double dl_2  = pow(dl, 2);
+    const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-
-    const double dl1   = log(1.-x);
-
+    const double dl1   = log(1-x);
     const double p2gga0 =
       2675.8 * dl / x + 14214. / x - 144. * dl_4 + 72. * dl_3
       - 7471. * dl_2 + 274.4 * dl + 3589. * dl1 - 20852.
@@ -498,12 +492,12 @@ namespace apfel
   }
   double P2gg::Singular(double const& x) const
   {
-    const double p2ggb = ( 2643.521 - _nf * 412.172 - _nf * _nf * 16. / 9. ) / ( 1.- x );
+    const double p2ggb = ( 2643.521 - _nf * 412.172 - _nf * _nf * 16. / 9. ) / ( 1 - x );
     return p2ggb;
   }
   double P2gg::Local(double const& x) const
   {
-    const double dl1   = log(1.-x);
+    const double dl1   = log(1-x);
     const double p2ggc =
       2643.521 * dl1 + 4425.448 + 0.446
       - _nf * ( 412.172 * dl1 +  528.720 + 0.003 )
@@ -780,27 +774,27 @@ namespace apfel
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm2 * dlm;
 
-       // nf^1: two approximations
-       const double p3nsa11 =
-	 omy * y * ( 4989.2 - 1607.73 * y ) + 3687.6 * dl + 3296.6 * dl2 + 1271.11* dl3
-	 + 533.44 * dl4 + 97.27 *  dl5 + 4 * dl6 + 60.40 * omy * dlm2 + 4.685 * omy * dlm3;
-      const double p3nsa12 =
-	1030.79 * omy * y + 1266.77 * omy * ( 2 - y2 ) + 2987.83 * dl + 273.05 * dl2 - 923.48 * dl3 
-	- 236.76 * dl4 - 33.886 * dl5 - 4 * dl6 - 254.63 * omy * dlm - 0.28953 * omy * dlm3;
+    // nf^1: two approximations
+    const double p3nsa11 =
+      omy * y * ( 4989.2 - 1607.73 * y ) + 3687.6 * dl + 3296.6 * dl2 + 1271.11* dl3
+      + 533.44 * dl4 + 97.27 *  dl5 + 4 * dl6 + 60.40 * omy * dlm2 + 4.685 * omy * dlm3;
+    const double p3nsa12 =
+      1030.79 * omy * y + 1266.77 * omy * ( 2 - y2 ) + 2987.83 * dl + 273.05 * dl2 - 923.48 * dl3 
+      - 236.76 * dl4 - 33.886 * dl5 - 4 * dl6 - 254.63 * omy * dlm - 0.28953 * omy * dlm3;
 
-      // nf^2 (parametrized)
-      const double p3nssa2 =
-	2.5e+2 * ( omy * ( - 4.7656 + 1.6908 * y + 0.1703 * y2 ) 
-		   - 0.41652 * y *dl + 0.90777 * y * dl2 + 0.12478 * y * dl3 
-		   + 0.17155 * omy * dlm + 0.17191  * dl * dlm )
-	- 6.473971e+2 * dl - 6.641219e+1 * dl2 - 5.353347 * dl3 - 5.925926 *dl4
-	- 3.950617e-1 * dl5 + 1.970002e+1 * omy * dlm - 3.435474 * omy * dlm2;
+    // nf^2 (parametrized)
+    const double p3nssa2 =
+      2.5e+2 * ( omy * ( - 4.7656 + 1.6908 * y + 0.1703 * y2 ) 
+		 - 0.41652 * y *dl + 0.90777 * y * dl2 + 0.12478 * y * dl3 
+		 + 0.17155 * omy * dlm + 0.17191  * dl * dlm )
+      - 6.473971e+2 * dl - 6.641219e+1 * dl2 - 5.353347 * dl3 - 5.925926 *dl4
+      - 3.950617e-1 * dl5 + 1.970002e+1 * omy * dlm - 3.435474 * omy * dlm2;
 
-      if (_imod == 1)
-	return _nf * p3nsa11 + _nf * _nf * p3nssa2;
-      else if (_imod == 2)
-	return _nf * p3nsa12 + _nf * _nf * p3nssa2;
-      else
-	return 0.5 *_nf * ( p3nsa11 + p3nsa12 ) + _nf * _nf * p3nssa2;
+    if (_imod == 1)
+      return _nf * p3nsa11 + _nf * _nf * p3nssa2;
+    else if (_imod == 2)
+      return _nf * p3nsa12 + _nf * _nf * p3nssa2;
+    else
+      return 0.5 *_nf * ( p3nsa11 + p3nsa12 ) + _nf * _nf * p3nssa2;
   }
 }

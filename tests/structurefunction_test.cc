@@ -23,6 +23,8 @@ using namespace std;
 
 int main()
 {
+  //SetVerbosityLevel(0);
+  Banner();
   // x-space grid
   const Grid g{{SubGrid{100,1e-5,3}, SubGrid{60,1e-1,3}, SubGrid{50,6e-1,3}, SubGrid{50,8e-1,3}}};
 

@@ -12,39 +12,39 @@
 namespace apfel
 {
   /**
-   * @brief The LO space-like splitting function classes
+   * @brief The LO time-like splitting function classes
    */
   //_________________________________________________________________________________
-  class P0ns: public Expression
+  class P0Tns: public Expression
   {
   public:
-    P0ns();
+    P0Tns();
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   };
 
   //_________________________________________________________________________________
-  class P0qg: public Expression
+  class P0Tqg: public Expression
   {
   public:
-    P0qg();
+    P0Tqg();
     double Regular(double const& x)  const;
   };
 
   //_________________________________________________________________________________
-  class P0gq: public Expression
+  class P0Tgq: public Expression
   {
   public:
-    P0gq();
+    P0Tgq();
     double Regular(double const& x)  const;
   };
 
   //_________________________________________________________________________________
-  class P0gg: public Expression
+  class P0Tgg: public Expression
   {
   public:
-    P0gg(int const& nf);
+    P0Tgg(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -53,13 +53,13 @@ namespace apfel
   };
 
   /**
-   * @brief The NLO space-like splitting function classes
+   * @brief The NLO time-like splitting function classes
    */
   //_________________________________________________________________________________
-  class P1nsp: public Expression
+  class P1Tnsp: public Expression
   {
   public:
-    P1nsp(int const& nf);
+    P1Tnsp(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -69,48 +69,48 @@ namespace apfel
   };
 
   //_________________________________________________________________________________
-  class P1nsm: public P1nsp
+  class P1Tnsm: public P1Tnsp
   {
   public:
-    P1nsm(int const& nf);
+    P1Tnsm(int const& nf);
     double Regular(double const& x)  const;
   };
 
   //_________________________________________________________________________________
-  class P1ps: public Expression
+  class P1Tps: public Expression
   {
   public:
-    P1ps(int const& nf);
-    double Regular(double const& x)  const;
-  private:
-    int const _nf;
-  };
-
-  //_________________________________________________________________________________
-  class P1qg: public Expression
-  {
-  public:
-    P1qg(int const& nf);
+    P1Tps(int const& nf);
     double Regular(double const& x)  const;
   private:
     int const _nf;
   };
 
   //_________________________________________________________________________________
-  class P1gq: public Expression
+  class P1Tqg: public Expression
   {
   public:
-    P1gq(int const& nf);
+    P1Tqg(int const& nf);
     double Regular(double const& x)  const;
   private:
     int const _nf;
   };
 
   //_________________________________________________________________________________
-  class P1gg: public Expression
+  class P1Tgq: public Expression
   {
   public:
-    P1gg(int const& nf);
+    P1Tgq(int const& nf);
+    double Regular(double const& x)  const;
+  private:
+    int const _nf;
+  };
+
+  //_________________________________________________________________________________
+  class P1Tgg: public Expression
+  {
+  public:
+    P1Tgg(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -120,13 +120,13 @@ namespace apfel
   };
 
   /**
-   * @brief The NNLO space-like splitting function classes (parametrized)
+   * @brief The NNLO time-like splitting function classes (parametrized)
    */
   //_________________________________________________________________________________
-  class P2nsp: public Expression
+  class P2Tnsp: public Expression
   {
   public:
-    P2nsp(int const& nf);
+    P2Tnsp(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -135,10 +135,10 @@ namespace apfel
   };
 
   //_________________________________________________________________________________
-  class P2nsm: public Expression
+  class P2Tnsm: public Expression
   {
   public:
-    P2nsm(int const& nf);
+    P2Tnsm(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -147,97 +147,54 @@ namespace apfel
   };
 
   //_________________________________________________________________________________
-  class P2nss: public Expression
+  class P2Tnss: public Expression
   {
   public:
-    P2nss(int const& nf);
+    P2Tnss(int const& nf);
     double Regular(double const& x)  const;
   private:
     int const _nf;
   };
 
   //_________________________________________________________________________________
-  class P2ps: public Expression
+  class P2Tps: public Expression
   {
   public:
-    P2ps(int const& nf);
+    P2Tps(int const& nf);
     double Regular(double const& x)  const;
   private:
     int const _nf;
   };
 
   //_________________________________________________________________________________
-  class P2qg: public Expression
+  class P2Tqg: public Expression
   {
   public:
-    P2qg(int const& nf);
+    P2Tqg(int const& nf);
     double Regular(double const& x)  const;
   private:
     int const _nf;
   };
 
   //_________________________________________________________________________________
-  class P2gq: public Expression
+  class P2Tgq: public Expression
   {
   public:
-    P2gq(int const& nf);
+    P2Tgq(int const& nf);
     double Regular(double const& x)  const;
   private:
     int const _nf;
   };
 
   //_________________________________________________________________________________
-  class P2gg: public Expression
+  class P2Tgg: public Expression
   {
   public:
-    P2gg(int const& nf);
+    P2Tgg(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
     int const _nf;
-  };
-
-  /**
-   * @brief The NNNLO space-like splitting function classes
-   * (parametrized and leading color). Only the +, -, and valence
-   * contributions have been computed so far.
-   *
-   */
-  //_________________________________________________________________________________
-  class P3nsp: public Expression
-  {
-  public:
-    P3nsp(int const& nf, int const& imod = 0);
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  private:
-    int const _nf;
-    int const _imod;
-  };
-
-  //_________________________________________________________________________________
-  class P3nsm: public Expression
-  {
-  public:
-    P3nsm(int const& nf, int const& imod = 0);
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  private:
-    int const _nf;
-    int const _imod;
-  };
-
-  //_________________________________________________________________________________
-  class P3nss: public Expression
-  {
-  public:
-    P3nss(int const& nf, int const& imod = 0);
-    double Regular(double const& x)  const;
-  private:
-    int const _nf;
-    int const _imod;
   };
 }
