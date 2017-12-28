@@ -98,16 +98,18 @@ namespace apfel
 	_fQg.push_back(_fQg.back());
       }
 
-    // Displace slightly the values below and above the thresholds.
-    for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
-      {
-	_fQg[_nQg[isg]-1] *= 1 - eps15;
-	_fQg[_nQg[isg]]   *= 1 + eps15;
-      }
-
     // Now compute grid in Q.
     for (auto const& lq : _fQg)
       _Qg.push_back(InvTabFunc(lq));
+
+    // Displace slightly the values below and above the thresholds.
+    for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
+      {
+	_Qg[_nQg[isg]-1] *= 1 - eps12;
+	_Qg[_nQg[isg]]   *= 1 + eps12;
+	_fQg[_nQg[isg]-1] = TabFunc(_Qg[_nQg[isg]-1]);
+	_fQg[_nQg[isg]]   = TabFunc(_Qg[_nQg[isg]]);
+      }
   }
 
   //_________________________________________________________________________________
@@ -137,8 +139,8 @@ namespace apfel
     int bound = tau + tQ - _InterDegree;
     if (_InterDegree > tau + tQ)
       bound = 0;
-    if (fq < _fQg[bound] || fq >= _fQg[tau+tQ+1])
-      return 0;
+    //if (fq < _fQg[bound] || fq >= _fQg[tau+tQ+1])
+    //  return 0;
 
     // Initialize interpolant
     double w_int = 1;
@@ -218,8 +220,8 @@ namespace apfel
   template<class T>
   T QGrid<T>::Evaluate(double const& Q) const
   {
-    const auto bounds = SumBounds(Q);
-    const auto fq     = _TabFunc(Q);
+    const tuple<int,int,int> bounds = SumBounds(Q);
+    const double             fq     = _TabFunc(Q);
 
     // first create a copy of template object with the first component
     int tau = get<1>(bounds);

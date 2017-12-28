@@ -26,9 +26,9 @@ int main()
 
   const auto Mu = 100.;
   cout << "\nLO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << endl;
-  cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu)  << endl;
-  cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << endl;
-  cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << "\n" << endl;
+  cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu)  << " (NLO/LO     = " << 100 * asNLO.Evaluate(Mu) / asLO.Evaluate(Mu)<< "%)" << endl;
+  cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLO.Evaluate(Mu) / asNLO.Evaluate(Mu)<< "%)" << endl;
+  cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLO.Evaluate(Mu) / asNNLO.Evaluate(Mu)<< "%)\n" << endl;
 
   return 0;
 }

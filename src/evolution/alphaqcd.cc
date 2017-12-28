@@ -56,7 +56,7 @@ namespace apfel {
       {
 	const int sgn     = ( Up ? 1 : -1);
 	const double ep   = Coup / FourPi;
-	const double c[4] = { 1, sgn * 2. / 3. * LogKth[nf], 4. / 9. * pow(LogKth[nf],2) + sgn *  38. / 3. * LogKth[nf] + sgn * 14. / 3., 0 };
+	const double c[4] = {1, sgn * 2. / 3. * LogKth[nf], 4. / 9. * pow(LogKth[nf],2) + sgn *  38. / 3. * LogKth[nf] + sgn * 14. / 3., 0};
 	double match = 0, powep = 1;
 	for (int i = 0; i <= _pt; i++)
 	  {

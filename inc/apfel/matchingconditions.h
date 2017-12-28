@@ -49,11 +49,43 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
+  // Term propotional to ln(mu2/m2) of eq (B.1)
+  class APS2Hq_L: public Expression
+  {
+  public:
+    APS2Hq_L();
+    double Regular(double const& x)  const;
+  };
+
+  // Term propotional to ln^2(mu2/m2) of eq (B.1)
+  class APS2Hq_L2: public Expression
+  {
+  public:
+    APS2Hq_L2();
+    double Regular(double const& x)  const;
+  };
+
   // Constant term of eq (B.3)
   class AS2Hg_0: public Expression
   {
   public:
     AS2Hg_0();
+    double Regular(double const& x)  const;
+  };
+
+  // Term propotional to ln(mu2/m2) of eq (B.3)
+  class AS2Hg_L: public Expression
+  {
+  public:
+    AS2Hg_L();
+    double Regular(double const& x)  const;
+  };
+
+  // Term propotional to ln^2(mu2/m2) of eq (B.3)
+  class AS2Hg_L2: public Expression
+  {
+  public:
+    AS2Hg_L2();
     double Regular(double const& x)  const;
   };
 
@@ -67,6 +99,26 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
+  // Term propotional to ln(mu2/m2) of eq (B.4)
+  class ANS2qqH_L: public Expression
+  {
+  public:
+    ANS2qqH_L();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  // Term propotional to ln^2(mu2/m2) of eq (B.4)
+  class ANS2qqH_L2: public Expression
+  {
+  public:
+    ANS2qqH_L2();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
   // Constant term of eq (B.5)
   class AS2gqH_0: public Expression
   {
@@ -75,11 +127,47 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
+  // Term propotional to ln(mu2/m2) of eq (B.5)
+  class AS2gqH_L: public Expression
+  {
+  public:
+    AS2gqH_L();
+    double Regular(double const& x)  const;
+  };
+
+  // Term propotional to ln^2(mu2/m2) of eq (B.5)
+  class AS2gqH_L2: public Expression
+  {
+  public:
+    AS2gqH_L2();
+    double Regular(double const& x)  const;
+  };
+
   // Constant term of eq (B.7)
   class AS2ggH_0: public Expression
   {
   public:
     AS2ggH_0();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  // Term propotional to ln(mu2/m2) of eq (B.7)
+  class AS2ggH_L: public Expression
+  {
+  public:
+    AS2ggH_L();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  // Term propotional to ln^2(mu2/m2) of eq (B.7)
+  class AS2ggH_L2: public Expression
+  {
+  public:
+    AS2ggH_L2();
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;

@@ -99,8 +99,8 @@ namespace apfel {
     const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const Operator AS1Hg  = LogKth[nf-1] * AS1HgL;
-	const Operator AS1ggH = LogKth[nf-1] * AS1ggHL;
+	const Operator AS1Hg  = LogKth[nf] * AS1HgL;
+	const Operator AS1ggH = LogKth[nf] * AS1ggHL;
 	const Operator AS1Tg  = - nf * AS1Hg;
 	map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, Zero});
@@ -146,16 +146,36 @@ namespace apfel {
     // ===============================================================
     // NNLO Matching conditions.
     map<int,map<int,Operator>> MatchNNLO;
-    const Operator APS2Hq {g, APS2Hq_0{},  IntEps};
-    const Operator ANS2qqH{g, ANS2qqH_0{}, IntEps};
-    const Operator AS2Hg  {g, AS2Hg_0{},   IntEps};
-    const Operator AS2gqH {g, AS2gqH_0{},  IntEps};
-    const Operator AS2ggH {g, AS2ggH_0{},  IntEps};
-    const Operator AS2qqH = ANS2qqH + APS2Hq;
+    const Operator APS2Hq0  {g, APS2Hq_0{},   IntEps};
+    const Operator APS2HqL  {g, APS2Hq_L{},   IntEps};
+    const Operator APS2HqL2 {g, APS2Hq_L2{},  IntEps};
+    const Operator ANS2qqH0 {g, ANS2qqH_0{},  IntEps};
+    const Operator ANS2qqHL {g, ANS2qqH_L{},  IntEps};
+    const Operator ANS2qqHL2{g, ANS2qqH_L2{}, IntEps};
+    const Operator AS2Hg0   {g, AS2Hg_0{},    IntEps};
+    const Operator AS2HgL   {g, AS2Hg_L{},    IntEps};
+    const Operator AS2HgL2  {g, AS2Hg_L2{},   IntEps};
+    const Operator AS2gqH0  {g, AS2gqH_0{},   IntEps};
+    const Operator AS2gqHL  {g, AS2gqH_L{},   IntEps};
+    const Operator AS2gqHL2 {g, AS2gqH_L2{},  IntEps};
+    const Operator AS2ggH0  {g, AS2ggH_0{},   IntEps};
+    const Operator AS2ggHL  {g, AS2ggH_L{},   IntEps};
+    const Operator AS2ggHL2 {g, AS2ggH_L2{},  IntEps};
+    const Operator AS2qqH0  = ANS2qqH0  + APS2Hq0;
+    const Operator AS2qqHL  = ANS2qqHL  + APS2HqL;
+    const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const Operator AS2TqH = ANS2qqH - nf * APS2Hq;
-	const Operator AS2Tg  = - nf * AS2Hg;
+	const double lnk  = LogKth[nf];
+	const double lnk2 = lnk * lnk;
+	const Operator APS2Hq  = APS2Hq0  + lnk * APS2HqL  + lnk2 * APS2HqL2;
+	const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
+	const Operator AS2Hg   = AS2Hg0   + lnk * AS2HgL   + lnk2 * AS2HgL2;
+	const Operator AS2gqH  = AS2gqH0  + lnk * AS2gqHL  + lnk2 * AS2gqHL2;
+	const Operator AS2ggH  = AS2ggH0  + lnk * AS2ggHL  + lnk2 * AS2ggHL2;
+	const Operator AS2qqH  = AS2qqH0  + lnk * AS2qqHL  + lnk2 * AS2qqHL2;
+	const Operator AS2TqH  = ANS2qqH - nf * APS2Hq;
+	const Operator AS2Tg   = - nf * AS2Hg;
 	map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, ANS2qqH});
 	OM.insert({MatchingBasisQCD::PQQ, AS2qqH});
@@ -354,8 +374,8 @@ namespace apfel {
     const Operator AS1ggHL{g, ATS1ggH_L{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const Operator AS1Hg  = AS1Hg0 + LogKth[nf-1] * AS1HgL;
-	const Operator AS1ggH = LogKth[nf-1] * AS1ggHL;
+	const Operator AS1Hg  = AS1Hg0 + LogKth[nf] * AS1HgL;
+	const Operator AS1ggH = LogKth[nf] * AS1ggHL;
 	const Operator AS1Tg  = - nf * AS1Hg;
 	map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, Zero});
@@ -526,12 +546,12 @@ namespace apfel {
     // Compute coupling above and below the thresholds.
     map<int,double> asThUp;
     map<int,double> asThDown;
-    for (auto const& obj : DglapObj)
+    for (auto obj = std::next(DglapObj.begin()); obj != DglapObj.end(); ++obj)
       {
-	const int    nf  = obj.first;
-	const double thr = obj.second.Threshold;
-	asThDown.insert({nf,Alphas(thr)/FourPi});
-	asThUp.insert({nf,Alphas(thr+eps8)/FourPi});
+	const int    nf  = obj->first;
+	const double thr = obj->second.Threshold;
+	asThDown.insert({nf,Alphas(thr*(1-eps8))/FourPi});
+	asThUp.insert({nf,Alphas(thr*(1+eps8))/FourPi});
       }
 
     if (PerturbativeOrder == 0)
@@ -542,28 +562,22 @@ namespace apfel {
     else if (PerturbativeOrder == 1)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
 	{
-	  const double cp = asThUp.at(nf+1);
+	  const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf+1) );
 	  const auto mc = DglapObj.at(nf).MatchingConditions;
 	  return mc.at(0) + ( Up ? 1 : -1) * cp * mc.at(1);
 	};
     else if (PerturbativeOrder == 2)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
 	{
-	  const double cp = asThUp.at(nf+1);
+	  const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf+1) );
 	  const auto mc = DglapObj.at(nf).MatchingConditions;
-	  // WARNING: This is not correct for Up = false
-	  // (i.e. backward evolution) and when there are displaced
-	  // thresholds. This has to be adjusted.
 	  return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
 	};
     else if (PerturbativeOrder == 3)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
 	{
-	  const double cp = asThUp.at(nf+1);
+	  const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf+1) );
 	  const auto mc = DglapObj.at(nf).MatchingConditions;
-	  // WARNING: This is not correct for Up = false
-	  // (i.e. backward evolution) and when there are displaced
-	  // thresholds. This has to be adjusted.
 	  return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
 	};
     else
@@ -673,8 +687,8 @@ namespace apfel {
     map<int,double> asThDown;
     for (int nf = nfi + 1; nf <= nff; nf++)
       {
-	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
-	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});
+	asThDown.insert({nf,Alphas(Thresholds[nf-1]*(1-eps8))/FourPi});
+	asThUp.insert({nf,Alphas(Thresholds[nf-1]*(1+eps8))/FourPi});
       }
 
     // Create splitting functions and matching conditions lambda
