@@ -59,7 +59,7 @@ namespace apfel {
         // Find the point of the "(ig-1)"-th SubGrid such that
         // "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]", and replace
         // "xMin[ig]" with "x[ig-1][ix]".
-        for (auto ig = 1; ig < ng; ig++)
+        for (int ig = 1; ig < ng; ig++)
           {
             int const nxg     = _GlobalGrid[ig-1].nx();
             double const xmin = _GlobalGrid[ig].xMin();
@@ -69,7 +69,7 @@ namespace apfel {
             double xmin_new = -1;
             int const id_new = _GlobalGrid[ig].InterDegree();
 
-            for (auto ix = 0; ix < nxg; ix++)
+            for (int ix = 0; ix < nxg; ix++)
               {
                 double const x = _GlobalGrid[ig-1].GetGrid()[ix];
                 if (x > xmin)
@@ -99,7 +99,7 @@ namespace apfel {
     int id_joint = _GlobalGrid[0].InterDegree(); // Use the interpolation degree of the first grid
     vector<double> xg_joint_vect;
 
-    for (auto ig = 0; ig < ng; ig++)
+    for (int ig = 0; ig < ng; ig++)
       {
         int const nxg = _GlobalGrid[ig].nx();
         double xtrans;
@@ -107,7 +107,7 @@ namespace apfel {
 	  xtrans = _GlobalGrid[ig+1].xMin();
         else
           xtrans = 1 + 2 * eps12;
-        for (auto ix = 0; ix <= nxg; ix++)
+        for (int ix = 0; ix <= nxg; ix++)
           {
             double const x = _GlobalGrid[ig].GetGrid()[ix];
             if (xtrans - x < eps12) break;
@@ -129,7 +129,7 @@ namespace apfel {
     if (_GlobalGrid.size() != g._GlobalGrid.size())
       return false;
 
-    for (auto ig = 0 ; ig < (int) _GlobalGrid.size(); ig++)
+    for (int ig = 0 ; ig < (int) _GlobalGrid.size(); ig++)
       if (_GlobalGrid[ig] != g._GlobalGrid[ig])
         return false;
 

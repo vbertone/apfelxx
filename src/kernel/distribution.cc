@@ -46,7 +46,7 @@ namespace apfel
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
       _distributionJointGrid.push_back(InDistFunc(ix < 1 ? ix : 1));
 
-    for (auto ig = 0; ig < _grid.nGrids(); ig++)
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
@@ -65,7 +65,7 @@ namespace apfel
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
       _distributionJointGrid.push_back(InDistFunc(ix < 1 ? ix : 1,Q));
 
-    for (auto ig = 0; ig < _grid.nGrids(); ig++)
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
@@ -84,7 +84,7 @@ namespace apfel
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
       _distributionJointGrid.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1));
 
-    for (auto ig = 0; ig < _grid.nGrids(); ig++)
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
@@ -104,7 +104,7 @@ namespace apfel
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
       _distributionJointGrid.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1,Q));
 
-    for (auto ig = 0; ig < _grid.nGrids(); ig++)
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
 	vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
@@ -305,7 +305,7 @@ namespace apfel
 
     // Initialise output.
     map<int,Distribution> DistMap;
-    const auto f = InDistFunc(jg[0],Q);
+    const map<int,double> f = InDistFunc(jg[0],Q);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	DistMap.insert({it->first,Distribution{g}});
@@ -313,19 +313,19 @@ namespace apfel
     // Fill in joint grid.
     for (auto const& ix : jg)
       {
-	const auto f = InDistFunc(ix < 1 ? ix : 1,Q);
+	const map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
 	for (auto it = f.begin(); it != f.end(); ++it)
 	  if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	    DistMap.at(it->first).PushJointGrid(it->second);
       }
 
     // Fill in subgrids.
-    for (auto ig = 0; ig < g.nGrids(); ig++)
+    for (int ig = 0; ig < g.nGrids(); ig++)
       {
 	bool next = true;
 	for (auto const& ix: g.GetSubGrid(ig).GetGrid())
 	  {
-	    const auto f = InDistFunc(ix < 1 ? ix : 1,Q);
+	    const map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
 	    for (auto it = f.begin(); it != f.end(); ++it)
 	      if (find(skip.begin(), skip.end(), it->first) == skip.end())
 		DistMap.at(it->first).PushSubGrid(it->second, next);
@@ -346,7 +346,7 @@ namespace apfel
 
     // Initialise output.
     map<int,Distribution> DistMap;
-    const auto f = InDistFunc(jg[0]);
+    const map<int,double> f = InDistFunc(jg[0]);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	DistMap.insert({it->first,Distribution{g}});
@@ -354,19 +354,19 @@ namespace apfel
     // Fill in joint grid.
     for (auto const& ix : jg)
       {
-	const auto f = InDistFunc(ix < 1 ? ix : 1);
+	const map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
 	for (auto it = f.begin(); it != f.end(); ++it)
 	  if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	    DistMap.at(it->first).PushJointGrid(it->second);
       }
 
     // Fill in subgrids.
-    for (auto ig = 0; ig < g.nGrids(); ig++)
+    for (int ig = 0; ig < g.nGrids(); ig++)
       {
 	bool next = true;
 	for (auto const& ix: g.GetSubGrid(ig).GetGrid())
 	  {
-	    const auto f = InDistFunc(ix < 1 ? ix : 1);
+	    const map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
 	    for (auto it = f.begin(); it != f.end(); ++it)
 	      if (find(skip.begin(), skip.end(), it->first) == skip.end())
 		DistMap.at(it->first).PushSubGrid(it->second, next);

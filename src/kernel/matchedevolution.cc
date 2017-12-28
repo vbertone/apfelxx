@@ -35,7 +35,7 @@ namespace apfel
     _LogMuRef2 = log(_MuRef2);
 
     // Compute squared thresholds.
-    for (auto &th : Thresholds)
+    for (auto const& th : Thresholds)
       {
 	const double th2 = pow(th,2);
 	_Thresholds2.push_back(th2);
@@ -60,10 +60,10 @@ namespace apfel
     const auto dObj = rk4<T>([&](double const& t, T const& Obj)->T{ return Derivative(nf, t, Obj); });
 
     // Use "_nsteps" steps for the evolution.
-    auto t        = t0;
-    auto Obj      = Obj0;
-    const auto dt = ( t1 - t0 ) / _nsteps;
-    for (auto k = 0; k < _nsteps; k++)
+    double t        = t0;
+    T      Obj      = Obj0;
+    const double dt = ( t1 - t0 ) / _nsteps;
+    for (int k = 0; k < _nsteps; k++)
       {
 	Obj += dObj(t, Obj, dt);
 	t   += dt;
@@ -75,12 +75,12 @@ namespace apfel
   template<class T>
   T MatchedEvolution<T>::Evaluate(double const& mu) const
   {
-    auto const mu2  = pow(mu,2);
-    auto const lmu2 = log(mu2);
+    const double mu2  = pow(mu,2);
+    const double lmu2 = log(mu2);
 
     // Find initial and final number of flavours.
-    const auto nfi = NF(_MuRef2, _Thresholds2);
-    const auto nff = NF(mu2, _Thresholds2);
+    const int nfi = NF(_MuRef2, _Thresholds2);
+    const int nff = NF(mu2, _Thresholds2);
 
     // Don't do the matching is initial and final number of flavours
     // are equal.
@@ -88,16 +88,16 @@ namespace apfel
       return EvolveObject(nfi, _LogMuRef2, lmu2, _ObjRef);
 
     // Direction of the evolution
-    const auto sgn = signbit(nfi - nff);
+    const bool sgn = signbit(nfi - nff);
 
     // Create a vector of objects containing the object right above
     // each threshold to make sure that every time a threshold is
     // crossed a new object with a different convolution map is
     // created (effective only when a "Set" object is evolved).
-    auto vobj = _ObjRef;
-    auto ti   = _LogMuRef2;
-    auto tf   = _LogThresholds2[(sgn ? nfi : nfi-1)];
-    for(auto inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
+    T      vobj = _ObjRef;
+    double ti   = _LogMuRef2;
+    double tf   = _LogThresholds2[(sgn ? nfi : nfi-1)];
+    for (int inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
         vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
 	ti = tf + (sgn ? 1 : -1) * eps8;  // Add "eps8" to make sure to be above the threshold

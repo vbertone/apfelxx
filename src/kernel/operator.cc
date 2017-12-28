@@ -48,7 +48,7 @@ namespace apfel
 	const int gbound = ( sg.IsExternal() ? nx : 0 );
 
 	_Operator[_ig].resize(gbound+1, nx+1, 0);
-	for (auto beta = 0; beta <= gbound; beta++)
+	for (int beta = 0; beta <= gbound; beta++)
 	  {
 	    _xbeta = xg[beta];
 	    // Local function. Can be computed outside the 'alpha'
@@ -74,7 +74,7 @@ namespace apfel
 
 		// Integral.
 		double I = 0;
-		for (auto jint = nmin; jint < nmax; jint++)
+		for (int jint = nmin; jint < nmax; jint++)
 		  {
 		    // Define integration bounds of the first
 		    // iteration.
@@ -122,7 +122,7 @@ namespace apfel
 
     // Compute the the distribution on the subgrids.
     int const ng = _grid.nGrids(); //sg.size();
-    for (auto ig = 0; ig < ng; ig++)
+    for (int ig = 0; ig < ng; ig++)
       {
         int const nx = _grid.GetSubGrid(ig).nx();
 
@@ -130,10 +130,10 @@ namespace apfel
 	// and the distribution has to be done in a standard way.
 	if (this->_grid.GetSubGrid(ig).IsExternal())
 	  {
-	    for (auto alpha = 0; alpha <= nx; alpha++)
+	    for (int alpha = 0; alpha <= nx; alpha++)
 	      {
 		s[ig][alpha] = 0;
-		for (auto beta = alpha; beta <= nx; beta++)
+		for (int beta = alpha; beta <= nx; beta++)
 		  s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
 	      }
 	  }
@@ -142,16 +142,16 @@ namespace apfel
 	// of the operator.
 	else
 	  {
-	    for (auto alpha = 0; alpha <= nx; alpha++)
+	    for (int alpha = 0; alpha <= nx; alpha++)
 	      {
 		s[ig][alpha] = 0;
-		for (auto beta = alpha; beta <= nx; beta++)
+		for (int beta = alpha; beta <= nx; beta++)
 		  s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
 	      }
 	  }
 
 	// Set to zero the values above one.
-	for (auto alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
+	for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
 	  s[ig][alpha] = 0;
 
 	// Compute the the distribution on the joint grid.
@@ -161,7 +161,7 @@ namespace apfel
         else
           xtrans = 1 + 2 * eps12;
 
-        for (auto alpha = 0; alpha <= nx; alpha++)
+        for (int alpha = 0; alpha <= nx; alpha++)
           {
             const double x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
             if (xtrans - x < eps12)
@@ -171,7 +171,7 @@ namespace apfel
       }
 
     // Set to zero the values above one.
-    for (auto alpha = 0; alpha < this->_grid.GetJointGrid().InterDegree(); alpha++)
+    for (int alpha = 0; alpha < this->_grid.GetJointGrid().InterDegree(); alpha++)
       j.push_back(0);
 
     return Distribution{d, s, j};
@@ -187,7 +187,7 @@ namespace apfel
     const auto v = _Operator;
 
     const int ng = _grid.nGrids(); //sg.size();
-    for (auto ig = 0; ig < ng; ig++)
+    for (int ig = 0; ig < ng; ig++)
       {
         const int nx = this->_grid.GetSubGrid(ig).nx();
 
@@ -195,11 +195,11 @@ namespace apfel
 	// has to be done in a standard way.
 	if (this->_grid.GetSubGrid(ig).IsExternal())
 	  {
-	    for (auto alpha = 0; alpha <= nx; alpha++)
-	      for (auto beta = alpha; beta <= nx; beta++)
+	    for (int alpha = 0; alpha <= nx; alpha++)
+	      for (int beta = alpha; beta <= nx; beta++)
 		{
 		  _Operator[ig](alpha,beta) = 0;
-		  for (auto gamma = alpha; gamma <= beta; gamma++)
+		  for (int gamma = alpha; gamma <= beta; gamma++)
 		    _Operator[ig](alpha,beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
 		}
 	  }
@@ -208,11 +208,11 @@ namespace apfel
 	else
 	  {
 	    _Operator[ig].resize(nx+1, nx+1, 0);
-	    for (auto alpha = 0; alpha <= nx; alpha++)
-	      for (auto beta = alpha; beta <= nx; beta++)
+	    for (int alpha = 0; alpha <= nx; alpha++)
+	      for (int beta = alpha; beta <= nx; beta++)
 		{
 		  _Operator[ig](alpha,beta) = 0;
-		  for (auto gamma = alpha; gamma <= beta; gamma++)
+		  for (int gamma = alpha; gamma <= beta; gamma++)
 		    _Operator[ig](alpha,beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
 		}
 	  }

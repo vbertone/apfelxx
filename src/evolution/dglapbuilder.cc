@@ -227,12 +227,12 @@ namespace apfel {
 	OpMapNNNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects
+    // Define object of the structure containing the DglapObjects.
     map<int,DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
     // of operators.
-    for (auto nf = nfi; nf <= nff; nf++)
+    for (int nf = nfi; nf <= nff; nf++)
       {
 	DglapObjects obj;
 	obj.Threshold = Thresholds[nf-1];
@@ -399,7 +399,8 @@ namespace apfel {
       }
 
     // ===============================================================
-    // NNLO Matching conditions.
+    // NNLO Matching conditions. Set to zero for now because they are
+    // not know yet.
     map<int,map<int,Operator>> MatchNNLO;  
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -434,12 +435,12 @@ namespace apfel {
 	OpMapNNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects
+    // Define object of the structure containing the DglapObjects.
     map<int,DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
     // of operators.
-    for (auto nf = nfi; nf <= nff; nf++)
+    for (int nf = nfi; nf <= nff; nf++)
       {
 	DglapObjects obj;
 	obj.Threshold = Thresholds[nf-1];
@@ -525,7 +526,7 @@ namespace apfel {
     // Compute coupling above and below the thresholds.
     map<int,double> asThUp;
     map<int,double> asThDown;
-    for(auto const& obj : DglapObj)
+    for (auto const& obj : DglapObj)
       {
 	const int    nf  = obj.first;
 	const double thr = obj.second.Threshold;
@@ -579,7 +580,7 @@ namespace apfel {
   {
     // Collect thresholds.
     vector<double> Thresholds;
-    for(auto const& obj : DglapObj)
+    for (auto const& obj : DglapObj)
       {
 	const int    nf  = obj.first;
 	const double thr = obj.second.Threshold;
@@ -606,7 +607,7 @@ namespace apfel {
   {
     // Collect thresholds.
     vector<double> Thresholds;
-    for(auto const& obj : DglapObj)
+    for (auto const& obj : DglapObj)
       {
 	const int    nf  = obj.first;
 	const double thr = obj.second.Threshold;
@@ -670,7 +671,7 @@ namespace apfel {
     // Compute coupling above and below the thresholds.
     map<int,double> asThUp;
     map<int,double> asThDown;
-    for (auto nf = nfi + 1; nf <= nff; nf++)
+    for (int nf = nfi + 1; nf <= nff; nf++)
       {
 	asThDown.insert({nf,Alphas(Thresholds[nf-1])/FourPi});
 	asThUp.insert({nf,Alphas(Thresholds[nf-1]+eps8)/FourPi});

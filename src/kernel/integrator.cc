@@ -100,14 +100,14 @@ namespace apfel
     double c2  = c1 - aa;
 
     double s8  = 0;
-    for (auto i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
       {
         double u = gq_x[1][i] * c2;
         s8 += gq_w[1][i] * ( integrand(c1+u) + integrand(c1-u) );
       }
 
     double s16 = 0;
-    for (auto i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
       {
         double u = gq_x[2][i] * c2;
         s16 += gq_w[2][i] * ( integrand(c1+u) + integrand(c1-u) );
@@ -168,7 +168,7 @@ namespace apfel
     double I  = 0;
     const double k1 = 0.5 * ( b - a );
     const double k2 = k1 + a;
-    for(auto i = 0; i < (int) gq_x[m].size(); i++)
+    for (int i = 0; i < (int) gq_x[m].size(); i++)
       {
         const double delta = gq_x[m][i] * k1;
 	I += gq_w[m][i] * ( integrand( k2 + delta ) + integrand( k2 - delta ) );

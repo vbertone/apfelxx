@@ -8,11 +8,9 @@
 #include "apfel/convolutionmap.h"
 
 namespace apfel {
-
   //_________________________________________________________________________________
   ConvolutionMap::ConvolutionMap(string const& name):
     _name(name)
   {
   }
-
 }

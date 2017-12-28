@@ -34,7 +34,7 @@ namespace apfel {
   Set<T> Dglap<T>::MatchObject(bool const& Up, int const& nf, Set<T> const& f) const
   {
     // Get matching conditions.
-    auto MC = _MatchingConditions(Up, nf);
+    Set<Operator> MC = _MatchingConditions(Up, nf);
 
     // Create the object 'g' with the same convolution map of the
     // matching conditions but containing the same objects of the
@@ -42,7 +42,7 @@ namespace apfel {
     Set<T> g{MC.GetMap(),f.GetObjects()};
 
     // Convolute 'MC' and 'g'.
-    auto MO = MC * g;
+    Set<T> MO = MC * g;
     MO.SetMap(_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap());
 
     // Return the convoluted object with the map on the next evolution

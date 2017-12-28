@@ -33,8 +33,8 @@ namespace apfel {
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
-    auto const id = sg.InterDegree();
-    int bound = beta - id;
+    const int id = sg.InterDegree();
+    int bound    = beta - id;
     if (id > beta)
       bound = 0;
     if (lnx < lxsg[bound] || lnx >= lxsg[beta+1])
@@ -48,7 +48,7 @@ namespace apfel {
 
     // Compute the interpolant.
     double w_int = 1;
-    for (auto delta = beta-j; delta <= beta-j+id; delta++)
+    for (int delta = beta-j; delta <= beta-j+id; delta++)
       if (delta != beta)
         w_int *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
 
@@ -64,7 +64,7 @@ namespace apfel {
     if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 
-    const auto low = lower_bound(xsg.begin()+1, xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
+    const int low = lower_bound(xsg.begin()+1, xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
     bounds[0] = bounds[1] = low;
 
     if (abs(x - xsg[low]) <= eps12)

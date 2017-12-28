@@ -33,20 +33,20 @@ namespace apfel {
     Timer t;
 
     // Save initial conditions.
-    const auto nsteps = Object.GetNumberOfSteps();
-    const auto ObjRef = Object.GetObjectRef();
-    const auto MuRef  = Object.GetMuRef();
+    const int    nsteps = Object.GetNumberOfSteps();
+    const T      ObjRef = Object.GetObjectRef();
+    const double MuRef  = Object.GetMuRef();
 
     // Set number of steps of the RK algorith to 1.
     Object.SetNumberOfSteps(1);
 
     // Find the point on the QGrid right below MuRef.
-    const auto tQ = lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
+    const int tQ = lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
 
     // Loop on "_Qg" below "MuRef".
-    for (auto iQ = tQ; iQ >= 0; iQ--)
+    for (int iQ = tQ; iQ >= 0; iQ--)
       {
-	auto o = Object.Evaluate(this->_Qg[iQ]);
+	T o = Object.Evaluate(this->_Qg[iQ]);
 	this->_GridValues.push_back(o);
 	Object.SetObjectRef(o);
 	Object.SetMuRef(this->_Qg[iQ]);
@@ -58,9 +58,9 @@ namespace apfel {
     // Loop on "_Qg" above "MuRef".
     Object.SetObjectRef(ObjRef);
     Object.SetMuRef(MuRef);
-    for (auto iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
+    for (int iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
       {
-	auto o = Object.Evaluate(this->_Qg[iQ]);
+	T o = Object.Evaluate(this->_Qg[iQ]);
 	this->_GridValues.push_back(o);
 	Object.SetObjectRef(o);
 	Object.SetMuRef(this->_Qg[iQ]);
@@ -135,9 +135,8 @@ namespace apfel {
 
     // Loop over the nodes.
     double result = 0;
-    for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
+    for (int tau = get<1>(bounds); tau < get<2>(bounds); tau++)
       result += Interpolant(get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x);
-
     return result;
   };
 
@@ -150,9 +149,8 @@ namespace apfel {
 
     // Loop over the nodes.
     double result = 0;
-    for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
+    for (int tau = get<1>(bounds); tau < get<2>(bounds); tau++)
       result += Interpolant(get<0>(bounds), tau, fq) * this->_GridValues[tau].at(i).Evaluate(x);
-
     return result;
   }
 
@@ -165,7 +163,7 @@ namespace apfel {
 
     // Loop over the nodes.
     double result = 0;
-    for (auto tau = get<1>(bounds); tau < get<2>(bounds); tau++)
+    for (int tau = get<1>(bounds); tau < get<2>(bounds); tau++)
       result += Interpolant(get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x,z);
 
     return result;
@@ -183,7 +181,7 @@ namespace apfel {
 
     // Fill in map.
     map<int,double> result;
-    for (auto tau = lower; tau < upper; tau++)
+    for (int tau = lower; tau < upper; tau++)
       {
 	const auto& obj = this->_GridValues[tau].GetObjects();
 	const double w = Interpolant(cp, tau, fq);

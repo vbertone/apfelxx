@@ -106,7 +106,7 @@ namespace apfel {
     // function, GammaCusp, gammaV, and Collins-Soper anomalous
     // dimensions.
     map<int,map<int,Set<Operator>>> MatchingFunctionsPDFs;
-    for (auto nf = nfi; nf <= nff; nf++)
+    for (int nf = nfi; nf <= nff; nf++)
       {
 	TmdObjects obj;
 

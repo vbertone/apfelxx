@@ -31,7 +31,7 @@ namespace apfel {
       PhysMap[0] = PhysMap[21];
 
     // Quarks (Fill in with zero if they don't exist).
-    for (auto i = -6; i <= 6; i++)
+    for (int i = -6; i <= 6; i++)
       if (PhysMap.find(i) == PhysMap.end())
 	PhysMap[i] = 0;
 

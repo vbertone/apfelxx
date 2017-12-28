@@ -34,12 +34,12 @@ namespace apfel
 
     _xsg[0] = _xMin;
     double const exps = exp(_Step);
-    for (auto ix = 1; ix < (int) _xsg.size(); ix++)
+    for (int ix = 1; ix < (int) _xsg.size(); ix++)
       _xsg[ix] = _xsg[ix-1] * exps;
     _xsg[_nx] = 1;
 
     _lxsg.resize(_xsg.size());
-    for (auto ix = 0; ix < (int) _xsg.size(); ix++)
+    for (int ix = 0; ix < (int) _xsg.size(); ix++)
       _lxsg[ix] = log(_xsg[ix]);
   }
 
@@ -66,11 +66,11 @@ namespace apfel
     // same width of the last bin in log scale.
     double const step = - log( xsg[_nx-1] );
     double const exps = exp(step);
-    for (auto ix = _nx; ix < (int) _xsg.size(); ix++)
+    for (int ix = _nx; ix < (int) _xsg.size(); ix++)
       _xsg[ix] = _xsg[ix-1] * exps;
 
     _lxsg.resize(_xsg.size());
-    for (auto ix = 0; ix < (int) _xsg.size(); ix++)
+    for (int ix = 0; ix < (int) _xsg.size(); ix++)
       _lxsg[ix] = log(_xsg[ix]);
   }
 
@@ -125,7 +125,7 @@ namespace apfel
     os << "IsExternal  = " << sg._IsExternal << "\n";
     os << "Step        = " << sg._Step << "\n";
     os << "xsg         = ";
-    for (const auto &v: sg._xsg) os << v << " ";
+    for (const auto& v: sg._xsg) os << v << " ";
     os << "\n\n";
     return os;
   }

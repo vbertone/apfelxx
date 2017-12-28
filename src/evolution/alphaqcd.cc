@@ -27,8 +27,8 @@ namespace apfel {
     // Initialize all coefficients of the QCD beta function for all
     // numbers of flavours.
     _bQCD.resize(4,4);
-    for (auto ipt = 0; ipt <= 3; ipt++)
-	for (auto nf = 3; nf <= 6; nf++)
+    for (int ipt = 0; ipt <= 3; ipt++)
+	for (int nf = 3; nf <= 6; nf++)
 	_bQCD(nf-3, ipt) = betaQCD(ipt, nf);
 
     // Compute logs of muth2 / m2 needed by the matching conditions.
@@ -43,7 +43,7 @@ namespace apfel {
     _BetaFunction = [&] (int const& nf, double const& as)-> double
       {
 	double bt = 0, powas = as * as;
-	for (auto i = 0; i <= _pt; i++)
+	for (int i = 0; i <= _pt; i++)
 	  {
 	    bt -= powas * _bQCD(nf-3, i);
 	    powas *= as;
@@ -54,11 +54,11 @@ namespace apfel {
     // Matching condition lambda function.
     _MatchingConditions = [&,LogKth] (bool const& Up, int const& nf, double const& Coup)-> double
       {
-	const auto sgn = ( Up ? 1 : -1);
-	const auto ep = Coup / FourPi;
+	const int sgn     = ( Up ? 1 : -1);
+	const double ep   = Coup / FourPi;
 	const double c[4] = { 1, sgn * 2. / 3. * LogKth[nf], 4. / 9. * pow(LogKth[nf],2) + sgn *  38. / 3. * LogKth[nf] + sgn * 14. / 3., 0 };
 	double match = 0, powep = 1;
-	for (auto i = 0; i <= _pt; i++)
+	for (int i = 0; i <= _pt; i++)
 	  {
 	    match += c[i] * powep;
 	    powep *= ep;

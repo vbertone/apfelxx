@@ -56,7 +56,7 @@ namespace apfel
     // without taking into account the threholds.
     vector<double> fq = {_TabFunc(_QMin)};
     double Step = ( _TabFunc(_QMax) - _TabFunc(_QMin) ) / _nQ;
-    for (auto iq = 1; iq <= _nQ; iq++)
+    for (int iq = 1; iq <= _nQ; iq++)
       fq.push_back(fq.back()+Step);
 
     // Identify the indices of the grid points that fall right below
@@ -65,7 +65,7 @@ namespace apfel
     // thresholds.
     _nQg.push_back(0);
     vector<double> fqTh = {_TabFunc(_QMin)};
-    for (auto isg = nfin+1; isg <= nffi; isg++)
+    for (int isg = nfin+1; isg <= nffi; isg++)
       {
 	fqTh.push_back(_TabFunc(_Thresholds[isg-1]));
 	_nQg.push_back(lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
@@ -77,7 +77,7 @@ namespace apfel
     // adjust it. Check also whether there is any subgrid whose number
     // of points is smaller than the interpolation degree plus one.
     // If so, adjust the interpolation degree.
-    for (auto isg = 0; isg < (int) _nQg.size() - 1; isg++)
+    for (int isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
 	if (_nQg[isg+1] - _nQg[isg] < 2)
 	  _nQg[isg+1]  = _nQg[isg] + 2;
@@ -91,15 +91,15 @@ namespace apfel
     // Now construct the actual grid in such a way that the threshold
     // concides with nodes of the grid.
     _fQg.push_back(_TabFunc(_QMin));
-    for (auto isg = 0; isg < (int) _nQg.size() - 1; isg++)
+    for (int isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
 	Step = ( fqTh[isg+1] - fqTh[isg] ) / ( _nQg[isg+1] - _nQg[isg] - 1 );
-	for (auto iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++) _fQg.push_back(_fQg.back()+Step);
+	for (int iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++) _fQg.push_back(_fQg.back()+Step);
 	_fQg.push_back(_fQg.back());
       }
 
     // Displace slightly the values below and above the thresholds.
-    for (auto isg = 1; isg < (int) _nQg.size() - 1; isg++)
+    for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
       {
 	_fQg[_nQg[isg]-1] *= 1 - eps15;
 	_fQg[_nQg[isg]]   *= 1 + eps15;
@@ -150,7 +150,7 @@ namespace apfel
 	break;
 
     // Compute the interpolant
-    for (auto delta = tau-j; delta <= tau-j+_InterDegree; delta++)
+    for (int delta = tau-j; delta <= tau-j+_InterDegree; delta++)
       if (delta != tau)
 	w_int *= ( fq - _fQg[delta] ) / ( _fQg[tau] - _fQg[delta] );
 
@@ -170,7 +170,7 @@ namespace apfel
 
     // If Q falls in the tiny gap at the thresholds assume the node
     // below.
-    for (auto iQ = 1; iQ < (int) _nQg.size() - 1; iQ++)
+    for (int iQ = 1; iQ < (int) _nQg.size() - 1; iQ++)
       if (Q > _Qg[_nQg[iQ]-1] && Q <= _Qg[_nQg[iQ]])
 	{
 	  get<1>(bounds) = _nQg[iQ] - 1;
@@ -199,7 +199,7 @@ namespace apfel
       }
 
     // Determine the actual bounds.
-    const auto low = lower_bound(_Qg.begin()+1, _Qg.end(), Q) - _Qg.begin();
+    const int low = lower_bound(_Qg.begin()+1, _Qg.end(), Q) - _Qg.begin();
     get<1>(bounds) = low;
     get<2>(bounds) = low;
 
@@ -218,11 +218,11 @@ namespace apfel
   template<class T>
   T QGrid<T>::Evaluate(double const& Q) const
   {
-    auto const bounds = SumBounds(Q);
-    auto const fq     = _TabFunc(Q);
+    const auto bounds = SumBounds(Q);
+    const auto fq     = _TabFunc(Q);
 
     // first create a copy of template object with the first component
-    auto tau = get<1>(bounds);
+    int tau = get<1>(bounds);
     T result = Interpolant(get<0>(bounds), tau, fq) * _GridValues[tau];
 
     // then loop and add the extra terms

@@ -76,7 +76,6 @@ namespace apfel
   {
     for (auto& t : o.GetTerms())
       _terms.push_back(t);
-
     return *this;
   }
 
@@ -96,7 +95,6 @@ namespace apfel
 	result += t.object1.Evaluate(x) * t.object2.Evaluate(z);
       else
 	result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
-
     return result;
   }
 
@@ -117,12 +115,9 @@ namespace apfel
 	    vt.push_back({sc, o1, o2});
 	  }
       }
-
     // Clear "_terms" and equal it to "vt".
     _terms.clear();
     _terms = vt;
-
     return *this;
   }
-
 }
