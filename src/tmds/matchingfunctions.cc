@@ -352,4 +352,52 @@ namespace apfel
 
     return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
   }
+
+  //_________________________________________________________________________________
+  C1nsff::C1nsff():
+    Expression()
+  {
+  }
+  double C1nsff::Regular(double const& x) const
+  {
+    return CF * ( 2 * ( 1 - x ) + 4 * ( 1 + x * x ) * log(x) / ( 1 - x ) );
+  }
+  double C1nsff::Local(double const&) const
+  {
+    return - CF * zeta2;
+  }
+
+  //_________________________________________________________________________________
+  C1qgff::C1qgff():
+    Expression()
+  {
+  }
+  double C1qgff::Regular(double const& x) const
+  {
+    return CF * ( 2 * x + 4 * ( 1 + pow(1 - x, 2) ) * log(x) / x );
+  }
+
+  //_________________________________________________________________________________
+  C1gqff::C1gqff():
+    Expression()
+  {
+  }
+  double C1gqff::Regular(double const& x) const
+  {
+    return TR * ( 4 * x * ( 1 - x ) + 4 * ( 1 - 2 * x * ( 1 - x ) ) * log(x) );
+  }
+
+  //_________________________________________________________________________________
+  C1ggff::C1ggff():
+    Expression()
+  {
+  }
+  double C1ggff::Regular(double const& x) const
+  {
+    return 8 * CA * pow(1 - x * ( 1 - x ), 2) * log(x) / x / ( 1 - x );
+  }
+  double C1ggff::Local(double const&) const
+  {
+    return - CA * zeta2;
+  }
 }

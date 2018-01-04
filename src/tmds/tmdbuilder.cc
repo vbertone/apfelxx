@@ -53,6 +53,7 @@ namespace apfel {
 
     // ===============================================================
     // NLO matching functions operators.
+    // PDFs
     map<int,map<int,Operator>> MatchPDFsNLO;
     const Operator O1ns{g, C1ns{}, IntEps};
     const Operator O1qg{g, C1qg{}, IntEps};
@@ -70,6 +71,26 @@ namespace apfel {
 	OM.insert({EvolutionBasisQCD::PGQ,  O1gq});
 	OM.insert({EvolutionBasisQCD::PGG,  O1gg});
 	MatchPDFsNLO.insert({nf,OM});
+      }
+
+    // FFs
+    map<int,map<int,Operator>> MatchFFsNLO;
+    const Operator O1nsff{g, C1nsff{}, IntEps};
+    const Operator O1qgff{g, C1qgff{}, IntEps};
+    const Operator O1gqff{g, C1gqff{}, IntEps};
+    const Operator O1ggff{g, C1ggff{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O1qgffnf = nf * O1qgff;
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O1nsff});
+	OM.insert({EvolutionBasisQCD::PNSM, O1nsff});
+	OM.insert({EvolutionBasisQCD::PNSV, O1nsff});
+	OM.insert({EvolutionBasisQCD::PQQ,  O1nsff});
+	OM.insert({EvolutionBasisQCD::PQG,  O1qgffnf});
+	OM.insert({EvolutionBasisQCD::PGQ,  O1gqff});
+	OM.insert({EvolutionBasisQCD::PGG,  O1ggff});
+	MatchFFsNLO.insert({nf,OM});
       }
 
     // ===============================================================
@@ -158,9 +179,9 @@ namespace apfel {
 	obj.MatchingFunctionsPDFs.insert({1, Set<Operator>{evb, MatchPDFsNLO.at(nf)}});
 	obj.MatchingFunctionsPDFs.insert({2, Set<Operator>{evb, MatchPDFsNNLO.at(nf)}});
 
-	//obj.MatchingFunctionsFFs.insert({0, Set<Operator>{evb, MatchLO}});
-	//obj.MatchingFunctionsFFs.insert({1, Set<Operator>{evb, MatchFFsNLO}});
-	//obj.MatchingFunctionsFFs.insert({2, Set<Operator>{evb, MatchFFsNNLO}});
+	obj.MatchingFunctionsFFs.insert({0, Set<Operator>{evb, MatchLO}});
+	obj.MatchingFunctionsFFs.insert({1, Set<Operator>{evb, MatchFFsNLO.at(nf)}});
+	//obj.MatchingFunctionsFFs.insert({2, Set<Operator>{evb, MatchFFsNNLO.at(nf)}});
 
 	TmdObj.insert({nf, obj});
       }
@@ -198,12 +219,41 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
-							  map<int,DglapObjects>                          const& DglapObj,
-							  function<Set<Distribution>(double const&)>     const& CollPDFs,
-							  function<double(double const&)>                const& Mub,
-							  int                                            const& PerturbativeOrder,
-							  function<double(double const&)>                const& Alphas)
+  function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(map<int,TmdObjects>                            const& TmdObj,
+										       map<int,DglapObjects>                          const& DglapObj,
+										       function<Set<Distribution>(double const&)>     const& CollFFs,
+										       function<double(double const&, double const&)> const& fNP,
+										       function<double(double const&)>                const& Mu0b,
+										       function<double(double const&)>                const& Mub,
+										       int                                            const& PerturbativeOrder,
+										       function<double(double const&)>                const& Alphas,
+										       double                                         const& IntEps)
+  {
+    // Computed TMDs at the initial scale by convoluting FFs,
+    // matching functions, and non-perturbative function.
+    const auto MatchedTmdFFs = MatchTmdFFs(TmdObj, DglapObj, CollFFs, Mub, PerturbativeOrder, Alphas);
+
+    // Compute TMD evolution factors.
+    const auto EvolFactors = EvolutionFactors(TmdObj, Mu0b, Mub, PerturbativeOrder, Alphas, IntEps);
+
+    // Construct the function that returns the product and includes
+    // the non perturbative function. Include a factor 1/z^2 typical
+    // of FFs.
+    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
+      {
+	return EvolFactors(b, muf, zetaf) * ( [&] (double const& z) -> double{ return fNP(z, b) / z / z; } * MatchedTmdFFs(b) );
+      };
+
+    return EvolvedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                        const& TmdObj,
+							  map<int,DglapObjects>                      const& DglapObj,
+							  function<Set<Distribution>(double const&)> const& CollPDFs,
+							  function<double(double const&)>            const& Mub,
+							  int                                        const& PerturbativeOrder,
+							  function<double(double const&)>            const& Alphas)
   {
     // Retrieve thresholds from "TmdObj".
     vector<double> thrs;
@@ -297,11 +347,122 @@ namespace apfel {
 	  };
       }
 
-    // Construct function that returns the product of: matching
-    // functions, PDFs, NP function.
+    // Construct function that returns the product of matching
+    // functions and collinear FFs.
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
       {
 	return MatchFunc(b) * CollPDFs(Mub(b));
+      };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  function<Set<Distribution>(double const&)> MatchTmdFFs(map<int,TmdObjects>                        const& TmdObj,
+							 map<int,DglapObjects>                      const& DglapObj,
+							 function<Set<Distribution>(double const&)> const& CollFFs,
+							 function<double(double const&)>            const& Mub,
+							 int                                        const& PerturbativeOrder,
+							 function<double(double const&)>            const& Alphas)
+  {
+    // Retrieve thresholds from "TmdObj".
+    vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+	const int    nf  = obj.first;
+	const double thr = obj.second.Threshold;
+	if ((int) thrs.size() < nf)
+	  thrs.resize(nf);
+	thrs[nf-1] = thr;
+      }
+
+    // Define the LX fuction as in eq. (4.9) of arXiv:1604.07869.
+    const double C0 = 2 * exp(- emc);
+    const auto LX = [C0] (double const& mu, double const& b) -> double{ return 2 * log( b * mu / C0 ); };
+
+    // Matching functions as functions of the absolute value of the
+    // impact parameter b.
+    function<Set<Operator>(double const&)> MatchFunc;
+    if (PerturbativeOrder == 0)
+      MatchFunc = [=] (double const& b) -> Set<Operator>
+	{
+	  return TmdObj.at(NF(Mub(b),thrs)).MatchingFunctionsFFs.at(0);
+	};
+    else if (PerturbativeOrder == 1)
+      MatchFunc = [=] (double const& b) -> Set<Operator>
+	{
+	  const double mu   = Mub(b);
+	  const int nf      = NF(mu,thrs);
+	  const auto mf     = TmdObj.at(nf).MatchingFunctionsFFs;
+	  const auto sf     = DglapObj.at(nf).SplittingFunctions;
+	  const double Lmu  = LX(mu,b);
+	  const double coup = Alphas(mu) / FourPi;
+	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
+	};
+/*
+    else if (PerturbativeOrder == 2)
+      {
+	// Precompute set of operators on the O(as^2) bit that are
+	// proportional to the different powers of Lmu (see eq. (2.37)
+	// of https://arxiv.org/pdf/1706.01473.pdf).
+	map<int,Set<Operator>> SetLcoef;
+	map<int,Set<Operator>> SetL2coef;
+	for (auto const& to : TmdObj)
+	  {
+	    const int nf    = to.first;
+	    const double b0 = to.second.Beta.at(0);
+	    const auto mf   = to.second.MatchingFunctionsFFs;
+	    const auto sf   = DglapObj.at(nf).SplittingFunctions;
+
+	    // Construct matricial product of P0 * P0 and C1 * P0 (see
+	    // eq. (B.15) https://arxiv.org/pdf/1706.01473.pdf).
+	    const auto P0 = sf.at(0);
+	    const auto P1 = sf.at(1);
+	    const auto C1 = mf.at(1);
+	    const auto ConvMap = P0.GetMap();
+
+	    map<int,Operator> MapL2coef;
+	    MapL2coef.insert({EvolutionBasisQCD::PNSP, ( P0.at(0) * P0.at(0)                       - b0 * P0.at(0) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PNSM, ( P0.at(1) * P0.at(1)                       - b0 * P0.at(1) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PNSV, ( P0.at(2) * P0.at(2)                       - b0 * P0.at(2) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PQQ,  ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) - b0 * P0.at(3) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PQG,  ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) - b0 * P0.at(4) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PGQ,  ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) - b0 * P0.at(5) ) / 2});
+	    MapL2coef.insert({EvolutionBasisQCD::PGG,  ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) - b0 * P0.at(6) ) / 2});
+
+	    map<int,Operator> MapLcoef;
+	    MapLcoef.insert({EvolutionBasisQCD::PNSP, P1.at(0) + C1.at(0) * P0.at(0)                       - b0 * C1.at(0)});
+	    MapLcoef.insert({EvolutionBasisQCD::PNSM, P1.at(1) + C1.at(1) * P0.at(1)                       - b0 * C1.at(1)});
+	    MapLcoef.insert({EvolutionBasisQCD::PNSV, P1.at(2) + C1.at(2) * P0.at(2)                       - b0 * C1.at(2)});
+	    MapLcoef.insert({EvolutionBasisQCD::PQQ,  P1.at(3) + C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) - b0 * C1.at(3)});
+	    MapLcoef.insert({EvolutionBasisQCD::PQG,  P1.at(4) + C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) - b0 * C1.at(4)});
+	    MapLcoef.insert({EvolutionBasisQCD::PGQ,  P1.at(5) + C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) - b0 * C1.at(5)});
+	    MapLcoef.insert({EvolutionBasisQCD::PGG,  P1.at(6) + C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) - b0 * C1.at(6)});
+
+	    SetL2coef.insert({nf,Set<Operator>{ConvMap, MapL2coef}});
+	    SetLcoef.insert({nf,Set<Operator>{ConvMap, MapLcoef}});
+	  }
+
+	// Now contruct the actual matching-function function.
+	MatchFunc = [=] (double const& b) -> Set<Operator>
+	  {
+	    const double mu   = Mub(b);
+	    const int nf      = NF(mu,thrs);
+	    const auto mf     = TmdObj.at(nf).MatchingFunctionsFFs;
+	    const auto sf     = DglapObj.at(nf).SplittingFunctions;
+	    const double Lmu  = LX(mu,b);
+	    const double coup = Alphas(mu) / FourPi;
+	    const auto nlo    = mf.at(1) - Lmu * sf.at(0);
+	    const auto nnlo   = mf.at(2) - Lmu * ( SetLcoef.at(nf) - Lmu * SetL2coef.at(nf) );
+	    return mf.at(0) + coup * ( nlo + coup * nnlo );
+	  };
+      }
+*/
+    // Construct function that returns the product of matching
+    // functions and collinear FFs.
+    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
+      {
+	return MatchFunc(b) * CollFFs(Mub(b));
       };
 
     return MatchedTMDs;

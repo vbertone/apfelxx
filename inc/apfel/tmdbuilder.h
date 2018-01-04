@@ -71,15 +71,41 @@ namespace apfel
 											  double                                         const& IntEps = 1e-7);
 
   /**
+   * @brief Function that returns the matched and evolved TMD FFs in
+   * b-space as functions of the final scale and rapidity zeta. It
+   * assumes the zeta-prescription.
+   */
+    function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(map<int,TmdObjects>                            const& TmdObj,
+											 map<int,DglapObjects>                          const& DglapObj,
+											 function<Set<Distribution>(double const&)>     const& CollFFs,
+											 function<double(double const&, double const&)> const& fNP,
+											 function<double(double const&)>                const& Mu0b,
+											 function<double(double const&)>                const& Mub,
+											 int                                            const& PerturbativeOrder,
+											 function<double(double const&)>                const& Alphas,
+											 double                                         const& IntEps = 1e-7);
+
+  /**
    * @brief Function that returns the matched TMD PDFs in b-space as
    * functions of the initial scale. It assumes the zeta-prescription.
    */
-    function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
-							    map<int,DglapObjects>                          const& DglapObj,
-							    function<Set<Distribution>(double const&)>     const& CollPDFs,
-							    function<double(double const&)>                const& Mub,
-							    int                                            const& PerturbativeOrder,
-							    function<double(double const&)>                const& Alphas);
+    function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                        const& TmdObj,
+							    map<int,DglapObjects>                      const& DglapObj,
+							    function<Set<Distribution>(double const&)> const& CollPDFs,
+							    function<double(double const&)>            const& Mub,
+							    int                                        const& PerturbativeOrder,
+							    function<double(double const&)>            const& Alphas);
+
+  /**
+   * @brief Function that returns the matched TMD FFs in b-space as
+   * functions of the initial scale. It assumes the zeta-prescription.
+   */
+    function<Set<Distribution>(double const&)> MatchTmdFFs(map<int,TmdObjects>                        const& TmdObj,
+							   map<int,DglapObjects>                      const& DglapObj,
+							   function<Set<Distribution>(double const&)> const& CollPDFs,
+							   function<double(double const&)>            const& Mub,
+							   int                                        const& PerturbativeOrder,
+							   function<double(double const&)>            const& Alphas);
 
   /**
    * @brief Function that returns the TMD evolution factor as a

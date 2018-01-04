@@ -12,7 +12,7 @@
 namespace apfel
 {
   /**
-   * @brief The NLO matching function classes
+   * @brief The NLO matching function classes for PDFs
    * @brief References: arXiv:1604.07869 and arXiv:1706.01473.
    */
   //_________________________________________________________________________________
@@ -115,5 +115,48 @@ namespace apfel
     int const _nf;
     double    _A2;
     double    _A3;
+  };
+
+  /**
+   * @brief The NLO matching function classes for FFs
+
+   * @brief Reference: arXiv:1604.07869. Notice that the following
+   * expressions are implicitly multiplied by a factor x^2. This is
+   * because the convolution with FFs have the form:
+   *
+   * D(x) = C(x) \otimes d(x) / x^2 = (1/x^2) \int_x^1 (dy/y) [y^2 C(y)] d(x/y)
+   */
+  //_________________________________________________________________________________
+  class C1nsff: public Expression
+  {
+  public:
+    C1nsff();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+
+  //_________________________________________________________________________________
+  class C1qgff: public Expression
+  {
+  public:
+    C1qgff();
+    double Regular(double const& x) const;
+  };
+
+  //_________________________________________________________________________________
+  class C1gqff: public Expression
+  {
+  public:
+    C1gqff();
+    double Regular(double const& x) const;
+  };
+
+  //_________________________________________________________________________________
+  class C1ggff: public Expression
+  {
+  public:
+    C1ggff();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
   };
 }

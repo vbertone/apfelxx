@@ -50,8 +50,34 @@ namespace apfel
 						    double                                                                const& czetaf = 1,
 						    double                                                                const& IntEps = 1e-5);
 
+  /**
+   * @brief Functions that return the fully differential SIDIS cross
+   * section as function of the transverse momentum on the vector
+   * boson qT, taking as inputs the evolved TMD PDFs and FFs, the
+   * center-of-mass energy Vs, the inelasticity y, the momentum
+   * fractions of the incmoming and outgoing hadrons x and z,
+   * rapidity, the final TMD scales muf and zetaf.
+   */
+  function<double(double const&)> TmdCrossSectionSIDIS(double                                                                   const& Vs,
+						       double                                                                   const& x,
+						       double                                                                   const& y,
+						       double                                                                   const& z,
+						       function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
+						       function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDFFs,
+						       function<double(double const&)>                                          const& Alphas,
+						       function<vector<double>(double const&)>                                  const& fEWCharges,
+						       int                                                                      const& PerturbativeOrder,
+						       vector<double>                                                           const& Thresholds,
+						       double                                                                   const& cmuf = 1,
+						       double                                                                   const& czetaf = 1);
+
  /**
    * @brief Perturbative hard cross section for Drell-Yann.
    */
   double HardCrossSectionDY(int const& pt, double const& Alphas, int const& nf, double const& kappa);
+
+ /**
+   * @brief Perturbative hard cross section for SIDIS.
+   */
+  double HardCrossSectionSIDIS(int const& pt, double const& Alphas, int const& nf, double const& kappa);
 }
