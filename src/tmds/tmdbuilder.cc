@@ -95,6 +95,7 @@ namespace apfel {
 
     // ===============================================================
     // NNLO matching functions operators.
+    // PDFs
     map<int,map<int,Operator>> MatchPDFsNNLO;
     const Operator O2Vqqb{g, C2Vqqb{}, IntEps};
     const Operator O2ps{g, C2ps{}, IntEps};
@@ -117,6 +118,31 @@ namespace apfel {
 	OM.insert({EvolutionBasisQCD::PGQ,  O2gq});
 	OM.insert({EvolutionBasisQCD::PGG,  O2gg});
 	MatchPDFsNNLO.insert({nf,OM});
+      }
+
+    // FFs
+    map<int,map<int,Operator>> MatchFFsNNLO;
+    const Operator O2Vqqbff{g, C2Vqqbff{}, IntEps};
+    const Operator O2psff{g, C2psff{}, IntEps};
+    const Operator O2qgff{g, C2qgff{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O2Vqqff{g, C2Vqqff{nf}, IntEps};
+	const Operator O2qgffnf = nf * O2qgff;
+	const Operator O2gqff{g, C2gqff{nf}, IntEps};
+	const Operator O2ggff{g, C2ggff{nf}, IntEps};
+	const Operator O2nspff = O2Vqqff + O2Vqqbff;
+	const Operator O2nsmff = O2Vqqff - O2Vqqbff;
+	const Operator O2qqff  = O2nspff + nf * O2psff;
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O2nspff});
+	OM.insert({EvolutionBasisQCD::PNSM, O2nsmff});
+	OM.insert({EvolutionBasisQCD::PNSV, O2nsmff});
+	OM.insert({EvolutionBasisQCD::PQQ,  O2qqff});
+	OM.insert({EvolutionBasisQCD::PQG,  O2qgffnf});
+	OM.insert({EvolutionBasisQCD::PGQ,  O2gqff});
+	OM.insert({EvolutionBasisQCD::PGG,  O2ggff});
+	MatchFFsNNLO.insert({nf,OM});
       }
 
     // Define map containing the TmdObjects for each nf.
@@ -181,7 +207,7 @@ namespace apfel {
 
 	obj.MatchingFunctionsFFs.insert({0, Set<Operator>{evb, MatchLO}});
 	obj.MatchingFunctionsFFs.insert({1, Set<Operator>{evb, MatchFFsNLO.at(nf)}});
-	//obj.MatchingFunctionsFFs.insert({2, Set<Operator>{evb, MatchFFsNNLO.at(nf)}});
+	obj.MatchingFunctionsFFs.insert({2, Set<Operator>{evb, MatchFFsNNLO.at(nf)}});
 
 	TmdObj.insert({nf, obj});
       }
@@ -399,7 +425,6 @@ namespace apfel {
 	  const double coup = Alphas(mu) / FourPi;
 	  return mf.at(0) + coup * ( - Lmu * sf.at(0) + mf.at(1) );
 	};
-/*
     else if (PerturbativeOrder == 2)
       {
 	// Precompute set of operators on the O(as^2) bit that are
@@ -457,7 +482,6 @@ namespace apfel {
 	    return mf.at(0) + coup * ( nlo + coup * nnlo );
 	  };
       }
-*/
     // Construct function that returns the product of matching
     // functions and collinear FFs.
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>

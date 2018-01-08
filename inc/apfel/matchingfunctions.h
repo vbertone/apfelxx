@@ -159,4 +159,72 @@ namespace apfel
     double Regular(double const& x) const;
     double Local(double const&)     const;
   };
+
+  /**
+   * @brief The NNLO matching function classes for FFs.
+   *
+   * Thanks to Alexey Vladimirov for providing me with the numerical
+   * parameterisation.
+   */
+  //_________________________________________________________________________________
+  class C2Vqqff: public Expression
+  {
+  public:
+    C2Vqqff(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
+    double    _A3;
+  };
+
+  //_________________________________________________________________________________
+  class C2Vqqbff: public Expression
+  {
+  public:
+    C2Vqqbff();
+    double Regular(double const& x)  const;
+  };
+
+  //_________________________________________________________________________________
+  class C2psff: public Expression
+  {
+  public:
+    C2psff();
+    double Regular(double const& x)  const;
+  };
+
+  //_________________________________________________________________________________
+  class C2qgff: public Expression
+  {
+  public:
+    C2qgff();
+    double Regular(double const& x)  const;
+  };
+
+  //_________________________________________________________________________________
+  class C2gqff: public Expression
+  {
+  public:
+    C2gqff(int const& nf);
+    double Regular(double const& x)  const;
+  private:
+    int const _nf;
+  };
+
+  //_________________________________________________________________________________
+  class C2ggff: public Expression
+  {
+  public:
+    C2ggff(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+    double    _A2;
+    double    _A3;
+  };
 }
