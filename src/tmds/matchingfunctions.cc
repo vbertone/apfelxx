@@ -374,7 +374,7 @@ namespace apfel
   }
   double C1qgff::Regular(double const& x) const
   {
-    return CF * ( 2 * x + 4 * ( 1 + pow(1 - x, 2) ) * log(x) / x );
+    return 2 * CF * ( 2 * x + 4 * ( 1 + pow(1 - x, 2) ) * log(x) / x );
   }
 
   //_________________________________________________________________________________
