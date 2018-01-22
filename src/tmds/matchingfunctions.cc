@@ -69,38 +69,62 @@ namespace apfel
   }
   double C2Vqq::Regular(double const& x) const
   {
-    const double fA4 = log(1-x);
-    const double fA5 = fA4 * fA4;
-    const double fA6 = fA5 * fA4;
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 *lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * ( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
-    const double fB1 = log(x);
-    const double fB2 = fB1 * fB1;
-    const double fB3 = fB2 * fB1;
-    const double fB4 = 1 / x;
-    const double fB5 = fB1 * fB4;
-
-    const double fc1 = 1;
-    const double fc2 = x;
-    const double fc3 = fc2 * fc2;
-    const double fc4 = fc3 * fc2;
-    const double fc5 = fA4 * fB1;
-    const double fc6 = fc5 * fB1;
-
-    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
-    const vector<double> CoeffReg{- 15.591812729537994 - 3.6403764478352265 * _nf,
-	- 26.19077732354684 - 4.035868117241033 * _nf,
-	61.362896852454675 - 0.6181383623814728 * _nf,
-	- 18.603456697689623 - 0.19612093929051017 * _nf,
-	200. / 9.,
+    const vector<double> CoeffReg{
+      200. / 9.,
 	- 64. / 9.,
 	0.,
-	- 8. + 40. * _nf / 27.,
-	- 2. + 4. * _nf / 9.,
-	- 20. / 27.,
-	32.70163574653397 - 0.069575874398736 * _nf,
-	12.62916203247169 - 0.17334865938082786 * _nf,
 	0.,
-	0.};
+	0.,
+	- 8. + 40. * _nf/27.,
+	- 2. + 4. * _nf/9.,
+	- 20. / 27.,
+	- 296. * _nf / 81. + 1076.6744297226016,
+	- 152. * _nf / 81. + 7792.719665777814,
+	111.49810429898287,
+	80. * _nf / 27. + 8980.334190376141,
+	- 40. * _nf / 27. - 3795.008745809993,
+	82.30795871692112,
+	8. * _nf / 9. - 201.0129463471822,
+	- 4. * _nf / 9. + 206.75145891009598,
+	5603.371344939401,
+	- 526.1352578350587,
+	1382.8610999663256,
+	1092.9256332669593,
+	2547.784733022028,
+	- 147.17479558391307,
+	3.564983084988843};
 
     return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -115,8 +139,8 @@ namespace apfel
   {
     const double ln1mx  = log(1-x);
     const double ln1mx2 = ln1mx * ln1mx;
-    const double A1     = - 2416. / 81. - 67 * Pi2 / 9 + 448 * zeta3 / 9 + 20 * Pi2 * Pi2 / 81
-      + _nf * ( 352. / 243. + 10 * Pi2 / 27 + 56 * zeta3 / 27 );
+    const double A1     = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 200 * zeta4 / 9
+      + _nf * ( 352. / 243. + 20 * zeta2 / 9 + 56 * zeta3 / 27 );
 
     return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
   }
@@ -127,35 +151,62 @@ namespace apfel
   }
   double C2Vqqb::Regular(double const& x) const
   {
-    const double fA4 = log(1-x);
-    const double fA5 = fA4 * fA4;
-    const double fA6 = fA5 * fA4;
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 *lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * ( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
-    const double fB1 = log(x);
-    const double fB2 = fB1 * fB1;
-    const double fB3 = fB2 * fB1;
-
-    const double fc1 = 1;
-    const double fc2 = x;
-    const double fc3 = fc2 * fc2;
-    const double fc4 = fc3 * fc2;
-    const double fc5 = fA4 * fB1;
-    const double fc6 = fc5 * fB1;
-
-    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6};
-
-    const vector<double> CoeffReg{- 3.329144380448291,
-	5.852825050121677,
-	- 4.796244777535505,
-	2.2557153775946435,
+    const vector<double> CoeffReg{
+      0.,
+	0.,
 	0.,
 	0.,
 	0.,
 	- 4. / 3.,
 	0.,
 	4. / 27.,
-	0.505971782717726,
-	0.08759292525297521};
+	540.6779037661292,
+	4561.881499265996,
+	330.3186826846845,
+	5432.878085716809,
+	- 2563.28806902233,
+	- 17.78991469587654,
+	- 76.36755190995123,
+	78.87763768206408,
+	3443.1424448947796,
+	- 599.7983485750569,
+	839.4963238597323,
+	544.0265746128981,
+	1417.3624064262308,
+	- 113.40180701234924,
+	0.009338040302161874};
 
     return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -167,40 +218,64 @@ namespace apfel
   }
   double C2ps::Regular(double const& x) const
   {
-    const double fA4 = log(1-x);
-    const double fA5 = fA4 * fA4;
-    const double fA6 = fA5 * fA4;
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 *lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * ( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
-    const double fB1 = log(x);
-    const double fB2 = fB1 * fB1;
-    const double fB3 = fB2 * fB1;
-    const double fB4 = 1 / x;
-    const double fB5 = fB1 * fB4;
-
-    const double fc1 = 1;
-    const double fc2 = x;
-    const double fc3 = fc2 * fc2;
-    const double fc4 = fc3 * fc2;
-    const double fc5 = fA4 * fB1;
-    const double fc6 = fc5 * fB1;
-
-    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
-    const vector<double> CoeffReg{- 3.54792360390173,
-	4.949994905325898,
-	- 11.357230229521692,
-	7.2245197835090105,
+    const vector<double> CoeffReg{
+      0.,
 	0.,
 	0.,
+	688. / 81. - 32. * zeta2 / 9.,
 	0.,
 	8. / 3.,
 	- 2. / 3.,
 	4. / 9.,
-	2.255041649827519,
-	0.7663091186642608,
-	688. / 81. - 32 * zeta2 / 9,
-	0.};
+	- 603.924227035499,
+	- 4636.485211211568,
+	- 49.76555465398209,
+	- 5287.52982020046,
+	2269.612280502602,
+	- 58.06494427244658,
+	119.75596348356056,
+	- 129.79997791500733,
+	- 3369.724995744234,
+	427.8946185110229,
+	- 812.4665998422748,
+	- 600.6972087253562,
+	- 1469.0061919285804,
+	92.73615445019001,
+	- 0.021528986881156446};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -210,38 +285,62 @@ namespace apfel
   }
   double C2qg::Regular(double const& x) const
   {
-    const double fA4 = log(1-x);
-    const double fA5 = fA4 * fA4;
-    const double fA6 = fA5 * fA4;
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 *lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * ( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
-    const double fB1 = log(x);
-    const double fB2 = fB1 * fB1;
-    const double fB3 = fB2 * fB1;
-    const double fB4 = 1 / x;
-    const double fB5 = fB1 * fB4;
-
-    const double fc1 = 1;
-    const double fc2 = x;
-    const double fc3 = fc2 * fc2;
-    const double fc4 = fc3 * fc2;
-    const double fc5 = fA4 * fB1;
-    const double fc6 = fc5 * fB1;
-
-    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
-    const vector<double> CoeffReg{5.32456247529479,
-	- 37.8039790325823,
-	55.939541231907775,
-	- 44.592546819513025,
-	- 5. / 3.,
+    const vector<double> CoeffReg{
+      - 5. / 3.,
 	0.,
 	5. / 9.,
+	172. / 9. - 8. * zeta2,
+	0.,
 	34. / 3.,
 	- 7. / 6.,
 	7. / 9.,
-	- 10.961736574029366,
-	- 6.522774793663304,
-	172. / 9. - 4 * Pi2 / 3,
-	0.};
+	11804.917158263002,
+	43420.91122559322,
+	- 3972.3493167408856,
+	51274.90217179903,
+	- 11322.606629412014,
+	1490.8267572457225,
+	365.38010578193774,
+	- 402.6162297779727,
+	21027.101170409886,
+	19269.1080641264,
+	11357.814388977074,
+	11798.406220601846,
+	29476.38189858057,
+	- 227.4273932698467,
+	15.408922558612357};
 
     return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -254,38 +353,62 @@ namespace apfel
   }
   double C2gq::Regular(double const& x) const
   {
-    const double fA4 = log(1-x);
-    const double fA5 = fA4 * fA4;
-    const double fA6 = fA5 * fA4;
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 *lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * ( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
-    const double fB1 = log(x);
-    const double fB2 = fB1 * fB1;
-    const double fB3 = fB2 * fB1;
-    const double fB4 = 1 / x;
-    const double fB5 = fB1 * fB4;
-
-    const double fc1 = 1;
-    const double fc2 = x;
-    const double fc3 = fc2 * fc2;
-    const double fc4 = fc3 * fc2;
-    const double fc5 = fA4 * fB1;
-    const double fc6 = fc5 * fB1;
-
-    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
-    const vector<double> CoeffReg{- 43.40171996161091 - 16.984343881161237 * _nf,
-	173.18374973344203 + 9.595722778694926 * _nf,
-	- 88.4323955556243 - 2.1972189030825384 * _nf,
-	- 8.718852731902624 + 1.1549244843223576 * _nf,
-	- 184. / 9. + 32. * _nf / 27.,
+    const vector<double> CoeffReg{
+      - 184. / 9. + 32. * _nf / 27.,
 	- 44. / 9. + 8. * _nf / 9.,
 	- 40. / 27.,
-	- 200. / 3., // !!!!!! - 200. / 9. in the paper  !!!!!!!
+	- 12640. / 27. + 896. * _nf / 81. + 352. * zeta2 / 3. + 192. * zeta3,
+	0.,
+	- 200. / 3.,
 	112. / 9.,
 	- 112. / 27.,
-	- 40.28067793284879 - 0.552346106244215 * _nf,
-	- 35.36530647197912 - 0.0627184829983808 * _nf,
-	- 12640. / 27. + 352 * zeta2 / 3 + 192 * zeta3 + 896. * _nf / 81.,
-	  0.};
+	25387.766684267783 - 155.5078210719438 * _nf,
+	128641.80191589122 - 529.7740230354465 * _nf,
+	- 4691.90206636766 + 33.2493657381115 * _nf,
+	149304.47081486747 - 643.5386512087849 * _nf,
+	- 49319.02516115282 + 160.4570922525814 * _nf,
+	3077.798040737399 - 15.139140368040819 * _nf,
+	- 1297.381684493681 + 2.266359003377411 * _nf,
+	1379.187692679483 - 2.2865882004537834 * _nf,
+	79157.51026314059 - 313.45913506070985 * _nf,
+	20294.80059647656 - 169.33020796238313 * _nf,
+	27727.02916158908 - 115.18065110064754 * _nf,
+	25431.533693585556 - 138.52016675095615 * _nf,
+	62304.61943144707 - 297.70931938249043 * _nf,
+	- 1802.796656932475 + 4.76862827955143 * _nf,
+	5.352770139788647 + 0.9080131334622416 * _nf};
 
     return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
@@ -295,45 +418,69 @@ namespace apfel
     Expression(),
     _nf(nf)
   {
-    _A2 = - 808. / 3. + 252 * zeta3 + 112. * _nf / 9.;
+    _A2 = - 808. / 3. + 252. * zeta3 + 112. * _nf / 9.;
     _A3 = 0.;
   }
   double C2gg::Regular(double const& x) const
   {
-    const double fA4 = log(1-x);
-    const double fA5 = fA4 * fA4;
-    const double fA6 = fA5 * fA4;
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 *lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * ( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
-    const double fB1 = log(x);
-    const double fB2 = fB1 * fB1;
-    const double fB3 = fB2 * fB1;
-    const double fB4 = 1 / x;
-    const double fB5 = fB1 * fB4;
-
-    const double fc1 = 1;
-    const double fc2 = x;
-    const double fc3 = fc2 * fc2;
-    const double fc4 = fc3 * fc2;
-    const double fc5 = fA4 * fB1;
-    const double fc6 = fc5 * fB1;
-
-    const vector<double> fReg{fc1, fc2, fc3, fc4, fA4, fA5, fA6, fB1, fB2, fB3, fc5, fc6, fB4, fB5};
-    const vector<double> CoeffReg{160.3174084388 + 1.8798838185664 * _nf,
-	235.25958439812186 - 13.729196847420008 * _nf,
-	- 77.67188779845978 - 0.6784851744787738 * _nf,
-	51.61266721115288 - 1.3169890096131303 * _nf,
-	2. - 2. * _nf / 3.,
-	- 12.,
+    const vector<double> CoeffReg{
+      6. - 2. * _nf,
+	- 36.,
 	0.,
-	- 293. / 3. + 74. * _nf / 9.,
-	1. + 2. * _nf,
-	- 4. + 8. * _nf / 27.,
-	24.137288673188998 - 1.0158393615503878 * _nf,
-	- 22.406633639406444 + 1.090527996849969 * _nf,
-	- 3160. / 9. + 264 * zeta2 / 3 + 432 * zeta3 / 3 + 226. * _nf / 27.,
-	0.};
+	- 3160. / 3. + 226. * _nf / 9. + 264. * zeta2 + 432. * zeta3,
+	0.,
+	- 293. + 74. * _nf / 3.,
+	3. + 6. * _nf,
+	- 12. + 8. * _nf / 9.,
+	28350.905925013587 - 1165.597999487027 * _nf,
+	204106.38400427837 - 9112.918558788755 * _nf,
+	- 3654.296204682914 - 202.82515955533333 * _nf,
+	228606.3613205384 - 10439.786162275559 * _nf,
+	- 92515.7827039022 + 4572.107887712472 * _nf,
+	4598.901824247715 - 82.57482307730146 * _nf,
+	-5961.66732755631 + 242.87579888233213 * _nf,
+	6430.443013955799 - 258.29777371318767 * _nf,
+	144229.2381370356 - 6707.548773597168 * _nf,
+	- 11622.452033932963 + 958.7180437906424 * _nf,
+	35791.91490687339 - 1542.1541360841081 * _nf,
+	28788.30003557479 - 1171.3757772648048 * _nf,
+	67492.96763028382 - 2764.3635575309518 * _nf,
+	- 3881.2814494298837 + 176.34274530829245 * _nf,
+	18.352295609756112 - 0.04234942977167983 * _nf};
 
-    return 3 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
   double C2gg::Singular(double const& x) const
   {
@@ -346,9 +493,9 @@ namespace apfel
   {
     const double ln1mx  = log(1-x);
     const double ln1mx2 = ln1mx * ln1mx;
-    const double A1     = - 112. - 201 * zeta2 / 2 + 154 * zeta3 + 225 * zeta4 / 4
-      + _nf * ( 548. / 27. + 5 * zeta2 - 28 * zeta3 / 3 )
-      - 56.  *_nf * _nf / 81.;
+    const double A1     = - 112. - 201. * zeta2 / 2. + 154. * zeta3 + 225. * zeta4 / 4.
+      + _nf * ( 548. / 27. + 5. * zeta2 - 28. * zeta3 / 3. )
+      - 56. * _nf * _nf  / 81.;
 
     return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
   }

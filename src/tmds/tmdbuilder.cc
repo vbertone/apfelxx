@@ -267,7 +267,7 @@ namespace apfel {
     // of FFs.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
       {
-	return EvolFactors(b, muf, zetaf) * ( [&] (double const& z) -> double{ return fNP(z, b) / z / z; } * MatchedTmdFFs(b) );
+	return EvolFactors(b, muf, zetaf) * ( [&] (double const& z) -> double{ return fNP(z, b); } * MatchedTmdFFs(b) );
       };
 
     return EvolvedTMDs;
@@ -482,6 +482,7 @@ namespace apfel {
 	    return mf.at(0) + coup * ( nlo + coup * nnlo );
 	  };
       }
+
     // Construct function that returns the product of matching
     // functions and collinear FFs.
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
