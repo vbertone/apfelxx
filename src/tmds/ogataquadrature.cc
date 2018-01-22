@@ -23,9 +23,8 @@ namespace apfel {
     // Number of terms counter.
     int i = 0;
 
-    // Run over the zero's of J0. There are 1000 zeros
-    // percalculated. This should be enough for all practical
-    // applications.
+    // Run over the zeros of J0. There are 1000 precomputed zeros.
+    // This should be enough for all practical applications.
     double integral = 0;
     for (auto const& jz : j0Zeros)
       {
@@ -48,7 +47,7 @@ namespace apfel {
     integral *= M_PI / qT / qT;
 
     // If the number of terms is equal to the size of the "j0Zeros"
-    // vector give a worning.
+    // vector give a warning.
     if (i == (int) j0Zeros.size())
       warning("OgataQuadrature", "Number of j0 zero's available exceeded: the integration might not have converged.");
 

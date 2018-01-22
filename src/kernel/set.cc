@@ -11,7 +11,6 @@
 #include "apfel/messages.h"
 
 namespace apfel {
-
   //_________________________________________________________________________
   template<class T>
   Set<T>::Set(ConvolutionMap const& Map, map<int,T> const& in):
