@@ -411,68 +411,39 @@ namespace apfel
   }
   double C2Vqqff::Regular(double const& x) const
   {
-    // 1)  Log[1-z],
-    // 2)  log[1-z]^2
-    // 3)  log[1-z]^3
-    // 4)  1/z
-    // 5)  log[z]/z
-    // 6)  Log[z]^2/z
-    // 7)  Log[z]^3/z
-    // 8)  Log[z]
-    // 9)  log[z]^2
-    // 10) Log[z]^3
-    // 11) 1
-    // 12) z
-    // 13) z^2
-    // 14) zLog[z]/(1-z)
-    // 15) z Log[z]
-    // 16) z^2 Log[z]
-    // 17) z Log[z]^2/(1-z)
-    // 18) z Log[z]^2
-    // 19) z Log[z]^3
-    // 20) (Log[z]/(1-z)+1)Log[1-z]
-    // 21) Log[z]Log[1-z]
-    // 22) zLog[z]Log[1-z]
-    // 23) (1-z)Log[z]/z
-    // 24) (1-z)Log[1-z]
-    // 25) (1-z) Log[1-z]^2
-
-    const double f1  = log(1-x);
-    const double f2  = f1 * f1;
-    const double f3  = f2 * f1;
-
-    const double f8  = log(x);
-    const double f9  = f8 * f8;
-    const double f10 = f9 * f8;
-
-    const double f11 = 1;
-    const double f12 = x;
-    const double f13 = x * x;
-
-    const double f4  = 1 / x;
-    const double f5  = f8 * f4;
-    const double f6  = f9 * f4;
-    const double f7  = f10 * f4;
-
-    const double f15 = x * f8;
-    const double f16 = x * f15;
-
-    const double f18 = f15 * f8;
-    const double f19 = f18 * f8;
-
-    const double f14 = f15 / ( 1 - x );
-    const double f17 = f14 * f8;
-
-    const double f20 = ( f8 / ( 1 - x ) + 1 ) * f1;
-    const double f21 = f8 * f1;
-    const double f22 = x * f21;
-    const double f23 = ( 1 - x ) * f5;
-    const double f24 = ( 1 - x ) * f1;
-    const double f25 = ( 1 - x ) * f2;
-
-    const vector<double> fReg{f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
-	f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
-	f21, f22, f23, f24, f25};
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx2 / x,
+	lx3 / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 * lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	x * lx3,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
     const vector<double> CoeffReg{
       - 200. / 9.,
@@ -482,7 +453,7 @@ namespace apfel
 	0.,
 	0.,
 	0.,
-	1496. / 9. - 8. * _nf-560. * zeta2 / 9.,
+	1496. / 9. - 8. * _nf - 560. * zeta2 / 9.,
 	- 130. / 9. + 4. * _nf / 9.,
 	- 140. / 27.,
 	- 296. * _nf / 81. - 301.03247439776976,
@@ -514,8 +485,8 @@ namespace apfel
   {
     const double ln1mx  = log(1-x);
     const double ln1mx2 = ln1mx * ln1mx;
-    const double A1     = - 2416. / 81. - 67 * Pi2 / 9 + 448 * zeta3 / 9 + 20 * Pi2 * Pi2 / 81
-      + _nf * ( 352. / 243. + 10 * Pi2 / 27 + 56 * zeta3 / 27 );
+    const double A1     = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 2360 * zeta4 / 9
+      + _nf * ( 352. / 243. + 20. * zeta2 / 9 + 56 * zeta3 / 27 );
 
     return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
   }
@@ -526,42 +497,39 @@ namespace apfel
   }
   double C2Vqqbff::Regular(double const& x) const
   {
-    const double f1  = log(1-x);
-    const double f2  = f1 * f1;
-    const double f3  = f2 * f1;
-
-    const double f8  = log(x);
-    const double f9  = f8 * f8;
-    const double f10 = f9 * f8;
-
-    const double f11 = 1;
-    const double f12 = x;
-    const double f13 = x * x;
-
-    const double f4  = 1 / x;
-    const double f5  = f8 * f4;
-    const double f6  = f9 * f4;
-    const double f7  = f10 * f4;
-
-    const double f15 = x * f8;
-    const double f16 = x * f15;
-
-    const double f18 = f15 * f8;
-    const double f19 = f18 * f8;
-
-    const double f14 = f15 / ( 1 - x );
-    const double f17 = f14 * f8;
-
-    const double f20 = ( f8 / ( 1 - x ) + 1 ) * f1;
-    const double f21 = f8 * f1;
-    const double f22 = x * f21;
-    const double f23 = ( 1 - x ) * f5;
-    const double f24 = ( 1 - x ) * f1;
-    const double f25 = ( 1 - x ) * f2;
-
-    const vector<double> fReg{f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
-	f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
-	f21, f22, f23, f24, f25};
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx2 / x,
+	lx3 / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 * lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	x * lx3,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
     const vector<double> CoeffReg{
       0.,
@@ -599,43 +567,39 @@ namespace apfel
   {
   }
   double C2psff::Regular(double const& x) const
-  {
-    const double f1  = log(1-x);
-    const double f2  = f1 * f1;
-    const double f3  = f2 * f1;
-
-    const double f8  = log(x);
-    const double f9  = f8 * f8;
-    const double f10 = f9 * f8;
-
-    const double f11 = 1;
-    const double f12 = x;
-    const double f13 = x * x;
-
-    const double f4  = 1 / x;
-    const double f5  = f8 * f4;
-    const double f6  = f9 * f4;
-    const double f7  = f10 * f4;
-
-    const double f15 = x * f8;
-    const double f16 = x * f15;
-
-    const double f18 = f15 * f8;
-    const double f19 = f18 * f8;
-
-    const double f14 = f15 / ( 1 - x );
-    const double f17 = f14 * f8;
-
-    const double f20 = ( f8 / ( 1 - x ) + 1 ) * f1;
-    const double f21 = f8 * f1;
-    const double f22 = x * f21;
-    const double f23 = ( 1 - x ) * f5;
-    const double f24 = ( 1 - x ) * f1;
-    const double f25 = ( 1 - x ) * f2;
-
-    const vector<double> fReg{f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
-	f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
-	f21, f22, f23, f24, f25};
+  {    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx2 / x,
+	lx3 / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 * lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	x * lx3,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
     const vector<double> CoeffReg{
       0.,
@@ -664,7 +628,7 @@ namespace apfel
 	- 16.127886782439663,
 	0.0009797967055855182};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -674,42 +638,39 @@ namespace apfel
   }
   double C2qgff::Regular(double const& x) const
   {
-    const double f1  = log(1-x);
-    const double f2  = f1 * f1;
-    const double f3  = f2 * f1;
-
-    const double f8  = log(x);
-    const double f9  = f8 * f8;
-    const double f10 = f9 * f8;
-
-    const double f11 = 1;
-    const double f12 = x;
-    const double f13 = x * x;
-
-    const double f4  = 1 / x;
-    const double f5  = f8 * f4;
-    const double f6  = f9 * f4;
-    const double f7  = f10 * f4;
-
-    const double f15 = x * f8;
-    const double f16 = x * f15;
-
-    const double f18 = f15 * f8;
-    const double f19 = f18 * f8;
-
-    const double f14 = f15 / ( 1 - x );
-    const double f17 = f14 * f8;
-
-    const double f20 = ( f8 / ( 1 - x ) + 1 ) * f1;
-    const double f21 = f8 * f1;
-    const double f22 = x * f21;
-    const double f23 = ( 1 - x ) * f5;
-    const double f24 = ( 1 - x ) * f1;
-    const double f25 = ( 1 - x ) * f2;
-
-    const vector<double> fReg{f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
-	f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
-	f21, f22, f23, f24, f25};
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx2 / x,
+	lx3 / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 * lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	x * lx3,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
     const vector<double> CoeffReg{
       - 40./9. - 80. * zeta2 / 3.,
@@ -749,42 +710,39 @@ namespace apfel
   }
   double C2gqff::Regular(double const& x) const
   {
-    const double f1  = log(1-x);
-    const double f2  = f1 * f1;
-    const double f3  = f2 * f1;
-
-    const double f8  = log(x);
-    const double f9  = f8 * f8;
-    const double f10 = f9 * f8;
-
-    const double f11 = 1;
-    const double f12 = x;
-    const double f13 = x * x;
-
-    const double f4  = 1 / x;
-    const double f5  = f8 * f4;
-    const double f6  = f9 * f4;
-    const double f7  = f10 * f4;
-
-    const double f15 = x * f8;
-    const double f16 = x * f15;
-
-    const double f18 = f15 * f8;
-    const double f19 = f18 * f8;
-
-    const double f14 = f15 / ( 1 - x );
-    const double f17 = f14 * f8;
-
-    const double f20 = ( f8 / ( 1 - x ) + 1 ) * f1;
-    const double f21 = f8 * f1;
-    const double f22 = x * f21;
-    const double f23 = ( 1 - x ) * f5;
-    const double f24 = ( 1 - x ) * f1;
-    const double f25 = ( 1 - x ) * f2;
-
-    const vector<double> fReg{f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
-	f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
-	f21, f22, f23, f24, f25};
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx2 / x,
+	lx3 / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 * lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	x * lx3,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
     const vector<double> CoeffReg{
       - 44. / 3. + 10. * _nf / 9. + 10. * zeta2,
@@ -826,42 +784,39 @@ namespace apfel
   }
   double C2ggff::Regular(double const& x) const
   {
-    const double f1  = log(1-x);
-    const double f2  = f1 * f1;
-    const double f3  = f2 * f1;
-
-    const double f8  = log(x);
-    const double f9  = f8 * f8;
-    const double f10 = f9 * f8;
-
-    const double f11 = 1;
-    const double f12 = x;
-    const double f13 = x * x;
-
-    const double f4  = 1 / x;
-    const double f5  = f8 * f4;
-    const double f6  = f9 * f4;
-    const double f7  = f10 * f4;
-
-    const double f15 = x * f8;
-    const double f16 = x * f15;
-
-    const double f18 = f15 * f8;
-    const double f19 = f18 * f8;
-
-    const double f14 = f15 / ( 1 - x );
-    const double f17 = f14 * f8;
-
-    const double f20 = ( f8 / ( 1 - x ) + 1 ) * f1;
-    const double f21 = f8 * f1;
-    const double f22 = x * f21;
-    const double f23 = ( 1 - x ) * f5;
-    const double f24 = ( 1 - x ) * f1;
-    const double f25 = ( 1 - x ) * f2;
-
-    const vector<double> fReg{f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
-	f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
-	f21, f22, f23, f24, f25};
+    const double x2   = x * x;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx2 * lx;
+    const double l1x  = log(1-x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x2 * l1x;
+    const vector<double> fReg{
+      l1x,
+	l1x2,
+	l1x3,
+	1 / x,
+	lx / x,
+	lx2 / x,
+	lx3 / x,
+	lx,
+	lx2,
+	lx3,
+	1,
+	x,
+	x2,
+	x * lx / ( 1 - x ),
+	x * lx,
+	x2 * lx,
+	x * lx2 / ( 1 - x ),
+	x * lx2,
+	x * lx3,
+	( lx / ( 1 - x ) + 1 ) * l1x,
+	lx * l1x,
+	x * lx * l1x,
+	( 1 - x ) * l1x / x,
+	( 1 - x ) * l1x,
+	( 1 - x ) * l1x2};
 
     const vector<double> CoeffReg{
       - 6. + 2. * _nf,
