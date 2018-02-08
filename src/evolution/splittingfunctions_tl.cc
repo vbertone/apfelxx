@@ -585,7 +585,7 @@ namespace apfel
     const double func  = 2 * x * lnx / ( 1 - x );
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double gqq1  =
-      + 4 * CF * CF * ( 1 - x - ( 3. / 2. + 2 * ln1mx ) * func )
+      + 4 * CF * CF * ( 1 - x + ( 3. / 2. + 2 * ln1mx - 2 * lnx ) * func )
       + 2 * CF * CA * ( - 143. / 9. + 2 * Pi2 / 3 + x + ( 11. / 3. + lnx ) * func )
       + 8 * _nf * CF * TR * ( - func + 10. / 3. ) / 3
       + 4 * CF * ( CF - CA / 2 ) * ( - 1 + x - 4 * S2x / ( 1 + x ) );
@@ -618,7 +618,7 @@ namespace apfel
     const double func  = 2 * x * lnx / ( 1 - x );
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double gqq1  =
-      + 4 * CF * CF * ( 1 - x - ( 3. / 2. + 2 * ln1mx ) * func )
+      + 4 * CF * CF * ( 1 - x + ( 3. / 2. + 2 * ln1mx - 2 * lnx ) * func )
       + 2 * CF * CA * ( - 143. / 9. + 2 * Pi2 / 3 + x + ( 11. / 3. + lnx ) * func )
       + 8 * _nf * CF * TR * ( - func + 10. / 3. ) / 3
       - 4 * CF * ( CF - CA / 2 ) * ( - 1 + x - 4 * S2x / ( 1 + x ) );
