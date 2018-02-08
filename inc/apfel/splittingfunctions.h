@@ -240,4 +240,45 @@ namespace apfel
     int const _nf;
     int const _imod;
   };
+
+  /**
+   * @brief The LO space-like splitting function for tranversely
+   * polarised PDFs. Reference
+   * https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
+   */
+  //_________________________________________________________________________________
+  class P0transns: public Expression
+  {
+  public:
+    P0transns();
+    double Regular(double const&)    const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief The NLO space-like splitting function for tranversely
+   * polarised PDFs. Reference
+   * https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
+   */
+  //_________________________________________________________________________________
+  class P1transnsp: public Expression
+  {
+  public:
+    P1transnsp(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _a2;
+  };
+
+  //_________________________________________________________________________________
+  class P1transnsm: public P1transnsp
+  {
+  public:
+    P1transnsm(int const& nf);
+    double Regular(double const& x)  const;
+  };
 }

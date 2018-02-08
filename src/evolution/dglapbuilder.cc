@@ -29,7 +29,7 @@ namespace apfel {
 						  bool           const& OpEvol,
 						  double         const& IntEps)
   {
-    report("Initializing DglapObjects for space-like QCD evolution... ");
+    report("Initializing DglapObjects for space-like QCD unpolarised evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -303,7 +303,7 @@ namespace apfel {
 						   bool           const& OpEvol,
 						   double         const& IntEps)
   {
-    report("Initializing DglapObjects for time-like QCD evolution... ");
+    report("Initializing DglapObjects for time-like QCD unpolarised evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -500,6 +500,272 @@ namespace apfel {
 						   double         const& IntEps)
   {
     return InitializeDglapObjectsQCDT(g, Thresholds, Thresholds, OpEvol, IntEps);
+  }
+
+  //_____________________________________________________________________________
+  map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
+						       vector<double> const& Masses,
+						       vector<double> const& Thresholds,
+						       bool           const& OpEvol,
+						       double         const& IntEps)
+  {
+    report("Initializing DglapObjects for space-like QCD transversely polarised evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+	nfi++;
+
+    // Compute logs of muth2 / m2 needed for the the matching
+    // conditions (not possible for transversities yet).
+    vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      if (Thresholds[im] < eps12 || Masses[im] < eps12)
+	LogKth.push_back(0);
+      else
+	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+
+    // Allocate needed operators (matching conditions and splitting
+    // functions). By now the code is fast enough to precompute
+    // everything at all available perturbative orders and the current
+    // perturbative order is accounted for only when the actual
+    // splitting functions and matching conditions (lambda) functions
+    // are defined.
+    // ===============================================================
+    // LO Matching conditions.
+    map<int,Operator> MatchLO;
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+    MatchLO.insert({MatchingBasisQCD::PNS, Id});
+    MatchLO.insert({MatchingBasisQCD::PQQ, Id});
+    MatchLO.insert({MatchingBasisQCD::PQG, Zero});
+    MatchLO.insert({MatchingBasisQCD::PGQ, Zero});
+    MatchLO.insert({MatchingBasisQCD::PGG, Id});
+    for (int i = MatchingBasisQCD::PT3Q; i <= MatchingBasisQCD::PT35Q; i++)
+      MatchLO.insert({i, Id});
+    for (int i = MatchingBasisQCD::PT3G; i <= MatchingBasisQCD::PT35G; i++)
+      MatchLO.insert({i, Zero});
+
+    // ===============================================================
+    // LO splitting function operators.
+    map<int,map<int,Operator>> OpMapLO;
+    const Operator O0ns{g, P0transns{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
+	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
+	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
+	OM.insert({EvolutionBasisQCD::PQQ,  O0ns});
+	OM.insert({EvolutionBasisQCD::PQG,  Zero});
+	OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+	OM.insert({EvolutionBasisQCD::PGG,  Zero});
+	OpMapLO.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO Matching conditions (Null).
+    map<int,Operator> MatchNLO;
+    for (int i = MatchingBasisQCD::PNS; i <= MatchingBasisQCD::PT35G; i++)
+      MatchNLO.insert({i, Zero});
+
+    // ===============================================================
+    // NLO splitting function operators.
+    map<int,map<int,Operator>> OpMapNLO;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O1nsp{g, P1transnsp{nf}, IntEps};
+	const Operator O1nsm{g, P1transnsm{nf}, IntEps};
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
+	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
+	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
+	OM.insert({EvolutionBasisQCD::PQQ,  O1nsp});
+	OM.insert({EvolutionBasisQCD::PQG,  Zero});
+	OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+	OM.insert({EvolutionBasisQCD::PGG,  Zero});
+	OpMapNLO.insert({nf, OM});
+      }
+
+    // Define object of the structure containing the DglapObjects.
+    map<int,DglapObjects> DglapObj;
+
+    // Allocate convolution maps for evolution and matching, and set
+    // of operators.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	DglapObjects obj;
+	obj.Threshold = Thresholds[nf-1];
+	if (OpEvol)
+	  {
+	    const EvolutionOperatorBasisQCD evopb{nf};
+	    const MatchingOperatorBasisQCD mtopb{nf};
+	    obj.SplittingFunctions.insert({0, Set<Operator>{evopb, OpMapLO.at(nf)}});
+	    obj.SplittingFunctions.insert({1, Set<Operator>{evopb, OpMapNLO.at(nf)}});
+	    obj.MatchingConditions.insert({0, Set<Operator>{mtopb, MatchLO}});
+	    obj.MatchingConditions.insert({1, Set<Operator>{mtopb, MatchNLO}});
+	  }
+	else
+	  {
+	    const EvolutionBasisQCD evb{nf};
+	    const MatchingBasisQCD  mtb{nf};
+	    obj.SplittingFunctions.insert({0, Set<Operator>{evb, OpMapLO.at(nf)}});
+	    obj.SplittingFunctions.insert({1, Set<Operator>{evb, OpMapNLO.at(nf)}});
+	    obj.MatchingConditions.insert({0, Set<Operator>{mtb, MatchLO}});
+	    obj.MatchingConditions.insert({1, Set<Operator>{mtb, MatchNLO}});
+	  }
+	DglapObj.insert({nf,obj});
+      }
+    t.stop();
+
+    return DglapObj;
+  }
+
+  //_____________________________________________________________________________
+  map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
+						       vector<double> const& Thresholds,
+						       bool           const& OpEvol,
+						       double         const& IntEps)
+  {
+    return InitializeDglapObjectsQCDtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
+  }
+
+  //_____________________________________________________________________________
+  map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
+							vector<double> const& Masses,
+							vector<double> const& Thresholds,
+							bool           const& OpEvol,
+							double         const& IntEps)
+  {
+    report("Initializing DglapObjects for time-like QCD transversely polarised evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+	nfi++;
+
+    // Compute logs of muth2 / m2 needed for the the matching
+    // conditions (not possible for transversities yet).
+    vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      if (Thresholds[im] < eps12 || Masses[im] < eps12)
+	LogKth.push_back(0);
+      else
+	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+
+    // Allocate needed operators (matching conditions and splitting
+    // functions). By now the code is fast enough to precompute
+    // everything at all available perturbative orders and the current
+    // perturbative order is accounted for only when the actual
+    // splitting functions and matching conditions (lambda) functions
+    // are defined.
+    // ===============================================================
+    // LO Matching conditions.
+    map<int,Operator> MatchLO;
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+    MatchLO.insert({MatchingBasisQCD::PNS, Id});
+    MatchLO.insert({MatchingBasisQCD::PQQ, Id});
+    MatchLO.insert({MatchingBasisQCD::PQG, Zero});
+    MatchLO.insert({MatchingBasisQCD::PGQ, Zero});
+    MatchLO.insert({MatchingBasisQCD::PGG, Id});
+    for (int i = MatchingBasisQCD::PT3Q; i <= MatchingBasisQCD::PT35Q; i++)
+      MatchLO.insert({i, Id});
+    for (int i = MatchingBasisQCD::PT3G; i <= MatchingBasisQCD::PT35G; i++)
+      MatchLO.insert({i, Zero});
+
+    // ===============================================================
+    // LO splitting function operators.
+    map<int,map<int,Operator>> OpMapLO;
+    const Operator O0ns{g, P0Ttransns{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
+	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
+	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
+	OM.insert({EvolutionBasisQCD::PQQ,  O0ns});
+	OM.insert({EvolutionBasisQCD::PQG,  Zero});
+	OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+	OM.insert({EvolutionBasisQCD::PGG,  Zero});
+	OpMapLO.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO Matching conditions (Null).
+    map<int,Operator> MatchNLO;
+    for (int i = MatchingBasisQCD::PNS; i <= MatchingBasisQCD::PT35G; i++)
+      MatchNLO.insert({i, Zero});
+
+    // ===============================================================
+    // NLO splitting function operators.
+    map<int,map<int,Operator>> OpMapNLO;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	const Operator O1nsp{g, P1Ttransnsp{nf}, IntEps};
+	const Operator O1nsm{g, P1Ttransnsm{nf}, IntEps};
+	map<int,Operator> OM;
+	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
+	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
+	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
+	OM.insert({EvolutionBasisQCD::PQQ,  O1nsp});
+	OM.insert({EvolutionBasisQCD::PQG,  Zero});
+	OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+	OM.insert({EvolutionBasisQCD::PGG,  Zero});
+	OpMapNLO.insert({nf, OM});
+      }
+
+    // Define object of the structure containing the DglapObjects.
+    map<int,DglapObjects> DglapObj;
+
+    // Allocate convolution maps for evolution and matching, and set
+    // of operators.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+	DglapObjects obj;
+	obj.Threshold = Thresholds[nf-1];
+	if (OpEvol)
+	  {
+	    const EvolutionOperatorBasisQCD evopb{nf};
+	    const MatchingOperatorBasisQCD mtopb{nf};
+	    obj.SplittingFunctions.insert({0, Set<Operator>{evopb, OpMapLO.at(nf)}});
+	    obj.SplittingFunctions.insert({1, Set<Operator>{evopb, OpMapNLO.at(nf)}});
+	    obj.MatchingConditions.insert({0, Set<Operator>{mtopb, MatchLO}});
+	    obj.MatchingConditions.insert({1, Set<Operator>{mtopb, MatchNLO}});
+	  }
+	else
+	  {
+	    const EvolutionBasisQCD evb{nf};
+	    const MatchingBasisQCD  mtb{nf};
+	    obj.SplittingFunctions.insert({0, Set<Operator>{evb, OpMapLO.at(nf)}});
+	    obj.SplittingFunctions.insert({1, Set<Operator>{evb, OpMapNLO.at(nf)}});
+	    obj.MatchingConditions.insert({0, Set<Operator>{mtb, MatchLO}});
+	    obj.MatchingConditions.insert({1, Set<Operator>{mtb, MatchNLO}});
+	  }
+	DglapObj.insert({nf,obj});
+      }
+    t.stop();
+
+    return DglapObj;
+  }
+
+  //_____________________________________________________________________________
+  map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
+							vector<double> const& Thresholds,
+							bool           const& OpEvol,
+							double         const& IntEps)
+  {
+    return InitializeDglapObjectsQCDTtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   // ============================================================================

@@ -34,8 +34,9 @@ namespace apfel
 
   /**
    * @brief The InitializeDglapObjectsQCD, precompute the perturbative
-   * coefficients of time-like splitting functions and matching
-   * conditions and store them in the 'DglapObjects' structure.
+   * coefficients of space-like unpolarised splitting functions and
+   * matching conditions and store them in the 'DglapObjects'
+   * structure.
    * @param g the grid
    * @param IntEps the integration accuracy
    * @param Masses
@@ -57,9 +58,10 @@ namespace apfel
 						  double         const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeDglapObjectsQCD, precompute the perturbative
-   * coefficients of space-like splitting functions and matching
-   * conditions and store them in the 'DglapObjects' structure.
+   * @brief The InitializeDglapObjectsQCDT, precompute the
+   * perturbative coefficients of time-like unpolarised splitting
+   * functions and matching conditions and store them in the
+   * 'DglapObjects' structure.
    * @param g the grid
    * @param IntEps the integration accuracy
    * @param Masses
@@ -79,6 +81,56 @@ namespace apfel
 						   vector<double> const& Thresholds,
 						   bool           const& OpEvol = false,
 						   double         const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeDglapObjectsQCDTrans, precompute the
+   * perturbative coefficients of space-like transversely polarised
+   * splitting functions and matching conditions and store them in the
+   * 'DglapObjects' structure.
+   * @param g the grid
+   * @param IntEps the integration accuracy
+   * @param Masses
+   * @param Thresholds
+   * @return
+   */
+  map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
+						       vector<double> const& Masses,
+						       vector<double> const& Thresholds,
+						       bool           const& OpEvol = false,
+						       double         const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above but assuming that Masses = Thresholds.
+   */
+  map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
+						       vector<double> const& Thresholds,
+						       bool           const& OpEvol = false,
+						       double         const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeDglapObjectsQCDTrans, precompute the
+   * perturbative coefficients of time-like transversely polarised
+   * splitting functions and matching conditions and store them in the
+   * 'DglapObjects' structure.
+   * @param g the grid
+   * @param IntEps the integration accuracy
+   * @param Masses
+   * @param Thresholds
+   * @return
+   */
+  map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
+							vector<double> const& Masses,
+							vector<double> const& Thresholds,
+							bool           const& OpEvol = false,
+							double         const& IntEps = 1e-5);
+
+  /**
+   * @brief Same as above but assuming that Masses = Thresholds.
+   */
+  map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
+							vector<double> const& Thresholds,
+							bool           const& OpEvol = false,
+							double         const& IntEps = 1e-5);
 
   // ============================================================================
   /**

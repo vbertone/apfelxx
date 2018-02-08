@@ -197,4 +197,45 @@ namespace apfel
   private:
     int const _nf;
   };
+
+  /**
+   * @brief The LO space-like splitting function for tranversely
+   * polarised FFs. Reference
+   * https://arxiv.org/pdf/hep-ph/0108241v1.pdf
+   */
+  //_________________________________________________________________________________
+  class P0Ttransns: public Expression
+  {
+  public:
+    P0Ttransns();
+    double Regular(double const&)    const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief The NLO space-like splitting function for tranversely
+   * polarised FFs. Reference
+   * https://arxiv.org/pdf/hep-ph/0108241v1.pdf
+   */
+  //_________________________________________________________________________________
+  class P1Ttransnsp: public Expression
+  {
+  public:
+    P1Ttransnsp(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _a2;
+  };
+
+  //_________________________________________________________________________________
+  class P1Ttransnsm: public P1Ttransnsp
+  {
+  public:
+    P1Ttransnsm(int const& nf);
+    double Regular(double const& x)  const;
+  };
 }

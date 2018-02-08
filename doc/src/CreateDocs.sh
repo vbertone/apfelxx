@@ -5,6 +5,7 @@ do
     pdflatex manual.tex
     pdflatex IntegralStucture.tex
     pdflatex CCDIS.tex
+    pdflatex Transversity.tex
 done
 
 mv *.pdf ../pdf/.
