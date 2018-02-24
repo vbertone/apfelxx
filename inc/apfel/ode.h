@@ -30,11 +30,10 @@ namespace apfel
    *    y += dy(t,y,dt)
    *
    * U is the type of the 'y' object.
-   * T is the f() signature auto-deduced.
    */
-  template<class U = double, class T>
+  template<class U>
   function<U(double const&, U const&, double const&)>
-  rk4(T const& f)
+  rk4(function<U(double const& t, U const& Obj)> const& f)
   {
     return
       [       f            ](double const& t, U const& y,  double const& dt) -> U{ return
@@ -52,9 +51,9 @@ namespace apfel
   /**
    * @brief rk1 first order RK method using lambdas.
    */
-  template<class U = double, class T>
+  template<class U>
   function<U(double const&, U const&, double const&)>
-  rk1(T const& f)
+  rk1(function<U(double const& t, U const& Obj)> const& f)
   {
     return [f](double const& t, U const& y,  double const& dt) -> U{ return dt * f(t, y); } ;
   }
