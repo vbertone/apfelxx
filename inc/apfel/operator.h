@@ -19,11 +19,10 @@ typedef double accuracy;
 namespace apfel
 {
   /**
-   * @brief The Operator class.
-   *
-   * This class defines the basic object "Operator" which is
-   * essentially the convolution on the grid bewteen a function
-   * (e.g. a splitting function) and the inetrpolant functions.
+   * @brief The Operator class defines the basic object "Operator"
+   * which is essentially the convolution on the grid bewteen an
+   * Expression object (e.g. a splitting function) and the inetrpolant
+   * functions.
    */
   class Operator: protected Integrator, protected LagrangeInterpolator
   {
@@ -32,15 +31,18 @@ namespace apfel
     Operator() = delete;
 
     /**
-     * @brief The default constructor, takes a Grid and a vector of
-     * pointers to functions.
-     *
-     * @param gr "Grid" object
-     * @param func vector of pointers to one-dimentional functions
+     * @brief The Operator default constructor.
+     * @param gr: the Grid object
+     * @param expr: the expression to be transformed
+     * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
     Operator(Grid const& gr, Expression const& expr, accuracy const& eps = 1e-5);
 
-    // Operators.
+    /**
+     * @name Operator binary operators
+     * Binary operators involving an Operator.
+     */
+    ///@{
     Distribution operator *= (Distribution const& d) const;       //!< this *= Distribution
     Operator&    operator  = (Operator const& o);                 //!< this  = Operator
     Operator&    operator *= (Operator const& o);                 //!< this *= Operator
@@ -49,8 +51,12 @@ namespace apfel
     Operator&    operator /= (double const& s);                   //!< this /= Scalar
     Operator&    operator += (Operator const& o);                 //!< this += Operator
     Operator&    operator -= (Operator const& o);                 //!< this -= Operator
+    ///@}
 
-    Grid const& GetGrid() const { return _grid; }                 //!< return the grid
+    /**
+     * @brief Function that returns the Grid object of the operator.
+     */
+    Grid const& GetGrid() const { return _grid; }
 
   protected:
     /**
@@ -71,8 +77,11 @@ namespace apfel
     double _eta;
   };
 
-  // Extra operation definitions where Operator is at the left hand
-  // side (lhs).
+  /**
+   * @name Operator ternary operators
+   * Ternary operators involving Operators.
+   */
+  ///@{
   Distribution operator * (Operator lhs, Distribution const& rhs);           //!< Operator*Distribution
   Operator     operator * (Operator lhs, Operator const& rhs);               //!< Operator*Operator
   Operator     operator * (double const& s, Operator rhs);                   //!< Scalar*Operator
@@ -82,4 +91,5 @@ namespace apfel
   Operator     operator / (Operator lhs, double const& s);                   //!< Operator/Scalar
   Operator     operator + (Operator lhs, Operator const& rhs);               //!< Operator+Operator
   Operator     operator - (Operator lhs, Operator const& rhs);               //!< Operator-Operator
+  ///@}
 }

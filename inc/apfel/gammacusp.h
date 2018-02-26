@@ -9,8 +9,13 @@
 
 namespace apfel
 {
-  // Cusp anomalous dimension coefficients
+  /**
+   * @name Cusp anomalous dimension.
+   * Coefficients of the Cusp anomalous dimension.
+   */
+  ///@{
   double GammaCusp0();
   double GammaCusp1(int const& nf);
   double GammaCusp2(int const& nf);
+  ///@}
 }

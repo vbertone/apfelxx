@@ -18,9 +18,7 @@ using std::unique_ptr;
 namespace apfel
 {
   /**
-   * @brief The global x-grid object.
-   *
-   * This class defines the "Grid" object which is essentially a
+   * @brief The Grid class defines ab object that is essentially a
    * collection of "SubGrid" objects plus other global
    * parameters. This class also includes all the relevant methods for
    * the manipulation of the SubGrids.
@@ -32,31 +30,55 @@ namespace apfel
     Grid() = delete;
 
     /**
-     * @brief The default constructor, takes a vector of SubGrid
-     * @param grs vector of subgrids
-     * @param lockgrids flag to enable-disable the locking.
+     * @brief The default constructor.
+     * @param grs: vector of subgrids
+     * @param lockgrids: flag to enable/disable the locking of the subgrids (default: true)
      */
     Grid(vector<SubGrid> const& grs, bool const& lockgrids = true);
 
-    // Getters
-    int            nGrids()           const { return _GlobalGrid.size(); } //!< return the number of subgrids
-    bool           Locked()           const { return _Locked; }            //!< return the locked flag
-    bool           ExtGrids()         const { return _ExtGrids; }          //!< return the external grid flag
-    SubGrid const& GetSubGrid(int ig) const { return _GlobalGrid[ig]; }    //!< return the SubGrid item ig
-    SubGrid const& GetJointGrid()     const { return *_JointGrid; }        //!< return the joint grid
+    /**
+     * @name Getters
+     */
+    ///@{
+    /**
+     * @return The number of subgrids
+     */
+    int            nGrids()           const { return _GlobalGrid.size(); }
 
     /**
-     * @brief Check whether Grids are equal
-     * @param sg the SubGrid to be compared
-     * @return true/false
+     * @return The locking flag
      */
+    bool           Locked()           const { return _Locked; }
+
+    /**
+     * @return The external-grid flag
+     */
+    bool           ExtGrids()         const { return _ExtGrids; }
+
+    /**
+     * @return The ig-th SubGrid
+     */
+    SubGrid const& GetSubGrid(int ig) const { return _GlobalGrid[ig]; }
+
+    /**
+     * @return The joint SubGrid
+     */
+    SubGrid const& GetJointGrid()     const { return *_JointGrid; }
+    ///@}
+
+    /**
+     * @name Comparison operators
+     * Collection of operators for comparing grid objects
+     */
+    ///@{
     bool operator == (Grid const& g) const;
     bool operator != (Grid const& g) const;
+    ///@}
 
   private:
     /**
-     * @brief Takes the input SubGrids, apply the locking and
-     * fill the \c _JointGrid object with the appropriate grid nodes.
+     * @brief Takes the input SubGrids, apply the locking if needed
+     * and fill the joint grid object with the appropriate grid nodes.
      */
     void CreateJointGrid();
 
@@ -69,7 +91,8 @@ namespace apfel
   };
 
   /**
-   * @brief Method which prints Grid with cout <<.
+   * @brief Overload the << operator to print the parameters of the
+   * grid.
    */
   std::ostream& operator<<(std::ostream& os, Grid const& gr);
 }

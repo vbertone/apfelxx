@@ -26,6 +26,11 @@ namespace apfel
   {
   public:
     /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
+    /**
      * @brief The Distribution constructors.
      * @param gr: the Grid object that defines the x-space interpolation grid
      */
@@ -90,6 +95,7 @@ namespace apfel
 		 function<double(int const&, double const&, double const&)> const& InDistFunc,
 		 int                                                        const& ipdf,
 		 double                                                     const& Q);
+    ///@}
 
     /**
      * @brief Function to push back the values of the joint grid.
@@ -105,8 +111,10 @@ namespace apfel
     void PushSubGrid(double const& xi, bool const& next);
 
     /**
-     * @brief Overloading of operators involving a distribution.
+     * @name Distribution binary operators
+     * Binary operators involving a distribution.
      */
+    ///@{
     Distribution& operator  = (Distribution const& d);                    //!< this  = Distribution
     Distribution& operator *= (double const& s);                          //!< this *= Scalar
     Distribution& operator *= (function<double(double const&)> const& f); //!< this *= Function of the integration variable
@@ -114,11 +122,14 @@ namespace apfel
     Distribution& operator *= (Distribution const& d);                    //!< this *= Distribution
     Distribution& operator += (Distribution const& d);                    //!< this += Distribution
     Distribution& operator -= (Distribution const& d);                    //!< this -= Distribution
+    ///@}
   };
 
   /**
-   * @brief Extra definitions where the distribution is on the left hand side (lhs).
+   * @name Distribution ternary operators
+   * Ternary operators involving distributions.
    */
+  ///@{
   Distribution operator * (double const& s, Distribution rhs);                          //!< Scalar*Distribution
   Distribution operator * (Distribution lhs, double const& s);                          //!< Distribution*Scalar
   Distribution operator * (function<double(double const&)> const& f, Distribution rhs); //!< Function*Distribution
@@ -127,7 +138,13 @@ namespace apfel
   Distribution operator + (Distribution lhs, Distribution const& rhs);                  //!< Distribution+Distribution
   Distribution operator - (Distribution lhs, Distribution const& rhs);                  //!< Distribution-Distribution
   Distribution operator * (Distribution lhs, Distribution const& rhs);                  //!< Distribution*Distribution
+  ///@}
 
+  /**
+   * @name Map of Distribution functions
+   * Function that return maps pf distributions.
+   */
+  ///@{
   /**
    * @brief Function that fills in a map of distributions from a
    * map-valued function.
@@ -151,4 +168,5 @@ namespace apfel
   map<int,Distribution> DistributionMap(Grid                                     const& g,
 					function<map<int,double>(double const&)> const& InDistFunc,
 					vector<int>                              const& skip = {});
+  ///@}
 }

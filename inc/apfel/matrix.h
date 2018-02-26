@@ -18,41 +18,43 @@ using std::pair;
 namespace apfel
 {  
   /**
-   * @brief The matrix class
-   *
-   * A simple implementation of 2d arrays based on a continous memory
-   * allocation. Elements are accessible throught the (i,j) operator.
+   * @brief The matrix class is a simple implementation of 2d arrays
+   * based on a continous memory allocation. Elements are accessible
+   * throught the (i,j) operator.
    */
   template<typename T>
   class matrix
   {
   public:
     /**
-     * @brief matrix constructor
-     *
-     * @param row number of rows
-     * @param col number of columns
+     * @brief matrix default constructor.
+     * @param row: number of rows
+     * @param col: number of columns
      */
     matrix(size_t const& row = 0, size_t const& col = 0);
 
     /**
-     * @brief Resizes object and set default value
-     *
-     * @param row number of rows
-     * @param col number of columns
-     * @param v the default value
+     * @brief Function that resizes object and set default value.
+     * @param row: number of rows
+     * @param col: number of columns
+     * @param v: the default value (default: 0)
      */
     void resize(size_t const& row, size_t const& col, T const& v = 0);
 
     /**
      * @brief Returns the (row,col) size pair.
+     * @param dim: the dimension
+     * @returns the number of raws and columns
      */
     size_t const& size(size_t const& dim) const { return _size[dim]; }
 
-    //operators
+    /**
+     * @name Binary operators involving matrices
+     */
+    ///@{
     T&       operator()(size_t const& i, size_t const& j)       { return _data[i*_size[1]+j]; }
     T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
-
+    ///@}
   private:
     array<size_t, 2> _size; //!< the dimension pair
     vector<T>        _data; //!< the data array

@@ -39,6 +39,11 @@ namespace apfel
   {
   public:
     /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
+    /**
      * @brief The DoubleObject constructor.
      */
     DoubleObject();
@@ -48,6 +53,7 @@ namespace apfel
      * @param terms: vector of term objects of the T kind
      */
     DoubleObject(vector<term<T>> const& terms);
+    ///@}
 
     /**
      * @brief Function to add more terms.
@@ -70,21 +76,26 @@ namespace apfel
     double Evaluate(double const& x, double const& z) const;
 
     /**
-     * @brief Overloading of operators involving a double distribution.
+     * @name DoubleObject binary operators
+     * Binary operators involving a DoubleObject.
      */
+    ///@{
     template<class V> DoubleObject<V> operator *= (DoubleObject<V> const& o) const;
     DoubleObject<T>& operator *= (double const& s);          //!< this *= scalar
     DoubleObject<T>& operator /= (double const& s);          //!< this /= scalar
     DoubleObject<T>& operator *= (DoubleObject<T> const& o); //!< this *= DoubleObject
     DoubleObject<T>& operator += (DoubleObject<T> const& o); //!< this += DoubleObject
+    ///@}
 
   private:
     vector<term<T>> _terms;
   };
 
   /**
-   * @brief Extra definitions where the distribution is on the left hand side (lhs).
+   * @name DoubleObject ternary operators
+   * Ternary operators involving DoubleObjects.
    */
+  ///@{
   template<class A, class B>
   DoubleObject<B> operator * (DoubleObject<A> lhs, DoubleObject<B> const& rhs) { return lhs *= rhs; }
 
@@ -105,4 +116,5 @@ namespace apfel
 
   template<class T>
   DoubleObject<T> operator + (DoubleObject<T> lhs, DoubleObject<T> const& rhs) { return lhs += rhs; }
+  ///@}
 }

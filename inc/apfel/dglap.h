@@ -69,6 +69,10 @@ namespace apfel
     Set<T> Derivative(int const& nf, double const& mu, Set<T> const& f) const;
 
     /**
+     * @name Setters
+     */
+    ///@{
+    /**
      * @brief Function that sets the reference object at the reference
      * scale using a function of the index and x.
      * @param InDistFunc: function that returns the distributions.
@@ -82,7 +86,7 @@ namespace apfel
      * @param InDistFunc: function that returns the distributions.
      */
     void SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc);
-
+    ///@}
   private:
     function<Set<Operator>(int const&,double const&)> _SplittingFunctions;
     function<Set<Operator>(bool const&,int const&)>   _MatchingConditions;

@@ -17,7 +17,8 @@ using std::function;
 namespace apfel
 {
   /**
-   * @brief rk4 fourth order RK method using lambdas, this solves:
+   * @name Runge-Kutta (RK) ODE solvers.
+   * These functions solve the ordinary differential equation (ODE):
    *
    *    dy / dt = f(t,y)
    *
@@ -30,6 +31,13 @@ namespace apfel
    *    y += dy(t,y,dt)
    *
    * U is the type of the 'y' object.
+   */
+  ///@{
+  /**
+   * @brief Template function that implements the fourth order RK
+   * algorithm.
+   * @param f: the function on the r.h.s. of the ODE
+   * @return the function tha returns the step
    */
   template<class U>
   function<U(double const&, U const&, double const&)>
@@ -49,7 +57,10 @@ namespace apfel
   }
 
   /**
-   * @brief rk1 first order RK method using lambdas.
+   * @brief Template function that implements the first order RK
+   * algorithm.
+   * @param f: the function on the r.h.s. of the ODE
+   * @return the function tha returns the step
    */
   template<class U>
   function<U(double const&, U const&, double const&)>
@@ -57,4 +68,5 @@ namespace apfel
   {
     return [f](double const& t, U const& y,  double const& dt) -> U{ return dt * f(t, y); } ;
   }
+  ///@}
 }

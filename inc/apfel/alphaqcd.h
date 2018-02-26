@@ -25,7 +25,11 @@ namespace apfel
   class AlphaQCD: public MatchedEvolution<double>
   {
   public:
-
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
     AlphaQCD() = delete;
 
     /**
@@ -56,6 +60,7 @@ namespace apfel
 	     vector<double> const& Masses,
 	     int            const& pt,
 	     int            const& nsteps = 10);
+    ///@}
 
     /**
      * @brief Function for the computation of the matching.

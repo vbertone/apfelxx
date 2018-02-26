@@ -48,6 +48,10 @@ namespace apfel
     };
 
     /**
+     * @name Getters
+     */
+    ///@{
+    /**
      * @brief Retrieve the name of the map.
      * @return The name of the map
      */
@@ -58,7 +62,7 @@ namespace apfel
      * @return The multiplication rules
      */
     map<int,vector<rule>> const& GetRules() const { return _rules; }
-
+    ///@}
   protected:
     map<int,vector<rule>> _rules; //!< the map container
     string                _name;  //!< the name of the derived class

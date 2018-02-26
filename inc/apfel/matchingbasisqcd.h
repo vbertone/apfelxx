@@ -14,23 +14,31 @@ using namespace std;
 namespace apfel
 {
   /**
-   * @brief ConvolutionMap derivation for the QCD evolution basis.
-   *
-   * This class, following the derivation procedure from
-   * ConvolutionMap implements the Basis enumerator with custom tags
-   * for the objects.
+   * @defgroup MatchBases Matching convolution maps
+   * Collection of derived classes from ConvolutionMap that implement
+   * the convolution map for the matching at the heavy-quark
+   * thresholds.
+   */
+  ///@{
+  /**
+   * @brief The MatchingBasisQCD class is a derived of ConvolutionMap
+   * specialised for the matching of distributions using the QCD
+   * evolution basis.
    */
   class MatchingBasisQCD: public ConvolutionMap
   {
   public:
     /**
-     * @brief The map enums
+     * @brief The map enumerators for the operands and the
+     * distributions.
      */
     enum Operand: int {PNS, PQQ, PQG, PGQ, PGG, PT3Q, PT8Q, PT15Q, PT24Q, PT35Q, PT3G, PT8G, PT15G, PT24G, PT35G};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
-     * @brief The class constructor
+     * @brief The MatchingBasisQCD default constructor for the
+     * matching in the QCD evolution basis with nf active flavours.
+     * @param nf: number of active flavours
      */
   MatchingBasisQCD(int const& nf):
     ConvolutionMap{"MatchingBasisQCD_" + std::to_string(nf)}
@@ -52,17 +60,25 @@ namespace apfel
     };
   };
 
+  /**
+   * @brief The MatchingOperatorBasisQCD class is a derived of
+   * ConvolutionMap specialised for the matching of operators using
+   * the QCD evolution basis.
+   */
   class MatchingOperatorBasisQCD: public ConvolutionMap
   {
   public:
     /**
-     * @brief The map enums
+     * @brief The map enumerators for the operands and the
+     * distributions.
      */
     enum Operand: int {PNS, PQQ, PQG, PGQ, PGG, PT3Q, PT8Q, PT15Q, PT24Q, PT35Q, PT3G, PT8G, PT15G, PT24G, PT35G};
     enum Object:  int {GG, GQ, QG, QQ, VAL, T3S, T3G, V3V, T8S, T8G, V8V, T15S, T15G, V15V, T24S, T24G, V24V, T35S, T35G, V35V};
 
     /**
-     * @brief The class constructor
+     * @brief The MatchingOperatorBasisQCD default constructor for the
+     * matching in the QCD evolution basis with nf active flavours.
+     * @param nf: number of active flavours
      */
   MatchingOperatorBasisQCD(int const& nf):
     ConvolutionMap{"MatchingOperatorBasisQCD_" + std::to_string(nf)}
@@ -87,4 +103,5 @@ namespace apfel
 	  }
     };
   };
+  ///@}
 }

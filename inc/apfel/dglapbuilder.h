@@ -34,6 +34,12 @@ namespace apfel
   };
 
   /**
+   * @name DGLAP object initializers
+   * Collection of functions that initialise DglapObjects structure
+   * for the different kinds of evolution currently available.
+   */
+  ///@{
+  /**
    * @brief The InitializeDglapObjectsQCD function precomputes the
    * perturbative coefficients of space-like unpolarised splitting
    * functions and matching conditions and store them into a
@@ -171,8 +177,14 @@ namespace apfel
 							vector<double> const& Thresholds,
 							bool           const& OpEvol = false,
 							double         const& IntEps = 1e-5);
+  ///@}
 
-  // ============================================================================
+  /**
+   * @name DGLAP builders
+   * Collection of functions that build a Dglap object used to perform
+   * the DGLAP evolution of distributions or operators.
+   */
+  ///@{
   /**
    * @brief The BuildDglap function builds the actual dglap object
    * that performs the DGLAP evolution for distributions.
@@ -231,4 +243,5 @@ namespace apfel
 					     int                                                     const& PerturbativeOrder,
 					     function<double(double const&)>                         const& Alphas,
 					     int                                                     const& nsteps = 10);
+  ///@}
 }

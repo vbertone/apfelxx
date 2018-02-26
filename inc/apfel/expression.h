@@ -10,44 +10,58 @@
 namespace apfel
 {
   /**
-   * @brief The Expression class for the manipulation of the splitting and coeffient functions.
-   *
-   * This class encapsulate in a proper form an analystic expressions
-   * in such a way that it can be transformed into an operator.
+   * @brief The Expression class encapsulates in a proper form a given
+   * analystic expression in such a way that it can be transformed
+   * into an operator.
    */
   class Expression
   {
   public:
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
     /**
      * @brief The default constructor
      */
     Expression();
 
     /**
-     * @brief The default constructor
+     * @brief The default constructor in the presence of a phase-space
+     * reduction given by eta < 1.
+     * @param eta: upper limit of the convolution integral
      */
     Expression(double const& eta);
+    ///@}
 
     /**
+     * @name Expression components
+     * The three different possible components of an expression:
+     * regular, singular, and local.
+     */
+    ///@{
+    /**
      * @brief Virtual regular term.
-     * @param x the integration variable.
-     * @return the regular term at x.
+     * @param x: the integration variable
+     * @return The regular term at x
      */
     virtual double Regular(double const&) const { return 0; }
 
     /**
      * @brief Virtual singular term.
-     * @param x the integration variable.
-     * @return the singular term at x.
+     * @param x: the integration variable
+     * @return The singular term at x
      */
     virtual double Singular(double const&) const { return 0; }
 
     /**
      * @brief Virtual local term.
-     * @param x the physical variable.
-     * @return the local term at x.
+     * @param x: the physical variable
+     * @return The local term at x
      */
     virtual double Local(double const&) const { return 0; }
+    ///@}
 
     /**
      * @brief Function that returns the value of the scaling parameter
@@ -59,7 +73,14 @@ namespace apfel
   };
 
   /**
-   * @brief Identity expression (delta function)
+   * @defgroup RecExprs Recurrent expressions
+   * Collection of recurrent expressions. This includes the identity
+   * and the null expressions.
+   */
+  ///@{
+  /**
+   * @brief Derived class from Expression to implement the Identity
+   * operator (delta function).
    */
   class Identity: public Expression
   {
@@ -69,11 +90,13 @@ namespace apfel
   };
 
   /**
-   * @brief Zero expression
+   * @brief Derived class from Expression to implement the Null
+   * operator (zero).
    */
   class Null: public Expression
   {
   public:
   Null(): Expression() { }
   };
+  ///@}
 }

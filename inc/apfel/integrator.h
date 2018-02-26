@@ -17,81 +17,84 @@ using std::vector;
 namespace apfel
 {
   /**
-   * @brief The Integrator class which uses Adaptative Gaussian Quadrature.
-   *
-   * This class takes as input the integrand function and provides the
-   * integrate method which performs the integration.
+   * @brief The Integrator class perform unidimensional numerical
+   * integration using the Guassian quadrature.
    */
   class Integrator
   {
   public:
     /**
-     * @brief The default constructor
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
+    /**
+     * @brief The default constructor.
      */
     Integrator();
 
     /**
-     * @brief The default constructor
-     * @param func the function to be integrated.
+     * @brief The default constructor.
+     * @param func: The function of one variable to be integrated
      */
     Integrator(function<double(double const&)> const& func);
 
     /**
-     * @brief This takes a function of two variables and integrates
-     * over the first keeping the second fixed to 'arg2'.
+     * @brief The default constructor.
+     * @param func: the function of two variables to be integrated over the first
+     * @param arg2: the value of the second variable while integrating over the first
      */
     Integrator(function<double(double const&, double const&)> const& func2, double const& arg2);
 
     /**
-     * @brief This takes a function of three variables and integrates
-     * over the first keeping the second and the thisrd fixed to
-     * 'arg2' and 'arg3'.
+     * @brief The default constructor.
+     * @param func: the function of three variables to be integrated over the first
+     * @param arg2: the value of the second variable while integrating over the first
+     * @param arg3: the value of the third variable while integrating over the first
      */
     Integrator(function<double(double const&, double const&, double const&)> const& func3, double const& arg2, double const& arg3);
+    ///@}
 
     /**
-     * @brief Integrates the integrand passed during initialization
-     * between xmin and xmax with tolerance eps.
-     *
-     * @param xmin the lower bound integration value.
-     * @param xmax the upper bound integration value.
-     * @param eps the required relative error.
-     * @return the integral value.
+     * @brief Function that integrates the integrand with a given
+     * relative accuracy.
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param eps: the required relative accuracy
+     * @return the value of the integral
      */
     double integrate(double const& xmin, double const& xmax, double const& eps) const;
 
     /**
-     * @brief Integrates the integrand passed during initialization
-     * between xmin and xmax with tolerance eps.
-     *
-     * @param xmin the lower bound integration value.
-     * @param xmax the upper bound integration value.
-     * @param FixPts vector of fixed points not to integrate over.
-     * @param eps the required relative error.
-     * @return the integral value.
+     * @brief Function that integrates the integrand with a given
+     * relative accuracy using a set of fixed point on the integration
+     * range.
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param FixPts: the vector of fixed points of the integration
+     * @param eps: the required relative accuracy
+     * @return the value of the integral
      */
     double integrate(double const& xmin, double const& xmax, vector<double> const& FixPts, double const& eps) const;
 
     /**
-     * @brief Integrates the integrand passed during initialization
-     * between xmin and xmax with m points.
-     *
-     * @param xmin the lower bound integration value.
-     * @param xmax the upper bound integration value.
-     * @param m the number of points of the Gauss quadrature.
-     * @return the integral value.
+     * @brief Function that integrates the integrand using a given
+     * number of point for the gauss quadrature.
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param m: number of point of the Guass quadrature
+     * @return the value of the integral
      */
     double integrate(double const& xmin, double const& xmax, int const& m) const;
 
     /**
-     * @brief Protected virtual integrand function.
-     *
-     * @param x the integration variable.
-     * @return the integrand evaluated at x.
+     * @brief Virtual function for the integrand.
+     * @param x: the integration variable
+     * @return the integrand evaluated at x
      */
     virtual double integrand(double const& x) const { return _func(x); };
 
   private:
-    function<double(double const&)> _func;
+    function<double(double const&)> _func; //!< The integrand function
   };
 }

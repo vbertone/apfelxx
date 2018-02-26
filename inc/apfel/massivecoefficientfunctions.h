@@ -12,10 +12,12 @@
 namespace apfel
 {
   /**
-   * Fortran functions for the O(as^2) coefficient functions from
-   * 'src/dis/hqcoef.f'. Use the analytic expressions whenever
-   * available.
+   * @name Fortran massive coefficient functions
+   * Fortran functions for the O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * coefficient functions from 'src/dis/hqcoef.f'. Use the analytic
+   * expressions whenever available.
    */
+  ///@{
   extern"C" {
     double c2log_(double *wr,double *xi);
     double cllog_(double *wr,double *xi);
@@ -30,14 +32,21 @@ namespace apfel
     double c2nlobarq_(double *wr,double *xi);
     double clnlobarq_(double *wr,double *xi);
   }
+  ///@}
 
   /**
-   * Massive Netral current coefficient functions. In the following
-   * 'xi' indicates the ratio Q^2 / mh^2.
+   * @defgroup NCMassive Massive neutral current coefficient functions
+   * @note In the following 'xi' indicates the ratio Q<SUP>2</SUP> /
+   * M<SUP>2</SUP>.
    */
-
+  ///@{
   /**
-   * @brief O(as) gluon coefficient function for F2. See eq. (53) of
+   * @defgroup LO LO massive coefficient functions
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief Gluon coefficient function for F2. See eq. (53) of
    * https://arxiv.org/pdf/1001.2312.pdf. Or it uses the fortran
    * routines in 'src/dis/hqcoef.f'
    */
@@ -50,8 +59,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(as) gluon coefficient function for FL. Analytic
-   * expression. Or it uses the fortran routines in 'src/dis/hqcoef.f'
+   * @brief Gluon coefficient function for FL.
    */
   //_________________________________________________________________________________
   class CmL1gNC: public Expression
@@ -60,11 +68,17 @@ namespace apfel
     CmL1gNC(double const& eta);
     double Regular(double const& x) const;
   };
+  ///@}
 
   /**
-   * @brief O(as^2) non-singlet coefficient function for F2. See
-   * Appendix A of https://arxiv.org/pdf/hep-ph/9601302.pdf. Or it
-   * uses the fortran routines in 'src/dis/hqcoef.f'
+   * @defgroup NLO NLO massive coefficient functions
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief Non-singlet coefficient function for F2. See Appendix A of
+   * https://arxiv.org/pdf/hep-ph/9601302.pdf. Or it uses the fortran
+   * routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class Cm22nsNC: public Expression
@@ -78,9 +92,9 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) non-singlet coefficient function for FL. See
-   * Appendix A of https://arxiv.org/pdf/hep-ph/9601302.pdf. Or it
-   * uses the fortran routines in 'src/dis/hqcoef.f'
+   * @brief Non-singlet coefficient function for FL. See Appendix A of
+   * https://arxiv.org/pdf/hep-ph/9601302.pdf. Or it uses the fortran
+   * routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class CmL2nsNC: public Expression
@@ -91,8 +105,8 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) gluon coefficient function for F2. Uses the
-   * fortran routines in 'src/dis/hqcoef.f'
+   * @brief Gluon coefficient function for F2. Uses the fortran
+   * routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class Cm22gNC: public Expression
@@ -103,8 +117,8 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) gluon coefficient function for FL. Uses the
-   * fortran routines in 'src/dis/hqcoef.f'
+   * @brief Gluon coefficient function for FL. Uses the fortran
+   * routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class CmL2gNC: public Expression
@@ -115,8 +129,8 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) pure-singlet coefficient function for F2. Uses the
-   * fortran routines in 'src/dis/hqcoef.f'
+   * @brief Pure-singlet coefficient function for F2. Uses the fortran
+   * routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class Cm22psNC: public Expression
@@ -127,8 +141,8 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) pure-singlet coefficient function for FL. Uses the
-   * fortran routines in 'src/dis/hqcoef.f'
+   * @brief Pure-singlet coefficient function for FL. Uses the fortran
+   * routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class CmL2psNC: public Expression
@@ -139,8 +153,8 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) gluon coefficient function proportional to
-   * ln(q2/m2) for F2. Uses the fortran routines in 'src/dis/hqcoef.f'
+   * @brief Gluon coefficient function proportional to ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for
+   * F2. Uses the fortran routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class Cm22bargNC: public Expression
@@ -151,8 +165,8 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) gluon coefficient function proportional to
-   * ln(q2/m2) for FL. Uses the fortran routines in 'src/dis/hqcoef.f'
+   * @brief Gluon coefficient function proportional to ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for
+   * FL. Uses the fortran routines in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class CmL2bargNC: public Expression
@@ -163,8 +177,9 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) pure-singlet coefficient function proportional to
-   * ln(q2/m2) for F2. Uses the fortran routines in 'src/dis/hqcoef.f'
+   * @brief Pure-singlet coefficient function proportional to
+   * ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for F2. Uses the fortran routines
+   * in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class Cm22barpsNC: public Expression
@@ -175,8 +190,9 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) pure-singlet coefficient function proportional to
-   * ln(q2/m2) for FL. Uses the fortran routines in 'src/dis/hqcoef.f'
+   * @brief Pure-singlet coefficient function proportional to
+   * ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for FL. Uses the fortran routines
+   * in 'src/dis/hqcoef.f'
    */
   //_________________________________________________________________________________
   class CmL2barpsNC: public Expression
@@ -185,4 +201,6 @@ namespace apfel
     CmL2barpsNC(double const& eta);
     double Regular(double const& x) const;
   };
+  ///@}
+  ///@}
 }

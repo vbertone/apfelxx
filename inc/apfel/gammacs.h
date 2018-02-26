@@ -9,7 +9,11 @@
 
 namespace apfel
 {
-  // Collins-Soper anomalous dimension coefficients
+  /**
+   * @name Collins-Soper anomalous dimension.
+   * Coefficients of the Collins-Soper anomalous dimension.
+   */
+  ///@{
   double CSd10();
   double CSd11();
   double CSd20(int const& nf);
@@ -19,4 +23,5 @@ namespace apfel
   double CSd31(int const& nf);
   double CSd32(int const& nf);
   double CSd33(int const& nf);
+  ///@}
 }

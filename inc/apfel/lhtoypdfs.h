@@ -15,9 +15,11 @@ using namespace std;
 namespace apfel
 {
   /**
-   * @brief Les Houches toy parameterisation at Q = sqrt(2) GeV. Used
-   * for test purposes.
+   * @name Les Houches PDFs
+   * Les Houches toy parameterisation at Q = sqrt(2) GeV. Used for
+   * test purposes.
    */
+  ///@{
   double xupv(double const& x)  { return 5.107200 * pow(x,0.8) * pow((1-x),3); }
   double xdnv(double const& x)  { return 3.064320 * pow(x,0.8) * pow((1-x),4); }
   double xglu(double const& x)  { return 1.7 * pow(x,-0.1) * pow((1-x),5); }
@@ -60,4 +62,5 @@ namespace apfel
 
     return QCDEvMap;
   }
+  ///@}
 }

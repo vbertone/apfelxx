@@ -25,6 +25,12 @@ namespace apfel
   enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
   /**
+   * @defgroup DISBases DIS convolution maps
+   * Collection of derived classes from ConvolutionMap that implement
+   * the convolution map for NC and CC DIS structure functions.
+   */
+  ///@{
+  /**
    * @brief The DISNCBasis class is a derived of ConvolutionMap
    * specialised for the computation of the NC DIS structure
    * functions.
@@ -32,6 +38,11 @@ namespace apfel
   class DISNCBasis: public ConvolutionMap
   {
   public:
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
     /**
      * @brief The DISNCBasis default constructor for the k-th
      * component of the structure functions.
@@ -98,6 +109,7 @@ namespace apfel
 	  _rules[2*j]   = { {CNS, 2*j,   coef} };
 	}
     };
+    ///@}
   };
 
   /**
@@ -127,6 +139,11 @@ namespace apfel
       {4,{2,1}}, {5,{2,2}}, {6,{2,3}},
       {7,{3,1}}, {8,{3,2}}, {9,{3,3}} };
 
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
     /**
      * @brief The DISCCBasis default constructor for the (i,k)-th
      * component of the structure functions.
@@ -229,5 +246,7 @@ namespace apfel
 	      _rules[k][0].coefficient += CKM[i-1] * rules.at(k)[0].coefficient;
 	}
     };
+    ///@}
   };
+  ///@}
 }

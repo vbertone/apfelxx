@@ -20,28 +20,30 @@ using std::function;
 namespace apfel
 {
   /**
-   * @brief Class for the Q-space interpolation QGrids.
-   *
-   * Subgrids are the building blocks of the interpolation procedure.
-   * This class defines the "QGrid" object that includes, apart from
-   * the grid itself, also the relevant parameters.
+   * @brief The template class QGrids is a mother class for the
+   * interpolation in Q. This class also implements methods for the
+   * subgrid interpolation relevant for example in a VFNS evolution.
    */
   template<class T>
   class QGrid
   {
   public:
-
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
     QGrid() = delete;
 
     /**
-     * @brief Standard internal grid constructor.
-     * @param nQ number of grid intervals in Q.
-     * @param QMin lower edge Q of the grid.
-     * @param QMax upper edge Q of the grid.
-     * @param InterDegree interpolation degree.
-     * @param Thresholds
-     * @param TabFunc function used to tabulate
-     * @param InvTabFunc inverse of TabFunc
+     * @brief The QGrid default constructor.
+     * @param nQ: the number of grid intervals in Q
+     * @param QMin: the lower edge of the grid in Q
+     * @param QMax: the upper edge of the grid in Q
+     * @param InterDegree: the interpolation degree
+     * @param Thresholds: the fixed point of the grid over which interpolation is forbidden
+     * @param TabFunc: the function used to tabulate the grid in Q
+     * @param InvTabFunc: the inverse function of TabFunc (an analytic expression is necessary)
      */
     QGrid(int                             const& nQ,
 	  double                          const& QMin,
@@ -52,13 +54,13 @@ namespace apfel
 	  function<double(double const&)> const& InvTabFunc);
 
     /**
-     * @brief Standard internal grid constructor.
-     * @param nQ number of grid intervals in Q.
-     * @param QMin lower edge Q of the grid.
-     * @param QMax upper edge Q of the grid.
-     * @param InterDegree interpolation degree.
-     * @param Thresholds
-     * @param Lambda pole of log(log(Q/Lambda))
+     * @brief The QGrid default constructor.
+     * @param nQ: the number of grid intervals in Q
+     * @param QMin: the lower edge of the grid in Q
+     * @param QMax: the upper edge of the grid in Q
+     * @param InterDegree: the interpolation degree
+     * @param Thresholds: the fixed point of the grid over which interpolation is forbidden
+     * @param Lambda: the parameter of the function log(log(Q/Lambda)) used for the tabulation on the grid in Q
      */
     QGrid(int            const& nQ,
 	  double         const& QMin,
@@ -66,23 +68,28 @@ namespace apfel
 	  int            const& InterDegree,
 	  vector<double> const& Thresholds,
 	  double         const& Lambda = 0.25);
+    ///@}
 
     /**
-     * @brief Interpolate on the grid
-     * @param Q the value of the required interpolation
-     * @return the interpolated value.
+     * @brief Function that interpolate on the grid in Q.
+     * @param Q: the value of the required interpolation
+     * @return the interpolated value
      */
     T Evaluate(double const& Q) const;
 
     /**
-     * @brief Check whether QGrids are equal
-     * @param sg the QGrid to be compared
-     * @return true/false
+     * @name Comparison operators
+     * Collection of operators for comparing QGrid objects
      */
+    ///@{
     bool operator == (QGrid const& sg) const;
     bool operator != (QGrid const& sg) const;
+    ///@}
 
-    // Getters
+    /**
+     * @name Getters
+     */
+    ///@{
     int                                    nQ()             const { return _nQ; }          //!< return the number of Q interval
     int                                    InterDegree()    const { return _InterDegree; } //!< return the interpolation degree
     double                                 QMin()           const { return _QMin; }        //!< return the minimum node value
@@ -92,20 +99,21 @@ namespace apfel
     vector<double>                  const& GetQGrid()       const { return _Qg; }          //!< return the grid in Q
     vector<double>                  const& GetFQGrid()      const { return _fQg; }         //!< return the grid in _TabFunc(Q)
     vector<T>                       const& GetQGridValues() const { return _GridValues; }  //!< return the tabulated objects on the grid.
+    ///@}
 
     /**
-     * @brief Interpolation functions on QGrid
-     * @param tQ interpolation control parameter
-     * @param tau the grid index
-     * @param fq the value of _TabFunc(Q) of the required interpolation
-     * @return the interpolation weights.
+     * @brief Interpolation functions on QGrid.
+     * @param tQ: interpolation control parameter
+     * @param tau: the grid index
+     * @param fq: the value of _TabFunc(Q) of the required interpolation
+     * @return the interpolation weights
      */
     double Interpolant(int const& tQ, int const& tau, double const& fq) const;
 
     /**
-     * @brief Computes the control parameter of the interpolant, the lower and upper bounds over which the sum is limited
-     * @param Q the value of the required interpolation
-     * @return the lower and upper bounds of tau.
+     * @brief Computes the control parameter of the interpolant, the lower and upper bounds over which the sum is limited.
+     * @param Q: the value of the required interpolation
+     * @return the lower and upper bounds of tau
      */
     tuple<int,int,int> SumBounds(double const& Q) const;
 
