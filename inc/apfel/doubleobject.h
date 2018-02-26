@@ -16,7 +16,8 @@ using std::vector;
 namespace apfel
 {
   /**
-   * @brief The term struct
+   * @brief The term structure that contains all the objects of a
+   * single term of a double object.
    */
   template <class V>
     struct term
@@ -29,42 +30,47 @@ namespace apfel
   /**
    * @brief The DoubleObject class is a collection of pairs of single
    * objects (Distributions or Operators) accompained by a
-   * multiplicative constant.
-   *
-   * This mother class provides the basic ingredients for the
-   * computation double convolutions required in SIDIS and DY.
+   * multiplicative constant. This mother class provides the basic
+   * ingredients for the computation double convolutions required in
+   * SIDIS and DY.
    */
   template<class T>
   class DoubleObject
   {
   public:
     /**
-     * @brief DoubleObject constructor
+     * @brief The DoubleObject constructor.
      */
     DoubleObject();
 
     /**
-     * @brief DoubleObject constructor
+     * @brief The DoubleObject constructor.
+     * @param terms: vector of term objects of the T kind
      */
     DoubleObject(vector<term<T>> const& terms);
 
     /**
-     * @brief AddTerm
+     * @brief Function to add more terms.
+     * @param newterm: new term to be appended to the vector of terms
      */
     void AddTerm(term<T> const& newterm);
 
     /**
-     * @brief GetTerms
+     * @brief Function to get the terms.
+     * @return The vector of terms
      */
     vector<term<T>> GetTerms() const { return _terms; };
 
     /**
-     * @brief Evaluate
+     * @brief Funtion that evaluates the double distribution.
+     * @param x: value of the first variable
+     * @param z: value of the second variable
+     * @return The value of the double distribution in (x,z)
      */
     double Evaluate(double const& x, double const& z) const;
 
     /**
-     * @brief operators *= and /=
+     * @brief Overloading of operators involving a double distribution.
      */
     template<class V> DoubleObject<V> operator *= (DoubleObject<V> const& o) const;
     DoubleObject<T>& operator *= (double const& s);          //!< this *= scalar
@@ -77,12 +83,11 @@ namespace apfel
   };
 
   /**
-   * @brief operator * and / definition
+   * @brief Extra definitions where the distribution is on the left hand side (lhs).
    */
   template<class A, class B>
   DoubleObject<B> operator * (DoubleObject<A> lhs, DoubleObject<B> const& rhs) { return lhs *= rhs; }
 
-  // other operators
   template<class T>
   DoubleObject<T> operator * (double const& s, DoubleObject<T> rhs) { return rhs *= s; }
 

@@ -23,7 +23,8 @@ namespace apfel
   /**
    * @brief Structure that contains all the precomputed quantities
    * needed to perform the DGLAP evolution, i.e. perturbative
-   * coefficients of splitting functions and matching conditions.
+   * coefficients of splitting functions and matching conditions, and
+   * the heavy quark thresholds.
    */
   struct DglapObjects
   {
@@ -33,24 +34,33 @@ namespace apfel
   };
 
   /**
-   * @brief The InitializeDglapObjectsQCD, precompute the perturbative
-   * coefficients of space-like unpolarised splitting functions and
-   * matching conditions and store them in the 'DglapObjects'
-   * structure.
-   * @param g the grid
-   * @param IntEps the integration accuracy
-   * @param Masses
-   * @param Thresholds
-   * @return
+   * @brief The InitializeDglapObjectsQCD function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy quark thresholds
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
 						  vector<double> const& Masses,
 						  vector<double> const& Thresholds,
 						  bool           const& OpEvol = false,
 						  double         const& IntEps = 1e-5);
-
   /**
-   * @brief Same as above but assuming that Masses = Thresholds.
+   * @brief The InitializeDglapObjectsQCD function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
+   * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
 						  vector<double> const& Thresholds,
@@ -58,15 +68,16 @@ namespace apfel
 						  double         const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeDglapObjectsQCDT, precompute the
+   * @brief The InitializeDglapObjectsQCDT function precomputes the
    * perturbative coefficients of time-like unpolarised splitting
-   * functions and matching conditions and store them in the
+   * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
-   * @param g the grid
-   * @param IntEps the integration accuracy
-   * @param Masses
-   * @param Thresholds
-   * @return
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy quark thresholds
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid           const& g,
 						   vector<double> const& Masses,
@@ -75,7 +86,16 @@ namespace apfel
 						   double         const& IntEps = 1e-5);
 
   /**
-   * @brief Same as above but assuming that Masses = Thresholds.
+   * @brief The InitializeDglapObjectsQCDT function precomputes the
+   * perturbative coefficients of time-like unpolarised splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
+   * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid           const& g,
 						   vector<double> const& Thresholds,
@@ -83,15 +103,16 @@ namespace apfel
 						   double         const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeDglapObjectsQCDTrans, precompute the
-   * perturbative coefficients of space-like transversely polarised
-   * splitting functions and matching conditions and store them in the
+   * @brief The InitializeDglapObjectsQCDtrans function precomputes
+   * the perturbative coefficients of space-like transverity splitting
+   * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
-   * @param g the grid
-   * @param IntEps the integration accuracy
-   * @param Masses
-   * @param Thresholds
-   * @return
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy quark thresholds
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
 						       vector<double> const& Masses,
@@ -100,7 +121,16 @@ namespace apfel
 						       double         const& IntEps = 1e-5);
 
   /**
-   * @brief Same as above but assuming that Masses = Thresholds.
+   * @brief The InitializeDglapObjectsQCDtrans function precomputes
+   * the perturbative coefficients of space-like transverity splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
+   * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
 						       vector<double> const& Thresholds,
@@ -108,15 +138,16 @@ namespace apfel
 						       double         const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeDglapObjectsQCDTrans, precompute the
-   * perturbative coefficients of time-like transversely polarised
-   * splitting functions and matching conditions and store them in the
+   * @brief The InitializeDglapObjectsQCDtrans function precomputes
+   * the perturbative coefficients of timelike-like transverity splitting
+   * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
-   * @param g the grid
-   * @param IntEps the integration accuracy
-   * @param Masses
-   * @param Thresholds
-   * @return
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy quark thresholds
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
 							vector<double> const& Masses,
@@ -125,7 +156,16 @@ namespace apfel
 							double         const& IntEps = 1e-5);
 
   /**
-   * @brief Same as above but assuming that Masses = Thresholds.
+   * @brief The InitializeDglapObjectsQCDtrans function precomputes
+   * the perturbative coefficients of time-like transverity splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map DglapObject objects, one for each possible nf
+   * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
 							vector<double> const& Thresholds,
@@ -134,15 +174,15 @@ namespace apfel
 
   // ============================================================================
   /**
-   * @brief The BuildDglap, builds the dglap object
-   *
-   * @param DglapObj structure with the coeffs. of perturbative objects
-   * @param InDistFunc the PDF method to query flavors
-   * @param MuRef the reference scale
-   * @param PerturbativeOrder the perturbative order
-   * @param Alphas the alpha strong object
-   * @param nsteps the number of steps for RK.
-   * @return
+   * @brief The BuildDglap function builds the actual dglap object
+   * that performs the DGLAP evolution for distributions.
+   * @param DglapObj: structure with the coefficients of the perturbative objects
+   * @param InDistFunc: the distributions at the reference scale
+   * @param MuRef: the reference scale
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param Alphas: the function returning the strong coupling
+   * @param nsteps: the number of steps of the ODE solver (default: 10).
+   * @return A unique pointer to a Dglap object
    */
   unique_ptr<Dglap<Distribution>> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
 					     function<map<int,double>(double const&, double const&)> const& InDistFunc,
@@ -150,9 +190,17 @@ namespace apfel
 					     int                                                     const& PerturbativeOrder,
 					     function<double(double const&)>                         const& Alphas,
 					     int                                                     const& nsteps = 10);
+
   /**
-   * @brief Same as above but it computes the evolution of the
-   * evolution operators.
+   * @brief The BuildDglap function builds the actual dglap object
+   * that performs the DGLAP evolution for operators.
+   * @param DglapObj: structure with the coefficients of the perturbative objects
+   * @param InDistFunc: the distributions at the reference scale
+   * @param MuRef: the reference scale
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param Alphas: the function returning the strong coupling
+   * @param nsteps: the number of steps of the ODE solver (default: 10).
+   * @return A unique pointer to a Dglap object
    */
   unique_ptr<Dglap<Operator>> BuildDglap(map<int,DglapObjects>           const& DglapObj,
 					 double                          const& MuRef,
@@ -164,6 +212,17 @@ namespace apfel
    * @brief Same as above but the DglapObjects object is a function of
    * a variable. This is useful for applications in which the
    * splitting functions depend on same energy scale.
+   */
+  /**
+   * @brief The BuildDglap function builds the actual dglap object
+   * that performs the DGLAP evolution for distributions.
+   * @param DglapObj: DglapObjects-values function that returns the structure with the coefficients of the perturbative objects as function of a scale
+   * @param InDistFunc: the distributions at the reference scale
+   * @param MuRef: the reference scale
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param Alphas: the function returning the strong coupling
+   * @param nsteps: the number of steps of the ODE solver (default: 10).
+   * @return A unique pointer to a Dglap object
    */
   unique_ptr<Dglap<Distribution>> BuildDglap(function<DglapObjects(double const&)>                   const& DglapObj,
 					     vector<double>                                          const& Thresholds,

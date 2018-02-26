@@ -18,23 +18,25 @@ using namespace std;
 namespace apfel
 {
   /**
-   * @brief The map enums
+   * @brief The map enumerators for the operands and the
+   * distributions.
    */
   enum Operand: int {CNS, CS, CG};
   enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
   /**
-   * @brief DISNCBasis
-   *
-   * This class allocates the "ComvolutionMap" object needed to
-   * compute the NC structure functions.
+   * @brief The DISNCBasis class is a derived of ConvolutionMap
+   * specialised for the computation of the NC DIS structure
+   * functions.
    */
   class DISNCBasis: public ConvolutionMap
   {
   public:
     /**
-     * @brief The class constructor fot the k-th NC structure
-     * function.
+     * @brief The DISNCBasis default constructor for the k-th
+     * component of the structure functions.
+     * @param k: index that identifies the component of the structure function
+     * @param fact: factor that multiplies the whole structure function
      */
   DISNCBasis(int const& k, double const& fact = 1):
     ConvolutionMap{"DISNCBasis_" + std::to_string(k)}
@@ -63,8 +65,8 @@ namespace apfel
     };
 
     /**
-     * @brief The class constructor for the total NC structure
-     * function.
+     * @brief The DISNCBasis default constructor for the total structure functions.
+     * @param Ch: vector of the effective quark charges
      */
   DISNCBasis(vector<double> const& Ch):
     ConvolutionMap{"DISNCBasis_tot"}
@@ -99,10 +101,9 @@ namespace apfel
   };
 
   /**
-   * @brief DISCCBasis
-   *
-   * This class allocates the "ComvolutionMap" object needed to
-   * compute the CC structure functions.
+   * @brief The DISCCBasis class is a derived of ConvolutionMap
+   * specialised for the computation of the CC DIS structure
+   * functions.
    */
   class DISCCBasis: public ConvolutionMap
   {
@@ -127,8 +128,11 @@ namespace apfel
       {7,{3,1}}, {8,{3,2}}, {9,{3,3}} };
 
     /**
-     * @brief The class constructor fot the (i,j)-th CC structure
-     * function.
+     * @brief The DISCCBasis default constructor for the (i,k)-th
+     * component of the structure functions.
+     * @param l: index that identifies the component of the structure function
+     * @param Is3: switch to tell the constructure whether the structure function is F3 or not
+     * @param fact: factor that multiplies the whole structure function
      */
   DISCCBasis(int const& l, bool const& Is3, double const& fact = 1):
     ConvolutionMap{"DISCCBasis_" + to_string(l) + "_" + to_string(Is3)}
@@ -191,8 +195,9 @@ namespace apfel
     };
 
     /**
-     * @brief The class constructor fot the total CC structure
-     * function.
+     * @brief The DISCCBasis default constructor for the total structure functions.
+     * @param CKM: vector with the CKM matrix entries
+     * @param Is3: switch to tell the constructure whether the structure function is F3 or not
      */
   DISCCBasis(vector<double> const& CKM, bool const& Is3):
     ConvolutionMap{"DISCCBasis_tot"}

@@ -9,9 +9,31 @@
 
 namespace apfel
 {
-  // QCD Beta functions coefficients
+  /**
+   * @brief LO coefficient of the QCD \f$\beta\f$ function.
+   * @param nf: number of active flavours
+   * @return \f$\beta_0(n_f)\f$
+   */
   double beta0(int const& nf);
+
+  /**
+   * @brief NLO coefficient of the QCD \f$\beta\f$ function.
+   * @param nf: number of active flavours
+   * @return \f$\beta_1(n_f)\f$
+   */
   double beta1(int const& nf);
+
+  /**
+   * @brief NNLO coefficient of the QCD \f$\beta\f$ function.
+   * @param nf: number of active flavours
+   * @return \f$\beta_2(n_f)\f$
+   */
   double beta2(int const& nf);
+
+  /**
+   * @brief NNNLO coefficient of the QCD \f$\beta\f$ function.
+   * @param nf: number of active flavours
+   * @return \f$\beta_3(n_f)\f$
+   */
   double beta3(int const& nf);
 }

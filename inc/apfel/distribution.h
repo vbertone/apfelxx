@@ -18,82 +18,73 @@ using std::map;
 namespace apfel
 {
   /**
-   * @brief The Distribution class for PDFs.
-   *
-   * This class provides methods to inherit a custom PDF distribution
-   * in a generic basis.
+   * @brief The Distribution class defines one of the basic objects of
+   * APFEL++. This is essentially the discretisation of a function
+   * that can be conveniently used for convolutions.
    */
   class Distribution: public LagrangeInterpolator
   {
   public:
     /**
-     * @brief Distribution constructors.
-     *
-     * @param gr the Grid object
+     * @brief The Distribution constructors.
+     * @param gr: the Grid object that defines the x-space interpolation grid
      */
     Distribution(Grid const& gr);
 
     /**
-     * @brief Distribution constructors.
-     *
-     * @param obj Distribution object
-     * @param distsubgrid a 2d vector with the distribution values for each subgrid.
-     * @param distjointgrid a vector with the distribution values on the joint grid.
+     * @brief The Distribution constructors.
+     * @param obj: a reference distribution from wich the grid is extracted
+     * @param distsubgrid: the vector of the distribution on the subgrids
+     * @param distjointgrid: the vector of the distribution on the joint grid
      */
     Distribution(Distribution           const& obj,
 		 vector<vector<double>> const& distsubgrid,
 		 vector<double>         const& distjointgrid);
 
     /**
-     * @brief Distribution constructors.
-     *
-     * @param gr the Grid object
-     * @param distsubgrid a 2d vector with the distribution values for each subgrid.
-     * @param distjointgrid a vector with the distribution values on the joint grid.
+     * @brief The Distribution constructors.
+     * @param gr: the Grid object that defines the x-space interpolation grid
+     * @param distsubgrid: the vector of the distribution on the subgrids
+     * @param distjointgrid: the vector of the distribution on the joint grid
      */
     Distribution(Grid                   const& g,
 		 vector<vector<double>> const& distsubgrid,
 		 vector<double>         const& distjointgrid);
 
     /**
-     * @brief Distribution constructors.
-     *
-     * @param gr the Grid object
-     * @param InDistFunc function of ipdf and x to be tabulated.
-     * @param ipdf int to be fed to InDistFunc.
+     * @brief The Distribution constructors.
+     * @param gr: the Grid object that defines the x-space interpolation grid
+     * @param InDistFunc: a function of x to be tabulated on the grid in x
      */
     Distribution(Grid                            const& g,
 		 function<double(double const&)> const& InDistFunc);
 
     /**
-     * @brief Distribution constructors.
-     *
-     * @param gr the Grid object
-     * @param InDistFunc function of ipdf, x, and Q to be tabulated.
-     * @param Q double to be fed to InDistFunc.
+     * @brief The Distribution constructors.
+     * @param gr: the Grid object that defines the x-space interpolation grid
+     * @param InDistFunc: a function of x and Q to be tabulated on the grid in x
+     * @param Q: the value of Q in which InDistFunc has to be tabulated
      */
     Distribution(Grid                                           const& g,
 		 function<double(double const&, double const&)> const& InDistFunc,
 		 double                                         const& Q);
 
     /**
-     * @brief Distribution constructors.
-     *
-     * @param gr the Grid object
-     * @param InDistFunc function of ipdf and x to be tabulated.
-     * @param ipdf int to be fed to InDistFunc.
+     * @brief The Distribution constructors.
+     * @param gr: the Grid object that defines the x-space interpolation grid
+     * @param InDistFunc: a function of ipdf and x to be tabulated on the grid in x
+     * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated
      */
     Distribution(Grid                                        const& g,
 		 function<double(int const&, double const&)> const& InDistFunc,
 		 int                                         const& ipdf);
 
     /**
-     * @brief Distribution constructors.
-     *
-     * @param gr the Grid object
-     * @param InDistFunc function of ipdf, x, and Q to be tabulated.
-     * @param ipdf int to be fed to InDistFunc.
-     * @param Q double to be fed to InDistFunc.
+     * @brief The Distribution constructors.
+     * @param gr: the Grid object that defines the x-space interpolation grid
+     * @param InDistFunc: a function of ipdf, x, and Q to be tabulated on the grid in x
+     * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated
+     * @param Q: the value of Q in which InDistFunc has to be tabulated
      */
     Distribution(Grid                                                       const& g,
 		 function<double(int const&, double const&, double const&)> const& InDistFunc,
@@ -102,15 +93,20 @@ namespace apfel
 
     /**
      * @brief Function to push back the values of the joint grid.
+     * @param xi: value of of the distribution to be appended to the distribution vector on the joint grid
      */
     void PushJointGrid(double const& xi);
 
     /**
      * @brief Function to push back the values of the subgrid.
+     * @param xi: value of of the distribution to be appended to the distribution vector on one of the subgrids
+     * @param next: switch to tell the function whether it should start filling in the next subgrid
      */
     void PushSubGrid(double const& xi, bool const& next);
 
-    // Operators
+    /**
+     * @brief Overloading of operators involving a distribution.
+     */
     Distribution& operator  = (Distribution const& d);                    //!< this  = Distribution
     Distribution& operator *= (double const& s);                          //!< this *= Scalar
     Distribution& operator *= (function<double(double const&)> const& f); //!< this *= Function of the integration variable
@@ -120,7 +116,9 @@ namespace apfel
     Distribution& operator -= (Distribution const& d);                    //!< this -= Distribution
   };
 
-  // Extra operation definitions where Distribution is at the left hand side (lhs).
+  /**
+   * @brief Extra definitions where the distribution is on the left hand side (lhs).
+   */
   Distribution operator * (double const& s, Distribution rhs);                          //!< Scalar*Distribution
   Distribution operator * (Distribution lhs, double const& s);                          //!< Distribution*Scalar
   Distribution operator * (function<double(double const&)> const& f, Distribution rhs); //!< Function*Distribution
@@ -130,13 +128,26 @@ namespace apfel
   Distribution operator - (Distribution lhs, Distribution const& rhs);                  //!< Distribution-Distribution
   Distribution operator * (Distribution lhs, Distribution const& rhs);                  //!< Distribution*Distribution
 
-  // Fill in an undordered_map of distributions from a map of distributions.
+  /**
+   * @brief Function that fills in a map of distributions from a
+   * map-valued function.
+   * @param g: Grid object
+   * @param InDistFunc: map-valued function dependent on x and a scale Q.
+   * @param Q: the value of Q in which InDistFunc has to be tabulated
+   * @param skip: vector of map indices to be skipped in the tabulation.
+   */
   map<int,Distribution> DistributionMap(Grid                                                    const& g,
 					function<map<int,double>(double const&, double const&)> const& InDistFunc,
 					double                                                  const& Q,
 					vector<int>                                             const& skip = {});
 
-  // Fill in an undordered_map of distributions from a map of distributions.
+  /**
+   * @brief Function that fills in a map of distributions from a
+   * map-valued function.
+   * @param g: Grid object
+   * @param InDistFunc: map-valued function dependent on x
+   * @param skip: vector of map indices to be skipped in the tabulation.
+   */
   map<int,Distribution> DistributionMap(Grid                                     const& g,
 					function<map<int,double>(double const&)> const& InDistFunc,
 					vector<int>                              const& skip = {});

@@ -30,11 +30,11 @@ namespace apfel
 
     /**
      * @brief AlphaQCD default constructor.
-     * @param AlphaRef the reference value of the coupling.
-     * @param MuRef the reference value of the scale.
-     * @param Masses vector of masses.
-     * @param Thresholds vector of thresholds.
-     * @param nsteps number of steps of the ODE solver.
+     * @param AlphaRef: the reference value of the coupling
+     * @param MuRef: the reference value of the scale
+     * @param Masses: vector of masses
+     * @param Thresholds: vector of thresholds
+     * @param nsteps: number of steps of the ODE solver
      */
     AlphaQCD(double         const& AlphaRef,
 	     double         const& MuRef,
@@ -45,10 +45,11 @@ namespace apfel
 
     /**
      * @brief AlphaQCD default constructor.
-     * @param AlphaRef the reference value of the coupling.
-     * @param MuRef the reference value of the scale.
-     * @param Masses vector of masses.
-     * @param nsteps number of steps of the ODE solver.
+     * @param AlphaRef: the reference value of the coupling
+     * @param MuRef: the reference value of the scale
+     * @param Masses: vector of masses
+     * @param nsteps: number of steps of the ODE solver
+     * @note This constructor assumes that masses and thresholds coincide.
      */
     AlphaQCD(double         const& AlphaRef,
 	     double         const& MuRef,
@@ -57,27 +58,27 @@ namespace apfel
 	     int            const& nsteps = 10);
 
     /**
-     * @brief Function for the computation of the matching. This function can be overriden.
-     * @param Up tells whether the matching is upward or not (downward).
-     * @param nf number of active flavours.
-     * @param Coup value of the coupling to be matched.
-     * @return the matched value of the coupling.
+     * @brief Function for the computation of the matching.
+     * @param Up: tells whether the matching is upward or not (downward)
+     * @param nf: number of active flavours
+     * @param Coup: value of the coupling to be matched
+     * @return The matched value of the strong coupling \f$\alpha_s\f$ at the threshold
      */
     double MatchObject(bool const& Up, int const& nf, double const& Coup) const;
 
     /**
-     * @brief Function for the computation of the full QCD beta function.
-     * @param as value of the coupling.
-     * @param nf number of active flavours.
-     * @return the value of the beta function.
+     * @brief Function that returns QCD \f$\beta\f$ function.
+     * @param as value of the coupling
+     * @param nf number of active flavours
+     * @return The the value of the QCD \f$\beta\f$ function
      */
     double Derivative(int const& nf, double const&, double const& as) const;
 
     /**
-     * @brief Function for the computation of the terms of the QCD beta function.
-     * @param pt perturnative order.
-     * @param nf number of active flavours.
-     * @return the pt-th coefficient of the beta function.
+     * @brief Function for the computation of the single coefficients of the expansion of the QCD \f$\beta\f$ function.
+     * @param pt: perturbative order
+     * @param nf: number of active flavours
+     * @return The pt-th coefficient of the QCD \f$\beta\f$ function.
      */
     double betaQCD(int const& pt, int const& nf) const;
 

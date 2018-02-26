@@ -14,7 +14,10 @@ using namespace std;
 
 namespace apfel
 {
-  // Small mumbers
+  /**
+   * @brief Small numbers used for cutoffs, integration accuracies,
+   * and so on.
+   */
   const double eps2  = 1e-2;
   const double eps3  = 1e-3;
   const double eps4  = 1e-4;
@@ -31,12 +34,16 @@ namespace apfel
   const double eps15 = 1e-15;
   const double eps25 = 1e-25;
 
-  // Color factors
+  /**
+   * @brief QCD colour factor (i.e. SU(3)).
+   */
   const double TR = 0.5;
   const double CF = 4./3.;
   const double CA = 3.;
 
-  // Useful constants
+  /**
+   * @brief Numerical constants.
+   */
   const double Pi2    = M_PI * M_PI;
   const double FourPi = 4 * M_PI;
   const double emc    = 0.5772156649015329;
@@ -45,7 +52,9 @@ namespace apfel
   const double zeta4  = 1.0823232337111382; // Pi2 * Pi2 / 90;
   const double zeta5  = 1.0369277551433699;
 
-  // Quark electric charges and their square
+  /**
+   * @brief Quark electric charges and their square.
+   */
   const double ed  = - 1. / 3.;
   const double eu  =   2. / 3.;
   const double ed2 =   1. / 9.;
@@ -53,6 +62,8 @@ namespace apfel
   const vector<double> QCh  = {ed, eu, ed, eu, ed, eu};
   const vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
 
-  // Conversion factor from GeV^{-2} to pb
+  /**
+   * @brief Conversion factor from GeV^{-2} to pb.
+   */
   const double ConvFact = 0.389379e9;
 }

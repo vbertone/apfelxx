@@ -54,6 +54,10 @@ By the default, if prefix is not set the program is installed in
 /usr/local. If you define a custom prefix, remember to export
 apfel/lib to the LD_LIBRARY_PATH.
 
+## Documetation
+
+Code documentation generated with doxygen can be found here: https://vbertone.github.io/apfelxx/html/index.html
+
 ## References
 
 - V. Bertone, S. Carrazza, J. Rojo, *Doped Parton Distributions*, [arXiv:1509.04022](http://arxiv.org/abs/1509.04022).
