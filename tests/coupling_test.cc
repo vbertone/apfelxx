@@ -15,15 +15,20 @@ using namespace std;
 
 int main()
 {
-  const auto           AlphaRef = 0.35;
-  const auto           MuRef    = sqrt(2);
+  // Reference value of the strong coupling and heavy-quark
+  // thresholds.
+  const double         AlphaRef = 0.35;
+  const double         MuRef    = sqrt(2);
   const vector<double> Masses   = {0, 0, 0, sqrt(2), 4.5, 175};
 
+  // Iniatialize the running of the coupling at all available
+  // perturbative orders.
   AlphaQCD asLO{AlphaRef, MuRef, Masses, 0};
   AlphaQCD asNLO{AlphaRef, MuRef, Masses, 1};
   AlphaQCD asNNLO{AlphaRef, MuRef, Masses, 2};
   AlphaQCD asNNNLO{AlphaRef, MuRef, Masses, 3};
 
+  // Compute and print values at Mu.
   const auto Mu = 100.;
   cout << "\nLO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << endl;
   cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu)  << " (NLO/LO     = " << 100 * asNLO.Evaluate(Mu) / asLO.Evaluate(Mu)<< "%)" << endl;

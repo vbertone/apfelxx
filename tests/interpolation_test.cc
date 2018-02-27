@@ -20,11 +20,14 @@ int main()
 {
   cout << setprecision(12) << scientific;
 
+  // Grid
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
 
+  // Test distribution
   const auto xg = [&] (double const& x)->double{ return x * ( 1 -x ); };
   const Distribution xgluon{g, xg};
 
+  // Test values
   vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
 
   cout << "x, original function, interpolated function (joint), ratio" << endl;

@@ -18,6 +18,7 @@
 using namespace apfel;
 using namespace std;
 
+// Test expression (the LO Pqq splitting function)
 class p0qq: public Expression
 {
 public:

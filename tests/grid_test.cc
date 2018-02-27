@@ -18,19 +18,23 @@ int main()
 {
   cout << setprecision(15) << scientific;
 
+  // Allocate vector of subgrids
   vector<SubGrid> sgs = {
     SubGrid{10,1e-5,3},
     SubGrid{20,1e-3,2},
     SubGrid{30,1e-1,2}
   };
 
-  Grid g{sgs, false};
+  // Construct grid with and without locking the subgrids
   Grid gl{sgs, true};
+  Grid g{sgs, false};
 
+  // Print grids
   cout << g << endl;
   cout << gl << endl;
 
-  if (g == gl) return 0;
+  if (g == gl)
+    return 0;
 
   return 0;
 }

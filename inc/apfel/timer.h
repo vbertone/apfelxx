@@ -17,20 +17,26 @@ using namespace std;
 namespace apfel
 {
   /**
-   * @brief The Timer class.
-   *
-   * Computes the calculation time.
+   * @brief The Timer class computes the time elapsed between start
+   * and stop.
    */
   class Timer
   {
   public:
-    // Constructor
+    /**
+     * @brief The Timer default constructor.
+     */
     Timer() { start(); }
 
-    // Starts the timer.
+    /**
+     * @brief This function starts the timer.
+     */
     void start() { startTime = chrono::steady_clock::now(); }
 
-    // Stops the timer.
+    /**
+     * @brief This function stops the timer and reports the elapsed
+     * time in seconds since the last time the timer was started.
+     */
     void stop()
     {
       auto end = chrono::steady_clock::now();

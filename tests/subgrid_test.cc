@@ -18,7 +18,7 @@ int main()
 {
   cout << setprecision(12) << scientific;
 
-  // Constructor tests
+  // Construct test subgrid
   SubGrid a{50, 1e-5, 3};
   cout << a << endl;
 

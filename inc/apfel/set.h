@@ -16,51 +16,68 @@ using std::function;
 namespace apfel
 {
   /**
-   * @brief The Set template class.
-   *
-   * This class allocates a Set of objects of type T
-   * following the ConvolutionMap U. This class provides the
-   * methods to deal with operations between different
-   * types of objects T.
-   *
-   * Things to be improved:
-   * - there is no real necessity of allocating U
-   * - missing operators.
+   * @brief The Set template class allocates a collection of objects
+   * of type T along the ConvolutionMap and provides the methods to
+   * perform operations between different types of objects T.
    */
   template<class T>
   class Set
   {        
   public:
     /**
-     * @brief The Set class constructor.
-     * @param the input map, in this case it makes a copy
+     * @brief The Set default constructor.
+     * @param Map: the convolution map
+     * @param in: a map of objects of type T
      */
     Set(ConvolutionMap const& Map, map<int, T> const& in);
 
     /**
+     * @name Set binary operators
+     * Binary operators involving a Set.
+     */
+    ///@{
+    /**
      * @brief operator *= product object
-     * @param d left hand side object
-     * @return a new object of type V and base U
+     * @param d: the left hand side object of type V
+     * @return a new object of type V
      */
     template<class V> Set<V> operator *= (Set<V> const& d) const;
 
-    // other operators
     Set<T>& operator *= (double const& s);                   //!< this *= scalar
     Set<T>& operator *= (function<double(double const&)> f); //!< this *= function of the integration variable (for distributions only)
     Set<T>& operator *= (vector<double> const& v);           //!< this *= vector of scalars
     Set<T>& operator /= (double const& s);                   //!< this /= scalar
     Set<T>& operator += (Set<T> const& d);                   //!< this += Set
     Set<T>& operator -= (Set<T> const& d);                   //!< this -= Set
+    ///@}
 
-    // Get methods
+    /**
+     * @name Getters
+     */
+    ///@{
+    /**
+     * @brief This returns object with ID "id" in the map.
+     */
     T              const& at(int const& id) const { return _objects.at(id); }
+    /**
+     * @brief This returns the convolution map.
+     */
     ConvolutionMap const& GetMap()          const { return _map; }
+    /**
+     * @brief This returns the full map of objects.
+     */
     map<int, T>    const& GetObjects()      const { return _objects; }
+    ///@}
 
-    // Set methods
+    /**
+     * @brief This function (re)sets the convolution map.
+     */
     void SetMap(ConvolutionMap const& newmap) { _map = newmap; }
 
-    // Method to sum all the objects of a given set.
+    /**
+     * @brief This function sums up all the objects of the set into
+     * one.
+     */
     T Combine() const;
 
   private:
@@ -69,11 +86,10 @@ namespace apfel
   };
 
   /**
-   * @brief operator *  and / definition
-   * @param lhs the left object
-   * @param rhs the right object
-   * @return a Set of type B, C.
+   * @name Set ternary operators
+   * Ternary operators involving Sets.
    */
+  ///@{
   template<class A, class B>
   Set<B> operator * (Set<A> lhs, Set<B> const& rhs) { return lhs *= rhs; }
 
@@ -110,4 +126,5 @@ namespace apfel
 
   template<class T>
   Set<T> operator - (Set<T> lhs, Set<T> const& rhs) { return lhs -= rhs; }
+  ///@}
 }

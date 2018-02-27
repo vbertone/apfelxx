@@ -19,11 +19,11 @@ using namespace std;
 
 int main()
 {
-  // Constructor of QGrid
+  // Constructor of QGrid with type double
   const QGrid<double> qg{50, 1, 1000, 3, {0, 0, 0, sqrt(2), 4.5, 175.}};
   cout << qg << endl;
 
-  // Direct AlphaQCD
+  // AlphaQCD running coupling
   AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
 
   // Tabulate AlphaQCD on a QGrid
