@@ -7,10 +7,10 @@
 APFEL++ is a C++ rewriting of the Fortran 77 evolution code APFEL (see
 http://apfel.hepforge.org and
 https://github.com/scarrazza/apfel). APFEL++ is based on a completely
-new code design guarantees a better performance and a more optimal
-memory management. The new modular structure allows for a better
-maintainability and an easier extensibility. This makes APFEL++
-suitable for a wide range of tasks: for the solution of the DGLAP
+new code design and guarantees a better performance along with a more
+optimal memory management. The new modular structure allows for a
+better maintainability and an easier extensibility. This makes APFEL++
+suitable for a wide range of tasks: from the solution of the DGLAP
 evolution equations to the computation of deep-inelastic-scattering
 (DIS) and single-inclusive-annihilation cross sections. Also more
 complex computations, like semi-inclusive DIS and Drell-Yan cross
