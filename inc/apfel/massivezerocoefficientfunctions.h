@@ -12,12 +12,13 @@
 namespace apfel
 {
   /**
-   * @defgroup NCMassiveZero
-   * Massless limit of the massive netral Current coefficient
-   * functions.
-   * @note In the following "xi" indicates the ratio Q<SUP>2</SUP> /
-   * M<SUP>2</SUP> and "xiF" is equal to M<SUP>2</SUP> /
-   * &muF;<SUP>2</SUP>. See Appendix D of
+   * @defgroup NCMassiveZero Massless limit of the massive neutral current coefficient functions
+   * Collection of the neutral current massless limit of the massive
+   * coefficient functions for F<SUB>2</SUB> and F<SUB>L</SUB> up to
+   * O(&alpha;<SUB>s</SUB>).
+   * @note In the following "xi"
+   * indicates the ratio Q<SUP>2</SUP> / M<SUP>2</SUP> and "xiF" is
+   * equal to M<SUP>2</SUP> / &mu;<SUB>F</SUB><SUP>2</SUP>. See Appendix D of
    * https://arxiv.org/pdf/hep-ph/9601302.pdf. The suffix "_c" in the
    * classes below stands for "constant", that is no dependence on
    * "xi" or "xiF". "_l" or "_l2" instead means that that term is
@@ -32,9 +33,9 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief Gluon coefficient function for F2. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for
+   * F2. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm021gNC_c: public Expression
   {
   public:
@@ -43,9 +44,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for F2. Single-log term. 
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for
+   * F2. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm021gNC_l: public Expression
   {
   public:
@@ -54,9 +55,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for FL. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for
+   * FL. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm0L1gNC_c: public Expression
   {
   public:
@@ -71,9 +72,9 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief Non-singlet coefficient function for F2. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for F2. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm022nsNC_c: public Expression
   {
   public:
@@ -84,9 +85,9 @@ namespace apfel
   };
 
   /**
-   * @brief Non-singlet coefficient function for F2. Single-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for F2. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm022nsNC_l: public Expression
   {
   public:
@@ -97,9 +98,9 @@ namespace apfel
   };
 
   /**
-   * @brief Non-singlet coefficient function for F2. Double-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for F2. Double-log term.
    */
-  //_________________________________________________________________________________
   class Cm022nsNC_l2: public Expression
   {
   public:
@@ -110,9 +111,9 @@ namespace apfel
   };
 
   /**
-   * @brief Non-singlet coefficient function for FL. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for FL. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm0L2nsNC_c: public Expression
   {
   public:
@@ -121,9 +122,9 @@ namespace apfel
   };
 
   /**
-   * @brief Non-singlet coefficient function for FL. Single-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for FL. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm0L2nsNC_l: public Expression
   {
   public:
@@ -132,9 +133,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for F2. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm022psNC_c: public Expression
   {
   public:
@@ -143,9 +144,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for F2. Single-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm022psNC_l: public Expression
   {
   public:
@@ -154,9 +155,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for F2. Double-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2. Double-log term.
    */
-  //_________________________________________________________________________________
   class Cm022psNC_l2: public Expression
   {
   public:
@@ -165,10 +166,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for
-   * F2. Single-log(&mu;<SUB>F</SUB>) term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2. Single-log(&mu;<SUB>F</SUB>) term.
    */
-  //_________________________________________________________________________________
   class Cm022psNC_f: public Expression
   {
   public:
@@ -177,10 +177,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for F2. Mixed-double-log
-   * term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2. Mixed-double-log term.
    */
-  //_________________________________________________________________________________
   class Cm022psNC_lf: public Expression
   {
   public:
@@ -189,9 +188,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for FL. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for FL. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm0L2psNC_c: public Expression
   {
   public:
@@ -200,9 +199,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for FL. Single-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for FL. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm0L2psNC_l: public Expression
   {
   public:
@@ -211,10 +210,9 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for
-   * FL. Single-log(&mu;<SUB>F</SUB>) term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for FL. Single-log(&mu;<SUB>F</SUB>) term.
    */
-  //_________________________________________________________________________________
   class Cm0L2psNC_f: public Expression
   {
   public:
@@ -223,9 +221,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for F2. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm022gNC_c: public Expression
   {
   public:
@@ -234,9 +232,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for F2. Single-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm022gNC_l: public Expression
   {
   public:
@@ -245,9 +243,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for F2. Double-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2. Double-log term.
    */
-  //_________________________________________________________________________________
   class Cm022gNC_l2: public Expression
   {
   public:
@@ -256,10 +254,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for
-   * F2. Single-log(&mu;<SUB>F</SUB>) term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2. Single-log(&mu;<SUB>F</SUB>) term.
    */
-  //_________________________________________________________________________________
   class Cm022gNC_f: public Expression
   {
   public:
@@ -268,9 +265,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for F2. Mixed-double-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2. Mixed-double-log term.
    */
-  //_________________________________________________________________________________
   class Cm022gNC_lf: public Expression
   {
   public:
@@ -279,9 +276,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for FL. Constant term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for FL. Constant term.
    */
-  //_________________________________________________________________________________
   class Cm0L2gNC_c: public Expression
   {
   public:
@@ -290,9 +287,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for FL. Single-log term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for FL. Single-log term.
    */
-  //_________________________________________________________________________________
   class Cm0L2gNC_l: public Expression
   {
   public:
@@ -301,10 +298,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for
-   * FL. Single-log(&mu;<SUB>F</SUB>) term.
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for FL. Single-log(&mu;<SUB>F</SUB>) term.
    */
-  //_________________________________________________________________________________
   class Cm0L2gNC_f: public Expression
   {
   public:

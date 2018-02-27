@@ -12,6 +12,9 @@
 
 using namespace std;
 
+/**
+ * @brief Namespace for all APFEL++ functions and classes
+ */
 namespace apfel
 {
   /**
@@ -31,7 +34,7 @@ namespace apfel
 
   /**
    * @brief Get Verbosity level
-   * @return the curremt verbosity level
+   * @return the current verbosity level
    */
   int GetVerbosityLevel();
 

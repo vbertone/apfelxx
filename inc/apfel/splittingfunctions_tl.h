@@ -12,9 +12,33 @@
 namespace apfel
 {
   /**
-   * @brief The LO time-like splitting function classes
+   * @defgroup TLSplittings Time-like splitting function
+   * Collection of the MSbar time-like splitting functions up to the
+   * highest order currently known for unpolarised, polarised (not
+   * yet!), and transversity evolution.
+   * @note While for the O(&alpha;<SUB>s</SUB>) and
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) splitting functions exact
+   * expressions are used, a fast parameterisation for the
+   * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) ones is used. See
+   * https://www.liverpool.ac.uk/~avogt/split.html for more details.
    */
-  //_________________________________________________________________________________
+  ///@{
+  ///@}
+  /**
+   * @defgroup UnpSFtl Unpolarised splitting functions
+   * @ingroup TLSplittings
+   */
+  ///@{
+  ///@}
+  /**
+   * @defgroup LOunpsftl LO splitting functions
+   * @ingroup UnpSFtl
+   */
+  ///@{
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB>) non-singlet unpolarised
+   * splitting function.
+   */
   class P0Tns: public Expression
   {
   public:
@@ -24,7 +48,10 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised
+   * splitting function.
+   */
   class P0Tqg: public Expression
   {
   public:
@@ -32,7 +59,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised
+   * splitting function.
+   */
   class P0Tgq: public Expression
   {
   public:
@@ -40,7 +70,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised
+   * splitting function.
+   */
   class P0Tgg: public Expression
   {
   public:
@@ -51,11 +84,17 @@ namespace apfel
   private:
     int const _nf;
   };
+  ///@}
 
   /**
-   * @brief The NLO time-like splitting function classes
+   * @defgroup NLOunpsftl NLO splitting functions
+   * @ingroup UnpSFtl
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * non-singlet-plus unpolarised splitting function.
+   */
   class P1Tnsp: public Expression
   {
   public:
@@ -68,7 +107,10 @@ namespace apfel
     double    _a2;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * non-singlet-minus unpolarised splitting function.
+   */
   class P1Tnsm: public P1Tnsp
   {
   public:
@@ -76,7 +118,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * unpolarised splitting function.
+   */
   class P1Tps: public Expression
   {
   public:
@@ -86,7 +131,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-gluon
+   * unpolarised splitting function.
+   */
   class P1Tqg: public Expression
   {
   public:
@@ -96,7 +144,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-quark
+   * unpolarised splitting function.
+   */
   class P1Tgq: public Expression
   {
   public:
@@ -106,7 +157,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-gluon
+   * unpolarised splitting function.
+   */
   class P1Tgg: public Expression
   {
   public:
@@ -118,11 +172,17 @@ namespace apfel
     int const _nf;
     double    _a2g;
   };
+  ///@}
 
   /**
-   * @brief The NNLO time-like splitting function classes (parametrized)
+   * @defgroup NNLOunpsftl NNLO splitting functions
+   * @ingroup UnpSFtl
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>)
+   * non-singlet-plus unpolarised splitting function.
+   */
   class P2Tnsp: public Expression
   {
   public:
@@ -134,7 +194,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>)
+   * non-singlet-minus unpolarised splitting function.
+   */
   class P2Tnsm: public Expression
   {
   public:
@@ -146,7 +209,11 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>)
+   * non-singlet-valence unpolarised splitting function minus
+   * non-singlet-minus unpolarised splitting function.
+   */
   class P2Tnss: public Expression
   {
   public:
@@ -156,7 +223,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * unpolarised splitting function.
+   */
   class P2Tps: public Expression
   {
   public:
@@ -166,7 +236,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quark-gluon
+   * unpolarised splitting function.
+   */
   class P2Tqg: public Expression
   {
   public:
@@ -176,7 +249,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-quark
+   * unpolarised splitting function.
+   */
   class P2Tgq: public Expression
   {
   public:
@@ -186,7 +262,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-gluon
+   * unpolarised splitting function.
+   */
   class P2Tgg: public Expression
   {
   public:
@@ -197,13 +276,24 @@ namespace apfel
   private:
     int const _nf;
   };
+  ///@}
 
   /**
-   * @brief The LO space-like splitting function for tranversely
-   * polarised FFs. Reference
-   * https://arxiv.org/pdf/hep-ph/0108241v1.pdf
+   * @defgroup TransSFtl Transversely polarised splitting functions
+   * @ingroup TLSplittings
+   * @note Reference https://arxiv.org/pdf/hep-ph/0108241v1.pdf.
    */
-  //_________________________________________________________________________________
+  ///@{
+  ///@}
+  /**
+   * @defgroup LOtranssf LO splitting functions
+   * @ingroup TransSFtl
+   */
+  ///@{
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB>) non-singlet transversely
+   * polarised splitting function.
+   */
   class P0Ttransns: public Expression
   {
   public:
@@ -212,13 +302,17 @@ namespace apfel
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   };
+  ///@}
 
   /**
-   * @brief The NLO space-like splitting function for tranversely
-   * polarised FFs. Reference
-   * https://arxiv.org/pdf/hep-ph/0108241v1.pdf
+   * @defgroup NLOtranssf NLO splitting functions
+   * @ingroup TransSFtl
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * non-singlet-plus transversely polarised splitting function.
+   */
   class P1Ttransnsp: public Expression
   {
   public:
@@ -231,11 +325,15 @@ namespace apfel
     double    _a2;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Time-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * non-singlet-minus transversely polarised splitting function.
+   */
   class P1Ttransnsm: public P1Ttransnsp
   {
   public:
     P1Ttransnsm(int const& nf);
     double Regular(double const& x)  const;
   };
+  ///@}
 }

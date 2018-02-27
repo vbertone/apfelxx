@@ -34,17 +34,17 @@ namespace apfel {
 
     // LO
     map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Id});
-    C2LO.insert({CG,  Zero});
+    C2LO.insert({DISNCBasis::CNS, Id});
+    C2LO.insert({DISNCBasis::CS,  Id});
+    C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  O21ns});
-    C2NLO.insert({CG,  O21g});
+    C2NLO.insert({DISNCBasis::CNS, O21ns});
+    C2NLO.insert({DISNCBasis::CS,  O21ns});
+    C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
     map<int,map<int,Operator>> C2NNLO;
@@ -55,9 +55,9 @@ namespace apfel {
 	const Operator O22nsp{g, C22nsp{nf}, IntEps};
 	const Operator O22t = O22nsp + 6 * O22ps;
 	map<int,Operator> C2NNLOnf;
-	C2NNLOnf.insert({CNS, O22nsp});
-	C2NNLOnf.insert({CS,  O22t});
-	C2NNLOnf.insert({CG,  O22g});
+	C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
+	C2NNLOnf.insert({DISNCBasis::CS,  O22t});
+	C2NNLOnf.insert({DISNCBasis::CG,  O22g});
 	C2NNLO.insert({nf,C2NNLOnf});
       }
 
@@ -107,17 +107,17 @@ namespace apfel {
 
     // LO
     map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
+    CLLO.insert({DISNCBasis::CNS, Zero});
+    CLLO.insert({DISNCBasis::CS,  Zero});
+    CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  OL1ns});
-    CLNLO.insert({CG,  OL1g});
+    CLNLO.insert({DISNCBasis::CNS, OL1ns});
+    CLNLO.insert({DISNCBasis::CS,  OL1ns});
+    CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO (for nf from 1 to 6)
     map<int,map<int,Operator>> CLNNLO;
@@ -128,9 +128,9 @@ namespace apfel {
 	const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
 	const Operator OL2t = OL2nsp + 6 * OL2ps;
 	map<int,Operator> CLNNLOnf;
-	CLNNLOnf.insert({CNS, OL2nsp});
-	CLNNLOnf.insert({CS,  OL2t});
-	CLNNLOnf.insert({CG,  OL2g});
+	CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
+	CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
+	CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
 	CLNNLO.insert({nf,CLNNLOnf});
       }
 
@@ -181,16 +181,16 @@ namespace apfel {
 
     // LO
     map<int,Operator> C3LO;
-    C3LO.insert({CNS, Id});
-    C3LO.insert({CS,  Id});
-    C3LO.insert({CG,  Zero});
+    C3LO.insert({DISNCBasis::CNS, Id});
+    C3LO.insert({DISNCBasis::CS,  Id});
+    C3LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
-    C3NLO.insert({CNS, O31ns});
-    C3NLO.insert({CS,  O31ns});
-    C3NLO.insert({CG,  Zero});
+    C3NLO.insert({DISNCBasis::CNS, O31ns});
+    C3NLO.insert({DISNCBasis::CS,  O31ns});
+    C3NLO.insert({DISNCBasis::CG,  Zero});
 
     // NNLO
     map<int,map<int,Operator>> C3NNLO;
@@ -199,9 +199,9 @@ namespace apfel {
 	const Operator O32nsm{g, C32nsm{nf}, IntEps};
 	const Operator O32t = O32nsm;
 	map<int,Operator> C3NNLOnf;
-	C3NNLOnf.insert({CNS, O32nsm});
-	C3NNLOnf.insert({CS,  O32t});
-	C3NNLOnf.insert({CG,  Zero});
+	C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
+	C3NNLOnf.insert({DISNCBasis::CS,  O32t});
+	C3NNLOnf.insert({DISNCBasis::CG,  Zero});
 	C3NNLO.insert({nf,C3NNLOnf});
       }
 
@@ -252,17 +252,17 @@ namespace apfel {
 
     // LO
     map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Id});
-    C2LO.insert({CG,  Zero});
+    C2LO.insert({DISCCBasis::CNS, Id});
+    C2LO.insert({DISCCBasis::CS,  Id});
+    C2LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  O21ns});
-    C2NLO.insert({CG,  O21g});
+    C2NLO.insert({DISCCBasis::CNS, O21ns});
+    C2NLO.insert({DISCCBasis::CS,  O21ns});
+    C2NLO.insert({DISCCBasis::CG,  O21g});
 
     // NNLO
     map<int,map<int,Operator>> C2NNLO;
@@ -273,9 +273,9 @@ namespace apfel {
 	const Operator O22nsp{g, C22nsp{nf}, IntEps};
 	const Operator O22t = O22nsp + 6 * O22ps;
 	map<int,Operator> C2NNLOnf;
-	C2NNLOnf.insert({CNS, O22nsp});
-	C2NNLOnf.insert({CS,  O22t});
-	C2NNLOnf.insert({CG,  O22g});
+	C2NNLOnf.insert({DISCCBasis::CNS, O22nsp});
+	C2NNLOnf.insert({DISCCBasis::CS,  O22t});
+	C2NNLOnf.insert({DISCCBasis::CG,  O22g});
 	C2NNLO.insert({nf,C2NNLOnf});
       }
 
@@ -331,16 +331,16 @@ namespace apfel {
 
     // LO
     map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Zero});
-    C2LO.insert({CG,  Zero});
+    C2LO.insert({DISCCBasis::CNS, Id});
+    C2LO.insert({DISCCBasis::CS,  Zero});
+    C2LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  Zero});
-    C2NLO.insert({CG,  Zero});
+    C2NLO.insert({DISCCBasis::CNS, O21ns});
+    C2NLO.insert({DISCCBasis::CS,  Zero});
+    C2NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
     map<int,map<int,Operator>> C2NNLO;
@@ -348,9 +348,9 @@ namespace apfel {
       {
 	const Operator O22nsm{g, C22nsm{nf}, IntEps};
 	map<int,Operator> C2NNLOnf;
-	C2NNLOnf.insert({CNS, O22nsm});
-	C2NNLOnf.insert({CS,  Zero});
-	C2NNLOnf.insert({CG,  Zero});
+	C2NNLOnf.insert({DISCCBasis::CNS, O22nsm});
+	C2NNLOnf.insert({DISCCBasis::CS,  Zero});
+	C2NNLOnf.insert({DISCCBasis::CG,  Zero});
 	C2NNLO.insert({nf,C2NNLOnf});
       }
 
@@ -405,17 +405,17 @@ namespace apfel {
 
     // LO
     map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
+    CLLO.insert({DISCCBasis::CNS, Zero});
+    CLLO.insert({DISCCBasis::CS,  Zero});
+    CLLO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  OL1ns});
-    CLNLO.insert({CG,  OL1g});
+    CLNLO.insert({DISCCBasis::CNS, OL1ns});
+    CLNLO.insert({DISCCBasis::CS,  OL1ns});
+    CLNLO.insert({DISCCBasis::CG,  OL1g});
 
     // NNLO
     map<int,map<int,Operator>> CLNNLO;
@@ -426,9 +426,9 @@ namespace apfel {
 	const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
 	const Operator OL2t = OL2nsp + 6 * OL2ps;
 	map<int,Operator> CLNNLOnf;
-	CLNNLOnf.insert({CNS, OL2nsp});
-	CLNNLOnf.insert({CS,  OL2t});
-	CLNNLOnf.insert({CG,  OL2g});
+	CLNNLOnf.insert({DISCCBasis::CNS, OL2nsp});
+	CLNNLOnf.insert({DISCCBasis::CS,  OL2t});
+	CLNNLOnf.insert({DISCCBasis::CG,  OL2g});
 	CLNNLO.insert({nf,CLNNLOnf});
       }
 
@@ -483,16 +483,16 @@ namespace apfel {
 
     // LO
     map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
+    CLLO.insert({DISCCBasis::CNS, Zero});
+    CLLO.insert({DISCCBasis::CS,  Zero});
+    CLLO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  Zero});
-    CLNLO.insert({CG,  Zero});
+    CLNLO.insert({DISCCBasis::CNS, OL1ns});
+    CLNLO.insert({DISCCBasis::CS,  Zero});
+    CLNLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
     map<int,map<int,Operator>> CLNNLO;
@@ -500,9 +500,9 @@ namespace apfel {
       {
 	const Operator OL2nsm{g, CL2nsm{nf}, IntEps};
 	map<int,Operator> CLNNLOnf;
-	CLNNLOnf.insert({CNS, OL2nsm});
-	CLNNLOnf.insert({CS,  Zero});
-	CLNNLOnf.insert({CG,  Zero});
+	CLNNLOnf.insert({DISCCBasis::CNS, OL2nsm});
+	CLNNLOnf.insert({DISCCBasis::CS,  Zero});
+	CLNNLOnf.insert({DISCCBasis::CG,  Zero});
 	CLNNLO.insert({nf,CLNNLOnf});
       }
 
@@ -558,16 +558,16 @@ namespace apfel {
 
     // LO
     map<int,Operator> C3LO;
-    C3LO.insert({CNS, Id});
-    C3LO.insert({CS,  Id});
-    C3LO.insert({CG,  Zero});
+    C3LO.insert({DISCCBasis::CNS, Id});
+    C3LO.insert({DISCCBasis::CS,  Id});
+    C3LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
-    C3NLO.insert({CNS, O31ns});
-    C3NLO.insert({CS,  O31ns});
-    C3NLO.insert({CG,  Zero});
+    C3NLO.insert({DISCCBasis::CNS, O31ns});
+    C3NLO.insert({DISCCBasis::CS,  O31ns});
+    C3NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
     map<int,map<int,Operator>> C3NNLO;
@@ -576,9 +576,9 @@ namespace apfel {
 	const Operator O32nsp{g, C32nsp{nf}, IntEps};
 	const Operator O32t = O32nsp;
 	map<int,Operator> C3NNLOnf;
-	C3NNLOnf.insert({CNS, O32nsp});
-	C3NNLOnf.insert({CS,  O32t});
-	C3NNLOnf.insert({CG,  Zero});
+	C3NNLOnf.insert({DISCCBasis::CNS, O32nsp});
+	C3NNLOnf.insert({DISCCBasis::CS,  O32t});
+	C3NNLOnf.insert({DISCCBasis::CG,  Zero});
 	C3NNLO.insert({nf,C3NNLOnf});
       }
 
@@ -634,16 +634,16 @@ namespace apfel {
 
     // LO
     map<int,Operator> C3LO;
-    C3LO.insert({CNS, Id});
-    C3LO.insert({CS,  Id});
-    C3LO.insert({CG,  Zero});
+    C3LO.insert({DISCCBasis::CNS, Id});
+    C3LO.insert({DISCCBasis::CS,  Id});
+    C3LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
-    C3NLO.insert({CNS, O31ns});
-    C3NLO.insert({CS,  O31ns});
-    C3NLO.insert({CG,  Zero});
+    C3NLO.insert({DISCCBasis::CNS, O31ns});
+    C3NLO.insert({DISCCBasis::CS,  O31ns});
+    C3NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
     map<int,map<int,Operator>> C3NNLO;
@@ -651,9 +651,9 @@ namespace apfel {
       {
 	const Operator O32nsm{g, C32nsm{nf}, IntEps};
 	map<int,Operator> C3NNLOnf;
-	C3NNLOnf.insert({CNS, O32nsm});
-	C3NNLOnf.insert({CS,  O32nsm});
-	C3NNLOnf.insert({CG,  Zero});
+	C3NNLOnf.insert({DISCCBasis::CNS, O32nsm});
+	C3NNLOnf.insert({DISCCBasis::CS,  O32nsm});
+	C3NNLOnf.insert({DISCCBasis::CG,  Zero});
 	C3NNLO.insert({nf,C3NNLOnf});
       }
 
@@ -722,17 +722,17 @@ namespace apfel {
     // Zero Mass coefficient functions
     // LO
     map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Id});
-    C2LO.insert({CG,  Zero});
+    C2LO.insert({DISNCBasis::CNS, Id});
+    C2LO.insert({DISNCBasis::CS,  Id});
+    C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  O21ns});
-    C2NLO.insert({CG,  O21g});
+    C2NLO.insert({DISNCBasis::CNS, O21ns});
+    C2NLO.insert({DISNCBasis::CS,  O21ns});
+    C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
     const Operator O22ps {g, C22ps{}, IntEps};
@@ -743,9 +743,9 @@ namespace apfel {
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
     map<int,Operator> Not;
-    Not.insert({CNS, Zero});
-    Not.insert({CS,  Zero});
-    Not.insert({CG,  Zero});
+    Not.insert({DISNCBasis::CNS, Zero});
+    Not.insert({DISNCBasis::CS,  Zero});
+    Not.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     const TabulateObject<Operator> TabO21g{[=,&g] (double const& xi) -> Operator
@@ -805,16 +805,16 @@ namespace apfel {
 
 	    // Now insert NLO
 	    map<int,Operator> NLO;
-	    NLO.insert({CNS, Zero});
-	    NLO.insert({CS,  Zero});
-	    NLO.insert({CG,  TabO21g.Evaluate(xi)});
+	    NLO.insert({DISNCBasis::CNS, Zero});
+	    NLO.insert({DISNCBasis::CS,  Zero});
+	    NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
 	    map<int,Operator> NNLO;
-	    NNLO.insert({CNS, Zero});
-	    NNLO.insert({CS,  TabO22s.Evaluate(xi)});
-	    NNLO.insert({CG,  TabO22g.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CNS, Zero});
+	    NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
 
 	    // Include the massive bit to the non-singlet coefficient
@@ -826,9 +826,9 @@ namespace apfel {
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
 	map<int,Operator> C2NNLO;
-	C2NNLO.insert({CNS, lNNLOns});
-	C2NNLO.insert({CS,  O22t});
-	C2NNLO.insert({CG,  O22g});
+	C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
+	C2NNLO.insert({DISNCBasis::CS,  O22t});
+	C2NNLO.insert({DISNCBasis::CG,  O22g});
 	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
@@ -878,17 +878,17 @@ namespace apfel {
     // Zero Mass coefficient functions
     // LO
     map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
+    CLLO.insert({DISNCBasis::CNS, Zero});
+    CLLO.insert({DISNCBasis::CS,  Zero});
+    CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  OL1ns});
-    CLNLO.insert({CG,  OL1g});
+    CLNLO.insert({DISNCBasis::CNS, OL1ns});
+    CLNLO.insert({DISNCBasis::CS,  OL1ns});
+    CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO
     const Operator OL2ps {g, CL2ps{}, IntEps};
@@ -899,9 +899,9 @@ namespace apfel {
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
     map<int,Operator> Not;
-    Not.insert({CNS, Zero});
-    Not.insert({CS,  Zero});
-    Not.insert({CG,  Zero});
+    Not.insert({DISNCBasis::CNS, Zero});
+    Not.insert({DISNCBasis::CS,  Zero});
+    Not.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     const TabulateObject<Operator> TabOL1g{[=,&g] (double const& xi) -> Operator
@@ -961,16 +961,16 @@ namespace apfel {
 
 	    // Now insert NLO
 	    map<int,Operator> NLO;
-	    NLO.insert({CNS, Zero});
-	    NLO.insert({CS,  Zero});
-	    NLO.insert({CG,  TabOL1g.Evaluate(xi)});
+	    NLO.insert({DISNCBasis::CNS, Zero});
+	    NLO.insert({DISNCBasis::CS,  Zero});
+	    NLO.insert({DISNCBasis::CG,  TabOL1g.Evaluate(xi)});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
 	    map<int,Operator> NNLO;
-	    NNLO.insert({CNS, Zero});
-	    NNLO.insert({CS,  TabOL2s.Evaluate(xi)});
-	    NNLO.insert({CG,  TabOL2g.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CNS, Zero});
+	    NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
 
 	    // Include the massive bit to the non-singlet coefficient
@@ -982,9 +982,9 @@ namespace apfel {
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
 	map<int,Operator> CLNNLO;
-	CLNNLO.insert({CNS, lNNLOns});
-	CLNNLO.insert({CS,  OL2t});
-	CLNNLO.insert({CG,  OL2g});
+	CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
+	CLNNLO.insert({DISNCBasis::CS,  OL2t});
+	CLNNLO.insert({DISNCBasis::CG,  OL2g});
 	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
@@ -1035,17 +1035,17 @@ namespace apfel {
     // Zero Mass coefficient functions
     // LO
     map<int,Operator> C2LO;
-    C2LO.insert({CNS, Id});
-    C2LO.insert({CS,  Id});
-    C2LO.insert({CG,  Zero});
+    C2LO.insert({DISNCBasis::CNS, Id});
+    C2LO.insert({DISNCBasis::CS,  Id});
+    C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
-    C2NLO.insert({CNS, O21ns});
-    C2NLO.insert({CS,  O21ns});
-    C2NLO.insert({CG,  O21g});
+    C2NLO.insert({DISNCBasis::CNS, O21ns});
+    C2NLO.insert({DISNCBasis::CS,  O21ns});
+    C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
     const Operator O22ps {g, C22ps{}, IntEps};
@@ -1056,9 +1056,9 @@ namespace apfel {
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
     map<int,Operator> Not;
-    Not.insert({CNS, Zero});
-    Not.insert({CS,  Zero});
-    Not.insert({CG,  Zero});
+    Not.insert({DISNCBasis::CNS, Zero});
+    Not.insert({DISNCBasis::CS,  Zero});
+    Not.insert({DISNCBasis::CG,  Zero});
 
     // Initialize massive zero coefficient functions
     const Operator Om021gc  {g, Cm021gNC_c{},   IntEps};
@@ -1136,16 +1136,16 @@ namespace apfel {
 
 	    // Now insert NLO
 	    map<int,Operator> NLO;
-	    NLO.insert({CNS, Zero});
-	    NLO.insert({CS,  Zero});
-	    NLO.insert({CG,  TabO21g.Evaluate(xi)});
+	    NLO.insert({DISNCBasis::CNS, Zero});
+	    NLO.insert({DISNCBasis::CS,  Zero});
+	    NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
 	    map<int,Operator> NNLO;
-	    NNLO.insert({CNS, Zero});
-	    NNLO.insert({CS,  TabO22s.Evaluate(xi)});
-	    NNLO.insert({CG,  TabO22g.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CNS, Zero});
+	    NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
 
 	    // Include the massive bit to the non-singlet coefficient
@@ -1157,9 +1157,9 @@ namespace apfel {
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
 	map<int,Operator> C2NNLO;
-	C2NNLO.insert({CNS, lNNLOns});
-	C2NNLO.insert({CS,  O22t});
-	C2NNLO.insert({CG,  O22g});
+	C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
+	C2NNLO.insert({DISNCBasis::CS,  O22t});
+	C2NNLO.insert({DISNCBasis::CG,  O22g});
 	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis
@@ -1209,17 +1209,17 @@ namespace apfel {
     // Zero Mass coefficient functions
     // LO
     map<int,Operator> CLLO;
-    CLLO.insert({CNS, Zero});
-    CLLO.insert({CS,  Zero});
-    CLLO.insert({CG,  Zero});
+    CLLO.insert({DISNCBasis::CNS, Zero});
+    CLLO.insert({DISNCBasis::CS,  Zero});
+    CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
     map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
-    CLNLO.insert({CNS, OL1ns});
-    CLNLO.insert({CS,  OL1ns});
-    CLNLO.insert({CG,  OL1g});
+    CLNLO.insert({DISNCBasis::CNS, OL1ns});
+    CLNLO.insert({DISNCBasis::CS,  OL1ns});
+    CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO
     const Operator OL2ps {g, CL2ps{}, IntEps};
@@ -1230,9 +1230,9 @@ namespace apfel {
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
     map<int,Operator> Not;
-    Not.insert({CNS, Zero});
-    Not.insert({CS,  Zero});
-    Not.insert({CG,  Zero});
+    Not.insert({DISNCBasis::CNS, Zero});
+    Not.insert({DISNCBasis::CS,  Zero});
+    Not.insert({DISNCBasis::CG,  Zero});
 
     // Initialize massive zero coefficient functions
     const Operator Om0L1g  {g, Cm0L1gNC_c{},  IntEps};
@@ -1294,16 +1294,16 @@ namespace apfel {
 
 	    // Now insert NLO
 	    map<int,Operator> NLO;
-	    NLO.insert({CNS, Zero});
-	    NLO.insert({CS,  Zero});
-	    NLO.insert({CG,  Om0L1g});
+	    NLO.insert({DISNCBasis::CNS, Zero});
+	    NLO.insert({DISNCBasis::CS,  Zero});
+	    NLO.insert({DISNCBasis::CG,  Om0L1g});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
 	    map<int,Operator> NNLO;
-	    NNLO.insert({CNS, Zero});
-	    NNLO.insert({CS,  TabOL2s.Evaluate(xi)});
-	    NNLO.insert({CG,  TabOL2g.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CNS, Zero});
+	    NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
+	    NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
 	    FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
 
 	    // Include the massive bit to the non-singlet coefficient
@@ -1315,9 +1315,9 @@ namespace apfel {
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
 	map<int,Operator> CLNNLO;
-	CLNNLO.insert({CNS, lNNLOns});
-	CLNNLO.insert({CS,  OL2t});
-	CLNNLO.insert({CG,  OL2g});
+	CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
+	CLNNLO.insert({DISNCBasis::CS,  OL2t});
+	CLNNLO.insert({DISNCBasis::CG,  OL2g});
 	for (int k = 1; k <= actnf; k++)
 	  {
 	    // Convolution Basis

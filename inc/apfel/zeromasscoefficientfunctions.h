@@ -12,9 +12,25 @@
 namespace apfel
 {
   /**
-   * @brief O(as) coefficient function classes for F2
+   * @defgroup NCMassless Zero-mass coefficient functions
+   * Collection of the Zero-mass coefficient functions for
+   * F<SUB>2</SUB>, F<SUB>L</SUB>, and F<SUB>3</SUB> up to
+   * O(&alpha;<SUB>s</SUB>).
+   * @note While for the O(&alpha;<SUB>s</SUB>) coefficient functions
+   * exact expressions are used, a fast parameterisation for the
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) ones is used. See
+   * https://www.liverpool.ac.uk/~avogt/coeff.html for more details.
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @defgroup NLOzm NLO zero-mass coefficient functions
+   * @ingroup NCMassless
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for F2.
+   */
   class C21ns: public Expression
   {
   public:
@@ -24,7 +40,9 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for F2.
+   */
   class C21g: public Expression
   {
   public:
@@ -33,9 +51,49 @@ namespace apfel
   };
 
   /**
-   * @brief O(as^2) coefficient function classes for F2 (parametrized)
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for FL.
    */
-  //_________________________________________________________________________________
+  class CL1ns: public Expression
+  {
+  public:
+    CL1ns();
+    double Regular(double const& x)  const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for FL.
+   */
+  class CL1g: public Expression
+  {
+  public:
+    CL1g();
+    double Regular(double const& x)  const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for F3.
+   */
+  class C31ns: public Expression
+  {
+  public:
+    C31ns();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOzm NNLO zero-mass coefficient functions
+   * @ingroup NCMassless
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
+   * coefficient function for F2.
+   */
   class C22nsp: public Expression
   {
   public:
@@ -47,7 +105,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
+   * coefficient function for F2.
+   */
   class C22nsm: public Expression
   {
   public:
@@ -59,7 +120,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2.
+   */
   class C22ps: public Expression
   {
   public:
@@ -67,7 +131,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2.
+   */
   class C22g: public Expression
   {
   public:
@@ -77,28 +144,9 @@ namespace apfel
   };
 
   /**
-   * @brief O(as) coefficient function classes for FL
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
+   * coefficient function for FL.
    */
-  //_________________________________________________________________________________
-  class CL1ns: public Expression
-  {
-  public:
-    CL1ns();
-    double Regular(double const& x)  const;
-  };
-
-  //_________________________________________________________________________________
-  class CL1g: public Expression
-  {
-  public:
-    CL1g();
-    double Regular(double const& x)  const;
-  };
-
-  /**
-   * @brief O(as^2) coefficient function classes for FL (parametrized)
-   */
-  //_________________________________________________________________________________
   class CL2nsp: public Expression
   {
   public:
@@ -109,7 +157,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
+   * coefficient function for FL.
+   */
   class CL2nsm: public Expression
   {
   public:
@@ -120,7 +171,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for FL.
+   */
   class CL2ps: public Expression
   {
   public:
@@ -128,7 +182,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for FL.
+   */
   class CL2g: public Expression
   {
   public:
@@ -137,22 +194,9 @@ namespace apfel
   };
 
   /**
-   * @brief O(as) coefficient function classes for F3
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
+   * coefficient function for F3.
    */
-  //_________________________________________________________________________________
-  class C31ns: public Expression
-  {
-  public:
-    C31ns();
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  };
-
-  /**
-   * @brief O(as^2) coefficient function classes for F3 (parametrized)
-   */
-  //_________________________________________________________________________________
   class C32nsp: public Expression
   {
   public:
@@ -164,7 +208,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
+   * coefficient function for F3.
+   */
   class C32nsm: public Expression
   {
   public:
@@ -175,4 +222,6 @@ namespace apfel
   private:
     int const _nf;
   };
+  ///@}
+  ///@}
 }

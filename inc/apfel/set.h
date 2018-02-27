@@ -32,8 +32,7 @@ namespace apfel
     Set(ConvolutionMap const& Map, map<int, T> const& in);
 
     /**
-     * @name Set binary operators
-     * Binary operators involving a Set.
+     * @name Binary operators
      */
     ///@{
     /**
@@ -86,8 +85,7 @@ namespace apfel
   };
 
   /**
-   * @name Set ternary operators
-   * Ternary operators involving Sets.
+   * @name Ternary operators
    */
   ///@{
   template<class A, class B>

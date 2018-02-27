@@ -12,10 +12,46 @@
 namespace apfel
 {
   /**
-   * @brief The NLO matching function classes for PDFs
-   * @brief References: arXiv:1604.07869 and arXiv:1706.01473.
+   * @defgroup TMDMatchingFunctions TMD matching functions
+   * @note The perturbative matching functions for PDFs and FFs
+   * (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf). Notice that the
+   * expressions for FFs are implicitly multiplied by a factor
+   * x<SUP>2</SUP>. This is because the convolution with FFs has the
+   * form:
+   *
+   * \f$D(x) = C(x) \otimes d(x) / x^2 = (1/x^2) \int_x^1 (dy/y) [y^2 C(y)] d(x/y)\f$
+   *
+   * For the implementation of the O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * expressions I have used the parameterization taken from the
+   * arTeMiDe code but only for the regular part. The exact
+   * coefficicients of the rest are implemented explicitly as reported
+   * in eq. (B.3) of https://arxiv.org/pdf/1706.01473.pdf.
    */
-  //_________________________________________________________________________________
+  ///@{
+  ///@}
+  /**
+   * @defgroup SLMatchFunc Space-like matching functions
+   * @ingroup TMDMatchingFunctions
+   */
+  ///@{
+  ///@}
+  /**
+   * @defgroup TLMatchFunc Time-like matching functions
+   * @ingroup TMDMatchingFunctions
+   */
+  ///@{
+  ///@}
+  /**
+   * @defgroup NLO NLO matching functions for PDFs
+   * @ingroup SLMatchFunc
+   */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet matching function
+   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1ns: public Expression
   {
   public:
@@ -24,7 +60,11 @@ namespace apfel
     double Local(double const&)     const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) quark-gluon matching function
+   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1qg: public Expression
   {
   public:
@@ -32,7 +72,11 @@ namespace apfel
     double Regular(double const& x) const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark matching function
+   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1gq: public Expression
   {
   public:
@@ -40,22 +84,30 @@ namespace apfel
     double Regular(double const& x) const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon matching function
+   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1gg: public Expression
   {
   public:
     C1gg();
     double Local(double const&) const;
   };
+  ///@}
 
   /**
-   * @brief The NNLO matching function classes. In the implementation
-   * of these expressions I used the parameterization only for the
-   * regular part. The exact coefficicients of the rest are
-   * implemented explicitly as reported in appendix B.3 of
-   * https://arxiv.org/pdf/1706.01473.pdf.
+   * @defgroup NNLO NNLO matching functions for PDFs
+   * @ingroup SLMatchFunc
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-quark
+   * matching function for PDFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2Vqq: public Expression
   {
   public:
@@ -69,7 +121,12 @@ namespace apfel
     double    _A3;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-antiquark
+   * matching function for PDFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2Vqqb: public Expression
   {
   public:
@@ -77,7 +134,12 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * matching function for PDFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2ps: public Expression
   {
   public:
@@ -85,7 +147,12 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-gluon
+   * matching function for PDFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2qg: public Expression
   {
   public:
@@ -93,7 +160,12 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-quark
+   * matching function for PDFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2gq: public Expression
   {
   public:
@@ -103,7 +175,12 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-gluon
+   * matching function for PDFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2gg: public Expression
   {
   public:
@@ -116,17 +193,18 @@ namespace apfel
     double    _A2;
     double    _A3;
   };
+  ///@}
 
   /**
-   * @brief The NLO matching function classes for FFs
-
-   * @brief Reference: arXiv:1604.07869. Notice that the following
-   * expressions are implicitly multiplied by a factor x^2. This is
-   * because the convolution with FFs have the form:
-   *
-   * D(x) = C(x) \otimes d(x) / x^2 = (1/x^2) \int_x^1 (dy/y) [y^2 C(y)] d(x/y)
+   * @defgroup NLOff NLO matching functions for FFs
+   * @ingroup TLMatchFunc
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet matching function
+   * for FFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1nsff: public Expression
   {
   public:
@@ -135,7 +213,11 @@ namespace apfel
     double Local(double const&)     const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) quark-gluon matching function
+   * for FFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1qgff: public Expression
   {
   public:
@@ -143,7 +225,11 @@ namespace apfel
     double Regular(double const& x) const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark matching function
+   * for FFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1gqff: public Expression
   {
   public:
@@ -151,7 +237,11 @@ namespace apfel
     double Regular(double const& x) const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon matching function
+   * for FFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C1ggff: public Expression
   {
   public:
@@ -159,14 +249,19 @@ namespace apfel
     double Regular(double const& x) const;
     double Local(double const&)     const;
   };
+  ///@}
 
   /**
-   * @brief The NNLO matching function classes for FFs.
-   *
-   * Thanks to Alexey Vladimirov for providing me with the numerical
-   * parameterisation.
+   * @defgroup NNLOff NNLO matching functions for FFs
+   * @ingroup TLMatchFunc
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-quark
+   * matching function for FFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2Vqqff: public Expression
   {
   public:
@@ -180,7 +275,12 @@ namespace apfel
     double    _A3;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-antiquark
+   * matching function for FFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2Vqqbff: public Expression
   {
   public:
@@ -188,7 +288,12 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * matching function for FFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2psff: public Expression
   {
   public:
@@ -196,7 +301,12 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-gluon
+   * matching function for FFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2qgff: public Expression
   {
   public:
@@ -204,7 +314,12 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-quark
+   * matching function for FFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2gqff: public Expression
   {
   public:
@@ -214,7 +329,12 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-gluon
+   * matching function for FFs (references:
+   * https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
   class C2ggff: public Expression
   {
   public:
@@ -227,4 +347,5 @@ namespace apfel
     double    _A2;
     double    _A3;
   };
+  ///@}
 }

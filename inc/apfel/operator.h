@@ -39,8 +39,7 @@ namespace apfel
     Operator(Grid const& gr, Expression const& expr, accuracy const& eps = 1e-5);
 
     /**
-     * @name Operator binary operators
-     * Binary operators involving an Operator.
+     * @name Binary operators
      */
     ///@{
     Distribution operator *= (Distribution const& d) const;       //!< this *= Distribution
@@ -78,8 +77,7 @@ namespace apfel
   };
 
   /**
-   * @name Operator ternary operators
-   * Ternary operators involving Operators.
+   * @name Ternary operators
    */
   ///@{
   Distribution operator * (Operator lhs, Distribution const& rhs);           //!< Operator*Distribution

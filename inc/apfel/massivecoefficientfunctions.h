@@ -11,6 +11,7 @@
 
 namespace apfel
 {
+  /// @cond UNNECESSARY
   /**
    * @name Fortran massive coefficient functions
    * Fortran functions for the O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
@@ -33,9 +34,12 @@ namespace apfel
     double clnlobarq_(double *wr,double *xi);
   }
   ///@}
+  /// endcond
 
   /**
    * @defgroup NCMassive Massive neutral current coefficient functions
+   * Collection of the neutral current massive coefficient functions
+   * for F<SUB>2</SUB> and F<SUB>L</SUB> up to O(&alpha;<SUB>s</SUB>).
    * @note In the following 'xi' indicates the ratio Q<SUP>2</SUP> /
    * M<SUP>2</SUP>.
    */
@@ -46,11 +50,10 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief Gluon coefficient function for F2. See eq. (53) of
-   * https://arxiv.org/pdf/1001.2312.pdf. Or it uses the fortran
-   * routines in 'src/dis/hqcoef.f'
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for
+   * F2. See eq. (53) of https://arxiv.org/pdf/1001.2312.pdf. Or it
+   * uses the fortran routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class Cm21gNC: public Expression
   {
   public:
@@ -59,9 +62,8 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for FL.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for FL.
    */
-  //_________________________________________________________________________________
   class CmL1gNC: public Expression
   {
   public:
@@ -76,11 +78,11 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief Non-singlet coefficient function for F2. See Appendix A of
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for F2. See Appendix A of
    * https://arxiv.org/pdf/hep-ph/9601302.pdf. Or it uses the fortran
    * routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class Cm22nsNC: public Expression
   {
   public:
@@ -92,11 +94,11 @@ namespace apfel
   };
 
   /**
-   * @brief Non-singlet coefficient function for FL. See Appendix A of
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet coefficient
+   * function for FL. See Appendix A of
    * https://arxiv.org/pdf/hep-ph/9601302.pdf. Or it uses the fortran
    * routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class CmL2nsNC: public Expression
   {
   public:
@@ -105,10 +107,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for F2. Uses the fortran
-   * routines in 'src/dis/hqcoef.f'
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for F2. Uses the fortran routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class Cm22gNC: public Expression
   {
   public:
@@ -117,10 +118,9 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function for FL. Uses the fortran
-   * routines in 'src/dis/hqcoef.f'
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function for FL. Uses the fortran routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class CmL2gNC: public Expression
   {
   public:
@@ -129,10 +129,10 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for F2. Uses the fortran
-   * routines in 'src/dis/hqcoef.f'
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for F2. Uses the fortran routines in
+   * 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class Cm22psNC: public Expression
   {
   public:
@@ -141,10 +141,10 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function for FL. Uses the fortran
-   * routines in 'src/dis/hqcoef.f'
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function for FL. Uses the fortran routines in
+   * 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class CmL2psNC: public Expression
   {
   public:
@@ -153,10 +153,10 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function proportional to ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function proportional to ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for
    * F2. Uses the fortran routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class Cm22bargNC: public Expression
   {
   public:
@@ -165,10 +165,10 @@ namespace apfel
   };
 
   /**
-   * @brief Gluon coefficient function proportional to ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
+   * function proportional to ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for
    * FL. Uses the fortran routines in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class CmL2bargNC: public Expression
   {
   public:
@@ -177,11 +177,11 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function proportional to
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function proportional to
    * ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for F2. Uses the fortran routines
    * in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class Cm22barpsNC: public Expression
   {
   public:
@@ -190,11 +190,11 @@ namespace apfel
   };
 
   /**
-   * @brief Pure-singlet coefficient function proportional to
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * coefficient function proportional to
    * ln(Q<SUP>2</SUP>/M<SUP>2</SUP>) for FL. Uses the fortran routines
    * in 'src/dis/hqcoef.f'
    */
-  //_________________________________________________________________________________
   class CmL2barpsNC: public Expression
   {
   public:

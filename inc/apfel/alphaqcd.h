@@ -17,10 +17,9 @@ using std::function;
 namespace apfel
 {
   /**
-   * @brief The AlphaQCD class.
-   *
-   * A specialization class of the MatchedEvolution class for the
-   * computation of the QCD coupling running.
+   * @brief The AlphaQCD is a specialization class of the
+   * MatchedEvolution class for the computation of the QCD coupling
+   * running.
    */
   class AlphaQCD: public MatchedEvolution<double>
   {
@@ -88,9 +87,9 @@ namespace apfel
     double betaQCD(int const& pt, int const& nf) const;
 
   private:
-    int                                                      const _pt;
-    matrix<double>                                                 _bQCD;
-    function<double(bool const&, int const&, double const&)>       _MatchingConditions;
-    function<double(int const&, double const&)>                    _BetaFunction;
+    int                                                      const _pt;                    //!< Perturbative order
+    matrix<double>                                                 _bQCD;                  //!< Matrix with the precomputed coefficients of the beta function
+    function<double(bool const&, int const&, double const&)>       _MatchingConditions;    //!< Matching condition functions
+    function<double(int const&, double const&)>                    _BetaFunction;          //!< Beta function
   };
 }

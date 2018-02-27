@@ -18,13 +18,6 @@ using namespace std;
 namespace apfel
 {
   /**
-   * @brief The map enumerators for the operands and the
-   * distributions.
-   */
-  enum Operand: int {CNS, CS, CG};
-  enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
-
-  /**
    * @defgroup DISBases DIS convolution maps
    * Collection of derived classes from ConvolutionMap that implement
    * the convolution map for NC and CC DIS structure functions.
@@ -38,6 +31,13 @@ namespace apfel
   class DISNCBasis: public ConvolutionMap
   {
   public:
+    /**
+     * @brief The map enumerators for the operands and the
+     * distributions.
+     */
+    enum Operand: int {CNS, CS, CG};
+    enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
+
     /**
      * @name Constructors
      * List of constructors.
@@ -120,6 +120,13 @@ namespace apfel
   class DISCCBasis: public ConvolutionMap
   {
   public:
+    /**
+     * @brief The map enumerators for the operands and the
+     * distributions.
+     */
+    enum Operand: int {CNS, CS, CG};
+    enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
+
     /**
      * @brief Map between one single index and the CKM matrix
      * elements:

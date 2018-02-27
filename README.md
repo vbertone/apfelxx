@@ -60,7 +60,7 @@ APFEL Web interface http://apfel.mi.infn.it/.
 
 ## Relevant references
 
-- V. Bertone, *APFEL++: A new PDF evolution library in C++ *, [arXiv:1708.00911](https://arxiv.org/pdf/1708.00911.pdf).
+- V. Bertone, *APFEL++: A new PDF evolution library in C++*, [arXiv:1708.00911](https://arxiv.org/pdf/1708.00911.pdf).
 - V. Bertone, S. Carrazza, J. Rojo, *Doped Parton Distributions*, [arXiv:1509.04022](http://arxiv.org/abs/1509.04022).
 - V. Bertone, S. Carrazza, D. Pagani, M. Zaro, *On the Impact of Lepton PDFs*, [arXiv:1508.07002](http://arxiv.org/abs/1508.07002).
 - V. Bertone, S. Carrazza, E. Nocera, *Reference results for time-like evolution up to O(α_s^3)*, [arXiv:1501.00494](http://arxiv.org/abs/1501.00494).

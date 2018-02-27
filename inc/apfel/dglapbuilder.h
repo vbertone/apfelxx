@@ -48,8 +48,8 @@ namespace apfel
    * @param Masses: the heavy-quark masses
    * @param Thresholds: the heavy quark thresholds
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
 						  vector<double> const& Masses,
@@ -64,8 +64,8 @@ namespace apfel
    * @param g: the x-space grid
    * @param Masses: the heavy-quark masses
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
@@ -82,8 +82,8 @@ namespace apfel
    * @param Masses: the heavy-quark masses
    * @param Thresholds: the heavy quark thresholds
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid           const& g,
 						   vector<double> const& Masses,
@@ -99,8 +99,8 @@ namespace apfel
    * @param g: the x-space grid
    * @param Masses: the heavy-quark masses
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid           const& g,
@@ -117,8 +117,8 @@ namespace apfel
    * @param Masses: the heavy-quark masses
    * @param Thresholds: the heavy quark thresholds
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
 						       vector<double> const& Masses,
@@ -134,8 +134,8 @@ namespace apfel
    * @param g: the x-space grid
    * @param Masses: the heavy-quark masses
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
@@ -152,8 +152,8 @@ namespace apfel
    * @param Masses: the heavy-quark masses
    * @param Thresholds: the heavy quark thresholds
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
 							vector<double> const& Masses,
@@ -169,8 +169,8 @@ namespace apfel
    * @param g: the x-space grid
    * @param Masses: the heavy-quark masses
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
-   * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @return A map DglapObject objects, one for each possible nf
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
    * @note This function assumes that masses and thresholds coincide.
    */
   map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,

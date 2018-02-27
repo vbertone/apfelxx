@@ -12,9 +12,35 @@
 namespace apfel
 {
   /**
-   * @brief The LO space-like splitting function classes
+   * @defgroup SLSplittings Space-like splitting function
+   * Collection of the MSbar space-like splitting functions up to the
+   * highest order currently known for unpolarised, polarised (not
+   * yet!), and transversity evolution.
+   * @note While for the O(&alpha;<SUB>s</SUB>) and
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) splitting functions exact
+   * expressions are used, a fast parameterisation for the
+   * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) (and
+   * O(&alpha;<SUB>s</SUB><SUP>4</SUP>) when available) ones is
+   * used. See https://www.liverpool.ac.uk/~avogt/split.html for more
+   * details.
    */
-  //_________________________________________________________________________________
+  ///@{
+  ///@}
+  /**
+   * @defgroup UnpSF Unpolarised splitting functions
+   * @ingroup SLSplittings
+   */
+  ///@{
+  ///@}
+  /**
+   * @defgroup LOunpsf LO splitting functions
+   * @ingroup UnpSF
+   */
+  ///@{
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB>) non-singlet unpolarised splitting
+   * function.
+   */
   class P0ns: public Expression
   {
   public:
@@ -24,7 +50,10 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised splitting
+   * function.
+   */
   class P0qg: public Expression
   {
   public:
@@ -32,7 +61,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised splitting
+   * function.
+   */
   class P0gq: public Expression
   {
   public:
@@ -40,7 +72,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised splitting
+   * function.
+   */
   class P0gg: public Expression
   {
   public:
@@ -51,11 +86,17 @@ namespace apfel
   private:
     int const _nf;
   };
+  ///@}
 
   /**
-   * @brief The NLO space-like splitting function classes
+   * @defgroup NLOunpsf NLO splitting functions
+   * @ingroup UnpSF
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
+   * unpolarised splitting function.
+   */
   class P1nsp: public Expression
   {
   public:
@@ -68,7 +109,10 @@ namespace apfel
     double    _a2;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
+   * unpolarised splitting function.
+   */
   class P1nsm: public P1nsp
   {
   public:
@@ -76,7 +120,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
+   * unpolarised splitting function.
+   */
   class P1ps: public Expression
   {
   public:
@@ -86,7 +133,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) quark-gluon unpolarised
+   * splitting function.
+   */
   class P1qg: public Expression
   {
   public:
@@ -96,7 +146,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-quark unpolarised
+   * splitting function.
+   */
   class P1gq: public Expression
   {
   public:
@@ -106,7 +159,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-gluon unpolarised
+   * splitting function.
+   */
   class P1gg: public Expression
   {
   public:
@@ -118,11 +174,17 @@ namespace apfel
     int const _nf;
     double    _a2g;
   };
+  ///@}
 
   /**
-   * @brief The NNLO space-like splitting function classes (parametrized)
+   * @defgroup NNLOunpsf NNLO splitting functions
+   * @ingroup UnpSF
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-plus
+   * unpolarised splitting function.
+   */
   class P2nsp: public Expression
   {
   public:
@@ -134,7 +196,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-minus
+   * unpolarised splitting function.
+   */
   class P2nsm: public Expression
   {
   public:
@@ -146,7 +211,11 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-valence
+   * unpolarised splitting function minus non-singlet-minus
+   * unpolarised splitting function.
+   */
   class P2nss: public Expression
   {
   public:
@@ -156,7 +225,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * unpolarised splitting function.
+   */
   class P2ps: public Expression
   {
   public:
@@ -166,7 +238,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quark-gluon unpolarised
+   * splitting function.
+   */
   class P2qg: public Expression
   {
   public:
@@ -176,7 +251,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-quark unpolarised
+   * splitting function.
+   */
   class P2gq: public Expression
   {
   public:
@@ -186,7 +264,10 @@ namespace apfel
     int const _nf;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-gluon unpolarised
+   * splitting function.
+   */
   class P2gg: public Expression
   {
   public:
@@ -197,14 +278,19 @@ namespace apfel
   private:
     int const _nf;
   };
+  ///@}
 
   /**
-   * @brief The NNNLO space-like splitting function classes
-   * (parametrized and leading color). Only the +, -, and valence
-   * contributions have been computed so far.
-   *
+   * @defgroup NNNLOunpsf NNNLO splitting functions
+   * @ingroup UnpSF
+   * @note For now only the plus, minus, and valence contributions
+   * have been computed (pamaterised and leading color).
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-plus
+   * unpolarised splitting function.
+   */
   class P3nsp: public Expression
   {
   public:
@@ -217,7 +303,10 @@ namespace apfel
     int const _imod;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-minus
+   * unpolarised splitting function.
+   */
   class P3nsm: public Expression
   {
   public:
@@ -230,7 +319,11 @@ namespace apfel
     int const _imod;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-valence
+   * unpolarised splitting function minus non-singlet-minus
+   * unpolarised splitting function.
+   */
   class P3nss: public Expression
   {
   public:
@@ -240,13 +333,24 @@ namespace apfel
     int const _nf;
     int const _imod;
   };
+  ///@}
 
   /**
-   * @brief The LO space-like splitting function for tranversely
-   * polarised PDFs. Reference
-   * https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
+   * @defgroup TransSF Transversely polarised splitting functions
+   * @ingroup SLSplittings
+   * @note Reference https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
    */
-  //_________________________________________________________________________________
+  ///@{
+  ///@}
+  /**
+   * @defgroup LOtranssf LO splitting functions
+   * @ingroup TransSF
+   */
+  ///@{
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB>) non-singlet transversely polarised
+   * splitting function.
+   */
   class P0transns: public Expression
   {
   public:
@@ -255,13 +359,17 @@ namespace apfel
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   };
+  ///@}
 
   /**
-   * @brief The NLO space-like splitting function for tranversely
-   * polarised PDFs. Reference
-   * https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
+   * @defgroup NLOtranssf NLO splitting functions
+   * @ingroup TransSF
    */
-  //_________________________________________________________________________________
+  ///@{
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
+   * transversely polarised splitting function.
+   */
   class P1transnsp: public Expression
   {
   public:
@@ -274,11 +382,15 @@ namespace apfel
     double    _a2;
   };
 
-  //_________________________________________________________________________________
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
+   * transversely polarised splitting function.
+   */
   class P1transnsm: public P1transnsp
   {
   public:
     P1transnsm(int const& nf);
     double Regular(double const& x)  const;
   };
+  ///@}
 }

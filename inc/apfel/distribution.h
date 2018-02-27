@@ -111,8 +111,7 @@ namespace apfel
     void PushSubGrid(double const& xi, bool const& next);
 
     /**
-     * @name Distribution binary operators
-     * Binary operators involving a distribution.
+     * @name Binary operators
      */
     ///@{
     Distribution& operator  = (Distribution const& d);                    //!< this  = Distribution
@@ -126,8 +125,7 @@ namespace apfel
   };
 
   /**
-   * @name Distribution ternary operators
-   * Ternary operators involving distributions.
+   * @name Ternary operators
    */
   ///@{
   Distribution operator * (double const& s, Distribution rhs);                          //!< Scalar*Distribution

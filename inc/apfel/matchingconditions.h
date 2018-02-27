@@ -12,17 +12,24 @@
 namespace apfel
 {
   /**
-   * @notes Expressions taken from:
+   * @defgroup MatchCond Space-like matching conditions
+   * @notes The expressions are taken from:
    * https://arxiv.org/pdf/hep-ph/9612398.pdf. Note that in these
-   * expressions ln(m2/mu2) appears while we need ln(mu2/m2), so we
-   * need to include a sign minus in front of every term linear in
-   * this log.
+   * expressions ln(m<SUP>2</SUP>/&mu;<SUP>2</SUP>) appears while we
+   * need ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>), so we need to include a
+   * minus sign in front of every term linear in this log.
    */
-
+  ///@{
   /**
-   * @brief O(alpha_s) matching conditions
+   * @defgroup NLOMC NLO matching conditions
+   * @ingroup MatchCond
    */
-  // Term propotional to ln(mu2/m2) of eq. (B.2)
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq. (B.2) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS1Hg_L: public Expression
   {
   public:
@@ -30,18 +37,28 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln(mu2/m2) of eq (B.6)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.6) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS1ggH_L: public Expression
   {
   public:
     AS1ggH_L();
     double Local(double const&)  const;
   };
+  ///@}
 
   /**
-   * @brief O(alpha_s^2) matching conditions
+   * @defgroup NNLOMC NNLO matching conditions
+   * @ingroup MatchCond
    */
-  // Constant term of eq (B.1)
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * (B.1) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class APS2Hq_0: public Expression
   {
   public:
@@ -49,7 +66,11 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln(mu2/m2) of eq (B.1)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.1) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class APS2Hq_L: public Expression
   {
   public:
@@ -57,7 +78,11 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln^2(mu2/m2) of eq (B.1)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.1) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class APS2Hq_L2: public Expression
   {
   public:
@@ -65,7 +90,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Constant term of eq (B.3)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * (B.3) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2Hg_0: public Expression
   {
   public:
@@ -73,7 +101,11 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln(mu2/m2) of eq (B.3)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.3) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2Hg_L: public Expression
   {
   public:
@@ -81,7 +113,11 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln^2(mu2/m2) of eq (B.3)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.3) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2Hg_L2: public Expression
   {
   public:
@@ -89,7 +125,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Constant term of eq (B.4)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * (B.4) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class ANS2qqH_0: public Expression
   {
   public:
@@ -99,7 +138,11 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  // Term propotional to ln(mu2/m2) of eq (B.4)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.4) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class ANS2qqH_L: public Expression
   {
   public:
@@ -109,7 +152,11 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  // Term propotional to ln^2(mu2/m2) of eq (B.4)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.4) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class ANS2qqH_L2: public Expression
   {
   public:
@@ -119,7 +166,10 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  // Constant term of eq (B.5)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * (B.5) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2gqH_0: public Expression
   {
   public:
@@ -127,7 +177,11 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln(mu2/m2) of eq (B.5)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.5) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2gqH_L: public Expression
   {
   public:
@@ -135,7 +189,11 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Term propotional to ln^2(mu2/m2) of eq (B.5)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.5) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2gqH_L2: public Expression
   {
   public:
@@ -143,7 +201,10 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  // Constant term of eq (B.7)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * (B.7) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2ggH_0: public Expression
   {
   public:
@@ -153,7 +214,11 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  // Term propotional to ln(mu2/m2) of eq (B.7)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.7) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2ggH_L: public Expression
   {
   public:
@@ -163,7 +228,11 @@ namespace apfel
     double Local(double const& x)    const;
   };
 
-  // Term propotional to ln^2(mu2/m2) of eq (B.7)
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.7) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf.
+   */
   class AS2ggH_L2: public Expression
   {
   public:
@@ -172,4 +241,6 @@ namespace apfel
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   };
+  ///@}
+  ///@}
 }

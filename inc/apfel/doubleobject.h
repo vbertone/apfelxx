@@ -76,8 +76,7 @@ namespace apfel
     double Evaluate(double const& x, double const& z) const;
 
     /**
-     * @name DoubleObject binary operators
-     * Binary operators involving a DoubleObject.
+     * @name Binary operators
      */
     ///@{
     template<class V> DoubleObject<V> operator *= (DoubleObject<V> const& o) const;
@@ -92,8 +91,7 @@ namespace apfel
   };
 
   /**
-   * @name DoubleObject ternary operators
-   * Ternary operators involving DoubleObjects.
+   * @name Ternary operators
    */
   ///@{
   template<class A, class B>

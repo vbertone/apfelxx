@@ -14,9 +14,10 @@ using namespace std;
 
 namespace apfel
 {
+  /// @cond UNNECESSARY
   /**
    * @name Les Houches PDFs
-   * Les Houches toy parameterisation at Q = sqrt(2) GeV. Used for
+   * Les Houches toy parameterisation at Q = &radic;2 GeV. Used for
    * test purposes.
    */
   ///@{
@@ -63,4 +64,5 @@ namespace apfel
     return QCDEvMap;
   }
   ///@}
+  /// @endcond 
 }
