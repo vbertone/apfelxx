@@ -9,6 +9,8 @@
 
 #include "apfel/convolutionmap.h"
 
+#include <functional>
+
 namespace apfel
 {
   /**
