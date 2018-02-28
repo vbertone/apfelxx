@@ -21,6 +21,8 @@
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
 
+#include <stdexcept>
+
 namespace apfel {
   //_____________________________________________________________________________
   std::map<int,DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,

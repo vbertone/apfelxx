@@ -10,6 +10,8 @@
 #include "apfel/betaqcd.h"
 #include "apfel/messages.h"
 
+#include <stdexcept>
+
 namespace apfel {
   //_________________________________________________________________________________
   AlphaQCD::AlphaQCD(double              const& AlphaRef,

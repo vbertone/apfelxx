@@ -12,6 +12,8 @@
 #include "apfel/set.h"
 #include "apfel/doubleobject.h"
 
+#include <stdexcept>
+
 namespace apfel
 {
   //_________________________________________________________________________________

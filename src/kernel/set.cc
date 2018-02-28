@@ -9,6 +9,8 @@
 #include "apfel/operator.h"
 #include "apfel/messages.h"
 
+#include <stdexcept>
+
 namespace apfel {
   //_________________________________________________________________________
   template<class T>

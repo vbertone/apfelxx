@@ -9,6 +9,8 @@
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 
+#include <stdexcept>
+
 namespace apfel {
   //_________________________________________________________________________________
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)

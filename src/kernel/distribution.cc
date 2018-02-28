@@ -8,6 +8,8 @@
 #include "apfel/distribution.h"
 #include "apfel/messages.h"
 
+#include <stdexcept>
+
 namespace apfel
 {
   //_________________________________________________________________________
