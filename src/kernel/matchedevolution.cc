@@ -13,6 +13,7 @@
 #include "apfel/doubleobject.h"
 
 #include <algorithm>
+#include <cmath>
 
 namespace apfel
 {
@@ -87,7 +88,7 @@ namespace apfel
       return EvolveObject(nfi, _LogMuRef2, lmu2, _ObjRef);
 
     // Direction of the evolution
-    const bool sgn = signbit(nfi - nff);
+    const bool sgn = std::signbit(nfi - nff);
 
     // Create a vector of objects containing the object right above
     // each threshold to make sure that every time a threshold is
