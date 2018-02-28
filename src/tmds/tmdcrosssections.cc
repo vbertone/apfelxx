@@ -13,20 +13,18 @@
 #include "apfel/constants.h"
 #include "apfel/tools.h"
 
-using namespace std;
-
 namespace apfel {
   //_____________________________________________________________________________
-  function<double(double const&)> TmdCrossSectionDY(double                                                                   const& Vs,
-						    double                                                                   const& Q,
-						    double                                                                   const& y,
-						    function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
-						    function<double(double const&)>                                          const& Alphas,
-						    function<vector<double>(double const&)>                                  const& fEWCharges,
-						    int                                                                      const& PerturbativeOrder,
-						    vector<double>                                                           const& Thresholds,
-						    double                                                                   const& cmuf,
-						    double                                                                   const& czetaf)
+  std::function<double(double const&)> TmdCrossSectionDY(double                                                                        const& Vs,
+							 double                                                                        const& Q,
+							 double                                                                        const& y,
+							 std::function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
+							 std::function<double(double const&)>                                          const& Alphas,
+							 std::function<std::vector<double>(double const&)>                             const& fEWCharges,
+							 int                                                                           const& PerturbativeOrder,
+							 std::vector<double>                                                           const& Thresholds,
+							 double                                                                        const& cmuf,
+							 double                                                                        const& czetaf)
   {
     // Compute "muf" and "zetaf". They are assumed to be proportional
     // to Q and Q^2, respectively, through "cmuf" and "czetaf".
@@ -38,7 +36,7 @@ namespace apfel {
     const double x2 = Q * exp(y) / Vs;
 
     // Get EW charges.
-    const vector<double> Bq = fEWCharges(Q);
+    const std::vector<double> Bq = fEWCharges(Q);
 
     // Tabulate input TMDs in the impact parameter to make the
     // integral faster.
@@ -53,8 +51,8 @@ namespace apfel {
       {
 	// Get map of the TMDs in "x1" and "x2" and rotate them into the
 	// physical basis.
-	map<int,double> TMD1 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x1, b));
-	map<int,double> TMD2 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x2, b));
+	std::map<int,double> TMD1 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x1, b));
+	std::map<int,double> TMD2 = QCDEvToPhys(TabulatedTMDs.EvaluateMapxQ(x2, b));
 
 	// Construct the combination of TMDs weighted by the EW
 	// charges.
@@ -88,18 +86,18 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<double(double const&)> TmdCrossSectionSIDIS(double                                                                   const& Vs,
-						       double                                                                   const& x,
-						       double                                                                   const& y,
-						       double                                                                   const& z,
-						       function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
-						       function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDFFs,
-						       function<double(double const&)>                                          const& Alphas,
-						       function<vector<double>(double const&)>                                  const& fEWCharges,
-						       int                                                                      const& PerturbativeOrder,
-						       vector<double>                                                           const& Thresholds,
-						       double                                                                   const& cmuf,
-						       double                                                                   const& czetaf)
+  std::function<double(double const&)> TmdCrossSectionSIDIS(double                                                                        const& Vs,
+							    double                                                                        const& x,
+							    double                                                                        const& y,
+							    double                                                                        const& z,
+							    std::function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
+							    std::function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDFFs,
+							    std::function<double(double const&)>                                          const& Alphas,
+							    std::function<std::vector<double>(double const&)>                             const& fEWCharges,
+							    int                                                                           const& PerturbativeOrder,
+							    std::vector<double>                                                           const& Thresholds,
+							    double                                                                        const& cmuf,
+							    double                                                                        const& czetaf)
   {
     // Compute virtuality of the photon.
     const double Q = sqrt( x * y ) * Vs;
@@ -110,7 +108,7 @@ namespace apfel {
     const double zetaf = czetaf * Q * Q;
 
     // Get EW charges.
-    const vector<double> Bq = fEWCharges(Q);
+    const std::vector<double> Bq = fEWCharges(Q);
 
     // Tabulate input TMD PDFs and FFs in the impact parameter to make
     // the integral faster.
@@ -127,8 +125,8 @@ namespace apfel {
       {
 	// Get map of the TMDs in "x1" and "x2" and rotate them into the
 	// physical basis.
-	map<int,double> PDFs = QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x, b));
-	map<int,double> FFs  = QCDEvToPhys(TabulatedFFs.EvaluateMapxQ(z, b));
+	std::map<int,double> PDFs = QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x, b));
+	std::map<int,double> FFs  = QCDEvToPhys(TabulatedFFs.EvaluateMapxQ(z, b));
 
 	// Construct the combination of TMDs weighted by the EW
 	// charges.
@@ -162,20 +160,20 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<double(double const&)> TmdCrossSectionDY(double                                                                const& Vs,
-						    double                                                                const& Qmin,
-						    double                                                                const& Qmax,
-						    double                                                                const& ymin,
-						    double                                                                const& ymax,
-						    function<Set<Distribution>(double const&)>                            const& InTMDPDFs,
-						    function<vector<double>(double const&, double const&, double const&)> const& EvolFact,
-						    function<double(double const&)>                                       const& Alphas,
-						    function<vector<double>(double const&)>                               const& fEWCharges,
-						    int                                                                   const& PerturbativeOrder,
-						    vector<double>                                                        const& Thresholds,
-						    double                                                                const& cmuf,
-						    double                                                                const& czetaf,
-						    double                                                                const& IntEps)
+  std::function<double(double const&)> TmdCrossSectionDY(double                                                                          const& Vs,
+							 double                                                                          const& Qmin,
+							 double                                                                          const& Qmax,
+							 double                                                                          const& ymin,
+							 double                                                                          const& ymax,
+							 std::function<Set<Distribution>(double const&)>                                 const& InTMDPDFs,
+							 std::function<std::vector<double>(double const&, double const&, double const&)> const& EvolFact,
+							 std::function<double(double const&)>                                            const& Alphas,
+							 std::function<std::vector<double>(double const&)>                               const& fEWCharges,
+							 int                                                                             const& PerturbativeOrder,
+							 std::vector<double>                                                             const& Thresholds,
+							 double                                                                          const& cmuf,
+							 double                                                                          const& czetaf,
+							 double                                                                          const& IntEps)
   {
     // Tabulation function and its inverse.
     const auto TabFunc    = [] (double const& b) -> double{ return log(b); };
@@ -201,7 +199,7 @@ namespace apfel {
 	      const double zetaf = czetaf * Q * Q;
 
 	      // Get EW charges.
-	      const vector<double> Bq = fEWCharges(Q);
+	      const std::vector<double> Bq = fEWCharges(Q);
 
 	      // Tabulate input TMDs in the impact parameter to make the
 	      // integral faster.
@@ -220,8 +218,8 @@ namespace apfel {
 
 		      // Get map of the TMDs in "x1" and "x2" and
 		      // rotate them into the physical basis.
-		      map<int,double> TMD1 = QCDEvToPhys(TabEvTMDs.EvaluateMapxQ(x1, b));
-		      map<int,double> TMD2 = QCDEvToPhys(TabEvTMDs.EvaluateMapxQ(x2, b));
+		      std::map<int,double> TMD1 = QCDEvToPhys(TabEvTMDs.EvaluateMapxQ(x1, b));
+		      std::map<int,double> TMD2 = QCDEvToPhys(TabEvTMDs.EvaluateMapxQ(x2, b));
 
 		      // Construct the combination of TMDs weighted by
 		      // the EW charges.

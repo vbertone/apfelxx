@@ -10,7 +10,7 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  int NF(double const& Q, vector<double> const& Thresholds)
+  int NF(double const& Q, std::vector<double> const& Thresholds)
   {
     // Compute number of active flavours the the PDF initial scale
     int nf = 0;

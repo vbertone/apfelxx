@@ -42,30 +42,30 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  void report(string const& what)
+  void report(std::string const& what)
   {
     if (VerbosityLevel > MEDIUM)
-      cout << what;
+      std::cout << what;
   }
 
   //_________________________________________________________________________
-  void info(string const& tag, string const& what)
+  void info(std::string const& tag, std::string const& what)
   {
     if (VerbosityLevel > MEDIUM)
-      cout << "\033[" << code::blue << "m[" << tag << "] Info: " << what << "\033[" << code::normal << "m\n";
+      std::cout << "\033[" << code::blue << "m[" << tag << "] Info: " << what << "\033[" << code::normal << "m\n";
   }
 
   //_________________________________________________________________________
-  void warning(string const& tag, string const& what)
+  void warning(std::string const& tag, std::string const& what)
   {
     if (VerbosityLevel > LOW)
-      cout << "\033[" << code::yellow << "m[" << tag << "] Warning: " << what << "\033[" << code::normal << "m\n";
+      std::cout << "\033[" << code::yellow << "m[" << tag << "] Warning: " << what << "\033[" << code::normal << "m\n";
   }
 
   //_________________________________________________________________________
-  string error(string const& tag, string const& what)
+  std::string error(std::string const& tag, std::string const& what)
   {
-    stringstream ss;
+    std::stringstream ss;
     ss << "\n\n\033[" << code::red << "m[" << tag << "] Error: " << what << "\033[" << code::normal << "m\n";
     return ss.str();
   }
@@ -75,16 +75,16 @@ namespace apfel
   {
     if (VerbosityLevel > MEDIUM)
       {
-	cout << "\033[1;" << code::red << "m\n";
-	cout << "       _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
-	cout << "     _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
-	cout << "    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
-	cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
-	cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
-	cout << "\033[0;" << code::green << "m\n";
-	cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
-	cout << "     Authors: V. Bertone, S. Carrazza\n";
-	cout << "\033[" << code::normal << "m\n";
+	std::cout << "\033[1;" << code::red << "m\n";
+	std::cout << "       _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
+	std::cout << "     _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
+	std::cout << "    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
+	std::cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
+	std::cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
+	std::cout << "\033[0;" << code::green << "m\n";
+	std::cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
+	std::cout << "     Authors: V. Bertone, S. Carrazza\n";
+	std::cout << "\033[" << code::normal << "m\n";
       }
   }
 }

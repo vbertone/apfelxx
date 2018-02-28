@@ -8,10 +8,7 @@
 #include "apfel/matchingfunctions.h"
 #include "apfel/constants.h"
 
-#include <cmath>
 #include <numeric>
-
-using std::inner_product;
 
 namespace apfel
 {
@@ -76,7 +73,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -101,7 +98,7 @@ namespace apfel
 	( 1 - x ) * ( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       200. / 9.,
 	- 64. / 9.,
 	0.,
@@ -126,7 +123,7 @@ namespace apfel
 	- 147.17479558391307,
 	3.564983084988843};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
   double C2Vqq::Singular(double const& x) const
   {
@@ -158,7 +155,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -183,7 +180,7 @@ namespace apfel
 	( 1 - x ) * ( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       0.,
 	0.,
 	0.,
@@ -208,7 +205,7 @@ namespace apfel
 	- 113.40180701234924,
 	0.009338040302161874};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -225,7 +222,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -250,7 +247,7 @@ namespace apfel
 	( 1 - x ) * ( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       0.,
 	0.,
 	0.,
@@ -275,7 +272,7 @@ namespace apfel
 	92.73615445019001,
 	- 0.021528986881156446};
 
-    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 2 * std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -292,7 +289,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -317,7 +314,7 @@ namespace apfel
 	( 1 - x ) * ( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       - 5. / 3.,
 	0.,
 	5. / 9.,
@@ -342,7 +339,7 @@ namespace apfel
 	- 227.4273932698467,
 	15.408922558612357};
 
-    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 2 * std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -360,7 +357,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -385,7 +382,7 @@ namespace apfel
 	( 1 - x ) * ( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       - 184. / 9. + 32. * _nf / 27.,
 	- 44. / 9. + 8. * _nf / 9.,
 	- 40. / 27.,
@@ -410,7 +407,7 @@ namespace apfel
 	- 1802.796656932475 + 4.76862827955143 * _nf,
 	5.352770139788647 + 0.9080131334622416 * _nf};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -430,7 +427,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -455,7 +452,7 @@ namespace apfel
 	( 1 - x ) * ( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       6. - 2. * _nf,
 	- 36.,
 	0.,
@@ -480,7 +477,7 @@ namespace apfel
 	- 3881.2814494298837 + 176.34274530829245 * _nf,
 	18.352295609756112 - 0.04234942977167983 * _nf};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
   double C2gg::Singular(double const& x) const
   {
@@ -565,7 +562,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -592,7 +589,7 @@ namespace apfel
 	( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       - 200. / 9.,
 	64. / 9.,
 	0.,
@@ -619,7 +616,7 @@ namespace apfel
 	- 112.83673919345797,
 	- 3.5294575557396084};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
   double C2Vqqff::Singular(double const& x) const
   {
@@ -651,7 +648,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -678,7 +675,7 @@ namespace apfel
 	( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       0.,
 	0.,
 	0.,
@@ -705,7 +702,7 @@ namespace apfel
 	1330.4397468097895,
 	- 0.02218996661410778};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -721,7 +718,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -748,7 +745,7 @@ namespace apfel
 	( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       0.,
 	0.,
 	0.,
@@ -775,7 +772,7 @@ namespace apfel
 	- 16.127886782439663,
 	0.0009797967055855182};
 
-    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 2 * std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -792,7 +789,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -819,7 +816,7 @@ namespace apfel
 	( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       - 40./9. - 80. * zeta2 / 3.,
 	- 40. /9.,
 	40. / 27.,
@@ -846,7 +843,7 @@ namespace apfel
 	- 29991.60756399795,
 	- 5.282535747460972};
 
-    return 2 * inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return 2 * std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -864,7 +861,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -891,7 +888,7 @@ namespace apfel
 	( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       - 44. / 3. + 10. * _nf / 9. + 10. * zeta2,
 	- 7. / 2. + _nf / 3.,
 	- 5. / 9.,
@@ -918,7 +915,7 @@ namespace apfel
 	- 15198.304463044708 - 144.13788267277235 * _nf,
 	- 11.384648952243019 - 0.6611076391799198 * _nf};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
 
   //_________________________________________________________________________________
@@ -938,7 +935,7 @@ namespace apfel
     const double l1x  = log(1-x);
     const double l1x2 = l1x * l1x;
     const double l1x3 = l1x2 * l1x;
-    const vector<double> fReg{
+    const std::vector<double> fReg{
       l1x,
 	l1x2,
 	l1x3,
@@ -965,7 +962,7 @@ namespace apfel
 	( 1 - x ) * l1x,
 	( 1 - x ) * l1x2};
 
-    const vector<double> CoeffReg{
+    const std::vector<double> CoeffReg{
       - 6. + 2. * _nf,
 	36.,
 	0.,
@@ -992,7 +989,7 @@ namespace apfel
 	- 54745.95834168829 + 54.675824792462755 * _nf,
 	- 17.510572839038723 - 0.003977517619150036 * _nf};
 
-    return inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
   double C2ggff::Singular(double const& x) const
   {

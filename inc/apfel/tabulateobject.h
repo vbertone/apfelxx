@@ -10,10 +10,7 @@
 #include "apfel/qgrid.h"
 #include "apfel/matchedevolution.h"
 
-#include <functional>
 #include <map>
-
-using namespace std;
 
 namespace apfel
 {
@@ -61,13 +58,13 @@ namespace apfel
      * @param InterDegree: the interpolation degree on the grid in Q
      * @param Lambda: the value of the parameter in the function ln(ln(Q<SUP>2</SUP>/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.25)
      */
-    TabulateObject(function<T(double)> const& Object,
-		   int                 const& nQ,
-		   double              const& QMin,
-		   double              const& QMax,
-		   int                 const& InterDegree,
-		   vector<double>      const& Thresholds,
-		   double              const& Lambda = 0.25);
+    TabulateObject(std::function<T(double)> const& Object,
+		   int                      const& nQ,
+		   double                   const& QMin,
+		   double                   const& QMax,
+		   int                      const& InterDegree,
+		   std::vector<double>      const& Thresholds,
+		   double                   const& Lambda = 0.25);
 
     /**
      * @brief The TabulateObject default constructor for a Q dependent 
@@ -80,14 +77,14 @@ namespace apfel
      * @param TabFunc: the function to be used for the tabulation in Q
      * @param InvTabFunc: the inverse function of TabFunc (it has to be provided analytically)
      */
-    TabulateObject(function<T(double)>             const& Object,
-		   int                             const& nQ,
-		   double                          const& QMin,
-		   double                          const& QMax,
-		   int                             const& InterDegree,
-		   vector<double>                  const& Thresholds,
-		   function<double(double const&)> const& TabFunc,
-		   function<double(double const&)> const& InvTabFunc);
+    TabulateObject(std::function<T(double)>             const& Object,
+		   int                                  const& nQ,
+		   double                               const& QMin,
+		   double                               const& QMax,
+		   int                                  const& InterDegree,
+		   std::vector<double>                  const& Thresholds,
+		   std::function<double(double const&)> const& TabFunc,
+		   std::function<double(double const&)> const& InvTabFunc);
     ///@}
 
     /**
@@ -114,7 +111,7 @@ namespace apfel
      * @brief This function interpolates in x and Q and returns a
      * map. It is used for T = Set<Distribution>.
      */
-    map<int,double> EvaluateMapxQ(double const& x, double const& Q) const;
+    std::map<int,double> EvaluateMapxQ(double const& x, double const& Q) const;
     ///@}
   };
 }

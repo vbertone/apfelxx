@@ -9,10 +9,6 @@
 
 #include "apfel/tools.h"
 
-#include <vector>
-
-using std::vector;
-
 namespace apfel
 {
   /**
@@ -52,7 +48,7 @@ namespace apfel
      * @brief The DoubleObject constructor.
      * @param terms: vector of term objects of the T kind
      */
-    DoubleObject(vector<term<T>> const& terms);
+    DoubleObject(std::vector<term<T>> const& terms);
     ///@}
 
     /**
@@ -65,7 +61,7 @@ namespace apfel
      * @brief Function to get the terms.
      * @return The vector of terms
      */
-    vector<term<T>> GetTerms() const { return _terms; };
+    std::vector<term<T>> GetTerms() const { return _terms; };
 
     /**
      * @brief Funtion that evaluates the double distribution.
@@ -87,7 +83,7 @@ namespace apfel
     ///@}
 
   private:
-    vector<term<T>> _terms;
+    std::vector<term<T>> _terms;
   };
 
   /**

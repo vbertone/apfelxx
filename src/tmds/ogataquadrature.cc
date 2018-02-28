@@ -10,11 +10,9 @@
 
 #include <cmath>
 
-using namespace std;
-
 namespace apfel {
   //_____________________________________________________________________________
-  double OgataQuadrature(function<double(double const&)> const& func, double const& qT, double const& CutOff, double const& h)
+  double OgataQuadrature(std::function<double(double const&)> const& func, double const& qT, double const& CutOff, double const& h)
   {
     // Define helper functions.
     const auto psi  = [] (double const& t)->double{ return t * tanh( M_PI * sinh(t) / 2 ); };

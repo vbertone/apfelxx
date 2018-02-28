@@ -48,6 +48,6 @@ namespace apfel
      * @return the lower and upper bounds of the grid index
      * @see Interpolator::SumBounds
      */
-    array<int,2> SumBounds(double const& x, SubGrid const& sg) const;
+    std::array<int,2> SumBounds(double const& x, SubGrid const& sg) const;
   };
 }

@@ -9,10 +9,6 @@
 
 #include "apfel/convolutionmap.h"
 
-#include <functional>
-
-using std::function;
-
 namespace apfel
 {
   /**
@@ -29,7 +25,7 @@ namespace apfel
      * @param Map: the convolution map
      * @param in: a map of objects of type T
      */
-    Set(ConvolutionMap const& Map, map<int, T> const& in);
+    Set(ConvolutionMap const& Map, std::map<int, T> const& in);
 
     /**
      * @name Binary operators
@@ -42,12 +38,12 @@ namespace apfel
      */
     template<class V> Set<V> operator *= (Set<V> const& d) const;
 
-    Set<T>& operator *= (double const& s);                   //!< this *= scalar
-    Set<T>& operator *= (function<double(double const&)> f); //!< this *= function of the integration variable (for distributions only)
-    Set<T>& operator *= (vector<double> const& v);           //!< this *= vector of scalars
-    Set<T>& operator /= (double const& s);                   //!< this /= scalar
-    Set<T>& operator += (Set<T> const& d);                   //!< this += Set
-    Set<T>& operator -= (Set<T> const& d);                   //!< this -= Set
+    Set<T>& operator *= (double const& s);                             //!< this *= scalar
+    Set<T>& operator *= (std::function<double(double const&)> f);      //!< this *= function of the integration variable (for distributions only)
+    Set<T>& operator *= (std::vector<double> const& v);                //!< this *= vector of scalars
+    Set<T>& operator /= (double const& s);                             //!< this /= scalar
+    Set<T>& operator += (Set<T> const& d);                             //!< this += Set
+    Set<T>& operator -= (Set<T> const& d);                             //!< this -= Set
     ///@}
 
     /**
@@ -57,15 +53,15 @@ namespace apfel
     /**
      * @brief This returns object with ID "id" in the map.
      */
-    T              const& at(int const& id) const { return _objects.at(id); }
+    T               const& at(int const& id) const { return _objects.at(id); }
     /**
      * @brief This returns the convolution map.
      */
-    ConvolutionMap const& GetMap()          const { return _map; }
+    ConvolutionMap  const& GetMap()          const { return _map; }
     /**
      * @brief This returns the full map of objects.
      */
-    map<int, T>    const& GetObjects()      const { return _objects; }
+    std::map<int, T> const& GetObjects()      const { return _objects; }
     ///@}
 
     /**
@@ -80,8 +76,8 @@ namespace apfel
     T Combine() const;
 
   private:
-    ConvolutionMap _map;     //!< The shared pointer containing the convolution map
-    map<int, T>    _objects; //!< The container for the map
+    ConvolutionMap   _map;     //!< The shared pointer containing the convolution map
+    std::map<int, T> _objects; //!< The container for the map
   };
 
   /**
@@ -99,16 +95,16 @@ namespace apfel
   Set<T> operator * (Set<T> lhs, double const& s) { return lhs *= s; }
 
   template<class T>
-  Set<T> operator * (function<double(double const&)> f, Set<T> rhs) { return rhs *= f; }
+  Set<T> operator * (std::function<double(double const&)> f, Set<T> rhs) { return rhs *= f; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, function<double(double const&)> f) { return lhs *= f; }
+  Set<T> operator * (Set<T> lhs, std::function<double(double const&)> f) { return lhs *= f; }
 
   template<class T>
-  Set<T> operator * (vector<double> const& v, Set<T> rhs) { return rhs *= v; }
+  Set<T> operator * (std::vector<double> const& v, Set<T> rhs) { return rhs *= v; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, vector<double> const& v) { return lhs *= v; }
+  Set<T> operator * (Set<T> lhs, std::vector<double> const& v) { return lhs *= v; }
 
   template<class T>
   Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s; }

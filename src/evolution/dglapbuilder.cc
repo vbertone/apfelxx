@@ -18,16 +18,16 @@
 #include "apfel/splittingfunctions_tl.h"
 #include "apfel/matchingconditions.h"
 #include "apfel/matchingconditions_tl.h"
-
-using namespace std;
+#include "apfel/evolutionbasisqcd.h"
+#include "apfel/matchingbasisqcd.h"
 
 namespace apfel {
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
-						  vector<double> const& Masses,
-						  vector<double> const& Thresholds,
-						  bool           const& OpEvol,
-						  double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
+						       std::vector<double> const& Masses,
+						       std::vector<double> const& Thresholds,
+						       bool                const& OpEvol,
+						       double              const& IntEps)
   {
     report("Initializing DglapObjects for space-like QCD unpolarised evolution... ");
     Timer t;
@@ -43,7 +43,7 @@ namespace apfel {
 
     // Compute logs of muth2 / m2 needed for the the matching
     // conditions.
-    vector<double> LogKth;
+    std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
 	LogKth.push_back(0);
@@ -58,7 +58,7 @@ namespace apfel {
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    map<int,Operator> MatchLO;
+    std::map<int,Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::PNS, Id});
@@ -73,7 +73,7 @@ namespace apfel {
 
     // ===============================================================
     // LO splitting function operators.
-    map<int,map<int,Operator>> OpMapLO;
+    std::map<int,std::map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0ns{}, IntEps};
     const Operator O0qg{g, P0qg{}, IntEps};
     const Operator O0gq{g, P0gq{}, IntEps};
@@ -81,7 +81,7 @@ namespace apfel {
       {
 	const Operator O0gg{g, P0gg{nf}, IntEps};
 	const Operator O0qgnf = nf * O0qg;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
@@ -94,7 +94,7 @@ namespace apfel {
 
     // ===============================================================
     // NLO Matching conditions.
-    map<int,map<int,Operator>> MatchNLO;
+    std::map<int,std::map<int,Operator>> MatchNLO;
     const Operator AS1HgL {g, AS1Hg_L{},  IntEps};
     const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
@@ -102,7 +102,7 @@ namespace apfel {
 	const Operator AS1Hg  = LogKth[nf] * AS1HgL;
 	const Operator AS1ggH = LogKth[nf] * AS1ggHL;
 	const Operator AS1Tg  = - nf * AS1Hg;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, Zero});
 	OM.insert({MatchingBasisQCD::PQQ, Zero});
 	OM.insert({MatchingBasisQCD::PQG, AS1Hg});
@@ -122,7 +122,7 @@ namespace apfel {
 
     // ===============================================================
     // NLO splitting function operators.
-    map<int,map<int,Operator>> OpMapNLO;
+    std::map<int,std::map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O1nsp{g, P1nsp{nf}, IntEps};
@@ -132,7 +132,7 @@ namespace apfel {
 	const Operator O1gq {g, P1gq{nf},  IntEps};
 	const Operator O1gg {g, P1gg{nf},  IntEps};
 	const Operator O1qq = O1nsp + O1ps;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
@@ -145,7 +145,7 @@ namespace apfel {
 
     // ===============================================================
     // NNLO Matching conditions.
-    map<int,map<int,Operator>> MatchNNLO;
+    std::map<int,std::map<int,Operator>> MatchNNLO;
     const Operator APS2Hq0  {g, APS2Hq_0{},   IntEps};
     const Operator APS2HqL  {g, APS2Hq_L{},   IntEps};
     const Operator APS2HqL2 {g, APS2Hq_L2{},  IntEps};
@@ -176,7 +176,7 @@ namespace apfel {
 	const Operator AS2qqH  = AS2qqH0  + lnk * AS2qqHL  + lnk2 * AS2qqHL2;
 	const Operator AS2TqH  = ANS2qqH - nf * APS2Hq;
 	const Operator AS2Tg   = - nf * AS2Hg;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, ANS2qqH});
 	OM.insert({MatchingBasisQCD::PQQ, AS2qqH});
 	OM.insert({MatchingBasisQCD::PQG, AS2Hg});
@@ -201,7 +201,7 @@ namespace apfel {
 
     // ===============================================================
     // NNLO splitting function operators.
-    map<int,map<int,Operator>> OpMapNNLO;
+    std::map<int,std::map<int,Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O2nsp{g, P2nsp{nf}, IntEps};
@@ -213,7 +213,7 @@ namespace apfel {
 	const Operator O2gg {g, P2gg{nf},  IntEps};
 	const Operator O2qq  = O2nsp + O2ps;
 	const Operator O2nsv = O2nsm + O2nss;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O2nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O2nsv});
@@ -229,14 +229,14 @@ namespace apfel {
     // non-singlet splitting functions have been computed to leading
     // colour even though the subleading colour part is estimated
     // through an approximate parameterisation.
-    map<int,map<int,Operator>> OpMapNNNLO;
+    std::map<int,std::map<int,Operator>> OpMapNNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O3nsp{g, P3nsp{nf}, IntEps};
 	const Operator O3nsm{g, P3nsm{nf}, IntEps};
 	const Operator O3nss{g, P3nss{nf}, IntEps};
 	const Operator O3nsv = O3nsm + O3nss;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O3nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O3nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O3nsv});
@@ -248,7 +248,7 @@ namespace apfel {
       }
 
     // Define object of the structure containing the DglapObjects.
-    map<int,DglapObjects> DglapObj;
+    std::map<int,DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
     // of operators.
@@ -288,20 +288,20 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCD(Grid           const& g,
-						  vector<double> const& Thresholds,
-						  bool           const& OpEvol,
-						  double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
+						       std::vector<double> const& Thresholds,
+						       bool                const& OpEvol,
+						       double              const& IntEps)
   {
     return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid           const& g,
-						   vector<double> const& Masses,
-						   vector<double> const& Thresholds,
-						   bool           const& OpEvol,
-						   double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid                const& g,
+							std::vector<double> const& Masses,
+							std::vector<double> const& Thresholds,
+							bool                const& OpEvol,
+							double              const& IntEps)
   {
     report("Initializing DglapObjects for time-like QCD unpolarised evolution... ");
     Timer t;
@@ -317,7 +317,7 @@ namespace apfel {
 
     // Compute logs of muth2 / m2 needed for the the matching
     // conditions.
-    vector<double> LogKth;
+    std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
 	LogKth.push_back(0);
@@ -332,7 +332,7 @@ namespace apfel {
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    map<int,Operator> MatchLO;
+    std::map<int,Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::PNS, Id});
@@ -347,7 +347,7 @@ namespace apfel {
 
     // ===============================================================
     // LO splitting function operators.
-    map<int,map<int,Operator>> OpMapLO;
+    std::map<int,std::map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0Tns{}, IntEps};
     const Operator O0qg{g, P0Tqg{}, IntEps};
     const Operator O0gq{g, P0Tgq{}, IntEps};
@@ -355,7 +355,7 @@ namespace apfel {
       {
 	const Operator O0gg{g, P0Tgg{nf}, IntEps};
 	const Operator O0qgnf = nf * O0qg;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
@@ -368,7 +368,7 @@ namespace apfel {
 
     // ===============================================================
     // NLO Matching conditions.
-    map<int,map<int,Operator>> MatchNLO;
+    std::map<int,std::map<int,Operator>> MatchNLO;
     const Operator AS1Hg0 {g, ATS1Hg_0{},  IntEps};
     const Operator AS1HgL {g, ATS1Hg_L{},  IntEps};
     const Operator AS1ggHL{g, ATS1ggH_L{}, IntEps};
@@ -377,7 +377,7 @@ namespace apfel {
 	const Operator AS1Hg  = AS1Hg0 + LogKth[nf] * AS1HgL;
 	const Operator AS1ggH = LogKth[nf] * AS1ggHL;
 	const Operator AS1Tg  = - nf * AS1Hg;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({MatchingBasisQCD::PNS, Zero});
 	OM.insert({MatchingBasisQCD::PQQ, Zero});
 	OM.insert({MatchingBasisQCD::PQG, AS1Hg});
@@ -397,7 +397,7 @@ namespace apfel {
 
     // ===============================================================
     // NLO splitting function operators.
-    map<int,map<int,Operator>> OpMapNLO;
+    std::map<int,std::map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O1nsp{g, P1Tnsp{nf}, IntEps};
@@ -407,7 +407,7 @@ namespace apfel {
 	const Operator O1gq {g, P1Tgq{nf},  IntEps};
 	const Operator O1gg {g, P1Tgg{nf},  IntEps};
 	const Operator O1qq = O1nsp + O1ps;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
@@ -421,10 +421,10 @@ namespace apfel {
     // ===============================================================
     // NNLO Matching conditions. Set to zero for now because they are
     // not know yet.
-    map<int,map<int,Operator>> MatchNNLO;  
+    std::map<int,std::map<int,Operator>> MatchNNLO;  
     for (int nf = nfi; nf <= nff; nf++)
       {
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	for (int i = MatchingBasisQCD::PNS; i <= MatchingBasisQCD::PT35G; i++)
 	  OM.insert({i, Zero});
 	MatchNNLO.insert({nf, OM});
@@ -432,7 +432,7 @@ namespace apfel {
 
     // ===============================================================
     // NNLO splitting function operators.
-    map<int,map<int,Operator>> OpMapNNLO;
+    std::map<int,std::map<int,Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O2nsp{g, P2Tnsp{nf}, IntEps};
@@ -444,7 +444,7 @@ namespace apfel {
 	const Operator O2gg {g, P2Tgg{nf},  IntEps};
 	const Operator O2qq  = O2nsp + O2ps;
 	const Operator O2nsv = O2nsm + O2nss;
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O2nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O2nsv});
@@ -456,7 +456,7 @@ namespace apfel {
       }
 
     // Define object of the structure containing the DglapObjects.
-    map<int,DglapObjects> DglapObj;
+    std::map<int,DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
     // of operators.
@@ -494,20 +494,20 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid           const& g,
-						   vector<double> const& Thresholds,
-						   bool           const& OpEvol,
-						   double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCDT(Grid                const& g,
+							std::vector<double> const& Thresholds,
+							bool                const& OpEvol,
+							double              const& IntEps)
   {
     return InitializeDglapObjectsQCDT(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
-						       vector<double> const& Masses,
-						       vector<double> const& Thresholds,
-						       bool           const& OpEvol,
-						       double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid                const& g,
+							    std::vector<double> const& Masses,
+							    std::vector<double> const& Thresholds,
+							    bool                const& OpEvol,
+							    double              const& IntEps)
   {
     report("Initializing DglapObjects for space-like QCD transversely polarised evolution... ");
     Timer t;
@@ -523,7 +523,7 @@ namespace apfel {
 
     // Compute logs of muth2 / m2 needed for the the matching
     // conditions (not possible for transversities yet).
-    vector<double> LogKth;
+    std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
 	LogKth.push_back(0);
@@ -538,7 +538,7 @@ namespace apfel {
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    map<int,Operator> MatchLO;
+    std::map<int,Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::PNS, Id});
@@ -553,11 +553,11 @@ namespace apfel {
 
     // ===============================================================
     // LO splitting function operators.
-    map<int,map<int,Operator>> OpMapLO;
+    std::map<int,std::map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0transns{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
@@ -570,18 +570,18 @@ namespace apfel {
 
     // ===============================================================
     // NLO Matching conditions (Null).
-    map<int,Operator> MatchNLO;
+    std::map<int,Operator> MatchNLO;
     for (int i = MatchingBasisQCD::PNS; i <= MatchingBasisQCD::PT35G; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
     // NLO splitting function operators.
-    map<int,map<int,Operator>> OpMapNLO;
+    std::map<int,std::map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O1nsp{g, P1transnsp{nf}, IntEps};
 	const Operator O1nsm{g, P1transnsm{nf}, IntEps};
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
@@ -593,7 +593,7 @@ namespace apfel {
       }
 
     // Define object of the structure containing the DglapObjects.
-    map<int,DglapObjects> DglapObj;
+    std::map<int,DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
     // of operators.
@@ -627,20 +627,20 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid           const& g,
-						       vector<double> const& Thresholds,
-						       bool           const& OpEvol,
-						       double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCDtrans(Grid                const& g,
+							    std::vector<double> const& Thresholds,
+							    bool                const& OpEvol,
+							    double              const& IntEps)
   {
     return InitializeDglapObjectsQCDtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
-							vector<double> const& Masses,
-							vector<double> const& Thresholds,
-							bool           const& OpEvol,
-							double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid                const& g,
+							     std::vector<double> const& Masses,
+							     std::vector<double> const& Thresholds,
+							     bool                const& OpEvol,
+							     double              const& IntEps)
   {
     report("Initializing DglapObjects for time-like QCD transversely polarised evolution... ");
     Timer t;
@@ -656,7 +656,7 @@ namespace apfel {
 
     // Compute logs of muth2 / m2 needed for the the matching
     // conditions (not possible for transversities yet).
-    vector<double> LogKth;
+    std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
 	LogKth.push_back(0);
@@ -671,7 +671,7 @@ namespace apfel {
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    map<int,Operator> MatchLO;
+    std::map<int,Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::PNS, Id});
@@ -686,11 +686,11 @@ namespace apfel {
 
     // ===============================================================
     // LO splitting function operators.
-    map<int,map<int,Operator>> OpMapLO;
+    std::map<int,std::map<int,Operator>> OpMapLO;
     const Operator O0ns{g, P0Ttransns{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSM, O0ns});
 	OM.insert({EvolutionBasisQCD::PNSV, O0ns});
@@ -703,18 +703,18 @@ namespace apfel {
 
     // ===============================================================
     // NLO Matching conditions (Null).
-    map<int,Operator> MatchNLO;
+    std::map<int,Operator> MatchNLO;
     for (int i = MatchingBasisQCD::PNS; i <= MatchingBasisQCD::PT35G; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
     // NLO splitting function operators.
-    map<int,map<int,Operator>> OpMapNLO;
+    std::map<int,std::map<int,Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
 	const Operator O1nsp{g, P1Ttransnsp{nf}, IntEps};
 	const Operator O1nsm{g, P1Ttransnsm{nf}, IntEps};
-	map<int,Operator> OM;
+	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
 	OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
 	OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
@@ -726,7 +726,7 @@ namespace apfel {
       }
 
     // Define object of the structure containing the DglapObjects.
-    map<int,DglapObjects> DglapObj;
+    std::map<int,DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
     // of operators.
@@ -760,18 +760,18 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid           const& g,
-							vector<double> const& Thresholds,
-							bool           const& OpEvol,
-							double         const& IntEps)
+  std::map<int,DglapObjects> InitializeDglapObjectsQCDTtrans(Grid                const& g,
+							     std::vector<double> const& Thresholds,
+							     bool                const& OpEvol,
+							     double              const& IntEps)
   {
     return InitializeDglapObjectsQCDTtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   // ============================================================================
-  function<Set<Operator>(int const&, double const&)> SplittingFunctions(map<int,DglapObjects>           const& DglapObj,
-									int                             const& PerturbativeOrder,
-									function<double(double const&)> const& Alphas)
+  std::function<Set<Operator>(int const&, double const&)> SplittingFunctions(std::map<int,DglapObjects>           const& DglapObj,
+									     int                                  const& PerturbativeOrder,
+									     std::function<double(double const&)> const& Alphas)
   {
     if (PerturbativeOrder == 0)
       return [=] (int const& nf, double const& mu) -> Set<Operator>
@@ -801,17 +801,17 @@ namespace apfel {
 	  return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
 	};
     else
-      throw runtime_error(error("SplittingFunctions","Perturbative order not allowed."));
+      throw std::runtime_error(error("SplittingFunctions","Perturbative order not allowed."));
   }
 
   //_____________________________________________________________________________
-  function<Set<Operator>(bool const&, int const&)> MatchingConditions(map<int,DglapObjects>           const& DglapObj,
-								      int                             const& PerturbativeOrder,
-								      function<double(double const&)> const& Alphas)
+  std::function<Set<Operator>(bool const&, int const&)> MatchingConditions(std::map<int,DglapObjects>           const& DglapObj,
+									   int                                  const& PerturbativeOrder,
+									   std::function<double(double const&)> const& Alphas)
   {
     // Compute coupling above and below the thresholds.
-    map<int,double> asThUp;
-    map<int,double> asThDown;
+    std::map<int,double> asThUp;
+    std::map<int,double> asThDown;
     for (auto obj = std::next(DglapObj.begin()); obj != DglapObj.end(); ++obj)
       {
 	const int    nf  = obj->first;
@@ -847,19 +847,19 @@ namespace apfel {
 	  return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
 	};
     else
-      throw runtime_error(error("MatchingConditions","Perturbative order not allowed."));
+      throw std::runtime_error(error("MatchingConditions","Perturbative order not allowed."));
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap<Distribution>> BuildDglap(map<int,DglapObjects>                                   const& DglapObj,
-					     function<map<int,double>(double const&, double const&)> const& InDistFunc,
-					     double                                                  const& MuRef,
-					     int                                                     const& PerturbativeOrder,
-					     function<double(double const&)>                         const& Alphas,
-					     int                                                     const& nsteps)
+  std::unique_ptr<Dglap<Distribution>> BuildDglap(std::map<int,DglapObjects>                                        const& DglapObj,
+						  std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
+						  double                                                            const& MuRef,
+						  int                                                               const& PerturbativeOrder,
+						  std::function<double(double const&)>                              const& Alphas,
+						  int                                                               const& nsteps)
   {
     // Collect thresholds.
-    vector<double> Thresholds;
+    std::vector<double> Thresholds;
     for (auto const& obj : DglapObj)
       {
 	const int    nf  = obj.first;
@@ -874,19 +874,19 @@ namespace apfel {
 	DistributionMap(DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
     // Initialize DGLAP evolution.
-    return unique_ptr<Dglap<Distribution>>(new Dglap<Distribution>{SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution>{SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
 	  MatchingConditions(DglapObj, PerturbativeOrder, Alphas), InPDFs, MuRef, Thresholds, nsteps});
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap<Operator>> BuildDglap(map<int,DglapObjects>           const& DglapObj,
-					 double                          const& MuRef,
-					 int                             const& PerturbativeOrder,
-					 function<double(double const&)> const& Alphas,
-					 int                             const& nsteps)
+  std::unique_ptr<Dglap<Operator>> BuildDglap(std::map<int,DglapObjects>           const& DglapObj,
+					      double                               const& MuRef,
+					      int                                  const& PerturbativeOrder,
+					      std::function<double(double const&)> const& Alphas,
+					      int                                  const& nsteps)
   {
     // Collect thresholds.
-    vector<double> Thresholds;
+    std::vector<double> Thresholds;
     for (auto const& obj : DglapObj)
       {
 	const int    nf  = obj.first;
@@ -902,7 +902,7 @@ namespace apfel {
 
     // Create set of initial operators that represent the unity set of
     // operators.
-    map<int,Operator> MapUnity;
+    std::map<int,Operator> MapUnity;
     MapUnity.insert({0,  One});
     MapUnity.insert({1,  Zero});
     MapUnity.insert({2,  Zero});
@@ -926,18 +926,18 @@ namespace apfel {
     Set<Operator> Unity{DglapObj.at(NF(MuRef, Thresholds)).SplittingFunctions.at(0).GetMap(), MapUnity};
 
     // Initialize DGLAP evolution.
-    return unique_ptr<Dglap<Operator>>(new Dglap<Operator>{SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
+    return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator>{SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
 	  MatchingConditions(DglapObj, PerturbativeOrder, Alphas), Unity, MuRef, Thresholds, nsteps});
   }
 
   //_____________________________________________________________________________
-  unique_ptr<Dglap<Distribution>> BuildDglap(function<DglapObjects(double const&)>                   const& DglapObj,
-					     vector<double>                                          const& Thresholds,
-					     function<map<int,double>(double const&, double const&)> const& InDistFunc,
-					     double                                                  const& MuRef,
-					     int                                                     const& PerturbativeOrder,
-					     function<double(double const&)>                         const& Alphas,
-					     int                                                     const& nsteps)
+  std::unique_ptr<Dglap<Distribution>> BuildDglap(std::function<DglapObjects(double const&)>                        const& DglapObj,
+						  std::vector<double>                                               const& Thresholds,
+						  std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
+						  double                                                            const& MuRef,
+						  int                                                               const& PerturbativeOrder,
+						  std::function<double(double const&)>                              const& Alphas,
+						  int                                                               const& nsteps)
   {
     // Compute initial and final number of active flavours according
     // to the vector of thresholds (it assumes that the thresholds
@@ -949,8 +949,8 @@ namespace apfel {
 	nfi++;
 
     // Compute coupling above and below the thresholds.
-    map<int,double> asThUp;
-    map<int,double> asThDown;
+    std::map<int,double> asThUp;
+    std::map<int,double> asThDown;
     for (int nf = nfi + 1; nf <= nff; nf++)
       {
 	asThDown.insert({nf,Alphas(Thresholds[nf-1]*(1-eps8))/FourPi});
@@ -959,8 +959,8 @@ namespace apfel {
 
     // Create splitting functions and matching conditions lambda
     // functions according to the requested perturbative order.
-    function<Set<Operator>(int const&, double const&)> SplittingFunctions;
-    function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
+    std::function<Set<Operator>(int const&, double const&)> SplittingFunctions;
+    std::function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
     if (PerturbativeOrder == 0)
       {
         SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
@@ -1022,6 +1022,6 @@ namespace apfel {
 	DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
     // Initialize DGLAP evolution.
-    return unique_ptr<Dglap<Distribution>>(new Dglap<Distribution>{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution>{SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
   }
 }

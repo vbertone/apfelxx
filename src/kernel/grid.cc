@@ -9,20 +9,17 @@
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 
-#include <iostream>
-#include <algorithm>
-
 namespace apfel {
   //_________________________________________________________________________________
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {
     if (sg1.xMin() == sg2.xMin())
-      throw runtime_error(error("ComparexMin","There are SubGrids with the same lower bound."));
+      throw std::runtime_error(error("ComparexMin","There are SubGrids with the same lower bound."));
     return sg1.xMin() < sg2.xMin();
   }
 
   //_________________________________________________________________________________
-  Grid::Grid(vector<SubGrid> const& grs, bool const& lockgrids):
+  Grid::Grid(std::vector<SubGrid> const& grs, bool const& lockgrids):
     _Locked(lockgrids),
     _ExtGrids(false),
     _GlobalGrid(grs)
@@ -81,7 +78,7 @@ namespace apfel {
               }
 
             if (nx_new < 0 || xmin_new < 0)
-              throw runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
+              throw std::runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
 
             // Find the closest multiple of "nx - ix + 1" to "nx",
             // i.e. "DensityFactor", and replace "nx" accordingly.
@@ -97,7 +94,7 @@ namespace apfel {
 
     // Compute the joint grid. Parameters of the joint grid
     int id_joint = _GlobalGrid[0].InterDegree(); // Use the interpolation degree of the first grid
-    vector<double> xg_joint_vect;
+    std::vector<double> xg_joint_vect;
 
     for (int ig = 0; ig < ng; ig++)
       {
@@ -116,7 +113,7 @@ namespace apfel {
       }
 
     // Initialize another SubGrid for the joint grid.
-    _JointGrid = unique_ptr<SubGrid>(new SubGrid{xg_joint_vect, id_joint});
+    _JointGrid = std::unique_ptr<SubGrid>(new SubGrid{xg_joint_vect, id_joint});
   }
 
   //_________________________________________________________________________________

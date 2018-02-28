@@ -9,13 +9,10 @@
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 
-#include <iostream>
-#include <cmath>
-
 namespace apfel
 {
   //_________________________________________________________________________
-  Operator::Operator(Grid const& gr, Expression const& expr, accuracy const& eps):
+  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
     Integrator{},
     LagrangeInterpolator{gr},
     _grid(gr),
@@ -35,7 +32,7 @@ namespace apfel
 	const SubGrid& sg = _grid.GetSubGrid(_ig);
 
 	// Get vector with the grid nodes.
-	const vector<double>& xg = sg.GetGrid();
+	const std::vector<double>& xg = sg.GetGrid();
 
 	// Number of grid points.
 	const int nx = sg.nx();
@@ -114,11 +111,11 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid.
     if (&this->_grid != &d.GetGrid())
-      throw runtime_error(error("Operator::operator*=", "Operator and Distribution grids do not match"));
+      throw std::runtime_error(error("Operator::operator*=", "Operator and Distribution grids do not match"));
 
-    const vector<vector<double>>& sg = d.GetDistributionSubGrid();
-    vector<vector<double>> s(sg);
-    vector<double> j;
+    const std::vector<std::vector<double>>& sg = d.GetDistributionSubGrid();
+    std::vector<std::vector<double>> s(sg);
+    std::vector<double> j;
 
     // Compute the the distribution on the subgrids.
     int const ng = _grid.nGrids(); //sg.size();
@@ -182,7 +179,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
-      throw runtime_error(error("Operator::operator*=", "Operators grid does not match"));
+      throw std::runtime_error(error("Operator::operator*=", "Operators grid does not match"));
 
     const auto v = _Operator;
 
@@ -233,10 +230,10 @@ namespace apfel
 
 
   //_________________________________________________________________________
-  Operator& Operator::operator *= (function<double(double const&)> f)
+  Operator& Operator::operator *= (std::function<double(double const&)> f)
   {
     if (!_grid.ExtGrids())
-      throw runtime_error(error("Operator::operator*=", "Multiplication by a function not allowed on internal grids"));
+      throw std::runtime_error(error("Operator::operator*=", "Multiplication by a function not allowed on internal grids"));
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       {
@@ -266,7 +263,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
-      throw runtime_error(error("Operator::operator+=", "Operators grid does not match"));
+      throw std::runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
@@ -281,7 +278,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid.
     if (&this->_grid != &o.GetGrid())
-      throw runtime_error(error("Operator::operator+=", "Operators grid does not match"));
+      throw std::runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
@@ -316,13 +313,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator operator * (function<double(double const&)> f, Operator rhs)
+  Operator operator * (std::function<double(double const&)> f, Operator rhs)
   {
     return rhs *= f;
   }
 
   //_________________________________________________________________________
-  Operator operator * (Operator lhs, function<double(double const&)> f)
+  Operator operator * (Operator lhs, std::function<double(double const&)> f)
   {
     return lhs *= f;
   }

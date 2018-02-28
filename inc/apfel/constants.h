@@ -10,8 +10,6 @@
 #include <cmath>
 #include <vector>
 
-using namespace std;
-
 namespace apfel
 {
   /**
@@ -69,8 +67,8 @@ namespace apfel
   const double eu  =   2. / 3.;
   const double ed2 =   1. / 9.;
   const double eu2 =   4. / 9.;
-  const vector<double> QCh  = {ed, eu, ed, eu, ed, eu};
-  const vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
+  const std::vector<double> QCh  = {ed, eu, ed, eu, ed, eu};
+  const std::vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
   ///@{
 
   /**

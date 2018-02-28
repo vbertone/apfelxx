@@ -7,22 +7,19 @@
 
 #include "apfel/matchedevolution.h"
 #include "apfel/constants.h"
-#include "apfel/distribution.h"
 #include "apfel/operator.h"
 #include "apfel/set.h"
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
 
-#include <algorithm>
-
 namespace apfel
 {
   //_________________________________________________________________________
   template<class T>
-  MatchedEvolution<T>::MatchedEvolution(T              const& ObjRef,
-					double         const& MuRef,
-					vector<double> const& Thresholds,
-					int            const& nsteps):
+  MatchedEvolution<T>::MatchedEvolution(T                   const& ObjRef,
+					double              const& MuRef,
+					std::vector<double> const& Thresholds,
+					int                 const& nsteps):
     _ObjRef(ObjRef),
     _MuRef(MuRef),
     _Thresholds(Thresholds),
@@ -101,7 +98,7 @@ namespace apfel
       {
         vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
 	ti = tf + (sgn ? 1 : -1) * eps8;  // Add "eps8" to make sure to be above the threshold
-	tf = (sgn ? _LogThresholds2[min(inf+1,nff-1)] : _LogThresholds2[max(inf-2,nff-1)]);
+	tf = (sgn ? _LogThresholds2[std::min(inf+1,nff-1)] : _LogThresholds2[std::max(inf-2,nff-1)]);
       }
     return EvolveObject(nff, ti, lmu2, vobj);
   }

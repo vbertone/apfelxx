@@ -7,14 +7,8 @@
 
 #pragma once
 
-#include "apfel/matchedevolution.h"
 #include "apfel/set.h"
-#include "apfel/distribution.h"
 #include "apfel/operator.h"
-
-#include <functional>
-
-using std::function;
 
 namespace apfel
 {
@@ -34,8 +28,8 @@ namespace apfel
      * @param CoefficientFunctions: a Set<Operator>-valued function returning the operators
      * @param Distributions: a Set<Distribution>-valued function returning the distributions
      */
-    Observable(function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-	       function<Set<Distribution>(double const&)> const& Distributions);
+    Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
+	       std::function<Set<Distribution>(double const&)> const& Distributions);
 
     /**
      * @name Functions that evaluate the the observable at the scale
@@ -62,11 +56,11 @@ namespace apfel
      * coefficient functions.
      * @param Distributions: the new set of distributions
      */
-    void SetDistributions(function<Set<Distribution>(double const&)> const& Distributions) { _Distributions = Distributions; }
+    void SetDistributions(std::function<Set<Distribution>(double const&)> const& Distributions) { _Distributions = Distributions; }
 
   private:
-    function<Set<Operator>(double const&)>     _CoefficientFunctions;
-    function<Set<Distribution>(double const&)> _Distributions;
+    std::function<Set<Operator>(double const&)>     _CoefficientFunctions;
+    std::function<Set<Distribution>(double const&)> _Distributions;
   };
 
 }

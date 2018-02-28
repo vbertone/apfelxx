@@ -9,12 +9,7 @@
 
 #include "apfel/grid.h"
 
-#include <vector>
 #include <array>
-#include <utility>
-
-using std::vector;
-using std::array;
 
 namespace apfel
 {
@@ -74,19 +69,19 @@ namespace apfel
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the lower and upper bounds of the grid index
      */
-    virtual array<int,2> SumBounds(double const& x, SubGrid const& sg) const = 0;
+    virtual std::array<int,2> SumBounds(double const& x, SubGrid const& sg) const = 0;
 
     /**
      * @name Getters
      */
     ///@{
-    Grid                   const& GetGrid()                  const { return _grid; }                  //!< The grid
-    vector<vector<double>> const& GetDistributionSubGrid()   const { return _distributionSubGrid; }   //!< The distribution on the subgrids
-    vector<double>         const& GetDistributionJointGrid() const { return _distributionJointGrid; } //!< The distribution on the joint grid
+    Grid                             const& GetGrid()                  const { return _grid; }                  //!< The grid
+    std::vector<std::vector<double>> const& GetDistributionSubGrid()   const { return _distributionSubGrid; }   //!< The distribution on the subgrids
+    std::vector<double>              const& GetDistributionJointGrid() const { return _distributionJointGrid; } //!< The distribution on the joint grid
     ///@}
   protected:
-    Grid                   const& _grid;                  //!< The stored grid reference
-    vector<vector<double>>        _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
-    vector<double>                _distributionJointGrid; //!< The array with the distribution values on the joint grid.
+    Grid                      const& _grid;                  //!< The stored grid reference
+    std::vector<std::vector<double>> _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
+    std::vector<double>              _distributionJointGrid; //!< The array with the distribution values on the joint grid.
   };
 }

@@ -9,12 +9,6 @@
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 
-#include <iostream>
-#include <cmath>
-#include <cassert>
-#include <algorithm>
-#include <stdexcept>
-
 namespace apfel
 {
   //_________________________________________________________________________________
@@ -44,7 +38,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  SubGrid::SubGrid(vector<double> const& xsg, int const& InterDegree):
+  SubGrid::SubGrid(std::vector<double> const& xsg, int const& InterDegree):
     _nx(xsg.size()-1),
     _InterDegree(InterDegree),
     _IsExternal(true),
@@ -58,7 +52,7 @@ namespace apfel
     // Check that the last point of the user-given grid is equal to
     // one.
     if (abs(_xsg[_nx]-1) >= eps11)
-      throw runtime_error(error("SubGrid::SubGrid","The upper value of the external grid does not coincide with 1."));
+      throw std::runtime_error(error("SubGrid::SubGrid","The upper value of the external grid does not coincide with 1."));
     else
       _xsg[_nx] = 1;
 

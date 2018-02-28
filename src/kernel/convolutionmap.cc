@@ -9,7 +9,7 @@
 
 namespace apfel {
   //_________________________________________________________________________________
-  ConvolutionMap::ConvolutionMap(string const& name):
+  ConvolutionMap::ConvolutionMap(std::string const& name):
     _name(name)
   {
   }

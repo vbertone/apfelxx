@@ -15,8 +15,6 @@
 
 #include <valarray>
 
-using std::valarray;
-
 namespace apfel
 {
   /**
@@ -27,18 +25,18 @@ namespace apfel
    */
   struct TmdObjects
   {
-    double                    Threshold;
-    map<int,double>           Beta;
-    map<int,double>           GammaCuspq;
-    map<int,double>           GammaCuspg;
-    map<int,double>           GammaVq;
-    map<int,double>           GammaVg;
-    map<int,valarray<double>> CSdq;
-    map<int,valarray<double>> CSdg;
-    map<int,valarray<double>> Lzetaq;
-    map<int,valarray<double>> Lzetag;
-    map<int,Set<Operator>>    MatchingFunctionsPDFs;
-    map<int,Set<Operator>>    MatchingFunctionsFFs;
+    double                              Threshold;
+    std::map<int,double>                Beta;
+    std::map<int,double>                GammaCuspq;
+    std::map<int,double>                GammaCuspg;
+    std::map<int,double>                GammaVq;
+    std::map<int,double>                GammaVg;
+    std::map<int,std::valarray<double>> CSdq;
+    std::map<int,std::valarray<double>> CSdg;
+    std::map<int,std::valarray<double>> Lzetaq;
+    std::map<int,std::valarray<double>> Lzetag;
+    std::map<int,Set<Operator>>         MatchingFunctionsPDFs;
+    std::map<int,Set<Operator>>         MatchingFunctionsFFs;
   };
 
   /**
@@ -71,9 +69,9 @@ namespace apfel
    * @param IntEps: the integration accuracy (default: 10^{-5})
    * @return A map of TmdObjects objects, one for each possible nf
    */
-    map<int,TmdObjects> InitializeTmdObjects(Grid           const& g,
-					     vector<double> const& Thresholds,
-					     double         const& IntEps = 1e-5);
+    std::map<int,TmdObjects> InitializeTmdObjects(Grid                const& g,
+						  std::vector<double> const& Thresholds,
+						  double              const& IntEps = 1e-5);
   ///@}
 
   /**
@@ -100,15 +98,15 @@ namespace apfel
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta; representing the evolved TMD PDFs
    */
-    function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(map<int,TmdObjects>                            const& TmdObj,
-											  map<int,DglapObjects>                          const& DglapObj,
-											  function<Set<Distribution>(double const&)>     const& CollPDFs,
-											  function<double(double const&, double const&)> const& fNP,
-											  function<double(double const&)>                const& Mu0b,
-											  function<double(double const&)>                const& Mub,
-											  int                                            const& PerturbativeOrder,
-											  function<double(double const&)>                const& Alphas,
-											  double                                         const& IntEps = 1e-7);
+    std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                            const& TmdObj,
+											       std::map<int,DglapObjects>                          const& DglapObj,
+											       std::function<Set<Distribution>(double const&)>     const& CollPDFs,
+											       std::function<double(double const&, double const&)> const& fNP,
+											       std::function<double(double const&)>                const& Mu0b,
+											       std::function<double(double const&)>                const& Mub,
+											       int                                                 const& PerturbativeOrder,
+											       std::function<double(double const&)>                const& Alphas,
+											       double                                              const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched and evolved TMD FFs in
@@ -127,15 +125,15 @@ namespace apfel
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta; representing the evolved TMD FFs
    */
-    function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(map<int,TmdObjects>                            const& TmdObj,
-											 map<int,DglapObjects>                          const& DglapObj,
-											 function<Set<Distribution>(double const&)>     const& CollFFs,
-											 function<double(double const&, double const&)> const& fNP,
-											 function<double(double const&)>                const& Mu0b,
-											 function<double(double const&)>                const& Mub,
-											 int                                            const& PerturbativeOrder,
-											 function<double(double const&)>                const& Alphas,
-											 double                                         const& IntEps = 1e-7);
+    std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                            const& TmdObj,
+											      std::map<int,DglapObjects>                          const& DglapObj,
+											      std::function<Set<Distribution>(double const&)>     const& CollFFs,
+											      std::function<double(double const&, double const&)> const& fNP,
+											      std::function<double(double const&)>                const& Mu0b,
+											      std::function<double(double const&)>                const& Mub,
+											      int                                                 const& PerturbativeOrder,
+											      std::function<double(double const&)>                const& Alphas,
+											      double                                              const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched TMD PDFs in b-space. It
@@ -150,12 +148,12 @@ namespace apfel
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD PDFs
    */
-    function<Set<Distribution>(double const&)> MatchTmdPDFs(map<int,TmdObjects>                        const& TmdObj,
-							    map<int,DglapObjects>                      const& DglapObj,
-							    function<Set<Distribution>(double const&)> const& CollPDFs,
-							    function<double(double const&)>            const& Mub,
-							    int                                        const& PerturbativeOrder,
-							    function<double(double const&)>            const& Alphas);
+    std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
+								 std::map<int,DglapObjects>                      const& DglapObj,
+								 std::function<Set<Distribution>(double const&)> const& CollPDFs,
+								 std::function<double(double const&)>            const& Mub,
+								 int                                             const& PerturbativeOrder,
+								 std::function<double(double const&)>            const& Alphas);
 
   /**
    * @brief Function that returns the matched TMD FFs in b-space. It
@@ -170,12 +168,12 @@ namespace apfel
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD FFs
    */
-    function<Set<Distribution>(double const&)> MatchTmdFFs(map<int,TmdObjects>                        const& TmdObj,
-							   map<int,DglapObjects>                      const& DglapObj,
-							   function<Set<Distribution>(double const&)> const& CollPDFs,
-							   function<double(double const&)>            const& Mub,
-							   int                                        const& PerturbativeOrder,
-							   function<double(double const&)>            const& Alphas);
+    std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
+								std::map<int,DglapObjects>                      const& DglapObj,
+								std::function<Set<Distribution>(double const&)> const& CollPDFs,
+								std::function<double(double const&)>            const& Mub,
+								int                                             const& PerturbativeOrder,
+								std::function<double(double const&)>            const& Alphas);
 
   /**
    * @brief Function that returns the evolution factors for gluon and quarks. It
@@ -186,18 +184,18 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-   * @return vector<double>-valued function of the impact parameter
+   * @return std::vector<double>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta;. The 0-th component contains the
    * gluon evolution vactor, the remaining 12, from 1 to 12, are all
    * equal and represent the quark evolution factors.
    */
   //_____________________________________________________________________________
-  function<vector<double>(double const&, double const&, double const&)> EvolutionFactors(map<int,TmdObjects>             const& TmdObj,
-											 function<double(double const&)> const& Mu0b,
-											 function<double(double const&)> const& Mub,
-											 int                             const& PerturbativeOrder,
-											 function<double(double const&)> const& Alphas,
-											 double                          const& IntEps = 1e-7);
+  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
+												   std::function<double(double const&)> const& Mu0b,
+												   std::function<double(double const&)> const& Mub,
+												   int                                  const& PerturbativeOrder,
+												   std::function<double(double const&)> const& Alphas,
+												   double                               const& IntEps = 1e-7);
   ///@}
 }

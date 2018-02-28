@@ -10,8 +10,6 @@
 #include <cmath>
 #include <vector>
 
-using std::vector;
-
 namespace apfel
 {
 
@@ -36,10 +34,10 @@ namespace apfel
      * @param Thresholds: vector with the heavy quark threholds
      * @param nsteps: number of steps of the ODE solver (default: 10)
      */
-    MatchedEvolution(T              const& ObjRef,
-		     double         const& MuRef,
-		     vector<double> const& Thresholds,
-		     int            const& nsteps = 10);
+    MatchedEvolution(T                   const& ObjRef,
+		     double              const& MuRef,
+		     std::vector<double> const& Thresholds,
+		     int                 const& nsteps = 10);
 
     /**
      * @brief Virtual function for the computation of the evolution.
@@ -93,7 +91,7 @@ namespace apfel
     /**
      * @brief Function that returns the values of the thresholds.
      */
-    vector<double> const& GetThresholds() const { return _Thresholds; }
+    std::vector<double> const& GetThresholds() const { return _Thresholds; }
 
     /**
      * @brief Function that returns the number of steps.
@@ -124,13 +122,13 @@ namespace apfel
     void SetNumberOfSteps(int const& nsteps) { _nsteps = nsteps; }
     ///@}
   protected:
-    T              _ObjRef;         //<! Reference value of the object
-    double         _MuRef;          //<! Reference scale of the object
-    double         _MuRef2;         //<! Squared reference scale of the object
-    double         _LogMuRef2;      //<! Log of the squared reference scale of the object
-    vector<double> _Thresholds;     //<! Values of the thresholds
-    int            _nsteps;         //<! Number of steps of the RK algorithm
-    vector<double> _Thresholds2;    //<! Squared quark threholds
-    vector<double> _LogThresholds2; //<! Log of the squared quark threholds
+    T                   _ObjRef;         //<! Reference value of the object
+    double              _MuRef;          //<! Reference scale of the object
+    double              _MuRef2;         //<! Squared reference scale of the object
+    double              _LogMuRef2;      //<! Log of the squared reference scale of the object
+    std::vector<double> _Thresholds;     //<! Values of the thresholds
+    int                 _nsteps;         //<! Number of steps of the RK algorithm
+    std::vector<double> _Thresholds2;    //<! Squared quark threholds
+    std::vector<double> _LogThresholds2; //<! Log of the squared quark threholds
   };
 }

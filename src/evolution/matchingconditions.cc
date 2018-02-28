@@ -9,8 +9,6 @@
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 
-#include <cmath>
-
 namespace apfel
 {
   //_________________________________________________________________________________

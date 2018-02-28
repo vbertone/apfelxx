@@ -10,16 +10,13 @@
 #include <vector>
 #include <functional>
 
-using std::vector;
-using std::function;
-
 namespace apfel
 {
   /**
    * @brief First 1000 zero's of the first-order Bessel function J0
    * computed with Boost.
    */
-  const vector<double> j0Zeros{
+  const std::vector<double> j0Zeros{
     2.404825557695773, 5.520078110286311, 8.653727912911013, 11.79153443901428, 
       14.93091770848779, 18.07106396791092, 21.21163662987926, 24.3524715307493, 
       27.49347913204025, 30.63460646843198, 33.77582021357357, 36.91709835366404, 
@@ -280,8 +277,8 @@ namespace apfel
    * @param h: internal variable of the algorithm (default: 0.001)
    * @return the Hankel-transform of the input function computed in qT
    */
-  double OgataQuadrature(function<double(double const&)> const& func,
-			 double                          const& qT,
-			 double                          const& CutOff = 1e-5,
-			 double                          const& h = 0.001);
+  double OgataQuadrature(std::function<double(double const&)> const& func,
+			 double                               const& qT,
+			 double                               const& CutOff = 1e-5,
+			 double                               const& h = 0.001);
 }

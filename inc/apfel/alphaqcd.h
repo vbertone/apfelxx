@@ -7,12 +7,10 @@
 
 #pragma once
 
-#include <apfel/matchedevolution.h>
-#include <apfel/matrix.h>
+#include "apfel/matchedevolution.h"
+#include "apfel/matrix.h"
 
 #include <functional>
-
-using std::function;
 
 namespace apfel
 {
@@ -39,12 +37,12 @@ namespace apfel
      * @param Thresholds: vector of thresholds
      * @param nsteps: number of steps of the ODE solver
      */
-    AlphaQCD(double         const& AlphaRef,
-	     double         const& MuRef,
-	     vector<double> const& Masses,
-	     vector<double> const& Thresholds,
-	     int            const& pt,
-	     int            const& nstep = 10);
+    AlphaQCD(double              const& AlphaRef,
+	     double              const& MuRef,
+	     std::vector<double> const& Masses,
+	     std::vector<double> const& Thresholds,
+	     int                 const& pt,
+	     int                 const& nstep = 10);
 
     /**
      * @brief AlphaQCD default constructor.
@@ -54,11 +52,11 @@ namespace apfel
      * @param nsteps: number of steps of the ODE solver
      * @note This constructor assumes that masses and thresholds coincide.
      */
-    AlphaQCD(double         const& AlphaRef,
-	     double         const& MuRef,
-	     vector<double> const& Masses,
-	     int            const& pt,
-	     int            const& nsteps = 10);
+    AlphaQCD(double              const& AlphaRef,
+	     double              const& MuRef,
+	     std::vector<double> const& Masses,
+	     int                 const& pt,
+	     int                 const& nsteps = 10);
     ///@}
 
     /**
@@ -89,7 +87,7 @@ namespace apfel
   private:
     int                                                      const _pt;                    //!< Perturbative order
     matrix<double>                                                 _bQCD;                  //!< Matrix with the precomputed coefficients of the beta function
-    function<double(bool const&, int const&, double const&)>       _MatchingConditions;    //!< Matching condition functions
-    function<double(int const&, double const&)>                    _BetaFunction;          //!< Beta function
+    std::function<double(bool const&, int const&, double const&)>  _MatchingConditions;    //!< Matching condition functions
+    std::function<double(int const&, double const&)>               _BetaFunction;          //!< Beta function
   };
 }

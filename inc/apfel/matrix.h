@@ -10,11 +10,6 @@
 #include <vector>
 #include <array>
 
-using std::array;
-using std::vector;
-using std::size_t;
-using std::pair;
-
 namespace apfel
 {  
   /**
@@ -56,7 +51,7 @@ namespace apfel
     T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
     ///@}
   private:
-    array<size_t, 2> _size; //!< the dimension pair
-    vector<T>        _data; //!< the data array
+    std::array<size_t, 2> _size; //!< the dimension pair
+    std::vector<T>        _data; //!< the data array
   };
 }

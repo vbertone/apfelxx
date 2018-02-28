@@ -10,8 +10,6 @@
 #include <sstream>
 #include <iostream>
 
-using namespace std;
-
 /**
  * @brief Namespace for all APFEL++ functions and classes
  */
@@ -43,21 +41,21 @@ namespace apfel
    * according to the verbosity level.
    * @param what: the message to report
    */
-  void report(string const& what);
+  void report(std::string const& what);
 
   /**
    * @brief Function that prints information on screen. Effective
    * according to the verbosity level.
    * @param what: the message to report
    */
-  void info(string const& tag, string const& what);
+  void info(std::string const& tag, std::string const& what);
 
   /**
    * @brief Function that prints warnings on screen. Effective
    * according to the verbosity level.
    * @param what: the warning to report
    */
-  void warning(string const& tag, string const& what);
+  void warning(std::string const& tag, std::string const& what);
 
   /**
    * @brief Function that prints information on screen. Always
@@ -66,7 +64,7 @@ namespace apfel
    * @param what: the error to report
    * @return the error message
    */
-  string error(string const& tag, string const& what);
+  std::string error(std::string const& tag, std::string const& what);
 
   /**
    * @brief Function that prints the APFEL++ banner on

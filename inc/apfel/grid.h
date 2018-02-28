@@ -9,12 +9,6 @@
 
 #include "apfel/subgrid.h"
 
-#include <vector>
-#include <memory>
-
-using std::vector;
-using std::unique_ptr;
-
 namespace apfel
 {
   /**
@@ -34,7 +28,7 @@ namespace apfel
      * @param grs: vector of subgrids
      * @param lockgrids: flag to enable/disable the locking of the subgrids (default: true)
      */
-    Grid(vector<SubGrid> const& grs, bool const& lockgrids = true);
+    Grid(std::vector<SubGrid> const& grs, bool const& lockgrids = true);
 
     /**
      * @name Getters
@@ -82,10 +76,10 @@ namespace apfel
      */
     void CreateJointGrid();
 
-    bool                _Locked;     //!< Flag for locking the grids.
-    bool                _ExtGrids;   //!< Contains external sub-grids.
-    vector<SubGrid>     _GlobalGrid; //!< Vector with sub-grids.
-    unique_ptr<SubGrid> _JointGrid;  //!< Container for the joint grid.
+    bool                     _Locked;     //!< Flag for locking the grids.
+    bool                     _ExtGrids;   //!< Contains external sub-grids.
+    std::vector<SubGrid>     _GlobalGrid; //!< Vector with sub-grids.
+    std::unique_ptr<SubGrid> _JointGrid;  //!< Container for the joint grid.
 
     friend std::ostream& operator << (std::ostream& os, Grid const& gr);
   };

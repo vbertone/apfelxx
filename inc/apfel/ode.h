@@ -7,13 +7,6 @@
 
 #pragma once
 
-#include "apfel/set.h"
-#include "apfel/distribution.h"
-
-#include <functional>
-
-using std::function;
-
 namespace apfel
 {
   /**
@@ -40,8 +33,8 @@ namespace apfel
    * @return the function tha returns the step
    */
   template<class U>
-  function<U(double const&, U const&, double const&)>
-  rk4(function<U(double const& t, U const& Obj)> const& f)
+  std::function<U(double const&, U const&, double const&)>
+  rk4(std::function<U(double const& t, U const& Obj)> const& f)
   {
     return
       [       f            ](double const& t, U const& y,  double const& dt) -> U{ return
@@ -63,8 +56,8 @@ namespace apfel
    * @return the function tha returns the step
    */
   template<class U>
-  function<U(double const&, U const&, double const&)>
-  rk1(function<U(double const& t, U const& Obj)> const& f)
+  std::function<U(double const&, U const&, double const&)>
+  rk1(std::function<U(double const& t, U const& Obj)> const& f)
   {
     return [f](double const& t, U const& y,  double const& dt) -> U{ return dt * f(t, y); } ;
   }

@@ -6,9 +6,6 @@
 //
 
 #include "apfel/structurefunctionbuilder.h"
-#include "apfel/grid.h"
-#include "apfel/operator.h"
-#include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/tools.h"
 #include "apfel/constants.h"
@@ -17,13 +14,11 @@
 #include "apfel/massivezerocoefficientfunctions.h"
 #include "apfel/tabulateobject.h"
 
-using namespace std;
-
 namespace apfel {
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF2NCObjectsZM(Grid           const& g,
-												   vector<double> const& Thresholds,
-												   double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsZM(Grid                const& g,
+													     std::vector<double> const& Thresholds,
+													     double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for F2 NC Zero Mass... ");
     Timer t;
@@ -33,13 +28,13 @@ namespace apfel {
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    map<int,Operator> C2LO;
+    std::map<int,Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C2NLO;
+    std::map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -47,14 +42,14 @@ namespace apfel {
     C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
-    map<int,map<int,Operator>> C2NNLO;
+    std::map<int,std::map<int,Operator>> C2NNLO;
     const Operator O22ps{g, C22ps{}, IntEps};
     const Operator O22g {g, C22g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator O22nsp{g, C22nsp{nf}, IntEps};
 	const Operator O22t = O22nsp + 6 * O22ps;
-	map<int,Operator> C2NNLOnf;
+	std::map<int,Operator> C2NNLOnf;
 	C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
 	C2NNLOnf.insert({DISNCBasis::CS,  O22t});
 	C2NNLOnf.insert({DISNCBasis::CG,  O22g});
@@ -62,17 +57,17 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto F2Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges. The charges of the components with mh >
 	// Q are set to zero.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	for (int k = 1; k <= 6; k++)
 	  EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
 
@@ -95,9 +90,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeFLNCObjectsZM(Grid           const& g,
-												   vector<double> const& Thresholds,
-												   double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsZM(Grid                const& g,
+													     std::vector<double> const& Thresholds,
+													     double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for FL NC Zero Mass... ");
     Timer t;
@@ -106,13 +101,13 @@ namespace apfel {
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    map<int,Operator> CLLO;
+    std::map<int,Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> CLNLO;
+    std::map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -120,14 +115,14 @@ namespace apfel {
     CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO (for nf from 1 to 6)
-    map<int,map<int,Operator>> CLNNLO;
+    std::map<int,std::map<int,Operator>> CLNNLO;
     const Operator OL2ps{g, CL2ps{}, IntEps};
     const Operator OL2g {g, CL2g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
 	const Operator OL2t = OL2nsp + 6 * OL2ps;
-	map<int,Operator> CLNNLOnf;
+	std::map<int,Operator> CLNNLOnf;
 	CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
 	CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
 	CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
@@ -135,17 +130,17 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto FLObj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges. The charges of the components with mh >
 	// Q are set to zero.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	for (int k = 1; k <= 6; k++)
 	  EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
 
@@ -168,9 +163,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF3NCObjectsZM(Grid           const& g,
-												   vector<double> const& Thresholds,
-												   double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3NCObjectsZM(Grid                const& g,
+													     std::vector<double> const& Thresholds,
+													     double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for F3 NC Zero Mass... ");
     Timer t;
@@ -180,25 +175,25 @@ namespace apfel {
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    map<int,Operator> C3LO;
+    std::map<int,Operator> C3LO;
     C3LO.insert({DISNCBasis::CNS, Id});
     C3LO.insert({DISNCBasis::CS,  Id});
     C3LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C3NLO;
+    std::map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISNCBasis::CNS, O31ns});
     C3NLO.insert({DISNCBasis::CS,  O31ns});
     C3NLO.insert({DISNCBasis::CG,  Zero});
 
     // NNLO
-    map<int,map<int,Operator>> C3NNLO;
+    std::map<int,std::map<int,Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator O32nsm{g, C32nsm{nf}, IntEps};
 	const Operator O32t = O32nsm;
-	map<int,Operator> C3NNLOnf;
+	std::map<int,Operator> C3NNLOnf;
 	C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
 	C3NNLOnf.insert({DISNCBasis::CS,  O32t});
 	C3NNLOnf.insert({DISNCBasis::CG,  Zero});
@@ -206,17 +201,17 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {1,3,5,7,9,11};
+    const std::vector<int> skip = {1,3,5,7,9,11};
 
     // Define object of the structure containing the DglapObjects
-    const auto F3Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges. The charges of the components with mh >
 	// Q are set to zero.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	for (int k = 1; k <= 6; k++)
 	  EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
 
@@ -239,9 +234,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF2CCPlusObjectsZM(Grid           const& g,
-												       vector<double> const& Thresholds,
-												       double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCPlusObjectsZM(Grid                const& g,
+														 std::vector<double> const& Thresholds,
+														 double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for ( F2(nu) + F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -251,13 +246,13 @@ namespace apfel {
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    map<int,Operator> C2LO;
+    std::map<int,Operator> C2LO;
     C2LO.insert({DISCCBasis::CNS, Id});
     C2LO.insert({DISCCBasis::CS,  Id});
     C2LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C2NLO;
+    std::map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISCCBasis::CNS, O21ns});
@@ -265,14 +260,14 @@ namespace apfel {
     C2NLO.insert({DISCCBasis::CG,  O21g});
 
     // NNLO
-    map<int,map<int,Operator>> C2NNLO;
+    std::map<int,std::map<int,Operator>> C2NNLO;
     const Operator O22ps{g, C22ps{}, IntEps};
     const Operator O22g {g, C22g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator O22nsp{g, C22nsp{nf}, IntEps};
 	const Operator O22t = O22nsp + 6 * O22ps;
-	map<int,Operator> C2NNLOnf;
+	std::map<int,Operator> C2NNLOnf;
 	C2NNLOnf.insert({DISCCBasis::CNS, O22nsp});
 	C2NNLOnf.insert({DISCCBasis::CS,  O22t});
 	C2NNLOnf.insert({DISCCBasis::CG,  O22g});
@@ -280,16 +275,16 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto F2Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	if (nf <= 3)
 	  EffCh = {Ch[0], Ch[1], 0, 0, 0, 0, 0, 0, 0};
 	else if (nf == 4)
@@ -318,9 +313,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF2CCMinusObjectsZM(Grid           const& g,
-													vector<double> const& Thresholds,
-													double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCMinusObjectsZM(Grid                const& g,
+														  std::vector<double> const& Thresholds,
+														  double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for ( F2(nu) - F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -330,24 +325,24 @@ namespace apfel {
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    map<int,Operator> C2LO;
+    std::map<int,Operator> C2LO;
     C2LO.insert({DISCCBasis::CNS, Id});
     C2LO.insert({DISCCBasis::CS,  Zero});
     C2LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C2NLO;
+    std::map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     C2NLO.insert({DISCCBasis::CNS, O21ns});
     C2NLO.insert({DISCCBasis::CS,  Zero});
     C2NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    map<int,map<int,Operator>> C2NNLO;
+    std::map<int,std::map<int,Operator>> C2NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator O22nsm{g, C22nsm{nf}, IntEps};
-	map<int,Operator> C2NNLOnf;
+	std::map<int,Operator> C2NNLOnf;
 	C2NNLOnf.insert({DISCCBasis::CNS, O22nsm});
 	C2NNLOnf.insert({DISCCBasis::CS,  Zero});
 	C2NNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -355,16 +350,16 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {0,1,2,3,5,7,9,11};
+    const std::vector<int> skip = {0,1,2,3,5,7,9,11};
 
     // Define object of the structure containing the DglapObjects
-    const auto F2Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	if (nf <= 3)
 	  EffCh = {Ch[0], Ch[1], 0, 0, 0, 0, 0, 0, 0};
 	else if (nf == 4)
@@ -393,9 +388,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeFLCCPlusObjectsZM(Grid           const& g,
-												       vector<double> const& Thresholds,
-												       double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCPlusObjectsZM(Grid                const& g,
+														 std::vector<double> const& Thresholds,
+														 double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for ( FL(nu) + FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -404,13 +399,13 @@ namespace apfel {
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    map<int,Operator> CLLO;
+    std::map<int,Operator> CLLO;
     CLLO.insert({DISCCBasis::CNS, Zero});
     CLLO.insert({DISCCBasis::CS,  Zero});
     CLLO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> CLNLO;
+    std::map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISCCBasis::CNS, OL1ns});
@@ -418,14 +413,14 @@ namespace apfel {
     CLNLO.insert({DISCCBasis::CG,  OL1g});
 
     // NNLO
-    map<int,map<int,Operator>> CLNNLO;
+    std::map<int,std::map<int,Operator>> CLNNLO;
     const Operator OL2ps{g, CL2ps{}, IntEps};
     const Operator OL2g {g, CL2g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
 	const Operator OL2t = OL2nsp + 6 * OL2ps;
-	map<int,Operator> CLNNLOnf;
+	std::map<int,Operator> CLNNLOnf;
 	CLNNLOnf.insert({DISCCBasis::CNS, OL2nsp});
 	CLNNLOnf.insert({DISCCBasis::CS,  OL2t});
 	CLNNLOnf.insert({DISCCBasis::CG,  OL2g});
@@ -433,16 +428,16 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto FLObj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	if (nf <= 3)
 	  EffCh = {Ch[0], Ch[1], 0, 0, 0, 0, 0, 0, 0};
 	else if (nf == 4)
@@ -471,9 +466,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeFLCCMinusObjectsZM(Grid           const& g,
-												       vector<double> const& Thresholds,
-												       double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCMinusObjectsZM(Grid                const& g,
+														  std::vector<double> const& Thresholds,
+														  double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for ( FL(nu) - FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -482,24 +477,24 @@ namespace apfel {
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    map<int,Operator> CLLO;
+    std::map<int,Operator> CLLO;
     CLLO.insert({DISCCBasis::CNS, Zero});
     CLLO.insert({DISCCBasis::CS,  Zero});
     CLLO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> CLNLO;
+    std::map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     CLNLO.insert({DISCCBasis::CNS, OL1ns});
     CLNLO.insert({DISCCBasis::CS,  Zero});
     CLNLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    map<int,map<int,Operator>> CLNNLO;
+    std::map<int,std::map<int,Operator>> CLNNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator OL2nsm{g, CL2nsm{nf}, IntEps};
-	map<int,Operator> CLNNLOnf;
+	std::map<int,Operator> CLNNLOnf;
 	CLNNLOnf.insert({DISCCBasis::CNS, OL2nsm});
 	CLNNLOnf.insert({DISCCBasis::CS,  Zero});
 	CLNNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -507,16 +502,16 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {0,1,2,3,5,7,9,11};
+    const std::vector<int> skip = {0,1,2,3,5,7,9,11};
 
     // Define object of the structure containing the DglapObjects
-    const auto FLObj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	if (nf <= 3)
 	  EffCh = {Ch[0], Ch[1], 0, 0, 0, 0, 0, 0, 0};
 	else if (nf == 4)
@@ -545,9 +540,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF3CCPlusObjectsZM(Grid           const& g,
-												       vector<double> const& Thresholds,
-												       double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCPlusObjectsZM(Grid                const& g,
+														 std::vector<double> const& Thresholds,
+														 double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for ( F3(nu) + F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -557,25 +552,25 @@ namespace apfel {
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    map<int,Operator> C3LO;
+    std::map<int,Operator> C3LO;
     C3LO.insert({DISCCBasis::CNS, Id});
     C3LO.insert({DISCCBasis::CS,  Id});
     C3LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C3NLO;
+    std::map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISCCBasis::CNS, O31ns});
     C3NLO.insert({DISCCBasis::CS,  O31ns});
     C3NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    map<int,map<int,Operator>> C3NNLO;
+    std::map<int,std::map<int,Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator O32nsp{g, C32nsp{nf}, IntEps};
 	const Operator O32t = O32nsp;
-	map<int,Operator> C3NNLOnf;
+	std::map<int,Operator> C3NNLOnf;
 	C3NNLOnf.insert({DISCCBasis::CNS, O32nsp});
 	C3NNLOnf.insert({DISCCBasis::CS,  O32t});
 	C3NNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -583,16 +578,16 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {0,1,2,4,6,8,10,12};
+    const std::vector<int> skip = {0,1,2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto F3Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	if (nf <= 3)
 	  EffCh = {Ch[0], Ch[1], 0, 0, 0, 0, 0, 0, 0};
 	else if (nf == 4)
@@ -621,9 +616,9 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF3CCMinusObjectsZM(Grid           const& g,
-												       vector<double> const& Thresholds,
-												       double         const& IntEps)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCMinusObjectsZM(Grid                const& g,
+														  std::vector<double> const& Thresholds,
+														  double              const& IntEps)
   {
     report("Initializing StructureFunctionObjects for ( F3(nu) - F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -633,24 +628,24 @@ namespace apfel {
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    map<int,Operator> C3LO;
+    std::map<int,Operator> C3LO;
     C3LO.insert({DISCCBasis::CNS, Id});
     C3LO.insert({DISCCBasis::CS,  Id});
     C3LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C3NLO;
+    std::map<int,Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISCCBasis::CNS, O31ns});
     C3NLO.insert({DISCCBasis::CS,  O31ns});
     C3NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    map<int,map<int,Operator>> C3NNLO;
+    std::map<int,std::map<int,Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
 	const Operator O32nsm{g, C32nsm{nf}, IntEps};
-	map<int,Operator> C3NNLOnf;
+	std::map<int,Operator> C3NNLOnf;
 	C3NNLOnf.insert({DISCCBasis::CNS, O32nsm});
 	C3NNLOnf.insert({DISCCBasis::CS,  O32nsm});
 	C3NNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -658,16 +653,16 @@ namespace apfel {
       }
 
     // Vector of distributions to skip
-    const vector<int> skip = {0,1,3,5,7,9,11};
+    const std::vector<int> skip = {0,1,3,5,7,9,11};
 
     // Define object of the structure containing the DglapObjects
-    const auto F3Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Determine number of active flavours.
 	const int nf = NF(Q, Thresholds);
 
 	// Effective charges.
-	vector<double> EffCh;
+	std::vector<double> EffCh;
 	if (nf <= 3)
 	  EffCh = {Ch[0], Ch[1], 0, 0, 0, 0, 0, 0, 0};
 	else if (nf == 4)
@@ -696,14 +691,14 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF2NCObjectsMassive(Grid           const& g,
-													vector<double> const& Masses,
-													double         const& IntEps,
-													int            const& nxi,
-													double         const& ximin,
-													double         const& ximax,
-													int            const& intdeg,
-													double         const& lambda)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsMassive(Grid                const& g,
+														  std::vector<double> const& Masses,
+														  double              const& IntEps,
+														  int                 const& nxi,
+														  double              const& ximin,
+														  double              const& ximax,
+														  int                 const& intdeg,
+														  double              const& lambda)
   {
     Timer t;
 
@@ -713,7 +708,7 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    report("Initializing StructureFunctionObjects for F2 NC Massive with " + to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for F2 NC Massive with " + std::to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -721,13 +716,13 @@ namespace apfel {
 
     // Zero Mass coefficient functions
     // LO
-    map<int,Operator> C2LO;
+    std::map<int,Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C2NLO;
+    std::map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -742,7 +737,7 @@ namespace apfel {
 
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    map<int,Operator> Not;
+    std::map<int,Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -778,10 +773,10 @@ namespace apfel {
     const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto F2Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Fill in structure function object
 	StructureFunctionObjects FObj;
@@ -804,14 +799,14 @@ namespace apfel {
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
 	    // Now insert NLO
-	    map<int,Operator> NLO;
+	    std::map<int,Operator> NLO;
 	    NLO.insert({DISNCBasis::CNS, Zero});
 	    NLO.insert({DISNCBasis::CS,  Zero});
 	    NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
-	    map<int,Operator> NNLO;
+	    std::map<int,Operator> NNLO;
 	    NNLO.insert({DISNCBasis::CNS, Zero});
 	    NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
 	    NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
@@ -825,7 +820,7 @@ namespace apfel {
 
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
-	map<int,Operator> C2NNLO;
+	std::map<int,Operator> C2NNLO;
 	C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
 	C2NNLO.insert({DISNCBasis::CS,  O22t});
 	C2NNLO.insert({DISNCBasis::CG,  O22g});
@@ -853,14 +848,14 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeFLNCObjectsMassive(Grid           const& g,
-													vector<double> const& Masses,
-													double         const& IntEps,
-													int            const& nxi,
-													double         const& ximin,
-													double         const& ximax,
-													int            const& intdeg,
-													double         const& lambda)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsMassive(Grid                const& g,
+														  std::vector<double> const& Masses,
+														  double              const& IntEps,
+														  int                 const& nxi,
+														  double              const& ximin,
+														  double              const& ximax,
+														  int                 const& intdeg,
+														  double              const& lambda)
   {
     Timer t;
 
@@ -870,20 +865,20 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    report("Initializing StructureFunctionObjects for FL NC Massive with " + to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for FL NC Massive with " + std::to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
 
     // Zero Mass coefficient functions
     // LO
-    map<int,Operator> CLLO;
+    std::map<int,Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> CLNLO;
+    std::map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -898,7 +893,7 @@ namespace apfel {
 
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    map<int,Operator> Not;
+    std::map<int,Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -934,10 +929,10 @@ namespace apfel {
     const TabulateObject<Operator> TabOL2g{fOL2g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto FLObj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Fill in structure function object
 	StructureFunctionObjects FObj;
@@ -960,14 +955,14 @@ namespace apfel {
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
 	    // Now insert NLO
-	    map<int,Operator> NLO;
+	    std::map<int,Operator> NLO;
 	    NLO.insert({DISNCBasis::CNS, Zero});
 	    NLO.insert({DISNCBasis::CS,  Zero});
 	    NLO.insert({DISNCBasis::CG,  TabOL1g.Evaluate(xi)});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
-	    map<int,Operator> NNLO;
+	    std::map<int,Operator> NNLO;
 	    NNLO.insert({DISNCBasis::CNS, Zero});
 	    NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
 	    NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
@@ -981,7 +976,7 @@ namespace apfel {
 
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
-	map<int,Operator> CLNNLO;
+	std::map<int,Operator> CLNNLO;
 	CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
 	CLNNLO.insert({DISNCBasis::CS,  OL2t});
 	CLNNLO.insert({DISNCBasis::CG,  OL2g});
@@ -1009,14 +1004,14 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeF2NCObjectsMassiveZero(Grid           const& g,
-													    vector<double> const& Masses,
-													    double         const& IntEps,
-													    int            const& nxi,
-													    double         const& ximin,
-													    double         const& ximax,
-													    int            const& intdeg,
-													    double         const& lambda)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsMassiveZero(Grid                const& g,
+														      std::vector<double> const& Masses,
+														      double              const& IntEps,
+														      int                 const& nxi,
+														      double              const& ximin,
+														      double              const& ximax,
+														      int                 const& intdeg,
+														      double              const& lambda)
   {
     Timer t;
 
@@ -1026,7 +1021,7 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + std::to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -1034,13 +1029,13 @@ namespace apfel {
 
     // Zero Mass coefficient functions
     // LO
-    map<int,Operator> C2LO;
+    std::map<int,Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> C2NLO;
+    std::map<int,Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -1055,7 +1050,7 @@ namespace apfel {
 
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    map<int,Operator> Not;
+    std::map<int,Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -1109,10 +1104,10 @@ namespace apfel {
     const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto F2Obj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Fill in structure function object
 	StructureFunctionObjects FObj;
@@ -1135,14 +1130,14 @@ namespace apfel {
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
 	    // Now insert NLO
-	    map<int,Operator> NLO;
+	    std::map<int,Operator> NLO;
 	    NLO.insert({DISNCBasis::CNS, Zero});
 	    NLO.insert({DISNCBasis::CS,  Zero});
 	    NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
-	    map<int,Operator> NNLO;
+	    std::map<int,Operator> NNLO;
 	    NNLO.insert({DISNCBasis::CNS, Zero});
 	    NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
 	    NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
@@ -1156,7 +1151,7 @@ namespace apfel {
 
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
-	map<int,Operator> C2NNLO;
+	std::map<int,Operator> C2NNLO;
 	C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
 	C2NNLO.insert({DISNCBasis::CS,  O22t});
 	C2NNLO.insert({DISNCBasis::CG,  O22g});
@@ -1184,14 +1179,14 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  function<StructureFunctionObjects(double const&, vector<double> const&)> InitializeFLNCObjectsMassiveZero(Grid           const& g,
-													    vector<double> const& Masses,
-													    double         const& IntEps,
-													    int            const& nxi,
-													    double         const& ximin,
-													    double         const& ximax,
-													    int            const& intdeg,
-													    double         const& lambda)
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsMassiveZero(Grid                const& g,
+														      std::vector<double> const& Masses,
+														      double              const& IntEps,
+														      int                 const& nxi,
+														      double              const& ximin,
+														      double              const& ximax,
+														      int                 const& intdeg,
+														      double              const& lambda)
   {
     Timer t;
 
@@ -1201,20 +1196,20 @@ namespace apfel {
       if (m < eps8)
 	actnf++;
 
-    report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + std::to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
 
     // Zero Mass coefficient functions
     // LO
-    map<int,Operator> CLLO;
+    std::map<int,Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    map<int,Operator> CLNLO;
+    std::map<int,Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -1229,7 +1224,7 @@ namespace apfel {
 
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    map<int,Operator> Not;
+    std::map<int,Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -1267,10 +1262,10 @@ namespace apfel {
     const TabulateObject<Operator> TabOL2g{fOL2g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2,4,6,8,10,12};
 
     // Define object of the structure containing the DglapObjects
-    const auto FLObj = [=] (double const& Q, vector<double> const& Ch) -> StructureFunctionObjects
+    const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
       {
 	// Fill in structure function object
 	StructureFunctionObjects FObj;
@@ -1293,14 +1288,14 @@ namespace apfel {
 	    FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
 	    // Now insert NLO
-	    map<int,Operator> NLO;
+	    std::map<int,Operator> NLO;
 	    NLO.insert({DISNCBasis::CNS, Zero});
 	    NLO.insert({DISNCBasis::CS,  Zero});
 	    NLO.insert({DISNCBasis::CG,  Om0L1g});
 	    FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
 	    // Now insert NNLO
-	    map<int,Operator> NNLO;
+	    std::map<int,Operator> NNLO;
 	    NNLO.insert({DISNCBasis::CNS, Zero});
 	    NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
 	    NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
@@ -1314,7 +1309,7 @@ namespace apfel {
 
 	// Now fill in the light components. To be updated in the
 	// loop over the heavy component.
-	map<int,Operator> CLNNLO;
+	std::map<int,Operator> CLNNLO;
 	CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
 	CLNNLO.insert({DISNCBasis::CS,  OL2t});
 	CLNNLO.insert({DISNCBasis::CG,  OL2g});
@@ -1342,11 +1337,11 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,Observable> BuildStructureFunctions(function<StructureFunctionObjects(double const&, vector<double> const&)> const& FObj,
-					      function<map<int,double>(double const&, double const&)>                  const& InDistFunc,
-					      int                                                                      const& PerturbativeOrder,
-					      function<double(double const&)>                                          const& Alphas,
-					      function<vector<double>(double const&)>                                  const& Couplings)
+  std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+						   std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
+						   int                                                                                const& PerturbativeOrder,
+						   std::function<double(double const&)>                                               const& Alphas,
+						   std::function<std::vector<double>(double const&)>                                  const& Couplings)
   {
     // Call FObj at energy 1 to use it for those quantities that do
     // not depend on Q.
@@ -1356,10 +1351,10 @@ namespace apfel {
     Grid const& g = FObj1.C0.at(1).at(0).GetGrid();
 
     // Get skip vector.
-    const vector<int> skip = FObj1.skip;
+    const std::vector<int> skip = FObj1.skip;
 
     // Cycle over the key of the convolution basis map.
-    map<int,Observable> F;
+    std::map<int,Observable> F;
     for (auto it = FObj1.ConvBasis.begin(); it != FObj1.ConvBasis.end(); ++it)
       {
 	// Structure function index.
@@ -1390,15 +1385,15 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,Observable> BuildStructureFunctions(function<StructureFunctionObjects(double const&, vector<double> const&)> const& FObj,
-					      function<double(int const&, double const&, double const&)>               const& InDistFunc,
-					      int                                                                      const& PerturbativeOrder,
-					      function<double(double const&)>                                          const& Alphas,
-					      function<vector<double>(double const&)>                                  const& Couplings)
+  std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+						   std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
+						   int                                                                                const& PerturbativeOrder,
+						   std::function<double(double const&)>                                               const& Alphas,
+						   std::function<std::vector<double>(double const&)>                                  const& Couplings)
   {
-    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> map<int,double>
+    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> std::map<int,double>
       {
-	map<int,double> DistMap;
+	std::map<int,double> DistMap;
 	for (int i = 0; i <= 12; i++)
 	  DistMap.insert({i,InDistFunc(i, x, Q)});
 	return DistMap;

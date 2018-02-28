@@ -10,10 +10,7 @@
 #include "apfel/convolutionmap.h"
 #include "apfel/messages.h"
 
-#include <vector>
 #include <numeric>
-
-using namespace std;
 
 namespace apfel
 {
@@ -79,11 +76,11 @@ namespace apfel
      * @brief The DISNCBasis default constructor for the total structure functions.
      * @param Ch: vector of the effective quark charges
      */
-  DISNCBasis(vector<double> const& Ch):
+  DISNCBasis(std::vector<double> const& Ch):
     ConvolutionMap{"DISNCBasis_tot"}
     {
       if (Ch.size() != 6)
-	throw runtime_error(error("DISNCBasis", "The charge vector must have 6 entries."));
+	throw std::runtime_error(error("DISNCBasis", "The charge vector must have 6 entries."));
 
       // Sum of the charges
       const double SumCh = accumulate(Ch.begin(), Ch.end(), 0.);
@@ -141,7 +138,7 @@ namespace apfel
      * 8 - Vts2
      * 9 - Vtb2
      */
-    map<int,pair<int,int>> Vij = {
+    std::map<int,std::pair<int,int>> Vij = {
       {1,{1,1}}, {2,{1,2}}, {3,{1,3}},
       {4,{2,1}}, {5,{2,2}}, {6,{2,3}},
       {7,{3,1}}, {8,{3,2}}, {9,{3,3}} };
@@ -159,7 +156,7 @@ namespace apfel
      * @param fact: factor that multiplies the whole structure function
      */
   DISCCBasis(int const& l, bool const& Is3, double const& fact = 1):
-    ConvolutionMap{"DISCCBasis_" + to_string(l) + "_" + to_string(Is3)}
+    ConvolutionMap{"DISCCBasis_" + std::to_string(l) + "_" + std::to_string(Is3)}
     {
       // Retrieve CKM matrix element.
       const int i = Vij.at(l).first;
@@ -223,11 +220,11 @@ namespace apfel
      * @param CKM: vector with the CKM matrix entries
      * @param Is3: switch to tell the constructure whether the structure function is F3 or not
      */
-  DISCCBasis(vector<double> const& CKM, bool const& Is3):
+  DISCCBasis(std::vector<double> const& CKM, bool const& Is3):
     ConvolutionMap{"DISCCBasis_tot"}
     {
       if (CKM.size() != 9)
-	throw runtime_error(error("DISCCBasis", "The CKM vector must have 9 entries."));
+	throw std::runtime_error(error("DISCCBasis", "The CKM vector must have 9 entries."));
 
       _rules[GLUON]   = { {CG, GLUON, 0} };
       _rules[SIGMA]   = { {CS, SIGMA, 0} };

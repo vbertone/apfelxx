@@ -10,8 +10,6 @@
 #include <cmath>
 #include <map>
 
-using namespace std;
-
 namespace apfel
 {
   /// @cond UNNECESSARY
@@ -27,7 +25,7 @@ namespace apfel
   double xdbar(double const& x) { return 0.1939875 * pow(x,-0.1) * pow((1-x),6); }
   double xubar(double const& x) { return xdbar(x) * (1-x); }
   double xsbar(double const& x) { return 0.2 * ( xdbar(x) + xubar(x) ); }
-  map<int,double> LHToyPDFs(double const& x, double const&)
+  std::map<int,double> LHToyPDFs(double const& x, double const&)
   {
     // Call all functions only once.
     const double upv  = xupv (x);
@@ -46,7 +44,7 @@ namespace apfel
     double const V3      = upv - dnv;
 
     // Fill in map in the QCD evolution basis.
-    map<int,double> QCDEvMap;
+    std::map<int,double> QCDEvMap;
     QCDEvMap[0]  = Gluon;
     QCDEvMap[1]  = Singlet;
     QCDEvMap[2]  = Valence;

@@ -8,9 +8,6 @@
 #include "apfel/lagrangeinterpolator.h"
 #include "apfel/constants.h"
 
-#include <cmath>
-#include <iostream>
-
 namespace apfel {
   //_________________________________________________________________________________
   LagrangeInterpolator::LagrangeInterpolator(Grid const& gr):
@@ -56,11 +53,11 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  array<int, 2> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
+  std::array<int, 2> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
   {
     auto const& xsg = sg.GetGrid();
 
-    array<int,2> bounds = {{0, 0}};
+    std::array<int,2> bounds = {{0, 0}};
     if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 

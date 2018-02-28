@@ -11,10 +11,6 @@
 #include <string>
 #include <vector>
 
-using std::map;
-using std::string;
-using std::vector;
-
 namespace apfel
 {
   /**
@@ -28,7 +24,7 @@ namespace apfel
      * @brief ConvolutionMap default constructor
      * @param name: name of the map
      */
-    ConvolutionMap(string const& name);
+    ConvolutionMap(std::string const& name);
 
     /**
      * @brief This structure contains the attribute of a single rule.
@@ -55,16 +51,16 @@ namespace apfel
      * @brief Retrieve the name of the map.
      * @return The name of the map
      */
-    string                const& GetName()  const { return _name; }
+    std::string                    const& GetName()  const { return _name; }
 
     /**
      * @brief Retrieve the full set of rules for the multiplications.
      * @return The multiplication rules
      */
-    map<int,vector<rule>> const& GetRules() const { return _rules; }
+    std::map<int,std::vector<rule>> const& GetRules() const { return _rules; }
     ///@}
   protected:
-    map<int,vector<rule>> _rules; //!< the map container
-    string                _name;  //!< the name of the derived class
+    std::map<int,std::vector<rule>> _rules; //!< the map container
+    std::string                     _name;  //!< the name of the derived class
   };
 }

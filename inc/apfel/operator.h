@@ -14,8 +14,6 @@
 #include "apfel/lagrangeinterpolator.h"
 #include "apfel/matrix.h"
 
-typedef double accuracy;
-
 namespace apfel
 {
   /**
@@ -36,20 +34,20 @@ namespace apfel
      * @param expr: the expression to be transformed
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
-    Operator(Grid const& gr, Expression const& expr, accuracy const& eps = 1e-5);
+    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
 
     /**
      * @name Binary operators
      */
     ///@{
-    Distribution operator *= (Distribution const& d) const;       //!< this *= Distribution
-    Operator&    operator  = (Operator const& o);                 //!< this  = Operator
-    Operator&    operator *= (Operator const& o);                 //!< this *= Operator
-    Operator&    operator *= (double const& s);                   //!< this *= Scalar
-    Operator&    operator *= (function<double(double const&)> f); //!< This *= function
-    Operator&    operator /= (double const& s);                   //!< this /= Scalar
-    Operator&    operator += (Operator const& o);                 //!< this += Operator
-    Operator&    operator -= (Operator const& o);                 //!< this -= Operator
+    Distribution operator *= (Distribution const& d) const;            //!< this *= Distribution
+    Operator&    operator  = (Operator const& o);                      //!< this  = Operator
+    Operator&    operator *= (Operator const& o);                      //!< this *= Operator
+    Operator&    operator *= (double const& s);                        //!< this *= Scalar
+    Operator&    operator *= (std::function<double(double const&)> f); //!< This *= function
+    Operator&    operator /= (double const& s);                        //!< this /= Scalar
+    Operator&    operator += (Operator const& o);                      //!< this += Operator
+    Operator&    operator -= (Operator const& o);                      //!< this -= Operator
     ///@}
 
     /**
@@ -64,9 +62,9 @@ namespace apfel
     double integrand(double const& x) const;
 
   private:
-    Grid                   const& _grid;         //!< Grid on which to compute the operator
-    Expression const*      const  _expr;         //!< Expression to be commuted into an operator
-    vector<matrix<double>>        _Operator;     //!< Operator values.
+    Grid                        const& _grid;         //!< Grid on which to compute the operator
+    Expression const*           const  _expr;         //!< Expression to be commuted into an operator
+    std::vector<matrix<double>>        _Operator;     //!< Operator values.
 
     // Global variables
     int    _alpha;
@@ -80,14 +78,14 @@ namespace apfel
    * @name Ternary operators
    */
   ///@{
-  Distribution operator * (Operator lhs, Distribution const& rhs);           //!< Operator*Distribution
-  Operator     operator * (Operator lhs, Operator const& rhs);               //!< Operator*Operator
-  Operator     operator * (double const& s, Operator rhs);                   //!< Scalar*Operator
-  Operator     operator * (Operator lhs, double const& s);                   //!< Operator*Scalar
-  Operator     operator * (function<double(double const&)> f, Operator rhs); //!< function*Operator
-  Operator     operator * (Operator lhs, function<double(double const&)> f); //!< Operator*function
-  Operator     operator / (Operator lhs, double const& s);                   //!< Operator/Scalar
-  Operator     operator + (Operator lhs, Operator const& rhs);               //!< Operator+Operator
-  Operator     operator - (Operator lhs, Operator const& rhs);               //!< Operator-Operator
+  Distribution operator * (Operator lhs, Distribution const& rhs);                //!< Operator*Distribution
+  Operator     operator * (Operator lhs, Operator const& rhs);                    //!< Operator*Operator
+  Operator     operator * (double const& s, Operator rhs);                        //!< Scalar*Operator
+  Operator     operator * (Operator lhs, double const& s);                        //!< Operator*Scalar
+  Operator     operator * (std::function<double(double const&)> f, Operator rhs); //!< function*Operator
+  Operator     operator * (Operator lhs, std::function<double(double const&)> f); //!< Operator*function
+  Operator     operator / (Operator lhs, double const& s);                        //!< Operator/Scalar
+  Operator     operator + (Operator lhs, Operator const& rhs);                    //!< Operator+Operator
+  Operator     operator - (Operator lhs, Operator const& rhs);                    //!< Operator-Operator
   ///@}
 }

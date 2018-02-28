@@ -9,8 +9,6 @@
 
 #include <vector>
 
-using std::vector;
-
 namespace apfel
 {
   /**
@@ -25,6 +23,6 @@ namespace apfel
    * @param Thresholds: the vector of thresholds
    * @return number of active flavours at Q
    */
-  int NF(double const& Q, vector<double> const& Thresholds);
+  int NF(double const& Q, std::vector<double> const& Thresholds);
   ///@}
 }

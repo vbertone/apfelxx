@@ -8,8 +8,6 @@
 #include "apfel/matchingconditions_tl.h"
 #include "apfel/constants.h"
 
-#include <cmath>
-
 namespace apfel
 {
   //_________________________________________________________________________________

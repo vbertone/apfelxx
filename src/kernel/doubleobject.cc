@@ -6,7 +6,6 @@
 //
 
 #include "apfel/doubleobject.h"
-#include "apfel/distribution.h"
 #include "apfel/operator.h"
 #include "apfel/tools.h"
 
@@ -20,7 +19,7 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
-  DoubleObject<T>::DoubleObject(vector<term<T>> const& terms):
+  DoubleObject<T>::DoubleObject(std::vector<term<T>> const& terms):
     _terms(terms)
   {
   }
@@ -37,7 +36,7 @@ namespace apfel
   template<class V> DoubleObject<V> DoubleObject<T>::operator *= (DoubleObject<V> const& o) const
   {
     auto tt = o.GetTerms();
-    vector<term<V>> vt;
+    std::vector<term<V>> vt;
     for (auto const& t : _terms)
       {
 	const double tc = t.coefficient;
@@ -103,7 +102,7 @@ namespace apfel
   DoubleObject<Operator>& DoubleObject<Operator>::operator *= (DoubleObject<Operator> const& o)
   {
     auto tt = o.GetTerms();
-    vector<term<Operator>> vt;
+    std::vector<term<Operator>> vt;
     for (auto const& t : _terms)
       {
 	const double tc = t.coefficient;

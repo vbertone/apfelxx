@@ -9,10 +9,6 @@
 
 #include <functional>
 #include <vector>
-#include <iostream>
-
-using std::function;
-using std::vector;
 
 namespace apfel
 {
@@ -37,14 +33,14 @@ namespace apfel
      * @brief The default constructor.
      * @param func: The function of one variable to be integrated
      */
-    Integrator(function<double(double const&)> const& func);
+    Integrator(std::function<double(double const&)> const& func);
 
     /**
      * @brief The default constructor.
      * @param func: the function of two variables to be integrated over the first
      * @param arg2: the value of the second variable while integrating over the first
      */
-    Integrator(function<double(double const&, double const&)> const& func2, double const& arg2);
+    Integrator(std::function<double(double const&, double const&)> const& func2, double const& arg2);
 
     /**
      * @brief The default constructor.
@@ -52,7 +48,7 @@ namespace apfel
      * @param arg2: the value of the second variable while integrating over the first
      * @param arg3: the value of the third variable while integrating over the first
      */
-    Integrator(function<double(double const&, double const&, double const&)> const& func3, double const& arg2, double const& arg3);
+    Integrator(std::function<double(double const&, double const&, double const&)> const& func3, double const& arg2, double const& arg3);
     ///@}
 
     /**
@@ -75,7 +71,7 @@ namespace apfel
      * @param eps: the required relative accuracy
      * @return the value of the integral
      */
-    double integrate(double const& xmin, double const& xmax, vector<double> const& FixPts, double const& eps) const;
+    double integrate(double const& xmin, double const& xmax, std::vector<double> const& FixPts, double const& eps) const;
 
     /**
      * @brief Function that integrates the integrand using a given
@@ -95,6 +91,6 @@ namespace apfel
     virtual double integrand(double const& x) const { return _func(x); };
 
   private:
-    function<double(double const&)> _func; //!< The integrand function
+    std::function<double(double const&)> _func; //!< The integrand function
   };
 }

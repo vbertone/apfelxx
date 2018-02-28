@@ -8,8 +8,6 @@
 #include "apfel/distribution.h"
 #include "apfel/messages.h"
 
-#include <algorithm>
-
 namespace apfel
 {
   //_________________________________________________________________________
@@ -19,9 +17,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Distribution           const& obj,
-			     vector<vector<double>> const& distsubgrid,
-			     vector<double>         const& distjointgrid):
+  Distribution::Distribution(Distribution                     const& obj,
+			     std::vector<std::vector<double>> const& distsubgrid,
+			     std::vector<double>              const& distjointgrid):
     LagrangeInterpolator{obj._grid}
   {
     _distributionSubGrid   = distsubgrid;
@@ -29,9 +27,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Grid                   const& gr,
-			     vector<vector<double>> const& distsubgrid,
-			     vector<double>         const& distjointgrid):
+  Distribution::Distribution(Grid                             const& gr,
+			     std::vector<std::vector<double>> const& distsubgrid,
+			     std::vector<double>              const& distjointgrid):
     LagrangeInterpolator{gr}
   {
     _distributionSubGrid   = distsubgrid;
@@ -39,8 +37,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Grid                            const& gr,
-			     function<double(double const&)> const& InDistFunc):
+  Distribution::Distribution(Grid                                 const& gr,
+			     std::function<double(double const&)> const& InDistFunc):
     LagrangeInterpolator{gr}
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
@@ -48,7 +46,7 @@ namespace apfel
 
     for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
-	vector<double> sg;
+	std::vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
 	  sg.push_back(InDistFunc(ix < 1 ? ix : 1));
 
@@ -57,9 +55,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Grid                                           const& gr,
-			     function<double(double const&, double const&)> const& InDistFunc,
-			     double                                         const& Q):
+  Distribution::Distribution(Grid                                                const& gr,
+			     std::function<double(double const&, double const&)> const& InDistFunc,
+			     double                                              const& Q):
     LagrangeInterpolator{gr}
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
@@ -67,7 +65,7 @@ namespace apfel
 
     for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
-	vector<double> sg;
+	std::vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
 	  sg.push_back(InDistFunc(ix < 1 ? ix : 1,Q));
 
@@ -76,9 +74,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Grid                                        const& gr,
-			     function<double(int const&, double const&)> const& InDistFunc,
-			     int                                         const& ipdf):
+  Distribution::Distribution(Grid                                             const& gr,
+			     std::function<double(int const&, double const&)> const& InDistFunc,
+			     int                                              const& ipdf):
     LagrangeInterpolator{gr}
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
@@ -86,7 +84,7 @@ namespace apfel
 
     for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
-	vector<double> sg;
+	std::vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
 	  sg.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1));
 
@@ -95,10 +93,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution::Distribution(Grid                                                       const& gr,
-			     function<double(int const&, double const&, double const&)> const& InDistFunc,
-			     int                                                        const& ipdf,
-			     double                                                     const& Q):
+  Distribution::Distribution(Grid                                                            const& gr,
+			     std::function<double(int const&, double const&, double const&)> const& InDistFunc,
+			     int                                                             const& ipdf,
+			     double                                                          const& Q):
     LagrangeInterpolator{gr}
   {
     for (auto const& ix: _grid.GetJointGrid().GetGrid())
@@ -106,7 +104,7 @@ namespace apfel
 
     for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
-	vector<double> sg;
+	std::vector<double> sg;
 	for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
 	  sg.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1,Q));
 
@@ -126,7 +124,7 @@ namespace apfel
       // If "next" is true start filling a new subgrid otherwise push
       // back in the last one.
       if (next)
-	_distributionSubGrid.push_back(vector<double>{xi});
+	_distributionSubGrid.push_back(std::vector<double>{xi});
       else
 	_distributionSubGrid.back().push_back(xi);
     }
@@ -156,7 +154,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution& Distribution::operator *= (function<double(double const&)> const& f)
+  Distribution& Distribution::operator *= (std::function<double(double const&)> const& f)
   {
     // Get joint grid
     const auto& jg = _grid.GetJointGrid().GetGrid();
@@ -213,7 +211,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
+      throw std::runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
 
     // sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
@@ -232,7 +230,7 @@ namespace apfel
   {
     // fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
+      throw std::runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
 
     // sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
@@ -259,13 +257,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution operator * (function<double(double const&)> const& f, Distribution rhs)
+  Distribution operator * (std::function<double(double const&)> const& f, Distribution rhs)
   {
     return rhs *= f;
   }
 
   //_________________________________________________________________________
-  Distribution operator * (Distribution lhs, function<double(double const&)> const& f)
+  Distribution operator * (Distribution lhs, std::function<double(double const&)> const& f)
   {
     return lhs *= f;
   }
@@ -295,17 +293,17 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  map<int,Distribution> DistributionMap(Grid                                                    const& g,
-					function<map<int,double>(double const&, double const&)> const& InDistFunc,
-					double                                                  const& Q,
-					vector<int>                                             const& skip)
+  std::map<int,Distribution> DistributionMap(Grid                                                              const& g,
+					     std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
+					     double                                                            const& Q,
+					     std::vector<int>                                                  const& skip)
   {
     // Joint grid and subgrid vectors.
-    const vector<double> jg = g.GetJointGrid().GetGrid();
+    const std::vector<double> jg = g.GetJointGrid().GetGrid();
 
     // Initialise output.
-    map<int,Distribution> DistMap;
-    const map<int,double> f = InDistFunc(jg[0],Q);
+    std::map<int,Distribution> DistMap;
+    const std::map<int,double> f = InDistFunc(jg[0],Q);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	DistMap.insert({it->first,Distribution{g}});
@@ -313,7 +311,7 @@ namespace apfel
     // Fill in joint grid.
     for (auto const& ix : jg)
       {
-	const map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
+	const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
 	for (auto it = f.begin(); it != f.end(); ++it)
 	  if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	    DistMap.at(it->first).PushJointGrid(it->second);
@@ -325,7 +323,7 @@ namespace apfel
 	bool next = true;
 	for (auto const& ix: g.GetSubGrid(ig).GetGrid())
 	  {
-	    const map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
+	    const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
 	    for (auto it = f.begin(); it != f.end(); ++it)
 	      if (find(skip.begin(), skip.end(), it->first) == skip.end())
 		DistMap.at(it->first).PushSubGrid(it->second, next);
@@ -337,16 +335,16 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  map<int,Distribution> DistributionMap(Grid                                     const& g,
-					function<map<int,double>(double const&)> const& InDistFunc,
-					vector<int>                              const& skip)
+  std::map<int,Distribution> DistributionMap(Grid                                               const& g,
+					     std::function<std::map<int,double>(double const&)> const& InDistFunc,
+					     std::vector<int>                                   const& skip)
   {
     // Joint grid and subgrid vectors.
-    const vector<double> jg = g.GetJointGrid().GetGrid();
+    const std::vector<double> jg = g.GetJointGrid().GetGrid();
 
     // Initialise output.
-    map<int,Distribution> DistMap;
-    const map<int,double> f = InDistFunc(jg[0]);
+    std::map<int,Distribution> DistMap;
+    const std::map<int,double> f = InDistFunc(jg[0]);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	DistMap.insert({it->first,Distribution{g}});
@@ -354,7 +352,7 @@ namespace apfel
     // Fill in joint grid.
     for (auto const& ix : jg)
       {
-	const map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
+	const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
 	for (auto it = f.begin(); it != f.end(); ++it)
 	  if (find(skip.begin(), skip.end(), it->first) == skip.end())
 	    DistMap.at(it->first).PushJointGrid(it->second);
@@ -366,7 +364,7 @@ namespace apfel
 	bool next = true;
 	for (auto const& ix: g.GetSubGrid(ig).GetGrid())
 	  {
-	    const map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
+	    const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
 	    for (auto it = f.begin(); it != f.end(); ++it)
 	      if (find(skip.begin(), skip.end(), it->first) == skip.end())
 		DistMap.at(it->first).PushSubGrid(it->second, next);

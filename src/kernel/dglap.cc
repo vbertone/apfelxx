@@ -6,23 +6,17 @@
 //
 
 #include "apfel/dglap.h"
-#include "apfel/ode.h"
 #include "apfel/tools.h"
-
-#include <iostream>
-#include <cmath>
-
-using namespace std;
 
 namespace apfel {
   //_________________________________________________________________________________
   template<class T>
-  Dglap<T>::Dglap(function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
-		  function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-		  Set<T>                                            const& ObjRef,
-		  double                                            const& MuDistRef,
-		  vector<double>                                    const& Thresholds,
-		  int                                               const& nsteps):
+  Dglap<T>::Dglap(std::function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
+		  std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
+		  Set<T>                                                 const& ObjRef,
+		  double                                                 const& MuDistRef,
+		  std::vector<double>                                    const& Thresholds,
+		  int                                                    const& nsteps):
     MatchedEvolution<Set<T>>(ObjRef, MuDistRef, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions)
@@ -63,10 +57,10 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<>
-  void Dglap<Distribution>::SetInitialDistributions(function<double(int const&, double const&)> const& InDistFunc)
+  void Dglap<Distribution>::SetInitialDistributions(std::function<double(int const&, double const&)> const& InDistFunc)
   {
     // Allocate initial scale distributions.
-    map<int,Distribution> DistMap;
+    std::map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
       DistMap.insert({i,Distribution{_ObjRef.at(0).GetGrid(), InDistFunc, i}});
 
@@ -77,7 +71,7 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<>
-  void Dglap<Distribution>::SetInitialDistributions(function<map<int,double>(double const&)> const& InDistFunc)
+  void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int,double>(double const&)> const& InDistFunc)
   {
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).

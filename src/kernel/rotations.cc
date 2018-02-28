@@ -6,9 +6,6 @@
 //
 
 #include "apfel/rotations.h"
-#include "apfel/distribution.h"
-
-using namespace std;
 
 namespace apfel {
   // Rotation matrix.
@@ -20,10 +17,10 @@ namespace apfel {
 				       {1./12.,     0.,     0.,     0.,      0., -1./12.}};   // t
 
   //_____________________________________________________________________________
-  map<int,double> PhysToQCDEv(map<int,double> const& InPhysMap)
+  std::map<int,double> PhysToQCDEv(std::map<int,double> const& InPhysMap)
   {
     // Call function in the physical basis.
-    map<int,double> PhysMap = InPhysMap;
+    std::map<int,double> PhysMap = InPhysMap;
 
     // Fill in keys that don't exist.
     // Gluon (assumes that the ID is 21).
@@ -37,7 +34,7 @@ namespace apfel {
 
     // Fill in map in the QCD evolution basis. It attumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
-    map<int,double> QCDEvMap;
+    std::map<int,double> QCDEvMap;
     QCDEvMap[0] = PhysMap.at(0);
     QCDEvMap[1] =
       + PhysMap.at(1) + PhysMap.at(-1)
@@ -108,11 +105,11 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,double> QCDEvToPhys(map<int,double> const& QCDEvMap)
+  std::map<int,double> QCDEvToPhys(std::map<int,double> const& QCDEvMap)
   {
     // Fill in map in the physical basis. It attumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
-    map<int,double> PhysMap;
+    std::map<int,double> PhysMap;
     PhysMap[0]  = QCDEvMap.at(0);
     PhysMap[21] = QCDEvMap.at(0);
 
@@ -131,11 +128,11 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  map<int,Distribution> QCDEvToPhys(map<int,Distribution> const& QCDEvMap)
+  std::map<int,Distribution> QCDEvToPhys(std::map<int,Distribution> const& QCDEvMap)
   {
     // Fill in map in the physical basis. It attumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
-    map<int,Distribution> PhysMap;
+    std::map<int,Distribution> PhysMap;
     PhysMap.insert({0,QCDEvMap.at(0)});
     PhysMap.insert({0,QCDEvMap.at(0)});
 

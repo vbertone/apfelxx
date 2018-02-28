@@ -10,8 +10,6 @@
 #include "apfel/specialfunctions.h"
 #include "apfel/integrator.h"
 
-#include <cmath>
-
 namespace apfel
 {
   //_________________________________________________________________________________

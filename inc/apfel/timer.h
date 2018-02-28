@@ -9,11 +9,6 @@
 
 #include "apfel/messages.h"
 
-#include <iostream>
-#include <chrono>
-
-using namespace std;
-
 namespace apfel
 {
   /**
@@ -31,7 +26,7 @@ namespace apfel
     /**
      * @brief This function starts the timer.
      */
-    void start() { startTime = chrono::steady_clock::now(); }
+    void start() { startTime = std::chrono::steady_clock::now(); }
 
     /**
      * @brief This function stops the timer and reports the elapsed
@@ -39,13 +34,13 @@ namespace apfel
      */
     void stop()
     {
-      auto end = chrono::steady_clock::now();
+      auto end = std::chrono::steady_clock::now();
       auto diff = end - startTime;
       if (GetVerbosityLevel() > 1)
-	printf("time elapsed: %5.6f seconds\n", chrono::duration <double, milli> (diff).count() * 1e-3);
+	printf("time elapsed: %5.6f seconds\n", std::chrono::duration <double, std::milli> (diff).count() * 1e-3);
     }
 
   private:
-    chrono::time_point<chrono::steady_clock> startTime;
+    std::chrono::time_point<std::chrono::steady_clock> startTime;
   };
 }

@@ -10,10 +10,6 @@
 #include "apfel/set.h"
 #include "apfel/distribution.h"
 
-#include <functional>
-
-using std::function;
-
 namespace apfel
 {
   /**
@@ -25,32 +21,32 @@ namespace apfel
    * rapidity, the final TMD scales muf and zetaf.
    */
   ///@{
-  function<double(double const&)> TmdCrossSectionDY(double                                                                   const& Vs,
-						    double                                                                   const& Q,
-						    double                                                                   const& y,
-						    function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
-						    function<double(double const&)>                                          const& Alphas,
-						    function<vector<double>(double const&)>                                  const& fEWCharges,
-						    int                                                                      const& PerturbativeOrder,
-						    vector<double>                                                           const& Thresholds,
-						    double                                                                   const& cmuf = 1,
-						    double                                                                   const& czetaf = 1);
+  std::function<double(double const&)> TmdCrossSectionDY(double                                                                        const& Vs,
+							 double                                                                        const& Q,
+							 double                                                                        const& y,
+							 std::function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
+							 std::function<double(double const&)>                                          const& Alphas,
+							 std::function<std::vector<double>(double const&)>                             const& fEWCharges,
+							 int                                                                           const& PerturbativeOrder,
+							 std::vector<double>                                                           const& Thresholds,
+							 double                                                                        const& cmuf = 1,
+							 double                                                                        const& czetaf = 1);
 
   //_____________________________________________________________________________
-  function<double(double const&)> TmdCrossSectionDY(double                                                                const& Vs,
-						    double                                                                const& Qmin,
-						    double                                                                const& Qmax,
-						    double                                                                const& ymin,
-						    double                                                                const& ymax,
-						    function<Set<Distribution>(double const&)>                            const& InTMDPDFs,
-						    function<vector<double>(double const&, double const&, double const&)> const& EvolFact,
-						    function<double(double const&)>                                       const& Alphas,
-						    function<vector<double>(double const&)>                               const& fEWCharges,
-						    int                                                                   const& PerturbativeOrder,
-						    vector<double>                                                        const& Thresholds,
-						    double                                                                const& cmuf = 1,
-						    double                                                                const& czetaf = 1,
-						    double                                                                const& IntEps = 1e-5);
+  std::function<double(double const&)> TmdCrossSectionDY(double                                                                          const& Vs,
+							 double                                                                          const& Qmin,
+							 double                                                                          const& Qmax,
+							 double                                                                          const& ymin,
+							 double                                                                          const& ymax,
+							 std::function<Set<Distribution>(double const&)>                                 const& InTMDPDFs,
+							 std::function<std::vector<double>(double const&, double const&, double const&)> const& EvolFact,
+							 std::function<double(double const&)>                                            const& Alphas,
+							 std::function<std::vector<double>(double const&)>                               const& fEWCharges,
+							 int                                                                             const& PerturbativeOrder,
+							 std::vector<double>                                                             const& Thresholds,
+							 double                                                                          const& cmuf = 1,
+							 double                                                                          const& czetaf = 1,
+							 double                                                                          const& IntEps = 1e-5);
   ///@}
 
   /**
@@ -63,18 +59,18 @@ namespace apfel
    * scales muf and zetaf.
    */
   ///@{
-  function<double(double const&)> TmdCrossSectionSIDIS(double                                                                   const& Vs,
-						       double                                                                   const& x,
-						       double                                                                   const& y,
-						       double                                                                   const& z,
-						       function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
-						       function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDFFs,
-						       function<double(double const&)>                                          const& Alphas,
-						       function<vector<double>(double const&)>                                  const& fEWCharges,
-						       int                                                                      const& PerturbativeOrder,
-						       vector<double>                                                           const& Thresholds,
-						       double                                                                   const& cmuf = 1,
-						       double                                                                   const& czetaf = 1);
+  std::function<double(double const&)> TmdCrossSectionSIDIS(double                                                                        const& Vs,
+							    double                                                                        const& x,
+							    double                                                                        const& y,
+							    double                                                                        const& z,
+							    std::function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDPDFs,
+							    std::function<Set<Distribution>(double const&, double const&, double const&)> const& EvolvedTMDFFs,
+							    std::function<double(double const&)>                                          const& Alphas,
+							    std::function<std::vector<double>(double const&)>                             const& fEWCharges,
+							    int                                                                           const& PerturbativeOrder,
+							    std::vector<double>                                                           const& Thresholds,
+							    double                                                                        const& cmuf = 1,
+							    double                                                                        const& czetaf = 1);
   ///@}
 
   /**

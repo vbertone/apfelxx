@@ -9,8 +9,8 @@
 
 namespace apfel {
   //_____________________________________________________________________________
-  Observable::Observable(function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-			 function<Set<Distribution>(double const&)> const& Distributions):
+  Observable::Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
+			 std::function<Set<Distribution>(double const&)> const& Distributions):
     _CoefficientFunctions(CoefficientFunctions),
     _Distributions(Distributions)
   {

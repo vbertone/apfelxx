@@ -9,18 +9,15 @@
 #include "apfel/constants.h"
 #include "apfel/betaqcd.h"
 #include "apfel/messages.h"
-#include "apfel/ode.h"
-
-using namespace std;
 
 namespace apfel {
   //_________________________________________________________________________________
-  AlphaQCD::AlphaQCD(double         const& AlphaRef,
-		     double         const& MuRef,
-		     vector<double> const& Masses,
-		     vector<double> const& Thresholds,
-		     int            const& pt,
-		     int            const& nstep):
+  AlphaQCD::AlphaQCD(double              const& AlphaRef,
+		     double              const& MuRef,
+		     std::vector<double> const& Masses,
+		     std::vector<double> const& Thresholds,
+		     int                 const& pt,
+		     int                 const& nstep):
     MatchedEvolution(AlphaRef, MuRef, Thresholds, nstep),
     _pt(pt)
   {
@@ -32,7 +29,7 @@ namespace apfel {
 	_bQCD(nf-3, ipt) = betaQCD(ipt, nf);
 
     // Compute logs of muth2 / m2 needed by the matching conditions.
-    vector<double> LogKth;
+    std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
 	LogKth.push_back(0);
@@ -68,7 +65,7 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, vector<double> const& Masses, int const& pt, int const& nstep):
+  AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, std::vector<double> const& Masses, int const& pt, int const& nstep):
     AlphaQCD(AlphaRef, MuRef, Masses, Masses, pt, nstep)
   {
   }
@@ -98,7 +95,7 @@ namespace apfel {
     else if ( pt == 3 )
       res = beta3(nf);
     else
-      throw runtime_error(error("AlphaQCD::betaQCD","perturbive range out-of-range."));
+      throw std::runtime_error(error("AlphaQCD::betaQCD","perturbive range out-of-range."));
 
     return res / pow(FourPi,pt+1);
   }
