@@ -12,6 +12,8 @@
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   //_________________________________________________________________________
@@ -41,7 +43,7 @@ namespace apfel
 
     // Sort the quark thresholds and logs.
     if (_Thresholds2.size() > 1)
-      sort(_Thresholds2.begin(), _Thresholds2.end());
+      std::sort(_Thresholds2.begin(), _Thresholds2.end());
   }
 
   //_________________________________________________________________________________
