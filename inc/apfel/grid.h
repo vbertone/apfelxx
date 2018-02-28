@@ -9,6 +9,8 @@
 
 #include "apfel/subgrid.h"
 
+#include <memory>
+
 namespace apfel
 {
   /**
