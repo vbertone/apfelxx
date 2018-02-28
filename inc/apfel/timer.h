@@ -9,6 +9,8 @@
 
 #include "apfel/messages.h"
 
+#include <chrono>
+
 namespace apfel
 {
   /**
