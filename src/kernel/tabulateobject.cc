@@ -12,6 +12,8 @@
 #include "apfel/set.h"
 #include "apfel/timer.h"
 
+#include <algorithm>
+
 namespace apfel {
   //_________________________________________________________________________________
   template<class T>
@@ -47,7 +49,7 @@ namespace apfel {
       }
 
     // Reverse order of the elements.
-    reverse(this->_GridValues.begin(),this->_GridValues.end());
+    std::reverse(this->_GridValues.begin(),this->_GridValues.end());
 
     // Loop on "_Qg" above "MuRef".
     Object.SetObjectRef(ObjRef);
