@@ -11,6 +11,7 @@
 
 #include <array>
 #include <stdexcept>
+#include <algorithm>
 
 namespace apfel
 {
@@ -149,7 +150,7 @@ namespace apfel
 	else
 	  return x1 > x2;
       };
-    sort(bounds.begin(),bounds.end(), sorter);
+    std::sort(bounds.begin(),bounds.end(), sorter);
 
     // Now compute sub-integrals and sum them.
     double dgauss = 0;
