@@ -9,6 +9,7 @@
 #include "apfel/messages.h"
 
 #include <stdexcept>
+#include <algorithm>
 
 namespace apfel
 {
@@ -307,7 +308,7 @@ namespace apfel
     std::map<int,Distribution> DistMap;
     const std::map<int,double> f = InDistFunc(jg[0],Q);
     for (auto it = f.begin(); it != f.end(); ++it)
-      if (find(skip.begin(), skip.end(), it->first) == skip.end())
+      if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
 	DistMap.insert({it->first,Distribution{g}});
 
     // Fill in joint grid.
@@ -315,7 +316,7 @@ namespace apfel
       {
 	const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
 	for (auto it = f.begin(); it != f.end(); ++it)
-	  if (find(skip.begin(), skip.end(), it->first) == skip.end())
+	  if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
 	    DistMap.at(it->first).PushJointGrid(it->second);
       }
 
@@ -327,7 +328,7 @@ namespace apfel
 	  {
 	    const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1,Q);
 	    for (auto it = f.begin(); it != f.end(); ++it)
-	      if (find(skip.begin(), skip.end(), it->first) == skip.end())
+	      if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
 		DistMap.at(it->first).PushSubGrid(it->second, next);
 	    next = false;
 	  }
@@ -348,7 +349,7 @@ namespace apfel
     std::map<int,Distribution> DistMap;
     const std::map<int,double> f = InDistFunc(jg[0]);
     for (auto it = f.begin(); it != f.end(); ++it)
-      if (find(skip.begin(), skip.end(), it->first) == skip.end())
+      if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
 	DistMap.insert({it->first,Distribution{g}});
 
     // Fill in joint grid.
@@ -356,7 +357,7 @@ namespace apfel
       {
 	const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
 	for (auto it = f.begin(); it != f.end(); ++it)
-	  if (find(skip.begin(), skip.end(), it->first) == skip.end())
+	  if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
 	    DistMap.at(it->first).PushJointGrid(it->second);
       }
 
@@ -368,7 +369,7 @@ namespace apfel
 	  {
 	    const std::map<int,double> f = InDistFunc(ix < 1 ? ix : 1);
 	    for (auto it = f.begin(); it != f.end(); ++it)
-	      if (find(skip.begin(), skip.end(), it->first) == skip.end())
+	      if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
 		DistMap.at(it->first).PushSubGrid(it->second, next);
 	    next = false;
 	  }
