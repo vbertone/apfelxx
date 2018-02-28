@@ -10,6 +10,7 @@
 #include "apfel/messages.h"
 
 #include <stdexcept>
+#include <algorithm>
 
 namespace apfel {
   //_________________________________________________________________________________
@@ -50,7 +51,7 @@ namespace apfel {
     // having the lowest value of xMin (only if there is more than one
     // grid).
     if (ng > 1)
-      sort(_GlobalGrid.begin(), _GlobalGrid.end(), ComparexMin);
+      std::sort(_GlobalGrid.begin(), _GlobalGrid.end(), ComparexMin);
 
     // In case there grids have been locked ...
     if (_Locked)
