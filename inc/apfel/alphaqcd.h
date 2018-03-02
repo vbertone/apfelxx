@@ -30,7 +30,7 @@ namespace apfel
     AlphaQCD() = delete;
 
     /**
-     * @brief AlphaQCD default constructor.
+     * @brief AlphaQCD constructor.
      * @param AlphaRef: the reference value of the coupling
      * @param MuRef: the reference value of the scale
      * @param Masses: vector of masses
@@ -45,7 +45,7 @@ namespace apfel
 	     int                 const& nstep = 10);
 
     /**
-     * @brief AlphaQCD default constructor.
+     * @brief AlphaQCD constructor.
      * @param AlphaRef: the reference value of the coupling
      * @param MuRef: the reference value of the scale
      * @param Masses: vector of masses

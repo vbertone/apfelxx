@@ -32,7 +32,7 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The TabulateObject default constructor for an "evolving"
+     * @brief The TabulateObject constructor for an "evolving"
      * object (MatchedEvolution).
      * @param Object: the MatchedEvolution type object to be tabulated in Q
      * @param nQ: the number of on nodes of the grid in Q
@@ -49,7 +49,7 @@ namespace apfel
 		   double              const& Lambda = 0.25);
 
     /**
-     * @brief The TabulateObject default constructor for a Q dependent 
+     * @brief The TabulateObject constructor for a Q dependent
      * object.
      * @param Object: the T-valued function to be tabulated in Q
      * @param nQ: the number of on nodes of the grid in Q
@@ -67,7 +67,7 @@ namespace apfel
 		   double                   const& Lambda = 0.25);
 
     /**
-     * @brief The TabulateObject default constructor for a Q dependent 
+     * @brief The TabulateObject constructor for a Q dependent
      * object tabulated on a used given distribution in Q.
      * @param Object: the T-valued function to be tabulated in Q
      * @param nQ: the number of on nodes of the grid in Q

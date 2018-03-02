@@ -22,7 +22,7 @@ namespace apfel
   {
   public:
     /**
-     * @brief matrix default constructor.
+     * @brief The matrix constructor.
      * @param row: number of rows
      * @param col: number of columns
      */

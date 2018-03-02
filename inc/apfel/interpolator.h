@@ -26,7 +26,7 @@ namespace apfel
     Interpolator() = delete;
 
     /**
-     * @brief Interpolator default constructor.
+     * @brief The Interpolator constructor.
      * @param gr: the x-space grid object over which interpolation takes place
      */
     Interpolator(Grid const& gr);

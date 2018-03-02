@@ -21,7 +21,7 @@ namespace apfel
   {
   public:
     /**
-     * @brief ConvolutionMap default constructor
+     * @brief ConvolutionMap constructor
      * @param name: name of the map
      */
     ConvolutionMap(std::string const& name);

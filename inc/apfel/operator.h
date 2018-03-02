@@ -29,7 +29,7 @@ namespace apfel
     Operator() = delete;
 
     /**
-     * @brief The Operator default constructor.
+     * @brief The Operator constructor.
      * @param gr: the Grid object
      * @param expr: the expression to be transformed
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
@@ -63,7 +63,7 @@ namespace apfel
 
   private:
     Grid                        const& _grid;         //!< Grid on which to compute the operator
-    Expression const*           const  _expr;         //!< Expression to be commuted into an operator
+    Expression                  const* _expr;         //!< Expression to be commuted into an operator
     std::vector<matrix<double>>        _Operator;     //!< Operator values.
 
     // Global variables

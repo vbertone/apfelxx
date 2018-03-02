@@ -28,7 +28,7 @@ namespace apfel
     Expression();
 
     /**
-     * @brief The default constructor in the presence of a phase-space
+     * @brief The constructor in the presence of a phase-space
      * reduction given by eta < 1.
      * @param eta: upper limit of the convolution integral
      */

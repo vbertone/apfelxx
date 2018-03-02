@@ -26,7 +26,7 @@ namespace apfel
     Dglap() =  delete;
 
     /**
-     * @brief Dglap default constructor.
+     * @brief Dglap constructor.
      * @param SplittingFunctions: set of splitting functions
      * @param MatchingConditions: set od matching conditions
      * @param ObjRef: reference object to be evolved

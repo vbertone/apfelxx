@@ -24,7 +24,7 @@ namespace apfel
     Observable() =  delete;
 
     /**
-     * @brief Observable default constructor.
+     * @brief The Observable constructor.
      * @param CoefficientFunctions: a Set<Operator>-valued function returning the operators
      * @param Distributions: a Set<Distribution>-valued function returning the distributions
      */

@@ -22,7 +22,7 @@ namespace apfel
     LagrangeInterpolator() = delete;
 
     /**
-     * @brief LagrangeInterpolator default constructor.
+     * @brief The LagrangeInterpolator constructor.
      * @param gr: the x-space grid object over which interpolation takes place
      * @see Interpolator::Interpolator
      */

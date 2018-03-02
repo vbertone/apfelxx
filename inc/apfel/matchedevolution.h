@@ -28,7 +28,7 @@ namespace apfel
     MatchedEvolution() = delete;
 
     /**
-     * @brief The MatchedEvolution default constructor.
+     * @brief The MatchedEvolution constructor.
      * @param ObjRef: the reference object
      * @param MuRef: the reference scale
      * @param Thresholds: vector with the heavy quark threholds

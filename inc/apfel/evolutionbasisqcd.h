@@ -33,7 +33,7 @@ namespace apfel
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
-     * @brief The EvolutionBasisQCD default constructor for the DGLAP
+     * @brief The EvolutionBasisQCD constructor for the DGLAP
      * evolution in the QCD evolution basis with nf active flavours.
      * @param nf: number of active flavours
      */
@@ -73,7 +73,7 @@ namespace apfel
     enum Object:  int {GG, GQ, QG, QQ, VAL, T3S, T3G, V3V, T8S, T8G, V8V, T15S, T15G, V15V, T24S, T24G, V24V, T35S, T35G, V35V};
 
     /**
-     * @brief The EvolutionOperatorBasisQCD default constructor for
+     * @brief The EvolutionOperatorBasisQCD constructor for
      * the DGLAP evolution in the QCD evolution basis with nf active
      * flavours.
      * @param nf: number of active flavours
@@ -118,7 +118,7 @@ namespace apfel
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
-     * @brief The MatchEvolOperatorBasisQCD default constructor for
+     * @brief The MatchEvolOperatorBasisQCD constructor for
      * the matching in the QCD evolution basis with nf active
      * flavours.
      * @param nf: number of active flavours

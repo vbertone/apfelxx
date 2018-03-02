@@ -31,7 +31,7 @@ namespace apfel
     QGrid() = delete;
 
     /**
-     * @brief The QGrid default constructor.
+     * @brief The QGrid constructor.
      * @param nQ: the number of grid intervals in Q
      * @param QMin: the lower edge of the grid in Q
      * @param QMax: the upper edge of the grid in Q
@@ -40,16 +40,16 @@ namespace apfel
      * @param TabFunc: the function used to tabulate the grid in Q
      * @param InvTabFunc: the inverse function of TabFunc (an analytic expression is necessary)
      */
-    QGrid(int                             const& nQ,
-	  double                          const& QMin,
-	  double                          const& QMax,
-	  int                             const& InterDegree,
+    QGrid(int                                  const& nQ,
+	  double                               const& QMin,
+	  double                               const& QMax,
+	  int                                  const& InterDegree,
 	  std::vector<double>                  const& Thresholds,
 	  std::function<double(double const&)> const& TabFunc,
 	  std::function<double(double const&)> const& InvTabFunc);
 
     /**
-     * @brief The QGrid default constructor.
+     * @brief The QGrid constructor.
      * @param nQ: the number of grid intervals in Q
      * @param QMin: the lower edge of the grid in Q
      * @param QMax: the upper edge of the grid in Q
@@ -57,12 +57,12 @@ namespace apfel
      * @param Thresholds: the fixed point of the grid over which interpolation is forbidden
      * @param Lambda: the parameter of the function log(log(Q/Lambda)) used for the tabulation on the grid in Q
      */
-    QGrid(int            const& nQ,
-	  double         const& QMin,
-	  double         const& QMax,
-	  int            const& InterDegree,
+    QGrid(int                 const& nQ,
+	  double              const& QMin,
+	  double              const& QMax,
+	  int                 const& InterDegree,
 	  std::vector<double> const& Thresholds,
-	  double         const& Lambda = 0.25);
+	  double              const& Lambda = 0.25);
     ///@}
 
     /**
@@ -113,10 +113,10 @@ namespace apfel
     std::tuple<int,int,int> SumBounds(double const& Q) const;
 
   protected:
-    int            _nQ;                       //!< Number intervals
-    double         _QMin;                     //!< Minumim value of Q
-    double         _QMax;                     //!< Maximum value of Q
-    int            _InterDegree;              //!< Interpolation degree
+    int                 _nQ;                       //!< Number intervals
+    double              _QMin;                     //!< Minumim value of Q
+    double              _QMax;                     //!< Maximum value of Q
+    int                 _InterDegree;              //!< Interpolation degree
     std::vector<double> _Thresholds;               //!< Thresholds
     std::function<double(double const&)> _TabFunc; //!< Function whose constant step is used for the tabulation
     std::vector<double> _Qg;                       //!< Grid in Q

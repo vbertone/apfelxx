@@ -26,7 +26,7 @@ namespace apfel
     Grid() = delete;
 
     /**
-     * @brief The default constructor.
+     * @brief The Grid constructor.
      * @param grs: vector of subgrids
      * @param lockgrids: flag to enable/disable the locking of the subgrids (default: true)
      */

@@ -42,7 +42,7 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The DISNCBasis default constructor for the k-th
+     * @brief The DISNCBasis constructor for the k-th
      * component of the structure functions.
      * @param k: index that identifies the component of the structure function
      * @param fact: factor that multiplies the whole structure function
@@ -74,7 +74,7 @@ namespace apfel
     };
 
     /**
-     * @brief The DISNCBasis default constructor for the total structure functions.
+     * @brief The DISNCBasis constructor for the total structure functions.
      * @param Ch: vector of the effective quark charges
      */
   DISNCBasis(std::vector<double> const& Ch):
@@ -150,7 +150,7 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The DISCCBasis default constructor for the (i,k)-th
+     * @brief The DISCCBasis constructor for the (i,k)-th
      * component of the structure functions.
      * @param l: index that identifies the component of the structure function
      * @param Is3: switch to tell the constructure whether the structure function is F3 or not
@@ -217,7 +217,7 @@ namespace apfel
     };
 
     /**
-     * @brief The DISCCBasis default constructor for the total structure functions.
+     * @brief The DISCCBasis constructor for the total structure functions.
      * @param CKM: vector with the CKM matrix entries
      * @param Is3: switch to tell the constructure whether the structure function is F3 or not
      */

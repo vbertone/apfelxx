@@ -23,7 +23,7 @@ namespace apfel
   {        
   public:
     /**
-     * @brief The Set default constructor.
+     * @brief The Set constructor.
      * @param Map: the convolution map
      * @param in: a map of objects of type T
      */
