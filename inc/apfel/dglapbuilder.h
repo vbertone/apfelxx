@@ -10,6 +10,8 @@
 #include "apfel/grid.h"
 #include "apfel/dglap.h"
 
+#include <memory>
+
 namespace apfel
 {
   /**
