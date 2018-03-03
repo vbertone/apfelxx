@@ -223,7 +223,7 @@ namespace apfel {
 		passed = false;
 	      }
 
-	    if (abs(v.back() - 1) > eps10)
+	    if (std::abs(v.back() - 1) > eps10)
 	      {
 		std::cout << error("InitialiseEvolution::CheckSetup", "The last element of each subgrid vector must be equal to 1.") << std::endl;
 		passed = false;

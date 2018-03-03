@@ -60,7 +60,7 @@ namespace apfel
 
     // Check that the last point of the user-given grid is equal to
     // one.
-    if (abs(_xsg[_nx]-1) >= eps11)
+    if (std::abs(_xsg[_nx]-1) >= eps11)
       throw std::runtime_error(error("SubGrid::SubGrid","The upper value of the external grid does not coincide with 1."));
     else
       _xsg[_nx] = 1;

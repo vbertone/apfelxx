@@ -8,6 +8,8 @@
 #include "apfel/lagrangeinterpolator.h"
 #include "apfel/constants.h"
 
+#include <algorithm>
+
 namespace apfel {
   //_________________________________________________________________________________
   LagrangeInterpolator::LagrangeInterpolator(Grid const& gr):
@@ -22,7 +24,7 @@ namespace apfel {
     auto const& lxsg = sg.GetLogGrid();
 
     // Return immediately 1 if "x" coincides with "xg[beta]".
-    if (abs(lnx - lxsg[beta]) < eps12)
+    if (std::abs(lnx - lxsg[beta]) < eps12)
       return 1;
 
     // Return 0 if "x" is outside the range in which the interpolant
@@ -61,11 +63,11 @@ namespace apfel {
     if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 
-    const int low = lower_bound(xsg.begin()+1, xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
+    const int low = std::lower_bound(xsg.begin(), xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
     bounds[0] = bounds[1] = low;
 
-    if (abs(x - xsg[low]) <= eps12)
-      bounds[1] += 1;
+    if (std::abs(x - xsg[low]) <= eps12)
+	bounds[1] += 1;
     else
       {
         bounds[0] -= 1;

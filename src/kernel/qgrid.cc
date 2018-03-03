@@ -43,7 +43,7 @@ namespace apfel
     const std::vector<double> TestPoints{_QMin, ( _QMax +  _QMin ) / 2, _QMax};
     for (auto const& p : TestPoints)
       {
-	const double reldiff = abs(InvTabFunc( TabFunc(p) ) / p - 1);
+	const double reldiff = std::abs(InvTabFunc( TabFunc(p) ) / p - 1);
 	if (reldiff > eps8)
 	  throw std::runtime_error(error("QGrid::QGrid","TabFunc and InvTabFunc are not the inverse of each other."));
       }
@@ -68,7 +68,7 @@ namespace apfel
     for (int isg = nfin+1; isg <= nffi; isg++)
       {
 	fqTh.push_back(_TabFunc(_Thresholds[isg-1]));
-	_nQg.push_back(lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
+	_nQg.push_back(std::lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
       }
     _nQg.push_back(_nQ);
     fqTh.push_back(_TabFunc(_QMax));
@@ -132,7 +132,7 @@ namespace apfel
   {
     // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless
     // tau coincides with a threshold index. In that case return zero.
-    if (abs(fq / _fQg[tau] - 1) < eps11)
+    if (std::abs(fq / _fQg[tau] - 1) < eps11)
       return 1;
 
     // Define the lower bound of the interpolation range.
@@ -201,11 +201,11 @@ namespace apfel
       }
 
     // Determine the actual bounds.
-    const int low       = lower_bound(_Qg.begin()+1, _Qg.end(), Q) - _Qg.begin();
+    const int low       = std::lower_bound(_Qg.begin()+1, _Qg.end(), Q) - _Qg.begin();
     std::get<1>(bounds) = low;
     std::get<2>(bounds) = low;
 
-    if (abs(Q / _Qg[low] - 1) <= eps12)
+    if (std::abs(Q / _Qg[low] - 1) <= eps12)
       std::get<2>(bounds) += 1;
     else
       {

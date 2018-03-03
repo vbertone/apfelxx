@@ -37,7 +37,7 @@ namespace apfel {
     Object.SetNumberOfSteps(1);
 
     // Find the point on the QGrid right below MuRef.
-    const int tQ = lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
+    const int tQ = std::lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
 
     // Loop on "_Qg" below "MuRef".
     for (int iQ = tQ; iQ >= 0; iQ--)

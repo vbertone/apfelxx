@@ -37,7 +37,7 @@ namespace apfel {
 	// than "CutOff". This assumes that terms are increasingly
 	// small. Provided that the integrand is not badly behaved,
 	// this should be guaranteed by the Bessel function j0.
-	if (abs(term/integral) < CutOff)
+	if (std::abs(term/integral) < CutOff)
 	  break;
 
 	integral += w * term;
