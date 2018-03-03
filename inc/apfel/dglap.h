@@ -68,7 +68,7 @@ namespace apfel
     /**
      * @brief Function that sets the reference object at the reference
      * scale using a function of the index and x.
-     * @param InDistFunc: function that returns the distributions.
+     * @param InDistFunc: the function that returns the distributions.
      */
     void SetInitialDistributions(std::function<double(int const&, double const&)> const& InDistFunc);
 
@@ -76,9 +76,18 @@ namespace apfel
      * @brief Function that sets the reference distribution at the
      * reference scale using a map of the distribution as function of
      * x.
-     * @param InDistFunc: function that returns the distributions.
+     * @param InDistFunc: the function that returns the distributions.
      */
     void SetInitialDistributions(std::function<std::map<int,double>(double const&)> const& InDistFunc);
+
+    /**
+     * @brief Function that sets the reference distribution at the
+     * reference scale using a map of the distribution as function of
+     * x and Q.
+     * @param InDistFunc: the function that returns the distributions.
+     * @param mu: the scale at which distributions have to be computed
+     */
+    void SetInitialDistributions(std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc, double const& mu);
     ///@}
   private:
     std::function<Set<Operator>(int const&,double const&)> _SplittingFunctions;

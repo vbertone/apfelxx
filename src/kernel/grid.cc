@@ -27,11 +27,11 @@ namespace apfel {
     _ExtGrids(false),
     _GlobalGrid(grs)
   {
-    CreateJointGrid();
+    _JointGrid = CreateJointGrid();
   }
 
   //_________________________________________________________________________________
-  void Grid::CreateJointGrid()
+  SubGrid Grid::CreateJointGrid()
   {
     // Number of grids.
     double const ng = _GlobalGrid.size();
@@ -116,7 +116,7 @@ namespace apfel {
       }
 
     // Initialize another SubGrid for the joint grid.
-    _JointGrid = std::unique_ptr<SubGrid>(new SubGrid{xg_joint_vect, id_joint});
+    return SubGrid{xg_joint_vect, id_joint};
   }
 
   //_________________________________________________________________________________
@@ -152,7 +152,7 @@ namespace apfel {
     os << "Locked    = " << gr._Locked << "\n";
     os << "ExtGrids  = " << gr._ExtGrids << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
-    for (const auto &v: gr._JointGrid->GetGrid()) os << v << " ";
+    for (const auto &v: gr._JointGrid.GetGrid()) os << v << " ";
     os << "\n\n";
     return os;
   }

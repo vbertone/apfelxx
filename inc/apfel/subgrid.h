@@ -23,11 +23,13 @@ namespace apfel
   class SubGrid
   {
   public:
-
-    SubGrid() = delete;
+    /**
+     * @brief The default SubGrid constructor.
+     */
+    SubGrid();
 
     /**
-     * @brief Standard internal grid constructor.
+     * @brief The SubGrid constructor.
      * @param nx number of grid points in x.
      * @param xMin lower edge x of the grid.
      * @param InterDegree interpolation degree.
@@ -35,7 +37,7 @@ namespace apfel
     SubGrid(int const& nx, double const& xMin, int const& InterDegree);
 
     /**
-     * @brief External grid constructor
+     * @brief The SubGrid constructor.
      * @param xsg a std::vector with the nodes of the grid
      * @param InterDegree interpolation degree
      */

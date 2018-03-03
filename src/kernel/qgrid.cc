@@ -223,11 +223,12 @@ namespace apfel
     const std::tuple<int,int,int> bounds = SumBounds(Q);
     const double                  fq     = _TabFunc(Q);
 
-    // first create a copy of template object with the first component
+    // First create a copy of template object with the first
+    // component...
     int tau  = std::get<1>(bounds);
     T result = Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 
-    // then loop and add the extra terms
+    // ...then loop and add the extra terms.
     for (tau = tau+1; tau < std::get<2>(bounds); tau++)
       result += Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 

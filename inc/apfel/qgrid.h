@@ -85,15 +85,16 @@ namespace apfel
      * @name Getters
      */
     ///@{
-    int                                    nQ()             const { return _nQ; }          //!< return the number of Q interval
-    int                                    InterDegree()    const { return _InterDegree; } //!< return the interpolation degree
-    double                                 QMin()           const { return _QMin; }        //!< return the minimum node value
-    double                                 QMax()           const { return _QMax; }        //!< return the maximum node value
-    std::function<double(double const&)> const& TabFunc()        const { return _TabFunc; }     //!< return the tabulation function
-    std::vector<double>                  const& GetThresholds()  const { return _Thresholds;}   //!< return the heavy quark thresholds
-    std::vector<double>                  const& GetQGrid()       const { return _Qg; }          //!< return the grid in Q
-    std::vector<double>                  const& GetFQGrid()      const { return _fQg; }         //!< return the grid in _TabFunc(Q)
-    std::vector<T>                       const& GetQGridValues() const { return _GridValues; }  //!< return the tabulated objects on the grid.
+    int                                         nQ()                 const { return _nQ; }          //!< return the number of Q interval
+    int                                         InterDegree()        const { return _InterDegree; } //!< return the interpolation degree
+    double                                      QMin()               const { return _QMin; }        //!< return the minimum node value
+    double                                      QMax()               const { return _QMax; }        //!< return the maximum node value
+    std::function<double(double const&)> const& TabFunc()            const { return _TabFunc; }     //!< return the tabulation function
+    std::vector<double>                  const& GetThresholds()      const { return _Thresholds;}   //!< return the heavy quark thresholds
+    std::vector<double>                  const& GetQGrid()           const { return _Qg; }          //!< return the grid in Q
+    std::vector<double>                  const& GetFQGrid()          const { return _fQg; }         //!< return the grid in _TabFunc(Q)
+    std::vector<int>                     const& GetThesholdIndices() const { return _nQg; }         //!< return the indices of the thresholds on the grid
+    std::vector<T>                       const& GetQGridValues()     const { return _GridValues; }  //!< return the tabulated objects on the grid.
     ///@}
 
     /**
@@ -113,16 +114,16 @@ namespace apfel
     std::tuple<int,int,int> SumBounds(double const& Q) const;
 
   protected:
-    int                 _nQ;                       //!< Number intervals
-    double              _QMin;                     //!< Minumim value of Q
-    double              _QMax;                     //!< Maximum value of Q
-    int                 _InterDegree;              //!< Interpolation degree
-    std::vector<double> _Thresholds;               //!< Thresholds
-    std::function<double(double const&)> _TabFunc; //!< Function whose constant step is used for the tabulation
-    std::vector<double> _Qg;                       //!< Grid in Q
-    std::vector<double> _fQg;                      //!< Grid in _TabFunc(Q)
-    std::vector<int>    _nQg;                      //!< Indices of the nodes on which there is either a bound or a threshold
-    std::vector<T>      _GridValues;               //!< Vector of values to be interpolated on the grid
+    int                                  _nQ;           //!< Number intervals
+    double                               _QMin;         //!< Minumim value of Q
+    double                               _QMax;         //!< Maximum value of Q
+    int                                  _InterDegree;  //!< Interpolation degree
+    std::vector<double>                  _Thresholds;   //!< Thresholds
+    std::function<double(double const&)> _TabFunc;      //!< Function whose constant step is used for the tabulation
+    std::vector<double>                  _Qg;           //!< Grid in Q
+    std::vector<double>                  _fQg;          //!< Grid in _TabFunc(Q)
+    std::vector<int>                     _nQg;          //!< Indices of the nodes on which there is either a bound or a threshold
+    std::vector<T>                       _GridValues;   //!< Vector of values to be interpolated on the grid
 
     template<class U>
     friend std::ostream& operator<<(std::ostream& os, QGrid<U> const& dt);

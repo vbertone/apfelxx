@@ -9,8 +9,6 @@
 
 #include "apfel/subgrid.h"
 
-#include <memory>
-
 namespace apfel
 {
   /**
@@ -59,7 +57,7 @@ namespace apfel
     /**
      * @return The joint SubGrid
      */
-    SubGrid const& GetJointGrid()     const { return *_JointGrid; }
+    SubGrid const& GetJointGrid()     const { return _JointGrid; }
     ///@}
 
     /**
@@ -75,13 +73,14 @@ namespace apfel
     /**
      * @brief Takes the input SubGrids, apply the locking if needed
      * and fill the joint grid object with the appropriate grid nodes.
+     * @return the joint grid
      */
-    void CreateJointGrid();
+    SubGrid CreateJointGrid();
 
-    bool                     _Locked;     //!< Flag for locking the grids.
-    bool                     _ExtGrids;   //!< Contains external sub-grids.
-    std::vector<SubGrid>     _GlobalGrid; //!< Vector with sub-grids.
-    std::unique_ptr<SubGrid> _JointGrid;  //!< Container for the joint grid.
+    bool                 _Locked;     //!< Flag for locking the grids.
+    bool                 _ExtGrids;   //!< Contains external sub-grids.
+    std::vector<SubGrid> _GlobalGrid; //!< Vector with sub-grids.
+    SubGrid              _JointGrid;  //!< Container for the joint grid.
 
     friend std::ostream& operator << (std::ostream& os, Grid const& gr);
   };

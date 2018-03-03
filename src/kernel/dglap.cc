@@ -77,5 +77,14 @@ namespace apfel {
     // evolution basis).
     SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc)});
   }
+
+  //_________________________________________________________________________________
+  template<>
+  void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc, double const& mu)
+  {
+    // Create set of initial distributions (assumed to be in the QCD
+    // evolution basis).
+    SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc, mu)});
+  }
 }
 

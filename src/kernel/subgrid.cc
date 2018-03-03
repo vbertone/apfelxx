@@ -14,6 +14,13 @@
 namespace apfel
 {
   //_________________________________________________________________________________
+  SubGrid::SubGrid():
+    _IsExternal(false),
+    _xMax(1)
+  {
+  }
+
+  //_________________________________________________________________________________
   SubGrid::SubGrid(int const& nx, double const& xMin, int const& InterDegree):
     _nx(nx),
     _InterDegree(InterDegree),
