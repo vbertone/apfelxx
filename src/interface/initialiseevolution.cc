@@ -121,8 +121,9 @@ namespace apfel {
     // Get Set of distributions on the Q-grid
     const std::vector<Set<Distribution>> xfg = TabulatedDists.GetQGridValues();
 
-    // Run over the threshold indices.
-    for (int i = 0; i < (int) tind.size(); i++)
+    // Run over the threshold indices. Skipe the last because it is
+    // the last point of the grid in Q.
+    for (int i = 0; i < (int) tind.size() - 1; i++)
       {
 	// Threshold index
 	const int ti = tind[i];
