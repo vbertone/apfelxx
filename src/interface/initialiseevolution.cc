@@ -128,8 +128,9 @@ namespace apfel {
 	// Threshold index
 	const int ti = tind[i];
 
-	// Retrieve distributions at the threshold.
-	const std::map<int, Distribution> tdist = xfg[ti].GetObjects();
+	// Retrieve distributions at the threshold and rotate
+	// distribution into the physical basis.
+	const std::map<int, Distribution> tdist = QCDEvToPhys(xfg[ti].GetObjects());
 
 	// Run over distributions.
 	std::map<int, LHKnotArray> LHKnotArrayNF;
@@ -145,7 +146,7 @@ namespace apfel {
 
 	    // Q2-space (sub)grid
 	    std::vector<double> q2;
-	    for (int iq = ti; iq < tind[i] + 1;iq++)
+	    for (int iq = ti; iq < tind[i+1]; iq++)
 	      q2.push_back(qg[iq] * qg[iq]);
 	    ka.q2s = q2;
 
@@ -155,9 +156,9 @@ namespace apfel {
 
 	    // Now fill in vector of distributions.
 	    std::vector<double> xf(xsize * q2size);
-	    for (int iq = ti; iq < tind[i] + 1;iq++)
+	    for (int iq = ti; iq < tind[i+1]; iq++)
 	      {
-		const std::vector<double> xfx = xfg[iq].GetObjects().at(d.first).GetDistributionJointGrid();
+		const std::vector<double> xfx = QCDEvToPhys(xfg[iq].GetObjects()).at(d.first).GetDistributionJointGrid();
 		for (int ix = 0; ix < (int) ka.xs.size(); ix++)
 		  xf[ix * q2size + iq - ti] = xfx[ix];
 	      }
