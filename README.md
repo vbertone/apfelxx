@@ -40,15 +40,17 @@ The code can be compiled using the following procedure:
 
 ```Shell
 cd apfelxx
-mkdir build;
-cd build;
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/your/installation/path/ .
 make && make install
 ```
-By the default, if no further specification is given, the program will
+By the default, if no prefix specification is given, the program will
 be installed in the /usr/local folder. If you want (or need) to use a
 different path, remember to export the APFEL++ /lib folder into the
-LD_LIBRARY_PATH.
+LD_LIBRARY_PATH. More configuration options can be accessed by typing:
+
+```Shell
+ccmake .
+```
 
 ## Documetation
 
