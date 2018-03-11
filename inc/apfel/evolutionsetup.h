@@ -64,7 +64,7 @@ namespace apfel
      */
     ///@{
 
-    double Q0;                                       //!< Starting scale of the evolutions
+    double                      Q0;                  //!< Starting scale of the evolutions
     std::vector<GridParameters> GridParameters;      //!< Vector of the parameters of the subgrids
     bool                        Locked;              //!< Subgrid locked (ON, OFF)
     int                         nQg;                 //!< Number of the grid in Q
@@ -84,15 +84,9 @@ namespace apfel
     double                      QQEDRef;             //!< Reference scale of the QCD coupling
     CouplingEvolution           CouplingEvolution;   //!< Solution of the RGE of the couplings
     PDFEvolution                PDFEvolution;        //!< Solution of the DGLAP equations
-    int                         MaxFlavourAlpha;     //!< Maximum number of flavours allowed in the coupling evolution
-    int                         MaxFlavourPDFs;      //!< Maximum number of flavours allowed in the PDF evolution
     double                      RenFacRatio;         //!< ratio muF / muR
-    double                      ThCharm;             //!< Charm threshold
-    double                      ThBottom;            //!< Bottom threshold
-    double                      ThTop;               //!< Top threshold
-    double                      MCharm;              //!< Reference value of the charm mass
-    double                      MBottom;             //!< Reference value of the bottom mass
-    double                      MTop;                //!< Reference value of the top mass
+    std::vector<double>         Thresholds;          //!< Heavy-quark thresholds
+    std::vector<double>         Masses;              //!< Heavy-quark Masses
     MassRenScheme               MassRenScheme;       //!< Renormalization scheme for the heavy-quark masses (POLE, MSBAR)
     double                      TauMass;             //!< Mass of the &tau; lepton
     double                      GaussAccuracy;       //!< Accuracy of the dguass integration
@@ -117,10 +111,9 @@ namespace apfel
       AlphaQCDRef(0.35), QQCDRef(sqrt(2)),
       AlphaQEDRef(7.496252e-3), QQEDRef(1.777),
       CouplingEvolution(exact), PDFEvolution(exactmu),
-      MaxFlavourAlpha(6), MaxFlavourPDFs(6),
       RenFacRatio(1),
-      ThCharm(sqrt(2)), ThBottom(4.5), ThTop(175),
-      MCharm(ThCharm), MBottom(ThBottom), MTop(ThTop),
+      Thresholds{0, 0, 0, sqrt(2), 4.5, 175},
+      Masses{Thresholds},
       MassRenScheme(POLE),
       TauMass(1.777),
       GaussAccuracy(1e-5),

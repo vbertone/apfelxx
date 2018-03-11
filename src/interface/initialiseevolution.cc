@@ -21,32 +21,12 @@ namespace apfel {
   InitialiseEvolution::InitialiseEvolution(EvolutionSetup const& setup):
     _setup(setup)
   {
-    // First check the sanity of the setup object
+    // Check the sanity of the setup object.
     if (!CheckSetup())
       throw std::runtime_error(error("InitialiseEvolution::InitialiseEvolution","Terminating program due to inconsistent setup."));
 
-    // Now report the evolution set up (if allowed by the vebosity
-    // level).
+    // Report the evolution set up (if allowed by the vebosity level).
     ReportSetup();
-
-    // Construct vectors of thresholds, masses, and mass reference
-    // scales assuming that the light-quark masses are zero.
-    const std::vector<double> Thresholds{0, 0, 0, _setup.ThCharm, _setup.ThBottom, _setup.ThTop};
-    const std::vector<double> Masses{0, 0, 0, _setup.MCharm, _setup.MBottom, _setup.MTop};
-
-    // Resize mass vectors according to the maximun number of active
-    // flavours for the couplings.
-    _ThAlpha = Thresholds;
-    _MAlpha  = Masses;
-    _ThAlpha.resize(_setup.MaxFlavourAlpha);
-    _MAlpha.resize(_setup.MaxFlavourAlpha);
-
-    // Resize mass vectors according to the maximun number of active
-    // flavours for the couplings.
-    _ThDist = Thresholds;
-    _MDist  = Masses;
-    _ThDist.resize(_setup.MaxFlavourPDFs);
-    _MDist.resize(_setup.MaxFlavourPDFs);
 
     // Initialise the couplings.
     InitialiseCouplings();
@@ -64,7 +44,7 @@ namespace apfel {
     if (_setup.Theory == EvolutionSetup::QCD)
       if (_setup.MassRenScheme == EvolutionSetup::POLE)
 	{
-	  AlphaQCD a{_setup.AlphaQCDRef, _setup.QQCDRef, _MAlpha, _ThAlpha, _setup.PerturbativeOrder};
+	  AlphaQCD a{_setup.AlphaQCDRef, _setup.QQCDRef, _setup.Masses, _setup.Thresholds, _setup.PerturbativeOrder};
 	  const TabulateObject<double> Alphas{a, 2 * _setup.nQg, _setup.Qmin - 0.1, _setup.Qmax + 1, _setup.InterDegreeQ};
 	  _as = [=] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 	}
@@ -90,16 +70,16 @@ namespace apfel {
     if (_setup.Virtuality == EvolutionSetup::SPACE)
       {
 	if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-	  _DglapObj = InitializeDglapObjectsQCD(*_g, _MDist, _ThDist, false, IntEps);
+	  _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
 	else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
-	  _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _MDist, _ThDist, false, IntEps);
+	  _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
       }
     else if (_setup.Virtuality == EvolutionSetup::TIME)
       {
 	if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-	  _DglapObj = InitializeDglapObjectsQCDT(*_g, _MDist, _ThDist, false, IntEps);
+	  _DglapObj = InitializeDglapObjectsQCDT(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
 	else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
-	  _DglapObj = InitializeDglapObjectsQCDTtrans(*_g, _MDist, _ThDist, false, IntEps);
+	  _DglapObj = InitializeDglapObjectsQCDTtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
       }
   }
 
@@ -142,7 +122,7 @@ namespace apfel {
 	    ka.xs = d.second.GetGrid().GetJointGrid().GetGrid();
 
 	    // Remove nodes above one.
-	    ka.xs.resize(ka.xs.size()-d.second.GetGrid().GetJointGrid().InterDegree());
+	    ka.xs.resize(ka.xs.size() - d.second.GetGrid().GetJointGrid().InterDegree());
 
 	    // Q2-space (sub)grid
 	    std::vector<double> q2;
@@ -151,7 +131,7 @@ namespace apfel {
 	    ka.q2s = q2;
 
 	    // Get sizes of both x and q2 grids.
-	    const int xsize = ka.xs.size();
+	    const int xsize  = ka.xs.size();
 	    const int q2size = ka.q2s.size();
 
 	    // Now fill in vector of distributions.
@@ -382,19 +362,6 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check maximum number of active flavours in the couplings.
-    if (_setup.MaxFlavourAlpha < 3 || _setup.MaxFlavourAlpha > 6)
-      {
-	std::cout << error("InitialiseEvolution::CheckSetup", "Maximum number of active flavours allowed in the coupling evolution out of range.") << std::endl;
-	passed = false;
-      }
-    // Check maximum number of active flavours in PDFs.
-    if (_setup.MaxFlavourPDFs < 3 || _setup.MaxFlavourPDFs > 6)
-      {
-	std::cout << error("InitialiseEvolution::CheckSetup", "Maximum number of active flavours allowed in the coupling evolution out of range.") << std::endl;
-	passed = false;
-      }
-
     // Check mass renormalisation scheme.
     if (_setup.MassRenScheme != EvolutionSetup::POLE &&
 	_setup.MassRenScheme != EvolutionSetup::MSBAR)
@@ -410,19 +377,31 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check that heavy-quark thresholds, masses, and reference scales
-    // are sorted.
-    const std::vector<double> Thresholds{_setup.ThCharm, _setup.ThBottom, _setup.ThTop};
-    if (!std::is_sorted(Thresholds.begin(),Thresholds.end()))
+    // Check that heavy-quark thresholds and masses are sorted.
+    if (!std::is_sorted(_setup.Thresholds.begin(), _setup.Thresholds.end()))
       {
 	std::cout << error("InitialiseEvolution::CheckSetup", "The heavy-quark thresholds are not sorted.") << std::endl;
 	passed = false;
       }
 
-    const std::vector<double> Masses{_setup.MCharm, _setup.MBottom, _setup.MTop};
-    if (!std::is_sorted(Masses.begin(),Masses.end()))
+    if (!std::is_sorted(_setup.Masses.begin(), _setup.Masses.end()))
       {
 	std::cout << error("InitialiseEvolution::CheckSetup", "The heavy-quark masses are not sorted.") << std::endl;
+	passed = false;
+      }
+
+    // Check the the number of thresholds and masses is the same and
+    // that is not less that three and more than six.
+    if (_setup.Thresholds.size() != _setup.Masses.size())
+      {
+	std::cout << error("InitialiseEvolution::CheckSetup", "Quark thresholds and masses are not the same in number.") << std::endl;
+	passed = false;
+      }
+
+    // Check maximum number of active flavours.
+    if (_setup.Thresholds.size() < 3 || _setup.Thresholds.size() > 6)
+      {
+	std::cout << error("InitialiseEvolution::CheckSetup", "Maximum number of active flavours out of range.") << std::endl;
 	passed = false;
       }
 
@@ -494,7 +473,7 @@ namespace apfel {
       report += "Exact";
     else if (_setup.CouplingEvolution == EvolutionSetup::expanded)
       report += "Expanded";
-    report += " with maximum " + std::to_string(_setup.MaxFlavourAlpha) + " active flavours\n";
+    report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
 
     // PDF evolution.
     report += "- PDF evolution: ";
@@ -506,33 +485,32 @@ namespace apfel {
       report += "Expanded in alpha";
     else if (_setup.PDFEvolution == EvolutionSetup::truncated)
       report += "Truncated";
-    report += " with maximum " + std::to_string(_setup.MaxFlavourPDFs) + " active flavours\n";
+    report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
 
     // Ren. / fact. scales ratio.
     report += "- muR / mF: " + std::to_string(_setup.RenFacRatio) + "\n";
 
     // Heavy-quark masses and thresholds.
+    std::vector<std::string> Thq{"mud", "muu", "mus", "muc", "mub", "mut"};
     if (_setup.MassRenScheme == EvolutionSetup::POLE)
       {
+	std::vector<std::string> Mq{"Md", "Mu", "Ms", "Mc", "Mb", "Mt"};
 	report += "- Pole heavy-quark masses:\n";
-	report += "  + Mc = " + std::to_string(_setup.MCharm)  + " GeV\n";
-	report += "  + Mb = " + std::to_string(_setup.MBottom) + " GeV\n";
-	report += "  + Mt = " + std::to_string(_setup.MTop)    + " GeV\n";
+	for (int i = 0; i < (int) _setup.Masses.size(); i++)
+	  report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
 	report += "- Pole heavy-quark threholds:\n";
-	report += "  + muc = " + std::to_string(_setup.ThCharm)  + " GeV\n";
-	report += "  + mub = " + std::to_string(_setup.ThBottom) + " GeV\n";
-	report += "  + mut = " + std::to_string(_setup.ThTop)    + " GeV\n";
+	for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
+	  report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
       }
     if (_setup.MassRenScheme == EvolutionSetup::MSBAR)
       {
+	std::vector<std::string> Mq{"md(md)", "mu(mu)", "ms(ms)", "mc(mc)", "mb(mb)", "mt(mt)"};
 	report += "- MSbar heavy-quark masses:\n";
-	report += "  + mc(mc) = " + std::to_string(_setup.MCharm)  + " GeV\n";
-	report += "  + mb(mb) = " + std::to_string(_setup.MBottom) + " GeV\n";
-	report += "  + mt(mt) = " + std::to_string(_setup.MTop)    + " GeV\n";
-	report += "- MSbar heavy-quark threholds:\n";
-	report += "  + muc = " + std::to_string(_setup.ThCharm)  + " GeV\n";
-	report += "  + mub = " + std::to_string(_setup.ThBottom) + " GeV\n";
-	report += "  + mut = " + std::to_string(_setup.ThTop)    + " GeV\n";
+	for (int i = 0; i < (int) _setup.Masses.size(); i++)
+	  report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
+	report += "- Pole heavy-quark threholds:\n";
+	for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
+	  report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
       }
 
     // Tau mass.

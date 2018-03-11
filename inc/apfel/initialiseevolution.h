@@ -103,10 +103,6 @@ namespace apfel
   private:
     EvolutionSetup                               _setup;        //!< Evolution setup object
     std::unique_ptr<const Grid>                  _g;            //!< x-space grid
-    std::vector<double>                          _ThAlpha;      //!< Vector of quark thresholds for the couplings
-    std::vector<double>                          _MAlpha;       //!< Vector of quark masses for the couplings
-    std::vector<double>                          _ThDist;       //!< Vector of quark thresholds for the distributions
-    std::vector<double>                          _MDist;        //!< Vector of quark masses for the distributions
     std::function<double(double const&)>         _as;           //!< Strong coupling function
     std::map<int, DglapObjects>                  _DglapObj;     //!< Dglap evolution objects
     std::map<double, std::map<int, LHKnotArray>> _KnotArray;    //!< Object that emulates the KnotArray of LHAPDF to be fet to LHAPDF itself
