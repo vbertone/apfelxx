@@ -497,20 +497,24 @@ namespace apfel {
 	std::vector<std::string> Mq{"Md", "Mu", "Ms", "Mc", "Mb", "Mt"};
 	report += "- Pole heavy-quark masses:\n";
 	for (int i = 0; i < (int) _setup.Masses.size(); i++)
-	  report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
+	  if (_setup.Masses[i] > 0)
+	    report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
 	report += "- Pole heavy-quark threholds:\n";
 	for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
-	  report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
+	  if (_setup.Thresholds[i] > 0)
+	    report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
       }
     if (_setup.MassRenScheme == EvolutionSetup::MSBAR)
       {
 	std::vector<std::string> Mq{"md(md)", "mu(mu)", "ms(ms)", "mc(mc)", "mb(mb)", "mt(mt)"};
 	report += "- MSbar heavy-quark masses:\n";
 	for (int i = 0; i < (int) _setup.Masses.size(); i++)
-	  report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
+	  if (_setup.Masses[i] > 0)
+	    report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
 	report += "- Pole heavy-quark threholds:\n";
 	for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
-	  report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
+	  if (_setup.Thresholds[i] > 0)
+	    report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
       }
 
     // Tau mass.
