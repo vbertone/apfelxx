@@ -46,18 +46,19 @@ namespace apfel
 	// external.
 	const int gbound = ( sg.IsExternal() ? nx : 0 );
 
-	_Operator[_ig].resize(gbound+1, nx+1, 0);
+	_Operator[_ig].resize(gbound + 1, nx + 1, 0);
 	for (int beta = 0; beta <= gbound; beta++)
 	  {
 	    _xbeta = xg[beta];
 	    // Local function. Can be computed outside the 'alpha'
 	    // loop.
-	    const double L = _eta * _expr->Local(_xbeta / xg[beta+1] / _eta);
+	    const double L   = _eta * _expr->Local(_xbeta / xg[beta+1] / _eta);
+	    const double lxe = log(_xbeta / _eta);
 	    for (_alpha = beta; _alpha <= nx; _alpha++)
 	      {
 		// Weight of the subtraction term (it is a delta if
 		// _eta = 1).
-		_ws = Interpolant(_alpha, log(_xbeta / _eta), sg);
+		_ws = Interpolant(_alpha, lxe, sg);
 
 		// Given that the interpolation functions have
 		// discontinuos derivative on the nodes and are
@@ -68,8 +69,8 @@ namespace apfel
 		// integration converges faster.
 
 		// Number of grid intervals we need to integrate over.
-		const int nmax = fmin(id,_alpha-beta) + 1;
-		const int nmin = fmax(0,_alpha+1-nx);
+		const int nmax = fmin(id, _alpha - beta) + 1;
+		const int nmin = fmax(0, _alpha + 1 - nx);
 
 		// Integral.
 		double I = 0;
@@ -128,26 +129,22 @@ namespace apfel
 	// If the grid is external the product between the operator
 	// and the distribution has to be done in a standard way.
 	if (this->_grid.GetSubGrid(ig).IsExternal())
-	  {
-	    for (int alpha = 0; alpha <= nx; alpha++)
-	      {
-		s[ig][alpha] = 0;
-		for (int beta = alpha; beta <= nx; beta++)
-		  s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
-	      }
-	  }
+	  for (int alpha = 0; alpha <= nx; alpha++)
+	    {
+	      s[ig][alpha] = 0;
+	      for (int beta = alpha; beta <= nx; beta++)
+		s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
+	    }
 	// If the grid is internal the product between the operator
 	// and the distribution has to be done exploiting the symmetry
 	// of the operator.
 	else
-	  {
-	    for (int alpha = 0; alpha <= nx; alpha++)
-	      {
-		s[ig][alpha] = 0;
-		for (int beta = alpha; beta <= nx; beta++)
-		  s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
-	      }
-	  }
+	  for (int alpha = 0; alpha <= nx; alpha++)
+	    {
+	      s[ig][alpha] = 0;
+	      for (int beta = alpha; beta <= nx; beta++)
+		s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
+	    }
 
 	// Set to zero the values above one.
 	for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
@@ -206,7 +203,7 @@ namespace apfel
 	// has to be done exploiting the symmetry of the operators.
 	else
 	  {
-	    _Operator[ig].resize(nx+1, nx+1, 0);
+	    _Operator[ig].resize(nx + 1, nx + 1, 0);
 	    for (int alpha = 0; alpha <= nx; alpha++)
 	      for (int beta = alpha; beta <= nx; beta++)
 		{

@@ -24,5 +24,17 @@ namespace apfel
    * @return number of active flavours at Q
    */
   int NF(double const& Q, std::vector<double> const& Thresholds);
+
+  /**
+   * @brief Utility function used by the heavy-quark initiated massive
+   * coefficient functions.
+
+
+   * @param a: first parameter
+   * @param b: second parameter
+   * @param c: thied parameter
+   * @return Triangular function
+   */
+  double DeltaFun(double const& a, double const& b, double const& c);
   ///@}
 }
