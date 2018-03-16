@@ -15,11 +15,14 @@
 
 #include <iostream>
 #include <algorithm>
+#include <sys/stat.h>
+#include <fstream>
 
 namespace apfel {
   //_________________________________________________________________________________
-  InitialiseEvolution::InitialiseEvolution(EvolutionSetup const& setup):
-    _setup(setup)
+  InitialiseEvolution::InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid):
+    _setup(setup),
+    _WriteGrid(WriteGrid)
   {
     // Check the sanity of the setup object.
     if (!CheckSetup())
@@ -34,8 +37,13 @@ namespace apfel {
     // Initialize Dglap objects.
     InitialiseDglapObject();
 
-    // Make a tabulation just in case the knot array is called straight away.
-    TabulateEvolution();    
+    // If the production of grids has been enabled, create a folded
+    // with the name of the setup and write the info file.
+    if (WriteGrid)
+      WriteGridInfo();
+
+    // Do the tabulation.
+    TabulateEvolution(setup.InSet);
   }
 
   //_________________________________________________________________________________
@@ -84,12 +92,16 @@ namespace apfel {
   }
 
   //_________________________________________________________________________________
-  void InitialiseEvolution::TabulateEvolution()
+  void InitialiseEvolution::TabulateEvolution(std::function<std::map<int,double>(double const&, double const&)> const& InSet)
   {
-    // Construct the Dglap object.
-    std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, _setup.InSet, _setup.Q0, _setup.PerturbativeOrder, _as);
+    // Clear the knot array map before filling it (in case this
+    // function was already called before).
+    _KnotArray.clear();
 
-    // Tabulate distributions
+    // Construct the Dglap object.
+    std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as);
+
+    // Tabulate distributions.
     const TabulateObject<Set<Distribution>> TabulatedDists{*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ};
 
     // Get Q-grid from the tabulated object.
@@ -98,14 +110,14 @@ namespace apfel {
     // Get threshold indices.
     const std::vector<int> tind = TabulatedDists.GetThesholdIndices();
 
-    // Get Set of distributions on the Q-grid
+    // Get Set of distributions on the Q-grid.
     const std::vector<Set<Distribution>> xfg = TabulatedDists.GetQGridValues();
 
     // Run over the threshold indices. Skipe the last because it is
     // the last point of the grid in Q.
     for (int i = 0; i < (int) tind.size() - 1; i++)
       {
-	// Threshold index
+	// Threshold index.
 	const int ti = tind[i];
 
 	// Retrieve distributions at the threshold and rotate
@@ -118,13 +130,13 @@ namespace apfel {
 	  {
 	    LHKnotArray ka;
 
-	    // x-space grid
+	    // x-space grid.
 	    ka.xs = d.second.GetGrid().GetJointGrid().GetGrid();
 
 	    // Remove nodes above one.
 	    ka.xs.resize(ka.xs.size() - d.second.GetGrid().GetJointGrid().InterDegree());
 
-	    // Q2-space (sub)grid
+	    // Q2-space (sub)grid.
 	    std::vector<double> q2;
 	    for (int iq = ti; iq < tind[i+1]; iq++)
 	      q2.push_back(qg[iq] * qg[iq]);
@@ -148,6 +160,10 @@ namespace apfel {
 	  }
 	_KnotArray.insert({qg[ti] * qg[ti], LHKnotArrayNF});
       }
+
+    // Write grid if required.
+    if (_WriteGrid)
+      WriteGrid();
   }
 
   //_________________________________________________________________________________
@@ -250,7 +266,7 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check flavour scheme
+    // Check flavour scheme.
     if (_setup.FlavourScheme != EvolutionSetup::VFNS &&
 	_setup.FlavourScheme != EvolutionSetup::FFNS)
       {
@@ -258,7 +274,7 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check number of flavours in the FFNS (if relevant)
+    // Check number of flavours in the FFNS (if relevant).
     if (_setup.FlavourScheme == EvolutionSetup::FFNS)
       if (_setup.Nf_FF < 3 || _setup.Nf_FF > 6)
 	{
@@ -273,7 +289,7 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check virtuality
+    // Check virtuality.
     if (_setup.Virtuality != EvolutionSetup::SPACE &&
 	_setup.Virtuality != EvolutionSetup::TIME)
       {
@@ -352,7 +368,7 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check coupling evolution.
+    // Check distribution evolution.
     if (_setup.PDFEvolution != EvolutionSetup::exactmu &&
 	_setup.PDFEvolution != EvolutionSetup::exactalpha &&
 	_setup.PDFEvolution != EvolutionSetup::expandalpha &&
@@ -390,14 +406,6 @@ namespace apfel {
 	passed = false;
       }
 
-    // Check the the number of thresholds and masses is the same and
-    // that is not less that three and more than six.
-    if (_setup.Thresholds.size() != _setup.Masses.size())
-      {
-	std::cout << error("InitialiseEvolution::CheckSetup", "Quark thresholds and masses are not the same in number.") << std::endl;
-	passed = false;
-      }
-
     // Check maximum number of active flavours.
     if (_setup.Thresholds.size() < 3 || _setup.Thresholds.size() > 6)
       {
@@ -421,7 +429,7 @@ namespace apfel {
     // Apfel banner.
     Banner();
 
-    // String with the report of parameters
+    // String with the report of parameters.
     std::string report = "\n\nCurrent evolution setup:\n";
 
     // Starting scale.
@@ -547,5 +555,151 @@ namespace apfel {
 
     // Print report.
     info("InitialiseEvolution::ReportSetup", report);
+  }
+
+  //_________________________________________________________________________________
+  void InitialiseEvolution::WriteGridInfo()
+  {
+    // Create folder for the info file and the grid(s).
+    if (mkdir(_setup.name.c_str(), 0777) != 0)
+      throw std::runtime_error(error("InitialiseEvolution::WriteGridInfo", "Cannot create folder for the LHAPDF set."));
+
+    // Information string.
+    std::string info;
+
+    // Write information.
+    info += "SetDesc: 'Set generated with APFEL++. Name: " + _setup.name + "'\n";
+    info += "Authors: V. Bertone, S. Carrazza\n";
+    info += "Reference: arXiv:1708.00911\n";
+    info += "Format: lhagrid\n1";
+    info += "DataVersion: 1\n";
+    info += "NumMembers: 0\n";
+    info += "Particle: 2212\n";
+
+    info += "Flavors: [";
+    for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
+      info += std::to_string((i == 0 ? 21 : i)) + ", ";
+    info = info.substr(0, info.size() - 2);
+    info += "]\n";
+
+    info += "OrderQCD: " + std::to_string(_setup.PerturbativeOrder) + "\n";
+    info += "FlavorScheme: variable\n";
+    info += "NumFlavors: " + std::to_string(_setup.Thresholds.size()) + "\n";
+
+    double xmin = 1;
+    for (auto const& gp : _setup.GridParameters)
+      xmin = std::min(xmin, gp.xmin);
+    info += "XMin: " + std::to_string(xmin) + "\n";
+    info += "XMax: 1\n";
+
+    info += "QMin: " + std::to_string(_setup.Qmin) + "\n";
+    info += "QMax: " + std::to_string(_setup.Qmax) + "\n";
+
+    info += "MZ: " + std::to_string(_setup.QQCDRef) + "\n";
+
+    const std::vector<std::string> ms{"MUp: ", "MDown: ", "MStrange: ", "MCharm: ", "MBottom: ", "MTop: "};
+    for (int i = 0; i < (int) _setup.Masses.size(); i++)
+      info += ms[i] + std::to_string(_setup.Masses[i]) + "\n";
+
+    const std::vector<std::string> th{"ThresholdUp: ", "ThresholdDown: ", "ThresholdStrange: ", "ThresholdCharm: ", "ThresholdBottom: ", "ThresholdTop: "};
+    for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
+      info += th[i] + std::to_string(_setup.Thresholds[i]) + "\n";
+
+    info += "AlphaS_MZ: " + std::to_string(_setup.AlphaQCDRef) + "\n";
+    info += "AlphaS_OrderQCD: " + std::to_string(_setup.PerturbativeOrder) + "\n";
+    info += "AlphaS_Type: ipol\n";
+
+    const QGrid<double> qg{_setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ, _setup.Thresholds};
+    info += "AlphaS_Qs: [";
+    for (auto const& q : qg.GetQGrid())
+      info += std::to_string(q) + ", ";
+    info = info.substr(0, info.size() - 2);
+    info += "]\n";
+
+    info += "AlphaS_Vals: [";
+    for (auto const& q : qg.GetQGrid())
+      info += std::to_string(_as(q)) + ", ";
+    info = info.substr(0, info.size() - 2);
+    info += "]\n";
+
+    // Open info file and print the information in it.
+    std::ofstream out(_setup.name + "/" + _setup.name + ".info");
+    out << info;
+    out.close();
+  }
+
+  //_________________________________________________________________________________
+  void InitialiseEvolution::WriteGrid()
+  {
+    // Check if the destination folder exists.
+    struct stat info;
+    if (stat(_setup.name.c_str(), &info) != 0)
+      throw std::runtime_error(error("InitialiseEvolution::WriteGrid", "Folder for the LHAPDF set does not exist."));
+
+    // Determine the first available member index and constuct the
+    // open file name.
+    std::ofstream out;
+    std::string filename = _setup.name + "/" + _setup.name + "_0000";
+    const int maxmem = 10000;
+    for (int i = 1; i < maxmem; i++)
+      {
+	if (!(bool) std::ifstream((filename + ".dat").c_str()))
+	  {
+	    out.open(filename + ".dat");
+	    break;
+	  }
+	filename = filename.substr(0, filename.size() - (int) log10(i) - 1) + std::to_string(i);
+      }
+
+    out << std::scientific;
+    out << "PdfType: replica\n";
+    out << "Format: lhagrid1\n";
+
+    for(auto const& ka : _KnotArray)
+      {
+	out << "---\n";
+
+	// Write x grid.
+	for (auto const& x : ka.second.begin()->second.xs)
+	  out << x << " ";
+	out << "\n";
+
+	// Write Q grid.
+	for (auto const& q2 : ka.second.begin()->second.q2s)
+	  out << sqrt(q2) << " ";
+	out << "\n";
+
+	// Write flavour indices.
+	for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
+	  out << (i == 0 ? 21 : i) << " ";
+	out << "\n";
+
+	// Array of distributions.
+	const int nd = 2 * _setup.Thresholds.size() + 1;
+	const int np = ka.second.begin()->second.xs.size() * ka.second.begin()->second.q2s.size();
+	double dist[np][nd];
+
+	// Gather tabulated distributions.
+	int id = 0;
+	for (auto const& d : ka.second)
+	  if (std::abs(d.first) <= (int) _setup.Thresholds.size())
+	    {
+	      const std::vector<double> xf = d.second.xfs;
+	      for (int jp = 0; jp < (int) xf.size(); jp++)
+		dist[jp][id] = (std::abs(xf[jp]) > eps15 ? xf[jp] : 0);
+	      id++;
+	    }
+
+	// Print distributions.
+	for (int jp = 0; jp < np; jp++)
+	  {
+	    for (int jd = 0; jd < nd; jd++)
+	      out << dist[jp][jd] << "  ";
+	    out << "\n";
+	  }
+      }
+
+    out << "---\n";
+    out.close();
   }
 }

@@ -40,7 +40,7 @@ namespace apfel
      * @brief The InitialiseEvolution constructor.
      * @param setup: the EvolutionSetup data structure encapsulate the evolution parameters
      */
-    InitialiseEvolution(EvolutionSetup const& setup);
+    InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid = false);
 
     /**
      * @brief The CheckSetup function checks that the input setup is
@@ -66,26 +66,36 @@ namespace apfel
     void InitialiseCouplings();
 
     /**
-     * @brief The InitialiseDglapObject intialises the relevant
-     * objects for the DGLAP evolution and constructs a Dglap object
-     * to be used for the evolution.
+     * @brief The InitialiseDglapObject function intialises the
+     * relevant objects for the DGLAP evolution and constructs a Dglap
+     * object to be used for the evolution.
      */
     void InitialiseDglapObject();
 
     /**
-     * @brief The TabulateEvolution computes the DGLAP evolution and
-     * tabulates the distributions over and (x,Q2) grid. The tabulated
-     * distributions can be accessed via the KnotArray() array
-     * function.
+     * @brief The TabulateEvolution function computes the DGLAP
+     * evolution and tabulates the distributions over and (x,Q2)
+     * grid. The tabulated distributions can be accessed via the
+     * KnotArray() array function.
+     * @param InSet: the input set of distributions
      */
-    void TabulateEvolution();
+    void TabulateEvolution(std::function<std::map<int,double>(double const&, double const&)> const& InSet);
 
     /**
-     * @brief The ResetInitialDistributions resets the initial set of
-     * distributions without the need of generating a new
-     * EvolutionSetup object.
+     * @brief The WriteGridInfo function creates the folded and write
+     * the info file of the LHAPDF grid.
      */
-    void ResetInitialDistributions(std::function<std::map<int,double>(double const&, double const&)> InSet) { _setup.InSet = InSet; }
+    void WriteGridInfo();
+
+    /**
+     * @brief The WriteGrid function dumps to file in the LHAPDF
+     * format the actual PDF grid.
+     * @note If the writing of the grid is enabled, this function is
+     * called every time that the TabulateEvolution function is
+     * called. Therefore this cab be used to compute more members of a
+     * given set without reinitialising the evolution.
+     */
+    void WriteGrid();
 
     /**
      * @brief Function that returns the evolved strong coupling.
@@ -102,9 +112,10 @@ namespace apfel
 
   private:
     EvolutionSetup                               _setup;        //!< Evolution setup object
+    bool                                         _WriteGrid;    //!< Switch to write LHAPDF grids
     std::unique_ptr<const Grid>                  _g;            //!< x-space grid
     std::function<double(double const&)>         _as;           //!< Strong coupling function
     std::map<int, DglapObjects>                  _DglapObj;     //!< Dglap evolution objects
-    std::map<double, std::map<int, LHKnotArray>> _KnotArray;    //!< Object that emulates the KnotArray of LHAPDF to be fet to LHAPDF itself
+    std::map<double, std::map<int, LHKnotArray>> _KnotArray;    //!< Object that emulates the KnotArray of LHAPDF to be fed to LHAPDF itself
   };
 }
