@@ -83,7 +83,7 @@ namespace apfel
   //_________________________________________________________________________
   double Integrator::integrate(double const& a, double const& b, double const& eps) const
   {
-    const double delta = eps25 * std::abs(a-b);
+    const double delta = eps25 * std::abs(a - b);
     double dgauss = 0;
     double aa = a;
 
@@ -93,9 +93,9 @@ namespace apfel
       return dgauss;
 
     goto2:
-    double bb  = aa + y;
-    double c1  = 0.5 * ( aa + bb );
-    double c2  = c1 - aa;
+    double bb = aa + y;
+    double c1 = 0.5 * ( aa + bb );
+    double c2 = c1 - aa;
 
     double s8  = 0;
     for (int i = 0; i < 4; i++)
@@ -113,7 +113,7 @@ namespace apfel
 
     s8  *= c2;
     s16 *= c2;
-    if (std::abs(s16-s8) > eps*(1+std::abs(s16)))
+    if (std::abs(s16 - s8) > eps * ( 1 + std::abs(s16) ))
       goto goto4;
 
     dgauss += s16;

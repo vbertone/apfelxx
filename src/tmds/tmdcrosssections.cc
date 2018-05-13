@@ -146,7 +146,7 @@ namespace apfel {
     const double hcs = 2 * M_PI * HardCrossSectionSIDIS(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), muf/Q) / x / y / pow(Q,2);
     //const double hcs = ConvFact * 2 * M_PI * HardCrossSectionSIDIS(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), muf/Q) / x / y / pow(Q,2);
 
-    return [TMDLumib,hcs,Q] (double const& qT) -> double
+    return [TMDLumib,hcs] (double const& qT) -> double
       {
 	return hcs * OgataQuadrature(TMDLumib, qT);
 	// For test purposes, one can comment out the line above, in

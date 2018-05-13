@@ -571,7 +571,7 @@ namespace apfel {
     info += "SetDesc: 'Set generated with APFEL++. Name: " + _setup.name + "'\n";
     info += "Authors: V. Bertone, S. Carrazza\n";
     info += "Reference: arXiv:1708.00911\n";
-    info += "Format: lhagrid\n1";
+    info += "Format: lhagrid1\n";
     info += "DataVersion: 1\n";
     info += "NumMembers: 0\n";
     info += "Particle: 2212\n";

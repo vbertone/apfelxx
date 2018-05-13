@@ -1073,20 +1073,20 @@ namespace apfel {
     const Operator Om022glf {g, Cm022gNC_lf{},  IntEps};
 
     // NLO
-    const TabulateObject<Operator> TabO21g{[=,&g] (double const& xi) -> Operator
+    const TabulateObject<Operator> TabO21g{[=] (double const& xi) -> Operator
 	{
 	  const double lxi = log(xi);
 	  return Om021gc + lxi * Om021gl;
 	}, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // NNLO
-    const TabulateObject<Operator> TabO22ns{[=,&g] (double const& xi) -> Operator
+    const TabulateObject<Operator> TabO22ns{[=] (double const& xi) -> Operator
 	{
 	  const double lxi  = log(xi);
 	  const double lxi2 = lxi * lxi;
 	  return Om022nsc + lxi * Om022nsl + lxi2 * Om022nsl2;
 	}, nxi, ximin, ximax, intdeg, {}, lambda};
-    const auto fO22s = [=,&g] (double const& xi) -> Operator
+    const auto fO22s = [=] (double const& xi) -> Operator
       {
 	const double lxi  = log(xi);
 	const double lxi2 = lxi * lxi;
@@ -1094,7 +1094,7 @@ namespace apfel {
 	return 6 * ( Om022psc + lxi * Om022psl + lxi2 * Om022psl2 + lxiF * Om022psf + lxi * lxiF * Om022pslf );
       };
     const TabulateObject<Operator> TabO22s{fO22s, nxi, ximin, ximax, intdeg, {}, lambda};
-    const auto fO22g = [=,&g] (double const& xi) -> Operator
+    const auto fO22g = [=] (double const& xi) -> Operator
       {
 	const double lxi  = log(xi);
 	const double lxi2 = lxi * lxi;
@@ -1241,19 +1241,19 @@ namespace apfel {
     const Operator Om0L2gf {g, Cm0L2gNC_f{},  IntEps};
 
     // NNLO
-    const TabulateObject<Operator> TabOL2ns{[=,&g] (double const& xi) -> Operator
+    const TabulateObject<Operator> TabOL2ns{[=] (double const& xi) -> Operator
 	{
 	  const double lxi = log(xi);
 	  return Om0L2nsc + lxi * Om0L2nsl;
 	}, nxi, ximin, ximax, intdeg, {}, lambda};
-    const auto fOL2s = [=,&g] (double const& xi) -> Operator
+    const auto fOL2s = [=] (double const& xi) -> Operator
       {
 	const double lxi  = log(xi);
 	const double lxiF = - lxi;
 	return 6 * ( Om0L2psc + lxi * Om0L2psl + lxiF * Om0L2psf );
       };
     const TabulateObject<Operator> TabOL2s{fOL2s, nxi, ximin, ximax, intdeg, {}, lambda};
-    const auto fOL2g = [=,&g] (double const& xi) -> Operator
+    const auto fOL2g = [=] (double const& xi) -> Operator
       {
 	const double lxi  = log(xi);
 	const double lxiF = - lxi;
@@ -1262,7 +1262,7 @@ namespace apfel {
     const TabulateObject<Operator> TabOL2g{fOL2g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects

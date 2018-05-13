@@ -54,7 +54,7 @@ int main()
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
       as.Evaluate(Q);
-      Q *=Step;
+      Q *= Step;
     }
   t.stop();
 
@@ -64,7 +64,7 @@ int main()
   for (auto iQ = 0; iQ < nQ; iQ++)
     {
       gas.Evaluate(Q);
-      Q *=Step;
+      Q *= Step;
     }
   t.stop();
 

@@ -24,7 +24,7 @@ int main()
   const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
 
   // Test distribution
-  const auto xg = [&] (double const& x)->double{ return x * ( 1 -x ); };
+  const auto xg = [&] (double const& x)->double{ return x * ( 1 - x ); };
   const Distribution xgluon{g, xg};
 
   // Test values

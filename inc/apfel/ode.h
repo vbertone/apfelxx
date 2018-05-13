@@ -41,7 +41,7 @@ namespace apfel
       [t,y,dt,f            ](                 U const& dy1                 ) -> U{ return
       [t,y,dt,f,dy1        ](                 U const& dy2                 ) -> U{ return
       [t,y,dt,f,dy1,dy2    ](                 U const& dy3                 ) -> U{ return
-      [t,y,dt,f,dy1,dy2,dy3](                 U const& dy4                 ) -> U{ return
+      [       f,dy1,dy2,dy3](                 U const& dy4                 ) -> U{ return
       ( dy1 + 2 * dy2 + 2 * dy3 + dy4 ) / 6  ;} (
       dt * f( t + dt    , y + dy3     )     );} (
       dt * f( t + dt / 2, y + dy2 / 2 )     );} (
