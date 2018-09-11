@@ -1,13 +1,10 @@
-## Customize dependencies
-dependencies:
-  pre:
-    - sudo apt-get update
-  override:
-    - sudo apt-get install g++ cmake valgrind
-  post:
-    - cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++11" . && make
-
-## Customize test commands
-test:
-  override:
-    - ctest -V
+version: 2
+  jobs:
+    build:
+      machine: true
+      steps:
+        - checkout
+        - run: sudo apt-get update
+        - run: sudo apt-get install g++ cmake valgrind
+	- run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++11" . && make
+	- run: ctest -V
