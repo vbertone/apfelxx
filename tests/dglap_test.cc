@@ -290,7 +290,7 @@ int main()
   t.stop();
 
   k = 100000;
-  cout << "Interpolating " << k << " times an map of PDFs on the (x,Q) grid... ";
+  cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
   t.start();
   for (auto i = 0; i < k; i++)
     TabulatedPDFs.EvaluateMapxQ(0.05,mu);

@@ -37,7 +37,7 @@ namespace apfel {
     // Initialize Dglap objects.
     InitialiseDglapObject();
 
-    // If the production of grids has been enabled, create a folded
+    // If the production of grids has been enabled, create a folder
     // with the name of the setup and write the info file.
     if (WriteGrid)
       WriteGridInfo();

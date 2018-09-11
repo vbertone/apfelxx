@@ -82,7 +82,7 @@ namespace apfel
     void TabulateEvolution(std::function<std::map<int,double>(double const&, double const&)> const& InSet);
 
     /**
-     * @brief The WriteGridInfo function creates the folded and write
+     * @brief The WriteGridInfo function creates the folder and writes
      * the info file of the LHAPDF grid.
      */
     void WriteGridInfo();
