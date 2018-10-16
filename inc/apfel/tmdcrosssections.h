@@ -72,19 +72,4 @@ namespace apfel
 							    double                                                                        const& cmuf = 1,
 							    double                                                                        const& czetaf = 1);
   ///@}
-
-  /**
-   * @name Form factors
-   */
-  ///@{
- /**
-   * @brief Perturbative form factor for Drell-Yan.
-   */
-  double HardCrossSectionDY(int const& pt, double const& Alphas, int const& nf, double const& kappa);
-
- /**
-   * @brief Perturbative form factor for SIDIS.
-   */
-  double HardCrossSectionSIDIS(int const& pt, double const& Alphas, int const& nf, double const& kappa);
-  ///@}
 }

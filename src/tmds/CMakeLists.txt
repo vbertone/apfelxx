@@ -7,6 +7,7 @@ set(tmds_source
   matchingfunctionsff.cc
   ogataquadrature.cc
   tmdcrosssections.cc
+  hardfactors.cc
   )
 
 add_library(tmds OBJECT ${tmds_source})
