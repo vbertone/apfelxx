@@ -1,0 +1,377 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath,amssymb,bm,makeidx,subfigure}
+\usepackage[italian,english]{babel}
+\usepackage[center,small]{caption}[2007/01/07]
+\usepackage{fancyhdr}
+\usepackage{color}
+
+\definecolor{blu}{rgb}{0,0,1}
+\definecolor{verde}{rgb}{0,1,0}
+\definecolor{rosso}{rgb}{1,0,0}
+\definecolor{viola}{rgb}{1,0,1}
+\definecolor{arancio}{rgb}{1,0.5,0}
+\definecolor{celeste}{rgb}{0,1,1}
+\definecolor{rosa}{rgb}{1,0.3,0.5}
+
+\oddsidemargin = 12pt
+\topmargin = 0pt
+\textwidth = 440pt
+\textheight = 650pt
+
+\makeindex
+
+\begin{document}
+
+\section{Evolution of the TMDs}
+
+In these notes I will show how to solve the renormalisation-group
+equation (RGE) and the rapidity-evolution equation (often referred to
+as Collins-Soper (CS) equation) of a TMD distribution $F$. The
+distribution $F$ can be either a PDF or a FF and can be associated to
+either to a quark or to the gluon: the structure of the solution of
+the evolution equations is exactly the same. In the impact-parameter
+space, $F$ is a function of the transverse-momentum fraction $x$, of
+the bidimensional impact-parameter vector $\mathbf{b}_T$, of the
+renormalisation scale $\mu$, and of the rapidity scale $\zeta$,
+\textit{i.e.}  $F\equiv F(x, \mathbf{b}_T,\mu,\zeta)$. Since the
+evolution equations govern the behaviour of $F$ w.r.t. the scale $\mu$
+and $\zeta$, in order to simplify the notation I will drop the
+dependence on $x$ and $\mathbf{b}_T$, \textit{i.e.}
+$F\equiv F(\mu,\zeta)$.\footnote{Notice that, despite the variables
+  $x$ and $\mathbf{b}_T$ will no longer appear, the symbol $\otimes$
+  indicates the Mellin convolution integral w.r.t. $x$ while $b_T$
+  indicates the length of the vector $\mathbf{b}_T$.}
+
+The goal of the solution of the evolution equation is that of
+expressing the distribution $F$ at some final scales $(\mu,\zeta)$ in
+terms of the same distribution at the initial scales
+$(\mu_0,\zeta_0)$. It will turn out that this is accomplished by
+computing the evolution kernel $R\left[(\mu_0,\zeta_0)\rightarrow
+  (\mu,\zeta)\right]$, such that:
+\begin{equation}\label{eq:evkernel}
+  F(\mu,\zeta) = R\left[(\mu,\zeta)\leftarrow
+    (\mu_0,\zeta_0)\right]F(\mu_0,\zeta_0)\,.
+\end{equation}
+The purpose of these notes is to provide the explicit expression of
+the evolution kernel $R$ in terms of perturbatively computable
+quantities. A collateral aspect that will be discussed is these notes
+is the independence from the path that connects the initial and final
+scales $(\mu_0,\zeta_0)$ and $(\mu,\zeta)$. This in turn concerns the
+resummation of large logarithms that is required to ensure that the
+perturbative convergence is not spoiled.
+
+
+The RGE and the CS equation read:
+\begin{equation}\label{eq:eveqs}
+\begin{array}{l}
+\displaystyle \frac{\partial \ln F}{\partial \ln \sqrt{\zeta}} =
+  K(\mu)\,,\\
+\\
+\displaystyle \frac{\partial \ln F}{\partial \ln \mu} = \gamma(\mu,\zeta)\,,
+\end{array}
+\end{equation}
+where $\gamma$ and $K$ are the anomalous dimensions of the evolution
+in $\mu$ and $\sqrt{\zeta}$, respectively, that will be discussed in
+more detail below. The equations above can be solved as follows. The
+first equation gives:
+\begin{equation}\label{eq:zetadir}
+F(\mu,\zeta) = \exp\left[  K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}\right]F(\mu,\zeta_0)\,.
+\end{equation}
+The factor $F(\mu,\zeta_0)$ can be evolved in $\mu$ using the second
+equation to give:
+\begin{equation}\label{eq:mudir}
+F(\mu,\zeta_0) = \exp\left[ \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,,
+\end{equation}
+such that:
+\begin{equation}\label{eq:solution1}
+  F(\mu,\zeta) = \exp\left[ K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,.
+\end{equation}
+This equation has exactly the structure of Eq.~(\ref{eq:evkernel}). We
+now need to express the argument of the exponent in terms of
+perturbatively computable quantities.
+
+In order to do so, we use the fact that the rapidity anomalous
+dimension $K$ needs to be renormalised and thus it obeys its own RGE,
+that reads:
+\begin{equation}\label{eq:CuspRGE}
+\frac{\partial K}{\partial \ln \mu} = - \gamma_K(\alpha_s(\mu))\,.
+\end{equation}
+$\gamma_K$ is said cusp anomalous dimension and obeys the perturbative
+expansion:
+\begin{equation}
+\gamma_K(\alpha_s) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s}{4\pi}\right)^{n+1}\gamma_K^{(n)}\,,
+\end{equation}
+where $\gamma_K^{(n)}$ are numerical coefficients. Their value up to
+$n=3$ can be read from Eq.~(59) of Ref.~\cite{Collins:2017oxh}. They
+coincide with those reported in Eq.~(D.6) of
+Ref.~\cite{Echevarria:2016scs} up to a factor two due to a different
+normalisation of the rapidity anomalous dimension $K$ whose derivative
+w.r.t. $\zeta$ is exactly $\gamma_K$. In addition, the cusp anomalous
+dimension for quarks and gluon are equal up to a factor $C_F$ in the
+quark case and $C_A$ in the gluon case.
+
+Eq.~(\ref{eq:CuspRGE}) can be easily solved obtaining:
+\begin{equation}\label{eq:CuspEv}
+K(\mu) = K(\mu_0) - \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\,.
+\end{equation}
+We anticipate that in the $\overline{\mbox{MS}}$ scheme, there exists
+a particular scale $\mu_b = 2e^{-\gamma_E}/b_T$ such that $K$ admits
+the following perturbative expansion:
+\begin{equation}
+K(\mu_b) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}K^{(n,0)}\,,
+\end{equation}
+where $K^{(n,0)}$ are numerical coefficients. Therefore, if
+$\mu_0\simeq \mu_b$ the first term in the r.h.s. of
+Eq.~(\ref{eq:CuspEv}) is free of large logs and thus its perturbative
+expansion, that reads:
+\begin{equation}\label{eq:rapandimlog}
+K(\mu_0) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^nK^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
+\end{equation}
+is reliable. The second term in the r.h.s. instead takes care, through
+the evolution of $\alpha_s$, of resumming large logarithms in the case
+in which $\mu\gg \mu_0$. The coefficients $K^{(n,m)}$ up to $n=3$ are
+reported in Eq.~(D.9) of Ref.~\cite{Echevarria:2016scs} and up to
+$n=2$ in Eq.~(69) of Ref.~\cite{Collins:2017oxh}. They differ by a
+factor $-2$ due to a different definition of $K$. In addition, the
+logarithmic expansion is done in terms of $\ln(\mu_0/\mu_b)$ in
+Ref.~\cite{Collins:2017oxh} and in terms of $\ln(\mu_0^2/\mu_b^2)$ in
+Ref.~\cite{Echevarria:2016scs}. Therefore, each coefficient differs by
+an additional factor $2^m$, where $m$ is the power of the logarithm
+that multiplies the coefficient itself.
+
+A further important property of the anomalous dimensions can be
+derived by considering the fact that the crossed double derivarives of
+$F$ must be equal:
+\begin{equation}
+\frac{\partial}{\partial \ln \mu} \frac{\partial \ln F}{\partial \ln
+  \sqrt{\zeta}} = \frac{\partial}{\partial \ln \sqrt{\zeta}} \frac{\partial \ln F}{\partial \ln
+  \mu}\,.
+\end{equation}
+Using Eqs.~(\ref{eq:eveqs}) and (\ref{eq:CuspRGE}) leads to the
+following differential equation:
+\begin{equation}
+\frac{\partial \gamma }{\partial \ln
+  \sqrt{\zeta}} = - \gamma_K(\alpha_s(\mu))\,,
+\end{equation}
+whose solution is:
+\begin{equation}
+\gamma(\mu,\zeta) = \gamma(\mu,\mu^2) - \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\,.
+\end{equation}
+It turns out that $\gamma(\mu,\mu^2)$ has a purely perturbative
+expansion:
+\begin{equation}
+  \gamma(\mu,\mu^2) \equiv \gamma_F(\alpha_s(\mu)) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_F^{(n)}\,,
+\end{equation}
+where $\gamma_F^{(n)}$ are again numerical coefficients that are given
+in Eq.~(58) of Ref.~\cite{Collins:2017oxh} and Eq.~(D.7) of
+Ref.~\cite{Echevarria:2016scs} (Eq.~(D.8) reports the coefficients for
+the gluon anomalous dimension). The two sets of coefficients differ by
+a minus sign due to the different definition of the constant (non-log)
+term of the RGE anomalous dimension. Therefore:
+\begin{equation}\label{eq:GFEv}
+\gamma(\mu,\zeta) = \gamma_F(\alpha_s(\mu)) - \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\,.
+\end{equation}
+Finally, plugging Eqs.~(\ref{eq:CuspEv}) and~(\ref{eq:GFEv}) into
+Eq.~(\ref{eq:solution1}), one gets:
+\begin{equation}\label{eq:solution2}
+  F(\mu,\zeta) = \exp\left\{ K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu')) - \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}F(\mu_0,\zeta_0)\,.
+\end{equation}
+Comparing Eq.~(\ref{eq:solution2}) to Eq.~(\ref{eq:evkernel}) allows
+one to give an explicit expression to the evolution kernel:
+\begin{equation}\label{eq:evkernelexp}
+  R\left[(\mu,\zeta)\leftarrow
+    (\mu_0,\zeta_0)\right] = \exp\left\{ K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu')) - \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}\,.
+\end{equation}
+
+Eq.~(\ref{eq:solution2}) has been obtained evolving the TMD $F$ first
+in the $\zeta$ direction (Eq.~(\ref{eq:zetadir})) and then in the
+$\mu$ direction (Eq.~(\ref{eq:mudir})). However, it is easy to verify
+that exchanging the order of the evolutions leads to the exact same
+result, Eq.~(\ref{eq:solution2}). In particular, the following
+relation holds:
+\begin{equation}
+  R\left[(\mu,\zeta)\leftarrow
+    (\mu_0,\zeta)\right] R\left[(\mu_0,\zeta)\leftarrow
+    (\mu_0,\zeta_0)\right] = R\left[(\mu,\zeta)\leftarrow
+    (\mu,\zeta_0)\right] R\left[(\mu,\zeta_0)\leftarrow
+    (\mu_0,\zeta_0)\right]=R\left[(\mu,\zeta)\leftarrow
+    (\mu_0,\zeta_0)\right]\,.
+\end{equation}
+This is a direct consequence of the independence of evolution kernel
+$R$ in Eq.~(\ref{eq:evkernelexp}) from the path $\mathcal{P}$ followed
+to connect the points $(\mu_0,\zeta_0)$ to the point $(\mu,\zeta)$:
+\begin{equation}
+  R\left[(\mu,\zeta)\mathop{\leftarrow}_{\mathcal{P}}
+    (\mu_0,\zeta_0)\right] \equiv R\left[(\mu,\zeta)\leftarrow
+    (\mu_0,\zeta_0)\right]\,.
+\end{equation}
+
+Another important piece of information comes from the fact that, for
+small values of $b_T$, the TMD $F$ can be matched onto the respective
+collinear distribution $f$ (a PDF or a FF) through the perturbative
+coefficients $C$\footnote{A sum over flavours is understood. As a
+  matter of fact, the matching function $C$ has to be regarded as a
+  matrix in flavour space multipling a vector of collinear PDFs/FFs.}:
+\begin{equation}\label{eq:matching}
+F(\mu,\zeta) = C(\mu,\zeta) \otimes f(\mu)\,,
+\end{equation}
+so that:
+\begin{equation}\label{eq:solution3}
+  F(\mu,\zeta) = \exp\left\{
+    K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'))
+      -
+      \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}C(\mu_0,\zeta_0)\otimes
+  f(\mu_0)\,.
+\end{equation}
+Exactly as in the case of $K$, for $\mu=\sqrt{\zeta}=\mu_b$ the
+matching function has the expansion:
+\begin{equation}
+C(\mu_b,\mu_b^2) =\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n}C^{(n,0)}\,,
+\end{equation}
+where the coefficients $C^{(n,0)}$ are functions of $x$ only. In order
+to be able to compute the function $C$ for generic values of the
+scales $\mu$ and $\zeta$, evolution equations can be derived. Deriving
+Eq.~(\ref{eq:matching}) with respect to $\mu$ and $\zeta$ one gets:
+\begin{equation}\label{eq:derivs1}
+\begin{array}{l}
+\displaystyle \frac{\partial F}{\partial \ln\sqrt{\zeta}} =
+  \frac{\partial C}{\partial \ln\sqrt{\zeta}}\otimes f(\mu)\,,\\
+\\
+\displaystyle \frac{\partial F}{\partial \ln\mu} = \frac{\partial
+  C}{\partial \ln\mu}\otimes f(\mu) + C(\mu,\zeta) \otimes
+  \frac{\partial f}{\partial \ln\mu} = \left[\frac{\partial
+  C}{\partial \ln\mu}+C(\mu,\zeta) \otimes 2P(\mu) \right]\otimes f(\mu)\,.
+\end{array}
+\end{equation}
+In the r.h.s. of the second equation I have used the DGLAP equation:
+\begin{equation}
+\frac{\partial f}{\partial \ln\mu} = 2P(\mu) \otimes f(\mu)\,.
+\end{equation}
+One can also take the derivative of Eq.~(\ref{eq:solution2}) and the
+result is:
+\begin{equation}\label{eq:derivs2}
+\begin{array}{l}
+\displaystyle \frac{\partial F}{\partial \ln\sqrt{\zeta}} =\left[
+  K(\mu_0)-\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\right]F(\mu,\zeta)= \left[
+  K(\mu_0)-\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\right]C(\mu,\zeta)\otimes f(\mu)
+\,,\\
+\\
+\displaystyle \frac{\partial F}{\partial \ln\mu} = \left[\gamma_F(\alpha_s(\mu))
+      -
+      \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]
+  F(\mu,\zeta) = \left[\gamma_F(\alpha_s(\mu))
+      -
+      \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]
+  C(\mu,\zeta)\otimes f(\mu)\,.
+\end{array}
+\end{equation}
+Equating Eq.~(\ref{eq:derivs1}) and Eq.~(\ref{eq:derivs2}) and dropping
+the distribution $f$, the evolution equations for $C$ are:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \frac{\partial C}{\partial \ln\sqrt{\zeta}} = \left[
+  K(\mu_0)-\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\right]C(\mu,\zeta)
+\,,\\
+\\
+\displaystyle \frac{\partial
+  C}{\partial \ln\mu} = \left\{\left[\gamma_F(\alpha_s(\mu))
+      -
+      \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]\delta(1-x)-2P(\mu)\right\}\otimes
+  C(\mu,\zeta)\,.
+\end{array}
+\end{equation}
+These equations can be solved to determine the evolution of the
+matching function $C$. The solution can eventually be expanded if
+initial and final scales are not too far apart. In particular, if
+$\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in Eq.~(\ref{eq:solution2}), the
+matching function $C$ can be reliably expanded as:
+\begin{equation}
+  C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
+\end{equation}
+The coefficient functions $C^{(n,m)}$ have been computed for both PDFs
+and FFs in SCET in Ref.~\cite{Echevarria:2016scs}. The same functions
+have also been computed in Ref.~\cite{Catani:2012qa} and reported in
+Ref.~\cite{Collins:2017oxh}. The authors of the latter paper have
+verified the equality of the two sets of functions.
+
+In order to use Eq.~(\ref{eq:solution2}) in phenomenological
+applications, one needs to define the values of both the initial and
+final pairs of scales $(\mu_0,\zeta_0)$ and $(\mu,\zeta)$. The initial
+scales are usually identified with $\mu_b$ up to a small factor $C_i$,
+\textit{i.e.}  $(\mu_0,\zeta_0) = (C_i\mu_b,C_f^2\mu_b^2)$, with
+$\mu_b = 2e^{-\gamma_E}/b_T$. This is advantageous because possible
+logarithms that appear in the perturbative expansion of $K(\mu_0)$ and
+$C(\mu_0,\zeta_0)$ in Eq.~(\ref{eq:solution3}) have the form
+$\ln(\mu_0/\mu_b)=\ln(\sqrt{\zeta_0}/\mu_b)=\ln C_i$ and thus are
+small enough not to spoil their convergence. Variations of $C_i$
+around unity can be possibly used to estimate the impact of
+higher-order corrections in the TMD evolution and matching.
+
+The natural choice for the final scales is to identify them with the
+hard scale of the process, say $Q$, within a modest factor $C_f$,
+\textit{i.e.}  $(\mu,\zeta) = (C_fQ,C_f^2Q^2)$. This choice has to
+match the scales in the hard factor $H$ of the process under
+consideration. Once again, modest variations of the factor $C_f$ can
+be used to estimate higher-order corrections to the evolution.
+
+% The choice $\mu_0=\sqrt{\zeta_0}\propto \mu_b$ has recently been
+% questioned. In particular, it has been shown that a choice $\zeta_0$
+% can be made such that the expanded evolution of the matching function
+% $C$ is no longer affected by double logs but by single
+% logs. Remarkably, these logs follow the DGLAP pattern. This goes under
+% the name of $\zeta$-prescription and I will discuss it below.
+
+% The $\zeta$-prescription exploits the freedom of choosing
+% $\zeta_0$. But rather that setting $\zeta_0=\mu_0^2$, it defines the
+% function $\zeta_\mu$ such that $\zeta_0=\zeta_\mu(\mu_0)$. The
+% function $\zeta_\mu$ has to be such that:
+% \begin{equation}
+% \frac{d\ln F(\mu,\zeta_\mu(\mu))}{d\ln\mu} = 0\,.
+% \end{equation}
+% Therefore $\zeta = \zeta_\mu(\mu)$ is the curve in the $(\mu,\zeta)$
+% plane along which the TMD does not evolve. The equation above leads to:
+% \begin{equation}
+% \frac{\partial \ln
+%   F}{\partial \ln\mu} +\frac12\frac{d\ln\zeta_\mu}{d\ln\mu}\frac{\partial \ln
+%   F}{\partial \ln\sqrt{\zeta}} =
+% \frac12 K \frac{d\ln\zeta_\mu}{d\ln\mu} -\frac12
+% \gamma_K\ln\zeta_\mu+ \gamma_K\ln\mu + \gamma_F = 0
+% \end{equation}
+
+
+
+\begin{thebibliography}{alp}
+
+%\cite{Catani:2012qa}
+\bibitem{Catani:2012qa}
+  S.~Catani, L.~Cieri, D.~de Florian, G.~Ferrera and M.~Grazzini,
+  %``Vector boson production at hadron colliders: hard-collinear coefficients at the NNLO,''
+  Eur.\ Phys.\ J.\ C {\bf 72} (2012) 2195
+  doi:10.1140/epjc/s10052-012-2195-7
+  [arXiv:1209.0158 [hep-ph]].
+  %%CITATION = doi:10.1140/epjc/s10052-012-2195-7;%%
+  %59 citations counted in INSPIRE as of 15 Oct 2018
+
+%\cite{Echevarria:2016scs}
+\bibitem{Echevarria:2016scs}
+  M.~G.~Echevarria, I.~Scimemi and A.~Vladimirov,
+  %``Unpolarized Transverse Momentum Dependent Parton Distribution and Fragmentation Functions at next-to-next-to-leading order,''
+  JHEP {\bf 1609} (2016) 004
+  doi:10.1007/JHEP09(2016)004
+  [arXiv:1604.07869 [hep-ph]].
+  %%CITATION = doi:10.1007/JHEP09(2016)004;%%
+  %32 citations counted in INSPIRE as of 15 Oct 2018
+
+%\cite{Collins:2017oxh}
+\bibitem{Collins:2017oxh}
+  J.~Collins and T.~C.~Rogers,
+  %``Connecting Different TMD Factorization Formalisms in QCD,''
+  Phys.\ Rev.\ D {\bf 96} (2017) no.5,  054011
+  doi:10.1103/PhysRevD.96.054011
+  [arXiv:1705.07167 [hep-ph]].
+  %%CITATION = doi:10.1103/PhysRevD.96.054011;%%
+  %7 citations counted in INSPIRE as of 15 Oct 2018
+
+\end{thebibliography}
+
+\end{document}

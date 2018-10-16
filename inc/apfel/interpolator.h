@@ -25,6 +25,8 @@ namespace apfel
 
     Interpolator() = delete;
 
+    virtual ~Interpolator() = default;
+
     /**
      * @brief The Interpolator constructor.
      * @param gr: the x-space grid object over which interpolation takes place

@@ -3,8 +3,8 @@ set(tmds_source
   gammacusp.cc
   gammav.cc
   gammacs.cc
-  logzeta.cc
-  matchingfunctions.cc
+  matchingfunctionspdf.cc
+  matchingfunctionsff.cc
   ogataquadrature.cc
   tmdcrosssections.cc
   )

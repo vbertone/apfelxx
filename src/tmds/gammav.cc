@@ -13,7 +13,7 @@ namespace apfel
   //_________________________________________________________________________
   double gammaVq0()
   {
-    return - 6 * CF;
+    return 6 * CF;
   }
 
   //_________________________________________________________________________
@@ -22,19 +22,19 @@ namespace apfel
     const double coeff = CF * CF * ( - 3 + 4 * Pi2 - 48 * zeta3 )
       + CF * CA * ( - 961. / 27. - 11 * Pi2 / 3 + 52 * zeta3 )
       + CF * TR * nf * (  260. / 27. + 4 * Pi2 / 3 );
-    return coeff;
+    return - coeff;
   }
 
   //_________________________________________________________________________
   double gammaVq2(int const& nf)
   {
-    const double coeff = pow(CF,3) * (  - 29 - 6 * Pi2 -  16 * Pi2 * Pi2 / 5 - 136 * zeta3 +  32 * Pi2 * zeta3 / 3  + 480 * zeta5 ) 
-      + CF * CF * CA * ( - 151. / 2. +  410 * Pi2 / 9 + 494 * Pi2 * Pi2 / 135 - 1688 * zeta3 / 3 - 16 * Pi2 * zeta3 / 3 - 240 * zeta5 ) 
-      + CF * CA * CA * ( - 139345. / 1458. - 7163 * Pi2 / 243 - 83 * Pi2 * Pi2 / 45 + 7052 * zeta3 / 9 - 88 * Pi2 * zeta3 / 9 - 272 * zeta5 ) 
-      + CF * CF * TR * nf * ( 5906. / 27. - 52 * Pi2 / 9 - 56 * Pi2 * Pi2 / 27 + 1024 * zeta3 / 9 ) 
-      + CF * CA * TR * nf * ( - 34636. / 729. + 5188 * Pi2 / 243 + 44 * Pi2 * Pi2 / 45 - 3856 * zeta3 / 27 ) 
+    const double coeff = pow(CF,3) * ( - 29 - 6 * Pi2 -  16 * Pi2 * Pi2 / 5 - 136 * zeta3 +  32 * Pi2 * zeta3 / 3  + 480 * zeta5 )
+      + CF * CF * CA * ( - 151. / 2. +  410 * Pi2 / 9 + 494 * Pi2 * Pi2 / 135 - 1688 * zeta3 / 3 - 16 * Pi2 * zeta3 / 3 - 240 * zeta5 )
+      + CF * CA * CA * ( - 139345. / 1458. - 7163 * Pi2 / 243 - 83 * Pi2 * Pi2 / 45 + 7052 * zeta3 / 9 - 88 * Pi2 * zeta3 / 9 - 272 * zeta5 )
+      + CF * CF * TR * nf * ( 5906. / 27. - 52 * Pi2 / 9 - 56 * Pi2 * Pi2 / 27 + 1024 * zeta3 / 9 )
+      + CF * CA * TR * nf * ( - 34636. / 729. + 5188 * Pi2 / 243 + 44 * Pi2 * Pi2 / 45 - 3856 * zeta3 / 27 )
       + CF * TR * TR * nf * nf * ( 19336. / 729. - 80 * Pi2 / 27 - 64 * zeta3 / 27 );
-    return coeff;
+    return - coeff;
   }
 
   //_________________________________________________________________________

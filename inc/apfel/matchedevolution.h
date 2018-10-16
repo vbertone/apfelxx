@@ -27,6 +27,8 @@ namespace apfel
 
     MatchedEvolution() = delete;
 
+    virtual ~MatchedEvolution() = default;
+
     /**
      * @brief The MatchedEvolution constructor.
      * @param ObjRef: the reference object
