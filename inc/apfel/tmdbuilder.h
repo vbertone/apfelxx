@@ -145,7 +145,7 @@ namespace apfel
    * @return std::vector<double>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta;. The 0-th component contains the
-   * gluon evolution vactor, the remaining 12, from 1 to 12, are all
+   * gluon evolution factor, the remaining 12, from 1 to 12, are all
    * equal and represent the quark evolution factors.
    */
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,

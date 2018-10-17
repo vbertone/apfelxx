@@ -238,13 +238,13 @@ namespace apfel {
 
     // Terms proportion to four powers of log(mu0/mub)
     std::map<int,Operator> C24;
-    C12.insert({EvolutionBasisQCD::PNSP, CF * CF * Id / 2});
-    C12.insert({EvolutionBasisQCD::PNSM, CF * CF * Id / 2});
-    C12.insert({EvolutionBasisQCD::PNSV, CF * CF * Id / 2});
-    C12.insert({EvolutionBasisQCD::PQQ,  CF * CF * Id / 2});
-    C12.insert({EvolutionBasisQCD::PQG,  Zero});
-    C12.insert({EvolutionBasisQCD::PGQ,  Zero});
-    C12.insert({EvolutionBasisQCD::PGG,  CA * CA * Id / 2});
+    C24.insert({EvolutionBasisQCD::PNSP, CF * CF * Id / 2});
+    C24.insert({EvolutionBasisQCD::PNSM, CF * CF * Id / 2});
+    C24.insert({EvolutionBasisQCD::PNSV, CF * CF * Id / 2});
+    C24.insert({EvolutionBasisQCD::PQQ,  CF * CF * Id / 2});
+    C24.insert({EvolutionBasisQCD::PQG,  Zero});
+    C24.insert({EvolutionBasisQCD::PGQ,  Zero});
+    C24.insert({EvolutionBasisQCD::PGG,  CA * CA * Id / 2});
 
     // FFs
     std::map<int,std::map<int,Operator>> C20ff;
@@ -482,7 +482,7 @@ namespace apfel {
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto mf  = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
+	  const auto& mf = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
 	  const auto c0  = mf.at(0);
 	  const auto c1  = mf.at(1);
 	  const auto lo  = c0[0];
@@ -493,7 +493,7 @@ namespace apfel {
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto mf   = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
+	  const auto& mf  = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
 	  const auto c0   = mf.at(0);
 	  const auto c1   = mf.at(1);
 	  const auto c2   = mf.at(2);
@@ -551,7 +551,7 @@ namespace apfel {
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto mf  = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
+	  const auto& mf = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
 	  const auto c0  = mf.at(0);
 	  const auto c1  = mf.at(1);
 	  const auto lo  = c0[0];
@@ -562,7 +562,7 @@ namespace apfel {
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto mf   = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
+	  const auto& mf  = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
 	  const auto c0   = mf.at(0);
 	  const auto c1   = mf.at(1);
 	  const auto c2   = mf.at(2);
@@ -625,7 +625,8 @@ namespace apfel {
 	  };
 	K = [=] (double const& mu) -> double
 	  {
-	    const std::vector<double> d0 = TmdObj.at(NF(mu,thrs)).GammaCS.at(0);
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
 	    const double coup = Alphas(mu) / FourPi;
 	    const double lo   = d0[0] + Lmu * d0[1];
 	    return coup * lo;
@@ -646,13 +647,13 @@ namespace apfel {
 	  };
 	gammaK = [=] (double const& mu) -> double
 	  {
-	    const auto gc     = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * gc.at(1) );
 	  };
 	K = [=] (double const& mu) -> double
 	  {
-	    const auto d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
 	    const std::vector<double> d0 = d.at(0);
 	    const std::vector<double> d1 = d.at(1);
 	    const double coup = Alphas(mu) / FourPi;
@@ -666,25 +667,25 @@ namespace apfel {
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
-	    const auto gv     = TmdObj.at(NF(mu,thrs)).GammaFq;
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFq;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gv.at(0) + coup * gv.at(1) );
 	  };
 	gammaFg = [=] (double const& mu) -> double
 	  {
-	    const auto gv     = TmdObj.at(NF(mu,thrs)).GammaFg;
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFg;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gv.at(0) + coup * gv.at(1) );
 	  };
 	gammaK = [=] (double const& mu) -> double
 	  {
-	    const auto gc     = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
 	  };
 	K = [=] (double const& mu) -> double
 	  {
-	    const auto d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
 	    const std::vector<double> d0 = d.at(0);
 	    const std::vector<double> d1 = d.at(1);
 	    const std::vector<double> d2 = d.at(2);
@@ -697,9 +698,10 @@ namespace apfel {
       }
 
     // Define the integrands.
-    Integrator I1q{[=] (double const& mu) -> double{ return ( gammaFq(mu) + CF * gammaK(mu) * log(mu) ) / mu; }};
-    Integrator I1g{[=] (double const& mu) -> double{ return ( gammaFg(mu) + CA * gammaK(mu) * log(mu) ) / mu; }};
-    Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+    Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
+    Integrator I1g{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
+    Integrator I3 {[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
+    Integrator I2 {[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
 
     // Construct function that returns the perturbative evolution
     // kernel.
@@ -713,9 +715,10 @@ namespace apfel {
 	const double IntI1q = I1q.integrate(mu0, muf, thrs, IntEps);
 	const double IntI1g = I1g.integrate(mu0, muf, thrs, IntEps);
 	const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
+	const double IntI3  = I3.integrate(mu0, muf, thrs, IntEps);
 
 	// Compute the evolution factors.
-	const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2;
+	const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
 	const double Rq  = exp( CF * Klz + IntI1q );
 	const double Rg  = exp( CA * Klz + IntI1g );
 
