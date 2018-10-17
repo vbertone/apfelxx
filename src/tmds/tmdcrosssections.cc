@@ -82,7 +82,7 @@ namespace apfel {
 	// be substantially slower but should return consistent
 	// results.
 	//const Integrator integrand{[=] (double const& bT) -> double{ return TMDLumib(bT) * j0(qT * bT) * bT / 2; }};
-	//return hcs * cutPref * integrand.integrate(0.00005,30,eps9);
+	//return hcs * cutPref * integrand.integrate(0.00005, 30, eps9);
       };
   }
 

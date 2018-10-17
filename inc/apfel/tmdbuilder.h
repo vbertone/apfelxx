@@ -65,21 +65,20 @@ namespace apfel
    * the zeta-prescription.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
-   * @param fNP: the non-perturbative function
-   * @param Mub: the initial scale function
-   * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial-scale variation factor
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta; representing the evolved TMD PDFs
    */
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                            const& TmdObj,
-											     std::function<Set<Distribution>(double const&)>     const& CollPDFs,
-											     std::function<double(double const&, double const&)> const& fNP,
-											     int                                                 const& PerturbativeOrder,
-											     std::function<double(double const&)>                const& Alphas,
-											     double                                              const& IntEps = 1e-7);
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
+											     std::function<Set<Distribution>(double const&)> const& CollPDFs,
+											     std::function<double(double const&)>            const& Alphas,
+											     int                                             const& PerturbativeOrder,
+											     double                                          const& Ci = 1,
+											     double                                          const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched and evolved TMD FFs in
@@ -87,31 +86,29 @@ namespace apfel
    * the zeta-prescription.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
-   * @param fNP: the non-perturbative function
-   * @param Mub: the initial scale function
-   * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial-scale variation factor
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta; representing the evolved TMD FFs
    */
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                            const& TmdObj,
-											    std::function<Set<Distribution>(double const&)>     const& CollFFs,
-											    std::function<double(double const&, double const&)> const& fNP,
-											    int                                                 const& PerturbativeOrder,
-											    std::function<double(double const&)>                const& Alphas,
-											    double                                              const& IntEps = 1e-7);
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
+											    std::function<Set<Distribution>(double const&)> const& CollFFs,
+											    std::function<double(double const&)>            const& Alphas,
+											    int                                             const& PerturbativeOrder,
+											    double                                          const& Ci = 1,
+											    double                                          const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched TMD PDFs in b-space. It
    * assumes the zeta-prescription.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
-   * @param fNP: the non-perturbative function
-   * @param Mub: the initial scale function
-   * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial-scale variation factor
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD PDFs
    */
@@ -119,17 +116,16 @@ namespace apfel
 							       std::function<Set<Distribution>(double const&)> const& CollPDFs,
 							       std::function<double(double const&)>            const& Alphas,
 							       int                                             const& PerturbativeOrder,
-							       double                                          const& Ci);
+							       double                                          const& Ci = 1);
 
   /**
    * @brief Function that returns the matched TMD FFs in b-space. It
    * assumes the zeta-prescription.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
-   * @param fNP: the non-perturbative function
-   * @param Mub: the initial scale function
-   * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial-scale variation factor
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD FFs
    */
@@ -137,7 +133,7 @@ namespace apfel
 							      std::function<Set<Distribution>(double const&)> const& CollPDFs,
 							      std::function<double(double const&)>            const& Alphas,
 							      int                                             const& PerturbativeOrder,
-							      double                                          const& Ci);
+							      double                                          const& Ci = 1);
 
   /**
    * @brief Function that returns the evolution factors for gluon and quarks.

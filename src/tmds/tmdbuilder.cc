@@ -22,6 +22,12 @@ namespace apfel {
 						std::vector<double> const& Thresholds,
 						double              const& IntEps)
   {
+    // Initialise space-like and time-like splitting functions on the
+    // grid required to compute the log terms of the matching
+    // functions.
+    const std::map<int,DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
+    const std::map<int,DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, IntEps);
+
     report("Initializing TMD objects for matching and evolution... ");
     Timer t;
 
@@ -33,12 +39,6 @@ namespace apfel {
     for (auto const& v : Thresholds)
       if (v <= 0)
 	nfi++;
-
-    // Initialise space-like and time-like splitting functions on the
-    // grid required to compute the log terms of the matching
-    // functions.
-    const std::map<int,DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
-    const std::map<int,DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, IntEps);
 
     // ===============================================================
     // LO matching functions operators.
@@ -87,8 +87,8 @@ namespace apfel {
 	OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - P0.at(1)});
 	OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - P0.at(2)});
 	OM.insert({EvolutionBasisQCD::PQQ,  O11gmVq - P0.at(3)});
-	OM.insert({EvolutionBasisQCD::PQG,  (-1) * P0.at(4)});
-	OM.insert({EvolutionBasisQCD::PGQ,  (-1) * P0.at(5)});
+	OM.insert({EvolutionBasisQCD::PQG,     (-1) * P0.at(4)});
+	OM.insert({EvolutionBasisQCD::PGQ,     (-1) * P0.at(5)});
 	OM.insert({EvolutionBasisQCD::PGG,  O11gmVg - P0.at(6)});
 	C11pdf.insert({nf, OM});
       }
@@ -135,8 +135,8 @@ namespace apfel {
 	OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - P0.at(1)});
 	OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - P0.at(2)});
 	OM.insert({EvolutionBasisQCD::PQQ,  O11gmVq - P0.at(3)});
-	OM.insert({EvolutionBasisQCD::PQG,  (-1) * P0.at(4)});
-	OM.insert({EvolutionBasisQCD::PGQ,  (-1) * P0.at(5)});
+	OM.insert({EvolutionBasisQCD::PQG,     (-1) * P0.at(4)});
+	OM.insert({EvolutionBasisQCD::PGQ,     (-1) * P0.at(5)});
 	OM.insert({EvolutionBasisQCD::PGG,  O11gmVg - P0.at(6)});
 	C11ff.insert({nf, OM});
       }
@@ -401,49 +401,49 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                            const& TmdObj,
-											     std::function<Set<Distribution>(double const&)>     const& CollPDFs,
-											     std::function<double(double const&, double const&)> const& fNP,
-											     int                                                 const& PerturbativeOrder,
-											     std::function<double(double const&)>                const& Alphas,
-											     double                                              const& IntEps)
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
+											     std::function<Set<Distribution>(double const&)> const& CollPDFs,
+											     std::function<double(double const&)>            const& Alphas,
+											     int                                             const& PerturbativeOrder,
+											     double                                          const& Ci,
+											     double                                          const& IntEps)
   {
     // Match TMDs on collinear PDFs.
-    const std::function<Set<Distribution>(double const&)> MatchedTmdPDFs = MatchTmdPDFs(TmdObj, CollPDFs, Alphas, PerturbativeOrder, 1);
+    const std::function<Set<Distribution>(double const&)> MatchedTmdPDFs = MatchTmdPDFs(TmdObj, CollPDFs, Alphas, PerturbativeOrder, Ci);
 
     // Compute TMD evolution factors.
-    const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, 1, IntEps);
+    const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
     // Computed TMDs at the initial scale by convoluting PDFs,
     // matching functions, and non-perturbative function.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
       {
-	return EvolFactors(b, muf, zetaf) * ( [&] (double const& x) -> double{ return fNP(x, b); } * MatchedTmdPDFs(b) );
+	return EvolFactors(b, muf, zetaf) * MatchedTmdPDFs(b);
       };
 
     return EvolvedTMDs;
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                            const& TmdObj,
-											    std::function<Set<Distribution>(double const&)>     const& CollFFs,
-											    std::function<double(double const&, double const&)> const& fNP,
-											    int                                                 const& PerturbativeOrder,
-											    std::function<double(double const&)>                const& Alphas,
-											    double                                              const& IntEps)
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
+											    std::function<Set<Distribution>(double const&)> const& CollFFs,
+											    std::function<double(double const&)>            const& Alphas,
+											    int                                             const& PerturbativeOrder,
+											    double                                          const& Ci,
+											    double                                          const& IntEps)
   {
     // Match TMDs on collinear FFs.
-    const std::function<Set<Distribution>(double const&)> MatchedTmdFFs = MatchTmdFFs(TmdObj, CollFFs, Alphas, PerturbativeOrder, 1);
+    const std::function<Set<Distribution>(double const&)> MatchedTmdFFs = MatchTmdFFs(TmdObj, CollFFs, Alphas, PerturbativeOrder, Ci);
 
     // Compute TMD evolution factors.
-    const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, 1, IntEps);
+    const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
     // Computed TMDs at the initial scale by convoluting FFs, matching
     // functions, and non-perturbative function. Include a factor
     // 1/z^2 typical of FFs.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
       {
-	return EvolFactors(b, muf, zetaf) * ( [&] (double const& z) -> double{ return fNP(z, b); } * MatchedTmdFFs(b) );
+	return EvolFactors(b, muf, zetaf) * MatchedTmdFFs(b);
       };
 
     return EvolvedTMDs;
@@ -481,20 +481,25 @@ namespace apfel {
     else if (PerturbativeOrder == 1)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
-	  const auto mf     = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto lo     = mf.at(0)[0];
-	  const auto nlo    = mf.at(1)[0] + Lmu * ( mf.at(1)[1] + Lmu * mf.at(1)[2] );
+	  const auto mf  = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
+	  const auto c0  = mf.at(0);
+	  const auto c1  = mf.at(1);
+	  const auto lo  = c0[0];
+	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
     else if (PerturbativeOrder == 2)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
-	  const auto mf     = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto lo     = mf.at(0)[0];
-	  const auto nlo    = mf.at(1)[0] + Lmu * ( mf.at(1)[1] + Lmu * mf.at(1)[2] );
-	  const auto nnlo   = mf.at(2)[0] + Lmu * ( mf.at(2)[1] + Lmu * ( mf.at(2)[2] + Lmu * ( mf.at(2)[3] + Lmu * mf.at(2)[4] ) ) );
+	  const auto mf   = TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs;
+	  const auto c0   = mf.at(0);
+	  const auto c1   = mf.at(1);
+	  const auto c2   = mf.at(2);
+	  const auto lo   = c0[0];
+	  const auto nlo  = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
+	  const auto nnlo = c2[0] + Lmu * ( c2[1] + Lmu * ( c2[2] + Lmu * ( c2[3] + Lmu * c2[4] ) ) );
 	  return lo + coup * ( nlo + coup * nnlo );
 	};
 
@@ -545,20 +550,25 @@ namespace apfel {
     else if (PerturbativeOrder == 1)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
-	  const auto mf     = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto lo     = mf.at(0)[0];
-	  const auto nlo    = mf.at(1)[0] + Lmu * ( mf.at(1)[1] + Lmu * mf.at(1)[2] );
+	  const auto mf  = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
+	  const auto c0  = mf.at(0);
+	  const auto c1  = mf.at(1);
+	  const auto lo  = c0[0];
+	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
     else if (PerturbativeOrder == 2)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
-	  const auto mf     = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
 	  const double coup = Alphas(mu) / FourPi;
-	  const auto lo     = mf.at(0)[0];
-	  const auto nlo    = mf.at(1)[0] + Lmu * ( mf.at(1)[1] + Lmu * mf.at(1)[2] );
-	  const auto nnlo   = mf.at(2)[0] + Lmu * ( mf.at(2)[1] + Lmu * ( mf.at(2)[2] + Lmu * ( mf.at(2)[3] + Lmu * mf.at(2)[4] ) ) );
+	  const auto mf   = TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs;
+	  const auto c0   = mf.at(0);
+	  const auto c1   = mf.at(1);
+	  const auto c2   = mf.at(2);
+	  const auto lo   = c0[0];
+	  const auto nlo  = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
+	  const auto nnlo = c2[0] + Lmu * ( c2[1] + Lmu * ( c2[2] + Lmu * ( c2[3] + Lmu * c2[4] ) ) );
 	  return lo + coup * ( nlo + coup * nnlo );
 	};
 
@@ -615,9 +625,9 @@ namespace apfel {
 	  };
 	K = [=] (double const& mu) -> double
 	  {
-	    const auto d      = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = TmdObj.at(NF(mu,thrs)).GammaCS.at(0);
 	    const double coup = Alphas(mu) / FourPi;
-	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
+	    const double lo   = d0[0] + Lmu * d0[1];
 	    return coup * lo;
 	  };
       }
@@ -642,10 +652,12 @@ namespace apfel {
 	  };
 	K = [=] (double const& mu) -> double
 	  {
-	    const auto d      = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const auto d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
 	    const double coup = Alphas(mu) / FourPi;
-	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
 	    return coup * ( lo + coup * nlo );
 	  };
       }
@@ -672,11 +684,14 @@ namespace apfel {
 	  };
 	K = [=] (double const& mu) -> double
 	  {
-	    const auto d      = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const auto d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
+	    const std::vector<double> d2 = d.at(2);
 	    const double coup = Alphas(mu) / FourPi;
-	    const double lo   = d.at(0)[0] + Lmu * d.at(0)[1];
-	    const double nlo  = d.at(1)[0] + Lmu * ( d.at(1)[1] + Lmu * d.at(1)[2] );
-	    const double nnlo = d.at(2)[0] + Lmu * ( d.at(2)[1] + Lmu * ( d.at(2)[2] + Lmu * d.at(2)[3] ) );
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+	    const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
 	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
 	  };
       }
@@ -695,14 +710,14 @@ namespace apfel {
 	const double zeta0 = mu0 * mu0;
 
 	// Compute argument of the exponent of the evolution factors.
-	const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf) / 2;
-	const double LRq = I1q.integrate(mu0, muf, thrs, IntEps) - CF * IntI2;
-	const double LRg = I1g.integrate(mu0, muf, thrs, IntEps) - CA * IntI2;
+	const double IntI1q = I1q.integrate(mu0, muf, thrs, IntEps);
+	const double IntI1g = I1g.integrate(mu0, muf, thrs, IntEps);
+	const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
 
 	// Compute the evolution factors.
-	const double lz = log( zetaf / zeta0 );
-	const double Rq = exp( CF * K(mu0) * lz + LRq );
-	const double Rg = exp( CA * K(mu0) * lz + LRg );
+	const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2;
+	const double Rq  = exp( CF * Klz + IntI1q );
+	const double Rg  = exp( CA * Klz + IntI1g );
 
 	// Return vector of evolution factors.
 	return std::vector<double>{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
