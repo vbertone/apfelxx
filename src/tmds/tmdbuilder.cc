@@ -623,7 +623,7 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
 	  };
-	K = [=] (double const& mu) -> double{ return 0; };
+	K = [=] (double const&) -> double{ return 0; };
       }
     // NLL
     else if (PerturbativeOrder == 1)
