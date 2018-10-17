@@ -153,5 +153,41 @@ namespace apfel
 												   int                                  const& PerturbativeOrder,
 												   double                               const& Ci = 1,
 												   double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the evolution factor for quarks.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial scale-variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
+   * final rapidity scale &zeta;. It returns the quark evolution
+   * factor.
+   */
+  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
+											   std::function<double(double const&)> const& Alphas,
+											   int                                  const& PerturbativeOrder,
+											   double                               const& Ci = 1,
+											   double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the evolution factor for the gluon.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial scale-variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
+   * final rapidity scale &zeta;. It returns the gluon evolution
+   * factor.
+   */
+  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
+											   std::function<double(double const&)> const& Alphas,
+											   int                                  const& PerturbativeOrder,
+											   double                               const& Ci = 1,
+											   double                               const& IntEps = 1e-7);
   ///@}
 }

@@ -508,7 +508,7 @@ namespace apfel {
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
       {
 	// Define lower scales
-	const double mu0   = Ci * 2 * exp(- emc) / b;
+	const double mu0 = Ci * 2 * exp(- emc) / b;
 
 	// Convolute matching functions with the collinear PDFs and
 	// return.
@@ -577,7 +577,7 @@ namespace apfel {
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
       {
 	// Define lower scales
-	const double mu0   = Ci * 2 * exp(- emc) / b;
+	const double mu0 = Ci * 2 * exp(- emc) / b;
 
 	// Convolute matching functions with the collinear FFs and
 	// return.
@@ -713,6 +713,236 @@ namespace apfel {
 
 	// Return vector of evolution factors.
 	return std::vector<double>{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
+      };
+
+    return EvolFactors;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
+											   std::function<double(double const&)> const& Alphas,
+											   int                                  const& PerturbativeOrder,
+											   double                               const& Ci,
+											   double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+	const int    nf  = obj.first;
+	const double thr = obj.second.Threshold;
+	if ((int) thrs.size() < nf)
+	  thrs.resize(nf);
+	thrs[nf-1] = thr;
+      }
+
+    // Define the log(Ci) to assess scale variations.
+    const double Lmu = 2 * log(Ci);
+
+    // Create functions needed for the TMD evolution.
+    std::function<double(double const&)> gammaFq;
+    std::function<double(double const&)> gammaK;
+    std::function<double(double const&)> K;
+    // LL
+    if (PerturbativeOrder == 0)
+      {
+	gammaFq = [=] (double const&) -> double{ return 0; };
+	gammaK  = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
+	  };
+	K = [=] (double const&) -> double{ return 0; };
+      }
+    // NLL
+    else if (PerturbativeOrder == 1)
+      {
+	gammaFq = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,thrs)).GammaFq.at(0);
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * gc.at(1) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    return coup * lo;
+	  };
+      }
+    // NNLL
+    else if (PerturbativeOrder == 2)
+      {
+	gammaFq = [=] (double const& mu) -> double
+	  {
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFq;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * gv.at(1) );
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+	    return coup * ( lo + coup * nlo );
+	  };
+      }
+
+    // Define the integrands.
+    Integrator I1{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
+    Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
+    Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> double
+      {
+	// Define lower scales
+	const double mu0   = Ci * 2 * exp(- emc) / b;
+	const double zeta0 = mu0 * mu0;
+
+	// Compute argument of the exponent of the evolution factors.
+	const double IntI1 = I1.integrate(mu0, muf, thrs, IntEps);
+	const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
+	const double IntI3 = I3.integrate(mu0, muf, thrs, IntEps);
+
+	// Compute the evolution factors.
+	const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
+	const double Rq  = exp( CF * Klz + IntI1 );
+
+	// Return vector of evolution factors.
+	return Rq;
+      };
+
+    return EvolFactors;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
+											   std::function<double(double const&)> const& Alphas,
+											   int                                  const& PerturbativeOrder,
+											   double                               const& Ci,
+											   double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+	const int    nf  = obj.first;
+	const double thr = obj.second.Threshold;
+	if ((int) thrs.size() < nf)
+	  thrs.resize(nf);
+	thrs[nf-1] = thr;
+      }
+
+    // Define the log(Ci) to assess scale variations.
+    const double Lmu = 2 * log(Ci);
+
+    // Create functions needed for the TMD evolution.
+    std::function<double(double const&)> gammaFg;
+    std::function<double(double const&)> gammaK;
+    std::function<double(double const&)> K;
+    // LL
+    if (PerturbativeOrder == 0)
+      {
+	gammaFg = [=] (double const&) -> double{ return 0; };
+	gammaK  = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
+	  };
+	K = [=] (double const&) -> double{ return 0; };
+      }
+    // NLL
+    else if (PerturbativeOrder == 1)
+      {
+	gammaFg = [=] (double const& mu) -> double
+	  {
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * TmdObj.at(NF(mu,thrs)).GammaFg.at(0);
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * gc.at(1) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    return coup * lo;
+	  };
+      }
+    // NNLL
+    else if (PerturbativeOrder == 2)
+      {
+	gammaFg = [=] (double const& mu) -> double
+	  {
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFg;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * gv.at(1) );
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+	    return coup * ( lo + coup * nlo );
+	  };
+      }
+
+    // Define the integrands.
+    Integrator I1{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
+    Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
+    Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> double
+      {
+	// Define lower scales
+	const double mu0   = Ci * 2 * exp(- emc) / b;
+	const double zeta0 = mu0 * mu0;
+
+	// Compute argument of the exponent of the evolution factors.
+	const double IntI1 = I1.integrate(mu0, muf, thrs, IntEps);
+	const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
+	const double IntI3 = I3.integrate(mu0, muf, thrs, IntEps);
+
+	// Compute the evolution factors.
+	const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
+	const double Rg  = exp( CA * Klz + IntI1 );
+
+	// Return vector of evolution factors.
+	return Rg;
       };
 
     return EvolFactors;
