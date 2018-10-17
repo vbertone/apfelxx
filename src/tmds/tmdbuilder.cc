@@ -623,14 +623,7 @@ namespace apfel {
 	    const double coup = Alphas(mu) / FourPi;
 	    return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
 	  };
-	K = [=] (double const& mu) -> double
-	  {
-	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
-	    const std::vector<double> d0 = d.at(0);
-	    const double coup = Alphas(mu) / FourPi;
-	    const double lo   = d0[0] + Lmu * d0[1];
-	    return coup * lo;
-	  };
+	K = [=] (double const& mu) -> double{ return 0; };
       }
     // NLL
     else if (PerturbativeOrder == 1)
@@ -655,11 +648,9 @@ namespace apfel {
 	  {
 	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
 	    const std::vector<double> d0 = d.at(0);
-	    const std::vector<double> d1 = d.at(1);
 	    const double coup = Alphas(mu) / FourPi;
 	    const double lo   = d0[0] + Lmu * d0[1];
-	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
-	    return coup * ( lo + coup * nlo );
+	    return coup * lo;
 	  };
       }
     // NNLL
@@ -688,12 +679,10 @@ namespace apfel {
 	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
 	    const std::vector<double> d0 = d.at(0);
 	    const std::vector<double> d1 = d.at(1);
-	    const std::vector<double> d2 = d.at(2);
 	    const double coup = Alphas(mu) / FourPi;
 	    const double lo   = d0[0] + Lmu * d0[1];
 	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
-	    const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
-	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
+	    return coup * ( lo + coup * nlo );
 	  };
       }
 
