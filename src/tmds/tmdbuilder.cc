@@ -719,11 +719,11 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
-											   std::function<double(double const&)> const& Alphas,
-											   int                                  const& PerturbativeOrder,
-											   double                               const& Ci,
-											   double                               const& IntEps)
+  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
+											  std::function<double(double const&)> const& Alphas,
+											  int                                  const& PerturbativeOrder,
+											  double                               const& Ci,
+											  double                               const& IntEps)
   {
     // Retrieve thresholds from "TmdObj".
     std::vector<double> thrs;
@@ -811,7 +811,7 @@ namespace apfel {
 
     // Construct function that returns the perturbative evolution
     // kernel.
-    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> double
+    const auto EvolFactor = [=] (double const& b, double const& muf, double const& zetaf) -> double
       {
 	// Define lower scales
 	const double mu0   = Ci * 2 * exp(- emc) / b;
@@ -830,15 +830,15 @@ namespace apfel {
 	return Rq;
       };
 
-    return EvolFactors;
+    return EvolFactor;
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
-											   std::function<double(double const&)> const& Alphas,
-											   int                                  const& PerturbativeOrder,
-											   double                               const& Ci,
-											   double                               const& IntEps)
+  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
+											  std::function<double(double const&)> const& Alphas,
+											  int                                  const& PerturbativeOrder,
+											  double                               const& Ci,
+											  double                               const& IntEps)
   {
     // Retrieve thresholds from "TmdObj".
     std::vector<double> thrs;
@@ -926,7 +926,7 @@ namespace apfel {
 
     // Construct function that returns the perturbative evolution
     // kernel.
-    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> double
+    const auto EvolFactor = [=] (double const& b, double const& muf, double const& zetaf) -> double
       {
 	// Define lower scales
 	const double mu0   = Ci * 2 * exp(- emc) / b;
@@ -945,6 +945,6 @@ namespace apfel {
 	return Rg;
       };
 
-    return EvolFactors;
+    return EvolFactor;
   }
 }

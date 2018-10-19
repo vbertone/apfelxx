@@ -166,11 +166,11 @@ namespace apfel
    * final rapidity scale &zeta;. It returns the quark evolution
    * factor.
    */
-  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
-											   std::function<double(double const&)> const& Alphas,
-											   int                                  const& PerturbativeOrder,
-											   double                               const& Ci = 1,
-											   double                               const& IntEps = 1e-7);
+  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
+											  std::function<double(double const&)> const& Alphas,
+											  int                                  const& PerturbativeOrder,
+											  double                               const& Ci = 1,
+											  double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the evolution factor for the gluon.
@@ -184,10 +184,10 @@ namespace apfel
    * final rapidity scale &zeta;. It returns the gluon evolution
    * factor.
    */
-  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
-											   std::function<double(double const&)> const& Alphas,
-											   int                                  const& PerturbativeOrder,
-											   double                               const& Ci = 1,
-											   double                               const& IntEps = 1e-7);
+  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
+											  std::function<double(double const&)> const& Alphas,
+											  int                                  const& PerturbativeOrder,
+											  double                               const& Ci = 1,
+											  double                               const& IntEps = 1e-7);
   ///@}
 }
