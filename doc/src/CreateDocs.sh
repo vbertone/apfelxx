@@ -7,6 +7,7 @@ do
     pdflatex CCDIS.tex
     pdflatex Transversity.tex
     pdflatex TMDEvolution.tex
+    pdflatex DrellYanTMD.tex
 done
 
 mv *.pdf ../pdf/.
