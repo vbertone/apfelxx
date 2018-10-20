@@ -8,6 +8,7 @@
 #include "apfel/messages.h"
 
 #include <cmath>
+//#include <boost/math/special_functions/bessel.hpp>
 
 namespace apfel {
   //_____________________________________________________________________________
@@ -49,5 +50,26 @@ namespace apfel {
       warning("OgataQuadrature", "Number of j0 zero's available exceeded: the integration might not have converged.");
 
     return integral;
+  }
+
+  //_____________________________________________________________________________
+  void J0ZerosGenerator()
+  {
+    std::cout << error("J0ZerosGenerator", "Function currently unavailable.") << std::endl;
+    /*
+    const int perline = 4;
+    const int lines   = 250;
+    const int n       = perline * lines - 1;
+
+    std::cout << std::setprecision(16);
+    std::cout << "  const vector<double> j0Zeros{";
+    for (int i = 1; i <= n; i++)
+      {
+	std::cout << boost::math::cyl_bessel_j_zero(0., i) << ", ";
+	if (i % perline == 0)
+	  std::cout << std::endl << "      ";
+      }
+    std::cout << boost::math::cyl_bessel_j_zero(0., n+1) << "};" << std::endl;
+    */
   }
 }

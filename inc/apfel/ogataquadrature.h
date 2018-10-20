@@ -280,4 +280,13 @@ namespace apfel
 			 double                               const& qT,
 			 double                               const& CutOff = 1e-5,
 			 double                               const& h = 0.001);
+
+  /**
+   * @brief Function that writes on screan the first 1000 zeros of the
+   * Bessel function J0. This function essentially generates the
+   * std::vector<double> j0Zeros above. This function requires BOOST
+   * and thus it is not available by defaults.
+   */
+  void J0ZerosGenerator();
 }
+
