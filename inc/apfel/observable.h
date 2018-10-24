@@ -21,7 +21,7 @@ namespace apfel
   {
   public:
 
-    Observable() =  delete;
+    Observable() = delete;
 
     /**
      * @brief The Observable constructor.
@@ -41,14 +41,15 @@ namespace apfel
      * @param Q: the scale where the observable has to be evaluated
      * @return the observable in Q as a distribution
      */
-    Distribution Evaluate(double const& Q)                  const;
+    Distribution Evaluate(double const& Q) const;
+
     /**
      * @brief This function returns the observable in Q interpolated in x.
      * @param x: the value to be interpolate on the x-space grid
      * @param Q: the scale where the observable has to be evaluated
      * @return the observable in Q interpolated in x
      */
-    double       Evaluate(double const& x, double const& Q) const;
+    double Evaluate(double const& x, double const& Q) const;
     ///@}
 
     /**
@@ -62,5 +63,4 @@ namespace apfel
     std::function<Set<Operator>(double const&)>     _CoefficientFunctions;
     std::function<Set<Distribution>(double const&)> _Distributions;
   };
-
 }
