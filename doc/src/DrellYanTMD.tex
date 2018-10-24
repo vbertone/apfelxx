@@ -455,6 +455,76 @@ The advantage of Eq.~(\ref{eq:finalinterpolated}) is that the weights
 $W_{n\alpha\tau}$ can be precomputed once and for all and used to fit
 the function $f_{\rm NP}$.
 
+\subsection{Narrow-width approximation}
+
+A possible alternative to the numerical integration in $Q$ when the
+integration region includes the $Z$-peak region is the so-called
+narrow-width approximation (NWA). In the NWA one assumes that the
+width of the $Z$ boson, $\Gamma_Z$, is much smaller than its mass
+$M_Z$. This way one can approximate the peaked behaviour of the
+couplings $C_q(Q)$ around $Q=M_Z$ with a $\delta$-function,
+\textit{i.e.}  $C_q(Q)\sim \delta(Q^2-M_Z^2)$. This way the
+integration over $Q$ can be done analytically essentially setting
+$Q=M_Z$ everywhere in the expression. The exact structure of the
+electroweak couplings is the following:
+\begin{equation}\label{eq:fullcoup}
+C_q(Q) = e_q^2 - 2 e_q V_q V_e \chi_1(Q) + (V_e^2 + A_e^2)(V_q^2 + A_q^2)\chi_2(Q)\,,
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \chi_1(Q) = \frac{1}{4 \sin^2\theta_W \cos^2\theta_W } \frac{Q^2 ( Q^2 -  M_Z^2 )}{ (Q^2 - M_Z^2)^2 + M_Z^2 \Gamma_Z^2} \,,\\
+\displaystyle \chi_2(Q) = \frac{1}{16 \sin^4\theta_W\cos^4\theta_W} \frac{Q^4}{ (Q^2 - M_Z^2)^2 + M_Z^2 \Gamma_Z^2} \,.
+\end{array}
+\end{equation}
+In the limit in which the width $\Gamma_Z$ is much smaller that the
+$Z$ mass $M_Z$ ($\Gamma_Z/M_Z\rightarrow 0$), the leading contribution
+to the coupling in Eq.~(\ref{eq:fullcoup}) comes from the region
+$Q\simeq M_Z$ and is that proportional to $\chi_2$:
+\begin{equation}\label{eq:partlead}
+C_q(Q) \simeq (V_e^2 + A_e^2)(V_q^2 + A_q^2)\chi_2(Q)\,,\quad Q\simeq M_Z\,.
+\end{equation}
+In addition, in this limit one can show that:
+\begin{equation}\label{eq:breitwigner}
+\frac{1}{ (Q^2 - M_Z^2)^2 + M_Z^2 \Gamma_Z^2}\rightarrow
+\frac{\pi}{M_Z\Gamma_Z}\delta(Q^2-M_Z^2) = \frac{\pi}{2M_Z^2\Gamma_Z}\delta(Q-M_Z)\,.
+\end{equation}
+Therefore, considering that:
+\begin{equation}
+\Gamma_Z = \frac{\alpha M_Z}{\sin^2\theta_W \cos^2\theta_W}\,,
+\end{equation}
+the electroweak couplings in the NWA have the following form:
+\begin{equation}\label{eq:partlead}
+C_q(Q) \simeq \frac{\pi M_Z (V_e^2 + A_e^2)(V_q^2 + A_q^2) }{32 \alpha
+  \sin^2\theta_W\cos^2\theta_W} \delta(Q-M_Z)\,,
+\end{equation}
+such that the differential cross section in
+Eq.~(\ref{eq:crosssection}) becomes:
+\begin{equation}
+\frac{d\sigma}{dQ dy dq_T} =
+\frac{2 q_T\pi^2\alpha}{3N_c M_Z^2} H(M_Z,M_Z) \sum_q \frac{(V_e^2 + A_e^2)(V_q^2 + A_q^2) }{
+  4\sin^2\theta_W\cos^2\theta_W} I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2) \delta(Q-M_Z)\,.
+\end{equation}
+Integrating the cross section over $Q$ under the condition that
+$Q_{\rm min}<M_Z<Q_{\rm max}$ yields:
+\begin{equation}
+\frac{d\sigma}{dy dq_T} = \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\frac{d\sigma}{dQ dy dq_T} =
+\frac{2 q_T\pi^2\alpha}{3N_c M_Z^2} H(M_Z,M_Z) \sum_q \frac{(V_e^2 + A_e^2)(V_q^2 + A_q^2) }{
+  4\sin^2\theta_W\cos^2\theta_W} I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2)\,.
+\end{equation}
+As a final step, one may want to let the $Z$ boson decay into
+leptons. At leading order in the EW sector and assuming an equal decay
+rate for electrons, muons, and taus, this can be done by multiplying
+the cross section above by three times the branching ratio for the $Z$
+decaying into any pair of leptons,
+$\mbox{Br}(Z\rightarrow \ell^+\ell^-)$:
+\begin{equation}
+\frac{d\sigma}{dy dq_T} = 
+\frac{2 q_T \mbox{Br}(Z\rightarrow \ell^+\ell^-)\pi^2\alpha}{N_c M_Z^2} H(M_Z,M_Z) \sum_q \frac{(V_e^2 + A_e^2)(V_q^2 + A_q^2) }{
+  4\sin^2\theta_W\cos^2\theta_W} I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2)\,.
+\end{equation}
+
+
 \begin{thebibliography}{alp}
 
 %\cite{Scimemi:2017etj}
