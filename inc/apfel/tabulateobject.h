@@ -58,13 +58,13 @@ namespace apfel
      * @param InterDegree: the interpolation degree on the grid in Q
      * @param Lambda: the value of the parameter in the function ln(ln(Q<SUP>2</SUP>/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.25)
      */
-    TabulateObject(std::function<T(double)> const& Object,
-		   int                      const& nQ,
-		   double                   const& QMin,
-		   double                   const& QMax,
-		   int                      const& InterDegree,
-		   std::vector<double>      const& Thresholds,
-		   double                   const& Lambda = 0.25);
+    TabulateObject(std::function<T(double const&)> const& Object,
+		   int                             const& nQ,
+		   double                          const& QMin,
+		   double                          const& QMax,
+		   int                             const& InterDegree,
+		   std::vector<double>             const& Thresholds,
+		   double                          const& Lambda = 0.25);
 
     /**
      * @brief The TabulateObject constructor for a Q dependent
@@ -77,7 +77,7 @@ namespace apfel
      * @param TabFunc: the function to be used for the tabulation in Q
      * @param InvTabFunc: the inverse function of TabFunc (it has to be provided analytically)
      */
-    TabulateObject(std::function<T(double)>             const& Object,
+    TabulateObject(std::function<T(double const&)>      const& Object,
 		   int                                  const& nQ,
 		   double                               const& QMin,
 		   double                               const& QMax,

@@ -6,7 +6,6 @@ set(tmds_source
   matchingfunctionspdf.cc
   matchingfunctionsff.cc
   ogataquadrature.cc
-  tmdcrosssections.cc
   hardfactors.cc
   )
 

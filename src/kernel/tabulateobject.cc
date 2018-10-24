@@ -72,13 +72,13 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<class T>
-  TabulateObject<T>::TabulateObject(std::function<T(double)> const& Object,
-				    int                      const& nQ,
-				    double                   const& QMin,
-				    double                   const& QMax,
-				    int                      const& InterDegree,
-				    std::vector<double>      const& Thresholds,
-				    double                   const& Lambda):
+  TabulateObject<T>::TabulateObject(std::function<T(double const&)> const& Object,
+				    int                             const& nQ,
+				    double                          const& QMin,
+				    double                          const& QMax,
+				    int                             const& InterDegree,
+				    std::vector<double>             const& Thresholds,
+				    double                          const& Lambda):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, Lambda)
   {
     report("Tabulating object... ");
@@ -93,7 +93,7 @@ namespace apfel {
 
   //_________________________________________________________________________________
   template<class T>
-  TabulateObject<T>::TabulateObject(std::function<T(double)>             const& Object,
+  TabulateObject<T>::TabulateObject(std::function<T(double const&)>      const& Object,
 				    int                                  const& nQ,
 				    double                               const& QMin,
 				    double                               const& QMax,

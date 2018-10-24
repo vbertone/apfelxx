@@ -75,7 +75,7 @@ namespace apfel {
     return [TMDLumib,hcs,Q] (double const& qT) -> double
       {
 	const double cutPref = 1 + pow(qT/Q,2) / 2;
-	return hcs * cutPref * OgataQuadrature(TMDLumib, qT);
+	return 0;//hcs * cutPref * OgataQuadrature(TMDLumib, qT);
 	// For test purposes, one can comment out the line above, in
 	// which the Ogata quadrature is used, and comment in the two
 	// lines below to use the DGauss quadrature. The second will
@@ -149,7 +149,7 @@ namespace apfel {
 
     return [TMDLumib,hcs] (double const& qT) -> double
       {
-	return hcs * OgataQuadrature(TMDLumib, qT);
+	return 0;//hcs * OgataQuadrature(TMDLumib, qT);
 	// For test purposes, one can comment out the line above, in
 	// which the Ogata quadrature is used, and comment in the two
 	// lines below to use the DGauss quadrature. The second will
@@ -246,7 +246,7 @@ namespace apfel {
 
 	      const double cutPref  = 1 + pow(qT/Q,2) / 2;
 	      const double HardFact = HardFactorDY(PerturbativeOrder, Alphas(muf), NF(muf, Thresholds), cmuf);
-	      return 2 * cutPref * HardFact * OgataQuadrature(bintegrand, qT);
+	      return 0;//2 * cutPref * HardFact * OgataQuadrature(bintegrand, qT);
 	    }
 	};
 	// Integrate in Q over [Qmin:Qmax] or return the
