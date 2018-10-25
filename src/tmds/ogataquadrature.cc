@@ -296,7 +296,7 @@ namespace apfel {
       {
 	const double jz = j0Zeros[i];
 	const double z  = jz / M_PI;
-	const double x  = M_PI * psi( _h * z ) / h;
+	const double x  = M_PI * psi( _h * z ) / _h;
 	const double w  = y0(jz) * j0(x) * psip( _h * z ) / j1(jz);
 	_xf[i] = x;
 	_weights[i] = M_PI * w;

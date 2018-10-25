@@ -49,9 +49,9 @@ Eq.~(\ref{eq:crosssection}) we are using the short-hand notation:
 \overline{F}_q(x,\mathbf{b};\mu,\zeta) \equiv xF_q(x,\mathbf{b};\mu,\zeta)\,,
 \end{equation}
 that is convenient for the implementation. The scales $\mu$ and
-$\zeta$ are introduced through TMD factorisation to factorise
-collinear and rapidity divergences. As usual, despite they are
-arbitrary scales, they are typically chosen
+$\zeta$ are introduced as a consequence of the removal of UV and
+rapidity divergences in the definition of the TMDs. Despite these
+scales are arbitrary scales, they are typically chosen
 $\mu=\sqrt{\zeta}=Q$. Therefore, for all practical purposes their
 presence is fictitious.
 
@@ -75,9 +75,9 @@ whose integral representation is:
 \begin{equation}
 J_0(x) = \frac1{2\pi}\int_0^{2\pi} d\theta e^{ix\cos(\theta)}\,.
 \end{equation}
-The single evolved TMD PDF $\overline{F}_i$ at the final scales $\mu$
-and $\zeta$ is obtained by multiplying the same TMD PDF at the initial
-scales $\mu_0$ and $\zeta_0$ by a single evolution factor
+The evolved quark TMD PDF $\overline{F}_i$ at the final scales $\mu$
+and $\zeta$ is obtained by multiplying the same distribution at the
+initial scales $\mu_0$ and $\zeta_0$ by a single evolution factor
 $R_q$(\footnote{Note that in Eq.~(\ref{eq:crosssection}) the gluon TMD
   PDF $\overline{F}_g$ is not involved. If also the gluon TMD PDF was
   involved, it would evolve by means of a different evolution factor
@@ -109,16 +109,16 @@ Putting Eqs.~(\ref{eq:evolution}) and~(\ref{eq:LOconvMod}), one finds:
   \sum_{j=g,q(\bar{q})}\int_x^1dy\,C_{ij}(y;\mu_0,\zeta_0)  \overline{f}_i\left(\frac{x}{y},\mu_0\right)\,.
 \end{equation}
 
-Matching and the evolution are affected by non-perturbative effects
-that become relevant at large $b$. In order to account for such
-effects, one usually introduces a phenomenological function
-$f_{\rm NP}$. In the traditional approach (CSS~\cite{Collins:2011zzd})
-the $b$-space TMDs get a multiplicative correction that does not
-depend on the flavour. In addition, the perturbative content of the
-TMDs is smoothly damped away at large $b$ by introducing the so-called
+Matching and evolution are affected by non-perturbative effects that
+become relevant at large $b$. In order to account for such effects,
+one usually introduces a phenomenological function $f_{\rm NP}$. In
+the traditional approach (CSS~\cite{Collins:2011zzd}), the $b$-space
+TMDs get a multiplicative correction that does not depend on the
+flavour. In addition, the perturbative content of the TMDs is smoothly
+damped away at large $b$ by introducing the so-called
 $b_*$-prescription:
 \begin{equation}\label{eq:LOconvNP1}
-  \overline{F}_i(x,b;\mu,\zeta) \rightarrow \overline{F}_i(x,b_*;\mu,\zeta) f_{\rm NP}(x,b,\zeta)\,,
+  \overline{F}_i(x,b;\mu,\zeta) \rightarrow \overline{F}_i(x,b_*(b);\mu,\zeta) f_{\rm NP}(x,b,\zeta)\,,
 \end{equation}
 where $b_*\equiv b_*(b)$ is a monotonic function of the impact
 parameter $b$ such that:
@@ -133,87 +133,84 @@ Eq.~(\ref{eq:integral2}) becomes:
 \begin{equation}\label{eq:integral3}
 \begin{array}{l}
 \displaystyle I_{ij}(x_1,x_2,q_T;\mu,\zeta) = \displaystyle \int_0^\infty db\,J_0(bq_T)\left[\frac{b}2 
-\mathcal{L}_{ij}(x_1,x_2,b_*(b);\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
+\overline{F}_i(x_1,b_*(b);\mu,\zeta) \overline{F}_{j}(x_2,b_*(b);\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
   f_{\rm NP}(x_2,b,\zeta) \right]\\
 \\
 \displaystyle =\frac{1}{q_T}\int_0^\infty d\bar{b}\,J_0(\bar{b})\left[\frac{\bar{b}}{2q_T} 
-\mathcal{L}_{ij}\left(x_1,x_2,b_*\left (\frac{\bar{b}}{q_T}\right);\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{\bar{b}}{q_T},\zeta\right)
+\overline{F}_i(x_1,b_*\left(\frac{\bar{b}}{q_T}\right);\mu,\zeta) \overline{F}_{j}(x_2,,b_*\left(\frac{\bar{b}}{q_T}\right);\mu,\zeta) f_{\rm NP}\left(x_1,\frac{\bar{b}}{q_T},\zeta\right)
   f_{\rm NP}\left(x_2,\frac{\bar{b}}{q_T},\zeta\right) \right]
-\,,
+\,.
 \end{array}
-\end{equation}
-with:
-\begin{equation}
-\mathcal{L}_{ij} (x_1,x_2,b_*;\mu,\zeta) \equiv
-\overline{F}_i(x_1,b_*;\mu,\zeta) \overline{F}_{j}(x_2,b_*;\mu,\zeta) \,.
 \end{equation}
 Eq.~(\ref{eq:integral3}) is a Hankel tranform and can be efficiently
 computed using the so-called Ogata quadrature~\cite{Ogata:quadrature}.
 Effectively, the computation of the integral in
 Eq.~(\ref{eq:integral}) is achieved through a weighted sum:
 \begin{equation}\label{eq:ogataquadrature}
-I_{ij}(x_1,x_2,q_T;\mu,\zeta) \simeq
+\begin{array}{rcl}
+I_{ij}(x_1,x_2,q_T;\mu,\zeta) &\simeq& \displaystyle
                                                      \frac1{q_T}\sum_{n=1}^N
                                                      \frac{w_n^{(0)}z_n^{(0)}}{2q_T} 
-\mathcal{L}_{ij}\left(x_1,x_2,b_*\left (\frac{z_n^{(0)}}{q_T}\right);\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{z_n^{(0)}}{q_T},\zeta\right)
+\overline{F}_i\left(x_1,b_*\left
+                                       (\frac{z_n^{(0)}}{q_T}\right);\mu,\zeta\right) \overline{F}_j\left(x_2,b_*\left (\frac{z_n^{(0)}}{q_T}\right);\mu,\zeta\right)\\
+\\
+&\times&\displaystyle f_{\rm NP}\left(x_1,\frac{z_n^{(0)}}{q_T},\zeta\right)
   f_{\rm NP}\left(x_2,\frac{z_n^{(0)}}{q_T},\zeta\right)\,,
+\end{array}
 \end{equation}
 where the unscaled coordinates $z_n^{(0)}$ and the weights $w_n^{(0)}$
-can be precomputed in terms of Bessel functions and one single
-parameter (see Ref.~\cite{Ogata:quadrature} for more details,
-specifically Eqs.~(5.1) and~(5.2))\footnote{The superscript 0 in
-  $z_n^{(0)}$ and $w_n^{(0)}$ indicates that here we are performing a
-  Hankel tranform that involves the Bessel function of degree zero
+can be precomputed in terms of the zero's of the Bessel function $J_0$
+and one single parameter (see Ref.~\cite{Ogata:quadrature} for more
+details, specifically Eqs.~(5.1) and~(5.2) or
+Appendix~\ref{app:OgataQuadrature} for the relevant formula to compute
+the unscaled coordinates and the weights)\footnote{The superscript 0
+  in $z_n^{(0)}$ and $w_n^{(0)}$ indicates that here we are performing
+  a Hankel tranform that involves the Bessel function of degree zero
   $J_0$. This is useful in view of the next section in which the
   integration over $q_T$ will give rise to a similar Hankel transform
   with $J_0$ replaced by $J_1$. Also in that case the Ogata quadrature
-  algorithm can be applied.}. Based on the (empirically verified)
-assumption that the absolute value of each term in the sum in the
-r.h.s. of Eq.~(\ref{eq:ogataquadrature}) is smaller than that of the
-preceding one, the truncation number $N$ is chosen dynamically in such
-a way that the $(N+1)$-th term is smaller in absolute value than a
-user-defined cutoff relatively to the sum of the preceding $N$
-terms. Eq.~(\ref{eq:ogataquadrature}) factors out the non-perturbative
-part of the calculation represented by $f_{\rm NP}$ from the
-perturbative content.
+  algorithm can be applied but coordinates and weights will be
+  different.}. Based on the (empirically verified) assumption that the
+absolute value of each term in the sum in the r.h.s. of
+Eq.~(\ref{eq:ogataquadrature}) is smaller than that of the preceding
+one, the truncation number $N$ is chosen dynamically in such a way
+that the $(N+1)$-th term is smaller in absolute value than a
+user-defined cutoff relatively to the sum of the preceding $N$ terms.
+
+Eq.~(\ref{eq:ogataquadrature}) factors out the non-perturbative part
+of the calculation represented by $f_{\rm NP}$ from the perturbative
+content. This is done on purpose to devise a method in which the
+perturbative content is precomputed and numerically convoluted with
+the non-perturbative functions \textit{a posteriori}. This is
+convenient in view of a fit of the function $f_{\rm NP}$.
 
 As customary in QCD, the most convenient basis for the matching in
 Eq.~(\ref{eq:LOconv}) is the so-called ``evolution'' basis
 (\textit{i.e.} $\Sigma$, $V$, $T_3$, $V_3$, etc.). In fact, in this
-basis the operators matrix $C_{ij}$ is almost diagonal with the only
+basis the operator matrix $C_{ij}$ is almost diagonal with the only
 exception of crossing terms that couple the gluon and the singlet
 $\Sigma$ distributions. As a consequence, this is the most convenient
 basis for the computation of $I_{ij}$. On the other hand, TMDs in
-Eq.~(\ref{eq:crosssection}) are in the so-called ``physical'' basis
+Eq.~(\ref{eq:crosssection}) appear in the so-called ``physical'' basis
 (\textit{i.e.} $d$, $\bar{d}$, $u$, $\bar{u}$, etc.). Therefore, we
-need to rotate $I_{ij}$ from the evolution basis, over which the
+need to rotate $F_{i(j)}$ from the evolution basis, over which the
 indices $i$ and $j$ run, to the physical basis. This is done by means
 of an appropriate constant matrix $T$, so that:
 \begin{equation}\label{eq:lumiInterRot}
-I_{q\bar{q}}(x_1,x_2,q_T;\mu,\zeta)= \sum_{ij}T_{qi}T_{\bar{q}j}I_{ij}(x_1,x_2,q_T;\mu,\zeta)\,.
+\overline{F}_{q}(x_1,b;\mu,\zeta)= \sum_{i}T_{qi}F_{i}(x_1,b;\mu,\zeta)\,,
 \end{equation}
-Putting all pieces together, one can conveniently write the cross
-section in Eq.~(\ref{eq:crosssection}) as:
+and similarly for $\overline{F}_{\bar{q}}$. Putting all pieces
+together, one can conveniently write the cross section in
+Eq.~(\ref{eq:crosssection}) as:
 \begin{equation}\label{eq:fastdiffxsec}
-  \frac{d\sigma}{dQ dy dq_T} =\sum_{n=1}^N w_n^{(0)} S\left(x_1,x_2,\frac{z_n^{(0)}}{q_T};\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{z_n^{(0)}}{q_T},\zeta\right) f_{\rm NP}\left(x_2,\frac{z_n^{(0)}}{q_T},\zeta\right)\,,
+  \frac{d\sigma}{dQ dy dq_T} \simeq\sum_{n=1}^N w_n^{(0)} \frac{z_n^{(0)}}{q_T}S\left(x_1,x_2,\frac{z_n^{(0)}}{q_T};\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{z_n^{(0)}}{q_T},\zeta\right) f_{\rm NP}\left(x_2,\frac{z_n^{(0)}}{q_T},\zeta\right)\,,
 \end{equation}
 with:
 \begin{equation}\label{eq:pertfact}
-\begin{array}{l}
-\displaystyle  S(x_1,x_2,b;\mu,\zeta) =
-  \frac{16\pi\alpha^2}{3N_c Q^3} H(Q,\mu) \frac{b}{2}\sum_q C_q(Q)
-  \sum_{ij}T_{qi}T_{\bar{q}j} 
-\mathcal{L}_{ij}\left(x_1,x_2,b_*(b);\mu,\zeta\right)\\
-\\
-\displaystyle =\frac{16\pi\alpha^2}{3N_c Q^3}
-    H(Q,\mu) \frac{b}{2}\sum_q C_q(Q) \left[
+S(x_1,x_2,b;\mu,\zeta) =\frac{16\pi\alpha^2}{3N_c Q^3}
+    H(Q,\mu) \frac{1}{2}\sum_q C_q(Q) \left[
 \overline{F}_q\left(x_1,b_*(b);\mu,\zeta \right)\right] \left[
-\overline{F}_{\bar{q}}\left(x_2,b_*(b);\mu,\zeta \right)\right]\,,
-\end{array}
-\end{equation}
-with:
-\begin{equation}
-\overline{F}_q(x_1,b;\mu,\zeta) = \sum_{i} T_{qi}\overline{F}_i(x_1,b;\mu,\zeta)\,.
+\overline{F}_{\bar{q}}\left(x_2,b_*(b);\mu,\zeta \right)\right]\,.
 \end{equation}
 Eq.~(\ref{eq:fastdiffxsec}) allows one to precompute the weights $S$
 in such a way that the differential cross section in
@@ -223,10 +220,9 @@ Eq.~(\ref{eq:pertfact}) is the fact that $S$ has five arguments. In
 actual facts, $S$ only depends on three independent variables. The
 reason is that $\mu$ and $\zeta$ are usually taken to be proportional
 to $Q$ by a constant factor. In addition $x_1$ and $x_2$ depend on $Q$
-and $y$ through Eq.~(\ref{eq:Bjorkenx12}). Therefore, as expected, the
-full dependence on the kinematics of the final state of
-Eq.~(\ref{eq:crosssection}) can be specified by $Q$, $y$ and $q_T$ or
-alternatively by $x_1$, $x_2$ and $q_T$.
+and $y$ through Eq.~(\ref{eq:Bjorkenx12}). Therefore, the full
+dependence on the kinematics of the final state of
+Eq.~(\ref{eq:crosssection}) can be specified by $Q$, $y$ and $q_T$.
 
 \section{Integrating over the final-state kinematic variables}
 
@@ -252,7 +248,7 @@ exploiting the following property of Bessel's function:
 dx\,x J_0(x) = x_2J_1(x_2) - x_1J_1(x_1)\,.
 \end{equation}
 To see it, we observe that the differential cross section in
-Eq.~(\ref{eq:crosssection}) has the following general structure:
+Eq.~(\ref{eq:crosssection}) has the following structure:
 \begin{equation}
   \frac{d\sigma}{dQ dy dq_T} \propto \int_0^\infty db\, q_T  J_0(bq_T)\dots
 \end{equation}
@@ -296,21 +292,12 @@ with:
 \end{equation}
 that can be computed using the Ogata quadrature as:
 \begin{equation}
-  K(Q,y,q_T) \simeq \sum_{n=1}^N w_n^{(1)} P\left(x_1,x_2,\frac{z_n^{(1)}}{q_T};\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{z_n^{(1)}}{q_T},\zeta\right) f_{\rm NP}\left(x_2,\frac{z_n^{(1)}}{q_T},\zeta\right)\,,
-\end{equation}
-where:
-\begin{equation}
-\begin{array}{rcl}
-P(x_1,x_2,b;\mu,\zeta) &=&\displaystyle
-  \frac1{b}S(x_1,x_2,b;\mu,\zeta) \\
-\\
-&=&\displaystyle\frac{16\pi\alpha^2}{3N_c Q^3}
-    H(Q,\mu) \frac{1}{2}\sum_q C_q(Q) \left[\overline{F}_q\left(x_1,b_*(b);\mu,\zeta \right)\right] \left[\overline{F}_{\bar{q}}\left(x_2,b_*(b);\mu,\zeta \right)\right]\,,
-\end{array}
+  K(Q,y,q_T) \simeq \sum_{n=1}^N w_n^{(1)} S\left(x_1,x_2,\frac{z_n^{(1)}}{q_T};\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{z_n^{(1)}}{q_T},\zeta\right) f_{\rm NP}\left(x_2,\frac{z_n^{(1)}}{q_T},\zeta\right)\,,
 \end{equation}
 with $S$ defined in Eq.~(\ref{eq:pertfact}). The unscaled coordinates
 $z_n^{(1)}$ and the weights $w_n^{(1)}$ can again be precomputed and
-stored. Eq.~(\ref{eq:primitive}) reduces the integration in $q_T$ to a
+stored in terms of the zero's of the Bessel function
+$J_1$. Eq.~(\ref{eq:primitive}) reduces the integration in $q_T$ to a
 calculation completely analogous to the unintegrated cross
 section. This is particularly convenient because it avoids the
 computation a numerical integration.
@@ -318,7 +305,7 @@ computation a numerical integration.
 \subsection{On the position of the peak of the $q_T$ distribution}
 
 It is interesting at this point to take a short detour to discuss the
-postion of the peak on the distribution in $q_T$ of the cross section
+position of the peak on the distribution in $q_T$ of the cross section
 in Eq.~(\ref{eq:crosssection}). The peak can be located by setting the
 derivative in $q_T$ of the cross section equal to zero. To do so, we
 use another property of Bessel's functions:
@@ -340,7 +327,7 @@ Using this relation, it is easy to see that:
   f_{\rm NP}(x_2,b,\zeta)\,,
 \end{array}
 \end{equation}
-that is equivalent to:
+that is equivalent to require that:
 \begin{equation}
   \sum_q C_q(Q)
   \int_0^\infty db\,b \left[J_0(bq_T) -bq_TJ_1(bq_T)\right] 
@@ -349,35 +336,35 @@ that is equivalent to:
 \end{equation}
 The integral above can be solved numerically using the technique
 discussed above and the value of $q_T$ that satisfies this equation
-can be found.
+represents the position of the peak of the $q_T$ distribution.
 
 \subsection{Integrating over $Q$ and $y$}
 
-As a final step we need to perform the integrals over $Q$ and $y$
+As a final step, we need to perform the integrals over $Q$ and $y$
 defined in Eq.~(\ref{eq:Intcrosssection}). To compute these integrals
 we can only rely on numerical methods. Having reduced the integration
 in $q_T$ to the difference of the two terms in the r.h.s. of
 Eq.~(\ref{eq:primitive}), we can concentrate on integrating the
-functions $K$ over $Q$ and $y$ for a fixed value of $q_T$:
+function $K$ over $Q$ and $y$ for a fixed value of $q_T$:
 \begin{equation}
 \widetilde{K}(q_T)=\int_{Q_{\rm min}}^{Q_{\rm max}}dQ \int_{y_{\rm
     min}}^{y_{\rm max}}dy\,K(Q,y,q_T)\,,
 \end{equation}
 such that:
-\begin{equation}\label{eq:Intcrosssection}
+\begin{equation}
   \widetilde{\sigma} = \widetilde{K} (q_{T,\rm max})- \widetilde{K} (q_{T,\rm min})\,.
 \end{equation}
 To this purpose, it is convenient to make explicit the dependence of
-$x_{1,2}$ on $Q$ and $y$ using Eq.~(\ref{eq:Bjorkenx12}). In addition,
-for the sake of simplicity we will identify the scales $\mu$ and
-$\sqrt{\zeta}$ with $Q$ (possible scale variations can be easily
+$x_1$ and $x_2$ on $Q$ and $y$ using Eq.~(\ref{eq:Bjorkenx12}). In
+addition, for the sake of simplicity we will identify the scales $\mu$
+and $\sqrt{\zeta}$ with $Q$ (possible scale variations can be easily
 reinstated at a later stage) and thus drop one of the arguments from
 the TMD distributions $\overline{F}$ and from the hard factor $H$.
 This yields:
 \begin{equation}\label{eq:finalintegral}
 \begin{array}{rcl}
-\displaystyle  \widetilde{K}(q_T) &=& \displaystyle\int_0^\infty db\, J_1(bq_T)
-  \frac{16\pi q_T}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\, 
+\displaystyle  \widetilde{K}(q_T) &=& \displaystyle \frac{16\pi q_T}{3N_c} \int_0^\infty db\, J_1(bq_T)
+  \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\, 
   \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
   \frac12 \\
 \\
@@ -390,27 +377,30 @@ This yields:
   f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right)\,.
 \end{array}
 \end{equation}
-Now we define a bidimensional grid in $\xi$, $\{\xi_\alpha\}$ with
-$\alpha=0,\dots,N_\xi$, and in $Q$, $\{Q_\tau\}$ with
-$\tau=0,\dots,N_Q$, each of which a set of interpolating functions $w$
-associated. This allows us to interpolate the pair of functions
-$f_{\rm NP}$ in Eq.~(\ref{eq:finalintegral}) for generic values of $\xi$
-and $Q$ as:
+Now we define one grid in $\xi$, $\{\xi_\alpha\}$ with
+$\alpha=0,\dots,N_\xi$, and one grid in $Q$, $\{Q_\tau\}$ with
+$\tau=0,\dots,N_Q$, each of which with a set of interpolating
+functions $\mathcal{I}$ associated. In addition, the grids are such
+that: $\xi_0 = e^{y_{\rm min}}$ and
+$\xi_{N_\xi} = e^{y_{\rm max}}$, and $Q_0 = Q_{\rm min}$ and
+$Q_{N_Q} = Q_{\rm max}$. This allows us to interpolate the pair of
+functions $f_{\rm NP}$ in Eq.~(\ref{eq:finalintegral}) for generic
+values of $\xi$ and $Q$ as:
 \begin{equation}
-f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\xi,b;Q\right) f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right) \simeq \sum_{\alpha=0}^{N_\xi}\sum_{\tau=0}^{N_Q}w_\alpha(\xi)w_\tau(Q) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,b;Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},b;Q_\tau\right)\,.
+f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\xi,b;Q\right) f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right) \simeq \sum_{\alpha=0}^{N_\xi}\sum_{\tau=0}^{N_Q}\mathcal{I}_\alpha(\xi)\mathcal{I}_\tau(Q) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,b;Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},b;Q_\tau\right)\,.
 \end{equation}
 Plugging the equation above into Eq.~(\ref{eq:finalintegral}) we
 obtain:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle\int_0^\infty db\, J_1(bq_T)
-  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\frac{16\pi q_T}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,w_\tau(Q)\, 
+\displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \frac{16\pi q_T}{3N_c} \int_0^\infty db\, J_1(bq_T)
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
   \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
   \frac12 \\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}d\xi\,w_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
+    min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*(b);Q\right)\Bigg] \\
 \\
 &\times& \displaystyle f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,b;Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},b;Q_\tau\right)\,.
@@ -421,13 +411,13 @@ quadrature as discussed above, so that:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \sum_{n=1}^N
-  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[w_n^{(1)}\frac{16\pi q_T}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,w_\tau(Q)\, 
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\frac{16\pi q_T}{3N_c} w_n^{(1)}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
   \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
   \frac12 \\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}d\xi\,w_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
+    min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*\left(\frac{z_n}{q_T}\right);Q\right)\Bigg] \\
 \\
 &\times& \displaystyle f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,.
@@ -436,37 +426,41 @@ quadrature as discussed above, so that:
 In conclusion, if we define:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle  W_{n\alpha\tau} & \equiv & \displaystyle w_n^{(1)}\frac{16\pi q_T}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,w_\tau(Q)\, 
-  \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
-  \frac12 \\
-\\
-&\times& \displaystyle 
-                         \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}d\xi\,w_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
-                         \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*\left(\frac{z_n}{q_T}\right);Q\right)\,,
+  \displaystyle  W_{n\tau\alpha} & \equiv & \displaystyle w_n^{(1)}\frac{16\pi q_T}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+                                            \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
+                                            \frac12 \\
+  \\
+                                 &\times& \displaystyle 
+                                          \int_{e^{y_{\rm
+                                          min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
+                                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*\left(\frac{z_n}{q_T}\right);Q\right)\,,
 \end{array}
 \end{equation}
 the quantity $\widetilde{K}(q_T)$ can be computed as:
 \begin{equation}\label{eq:finalinterpolated}
 \widetilde{K}(q_T) \simeq \sum_{n=1}^N
-  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi} W_{n\alpha\tau} f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,.
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi} W_{n\tau\alpha} f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,.
 \end{equation}
 The advantage of Eq.~(\ref{eq:finalinterpolated}) is that the weights
-$W_{n\alpha\tau}$ can be precomputed once and for all and used to fit
-the function $f_{\rm NP}$.
+$W_{n\alpha\tau}$, that clearly depend on $q_T$ and the intervals
+$[Q_{\rm min}:Q_{\rm max}]$ and $[y_{\rm min}:y_{\rm max}]$, can be
+precomputed once and for all for each of the experimental points
+included in a fit and used to determine the function $f_{\rm NP}$.
+This provides a fast tool for the computation of predictions that
+makes the extraction of the non-perturbative part of the TMDs much
+easier.
 
 \subsection{Narrow-width approximation}
 
 A possible alternative to the numerical integration in $Q$ when the
 integration region includes the $Z$-peak region is the so-called
 narrow-width approximation (NWA). In the NWA one assumes that the
-width of the $Z$ boson, $\Gamma_Z$, is much smaller than its mass
+width of the $Z$ boson, $\Gamma_Z$, is much smaller than its mass,
 $M_Z$. This way one can approximate the peaked behaviour of the
 couplings $C_q(Q)$ around $Q=M_Z$ with a $\delta$-function,
-\textit{i.e.}  $C_q(Q)\sim \delta(Q^2-M_Z^2)$. This way the
-integration over $Q$ can be done analytically essentially setting
-$Q=M_Z$ everywhere in the expression. The exact structure of the
-electroweak couplings is the following:
+\textit{i.e.}  $C_q(Q)\sim \delta(Q^2-M_Z^2)$. Therefore, the
+integration over $Q$ can be done analytically. The exact structure of
+the electroweak couplings is the following:
 \begin{equation}\label{eq:fullcoup}
 C_q(Q) = e_q^2 - 2 e_q V_q V_e \chi_1(Q) + (V_e^2 + A_e^2)(V_q^2 + A_q^2)\chi_2(Q)\,,
 \end{equation}
@@ -477,9 +471,8 @@ with:
 \displaystyle \chi_2(Q) = \frac{1}{16 \sin^4\theta_W\cos^4\theta_W} \frac{Q^4}{ (Q^2 - M_Z^2)^2 + M_Z^2 \Gamma_Z^2} \,.
 \end{array}
 \end{equation}
-In the limit in which the width $\Gamma_Z$ is much smaller that the
-$Z$ mass $M_Z$ ($\Gamma_Z/M_Z\rightarrow 0$), the leading contribution
-to the coupling in Eq.~(\ref{eq:fullcoup}) comes from the region
+In the limit $\Gamma_Z/M_Z\rightarrow 0$, the leading contribution to
+the coupling in Eq.~(\ref{eq:fullcoup}) comes from the region
 $Q\simeq M_Z$ and is that proportional to $\chi_2$:
 \begin{equation}\label{eq:partlead}
 C_q(Q) \simeq (V_e^2 + A_e^2)(V_q^2 + A_q^2)\chi_2(Q)\,,\quad Q\simeq M_Z\,.
@@ -495,35 +488,69 @@ Therefore, considering that:
 \end{equation}
 the electroweak couplings in the NWA have the following form:
 \begin{equation}\label{eq:partlead}
-C_q(Q) \simeq \frac{\pi M_Z (V_e^2 + A_e^2)(V_q^2 + A_q^2) }{32 \alpha
-  \sin^2\theta_W\cos^2\theta_W} \delta(Q-M_Z)\,,
+  C_q(Q) \simeq \frac{\pi M_Z (V_e^2 + A_e^2)(V_q^2 + A_q^2) }{32 \alpha
+    \sin^2\theta_W\cos^2\theta_W} \delta(Q-M_Z)=\widetilde{C}_q(Q) \delta(Q-M_Z)\,.
 \end{equation}
-such that the differential cross section in
-Eq.~(\ref{eq:crosssection}) becomes:
+Therefore, using Eq.~(\ref{eq:partlead}) the integral of the cross
+section over $Q$ under the condition that
+$Q_{\rm min}<M_Z<Q_{\rm max}$ has the consequence of adjusting the
+couplings and of setting $Q=M_Z$ in the computation. This yields:
 \begin{equation}
-\frac{d\sigma}{dQ dy dq_T} =
-\frac{2 q_T\pi^2\alpha}{3N_c M_Z^2} H(M_Z,M_Z) \sum_q \frac{(V_e^2 + A_e^2)(V_q^2 + A_q^2) }{
-  4\sin^2\theta_W\cos^2\theta_W} I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2) \delta(Q-M_Z)\,.
+\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\frac{d\sigma}{dQ dy dq_T} =
+ \frac{16\pi\alpha^2q_T}{3N_c M_Z^3} H(M_Z,M_Z) \sum_q \widetilde{C}_q(M_Z)
+  I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2)\,,
 \end{equation}
-Integrating the cross section over $Q$ under the condition that
-$Q_{\rm min}<M_Z<Q_{\rm max}$ yields:
-\begin{equation}
-\frac{d\sigma}{dy dq_T} = \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\frac{d\sigma}{dQ dy dq_T} =
-\frac{2 q_T\pi^2\alpha}{3N_c M_Z^2} H(M_Z,M_Z) \sum_q \frac{(V_e^2 + A_e^2)(V_q^2 + A_q^2) }{
-  4\sin^2\theta_W\cos^2\theta_W} I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2)\,.
-\end{equation}
-As a final step, one may want to let the $Z$ boson decay into
-leptons. At leading order in the EW sector and assuming an equal decay
-rate for electrons, muons, and taus, this can be done by multiplying
-the cross section above by three times the branching ratio for the $Z$
-decaying into any pair of leptons,
-$\mbox{Br}(Z\rightarrow \ell^+\ell^-)$:
-\begin{equation}
-\frac{d\sigma}{dy dq_T} = 
-\frac{2 q_T \mbox{Br}(Z\rightarrow \ell^+\ell^-)\pi^2\alpha}{N_c M_Z^2} H(M_Z,M_Z) \sum_q \frac{(V_e^2 + A_e^2)(V_q^2 + A_q^2) }{
-  4\sin^2\theta_W\cos^2\theta_W} I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2)\,.
-\end{equation}
+where we are also assuming that $\mu=\sqrt{\zeta}=M_Z$. As a final
+step, one may want to let the $Z$ boson decay into leptons. At leading
+order in the EW sector and assuming an equal decay rate for electrons,
+muons, and tauons, this can be done by multiplying the cross section
+above by three times the branching ratio for the $Z$ decaying into any
+pair of leptons, $3\mbox{Br}(Z\rightarrow \ell^+\ell^-)$.
 
+\appendix
+
+\section{Ogata quadrature}\label{app:OgataQuadrature}
+
+In this section we limit ourselves to write the formulas for the
+computation of the unscaled coordinates $z_n^{(\nu)}$ and weights
+$w_n^{(\nu)}$ required to compute the following integral:
+\begin{equation}\label{eq:OgataQuadMast}
+I_\nu(q_T)=\int_0^\infty db J_\nu(bq_T) f\left(b\right) =
+\frac1{q_T}\int_0^\infty d\bar{b} J_\nu(\bar{b})
+f\left(\frac{\bar{b}}{q_T}\right) \simeq
+\frac{1}{q_T}\sum_{n=1}^\infty
+w_n^{(\nu)}f\left(\frac{z_n^{(\nu)}}{q_T}\right)\quad \nu =0,1,\dots\,,
+\end{equation}
+using the Ogata-quadrature algorithm. More details can be found in
+Ref.~\cite{Ogata:quadrature}. There relevant formaulas are:
+\begin{equation}
+\begin{array}{l}
+\displaystyle z_n^{(\nu)} = \frac{\pi}{h}  \psi\left(\frac{h\xi_{\nu
+  n}}{\pi}\right)\,,\\
+\\
+\displaystyle w_n^{(\nu)}  = \frac{Y_\nu(\xi_{\nu
+  n})}{J_{\nu+1}(\xi_{\nu n})}  J_\nu(z_n^{(\nu)})  \psi'\left(\frac{h\xi_{\nu
+  n}}{\pi}\right)\,.
+\end{array}
+\end{equation}
+where:
+\begin{itemize}
+\item $h$ is a free parameter of the algorithm that hat to be
+  typically small (we choose $h = 10^{-3}$),
+\item $\xi_{\nu n}$ are the zero's of $J_\nu$, \textit{i.e.}
+  $J_\nu(\xi_{\nu n}) = 0$ $\forall\, n$,
+\item $J_\nu$ and $Y_\nu$ are the Bessel functions of first and second
+  kind, respectively, of degree $\nu$,
+\item $\psi$ is the following function:
+\begin{equation}
+\psi(t) = t\tanh\left(\frac{\pi}{2}\sinh t\right)
+\end{equation}
+and its derivative:
+\begin{equation}
+\psi'(t) =  \frac{\pi t \cosh t + \sinh( \pi \sinh t ) }{1 +
+  \cosh( \pi \sinh t  ) }\,.
+\end{equation}
+\end{itemize}
 
 \begin{thebibliography}{alp}
 
