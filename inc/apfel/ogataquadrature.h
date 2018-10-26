@@ -22,10 +22,12 @@ namespace apfel
   public:
     /**
      * @brief The Integrator constructor.
+     * @param nu: the order of the Bessel function (default: 0)
      * @param CutOff: the accuracy computed as a cutoff on the size of the last computed term relative to the total (default: 10<SUP>-5</SUP>)
      * @param h: internal variable of the algorithm (default: 0.001)
      */
-    OgataQuadrature(double const& CutOff = 1e-5,
+    OgataQuadrature(int    const& nu = 0,
+		    double const& CutOff = 1e-5,
 		    double const& h = 0.001);
 
     /**
@@ -57,8 +59,9 @@ namespace apfel
      * Bessel function J0. This function essentially generates the
      * std::vector<double> j0Zeros above. This function requires BOOST
      * and thus it is not available by defaults.
+     * @param nu: the order of the Bessel function
      */
-    void J0ZerosGenerator() const;
+    void JnuZerosGenerator(int const& nu) const;
 
   private:
     double              const _CutOff;  //!< The target accuracy parameter

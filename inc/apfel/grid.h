@@ -37,17 +37,17 @@ namespace apfel
     /**
      * @return The number of subgrids
      */
-    int            nGrids()           const { return _GlobalGrid.size(); }
+    int nGrids() const { return _GlobalGrid.size(); }
 
     /**
      * @return The locking flag
      */
-    bool           Locked()           const { return _Locked; }
+    bool Locked() const { return _Locked; }
 
     /**
      * @return The external-grid flag
      */
-    bool           ExtGrids()         const { return _ExtGrids; }
+    bool ExtGrids() const { return _ExtGrids; }
 
     /**
      * @return The ig-th SubGrid

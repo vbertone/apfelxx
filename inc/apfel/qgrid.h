@@ -107,7 +107,8 @@ namespace apfel
     double Interpolant(int const& tQ, int const& tau, double const& fq) const;
 
     /**
-     * @brief Computes the control parameter of the interpolant, the lower and upper bounds over which the sum is limited.
+     * @brief Computes the control parameter of the interpolant, the
+     * lower and upper bounds over which the sum is limited.
      * @param Q: the value of the required interpolation
      * @return the lower and upper bounds of tau
      */

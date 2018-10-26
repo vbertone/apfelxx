@@ -207,8 +207,8 @@ Eq.~(\ref{eq:crosssection}) as:
 \end{equation}
 with:
 \begin{equation}\label{eq:pertfact}
-S(x_1,x_2,b;\mu,\zeta) =\frac{16\pi\alpha^2}{3N_c Q^3}
-    H(Q,\mu) \frac{1}{2}\sum_q C_q(Q) \left[
+S(x_1,x_2,b;\mu,\zeta) =\frac{8\pi\alpha^2}{3N_c Q^3}
+    H(Q,\mu) \sum_q C_q(Q) \left[
 \overline{F}_q\left(x_1,b_*(b);\mu,\zeta \right)\right] \left[
 \overline{F}_{\bar{q}}\left(x_2,b_*(b);\mu,\zeta \right)\right]\,.
 \end{equation}
@@ -283,10 +283,10 @@ with:
 \begin{equation}
 \begin{array}{l}
  \displaystyle K(Q,y,q_T) =
-  \frac{16\pi\alpha^2q_T}{3N_c Q^3} H(Q,\mu) \\
+  \frac{8\pi\alpha^2q_T}{3N_c Q^3} H(Q,\mu) \\
 \\
 \displaystyle \times\sum_q C_q(Q)
-  \frac12\int_0^\infty db\, J_1(bq_T) \overline{F}_q(x_1,b;\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b;\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
+  \int_0^\infty db\, J_1(bq_T) \overline{F}_q(x_1,b;\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b;\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
   f_{\rm NP}(x_2,b,\zeta)\,,
 \end{array}
 \end{equation}
@@ -318,8 +318,8 @@ Using this relation, it is easy to see that:
 \displaystyle 0 = \frac{d}{dq_T}  \left[\frac{d\sigma}{dQ dy dq_T}\right]
   =\\
 \\
-\displaystyle  \frac{16\pi\alpha^2}{3N_c Q^3} H(Q,\mu) \sum_q C_q(Q)
-  \frac12\int_0^\infty db\,b \left[J_0(bq_T) -bq_TJ_1(bq_T)\right] 
+\displaystyle  \frac{8\pi\alpha^2}{3N_c Q^3} H(Q,\mu) \sum_q C_q(Q)
+  \int_0^\infty db\,b \left[J_0(bq_T) -bq_TJ_1(bq_T)\right] 
 \overline{F}_q(x_1,b_*(b);\mu,\zeta)
   \overline{F}_{\bar{q}}(x_2,b_*(b);\mu,\zeta)\\
 \\
@@ -363,10 +363,9 @@ the TMD distributions $\overline{F}$ and from the hard factor $H$.
 This yields:
 \begin{equation}\label{eq:finalintegral}
 \begin{array}{rcl}
-\displaystyle  \widetilde{K}(q_T) &=& \displaystyle \frac{16\pi q_T}{3N_c} \int_0^\infty db\, J_1(bq_T)
+\displaystyle  \widetilde{K}(q_T) &=& \displaystyle \frac{8\pi}{3N_c} \int_0^\infty db\, J_1(bq_T)
   \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\, 
-  \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
-  \frac12 \\
+  \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)\\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
@@ -393,10 +392,10 @@ Plugging the equation above into Eq.~(\ref{eq:finalintegral}) we
 obtain:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \frac{16\pi q_T}{3N_c} \int_0^\infty db\, J_1(bq_T)
+\displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \frac{8\pi}{3N_c} \int_0^\infty db\, J_1(bq_T)
   \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
   \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
-  \frac12 \\
+  \\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
@@ -411,9 +410,9 @@ quadrature as discussed above, so that:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \sum_{n=1}^N
-  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\frac{16\pi q_T}{3N_c} w_n^{(1)}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\frac{8\pi}{3N_c} w_n^{(1)}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
   \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
-  \frac12 \\
+\\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
@@ -426,9 +425,9 @@ quadrature as discussed above, so that:
 In conclusion, if we define:
 \begin{equation}
 \begin{array}{rcl}
-  \displaystyle  W_{n\tau\alpha} & \equiv & \displaystyle w_n^{(1)}\frac{16\pi q_T}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+  \displaystyle  W_{n\tau\alpha} & \equiv & \displaystyle w_n^{(1)}\frac{8\pi}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
                                             \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
-                                            \frac12 \\
+                                            \\
   \\
                                  &\times& \displaystyle 
                                           \int_{e^{y_{\rm
@@ -522,13 +521,13 @@ f\left(\frac{\bar{b}}{q_T}\right) \simeq
 w_n^{(\nu)}f\left(\frac{z_n^{(\nu)}}{q_T}\right)\quad \nu =0,1,\dots\,,
 \end{equation}
 using the Ogata-quadrature algorithm. More details can be found in
-Ref.~\cite{Ogata:quadrature}. There relevant formaulas are:
+Ref.~\cite{Ogata:quadrature}. There relevant formulas are:
 \begin{equation}
 \begin{array}{l}
 \displaystyle z_n^{(\nu)} = \frac{\pi}{h}  \psi\left(\frac{h\xi_{\nu
   n}}{\pi}\right)\,,\\
 \\
-\displaystyle w_n^{(\nu)}  = \frac{Y_\nu(\xi_{\nu
+\displaystyle w_n^{(\nu)}  = \pi\frac{Y_\nu(\xi_{\nu
   n})}{J_{\nu+1}(\xi_{\nu n})}  J_\nu(z_n^{(\nu)})  \psi'\left(\frac{h\xi_{\nu
   n}}{\pi}\right)\,.
 \end{array}
