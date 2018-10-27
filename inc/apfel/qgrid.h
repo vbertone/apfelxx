@@ -63,6 +63,18 @@ namespace apfel
 	  int                 const& InterDegree,
 	  std::vector<double> const& Thresholds,
 	  double              const& Lambda = 0.25);
+
+    /**
+     * @brief The QGrid constructor.
+     * @param Qg: the user-defined interpolation grid
+     * @param InterDegree: the interpolation degree
+     * @note This constructor assumes that the function used to
+     * compute the interpolating functions is linear. In addition, the
+     * input vector 'Qg' is assumed to be ordered and
+     * 'well-behaved'. To be used with care.
+     */
+    QGrid(std::vector<double> const& Qg,
+	  int                 const& InterDegree);
     ///@}
 
     /**

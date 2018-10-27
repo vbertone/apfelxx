@@ -113,6 +113,23 @@ namespace apfel {
     t.stop();
   }
 
+  //_________________________________________________________________________________
+  template<class T>
+  TabulateObject<T>::TabulateObject(std::function<T(double const&)> const& Object,
+				    std::vector<double>             const& Qg,
+				    int                             const& InterDegree):
+    QGrid<T>(Qg, InterDegree)
+  {
+    report("Tabulating object... ");
+    Timer t;
+
+    // Fill in Qgrid with the object.
+    for (auto const& iQ : this->_Qg)
+      this->_GridValues.push_back(Object(iQ));
+
+    t.stop();
+  }
+
   // Specializations
   //_________________________________________________________________________________
   template class TabulateObject<double>;

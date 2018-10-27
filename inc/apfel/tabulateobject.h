@@ -68,7 +68,7 @@ namespace apfel
 
     /**
      * @brief The TabulateObject constructor for a Q dependent
-     * object tabulated on a used given distribution in Q.
+     * object tabulated on a user-defined distribution in Q.
      * @param Object: the T-valued function to be tabulated in Q
      * @param nQ: the number of on nodes of the grid in Q
      * @param QMin: the lower bound of the grid in Q
@@ -85,6 +85,17 @@ namespace apfel
 		   std::vector<double>                  const& Thresholds,
 		   std::function<double(double const&)> const& TabFunc,
 		   std::function<double(double const&)> const& InvTabFunc);
+
+    /**
+     * @brief The TabulateObject constructor for a Q dependent
+     * object tabulated on a user-defined grid.
+     * @param Object: the T-valued function to be tabulated in Q
+     * @param Qg: the user-defined interpolation grid
+     * @param InterDegree: the interpolation degree on the grid in Q
+     */
+    TabulateObject(std::function<T(double const&)> const& Object,
+		   std::vector<double>             const& Qg,
+		   int                             const& InterDegree);
     ///@}
 
     /**

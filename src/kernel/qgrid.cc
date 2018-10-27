@@ -39,7 +39,6 @@ namespace apfel
     // Check that "TabFunc" and "InvTabFunc" are actually the inverse
     // function of each other. The check is done at grid bounds and in
     // the middle.
-
     const std::vector<double> TestPoints{_QMin, ( _QMax +  _QMin ) / 2, _QMax};
     for (auto const& p : TestPoints)
       {
@@ -52,17 +51,16 @@ namespace apfel
     const int nfin = NF(_QMin, _Thresholds);
     const int nffi = NF(_QMax, _Thresholds);
 
-    // Compute a temporary grid constant in ln(ln(Q^2/Lambda^2)
-    // without taking into account the threholds.
+    // Compute a temporary grid constant in '_TabFunc(Q)' without
+    // taking into account the threholds.
     std::vector<double> fq = {_TabFunc(_QMin)};
     double Step = ( _TabFunc(_QMax) - _TabFunc(_QMin) ) / _nQ;
     for (int iq = 1; iq <= _nQ; iq++)
       fq.push_back(fq.back()+Step);
 
     // Identify the indices of the grid points that fall right below
-    // the thresholds.  This will define the number of points that
-    // fall in each interval defined by the grid bounds and the
-    // thresholds.
+    // the thresholds. This will define the number of points that fall
+    // in each interval defined by the grid bounds and the thresholds.
     _nQg.push_back(0);
     std::vector<double> fqTh = {_TabFunc(_QMin)};
     for (int isg = nfin+1; isg <= nffi; isg++)
@@ -86,7 +84,8 @@ namespace apfel
       }
 
     // Adjust _nQ if needed.
-    if (_nQ != _nQg.back()) _nQ = _nQg.back();
+    if (_nQ != _nQg.back())
+      _nQ = _nQg.back();
 
     // Now construct the actual grid in such a way that the threshold
     // concides with nodes of the grid.
@@ -94,7 +93,8 @@ namespace apfel
     for (int isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
 	Step = ( fqTh[isg+1] - fqTh[isg] ) / ( _nQg[isg+1] - _nQg[isg] - 1 );
-	for (int iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++) _fQg.push_back(_fQg.back()+Step);
+	for (int iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++)
+	  _fQg.push_back(_fQg.back()+Step);
 	_fQg.push_back(_fQg.back());
       }
 
@@ -128,6 +128,22 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<class T>
+  QGrid<T>::QGrid(std::vector<double> const& Qg,
+		  int                 const& InterDegree):
+    _nQ(Qg.size()-1),
+    _QMin(Qg.front()),
+    _QMax(Qg.back()),
+    _InterDegree(InterDegree),
+    _Thresholds{},
+    _TabFunc([] (double const& Q)->double{ return Q; }),
+    _Qg(Qg),
+    _fQg(Qg),
+    _nQg{0, _nQ}
+  {
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
   double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& fq) const
   {
     // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless
@@ -136,23 +152,23 @@ namespace apfel
       return 1;
 
     // Define the lower bound of the interpolation range.
-    int bound = tau + tQ - _InterDegree;
-    if (_InterDegree > tau + tQ)
-      bound = 0;
-    //if (fq < _fQg[bound] || fq >= _fQg[tau+tQ+1])
-    //  return 0;
+    const int bound = std::max(tau + tQ - _InterDegree, 0);
+
+    // Return zero if fq is outside the allowed range.
+    if (fq < _fQg[bound] || fq >= _fQg[std::min(tau + tQ + 1, _nQ)])
+      return 0;
 
     // Initialize interpolant
     double w_int = 1;
 
-    // Find the the neighbors of "Q" on the grid
+    // Find the the neighbours of "Q" on the grid
     int j;
-    for (j = tau+tQ-bound; j >=0; j--)
+    for (j = tau + tQ - bound; j >= 0; j--)
       if (fq < _fQg[tau+tQ-j+1])
 	break;
 
     // Compute the interpolant
-    for (int delta = tau-j; delta <= tau-j+_InterDegree; delta++)
+    for (int delta = tau - j; delta <= tau - j + _InterDegree; delta++)
       if (delta != tau)
 	w_int *= ( fq - _fQg[delta] ) / ( _fQg[tau] - _fQg[delta] );
 

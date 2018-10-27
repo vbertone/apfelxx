@@ -30,16 +30,15 @@ region in which the TMD factorisation applies, $i.e.$ $q_T \ll
 Q$. After some minor manipulations, it reads:
 \begin{equation}\label{eq:crosssection}
   \frac{d\sigma}{dQ dy dq_T} =
-  \frac{16\pi\alpha^2q_T}{3N_c Q^3} H(Q,\mu) \sum_q C_q(Q)
+  \frac{16\pi\alpha^2q_T}{9 Q^3} H(Q,\mu) \sum_q C_q(Q)
   \int\frac{d^2\mathbf{b}}{4\pi} e^{i \mathbf{b}\cdot \mathbf{q}_T} \overline{F}_q(x_1,\mathbf{b};\mu,\zeta) \overline{F}_{\bar{q}}(x_2,\mathbf{b};\mu,\zeta)\,,
 \end{equation}
 where $Q$, $y$, and $q_T$ are the invariant mass, the rapidity, and
 the transverse momentum of the lepton pair, respectively, while
-$N_c=3$ is the number of colours, $\alpha$ is the electromagnetic
-coupling, $H$ is the appropriate QCD hard factor that can be
-perturbatively computed, and $C_q$ are the effective electroweak
-charges. In addition, the variables $x_1$ and $x_2$ are functions of
-$Q$ and $y$ and are given by:
+$\alpha$ is the electromagnetic coupling, $H$ is the appropriate QCD
+hard factor that can be perturbatively computed, and $C_q$ are the
+effective electroweak charges. In addition, the variables $x_1$ and
+$x_2$ are functions of $Q$ and $y$ and are given by:
 \begin{equation}\label{eq:Bjorkenx12}
   x_{1,2} = \frac{Q}{\sqrt{s}}e^{\pm y}\,,
 \end{equation}
@@ -207,7 +206,7 @@ Eq.~(\ref{eq:crosssection}) as:
 \end{equation}
 with:
 \begin{equation}\label{eq:pertfact}
-S(x_1,x_2,b;\mu,\zeta) =\frac{8\pi\alpha^2}{3N_c Q^3}
+S(x_1,x_2,b;\mu,\zeta) =\frac{8\pi\alpha^2}{9 Q^3}
     H(Q,\mu) \sum_q C_q(Q) \left[
 \overline{F}_q\left(x_1,b_*(b);\mu,\zeta \right)\right] \left[
 \overline{F}_{\bar{q}}\left(x_2,b_*(b);\mu,\zeta \right)\right]\,.
@@ -283,10 +282,10 @@ with:
 \begin{equation}
 \begin{array}{l}
  \displaystyle K(Q,y,q_T) =
-  \frac{8\pi\alpha^2q_T}{3N_c Q^3} H(Q,\mu) \\
+  \frac{8\pi\alpha^2q_T}{9 Q^3} H(Q,\mu) \\
 \\
-\displaystyle \times\sum_q C_q(Q)
-  \int_0^\infty db\, J_1(bq_T) \overline{F}_q(x_1,b;\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b;\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
+\displaystyle \times
+  \int_0^\infty db\, J_1(bq_T) \sum_q C_q(Q)\overline{F}_q(x_1,b;\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b;\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
   f_{\rm NP}(x_2,b,\zeta)\,,
 \end{array}
 \end{equation}
@@ -318,9 +317,9 @@ Using this relation, it is easy to see that:
 \displaystyle 0 = \frac{d}{dq_T}  \left[\frac{d\sigma}{dQ dy dq_T}\right]
   =\\
 \\
-\displaystyle  \frac{8\pi\alpha^2}{3N_c Q^3} H(Q,\mu) \sum_q C_q(Q)
+\displaystyle  \frac{8\pi\alpha^2}{9 Q^3} H(Q,\mu) 
   \int_0^\infty db\,b \left[J_0(bq_T) -bq_TJ_1(bq_T)\right] 
-\overline{F}_q(x_1,b_*(b);\mu,\zeta)
+\sum_q C_q(Q)\overline{F}_q(x_1,b_*(b);\mu,\zeta)
   \overline{F}_{\bar{q}}(x_2,b_*(b);\mu,\zeta)\\
 \\
 \displaystyle \times f_{\rm NP}(x_1,b,\zeta)
@@ -329,9 +328,8 @@ Using this relation, it is easy to see that:
 \end{equation}
 that is equivalent to require that:
 \begin{equation}
-  \sum_q C_q(Q)
   \int_0^\infty db\,b \left[J_0(bq_T) -bq_TJ_1(bq_T)\right] 
-  \overline{F}_q(x_1,b_*(b);\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b_*(b);\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
+  \sum_q C_q(Q)\overline{F}_q(x_1,b_*(b);\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b_*(b);\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
   f_{\rm NP}(x_2,b,\zeta) = 0\,.
 \end{equation}
 The integral above can be solved numerically using the technique
@@ -363,28 +361,28 @@ the TMD distributions $\overline{F}$ and from the hard factor $H$.
 This yields:
 \begin{equation}\label{eq:finalintegral}
 \begin{array}{rcl}
-\displaystyle  \widetilde{K}(q_T) &=& \displaystyle \frac{8\pi}{3N_c} \int_0^\infty db\, J_1(bq_T)
-  \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\, 
-  \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)\\
+\displaystyle  \widetilde{K}(q_T) &=& \displaystyle \frac{8\pi}{9} \int_0^\infty db\, J_1(bq_T)
+  \int_{Q_{\rm min}}^{Q_{\rm max}}
+  \frac{dQ}{Q^3} \alpha^2(Q) H(Q) \\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}d\xi\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
+    min}}}^{e^{y_{\rm max}}}\frac{d\xi}{\xi} \sum_q C_q(Q)\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*(b);Q\right) \\
 \\
 &\times& \displaystyle f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\xi,b;Q\right)
-  f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right)\,.
+  f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right)\,,
 \end{array}
 \end{equation}
-Now we define one grid in $\xi$, $\{\xi_\alpha\}$ with
+where we have performed the change of variable $e^{y} = \xi$. Now we
+define one grid in $\xi$, $\{\xi_\alpha\}$ with
 $\alpha=0,\dots,N_\xi$, and one grid in $Q$, $\{Q_\tau\}$ with
 $\tau=0,\dots,N_Q$, each of which with a set of interpolating
 functions $\mathcal{I}$ associated. In addition, the grids are such
-that: $\xi_0 = e^{y_{\rm min}}$ and
-$\xi_{N_\xi} = e^{y_{\rm max}}$, and $Q_0 = Q_{\rm min}$ and
-$Q_{N_Q} = Q_{\rm max}$. This allows us to interpolate the pair of
-functions $f_{\rm NP}$ in Eq.~(\ref{eq:finalintegral}) for generic
-values of $\xi$ and $Q$ as:
+that: $\xi_0 = e^{y_{\rm min}}$ and $\xi_{N_\xi} = e^{y_{\rm max}}$,
+and $Q_0 = Q_{\rm min}$ and $Q_{N_Q} = Q_{\rm max}$. This allows us to
+interpolate the pair of functions $f_{\rm NP}$ in
+Eq.~(\ref{eq:finalintegral}) for generic values of $\xi$ and $Q$ as:
 \begin{equation}
 f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\xi,b;Q\right) f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right) \simeq \sum_{\alpha=0}^{N_\xi}\sum_{\tau=0}^{N_Q}\mathcal{I}_\alpha(\xi)\mathcal{I}_\tau(Q) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,b;Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},b;Q_\tau\right)\,.
 \end{equation}
@@ -392,14 +390,14 @@ Plugging the equation above into Eq.~(\ref{eq:finalintegral}) we
 obtain:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \frac{8\pi}{3N_c} \int_0^\infty db\, J_1(bq_T)
+\displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \frac{8\pi}{9} \int_0^\infty db\, J_1(bq_T)
   \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
-  \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
+  \frac{1}{Q^3} \alpha^2(Q) H(Q) 
   \\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
+    min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \sum_q C_q(Q)\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*(b);Q\right)\Bigg] \\
 \\
 &\times& \displaystyle f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,b;Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},b;Q_\tau\right)\,.
@@ -410,13 +408,13 @@ quadrature as discussed above, so that:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle  \widetilde{K}(q_T) &\simeq& \displaystyle \sum_{n=1}^N
-  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\frac{8\pi}{3N_c} w_n^{(1)}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
-  \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi}\Bigg[\frac{8\pi}{9} w_n^{(1)}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+  \frac{1}{Q^3} \alpha^2(Q) H(Q) 
 \\
 \\
 &\times& \displaystyle 
                          \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
+    min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \sum_q C_q(Q)\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*\left(\frac{z_n}{q_T}\right);Q\right)\Bigg] \\
 \\
 &\times& \displaystyle f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,.
@@ -425,29 +423,29 @@ quadrature as discussed above, so that:
 In conclusion, if we define:
 \begin{equation}
 \begin{array}{rcl}
-  \displaystyle  W_{n\tau\alpha} & \equiv & \displaystyle w_n^{(1)}\frac{8\pi}{3N_c} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
-                                            \frac{\alpha^2(Q)}{Q^3} H(Q) \sum_q C_q(Q)
+  \displaystyle  W_{n\tau\alpha}(q_T) & \equiv & \displaystyle w_n^{(1)}\frac{8\pi}{9} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+                                            \frac{\alpha^2(Q)}{Q^3} H(Q) 
                                             \\
   \\
                                  &\times& \displaystyle 
                                           \int_{e^{y_{\rm
-                                          min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \,\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
+                                          min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \sum_q C_q(Q)\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
                                           \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*\left(\frac{z_n}{q_T}\right);Q\right)\,,
 \end{array}
 \end{equation}
 the quantity $\widetilde{K}(q_T)$ can be computed as:
 \begin{equation}\label{eq:finalinterpolated}
 \widetilde{K}(q_T) \simeq \sum_{n=1}^N
-  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi} W_{n\tau\alpha} f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,.
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi} W_{n\tau\alpha}(q_T) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,.
 \end{equation}
 The advantage of Eq.~(\ref{eq:finalinterpolated}) is that the weights
-$W_{n\alpha\tau}$, that clearly depend on $q_T$ and the intervals
-$[Q_{\rm min}:Q_{\rm max}]$ and $[y_{\rm min}:y_{\rm max}]$, can be
-precomputed once and for all for each of the experimental points
-included in a fit and used to determine the function $f_{\rm NP}$.
-This provides a fast tool for the computation of predictions that
-makes the extraction of the non-perturbative part of the TMDs much
-easier.
+$W_{n\alpha\tau}$, that clearly depend on $q_T$ but also on the
+intervals $[Q_{\rm min}:Q_{\rm max}]$ and $[y_{\rm min}:y_{\rm max}]$,
+can be precomputed once and for all for each of the experimental
+points included in a fit and used to determine the function
+$f_{\rm NP}$.  This provides a fast tool for the computation of
+predictions that makes the extraction of the non-perturbative part of
+the TMDs much easier.
 
 \subsection{Narrow-width approximation}
 
@@ -496,7 +494,7 @@ $Q_{\rm min}<M_Z<Q_{\rm max}$ has the consequence of adjusting the
 couplings and of setting $Q=M_Z$ in the computation. This yields:
 \begin{equation}
 \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\frac{d\sigma}{dQ dy dq_T} =
- \frac{16\pi\alpha^2q_T}{3N_c M_Z^3} H(M_Z,M_Z) \sum_q \widetilde{C}_q(M_Z)
+ \frac{16\pi\alpha^2q_T}{9 M_Z^3} H(M_Z,M_Z) \sum_q \widetilde{C}_q(M_Z)
   I_{q\bar{q}}(x_1,x_2,q_T;M_Z,M_Z^2)\,,
 \end{equation}
 where we are also assuming that $\mu=\sqrt{\zeta}=M_Z$. As a final
