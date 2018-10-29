@@ -23,13 +23,6 @@ namespace apfel {
     MatchedEvolution(AlphaRef, MuRef, Thresholds, nstep),
     _pt(pt)
   {
-    // Initialize all coefficients of the QCD beta function for all
-    // numbers of flavours.
-    _bQCD.resize(4,4);
-    for (int ipt = 0; ipt <= 3; ipt++)
-	for (int nf = 3; nf <= 6; nf++)
-	_bQCD(nf-3, ipt) = betaQCD(ipt, nf);
-
     // Compute logs of muth2 / m2 needed by the matching conditions.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
@@ -44,7 +37,7 @@ namespace apfel {
 	double bt = 0, powas = as * as;
 	for (int i = 0; i <= _pt; i++)
 	  {
-	    bt -= powas * _bQCD(nf-3, i);
+	    bt -= powas * betaQCD(i, nf);
 	    powas *= as;
 	  }
 	return bt;
@@ -88,14 +81,14 @@ namespace apfel {
   double AlphaQCD::betaQCD(int const& pt, int const& nf) const
   {
     double res;
-    if ( pt == 0 )
-      res = beta0(nf);
-    else if ( pt == 1 )
-      res = beta1(nf);
-    else if ( pt == 2 )
-      res = beta2(nf);
-    else if ( pt == 3 )
-      res = beta3(nf);
+    if (pt == 0)
+      res = beta0qcd(nf);
+    else if (pt == 1)
+      res = beta1qcd(nf);
+    else if (pt == 2)
+      res = beta2qcd(nf);
+    else if (pt == 3)
+      res = beta3qcd(nf);
     else
       throw std::runtime_error(error("AlphaQCD::betaQCD","perturbive range out-of-range."));
 

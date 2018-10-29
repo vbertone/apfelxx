@@ -70,8 +70,8 @@ namespace apfel
 
     /**
      * @brief Function that returns QCD \f$\beta\f$ function.
-     * @param as value of the coupling
-     * @param nf number of active flavours
+     * @param as: value of the coupling
+     * @param nf: number of active flavours
      * @return The the value of the QCD \f$\beta\f$ function
      */
     double Derivative(int const& nf, double const&, double const& as) const;
@@ -86,7 +86,6 @@ namespace apfel
 
   private:
     int                                                      const _pt;                    //!< Perturbative order
-    matrix<double>                                                 _bQCD;                  //!< Matrix with the precomputed coefficients of the beta function
     std::function<double(bool const&, int const&, double const&)>  _MatchingConditions;    //!< Matching condition functions
     std::function<double(int const&, double const&)>               _BetaFunction;          //!< Beta function
   };

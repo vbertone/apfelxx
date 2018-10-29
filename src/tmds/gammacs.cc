@@ -39,7 +39,7 @@ namespace apfel
   //_________________________________________________________________________
   double CSd22(int const& nf)
   {
-    return - 2 * beta0(nf);
+    return - 2 * beta0qcd(nf);
   }
 
   //_________________________________________________________________________
@@ -56,19 +56,19 @@ namespace apfel
   //_________________________________________________________________________
   double CSd31(int const& nf)
   {
-    return 2 * beta0(nf) * CSd20(nf) - GammaCusp2(nf);
+    return 2 * beta0qcd(nf) * CSd20(nf) - GammaCusp2(nf);
   }
 
   //_________________________________________________________________________
   double CSd32(int const& nf)
   {
-    return - GammaCusp1(nf) * beta0(nf) - 2 * beta1(nf);
+    return - GammaCusp1(nf) * beta0qcd(nf) - 2 * beta1qcd(nf);
   }
 
   //_________________________________________________________________________
   double CSd33(int const& nf)
   {
-    const double b0 = beta0(nf);
+    const double b0 = beta0qcd(nf);
     return - 4 * b0 * b0 / 3;
   }
 }

@@ -1,6 +1,8 @@
 set(evolution_source
   alphaqcd.cc
   betaqcd.cc
+  alphaqed.cc
+  betaqed.cc
   dglapbuilder.cc
   splittingfunctions.cc
   matchingconditions.cc

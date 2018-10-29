@@ -28,13 +28,30 @@ namespace apfel
   /**
    * @brief Utility function used by the heavy-quark initiated massive
    * coefficient functions.
-
-
    * @param a: first parameter
    * @param b: second parameter
    * @param c: thied parameter
    * @return Triangular function
    */
   double DeltaFun(double const& a, double const& b, double const& c);
+
+  /**
+   * @brief Utility function for the computation of the electroweak
+   * charges, for both time-like and space-like virtualities
+   * (Reference: https://arxiv.org/pdf/hep-ph/9711387.pdf).
+   * @param Q: absolute value the virtuality of the vector boson
+   * @param virt: virtuality (true: time-like, false: space-like)
+   * @return the std::vector of the electroweak charges
+   */
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt);
+
+  /**
+   * @brief Utility function that concatenates and sort the input
+   * vectors.
+   * @param v1: first vector
+   * @param v2: second vector
+   * @return a std::vector containing the sorted entries of 'v1' and 'v2'
+   */
+  std::vector<double> ConcatenateAndSortVectors(std::vector<double> const& v1, std::vector<double> const& v2);
   ///@}
 }

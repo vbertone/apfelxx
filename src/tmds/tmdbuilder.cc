@@ -175,8 +175,8 @@ namespace apfel {
     std::map<int,std::map<int,Operator>> C21pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const double factq = beta0(nf) + gammaVq0() / 2;
-	const double factg = beta0(nf) + gammaVg0(nf) / 2;
+	const double factq = beta0qcd(nf) + gammaVq0() / 2;
+	const double factg = beta0qcd(nf) + gammaVg0(nf) / 2;
 	const Operator O21gmVq = gammaVq1(nf) * Id / 2;
 	const Operator O21gmVg = gammaVg1(nf) * Id / 2;
 	const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
@@ -197,7 +197,7 @@ namespace apfel {
     std::map<int,std::map<int,Operator>> C22pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const double b0    = beta0(nf);
+	const double b0    = beta0qcd(nf);
 	const double gv0q  = gammaVq0();
 	const double gv0g  = gammaVg0(nf);
 	const double gcp   = GammaCusp1(nf);
@@ -222,8 +222,8 @@ namespace apfel {
     std::map<int,std::map<int,Operator>> C23pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const Operator O23gmVq = CF * ( beta0(nf) / 3 + gammaVq0() / 2 ) * Id;
-	const Operator O23gmVg = CA * ( beta0(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
+	const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaVq0() / 2 ) * Id;
+	const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
 	const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
 	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O23gmVq - CF * P0.at(0)});
@@ -275,8 +275,8 @@ namespace apfel {
     std::map<int,std::map<int,Operator>> C21ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const double factq = beta0(nf) + gammaVq0() / 2;
-	const double factg = beta0(nf) + gammaVg0(nf) / 2;
+	const double factq = beta0qcd(nf) + gammaVq0() / 2;
+	const double factg = beta0qcd(nf) + gammaVg0(nf) / 2;
 	const Operator O21gmVq = gammaVq1(nf) * Id / 2;
 	const Operator O21gmVg = gammaVg1(nf) * Id / 2;
 	const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
@@ -297,7 +297,7 @@ namespace apfel {
     std::map<int,std::map<int,Operator>> C22ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const double b0    = beta0(nf);
+	const double b0    = beta0qcd(nf);
 	const double gv0q  = gammaVq0();
 	const double gv0g  = gammaVg0(nf);
 	const double gcp   = GammaCusp1(nf);
@@ -322,8 +322,8 @@ namespace apfel {
     std::map<int,std::map<int,Operator>> C23ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
-	const Operator O23gmVq = CF * ( beta0(nf) / 3 + gammaVq0() / 2 ) * Id;
-	const Operator O23gmVg = CA * ( beta0(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
+	const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaVq0() / 2 ) * Id;
+	const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
 	const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
 	std::map<int,Operator> OM;
 	OM.insert({EvolutionBasisQCD::PNSP, O23gmVq - CF * P0.at(0)});
@@ -355,9 +355,9 @@ namespace apfel {
 	obj.Threshold = Thresholds[nf-1];
 
 	// Beta function
-	obj.Beta.insert({0, beta0(nf)});
-	obj.Beta.insert({1, beta1(nf)});
-	obj.Beta.insert({2, beta2(nf)});
+	obj.Beta.insert({0, beta0qcd(nf)});
+	obj.Beta.insert({1, beta1qcd(nf)});
+	obj.Beta.insert({2, beta2qcd(nf)});
 
 	// GammaF quark
 	obj.GammaFq.insert({0, gammaVq0()});
