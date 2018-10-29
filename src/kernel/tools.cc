@@ -9,6 +9,7 @@
 #include "apfel/constants.h"
 
 #include <math.h>
+#include <algorithm>
 
 namespace apfel
 {
