@@ -32,7 +32,7 @@ namespace apfel {
 	LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
 
     // Beta function lambda function.
-    _BetaFunction = [&] (int const& nf, double const& as)-> double
+    _BetaFunction = [=] (int const& nf, double const& as)-> double
       {
 	double bt = 0, powas = as * as;
 	for (int i = 0; i <= _pt; i++)
@@ -44,7 +44,7 @@ namespace apfel {
       };
 
     // Matching condition lambda function.
-    _MatchingConditions = [&,LogKth] (bool const& Up, int const& nf, double const& Coup)-> double
+    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup)-> double
       {
 	const int sgn     = ( Up ? 1 : -1);
 	const double ep   = Coup / FourPi;
