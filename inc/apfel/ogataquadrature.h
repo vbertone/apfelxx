@@ -31,14 +31,13 @@ namespace apfel
 		    double const& h = 0.001);
 
     /**
-     * @brief Function that integrates the integrand with a given
-     * relative accuracy.
-     * @param xmin: the lower bound integration bound
-     * @param xmax: the upper bound integration bound
-     * @param eps: the required relative accuracy
-     * @return the value of the integral
+     * @brief Function that transform the input function.
+     * @param func: function to be transformed
+     * @param qT: value of qT in which to compute the transform
+     * @param nmax: maximum number of terms in the Ogata quadrature (default: 1000)
+     * @return the value of the transform
      */
-    double transform(std::function<double(double const&)> const& func, double const& qT) const;
+    double transform(std::function<double(double const&)> const& func, double const& qT, int const& nmax = 1000) const;
 
     /**
      * @brief Function that returns the unscaled coordinates used in

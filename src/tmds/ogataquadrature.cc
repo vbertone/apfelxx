@@ -568,12 +568,12 @@ namespace apfel {
   }
 
   //_____________________________________________________________________________
-  double OgataQuadrature::transform(std::function<double(double const&)> const& func, double const& qT) const
+  double OgataQuadrature::transform(std::function<double(double const&)> const& func, double const& qT, int const& nmax) const
   {
     // Compute integral as a weighted sum.
     double integral = 0;
     int i;
-    for (i = 0; i < (int) j0Zeros.size(); i++)
+    for (i = 0; i < std::min(nmax, (int) j0Zeros.size()); i++)
       {
 	const double term = _weights[i] * func(_xf[i]/qT);
 
