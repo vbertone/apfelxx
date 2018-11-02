@@ -380,10 +380,12 @@ $\alpha=0,\dots,N_\xi$, and one grid in $Q$, $\{Q_\tau\}$ with
 $\tau=0,\dots,N_Q$, each of which with a set of interpolating
 functions $\mathcal{I}$ associated. In addition, the grids are such
 that: $\xi_0 = e^{y_{\rm min}}$ and $\xi_{N_\xi} = e^{y_{\rm max}}$,
-and $Q_0 = Q_{\rm min}$ and $Q_{N_Q} = Q_{\rm max}$. This allows us to
-interpolate the pair of functions $f_{\rm NP}$ in
-Eq.~(\ref{eq:finalintegral}) for generic values of $\xi$ and $Q$ as:
-\begin{equation}
+and $Q_0 = Q_{\rm min}$ and $Q_{N_Q} = Q_{\rm max}$. More details on
+the interpolation procedure are presented in
+Appendix~\ref{app:LagrangeInterpolation}. This allows us to interpolate
+the pair of functions $f_{\rm NP}$ in Eq.~(\ref{eq:finalintegral}) for
+generic values of $\xi$ and $Q$ as:
+\begin{equation}\label{eq:interpolation}
 f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\xi,b;Q\right) f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b;Q\right) \simeq \sum_{\alpha=0}^{N_\xi}\sum_{\tau=0}^{N_Q}\mathcal{I}_\alpha(\xi)\mathcal{I}_\tau(Q) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,b;Q_\tau\right) f_{\rm NP}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},b;Q_\tau\right)\,.
 \end{equation}
 Plugging the equation above into Eq.~(\ref{eq:finalintegral}) we
@@ -548,6 +550,150 @@ and its derivative:
   \cosh( \pi \sinh t  ) }\,.
 \end{equation}
 \end{itemize}
+
+\section{Lagrange interpolation}\label{app:LagrangeInterpolation}
+
+Just for the record, it is useful to derive a general expression for
+the Lagrange interpolating functions $\mathcal{I}$ introduced in
+Eq.~(\ref{eq:interpolation}) and used to interpolate the
+non-perturbative functions $f_{\rm NP}$. More, importantly, we need to
+understand how these functions behave upon integration.
+
+Suppose one wants to interpolate the test function $g$ in the point
+$x$ using a set of Lagrange polynomials of degree $k$ of. This
+requires a subset of $k+1$ consecutive points on an interpolation
+grid, say $\{x_{\alpha},\dots,x_{\alpha+k}\}$. The relative position
+between the point $x$ and the subset of points used for the
+interpolation is arbitrary. It is convenient to choose the subset of
+points such that $x_\alpha < x \leq x_{\alpha+k}$.\footnote{In fact,
+  it is not even necessary to impose the constraint
+  $x_\alpha < x \leq x_{\alpha+k}$.  In case this relation is not
+  fulfilled one usually refers to \textit{extrapolation} rather than
+  \textit{interpolation}. If not necessary, this option is typically
+  not convenient because it may lead to a substantial deterioration in
+  the accuracy with which $g(x)$ is determined.}  However, the
+ambiguity remains because there are $k$ possible choices according to
+whether $x_\alpha < x \leq x_{\alpha+1}$, or
+$x_{\alpha+1} < x \leq x_{\alpha+2}$, and so on.
+
+In order to determine the exact form of the interpolation functions
+$\mathcal{I}$, let us see how to derive
+eq.~(\ref{eq:interpolation}). Using the standard Lagrange
+interpolation procedure, we can approximate the function $g$ in $x$
+as:
+\begin{equation}\label{particularCase}
+g(x) = \sum_{i=0}^k\ell_i^{(k)}(x)g(x_{\alpha+i})\,,
+\end{equation}
+where $\ell_i^{(k)}$ is the $i$-th Lagrange polynomial of degree $k$
+which can be written as:
+\begin{equation} \ell_i^{(k)}(x) = \prod^{k}_{m=0,m\ne
+i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,.
+\end{equation}
+We now assume that:
+\begin{equation}\label{eq:assumption1}
+x_{\alpha} < x \leq x_{\alpha+1}\,,
+\end{equation}
+Eq.~(\ref{particularCase}) becomes:
+\begin{equation}\label{particularCaseTheta}
+  g(x) =
+  \theta(x-x_{\alpha})\theta(x_{\alpha+1}-x)\sum_{i=0}^k
+  g(x_{\alpha+i})\prod^{k}_{m=0,m\ne
+    i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,.
+\end{equation}
+
+In order to make Eq.~(\ref{particularCaseTheta}) valid for all values
+of $\alpha$, one just has to sum over all $N_x$ intervals of the
+\textit{global} interpolation grid $\{x_0,\dots,x_{N_x}\}$, that is:
+\begin{equation}\label{generalCase}
+  g(x) =
+  \sum_{\alpha=0}^{N_x-1}\theta(x-x_{\alpha})\theta(x_{\alpha+1}-x)\sum_{i=0}^k
+  g(x_{\alpha+i})\prod^{k}_{m=0,m\ne
+    i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,,
+\end{equation}
+
+Defining $\beta=\alpha+i$, we can rearrange the equation above as:
+\begin{equation}\label{generalCase2}
+  g(x) =
+  \sum_{\beta=0}^{N_x+k-1}\mathcal{I}_\beta^{(k)}(x) g(x_{\beta})\,,
+\end{equation}
+that leads us to the definition of the interpolating functions:
+\begin{equation}\label{eq:intfunc}
+  \mathcal{I}_\beta^{(k)}(x) = \sum_{i=0,i\leq\beta}^k
+  \theta(x-x_{\beta-i})\theta(x_{\beta-i+1}-x) \prod^{k}_{m=0,m\ne
+    i}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\,,
+\end{equation}
+where the condition $i\leq\beta$ comes from the condition
+$\alpha\geq 0$. It is important to observe that the sum in
+Eq.~(\ref{generalCase2}) extends up to the $(N_x+k-1)$-th
+node. Therefore, the original grid needs to be extended by $k-1$
+nodes. However, the range of validity of the interpolation remains
+that defined by the original grid, \textit{i.e.}
+$x_0 \leq x \leq x_{N_x}$. Finally, it is crucial to realise that the
+interpolation function $\mathcal{I}_\beta^{(k)}(x)$ is different from
+zero only over a limited interval, specifically:
+\begin{equation}\label{eq:limits}
+\mathcal{I}_\beta^{(k)}(x) \neq 0\quad \Leftrightarrow\quad
+x_{\beta-k}<x < x_{\beta+1}\,.
+\end{equation}
+
+Before going further, it is interesting to generalise
+Eq.~(\ref{eq:assumption1}) to:
+\begin{equation}\label{IntAssumptionGen}
+  x_{\alpha+t} < x \leq
+  x_{\alpha+t+1}\quad\mbox{with}\quad t = 0,\dots,k-1\,,
+\end{equation}
+such that the interpolation formula becomes:
+\begin{equation}\label{MoreGeneralCase}
+  g(x) =
+  \sum_{\alpha=-t}^{N_x-t-1}\theta(x-x_{\alpha+t})\theta(x_{\alpha+t+1}-x)\sum_{i=0}^k
+  g(x_{\alpha+i})\prod^{k}_{m=0,m\ne
+    i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,,
+\end{equation}
+that can be rearranged as:
+\begin{equation}\label{generalCase3} g(x) =
+\sum_{\beta=-t}^{N_x+k-t-1}\mathcal{I}_{\beta,t}^{(k)}(x) g(x_{\beta})\,,
+\end{equation}
+with:
+\begin{equation} \mathcal{I}_{\beta,t}^{(k)}(x) = \sum_{i=0,i\leq\beta}^k
+\theta(x-x_{\beta-i+t})\theta(x_{\beta-i+t+1}-x) \prod^{k}_{m=0,m\ne
+i}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\,,
+\end{equation}
+being the ``generalised'' interpolation functions. However, for the
+sake of simplicity, in the rest of this document we will stick to the
+assumption in Eq.~(\ref{eq:assumption1}).
+
+Now suppose we wnat to compute the following intergral:
+\begin{equation}
+I_1 = \int_{x_0}^{x_{N_x}}dx\,g(x)f(x)\,,
+\end{equation}
+where $f$ is some other function that we don't want to
+interpolate. Using Eqs.~(\ref{generalCase2}) and~(\ref{eq:limits}) we
+finally have that:
+\begin{equation}
+  I_1 = \sum_{\beta=0}^{N_x+k-1} W_\beta g(x_{\beta})\,,
+\end{equation}
+with:
+\begin{equation}
+W_\beta = \int_{x_{\rm max(0,\beta-k)}}^{x_{{\rm min}(N_x,\beta+1)}}dx \,\mathcal{I}_\beta^{(k)}(x)f(x)\,.
+\end{equation}
+The equation above can be easily generalised to a bidimensional
+integral as:
+\begin{equation}
+I_2 = \int_{x_0}^{x_{N_x}}dx \int_{y_0}^{y_{N_y}}dy\,g(x,y)f(x,y) = \sum_{\alpha=0}^{N_x+k-1} \sum_{\beta=0}^{N_y+l-1} W_{\alpha\beta} g(x_{\alpha},y_{\beta})\,,
+\end{equation}
+with:
+\begin{equation}
+W_{\alpha\beta} = \int_{x_{\rm max(0,\alpha-k)}}^{x_{{\rm
+      min}(N_x,\alpha+1)}}dx \int_{y_{\rm max(0,\beta-k)}}^{y_{{\rm
+      min}(N_y,\beta+1)}}dy \,\mathcal{I}_\alpha^{(k)}(x)\,\mathcal{I}_\beta^{(l)}(y)\,f(x,y)\,.
+\end{equation}
+
+
+
+
+
+
+
 
 \begin{thebibliography}{alp}
 
