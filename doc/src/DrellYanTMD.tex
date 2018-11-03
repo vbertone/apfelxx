@@ -423,7 +423,7 @@ quadrature as discussed above, so that:
 \end{array}
 \end{equation}
 In conclusion, if we define:
-\begin{equation}
+\begin{equation}\label{eq:weights}
 \begin{array}{rcl}
   \displaystyle  W_{n\tau\alpha}(q_T) & \equiv & \displaystyle w_n^{(1)}\frac{8\pi}{9} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
                                             \frac{\alpha^2(Q)}{Q^3} H(Q) 
@@ -636,8 +636,9 @@ zero only over a limited interval, specifically:
 x_{\beta-k}<x < x_{\beta+1}\,.
 \end{equation}
 
-Before going further, it is interesting to generalise
-Eq.~(\ref{eq:assumption1}) to:
+In the rest of this document we will stick to the assumption in
+Eq.~(\ref{eq:assumption1}). However, before going further, it is
+interesting to generalise Eq.~(\ref{eq:assumption1}) to:
 \begin{equation}\label{IntAssumptionGen}
   x_{\alpha+t} < x \leq
   x_{\alpha+t+1}\quad\mbox{with}\quad t = 0,\dots,k-1\,,
@@ -654,15 +655,20 @@ that can be rearranged as:
 \sum_{\beta=-t}^{N_x+k-t-1}\mathcal{I}_{\beta,t}^{(k)}(x) g(x_{\beta})\,,
 \end{equation}
 with:
-\begin{equation} \mathcal{I}_{\beta,t}^{(k)}(x) = \sum_{i=0,i\leq\beta}^k
+\begin{equation}\label{eq:generalisedintfuncs}
+\mathcal{I}_{\beta,t}^{(k)}(x) = \sum_{i=0,i\leq\beta}^k
 \theta(x-x_{\beta-i+t})\theta(x_{\beta-i+t+1}-x) \prod^{k}_{m=0,m\ne
 i}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\,,
 \end{equation}
-being the ``generalised'' interpolation functions. However, for the
-sake of simplicity, in the rest of this document we will stick to the
-assumption in Eq.~(\ref{eq:assumption1}).
+being the ``generalised'' interpolation functions.  The generalised
+interpolation functions can be used to overcome the ``drawback'' of
+requiring $k-1$ additional nodes on the interpolation grid. In
+practice, given the grid $\{x_0,\dots,x_{N_x}\}$, one can tune $t$
+according to the position of $x$ on the grid. More specifically, one
+can choose $t$ in such a way that $\beta+t$ in
+Eq.~(\ref{eq:generalisedintfuncs}) never exceeds $N_x$.
 
-Now suppose we wnat to compute the following intergral:
+Now suppose we want to compute the following intergral:
 \begin{equation}
 I_1 = \int_{x_0}^{x_{N_x}}dx\,g(x)f(x)\,,
 \end{equation}
@@ -674,7 +680,7 @@ finally have that:
 \end{equation}
 with:
 \begin{equation}
-W_\beta = \int_{x_{\rm max(0,\beta-k)}}^{x_{{\rm min}(N_x,\beta+1)}}dx \,\mathcal{I}_\beta^{(k)}(x)f(x)\,.
+W_\beta = \int_{x_{{\rm max}(0,\beta-k)}}^{x_{{\rm min}(N_x,\beta+1)}}dx \,\mathcal{I}_\beta^{(k)}(x)f(x)\,.
 \end{equation}
 The equation above can be easily generalised to a bidimensional
 integral as:
@@ -683,11 +689,12 @@ I_2 = \int_{x_0}^{x_{N_x}}dx \int_{y_0}^{y_{N_y}}dy\,g(x,y)f(x,y) = \sum_{\alpha
 \end{equation}
 with:
 \begin{equation}
-W_{\alpha\beta} = \int_{x_{\rm max(0,\alpha-k)}}^{x_{{\rm
-      min}(N_x,\alpha+1)}}dx \int_{y_{\rm max(0,\beta-k)}}^{y_{{\rm
+W_{\alpha\beta} = \int_{x_{{\rm max}(0,\alpha-k)}}^{x_{{\rm
+      min}(N_x,\alpha+1)}}dx \int_{y_{{\rm max}(0,\beta-k)}}^{y_{{\rm
       min}(N_y,\beta+1)}}dy \,\mathcal{I}_\alpha^{(k)}(x)\,\mathcal{I}_\beta^{(l)}(y)\,f(x,y)\,.
 \end{equation}
-
+This formalism nicely applies to the integral in $Q$ and $\xi=e^{y}$
+discussed above in Eq.~(\ref{eq:weights}).
 
 
 
