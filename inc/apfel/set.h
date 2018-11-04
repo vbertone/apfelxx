@@ -55,7 +55,7 @@ namespace apfel
     /**
      * @brief This returns object with ID "id" in the map.
      */
-    T               const& at(int const& id) const { return _objects.at(id); }
+    T const& at(int const& id) const { return _objects.at(id); }
     /**
      * @brief This returns the convolution map.
      */

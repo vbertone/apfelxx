@@ -679,7 +679,7 @@ finally have that:
   I_1 = \sum_{\beta=0}^{N_x+k-1} W_\beta g(x_{\beta})\,,
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:monodim}
 W_\beta = \int_{x_{{\rm max}(0,\beta-k)}}^{x_{{\rm min}(N_x,\beta+1)}}dx \,\mathcal{I}_\beta^{(k)}(x)f(x)\,.
 \end{equation}
 The equation above can be easily generalised to a bidimensional
@@ -688,13 +688,24 @@ integral as:
 I_2 = \int_{x_0}^{x_{N_x}}dx \int_{y_0}^{y_{N_y}}dy\,g(x,y)f(x,y) = \sum_{\alpha=0}^{N_x+k-1} \sum_{\beta=0}^{N_y+l-1} W_{\alpha\beta} g(x_{\alpha},y_{\beta})\,,
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:bidim}
 W_{\alpha\beta} = \int_{x_{{\rm max}(0,\alpha-k)}}^{x_{{\rm
       min}(N_x,\alpha+1)}}dx \int_{y_{{\rm max}(0,\beta-k)}}^{y_{{\rm
       min}(N_y,\beta+1)}}dy \,\mathcal{I}_\alpha^{(k)}(x)\,\mathcal{I}_\beta^{(l)}(y)\,f(x,y)\,.
 \end{equation}
 This formalism nicely applies to the integral in $Q$ and $\xi=e^{y}$
-discussed above in Eq.~(\ref{eq:weights}).
+discussed above in Eq.~(\ref{eq:weights}). In view of a numerical
+implementation, it is worth noticing that the functions $\mathcal{I}$
+are piecewise. In particular, while these functions are continuos in
+correspondence of the nodes of the grid, their first derivative is
+not. As a consequence, the result of the numerical integrals in
+Eqs.~(\ref{eq:monodim}) and~(\ref{eq:bidim}) may be inaccurate. To
+overcome this problem, it is sufficient to split the integrals in
+sub-integrals over the intervals delimited by two consecutive
+nodes. Using Eq.~(\ref{eq:limits}), it is easy to see that, for an
+interpolation of degree $k$, one needs to do $k+1$ integrals over the
+intervals included between the $(\beta-k)$-th and the $(\beta+1)$-th
+node.
 
 
 
