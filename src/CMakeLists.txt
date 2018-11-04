@@ -4,7 +4,7 @@ add_subdirectory(evolution)
 add_subdirectory(dis)
 add_subdirectory(tmds)
 
-option(SHARED "Build shared-libray instead of static-libray" ON)
+option(SHARED "Build shared-libray instead of static-libray" OFF)
 if(SHARED)
   add_library(apfelxx SHARED $<TARGET_OBJECTS:kernel> $<TARGET_OBJECTS:interface>
   $<TARGET_OBJECTS:evolution> $<TARGET_OBJECTS:dis> $<TARGET_OBJECTS:tmds>)
