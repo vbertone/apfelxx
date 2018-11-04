@@ -136,9 +136,11 @@ namespace apfel
     // Create vector of fixed points including the integration bounds
     // in ordered sequence and removing the points outside the
     // integration range.
-    std::vector<double> bounds{(a < b ? a : b), (a < b ? b : a)};
+    const double ap = (a < b ? a : b);
+    const double bp = (a < b ? b : a);
+    std::vector<double> bounds{ap, bp};
     for (auto const& ib : FixPts)
-      if(ib > bounds.front() && ib < bounds.back())
+      if(ib > ap && ib < bp)
 	bounds.push_back(ib);
 
     // Sort vector according on how the integration bounds are
