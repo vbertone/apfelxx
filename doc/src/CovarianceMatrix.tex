@@ -1,0 +1,333 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath,amssymb,bm,graphicx,pictex,makeidx,subfigure}
+\usepackage[italian,english]{babel}
+\usepackage[center,small]{caption}[2007/01/07]
+\usepackage{fancyhdr}
+\usepackage{color}
+
+\definecolor{blu}{rgb}{0,0,1}
+\definecolor{verde}{rgb}{0,1,0}
+\definecolor{rosso}{rgb}{1,0,0}
+
+\begin{document}
+
+\section{The $\chi^2$ in the presence of correlations}
+
+Suppose to have an ensamble of $n$ measurements having the following
+structure:
+\begin{equation}
+  m_i\pm \sigma_{i,\rm stat} \pm \sigma_{i,\rm unc} \pm \sigma_{i,\rm
+    corr}^{(1)}\pm\dots \pm \sigma_{i,\rm
+    corr}^{(k)}\,,
+\end{equation}
+where $m_i$, with $i=1,\dots, n$, is the central value of the $i$-th
+measurement, $\sigma_{i,\rm stat}$ its (uncorrelated) statistical
+uncertainty, $\sigma_{i,\rm unc}$ its uncorrelated systematic
+uncertainty\footnote{There could be more than one uncorrelated
+  systematic uncertainty. In this case, $\sigma_{i,\rm unc}$ is just
+  the square root of the sum in quadrature of all the uncorrelated
+  systematic uncertainties.}, and $\sigma_{i,\rm corr}^{(l)}$, with
+$l=1,\dots,k$, its correlated systematic uncertainties. With this
+information at hand, one can construct the full covariance matrix
+$V_{ij}$ as follows (see for example Ref.~\cite{Ball:2012wy}):
+\begin{equation}\label{eq:covmat}
+  V_{ij}=\left(\sigma_{i,\rm stat}^2 +\sigma_{i,\rm unc}^2\right)\delta_{ij} + \sum_{l=1}^{k}\sigma_{i,\rm
+    corr}^{(l)}\sigma_{j,\rm
+    corr}^{(l)}\,.
+\end{equation}
+This is a clearly symmetric matrix. Given a set of predictions $t_i$
+corresponding to the $n$ measurements of the ensamble, the $\chi^2$
+takes the form:
+\begin{equation}\label{eq:chi2cov}
+  \chi^2=
+  \sum_{i,j=1}^{n}\left(m_i-t_i\right)V_{ij}^{-1}\left(m_j-t_j\right) =
+  \mathbf{y}^{T} \cdot \mathbf{V}^{-1} \cdot \mathbf{y}\,,
+\end{equation}
+where in the second equality we have used the matricial notation and
+defined $y_i = m_i-t_i$. A convenient way to compute the $\chi^2$
+relies on the Cholesky decomposition of the covariance matrix
+$\mathbf{V}$. In particular, it can be proven that any symmetric and
+positive definite matrix $\mathbf{V}$ can be decomposed as:
+\begin{equation}\label{eq:choleskydec}
+\mathbf{V} = \mathbf{L}\cdot\mathbf{L}^{T}\,,
+\end{equation}
+where $\mathbf{L}$ is a lower triangular matrix whose entries are
+related recursively to those of $\mathbf{V}$ as follows:
+\begin{equation}\label{eq:cholalg}
+\begin{array}{rcl}
+  L_{kk} &=&\displaystyle \sqrt{V_{kk}-\sum_{j=1}^{k-1}L_{kj}^2}\,,\\
+  \\
+  L_{ik} &=&\displaystyle
+             \frac{1}{L_{kk}}\left(V_{ik}-\sum_{j=1}^{k-1}L_{ij}L_{kj}\right)\,,\quad
+             k < i\,,\\
+\\
+  L_{ik} &=&\displaystyle 0\,,\quad
+             k > i\,.\\
+\end{array}
+\end{equation}
+It is then easy to see that the $\chi^2$ can be written as:
+\begin{equation}
+\chi^2 = \left|\mathbf{L}^{-1}\cdot \mathbf{y}\right|^2\,.
+\end{equation}
+But the vector $\mathbf{x} \equiv \mathbf{L}^{-1}\cdot \mathbf{y}$ is
+the solution of the linear system:
+\begin{equation}
+  \mathbf{L} \cdot \mathbf{x} = \mathbf{y}\,,
+\end{equation}
+that can be efficiently solved by forward substitution, so that:
+\begin{equation}
+  \chi^2 = \left|\mathbf{x}\right|^2\,.
+\end{equation}
+Following this procedure, one does not need to compute explicitly the
+inverse of the covariance matrix $\mathbf{V}$, simplifying
+significantly the computation of the $\chi^2$.
+
+\section{Additive and multiplicative uncertainties}
+
+The correlated systematic uncertainties $\sigma_{i,\rm corr}^{(l)}$
+may be either \textit{additive} or \textit{multiplicative}. The nature
+of the single uncertainties is typically provided by the experiments
+that release the measurements. A typical example of multiplicative
+uncertainty is the luminosity uncertainty but there can be others.
+
+Now let us express all the correlated systematic uncertainties
+$\sigma_{i,\rm corr}^{(l)}$ as relative to the associate central value
+$m_i$, so that we define\footnote{Note that this redefinition does not
+  change the nature of the uncertainties, additive uncertainties
+  remain additive as well as multiplicative uncertainties remain
+  multiplicative.}:
+\begin{equation}
+\sigma_{i,\rm corr}^{(l)}\equiv  \delta_{i,\rm corr}^{(l)} m_i
+\end{equation}
+and let us also define
+$s_i^2\equiv \sigma_{i,\rm stat}^2 +\sigma_{i,\rm unc}^2$ so that
+Eq.~(\ref{eq:covmat}) can be rewritten as:
+\begin{equation}\label{eq:covmat2}
+  V_{ij}=s_i^2\delta_{ij} + \left(\sum_{l=1}^{k}\delta_{i,\rm
+    corr}^{(l)}\delta_{j,\rm
+    corr}^{(l)}\right)m_im_j\,.
+\end{equation}
+Now we split the correlated systematic uncertainties into $k_a$
+additive uncertainties and $k_m$ multiplicative uncertainties, such
+that $k_a+k_m=k$. This way Eq.~(\ref{eq:covmat2}) takes the form:
+\begin{equation}\label{eq:covmat3}
+  V_{ij}=s_i^2\delta_{ij} + \left(\sum_{l=1}^{k_a}\delta_{i,\rm
+    add}^{(l)}\delta_{j,\rm
+    add}^{(l)}+\sum_{l=1}^{k_m}\delta_{i,\rm
+    mult}^{(l)}\delta_{j,\rm
+    mult}^{(l)}\right)m_im_j\,.
+\end{equation}
+It is well known that this definition of the covariance matrix is
+problematic in that it results in the so-called D'Agostini bias of the
+multiplicative uncertainties~\cite{DAgostini:1993arp}. A possible
+solution to this problem is the so-called
+$t_0$-prescription~\cite{Ball:2009qv}, where the experimental central
+value $m_i$ in the multiplicative term is replaced by a fixed
+theoretical predictions $t_i^{(0)}$, typically computed in a previous
+fit in which the ``standard'' definition of the covariance matrix in
+Eq.~(\ref{eq:covmat}) (often referred to as \textit{experimental}
+definition) is used. Applying the $t_0$ prescription, the covariance
+matrix takes the form:
+\begin{equation}\label{eq:covmat4}
+  V_{ij}=s_i^2\delta_{ij} + \sum_{l=1}^{k_a}\delta_{i,\rm
+    add}^{(l)}\delta_{j,\rm
+    add}^{(l)}m_im_j+\sum_{l=1}^{k_m}\delta_{i,\rm
+    mult}^{(l)}\delta_{j,\rm
+    mult}^{(l)}t_i^{(0)}t_j^{(0)}\,.
+\end{equation}
+
+\section{Artificial generation of correlated systematics}
+
+In order to implement the definition of the $\chi^2$ discussed above,
+it is necessary to have the experimental information in terms of the
+correlated systematic uncertainties $\sigma_{i,\rm corr}^{(l)}$. This
+is what the experimental collaborations usually release. However, in
+some cases this information is given in terms of a covariance
+matrix. Therefore, one needs to find a workaround to generate
+correlated systematic uncertainties out of a covariance matrix. 
+
+Given a $n \times n$ symmetric matrix $\mathbf{C}$, it will have $n$
+orthonormal eigenvectors $\mathbf{x}^{(i)}$, such that
+$\mathbf{x}^{(i)}\cdot \mathbf{x}^{(j)}=\delta_{ij}$, each of which
+will have a non-negative eigenvalue $\lambda_i$ associated:
+\begin{equation}
+  \mathbf{C}\cdot \mathbf{x}^{(i)} = \lambda_i \mathbf{x}^{(i)}\,, \quad
+  i =1,\dots,n\,.
+\end{equation}
+If we define:
+\begin{equation}\label{eq:artsys}
+  \sigma_{i,\rm corr}^{(l)} = \sqrt{\lambda_l} x_i^{(l)}\,,\quad i,l=1,\dots,n\,,
+\end{equation}
+one can show that:
+\begin{equation}\label{eq:artsydef}
+  \sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} =C_{ij}\,.
+\end{equation}
+To prove this equality we start from the following matricial relation:
+\begin{equation}
+\mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{-1}\,,
+\end{equation}
+where $\mathbf{\Lambda}$ is a diagonal matrix with the eigenvalues
+$\lambda_i$ on the diagonal ($\Lambda_{ij} = \lambda_i\delta_{ij}$),
+while $\mathbf{Q}$ is a matrix whose columns are the eigenvectors
+$\mathbf{x}^{(i)}$ ($Q_{ij} = x_{i}^{(j)}$). In addition, since in
+this particular case
+$\mathbf{x}^{(i)}\cdot \mathbf{x}^{(j)}=\delta_{ij}$, this implies
+that:
+\begin{equation}
+\mathbf{Q}^T \cdot \mathbf{Q}  = \mathbf{I}\quad\Rightarrow\quad
+\mathbf{Q}^{-1} =  \mathbf{Q}^{T}\,,
+\end{equation}
+so that:
+\begin{equation}\label{eq:diagC}
+  \mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{T}\,.
+\end{equation}
+It follows that:
+\begin{equation}
+  C_{ij} =\sum_{k,l=1}^{n}Q_{ik}\Lambda_{kl} Q_{jl} = \sum_{k,l=1}^{n} x_{i}^{(k)}
+  \lambda_{k}\delta_{kl}x_{j}^{(l)} = \sum_{l=1}^{n} \lambda_{l}x_{i}^{(l)}
+  x_{j}^{(l)}=\sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} \,,
+\end{equation}
+as required.
+
+The matrix \textbf{C} can be regarded as the correlated contribution to
+the full covariance matrix \textbf{V}. In particular, considering
+Eqs.~(\ref{eq:covmat}) and~(\ref{eq:covmat2}), one can write:
+\begin{equation}
+\mathbf{V} = \mathbf{U} + \mathbf{C}\,,
+\end{equation}
+where $\mathbf{U}$ is a diagonal matrix of uncorrelated uncertainties:
+\begin{equation}
+U_{ij} = s_i^2\delta_{ij}\,.
+\end{equation}
+This defines the matrix $\mathbf{C}$ as:
+\begin{equation}\label{eq:corrdef}
+\mathbf{C} = \mathbf{V} - \mathbf{U}\,,
+\end{equation}
+such that, given a $n\times n$ covariance matrix $\mathbf{V}$ along
+with its uncorrelated contribution $\mathbf{U}$, one can generate a
+set of $n$ \textit{artificial} correlated systematics according to
+Eq.~(\ref{eq:artsys}), where $\mathbf{C}$ is given in
+Eq.~(\ref{eq:corrdef}), for each of the $n$ measurements. This allows
+us to implement Eq.~(\ref{eq:covmat4}) for the construction of the
+covariance matrix.
+
+\section{Determining the systematic shifts}
+
+In order to visualise the effect of systematic uncertainties, it is
+instructive to compute the \textit{systematic shift} generated by the
+systematic uncertainties. To do so, we need to write the $\chi^2$ in
+terms of the so-called ``nuisance parameters'' $\lambda_\alpha$. One
+can show that the definition of the $\chi^2$ in Eq.~(\ref{eq:chi2cov})
+is equivalent to~\cite{Ball:2012wy}:
+\begin{equation}\label{eq:chi2nuis}
+\chi^2 = \sum_{i=1}^n\frac{1}{s_i^2}\left(m_i -t_i
+  -\sum_{\alpha=1}^k\lambda_\alpha \sigma_{i,\rm corr}^{(\alpha)} \right)^2 + \sum_{\alpha=1}^k\lambda_\alpha^2\,.
+\end{equation}
+The optimal value of the nuisance parameters can be computed by
+minimising the $\chi^2$ with respect to them, that is imposing:
+\begin{equation}
+\frac{\partial \chi^2}{\partial \lambda_\beta} = 0\,.
+\end{equation}
+This yields the system:
+\begin{equation}\label{eq:nuissys}
+  \sum_{\beta=1}^kA_{\alpha\beta}\lambda_\beta =\rho_\alpha\,,
+\end{equation}
+with:
+\begin{equation}\label{eq:sysing}
+A_{\alpha\beta}= \delta_{\alpha\beta}+\sum_{i=1}^n\frac{\sigma_{i,\rm corr}^{(\alpha)}\sigma_{i,\rm corr}^{(\beta)}}{s_i^2}\quad\mbox{and}\quad \rho_\alpha=\sum_{i=1}^n\frac{m_i-t_i}{s_i^2}\sigma_{i,\rm corr}^{(\alpha)}\,,
+\end{equation}
+that determines the values of $\lambda_\beta$. The quantity:
+\begin{equation}
+d_i =\sum_{\alpha=1}^k\lambda_\alpha \sigma_{i,\rm corr}^{(\alpha)}
+\end{equation}
+in Eq.~(\ref{eq:chi2nuis}) can be interpreted as a shift caused by the
+correlated systematic uncertainties. Defining the shifted predictions
+as:
+\begin{equation}
+\overline{t}_i =t_i+d_i\,,
+\end{equation}
+the $\chi^2$ reads:
+\begin{equation}\label{eq:chi2nuisshift}
+  \chi^2 = \sum_{i=1}^n\left(\frac{m_i -\overline{t}_i}{s_i}\right)^2 + \sum_{\alpha=1}^k\lambda_\alpha^2\,.
+\end{equation}
+Therefore, up to a penalty term given by the sum of the square of the
+nuisance parameters, the $\chi^2$ takes the form of the uncorrelated
+definition. In order to achieve a visual assessment of the agreement
+between data and theory, it appears natural to compare the central
+experimental values $m_i$ to the shifted theoretical predictions
+$\overline{t}_i$ in units of the uncorrelated uncertainty $s_i$.
+
+
+% \section{The effect of cuts}
+
+% Due to the possible mutual correlation of the measurements of a given
+% ensamble, the exclusion of any of the measurements in the computation
+% of the $\chi^2$ necessarily introduces an inconsistency. However, in
+% many cases, due to limitations in the computation of the theoretical
+% predictions, it is unavoidable introducing cuts. Unfortunately, there
+% is no way to avoid this inconsistency and the best one can do is to
+% compute the $\chi^2$ in Eq.~(\ref{eq:chi2cov}) skipping the values of
+% $i$ and $j$ corresponding to the measurements excluded from the
+% computation.
+
+% Since cuts are typically of kinematic origin, one can argue that in
+% the case of \textit{unnormalised} measurements the correlation between
+% measurements taken in sufficiently different kinematic regions are not
+% very correlated. This ensures that the exclusion of measurements based
+% on kinematic cuts does not bias the computation of the $\chi^2$
+% significantly\footnote{This heuristic argument is far from being
+%   rigorous.}. However, in the presence of \textit{normalised}
+% measurements this problem is made more severe by the fact that the
+% (common) normalisation introduces a further correlation that is
+% transversal to the whole ensamble~\cite{Boughezal:2017nla}. Moreover,
+% normalised measurements are typically such that the integral over the
+% full ensamble gives one. Therefore, excluding data breaks the
+% normalisation.  However, this problem can be overcome by simply
+% normalising the theoretical predictions to the integral of the
+% measurements that survive the cut.
+
+\begin{thebibliography}{alp}
+
+%\cite{Ball:2009qv}
+\bibitem{Ball:2009qv}
+  R.~D.~Ball {\it et al.} [NNPDF Collaboration],
+  %``Fitting Parton Distribution Data with Multiplicative Normalization Uncertainties,''
+  JHEP {\bf 1005} (2010) 075
+  doi:10.1007/JHEP05(2010)075
+  [arXiv:0912.2276 [hep-ph]].
+  %%CITATION = doi:10.1007/JHEP05(2010)075;%%
+  %84 citations counted in INSPIRE as of 13 May 2018
+
+%\cite{DAgostini:1993arp}
+\bibitem{DAgostini:1993arp}
+  G.~D'Agostini,
+  %``On the use of the covariance matrix to fit correlated data,''
+  Nucl.\ Instrum.\ Meth.\ A {\bf 346} (1994) 306.
+  doi:10.1016/0168-9002(94)90719-6
+  %%CITATION = doi:10.1016/0168-9002(94)90719-6;%%
+  %146 citations counted in INSPIRE as of 13 May 2018
+
+%\cite{Ball:2012wy}
+\bibitem{Ball:2012wy}
+  R.~D.~Ball {\it et al.},
+  %``Parton Distribution Benchmarking with LHC Data,''
+  JHEP {\bf 1304} (2013) 125
+  doi:10.1007/JHEP04(2013)125
+  [arXiv:1211.5142 [hep-ph]].
+  %%CITATION = doi:10.1007/JHEP04(2013)125;%%
+  %102 citations counted in INSPIRE as of 13 May 2018
+
+%\cite{Boughezal:2017nla}
+\bibitem{Boughezal:2017nla}
+  R.~Boughezal, A.~Guffanti, F.~Petriello and M.~Ubiali,
+  %``The impact of the LHC Z-boson transverse momentum data on PDF determinations,''
+  JHEP {\bf 1707} (2017) 130
+  doi:10.1007/JHEP07(2017)130
+  [arXiv:1705.00343 [hep-ph]].
+  %%CITATION = doi:10.1007/JHEP07(2017)130;%%
+  %19 citations counted in INSPIRE as of 13 May 2018
+
+\end{thebibliography}
+
+
+\end{document}

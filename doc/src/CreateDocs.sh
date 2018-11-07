@@ -8,6 +8,7 @@ do
     pdflatex Transversity.tex
     pdflatex TMDEvolution.tex
     pdflatex DrellYanTMD.tex
+    pdflatex CovarianceMatrix.tex
 done
 
 mv *.pdf ../pdf/.
