@@ -60,7 +60,7 @@ namespace apfel {
     else if (pt == 1)
       res = beta1qed(nf, nl);
     else
-      throw std::runtime_error(error("AlphaQED::betaQED","perturbive range out-of-range."));
+      throw std::runtime_error(error("AlphaQED::betaQED","perturbive order out of range."));
 
     return res / pow(FourPi,pt+1);
   }

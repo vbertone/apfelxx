@@ -16,7 +16,7 @@
 namespace apfel
 {
   /**
-    * Parameters of the dgauss integration with 8, 16, 32 and 64-point integration.
+    * Parameters of the dgauss integration with 4, 8, 16, 32 and 64-point integration.
     */
   const std::array<std::vector<double>,5> gq_x =
     {{
@@ -97,7 +97,7 @@ namespace apfel
     double c1 = 0.5 * ( aa + bb );
     double c2 = c1 - aa;
 
-    double s8  = 0;
+    double s8 = 0;
     for (int i = 0; i < 4; i++)
       {
         double u = gq_x[1][i] * c2;
@@ -125,7 +125,7 @@ namespace apfel
     if (std::abs(y) > delta)
       goto goto2;
 
-    throw std::runtime_error(error("Integrator::dgauss", "too high accuracy required"));
+    throw std::runtime_error(error("Integrator::integrate", "too high accuracy required"));
 
     return dgauss;
   }

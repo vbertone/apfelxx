@@ -506,6 +506,35 @@ muons, and tauons, this can be done by multiplying the cross section
 above by three times the branching ratio for the $Z$ decaying into any
 pair of leptons, $3\mbox{Br}(Z\rightarrow \ell^+\ell^-)$.
 
+\section{Cross section differential in $x_F$}
+
+In some cases, the Drell-Yan differential cross section may be
+presented as differential in the invariant mass of the lepton pair $Q$
+and, instead of the rapidity $y$, of the Feynman variable $x_F$
+defined as:
+\begin{equation}
+  x_F = 
+  \frac{Q}{\sqrt{s}}\left(e^{y} - e^{-y}\right) =
+  \frac{2Q}{\sqrt{s}}\sinh y\,,
+\end{equation}
+such that:
+\begin{equation}
+  y(x_F,Q) =
+  \sinh^{-1}\left(\frac{x_F\sqrt{s}}{2Q}\right) = \ln\left(\frac{x_F\sqrt{s}}{2Q}+\sqrt{1+\left(\frac{x_F\sqrt{s}}{2Q}\right)^2}\right)\,,
+\end{equation}
+and so that:
+\begin{equation}
+\frac{dx_F}{dy} = \frac{2Q}{\sqrt{s}}\cosh y\,.
+\end{equation}
+Therefore:
+\begin{equation}
+  \frac{d\sigma}{dQ dx_F dq_T} =
+  \left.\frac{dy}{dx_F}\frac{d\sigma}{dQ dy dq_T}\right|_{y=y(x_F,Q)}=
+  \left.\frac{\sqrt{s}}{2Q\cosh y}\frac{d\sigma}{dQ dy dq_T}\right|_{y=y(x_F,Q)}
+\end{equation}
+and, when integrating over $Q$ for a fixed value of $x_F$, one needs
+to take into account the dependence of $y$ on $Q$.
+
 \appendix
 
 \section{Ogata quadrature}\label{app:OgataQuadrature}
@@ -706,12 +735,6 @@ nodes. Using Eq.~(\ref{eq:limits}), it is easy to see that, for an
 interpolation of degree $k$, one needs to do $k+1$ integrals over the
 intervals included between the $(\beta-k)$-th and the $(\beta+1)$-th
 node.
-
-
-
-
-
-
 
 \begin{thebibliography}{alp}
 

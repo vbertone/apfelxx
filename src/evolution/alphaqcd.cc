@@ -90,7 +90,7 @@ namespace apfel {
     else if (pt == 3)
       res = beta3qcd(nf);
     else
-      throw std::runtime_error(error("AlphaQCD::betaQCD","perturbive range out-of-range."));
+      throw std::runtime_error(error("AlphaQCD::betaQCD","perturbive order out of range."));
 
     return res / pow(FourPi,pt+1);
   }
