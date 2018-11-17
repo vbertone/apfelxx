@@ -14,31 +14,31 @@ namespace apfel
   //_________________________________________________________________________________
   double xupv(double const& x)
   {
-    return 5.107200 * pow(x,0.8) * pow((1-x),3);
+    return 5.107200 * pow(x, 0.8) * pow(1 - x, 3);
   }
 
   //_________________________________________________________________________________
   double xdnv(double const& x)
   {
-    return 3.064320 * pow(x,0.8) * pow((1-x),4);
+    return 3.064320 * pow(x, 0.8) * pow(1 - x, 4);
   }
 
   //_________________________________________________________________________________
   double xglu(double const& x)
   {
-    return 1.7 * pow(x,-0.1) * pow((1-x),5);
+    return 1.7 * pow(x, - 0.1) * pow(1 - x, 5);
   }
 
   //_________________________________________________________________________________
   double xdbar(double const& x)
   {
-    return 0.1939875 * pow(x,-0.1) * pow((1-x),6);
+    return 0.1939875 * pow(x, - 0.1) * pow(1 - x, 6);
   }
 
   //_________________________________________________________________________________
   double xubar(double const& x)
   {
-    return xdbar(x) * (1-x);
+    return xdbar(x) * ( 1 - x );
   }
 
   //_________________________________________________________________________________
@@ -51,9 +51,9 @@ namespace apfel
   std::map<int,double> LHToyPDFs(double const& x, double const&)
   {
     // Call all functions only once.
-    const double upv  = xupv (x);
-    const double dnv  = xdnv (x);
-    const double glu  = xglu (x);
+    const double upv  = xupv(x);
+    const double dnv  = xdnv(x);
+    const double glu  = xglu(x);
     const double dbar = xdbar(x);
     const double ubar = xubar(x);
     const double sbar = xsbar(x);
