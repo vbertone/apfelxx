@@ -8,6 +8,7 @@ set(evolution_source
   matchingconditions.cc
   splittingfunctions_tl.cc
   matchingconditions_tl.cc
+  lhtoypdfs.cc
   )
 
 add_library(evolution OBJECT ${evolution_source})
