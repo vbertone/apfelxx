@@ -89,5 +89,5 @@ namespace apfel
    * @brief Overload the << operator to print the parameters of the
    * grid.
    */
-  std::ostream& operator<<(std::ostream& os, Grid const& gr);
+  std::ostream& operator << (std::ostream& os, Grid const& gr);
 }

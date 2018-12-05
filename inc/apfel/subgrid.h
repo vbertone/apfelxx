@@ -71,11 +71,11 @@ namespace apfel
     std::vector<double> _xsg;          //!< Actual grid
     std::vector<double> _lxsg;         //!< The log of the actual grid
 
-    friend std::ostream& operator<<(std::ostream& os, SubGrid const& dt);
+    friend std::ostream& operator << (std::ostream& os, SubGrid const& sg);
   };
 
   /**
    * @brief Method which prints SubGrid with cout <<.
    */
-  std::ostream& operator<<(std::ostream& os, SubGrid const& sg);
+  std::ostream& operator << (std::ostream& os, SubGrid const& sg);
 }

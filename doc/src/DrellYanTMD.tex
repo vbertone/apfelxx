@@ -363,11 +363,11 @@ This yields:
 \begin{array}{rcl}
 \displaystyle  \widetilde{K}(q_T) &=& \displaystyle \frac{8\pi q_T}{9} \int_0^\infty db\, J_1(bq_T)
   \int_{Q_{\rm min}}^{Q_{\rm max}}
-  \frac{dQ}{Q^3} \alpha^2(Q) H(Q) \\
+  dQ \int_{e^{y_{\rm
+    min}}}^{e^{y_{\rm max}}}\frac{d\xi}{\xi}\\
 \\
 &\times& \displaystyle 
-                         \int_{e^{y_{\rm
-    min}}}^{e^{y_{\rm max}}}\frac{d\xi}{\xi} \sum_q C_q(Q)\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
+                         \frac{1}{Q^3} \alpha^2(Q) H(Q)\sum_q C_q(Q)\overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*(b);Q\right)
                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*(b);Q\right) \\
 \\
 &\times& \displaystyle f_{\rm NP}\left(\frac{Q}{\sqrt{s}}\xi,b;Q\right)
