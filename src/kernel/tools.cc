@@ -33,7 +33,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt)
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& sel)
   {
     // Relevant constants
     const double Q2    = Q * Q;
@@ -64,14 +64,17 @@ namespace apfel
       }
 
     // Build electroweak charges
-    std::vector<double> Charges;
-    for (auto i = 0; i < 6; i++)
-      {
-	const double b = apfel::QCh2[i]
+    std::vector<double> Charges(6, 0.);
+    if (sel < 0 || sel > 5)
+      for (auto i = 0; i < 6; i++)
+	Charges[i] = apfel::QCh2[i]
 	  - 2 * apfel::QCh[i] * Vq[i] * Ve * PZ
 	  + ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
-	Charges.push_back(b);
-      }
+    else
+      Charges[sel] = apfel::QCh2[sel]
+	- 2 * apfel::QCh[sel] * Vq[sel] * Ve * PZ
+	+ ( Ve * Ve + Ae * Ae ) * ( Vq[sel] * Vq[sel] + Aq[sel] * Aq[sel] ) * PZ2;
+
     return Charges;
   }
 

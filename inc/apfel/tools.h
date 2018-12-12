@@ -41,9 +41,10 @@ namespace apfel
    * (Reference: https://arxiv.org/pdf/hep-ph/9711387.pdf).
    * @param Q: absolute value the virtuality of the vector boson
    * @param virt: virtuality (true: time-like, false: space-like)
+   * @param sel: the flavour selector (default: -1, i.e. all flavours are computed)
    * @return the std::vector of the electroweak charges
    */
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt);
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& sel = -1);
 
   /**
    * @brief Utility function that concatenates and sort the input
