@@ -449,6 +449,69 @@ $f_{\rm NP}$.  This provides a fast tool for the computation of
 predictions that makes the extraction of the non-perturbative part of
 the TMDs much easier.
 
+\subsection{Flavour dependence}
+
+It may be advantageous to introduce a flavour dependence of the
+non-perturbative contributions to TMDs. This can be easily done by
+observing that the tensor $W_{n\tau\alpha}$ defined in
+Eq.~(\ref{eq:weights}) can be decomposed as:
+\begin{equation}
+W_{n\tau\alpha}(q_T) = \sum_q W_{n\tau\alpha}^{(q)} (q_T)\,,
+\end{equation}
+with:
+\begin{equation}\label{eq:weightsfl}
+\begin{array}{rcl}
+  \displaystyle  W_{n\tau\alpha}^{(q)}(q_T) & \equiv & \displaystyle w_n^{(1)}\frac{8\pi}{9} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+                                            \frac{\alpha^2(Q)}{Q^3} H(Q) C_q(Q)
+                                            \\
+  \\
+                                 &\times& \displaystyle 
+                                          \int_{e^{y_{\rm
+                                          min}}}^{e^{y_{\rm max}}}d\xi\,\mathcal{I}_\alpha(\xi)\,\frac{1}{\xi} \overline{F}_q\left(\frac{Q}{\sqrt{s}}\xi,b_*\left(\frac{z_n}{q_T}\right);Q\right)
+                                          \overline{F}_{\bar{q}}\left(\frac{Q}{\sqrt{s}}\frac1{\xi},b_*\left(\frac{z_n}{q_T}\right);Q\right)\,.
+\end{array}
+\end{equation}
+This allows for an independent parameterisation of the
+non-perturbative contribution such that
+Eq.~(\ref{eq:finalinterpolated}) can be written as:
+\begin{equation}\label{eq:finalinterpolatedfl}
+\widetilde{K}(q_T) \simeq \sum_q\sum_{n=1}^N
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi} W_{n\tau\alpha}^{(q)}(q_T) f_{\rm NP}^{(q)}\left(\frac{Q_\tau}{\sqrt{s}}\xi_\alpha,\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}^{(q)}\left(\frac{Q_\tau}{\sqrt{s}}\frac1{\xi_\alpha},\frac{z_n}{q_T};Q_\tau\right)\,,
+\end{equation}
+where $f_{\rm NP}^{(q)}$ parametrises the non-perturbative component
+of the TMD with flavour $q$.
+
+\subsection{Gradient with respect to the free parameters}
+
+A very useful appealing of the computation of cross section in terms
+of precomputed table as in Eqs.~(\ref{eq:finalinterpolated}) and
+~(\ref{eq:finalinterpolatedfl}) is the fact that it exposes the free
+parameters of the non-perturbative functions. To be more precise, the
+non-perturbative function $f_{\rm NP}$, on top of being a function of
+$x$, $b$, and $\zeta$, depends on a set of $N_p$ parameters
+$\{\theta_k\}$, $k=1,\dots,N_p$, that are typically determined by fits
+to data, in other words:
+\begin{equation}
+f_{\rm NP}\equiv f_{\rm NP}\left(x,b,\zeta;\{\theta_k\}\right)\,.
+\end{equation}
+Now, when performing a fit it is very useful to be able to compute the
+derivative of the figure of merit (usually the $\chi^2$) with respect
+to the parameters to be determined. In turn, this immediately implies
+being able to compute the derivative of the observables. Referring to
+Eq.~(\ref{eq:finalinterpolated}), the relevant quantity is:
+\begin{equation}
+\frac{d\widetilde{K}}{d\theta_k}=
+\sum_{n=1}^N
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_\xi} W_{n\tau\alpha}(q_T) \left[\frac{d f_{\rm NP}^{(1)}}{d\theta_k} f_{\rm NP}^{(2)}+f_{\rm NP}^{(1)}\frac{d f_{\rm NP}^{(2)}}{d\theta_k} \right]\,,
+\end{equation}
+where $f_{\rm NP}^{(1)}$ and $f_{\rm NP}^{(2)}$ refer to the
+non-perturbative function $f_{\rm NP}$ computed in $x_1$ and $x_2$,
+respectively. It is thus clear that the derivatives w.r.t. the free
+parameters penetrates the observable. Since in most cases the
+derivative of $f_{\rm NP}$ can be computed analytically, this allows
+one to compute the gradient of the figure of merit analytically. This
+potentially makes any fit much simpler.
+
 \subsection{Narrow-width approximation}
 
 A possible alternative to the numerical integration in $Q$ when the
