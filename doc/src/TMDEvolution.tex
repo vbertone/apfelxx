@@ -1,65 +1,98 @@
-\documentclass[10pt,a4paper]{article}
-\usepackage{amsmath,amssymb,bm,makeidx,subfigure}
-\usepackage[italian,english]{babel}
-\usepackage[center,small]{caption}[2007/01/07]
-\usepackage{fancyhdr}
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
 \usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+\usepackage{mathrsfs}
 
-\definecolor{blu}{rgb}{0,0,1}
-\definecolor{verde}{rgb}{0,1,0}
-\definecolor{rosso}{rgb}{1,0,0}
-\definecolor{viola}{rgb}{1,0,1}
-\definecolor{arancio}{rgb}{1,0.5,0}
-\definecolor{celeste}{rgb}{0,1,1}
-\definecolor{rosa}{rgb}{1,0.3,0.5}
+\makeatletter
 
-\oddsidemargin = 12pt
-\topmargin = 0pt
-\textwidth = 440pt
-\textheight = 650pt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
 
-\makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
 
 \begin{document}
 
+\title{Transverse momentum resummation and matching to fixed order}
+
+\author{Valerio Bertone}
+
+%\institution{$^{a}$PH Department, TH Unit, CERN, CH-1211 Geneva 23, Switzerland}
+\maketitle
+
+%\begin{abstract}
+%In this document 
+%\end{abstract}
+\tableofcontents{}
+
 \section{Evolution of the TMDs}
 
-In these notes I will show how to solve the renormalisation-group
+In this section I will show how to solve the renormalisation-group
 equation (RGE) and the rapidity-evolution equation (often referred to
 as Collins-Soper (CS) equation) of a TMD distribution $F$. The
 distribution $F$ can be either a PDF or a FF and can be associated to
 either to a quark or to the gluon: the structure of the solution of
-the evolution equations is exactly the same. In the impact-parameter
-space, $F$ is a function of the transverse-momentum fraction $x$, of
-the bidimensional impact-parameter vector $\mathbf{b}_T$, of the
-renormalisation scale $\mu$, and of the rapidity scale $\zeta$,
-\textit{i.e.}  $F\equiv F(x, \mathbf{b}_T,\mu,\zeta)$. Since the
-evolution equations govern the behaviour of $F$ w.r.t. the scale $\mu$
-and $\zeta$, in order to simplify the notation I will drop the
+the evolution equations is exactly the same. In fact, the solution
+equation only depends on whether we are evolving a quark or a gluon
+while it does not distinguish between PDFs and FFs. In the
+impact-parameter space, $F$ is a function of the transverse-momentum
+fraction $x$, of the bidimensional impact-parameter vector
+$\mathbf{b}_T$, of the renormalisation scale $\mu$, and of the
+rapidity scale $\zeta$, \textit{i.e.}
+$F\equiv F(x, \mathbf{b}_T,\mu,\zeta)$. Since the evolution equations
+govern the behaviour of $F$ w.r.t. the scale $\mu$ and $\zeta$, in
+order to simplify the notation in this section I will drop the
 dependence on $x$ and $\mathbf{b}_T$, \textit{i.e.}
 $F\equiv F(\mu,\zeta)$.\footnote{Notice that, despite the variables
-  $x$ and $\mathbf{b}_T$ will no longer appear, the symbol $\otimes$
-  indicates the Mellin convolution integral w.r.t. $x$ while $b_T$
-  indicates the length of the vector $\mathbf{b}_T$.}
+  $x$ and $\mathbf{b}_T$ will not appear explicitly, the symbol
+  $\otimes$ indicates the Mellin convolution integral w.r.t. $x$ while
+  $b_T$ indicates the length of the vector $\mathbf{b}_T$.}
 
-The goal of the solution of the evolution equation is that of
-expressing the distribution $F$ at some final scales $(\mu,\zeta)$ in
-terms of the same distribution at the initial scales
-$(\mu_0,\zeta_0)$. It will turn out that this is accomplished by
-computing the evolution kernel $R\left[(\mu_0,\zeta_0)\rightarrow
-  (\mu,\zeta)\right]$, such that:
+The solution of the evolution equation allows one to express the
+distribution $F$ at some final scales $(\mu,\zeta)$ in terms of the
+same distribution at the initial scales $(\mu_0,\zeta_0)$. It will
+turn out that this is accomplished by computing the evolution kernel
+$R\left[(\mu,\zeta)\leftarrow (\mu_0,\zeta_0)\right]$, such that:
 \begin{equation}\label{eq:evkernel}
   F(\mu,\zeta) = R\left[(\mu,\zeta)\leftarrow
     (\mu_0,\zeta_0)\right]F(\mu_0,\zeta_0)\,.
 \end{equation}
-The purpose of these notes is to provide the explicit expression of
-the evolution kernel $R$ in terms of perturbatively computable
-quantities. A collateral aspect that will be discussed is these notes
-is the independence from the path that connects the initial and final
-scales $(\mu_0,\zeta_0)$ and $(\mu,\zeta)$. This in turn concerns the
-resummation of large logarithms that is required to ensure that the
-perturbative convergence is not spoiled.
-
+The evolution kernel $R$ can be expressed in terms of perturbatively
+computable quantities. A collateral aspect that will be discussed in
+below is the independence from the path that connects the initial and
+final scales $(\mu_0,\zeta_0)$ and $(\mu,\zeta)$. This in turn
+concerns the resummation of large logarithms that is required to
+ensure that the perturbative convergence is not spoiled.
 
 The RGE and the CS equation read:
 \begin{equation}\label{eq:eveqs}
@@ -71,14 +104,13 @@ The RGE and the CS equation read:
 \end{array}
 \end{equation}
 where $\gamma$ and $K$ are the anomalous dimensions of the evolution
-in $\mu$ and $\sqrt{\zeta}$, respectively, that will be discussed in
-more detail below. The equations above can be solved as follows. The
-first equation gives:
+in $\mu$ and $\sqrt{\zeta}$, respectively. The equations above can be
+solved as follows. The first equation gives:
 \begin{equation}\label{eq:zetadir}
 F(\mu,\zeta) = \exp\left[  K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}\right]F(\mu,\zeta_0)\,.
 \end{equation}
 The factor $F(\mu,\zeta_0)$ can be evolved in $\mu$ using the second
-equation to give:
+equation:
 \begin{equation}\label{eq:mudir}
 F(\mu,\zeta_0) = \exp\left[ \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,,
 \end{equation}
@@ -98,10 +130,10 @@ that reads:
 \end{equation}
 $\gamma_K$ is said cusp anomalous dimension and obeys the perturbative
 expansion:
-\begin{equation}
-\gamma_K(\alpha_s) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s}{4\pi}\right)^{n+1}\gamma_K^{(n)}\,,
+\begin{equation}\label{eq:GKexp}
+  \gamma_K(\alpha_s(\mu)) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_K^{(n)}\,,
 \end{equation}
-where $\gamma_K^{(n)}$ are numerical coefficients. Their value up to
+where $\gamma_K^{(n)}$ are numerical coefficients. The values up to
 $n=3$ can be read from Eq.~(59) of Ref.~\cite{Collins:2017oxh}. They
 coincide with those reported in Eq.~(D.6) of
 Ref.~\cite{Echevarria:2016scs} up to a factor two due to a different
@@ -117,7 +149,7 @@ K(\mu) = K(\mu_0) - \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))
 We anticipate that in the $\overline{\mbox{MS}}$ scheme, there exists
 a particular scale $\mu_b = 2e^{-\gamma_E}/b_T$ such that $K$ admits
 the following perturbative expansion:
-\begin{equation}
+\begin{equation}\label{eq:Kexp}
 K(\mu_b) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}K^{(n,0)}\,,
 \end{equation}
 where $K^{(n,0)}$ are numerical coefficients. Therefore, if
@@ -159,7 +191,7 @@ whose solution is:
 \end{equation}
 It turns out that $\gamma(\mu,\mu^2)$ has a purely perturbative
 expansion:
-\begin{equation}
+\begin{equation}\label{eq:GFexp}
   \gamma(\mu,\mu^2) \equiv \gamma_F(\alpha_s(\mu)) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_F^{(n)}\,,
 \end{equation}
 where $\gamma_F^{(n)}$ are again numerical coefficients that are given
@@ -223,9 +255,9 @@ so that:
       \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}C(\mu_0,\zeta_0)\otimes
   f(\mu_0)\,.
 \end{equation}
-Exactly as in the case of $K$, for $\mu=\sqrt{\zeta}=\mu_b$ the
+Exactly as in the case of $K$, for $\mu_0=\sqrt{\zeta_0}=\mu_b$ the
 matching function has the expansion:
-\begin{equation}
+\begin{equation}\label{eq:MatchCoeffExp}
 C(\mu_b,\mu_b^2) =\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n}C^{(n,0)}\,,
 \end{equation}
 where the coefficients $C^{(n,0)}$ are functions of $x$ only. In order
@@ -244,7 +276,7 @@ Eq.~(\ref{eq:matching}) with respect to $\mu$ and $\zeta$ one gets:
 \end{array}
 \end{equation}
 In the r.h.s. of the second equation I have used the DGLAP equation:
-\begin{equation}
+\begin{equation}\label{eq:DGLAPeq}
 \frac{\partial f}{\partial \ln\mu} = 2P(\mu) \otimes f(\mu)\,.
 \end{equation}
 One can also take the derivative of Eq.~(\ref{eq:solution2}) and the
@@ -265,8 +297,9 @@ result is:
   C(\mu,\zeta)\otimes f(\mu)\,.
 \end{array}
 \end{equation}
-Equating Eq.~(\ref{eq:derivs1}) and Eq.~(\ref{eq:derivs2}) and dropping
-the distribution $f$, the evolution equations for $C$ are:
+Equating Eq.~(\ref{eq:derivs1}) and Eq.~(\ref{eq:derivs2}) and
+dropping the distribution $f$, the evolution equations for $C$
+are:
 \begin{equation}
 \begin{array}{l}
 \displaystyle \frac{\partial C}{\partial \ln\sqrt{\zeta}} = \left[
@@ -276,15 +309,21 @@ the distribution $f$, the evolution equations for $C$ are:
 \displaystyle \frac{\partial
   C}{\partial \ln\mu} = \left\{\left[\gamma_F(\alpha_s(\mu))
       -
-      \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]\delta(1-x)-2P(\mu)\right\}\otimes
-  C(\mu,\zeta)\,.
+      \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]\Delta(1-x)-2P(\mu)\right\}\otimes
+  C(\mu,\zeta)\,,
 \end{array}
 \end{equation}
-These equations can be solved to determine the evolution of the
-matching function $C$. The solution can eventually be expanded if
-initial and final scales are not too far apart. In particular, if
-$\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in Eq.~(\ref{eq:solution2}), the
-matching function $C$ can be reliably expanded as:
+where the $\Delta$ is a matrix in flavour space whose components are
+defined as:
+\begin{equation}
+\Delta_{ij}(1-x) = \delta_{ij}\delta(1-x)\,,
+\end{equation}
+being $i$ and $j$ flavour indices. The equations above can be solved
+to determine the evolution of the matching function $C$. The solution
+can eventually be expanded if initial and final scales are not too far
+apart. In particular, if $\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in
+Eq.~(\ref{eq:solution2}), the matching function $C$ can be reliably
+expanded as:
 \begin{equation}
   C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
 \end{equation}
@@ -298,7 +337,7 @@ In order to use Eq.~(\ref{eq:solution2}) in phenomenological
 applications, one needs to define the values of both the initial and
 final pairs of scales $(\mu_0,\zeta_0)$ and $(\mu,\zeta)$. The initial
 scales are usually identified with $\mu_b$ up to a small factor $C_i$,
-\textit{i.e.}  $(\mu_0,\zeta_0) = (C_i\mu_b,C_f^2\mu_b^2)$, with
+\textit{i.e.}  $(\mu_0,\zeta_0) = (C_i\mu_b,C_i^2\mu_b^2)$, with
 $\mu_b = 2e^{-\gamma_E}/b_T$. This is advantageous because possible
 logarithms that appear in the perturbative expansion of $K(\mu_0)$ and
 $C(\mu_0,\zeta_0)$ in Eq.~(\ref{eq:solution3}) have the form
@@ -338,7 +377,1191 @@ corrections.
 % \gamma_K\ln\zeta_\mu+ \gamma_K\ln\mu + \gamma_F = 0
 % \end{equation}
 
+\section{Non-perturbative component}\label{sec:nonpert}
 
+In the previous section, I have considered the evolution of TMDs and
+thus I concentrated on their dependence on the renormalisation and
+rapidity scales $\mu$ and $\zeta$, leaving aside the dependence on
+$b_T$. Nonetheless, the computation of the rapidity evolution kernel
+in the $\overline{\mbox{MS}}$ scheme has led to the introduction of
+the scale:
+\begin{equation}
+  \mu_b = \frac{2e^{-\gamma_E}}{b_T}\,,
+\end{equation}
+This scale, within a modest factor, provides a natural choice for the
+evolution initial scales $\mu_0$ and $\sqrt{\zeta_0}$ that prevents
+the appearance of large logarithms. Crucially, the strong coupling
+$\alpha_s$ has to be computed in the vicinity of the scale
+$\mu_b$. Therefore, if the impact parameters $b_T$ becomes large,
+$\alpha_s(\mu_b)$ may potentially become very large invalidating any
+perturbative calculation. Since the computation of $q_T$ dependent
+observables requires Fourier transforming TMDs, they need to be
+accessed also at large values of $b_T$ where the perturbative
+computation of the previous section is not valid. To overcome this
+limitation, it is customary to introduce an \textit{arbitrary} scale
+$b_{\rm max}$ that denotes the maximum value of $b_T$ at which one
+trusts perturbation theory. The value has to be such that:
+\begin{equation}
+\alpha_s\left(\frac{2e^{-\gamma_E}}{b_{\rm max}}\right) \ll 1\,.
+\end{equation}
+The one introduces a monotonic function $b_*$ of $b_T$ with the
+following behaviour:
+\begin{equation}
+\begin{array}{lll}
+b_*(b_T)\simeq b_T &\mbox{ for } & b_T\rightarrow 0\,,\\
+b_*(b_T) \rightarrow b_{\rm max} &\mbox{ for } & b_T\rightarrow \infty\,.
+\end{array}
+\end{equation}
+A common choice is:
+\begin{equation}
+b_*(b_T) = \frac{b_T}{\sqrt{1+ b_T^2/b_{\rm max}^2}}\,.
+\end{equation}
+Now, one writes:
+\begin{equation}\label{eq:separatation}
+F(x, {b}_T,\mu,\zeta) = \left[\frac{F(x,
+    {b}_T,\mu,\zeta)}{F(x,
+    b_*({b}_T),\mu,\zeta)}\right]F(x,
+b_*({b}_T),\mu,\zeta) \equiv f_{\rm NP}(x,
+{b}_T,\mu,\zeta) F(x, b_*({b}_T),\mu,\zeta)\,.
+\end{equation}
+This separation is advantageous because, due to the behaviour of
+$b_*(b_T)$, $F(x, b_*({b}_T),\mu,\zeta)$ can be computed in
+perturbation theory, while $f_{\rm NP}(x, {b}_T,\mu,\zeta)$ embodies
+the non-perturbative dependence. It is important to stress that this
+separation is arbitrary and dependes of the particular choice of $b_*$
+and $b_{\rm max}$. Therefore, for any particular choice, only the
+combination in Eq.~(\ref{eq:separatation}) is meaningful and it is
+misleading to refer to $f_{\rm NP}$ as to the non-perturbative part of
+the TMDs in a universal sense.
+
+\section{Extraction of the singular behaviour for $q_T\rightarrow 0$}
+
+In this section we derive the expansion of the different ingredients
+of TMDs in order to finally extract the singular behaviour of a cross
+section involving TMDs for $q_T\rightarrow 0$.
+
+\subsection{Expansion of the evolution kernel}
+
+In this subsection we work out the perturbative expansion of the
+evolution kernel $R$ up to $\mathcal{O}(\alpha_s^2)$. This expansion
+is useful to extract the (singular) asymptotic behaviour of a cross
+section computed at fixed order in pQCD as $q_T$ tends to zero. Since
+TMDs always appear in pairs in the computation of a cross section and
+that the evolution kernel is universal, it is convenient to compute
+the expansion of $R^2$. To do so, we start from
+Eq.~(\ref{eq:evkernelexp}) where we set
+$\mu_0=\sqrt{\zeta_0}=\mu_b=2e^{-\gamma_E}/{b_T}$ and
+$\mu=\sqrt{\zeta}=Q$, possible variations can be reinstated at a later
+stage:
+\begin{equation}
+  R^2 = \exp\left\{ K(\mu_b)\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\left[\gamma_F(\alpha_s(\mu')) - \frac12\gamma_K(\alpha_s(\mu'))\ln\frac{Q^2}{\mu'^2}\right]\right\}\,.
+\end{equation}
+Now we use the expansions in Eqs.~(\ref{eq:GKexp}), (\ref{eq:Kexp})
+and~(\ref{eq:GFexp}):
+\begin{equation}\label{eq:Sudexp}
+  R^2 = \exp\left\{\left[\sum_{n=0}^\infty a_s^{n+1}(\mu_b)K^{(n,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}a_s^{n+1}(\mu')\left(\gamma_F^{(n)} - \frac12\gamma_K^{(n)}\ln\frac{Q^2}{\mu'^2}\right)\right]\right\}\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+a_s = \frac{\alpha_s}{4\pi}\,.
+\end{equation}
+In order to carry out the perturbative expansion we need to write the
+argument of the exponential in terms of a common value of $\alpha_s$
+computed at some hard scale: the natural choice is $\alpha_s(Q)$. This
+can be achieved by using the RGE for $a_s$ at leading order:
+\begin{equation}\label{eq:RGEas}
+\mu^2\frac{da_s}{d\mu^2}=-\beta_0a_s^2(\mu)\,,
+\end{equation}
+whose solution is:
+\begin{equation}\label{eq:asexp}
+a_s(\mu) = \frac{a_s(Q)}{1+a_s(Q)\beta_0\ln(\mu^2/Q^2)}\simeq a_s(Q)\left[1+a_s(Q)\beta_0\ln(Q^2/\mu^2)+\mathcal{O}(a_s^2)\right]\,.
+\end{equation}
+Plugging the expansion in the r.h.s. of Eq.~(\ref{eq:asexp}) into
+Eq.~(\ref{eq:Sudexp}) and retaining only terms up to
+$\mathcal{O}(a_s^2)$, one finds: 
+\begin{equation}\label{eq:SudExp1}
+\begin{array}{rcl}
+  R^2 &=&\displaystyle \exp\Bigg\{ a_s(Q)\left[
+          K^{(0,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\left(\gamma_F^{(0)}
+          - \frac12\gamma_K^{(0)}\ln\frac{Q^2}{\mu'^2}\right)\right]\\
+\\
+&+& \displaystyle a_s^2(Q)\beta_0\left[K^{(0,0)}\ln^2\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\left(\gamma_F^{(0)}\ln\frac{Q^2}{\mu'^2}
+          - \frac12\gamma_K^{(0)}\ln^2\frac{Q^2}{\mu'^2}\right)\right]\\
+\\
+&+&\displaystyle a_s^2(Q)\left[K^{(1,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\left(\gamma_F^{(1)}
+          - \frac12\gamma_K^{(1)}\ln\frac{Q^2}{\mu'^2}\right)\right]+\mathcal{O}(a_s^3)\Bigg\}\,.
+\end{array}
+\end{equation}
+The final step before carrying out the expansion is computing the
+integrals:
+\begin{equation}
+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\ln^k\left(\frac{Q^2}{\mu'^2}\right)
+= \int_{\ln(\mu_b^2)}^{\ln
+  Q^2}d\ln\mu'^2\ln^k\left(\frac{Q^2}{\mu'^2}\right) = \int^{\ln(Q^2/\mu_b^2)}_{0}dx\,x^k=\frac{1}{k+1}\ln^{k+1}\left(\frac{Q^2}{\mu_b^2}\right)\,.
+\end{equation}
+so that:
+\begin{equation}\label{eq:SudExp0}
+\begin{array}{rcl}
+  R^2 &\simeq&\displaystyle \exp\Bigg\{ a_s(Q)\left[
+          \left(K^{(0,0)}+\gamma_F^{(0)}\right)L - \frac14\gamma_K^{(0)}L^2
+          \right]\\
+\\
+&+& \displaystyle a_s^2(Q)\bigg[\left(K^{(1,0)}+\gamma_F^{(1)}\right)L +\left(\beta_0 K^{(0,0)}+\frac12\beta_0\gamma_F^{(0)} - \frac14\gamma_K^{(1)}\right)L^2- \frac16 \beta_0\gamma_K^{(0)}L^3\bigg]\Bigg\}\,,
+\end{array}
+\end{equation}
+where we have defined:
+%If we define:
+\begin{equation}\label{eq:reslogs}
+L\equiv \ln\frac{Q^2}{\mu_b^2}\,,
+\end{equation}
+Eq.~(\ref{eq:SudExp1}) can be conveniently written as:
+\begin{equation}\label{eq:SudCompact}
+  R^2=\exp\left\{\sum_{n=1}^2a_s^n(Q)\sum_{k=1}^{n+1}S^{(n,k)}L^k\right\}\,,
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \displaystyle S^{(1,1)} =K^{(0,0)}+\gamma_F^{(0)}\,,\quad\displaystyle
+                                                   S^{(1,2)} =- \frac14\gamma_K^{(0)}\,,\\
+\\
+\displaystyle S^{(2,1)} =K^{(1,0)}+\gamma_F^{(1)}\,,\quad\displaystyle S^{(2,2)} = \beta_0 K^{(0,0)}+\frac12\beta_0\gamma_F^{(0)} - \frac14\gamma_K^{(1)}\,,\quad\displaystyle S^{(2,3)} = - \frac16 \beta_0\gamma_K^{(0)}\,.
+\end{array}
+\end{equation}
+Eq.~(\ref{eq:SudCompact}) can be easily expanded up to order $a_s^2$
+as:
+\begin{equation}\label{eq:exp1}
+\begin{array}{rcl}
+  \displaystyle R^2&=&\displaystyle
+                       1+a_s(Q)\sum_{k=1}^{2}S^{(1,k)}L^k+a_s^2(Q)\left[\sum_{k=1}^{3}S^{(2,k)}L^k+\frac12\left(\sum_{k=1}^{2}S^{(1,k)}L^k\right)^2\right]+\mathcal{O}(a_s^3)\\
+  \\
+                   &=&\displaystyle
+                       1+a_s(Q)\sum_{k=1}^{2}S^{(1,k)}L^k+a_s^2(Q)
+                       \sum_{k=1}^{4}\widetilde{S}^{(2,k)}L^k
+                       +\mathcal{O}(a_s^3)\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{ll}
+\displaystyle    \widetilde{S}^{(2,1)}={S}^{(2,1)}\,,&\displaystyle \quad \widetilde{S}^{(2,2)}={S}^{(2,2)}+\frac12\left[S^{(1,1)}\right]^2\,,\\
+\\
+\displaystyle
+  \widetilde{S}^{(2,3)}={S}^{(2,3)}+{S}^{(1,1)}{S}^{(1,2)}\,,&\displaystyle
+                                                                \quad \widetilde{S}^{(2,4)}=\frac12\left[S^{(1,2)}\right]^2\,.
+\end{array}
+\end{equation}
+
+\subsection{Expansion of the DGLAP evolution}
+
+A further step towards the extraction of the singular behaviour of the
+resummed cross section in the limit $q_T\rightarrow 0$ requires
+expanding the solution of the DGLAP equation that also resums logs as
+that in Eq.~(\ref{eq:reslogs}). The solution of the DGLAP equation in
+Eq.~(\ref{eq:DGLAPeq}) that evolves PDFs from the scale $\mu_0=\mu$ to
+the scale $Q$ can be written as\footnote{A possible summation over the
+flavour indices is understood}:
+\begin{equation}
+f(Q) = \Gamma(Q,\mu_b)\otimes f(\mu_b)\,,
+\end{equation}
+where the evolution operator $\Gamma$ obeys the equation:
+\begin{equation}\label{eq:DGLAPeqOp}
+\frac{\partial \Gamma(Q,\mu_b)}{\partial \ln Q^2} = P(Q) \otimes \Gamma(Q,\mu_b)\,,
+\end{equation}
+with the splitting functions $P$ having the perturbative expansion:
+\begin{equation}
+P(Q) =\sum_{n=0}^{\infty}a_s^{n+1}(Q) P^{(n)}\,.
+\end{equation}
+The coefficients $P^{(n)}$ are functions of $x$ (or $z$) only and thus
+(in $\overline{\mbox{MS}}$) $P$ depends on $Q$ only through the
+coupling $a_s$. We now need to expand $\Gamma$ in powers of $a_s$ up
+to $\mathcal{O}(a_s^2)$. To this end, we assume that $\Gamma$ obeys
+the expansion:
+\begin{equation}
+\Gamma(Q,\mu_b) = \Delta(1-x) + \sum_{n=1}^{\infty} a_s^{n}(Q)\sum_{k=1}^{n}L^k\Gamma^{(n,k)}\,,
+\end{equation}
+where the coefficients $\Gamma^{(n,k)}$ are functions of $x$ only that
+we need to determine up to $n=2$. Now Eq.~(\ref{eq:DGLAPeqOp}) can be
+solved iteratively. At $\mathcal{O}(a_s)$, considering that:
+\begin{equation}
+\frac{da_s}{d \ln Q^2}=\mathcal{O}(a_s^2)\,,
+\end{equation}
+this gives:
+\begin{equation}
+\Gamma^{(1,1)}=P^{(0)}\,.
+\end{equation}
+At $\mathcal{O}(a_s^2)$, this gives:
+\begin{equation}
+-\beta_0 P^{(0)} +\Gamma^{(2,1)}+2L\Gamma^{(2,2)}= P^{(1)}+L
+P^{(0)}\otimes P^{(0)}\,,
+\end{equation}
+so that:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \Gamma^{(2,1)} = P^{(1)} + \beta_0 P^{(0)}\,,\\
+\\
+\displaystyle \Gamma^{(2,2)} = \frac12 P^{(0)}\otimes P^{(0)}\,.
+\end{array}
+\end{equation}
+Putting all pieces together we find:
+\begin{equation}
+\Gamma(Q,\mu_b) = \Delta(1-x) + a_s(Q)L P^{(0)}
++a_s^2(Q)\left[L\left(P^{(1)} + \beta_0 P^{(0)}\right)+\frac12 L^2 P^{(0)}\otimes P^{(0)}\right]+\mathcal{O}(a_s^3)\,.
+\end{equation}
+However, the quantity we are interested in is the inverse of the
+operator $\Gamma$, that evolves the PDFs from the scale $Q$ to
+$\mu_b$:
+\begin{equation}\label{eq:DGLAPeqOp1}
+\begin{array}{l}
+\displaystyle \Gamma(\mu_b,Q)=\Gamma^{-1}(Q,\mu_b) \\
+\\
+ = \Delta(1-x) - a_s(Q)L P^{(0)}
+\displaystyle - a_s^2(Q)\left[L\left(P^{(1)} + \beta_0 P^{(0)}\right)-\frac12 L^2 P^{(0)}\otimes P^{(0)}\right]+\mathcal{O}(a_s^3)\,.
+\end{array}
+\end{equation}
+
+\subsection{Expansion of the matching coefficients at the hard scale}
+
+The final step is the expansion of the matching coefficients $C$
+defined in Eq.~(\ref{eq:matching}) for $\mu_0=\mu$ around the scale
+$Q$ up to order $a_s^2$. To do this, we use the expansion in
+Eq.~(\ref{eq:MatchCoeffExp}), in which $a_s$ is computed at $\mu_b$,
+and combine it with Eq.~(\ref{eq:asexp}). This yields:
+\begin{equation}\label{eq:MatchCoeffExp1}
+  C(\mu_b,\mu_b^2) = \Delta(1-x) + a_s(Q) C^{(1,0)} + a_s^2(Q) \left[C^{(2,0)}+L\beta_0C^{(1,0)}\right]+\mathcal{O}(a_s^3)\,.
+\end{equation}
+
+\subsection{Expansion of the single low-scale TMD}
+
+Before going into the more convoluted (but more relevant) case of a
+cross section, it is useful to compute the expansion of the low-scale
+TMD, \textit{i.e.} the convolution between matching coefficients and
+collinear distributions at the scale $\mu_0=\mu_b$. This can be
+achieved combining Eqs.~(\ref{eq:DGLAPeqOp1})
+and~(\ref{eq:MatchCoeffExp1}):
+\begin{equation}\label{eq:LowScaleTMD}
+\begin{array}{rcl}
+C(\mu_b,\mu_b^2)\otimes f(\mu_b) &=& C(\mu_b,\mu_b^2)\otimes
+\Gamma(\mu_b,Q) \otimes f(Q)\\
+\\
+&=& \bigg\{\Delta(1-x) + a_s(Q)\left[C^{(1,0)}-L P^{(0)}\right]\\
+\\
+&+&\displaystyle a_s^2(Q)\bigg[C^{(2,0)}+L\left(-P^{(1)}-C^{(1,0)}\otimes P^{(0)}+\beta_0C^{(1,0)} - \beta_0
+    P^{(0)}\right)\\
+\\
+&+&\displaystyle \frac12 L^2 P^{(0)}\otimes
+    P^{(0)}\bigg]\bigg\}\otimes f(Q)+\mathcal{O}(a_s^3)\,.
+\end{array}
+\end{equation}
+
+\subsection{Expansion of the cross section}
+
+We are finally in the position to gather all pieces and write down the
+perturbative expansion of a cross section involving TMDs relevant in
+the limit $q_T\rightarrow 0$. The only additional information required
+is the hard factor $H$ that also admits a perturbative expansion. It
+is now opportune to reinstate the flavour indices. In general, the
+hard factor $H$ has a flavour structure, meaning that it carries a
+pair of flavour indices. Choosing $\mu = Q$, the expansion of the hard
+factor reads:
+\begin{equation}\label{eq:HardFactExp}
+H_{ij}(Q) = \sum_{n=0}^\infty a_s^n(Q) H_{ij}^{(n)}=1+a_s(Q) H_{ij}^{(1)}+a_s^2(Q) H_{ij}^{(2)}+\mathcal{O}(a_s^3)\,,
+\end{equation}
+where $H_{ij}^{(n)}$ are numerical factors.
+
+A physical cross section differential in $q_T$ can finally be computed
+as:
+\begin{equation}
+  \displaystyle \frac{d\sigma}{dq_T^2} \propto \sum_{ij}H_{ij} (Q) \int d^2\mathbf{b}_T e^{i \mathbf{b}_T\cdot \mathbf{q}_T}F_i(x, \mathbf{b}_T,Q,Q^2) D_j(z, \mathbf{b}_T,Q,Q^2)
+\end{equation}
+where $F_i$ and $D_j$ are two different TMDs distributions
+(\textit{e.g.} a PDF and a FF) indexed by a flavour index. Assuming
+that the flavour indices $i$ and $j$ run \textit{either} on quarks
+\textit{or} on the gluon and writing explicitly all perturbative
+factors, one has:
+\begin{equation}\label{eq:xsecexp}
+\begin{array}{rcl}
+\displaystyle \frac{d\sigma}{dq_T^2} &\propto&\displaystyle  \sum_{ij}H_{ij} (Q) \int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
+  \mathbf{q}_T} R^2\left[(\mu_b,\mu_b^2)\rightarrow
+  (Q,Q^2)\right] \\
+\\
+&\times&\displaystyle \sum_{k}\left[ \mathcal{C}_{ik}(x;\mu_b,\mu_b^2)\otimes
+  f_k(x,\mu_b)\right]\sum_{l}\left[
+  \mathbb{C}_{jl}(z;\mu_b,\mu_b^2)\otimes
+  d_l(z,\mu_b)\right]\\
+\\
+&=&\displaystyle \sum_{n=0}^\infty a_s^n(Q)\sum_{p=0}^{2n} I_p(q_T,Q)
+    \sum_{ij,kl} B_{ij,kl}^{(n,p)}(x,z) \mathop{\otimes}_x f_k(x,Q) \mathop{\otimes}_z d_l(z,Q)\,.
+\end{array}
+\end{equation}
+In the equation above we have defined:
+\begin{equation}\label{eq:IkPert}
+I_p(q_T,Q)\equiv \int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
+  \mathbf{q}_T} \ln^p\left(\frac{b_T^2Q^2}{4e^{-2\gamma_E}}\right) = \frac12\int_0^\infty db_T\,b_T J_0(b_Tq_T) \ln^p\left(\frac{b_T^2Q^2}{4e^{-2\gamma_E}}\right)\,.
+\end{equation}
+Results for $I_p$ have been computed up to $p=4$ in Eq.~(136) of
+Appendix B of Ref.~\cite{Bozzi:2005wk}. Specifically, and including
+the trivial tranform with $p=0$, they read:
+\begin{equation}
+\begin{array}{l}
+\displaystyle I_0(q_T,Q) = \delta(q_T)\,,\\
+\\
+\displaystyle I_1(q_T,Q) = - \frac{1}{q_T^2}\,,\\
+\\
+\displaystyle I_2(q_T,Q) = - \frac{2}{q_T^2}\ln\left(\frac{Q^2}{q_T^2}\right) \,,\\
+\\
+\displaystyle I_3(q_T,Q) = - \frac{3}{q_T^2}\ln^2\left(\frac{Q^2}{q_T^2}\right) \,,\\
+\\
+\displaystyle I_4(q_T,Q) = - \frac{4}{q_T^2}\left[\ln^3\left(\frac{Q^2}{q_T^2}\right)-4\zeta_3\right]\,.
+\end{array}
+\end{equation}
+The functions above are compute under the assumption that there is no
+non-perturbative component. Upon this assumption, that we will relax
+below, all terms with $p=0$ will be proportional to
+$\delta(q_T)$. Analogous terms are \textit{not} included in the
+fixed-order calculation. Therefore, when matching the resummed
+calculation to the fixed-order one, one should remove from
+Eq.~(\ref{eq:xsecexp}) all terms with $p=0$. Importantly, this means
+removing the full $\mathcal{O}(1)$ terms such that leading-order term
+for $q_T>0$ is $\mathcal{O}(a_s)$.
+
+The coefficients $B^{(n,k)}$ in Eq.~(\ref{eq:xsecexp}) can be
+determined by using the expansions worked out above in
+Eqs.~(\ref{eq:exp1}), (\ref{eq:LowScaleTMD}),
+and~(\ref{eq:HardFactExp}). The leading order is obtained by just
+retaining the $\mathcal{O}(a_s^0)$ terms in all the expansions. This
+gives:
+\begin{equation}
+B_{ij,kl}^{(0,0)}(x,z) = \delta_{ik}\delta_{jl}\delta(1-x)\delta(1-z)\,.
+\end{equation}
+
+The $\mathcal{O}(a_s)$ terms are obtained by combining the
+leading-order once of all expansions but one. Finally organising the terms in
+powers of $L$, this yields:
+\begin{equation}
+\begin{array}{rcl}
+B_{ij,kl}^{(1,0)}(x,z) &=& \displaystyle H_{ij}^{(1)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)+\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)\,,\\
+\\
+B_{ij,kl}^{(1,1)}(x,z) &=& \displaystyle S^{(1,1)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)-\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)-\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)\,,\\
+\\
+B_{ij,kl}^{(1,2)}(x,z) &=& \displaystyle S^{(1,2)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\,.
+\end{array}
+\end{equation}
+
+Finally, the $\mathcal{O}(a_s^2)$ terms are:
+\begin{equation}
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle H_{ij}^{(2)}
+                              \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
+  \\
+                          &+&\displaystyle
+                              H_{ij}^{(1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
+                              +
+                              \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+  \\
+                          &+&\displaystyle \mathcal{C}_{ik}^{(2,0)}(x)\delta_{jl}\delta(1-z) + 
+                              \mathcal{C}_{ik}^{(1,0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
+                              +\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(2,0)}(z)\,,\\
+
+  \\
+  {B}_{ij,kl}^{(2,1)}(x,z) &=&\displaystyle \left(\widetilde{S}^{(2,1)}+H_{ij}^{(1)}S^{(1,1)}\right)
+                              \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
+  \\
+                          &-& \displaystyle
+                              H_{ij}^{(1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
+                              +
+                              \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
+  \\
+                          &+&
+                              S^{(1,1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
+                              +
+                              \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+  \\
+                          &+&\displaystyle 
+                              \left(-\mathcal{P}^{(1)}(x)-\sum_\alpha
+                              \mathcal{C}_{i\alpha}^{(1,0)}(x)\otimes
+                              \mathcal{P}_{\alpha k}^{(0)}(x)+\beta_0\mathcal{C}_{ik}^{(1,0)}(x) - \beta_0
+    \mathcal{P}_{ik}^{(0)}(x)\right)\delta_{jl}\delta(1-z)\\
+\\
+ &-&\displaystyle \mathcal{P}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
+     -\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
+\\
+                              &+&\displaystyle \delta_{jl}\delta(1-z) \left(-\mathbb{P}^{(1)}(z)-\sum_\beta
+                              \mathbb{C}_{j\beta}^{(1,0)}(z)\otimes
+                              \mathbb{P}_{\beta l}^{(0)}(z)+\beta_0\mathbb{C}_{jl}^{(1,0)}(z) - \beta_0
+    \mathbb{P}_{jl}^{(0)}(z)\right) \,,\\
+  \\
+  {B}_{ij,kl}^{(2,2)}(x,z) &=&\displaystyle \left(\widetilde{S}^{(2,2)}+H_{ij}^{(1)}S^{(1,2)}\right)
+                              \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
+  \\
+                          &+&\displaystyle
+                              \widetilde{S}^{(1,2)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+  \\
+                          &-&\displaystyle
+                              S^{(1,1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
+  \\
+                          &+& \displaystyle \frac12 \sum_{\alpha}\mathcal{P}^{(0)}_{i\alpha}(x)\otimes
+    \mathcal{P}_{\alpha k}^{(0)}(x)\delta_{jl}\delta(1-z) + 
+                              \mathcal{P}_{ik}^{(0)}(x)\mathbb{P}_{jl}^{(0)}(z)
+                              +\delta_{ik}\delta(1-x) \frac12 \sum_{\beta}\mathcal{P}^{(0)}_{j\beta}(z)\otimes
+    \mathbb{P}_{\beta l}^{(0)}(z) \,,\\
+  \\
+  {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle
+                              \widetilde{S}^{(2,3)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)
+                              - S^{(1,2)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
+                              +
+                              \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\,,\\
+  \\
+  {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle \widetilde{S}^{(2,4)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,.
+\end{array}
+\end{equation}
+
+\section{Non-perturbative effect on the asymptotic cross section}
+
+As discussed in Sect.~\ref{sec:nonpert}, TMDs have a non-perturbative
+component that can be parameterised as in
+Eq.~(\ref{eq:separatation}). This implies two main ingredients: the
+introduction of a function $b_*(b_T)$ that prevents the perturbative
+component to enter the non-perturbative regime and a function
+$f_{\rm NP}$ that parametrises the actual non-perturbative
+component. These changes leave almost unchanged the derivation of the
+asymptotic behavior of a cross section for $q_T\rightarrow 0$. The
+only thing that needs to be changed are the functions $I_p$ defined in
+Eq.~(\ref{eq:IkPert}), that have to be replaced with:
+\begin{equation}\label{eq:IkNonPert}
+  \widetilde{I}_p(x,z,q_T,Q)\equiv \frac12\int_0^\infty db_T\,b_T J_0(b_Tq_T) f_{\rm NP}^{(1)}(x,
+  {b}_T,Q,Q^2) f_{\rm NP}^{(2)}(z,
+  {b}_T,Q,Q^2)\ln^p\left(\frac{b_*^2(b_T)Q^2}{4e^{-2\gamma_E}}\right)\,,
+\end{equation}
+where $f_{\rm NP}^{(1)}$ and $f_{\rm NP}^{(2)}$ are the
+non-perturbative functions associated to the two TMDs involved in the
+cross sections and where we are assuming $\mu=\sqrt{\zeta}=Q$ and
+$\mu_0=\sqrt{\zeta_0}=\mu_b$. In general, the integral in
+Eq.~(\ref{eq:IkNonPert}) cannot be computed analytically. However, in
+the case $k=0$ Eq.~(\ref{eq:IkNonPert}) has an intersting
+consequence. Specifically, contrary to the case in which no
+non-perturbative contribution is introduced, $\widetilde{I}_0$ is
+different from zero also for $q_T>0$. Therefore, also the terms in the
+expansion in Eq.~(\ref{eq:xsecexp}) that are independent of $L$
+contribute to the cross section differential in $q_T$. Clearly, any
+non-perturbative contribution is expected to give a substantial
+contribution only in the vicinity of $q_T=0$.
+
+\section{Fixed order and asymptotic limit}
+
+In order to validate the results above, it is opportune to compare the
+$\mathcal{O}(a_s)$ expressions to those present in the literature. To
+this end, we write explicitly the expression for the cross section
+differential in $q_T$ fot $q_T>0$, \textit{i.e.} without the
+$\delta(q_T)$ terms, and with no non-perturbative effect. Considering
+that, $S^{(1,1)} = 6C_F$ and $S^{(1,1)} = -2C_F$, this yields:
+\begin{equation}\label{eq:asymptfromres}
+\begin{array}{rcl}
+  \displaystyle  \frac{d\sigma}{dq_T^2} &\propto &\displaystyle a_s(Q)\sum_{ij,kl}\left[
+                                                   -{B}_{ij,kl}^{(1,1)}(x,z)\frac{1}{q_T^2}
+                                                   -{B}_{ij,kl}^{(1,2)}(x,z)\frac{2}{q_T^2}\ln\left(\frac{Q^2}{q_T^2}\right)\right]\mathop{\otimes}_x f_k(x,Q) \mathop{\otimes}_z d_l(z,Q)\\
+  \\
+                                        &=&\displaystyle
+                                            \frac{a_s(Q)}{q_T^2}\sum_{ij,kl}\bigg[4C_F\left(\ln\left(\frac{Q^2}{q_T^2}\right)-\frac{3}{2}\right)\delta_{ik}\delta_{jl}\delta(1-x)\delta(1-z)\\
+  \\
+                                        &+&\displaystyle
+                                            \mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
+                                            +
+                                            \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\bigg]\mathop{\otimes}_x
+                                            f_k(x,Q) \mathop{\otimes}_z
+                                            d_l(z,Q)\\
+  \\
+                                        &=&\displaystyle \frac{a_s(Q)}{q_T^2}\sum_{ij}\bigg[4C_F\left(\ln\left(\frac{Q^2}{q_T^2}\right)-\frac{3}{2}\right) f_i(x,Q)d_j(z,Q)\\
+  \\
+                                        &+&\displaystyle \left(\sum_{k}\mathcal{P}_{ik}^{(0)}(x) \mathop{\otimes}_x
+                                            f_k(x,Q)\right)d_j(z,Q) + f_i(x,Q)\left(\sum_l\mathbb{P}_{jl}^{(0)}(z) \mathop{\otimes}_zd_l(z,Q)\right) +\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+This result, up to some pre-factors and to selecting the right flavour
+combinations,\footnote{We have purposely left the flavour indices $i$
+  and $j$ unspecified because they do not necessarily run over the
+  quark flavours $u$, $d$, etc. In fact, it turns out to be useful to
+  adopt a different basis (usual referred to as evolution basis) that
+  simplifies the structure of the products between, for example,
+  PDFs/FFs and splitting functions.} nicely agrees with that of,
+\textit{e.g.},
+Refs.~\cite{Meng:1995yn,Nadolsky:1999kb,Collins:2016hqq}.
+
+In order to check that the matching is actually removing the double
+counting terms, it is instructive to derive
+Eq.~(\ref{eq:asymptfromres}) extracting the asymptote from the
+fixed-order computation at $\mathcal{O}(a_s)$. We take the expressions
+for the coefficient functions from Eqs.~(106)-(109) of Appendix B of
+Ref.~\cite{Nadolsky:1999kb} or from Eqs.~(4.6)-(4.20) of
+Ref.~\cite{Bacchetta:2008xw}. Referring to the second reference, some
+simplifications apply. First, we consider cross sections with
+unpolarised projectiles ($\lambda_e=0$) on unpolarised targets
+($S_\perp^\mu = 0$) and integrated over the azimuthal angles $\phi_H$
+and $\phi_S$. By doing so and after a simple manipulation, the cross
+section simplifies greatly and can be written in terms of structure
+functions as:
+\begin{equation}\label{eq:xsexinsf}
+  \frac{d\sigma}{dx dy dz dq_T^2} = \frac{2\pi\alpha^2}{xyQ^2}\left[Y_+ F_{UU,T}+2(1-y)F_{UU,L}\right]=\frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\end{equation}
+with:
+\begin{equation}
+Y_+\equiv 1+(1-y)^2\,,
+\end{equation}
+and where we have defined the structure function:
+\begin{equation}
+F_{UU,2}\equiv F_{UU,T} + F_{UU,L}\,.
+\end{equation}
+Notice that, as compared to Ref.~\cite{Bacchetta:2008xw}, we have
+factored out from the structure functions a factor
+$1/(\pi z^2)$\footnote{The factor $z^{2}$ is the consequence of the
+  fact that we are writing the cross section differential in $q_T^2$
+  that is the transverse momentum of the exchanged photon while in
+  Ref.~\cite{Bacchetta:2008xw} the cross section is differentila in
+  $p_T^2$ that is the transverse momentum of the of the outgoing
+  hadrons. Since $p_T=z q_T$, the factor $z^2$ cancels.} so that they
+factorize as:
+\begin{equation}\label{eq:FOxsec}
+\begin{array}{rcl}
+  F_{UU,S}&=&\displaystyle 
+  a_s\frac{x}{Q^2}\sum_{i}e_i^2\int_x^1\frac{d\bar{x}}{\bar{x}}\int_z^1\frac{d\bar{z}}{\bar{z}}\delta\left(\frac{q_T^2}{Q^2}-\frac{(1-\bar{x})(1-\bar{z})}{\bar{x}\bar{z}}\right)\bigg[\hat{B}_{qq}^{S,
+    \rm FO}(\bar{x},\bar{z},q_T)f_i\left(\frac{x}{\bar{x}}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)\\
+\\
+&+&\displaystyle \hat{B}_{qg}^{S,
+    \rm FO}(\bar{x},\bar{z},q_T)f_g\left(\frac{x}{\bar{x}}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)+ \hat{B}_{gq}^{S,
+    \rm FO}(\bar{x},\bar{z},q_T)f_i\left(\frac{x}{\bar{x}}\right)
+              d_g\left(\frac{z}{\bar{z}}\right)\bigg]
++\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+with $S=2,L$ and where the sum over $i$ runs over the active quark and
+antiquark flavours and $e_i$ is the electric charge of the $i$-th
+flavour. The explicit expressions for the coefficient functions are:
+\begin{equation}\label{eq:Bacchettaetal}
+\begin{array}{l}
+\displaystyle \hat{B}_{qq}^{2,\rm FO}(x,z,q_T) = 2C_F\left[(1-x)(1-z)+4xz+\frac{1+x^2z^2}{xz}\frac{Q^2}{q_T^2}\right]\,,\\
+\\
+\displaystyle \hat{B}_{qq}^{L,\rm FO}(x,z,q_T) = 8C_Fxz\,,\\
+\\
+\displaystyle \hat{B}_{qg}^{2,\rm FO}(x,z,q_T) = 2T_R\left[[x^2+(1-x)^2][z^2+(1-z)^2]\frac{1-x}{xz^2}\frac{Q^2}{q_T^2} +8x(1-x)\right]\,,\\
+\\
+\displaystyle \hat{B}_{qg}^{L,\rm FO}(x,z,q_T) = 16T_Rx(1-x)\,.\\
+\\
+\displaystyle \hat{B}_{gq}^{2,\rm FO}(x,z,q_T) = 2C_F\left[(1-x)z+4x(1-z)+\frac{1+x^2(1-z)^2}{xz}\frac{1-z}{z}\frac{Q^2}{q_T^2}\right]\,,\\
+\\
+\displaystyle \hat{B}_{gq}^{L,\rm FO}(x,z,q_T) = 8C_Fx(1-z)\,,
+\end{array}
+\end{equation}
+These expressions are enough to compute the SIDIS cross section at
+$\mathcal{O}(a_s)$ in the region $q_T \lesssim Q$. In order to match
+Eq.~(\ref{eq:asymptfromres}), one has to take the limit
+$q_T/Q\rightarrow 0$ and retain in the coefficient functions only the
+terms enhanced as $\ln(Q^2/q_T^2)$. This automatically means that
+$F_{UU,L}$ does not contribute in this limit because:
+\begin{equation}
+F_{UU,L}\mathop{\longrightarrow}_{q_T/Q\rightarrow 0} 0\,.
+\end{equation}
+Another crucial observation is that the $\delta$-function in
+Eq.~(\ref{eq:FOxsec}) can be expanded as follows\footnote{The proof of
+  this relation is given in Appendix~\ref{sec:deltaexpansion}.}:
+\begin{equation}\label{eq:deltaexpansion}
+  \delta\left(\frac{q_T^2}{Q^2}-\frac{(1-x)(1-z)}{xz}\right)
+  \mathop{\longrightarrow}_{q_T^2/Q^2\rightarrow0}\ln\left(\frac{Q^2}{q_T^2}\right)\delta(1-x) \delta(1-z) +
+  \frac{x\delta(1-z)}{(1-x)_+}+ \frac{z\delta(1-x)}{(1-z)_+}\,,
+\end{equation}
+so that:
+\begin{equation}\label{eq:FOxsecasy}
+\begin{array}{rcl}
+  F_{UU,2}&\displaystyle \mathop{\longrightarrow}_{q_T/Q\rightarrow 0}&\displaystyle 
+  a_s\frac{x}{q_T^2}\sum_{i}e_i^2\int_x^1\frac{d\bar{x}}{\bar{x}}\int_z^1\frac{d\bar{z}}{\bar{z}}\bigg[\hat{B}_{qq}^{2,
+    \rm asy}(\bar{x},\bar{z},q_T)f_i\left(\frac{x}{\bar{x}}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)\\
+\\
+&+&\displaystyle \hat{B}_{qg}^{2,
+    \rm asy}(\bar{x},\bar{z},q_T)f_g\left(\frac{x}{\bar{x}}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)+ \hat{B}_{gq}^{2,
+    \rm asy}(\bar{x},\bar{z},q_T)f_i\left(\frac{x}{\bar{x}}\right)
+              d_g\left(\frac{z}{\bar{z}}\right)\bigg]
++\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+  \hat{B}_{qq}^{2,\rm asy}(x,z,q_T) &=& \displaystyle  2C_F\left[2
+                                        \ln\left(\frac{Q^2}{q_T^2}\right)+\frac{1+x^2}{(1-x)_+}\delta(1-z) +\delta(1-x)\frac{1+z^2}{(1-z)_+} \right]\\
+  \\
+                                    &=&\displaystyle 2C_F\left[2\ln\left(\frac{Q^2}{q_T^2}\right) -3\right]\delta(1-x) \delta(1-z)+\mathcal{P}_{qq}^{(0)}(x)\delta(1-z)
+                                        +\delta(1-x) \mathbb{P}_{qq}^{(0)}(z)\,,\\
+  \\
+  \hat{B}_{qg}^{2,\rm asy}(x,z,q_T) &=& \displaystyle
+                                        2T_R\left[x^2+(1-x)^2\right]\delta(1-z)=\mathcal{P}_{qg}^{(0)}(x)
+                                        \delta(1-z)\,,\\
+\\
+  \hat{B}_{gq}^{2,\rm asy}(x,z,q_T) &=& \displaystyle  \delta(1-x)2C_F\left[\frac{1+(1-z)^2}{z}\right]=\delta(1-x)\mathbb{P}_{qg}^{(0)}(z)\,.
+\end{array}
+\end{equation}
+It is thus easy to see that we can rewrite Eq.~(\ref{eq:FOxsecasy})
+as:
+\begin{equation}\label{eq:FOxsecasy2}
+\begin{array}{rcl}
+  F_{UU,2}&\displaystyle \mathop{\longrightarrow}_{q_T/Q\rightarrow 0}&\displaystyle 
+  a_s\frac{x}{q_T^2}\sum_{i}e_i^2 \Bigg[4C_F\left(\ln\left(\frac{Q^2}{q_T^2}\right) -\frac{3}{2}\right) f_i\left(x\right)
+              d_i\left(z\right)\\
+\\
+&+&\displaystyle
+    \left(\sum_{k=q,g}\mathcal{P}^{(0)}_{qk}(x)\otimes f_k\left(x\right) \right)
+              d_i\left(z\right)+ f_i\left(x\right)
+              \left(\sum_{k=q,g}\mathbb{P}^{(0)}_{qk}(z) \otimes d_k\left(z\right)\right)\Bigg]
++\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+Eq.~(\ref{eq:FOxsecasy2}) agrees with
+Eq.~(\ref{eq:asymptfromres}). This confirms that the expansion of the
+resummed calculation, as well as the asymptotic limit of the fixed
+order, removes the double-counting terms when doing the matching.
+
+In order to provide a version of Eq.~(\ref{eq:FOxsec}) that can be
+readily implemented, we need to perform one of the integrals making
+use of the $\delta$-function. We integrate over $\bar{x}$ so that we
+write:
+\begin{equation}
+\delta\left(\frac{q_T^2}{Q^2}-\frac{(1-\bar{x})(1-\bar{z})}{\bar{x}\bar{z}}\right)
+= \frac{\bar{z}\bar{x}_0^2}{1-\bar{z}}\delta(\bar{x} - \bar{x}_0)\,,
+\end{equation}
+with:
+\begin{equation}\label{eq:x0bar}
+  \bar{x}_0 = \frac{1-\bar{z}}{1-\bar{z}\left(1-\frac{q_T^2}{Q^2}\right)}\,.
+\end{equation}
+This allows us to write:
+\begin{equation}\label{eq:FOxsecFin}
+\begin{array}{rcl}
+  F_{UU,S}&=&\displaystyle 
+  a_s\frac{x }{Q^2}\sum_{i}e_i^2\int_z^{z_{\rm max}} \frac{d\bar{z}}{1-\bar{z}}\bar{x}_0\bigg[\hat{B}_{qq}^{S,
+    \rm FO}(\bar{x}_0,\bar{z},q_T)f_i\left(\frac{x}{\bar{x}_0}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)\\
+\\
+&+&\displaystyle \hat{B}_{qg}^{S,
+    \rm FO}(\bar{x}_0,\bar{z},q_T)f_g\left(\frac{x}{\bar{x}_0}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)+ \hat{B}_{gq}^{S,
+    \rm FO}(\bar{x}_0,\bar{z},q_T)f_i\left(\frac{x}{\bar{x}_0}\right)
+              d_g\left(\frac{z}{\bar{z}}\right)\bigg]
++\mathcal{O}(a_s^2)\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+z_{\rm max} = \frac{1-x}{1-x\left(1-\frac{q_T^2}{Q^2}\right)}\,.
+\end{equation}
+
+Now we can rewrite the cross section above in such a way that it
+matches that at $\mathcal{O}(a_s)$ of Ref.~\cite{Daleo:2004pn}. That
+would allow us to confidently use the $\mathcal{O}(a_s^2)$ calculation
+presented right in that reference for the matching to the resummed
+calculation. This is made a little tricky by the different notation
+used in Ref.~\cite{Daleo:2004pn} and from the fact that in that paper
+the cross section is differential in a different set of
+variables. Specifically, we would like it to be differential in $x$,
+$y$, $z$, and $q_T^2$ while in Ref.~\cite{Daleo:2004pn} it is
+differential in $x$, $Q^2$, $\eta$, and $p_T^2$, where the last two
+are the rapidity and the transverse momentum of the outgoing hadron,
+respectively. Eq.~(13) of Ref.~\cite{Daleo:2004pn}, can be translated
+into our notation by noticing that:
+\begin{equation}\label{eq:Daleoetal}
+\frac{d\sigma}{dxdQ^2d p_T^2 d\eta} = \frac{x}{z Q^2}\sum_{i,j}\int_z^{z_{\rm
+    max}} \frac{d\bar{z}}{1-\bar{z}} f_i\left(\frac{x}{\bar{x}_0}\right)d_j\left(\frac{z}{\bar{z}}\right) \frac{d\sigma_{ij}^{(1)}}{dxdQ^2d p_T^2 d\eta}+\mathcal{O}(a_s^2)\,,
+\end{equation}
+where we have exploited the $\delta$-functions in Eqs.~(18)-(20) to
+get rid of the integral over $z$.\footnote{Notice that the $z$
+  variable of Ref.~\cite{Daleo:2004pn} does not coincide with our
+  definition.}
+
+The $\mathcal{O}(a_s)$ partonic cross sections in Eqs.~(18)-(20) of
+Ref.~\cite{Daleo:2004pn}, setting $\varepsilon=0$, can be written as:
+\begin{equation}
+\frac{d\sigma_{ij}^{(1)}}{dxdQ^2d p_T^2 d\eta}=\frac{2\pi \alpha^2 a_s
+  e_q^2\bar{x}_0}{x Q^4}Y_+ \left[ \underbrace{\left( F_{UU,M}^{ij}(\bar{x}_0,\bar{z})+\frac{3}{2}F_{UU,L}^{ij}(\bar{x}_0,\bar{z})\right)}_{F_{UU,2}^{ij}} - \frac{y^2}{Y_+}F_{UU,L}^{ij}(\bar{x}_0,\bar{z})\right]\,.
+\end{equation}
+One can verify that $F_{UU,2}^{qq}(\bar{x}_0,\bar{z})$,
+$F_{UU,L}^{qq}(\bar{x}_0,\bar{z})$,
+$F_{UU,M}^{qg}(\bar{x}_0,\bar{z})$,
+$F_{UU,L}^{qg}(\bar{x}_0,\bar{z})$,
+$F_{UU,M}^{gq}(\bar{x}_0,\bar{z})$, and
+$F_{UU,L}^{gq}(\bar{x}_0,\bar{z})$ exactly correspond to
+$\hat{B}^{2, \rm FO}_{qq}(\bar{x}_0,\bar{z},q_T)$,
+$\hat{B}^{L, \rm FO}_{qq}(\bar{x}_0,\bar{z},q_T)$,
+$\hat{B}^{M, \rm FO}_{qg}(\bar{x}_0,\bar{z},q_T)$,
+$\hat{B}^{L, \rm FO}_{qg}(\bar{x}_0,\bar{z},q_T)$,
+$\hat{B}^{M, \rm FO}_{gq}(\bar{x}_0,\bar{z},q_T)$, and
+$\hat{B}^{L, \rm FO}_{gq}(\bar{x}_0,\bar{z},q_T)$ of
+Eq.~(\ref{eq:Bacchettaetal}). It is crucial to notice that the
+correspondence holds only if $\bar{x}_0$ defined in
+Eq.~(\ref{eq:x0bar}) as a function of $\bar{z}$ is used. As an
+example, taking into account the different factors (a factor 2 for
+$F_{UU,M}$ and a factor 4 for $F_{UU,L}$) and using our notation for
+the integration variables ($y\rightarrow \bar{z}$,
+$\rho(z=0)\rightarrow \bar{x}_0$), we read off from Eq.~(18) of
+Ref.~\cite{Daleo:2004pn}:
+\begin{equation}
+\begin{array}{rcl}
+F_{UU,M}^{qq}(\bar{x}_0,\bar{z}) &=& \displaystyle 2C_F\left[\frac{(\bar{x}_0+\bar{z})^2+2(1-\bar{x}_0-\bar{z})}{(1-\bar{x}_0)(1-\bar{z})}\right]\,,\\
+\\
+F_{UU,L}^{qq}(\bar{x}_0,\bar{z}) &=& \displaystyle 8C_F\bar{x_0}\bar{z}\,,
+\end{array}
+\end{equation}
+so that:
+\begin{equation}
+\begin{array}{rcl}
+F_{UU,2}^{qq}(\bar{x}_0,\bar{z}) &=& \displaystyle F_{UU,M}^{qq}(\bar{x}_0,\bar{z})+\frac{3}{2}F_{UU,L}^{qq}(\bar{x}_0,\bar{z})\\
+\\
+ &=& \displaystyle 2
+     C_F\left[\frac{(\bar{x}_0+\bar{z})^2+2(1-\bar{x}_0-\bar{z})}{(1-\bar{x}_0)(1-\bar{z})}
+     + 3\bar{x_0}\bar{z}\right]\\
+\\
+&=& \displaystyle 2
+     C_F\left[(1-\bar{x}_0)(1-\bar{z})+4\bar{x}_0\bar{z} +\frac{1+\bar{x}_0^2\bar{z}^2}{\bar{x}_0\bar{z}}\left(\frac{\bar{x}_0\bar{z}}{(1-\bar{x}_0)(1-\bar{z})}\right)\right]\,.
+\end{array}
+\end{equation}
+Using Eq.~(\ref{eq:x0bar}), it is easy to see that the factor in round
+brackets in the last line of the equation above is equal to
+$Q^2/q_T^2$. Therefore, it reduces exactly to the first relation in
+Eq.~(\ref{eq:Bacchettaetal}). The same holds also for the two
+remaining partonic channels.
+
+Putting all pieces together, Eq.~(\ref{eq:Daleoetal}) can be recast as:
+\begin{equation}
+\frac{d\sigma}{dxdQ^2d p_T^2 d\eta} = \frac{2\pi \alpha^2
+  }{z x Q^4}Y_+ \left[F_{UU,2} - \frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+  F_{UU,S}&=&\displaystyle 
+  a_s\frac{x }{Q^2}\sum_{i}e_i^2\int_z^{z_{\rm max}}
+              \frac{d\bar{z}}{1-\bar{z}}\bar{x}_0\bigg[F^{qq}_{UU,L}(\bar{x}_0,\bar{z})f_i\left(\frac{x}{\bar{x}_0}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)\\
+\\
+&+&\displaystyle F^{qg}_{UU, L}(\bar{x}_0,\bar{z})f_g\left(\frac{x}{\bar{x}_0}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)+ F^{gq}_{UU, L}(\bar{x}_0,\bar{z})f_i\left(\frac{x}{\bar{x}_0}\right)
+              d_g\left(\frac{z}{\bar{z}}\right)\bigg]
++\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+Therefore, the structure of the observables is exactly the same. What
+is left to work out is the Jacobian to express the cross section as
+differential in the same variables as in
+Eq.~(\ref{eq:FOxsecFin}). What we need is to know is how the variables
+$Q^2$, $p_T$, and $\eta$ are related to $y$, $z$, and $q_T$. The
+relevant relations are:
+\begin{equation}
+\left\{\begin{array}{rcl}
+Q^2 &=& xyS_H\\
+\\
+p_T^2 &=& z^2 q_T^2\\
+\\
+\eta &=& \displaystyle \frac{1}{2}\ln\left(\frac{y(1-x)S_H}{q_T^2}\right)
+\end{array}\right.\quad\Longrightarrow\quad dQ^2dp_T^2d\eta = \frac{zQ^2}{y} dydzdq_T^2\,.
+\end{equation}
+where $S_H$ is the squared center-of-mass energy of the collision, so
+that:
+\begin{equation}
+  \frac{d\sigma}{dx dy dz dq_T^2} = \frac{zQ^2}{y}\frac{d\sigma}{dxdQ^2d p_T^2
+    d\eta} = \frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\end{equation}
+exactly like in Eq.~(\ref{eq:xsexinsf}). This confirms that the
+computation of Ref.~\cite{Daleo:2004pn} can be matched to the resummed
+calculation provided that the correct Jacobian is taken into account.
+
+% \section{Numerical results}
+
+% In Fig.~\ref{fig:APFELvsTIMBA}, a comparison between the
+% $\mathcal{O}(a_s)$ computation of Ref.~\cite{Daleo:2004pn} for the
+% differential cross section in Eq.~(\ref{eq:Daleoetal}), implemented in
+% the computer code {\tt TIMBA}, and the implementation in the {\tt
+%   APFEL++} framework~\cite{Bertone:2017gds} of the expressions in
+% Eq.~(\ref{eq:FOxsecFin}) is presented. The cross section as a function
+% of the hadron transverse momentum $p_T$ obtained with {\tt APFEL++} is
+% displayed as ratios to {\tt TIMBA} for a representative values of the
+% kinematic variables.
+% \begin{figure}[t]
+%   \begin{centering}
+%     \includegraphics[width=0.6\textwidth]{plots/APFELvsTIMBA}
+%     \caption{Comparison at $\mathcal{O}(\alpha_s)$ between the {\tt
+%         TIMBA} code, implementation of the results of
+%       Ref.~\cite{Daleo:2004pn}, and the implementation of the
+%       expressions in Eq.~(\ref{eq:FOxsecFin}) in the {\tt APFEL++}
+%       code~\cite{Bertone:2017gds}.\label{fig:APFELvsTIMBA}}
+%   \end{centering}
+% \end{figure}
+% It is clear that the agreement between the two codes is
+% excellent. Since we will be using {\tt TIMBA} for the NLO
+% (\textit{i.e.} $\mathcal{O}(a_s^2)$) cross section calculation to be
+% matched to the NNLL resummed computation, this provides a solid ground
+% to start from.
+
+% The next step is to compare the asymptotic behaviour worked out in
+% Eq.~(\ref{eq:FOxsecasy2}) to the fixed-order computation. This is done
+% Fig.~\ref{fig:FOvsAsy} where the differential cross section in both
+% cases is plotted as a function of the photon tranverve momentum $q_T$
+% for a representative set of values of the kinematic variables. As
+% expected, the two curves are very close to each other at small values
+% of $q_T$ where the logarithmically enhanced terms dominate. At larger
+% values of $q_T$ instead the two curves tend to depart indicating that
+% power corrections are important in that region.
+% \begin{figure}[t]
+%   \begin{centering}
+%     \includegraphics[width=0.6\textwidth]{plots/FOvsAsy}
+%     \caption{Comparison at $\mathcal{O}(\alpha_s)$ between the
+%       asymptotic limit in Eq.~(\ref{eq:FOxsecasy2}) to the fixed-order
+%       computation expressions in
+%       Eq.~(\ref{eq:FOxsecFin}).\label{fig:FOvsAsy}}
+%   \end{centering}
+% \end{figure}
+
+% The conclusive step is the comparison between the resummed computation
+% and its fixed-order order expansion that, as we have shown above,
+% coincides with the asymptote of the full fixed-oder. This is done in
+% Fig.~(\ref{fig:ResVsExp}) where the resummed calculation a NLL
+% accuracy is compared to its fixed-order expansion to
+% $\mathcal{O}(\alpha_s)$, that coincides with
+% Eq.~(\ref{eq:FOxsecasy2}). As expected, while the two curves are far
+% apart at low $q_T$ they tend to converge towards larger values of
+% $q_T$. However, the convergence is not so ``accurate'' as in the case
+% of the fixed-order calculation versus its asymptotic limit. The reason
+% is that in this case the two computations converge up to subleading
+% terms that in this case are $\mathcal{O}(\alpha_s^2)$ that are
+% effectively NLO and thus numerically large. We will see that the
+% situation improves when going one order up.
+% \begin{figure}[t]
+%   \begin{centering}
+%     \includegraphics[width=0.6\textwidth]{plots/ResVsExp}
+%     \caption{Comparison between the NLL resummed calculation and the
+%       expansion to $\mathcal{O}(\alpha_s)$ in
+%       Eq.~(\ref{eq:FOxsecasy2}).\label{fig:ResVsExp}}
+%   \end{centering}
+% \end{figure}
+
+% We can now formulate the matching procedure to consistently combine
+% the resummed calculation with the fixed-order one subtracting the
+% double counting terms. The particular way in which the matching is
+% implemented is defined up to subleading and power-suppressed
+% terms. One can then exploit this arbitrariness to adjust the matching
+% in such a way that the possibly large subleading terms are mitigated
+% by some \textit{ad-hoc} prescription. The most natural, despite not
+% unique, prescription is the \textit{additive} matching that reads:
+% \begin{equation}\label{eq:matching1}
+% \sigma^{\rm Match}(q_T,Q) = \sigma^{\rm FO}(q_T,Q) + \sigma^{\rm Res}(q_T,Q) - \sigma^{\rm Asy}(q_T,Q)\,.
+% \end{equation}
+% where $\sigma^{\rm Match}$ is obtained adding up the fixed-order
+% computation $\sigma^{\rm FO}$ to some perturbative accuracy (say
+% $\mathcal{O}(\alpha_s^n)$), valid for $q_T \simeq Q$, to the resummed
+% calculation $\sigma^{\rm Res}$ at some logarithmic accuracy, valid for
+% $q_T\ll Q$, and subtracting the double-counting terms
+% $\sigma^{\rm Asy}$. By the arguments discussed above, it is easy to
+% see that:
+% \begin{equation}
+% \begin{array}{rcl}
+%   \sigma^{\rm Match}(q_T,Q) &\displaystyle\mathop{\longrightarrow}_{q_T\simeq Q}&
+%                                                                                   \sigma^{\rm FO}(q_T,Q) +\mathcal{O}\left[\alpha_s^{n+1}(Q)\right]\,,\\
+%   \\
+%   \sigma^{\rm Match}(q_T,Q) &\displaystyle\mathop{\longrightarrow}_{q_T\ll Q}&\displaystyle
+%                                                                                \sigma^{\rm Res}(q_T,Q) +\mathcal{O}\left(\frac{q_T^2}{Q^2}\right)\,.
+% \end{array}
+% \end{equation}
+% However, as we have seen above, for low-order computations the
+% $\mathcal{O}(\alpha_s^{n+1})$ residual for $q_T\simeq Q$ may be
+% numerically relevant. On the other hand, one would expect that when
+% increasing the perturbative accuracy these differences tend to
+% shrink. Therefore, for the moment I refrain from form introducing any
+% prescription for the suppression of subleading terms. I will come back
+% on this point in the next section where I will study the matching of
+% the NLO fixed-order computation to the NNLL resummed
+% one. Fig.~\ref{fig:FONLL} shows a summary of the computations
+% consideres so far, including the matched one according to
+% Eq.~(\ref{eq:matching1}): this provides the lowest order matching
+% LO+NLL. The behaviour of the red curve is the expected one. In
+% particular, in the low-$q_T$ region it is close to the resummed
+% (green) curve while in the high-$q_T$ region it tends to the
+% fixed-order (blue) curve. In the next section we will raise the
+% perturbative accuracy to NLO+NNLL.
+% \begin{figure}[t]
+%   \begin{centering}
+%     \includegraphics[width=0.6\textwidth]{plots/FONLL}
+%     \caption{Summary of the computations: fixed order (blue curve),
+%       resummed (green curve), double counting (cyan curve), and
+%       matched according to Eq.~(\ref{eq:matching1}) (red
+%       curve).\label{fig:FONLL}}
+%   \end{centering}
+% \end{figure}
+
+% % Exploiting the power-suppressed residual in the $q_T \ll Q$ limit, one
+% % can replace the prescription in Eq.~(\ref{eq:matching1}) with:
+% % \begin{equation}\label{eq:matching2}
+% %   \sigma^{\rm Match}(q_T,Q) = \sigma^{\rm FO}(q_T,Q) + \mathcal{D}\left(\frac{q_T^2}{Q^2}\right)\left[\sigma^{\rm Res}(q_T,Q) - \sigma^{\rm Asy}(q_T,Q)]\right]\,,
+% % \end{equation}
+% % with:
+% % \begin{equation}
+% % \mathcal{D}\left(\frac{q_T^2}{Q^2}\right) = 1 + \mathcal{O}\left(\frac{q_T^2}{Q^2}\right)\,.
+% % \end{equation}
+% % Despite the exact form of the ``damping'' function $\mathcal{D}$
+% % remains unspecified at this level, this prescription ensures that the
+% % uncertainty of Eq.~(\ref{eq:matching2}) is power suppressed over the
+% % whole relevant spectrum. The simplest choice is:
+% % \begin{equation}
+% %   \mathcal{D}\left(\frac{q_T^2}{Q^2}\right) = 1 + \frac{q_T^2}{Q^2}\,.
+% % \end{equation}
+
+\section{Integrating over $q_T$}
+
+It is interesting to carry out the integration over $q_T$ of
+Eq.~(\ref{eq:FOxsec}) analytically. The result can then be compared to
+the results presented in Appendix~C of Ref.~\cite{deFlorian:1997zj}.
+\begin{equation}
+\begin{array}{rcl}
+ \displaystyle \int_0^{\infty} dq_T^2 F_{UU,S}&=&\displaystyle 
+  a_sx\sum_{i}e_i^2\int_x^1\frac{d\bar{x}}{\bar{x}}\int_z^1\frac{d\bar{z}}{\bar{z}}\bigg[\hat{B}_{qq}^{S,
+    \rm FO}\left(\bar{x},\bar{z},\frac{(1-\bar{x})(1-\bar{z})}{\bar{x}\bar{z}}\right)f_i\left(\frac{x}{\bar{x}}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)\\
+\\
+&+&\displaystyle \hat{B}_{qg}^{S,
+    \rm FO}\left(\bar{x},\bar{z},\frac{(1-\bar{x})(1-\bar{z})}{\bar{x}\bar{z}}\right)f_g\left(\frac{x}{\bar{x}}\right)
+              d_i\left(\frac{z}{\bar{z}}\right)\\
+\\
+&+& \displaystyle \hat{B}_{gq}^{S,
+    \rm FO}\left(\bar{x},\bar{z},\frac{(1-\bar{x})(1-\bar{z})}{\bar{x}\bar{z}}\right)f_i\left(\frac{x}{\bar{x}}\right)
+              d_g\left(\frac{z}{\bar{z}}\right)\bigg]
++\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+replacing $q_T^2/Q^2$ in Eq.~(\ref{eq:Bacchettaetal}) has no effect on
+the coefficient functions for $F_{UU,L}$. The reason is that
+$F_{UU,L}$ is independent of $q_T$ and therefore integrating over
+$q_T$ has essentially the effect of removing the $\delta$-function. On
+the other hand, integrating $F_{UU,2}$ gives:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \hat{B}_{qq}^{2,\rm FO}\left(x,z,\frac{(1-{x})(1-{z})}{{x}{z}}\right) = 2C_F\left[(1-x)(1-z)+4xz+\frac{1+x^2z^2}{(1-x)(1-z)}\right]\,,\\
+\\
+\displaystyle \hat{B}_{qg}^{2,\rm FO}\left
+  (x,z,\frac{(1-{x})(1-{z})}{{x}{z}}\right) = 2T_R\left[[x^2+(1-x)^2]\left(\frac{1}{1-z}+\frac1{z}-2\right)+8x(1-x)\right]\,,\\
+\\
+\displaystyle \hat{B}_{gq}^{2,\rm FO}\left (x,z,\frac{(1-{x})(1-{z})}{{x}{z}}\right) =
+  2C_F\left[(1-x)z+4x(1-z)+\frac{1+x^2(1-z)^2}{z(1-x)}\right]\,,
+\end{array}
+\end{equation}
+Instating the plus prescription in all terms that behave as
+$(1-x)^{-1}$ and $(1-z)^{-1}$\footnote{This step has the effect of
+  removing the uncancelled soft divergencies.}, one can see that up to
+``local'' terms (\textit{i.e.} those terms proportional to the
+$\delta$-function) the expressions of Appendix~C of
+Ref.~\cite{deFlorian:1997zj} are reproduced. The local terms
+correspond to virtual corrections that thus give contributions at
+$q_T=0$. As such, they should coincide with the terms proportional to
+$\delta(q_T)$ generated in the expansion of the resummed
+calculation. Specifically, they should be equal to the coefficients
+${B}_{ij,kl}^{(n,0)}$ in the expansion in Eq.~(\ref{eq:xsecexp}). This
+is evidently the case for ${B}_{ij,kl}^{(0,0)}$ that gives the
+leading-order contribution to the integrated cross
+section. Unfortunately, this is not true at next-to-leading order
+because the expressions for the local terms in Appendix~C of
+Ref.~\cite{deFlorian:1997zj} (Eqs.~(C.2)-(C.4)) do not match
+${B}_{ij,kl}^{(1,0)}$. However, when checking the expressions
+explicitly an interesting pattern emerges: if all the occurrences of
+$\ln(1-x)$ (or $\ln(1-z)$) in Eqs.~(C.2)-(C.4) of
+Ref.~\cite{deFlorian:1997zj} are replaced with $\ln(x)$ (or $\ln(z)$)
+the two sets of expressions coincide. The expressions reported in
+Ref.~\cite{deFlorian:1997zj} are those computed long time ago in
+Ref.~\cite{Furmanski:1981cw}.
+
+\section{Integrating over $z$}
+
+In order to understand which of the two is the correct set of
+expressions, whether those computed in Ref.~\cite{Furmanski:1981cw} or
+those derived here, we may try to integrate over $z$ summing over all
+possible hadrons produced in the final state. By doing so, we should
+obtain the expressions of the hard cross sections for inclusive
+deep-inelastic scattering. This last set of expressions has also been
+computed in Ref.~\cite{Furmanski:1981cw} and is very likely to be
+correct. The presence of terms proportional to $\ln(1-x)$ in the
+inclusive DIS hard cross sections suggests that the expressions
+reported in Ref.~\cite{deFlorian:1997zj} and computed in
+Ref.~\cite{Furmanski:1981cw} are the correct ones. To integrate the
+expressions in Ref.~\cite{deFlorian:1997zj} we need to use the fact
+that the SIDIS cross section integrate in $q_T$ for the production of
+a hadron $h$ has the following structure:
+\begin{equation}\label{eq:intxsec}
+\frac{d\sigma^h}{dx dy dz} = \sum_{ij} \int_x^1\frac{d\xi}{\xi}
+\int_z^1\frac{d\zeta}{\zeta}
+C_{ij}\left(\frac{x}{\xi},\frac{z}{\zeta}\right) d_{i/h}(\zeta) f_j(\xi)\,,
+\end{equation}
+where $d_{i/h}$ is the fragmentation function for the parton $i$
+fragmenting into the hadron species $h$. What we need to compute is:
+\begin{equation}
+\frac{d\sigma}{dx dy} = \sum_{h}\int_0^1 dz\,\frac{d\sigma^h}{dx dy dz}\,,
+\end{equation}
+where the sum over $h$ extends over all possible hadronic species. In
+order to compute the integral above we need to use the following
+property of the Mellin convolution:
+\begin{equation}
+C(z)\otimes d(z) = \int_z^1\frac{d\zeta}{\zeta}
+C\left(\frac{z}{\zeta}\right)d(\zeta) = \int_0^1d\zeta \int_0^1d\eta\,C(\zeta)f(\eta)\delta(z-\zeta\eta)\,.
+\end{equation}
+By using this property we have:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \frac{d\sigma}{dx dy} &=& \displaystyle \sum_{ij} \int_x^1\frac{d\xi}{\xi}
+                                          \int_0^1 d\zeta \,
+                                          C_{ij}\left(\frac{x}{\xi},\zeta\right)f_j(\xi) \sum_h\int_0^1
+                                          d\eta\,d_{i/h}(\eta)\,\int_0^1dz\,\delta(z-\zeta\eta)\\
+  \\
+                                      &=& \displaystyle \sum_{j} \int_x^1\frac{d\xi}{\xi}
+                                          \left[\int_0^1 d\zeta \,
+                                          \sum_i  C_{ij}\left(\frac{x}{\xi},\zeta\right)\right]f_j(\xi) = \sum_{j} \int_x^1\frac{d\xi}{\xi}\,
+                                          \widetilde{C}_{j}\left(\frac{x}{\xi}\right)f_j(\xi)\,.
+\end{array}
+\end{equation}
+where we have defined the inclusive DIS coefficient functions as:
+\begin{equation}\label{eq:incDIS}
+\widetilde{C}_{j}\left(\xi\right) \equiv \int_0^1 d\zeta \,
+                                          \sum_i  C_{ij}\left(\xi,\zeta\right)\,,
+\end{equation}
+and we have used the sum rule:
+\begin{equation}
+\sum_h\int_0^1 d\eta\,d_{i/h}(\eta) = 1\,,
+\end{equation}
+that essentially encodes the fact that the total probability for a
+parton to fragment into any hadron in one. The correctness of
+Eq.~(\ref{eq:incDIS}) can be verified explicitly by integrating over
+$z$ the expressions reported in Appendix~C of
+Ref.~\cite{deFlorian:1997zj} for both structure functions $F_2$ and
+$F_L$. The leading order is trivial:
+\begin{equation}
+\widetilde{C}_{2,q}^{(0)}\left(\xi\right) \equiv \int_0^1 d\zeta \,
+                                         \delta(1-\xi)\delta(1-\zeta) = \delta(1-\xi)\,,
+\end{equation}
+as well know, while the gluon as well as the longitudinal coefficient
+functions are zero. The next-to-leading order coefficient functions
+are computed as:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \widetilde{C}_{q}^{(1)}\left(\xi\right) \equiv \int_0^1
+  d\zeta
+  \left[C_{qq}^{(1)}\left(\xi,\zeta\right)+C_{gq}^{(1)}\left(\xi,\zeta\right)\right]\,,\\
+\\
+\displaystyle \widetilde{C}_{g}^{(1)}\left(\xi\right) \equiv \int_0^1
+  d\zeta\,C_{qg}^{(1)}\left(\xi,\zeta\right)\,.
+\end{array}
+\end{equation}
+For $F_L$ they read:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \widetilde{C}_{L,q}^{(1)}\left(\xi\right) = 8C_F\xi\,,\\
+\\
+\displaystyle \widetilde{C}_{L,g}^{(1)}\left(\xi\right) = 8T_R\xi(1-\xi)\,.
+\end{array}
+\end{equation}
+while for $F_2$:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \widetilde{C}_{2,q}^{(1)}\left(\xi\right) = \,,\\
+\\
+\displaystyle \widetilde{C}_{2,g}^{(1)}\left(\xi\right) = T_R\left[(\xi^2+(1-\xi)^2)\ln\left(\frac{1-\xi}{\xi}\right)+10\xi(1-\xi)\right]\,.
+\end{array}
+\end{equation}
+
+
+
+\newpage
+
+\appendix
+
+\section{Expansion of the kinematic $\delta$-function}\label{sec:deltaexpansion}
+
+In order to prove the equality in Eq.~(\ref{eq:deltaexpansion}), we
+consider the following integral:
+\begin{equation}\label{eq:testint}
+I(\varepsilon) =\int_0^1 dx \int_0^1 dy\,\delta(xy-\varepsilon) f(x,y)\,,
+\end{equation}
+where $f(x,y)$ is a test function ``well-behaved'' over the
+integration region. Now I split the integral as follows:
+\begin{equation}
+I(\varepsilon) =\left(\int_0^1 dx \int_x^1 dy+\int_0^1 dy \int_y^1 dx\right)\,\delta(xy-\varepsilon) f(x,y)\,,
+\end{equation}
+where the first term in the r.h.s. corresponds to the integral over
+the grey region \textit{above} the blue line while the second over the
+grey region \textit{below} the blue line in
+Fig.~\ref{fig:deltaexpansion}.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/DeltaExpansion}
+    \caption{Integration region of the integral in 
+      Eq.~(\ref{eq:testint}). The integral is along the red curve 
+      defined by the $\delta$-function.\label{fig:deltaexpansion}}
+  \end{centering}
+\end{figure}
+
+Now I use the following equalities:
+\begin{equation}
+\delta(xy-\varepsilon) = \left\{
+\begin{array}{ll}
+\displaystyle \frac{1}{x}\delta\left(y-\frac{\varepsilon}{x}\right)\theta(y-\sqrt{\varepsilon}) &
+                                                                      \quad\mbox{integral
+                                                                      over
+                                                                      $y$,}\\
+\\
+\displaystyle \frac{1}{y}\delta\left(x-\frac{\varepsilon}{y}\right) \theta(x-\sqrt{\varepsilon}) &
+                                                                      \quad\mbox{integral
+                                                                      over
+                                                                      $x$.}
+\end{array}
+\right.
+\end{equation}
+The $\theta$-functions arise from the fact that the first integral has
+to be done along the upper branch on the red curve while the second
+along the lower branch. The two branches are joint at the point
+$x=y=\sqrt{\varepsilon}$ and thus the integration ranges are bounded
+from below by this point. Therefore, I find:
+\begin{equation}
+I(\varepsilon) =\int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x}f\left(x,\frac{\varepsilon}{x}\right) + \int_{\sqrt{\varepsilon}}^1 \frac{dy}{y}f\left(\frac{\varepsilon}{y},y\right)\,.
+\end{equation}
+It is crucial to realise that in the first and the second integral the
+following conditions hold: $\varepsilon < \sqrt{\varepsilon}\leq x$
+and $\varepsilon < \sqrt{\varepsilon}\leq y$, respectively. Therefore,
+in the limit $\varepsilon\rightarrow 0$, the arguments $\varepsilon/x$
+and $\varepsilon/y$ of the function $f$ will tend to zero. I now add
+and subtract a term proportional to $f(0,0)$ to both integrals, so
+that:
+\begin{equation}
+I(\varepsilon) =\int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x}\left[f\left(x,\frac{\varepsilon}{x}\right)-f(0,0)\right] + \int_{\sqrt{\varepsilon}}^1 \frac{dy}{y}\left[f\left(\frac{\varepsilon}{y},y\right)-f(0,0)\right]+2f(0,0) \underbrace{\int_{\sqrt{\varepsilon}}^1 \frac{d\xi}{\xi}}_{-\ln\sqrt{\varepsilon}}\,.
+\end{equation}
+Finally, I take the limit for $\varepsilon\rightarrow 0$:
+\begin{equation}
+\lim_{\varepsilon\rightarrow 0}I(\varepsilon) =\int_0^1
+\frac{dx}{x}\left[f\left(x,0\right)-f(0,0)\right] + \int_{0}^1 \frac{dy}{y}\left[f\left(0,y\right)-f(0,0)\right]-\ln\left(\varepsilon\right) f(0,0)\,,
+\end{equation}
+that I rewrite as:
+\begin{equation}
+\lim_{\varepsilon\rightarrow 0}I(\varepsilon) =\int_0^1dx \int_0^1dy\left\{\frac{\delta(y)}{[x]_+}+\frac{\delta(x)}{[y]_+}-\ln\left(\varepsilon\right)\delta(x)\delta(y)\right\}f(x,y)\,.
+\end{equation}
+Comparing the equation above with Eq.~(\ref{eq:testint}), one deduces that:
+\begin{equation}
+\delta(xy-\varepsilon)\mathop{\longrightarrow}_{\varepsilon\rightarrow 0}
+\frac{\delta(y)}{[x]_+}+\frac{\delta(x)}{[y]_+}-\ln\left(\varepsilon\right)\delta(x)\delta(y)\,.
+\end{equation}
+Finally, substituting:
+\begin{equation}
+x\rightarrow \frac{1-x}{x}\,,\quad y\rightarrow \frac{1-z}{z}\,,\quad\mbox{and}\quad\varepsilon\rightarrow\frac{q_T^2}{Q^2}\,,
+\end{equation}
+it is easy to recover Eq.~(\ref{eq:deltaexpansion}). In particular,
+one needs to use the fact that:
+\begin{equation}
+\delta\left(\frac{1-x}{x}\right)=\delta(1-x)\,.
+\end{equation}
+
+
+\newpage
 
 \begin{thebibliography}{alp}
 
@@ -371,6 +1594,122 @@ corrections.
   [arXiv:1705.07167 [hep-ph]].
   %%CITATION = doi:10.1103/PhysRevD.96.054011;%%
   %7 citations counted in INSPIRE as of 15 Oct 2018
+
+%\cite{Bozzi:2005wk}
+\bibitem{Bozzi:2005wk}
+  G.~Bozzi, S.~Catani, D.~de Florian and M.~Grazzini,
+  %``Transverse-momentum resummation and the spectrum of the Higgs boson at the LHC,''
+  Nucl.\ Phys.\ B {\bf 737} (2006) 73
+  doi:10.1016/j.nuclphysb.2005.12.022
+  [hep-ph/0508068].
+  %%CITATION = doi:10.1016/j.nuclphysb.2005.12.022;%%
+  %362 citations counted in INSPIRE as of 20 Dec 2017
+
+%\cite{Scimemi:2017etj}
+\bibitem{Scimemi:2017etj}
+  I.~Scimemi and A.~Vladimirov,
+  %``Analysis of vector boson production within TMD factorization,''
+  arXiv:1706.01473 [hep-ph].
+  %%CITATION = ARXIV:1706.01473;%%
+  %2 citations counted in INSPIRE as of 24 Oct 2017
+
+%\cite{vanNeerven:2000uj}
+\bibitem{vanNeerven:2000uj}
+  W.~L.~van Neerven and A.~Vogt,
+  %``NNLO evolution of deep inelastic structure functions: The Singlet case,''
+  Nucl.\ Phys.\ B {\bf 588} (2000) 345
+  doi:10.1016/S0550-3213(00)00480-6
+  [hep-ph/0006154].
+  %%CITATION = doi:10.1016/S0550-3213(00)00480-6;%%
+  %159 citations counted in INSPIRE as of 19 Dec 2017
+
+%\cite{Bozzi:2005wk}
+\bibitem{Bozzi:2005wk}
+  G.~Bozzi, S.~Catani, D.~de Florian and M.~Grazzini,
+  %``Transverse-momentum resummation and the spectrum of the Higgs boson at the LHC,''
+  Nucl.\ Phys.\ B {\bf 737} (2006) 73
+  doi:10.1016/j.nuclphysb.2005.12.022
+  [hep-ph/0508068].
+  %%CITATION = doi:10.1016/j.nuclphysb.2005.12.022;%%
+  %362 citations counted in INSPIRE as of 20 Dec 2017
+
+%\cite{Meng:1995yn}
+\bibitem{Meng:1995yn}
+  R.~Meng, F.~I.~Olness and D.~E.~Soper,
+  %``Semiinclusive deeply inelastic scattering at small q(T),''
+  Phys.\ Rev.\ D {\bf 54} (1996) 1919
+  doi:10.1103/PhysRevD.54.1919
+  [hep-ph/9511311].
+  %%CITATION = doi:10.1103/PhysRevD.54.1919;%%
+  %49 citations counted in INSPIRE as of 21 Dec 2017
+
+%\cite{Collins:2016hqq}
+\bibitem{Collins:2016hqq}
+  J.~Collins, L.~Gamberg, A.~Prokudin, T.~C.~Rogers, N.~Sato and B.~Wang,
+  %``Relating Transverse Momentum Dependent and Collinear Factorization Theorems in a Generalized Formalism,''
+  Phys.\ Rev.\ D {\bf 94} (2016) no.3,  034014
+  doi:10.1103/PhysRevD.94.034014
+  [arXiv:1605.00671 [hep-ph]].
+  %%CITATION = doi:10.1103/PhysRevD.94.034014;%%
+  %14 citations counted in INSPIRE as of 21 Dec 2017
+
+%\cite{Nadolsky:1999kb}
+\bibitem{Nadolsky:1999kb}
+  P.~M.~Nadolsky, D.~R.~Stump and C.~P.~Yuan,
+  %``Semiinclusive hadron production at HERA: The Effect of QCD gluon resummation,''
+  Phys.\ Rev.\ D {\bf 61} (2000) 014003
+   Erratum: [Phys.\ Rev.\ D {\bf 64} (2001) 059903]
+  doi:10.1103/PhysRevD.64.059903, 10.1103/PhysRevD.61.014003
+  [hep-ph/9906280].
+  %%CITATION = doi:10.1103/PhysRevD.64.059903, 10.1103/PhysRevD.61.014003;%%
+  %77 citations counted in INSPIRE as of 23 Dec 2017
+
+%\cite{Bacchetta:2008xw}
+\bibitem{Bacchetta:2008xw}
+  A.~Bacchetta, D.~Boer, M.~Diehl and P.~J.~Mulders,
+  %``Matches and mismatches in the descriptions of semi-inclusive processes at low and high transverse momentum,''
+  JHEP {\bf 0808} (2008) 023
+  doi:10.1088/1126-6708/2008/08/023
+  [arXiv:0803.0227 [hep-ph]].
+  %%CITATION = doi:10.1088/1126-6708/2008/08/023;%%
+  %174 citations counted in INSPIRE as of 25 Dec 2017
+
+%\cite{Daleo:2004pn}
+\bibitem{Daleo:2004pn}
+  A.~Daleo, D.~de Florian and R.~Sassot,
+  %``O(alpha**2(s)) QCD corrections to the electroproduction of hadrons with high transverse momentum,''
+  Phys.\ Rev.\ D {\bf 71} (2005) 034013
+  doi:10.1103/PhysRevD.71.034013
+  [hep-ph/0411212].
+  %%CITATION = doi:10.1103/PhysRevD.71.034013;%%
+  %45 citations counted in INSPIRE as of 25 Dec 2017
+
+%\cite{Bertone:2017gds}
+\bibitem{Bertone:2017gds}
+  V.~Bertone,
+  %``APFEL++: A new PDF evolution library in C++,''
+  arXiv:1708.00911 [hep-ph].
+  %%CITATION = ARXIV:1708.00911;%%
+  %3 citations counted in INSPIRE as of 30 Dec 2017
+
+%\cite{deFlorian:1997zj}
+\bibitem{deFlorian:1997zj}
+  D.~de Florian, M.~Stratmann and W.~Vogelsang,
+  %``QCD analysis of unpolarized and polarized Lambda baryon production in leading and next-to-leading order,''
+  Phys.\ Rev.\ D {\bf 57} (1998) 5811
+  doi:10.1103/PhysRevD.57.5811
+  [hep-ph/9711387].
+  %%CITATION = doi:10.1103/PhysRevD.57.5811;%%
+  %149 citations counted in INSPIRE as of 26 Nov 2018
+
+%\cite{Furmanski:1981cw}
+\bibitem{Furmanski:1981cw}
+  W.~Furmanski and R.~Petronzio,
+  %``Lepton - Hadron Processes Beyond Leading Order in Quantum Chromodynamics,''
+  Z.\ Phys.\ C {\bf 11} (1982) 293.
+  doi:10.1007/BF01578280
+  %%CITATION = doi:10.1007/BF01578280;%%
+  %493 citations counted in INSPIRE as of 27 Nov 2018
 
 \end{thebibliography}
 
