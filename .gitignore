@@ -29,6 +29,8 @@ tests/set_test
 tests/cache_test
 tests/qgriddist_test
 tests/dglap_test
+doc/src/codes/FOvsAsy
+doc/src/codes/logs
 
 # Compiled Object files
 *.slo

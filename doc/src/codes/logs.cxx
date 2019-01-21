@@ -10,7 +10,7 @@
 // b* prescription
 double bstar(double const& b)
 {
-  const double bmax = 2 * exp( - apfel::emc);
+  const double bmax = 2 * exp( - apfel::emc) * 10;
   return b / sqrt( 1 + pow(b / bmax, 2) );
 }
 
@@ -29,7 +29,7 @@ int main() {
 
   const double Q = 10;
 
-  for (int ord = 0; ord < 4; ord++)
+  for (int ord = 2; ord < 3; ord++)
     {
       const auto integrand = [=] (double const& b) -> double
 	{
@@ -39,9 +39,9 @@ int main() {
 	  return b * f1 * f2 * pow(lg, ord) / 2;
 	};
 
-      const int nqT = 1000;
-      const double qTmin = 1e-2;
-      const double qTmax = 5 * Q;
+      const int nqT = 100;
+      const double qTmin = 0.01;
+      const double qTmax = 2 * Q;
       const double qTstep = exp( log( qTmax / qTmin ) / ( nqT - 1 ) );
 
       double qT = qTmin;
@@ -61,7 +61,7 @@ int main() {
 	  const double matched = ( 1 - powsup ) * exact + powsup * trans;
 
 	  // Print results
-	  std::cout << std::scientific << ord << "\t" << qT << "\t" << trans << "\t" << exact << "\t" << matched << std::endl;
+	  std::cout << std::scientific << ord << "\t" << qT << "\t" << trans << "\t" << exact << "\t" << trans / exact << std::endl;
 
 	  qT *= qTstep;
 	}

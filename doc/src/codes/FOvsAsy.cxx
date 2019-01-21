@@ -26,13 +26,13 @@ using namespace std;
 using namespace apfel;
 
 // b* prescription
-double bstar(double const& b, double const&)
+double bstar(double const& b, double const& Q)
 {
   const double bmax = 2 * exp( - apfel::emc);
-  return b / sqrt( 1 + pow(b / bmax, 2) );
+  return sqrt( pow(b, 2) / ( 1 + pow(b / bmax, 2) ) );//+ pow(bmax / Q, 2) );
 }
 
-// Non-perturnative function
+// Non-perturbative function
 double fNP(double const&, double const& b, double const& zetaf)
 {
   const double g1 = 0.02;
@@ -75,7 +75,8 @@ int main() {
   // PDF and FF sets
   LHAPDF::PDF* PDFs = LHAPDF::mkPDF("CT14nlo");
   //LHAPDF::PDF* FFs  = LHAPDF::mkPDF("DSS07_NLO_HadronSum");
-  LHAPDF::PDF* FFs  = LHAPDF::mkPDF("NNFF11_HadronSum_nlo");
+  //LHAPDF::PDF* FFs  = LHAPDF::mkPDF("NNFF11_HadronSum_nlo");
+  LHAPDF::PDF* FFs  = LHAPDF::mkPDF("NNFF10_PIsum_nlo");
 
   // Heavy quark masses.
   const double mc = PDFs->quarkThreshold(4);
@@ -140,7 +141,7 @@ int main() {
     };
 
   // Initialize space- and time-like splitting functions.
-  const Grid g{{SubGrid{50,1e-2,3}, SubGrid{60,1e-1,3}, SubGrid{50,5e-1,3}, SubGrid{60,7e-1,3}}};
+  const Grid g{{SubGrid{100,1e-3,3}, SubGrid{60,1e-1,3}, SubGrid{50,5e-1,3}, SubGrid{60,7e-1,3}}};
   const auto PDFObj = InitializeDglapObjectsQCD(g, Masses);
   const auto FFObj  = InitializeDglapObjectsQCDT(g, Masses);
 
@@ -149,7 +150,7 @@ int main() {
  
   // Function for the computation of the asymptotic cross section at
   // O(as).
-  const auto xsecAsy = [=,&g] (double const& Q2, double const& x, double const& y, double const& z, double const& qT2) -> double
+  const auto xsecAsy = [=,&g] (double const& Q2, double const& x, double const& y, double const& z, double const& qT2, double const& S) -> double
     {
       // Internal kinematic variables
       const double Q  = sqrt(Q2);
@@ -171,7 +172,7 @@ int main() {
 	};
 
       // Useful definitions
-      const double powsup = pow(qT/Q, 0.2);
+      const double powsup = std::min(pow(qT/Q, S), 1.);
       const double I1 = - ( 1 - powsup ) / qT2                     + powsup * OgataObj2.transform(integrand1, qT);
       const double I2 = - ( 1 - powsup ) * 2 * log(Q2 / qT2) / qT2 + powsup * OgataObj2.transform(integrand2, qT);
       const double S11 = 6 * CF;
@@ -223,21 +224,15 @@ int main() {
     return apfel::Set<apfel::Distribution>{apfel::EvolutionBasisQCD{apfel::NF(mu, Masses)}, DistributionMap(g, RotFFs, mu)};
   };
 
-  // Tabulate collinear PDFs and FFs
-  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabPDFs{EvolvedPDFs, 100, PDFs->qMin(), PDFs->qMax(), 3, Masses};
-  const auto CollPDFs = [&] (double const& mu) -> apfel::Set<apfel::Distribution> { return TabPDFs.Evaluate(mu); };
-  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabFFs{EvolvedPDFs, 100, FFs->qMin(), FFs->qMax(), 3, Masses};
-  const auto CollFFs = [&] (double const& mu) -> apfel::Set<apfel::Distribution> { return TabFFs.Evaluate(mu); };
-
   // Initialize TMD objects
   const auto TmdObj = apfel::InitializeTmdObjects(g, Masses);
 
   // Build evolved TMD PDFs and FFs
-  const auto EvTMDPDFs = BuildTmdPDFs(TmdObj, CollPDFs, Alphas, 1, 1);
-  const auto EvTMDFFs  = BuildTmdFFs(TmdObj, CollFFs, Alphas, 1, 1);
+  const auto EvTMDPDFs = BuildTmdPDFs(TmdObj, EvolvedPDFs, Alphas, 1);
+  const auto EvTMDFFs  = BuildTmdFFs(TmdObj, EvolvedFFs, Alphas, 1);
 
   // Ogata-quadrature object of degree zero (do not integrate in qT).
-  apfel::OgataQuadrature OgataObj{};
+  apfel::OgataQuadrature OgataObj{0, 1e-11};
 
   // Function for the computation of the asymptotic cross section at
   // O(as).
@@ -274,20 +269,24 @@ int main() {
 	return b * lumi * fNP(x, b, Q2) * fNP(z, b, Q2);
       };
 
-      return 2 * qT * 2 * M_PI * alpha2 * Yp * hcs * ( OgataObj.transform(TMDLumib, qT) / x / z ) / x / y / Q2;
+      return 2 * qT * 2 * M_PI * alpha2 * Yp * hcs * ( OgataObj.transform(TMDLumib, qT) / z ) / x / y / Q2;
     };
 
   // Kinematics in terms of the variables in which TIMBA is
   // differential.
-  const double Q2 = 10;
-  const double x  = 0.4;
-  const double z  = 0.1;
-  const double y  = 0.2;
+  const double EP  = 1;
+  const double El  = 27.6;
+  const double VS  = sqrt( 4 * EP * El );
 
-  const int    nqT    = 20;
-  const double qTmin  = 0.001;
-  const double qTmax  = 3;
-  const double qTstep = exp( log( qTmax / qTmin ) / ( nqT - 1 ) );
+  const double Q2 = 8;
+  const double x  = 0.1;
+  const double z  = 0.2;
+  const double y  = Q2 / VS / VS / x;
+
+  const int    nqT    = 100;
+  const double qTmin  = 0.01;
+  const double qTmax  = 100;
+  const double qTstep = exp( log(qTmax / qTmin ) / ( nqT - 1 ) );
 
   cout << scientific;
   double qT = qTmin;
@@ -295,7 +294,8 @@ int main() {
     {
       cout << qT << "\t"
 	   << xsecFO(Q2, x, y, z, qT) << "\t"
-	   << xsecAsy(Q2, x, y, z, qT) << "\t"
+	   << xsecAsy(Q2, x, y, z, qT, 2) << "\t"
+	   << xsecAsy(Q2, x, y, z, qT, 10) << "\t"
 	   << xsecRes(Q2, x, y, z, qT) << "\t"
 	   << endl;
       qT *= qTstep;
