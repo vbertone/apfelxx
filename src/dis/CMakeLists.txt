@@ -7,3 +7,5 @@ set(dis_source
   )
 
 add_library(dis OBJECT ${dis_source})
+
+set_property(TARGET dis PROPERTY POSITION_INDEPENDENT_CODE ON)
