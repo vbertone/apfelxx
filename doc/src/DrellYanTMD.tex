@@ -336,7 +336,7 @@ The integral above can be solved numerically using the technique
 discussed above and the value of $q_T$ that satisfies this equation
 represents the position of the peak of the $q_T$ distribution.
 
-\subsection{Integrating over $Q$ and $y$}
+\subsection{Integrating over $Q$ and $y$}\label{sec:QyInt}
 
 As a final step, we need to perform the integrals over $Q$ and $y$
 defined in Eq.~(\ref{eq:Intcrosssection}). To compute these integrals
@@ -449,12 +449,81 @@ $f_{\rm NP}$.  This provides a fast tool for the computation of
 predictions that makes the extraction of the non-perturbative part of
 the TMDs much easier.
 
+\subsection{Cross section differential in $x_F$}
+
+In some cases, the Drell-Yan differential cross section may be
+presented as differential in the invariant mass of the lepton pair $Q$
+and, instead of the rapidity $y$, of the Feynman variable $x_F$
+defined as:
+\begin{equation}
+  x_F = 
+  \frac{Q}{\sqrt{s}}\left(e^{y} - e^{-y}\right) =
+  \frac{2Q}{\sqrt{s}}\sinh y = x_1-x_2\,,
+\end{equation}
+so that:
+\begin{equation}
+\frac{dx_F}{dy} = \frac{2Q}{\sqrt{s}}\cosh y=x_1+x_2\,.
+\end{equation}
+Therefore:
+\begin{equation}
+  \frac{d\sigma}{dQ dx_F dq_T} =
+  \left.\frac{dy}{dx_F}\frac{d\sigma}{dQ dy dq_T}\right|_{y=y(x_F,Q)}=
+  \left.\frac{\sqrt{s}}{2Q\cosh y}\frac{d\sigma}{dQ dy dq_T}\right|_{y=y(x_F,Q)}
+\end{equation}
+with:
+\begin{equation}
+  y(x_F,Q) =
+  \sinh^{-1}\left(\frac{x_F\sqrt{s}}{2Q}\right) =
+  \ln\left[\frac{\sqrt{s}}{2Q}\left(x_F+\sqrt{x_F^2 + \frac{4Q^2}{s}}\right)\right]\,,
+\end{equation}
+so that:
+\begin{equation}\label{eq:x12ofxFQ}
+x_1 = \frac12\left(x_F+\sqrt{x_F^2 +
+    \frac{4Q^2}{s}}\right)\quad\mbox{and}\quad x_2 = \frac{Q^2}{sx_1}\,.
+\end{equation}
+Therefore, we can compute the integral:
+\begin{equation}
+\widetilde{I}(q_T)=\int_{Q_{\rm min}}^{Q_{\rm max}}dQ \int_{x_{F,\rm
+    min}}^{x_{F,\rm max}}dx_F\,I(Q,x_F,q_T)\,,
+\end{equation}
+where $I$ is the primitive in $q_T$ of the cross section differential
+in $x_F$:
+\begin{equation}
+I(Q,x_F,q_T) = \int dq_T\left[\frac{d\sigma}{dQ dx_F dq_T}\right]\,,
+\end{equation}
+following the same steps of Sect.~\ref{sec:QyInt}. This leads to:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle  \widetilde{I}(q_T) &\simeq& \displaystyle \sum_{n=1}^N
+  \sum_{\tau=0}^{N_Q}\sum_{\alpha=0}^{N_x}\overline{W}_{n\tau\alpha}(q_T) f_{\rm NP}\left(x_{1,\alpha\tau},\frac{z_n}{q_T};Q_\tau\right) f_{\rm NP}\left(x_{2,\alpha\tau},\frac{z_n}{q_T};Q_\tau\right)\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}\label{eq:xFtens}
+\begin{array}{rcl}
+\displaystyle  \overline{W}_{n\tau\alpha}(q_T) &\equiv& \displaystyle w_n^{(1)}\frac{8\pi}{9} \int_{Q_{\rm min}}^{Q_{\rm max}}dQ\,\mathcal{I}_\tau(Q)\, 
+  \frac{1}{Q^3} \alpha^2(Q) H(Q) 
+\\
+\\
+&\times& \displaystyle 
+                         \int_{x_{F,\rm
+    min}}^{x_{F,\rm max}}dx_F\,\mathcal{I}_\alpha(x_F)\,\frac{1}{x_1+x_2} \sum_q C_q(Q)\overline{F}_q\left(x_1,b_*\left(\frac{z_n}{q_T}\right);Q\right)
+                         \overline{F}_{\bar{q}}\left(x_2,b_*\left(\frac{z_n}{q_T}\right);Q\right)\,,
+\end{array}
+\end{equation}
+where $x_1$ and $x_2$ are functions of $x_F$ and $Q$ through
+Eq.~(\ref{eq:x12ofxFQ}). In addition, we have defined a grid in $x_F$,
+$\{x_{F,\alpha}\}$ with $\alpha = 0,\dots,N_x$, that allowed us to
+define $x_{1(2),\alpha\tau}\equiv x_{1(2)}(x_{F,\alpha},Q_\tau)$.
+
 \subsection{Flavour dependence}
 
 It may be advantageous to introduce a flavour dependence of the
 non-perturbative contributions to TMDs. This can be easily done by
 observing that the tensor $W_{n\tau\alpha}$ defined in
-Eq.~(\ref{eq:weights}) can be decomposed as:
+Eq.~(\ref{eq:weights}) can be decomposed as\footnote{The same
+  procedure applies to the tensor $\overline{W}_{n\tau\alpha}$ defined
+in Eq.~(\ref{eq:xFtens}).}:
 \begin{equation}
 W_{n\tau\alpha}(q_T) = \sum_q W_{n\tau\alpha}^{(q)} (q_T)\,,
 \end{equation}
@@ -483,22 +552,23 @@ of the TMD with flavour $q$.
 
 \subsection{Gradient with respect to the free parameters}
 
-A very useful appealing of the computation of cross section in terms
-of precomputed table as in Eqs.~(\ref{eq:finalinterpolated}) and
-~(\ref{eq:finalinterpolatedfl}) is the fact that it exposes the free
-parameters of the non-perturbative functions. To be more precise, the
-non-perturbative function $f_{\rm NP}$, on top of being a function of
-$x$, $b$, and $\zeta$, depends on a set of $N_p$ parameters
-$\{\theta_k\}$, $k=1,\dots,N_p$, that are typically determined by fits
-to data, in other words:
+A very appealing implication of the computation of cross section in
+terms of precomputed table as in Eqs.~(\ref{eq:finalinterpolated})
+and~(\ref{eq:finalinterpolatedfl}) is the fact that it exposes the
+free parameters of the non-perturbative functions. To be more
+specific, the non-perturbative function $f_{\rm NP}$, on top of being
+a function of $x$, $b$, and $\zeta$, depends parameterically on a set
+of $N_p$ parameters $\{\theta_k\}$, $k=1,\dots,N_p$, that are
+typically determined by fits to data, in other words:
 \begin{equation}
 f_{\rm NP}\equiv f_{\rm NP}\left(x,b,\zeta;\{\theta_k\}\right)\,.
 \end{equation}
-Now, when performing a fit it is very useful to be able to compute the
-derivative of the figure of merit (usually the $\chi^2$) with respect
-to the parameters to be determined. In turn, this immediately implies
-being able to compute the derivative of the observables. Referring to
-Eq.~(\ref{eq:finalinterpolated}), the relevant quantity is:
+Now, when performing a fit, it is very useful to be able to compute
+the derivative of the figure of merit (usually the $\chi^2$) with
+respect to the parameters to be determined. In turn, this immediately
+implies being able to compute the derivative of the
+observables. Referring to Eq.~(\ref{eq:finalinterpolated}), the
+relevant quantity is:
 \begin{equation}
 \frac{d\widetilde{K}}{d\theta_k}=
 \sum_{n=1}^N
@@ -569,35 +639,6 @@ muons, and tauons, this can be done by multiplying the cross section
 above by three times the branching ratio for the $Z$ decaying into any
 pair of leptons, $3\mbox{Br}(Z\rightarrow \ell^+\ell^-)$.
 
-\section{Cross section differential in $x_F$}
-
-In some cases, the Drell-Yan differential cross section may be
-presented as differential in the invariant mass of the lepton pair $Q$
-and, instead of the rapidity $y$, of the Feynman variable $x_F$
-defined as:
-\begin{equation}
-  x_F = 
-  \frac{Q}{\sqrt{s}}\left(e^{y} - e^{-y}\right) =
-  \frac{2Q}{\sqrt{s}}\sinh y\,,
-\end{equation}
-such that:
-\begin{equation}
-  y(x_F,Q) =
-  \sinh^{-1}\left(\frac{x_F\sqrt{s}}{2Q}\right) = \ln\left(\frac{x_F\sqrt{s}}{2Q}+\sqrt{1+\left(\frac{x_F\sqrt{s}}{2Q}\right)^2}\right)\,,
-\end{equation}
-and so that:
-\begin{equation}
-\frac{dx_F}{dy} = \frac{2Q}{\sqrt{s}}\cosh y\,.
-\end{equation}
-Therefore:
-\begin{equation}
-  \frac{d\sigma}{dQ dx_F dq_T} =
-  \left.\frac{dy}{dx_F}\frac{d\sigma}{dQ dy dq_T}\right|_{y=y(x_F,Q)}=
-  \left.\frac{\sqrt{s}}{2Q\cosh y}\frac{d\sigma}{dQ dy dq_T}\right|_{y=y(x_F,Q)}
-\end{equation}
-and, when integrating over $Q$ for a fixed value of $x_F$, one needs
-to take into account the dependence of $y$ on $Q$.
-
 \appendix
 
 \section{Ogata quadrature}\label{app:OgataQuadrature}
@@ -626,7 +667,7 @@ Ref.~\cite{Ogata:quadrature}. There relevant formulas are:
 \end{equation}
 where:
 \begin{itemize}
-\item $h$ is a free parameter of the algorithm that hat to be
+\item $h$ is a free parameter of the algorithm that has to be
   typically small (we choose $h = 10^{-3}$),
 \item $\xi_{\nu n}$ are the zero's of $J_\nu$, \textit{i.e.}
   $J_\nu(\xi_{\nu n}) = 0$ $\forall\, n$,
