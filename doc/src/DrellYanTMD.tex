@@ -242,6 +242,10 @@ include the integrations above in the precomputed factors.
 
 The integration over bins in $q_T$ can be carried out analytically
 exploiting the following property of Bessel's function:
+\begin{equation}
+\frac{d}{dx}\left[x^mJ_m(x)\right]=x^mJ_{m-1}(x)\,,
+\end{equation}
+that leads to:
 \begin{equation}\label{eq:besselproperty}
 \int dx\,x J_0(x) = xJ_1(x)\quad\Rightarrow\quad \int_{x_1}^{x_2}
 dx\,x J_0(x) = x_2J_1(x_2) - x_1J_1(x_1)\,.
@@ -300,6 +304,105 @@ $J_1$. Eq.~(\ref{eq:primitive}) reduces the integration in $q_T$ to a
 calculation completely analogous to the unintegrated cross
 section. This is particularly convenient because it avoids the
 computation a numerical integration.
+
+\subsubsection{Leptonic cuts}
+
+In the presence of cuts on the final state leptons, the analytic
+integration over $q_T$ discussed above cannot be performed. The reason
+is that the implementation of these cuts effectively introduces a
+$q_T$-dependent function $\mathcal{P}$(\footnote{In fact,
+  $\mathcal{P}$ also depends on the invariant mass $Q$ and the
+  rapidity $y$ of the lepton pair that also need to be integrated
+  over.}) in the integral:
+\begin{equation}
+  \frac{d\sigma}{dQ dy dq_T} \propto \int_0^\infty db\, q_T  J_0(bq_T)\mathcal{P}(q_T)\dots\,,
+\end{equation}
+that prevents the direct use of Eq.~(\ref{eq:besselproperty}).
+However, integrating by parts, we can write(\footnote{Notice that the
+  lower bound of the integral in the r.h.s., that is 0 here, is
+  actually arbitrary because the final result does not depend on
+  it.}):
+\begin{equation}
+  \int_{q_{T,\rm min}}^{q_{T,\rm
+      max}} dq_T\, q_T J_0(bq_T) \mathcal{P}(q_T)= \frac{1}{b}\left[q_T J_1(bq_T) \mathcal{P}(q_T)- \int_{0}^{q_{T}} d\bar{q}_T\, \bar{q}_T J_1(b\bar{q}_T) \mathcal{P}'(\bar{q}_T)\right]\Bigg|_{q_{T,\rm min}}^{q_{T,\rm
+      max}}\,.
+\end{equation}
+Now, if we assume that $\mathcal{P}$ is a slowly-varying function of
+$q_T$ (\textit{i.e.} $\mathcal{P}'$ is small), we could, in first
+approximation, neglect the second term in the r.h.s. of the equation
+above. Unfortunately, despite $\mathcal{P}$ is an actual
+slowly-varying function of $q_T$, the contribution of the integral in
+the r.h.s. is still large, particularly at large $q_T$. This is mostly
+due to the fact that the integral over $b$ of $J_1(bq_T)$,
+particularly for large values of $q_T$, is numerically large.
+
+Since $\mathcal{P}$ is a slowly-varying function of $q_T$ of the
+typical bins, we can approximate the integral over the bins in $q_T$
+as:
+\begin{equation}\label{eq:intbyparts}
+\begin{array}{rcl}
+\displaystyle  \int_{q_{T,\rm min}}^{q_{T,\rm
+      max}} dq_T\, q_T J_0(bq_T) \mathcal{P}(q_T)&\simeq&\displaystyle
+  \mathcal{P}\left(\frac{q_{T,\rm max}+q_{T,\rm min}}2\right)\int_{q_{T,\rm min}}^{q_{T,\rm
+      max}} dq_T\, q_T J_0(bq_T) \\
+\\
+&=& \displaystyle\mathcal{P}\left(\frac{q_{T,\rm max}+q_{T,\rm
+    min}}2\right) \frac{1}{b}\left[q_{T,\rm max} J_1(bq_{T,\rm max}) - q_{T,\rm min} J_1(bq_{T,\rm min}) \right]\,.
+\end{array}
+\end{equation}
+Unfortunately, this structure is inconvenient because it mixes
+different bin bounds and prevents a recursive computation.
+However, we can try to go further and, assuming that the bin width is
+small enough, we can expand $\mathcal{P}$ is the following ways:
+\begin{equation}
+\begin{array}{l}
+\displaystyle\mathcal{P}\left(\frac{q_{T,\rm max}+q_{T,\rm
+    min}}2\right)= \mathcal{P}\left(q_{T,\rm min}+\Delta q_T\right) =
+  \mathcal{P}\left(q_{T,\rm min}\right) + \mathcal{P}'\left(q_{T,\rm
+  min}\right)\Delta q_T +\mathcal{O}\left(\Delta q_T^2\right)\,,\\
+\\
+\displaystyle\mathcal{P}\left(\frac{q_{T,\rm max}+q_{T,\rm
+    min}}2\right)= \mathcal{P}\left(q_{T,\rm max}-\Delta q_T\right) =
+  \mathcal{P}\left(q_{T,\rm max}\right) - \mathcal{P}'\left(q_{T,\rm
+  max}\right)\Delta q_T +\mathcal{O}\left(\Delta q_T^2\right)\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+\Delta q_T = \frac{q_{T,\rm max}- q_{T,\rm min}}2\,.
+\end{equation}
+Therefore:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle  b\int_{q_{T,\rm min}}^{q_{T,\rm
+  max}} dq_T\, q_T J_0(bq_T) \mathcal{P}(q_T)&\simeq&\displaystyle
+                                                      q_{T,\rm
+                                                      max}
+                                                      J_1(bq_{T,\rm
+                                                      max})\left[
+                                                      \mathcal{P}\left(q_{T,\rm
+                                                      max}\right)
+                                                      - 
+                                                      \mathcal{P}'\left(q_{T,\rm
+                                                      max}\right)\Delta
+                                                      q_T\right]\\
+\\
+&-&\displaystyle q_{T,\rm
+                                                      min}
+                                                      J_1(bq_{T,\rm
+                                                      min})\left[
+                                                      \mathcal{P}\left(q_{T,\rm
+                                                      min}\right)
+                                                      +
+                                                      \mathcal{P}'\left(q_{T,\rm
+                                                      min}\right)\Delta
+                                                      q_T\right]\,.
+\end{array}
+\end{equation}
+The advantage of this approximation as compared to
+Eq.~(\ref{eq:intbyparts}) is the fact that each single term depends on
+one single $q_T$-bin-bound rather than on a combination of two
+consecutive bounds.
 
 \subsection{On the position of the peak of the $q_T$ distribution}
 
