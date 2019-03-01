@@ -128,7 +128,8 @@ namespace apfel
     os << "IsExternal  = " << sg._IsExternal << "\n";
     os << "Step        = " << sg._Step << "\n";
     os << "xsg         = ";
-    for (const auto& v: sg._xsg) os << v << " ";
+    for (const auto& v: sg._xsg)
+      os << v << " ";
     os << "\n\n";
     return os;
   }

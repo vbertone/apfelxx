@@ -283,7 +283,7 @@ Eq.~(\ref{eq:crosssection}), we have that:
 - K(Q,y,q_{T,\rm min})\,,
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:Kexplicit}
 \begin{array}{l}
  \displaystyle K(Q,y,q_T) =
   \frac{8\pi\alpha^2q_T}{9 Q^3} H(Q,\mu) \\
@@ -305,40 +305,39 @@ calculation completely analogous to the unintegrated cross
 section. This is particularly convenient because it avoids the
 computation a numerical integration.
 
-\subsubsection{Leptonic cuts}
+\subsubsection{Kinematic cuts}\label{sec:kincuts}
 
-In the presence of cuts on the final state leptons, the analytic
-integration over $q_T$ discussed above cannot be performed. The reason
-is that the implementation of these cuts effectively introduces a
-$q_T$-dependent function $\mathcal{P}$(\footnote{In fact,
-  $\mathcal{P}$ also depends on the invariant mass $Q$ and the
-  rapidity $y$ of the lepton pair that also need to be integrated
-  over.}) in the integral:
+In the presence of kinematic cuts, such as those on the final-state
+leptons in Drell-Yan, the analytic integration over $q_T$ discussed
+above cannot be performed. The reason is that the implementation of
+these cuts effectively introduces a $q_T$-dependent function
+$\mathcal{P}$(\footnote{In fact, $\mathcal{P}$ also depends on the
+  invariant mass $Q$ and the rapidity $y$ of the lepton pair that also
+  need to be integrated over.}) in the integral:
 \begin{equation}
   \frac{d\sigma}{dQ dy dq_T} \propto \int_0^\infty db\, q_T  J_0(bq_T)\mathcal{P}(q_T)\dots\,,
 \end{equation}
 that prevents the direct use of Eq.~(\ref{eq:besselproperty}).
-However, integrating by parts, we can write(\footnote{Notice that the
-  lower bound of the integral in the r.h.s., that is 0 here, is
-  actually arbitrary because the final result does not depend on
-  it.}):
-\begin{equation}
-  \int_{q_{T,\rm min}}^{q_{T,\rm
-      max}} dq_T\, q_T J_0(bq_T) \mathcal{P}(q_T)= \frac{1}{b}\left[q_T J_1(bq_T) \mathcal{P}(q_T)- \int_{0}^{q_{T}} d\bar{q}_T\, \bar{q}_T J_1(b\bar{q}_T) \mathcal{P}'(\bar{q}_T)\right]\Bigg|_{q_{T,\rm min}}^{q_{T,\rm
-      max}}\,.
-\end{equation}
-Now, if we assume that $\mathcal{P}$ is a slowly-varying function of
-$q_T$ (\textit{i.e.} $\mathcal{P}'$ is small), we could, in first
-approximation, neglect the second term in the r.h.s. of the equation
-above. Unfortunately, despite $\mathcal{P}$ is an actual
-slowly-varying function of $q_T$, the contribution of the integral in
-the r.h.s. is still large, particularly at large $q_T$. This is mostly
-due to the fact that the integral over $b$ of $J_1(bq_T)$,
-particularly for large values of $q_T$, is numerically large.
-
-Since $\mathcal{P}$ is a slowly-varying function of $q_T$ of the
-typical bins, we can approximate the integral over the bins in $q_T$
-as:
+% However, integrating by parts, we can write(\footnote{Notice that the
+%   lower bound of the integral in the r.h.s., that is 0 here, is
+%   actually arbitrary because the final result does not depend on
+%   it.}):
+% \begin{equation}
+%   \int_{q_{T,\rm min}}^{q_{T,\rm
+%       max}} dq_T\, q_T J_0(bq_T) \mathcal{P}(q_T)= \frac{1}{b}\left[q_T J_1(bq_T) \mathcal{P}(q_T)- \int_{0}^{q_{T}} d\bar{q}_T\, \bar{q}_T J_1(b\bar{q}_T) \mathcal{P}'(\bar{q}_T)\right]\Bigg|_{q_{T,\rm min}}^{q_{T,\rm
+%       max}}\,.
+% \end{equation}
+% Now, if we assume that $\mathcal{P}$ is a slowly-varying function of
+% $q_T$ (\textit{i.e.} $\mathcal{P}'$ is small), we could, in first
+% approximation, neglect the second term in the r.h.s. of the equation
+% above. Unfortunately, despite $\mathcal{P}$ is an actual
+% slowly-varying function of $q_T$, the contribution of the integral in
+% the r.h.s. is still large, particularly at large $q_T$. This is mostly
+% due to the fact that the integral over $b$ of $J_1(bq_T)$,
+% particularly for large values of $q_T$, is numerically large.
+Since $\mathcal{P}$ is a slowly-varying function of $q_T$ over the
+typical bin size, we can approximate the integral over the bins in
+$q_T$ as:
 \begin{equation}\label{eq:intbyparts}
 \begin{array}{rcl}
 \displaystyle  \int_{q_{T,\rm min}}^{q_{T,\rm
@@ -368,11 +367,11 @@ small enough, we can expand $\mathcal{P}$ is the following ways:
 \end{array}
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:halfqTinterval}
 \Delta q_T = \frac{q_{T,\rm max}- q_{T,\rm min}}2\,.
 \end{equation}
 Therefore:
-\begin{equation}
+\begin{equation}\label{eq:lastexpP}
 \begin{array}{rcl}
   \displaystyle  b\int_{q_{T,\rm min}}^{q_{T,\rm
   max}} dq_T\, q_T J_0(bq_T) \mathcal{P}(q_T)&\simeq&\displaystyle
@@ -399,10 +398,38 @@ Therefore:
                                                       q_T\right]\,.
 \end{array}
 \end{equation}
-The advantage of this approximation as compared to
-Eq.~(\ref{eq:intbyparts}) is the fact that each single term depends on
-one single $q_T$-bin-bound rather than on a combination of two
-consecutive bounds.
+The advantage of this formula as compared to Eq.~(\ref{eq:intbyparts})
+is that each single term depends on one single bin-bound in $q_T$
+rather than on a combination of two consecutive bounds. Therefore, in
+the presence of kinematic cuts, the actual form of the primitive
+function $K$ defined in Eq.~(\ref{eq:primitive}) and given explicitly
+in Eq.~(\ref{eq:Kexplicit}) is:
+\begin{equation}\label{eq:KexplicitCuts}
+\begin{array}{l}
+ \displaystyle K(Q,y,q_T) =
+  \frac{8\pi\alpha^2q_T}{9 Q^3} H(Q,\mu)
+  \left[\mathcal{P}\left(Q,y,q_{T}\right) \pm
+  \mathcal{P}'\left(Q,y,q_{T}\right)\Delta q_T\right]\\
+\\
+\displaystyle \times
+  \int_0^\infty db\, J_1(bq_T) \sum_q C_q(Q)\overline{F}_q(x_1,b;\mu,\zeta) \overline{F}_{\bar{q}}(x_2,b;\mu,\zeta) f_{\rm NP}(x_1,b,\zeta)
+  f_{\rm NP}(x_2,b,\zeta)\,,
+\end{array}
+\end{equation}
+where I have explicitly reinstated the dependence of the function
+$\mathcal{P}$ and its derivative with respect to $q_T$,
+$\mathcal{P}'$, on $Q$ and $y$. In the square bracket in
+Eq.~(\ref{eq:KexplicitCuts}), the minus sign applies when $q_T$ is the
+upper bound of the bin and the plus sign when it is the lower bound
+(see Eq.~(\ref{eq:lastexpP})), and $\Delta q_T$ is defined in
+Eq.~(\ref{eq:halfqTinterval}). As discussed below, when integrating
+over bins in $Q$ and $y$, one should also integrate the functions
+$\mathcal{P}$ and $\mathcal{P}'$. However, we will argue that, in the
+interpolation procedure discussed belo, these functions can be
+extracted from the integrals in $Q$ and $y$ in a proper manner in such
+a way to avoid computing the expensive function $\mathcal{P}$ many
+times and, moreover, simplify enormously the structure of the
+resulting interpolation tables.
 
 \subsection{On the position of the peak of the $q_T$ distribution}
 
@@ -445,8 +472,12 @@ As a final step, we need to perform the integrals over $Q$ and $y$
 defined in Eq.~(\ref{eq:Intcrosssection}). To compute these integrals
 we can only rely on numerical methods. Having reduced the integration
 in $q_T$ to the difference of the two terms in the r.h.s. of
-Eq.~(\ref{eq:primitive}), we can concentrate on integrating the
-function $K$ over $Q$ and $y$ for a fixed value of $q_T$:
+Eq.~(\ref{eq:primitive})(\footnote{For the moment we ignore the
+  complication introduced by the presence of cuts on the final state
+  discussed in Sect.~\ref{sec:kincuts}. We will come back on this
+  issue at the end of the section.}), we can concentrate on
+integrating the function $K$ over $Q$ and $y$ for a fixed value of
+$q_T$:
 \begin{equation}
 \widetilde{K}(q_T)=\int_{Q_{\rm min}}^{Q_{\rm max}}dQ \int_{y_{\rm
     min}}^{y_{\rm max}}dy\,K(Q,y,q_T)\,,
@@ -551,6 +582,38 @@ points included in a fit and used to determine the function
 $f_{\rm NP}$.  This provides a fast tool for the computation of
 predictions that makes the extraction of the non-perturbative part of
 the TMDs much easier.
+
+It is now time to discuss how the weights defined in
+Eq.~(\ref{eq:finalinterpolated}) are affected by the presence of cuts
+as discussed in Sect.~\ref{sec:kincuts}. In principle, the function
+between square brackets in Eq.~(\ref{eq:KexplicitCuts}) should be
+inside the integral in Eq.~(\ref{eq:weights}) and integrated over the
+variable $Q$ and $\xi=e^y$. However, this turns out to be numerically
+problematic because the phase-space-reduction function $\mathcal{P}$
+is expensive to compute. On top of this, the fact that the factor in
+between square brackets in Eq.~(\ref{eq:KexplicitCuts}) depends on
+whether $q_T$ is a lower or an upper integration bound would lead to a
+duplication of the weights to compute. In order to simplify the
+computation, we assume that the function $\mathcal{P}$ and its
+derivative $\mathcal{P}'$ are slowly varying functions of $Q$ and $y$
+over the typical grid interval of the grids in $Q$ and $\xi$. In
+addition, the interpolating functions $\mathcal{I}_\tau(Q)$ and
+$\mathcal{I}_\alpha(\xi)$ are strongly peaked at $Q_\tau$ and
+$\xi_\alpha$, respectively. These considerations allows us to avoid
+integrating explicitly $\mathcal{P}$ and $\mathcal{P}'$ over $Q$ and
+$\xi$ and to replace the weights in Eq.~(\ref{eq:weights}) with:
+\begin{equation}\label{eq:weightswithcuts}
+  \displaystyle  W_{n\tau\alpha}(q_T) \rightarrow \left[\mathcal{P}\left(Q_\tau,\ln(\xi_\alpha),q_{T}\right) \pm
+  \mathcal{P}'\left(Q_\tau,\ln(\xi_\alpha),q_{T}\right)\Delta q_T\right] W_{n\tau\alpha}(q_T)\,.
+\end{equation}
+At the end of the day, the only additional information required to
+implement cuts on the final state is the value of the
+phase-space-reduction function $\mathcal{P}$ and its derivative
+$\mathcal{P}'$ on all points of the bidimensional grid in $Q$ and
+$\xi$ for all $q_T$ bin bounds. Eq.~(\ref{eq:weightswithcuts}) will
+then allow one to use the weights computed over the full phase space.
+We will check the accuracy of this procedure by comparing it to the
+explicit integration.
 
 \subsection{Cross section differential in $x_F$}
 
