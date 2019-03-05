@@ -421,11 +421,10 @@ $\mathcal{P}$ and its derivative with respect to $q_T$,
 $\mathcal{P}'$, on $Q$ and $y$. In the square bracket in
 Eq.~(\ref{eq:KexplicitCuts}), the minus sign applies when $q_T$ is the
 upper bound of the bin and the plus sign when it is the lower bound
-(see Eq.~(\ref{eq:lastexpP})), and $\Delta q_T$ is defined in
-Eq.~(\ref{eq:halfqTinterval}). As discussed below, when integrating
+(see Eq.~(\ref{eq:lastexpP})). As discussed below, when integrating
 over bins in $Q$ and $y$, one should also integrate the functions
 $\mathcal{P}$ and $\mathcal{P}'$. However, we will argue that, in the
-interpolation procedure discussed belo, these functions can be
+interpolation procedure discussed below, these functions can be
 extracted from the integrals in $Q$ and $y$ in a proper manner in such
 a way to avoid computing the expensive function $\mathcal{P}$ many
 times and, moreover, simplify enormously the structure of the
@@ -584,13 +583,13 @@ predictions that makes the extraction of the non-perturbative part of
 the TMDs much easier.
 
 It is now time to discuss how the weights defined in
-Eq.~(\ref{eq:finalinterpolated}) are affected by the presence of cuts
-as discussed in Sect.~\ref{sec:kincuts}. In principle, the function
+Eq.~(\ref{eq:weights}) are affected by the presence of cuts as
+discussed in Sect.~\ref{sec:kincuts}. In principle, the function
 between square brackets in Eq.~(\ref{eq:KexplicitCuts}) should be
-inside the integral in Eq.~(\ref{eq:weights}) and integrated over the
+inside the integrals in Eq.~(\ref{eq:weights}) and integrated over the
 variable $Q$ and $\xi=e^y$. However, this turns out to be numerically
 problematic because the phase-space-reduction function $\mathcal{P}$
-is expensive to compute. On top of this, the fact that the factor in
+is expensive to compute. On top of this, the fact that the factor
 between square brackets in Eq.~(\ref{eq:KexplicitCuts}) depends on
 whether $q_T$ is a lower or an upper integration bound would lead to a
 duplication of the weights to compute. In order to simplify the
@@ -599,7 +598,7 @@ derivative $\mathcal{P}'$ are slowly varying functions of $Q$ and $y$
 over the typical grid interval of the grids in $Q$ and $\xi$. In
 addition, the interpolating functions $\mathcal{I}_\tau(Q)$ and
 $\mathcal{I}_\alpha(\xi)$ are strongly peaked at $Q_\tau$ and
-$\xi_\alpha$, respectively. These considerations allows us to avoid
+$\xi_\alpha$, respectively. These considerations allow us to avoid
 integrating explicitly $\mathcal{P}$ and $\mathcal{P}'$ over $Q$ and
 $\xi$ and to replace the weights in Eq.~(\ref{eq:weights}) with:
 \begin{equation}\label{eq:weightswithcuts}
