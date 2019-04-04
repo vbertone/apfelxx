@@ -57,3 +57,8 @@ add_test(qgriddist_test qgriddist_test)
 add_executable(dglap_test dglap_test.cc)
 target_link_libraries(dglap_test apfelxx)
 add_test(dglap_test dglap_test)
+
+# build tests
+add_executable(ogata_test ogata_test.cc)
+target_link_libraries(ogata_test apfelxx)
+add_test(ogata_test ogata_test)
