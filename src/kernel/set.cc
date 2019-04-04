@@ -25,7 +25,7 @@ namespace apfel {
   template<class V> Set<V> Set<T>::operator *= (Set<V> const& d) const
   {
     if (_map.GetName() != d.GetMap().GetName())
-      throw std::runtime_error(error("Set::operator *=", "Convolution Map does not match (1)"));
+      throw std::runtime_error(error("Set::operator *=", "Convolution Map does not match"));
 
     std::map<int,V> mmap;
     for (auto item = _map.GetRules().begin(); item != _map.GetRules().end(); item++)
