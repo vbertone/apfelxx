@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include <apfel/distribution.h>
@@ -22,80 +21,77 @@
 #include <map>
 #include <functional>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
   // Time counter
-  Timer t,ttot;
+  apfel::Timer t,ttot;
 
   // Grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}};
+  const apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,5}, apfel::SubGrid{40,8e-1,5}}};
 
   // ===============================================================
   // Allocate LO splitting functions operators
-  cout << "Initializing operators... ";
+  std::cout << "Initializing operators... ";
   t.start();
-  map<int,map<int,Operator>> OpMap;
-  const Operator O0ns{g, P0ns{}};
-  const Operator O0qg{g, P0qg{}};
-  const Operator O0gq{g, P0gq{}};
+  std::map<int, std::map<int, apfel::Operator>> OpMap;
+  const apfel::Operator O0ns{g, apfel::P0ns{}};
+  const apfel::Operator O0qg{g, apfel::P0qg{}};
+  const apfel::Operator O0gq{g, apfel::P0gq{}};
   for (int nf = 3; nf <= 6; nf++)
     {
-      const Operator O0gg{g, P0gg{nf}};
-      const Operator O0qgnf = nf * O0qg;
-      map<int,Operator> OM;
-      OM.insert({EvolutionBasisQCD::PNSP,O0ns});
-      OM.insert({EvolutionBasisQCD::PNSM,O0ns});
-      OM.insert({EvolutionBasisQCD::PNSV,O0ns});
-      OM.insert({EvolutionBasisQCD::PQQ, O0ns});
-      OM.insert({EvolutionBasisQCD::PQG, O0qgnf});
-      OM.insert({EvolutionBasisQCD::PGQ, O0gq});
-      OM.insert({EvolutionBasisQCD::PGG, O0gg});
+      const apfel::Operator O0gg{g, apfel::P0gg{nf}};
+      const apfel::Operator O0qgnf = nf * O0qg;
+      std::map<int, apfel::Operator> OM;
+      OM.insert({apfel::EvolutionBasisQCD::PNSP,O0ns});
+      OM.insert({apfel::EvolutionBasisQCD::PNSM,O0ns});
+      OM.insert({apfel::EvolutionBasisQCD::PNSV,O0ns});
+      OM.insert({apfel::EvolutionBasisQCD::PQQ, O0ns});
+      OM.insert({apfel::EvolutionBasisQCD::PQG, O0qgnf});
+      OM.insert({apfel::EvolutionBasisQCD::PGQ, O0gq});
+      OM.insert({apfel::EvolutionBasisQCD::PGG, O0gg});
       OpMap.insert({nf,OM});
     }
   t.stop();
 
   // Allocate distributions
-  cout << "Initializing distributions... ";
+  std::cout << "Initializing distributions... ";
   t.start();
-  map<int,Distribution> DistMap = DistributionMap(g, LHToyPDFs, 0);
+  std::map<int, apfel::Distribution> DistMap = DistributionMap(g, apfel::LHToyPDFs, 0);
   t.stop();
 
-  cout << "Initializing set of operators and distributions... ";
+  std::cout << "Initializing set of operators and distributions... ";
   t.start();
   // Allocate maps
-  map<int,EvolutionBasisQCD> basis;
+  std::map<int, apfel::EvolutionBasisQCD> basis;
   for (int nf = 3; nf <= 6; nf++)
-    basis.insert({nf,EvolutionBasisQCD{nf}});
+    basis.insert({nf, apfel::EvolutionBasisQCD{nf}});
 
   // Allocate set of operators
-  map<int,Set<Operator>> Splittings;
+  std::map<int, apfel::Set<apfel::Operator>> Splittings;
   for (int nf = 3; nf <= 6; nf++)
-    Splittings.insert({nf,Set<Operator>{basis.at(nf), OpMap.at(nf)}});
+    Splittings.insert({nf, apfel::Set<apfel::Operator>{basis.at(nf), OpMap.at(nf)}});
 
   // Allocate set of initial distributions
-  Set<Distribution> PDFs{basis.at(5), DistMap};
+  apfel::Set<apfel::Distribution> PDFs{basis.at(5), DistMap};
   t.stop();
 
   // Test products
-  cout << "\nTesting products..." << endl;
+  std::cout << "\nTesting products..." << std::endl;
   t.start();
-  auto Product = Splittings.at(5) * PDFs;
-  cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
-       << Product.at(EvolutionBasisQCD::GLUON).Evaluate(0.1) << endl;
+  const apfel::Set<apfel::Distribution> Product = Splittings.at(5) * PDFs;
+  std::cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
+       << Product.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
 
-  auto Product2 = 3 * Splittings.at(5) * PDFs;
-  cout << "(3 * Splitting * PDFs)[GLUON](x=0.1) = "
-       << Product2.at(EvolutionBasisQCD::GLUON).Evaluate(0.1) << endl;
+  const apfel::Set<apfel::Distribution> Product2 = 3 * Splittings.at(5) * PDFs;
+  std::cout << "(3 * Splitting * PDFs)[GLUON](x=0.1) = "
+       << Product2.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
 
-  auto Sum = ( Splittings.at(5) + 2 * Splittings.at(5) ) * PDFs;
-  cout << "[(Splitting * PDFs)[GLUON] + 2 * (Splitting * PDFs)[GLUON]](x=0.1) = "
-       << Sum.at(EvolutionBasisQCD::GLUON).Evaluate(0.1) << endl;
+  const apfel::Set<apfel::Distribution> Sum = ( Splittings.at(5) + 2 * Splittings.at(5) ) * PDFs;
+  std::cout << "[(Splitting * PDFs)[GLUON] + 2 * (Splitting * PDFs)[GLUON]](x=0.1) = "
+       << Sum.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
   t.stop();
 
-  cout << "\nTotal ";
+  std::cout << "\nTotal ";
   ttot.stop();
 
   return 0;

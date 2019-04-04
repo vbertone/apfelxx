@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include <apfel/grid.h>
@@ -16,48 +15,45 @@
 #include <cmath>
 #include <iomanip>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
   // Grid
-  Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,3}, SubGrid{40,8e-1,3}}, false};
+  apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,3}, apfel::SubGrid{40,8e-1,3}}, false};
 
   // Define distribution.
-  const auto xQdist = [&](double const& x, double const& Q)->double{ return x * ( 1 - x ) * log(Q); };
-  const auto d = [&](double const& Q)->Distribution{ return Distribution{g, xQdist, Q}; };
+  const auto xQdist = [&](double const& x, double const& Q) -> double{ return x * ( 1 - x ) * log(Q); };
+  const auto d = [&](double const& Q) -> apfel::Distribution{ return apfel::Distribution{g, xQdist, Q}; };
 
   // Tabulate distribution on a QGrid
-  const TabulateObject<Distribution> dist{d, 50, 1, 1000, 3, {}};
+  const apfel::TabulateObject<apfel::Distribution> dist{d, 50, 1, 1000, 3, {}};
 
   // Printout Qgrid
-  cout << dist << endl;
+  std::cout << dist << std::endl;
 
-  auto nx    = 10;
-  auto xmin  = 1e-5;
-  auto xmax  = 9e-1;
-  auto xstep = exp( log( xmax / xmin ) / ( nx - 1 ) );
-  auto nQ    = 5;
-  auto Qmin  = 2.;
-  auto Qmax  = 100.;
-  auto Qstep = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
+  double nx    = 10;
+  double xmin  = 1e-5;
+  double xmax  = 9e-1;
+  double xstep = exp( log( xmax / xmin ) / ( nx - 1 ) );
+  double nQ    = 5;
+  double Qmin  = 2.;
+  double Qmax  = 100.;
+  double Qstep = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
 
-  cout << "Accuracy test ..." << endl;
-  cout << "Q             "
-       << "x             "
-       << "Interpolated  "
-       << "Direct        "
-       << "Ratio         " << endl;
-  cout << scientific;
-  auto Q = Qmin;
-  for (auto iQ = 0; iQ < nQ; iQ++)
+  std::cout << "Accuracy test ..." << std::endl;
+  std::cout << "Q             "
+	    << "x             "
+	    << "Interpolated  "
+	    << "Direct        "
+	    << "Ratio         " << std::endl;
+  std::cout << std::scientific;
+  double Q = Qmin;
+  for (int iQ = 0; iQ < nQ; iQ++)
     {
-      auto x = xmin;
-      const auto d = dist.Evaluate(Q);
-      for (auto ix = 0; ix < nx; ix++)
+      double x = xmin;
+      const apfel::Distribution d = dist.Evaluate(Q);
+      for (int ix = 0; ix < nx; ix++)
 	{
-	  cout << Q << "  " << x << "  " << d.Evaluate(x) << "  " << xQdist(x,Q) << "  " << d.Evaluate(x) / xQdist(x,Q) << endl;
+	  std::cout << Q << "  " << x << "  " << d.Evaluate(x) << "  " << xQdist(x,Q) << "  " << d.Evaluate(x) / xQdist(x,Q) << std::endl;
 	  x *= xstep;
 	}
       Q *= Qstep;
@@ -67,15 +63,15 @@ int main()
   xstep = exp( log( xmax / xmin ) / ( nx - 1 ) );
   nQ    = 1000;
   Qstep = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
-  cout << "\nSpeed test ..." << endl;
-  cout << "Interpolating " << nx << " x-space points for each of " << nQ << " Q-space points ..." << endl;
-  Timer t;
+  std::cout << "\nSpeed test ..." << std::endl;
+  std::cout << "Interpolating " << nx << " x-space points for each of " << nQ << " Q-space points ..." << std::endl;
+  apfel::Timer t;
   Q = Qmin;
-  for (auto iQ = 0; iQ < nQ; iQ++)
+  for (int iQ = 0; iQ < nQ; iQ++)
     {
-      auto x = xmin;
-      const auto d = dist.Evaluate(Q);
-      for (auto ix = 0; ix < nx; ix++)
+      double x = xmin;
+      const apfel::Distribution d = dist.Evaluate(Q);
+      for (int ix = 0; ix < nx; ix++)
 	{
 	  d.Evaluate(x);
 	  x *= xstep;

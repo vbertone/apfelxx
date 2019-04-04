@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include <apfel/qgrid.h>
@@ -14,44 +13,41 @@
 #include <cmath>
 #include <iomanip>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
   // Constructor of QGrid with type double
-  const QGrid<double> qg{50, 1, 1000, 3, {0, 0, 0, sqrt(2), 4.5, 175.}};
-  cout << qg << endl;
+  const apfel::QGrid<double> qg{50, 1, 1000, 3, {0, 0, 0, sqrt(2), 4.5, 175.}};
+  std::cout << qg << std::endl;
 
   // AlphaQCD running coupling
-  AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
+  apfel::AlphaQCD as{0.35, sqrt(2), {0, 0, 0, sqrt(2), 4.5, 175}, 2};
 
   // Tabulate AlphaQCD on a QGrid
-  const TabulateObject<double> gas{as, 50, 1, 1000, 3};
+  const apfel::TabulateObject<double> gas{as, 50, 1, 1000, 3};
 
-  cout << "Precision test ..." << endl;
-  auto nQ   = 20;
-  auto Qmin = 1.1;
-  auto Qmax = 999.;
-  auto Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
-  auto Q = Qmin;
-  cout << setprecision(8) << scientific;
-  cout << "Q       \t\tDirect  \t\tInterpolated\t\tRatio" << endl;
-  for (auto iQ = 0; iQ < nQ; iQ++)
+  std::cout << "Precision test ..." << std::endl;
+  double nQ   = 20;
+  double Qmin = 1.1;
+  double Qmax = 999.;
+  double Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
+  double Q = Qmin;
+  std::cout << std::setprecision(8) << std::scientific;
+  std::cout << "Q       \t\tDirect  \t\tInterpolated\t\tRatio" << std::endl;
+  for (int iQ = 0; iQ < nQ; iQ++)
     {
-      cout << Q << "\t\t" << as.Evaluate(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as.Evaluate(Q) / gas.Evaluate(Q) << endl;
+      std::cout << Q << "\t\t" << as.Evaluate(Q) << "\t\t" << gas.Evaluate(Q) << "\t\t" << as.Evaluate(Q) / gas.Evaluate(Q) << std::endl;
       Q *=Step;
     }
 
-  cout << "\nSpeed test ..." << endl;
-  Timer t;
+  std::cout << "\nSpeed test ..." << std::endl;
+  apfel::Timer t;
   nQ   = 1000000;
   Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
 
   t.start();
-  cout << "Direct calculation of " << nQ << " points ..." << endl;
+  std::cout << "Direct calculation of " << nQ << " points ..." << std::endl;
   Q = Qmin;
-  for (auto iQ = 0; iQ < nQ; iQ++)
+  for (int iQ = 0; iQ < nQ; iQ++)
     {
       as.Evaluate(Q);
       Q *= Step;
@@ -59,9 +55,9 @@ int main()
   t.stop();
 
   t.start();
-  cout << "Interpolated calculation of " << nQ << " points ..." << endl;
+  std::cout << "Interpolated calculation of " << nQ << " points ..." << std::endl;
   Q = Qmin;
-  for (auto iQ = 0; iQ < nQ; iQ++)
+  for (int iQ = 0; iQ < nQ; iQ++)
     {
       gas.Evaluate(Q);
       Q *= Step;

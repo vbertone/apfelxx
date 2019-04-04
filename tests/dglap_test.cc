@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include <apfel/grid.h>
@@ -18,20 +18,17 @@
 
 #include <functional>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
   // x-space grid
-  const Grid g{{SubGrid{100,1e-5,3}, SubGrid{60,1e-1,3}, SubGrid{50,6e-1,3}, SubGrid{50,8e-1,3}}};
+  const apfel::Grid g{{apfel::SubGrid{100,1e-5,3}, apfel::SubGrid{60,1e-1,3}, apfel::SubGrid{50,6e-1,3}, apfel::SubGrid{50,8e-1,3}}};
 
   // Initial scale
   const double mu0 = sqrt(2);
 
   // Vectors of masses and thresholds
-  const vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175};
-  const vector<double> Thresholds = Masses;
+  const std::vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175};
+  const std::vector<double> Thresholds = Masses;
 
   // Perturbative order
   const int PerturbativeOrder = 2;
@@ -39,8 +36,8 @@ int main()
   // Running coupling
   const double AlphaQCDRef = 0.35;
   const double MuAlphaQCDRef = sqrt(2);
-  AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
-  const TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
+  apfel::AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
+  const apfel::TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects
@@ -48,60 +45,60 @@ int main()
   const auto DglapObjOp = InitializeDglapObjectsQCD(g, Masses, Thresholds, true);
 
   // Construct the DGLAP objects
-  auto EvolvedPDFs = BuildDglap(DglapObj, LHToyPDFs, mu0, PerturbativeOrder, as);
-  auto EvolvedOps  = BuildDglap(DglapObjOp,          mu0, PerturbativeOrder, as);
+  const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
+  const auto EvolvedOps  = BuildDglap(DglapObjOp,          mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
-  const TabulateObject<Set<Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
+  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
   // Final scale
-  double mu = 100;
+  const double mu = 100;
 
   // Print results
-  cout << scientific;
+  std::cout << std::scientific;
 
   // Evolve PDFs to the final Scale
-  cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
-  Timer t;
-  auto pdfs = EvolvedPDFs->Evaluate(mu);
+  std::cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
+  apfel::Timer t;
+  const apfel::Set<apfel::Distribution> pdfs = EvolvedPDFs->Evaluate(mu);
   t.stop();
 
-  cout << "Interpolation of the tabulated PDFs... ";
+  std::cout << "Interpolation of the tabulated PDFs... ";
   t.start();
-  auto tpdfs = TabulatedPDFs.Evaluate(mu);
+  const apfel::Set<apfel::Distribution> tpdfs = TabulatedPDFs.Evaluate(mu);
   t.stop();
 
-  cout << "Direct evolution of the operators... ";
+  std::cout << "Direct evolution of the operators... ";
   t.start();
-  auto ops = EvolvedOps->Evaluate(mu);
+  apfel::Set<apfel::Operator> ops = EvolvedOps->Evaluate(mu);
   t.stop();
 
   // Convolute evolution operators with the initial scale
   // distributions.
-  auto InDist = EvolvedPDFs->Evaluate(mu0);
-  const MatchEvolOperatorBasisQCD matchbasis{NF(mu0, Thresholds)};
+  apfel::Set<apfel::Distribution> InDist = EvolvedPDFs->Evaluate(mu0);
+  const apfel::MatchEvolOperatorBasisQCD matchbasis{apfel::NF(mu0, Thresholds)};
   InDist.SetMap(matchbasis);
   ops.SetMap(matchbasis);
-  const auto oppdfs = ops * InDist;
+  const apfel::Set<apfel::Distribution> oppdfs = ops * InDist;
 
   const double xlha[] = {1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
-  cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << endl;
-  cout << "\n   x    "
+  std::cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << std::endl;
+  std::cout << "\n   x    "
        << "   u-ubar   "
        << "   d-dbar   "
        << " 2(ubr+dbr) "
        << "   c+cbar   "
        << "    gluon   "
-       << endl;
+       << std::endl;
 
-  cout << "Direct Evolution:" << endl;
-  for (auto i = 2; i < 11; i++)
+  std::cout << "Direct Evolution:" << std::endl;
+  for (int i = 2; i < 11; i++)
     {
-      cout.precision(1);
-      cout << xlha[i];
-      cout.precision(4);
-      cout << "  " <<
+      std::cout.precision(1);
+      std::cout << xlha[i];
+      std::cout.precision(4);
+      std::cout << "  " <<
 	pdfs.at(2).Evaluate(xlha[i])  / 6  +
 	pdfs.at(4).Evaluate(xlha[i])  / 2  +
 	pdfs.at(6).Evaluate(xlha[i])  / 6  +
@@ -128,17 +125,17 @@ int main()
 	pdfs.at(11).Evaluate(xlha[i]) / 30
 	   << "  " <<
 	pdfs.at(0).Evaluate(xlha[i]) << "  "
-	   << endl;
+	   << std::endl;
     }
-  cout << "      " << endl;
+  std::cout << "      " << std::endl;
 
-  cout << "Direct Evolution through the evolution operators:" << endl;
-  for (auto i = 2; i < 11; i++)
+  std::cout << "Direct Evolution through the evolution operators:" << std::endl;
+  for (int i = 2; i < 11; i++)
     {
-      cout.precision(1);
-      cout << xlha[i];
-      cout.precision(4);
-      cout << "  " <<
+      std::cout.precision(1);
+      std::cout << xlha[i];
+      std::cout.precision(4);
+      std::cout << "  " <<
 	oppdfs.at(2).Evaluate(xlha[i])  / 6  +
 	oppdfs.at(4).Evaluate(xlha[i])  / 2  +
 	oppdfs.at(6).Evaluate(xlha[i])  / 6  +
@@ -165,17 +162,17 @@ int main()
 	oppdfs.at(11).Evaluate(xlha[i]) / 30
 	   << "  " <<
 	oppdfs.at(0).Evaluate(xlha[i]) << "  "
-	   << endl;
+	   << std::endl;
     }
-  cout << "      " << endl;
+  std::cout << "      " << std::endl;
 
-  cout << "Interpolation on the PDF table (all x for each Q):" << endl;
-  for (auto i = 2; i < 11; i++)
+  std::cout << "Interpolation on the PDF table (all x for each Q):" << std::endl;
+  for (int i = 2; i < 11; i++)
     {
-      cout.precision(1);
-      cout << xlha[i];
-      cout.precision(4);
-      cout << "  " <<
+      std::cout.precision(1);
+      std::cout << xlha[i];
+      std::cout.precision(4);
+      std::cout << "  " <<
 	tpdfs.at(2).Evaluate(xlha[i])  / 6  +
 	tpdfs.at(4).Evaluate(xlha[i])  / 2  +
 	tpdfs.at(6).Evaluate(xlha[i])  / 6  +
@@ -202,17 +199,17 @@ int main()
 	tpdfs.at(11).Evaluate(xlha[i]) / 30
 	   << "  " <<
 	tpdfs.at(0).Evaluate(xlha[i]) << "  "
-	   << endl;
+	   << std::endl;
     }
-  cout << "      " << endl;
+  std::cout << "      " << std::endl;
 
-  cout << "Interpolation on the PDF table (x and Q independently):" << endl;
-  for (auto i = 2; i < 11; i++)
+  std::cout << "Interpolation on the PDF table (x and Q independently):" << std::endl;
+  for (int i = 2; i < 11; i++)
     {
-      cout.precision(1);
-      cout << xlha[i];
-      cout.precision(4);
-      cout << "  " <<
+      std::cout.precision(1);
+      std::cout << xlha[i];
+      std::cout.precision(4);
+      std::cout << "  " <<
 	TabulatedPDFs.EvaluatexQ(2,xlha[i],mu)  / 6  +
 	TabulatedPDFs.EvaluatexQ(4,xlha[i],mu)  / 2  +
 	TabulatedPDFs.EvaluatexQ(6,xlha[i],mu)  / 6  +
@@ -239,18 +236,18 @@ int main()
 	TabulatedPDFs.EvaluatexQ(11,xlha[i],mu) / 30
 	   << "  " <<
 	TabulatedPDFs.EvaluatexQ(0,xlha[i],mu) << "  "
-	   << endl;
+	   << std::endl;
     }
-  cout << "      " << endl;
+  std::cout << "      " << std::endl;
 
-  cout << "Interpolation on the PDF table as a map (x and Q independently):" << endl;
-  for (auto i = 2; i < 11; i++)
+  std::cout << "Interpolation on the PDF table as a map (x and Q independently):" << std::endl;
+  for (int i = 2; i < 11; i++)
     {
-      const auto DistMap = TabulatedPDFs.EvaluateMapxQ(xlha[i],mu);
-      cout.precision(1);
-      cout << xlha[i];
-      cout.precision(4);
-      cout << "  " <<
+      const std::map<int, double> DistMap = TabulatedPDFs.EvaluateMapxQ(xlha[i],mu);
+      std::cout.precision(1);
+      std::cout << xlha[i];
+      std::cout.precision(4);
+      std::cout << "  " <<
 	DistMap.at(2)  / 6  +
 	DistMap.at(4)  / 2  +
 	DistMap.at(6)  / 6  +
@@ -277,21 +274,21 @@ int main()
 	DistMap.at(11) / 30
 	   << "  " <<
 	DistMap.at(0) << "  "
-	   << endl;
+	   << std::endl;
     }
-  cout << "      " << endl;
+  std::cout << "      " << std::endl;
 
   int k = 1000000;
-  cout << "Interpolating " << k << " times a single PDF on the (x,Q) grid... ";
+  std::cout << "Interpolating " << k << " times a single PDF on the (x,Q) grid... ";
   t.start();
-  for (auto i = 0; i < k; i++)
+  for (int i = 0; i < k; i++)
     TabulatedPDFs.EvaluatexQ(0,0.05,mu);
   t.stop();
 
   k = 100000;
-  cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
+  std::cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
   t.start();
-  for (auto i = 0; i < k; i++)
+  for (int i = 0; i < k; i++)
     TabulatedPDFs.EvaluateMapxQ(0.05,mu);
   t.stop();
 

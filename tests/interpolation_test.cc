@@ -13,102 +13,99 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
-  cout << setprecision(12) << scientific;
+  std::cout << std::setprecision(12) << std::scientific;
 
   // Grid
-  const Grid g{{SubGrid{80,1e-5,3}, SubGrid{50,1e-1,5}, SubGrid{40,8e-1,5}}, false};
+  const apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,5}, apfel::SubGrid{40,8e-1,5}}, false};
 
   // Test distribution
-  const auto xg = [&] (double const& x)->double{ return x * ( 1 - x ); };
-  const Distribution xgluon{g, xg};
+  const auto xg = [&] (double const& x) -> double{ return x * ( 1 - x ); };
+  const apfel::Distribution xgluon{g, xg};
 
   // Test values
-  vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+  std::vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
 
-  cout << "x, original function, interpolated function (joint), ratio" << endl;
+  std::cout << "x, original function, interpolated function (joint), ratio" << std::endl;
   for (auto const& ix: x)
     {
-      const auto original = xg(ix);
-      const auto interpol = xgluon.Evaluate(ix);
-      cout << ix << "  "
-           << original << "  "
-           << interpol << "  "
-           << original / interpol<< endl;
+      const double original = xg(ix);
+      const double interpol = xgluon.Evaluate(ix);
+      std::cout << ix << "  "
+		<< original << "  "
+		<< interpol << "  "
+		<< original / interpol<< std::endl;
     }
-  cout << endl;
+  std::cout << "\n";
 
-  cout << "x, original function, interpolated function (first subgrid), ratio" << endl;
+  std::cout << "x, original function, interpolated function (first subgrid), ratio" << std::endl;
   for (auto const& ix: x)
     {
-      const auto original = xg(ix);
-      const auto interpol = xgluon.Evaluate(ix,0);
-      cout << ix << "  "
-           << original << "  "
-           << interpol << "  "
-           << original / interpol<< endl;
+      const double original = xg(ix);
+      const double interpol = xgluon.Evaluate(ix,0);
+      std::cout << ix << "  "
+		<< original << "  "
+		<< interpol << "  "
+		<< original / interpol<< std::endl;
     }
-  cout << endl;
+  std::cout << "\n";
 
-  cout << "x, original function, interpolated function (second subgrid), ratio" << endl;
+  std::cout << "x, original function, interpolated function (second subgrid), ratio" << std::endl;
   for (auto const& ix: x)
     {
-      const auto original = xg(ix);
-      const auto interpol = xgluon.Evaluate(ix,1);
-      cout << ix << "  "
-           << original << "  "
-           << interpol << "  "
-           << original / interpol<< endl;
+      const double original = xg(ix);
+      const double interpol = xgluon.Evaluate(ix,1);
+      std::cout << ix << "  "
+		<< original << "  "
+		<< interpol << "  "
+		<< original / interpol<< std::endl;
     }
-  cout << endl;
+  std::cout << "\n";
 
-  cout << "x, original function, interpolated function (third subgrid), ratio" << endl;
+  std::cout << "x, original function, interpolated function (third subgrid), ratio" << std::endl;
   for (auto const& ix: x)
     {
-      const auto original = xg(ix);
-      const auto interpol = xgluon.Evaluate(ix,2);
-      cout << ix << "  "
-           << original << "  "
-           << interpol << "  "
-           << original / interpol<< endl;
+      const double original = xg(ix);
+      const double interpol = xgluon.Evaluate(ix,2);
+      std::cout << ix << "  "
+		<< original << "  "
+		<< interpol << "  "
+		<< original / interpol<< std::endl;
     }
-  cout << endl;
+  std::cout << "\n";
 
-  int const nint = 1000000;
-  const SubGrid test_grid{nint, 1e-5, 1};
-  Timer t;
+  const int nint = 1000000;
+  const apfel::SubGrid test_grid{nint, 1e-5, 1};
+  apfel::Timer t;
 
-  cout << "Performance test ("<< nint << " interpolations) ..." << endl;
+  std::cout << "Performance test ("<< nint << " interpolations) ..." << std::endl;
 
-  cout << "(Joint Grid) ";
+  std::cout << "(Joint Grid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r);
   t.stop();
 
-  cout << "(First SubGrid) ";
+  std::cout << "(First SubGrid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r,0);
   t.stop();
 
-  cout << "(Second SubGrid) ";
+  std::cout << "(Second SubGrid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r,1);
   t.stop();
 
-  cout << "(Third SubGrid) ";
+  std::cout << "(Third SubGrid) ";
   t.start();
   for (auto const& r: test_grid.GetGrid())
     xgluon.Evaluate(r,2);
   t.stop();
 
-  cout << "\n";
+  std::cout << "\n";
 
   return 0;
 }

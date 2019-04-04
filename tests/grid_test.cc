@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include <apfel/grid.h>
@@ -11,27 +10,20 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
-  cout << setprecision(15) << scientific;
+  std::cout << std::setprecision(15) << std::scientific;
 
   // Allocate vector of subgrids
-  vector<SubGrid> sgs = {
-    SubGrid{10,1e-5,3},
-    SubGrid{20,1e-3,2},
-    SubGrid{30,1e-1,2}
-  };
+  std::vector<apfel::SubGrid> sgs = {apfel::SubGrid{10,1e-5,3}, apfel::SubGrid{20,1e-3,2}, apfel::SubGrid{30,1e-1,2}};
 
   // Construct grid with and without locking the subgrids
-  Grid gl{sgs, true};
-  Grid g{sgs, false};
+  apfel::Grid gl{sgs, true};
+  apfel::Grid g{sgs, false};
 
   // Print grids
-  cout << g << endl;
-  cout << gl << endl;
+  std::cout << g << std::endl;
+  std::cout << gl << std::endl;
 
   if (g == gl)
     return 0;

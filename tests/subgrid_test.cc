@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include <apfel/subgrid.h>
@@ -11,35 +10,32 @@
 #include <memory>
 #include <iomanip>
 
-using namespace apfel;
-using namespace std;
-
 int main()
 {
-  cout << setprecision(12) << scientific;
+  std::cout << std::setprecision(12) << std::scientific;
 
   // Construct test subgrid
-  SubGrid a{50, 1e-5, 3};
-  cout << a << endl;
+  apfel::SubGrid a{50, 1e-5, 3};
+  std::cout << a << std::endl;
 
   // Copy constructor
-  SubGrid b = a;
-  cout << b << endl;
+  apfel::SubGrid b = a;
+  std::cout << b << std::endl;
 
   // Dynamic allocation through copy constructor
-  unique_ptr<SubGrid> c{new SubGrid{a}};
-  cout << *c << endl;
+  std::unique_ptr<apfel::SubGrid> c{new apfel::SubGrid{a}};
+  std::cout << *c << std::endl;
 
   // Copy assigment
-  SubGrid d{100, 1e-3, 4};
-  cout << d << endl;
+  apfel::SubGrid d{100, 1e-3, 4};
+  std::cout << d << std::endl;
   d = a;
-  cout << d << endl;
+  std::cout << d << std::endl;
 
   // External constructor
-  vector<double> v = {1e-5, 1e-4, 1e-3, 1e-2, 1};
-  SubGrid e{v, 3};
-  cout << e << endl;
+  std::vector<double> v = {1e-5, 1e-4, 1e-3, 1e-2, 1};
+  apfel::SubGrid e{v, 3};
+  std::cout << e << std::endl;
 
   // Check equality operator
   if ( (a == b)  == false ||
