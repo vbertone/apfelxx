@@ -655,21 +655,21 @@ this gives:
 \end{equation}
 At $\mathcal{O}(a_s^2)$, this gives:
 \begin{equation}
--\beta_0 P^{(0)} +\Gamma^{(2,1)}+2L\Gamma^{(2,2)}= P^{(1)}+L
+-L\beta_0 P^{(0)} +\Gamma^{(2,1)}+2L\Gamma^{(2,2)}= P^{(1)}+L
 P^{(0)}\otimes P^{(0)}\,,
 \end{equation}
 so that:
 \begin{equation}
 \begin{array}{l}
-\displaystyle \Gamma^{(2,1)} = P^{(1)} + \beta_0 P^{(0)}\,,\\
+\displaystyle \Gamma^{(2,1)} = P^{(1)}\,,\\
 \\
-\displaystyle \Gamma^{(2,2)} = \frac12 P^{(0)}\otimes P^{(0)}\,.
+\displaystyle \Gamma^{(2,2)} = \frac12\beta_0 P^{(0)} + \frac12 P^{(0)}\otimes P^{(0)}\,.
 \end{array}
 \end{equation}
 Putting all pieces together, we find:
 \begin{equation}
 \Gamma(Q,\mu_b) = \Delta(1-x) + a_s(Q)L P^{(0)}
-+a_s^2(Q)\left[L\left(P^{(1)} + \beta_0 P^{(0)}\right)+\frac12 L^2 P^{(0)}\otimes P^{(0)}\right]+\mathcal{O}(a_s^3)\,.
++a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)} +P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
 \end{equation}
 However, the quantity we are interested in is the inverse of the
 operator $\Gamma$, that evolves the PDFs from the scale $Q$ to
@@ -677,9 +677,9 @@ $\mu_b$:
 \begin{equation}\label{eq:DGLAPeqOp1}
 \begin{array}{l}
 \displaystyle \Gamma(\mu_b,Q)=\Gamma^{-1}(Q,\mu_b) \\
-\\
+\\\displaystyle
  = \Delta(1-x) - a_s(Q)L P^{(0)}
-\displaystyle - a_s^2(Q)\left[L\left(P^{(1)} + \beta_0 P^{(0)}\right)-\frac12 L^2 P^{(0)}\otimes P^{(0)}\right]+\mathcal{O}(a_s^3)\,.
+- a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)}-P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
 \end{array}
 \end{equation}
 
@@ -709,11 +709,9 @@ C(\mu_b,\mu_b^2)\otimes f(\mu_b) &=& C(\mu_b,\mu_b^2)\otimes
 \\
 &=& \bigg\{\Delta(1-x) + a_s(Q)\left[C^{(1,0)}-L P^{(0)}\right]\\
 \\
-&+&\displaystyle a_s^2(Q)\bigg[C^{(2,0)}+L\left(-P^{(1)}-C^{(1,0)}\otimes P^{(0)}+\beta_0C^{(1,0)} - \beta_0
-    P^{(0)}\right)\\
+&+&\displaystyle a_s^2(Q)\bigg[C^{(2,0)}+L\left(-P^{(1)}-C^{(1,0)}\otimes P^{(0)}+\beta_0C^{(1,0)}\right)\\
 \\
-&+&\displaystyle \frac12 L^2 P^{(0)}\otimes
-    P^{(0)}\bigg]\bigg\}\otimes f(Q)+\mathcal{O}(a_s^3)\,.
+&+&\displaystyle \frac{L^2}2 \left(P^{(0)}\otimes P^{(0)}-\beta_0 P^{(0)}\right)\bigg]\bigg\}\otimes f(Q)+\mathcal{O}(a_s^3)\,.
 \end{array}
 \end{equation}
 
@@ -748,11 +746,11 @@ as:
 \begin{equation}
   \displaystyle \frac{d\sigma}{dq_T^2} \propto \sum_{ij}H_{ij} (Q) \int d^2\mathbf{b}_T e^{i \mathbf{b}_T\cdot \mathbf{q}_T}F_i(x, \mathbf{b}_T,Q,Q^2) D_j(z, \mathbf{b}_T,Q,Q^2)
 \end{equation}
-where $F_i$ and $D_j$ are two different TMDs distributions
-(\textit{e.g.} a PDF and a FF) indexed by a flavour index. Assuming
-that the flavour indices $i$ and $j$ run \textit{either} on quarks
-\textit{or} on the gluon and writing explicitly all perturbative
-factors, one has:
+where $F_i$ and $D_j$ are two different sets of TMD distributions
+(\textit{e.g.} a set of PDFs and a set of FFs) indexed by a flavour
+index. Assuming that the flavour indices $i$ and $j$ run
+\textit{either} on quarks \textit{or} on the gluon and writing
+explicitly all perturbative factors, one has:
 \begin{equation}\label{eq:xsecexp}
 \begin{array}{rcl}
 \displaystyle \frac{d\sigma}{dq_T^2} &\propto&\displaystyle  \sum_{ij}H_{ij} (Q) \int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
@@ -856,16 +854,14 @@ Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
                           &+&\displaystyle 
                               H_{ij}^{(0)}\left(-\mathcal{P}^{(1)}(x)-\sum_\alpha
                               \mathcal{C}_{i\alpha}^{(1,0)}(x)\otimes
-                              \mathcal{P}_{\alpha k}^{(0)}(x)+\beta_0\mathcal{C}_{ik}^{(1,0)}(x) - \beta_0
-    \mathcal{P}_{ik}^{(0)}(x)\right)\delta_{jl}\delta(1-z)\\
+                              \mathcal{P}_{\alpha k}^{(0)}(x)+\beta_0\mathcal{C}_{ik}^{(1,0)}(x)\right)\delta_{jl}\delta(1-z)\\
 \\
  &-&\displaystyle H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
      -H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
 \\
                               &+&\displaystyle H_{ij}^{(0)}\delta_{jl}\delta(1-z) \left(-\mathbb{P}^{(1)}(z)-\sum_\beta
                               \mathbb{C}_{j\beta}^{(1,0)}(z)\otimes
-                              \mathbb{P}_{\beta l}^{(0)}(z)+\beta_0\mathbb{C}_{jl}^{(1,0)}(z) - \beta_0
-    \mathbb{P}_{jl}^{(0)}(z)\right) \,,\\
+                              \mathbb{P}_{\beta l}^{(0)}(z)+\beta_0\mathbb{C}_{jl}^{(1,0)}(z)\right) \,,\\
   \\
   {B}_{ij,kl}^{(2,2)}(x,z) &=&\displaystyle \left( H_{ij}^{(0)}\widetilde{S}^{(2,2)}+H_{ij}^{(1)}S^{(1,2)}\right)
                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
@@ -876,11 +872,14 @@ Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
                           &-&\displaystyle
                               H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
   \\
-                          &+& \displaystyle H_{ij}^{(0)}\frac12\sum_{\alpha}\mathcal{P}^{(0)}_{i\alpha}(x)\otimes
-    \mathcal{P}_{\alpha k}^{(0)}(x)\delta_{jl}\delta(1-z) + 
-                              H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{P}_{jl}^{(0)}(z)
-                              +H_{ij}^{(0)}\delta_{ik}\delta(1-x) \frac12 \sum_{\beta}\mathbb{P}^{(0)}_{j\beta}(z)\otimes
-    \mathbb{P}_{\beta l}^{(0)}(z) \,,\\
+ &+& \displaystyle
+     H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
+\\
+                          &+& \displaystyle H_{ij}^{(0)}\frac12\left(\sum_{\alpha}\mathcal{P}^{(0)}_{i\alpha}(x)\otimes
+    \mathcal{P}_{\alpha k}^{(0)}(x)-\beta_0 \mathcal{P}_{ik}^{(0)}(x)\right)\delta_{jl}\delta(1-z)\\
+\\
+                              &+&\displaystyle H_{ij}^{(0)}\delta_{ik}\delta(1-x) \frac12 \left(\sum_{\beta}\mathbb{P}^{(0)}_{j\beta}(z)\otimes
+    \mathbb{P}_{\beta l}^{(0)}(z) -\beta_0 \mathbb{P}_{jl}^{(0)}(z)\right)\,,\\
   \\
   {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle
                               H_{ij}^{(0)}\widetilde{S}^{(2,3)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)
