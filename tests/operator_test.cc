@@ -4,18 +4,9 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/constants.h>
-#include <apfel/expression.h>
-#include <apfel/lagrangeinterpolator.h>
-#include <apfel/grid.h>
-#include <apfel/subgrid.h>
-#include <apfel/operator.h>
-#include <apfel/timer.h>
+#include <apfel/apfelxx.h>
 
 #include <cmath>
-
-using namespace apfel;
-using namespace std;
 
 // Test expression (the LO Pqq splitting function)
 class p0qq: public apfel::Expression

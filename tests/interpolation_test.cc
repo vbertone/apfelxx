@@ -1,14 +1,10 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/grid.h>
-#include <apfel/subgrid.h>
-#include <apfel/distribution.h>
-#include <apfel/timer.h>
+#include <apfel/apfelxx.h>
 
 #include <iostream>
 #include <iomanip>

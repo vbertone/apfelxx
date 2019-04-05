@@ -4,18 +4,8 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/distribution.h>
-#include <apfel/grid.h>
-#include <apfel/subgrid.h>
-#include <apfel/operator.h>
-#include <apfel/expression.h>
-#include <apfel/timer.h>
-#include <apfel/tools.h>
-#include <apfel/alphaqcd.h>
-#include <apfel/set.h>
-#include <apfel/evolutionbasisqcd.h>
+#include <apfel/apfelxx.h>
 #include <apfel/splittingfunctions.h>
-#include <apfel/lhtoypdfs.h>
 
 #include <cmath>
 #include <map>

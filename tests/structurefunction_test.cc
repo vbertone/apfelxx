@@ -4,14 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/dglapbuilder.h>
-#include <apfel/structurefunctionbuilder.h>
-#include <apfel/grid.h>
-#include <apfel/timer.h>
-#include <apfel/constants.h>
-#include <apfel/alphaqcd.h>
-#include <apfel/tabulateobject.h>
-#include <apfel/lhtoypdfs.h>
+#include <apfel/apfelxx.h>
 
 #include <cmath>
 #include <map>
@@ -21,6 +14,7 @@ int main()
 {
   //SetVerbosityLevel(0);
   apfel::Banner();
+
   // x-space grid
   const apfel::Grid g{{apfel::SubGrid{100,1e-5,3}, apfel::SubGrid{60,1e-1,3}, apfel::SubGrid{50,6e-1,3}, apfel::SubGrid{50,8e-1,3}}};
 
@@ -28,7 +22,7 @@ int main()
   const double mu0 = sqrt(2);
 
   // Vectors of masses and thresholds
-  const std::vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175}; // Check in the level above that they are ordered
+  const std::vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175};
   const std::vector<double> Thresholds = Masses;
 
   // Perturbative order
@@ -67,6 +61,7 @@ int main()
   const auto FL = BuildStructureFunctions(FLObj, PDFs, PerturbativeOrder, as, fBq);
   const auto F3 = BuildStructureFunctions(F3Obj, PDFs, PerturbativeOrder, as, fDq);
 
+  // Tabulate Structure functions
   const apfel::TabulateObject<apfel::Distribution> F2total {[&] (double const& Q) -> apfel::Distribution{ return F2.at(0).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
   const apfel::TabulateObject<apfel::Distribution> F2light {[&] (double const& Q) -> apfel::Distribution{ return F2.at(1).Evaluate(Q) + F2.at(2).Evaluate(Q) + F2.at(3).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
   const apfel::TabulateObject<apfel::Distribution> F2charm {[&] (double const& Q) -> apfel::Distribution{ return F2.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
@@ -91,7 +86,8 @@ int main()
   std::cout << "Alphas(Q) = " << as(Q) << std::endl;
   std::cout << std::endl;
 
-  const std::vector<double> xlha = { 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1 };
+  // Print results
+  const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   std::cout << "    x   "
        << "  F2light   "
@@ -99,12 +95,12 @@ int main()
        << "  F2bottom  "
        << "  F2total   "
        << std::endl;
-  for (int i = 2; i < (int) xlha.size(); i++)
-    std::cout << std::setprecision(1) << xlha[i] << "  " << std::setprecision(4)
-	 << F2light.EvaluatexQ(xlha[i],Q)  << "  "
-	 << F2charm.EvaluatexQ(xlha[i],Q)  << "  "
-	 << F2bottom.EvaluatexQ(xlha[i],Q) << "  "
-	 << F2total.EvaluatexQ(xlha[i],Q)  << "  "
+  for (auto const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+	 << F2light.EvaluatexQ(x,Q)  << "  "
+	 << F2charm.EvaluatexQ(x,Q)  << "  "
+	 << F2bottom.EvaluatexQ(x,Q) << "  "
+	 << F2total.EvaluatexQ(x,Q)  << "  "
 	 << std::endl;
   std::cout << std::endl;
 
@@ -114,12 +110,12 @@ int main()
        << "  FLbottom  "
        << "  FLtotal   "
        << std::endl;
-  for (int i = 2; i < (int) xlha.size(); i++)
-    std::cout << std::setprecision(1) << xlha[i] << "  " << std::setprecision(4)
-	 << FLlight.EvaluatexQ(xlha[i],Q)  << "  "
-	 << FLcharm.EvaluatexQ(xlha[i],Q)  << "  "
-	 << FLbottom.EvaluatexQ(xlha[i],Q) << "  "
-	 << FLtotal.EvaluatexQ(xlha[i],Q)  << "  "
+for (auto const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+	 << FLlight.EvaluatexQ(x,Q)  << "  "
+	 << FLcharm.EvaluatexQ(x,Q)  << "  "
+	 << FLbottom.EvaluatexQ(x,Q) << "  "
+	 << FLtotal.EvaluatexQ(x,Q)  << "  "
 	 << std::endl;
   std::cout << std::endl;
 
@@ -129,12 +125,12 @@ int main()
        << "  F3bottom  "
        << "  F3total   "
        << std::endl;
-  for (int i = 2; i < (int) xlha.size(); i++)
-    std::cout << std::setprecision(1) << xlha[i] << "  " << std::setprecision(4)
-	 << F3light.EvaluatexQ(xlha[i],Q)  << "  "
-	 << F3charm.EvaluatexQ(xlha[i],Q)  << "  "
-	 << F3bottom.EvaluatexQ(xlha[i],Q) << "  "
-	 << F3total.EvaluatexQ(xlha[i],Q)  << "  "
+for (auto const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+	 << F3light.EvaluatexQ(x,Q)  << "  "
+	 << F3charm.EvaluatexQ(x,Q)  << "  "
+	 << F3bottom.EvaluatexQ(x,Q) << "  "
+	 << F3total.EvaluatexQ(x,Q)  << "  "
 	 << std::endl;
   std::cout << std::endl;
 

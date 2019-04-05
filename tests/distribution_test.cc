@@ -4,13 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/distribution.h>
-#include <apfel/grid.h>
-#include <apfel/subgrid.h>
-#include <apfel/operator.h>
-#include <apfel/expression.h>
-#include <apfel/timer.h>
-#include <apfel/constants.h>
+#include <apfel/apfelxx.h>
 
 #include <cmath>
 

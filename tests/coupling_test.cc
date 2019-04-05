@@ -4,8 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/alphaqcd.h>
-#include <apfel/alphaqed.h>
+#include <apfel/apfelxx.h>
 
 #include <cmath>
 #include <iostream>

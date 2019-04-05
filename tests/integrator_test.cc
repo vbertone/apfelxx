@@ -4,7 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/integrator.h>
+#include <apfel/apfelxx.h>
 
 #include <iostream>
 #include <cmath>

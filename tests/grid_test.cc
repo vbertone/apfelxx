@@ -4,8 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include <apfel/grid.h>
-#include <apfel/subgrid.h>
+#include <apfel/apfelxx.h>
 
 #include <iostream>
 #include <iomanip>
