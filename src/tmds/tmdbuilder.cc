@@ -373,6 +373,7 @@ namespace apfel {
 	obj.GammaCusp.insert({0, GammaCusp0()});
 	obj.GammaCusp.insert({1, GammaCusp1(nf)});
 	obj.GammaCusp.insert({2, GammaCusp2(nf)});
+	obj.GammaCusp.insert({3, GammaCusp3(nf)});
 
 	// Collins-Soper anomalous dimensions (multiply by CF for
 	// quarks and by CA for gluons).
@@ -489,7 +490,7 @@ namespace apfel {
 	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder >= 2)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -558,7 +559,7 @@ namespace apfel {
 	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder >= 2)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -685,6 +686,40 @@ namespace apfel {
 	    return coup * ( lo + coup * nlo );
 	  };
       }
+    // N3LL
+    else if (PerturbativeOrder >= 3)
+      {
+	gammaFq = [=] (double const& mu) -> double
+	  {
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFq;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * ( gv.at(1) + coup * gv.at(2) ) );
+	  };
+	gammaFg = [=] (double const& mu) -> double
+	  {
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFg;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * ( gv.at(1) + coup * gv.at(2) ) );
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
+	    const std::vector<double> d2 = d.at(2);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+	    const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
+	  };
+      }
 
     // Define the integrands.
     Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
@@ -803,6 +838,34 @@ namespace apfel {
 	    return coup * ( lo + coup * nlo );
 	  };
       }
+    // N3LL
+    else if (PerturbativeOrder >= 3)
+      {
+	gammaFq = [=] (double const& mu) -> double
+	  {
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFq;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * ( gv.at(1) + coup * gv.at(2) ) );
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
+	    const std::vector<double> d2 = d.at(2);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+	    const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
+	  };
+      }
 
     // Define the integrands.
     Integrator I1{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
@@ -916,6 +979,34 @@ namespace apfel {
 	    const double lo   = d0[0] + Lmu * d0[1];
 	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
 	    return coup * ( lo + coup * nlo );
+	  };
+      }
+    // N3LL
+    else if (PerturbativeOrder >= 3)
+      {
+	gammaFg = [=] (double const& mu) -> double
+	  {
+	    const auto& gv    = TmdObj.at(NF(mu,thrs)).GammaFg;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gv.at(0) + coup * ( gv.at(1) + coup * gv.at(2) ) );
+	  };
+	gammaK = [=] (double const& mu) -> double
+	  {
+	    const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+	    const double coup = Alphas(mu) / FourPi;
+	    return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+	  };
+	K = [=] (double const& mu) -> double
+	  {
+	    const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+	    const std::vector<double> d0 = d.at(0);
+	    const std::vector<double> d1 = d.at(1);
+	    const std::vector<double> d2 = d.at(2);
+	    const double coup = Alphas(mu) / FourPi;
+	    const double lo   = d0[0] + Lmu * d0[1];
+	    const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+	    const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+	    return coup * ( lo + coup * ( nlo + coup * nnlo ) );
 	  };
       }
 

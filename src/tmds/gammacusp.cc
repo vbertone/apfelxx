@@ -31,4 +31,19 @@ namespace apfel
       - 16 * TR * TR * nf * nf / 27;
     return 8 * coeff;
   }
+
+  //_________________________________________________________________________
+  double GammaCusp3(int const& nf)
+  {
+    const int nf2 = nf * nf;
+    const int nf3 = nf2 * nf;
+    const double coeff = 20702 - 5171.9 * nf + 195.5772 * nf2 + 3.272344 * nf3;
+    return coeff / CF;
+  }
+
+  //_________________________________________________________________________
+  double GammaCusp3gmq()
+  {
+    return 40880 / CA - 20702 / CF;
+  }
 }
