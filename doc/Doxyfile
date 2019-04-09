@@ -773,7 +773,6 @@ WARN_LOGFILE           =
 
 INPUT                  = ../inc/apfel \
 			 ../README.md \
-			 main.dox \
 			 examples.dox
 
 # This tag can be used to specify the character encoding of the source files

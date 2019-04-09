@@ -891,6 +891,46 @@ Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
 \end{array}
 \end{equation}
 
+\subsection{A note on the logarithmic ordering}
+
+The logarithmic accuracy is driven by the evolution kernel $R$ defined
+in Eq.~(\ref{eq:evkernel}). As it should be clear from
+Eq.~(\ref{eq:exp1}), the evolution kernel squared $R^2$, also referred
+to as Sudakov form factor, admits the following expansion:
+\begin{equation}
+R^2 = \sum_{n=0}^\infty a_s^{n}\sum_{k=1}^{2n}\widetilde{S}^{(n,k)}L^k\,.
+\end{equation}
+This expansion naturally allows us to define a logarithmic ordering
+as:
+\begin{equation}
+  R_{\rm N^mLL}^2 = \sum_{n=[m/2]}^\infty \widetilde{S}^{(n,2n-m)}\,a_s^{n}L^{2n-m}\,,
+\end{equation}
+where $[m/2]$ stands for ``integer part of $m/2$''. Now, I multiply
+$R_{\rm N^mLL}^2$ by $a_s$ to a generic power $p$ and do some
+manipulation defining $n+p=j$. This way, I get:
+\begin{equation}\label{eq:LogAcc}
+a_s^p R_{\rm N^mLL}^2 = \sum_{n=[(m+2p)/2]+p}^\infty
+\widetilde{S}^{(n,2j-(m+2p))}\,a_s^{j}L^{2j-(m+2p)}\sim R_{\rm N^{(m+2p)}LL}^2\,,
+\end{equation}
+where the symbol $\sim$ means that the terms at two sides have the
+same logarithmic accuracy. This finding is relevant in that, in order
+to compute a cross section, the Sudakov from factor has to be
+multiplied by the hard factor $H$ and a pair of matching functions
+$C$. Both these components admit an expansion in powers of $a_s$
+without enhancing logaritms $L$ (see Eqs.~(\ref{eq:MatchCoeffExp})
+and~(\ref{eq:HardFactExp})). Therefore $R^2$ will eventually be
+multiplied by some power of $a_s$.
+
+Suppose we compute the Sudakov form factor to leading-logarithmic (LL)
+accuracy ($m=0$): Eq.~(\ref{eq:LogAcc}) tells us that, in terms of
+logarithmic accuracy, including $\mathcal{O}(a_s)$ corrections in $H$
+and $C$ implies introducing next-to-next-to-leading-logarithmic (NNLL)
+corrections. In practice, this means that to LL and NLL the functions
+$H$ and $C$ can be taken at leading order, at NNLL we only need to
+introduce $\mathcal{O}(a_s)$ corrections in $H$ and $C$, while at
+N$^3$LL we have to introduce $\mathcal{O}(a_s^2)$ corrections in $H$
+and $C$.
+
 \section{Non-perturbative effect on the asymptotic cross section}
 
 As discussed in Sect.~\ref{sec:nonpert}, TMDs have a non-perturbative
