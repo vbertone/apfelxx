@@ -267,7 +267,7 @@ so that:
   f(\mu_0)\,.
 \end{equation}
 Exactly as in the case of $K$, for $\mu_0=\sqrt{\zeta_0}=\mu_b$ the
-matching function has the expansion:
+matching function admits the expansion:
 \begin{equation}\label{eq:MatchCoeffExp}
 C(\mu_b,\mu_b^2) =\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n}C^{(n,0)}\,,
 \end{equation}
@@ -290,8 +290,8 @@ In the r.h.s. of the second equation I have used the DGLAP equation:
 \begin{equation}\label{eq:DGLAPeq}
 \frac{\partial f}{\partial \ln\mu} = 2P(\mu) \otimes f(\mu)\,.
 \end{equation}
-One can also take the derivative of Eq.~(\ref{eq:solution2}) and the
-result is:
+One can also take the derivative of Eq.~(\ref{eq:solution2}) and,
+using Eq.~(\ref{eq:matching}), the result is:
 \begin{equation}\label{eq:derivs2}
 \begin{array}{l}
 \displaystyle \frac{\partial F}{\partial \ln\sqrt{\zeta}} =\left[
@@ -311,31 +311,31 @@ result is:
 Equating Eq.~(\ref{eq:derivs1}) and Eq.~(\ref{eq:derivs2}) and
 dropping the distribution $f$, the evolution equations for $C$ are
 obtained:
-\begin{equation}
+\begin{equation}\label{eq:CEvEq}
 \begin{array}{l}
-\displaystyle \frac{\partial C}{\partial \ln\sqrt{\zeta}} = \left[
+  \displaystyle \frac{\partial C}{\partial \ln\sqrt{\zeta}} = \left[
   K(\mu_0)-\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\right]C(\mu,\zeta)
-\,,\\
-\\
-\displaystyle \frac{\partial
+  \,,\\
+  \\
+  \displaystyle \frac{\partial
   C}{\partial \ln\mu} = \left\{\left[\gamma_F(\alpha_s(\mu))
-      -
-      \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]\Delta(1-x)-2P(\mu)\right\}\otimes
+  -
+  \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]\Delta-2P(\mu)\right\}\otimes
   C(\mu,\zeta)\,,
 \end{array}
 \end{equation}
 where the $\Delta$ is a matrix in flavour space whose components are
 defined as:
 \begin{equation}
-\Delta_{ij}(1-x) = \delta_{ij}\delta(1-x)\,,
+  \Delta_{ij}(x) = \delta_{ij}\delta(1-x)\,,
 \end{equation}
 being $i$ and $j$ flavour indices. The equations above can be solved
 to determine the evolution of the matching function $C$. If initial
 and final scales are not too far apart, the solution can be
-expanded. In particular, if $\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in
-Eq.~(\ref{eq:solution2}), the matching function $C$ can be reliably
-expanded as:
-\begin{equation}
+expanded. In particular, if one assumes
+$\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in Eq.~(\ref{eq:solution2}), the
+matching function $C$ can be reliably expanded as:
+\begin{equation}\label{eq:MatchExp}
   C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
 \end{equation}
 The coefficient functions $C^{(n,m)}$ have been computed for both PDFs
@@ -343,6 +343,26 @@ and FFs in Ref.~\cite{Echevarria:2016scs}. The same functions have
 been computed also in Ref.~\cite{Catani:2012qa} and reported in
 Ref.~\cite{Collins:2017oxh}. The authors of the latter paper have
 verified the equality of the two sets of functions.
+
+% However, the assumption $\mu_0=\sqrt{\zeta_0}$ does not allow to
+% identify the origin of the logarithms in Eq.~(\ref{eq:MatchExp}):
+% whether they are logs of $\mu_0$ or $\zeta_0$. In order, to
+% disentangle the two categories of logarithms and identify the
+% respective coefficients, we generalise Eq.~(\ref{eq:MatchExp}) as:
+% \begin{equation}
+%   C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
+% \end{equation}
+% such that:
+% \begin{equation}
+% \begin{array}{rcl}
+%   C(\mu_0,\mu_b^2) &=&\displaystyle 
+%   \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{i=0}^{n}C^{(n;i,0)}\ln^i\left(\frac{\mu_0}{\mu_b}\right)\,,\\
+% \\
+%   C(\mu_b,\zeta_0) &=&\displaystyle 
+%   \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\sqrt{\zeta_0})}{4\pi}\right)^{n}\sum_{j=0}^{n}C^{(n;0,j)}\ln^j\left(\frac{\sqrt{\zeta_0}}{\mu_b}\right)\,,
+% \end{array}
+% \end{equation}
+% and then use the equations in Eq.~(\ref{eq:CEvEq}) one by one.
 
 In order to use Eq.~(\ref{eq:solution2}) in phenomenological
 applications, one needs to define the values of both the initial and
@@ -363,7 +383,13 @@ hard scale of the process, say $Q$. This choice has to match the
 renormalisation scale $\mu$ used in the hard factor $H$ of the process
 under consideration. Therefore, choosing $(\mu,\zeta) = (C_fQ,Q^2)$,
 with $C_f$ being a modest factor, can be used to estimate higher-order
-corrections.
+corrections. 
+
+% Variation of the scale $\zeta$ around $Q^2$ are in principle also
+% possible. However, such a variation only accounts for a different
+% balance between the first term (that proportional to $K$) and the
+% second term (the integral) in the argument of the exponent in
+% Eq.~(\ref{eq:evkernelexp}).
 
 % The choice $\mu_0=\sqrt{\zeta_0}\propto \mu_b$ has recently been
 % questioned. In particular, it has been shown that a choice $\zeta_0$
@@ -641,7 +667,7 @@ coupling $a_s$. We now need to expand $\Gamma$ in powers of $a_s$ up
 to $\mathcal{O}(a_s^2)$. To this end, we assume that $\Gamma$ obeys
 the expansion:
 \begin{equation}
-\Gamma(Q,\mu_b) = \Delta(1-x) + \sum_{n=1}^{\infty} a_s^{n}(Q)\sum_{k=1}^{n}L^k\Gamma^{(n,k)}\,,
+\Gamma(Q,\mu_b) = \Delta + \sum_{n=1}^{\infty} a_s^{n}(Q)\sum_{k=1}^{n}L^k\Gamma^{(n,k)}\,,
 \end{equation}
 where the coefficients $\Gamma^{(n,k)}$ are functions of $x$ only that
 we need to determine up to $n=2$. Eq.~(\ref{eq:DGLAPeqOp}) can be
@@ -668,7 +694,7 @@ so that:
 \end{equation}
 Putting all pieces together, we find:
 \begin{equation}
-\Gamma(Q,\mu_b) = \Delta(1-x) + a_s(Q)L P^{(0)}
+\Gamma(Q,\mu_b) = \Delta + a_s(Q)L P^{(0)}
 +a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)} +P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
 \end{equation}
 However, the quantity we are interested in is the inverse of the
@@ -678,7 +704,7 @@ $\mu_b$:
 \begin{array}{l}
 \displaystyle \Gamma(\mu_b,Q)=\Gamma^{-1}(Q,\mu_b) \\
 \\\displaystyle
- = \Delta(1-x) - a_s(Q)L P^{(0)}
+ = \Delta - a_s(Q)L P^{(0)}
 - a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)}-P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
 \end{array}
 \end{equation}
@@ -691,7 +717,7 @@ $Q$ up to order $a_s^2$. To do this, we use the expansion in
 Eq.~(\ref{eq:MatchCoeffExp}), in which $a_s$ is computed at $\mu_b$,
 and combine it with Eq.~(\ref{eq:asexp}). This yields:
 \begin{equation}\label{eq:MatchCoeffExp1}
-  C(\mu_b,\mu_b^2) = \Delta(1-x) + a_s(Q) C^{(1,0)} + a_s^2(Q) \left[C^{(2,0)}+L\beta_0C^{(1,0)}\right]+\mathcal{O}(a_s^3)\,.
+  C(\mu_b,\mu_b^2) = \Delta + a_s(Q) C^{(1,0)} + a_s^2(Q) \left[C^{(2,0)}+L\beta_0C^{(1,0)}\right]+\mathcal{O}(a_s^3)\,.
 \end{equation}
 
 \subsection{Expansion of the single low-scale TMD}
@@ -707,7 +733,7 @@ Eqs.~(\ref{eq:DGLAPeqOp1}) and~(\ref{eq:MatchCoeffExp1}):
 C(\mu_b,\mu_b^2)\otimes f(\mu_b) &=& C(\mu_b,\mu_b^2)\otimes
 \Gamma(\mu_b,Q) \otimes f(Q)\\
 \\
-&=& \bigg\{\Delta(1-x) + a_s(Q)\left[C^{(1,0)}-L P^{(0)}\right]\\
+&=& \bigg\{\Delta + a_s(Q)\left[C^{(1,0)}-L P^{(0)}\right]\\
 \\
 &+&\displaystyle a_s^2(Q)\bigg[C^{(2,0)}+L\left(-P^{(1)}-C^{(1,0)}\otimes P^{(0)}+\beta_0C^{(1,0)}\right)\\
 \\

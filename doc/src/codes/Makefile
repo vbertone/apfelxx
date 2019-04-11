@@ -18,12 +18,15 @@ LDFLAGS  += $(LHAPDFINCS) $(APFELPPINCS)
 CLIBS += $(LHAPDFLIBS) $(APFELPPLIBS)
 
 install : all
-all : logs FOvsAsy
+all : logs FOvsAsy EvolutionFactor
 
 logs: logs.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
 FOvsAsy: FOvsAsy.o 
+	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
+
+EvolutionFactor: EvolutionFactor.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
 .SUFFIXES : .cxx .o .f .c
@@ -35,5 +38,5 @@ FOvsAsy: FOvsAsy.o
 	$(F77)  -c $< 
 
 clean:
-	rm -rf *.lo *.o *.la logs FOvsAsy *~
+	rm -rf *.lo *.o *.la logs FOvsAsy EvolutionFactor *~
 

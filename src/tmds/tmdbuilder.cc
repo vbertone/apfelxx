@@ -474,12 +474,12 @@ namespace apfel {
     // Matching functions as functions of the absolute value of the
     // impact parameter b.
     std::function<Set<Operator>(double const&)> MatchFunc;
-    if (PerturbativeOrder == 0)
+    if (PerturbativeOrder == 0 || PerturbativeOrder == 1)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  return TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs.at(0)[0];
 	};
-    else if (PerturbativeOrder == 1)
+    else if (PerturbativeOrder == 2)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -490,7 +490,7 @@ namespace apfel {
 	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
-    else if (PerturbativeOrder >= 2)
+    else if (PerturbativeOrder == 3)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -543,12 +543,12 @@ namespace apfel {
     // Matching functions as functions of the absolute value of the
     // impact parameter b.
     std::function<Set<Operator>(double const&)> MatchFunc;
-    if (PerturbativeOrder == 0)
+    if (PerturbativeOrder == 0 || PerturbativeOrder == 1)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  return TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs.at(0)[0];
 	};
-    else if (PerturbativeOrder == 1)
+    else if (PerturbativeOrder == 2)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -559,7 +559,7 @@ namespace apfel {
 	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
-    else if (PerturbativeOrder >= 2)
+    else if (PerturbativeOrder == 3)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
