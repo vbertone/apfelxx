@@ -474,12 +474,12 @@ namespace apfel {
     // Matching functions as functions of the absolute value of the
     // impact parameter b.
     std::function<Set<Operator>(double const&)> MatchFunc;
-    if (PerturbativeOrder == 0 || PerturbativeOrder == 1)
+    if (PerturbativeOrder == LL || PerturbativeOrder == NLL)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  return TmdObj.at(NF(mu,thrs)).MatchingFunctionsPDFs.at(0)[0];
 	};
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NLLp)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -490,7 +490,7 @@ namespace apfel {
 	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
-    else if (PerturbativeOrder == 3)
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNLLp)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -543,12 +543,12 @@ namespace apfel {
     // Matching functions as functions of the absolute value of the
     // impact parameter b.
     std::function<Set<Operator>(double const&)> MatchFunc;
-    if (PerturbativeOrder == 0 || PerturbativeOrder == 1)
+    if (PerturbativeOrder == LL || PerturbativeOrder == NLL)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  return TmdObj.at(NF(mu,thrs)).MatchingFunctionsFFs.at(0)[0];
 	};
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NLLp)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -559,7 +559,7 @@ namespace apfel {
 	  const auto nlo = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
 	  return lo + coup * nlo;
 	};
-    else if (PerturbativeOrder == 3)
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNLLp)
       MatchFunc = [=] (double const& mu) -> Set<Operator>
 	{
 	  const double coup = Alphas(mu) / FourPi;
@@ -615,7 +615,7 @@ namespace apfel {
     std::function<double(double const&)> gammaK;
     std::function<double(double const&)> K;
     // LL
-    if (PerturbativeOrder == 0)
+    if (PerturbativeOrder == LL)
       {
 	gammaFq = [=] (double const&) -> double{ return 0; };
 	gammaFg = [=] (double const&) -> double{ return 0; };
@@ -627,7 +627,7 @@ namespace apfel {
 	K = [=] (double const&) -> double{ return 0; };
       }
     // NLL
-    else if (PerturbativeOrder == 1)
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
@@ -655,7 +655,7 @@ namespace apfel {
 	  };
       }
     // NNLL
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
@@ -687,7 +687,7 @@ namespace apfel {
 	  };
       }
     // N3LL
-    else if (PerturbativeOrder >= 3)
+    else if (PerturbativeOrder == NNNLL)
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
@@ -779,7 +779,7 @@ namespace apfel {
     std::function<double(double const&)> gammaK;
     std::function<double(double const&)> K;
     // LL
-    if (PerturbativeOrder == 0)
+    if (PerturbativeOrder == LL)
       {
 	gammaFq = [=] (double const&) -> double{ return 0; };
 	gammaK  = [=] (double const& mu) -> double
@@ -790,7 +790,7 @@ namespace apfel {
 	K = [=] (double const&) -> double{ return 0; };
       }
     // NLL
-    else if (PerturbativeOrder == 1)
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
@@ -813,7 +813,7 @@ namespace apfel {
 	  };
       }
     // NNLL
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
@@ -839,7 +839,7 @@ namespace apfel {
 	  };
       }
     // N3LL
-    else if (PerturbativeOrder >= 3)
+    else if (PerturbativeOrder == NNNLL)
       {
 	gammaFq = [=] (double const& mu) -> double
 	  {
@@ -922,7 +922,7 @@ namespace apfel {
     std::function<double(double const&)> gammaK;
     std::function<double(double const&)> K;
     // LL
-    if (PerturbativeOrder == 0)
+    if (PerturbativeOrder == LL)
       {
 	gammaFg = [=] (double const&) -> double{ return 0; };
 	gammaK  = [=] (double const& mu) -> double
@@ -933,7 +933,7 @@ namespace apfel {
 	K = [=] (double const&) -> double{ return 0; };
       }
     // NLL
-    else if (PerturbativeOrder == 1)
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
       {
 	gammaFg = [=] (double const& mu) -> double
 	  {
@@ -956,7 +956,7 @@ namespace apfel {
 	  };
       }
     // NNLL
-    else if (PerturbativeOrder == 2)
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
       {
 	gammaFg = [=] (double const& mu) -> double
 	  {
@@ -982,7 +982,7 @@ namespace apfel {
 	  };
       }
     // N3LL
-    else if (PerturbativeOrder >= 3)
+    else if (PerturbativeOrder == NNNLL)
       {
 	gammaFg = [=] (double const& mu) -> double
 	  {

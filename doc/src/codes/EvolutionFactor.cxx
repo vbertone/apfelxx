@@ -42,7 +42,7 @@ int main()
   const auto Alphas = [&] (double const& mu) -> double{ return distpdf->alphasQ(mu); };
 
   // Perturbative order.
-  const int PerturbativeOrder = 3;
+  const int PerturbativeOrder = apfel::LogAccuracy::NNLL;
 
   // Initial scale-variation factor;
   const double Ci = 1;

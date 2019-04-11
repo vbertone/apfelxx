@@ -15,6 +15,11 @@
 namespace apfel
 {
   /**
+   * @brief Enumerator for the logarithmic accuracy
+   */
+  enum LogAccuracy: int {NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3};
+
+  /**
    * @brief Structure that contains all the precomputed quantities
    * needed to perform the TMD evolution and matchinf to the collinear
    * PDFs, i.e. perturbative coefficients of matching functions and
