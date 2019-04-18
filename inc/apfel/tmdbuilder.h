@@ -195,4 +195,31 @@ namespace apfel
 											  double                               const& Ci = 1,
 											  double                               const& IntEps = 1e-7);
   ///@}
+
+  /**
+   * @name Hard factors
+   * Collection of hard functions used in the defintion of the
+   * qT-dependent cross sections in TMD factorisation.
+   */
+  ///@{
+ /**
+   * @brief Perturbative hard factor for Drell-Yan.
+   * @param PerturbativeOrder: the perturbative order
+   * @param Alphas: the value of the strong coupling
+   * @param nf: the number of active flavours
+   * @param kappa: the ration between hard scale and renormalusation scale
+   * @return The hard factor for Drell-Yan.
+   */
+  double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
+
+ /**
+   * @brief Perturbative hard factor for SIDIS.
+   * @param PerturbativeOrder: the perturbative order
+   * @param Alphas: the value of the strong coupling
+   * @param nf: the number of active flavours
+   * @param kappa: the ration between hard scale and renormalusation scale
+   * @return The hard factor for SIDIS.
+   */
+  double HardFactorSIDIS(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
+  ///@}
 }

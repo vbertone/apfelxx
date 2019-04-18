@@ -6,7 +6,6 @@ set(tmds_source
   matchingfunctionspdf.cc
   matchingfunctionsff.cc
   ogataquadrature.cc
-  hardfactors.cc
   )
 
 add_library(tmds OBJECT ${tmds_source})
