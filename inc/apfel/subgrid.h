@@ -8,7 +8,7 @@
 #pragma once
 
 #include <vector>
-#include <iostream> 
+#include <iostream>
 
 namespace apfel
 {

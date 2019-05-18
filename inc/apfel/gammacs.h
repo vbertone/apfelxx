@@ -20,7 +20,7 @@ namespace apfel
   /// &alpha;<SUB>s</SUB> term
   double CSd10();
 
- /// &alpha;<SUB>s</SUB>L term
+/// &alpha;<SUB>s</SUB>L term
   double CSd11();
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP> term

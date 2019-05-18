@@ -88,21 +88,21 @@ namespace apfel
     if (_IsExternal)
       {
         if (_xsg != sg._xsg)
-	  return false;
+          return false;
         if (_InterDegree != sg._InterDegree)
-	  return false;
+          return false;
       }
     // In case they are internal ...
     else
       {
         if (_nx != sg._nx)
-	  return false;
+          return false;
         if (_xMin != sg._xMin)
-	  return false;
+          return false;
         if (_xMax != sg._xMax)
-	  return false;
+          return false;
         if (_InterDegree != sg._InterDegree)
-	  return false;
+          return false;
       }
     return true;
   }
@@ -117,7 +117,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::ostream& operator<<(std::ostream& os, SubGrid const& sg)
+  std::ostream& operator << (std::ostream& os, SubGrid const& sg)
   {
     os << "SubGrid: " << &sg << "\n";
     os << "nx          = " << sg._nx << "\n";

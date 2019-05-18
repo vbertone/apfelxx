@@ -35,11 +35,11 @@ namespace apfel
      * @param nsteps: number of steps of the ODE solver (default: 10)
      */
     Dglap(std::function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
-	  std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-	  Set<T>                                                 const& ObjRef,
-	  double                                                 const& MuRef,
-	  std::vector<double>                                    const& Thresholds,
-	  int                                                    const& nsteps = 10);
+          std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
+          Set<T>                                                 const& ObjRef,
+          double                                                 const& MuRef,
+          std::vector<double>                                    const& Thresholds,
+          int                                                    const& nsteps = 10);
 
     /**
      * @brief Function that matches the evolved object at the thresholds.

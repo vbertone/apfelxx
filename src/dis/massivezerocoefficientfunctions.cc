@@ -60,7 +60,7 @@ namespace apfel
     const double dlm2 = dlm * dlm;
     const double spx  = wgplg(1,1,1-x);
     const double a2 = ( 1 + 13 * x ) * dlm - ( 3 + 23 * x ) * dlx + 29. / 6 - 295 * x / 6
-      + ( 1 + x2 ) * ( - 4 * spx - 8 * dlx * dlm + 6 * dlx2 + 67 * dlx / 3) / ( 1 - x );
+                      + ( 1 + x2 ) * ( - 4 * spx - 8 * dlx * dlm + 6 * dlx2 + 67 * dlx / 3) / ( 1 - x );
     const double b2 = ( - 1 - x ) * ( - 4 * zeta2 + 2 * dlm2 - 29 * dlm / 3 + 359. / 18 );
     const double cm022nscr = 2 * CF * TR * ( a2 + b2 ) / 3;
     return cm022nscr;
@@ -79,7 +79,7 @@ namespace apfel
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm2 * dlm;
     const double cm022nscl = 4 * CF * TR * ( - 4 * zeta2 * dlm + 2 * dlm3 / 3 - 29 * dlm2 / 6 + 359 * dlm / 18 ) / 3
-      + CF * TR * ( 268 * zeta2 / 9 + 265. / 9 );
+                             + CF * TR * ( 268 * zeta2 / 9 + 265. / 9 );
     return cm022nscl;
   }
 
@@ -177,14 +177,14 @@ namespace apfel
     const double s21  = wgplg(2,1,1-x);
     const double s11m = wgplg(1,1,-x);
     const double a3   = ( 1 + x ) * ( 16 * dlx3 / 3 - 16 * dlx2 * dlm + 8 * dlx * dlm2
-				    - 32 * zeta2 * dlx + 16 * dlm * s11 + 32 * s12 - 16 * s21 )
-      + ( 40 * x - 16 * x2 ) * dlx2 + 32 * x2 * dlx * dlm + ( 280. / 3 - 704 * x2 / 9 - 88 * x ) * dlx
-      + ( 4 - 16 * x2 / 3 - 4 * x + 16 / x / 3 ) * dlm2
-      + ( - 208. / 3 - 64 * x2 / 9 + 160 * x / 3 + 208 / x / 9 ) * dlm
-      + ( - 16 + 64 * x2 / 3 - 16 * x - 32 / x ) * zeta2
-      + ( 16 - 16 * x + 64 / x / 3 + 32 * x2 / 3 ) * s11
-      + ( - 32 - 32 * x2 / 3 - 32 * x - 32 / x / 3 ) * ( s11m + dlx * dlp )
-      + 304. / 9 + 832 * x2 / 9 - 1216 * x / 9 + 80 / x / 9;
+                                      - 32 * zeta2 * dlx + 16 * dlm * s11 + 32 * s12 - 16 * s21 )
+                        + ( 40 * x - 16 * x2 ) * dlx2 + 32 * x2 * dlx * dlm + ( 280. / 3 - 704 * x2 / 9 - 88 * x ) * dlx
+                        + ( 4 - 16 * x2 / 3 - 4 * x + 16 / x / 3 ) * dlm2
+                        + ( - 208. / 3 - 64 * x2 / 9 + 160 * x / 3 + 208 / x / 9 ) * dlm
+                        + ( - 16 + 64 * x2 / 3 - 16 * x - 32 / x ) * zeta2
+                        + ( 16 - 16 * x + 64 / x / 3 + 32 * x2 / 3 ) * s11
+                        + ( - 32 - 32 * x2 / 3 - 32 * x - 32 / x / 3 ) * ( s11m + dlx * dlp )
+                        + 304. / 9 + 832 * x2 / 9 - 1216 * x / 9 + 80 / x / 9;
     const double c2ps2am0_a0 = CF * TR * a3;
     return c2ps2am0_a0;
   }
@@ -202,8 +202,8 @@ namespace apfel
     const double dlm  = log(1-x);
     const double s11  = wgplg(1,1,1-x);
     const double a2   = - 64 * x2 / 9 + 160 * x / 3 - 208. / 3 + 208 / x / 9 + 32 * x2 * dlx
-      + 16 * ( 1 + x ) * ( - dlx2 + dlx * dlm + s11 )
-      + ( - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 ) * dlm;
+                        + 16 * ( 1 + x ) * ( - dlx2 + dlx * dlm + s11 )
+                        + ( - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 ) * dlm;
     double const c2ps2am0_aq = CF * TR * a2;
     return c2ps2am0_aq;
   }
@@ -235,9 +235,9 @@ namespace apfel
     const double dlm  = log(1-x);
     const double spx  = wgplg(1,1,1-x);
     const double c2   = 128 * x2 / 3 + 16 * x / 3 - 160. / 3 + 16 / x / 3
-      + 8 * ( 1 + x ) * ( - dlx2 + 2 * dlx * dlm + 2 * spx )
-      + ( - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 ) * dlm
-      + ( 32 * x2 / 3 - 40 * x - 8 ) * dlx;
+                        + 8 * ( 1 + x ) * ( - dlx2 + 2 * dlx * dlm + 2 * spx )
+                        + ( - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 ) * dlm
+                        + ( 32 * x2 / 3 - 40 * x - 8 ) * dlx;
     const double c2ps2am0_af = CF * TR * c2;
     return c2ps2am0_af;
   }
@@ -269,9 +269,9 @@ namespace apfel
     const double dlm  = log(1-x);
     const double spx  = wgplg(1,1,1-x);
     const double a2   = 32 * x * ( dlx2 - dlx * dlm - spx )
-      + ( - 32 + 64 * x2 / 3 + 32 / x / 3 ) * dlm
-      + ( 32 - 64 * x2 - 32 * x ) * dlx + 32. / 3
-      + 320 * x2 / 9 - 128 * x / 3 - 32 / x / 9;
+                        + ( - 32 + 64 * x2 / 3 + 32 / x / 3 ) * dlm
+                        + ( 32 - 64 * x2 - 32 * x ) * dlx + 32. / 3
+                        + 320 * x2 / 9 - 128 * x / 3 - 32 / x / 9;
     const double clps2am0_a0 = CF * TR * a2;
     return clps2am0_a0;
   }
@@ -331,67 +331,67 @@ namespace apfel
     const double s21z   = wgplg(2,1,z);
     const double s21mz  = wgplg(2,1,-z);
     const double a31 = dlx3 * ( 16. / 3 + 16 * x ) +
-      dlx2 * dlm * ( - 8 + 16 * x2 - 64 * x ) + 
-      dlx2 * dlp * ( 12 + 32 * x2 + 24 * x ) + 
-      dlx2 * ( - 114 * x2 + 184 * x ) + 
-      dlx * dlm2 * ( - 16 * x2 + 48 * x ) + 
-      dlx * dlm * dlp * ( - 16 - 32 * x2 - 32 * x ) + 
-      dlx * dlm * ( 16 + 292 * x2 - 288 * x ) + 
-      dlx * dlp2 * ( 8 + 16 * x );
-    const double a32 = dlx * dlp * ( - 48 + 208 * x2 / 3 + 16 * x - 32 / x / 3 ) + 
-      dlx * zeta2 * ( - 16 + 32 * x2 - 160 * x ) + 
-      dlx * s111mx * (  + 32 * x ) + 
-      dlx * s11mx * ( 24 + 32 * x2 + 48 * x ) + 
-      dlx * ( 292. / 3 - 5780 * x2 / 9 + 332 * x ) + 
-      dlm2 * ( - 6 - 214 * x2 / 3 + 64 * x + 16 / x / 3 ) + 
-      zeta2 * dlm * ( - 40 - 64 * x2 + 48 * x );
-    const double a33 = dlm * s111mx * ( 16 + 64 * x ) + 
-      dlm * s11mx * ( - 16 - 32 * x2 - 32 * x ) + 
-      dlm * ( - 112. / 3 + 2996 * x2 / 9 - 860 * x / 3 + 208 / x / 9 ) + 
-      zeta2 * dlp * ( 8 + 16 * x ) + 
-      dlp * s11mx * ( 16 + 32 * x ) + 
-      s21mz * ( - 16 - 32 * x2 - 32 * x ) + 
-      s21z * ( 16 + 32 * x2 + 32 * x );
-    const double a34 = zeta2 * ( - 4 + 796 * x2 / 3 - 208 * x - 32 / x ) + 
-      zeta3 * ( - 12 - 8 * x2 - 56 * x ) + 
-      s111mx * ( 20 + 80 * x2 / 3 - 64 * x + 64 / x / 3 ) + 
-      s211mx * ( - 16 - 128 * x ) + 
-      s121mx * ( 40 + 144 * x ) + 
-      s11mx * ( - 48 + 208 * x2 / 3 + 16 * x - 32 / x / 3 ) + 
-      s21mx * ( - 24 - 48 * x ) + 
-      s12mx * ( 16 + 32 * x ) + 80 / x / 9 + 
-      466. / 9 - 878 * x2 / 9 + 260 * x / 9;
+                       dlx2 * dlm * ( - 8 + 16 * x2 - 64 * x ) +
+                       dlx2 * dlp * ( 12 + 32 * x2 + 24 * x ) +
+                       dlx2 * ( - 114 * x2 + 184 * x ) +
+                       dlx * dlm2 * ( - 16 * x2 + 48 * x ) +
+                       dlx * dlm * dlp * ( - 16 - 32 * x2 - 32 * x ) +
+                       dlx * dlm * ( 16 + 292 * x2 - 288 * x ) +
+                       dlx * dlp2 * ( 8 + 16 * x );
+    const double a32 = dlx * dlp * ( - 48 + 208 * x2 / 3 + 16 * x - 32 / x / 3 ) +
+                       dlx * zeta2 * ( - 16 + 32 * x2 - 160 * x ) +
+                       dlx * s111mx * (  + 32 * x ) +
+                       dlx * s11mx * ( 24 + 32 * x2 + 48 * x ) +
+                       dlx * ( 292. / 3 - 5780 * x2 / 9 + 332 * x ) +
+                       dlm2 * ( - 6 - 214 * x2 / 3 + 64 * x + 16 / x / 3 ) +
+                       zeta2 * dlm * ( - 40 - 64 * x2 + 48 * x );
+    const double a33 = dlm * s111mx * ( 16 + 64 * x ) +
+                       dlm * s11mx * ( - 16 - 32 * x2 - 32 * x ) +
+                       dlm * ( - 112. / 3 + 2996 * x2 / 9 - 860 * x / 3 + 208 / x / 9 ) +
+                       zeta2 * dlp * ( 8 + 16 * x ) +
+                       dlp * s11mx * ( 16 + 32 * x ) +
+                       s21mz * ( - 16 - 32 * x2 - 32 * x ) +
+                       s21z * ( 16 + 32 * x2 + 32 * x );
+    const double a34 = zeta2 * ( - 4 + 796 * x2 / 3 - 208 * x - 32 / x ) +
+                       zeta3 * ( - 12 - 8 * x2 - 56 * x ) +
+                       s111mx * ( 20 + 80 * x2 / 3 - 64 * x + 64 / x / 3 ) +
+                       s211mx * ( - 16 - 128 * x ) +
+                       s121mx * ( 40 + 144 * x ) +
+                       s11mx * ( - 48 + 208 * x2 / 3 + 16 * x - 32 / x / 3 ) +
+                       s21mx * ( - 24 - 48 * x ) +
+                       s12mx * ( 16 + 32 * x ) + 80 / x / 9 +
+                       466. / 9 - 878 * x2 / 9 + 260 * x / 9;
     const double a3 = a31 + a32 + a33 + a34;
-    const double b31 = dlx3 * ( - 8. / 3 - 32 * x2 / 3 + 16 * x / 3 ) + 
-      dlx2 * dlm * ( 16 + 48 * x2 - 32 * x ) + 
-      dlx2 * dlp * ( 16 + 16 * x2 + 32 * x ) + 
-      dlx2 * ( - 4 - 96 * x3 / 5 - 52 * x2 + 8 * x / 3 ) + 
-      dlx * dlm2 * ( - 20 - 48 * x2 + 40 * x ) + 
-      dlx * dlm * ( 24 + 168 * x2 - 160 * x ) + 
-      dlx * dlp2 * ( - 32 - 32 * x2 - 64 * x ) + 
-      dlx * dlp * ( 96 + 192 * x3 / 5 + 128 * x / 3 );
-    const double b32 = 16 * dlx * dlp / x2 / 15 - 16 * dlx / x / 15 + 
-      dlx * zeta2 * ( 32 + 64 * x2 - 64 * x ) + 
-      dlx * s111mx * ( 32 * x2 ) + 
-      dlx * s11mx * ( - 32 - 32 * x2 + 64 * x ) + 
-      dlx * ( - 712. / 15 - 672 * x2 / 5 + 136 * x / 5 ) + 
-      dlm3 * ( 8 + 16 * x2 - 16 * x ) + 
-      dlm2 * ( - 22 - 84 * x2 + 88 * x ) + 
-      zeta2 * dlm * ( - 32 * x2 );
-    const double b33 = dlm * s111mx * ( 8 - 16 * x ) + 
-      dlm * ( 28 + 96 * x2 - 132 * x ) + 
-      zeta2 * dlp * ( - 32 - 32 * x2 - 64 * x ) + 
-      dlp * s11mx * ( - 64 - 64 * x2 - 128 * x ) + 
-      zeta2 * ( 48 + 192 * x3 / 5 + 104 * x2 - 208 * x / 3 ) + 
-      zeta3 * ( 112 + 192 * x2 - 96 * x );
-    const double b34 = s111mx * ( - 24 + 64 * x2 - 48 * x ) + 
-      s211mx * ( - 24 - 32 * x2 + 48 * x ) + 
-      s121mx * ( - 32 + 64 * x ) + 
-      s11mx * ( 96 + 192 * x3 / 5 + 128 * x / 3 ) + 
-      16 * s11mx / x2 / 15 + 16 / x / 15 + 
-      s21mx * ( 96 + 96 * x2 - 64 * x ) + 
-      s12mx * ( - 64 - 64 * x2 - 128 * x ) - 
-      904. / 15 + 328 * x2 / 5 + 68 * x / 5;
+    const double b31 = dlx3 * ( - 8. / 3 - 32 * x2 / 3 + 16 * x / 3 ) +
+                       dlx2 * dlm * ( 16 + 48 * x2 - 32 * x ) +
+                       dlx2 * dlp * ( 16 + 16 * x2 + 32 * x ) +
+                       dlx2 * ( - 4 - 96 * x3 / 5 - 52 * x2 + 8 * x / 3 ) +
+                       dlx * dlm2 * ( - 20 - 48 * x2 + 40 * x ) +
+                       dlx * dlm * ( 24 + 168 * x2 - 160 * x ) +
+                       dlx * dlp2 * ( - 32 - 32 * x2 - 64 * x ) +
+                       dlx * dlp * ( 96 + 192 * x3 / 5 + 128 * x / 3 );
+    const double b32 = 16 * dlx * dlp / x2 / 15 - 16 * dlx / x / 15 +
+                       dlx * zeta2 * ( 32 + 64 * x2 - 64 * x ) +
+                       dlx * s111mx * ( 32 * x2 ) +
+                       dlx * s11mx * ( - 32 - 32 * x2 + 64 * x ) +
+                       dlx * ( - 712. / 15 - 672 * x2 / 5 + 136 * x / 5 ) +
+                       dlm3 * ( 8 + 16 * x2 - 16 * x ) +
+                       dlm2 * ( - 22 - 84 * x2 + 88 * x ) +
+                       zeta2 * dlm * ( - 32 * x2 );
+    const double b33 = dlm * s111mx * ( 8 - 16 * x ) +
+                       dlm * ( 28 + 96 * x2 - 132 * x ) +
+                       zeta2 * dlp * ( - 32 - 32 * x2 - 64 * x ) +
+                       dlp * s11mx * ( - 64 - 64 * x2 - 128 * x ) +
+                       zeta2 * ( 48 + 192 * x3 / 5 + 104 * x2 - 208 * x / 3 ) +
+                       zeta3 * ( 112 + 192 * x2 - 96 * x );
+    const double b34 = s111mx * ( - 24 + 64 * x2 - 48 * x ) +
+                       s211mx * ( - 24 - 32 * x2 + 48 * x ) +
+                       s121mx * ( - 32 + 64 * x ) +
+                       s11mx * ( 96 + 192 * x3 / 5 + 128 * x / 3 ) +
+                       16 * s11mx / x2 / 15 + 16 / x / 15 +
+                       s21mx * ( 96 + 96 * x2 - 64 * x ) +
+                       s12mx * ( - 64 - 64 * x2 - 128 * x ) -
+                       904. / 15 + 328 * x2 / 5 + 68 * x / 5;
     const double b3 = b31 + b32 + b33 + b34;
     const double c2g2am0_a0 = TR * ( CA * a3 + CF * b3 );
     return c2g2am0_a0;
@@ -413,15 +413,15 @@ namespace apfel
     const double s111mx = wgplg(1,1,1-x);
     const double s11mx  = wgplg(1,1,-x);
     const double a2     =  - ( 16 + 32 * x2 ) * zeta2 + 1628 * x2 / 9
-      - 368 * x / 3 - 220. / 3 + 208 / x / 9
-      + ( 16 * x2 - 16 * x + 8 ) * dlm2 - ( 48 * x + 16 ) * dlx2
-      + ( - 536 * x2 / 3 + 160 * x - 8 + 32 / x / 3 ) * dlm
-      + ( 200 * x2 - 192 * x ) * dlx + ( 96 * x - 32 * x2 ) * dlx * dlm
-      + ( 64 * x + 16 ) * s111mx - ( 32 * x2 + 32 * x + 16 ) * ( s11mx + dlx * dlp );
+                           - 368 * x / 3 - 220. / 3 + 208 / x / 9
+                           + ( 16 * x2 - 16 * x + 8 ) * dlm2 - ( 48 * x + 16 ) * dlx2
+                           + ( - 536 * x2 / 3 + 160 * x - 8 + 32 / x / 3 ) * dlm
+                           + ( 200 * x2 - 192 * x ) * dlx + ( 96 * x - 32 * x2 ) * dlx * dlm
+                           + ( 64 * x + 16 ) * s111mx - ( 32 * x2 + 32 * x + 16 ) * ( s11mx + dlx * dlp );
     const double b2     = ( - 64 * x2 + 64 * x - 32 ) * zeta2 + 16 * x2 - 68 * x + 36
-      + ( 32 * x2 - 32 * x + 16 ) * dlm2 + ( 32 * x2 - 16 * x + 8 ) * dlx2
-      + ( - 80 * x2 + 96 * x - 28 ) * dlm + ( 80 * x2 - 48 * x + 8 ) * dlx
-      + ( - 64 * x2 + 48 * x - 24 ) * dlx * dlm + ( 8 - 16 * x ) * s111mx;
+                          + ( 32 * x2 - 32 * x + 16 ) * dlm2 + ( 32 * x2 - 16 * x + 8 ) * dlx2
+                          + ( - 80 * x2 + 96 * x - 28 ) * dlm + ( 80 * x2 - 48 * x + 8 ) * dlx
+                          + ( - 64 * x2 + 48 * x - 24 ) * dlx * dlm + ( 8 - 16 * x ) * s111mx;
     const double c2g2am0_aq = TR * (  CA * a2 + CF * b2 );
     return c2g2am0_aq;
   }
@@ -437,9 +437,9 @@ namespace apfel
     const double dlx = log(x);
     const double dlm = log(1-x);
     const double a1  = 16 / x / 3 - 124 * x2 / 3 + 32 * x + 4
-      + ( 16 * x2 - 16 * x + 8 ) * dlm + ( 32 * x + 8 ) * dlx;
+                       + ( 16 * x2 - 16 * x + 8 ) * dlm + ( 32 * x + 8 ) * dlx;
     const double b1  = - 2 + 8 * x + ( 16 * x2 - 16 * x + 8 ) * dlm
-      + ( - 16 * x2 + 8 * x - 4 ) * dlx;
+                       + ( - 16 * x2 + 8 * x - 4 ) * dlx;
     const double c2g2am0_aq2 = TR * ( CA * a1 + CF * b1 );
     return c2g2am0_aq2;
   }
@@ -458,11 +458,11 @@ namespace apfel
     const double dlm2 = dlm * dlm;
     const double s11  = wgplg(1,1,1-x);
     const double c2   = ( - 16 + 32 * x - 32 * x2 ) * zeta2
-      + 1124 * x2 / 3 - 968 * x / 3 - 172. / 3 + 16 / x / 3
-      + ( 16 - 32 * x + 32 * x2 ) * dlm2 - ( 8 + 32 * x ) * dlx2
-      + ( 248 * x2 / 3 - 256 * x - 8 ) * dlx
-      + ( 32 / x / 3 - 8 + 192 * x - 632 * x2 / 3 ) * dlm
-      + ( 96 * x - 32 * x2 ) * dlx * dlm + ( 64 * x + 16 ) * s11;
+                        + 1124 * x2 / 3 - 968 * x / 3 - 172. / 3 + 16 / x / 3
+                        + ( 16 - 32 * x + 32 * x2 ) * dlm2 - ( 8 + 32 * x ) * dlx2
+                        + ( 248 * x2 / 3 - 256 * x - 8 ) * dlx
+                        + ( 32 / x / 3 - 8 + 192 * x - 632 * x2 / 3 ) * dlm
+                        + ( 96 * x - 32 * x2 ) * dlx * dlm + ( 64 * x + 16 ) * s11;
     const double c2g2am0_af = TR * CA * c2;
     return c2g2am0_af;
   }
@@ -478,7 +478,7 @@ namespace apfel
     const double dlx = log(x);
     const double dlm = log(1-x);
     const double c1  = - 248 * x2 / 3 + 64 * x + 8 + 32 / x / 3
-      + ( 32 * x2 - 32 * x + 16 ) * dlm + ( 64 * x + 16 ) * dlx;
+                       + ( 32 * x2 - 32 * x + 16 ) * dlm + ( 64 * x + 16 ) * dlx;
     const double c2g2am0_aqf = TR * CA * c1;
     return c2g2am0_aqf;
   }
@@ -500,19 +500,19 @@ namespace apfel
     const double s11  = wgplg(1,1,1-x);
     const double s11m = wgplg(1,1,-x);
     const double a2   = 96 * x * dlx2 + ( 64 * x2 - 192 * x ) * dlx * dlm
-      + ( 32 - 416 * x2 + 256 * x ) * dlx
-      + 32 * x * ( 1 - x ) * dlm2 + ( - 32 + 928 * x2 / 3 - 288 * x + 32 / x / 3 ) * dlm
-      + 64 * x2 * zeta2 - 128 * x * s11
-      + 64 * x * ( 1 + x ) * ( s11m + dlx * dlp )
-      + 32. / 3 - 1696 * x2 / 9 + 544 * x / 3 - 32 / x / 9;
+                        + ( 32 - 416 * x2 + 256 * x ) * dlx
+                        + 32 * x * ( 1 - x ) * dlm2 + ( - 32 + 928 * x2 / 3 - 288 * x + 32 / x / 3 ) * dlm
+                        + 64 * x2 * zeta2 - 128 * x * s11
+                        + 64 * x * ( 1 + x ) * ( s11m + dlx * dlp )
+                        + 32. / 3 - 1696 * x2 / 9 + 544 * x / 3 - 32 / x / 9;
     const double b2   = - ( 64 * x3 / 5 + 64 * x / 3 ) * dlx2
-      + 32 * x * ( s11 + dlx * dlm )
-      + ( - 208. / 15 + 192 * x2 / 5 - 416 * x / 5 - 64 / x / 15 ) * dlx
-      + ( 16 - 64 * x2 + 48 * x ) * dlm + ( 128 * x3 / 5 - 64 * x / 3 ) * zeta2
-      + ( 128 * x3 / 5 - 64 * x / 3 + 64 / x2 / 15 ) * ( s11m + dlx * dlp )
-      - 256. / 15 + 672 * x2 / 5 - 608 * x / 5 + 64 / x / 15;
-      const double clg2am0_a0 = TR * ( CA * a2 + CF * b2 );
-      return clg2am0_a0;
+                        + 32 * x * ( s11 + dlx * dlm )
+                        + ( - 208. / 15 + 192 * x2 / 5 - 416 * x / 5 - 64 / x / 15 ) * dlx
+                        + ( 16 - 64 * x2 + 48 * x ) * dlm + ( 128 * x3 / 5 - 64 * x / 3 ) * zeta2
+                        + ( 128 * x3 / 5 - 64 * x / 3 + 64 / x2 / 15 ) * ( s11m + dlx * dlp )
+                        - 256. / 15 + 672 * x2 / 5 - 608 * x / 5 + 64 / x / 15;
+    const double clg2am0_a0 = TR * ( CA * a2 + CF * b2 );
+    return clg2am0_a0;
   }
 
   //_________________________________________________________________________________

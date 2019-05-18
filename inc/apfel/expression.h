@@ -85,7 +85,7 @@ namespace apfel
   class Identity: public Expression
   {
   public:
-  Identity(): Expression() { }
+    Identity(): Expression() { }
     double Local(double const&) const { return 1; }
   };
 
@@ -96,7 +96,7 @@ namespace apfel
   class Null: public Expression
   {
   public:
-  Null(): Expression() { }
+    Null(): Expression() { }
   };
   ///@}
 }

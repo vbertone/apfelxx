@@ -41,12 +41,12 @@ namespace apfel
      * @param InvTabFunc: the inverse function of TabFunc (an analytic expression is necessary)
      */
     QGrid(int                                  const& nQ,
-	  double                               const& QMin,
-	  double                               const& QMax,
-	  int                                  const& InterDegree,
-	  std::vector<double>                  const& Thresholds,
-	  std::function<double(double const&)> const& TabFunc,
-	  std::function<double(double const&)> const& InvTabFunc);
+          double                               const& QMin,
+          double                               const& QMax,
+          int                                  const& InterDegree,
+          std::vector<double>                  const& Thresholds,
+          std::function<double(double const&)> const& TabFunc,
+          std::function<double(double const&)> const& InvTabFunc);
 
     /**
      * @brief The QGrid constructor.
@@ -58,11 +58,11 @@ namespace apfel
      * @param Lambda: the parameter of the function log(log(Q/Lambda)) used for the tabulation on the grid in Q
      */
     QGrid(int                 const& nQ,
-	  double              const& QMin,
-	  double              const& QMax,
-	  int                 const& InterDegree,
-	  std::vector<double> const& Thresholds,
-	  double              const& Lambda = 0.25);
+          double              const& QMin,
+          double              const& QMax,
+          int                 const& InterDegree,
+          std::vector<double> const& Thresholds,
+          double              const& Lambda = 0.25);
 
     /**
      * @brief The QGrid constructor.
@@ -74,7 +74,7 @@ namespace apfel
      * 'well-behaved'. To be used with care.
      */
     QGrid(std::vector<double> const& Qg,
-	  int                 const& InterDegree);
+          int                 const& InterDegree);
     ///@}
 
     /**

@@ -53,8 +53,8 @@ namespace apfel
    * @return A map DglapObject objects, one for each possible nf
    */
   std::map<int,TmdObjects> InitializeTmdObjects(Grid                const& g,
-						std::vector<double> const& Thresholds,
-						double              const& IntEps = 1e-5);
+                                                std::vector<double> const& Thresholds,
+                                                double              const& IntEps = 1e-5);
   ///@}
 
   /**
@@ -79,11 +79,11 @@ namespace apfel
    * final rapidity scale &zeta; representing the evolved TMD PDFs
    */
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
-											     std::function<Set<Distribution>(double const&)> const& CollPDFs,
-											     std::function<double(double const&)>            const& Alphas,
-											     int                                             const& PerturbativeOrder,
-											     double                                          const& Ci = 1,
-											     double                                          const& IntEps = 1e-7);
+                                                                                             std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                                                             std::function<double(double const&)>            const& Alphas,
+                                                                                             int                                             const& PerturbativeOrder,
+                                                                                             double                                          const& Ci = 1,
+                                                                                             double                                          const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched and evolved TMD FFs in
@@ -100,11 +100,11 @@ namespace apfel
    * final rapidity scale &zeta; representing the evolved TMD FFs
    */
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
-											    std::function<Set<Distribution>(double const&)> const& CollFFs,
-											    std::function<double(double const&)>            const& Alphas,
-											    int                                             const& PerturbativeOrder,
-											    double                                          const& Ci = 1,
-											    double                                          const& IntEps = 1e-7);
+                                                                                            std::function<Set<Distribution>(double const&)> const& CollFFs,
+                                                                                            std::function<double(double const&)>            const& Alphas,
+                                                                                            int                                             const& PerturbativeOrder,
+                                                                                            double                                          const& Ci = 1,
+                                                                                            double                                          const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched TMD PDFs in b-space. It
@@ -118,10 +118,10 @@ namespace apfel
    * b<SUB>T</SUB> representing the matched TMD PDFs
    */
   std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
-							       std::function<Set<Distribution>(double const&)> const& CollPDFs,
-							       std::function<double(double const&)>            const& Alphas,
-							       int                                             const& PerturbativeOrder,
-							       double                                          const& Ci = 1);
+                                                               std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                               std::function<double(double const&)>            const& Alphas,
+                                                               int                                             const& PerturbativeOrder,
+                                                               double                                          const& Ci = 1);
 
   /**
    * @brief Function that returns the matched TMD FFs in b-space. It
@@ -135,10 +135,10 @@ namespace apfel
    * b<SUB>T</SUB> representing the matched TMD FFs
    */
   std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
-							      std::function<Set<Distribution>(double const&)> const& CollPDFs,
-							      std::function<double(double const&)>            const& Alphas,
-							      int                                             const& PerturbativeOrder,
-							      double                                          const& Ci = 1);
+                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                              std::function<double(double const&)>            const& Alphas,
+                                                              int                                             const& PerturbativeOrder,
+                                                              double                                          const& Ci = 1);
 
   /**
    * @brief Function that returns the evolution factors for gluon and quarks.
@@ -154,10 +154,10 @@ namespace apfel
    * equal and represent the quark evolution factors.
    */
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
-												   std::function<double(double const&)> const& Alphas,
-												   int                                  const& PerturbativeOrder,
-												   double                               const& Ci = 1,
-												   double                               const& IntEps = 1e-7);
+                                                                                                   std::function<double(double const&)> const& Alphas,
+                                                                                                   int                                  const& PerturbativeOrder,
+                                                                                                   double                               const& Ci = 1,
+                                                                                                   double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the evolution factor for quarks.
@@ -172,10 +172,10 @@ namespace apfel
    * factor.
    */
   std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
-											  std::function<double(double const&)> const& Alphas,
-											  int                                  const& PerturbativeOrder,
-											  double                               const& Ci = 1,
-											  double                               const& IntEps = 1e-7);
+                                                                                          std::function<double(double const&)> const& Alphas,
+                                                                                          int                                  const& PerturbativeOrder,
+                                                                                          double                               const& Ci = 1,
+                                                                                          double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the evolution factor for the gluon.
@@ -190,10 +190,10 @@ namespace apfel
    * factor.
    */
   std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
-											  std::function<double(double const&)> const& Alphas,
-											  int                                  const& PerturbativeOrder,
-											  double                               const& Ci = 1,
-											  double                               const& IntEps = 1e-7);
+                                                                                          std::function<double(double const&)> const& Alphas,
+                                                                                          int                                  const& PerturbativeOrder,
+                                                                                          double                               const& Ci = 1,
+                                                                                          double                               const& IntEps = 1e-7);
   ///@}
 
   /**
@@ -202,7 +202,7 @@ namespace apfel
    * qT-dependent cross sections in TMD factorisation.
    */
   ///@{
- /**
+  /**
    * @brief Perturbative hard factor for Drell-Yan.
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the value of the strong coupling
@@ -212,7 +212,7 @@ namespace apfel
    */
   double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
 
- /**
+  /**
    * @brief Perturbative hard factor for SIDIS.
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the value of the strong coupling

@@ -46,10 +46,10 @@ namespace apfel
   double CSd30(int const& nf)
   {
     const double coeff = CA * CA * ( - 176 * zeta3 * zeta2 / 3 + 6392 * zeta2 / 81 + 12328 * zeta3 / 27
-				       + 154 * zeta4 / 3 - 192 * zeta5 - 297029. / 729. ) / 2
-      + CA * TR * nf * ( - 824 * zeta2 / 81 - 904 * zeta3 / 27 + 20 * zeta4 / 3 + 62626. / 729. )
-      + 2 * TR * TR * nf * nf * ( - 32 * zeta3 / 9 - 1856. / 729. )
-      + CF * TR * nf * ( - 304 * zeta3 / 9 - 16 * zeta4 + 1711. / 27. );
+                                     + 154 * zeta4 / 3 - 192 * zeta5 - 297029. / 729. ) / 2
+                         + CA * TR * nf * ( - 824 * zeta2 / 81 - 904 * zeta3 / 27 + 20 * zeta4 / 3 + 62626. / 729. )
+                         + 2 * TR * TR * nf * nf * ( - 32 * zeta3 / 9 - 1856. / 729. )
+                         + CF * TR * nf * ( - 304 * zeta3 / 9 - 16 * zeta4 + 1711. / 27. );
     return 2 * coeff;
   }
 

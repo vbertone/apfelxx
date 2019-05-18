@@ -194,7 +194,7 @@ namespace apfel
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     double const clnsp2a =
-      - 40.41 + 97.48 * x + ( 26.56 * x - 0.031 ) * dl_2 - 14.85 * dl + 13.62 * dl1_2 - 55.79 * dl1 - 150.5 * dl * dl1 
+      - 40.41 + 97.48 * x + ( 26.56 * x - 0.031 ) * dl_2 - 14.85 * dl + 13.62 * dl1_2 - 55.79 * dl1 - 150.5 * dl * dl1
       + _nf * 16 / 27. * ( 6 * x * dl1 - 12 * x * dl - 25 * x + 6 );
     return clnsp2a;
   }
@@ -216,11 +216,14 @@ namespace apfel
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     double const clnsm2a =
-      - 52.27 + 100.8 * x + ( 23.29 * x - 0.043 ) * dl_2 - 22.21 * dl + 13.30 * dl1_2 - 59.12 * dl1 - 141.7 * dl * dl1 
+      - 52.27 + 100.8 * x + ( 23.29 * x - 0.043 ) * dl_2 - 22.21 * dl + 13.30 * dl1_2 - 59.12 * dl1 - 141.7 * dl * dl1
       + _nf * 16 / 27. * ( 6 * x * dl1 - 12 * x * dl - 25 * x + 6 );
     return clnsm2a;
   }
-  double CL2nsm::Local(double const&) const { return - 0.150; }
+  double CL2nsm::Local(double const&) const
+  {
+    return - 0.150;
+  }
 
   //_________________________________________________________________________________
   CL2ps::CL2ps():
@@ -290,7 +293,7 @@ namespace apfel
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
     double const c3nsp2a =
-      - 242.9 - 467.2 * x - 3.049 * dl_3 - 30.14 * dl_2 - 79.14 * dl - 15.20 * dl1_3 + 94.61 * dl1_2 - 396.1 * dl1 - 92.43 * dl * dl1_2 
+      - 242.9 - 467.2 * x - 3.049 * dl_3 - 30.14 * dl_2 - 79.14 * dl - 15.20 * dl1_3 + 94.61 * dl1_2 - 396.1 * dl1 - 92.43 * dl * dl1_2
       + _nf * ( - 6.337 - 14.97 * x + 2.207 * dl_2 + 8.683 * dl + 0.042 * dl1_3 - 0.808 * dl1_2  + 25.00 * dl1 + 9.684 * dl * dl1 );
     return c3nsp2a;
   }
@@ -300,7 +303,7 @@ namespace apfel
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
     double const c3ns2b =
-      + 14.2222 * dl1_3 - 61.3333 * dl1_2 - 31.105 * dl1 + 188.64 
+      + 14.2222 * dl1_3 - 61.3333 * dl1_2 - 31.105 * dl1 + 188.64
       + _nf * ( 1.77778 * dl1_2 - 8.5926 * dl1 + 6.3489 );
     return c3ns2b / ( 1 - x );
   }
@@ -311,7 +314,7 @@ namespace apfel
     double const dl1_3   = dl1_2 * dl1;
     double const dl1_4   = dl1_3 * dl1;
     double const c3nsp2c =
-      + 3.55555 * dl1_4 - 20.4444 * dl1_3 - 15.5525 * dl1_2 + 188.64 * dl1 - 338.531 - 0.152 
+      + 3.55555 * dl1_4 - 20.4444 * dl1_3 - 15.5525 * dl1_2 + 188.64 * dl1 - 338.531 - 0.152
       + _nf * ( 0.592593 * dl1_3 - 4.2963 * dl1_2 + 6.3489 * dl1 + 46.844 + 0.013 );
     return c3nsp2c;
   }
@@ -331,7 +334,7 @@ namespace apfel
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
     double const c3nsm2a =
-      - 206.1 - 576.8 * x - 3.922 * dl_3 - 33.31 * dl_2 - 67.60 * dl - 15.20 * dl1_3 + 94.61 * dl1_2 - 409.6 * dl1 - 147.9 * dl * dl1_2 
+      - 206.1 - 576.8 * x - 3.922 * dl_3 - 33.31 * dl_2 - 67.60 * dl - 15.20 * dl1_3 + 94.61 * dl1_2 - 409.6 * dl1 - 147.9 * dl * dl1_2
       + _nf * ( - 6.337 - 14.97 * x + 2.207 * dl_2 + 8.683 * dl + 0.042 * dl1_3 - 0.808 * dl1_2 + 25.00 * dl1 + 9.684 * dl * dl1 );
     return c3nsm2a;
   }
@@ -341,7 +344,7 @@ namespace apfel
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
     double const c3ns2b =
-      + 14.2222 * dl1_3 - 61.3333 * dl1_2 - 31.105 * dl1 + 188.64 
+      + 14.2222 * dl1_3 - 61.3333 * dl1_2 - 31.105 * dl1 + 188.64
       + _nf * ( 1.77778 * dl1_2 - 8.5926 * dl1 + 6.3489 );
     return c3ns2b / ( 1 - x );
   }
@@ -352,7 +355,7 @@ namespace apfel
     double const dl1_3   = dl1_2 * dl1;
     double const dl1_4   = dl1_3 * dl1;
     double const c3nsm2c =
-      + 3.55555 * dl1_4 - 20.4444 * dl1_3 - 15.5525 * dl1_2 + 188.64 * dl1 - 338.531 - 0.104 
+      + 3.55555 * dl1_4 - 20.4444 * dl1_3 - 15.5525 * dl1_2 + 188.64 * dl1 - 338.531 - 0.104
       + _nf * ( 0.592593 * dl1_3 - 4.2963 * dl1_2 + 6.3489 * dl1 + 46.844 + 0.013 );
     return c3nsm2c;
   }

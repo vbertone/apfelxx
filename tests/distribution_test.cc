@@ -13,9 +13,18 @@ class p0qq: public apfel::Expression
 {
 public:
   p0qq(): Expression() {}
-  double Regular(double const& x)  const { return - 2 * apfel::CF * ( 1 + x ); }
-  double Singular(double const& x) const { return 4 * apfel::CF / ( 1 - x ); }
-  double Local(double const& x)    const { return 4 * apfel::CF * log( 1 - x ) + 3 * apfel::CF; }
+  double Regular(double const& x)  const
+  {
+    return - 2 * apfel::CF * ( 1 + x );
+  }
+  double Singular(double const& x) const
+  {
+    return 4 * apfel::CF / ( 1 - x );
+  }
+  double Local(double const& x)    const
+  {
+    return 4 * apfel::CF * log( 1 - x ) + 3 * apfel::CF;
+  }
 };
 
 // Class to define the analytical expression of the squared LO splitting function P0qq
@@ -23,9 +32,18 @@ class p0qq2: public apfel::Expression
 {
 public:
   p0qq2(): Expression() {}
-  double Regular(double const& x)  const { return 4 * apfel::CF * apfel::CF * ( - 4 * log(x) / ( 1 - x ) - 4 * ( 1 + x ) * log( 1 - x ) + 3 * ( 1 + x ) * log(x) - ( x + 5 ) ); }
-  double Singular(double const& x) const { return 4 * apfel::CF * apfel::CF * ( 8 * log( 1 - x ) + 6 ) / ( 1 - x ); }
-  double Local(double const& x)    const { return 4 * apfel::CF * apfel::CF * ( 4 * pow(log( 1 - x ),2) + 6 * log( 1 - x ) + 9. / 4. - 4 * pow(M_PI,2) / 6. ) ;}
+  double Regular(double const& x)  const
+  {
+    return 4 * apfel::CF * apfel::CF * ( - 4 * log(x) / ( 1 - x ) - 4 * ( 1 + x ) * log( 1 - x ) + 3 * ( 1 + x ) * log(x) - ( x + 5 ) );
+  }
+  double Singular(double const& x) const
+  {
+    return 4 * apfel::CF * apfel::CF * ( 8 * log( 1 - x ) + 6 ) / ( 1 - x );
+  }
+  double Local(double const& x)    const
+  {
+    return 4 * apfel::CF * apfel::CF * ( 4 * pow(log( 1 - x ),2) + 6 * log( 1 - x ) + 9. / 4. - 4 * pow(M_PI,2) / 6. ) ;
+  }
 };
 
 int main()

@@ -19,12 +19,12 @@ namespace apfel
   //_________________________________________________________________________________
   template<class T>
   QGrid<T>::QGrid(int                                  const& nQ,
-		  double                               const& QMin,
-		  double                               const& QMax,
-		  int                                  const& InterDegree,
-		  std::vector<double>                  const& Thresholds,
-		  std::function<double(double const&)> const& TabFunc,
-		  std::function<double(double const&)> const& InvTabFunc):
+                  double                               const& QMin,
+                  double                               const& QMax,
+                  int                                  const& InterDegree,
+                  std::vector<double>                  const& Thresholds,
+                  std::function<double(double const&)> const& TabFunc,
+                  std::function<double(double const&)> const& InvTabFunc):
     _nQ(nQ),
     _QMin(QMin),
     _QMax(QMax),
@@ -42,9 +42,9 @@ namespace apfel
     const std::vector<double> TestPoints{_QMin, ( _QMax +  _QMin ) / 2, _QMax};
     for (auto const& p : TestPoints)
       {
-	const double reldiff = std::abs(InvTabFunc( TabFunc(p) ) / p - 1);
-	if (reldiff > eps8)
-	  throw std::runtime_error(error("QGrid::QGrid","TabFunc and InvTabFunc are not the inverse of each other."));
+        const double reldiff = std::abs(InvTabFunc( TabFunc(p) ) / p - 1);
+        if (reldiff > eps8)
+          throw std::runtime_error(error("QGrid::QGrid","TabFunc and InvTabFunc are not the inverse of each other."));
       }
 
     // Find initial and final number of flavours.
@@ -65,8 +65,8 @@ namespace apfel
     std::vector<double> fqTh = {_TabFunc(_QMin)};
     for (int isg = nfin+1; isg <= nffi; isg++)
       {
-	fqTh.push_back(_TabFunc(_Thresholds[isg-1]));
-	_nQg.push_back(std::lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
+        fqTh.push_back(_TabFunc(_Thresholds[isg-1]));
+        _nQg.push_back(std::lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
       }
     _nQg.push_back(_nQ);
     fqTh.push_back(_TabFunc(_QMax));
@@ -77,10 +77,10 @@ namespace apfel
     // If so, adjust the interpolation degree.
     for (int isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
-	if (_nQg[isg+1] - _nQg[isg] < 2)
-	  _nQg[isg+1]  = _nQg[isg] + 2;
-	if (_nQg[isg+1] - _nQg[isg] < _InterDegree + 2)
-	  _InterDegree = _nQg[isg+1] - _nQg[isg] - 1;
+        if (_nQg[isg+1] - _nQg[isg] < 2)
+          _nQg[isg+1]  = _nQg[isg] + 2;
+        if (_nQg[isg+1] - _nQg[isg] < _InterDegree + 2)
+          _InterDegree = _nQg[isg+1] - _nQg[isg] - 1;
       }
 
     // Adjust _nQ if needed.
@@ -92,10 +92,10 @@ namespace apfel
     _fQg.push_back(_TabFunc(_QMin));
     for (int isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
-	Step = ( fqTh[isg+1] - fqTh[isg] ) / ( _nQg[isg+1] - _nQg[isg] - 1 );
-	for (int iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++)
-	  _fQg.push_back(_fQg.back()+Step);
-	_fQg.push_back(_fQg.back());
+        Step = ( fqTh[isg+1] - fqTh[isg] ) / ( _nQg[isg+1] - _nQg[isg] - 1 );
+        for (int iq = _nQg[isg] + 1; iq < _nQg[isg+1]; iq++)
+          _fQg.push_back(_fQg.back()+Step);
+        _fQg.push_back(_fQg.back());
       }
 
     // Now compute grid in Q.
@@ -105,31 +105,31 @@ namespace apfel
     // Displace slightly the values below and above the thresholds.
     for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
       {
-	_Qg[_nQg[isg]-1] *= 1 - eps12;
-	_Qg[_nQg[isg]]   *= 1 + eps12;
-	_fQg[_nQg[isg]-1] = TabFunc(_Qg[_nQg[isg]-1]);
-	_fQg[_nQg[isg]]   = TabFunc(_Qg[_nQg[isg]]);
+        _Qg[_nQg[isg]-1] *= 1 - eps12;
+        _Qg[_nQg[isg]]   *= 1 + eps12;
+        _fQg[_nQg[isg]-1] = TabFunc(_Qg[_nQg[isg]-1]);
+        _fQg[_nQg[isg]]   = TabFunc(_Qg[_nQg[isg]]);
       }
   }
 
   //_________________________________________________________________________________
   template<class T>
   QGrid<T>::QGrid(int                 const& nQ,
-		  double              const& QMin,
-		  double              const& QMax,
-		  int                 const& InterDegree,
-		  std::vector<double> const& Thresholds,
-		  double              const& Lambda):
+                  double              const& QMin,
+                  double              const& QMax,
+                  int                 const& InterDegree,
+                  std::vector<double> const& Thresholds,
+                  double              const& Lambda):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds,
-	     [Lambda] (double const& Q)->double{ return log( 2 * log( Q / Lambda ) ); },
-	     [Lambda] (double const& fQ)->double{ return Lambda * exp( exp(fQ) / 2 ); })
+             [Lambda] (double const& Q)->double{ return log( 2 * log( Q / Lambda ) ); },
+             [Lambda] (double const& fQ)->double{ return Lambda * exp( exp(fQ) / 2 ); })
   {
   }
 
   //_________________________________________________________________________________
   template<class T>
   QGrid<T>::QGrid(std::vector<double> const& Qg,
-		  int                 const& InterDegree):
+                  int                 const& InterDegree):
     _nQ(Qg.size()-1),
     _QMin(Qg.front()),
     _QMax(Qg.back()),
@@ -165,12 +165,12 @@ namespace apfel
     int j;
     for (j = tau + tQ - bound; j >= 0; j--)
       if (fq < _fQg[tau+tQ-j+1])
-	break;
+        break;
 
     // Compute the interpolant
     for (int delta = tau - j; delta <= tau - j + _InterDegree; delta++)
       if (delta != tau)
-	w_int *= ( fq - _fQg[delta] ) / ( _fQg[tau] - _fQg[delta] );
+        w_int *= ( fq - _fQg[delta] ) / ( _fQg[tau] - _fQg[delta] );
 
     return w_int;
   }
@@ -190,17 +190,17 @@ namespace apfel
     // below.
     for (int iQ = 1; iQ < (int) _nQg.size() - 1; iQ++)
       if (Q > _Qg[_nQg[iQ]-1] && Q <= _Qg[_nQg[iQ]])
-	{
-	  std::get<1>(bounds) = _nQg[iQ] - 1;
-	  std::get<2>(bounds) = _nQg[iQ];
-	  return bounds;
-	}
-      
+        {
+          std::get<1>(bounds) = _nQg[iQ] - 1;
+          std::get<2>(bounds) = _nQg[iQ];
+          return bounds;
+        }
+
     // Identify the subgrid in which Q falls.
     int iQ;
     for (iQ = 0; iQ < (int) _nQg.size() - 1; iQ++)
       if (Q > _Qg[_nQg[iQ]] && Q <= _Qg[_nQg[iQ+1]])
-	break;
+        break;
 
     if (iQ == (int) _nQg.size()-1)
       iQ--;
@@ -209,11 +209,11 @@ namespace apfel
     // of the tuple.
     if (Q > _Qg[_nQg[iQ+1] - _InterDegree])
       {
-	int id;
-	for (id = 2; id <= _InterDegree; id++)
-	  if (Q > _Qg[_nQg[iQ+1] - id])
-	    break;
-	std::get<0>(bounds) = _InterDegree - id + 1;
+        int id;
+        for (id = 2; id <= _InterDegree; id++)
+          if (Q > _Qg[_nQg[iQ+1] - id])
+            break;
+        std::get<0>(bounds) = _InterDegree - id + 1;
       }
 
     // Determine the actual bounds.

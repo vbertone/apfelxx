@@ -7,10 +7,11 @@
 
 #include "apfel/observable.h"
 
-namespace apfel {
+namespace apfel
+{
   //_____________________________________________________________________________
   Observable::Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-			 std::function<Set<Distribution>(double const&)> const& Distributions):
+                         std::function<Set<Distribution>(double const&)> const& Distributions):
     _CoefficientFunctions(CoefficientFunctions),
     _Distributions(Distributions)
   {

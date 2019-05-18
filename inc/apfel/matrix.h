@@ -11,7 +11,7 @@
 #include <array>
 
 namespace apfel
-{  
+{
   /**
    * @brief The matrix class is a simple implementation of 2d arrays
    * based on a continous memory allocation. Elements are accessible

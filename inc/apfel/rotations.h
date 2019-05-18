@@ -20,7 +20,7 @@ namespace apfel
    * {g, &Sigma;, V, T<SUB>3</SUB>, V<SUB>3</SUB>, T<SUB>8</SUB>,
    * V<SUB>8</SUB>, T<SUB>15</SUB>, V<SUB>15</SUB>, T<SUB>24</SUB>,
    * V<SUB>24</SUB>, T<SUB>35</SUB>, T<SUB>34</SUB>}
-   * 
+   *
    * while the physical basis is:
    *
    * { <span style="text-decoration: overline">t</span>, <span

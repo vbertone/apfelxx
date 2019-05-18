@@ -30,64 +30,64 @@ namespace apfel
     _Operator.resize(ng);
     for (_ig = 0; _ig < ng; _ig++)
       {
-	// Define the global subgrid.
-	const SubGrid& sg = _grid.GetSubGrid(_ig);
+        // Define the global subgrid.
+        const SubGrid& sg = _grid.GetSubGrid(_ig);
 
-	// Get vector with the grid nodes.
-	const std::vector<double>& xg = sg.GetGrid();
+        // Get vector with the grid nodes.
+        const std::vector<double>& xg = sg.GetGrid();
 
-	// Number of grid points.
-	const int nx = sg.nx();
+        // Number of grid points.
+        const int nx = sg.nx();
 
-	// Interpolation degree.
-	const int id = sg.InterDegree();
+        // Interpolation degree.
+        const int id = sg.InterDegree();
 
-	// Limit the loop over "beta" according to whether "sg" is
-	// external.
-	const int gbound = ( sg.IsExternal() ? nx : 0 );
+        // Limit the loop over "beta" according to whether "sg" is
+        // external.
+        const int gbound = ( sg.IsExternal() ? nx : 0 );
 
-	_Operator[_ig].resize(gbound + 1, nx + 1, 0);
-	for (int beta = 0; beta <= gbound; beta++)
-	  {
-	    _xbeta = xg[beta];
-	    // Local function. Can be computed outside the 'alpha'
-	    // loop.
-	    const double L   = _eta * _expr->Local(_xbeta / xg[beta+1] / _eta);
-	    const double lxe = log(_xbeta / _eta);
-	    for (_alpha = beta; _alpha <= nx; _alpha++)
-	      {
-		// Weight of the subtraction term (it is a delta if
-		// _eta = 1).
-		_ws = Interpolant(_alpha, lxe, sg);
+        _Operator[_ig].resize(gbound + 1, nx + 1, 0);
+        for (int beta = 0; beta <= gbound; beta++)
+          {
+            _xbeta = xg[beta];
+            // Local function. Can be computed outside the 'alpha'
+            // loop.
+            const double L   = _eta * _expr->Local(_xbeta / xg[beta+1] / _eta);
+            const double lxe = log(_xbeta / _eta);
+            for (_alpha = beta; _alpha <= nx; _alpha++)
+              {
+                // Weight of the subtraction term (it is a delta if
+                // _eta = 1).
+                _ws = Interpolant(_alpha, lxe, sg);
 
-		// Given that the interpolation functions have
-		// discontinuos derivative on the nodes and are
-		// wiggly, it turns out that it is convenient to split
-		// the integrals into (id+1) intervals on each of
-		// which the integrand is smooth. This way, even
-		// though more integrals have to be computed, the
-		// integration converges faster.
+                // Given that the interpolation functions have
+                // discontinuos derivative on the nodes and are
+                // wiggly, it turns out that it is convenient to split
+                // the integrals into (id+1) intervals on each of
+                // which the integrand is smooth. This way, even
+                // though more integrals have to be computed, the
+                // integration converges faster.
 
-		// Number of grid intervals we need to integrate over.
-		const int nmax = fmin(id, _alpha - beta) + 1;
-		const int nmin = fmax(0, _alpha + 1 - nx);
+                // Number of grid intervals we need to integrate over.
+                const int nmax = fmin(id, _alpha - beta) + 1;
+                const int nmin = fmax(0, _alpha + 1 - nx);
 
-		// Integral.
-		double I = 0;
-		for (int jint = nmin; jint < nmax; jint++)
-		  {
-		    // Define integration bounds of the first
-		    // iteration.
-		    const double c = _xbeta / xg[_alpha-jint+1];
-		    const double d = _xbeta / xg[_alpha-jint];
+                // Integral.
+                double I = 0;
+                for (int jint = nmin; jint < nmax; jint++)
+                  {
+                    // Define integration bounds of the first
+                    // iteration.
+                    const double c = _xbeta / xg[_alpha-jint+1];
+                    const double d = _xbeta / xg[_alpha-jint];
 
-		    // Compute the integral.
-		    I += integrate(c, d, eps);
-		  }
-		// Add the local part.
-		_Operator[_ig](beta,_alpha) = I + L * _ws;
-	      }
-	  }
+                    // Compute the integral.
+                    I += integrate(c, d, eps);
+                  }
+                // Add the local part.
+                _Operator[_ig](beta,_alpha) = I + L * _ws;
+              }
+          }
       }
   }
 
@@ -126,34 +126,34 @@ namespace apfel
       {
         int const nx = _grid.GetSubGrid(ig).nx();
 
-	// If the grid is external the product between the operator
-	// and the distribution has to be done in a standard way.
-	if (this->_grid.GetSubGrid(ig).IsExternal())
-	  for (int alpha = 0; alpha <= nx; alpha++)
-	    {
-	      s[ig][alpha] = 0;
-	      for (int beta = alpha; beta <= nx; beta++)
-		s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
-	    }
-	// If the grid is internal the product between the operator
-	// and the distribution has to be done exploiting the symmetry
-	// of the operator.
-	else
-	  for (int alpha = 0; alpha <= nx; alpha++)
-	    {
-	      s[ig][alpha] = 0;
-	      for (int beta = alpha; beta <= nx; beta++)
-		s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
-	    }
+        // If the grid is external the product between the operator
+        // and the distribution has to be done in a standard way.
+        if (this->_grid.GetSubGrid(ig).IsExternal())
+          for (int alpha = 0; alpha <= nx; alpha++)
+            {
+              s[ig][alpha] = 0;
+              for (int beta = alpha; beta <= nx; beta++)
+                s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
+            }
+        // If the grid is internal the product between the operator
+        // and the distribution has to be done exploiting the symmetry
+        // of the operator.
+        else
+          for (int alpha = 0; alpha <= nx; alpha++)
+            {
+              s[ig][alpha] = 0;
+              for (int beta = alpha; beta <= nx; beta++)
+                s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
+            }
 
-	// Set to zero the values above one.
-	for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
-	  s[ig][alpha] = 0;
+        // Set to zero the values above one.
+        for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
+          s[ig][alpha] = 0;
 
-	// Compute the the distribution on the joint grid.
+        // Compute the the distribution on the joint grid.
         double xtrans;
         if (ig < ng-1)
-	  xtrans = this->_grid.GetSubGrid(ig+1).xMin();
+          xtrans = this->_grid.GetSubGrid(ig+1).xMin();
         else
           xtrans = 1 + 2 * eps12;
 
@@ -161,7 +161,7 @@ namespace apfel
           {
             const double x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
             if (xtrans - x < eps12)
-	      break;
+              break;
             j.push_back(s[ig][alpha]);
           }
       }
@@ -187,31 +187,31 @@ namespace apfel
       {
         const int nx = this->_grid.GetSubGrid(ig).nx();
 
-	// If the grid is external the product between the operators
-	// has to be done in a standard way.
-	if (this->_grid.GetSubGrid(ig).IsExternal())
-	  {
-	    for (int alpha = 0; alpha <= nx; alpha++)
-	      for (int beta = alpha; beta <= nx; beta++)
-		{
-		  _Operator[ig](alpha,beta) = 0;
-		  for (int gamma = alpha; gamma <= beta; gamma++)
-		    _Operator[ig](alpha,beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
-		}
-	  }
-	// If the grid is internal the product between the operators
-	// has to be done exploiting the symmetry of the operators.
-	else
-	  {
-	    _Operator[ig].resize(nx + 1, nx + 1, 0);
-	    for (int alpha = 0; alpha <= nx; alpha++)
-	      for (int beta = alpha; beta <= nx; beta++)
-		{
-		  _Operator[ig](alpha,beta) = 0;
-		  for (int gamma = alpha; gamma <= beta; gamma++)
-		    _Operator[ig](alpha,beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
-		}
-	  }
+        // If the grid is external the product between the operators
+        // has to be done in a standard way.
+        if (this->_grid.GetSubGrid(ig).IsExternal())
+          {
+            for (int alpha = 0; alpha <= nx; alpha++)
+              for (int beta = alpha; beta <= nx; beta++)
+                {
+                  _Operator[ig](alpha,beta) = 0;
+                  for (int gamma = alpha; gamma <= beta; gamma++)
+                    _Operator[ig](alpha,beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
+                }
+          }
+        // If the grid is internal the product between the operators
+        // has to be done exploiting the symmetry of the operators.
+        else
+          {
+            _Operator[ig].resize(nx + 1, nx + 1, 0);
+            for (int alpha = 0; alpha <= nx; alpha++)
+              for (int beta = alpha; beta <= nx; beta++)
+                {
+                  _Operator[ig](alpha,beta) = 0;
+                  for (int gamma = alpha; gamma <= beta; gamma++)
+                    _Operator[ig](alpha,beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
+                }
+          }
       }
     return *this;
   }
@@ -236,11 +236,11 @@ namespace apfel
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       {
-	// Get ig-th subgrid
-	const auto& sg = _grid.GetSubGrid(ig).GetGrid();
-	for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
-	  for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
-	    _Operator[ig](alpha,beta) *= f(sg[alpha]);
+        // Get ig-th subgrid
+        const auto& sg = _grid.GetSubGrid(ig).GetGrid();
+        for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
+          for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
+            _Operator[ig](alpha,beta) *= f(sg[alpha]);
       }
     return *this;
   }

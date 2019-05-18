@@ -36,10 +36,10 @@ int main()
 
   std::cout << "Accuracy test ..." << std::endl;
   std::cout << "Q             "
-	    << "x             "
-	    << "Interpolated  "
-	    << "Direct        "
-	    << "Ratio         " << std::endl;
+            << "x             "
+            << "Interpolated  "
+            << "Direct        "
+            << "Ratio         " << std::endl;
   std::cout << std::scientific;
   double Q = Qmin;
   for (int iQ = 0; iQ < nQ; iQ++)
@@ -47,10 +47,10 @@ int main()
       double x = xmin;
       const apfel::Distribution d = dist.Evaluate(Q);
       for (int ix = 0; ix < nx; ix++)
-	{
-	  std::cout << Q << "  " << x << "  " << d.Evaluate(x) << "  " << xQdist(x,Q) << "  " << d.Evaluate(x) / xQdist(x,Q) << std::endl;
-	  x *= xstep;
-	}
+        {
+          std::cout << Q << "  " << x << "  " << d.Evaluate(x) << "  " << xQdist(x,Q) << "  " << d.Evaluate(x) / xQdist(x,Q) << std::endl;
+          x *= xstep;
+        }
       Q *= Qstep;
     }
 
@@ -67,10 +67,10 @@ int main()
       double x = xmin;
       const apfel::Distribution d = dist.Evaluate(Q);
       for (int ix = 0; ix < nx; ix++)
-	{
-	  d.Evaluate(x);
-	  x *= xstep;
-	}
+        {
+          d.Evaluate(x);
+          x *= xstep;
+        }
       Q *= Qstep;
     }
   t.stop();

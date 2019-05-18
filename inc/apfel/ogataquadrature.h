@@ -27,8 +27,8 @@ namespace apfel
      * @param h: internal variable of the algorithm (default: 0.001)
      */
     OgataQuadrature(int    const& nu = 0,
-		    double const& CutOff = 1e-5,
-		    double const& h = 0.001);
+                    double const& CutOff = 1e-5,
+                    double const& h = 0.001);
 
     /**
      * @brief Function that transform the input function.

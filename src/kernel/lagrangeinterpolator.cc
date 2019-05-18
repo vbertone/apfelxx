@@ -10,7 +10,8 @@
 
 #include <algorithm>
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________________
   LagrangeInterpolator::LagrangeInterpolator(Grid const& gr):
     Interpolator{gr}
@@ -43,7 +44,7 @@ namespace apfel {
     int j;
     for (j = 0; j <= beta - bound; j++)
       if (lnx >= lxsg[beta-j])
-	break;
+        break;
 
     // Compute the interpolant.
     double w_int = 1;
@@ -67,7 +68,7 @@ namespace apfel {
     bounds[0] = bounds[1] = low;
 
     if (std::abs(x - xsg[low]) <= eps12)
-	bounds[1] += 1;
+      bounds[1] += 1;
     else
       {
         bounds[0] -= 1;

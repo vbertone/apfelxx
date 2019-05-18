@@ -26,9 +26,9 @@ namespace apfel
   double GammaCusp2(int const& nf)
   {
     const double coeff = ( 245. / 6. - 134 * Pi2 / 27 + 11 * Pi2 * Pi2 / 45 + 22 * zeta3 / 3 ) * CA * CA
-      + ( - 418. / 27. + 40 * Pi2 / 27 - 56 * zeta3 / 3 ) * CA * TR * nf
-      + ( - 55. / 3. + 16 * zeta3 ) * CF * TR * nf
-      - 16 * TR * TR * nf * nf / 27;
+                         + ( - 418. / 27. + 40 * Pi2 / 27 - 56 * zeta3 / 3 ) * CA * TR * nf
+                         + ( - 55. / 3. + 16 * zeta3 ) * CF * TR * nf
+                         - 16 * TR * TR * nf * nf / 27;
     return 8 * coeff;
   }
 

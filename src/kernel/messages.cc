@@ -75,16 +75,16 @@ namespace apfel
   {
     if (VerbosityLevel > MEDIUM)
       {
-	std::cout << "\033[1;" << code::red << "m\n";
-	std::cout << "       _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
-	std::cout << "     _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
-	std::cout << "    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
-	std::cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
-	std::cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
-	std::cout << "\033[0;" << code::green << "m\n";
-	std::cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
-	std::cout << "     Authors: V. Bertone, S. Carrazza\n";
-	std::cout << "\033[" << code::normal << "m\n";
+        std::cout << "\033[1;" << code::red << "m\n";
+        std::cout << "       _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/\n";
+        std::cout << "     _/    _/  _/    _/  _/        _/        _/        _/     _/\n";
+        std::cout << "    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/\n";
+        std::cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
+        std::cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
+        std::cout << "\033[0;" << code::green << "m\n";
+        std::cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
+        std::cout << "     Authors: V. Bertone, S. Carrazza\n";
+        std::cout << "\033[" << code::normal << "m\n";
       }
   }
 }

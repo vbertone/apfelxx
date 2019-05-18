@@ -28,8 +28,8 @@ namespace apfel
   double beta2qcd(int const& nf)
   {
     const double coeff = 2857 * pow(CA,3) / 54
-      + ( 2 * CF * CF - 205 * CF * CA / 9 - 1415 * CA * CA / 27 ) * TR * nf
-      + ( 44 * CF / 9 + 158 * CA / 27 ) * TR * TR * nf * nf;
+                         + ( 2 * CF * CF - 205 * CF * CA / 9 - 1415 * CA * CA / 27 ) * TR * nf
+                         + ( 44 * CF / 9 + 158 * CA / 27 ) * TR * TR * nf * nf;
     return coeff;
   }
 
@@ -37,9 +37,9 @@ namespace apfel
   double beta3qcd(int const& nf)
   {
     const double coeff = 149753. / 6. + 3564. * zeta3
-      + ( - 1078361. / 162. - 6508. * zeta3 / 27. ) * nf
-      + ( 50065. / 162. + 6472. * zeta3 / 81 ) * nf * nf
-      + 1093. / 729. * nf * nf * nf;
+                         + ( - 1078361. / 162. - 6508. * zeta3 / 27. ) * nf
+                         + ( 50065. / 162. + 6472. * zeta3 / 81 ) * nf * nf
+                         + 1093. / 729. * nf * nf * nf;
     return coeff;
   }
 }

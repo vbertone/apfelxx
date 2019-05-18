@@ -46,8 +46,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsZM(Grid                const& g,
-													     std::vector<double> const& Thresholds,
-													     double              const& IntEps = 1e-5);
+                                                                                                             std::vector<double> const& Thresholds,
+                                                                                                             double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeFLNCObjectsZM precomputes the perturbative
@@ -59,8 +59,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsZM(Grid                const& g,
-													     std::vector<double> const& Thresholds,
-													     double              const& IntEps = 1e-5);
+                                                                                                             std::vector<double> const& Thresholds,
+                                                                                                             double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeF3NCObjectsZM precomputes the perturbative
@@ -72,8 +72,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3NCObjectsZM(Grid                const& g,
-													     std::vector<double> const& Thresholds,
-													     double              const& IntEps = 1e-5);
+                                                                                                             std::vector<double> const& Thresholds,
+                                                                                                             double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeF2CCPlusObjectsZM precomputes the perturbative
@@ -86,8 +86,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCPlusObjectsZM(Grid                const& g,
-														 std::vector<double> const& Thresholds,
-														 double              const& IntEps = 1e-5);
+                                                                                                                 std::vector<double> const& Thresholds,
+                                                                                                                 double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeF2CCMinusObjectsZM precomputes the perturbative
@@ -100,8 +100,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCMinusObjectsZM(Grid                const& g,
-														  std::vector<double> const& Thresholds,
-														  double              const& IntEps = 1e-5);
+                                                                                                                  std::vector<double> const& Thresholds,
+                                                                                                                  double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeFLCCPlusObjectsZM precomputes the perturbative
@@ -114,8 +114,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCPlusObjectsZM(Grid                const& g,
-														 std::vector<double> const& Thresholds,
-														 double              const& IntEps = 1e-5);
+                                                                                                                 std::vector<double> const& Thresholds,
+                                                                                                                 double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeFLCCMinusObjectsZM precomputes the perturbative
@@ -128,8 +128,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCMinusObjectsZM(Grid                const& g,
-														  std::vector<double> const& Thresholds,
-														  double              const& IntEps = 1e-5);
+                                                                                                                  std::vector<double> const& Thresholds,
+                                                                                                                  double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeF3CCPlusObjectsZM precomputes the perturbative
@@ -142,8 +142,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCPlusObjectsZM(Grid                const& g,
-														 std::vector<double> const& Thresholds,
-														 double              const& IntEps = 1e-5);
+                                                                                                                 std::vector<double> const& Thresholds,
+                                                                                                                 double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeF3CCMinusObjectsZM precomputes the perturbative
@@ -156,8 +156,8 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCMinusObjectsZM(Grid                const& g,
-														  std::vector<double> const& Thresholds,
-														  double              const& IntEps = 1e-5);
+                                                                                                                  std::vector<double> const& Thresholds,
+                                                                                                                  double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeF2NCObjectsMassive precomputes the
@@ -175,13 +175,13 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsMassive(Grid                const& g,
-														  std::vector<double> const& Masses,
-														  double              const& IntEps = 1e-5,
-														  int                 const& nxi    = 150,
-														  double              const& ximin  = 0.001,
-														  double              const& ximax  = 100000,
-														  int                 const& intdeg = 3,
-														  double              const& lambda = 0.0005);
+                                                                                                                  std::vector<double> const& Masses,
+                                                                                                                  double              const& IntEps = 1e-5,
+                                                                                                                  int                 const& nxi    = 150,
+                                                                                                                  double              const& ximin  = 0.001,
+                                                                                                                  double              const& ximax  = 100000,
+                                                                                                                  int                 const& intdeg = 3,
+                                                                                                                  double              const& lambda = 0.0005);
 
   /**
    * @brief The InitializeFLNCObjectsMassive precomputes the
@@ -199,13 +199,13 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsMassive(Grid                const& g,
-														  std::vector<double> const& Masses,
-														  double              const& IntEps = 1e-5,
-														  int                 const& nxi    = 150,
-														  double              const& ximin  = 0.001,
-														  double              const& ximax  = 100000,
-														  int                 const& intdeg = 3,
-														  double              const& lambda = 0.0005);
+                                                                                                                  std::vector<double> const& Masses,
+                                                                                                                  double              const& IntEps = 1e-5,
+                                                                                                                  int                 const& nxi    = 150,
+                                                                                                                  double              const& ximin  = 0.001,
+                                                                                                                  double              const& ximax  = 100000,
+                                                                                                                  int                 const& intdeg = 3,
+                                                                                                                  double              const& lambda = 0.0005);
 
   /**
    * @brief The InitializeF2NCObjectsMassiveZero precomputes the
@@ -223,13 +223,13 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsMassiveZero(Grid                const& g,
-														      std::vector<double> const& Masses,
-														      double              const& IntEps = 1e-5,
-														      int                 const& nxi    = 150,
-														      double              const& ximin  = 0.001,
-														      double              const& ximax  = 100000,
-														      int                 const& intdeg = 3,
-														      double              const& lambda = 0.0005);
+                                                                                                                      std::vector<double> const& Masses,
+                                                                                                                      double              const& IntEps = 1e-5,
+                                                                                                                      int                 const& nxi    = 150,
+                                                                                                                      double              const& ximin  = 0.001,
+                                                                                                                      double              const& ximax  = 100000,
+                                                                                                                      int                 const& intdeg = 3,
+                                                                                                                      double              const& lambda = 0.0005);
 
   /**
    * @brief The InitializeFLNCObjectsMassiveZero precomputes the
@@ -247,13 +247,13 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsMassiveZero(Grid                const& g,
-														      std::vector<double> const& Masses,
-														      double              const& IntEps = 1e-5,
-														      int                 const& nxi    = 150,
-														      double              const& ximin  = 0.001,
-														      double              const& ximax  = 100000,
-														      int                 const& intdeg = 3,
-														      double              const& lambda = 0.0005);
+                                                                                                                      std::vector<double> const& Masses,
+                                                                                                                      double              const& IntEps = 1e-5,
+                                                                                                                      int                 const& nxi    = 150,
+                                                                                                                      double              const& ximin  = 0.001,
+                                                                                                                      double              const& ximax  = 100000,
+                                                                                                                      int                 const& intdeg = 3,
+                                                                                                                      double              const& lambda = 0.0005);
   ///@}
 
   /**
@@ -271,13 +271,13 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
    * @param Couplings: the vector-valued function of (non-QCD) couplings
-   * @return a 
+   * @return A map of "Observable" objects, one for number of active flavours
    */
   std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-						   std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
-						   int                                                                                const& PerturbativeOrder,
-						   std::function<double(double const&)>                                               const& Alphas,
-						   std::function<std::vector<double>(double const&)>                                  const& Couplings);
+                                                   std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
+                                                   int                                                                                const& PerturbativeOrder,
+                                                   std::function<double(double const&)>                                               const& Alphas,
+                                                   std::function<std::vector<double>(double const&)>                                  const& Couplings);
 
   /**
    * @brief The StructureFunctionBuildNC class constructs a map of
@@ -287,13 +287,13 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
    * @param Couplings: the vector-valued function of (non-QCD) couplings
-   * @return a 
+   * @return A map of "Observable" objects, one for number of active flavours
    */
   //_____________________________________________________________________________
   std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-						   std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
-						   int                                                                                const& PerturbativeOrder,
-						   std::function<double(double const&)>                                               const& Alphas,
-						   std::function<std::vector<double>(double const&)>                                  const& Couplings);
+                                                   std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
+                                                   int                                                                                const& PerturbativeOrder,
+                                                   std::function<double(double const&)>                                               const& Alphas,
+                                                   std::function<std::vector<double>(double const&)>                                  const& Couplings);
   ///@}
 }

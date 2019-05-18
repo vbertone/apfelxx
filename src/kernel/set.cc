@@ -11,7 +11,8 @@
 
 #include <stdexcept>
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________
   template<class T>
   Set<T>::Set(ConvolutionMap const& Map, std::map<int,T> const& in):
@@ -30,55 +31,55 @@ namespace apfel {
     std::map<int,V> mmap;
     for (auto item = _map.GetRules().begin(); item != _map.GetRules().end(); item++)
       {
-	// If an element of the map with the same rules has already
-	// been computed, retrieve it and use it.
-	bool cycle = false;
-	for (auto it = _map.GetRules().begin(); it != item; it++)
-	  if (it->second == item->second)
-	    {
-	      mmap.insert({item->first,mmap.at(it->first)});
-	      cycle = true;
-	      break;
-	    }
-	if (cycle)
-	  continue;
+        // If an element of the map with the same rules has already
+        // been computed, retrieve it and use it.
+        bool cycle = false;
+        for (auto it = _map.GetRules().begin(); it != item; it++)
+          if (it->second == item->second)
+            {
+              mmap.insert({item->first,mmap.at(it->first)});
+              cycle = true;
+              break;
+            }
+        if (cycle)
+          continue;
 
-	// Get set of distributions.
-	const auto& dist = d.GetObjects();
+        // Get set of distributions.
+        const auto& dist = d.GetObjects();
 
-	// Start with the first object of the vector or rules.
-	// If it does not exist, continue.
+        // Start with the first object of the vector or rules.
+        // If it does not exist, continue.
         auto o = std::begin(item->second);
-	if (dist.count((*o).object) == 0)
-	  continue;
+        if (dist.count((*o).object) == 0)
+          continue;
         V result = _objects.at((*o).operand) * dist.at((*o).object);
 
-	// Multiply by the numerical coefficient only if it is
-	// different from one.
-	if((*o).coefficient != 1)
-	  result *= (*o).coefficient;
+        // Multiply by the numerical coefficient only if it is
+        // different from one.
+        if((*o).coefficient != 1)
+          result *= (*o).coefficient;
         o++;
 
-	// Continue with the following objects of the vector of rules.
+        // Continue with the following objects of the vector of rules.
         for (auto end = std::end(item->second); o != end; o++)
-	  {
-	    // If the distribution does not exist skip it.
-	    if (dist.count((*o).object) == 0)
-	      continue;
+          {
+            // If the distribution does not exist skip it.
+            if (dist.count((*o).object) == 0)
+              continue;
 
-	    // Multiply by the numerical coefficient only if it is
-	    // different from one.
-	    if((*o).coefficient == 0)
-	      continue;
-	    else if((*o).coefficient != 1)
-	      result += (*o).coefficient * _objects.at((*o).operand) * dist.at((*o).object);
-	    else
-	      result += _objects.at((*o).operand) * dist.at((*o).object);
-	  }
+            // Multiply by the numerical coefficient only if it is
+            // different from one.
+            if((*o).coefficient == 0)
+              continue;
+            else if((*o).coefficient != 1)
+              result += (*o).coefficient * _objects.at((*o).operand) * dist.at((*o).object);
+            else
+              result += _objects.at((*o).operand) * dist.at((*o).object);
+          }
         mmap.insert({item->first,result});
       }
 
-    return Set<V>{d.GetMap(),mmap};
+    return Set<V> {d.GetMap(),mmap};
   }
 
   //_________________________________________________________________________

@@ -12,31 +12,32 @@
 
 #include <stdexcept>
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________________
   AlphaQED::AlphaQED(double              const& AlphaRef,
-		     double              const& MuRef,
-		     std::vector<double> const& QuarkThresholds,
-		     std::vector<double> const& LeptThresholds,
-		     int                 const& pt,
-		     int                 const& nstep):
+                     double              const& MuRef,
+                     std::vector<double> const& QuarkThresholds,
+                     std::vector<double> const& LeptThresholds,
+                     int                 const& pt,
+                     int                 const& nstep):
     MatchedEvolution(AlphaRef, MuRef, ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds), nstep),
     _pt(pt)
   {
     // Beta function lambda function.
     _BetaFunction = [=] (int const& nfl, double const& a)-> double
-      {
-	const double Qr = ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds)[nfl-1] + eps8;
-	const int nf = NF(Qr, QuarkThresholds);
-	const int nl = NF(Qr, LeptThresholds);
-	double bt = 0, powa = a * a;
-	for (int i = 0; i <= _pt; i++)
-	  {
-	    bt -= powa * betaQED(i, nf, nl);
-	    powa *= a;
-	  }
-	return bt;
-      };
+    {
+      const double Qr = ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds)[nfl-1] + eps8;
+      const int nf = NF(Qr, QuarkThresholds);
+      const int nl = NF(Qr, LeptThresholds);
+      double bt = 0, powa = a * a;
+      for (int i = 0; i <= _pt; i++)
+        {
+          bt -= powa * betaQED(i, nf, nl);
+          powa *= a;
+        }
+      return bt;
+    };
   }
 
   //_________________________________________________________________________________

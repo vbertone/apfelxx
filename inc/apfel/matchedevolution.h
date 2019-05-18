@@ -37,9 +37,9 @@ namespace apfel
      * @param nsteps: number of steps of the ODE solver (default: 10)
      */
     MatchedEvolution(T                   const& ObjRef,
-		     double              const& MuRef,
-		     std::vector<double> const& Thresholds,
-		     int                 const& nsteps = 10);
+                     double              const& MuRef,
+                     std::vector<double> const& Thresholds,
+                     int                 const& nsteps = 10);
 
     /**
      * @brief Virtual function for the computation of the evolution.

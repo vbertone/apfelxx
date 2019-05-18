@@ -20,9 +20,9 @@ namespace apfel
   //_________________________________________________________________________
   template<class T>
   MatchedEvolution<T>::MatchedEvolution(T                   const& ObjRef,
-					double              const& MuRef,
-					std::vector<double> const& Thresholds,
-					int                 const& nsteps):
+                                        double              const& MuRef,
+                                        std::vector<double> const& Thresholds,
+                                        int                 const& nsteps):
     _ObjRef(ObjRef),
     _MuRef(MuRef),
     _Thresholds(Thresholds),
@@ -37,9 +37,9 @@ namespace apfel
     // Compute squared thresholds.
     for (auto const& th : Thresholds)
       {
-	const double th2 = pow(th,2);
-	_Thresholds2.push_back(th2);
-	_LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
+        const double th2 = pow(th,2);
+        _Thresholds2.push_back(th2);
+        _LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
       }
 
     // Sort the quark thresholds and logs.
@@ -65,8 +65,8 @@ namespace apfel
     const double dt = ( t1 - t0 ) / _nsteps;
     for (int k = 0; k < _nsteps; k++)
       {
-	Obj += dObj(t, Obj, dt);
-	t   += dt;
+        Obj += dObj(t, Obj, dt);
+        t   += dt;
       }
     return Obj;
   }
@@ -100,8 +100,8 @@ namespace apfel
     for (int inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
         vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
-	ti   = tf + (sgn ? 1 : -1) * eps8;  // Add "eps8" to make sure to be above the threshold
-	tf   = (sgn ? _LogThresholds2[std::min(inf+1,nff-1)] : _LogThresholds2[std::max(inf-2,nff-1)]);
+        ti   = tf + (sgn ? 1 : -1) * eps8;  // Add "eps8" to make sure to be above the threshold
+        tf   = (sgn ? _LogThresholds2[std::min(inf+1,nff-1)] : _LogThresholds2[std::max(inf-2,nff-1)]);
       }
     return EvolveObject(nff, ti, lmu2, vobj);
   }

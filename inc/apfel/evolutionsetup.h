@@ -2,7 +2,6 @@
 // APFEL++ 2017
 //
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
 #pragma once
@@ -52,7 +51,8 @@ namespace apfel
     ///@}
 
     /// Structure for the **subgrid** parameters
-    struct GridParameters {
+    struct GridParameters
+    {
       int    nx;                  //!< Number of nodes
       double xmin;                //!< Minimum value of x
       int    id;                  //!< Interpolation degree
@@ -98,10 +98,11 @@ namespace apfel
     /**
      * @brief the constructor
      */
+    // *INDENT-OFF*
     EvolutionSetup():
-    name("default"),
+      name("default"),
       Q0(sqrt(2)),
-      GridParameters{{100, 1e-5, 3, {}}, {60, 1e-1, 3, {}}, {50, 6e-1, 3, {}}, {50, 8e-1, 3, {}}},
+      GridParameters({100, 1e-5, 3, {}}, {60, 1e-1, 3, {}}, {50, 6e-1, 3, {}}, {50, 8e-1, 3, {}}),
       Locked(true),
       nQg(50), Qmin(1), Qmax(1000), InterDegreeQ(3), Lambda(0.25),
       PerturbativeOrder(2),
@@ -122,5 +123,6 @@ namespace apfel
       InSet(LHToyPDFs)
     {
     }
+    // *INDENT-ON*
   };
 }

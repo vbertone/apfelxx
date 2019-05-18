@@ -7,7 +7,8 @@
 
 #include "apfel/convolutionmap.h"
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________________
   ConvolutionMap::ConvolutionMap(std::string const& name):
     _name(name)

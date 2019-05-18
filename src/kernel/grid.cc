@@ -12,7 +12,8 @@
 #include <stdexcept>
 #include <algorithm>
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________________
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {
@@ -104,7 +105,7 @@ namespace apfel {
         int const nxg = _GlobalGrid[ig].nx();
         double xtrans;
         if (ig < ng-1)
-	  xtrans = _GlobalGrid[ig+1].xMin();
+          xtrans = _GlobalGrid[ig+1].xMin();
         else
           xtrans = 1 + 2 * eps12;
         for (int ix = 0; ix <= nxg; ix++)

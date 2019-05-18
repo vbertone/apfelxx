@@ -36,11 +36,11 @@ namespace apfel
      * @param nsteps: number of steps of the ODE solver
      */
     AlphaQED(double              const& AlphaRef,
-	     double              const& MuRef,
-	     std::vector<double> const& LeptThresholds,
-	     std::vector<double> const& QuarkThresholds,
-	     int                 const& pt,
-	     int                 const& nstep = 10);
+             double              const& MuRef,
+             std::vector<double> const& LeptThresholds,
+             std::vector<double> const& QuarkThresholds,
+             int                 const& pt,
+             int                 const& nstep = 10);
     ///@}
 
     /**

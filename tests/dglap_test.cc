@@ -75,12 +75,12 @@ int main()
 
   std::cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << std::endl;
   std::cout << "\n   x    "
-       << "   u-ubar   "
-       << "   d-dbar   "
-       << " 2(ubr+dbr) "
-       << "   c+cbar   "
-       << "    gluon   "
-       << std::endl;
+            << "   u-ubar   "
+            << "   d-dbar   "
+            << " 2(ubr+dbr) "
+            << "   c+cbar   "
+            << "    gluon   "
+            << std::endl;
 
   std::cout << "Direct Evolution:" << std::endl;
   for (auto const& x : xlha)
@@ -89,11 +89,11 @@ int main()
       std::cout << x;
       std::cout.precision(4);
       std::cout << "  " << (pdfs.at(2) - pdfs.at(-2)).Evaluate(x)
-		<< "  " << (pdfs.at(1) - pdfs.at(-1)).Evaluate(x)
-		<< "  " << 2 * (pdfs.at(-2) + pdfs.at(-1)).Evaluate(x)
-		<< "  " << (pdfs.at(4) + pdfs.at(-4)).Evaluate(x)
-		<< "  " << pdfs.at(0).Evaluate(x)
-		<< std::endl;
+                << "  " << (pdfs.at(1) - pdfs.at(-1)).Evaluate(x)
+                << "  " << 2 * (pdfs.at(-2) + pdfs.at(-1)).Evaluate(x)
+                << "  " << (pdfs.at(4) + pdfs.at(-4)).Evaluate(x)
+                << "  " << pdfs.at(0).Evaluate(x)
+                << std::endl;
     }
   std::cout << "\n";
 
@@ -104,11 +104,11 @@ int main()
       std::cout << x;
       std::cout.precision(4);
       std::cout << "  " << (oppdfs.at(2) - oppdfs.at(-2)).Evaluate(x)
-		<< "  " << (oppdfs.at(1) - oppdfs.at(-1)).Evaluate(x)
-		<< "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
-		<< "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
-		<< "  " << oppdfs.at(0).Evaluate(x)
-		<< std::endl;
+                << "  " << (oppdfs.at(1) - oppdfs.at(-1)).Evaluate(x)
+                << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
+                << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
+                << "  " << oppdfs.at(0).Evaluate(x)
+                << std::endl;
     }
   std::cout << "\n";
 
@@ -119,11 +119,11 @@ int main()
       std::cout << x;
       std::cout.precision(4);
       std::cout << "  " << (tpdfs.at(2) - tpdfs.at(-2)).Evaluate(x)
-		<< "  " << (tpdfs.at(1) - tpdfs.at(-1)).Evaluate(x)
-		<< "  " << 2 * (tpdfs.at(-2) + tpdfs.at(-1)).Evaluate(x)
-		<< "  " << (tpdfs.at(4) + tpdfs.at(-4)).Evaluate(x)
-		<< "  " << tpdfs.at(0).Evaluate(x)
-		<< std::endl;
+                << "  " << (tpdfs.at(1) - tpdfs.at(-1)).Evaluate(x)
+                << "  " << 2 * (tpdfs.at(-2) + tpdfs.at(-1)).Evaluate(x)
+                << "  " << (tpdfs.at(4) + tpdfs.at(-4)).Evaluate(x)
+                << "  " << tpdfs.at(0).Evaluate(x)
+                << std::endl;
     }
   std::cout << "\n";
 
@@ -135,11 +135,11 @@ int main()
       std::cout << x;
       std::cout.precision(4);
       std::cout << "  " << DistMap.at(2) - DistMap.at(-2)
-		<< "  " << DistMap.at(1) - DistMap.at(-1)
-		<< "  " << 2 * ( DistMap.at(-2) + DistMap.at(-1) )
-		<< "  " << DistMap.at(4) + DistMap.at(-4)
-		<< "  " << DistMap.at(0)
-		<< std::endl;
+                << "  " << DistMap.at(1) - DistMap.at(-1)
+                << "  " << 2 * ( DistMap.at(-2) + DistMap.at(-1) )
+                << "  " << DistMap.at(4) + DistMap.at(-4)
+                << "  " << DistMap.at(0)
+                << std::endl;
     }
   std::cout << "\n";
 

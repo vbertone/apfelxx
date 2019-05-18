@@ -22,16 +22,16 @@ int main()
   // Print comparison
   const std::vector<double> kv = {0.1, 0.2, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6};
   std::cout << "      k         "
-	    << "  analytic      "
-	    << "  numerical     "
-	    << "   ratio        "
-	    << std::endl;
+            << "  analytic      "
+            << "  numerical     "
+            << "   ratio        "
+            << std::endl;
   for (auto const& k : kv)
     std::cout << std::scientific << k << "\t"
-	      << kfunc(k) << "\t"
-	      << OgataObj.transform(rfunc, k) << "\t"
-	      << OgataObj.transform(rfunc, k) / kfunc(k) << "\t"
-	      << std::endl;
+              << kfunc(k) << "\t"
+              << OgataObj.transform(rfunc, k) << "\t"
+              << OgataObj.transform(rfunc, k) / kfunc(k) << "\t"
+              << std::endl;
 
   return 0;
 }

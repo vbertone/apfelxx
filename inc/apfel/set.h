@@ -20,7 +20,7 @@ namespace apfel
    */
   template<class T>
   class Set
-  {        
+  {
   public:
     /**
      * @brief The Set constructor.

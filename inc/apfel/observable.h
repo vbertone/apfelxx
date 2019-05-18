@@ -29,7 +29,7 @@ namespace apfel
      * @param Distributions: a Set<Distribution>-valued function returning the distributions
      */
     Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-	       std::function<Set<Distribution>(double const&)> const& Distributions);
+               std::function<Set<Distribution>(double const&)> const& Distributions);
 
     /**
      * @name Functions that evaluate the the observable at the scale

@@ -36,8 +36,8 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Effective charges.
-  std::function<std::vector<double>(double const&)> fBq = [=] (double const&) -> std::vector<double>{ return apfel::QCh2; };
-  std::function<std::vector<double>(double const&)> fDq = [=] (double const&) -> std::vector<double>{ return {0, 0, 0, 0, 0, 0}; };
+  std::function<std::vector<double>(double const&)> fBq = [=] (double const&) -> std::vector<double> { return apfel::QCh2; };
+  std::function<std::vector<double>(double const&)> fDq = [=] (double const&) -> std::vector<double> { return {0, 0, 0, 0, 0, 0}; };
 
   // Initialize QCD evolution objects
   const auto DglapObj = InitializeDglapObjectsQCD(g, Masses, Thresholds);
@@ -49,7 +49,7 @@ int main()
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
   // Evolved PDFs
-  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int,double>{ return TabulatedPDFs.EvaluateMapxQ(x,Q); };
+  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int,double> { return TabulatedPDFs.EvaluateMapxQ(x,Q); };
 
   // Initialize coefficient functions
   const auto F2Obj = InitializeF2NCObjectsZM(g, Thresholds);
@@ -90,48 +90,48 @@ int main()
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   std::cout << "    x   "
-       << "  F2light   "
-       << "  F2charm   "
-       << "  F2bottom  "
-       << "  F2total   "
-       << std::endl;
+            << "  F2light   "
+            << "  F2charm   "
+            << "  F2bottom  "
+            << "  F2total   "
+            << std::endl;
   for (auto const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
-	 << F2light.EvaluatexQ(x,Q)  << "  "
-	 << F2charm.EvaluatexQ(x,Q)  << "  "
-	 << F2bottom.EvaluatexQ(x,Q) << "  "
-	 << F2total.EvaluatexQ(x,Q)  << "  "
-	 << std::endl;
+              << F2light.EvaluatexQ(x,Q)  << "  "
+              << F2charm.EvaluatexQ(x,Q)  << "  "
+              << F2bottom.EvaluatexQ(x,Q) << "  "
+              << F2total.EvaluatexQ(x,Q)  << "  "
+              << std::endl;
   std::cout << std::endl;
 
   std::cout << "    x   "
-       << "  FLlight   "
-       << "  FLcharm   "
-       << "  FLbottom  "
-       << "  FLtotal   "
-       << std::endl;
-for (auto const& x : xlha)
+            << "  FLlight   "
+            << "  FLcharm   "
+            << "  FLbottom  "
+            << "  FLtotal   "
+            << std::endl;
+  for (auto const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
-	 << FLlight.EvaluatexQ(x,Q)  << "  "
-	 << FLcharm.EvaluatexQ(x,Q)  << "  "
-	 << FLbottom.EvaluatexQ(x,Q) << "  "
-	 << FLtotal.EvaluatexQ(x,Q)  << "  "
-	 << std::endl;
+              << FLlight.EvaluatexQ(x,Q)  << "  "
+              << FLcharm.EvaluatexQ(x,Q)  << "  "
+              << FLbottom.EvaluatexQ(x,Q) << "  "
+              << FLtotal.EvaluatexQ(x,Q)  << "  "
+              << std::endl;
   std::cout << std::endl;
 
   std::cout << "    x   "
-       << "  F3light   "
-       << "  F3charm   "
-       << "  F3bottom  "
-       << "  F3total   "
-       << std::endl;
-for (auto const& x : xlha)
+            << "  F3light   "
+            << "  F3charm   "
+            << "  F3bottom  "
+            << "  F3total   "
+            << std::endl;
+  for (auto const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
-	 << F3light.EvaluatexQ(x,Q)  << "  "
-	 << F3charm.EvaluatexQ(x,Q)  << "  "
-	 << F3bottom.EvaluatexQ(x,Q) << "  "
-	 << F3total.EvaluatexQ(x,Q)  << "  "
-	 << std::endl;
+              << F3light.EvaluatexQ(x,Q)  << "  "
+              << F3charm.EvaluatexQ(x,Q)  << "  "
+              << F3bottom.EvaluatexQ(x,Q) << "  "
+              << F3total.EvaluatexQ(x,Q)  << "  "
+              << std::endl;
   std::cout << std::endl;
 
   t.stop();

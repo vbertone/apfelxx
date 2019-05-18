@@ -29,9 +29,9 @@ int main()
       const double original = xg(ix);
       const double interpol = xgluon.Evaluate(ix);
       std::cout << ix << "  "
-		<< original << "  "
-		<< interpol << "  "
-		<< original / interpol<< std::endl;
+                << original << "  "
+                << interpol << "  "
+                << original / interpol<< std::endl;
     }
   std::cout << "\n";
 
@@ -41,9 +41,9 @@ int main()
       const double original = xg(ix);
       const double interpol = xgluon.Evaluate(ix,0);
       std::cout << ix << "  "
-		<< original << "  "
-		<< interpol << "  "
-		<< original / interpol<< std::endl;
+                << original << "  "
+                << interpol << "  "
+                << original / interpol<< std::endl;
     }
   std::cout << "\n";
 
@@ -53,9 +53,9 @@ int main()
       const double original = xg(ix);
       const double interpol = xgluon.Evaluate(ix,1);
       std::cout << ix << "  "
-		<< original << "  "
-		<< interpol << "  "
-		<< original / interpol<< std::endl;
+                << original << "  "
+                << interpol << "  "
+                << original / interpol<< std::endl;
     }
   std::cout << "\n";
 
@@ -65,9 +65,9 @@ int main()
       const double original = xg(ix);
       const double interpol = xgluon.Evaluate(ix,2);
       std::cout << ix << "  "
-		<< original << "  "
-		<< interpol << "  "
-		<< original / interpol<< std::endl;
+                << original << "  "
+                << interpol << "  "
+                << original / interpol<< std::endl;
     }
   std::cout << "\n";
 

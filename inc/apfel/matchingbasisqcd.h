@@ -38,23 +38,23 @@ namespace apfel
      * matching in the QCD evolution basis with nf active flavours.
      * @param nf: number of active flavours
      */
-  MatchingBasisQCD(int const& nf):
-    ConvolutionMap{"MatchingBasisQCD_" + std::to_string(nf)}
+    MatchingBasisQCD(int const& nf):
+      ConvolutionMap{"MatchingBasisQCD_" + std::to_string(nf)}
     {
       _rules[GLUON] = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1} };
       _rules[SIGMA] = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
       _rules[VALENCE] = { {PNS, VALENCE, 1} };
       for (int k = 1; k < 6; k++)
-	if (k < nf)
-	  {
-	    _rules[2*k+1] = { {PNS, 2*k+1, 1} };
-	    _rules[2*k+2] = { {PNS, 2*k+2, 1} };
-	  }
-	else
-	  {
-	    _rules[2*k+1] = { {4+k, SIGMA, 1}, {9+k, GLUON, 1} };
-	    _rules[2*k+2] = _rules[VALENCE];
-	  }
+        if (k < nf)
+          {
+            _rules[2*k+1] = { {PNS, 2*k+1, 1} };
+            _rules[2*k+2] = { {PNS, 2*k+2, 1} };
+          }
+        else
+          {
+            _rules[2*k+1] = { {4+k, SIGMA, 1}, {9+k, GLUON, 1} };
+            _rules[2*k+2] = _rules[VALENCE];
+          }
     };
   };
 
@@ -78,8 +78,8 @@ namespace apfel
      * matching in the QCD evolution basis with nf active flavours.
      * @param nf: number of active flavours
      */
-  MatchingOperatorBasisQCD(int const& nf):
-    ConvolutionMap{"MatchingOperatorBasisQCD_" + std::to_string(nf)}
+    MatchingOperatorBasisQCD(int const& nf):
+      ConvolutionMap{"MatchingOperatorBasisQCD_" + std::to_string(nf)}
     {
       _rules[GG]  = { {PGG, GG, 1}, {PGQ, QG, 1} };
       _rules[GQ]  = { {PGG, GQ, 1}, {PGQ, QQ, 1} };
@@ -87,18 +87,18 @@ namespace apfel
       _rules[QQ]  = { {PQG, GQ, 1}, {PQQ, QQ, 1} };
       _rules[VAL] = { {PNS, VAL, 1} };
       for (int k = 1; k < 6; k++)
-	if (k < nf)
-	  {
-	    _rules[3*k+2] = { {PNS, 3*k+2, 1} };
-	    _rules[3*k+3] = { {PNS, 3*k+3, 1} };
-	    _rules[3*k+4] = { {PNS, 3*k+4, 1} };
-	  }
-	else
-	  {
-	    _rules[3*k+2] = { {4+k, QQ, 1}, {9+k, GQ, 1} };
-	    _rules[3*k+3] = { {4+k, QG, 1}, {9+k, GG, 1} };
-	    _rules[3*k+4] = _rules[VAL];
-	  }
+        if (k < nf)
+          {
+            _rules[3*k+2] = { {PNS, 3*k+2, 1} };
+            _rules[3*k+3] = { {PNS, 3*k+3, 1} };
+            _rules[3*k+4] = { {PNS, 3*k+4, 1} };
+          }
+        else
+          {
+            _rules[3*k+2] = { {4+k, QQ, 1}, {9+k, GQ, 1} };
+            _rules[3*k+3] = { {4+k, QG, 1}, {9+k, GG, 1} };
+            _rules[3*k+4] = _rules[VAL];
+          }
     };
   };
   ///@}

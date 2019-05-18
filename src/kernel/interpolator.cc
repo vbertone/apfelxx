@@ -9,7 +9,8 @@
 
 #include <cmath>
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________________
   Interpolator::Interpolator(Grid const& gr):
     _grid(gr)

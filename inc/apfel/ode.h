@@ -36,6 +36,7 @@ namespace apfel
   std::function<U(double const&, U const&, double const&)>
   rk4(std::function<U(double const& t, U const& Obj)> const& f)
   {
+    // *INDENT-OFF*
     return
       [       f            ](double const& t, U const& y,  double const& dt) -> U{ return
       [t,y,dt,f            ](                 U const& dy1                 ) -> U{ return
@@ -47,6 +48,7 @@ namespace apfel
       dt * f( t + dt / 2, y + dy2 / 2 )     );} (
       dt * f( t + dt / 2, y + dy1 / 2 )     );} (
       dt * f( t         , y           )     );} ;
+    // *INDENT-ON*
   }
 
   /**

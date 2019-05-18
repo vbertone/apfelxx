@@ -16,12 +16,12 @@ namespace apfel
    * single term of a double object.
    */
   template <class V>
-    struct term
-    {
-      double coefficient;
-      V      object1;
-      V      object2;
-    };
+  struct term
+  {
+    double coefficient;
+    V      object1;
+    V      object2;
+  };
 
   /**
    * @brief The DoubleObject class is a collection of pairs of single

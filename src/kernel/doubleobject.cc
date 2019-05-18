@@ -39,16 +39,16 @@ namespace apfel
     std::vector<term<V>> vt;
     for (auto const& t : _terms)
       {
-	const double tc = t.coefficient;
-	for (auto const& s : tt)
-	  {
-	    const double sc = tc * s.coefficient;
-	    const auto o1 = t.object1 * s.object1;
-	    const auto o2 = t.object2 * s.object2;
-	    vt.push_back({sc, o1, o2});
-	  }
+        const double tc = t.coefficient;
+        for (auto const& s : tt)
+          {
+            const double sc = tc * s.coefficient;
+            const auto o1 = t.object1 * s.object1;
+            const auto o2 = t.object2 * s.object2;
+            vt.push_back({sc, o1, o2});
+          }
       }
-    return DoubleObject<V>{vt};
+    return DoubleObject<V> {vt};
   }
 
   //_________________________________________________________________________
@@ -91,9 +91,9 @@ namespace apfel
     double result = 0;
     for (auto const& t : _terms)
       if (t.coefficient == 1)
-	result += t.object1.Evaluate(x) * t.object2.Evaluate(z);
+        result += t.object1.Evaluate(x) * t.object2.Evaluate(z);
       else
-	result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
+        result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
     return result;
   }
 
@@ -105,14 +105,14 @@ namespace apfel
     std::vector<term<Operator>> vt;
     for (auto const& t : _terms)
       {
-	const double tc = t.coefficient;
-	for (auto const& s : tt)
-	  {
-	    const double sc = tc * s.coefficient;
-	    const auto o1 = t.object1 * s.object1;
-	    const auto o2 = t.object2 * s.object2;
-	    vt.push_back({sc, o1, o2});
-	  }
+        const double tc = t.coefficient;
+        for (auto const& s : tt)
+          {
+            const double sc = tc * s.coefficient;
+            const auto o1 = t.object1 * s.object1;
+            const auto o2 = t.object2 * s.object2;
+            vt.push_back({sc, o1, o2});
+          }
       }
     // Clear "_terms" and equal it to "vt".
     _terms.clear();

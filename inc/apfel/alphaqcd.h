@@ -37,11 +37,11 @@ namespace apfel
      * @param nsteps: number of steps of the ODE solver
      */
     AlphaQCD(double              const& AlphaRef,
-	     double              const& MuRef,
-	     std::vector<double> const& Masses,
-	     std::vector<double> const& Thresholds,
-	     int                 const& pt,
-	     int                 const& nstep = 10);
+             double              const& MuRef,
+             std::vector<double> const& Masses,
+             std::vector<double> const& Thresholds,
+             int                 const& pt,
+             int                 const& nstep = 10);
 
     /**
      * @brief AlphaQCD constructor.
@@ -52,10 +52,10 @@ namespace apfel
      * @note This constructor assumes that masses and thresholds coincide.
      */
     AlphaQCD(double              const& AlphaRef,
-	     double              const& MuRef,
-	     std::vector<double> const& Masses,
-	     int                 const& pt,
-	     int                 const& nsteps = 10);
+             double              const& MuRef,
+             std::vector<double> const& Masses,
+             int                 const& pt,
+             int                 const& nsteps = 10);
     ///@}
 
     /**

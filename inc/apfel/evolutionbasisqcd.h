@@ -37,23 +37,23 @@ namespace apfel
      * evolution in the QCD evolution basis with nf active flavours.
      * @param nf: number of active flavours
      */
-  EvolutionBasisQCD(int const& nf):
-    ConvolutionMap{"EvolutionBasisQCD_" + std::to_string(nf)}
+    EvolutionBasisQCD(int const& nf):
+      ConvolutionMap{"EvolutionBasisQCD_" + std::to_string(nf)}
     {
       _rules[GLUON]   = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1} };
       _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
       _rules[VALENCE] = { {PNSV, VALENCE, 1} };
       for (int k = 1; k < 6; k++)
-	if (k < nf)
-	  {
-	    _rules[2*k+1] = { {PNSP, 2*k+1, 1} };
-	    _rules[2*k+2] = { {PNSM, 2*k+2, 1} };
-	  }
-	else
-	  {
-	    _rules[2*k+1] = _rules[SIGMA];
-	    _rules[2*k+2] = _rules[VALENCE];
-	  }
+        if (k < nf)
+          {
+            _rules[2*k+1] = { {PNSP, 2*k+1, 1} };
+            _rules[2*k+2] = { {PNSM, 2*k+2, 1} };
+          }
+        else
+          {
+            _rules[2*k+1] = _rules[SIGMA];
+            _rules[2*k+2] = _rules[VALENCE];
+          }
     };
   };
 
@@ -78,8 +78,8 @@ namespace apfel
      * flavours.
      * @param nf: number of active flavours
      */
-  EvolutionOperatorBasisQCD(int const& nf):
-    ConvolutionMap{"EvolutionOperatorBasisQCD_" + std::to_string(nf)}
+    EvolutionOperatorBasisQCD(int const& nf):
+      ConvolutionMap{"EvolutionOperatorBasisQCD_" + std::to_string(nf)}
     {
       _rules[GG]  = { {PGG, GG, 1}, {PGQ, QG, 1} };
       _rules[GQ]  = { {PGG, GQ, 1}, {PGQ, QQ, 1} };
@@ -87,18 +87,18 @@ namespace apfel
       _rules[QQ]  = { {PQG, GQ, 1}, {PQQ, QQ, 1} };
       _rules[VAL] = { {PNSV, VAL, 1} };
       for (int k = 1; k < 6; k++)
-	if (k < nf)
-	  {
-	    _rules[3*k+2] = { {PNSP, 3*k+2, 1} };
-	    _rules[3*k+3] = { {PNSP, 3*k+3, 1} };
-	    _rules[3*k+4] = { {PNSM, 3*k+4, 1} };
-	  }
-	else
-	  {
-	    _rules[3*k+2] = _rules[QQ];
-	    _rules[3*k+3] = _rules[QG];
-	    _rules[3*k+4] = _rules[VAL];
-	  }
+        if (k < nf)
+          {
+            _rules[3*k+2] = { {PNSP, 3*k+2, 1} };
+            _rules[3*k+3] = { {PNSP, 3*k+3, 1} };
+            _rules[3*k+4] = { {PNSM, 3*k+4, 1} };
+          }
+        else
+          {
+            _rules[3*k+2] = _rules[QQ];
+            _rules[3*k+3] = _rules[QG];
+            _rules[3*k+4] = _rules[VAL];
+          }
     };
   };
 
@@ -123,23 +123,23 @@ namespace apfel
      * flavours.
      * @param nf: number of active flavours
      */
-  MatchEvolOperatorBasisQCD(int const& nf):
-    ConvolutionMap{"MatchEvolOperatorBasisQCD_" + std::to_string(nf)}
+    MatchEvolOperatorBasisQCD(int const& nf):
+      ConvolutionMap{"MatchEvolOperatorBasisQCD_" + std::to_string(nf)}
     {
       _rules[GLUON]   = { {GG, GLUON, 1}, {GQ, SIGMA, 1} };
       _rules[SIGMA]   = { {QG, GLUON, 1}, {QQ, SIGMA, 1} };
       _rules[VALENCE] = { {VAL, VALENCE, 1} };
       for (int k = 1; k < 6; k++)
-	if (k < nf)
-	  {
-	    _rules[2*k+1] = { {3*k+2, 2*k+1, 1} };
-	    _rules[2*k+2] = { {3*k+4, 2*k+2, 1} };
-	  }
-	else
-	  {
-	    _rules[2*k+1] = { {3*k+2, SIGMA, 1}, {3*k+3, GLUON, 1} };
-	    _rules[2*k+2] = { {3*k+4, VALENCE, 1} };
-	  }
+        if (k < nf)
+          {
+            _rules[2*k+1] = { {3*k+2, 2*k+1, 1} };
+            _rules[2*k+2] = { {3*k+4, 2*k+2, 1} };
+          }
+        else
+          {
+            _rules[2*k+1] = { {3*k+2, SIGMA, 1}, {3*k+3, GLUON, 1} };
+            _rules[2*k+2] = { {3*k+4, VALENCE, 1} };
+          }
     };
   };
   ///@}

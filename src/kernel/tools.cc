@@ -20,9 +20,9 @@ namespace apfel
     int nf = 0;
     for (auto const& v : Thresholds)
       if (Q > v)
-	nf++;
+        nf++;
       else
-	break;
+        break;
     return nf;
   }
 
@@ -54,26 +54,26 @@ namespace apfel
     double PZ2;
     if (virt)
       {
-	PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
-	PZ2 = pow(Q2,2) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / pow(4 * S2ThW * ( 1 - S2ThW ),2);
+        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
+        PZ2 = pow(Q2,2) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / pow(4 * S2ThW * ( 1 - S2ThW ),2);
       }
     else
       {
-	PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
-	PZ2 = PZ * PZ;
+        PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
+        PZ2 = PZ * PZ;
       }
 
     // Build electroweak charges
     std::vector<double> Charges(6, 0.);
     if (sel < 0 || sel > 5)
       for (auto i = 0; i < 6; i++)
-	Charges[i] = apfel::QCh2[i]
-	  - 2 * apfel::QCh[i] * Vq[i] * Ve * PZ
-	  + ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
+        Charges[i] = apfel::QCh2[i]
+                     - 2 * apfel::QCh[i] * Vq[i] * Ve * PZ
+                     + ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
     else
       Charges[sel] = apfel::QCh2[sel]
-	- 2 * apfel::QCh[sel] * Vq[sel] * Ve * PZ
-	+ ( Ve * Ve + Ae * Ae ) * ( Vq[sel] * Vq[sel] + Aq[sel] * Aq[sel] ) * PZ2;
+                     - 2 * apfel::QCh[sel] * Vq[sel] * Ve * PZ
+                     + ( Ve * Ve + Ae * Ae ) * ( Vq[sel] * Vq[sel] + Aq[sel] * Aq[sel] ) * PZ2;
 
     return Charges;
   }

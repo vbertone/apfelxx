@@ -2,19 +2,22 @@
 // APFEL++ 2017
 //
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
 #include "apfel/rotations.h"
 
-namespace apfel {
+namespace apfel
+{
   // Rotation matrix.
-  const double RotQCDEvToPhys[6][6] = {{1./12., -1./4., 1./12., 1./24.,  1./40.,  1./60.},    // d
-				       {1./12.,  1./4., 1./12., 1./24.,  1./40.,  1./60.},    // u
-				       {1./12.,     0., -1./6., 1./24.,  1./40.,  1./60.},    // s
-				       {1./12.,     0.,     0., -1./8.,  1./40.,  1./60.},    // c
-				       {1./12.,     0.,     0.,     0., -1./10.,  1./60.},    // b
-				       {1./12.,     0.,     0.,     0.,      0., -1./12.}};   // t
+  const double RotQCDEvToPhys[6][6] =
+  {
+    {1./12., -1./4., 1./12., 1./24.,  1./40.,  1./60.},    // d
+    {1./12.,  1./4., 1./12., 1./24.,  1./40.,  1./60.},    // u
+    {1./12.,     0., -1./6., 1./24.,  1./40.,  1./60.},    // s
+    {1./12.,     0.,     0., -1./8.,  1./40.,  1./60.},    // c
+    {1./12.,     0.,     0.,     0., -1./10.,  1./60.},    // b
+    {1./12.,     0.,     0.,     0.,      0., -1./12.}     // t
+  };
 
   //_____________________________________________________________________________
   std::map<int,double> PhysToQCDEv(std::map<int,double> const& InPhysMap)
@@ -30,7 +33,7 @@ namespace apfel {
     // Quarks (Fill in with zero if they don't exist).
     for (int i = -6; i <= 6; i++)
       if (PhysMap.find(i) == PhysMap.end())
-	PhysMap[i] = 0;
+        PhysMap[i] = 0;
 
     // Fill in map in the QCD evolution basis. It attumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
@@ -116,13 +119,13 @@ namespace apfel {
     // Perform the rotation.
     for (int i = 1; i <= 6; i++)
       {
-	PhysMap[i]  = 0;
-	PhysMap[-i] = 0;
-	  for (int j = 1; j <= 6; j++)
-	    {
-	      PhysMap[i]  += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
-	      PhysMap[-i] += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
-	    }
+        PhysMap[i]  = 0;
+        PhysMap[-i] = 0;
+        for (int j = 1; j <= 6; j++)
+          {
+            PhysMap[i]  += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+            PhysMap[-i] += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+          }
       }
     return PhysMap;
   }
@@ -139,15 +142,15 @@ namespace apfel {
     // Perform the rotation.
     for (int i = 1; i <= 6; i++)
       {
-	Distribution Td = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
-	Distribution Vd = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
-	for (int j = 2; j <= 6; j++)
-	  {
-	    Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
-	    Vd += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
-	  }
-	PhysMap.insert({i,Td});
-	PhysMap.insert({-i,Vd});
+        Distribution Td = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
+        Distribution Vd = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
+        for (int j = 2; j <= 6; j++)
+          {
+            Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+            Vd += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+          }
+        PhysMap.insert({i,Td});
+        PhysMap.insert({-i,Vd});
       }
     return PhysMap;
   }

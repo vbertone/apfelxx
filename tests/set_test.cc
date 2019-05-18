@@ -70,15 +70,15 @@ int main()
   t.start();
   const apfel::Set<apfel::Distribution> Product = Splittings.at(5) * PDFs;
   std::cout << "(Splitting * PDFs)[GLUON](x=0.1) = "
-       << Product.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
+            << Product.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
 
   const apfel::Set<apfel::Distribution> Product2 = 3 * Splittings.at(5) * PDFs;
   std::cout << "(3 * Splitting * PDFs)[GLUON](x=0.1) = "
-       << Product2.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
+            << Product2.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
 
   const apfel::Set<apfel::Distribution> Sum = ( Splittings.at(5) + 2 * Splittings.at(5) ) * PDFs;
   std::cout << "[(Splitting * PDFs)[GLUON] + 2 * (Splitting * PDFs)[GLUON]](x=0.1) = "
-       << Sum.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
+            << Sum.at(apfel::EvolutionBasisQCD::GLUON).Evaluate(0.1) << std::endl;
   t.stop();
 
   std::cout << "\nTotal ";

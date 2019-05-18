@@ -31,7 +31,7 @@ namespace apfel
   {
     return 4 * CF * log( 1 - x ) + 3 * CF;
   }
-  
+
   //_________________________________________________________________________________
   P0qg::P0qg():
     Expression()
@@ -90,11 +90,11 @@ namespace apfel
     const double pqqmx = 2 / ( 1 + x ) - 1 + x;
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double gqq1  =
-      + 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
+      + 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 )
       + 4 * CA * CF * ( ( 67 / 18. + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
-			+ 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
+                        + 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
       + 4 * CF * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - 5 * ( 1 - x )
-			- lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
+                        - lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
       + 4 * CF * ( CF - CA / 2 ) * ( 2 * pqqmx * S2x + 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) );
     const double gqq1l = _a2 / ( 1 - x );
     const double x1nspa = gqq1 - gqq1l;
@@ -127,11 +127,11 @@ namespace apfel
     const double pqqmx = 2 / ( 1 + x ) - 1 + x;
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double gqq1  =
-      + 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 ) 
+      + 2 * CF * _nf * ( ( - 10 / 9. - 2 * lnx / 3 ) * pqq - 4 * ( 1 - x ) / 3 )
       + 4 * CA * CF * ( ( 67 / 18. + 11 * lnx / 6 + lnx2 / 2 - Pi2 / 6 ) * pqq
-			+ 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
+                        + 20 * ( 1 - x ) / 3 + lnx * ( 1 + x ) )
       + 4 * CF * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - 5 * ( 1 - x )
-			- lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
+                        - lnx2 * ( 1 + x ) / 2 - lnx * ( 1.5 + 7 * x / 2 ) )
       - 4 * CF * ( CF - CA / 2 ) * ( 2 * pqqmx * S2x + 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) );
     const double gqq1l = _a2 / ( 1 - x );
     const double x1nsma = gqq1 - gqq1l;
@@ -150,8 +150,8 @@ namespace apfel
     const double lnx2 = lnx * lnx;
     const double x1psa =
       _nf * CF * ( - 8 + 24 * x - 224 / 9. * x * x + 80 / 9. / x
-		   + ( 4 + 20 * x ) * lnx + 32 / 3. * x * x * lnx
-		   - ( 4 + 4 * x ) * lnx2 );
+                   + ( 4 + 20 * x ) * lnx + 32 / 3. * x * x * lnx
+                   - ( 4 + 4 * x ) * lnx2 );
     return x1psa;
   }
 
@@ -171,11 +171,11 @@ namespace apfel
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double x1qga =
       + 2 * CF * _nf * ( 4  + 4 * ln1mx + ( 10 - 4 * ( ln1mx - lnx ) + 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 2 * Pi2 / 3 ) * pqg
-			 - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) - 9 * x )
+                         - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) - 9 * x )
       + 2 * CA * _nf * ( 182 / 9. - 4 * ln1mx
-			 + ( - 218 / 9. + 4 * ln1mx - 2 * ln1mx * ln1mx + 44 * lnx / 3 - lnx2 + Pi2 / 3 ) * pqg
-			 + 2 * pqgmx * S2x + 40 / ( 9 * x ) + 14 * x / 9 - lnx2 * ( 2 + 8 * x )
-			 + lnx * ( - 38 / 3. + 136 * x / 3 ) );
+                         + ( - 218 / 9. + 4 * ln1mx - 2 * ln1mx * ln1mx + 44 * lnx / 3 - lnx2 + Pi2 / 3 ) * pqg
+                         + 2 * pqgmx * S2x + 40 / ( 9 * x ) + 14 * x / 9 - lnx2 * ( 2 + 8 * x )
+                         + lnx * ( - 38 / 3. + 136 * x / 3 ) );
     return x1qga;
   }
 
@@ -195,10 +195,10 @@ namespace apfel
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double x1gqa =
       + 2 * CF * _nf * ( - ( 20 / 9. + 4 * ln1mx / 3 ) * pgq - 4 * x / 3 )
-      + 4 * CF * CF  * ( - 2.5 - ( 3 * ln1mx + ln1mx * ln1mx ) * pgq - lnx2 * ( 1 - x / 2 ) - 7 * x / 2 
-			 - 2 * ln1mx * x + lnx * ( 2 + 7 * x / 2 ) )
-      + 4 * CA * CF  * ( 28 / 9. + pgq * ( 0.5 + 11 * ln1mx / 3 + ln1mx * ln1mx - 2 * ln1mx * lnx + lnx2 / 2 - Pi2 / 6 ) + pgqmx * S2x 
-			 + 65 * x / 18 + 2 * ln1mx * x + 44 * x * x / 9 + lnx2 * ( 4 + x ) - lnx * ( 12 + 5 * x + 8 * x * x / 3 ) );
+      + 4 * CF * CF  * ( - 2.5 - ( 3 * ln1mx + ln1mx * ln1mx ) * pgq - lnx2 * ( 1 - x / 2 ) - 7 * x / 2
+                         - 2 * ln1mx * x + lnx * ( 2 + 7 * x / 2 ) )
+      + 4 * CA * CF  * ( 28 / 9. + pgq * ( 0.5 + 11 * ln1mx / 3 + ln1mx * ln1mx - 2 * ln1mx * lnx + lnx2 / 2 - Pi2 / 6 ) + pgqmx * S2x
+                         + 65 * x / 18 + 2 * ln1mx * x + 44 * x * x / 9 + lnx2 * ( 4 + x ) - lnx * ( 12 + 5 * x + 8 * x * x / 3 ) );
     return x1gqa;
   }
 
@@ -221,8 +221,8 @@ namespace apfel
       + 2 * CF * _nf * ( - 16 + 4 / ( 3 * x ) + 8 * x + ( 20 * x * x ) / 3 - lnx2 * ( 2 + 2 * x ) - lnx * ( 6 + 10 * x ) )
       + 2 * CA * _nf * ( 2 - 20 * pgg / 9 - 2 * x - 4 * lnx * ( 1 + x ) / 3 + 26 * ( - 1 / x + x * x ) / 9 )
       + 4 * CA *  CA * ( pgg * ( 67 / 9. - 4 * ln1mx * lnx + lnx2 - Pi2 / 3 ) + 2 * pggmx * S2x
-			 + 27 * ( 1 - x ) / 2 + 4 * lnx2 * ( 1 + x ) + 67 * ( - 1 / x + x * x ) / 9
-			 - lnx * ( 25 / 3. - 11 * x / 3 + 44 * x * x / 3 ) );
+                         + 27 * ( 1 - x ) / 2 + 4 * lnx2 * ( 1 + x ) + 67 * ( - 1 / x + x * x ) / 9
+                         - lnx * ( 25 / 3. - 11 * x / 3 + 44 * x * x / 3 ) );
     const double ggg1l = _a2g / ( 1 - x );
     const double x1gga = ggg1 - ggg1l;
     return x1gga;
@@ -263,10 +263,10 @@ namespace apfel
       + 294.9 * dl_2 + 1258. * dl
       + 714.1 * dl1 + dl * dl1 * ( 563.9 + 256.8 * dl )
       + _nf * ( -197.0 + 381.1 * x + 72.94 * x_2 + 44.79 * x_3
-		- 192. * d81 * dl_3  - 2608. * d81 * dl_2 - 152.6 * dl
-		- 5120. * d81 * dl1 - 56.66 * dl * dl1 - 1.497 * x * dl_3 )
+                - 192. * d81 * dl_3  - 2608. * d81 * dl_2 - 152.6 * dl
+                - 5120. * d81 * dl1 - 56.66 * dl * dl1 - 1.497 * x * dl_3 )
       + _nf * _nf * ( 32. * x * dl / ( 1 - x ) * ( 3. * dl + 10. ) + 64.
-		      + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1 - x ) ) * d81;
+                      + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1 - x ) ) * d81;
     return p2nspa;
   }
   double P2nsp::Singular(double const& x) const
@@ -305,10 +305,10 @@ namespace apfel
       + 399.2 * dl_2 + 1465.2 * dl
       + 714.1 * dl1 + dl * dl1 * ( 684.0 + 251.2 * dl )
       + _nf * ( -216.62 + 406.5 * x + 77.89 * x_2 + 34.76 * x_3
-		- 256. * d81 * dl_3  - 3216. * d81 * dl_2 - 172.69 * dl
-		- 5120. * d81 * dl1 - 65.43 * dl * dl1 - 1.136 * x * dl_3 )
+                - 256. * d81 * dl_3  - 3216. * d81 * dl_2 - 172.69 * dl
+                - 5120. * d81 * dl1 - 65.43 * dl * dl1 - 1.136 * x * dl_3 )
       + _nf * _nf * ( 32.* x * dl / ( 1 - x ) * ( 3. * dl + 10. ) + 64.
-		      + ( 48.* dl_2 + 352.* dl + 384. ) * ( 1.-x ) ) * d81;
+                      + ( 48.* dl_2 + 352.* dl + 384. ) * ( 1.-x ) ) * d81;
     return p2nsma;
   }
   double P2nsm::Singular(double const& x) const
@@ -450,8 +450,8 @@ namespace apfel
       - 49.68 * dl * dl1;
     const double p2gq2 =
       ( 64. * ( - 1. / x + 1. + 2. * x )
-	+ 320. * dl1 * ( 1. / x - 1. + 0.8 * x )
-	+ 96. * dl1_2 * ( 1. / x - 1. + 0.5 * x ) ) / 27.;
+        + 320. * dl1 * ( 1. / x - 1. + 0.8 * x )
+        + 96. * dl1_2 * ( 1. / x - 1. + 0.5 * x ) ) / 27.;
     const double p2gqa = ( p2gq0 + _nf * ( p2gq1 + _nf * p2gq2 ) );
     return p2gqa;
   }
@@ -533,15 +533,15 @@ namespace apfel
     const double dlm3 = dlm2 * dlm;
 
     // Leading large-n_c, nf^0 and nf^1, parametrized.
-    const double p3nsa0 = 
+    const double p3nsa0 =
       2.5e4 * ( omy * ( 3.5254 + 8.6935 * y - 1.5051 * y2 + 1.8300 * y3 )
-		+ 11.883 * y * dl - 0.09066 * y * dl2 + 11.410 * omy * dlm + 13.376 * dl * dlm )
+                + 11.883 * y * dl - 0.09066 * y * dl2 + 11.410 * omy * dlm + 13.376 * dl * dlm )
       + 5.167133e4 * dl + 1.712095e4 * dl2 + 2.863226e3 * dl3 + 2.978255e2 * dl4
       + 1.6e1 * dl5 + 5e-1 * dl6 - 2.973385e4 + 1.906980e4 * dlm;
     const double p3nsa1 =
       2.5e4* ( omy * ( - 0.74077 + 1.4860 * y - 0.23631 * y2 + 0.31584 * y3 )
-	       + 2.5251 * omy * dlm + 2.5203 * dl * dlm + 2.2242 * y * dl
-	       - 0.02460 * y * dl2 + 0.00310 * y * dl3 )
+               + 2.5251 * omy * dlm + 2.5203 * dl * dlm + 2.2242 * y * dl
+               - 0.02460 * y * dl2 + 0.00310 * y * dl3 )
       - 9.239374e3 * dl - 2.917312e3 * dl2 - 4.305308e2 * dl3 - 3.6e1 * dl4
       - 4. / 3. * dl5 + 8.115605e3 - 3.079761e3 * dlm;
 
@@ -549,11 +549,11 @@ namespace apfel
     const double p3npa01 =
       3948.16 * omy - 2464.61 * ( 2 * y - y2 ) * omy - 1839.44 * dl2 - 402.156 * dl3
       - 1777.27 * dlm2 * omy - 204.183 * dlm3 * omy + 507.152 - 5.587553e+1 * dl4
-       - 2.831276 * dl5 - 1.488340e-1 * dl6 - 2.601749e+3 - 2.118867e+3 * dlm;
+      - 2.831276 * dl5 - 1.488340e-1 * dl6 - 2.601749e+3 - 2.118867e+3 * dlm;
     const double p3npa02 =
       ( 8698.39 - 10490.47 * y ) * y * omy + 1389.73 * dl + 189.576 * dl2
       - 173.936 * dlm2 * omy + 223.078 * dlm3 * omy + 505.209 - 5.587553e+1 * dl4
-       - 2.831276 * dl5 - 1.488340e-1 * dl6 - 2.601749e+3 - 2.118867e+3 * dlm;
+      - 2.831276 * dl5 - 1.488340e-1 * dl6 - 2.601749e+3 - 2.118867e+3 * dlm;
 
     const double p3npa11 =
       ( - 1116.34 + 1071.24 * y ) * y * omy - 59.3041 * dl2 - 8.4620 * dl3
@@ -567,8 +567,8 @@ namespace apfel
     // nf^2 (parametrized) and nf^3 (exact)
     const double p3nspa2 =
       2.5e2 *  ( omy * ( 3.0008 + 0.8619 * y - 0.12411 * y2 + 0.31595 * y3 )
-		 - 0.37529 * y * dl - 0.21684 * y * dl2 - 0.02295 * y * dl3
-		 + 0.03394 * omy * dlm + 0.40431  * dl * dlm )
+                 - 0.37529 * y * dl - 0.21684 * y * dl2 - 0.02295 * y * dl3
+                 + 0.03394 * omy * dlm + 0.40431  * dl * dlm )
       + 3.930056e+2 * dl + 1.125705e+2 * dl2 + 1.652675e+1 * dl3
       + 7.901235e-1 * dl4 - 3.760092e+2 + 2.668861e+1 * dlm;
     const double p3nsa3  =
@@ -590,8 +590,8 @@ namespace apfel
     const double d1 = 1 / ( 1 - y );
     const double a4qi =
       2.120902e+4
-      - 5.179372e+3 * _nf 
-      + 1.955772e+2 * _nf * _nf 
+      - 5.179372e+3 * _nf
+      + 1.955772e+2 * _nf * _nf
       + 3.272344 * _nf * _nf * _nf;
     const double a4ap1 = - 507.152 + 7.33927 * _nf;
     const double a4ap2 = - 505.209 + 7.53662 * _nf;
@@ -615,9 +615,9 @@ namespace apfel
     const double a4ap2 = - 505.209 + 7.53662 * _nf;
 
     const double b4qi =
-      2.579609e+4 + 0.08 
+      2.579609e+4 + 0.08
       - ( 5.818637e+3 + 0.97 ) * _nf
-      + ( 1.938554e+2 + 0.0037)* _nf * _nf 
+      + ( 1.938554e+2 + 0.0037)* _nf * _nf
       + 3.014982 * _nf * _nf * _nf;
     const double b4ap1 = - 2405.03 + 267.965 * _nf;
     const double b4ap2 = - 2394.47 + 269.028 * _nf;
@@ -627,8 +627,8 @@ namespace apfel
     else if (_imod == 2)
       return ( a4qi + a4ap1 ) * dl1 + b4qi + b4ap2;
     else
-      return ( a4qi + 0.5 * ( a4ap1 + a4ap2 ) ) * dl1 
-	+ b4qi + 0.5 * ( b4ap1 + b4ap2 );
+      return ( a4qi + 0.5 * ( a4ap1 + a4ap2 ) ) * dl1
+             + b4qi + 0.5 * ( b4ap1 + b4ap2 );
   }
 
   //_________________________________________________________________________________
@@ -656,13 +656,13 @@ namespace apfel
 
     const double p3nsa0  =
       2.5e+4 * ( omy * ( 3.5254 + 8.6935 * y - 1.5051 * y2 + 1.8300 * y3 )
-		 + 11.883 * y * dl - 0.09066 * y * dl2 + 11.410 * omy * dlm + 13.376  * dl * dlm )
+                 + 11.883 * y * dl - 0.09066 * y * dl2 + 11.410 * omy * dlm + 13.376  * dl * dlm )
       + 5.167133e+4 * dl + 1.712095e+4 * dl2 + 2.863226e+3 * dl3 + 2.978255e+2 * dl4
       + 1.6e+1 * dl5 + 5.e-1 * dl6 - 2.973385e+4 + 1.906980e+4 * dlm;
     const double p3nsa1  =
       2.5e+4 * ( omy * ( - 0.74077 + 1.4860 * y - 0.23631 * y2 + 0.31584 * y3 )
-		 + 2.5251 * omy * dlm + 2.5203 * dl * dlm + 2.2242 * y * dl
-		 - 0.02460 * y * dl2 + 0.00310 * y * dl3 )
+                 + 2.5251 * omy * dlm + 2.5203 * dl * dlm + 2.2242 * y * dl
+                 - 0.02460 * y * dl2 + 0.00310 * y * dl3 )
       - 9.239374e+3 * dl - 2.917312e+3 * dl2 - 4.305308e+2 *dl3 - 3.6e+1 * dl4
       - 4. / 3. * dl5 + 8.115605e+3 - 3.079761e+3 * dlm;
 
@@ -686,8 +686,8 @@ namespace apfel
     // nf^2 (parametrized) and nf^3 (exact)
     const double p3nsma2 =
       2.5e+2 * ( omy * ( 3.2206 + 1.7507 * y + 0.13281 * y2 + 0.45969 * y3 )
-		 + 1.5641 * y * dl - 0.37902 * y * dl2 - 0.03248 * y *dl3
-		 + 2.7511 * omy * dlm + 3.2709  * dl * dlm )
+                 + 1.5641 * y * dl - 0.37902 * y * dl2 - 0.03248 * y *dl3
+                 + 2.7511 * omy * dlm + 3.2709  * dl * dlm )
       + 4.378810e+2 * dl + 1.282948e+2 * dl2 + 1.959945e+1 * dl3
       + 9.876543e-1 * dl4 - 3.760092e+2 + 2.668861e+1 * dlm;
     const double p3nsa3  =
@@ -709,8 +709,8 @@ namespace apfel
     const double d1 = 1 / ( 1 - y );
 
     const double a4qi  =
-      2.120902e+4 
-      - 5.179372e+3 * _nf 
+      2.120902e+4
+      - 5.179372e+3 * _nf
       + 1.955772e+2 * _nf * _nf
       + 3.272344e+0 * _nf * _nf * _nf;
     const double a4ap1 = - 511.228 + 7.08645 * _nf;
@@ -728,17 +728,17 @@ namespace apfel
     const double dl1 = log(1-y);
 
     const double a4qi  =
-      2.120902e+4 
-      - 5.179372e+3 * _nf 
-      + 1.955772e+2 * _nf * _nf 
+      2.120902e+4
+      - 5.179372e+3 * _nf
+      + 1.955772e+2 * _nf * _nf
       + 3.272344e+0 * _nf * _nf * _nf;
     const double a4ap1 = - 511.228 + 7.08645 * _nf;
     const double a4ap2 = - 502.481 + 7.82077 * _nf;
 
     const double b4qi =
-      2.579609e+4 + 0.08 
+      2.579609e+4 + 0.08
       - ( 5.818637e+3 + 0.97 ) * _nf
-      + ( 1.938554e+2 + 0.0037)* _nf * _nf 
+      + ( 1.938554e+2 + 0.0037)* _nf * _nf
       +   3.014982e+0 * _nf * _nf * _nf;
     const double b4ap1 = - 2426.05  + 266.674 * _nf - 0.05 * _nf;
     const double b4ap2 = - 2380.255 + 270.518 * _nf - 0.05 * _nf;
@@ -777,14 +777,14 @@ namespace apfel
       omy * y * ( 4989.2 - 1607.73 * y ) + 3687.6 * dl + 3296.6 * dl2 + 1271.11* dl3
       + 533.44 * dl4 + 97.27 *  dl5 + 4 * dl6 + 60.40 * omy * dlm2 + 4.685 * omy * dlm3;
     const double p3nsa12 =
-      1030.79 * omy * y + 1266.77 * omy * ( 2 - y2 ) + 2987.83 * dl + 273.05 * dl2 - 923.48 * dl3 
+      1030.79 * omy * y + 1266.77 * omy * ( 2 - y2 ) + 2987.83 * dl + 273.05 * dl2 - 923.48 * dl3
       - 236.76 * dl4 - 33.886 * dl5 - 4 * dl6 - 254.63 * omy * dlm - 0.28953 * omy * dlm3;
 
     // nf^2 (parametrized)
     const double p3nssa2 =
-      2.5e+2 * ( omy * ( - 4.7656 + 1.6908 * y + 0.1703 * y2 ) 
-		 - 0.41652 * y *dl + 0.90777 * y * dl2 + 0.12478 * y * dl3 
-		 + 0.17155 * omy * dlm + 0.17191  * dl * dlm )
+      2.5e+2 * ( omy * ( - 4.7656 + 1.6908 * y + 0.1703 * y2 )
+                 - 0.41652 * y *dl + 0.90777 * y * dl2 + 0.12478 * y * dl3
+                 + 0.17155 * omy * dlm + 0.17191  * dl * dlm )
       - 6.473971e+2 * dl - 6.641219e+1 * dl2 - 5.353347 * dl3 - 5.925926 *dl4
       - 3.950617e-1 * dl5 + 1.970002e+1 * omy * dlm - 3.435474 * omy * dlm2;
 

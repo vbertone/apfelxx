@@ -8,18 +8,19 @@
 #include "apfel/dglap.h"
 #include "apfel/tools.h"
 
-namespace apfel {
+namespace apfel
+{
   //_________________________________________________________________________________
   template<class T>
   Dglap<T>::Dglap(std::function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
-		  std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-		  Set<T>                                                 const& ObjRef,
-		  double                                                 const& MuDistRef,
-		  std::vector<double>                                    const& Thresholds,
-		  int                                                    const& nsteps):
+                  std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
+                  Set<T>                                                 const& ObjRef,
+                  double                                                 const& MuDistRef,
+                  std::vector<double>                                    const& Thresholds,
+                  int                                                    const& nsteps):
     MatchedEvolution<Set<T>>(ObjRef, MuDistRef, Thresholds, nsteps),
-    _SplittingFunctions(SplittingFunctions),
-    _MatchingConditions(MatchingConditions)
+                          _SplittingFunctions(SplittingFunctions),
+                          _MatchingConditions(MatchingConditions)
   {
   }
 
@@ -66,7 +67,7 @@ namespace apfel {
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
-    SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistMap});
+    SetObjectRef(Set<Distribution> {_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistMap});
   }
 
   //_________________________________________________________________________________
@@ -75,7 +76,7 @@ namespace apfel {
   {
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
-    SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc)});
+    SetObjectRef(Set<Distribution> {_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc)});
   }
 
   //_________________________________________________________________________________
@@ -84,7 +85,7 @@ namespace apfel {
   {
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
-    SetObjectRef(Set<Distribution>{_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc, mu)});
+    SetObjectRef(Set<Distribution> {_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc, mu)});
   }
 }
 

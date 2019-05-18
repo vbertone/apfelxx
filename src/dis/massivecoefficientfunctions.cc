@@ -34,8 +34,8 @@ namespace apfel
     const double epsi2 = epsi * epsi;
     const double v     = sqrt( 1 - 4 * epsi * z / ( 1 - z ));
     const double cm21g = 4 * TR * ( ( z2 + ( 1 - z ) * ( 1 - z ) + 4 * epsi * z * ( 1 - 3 * z )
-				      - 8 * epsi2 * z2 ) * log( ( 1 + v ) / ( 1 - v ) )
-				    + ( 8 * z * ( 1 - z ) - 1 - 4 * epsi * z * ( 1 - z ) ) * v );
+                                      - 8 * epsi2 * z2 ) * log( ( 1 + v ) / ( 1 - v ) )
+                                    + ( 8 * z * ( 1 - z ) - 1 - 4 * epsi * z * ( 1 - z ) ) * v );
     return cm21g;
   }
 
@@ -60,7 +60,7 @@ namespace apfel
     const double epsi  = ( 1 - eta ) / eta / 4;
     const double v     = sqrt( 1 - 4 * z / ( 1 - z ) * epsi );
     const double cml1g = 4 * TR * ( - 8 * epsi * z2 * log( ( 1 + v ) / ( 1 - v ) )
-				    + 4 * v * z * ( 1 - z ) );
+                                    + 4 * v * z * ( 1 - z ) );
     return cml1g;
   }
 
@@ -104,13 +104,13 @@ namespace apfel
     const double dil3 = dilog( ( 1 - sq1 ) / ( 1 + sq2 ) );
     const double dil4 = dilog( ( 1 + sq1 ) / ( 1 + sq2 ) );
     const double cm22ns = CF * TR * ( ( 4. / 3 * ( 1 + z2 ) / omz - 16 / omz * zr2 * ( 1 - 9 * z + 9 * z2 ) )
-				      * ( log( omz / z2 ) * l1 + l1 * l2 + 2 * ( - dil1 + dil2 + dil3 - dil4 ) )
-				      + ( - 8. / 3 + 4 / omz + qr2 * ( 128. - 432 * z + 288 * z2 - 8 / omz ) ) * l1
-				      + ( 88. / 9 + 136. / 9 * z - 152. / 9 / omz
-					  + qr * ( 464. / 9 - 512. / 3 * z + 2048. / 9 * z2 )
-					  + qr2 * ( - 832. / 9 + 6208. / 9 * z - 11392. / 9 * z2 + 6016. / 9 * z3 ) ) * l3 / sq2
-				      + ( - 272. / 27 - 1244. / 27 * z + 718. / 27 / omz
-					  + qr * ( - 3424. / 27 + 15608. / 27 * z - 4304. / 9 * z2 + 20. / 27 / omz ) ) * sq1 );
+                                      * ( log( omz / z2 ) * l1 + l1 * l2 + 2 * ( - dil1 + dil2 + dil3 - dil4 ) )
+                                      + ( - 8. / 3 + 4 / omz + qr2 * ( 128. - 432 * z + 288 * z2 - 8 / omz ) ) * l1
+                                      + ( 88. / 9 + 136. / 9 * z - 152. / 9 / omz
+                                          + qr * ( 464. / 9 - 512. / 3 * z + 2048. / 9 * z2 )
+                                          + qr2 * ( - 832. / 9 + 6208. / 9 * z - 11392. / 9 * z2 + 6016. / 9 * z3 ) ) * l3 / sq2
+                                      + ( - 272. / 27 - 1244. / 27 * z + 718. / 27 / omz
+                                          + qr * ( - 3424. / 27 + 15608. / 27 * z - 4304. / 9 * z2 + 20. / 27 / omz ) ) * sq1 );
     return cm22ns;
   }
   double Cm22nsNC::Local(double const&) const
@@ -153,10 +153,10 @@ namespace apfel
     const double dil3 = dilog( ( 1 - sq1 ) / ( 1 + sq2 ) );
     const double dil4 = dilog( ( 1 + sq1 ) / ( 1 + sq2 ) );
     const double cml2ns = CF * TR * ( 96 * z * zr2 * ( log( omz / z2 ) * l1 + l1 * l2 + 2 * ( - dil1 + dil2 + dil3 - dil4 ) )
-				      + qr2 * ( 64 - 288 * z + 192 * z2 ) * l1
-				      + z * ( 16. / 3 - 416 * z / 3 / xi + 1408 * z2 / 3 / xi / xi ) * l3 / sq2
-				      + ( 16. / 3 - 400 * z / 18
-					  + z * ( - 160. / 3 + 3824 * z / 9 - 992 * z2 / 3 ) / omz / xi ) * sq1);
+                                      + qr2 * ( 64 - 288 * z + 192 * z2 ) * l1
+                                      + z * ( 16. / 3 - 416 * z / 3 / xi + 1408 * z2 / 3 / xi / xi ) * l3 / sq2
+                                      + ( 16. / 3 - 400 * z / 18
+                                          + z * ( - 160. / 3 + 3824 * z / 9 - 992 * z2 / 3 ) / omz / xi ) * sq1);
     return cml2ns;
   }
 

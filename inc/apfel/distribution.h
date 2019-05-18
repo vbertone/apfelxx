@@ -2,7 +2,6 @@
 // APFEL++ 2017
 //
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
 #pragma once
@@ -40,8 +39,8 @@ namespace apfel
      * @param distjointgrid: the vector of the distribution on the joint grid
      */
     Distribution(Distribution                     const& obj,
-		 std::vector<std::vector<double>> const& distsubgrid,
-		 std::vector<double>              const& distjointgrid);
+                 std::vector<std::vector<double>> const& distsubgrid,
+                 std::vector<double>              const& distjointgrid);
 
     /**
      * @brief The Distribution constructors.
@@ -50,8 +49,8 @@ namespace apfel
      * @param distjointgrid: the vector of the distribution on the joint grid
      */
     Distribution(Grid                             const& g,
-		 std::vector<std::vector<double>> const& distsubgrid,
-		 std::vector<double>              const& distjointgrid);
+                 std::vector<std::vector<double>> const& distsubgrid,
+                 std::vector<double>              const& distjointgrid);
 
     /**
      * @brief The Distribution constructors.
@@ -59,7 +58,7 @@ namespace apfel
      * @param InDistFunc: a function of x to be tabulated on the grid in x
      */
     Distribution(Grid                                 const& g,
-		 std::function<double(double const&)> const& InDistFunc);
+                 std::function<double(double const&)> const& InDistFunc);
 
     /**
      * @brief The Distribution constructors.
@@ -68,8 +67,8 @@ namespace apfel
      * @param Q: the value of Q in which InDistFunc has to be tabulated
      */
     Distribution(Grid                                                const& g,
-		 std::function<double(double const&, double const&)> const& InDistFunc,
-		 double                                              const& Q);
+                 std::function<double(double const&, double const&)> const& InDistFunc,
+                 double                                              const& Q);
 
     /**
      * @brief The Distribution constructors.
@@ -78,8 +77,8 @@ namespace apfel
      * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated
      */
     Distribution(Grid                                             const& g,
-		 std::function<double(int const&, double const&)> const& InDistFunc,
-		 int                                              const& ipdf);
+                 std::function<double(int const&, double const&)> const& InDistFunc,
+                 int                                              const& ipdf);
 
     /**
      * @brief The Distribution constructors.
@@ -89,9 +88,9 @@ namespace apfel
      * @param Q: the value of Q in which InDistFunc has to be tabulated
      */
     Distribution(Grid                                                            const& g,
-		 std::function<double(int const&, double const&, double const&)> const& InDistFunc,
-		 int                                                             const& ipdf,
-		 double                                                          const& Q);
+                 std::function<double(int const&, double const&, double const&)> const& InDistFunc,
+                 int                                                             const& ipdf,
+                 double                                                          const& Q);
     ///@}
 
     /**
@@ -149,9 +148,9 @@ namespace apfel
    * @param skip: vector of map indices to be skipped in the tabulation.
    */
   std::map<int,Distribution> DistributionMap(Grid                                                              const& g,
-					     std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
-					     double                                                            const& Q,
-					     std::vector<int>                                                  const& skip = {});
+                                             std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
+                                             double                                                            const& Q,
+                                             std::vector<int>                                                  const& skip = {});
 
   /**
    * @brief Function that fills in a map of distributions from a
@@ -161,7 +160,7 @@ namespace apfel
    * @param skip: vector of map indices to be skipped in the tabulation.
    */
   std::map<int,Distribution> DistributionMap(Grid                                               const& g,
-					     std::function<std::map<int,double>(double const&)> const& InDistFunc,
-					     std::vector<int>                                   const& skip = {});
+                                             std::function<std::map<int,double>(double const&)> const& InDistFunc,
+                                             std::vector<int>                                   const& skip = {});
   ///@}
 }
