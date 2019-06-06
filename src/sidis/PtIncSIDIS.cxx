@@ -77,10 +77,11 @@ int main() {
     };
 
   // Kinematics
-  const double x  = 1e-2;
-  const double Q2 = 10;
-  const double z  = 0.1;
-  const double S  = pow(318, 2); // HERA c.m.e.
+  const double x  = 0.157;
+  const double Q2 = 20;
+  const double z  = 0.35;
+  const double y  = 0.439;
+  const double S  = Q2 / x / y; // Q2 = xyS pow(318, 2); // HERA c.m.e.
 
   // Output cross section
   cout << scientific << "\ndSigma/dxdQ2dz(x = " << x << ", Q2 = " << Q2 << " GeV^2, z = " << z << ") = " << SigmaSIDIS(x, Q2, z, S) << " pb GeV^{-2}\n" << endl;

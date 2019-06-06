@@ -34,7 +34,7 @@ class s0: public Expression
 public:
   s0(): Expression() {}
   double Singular(double const& x) const { return 1 / ( 1 - x ); }
-  double Local(double const& x) const { return log(1-x); }
+  double Local(double const& x) const { return log( 1 - x ); }
 };
 
 class s1: public Expression
@@ -42,7 +42,7 @@ class s1: public Expression
 public:
   s1(): Expression() {}
   double Singular(double const& x) const { return log( 1 - x ) / ( 1 - x ); }
-  double Local(double const& x) const { double l = log(1-x); return l * l / 2; }
+  double Local(double const& x) const { double l = log( 1 - x ); return l * l / 2; }
 };
 
 class lrqq: public Expression

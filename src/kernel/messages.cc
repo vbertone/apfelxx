@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/messages.h"
@@ -82,8 +81,8 @@ namespace apfel
         std::cout << "   _/    _/  _/        _/        _/        _/        _/     _/\n";
         std::cout << "  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/\n";
         std::cout << "\033[0;" << code::green << "m\n";
-        std::cout << "_____v" << VERSION << ": A new PDF evolution library in C++, arXiv:1708.00911\n";
-        std::cout << "     Authors: V. Bertone, S. Carrazza\n";
+        std::cout << "_____v" << VERSION << ": A PDF evolution library in C++, arXiv:1708.00911\n";
+        //std::cout << "     Authors: V. Bertone, S. Carrazza\n";
         std::cout << "\033[" << code::normal << "m\n";
       }
   }

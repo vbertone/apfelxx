@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -66,7 +65,7 @@ namespace apfel
    */
   ///@{
   const double TR = 0.5;
-  const double CF = 4./3.;
+  const double CF = 4. / 3.;
   const double CA = 3.;
   ///@}
   ///@}
@@ -85,7 +84,7 @@ namespace apfel
   const double eu  =   2. / 3.;
   const double ed2 =   1. / 9.;
   const double eu2 =   4. / 9.;
-  const std::vector<double> QCh  = {ed, eu, ed, eu, ed, eu};
+  const std::vector<double> QCh  = {ed,  eu,  ed,  eu,  ed,  eu};
   const std::vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
   ///@}
 
@@ -154,15 +153,15 @@ namespace apfel
    * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-ckm-matrix.pdf.
    */
   ///@{
-  const double Vud = 0.97446;
-  const double Vus = 0.22452;
-  const double Vub = 0.00365;
-  const double Vcd = 0.22438;
-  const double Vcs = 0.97359;
-  const double Vcb = 0.04214;
-  const double Vtd = 0.00896;
-  const double Vts = 0.04133;
-  const double Vtb = 0.999105;
+  const double Vud  = 0.97446;
+  const double Vus  = 0.22452;
+  const double Vub  = 0.00365;
+  const double Vcd  = 0.22438;
+  const double Vcs  = 0.97359;
+  const double Vcb  = 0.04214;
+  const double Vtd  = 0.00896;
+  const double Vts  = 0.04133;
+  const double Vtb  = 0.999105;
   const double Vud2 = Vud * Vud;
   const double Vus2 = Vus * Vus;
   const double Vub2 = Vub * Vub;
@@ -172,7 +171,7 @@ namespace apfel
   const double Vtd2 = Vtd * Vtd;
   const double Vts2 = Vts * Vts;
   const double Vtb2 = Vtb * Vtb;
-  const std::vector<double> CMK  = {Vud, Vus, Vub, Vcd, Vcs, Vcb, Vtd, Vts, Vtb};
+  const std::vector<double> CMK  = {Vud,  Vus,  Vub,  Vcd,  Vcs,  Vcb,  Vtd,  Vts,  Vtb};
   const std::vector<double> CKM2 = {Vud2, Vus2, Vub2, Vcd2, Vcs2, Vcb2, Vtd2, Vts2, Vtb2};
   ///@}
   ///@}

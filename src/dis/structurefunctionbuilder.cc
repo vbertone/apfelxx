@@ -1337,11 +1337,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-                                                   std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
-                                                   int                                                                                const& PerturbativeOrder,
-                                                   std::function<double(double const&)>                                               const& Alphas,
-                                                   std::function<std::vector<double>(double const&)>                                  const& Couplings)
+  std::map<int,Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                     std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
+                                                     int                                                                                const& PerturbativeOrder,
+                                                     std::function<double(double const&)>                                               const& Alphas,
+                                                     std::function<std::vector<double>(double const&)>                                  const& Couplings)
   {
     // Call FObj at energy 1 to use it for those quantities that do
     // not depend on Q.
@@ -1354,11 +1354,12 @@ namespace apfel
     const std::vector<int> skip = FObj1.skip;
 
     // Cycle over the key of the convolution basis map.
-    std::map<int,Observable> F;
+    std::map<int,Observable<>> F;
     for (auto it = FObj1.ConvBasis.begin(); it != FObj1.ConvBasis.end(); ++it)
       {
         // Structure function index.
         const int k = it->first;
+
         // Define coefficient function functions.
         const auto Cf = [=] (double const& Q) -> Set<Operator>
         {
@@ -1379,17 +1380,17 @@ namespace apfel
         };
 
         // Initialize "Observable".
-        F.insert({k,Observable{Cf, DistF}});
+        F.insert({k,Observable<>{Cf, DistF}});
       }
     return F;
   }
 
   //_____________________________________________________________________________
-  std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-                                                   std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
-                                                   int                                                                                const& PerturbativeOrder,
-                                                   std::function<double(double const&)>                                               const& Alphas,
-                                                   std::function<std::vector<double>(double const&)>                                  const& Couplings)
+  std::map<int,Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                     std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
+                                                     int                                                                                const& PerturbativeOrder,
+                                                     std::function<double(double const&)>                                               const& Alphas,
+                                                     std::function<std::vector<double>(double const&)>                                  const& Couplings)
   {
     const auto InDistFuncMap = [=] (double const& x, double const& Q) -> std::map<int,double>
     {

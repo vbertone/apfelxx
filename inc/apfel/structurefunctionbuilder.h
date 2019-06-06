@@ -273,11 +273,11 @@ namespace apfel
    * @param Couplings: the vector-valued function of (non-QCD) couplings
    * @return A map of "Observable" objects, one for number of active flavours
    */
-  std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-                                                   std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
-                                                   int                                                                                const& PerturbativeOrder,
-                                                   std::function<double(double const&)>                                               const& Alphas,
-                                                   std::function<std::vector<double>(double const&)>                                  const& Couplings);
+  std::map<int,Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                     std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
+                                                     int                                                                                const& PerturbativeOrder,
+                                                     std::function<double(double const&)>                                               const& Alphas,
+                                                     std::function<std::vector<double>(double const&)>                                  const& Couplings);
 
   /**
    * @brief The StructureFunctionBuildNC class constructs a map of
@@ -290,10 +290,10 @@ namespace apfel
    * @return A map of "Observable" objects, one for number of active flavours
    */
   //_____________________________________________________________________________
-  std::map<int,Observable> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-                                                   std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
-                                                   int                                                                                const& PerturbativeOrder,
-                                                   std::function<double(double const&)>                                               const& Alphas,
-                                                   std::function<std::vector<double>(double const&)>                                  const& Couplings);
+  std::map<int,Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                     std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
+                                                     int                                                                                const& PerturbativeOrder,
+                                                     std::function<double(double const&)>                                               const& Alphas,
+                                                     std::function<std::vector<double>(double const&)>                                  const& Couplings);
   ///@}
 }

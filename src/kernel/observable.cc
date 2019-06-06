@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/observable.h"
@@ -10,22 +9,30 @@
 namespace apfel
 {
   //_____________________________________________________________________________
-  Observable::Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-                         std::function<Set<Distribution>(double const&)> const& Distributions):
+  template<class T>
+  Observable<T>::Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
+                            std::function<Set<T>(double const&)> const& Objects):
     _CoefficientFunctions(CoefficientFunctions),
-    _Distributions(Distributions)
+    _Objects(Objects)
   {
   }
 
   //_____________________________________________________________________________
-  Distribution Observable::Evaluate(double const& Q) const
+  template<class T>
+  T Observable<T>::Evaluate(double const& Q) const
   {
-    const Set<Distribution> sSF = _CoefficientFunctions(Q) * _Distributions(Q);
+    const Set<T> sSF = _CoefficientFunctions(Q) * _Objects(Q);
     return sSF.Combine();
   }
 
+  // Specializations
+  //_________________________________________________________________________________
+  template class Observable<Distribution>;
+  template class Observable<Operator>;
+
   //_____________________________________________________________________________
-  double Observable::Evaluate(double const& x, double const& Q) const
+  template<>
+  double Observable<Distribution>::Evaluate(double const& x, double const& Q) const
   {
     return this->Evaluate(Q).Evaluate(x);
   }

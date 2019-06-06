@@ -30,7 +30,7 @@ namespace apfel
    * coefficient functions.
    * @param a: first parameter
    * @param b: second parameter
-   * @param c: thied parameter
+   * @param c: third parameter
    * @return Triangular function
    */
   double DeltaFun(double const& a, double const& b, double const& c);

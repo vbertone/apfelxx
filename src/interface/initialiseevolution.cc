@@ -569,7 +569,7 @@ namespace apfel
 
     // Write information.
     info += "SetDesc: 'Set generated with APFEL++. Name: " + _setup.name + "'\n";
-    info += "Authors: V. Bertone, S. Carrazza\n";
+    info += "Author: V. Bertone\n";
     info += "Reference: arXiv:1708.00911\n";
     info += "Format: lhagrid1\n";
     info += "DataVersion: 1\n";

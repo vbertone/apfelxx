@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -17,6 +16,7 @@ namespace apfel
    * sets of operators for an easy computation of observebles deriving
    * from the covolution of the two.
    */
+  template<class T = Distribution>
   class Observable
   {
   public:
@@ -26,10 +26,10 @@ namespace apfel
     /**
      * @brief The Observable constructor.
      * @param CoefficientFunctions: a Set<Operator>-valued function returning the operators
-     * @param Distributions: a Set<Distribution>-valued function returning the distributions
+     * @param Object: a Set<T>-valued function returning the relevant object
      */
-    Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-               std::function<Set<Distribution>(double const&)> const& Distributions);
+    Observable(std::function<Set<Operator>(double const&)> const& CoefficientFunctions,
+               std::function<Set<T>(double const&)>        const& Objects);
 
     /**
      * @name Functions that evaluate the the observable at the scale
@@ -41,7 +41,7 @@ namespace apfel
      * @param Q: the scale where the observable has to be evaluated
      * @return the observable in Q as a distribution
      */
-    Distribution Evaluate(double const& Q) const;
+    T Evaluate(double const& Q) const;
 
     /**
      * @brief This function returns the observable in Q interpolated in x.
@@ -55,12 +55,12 @@ namespace apfel
     /**
      * @brief Set the set of ditributions keeping the same set of
      * coefficient functions.
-     * @param Distributions: the new set of distributions
+     * @param Objects: the new set of objects
      */
-    void SetDistributions(std::function<Set<Distribution>(double const&)> const& Distributions) { _Distributions = Distributions; }
+    void SetObjects(std::function<Set<T>(double const&)> const& Objects) { _Objects = Objects; }
 
   private:
-    std::function<Set<Operator>(double const&)>     _CoefficientFunctions;
-    std::function<Set<Distribution>(double const&)> _Distributions;
+    std::function<Set<Operator>(double const&)> _CoefficientFunctions;
+    std::function<Set<T>(double const&)>        _Objects;
   };
 }

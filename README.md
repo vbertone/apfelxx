@@ -13,7 +13,7 @@ better maintainability and an easier extensibility. This makes APFEL++
 suitable for a wide range of tasks: from the solution of the DGLAP
 evolution equations to the computation of deep-inelastic-scattering
 (DIS) and single-inclusive-annihilation cross sections. Also more
-complex computations, like semi-inclusive DIS and Drell-Yan cross
+complex computations, such as semi-inclusive DIS and Drell-Yan cross
 sections, are easily implementable in APFEL++.
 
 ## Download
@@ -68,4 +68,3 @@ APFEL Web interface http://apfel.mi.infn.it/.
 ## Contact Information
 
 - Valerio Bertone: valerio.bertone@cern.ch
-- Stefano Carrazza: stefano.carrazza@cern.ch
