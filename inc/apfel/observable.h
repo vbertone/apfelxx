@@ -59,6 +59,12 @@ namespace apfel
      */
     void SetObjects(std::function<Set<T>(double const&)> const& Objects) { _Objects = Objects; }
 
+    /**
+     * @brief Get the set of coefficient functions.
+     * @return the set of coefficient functions.
+     */
+    std::function<Set<Operator>(double const&)> GetCoefficientFunctions() const { return _CoefficientFunctions; }
+
   private:
     std::function<Set<Operator>(double const&)> _CoefficientFunctions;
     std::function<Set<T>(double const&)>        _Objects;

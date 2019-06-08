@@ -9,6 +9,7 @@ do
     pdflatex TMDEvolution.tex
     pdflatex DrellYanTMD.tex
     pdflatex CovarianceMatrix.tex
+    pdflatex DIS.tex
 done
 
 mv *.pdf ../pdf/.

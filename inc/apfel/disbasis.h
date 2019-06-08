@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -68,8 +67,8 @@ namespace apfel
           // Multiply the coefficient by the overall factor.
           coef *= fact;
 
-          _rules[2*i-1] = { {CNS, 2*i-1, coef} };
-          _rules[2*i]   = { {CNS, 2*i,   coef} };
+          _rules[2 * i - 1] = { {CNS, 2 * i - 1, coef} };
+          _rules[2 * i]     = { {CNS, 2 * i,     coef} };
         }
     };
 
@@ -87,24 +86,24 @@ namespace apfel
       const double SumCh = accumulate(Ch.begin(), Ch.end(), 0.);
 
       _rules[GLUON]   = { {CG, GLUON, SumCh} };
-      _rules[SIGMA]   = { {CS, SIGMA, SumCh/6} };
-      _rules[VALENCE] = { {CS, VALENCE, SumCh/6} };
+      _rules[SIGMA]   = { {CS, SIGMA, SumCh / 6} };
+      _rules[VALENCE] = { {CS, VALENCE, SumCh / 6} };
       for (int j = 2; j <= 6; j++)
         {
           double coef = 0;
           for (int i = 1; i <= j; i++)
             if (i < j)
-              coef += Ch[i-1];
+              coef += Ch[i - 1];
             else
-              coef += Ch[i-1] * ( 1 - j );
+              coef += Ch[i - 1] * ( 1 - j );
           coef /= j * ( j - 1 );
 
           // Change sign to T3 and V3
           if (j == 2)
             coef *= - 1;
 
-          _rules[2*j-1] = { {CNS, 2*j-1, coef} };
-          _rules[2*j]   = { {CNS, 2*j,   coef} };
+          _rules[2 * j - 1] = { {CNS, 2 * j - 1, coef} };
+          _rules[2 * j]     = { {CNS, 2 * j,     coef} };
         }
     };
     ///@}
@@ -141,9 +140,9 @@ namespace apfel
      */
     std::map<int,std::pair<int,int>> Vij =
     {
-      {1,{1,1}}, {2,{1,2}}, {3,{1,3}},
-      {4,{2,1}}, {5,{2,2}}, {6,{2,3}},
-      {7,{3,1}}, {8,{3,2}}, {9,{3,3}}
+      {1, {1, 1}}, {2, {1, 2}}, {3, {1, 3}},
+      {4, {2, 1}}, {5, {2, 2}}, {6, {2, 3}},
+      {7, {3, 1}}, {8, {3, 2}}, {9, {3, 3}}
     };
 
     /**
@@ -207,13 +206,13 @@ namespace apfel
 
           if (Is3)
             {
-              _rules[2*k-1] = { {CNS, 2*k-1, coefm} };
-              _rules[2*k]   = { {CNS, 2*k,   coefp} };
+              _rules[2 * k - 1] = { {CNS, 2 * k - 1, coefm} };
+              _rules[2 * k]     = { {CNS, 2 * k,     coefp} };
             }
           else
             {
-              _rules[2*k-1] = { {CNS, 2*k-1, coefp} };
-              _rules[2*k]   = { {CNS, 2*k,   coefm} };
+              _rules[2 * k - 1] = { {CNS, 2 * k - 1, coefp} };
+              _rules[2 * k]     = { {CNS, 2 * k,   coefm} };
             }
         }
     };
@@ -238,7 +237,7 @@ namespace apfel
       // Fill in rules according to the input CKM matrix.
       for (auto i = 1; i <= (int) CKM.size(); i++)
         {
-          if (CKM[i-1] == 0)
+          if (CKM[i - 1] == 0)
             continue;
 
           // Get basis of the i-th component.
@@ -250,7 +249,7 @@ namespace apfel
           // Update rules
           for (int k = 0; k <= 12; k++)
             if (rules.count(k) != 0)
-              _rules[k][0].coefficient += CKM[i-1] * rules.at(k)[0].coefficient;
+              _rules[k][0].coefficient += CKM[i - 1] * rules.at(k)[0].coefficient;
         }
     };
     ///@}

@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/structurefunctionbuilder.h"
@@ -57,7 +57,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -130,7 +130,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -201,7 +201,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {1,3,5,7,9,11};
+    const std::vector<int> skip = {1, 3, 5, 7, 9, 11};
 
     // Define object of the structure containing the DglapObjects
     const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -275,7 +275,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -350,7 +350,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0,1,2,3,5,7,9,11};
+    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
 
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -428,7 +428,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -502,7 +502,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0,1,2,3,5,7,9,11};
+    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
 
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -578,7 +578,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0,1,2,4,6,8,10,12};
+    const std::vector<int> skip = {0, 1, 2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -653,7 +653,7 @@ namespace apfel
       }
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0,1,3,5,7,9,11};
+    const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
 
     // Define object of the structure containing the DglapObjects
     const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -773,7 +773,7 @@ namespace apfel
     const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -929,7 +929,7 @@ namespace apfel
     const TabulateObject<Operator> TabOL2g{fOL2g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -1104,7 +1104,7 @@ namespace apfel
     const TabulateObject<Operator> TabO22g{fO22g, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {2,4,6,8,10,12};
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
@@ -1364,19 +1364,19 @@ namespace apfel
         const auto Cf = [=] (double const& Q) -> Set<Operator>
         {
           const double cp = Alphas(Q) / FourPi;
-          const StructureFunctionObjects FObjQ = FObj(Q,Couplings(Q));
+          const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
           Set<Operator> CoefFuncs = FObjQ.C0.at(k);
           if (PerturbativeOrder > 0)
             CoefFuncs += cp * FObjQ.C1.at(k);
           if (PerturbativeOrder > 1)
-            CoefFuncs += cp * cp * FObjQ.C2.at(k);
+            CoefFuncs += ( cp * cp ) * FObjQ.C2.at(k);
           return CoefFuncs;
         };
 
-        // Define distribution function functions.
+        // Define distribution-function functions.
         const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
         {
-          return Set<Distribution>{FObj(Q,Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)};
+          return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)};
         };
 
         // Initialize "Observable".

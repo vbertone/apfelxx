@@ -1,8 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -46,13 +45,13 @@ namespace apfel
       for (int k = 1; k < 6; k++)
         if (k < nf)
           {
-            _rules[2*k+1] = { {PNSP, 2*k+1, 1} };
-            _rules[2*k+2] = { {PNSM, 2*k+2, 1} };
+            _rules[2 * k + 1] = { {PNSP, 2 * k + 1, 1} };
+            _rules[2 * k + 2] = { {PNSM, 2 * k + 2, 1} };
           }
         else
           {
-            _rules[2*k+1] = _rules[SIGMA];
-            _rules[2*k+2] = _rules[VALENCE];
+            _rules[2 * k + 1] = _rules[SIGMA];
+            _rules[2 * k + 2] = _rules[VALENCE];
           }
     };
   };
@@ -89,15 +88,15 @@ namespace apfel
       for (int k = 1; k < 6; k++)
         if (k < nf)
           {
-            _rules[3*k+2] = { {PNSP, 3*k+2, 1} };
-            _rules[3*k+3] = { {PNSP, 3*k+3, 1} };
-            _rules[3*k+4] = { {PNSM, 3*k+4, 1} };
+            _rules[3 * k + 2] = { {PNSP, 3 * k + 2, 1} };
+            _rules[3 * k + 3] = { {PNSP, 3 * k + 3, 1} };
+            _rules[3 * k + 4] = { {PNSM, 3 * k + 4, 1} };
           }
         else
           {
-            _rules[3*k+2] = _rules[QQ];
-            _rules[3*k+3] = _rules[QG];
-            _rules[3*k+4] = _rules[VAL];
+            _rules[3 * k + 2] = _rules[QQ];
+            _rules[3 * k + 3] = _rules[QG];
+            _rules[3 * k + 4] = _rules[VAL];
           }
     };
   };
@@ -132,13 +131,13 @@ namespace apfel
       for (int k = 1; k < 6; k++)
         if (k < nf)
           {
-            _rules[2*k+1] = { {3*k+2, 2*k+1, 1} };
-            _rules[2*k+2] = { {3*k+4, 2*k+2, 1} };
+            _rules[2 * k + 1] = { {3 * k + 2, 2 * k + 1, 1} };
+            _rules[2 * k + 2] = { {3 * k + 4, 2 * k + 2, 1} };
           }
         else
           {
-            _rules[2*k+1] = { {3*k+2, SIGMA, 1}, {3*k+3, GLUON, 1} };
-            _rules[2*k+2] = { {3*k+4, VALENCE, 1} };
+            _rules[2 * k + 1] = { {3 * k + 2, SIGMA, 1}, {3 * k + 3, GLUON, 1} };
+            _rules[2 * k + 2] = { {3 * k + 4, VALENCE, 1} };
           }
     };
   };
