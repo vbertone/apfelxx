@@ -1005,6 +1005,179 @@ interpolation of degree $k$, one needs to do $k+1$ integrals over the
 intervals included between the $(\beta-k)$-th and the $(\beta+1)$-th
 node.
 
+\section{Cuts on the final-state leptons}
+
+In this section we derive explicitly the phase-space reduction factor
+$\mathcal{P}$ introduced in Sect.~\ref{sec:kincuts}. This factor is
+defined as:
+\begin{equation}\label{eq:PSredDef}
+\mathcal{P}(Q,y,q_T) = \mathcal{P}(q) = \frac{\displaystyle \int_{\mbox{\footnotesize fid.
+    reg.}}d^4p_1 d^4p_2 \,\delta(p_1^2) \delta(p_2^2)\theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) g_{\mu\nu}L^{\mu\nu}(p_1,p_2)}{\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) g_{\mu\nu}L^{\mu\nu}(p_1,p_2)}\,,
+\end{equation}
+where $p_1$ and $p_2$ are the four-momenta of the outgoing leptons
+and $L^{\mu\nu}$ is the leptonic tensor that, assuming massless
+leptons, reads:
+\begin{equation}
+L^{\mu\nu}(p_1,p_2) = 4(p_1^{\mu}p_2^{\nu}+p_2^{\mu}p_1^{\nu}-g^{\mu\nu}p_1p_2)\,,
+\end{equation}
+so that:
+\begin{equation}
+g_{\mu\nu}L^{\mu\nu}(p_1,p_2) = -8(p_1p_2) = -4(p_1+p_2)^2\,.
+\end{equation}
+In the last step we have used the on-shell-ness of the leptons
+($p_1^2=p_2^2=0$). The integral in the denominator of
+Eq.~(\ref{eq:PSredDef}) is restricted to some \textit{fiducial
+  region}. Finally, we find:
+\begin{equation}\label{eq:PSredDef2}
+\mathcal{P}(q) = \frac{\displaystyle \int_{\mbox{\footnotesize fid.
+    reg.}}d^4p_1 d^4p_2 \,\delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) (p_1+p_2)^2}{\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) (p_1+p_2)^2}\,.
+\end{equation}
+The effect of integrating over the fiducial region can be implemented
+by defining a generalised $\theta$-function, $\Phi(p_1,p_2)$, that is
+equal to one inside the fiducial region and zero outside. This allows
+one to integrate also the numerator of Eq.~(\ref{eq:PSredDef2}) over
+the full phase-space of the two outgoing leptons:
+\begin{equation}\label{eq:PSredDef3}
+\mathcal{P}(q) = \frac{\displaystyle \int d^4p_1 d^4p_2 \,\delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) \Phi(p_1,p_2) (p_1+p_2)^2}{\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) (p_1+p_2)^2}\,.
+\end{equation}
+Now we can integrate over one of the outgoing momenta, say $p_2$,
+exploiting the momentum-conservation $\delta$-function both in the
+numerator and in the denominator. Specifically, the numerator of
+Eq.~(\ref{eq:PSredDef3}) gives:
+\begin{equation}
+\begin{array}{c}
+\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2)
+\delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q)
+  \Phi(p_1,p_2) (p_1+p_2)^2 = \\
+\\
+\displaystyle Q^2 \int d^4p_1 \delta(p_1^2)
+\delta((q-p_1)^2) \theta(p_{1,0})
+  \theta(q_0-p_{1,0})\Phi(p_1,q-p_1)\,,
+\end{array}
+\end{equation}
+and likewise in the denominator setting $\Phi(p_1,p_2)=1$. Finally,
+renaming $p_1=p$, the phase-space reduction factor reads:
+\begin{equation}\label{eq:PSredDef3}
+  \mathcal{P}(q) = \frac{\displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
+    \theta(q_0-p_{0})  \Phi(p,q-p)}{\displaystyle \int d^4p \delta(p^2) \theta(p_{0})
+    \theta(q_0-p_{0})  \delta((q-p)^2)}\,.
+\end{equation}
+The $\delta$-functions can now be used to constrain two of the four
+components of the momentum $p$. The first, $\delta(p_2^2)$, is usually
+used to set the first component of $p$, the energy, to the on-shell
+value. Since the leptons are assumed to be massless, this
+produces:
+\begin{equation}
+\int d^4p\delta(p^2)\theta(p_0) = \int d^4p\delta(E^2-|\mathbf{p}|^2)\theta(E)=\int\frac{dEd^3\mathbf{p}}{2|\mathbf{p}|}\delta(E-|\mathbf{p}|)=\int\frac{d^3\mathbf{p}}{2|\mathbf{p}|}\,.
+\end{equation}
+Of course, the four-momentum $p$ appearing in the rest of the
+integrand has to be set on shell ($E=|\mathbf{p}|$). Now we express
+the three-dimensional measure $d^3\mathbf{p}$ in spherical coordinates
+as:
+\begin{equation}
+d^3\mathbf{p} = |\mathbf{p}|^2d|\mathbf{p}|d(\cos\theta) d\phi\,.
+\end{equation}
+Then we make a change of variable from $(|\mathbf{p}|,\cos\theta)$ to
+$(|\mathbf{p}_T|,\eta)$: the second set of variables are exactly those
+on which kinematic cuts are imposed. We do so by knowing that:
+\begin{equation}
+\left\{
+\begin{array}{l}
+|\mathbf{p}| = |\mathbf{p}_T|\cosh\eta\,,\\
+\cos\theta =\tanh\eta\,.
+\end{array}
+\right.
+\end{equation}
+This leads to:
+\begin{equation}
+\int\frac{d^3\mathbf{p}}{2 |\mathbf{p}|} = \int|\mathbf{p}|d|\mathbf{p}|d(\cos\theta) d\phi=\int|\mathbf{p}_T|d|\mathbf{p}_T|d\eta d\phi=\int d^2\mathbf{p}_T d\eta\,.
+\end{equation}
+
+Now we consider the second $\delta$-function:
+\begin{equation}\label{eq:integralyeah!}
+\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\int_{-\infty}^\infty d\eta
+\int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)\,,
+\end{equation}
+being $q^2=Q^2$ and $p^2=0$. The goal is that of using this last
+$\delta$-function to get rid of the integral over $\phi$. To do so, it
+is convenient to express the four-vector $q$ in terms of $Q$, $y$, and
+$\mathbf{q}_T$:
+\begin{equation}
+q=\left(M\cosh y,\mathbf{q}_T,M\sinh y\right)\,.
+\end{equation}
+with $M=\sqrt{Q^2+|\mathbf{q}_T|^2}$. While:
+\begin{equation}
+p=\left(|\mathbf{p}_T|\cosh\eta,\mathbf{p}_T,|\mathbf{p}_T|\sinh\eta\right)\,,
+\end{equation}
+so that:
+\begin{equation}
+p\cdot q=|\mathbf{p}_T|M\left(\cosh\eta \cosh y-\sinh\eta\sinh
+  y\right)-\mathbf{p}_T\cdot
+\mathbf{q}_T=|\mathbf{p}_T|M\cosh\left(\eta - y\right)-\mathbf{p}_T\cdot \mathbf{q}_T\,.
+\end{equation}
+We can now assume that the two-dimensional vector $\mathbf{q}_T$ is
+aligned with the $x$ axis so that 
+$\mathbf{p}_T\cdot \mathbf{q}_T =
+|\mathbf{p}_T||\mathbf{q}_T|\cos\phi$(\footnote{In
+  the general case in which $\mathbf{q}_T$ forms an angle $\beta$ with
+  the $x$ axis, the scalar product would result in
+  $|\mathbf{p}_T||\mathbf{q}_T|\cos(\phi-\beta)$. However, the angle
+  $\beta$ could always be reabsorbed in a redefinition of the
+  integration angle $\phi$ in
+  Eq.~(\ref{eq:integralyeah!}).}). Therefore, the integral of the
+$\delta$-function over the angle $\phi$ becomes:
+\begin{equation}
+\int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\int_0^{2\pi} d\phi\,\delta\left(Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\right)\,,
+\end{equation}
+The argument of the delta function:
+\begin{equation}
+f(\phi) = Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\,,
+\end{equation}
+whose derivative is:
+\begin{equation}
+\frac{df(\phi)}{d\phi} = -2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi\,,
+\end{equation}
+has a zero in $\phi_0$ such that:
+\begin{equation}\label{eq:cosphi0}
+\cos\phi_0=\frac{2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2}{2|\mathbf{p}_T||\mathbf{q}_T|}\,,
+\end{equation}
+so that:
+\begin{equation}\label{eq:derivphi0}
+\left|\frac{df(\phi)}{d\phi}\right|_{\phi=\phi_0} = 2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi_0=\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}\,,
+\end{equation}
+that gives:
+\begin{equation}
+\int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\left|\frac{df(\phi)}{d\phi}\right|^{-1}_{\phi=\phi_0}\int_0^{2\pi} d\phi\,\delta(\phi-\phi_0)=\frac1{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}}\,.
+\end{equation}
+Of course, the equality in Eq.~(\ref{eq:cosphi0}) is possible only if:
+\begin{equation}\label{eq:cosphi0}
+|2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2|\leq 2|\mathbf{p}_T||\mathbf{q}_T|\,.
+\end{equation}
+that is such to make the argument of the square root in
+Eq.~(\ref{eq:derivphi0}) non-negative. This sets additional
+constraints on the integration domain(\footnote{Notice that
+  $M\cosh(\eta-y)\geq |\mathbf{q}_T|$.}):
+\begin{equation}
+p_T^{-} \leq |\mathbf{p}_T| \leq p_T^{+}\quad\mbox{with}\quad
+p_T^{\pm}=\frac{Q^2}{M\cosh(\eta-y)\mp |\mathbf{q}_T|}\,.
+\end{equation}
+In addition, one has to take into account the $\theta$-function in
+Eq.~(\ref{eq:integralyeah!}) that guarantees the positiveness of the
+energy:
+\begin{equation}
+\theta(q_0-p_0)=\theta(M\cosh y-|\mathbf{p}_T|\cosh\eta)\quad\Rightarrow\quad |\mathbf{p}_T|\leq
+p_T^{(E)} = \frac{M\cosh y}{\cosh\eta}\,.
+\end{equation}
+Finally, we have:
+\begin{equation}
+\int d^4p \delta(p^2) \delta((q-p)^2)=\int_{-\infty}^\infty d\eta
+\int_{p_T^{-}}^{{\rm min}(p_T^{+},p_T^{(E)})}
+\frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}}\,.
+\end{equation}
+
+
+\newpage
+
 \begin{thebibliography}{alp}
 
 %\cite{Scimemi:2017etj}
