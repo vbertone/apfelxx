@@ -4,6 +4,7 @@
 \usepackage[center,small]{caption}[2007/01/07]
 \usepackage{fancyhdr}
 \usepackage{color}
+\usepackage{graphicx}
 
 \definecolor{blu}{rgb}{0,0,1}
 \definecolor{verde}{rgb}{0,1,0}
@@ -1314,33 +1315,83 @@ Regerring to Eq.~(\ref{eq:PSredDef4}), and considering that:
 q-p=\left(M\cosh y-|\mathbf{p}_T|\cosh\eta,\mathbf{q}_T-\mathbf{p}_T,M\sinh y-|\mathbf{p}_T|\sinh\eta\right)\,.
 \end{equation}
 we thus have:
-\begin{equation}
-\begin{array}{l}
-\Phi(p,q-p) = \Theta(p) \Theta(q-p)=\\
+\begin{equation}\label{eq:intdomain}
+\begin{array}{ll}
+&\Phi(p,q-p) = \Theta(p) \Theta(q-p)=\\
 \\
-\displaystyle \vartheta(|\mathbf{p}_{T}| - p_{T\rm min})
+&\displaystyle \vartheta(|\mathbf{p}_{T}| - p_{T\rm min})
 \vartheta(\eta_{\rm max}-|\eta|)
 \vartheta(|\mathbf{q}_{T}-\mathbf{p}_{T}| - p_{T\rm min})\times\\
 \\
-\displaystyle \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{M\cosh y-|\mathbf{p}_T|\cosh\eta+M\sinh y-|\mathbf{p}_T|\sinh\eta}{M\cosh y-|\mathbf{p}_T|\cosh\eta-M\sinh y+|\mathbf{p}_T|\sinh\eta}\right)\right|\right)=\\
+&\displaystyle \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{M\cosh y-|\mathbf{p}_T|\cosh\eta+M\sinh y-|\mathbf{p}_T|\sinh\eta}{M\cosh y-|\mathbf{p}_T|\cosh\eta-M\sinh y+|\mathbf{p}_T|\sinh\eta}\right)\right|\right)=\\
 \\
-\displaystyle \vartheta(\overline{p}_T - p_{T\rm min})
-\vartheta(|\eta| - \eta_{\rm max}) \vartheta(\sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi} - p_{T\rm min})\\
+1):\quad&\displaystyle \vartheta(\eta_{\rm max}-|\eta|) \times\\
 \\
-\displaystyle \times
+2):\quad&\displaystyle \vartheta(\overline{p}_T - p_{T\rm min})\times\\
+\\
+3):\quad&\displaystyle 
   \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{Me^y-\overline{p}_Te^\eta}{Me^{-y}-\overline{p}_Te^{-
-\eta}}\right)\right|\right)\,,
+\eta}}\right)\right|\right)\times\\
+\\
+4):\quad&\displaystyle \vartheta(\sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi} - p_{T\rm min})\,,
 \end{array}
 \end{equation}
 where in the last step we have replaced $|\mathbf{p}_T|$ with
-$|\overline{p}_T|$ defined Eq.~(\ref{eq:overpT}). Now the question is
+$\overline{p}_T$ defined Eq.~(\ref{eq:overpT}). Now the question is
 understanding what is the integration domain defined by $\Phi(p,q-p)$
-on the $(\eta,\cos\phi)$-plane.
+on the $(\eta,\cos\phi)$-plane. As an example,
+Fig.~\ref{fig:IntDomain} shows the integration domain of the numerator
+in of the phase-space reduction factor Eq.~(\ref{eq:PSredDef4}) for
+$p_{T,\rm min}=20$ GeV and $\eta_{\rm max}=2.4$ at $Q=91$ GeV,
+$|\mathbf{q}_T|=10$ GeV and $y=1$.  Clearly, given that
+$1\leq\cos\phi\leq 1$, the integration domain is limited to this
+region (gray band). The $\theta$-function 1) in
+Eq.~(\ref{eq:intdomain}) limits the region to the vertical stip
+defined by $-\eta_{\rm max} < \eta < \eta_{\rm max}$ (black vertical
+lines), the $\theta$-function 2) gives the red lines, the
+$\theta$-function 3) the blue line , and the $\theta$-function 4) the
+green lines.
+\begin{figure}[h]
+  \begin{centering}
+    \includegraphics[width=0.8\textwidth]{plots/IntDomain}
+    \caption{The red area indicates the integration domain of the
+      numerator in of the phase-space reduction factor
+      Eq.~(\ref{eq:PSredDef4}) for $p_{T,\rm min}=20$ GeV and
+      $\eta_{\rm max}=2.4$ at $Q=91$ GeV, $|\mathbf{q}_T|=10$ GeV and
+      $y=1$.\label{fig:IntDomain}}
+  \end{centering}
+\end{figure}
 
-
-
-
-
+Since the $\theta$-functions in Eq.~(\ref{eq:PSredDef4}) will be used
+insinde a double nested integral over $x=\cos\phi$ first and $\eta$
+second, it is convenient to write the function $\Phi(p,q-p)$ as
+follows:
+\begin{equation}\label{eq:almostfinal}
+\Phi(p,q-p) = \vartheta(\eta_{\rm max}-|\eta|) \times \vartheta(x - f^{(2)}(\eta)) \times \vartheta(f^{(3)}(\eta)-x) \times \vartheta(f^{(4)}(\eta)-x)\,,
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+f^{(2)}(\eta) & = &\displaystyle \frac{2M p_{T,\rm min}\cosh(\eta-y) 
+                    - Q^{2}}{2p_{T,\rm min}
+                    |\mathbf{q}_T|}\,,\\
+\\
+f^{(3)}(\eta) & = &\displaystyle \frac{M \cosh(\eta-y)(Q^2 - 2
+                    p_{T,\rm min}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh(\eta-y)^{2} + p_{T,\rm min}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm min}^{2}\right)}\,, \\
+\\
+f^{(4)}(\eta) & = &\displaystyle \frac{M \cosh(\eta-y)}{|\mathbf{q}_T| }-\frac{Q^{2} \sinh(\eta -\eta_{\rm max})}{2|\mathbf{q}_T|  M\sinh(y -\eta_{\rm max})}\,.
+\end{array}
+\end{equation}
+Eq.~(\ref{eq:almostfinal}) can be written in an even more convenient
+way as:
+\begin{equation}\label{eq:final}
+\Phi(p,q-p) = \vartheta(\eta_{\rm max}-|\eta|) \times \vartheta(x - \mbox{max}[f^{(2)}(\eta),-1])\times\vartheta(\mbox{min}[f^{(3)}(\eta),f^{(4)}(\eta),1]-x)
+\end{equation}
+such that a double integral over $\eta$ and $x$ would read:
+\begin{equation}
+\int_{-\infty}^{\infty}d\eta\int_{-1}^{1}dx\,\Phi(p,q-p)\dots =
+\int_{-\eta_{\rm max}}^{\eta_{\rm max}}d\eta\int_{\mbox{max}[f^{(2)}(\eta),-1]}^{\mbox{min}[f^{(3)}(\eta),f^{(4)}(\eta),1]}dx\dots\,.
+\end{equation}
 
 
 

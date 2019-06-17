@@ -67,3 +67,6 @@ doc/src/codes/EvolutionFactor
 # Generated files
 inc/apfel/version.h
 bin/apfelxx-config
+
+# Jupyter checkpoints
+*.ipynb_checkpoints/
