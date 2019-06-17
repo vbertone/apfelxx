@@ -1057,10 +1057,10 @@ Eq.~(\ref{eq:PSredDef3}) gives:
 \end{equation}
 and likewise in the denominator setting $\Phi(p_1,p_2)=1$. Finally,
 renaming $p_1=p$, the phase-space reduction factor reads:
-\begin{equation}\label{eq:PSredDef3}
+\begin{equation}\label{eq:PSredDef4}
   \mathcal{P}(q) = \frac{\displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
-    \theta(q_0-p_{0})  \Phi(p,q-p)}{\displaystyle \int d^4p \delta(p^2) \theta(p_{0})
-    \theta(q_0-p_{0})  \delta((q-p)^2)}\,.
+    \theta(q_0-p_{0})  \Phi(p,q-p)}{\displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
+    \theta(q_0-p_{0})  }\,.
 \end{equation}
 The $\delta$-functions can now be used to constrain two of the four
 components of the momentum $p$. The first, $\delta(p_2^2)$, is usually
@@ -1095,13 +1095,11 @@ This leads to:
 
 Now we consider the second $\delta$-function:
 \begin{equation}\label{eq:integralyeah!}
-\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\int_{-\infty}^\infty d\eta
-\int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)\,,
+\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\int_{-\infty}^\infty d\eta
+\int_0^{2\pi} d\phi \int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)\,,
 \end{equation}
-being $q^2=Q^2$ and $p^2=0$. The goal is that of using this last
-$\delta$-function to get rid of the integral over $\phi$. To do so, it
-is convenient to express the four-vector $q$ in terms of $Q$, $y$, and
-$\mathbf{q}_T$:
+being $q^2=Q^2$ and $p^2=0$. It is convenient to express the
+four-vector $q$ in terms of $Q$, $y$, and $\mathbf{q}_T$:
 \begin{equation}
 q=\left(M\cosh y,\mathbf{q}_T,M\sinh y\right)\,.
 \end{equation}
@@ -1116,7 +1114,7 @@ p\cdot q=|\mathbf{p}_T|M\left(\cosh\eta \cosh y-\sinh\eta\sinh
 \mathbf{q}_T=|\mathbf{p}_T|M\cosh\left(\eta - y\right)-\mathbf{p}_T\cdot \mathbf{q}_T\,.
 \end{equation}
 We can now assume that the two-dimensional vector $\mathbf{q}_T$ is
-aligned with the $x$ axis so that 
+aligned with the $x$ axis so that
 $\mathbf{p}_T\cdot \mathbf{q}_T =
 |\mathbf{p}_T||\mathbf{q}_T|\cos\phi$(\footnote{In
   the general case in which $\mathbf{q}_T$ forms an angle $\beta$ with
@@ -1124,56 +1122,233 @@ $\mathbf{p}_T\cdot \mathbf{q}_T =
   $|\mathbf{p}_T||\mathbf{q}_T|\cos(\phi-\beta)$. However, the angle
   $\beta$ could always be reabsorbed in a redefinition of the
   integration angle $\phi$ in
-  Eq.~(\ref{eq:integralyeah!}).}). Therefore, the integral of the
-$\delta$-function over the angle $\phi$ becomes:
+  Eq.~(\ref{eq:integralyeah!}).}). Therefore, the argument of the
+delta function in Eq.~(\ref{eq:integralyeah!}) becomes:
 \begin{equation}
-\int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\int_0^{2\pi} d\phi\,\delta\left(Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\right)\,,
+f(|\mathbf{p}_T|,\eta,\phi) = Q^2-2 |\mathbf{p}_T|\left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right]\,.
 \end{equation}
-The argument of the delta function:
+and that of the $\vartheta$-function
+$M\cosh y-|\mathbf{p}_T|\cosh\eta$. It thus appears convenient to
+integrate Eq.~(\ref{eq:integralyeah!}) over $|\mathbf{p}_T|$ first:
 \begin{equation}
-f(\phi) = Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\,,
+\int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)=\frac{\overline{p}_T^2}{Q^2}\vartheta(M\cosh y-\overline{p}_T\cosh\eta)=\frac{\overline{p}_T^2}{Q^2}\,,
 \end{equation}
-whose derivative is:
+with(\footnote{Notice that the $\vartheta$-function has no effect. I
+  have verified it numerically but I cannot see it analytically.}):
+\begin{equation}\label{eq:overpT}
+\overline{p}_T(\cos\phi) = \frac{Q^2}{2 \left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right]}\,.
+\end{equation}
+Now we turn to consider the integral in $d\phi$. To this end, the
+following relations are useful:
+\begin{equation}\label{eq:intoverphi}
+\int_0^{2\pi}d\phi\, f(\cos\phi) = \int_{-1}^1\frac{dx}{\sqrt{1-x^2}}\left[f(x)+f(-x)\right]\,.
+\end{equation}
+and:
 \begin{equation}
-\frac{df(\phi)}{d\phi} = -2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi\,,
+\int \frac{dx}{(a\pm
+  x)^2\sqrt{1-x^2}}=\frac{\sqrt{1-x^2}}{(a^2-1)(x\pm
+  a)}\pm\frac{a}{(a^2-1)^{3/2}}\tan^{-1}\left(\frac{1\pm ax}{\sqrt{(a^2-1)}\sqrt{1-x^2}}\right)\,.
 \end{equation}
-has a zero in $\phi_0$ such that:
-\begin{equation}\label{eq:cosphi0}
-\cos\phi_0=\frac{2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2}{2|\mathbf{p}_T||\mathbf{q}_T|}\,,
+The last integral is such that:
+\begin{equation}\label{eq:defintoverphi}
+\int_{-1}^{1} \frac{dx}{(a\pm x)^2\sqrt{1-x^2}}=\frac{\pi a}{(a^2-1)^{3/2}}\,.
 \end{equation}
-so that:
-\begin{equation}\label{eq:derivphi0}
-\left|\frac{df(\phi)}{d\phi}\right|_{\phi=\phi_0} = 2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi_0=\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}\,,
-\end{equation}
-that gives:
+We now use Eqs.~(\ref{eq:intoverphi}) and~(\ref{eq:defintoverphi}) to
+compute:
 \begin{equation}
-\int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\left|\frac{df(\phi)}{d\phi}\right|^{-1}_{\phi=\phi_0}\int_0^{2\pi} d\phi\,\delta(\phi-\phi_0)=\frac1{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}}\,.
+\frac{1}{Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 = \frac{2\pi
+  Q^2M\cosh\left(\eta -
+    y\right)}{(M^2\cosh^2\left(\eta -
+    y\right)-|\mathbf{q}_T|^2)^{3/2}}
 \end{equation}
-Of course, the equality in Eq.~(\ref{eq:cosphi0}) is possible only if:
-\begin{equation}\label{eq:cosphi0}
-|2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2|\leq 2|\mathbf{p}_T||\mathbf{q}_T|\,.
-\end{equation}
-that is such to make the argument of the square root in
-Eq.~(\ref{eq:derivphi0}) non-negative. This sets additional
-constraints on the integration domain(\footnote{Notice that
-  $M\cosh(\eta-y)\geq |\mathbf{q}_T|$.}):
+We can go further and solve also the integral in $\eta$:
 \begin{equation}
-p_T^{-} \leq |\mathbf{p}_T| \leq p_T^{+}\quad\mbox{with}\quad
-p_T^{\pm}=\frac{Q^2}{M\cosh(\eta-y)\mp |\mathbf{q}_T|}\,.
+\begin{array}{l}
+  \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
+  \theta(q_0-p_{0})=\int_{-\infty}^\infty
+  d\eta\frac{2\pi Q^2M\cosh(\eta-y)}{(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}= \\
+  \\
+  \displaystyle\pi \frac{Q^2}{M^2}\int_{-\infty}^\infty
+  \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}= 2\pi \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= 4\pi\,.
+\end{array}
 \end{equation}
-In addition, one has to take into account the $\theta$-function in
-Eq.~(\ref{eq:integralyeah!}) that guarantees the positiveness of the
-energy:
+% \newpage
+% To so, it is convenient to express the four-vector $q$ in terms of
+% $Q$, $y$, and $\mathbf{q}_T$:
+% \begin{equation}
+% q=\left(M\cosh y,\mathbf{q}_T,M\sinh y\right)\,.
+% \end{equation}
+% with $M=\sqrt{Q^2+|\mathbf{q}_T|^2}$. While:
+% \begin{equation}
+% p=\left(|\mathbf{p}_T|\cosh\eta,\mathbf{p}_T,|\mathbf{p}_T|\sinh\eta\right)\,,
+% \end{equation}
+% so that:
+% \begin{equation}
+% p\cdot q=|\mathbf{p}_T|M\left(\cosh\eta \cosh y-\sinh\eta\sinh
+%   y\right)-\mathbf{p}_T\cdot
+% \mathbf{q}_T=|\mathbf{p}_T|M\cosh\left(\eta - y\right)-\mathbf{p}_T\cdot \mathbf{q}_T\,.
+% \end{equation}
+% We can now assume that the two-dimensional vector $\mathbf{q}_T$ is
+% aligned with the $x$ axis so that 
+% $\mathbf{p}_T\cdot \mathbf{q}_T =
+% |\mathbf{p}_T||\mathbf{q}_T|\cos\phi$(\footnote{In
+%   the general case in which $\mathbf{q}_T$ forms an angle $\beta$ with
+%   the $x$ axis, the scalar product would result in
+%   $|\mathbf{p}_T||\mathbf{q}_T|\cos(\phi-\beta)$. However, the angle
+%   $\beta$ could always be reabsorbed in a redefinition of the
+%   integration angle $\phi$ in
+%   Eq.~(\ref{eq:integralyeah!}).}). Therefore, the integral of the
+% $\delta$-function over the angle $\phi$ becomes:
+% \begin{equation}
+% \int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\int_0^{2\pi} d\phi\,\delta\left(Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\right)\,,
+% \end{equation}
+% The argument of the delta function:
+% \begin{equation}
+% f(\phi) = Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\,,
+% \end{equation}
+% whose derivative is:
+% \begin{equation}
+% \frac{df(\phi)}{d\phi} = -2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi\,,
+% \end{equation}
+% has a zero in $\phi_0$ such that:
+% \begin{equation}\label{eq:cosphi0}
+% \cos\phi_0=\frac{2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2}{2|\mathbf{p}_T||\mathbf{q}_T|}\,,
+% \end{equation}
+% so that:
+% \begin{equation}\label{eq:derivphi0}
+% \left|\frac{df(\phi)}{d\phi}\right|_{\phi=\phi_0} = 2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi_0=\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}\,,
+% \end{equation}
+% that gives:
+% \begin{equation}
+% \int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\left|\frac{df(\phi)}{d\phi}\right|^{-1}_{\phi=\phi_0}\int_0^{2\pi} d\phi\,\delta(\phi-\phi_0)=\frac1{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}}\,.
+% \end{equation}
+% Of course, the equality in Eq.~(\ref{eq:cosphi0}) is possible only if:
+% \begin{equation}\label{eq:cosphi0}
+% |2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2|\leq 2|\mathbf{p}_T||\mathbf{q}_T|\,.
+% \end{equation}
+% that is such to make the argument of the square root in
+% Eq.~(\ref{eq:derivphi0}) non-negative. This sets additional
+% constraints on the integration domain(\footnote{Notice that
+%   $M\cosh(\eta-y)\geq |\mathbf{q}_T|$.}):
+% \begin{equation}\label{eq:pTpm}
+% p_T^{-} \leq |\mathbf{p}_T| \leq p_T^{+}\quad\mbox{with}\quad
+% p_T^{\pm}=\frac{Q^2}{M\cosh(\eta-y)\mp |\mathbf{q}_T|}\,.
+% \end{equation}
+% In principle, one should also take into account the $\theta$-function
+% in Eq.~(\ref{eq:integralyeah!}) that guarantees the positiveness of
+% the energy:
+% \begin{equation}
+% \theta(q_0-p_0)=\theta(M\cosh y-|\mathbf{p}_T|\cosh\eta)\quad\Rightarrow\quad |\mathbf{p}_T|\leq
+% p_T^{(E)} = \frac{M\cosh y}{\cosh\eta}\,.
+% \end{equation}
+% However, it turns out that this constraint is always fulfilled within
+% the interval defined in Eq.~(\ref{eq:pTpm}) (To be
+% verified!). Finally, we have:
+% \begin{equation}\label{eq:PSintegral}
+% \begin{array}{l}
+% \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
+%     \theta(q_0-p_{0})=\\
+% \\
+%  \displaystyle \int_{-\infty}^\infty d\eta
+% \int_{p_T^{-}}^{p_T^{+}}
+% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{4|\mathbf{p}_T|^2\left[|\mathbf{q}_T|^2-M^2\cosh^2\left(\eta
+%   - y\right)\right] +4|\mathbf{p}_T|Q^2 M\cosh\left(\eta - y\right)
+%   -Q^4}}=\\
+% \\
+% \displaystyle \frac1{Q^2}\int_{-\infty}^\infty d\eta \sqrt{p_T^+p_T^-}
+% \int_{p_T^{-}}^{p_T^{+}}
+% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}\,.
+% \end{array}
+% \end{equation}
+% In turns out that the primitive function of the integrand in
+% $|\mathbf{p}_T|$ can be computed analytically:
+% \begin{equation}
+% \int
+% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}
+% = \sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}+\frac{p_T^-
+%   +p_T^+}2\tan^{-1}\left[\frac{p_T^- +p_T^+ - 2 |\mathbf{p}_T|}{2\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}\right]\,,
+% \end{equation}
+% and is such that, if computed between $p_T^{-}$ and $p_T^{+}$, it
+% gives:
+% \begin{equation}
+% \int_{p_T^-}^{p_T^+}
+% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}
+% = \frac{\pi(p_T^-+p_T^+)}2\,.
+% \end{equation}
+% We can go further and try to solve also the integral in $\eta$. To do
+% so we need to use the explicit expressions for $p_T^{\pm}$ given in
+% Eq.~(\ref{eq:pTpm}):
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
+%     \theta(q_0-p_{0})=\frac{\pi}{2Q^2}\int_{-\infty}^\infty d\eta
+%   (p_T^-+p_T^+)\sqrt{p_T^+p_T^-} =\\
+% \\
+% \displaystyle\pi Q^2\int_{-\infty}^\infty
+%   d\eta\frac{M\cosh(\eta-y)}{(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}
+%   = \pi \frac{Q^2}{M^2}\int_{-\infty}^\infty
+%   \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}=\\
+% \\
+% \displaystyle \pi \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= 2\pi\,.
+% \end{array}
+% \end{equation}
+Remarkably, this result gives us the denominator of
+Eq.~(\ref{eq:PSredDef4}). We now need to compute the numerator by
+inserting the appropriate function $\Phi$. In our case, the kinematic
+cuts are identical for lepton and anti-lepton:
 \begin{equation}
-\theta(q_0-p_0)=\theta(M\cosh y-|\mathbf{p}_T|\cosh\eta)\quad\Rightarrow\quad |\mathbf{p}_T|\leq
-p_T^{(E)} = \frac{M\cosh y}{\cosh\eta}\,.
+|\mathbf{p}_{T,1(2)}| > p_{T\rm min}\quad\mbox{and}\quad |\eta_{1(2)}| < \eta_{\rm max}\,.
 \end{equation}
-Finally, we have:
+Therefore, the function $\Phi$ factorises into two identical functions
+as:
 \begin{equation}
-\int d^4p \delta(p^2) \delta((q-p)^2)=\int_{-\infty}^\infty d\eta
-\int_{p_T^{-}}^{{\rm min}(p_T^{+},p_T^{(E)})}
-\frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}}\,.
+\Phi(p_1,p_2) = \Theta(p_1)\Theta(p_2)\,,
 \end{equation}
+with:
+\begin{equation}
+\Theta(p) = \vartheta(|\mathbf{p}_{T}| - p_{T\rm min})
+\vartheta(\eta_{\rm max}-|\eta|)\,.
+\end{equation}
+Regerring to Eq.~(\ref{eq:PSredDef4}), and considering that:
+\begin{equation}
+q-p=\left(M\cosh y-|\mathbf{p}_T|\cosh\eta,\mathbf{q}_T-\mathbf{p}_T,M\sinh y-|\mathbf{p}_T|\sinh\eta\right)\,.
+\end{equation}
+we thus have:
+\begin{equation}
+\begin{array}{l}
+\Phi(p,q-p) = \Theta(p) \Theta(q-p)=\\
+\\
+\displaystyle \vartheta(|\mathbf{p}_{T}| - p_{T\rm min})
+\vartheta(\eta_{\rm max}-|\eta|)
+\vartheta(|\mathbf{q}_{T}-\mathbf{p}_{T}| - p_{T\rm min})\times\\
+\\
+\displaystyle \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{M\cosh y-|\mathbf{p}_T|\cosh\eta+M\sinh y-|\mathbf{p}_T|\sinh\eta}{M\cosh y-|\mathbf{p}_T|\cosh\eta-M\sinh y+|\mathbf{p}_T|\sinh\eta}\right)\right|\right)=\\
+\\
+\displaystyle \vartheta(\overline{p}_T - p_{T\rm min})
+\vartheta(|\eta| - \eta_{\rm max}) \vartheta(\sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi} - p_{T\rm min})\\
+\\
+\displaystyle \times
+  \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{Me^y-\overline{p}_Te^\eta}{Me^{-y}-\overline{p}_Te^{-
+\eta}}\right)\right|\right)\,,
+\end{array}
+\end{equation}
+where in the last step we have replaced $|\mathbf{p}_T|$ with
+$|\overline{p}_T|$ defined Eq.~(\ref{eq:overpT}). Now the question is
+understanding what is the integration domain defined by $\Phi(p,q-p)$
+on the $(\eta,\cos\phi)$-plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \newpage
