@@ -1,0 +1,218 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+\usepackage{mathrsfs}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+\begin{document}
+
+\title{Combining evolution and DIS operators}
+
+\maketitle
+
+\section{The structure of the observables}
+
+In all cases the inclusive DIS structure functions are conveniently
+expressed in terms of PDF combinations in the so-called physical basis
+$\{q_i^\pm\}$, with $q_i^\mp = q_i\pm\overline{q}_i$, where $q_i$ and
+$\overline{q}_i$ are the PDFs of the $i-th$ quark-flavour, with
+$i=u,d,s,c,b,t$, and its antiflavour, respectively. Schematically, a
+DIS structure function can be written as:
+\begin{equation}
+F = C_g g + \sum_{i}\left(C_i^+q_i^++C_i^-q_i^-\right)\,,
+\end{equation}
+being $C$ the appropriate coefficient functions. Conversely, the
+evolution of PDFs is usually compute in the so-called QCD evolution
+basis $\{d_i^\pm\}$, with $d^+_1=\Sigma$, $d^+_2=-T_3$, $d^+_3=T_8$,
+$d^+_4=T_{15}$, $d^+_5=T_{24}$, and $d^+_6=T_{35}$ and $d^-_1=V$,
+$d^-_2=-V_3$, $d^-_3=V_8$, $d^-_4=V_{15}$, $d^-_5=V_{24}$, and
+$d^-_6=V_{35}$. The gluon remains unchanged.
+\begin{equation}
+g = \Gamma_{gg}g_0 + \Gamma_{gq}d_{1,0}^+
+\end{equation}
+while:
+\begin{equation}
+\begin{array}{rcl}
+d_i^\pm&=&\displaystyle \theta_{i2}\theta(Q-m_i)\Gamma^{\pm}d_{i,0}^\pm+\theta(m_i-Q)
+\left\{\begin{array}{ll}
+\Gamma_{qq}d_{1,0}^++\Gamma_{qg}g_0&\quad\mbox{for }+\\
+\Gamma^vd_{1,0}^-&\quad\mbox{for }-
+\end{array}\right.\\
+\\
+&=&\left\{\begin{array}{l}
+\Gamma_{qq}d_{1,0}^++\Gamma_{qg}g_0\\
+\Gamma^vd_{1,0}^-
+\end{array}\right.+\theta(Q-m_i) \left[\theta_{i2}\Gamma^{\pm}d_{i,0}^\pm-
+\left\{\begin{array}{l}
+\Gamma_{qq}d_{1,0}^++\Gamma_{qg}g_0\\
+\Gamma^vd_{1,0}^-
+\end{array}\right.\right]\,.
+\end{array}
+\end{equation}
+so that:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle  q_i^- &=& \displaystyle \delta_{i1}
+  \Gamma^vd_{1,0}^-+\Gamma^{\pm}\sum_{j=2}^6
+  \theta_{ji}\frac{1-\delta_{ij}j}{j(j-1)} 
+  \theta(Q-m_j)d_{j,0}^\pm
+\end{array}
+\end{equation}
+
+Therefore, we need to relate these two bases. This is done through the
+linear transformation:
+\begin{equation}\label{TranformationBella}
+q_i^\pm = \sum_{j=1}^6M_{ij}d^\pm_j\,,
+\end{equation}
+where the trasformation matrix $M_{ij}$ can be written as:
+\begin{equation}\label{TransDef}
+\begin{array}{l}
+\displaystyle M_{ij}=\theta_{ji}\frac{1-\delta_{ij}j}{j(j-1)}\quad j\geq 2\,,\\
+\\
+\displaystyle M_{i1} = \frac{1}{6}\,,
+\end{array}
+\end{equation}
+with $\theta_{ji}=1$ for $j\geq i$ and zero otherwise. 
+
+
+Using eq.~(\ref{TranformationBella}) we can make the following
+identifications:
+\begin{equation}
+D^{\pm} = q_{2j-1}^\pm\quad\mbox{and}\quad U^{\pm} =
+q_{2j}^\pm\,,\quad j=1,2,3\,,
+\end{equation}
+so that we can write:
+\begin{equation}
+F^\pm=
+\frac12\sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2\left[C_\pm\left(q_{2j-1}^\pm
+    \pm q_{2i}^\pm\right) + 4P^{\pm} C_g g\right]\,.
+\end{equation}
+Using the definition of $M_{ij}$ in eq.~(\ref{TransDef}), we can
+rewrite $F^{\pm}$ in terms of PDFs in the evolution basis as:
+\begin{equation}\label{eq:decompF2L}
+F^\pm=
+\sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2 F_{ij}^\pm\,,
+\end{equation}
+with:
+\begin{equation}\label{F2Ldef}
+F_{ij}^\pm=
+C_g 2P^\pm g
++
+C_\pm^{\rm S} P^\pm \frac16 d_1^\pm
++ C_\pm\sum_{k=2}^6\frac{\theta_{k,2j-1}(1-\delta_{2j-1,k}k)\pm \theta_{k,2i}(1-\delta_{2i,k}k) }{2k(k-1)}d_k^\pm\,.
+\end{equation}
+
+Eq.~(\ref{F2Ldef}) is valid only for $F_2$ and $F_3$. In order to
+obtain a similar equation also for $F_3$, one needs to change sign to
+the antiquark distributions, $i.e.$
+$\overline{q}_i\rightarrow - \overline{q}_i$. In the QCD evolution
+basis, this has the consequence of exchanging the $T$-like
+distributions with the $V$-like ones, that is to say
+$d_k^+\leftrightarrow d_k^-$. It is the easy to see that:
+\begin{equation}
+F_3^\pm=
+\sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2 F_{3,ij}^\pm\,,
+\end{equation}
+with:
+\begin{equation}\label{F3def}
+F_{3,ij}^\pm=
+C_g 2P^\pm g
++
+C_\pm^{\rm S} P^\mp \frac16 d_1^\pm
++ C_\pm\sum_{k=2}^6\frac{\theta_{k,2j-1}(1-\delta_{2j-1,k}k)\mp \theta_{k,2i}(1-\delta_{2i,k}k) }{2k(k-1)}d_k^\pm\,.
+\end{equation}
+
+It is now useful to consider the inclusive structure functions and
+exploit the unitarity of the CKM matrix elements $V_{UD}$:
+\begin{equation}
+\sum_{i=1}^3|V_{2i,(2j-1)}|^2 = \sum_{j=1}^3|V_{2i,(2j-1)}|^2 = 1\quad\Rightarrow\quad \sum_{i=1}^3\sum_{j=1}^3|V_{2i,(2j-1)}|^2 = 3\,.
+\end{equation}
+Summing over $i$ and $j$ in eq.~(\ref{eq:decompF2L}) and using
+eq.~(\ref{F2Ldef}), one obtains:
+\begin{equation}
+F^\pm=
+C_g 6P^\pm g
++
+C_\pm^{\rm S} P^\pm \frac12 d_1^\pm
++ \frac12 C_\pm\sum_{k=2}^6 d_k^\pm\sum_{l=1}^6(\pm 1)^{l+1}M_{lk}\,.
+\end{equation}
+Considering separately $F^+$ and $F^-$ and using
+eq.~(\ref{eq:properties}), one finds:
+\begin{equation}
+F^+= C_g 6g + C_+^{\rm S} \frac12 d_1^+
+\end{equation}
+and:
+\begin{equation}
+F^-= \frac12 C_-\sum_{k=2}^6\left[\frac{P^+}{k-1}-\frac{P^-}{k}\right]d_k^-\,,
+\end{equation}
+with the even/odd projectors defined as:
+\begin{equation}
+P_k^{\pm} = \frac{1\pm(-1)^k}{2}\,.
+\end{equation}
+
+It should be pointed out that such simple expressions (independent of
+the CMK matrix elements) is achievable only if it is possible to
+factorize the non-singlet coefficient functions as implicitly done in
+eqs.~(\ref{F2Ldef}) and~(\ref{F3def}). In fact, this is possible only
+in the ZM case in which the coefficient functions of each PDF
+combination is the same.
+
+For $F_3$ we find:
+\begin{equation}
+F_3^+= C_g 6g + C_-^{\rm S} \frac12 d_1^-
+\end{equation}
+and:
+\begin{equation}
+F_3^-= \frac12 C_+\sum_{k=2}^6\left[\frac{P_k^+}{k-1}-\frac{P_k^-}{k}\right]d_k^+\,.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

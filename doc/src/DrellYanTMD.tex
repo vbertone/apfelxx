@@ -1137,7 +1137,7 @@ integrate Eq.~(\ref{eq:integralyeah!}) over $|\mathbf{p}_T|$ first:
 with(\footnote{Notice that the $\vartheta$-function has no effect. I
   have verified it numerically but I cannot see it analytically.}):
 \begin{equation}\label{eq:overpT}
-\overline{p}_T(\cos\phi) = \frac{Q^2}{2 \left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right]}\,.
+\overline{p}_T(\cos\phi) = \frac{Q^2}{2 \left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right]}=\frac{Q^2}{2 |\mathbf{q}_T|}\frac1{\left[\frac{M\cosh\left(\eta - y\right)}{|\mathbf{q}_T|}-\cos\phi\right]}\,.
 \end{equation}
 Now we turn to consider the integral in $d\phi$. To this end, the
 following relations are useful:
@@ -1154,23 +1154,46 @@ The last integral is such that:
 \begin{equation}\label{eq:defintoverphi}
 \int_{-1}^{1} \frac{dx}{(a\pm x)^2\sqrt{1-x^2}}=\frac{\pi a}{(a^2-1)^{3/2}}\,.
 \end{equation}
-We now use Eqs.~(\ref{eq:intoverphi}) and~(\ref{eq:defintoverphi}) to
+We now use Eqs.~(\ref{eq:intoverphi})-(\ref{eq:defintoverphi}) to
 compute:
 \begin{equation}
-\frac{1}{Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 = \frac{2\pi
+\begin{array}{rcl}
+&&\displaystyle
+  \frac{1}{Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 =
+                                                                    \displaystyle
+                                                                    \frac{Q^2}{4
+                                                                    |\mathbf{q}_T|^2}\int_0^{2\pi}\frac{d\phi}{\left[\frac{M\cosh\left(\eta
+                                                                    -
+                                                                    y\right)}{|\mathbf{q}_T|}-\cos\phi\right]^2}\\
+\\
+&=&\displaystyle \frac{Q^2}{4|\mathbf{q}_T|^2}\int_{-1}^{1}\frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}-x\right)^2}+\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}+x\right)^2}\right]\\
+\\
+&=&\displaystyle \frac{Q^2}{4}\Bigg\{\frac{|\mathbf{q}_T|^2 x\sqrt{1-x^2}}{(M ^2\cosh ^2\left(\eta- y\right)-|\mathbf{q}_T|^2)(x^2 |\mathbf{q}_T|^2-
+  M ^2\cosh ^2\left(\eta- y\right))}\\
+\\
+&-&\displaystyle \frac{M\cosh\left(\eta-
+    y\right)}{(M^2\cosh^2\left(\eta-
+    y\right)-|\mathbf{q}_T|^2)^{3/2}}\Bigg[\tan^{-1}\left(\frac{|\mathbf{q}_T|-
+    xM\cosh\left(\eta-y\right)}{\sqrt{(M^2\cosh^2\left(\eta-y\right)-|\mathbf{q}_T|^2)}\sqrt{1-x^2}}\right)\\
+\\
+&-&\displaystyle\tan^{-1}\left(\frac{|\mathbf{q}_T|+
+    xM\cosh\left(\eta-y\right)}{\sqrt{(M^2\cosh^2\left(\eta-y\right)-|\mathbf{q}_T|^2)}\sqrt{1-x^2}}\right)\Bigg]\Bigg\}_{-1}^{1}\\
+\\
+&=&\displaystyle \frac{\pi
   Q^2M\cosh\left(\eta -
-    y\right)}{(M^2\cosh^2\left(\eta -
+    y\right)}{2(M^2\cosh^2\left(\eta -
     y\right)-|\mathbf{q}_T|^2)^{3/2}}
+\end{array}
 \end{equation}
 We can go further and solve also the integral in $\eta$:
 \begin{equation}
 \begin{array}{l}
   \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
   \theta(q_0-p_{0})=\int_{-\infty}^\infty
-  d\eta\frac{2\pi Q^2M\cosh(\eta-y)}{(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}= \\
+  d\eta\frac{\pi Q^2M\cosh(\eta-y)}{2(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}= \\
   \\
-  \displaystyle\pi \frac{Q^2}{M^2}\int_{-\infty}^\infty
-  \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}= 2\pi \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= 4\pi\,.
+  \displaystyle\frac{\pi }{2}\frac{Q^2}{M^2}\int_{-\infty}^\infty
+  \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}= \frac{\pi}{2} \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= \pi\,.
 \end{array}
 \end{equation}
 % \newpage
@@ -1370,14 +1393,14 @@ follows:
 \Phi(p,q-p) = \vartheta(\eta_{\rm max}-|\eta|) \times \vartheta(x - f^{(2)}(\eta)) \times \vartheta(f^{(3)}(\eta)-x) \times \vartheta(f^{(4)}(\eta)-x)\,,
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:relevantfuncs}
 \begin{array}{rcl}
 f^{(2)}(\eta) & = &\displaystyle \frac{2M p_{T,\rm min}\cosh(\eta-y) 
                     - Q^{2}}{2p_{T,\rm min}
                     |\mathbf{q}_T|}\,,\\
 \\
 f^{(3)}(\eta) & = &\displaystyle \frac{M \cosh(\eta-y)(Q^2 - 2
-                    p_{T,\rm min}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh(\eta-y)^{2} + p_{T,\rm min}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm min}^{2}\right)}\,, \\
+                    p_{T,\rm min}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh ^{2} (\eta-y) + p_{T,\rm min}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm min}^{2}\right)}\,, \\
 \\
 f^{(4)}(\eta) & = &\displaystyle \frac{M \cosh(\eta-y)}{|\mathbf{q}_T| }-\frac{Q^{2} \sinh(\eta -\eta_{\rm max})}{2|\mathbf{q}_T|  M\sinh(y -\eta_{\rm max})}\,.
 \end{array}
@@ -1390,14 +1413,96 @@ way as:
 such that a double integral over $\eta$ and $x$ would read:
 \begin{equation}
 \int_{-\infty}^{\infty}d\eta\int_{-1}^{1}dx\,\Phi(p,q-p)\dots =
-\int_{-\eta_{\rm max}}^{\eta_{\rm max}}d\eta\int_{\mbox{max}[f^{(2)}(\eta),-1]}^{\mbox{min}[f^{(3)}(\eta),f^{(4)}(\eta),1]}dx\dots\,.
+\int_{-\eta_{\rm max}}^{\eta_{\rm
+    max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\int_{x_1(\eta)}^{x_2(\eta)}dx\dots\,.
+\end{equation}
+with:
+\begin{equation}
+x_1(\eta) = {\rm max}[f^{(2)}(\eta),-1]\quad\mbox{and}\quad x_2(\eta) = {\rm min}[f^{(3)}(\eta),f^{(4)}(\eta),1]\,.
 \end{equation}
 
+Gathering all the pieces, the final expression for the phase-space
+reduction factor is given by:
+\begin{equation}\label{eq:finalformula}
+  \mathcal{P}(Q,y,q_T)=\displaystyle \int_{-\eta_{\rm
+      max}}^{\eta_{\rm
+      max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\left[F(x_2(\eta),\eta)-F(x_1(\eta) ,\eta)\right]
+\end{equation}
+with:
+\begin{equation}\label{eq:integrandF}
+\begin{array}{rcl}
+\displaystyle F(x ,\eta)&=&\displaystyle \frac{1}{4\pi}\frac{Q^2}{E_q^2-q_T^2}\Bigg\{\frac{q_T^2 x\sqrt{1-x^2}}{x^2 q_T^2-
+  E_q^2}\\
+\\
+&-&\displaystyle \frac{E_q}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{q_T-
+    xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)-\displaystyle\tan^{-1}\left(\frac{q_T+
+    xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)\right]\Bigg\}\
+\end{array}
+\end{equation}
+where we have defined $E_q = M\cosh(\eta-y)$ and
+$q_T=|\mathbf{q}_T|$.
 
-
-
-
-
+Let us consider the case $y=q_T=0$. In this limit,
+Eq.~(\ref{eq:integrandF}) reduces to:
+\begin{equation}
+F(x,\eta)=\displaystyle \frac{1}{4\pi}\frac{1}{\cosh^2(\eta)}\left[\tan^{-1}\left(\frac{
+    x}{\sqrt{1-x^2}}\right)-\displaystyle\tan^{-1}\left(-\frac{
+    x}{\sqrt{1-x^2}}\right)\right]\,.
+\end{equation}
+As evident from Eq.~(\ref{eq:relevantfuncs}), for $q_T=0$ all
+functions $f^{(2)}$, $f^{(3)}$, and $f^{(4)}$ diverge. The relevant
+question, though, is whether they go to plus or minus infinity
+depending on the value of $Q$. Of course, $q_T$ will tend to zero
+positively, so we find:
+\begin{equation}
+\begin{array}{l}
+\displaystyle f^{(2)}(\eta)\rightarrow \infty\times\mbox{sign}\left[2 p_{T,\rm min}\cosh(\eta)-Q\right]\,,\\
+\\
+\displaystyle f^{(3)}(\eta) \rightarrow \infty\times\mbox{sign}\left[\frac{\cosh(\eta)(Q^2 - 2
+                    p_{T,\rm min}^{2})- Q\sqrt{Q^{2} \sinh^{2}(\eta) + p_{T,\rm min}^{2} }}{Q^{2} - p_{T,\rm min}^{2}}\right]\,, \\
+\\
+\displaystyle f^{(4)}(\eta) \rightarrow \infty\times\mbox{sign}\left[\sinh(\eta +\eta_{\rm max})\right]=+\infty\,.
+\end{array}
+\end{equation}
+Therefore, the last function never contributes. In addition, for the
+$\theta$-function in Eq.~(\ref{eq:finalformula}) to be different from
+zero, we need $f^{(2)}(\eta)\rightarrow -\infty$ and
+$f^{(3)}(\eta)\rightarrow \infty$. These both translate into
+$Q\geq 2 p_{T,\rm min}\cosh(\eta)$. This inequality is
+satisfied only if $Q\geq 2p_{T,\rm min}$ for:
+\begin{equation}
+-\overline{\eta}\leq\eta\leq \overline{\eta}\quad\mbox{with}\quad \overline{\eta} =\cosh^{-1}\left(\frac{Q}{2p_{T,\rm min}}\right)\,.
+\end{equation}
+Therefore, the phase-space reduction factor eventually becomes:
+\begin{equation}
+\begin{array}{rcl}
+  \mathcal{P}(Q,0,0)&=&\displaystyle\frac12\vartheta(Q- 2p_{T,\rm min})\displaystyle \int_{-\eta_{\rm
+      max}}^{\eta_{\rm
+      max}}\frac{d\eta}{\cosh^2\eta}\,\vartheta(\eta+\overline{\eta})
+  \vartheta(\eta^+-\overline{\eta})\\
+\\
+&=&\displaystyle\vartheta(Q- 2p_{T,\rm
+    min})\tanh(\mbox{max}[\eta_{\rm max},\overline{\eta}])\,.
+\end{array}
+\end{equation}
+This result can be written more explicitly as:
+\begin{equation}\label{eq:partcase}
+\mathcal{P}(Q,0,0) = 
+\left\{
+\begin{array}{ll}
+0 & \quad Q< 2p_{T,\rm min}\,,\\
+\displaystyle \tanh(\overline{\eta})=\left(1+\frac{2p_{T,\rm min}}{Q}\right)\sqrt{1-\frac{4 p_{T,\rm min}}{Q+2p_{T,\rm min}}}& \quad 2p_{T,\rm min} \leq Q < 2p_{T,\rm min}\cosh\eta_{\rm max}\,,\\
+\tanh(\eta_{\rm max}) & \quad Q \geq 2p_{T,\rm min}\cosh\eta_{\rm max}\,.
+\end{array}
+\right.
+\end{equation}
+This differs from Eq.~(24) of Ref.~\cite{Scimemi:2017etj}. Despite the
+three different regions coincide, the behavior of the phase-space
+reduction factor for all regions but for $Q< 2p_{T,\rm min}$ is
+different. In favour of our result there is the fact that
+$\mathcal{P}(Q,0,0)$ in Eq.~(\ref{eq:partcase}) is continuous at
+$Q = 2p_{T,\rm min}\cosh\eta_{\rm max}$ while that of
+Ref.~\cite{Scimemi:2017etj} is not.
 
 
 
