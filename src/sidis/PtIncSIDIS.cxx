@@ -1,33 +1,27 @@
 /*
-  Author: Valerio Bertone
+ * Author: Valerio Bertone
  */
 
 // LHAPDF libs
-#include "LHAPDF/LHAPDF.h"
+#include <LHAPDF/LHAPDF.h>
 
 // APFEL++ libs
-#include "apfel/grid.h"
-#include "apfel/constants.h"
-
-// SIDIS objects
-#include "SIDIS.h"
-
-using namespace std;
-using namespace apfel;
+#include <apfel/apfelxx.h>
+#include <apfel/SIDIS.h>
 
 int main() {
   // Open PDF and FF sets.
-  const string PDFset = "CT14nlo";
-  const string FFset  = "DSS14_NLO_PiSum";  // DSS14 set for pi^{\pm} converted in the LHAPDF format
+  const std::string PDFset = "CT14nlo";
+  const std::string FFset  = "DSS14_NLO_PiSum";  // DSS14 set for pi^{\pm} converted in the LHAPDF format
   LHAPDF::PDF* PDFs = LHAPDF::mkPDF(PDFset);
   LHAPDF::PDF* FFs  = LHAPDF::mkPDF(FFset);
 
   // Define PDFs and FFs as lambda functions.
-  auto fPDFs = [&] (double const& x, double const& Q) -> map<int, double> { return PDFs->xfxQ(x,Q); };
-  auto fFFs  = [&] (double const& x, double const& Q) -> map<int, double> { return FFs->xfxQ(x,Q); };
+  auto fPDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return PDFs->xfxQ(x,Q); };
+  auto fFFs  = [&] (double const& x, double const& Q) -> std::map<int, double> { return FFs->xfxQ(x,Q); };
 
   // Define x-space grid.
-  const Grid g{{SubGrid{100, 1e-4, 3}, SubGrid{100, 1e-1, 3},SubGrid{50, 8e-1, 3}}};
+  const apfel::Grid g{{{100, 1e-4, 3}, {100, 1e-1, 3}, {50, 8e-1, 3}}};
 
   // Initialize SIDIS objects.
   InitializeSIDIS(g);
@@ -40,24 +34,24 @@ int main() {
       const double Q = sqrt(Q2);
 
       // Compute coupling from the LHAPDF PDF set.
-      const double coup = PDFs->alphasQ(Q) / FourPi;
+      const double coup = PDFs->alphasQ(Q) / apfel::FourPi;
 
       // Compute distributions for PDFs and FFs.
-      const map<int, Distribution> dPDF = DistributionMap(g, fPDFs, Q);
-      const map<int, Distribution> dFF  = DistributionMap(g, fFFs,  Q);
+      const std::map<int, apfel::Distribution> dPDF = DistributionMap(g, fPDFs, Q);
+      const std::map<int, apfel::Distribution> dFF  = DistributionMap(g, fFFs,  Q);
 
-      DoubleObject<Distribution> distqq;
-      DoubleObject<Distribution> distgq;
-      DoubleObject<Distribution> distqg;
+      apfel::DoubleObject<apfel::Distribution> distqq;
+      apfel::DoubleObject<apfel::Distribution> distgq;
+      apfel::DoubleObject<apfel::Distribution> distqg;
       for (auto j = - 6; j <= 6; j++)
 	{
 	  // Skip the gluon.
 	  if (j == 0 || dPDF.find(j) == dPDF.end() || dFF.find(j) == dFF.end())
 	    continue;
 
-	  distqq.AddTerm({QCh2[abs(j)-1], dPDF.at(j),  dFF.at(j)});
-	  distgq.AddTerm({QCh2[abs(j)-1], dPDF.at(j),  dFF.at(21)});
-	  distqg.AddTerm({QCh2[abs(j)-1], dPDF.at(21), dFF.at(j)});
+	  distqq.AddTerm({apfel::QCh2[abs(j)-1], dPDF.at(j),  dFF.at(j)});
+	  distgq.AddTerm({apfel::QCh2[abs(j)-1], dPDF.at(j),  dFF.at(21)});
+	  distqg.AddTerm({apfel::QCh2[abs(j)-1], dPDF.at(21), dFF.at(j)});
 	}
 
       // Inelasticity.
@@ -67,10 +61,10 @@ int main() {
 
       // DIS prefactor. ConvFact is the conversion factor from
       // GeV^{-2} to pb.
-      const double fact = ConvFact * pow(1./137.,2) * FourPi / pow(Q, 4) / x;
+      const double fact = apfel::ConvFact * pow(1./137.,2) * apfel::FourPi / pow(Q, 4) / x;
 
       // Compute cross sections at LO and NLO.
-      const DoubleObject<Distribution> xsec = yp * ( ( C20qq + coup * C21qq ) * distqq + coup * ( C21gq * distgq + C21qg * distqg ) )
+      const apfel::DoubleObject<apfel::Distribution> xsec = yp * ( ( C20qq + coup * C21qq ) * distqq + coup * ( C21gq * distgq + C21qg * distqg ) )
       + y2 * coup * ( CL1qq * distqq + CL1gq * distgq + CL1qg * distqg );
 
       return fact * xsec.Evaluate(x, z);
@@ -84,7 +78,7 @@ int main() {
   const double S  = Q2 / x / y; // Q2 = xyS pow(318, 2); // HERA c.m.e.
 
   // Output cross section
-  cout << scientific << "\ndSigma/dxdQ2dz(x = " << x << ", Q2 = " << Q2 << " GeV^2, z = " << z << ") = " << SigmaSIDIS(x, Q2, z, S) << " pb GeV^{-2}\n" << endl;
+  std::cout << std::scientific << "\ndSigma/dxdQ2dz(x = " << x << ", Q2 = " << Q2 << " GeV^2, z = " << z << ") = " << SigmaSIDIS(x, Q2, z, S) << " pb GeV^{-2}\n" << std::endl;
 
   return 0;
 }

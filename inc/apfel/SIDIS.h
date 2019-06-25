@@ -1,35 +1,34 @@
-/*
-  Author: Valerio Bertone
- */
+//
+// APFEL++ 2017
+//
+// Authors: Valerio Bertone: valerio.bertone@cern.ch
+//
 
 #include "apfel/expression.h"
 #include "apfel/doubleobject.h"
 #include "apfel/operator.h"
 #include "apfel/timer.h"
 
-using namespace std;
-using namespace apfel;
-
 // SIDIS hard cross sections.
-DoubleObject<Operator> C20qq;
-DoubleObject<Operator> C21qq;
-DoubleObject<Operator> C21gq;
-DoubleObject<Operator> C21qg;
+apfel::DoubleObject<apfel::Operator> C20qq;
+apfel::DoubleObject<apfel::Operator> C21qq;
+apfel::DoubleObject<apfel::Operator> C21gq;
+apfel::DoubleObject<apfel::Operator> C21qg;
 
-DoubleObject<Operator> CL1qq;
-DoubleObject<Operator> CL1gq;
-DoubleObject<Operator> CL1qg;
+apfel::DoubleObject<apfel::Operator> CL1qq;
+apfel::DoubleObject<apfel::Operator> CL1gq;
+apfel::DoubleObject<apfel::Operator> CL1qg;
 
 // Expressions needed for the computation of the SIDIS cross sections.
 // F2
-class delta: public Expression
+class delta: public apfel::Expression
 {
 public:
   delta(): Expression() {}
   double Local(double const&) const { return 1; }
 };
 
-class s0: public Expression
+class s0: public apfel::Expression
 {
 public:
   s0(): Expression() {}
@@ -37,7 +36,7 @@ public:
   double Local(double const& x) const { return log( 1 - x ); }
 };
 
-class s1: public Expression
+class s1: public apfel::Expression
 {
 public:
   s1(): Expression() {}
@@ -45,72 +44,72 @@ public:
   double Local(double const& x) const { double l = log( 1 - x ); return l * l / 2; }
 };
 
-class lrqq: public Expression
+class lrqq: public apfel::Expression
 {
 public:
   lrqq(): Expression() {}
   double Regular(double const& x) const
   {
     const double expr = ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
-    return 2 * CF * expr;
+    return 2 * apfel::CF * expr;
   }
 };
 
-class srqq: public Expression
+class srqq: public apfel::Expression
 {
 public:
   srqq(): Expression() {}
-  double Regular(double const& x) const { return - 2 * CF * ( 1 + x ); }
+  double Regular(double const& x) const { return - 2 * apfel::CF * ( 1 + x ); }
 };
 
-class rlqq: public Expression
+class rlqq: public apfel::Expression
 {
 public:
   rlqq(): Expression() {}
   double Regular(double const& x) const
   {
     const double expr = - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
-    return 2 * CF * expr;
+    return 2 * apfel::CF * expr;
   }
 };
 
-class rsqq: public Expression
+class rsqq: public apfel::Expression
 {
 public:
   rsqq(): Expression() {}
-  double Regular(double const& x) const { return - 2 * CF * ( 1 + x ); }
+  double Regular(double const& x) const { return - 2 * apfel::CF * ( 1 + x ); }
 };
 
 
-class r11qq: public Expression
+class r11qq: public apfel::Expression
 {
 public:
   r11qq(): Expression() {}
   double Regular(double const&) const { return 1; }
 };
 
-class r12qq: public Expression
+class r12qq: public apfel::Expression
 {
 public:
   r12qq(): Expression() {}
   double Regular(double const&) const { return 1; }
 };
 
-class r21qq: public Expression
+class r21qq: public apfel::Expression
 {
 public:
   r21qq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class r22qq: public Expression
+class r22qq: public apfel::Expression
 {
 public:
   r22qq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class lrgq: public Expression
+class lrgq: public apfel::Expression
 {
 public:
   lrgq(): Expression() {}
@@ -118,11 +117,11 @@ public:
   {
     const double omx = ( 1 - x );
     const double expr = ( 1 + omx * omx ) * log( x * omx ) / x + x;
-    return 2 * CF * expr;
+    return 2 * apfel::CF * expr;
   }
 };
 
-class srgq: public Expression
+class srgq: public apfel::Expression
 {
 public:
   srgq(): Expression() {}
@@ -130,53 +129,53 @@ public:
   {
     const double omx = ( 1 - x );
     const double expr = ( 1 + omx * omx ) / x;
-    return 2 * CF * expr;
+    return 2 * apfel::CF * expr;
   }
 };
 
-class r11gq: public Expression
+class r11gq: public apfel::Expression
 {
 public:
   r11gq(): Expression() {}
   double Regular(double const& x) const { return 1 + 3 * x; }
 };
 
-class r12gq: public Expression
+class r12gq: public apfel::Expression
 {
 public:
   r12gq(): Expression() {}
   double Regular(double const&) const { return 1; }
 };
 
-class r21gq: public Expression
+class r21gq: public apfel::Expression
 {
 public:
   r21gq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class r22gq: public Expression
+class r22gq: public apfel::Expression
 {
 public:
   r22gq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class r31gq: public Expression
+class r31gq: public apfel::Expression
 {
 public:
   r31gq(): Expression() {}
   double Regular(double const& x) const { return 1 + x; }
 };
 
-class r32gq: public Expression
+class r32gq: public apfel::Expression
 {
 public:
   r32gq(): Expression() {}
   double Regular(double const& x) const { return 1 / x; }
 };
 
-class rlqg: public Expression
+class rlqg: public apfel::Expression
 {
 public:
   rlqg(): Expression() {}
@@ -188,7 +187,7 @@ public:
   }
 };
 
-class rsqg: public Expression
+class rsqg: public apfel::Expression
 {
 public:
   rsqg(): Expression() {}
@@ -200,28 +199,28 @@ public:
   }
 };
 
-class r11qg: public Expression
+class r11qg: public apfel::Expression
 {
 public:
   r11qg(): Expression() {}
   double Regular(double const& x) const { return - 1 + 6 * x - 6 * x * x; }
 };
 
-class r12qg: public Expression
+class r12qg: public apfel::Expression
 {
 public:
   r12qg(): Expression() {}
   double Regular(double const&) const { return 1; }
 };
 
-class r21qg: public Expression
+class r21qg: public apfel::Expression
 {
 public:
   r21qg(): Expression() {}
   double Regular(double const& x) const { return x * x + ( 1 - x ) * ( 1 - x ); }
 };
 
-class r22qg: public Expression
+class r22qg: public apfel::Expression
 {
 public:
   r22qg(): Expression() {}
@@ -229,42 +228,42 @@ public:
 };
 
 // FL
-class r11Lqq: public Expression
+class r11Lqq: public apfel::Expression
 {
 public:
   r11Lqq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class r12Lqq: public Expression
+class r12Lqq: public apfel::Expression
 {
 public:
   r12Lqq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class r11Lgq: public Expression
+class r11Lgq: public apfel::Expression
 {
 public:
   r11Lgq(): Expression() {}
   double Regular(double const& x) const { return x; }
 };
 
-class r12Lgq: public Expression
+class r12Lgq: public apfel::Expression
 {
 public:
   r12Lgq(): Expression() {}
   double Regular(double const& x) const { return 1 - x; }
 };
 
-class r11Lqg: public Expression
+class r11Lqg: public apfel::Expression
 {
 public:
   r11Lqg(): Expression() {}
   double Regular(double const& x) const { return x * ( 1 - x ); }
 };
 
-class r12Lqg: public Expression
+class r12Lqg: public apfel::Expression
 {
 public:
   r12Lqg(): Expression() {}
@@ -272,10 +271,10 @@ public:
 };
 
 // Functions that fills in the SIDIS hard cross sections.
-void InitializeSIDIS(Grid const& g)
+void InitializeSIDIS(apfel::Grid const& g)
 {
-  cout << "Initializing SIDIS hard cross sections... ";
-  Timer t;
+  std::cout << "Initializing SIDIS hard cross sections... ";
+  apfel::Timer t;
   t.start();
 
   // ====================================================
@@ -283,30 +282,30 @@ void InitializeSIDIS(Grid const& g)
   // Expressions taken from Appendix C of hep-ph/9711387.
   // ====================================================
   // LO contribution.
-  const Operator odelta{g, delta{}};
+  const apfel::Operator odelta{g, delta{}};
 
   C20qq.AddTerm({1, odelta, odelta});
 
   // NLO contributions
   // F2
-  const Operator os0{g, s0{}};
-  const Operator os1{g, s1{}};
+  const apfel::Operator os0{g, s0{}};
+  const apfel::Operator os1{g, s1{}};
 
-  const double LLqq = - 16 * CF;
-  const double LSqq = 4 * CF;
-  const double SLqq = 4 * CF;
-  const double SSqq = 4 * CF;
-  const double K1qq = 4 * CF;
-  const double K2qq = 12 * CF;
+  const double LLqq = - 16 * apfel::CF;
+  const double LSqq = 4 * apfel::CF;
+  const double SLqq = 4 * apfel::CF;
+  const double SSqq = 4 * apfel::CF;
+  const double K1qq = 4 * apfel::CF;
+  const double K2qq = 12 * apfel::CF;
 
-  const Operator olrqq{g, lrqq{}};
-  const Operator osrqq{g, srqq{}};
-  const Operator orlqq{g, rlqq{}};
-  const Operator orsqq{g, rsqq{}};
-  const Operator or11qq{g, r11qq{}};
-  const Operator or12qq{g, r12qq{}};
-  const Operator or21qq{g, r21qq{}};
-  const Operator or22qq{g, r22qq{}};
+  const apfel::Operator olrqq{g, lrqq{}};
+  const apfel::Operator osrqq{g, srqq{}};
+  const apfel::Operator orlqq{g, rlqq{}};
+  const apfel::Operator orsqq{g, rsqq{}};
+  const apfel::Operator or11qq{g, r11qq{}};
+  const apfel::Operator or12qq{g, r12qq{}};
+  const apfel::Operator or21qq{g, r21qq{}};
+  const apfel::Operator or22qq{g, r22qq{}};
 
   C21qq.AddTerm({LLqq, odelta, odelta}); //1
   C21qq.AddTerm({LSqq, odelta, os1   }); //2
@@ -319,18 +318,18 @@ void InitializeSIDIS(Grid const& g)
   C21qq.AddTerm({K1qq, or11qq, or12qq}); //9
   C21qq.AddTerm({K2qq, or21qq, or22qq}); //10
 
-  const double K1gq = 4 * CF;
-  const double K2gq = - 12 * CF;
-  const double K3gq = - 2 * CF;
+  const double K1gq = 4 * apfel::CF;
+  const double K2gq = - 12 * apfel::CF;
+  const double K3gq = - 2 * apfel::CF;
 
-  const Operator olrgq{g, lrgq{}};
-  const Operator osrgq{g, srgq{}};
-  const Operator or11gq{g, r11gq{}};
-  const Operator or12gq{g, r12gq{}};
-  const Operator or21gq{g, r21gq{}};
-  const Operator or22gq{g, r22gq{}};
-  const Operator or31gq{g, r31gq{}};
-  const Operator or32gq{g, r32gq{}};
+  const apfel::Operator olrgq{g, lrgq{}};
+  const apfel::Operator osrgq{g, srgq{}};
+  const apfel::Operator or11gq{g, r11gq{}};
+  const apfel::Operator or12gq{g, r12gq{}};
+  const apfel::Operator or21gq{g, r21gq{}};
+  const apfel::Operator or22gq{g, r22gq{}};
+  const apfel::Operator or31gq{g, r31gq{}};
+  const apfel::Operator or32gq{g, r32gq{}};
 
   C21gq.AddTerm({1   , odelta, olrgq }); //1
   C21gq.AddTerm({1   , os0   , osrgq }); //2
@@ -341,12 +340,12 @@ void InitializeSIDIS(Grid const& g)
   const double K1qg = 2;
   const double K2qg = 1;
 
-  const Operator orlqg{g, rlqg{}};
-  const Operator orsqg{g, rsqg{}};
-  const Operator or11qg{g, r11qg{}};
-  const Operator or12qg{g, r12qg{}};
-  const Operator or21qg{g, r21qg{}};
-  const Operator or22qg{g, r22qg{}};
+  const apfel::Operator orlqg{g, rlqg{}};
+  const apfel::Operator orsqg{g, rsqg{}};
+  const apfel::Operator or11qg{g, r11qg{}};
+  const apfel::Operator or12qg{g, r12qg{}};
+  const apfel::Operator or21qg{g, r21qg{}};
+  const apfel::Operator or22qg{g, r22qg{}};
 
   C21qg.AddTerm({1   , orlqg , odelta}); //1
   C21qg.AddTerm({1   , orsqg , os0   }); //2
@@ -354,24 +353,24 @@ void InitializeSIDIS(Grid const& g)
   C21qg.AddTerm({K2qg, or21qg, or22qg}); //4
 
   // FL
-  const double K1Lqq = 8 * CF;
+  const double K1Lqq = 8 * apfel::CF;
 
-  const Operator or11Lqq{g, r11Lqq{}};
-  const Operator or12Lqq{g, r12Lqq{}};
+  const apfel::Operator or11Lqq{g, r11Lqq{}};
+  const apfel::Operator or12Lqq{g, r12Lqq{}};
 
   CL1qq.AddTerm({K1Lqq, or11Lqq, or12Lqq});
 
-  const double K1Lgq = 8 * CF;
+  const double K1Lgq = 8 * apfel::CF;
 
-  const Operator or11Lgq{g, r11Lgq{}};
-  const Operator or12Lgq{g, r12Lgq{}};
+  const apfel::Operator or11Lgq{g, r11Lgq{}};
+  const apfel::Operator or12Lgq{g, r12Lgq{}};
 
   CL1gq.AddTerm({K1Lgq, or11Lgq, or12Lgq});
 
   const double K1Lqg = 8;
 
-  const Operator or11Lqg{g, r11Lqg{}};
-  const Operator or12Lqg{g, r12Lqg{}};
+  const apfel::Operator or11Lqg{g, r11Lqg{}};
+  const apfel::Operator or12Lqg{g, r12Lqg{}};
 
   CL1qg.AddTerm({K1Lqg, or11Lqg, or12Lqg});
   t.stop();
