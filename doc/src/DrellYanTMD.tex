@@ -1018,7 +1018,7 @@ defined as:
 where $p_1$ and $p_2$ are the four-momenta of the outgoing leptons
 and $L^{\mu\nu}$ is the leptonic tensor that, assuming massless
 leptons, reads:
-\begin{equation}
+\begin{equation}\label{eq:lepttens}
 L^{\mu\nu}(p_1,p_2) = 4(p_1^{\mu}p_2^{\nu}+p_2^{\mu}p_1^{\nu}-g^{\mu\nu}p_1p_2)\,,
 \end{equation}
 so that:
@@ -1131,7 +1131,7 @@ f(|\mathbf{p}_T|,\eta,\phi) = Q^2-2 |\mathbf{p}_T|\left[M\cosh\left(\eta - y\rig
 and that of the $\vartheta$-function
 $M\cosh y-|\mathbf{p}_T|\cosh\eta$. It thus appears convenient to
 integrate Eq.~(\ref{eq:integralyeah!}) over $|\mathbf{p}_T|$ first:
-\begin{equation}
+\begin{equation}\label{eq:firstintegral}
 \int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)=\frac{\overline{p}_T^2}{Q^2}\vartheta(M\cosh y-\overline{p}_T\cosh\eta)=\frac{\overline{p}_T^2}{Q^2}\,,
 \end{equation}
 with(\footnote{Notice that the $\vartheta$-function has no effect. I
@@ -1145,7 +1145,7 @@ following relations are useful:
 \int_0^{2\pi}d\phi\, f(\cos\phi) = \int_{-1}^1\frac{dx}{\sqrt{1-x^2}}\left[f(x)+f(-x)\right]\,.
 \end{equation}
 and:
-\begin{equation}
+\begin{equation}\label{eq:complicatedintegral}
 \int \frac{dx}{(a\pm
   x)^2\sqrt{1-x^2}}=\frac{\sqrt{1-x^2}}{(a^2-1)(x\pm
   a)}\pm\frac{a}{(a^2-1)^{3/2}}\tan^{-1}\left(\frac{1\pm ax}{\sqrt{(a^2-1)}\sqrt{1-x^2}}\right)\,.
@@ -1186,7 +1186,7 @@ compute:
 \end{array}
 \end{equation}
 We can go further and solve also the integral in $\eta$:
-\begin{equation}
+\begin{equation}\label{eq:remarkableintegral}
 \begin{array}{l}
   \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
   \theta(q_0-p_{0})=\int_{-\infty}^\infty
@@ -1502,7 +1502,134 @@ reduction factor for all regions but for $Q< 2p_{T,\rm min}$ is
 different. In favour of our result there is the fact that
 $\mathcal{P}(Q,0,0)$ in Eq.~(\ref{eq:partcase}) is continuous at
 $Q = 2p_{T,\rm min}\cosh\eta_{\rm max}$ while that of
-Ref.~\cite{Scimemi:2017etj} is not.
+Ref.~\cite{Scimemi:2017etj} is not. In addition, when setting
+$p_{T,\rm min} = 0$ and $\eta_{\rm max}=\infty$, \textit{i.e.} no
+cuts, our result tends to $\mathcal{P}(Q,0,0)=\tanh(\infty)=1$, as it
+should. While the result in Eq.~(24) of Ref.~\cite{Scimemi:2017etj}
+actually diverges.
+
+The integrand of Eq.~(\ref{eq:finalformula}), due to the behaviour of
+$x_1$ and $x_2$ as functions of $\eta$, a piecewise
+function. Therefore, its numerical integration is problematic in that
+quadrature algorithms assume that the integrand be continuos over the
+integration range. The solution is to identify the discontinuity
+points and integrate the function separately over the resulting
+ranges. However, the complexity of the integration region
+(\textit{e.g.} see Fig.~\ref{fig:IntDomain}) makes the analytical
+identification of the discontinuity points hard to achieve.
+
+\subsection{Convoluting the leptonic tensor with $g_\perp^{\mu\nu}$}
+
+The calculation done in the previous section holds when convoluting
+the leptonic tensor $L_{\mu\nu}$ with the metric tensor $g^{\mu\nu}$
+associated with the Lorentz structure of the hadronic tensor. However,
+at small values of $|\mathbf{q}_T|$, the leading-power Lorentz
+structure that one needs to multiply the leptonic tensor for is:
+\begin{equation}
+g_\perp^{\mu\nu} = g^{\mu\nu}+z^\mu z^\nu-t^\mu t^\nu
+\end{equation}
+where the vectors $z^\mu$ and $t^\mu$ in the Collins-Soper (CS) frame
+are defined as:
+\begin{equation}
+\begin{array}{l}
+\displaystyle z^\mu = (\sinh y,\mathbf{0},\cosh y)\,,\\
+\\
+\displaystyle t^\mu = \frac{q^\mu}{Q}\,,
+\end{array}
+\end{equation}
+and they are such that $z^2=t^2=1$ and $zq = 0$. Using
+Eq.~(\ref{eq:lepttens}) for the leptonic tensor, one finds:
+\begin{equation}
+L_\perp = -g_\perp^{\mu\nu}L_{\mu\nu} = 8(p_1p_2 - (zp_1) (zp_2) + (tp_1) (tp_2))\,.
+\end{equation}
+Now we use the on-shell-ness of $p_1$ and $p_2$ ($p_1^2=p_2^2=0$) and
+the momentum conservation ($p\equiv p_1=q-p_2$) to reduce the quantity
+above to:
+\begin{equation}\label{eq:LT}
+  L_\perp = 4\left[q^2 + 2(zp)^2\right] = 4Q^2\left[1+2 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]\,.
+\end{equation}
+Therefore, we need to introduce this factor in both the numerator and
+the denominator of Eq.~(\ref{eq:PSredDef4}). Following the same steps
+of the previous section, up to a factor $4Q^2$, this leads us to
+replace the integral in Eq.~(\ref{eq:firstintegral}) with(\footnote{We
+  removed the $\theta$-function as we know it does not have any
+  effect.}):
+\begin{equation}\label{eq:firstintegralNew}
+\begin{array}{l}
+  \displaystyle \int_0^\infty|\mathbf{p}_T|\left[1+2 \sinh^2(y-\eta)
+  \frac{|\mathbf{p}_T|^2}{Q^2}\right]d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot
+  q) =\frac{\overline{p}_T^2}{Q^2}+
+  2\sinh^2(y-\eta)\frac{\overline{p}_T^4} {Q^4}
+  \,.
+\end{array}
+\end{equation}
+We can still use Eq.~(\ref{eq:complicatedintegral}) for the first term
+in the r.h.s. of the equation above. For the second, instead we need
+to use:
+\begin{equation}\label{eq:complicatedintegral2}
+\begin{array}{rcl}
+\displaystyle\int \frac{dx}{(a\pm
+  x)^4\sqrt{1-x^2}}&=&\displaystyle\frac{\sqrt{1-x^2}\left[(11a^2+4)x^2\pm
+                       3 a(9a^2+1)x + (18a^4-5a^2+2)\right]}{6(a^2-1)^3(x\pm
+  a)^3}\\
+\\
+&\pm&\displaystyle\frac{a(2a^2+3)}{2(a^2-1)^{7/2}}\tan^{-1}\left(\frac{1\pm
+      ax}{\sqrt{(a^2-1)}\sqrt{1-x^2}}\right)\,,
+\end{array}
+\end{equation}
+that is such that:
+\begin{equation}
+\int_{-1}^{1} \frac{dx}{(a\pm
+  x)^4\sqrt{1-x^2}}=\frac{\pi a(2a^2+3)}{(a^2-1)^{7/2}}\,.
+\end{equation}
+In our particular case the integrand we are considering is the second
+term in the r.h.s. term of Eq.~(\ref{eq:firstintegralNew}):
+\begin{equation}\label{eq:integralmmm}
+\begin{array}{l}
+\displaystyle
+  \frac{2\sinh^2(y-\eta)}{Q^4}\int_{-1}^{1}d(\cos\phi)\overline{p}_T^4(\cos\phi)=\\
+\\
+\displaystyle\sinh^2(y-\eta)\frac{Q^4}{8q_T^4}  \int_{-1}^{1} \frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{(a+
+      x)^4}+\frac1{(a-
+      x)^4}\right]= \sinh^2(y-\eta)\frac{Q^4}{4q_T^4} \frac{\pi
+  a(2a^2+3)}{(a^2-1)^{7/2}}\,.
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+a =\frac{M}{q_T}\cosh(y-\eta)\,.
+\end{equation}
+Now we need to integrate Eq.~(\ref{eq:integralmmm}) over $\eta$:
+\begin{equation}
+\int_{-\infty}^{\infty}d\eta\sinh^2(y-\eta)\frac{Q^4}{4q_T^4} \frac{\pi
+  a(2a^2+3)}{(a^2-1)^{7/2}}\,.
+\end{equation}
+If we make the following change of variable in the integral above:
+\begin{equation}
+z=\frac{M}{q_T}\sinh(y-\eta)
+\end{equation}
+such that:
+\begin{equation}
+a^2 = z^2+\frac{M^2}{q_T^2}\quad\mbox{and}\quad dz = -ad\eta\,,
+\end{equation}
+the integral above becomes:
+\begin{equation}
+\frac{\pi Q^4}{2 M^2 q_T^2} \int_{-\infty}^{\infty}dz\frac{
+  z^2\left(z^2+\frac{M^2}{q_T^2}+\frac32\right)}{\left(z^2+\frac{M^2}{q_T^2}-1\right)^{7/2}}=\frac{\pi}{3}\,.
+\end{equation}
+Putting this result together with Eq.~(\ref{eq:remarkableintegral})
+and taking into account the factor $4Q^2$ in Eq.~(\ref{eq:LT}), we find
+that:
+\begin{equation}
+\begin{array}{l}
+  \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
+  \theta(q_0-p_{0})L_\perp = \frac{16\pi}{3}Q^2\,.
+\end{array}
+\end{equation}
+This is in agreement with Eq.~(2.38) of
+Ref.~\cite{Scimemi:2017etj}. This provides the denominator of the
+phase-space-reduction factor $\mathcal{P}$.% In order to compute the numerator
+
 
 
 
