@@ -1444,7 +1444,7 @@ $q_T=|\mathbf{q}_T|$.
 
 Let us consider the case $y=q_T=0$. In this limit,
 Eq.~(\ref{eq:integrandF}) reduces to:
-\begin{equation}
+\begin{equation}\label{eq:F00}
 F(x,\eta)=\displaystyle \frac{1}{4\pi}\frac{1}{\cosh^2(\eta)}\left[\tan^{-1}\left(\frac{
     x}{\sqrt{1-x^2}}\right)-\displaystyle\tan^{-1}\left(-\frac{
     x}{\sqrt{1-x^2}}\right)\right]\,.
@@ -1470,7 +1470,7 @@ zero, we need $f^{(2)}(\eta)\rightarrow -\infty$ and
 $f^{(3)}(\eta)\rightarrow \infty$. These both translate into
 $Q\geq 2 p_{T,\rm min}\cosh(\eta)$. This inequality is
 satisfied only if $Q\geq 2p_{T,\rm min}$ for:
-\begin{equation}
+\begin{equation}\label{eq:etabardef}
 -\overline{\eta}\leq\eta\leq \overline{\eta}\quad\mbox{with}\quad \overline{\eta} =\cosh^{-1}\left(\frac{Q}{2p_{T,\rm min}}\right)\,.
 \end{equation}
 Therefore, the phase-space reduction factor eventually becomes:
@@ -1628,9 +1628,82 @@ that:
 \end{equation}
 This is in agreement with Eq.~(2.38) of
 Ref.~\cite{Scimemi:2017etj}. This provides the denominator of the
-phase-space-reduction factor $\mathcal{P}$.% In order to compute the numerator
+phase-space-reduction factor $\mathcal{P}$. The structure of
+$\mathcal{P}$ will be exactly like that in
+Eq.~(\ref{eq:finalformula}), the only thing we need to do is to
+identify the correct function $F(x,\eta)$. To this end, we need to
+make the following replacement for the function $F$ given in
+Eq.~(\ref{eq:integrandF}) with:
+\begin{equation}\label{eq:FGcombination}
+F(x,\eta)\rightarrow \overline{F}(x,\eta) = \frac34 F(x,\eta)+ \frac14 G(x,\eta)\,,
+\end{equation}
+where:
+\begin{equation}\label{eq:integrandG}
+\begin{array}{rcl}
+\displaystyle G(x ,\eta)&=&\displaystyle 
+                            \frac{1}{16\pi }\sinh^2(y-\eta)\frac{Q^4}{(E_q^2-q_T^2)^3}
+                            \Bigg\{\sqrt{1-x^2}q_T\\
+\\
+&\times&\displaystyle\Bigg[\frac{(11E_q^2q_T^2+4q_T^4)x^2+
+                       3 E_qq_T(9E_q^2+q_T^2)x + (18E_q^4-5E_q^2q_T^2+2q_T^4)}{(xq_T+
+  E_q)^3}\\
+\\
+&+&\displaystyle\frac{(11E_q^2q_T^2+4q_T^4)x^2-
+                       3 E_qq_T(9E_q^2+q_T^2)x + (18E_q^4-5E_q^2q_T^2+2q_T^4)}{(xq_T-
+  E_q)^3}\Bigg]\\
+\\
+&-&\displaystyle\frac{6E_q (2E_q^2+3q_T^2)}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{q_T-
+      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)-\tan^{-1}\left(\frac{q_T+
+      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)\right]
+\Bigg\}\,.
+\end{array}
+\end{equation}
+Finally, combining the functions $F$ and $G$ given in
+Eqs.~(\ref{eq:integrandF}) and~(\ref{eq:integrandG}), respectively,
+according to Eq.~(\ref{eq:FGcombination}) to obtain $\overline{F}$,
+and replacing $F$ with $\overline{F}$ in Eq.~(\ref{eq:finalformula})
+gives the phase-space-reduction factor $\mathcal{P}(Q,y,q_T)$ when the
+leptonic tensor $L_{\mu\nu}$ is contracted with the transverse metrics
+$g_\perp^{\mu\nu}$.
 
-
+As a final check, it is interesting to compute $\mathcal{P}$ when
+$y=q_T=0$. In this limit $F$ reduces to the expression in
+Eq.~(\ref{eq:F00}), while $G$ becomes:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle G(x ,\eta)&=&\displaystyle 
+                            \frac{3}{4\pi }\frac{\sinh^2(\eta)}{\cosh^4(\eta)}
+                            \Bigg\{\left[\tan^{-1}\left(\frac{
+      x}{\sqrt{1-x^2}}\right)-\tan^{-1}\left(-\frac{
+      x}{\sqrt{1-x^2}}\right)\right]
+\Bigg\}\,,
+\end{array}
+\end{equation}
+such that:
+\begin{equation}
+\begin{array}{rcl}
+  \mathcal{P}(Q,0,0)&=&\displaystyle\frac38\vartheta(Q- 2p_{T,\rm min})\displaystyle \int_{-\eta_{\rm
+      max}}^{\eta_{\rm
+      max}}d\eta\left[\frac{\cosh^2\eta+\sinh^2(\eta)}{\cosh^4(\eta)}\right]\,\vartheta(\eta+\overline{\eta})
+  \vartheta(\overline{\eta}-\eta)\\
+\\
+&=&\displaystyle\vartheta(Q- 2p_{T,\rm
+    min})\tanh(\mbox{max}[\eta_{\rm max},\overline{\eta}])\left[1-\frac{1}{4\cosh^2(\mbox{max}[\eta_{\rm max},\overline{\eta}])}\right]\,,
+\end{array}
+\end{equation}
+with $\overline{\eta}$ defined in Eq.~(\ref{eq:etabardef}). The
+relation above can be written more explicitly as:
+\begin{equation}\label{eq:partcase2}
+{\tiny
+\mathcal{P}(Q,0,0) = 
+\left\{
+\begin{array}{ll}
+0 & \quad Q< 2p_{T,\rm min}\,,\\
+ \tanh(\overline{\eta})\left[1-\frac{1}{4\cosh^2(\overline{\eta})}\right]=\left(1+\frac{2p_{T,\rm min}}{Q}\right) \left(1-\frac{p_{T,\rm min}^2}{Q^2}\right)\sqrt{1-\frac{4 p_{T,\rm min}}{Q+2p_{T,\rm min}}}& \quad 2p_{T,\rm min} \leq Q < 2p_{T,\rm min}\cosh\eta_{\rm max}\,,\\
+ \tanh(\eta_{\rm max})\left[1-\frac{1}{4\cosh^2(\eta_{\rm max})}\right] & \quad Q \geq 2p_{T,\rm min}\cosh\eta_{\rm max}\,.
+\end{array}
+\right.}
+\end{equation}
 
 
 
