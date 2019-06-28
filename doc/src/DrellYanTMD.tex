@@ -1091,12 +1091,12 @@ on which kinematic cuts are imposed. We do so by knowing that:
 \end{equation}
 This leads to:
 \begin{equation}
-\int\frac{d^3\mathbf{p}}{2 |\mathbf{p}|} = \int|\mathbf{p}|d|\mathbf{p}|d(\cos\theta) d\phi=\int|\mathbf{p}_T|d|\mathbf{p}_T|d\eta d\phi=\int d^2\mathbf{p}_T d\eta\,.
+\int\frac{d^3\mathbf{p}}{2 |\mathbf{p}|} = \frac12\int|\mathbf{p}|d|\mathbf{p}|d(\cos\theta) d\phi=\frac12\int|\mathbf{p}_T|d|\mathbf{p}_T|d\eta d\phi=\frac12\int d^2\mathbf{p}_T d\eta\,.
 \end{equation}
 
 Now we consider the second $\delta$-function:
 \begin{equation}\label{eq:integralyeah!}
-\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\int_{-\infty}^\infty d\eta
+\frac12\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\int_{-\infty}^\infty d\eta
 \int_0^{2\pi} d\phi \int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)\,,
 \end{equation}
 being $q^2=Q^2$ and $p^2=0$. It is convenient to express the
@@ -1132,7 +1132,7 @@ and that of the $\vartheta$-function
 $M\cosh y-|\mathbf{p}_T|\cosh\eta$. It thus appears convenient to
 integrate Eq.~(\ref{eq:integralyeah!}) over $|\mathbf{p}_T|$ first:
 \begin{equation}\label{eq:firstintegral}
-\int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)=\frac{\overline{p}_T^2}{Q^2}\vartheta(M\cosh y-\overline{p}_T\cosh\eta)=\frac{\overline{p}_T^2}{Q^2}\,,
+\frac12\int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)=\frac{\overline{p}_T^2}{2Q^2}\vartheta(M\cosh y-\overline{p}_T\cosh\eta)=\frac{\overline{p}_T^2}{2Q^2}\,,
 \end{equation}
 with(\footnote{Notice that the $\vartheta$-function has no effect. I
   have verified it numerically but I cannot see it analytically.}):
@@ -1159,16 +1159,16 @@ compute:
 \begin{equation}
 \begin{array}{rcl}
 &&\displaystyle
-  \frac{1}{Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 =
+  \frac{1}{2Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 =
                                                                     \displaystyle
                                                                     \frac{Q^2}{4
                                                                     |\mathbf{q}_T|^2}\int_0^{2\pi}\frac{d\phi}{\left[\frac{M\cosh\left(\eta
                                                                     -
                                                                     y\right)}{|\mathbf{q}_T|}-\cos\phi\right]^2}\\
 \\
-&=&\displaystyle \frac{Q^2}{4|\mathbf{q}_T|^2}\int_{-1}^{1}\frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}-x\right)^2}+\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}+x\right)^2}\right]\\
+&=&\displaystyle \frac{Q^2}{8|\mathbf{q}_T|^2}\int_{-1}^{1}\frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}-x\right)^2}+\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}+x\right)^2}\right]\\
 \\
-&=&\displaystyle \frac{Q^2}{4}\Bigg\{\frac{|\mathbf{q}_T|^2 x\sqrt{1-x^2}}{(M ^2\cosh ^2\left(\eta- y\right)-|\mathbf{q}_T|^2)(x^2 |\mathbf{q}_T|^2-
+&=&\displaystyle \frac{Q^2}{8}\Bigg\{\frac{|\mathbf{q}_T|^2 x\sqrt{1-x^2}}{(M ^2\cosh ^2\left(\eta- y\right)-|\mathbf{q}_T|^2)(x^2 |\mathbf{q}_T|^2-
   M ^2\cosh ^2\left(\eta- y\right))}\\
 \\
 &-&\displaystyle \frac{M\cosh\left(\eta-
@@ -1181,7 +1181,7 @@ compute:
 \\
 &=&\displaystyle \frac{\pi
   Q^2M\cosh\left(\eta -
-    y\right)}{2(M^2\cosh^2\left(\eta -
+    y\right)}{4(M^2\cosh^2\left(\eta -
     y\right)-|\mathbf{q}_T|^2)^{3/2}}
 \end{array}
 \end{equation}
@@ -1190,132 +1190,12 @@ We can go further and solve also the integral in $\eta$:
 \begin{array}{l}
   \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
   \theta(q_0-p_{0})=\int_{-\infty}^\infty
-  d\eta\frac{\pi Q^2M\cosh(\eta-y)}{2(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}= \\
+  d\eta\frac{\pi Q^2M\cosh(\eta-y)}{4(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}= \\
   \\
-  \displaystyle\frac{\pi }{2}\frac{Q^2}{M^2}\int_{-\infty}^\infty
-  \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}= \frac{\pi}{2} \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= \pi\,.
+  \displaystyle\frac{\pi }{4}\frac{Q^2}{M^2}\int_{-\infty}^\infty
+  \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}= \frac{\pi}{4} \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= \frac{\pi}{2}\,.
 \end{array}
 \end{equation}
-% \newpage
-% To so, it is convenient to express the four-vector $q$ in terms of
-% $Q$, $y$, and $\mathbf{q}_T$:
-% \begin{equation}
-% q=\left(M\cosh y,\mathbf{q}_T,M\sinh y\right)\,.
-% \end{equation}
-% with $M=\sqrt{Q^2+|\mathbf{q}_T|^2}$. While:
-% \begin{equation}
-% p=\left(|\mathbf{p}_T|\cosh\eta,\mathbf{p}_T,|\mathbf{p}_T|\sinh\eta\right)\,,
-% \end{equation}
-% so that:
-% \begin{equation}
-% p\cdot q=|\mathbf{p}_T|M\left(\cosh\eta \cosh y-\sinh\eta\sinh
-%   y\right)-\mathbf{p}_T\cdot
-% \mathbf{q}_T=|\mathbf{p}_T|M\cosh\left(\eta - y\right)-\mathbf{p}_T\cdot \mathbf{q}_T\,.
-% \end{equation}
-% We can now assume that the two-dimensional vector $\mathbf{q}_T$ is
-% aligned with the $x$ axis so that 
-% $\mathbf{p}_T\cdot \mathbf{q}_T =
-% |\mathbf{p}_T||\mathbf{q}_T|\cos\phi$(\footnote{In
-%   the general case in which $\mathbf{q}_T$ forms an angle $\beta$ with
-%   the $x$ axis, the scalar product would result in
-%   $|\mathbf{p}_T||\mathbf{q}_T|\cos(\phi-\beta)$. However, the angle
-%   $\beta$ could always be reabsorbed in a redefinition of the
-%   integration angle $\phi$ in
-%   Eq.~(\ref{eq:integralyeah!}).}). Therefore, the integral of the
-% $\delta$-function over the angle $\phi$ becomes:
-% \begin{equation}
-% \int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\int_0^{2\pi} d\phi\,\delta\left(Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\right)\,,
-% \end{equation}
-% The argument of the delta function:
-% \begin{equation}
-% f(\phi) = Q^2-2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)+2|\mathbf{p}_T||\mathbf{q}_T|\cos\phi\,,
-% \end{equation}
-% whose derivative is:
-% \begin{equation}
-% \frac{df(\phi)}{d\phi} = -2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi\,,
-% \end{equation}
-% has a zero in $\phi_0$ such that:
-% \begin{equation}\label{eq:cosphi0}
-% \cos\phi_0=\frac{2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2}{2|\mathbf{p}_T||\mathbf{q}_T|}\,,
-% \end{equation}
-% so that:
-% \begin{equation}\label{eq:derivphi0}
-% \left|\frac{df(\phi)}{d\phi}\right|_{\phi=\phi_0} = 2|\mathbf{p}_T||\mathbf{q}_T|\sin\phi_0=\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}\,,
-% \end{equation}
-% that gives:
-% \begin{equation}
-% \int_0^{2\pi} d\phi\,\delta(Q^2-2p\cdot q)=\left|\frac{df(\phi)}{d\phi}\right|^{-1}_{\phi=\phi_0}\int_0^{2\pi} d\phi\,\delta(\phi-\phi_0)=\frac1{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-\left(2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2\right)^2}}\,.
-% \end{equation}
-% Of course, the equality in Eq.~(\ref{eq:cosphi0}) is possible only if:
-% \begin{equation}\label{eq:cosphi0}
-% |2 |\mathbf{p}_T|M\cosh\left(\eta - y\right)-Q^2|\leq 2|\mathbf{p}_T||\mathbf{q}_T|\,.
-% \end{equation}
-% that is such to make the argument of the square root in
-% Eq.~(\ref{eq:derivphi0}) non-negative. This sets additional
-% constraints on the integration domain(\footnote{Notice that
-%   $M\cosh(\eta-y)\geq |\mathbf{q}_T|$.}):
-% \begin{equation}\label{eq:pTpm}
-% p_T^{-} \leq |\mathbf{p}_T| \leq p_T^{+}\quad\mbox{with}\quad
-% p_T^{\pm}=\frac{Q^2}{M\cosh(\eta-y)\mp |\mathbf{q}_T|}\,.
-% \end{equation}
-% In principle, one should also take into account the $\theta$-function
-% in Eq.~(\ref{eq:integralyeah!}) that guarantees the positiveness of
-% the energy:
-% \begin{equation}
-% \theta(q_0-p_0)=\theta(M\cosh y-|\mathbf{p}_T|\cosh\eta)\quad\Rightarrow\quad |\mathbf{p}_T|\leq
-% p_T^{(E)} = \frac{M\cosh y}{\cosh\eta}\,.
-% \end{equation}
-% However, it turns out that this constraint is always fulfilled within
-% the interval defined in Eq.~(\ref{eq:pTpm}) (To be
-% verified!). Finally, we have:
-% \begin{equation}\label{eq:PSintegral}
-% \begin{array}{l}
-% \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
-%     \theta(q_0-p_{0})=\\
-% \\
-%  \displaystyle \int_{-\infty}^\infty d\eta
-% \int_{p_T^{-}}^{p_T^{+}}
-% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{4|\mathbf{p}_T|^2\left[|\mathbf{q}_T|^2-M^2\cosh^2\left(\eta
-%   - y\right)\right] +4|\mathbf{p}_T|Q^2 M\cosh\left(\eta - y\right)
-%   -Q^4}}=\\
-% \\
-% \displaystyle \frac1{Q^2}\int_{-\infty}^\infty d\eta \sqrt{p_T^+p_T^-}
-% \int_{p_T^{-}}^{p_T^{+}}
-% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}\,.
-% \end{array}
-% \end{equation}
-% In turns out that the primitive function of the integrand in
-% $|\mathbf{p}_T|$ can be computed analytically:
-% \begin{equation}
-% \int
-% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}
-% = \sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}+\frac{p_T^-
-%   +p_T^+}2\tan^{-1}\left[\frac{p_T^- +p_T^+ - 2 |\mathbf{p}_T|}{2\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}\right]\,,
-% \end{equation}
-% and is such that, if computed between $p_T^{-}$ and $p_T^{+}$, it
-% gives:
-% \begin{equation}
-% \int_{p_T^-}^{p_T^+}
-% \frac{d|\mathbf{p}_T||\mathbf{p}_T|}{\sqrt{(|\mathbf{p}_T|-p_T^-)(p_T^+-|\mathbf{p}_T|)}}
-% = \frac{\pi(p_T^-+p_T^+)}2\,.
-% \end{equation}
-% We can go further and try to solve also the integral in $\eta$. To do
-% so we need to use the explicit expressions for $p_T^{\pm}$ given in
-% Eq.~(\ref{eq:pTpm}):
-% \begin{equation}
-% \begin{array}{l}
-% \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
-%     \theta(q_0-p_{0})=\frac{\pi}{2Q^2}\int_{-\infty}^\infty d\eta
-%   (p_T^-+p_T^+)\sqrt{p_T^+p_T^-} =\\
-% \\
-% \displaystyle\pi Q^2\int_{-\infty}^\infty
-%   d\eta\frac{M\cosh(\eta-y)}{(M^2\cosh^2(\eta-y)-|\mathbf{q}_T|^2)^{3/2}}
-%   = \pi \frac{Q^2}{M^2}\int_{-\infty}^\infty
-%   \frac{d(\sinh\eta)}{\left(\sinh^2(\eta-y)+\frac{Q^2}{M^2}\right)^{3/2}}=\\
-% \\
-% \displaystyle \pi \frac{Q^2}{M^2}\left[\frac{M^2}{Q^2}\frac{\sinh\eta}{\sqrt{\sinh^2\eta+\frac{Q^2}{M^2}}}\right]_{-\infty}^{\infty}= 2\pi\,.
-% \end{array}
-% \end{equation}
 Remarkably, this result gives us the denominator of
 Eq.~(\ref{eq:PSredDef4}). We now need to compute the numerator by
 inserting the appropriate function $\Phi$. In our case, the kinematic
@@ -1537,31 +1417,24 @@ are defined as:
 \displaystyle t^\mu = \frac{q^\mu}{Q}\,,
 \end{array}
 \end{equation}
-and they are such that $z^2=t^2=1$ and $zq = 0$. Using
-Eq.~(\ref{eq:lepttens}) for the leptonic tensor, one finds:
-\begin{equation}
-L_\perp = -g_\perp^{\mu\nu}L_{\mu\nu} = 8(p_1p_2 - (zp_1) (zp_2) + (tp_1) (tp_2))\,.
-\end{equation}
-Now we use the on-shell-ness of $p_1$ and $p_2$ ($p_1^2=p_2^2=0$) and
-the momentum conservation ($p\equiv p_1=q-p_2$) to reduce the quantity
-above to:
+and they are such that $z^2=-1$, $t^2=1$ and $zq = 0$. if we use the
+on-shell-ness of $p_1$ and $p_2$ ($p_1^2=p_2^2=0$) and the momentum
+conservation ($p\equiv p_1$, $p_2=q-p$), we find that
+$t^\mu t^\nu L_{\mu\nu}=0$ and the quantity above reduces to:
 \begin{equation}\label{eq:LT}
-  L_\perp = 4\left[q^2 + 2(zp)^2\right] = 4Q^2\left[1+2 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]\,.
+  L_\perp = 4\left[\frac12q^2 + 2(zp)^2\right] = 2Q^2\left[1+4 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]\,.
 \end{equation}
 Therefore, we need to introduce this factor in both the numerator and
 the denominator of Eq.~(\ref{eq:PSredDef4}). Following the same steps
-of the previous section, up to a factor $4Q^2$, this leads us to
+of the previous section, up to a factor $2Q^2$, this leads us to
 replace the integral in Eq.~(\ref{eq:firstintegral}) with(\footnote{We
   removed the $\theta$-function as we know it does not have any
   effect.}):
 \begin{equation}\label{eq:firstintegralNew}
-\begin{array}{l}
-  \displaystyle \int_0^\infty|\mathbf{p}_T|\left[1+2 \sinh^2(y-\eta)
+  \frac12 \int_0^\infty|\mathbf{p}_T|\left[1+4\sinh^2(y-\eta)
   \frac{|\mathbf{p}_T|^2}{Q^2}\right]d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot
-  q) =\frac{\overline{p}_T^2}{Q^2}+
-  2\sinh^2(y-\eta)\frac{\overline{p}_T^4} {Q^4}
-  \,.
-\end{array}
+  q) =\frac{\overline{2p}_T^2}{Q^2}+
+  2\sinh^2(y-\eta)\frac{\overline{p}_T^4} {Q^4}\,.
 \end{equation}
 We can still use Eq.~(\ref{eq:complicatedintegral}) for the first term
 in the r.h.s. of the equation above. For the second, instead we need
@@ -1580,18 +1453,18 @@ to use:
 that is such that:
 \begin{equation}
 \int_{-1}^{1} \frac{dx}{(a\pm
-  x)^4\sqrt{1-x^2}}=\frac{\pi a(2a^2+3)}{(a^2-1)^{7/2}}\,.
+  x)^4\sqrt{1-x^2}}=\frac{\pi a(2a^2+3)}{2(a^2-1)^{7/2}}\,.
 \end{equation}
-In our particular case the integrand we are considering is the second
+In our particular case, the integrand we are considering is the second
 term in the r.h.s. term of Eq.~(\ref{eq:firstintegralNew}):
 \begin{equation}\label{eq:integralmmm}
 \begin{array}{l}
 \displaystyle
   \frac{2\sinh^2(y-\eta)}{Q^4}\int_{-1}^{1}d(\cos\phi)\overline{p}_T^4(\cos\phi)=\\
 \\
-\displaystyle\sinh^2(y-\eta)\frac{Q^4}{8q_T^4}  \int_{-1}^{1} \frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{(a+
+\displaystyle\frac{Q^4}{8q_T^4} \sinh^2(y-\eta) \int_{-1}^{1} \frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{(a+
       x)^4}+\frac1{(a-
-      x)^4}\right]= \sinh^2(y-\eta)\frac{Q^4}{4q_T^4} \frac{\pi
+      x)^4}\right]= \frac{\pi Q^4}{8q_T^4}\sinh^2(y-\eta) \frac{
   a(2a^2+3)}{(a^2-1)^{7/2}}\,.
 \end{array}
 \end{equation}
@@ -1601,8 +1474,8 @@ a =\frac{M}{q_T}\cosh(y-\eta)\,.
 \end{equation}
 Now we need to integrate Eq.~(\ref{eq:integralmmm}) over $\eta$:
 \begin{equation}
-\int_{-\infty}^{\infty}d\eta\sinh^2(y-\eta)\frac{Q^4}{4q_T^4} \frac{\pi
-  a(2a^2+3)}{(a^2-1)^{7/2}}\,.
+  \frac{\pi Q^4}{8q_T^4} \int_{-\infty}^{\infty}d\eta\sinh^2(y-\eta)\frac{
+    a(2a^2+3)}{(a^2-1)^{7/2}}\,.
 \end{equation}
 If we make the following change of variable in the integral above:
 \begin{equation}
@@ -1614,20 +1487,20 @@ a^2 = z^2+\frac{M^2}{q_T^2}\quad\mbox{and}\quad dz = -ad\eta\,,
 \end{equation}
 the integral above becomes:
 \begin{equation}
-\frac{\pi Q^4}{2 M^2 q_T^2} \int_{-\infty}^{\infty}dz\frac{
-  z^2\left(z^2+\frac{M^2}{q_T^2}+\frac32\right)}{\left(z^2+\frac{M^2}{q_T^2}-1\right)^{7/2}}=\frac{\pi}{3}\,.
+\frac{\pi Q^4}{4M^2 q_T^2} \int_{-\infty}^{\infty}dz\frac{
+  z^2\left(z^2+\frac{M^2}{q_T^2}+\frac32\right)}{\left(z^2+\frac{M^2}{q_T^2}-1\right)^{7/2}}=\frac{\pi}{6}\,.
 \end{equation}
 Putting this result together with Eq.~(\ref{eq:remarkableintegral})
-and taking into account the factor $4Q^2$ in Eq.~(\ref{eq:LT}), we find
+and taking into account the factor $2Q^2$ in Eq.~(\ref{eq:LT}), we find
 that:
 \begin{equation}
 \begin{array}{l}
   \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
-  \theta(q_0-p_{0})L_\perp = \frac{16\pi}{3}Q^2\,.
+  \theta(q_0-p_{0})L_\perp = \frac{4\pi}{3}Q^2\,.
 \end{array}
 \end{equation}
-This is in agreement with Eq.~(2.38) of
-Ref.~\cite{Scimemi:2017etj}. This provides the denominator of the
+This result agrees with Eq.~(2.38) of Ref.~\cite{Scimemi:2017etj}, up
+to a factor four. This provides the denominator of the
 phase-space-reduction factor $\mathcal{P}$. The structure of
 $\mathcal{P}$ will be exactly like that in
 Eq.~(\ref{eq:finalformula}), the only thing we need to do is to
