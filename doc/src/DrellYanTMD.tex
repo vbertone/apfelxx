@@ -1578,6 +1578,21 @@ relation above can be written more explicitly as:
 \right.}
 \end{equation}
 
+For simplicity, in the discussion above we have considered only the
+case of symmetric rapidity cuts, \textit{i.e.}
+$|\eta| < \eta_{\rm max}$. However, it may be required to implement an
+asymmetric cut, $\eta_{\rm min}<\eta<\eta_{\rm max}$, with
+$\eta_{\rm min}\neq -\eta_{\rm max}$. This is the case, for example,
+of the LHCb experiment that delivers data only in the forward region
+($2 < \eta < 4.5$). Fortunately, our calculation is easily extensible
+to this case. This simply amounts to rewriting
+Eq.~(\ref{eq:finalformula}) as:
+\begin{equation}\label{eq:finalformulaasy}
+  \mathcal{P}(Q,y,q_T)=\displaystyle \int_{\eta_{\rm
+      min}}^{\eta_{\rm
+      max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\left[\overline{F}(x_2(\eta),\eta)-\overline{F} (x_1(\eta) ,\eta)\right]\,,
+\end{equation}
+where $\overline{F}$ defined in Eq.~(\ref{eq:FGcombination}).
 
 
 \newpage
