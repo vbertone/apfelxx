@@ -1096,7 +1096,7 @@ This leads to:
 
 Now we consider the second $\delta$-function:
 \begin{equation}\label{eq:integralyeah!}
-\frac12\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\int_{-\infty}^\infty d\eta
+\frac12\int d^2\mathbf{p}_T d\eta\,\delta((q-p)^2)\theta(q_0-p_0)=\frac12\int_{-\infty}^\infty d\eta
 \int_0^{2\pi} d\phi \int_0^\infty|\mathbf{p}_T|d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot q) \theta(q_0-p_0)\,,
 \end{equation}
 being $q^2=Q^2$ and $p^2=0$. It is convenient to express the
@@ -1199,9 +1199,10 @@ We can go further and solve also the integral in $\eta$:
 Remarkably, this result gives us the denominator of
 Eq.~(\ref{eq:PSredDef4}). We now need to compute the numerator by
 inserting the appropriate function $\Phi$. In our case, the kinematic
-cuts are identical for lepton and anti-lepton:
+cuts are identical for the outgoing leptons and read:
 \begin{equation}
-|\mathbf{p}_{T,1(2)}| > p_{T\rm min}\quad\mbox{and}\quad |\eta_{1(2)}| < \eta_{\rm max}\,.
+\eta_{\rm
+  min} < \eta_{1(2)} < \eta_{\rm max}\quad\mbox{and}\quad |\mathbf{p}_{T,1(2)}| > p_{T,\rm min}\,.
 \end{equation}
 Therefore, the function $\Phi$ factorises into two identical functions
 as:
@@ -1210,8 +1211,7 @@ as:
 \end{equation}
 with:
 \begin{equation}
-\Theta(p) = \vartheta(|\mathbf{p}_{T}| - p_{T\rm min})
-\vartheta(\eta_{\rm max}-|\eta|)\,.
+  \Theta(p) = \vartheta(\eta - \eta_{\rm min})\vartheta(\eta_{\rm max}-\eta) \vartheta(|\mathbf{p}_{T}| - p_{T,\rm min}) \,. 
 \end{equation}
 Regerring to Eq.~(\ref{eq:PSredDef4}), and considering that:
 \begin{equation}
@@ -1222,90 +1222,132 @@ we thus have:
 \begin{array}{ll}
 &\Phi(p,q-p) = \Theta(p) \Theta(q-p)=\\
 \\
-&\displaystyle \vartheta(|\mathbf{p}_{T}| - p_{T\rm min})
-\vartheta(\eta_{\rm max}-|\eta|)
-\vartheta(|\mathbf{q}_{T}-\mathbf{p}_{T}| - p_{T\rm min})\times\\
+&\displaystyle 
+\vartheta(\eta - \eta_{\rm min}) \vartheta(\eta_{\rm max}-\eta)
+  \times\\
 \\
-&\displaystyle \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{M\cosh y-|\mathbf{p}_T|\cosh\eta+M\sinh y-|\mathbf{p}_T|\sinh\eta}{M\cosh y-|\mathbf{p}_T|\cosh\eta-M\sinh y+|\mathbf{p}_T|\sinh\eta}\right)\right|\right)=\\
+&\displaystyle \vartheta(|\mathbf{p}_{T}| - p_{T,\rm min})\times\\
 \\
-1):\quad&\displaystyle \vartheta(\eta_{\rm max}-|\eta|) \times\\
+&\displaystyle \vartheta\left(\frac12\ln\left(\frac{M\cosh y-|\mathbf{p}_T|\cosh\eta+M\sinh y-|\mathbf{p}_T|\sinh\eta}{M\cosh y-|\mathbf{p}_T|\cosh\eta-M\sinh y+|\mathbf{p}_T|\sinh\eta}\right)-\eta_{\rm min}\right)\times\\
 \\
-2):\quad&\displaystyle \vartheta(\overline{p}_T - p_{T\rm min})\times\\
+&\displaystyle \vartheta\left(\eta_{\rm
+  max}-\frac12\ln\left(\frac{M\cosh y-|\mathbf{p}_T|\cosh\eta+M\sinh
+  y-|\mathbf{p}_T|\sinh\eta}{M\cosh y-|\mathbf{p}_T|\cosh\eta-M\sinh
+  y+|\mathbf{p}_T|\sinh\eta}\right)\right)\times\\
+\\
+&\vartheta(|\mathbf{q}_{T}-\mathbf{p}_{T}| - p_{T,\rm min})=\\
+\\
+1):\quad&\displaystyle \vartheta(\eta-\eta_{\rm min}) \times\vartheta(\eta_{\rm max}-\eta) \times\\
+\\
+2):\quad&\displaystyle \vartheta(\overline{p}_T - p_{T,\rm min})\times\\
 \\
 3):\quad&\displaystyle 
-  \vartheta\left(\eta_{\rm max}-\left|\frac12\ln\left(\frac{Me^y-\overline{p}_Te^\eta}{Me^{-y}-\overline{p}_Te^{-
-\eta}}\right)\right|\right)\times\\
+  \vartheta\left(\frac12\ln\left(\frac{Me^y-\overline{p}_Te^\eta}{Me^{-y}-\overline{p}_Te^{-
+\eta}}\right)-\eta_{\rm min}\right)\times\vartheta\left(\eta_{\rm max}-\frac12\ln\left(\frac{Me^y-\overline{p}_Te^\eta}{Me^{-y}-\overline{p}_Te^{-
+\eta}}\right)\right)\times\\
 \\
-4):\quad&\displaystyle \vartheta(\sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi} - p_{T\rm min})\,,
+4):\quad&\displaystyle \vartheta(\sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi} - p_{T,\rm min})\,,
 \end{array}
 \end{equation}
 where in the last step we have replaced $|\mathbf{p}_T|$ with
 $\overline{p}_T$ defined Eq.~(\ref{eq:overpT}). Now the question is
-understanding what is the integration domain defined by $\Phi(p,q-p)$
-on the $(\eta,\cos\phi)$-plane. As an example,
-Fig.~\ref{fig:IntDomain} shows the integration domain of the numerator
-in of the phase-space reduction factor Eq.~(\ref{eq:PSredDef4}) for
-$p_{T,\rm min}=20$ GeV and $\eta_{\rm max}=2.4$ at $Q=91$ GeV,
-$|\mathbf{q}_T|=10$ GeV and $y=1$.  Clearly, given that
-$1\leq\cos\phi\leq 1$, the integration domain is limited to this
-region (gray band). The $\theta$-function 1) in
-Eq.~(\ref{eq:intdomain}) limits the region to the vertical stip
-defined by $-\eta_{\rm max} < \eta < \eta_{\rm max}$ (black vertical
-lines), the $\theta$-function 2) gives the red lines, the
-$\theta$-function 3) the blue line , and the $\theta$-function 4) the
-green lines.
-\begin{figure}[h]
+identifying the integration domain defined by $\Phi(p,q-p)$ on the
+$(\eta,\cos\phi)$-plane. Since the $\theta$-functions in
+Eq.~(\ref{eq:PSredDef4}) will be used inside a double nested integral
+over $x=\cos\phi$ first and $\eta$ second, it is convenient to rewrite
+the function $\Phi(p,q-p)$ in Eq.~(\ref{eq:intdomain}) as follows:
+\begin{equation}\label{eq:almostfinal}
+\begin{array}{rcl}
+\Phi(p,q-p) &=&\displaystyle \vartheta(\eta-\eta_{\rm min}) \times
+\vartheta(\eta_{\rm max}-\eta) \\
+\\
+&\times& \vartheta(x - f^{(2)}(\eta,
+                p_{T,\rm min})) \\
+\\
+&\times&\displaystyle
+         \vartheta(f^{(3)}(\eta,\eta_{\rm min})-x) \times \vartheta(f^{(3)}(\eta,\eta_{\rm max})-x)\\
+\\
+&\times&\vartheta(f^{(4)}(\eta,
+         p_{T,\rm min})-x)
+         
+         \,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}\label{eq:relevantfuncs}
+\begin{array}{rcl}
+f^{(2)}(\eta, p_{T,\rm cut}) & = &\displaystyle \frac{2M p_{T,\rm min}\cosh(\eta-y) 
+                    - Q^{2}}{2p_{T,\rm cut}
+                    |\mathbf{q}_T|}\,, \\
+\\
+f^{(3)}(\eta,\eta_{\rm cut}) & = &\displaystyle \frac{M \cosh(\eta-y)}{|\mathbf{q}_T|
+                    }-\frac{Q^{2} \left(\sinh(\eta
+                                   -y)\coth(y-\eta_{\rm cut})+\cosh(\eta-y)\right)}{2|\mathbf{q}_T|  M}\,,\\
+\\
+f^{(4)}(\eta, p_{T,\rm cut}) & = &\displaystyle \frac{M \cosh(\eta-y)(Q^2 - 2
+                    p_{T,\rm cut}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh ^{2} (\eta-y) + p_{T,\rm min}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm min}^{2}\right)}\,.
+\end{array}
+\end{equation}
+Considering that $1\leq\cos\phi\leq 1$, the integration domain is
+limited to this region. Therefore, Eq.~(\ref{eq:almostfinal}) can be
+written in an even more convenient way as:
+\begin{equation}\label{eq:final}
+\begin{array}{rcl}
+\Phi(p,q-p) &=& \vartheta(\eta-\eta_{\rm min})\vartheta(\eta_{\rm
+  max}-\eta)  \\
+\\
+&\times&\vartheta(x -
+  \mbox{max}[f^{(2)}(\eta,p_{T,\rm min}),-1])\\
+\\
+&\times&\vartheta(\mbox{min}[f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
+         max}), f^{(4)}(\eta,p_{T,\rm
+         min}),1]-x)
+\end{array}
+\end{equation}
+such that a double integral over $\eta$ and $x$ would read:
+\begin{equation}
+\int_{-\infty}^{\infty}d\eta\int_{-1}^{1}dx\,\Phi(p,q-p)\dots =
+\int_{\eta_{\rm min}}^{\eta_{\rm
+    max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\int_{x_1(\eta)}^{x_2(\eta)}dx\dots\,.
+\end{equation}
+with:
+\begin{equation}
+x_1(\eta) = \mbox{max}[f^{(2)}(\eta,p_{T,\rm min}),-1]
+\end{equation}
+and:
+\begin{equation}
+x_2(\eta) = \mbox{min}[f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
+         max}),f^{(4)}(\eta,p_{T,\rm
+         min}),1]\,.
+\end{equation}
+
+\begin{figure}[t]
   \begin{centering}
     \includegraphics[width=0.8\textwidth]{plots/IntDomain}
     \caption{The red area indicates the integration domain of the
       numerator in of the phase-space reduction factor
       Eq.~(\ref{eq:PSredDef4}) for $p_{T,\rm min}=20$ GeV and
-      $\eta_{\rm max}=2.4$ at $Q=91$ GeV, $|\mathbf{q}_T|=10$ GeV and
+      $-\eta_{\rm min}=\eta_{\rm max}=2.4$ at $Q=91$ GeV, $|\mathbf{q}_T|=10$ GeV and
       $y=1$.\label{fig:IntDomain}}
   \end{centering}
 \end{figure}
+As an example, Fig.~\ref{fig:IntDomain} shows the integration domain
+of the numerator in of the phase-space reduction factor
+Eq.~(\ref{eq:PSredDef4}) for $p_{T,\rm min}=20$ GeV and
+$-\eta_{\rm min}=\eta_{\rm max}=2.4$ at $Q=91$ GeV,
+$|\mathbf{q}_T|=10$ GeV and $y=1$.  The gray band corresponds to the
+region $1\leq\cos\phi\leq 1$. The $\theta$-function 1) in
+Eq.~(\ref{eq:intdomain}) limits the region to the vertical stip
+defined by $\eta_{\rm min} < \eta < \eta_{\rm max}$ (black vertical
+lines), the $\theta$-function 2) gives the red lines, the
+$\theta$-functions 3) the blue lines , and the $\theta$-function 4)
+the green lines.
 
-Since the $\theta$-functions in Eq.~(\ref{eq:PSredDef4}) will be used
-insinde a double nested integral over $x=\cos\phi$ first and $\eta$
-second, it is convenient to write the function $\Phi(p,q-p)$ as
-follows:
-\begin{equation}\label{eq:almostfinal}
-\Phi(p,q-p) = \vartheta(\eta_{\rm max}-|\eta|) \times \vartheta(x - f^{(2)}(\eta)) \times \vartheta(f^{(3)}(\eta)-x) \times \vartheta(f^{(4)}(\eta)-x)\,,
-\end{equation}
-with:
-\begin{equation}\label{eq:relevantfuncs}
-\begin{array}{rcl}
-f^{(2)}(\eta) & = &\displaystyle \frac{2M p_{T,\rm min}\cosh(\eta-y) 
-                    - Q^{2}}{2p_{T,\rm min}
-                    |\mathbf{q}_T|}\,,\\
-\\
-f^{(3)}(\eta) & = &\displaystyle \frac{M \cosh(\eta-y)(Q^2 - 2
-                    p_{T,\rm min}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh ^{2} (\eta-y) + p_{T,\rm min}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm min}^{2}\right)}\,, \\
-\\
-f^{(4)}(\eta) & = &\displaystyle \frac{M \cosh(\eta-y)}{|\mathbf{q}_T| }-\frac{Q^{2} \sinh(\eta -\eta_{\rm max})}{2|\mathbf{q}_T|  M\sinh(y -\eta_{\rm max})}\,.
-\end{array}
-\end{equation}
-Eq.~(\ref{eq:almostfinal}) can be written in an even more convenient
-way as:
-\begin{equation}\label{eq:final}
-\Phi(p,q-p) = \vartheta(\eta_{\rm max}-|\eta|) \times \vartheta(x - \mbox{max}[f^{(2)}(\eta),-1])\times\vartheta(\mbox{min}[f^{(3)}(\eta),f^{(4)}(\eta),1]-x)
-\end{equation}
-such that a double integral over $\eta$ and $x$ would read:
-\begin{equation}
-\int_{-\infty}^{\infty}d\eta\int_{-1}^{1}dx\,\Phi(p,q-p)\dots =
-\int_{-\eta_{\rm max}}^{\eta_{\rm
-    max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\int_{x_1(\eta)}^{x_2(\eta)}dx\dots\,.
-\end{equation}
-with:
-\begin{equation}
-x_1(\eta) = {\rm max}[f^{(2)}(\eta),-1]\quad\mbox{and}\quad x_2(\eta) = {\rm min}[f^{(3)}(\eta),f^{(4)}(\eta),1]\,.
-\end{equation}
-
-Gathering all the pieces, the final expression for the phase-space
-reduction factor is given by:
+Gathering all pieces, the final expression for the phase-space
+reduction factor reads:
 \begin{equation}\label{eq:finalformula}
-  \mathcal{P}(Q,y,q_T)=\displaystyle \int_{-\eta_{\rm
-      max}}^{\eta_{\rm
+  \mathcal{P}(Q,y,q_T)=\displaystyle \int_{\eta_{\rm
+      min}}^{\eta_{\rm
       max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\left[F(x_2(\eta),\eta)-F(x_1(\eta) ,\eta)\right]
 \end{equation}
 with:
@@ -1322,7 +1364,8 @@ with:
 where we have defined $E_q = M\cosh(\eta-y)$ and
 $q_T=|\mathbf{q}_T|$.
 
-Let us consider the case $y=q_T=0$. In this limit,
+Let us consider the case $y=q_T=0$. For simplicity, we also take
+$\eta_{\rm min} = -\eta_{\rm max}$. In these conditions,
 Eq.~(\ref{eq:integrandF}) reduces to:
 \begin{equation}\label{eq:F00}
 F(x,\eta)=\displaystyle \frac{1}{4\pi}\frac{1}{\cosh^2(\eta)}\left[\tan^{-1}\left(\frac{
@@ -1333,23 +1376,25 @@ As evident from Eq.~(\ref{eq:relevantfuncs}), for $q_T=0$ all
 functions $f^{(2)}$, $f^{(3)}$, and $f^{(4)}$ diverge. The relevant
 question, though, is whether they go to plus or minus infinity
 depending on the value of $Q$. Of course, $q_T$ will tend to zero
-positively, so we find:
+positively so we find:
 \begin{equation}
 \begin{array}{l}
-\displaystyle f^{(2)}(\eta)\rightarrow \infty\times\mbox{sign}\left[2 p_{T,\rm min}\cosh(\eta)-Q\right]\,,\\
+\displaystyle f^{(2)}(\eta,p_{T,\rm min})\rightarrow \infty\times\mbox{sign}\left[2 p_{T,\rm min}\cosh(\eta)-Q\right]\,,\\
 \\
-\displaystyle f^{(3)}(\eta) \rightarrow \infty\times\mbox{sign}\left[\frac{\cosh(\eta)(Q^2 - 2
-                    p_{T,\rm min}^{2})- Q\sqrt{Q^{2} \sinh^{2}(\eta) + p_{T,\rm min}^{2} }}{Q^{2} - p_{T,\rm min}^{2}}\right]\,, \\
+\displaystyle f^{(3)}(\eta,\eta_{\rm min}= -\eta_{\rm max}) \rightarrow +\infty\\
 \\
-\displaystyle f^{(4)}(\eta) \rightarrow \infty\times\mbox{sign}\left[\sinh(\eta +\eta_{\rm max})\right]=+\infty\,.
+\displaystyle f^{(3)}(\eta,\eta_{\rm max}) \rightarrow -\infty\,,\\
+\\
+\displaystyle f^{(4)}(\eta,p_{T,\rm min}) \rightarrow \infty\times\mbox{sign}\left[\frac{\cosh(\eta)(Q^2 - 2
+                    p_{T,\rm min}^{2})- Q\sqrt{Q^{2} \sinh^{2}(\eta) + p_{T,\rm min}^{2} }}{Q^{2} - p_{T,\rm min}^{2}}\right]\,, 
 \end{array}
 \end{equation}
-Therefore, the last function never contributes. In addition, for the
+Therefore, $f^{(3)}$ never actually contributes. In addition, for the
 $\theta$-function in Eq.~(\ref{eq:finalformula}) to be different from
 zero, we need $f^{(2)}(\eta)\rightarrow -\infty$ and
 $f^{(3)}(\eta)\rightarrow \infty$. These both translate into
-$Q\geq 2 p_{T,\rm min}\cosh(\eta)$. This inequality is
-satisfied only if $Q\geq 2p_{T,\rm min}$ for:
+$Q\geq 2 p_{T,\rm min}\cosh(\eta)$. This inequality is satisfied only
+if $Q\geq 2p_{T,\rm min}$ for:
 \begin{equation}\label{eq:etabardef}
 -\overline{\eta}\leq\eta\leq \overline{\eta}\quad\mbox{with}\quad \overline{\eta} =\cosh^{-1}\left(\frac{Q}{2p_{T,\rm min}}\right)\,.
 \end{equation}
@@ -1386,17 +1431,17 @@ Ref.~\cite{Scimemi:2017etj} is not. In addition, when setting
 $p_{T,\rm min} = 0$ and $\eta_{\rm max}=\infty$, \textit{i.e.} no
 cuts, our result tends to $\mathcal{P}(Q,0,0)=\tanh(\infty)=1$, as it
 should. While the result in Eq.~(24) of Ref.~\cite{Scimemi:2017etj}
-actually diverges.
+actually diverges in this limit.
 
 The integrand of Eq.~(\ref{eq:finalformula}), due to the behaviour of
 $x_1$ and $x_2$ as functions of $\eta$, a piecewise
 function. Therefore, its numerical integration is problematic in that
-quadrature algorithms assume that the integrand be continuos over the
+quadrature algorithms assume the integrand be continuos over the
 integration range. The solution is to identify the discontinuity
 points and integrate the function separately over the resulting
 ranges. However, the complexity of the integration region
 (\textit{e.g.} see Fig.~\ref{fig:IntDomain}) makes the analytical
-identification of the discontinuity points hard to achieve.
+identification of the discontinuity points very hard to achieve.
 
 \subsection{Convoluting the leptonic tensor with $g_\perp^{\mu\nu}$}
 
@@ -1540,8 +1585,9 @@ leptonic tensor $L_{\mu\nu}$ is contracted with the transverse metrics
 $g_\perp^{\mu\nu}$.
 
 As a final check, it is interesting to compute $\mathcal{P}$ when
-$y=q_T=0$. In this limit $F$ reduces to the expression in
-Eq.~(\ref{eq:F00}), while $G$ becomes:
+$y=q_T=0$, again assuming $\eta_{\rm min} = -\eta_{\rm max}$. In this
+limit $F$ reduces to the expression in Eq.~(\ref{eq:F00}), while $G$
+becomes:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle G(x ,\eta)&=&\displaystyle 
@@ -1578,22 +1624,22 @@ relation above can be written more explicitly as:
 \right.}
 \end{equation}
 
-For simplicity, in the discussion above we have considered only the
-case of symmetric rapidity cuts, \textit{i.e.}
-$|\eta| < \eta_{\rm max}$. However, it may be required to implement an
-asymmetric cut, $\eta_{\rm min}<\eta<\eta_{\rm max}$, with
-$\eta_{\rm min}\neq -\eta_{\rm max}$. This is the case, for example,
+The reason why we kept $\eta_{\rm min} \neq -\eta_{\rm max}$ is that
+in some cases it may be required to implement an asymmetric cut,
+$\eta_{\rm min}<\eta<\eta_{\rm max}$. This is the case, for example,
 of the LHCb experiment that delivers data only in the forward region
-($2 < \eta < 4.5$). Fortunately, our calculation is easily extensible
-to this case. This simply amounts to rewriting
-Eq.~(\ref{eq:finalformula}) as:
-\begin{equation}\label{eq:finalformulaasy}
-  \mathcal{P}(Q,y,q_T)=\displaystyle \int_{\eta_{\rm
-      min}}^{\eta_{\rm
-      max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\left[\overline{F}(x_2(\eta),\eta)-\overline{F} (x_1(\eta) ,\eta)\right]\,,
-\end{equation}
-where $\overline{F}$ defined in Eq.~(\ref{eq:FGcombination}).
-
+($2 < \eta < 4.5$).
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.8\textwidth]{plots/IntDomainAsy}
+    \caption{Same as Fig.~\ref{fig:IntDomain} for the asymmetric
+      rapidity cut $2<\eta < 4.5$ at $y=3$.\label{fig:IntDomainAsy}}
+  \end{centering}
+\end{figure}
+As an example, Fig.~\ref{fig:IntDomainAsy} shows the integration
+domain of the phase-space reduction factor Eq.~(\ref{eq:PSredDef4})
+for $p_{T,\rm min}=20$ GeV and $2<\eta < 4.5$ at $Q=91$ GeV,
+$|\mathbf{q}_T|=10$ GeV and $y=3$.
 
 \newpage
 
