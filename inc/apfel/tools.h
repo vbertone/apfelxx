@@ -47,6 +47,13 @@ namespace apfel
   std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& sel = -1);
 
   /**
+   * @brief Utility function for the computation of the electroweak
+   * charges for Drell-Yan in narrow-width appriximatiob
+   * @return the std::vector of the electroweak charges
+   */
+  std::vector<double> ElectroWeakChargesNWA();
+
+  /**
    * @brief Utility function that concatenates and sort the input
    * vectors.
    * @param v1: first vector

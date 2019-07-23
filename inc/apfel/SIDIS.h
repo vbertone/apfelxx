@@ -309,12 +309,12 @@ void InitializeSIDIS(apfel::Grid const& g)
 
   C21qq.AddTerm({LLqq, odelta, odelta}); //1
   C21qq.AddTerm({LSqq, odelta, os1   }); //2
-  C21qq.AddTerm({1   , odelta, olrqq }); //3
-  C21qq.AddTerm({SLqq, os1   , odelta}); //4
-  C21qq.AddTerm({SSqq, os0   , os0   }); //5
-  C21qq.AddTerm({1   , os0   , osrqq }); //6
-  C21qq.AddTerm({1   , orlqq , odelta}); //7
-  C21qq.AddTerm({1   , orsqq , os0   }); //8
+  C21qq.AddTerm({1, odelta, olrqq });    //3
+  C21qq.AddTerm({SLqq, os1, odelta});    //4
+  C21qq.AddTerm({SSqq, os0, os0   });    //5
+  C21qq.AddTerm({1, os0, osrqq });       //6
+  C21qq.AddTerm({1, orlqq, odelta});     //7
+  C21qq.AddTerm({1, orsqq, os0   });     //8
   C21qq.AddTerm({K1qq, or11qq, or12qq}); //9
   C21qq.AddTerm({K2qq, or21qq, or22qq}); //10
 
@@ -331,8 +331,8 @@ void InitializeSIDIS(apfel::Grid const& g)
   const apfel::Operator or31gq{g, r31gq{}};
   const apfel::Operator or32gq{g, r32gq{}};
 
-  C21gq.AddTerm({1   , odelta, olrgq }); //1
-  C21gq.AddTerm({1   , os0   , osrgq }); //2
+  C21gq.AddTerm({1, odelta, olrgq });    //1
+  C21gq.AddTerm({1, os0, osrgq });       //2
   C21gq.AddTerm({K1gq, or11gq, or12gq}); //3
   C21gq.AddTerm({K2gq, or21gq, or22gq}); //4
   C21gq.AddTerm({K3gq, or31gq, or32gq}); //5
@@ -347,8 +347,8 @@ void InitializeSIDIS(apfel::Grid const& g)
   const apfel::Operator or21qg{g, r21qg{}};
   const apfel::Operator or22qg{g, r22qg{}};
 
-  C21qg.AddTerm({1   , orlqg , odelta}); //1
-  C21qg.AddTerm({1   , orsqg , os0   }); //2
+  C21qg.AddTerm({1, orlqg, odelta});     //1
+  C21qg.AddTerm({1, orsqg, os0   });     //2
   C21qg.AddTerm({K1qg, or11qg, or12qg}); //3
   C21qg.AddTerm({K2qg, or21qg, or22qg}); //4
 

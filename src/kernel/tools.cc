@@ -77,6 +77,30 @@ namespace apfel
     return Charges;
   }
 
+  //_________________________________________________________________________
+  std::vector<double> ElectroWeakChargesNWA()
+  {
+    // Relevant constants
+    const double S2ThW = apfel::Sin2ThetaW;
+    const double VD    = - 0.5 + 2 * S2ThW / 3;
+    const double VU    = + 0.5 - 4 * S2ThW / 3;
+    const double AD    = - 0.5;
+    const double AU    = + 0.5;
+    const double Ve    = - 0.5 + 2 * S2ThW;
+    const double Ae    = - 0.5;
+    const std::vector<double> Vq = {VD, VU, VD, VU, VD, VU};
+    const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
+
+    // Propagator and its square
+    double PZ2 = pow(apfel::ZMass, 4) * M_PI / apfel::ZMass / apfel::ZMass / apfel::GammaZ / pow(4 * S2ThW * ( 1 - S2ThW ), 2) / 2;
+
+    std::vector<double> Charges(6, 0.);
+    for (auto i = 0; i < 6; i++)
+      Charges[i] = ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
+
+    return Charges;
+  }
+
   //_________________________________________________________________________________
   std::vector<double> ConcatenateAndSortVectors(std::vector<double> const& v1, std::vector<double> const& v2)
   {

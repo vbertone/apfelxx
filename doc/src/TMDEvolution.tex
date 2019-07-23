@@ -472,12 +472,11 @@ arbitrary and dependes of the particular choice of $b_*$ and
 $b_{\rm max}$. Therefore, for any particular choice, only the
 combination in Eq.~(\ref{eq:separatation}) is meaningful and it is
 misleading to refer to $f_{\rm NP}$ as to the non-perturbative part of
-the TMDs in a universal sense. The reason why the function
-$f_{\rm NP}$ in Eq.~(\ref{eq:separatation}) does not depend on the
-renormalisation scale $\mu$ is that this dependence cancels in the
-ratio. To be more specific, if one chooses
-$\mu_0 = \mu_b = 2e^{-\gamma_E}{b_T}$ and uses
-Eq.~(\ref{eq:solution2}), one finds:
+TMDs in a universal sense. The reason why the function $f_{\rm NP}$ in
+Eq.~(\ref{eq:separatation}) does not depend on the renormalisation
+scale $\mu$ is that this dependence cancels out in the ratio. To be
+more specific, if one chooses $\mu_0 = \mu_b = 2e^{-\gamma_E}/{b_T}$
+and uses Eq.~(\ref{eq:solution2}), one finds:
 \begin{equation}
 \begin{array}{l}
 \displaystyle  f_{\rm NP}(x,
@@ -494,12 +493,13 @@ Eq.~(\ref{eq:solution2}), one finds:
 \end{equation}
 with $\mu_{b_*} = \sqrt{\zeta_{b_*}}=2e^{-\gamma_E}/{b_*(b_T)}$. It is
 thus apparent that the dependence on $\mu$ cancels. Due to the
-required behaviour $b_*$, if $b_T$ becomes small, $b_T$ and $b_*$ get
-closer and so do $\mu_{b_*}$ and $\mu_b$ as well as $\zeta_{b_*}$ and
-$\zeta_b$. Therefore, from the equation above, we see that
+required behaviour of $b_*$, if $b_T$ becomes small, $b_T$ and $b_*$
+get closer and so do $\mu_{b_*}$ and $\mu_b$ as well as $\zeta_{b_*}$
+and $\zeta_b$. Therefore, from the equation above, we see that
 $f_{\rm NP}\rightarrow 1$ for $b_T\rightarrow 0$. Conversely, if $b_T$
-becomes large $b_*$ saturates to $b_{\rm max}$. In this limit, we can write:
-\begin{equation}
+becomes large $b_*$ saturates to $b_{\rm max}$. In this limit, we can
+write:
+\begin{equation}\label{eq:fNPexplicit}
 \begin{array}{l}
 \displaystyle  f_{\rm NP}(x,
   {b}_T,\zeta) \mathop{\longrightarrow}_{b_T\rightarrow \infty}\\
@@ -520,6 +520,26 @@ between two sets of scales far apart from each other. As well known,
 the evolution kernel suppresses the distribution for large final
 scales. Extrapolating, one would then expect $f_{\rm NP}$ to be
 exponentially suppressed as $b_T$ becomes large.
+
+The definition of $f_{\rm NP}$ in Eq.~(\ref{eq:fNPexplicit}) allows
+for a more systematic study of this quantity that may help adopting an
+optimal parameterisation when fitting it to data. The idea is to plot
+the ratio in the r.h.s. of the first line of
+Eq.~(\ref{eq:fNPexplicit}) as a function of $b_T$ for fixed values of
+$x$ and $\zeta$. We know that for $b_T$ larger than some value, the
+numerator of this ratio will become unreliable. To identify this
+value, one can change the definition of $\mu_b$ (as well as that for
+$\mu_{b_*}$) by introducing a factor $C_2$:
+\begin{equation}
+  \mu_b = C_2\frac{2e^{-\gamma_E}}{b_T}\,.
+\end{equation}
+and vary $C_2$ around one by, say, a factor two up and down. When the
+effect of varying $C_2$ on the ratio becomes large, one can say that
+non-perturbative effects are large. On the other hand, in the region
+of $b_T$ where variations are small perturbation theory is still
+reliable. Therefore this region can be used to put some constraint on
+$f_{\rm NP}$.
+
 
 \section{Extraction of the singular behaviour for $q_T\rightarrow 0$}
 
@@ -976,6 +996,15 @@ and $C$.
 % fixed-order calculation in next-to-leading order ($f=1$). In other
 % words, the best we can do employing an additive matching seems to be
 % N$^3$LL + NLO.
+
+As a final remark, we notice that, as opposed to the Sudakov form
+factor, the evolution of collinear distributions and $\alpha_s$
+provide resummation of single logarithms. Therefore, the inclusion of
+perturbative corrections to the $\beta$-functions and splitting
+functions should be accordingly. Specifically, the perturbative
+accuracy at which they are computed should be the same as that of the
+non-cusp anomalous dimension $\gamma_F$.
+
 
 \section{Non-perturbative effect on the asymptotic cross section}
 
