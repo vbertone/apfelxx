@@ -188,4 +188,36 @@ namespace apfel
     double    _A3;
   };
   ///@}
+
+  /**
+   * @defgroup NLOBM NLO matching functions for linearly polarised
+   * gluon PDF (Boer-Mulders)
+   * @ingroup SLMatchFunc
+   */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark matching function
+   * for linearly polarised PDFs (reference:
+   * https://arxiv.org/pdf/1907.03780.pdf).
+   */
+
+  class C1gqpdfBM: public Expression
+  {
+  public:
+    C1gqpdfBM();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon matching function
+   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
+   * https://arxiv.org/pdf/1706.01473.pdf).
+   */
+  class C1ggpdfBM: public Expression
+  {
+  public:
+    C1ggpdfBM();
+    double Regular(double const& x) const;
+  };
+  ///@}
 }

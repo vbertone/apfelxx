@@ -1043,7 +1043,7 @@ namespace apfel
   //_____________________________________________________________________________
   double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
   {
-    // Compute log anf its powers.
+    // Compute log and its powers.
     const double lQ2  = 2 * log(kappa);
     const double lQ22 = lQ2 * lQ2;
     const double lQ23 = lQ22 * lQ2;
@@ -1072,7 +1072,7 @@ namespace apfel
   //_____________________________________________________________________________
   double HardFactorSIDIS(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
   {
-    // Compute log anf its powers.
+    // Compute log and its powers.
     const double lQ2  = 2 * log(kappa);
     const double lQ22 = lQ2 * lQ2;
     const double lQ23 = lQ22 * lQ2;
@@ -1094,6 +1094,47 @@ namespace apfel
                        - 51157. / 648. - 337 * zeta2 / 18 + 313 * zeta3 / 9 + 22 * zeta4 ) +
                 TR * nf * ( 4 * lQ23 / 9 + 38 * lQ22 / 9 + ( 418. / 27. + 8 * zeta2 / 3 ) * lQ2
                             + 4085. / 162. + 46 * zeta2 / 9 + 4 * zeta3 / 9 ) );
+
+    return hfct;
+  }
+
+  //_____________________________________________________________________________
+  double HardFactorggHiggs(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
+  {
+    // Scale variations are not implemented yet. The relevant formulas
+    // can be found in the appendix of
+    // https://arxiv.org/pdf/1805.05916.pdf.
+    if (kappa != 1)
+      throw std::runtime_error(error("HardFactorggHiggs", "Scale variations not implemented yet."));
+    // Compute log and its powers.
+    //const double lQ2  = 2 * log(kappa);
+    //const double lQ22 = lQ2 * lQ2;
+    //const double lQ23 = lQ22 * lQ2;
+    //const double lQ24 = lQ23 * lQ2;
+
+    // Compute coupling and its powers.
+    const double as  = Alphas / FourPi;
+    const double as2 = as * as;
+
+    // PDG values of the Higgs mass
+    // (http://pdg.lbl.gov/2019/listings/rpp2019-list-higgs-boson.pdf)
+    // and of the top pole mass
+    // (http://pdg.lbl.gov/2019/listings/rpp2019-list-t-quark.pdf) in
+    // GeV as of July 2019
+    const double mH = 125.1;
+    const double mt = 172.9;
+    const double Lt = 2 * log( mH / mt );
+
+    // Now compute hard factor according to the perturbative order.
+    double hfct = 1;
+    if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
+      hfct += 2 * as * ( CA * ( 5 + 7 * Pi2 / 6 ) - 3 * CF );
+    if (PerturbativeOrder > 2 || PerturbativeOrder < -1)
+      hfct += as2 * ( - 135 * CA + 23827 * CA * CA - 216 * CF - 15660 * CA * CF + 5832 * CF * CF
+                      + 2268 * CA * CA * Lt - 3564 * CA * CF * Lt - 4510 * CA * nf - 4428 * CF * nf
+                      + 1296 * CF * nf * Lt + 6795 * CA * CA * Pi2 - 2268 * CA * CF * Pi2
+                      - 450 * Pi2 * CA * nf + 333 * Pi2 * Pi2 * CA * CA - 5148 * CA * CA * zeta3
+                      - 1656 * zeta3 * CA * nf + 2592 * zeta3 * CF * nf ) / 162;
 
     return hfct;
   }

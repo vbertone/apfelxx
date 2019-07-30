@@ -221,5 +221,18 @@ namespace apfel
    * @return The hard factor for SIDIS.
    */
   double HardFactorSIDIS(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
+
+  /**
+   * @brief Perturbative hard factor for Higgs production in
+   * gluon-gluon fusion via top loop.
+   * @param PerturbativeOrder: the perturbative order
+   * @param Alphas: the value of the strong coupling
+   * @param nf: the number of active flavours
+   * @param kappa: the ration between hard scale and renormalusation scale
+   * @return The hard factor for Higgs production in gluon-gluon
+   * fusion.
+   * @note Reference: https://arxiv.org/pdf/1805.05916.pdf
+   */
+  double HardFactorggHiggs(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
   ///@}
 }

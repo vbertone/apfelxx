@@ -507,4 +507,24 @@ namespace apfel
 
     return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
   }
+
+  //_________________________________________________________________________________
+  C1gqpdfBM::C1gqpdfBM():
+    Expression()
+  {
+  }
+  double C1gqpdfBM::Regular(double const& x) const
+  {
+    return - 4 * CF * ( 1 - x ) / x;
+  }
+
+  //_________________________________________________________________________________
+  C1ggpdfBM::C1ggpdfBM():
+    Expression()
+  {
+  }
+  double C1ggpdfBM::Regular(double const& x) const
+  {
+    return - 4 * CA * ( 1 - x ) / x;
+  }
 }
