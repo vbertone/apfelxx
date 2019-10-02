@@ -6,6 +6,7 @@ set(tmds_source
   matchingfunctionspdf.cc
   matchingfunctionsff.cc
   ogataquadrature.cc
+  doubleexponentialquadrature.cc
   )
 
 add_library(tmds OBJECT ${tmds_source})
