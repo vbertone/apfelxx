@@ -12,8 +12,11 @@ namespace apfel
 {
   /**
    * @brief DE-Quadrature
-   * Numerical Automatic Integrator for Improper Integral
-   * Double Exponential (DE) Transformation
+   * Numerical automatic integrator for improper integral using double
+   * dxponential (DE) quadrature. The code is a manipulation of the
+   * code linked here:
+   *
+   * http://www.kurims.kyoto-u.ac.jp/~ooura/intde.html 
    */
   class DoubleExponentialQuadrature
   {
