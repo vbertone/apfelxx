@@ -1068,7 +1068,7 @@ components of the momentum $p$. The first, $\delta(p_2^2)$, is usually
 used to set the first component of $p$, the energy, to the on-shell
 value. Since the leptons are assumed to be massless, this
 produces:
-\begin{equation}
+\begin{equation}\label{eq:phasespacemeasure}
 \int d^4p\delta(p^2)\theta(p_0) = \int d^4p\delta(E^2-|\mathbf{p}|^2)\theta(E)=\int\frac{dEd^3\mathbf{p}}{2|\mathbf{p}|}\delta(E-|\mathbf{p}|)=\int\frac{d^3\mathbf{p}}{2|\mathbf{p}|}\,.
 \end{equation}
 Of course, the four-momentum $p$ appearing in the rest of the
@@ -1125,7 +1125,7 @@ $\mathbf{p}_T\cdot \mathbf{q}_T =
   integration angle $\phi$ in
   Eq.~(\ref{eq:integralyeah!}).}). Therefore, the argument of the
 delta function in Eq.~(\ref{eq:integralyeah!}) becomes:
-\begin{equation}
+\begin{equation}\label{eq:deltaargument}
 f(|\mathbf{p}_T|,\eta,\phi) = Q^2-2 |\mathbf{p}_T|\left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right]\,.
 \end{equation}
 and that of the $\vartheta$-function
@@ -1467,7 +1467,7 @@ on-shell-ness of $p_1$ and $p_2$ ($p_1^2=p_2^2=0$) and the momentum
 conservation ($p\equiv p_1$, $p_2=q-p$), we find that
 $t^\mu t^\nu L_{\mu\nu}=0$ and the quantity above reduces to:
 \begin{equation}\label{eq:LT}
-  L_\perp = 4\left[\frac12q^2 + 2(zp)^2\right] = 2Q^2\left[1+4 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]\,.
+  L_\perp = g_\perp^{\mu\nu}L_{\mu\nu} = 4\left[\frac12q^2 + 2(zp)^2\right] = 2Q^2\left[1+4 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]\,.
 \end{equation}
 Therefore, we need to introduce this factor in both the numerator and
 the denominator of Eq.~(\ref{eq:PSredDef4}). Following the same steps
@@ -1538,7 +1538,7 @@ the integral above becomes:
 Putting this result together with Eq.~(\ref{eq:remarkableintegral})
 and taking into account the factor $2Q^2$ in Eq.~(\ref{eq:LT}), we find
 that:
-\begin{equation}
+\begin{equation}\label{eq:normalisation}
 \begin{array}{l}
   \displaystyle \int d^4p \delta(p^2) \delta((q-p)^2) \theta(p_{0})
   \theta(q_0-p_{0})L_\perp = \frac{4\pi}{3}Q^2\,.
@@ -1640,6 +1640,58 @@ As an example, Fig.~\ref{fig:IntDomainAsy} shows the integration
 domain of the phase-space reduction factor Eq.~(\ref{eq:PSredDef4})
 for $p_{T,\rm min}=20$ GeV and $2<\eta < 4.5$ at $Q=91$ GeV,
 $|\mathbf{q}_T|=10$ GeV and $y=3$.
+
+\section{Differential cross section in the leptonic variables}
+
+The calculation of the phase-space reduction factor carried out in the
+previous section can be used to express the Drell-Yan cross section in
+Eq.(\ref{eq:crosssection}) as differential in the kinematic variables
+of the single leptons. Loosely speaking, this amounts to removing the
+integral sign in the numerator in Eq.~(\ref{eq:PSredDef}) but taking
+into account kinematic constraints. Using the transverse metric
+$g_\perp^{\mu\nu}$:
+\begin{equation}
+d\mathcal{P} = \frac{\displaystyle d^4p_1 d^4p_2 \,\delta(p_1^2) \delta(p_2^2)\theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) L_\perp(p_1,p_2)}{\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) L_\perp(p_1,p_2)}\,.
+\end{equation}
+From Eq.~(\ref{eq:normalisation}), we know the value of the
+denominator. In the numerator, we can make use of the
+momentum-conservation and one of the on-shell-ness
+$\delta$-functions. This leads to:
+\begin{equation}
+\frac{d\mathcal{P}}{d|\mathbf{p}_T|d\eta} = \frac {3 |\mathbf{p}_T|}{4\pi}\left[1+4 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]
+ \int_0^{2\pi} d\phi\,\delta(Q^2-2 |\mathbf{p}_T|\left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right])\,,
+\end{equation}
+where we have used
+Eqs.~(\ref{eq:phasespacemeasure})-(\ref{eq:integralyeah!}) and
+Eq.~(\ref{eq:deltaargument}). Finally, to perform the integral over $\phi$ we
+use Eq.~(\ref{eq:intoverphi}) and we get:
+\begin{equation}
+\frac{d\mathcal{P}}{d|\mathbf{p}_T|d\eta} = \frac {3|\mathbf{p}_T|}{4\pi Q^2}
+ \frac{Q^2+4 |\mathbf{p}_T|^2 \sinh^2(\eta-y)}{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-(Q^2-2|\mathbf{p}_T|M\cosh(\eta-y))^2}}\,.
+\end{equation}
+This allows us to get the Drell-Yan cross section differential in the
+leptonic variables $|\mathbf{p}_T|$ and $\eta$:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \frac{d\sigma}{dQ dy dq_T d\eta dp_T} &=&\displaystyle
+                                                          \left[\frac
+                                                          {3p_T}{4\pi
+                                                          Q^2}\frac{Q^2+4 p_T^2\sinh^2(\eta-y)}{\sqrt{4p_T^2q_T^2-(Q^2-2p_TM\cosh(\eta-y))^2}}\right]\frac{d\sigma}{dQ dy dq_T}\\
+\\
+&=&\displaystyle
+ \frac{4\alpha^2q_T p_T}{3 Q^5}\frac{Q^2+4
+                                                         \sinh^2(\eta-y)p_T^2}{\sqrt{4p_T^2q_T^2-(Q^2-2p_TM\cosh(\eta-y))^2}}\\
+\\
+&\times&\displaystyle
+  H(Q,\mu) \sum_q C_q(Q)
+  \int\frac{d^2\mathbf{b}}{4\pi} e^{i \mathbf{b}\cdot \mathbf{q}_T}
+         \overline{F}_q(x_1,\mathbf{b};\mu,\zeta)
+         \overline{F}_{\bar{q}}(x_2,\mathbf{b};\mu,\zeta)\,.
+\end{array}
+\end{equation}
+
+
+
 
 \newpage
 
