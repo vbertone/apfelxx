@@ -23,7 +23,7 @@ LDFLAGS  += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS)
 CLIBS += $(LHAPDFLIBS) $(APFELPPLIBS) $(NANPARLIBS)
 
 install : all
-all : logs FOvsAsy EvolutionFactor fNP
+all : logs FOvsAsy EvolutionFactor fNP LeptonicModulation
 
 logs: logs.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
@@ -35,6 +35,9 @@ EvolutionFactor: EvolutionFactor.o
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
 fNP: fNP.o 
+	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
+
+LeptonicModulation: LeptonicModulation.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
 .SUFFIXES : .cxx .o .f .c

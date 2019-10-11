@@ -1124,7 +1124,7 @@ $\mathbf{p}_T\cdot \mathbf{q}_T =
   $\beta$ could always be reabsorbed in a redefinition of the
   integration angle $\phi$ in
   Eq.~(\ref{eq:integralyeah!}).}). Therefore, the argument of the
-delta function in Eq.~(\ref{eq:integralyeah!}) becomes:
+$\delta$-function in Eq.~(\ref{eq:integralyeah!}) becomes:
 \begin{equation}\label{eq:deltaargument}
 f(|\mathbf{p}_T|,\eta,\phi) = Q^2-2 |\mathbf{p}_T|\left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right]\,.
 \end{equation}
@@ -1648,49 +1648,78 @@ previous section can be used to express the Drell-Yan cross section in
 Eq.(\ref{eq:crosssection}) as differential in the kinematic variables
 of the single leptons. Loosely speaking, this amounts to removing the
 integral sign in the numerator in Eq.~(\ref{eq:PSredDef}) but taking
-into account kinematic constraints. Using the transverse metric
-$g_\perp^{\mu\nu}$:
+into account kinematic constraints. Using the transverse metric tensor
+$g_\perp^{\mu\nu}$, one finds:
 \begin{equation}
-d\mathcal{P} = \frac{\displaystyle d^4p_1 d^4p_2 \,\delta(p_1^2) \delta(p_2^2)\theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) L_\perp(p_1,p_2)}{\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) L_\perp(p_1,p_2)}\,.
+d\mathcal{P} = \frac{\displaystyle d^4p_1 d^4p_2 \,\delta(p_1^2) \delta(p_2^2)\theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) L_\perp(p_1,p_2)}{\displaystyle \int d^4p_1 d^4p_2\, \delta(p_1^2) \delta(p_2^2) \theta(p_{1,0}) \theta(p_{2,0})\delta^{(4)}(p_1+p_2-q) L_\perp(p_1,p_2)}\,,
 \end{equation}
 From Eq.~(\ref{eq:normalisation}), we know the value of the
 denominator. In the numerator, we can make use of the
 momentum-conservation and one of the on-shell-ness
-$\delta$-functions. This leads to:
+$\delta$-functions. Using the r.h.s. of
+Eq.~(\ref{eq:firstintegralNew}), but integrating over $\phi$ rather
+than $|\mathbf{p}_T|$, leads to:
 \begin{equation}
 \frac{d\mathcal{P}}{d|\mathbf{p}_T|d\eta} = \frac {3 |\mathbf{p}_T|}{4\pi}\left[1+4 \sinh^2(y-\eta)\frac{|\mathbf{p}_T|^2}{Q^2}\right]
  \int_0^{2\pi} d\phi\,\delta(Q^2-2 |\mathbf{p}_T|\left[M\cosh\left(\eta - y\right)-|\mathbf{q}_T|\cos\phi\right])\,,
 \end{equation}
 where we have used
 Eqs.~(\ref{eq:phasespacemeasure})-(\ref{eq:integralyeah!}) and
-Eq.~(\ref{eq:deltaargument}). Finally, to perform the integral over $\phi$ we
-use Eq.~(\ref{eq:intoverphi}) and we get:
+Eq.~(\ref{eq:deltaargument}). Finally, to perform the integral over
+$\phi$ we use Eq.~(\ref{eq:intoverphi}) to get:
 \begin{equation}
-\frac{d\mathcal{P}}{d|\mathbf{p}_T|d\eta} = \frac {3|\mathbf{p}_T|}{4\pi Q^2}
- \frac{Q^2+4 |\mathbf{p}_T|^2 \sinh^2(\eta-y)}{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-(Q^2-2|\mathbf{p}_T|M\cosh(\eta-y))^2}}\,.
+\frac{d\mathcal{P}}{d|\mathbf{p}_T|d\eta} = \frac {3|\mathbf{p}_T|}{2\pi Q^2}
+ \frac{Q^2+4 |\mathbf{p}_T|^2 \sinh^2(\eta-y)}{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-(2|\mathbf{p}_T|M\cosh(\eta-y)-Q^2)^2}}\,.
 \end{equation}
-This allows us to get the Drell-Yan cross section differential in the
+Getting rid of the absolute value of the transverse vectors, this
+allows one to get the Drell-Yan cross section differential in the
 leptonic variables $|\mathbf{p}_T|$ and $\eta$:
 \begin{equation}
-\begin{array}{rcl}
-  \displaystyle \frac{d\sigma}{dQ dy dq_T d\eta dp_T} &=&\displaystyle
+\frac{d\sigma}{dQ dy dq_T d\eta dp_T} =
                                                           \left[\frac
-                                                          {3p_T}{4\pi
-                                                          Q^2}\frac{Q^2+4 p_T^2\sinh^2(\eta-y)}{\sqrt{4p_T^2q_T^2-(Q^2-2p_TM\cosh(\eta-y))^2}}\right]\frac{d\sigma}{dQ dy dq_T}\\
-\\
-&=&\displaystyle
- \frac{4\alpha^2q_T p_T}{3 Q^5}\frac{Q^2+4
-                                                         \sinh^2(\eta-y)p_T^2}{\sqrt{4p_T^2q_T^2-(Q^2-2p_TM\cosh(\eta-y))^2}}\\
-\\
-&\times&\displaystyle
-  H(Q,\mu) \sum_q C_q(Q)
-  \int\frac{d^2\mathbf{b}}{4\pi} e^{i \mathbf{b}\cdot \mathbf{q}_T}
-         \overline{F}_q(x_1,\mathbf{b};\mu,\zeta)
-         \overline{F}_{\bar{q}}(x_2,\mathbf{b};\mu,\zeta)\,.
-\end{array}
+                                                          {3p_T^2}{\pi
+                                                          Q^2 M}\frac{\left(\frac{Q^2}{4 p_T^2}-1\right)+\cosh^2(\eta-y)}{\sqrt{\frac{q_T^2}{M^2}-\left(\cosh(\eta-y)-\frac{Q^2}{2p_TM}\right)^2}}\right]\frac{d\sigma}{dQ dy dq_T}\,.
+\end{equation}
+Due to the square root in the denominator, for fixed values of $Q$,
+$q_T$, and $y$, the expression above is defined for values of $p_T$
+and $\eta$ such that:
+\begin{equation}\label{eq:kinconstr}
+\frac{Q^2}{2p_TM}-\frac{q_T }{M}< \cosh(\eta-y) < \frac{Q^2}{2p_TM}+\frac{q_T}{M}\,.
 \end{equation}
 
-
+In order to focus on the $p_T$ dependence of the cross section, one
+may want to integrate of the lepton rapidity $\eta$. Using the
+analogous of Eq.~(\ref{eq:intoverphi}) for $\cosh(\eta)$:
+\begin{equation}\label{eq:intovereta}
+\int_{-\infty}^{\infty}d\eta\, f(\cos\eta) = \int_{1}^{\infty}\frac{dx}{\sqrt{x^2-1}}\left[f(x)+f(-x)\right]\,,
+\end{equation}
+and taking into account the constraint in Eq.~(\ref{eq:kinconstr}),
+one finds:
+\begin{equation}\label{eq:LeptonicModulation}
+\begin{array}{l}
+\displaystyle \frac{d\sigma}{dQ dy dq_T dp_T} =\frac{d\sigma}{dQ dy
+  dq_T} \times\\
+\\
+\displaystyle\frac
+                                                          {3p_T}{2\pi
+                                                          Q^2}\int_{-\frac{q_T}{M}}^{\frac{q_T}{M}}
+  \frac{dy}{\sqrt{\frac{q_T^2}{M^2}-y^2}}\left(\frac{\left(\frac{Q^2}{4
+  p_T^2}-1\right)+\left(y+\frac{Q^2}{2p_TM}\right)^2}{\sqrt{\left(y+\frac{Q^2}{2p_TM}\right)^2-1}}+\frac{\left(\frac{Q^2}{4
+  p_T^2}-1\right)+\left(y-\frac{Q^2}{2p_TM}\right)^2}{\sqrt{\left(y-\frac{Q^2}{2p_TM}\right)^2-1}}\right)\,.
+\end{array}
+\end{equation}
+For fixed values of $Q$, $q_T$, and $y$, the integral above can be
+solved numerically a plotted as a function of $p_T$. The result is
+shown in Fig.~\ref{fig:LeptonicModulation}.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.8\textwidth]{plots/LeptonicModulation}
+    \caption{Behaviour of the second line of
+      Eq.~(\ref{eq:LeptonicModulation}) at $Q=M_Z$ and $y=0$ as a
+      function of the lepton transverse momentum
+      $p_{T,\ell}$.\label{fig:LeptonicModulation}}
+  \end{centering}
+\end{figure}
 
 
 \newpage

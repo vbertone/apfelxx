@@ -33,6 +33,7 @@ tests/ogata_test
 doc/src/codes/FOvsAsy
 doc/src/codes/logs
 doc/src/codes/EvolutionFactor
+doc/src/codes/LeptonicModulation
 
 # Compiled Object files
 *.slo
