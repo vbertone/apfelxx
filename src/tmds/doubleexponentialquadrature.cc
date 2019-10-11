@@ -112,6 +112,9 @@ namespace apfel
 
     a = 0;
     i = 0;
+    errh = 0;
+    fm = 0;
+    fp = 0;
     lenawm = (int) (_aw[0] + 0.5);
     nk0 = (int) (_aw[1] + 0.5);
     noff0 = 6;
