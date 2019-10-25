@@ -16,7 +16,7 @@ namespace apfel
    * dxponential (DE) quadrature. The code is a manipulation of the
    * code linked here:
    *
-   * http://www.kurims.kyoto-u.ac.jp/~ooura/intde.html 
+   * http://www.kurims.kyoto-u.ac.jp/~ooura/intde.html
    */
   class DoubleExponentialQuadrature
   {

@@ -2,7 +2,6 @@
 // APFEL++ 2017
 //
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
 #pragma once
@@ -139,14 +138,14 @@ namespace apfel
     std::vector<T>                       _GridValues;   //!< Vector of values to be interpolated on the grid
 
     template<class U>
-    friend std::ostream& operator<<(std::ostream& os, QGrid<U> const& dt);
+    friend std::ostream& operator << (std::ostream& os, QGrid<U> const& dt);
   };
 
   /**
    * @brief Method that prints QGrid with cout <<.
    */
   template<class T>
-  inline std::ostream& operator<<(std::ostream& os, QGrid<T> const& Qg)
+  inline std::ostream& operator << (std::ostream& os, QGrid<T> const& Qg)
   {
     os << "QGrid: " << &Qg << "\n";
     os << "nQ                = " << Qg._nQ << "\n";
