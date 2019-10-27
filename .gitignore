@@ -34,6 +34,7 @@ doc/src/codes/FOvsAsy
 doc/src/codes/logs
 doc/src/codes/EvolutionFactor
 doc/src/codes/LeptonicModulation
+doc/src/codes/PhaseSpaceRedFactor
 
 # Compiled Object files
 *.slo

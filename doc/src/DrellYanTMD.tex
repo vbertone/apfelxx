@@ -1101,11 +1101,11 @@ Now we consider the second $\delta$-function:
 \end{equation}
 being $q^2=Q^2$ and $p^2=0$. It is convenient to express the
 four-vector $q$ in terms of $Q$, $y$, and $\mathbf{q}_T$:
-\begin{equation}
+\begin{equation}\label{eq:qexplicit}
 q=\left(M\cosh y,\mathbf{q}_T,M\sinh y\right)\,.
 \end{equation}
 with $M=\sqrt{Q^2+|\mathbf{q}_T|^2}$. While:
-\begin{equation}
+\begin{equation}\label{eq:pexplicit}
 p=\left(|\mathbf{p}_T|\cosh\eta,\mathbf{p}_T,|\mathbf{p}_T|\sinh\eta\right)\,,
 \end{equation}
 so that:
@@ -1148,7 +1148,7 @@ and:
 \begin{equation}\label{eq:complicatedintegral}
 \int \frac{dx}{(a\pm
   x)^2\sqrt{1-x^2}}=\frac{\sqrt{1-x^2}}{(a^2-1)(x\pm
-  a)}\pm\frac{a}{(a^2-1)^{3/2}}\tan^{-1}\left(\frac{1\pm ax}{\sqrt{(a^2-1)}\sqrt{1-x^2}}\right)\,.
+  a)}\pm\frac{a}{(a^2-1)^{3/2}}\tan^{-1}\left(\frac{1\pm ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\,.
 \end{equation}
 The last integral is such that:
 \begin{equation}\label{eq:defintoverphi}
@@ -1443,9 +1443,9 @@ ranges. However, the complexity of the integration region
 (\textit{e.g.} see Fig.~\ref{fig:IntDomain}) makes the analytical
 identification of the discontinuity points very hard to achieve.
 
-\subsection{Convoluting the leptonic tensor with $g_\perp^{\mu\nu}$}
+\subsection{Contracting the leptonic tensor with $g_\perp^{\mu\nu}$}
 
-The calculation done in the previous section holds when convoluting
+The calculation done in the previous section holds when contracting
 the leptonic tensor $L_{\mu\nu}$ with the metric tensor $g^{\mu\nu}$
 associated with the Lorentz structure of the hadronic tensor. However,
 at small values of $|\mathbf{q}_T|$, the leading-power Lorentz
@@ -1455,7 +1455,7 @@ g_\perp^{\mu\nu} = g^{\mu\nu}+z^\mu z^\nu-t^\mu t^\nu
 \end{equation}
 where the vectors $z^\mu$ and $t^\mu$ in the Collins-Soper (CS) frame
 are defined as:
-\begin{equation}
+\begin{equation}\label{eq:auxvects}
 \begin{array}{l}
 \displaystyle z^\mu = (\sinh y,\mathbf{0},\cosh y)\,,\\
 \\
@@ -1478,7 +1478,7 @@ replace the integral in Eq.~(\ref{eq:firstintegral}) with(\footnote{We
 \begin{equation}\label{eq:firstintegralNew}
   \frac12 \int_0^\infty|\mathbf{p}_T|\left[1+4\sinh^2(y-\eta)
   \frac{|\mathbf{p}_T|^2}{Q^2}\right]d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot
-  q) =\frac{\overline{2p}_T^2}{Q^2}+
+  q) =\frac{2\overline{p}_T^2}{Q^2}+
   2\sinh^2(y-\eta)\frac{\overline{p}_T^4} {Q^4}\,.
 \end{equation}
 We can still use Eq.~(\ref{eq:complicatedintegral}) for the first term
@@ -1492,7 +1492,7 @@ to use:
   a)^3}\\
 \\
 &\pm&\displaystyle\frac{a(2a^2+3)}{2(a^2-1)^{7/2}}\tan^{-1}\left(\frac{1\pm
-      ax}{\sqrt{(a^2-1)}\sqrt{1-x^2}}\right)\,,
+      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\,,
 \end{array}
 \end{equation}
 that is such that:
@@ -1641,6 +1641,153 @@ domain of the phase-space reduction factor Eq.~(\ref{eq:PSredDef4})
 for $p_{T,\rm min}=20$ GeV and $2<\eta < 4.5$ at $Q=91$ GeV,
 $|\mathbf{q}_T|=10$ GeV and $y=3$.
 
+\subsection{Parity-violating contribution}
+
+In the presence of cuts on the final-state leptons and for invariant
+masses around the $Z$ mass, parity-violating effects arise. As we will
+show below, these effects integrate to zero when removing the leptonic
+cuts. This contribution stems from interference of the antisymmetric
+contributions to the lepton tensor, proportional to $p_1^{\mu}
+p_2^{\nu}\epsilon_{\mu\nu\rho\sigma}$, and the hadronic tensor,
+proportional to $\epsilon_{\perp}^{\mu\nu}$ defined as:
+\begin{equation}
+\epsilon_{\perp}^{\mu\nu}\equiv \epsilon^{\mu\nu\rho\sigma}t_\rho z_\sigma\,,
+\end{equation}
+where $t^\mu$ and $z^\mu$ are given in Eq.~(\ref{eq:auxvects}).
+Therefore, the contribution we are after results from the contraction
+of the following Lorentz structures:
+\begin{equation}
+L_{\rm PV}\equiv p_1^{\mu}
+p_2^{\nu}\epsilon_{\mu\nu\rho\sigma}\epsilon_{\perp}^{\rho\sigma}\,.
+\end{equation}
+After some manipulation, one finds:
+\begin{equation}\label{eq:pvphasespace}
+\begin{array}{rcl}
+\displaystyle L_{\rm PV}&=& \displaystyle
+p_1^{\mu}
+p_2^{\nu}\epsilon_{\mu\nu\rho\sigma}\epsilon^{\rho\sigma\alpha\beta}t_\alpha
+z_\beta= -2 p_1^{\mu}
+p_2^{\nu}\delta_\mu^\alpha \delta_\nu^\beta t_\alpha \\
+\\
+&=&\displaystyle -2 (p_1 t)(p_2 z) = -2 (pt)\left[(qz)-(pz)\right] = 2(pt)(pz)\\
+\\
+&=&\displaystyle \frac{2|\mathbf{p}_T|^2}{Q}\sinh(y-\eta)\left[M\cosh(y-\eta)-|\mathbf{q}_T|\cos\phi\right]\,,
+\end{array}
+\end{equation}
+where I have defined $p_1\equiv p$ and used the equalities
+$p_2 = q - p$, and $zq=0$. To compute the third line I have used the
+explicit parameterisation of $q$ and $p$ given in
+Eqs.~(\ref{eq:qexplicit}) and~(\ref{eq:pexplicit}), respectively. The
+presence of $\sinh(y-\eta)$ in Eq.~(\ref{eq:pvphasespace}) is such
+that integrating over the full range in the lepton rapidity $\eta$
+nullifies this contribution:
+\begin{equation}\label{eq:noPVcontr}
+\int_{-\infty}^{\infty} d\eta\,L_{\rm PV} = 0\,.
+\end{equation}
+Therefore, it turns out that, for observables inclusive in the lepton
+phase space, the parity violating term does not give any
+contribution. Conversely, the presence of cuts on the final-state
+leptons may prevent Eq.~(\ref{eq:noPVcontr}) from being satisfied
+leaving a residual contribution. In order to quantify this effect, we
+take the same steps performed in the previous sections to integrate
+$L_{\rm PV}$ over the fiducial region. As above, we start integrating
+over the full range in $|\mathbf{p}_T|$ using the on-shell-ness
+$\delta$-function:
+\begin{equation}
+\begin{array}{c}
+\displaystyle \int_0^\infty d|\mathbf{p}_T||\mathbf{p}_T|\,L_{\rm PV}=\frac{\sinh(y-\eta)}{Q}\left[M\cosh(y-\eta)-|\mathbf{q}_T|\cos\phi\right]
+\int_0^\infty d|\mathbf{p}_T||\mathbf{p}_T|^3\delta(Q^2-2pq)\\
+\\
+\displaystyle = \frac{\overline{p}_T^4}{Q^3}\sinh(y-\eta)\left[M\cosh(y-\eta)-|\mathbf{q}_T|\cos\phi\right]\,,
+\end{array}
+\end{equation}
+with $\overline{p}_T$ defined in Eq.~(\ref{eq:overpT}). Now we compute
+the indefinte integral over $\cos\phi$. To do so, we need to use
+Eq.~(\ref{eq:intoverphi}) along with the equality:
+\begin{equation}\label{eq:complicatedintegral3}
+\int \frac{dx}{(a\pm
+  x)^3\sqrt{1-x^2}}=\frac{\sqrt{1-x^2}\left[3ax\pm(4a^2-1) \right]}{2(a^2-1)^2(x\pm
+  a)^2}\pm\displaystyle\frac{(2a^2+1)}{2(a^2-1)^{5/2}}\tan^{-1}\left(\frac{1\pm
+      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\,.
+\end{equation}
+This allows us to compute the integral(\footnote{The factor
+  $\left(\frac {4\pi Q^2}{3}\right)^{-1}$ in
+  Eq.~(\ref{eq:Hdefinition}) corresponds to the full phase-space in
+  integral of $L_\perp$ in Eq.~(\ref{eq:normalisation}) that provides
+  the natural normalisation.}):
+\begin{equation}\label{eq:Hdefinition}
+\begin{array}{rcl}
+\displaystyle H(x,\eta)&=&\displaystyle\left(\frac {4\pi Q^2}{3}\right)^{-1}\frac{\sinh(y-\eta)}{Q^3}\left[M\cosh(y-\eta) \int
+  d(\cos\phi)\overline{p}_T^4(\cos\phi)- |\mathbf{q}_T|
+  \int d(\cos\phi) \cos\phi\,\overline{p}_T^4(\cos\phi)\right]\\
+\\
+&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{64\pi |\mathbf{q}_T|^4}\left[M\cosh(y-\eta) \int
+  \frac{d(\cos\phi)}{\left(a-\cos\phi\right)^4}-|\mathbf{q}_T|\int
+  \frac{\cos\phi \,d(\cos\phi)}{\left(a-\cos\phi\right)^4}\right]\\
+\\
+&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{64\pi q_T^3} \int
+  \frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{(a-x)^3}+\frac{1}{(a+x)^3}\right]\\
+\\
+&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{128\pi q_T^3}\Bigg\{\frac{\sqrt{1-x^2}}{(a^2-1)^2}\left[\frac{3ax-(4a^2-1) }{(x-
+  a)^2}+\frac{3ax+(4a^2-1) }{(x+
+  a)^2}\right]\\
+\\
+&-&\displaystyle\frac{(2a^2+1)}{(a^2-1)^{5/2}}\left[\tan^{-1}\left(\frac{1-
+      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right) -\tan^{-1}\left(\frac{1+
+      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\right]\Bigg\}
+\end{array}
+\end{equation}
+with $E_q=M\cosh\left(\eta - y\right)$, $q_T=|\mathbf{q}_T|$, and:
+\begin{equation}
+  a = \frac{E_q}{q_T}\,,
+\end{equation}
+so that:
+\begin{equation}\label{eq:Hfinal}
+\begin{array}{rcl}
+\displaystyle H(x,\eta)&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{128\pi (E_q^2-q_T^2)^{2}}\Bigg\{\sqrt{1-x^2}q_T\left[\frac{3E_qq_Tx-(4E_q^2-q_T^2) }{(xq_T-
+  E_q)^2}+\frac{3E_qq_Tx+(4E_q^2-q_T^2) }{(q_Tx+
+  E_q)^2}\right]\\
+\\
+&-&\displaystyle\frac{(2E_q^2+q_T^2)}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{q_T-
+      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right) -\tan^{-1}\left(\frac{q_T+
+      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)\right]\Bigg\}\,.
+\end{array}
+\end{equation}
+Finally, using the definition of $H$ in Eq.~(\ref{eq:Hfinal}), one can
+perform the integral over the fiducial phase space as discussed
+above in Eq.~(\ref{eq:finalformula}):
+\begin{equation}\label{eq:finalformulaH}
+  \mathcal{P}_{\rm PV}(Q,y,q_T)=\displaystyle \int_{\eta_{\rm
+      min}}^{\eta_{\rm
+      max}}d\eta\,\vartheta(x_2(\eta)-x_1(\eta))\left[H(x_2(\eta),\eta)-H(x_1(\eta) ,\eta)\right]\,.
+\end{equation}
+This allows one to estimate the impact of the parity-violating
+contribution to the phase-space reduction factor.
+
+In order to quantify numerically the impact of
+Eq.~(\ref{eq:finalformulaH}), Fig.~\ref{fig:PhaseSpaceRedFactor}
+displays the size $\mathcal{P}_{\rm PV}$ relative to the
+parity-conserving phase-space reduction factor as a function of $y$
+for three different values of $q_T$ at $Q=M_Z$ and for the following
+lepton cuts: $p_{T,\ell}>20$ GeV and $-2.4 < \eta_\ell < 2.4$.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.8\textwidth]{plots/PhaseSpaceRedFactor}
+    \caption{Ratio between the parity-violating phase-space reduction
+      factor $\mathcal{P}_{\rm PV}$ in Eq.~(\ref{eq:finalformulaH})
+      and the respective parity-conserving factor as a function of the
+      $Z$ rapidity $y$ at $Q=M_Z$ and for three different values of
+      $q_T$, with lepton cuts equal to $p_{T,\ell}>20$~GeV and
+      $-2.4 < \eta_\ell < 2.4$.\label{fig:PhaseSpaceRedFactor}}
+  \end{centering}
+\end{figure}
+It turns out that the size of $\mathcal{P}_{\rm PV}$ relative to
+$\mathcal{P}$ is never larger than $2\times10^{-6}$. In addition, the
+rapid oscillations with $y$ contribute to suppress even more the
+integral over realistic bins in $y$. One can thus conclude that, for
+realistic kinematic configurations, the impact of parity violating
+effects is completely negligible.
+
 \section{Differential cross section in the leptonic variables}
 
 The calculation of the phase-space reduction factor carried out in the
@@ -1720,7 +1867,6 @@ shown in Fig.~\ref{fig:LeptonicModulation}.
       $p_{T,\ell}$.\label{fig:LeptonicModulation}}
   \end{centering}
 \end{figure}
-
 
 \newpage
 
