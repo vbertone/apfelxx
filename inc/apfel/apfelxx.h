@@ -33,7 +33,7 @@
 #include "apfel/matchedevolution.h"
 #include "apfel/observable.h"
 #include "apfel/ogataquadrature.h"
-#include "doubleexponentialquadrature.h"
+#include "apfel/doubleexponentialquadrature.h"
 #include "apfel/operator.h"
 #include "apfel/qgrid.h"
 #include "apfel/set.h"
