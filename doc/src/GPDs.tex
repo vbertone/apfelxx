@@ -1,0 +1,97 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+\usepackage{makeidx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+\usepackage{listings}
+
+
+\begin{document}
+
+\title{Generalised parton distributions}
+
+\author{Valerio Bertone}
+
+\tableofcontents{}
+
+In this set of notes I collect the technical aspects concerning
+generalised parton distributions (GPDs). Since the computation GPDs
+introduces new kinds of convolution integrals, a strategy aimed at
+optimising the numerics needs to be devised.
+
+\section{Evolution equations}
+
+We start by discussing the implementation of the evolution
+equations. I will try to stick to Ref.~\cite{Diehl:2003ny} for the
+general notation. First, I introduce the main variables involved in
+the computation of GPDs:
+\begin{itemize}
+\item $x\equiv\frac{Q^2}{2pq}$ is the usual Bjorken x defined in the
+  range $[-1:1]$,
+\item $\xi= \frac{p^+-p'^+}{p^++p'^+}$:
+\item $t = (p-p')^2$ is the usual $t$-channel squared energy,
+\item $\mu$ the renormalisation scale
+\end{itemize}
+Sect.~3.1 of Ref.~\cite{Diehl:2003ny} gives a comprehensive review of
+the relevant variables and notation.
+
+
+
+\newpage
+
+\begin{thebibliography}{alp}
+
+%\cite{Diehl:2003ny}
+\bibitem{Diehl:2003ny}
+  M.~Diehl,
+  %``Generalized parton distributions,''
+  Phys.\ Rept.\  {\bf 388} (2003) 41
+  doi:10.1016/j.physrep.2003.08.002, 10.3204/DESY-THESIS-2003-018
+  [hep-ph/0307382].
+  %%CITATION = doi:10.1016/j.physrep.2003.08.002, 10.3204/DESY-THESIS-2003-018;%%
+  %1016 citations counted in INSPIRE as of 30 Oct 2019
+
+\end{thebibliography}
+
+
+
+
+\end{document}
