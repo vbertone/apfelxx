@@ -463,7 +463,8 @@ on the low-$b_T$ region. Now, one writes:
   b_*({b}_T),\mu,\zeta) \equiv f_{\rm NP}(x,
   {b}_T,\zeta) F(x, b_*({b}_T),\mu,\zeta)\,.
 \end{equation}
-This separation is advantageous because, due to the behaviour of
+This separation, often referred to as CSS prescription after Collins,
+Soper, and Sterman, is advantageous because, due to the behaviour of
 $b_*(b_T)$, $F(x, b_*({b}_T),\mu,\zeta)$ can be computed in
 perturbation theory for any value of $b_T$, while
 $f_{\rm NP}(x, {b}_T,\zeta)$ embodies the non-perturbative
@@ -540,6 +541,50 @@ of $b_T$ where variations are small perturbation theory is still
 reliable. Therefore this region can be used to put some constraint on
 $f_{\rm NP}$.
 
+\subsection{Alternative to the CSS prescription}
+
+As discussed above, the CSS prescription has the purpose to avoid
+integrating the Landau pole both in the strong coupling $\alpha_s$ and
+in the collinear distributions. This is implemented by
+\textit{globally} replacing $b_T$ with $b_*$ in
+Eq.~(\ref{eq:bstardefCSS}) in the TMDs that in turn naturally leads to
+the introduction of the non-perturbative function $f_{\rm NP}$ through
+Eq.~(\ref{eq:separatation}). Despite very simple and natural, this
+approach implies using $b_*$ even where not strictly
+required. Specifically in the logarithms appearing explicitly in the
+exponent of the Sudakov form factor that will now depend on $b_*$
+rather than on $b_T$ even though they are not problematic. Of course,
+the presence of $f_{\rm NP}$ will reabsorb these effects as clear from
+Eq.~(\ref{eq:separatation}).
+
+However, one can decide take a less invasive perspective to leave the
+explicit logarithms in the Sudakov unchanged while only regularising
+only $\alpha_s$ and the collinear distributions. This can be done by
+computing them at some modified scale $\mu_*(mu)$ su that:
+\begin{equation}\label{eq:bstardef}
+\begin{array}{lll}
+\mu_*(\mu)\simeq \mu &\mbox{ for } & \mu\rightarrow \infty\,,\\
+\mu_*(\mu) \rightarrow \mu_{\rm min} &\mbox{ for } & \mu\rightarrow 0\,.
+\end{array}
+\end{equation}
+This can be easily connected to the $b_*$ prescription as:
+\begin{equation}
+\mu_*(\mu)=\frac{b_0}{b_*\left(\frac{b_0}{\mu}\right)}\,,
+\end{equation}
+with $b_0=2e^{-\gamma_E}$. Adopting the particular $b_*$ in
+Eq.~(\ref{eq:bstardefCSS}) and choosing $b_{\rm max}=b_0$ gives the
+surprisingly simple relation:
+\begin{equation}
+\mu_*(\mu)=\sqrt{\mu^2+1}\,.
+\end{equation}
+Therefore, the alternative recipe to the CSS procedure amounts to
+computing $\alpha_s$ and collinear distributions in $\sqrt{\mu^2+1}$
+rather than in $\mu$. This suffices to avoid integrating over the
+Landau pole, regularising only what actually needs to be regularised
+and leaving the rest untouched. The one unpleasant drawback of this
+approach is the fact that it does not make as transparent as in CSS
+the introduction of the function $f_{\rm NP}$ that in any case has to
+be present to encapsulate non-perturbative effects.
 
 \section{Extraction of the singular behaviour for $q_T\rightarrow 0$}
 
