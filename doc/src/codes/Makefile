@@ -23,7 +23,7 @@ LDFLAGS  += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS)
 CLIBS += $(LHAPDFLIBS) $(APFELPPLIBS) $(NANPARLIBS)
 
 install : all
-all : logs FOvsAsy EvolutionFactor fNP LeptonicModulation PhaseSpaceRedFactor
+all : logs FOvsAsy EvolutionFactor fNP LeptonicModulation PhaseSpaceRedFactor NewPrescription
 
 logs: logs.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
@@ -43,6 +43,9 @@ LeptonicModulation: LeptonicModulation.o
 PhaseSpaceRedFactor: PhaseSpaceRedFactor.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
+NewPrescription: NewPrescription.o 
+	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
+
 .SUFFIXES : .cxx .o .f .c
 
 .cxx.o:	 
@@ -52,5 +55,5 @@ PhaseSpaceRedFactor: PhaseSpaceRedFactor.o
 	$(F77)  -c $< 
 
 clean:
-	rm -rf *.lo *.o *.la logs FOvsAsy EvolutionFactor fNP *~
+	rm -rf *.lo *.o *.la logs FOvsAsy EvolutionFactor fNP NewPrescription *~
 
