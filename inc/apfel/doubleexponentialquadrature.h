@@ -33,7 +33,8 @@ namespace apfel
      * @param qT: value of qT in which to compute the transform
      * @return the value of the transform
      */
-    double transform(std::function<double(double const&)> const& f, double const& qT) const;
+    template<class T>
+    T transform(std::function<T(double const&)> const& f, double const& qT) const;
 
   private:
     double _aw[8000];

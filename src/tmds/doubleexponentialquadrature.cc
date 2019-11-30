@@ -5,6 +5,7 @@
 //
 
 #include "apfel/doubleexponentialquadrature.h"
+#include "apfel/distribution.h"
 
 #include <math.h>
 
@@ -104,34 +105,44 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  double DoubleExponentialQuadrature::transform(std::function<double(double const&)> const& f, double const& qT) const
+  template<class T>
+  T DoubleExponentialQuadrature::transform(std::function<T(double const&)> const& f, double const& qT) const
   {
-    int lenawm, nk0, noff0, nk, noff, lmax, m, k, j, jm, l;
-    double eps, per, perw, w02, ir, h, iback, irback, t, tk,
-           xa, fm, fp, errh, s0, s1, s2, errd, i, err, a;
+    const int lenawm = (int) (_aw[0] + 0.5);
+    const int nk0    = (int) (_aw[1] + 0.5);
+    const int noff0 = 6;
+    const int nk = (int) (_aw[2] + 0.5);
+    const int noff = 2 * nk0 + noff0;
+    const int lmax = (int) (_aw[3] + 0.5);
+    const double eps = _aw[4];
+    const double per = 1 / fabs(qT);
+    const double w02 = 2 * _aw[noff + 2];
+    const double perw = per * w02;
 
-    a = 0;
-    i = 0;
-    errh = 0;
-    fm = 0;
-    fp = 0;
-    lenawm = (int) (_aw[0] + 0.5);
-    nk0 = (int) (_aw[1] + 0.5);
-    noff0 = 6;
-    nk = (int) (_aw[2] + 0.5);
-    noff = 2 * nk0 + noff0;
-    lmax = (int) (_aw[3] + 0.5);
-    eps = _aw[4];
-    per = 1 / fabs(qT);
-    w02 = 2 * _aw[noff + 2];
-    perw = per * w02;
-    i = f(a + _aw[noff] * per) * j0(qT * (a + _aw[noff] * per));
-    ir = i * _aw[noff + 1];
+    T i = f(_aw[noff] * per) * j0(qT * (_aw[noff] * per));
+    T ir = i * _aw[noff + 1];
+    double err = fabs(i);
+    double h = 2;
+    int m = 1;
+    int k = noff;
+
+    int j;
+    int jm;
+    int l;
+    double t;
+    double tk;
+    double xa;
+    T errd{i};
+    T errh{i};
+    T iback{i};
+    T irback{i};
+    T s0{i};
+    T s1{i};
+    T s2{i};
+    T fm{i};
+    T fp{i};
+
     i *= _aw[noff + 2];
-    err = fabs(i);
-    h = 2;
-    m = 1;
-    k = noff;
     do
       {
         iback = i;
@@ -148,8 +159,8 @@ namespace apfel
                   {
                     j += 3;
                     xa = per * _aw[j];
-                    fm = f(a + xa) * j0(qT * (a + xa));
-                    fp = f(a + xa + perw * tk) * j0(qT * (a + xa + perw * tk));
+                    fm = f(xa) * j0(qT * xa);
+                    fp = f(xa + perw * tk) * j0(qT * (xa + perw * tk));
                     ir += (fm + fp) * _aw[j + 1];
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];
@@ -168,8 +179,8 @@ namespace apfel
                 for (j = k + 3; j <= k + jm; j += 3)
                   {
                     xa = per * _aw[j];
-                    fm = f(a + xa) * j0(qT * (a + xa));
-                    fp = f(a + xa + perw * tk) * j0(qT * (a + xa + perw * tk));
+                    fm = f(xa) * j0(qT * xa);
+                    fp = f(xa + perw * tk) * j0(qT * (xa + perw * tk));
                     ir += (fm + fp) * _aw[j + 1];
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];
@@ -182,12 +193,12 @@ namespace apfel
             while (fabs(fm) > err && j < k)
               {
                 j += 3;
-                fm = f(a + per * _aw[j]) * j0(qT * (a + per * _aw[j]));
+                fm = f(per * _aw[j]) * j0(qT * per * _aw[j]);
                 ir += fm * _aw[j + 1];
                 fm *= _aw[j + 2];
                 i += fm;
               }
-            fm = f(a + perw * tk) * j0(qT * (a + perw * tk));
+            fm = f(perw * tk) * j0(qT * perw * tk);
             s2 = w02 * fm;
             i += s2;
             if (fabs(fp) > err || fabs(s2) > err)
@@ -202,12 +213,13 @@ namespace apfel
                     for (j = noff0 + 2; j <= noff - 2; j += 2)
                       {
                         tk += 1;
-                        fm = f(a + perw * tk) * j0(qT * (a + perw * tk));
+                        fm = f(perw * tk) * j0(qT * perw * tk);
                         s0 += fm;
                         s1 += fm * _aw[j];
                         s2 += fm * _aw[j + 1];
                       }
-                    if (s2 <= err || l >= lmax) break;
+                    if (s2 <= err || l >= lmax)
+                      break;
                     i += w02 * s0;
                   }
                 i += s1;
@@ -239,4 +251,8 @@ namespace apfel
       }
     return i;
   }
+
+  // Specilisations
+  template double DoubleExponentialQuadrature::transform(std::function<double(double const&)> const& f, double const& qT) const;
+  //template Distribution DoubleExponentialQuadrature::transform(std::function<Distribution(double const&)> const& f, double const& qT) const;
 }
