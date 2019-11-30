@@ -105,8 +105,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  template<class T>
-  T DoubleExponentialQuadrature::transform(std::function<T(double const&)> const& f, double const& qT) const
+  double DoubleExponentialQuadrature::transform(std::function<double(double const&)> const& f, double const& qT) const
   {
     const int lenawm = (int) (_aw[0] + 0.5);
     const int nk0    = (int) (_aw[1] + 0.5);
@@ -119,8 +118,8 @@ namespace apfel
     const double w02 = 2 * _aw[noff + 2];
     const double perw = per * w02;
 
-    T i = f(_aw[noff] * per) * j0(qT * (_aw[noff] * per));
-    T ir = i * _aw[noff + 1];
+    double i = f(_aw[noff] * per) * j0(qT * (_aw[noff] * per));
+    double ir = i * _aw[noff + 1];
     double err = fabs(i);
     double h = 2;
     int m = 1;
@@ -132,15 +131,15 @@ namespace apfel
     double t;
     double tk;
     double xa;
-    T errd{i};
-    T errh{i};
-    T iback{i};
-    T irback{i};
-    T s0{i};
-    T s1{i};
-    T s2{i};
-    T fm{i};
-    T fp{i};
+    double errd{i};
+    double errh{i};
+    double iback{i};
+    double irback{i};
+    double s0{i};
+    double s1{i};
+    double s2{i};
+    double fm{i};
+    double fp{i};
 
     i *= _aw[noff + 2];
     do
@@ -251,8 +250,4 @@ namespace apfel
       }
     return i;
   }
-
-  // Specilisations
-  template double DoubleExponentialQuadrature::transform(std::function<double(double const&)> const& f, double const& qT) const;
-  //template Distribution DoubleExponentialQuadrature::transform(std::function<Distribution(double const&)> const& f, double const& qT) const;
 }
