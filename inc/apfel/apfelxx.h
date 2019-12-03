@@ -61,4 +61,5 @@
 #include "apfel/tmdbuilder.h"
 #include "apfel/alphaqcd.h"
 #include "apfel/alphaqed.h"
+#include "apfel/twobodyphasespace.h"
 ///@}
