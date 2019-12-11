@@ -113,8 +113,8 @@ namespace apfel
     // Get Set of distributions on the Q-grid.
     const std::vector<Set<Distribution>> xfg = TabulatedDists.GetQGridValues();
 
-    // Run over the threshold indices. Skipe the last because it is
-    // the last point of the grid in Q.
+    // Run over the threshold indices. Skip the last because it is the
+    // last point of the grid in Q.
     for (int i = 0; i < (int) tind.size() - 1; i++)
       {
         // Threshold index.
@@ -573,7 +573,7 @@ namespace apfel
     info += "Reference: arXiv:1708.00911\n";
     info += "Format: lhagrid1\n";
     info += "DataVersion: 1\n";
-    info += "NumMembers: 0\n";
+    info += "NumMembers: 1\n";
     info += "Particle: 2212\n";
 
     info += "Flavors: [";
