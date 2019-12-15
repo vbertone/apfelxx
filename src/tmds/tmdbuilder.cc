@@ -1138,153 +1138,153 @@ namespace apfel
 
     return hfct;
   }
-/*
-  //_____________________________________________________________________________
-  void test(std::map<int,TmdObjects>             const& TmdObj,
-            std::function<double(double const&)> const& Alphas,
-            int                                  const& PerturbativeOrder,
-            double                               const& Ci)
-  {
-    const double Q   = 1;
-    const double muR = 1;
-    const double xQ  = 1;
-
-    const double Q2   = Q * Q;
-    const double muR2 = muR * muR;
-    const double xQ2  = xQ * xQ;
-
-    //const auto& gc    = TmdObj.at(NF(muR, thrs)).GammaCusp;
-    //const double coup = Alphas(muR) / FourPi;
-
-    // Coefficients A's in terms of GammaCusp, GammaCS (K) and BetaQCD
-    // (see Eq. (74) of https://arxiv.org/pdf/1007.4005.pdf)
-    const double A1 = 0;
-    const double A2 = 0;
-    const double A3 = 0;
-    const double A4 = 0;
-
-    // Coefficients B's in terms of GammaF, GammaCS (K) and BetaQCD
-    // (see Eq. (74) of https://arxiv.org/pdf/1007.4005.pdf)
-    const double B1 = 0;
-    const double B2 = 0;
-    const double B3 = 0;
-
-    //lambda = ( as(muR) / FourPi ) * beta0qcd(nf) * L;
-
-    const auto g1 = [=] (int const& nf, double const& lambda) -> double
+  /*
+    //_____________________________________________________________________________
+    void test(std::map<int,TmdObjects>             const& TmdObj,
+              std::function<double(double const&)> const& Alphas,
+              int                                  const& PerturbativeOrder,
+              double                               const& Ci)
     {
-      const double twl    = 2 * lambda;
-      const double omtwl  = 1 - twl;
-      const double lomtwl = log(omtwl);
-      return 4 * A1 / beta0qcd(nf) * ( twl + lomtwl ) / twl;
-    };
+      const double Q   = 1;
+      const double muR = 1;
+      const double xQ  = 1;
 
-    const auto g2 = [=] (int const& nf, double const& lambda) -> double
-    {
-      const double twl    = 2 * lambda;
-      const double omtwl  = 1 - twl;
-      const double lomtwl = log( omtwl);
-      return
-      2 / beta0qcd(nf) * lomtwl * ( A1 * log( 1 / xQ2 ) + B1 )
-      - A2 / pow(beta0qcd(nf) / 2, 2) * ( twl + omtwl * lomtwl ) / omtwl
-      + A1 * ( - ( ( beta1qcd(nf) / pow(FourPi, 2) ) ) / ( 4 * M_PI * pow(beta0qcd(nf) / FourPi, 3) )
-               * ( lomtwl * ( ( twl - 1 ) * lomtwl - 2 ) - 4 * lambda ) / omtwl
-               - 1 / ( beta0qcd(nf) / 2 ) * ( ( twl * ( 1 - lomtwl ) + lomtwl ) ) / omtwl * log( muR2 / xQ2 / Q2 ) );
-    };
+      const double Q2   = Q * Q;
+      const double muR2 = muR * muR;
+      const double xQ2  = xQ * xQ;
 
-    const auto g3 = [=] (int const& nf,  double const& lambda) -> double
-    {
-      const double twl    = 2 * lambda;
-      const double twl2   = twl * twl;
-      const double omtwl  = 1 - twl;
-      const double lomtwl = log(omtwl);
-      return
-      ( A1 * log( 1 / xQ2 ) + B1 ) * ( - lambda / omtwl * log( muR2 / xQ2 / Q2 ) + ( ( beta1qcd(nf) / pow(FourPi, 2) ) )
-                                       / ( 2 * pow(beta0qcd(nf) / FourPi, 2) ) * ( twl + lomtwl ) / omtwl )
-      - 1 / ( beta0qcd(nf) / 2 ) * lambda / omtwl * ( A2 * log( 1 / xQ2 ) + B2 )
-      - A3 / ( pow(beta0qcd(nf) / 2, 2) ) * twl2 / pow(omtwl, 2)
-      + A2 * ( ( ( beta1qcd(nf) / pow(FourPi, 2) ) ) / ( 4 * M_PI * pow(beta0qcd(nf) / FourPi, 3) )
-               * ( twl * ( 3 * lambda - 1 ) + ( 4 * lambda - 1 ) * lomtwl ) / pow(omtwl, 2)
-               - 1 / ( beta0qcd(nf) / 4 ) * twl2 / pow(omtwl, 2) * log( muR2 / xQ2 / Q2 ) )
-      + A1 * ( ( lambda * ( beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) * ( 1 - 3 * lambda )
-                            + pow(beta1qcd(nf) / pow(FourPi, 2), 2) * lambda ) )
-               / ( pow(beta0qcd(nf) / FourPi, 4) * pow(omtwl, 2) )
-               + ( omtwl * lomtwl * ( beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) * omtwl
-                                      + 2 * pow(beta1qcd(nf) / pow(FourPi, 2), 2) * lambda ) )
-               / ( 2 * pow(beta0qcd(nf) / FourPi, 4) * pow(omtwl, 2) )
-               + ( pow(beta1qcd(nf) / pow(FourPi, 2), 2) ) / ( 4 * pow(beta0qcd(nf) / FourPi, 4) )
-               * ( ( 1 - 4 * lambda ) * pow(lomtwl, 2) ) / pow(omtwl, 2)
-               - twl2 / pow(omtwl, 2) * pow(log( muR2 / xQ2 / Q2 ), 2)
-               - ( ( beta1qcd(nf) / pow(FourPi, 2) ) ) / ( 2 * pow(beta0qcd(nf) / FourPi, 2) )
-               * ( ( twl * omtwl + ( 1 - 4 * lambda ) * lomtwl ) ) / pow(omtwl, 2) * log( muR2 / xQ2 / Q2 ) );
-    };
+      //const auto& gc    = TmdObj.at(NF(muR, thrs)).GammaCusp;
+      //const double coup = Alphas(muR) / FourPi;
 
-    const auto g4 = [=] (int const& nf,  double const& lambda) -> double
-    {
-      const double twl    = 2 * lambda;
-      const double twl2   = twl * twl;
-      const double twl3   = twl2 * twl;
-      const double omtwl  = 1 - twl;
-      const double lomtwl = log(omtwl);
-      return
-      ( A4 * ( 3 - twl ) * twl2 ) / ( 6 * pow(beta0qcd(nf) / 2, 2) * pow(twl - 1, 3) )
-      + A3 / ( 48 * M_PI * pow(beta0qcd(nf) / FourPi, 3) * pow(twl - 1, 3) )
-      * ( 3 * ( beta1qcd(nf) / pow(FourPi, 2) ) * ( 1 - 6 * lambda ) * lomtwl
-          + twl * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * ( 5 * lambda * ( twl - 3 ) + 3 )
-                    + 6 * pow(beta0qcd(nf) / FourPi, 2) * ( 3 - twl ) * lambda * log( muR2 / xQ2 / Q2 ) )
-          + 12 * pow(beta0qcd(nf) / FourPi, 2) * ( lambda - 1 ) * lambda * ( twl - 1 ) * log( 1 / xQ2 ) )
-      + A2 / ( 24 * pow(beta0qcd(nf) / FourPi, 4) * pow(twl - 1, 3) )
-      * ( 32 * beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) * twl3
-          - 2 * pow(beta1qcd(nf) / pow(FourPi, 2), 2) * lambda * ( lambda * ( 11 * twl - 9 ) + 3 )
-          + 12 * pow(beta0qcd(nf) / FourPi, 4) * ( 3 - twl ) * twl2 * pow(log( muR2 / xQ2 / Q2 ), 2)
-          + 6 * pow(beta0qcd(nf) / FourPi, 2) * log( muR2 / xQ2 / Q2 )
-          * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * ( 1 - 6 * lambda ) * lomtwl
-              + 2 * ( lambda - 1 ) * lambda * ( twl - 1 ) * ( ( beta1qcd(nf) / pow(FourPi, 2) )
-                                                              + 2 * pow(beta0qcd(nf) / FourPi, 2) * log( 1 / xQ2 ) ) )
-          + 3 * ( beta1qcd(nf) / pow(FourPi, 2) ) * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl
-                                                      * ( twl + ( 6 * lambda - 1 ) * lomtwl - 1 )
-                                                      - 2 * pow(beta0qcd(nf) / FourPi, 2) * ( twl - 1 )
-                                                      * ( 2 * ( lambda - 1 ) * lambda - lomtwl ) * log( 1 / xQ2 ) ) )
-      + ( M_PI * A1 ) / ( 12 * pow(beta0qcd(nf) / FourPi, 5) * pow(twl - 1, 3) )
-      * ( pow(beta1qcd(nf) / pow(FourPi, 2), 3) * ( 1 - 6 * lambda ) * pow(lomtwl, 3)
-          + 3 * lomtwl * ( pow(beta0qcd(nf) / FourPi, 2) * ( beta3qcd(nf) / pow(FourPi, 4) ) * pow(twl - 1, 3)
-                           + beta0qcd(nf) / FourPi * ( beta1qcd(nf) / pow(FourPi, 2) ) * ( beta2qcd(nf) / pow(FourPi, 3) )
-                           * ( omtwl * ( 8 * twl2 - 4 * lambda + 3 ) )
-                           + 4 * pow(beta1qcd(nf) / pow(FourPi, 2), 3) * twl2 * ( twl + 1 )
-                           + pow(beta0qcd(nf) / FourPi, 2) * ( beta1qcd(nf) / pow(FourPi, 2) ) * log( muR2 / xQ2 / Q2 )
-                           * ( pow(beta0qcd(nf) / FourPi, 2) * ( 1 - 6 * lambda ) * log( muR2 / xQ2 / Q2 )
-                               - 4 * ( beta1qcd(nf) / pow(FourPi, 2) ) * lambda ) )
-          + 3 * pow(beta1qcd(nf) / pow(FourPi, 2), 2) * pow(lomtwl, 2)
-          * ( 2 * ( beta1qcd(nf) / pow(FourPi, 2) ) * lambda + pow(beta0qcd(nf) / FourPi, 2)
-              * ( 6 * lambda - 1 ) * log( muR2 / xQ2 / Q2 ) )
-          + 3 * pow(beta0qcd(nf) / FourPi, 2) * ( twl - 1 ) * log( 1 / xQ2 )
-          * ( - pow(beta1qcd(nf) / pow(FourPi, 2), 2) * pow(lomtwl, 2) + 2 * pow(beta0qcd(nf) / FourPi, 2)
-              * ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl * log( muR2 / xQ2 / Q2 )
-              + 4 * lambda * ( lambda * ( pow(beta1qcd(nf) / pow(FourPi, 2), 2)
-                                          - beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) )
-                               + pow(beta0qcd(nf) / FourPi, 4) * ( lambda - 1 ) * pow(log( muR2 / xQ2 / Q2 ), 2) ) )
-          + twl * ( pow(beta0qcd(nf) / FourPi, 2) * ( beta3qcd(nf) / pow(FourPi, 4) ) * ( ( 15 - 14 * lambda ) * lambda - 3 )
-                    + beta0qcd(nf) / FourPi * ( beta1qcd(nf) / pow(FourPi, 2) )
-                    * ( beta2qcd(nf) / pow(FourPi, 3) ) * ( 5 * lambda * ( twl - 3 ) + 3 )
-                    + 4 * pow(beta1qcd(nf) / pow(FourPi, 2), 3) * twl2
-                    + 2 * pow(beta0qcd(nf) / FourPi, 6) * ( 3 - twl ) * lambda * pow(log( muR2 / xQ2 / Q2 ), 3)
-                    + 3 * pow(beta0qcd(nf) / FourPi, 4) * ( beta1qcd(nf) / pow(FourPi, 2) ) * pow(log( muR2 / xQ2 / Q2 ), 2)
-                    + 6 * pow(beta0qcd(nf) / FourPi, 2) * lambda * ( twl + 1 )
-                    * ( beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) )
-                        - pow(beta1qcd(nf) / pow(FourPi, 2), 2) ) * log( muR2 / xQ2 / Q2 )
-                    - 8 * pow(beta0qcd(nf) / FourPi, 6) * ( 4 * twl2 - 6 * lambda + 3 ) * zeta3 ) )
-      + ( B3 * ( lambda - 1 ) * lambda ) / ( beta0qcd(nf) * pow(omtwl, 2) )
-      + ( B2 * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl
-                 - 2 * ( lambda - 1 ) * lambda * ( ( beta1qcd(nf) / pow(FourPi, 2) )
-                                                   - 2 * pow(beta0qcd(nf) / FourPi, 2) * log( muR2 / xQ2 / Q2 ) ) ) )
-      / ( 4 * pow(beta0qcd(nf) / FourPi, 2) * pow(omtwl, 2) )
-      + ( M_PI * B1 ) / ( 4 * pow(beta0qcd(nf) / FourPi, 3) * pow(omtwl, 2) )
-      * ( 4 * lambda * ( lambda * ( pow(beta1qcd(nf) / pow(FourPi, 2), 2)
-                                    - beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) )
-                         + pow(beta0qcd(nf) / FourPi, 4) * ( lambda - 1 ) * pow(log( muR2 / xQ2 / Q2 ), 2) )
-          - pow(beta1qcd(nf) / pow(FourPi, 2), 2) * pow(lomtwl, 2)
-          + 2 * pow(beta0qcd(nf) / FourPi, 2) * ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl * log( muR2 / xQ2 / Q2 ) );
-    };
-  }
-*/
+      // Coefficients A's in terms of GammaCusp, GammaCS (K) and BetaQCD
+      // (see Eq. (74) of https://arxiv.org/pdf/1007.4005.pdf)
+      const double A1 = 0;
+      const double A2 = 0;
+      const double A3 = 0;
+      const double A4 = 0;
+
+      // Coefficients B's in terms of GammaF, GammaCS (K) and BetaQCD
+      // (see Eq. (74) of https://arxiv.org/pdf/1007.4005.pdf)
+      const double B1 = 0;
+      const double B2 = 0;
+      const double B3 = 0;
+
+      //lambda = ( as(muR) / FourPi ) * beta0qcd(nf) * L;
+
+      const auto g1 = [=] (int const& nf, double const& lambda) -> double
+      {
+        const double twl    = 2 * lambda;
+        const double omtwl  = 1 - twl;
+        const double lomtwl = log(omtwl);
+        return 4 * A1 / beta0qcd(nf) * ( twl + lomtwl ) / twl;
+      };
+
+      const auto g2 = [=] (int const& nf, double const& lambda) -> double
+      {
+        const double twl    = 2 * lambda;
+        const double omtwl  = 1 - twl;
+        const double lomtwl = log( omtwl);
+        return
+        2 / beta0qcd(nf) * lomtwl * ( A1 * log( 1 / xQ2 ) + B1 )
+        - A2 / pow(beta0qcd(nf) / 2, 2) * ( twl + omtwl * lomtwl ) / omtwl
+        + A1 * ( - ( ( beta1qcd(nf) / pow(FourPi, 2) ) ) / ( 4 * M_PI * pow(beta0qcd(nf) / FourPi, 3) )
+                 * ( lomtwl * ( ( twl - 1 ) * lomtwl - 2 ) - 4 * lambda ) / omtwl
+                 - 1 / ( beta0qcd(nf) / 2 ) * ( ( twl * ( 1 - lomtwl ) + lomtwl ) ) / omtwl * log( muR2 / xQ2 / Q2 ) );
+      };
+
+      const auto g3 = [=] (int const& nf,  double const& lambda) -> double
+      {
+        const double twl    = 2 * lambda;
+        const double twl2   = twl * twl;
+        const double omtwl  = 1 - twl;
+        const double lomtwl = log(omtwl);
+        return
+        ( A1 * log( 1 / xQ2 ) + B1 ) * ( - lambda / omtwl * log( muR2 / xQ2 / Q2 ) + ( ( beta1qcd(nf) / pow(FourPi, 2) ) )
+                                         / ( 2 * pow(beta0qcd(nf) / FourPi, 2) ) * ( twl + lomtwl ) / omtwl )
+        - 1 / ( beta0qcd(nf) / 2 ) * lambda / omtwl * ( A2 * log( 1 / xQ2 ) + B2 )
+        - A3 / ( pow(beta0qcd(nf) / 2, 2) ) * twl2 / pow(omtwl, 2)
+        + A2 * ( ( ( beta1qcd(nf) / pow(FourPi, 2) ) ) / ( 4 * M_PI * pow(beta0qcd(nf) / FourPi, 3) )
+                 * ( twl * ( 3 * lambda - 1 ) + ( 4 * lambda - 1 ) * lomtwl ) / pow(omtwl, 2)
+                 - 1 / ( beta0qcd(nf) / 4 ) * twl2 / pow(omtwl, 2) * log( muR2 / xQ2 / Q2 ) )
+        + A1 * ( ( lambda * ( beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) * ( 1 - 3 * lambda )
+                              + pow(beta1qcd(nf) / pow(FourPi, 2), 2) * lambda ) )
+                 / ( pow(beta0qcd(nf) / FourPi, 4) * pow(omtwl, 2) )
+                 + ( omtwl * lomtwl * ( beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) * omtwl
+                                        + 2 * pow(beta1qcd(nf) / pow(FourPi, 2), 2) * lambda ) )
+                 / ( 2 * pow(beta0qcd(nf) / FourPi, 4) * pow(omtwl, 2) )
+                 + ( pow(beta1qcd(nf) / pow(FourPi, 2), 2) ) / ( 4 * pow(beta0qcd(nf) / FourPi, 4) )
+                 * ( ( 1 - 4 * lambda ) * pow(lomtwl, 2) ) / pow(omtwl, 2)
+                 - twl2 / pow(omtwl, 2) * pow(log( muR2 / xQ2 / Q2 ), 2)
+                 - ( ( beta1qcd(nf) / pow(FourPi, 2) ) ) / ( 2 * pow(beta0qcd(nf) / FourPi, 2) )
+                 * ( ( twl * omtwl + ( 1 - 4 * lambda ) * lomtwl ) ) / pow(omtwl, 2) * log( muR2 / xQ2 / Q2 ) );
+      };
+
+      const auto g4 = [=] (int const& nf,  double const& lambda) -> double
+      {
+        const double twl    = 2 * lambda;
+        const double twl2   = twl * twl;
+        const double twl3   = twl2 * twl;
+        const double omtwl  = 1 - twl;
+        const double lomtwl = log(omtwl);
+        return
+        ( A4 * ( 3 - twl ) * twl2 ) / ( 6 * pow(beta0qcd(nf) / 2, 2) * pow(twl - 1, 3) )
+        + A3 / ( 48 * M_PI * pow(beta0qcd(nf) / FourPi, 3) * pow(twl - 1, 3) )
+        * ( 3 * ( beta1qcd(nf) / pow(FourPi, 2) ) * ( 1 - 6 * lambda ) * lomtwl
+            + twl * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * ( 5 * lambda * ( twl - 3 ) + 3 )
+                      + 6 * pow(beta0qcd(nf) / FourPi, 2) * ( 3 - twl ) * lambda * log( muR2 / xQ2 / Q2 ) )
+            + 12 * pow(beta0qcd(nf) / FourPi, 2) * ( lambda - 1 ) * lambda * ( twl - 1 ) * log( 1 / xQ2 ) )
+        + A2 / ( 24 * pow(beta0qcd(nf) / FourPi, 4) * pow(twl - 1, 3) )
+        * ( 32 * beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) * twl3
+            - 2 * pow(beta1qcd(nf) / pow(FourPi, 2), 2) * lambda * ( lambda * ( 11 * twl - 9 ) + 3 )
+            + 12 * pow(beta0qcd(nf) / FourPi, 4) * ( 3 - twl ) * twl2 * pow(log( muR2 / xQ2 / Q2 ), 2)
+            + 6 * pow(beta0qcd(nf) / FourPi, 2) * log( muR2 / xQ2 / Q2 )
+            * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * ( 1 - 6 * lambda ) * lomtwl
+                + 2 * ( lambda - 1 ) * lambda * ( twl - 1 ) * ( ( beta1qcd(nf) / pow(FourPi, 2) )
+                                                                + 2 * pow(beta0qcd(nf) / FourPi, 2) * log( 1 / xQ2 ) ) )
+            + 3 * ( beta1qcd(nf) / pow(FourPi, 2) ) * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl
+                                                        * ( twl + ( 6 * lambda - 1 ) * lomtwl - 1 )
+                                                        - 2 * pow(beta0qcd(nf) / FourPi, 2) * ( twl - 1 )
+                                                        * ( 2 * ( lambda - 1 ) * lambda - lomtwl ) * log( 1 / xQ2 ) ) )
+        + ( M_PI * A1 ) / ( 12 * pow(beta0qcd(nf) / FourPi, 5) * pow(twl - 1, 3) )
+        * ( pow(beta1qcd(nf) / pow(FourPi, 2), 3) * ( 1 - 6 * lambda ) * pow(lomtwl, 3)
+            + 3 * lomtwl * ( pow(beta0qcd(nf) / FourPi, 2) * ( beta3qcd(nf) / pow(FourPi, 4) ) * pow(twl - 1, 3)
+                             + beta0qcd(nf) / FourPi * ( beta1qcd(nf) / pow(FourPi, 2) ) * ( beta2qcd(nf) / pow(FourPi, 3) )
+                             * ( omtwl * ( 8 * twl2 - 4 * lambda + 3 ) )
+                             + 4 * pow(beta1qcd(nf) / pow(FourPi, 2), 3) * twl2 * ( twl + 1 )
+                             + pow(beta0qcd(nf) / FourPi, 2) * ( beta1qcd(nf) / pow(FourPi, 2) ) * log( muR2 / xQ2 / Q2 )
+                             * ( pow(beta0qcd(nf) / FourPi, 2) * ( 1 - 6 * lambda ) * log( muR2 / xQ2 / Q2 )
+                                 - 4 * ( beta1qcd(nf) / pow(FourPi, 2) ) * lambda ) )
+            + 3 * pow(beta1qcd(nf) / pow(FourPi, 2), 2) * pow(lomtwl, 2)
+            * ( 2 * ( beta1qcd(nf) / pow(FourPi, 2) ) * lambda + pow(beta0qcd(nf) / FourPi, 2)
+                * ( 6 * lambda - 1 ) * log( muR2 / xQ2 / Q2 ) )
+            + 3 * pow(beta0qcd(nf) / FourPi, 2) * ( twl - 1 ) * log( 1 / xQ2 )
+            * ( - pow(beta1qcd(nf) / pow(FourPi, 2), 2) * pow(lomtwl, 2) + 2 * pow(beta0qcd(nf) / FourPi, 2)
+                * ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl * log( muR2 / xQ2 / Q2 )
+                + 4 * lambda * ( lambda * ( pow(beta1qcd(nf) / pow(FourPi, 2), 2)
+                                            - beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) )
+                                 + pow(beta0qcd(nf) / FourPi, 4) * ( lambda - 1 ) * pow(log( muR2 / xQ2 / Q2 ), 2) ) )
+            + twl * ( pow(beta0qcd(nf) / FourPi, 2) * ( beta3qcd(nf) / pow(FourPi, 4) ) * ( ( 15 - 14 * lambda ) * lambda - 3 )
+                      + beta0qcd(nf) / FourPi * ( beta1qcd(nf) / pow(FourPi, 2) )
+                      * ( beta2qcd(nf) / pow(FourPi, 3) ) * ( 5 * lambda * ( twl - 3 ) + 3 )
+                      + 4 * pow(beta1qcd(nf) / pow(FourPi, 2), 3) * twl2
+                      + 2 * pow(beta0qcd(nf) / FourPi, 6) * ( 3 - twl ) * lambda * pow(log( muR2 / xQ2 / Q2 ), 3)
+                      + 3 * pow(beta0qcd(nf) / FourPi, 4) * ( beta1qcd(nf) / pow(FourPi, 2) ) * pow(log( muR2 / xQ2 / Q2 ), 2)
+                      + 6 * pow(beta0qcd(nf) / FourPi, 2) * lambda * ( twl + 1 )
+                      * ( beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) )
+                          - pow(beta1qcd(nf) / pow(FourPi, 2), 2) ) * log( muR2 / xQ2 / Q2 )
+                      - 8 * pow(beta0qcd(nf) / FourPi, 6) * ( 4 * twl2 - 6 * lambda + 3 ) * zeta3 ) )
+        + ( B3 * ( lambda - 1 ) * lambda ) / ( beta0qcd(nf) * pow(omtwl, 2) )
+        + ( B2 * ( ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl
+                   - 2 * ( lambda - 1 ) * lambda * ( ( beta1qcd(nf) / pow(FourPi, 2) )
+                                                     - 2 * pow(beta0qcd(nf) / FourPi, 2) * log( muR2 / xQ2 / Q2 ) ) ) )
+        / ( 4 * pow(beta0qcd(nf) / FourPi, 2) * pow(omtwl, 2) )
+        + ( M_PI * B1 ) / ( 4 * pow(beta0qcd(nf) / FourPi, 3) * pow(omtwl, 2) )
+        * ( 4 * lambda * ( lambda * ( pow(beta1qcd(nf) / pow(FourPi, 2), 2)
+                                      - beta0qcd(nf) / FourPi * ( beta2qcd(nf) / pow(FourPi, 3) ) )
+                           + pow(beta0qcd(nf) / FourPi, 4) * ( lambda - 1 ) * pow(log( muR2 / xQ2 / Q2 ), 2) )
+            - pow(beta1qcd(nf) / pow(FourPi, 2), 2) * pow(lomtwl, 2)
+            + 2 * pow(beta0qcd(nf) / FourPi, 2) * ( beta1qcd(nf) / pow(FourPi, 2) ) * lomtwl * log( muR2 / xQ2 / Q2 ) );
+      };
+    }
+  */
 }

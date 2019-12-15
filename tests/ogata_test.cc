@@ -23,7 +23,7 @@ int main()
   const std::function<double(double const&)> kfunc = [=] (double const& k) -> double{ return exp( - pow(k / a, 2) / 2) / pow(a, 2); };
 
   // Print comparison
-  const std::vector<double> kv = {0.1, 0.2, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6};
+  const std::vector<double> kv = {0.0001, 0.001, 0.1, 0.2, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6};
   std::cout << "     k          "
             << " analytic       "
             << "numerical Og    "
