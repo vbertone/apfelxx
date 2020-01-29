@@ -11,73 +11,71 @@
 namespace apfel
 {
   /**
-   * @defgroup NCMassless Zero-mass coefficient functions for DIS
+   * @defgroup NCMasslessSIA Zero-mass coefficient functions for SIA
    * Collection of the Zero-mass coefficient functions for
    * F<SUB>2</SUB>, F<SUB>L</SUB>, and F<SUB>3</SUB> up to
    * O(&alpha;<SUB>s</SUB>).
-   * @note While for the O(&alpha;<SUB>s</SUB>) coefficient functions
-   * exact expressions are used, a fast parameterisation for the
-   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) ones is used. See
-   * https://www.liverpool.ac.uk/~avogt/coeff.html for more details.
    */
   ///@{
   /**
-   * @defgroup NLOzm NLO zero-mass coefficient functions
-   * @ingroup NCMassless
+   * @defgroup NLOzmSIA NLO zero-mass coefficient functions
+   * @ingroup NCMasslessSIA
    */
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
-   * for F2.
+   * for F2 in SIA.
    */
-  class C21ns: public Expression
+  class C21Tns: public Expression
   {
   public:
-    C21ns();
+    C21Tns();
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for F2.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for F2
+   * in SIA.
    */
-  class C21g: public Expression
+  class C21Tg: public Expression
   {
   public:
-    C21g();
+    C21Tg();
     double Regular(double const& x)  const;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
-   * for FL.
+   * for FL in SIA.
    */
-  class CL1ns: public Expression
+  class CL1Tns: public Expression
   {
   public:
-    CL1ns();
+    CL1Tns();
     double Regular(double const& x)  const;
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for FL.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for FL
+   * in SIA.
    */
-  class CL1g: public Expression
+  class CL1Tg: public Expression
   {
   public:
-    CL1g();
+    CL1Tg();
     double Regular(double const& x)  const;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
-   * for F3.
+   * for F3 in SIA.
    */
-  class C31ns: public Expression
+  class C31Tns: public Expression
   {
   public:
-    C31ns();
+    C31Tns();
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -85,18 +83,18 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNLOzm NNLO zero-mass coefficient functions
-   * @ingroup NCMassless
+   * @defgroup NNLOzmSIA NNLO zero-mass coefficient functions
+   * @ingroup NCMasslessSIA
    */
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
-   * coefficient function for F2.
+   * coefficient function for F2 in SIA.
    */
-  class C22nsp: public Expression
+  class C22Tnsp: public Expression
   {
   public:
-    C22nsp(int const& nf);
+    C22Tnsp(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -106,12 +104,12 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * coefficient function for F2.
+   * coefficient function for F2 in SIA.
    */
-  class C22nsm: public Expression
+  class C22Tnsm: public Expression
   {
   public:
-    C22nsm(int const& nf);
+    C22Tnsm(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -121,35 +119,35 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
-   * coefficient function for F2.
+   * coefficient function for F2 in SIA.
    */
-  class C22ps: public Expression
+  class C22Tps: public Expression
   {
   public:
-    C22ps();
+    C22Tps();
     double Regular(double const& x)  const;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
-   * function for F2.
+   * function for F2 in SIA.
    */
-  class C22g: public Expression
+  class C22Tg: public Expression
   {
   public:
-    C22g();
+    C22Tg();
     double Regular(double const& x)  const;
     double Local(double const& x)    const;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
-   * coefficient function for FL.
+   * coefficient function for FL in SIA.
    */
-  class CL2nsp: public Expression
+  class CL2Tnsp: public Expression
   {
   public:
-    CL2nsp(int const& nf);
+    CL2Tnsp(int const& nf);
     double Regular(double const& x)  const;
     double Local(double const&)      const;
   private:
@@ -158,12 +156,12 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * coefficient function for FL.
+   * coefficient function for FL in SIA.
    */
-  class CL2nsm: public Expression
+  class CL2Tnsm: public Expression
   {
   public:
-    CL2nsm(int const& nf);
+    CL2Tnsm(int const& nf);
     double Regular(double const& x)  const;
     double Local(double const&)      const;
   private:
@@ -172,34 +170,34 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) pure-singlet
-   * coefficient function for FL.
+   * coefficient function for FL in SIA.
    */
-  class CL2ps: public Expression
+  class CL2Tps: public Expression
   {
   public:
-    CL2ps();
+    CL2Tps();
     double Regular(double const& x)  const;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon coefficient
-   * function for FL.
+   * function for FL in SIA.
    */
-  class CL2g: public Expression
+  class CL2Tg: public Expression
   {
   public:
-    CL2g();
+    CL2Tg();
     double Regular(double const& x)  const;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
-   * coefficient function for F3.
+   * coefficient function for F3 in SIA.
    */
-  class C32nsp: public Expression
+  class C32Tnsp: public Expression
   {
   public:
-    C32nsp(int const& nf);
+    C32Tnsp(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
@@ -209,12 +207,12 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * coefficient function for F3.
+   * coefficient function for F3 in SIA.
    */
-  class C32nsm: public Expression
+  class C32Tnsm: public Expression
   {
   public:
-    C32nsm(int const& nf);
+    C32Tnsm(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;

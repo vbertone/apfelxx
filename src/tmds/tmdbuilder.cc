@@ -416,8 +416,8 @@ namespace apfel
     // Compute TMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
-    // Computed TMDs at the initial scale by convoluting PDFs,
-    // matching functions, and non-perturbative function.
+    // Computed TMDPDFs at the final scale by multiplying initial
+    // scale TMDPDFs by the evolution factor.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
       return EvolFactors(b, muf, zetaf) * MatchedTmdPDFs(b);
@@ -440,9 +440,8 @@ namespace apfel
     // Compute TMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
-    // Computed TMDs at the initial scale by convoluting FFs, matching
-    // functions, and non-perturbative function. Include a factor
-    // 1/z^2 typical of FFs.
+    // Computed TMDFFs at the final scale by multiplying initial scale
+    // TMDFFs by the evolution factor.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
       return EvolFactors(b, muf, zetaf) * MatchedTmdFFs(b);
@@ -506,7 +505,7 @@ namespace apfel
       };
 
     // Construct function that returns the product of matching
-    // functions and collinear FFs.
+    // functions and collinear PDFs.
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
     {
       // Define lower scales
@@ -575,7 +574,8 @@ namespace apfel
       };
 
     // Construct function that returns the product of matching
-    // functions and collinear FFs.
+    // functions and collinear FFs. Includes a factor z^2 typical of
+    // FFs.
     const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
     {
       // Define lower scales

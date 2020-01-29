@@ -8,6 +8,7 @@ do
     pdflatex Transversity.tex
     pdflatex TMDEvolution.tex
     pdflatex DrellYanTMD.tex
+    pdflatex SIDISTMD.tex
     pdflatex CovarianceMatrix.tex
     pdflatex DIS.tex
     pdflatex GPDs.tex

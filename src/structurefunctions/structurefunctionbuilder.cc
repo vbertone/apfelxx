@@ -11,6 +11,7 @@
 #include "apfel/zeromasscoefficientfunctions.h"
 #include "apfel/massivecoefficientfunctions.h"
 #include "apfel/massivezerocoefficientfunctions.h"
+#include "apfel/zeromasscoefficientfunctions_tl.h"
 #include "apfel/tabulateobject.h"
 
 namespace apfel
@@ -1334,6 +1335,227 @@ namespace apfel
     t.stop();
 
     return FLObj;
+  }
+
+  //_____________________________________________________________________________
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsZMT(Grid                const& g,
+                                                                                                              std::vector<double> const& Thresholds,
+                                                                                                              double              const& IntEps)
+  {
+    report("Initializing StructureFunctionObjects for F2 Zero Mass for SIA...\n");
+    warning("InitializeF2NCObjectsZMT", "NNLO corrections currently unavailable");
+    Timer t;
+
+    // ===============================================================
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+
+    // LO
+    std::map<int,Operator> C2LO;
+    C2LO.insert({DISNCBasis::CNS, Id});
+    C2LO.insert({DISNCBasis::CS,  Id});
+    C2LO.insert({DISNCBasis::CG,  Zero});
+
+    // NLO
+    std::map<int,Operator> C2NLO;
+    const Operator O21ns{g, C21Tns{}, IntEps};
+    const Operator O21g {g, C21Tg{},  IntEps};
+    C2NLO.insert({DISNCBasis::CNS, O21ns});
+    C2NLO.insert({DISNCBasis::CS,  O21ns});
+    C2NLO.insert({DISNCBasis::CG,  O21g});
+
+    // NNLO
+    std::map<int,std::map<int,Operator>> C2NNLO;
+    const Operator O22ps{g, C22Tps{}, IntEps};
+    const Operator O22g {g, C22Tg{},  IntEps};
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O22nsp{g, C22Tnsp{nf}, IntEps};
+        const Operator O22t = O22nsp + 6 * O22ps;
+        std::map<int,Operator> C2NNLOnf;
+        C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
+        C2NNLOnf.insert({DISNCBasis::CS,  O22t});
+        C2NNLOnf.insert({DISNCBasis::CG,  O22g});
+        C2NNLO.insert({nf,C2NNLOnf});
+      }
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
+
+    // Define object of the structure containing the DglapObjects
+    const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
+    {
+      // Determine number of active flavours.
+      const int nf = NF(Q, Thresholds);
+
+      // Effective charges. The charges of the components with mh >
+      // Q are set to zero.
+      std::vector<double> EffCh;
+      for (int k = 1; k <= 6; k++)
+        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+
+      // Fill in structure function object
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      // Single structure function components.
+      for (int k = 0; k <= 6; k++)
+        {
+          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+        }
+      return FObj;
+    };
+    t.stop();
+
+    return F2Obj;
+  }
+
+  //_____________________________________________________________________________
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsZMT(Grid                const& g,
+                                                                                                              std::vector<double> const& Thresholds,
+                                                                                                              double              const& IntEps)
+  {
+    report("Initializing StructureFunctionObjects for FL Zero Mass for SIA...\n");
+    warning("InitializeFLNCObjectsZMT", "NNLO corrections currently unavailable");
+    Timer t;
+
+    // ===============================================================
+    const Operator Zero{g, Null{}, IntEps};
+
+    // LO
+    std::map<int,Operator> CLLO;
+    CLLO.insert({DISNCBasis::CNS, Zero});
+    CLLO.insert({DISNCBasis::CS,  Zero});
+    CLLO.insert({DISNCBasis::CG,  Zero});
+
+    // NLO
+    std::map<int,Operator> CLNLO;
+    const Operator OL1ns{g, CL1Tns{}, IntEps};
+    const Operator OL1g {g, CL1Tg{},  IntEps};
+    CLNLO.insert({DISNCBasis::CNS, OL1ns});
+    CLNLO.insert({DISNCBasis::CS,  OL1ns});
+    CLNLO.insert({DISNCBasis::CG,  OL1g});
+
+    // NNLO (for nf from 1 to 6)
+    std::map<int,std::map<int,Operator>> CLNNLO;
+    const Operator OL2ps{g, CL2Tps{}, IntEps};
+    const Operator OL2g {g, CL2Tg{},  IntEps};
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator OL2nsp{g, CL2Tnsp{nf}, IntEps};
+        const Operator OL2t = OL2nsp + 6 * OL2ps;
+        std::map<int,Operator> CLNNLOnf;
+        CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
+        CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
+        CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
+        CLNNLO.insert({nf,CLNNLOnf});
+      }
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
+
+    // Define object of the structure containing the DglapObjects
+    const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
+    {
+      // Determine number of active flavours.
+      const int nf = NF(Q, Thresholds);
+
+      // Effective charges. The charges of the components with mh >
+      // Q are set to zero.
+      std::vector<double> EffCh;
+      for (int k = 1; k <= 6; k++)
+        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+
+      // Fill in structure function object
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      // Single structure function components.
+      for (int k = 0; k <= 6; k++)
+        {
+          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+        }
+      return FObj;
+    };
+    t.stop();
+
+    return FLObj;
+  }
+
+  //_____________________________________________________________________________
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3NCObjectsZMT(Grid                const& g,
+                                                                                                              std::vector<double> const& Thresholds,
+                                                                                                              double              const& IntEps)
+  {
+    report("Initializing StructureFunctionObjects for F3 Zero Mass for SIA...\n");
+    warning("InitializeF3NCObjectsZMT", "NNLO corrections currently unavailable");
+    Timer t;
+
+    // ===============================================================
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+
+    // LO
+    std::map<int,Operator> C3LO;
+    C3LO.insert({DISNCBasis::CNS, Id});
+    C3LO.insert({DISNCBasis::CS,  Id});
+    C3LO.insert({DISNCBasis::CG,  Zero});
+
+    // NLO
+    std::map<int,Operator> C3NLO;
+    const Operator O31ns{g, C31Tns{}, IntEps};
+    C3NLO.insert({DISNCBasis::CNS, O31ns});
+    C3NLO.insert({DISNCBasis::CS,  O31ns});
+    C3NLO.insert({DISNCBasis::CG,  Zero});
+
+    // NNLO
+    std::map<int,std::map<int,Operator>> C3NNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O32nsm{g, C32Tnsm{nf}, IntEps};
+        const Operator O32t = O32nsm;
+        std::map<int,Operator> C3NNLOnf;
+        C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
+        C3NNLOnf.insert({DISNCBasis::CS,  O32t});
+        C3NNLOnf.insert({DISNCBasis::CG,  Zero});
+        C3NNLO.insert({nf,C3NNLOnf});
+      }
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {1, 3, 5, 7, 9, 11};
+
+    // Define object of the structure containing the DglapObjects
+    const auto F3Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
+    {
+      // Determine number of active flavours.
+      const int nf = NF(Q, Thresholds);
+
+      // Effective charges. The charges of the components with mh >
+      // Q are set to zero.
+      std::vector<double> EffCh;
+      for (int k = 1; k <= 6; k++)
+        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+
+      // Fill in structure function object
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      // Single structure function components.
+      for (int k = 0; k <= 6; k++)
+        {
+          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
+          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
+          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+        }
+      return FObj;
+    };
+    t.stop();
+
+    return F3Obj;
   }
 
   //_____________________________________________________________________________

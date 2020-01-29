@@ -2,7 +2,6 @@
 // APFEL++ 2017
 //
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
 #pragma once
@@ -254,6 +253,58 @@ namespace apfel
                                                                                                                       double              const& ximax  = 100000,
                                                                                                                       int                 const& intdeg = 3,
                                                                                                                       double              const& lambda = 0.0005);
+  ///@}
+
+  /**
+   * @name SIA structure function object initializers
+   * Collection of functions that initialise StructureFunctionObjects
+   * structure for the different kinds of structure functions
+   * available.
+   * @note For now only Zero-Mass structure functions up to
+   * O(&alpha;<SUB>s</SUB>) are implemented.
+   */
+  ///@{
+  /**
+   * @brief The InitializeF2NCObjectsZMT precomputes the perturbative
+   * coefficients of coefficient functions for NC F2 for SIA in the ZM
+   * scheme and store them in the 'StructureFunctionObjects'
+   * structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsZMT(Grid                const& g,
+                                                                                                              std::vector<double> const& Thresholds,
+                                                                                                              double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeFLNCObjectsZMT precomputes the perturbative
+   * coefficients of coefficient functions for NC FL for SIA in the ZM
+   * scheme and store them in the 'StructureFunctionObjects'
+   * structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsZMT(Grid                const& g,
+                                                                                                              std::vector<double> const& Thresholds,
+                                                                                                              double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeF3NCObjectsZMT precomputes the perturbative
+   * coefficients of coefficient functions for NC xF3 for SIA in the
+   * ZM scheme and store them in the 'StructureFunctionObjects'
+   * structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3NCObjectsZMT(Grid                const& g,
+                                                                                                              std::vector<double> const& Thresholds,
+                                                                                                              double              const& IntEps = 1e-5);
   ///@}
 
   /**
