@@ -38,7 +38,6 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
      $          Hr4(n1:n2,n1:n2,n1:n2,n1:n2) 
       dimension Hi1(n1:n2),Hi2(n1:n2,n1:n2),Hi3(n1:n2,n1:n2,n1:n2), 
      $          Hi4(n1:n2,n1:n2,n1:n2,n1:n2) 
-      common /fillred/infilldim,infill(3) 
       parameter (r2   = 1.4142135623730950488d0) 
 ** check on the weight nw 
       if ( (nw.lt.1).or.(nw.gt.4) ) then 
@@ -47,26 +46,6 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
         print*, ' the allowed values of the weight are 1,2,3,4 ' 
         stop
       endif
-** check on the range n1:n2 
-      if ( (n1.eq.-1).and.(n2.eq.0) ) then 
-        infilldim =  2 
-        infill(1) =  0 
-        infill(2) = -1  
-      elseif ( (n1.eq.0).and.(n2.eq.1) ) then 
-        infilldim =  2 
-        infill(1) =  0 
-        infill(2) =  1  
-      elseif ( (n1.eq.-1).and.(n2.eq.1) ) then 
-        infilldim =  3 
-        infill(1) =  0 
-        infill(2) = -1  
-        infill(3) =  1  
-      else 
-        print*, ' illegal call of eval1dhpl with the two last ', 
-     $          'arguments = (',n1,',',n2,')' 
-        print*, ' the allowed values are (-1,0), (0,1), (-1,1) ' 
-        stop 
-      endif 
 ** setting the immaginary parts equal to zero 
       call setzero(nw,Hi1,Hi2,Hi3,Hi4,n1,n2) 
 ** looking at the range of the argument 
@@ -261,28 +240,16 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
       dimension Gi1(-n2:-n1),Gi2(-n2:-n1,-n2:-n1),
      $          Gi3(-n2:-n1,-n2:-n1,-n2:-n1), 
      $          Gi4(-n2:-n1,-n2:-n1,-n2:-n1,-n2:-n1) 
-      common /fillred/infilldim,infill(3) 
       dimension istorfill(3)
       dimension nphase(-1:1) 
       data nphase/-1,1,-1/ 
       parameter (pi   = 3.14159265358979324d0) 
 *      print*,' eval1dhplatm1: y = ',y 
-      if (infilldim.eq.2) then
-         do i=1,2
-            istorfill(i) = infill(i)
-            infill(i) = -istorfill(i)
-         enddo
-      endif
 ** evaluate H(...,-y) 
       call setzero(nw,Gi1,Gi2,Gi3,Gi4,-n2,-n1) 
       Gi1(0) = -1
       call eval1dhplin1(-y,nw,G1,G2,G3,G4, 
      $                        GY1,GY2,GY3,GY4,Gi1,Gi2,Gi3,Gi4,-n2,-n1) 
-      if (infilldim.eq.2) then
-         do i=1,2
-            infill(i) = istorfill(i)
-         enddo
-      endif
 ** fill the arrays H's 
       do k1=n1,n2 
         nph1 = nphase(k1) 
@@ -356,28 +323,16 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
      $          Gi3(-n2:-n1,-n2:-n1,-n2:-n1), 
      $          Gi4(-n2:-n1,-n2:-n1,-n2:-n1,-n2:-n1) 
 ** 
-      common /fillred/infilldim,infill(3) 
       dimension istorfill(3)
       dimension nphase(-1:1) 
       data nphase/-1,1,-1/ 
       parameter (pi   = 3.14159265358979324d0) 
 *      print*,' eval1dhplatm1: y = ',y 
-      if (infilldim.eq.2) then
-         do i=1,2
-            istorfill(i) = infill(i)
-            infill(i) = -istorfill(i)
-         enddo
-      endif
 ** evaluate H(...,-y) 
       call setzero(nw,Gi1,Gi2,Gi3,Gi4,-n2,-n1) 
       Gi1(0) = -1
       call eval1dhplat1(-y,nw,G1,G2,G3,G4, 
      $                        GY1,GY2,GY3,GY4,Gi1,Gi2,Gi3,Gi4,-n2,-n1) 
-      if (infilldim.eq.2) then
-         do i=1,2
-            infill(i) = istorfill(i)
-         enddo
-      endif
 ** fill the arrays H's 
       do k1=n1,n2 
         nph1 = nphase(k1) 
@@ -439,28 +394,16 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
      $          Gi3(-n2:-n1,-n2:-n1,-n2:-n1), 
      $          Gi4(-n2:-n1,-n2:-n1,-n2:-n1,-n2:-n1) 
 ** 
-      common /fillred/infilldim,infill(3) 
       dimension istorfill(3)
       dimension nphase(-1:1) 
       data nphase/-1,1,-1/ 
       parameter (pi   = 3.14159265358979324d0) 
 *      print*,' eval1dhplatm1: y = ',y 
-      if (infilldim.eq.2) then
-         do i=1,2
-            istorfill(i) = infill(i)
-            infill(i) = -istorfill(i)
-         enddo
-      endif
 ** evaluate H(...,-y) 
       call setzero(nw,Gi1,Gi2,Gi3,Gi4,-n2,-n1) 
       Gi1(0) = -1
       call eval1dhplatinf(-y,nw,G1,G2,G3,G4, 
      $                        GY1,GY2,GY3,GY4,Gi1,Gi2,Gi3,Gi4,-n2,-n1) 
-      if (infilldim.eq.2) then
-         do i=1,2
-            infill(i) = istorfill(i)
-         enddo
-      endif
 ** fill the arrays H's 
       do k1=n1,n2 
         nph1 = nphase(k1) 
@@ -533,9 +476,9 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
      $          HY4(n1:n2,n1:n2,n1:n2,n1:n2) 
       dimension Hi1(n1:n2),Hi2(n1:n2,n1:n2),Hi3(n1:n2,n1:n2,n1:n2), 
      $          Hi4(n1:n2,n1:n2,n1:n2,n1:n2) 
-      common /fillred/infilldim,infill(3) 
       parameter (pinv = 0.318309886183790672d0) 
       parameter (pi   = 3.14159265358979324d0) 
+      dimension infill(3)
 ** combining real and immaginary into the complex value 
       do k1=n1,n2 
       do k2=n1,n2 
@@ -555,16 +498,19 @@ c     $                      Hr1,Hr2,Hr3,Hr4,Hi1,Hi2,Hi3,Hi4,n1,n2)
       enddo 
 ** evaluating the reduced HPL's 
 ** iflag = 0 to suppress auxiliary printings of FILLREDHPLx 
+      infill(1) =  0
+      infill(2) = -1
+      infill(3) =  1
       iflag = 0 
-      do ia =  1,infilldim 
-      do ib = ia,infilldim 
+      do ia =  1,3 
+      do ib = ia,3 
         call FILLREDHPL2(iflag,H1,H2,n1,n2,infill(ia),infill(ib)) 
         if ( nw.gt.2 ) then 
-          do ic = ib,infilldim 
+          do ic = ib,3 
             call FILLREDHPL3(iflag,H1,H2,H3,n1,n2, 
      $                          infill(ia),infill(ib),infill(ic)) 
             if ( nw.gt.3 ) then 
-              do id = ic,infilldim 
+              do id = ic,3 
                 call FILLREDHPL4(iflag,H1,H2,H3,H4,n1,n2, 
      $               infill(ia),infill(ib),infill(ic),infill(id)) 
               enddo 
