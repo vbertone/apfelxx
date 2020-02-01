@@ -20,6 +20,7 @@ set(kernel_source
   rotations.cc
   specialfunctions.cc
   messages.cc
+  hplog.f
   )
 
 add_library(kernel OBJECT ${kernel_source})

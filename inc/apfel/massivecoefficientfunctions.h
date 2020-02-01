@@ -18,7 +18,8 @@ namespace apfel
    * expressions whenever available.
    */
   ///@{
-  extern"C" {
+  extern"C"
+  {
     double c2log_(double *wr,double *xi);
     double cllog_(double *wr,double *xi);
     double d2nloq_(double *wr,double *xi);

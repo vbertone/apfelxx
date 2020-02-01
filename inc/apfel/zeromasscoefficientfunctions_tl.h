@@ -100,21 +100,10 @@ namespace apfel
     double Local(double const& x)    const;
   private:
     int const _nf;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * coefficient function for F2 in SIA.
-   */
-  class C22Tnsm: public Expression
-  {
-  public:
-    C22Tnsm(int const& nf);
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  private:
-    int const _nf;
+    double _a0;
+    double _a1;
+    double _a2;
+    double _a3;
   };
 
   /**
@@ -137,7 +126,6 @@ namespace apfel
   public:
     C22Tg();
     double Regular(double const& x)  const;
-    double Local(double const& x)    const;
   };
 
   /**
@@ -149,21 +137,6 @@ namespace apfel
   public:
     CL2Tnsp(int const& nf);
     double Regular(double const& x)  const;
-    double Local(double const&)      const;
-  private:
-    int const _nf;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * coefficient function for FL in SIA.
-   */
-  class CL2Tnsm: public Expression
-  {
-  public:
-    CL2Tnsm(int const& nf);
-    double Regular(double const& x)  const;
-    double Local(double const&)      const;
   private:
     int const _nf;
   };
@@ -203,21 +176,10 @@ namespace apfel
     double Local(double const& x)    const;
   private:
     int const _nf;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * coefficient function for F3 in SIA.
-   */
-  class C32Tnsm: public Expression
-  {
-  public:
-    C32Tnsm(int const& nf);
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  private:
-    int const _nf;
+    double _a0;
+    double _a1;
+    double _a2;
+    double _a3;
   };
   ///@}
   ///@}

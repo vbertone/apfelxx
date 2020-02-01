@@ -1342,8 +1342,7 @@ namespace apfel
                                                                                                               std::vector<double> const& Thresholds,
                                                                                                               double              const& IntEps)
   {
-    report("Initializing StructureFunctionObjects for F2 Zero Mass for SIA...\n");
-    warning("InitializeF2NCObjectsZMT", "NNLO corrections currently unavailable");
+    report("Initializing StructureFunctionObjects for F2 Zero Mass for SIA... ");
     Timer t;
 
     // ===============================================================
@@ -1417,8 +1416,7 @@ namespace apfel
                                                                                                               std::vector<double> const& Thresholds,
                                                                                                               double              const& IntEps)
   {
-    report("Initializing StructureFunctionObjects for FL Zero Mass for SIA...\n");
-    warning("InitializeFLNCObjectsZMT", "NNLO corrections currently unavailable");
+    report("Initializing StructureFunctionObjects for FL Zero Mass for SIA... ");
     Timer t;
 
     // ===============================================================
@@ -1516,15 +1514,26 @@ namespace apfel
     std::map<int,std::map<int,Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
-        const Operator O32nsm{g, C32Tnsm{nf}, IntEps};
-        const Operator O32t = O32nsm;
         std::map<int,Operator> C3NNLOnf;
-        C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
-        C3NNLOnf.insert({DISNCBasis::CS,  O32t});
+        C3NNLOnf.insert({DISNCBasis::CNS, Zero});
+        C3NNLOnf.insert({DISNCBasis::CS,  Zero});
         C3NNLOnf.insert({DISNCBasis::CG,  Zero});
         C3NNLO.insert({nf,C3NNLOnf});
       }
-
+    /*
+        // NNLO
+        std::map<int,std::map<int,Operator>> C3NNLO;
+        for (int nf = 1; nf <= 6; nf++)
+          {
+            const Operator O32nsm{g, C32Tnsm{nf}, IntEps};
+            const Operator O32t = O32nsm;
+            std::map<int,Operator> C3NNLOnf;
+            C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
+            C3NNLOnf.insert({DISNCBasis::CS,  O32t});
+            C3NNLOnf.insert({DISNCBasis::CG,  Zero});
+            C3NNLO.insert({nf,C3NNLOnf});
+          }
+    */
     // Vector of distributions to skip
     const std::vector<int> skip = {1, 3, 5, 7, 9, 11};
 
