@@ -126,7 +126,7 @@ namespace apfel
     int k = noff;
 
     int j;
-    int jm;
+    int jm = 0;
     int l;
     double t;
     double tk;
