@@ -1585,7 +1585,7 @@ namespace apfel
     const std::vector<int> skip = FObj1.skip;
 
     // Cycle over the key of the convolution basis map.
-    std::map<int,Observable<>> F;
+    std::map<int, Observable<>> F;
     for (auto it = FObj1.ConvBasis.begin(); it != FObj1.ConvBasis.end(); ++it)
       {
         // Structure function index.
@@ -1605,13 +1605,13 @@ namespace apfel
         };
 
         // Define distribution-function functions.
-        const auto DistF = [=,&g] (double const& Q) -> Set<Distribution>
+        const auto DistF = [=, &g] (double const& Q) -> Set<Distribution>
         {
           return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)};
         };
 
         // Initialize "Observable".
-        F.insert({k,Observable<>{Cf, DistF}});
+        F.insert({k, Observable<>{Cf, DistF}});
       }
     return F;
   }
@@ -1631,5 +1631,37 @@ namespace apfel
       return DistMap;
     };
     return BuildStructureFunctions(FObj, InDistFuncMap, PerturbativeOrder, Alphas, Couplings);
+  }
+
+  //_____________________________________________________________________________
+  Distribution BuildStructureFunctions(StructureFunctionObjects   const& FObjQ,
+                                       std::map<int,Distribution> const& InDistFuncQ,
+                                       int                        const& PerturbativeOrder,
+                                       double                     const& AlphasQ,
+                                       int                        const& k)
+  {
+    const double cp = AlphasQ / FourPi;
+    Set<Operator> CoefFuncs = FObjQ.C0.at(k);
+    if (PerturbativeOrder > 0)
+      CoefFuncs += cp * FObjQ.C1.at(k);
+    if (PerturbativeOrder > 1)
+      CoefFuncs += ( cp * cp ) * FObjQ.C2.at(k);
+
+    // Push "Distribution".
+    return (CoefFuncs * Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQ}).Combine();
+  }
+
+  //_____________________________________________________________________________
+  std::map<int,Distribution> BuildStructureFunctions(StructureFunctionObjects   const& FObjQ,
+                                                     std::map<int,Distribution> const& InDistFuncQ,
+                                                     int                        const& PerturbativeOrder,
+                                                     double                     const& AlphasQ)
+  {
+    // Cycle over the key of the convolution basis map.
+    std::map<int, Distribution> F;
+    for (auto it = FObjQ.ConvBasis.begin(); it != FObjQ.ConvBasis.end(); ++it)
+      // Push "Distribution".
+      F.insert({it->first, BuildStructureFunctions(FObjQ, InDistFuncQ, PerturbativeOrder, AlphasQ, it->first)});
+    return F;
   }
 }

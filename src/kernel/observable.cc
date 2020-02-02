@@ -10,8 +10,8 @@ namespace apfel
 {
   //_____________________________________________________________________________
   template<class T>
-  Observable<T>::Observable(std::function<Set<Operator>(double const&)>     const& CoefficientFunctions,
-                            std::function<Set<T>(double const&)> const& Objects):
+  Observable<T>::Observable(std::function<Set<Operator>(double const&)> const& CoefficientFunctions,
+                            std::function<Set<T>(double const&)>        const& Objects):
     _CoefficientFunctions(CoefficientFunctions),
     _Objects(Objects)
   {
