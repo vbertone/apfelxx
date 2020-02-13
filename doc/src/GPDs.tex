@@ -59,19 +59,161 @@ optimising the numerics needs to be devised.
 
 \section{Evolution equations}
 
-We start by discussing the implementation of the evolution
-equations. I will try to stick to Ref.~\cite{Diehl:2003ny} for the
-general notation. First, I introduce the main variables involved in
-the computation of GPDs:
-\begin{itemize}
-\item $x\equiv\frac{Q^2}{2pq}$ is the usual Bjorken x defined in the
-  range $[-1:1]$,
-\item $\xi= \frac{p^+-p'^+}{p^++p'^+}$:
-\item $t = (p-p')^2$ is the usual $t$-channel squared energy,
-\item $\mu$ the renormalisation scale
-\end{itemize}
-Sect.~3.1 of Ref.~\cite{Diehl:2003ny} gives a comprehensive review of
-the relevant variables and notation.
+In general, the evolution equation for GPDs reads:
+\begin{equation}\label{eq:eveq}
+\mu^2\frac{d}{d\mu^2}f(x,\xi) = \int_{-\infty}^{+\infty}\frac{dx'}{2\xi}V\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)\,.
+\end{equation}
+The GPD $f$ and the evolution kernel $V$ may in general be a vector
+and a matrix in flavour space. For now we will just be concerned with
+the integral in the r.h.s. of Eq.~(\ref{eq:eveq}) regardless of the
+flavour structure. The support of the evolution kernel
+$V\left(\frac{x}{\xi},\frac{x'}{\xi}\right)$ is shown in
+Fig.~\ref{fig:GPDIntDomain}.
+\begin{figure}[h]
+  \begin{centering}
+    \includegraphics[width=0.7\textwidth]{plots/GPDIntDomain}
+    \caption{Support domain of the evolution kernel
+      $V\left(\frac{x}{\xi},\frac{x'}{\xi}\right)$.\label{fig:GPDIntDomain}}
+  \end{centering}
+\end{figure}
+Without loss of generality, we can assume that $x>0$. Knowing the
+support of the evolution kernel, Eq.~(\ref{eq:eveq}) can be split as
+follows:
+\begin{equation}\label{eq:eveq}
+\begin{array}{rcl}
+\displaystyle\mu^2\frac{d}{d\mu^2}f(\pm x,\xi) &=&\displaystyle
+  \int_{x}^{1}\frac{dx'}{x'}\left[\frac{x'}{2\xi}V\left(\pm \frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)+\frac{x'}{2\xi}V\left(\mp \frac{x}{\xi},\frac{x'}{\xi}\right)f(-x',\xi)\right]\\
+\\
+&+&\displaystyle\theta\left(1-\frac{x}{\xi}\right)
+  \int_{0}^{x}dx'\left[\frac{1}{2\xi}V\left(\pm \frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)+\frac{1}{2\xi}V\left(\mp \frac{x}{\xi},\frac{x'}{\xi}\right)f(-x',\xi)\right]\,.
+\end{array}
+\end{equation}
+where we have used the symmetry property $V(y,y')=V(-y,-y')$. In the
+unpolarised case, it is useful to define:\footnote{Notice the
+  seemingly unusual fact that $f^{+}$ is defined as difference and
+  $f^{-}$ as sum of GPDs computed at opposite values of $x$. This can
+  be understood from the fact that, in the forward limit,
+  $f(-x)= -\overline{f}(x)$, \textit{i.e.} the PDF of a quark computed
+  at $-x$ equals the PDF of the corresponding antiquark computed at
+  $x$ with opposite sign.}
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle f^{\pm}(x,\xi) &=&\displaystyle  f(x,\xi) \mp
+                       f(-x,\xi)\,,\\
+\\
+\displaystyle V^{\pm}(y,y') &=&\displaystyle  V(y,y') \mp V(-y,y')\,,
+\end{array}
+\end{equation}
+so that the evolution equation for $f^{\pm}$ can be split as:
+\begin{equation}\label{eq:eveq2}
+\begin{array}{rcl}
+\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi) &=&
+  \displaystyle\int_{x}^{1}\frac{dx'}{x'}\frac{x'}{2\xi}
+                                                         V^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f^{\pm}(x',\xi)+\theta\left(1-\frac{x}{\xi}\right)
+  \int_{0}^{x}dx'\frac{1}{2\xi}V^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f^{\pm}(x',\xi)\\
+\\
+&=&\displaystyle I^{\pm,\rm DGLAP}(\xi,x)+I^{\pm,\rm ERBL}(\xi,x)\,.
+\end{array}
+\end{equation}
+The first term in the second line of the equation above,
+$I^{\pm,\rm DGLAP}$, corresponds to integrating over the blue regions in
+Fig.~\ref{fig:GPDIntDomain}, while the second term, $I^{\pm,\rm ERBL}$,
+results from the integration over the red regions. As indicated by the
+subscripts, $I^{\pm,\rm DGLAP}$ and $I^{\pm,\rm ERBL}$ define the so-called
+DGLAP and ERBL regions in $x$ relative $\xi$. Specifically, the
+presence of the $\theta$-function in $I^{\pm,\rm ERBL}$ is such that for
+$x>\xi$ this term drops leaving only the DGLAP-like term
+$I^{\pm,\rm DGLAP}$. For $x\leq\xi$, instead, $I^{\pm,\rm ERBL}$ kicks in and
+the evolution equation assumes the form of the so-called ERBL equation
+that describes the evolution of meson distribution amplitudes
+(DAs). Crucially, in the limits $\xi\rightarrow 0$ and
+$\xi\rightarrow 1$ one should and does recover the DGLAP and ERBL
+equations, respectively.
+
+For convenience, we define the parameter:
+\begin{equation}
+\kappa = \frac{\xi}{x}\,,
+\end{equation}
+so that:
+\begin{equation}
+\frac{x'}{2\xi}
+V^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)=\frac{1}{2\kappa}
+\frac{x'}{x} V^{\pm}\left(\frac{1}{\kappa},\frac{1}{\kappa}
+  \frac{x'}{x}\right)\equiv \mathcal{V}^{\pm}\left(\kappa,\frac{x}{x'}\right)\,,
+\end{equation}
+where the last equality effectively defines the function
+$\mathcal{V}^{\pm}(\kappa,y)$. Plugging this definition into the first
+integral in the r.h.s. of Eq.~(\ref{eq:eveq2}) gives:
+\begin{equation}
+  I^{\pm,\rm DGLAP}(\xi,x)=\int_{x}^{1}\frac{dx'}{x'}\frac{x'}{2\xi}
+                                                         V^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f^{\pm}(x',\xi)=
+                                                         \int_{x}^{1}\frac{dx'}{x'}\mathcal{V}^{\pm}\left(\kappa,\frac{x}{x'}\right)f^{\pm}(x',\xi)\equiv
+                                                         \mathcal{V}^{\pm}\left(\kappa,x\right)\otimes
+                                                         f^{\pm}(x,\xi)\,.
+\end{equation}
+Therefore, $I^{\pm,\rm DGLAP}$ has the form of a ``standard'' Mellin
+convolution that, up to minor modifications due to the fact that
+$\kappa$ depends on $x$, is easily handled by APFEL. Assuming a grid
+in $x$ indexed by $\alpha$ or $\beta$, we have:
+\begin{equation}
+x_\beta I^{\pm,\rm DGLAP}(\xi, x_\beta) = \sum_\alpha \mathcal{V}_{\beta\alpha}^{\pm,\rm DGLAP}(\xi) f^\pm_\alpha (\xi)\,,
+\end{equation}
+with:
+\begin{equation}
+f^\pm_\alpha (\xi) = x_\alpha f^\pm(x_\alpha,\xi)\,,
+\end{equation}
+and:
+\begin{equation}
+\mathcal{V}_{\beta\alpha}^{\pm, \rm
+  DGLAP}(\xi) = \int_{c}^{d}dx'\,\mathcal{V}^\pm\left(\kappa_\beta,x'\right)w_\alpha^{(k)}\left(\frac{x_\beta}{x'}\right)\,,
+\end{equation}
+where $\kappa_\beta=\xi/x_\beta$ and $\{w_\alpha^{(k)}\}$ is a set of
+Lagrange interpolating functions of degree $k$ and the integration
+bounds are:
+\begin{equation}
+  c=\mbox{max}(x_\beta,x_{\beta}/x_{\alpha+1})\quad\mbox{and}\quad c=\mbox{min}(1,x_{\beta}/x_{\alpha-k})\,.
+\end{equation}
+
+Now we need to treat $I^{\pm,\rm ERBL}$ in Eq.~(\ref{eq:eveq2}). The
+structure of this term is rather unusual for APFEL because the
+pre-computation of convolution integrals is usually done on
+logarithmically-spaced grids in $x$ and integrating down to zero might
+be problematic. However, contrary to forward distributions, GPDs are
+generally well-behaved at $x=0$ and thus it is not strictly necessary
+to reach this point in the integral.\footnote{We will verify this
+  conjecture numerically.}  Upon this assumption, we find: to compute:
+\begin{equation}
+x_\beta I^{\pm,\rm ERBL}(\xi, x_\beta) = \sum_\alpha \mathcal{V}_{\beta\alpha}^{\pm,\rm ERBL}(\xi) f^{\pm}_\alpha (\xi)\,,
+\end{equation}
+with:
+\begin{equation}
+\mathcal{V}_{\beta\alpha}^{\pm, \rm
+  ERBL}(\xi)=\theta\left(1-\frac{1}{\kappa_\beta}\right)\int_{\epsilon}^{x_\beta}dx'\,\frac{x_\beta}{x'^2}\mathcal{V}^\pm\left(\kappa_\beta,\frac{x_\beta}{x'}\right)w_\alpha^{(k)}(x')\,,
+\end{equation}
+where $\epsilon$ is a small number. Since the interpolating functions
+$w_\alpha^{(k)}$ are such that:
+\begin{equation}
+w_\alpha^{(k)}(x)\neq0\quad\mbox{for}\quad x_{\alpha-k} <x<x_{\alpha+1}\,,
+\end{equation}
+the integral above can be computed more efficiently as:
+\begin{equation}
+  \mathcal{V}_{\beta\alpha}^{\pm,\rm
+    ERBL}(\xi)=\theta\left(1-\frac{1}{\kappa_\beta}\right)\int_{a}^{b}dx'\,\frac{x_\beta}{x'^2}\mathcal{V}^\pm\left(\kappa_\beta,\frac{x_\beta}{x'}\right)w_\alpha^{(k)}(x')\,,
+\end{equation}
+with:
+\begin{equation}
+a = \mbox{max}(\epsilon,x_{\alpha-k})\quad\mbox{and}\quad b=\mbox{min}(x_\beta,x_{\alpha+1})\,.
+\end{equation}
+
+Finally, summing $I^{\pm,\rm DGLAP}$ and $I^{\pm,\rm ERBL}$ and multiplying by
+a factor $x_\beta$, the evolution equation in Eq.~(\ref{eq:eveq}) can
+be approximated on an grid in $x$ as:
+\begin{equation}
+\mu^2\frac{d}{d\mu^2}f^{\pm}_\beta(\xi) = \sum_{\alpha}\left[\mathcal{V}_{\beta\alpha}^{\pm,\rm DGLAP}(\xi)+\mathcal{V}_{\beta\alpha}^{\pm,\rm ERBL}(\xi)\right]f^{\pm}_\alpha(\xi)
+\end{equation}
+This is a system of coupled differential equation that can be solved
+numerically using the fourth-order Runge-Kutta algorithm as
+implemented in APFEL.
 
 
 

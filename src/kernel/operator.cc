@@ -2,7 +2,6 @@
 // APFEL++ 2017
 //
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
-//          Stefano Carrazza: stefano.carrazza@cern.ch
 //
 
 #include "apfel/operator.h"
@@ -121,7 +120,7 @@ namespace apfel
     std::vector<double> j;
 
     // Compute the the distribution on the subgrids.
-    int const ng = _grid.nGrids(); //sg.size();
+    int const ng = _grid.nGrids();
     for (int ig = 0; ig < ng; ig++)
       {
         int const nx = _grid.GetSubGrid(ig).nx();
