@@ -8,6 +8,8 @@
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   //_________________________________________________________________________________

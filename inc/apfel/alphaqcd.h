@@ -8,6 +8,8 @@
 
 #include "apfel/matchedevolution.h"
 
+#include <functional>
+
 namespace apfel
 {
   /**

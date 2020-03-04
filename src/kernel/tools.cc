@@ -7,6 +7,8 @@
 #include "apfel/tools.h"
 #include "apfel/constants.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   //_________________________________________________________________________

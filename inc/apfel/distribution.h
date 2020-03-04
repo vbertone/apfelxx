@@ -9,6 +9,7 @@
 #include "apfel/lagrangeinterpolator.h"
 
 #include <map>
+#include <functional>
 
 namespace apfel
 {
