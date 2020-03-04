@@ -11,6 +11,8 @@
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   //_________________________________________________________________________
