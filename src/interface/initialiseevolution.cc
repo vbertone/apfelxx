@@ -14,6 +14,7 @@
 
 #include <sys/stat.h>
 #include <fstream>
+#include <algorithm>
 
 namespace apfel
 {
