@@ -12,8 +12,6 @@
 #include "apfel/constants.h"
 #include "apfel/rotations.h"
 
-#include <iostream>
-#include <algorithm>
 #include <sys/stat.h>
 #include <fstream>
 
@@ -92,7 +90,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  void InitialiseEvolution::TabulateEvolution(std::function<std::map<int,double>(double const&, double const&)> const& InSet)
+  void InitialiseEvolution::TabulateEvolution(std::function<std::map<int, double>(double const&, double const&)> const& InSet)
   {
     // Clear the knot array map before filling it (in case this
     // function was already called before).

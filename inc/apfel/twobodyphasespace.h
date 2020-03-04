@@ -69,10 +69,10 @@ namespace apfel
      * Cut Variables that define the cuts on the single leptons
      */
     ///@{
-    double _pTmin;
-    double _etamin;
-    double _etamax;
-    double _eps;
+    double const _pTmin;
+    double const _etamin;
+    double const _etamax;
+    double const _eps;
     ///@}
   };
 }

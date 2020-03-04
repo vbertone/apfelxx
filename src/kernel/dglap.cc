@@ -11,12 +11,12 @@ namespace apfel
 {
   //_________________________________________________________________________________
   template<class T>
-  Dglap<T>::Dglap(std::function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
-                  std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-                  Set<T>                                                 const& ObjRef,
-                  double                                                 const& MuDistRef,
-                  std::vector<double>                                    const& Thresholds,
-                  int                                                    const& nsteps):
+  Dglap<T>::Dglap(std::function<Set<Operator>(int const&, double const&)> const& SplittingFunctions,
+                  std::function<Set<Operator>(bool const&, int const&)>   const& MatchingConditions,
+                  Set<T>                                                  const& ObjRef,
+                  double                                                  const& MuDistRef,
+                  std::vector<double>                                     const& Thresholds,
+                  int                                                     const& nsteps):
     MatchedEvolution<Set<T>>(ObjRef, MuDistRef, Thresholds, nsteps),
                           _SplittingFunctions(SplittingFunctions),
                           _MatchingConditions(MatchingConditions)
@@ -33,11 +33,11 @@ namespace apfel
     // Create the object 'g' with the same convolution map of the
     // matching conditions but containing the same objects of the
     // input set of functions 'f'.
-    Set<T> g{MC.GetMap(),f.GetObjects()};
+    Set<T> g{MC.GetMap(), f.GetObjects()};
 
     // Convolute 'MC' and 'g'.
     Set<T> MO = MC * g;
-    MO.SetMap(_SplittingFunctions((Up ? nf+1 : nf-1), 0).GetMap());
+    MO.SetMap(_SplittingFunctions((Up ? nf + 1 : nf - 1), 0).GetMap());
 
     // Return the convoluted object with the map on the next evolution
     // step.
@@ -48,7 +48,7 @@ namespace apfel
   template<class T>
   Set<T> Dglap<T>::Derivative(int const& nf, double const& t, Set<T> const& f) const
   {
-    return _SplittingFunctions(nf, exp(t/2)) * f;
+    return _SplittingFunctions(nf, exp(t / 2)) * f;
   }
 
   // Fixed template types.
@@ -62,7 +62,7 @@ namespace apfel
     // Allocate initial scale distributions.
     std::map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
-      DistMap.insert({i,Distribution{_ObjRef.at(0).GetGrid(), InDistFunc, i}});
+      DistMap.insert({i, Distribution{_ObjRef.at(0).GetGrid(), InDistFunc, i}});
 
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
@@ -71,7 +71,7 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
-  void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int,double>(double const&)> const& InDistFunc)
+  void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int, double>(double const&)> const& InDistFunc)
   {
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).
@@ -80,7 +80,7 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
-  void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc, double const& mu)
+  void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc, double const& mu)
   {
     // Create set of initial distributions (assumed to be in the QCD
     // evolution basis).

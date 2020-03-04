@@ -57,8 +57,8 @@ namespace apfel
     double                     xMin()        const { return _xMin; }        //!< return the minimum node value
     double                     xMax()        const { return _xMax; }        //!< return the maximum node value
     double                     Step()        const { return _Step; }        //!< return the step size of the log grid
-    std::vector<double> const& GetGrid()     const { return _xsg; }         //!< return the grid setup.
-    std::vector<double> const& GetLogGrid()  const { return _lxsg; }        //!< return the log grid obj.
+    std::vector<double> const& GetGrid()     const { return _xsg; }         //!< return the grid
+    std::vector<double> const& GetLogGrid()  const { return _lxsg; }        //!< return the log-grid
 
   private:
     int                 _nx;           //!< Number intervals
@@ -68,7 +68,7 @@ namespace apfel
     double              _xMax;         //!< Maximum value of x (should always be 1)
     double              _Step;         //!< Step pf the logarthmically spaced grid
     std::vector<double> _xsg;          //!< Actual grid
-    std::vector<double> _lxsg;         //!< The log of the actual grid
+    std::vector<double> _lxsg;         //!< The log of the grid
 
     friend std::ostream& operator << (std::ostream& os, SubGrid const& sg);
   };

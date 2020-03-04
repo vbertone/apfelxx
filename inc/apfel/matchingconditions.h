@@ -33,7 +33,7 @@ namespace apfel
   {
   public:
     AS1Hg_L();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -45,7 +45,7 @@ namespace apfel
   {
   public:
     AS1ggH_L();
-    double Local(double const&)  const;
+    double Local(double const&) const;
   };
   ///@}
 
@@ -62,7 +62,7 @@ namespace apfel
   {
   public:
     APS2Hq_0();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -74,7 +74,7 @@ namespace apfel
   {
   public:
     APS2Hq_L();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -86,7 +86,7 @@ namespace apfel
   {
   public:
     APS2Hq_L2();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -97,7 +97,7 @@ namespace apfel
   {
   public:
     AS2Hg_0();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -109,7 +109,7 @@ namespace apfel
   {
   public:
     AS2Hg_L();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -121,7 +121,7 @@ namespace apfel
   {
   public:
     AS2Hg_L2();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -173,7 +173,7 @@ namespace apfel
   {
   public:
     AS2gqH_0();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -185,7 +185,7 @@ namespace apfel
   {
   public:
     AS2gqH_L();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -197,7 +197,7 @@ namespace apfel
   {
   public:
     AS2gqH_L2();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**

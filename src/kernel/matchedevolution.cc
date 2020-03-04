@@ -11,9 +11,6 @@
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
 
-#include <algorithm>
-#include <cmath>
-
 namespace apfel
 {
   //_________________________________________________________________________
@@ -36,7 +33,7 @@ namespace apfel
     // Compute squared thresholds.
     for (auto const& th : Thresholds)
       {
-        const double th2 = pow(th,2);
+        const double th2 = pow(th, 2);
         _Thresholds2.push_back(th2);
         _LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
       }

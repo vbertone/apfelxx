@@ -50,7 +50,7 @@ namespace apfel
      * @brief Retrieve the name of the map.
      * @return The name of the map
      */
-    std::string const& GetName()  const { return _name; }
+    std::string const& GetName() const { return _name; }
 
     /**
      * @brief Retrieve the full set of rules for the multiplications.

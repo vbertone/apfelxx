@@ -14,7 +14,7 @@ namespace apfel
 {
   //_________________________________________________________________________
   template<class T>
-  Set<T>::Set(ConvolutionMap const& Map, std::map<int,T> const& in):
+  Set<T>::Set(ConvolutionMap const& Map, std::map<int, T> const& in):
     _map(Map),
     _objects(in)
   {
@@ -36,7 +36,7 @@ namespace apfel
         for (auto it = _map.GetRules().begin(); it != item; it++)
           if (it->second == item->second)
             {
-              mmap.insert({item->first,mmap.at(it->first)});
+              mmap.insert({item->first, mmap.at(it->first)});
               cycle = true;
               break;
             }
@@ -75,10 +75,10 @@ namespace apfel
             else
               result += _objects.at((*o).operand) * dist.at((*o).object);
           }
-        mmap.insert({item->first,result});
+        mmap.insert({item->first, result});
       }
 
-    return Set<V> {d.GetMap(),mmap};
+    return Set<V> {d.GetMap(), mmap};
   }
 
   //_________________________________________________________________________

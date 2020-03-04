@@ -12,7 +12,8 @@ namespace apfel
 {
   //_________________________________________________________________________
   template<class T>
-  DoubleObject<T>::DoubleObject()
+  DoubleObject<T>::DoubleObject():
+    _terms({})
   {
   }
 

@@ -10,19 +10,19 @@ namespace apfel
 {
   //_________________________________________________________________________
   template<class T>
-  matrix<T>::matrix(const std::size_t &row, const std::size_t &col):
-    _size{{row,col}}
+  matrix<T>::matrix(std::size_t const& row, std::size_t const& col):
+    _size{{row, col}}
   {
-    if (row*col != 0)
-      _data.resize(row*col);
+    if (row * col != 0)
+      _data.resize(row * col);
   }
 
   //_________________________________________________________________________
   template<class T>
-  void matrix<T>::resize(const std::size_t &row, const std::size_t &col, T const& v)
+  void matrix<T>::resize(std::size_t const& row, std::size_t const& col, T const& v)
   {
-    _size = {{row,col}};
-    _data.resize(row*col, v);
+    _size = {{row, col}};
+    _data.resize(row * col, v);
   }
 
   // type constrain

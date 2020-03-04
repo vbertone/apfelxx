@@ -21,9 +21,6 @@ namespace apfel
   class Interpolator
   {
   public:
-
-    Interpolator() = delete;
-
     virtual ~Interpolator() = default;
 
     /**
@@ -80,9 +77,10 @@ namespace apfel
     std::vector<std::vector<double>> const& GetDistributionSubGrid()   const { return _distributionSubGrid; }   //!< The distribution on the subgrids
     std::vector<double>              const& GetDistributionJointGrid() const { return _distributionJointGrid; } //!< The distribution on the joint grid
     ///@}
+
   protected:
-    Grid                      const& _grid;                  //!< The stored grid reference
-    std::vector<std::vector<double>> _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
-    std::vector<double>              _distributionJointGrid; //!< The array with the distribution values on the joint grid.
+    Grid                             const& _grid;                  //!< The stored grid reference
+    std::vector<std::vector<double>>        _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
+    std::vector<double>                     _distributionJointGrid; //!< The array with the distribution values on the joint grid.
   };
 }

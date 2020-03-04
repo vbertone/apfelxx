@@ -19,8 +19,10 @@ namespace apfel
   class Grid
   {
   public:
-
-    Grid() = delete;
+    /**
+     * @brief Default constructor.
+     */
+    Grid();
 
     /**
      * @brief The Grid constructor.
@@ -76,6 +78,7 @@ namespace apfel
      */
     SubGrid CreateJointGrid();
 
+  private:
     bool                 _Locked;     //!< Flag for locking the grids.
     bool                 _ExtGrids;   //!< Contains external sub-grids.
     std::vector<SubGrid> _GlobalGrid; //!< Vector with sub-grids.

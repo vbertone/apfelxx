@@ -51,10 +51,10 @@ namespace apfel
       const double EmqT  = sqrt(EmqT2);
 
       // Auxiliary functions
-      const double f2 = ( 2 * _pTmin * Eq - Q2 ) / 2 / _pTmin / qT;
+      const double f2    = ( 2 * _pTmin * Eq - Q2 ) / 2 / _pTmin / qT;
       const double f3max = Eq / qT - Q2 * ( sinh(eta - y) * ctghmax + ch ) / 2 / qT / M;
       const double f3min = Eq / qT - Q2 * ( sinh(eta - y) * ctghmin + ch ) / 2 / qT / M;
-      const double f4 = ( Eq * ( Q2 - 2 * pTmin2 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin2 ) ) / 2 / qT / ( M2 - pTmin2 );
+      const double f4    = ( Eq * ( Q2 - 2 * pTmin2 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin2 ) ) / 2 / qT / ( M2 - pTmin2 );
 
       // Integration limits in cos(phi)
       const double x1 = std::max(f2, -1.);
@@ -126,10 +126,10 @@ namespace apfel
       const double EmqT  = sqrt(EmqT2);
 
       // Auxiliary functions
-      const double f2 = ( 2 * _pTmin * Eq - Q2 ) / 2 / _pTmin / qT;
+      const double f2    = ( 2 * _pTmin * Eq - Q2 ) / 2 / _pTmin / qT;
       const double f3max = Eq / qT - Q2 * ( sinh(eta - y) * ctghmax + ch ) / 2 / qT / M;
       const double f3min = Eq / qT - Q2 * ( sinh(eta - y) * ctghmin + ch ) / 2 / qT / M;
-      const double f4 = ( Eq * ( Q2 - 2 * pTmin2 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin2 ) ) / 2 / qT / ( M2 - pTmin2 );
+      const double f4    = ( Eq * ( Q2 - 2 * pTmin2 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin2 ) ) / 2 / qT / ( M2 - pTmin2 );
 
       // Integration limits in cos(phi)
       const double x1 = std::max(f2, -1.);

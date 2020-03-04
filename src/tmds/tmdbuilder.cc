@@ -15,19 +15,20 @@
 #include "apfel/gammacs.h"
 #include "apfel/tools.h"
 #include "apfel/constants.h"
+#include "apfel/integrator.h"
 
 namespace apfel
 {
   //_____________________________________________________________________________
-  std::map<int,TmdObjects> InitializeTmdObjects(Grid                const& g,
-                                                std::vector<double> const& Thresholds,
-                                                double              const& IntEps)
+  std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
+                                                 std::vector<double> const& Thresholds,
+                                                 double              const& IntEps)
   {
     // Initialise space-like and time-like splitting functions on the
     // grid required to compute the log terms of the matching
     // functions.
-    const std::map<int,DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
-    const std::map<int,DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, IntEps);
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
+    const std::map<int, DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, IntEps);
 
     report("Initializing TMD objects for matching and evolution... ");
     Timer t;
@@ -43,7 +44,7 @@ namespace apfel
 
     // ===============================================================
     // LO matching functions operators.
-    std::map<int,Operator> C00;
+    std::map<int, Operator> C00;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
     C00.insert({EvolutionBasisQCD::PNSP, Id});
@@ -57,7 +58,7 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators.
     // PDFs
-    std::map<int,std::map<int,Operator>> C10pdf;
+    std::map<int, std::map<int, Operator>> C10pdf;
     const Operator O1nspdf{g, C1nspdf{}, IntEps};
     const Operator O1qgpdf{g, C1qgpdf{}, IntEps};
     const Operator O1gqpdf{g, C1gqpdf{}, IntEps};
@@ -65,7 +66,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O1qgpdfnf = nf * O1qgpdf;
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O1nspdf});
         OM.insert({EvolutionBasisQCD::PNSM, O1nspdf});
         OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
@@ -77,13 +78,13 @@ namespace apfel
       }
 
     // Terms proportion to one power of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C11pdf;
+    std::map<int, std::map<int, Operator>> C11pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O11gmVq = gammaVq0() * Id / 2;
         const Operator O11gmVg = gammaVg0(nf) * Id / 2;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - P0.at(2)});
@@ -95,7 +96,7 @@ namespace apfel
       }
 
     // Terms proportion to two powers of log(mu0/mub)
-    std::map<int,Operator> C12;
+    std::map<int, Operator> C12;
     C12.insert({EvolutionBasisQCD::PNSP, CF * Id});
     C12.insert({EvolutionBasisQCD::PNSM, CF * Id});
     C12.insert({EvolutionBasisQCD::PNSV, CF * Id});
@@ -105,7 +106,7 @@ namespace apfel
     C12.insert({EvolutionBasisQCD::PGG,  CA * Id});
 
     // FFs
-    std::map<int,std::map<int,Operator>> C10ff;
+    std::map<int, std::map<int, Operator>> C10ff;
     const Operator O1nsff{g, C1nsff{}, IntEps};
     const Operator O1qgff{g, C1qgff{}, IntEps};
     const Operator O1gqff{g, C1gqff{}, IntEps};
@@ -113,7 +114,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O1qgffnf = nf * O1qgff;
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O1nsff});
         OM.insert({EvolutionBasisQCD::PNSM, O1nsff});
         OM.insert({EvolutionBasisQCD::PNSV, O1nsff});
@@ -125,13 +126,13 @@ namespace apfel
       }
 
     // Terms proportion to one power of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C11ff;
+    std::map<int, std::map<int, Operator>> C11ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O11gmVq = gammaVq0() * Id / 2;
         const Operator O11gmVg = gammaVg0(nf) * Id / 2;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - P0.at(2)});
@@ -148,7 +149,7 @@ namespace apfel
     // ===============================================================
     // NNLO matching functions operators.
     // PDFs
-    std::map<int,std::map<int,Operator>> C20pdf;
+    std::map<int, std::map<int, Operator>> C20pdf;
     const Operator O2Vqqbpdf{g, C2Vqqbpdf{}, IntEps};
     const Operator O2pspdf{g, C2pspdf{}, IntEps};
     const Operator O2qgpdf{g, C2qgpdf{}, IntEps};
@@ -161,7 +162,7 @@ namespace apfel
         const Operator O2nsppdf = O2Vqqpdf + O2Vqqbpdf;
         const Operator O2nsmpdf = O2Vqqpdf - O2Vqqbpdf;
         const Operator O2qqpdf  = O2nsppdf + nf * O2pspdf;
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O2nsppdf});
         OM.insert({EvolutionBasisQCD::PNSM, O2nsmpdf});
         OM.insert({EvolutionBasisQCD::PNSV, O2nsmpdf});
@@ -173,7 +174,7 @@ namespace apfel
       }
 
     // Terms proportion to one power of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C21pdf;
+    std::map<int, std::map<int, Operator>> C21pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const double factq = beta0qcd(nf) + gammaVq0() / 2;
@@ -183,7 +184,7 @@ namespace apfel
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         const auto P1 = DglapObjpdf.at(nf).SplittingFunctions.at(1);
         const auto C1 = C10pdf.at(nf);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - P1.at(0) + factq * C1.at(0) - C1.at(0) * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - P1.at(1) + factq * C1.at(1) - C1.at(1) * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - P1.at(2) + factq * C1.at(2) - C1.at(2) * P0.at(2)});
@@ -195,7 +196,7 @@ namespace apfel
       }
 
     // Terms proportion to two powers of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C22pdf;
+    std::map<int, std::map<int, Operator>> C22pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const double b0    = beta0qcd(nf);
@@ -208,7 +209,7 @@ namespace apfel
         const Operator O22gmVg = ( CA * gcp / 8 + gv0g * ( 2 * b0 + gv0g ) / 8 ) * Id;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         const auto C1 = C10pdf.at(nf);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O22gmVq + factq * P0.at(0) + CF * C1.at(0) + P0.at(0) * P0.at(0) / 2});
         OM.insert({EvolutionBasisQCD::PNSM, O22gmVq + factq * P0.at(1) + CF * C1.at(1) + P0.at(1) * P0.at(1) / 2});
         OM.insert({EvolutionBasisQCD::PNSV, O22gmVq + factq * P0.at(2) + CF * C1.at(2) + P0.at(2) * P0.at(2) / 2});
@@ -220,13 +221,13 @@ namespace apfel
       }
 
     // Terms proportion to three powers of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C23pdf;
+    std::map<int, std::map<int, Operator>> C23pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaVq0() / 2 ) * Id;
         const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq - CF * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O23gmVq - CF * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O23gmVq - CF * P0.at(2)});
@@ -238,7 +239,7 @@ namespace apfel
       }
 
     // Terms proportion to four powers of log(mu0/mub)
-    std::map<int,Operator> C24;
+    std::map<int, Operator> C24;
     C24.insert({EvolutionBasisQCD::PNSP, CF * CF * Id / 2});
     C24.insert({EvolutionBasisQCD::PNSM, CF * CF * Id / 2});
     C24.insert({EvolutionBasisQCD::PNSV, CF * CF * Id / 2});
@@ -248,7 +249,7 @@ namespace apfel
     C24.insert({EvolutionBasisQCD::PGG,  CA * CA * Id / 2});
 
     // FFs
-    std::map<int,std::map<int,Operator>> C20ff;
+    std::map<int, std::map<int, Operator>> C20ff;
     const Operator O2Vqqbff{g, C2Vqqbff{}, IntEps};
     const Operator O2psff{g, C2psff{}, IntEps};
     const Operator O2qgff{g, C2qgff{}, IntEps};
@@ -261,7 +262,7 @@ namespace apfel
         const Operator O2nspff = O2Vqqff + O2Vqqbff;
         const Operator O2nsmff = O2Vqqff - O2Vqqbff;
         const Operator O2qqff  = O2nspff + nf * O2psff;
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O2nspff});
         OM.insert({EvolutionBasisQCD::PNSM, O2nsmff});
         OM.insert({EvolutionBasisQCD::PNSV, O2nsmff});
@@ -273,7 +274,7 @@ namespace apfel
       }
 
     // Terms proportion to one power of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C21ff;
+    std::map<int, std::map<int, Operator>> C21ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const double factq = beta0qcd(nf) + gammaVq0() / 2;
@@ -283,7 +284,7 @@ namespace apfel
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
         const auto P1 = DglapObjff.at(nf).SplittingFunctions.at(1);
         const auto C1 = C10ff.at(nf);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - P1.at(0) + factq * C1.at(0) - C1.at(0) * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - P1.at(1) + factq * C1.at(1) - C1.at(1) * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - P1.at(2) + factq * C1.at(2) - C1.at(2) * P0.at(2)});
@@ -295,7 +296,7 @@ namespace apfel
       }
 
     // Terms proportion to two powers of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C22ff;
+    std::map<int, std::map<int, Operator>> C22ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const double b0    = beta0qcd(nf);
@@ -308,7 +309,7 @@ namespace apfel
         const Operator O22gmVg = ( CA * gcp / 8 + gv0g * ( 2 * b0 + gv0g ) / 8 ) * Id;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
         const auto C1 = C10ff.at(nf);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O22gmVq + factq * P0.at(0) + CF * C1.at(0) + P0.at(0) * P0.at(0) / 2});
         OM.insert({EvolutionBasisQCD::PNSM, O22gmVq + factq * P0.at(1) + CF * C1.at(1) + P0.at(1) * P0.at(1) / 2});
         OM.insert({EvolutionBasisQCD::PNSV, O22gmVq + factq * P0.at(2) + CF * C1.at(2) + P0.at(2) * P0.at(2) / 2});
@@ -320,13 +321,13 @@ namespace apfel
       }
 
     // Terms proportion to three powers of log(mu0/mub)
-    std::map<int,std::map<int,Operator>> C23ff;
+    std::map<int, std::map<int, Operator>> C23ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaVq0() / 2 ) * Id;
         const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
-        std::map<int,Operator> OM;
+        std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq - CF * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O23gmVq - CF * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O23gmVq - CF * P0.at(2)});
@@ -341,13 +342,13 @@ namespace apfel
     // of PDFs.
 
     // Define map containing the TmdObjects for each nf.
-    std::map<int,TmdObjects> TmdObj;
+    std::map<int, TmdObjects> TmdObj;
 
     // Construct sets of operators for each perturbative order for the
     // matching functions. Initialize also coefficients of: beta
     // function, GammaCusp, gammaV, and Collins-Soper anomalous
     // dimensions.
-    std::map<int,std::map<int,Set<Operator>>> MatchingFunctionsPDFs;
+    std::map<int, std::map<int, Set<Operator>>> MatchingFunctionsPDFs;
     for (int nf = nfi; nf <= nff; nf++)
       {
         TmdObjects obj;
@@ -403,7 +404,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
                                                                                              int                                             const& PerturbativeOrder,
@@ -427,7 +428,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                             std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                                                             std::function<double(double const&)>            const& Alphas,
                                                                                             int                                             const& PerturbativeOrder,
@@ -451,7 +452,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int,TmdObjects>                        const& TmdObj,
+  std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                std::function<double(double const&)>            const& Alphas,
                                                                int                                             const& PerturbativeOrder,
@@ -520,7 +521,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int,TmdObjects>                        const& TmdObj,
+  std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                               std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                               std::function<double(double const&)>            const& Alphas,
                                                               int                                             const& PerturbativeOrder,
@@ -590,7 +591,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int,TmdObjects>             const& TmdObj,
+  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                    std::function<double(double const&)> const& Alphas,
                                                                                                    int                                  const& PerturbativeOrder,
                                                                                                    double                               const& Ci,
@@ -755,7 +756,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
+  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
                                                                                           int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci,
@@ -898,7 +899,7 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int,TmdObjects>             const& TmdObj,
+  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
                                                                                           int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci,

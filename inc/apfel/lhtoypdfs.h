@@ -23,7 +23,7 @@ namespace apfel
   double xdbar(double const& x);
   double xubar(double const& x);
   double xsbar(double const& x);
-  std::map<int,double> LHToyPDFs(double const& x, double const&);
+  std::map<int, double> LHToyPDFs(double const& x, double const&);
   ///@}
   /// @endcond
 }

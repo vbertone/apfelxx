@@ -47,7 +47,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::map<int,double> LHToyPDFs(double const& x, double const&)
+  std::map<int, double> LHToyPDFs(double const& x, double const&)
   {
     // Call all functions only once.
     const double upv  = xupv(x);
@@ -66,7 +66,7 @@ namespace apfel
     double const V3      = upv - dnv;
 
     // Fill in map in the QCD evolution basis.
-    std::map<int,double> QCDEvMap;
+    std::map<int, double> QCDEvMap;
     QCDEvMap[0]  = Gluon;
     QCDEvMap[1]  = Singlet;
     QCDEvMap[2]  = Valence;

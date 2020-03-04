@@ -11,8 +11,6 @@
 #include "apfel/set.h"
 #include "apfel/timer.h"
 
-#include <algorithm>
-
 namespace apfel
 {
   //_________________________________________________________________________________
@@ -23,7 +21,10 @@ namespace apfel
                                     double              const& QMax,
                                     int                 const& InterDegree,
                                     double              const& Lambda):
-    QGrid<T>(nQ, QMin, QMax, InterDegree, Object.GetThresholds(), Lambda)
+    QGrid<T>
+  {
+    nQ, QMin, QMax, InterDegree, Object.GetThresholds(), Lambda
+  }
   {
     report("Tabulating object... ");
     Timer t;
@@ -49,7 +50,7 @@ namespace apfel
       }
 
     // Reverse order of the elements.
-    std::reverse(this->_GridValues.begin(),this->_GridValues.end());
+    std::reverse(this->_GridValues.begin(), this->_GridValues.end());
 
     // Loop on "_Qg" above "MuRef".
     Object.SetObjectRef(ObjRef);
@@ -79,7 +80,10 @@ namespace apfel
                                     int                             const& InterDegree,
                                     std::vector<double>             const& Thresholds,
                                     double                          const& Lambda):
-    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, Lambda)
+    QGrid<T>
+  {
+    nQ, QMin, QMax, InterDegree, Thresholds, Lambda
+  }
   {
     report("Tabulating object... ");
     Timer t;
@@ -101,7 +105,10 @@ namespace apfel
                                     std::vector<double>                  const& Thresholds,
                                     std::function<double(double const&)> const& TabFunc,
                                     std::function<double(double const&)> const& InvTabFunc):
-    QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds, TabFunc, InvTabFunc)
+    QGrid<T>
+  {
+    nQ, QMin, QMax, InterDegree, Thresholds, TabFunc, InvTabFunc
+  }
   {
     report("Tabulating object... ");
     Timer t;
@@ -184,7 +191,7 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
-  std::map<int,double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
+  std::map<int, double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
   {
     const auto fq     = this->_TabFunc(Q);
     const auto bounds = this->SumBounds(Q);
@@ -193,7 +200,7 @@ namespace apfel
     const int upper   = std::get<2>(bounds);
 
     // Fill in map.
-    std::map<int,double> result;
+    std::map<int, double> result;
     for (int tau = lower; tau < upper; tau++)
       {
         const auto& obj = this->_GridValues[tau].GetObjects();

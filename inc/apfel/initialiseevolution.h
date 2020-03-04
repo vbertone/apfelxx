@@ -78,7 +78,7 @@ namespace apfel
      * KnotArray() array function.
      * @param InSet: the input set of distributions
      */
-    void TabulateEvolution(std::function<std::map<int,double>(double const&, double const&)> const& InSet);
+    void TabulateEvolution(std::function<std::map<int, double>(double const&, double const&)> const& InSet);
 
     /**
      * @brief The WriteGridInfo function creates the folder and writes

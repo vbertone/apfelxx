@@ -35,14 +35,14 @@ namespace apfel
    * @param InPhysMap: the map in the physical basis
    * @return The map in the QCD evolution basis
    */
-  std::map<int,double> PhysToQCDEv(std::map<int,double> const& InPhysMap);
+  std::map<int, double> PhysToQCDEv(std::map<int, double> const& InPhysMap);
 
   /**
    * @brief Rotation from the QCD evolution to the physical basis.
    * @param QCDEvMap: The map in the QCD evolution basis
    * @return the map in the physical basis
    */
-  std::map<int,double> QCDEvToPhys(std::map<int,double> const& QCDEvMap);
+  std::map<int, double> QCDEvToPhys(std::map<int, double> const& QCDEvMap);
 
   /**
    * @brief Rotation from the QCD evolution to the physical basis of a
@@ -50,6 +50,6 @@ namespace apfel
    * @param QCDEvMap: The map of distributions in the QCD evolution basis
    * @return the map of distributions in the physical basis
    */
-  std::map<int,Distribution> QCDEvToPhys(std::map<int,Distribution> const& QCDEvMap);
+  std::map<int, Distribution> QCDEvToPhys(std::map<int, Distribution> const& QCDEvMap);
   ///@}
 }

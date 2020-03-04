@@ -21,14 +21,14 @@ namespace apfel
   double LagrangeInterpolator::Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const
   {
     // Get the logarithmic grid.
-    auto const& lxsg = sg.GetLogGrid();
+    const std::vector<double>& lxsg = sg.GetLogGrid();
 
     // Return immediately 1 if "x" coincides with "xg[beta]".
     if (std::abs(lnx - lxsg[beta]) < eps12)
       return 1;
 
     // Define the lower bound of the interpolation range.
-    const int id = sg.InterDegree();
+    const int id    = sg.InterDegree();
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
@@ -57,13 +57,13 @@ namespace apfel
   //_________________________________________________________________________________
   std::array<int, 2> LagrangeInterpolator::SumBounds(double const& x, SubGrid const& sg) const
   {
-    auto const& xsg = sg.GetGrid();
+    const std::vector<double>& xsg = sg.GetGrid();
 
     std::array<int,2> bounds = {{0, 0}};
     if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
       return bounds;
 
-    const int low = std::lower_bound(xsg.begin(), xsg.end()-sg.InterDegree()-1, x) - xsg.begin();
+    const int low = std::lower_bound(xsg.begin(), xsg.end() - sg.InterDegree() - 1, x) - xsg.begin();
     bounds[0] = bounds[1] = low;
 
     if (std::abs(x - xsg[low]) <= eps12)

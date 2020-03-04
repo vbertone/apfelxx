@@ -33,12 +33,12 @@ namespace apfel
      * @param Thresholds: vector of the heavy quark thresholds
      * @param nsteps: number of steps of the ODE solver (default: 10)
      */
-    Dglap(std::function<Set<Operator>(int const&,double const&)> const& SplittingFunctions,
-          std::function<Set<Operator>(bool const&,int const&)>   const& MatchingConditions,
-          Set<T>                                                 const& ObjRef,
-          double                                                 const& MuRef,
-          std::vector<double>                                    const& Thresholds,
-          int                                                    const& nsteps = 10);
+    Dglap(std::function<Set<Operator>(int const&, double const&)> const& SplittingFunctions,
+          std::function<Set<Operator>(bool const&, int const&)>   const& MatchingConditions,
+          Set<T>                                                  const& ObjRef,
+          double                                                  const& MuRef,
+          std::vector<double>                                     const& Thresholds,
+          int                                                     const& nsteps = 10);
 
     /**
      * @brief Function that matches the evolved object at the thresholds.
@@ -77,7 +77,7 @@ namespace apfel
      * x.
      * @param InDistFunc: the function that returns the distributions.
      */
-    void SetInitialDistributions(std::function<std::map<int,double>(double const&)> const& InDistFunc);
+    void SetInitialDistributions(std::function<std::map<int, double>(double const&)> const& InDistFunc);
 
     /**
      * @brief Function that sets the reference distribution at the
@@ -86,7 +86,7 @@ namespace apfel
      * @param InDistFunc: the function that returns the distributions.
      * @param mu: the scale at which distributions have to be computed
      */
-    void SetInitialDistributions(std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc, double const& mu);
+    void SetInitialDistributions(std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc, double const& mu);
     ///@}
   private:
     std::function<Set<Operator>(int const&,double const&)> _SplittingFunctions;

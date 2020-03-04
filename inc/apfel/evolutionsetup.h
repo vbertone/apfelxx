@@ -63,7 +63,6 @@ namespace apfel
      * @name Attributes of the struture.
      */
     ///@{
-
     std::string                 name;                //!< Identifier name of the setup
     double                      Q0;                  //!< Starting scale of the evolutions
     std::vector<GridParameters> GridParameters;      //!< Vector of the parameters of the subgrids
@@ -91,8 +90,7 @@ namespace apfel
     MassRenScheme               MassRenScheme;       //!< Renormalization scheme for the heavy-quark masses (POLE, MSBAR)
     double                      TauMass;             //!< Mass of the &tau; lepton
     double                      GaussAccuracy;       //!< Accuracy of the dguass integration
-    std::function<std::map<int,double>(double const&, double const&)> InSet; //!< Input set of distributions at the initial scale
-
+    std::function<std::map<int, double>(double const&, double const&)> InSet; //!< Input set of distributions at the initial scale
     ///@}
 
     /**

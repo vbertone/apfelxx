@@ -24,11 +24,6 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The default constructor.
-     */
-    Integrator();
-
-    /**
      * @brief The Integrator constructor.
      * @param func: The function of one variable to be integrated
      */
@@ -83,13 +78,13 @@ namespace apfel
     double integrate(double const& xmin, double const& xmax, int const& m) const;
 
     /**
-     * @brief Virtual function for the integrand.
+     * @brief Function for the integrand.
      * @param x: the integration variable
      * @return the integrand evaluated at x
      */
-    virtual double integrand(double const& x) const { return _func(x); };
+    double integrand(double const& x) const { return _func(x); };
 
   private:
-    std::function<double(double const&)> _func; //!< The integrand function
+    std::function<double(double const&)> const& _func; //!< The integrand function
   };
 }

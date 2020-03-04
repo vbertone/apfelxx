@@ -10,8 +10,6 @@
 #include "apfel/messages.h"
 #include "apfel/tools.h"
 
-#include <stdexcept>
-
 namespace apfel
 {
   //_________________________________________________________________________________
@@ -21,7 +19,7 @@ namespace apfel
                      std::vector<double> const& LeptThresholds,
                      int                 const& pt,
                      int                 const& nstep):
-    MatchedEvolution(AlphaRef, MuRef, ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds), nstep),
+    MatchedEvolution{AlphaRef, MuRef, ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds), nstep},
     _pt(pt)
   {
     // Beta function lambda function.
@@ -61,8 +59,8 @@ namespace apfel
     else if (pt == 1)
       res = beta1qed(nf, nl);
     else
-      throw std::runtime_error(error("AlphaQED::betaQED","perturbive order out of range."));
+      throw std::runtime_error(error("AlphaQED::betaQED", "perturbive order out of range."));
 
-    return res / pow(FourPi,pt+1);
+    return res / pow(FourPi, pt + 1);
   }
 }

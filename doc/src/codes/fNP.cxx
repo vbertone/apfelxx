@@ -5,7 +5,7 @@
 //
 
 #include <apfel/apfelxx.h>
-#include <NangaParbat/utilities.h>
+#include <NangaParbat/bstar.h>
 
 #include "LHAPDF/LHAPDF.h"
 

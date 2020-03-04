@@ -55,7 +55,7 @@ namespace apfel
   {
   public:
     P0Tqg();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -66,7 +66,7 @@ namespace apfel
   {
   public:
     P0Tgq();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -114,7 +114,7 @@ namespace apfel
   {
   public:
     P1Tnsm(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -125,7 +125,7 @@ namespace apfel
   {
   public:
     P1Tps(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -138,7 +138,7 @@ namespace apfel
   {
   public:
     P1Tqg(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -151,7 +151,7 @@ namespace apfel
   {
   public:
     P1Tgq(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -217,7 +217,7 @@ namespace apfel
   {
   public:
     P2Tnss(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -230,7 +230,7 @@ namespace apfel
   {
   public:
     P2Tps(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -243,7 +243,7 @@ namespace apfel
   {
   public:
     P2Tqg(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -256,7 +256,7 @@ namespace apfel
   {
   public:
     P2Tgq(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -332,7 +332,7 @@ namespace apfel
   {
   public:
     P1Ttransnsm(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
   ///@}
 }

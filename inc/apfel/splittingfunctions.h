@@ -57,7 +57,7 @@ namespace apfel
   {
   public:
     P0qg();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -68,7 +68,7 @@ namespace apfel
   {
   public:
     P0gq();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -116,7 +116,7 @@ namespace apfel
   {
   public:
     P1nsm(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -127,7 +127,7 @@ namespace apfel
   {
   public:
     P1ps(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -140,7 +140,7 @@ namespace apfel
   {
   public:
     P1qg(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -153,7 +153,7 @@ namespace apfel
   {
   public:
     P1gq(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -219,7 +219,7 @@ namespace apfel
   {
   public:
     P2nss(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -232,7 +232,7 @@ namespace apfel
   {
   public:
     P2ps(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -245,7 +245,7 @@ namespace apfel
   {
   public:
     P2qg(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -258,7 +258,7 @@ namespace apfel
   {
   public:
     P2gq(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -327,7 +327,7 @@ namespace apfel
   {
   public:
     P3nss(int const& nf, int const& imod = 0);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
     int const _imod;
@@ -389,7 +389,7 @@ namespace apfel
   {
   public:
     P1transnsm(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
   ///@}
 }

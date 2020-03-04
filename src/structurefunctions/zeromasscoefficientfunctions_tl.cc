@@ -280,7 +280,13 @@ namespace apfel
     const double Hr3001 = Hr3[22];
     const double Hr3011 = Hr3[25];
 
-    const double cTeqps2 =
+    // Deallocate pointers for the harmonic polylogs
+    delete[] Hr4;
+    delete[] Hr3;
+    delete[] Hr2;
+    delete[] Hr1;
+
+    return
       // Transverse contribution
       + CF * ( - 118./3. + 70./3.*x + 512./27.*x2
                - 80./27./x + 16*zeta3 + 16*zeta3*x - 8*zeta2 - 32*zeta2*x - 200./
@@ -300,13 +306,6 @@ namespace apfel
                zeta2 - 16*Hr10 - 16*Hr10*x + 8./3.*Hr10*x2 + 32./
                3.*Hr10/x + 8*Hr11*x - 8./3.*Hr11*x2 - 16./3.
                *Hr11/x + 24*Hr200 - 8*Hr201 );
-
-    // Deallocate pointers for the harmonic polylogs
-    delete[] Hr4;
-    delete[] Hr3;
-    delete[] Hr2;
-    delete[] Hr1;
-    return cTeqps2;
   }
 
   //_________________________________________________________________________________
@@ -359,7 +358,13 @@ namespace apfel
     const double Hr3011   = Hr3[25];
     const double Hr3111   = Hr3[26];
 
-    const double cTeg2 =
+    // Deallocate pointers for the harmonic polylogs
+    delete[] Hr4;
+    delete[] Hr3;
+    delete[] Hr2;
+    delete[] Hr1;
+
+    return
       // Transverse contribution
       + CF * CA * ( - 36 - 106*x - 928./27.*x2 + 4438./27.*
                     dx + 64*zeta3 - 136*zeta3*x - 240*zeta3*dx + 32*zeta2 + 64*zeta2*x - 56*zeta2*
@@ -421,13 +426,6 @@ namespace apfel
                     dx - 32./3.*Hr2m10 + 32./15.*Hr2m10*x3 + 64.
                     /5.*Hr2m10*dx2 + 48*Hr200 - 32./15.*Hr200*
                     x3 - 16*Hr201 );
-
-    // Deallocate pointers for the harmonic polylogs
-    delete[] Hr4;
-    delete[] Hr3;
-    delete[] Hr2;
-    delete[] Hr1;
-    return cTeg2;
   }
 
   //_________________________________________________________________________________
@@ -493,7 +491,13 @@ namespace apfel
     const double Hr3m100  = Hr3[12];
     const double Hr3100   = Hr3[14];
 
-    const double CLeq2 =
+    // Deallocate pointers for the harmonic polylogs
+    delete[] Hr4;
+    delete[] Hr3;
+    delete[] Hr2;
+    delete[] Hr1;
+
+    return
       + CF * CA * ( 1729./45. - 98./15.*x - 16./5.*x2 -
                     24./5.*dx + 16.*zeta2*x + 16./5.*zeta2*x3 - 8.*Hr1m1*zeta2
                     - 146./15.*Hr10 + 8./5.*Hr10*x - 16./5.*
@@ -514,13 +518,6 @@ namespace apfel
                     Hr30m10 - 16.*Hr3100 )
       + _nf * CF * ( - 50./9. + 4./3.*x + 4./3.
                      *Hr10 - 4./3.*Hr11 );
-
-    // Deallocate pointers for the harmonic polylogs
-    delete[] Hr4;
-    delete[] Hr3;
-    delete[] Hr2;
-    delete[] Hr1;
-    return CLeq2;
   }
 
   //_________________________________________________________________________________
@@ -547,24 +544,23 @@ namespace apfel
     // Call polylogs
     hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
 
-    const double Hr10  = Hr1[1];
-    const double Hr11  = Hr1[2];
+    const double Hr10 = Hr1[1];
+    const double Hr11 = Hr1[2];
 
-    const double Hr200  = Hr2[4];
-    const double Hr201  = Hr2[7];
-
-    const double cLeqps2 =
-      + CF * ( - 56./3. + 104./3.*x - 8*x2 - 8/x + 8*
-               zeta2 - 16*Hr10 - 16*Hr10*x + 8./3.*Hr10*x2 + 32./
-               3.*Hr10/x + 8*Hr11*x - 8./3.*Hr11*x2 - 16./3.
-               *Hr11/x + 24*Hr200 - 8*Hr201 );
+    const double Hr200 = Hr2[4];
+    const double Hr201 = Hr2[7];
 
     // Deallocate pointers for the harmonic polylogs
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
     delete[] Hr1;
-    return cLeqps2;
+
+    return
+      + CF * ( - 56./3. + 104./3.*x - 8*x2 - 8/x + 8*
+               zeta2 - 16*Hr10 - 16*Hr10*x + 8./3.*Hr10*x2 + 32./
+               3.*Hr10/x + 8*Hr11*x - 8./3.*Hr11*x2 - 16./3.
+               *Hr11/x + 24*Hr200 - 8*Hr201 );
   }
 
   //_________________________________________________________________________________
@@ -603,7 +599,13 @@ namespace apfel
     const double Hr201  = Hr2[7];
     const double Hr211  = Hr2[8];
 
-    const double cLeg2 =
+    // Deallocate pointers for the harmonic polylogs
+    delete[] Hr4;
+    delete[] Hr3;
+    delete[] Hr2;
+    delete[] Hr1;
+
+    return
       + CF * CA * ( - 320./3. - 160./3.*x + 32./3.*x2 +
                     448./3.*dx - 64*zeta2 + 32*zeta2*dx + 112*Hr10 + 32*Hr10*x
                     - 16./3.*Hr10*x2 - 352./3.*Hr10*dx - 144*Hr11
@@ -618,13 +620,6 @@ namespace apfel
                     dx - 32./3.*Hr2m10 + 32./15.*Hr2m10*x3 + 64.
                     /5.*Hr2m10*dx2 + 48*Hr200 - 32./15.*Hr200*
                     x3 - 16*Hr201 );
-
-    // Deallocate pointers for the harmonic polylogs
-    delete[] Hr4;
-    delete[] Hr3;
-    delete[] Hr2;
-    delete[] Hr1;
-    return cLeg2;
   }
 
   //_________________________________________________________________________________

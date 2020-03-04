@@ -125,7 +125,7 @@ namespace apfel
   {
   public:
     C2Vqqbpdf();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -138,7 +138,7 @@ namespace apfel
   {
   public:
     C2pspdf();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -151,7 +151,7 @@ namespace apfel
   {
   public:
     C2qgpdf();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -164,7 +164,7 @@ namespace apfel
   {
   public:
     C2gqpdf(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };

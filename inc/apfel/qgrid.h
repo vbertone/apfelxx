@@ -123,7 +123,7 @@ namespace apfel
      * @param Q: the value of the required interpolation
      * @return the lower and upper bounds of tau
      */
-    std::tuple<int,int,int> SumBounds(double const& Q) const;
+    std::tuple<int, int, int> SumBounds(double const& Q) const;
 
   protected:
     int                                  _nQ;           //!< Number intervals

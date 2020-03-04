@@ -9,8 +9,6 @@
 #include "apfel/messages.h"
 
 #include <array>
-#include <stdexcept>
-#include <algorithm>
 
 namespace apfel
 {
@@ -71,11 +69,6 @@ namespace apfel
       }
     }
   };
-
-  //_________________________________________________________________________
-  Integrator::Integrator()
-  {
-  }
 
   //_________________________________________________________________________
   Integrator::Integrator(std::function<double(double const&)> const& func):
@@ -160,19 +153,19 @@ goto4:
 
     // Sort vector according on how the integration bounds are
     // ordered.
-    const auto sorter = [a,b] (double const& x1, double const& x2)->bool
+    const auto sorter = [a, b] (double const& x1, double const& x2) -> bool
     {
       if (b > a)
         return x1 < x2;
       else
         return x1 > x2;
     };
-    std::sort(bounds.begin(),bounds.end(), sorter);
+    std::sort(bounds.begin(), bounds.end(), sorter);
 
     // Now compute sub-integrals and sum them.
     double dgauss = 0;
     for (int i = 1; i < (int) bounds.size(); i++)
-      dgauss += integrate(bounds[i-1],bounds[i],eps);
+      dgauss += integrate(bounds[i-1], bounds[i], eps);
 
     return dgauss;
   }
@@ -180,7 +173,7 @@ goto4:
   //_________________________________________________________________________
   double Integrator::integrate(double const& a, double const& b, int const& m) const
   {
-    double I  = 0;
+    double I = 0;
     const double k1 = 0.5 * ( b - a );
     const double k2 = k1 + a;
     for (int i = 0; i < (int) gq_x[m].size(); i++)

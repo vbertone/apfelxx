@@ -17,9 +17,6 @@ namespace apfel
   class LagrangeInterpolator: public Interpolator
   {
   public:
-
-    LagrangeInterpolator() = delete;
-
     /**
      * @brief The LagrangeInterpolator constructor.
      * @param gr: the x-space grid object over which interpolation takes place

@@ -5,32 +5,32 @@
 //
 
 #include "apfel/operator.h"
+#include "apfel/lagrangeinterpolator.h"
+#include "apfel/integrator.h"
 #include "apfel/constants.h"
 #include "apfel/messages.h"
-
-#include <stdexcept>
 
 namespace apfel
 {
   //_________________________________________________________________________
   Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
-    Integrator{},
-    LagrangeInterpolator{gr},
-    _grid(gr),
-    _expr(&expr)
+    _grid(gr)
   {
+    // Interpolator object for the interpolating functions
+    const LagrangeInterpolator li{gr};
+
     // Scaling factor
-    _eta = _expr->eta();
+    const double eta = expr.eta();
 
     // Number of grids.
     const int ng = _grid.nGrids();
 
     // Loop over the subgrids.
     _Operator.resize(ng);
-    for (_ig = 0; _ig < ng; _ig++)
+    for (int ig = 0; ig < ng; ig++)
       {
         // Define the global subgrid.
-        const SubGrid& sg = _grid.GetSubGrid(_ig);
+        const SubGrid& sg = _grid.GetSubGrid(ig);
 
         // Get vector with the grid nodes.
         const std::vector<double>& xg = sg.GetGrid();
@@ -45,19 +45,19 @@ namespace apfel
         // external.
         const int gbound = ( sg.IsExternal() ? nx : 0 );
 
-        _Operator[_ig].resize(gbound + 1, nx + 1, 0);
+        _Operator[ig].resize(gbound + 1, nx + 1, 0);
         for (int beta = 0; beta <= gbound; beta++)
           {
-            _xbeta = xg[beta];
+            const double xbeta = xg[beta];
             // Local function. Can be computed outside the 'alpha'
             // loop.
-            const double L   = _eta * _expr->Local(_xbeta / xg[beta+1] / _eta);
-            const double lxe = log(_xbeta / _eta);
-            for (_alpha = beta; _alpha <= nx; _alpha++)
+            const double L   = eta * expr.Local(xbeta / xg[beta+1] / eta);
+            const double lxe = log(xbeta / eta);
+            for (int alpha = beta; alpha <= nx; alpha++)
               {
                 // Weight of the subtraction term (it is a delta if
-                // _eta = 1).
-                _ws = Interpolant(_alpha, lxe, sg);
+                // eta = 1).
+                const double ws = li.Interpolant(alpha, lxe, sg);
 
                 // Given that the interpolation functions have
                 // discontinuos derivative on the nodes and are
@@ -68,8 +68,8 @@ namespace apfel
                 // integration converges faster.
 
                 // Number of grid intervals we need to integrate over.
-                const int nmax = fmin(id, _alpha - beta) + 1;
-                const int nmin = fmax(0, _alpha + 1 - nx);
+                const int nmax = fmin(id, alpha - beta) + 1;
+                const int nmin = fmax(0, alpha + 1 - nx);
 
                 // Integral.
                 double I = 0;
@@ -77,27 +77,29 @@ namespace apfel
                   {
                     // Define integration bounds of the first
                     // iteration.
-                    const double c = _xbeta / xg[_alpha-jint+1];
-                    const double d = _xbeta / xg[_alpha-jint];
+                    const double c = xbeta / xg[alpha-jint+1];
+                    const double d = xbeta / xg[alpha-jint];
+
+                    // Define integrand and the corresponding
+                    // "Integrator" object.
+                    const auto integrand = [&] (double const& x) -> double
+                    {
+                      const double z = x / eta;
+                      if (z >= 1)
+                        return 0;
+                      const double wr = li.Interpolant(alpha, log(xbeta / x), _grid.GetSubGrid(ig));
+                      return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
+                    };
+                    const Integrator Io{integrand};
 
                     // Compute the integral.
-                    I += integrate(c, d, eps);
+                    I += Io.integrate(c, d, eps);
                   }
                 // Add the local part.
-                _Operator[_ig](beta,_alpha) = I + L * _ws;
+                _Operator[ig](beta, alpha) = I + L * ws;
               }
           }
       }
-  }
-
-  //_________________________________________________________________________
-  double Operator::integrand(double const& x) const
-  {
-    const double z = x / _eta;
-    if (z >= 1)
-      return 0;
-    const double wr = Interpolant(_alpha, log(_xbeta / x), _grid.GetSubGrid(_ig));
-    return _expr->Regular(z) * wr + _expr->Singular(z) * ( wr - _ws );
   }
 
   //_________________________________________________________________________
@@ -236,7 +238,7 @@ namespace apfel
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       {
         // Get ig-th subgrid
-        const auto& sg = _grid.GetSubGrid(ig).GetGrid();
+        const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
         for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
           for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
             _Operator[ig](alpha,beta) *= f(sg[alpha]);

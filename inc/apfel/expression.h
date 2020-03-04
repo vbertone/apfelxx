@@ -22,16 +22,11 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The default constructor
-     */
-    Expression();
-
-    /**
      * @brief The constructor in the presence of a phase-space
-     * reduction given by eta < 1.
-     * @param eta: upper limit of the convolution integral
+     * reduction given by eta.
+     * @param eta: upper limit of the convolution integral (default: 1)
      */
-    Expression(double const& eta);
+    Expression(double const& eta = 1);
     ///@}
 
     /**

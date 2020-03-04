@@ -39,7 +39,7 @@ namespace apfel
   {
   public:
     Cm021gNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -50,7 +50,7 @@ namespace apfel
   {
   public:
     Cm021gNC_l();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -61,7 +61,7 @@ namespace apfel
   {
   public:
     Cm0L1gNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
   ///@}
 
@@ -117,7 +117,7 @@ namespace apfel
   {
   public:
     Cm0L2nsNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -128,7 +128,7 @@ namespace apfel
   {
   public:
     Cm0L2nsNC_l();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -139,7 +139,7 @@ namespace apfel
   {
   public:
     Cm022psNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -150,7 +150,7 @@ namespace apfel
   {
   public:
     Cm022psNC_l();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -161,7 +161,7 @@ namespace apfel
   {
   public:
     Cm022psNC_l2();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -172,7 +172,7 @@ namespace apfel
   {
   public:
     Cm022psNC_f();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -183,7 +183,7 @@ namespace apfel
   {
   public:
     Cm022psNC_lf();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -194,7 +194,7 @@ namespace apfel
   {
   public:
     Cm0L2psNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -205,7 +205,7 @@ namespace apfel
   {
   public:
     Cm0L2psNC_l();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -216,7 +216,7 @@ namespace apfel
   {
   public:
     Cm0L2psNC_f();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -227,7 +227,7 @@ namespace apfel
   {
   public:
     Cm022gNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -238,7 +238,7 @@ namespace apfel
   {
   public:
     Cm022gNC_l();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -249,7 +249,7 @@ namespace apfel
   {
   public:
     Cm022gNC_l2();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -260,7 +260,7 @@ namespace apfel
   {
   public:
     Cm022gNC_f();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -271,7 +271,7 @@ namespace apfel
   {
   public:
     Cm022gNC_lf();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -282,7 +282,7 @@ namespace apfel
   {
   public:
     Cm0L2gNC_c();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -293,7 +293,7 @@ namespace apfel
   {
   public:
     Cm0L2gNC_l();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -304,7 +304,7 @@ namespace apfel
   {
   public:
     Cm0L2gNC_f();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
   ///@}
   ///@}

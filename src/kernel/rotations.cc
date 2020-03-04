@@ -20,10 +20,10 @@ namespace apfel
   };
 
   //_____________________________________________________________________________
-  std::map<int,double> PhysToQCDEv(std::map<int,double> const& InPhysMap)
+  std::map<int, double> PhysToQCDEv(std::map<int, double> const& InPhysMap)
   {
     // Call function in the physical basis.
-    std::map<int,double> PhysMap = InPhysMap;
+    std::map<int, double> PhysMap = InPhysMap;
 
     // Fill in keys that don't exist.
     // Gluon (assumes that the ID is 21).
@@ -108,11 +108,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int,double> QCDEvToPhys(std::map<int,double> const& QCDEvMap)
+  std::map<int, double> QCDEvToPhys(std::map<int, double> const& QCDEvMap)
   {
     // Fill in map in the physical basis. It attumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
-    std::map<int,double> PhysMap;
+    std::map<int, double> PhysMap;
     PhysMap[0]  = QCDEvMap.at(0);
     PhysMap[21] = QCDEvMap.at(0);
 
@@ -131,13 +131,13 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int,Distribution> QCDEvToPhys(std::map<int,Distribution> const& QCDEvMap)
+  std::map<int, Distribution> QCDEvToPhys(std::map<int, Distribution> const& QCDEvMap)
   {
     // Fill in map in the physical basis. It attumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int,Distribution> PhysMap;
-    PhysMap.insert({0,QCDEvMap.at(0)});
-    PhysMap.insert({0,QCDEvMap.at(0)});
+    PhysMap.insert({0, QCDEvMap.at(0)});
+    PhysMap.insert({0, QCDEvMap.at(0)});
 
     // Perform the rotation.
     for (int i = 1; i <= 6; i++)
@@ -149,8 +149,8 @@ namespace apfel
             Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
             Vd += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
           }
-        PhysMap.insert({i,Td});
-        PhysMap.insert({-i,Vd});
+        PhysMap.insert({i, Td});
+        PhysMap.insert({-i, Vd});
       }
     return PhysMap;
   }

@@ -8,14 +8,16 @@
 #include "apfel/constants.h"
 #include "apfel/messages.h"
 
-#include <stdexcept>
-
 namespace apfel
 {
   //_________________________________________________________________________________
   SubGrid::SubGrid():
+    _nx(2),
+    _InterDegree(1),
     _IsExternal(false),
-    _xMax(1)
+    _xMin(0),
+    _xMax(1),
+    _Step(0)
   {
   }
 
@@ -35,7 +37,7 @@ namespace apfel
     _xsg.resize(_nx+_InterDegree+1, 0);
 
     _xsg[0] = _xMin;
-    double const exps = exp(_Step);
+    const double exps = exp(_Step);
     for (int ix = 1; ix < (int) _xsg.size(); ix++)
       _xsg[ix] = _xsg[ix-1] * exps;
     _xsg[_nx] = 1;
@@ -66,8 +68,8 @@ namespace apfel
 
     // Extend the grid for x > 1 for interpolation reasons using the
     // same width of the last bin in log scale.
-    double const step = - log( xsg[_nx-1] );
-    double const exps = exp(step);
+    const double step = - log( xsg[_nx-1] );
+    const double exps = exp(step);
     for (int ix = _nx; ix < (int) _xsg.size(); ix++)
       _xsg[ix] = _xsg[ix-1] * exps;
 
@@ -127,7 +129,7 @@ namespace apfel
     os << "IsExternal  = " << sg._IsExternal << "\n";
     os << "Step        = " << sg._Step << "\n";
     os << "xsg         = ";
-    for (const auto& v: sg._xsg)
+    for (auto const& v: sg._xsg)
       os << v << " ";
     os << "\n\n";
     return os;

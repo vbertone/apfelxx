@@ -18,8 +18,7 @@ namespace apfel
   double Cm021gNC_c::Regular(double const& x) const
   {
     const double x2 = x * x;
-    const double cm021gc = TR * ( ( 4 - 8 * x + 8 * x2 ) * log( ( 1 - x ) / x ) - 4 + 32 * x - 32 * x2 );
-    return cm021gc;
+    return TR * ( ( 4 - 8 * x + 8 * x2 ) * log( ( 1 - x ) / x ) - 4 + 32 * x - 32 * x2 );
   }
 
   //_________________________________________________________________________________
@@ -30,8 +29,7 @@ namespace apfel
   double Cm021gNC_l::Regular(double const& x) const
   {
     const double x2 = x * x;
-    const double cm021gl =  TR * ( 4 - 8 * x + 8 * x2 );
-    return cm021gl;
+    return TR * ( 4 - 8 * x + 8 * x2 );
   }
 
   //_________________________________________________________________________________
@@ -41,8 +39,7 @@ namespace apfel
   }
   double Cm0L1gNC_c::Regular(double const& x) const
   {
-    const double cm0l1gc = TR * 16 * x * ( 1 - x );
-    return cm0l1gc;
+    return TR * 16 * x * ( 1 - x );
   }
 
   //_________________________________________________________________________________
@@ -61,25 +58,22 @@ namespace apfel
     const double a2 = ( 1 + 13 * x ) * dlm - ( 3 + 23 * x ) * dlx + 29. / 6 - 295 * x / 6
                       + ( 1 + x2 ) * ( - 4 * spx - 8 * dlx * dlm + 6 * dlx2 + 67 * dlx / 3) / ( 1 - x );
     const double b2 = ( - 1 - x ) * ( - 4 * zeta2 + 2 * dlm2 - 29 * dlm / 3 + 359. / 18 );
-    const double cm022nscr = 2 * CF * TR * ( a2 + b2 ) / 3;
-    return cm022nscr;
+    return 2 * CF * TR * ( a2 + b2 ) / 3;
   }
   double Cm022nsNC_c::Singular(double const& x) const
   {
     const double dlm  = log( 1 - x );
     const double dlm2 = dlm * dlm;
     const double z    = 2 / ( 1 - x );
-    const double cm022nscs = z * 2 * CF * TR * ( - 4 * zeta2 + 2 * dlm2 - 29 * dlm / 3 + 359. / 18 ) / 3;
-    return cm022nscs;
+    return z * 2 * CF * TR * ( - 4 * zeta2 + 2 * dlm2 - 29 * dlm / 3 + 359. / 18 ) / 3;
   }
   double Cm022nsNC_c::Local(double const& x) const
   {
     const double dlm  = log( 1 - x );
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm2 * dlm;
-    const double cm022nscl = 4 * CF * TR * ( - 4 * zeta2 * dlm + 2 * dlm3 / 3 - 29 * dlm2 / 6 + 359 * dlm / 18 ) / 3
-                             + CF * TR * ( 268 * zeta2 / 9 + 265. / 9 );
-    return cm022nscl;
+    return 4 * CF * TR * ( - 4 * zeta2 * dlm + 2 * dlm3 / 3 - 29 * dlm2 / 6 + 359 * dlm / 18 ) / 3
+           + CF * TR * ( 268 * zeta2 / 9 + 265. / 9 );
   }
 
   //_________________________________________________________________________________
@@ -93,22 +87,19 @@ namespace apfel
     const double dlx = log(x);
     const double dlm = log(1-x);
     const double a1  = ( -8 * ( 1 + x2 ) * dlx / ( 1 - x ) + 13 * x + 1 ) + ( - 1 - x ) * ( 4 * dlm - 29. / 3 );
-    const double cm022nslr = 2 * CF * TR * a1 / 3;
-    return cm022nslr;
+    return 2 * CF * TR * a1 / 3;
   }
   double Cm022nsNC_l::Singular(double const& x) const
   {
     const double dlm = log( 1 - x );
     const double z   = 2 / ( 1 - x );
-    const double cm022nsls = z * 2 * CF * TR * ( 4 * dlm - 29. / 3 ) / 3;
-    return cm022nsls;
+    return z * 2 * CF * TR * ( 4 * dlm - 29. / 3 ) / 3;
   }
   double Cm022nsNC_l::Local(double const& x) const
   {
     const double dlm  = log( 1 - x );
     const double dlm2 = dlm * dlm;
-    const double cm022nsll = 4 * CF * TR * ( 2 * dlm2 - 29 * dlm / 3 ) / 3 - CF * TR * ( 32 * zeta2 / 3 + 38. / 3 );
-    return cm022nsll;
+    return 4 * CF * TR * ( 2 * dlm2 - 29 * dlm / 3 ) / 3 - CF * TR * ( 32 * zeta2 / 3 + 38. / 3 );
   }
 
   //_________________________________________________________________________________
@@ -119,20 +110,17 @@ namespace apfel
   double Cm022nsNC_l2::Regular(double const& x) const
   {
     const double b1 = 2 * ( - 1 - x );
-    const double cm022nsl2r = 2 * CF * TR * b1 / 3;
-    return cm022nsl2r;
+    return 2 * CF * TR * b1 / 3;
   }
   double Cm022nsNC_l2::Singular(double const& x) const
   {
     const double z = 2 / ( 1 - x );
-    const double cm022nsl2s = z * 4 * CF * TR / 3;
-    return cm022nsl2s;
+    return z * 4 * CF * TR / 3;
   }
   double Cm022nsNC_l2::Local(double const& x) const
   {
     const double dlm = log( 1 - x );
-    const double cm022nsl2l = 8 * CF * TR * dlm / 3 + 2 * CF * TR;
-    return cm022nsl2l;
+    return 8 * CF * TR * dlm / 3 + 2 * CF * TR;
   }
 
   //_________________________________________________________________________________
@@ -142,8 +130,7 @@ namespace apfel
   }
   double Cm0L2nsNC_c::Regular(double const& x) const
   {
-    const double cm0l2nsc = 16 * CF * TR * ( x * log( 1 - x ) - 2 * x * log(x) - 25 * x / 6 + 1 ) / 3;
-    return cm0l2nsc;
+    return 16 * CF * TR * ( x * log( 1 - x ) - 2 * x * log(x) - 25 * x / 6 + 1 ) / 3;
   }
 
   //_________________________________________________________________________________
@@ -153,8 +140,7 @@ namespace apfel
   }
   double Cm0L2nsNC_l::Regular(double const& x) const
   {
-    const double cm0l2nsl = 16 * CF * TR * x / 3;
-    return cm0l2nsl;
+    return 16 * CF * TR * x / 3;
   }
 
   //_________________________________________________________________________________
@@ -184,8 +170,7 @@ namespace apfel
                         + ( 16 - 16 * x + 64 / x / 3 + 32 * x2 / 3 ) * s11
                         + ( - 32 - 32 * x2 / 3 - 32 * x - 32 / x / 3 ) * ( s11m + dlx * dlp )
                         + 304. / 9 + 832 * x2 / 9 - 1216 * x / 9 + 80 / x / 9;
-    const double c2ps2am0_a0 = CF * TR * a3;
-    return c2ps2am0_a0;
+    return CF * TR * a3;
   }
 
   //_________________________________________________________________________________
@@ -203,8 +188,7 @@ namespace apfel
     const double a2   = - 64 * x2 / 9 + 160 * x / 3 - 208. / 3 + 208 / x / 9 + 32 * x2 * dlx
                         + 16 * ( 1 + x ) * ( - dlx2 + dlx * dlm + s11 )
                         + ( - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 ) * dlm;
-    double const c2ps2am0_aq = CF * TR * a2;
-    return c2ps2am0_aq;
+    return CF * TR * a2;
   }
 
   //_________________________________________________________________________________
@@ -217,8 +201,7 @@ namespace apfel
     const double x2  = x * x;
     const double dlx = log(x);
     const double a1  = - 16 * x2 / 3 - 4 * x + 4 + 16 / x / 3 + 8 * ( 1 + x ) * dlx;
-    const double c2ps2am0_aq2 = CF * TR * a1;
-    return c2ps2am0_aq2;
+    return CF * TR * a1;
   }
 
   //_________________________________________________________________________________
@@ -237,8 +220,7 @@ namespace apfel
                         + 8 * ( 1 + x ) * ( - dlx2 + 2 * dlx * dlm + 2 * spx )
                         + ( - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 ) * dlm
                         + ( 32 * x2 / 3 - 40 * x - 8 ) * dlx;
-    const double c2ps2am0_af = CF * TR * c2;
-    return c2ps2am0_af;
+    return CF * TR * c2;
   }
 
   //_________________________________________________________________________________
@@ -251,8 +233,7 @@ namespace apfel
     const double x2  = x * x;
     const double dlx = log(x);
     const double c1  = - 32 * x2 / 3 - 8 * x + 8 + 32 / x / 3 + 16 * ( 1 + x ) * dlx;
-    const double c2ps2am0_aqf = CF * TR * c1;
-    return c2ps2am0_aqf;
+    return CF * TR * c1;
   }
 
   //_________________________________________________________________________________
@@ -271,8 +252,7 @@ namespace apfel
                         + ( - 32 + 64 * x2 / 3 + 32 / x / 3 ) * dlm
                         + ( 32 - 64 * x2 - 32 * x ) * dlx + 32. / 3
                         + 320 * x2 / 9 - 128 * x / 3 - 32 / x / 9;
-    const double clps2am0_a0 = CF * TR * a2;
-    return clps2am0_a0;
+    return CF * TR * a2;
   }
 
   //_________________________________________________________________________________
@@ -285,8 +265,7 @@ namespace apfel
     const double x2   = x * x;
     const double dlx = log(x);
     const double a1  = - 32 * x * dlx - 32 + 64 * x2 / 3 + 32 / x / 3;
-    const double clps2am0_aq = CF * TR * a1;
-    return clps2am0_aq;
+    return CF * TR * a1;
   }
 
   //_________________________________________________________________________________
@@ -299,8 +278,7 @@ namespace apfel
     const double x2   = x * x;
     const double dlx = log(x);
     const double a1  = - 32 * x * dlx - 32 + 64 * x2 / 3 + 32 / x / 3;
-    const double clps2am0_af = CF * TR * a1;
-    return clps2am0_af;
+    return CF * TR * a1;
   }
 
   //_________________________________________________________________________________
@@ -392,8 +370,7 @@ namespace apfel
                        s12mx * ( - 64 - 64 * x2 - 128 * x ) -
                        904. / 15 + 328 * x2 / 5 + 68 * x / 5;
     const double b3 = b31 + b32 + b33 + b34;
-    const double c2g2am0_a0 = TR * ( CA * a3 + CF * b3 );
-    return c2g2am0_a0;
+    return TR * ( CA * a3 + CF * b3 );
   }
 
   //_________________________________________________________________________________
@@ -421,8 +398,7 @@ namespace apfel
                           + ( 32 * x2 - 32 * x + 16 ) * dlm2 + ( 32 * x2 - 16 * x + 8 ) * dlx2
                           + ( - 80 * x2 + 96 * x - 28 ) * dlm + ( 80 * x2 - 48 * x + 8 ) * dlx
                           + ( - 64 * x2 + 48 * x - 24 ) * dlx * dlm + ( 8 - 16 * x ) * s111mx;
-    const double c2g2am0_aq = TR * (  CA * a2 + CF * b2 );
-    return c2g2am0_aq;
+    return TR * (  CA * a2 + CF * b2 );
   }
 
   //_________________________________________________________________________________
@@ -439,8 +415,7 @@ namespace apfel
                        + ( 16 * x2 - 16 * x + 8 ) * dlm + ( 32 * x + 8 ) * dlx;
     const double b1  = - 2 + 8 * x + ( 16 * x2 - 16 * x + 8 ) * dlm
                        + ( - 16 * x2 + 8 * x - 4 ) * dlx;
-    const double c2g2am0_aq2 = TR * ( CA * a1 + CF * b1 );
-    return c2g2am0_aq2;
+    return TR * ( CA * a1 + CF * b1 );
   }
 
   //_________________________________________________________________________________
@@ -462,8 +437,7 @@ namespace apfel
                         + ( 248 * x2 / 3 - 256 * x - 8 ) * dlx
                         + ( 32 / x / 3 - 8 + 192 * x - 632 * x2 / 3 ) * dlm
                         + ( 96 * x - 32 * x2 ) * dlx * dlm + ( 64 * x + 16 ) * s11;
-    const double c2g2am0_af = TR * CA * c2;
-    return c2g2am0_af;
+    return TR * CA * c2;
   }
 
   //_________________________________________________________________________________
@@ -478,8 +452,7 @@ namespace apfel
     const double dlm = log(1-x);
     const double c1  = - 248 * x2 / 3 + 64 * x + 8 + 32 / x / 3
                        + ( 32 * x2 - 32 * x + 16 ) * dlm + ( 64 * x + 16 ) * dlx;
-    const double c2g2am0_aqf = TR * CA * c1;
-    return c2g2am0_aqf;
+    return TR * CA * c1;
   }
 
   //_________________________________________________________________________________
@@ -510,8 +483,7 @@ namespace apfel
                         + ( 16 - 64 * x2 + 48 * x ) * dlm + ( 128 * x3 / 5 - 64 * x / 3 ) * zeta2
                         + ( 128 * x3 / 5 - 64 * x / 3 + 64 / x2 / 15 ) * ( s11m + dlx * dlp )
                         - 256. / 15 + 672 * x2 / 5 - 608 * x / 5 + 64 / x / 15;
-    const double clg2am0_a0 = TR * ( CA * a2 + CF * b2 );
-    return clg2am0_a0;
+    return TR * ( CA * a2 + CF * b2 );
   }
 
   //_________________________________________________________________________________
@@ -526,8 +498,7 @@ namespace apfel
     const double dlm = log(1-x);
     const double a1  = 64 * x * ( 1 - x ) * dlm - 128 * x * dlx - 32 - 160 * x + 544 * x2 / 3 + 32 / x / 3;
     const double b1  = 32 * x * dlx + 16 * ( 1 - 2 * x2 + x );
-    const double clg2am0_aq = TR * ( CA * a1 + CF * b1 );
-    return clg2am0_aq;
+    return TR * ( CA * a1 + CF * b1 );
   }
 
   //_________________________________________________________________________________
@@ -541,7 +512,6 @@ namespace apfel
     const double dlx = log(x);
     const double dlm = log(1-x);
     const double c1  = 64 * x * ( 1 - x ) * dlm - 128 * x * dlx - 32 - 160 * x + 544 * x2 / 3 + 32 / x / 3;
-    const double clg2am0_af = TR * CA * c1;
-    return clg2am0_af;
+    return TR * CA * c1;
   }
 }

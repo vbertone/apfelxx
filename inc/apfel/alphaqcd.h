@@ -8,8 +8,6 @@
 
 #include "apfel/matchedevolution.h"
 
-#include <functional>
-
 namespace apfel
 {
   /**
@@ -83,8 +81,8 @@ namespace apfel
     double betaQCD(int const& pt, int const& nf) const;
 
   private:
-    int                                                      const _pt;                    //!< Perturbative order
-    std::function<double(bool const&, int const&, double const&)>  _MatchingConditions;    //!< Matching condition functions
-    std::function<double(int const&, double const&)>               _BetaFunction;          //!< Beta function
+    int                                                           const _pt;                    //!< Perturbative order
+    std::function<double(bool const&, int const&, double const&)>       _MatchingConditions;    //!< Matching condition functions
+    std::function<double(int const&, double const&)>                    _BetaFunction;          //!< Beta function
   };
 }

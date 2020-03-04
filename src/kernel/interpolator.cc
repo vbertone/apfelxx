@@ -19,8 +19,8 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Evaluate(double const& x) const
   {
-    const auto   bounds = SumBounds(x, _grid.GetJointGrid());
-    const double lnx    = log(x);
+    const auto bounds = SumBounds(x, _grid.GetJointGrid());
+    const double lnx  = log(x);
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
@@ -31,8 +31,8 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Evaluate(double const& x, int const& ig) const
   {
-    const auto   bounds = SumBounds(x, _grid.GetSubGrid(ig));
-    const double lnx    = log(x);
+    const auto bounds = SumBounds(x, _grid.GetSubGrid(ig));
+    const double lnx  = log(x);
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)

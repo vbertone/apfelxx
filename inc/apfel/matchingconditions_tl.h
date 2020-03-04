@@ -30,7 +30,7 @@ namespace apfel
   {
   public:
     ATS1Hg_0();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -42,7 +42,7 @@ namespace apfel
   {
   public:
     ATS1Hg_L();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -54,7 +54,7 @@ namespace apfel
   {
   public:
     ATS1ggH_L();
-    double Local(double const& x)  const;
+    double Local(double const& x) const;
   };
   ///@}
 }

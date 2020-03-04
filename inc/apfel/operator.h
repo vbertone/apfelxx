@@ -9,8 +9,6 @@
 #include "apfel/grid.h"
 #include "apfel/expression.h"
 #include "apfel/distribution.h"
-#include "apfel/integrator.h"
-#include "apfel/lagrangeinterpolator.h"
 #include "apfel/matrix.h"
 
 namespace apfel
@@ -18,10 +16,10 @@ namespace apfel
   /**
    * @brief The Operator class defines the basic object "Operator"
    * which is essentially the convolution on the grid bewteen an
-   * Expression object (e.g. a splitting function) and the inetrpolant
+   * Expression object (e.g. a splitting function) and the interpolant
    * functions.
    */
-  class Operator: protected Integrator, protected LagrangeInterpolator
+  class Operator
   {
   public:
 
@@ -54,23 +52,9 @@ namespace apfel
      */
     Grid const& GetGrid() const { return _grid; }
 
-  protected:
-    /**
-     * @see Integrator::integrand
-     */
-    double integrand(double const& x) const;
-
   private:
     Grid                        const& _grid;         //!< Grid on which to compute the operator
-    Expression                  const* _expr;         //!< Expression to be commuted into an operator
     std::vector<matrix<double>>        _Operator;     //!< Operator values.
-
-    // Global variables
-    int    _alpha;
-    int    _ig;
-    double _ws;
-    double _xbeta;
-    double _eta;
   };
 
   /**

@@ -107,7 +107,7 @@ namespace apfel
   {
   public:
     C2Vqqbff();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -120,7 +120,7 @@ namespace apfel
   {
   public:
     C2psff();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -133,7 +133,7 @@ namespace apfel
   {
   public:
     C2qgff();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -146,7 +146,7 @@ namespace apfel
   {
   public:
     C2gqff(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };

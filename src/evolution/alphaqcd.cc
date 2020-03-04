@@ -9,8 +9,6 @@
 #include "apfel/betaqcd.h"
 #include "apfel/messages.h"
 
-#include <stdexcept>
-
 namespace apfel
 {
   //_________________________________________________________________________________
@@ -20,7 +18,7 @@ namespace apfel
                      std::vector<double> const& Thresholds,
                      int                 const& pt,
                      int                 const& nstep):
-    MatchedEvolution(AlphaRef, MuRef, Thresholds, nstep),
+    MatchedEvolution{AlphaRef, MuRef, Thresholds, nstep},
     _pt(pt)
   {
     // Compute logs of muth2 / m2 needed by the matching conditions.
@@ -44,9 +42,9 @@ namespace apfel
     };
 
     // Matching condition lambda function.
-    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup)-> double
+    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
     {
-      const int sgn     = ( Up ? 1 : -1);
+      const int    sgn  = (Up ? 1 : -1);
       const double ep   = Coup / FourPi;
       const double c[4] = {1, sgn * 2. / 3. * LogKth[nf], 4. / 9. * pow(LogKth[nf],2) + sgn *  38. / 3. * LogKth[nf] + sgn * 14. / 3., 0};
       double match = 0, powep = 1;
@@ -61,7 +59,7 @@ namespace apfel
 
   //_________________________________________________________________________________
   AlphaQCD::AlphaQCD(double const& AlphaRef, double const& MuRef, std::vector<double> const& Masses, int const& pt, int const& nstep):
-    AlphaQCD(AlphaRef, MuRef, Masses, Masses, pt, nstep)
+    AlphaQCD{AlphaRef, MuRef, Masses, Masses, pt, nstep}
   {
   }
 
@@ -90,8 +88,8 @@ namespace apfel
     else if (pt == 3)
       res = beta3qcd(nf);
     else
-      throw std::runtime_error(error("AlphaQCD::betaQCD","perturbive order out of range."));
+      throw std::runtime_error(error("AlphaQCD::betaQCD", "perturbive order out of range."));
 
-    return res / pow(FourPi,pt+1);
+    return res / pow(FourPi, pt + 1);
   }
 }

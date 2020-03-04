@@ -121,7 +121,7 @@ namespace apfel
      * @brief This function interpolates in x and Q and returns a
      * map. It is used for T = Set<Distribution>.
      */
-    std::map<int,double> EvaluateMapxQ(double const& x, double const& Q) const;
+    std::map<int, double> EvaluateMapxQ(double const& x, double const& Q) const;
     ///@}
   };
 }

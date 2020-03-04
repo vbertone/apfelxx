@@ -96,8 +96,7 @@ namespace apfel
                         + lnx2 * ( 1 + x ) / 2 - lnx * ( 3.5 + 3 * x / 2 ) )
       + 4 * CF * ( CF - CA / 2 ) * ( 2 * pqqmx * S2x + 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) );
     const double gqq1l = _a2 / ( 1 - x );
-    const double x1nspa = gqq1 - gqq1l;
-    return x1nspa;
+    return gqq1 - gqq1l;
   }
   double P1Tnsp::Singular(double const& x) const
   {
@@ -108,8 +107,7 @@ namespace apfel
     const double p1delta =
       - 1 / 3. * CF * _nf + 3 / 2. * CF * CF + 17 / 6. * CA * CF + 24 * zeta3 * CF * CF - 12 * zeta3 * CA * CF
       - 8 / 3. * zeta2 * CF * _nf - 12 * zeta2 * CF * CF + 44 / 3. * zeta2 * CA * CF;
-    const double x1nsc = log(1-x) * _a2 + p1delta;
-    return x1nsc;
+    return log(1-x) * _a2 + p1delta;
   }
 
   //_________________________________________________________________________________
@@ -133,8 +131,7 @@ namespace apfel
                         + lnx2 * ( 1 + x ) / 2 - lnx * ( 3.5 + 3 * x / 2 ) )
       - 4 * CF * ( CF - CA / 2 ) * ( 2 * pqqmx * S2x + 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) );
     const double gqq1l = _a2 / ( 1 - x );
-    const double x1nsma = gqq1 - gqq1l;
-    return x1nsma;
+    return gqq1 - gqq1l;
   }
 
   //_________________________________________________________________________________
@@ -147,11 +144,10 @@ namespace apfel
   {
     const double lnx  = log(x);
     const double lnx2 = lnx * lnx;
-    const double x1psa =
+    return
       _nf * CF * ( - 32 + 16 * x + 224 * x * x / 9 - 80 / 9. / x
                    - ( 20 + 36 * x ) * lnx - 32 * x * x * lnx / 3
                    + ( 4 + 4 * x ) * lnx2 );
-    return x1psa;
   }
 
   //_________________________________________________________________________________
@@ -170,14 +166,13 @@ namespace apfel
     const double pgqmx  = - ( 1 + ( 1 + x ) * ( 1 + x ) ) / x;
     const double S1x    = - dilog(1-x);
     const double S2x    = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-    const double x1qga  =
+    return
       2 * _nf * ( 4 * CF * CF * ( - 1. / 2 + 9 * x / 2 + ( - 8 + x / 2 ) * lnx + 2 * x * ln1mx + ( 1 - x / 2 ) * lnx2
                                   + ( ln1mx2 + 4 * lnx * ln1mx - 8 * S1x - 4 * Pi2 / 3 ) * pgq )
                   + 4 * CF * CA * ( 62. / 9 - 35 * x / 18 - 44 * x * x / 9 + ( 2 + 12 * x + 8 * x * x / 3 ) * lnx
                                     - 2 * x * ln1mx - ( 4 + x ) * lnx2 + pgqmx * S2x
                                     + ( - 2 * lnx * ln1mx - 3 * lnx - 3 * lnx2 / 2 - ln1mx2
                                         + 8 * S1x + 7 * Pi2 / 6 + 17. / 18 ) * pgq ) );
-    return x1qga;
   }
 
   //_________________________________________________________________________________
@@ -196,7 +191,7 @@ namespace apfel
     const double pqgmx  = x * x + ( 1 + x ) * ( 1 + x );
     const double S1x    = - dilog(1-x);
     const double S2x    = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-    const double x1gqa  =
+    return
       + _nf * ( - 8. / 6 - ( 16. / 18 + 8 * lnx / 6 + 8 * ln1mx / 6 ) * pqg )
       + CF * ( - 2 + 3 * x + ( - 7 + 8 * x ) * lnx - 4 * ln1mx + ( 1 - 2 * x ) * lnx2
                + ( - 2 * pow(lnx + ln1mx, 2) - 2 * ( ln1mx - lnx ) + 16 * S1x + 2 * Pi2 - 10 ) * pqg )
@@ -205,7 +200,6 @@ namespace apfel
                + ( 8 * lnx * ln1mx - lnx2 - 4 * lnx / 3 + 10 * ln1mx / 3
                    + 2 * ln1mx2 - 16 * S1x - 7 * Pi2 / 3 + 178. / 9 ) * pqg
                + 2 * pqgmx * S2x );
-    return x1gqa;
   }
 
   //_________________________________________________________________________________
@@ -235,8 +229,7 @@ namespace apfel
                         + ( 4 * lnx * ln1mx - 3 * lnx2 + 22 * lnx / 3
                             - 2 * zeta2 + 67. / 9 ) * pgg + 2 * pggmx * S2x );
     const double ggg1l = _a2g / ( 1 - x );
-    const double x1gga = ggg1 - ggg1l;
-    return x1gga;
+    return ggg1 - ggg1l;
   }
   double P1Tgg::Singular(double const& x) const
   {
@@ -245,8 +238,7 @@ namespace apfel
   double P1Tgg::Local(double const& x) const
   {
     const double p1delta = ( - 2 * CF - 8 / 3. * CA ) * _nf + ( 32 / 3. + 12 * zeta3 ) * CA * CA;
-    const double x1ggc = log(1-x) * _a2g + p1delta;
-    return x1ggc;
+    return log(1-x) * _a2g + p1delta;
   }
 
   /**
@@ -268,7 +260,7 @@ namespace apfel
     const double dl_4   = dl_3 * dl;
     const double dl1    = log(1-x);
     const double d81    = 1. / 81.;
-    const double p2nspa =
+    return
       1658.7 - 707.67 * dl1 + 1327.5 * dl - 56.907 * dl * dl1
       - 189.37 * dl_2 - 519.37 * dl1 * dl_2 - 352. / 9. * dl_3
       + 128. / 81.* dl_4 - 4249.4 * x - 559.1 * dl1 * dl * x
@@ -279,21 +271,18 @@ namespace apfel
                 - 39.113 * x * dl + 85.72 * x * dl * dl1 - 23.102 * x * dl_2 * dl1 )
       + _nf * _nf * ( 32.* x * dl / ( 1 - x ) * ( 3. * dl + 10. ) + 64.
                       + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1 - x ) ) * d81;
-    return p2nspa;
   }
   double P2Tnsp::Singular(double const& x) const
   {
-    const double p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1 - x );
-    return p2nsb;
+    return ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1 - x );
   }
   double P2Tnsp::Local(double const& x) const
   {
-    const double dl1    = log(1-x);
-    const double p2nspc =
+    const double dl1 = log(1-x);
+    return
       1174.898 * dl1 + 1295.624 + 0.001
       - _nf * ( 183.187 * dl1 + 173.938 - 0.003)
       + _nf * _nf * ( - 64. / 81. * dl1 + 1.13067 );
-    return p2nspc;
   }
 
   //_________________________________________________________________________________
@@ -304,15 +293,15 @@ namespace apfel
   }
   double P2Tnsm::Regular(double const& x) const
   {
-    const double x_2    = x * x;
-    const double x_3    = x_2 * x;
-    const double dl     = log(x);
-    const double dl_2   = dl * dl;
-    const double dl_3   = dl_2 * dl;
-    const double dl_4   = dl_3 * dl;
-    const double dl1    = log(1-x);
-    const double d81    = 1. / 81.;
-    const double p2nsma =
+    const double x_2  = x * x;
+    const double x_3  = x_2 * x;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double dl_3 = dl_2 * dl;
+    const double dl_4 = dl_3 * dl;
+    const double dl1  = log(1-x);
+    const double d81  = 1. / 81.;
+    return
       - 140. / 81.* dl_4 - 1024. / 27. * dl_3
       - 38.298 * dl_2 + 1625.5 * dl - 707.94 * dl1 + 1981.3
       - 4885.7 * x - 577.42 * x_2 + 407.89 * x_3
@@ -326,21 +315,18 @@ namespace apfel
                 - 18.975 * x * dl_2 * dl1 )
       + _nf * _nf * ( 32. * x * dl / ( 1 - x ) * ( 3. * dl + 10. ) + 64.
                       + ( 48. * dl_2 + 352. * dl + 384. ) * ( 1 - x ) ) * d81;
-    return p2nsma;
   }
   double P2Tnsm::Singular(double const& x) const
   {
-    const double p2nsb = ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1 - x );
-    return p2nsb;
+    return ( 1174.898 - _nf * 183.187 - _nf * _nf * 64. / 81. ) / ( 1 - x );
   }
   double P2Tnsm::Local(double const& x) const
   {
-    const double dl1    = log(1-x);
-    const double p2nsmc =
+    const double dl1 = log(1-x);
+    return
       1174.898 * dl1 + 1295.624 - 0.002
       - _nf * ( 183.187 * dl1 + 173.938 - 0.0004 )
       + _nf * _nf * ( - 64. / 81. * dl1 + 1.13067 );
-    return p2nsmc;
   }
 
   //_________________________________________________________________________________
@@ -351,21 +337,20 @@ namespace apfel
   }
   double P2Tnss::Regular(double const& x) const
   {
-    const double x_2    = x * x;
-    const double x_3    = x_2 * x;
-    const double d27    = 1./27.;
-    const double dl     = log(x);
-    const double dl_2   = dl * dl;
-    const double dl_3   = dl_2 * dl;
-    const double dl_4   = dl_3 * dl;
-    const double x1     = 1 - x;
-    const double dl1    = log(x1);
-    const double p2nssa =
-      x1 * ( 151.49 + 44.51 * x - 43.12 * x_2 + 4.820 * x_3 )
-      + 40. * d27 * dl_4 - 80. * d27 * dl_3 + 6.892 * dl_2
-      + 178.04 * dl + dl * dl1 * ( - 173.1 + 46.18 * dl )
-      + x1 * dl1 * ( - 163.9 / x - 7.208 * x );
-    return _nf * p2nssa;
+    const double x_2  = x * x;
+    const double x_3  = x_2 * x;
+    const double d27  = 1./27.;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double dl_3 = dl_2 * dl;
+    const double dl_4 = dl_3 * dl;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
+    return
+      _nf * ( x1 * ( 151.49 + 44.51 * x - 43.12 * x_2 + 4.820 * x_3 )
+              + 40. * d27 * dl_4 - 80. * d27 * dl_3 + 6.892 * dl_2
+              + 178.04 * dl + dl * dl1 * ( - 173.1 + 46.18 * dl )
+              + x1 * dl1 * ( - 163.9 / x - 7.208 * x ) );
   }
 
   //_________________________________________________________________________________
@@ -399,8 +384,7 @@ namespace apfel
       - 2.1031 * dl * dl1 + 57.713 * dl + 9.1682 * dl_2
       - 1.9 * dl_3 + 0.019122 * dl_4
       + 26.294 * x * dl - 7.8645 * x * dl_3;
-    const double p2psa = ( 1 - x ) * _nf * ( p2ps1 + _nf * p2ps2 );
-    return p2psa;
+    return ( 1 - x ) * _nf * ( p2ps1 + _nf * p2ps2 );
   }
 
   //_________________________________________________________________________________
@@ -438,8 +422,7 @@ namespace apfel
       + 55.048 * dl * dl1 - 4.3465 * x * dl_3
       + 6.0041 / x + 141.93 / x * dl
       + 2912. / ( 27. * x ) * dl_2 + 1280. / ( 81. * x ) * dl_3;
-    const double p2qga = 2 * _nf * ( p2qg1 + _nf * p2qg2 );
-    return p2qga;
+    return 2 * _nf * ( p2qg1 + _nf * p2qg2 );
   }
 
   //_________________________________________________________________________________
@@ -480,8 +463,7 @@ namespace apfel
       4. / 9. * ( 4. + 6. * ( dl + dl1 )
                   + ( 1. - 2. * x + 2. * x_2 ) * ( 3.8696 + 4. * ( dl + dl1 )
                                                    + 3. * pow(dl + dl1, 2) ) );
-    const double p2gqa = ( p2gq1 + _nf * p2gq2 + _nf * _nf * p2gq3 ) / 2;
-    return p2gqa;
+    return ( p2gq1 + _nf * p2gq2 + _nf * _nf * p2gq3 ) / 2;
   }
 
   //_________________________________________________________________________________
@@ -521,22 +503,19 @@ namespace apfel
       - 77.190 + 153.27 * x - 106.03 * x_2 + 11.995 * x_3
       - 5.0372 * dl_3 - 44.8 * dl_2 - 69.712 * dl
       - 115.01 * dl * dl1 + 96.522 * x * dl * dl1 - 62.908 * dl_2 * dl1;
-    const double p2gga = p2gga0 + _nf * ( p2gga1 + _nf * p2gga2 );
-    return p2gga;
+    return p2gga0 + _nf * ( p2gga1 + _nf * p2gga2 );
   }
   double P2Tgg::Singular(double const& x) const
   {
-    const double p2ggb = ( 2643.521 - _nf * 412.172 - _nf * _nf * 16. / 9. ) / ( 1 - x );
-    return p2ggb;
+    return ( 2643.521 - _nf * 412.172 - _nf * _nf * 16. / 9. ) / ( 1 - x );
   }
   double P2Tgg::Local(double const& x) const
   {
     const double dl1   = log(1-x);
-    const double p2ggc =
+    return
       2643.521 * dl1 + 4425.448 + 0.003
       - _nf * ( 412.172 * dl1 +  528.720 - 0.001 )
       + _nf * _nf * ( - 16. / 9. * dl1 + 6.4630 - 0.0002 );
-    return p2ggc;
   }
 
   /**
@@ -581,12 +560,11 @@ namespace apfel
     const double ln1mx = log(1-x);
     const double func  = 2 * x * lnx / ( 1 - x );
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-    const double gqq1  =
+    return
       + 4 * CF * CF * ( 1 - x + ( 3. / 2. + 2 * ln1mx - 2 * lnx ) * func )
       + 2 * CF * CA * ( - 143. / 9. + 2 * Pi2 / 3 + x + ( 11. / 3. + lnx ) * func )
       + 8 * _nf * CF * TR * ( - func + 10. / 3. ) / 3
       + 4 * CF * ( CF - CA / 2 ) * ( - 1 + x - 4 * S2x / ( 1 + x ) );
-    return gqq1;
   }
   double P1Ttransnsp::Singular(double const& x) const
   {
@@ -598,8 +576,7 @@ namespace apfel
       + 4 * CF * CF * ( 3. / 8. - Pi2 / 2 + 6 * zeta3 )
       + 2 * CF * CA * ( 17. / 12. + 11 * Pi2 / 9 - 6 * zeta3 )
       - 8 * _nf * CF * TR * ( 1. / 4. + Pi2 / 3 );
-    const double x1nsc = log(1-x) * _a2 + p1delta;
-    return x1nsc;
+    return log(1-x) * _a2 + p1delta;
   }
 
   //_________________________________________________________________________________
@@ -614,11 +591,10 @@ namespace apfel
     const double ln1mx = log(1-x);
     const double func  = 2 * x * lnx / ( 1 - x );
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
-    const double gqq1  =
+    return
       + 4 * CF * CF * ( 1 - x + ( 3. / 2. + 2 * ln1mx - 2 * lnx ) * func )
       + 2 * CF * CA * ( - 143. / 9. + 2 * Pi2 / 3 + x + ( 11. / 3. + lnx ) * func )
       + 8 * _nf * CF * TR * ( - func + 10. / 3. ) / 3
       - 4 * CF * ( CF - CA / 2 ) * ( - 1 + x - 4 * S2x / ( 1 + x ) );
-    return gqq1;
   }
 }

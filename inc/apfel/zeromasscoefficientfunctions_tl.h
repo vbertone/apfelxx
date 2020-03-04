@@ -43,7 +43,7 @@ namespace apfel
   {
   public:
     C21Tg();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -54,7 +54,7 @@ namespace apfel
   {
   public:
     CL1Tns();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -65,7 +65,7 @@ namespace apfel
   {
   public:
     CL1Tg();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -114,7 +114,7 @@ namespace apfel
   {
   public:
     C22Tps();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -125,7 +125,7 @@ namespace apfel
   {
   public:
     C22Tg();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -136,7 +136,7 @@ namespace apfel
   {
   public:
     CL2Tnsp(int const& nf);
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   private:
     int const _nf;
   };
@@ -149,7 +149,7 @@ namespace apfel
   {
   public:
     CL2Tps();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**
@@ -160,7 +160,7 @@ namespace apfel
   {
   public:
     CL2Tg();
-    double Regular(double const& x)  const;
+    double Regular(double const& x) const;
   };
 
   /**

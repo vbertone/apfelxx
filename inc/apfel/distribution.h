@@ -9,7 +9,6 @@
 #include "apfel/lagrangeinterpolator.h"
 
 #include <map>
-#include <functional>
 
 namespace apfel
 {
@@ -21,6 +20,9 @@ namespace apfel
   class Distribution: public LagrangeInterpolator
   {
   public:
+
+    Distribution() = delete;
+
     /**
      * @name Constructors
      * List of constructors.
@@ -147,10 +149,10 @@ namespace apfel
    * @param Q: the value of Q in which InDistFunc has to be tabulated
    * @param skip: vector of map indices to be skipped in the tabulation.
    */
-  std::map<int,Distribution> DistributionMap(Grid                                                              const& g,
-                                             std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
-                                             double                                                            const& Q,
-                                             std::vector<int>                                                  const& skip = {});
+  std::map<int, Distribution> DistributionMap(Grid                                                              const& g,
+                                              std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
+                                              double                                                            const& Q,
+                                              std::vector<int>                                                  const& skip = {});
 
   /**
    * @brief Function that fills in a map of distributions from a
@@ -159,8 +161,8 @@ namespace apfel
    * @param InDistFunc: map-valued function dependent on x
    * @param skip: vector of map indices to be skipped in the tabulation.
    */
-  std::map<int,Distribution> DistributionMap(Grid                                               const& g,
-                                             std::function<std::map<int,double>(double const&)> const& InDistFunc,
-                                             std::vector<int>                                   const& skip = {});
+  std::map<int, Distribution> DistributionMap(Grid                                               const& g,
+                                              std::function<std::map<int,double>(double const&)> const& InDistFunc,
+                                              std::vector<int>                                   const& skip = {});
   ///@}
 }

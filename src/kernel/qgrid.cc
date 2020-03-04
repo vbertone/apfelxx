@@ -11,8 +11,6 @@
 #include "apfel/set.h"
 #include "apfel/doubleobject.h"
 
-#include <stdexcept>
-
 namespace apfel
 {
   //_________________________________________________________________________________
@@ -33,7 +31,7 @@ namespace apfel
   {
     // Check that QMin is actually smaller than QMax.
     if (QMax <= QMin)
-      throw std::runtime_error(error("QGrid::QGrid","QMax must be larger than QMin"));
+      throw std::runtime_error(error("QGrid::QGrid", "QMax must be larger than QMin"));
 
     // Check that "TabFunc" and "InvTabFunc" are actually the inverse
     // function of each other. The check is done at grid bounds and in
@@ -43,7 +41,7 @@ namespace apfel
       {
         const double reldiff = std::abs(InvTabFunc( TabFunc(p) ) / p - 1);
         if (reldiff > eps8)
-          throw std::runtime_error(error("QGrid::QGrid","TabFunc and InvTabFunc are not the inverse of each other."));
+          throw std::runtime_error(error("QGrid::QGrid", "TabFunc and InvTabFunc are not the inverse of each other."));
       }
 
     // Find initial and final number of flavours.
@@ -55,14 +53,14 @@ namespace apfel
     std::vector<double> fq = {_TabFunc(_QMin)};
     double Step = ( _TabFunc(_QMax) - _TabFunc(_QMin) ) / _nQ;
     for (int iq = 1; iq <= _nQ; iq++)
-      fq.push_back(fq.back()+Step);
+      fq.push_back(fq.back() + Step);
 
     // Identify the indices of the grid points that fall right below
     // the thresholds. This will define the number of points that fall
     // in each interval defined by the grid bounds and the thresholds.
     _nQg.push_back(0);
     std::vector<double> fqTh = {_TabFunc(_QMin)};
-    for (int isg = nfin+1; isg <= nffi; isg++)
+    for (int isg = nfin + 1; isg <= nffi; isg++)
       {
         fqTh.push_back(_TabFunc(_Thresholds[isg-1]));
         _nQg.push_back(std::lower_bound(fq.begin()+1, fq.end(), fqTh.back()) - fq.begin());
@@ -120,8 +118,8 @@ namespace apfel
                   std::vector<double> const& Thresholds,
                   double              const& Lambda):
     QGrid<T>(nQ, QMin, QMax, InterDegree, Thresholds,
-             [Lambda] (double const& Q)->double{ return log( 2 * log( Q / Lambda ) ); },
-             [Lambda] (double const& fQ)->double{ return Lambda * exp( exp(fQ) / 2 ); })
+             [Lambda] (double const& Q) -> double{ return log( 2 * log( Q / Lambda ) ); },
+             [Lambda] (double const& fQ) -> double{ return Lambda * exp( exp(fQ) / 2 ); })
   {
   }
 
@@ -129,12 +127,12 @@ namespace apfel
   template<class T>
   QGrid<T>::QGrid(std::vector<double> const& Qg,
                   int                 const& InterDegree):
-    _nQ(Qg.size()-1),
+    _nQ(Qg.size() - 1),
     _QMin(Qg.front()),
     _QMax(Qg.back()),
     _InterDegree(InterDegree),
     _Thresholds{},
-    _TabFunc([] (double const& Q)->double{ return Q; }),
+    _TabFunc([] (double const& Q) -> double{ return Q; }),
     _Qg(Qg),
     _fQg(Qg),
     _nQg{0, _nQ}
@@ -176,9 +174,9 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<class T>
-  std::tuple<int,int,int> QGrid<T>::SumBounds(double const& Q) const
+  std::tuple<int, int, int> QGrid<T>::SumBounds(double const& Q) const
   {
-    std::tuple<int,int,int> bounds{0, 0, 0};
+    std::tuple<int, int, int> bounds{0, 0, 0};
 
     // Return if "Q" is outside the grid range (no sum will be
     // performed).
@@ -188,7 +186,7 @@ namespace apfel
     // If Q falls in the tiny gap at the thresholds assume the node
     // below.
     for (int iQ = 1; iQ < (int) _nQg.size() - 1; iQ++)
-      if (Q > _Qg[_nQg[iQ]-1] && Q <= _Qg[_nQg[iQ]])
+      if (Q > _Qg[_nQg[iQ] - 1] && Q <= _Qg[_nQg[iQ]])
         {
           std::get<1>(bounds) = _nQg[iQ] - 1;
           std::get<2>(bounds) = _nQg[iQ];
@@ -198,10 +196,10 @@ namespace apfel
     // Identify the subgrid in which Q falls.
     int iQ;
     for (iQ = 0; iQ < (int) _nQg.size() - 1; iQ++)
-      if (Q > _Qg[_nQg[iQ]] && Q <= _Qg[_nQg[iQ+1]])
+      if (Q > _Qg[_nQg[iQ]] && Q <= _Qg[_nQg[iQ + 1]])
         break;
 
-    if (iQ == (int) _nQg.size()-1)
+    if (iQ == (int) _nQg.size() - 1)
       iQ--;
 
     // Determine the control parameter and put it in the first entry
@@ -216,7 +214,7 @@ namespace apfel
       }
 
     // Determine the actual bounds.
-    const int low       = std::lower_bound(_Qg.begin()+1, _Qg.end(), Q) - _Qg.begin();
+    const int low       = std::lower_bound(_Qg.begin() + 1, _Qg.end(), Q) - _Qg.begin();
     std::get<1>(bounds) = low;
     std::get<2>(bounds) = low;
 
@@ -235,8 +233,8 @@ namespace apfel
   template<class T>
   T QGrid<T>::Evaluate(double const& Q) const
   {
-    const std::tuple<int,int,int> bounds = SumBounds(Q);
-    const double                  fq     = _TabFunc(Q);
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+    const double                    fq     = _TabFunc(Q);
 
     // First create a copy of template object with the first
     // component...
@@ -244,7 +242,7 @@ namespace apfel
     T result = Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 
     // ...then loop and add the extra terms.
-    for (tau = tau+1; tau < std::get<2>(bounds); tau++)
+    for (tau = tau + 1; tau < std::get<2>(bounds); tau++)
       result += Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 
     return result;

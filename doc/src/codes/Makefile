@@ -1,7 +1,7 @@
 
 CXX = clang++
 
-CXXFLAGS += -O3 -fPIC -std=c++11
+CXXFLAGS += -O3 -fPIC -std=c++17
 
 # APFEL++
 APFELPPINCS = $(shell apfelxx-config --cppflags)

@@ -5,7 +5,7 @@
 #include <iostream>
 
 // NangaParbat libs
-#include <NangaParbat/twobodyphasespace.h>
+#include <apfel/apfelxx.h>
 
 int main() {
   // Define lepton cuts
@@ -14,7 +14,7 @@ int main() {
   const double etamax = 2.4;
 
   // Phase-space reduction factor
-  NangaParbat::TwoBodyPhaseSpace ps{pTmin, etamin, etamax};
+  apfel::TwoBodyPhaseSpace ps{pTmin, etamin, etamax};
 
   // Vector boson kinematics
   const double Q  = 91;
