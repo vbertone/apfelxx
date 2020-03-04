@@ -55,5 +55,5 @@ NewPrescription: NewPrescription.o
 	$(F77)  -c $< 
 
 clean:
-	rm -rf *.lo *.o *.la logs FOvsAsy EvolutionFactor fNP NewPrescription *~
+	rm -rf *.lo *.o *.la logs FOvsAsy EvolutionFactor fNP LeptonicModulation PhaseSpaceRedFactor NewPrescription *~
 
