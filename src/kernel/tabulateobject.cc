@@ -11,6 +11,8 @@
 #include "apfel/set.h"
 #include "apfel/timer.h"
 
+#include<algorithm>
+
 namespace apfel
 {
   //_________________________________________________________________________________
