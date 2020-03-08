@@ -187,7 +187,8 @@ the coupling $\alpha_s$, that we write:
 \begin{equation}
 \frac{d}{d\ln\mu}\left(\frac{\alpha_s(\mu)}{4\pi}\right) = -2 \left(\frac{\alpha_s(\mu)}{4\pi}\right)^{2}\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n}\beta_n \,,
 \end{equation}
-whose solution between $\mu_b$ and $\mu'$ expanded to two loops reads:
+whose solution for the evolution between $\mu_b$ and $\mu'$ expanded
+to two loops reads:
 \begin{equation}
 \left(\frac{\alpha_s(\mu')}{4\pi}\right) =
 \left(\frac{\alpha_s(\mu_b)}{4\pi}\right)+\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^2\left(-2\beta_0\ln\frac{\mu'}{\mu_b}\right) +\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^3\left(4\beta_0^2 \ln^2\frac{\mu'}{\mu_b}-2\beta_1 \ln\frac{\mu'}{\mu_b}\right) +\mathcal{O}(\alpha_s^4)\,,
@@ -509,19 +510,19 @@ $\mathcal{O}(\alpha_s^2)$:
                        C^{(1,0)}+K^{(1,0)}
                        \right)L_{\zeta} \\
   \\
-                   &-&\displaystyle \left(\beta_0 \gamma_F^{(0)}-2 \beta_0
-                       P^{(0)}-\frac12\left(\gamma_F^{(0)}\right)^2 +2
-                       \gamma_F^{(0)} P^{(0)} -2P^{(0)}\otimes P^{(0)}-\frac12\gamma_K^{(1)}-\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_{\mu}^2\\
+                   &+&\displaystyle \left(-\beta_0 \gamma_F^{(0)}+2 \beta_0
+                       P^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2
+                       \gamma_F^{(0)} P^{(0)} +2P^{(0)}\otimes P^{(0)}+\frac12\gamma_K^{(1)}+\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_{\mu}^2\\
   \\
                    &+&\displaystyle \left(\gamma_F^{(0)}K^{(0,0)} -2 K^{(0,0)} P^{(0)}-\gamma_K^{(1)}-\gamma_K^{(0)}C^{(1,0)}\right) L_{\mu}L_{\zeta}
                        +\frac12\left(K^{(0,0)}\right)^2 L_{\zeta}^2\\
   \\
                    &+&\displaystyle
                        \left(\frac12\gamma_K^{(0)}\gamma_F^{(0)}
-                       -\gamma_K^{(0)} P^{(0)}-\frac13 \beta_0 \gamma_K^{(0)}\right) L_{\mu}^3\\
+                       -\gamma_K^{(0)} P^{(0)}-\frac23 \beta_0 \gamma_K^{(0)}\right) L_{\mu}^3\\
   \\
-                   &-&\displaystyle \left(\gamma_K^{(0)}\gamma_F^{(0)}
-                       -2 \gamma_K^{(0)} P^{(0)}+\beta_0 \gamma_K^{(0)}+\frac12\gamma_K^{(0)}K^{(0,0)}\right) L_{\mu}^2 L_{\zeta}-
+                   &+&\displaystyle \left(-\gamma_K^{(0)}\gamma_F^{(0)}
+                       +2 \gamma_K^{(0)} P^{(0)}+\beta_0 \gamma_K^{(0)}+\frac12\gamma_K^{(0)}K^{(0,0)}\right) L_{\mu}^2 L_{\zeta}-
                        \gamma_K^{(0)}K^{(0,0)} L_{\mu}L_{\zeta}^2\\
   \\
                    &+&\displaystyle
@@ -604,54 +605,49 @@ that, using Eq.~(\ref{eq:physobsev}), translates into the following
 evolution equation for $H$:
 \begin{equation}\label{eq:HEv}
 \frac{d \ln H}{d \ln\mu} =-2\gamma_F(\alpha_s(\mu))
-      +
-      2\gamma_K(\alpha_s(\mu))\ln\frac{Q}{\mu}\,.
+      -
+      2\gamma_K(\alpha_s(\mu))\ln\frac{\mu}{Q}\,.
 \end{equation}
 whose solution for the evolution between $Q$ and $\mu$ is:
 \begin{equation}\label{eq:HEvSol}
 H(Q,\mu) = \exp\left\{-2\int_Q^\mu\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'))
-      -
-      \gamma_K(\alpha_s(\mu'))\ln\frac{Q}{\mu'}\right]\right\}H(Q,Q)\,.
+      +
+      \gamma_K(\alpha_s(\mu'))\ln\frac {\mu'}{Q}\right]\right\}H(Q,Q)\,.
 \end{equation}
 Knowing that:
 \begin{equation}
-H(Q,Q) = 1+\sum_{n=1}^\infty\left(\frac{\alpha_s(Q)}{4\pi}\right)^nH^{(n)}\,,
+\begin{array}{rcl}
+H(Q,Q) &=&\displaystyle
+           1+\sum_{n=1}^\infty\left(\frac{\alpha_s(Q)}{4\pi}\right)^nH^{(n)}\\
+\\
+  &=&\displaystyle  1+\left(\frac{\alpha_s(\mu)}{4\pi}\right)H^{(1)}+\left(\frac{\alpha_s(\mu)}{4\pi}\right)^2\left(H^{(2)}-2\beta_0H^{(1)}\ln\frac{\mu}{Q}\right)+\mathcal{O}(\alpha_s^3)\,,
+\end{array}
 \end{equation}
 and assuming that $Q$ and $\mu$ are not too far apart,
 Eq.~(\ref{eq:HEvSol}) can be reliably expanded and truncated to
 $\mathcal{O}(\alpha_s^2)$.
 Defining:
 \begin{equation}
-a_s = \frac{\alpha_s(\mu)}{4\pi}\quad\mbox{and}\quad L = \ln\frac{\mu}{Q}\,,
+a_\mu = \frac{\alpha_s(\mu)}{4\pi}\quad\mbox{and}\quad L_{Q} = \ln\frac{\mu}{Q}\,,
 \end{equation}
 we find:
 \begin{equation}\label{eq:Cexp2}
 \begin{array}{rcl}
-  H(Q,\mu) &=&\displaystyle \bigg\{1+a_s\left[2\gamma_F^{(0)}L
+  H(Q,\mu) &=&\displaystyle 1+a_\mu\left[H^{(1)}-2\gamma_F^{(0)}L_{Q}
                        -
-                       \gamma_K^{(0)}L^2\right]+
-                       a_s^{2}\bigg[2\gamma_F^{(1)}L- \left(\gamma_K^{(1)}+2\beta_0 \gamma_F^{(0)}-\left(\gamma_F^{(0)}\right)^2 \right)L^2\\
-  \\
-                   &+&\displaystyle\left(\frac23
-                       \beta_0 \gamma_K^{(0)}- \gamma_F^{(0)}
-                       \gamma_K^{(0)}\right)L^3+
-                       \frac14\left(\gamma_K^{(0)}\right)^2L^4\bigg]
-                       +\mathcal{O}(\alpha_s^3)\bigg\}
-                       H(Q,Q)\\
+                       \gamma_K^{(0)}L_{Q}^2\right]
+                       \\
 \\
-&=&\displaystyle 1+a_s\left[H^{(1)}+2\gamma_F^{(0)}L
-                       -
-                       \gamma_K^{(0)}L^2\right]+
-                       a_s^{2}\bigg[H^{(2)} +
-    \left(2\gamma_F^{(1)}+2\gamma_F^{(0)}H^{(1)}\right)L\\
+           &+&\displaystyle a_\mu^{2}\bigg[H^{(2)} + 
+               \left(-2\gamma_F^{(1)}-2\beta_0H^{(1)}-2\gamma_F^{(0)}H^{(1)}\right)L_{Q}\\
 \\
-&-&\displaystyle \left(\gamma_K^{(1)}+2\beta_0 \gamma_F^{(0)}-\left(\gamma_F^{(0)}\right)^2 -
-                       \gamma_K^{(0)}H^{(1)}\right)L^2\\
+&+&\displaystyle \left(-\gamma_K^{(1)}+2\beta_0 \gamma_F^{(0)}+2\left(\gamma_F^{(0)}\right)^2 -
+                       \gamma_K^{(0)}H^{(1)}\right)L_{Q}^2\\
   \\
-                   &+&\displaystyle\left(\frac23
-                       \beta_0 \gamma_K^{(0)}- \gamma_F^{(0)}
-                       \gamma_K^{(0)}\right)L^3+
-                       \frac14\left(\gamma_K^{(0)}\right)^2L^4
+                   &+&\displaystyle\left(\frac43
+                       \beta_0 \gamma_K^{(0)}+ 2\gamma_F^{(0)}
+                       \gamma_K^{(0)}\right)L_{Q}^3+
+                       \frac12\left(\gamma_K^{(0)}\right)^2L_{Q}^4
                        \bigg]
                        +\mathcal{O}(\alpha_s^3)\,.
 \end{array}
@@ -661,9 +657,11 @@ $\mu$ around the natural value $Q$. To summarise, there three possible
 variations that allow one to estimate higher-order corrections. The
 first two are associated to the variation of the initial scales
 $\mu_0$ and $\sqrt{\zeta_0}$ around the natural scale $\mu_b$ and they
-are parametrised by the modest factors $C_i^\mu$ and $C_i^\zeta$. The
-third variation is associated to the final renormalisation scale $\mu$
-around the hard scale $Q$ and is parameterised by the factor $C_f$.
+are parametrised by the modest factors $C_i^\mu$ and $C_i^\zeta$, such
+that $L_\mu=\ln C_i^\mu$ and $L_\zeta=\ln C_i^\zeta$. The third
+variation is associated to the final renormalisation scale $\mu$
+around the hard scale $Q$ and is parameterised by the factor $C_f$,
+such that $L_Q=\ln C_f$.
 
 \section{Non-perturbative component}\label{sec:nonpert}
 

@@ -36,6 +36,7 @@ doc/src/codes/EvolutionFactor
 doc/src/codes/LeptonicModulation
 doc/src/codes/PhaseSpaceRedFactor
 doc/src/codes/NewPrescription
+doc/src/codes/PhaseSpacePowerCorrs
 
 # Compiled Object files
 *.slo

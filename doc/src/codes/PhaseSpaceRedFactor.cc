@@ -17,7 +17,7 @@ int main() {
   apfel::TwoBodyPhaseSpace ps{pTmin, etamin, etamax};
 
   // Vector boson kinematics
-  const double Q  = 91;
+  const double Q = 91;
   double qT;
 
   const int ny = 10000;
