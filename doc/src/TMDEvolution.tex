@@ -498,7 +498,7 @@ The solution is:
 Finally, we need to multiply Eqs.~(\ref{eq:Cexp1})
 and~(\ref{eq:Cexp2}) and truncate the result to
 $\mathcal{O}(\alpha_s^2)$:
-\begin{equation}
+\begin{equation}\label{eq:Cmu0z0}
 \begin{array}{rcl}
   C(\mu_0,\zeta_0) &=&\displaystyle 1+a_b\left[
                        C^{(1,0)}+\left(\gamma_F^{(0)}
@@ -537,6 +537,58 @@ that can be written in a compact form as:
 with:
 \begin{equation}
   C^{(n,m)}=\sum_{k=0}^{m}\bar{C}^{(n,m-k,k)}\,.
+\end{equation}
+
+Accounting for the fact that $K^{(0,0)}=0$, Eq.~(\ref{eq:Cmu0z0})
+reduces to:
+\begin{equation}
+\begin{array}{rcl}
+  C(\mu_0,\zeta_0) &=&\displaystyle 1+a_b\left[
+                       C^{(1,0)}+\left(\gamma_F^{(0)}
+                       -2P^{(0)}\right)L_{\mu}+\frac12\gamma_K^{(0)}\left(L_{\mu}^2-2 L_{\mu} L_{\zeta}\right)\right]\\
+  \\
+                   &+&\displaystyle a_b^2\bigg[C^{(2,0)}+\left(\gamma_F^{(1)} -2P^{(1)}+\gamma_F^{(0)}C^{(1,0)}
+                       -2P^{(0)}\otimes C^{(1,0)}\right)L_{\mu}
+                       +K^{(1,0)}L_{\zeta} \\
+  \\
+                   &+&\displaystyle \left(-\beta_0 \gamma_F^{(0)}+2 \beta_0
+                       P^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2
+                       \gamma_F^{(0)} P^{(0)} +2P^{(0)}\otimes P^{(0)}+\frac12\gamma_K^{(1)}+\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_{\mu}^2\\
+  \\
+                   &+&\displaystyle \left(-\gamma_K^{(1)}-\gamma_K^{(0)}C^{(1,0)}\right) L_{\mu}L_{\zeta}+
+                       \left(\frac12\gamma_K^{(0)}\gamma_F^{(0)}
+                       -\gamma_K^{(0)} P^{(0)}-\frac23 \beta_0 \gamma_K^{(0)}\right) L_{\mu}^3\\
+  \\
+                   &+&\displaystyle \left(-\gamma_K^{(0)}\gamma_F^{(0)}
+                       +2 \gamma_K^{(0)} P^{(0)}+\beta_0 \gamma_K^{(0)}\right) L_{\mu}^2 L_{\zeta}+
+                       \frac18\left(\gamma_K^{(0)}\right)^2\left(L_{\mu}^2-2L_\mu
+                       L_{\zeta}\right)^2\bigg]+\mathcal{O}(\alpha_s^3)\,.
+\end{array}
+\end{equation}
+In addition, to simplify the structure even further, one may take:
+\begin{equation}
+L_\mu=L_\zeta=L_0\,,
+\end{equation}
+so that:
+\begin{equation}
+\begin{array}{rcl}
+  C(\mu_0,\mu_0^2) &=&\displaystyle 1+a_b\left[
+                       C^{(1,0)}+\left(\gamma_F^{(0)}
+                       -2P^{(0)}\right)L_0-\frac12\gamma_K^{(0)}L_0^2\right]\\
+  \\
+                   &+&\displaystyle a_b^2\bigg[C^{(2,0)}+\left(\gamma_F^{(1)} +K^{(1,0)}-2P^{(1)}+\gamma_F^{(0)}C^{(1,0)}
+                       -2P^{(0)}\otimes C^{(1,0)}\right)L_0
+                       \\
+  \\
+                   &+&\displaystyle \left(-\beta_0 \gamma_F^{(0)}+2 \beta_0
+                       P^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2
+                       \gamma_F^{(0)} P^{(0)} +2P^{(0)}\otimes P^{(0)}-\frac12\gamma_K^{(1)}-\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_0^2\\
+  \\
+                   &+&\displaystyle 
+                       \left(-\frac12\gamma_K^{(0)}\gamma_F^{(0)}
+                       +\gamma_K^{(0)} P^{(0)}+\frac13 \beta_0 \gamma_K^{(0)}\right) L_0^3+
+                       \frac18\left(\gamma_K^{(0)}\right)^2L_0^4\bigg]+\mathcal{O}(\alpha_s^3)\,.
+\end{array}
 \end{equation}
 
 In order to use Eq.~(\ref{eq:solution3}) in phenomenological
