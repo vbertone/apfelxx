@@ -4,19 +4,19 @@
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/gammav.h"
+#include "apfel/gammaf.h"
 #include "apfel/constants.h"
 
 namespace apfel
 {
   //_________________________________________________________________________
-  double gammaVq0()
+  double gammaFq0()
   {
     return 6 * CF;
   }
 
   //_________________________________________________________________________
-  double gammaVq1(int const& nf)
+  double gammaFq1(int const& nf)
   {
     return - ( CF * CF * ( - 3 + 4 * Pi2 - 48 * zeta3 )
                + CF * CA * ( - 961. / 27. - 11 * Pi2 / 3 + 52 * zeta3 )
@@ -24,7 +24,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  double gammaVq2(int const& nf)
+  double gammaFq2(int const& nf)
   {
     return - ( pow(CF, 3) * ( - 29 - 6 * Pi2 -  16 * Pi2 * Pi2 / 5 - 136 * zeta3 +  32 * Pi2 * zeta3 / 3  + 480 * zeta5 )
                + CF * CF * CA * ( - 151. / 2. +  410 * Pi2 / 9 + 494 * Pi2 * Pi2 / 135 - 1688 * zeta3 / 3 - 16 * Pi2 * zeta3 / 3 - 240 * zeta5 )
@@ -35,20 +35,20 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  double gammaVg0(int const& nf)
+  double gammaFg0(int const& nf)
   {
     return - ( - 22 * CA / 3 + 8 * TR * nf / 3 );
   }
 
   //_________________________________________________________________________
-  double gammaVg1(int const& nf)
+  double gammaFg1(int const& nf)
   {
     return - ( CA * CA * ( - 1384. / 27. + 11 * Pi2 / 9 + 4 * zeta3 )
                + CA * TR * nf * ( 512. / 27. - 4 * Pi2 / 9 ) + 8 * CF * TR * nf );
   }
 
   //_________________________________________________________________________
-  double gammaVg2(int const& nf)
+  double gammaFg2(int const& nf)
   {
     return - ( 2 * pow(CA, 3) * ( - 97186. / 729. + 6109 * Pi2 / 486 - 319 * Pi2 * Pi2 / 270 + 122 * zeta3 / 3 - 20 * Pi2 * zeta3 / 9 - 16 * zeta5 )
                + 2 * CA * CA * TR * nf * ( 30715. / 729. - 1198 * Pi2 / 243 + 82 * Pi2 * Pi2 / 135 + 712 * zeta3 / 27 )

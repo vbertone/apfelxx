@@ -17,30 +17,30 @@ namespace apfel
    */
   ///@{
   /// &alpha;<SUB>s</SUB> term
-  double CSd10();
+  double KCS00();
 
 /// &alpha;<SUB>s</SUB>L term
-  double CSd11();
+  double KCS01();
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP> term
-  double CSd20(int const& nf);
+  double KCS10(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP>L term
-  double CSd21(int const& nf);
+  double KCS11(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP>L<SUP>2</SUP> term
-  double CSd22(int const& nf);
+  double KCS12(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>3</SUP> term
-  double CSd30(int const& nf);
+  double KCS20(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>3</SUP>L term
-  double CSd31(int const& nf);
+  double KCS21(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>3</SUP>L<SUP>2</SUP> term
-  double CSd32(int const& nf);
+  double KCS22(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>3</SUP>L<SUP>3</SUP> term
-  double CSd33(int const& nf);
+  double KCS23(int const& nf);
   ///@}
 }

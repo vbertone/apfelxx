@@ -1,8 +1,8 @@
 set(tmds_source
   tmdbuilder.cc
-  gammacusp.cc
-  gammav.cc
-  gammacs.cc
+  gammak.cc
+  gammaf.cc
+  kcs.cc
   matchingfunctionspdf.cc
   matchingfunctionsff.cc
   ogataquadrature.cc

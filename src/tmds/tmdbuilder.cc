@@ -10,9 +10,9 @@
 #include "apfel/matchingfunctionsff.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/betaqcd.h"
-#include "apfel/gammacusp.h"
-#include "apfel/gammav.h"
-#include "apfel/gammacs.h"
+#include "apfel/gammak.h"
+#include "apfel/gammaf.h"
+#include "apfel/kcs.h"
 #include "apfel/tools.h"
 #include "apfel/constants.h"
 #include "apfel/integrator.h"
@@ -81,8 +81,8 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C11pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O11gmVq = gammaVq0() * Id / 2;
-        const Operator O11gmVg = gammaVg0(nf) * Id / 2;
+        const Operator O11gmVq = gammaFq0() * Id / 2;
+        const Operator O11gmVg = gammaFg0(nf) * Id / 2;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - P0.at(0)});
@@ -129,8 +129,8 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C11ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O11gmVq = gammaVq0() * Id / 2;
-        const Operator O11gmVg = gammaVg0(nf) * Id / 2;
+        const Operator O11gmVq = gammaFq0() * Id / 2;
+        const Operator O11gmVg = gammaFg0(nf) * Id / 2;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - P0.at(0)});
@@ -177,10 +177,10 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C21pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const double factq = beta0qcd(nf) + gammaVq0() / 2;
-        const double factg = beta0qcd(nf) + gammaVg0(nf) / 2;
-        const Operator O21gmVq = gammaVq1(nf) * Id / 2;
-        const Operator O21gmVg = gammaVg1(nf) * Id / 2;
+        const double factq = beta0qcd(nf) + gammaFq0() / 2;
+        const double factg = beta0qcd(nf) + gammaFg0(nf) / 2;
+        const Operator O21gmVq = gammaFq1(nf) * Id / 2;
+        const Operator O21gmVg = gammaFg1(nf) * Id / 2;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         const auto P1 = DglapObjpdf.at(nf).SplittingFunctions.at(1);
         const auto C1 = C10pdf.at(nf);
@@ -200,9 +200,9 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         const double b0    = beta0qcd(nf);
-        const double gv0q  = gammaVq0();
-        const double gv0g  = gammaVg0(nf);
-        const double gcp   = GammaCusp1(nf);
+        const double gv0q  = gammaFq0();
+        const double gv0g  = gammaFg0(nf);
+        const double gcp   = gammaK1(nf);
         const double factq = - ( gv0q + b0 ) / 2;
         const double factg = - ( gv0g + b0 ) / 2;
         const Operator O22gmVq = ( CF * gcp / 8 + gv0q * ( 2 * b0 + gv0q ) / 8 ) * Id;
@@ -224,8 +224,8 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C23pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaVq0() / 2 ) * Id;
-        const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
+        const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaFq0() / 2 ) * Id;
+        const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaFg0(nf) / 2 ) * Id;;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq - CF * P0.at(0)});
@@ -277,10 +277,10 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C21ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const double factq = beta0qcd(nf) + gammaVq0() / 2;
-        const double factg = beta0qcd(nf) + gammaVg0(nf) / 2;
-        const Operator O21gmVq = gammaVq1(nf) * Id / 2;
-        const Operator O21gmVg = gammaVg1(nf) * Id / 2;
+        const double factq = beta0qcd(nf) + gammaFq0() / 2;
+        const double factg = beta0qcd(nf) + gammaFg0(nf) / 2;
+        const Operator O21gmVq = gammaFq1(nf) * Id / 2;
+        const Operator O21gmVg = gammaFg1(nf) * Id / 2;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
         const auto P1 = DglapObjff.at(nf).SplittingFunctions.at(1);
         const auto C1 = C10ff.at(nf);
@@ -300,9 +300,9 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         const double b0    = beta0qcd(nf);
-        const double gv0q  = gammaVq0();
-        const double gv0g  = gammaVg0(nf);
-        const double gcp   = GammaCusp1(nf);
+        const double gv0q  = gammaFq0();
+        const double gv0g  = gammaFg0(nf);
+        const double gcp   = gammaK1(nf);
         const double factq = - ( gv0q + b0 ) / 2;
         const double factg = - ( gv0g + b0 ) / 2;
         const Operator O22gmVq = ( CF * gcp / 8 + gv0q * ( 2 * b0 + gv0q ) / 8 ) * Id;
@@ -324,8 +324,8 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C23ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaVq0() / 2 ) * Id;
-        const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaVg0(nf) / 2 ) * Id;;
+        const Operator O23gmVq = CF * ( beta0qcd(nf) / 3 + gammaFq0() / 2 ) * Id;
+        const Operator O23gmVg = CA * ( beta0qcd(nf) / 3 + gammaFg0(nf) / 2 ) * Id;;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq - CF * P0.at(0)});
@@ -346,7 +346,7 @@ namespace apfel
 
     // Construct sets of operators for each perturbative order for the
     // matching functions. Initialize also coefficients of: beta
-    // function, GammaCusp, gammaV, and Collins-Soper anomalous
+    // function, gammaK, gammaF, and Collins-Soper anomalous
     // dimensions.
     std::map<int, std::map<int, Set<Operator>>> MatchingFunctionsPDFs;
     for (int nf = nfi; nf <= nff; nf++)
@@ -362,26 +362,26 @@ namespace apfel
         obj.Beta.insert({2, beta2qcd(nf)});
 
         // GammaF quark
-        obj.GammaFq.insert({0, gammaVq0()});
-        obj.GammaFq.insert({1, gammaVq1(nf)});
-        obj.GammaFq.insert({2, gammaVq2(nf)});
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+        obj.GammaFq.insert({2, gammaFq2(nf)});
 
         // GammaF gluon
-        obj.GammaFg.insert({0, gammaVg0(nf)});
-        obj.GammaFg.insert({1, gammaVg1(nf)});
-        obj.GammaFg.insert({2, gammaVg2(nf)});
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+        obj.GammaFg.insert({2, gammaFg2(nf)});
 
-        // GammaCusp (multiply by CF for quarks and by CA for gluons)
-        obj.GammaCusp.insert({0, GammaCusp0()});
-        obj.GammaCusp.insert({1, GammaCusp1(nf)});
-        obj.GammaCusp.insert({2, GammaCusp2(nf)});
-        obj.GammaCusp.insert({3, GammaCusp3(nf)});
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+        obj.GammaK.insert({3, gammaK3(nf)});
 
         // Collins-Soper anomalous dimensions (multiply by CF for
         // quarks and by CA for gluons).
-        obj.GammaCS.insert({0, {CSd10(), CSd11()}});
-        obj.GammaCS.insert({1, {CSd20(nf), CSd21(nf), CSd22(nf)}});
-        obj.GammaCS.insert({2, {CSd30(nf), CSd31(nf), CSd32(nf), CSd33(nf)}});
+        obj.KCS.insert({0, {KCS00(), KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+        obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
 
         // Matching functions.
         const EvolutionBasisQCD evb{nf};
@@ -624,7 +624,7 @@ namespace apfel
         gammaK  = [=] (double const& mu) -> double
         {
           const double coup = Alphas(mu) / FourPi;
-          return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
+          return coup * TmdObj.at(NF(mu,thrs)).GammaK.at(0);
         };
         K = [=] (double const&) -> double{ return 0; };
       }
@@ -643,13 +643,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * gc.at(1) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const double coup = Alphas(mu) / FourPi;
           const double lo   = d0[0] + Lmu * d0[1];
@@ -673,13 +673,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const std::vector<double> d1 = d.at(1);
           const double coup = Alphas(mu) / FourPi;
@@ -705,13 +705,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const std::vector<double> d1 = d.at(1);
           const std::vector<double> d2 = d.at(2);
@@ -787,7 +787,7 @@ namespace apfel
         gammaK  = [=] (double const& mu) -> double
         {
           const double coup = Alphas(mu) / FourPi;
-          return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
+          return coup * TmdObj.at(NF(mu,thrs)).GammaK.at(0);
         };
         K = [=] (double const&) -> double{ return 0; };
       }
@@ -801,13 +801,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * gc.at(1) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const double coup = Alphas(mu) / FourPi;
           const double lo   = d0[0] + Lmu * d0[1];
@@ -825,13 +825,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const std::vector<double> d1 = d.at(1);
           const double coup = Alphas(mu) / FourPi;
@@ -851,13 +851,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const std::vector<double> d1 = d.at(1);
           const std::vector<double> d2 = d.at(2);
@@ -930,7 +930,7 @@ namespace apfel
         gammaK  = [=] (double const& mu) -> double
         {
           const double coup = Alphas(mu) / FourPi;
-          return coup * TmdObj.at(NF(mu,thrs)).GammaCusp.at(0);
+          return coup * TmdObj.at(NF(mu,thrs)).GammaK.at(0);
         };
         K = [=] (double const&) -> double{ return 0; };
       }
@@ -944,13 +944,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * gc.at(1) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const double coup = Alphas(mu) / FourPi;
           const double lo   = d0[0] + Lmu * d0[1];
@@ -968,13 +968,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const std::vector<double> d1 = d.at(1);
           const double coup = Alphas(mu) / FourPi;
@@ -994,13 +994,13 @@ namespace apfel
         };
         gammaK = [=] (double const& mu) -> double
         {
-          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaCusp;
+          const auto& gc    = TmdObj.at(NF(mu,thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
           return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
         };
         K = [=] (double const& mu) -> double
         {
-          const auto& d = TmdObj.at(NF(mu,thrs)).GammaCS;
+          const auto& d = TmdObj.at(NF(mu,thrs)).KCS;
           const std::vector<double> d0 = d.at(0);
           const std::vector<double> d1 = d.at(1);
           const std::vector<double> d2 = d.at(2);
@@ -1040,32 +1040,71 @@ namespace apfel
 
     return EvolFactor;
   }
+  /*
+    //_____________________________________________________________________________
+    double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
+    {
+      // Compute log and its powers.
+      const double lQ2  = 2 * log(kappa);
+      const double lQ22 = lQ2 * lQ2;
+      const double lQ23 = lQ22 * lQ2;
+      const double lQ24 = lQ23 * lQ2;
 
+      // Compute coupling and its powers.
+      const double as  = Alphas / FourPi;
+      const double as2 = as * as;
+
+      // Now compute hard factor according to the perturbative order.
+      double hfct = 1;
+      if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
+        hfct += 2 * as * CF * ( - lQ22 - 3 * lQ2 - 8 + 7 * Pi2 / 6 );
+      if (PerturbativeOrder > 2 || PerturbativeOrder < -1)
+        hfct += 2 * as2 * CF *
+                ( CF * ( lQ24 + 6 * lQ23 + ( 25. - 7 * Pi2 / 3 ) * lQ22 + ( 93. / 2. - 5 * Pi2 - 24 * zeta3 ) * lQ2
+                         + 511. / 8. - 83 * Pi2 / 6 - 30 * zeta3 + 67 * Pi2 * Pi2 / 60 ) +
+                  CA * ( - 11 * lQ23 / 9 + ( - 233. / 18. + Pi2 / 3 ) * lQ22 + ( - 2545. / 54. + 22 * Pi2 / 9 + 26 * zeta3 ) * lQ2
+                         - 51157. / 648. + 1061 * Pi2 / 108 + 313 * zeta3 / 9 - 4 * Pi2 * Pi2 / 45 ) +
+                  TR * nf * ( 4 * lQ23 / 9 + 38 * lQ22 / 9 + ( 418. / 27. - 8 * Pi2 / 9 ) * lQ2
+                              + 4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
+
+      return hfct;
+    }
+  */
   //_____________________________________________________________________________
   double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
   {
     // Compute log and its powers.
-    const double lQ2  = 2 * log(kappa);
-    const double lQ22 = lQ2 * lQ2;
-    const double lQ23 = lQ22 * lQ2;
-    const double lQ24 = lQ23 * lQ2;
+    const double lQ  = log(kappa);
+    const double lQ2 = lQ * lQ;
+    const double lQ3 = lQ2 * lQ;
+    const double lQ4 = lQ3 * lQ;
 
     // Compute coupling and its powers.
     const double as  = Alphas / FourPi;
     const double as2 = as * as;
 
+    // Coefficients
+    const double b0  = beta0qcd(nf);
+    const double gK0 = CF * gammaK0();
+    const double gK1 = CF * gammaK1(nf);
+    const double gF0 = gammaFq0();
+    const double gF1 = gammaFq1(nf);
+    const double H1  = 2 * CF * ( - 8 + 7 * Pi2 / 6 );
+    const double H2  = 2 * CF * ( CF * ( 511. / 8. - 83 * Pi2 / 6 - 30 * zeta3 + 67 * Pi2 * Pi2 / 60 ) +
+                                  CA * ( - 51157. / 648. + 1061 * Pi2 / 108 + 313 * zeta3 / 9 - 4 * Pi2 * Pi2 / 45 ) +
+                                  TR * nf * ( 4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
+
     // Now compute hard factor according to the perturbative order.
     double hfct = 1;
     if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
-      hfct += 2 * as * CF * ( - lQ22 - 3 * lQ2 - 8 + 7 * Pi2 / 6 );
+      hfct += as * ( H1
+                     - 2 * gF0 * lQ - gK0 * lQ2 );
     if (PerturbativeOrder > 2 || PerturbativeOrder < -1)
-      hfct += 2 * as2 * CF *
-              ( CF * ( lQ24 + 6 * lQ23 + ( 25. - 7 * Pi2 / 3 ) * lQ22 + ( 93. / 2. - 5 * Pi2 - 24 * zeta3 ) * lQ2
-                       + 511. / 8. - 83 * Pi2 / 6 - 30 * zeta3 + 67 * Pi2 * Pi2 / 60 ) +
-                CA * ( - 11 * lQ23 / 9 + ( - 233. / 18. + Pi2 / 3 ) * lQ22 + ( - 2545. / 54. + 22 * Pi2 / 9 + 26 * zeta3 ) * lQ2
-                       - 51157. / 648. + 1061 * Pi2 / 108 + 313 * zeta3 / 9 - 4 * Pi2 * Pi2 / 45 ) +
-                TR * nf * ( 4 * lQ23 / 9 + 38 * lQ22 / 9 + ( 418. / 27. - 8 * Pi2 / 9 ) * lQ2
-                            + 4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
+      hfct += as2 * ( H2
+                      + ( - 2 * gF1 - 2 * H1 * ( b0 + gF0 ) ) * lQ
+                      + ( - gK1 + 2 * b0 * gF0 + 2 * pow(gF0, 2) - gK0 * H1 ) * lQ2
+                      + gK0 * ( 4 * b0 / 3 + 2 * gF0 ) * lQ3
+                      + pow(gK0, 2) / 2 * lQ4 );
 
     return hfct;
   }
@@ -1154,10 +1193,10 @@ namespace apfel
       const double muR2 = muR * muR;
       const double xQ2  = xQ * xQ;
 
-      //const auto& gc    = TmdObj.at(NF(muR, thrs)).GammaCusp;
+      //const auto& gc    = TmdObj.at(NF(muR, thrs)).GammaK;
       //const double coup = Alphas(muR) / FourPi;
 
-      // Coefficients A's in terms of GammaCusp, GammaCS (K) and BetaQCD
+      // Coefficients A's in terms of gammaK, GammaCS (K) and BetaQCD
       // (see Eq. (74) of https://arxiv.org/pdf/1007.4005.pdf)
       const double A1 = 0;
       const double A2 = 0;

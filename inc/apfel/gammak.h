@@ -10,7 +10,7 @@ namespace apfel
 {
   /**
    * @name Cusp anomalous dimension.
-   * Coefficients of the &Gamma;<SUB>Cusp</SUB> anomalous
+   * Coefficients of the &gamma;<SUB>K</SUB> anomalous
    * dimension. The expressions up to
    * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) are taken from eq. (59)
    * https://arxiv.org/pdf/1705.07167.pdf. While the expressions at
@@ -21,19 +21,19 @@ namespace apfel
    */
   ///@{
   /// &alpha;<SUB>s</SUB> term
-  double GammaCusp0();
+  double gammaK0();
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP> term
-  double GammaCusp1(int const& nf);
+  double gammaK1(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>3</SUP> term
-  double GammaCusp2(int const& nf);
+  double gammaK2(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>4</SUP> term
-  double GammaCusp3(int const& nf);
+  double gammaK3(int const& nf);
 
   /// &alpha;<SUB>s</SUB><SUP>4</SUP> correction to the gluon
   /// anonalous dimension (neglected for now).
-  double GammaCusp3gmq(int const& nf);
+  double gammaK3gmq(int const& nf);
   ///@}
 }

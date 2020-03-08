@@ -31,8 +31,8 @@ namespace apfel
     std::map<int, double>                     Beta;
     std::map<int, double>                     GammaFq;
     std::map<int, double>                     GammaFg;
-    std::map<int, double>                     GammaCusp;
-    std::map<int, std::vector<double>>        GammaCS;
+    std::map<int, double>                     GammaK;
+    std::map<int, std::vector<double>>        KCS;
     std::map<int, std::vector<Set<Operator>>> MatchingFunctionsPDFs;
     std::map<int, std::vector<Set<Operator>>> MatchingFunctionsFFs;
   };

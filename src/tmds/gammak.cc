@@ -4,25 +4,25 @@
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/gammacusp.h"
+#include "apfel/gammak.h"
 #include "apfel/constants.h"
 
 namespace apfel
 {
   //_________________________________________________________________________
-  double GammaCusp0()
+  double gammaK0()
   {
     return 8;
   }
 
   //_________________________________________________________________________
-  double GammaCusp1(int const& nf)
+  double gammaK1(int const& nf)
   {
     return 8 * ( ( 67. / 9. - Pi2 / 3 ) * CA - 20 * TR * nf / 9 );
   }
 
   //_________________________________________________________________________
-  double GammaCusp2(int const& nf)
+  double gammaK2(int const& nf)
   {
     return 8 * ( ( 245. / 6. - 134 * Pi2 / 27 + 11 * Pi2 * Pi2 / 45 + 22 * zeta3 / 3 ) * CA * CA
                  + ( - 418. / 27. + 40 * Pi2 / 27 - 56 * zeta3 / 3 ) * CA * TR * nf
@@ -31,7 +31,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  double GammaCusp3(int const& nf)
+  double gammaK3(int const& nf)
   {
     const int nf2 = nf * nf;
     const int nf3 = nf2 * nf;
@@ -39,7 +39,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  double GammaCusp3gmq()
+  double gammaK3gmq()
   {
     return 40880 / CA - 20702 / CF;
   }

@@ -4,45 +4,45 @@
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/gammacs.h"
+#include "apfel/kcs.h"
 #include "apfel/betaqcd.h"
-#include "apfel/gammacusp.h"
+#include "apfel/gammak.h"
 #include "apfel/constants.h"
 
 namespace apfel
 {
   //_________________________________________________________________________
-  double CSd10()
+  double KCS00()
   {
     return 0;
   }
 
   //_________________________________________________________________________
-  double CSd11()
+  double KCS01()
   {
-    return - 4;
+    return - gammaK0();
   }
 
   //_________________________________________________________________________
-  double CSd20(int const& nf)
+  double KCS10(int const& nf)
   {
     return CA * ( 28 * zeta3 - 808. / 27. ) + 224 * TR * nf / 27;
   }
 
   //_________________________________________________________________________
-  double CSd21(int const& nf)
+  double KCS11(int const& nf)
   {
-    return - GammaCusp1(nf);
+    return - gammaK1(nf);
   }
 
   //_________________________________________________________________________
-  double CSd22(int const& nf)
+  double KCS12(int const& nf)
   {
-    return - 2 * beta0qcd(nf);
+    return beta0qcd(nf) * gammaK0();
   }
 
   //_________________________________________________________________________
-  double CSd30(int const& nf)
+  double KCS20(int const& nf)
   {
     return 2 * ( CA * CA * ( - 176 * zeta3 * zeta2 / 3 + 6392 * zeta2 / 81 + 12328 * zeta3 / 27
                              + 154 * zeta4 / 3 - 192 * zeta5 - 297029. / 729. ) / 2
@@ -52,21 +52,21 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  double CSd31(int const& nf)
+  double KCS21(int const& nf)
   {
-    return 2 * beta0qcd(nf) * CSd20(nf) - GammaCusp2(nf);
+    return - gammaK2(nf);
   }
 
   //_________________________________________________________________________
-  double CSd32(int const& nf)
+  double KCS22(int const& nf)
   {
-    return - GammaCusp1(nf) * beta0qcd(nf) - 2 * beta1qcd(nf);
+    return beta1qcd(nf) * gammaK0() + 2 * beta0qcd(nf) * gammaK1(nf);
   }
 
   //_________________________________________________________________________
-  double CSd33(int const& nf)
+  double KCS23(int const& nf)
   {
-    const double b0 = beta0qcd(nf);
-    return - 4 * b0 * b0 / 3;
+    const double b02 = pow(beta0qcd(nf), 2);
+    return - 4 * b02 * gammaK0() / 3;
   }
 }
