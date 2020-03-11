@@ -162,7 +162,7 @@ $\mu_0\simeq \mu_b$ the first term in the r.h.s. of
 Eq.~(\ref{eq:CuspEv}) is free of large logs and thus its perturbative
 expansion, that reads:
 \begin{equation}\label{eq:rapandimlog}
-K(\mu_0) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
+K(\mu_0) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
 \end{equation}
 is reliable. The logarithmic terms in Eq.~(\ref{eq:rapandimlog}) can
 be computed by using Eq.~(\ref{eq:CuspRGE}) or Eq.~(\ref{eq:CuspEv})
@@ -233,23 +233,23 @@ Eq.~(\ref{eq:CuspEv}) computed between $\mu_b$ and $\mu_0$, one finds:
   \,.
 \end{array}
 \end{equation}
-The final result is:
+Replacing $\alpha_s(\mu_b)$ with $\alpha_s(\mu_0)$ through the
+expansion:
+\begin{equation}\label{eq:asinvexp}
+\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)=\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)+2\beta_0\ln\frac{\mu_0}{\mu_b}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^2+\left(2\beta_1\ln\frac{\mu_0}{\mu_b}+4\beta_0^2\ln^2\frac{\mu_0}{\mu_b}\right)\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^3+\mathcal{O}(\alpha_s^4)\,,
+\end{equation}
+the final result is:
 \begin{equation}\label{eq:CSkernelScales}
-\begin{array}{rcl}
-K(\mu_0) &=&\displaystyle  K(\mu_b) -
-             \int_{\mu_b}^{\mu_0}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\\
-\\
-&=& \displaystyle \sum_{n=0}^{2}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}K^{(n,0)}+\sum_{n=0}^{2}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}\sum_{m=1}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)
-\end{array}
+K(\mu_0) =\sum_{n=0}^{2}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
 \end{equation}
 where we read off:
 \begin{equation}
 \begin{array}{l}
 \displaystyle K^{(0,1)}=-\gamma_K^{(0)}\,,\\
 \\
-\displaystyle K^{(1,1)}=-\gamma_K^{(1)}\,,\quad K^{(1,2)}=\beta_0 \gamma_K^{(0)}\\
+\displaystyle K^{(1,1)}=-\gamma_K^{(1)}+2\beta_0 K^{(0,0)}\,,\quad K^{(1,2)}=-\beta_0 \gamma_K^{(0)}\\
 \\
-\displaystyle K^{(2,1)}=-\gamma_K^{(2)}\,,\quad K^{(2,2)}=\beta_1 \gamma_K^{(0)}+2\beta_0 \gamma_K^{(1)}\,,\quad K^{(2,3)}=-\frac{4}{3}\beta_0^2 \gamma_K^{(0)}\\
+\displaystyle K^{(2,1)}=-\gamma_K^{(2)}+2\beta_1 K^{(0,0)}+4\beta_0 K^{(1,0)}\,,\quad K^{(2,2)}=-\beta_1 \gamma_K^{(0)}-2\beta_0 \gamma_K^{(1)}+4\beta_0^2K^{(0,0)}\,,\quad K^{(2,3)}=-\frac{4}{3}\beta_0^2 \gamma_K^{(0)}\\
 \end{array}
 \end{equation}
 
@@ -407,7 +407,7 @@ assumes $\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in
 Eq.~(\ref{eq:solution2}), the matching function $C$ can be reliably
 expanded as:
 \begin{equation}\label{eq:MatchExp}
-  C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
+  C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
 \end{equation}
 The coefficient functions $C^{(n,m)}$ have been computed for both PDFs
 and FFs in Ref.~\cite{Echevarria:2016scs}. The same functions have
@@ -424,7 +424,7 @@ solution to $\mathcal{O}(\alpha_s^2)$. Contrary to the usual
 assumption, we take $\mu_0\neq\sqrt{\zeta_0}$ but in order to simplify
 the notation we introduce the following definitions:
 \begin{equation}
-a_b = \frac{\alpha_s(\mu_b)}{4\pi}\,,\quad
+a_b = \frac{\alpha_s(\mu_b)}{4\pi}\,,\quad a_0 = \frac{\alpha_s(\mu_0)}{4\pi}\,,\quad
 L_\mu=\ln\frac{\mu_0}{\mu_b}\,,\quad L_\zeta=\ln\frac{\sqrt{\zeta_0}}{\mu_b}\,,
 \end{equation}
 and we set $C^{(0,0)}=\Delta\equiv 1$ keeping in mind that any scalar
@@ -449,144 +449,47 @@ Now we need to solve also the second equation in Eq.~(\ref{eq:CEvEq})
 to evolve $C$ from $(\mu_b,\zeta_0)$ to $(\mu_0,\zeta_0)$. 
 The solution is:
 \begin{equation}\label{eq:Cexp2}
-\begin{array}{rcl}
-  C(\mu_0,\zeta_0) &=&\displaystyle
+  C(\mu_0,\zeta_0) =
                        \exp\left[\sum_{n=0}^{\infty}\int_{\mu_b}^{\mu_0}\frac{d\mu'}{\mu'}\left(\frac{\alpha_s(\mu')}{4\pi}\right)^{n+1}\left\{\left[\gamma_F^{(n)}
                        -
                        \gamma_K^{(n)}\ln\frac{\sqrt{\zeta_0}}{\mu'}\right]\Delta-2P^{(n)}\right\}\right]\otimes
                        C(\mu_b,\zeta_0) \\
-  \\
-                   &=&\displaystyle \exp\bigg[a_b\left\{\left(\gamma_F^{(0)} -2P^{(0)}\right)L_{\mu}
-                       +
-                       \frac12\gamma_K^{(0)}\left(L_{\mu}-2L_{\zeta}\right)L_{\mu}\right\}\\
-  \\
-                   &+&\displaystyle
-                       a_b^{2}\bigg\{\left(\gamma_F^{(1)} -2P^{(1)}\right)L_{\mu}
-                       +
-                       \frac12\gamma_K^{(1)}\left(L_{\mu}-2L_{\zeta}\right)L_{\mu}\\
-  \\
-                   &-&\displaystyle \left(\beta_0 \gamma_F^{(0)}-2 \beta_0  P^{(0)}\right)L_{\mu}^2
-                       -
-                       \beta_0 \gamma_K^{(0)}\left(\frac23 L_{\mu}-L_{\zeta}\right)L_{\mu}^2\bigg\}
-                       +\mathcal{O}(\alpha_s^3)\bigg]\otimes
-                       C(\mu_b,\zeta_0)\\
-  \\
-                   &=&\displaystyle \bigg\{1+a_b\left[\left(\gamma_F^{(0)} -2P^{(0)}\right)L_{\mu}
-                       +
-                       \frac12\gamma_K^{(0)}\left(L_{\mu}-2L_{\zeta}\right)L_{\mu}\right]\\
-  \\
-                   &+&\displaystyle
-                       a_b^{2}\bigg[\left(\gamma_F^{(1)} -2P^{(1)}\right)L_{\mu}
-                       +
-                       \frac12\gamma_K^{(1)}\left(L_{\mu}-2L_{\zeta}\right)L_{\mu}\\
-  \\
-                   &-&\displaystyle \left(\beta_0 \gamma_F^{(0)}-2 \beta_0
-                       P^{(0)}-\frac12\left(\gamma_F^{(0)}\right)^2 +2
-                       \gamma_F^{(0)} P^{(0)} -2P^{(0)}\otimes P^{(0)}\right)L_{\mu}^2\\
-  \\
-                   &-&\displaystyle
-                       \beta_0 \gamma_K^{(0)}\left(\frac23 L_{\mu}-L_{\zeta}\right)L_{\mu}^2\\
-  \\
-                   &+&\displaystyle \frac12\left(\gamma_F^{(0)}
-                       -2P^{(0)}\right)\gamma_K^{(0)}\left(L_{\mu}-2L_{\zeta}\right)L_{\mu}^2\\
-  \\
-                   &+&\displaystyle \frac18\left(\gamma_K^{(0)}\right)^2\left(L_{\mu}-2L_{\zeta}\right)^2L_{\mu}^2\bigg]
-                       +\mathcal{O}(\alpha_s^3)\bigg\}\otimes
-                       C(\mu_b,\zeta_0)
-\end{array}
 \end{equation}
-Finally, we need to multiply Eqs.~(\ref{eq:Cexp1})
-and~(\ref{eq:Cexp2}) and truncate the result to
-$\mathcal{O}(\alpha_s^2)$:
-\begin{equation}\label{eq:Cmu0z0}
-\begin{array}{rcl}
-  C(\mu_0,\zeta_0) &=&\displaystyle 1+a_b\left[
-                       C^{(1,0)}+\left(\gamma_F^{(0)}
-                       -2P^{(0)}\right)L_{\mu}+K^{(0,0)}L_{\zeta}+\frac12\gamma_K^{(0)}\left(L_{\mu}^2-2 L_{\mu} L_{\zeta}\right)\right]\\
-  \\
-                   &+&\displaystyle a_b^2\bigg[C^{(2,0)}+\left(\gamma_F^{(1)} -2P^{(1)}+\gamma_F^{(0)}C^{(1,0)}
-                       -2C^{(1,0)}\otimes P^{(0)}\right)L_{\mu}
-                       +\left(K^{(0,0)}
-                       C^{(1,0)}+K^{(1,0)}
-                       \right)L_{\zeta} \\
-  \\
-                   &+&\displaystyle \left(-\beta_0 \gamma_F^{(0)}+2 \beta_0
-                       P^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2
-                       \gamma_F^{(0)} P^{(0)} +2P^{(0)}\otimes P^{(0)}+\frac12\gamma_K^{(1)}+\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_{\mu}^2\\
-  \\
-                   &+&\displaystyle \left(\gamma_F^{(0)}K^{(0,0)} -2 K^{(0,0)} P^{(0)}-\gamma_K^{(1)}-\gamma_K^{(0)}C^{(1,0)}\right) L_{\mu}L_{\zeta}
-                       +\frac12\left(K^{(0,0)}\right)^2 L_{\zeta}^2\\
-  \\
-                   &+&\displaystyle
-                       \left(\frac12\gamma_K^{(0)}\gamma_F^{(0)}
-                       -\gamma_K^{(0)} P^{(0)}-\frac23 \beta_0 \gamma_K^{(0)}\right) L_{\mu}^3\\
-  \\
-                   &+&\displaystyle \left(-\gamma_K^{(0)}\gamma_F^{(0)}
-                       +2 \gamma_K^{(0)} P^{(0)}+\beta_0 \gamma_K^{(0)}+\frac12\gamma_K^{(0)}K^{(0,0)}\right) L_{\mu}^2 L_{\zeta}-
-                       \gamma_K^{(0)}K^{(0,0)} L_{\mu}L_{\zeta}^2\\
-  \\
-                   &+&\displaystyle
-                       \frac18\left(\gamma_K^{(0)}\right)^2\left(L_{\mu}^2-2L_\mu
-                       L_{\zeta}\right)^2\bigg]+\mathcal{O}(\alpha_s^3)\,,
-\end{array}
-\end{equation}
-that can be written in a compact form as:
+Finally, we need to plug Eq.~(\ref{eq:Cexp1}) into
+Eq.~(\ref{eq:Cexp2}), replace $\alpha_s(\mu_b)$ with $\alpha_s(\mu_0)$
+using Eq.~(\ref{eq:asinvexp}), and truncate the result to
+$\mathcal{O}(\alpha_s^2)$. We refrain from writing the full expression
+because too lengthy that however can be written in a compact form as:
 \begin{equation}\label{eq:MatchExp2}
-  C(\mu_0,\zeta_0) = \sum_{n=0}^{2}a_b^{n}\sum_{m=0}^{2n}\sum_{k=0}^{m}\bar{C}^{(n,m-k,k)}L_\mu^{m-k}L_\zeta^{k} +\mathcal{O}(\alpha_s^3)\,,
+  C(\mu_0,\zeta_0) = \sum_{n=0}^{2}a_0^{n}\sum_{m=0}^{2n}\sum_{k=0}^{m}\bar{C}^{(n,m-k,k)}L_\mu^{m-k}L_\zeta^{k} +\mathcal{O}(\alpha_s^3)\,,
 \end{equation}
 with:
 \begin{equation}
   C^{(n,m)}=\sum_{k=0}^{m}\bar{C}^{(n,m-k,k)}\,.
 \end{equation}
-
-Accounting for the fact that $K^{(0,0)}=0$, Eq.~(\ref{eq:Cmu0z0})
-reduces to:
-\begin{equation}
-\begin{array}{rcl}
-  C(\mu_0,\zeta_0) &=&\displaystyle 1+a_b\left[
-                       C^{(1,0)}+\left(\gamma_F^{(0)}
-                       -2P^{(0)}\right)L_{\mu}+\frac12\gamma_K^{(0)}\left(L_{\mu}^2-2 L_{\mu} L_{\zeta}\right)\right]\\
-  \\
-                   &+&\displaystyle a_b^2\bigg[C^{(2,0)}+\left(\gamma_F^{(1)} -2P^{(1)}+\gamma_F^{(0)}C^{(1,0)}
-                       -2C^{(1,0)}\otimes P^{(0)}\right)L_{\mu}
-                       +K^{(1,0)}L_{\zeta} \\
-  \\
-                   &+&\displaystyle \left(-\beta_0 \gamma_F^{(0)}+2 \beta_0
-                       P^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2
-                       \gamma_F^{(0)} P^{(0)} +2P^{(0)}\otimes P^{(0)}+\frac12\gamma_K^{(1)}+\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_{\mu}^2\\
-  \\
-                   &+&\displaystyle \left(-\gamma_K^{(1)}-\gamma_K^{(0)}C^{(1,0)}\right) L_{\mu}L_{\zeta}+
-                       \left(\frac12\gamma_K^{(0)}\gamma_F^{(0)}
-                       -\gamma_K^{(0)} P^{(0)}-\frac23 \beta_0 \gamma_K^{(0)}\right) L_{\mu}^3\\
-  \\
-                   &+&\displaystyle \left(-\gamma_K^{(0)}\gamma_F^{(0)}
-                       +2 \gamma_K^{(0)} P^{(0)}+\beta_0 \gamma_K^{(0)}\right) L_{\mu}^2 L_{\zeta}+
-                       \frac18\left(\gamma_K^{(0)}\right)^2\left(L_{\mu}^2-2L_\mu
-                       L_{\zeta}\right)^2\bigg]+\mathcal{O}(\alpha_s^3)\,.
-\end{array}
-\end{equation}
-In addition, to simplify the structure even further, one may take:
+In order to simplify the structure, one may take:
 \begin{equation}
 L_\mu=L_\zeta=L_0\,,
 \end{equation}
-so that:
+and accounting for the fact that $K^{(0,0)}=0$, Eq.~(\ref{eq:Cmu0z0})
+reduces to:
 \begin{equation}
 \begin{array}{rcl}
-  C(\mu_0,\mu_0^2) &=&\displaystyle 1+a_b\left[
+  C(\mu_0,\mu_0^2) &=&\displaystyle 1+a_0\left[
                        C^{(1,0)}+\left(\gamma_F^{(0)}
                        -2P^{(0)}\right)L_0-\frac12\gamma_K^{(0)}L_0^2\right]\\
   \\
-                   &+&\displaystyle a_b^2\bigg[C^{(2,0)}+\left(\gamma_F^{(1)} +K^{(1,0)}-2P^{(1)}+\gamma_F^{(0)}C^{(1,0)}
+                   &+&\displaystyle a_0^2\bigg[C^{(2,0)}+\left(\gamma_F^{(1)} +K^{(1,0)}-2P^{(1)}+\left(\gamma_F^{(0)}+2\beta_0\right)C^{(1,0)}
                        -2C^{(1,0)}\otimes P^{(0)}\right)L_0
                        \\
   \\
-                   &+&\displaystyle \left(-\beta_0 \gamma_F^{(0)}+2 \beta_0
-                       P^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2
-                       \gamma_F^{(0)} P^{(0)} +2P^{(0)}\otimes P^{(0)}-\frac12\gamma_K^{(1)}-\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_0^2\\
+                   &+&\displaystyle \left(\beta_0 \gamma_F^{(0)}+\frac12\left(\gamma_F^{(0)}\right)^2 -2 \left(\beta_0
+                       +
+                       \gamma_F^{(0)}\right) P^{(0)} +2P^{(0)}\otimes P^{(0)}-\frac12\gamma_K^{(1)}-\frac12\gamma_K^{(0)}C^{(1,0)}\right)L_0^2\\
   \\
                    &+&\displaystyle 
                        \left(-\frac12\gamma_K^{(0)}\gamma_F^{(0)}
-                       +\gamma_K^{(0)} P^{(0)}+\frac13 \beta_0 \gamma_K^{(0)}\right) L_0^3+
+                       +\gamma_K^{(0)} P^{(0)}-\frac23 \beta_0 \gamma_K^{(0)}\right) L_0^3+
                        \frac18\left(\gamma_K^{(0)}\right)^2L_0^4\bigg]+\mathcal{O}(\alpha_s^3)\,.
 \end{array}
 \end{equation}
@@ -683,7 +586,7 @@ Defining:
 a_\mu = \frac{\alpha_s(\mu)}{4\pi}\quad\mbox{and}\quad L_{Q} = \ln\frac{\mu}{Q}\,,
 \end{equation}
 we find:
-\begin{equation}\label{eq:Cexp2}
+\begin{equation}\label{eq:Hexp2}
 \begin{array}{rcl}
   H(Q,\mu) &=&\displaystyle 1+a_\mu\left[H^{(1)}-2\gamma_F^{(0)}L_{Q}
                        -

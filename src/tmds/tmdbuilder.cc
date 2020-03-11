@@ -179,6 +179,7 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C21pdf;
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const double b0   = beta0qcd(nf);
         const double gFq0 = gammaFq0();
         const double gFg0 = gammaFg0(nf);
         const Operator O21gmVq = ( gammaFq1(nf) + CF * KCS10(nf) ) * Id;
@@ -187,13 +188,13 @@ namespace apfel
         const auto P1 = DglapObjpdf.at(nf).SplittingFunctions.at(1);
         const auto C1 = C10pdf.at(nf);
         std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - 2 * P1.at(0) + gFq0 * C1.at(0) - 2 * C1.at(0) * P0.at(0)});
-        OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - 2 * P1.at(1) + gFq0 * C1.at(1) - 2 * C1.at(1) * P0.at(1)});
-        OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - 2 * P1.at(2) + gFq0 * C1.at(2) - 2 * C1.at(2) * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O21gmVq - 2 * P1.at(3) + gFq0 * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P1.at(4) + gFq0 * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P1.at(5) + gFg0 * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PGG,  O21gmVg - 2 * P1.at(6) + gFg0 * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - 2 * P1.at(0) + ( gFq0 + 2 * b0 ) * C1.at(0) - 2 * C1.at(0) * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - 2 * P1.at(1) + ( gFq0 + 2 * b0 ) * C1.at(1) - 2 * C1.at(1) * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - 2 * P1.at(2) + ( gFq0 + 2 * b0 ) * C1.at(2) - 2 * C1.at(2) * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  O21gmVq - 2 * P1.at(3) + ( gFq0 + 2 * b0 ) * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) )});
+        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P1.at(4) + ( gFq0 + 2 * b0 ) * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) )});
+        OM.insert({EvolutionBasisQCD::PGG,  O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
         C21pdf.insert({nf, OM});
       }
 
@@ -206,18 +207,18 @@ namespace apfel
         const double gK1  = gammaK1(nf);
         const double gFq0 = gammaFq0();
         const double gFg0 = gammaFg0(nf);
-        const Operator O22gmVq = ( - b0 * gFq0 + pow(gFq0, 2) / 2 - CF * gK1 / 2 ) * Id;
-        const Operator O22gmVg = ( - b0 * gFg0 + pow(gFg0, 2) / 2 - CA * gK1 / 2 ) * Id;
+        const Operator O22gmVq = ( b0 * gFq0 + pow(gFq0, 2) / 2 - CF * gK1 / 2 ) * Id;
+        const Operator O22gmVg = ( b0 * gFg0 + pow(gFg0, 2) / 2 - CA * gK1 / 2 ) * Id;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         const auto C1 = C10pdf.at(nf);
         std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O22gmVq + 2 * ( b0 - gFq0 ) * P0.at(0) - CF * gK0 / 2 * C1.at(0) + 2 * P0.at(0) * P0.at(0)});
-        OM.insert({EvolutionBasisQCD::PNSM, O22gmVq + 2 * ( b0 - gFq0 ) * P0.at(1) - CF * gK0 / 2 * C1.at(1) + 2 * P0.at(1) * P0.at(1)});
-        OM.insert({EvolutionBasisQCD::PNSV, O22gmVq + 2 * ( b0 - gFq0 ) * P0.at(2) - CF * gK0 / 2 * C1.at(2) + 2 * P0.at(2) * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O22gmVq + 2 * ( b0 - gFq0 ) * P0.at(3) - CF * gK0 / 2 * C1.at(3) + 2 * ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PQG,            2 * ( b0 - gFq0 ) * P0.at(4) - CF * gK0 / 2 * C1.at(4) + 2 * ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) )});
-        OM.insert({EvolutionBasisQCD::PGQ,            2 * ( b0 - gFg0 ) * P0.at(5) - CA * gK0 / 2 * C1.at(5) + 2 * ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PGG,  O22gmVg + 2 * ( b0 - gFg0 ) * P0.at(6) - CA * gK0 / 2 * C1.at(6) + 2 * ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PNSP, O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(0) - CF * gK0 / 2 * C1.at(0) + 2 * P0.at(0) * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(1) - CF * gK0 / 2 * C1.at(1) + 2 * P0.at(1) * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(2) - CF * gK0 / 2 * C1.at(2) + 2 * P0.at(2) * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(3) - CF * gK0 / 2 * C1.at(3) + 2 * ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) )});
+        OM.insert({EvolutionBasisQCD::PQG,          - 2 * ( b0 + gFq0 ) * P0.at(4) - CF * gK0 / 2 * C1.at(4) + 2 * ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * ( b0 + gFg0 ) * P0.at(5) - CA * gK0 / 2 * C1.at(5) + 2 * ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) )});
+        OM.insert({EvolutionBasisQCD::PGG,  O22gmVg - 2 * ( b0 + gFg0 ) * P0.at(6) - CA * gK0 / 2 * C1.at(6) + 2 * ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) )});
         C22pdf.insert({nf, OM});
       }
 
@@ -229,8 +230,8 @@ namespace apfel
         const double gK0  = gammaK0();
         const double gFq0 = gammaFq0();
         const double gFg0 = gammaFg0(nf);
-        const Operator O23gmVq = CF * gK0 * ( - gFq0 / 2 + b0 / 3 ) * Id;
-        const Operator O23gmVg = CA * gK0 * ( - gFg0 / 2 + b0 / 3 ) * Id;
+        const Operator O23gmVq = CF * gK0 * ( - gFq0 / 2 - 2 * b0 / 3 ) * Id;
+        const Operator O23gmVg = CA * gK0 * ( - gFg0 / 2 - 2 * b0 / 3 ) * Id;
         const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq + CF * gK0 * P0.at(0)});
@@ -285,6 +286,7 @@ namespace apfel
     std::map<int, std::map<int, Operator>> C21ff;
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const double b0   = beta0qcd(nf);
         const double gFq0 = gammaFq0();
         const double gFg0 = gammaFg0(nf);
         const Operator O21gmVq = ( gammaFq1(nf) + CF * KCS10(nf) ) * Id;
@@ -293,13 +295,13 @@ namespace apfel
         const auto P1 = DglapObjff.at(nf).SplittingFunctions.at(1);
         const auto C1 = C10ff.at(nf);
         std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - 2 * P1.at(0) + gFq0 * C1.at(0) - 2 * C1.at(0) * P0.at(0)});
-        OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - 2 * P1.at(1) + gFq0 * C1.at(1) - 2 * C1.at(1) * P0.at(1)});
-        OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - 2 * P1.at(2) + gFq0 * C1.at(2) - 2 * C1.at(2) * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O21gmVq - 2 * P1.at(3) + gFq0 * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P1.at(4) + gFq0 * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P1.at(5) + gFg0 * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PGG,  O21gmVg - 2 * P1.at(6) + gFg0 * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - 2 * P1.at(0) + ( gFq0 + 2 * b0 ) * C1.at(0) - 2 * C1.at(0) * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - 2 * P1.at(1) + ( gFq0 + 2 * b0 ) * C1.at(1) - 2 * C1.at(1) * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - 2 * P1.at(2) + ( gFq0 + 2 * b0 ) * C1.at(2) - 2 * C1.at(2) * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  O21gmVq - 2 * P1.at(3) + ( gFq0 + 2 * b0 ) * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) )});
+        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P1.at(4) + ( gFq0 + 2 * b0 ) * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) )});
+        OM.insert({EvolutionBasisQCD::PGG,  O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
         C21ff.insert({nf, OM});
       }
 
@@ -336,8 +338,8 @@ namespace apfel
         const double gK0  = gammaK0();
         const double gFq0 = gammaFq0();
         const double gFg0 = gammaFg0(nf);
-        const Operator O23gmVq = CF * gK0 * ( - gFq0 / 2 + b0 / 3 ) * Id;
-        const Operator O23gmVg = CA * gK0 * ( - gFg0 / 2 + b0 / 3 ) * Id;
+        const Operator O23gmVq = CF * gK0 * ( - gFq0 / 2 - 2 * b0 / 3 ) * Id;
+        const Operator O23gmVg = CA * gK0 * ( - gFg0 / 2 - 2 * b0 / 3 ) * Id;
         const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq + CF * gK0 * P0.at(0)});

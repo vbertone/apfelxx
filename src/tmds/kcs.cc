@@ -32,13 +32,13 @@ namespace apfel
   //_________________________________________________________________________
   double KCS11(int const& nf)
   {
-    return - gammaK1(nf);
+    return - gammaK1(nf) + 2 * beta0qcd(nf) * KCS00();
   }
 
   //_________________________________________________________________________
   double KCS12(int const& nf)
   {
-    return beta0qcd(nf) * gammaK0();
+    return - beta0qcd(nf) * gammaK0();
   }
 
   //_________________________________________________________________________
@@ -54,13 +54,14 @@ namespace apfel
   //_________________________________________________________________________
   double KCS21(int const& nf)
   {
-    return - gammaK2(nf);
+    return - gammaK2(nf) + 2 * beta1qcd(nf) * KCS00() + 4 * beta0qcd(nf) * KCS10(nf);
   }
 
   //_________________________________________________________________________
   double KCS22(int const& nf)
   {
-    return beta1qcd(nf) * gammaK0() + 2 * beta0qcd(nf) * gammaK1(nf);
+    const double b0 = beta0qcd(nf);
+    return - beta1qcd(nf) * gammaK0() - 2 * b0 * ( gammaK1(nf) - 2 * b0 * KCS00() );
   }
 
   //_________________________________________________________________________
