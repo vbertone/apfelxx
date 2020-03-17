@@ -62,8 +62,16 @@ namespace apfel
      * eta.
      */
     double eta() const { return _eta; }
+
+    /**
+     * @brief Function that sets the value of a possible external
+     * variable.
+     */
+    void SetExternalVariable(double const& extvar) const { _extvar = extvar; }
+
   protected:
-    double const _eta;
+    double const   _eta;     //!< Mass parameter
+    double mutable _extvar;  //!< External kinematic variable
   };
 
   /**

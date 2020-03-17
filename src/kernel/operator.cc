@@ -49,6 +49,12 @@ namespace apfel
         for (int beta = 0; beta <= gbound; beta++)
           {
             const double xbeta = xg[beta];
+
+            // Set xbeta as external variable in case needed for the
+            // computation of the operator (this is in general not
+            // needed but in the case of GPD evolution it is)
+            expr.SetExternalVariable(xbeta);
+
             // Local function. Can be computed outside the 'alpha'
             // loop.
             const double L   = eta * expr.Local(xbeta / xg[beta+1] / eta);
@@ -65,7 +71,7 @@ namespace apfel
                 // the integrals into (id+1) intervals on each of
                 // which the integrand is smooth. This way, even
                 // though more integrals have to be computed, the
-                // integration converges faster.
+                // integration converges faster and is more accurate.
 
                 // Number of grid intervals we need to integrate over.
                 const int nmax = fmin(id, alpha - beta) + 1;

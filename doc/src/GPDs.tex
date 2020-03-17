@@ -79,7 +79,7 @@ Fig.~\ref{fig:GPDIntDomain}.
 \end{figure}
 Knowing the support of the evolution kernel, Eq.~(\ref{eq:eveq}) can
 be split as follows:
-\begin{equation}\label{eq:eveq}
+\begin{equation}
 \begin{array}{rcl}
 \displaystyle\mu^2\frac{d}{d\mu^2}f(\pm x,\xi) &=&\displaystyle
   \int_{|x|}^{1}\frac{dx'}{x'}\left[\frac{x'}{\left|2\xi\right|}P\left(\pm \frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)+\frac{x'}{\left|2\xi\right|}P\left(\mp \frac{x}{\xi},\frac{x'}{\xi}\right)f(-x',\xi)\right]\\
@@ -96,7 +96,7 @@ define:\footnote{Notice the seemingly unusual fact that $f^{+}$ is
   in the forward limit, $f(-x)= -\overline{f}(x)$, \textit{i.e.} the
   PDF of a quark computed at $-x$ equals the PDF of the corresponding
   antiquark computed at $x$ with opposite sign.}
-\begin{equation}
+\begin{equation}\label{eq:pmdef}
 \begin{array}{rcl}
 \displaystyle f^{\pm}(x,\xi) &=&\displaystyle  f(x,\xi) \mp
                        f(-x,\xi)\,,\\
@@ -142,7 +142,7 @@ P^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)=\frac{1}{2\kappa}
   \frac{x'}{x}\right)\equiv \mathcal{P}^{\pm}\left(\kappa,\frac{x}{x'}\right)\,,
 \end{equation}
 where the last equality effectively defines the function:
-\begin{equation}
+\begin{equation}\label{eq:DGLAPevk}
 \mathcal{P}^{\pm}(\kappa,y) = \frac{1}{2\kappa y}
 P^{\pm}\left(\frac{1}{\kappa},\frac{1}{\kappa y}\right)\,.
 \end{equation}
@@ -267,7 +267,7 @@ that allows us to read off:
 For an incomplete integral between $x$ and one, typical of a Mellin
 convolution, the result is:
 \begin{equation}
-I(x)=\int_x^1dy\,\left[\frac{F(y)-F(1)}{1-y}+F(1)\left(\frac{1}{1-y}\right)_++\left(L+S\ln(1-x)\right)\delta(1-y)\right]f(y)\,.
+I(x)=\int_x^1dy\,\left[\frac{F(y)-S}{1-y}+S\left(\frac{1}{1-y}\right)_++\left(L+S\ln(1-x)\right)\delta(1-y)\right]f(y)\,.
 \end{equation}
 
 \section{Flavour structure}
@@ -281,21 +281,28 @@ the evolution kernels reads:
   \mathcal{P}^{\pm}(\kappa,y;\mu) = \sum_{n=0}^\infty \left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\mathcal{P}^{\pm,[n]} (\kappa,y)\,.
 \end{equation}
 
-At leading-order (LO), we find:
+At leading-order (LO) it turns out that the evolution kernels $P$
+appearing in Eq.~(\ref{eq:eveq}) vanish for negative values of
+$x'$. As a consequence of the definition in Eq.~(\ref{eq:pmdef}), at
+LO one has $P^{+}=P^{-}$. The explicit form of the LO evolution
+kernels $\mathcal{P}$, defined in Eq.~(\ref{eq:DGLAPevk}), is:
 \begin{equation}
-\mathcal{P}_{qq,\rm NS}^{\pm,[0]} (\kappa,y) = 2C_F\left[-\frac{1+y}{1-\kappa^2 y^2}+2\left(\frac{1}{1-y}\right)_+-\left(\frac{(1+\kappa)\ln(1-\kappa)+(1-\kappa)\ln(1+\kappa)}{2\kappa^2}\right)\delta(1-x)\right]\,,
-\end{equation}
-
-\begin{equation}
-\mathcal{P}_{qg}^{\pm,[0]} (\kappa,y) = 4n_f T_R \frac{1-y(2-(2-\kappa^2)y)}{(1-\kappa^2 y^2)^2}\,,
-\end{equation}
-
-\begin{equation}
-\mathcal{P}_{gq}^{\pm,[0]} (\kappa,y) = 2C_F\frac{2-y(2-(1-\kappa^2)y)}{y(1-\kappa^2 y^2)}\,,
-\end{equation}
-
-\begin{equation}
-\mathcal{P}_{gg}^{\pm,[0]} (\kappa,y) = 
+\begin{array}{rcl}
+\mathcal{P}_{qq,\rm NS}^{\pm,[0]} (\kappa,y) &=&\displaystyle
+                                                 2C_F\left[\frac{-1-y}{1-\kappa^2
+                                                 y^2}+2\left(\frac{1}{1-y}\right)_+-\left(\frac{(1+\kappa)\ln(1-\kappa)+(1-\kappa)\ln(1+\kappa)}{2\kappa^2}\right)\delta(1-x)\right]\,,\\
+\\
+\mathcal{P}_{qg}^{\pm,[0]} (\kappa,y)  &=&\displaystyle 4n_f T_R\frac{1}{1-\kappa^2y^2}
+                                           \left[1-\frac{2 y(1-y)}{1-\kappa^2
+                                           y^2}\right]\,,\\
+\\
+\mathcal{P}_{gq}^{\pm,[0]} (\kappa,y)  &=&\displaystyle
+2C_F\left[\frac{(1-y)^2}{y(1-\kappa^2 y^2)}+\frac1y\right]\,,\\
+\\
+\mathcal{P}_{gg}^{\pm,[0]} (\kappa,y) &=&\displaystyle
+                                          4C_A\left[\frac{-2+(1+\kappa^2)y-(1-\kappa^2)y^2}{(1-\kappa^2
+                                          y^2)^2}+\frac{1}{y}+ \left(\frac{1}{1-y}\right)_+\right]+\left(\frac{11}{3}C_A-\frac{4}{3}n_fT_R\right)\delta(1-x)\,.
+\end{array}
 \end{equation}
 
 
