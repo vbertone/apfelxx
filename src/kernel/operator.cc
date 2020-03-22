@@ -13,6 +13,12 @@
 namespace apfel
 {
   //_________________________________________________________________________
+  Operator::Operator(Grid const& gr):
+    _grid(gr)
+  {
+  }
+
+  //_________________________________________________________________________
   Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
     _grid(gr)
   {
@@ -52,7 +58,7 @@ namespace apfel
 
             // Set xbeta as external variable in case needed for the
             // computation of the operator (this is in general not
-            // needed but in the case of GPD evolution it is)
+            // needed but in the case of GPD evolution it is).
             expr.SetExternalVariable(xbeta);
 
             // Local function. Can be computed outside the 'alpha'
@@ -74,8 +80,8 @@ namespace apfel
                 // integration converges faster and is more accurate.
 
                 // Number of grid intervals we need to integrate over.
-                const int nmax = fmin(id, alpha - beta) + 1;
                 const int nmin = fmax(0, alpha + 1 - nx);
+                const int nmax = fmin(id, alpha - beta) + 1;
 
                 // Integral.
                 double I = 0;
@@ -233,7 +239,6 @@ namespace apfel
 
     return *this;
   }
-
 
   //_________________________________________________________________________
   Operator& Operator::operator *= (std::function<double(double const&)> f)

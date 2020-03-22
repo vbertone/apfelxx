@@ -4,11 +4,7 @@
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/grid.h"
 #include "apfel/dglapbuilder.h"
-#include "apfel/dglap.h"
-#include "apfel/operator.h"
-#include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/constants.h"
 #include "apfel/tools.h"
@@ -19,8 +15,6 @@
 #include "apfel/matchingconditions_tl.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
-
-#include <stdexcept>
 
 namespace apfel
 {

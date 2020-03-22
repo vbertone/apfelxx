@@ -28,6 +28,14 @@ namespace apfel
     /**
      * @brief The Operator constructor.
      * @param gr: the Grid object
+     * @note This constructor is used when the operator class is
+     * inherited (e.g. to compute GPD evolution).
+     */
+    Operator(Grid const& gr);
+
+    /**
+     * @brief The Operator constructor.
+     * @param gr: the Grid object
      * @param expr: the expression to be transformed
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
@@ -52,7 +60,7 @@ namespace apfel
      */
     Grid const& GetGrid() const { return _grid; }
 
-  private:
+  protected:
     Grid                        const& _grid;         //!< Grid on which to compute the operator
     std::vector<matrix<double>>        _Operator;     //!< Operator values.
   };

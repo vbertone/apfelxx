@@ -62,3 +62,8 @@ add_test(dglap_test dglap_test)
 add_executable(ogata_test ogata_test.cc)
 target_link_libraries(ogata_test apfelxx)
 add_test(ogata_test ogata_test)
+
+# build tests
+add_executable(gpd_test gpd_test.cc)
+target_link_libraries(gpd_test apfelxx)
+add_test(gpd_test gpd_test)
