@@ -11,10 +11,10 @@
 namespace apfel
 {
   /**
-   * @defgroup GPDEvKernels GPD evolution kernels Collection of the
-   * MSbar evolution kernels for the evolution of GPDs. They are split
-   * into two categories that apply to the DGLAP and ERBL regions
-   * respectively.
+   * @defgroup GPDEvKernels GPD evolution kernels
+   * Collection of the MSbar evolution kernels for the evolution of
+   * GPDs. They are split into two categories that apply to the DGLAP
+   * and ERBL regions respectively.
    */
   ///@{
   ///@}
@@ -57,8 +57,8 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised
-   * splitting function for the DGLAP region.
+   * @brief O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised splitting
+   * function for the DGLAP region.
    */
   class Pgpd0qgDGLAP: public Expression
   {
@@ -70,8 +70,8 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised
-   * splitting function for the ERBL region.
+   * @brief O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised splitting
+   * function for the ERBL region.
    */
   class Pgpd0qgERBL: public Expression
   {
@@ -83,8 +83,8 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised
-   * splitting function for the DGLAP region.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised splitting
+   * function for the DGLAP region.
    */
   class Pgpd0gqDGLAP: public Expression
   {
@@ -96,8 +96,8 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised
-   * splitting function for the ERBL region.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised splitting
+   * function for the ERBL region.
    */
   class Pgpd0gqERBL: public Expression
   {
@@ -109,8 +109,8 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised
-   * splitting function for the DGLAP region.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised splitting
+   * function for the DGLAP region.
    */
   class Pgpd0ggDGLAP: public Expression
   {
@@ -125,8 +125,8 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised
-   * splitting function for the ERBL region.
+   * @brief O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised splitting
+   * function for the ERBL region.
    */
   class Pgpd0ggERBL: public Expression
   {

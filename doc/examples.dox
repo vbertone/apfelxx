@@ -12,4 +12,5 @@
  \example qgriddist_test.cc
  \example dglap_test.cc
  \example structurefunction_test.cc
+ \example gpd_test.cc
  */
