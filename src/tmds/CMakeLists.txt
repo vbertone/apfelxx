@@ -5,6 +5,7 @@ set(tmds_source
   kcs.cc
   matchingfunctionspdf.cc
   matchingfunctionsff.cc
+  hardfactors.cc
   ogataquadrature.cc
   doubleexponentialquadrature.cc
   twobodyphasespace.cc

@@ -21,20 +21,22 @@ namespace apfel
 
   /**
    * @brief Structure that contains all the precomputed quantities
-   * needed to perform the TMD evolution and matchinf to the collinear
-   * PDFs, i.e. perturbative coefficients of matching functions and
-   * and all anomalous dimensions.
+   * needed to perform the TMD evolution, matching to the collinear
+   * PDFs, and computation of cross sections, i.e. perturbative
+   * coefficients of matching functions, all anomalous dimensions, and
+   * hard functions.
    */
   struct TmdObjects
   {
-    double                                    Threshold;
-    std::map<int, double>                     Beta;
-    std::map<int, double>                     GammaFq;
-    std::map<int, double>                     GammaFg;
-    std::map<int, double>                     GammaK;
-    std::map<int, std::vector<double>>        KCS;
-    std::map<int, std::vector<Set<Operator>>> MatchingFunctionsPDFs;
-    std::map<int, std::vector<Set<Operator>>> MatchingFunctionsFFs;
+    double                                       Threshold;
+    std::map<int, double>                        Beta;
+    std::map<int, double>                        GammaFq;
+    std::map<int, double>                        GammaFg;
+    std::map<int, double>                        GammaK;
+    std::map<int, std::vector<double>>           KCS;
+    std::map<int, std::vector<Set<Operator>>>    MatchingFunctionsPDFs;
+    std::map<int, std::vector<Set<Operator>>>    MatchingFunctionsFFs;
+    std::map<std::string, std::map<int, double>> HardFactors;
   };
 
   /**
@@ -62,6 +64,8 @@ namespace apfel
    * Collection of functions that build a TMD distributions (both PDFs
    * and FF) as Set<Distribution>-valued functions. These functions
    * perform evolution and matching either separately or alltogether.
+   * Also a function for the computation of the hard factors is
+   * provided.
    */
   ///@{
   /**
@@ -194,6 +198,21 @@ namespace apfel
                                                                                           int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the hard factor.
+   * @param Process: the string corresponding to the process requested
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Cf: the final scale-variation factor (default: 1)
+   * @return double-valued function of the final renormalisation scale &mu;
+   */
+  std::function<double(double const&)> HardFactor(std::string                          const& Process,
+                                                  std::map<int, TmdObjects>            const& TmdObj,
+                                                  std::function<double(double const&)> const& Alphas,
+                                                  int                                  const& PerturbativeOrder,
+                                                  double                               const& Cf = 1);
   ///@}
 
   /**
@@ -211,28 +230,5 @@ namespace apfel
    * @return The hard factor for Drell-Yan.
    */
   double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
-
-  /**
-   * @brief Perturbative hard factor for SIDIS.
-   * @param PerturbativeOrder: the perturbative order
-   * @param Alphas: the value of the strong coupling
-   * @param nf: the number of active flavours
-   * @param kappa: the ration between hard scale and renormalusation scale
-   * @return The hard factor for SIDIS.
-   */
-  double HardFactorSIDIS(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
-
-  /**
-   * @brief Perturbative hard factor for Higgs production in
-   * gluon-gluon fusion via top loop.
-   * @param PerturbativeOrder: the perturbative order
-   * @param Alphas: the value of the strong coupling
-   * @param nf: the number of active flavours
-   * @param kappa: the ration between hard scale and renormalusation scale
-   * @return The hard factor for Higgs production in gluon-gluon
-   * fusion.
-   * @note Reference: https://arxiv.org/pdf/1805.05916.pdf
-   */
-  double HardFactorggHiggs(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
   ///@}
 }

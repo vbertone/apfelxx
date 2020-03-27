@@ -471,8 +471,7 @@ In order to simplify the structure, one may take:
 \begin{equation}
 L_\mu=L_\zeta=L_0\,,
 \end{equation}
-and accounting for the fact that $K^{(0,0)}=0$, Eq.~(\ref{eq:Cmu0z0})
-reduces to:
+and accounting for the fact that $K^{(0,0)}=0$, we have:
 \begin{equation}
 \begin{array}{rcl}
   C(\mu_0,\mu_0^2) &=&\displaystyle 1+a_0\left[
@@ -572,10 +571,8 @@ H(Q,\mu) = \exp\left\{-2\int_Q^\mu\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'
 Knowing that:
 \begin{equation}
 \begin{array}{rcl}
-H(Q,Q) &=&\displaystyle
-           1+\sum_{n=1}^\infty\left(\frac{\alpha_s(Q)}{4\pi}\right)^nH^{(n)}\\
-\\
-  &=&\displaystyle  1+\left(\frac{\alpha_s(\mu)}{4\pi}\right)H^{(1)}+\left(\frac{\alpha_s(\mu)}{4\pi}\right)^2\left(H^{(2)}-2\beta_0H^{(1)}\ln\frac{\mu}{Q}\right)+\mathcal{O}(\alpha_s^3)\,,
+  H(Q,Q) &=&\displaystyle
+             1+\sum_{n=1}^\infty\left(\frac{\alpha_s(Q)}{4\pi}\right)^nH^{(n)}\,,
 \end{array}
 \end{equation}
 and assuming that $Q$ and $\mu$ are not too far apart,
@@ -594,12 +591,12 @@ we find:
                        \\
 \\
            &+&\displaystyle a_\mu^{2}\bigg[H^{(2)} + 
-               \left(-2\gamma_F^{(1)}-2\beta_0H^{(1)}-2\gamma_F^{(0)}H^{(1)}\right)L_{Q}\\
+               \left(-2\gamma_F^{(1)}+2\beta_0H^{(1)}-2\gamma_F^{(0)}H^{(1)}\right)L_{Q}\\
 \\
-&+&\displaystyle \left(-\gamma_K^{(1)}+2\beta_0 \gamma_F^{(0)}+2\left(\gamma_F^{(0)}\right)^2 -
+&+&\displaystyle \left(-\gamma_K^{(1)}-2\beta_0 \gamma_F^{(0)}+2\left(\gamma_F^{(0)}\right)^2 -
                        \gamma_K^{(0)}H^{(1)}\right)L_{Q}^2\\
   \\
-                   &+&\displaystyle\left(\frac43
+                   &+&\displaystyle\left(-\frac23
                        \beta_0 \gamma_K^{(0)}+ 2\gamma_F^{(0)}
                        \gamma_K^{(0)}\right)L_{Q}^3+
                        \frac12\left(\gamma_K^{(0)}\right)^2L_{Q}^4
