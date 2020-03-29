@@ -9,7 +9,7 @@
 int main()
 {
   const double xx = 0.4;
-/*
+
   double *x = new double;
   int *nw = new int;
   int *wn1 = new int;
@@ -18,13 +18,13 @@ int main()
   *nw = 4;
   *wn1 = -1;
   *wn2 = 1;
-*/
+
   // HPOLY all at once
   std::map<int, std::vector<double>> hpls = apfel::hpoly(xx);
 
   // HPLOG all at once
   double Hr1[3], Hr2[9], Hr3[27], Hr4[81];
-  //apfel::hplog_(x, nw, Hr1, Hr2, Hr3, Hr4, wn1, wn2);
+  apfel::hplog_(x, nw, Hr1, Hr2, Hr3, Hr4, wn1, wn2);
 
   std::cout << " x = " << xx << std::endl;
   std::cout << "                        "
@@ -68,7 +68,7 @@ int main()
     apfel::hpoly(xx);
   std::cout << "Calling HPOLY [2] " << nc << " times... ";
   t.stop();
-/*
+
   t.start();
   for (int i = 0; i < nc; i++)
     apfel::hplog_(x, nw, Hr1, Hr2, Hr3, Hr4, wn1, wn2);
@@ -80,6 +80,6 @@ int main()
   delete nw;
   delete wn1;
   delete wn2;
-*/
+
   return 0;
 }
