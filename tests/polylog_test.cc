@@ -76,5 +76,10 @@ int main()
   t.stop();
   std::cout << "\n";
 
+  delete x;
+  delete nw;
+  delete wn1;
+  delete wn2;
+
   return 0;
 }
