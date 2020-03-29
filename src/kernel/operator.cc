@@ -146,7 +146,7 @@ namespace apfel
             {
               s[ig][alpha] = 0;
               for (int beta = alpha; beta <= nx; beta++)
-                s[ig][alpha] += _Operator[ig](alpha,beta) * sg[ig][beta];
+                s[ig][alpha] += _Operator[ig](alpha, beta) * sg[ig][beta];
             }
         // If the grid is internal the product between the operator
         // and the distribution has to be done exploiting the symmetry
@@ -207,9 +207,9 @@ namespace apfel
             for (int alpha = 0; alpha <= nx; alpha++)
               for (int beta = alpha; beta <= nx; beta++)
                 {
-                  _Operator[ig](alpha,beta) = 0;
+                  _Operator[ig](alpha, beta) = 0;
                   for (int gamma = alpha; gamma <= beta; gamma++)
-                    _Operator[ig](alpha,beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
+                    _Operator[ig](alpha, beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
                 }
           }
         // If the grid is internal the product between the operators
@@ -220,9 +220,9 @@ namespace apfel
             for (int alpha = 0; alpha <= nx; alpha++)
               for (int beta = alpha; beta <= nx; beta++)
                 {
-                  _Operator[ig](alpha,beta) = 0;
+                  _Operator[ig](alpha, beta) = 0;
                   for (int gamma = alpha; gamma <= beta; gamma++)
-                    _Operator[ig](alpha,beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
+                    _Operator[ig](alpha, beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
                 }
           }
       }
@@ -235,7 +235,7 @@ namespace apfel
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
         for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
-          _Operator[ig](alpha,beta) *= s;
+          _Operator[ig](alpha, beta) *= s;
 
     return *this;
   }
@@ -252,7 +252,7 @@ namespace apfel
         const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
         for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
           for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
-            _Operator[ig](alpha,beta) *= f(sg[alpha]);
+            _Operator[ig](alpha, beta) *= f(sg[alpha]);
       }
     return *this;
   }
@@ -264,7 +264,7 @@ namespace apfel
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
         for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
-          _Operator[ig](alpha,beta) *= r;
+          _Operator[ig](alpha, beta) *= r;
 
     return *this;
   }
@@ -279,7 +279,7 @@ namespace apfel
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
         for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
-          _Operator[ig](alpha,beta) += o._Operator[ig](alpha,beta);
+          _Operator[ig](alpha, beta) += o._Operator[ig](alpha, beta);
 
     return *this;
   }
@@ -294,7 +294,7 @@ namespace apfel
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(0); alpha++)
         for (size_t beta = alpha; beta < _Operator[ig].size(1); beta++)
-          _Operator[ig](alpha,beta) -= o._Operator[ig](alpha,beta);
+          _Operator[ig](alpha, beta) -= o._Operator[ig](alpha, beta);
 
     return *this;
   }

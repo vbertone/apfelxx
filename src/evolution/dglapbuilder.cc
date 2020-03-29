@@ -95,8 +95,8 @@ namespace apfel
     const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg  = LogKth[nf] * AS1HgL;
-        const Operator AS1ggH = LogKth[nf] * AS1ggHL;
+        const Operator AS1Hg  = LogKth[nf-1] * AS1HgL;
+        const Operator AS1ggH = LogKth[nf-1] * AS1ggHL;
         const Operator AS1Tg  = - nf * AS1Hg;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::PNS, Zero});
@@ -162,7 +162,7 @@ namespace apfel
     const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const double lnk  = LogKth[nf];
+        const double lnk  = LogKth[nf-1];
         const double lnk2 = lnk * lnk;
         const Operator APS2Hq  = APS2Hq0  + lnk * APS2HqL  + lnk2 * APS2HqL2;
         const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
@@ -370,8 +370,8 @@ namespace apfel
     const Operator AS1ggHL{g, ATS1ggH_L{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg  = AS1Hg0 + LogKth[nf] * AS1HgL;
-        const Operator AS1ggH = LogKth[nf] * AS1ggHL;
+        const Operator AS1Hg  = AS1Hg0 + LogKth[nf-1] * AS1HgL;
+        const Operator AS1ggH = LogKth[nf-1] * AS1ggHL;
         const Operator AS1Tg  = - nf * AS1Hg;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::PNS, Zero});

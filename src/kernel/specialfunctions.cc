@@ -670,7 +670,7 @@ namespace apfel
             hpb[ib] = tu[0];
             for (int k = 1; k < iw; k++)
               hpb[ib] += tu[k] * dlu[k] + tv[k-1] * dlv[k-1];
-	    vin[iw-2] += bs;
+            vin[iw-2] += bs;
           }
         hpls.insert({iw, hpb});
         dlu.push_back(dlu[1] * dlu.back());
