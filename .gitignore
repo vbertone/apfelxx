@@ -31,6 +31,7 @@ tests/qgriddist_test
 tests/dglap_test
 tests/ogata_test
 tests/gpd_test
+tests/polylog_test
 doc/src/codes/FOvsAsy
 doc/src/codes/logs
 doc/src/codes/EvolutionFactor

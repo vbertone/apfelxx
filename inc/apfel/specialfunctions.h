@@ -6,6 +6,9 @@
 
 #pragma once
 
+#include <vector>
+#include <map>
+
 namespace apfel
 {
   /**
@@ -43,7 +46,7 @@ namespace apfel
   double dilog(double const& x);
 
   /**
-   * @brief function for the computation of the Nielsen's generalized dilogs.
+   * @brief Function for the computation of the Nielsen's generalized dilogs.
    * @param n: integer argument
    * @param p: integer argument
    * @param x: real argument
@@ -51,5 +54,35 @@ namespace apfel
    * @note Implementation translated from CERNLIB WGPLG.
    */
   double wgplg(int const& n, int const& p, double const& x);
+
+  /**
+   * @brief Function for the computation of the Harmonic polylogs up
+   * to weight 5.
+   * @param w: vector of weights
+   * @param x: real argument
+   * @return \f$\mathrm{H}(\{w\},x)\f$
+   * @note C++ adaptation of the FORTRAN implementation discussed in
+   * https://arxiv.org/pdf/1809.07084.pdf. The argument x is limited
+   * to the interval [0, sqrt(2)-1].
+   */
+  double hpoly(std::vector<int> const& w, double const& x);
+
+  /**
+   * @brief Function for the computation of the Harmonic polylogs up
+   * to weight 5.
+   * @param x: real argument
+   * @param wmax: maximum number of weights to be computed (default: 5, i.e. the maximum)
+   * @return \f$\mathrm{H}(\{w\},x)\f$
+   * @note As the function above but in this case all HPLs up to wmax
+   * are computed at once. This is computationally convenient.
+   */
+  std::map<int, std::vector<double>> hpoly(double const& x, int const& wmax = 5);
+
+  /**
+   * @brief Function that returns weight and basis index of the HPL
+   * given the input vector.
+   * @param w: the packed vector of weights
+   */
+  std::pair<int, int> WeightAndIndex(std::vector<int> const& w);
   ///@}
 }

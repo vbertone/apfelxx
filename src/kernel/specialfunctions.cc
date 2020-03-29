@@ -5,6 +5,8 @@
 //
 
 #include "apfel/specialfunctions.h"
+#include "apfel/messages.h"
+#include "apfel/hpolyweights.h"
 
 #include <cmath>
 #include <cstdio>
@@ -535,5 +537,145 @@ namespace apfel
       }
     result=(b0-h*b2)*pow(x,p)/(fct[p]*pow(p,n));
     return(result);
+  }
+
+  //_________________________________________________________________________________
+  std::pair<int, int> WeightAndIndex(std::vector<int> const& w)
+  {
+    // Unpack vector of weights
+    std::vector<int> uw;
+    for (auto const n : w)
+      {
+        const int d = std::max(std::abs(n), 1);
+        uw.resize(uw.size() + d);
+        uw.back() = n / d;
+      }
+
+    // Now return the weight size and the corresponding index in the
+    // basis.
+    return {uw.size(), WeightIndex.at(uw)};
+  }
+
+  //_________________________________________________________________________________
+  double hpoly(std::vector<int> const& w, double const& x)
+  {
+    // Make sure that the argument is inside the validity range.
+    if (x <= 0 || x > sqrt(2) - 1)
+      throw std::runtime_error(error("hpoly", "Argument out of range."));
+
+    // Get weight size and index in the basis
+    const std::pair<int, int> wi = WeightAndIndex(w);
+
+    // Make sure that the weight does not exceed 5
+    if (wi.first < 1 || wi.first > 5)
+      throw std::runtime_error(error("hpoly", "Weight out of range."));
+
+    // If the weight is one use the explicit expressions
+    if (wi.first == 1)
+      if (w[0] == - 1)
+        return log(1 + x);
+      else if (w[0] == 0)
+        return log(x);
+      else
+        return - log(1 - x);
+    else
+      {
+        // Find position on the coefficient vectors
+        const int step = bv[wi.first-1] * bs;
+        std::vector<double>::const_iterator in;
+        if (wi.first == 2)
+          in = da2.begin() + bs * wi.second;
+        else if (wi.first == 3)
+          in = da3.begin() + bs * wi.second;
+        else if (wi.first == 4)
+          in = da4.begin() + bs * wi.second;
+        else
+          in = da5.begin() + bs * wi.second;
+
+        // Compute HPL
+        const double u   =   log(1 + x);
+        const double v   = - log(1 - x);
+        const double dlu =   log(u);
+        const double dlv =   log(v);
+        double uk = u;
+        double vk = v;
+        std::vector<double> tu(wi.first, 0);
+        std::vector<double> tv(wi.first - 1, 0);
+        for (std::vector<double>::const_iterator it = in; it < in + bs; it++)
+          {
+            int i = 0;
+            for (int k = 0; k < wi.first; k++)
+              tu[k] += uk * *(it + i++ * step);
+            for (int k = 0; k < wi.first - 1; k++)
+              tv[k] += vk * *(it + i++ * step);
+            uk *= u;
+            vk *= v;
+          }
+        double hpl = tu[0];
+        for (int k = 1; k < wi.first; k++)
+          hpl += tu[k] * pow(dlu, k) + tv[k-1] * pow(dlv, k - 1);
+
+        return hpl;
+      }
+  }
+
+  //_________________________________________________________________________________
+  std::map<int, std::vector<double>> hpoly(double const& x, int const& wmax)
+  {
+    // Make sure that the argument is inside the validity range.
+    if (x <= 0 || x > sqrt(2) - 1)
+      throw std::runtime_error(error("hpoly", "Argument out of range."));
+
+    // Make sure that wmax is within the validity range.
+    if (wmax < 1 || wmax > 5)
+      throw std::runtime_error(error("hpoly", "Max weight out of range."));
+
+    // Relevant variables
+    const double u =   log(1 + x);
+    const double v = - log(1 - x);
+    std::vector<double> dlu{1, log(u)};
+    std::vector<double> dlv{1, log(v)};
+
+    // Starting points of the iterator
+    std::vector<std::vector<double>::const_iterator> vin{da2.begin(), da3.begin(), da4.begin(), da5.begin()};
+
+    // Initialise output
+    std::map<int, std::vector<double>> hpls;
+
+    // Weight 1
+    hpls.insert({1, {u, log(x), v}});
+
+    // Loop over remaining weights
+    for (int iw = 2; iw <= wmax; iw++)
+      {
+        const int step = bv[iw-1] * bs;
+        std::vector<double> hpb(bv[iw-1], 0);
+        for (int ib = 0; ib < bv[iw-1]; ib++)
+          {
+            // Compute HPL
+            double uk = u;
+            double vk = v;
+            std::vector<double> tu(iw, 0);
+            std::vector<double> tv(iw - 1, 0);
+            for (std::vector<double>::const_iterator it = vin[iw-2]; it < vin[iw-2] + bs; it++)
+              {
+                int i = 0;
+                for (int k = 0; k < iw; k++)
+                  tu[k] += uk * *(it + i++ * step);
+                for (int k = 0; k < iw - 1; k++)
+                  tv[k] += vk * *(it + i++ * step);
+                uk *= u;
+                vk *= v;
+              }
+            hpb[ib] = tu[0];
+            for (int k = 1; k < iw; k++)
+              hpb[ib] += tu[k] * dlu[k] + tv[k-1] * dlv[k-1];
+            vin[iw-2] += bs;
+          }
+        hpls.insert({iw, hpb});
+        dlu.push_back(dlu[1] * dlu.back());
+        dlu.push_back(dlv[1] * dlv.back());
+      }
+    return hpls;
   }
 }

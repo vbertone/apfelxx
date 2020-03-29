@@ -1,0 +1,140 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4846,        132]
+NotebookOptionsPosition[      3539,        103]
+NotebookOutlinePosition[      3874,        118]
+CellTagsIndexPosition[      3831,        115]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "HPL`"}]], "Input",
+ CellChangeTimes->{{3.794381613871706*^9, 3.794381625457152*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"dcaac740-d202-461b-a005-411d31b03fc3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"*-*-*-*-*-* HPL 2.0 *-*-*-*-*-*\\n\\nAuthor: Daniel Maitre, \
+University of Zurich\"\>"], "Print",
+ CellChangeTimes->{3.79438162602183*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"5a8990fa-c990-4c67-9f38-7e176cb6a222"],
+
+Cell[BoxData["\<\"Rules for minimal set loaded for weights: 2, 3, 4, 5, \
+6.\"\>"], "Print",
+ CellChangeTimes->{3.794381626195443*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"875655b5-431b-43d3-ac5c-9b5ee2fbb610"],
+
+Cell[BoxData["\<\"Rules for minimal set for + - weights loaded for weights: \
+2, 3, 4, 5, 6.\"\>"], "Print",
+ CellChangeTimes->{3.794381626519559*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"63322944-2a21-4c79-8337-f00234deb7cf"],
+
+Cell[BoxData["\<\"Table of MZVs loaded up to weight 6\"\>"], "Print",
+ CellChangeTimes->{3.7943816265444937`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"c469b491-c616-4a22-a801-c14ad3aa5858"],
+
+Cell[BoxData["\<\"Table of values at I loaded up to weight 6\"\>"], "Print",
+ CellChangeTimes->{3.794381627359724*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"7ca90632-f0c9-444a-a040-fdd352f0eb1f"],
+
+Cell[BoxData["\<\"$HPLFunctions gives a list of the functions of the package.\
+\\n$HPLOptions gives a list of the options of the package.\"\>"], "Print",
+ CellChangeTimes->{3.79438162738098*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"c56ca344-0072-4ddd-95df-914f49213b42"],
+
+Cell[BoxData["\<\"More info in hep-ph/0507152, hep-ph/0703052 and at \\n \
+http://krone.physik.unizh.ch/~maitreda/HPL/\"\>"], "Print",
+ CellChangeTimes->{3.794381627382798*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"0ee01124-2d2c-44f0-81f1-4dcbb5ba01ec"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Import", "[", "\"\<./TMDpdf.m\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.794381874497877*^9, 3.7943819327519503`*^9}, {
+  3.794381982938748*^9, 3.794381996056549*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"c5345d20-3682-460c-b948-dc0645530601"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Import","nffil",
+   "\"File \\!\\(\\*RowBox[{\\\"\\\\\\\"./TMDpdf.m\\\\\\\"\\\"}]\\) not found \
+during \\!\\(\\*RowBox[{\\\"Import\\\"}]\\).\"",2,7,9,19606680818695719729,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.7943819862341022`*^9, 3.7943819964795628`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"fe83c9ad-cc43-4b28-ab06-c1e774c9925b"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{{3.7943819862398853`*^9, 3.794381996487197*^9}},
+ CellLabel->"Out[7]=",ExpressionUUID->"98f01e62-f732-4a8b-a733-054b0816edf8"]
+}, Open  ]]
+},
+WindowSize->{808, 678},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 192, 3, 30, "Input",ExpressionUUID->"dcaac740-d202-461b-a005-411d31b03fc3"],
+Cell[CellGroupData[{
+Cell[797, 29, 261, 5, 63, "Print",ExpressionUUID->"5a8990fa-c990-4c67-9f38-7e176cb6a222"],
+Cell[1061, 36, 238, 5, 24, "Print",ExpressionUUID->"875655b5-431b-43d3-ac5c-9b5ee2fbb610"],
+Cell[1302, 43, 254, 5, 24, "Print",ExpressionUUID->"63322944-2a21-4c79-8337-f00234deb7cf"],
+Cell[1559, 50, 217, 4, 24, "Print",ExpressionUUID->"c469b491-c616-4a22-a801-c14ad3aa5858"],
+Cell[1779, 56, 222, 4, 24, "Print",ExpressionUUID->"7ca90632-f0c9-444a-a040-fdd352f0eb1f"],
+Cell[2004, 62, 298, 5, 44, "Print",ExpressionUUID->"c56ca344-0072-4ddd-95df-914f49213b42"],
+Cell[2305, 69, 280, 5, 44, "Print",ExpressionUUID->"0ee01124-2d2c-44f0-81f1-4dcbb5ba01ec"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2634, 80, 271, 4, 30, "Input",ExpressionUUID->"c5345d20-3682-460c-b948-dc0645530601"],
+Cell[2908, 86, 432, 10, 24, "Message",ExpressionUUID->"fe83c9ad-cc43-4b28-ab06-c1e774c9925b"],
+Cell[3343, 98, 180, 2, 68, "Output",ExpressionUUID->"98f01e62-f732-4a8b-a733-054b0816edf8"]
+}, Open  ]]
+}
+]
+*)
+
