@@ -620,36 +620,34 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::map<int, std::vector<double>> hpoly(double const& x, int const& wmax)
+  std::map<int, std::vector<double>> hpoly(double const& x)
   {
     // Make sure that the argument is inside the validity range.
     if (x <= 0 || x > sqrt(2) - 1)
       throw std::runtime_error(error("hpoly", "Argument out of range."));
 
-    // Make sure that wmax is within the validity range.
-    if (wmax < 1 || wmax > 5)
-      throw std::runtime_error(error("hpoly", "Max weight out of range."));
-
     // Relevant variables
     const double u =   log(1 + x);
     const double v = - log(1 - x);
-    std::vector<double> dlu{1, log(u)};
-    std::vector<double> dlv{1, log(v)};
+    const double lu = log(u);
+    const double lv = log(v);
+    const double vlu[5] = {1, lu, lu * lu, lu * lu * lu, lu * lu * lu * lu};
+    const double vlv[4] = {1, lv, lv * lv, lv * lv * lv};
 
     // Starting points of the iterator
-    std::vector<std::vector<double>::const_iterator> vin{da2.begin(), da3.begin(), da4.begin(), da5.begin()};
+    std::vector<double>::const_iterator vin[4] = {da2.begin(), da3.begin(), da4.begin(), da5.begin()};
 
     // Initialise output
-    std::map<int, std::vector<double>> hpls;
-
-    // Weight 1
-    hpls.insert({1, {u, log(x), v}});
+    std::map<int, std::vector<double>> hpls{{1, {u, log(x), v}},
+      {2, std::vector<double>(bv[1], 0)},
+      {3, std::vector<double>(bv[2], 0)},
+      {4, std::vector<double>(bv[3], 0)},
+      {5, std::vector<double>(bv[4], 0)}};
 
     // Loop over remaining weights
-    for (int iw = 2; iw <= wmax; iw++)
+    for (int iw = 2; iw <= 5; iw++)
       {
         const int step = bv[iw-1] * bs;
-        std::vector<double> hpb(bv[iw-1], 0);
         for (int ib = 0; ib < bv[iw-1]; ib++)
           {
             // Compute HPL
@@ -667,14 +665,11 @@ namespace apfel
                 uk *= u;
                 vk *= v;
               }
-            hpb[ib] = tu[0];
+            hpls[iw][ib] = tu[0];
             for (int k = 1; k < iw; k++)
-              hpb[ib] += tu[k] * dlu[k] + tv[k-1] * dlv[k-1];
+              hpls[iw][ib] += tu[k] * vlu[k] + tv[k-1] * vlv[k-1];
             vin[iw-2] += bs;
           }
-        hpls.insert({iw, hpb});
-        dlu.push_back(dlu[1] * dlu.back());
-        dlv.push_back(dlv[1] * dlv.back());
       }
     return hpls;
   }

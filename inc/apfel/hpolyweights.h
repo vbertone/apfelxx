@@ -16,7 +16,7 @@ namespace apfel
   const int bs = 40;
 
   // Number of elements of each basis
-  const std::vector<int> bv{3, 3, 8, 18, 48};
+  const int bv[5] = {3, 3, 8, 18, 48};
 
   // Map between signature and index on the function basis
   const std::map<std::vector<int>, int> WeightIndex

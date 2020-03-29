@@ -71,12 +71,11 @@ namespace apfel
    * @brief Function for the computation of the Harmonic polylogs up
    * to weight 5.
    * @param x: real argument
-   * @param wmax: maximum number of weights to be computed (default: 5, i.e. the maximum)
    * @return \f$\mathrm{H}(\{w\},x)\f$
-   * @note As the function above but in this case all HPLs up to wmax
+   * @note As the function above but in this case all HPLs up to 5
    * are computed at once. This is computationally convenient.
    */
-  std::map<int, std::vector<double>> hpoly(double const& x, int const& wmax = 5);
+  std::map<int, std::vector<double>> hpoly(double const& x);
 
   /**
    * @brief Function that returns weight and basis index of the HPL
