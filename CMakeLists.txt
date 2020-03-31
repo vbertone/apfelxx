@@ -23,6 +23,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fPIC")
 #set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wall -Wextra -fPIC")
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}  -fPIC")
+set(CMAKE_SHARED_LINKER_FLAGS -w)
 
 # export version to file
 configure_file(

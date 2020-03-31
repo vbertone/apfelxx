@@ -83,9 +83,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];
@@ -264,9 +265,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr10 = Hr1[1];
     const double Hr11 = Hr1[2];
@@ -331,9 +333,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];
@@ -472,9 +475,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];
@@ -540,9 +544,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr10 = Hr1[1];
     const double Hr11 = Hr1[2];
@@ -586,9 +591,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr10  = Hr1[1];
     const double Hr11  = Hr1[2];
@@ -683,9 +689,10 @@ namespace apfel
     double *Hr2 = new double[sz*sz];
     double *Hr3 = new double[sz*sz*sz];
     double *Hr4 = new double[sz*sz*sz*sz];
+    double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, &n1, &n2);
+    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];

@@ -13,13 +13,14 @@ namespace apfel
 {
   /**
    * @name Fortran harmonic polylogarithms
-   * @brief Harmonic polylogarithms up to weight four
+   * @brief Harmonic polylogarithms up to weight five
    * @param x: real input argument
    * @param nw: maximum number of weights requested
    * @param Hr1: weight 1 harmonic polylogs (1D array)
    * @param Hr2: weight 2 harmonic polylogs (2D array)
    * @param Hr3: weight 3 harmonic polylogs (3D array)
    * @param Hr4: weight 4 harmonic polylogs (4D array)
+   * @param Hr5: weight 5 harmonic polylogs (5D array)
    * @param n1: lower bound of the weight index requested
    * @param n2: upper bound of the weight index requested
    * @note This is just a suitably formatted wrapper of the original
@@ -28,7 +29,7 @@ namespace apfel
    */
   extern"C"
   {
-    double hplog_(double *wx, int *wnw, double *Hr1, double *Hr2, double *Hr3, double *Hr4, int *wn1, int *wn2);
+    double hplog_(double *wx, int *wnw, double *Hr1, double *Hr2, double *Hr3, double *Hr4, double *Hr5, int *wn1, int *wn2);
   }
 
   /**
@@ -68,20 +69,17 @@ namespace apfel
   double hpoly(std::vector<int> const& w, double const& x);
 
   /**
-   * @brief Function for the computation of the Harmonic polylogs up
-   * to weight 5.
-   * @param x: real argument
-   * @return \f$\mathrm{H}(\{w\},x)\f$
-   * @note As the function above but in this case all HPLs up to 5
-   * are computed at once. This is computationally convenient.
+   * @brief Function that returns the index to be used with
+   * unidimensional arrays returned by hplog_.
+   * @param w: the packed vector of weights
    */
-  std::map<int, std::vector<double>> hpoly(double const& x);
+  int HPLogMap(std::vector<int> const& w);
 
   /**
-   * @brief Function that returns weight and basis index of the HPL
+   * @brief Function that returns the unpacked weights of the HPL
    * given the input vector.
    * @param w: the packed vector of weights
    */
-  std::pair<int, int> WeightAndIndex(std::vector<int> const& w);
+  std::vector<int> UnpackWeights(std::vector<int> const& w);
   ///@}
 }
