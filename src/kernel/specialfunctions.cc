@@ -541,19 +541,6 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  int HPLogMap(std::vector<int> const& w)
-  {
-    int m  = 0;
-    int os = 1;
-    for (auto const& p : w)
-      {
-        m += os * ( p + 1 );
-        os *= 3;
-      }
-    return m;
-  }
-
-  //_________________________________________________________________________________
   std::vector<int> UnpackWeights(std::vector<int> const& w)
   {
     // Unpack vector of weights
@@ -568,6 +555,21 @@ namespace apfel
     // Now return the weight size and the corresponding index in the
     // basis.
     return uw;
+  }
+
+  //_________________________________________________________________________________
+  int HPLogMap(std::vector<int> const& w)
+  {
+    int m  = 0;
+    int os = 1;
+    int sh = -1;
+    for (auto const& p : UnpackWeights(w))
+      {
+        m += os * ( p + 1 );
+        sh += os;
+        os *= 3;
+      }
+    return m + sh;
   }
 
   //_________________________________________________________________________________

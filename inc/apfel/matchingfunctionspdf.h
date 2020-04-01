@@ -184,7 +184,6 @@ namespace apfel
   private:
     int const _nf;
     double    _A2;
-    double    _A3;
   };
   ///@}
 

@@ -420,7 +420,6 @@ namespace apfel
     _nf(nf)
   {
     _A2 = - 808. / 3. + 252. * zeta3 + 112. * _nf / 9.;
-    _A3 = 0.;
   }
   double C2ggpdf::Regular(double const& x) const
   {
@@ -487,20 +486,16 @@ namespace apfel
   }
   double C2ggpdf::Singular(double const& x) const
   {
-    const double fA2 = 1 / ( 1 - x );
-    const double fA3 = fA2 * log(1-x);
-
-    return _A2 * fA2 + _A3 * fA3;
+    return _A2 / ( 1 - x );
   }
   double C2ggpdf::Local(double const& x) const
   {
-    const double ln1mx  = log(1-x);
-    const double ln1mx2 = ln1mx * ln1mx;
-    const double A1     = - 112. - 201. * zeta2 / 2. + 154. * zeta3 + 225. * zeta4 / 4.
-                          + _nf * ( 548. / 27. + 5. * zeta2 - 28. * zeta3 / 3. )
-                          - 56. * _nf * _nf  / 81.;
+    const double ln1mx = log(1-x);
+    const double A1    = - 112. - 201. * zeta2 / 2. + 154. * zeta3 + 225. * zeta4 / 4.
+                         + _nf * ( 548. / 27. + 5. * zeta2 - 28. * zeta3 / 3. )
+                         - 56. * _nf * _nf  / 81.;
 
-    return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
+    return A1 + _A2 * ln1mx;
   }
 
   //_________________________________________________________________________________
