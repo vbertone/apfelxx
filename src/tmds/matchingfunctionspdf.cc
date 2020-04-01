@@ -6,6 +6,7 @@
 
 #include "apfel/matchingfunctionspdf.h"
 #include "apfel/constants.h"
+#include "apfel/specialfunctions.h"
 
 #include <numeric>
 
@@ -60,10 +61,54 @@ namespace apfel
     Expression(),
     _nf(nf)
   {
+    /*
+        _A2 = 224 * CF * _nf * TR / 27.
+          + CA * CF * ( - 29.925925925925927 + 28 * zeta3 );
+    */
     _A2 = - 3232. / 27. + 112 * zeta3 + 448. * _nf / 81.;
   }
   double C2Vqqpdf::Regular(double const& x) const
   {
+    /*
+        // Polylogs
+        double *xx  = new double{x};
+        int    *nw  = new int{3};
+        int    *wn1 = new int{-1};
+        int    *wn2 = new int{1};
+        double *H   = new double[363];
+        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+
+        // Defintions
+        const double x2 = x * x;
+        const double H0  = H[HPLogMap({0})];
+        const double H1  = H[HPLogMap({1})];
+
+        const double H00 = H[HPLogMap({0,0})];
+        const double H2  = H[HPLogMap({2})];
+        const double H10 = H[HPLogMap({1,0})];
+
+        const double H000 = H[HPLogMap({0,0,0})];
+        const double H12  = H[HPLogMap({1,2})];
+        const double H20  = H[HPLogMap({2,0})];
+        const double H21  = H[HPLogMap({2,1})];
+        const double H100 = H[HPLogMap({1,0,0})];
+        const double H110 = H[HPLogMap({1,1,0})];
+
+        // Delete pointers
+        delete xx;
+        delete nw;
+        delete wn1;
+        delete wn2;
+        delete[] H;
+
+        return CF*_nf*TR*((-4*(37 + 19*x))/27. + (20*(1 + x2)*H0)/(9.*(1 - x)) + (4*(1 + x2)*H00)/(3.*(1 - x)))
+          + pow(CF,2)*(-22*(1 - x) + (2*(5 - 13*x + 16*x2)*H0)/(1 - x) + 2*x*H1 - (2*(-3 - 2*x + 2*x2)*H00)/(1 - x)
+    		   + 2*(1 + x)*H000 + 2*(1 - x)*(2*H2 + 6*H10 + 3*zeta2)
+    		   + (4*(1 + x2)*(2*H12 + 2*H20 + H21 - H100 + 2*H110 + 6*zeta3))/(1 - x))
+          + CA*CF*((8*(100 + x))/27. - (2*(29 - 36*x + 83*x2)*H0)/(9.*(1 - x)) - 2*x*H1
+    	       + ((-11 - 12*x + x2)*H00)/(3.*(1 - x)) - 2*(1 - x)*(2*H10 + 3*zeta2)
+    	       + (-2*(1 + x2)*(2*H12 + 2*H20 + H000 + 2*H110) + 2*(-13 + x2)*zeta3)/(1 - x));
+    */
     const double x2   = x * x;
     const double lx   = log(x);
     const double lx2  = lx * lx;
@@ -131,7 +176,7 @@ namespace apfel
   }
   double C2Vqqpdf::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log( 1 - x );
     const double A1    = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 200 * zeta4 / 9
                          + _nf * ( 352. / 243. + 20 * zeta2 / 9 + 56 * zeta3 / 27 );
 
@@ -144,6 +189,40 @@ namespace apfel
   }
   double C2Vqqbpdf::Regular(double const& x) const
   {
+    /*
+        // Polylogs
+        double *xx  = new double{x};
+        int    *nw  = new int{3};
+        int    *wn1 = new int{-1};
+        int    *wn2 = new int{1};
+        double *H   = new double[363];
+        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+
+        // Defintions
+        const double Hm1 = H[HPLogMap({-1})];
+        const double H0  = H[HPLogMap({0})];
+
+        const double Hm10 = H[HPLogMap({-1,0})];
+        const double H10  = H[HPLogMap({1,0})];
+
+        const double Hm20   = H[HPLogMap({-2,0})];
+        const double H000   = H[HPLogMap({0,0,0})];
+        const double H20    = H[HPLogMap({2,0})];
+        const double Hm1m10 = H[HPLogMap({-1,-1,0})];
+        const double Hm100  = H[HPLogMap({-1,0,0})];
+
+        // Delete pointers
+        delete xx;
+        delete nw;
+        delete wn1;
+        delete wn2;
+        delete[] H;
+
+        return (CA - 2*CF)*CF*(-15*(1 - x) + (-3 - 11*x)*H0 + 4*(1 + x)*Hm10
+    			   + 4*(1 - x)*H10 - 2*(-3 + x)*zeta2
+    			   - (2*(1 + pow(x,2))*(4*Hm20 - 2*H20 - 4*Hm1m10 + 2*Hm100
+    						- H000 - 2*Hm1*zeta2 + zeta3))/(1 + x));
+    */
     const double x2   = x * x;
     const double lx   = log(x);
     const double lx2  = lx * lx;
@@ -213,6 +292,39 @@ namespace apfel
   }
   double C2pspdf::Regular(double const& x) const
   {
+    /*
+        // Polylogs
+        double *xx  = new double{x};
+        int    *nw  = new int{3};
+        int    *wn1 = new int{-1};
+        int    *wn2 = new int{1};
+        double *H   = new double[363];
+        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+
+        // Defintions
+        const double x2 = x * x;
+        const double H0   = H[HPLogMap({0})];
+        const double H00  = H[HPLogMap({0,0})];
+        const double H10  = H[HPLogMap({1,0})];
+        const double H000 = H[HPLogMap({0,0,0})];
+
+        // Delete pointers
+        delete xx;
+        delete nw;
+        delete wn1;
+        delete wn2;
+        delete[] H;
+
+        return 2*CF*TR*((2*(1 - x)*(172 - 143*x + 136*x2))/(27.*x)
+    		    + (4*(21 - 30*x + 32*x2)*H0)/9. - (2*(3 + 3*x + 8*x2)*H00)/3.
+    		    + 4*(1 + x)*H000 - (8*(1 - x)*(2 - x + 2*x2)*(H10 + zeta2))/(3.*x));
+    */
+    /*
+      return 2*CF*TR*((2*(1 - x)*(172 - 143*x + 136*x2))/(27.*x)
+      + (4*(21 - 30*x + 32*x2)*log(x))/9. - ((3 + 3*x + 8*x2)*pow(log(x),2))/3.
+      + (2*(1 + x)*pow(log(x),3))/3. - (8*(1 - x)*(2 - x + 2*x2)*(-(log(1 - x)*log(x))
+      - dilog(x) + zeta2))/(3.*x));
+    */
     const double x2   = x * x;
     const double lx   = log(x);
     const double lx2  = lx * lx;
@@ -282,6 +394,55 @@ namespace apfel
   }
   double C2qgpdf::Regular(double const& x) const
   {
+    /*
+        // Polylogs
+        double *xx  = new double{x};
+        int    *nw  = new int{3};
+        int    *wn1 = new int{-1};
+        int    *wn2 = new int{1};
+        double *H   = new double[363];
+        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+
+        // Defintions
+        const double x2 = x * x;
+        const double x3 = x * x2;
+        const double Hm1 = H[HPLogMap({-1})];
+        const double H0  = H[HPLogMap({0})];
+        const double H1  = H[HPLogMap({1})];
+
+        const double Hm10 = H[HPLogMap({-1,0})];
+        const double H00  = H[HPLogMap({0,0})];
+        const double H2   = H[HPLogMap({2})];
+        const double H10  = H[HPLogMap({1,0})];
+        const double H11  = H[HPLogMap({1,1})];
+
+        const double Hm20   = H[HPLogMap({-2,0})];
+        const double H000   = H[HPLogMap({0,0,0})];
+        const double H12    = H[HPLogMap({1,2})];
+        const double H20    = H[HPLogMap({2,0})];
+        const double H21    = H[HPLogMap({2,1})];
+        const double H100   = H[HPLogMap({1,0,0})];
+        const double H110   = H[HPLogMap({1,1,0})];
+        const double Hm1m10 = H[HPLogMap({-1,-1,0})];
+        const double Hm100  = H[HPLogMap({-1,0,0})];
+        const double H111   = H[HPLogMap({1,1,1})];
+
+        // Delete pointers
+        delete xx;
+        delete nw;
+        delete wn1;
+        delete wn2;
+        delete[] H;
+
+        return 2*(CA*TR*((-2*(-172 + 315*x - 387*x2 + 298*x3))/(27.*x) + (4*(21 - 30*x + 68*x2)*H0)/9.
+    		     + 2*x*(-3 + 4*x)*H1 + 8*x*(1 + x)*Hm10 - (2*(3 - 12*x + 44*x2)*H00)/3.
+    		     - (8*(1 - x)*(2 - x + 11*x2)*H10)/(3.*x) - 8*(1 - x)*x*H11 + 4*(1 + 2*x)*H000
+    		     + 4*(1 - 2*x + 2*x2)*(H12 + H110 - H111) + (8*(-2 + 3*x - 9*x2 + 11*x3)*zeta2)/(3.*x)
+    		     + 4*(1 + 2*x + 2*x2)*(2*Hm20 - 2*Hm1m10 + Hm100 - Hm1*zeta2) - 8*x*(2*H20 - zeta3))
+    	      + CF*TR*(-13 + 75*x - 72*x2 + (8 + 15*x - 8*x2)*H0 - 2*x*(-3 + 4*x)*H1 + (1 + 12*x - 8*x2)*H00
+    		       - 2*(1 - 2*x + 4*x2)*H000 + 4*(1 - x)*x*(2*H2 + 2*H10 + 2*H11 - 3*zeta2)
+    		       + 4*(1 - 2*x + 2*x2)*(H21 - H100 + H111 + 7*zeta3)));
+    */
     const double x2   = x * x;
     const double lx   = log(x);
     const double lx2  = lx * lx;

@@ -21,7 +21,6 @@ int main()
   *wn2 = 1;
 
   // HPLOG all at once up to weight 5
-
   double *H = new double[363];
   apfel::hplog_(x, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
