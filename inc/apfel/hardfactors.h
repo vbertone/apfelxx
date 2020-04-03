@@ -32,6 +32,10 @@ namespace apfel
   /// &alpha;<SUB>s</SUB><SUP>3</SUP> correction to the SIDIS hard factor
   double H3SIDIS(int const& nf);
 
+  /// &alpha;<SUB>s</SUB><SUP>3</SUP> charge-dependent correction to
+  /// DY and SIDIS hard factor
+  double H3Ch();
+
   /// &alpha;<SUB>s</SUB> correction to the H in gg fusion hard factor
   double H1ggH();
 

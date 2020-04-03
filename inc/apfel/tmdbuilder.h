@@ -17,7 +17,7 @@ namespace apfel
   /**
    * @brief Enumerator for the logarithmic accuracy
    */
-  enum LogAccuracy: int {NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3};
+  enum LogAccuracy: int {NNNLLp = -3, NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3};
 
   /**
    * @brief Structure that contains all the precomputed quantities

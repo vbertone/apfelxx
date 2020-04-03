@@ -451,9 +451,14 @@ namespace apfel
         obj.MatchingFunctionsFFs.insert({2, {{evb, C20ff.at(nf)}, {evb, C21ff.at(nf)}, {evb, C22ff.at(nf)}, {evb, C23ff.at(nf)}, {evb, C24}}});
         obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
 
-        // Hard factors (set to zero when unkwown)
-        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)},    {3, H3DY(nf)},}});
-        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}, {3, H3SIDIS(nf)}}});
+        // Hard factors (set to zero when unkwown). In addition,
+        // H3Ch() should be multiplied by N_{nf,j} =
+        // (\sum_{i=1}^{nf}e_q) / e_j channel by channel. Here we set
+        // this factor to the constant 1 / 4 because it results from
+        // the average ( N_{5,u} + N_{5,d} ) / 2. The numerical
+        // difference for different choices is however very small.
+        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)},    {3, H3DY(nf)    + H3Ch() / 4}}});
+        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}, {3, H3SIDIS(nf) + H3Ch() / 4}}});
         obj.HardFactors.insert({"ggH",   {{1, H1ggH()},   {2, H2ggH(nf)},   {3, 0}}});
 
         // Insert full object
@@ -565,6 +570,20 @@ namespace apfel
         const auto nnlo = c2[0] + Lmu * ( c2[1] + Lmu * ( c2[2] + Lmu * ( c2[3] + Lmu * c2[4] ) ) );
         return lo + coup * ( nlo + coup * nnlo );
       };
+    else if (PerturbativeOrder == NNNLLp)
+      MatchFunc = [=] (double const& mu) -> Set<Operator>
+      {
+        const double coup = Alphas(mu) / FourPi;
+        const auto& mf   = TmdObj.at(NF(mu, thrs)).MatchingFunctionsPDFs;
+        const auto c0    = mf.at(0);
+        const auto c1    = mf.at(1);
+        const auto c2    = mf.at(2);
+        const auto lo    = c0[0];
+        const auto nlo   = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
+        const auto nnlo  = c2[0] + Lmu * ( c2[1] + Lmu * ( c2[2] + Lmu * ( c2[3] + Lmu * c2[4] ) ) );
+        const auto nnnlo = mf.at(3)[0];
+        return lo + coup * ( nlo + coup * ( nnlo + coup * nnnlo ) );
+      };
 
     // Construct function that returns the product of matching
     // functions and collinear PDFs.
@@ -633,6 +652,20 @@ namespace apfel
         const auto nlo  = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
         const auto nnlo = c2[0] + Lmu * ( c2[1] + Lmu * ( c2[2] + Lmu * ( c2[3] + Lmu * c2[4] ) ) );
         return lo + coup * ( nlo + coup * nnlo );
+      };
+    else if (PerturbativeOrder == NNNLLp)
+      MatchFunc = [=] (double const& mu) -> Set<Operator>
+      {
+        const double coup = Alphas(mu) / FourPi;
+        const auto& mf   = TmdObj.at(NF(mu, thrs)).MatchingFunctionsFFs;
+        const auto c0    = mf.at(0);
+        const auto c1    = mf.at(1);
+        const auto c2    = mf.at(2);
+        const auto lo    = c0[0];
+        const auto nlo   = c1[0] + Lmu * ( c1[1] + Lmu * c1[2] );
+        const auto nnlo  = c2[0] + Lmu * ( c2[1] + Lmu * ( c2[2] + Lmu * ( c2[3] + Lmu * c2[4] ) ) );
+        const auto nnnlo = mf.at(3)[0];
+        return lo + coup * ( nlo + coup * ( nnlo + coup * nnnlo ) );
       };
 
     // Construct function that returns the product of matching
@@ -750,7 +783,7 @@ namespace apfel
         };
       }
     // N3LL
-    else if (PerturbativeOrder == NNNLL)
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNNLLp)
       {
         gammaFq = [=] (double const& mu) -> double
         {
@@ -902,7 +935,7 @@ namespace apfel
         };
       }
     // N3LL
-    else if (PerturbativeOrder == NNNLL)
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNNLLp)
       {
         gammaFq = [=] (double const& mu) -> double
         {
@@ -1045,7 +1078,7 @@ namespace apfel
         };
       }
     // N3LL
-    else if (PerturbativeOrder == NNNLL)
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNNLLp)
       {
         gammaFg = [=] (double const& mu) -> double
         {
@@ -1143,6 +1176,7 @@ namespace apfel
     std::map<int, double> gF1;
     std::map<int, double> H1;
     std::map<int, double> H2;
+    std::map<int, double> H3;
     if (Process == "DY" || Process == "SIDIS")
       for (int nf = nfi; nf <= nff; nf++)
         {
@@ -1153,6 +1187,7 @@ namespace apfel
           gF1.insert({nf, TmdObj.at(nf).GammaFq.at(1)});
           H1.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(1)});
           H2.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(2)});
+          H3.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(3)});
         }
     else if (Process == "ggH")
       for (int nf = nfi; nf <= nff; nf++)
@@ -1164,6 +1199,7 @@ namespace apfel
           gF1.insert({nf, TmdObj.at(nf).GammaFg.at(1)});
           H1.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(1)});
           H2.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(2)});
+          H3.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(3)});
         }
     else
       throw std::runtime_error(error("HardFactor", "Process not available."));
@@ -1188,8 +1224,10 @@ namespace apfel
                               + ( - gK1.at(nf) - 2 * b0.at(nf) * gF0.at(nf) + 2 * pow(gF0.at(nf), 2) - gK0.at(nf) * H1.at(nf) ) * lQ2
                               + gK0.at(nf) * ( - 2 * b0.at(nf) / 3 + 2 * gF0.at(nf) ) * lQ3
                               + pow(gK0.at(nf), 2) / 2 * lQ4 );
+      if (PerturbativeOrder > 3 || PerturbativeOrder < -2)
+        H += pow(coup, 3) * H3.at(nf);
 
-      // Return hard function
+      // Return hard factor
       return H;
     };
 
