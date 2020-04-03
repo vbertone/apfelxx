@@ -57,6 +57,7 @@ namespace apfel
   const double zeta3  = 1.2020569031595943;
   const double zeta4  = 1.0823232337111382; // Pi2 * Pi2 / 90;
   const double zeta5  = 1.0369277551433699;
+  const double zeta6  = 1.0173430619844491;
   ///@}
 
   /**
