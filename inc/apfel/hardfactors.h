@@ -20,11 +20,17 @@ namespace apfel
   /// &alpha;<SUB>s</SUB><SUP>2</SUP> correction to the Drell-Yan hard factor
   double H2DY(int const& nf);
 
+  /// &alpha;<SUB>s</SUB><SUP>3</SUP> correction to the Drell-Yan hard factor
+  double H3DY(int const& nf);
+
   /// &alpha;<SUB>s</SUB> correction to the SIDIS hard factor
   double H1SIDIS();
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP> correction to the SIDIS hard factor
   double H2SIDIS(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>3</SUP> correction to the SIDIS hard factor
+  double H3SIDIS(int const& nf);
 
   /// &alpha;<SUB>s</SUB> correction to the H in gg fusion hard factor
   double H1ggH();

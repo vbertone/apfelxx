@@ -188,6 +188,105 @@ namespace apfel
   ///@}
 
   /**
+   * @defgroup NNNLO NNNLO matching functions for PDFs
+   * @ingroup SLMatchFunc
+   */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) valence quark-quark
+   * matching function for PDFs (reference:
+   * https://arxiv.org/pdf/1912.05778.pdf).
+   */
+  class C3Vqqpdf: public Expression
+  {
+  public:
+    C3Vqqpdf(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) valence
+   * quark-antiquark matching function for PDFs (reference:
+   * https://arxiv.org/pdf/1912.05778.pdf).
+   */
+  class C3Vqqbpdf: public Expression
+  {
+  public:
+    C3Vqqbpdf(int const& nf);
+    double Regular(double const& x) const;
+  protected:
+    int const _nf;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-valence
+   * matching function for PDFs (reference:
+   * https://arxiv.org/pdf/1912.05778.pdf).
+   */
+  class C3pvpdf: public Expression
+  {
+  public:
+    C3pvpdf();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * matching function for PDFs (reference:
+   * https://arxiv.org/pdf/1912.05778.pdf).
+   */
+  class C3pspdf: public Expression
+  {
+  public:
+    C3pspdf(int const& nf);
+    double Regular(double const& x) const;
+  protected:
+    int const _nf;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quark-gluon
+   * matching function for PDFs (reference:
+   * https://arxiv.org/pdf/1912.05778.pdf).
+   */
+  class C3qgpdf: public Expression
+  {
+  public:
+    C3qgpdf(int const& nf);
+    double Regular(double const& x) const;
+  protected:
+    int const _nf;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-quark
+   * matching function for PDFs. Currently unknown and thus set to
+   * zero.
+   */
+  class C3gqpdf: public Expression
+  {
+  public:
+    C3gqpdf() {};
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-gluon
+   * matching function for PDFs. Currently unknown and thus set to
+   * zero.
+   */
+  class C3ggpdf: public Expression
+  {
+  public:
+    C3ggpdf() {};
+  };
+  ///@}
+
+  /**
    * @defgroup NLOBM NLO matching functions for linearly polarised
    * gluon PDF (Boer-Mulders)
    * @ingroup SLMatchFunc

@@ -356,6 +356,45 @@ namespace apfel
     // Terms proportion to four powers of log(mu0/mub) equal to that
     // of PDFs.
 
+    // ===============================================================
+    // NNNLO matching functions operators.
+    // PDFs
+    std::map<int, std::map<int, Operator>> C30pdf;
+    const Operator O3pvpdf{g, C3pvpdf{}, IntEps};
+    const Operator O3gqpdf{g, C3gqpdf{}, IntEps};
+    const Operator O3ggpdf{g, C3ggpdf{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O3Vqqpdf{g, C3Vqqpdf{nf}, IntEps};
+        const Operator O3Vqqbpdf{g, C3Vqqbpdf{nf}, IntEps};
+        const Operator O3pspdf{g, C3pspdf{nf}, IntEps};
+        const Operator O3qgpdf{g, C3qgpdf{nf}, IntEps};
+        const Operator O3nsppdf  = O3Vqqpdf + O3Vqqbpdf;
+        const Operator O3nsmpdf  = O3Vqqpdf - O3Vqqbpdf;
+        const Operator O3qqpdf   = O3nsppdf + nf * O3pspdf;
+        const Operator O3nsvpdf  = O3nsmpdf + nf * O3pvpdf;
+        const Operator O3qgpdfnf = nf * O3qgpdf;
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O3nsppdf});
+        OM.insert({EvolutionBasisQCD::PNSM, O3nsmpdf});
+        OM.insert({EvolutionBasisQCD::PNSV, O3nsvpdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  O3qqpdf});
+        OM.insert({EvolutionBasisQCD::PQG,  O3qgpdfnf});
+        OM.insert({EvolutionBasisQCD::PGQ,  O3gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,  O3ggpdf});
+        C30pdf.insert({nf, OM});
+      }
+
+    // FFs (unknown, thus set to zero)
+    std::map<int, Operator> ZeroOp;
+    ZeroOp.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroOp.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroOp.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroOp.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroOp.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroOp.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroOp.insert({EvolutionBasisQCD::PGG,  Zero});
+
     // Define map containing the TmdObjects for each nf.
     std::map<int, TmdObjects> TmdObj;
 
@@ -404,16 +443,18 @@ namespace apfel
         obj.MatchingFunctionsPDFs.insert({0, {{evb, C00}}});
         obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, C11pdf.at(nf)}, {evb, C12}}});
         obj.MatchingFunctionsPDFs.insert({2, {{evb, C20pdf.at(nf)}, {evb, C21pdf.at(nf)}, {evb, C22pdf.at(nf)}, {evb, C23pdf.at(nf)}, {evb, C24}}});
+        obj.MatchingFunctionsPDFs.insert({3, {{evb, C30pdf.at(nf)}}});
 
         // FFs
         obj.MatchingFunctionsFFs.insert({0, {{evb, C00}}});
         obj.MatchingFunctionsFFs.insert({1, {{evb, C10ff.at(nf)}, {evb, C11ff.at(nf)}, {evb, C12}}});
         obj.MatchingFunctionsFFs.insert({2, {{evb, C20ff.at(nf)}, {evb, C21ff.at(nf)}, {evb, C22ff.at(nf)}, {evb, C23ff.at(nf)}, {evb, C24}}});
+        obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
 
-        // Hard factors
-        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)}}});
-        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}}});
-        obj.HardFactors.insert({"ggH",   {{1, H1ggH()},   {2, H2ggH(nf)}}});
+        // Hard factors (set to zero when unkwown)
+        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)},    {3, H3DY(nf)},}});
+        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}, {3, H3SIDIS(nf)}}});
+        obj.HardFactors.insert({"ggH",   {{1, H1ggH()},   {2, H2ggH(nf)},   {3, 0}}});
 
         // Insert full object
         TmdObj.insert({nf, obj});
