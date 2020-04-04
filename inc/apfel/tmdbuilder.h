@@ -56,7 +56,17 @@ namespace apfel
    */
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
-                                                 double              const& IntEps = 1e-5);
+                                                 double              const& IntEps = 1e-5,
+                                                 bool                const& nnnlo = true);
+
+  /**
+   * @brief As the InitializeTmdObjects but with the computation of
+   * the NNNLO corrections to the matching conditions set to
+   * zero. This saves much computation time usually unneded.
+   */
+  std::map<int, TmdObjects> InitializeTmdObjectsLite(Grid                const& g,
+                                                     std::vector<double> const& Thresholds,
+                                                     double              const& IntEps = 1e-5);
   ///@}
 
   /**

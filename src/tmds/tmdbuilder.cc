@@ -21,9 +21,18 @@
 namespace apfel
 {
   //_____________________________________________________________________________
+  std::map<int, TmdObjects> InitializeTmdObjectsLite(Grid                const& g,
+                                                     std::vector<double> const& Thresholds,
+                                                     double              const& IntEps)
+  {
+    return InitializeTmdObjects(g, Thresholds, IntEps, false);
+  }
+
+  //_____________________________________________________________________________
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
-                                                 double              const& IntEps)
+                                                 double              const& IntEps,
+                                                 bool                const& nnnlo)
   {
     // Initialise space-like and time-like splitting functions on the
     // grid required to compute the log terms of the matching
@@ -360,30 +369,46 @@ namespace apfel
     // NNNLO matching functions operators.
     // PDFs
     std::map<int, std::map<int, Operator>> C30pdf;
-    const Operator O3pvpdf{g, C3pvpdf{}, IntEps};
-    const Operator O3gqpdf{g, C3gqpdf{}, IntEps};
-    const Operator O3ggpdf{g, C3ggpdf{}, IntEps};
-    for (int nf = nfi; nf <= nff; nf++)
+    if (nnnlo)
       {
-        const Operator O3Vqqpdf{g, C3Vqqpdf{nf}, IntEps};
-        const Operator O3Vqqbpdf{g, C3Vqqbpdf{nf}, IntEps};
-        const Operator O3pspdf{g, C3pspdf{nf}, IntEps};
-        const Operator O3qgpdf{g, C3qgpdf{nf}, IntEps};
-        const Operator O3nsppdf  = O3Vqqpdf + O3Vqqbpdf;
-        const Operator O3nsmpdf  = O3Vqqpdf - O3Vqqbpdf;
-        const Operator O3qqpdf   = O3nsppdf + nf * O3pspdf;
-        const Operator O3nsvpdf  = O3nsmpdf + nf * O3pvpdf;
-        const Operator O3qgpdfnf = nf * O3qgpdf;
-        std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O3nsppdf});
-        OM.insert({EvolutionBasisQCD::PNSM, O3nsmpdf});
-        OM.insert({EvolutionBasisQCD::PNSV, O3nsvpdf});
-        OM.insert({EvolutionBasisQCD::PQQ,  O3qqpdf});
-        OM.insert({EvolutionBasisQCD::PQG,  O3qgpdfnf});
-        OM.insert({EvolutionBasisQCD::PGQ,  O3gqpdf});
-        OM.insert({EvolutionBasisQCD::PGG,  O3ggpdf});
-        C30pdf.insert({nf, OM});
+        const Operator O3pvpdf{g, C3pvpdf{}, IntEps};
+        const Operator O3gqpdf{g, C3gqpdf{}, IntEps};
+        const Operator O3ggpdf{g, C3ggpdf{}, IntEps};
+        for (int nf = nfi; nf <= nff; nf++)
+          {
+            const Operator O3Vqqpdf{g, C3Vqqpdf{nf}, IntEps};
+            const Operator O3Vqqbpdf{g, C3Vqqbpdf{nf}, IntEps};
+            const Operator O3pspdf{g, C3pspdf{nf}, IntEps};
+            const Operator O3qgpdf{g, C3qgpdf{nf}, IntEps};
+            const Operator O3nsppdf  = O3Vqqpdf + O3Vqqbpdf;
+            const Operator O3nsmpdf  = O3Vqqpdf - O3Vqqbpdf;
+            const Operator O3qqpdf   = O3nsppdf + nf * O3pspdf;
+            const Operator O3nsvpdf  = O3nsmpdf + nf * O3pvpdf;
+            const Operator O3qgpdfnf = nf * O3qgpdf;
+            std::map<int, Operator> OM;
+            OM.insert({EvolutionBasisQCD::PNSP, O3nsppdf});
+            OM.insert({EvolutionBasisQCD::PNSM, O3nsmpdf});
+            OM.insert({EvolutionBasisQCD::PNSV, O3nsvpdf});
+            OM.insert({EvolutionBasisQCD::PQQ,  O3qqpdf});
+            OM.insert({EvolutionBasisQCD::PQG,  O3qgpdfnf});
+            OM.insert({EvolutionBasisQCD::PGQ,  O3gqpdf});
+            OM.insert({EvolutionBasisQCD::PGG,  O3ggpdf});
+            C30pdf.insert({nf, OM});
+          }
       }
+    else
+      for (int nf = nfi; nf <= nff; nf++)
+        {
+          std::map<int, Operator> OM;
+          OM.insert({EvolutionBasisQCD::PNSP, Zero});
+          OM.insert({EvolutionBasisQCD::PNSM, Zero});
+          OM.insert({EvolutionBasisQCD::PNSV, Zero});
+          OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+          OM.insert({EvolutionBasisQCD::PQG,  Zero});
+          OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+          OM.insert({EvolutionBasisQCD::PGG,  Zero});
+          C30pdf.insert({nf, OM});
+        }
 
     // FFs (unknown, thus set to zero)
     std::map<int, Operator> ZeroOp;
