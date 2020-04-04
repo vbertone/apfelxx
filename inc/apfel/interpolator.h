@@ -30,6 +30,18 @@ namespace apfel
     Interpolator(Grid const& gr);
 
     /**
+     * @brief The Interpolator constructor.
+     * @param gr: the x-space grid object over which interpolation takes place
+     * @param distsubgrid: the vector of subgrids
+     * @param distjointgrid: the joint subgrid
+     * @note distjointgrid and distsubgrid are assumed to match the
+     * structure of the grid gr.
+     */
+    Interpolator(Grid                             const& gr,
+                 std::vector<std::vector<double>> const& distsubgrid,
+                 std::vector<double>              const& distjointgrid);
+
+    /**
      * @name Evaluate functions
      * List of functions that perform the interpolation on the x-space
      * grid.

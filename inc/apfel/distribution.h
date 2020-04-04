@@ -97,17 +97,19 @@ namespace apfel
     ///@}
 
     /**
-     * @brief Function to push back the values of the joint grid.
-     * @param xi: value of of the distribution to be appended to the distribution vector on the joint grid
+     * @brief Function to set the values of the joint grid.
+     * @param ix: the vector index
+     * @param x: value of of the distribution to set in the distribution vector on the joint grid
      */
-    void PushJointGrid(double const& xi);
+    void SetJointGrid(int const& ix, double const& x);
 
     /**
      * @brief Function to push back the values of the subgrid.
-     * @param xi: value of of the distribution to be appended to the distribution vector on one of the subgrids
-     * @param next: switch to tell the function whether it should start filling in the next subgrid
+     * @param ig: the subgrid index
+     * @param ix: the vector index
+     * @param x: value of of the distribution to set in the distribution vector on the joint grid
      */
-    void PushSubGrid(double const& xi, bool const& next);
+    void SetSubGrid(int const& ig, int const& ix, double const& x);
 
     /**
      * @name Binary operators

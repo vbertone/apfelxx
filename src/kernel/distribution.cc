@@ -22,20 +22,16 @@ namespace apfel
   Distribution::Distribution(Distribution                     const& obj,
                              std::vector<std::vector<double>> const& distsubgrid,
                              std::vector<double>              const& distjointgrid):
-    LagrangeInterpolator{obj._grid}
+    LagrangeInterpolator{obj._grid, distsubgrid, distjointgrid}
   {
-    _distributionSubGrid   = distsubgrid;
-    _distributionJointGrid = distjointgrid;
   }
 
   //_________________________________________________________________________
   Distribution::Distribution(Grid                             const& gr,
                              std::vector<std::vector<double>> const& distsubgrid,
                              std::vector<double>              const& distjointgrid):
-    LagrangeInterpolator{gr}
+    LagrangeInterpolator{gr, distsubgrid, distjointgrid}
   {
-    _distributionSubGrid   = distsubgrid;
-    _distributionJointGrid = distjointgrid;
   }
 
   //_________________________________________________________________________
@@ -43,16 +39,18 @@ namespace apfel
                              std::function<double(double const&)> const& InDistFunc):
     LagrangeInterpolator{gr}
   {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distributionJointGrid.push_back(InDistFunc(ix < 1 ? ix : 1));
+    const std::vector<double>& jg = _grid.GetJointGrid().GetGrid();
+    _distributionJointGrid.resize(jg.size());
+    for (int ix = 0; ix < (int) jg.size(); ix++)
+      _distributionJointGrid[ix] = InDistFunc(std::min(jg[ix], 1.));
 
-    for (int ig = 0; ig < _grid.nGrids(); ig++)
+    _distributionSubGrid.resize(_grid.nGrids());
+    for (int ig = 0; ig < (int) _distributionSubGrid.size(); ig++)
       {
-        std::vector<double> sg;
-        for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          sg.push_back(InDistFunc(ix < 1 ? ix : 1));
-
-        _distributionSubGrid.push_back(sg);
+        const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
+        _distributionSubGrid[ig].resize(sg.size());
+        for (int ix = 0; ix < (int) sg.size(); ix++)
+          _distributionSubGrid[ig][ix] = InDistFunc(std::min(sg[ix], 1.));
       }
   }
 
@@ -62,16 +60,18 @@ namespace apfel
                              double                                              const& Q):
     LagrangeInterpolator{gr}
   {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distributionJointGrid.push_back(InDistFunc(ix < 1 ? ix : 1,Q));
+    const std::vector<double>& jg = _grid.GetJointGrid().GetGrid();
+    _distributionJointGrid.resize(jg.size());
+    for (int ix = 0; ix < (int) jg.size(); ix++)
+      _distributionJointGrid[ix] = InDistFunc(std::min(jg[ix], 1.), Q);
 
-    for (int ig = 0; ig < _grid.nGrids(); ig++)
+    _distributionSubGrid.resize(_grid.nGrids());
+    for (int ig = 0; ig < (int) _distributionSubGrid.size(); ig++)
       {
-        std::vector<double> sg;
-        for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          sg.push_back(InDistFunc(ix < 1 ? ix : 1,Q));
-
-        _distributionSubGrid.push_back(sg);
+        const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
+        _distributionSubGrid[ig].resize(sg.size());
+        for (int ix = 0; ix < (int) sg.size(); ix++)
+          _distributionSubGrid[ig][ix] = InDistFunc(std::min(sg[ix], 1.), Q);
       }
   }
 
@@ -81,16 +81,18 @@ namespace apfel
                              int                                              const& ipdf):
     LagrangeInterpolator{gr}
   {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distributionJointGrid.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1));
+    const std::vector<double>& jg = _grid.GetJointGrid().GetGrid();
+    _distributionJointGrid.resize(jg.size());
+    for (int ix = 0; ix < (int) jg.size(); ix++)
+      _distributionJointGrid[ix] = InDistFunc(ipdf, std::min(jg[ix], 1.));
 
-    for (int ig = 0; ig < _grid.nGrids(); ig++)
+    _distributionSubGrid.resize(_grid.nGrids());
+    for (int ig = 0; ig < (int) _distributionSubGrid.size(); ig++)
       {
-        std::vector<double> sg;
-        for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          sg.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1));
-
-        _distributionSubGrid.push_back(sg);
+        const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
+        _distributionSubGrid[ig].resize(sg.size());
+        for (int ix = 0; ix < (int) sg.size(); ix++)
+          _distributionSubGrid[ig][ix] = InDistFunc(ipdf, std::min(sg[ix], 1.));
       }
   }
 
@@ -101,34 +103,31 @@ namespace apfel
                              double                                                          const& Q):
     LagrangeInterpolator{gr}
   {
-    for (auto const& ix: _grid.GetJointGrid().GetGrid())
-      _distributionJointGrid.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1,Q));
+    const std::vector<double>& jg = _grid.GetJointGrid().GetGrid();
+    _distributionJointGrid.resize(jg.size());
+    for (int ix = 0; ix < (int) jg.size(); ix++)
+      _distributionJointGrid[ix] = InDistFunc(ipdf, std::min(jg[ix], 1.), Q);
 
-    for (int ig = 0; ig < _grid.nGrids(); ig++)
+    _distributionSubGrid.resize(_grid.nGrids());
+    for (int ig = 0; ig < (int) _distributionSubGrid.size(); ig++)
       {
-        std::vector<double> sg;
-        for (auto const& ix: _grid.GetSubGrid(ig).GetGrid())
-          sg.push_back(InDistFunc(ipdf,ix < 1 ? ix : 1,Q));
-
-        _distributionSubGrid.push_back(sg);
+        const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
+        _distributionSubGrid[ig].resize(sg.size());
+        for (int ix = 0; ix < (int) sg.size(); ix++)
+          _distributionSubGrid[ig][ix] = InDistFunc(ipdf, std::min(sg[ix], 1.), Q);
       }
   }
 
   //_________________________________________________________________________
-  void Distribution::PushJointGrid(double const& xi)
+  void Distribution::SetJointGrid(int const& ix, double const& x)
   {
-    _distributionJointGrid.push_back(xi);
+    _distributionJointGrid[ix] = x;
   }
 
   //_________________________________________________________________________
-  void Distribution::PushSubGrid(double const& xi, bool const& next)
+  void Distribution::SetSubGrid(int const& ig, int const& ix, double const& x)
   {
-    // If "next" is true start filling a new subgrid otherwise push
-    // back in the last one.
-    if (next)
-      _distributionSubGrid.push_back(std::vector<double> {xi});
-    else
-      _distributionSubGrid.back().push_back(xi);
+    _distributionSubGrid[ig][ix] = x;
   }
 
   //_________________________________________________________________________
@@ -295,10 +294,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  std::map<int,Distribution> DistributionMap(Grid                                                              const& g,
-                                             std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
-                                             double                                                            const& Q,
-                                             std::vector<int>                                                  const& skip)
+  std::map<int, Distribution> DistributionMap(Grid                                                               const& g,
+                                              std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
+                                              double                                                             const& Q,
+                                              std::vector<int>                                                   const& skip)
   {
     // Joint grid and subgrid vectors.
     const std::vector<double>& jg = g.GetJointGrid().GetGrid();
@@ -311,34 +310,33 @@ namespace apfel
         DistMap.insert({it->first, Distribution{g}});
 
     // Fill in joint grid.
-    for (auto const& ix : jg)
+    for (int ix = 0; ix < (int) jg.size(); ix++)
       {
-        const std::map<int, double> f = InDistFunc(ix < 1 ? ix : 1, Q);
-        for (auto it = f.begin(); it != f.end(); ++it)
-          if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
-            DistMap.at(it->first).PushJointGrid(it->second);
+        const std::map<int, double> f = InDistFunc(std::min(jg[ix], 1.), Q);
+        for (auto const& it : f)
+          if (std::find(skip.begin(), skip.end(), it.first) == skip.end())
+            DistMap.at(it.first).SetJointGrid(ix, it.second);
       }
 
     // Fill in subgrids.
     for (int ig = 0; ig < g.nGrids(); ig++)
       {
-        bool next = true;
-        for (auto const& ix: g.GetSubGrid(ig).GetGrid())
+        const std::vector<double>& sg = g.GetSubGrid(ig).GetGrid();
+        for (int ix = 0; ix < (int) sg.size(); ix++)
           {
-            const std::map<int, double> f = InDistFunc(ix < 1 ? ix : 1, Q);
-            for (auto it = f.begin(); it != f.end(); ++it)
-              if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
-                DistMap.at(it->first).PushSubGrid(it->second, next);
-            next = false;
+            const std::map<int, double> f = InDistFunc(std::min(sg[ix], 1.), Q);
+            for (auto const& it : f)
+              if (std::find(skip.begin(), skip.end(), it.first) == skip.end())
+                DistMap.at(it.first).SetSubGrid(ig, ix, it.second);
           }
       }
     return DistMap;
   }
 
   //_________________________________________________________________________
-  std::map<int,Distribution> DistributionMap(Grid                                               const& g,
-                                             std::function<std::map<int,double>(double const&)> const& InDistFunc,
-                                             std::vector<int>                                   const& skip)
+  std::map<int, Distribution> DistributionMap(Grid                                                const& g,
+                                              std::function<std::map<int, double>(double const&)> const& InDistFunc,
+                                              std::vector<int>                                    const& skip)
   {
     // Joint grid and subgrid vectors.
     const std::vector<double>& jg = g.GetJointGrid().GetGrid();
@@ -346,30 +344,29 @@ namespace apfel
     // Initialise output.
     std::map<int, Distribution> DistMap;
     const std::map<int, double> f = InDistFunc(jg[0]);
-    for (auto it = f.begin(); it != f.end(); ++it)
-      if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
-        DistMap.insert({it->first, Distribution{g}});
+    for (auto const& it : f)
+      if (std::find(skip.begin(), skip.end(), it.first) == skip.end())
+        DistMap.insert({it.first, Distribution{g}});
 
     // Fill in joint grid.
-    for (auto const& ix : jg)
+    for (int ix = 0; ix < (int) jg.size(); ix++)
       {
-        const std::map<int, double> f = InDistFunc(ix < 1 ? ix : 1);
-        for (auto it = f.begin(); it != f.end(); ++it)
-          if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
-            DistMap.at(it->first).PushJointGrid(it->second);
+        const std::map<int, double> f = InDistFunc(std::min(jg[ix], 1.));
+        for (auto const& it : f)
+          if (std::find(skip.begin(), skip.end(), it.first) == skip.end())
+            DistMap.at(it.first).SetJointGrid(ix, it.second);
       }
 
     // Fill in subgrids.
     for (int ig = 0; ig < g.nGrids(); ig++)
       {
-        bool next = true;
-        for (auto const& ix: g.GetSubGrid(ig).GetGrid())
+        const std::vector<double>& sg = g.GetSubGrid(ig).GetGrid();
+        for (int ix = 0; ix < (int) sg.size(); ix++)
           {
-            const std::map<int, double> f = InDistFunc(ix < 1 ? ix : 1);
-            for (auto it = f.begin(); it != f.end(); ++it)
-              if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
-                DistMap.at(it->first).PushSubGrid(it->second, next);
-            next = false;
+            const std::map<int, double> f = InDistFunc(std::min(sg[ix], 1.));
+            for (auto const& it : f)
+              if (std::find(skip.begin(), skip.end(), it.first) == skip.end())
+                DistMap.at(it.first).SetSubGrid(ig, ix, it.second);
           }
       }
     return DistMap;

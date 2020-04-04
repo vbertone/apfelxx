@@ -25,6 +25,19 @@ namespace apfel
     LagrangeInterpolator(Grid const& gr);
 
     /**
+     * @brief The LagrangeInterpolator constructor.
+     * @param gr: the x-space grid object over which interpolation takes place
+     * @param distsubgrid: the vector of subgrids
+     * @param distjointgrid: the joint subgrid
+     * @see Interpolator::Interpolator
+     * @note distjointgrid and distsubgrid are assumed to match the
+     * structure of the grid gr.
+     */
+    LagrangeInterpolator(Grid                             const& gr,
+                         std::vector<std::vector<double>> const& distsubgrid,
+                         std::vector<double>              const& distjointgrid);
+
+    /**
      * @brief This function defines the interpolating function used by
      * the mothe class Interpolator to perform the actual
      * interpolation.

@@ -12,7 +12,21 @@ namespace apfel
 {
   //_________________________________________________________________________________
   Interpolator::Interpolator(Grid const& gr):
-    _grid(gr)
+    _grid(gr),
+    _distributionJointGrid(_grid.GetJointGrid().GetGrid().size())
+  {
+    _distributionSubGrid.resize(_grid.nGrids());
+    for (int ig = 0; ig < (int) _distributionSubGrid.size(); ig++)
+      _distributionSubGrid[ig].resize(_grid.GetSubGrid(ig).GetGrid().size(), 0.);
+  }
+
+  //_________________________________________________________________________________
+  Interpolator::Interpolator(Grid                             const& gr,
+                             std::vector<std::vector<double>> const& distsubgrid,
+                             std::vector<double>              const& distjointgrid):
+    _grid(gr),
+    _distributionSubGrid(distsubgrid),
+    _distributionJointGrid(distjointgrid)
   {
   }
 

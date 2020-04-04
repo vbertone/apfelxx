@@ -18,6 +18,14 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  LagrangeInterpolator::LagrangeInterpolator(Grid                             const& gr,
+                                             std::vector<std::vector<double>> const& distsubgrid,
+                                             std::vector<double>              const& distjointgrid):
+    Interpolator{gr, distsubgrid, distjointgrid}
+  {
+  }
+
+  //_________________________________________________________________________________
   double LagrangeInterpolator::Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const
   {
     // Get the logarithmic grid.
