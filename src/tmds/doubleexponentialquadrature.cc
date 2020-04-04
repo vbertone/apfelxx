@@ -6,6 +6,8 @@
 
 #include "apfel/doubleexponentialquadrature.h"
 #include "apfel/distribution.h"
+#include "apfel/set.h"
+#include "apfel/tools.h"
 
 #include <math.h>
 
@@ -105,7 +107,8 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  double DoubleExponentialQuadrature::transform(std::function<double(double const&)> const& f, double const& qT) const
+  template<typename T>
+  T DoubleExponentialQuadrature::transform(std::function<T(double const&)> const& f, double const& qT) const
   {
     const int lenawm = (int) (_aw[0] + 0.5);
     const int nk0    = (int) (_aw[1] + 0.5);
@@ -114,13 +117,14 @@ namespace apfel
     const int noff = 2 * nk0 + noff0;
     const int lmax = (int) (_aw[3] + 0.5);
     const double eps = _aw[4];
-    const double per = 1 / fabs(qT);
+    const double per = 1 / dabs(qT);
     const double w02 = 2 * _aw[noff + 2];
     const double perw = per * w02;
 
-    double i = f(_aw[noff] * per) * j0(qT * (_aw[noff] * per));
-    double ir = i * _aw[noff + 1];
-    double err = fabs(i);
+    T i = f(_aw[noff] * per) * j0(qT * (_aw[noff] * per));
+    T ir = i * _aw[noff + 1];
+    T zero = T{0*i};
+    double err = dabs(i);
     double h = 2;
     int m = 1;
     int k = noff;
@@ -131,15 +135,16 @@ namespace apfel
     double t;
     double tk;
     double xa;
-    double errd{i};
-    double errh{i};
-    double iback{i};
-    double irback{i};
-    double s0{i};
-    double s1{i};
-    double s2{i};
-    double fm{i};
-    double fp{i};
+    double di = dabs(i);
+    double errd{di};
+    double errh{di};
+    T s0{i};
+    T s1{i};
+    T s2{i};
+    T iback{i};
+    T irback{i};
+    T fm{i};
+    T fp{i};
 
     i *= _aw[noff + 2];
     do
@@ -164,7 +169,7 @@ namespace apfel
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];
                     i += fm + fp;
-                    err += fabs(fm) + fabs(fp);
+                    err += dabs(fm) + dabs(fp);
                     tk += 1;
                   }
                 while (_aw[j] > eps && j < k);
@@ -189,7 +194,7 @@ namespace apfel
                 j = k + jm;
                 k += nk;
               }
-            while (fabs(fm) > err && j < k)
+            while (dabs(fm) > err && j < k)
               {
                 j += 3;
                 fm = f(per * _aw[j]) * j0(qT * per * _aw[j]);
@@ -200,14 +205,14 @@ namespace apfel
             fm = f(perw * tk) * j0(qT * perw * tk);
             s2 = w02 * fm;
             i += s2;
-            if (fabs(fp) > err || fabs(s2) > err)
+            if (dabs(fp) > err || dabs(s2) > err)
               {
                 l = 0;
                 for (;;)
                   {
                     l++;
-                    s0 = 0;
-                    s1 = 0;
+                    s0 = zero;
+                    s1 = zero;
                     s2 = fm * _aw[noff0 + 1];
                     for (j = noff0 + 2; j <= noff - 2; j += 2)
                       {
@@ -217,37 +222,38 @@ namespace apfel
                         s1 += fm * _aw[j];
                         s2 += fm * _aw[j + 1];
                       }
-                    if (s2 <= err || l >= lmax)
+                    if (dabs(s2) <= err || l >= lmax)
                       break;
                     i += w02 * s0;
                   }
                 i += s1;
-                if (s2 > err) err = s2;
+                if (dabs(s2) > err)
+                  err = dabs(s2);
               }
             t += h;
           }
         while (t < 1);
         if (m == 1)
-          {
-            errd = 1 + 2 * errh;
-          }
+          errd = 1 + 2 * errh;
         else
-          {
-            errd = h * (fabs(i - 2 * iback) + fabs(ir - 2 * irback));
-          }
+          errd = h * (dabs(i - 2 * iback) + dabs(ir - 2 * irback));
         h *= 0.5;
         m *= 2;
       }
     while (errd > errh && 2 * k - noff <= lenawm);
     i *= h * per;
     if (errd > errh)
-      {
-        err = -errd * per;
-      }
+      err = -errd * per;
     else
-      {
-        err *= per * m * 0.5;
-      }
+      err *= per * m * 0.5;
     return i;
   }
+
+  // Specialisations
+  template double DoubleExponentialQuadrature::transform<double>(std::function<double(double const&)> const& f,
+                                                                 double const& qT) const;
+  template Distribution DoubleExponentialQuadrature::transform<Distribution>(std::function<Distribution(double const&)> const& f,
+                                                                             double const& qT) const;
+  template Set<Distribution> DoubleExponentialQuadrature::transform<Set<Distribution>>(std::function<Set<Distribution>(double const&)> const& f,
+                                                                                       double const& qT) const;
 }

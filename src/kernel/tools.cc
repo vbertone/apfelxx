@@ -6,6 +6,8 @@
 
 #include "apfel/tools.h"
 #include "apfel/constants.h"
+#include "apfel/distribution.h"
+#include "apfel/set.h"
 
 #include <algorithm>
 
@@ -107,5 +109,33 @@ namespace apfel
     v12.insert(v12.end(), v2.begin(), v2.end());
     std::sort(v12.begin(), v12.end());
     return v12;
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  double dabs(double const& d)
+  {
+    return fabs(d);
+  }
+
+
+  //_________________________________________________________________________________
+  template<>
+  double dabs(Distribution const& d)
+  {
+    double lgt = 0;
+    for (auto const& e : d.GetDistributionJointGrid())
+      lgt += e * e;
+    return sqrt(lgt);
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  double dabs(Set<Distribution> const& d)
+  {
+    double lgt = 1e30;
+    for (auto const& e : d.GetObjects())
+      lgt = std::min(lgt, dabs(e.second));
+    return lgt;
   }
 }

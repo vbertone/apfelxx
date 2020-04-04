@@ -60,5 +60,17 @@ namespace apfel
    * @return a std::vector containing the sorted entries of 'v1' and 'v2'
    */
   std::vector<double> ConcatenateAndSortVectors(std::vector<double> const& v1, std::vector<double> const& v2);
+
+  /**
+   * @brief Absolute value of the object T. In the case of a
+   * Distribution, this is computed like the squared mean average of
+   * the entries of the joint grid. In the case of a set of
+   * distributions, the minimum dabs over the distributions is
+   * returned.
+   * @param d: input object
+   * @return the absolute value
+   */
+  template<typename T>
+  double dabs(T const& d);
   ///@}
 }
