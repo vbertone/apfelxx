@@ -118,7 +118,6 @@ namespace apfel
     return fabs(d);
   }
 
-
   //_________________________________________________________________________________
   template<>
   double dabs(Distribution const& d)
