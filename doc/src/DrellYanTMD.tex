@@ -1877,6 +1877,48 @@ shown in Fig.~\ref{fig:LeptonicModulation}.
   \end{centering}
 \end{figure}
 
+\section{Convolution in transverse-momentum space}
+
+The ``transverse-momentum'' version of Eq.~(\ref{eq:crosssection}) reads:
+\begin{equation}\label{eq:crosssectionkt}
+\begin{array}{rcl}
+  \displaystyle \frac{d\sigma}{dQ dy dq_T} &=&\displaystyle 
+  \frac{16\pi\alpha^2q_T}{9 Q^3} H(Q,\mu) \sum_q C_q(Q)\\
+\\
+&\times&\displaystyle 
+  \int d^2\mathbf{k}_{T,1}d^2\mathbf{k}_{T,2}
+  \overline{F}_q(x_1,\mathbf{k}_{T,1};\mu,\zeta)
+  \overline{F}_{\bar{q}}(x_2,\mathbf{k}_{T,2};\mu,\zeta)\delta^{(2)}(\mathbf{q}_{T}-\mathbf{k}_{T,1}-\mathbf{k}_{T,2})\,,
+\end{array}
+\end{equation}
+where, with abuse of notation, we used the same symbol for the
+distributions $F$ both in $k_T$ and $b_T$ space. We can make use of
+the $\delta$-function to reduce the expression above to:
+\begin{equation}\label{eq:crosssectionkt2}
+\frac{d\sigma}{dQ dy dq_T} =\frac{16\pi\alpha^2q_T}{9 Q^3} H(Q,\mu) \sum_q C_q(Q)\int d^2\mathbf{k}_{T}
+  \overline{F}_q(x_1,\mathbf{k}_{T};\mu,\zeta)
+  \overline{F}_{\bar{q}}(x_2,\mathbf{q}_{T}-\mathbf{k}_{T};\mu,\zeta)\,.
+\end{equation}
+Since the distributions $F$ only depend on the absolute value of their
+argument (be it $k_T$ or $b_T$), the expression above can be further
+reduced to:
+\begin{equation}\label{eq:crosssectionkt3}
+\begin{array}{rcl}
+\displaystyle \frac{d\sigma}{dQ dy dq_T} &=&\displaystyle
+                                             \frac{16\pi\alpha^2q_T}{9
+                                             Q^3} H(Q,\mu) \sum_q
+                                             C_q(Q)\\
+\\
+&\times&\displaystyle \int_0^\infty dk_{T}\,k_{T}\int_0^{2\pi}d\theta\,
+  \overline{F}_q(x_1,k_T;\mu,\zeta)
+  \overline{F}_{\bar{q}}(x_2,\sqrt{q_{T}^2+k_{T}^2
+  -2q_{T}k_{T}\cos\theta};\mu,\zeta)\,,
+\end{array}
+\end{equation}
+where, without loss of generality, we are assuming that the vector
+$\mathbf{q}_T$ is directed along the $x$ axis. Knowing the functions
+$F$ in $k_T$ space, the formula above can be implemented numerically.
+
 \newpage
 
 \begin{thebibliography}{alp}

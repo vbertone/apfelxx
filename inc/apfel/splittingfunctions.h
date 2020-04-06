@@ -283,7 +283,7 @@ namespace apfel
    * @defgroup NNNLOunpsf NNNLO splitting functions
    * @ingroup UnpSF
    * @note For now only the plus, minus, and valence contributions
-   * have been computed (pamaterised and leading color).
+   * have been computed (parameterised and leading color).
    */
   ///@{
   /**
