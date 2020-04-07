@@ -1700,7 +1700,7 @@ is left to work out is the Jacobian to express the cross section
 differential in the same variables as in Eq.~(\ref{eq:xsexinsf}). What
 we need is to know is how the variables $Q^2$, $p_T$, and $\eta$ are
 related to $y$, $z$, and $q_T$. The relevant relations are:
-\begin{equation}
+\begin{equation}\label{eq:variablechange}
 \left\{\begin{array}{rcl}
 Q^2 &=& xyS_H\\
 \\
@@ -1711,7 +1711,7 @@ p_T^2 &=& z^2 q_T^2\\
 \end{equation}
 where $S_H$ is the squared center-of-mass energy of the collision, so
 that:
-\begin{equation}
+\begin{equation}\label{eq:differentialversion2}
   \frac{d\sigma}{dx dy dz dq_T^2} = \frac{zQ^2}{y}\frac{d\sigma}{dxdQ^2d p_T^2
     d\eta} = \frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
 \end{equation}
@@ -1742,6 +1742,21 @@ provides a solid ground to start from.
       code~\cite{Bertone:2017gds}.\label{fig:APFELvsTIMBA}}
   \end{centering}
 \end{figure}
+
+In order to be able to compare the theoretic predictions to the data,
+it is useful to work out the for of the cross section differential in
+the variables $x$, $Q^2$, $z$, and $p_T^2$. This is easily done
+starting from Eq.~(\ref{eq:differentialversion2}) and considering
+that:
+\begin{equation}
+\eta = \ln\left(\frac{zW}{p_T}\right)\,,\quad\mbox{with}\quad W
+=\sqrt{\frac{Q^2(1-x)}{x}}\,,\quad\Rightarrow\quad d\eta = \frac{dz}{z}\,.
+\end{equation}
+It follows that:
+\begin{equation}\label{eq:differentialversion3}
+ \frac{d\sigma}{dxdQ^2dz dp_T^2} = \frac{2\pi\alpha^2}{xQ^4}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\end{equation}
+with $y=Q^2/xS_H$ (see Eq.~(\ref{eq:variablechange})).
 
 % \section{Numerical results}
 
