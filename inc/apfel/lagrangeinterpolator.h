@@ -62,6 +62,18 @@ namespace apfel
     double DerInterpolant(int const& beta, double const& lnx, SubGrid const& sg) const;
 
     /**
+     * @brief This function defines the indefinte integral of the
+     * interpolating function used by the mother class Interpolator to
+     * perform the actual interpolation.
+     * @param beta: the x-space grid index
+     * @param lnx: the value (of the log) of the interpolation point
+     * @param sg: the SubGrid over which the interpolant is defined
+     * @return the derivative of the interpolation weights
+     * @see Interpolator::IntInterpolant
+     */
+    double IntInterpolant(int const& beta, double const& lnx, SubGrid const& sg) const;
+
+    /**
      * @brief This function computes the lower and upper bounds on
      * which the the sum over interpolants is limited.
      * @param x: the value in x to be interpolated

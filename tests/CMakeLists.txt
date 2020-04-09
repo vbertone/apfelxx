@@ -72,3 +72,8 @@ add_test(gpd_test gpd_test)
 add_executable(polylog_test polylog_test.cc)
 target_link_libraries(polylog_test apfelxx)
 add_test(polylog_test polylog_test)
+
+# build tests
+add_executable(expansion_test expansion_test.cc)
+target_link_libraries(expansion_test apfelxx)
+add_test(expansion_test expansion_test)

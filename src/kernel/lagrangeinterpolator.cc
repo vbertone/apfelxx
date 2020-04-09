@@ -6,6 +6,7 @@
 
 #include "apfel/lagrangeinterpolator.h"
 #include "apfel/constants.h"
+#include "apfel/tools.h"
 
 #include <algorithm>
 
@@ -101,6 +102,58 @@ namespace apfel
           }
       }
     return dw_int;
+  }
+
+  //_________________________________________________________________________________
+  double LagrangeInterpolator::IntInterpolant(int const& beta, double const& lnx, SubGrid const& sg) const
+  {
+    // Get the logarithmic grid.
+    const std::vector<double>& lxsg = sg.GetLogGrid();
+
+    // Define the lower bound of the interpolation range.
+    const int id    = sg.InterDegree();
+    const int bound = std::max(beta - id, 0);
+
+    // Return 0 if "x" is outside the range in which the interpolant
+    // is different from zero.  Ideally this functions should never be
+    // called if "beta" and "x" are such that "Interpolant" is
+    // identically zero. Use "SumBounds" to know where "beta" should
+    // run over given "x".
+    if (lnx < lxsg[bound] || lnx >= lxsg[beta+1])
+      return 0;
+
+    // Find the the neighbors of "x" on the grid.
+    int j;
+    for (j = 0; j <= beta - bound; j++)
+      if (lnx >= lxsg[beta-j])
+        break;
+
+    // Compute product of denominators and collect interpolation
+    // nodes.
+    double dp = 1;
+    std::vector<double> r(id);
+    int i = 0;
+    for (int delta = beta - j; delta <= beta - j + id; delta++)
+      if (delta != beta)
+        {
+          dp /= lxsg[beta] - lxsg[delta];
+          r[i++] = lxsg[delta];
+        }
+
+    // Compute the interpolant.
+    double iw_int = 0;
+    std::vector<double> Pk(id, 1.);
+    double lnxd = pow(lnx, id + 1);
+    int sgn = 1;
+    for (int gamma = 0; gamma <= id; gamma++)
+      {
+        iw_int += sgn * Pk[0] * lnxd / ( id - gamma + 1 );
+        Pk = VectorComposition(r, Pk);
+        lnxd /= lnx;
+        sgn *= - 1;
+      }
+
+    return iw_int * dp * 0;
   }
 
   //_________________________________________________________________________________

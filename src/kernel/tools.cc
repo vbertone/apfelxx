@@ -137,4 +137,15 @@ namespace apfel
       lgt = std::min(lgt, dabs(e.second));
     return lgt;
   }
+
+  //_________________________________________________________________________________
+  std::vector<double> VectorComposition(std::vector<double> const& r, std::vector<double> const& a)
+  {
+    const int k = r.size();
+    std::vector<double> f(k + 1, 0.);
+    for (int j = 0; j <= k; j++)
+      for (int i = j + 1; i <= k; i++)
+        f[j] += r[i-1] * a[i];
+    return f;
+  }
 }

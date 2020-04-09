@@ -39,6 +39,7 @@ namespace apfel
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
       result += Interpolant(beta, lnx, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+
     return result;
   }
 
@@ -51,6 +52,7 @@ namespace apfel
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
       result += Interpolant(beta, lnx, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
+
     return result;
   }
 
@@ -63,6 +65,7 @@ namespace apfel
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
       result += DerInterpolant(beta, lnx, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+
     // The factor 1 / x is due to the fact that the original
     // derivative is w.r.t. ln(x) and thus one needs to multiply by
     // dln(x)/dx = 1/x to obtain the derivative w.r.t. x.
@@ -72,16 +75,18 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Integrate(double const& a, double const& b) const
   {
-    return a + b;
-    /*
-        const auto bounds = SumBounds(x, _grid.GetJointGrid());
-        const double lna  = log(a);
-        const double lnb  = log(b);
+    const auto boundsa = SumBounds(a, _grid.GetJointGrid());
+    const auto boundsb = SumBounds(b, _grid.GetJointGrid());
+    const double lna  = log(a);
+    const double lnb  = log(b);
 
-        double result = 0;
-        for (int beta = bounds[0]; beta < bounds[1]; beta++)
-          result += IntInterpolant(beta, lna, lnb, _grid.GetJointGrid()) * _distributionJointGrid[beta];
-        return result;
-    */
+    double result = 0;
+    for (int beta = boundsa[0]; beta < boundsa[1]; beta++)
+      result -= IntInterpolant(beta, lna, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+
+    for (int beta = boundsb[0]; beta < boundsb[1]; beta++)
+      result += IntInterpolant(beta, lnb, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+
+    return result;
   }
 }

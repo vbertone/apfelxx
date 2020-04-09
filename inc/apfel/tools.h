@@ -72,5 +72,14 @@ namespace apfel
    */
   template<typename T>
   double dabs(T const& d);
+
+  /**
+   * @brief Function used for the recursive expansion \prod_{n=1}^k
+   * (x-r_n) = \sum_{m=0}^k (-1)^m p(m) x^m used in turn for the
+   * integration on the grid.
+   * @param r: first input vector
+   * @param a: second input vector
+   */
+  std::vector<double> VectorComposition(std::vector<double> const& r, std::vector<double> const& a);
   ///@}
 }
