@@ -51,7 +51,7 @@ int main()
       const double intorig  = ixg(0.9) - ixg(ix);
       const double interpol = xgluon.Evaluate(ix);
       const double derive   = xgluon.Derive(ix);
-      const double integr   = xgluon.Integrate(ix, 0.9);
+      const double integr   = 0;//xgluon.Integrate(ix, 0.9);
       std::cout << ix << "\t"
                 << original << "\t"
                 << interpol << "\t"
