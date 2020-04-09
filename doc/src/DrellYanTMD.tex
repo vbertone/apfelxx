@@ -805,6 +805,8 @@ muons, and tauons, this can be done by multiplying the cross section
 above by three times the branching ratio for the $Z$ decaying into any
 pair of leptons, $3\mbox{Br}(Z\rightarrow \ell^+\ell^-)$.
 
+
+\newpage
 \appendix
 
 \section{Ogata quadrature}\label{app:OgataQuadrature}
@@ -859,20 +861,20 @@ non-perturbative functions $f_{\rm NP}$. More, importantly, we need to
 understand how these functions behave upon integration.
 
 Suppose one wants to interpolate the test function $g$ in the point
-$x$ using a set of Lagrange polynomials of degree $k$ of. This
-requires a subset of $k+1$ consecutive points on an interpolation
-grid, say $\{x_{\alpha},\dots,x_{\alpha+k}\}$. The relative position
-between the point $x$ and the subset of points used for the
-interpolation is arbitrary. It is convenient to choose the subset of
-points such that $x_\alpha < x \leq x_{\alpha+k}$.\footnote{In fact,
-  it is not even necessary to impose the constraint
-  $x_\alpha < x \leq x_{\alpha+k}$.  In case this relation is not
-  fulfilled one usually refers to \textit{extrapolation} rather than
-  \textit{interpolation}. If not necessary, this option is typically
-  not convenient because it may lead to a substantial deterioration in
-  the accuracy with which $g(x)$ is determined.}  However, the
-ambiguity remains because there are $k$ possible choices according to
-whether $x_\alpha < x \leq x_{\alpha+1}$, or
+$x$ using a set of Lagrange polynomials of degree $k$. This requires a
+subset of $k+1$ consecutive points on an interpolation grid, say
+$\{x_{\alpha},\dots,x_{\alpha+k}\}$. The relative position between the
+point $x$ and the subset of points used for the interpolation is
+arbitrary. It is convenient to choose the subset of points such that
+$x_\alpha < x \leq x_{\alpha+k}$.\footnote{In fact, it is not even
+  necessary to impose the constraint $x_\alpha < x \leq x_{\alpha+k}$.
+  In case this relation is not fulfilled one usually refers to
+  \textit{extrapolation} rather than \textit{interpolation}. If not
+  necessary, this option is typically not convenient because it may
+  lead to a substantial deterioration in the accuracy with which
+  $g(x)$ is determined.}  However, the ambiguity remains because there
+are $k$ possible choices according to whether
+$x_\alpha < x \leq x_{\alpha+1}$, or
 $x_{\alpha+1} < x \leq x_{\alpha+2}$, and so on.
 
 In order to determine the exact form of the interpolation functions
@@ -885,7 +887,8 @@ g(x) = \sum_{i=0}^k\ell_i^{(k)}(x)g(x_{\alpha+i})\,,
 \end{equation}
 where $\ell_i^{(k)}$ is the $i$-th Lagrange polynomial of degree $k$
 which can be written as:
-\begin{equation} \ell_i^{(k)}(x) = \prod^{k}_{m=0,m\ne
+\begin{equation}\label{eq:LagPoly}
+\ell_i^{(k)}(x) = \prod^{k}_{m=0,m\ne
 i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,.
 \end{equation}
 We now assume that:
@@ -950,7 +953,8 @@ such that the interpolation formula becomes:
     i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,,
 \end{equation}
 that can be rearranged as:
-\begin{equation}\label{generalCase3} g(x) =
+\begin{equation}\label{generalCase3}
+g(x) =
 \sum_{\beta=-t}^{N_x+k-t-1}\mathcal{I}_{\beta,t}^{(k)}(x) g(x_{\beta})\,,
 \end{equation}
 with:
@@ -971,9 +975,8 @@ Now suppose we want to compute the following intergral:
 \begin{equation}
 I_1 = \int_{x_0}^{x_{N_x}}dx\,g(x)f(x)\,,
 \end{equation}
-where $f$ is some other function that we don't want to
-interpolate. Using Eqs.~(\ref{generalCase2}) and~(\ref{eq:limits}) we
-finally have that:
+where $f$ is a smooth function. Using Eqs.~(\ref{generalCase2})
+and~(\ref{eq:limits}) we have that:
 \begin{equation}
   I_1 = \sum_{\beta=0}^{N_x+k-1} W_\beta g(x_{\beta})\,,
 \end{equation}
@@ -995,7 +998,7 @@ W_{\alpha\beta} = \int_{x_{{\rm max}(0,\alpha-k)}}^{x_{{\rm
 This formalism nicely applies to the integral in $Q$ and $\xi=e^{y}$
 discussed above in Eq.~(\ref{eq:weights}). In view of a numerical
 implementation, it is worth noticing that the functions $\mathcal{I}$
-are piecewise. In particular, while these functions are continuos in
+are piecewise. In particular, while these functions are continuous in
 correspondence of the nodes of the grid, their first derivative is
 not. As a consequence, the result of the numerical integrals in
 Eqs.~(\ref{eq:monodim}) and~(\ref{eq:bidim}) may be inaccurate. To
@@ -1005,6 +1008,109 @@ nodes. Using Eq.~(\ref{eq:limits}), it is easy to see that, for an
 interpolation of degree $k$, one needs to do $k+1$ integrals over the
 intervals included between the $(\beta-k)$-th and the $(\beta+1)$-th
 node.
+
+\subsection{Derivation and integration of an interpolated function}
+
+The simple form of the Lagrange polynomials allows, in some cases, for
+the analytic handling of operations such has derivation and
+integration of the interpolated functions. In this section we discuss
+how derivation and integration can be carried out analytically
+exploiting the properties of the Lagrange polynomials.
+
+We start from Eq.~(\ref{particularCase}) and the main observation is
+that the interpolating functions $\ell_i^{(k)}$ are solutions of the
+following differential-equation system:
+\begin{equation}\label{eq:diffeqlagpol}
+\left\{
+\begin{array}{l}
+\displaystyle \frac{d\ell_i^{(k)}}{dx} = \left(\sum_{n=0 \atop n\neq
+  i}^k\frac{1}{x-x_{\alpha+n}}\right) \ell_i^{(k)}(x)\\
+\\
+\ell_i^{(k)}(x_{\alpha+i}) = 1
+\end{array}
+\right.\,,
+\end{equation}
+whose solution is Eq.~(\ref{eq:LagPoly}). This allows us to compute the
+derivative of the test function $g$ in Eq.~(\ref{generalCase2}) only
+knowing its values on the grid points as: 
+\begin{equation}\label{DerGeneralCase2}
+  \frac{dg}{dx} =
+  \sum_{\beta=0}^{N_x+k-1}\frac{d\mathcal{I}_\beta^{(k)}}{dx} g(x_{\beta})\,,
+\end{equation}
+where:
+\begin{equation}\label{eq:derintfunc}
+  \frac{d\mathcal{I}_\beta^{(k)}}{dx} = \sum_{i=0\atop i\leq\beta}^k
+  \theta(x-x_{\beta-i})\theta(x_{\beta-i+1}-x) \left(\sum_{n=0 \atop n\neq
+  i}^k\frac1{x_\beta-x_{\beta-i+n}}\prod^{k}_{m=0\atop m\ne
+    i,n}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\right)\,.
+\end{equation}
+
+Eq.~(\ref{eq:diffeqlagpol}) can also be used to compute integrals of
+the function $g$. To do so, we need to compute the integral:
+\begin{equation}
+L_i^{(k)}(a,b)=\int_a^bdy\,\ell_i^{(k)}(y) =\prod^{k}_{m=0\atop m\ne
+i}\frac{1}{x_{\alpha+i}-x_{\alpha+m}}\int_a^b dy\prod^{k}_{m=0\atop m\ne
+i}(y-x_{\alpha+m})\,.
+\end{equation}
+It is easy to see that:
+\begin{equation}\label{eq:expansion}
+\prod^{k}_{m=0\atop m\ne
+i}(y-x_{\alpha+m})=\sum_{n=0}^k (-1)^n p_{\alpha+i}^{(k)}(n)y^{k-n}\,,
+\end{equation}
+such that:
+\begin{equation}
+L_i^{(k)}(a,b) =\left[\prod^{k}_{m=0\atop m\ne
+i}\frac{1}{x_{\alpha+i}-x_{\alpha+m}}\right]\left[\sum_{n=0}^k\frac{(-1)^n p_{\alpha+i}^{(k)}(n)}{k-n+1}\left(b^{k-n+1}-a^{k-n+1}\right)\right]\,.
+\end{equation}
+What is left to do is to determine the coefficients
+$p_{\alpha+i}^{(k)}$. For convenience, let us define the set
+$\{r_1,\dots,r_k\}=\{x_\alpha,\dots,x_{\alpha+i-1},x_{\alpha+i+1},\dots,x_{\alpha+k}\}$.\footnote{From
+  the definition of the set $\{r_1,\dots,r_k\}$, it becomes clear that
+  the subscript $\alpha+i$ of the coefficients $p_{\alpha+i}^{(k)}$
+  refers to the fact that this coefficients are computed on a vector
+  of $k$ nodes where the node $x_{\alpha+i}$ has been removed.} The
+coefficients $p_{\alpha+i}^{(k)}$ defined in Eq.~(\ref{eq:expansion})
+can be expressed as:
+\begin{equation}\label{eq:pncoef}
+  p_{\alpha+i}^{(k)}(n)=\sum_{i_1=1}^k r_{i_1}\sum_{i_2=i_1+1}^k r_{i_2}\dots\sum_{i_n=i_{n-1}+1}^k r_{i_n}\,.
+\end{equation}
+In order to obtain a convenient algorithm to compute the coefficients
+$p_{\alpha+i}^{(k)}$, we define the vectorial function:
+\begin{equation}
+\mathbf{f}^{(k)}(\mathbf{r},\mathbf{a})\quad\mbox{with components}\quad  f_j^{(k)}\left(\mathbf{r},\mathbf{a}\right)=\sum_{i=j+1}^k r_{i}a_{i-j}\,.
+\end{equation}
+It is important to notice that while $\mathbf{r}$ is a $k$-dimensional
+vector with index running between 1 and $k$, $\mathbf{a}$ and are in
+principle an infinite-dimensional vector with index running between
+$-\infty$ and $+\infty$. However, given the definition of its
+components in Eq.~(\ref{eq:pncoef}), it turns out that $f_j^{(k)}=0$
+for $j\geq k$. The same applies to $\mathbf{a}$ because, as we will
+see below, it has to be identified with some $\mathbf{f}^{(k)}$. The
+function $\mathbf{f}^{(k)}$ can now be used to defined the vector
+$\mathbf{P}^{(k)}(n)$ recursively. The relevant recursive relation is:
+\begin{equation}
+\mathbf{P}^{(k)}(n+1) = \mathbf{f}^{(k)}(\mathbf{r},\mathbf{P}^{(k)}(n))\quad\mbox{with}\quad\mathbf{P}^{(k)}(0) = \mathbf{1}\,.
+\end{equation}
+Finally, the coefficient $p_{\alpha+i}^{(k)}(n)$ is the zero-th
+component of the vector $\mathbf{P}^{(k)}(n)$, \textit{i.e.}
+$p_{\alpha+i}^{(k)}(n)\equiv P_0^{(k)}(n)$.
+
+The integral of the function $g$ between $a$ and be can finally be
+computed on the grid as:
+\begin{equation}
+\int_a^bdy\,g(y) = \sum_{\beta=0}^{N_x+k-1}\mathcal{L}_\beta^{(k)}(a,b)\, g(x_{\beta})\,,
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+\mathcal{L}_\beta^{(k)}(a,b)&=&\displaystyle\sum_{i=0\atop i\leq\beta}^k
+  \theta(x-x_{\beta-i})\theta(x_{\beta-i+1}-x) \\
+\\
+&\times& \displaystyle\left[\prod^{k}_{m=0\atop m\ne
+i}\frac{1}{x_{\beta}-x_{\beta-i+m}}\right]\left[\sum_{n=0}^k\frac{(-1)^n
+         p_{\beta}^{(k)}(n)}{k-n+1}\left(b^{k-n+1}-a^{k-n+1}\right)\right]\,.
+\end{array}
+\end{equation}
 
 \section{Cuts on the final-state leptons}
 
