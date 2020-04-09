@@ -14,93 +14,49 @@ int main()
   std::cout << std::setprecision(12) << std::scientific;
 
   // Grid
-  const apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,5}, apfel::SubGrid{40,8e-1,5}}, false};
+  const apfel::Grid g{{{100, 9.9e-6, 5}, {100,1e-1, 5}, {40,8e-1,5}}};
 
   // Test distribution
   const auto xg = [&] (double const& x) -> double{ return x * ( 1 - x ); };
   const apfel::Distribution xgluon{g, xg};
 
+  // Derivative of the distribution
+  const auto dxg = [&] (double const& x) -> double{ return 1 - 2 * x; };
+
   // Test values
-  std::vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+  std::vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.51, 0.6, 0.7, 0.8, 0.9};
 
-  std::cout << "x, original function, interpolated function (joint), ratio" << std::endl;
+  std::cout << "\n        x               "
+            << "analytic function       "
+            << " inter. function        "
+            << "      ratio             "
+            << "analytic derivative     "
+            << " inter. derivative      "
+            << "      ratio             "
+            << std::endl;
+
   for (auto const& ix: x)
     {
       const double original = xg(ix);
+      const double derorig  = dxg(ix);
       const double interpol = xgluon.Evaluate(ix);
-      std::cout << ix << "  "
-                << original << "  "
-                << interpol << "  "
-                << original / interpol<< std::endl;
+      const double derive   = xgluon.Derive(ix);
+      std::cout << ix << "\t"
+                << original << "\t"
+                << interpol << "\t"
+                << interpol / original<< "\t"
+                << derorig  << "\t"
+                << derive   << "\t"
+                << derive / derorig << std::endl;
     }
   std::cout << "\n";
 
-  std::cout << "x, original function, interpolated function (first subgrid), ratio" << std::endl;
-  for (auto const& ix: x)
-    {
-      const double original = xg(ix);
-      const double interpol = xgluon.Evaluate(ix,0);
-      std::cout << ix << "  "
-                << original << "  "
-                << interpol << "  "
-                << original / interpol<< std::endl;
-    }
-  std::cout << "\n";
-
-  std::cout << "x, original function, interpolated function (second subgrid), ratio" << std::endl;
-  for (auto const& ix: x)
-    {
-      const double original = xg(ix);
-      const double interpol = xgluon.Evaluate(ix,1);
-      std::cout << ix << "  "
-                << original << "  "
-                << interpol << "  "
-                << original / interpol<< std::endl;
-    }
-  std::cout << "\n";
-
-  std::cout << "x, original function, interpolated function (third subgrid), ratio" << std::endl;
-  for (auto const& ix: x)
-    {
-      const double original = xg(ix);
-      const double interpol = xgluon.Evaluate(ix,2);
-      std::cout << ix << "  "
-                << original << "  "
-                << interpol << "  "
-                << original / interpol<< std::endl;
-    }
-  std::cout << "\n";
-
-  const int nint = 1000000;
-  const apfel::SubGrid test_grid{nint, 1e-5, 1};
   apfel::Timer t;
-
-  std::cout << "Performance test ("<< nint << " interpolations) ..." << std::endl;
-
-  std::cout << "(Joint Grid) ";
-  t.start();
-  for (auto const& r: test_grid.GetGrid())
-    xgluon.Evaluate(r);
+  const int nint = 1000000;
+  std::cout << "Performance test ("<< nint << " interpolations)... ";
+  for (int i = 0; i < nint; i++)
+    xgluon.Evaluate(0.1111);
   t.stop();
-
-  std::cout << "(First SubGrid) ";
-  t.start();
-  for (auto const& r: test_grid.GetGrid())
-    xgluon.Evaluate(r,0);
-  t.stop();
-
-  std::cout << "(Second SubGrid) ";
-  t.start();
-  for (auto const& r: test_grid.GetGrid())
-    xgluon.Evaluate(r,1);
-  t.stop();
-
-  std::cout << "(Third SubGrid) ";
-  t.start();
-  for (auto const& r: test_grid.GetGrid())
-    xgluon.Evaluate(r,2);
-  t.stop();
-
   std::cout << "\n";
 
   return 0;

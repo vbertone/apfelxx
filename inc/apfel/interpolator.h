@@ -44,7 +44,8 @@ namespace apfel
     /**
      * @name Evaluate functions
      * List of functions that perform the interpolation on the x-space
-     * grid.
+     * grid. These also include the derivative and the integral of the
+     * interpolated function.
      */
     ///@{
     /**
@@ -61,6 +62,23 @@ namespace apfel
      * @return the interpolated result
      */
     double Evaluate(double const& x, int const& ig) const;
+
+    /**
+     * @brief Function that evaluates the derivative of the
+     * interpolated function on the joint grid.
+     * @param x: the value in x where the derivative has to be computed
+     * @return the derivative of the interpolated function
+     */
+    double Derive(double const& x) const;
+
+    /**
+     * @brief Function that evaluates the integral of the interpolated
+     * function in the interval [a,b] on the joint grid.
+     * @param a: the lower integration bound
+     * @param b: the upper integration bound
+     * @return the integral of the interpolated function
+     */
+    double Integrate(double const& a, double const& b) const;
     ///@}
 
     /**
@@ -71,6 +89,30 @@ namespace apfel
      * @return the interpolation weights
      */
     virtual double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const = 0;
+
+    /**
+     * @brief Virtual method for the derivative of the interpolating
+     * functions.
+     * @param beta: the x-space grid index
+     * @param lnx: the value (of the log) of the interpolation point
+     * @param sg: the SubGrid over which the interpolant is defined
+     * @return the derivarive of the interpolation weights
+     * @note When computing the derivative it is strongly suggested to
+     * use locked grids. In addition, derivatives are not defined on
+     * the grid boundaries.
+     */
+    virtual double DerInterpolant(int const&, double const&, SubGrid const&) const { return 0; };
+
+    /**
+     * @brief Virtual method for the inegral of the interpolating
+     * functions.
+     * @param beta: the x-space grid index
+     * @param lna: the value (of the log) of the lower integration bound
+     * @param lnb: the value (of the log) of the upper integration bound
+     * @param sg: the SubGrid over which the interpolant is defined
+     * @return the integral of the interpolation weights
+     */
+    virtual double IntInterpolant(int const&, double const&, double const&, SubGrid const&) const { return 0; };
 
     /**
      * @brief This purely virtual function computes the lower and

@@ -1035,11 +1035,11 @@ derivative of the test function $g$ in Eq.~(\ref{generalCase2}) only
 knowing its values on the grid points as: 
 \begin{equation}\label{DerGeneralCase2}
   \frac{dg}{dx} =
-  \sum_{\beta=0}^{N_x+k-1}\frac{d\mathcal{I}_\beta^{(k)}}{dx} g(x_{\beta})\,,
+  \sum_{\beta=0}^{N_x+k-1}\mathcal{D}_\beta^{(k)}(x) g(x_{\beta})\,,
 \end{equation}
 where:
 \begin{equation}\label{eq:derintfunc}
-  \frac{d\mathcal{I}_\beta^{(k)}}{dx} = \sum_{i=0\atop i\leq\beta}^k
+  \mathcal{D}_\beta^{(k)}(x) = \sum_{i=0\atop i\leq\beta}^k
   \theta(x-x_{\beta-i})\theta(x_{\beta-i+1}-x) \left(\sum_{n=0 \atop n\neq
   i}^k\frac1{x_\beta-x_{\beta-i+n}}\prod^{k}_{m=0\atop m\ne
     i,n}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\right)\,.
