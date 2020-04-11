@@ -82,13 +82,18 @@ namespace apfel
     ///@}
 
     /**
-     * @brief Pure virtual method for the interpolating functions.
+     * @brief Pure virtual method for the interpolating functions
+     * polynomial in log(x).
      * @param beta: the x-space grid index
      * @param lnx: the value (of the log) of the interpolation point
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the interpolation weights
+     * @note This interpolant is polynomial in log(x) and is used when
+     * computing operators on the grid. The reason is it's translation
+     * invariance on a logarithmically spaced grid that reduces the
+     * ammount of computations.
      */
-    virtual double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const = 0;
+    virtual double InterpolantLog(int const& beta, double const& lnx, SubGrid const& sg) const = 0;
 
     /**
      * @brief Pure virtual method for the interpolating functions.
@@ -96,10 +101,8 @@ namespace apfel
      * @param x: the value of the interpolation point
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the interpolation weights
-     * @note This function, contrary to Interpolant that uses a
-     * logarithmic interpolation, uses a linear interpolation.
      */
-    virtual double InterpolantLin(int const& beta, double const& x, SubGrid const& sg) const = 0;
+    virtual double Interpolant(int const& beta, double const& x, SubGrid const& sg) const = 0;
 
     /**
      * @brief Virtual method for the derivative of the interpolating
@@ -108,9 +111,6 @@ namespace apfel
      * @param lnx: the value (of the log) of the interpolation point
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the derivarive of the interpolation weights
-     * @note When computing the derivative it is strongly suggested to
-     * use locked grids. In addition, derivatives are not defined on
-     * the grid boundaries.
      */
     virtual double DerInterpolant(int const&, double const&, SubGrid const&) const { return 0; };
 

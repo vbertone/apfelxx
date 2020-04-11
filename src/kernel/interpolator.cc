@@ -38,7 +38,7 @@ namespace apfel
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
-      result += InterpolantLin(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+      result += Interpolant(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
 
     return result;
   }
@@ -50,7 +50,7 @@ namespace apfel
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
-      result += InterpolantLin(beta, x, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
+      result += Interpolant(beta, x, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
 
     return result;
   }

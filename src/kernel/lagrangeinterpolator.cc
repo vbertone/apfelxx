@@ -27,7 +27,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double LagrangeInterpolator::Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const
+  double LagrangeInterpolator::InterpolantLog(int const& beta, double const& lnx, SubGrid const& sg) const
   {
     // Get the logarithmic grid.
     const std::vector<double>& lxsg = sg.GetLogGrid();
@@ -64,7 +64,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double LagrangeInterpolator::InterpolantLin(int const& beta, double const& x, SubGrid const& sg) const
+  double LagrangeInterpolator::Interpolant(int const& beta, double const& x, SubGrid const& sg) const
   {
     // Get the grid.
     const std::vector<double>& xg = sg.GetGrid();

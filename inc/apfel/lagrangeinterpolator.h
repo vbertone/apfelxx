@@ -40,28 +40,26 @@ namespace apfel
     /**
      * @brief This function defines the interpolating function used by
      * the mother class Interpolator to perform the actual
-     * interpolation.
+     * interpolation using polynomials in log(x).
      * @param beta: the x-space grid index
      * @param lnx: the value (of the log) of the interpolation point
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the interpolation weights
-     * @see Interpolator::Interpolant
+     * @see Interpolator::InterpolantLog
      */
-    double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const;
+    double InterpolantLog(int const& beta, double const& lnx, SubGrid const& sg) const;
 
     /**
      * @brief This function defines the interpolating function used by
-     * the mother class Interpolator to perform the actual
+     * the mother class Interpolator to perform the
      * interpolation.
      * @param beta: the x-space grid index
      * @param x: the value of the interpolation point
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the interpolation weights
-     * @see Interpolator::InterpolantLin
-     * @note Contrary to the Evaluate, here polynomials in 'x' rather
-     * than in 'log(x)' are used. This seems more accurate.
+     * @see Interpolator::Interpolant
      */
-    double InterpolantLin(int const& beta, double const& lnx, SubGrid const& sg) const;
+    double Interpolant(int const& beta, double const& x, SubGrid const& sg) const;
 
     /**
      * @brief This function defines the derivative of the
@@ -72,8 +70,6 @@ namespace apfel
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the derivative of the interpolation weights
      * @see Interpolator::DerInterpolant
-     * @note Contrary to the Evaluate, here polynomials in 'x' rather
-     * than in 'log(x)' are used. This seems more accurate.
      */
     double DerInterpolant(int const& beta, double const& x, SubGrid const& sg) const;
 
@@ -87,9 +83,6 @@ namespace apfel
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the integral of the interpolation weights
      * @see Interpolator::IntInterpolant
-     * @note Contrary to the Evaluate, here polynomials in 'x' rather
-     * than in 'log(x)' are used. This seems to be faster and more
-     * accurate.
      */
     double IntInterpolant(int const& beta, double const& a, double const& b, SubGrid const& sg) const;
 

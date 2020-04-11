@@ -69,7 +69,7 @@ namespace apfel
               {
                 // Weight of the subtraction term (it is a delta if
                 // eta = 1).
-                const double ws = li.Interpolant(alpha, lxe, sg);
+                const double ws = li.InterpolantLog(alpha, lxe, sg);
 
                 // Given that the interpolation functions have
                 // discontinuos derivative on the nodes and are
@@ -99,7 +99,7 @@ namespace apfel
                       const double z = x / eta;
                       if (z >= 1)
                         return 0;
-                      const double wr = li.Interpolant(alpha, log(xbeta / x), _grid.GetSubGrid(ig));
+                      const double wr = li.InterpolantLog(alpha, log(xbeta / x), _grid.GetSubGrid(ig));
                       return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
                     };
                     const Integrator Io{integrand};

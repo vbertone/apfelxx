@@ -82,7 +82,7 @@ namespace apfel
                     // "Integrator" object.
                     const auto integrand = [&] (double const& x) -> double
                     {
-                      const double wr = li.Interpolant(alpha, log(x), _grid.GetSubGrid(ig));
+                      const double wr = li.InterpolantLog(alpha, log(x), _grid.GetSubGrid(ig));
                       return expr.Regular(xbeta / x) * wr / x + expr.Singular(xbeta / x) * ( wr / x - ws / xbeta );
                     };
                     const Integrator Io{integrand};
