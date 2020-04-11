@@ -91,6 +91,17 @@ namespace apfel
     virtual double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const = 0;
 
     /**
+     * @brief Pure virtual method for the interpolating functions.
+     * @param beta: the x-space grid index
+     * @param x: the value of the interpolation point
+     * @param sg: the SubGrid over which the interpolant is defined
+     * @return the interpolation weights
+     * @note This function, contrary to Interpolant that uses a
+     * logarithmic interpolation, uses a linear interpolation.
+     */
+    virtual double InterpolantLin(int const& beta, double const& x, SubGrid const& sg) const = 0;
+
+    /**
      * @brief Virtual method for the derivative of the interpolating
      * functions.
      * @param beta: the x-space grid index

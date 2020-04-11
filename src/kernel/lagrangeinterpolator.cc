@@ -64,6 +64,43 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  double LagrangeInterpolator::InterpolantLin(int const& beta, double const& x, SubGrid const& sg) const
+  {
+    // Get the grid.
+    const std::vector<double>& xg = sg.GetGrid();
+
+    // Return immediately 1 if "x" coincides with "xg[beta]".
+    if (std::abs(x - xg[beta]) < eps12)
+      return 1;
+
+    // Define the lower bound of the interpolation range.
+    const int id    = sg.InterDegree();
+    const int bound = std::max(beta - id, 0);
+
+    // Return 0 if "x" is outside the range in which the interpolant
+    // is different from zero.  Ideally this functions should never be
+    // called if "beta" and "x" are such that "Interpolant" is
+    // identically zero. Use "SumBounds" to know where "beta" should
+    // run over given "x".
+    if (x < xg[bound] || x >= xg[beta+1])
+      return 0;
+
+    // Find the the neighbors of "x" on the grid.
+    int j;
+    for (j = 0; j <= beta - bound; j++)
+      if (x >= xg[beta-j])
+        break;
+
+    // Compute the interpolant.
+    double w_int = 1;
+    for (int delta = beta - j; delta <= beta - j + id; delta++)
+      if (delta != beta)
+        w_int *= ( x - xg[delta] ) / ( xg[beta] - xg[delta] );
+
+    return w_int;
+  }
+
+  //_________________________________________________________________________________
   double LagrangeInterpolator::DerInterpolant(int const& beta, double const& x, SubGrid const& sg) const
   {
     // Get the grid.

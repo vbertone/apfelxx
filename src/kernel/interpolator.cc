@@ -35,11 +35,10 @@ namespace apfel
   double Interpolator::Evaluate(double const& x) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
-    const double lnx  = log(x);
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
-      result += Interpolant(beta, lnx, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+      result += InterpolantLin(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
 
     return result;
   }
@@ -48,11 +47,10 @@ namespace apfel
   double Interpolator::Evaluate(double const& x, int const& ig) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetSubGrid(ig));
-    const double lnx  = log(x);
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
-      result += Interpolant(beta, lnx, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
+      result += InterpolantLin(beta, x, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
 
     return result;
   }

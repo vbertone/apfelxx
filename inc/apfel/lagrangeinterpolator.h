@@ -50,6 +50,20 @@ namespace apfel
     double Interpolant(int const& beta, double const& lnx, SubGrid const& sg) const;
 
     /**
+     * @brief This function defines the interpolating function used by
+     * the mother class Interpolator to perform the actual
+     * interpolation.
+     * @param beta: the x-space grid index
+     * @param x: the value of the interpolation point
+     * @param sg: the SubGrid over which the interpolant is defined
+     * @return the interpolation weights
+     * @see Interpolator::InterpolantLin
+     * @note Contrary to the Evaluate, here polynomials in 'x' rather
+     * than in 'log(x)' are used. This seems more accurate.
+     */
+    double InterpolantLin(int const& beta, double const& lnx, SubGrid const& sg) const;
+
+    /**
      * @brief This function defines the derivative of the
      * interpolating function used by the mother class Interpolator to
      * perform the actual interpolation.
