@@ -120,7 +120,7 @@ namespace apfel
 
     // Return 0 if "a" and "b" are outside the range in which the
     // interpolant is different from zero.
-    if (a > xg[beta+1] || b < xg[beta-k])
+    if (a > xg[beta+1] || b < xg[std::max(beta-k, 0)])
       return 0;
 
     // Construct interpolant
