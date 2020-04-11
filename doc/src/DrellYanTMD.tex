@@ -23,6 +23,18 @@
 
 \begin{document}
 
+\title{Drell-Yan cross section in TMD factorisation}
+
+\author{Valerio Bertone}
+
+%\institution{$^{a}$PH Department, TH Unit, CERN, CH-1211 Geneva 23, Switzerland}
+\maketitle
+
+%\begin{abstract}
+%In this document 
+%\end{abstract}
+\tableofcontents{}
+
 \section{Structure of the observables}
 
 Let us start from Eq.~(2.6) of Ref.~\cite{Scimemi:2017etj}, that is
@@ -1039,74 +1051,193 @@ knowing its values on the grid points as:
 \end{equation}
 where:
 \begin{equation}\label{eq:derintfunc}
-  \mathcal{D}_\beta^{(k)}(x) = \sum_{i=0\atop i\leq\beta}^k
+  \mathcal{D}_\beta^{(k)}(x) = \sum_{i=0}^{{\rm min}(k,\beta)}
   \theta(x-x_{\beta-i})\theta(x_{\beta-i+1}-x) \left(\sum_{n=0 \atop n\neq
   i}^k\frac1{x_\beta-x_{\beta-i+n}}\prod^{k}_{m=0\atop m\ne
     i,n}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\right)\,.
 \end{equation}
 
 Eq.~(\ref{eq:diffeqlagpol}) can also be used to compute integrals of
-the function $g$. To do so, we need to compute the indefinite
-integral:
+the function $g$. In particular, we want to compute the integral:
 \begin{equation}
-G_i^{(k)}(x)=\int^xdy\,\ell_i^{(k)}(y) =\prod^{k}_{m=0\atop m\ne
-i}\frac{1}{x_{\alpha+i}-x_{\alpha+m}}\int^x dy\prod^{k}_{m=0\atop m\ne
-i}(y-x_{\alpha+m})\,.
+I(a,b) = \int_a^b dy\,g(y)\,.
+\end{equation}
+Using Eq.~(\ref{generalCase2}), we find that:
+\begin{equation}
+  I(a,b) =
+  \sum_{\beta=0}^{N_x+k-1}\mathcal{G}_\beta^{(k)}(a,b) g(x_{\beta})\,,
+\end{equation}
+where:
+% \begin{equation}
+% \mathcal{G}_\beta^{(k)}(a,b) = \int_a^bdy\,\mathcal{I}_\beta^{(k)}(y)\,.
+% \end{equation}
+% From Eq.~(\ref{eq:limits}), we know that the integrand
+% $\mathcal{I}_\beta^{(k)}(y)$ is zero outside the interval
+% $y\in [x_{\beta-k}:x_{\beta+1}]$. Assuming that $a\leq b$, there are a
+% few possible configurations:
+% \begin{itemize}
+% \item $x_{\beta-k}\geq b$ or $x_{\beta+1}\leq a$: in these cases there is no
+%   overlap between the support region of $\mathcal{I}_\beta^{(k)}$ and
+%   the integration range. It follows that:
+% \begin{equation}
+% \mathcal{G}_\beta^{(k)}(a,b)=0\,.
+% \end{equation}
+
+% \item $x_{\beta-k}\geq a$ and $x_{\beta+1}\leq b$: in this case the
+%   support region of $\mathcal{I}_\beta^{(k)}$ is entirely contained in
+%   the integration range. Therefore:
+% \begin{equation}
+% \begin{array}{rcl}
+% \displaystyle \mathcal{G}_\beta^{(k)}(a,b) =
+%   \int_{x_{\beta-k}}^{x_{\beta+1}}dy\,\mathcal{I}_\beta^{(k)}(y)&=&\displaystyle
+%                                                                     \sum_{i=0}^{{\rm
+%                                                                     min}(k,\beta)}
+%   \int_{x_{\beta-k}}^{x_{\beta+1}}dy\,\theta(y-x_{\beta-i})\theta(x_{\beta-i+1}-y)
+%   \prod^{k}_{m=0\atop m\ne
+%     i}\frac{y-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\\
+% \\
+% &=&\displaystyle \sum_{i=0}^{{\rm min}(k,\beta)}
+%   \int_{x_{\beta-i}}^{x_{\beta-i+1}}dy
+%   \prod^{k}_{m=0\atop m\ne
+%     i}\frac{y-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}
+% \end{array}
+% \end{equation}
+
+% \item $x_{\beta-k}\geq a$ and $x_{\beta+1}> b$:
+% \begin{equation}
+% \mathcal{G}_\beta^{(k)}(a,b) = \int_{x_{\beta-k}}^{b}dy\,\mathcal{I}_\beta^{(k)}(y)=\sum_{i=0}^{{\rm min}(k,\beta)}\theta(b-x_{\beta-i})
+%   \int_{x_{\beta-i}}^{{\rm min}(x_{\beta-i+1},b)}dy
+%   \prod^{k}_{m=0\atop m\ne
+%     i}\frac{y-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}
+% \end{equation}
+
+% \item $x_{\beta-k}< a$ and $x_{\beta+1}\leq b$:
+% \begin{equation}
+% \mathcal{G}_\beta^{(k)}(a,b) = \int_{a}^{x_{\beta+1}}dy\,\mathcal{I}_\beta^{(k)}(y)=\sum_{i=0}^{{\rm min}(k,\beta)}
+%   \theta(x_{\beta-i+1}-a)\int_{{\rm max}(x_{\beta-i},a)}^{x_{\beta-i+1}}dy
+%   \prod^{k}_{m=0\atop m\ne
+%     i}\frac{y-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}
+% \end{equation}
+
+% \item $x_{\beta-k}< a$ and $x_{\beta+1}> b$: in this case the support
+%   region of $\mathcal{I}_\beta^{(k)}$ contains the integration
+%   range. Therefore:
+% \begin{equation}
+% \mathcal{G}_\beta^{(k)}(a,b) = \int_{a}^{b}dy\,\mathcal{I}_\beta^{(k)}(y) =\sum_{i=0}^{{\rm min}(k,\beta)}
+%   \theta(b-x_{\beta-i})\theta(x_{\beta-i+1}-a)\int_{{\rm max}(x_{\beta-i},a)}^{{\rm min}(x_{\beta-i+1},b)}dy\prod^{k}_{m=0\atop m\ne
+%     i}\frac{y-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\,.
+% \end{equation}
+
+% \end{itemize}
+
+% \newpage
+
+\begin{equation}
+\mathcal{G}_\beta^{(k)}(a,b) = \int_a^bdy\,\mathcal{I}_\beta^{(k)}(y)=
+\sum_{i=0}^{{\rm min}(k,\beta)}
+  \int_a^bdy\,\theta(y-x_{\beta-i})\theta(x_{\beta-i+1}-y)
+  \prod^{k}_{m=0\atop m\ne
+    i}\frac{y-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\,.
+\end{equation}
+Now, assuming that $a\leq b$, we can write the integral above as:
+\begin{equation}
+\int_a^bdy\,\theta(y-x_{\beta-i})\theta(x_{\beta-i+1}-y)\dots
+=\theta(b-x_{\beta-i})\theta(x_{\beta-i+1}-a)\int_{{\rm max}(a,x_{\beta-i})}^{{\rm min}(b,x_{\beta-i+1})}dy\dots\,,
+\end{equation}
+so that:
+\begin{equation}
+\mathcal{G}_\beta^{(k)}(a,b) = \sum_{i=0}^{{\rm min}(k,\beta)}
+  \theta(b-x_{\beta-i})\theta(x_{\beta-i+1}-a)\prod^{k}_{m=0\atop m\ne
+    i}\frac{1}{x_{\beta}-x_{\beta-i+m}}\int_{{\rm max}(a,x_{\beta-i})}^{{\rm min}(b,x_{\beta-i+1})}dy\prod^{k}_{m=0\atop m\ne
+    i}(y-x_{\beta-i+m})\,.
 \end{equation}
 It is easy to see that:
 \begin{equation}\label{eq:expansion}
 \prod^{k}_{m=0\atop m\ne
-i}(y-x_{\alpha+m})=\sum_{n=0}^k (-1)^n p_{\alpha+i}^{(k)}(n)y^{k-n}\,,
+i}(y-x_{\beta-i+m})=\sum_{n=0}^k (-1)^n p_{\beta}^{(k)}(n)y^{k-n}\,,
 \end{equation}
 such that:
-\begin{equation}
-G_i^{(k)}(x) =\left[\prod^{k}_{m=0\atop m\ne
-i}\frac{1}{x_{\alpha+i}-x_{\alpha+m}}\right]\left[\sum_{n=0}^k\frac{(-1)^n p_{\alpha+i}^{(k)}(n)}{k-n+1}x^{k-n+1}\right]\,.
+\begin{equation}\label{eq:linIntegral}
+\mathcal{G}_\beta^{(k)}(a,b) = \sum_{i=0}^{{\rm min}(k,\beta)}
+  \theta(b-x_{\beta-i})\theta(x_{\beta-i+1}-a)\prod^{k}_{m=0\atop m\ne
+    i}\frac{1}{x_{\beta}-x_{\beta-i+m}} \sum_{n=0}^k (-1)^n p_{\beta}^{(k)}(n) \int_{{\rm max}(a,x_{\beta-i})}^{{\rm min}(b,x_{\beta-i+1})}dy\,y^{k-n}\,.
 \end{equation}
-What is left to do is to determine the coefficients
-$p_{\alpha+i}^{(k)}$. For convenience, let us define the set
-$\{r_1,\dots,r_k\}=\{x_\alpha,\dots,x_{\alpha+i-1},x_{\alpha+i+1},\dots,x_{\alpha+k}\}$.\footnote{From
+Fo the moment we leave the integral unsolved, we will come back on
+that later because the situation is more complicated than that. What
+is left to do is to determine the coefficients $p_{\beta}^{(k)}$. For
+convenience, let us define the set
+$\{r_1,\dots,r_k\}=\{x_{\beta-i},\dots,x_{\beta-1},x_{\beta+1},\dots,x_{\beta-i+k}\}$.\footnote{From
   the definition of the set $\{r_1,\dots,r_k\}$, it becomes clear that
-  the subscript $\alpha+i$ of the coefficients $p_{\alpha+i}^{(k)}$
-  refers to the fact that this coefficients are computed on a vector
-  of $k$ nodes where the node $x_{\alpha+i}$ has been removed.} The
-coefficients $p_{\alpha+i}^{(k)}$ defined in Eq.~(\ref{eq:expansion})
-can be expressed as:
+  the subscript $\beta$ of the coefficients $p_{\beta}^{(k)}$ refers
+  to the fact that this coefficients are computed on a vector of $k$
+  nodes where the node $x_{\beta}$ has been removed.} The coefficients
+$p_{\beta}^{(k)}$ defined in Eq.~(\ref{eq:expansion}) can be expressed
+as:
 \begin{equation}\label{eq:pncoef}
-  p_{\alpha+i}^{(k)}(n)=\sum_{i_1=1}^k r_{i_1}\sum_{i_2=i_1+1}^k r_{i_2}\dots\sum_{i_n=i_{n-1}+1}^k r_{i_n}\,.
+  p_{\beta}^{(k)}(n)=\sum_{i_1=1}^k r_{i_1}\sum_{i_2=i_1+1}^k r_{i_2}\dots\sum_{i_n=i_{n-1}+1}^k r_{i_n}\,.
 \end{equation}
 In order to obtain a convenient algorithm to compute the coefficients
-$p_{\alpha+i}^{(k)}$, we define the vectorial function:
+$p_{\beta}^{(k)}$, we define the vectorial function:
 \begin{equation}
 \mathbf{f}^{(k)}(\mathbf{r},\mathbf{a})\quad\mbox{with components}\quad  f_j^{(k)}\left(\mathbf{r},\mathbf{a}\right)=\sum_{i=j+1}^k r_{i}a_{i}\,.
 \end{equation}
 It is important to notice that while $\mathbf{r}$ is a $k$-dimensional
-vector with index running between 1 and $k$, $\mathbf{a}$ and are in
-principle an infinite-dimensional vector with index running between
-$-\infty$ and $+\infty$. However, given the definition of its
-components in Eq.~(\ref{eq:pncoef}), it turns out that $f_j^{(k)}=0$
-for $j\geq k$. The same applies to $\mathbf{a}$ because, as we will
-see below, it has to be identified with some $\mathbf{f}^{(k)}$. The
-function $\mathbf{f}^{(k)}$ can now be used to defined the vector
-$\mathbf{P}^{(k)}(n)$ recursively. The relevant recursive relation is:
+vector with index running between 1 and $k$, $\mathbf{a}$ and
+$\mathbf{f}^{(k)}$ are in principle infinite-dimensional vectors with
+index running between $-\infty$ and $+\infty$.  However, given the
+definition of its components in Eq.~(\ref{eq:pncoef}), it turns out
+that $f_j^{(k)}=0$ for $j\geq k$. The same applies to $\mathbf{a}$
+because, as we will see below, it has to be identified with some
+$\mathbf{f}^{(k)}$.  The function $\mathbf{f}^{(k)}$ can now be used
+to defined the vector $\mathbf{P}^{(k)}(n)$ recursively. The relevant
+recursive relation is:
 \begin{equation}
 \mathbf{P}^{(k)}(n+1) = \mathbf{f}^{(k)}(\mathbf{r},\mathbf{P}^{(k)}(n))\quad\mbox{with}\quad\mathbf{P}^{(k)}(0) = \mathbf{1}\,.
 \end{equation}
-Finally, the coefficient $p_{\alpha+i}^{(k)}(n)$ is the zero-th
+Finally, the coefficient $p_{\beta}^{(k)}(n)$ is the zero-th
 component of the vector $\mathbf{P}^{(k)}(n)$, \textit{i.e.}
-$p_{\alpha+i}^{(k)}(n)\equiv P_0^{(k)}(n)$.
+$p_{\beta}^{(k)}(n)\equiv P_0^{(k)}(n)$.
 
-The integral of the function $g$ between $a$ and be can then be
-computed on the grid as:
+As mentioned above, there is a complication. The discussion above
+applies to Lagrange interpolating functions written in terms of powers
+of $x$. Nonetheless, APFEL implements an interpolation procedure based
+on powers of $\ln x$. Specifically, the Lagrange polynomials look like
+this:
+\begin{equation}\label{eq:LagPolyLog}
+  \ell_i^{(k)}(x) = \prod^{k}_{m=0\atop m\ne
+    i}\frac{\ln x-\ln x_{\alpha+m}}{\ln x_{\alpha+i}-\ln x_{\alpha+m}}\,.
+\end{equation}
+Therefore, deriving and integrating w.r.t. $x$ needs to account for
+the presence of the logarithm. This is not particularly complicated
+for the derivative because the derivation above applies verbatim to
+$dg/d\ln x$ and this easily translates into $dg/dx$ using the chain
+rule:
 \begin{equation}
-\int_a^bdy\,g(y) = \sum_{\beta=0}^{N_x+k-1}\left[\mathcal{G}_\beta^{(k)}(b) -\mathcal{G}_\beta^{(k)}(a)\right]g(x_{\beta})\,,
+\frac{dg}{dx} = \frac{d\ln x}{dx}\frac{dg}{d\ln x} = \frac{1}{x} \frac{dg}{d\ln x}\,.
+\end{equation}
+
+The integration is instead more complicated because the integral in
+Eq.~(\ref{eq:linIntegral}) needs to be replaced as follows:
+\begin{equation}
+\int_{\overline{a}}^{\overline{b}}dy\,y^{k-n}\quad\rightarrow\quad \int_{\overline{a}}^{\overline{b}} dy\,\ln^{k-n}y=\sum_{p=0}^{k-n}\frac{(-1)^{k-n+p}(k-n)!}{p!}\left[\overline{b}\ln^p \overline{b}-\overline{a}\ln^p \overline{a}\right]\,.
+\end{equation}
+with $\overline{a} = {\rm max}(a,x_{\beta-i})$ and
+$\overline{b} = {\rm min}(b,x_{\beta-i+1})$.
+Therefore, after some manipulation, Eq.~(\ref{eq:linIntegral}) becomes:
+\begin{equation}\label{eq:logIntegral}
+\begin{array}{rcl}
+\displaystyle \mathcal{G}_\beta^{(k)}(a,b) &=&\displaystyle
+                                               \sum_{j=0}^{{\rm min}(\beta,k)}
+  \theta(b-x_{\beta-j})\theta(x_{\beta-j+1}-a)\\
+\\
+&\times&\displaystyle\left[\prod^{k}_{\delta=0\atop \delta\ne
+    j}\frac{1}{\ln x_{\beta}-\ln x_{\beta-j+\delta}}\right]\left[\sum_{p=0}^k q_\beta^{(k)}(p)\frac{(-1)^{k+p} \left[\overline{b}\ln^{p} \overline{b}-\overline{a}\ln^p \overline{a}\right]}{p!}\right]\,.
+\end{array}
 \end{equation}
 with:
 \begin{equation}
-\mathcal{G}_\beta^{(k)}(x)= \sum_{j=0\atop j\leq\beta}^k
-  \theta(x-x_{\beta-j})\theta(x_{\beta-j+1}-x)\left[\prod^{k}_{\delta=0\atop \delta\ne
-j}\frac{1}{x_{\beta}-x_{\beta-j+\delta}}\right]\left[\sum_{\gamma=0}^k\frac{(-1)^\gamma
-         p_{\beta}^{(k)}(\gamma)}{k-\gamma+1}x^{k-\gamma+1}\right]\,.
+  q_\beta^{(k)}(p) = \sum_{\eta=p}^{k}
+  \eta!\,p_{\beta}^{(k)}(k-\eta)\,.
 \end{equation}
 
 \section{Cuts on the final-state leptons}

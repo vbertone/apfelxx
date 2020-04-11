@@ -74,12 +74,16 @@ namespace apfel
   double dabs(T const& d);
 
   /**
-   * @brief Function used for the recursive expansion \prod_{n=1}^k
-   * (x-r_n) = \sum_{m=0}^k (-1)^m p(m) x^m used in turn for the
-   * integration on the grid.
-   * @param r: first input vector
-   * @param a: second input vector
+   * @brief Function that computes the coefficients of the expansion
+   * of a product of n binomials with zero's in r.
+   * @param r: input vector of zero's
    */
-  std::vector<double> VectorComposition(std::vector<double> const& r, std::vector<double> const& a);
+  std::vector<double> ProductExpansion(std::vector<double> const& r);
+
+  /**
+   * @brief Factorial of an integer
+   * @param n: input integer
+   */
+  int factorial(int const& n);
   ///@}
 }

@@ -5,6 +5,7 @@
 //
 
 #include "apfel/interpolator.h"
+#include "apfel/messages.h"
 
 #include <cmath>
 
@@ -33,7 +34,7 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Evaluate(double const& x) const
   {
-    const auto bounds = SumBounds(x, _grid.GetJointGrid());
+    const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
     const double lnx  = log(x);
 
     double result = 0;
@@ -46,7 +47,7 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Evaluate(double const& x, int const& ig) const
   {
-    const auto bounds = SumBounds(x, _grid.GetSubGrid(ig));
+    const std::array<int, 2> bounds = SumBounds(x, _grid.GetSubGrid(ig));
     const double lnx  = log(x);
 
     double result = 0;
@@ -59,7 +60,7 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Derive(double const& x) const
   {
-    const auto bounds = SumBounds(x, _grid.GetJointGrid());
+    const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
     const double lnx  = log(x);
 
     double result = 0;
@@ -75,18 +76,20 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Integrate(double const& a, double const& b) const
   {
-    const auto boundsa = SumBounds(a, _grid.GetJointGrid());
-    const auto boundsb = SumBounds(b, _grid.GetJointGrid());
-    const double lna  = log(a);
-    const double lnb  = log(b);
+    // Order integration bounds and adjust sign if necessary
+    double ao  = std::min(a, b);
+    double bo  = std::max(a, b);
+    int    sgn = (b > a ? 1 : -1);
 
+    // Get summation bounds
+    const std::array<int, 2> boundsa = SumBounds(ao, _grid.GetJointGrid());
+    const std::array<int, 2> boundsb = SumBounds(bo, _grid.GetJointGrid());
+
+    // Interpolate
     double result = 0;
-    for (int beta = boundsa[0]; beta < boundsa[1]; beta++)
-      result -= IntInterpolant(beta, lna, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+    for (int beta = boundsa[0]; beta < boundsb[1]; beta++)
+      result += IntInterpolant(beta, ao, bo, _grid.GetJointGrid()) * _distributionJointGrid[beta];
 
-    for (int beta = boundsb[0]; beta < boundsb[1]; beta++)
-      result += IntInterpolant(beta, lnb, _grid.GetJointGrid()) * _distributionJointGrid[beta];
-
-    return result;
+    return sgn * result;
   }
 }

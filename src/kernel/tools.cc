@@ -139,13 +139,26 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::vector<double> VectorComposition(std::vector<double> const& r, std::vector<double> const& a)
+  std::vector<double> ProductExpansion(std::vector<double> const& r)
   {
     const int k = r.size();
-    std::vector<double> f(k + 1, 0.);
-    for (int j = 0; j <= k; j++)
-      for (int i = j + 1; i <= k; i++)
-        f[j] += r[i-1] * a[i];
-    return f;
+    std::vector<double> a(k + 1, 1.);
+    std::vector<double> p(k + 1, 1.);
+    for (int n = 0; n <= k; n++)
+      {
+        p[n] = a[0];
+        std::vector<double> f(k + 1, 0.);
+        for (int j = 0; j <= k; j++)
+          for (int i = j + 1; i <= k; i++)
+            f[j] += r[i-1] * a[i];
+        a = f;
+      }
+    return p;
+  }
+
+  //_________________________________________________________________________________
+  int factorial(int const& n)
+  {
+    return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
   }
 }

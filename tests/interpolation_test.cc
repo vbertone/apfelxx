@@ -48,10 +48,10 @@ int main()
     {
       const double original = xg(ix);
       const double derorig  = dxg(ix);
-      const double intorig  = ixg(0.9) - ixg(ix);
+      const double intorig  = ixg(0.65) - ixg(ix);
       const double interpol = xgluon.Evaluate(ix);
       const double derive   = xgluon.Derive(ix);
-      const double integr   = 0;//xgluon.Integrate(ix, 0.9);
+      const double integr   = xgluon.Integrate(ix, 0.65);
       std::cout << ix << "\t"
                 << original << "\t"
                 << interpol << "\t"
@@ -71,6 +71,16 @@ int main()
   std::cout << "Performance test ("<< nint << " interpolations)... ";
   for (int i = 0; i < nint; i++)
     xgluon.Evaluate(0.1111);
+  t.stop();
+  t.start();
+  std::cout << "Performance test ("<< nint << " derivations)... ";
+  for (int i = 0; i < nint; i++)
+    xgluon.Derive(0.1111);
+  t.stop();
+  t.start();
+  std::cout << "Performance test ("<< nint / 1000 << " integrations)... ";
+  for (int i = 0; i < nint / 1000; i++)
+    xgluon.Integrate(0.1111, 0.55555);
   t.stop();
   std::cout << "\n";
 

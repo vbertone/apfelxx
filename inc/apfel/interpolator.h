@@ -104,14 +104,15 @@ namespace apfel
     virtual double DerInterpolant(int const&, double const&, SubGrid const&) const { return 0; };
 
     /**
-     * @brief Virtual method for the indefinite integral of the
-     * interpolating functions.
+     * @brief Virtual method for the integral of the interpolating
+     * functions.
      * @param beta: the x-space grid index
-     * @param lnx: the value (of the log) of the interpolation point
+     * @param lna: the value (of the log) of the lower bound
+     * @param lnb: the value (of the log) of the upper bound
      * @param sg: the SubGrid over which the interpolant is defined
-     * @return the indefinite integral of the interpolation weights
+     * @return the integral of the interpolation weights
      */
-    virtual double IntInterpolant(int const&, double const&, SubGrid const&) const { return 0; };
+    virtual double IntInterpolant(int const&, double const&, double const&, SubGrid const&) const { return 0; };
 
     /**
      * @brief This purely virtual function computes the lower and

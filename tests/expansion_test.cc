@@ -27,14 +27,10 @@ int main()
   // Expanded function
   const std::function<double(double const&)> expF = [=] (double const& x) -> double
   {
-    const int k = zeros.size();
-    std::vector<double> Pk(k + 1, 1.);
+    const std::vector<double> p = apfel::ProductExpansion(zeros);
     double res = 0;
-    for (int gamma = 0; gamma <= k; gamma++)
-      {
-        res += pow(-1, gamma) * Pk[0] * pow(x, k - gamma);
-        Pk = apfel::VectorComposition(zeros, Pk);
-      }
+    for (int gamma = 0; gamma <= (int) zeros.size(); gamma++)
+      res += pow(-1, gamma) * p[gamma] * pow(x, zeros.size() - gamma);
     return res;
   };
 
@@ -42,7 +38,7 @@ int main()
   std::cout << "\nPolynomial of degree " << zeros.size() << " computed at x = " << x << std::endl;
   std::cout << "Zero's in: [  ";
   for (auto e : zeros)
-    std::cout << e << "\t";
+    std::cout << e << " ";
   std::cout << "]\n";
   std::cout << "\n   Factorised              Expanded" << std::endl;
   std::cout << factF(x) << "\t\t" << expF(x) << std::endl;
