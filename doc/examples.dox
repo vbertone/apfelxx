@@ -13,4 +13,6 @@
  \example dglap_test.cc
  \example structurefunction_test.cc
  \example gpd_test.cc
+ \example polylog_test.cc
+ \example expansion_test.cc
  */
