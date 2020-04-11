@@ -61,16 +61,12 @@ namespace apfel
   double Interpolator::Derive(double const& x) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
-    const double lnx  = log(x);
 
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
-      result += DerInterpolant(beta, lnx, _grid.GetJointGrid()) * _distributionJointGrid[beta];
+      result += DerInterpolant(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
 
-    // The factor 1 / x is due to the fact that the original
-    // derivative is w.r.t. ln(x) and thus one needs to multiply by
-    // dln(x)/dx = 1/x to obtain the derivative w.r.t. x.
-    return result / x;
+    return result;
   }
 
   //_________________________________________________________________________________

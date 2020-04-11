@@ -23,14 +23,13 @@ int main()
   const auto ixg = [&] (double const& x) -> double{ return x * x * ( 1. / 2 - x / 3 ); };
 
   // Grid
-  const apfel::Grid g{{{100, 9.9e-6, 5}, {100, 1e-1, 5}, {40, 8e-1, 5}}};
+  const apfel::Grid g{{{100, 9.9e-6, 3}, {100, 1e-1, 5}, {40, 8e-1, 5}}};
 
   // Interpolated distribution
   const apfel::Distribution xgluon{g, xg};
 
   // Test values
   std::vector<double> x = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 0.2, 0.3, 0.4, 0.51, 0.6, 0.7, 0.8, 0.9};
-  //std::vector<double> x = {1e-4};
 
   std::cout << "\n        x       "
             << "  an. func.     "

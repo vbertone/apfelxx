@@ -64,10 +64,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double LagrangeInterpolator::DerInterpolant(int const& beta, double const& lnx, SubGrid const& sg) const
+  double LagrangeInterpolator::DerInterpolant(int const& beta, double const& x, SubGrid const& sg) const
   {
-    // Get the logarithmic grid.
-    const std::vector<double>& lxsg = sg.GetLogGrid();
+    // Get the grid.
+    const std::vector<double>& xg = sg.GetGrid();
 
     // Define the lower bound of the interpolation range.
     const int id    = sg.InterDegree();
@@ -78,13 +78,13 @@ namespace apfel
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
-    if (lnx < lxsg[bound] || lnx >= lxsg[beta+1])
+    if (x < xg[bound] || x >= xg[beta+1])
       return 0;
 
     // Find the the neighbors of "x" on the grid.
     int j;
     for (j = 0; j <= beta - bound; j++)
-      if (lnx >= lxsg[beta-j])
+      if (x >= xg[beta-j])
         break;
 
     // Compute the interpolant.
@@ -94,10 +94,10 @@ namespace apfel
         double w = 1;
         for (int delta = beta - j; delta <= beta - j + id; delta++)
           if (delta != beta && delta != gamma)
-            w *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
+            w *= ( x - xg[delta] ) / ( xg[beta] - xg[delta] );
         if (gamma != beta)
           {
-            w /= lxsg[beta] - lxsg[gamma];
+            w /= xg[beta] - xg[gamma];
             dw_int += w;
           }
       }
