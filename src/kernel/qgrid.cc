@@ -143,8 +143,7 @@ namespace apfel
   template<class T>
   double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& fq) const
   {
-    // Return immediately 1 if "Q" coincides with "_Qg[tau]" unless
-    // tau coincides with a threshold index. In that case return zero.
+    // Return immediately 1 if "Q" coincides with "_Qg[tau]".
     if (std::abs(fq / _fQg[tau] - 1) < eps11)
       return 1;
 
@@ -155,9 +154,6 @@ namespace apfel
     if (fq < _fQg[bound] || fq >= _fQg[std::min(tau + tQ + 1, _nQ)])
       return 0;
 
-    // Initialize interpolant
-    double w_int = 1;
-
     // Find the the neighbours of "Q" on the grid
     int j;
     for (j = tau + tQ - bound; j >= 0; j--)
@@ -165,6 +161,7 @@ namespace apfel
         break;
 
     // Compute the interpolant
+    double w_int = 1;
     for (int delta = tau - j; delta <= tau - j + _InterDegree; delta++)
       if (delta != tau)
         w_int *= ( fq - _fQg[delta] ) / ( _fQg[tau] - _fQg[delta] );
@@ -174,8 +171,87 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<class T>
+  double QGrid<T>::DerInterpolant(int const& tQ, int const& tau, double const& Q) const
+  {
+    // Define the lower bound of the interpolation range.
+    const int bound = std::max(tau + tQ - _InterDegree, 0);
+
+    // Return zero if Q is outside the allowed range.
+    if (Q < _Qg[bound] || Q >= _Qg[std::min(tau + tQ + 1, _nQ)])
+      return 0;
+
+    // Find the the neighbours of "Q" on the grid.
+    int j;
+    for (j = tau + tQ - bound; j >= 0; j--)
+      if (Q < _Qg[tau+tQ-j+1])
+        break;
+
+    // Compute the interpolant.
+    double dw_int = 0;
+    for (int gamma = tau - j; gamma <= tau - j + _InterDegree; gamma++)
+      {
+        double w = 1;
+        for (int delta = tau - j; delta <= tau - j + _InterDegree; delta++)
+          if (delta != tau && delta != gamma)
+            w *= ( Q - _Qg[delta] ) / ( _Qg[tau] - _Qg[delta] );
+        if (gamma != tau)
+          {
+            w /= _Qg[tau] - _Qg[gamma];
+            dw_int += w;
+          }
+      }
+    return dw_int;
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
+  double QGrid<T>::IntInterpolant(int const& tQ, int const& tau, double const& Qa, double const& Qb) const
+  {
+    // Return 0 if "Qa" and "Qb" are outside the range in which the
+    // interpolant is different from zero.
+    if (Qa > _Qg[tau + tQ + 1] || Qb < _Qg[std::max(tau + tQ - _InterDegree, 0)])
+      return 0;
+
+    // Construct interpolant
+    double iw_int = 0;
+    for (int i = 0; i <= std::min(_InterDegree, tau); i++)
+      {
+        if (_Qg[tau + tQ - i] > Qb || _Qg[tau + tQ - i + 1] < Qa)
+          continue;
+
+        // Product of denominators
+        double dp = 1;
+        std::vector<double> r(_InterDegree);
+        int j = 0;
+        for (int m = 0; m <= _InterDegree; m++)
+          if(m != i)
+            {
+              dp /= _Qg[tau] - _Qg[tau-i+m];
+              r[j++] = _Qg[tau-i+m];
+            }
+
+        // Expansion coefficients
+        const std::vector<double> p = ProductExpansion(r);
+
+        // Integration bounds
+        const double Qab = std::max(Qa, _Qg[tau + tQ - i]);
+        const double Qbb = std::min(Qb, _Qg[tau + tQ - i + 1]);
+
+        // Sum of the integrals
+        double sum = 0;
+        for (int n = 0; n <= _InterDegree; n++)
+          sum += pow(-1, n) * p[n] * ( pow(Qbb, _InterDegree - n + 1) - pow(Qab, _InterDegree - n + 1) ) / ( _InterDegree - n + 1 );
+
+        iw_int += dp * sum;
+      }
+    return iw_int;
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
   std::tuple<int, int, int> QGrid<T>::SumBounds(double const& Q) const
   {
+    // Initialise output tuple.
     std::tuple<int, int, int> bounds{0, 0, 0};
 
     // Return if "Q" is outside the grid range (no sum will be
@@ -233,6 +309,7 @@ namespace apfel
   template<class T>
   T QGrid<T>::Evaluate(double const& Q) const
   {
+    // Get summation bounds
     const std::tuple<int, int, int> bounds = SumBounds(Q);
     const double                    fq     = _TabFunc(Q);
 
@@ -246,6 +323,63 @@ namespace apfel
       result += Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 
     return result;
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
+  T QGrid<T>::Derive(double const& Q) const
+  {
+    // Get summation bounds
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+
+    // First create a copy of template object with the first
+    // component...
+    int tau  = std::get<1>(bounds);
+    T result = DerInterpolant(std::get<0>(bounds), tau, Q) * _GridValues[tau];
+
+    // ...then loop and add the extra terms.
+    for (tau = tau + 1; tau < std::get<2>(bounds); tau++)
+      result += DerInterpolant(std::get<0>(bounds), tau, Q) * _GridValues[tau];
+
+    return result;
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
+  T QGrid<T>::Integrate(double const& Qa, double const& Qb) const
+  {
+    // Order integration bounds and adjust sign if necessary
+    double Qao = std::min(Qa, Qb);
+    double Qbo = std::max(Qa, Qb);
+    int    sgn = (Qb > Qa ? 1 : -1);
+
+    // Initialise result to zero
+    T result = T{0*_GridValues[0]};
+
+    // Sum boundaries and control parameters at the integral boundaries
+    const std::tuple<int, int, int> boundsa = SumBounds(Qao);
+    const std::tuple<int, int, int> boundsb = SumBounds(Qbo);
+
+    // First term
+    for (int tau = std::get<1>(boundsa); tau < std::get<2>(boundsa); tau++)
+      result += IntInterpolant(std::get<0>(boundsa), tau, Qao, _Qg[std::get<1>(boundsa) + std::get<0>(boundsa) + 1]) * _GridValues[tau];
+
+    // Second term
+    for (int gamma = std::get<1>(boundsa) + std::get<0>(boundsa) + 1; gamma <= std::get<1>(boundsb) + std::get<0>(boundsb); gamma++)
+      {
+        // skip the tiny interval at the thresholds
+        if (std::abs(_Qg[gamma+1] - _Qg[gamma]) < eps8)
+          continue;
+        const std::tuple<int, int, int> bounds = SumBounds(_Qg[gamma] * ( 1 + eps8 ));
+        for (int tau = std::get<1>(bounds); tau < std::get<2>(bounds); tau++)
+          result += IntInterpolant(std::get<0>(bounds), tau, _Qg[gamma], _Qg[gamma+1]) * _GridValues[tau];
+      }
+
+    // Third term
+    for (int tau = std::get<1>(boundsb); tau < std::get<2>(boundsb); tau++)
+      result -= IntInterpolant(std::get<0>(boundsb), tau, Qbo, _Qg[std::get<1>(boundsb) + std::get<0>(boundsb) + 1]) * _GridValues[tau];
+
+    return sgn * result;
   }
 
   //_________________________________________________________________________________

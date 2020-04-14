@@ -79,6 +79,7 @@ namespace apfel
     DoubleObject<T>& operator /= (double const& s);          //!< this /= scalar
     DoubleObject<T>& operator *= (DoubleObject<T> const& o); //!< this *= DoubleObject
     DoubleObject<T>& operator += (DoubleObject<T> const& o); //!< this += DoubleObject
+    DoubleObject<T>& operator -= (DoubleObject<T> const& o); //!< this -= DoubleObject
     ///@}
 
   private:

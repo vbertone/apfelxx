@@ -144,11 +144,6 @@ namespace apfel
   //_________________________________________________________________________________
   double LagrangeInterpolator::IntInterpolant(int const& beta, double const& a, double const& b, SubGrid const& sg) const
   {
-    // Contrary to the other interpolants, here I use polynomials in
-    // 'x' rather than in 'log(x)'. This seems to be faster and more
-    // accurate. The algorithm in terms of polynomials in 'log(x)' is
-    // appended below and commented out.
-
     // Get the grid.
     const std::vector<double>& xg = sg.GetGrid();
 
@@ -170,7 +165,6 @@ namespace apfel
         // Product of denominators
         double dp = 1;
         std::vector<double> r(k);
-
         int j = 0;
         for (int m = 0; m <= k; m++)
           if(m != i)

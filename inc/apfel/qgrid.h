@@ -77,11 +77,26 @@ namespace apfel
     ///@}
 
     /**
-     * @brief Function that interpolate on the grid in Q.
+     * @brief Function that interpolates on the grid in Q.
      * @param Q: the value of the required interpolation
      * @return the interpolated value
      */
     T Evaluate(double const& Q) const;
+
+    /**
+     * @brief Function that derives on the grid in Q.
+     * @param Q: the value of the required interpolation
+     * @return the interpolated derivative
+     */
+    T Derive(double const& Q) const;
+
+    /**
+     * @brief Function that integrates on the grid in Q.
+     * @param Qa: the lower integration bound
+     * @param Qb: the upper integration bound
+     * @return the interpolated integral
+     */
+    T Integrate(double const& Qa, double const& Qb) const;
 
     /**
      * @name Comparison operators
@@ -116,6 +131,25 @@ namespace apfel
      * @return the interpolation weights
      */
     double Interpolant(int const& tQ, int const& tau, double const& fq) const;
+
+    /**
+     * @brief Derivative of the interpolation functions on QGrid.
+     * @param tQ: interpolation control parameter
+     * @param tau: the grid index
+     * @param Q: the value of Q of the required interpolation
+     * @return the derivarive of the interpolation weights
+     */
+    double DerInterpolant(int const& tQ, int const& tau, double const& Qa) const;
+
+    /**
+     * @brief Derivative of the interpolation functions on QGrid.
+     * @param tQ: interpolation control parameter
+     * @param tau: the grid index
+     * @param Qa: the value of the lower integration bound
+     * @param Qb: the value of the upper integration bound
+     * @return the integral of interpolation weights
+     */
+    double IntInterpolant(int const& tQ, int const& tau, double const& Qa, double const& Qb) const;
 
     /**
      * @brief Computes the control parameter of the interpolant, the

@@ -22,7 +22,7 @@ int main()
   // Tabulate AlphaQCD on a QGrid
   const apfel::TabulateObject<double> gas{as, 50, 1, 1000, 3};
 
-  std::cout << "Precision test ..." << std::endl;
+  std::cout << "\nAccuracy test:" << std::endl;
   double nQ   = 20;
   double Qmin = 1.1;
   double Qmax = 999.;
@@ -36,13 +36,13 @@ int main()
       Q *=Step;
     }
 
-  std::cout << "\nSpeed test ..." << std::endl;
+  std::cout << "\nPerformance test:" << std::endl;
   apfel::Timer t;
-  nQ   = 1000000;
+  nQ   = 100000;
   Step = exp( log( Qmax / Qmin ) / ( nQ - 1 ) );
 
   t.start();
-  std::cout << "Direct calculation of " << nQ << " points ..." << std::endl;
+  std::cout << "Direct calculation of " << nQ << " points... ";
   Q = Qmin;
   for (int iQ = 0; iQ < nQ; iQ++)
     {
@@ -52,7 +52,7 @@ int main()
   t.stop();
 
   t.start();
-  std::cout << "Interpolated calculation of " << nQ << " points ..." << std::endl;
+  std::cout << "Interpolated calculation of " << nQ << " points... ";
   Q = Qmin;
   for (int iQ = 0; iQ < nQ; iQ++)
     {

@@ -78,6 +78,18 @@ namespace apfel
     return *this;
   }
 
+  //_________________________________________________________________________
+  template<class T>
+  DoubleObject<T>& DoubleObject<T>::operator -= (DoubleObject<T> const& o)
+  {
+    for (auto& t : o.GetTerms())
+      {
+        t.coefficient *= -1;
+        _terms.push_back(t);
+      }
+    return *this;
+  }
+
   // Specializations
   //_________________________________________________________________________________
   template class DoubleObject<Distribution>;

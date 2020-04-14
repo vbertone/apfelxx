@@ -186,7 +186,7 @@ namespace apfel
     // Loop over the nodes.
     double result = 0;
     for (int tau = std::get<1>(bounds); tau < std::get<2>(bounds); tau++)
-      result += Interpolant(std::get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x,z);
+      result += Interpolant(std::get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x, z);
 
     return result;
   }
