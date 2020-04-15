@@ -43,6 +43,11 @@ namespace apfel
    * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
+   * @note In the case of displaced thresholds (i.e. Masses not equal
+   * to Thresholds), the PDF matching conditions in the case of
+   * threshold crossing during 'backward evolution' miss a term
+   * O(as^2) deriving from the inversion of the forward matching
+   * conditions. This has to be included.
    */
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
                                                         std::vector<double> const& Masses,

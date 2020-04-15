@@ -94,12 +94,17 @@ namespace apfel
     // created (effective only when a "Set" object is evolved).
     T      vobj = _ObjRef;
     double ti   = _LogMuRef2;
-    double tf   = _LogThresholds2[(sgn ? nfi : nfi-1)];
     for (int inf = nfi; (sgn ? inf < nff : inf > nff); inf += (sgn ? 1 : -1))
       {
+        // Final scale
+        const double tf = _LogThresholds2[(sgn ? inf : inf - 1)];
+
+        // Do the matching
         vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
-        ti   = tf + (sgn ? 1 : -1) * eps8;  // Add "eps8" to make sure to be above the threshold
-        tf   = (sgn ? _LogThresholds2[std::min(inf+1,nff-1)] : _LogThresholds2[std::max(inf-2,nff-1)]);
+
+        // Update initial scale and displace it by "eps8" to make sure
+        // to be above (below) the threshold
+        ti = tf * ( 1 + (sgn ? 1 : -1) * eps8 );
       }
     return EvolveObject(nff, ti, lmu2, vobj);
   }

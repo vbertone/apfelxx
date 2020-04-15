@@ -812,8 +812,8 @@ namespace apfel
       {
         const int    nf  = obj->first;
         const double thr = obj->second.Threshold;
-        asThDown.insert({nf,Alphas(thr*(1-eps8))/FourPi});
-        asThUp.insert({nf,Alphas(thr*(1+eps8))/FourPi});
+        asThDown.insert({nf, Alphas(thr * ( 1 - eps8 ) ) / FourPi});
+        asThUp.insert({nf, Alphas(thr * ( 1 + eps8 ) ) / FourPi});
       }
 
     if (PerturbativeOrder == 0)
@@ -824,21 +824,21 @@ namespace apfel
     else if (PerturbativeOrder == 1)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf+1) );
+        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf) );
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + ( Up ? 1 : -1) * cp * mc.at(1);
       };
     else if (PerturbativeOrder == 2)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf+1) );
+        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf) );
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
       };
     else if (PerturbativeOrder == 3)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf+1) );
+        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf) );
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
       };
@@ -951,8 +951,8 @@ namespace apfel
     std::map<int, double> asThDown;
     for (int nf = nfi + 1; nf <= nff; nf++)
       {
-        asThDown.insert({nf,Alphas(Thresholds[nf-1]*(1-eps8))/FourPi});
-        asThUp.insert({nf,Alphas(Thresholds[nf-1]*(1+eps8))/FourPi});
+        asThDown.insert({nf, Alphas(Thresholds[nf-1]  * ( 1 - eps8 ) ) / FourPi});
+        asThUp.insert({nf, Alphas(Thresholds[nf-1] * ( 1 + eps8 ) ) / FourPi});
       }
 
     // Create splitting functions and matching conditions lambda
