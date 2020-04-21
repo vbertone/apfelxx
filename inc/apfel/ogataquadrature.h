@@ -37,7 +37,8 @@ namespace apfel
      * @param nmax: maximum number of terms in the Ogata quadrature (default: 1000)
      * @return the value of the transform
      */
-    double transform(std::function<double(double const&)> const& func, double const& qT, int const& nmax = 1000) const;
+    template<typename T>
+    T transform(std::function<T(double const&)> const& func, double const& qT, int const& nmax = 1000) const;
 
     /**
      * @brief Function that returns the unscaled coordinates used in

@@ -125,7 +125,7 @@ namespace apfel
 
     T i = f(_aw[noff] * per) * jn(_nu, qT * (_aw[noff] * per));
     T ir = i * _aw[noff + 1];
-    T zero = T{0*i};
+    T zero{0*i};
     double err = dabs(i);
     double h = 2;
     int m = 1;

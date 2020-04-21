@@ -6,6 +6,9 @@
 
 #include "apfel/ogataquadrature.h"
 #include "apfel/messages.h"
+#include "apfel/distribution.h"
+#include "apfel/set.h"
+#include "apfel/doubleobject.h"
 
 #include <cmath>
 //#include <boost/math/special_functions/bessel.hpp>
@@ -570,21 +573,22 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  double OgataQuadrature::transform(std::function<double(double const&)> const& func, double const& qT, int const& nmax) const
+  template<typename T>
+  T OgataQuadrature::transform(std::function<T(double const&)> const& func, double const& qT, int const& nmax) const
   {
     // Compute integral as a weighted sum.
-    double integral = 0;
+    T integral = _weights[0] * func(_xf[0]/qT);
     int i;
-    for (i = 0; i < std::min(nmax, (int) j0Zeros.size()); i++)
+    for (i = 1; i < std::min(nmax, (int) j0Zeros.size()); i++)
       {
-        const double term = _weights[i] * func(_xf[i]/qT);
+        const T term = _weights[i] * func(_xf[i]/qT);
 
         // Break when the absolute value of the last term is less than
         // "_CutOff". This assumes that terms are increasingly
         // small. Provided that the integrand is not badly behaved,
         // this should be guaranteed by the Bessel functions
         // themselves.
-        if (std::abs(term / integral) < _CutOff)
+        if (dabs(term) < dabs(_CutOff * integral))
           break;
 
         integral += term;
@@ -623,4 +627,14 @@ namespace apfel
       std::cout << boost::math::cyl_bessel_j_zero((double) nu, n+1) << "};" << std::endl;
     }
   */
+
+  // Specialisations
+  template double OgataQuadrature::transform<double>(std::function<double(double const&)> const& f,
+                                                     double const& qT, int const& nmax) const;
+  template Distribution OgataQuadrature::transform<Distribution>(std::function<Distribution(double const&)> const& f,
+                                                                 double const& qT, int const& nmax) const;
+  template Set<Distribution> OgataQuadrature::transform<Set<Distribution>>(std::function<Set<Distribution>(double const&)> const& f,
+                                                                           double const& qT, int const& nmax) const;
+  template DoubleObject<Distribution> OgataQuadrature::transform<DoubleObject<Distribution>>(std::function<DoubleObject<Distribution>(double const&)> const& f,
+                                                                                             double const& qT, int const& nmax) const;
 }
