@@ -8,6 +8,7 @@
 #include "apfel/constants.h"
 #include "apfel/distribution.h"
 #include "apfel/set.h"
+#include "apfel/doubleobject.h"
 
 #include <algorithm>
 
@@ -135,6 +136,16 @@ namespace apfel
     double lgt = 1e30;
     for (auto const& e : d.GetObjects())
       lgt = std::min(lgt, dabs(e.second));
+    return lgt;
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  double dabs(DoubleObject<Distribution> const& d)
+  {
+    double lgt = 1e30;
+    for (auto const& e : d.GetTerms())
+      lgt = std::min(std::min(lgt, dabs(e.object1)), dabs(e.object2));
     return lgt;
   }
 

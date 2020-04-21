@@ -23,9 +23,10 @@ namespace apfel
   public:
     /**
      * @brief The Integrator constructor.
+     * @param nu: the order of the Bessel function (default: 0)
      * @param eps: relative integration accuracy
      */
-    DoubleExponentialQuadrature(double const& eps = 1e-5);
+    DoubleExponentialQuadrature(int const& nu = 0, double const& eps = 1e-5);
 
     /**
      * @brief Function that transform the input function.
@@ -37,6 +38,7 @@ namespace apfel
     T transform(std::function<T(double const&)> const& f, double const& qT) const;
 
   private:
-    double _aw[8000];
+    int    const _nu;
+    double       _aw[8000];
   };
 }

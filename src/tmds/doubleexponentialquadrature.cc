@@ -7,6 +7,7 @@
 #include "apfel/doubleexponentialquadrature.h"
 #include "apfel/distribution.h"
 #include "apfel/set.h"
+#include "apfel/doubleobject.h"
 #include "apfel/tools.h"
 
 #include <math.h>
@@ -14,7 +15,8 @@
 namespace apfel
 {
   //_____________________________________________________________________________
-  DoubleExponentialQuadrature::DoubleExponentialQuadrature(double const& eps)
+  DoubleExponentialQuadrature::DoubleExponentialQuadrature(int const& nu, double const& eps):
+    _nu(nu)
   {
     /* ---- adjustable parameter ---- */
     int lmax = 5;
@@ -121,7 +123,7 @@ namespace apfel
     const double w02 = 2 * _aw[noff + 2];
     const double perw = per * w02;
 
-    T i = f(_aw[noff] * per) * j0(qT * (_aw[noff] * per));
+    T i = f(_aw[noff] * per) * jn(_nu, qT * (_aw[noff] * per));
     T ir = i * _aw[noff + 1];
     T zero = T{0*i};
     double err = dabs(i);
@@ -163,8 +165,8 @@ namespace apfel
                   {
                     j += 3;
                     xa = per * _aw[j];
-                    fm = f(xa) * j0(qT * xa);
-                    fp = f(xa + perw * tk) * j0(qT * (xa + perw * tk));
+                    fm = f(xa) * jn(_nu, qT * xa);
+                    fp = f(xa + perw * tk) * jn(_nu, qT * (xa + perw * tk));
                     ir += (fm + fp) * _aw[j + 1];
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];
@@ -183,8 +185,8 @@ namespace apfel
                 for (j = k + 3; j <= k + jm; j += 3)
                   {
                     xa = per * _aw[j];
-                    fm = f(xa) * j0(qT * xa);
-                    fp = f(xa + perw * tk) * j0(qT * (xa + perw * tk));
+                    fm = f(xa) * jn(_nu, qT * xa);
+                    fp = f(xa + perw * tk) * jn(_nu, qT * (xa + perw * tk));
                     ir += (fm + fp) * _aw[j + 1];
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];
@@ -197,12 +199,12 @@ namespace apfel
             while (dabs(fm) > err && j < k)
               {
                 j += 3;
-                fm = f(per * _aw[j]) * j0(qT * per * _aw[j]);
+                fm = f(per * _aw[j]) * jn(_nu, qT * per * _aw[j]);
                 ir += fm * _aw[j + 1];
                 fm *= _aw[j + 2];
                 i += fm;
               }
-            fm = f(perw * tk) * j0(qT * perw * tk);
+            fm = f(perw * tk) * jn(_nu, qT * perw * tk);
             s2 = w02 * fm;
             i += s2;
             if (dabs(fp) > err || dabs(s2) > err)
@@ -217,7 +219,7 @@ namespace apfel
                     for (j = noff0 + 2; j <= noff - 2; j += 2)
                       {
                         tk += 1;
-                        fm = f(perw * tk) * j0(qT * perw * tk);
+                        fm = f(perw * tk) * jn(_nu, qT * perw * tk);
                         s0 += fm;
                         s1 += fm * _aw[j];
                         s2 += fm * _aw[j + 1];
@@ -256,4 +258,6 @@ namespace apfel
                                                                              double const& qT) const;
   template Set<Distribution> DoubleExponentialQuadrature::transform<Set<Distribution>>(std::function<Set<Distribution>(double const&)> const& f,
                                                                                        double const& qT) const;
+  template DoubleObject<Distribution> DoubleExponentialQuadrature::transform<DoubleObject<Distribution>>(std::function<DoubleObject<Distribution>(double const&)> const& f,
+                                                                                                         double const& qT) const;
 }

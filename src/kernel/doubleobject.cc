@@ -109,6 +109,32 @@ namespace apfel
     return result;
   }
 
+  //_________________________________________________________________________________
+  template<>
+  double DoubleObject<Distribution>::Derive(double const& x, double const& z) const
+  {
+    double result = 0;
+    for (auto const& t : _terms)
+      if (t.coefficient == 1)
+        result += t.object1.Derive(x) * t.object2.Derive(z);
+      else
+        result += t.coefficient * t.object1.Derive(x) * t.object2.Derive(z);
+    return result;
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  double DoubleObject<Distribution>::Integrate(double const& xl, double const& xu, double const& zl, double const& zu) const
+  {
+    double result = 0;
+    for (auto const& t : _terms)
+      if (t.coefficient == 1)
+        result += t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
+      else
+        result += t.coefficient * t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
+    return result;
+  }
+
   //_________________________________________________________________________
   template<>
   DoubleObject<Operator>& DoubleObject<Operator>::operator *= (DoubleObject<Operator> const& o)

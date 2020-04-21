@@ -66,9 +66,30 @@ namespace apfel
      * @brief Funtion that evaluates the double distribution.
      * @param x: value of the first variable
      * @param z: value of the second variable
-     * @return The value of the double distribution in (x,z)
+     * @return The value of the double distribution in (x, z)
      */
     double Evaluate(double const& x, double const& z) const;
+
+    /**
+     * @brief Funtion that evaluates the derivative of the double
+     * distribution.
+     * @param x: value of the first variable
+     * @param z: value of the second variable
+     * @return The value of the derivative of the double distribution
+     * in (x, z)
+     */
+    double Derive(double const& x, double const& z) const;
+
+    /**
+     * @brief Funtion that evaluates the integral of the double
+     * distribution.
+     * @param xl: value of the lower bound of the of the first variable
+     * @param xu: value of the upper bound of the of the first variable
+     * @param zl: value of the lower bound of the of the second variable
+     * @param zu: value of the upper bound of the of the second variable
+     * @return The value of the integral of the double distribution
+     */
+    double Integrate(double const& xl, double const& xu, double const& zl, double const& zu) const;
 
     /**
      * @name Binary operators
@@ -110,5 +131,8 @@ namespace apfel
 
   template<class T>
   DoubleObject<T> operator + (DoubleObject<T> lhs, DoubleObject<T> const& rhs) { return lhs += rhs; }
+
+  template<class T>
+  DoubleObject<T> operator - (DoubleObject<T> lhs, DoubleObject<T> const& rhs) { return lhs -= rhs; }
   ///@}
 }
