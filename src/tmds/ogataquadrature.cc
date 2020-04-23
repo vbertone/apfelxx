@@ -569,7 +569,7 @@ namespace apfel
           _weights[i] = M_PI * w;
         }
     else
-      std::cout << error("OgataQuadrature", "Value on 'nu' not available.") << std::endl;
+      throw std::runtime_error(error("OgataQuadrature", "Value on 'nu' not available."));
   }
 
   //_____________________________________________________________________________
@@ -588,7 +588,7 @@ namespace apfel
         // small. Provided that the integrand is not badly behaved,
         // this should be guaranteed by the Bessel functions
         // themselves.
-        if (dabs(term) < dabs(_CutOff * integral))
+        if (dabs(term) < _CutOff * dabs(integral))
           break;
 
         integral += term;

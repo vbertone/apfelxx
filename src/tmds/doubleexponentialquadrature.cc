@@ -245,7 +245,7 @@ namespace apfel
     while (errd > errh && 2 * k - noff <= lenawm);
     i *= h * per;
     if (errd > errh)
-      err = -errd * per;
+      err = - errd * per;
     else
       err *= per * m * 0.5;
     return i;

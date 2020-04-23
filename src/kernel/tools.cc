@@ -116,23 +116,41 @@ namespace apfel
   template<>
   double dabs(double const& d)
   {
-    return fabs(d);
+    return std::abs(d);
   }
 
   //_________________________________________________________________________________
   template<>
   double dabs(Distribution const& d)
   {
-    double lgt = 0;
-    for (auto const& e : d.GetDistributionJointGrid())
-      lgt += e * e;
-    return sqrt(lgt);
+    // The absolute value of a distribution is assumed to be equal to
+    // its mean value over the definition interval, that is:
+    //
+    // 1/(b-a)\int_a^b dx f(x)
+    //
+    // where the integral is approximated through the rectangle rule.
+
+    // Get joint grid and respective values
+    const std::vector<double>& jg = d.GetGrid().GetJointGrid().GetGrid();
+    const std::vector<double>& jv = d.GetDistributionJointGrid();
+
+    // Now compute the integral
+    double integ = 0;
+    for (int i = 0; i < (int) jg.size() - 1; i++)
+      integ += jv[i] * ( jg[i+1] - jg[i] );
+
+    // Divide the integral by the interval and return the absolute
+    // value of the result.
+    return std::abs(integ / ( jg.back() - jg.front() ));
   }
 
   //_________________________________________________________________________________
   template<>
   double dabs(Set<Distribution> const& d)
   {
+    // For a set of distributions, the absolute value is assumed to be
+    // the smallest absolute value amongst the distributions of the
+    // set.
     double lgt = 1e30;
     for (auto const& e : d.GetObjects())
       lgt = std::min(lgt, dabs(e.second));
@@ -143,10 +161,15 @@ namespace apfel
   template<>
   double dabs(DoubleObject<Distribution> const& d)
   {
-    double lgt = 1e30;
+    // For a double object of distributions, the absolute value is
+    // assumed to be the sum over all the terms, weighted by the
+    // coefficients, of the product of the two distributions in each
+    // term.
+    double av = 0;
     for (auto const& e : d.GetTerms())
-      lgt = std::min(std::min(lgt, dabs(e.object1)), dabs(e.object2));
-    return lgt;
+      av += e.coefficient * dabs(e.object1) * dabs(e.object2);
+
+    return std::abs(av);
   }
 
   //_________________________________________________________________________________

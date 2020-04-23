@@ -95,7 +95,6 @@ namespace apfel
      * @name Binary operators
      */
     ///@{
-    template<class V> DoubleObject<V> operator *= (DoubleObject<V> const& o) const;
     DoubleObject<T>& operator *= (double const& s);          //!< this *= scalar
     DoubleObject<T>& operator /= (double const& s);          //!< this /= scalar
     DoubleObject<T>& operator *= (DoubleObject<T> const& o); //!< this *= DoubleObject
@@ -111,9 +110,6 @@ namespace apfel
    * @name Ternary operators
    */
   ///@{
-  template<class A, class B>
-  DoubleObject<B> operator * (DoubleObject<A> lhs, DoubleObject<B> const& rhs) { return lhs *= rhs; }
-
   template<class T>
   DoubleObject<T> operator * (double const& s, DoubleObject<T> rhs) { return rhs *= s; }
 

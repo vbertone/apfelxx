@@ -71,13 +71,13 @@ int main()
   const apfel::DoubleExponentialQuadrature DEObjI{1};
 
   std::cout << "\nIntegration test:" << std::endl;
-  std::cout << "   kmin         "
-            << "   kmax         "
+  std::cout << "   [kmin     :   "
+            << " kmax]          "
             << " Numerical      "
             << "Analytic Og     "
             << "Analytic DE     "
-            << "  ratio Og      "
-            << "  ratio DE      "
+            << " ratio Og       "
+            << " ratio DE       "
             << std::endl;
   for (int ik = 1; ik < (int) kv.size() - 1; ik++)
     {
@@ -85,7 +85,7 @@ int main()
       const double IOga = kv[ik+1] * OgataObjI.transform(rfuncI, kv[ik+1]) - kv[ik] * OgataObjI.transform(rfuncI, kv[ik]);
       const double IDEQ = kv[ik+1] * DEObjI.transform(rfuncI, kv[ik+1]) - kv[ik] * DEObjI.transform(rfuncI, kv[ik]);
 
-      std::cout << std::scientific << kv[ik] << "\t" << kv[ik+1] << "\t"
+      std::cout << std::scientific << "[" << kv[ik] << ":\t" << kv[ik+1] << "]\t"
                 << INum << "\t"
                 << IOga << "\t"
                 << IDEQ << "\t"
