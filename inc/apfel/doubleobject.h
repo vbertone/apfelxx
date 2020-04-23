@@ -8,6 +8,8 @@
 
 #include "apfel/tools.h"
 
+#include <functional>
+
 namespace apfel
 {
   /**
