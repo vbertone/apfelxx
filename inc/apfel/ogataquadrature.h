@@ -25,6 +25,12 @@ namespace apfel
      * @param nu: the order of the Bessel function (default: 0)
      * @param CutOff: the accuracy computed as a cutoff on the size of the last computed term relative to the total (default: 10<SUP>-5</SUP>)
      * @param h: internal variable of the algorithm (default: 0.001)
+     * @note Note that the default value of the parameter 'h' (0.001)
+     * based of studies of Drell-Yan transverse-momentum
+     * distributions. However, this values could possibly be badly
+     * non-optimal in other contexts. A good value of 'h' should take
+     * into account the decay rate of the integrand. In particular,
+     * the faster the decay the smaller the value of 'h' has to be.
      */
     OgataQuadrature(int    const& nu = 0,
                     double const& CutOff = 1e-5,

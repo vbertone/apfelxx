@@ -85,6 +85,22 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
+  DoubleObject<Distribution>& DoubleObject<Distribution>::MultiplyBy(std::function<double(double const&)> const& fx, std::function<double(double const&)> const& fz)
+  {
+    // Take the grids from the first element of the vector of terms.
+    const Distribution dfx{_terms[0].object1.GetGrid(), fx};
+    const Distribution dfz{_terms[0].object2.GetGrid(), fz};
+    for (auto& t : _terms)
+      {
+        t.object1 *= dfx;
+        t.object2 *= dfz;
+      }
+
+    return *this;
+  }
+
+  //_________________________________________________________________________________
+  template<>
   double DoubleObject<Distribution>::Evaluate(double const& x, double const& z) const
   {
     double result = 0;

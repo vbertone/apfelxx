@@ -92,12 +92,19 @@ namespace apfel
     double Integrate(double const& xl, double const& xu, double const& zl, double const& zu) const;
 
     /**
+     * @brief This function multiplies the distributions single terms
+     * of the DoubleObject by a respective function.
+     * @param fx: that function that multiplies the first distribution
+     * @param fz: that function that multiplies the second distribution
+     */
+    DoubleObject<T>& MultiplyBy(std::function<double(double const&)> const& fx, std::function<double(double const&)> const& fz);
+
+    /**
      * @name Binary operators
      */
     ///@{
     DoubleObject<T>& operator *= (double const& s);          //!< this *= scalar
     DoubleObject<T>& operator /= (double const& s);          //!< this /= scalar
-    DoubleObject<T>& operator *= (DoubleObject<T> const& o); //!< this *= DoubleObject
     DoubleObject<T>& operator += (DoubleObject<T> const& o); //!< this += DoubleObject
     DoubleObject<T>& operator -= (DoubleObject<T> const& o); //!< this -= DoubleObject
     ///@}
