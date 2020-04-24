@@ -37,6 +37,26 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
+  template<class V> DoubleObject<V> DoubleObject<T>::operator *= (DoubleObject<V> const& o) const
+  {
+    auto tt = o.GetTerms();
+    std::vector<term<V>> vt;
+    for (auto const& t : _terms)
+      {
+        const double tc = t.coefficient;
+        for (auto const& s : tt)
+          {
+            const double sc = tc * s.coefficient;
+            const auto o1 = t.object1 * s.object1;
+            const auto o2 = t.object2 * s.object2;
+            vt.push_back({sc, o1, o2});
+          }
+      }
+    return DoubleObject<V> {vt};
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   DoubleObject<T>& DoubleObject<T>::operator *= (double const& s)
   {
     for (auto& t : _terms)
@@ -82,6 +102,7 @@ namespace apfel
   //_________________________________________________________________________________
   template class DoubleObject<Distribution>;
   template class DoubleObject<Operator>;
+  template DoubleObject<Distribution> DoubleObject<Operator>::operator *= (DoubleObject<Distribution> const&) const;
 
   //_________________________________________________________________________________
   template<>
@@ -136,5 +157,28 @@ namespace apfel
       else
         result += t.coefficient * t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
     return result;
+  }
+
+  //_________________________________________________________________________
+  template<>
+  DoubleObject<Operator>& DoubleObject<Operator>::operator *= (DoubleObject<Operator> const& o)
+  {
+    auto tt = o.GetTerms();
+    std::vector<term<Operator>> vt;
+    for (auto const& t : _terms)
+      {
+        const double tc = t.coefficient;
+        for (auto const& s : tt)
+          {
+            const double sc = tc * s.coefficient;
+            const auto o1 = t.object1 * s.object1;
+            const auto o2 = t.object2 * s.object2;
+            vt.push_back({sc, o1, o2});
+          }
+      }
+    // Clear "_terms" and equal it to "vt".
+    _terms.clear();
+    _terms = vt;
+    return *this;
   }
 }
