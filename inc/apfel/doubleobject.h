@@ -65,7 +65,7 @@ namespace apfel
     std::vector<term<T>> GetTerms() const { return _terms; };
 
     /**
-     * @brief Funtion that evaluates the double distribution.
+     * @brief Function that evaluates the double distribution.
      * @param x: value of the first variable
      * @param z: value of the second variable
      * @return The value of the double distribution in (x, z)
@@ -73,7 +73,17 @@ namespace apfel
     double Evaluate(double const& x, double const& z) const;
 
     /**
-     * @brief Funtion that evaluates the derivative of the double
+     * @brief Function that evaluates the double distribution in one of
+     * the two variables leaving the other undetermined.
+     * @param iv: variable index. It can be either 1 or 2.
+     * @param y: value of the iv-th variable
+     * @return The value of the double object in y for any other value
+     * of the other variable
+     */
+    T Evaluate(int const& iv, double const& y) const;
+
+    /**
+     * @brief Function that evaluates the derivative of the double
      * distribution.
      * @param x: value of the first variable
      * @param z: value of the second variable
@@ -83,7 +93,19 @@ namespace apfel
     double Derive(double const& x, double const& z) const;
 
     /**
-     * @brief Funtion that evaluates the integral of the double
+     * @brief Function that evaluates the derivative of a double
+     * distribution in one of the two variables leaving the other
+     * undetermined.
+     * @param iv: variable index. It can be either 1 or 2.
+     * @param y: value of the iv-th variable in which the derivative
+     * has to be computed
+     * @return The value of the derivative of the double object in y
+     * for any other value of the other variable
+     */
+    T Derive(int const& iv, double const& y) const;
+
+    /**
+     * @brief Function that evaluates the integral of the double
      * distribution.
      * @param xl: value of the lower bound of the of the first variable
      * @param xu: value of the upper bound of the of the first variable
@@ -92,6 +114,18 @@ namespace apfel
      * @return The value of the integral of the double distribution
      */
     double Integrate(double const& xl, double const& xu, double const& zl, double const& zu) const;
+
+    /**
+     * @brief Function that evaluates the integral of the double
+     * distribution in one of the two variables leaving the other
+     * undetermined.
+     * @param iv: variable index. It can be either 1 or 2.
+     * @param yl: value of the lower bound of the of the iv-th variable
+     * @param yu: value of the upper bound of the of the iv-th variable
+     * @return The value of the integral of the double distribution in
+     * [yl: yu] for any other value of the other variable
+     */
+    T Integrate(int const& iv, double const& yl, double const& yu) const;
 
     /**
      * @brief This function multiplies the distributions single terms

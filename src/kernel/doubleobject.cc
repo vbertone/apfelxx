@@ -135,6 +135,29 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
+  Distribution DoubleObject<Distribution>::Evaluate(int const& iv, double const& y) const
+  {
+    if (iv < 1 || iv >2)
+      throw std::runtime_error(error("Evaluate", "Function index out of range: it can be either 1 or 2."));
+
+    if (iv == 1)
+      {
+        Distribution result = _terms[0].coefficient * _terms[0].object1.Evaluate(y) * _terms[0].object2;
+        for (int i = 1; i < (int) _terms.size(); i++)
+          result += _terms[i].coefficient * _terms[i].object1.Evaluate(y) * _terms[i].object2;
+        return result;
+      }
+    else
+      {
+        Distribution result = _terms[0].coefficient * _terms[0].object2.Evaluate(y) * _terms[0].object1;
+        for (int i = 1; i < (int) _terms.size(); i++)
+          result += _terms[i].coefficient * _terms[i].object2.Evaluate(y) * _terms[i].object1;
+        return result;
+      }
+  }
+
+  //_________________________________________________________________________________
+  template<>
   double DoubleObject<Distribution>::Derive(double const& x, double const& z) const
   {
     double result = 0;
@@ -148,6 +171,29 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
+  Distribution DoubleObject<Distribution>::Derive(int const& iv, double const& y) const
+  {
+    if (iv < 1 || iv >2)
+      throw std::runtime_error(error("Derive", "Function index out of range: it can be either 1 or 2."));
+
+    if (iv == 1)
+      {
+        Distribution result = _terms[0].coefficient * _terms[0].object1.Derive(y) * _terms[0].object2;
+        for (int i = 1; i < (int) _terms.size(); i++)
+          result += _terms[i].coefficient * _terms[i].object1.Derive(y) * _terms[i].object2;
+        return result;
+      }
+    else
+      {
+        Distribution result = _terms[0].coefficient * _terms[0].object2.Derive(y) * _terms[0].object1;
+        for (int i = 1; i < (int) _terms.size(); i++)
+          result += _terms[i].coefficient * _terms[i].object2.Derive(y) * _terms[i].object1;
+        return result;
+      }
+  }
+
+  //_________________________________________________________________________________
+  template<>
   double DoubleObject<Distribution>::Integrate(double const& xl, double const& xu, double const& zl, double const& zu) const
   {
     double result = 0;
@@ -157,6 +203,29 @@ namespace apfel
       else
         result += t.coefficient * t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
     return result;
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  Distribution DoubleObject<Distribution>::Integrate(int const& iv, double const& yl, double const& yu) const
+  {
+    if (iv < 1 || iv >2)
+      throw std::runtime_error(error("Integrate", "Function index out of range: it can be either 1 or 2."));
+
+    if (iv == 1)
+      {
+        Distribution result = _terms[0].coefficient * _terms[0].object1.Integrate(yl, yu) * _terms[0].object2;
+        for (int i = 1; i < (int) _terms.size(); i++)
+          result += _terms[i].coefficient * _terms[i].object1.Integrate(yl, yu) * _terms[i].object2;
+        return result;
+      }
+    else
+      {
+        Distribution result = _terms[0].coefficient * _terms[0].object2.Integrate(yl, yu) * _terms[0].object1;
+        for (int i = 1; i < (int) _terms.size(); i++)
+          result += _terms[i].coefficient * _terms[i].object2.Integrate(yl, yu) * _terms[i].object1;
+        return result;
+      }
   }
 
   //_________________________________________________________________________

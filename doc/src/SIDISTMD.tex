@@ -49,21 +49,27 @@ In this document we report the relevant formulas for the computation
 of semi-inclusive deep-inelastic scattering (SIDIS) multiplicities
 under the assumption that the (negative) virtuality of the $Q^2$ of
 the exchanged vector boson is much smaller than the $Z$ mass. This
-allows us to neglect weak contributions and write the multiplicity
-as:
+allows us to neglect weak contributions and write the cross section
+in TMD factorisation as:
 \begin{equation}
-\frac{d\sigma}{dxdQ^2 dz d p_T} = \frac{2p_T\pi \alpha^2
-  }{z^2 x Q^4}\left[1+(1-y)^2\right] H(Q,\mu) \sum_q e_q^2
-  \int_0^\infty db \,b J_0\left(\frac{bp_T}{z}\right)\overline{F}_q(x,b;\mu,\zeta) \overline{D}_{q}(z,b;\mu,\zeta)\,,
+  \frac{d\sigma}{dxdQdz d q_T} = \frac{4\pi \alpha^2q_T}{z x Q^3}Y_+ H(Q,\mu) \sum_q e_q^2
+  \int_0^\infty db \,b J_0\left(bq_T\right)\overline{F}_q(x,b;\mu,\zeta_1) \overline{D}_{q}(z,b;\mu,\zeta_2)\,,
 \end{equation}
-where:
+with:
+\begin{equation}
+Y_+=1+(1-y)^2=1+\left(1-\frac{Q^2}{xs}\right)^2\,,
+\end{equation}
+and where:
 \begin{equation}
 \overline{F}_i(x,b;\mu,\zeta) =xF_i(x,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_x^1dy\,\mathcal{C}_{ij}(y;\mu_0,\zeta_0)\left[\frac{x}{y}f_j\left(\frac{x}{y},\mu_0\right)\right]\,,
 \end{equation}
 and:
 \begin{equation}
-\overline{D}_{i}(z,b;\mu,\zeta) =z^3D_{i}(z,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{ij}(y;\mu_0,\zeta_0)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y},\mu_0\right)\right]\,.
+\overline{D}_{i}(z,b;\mu,\zeta) =z^3D_{i}(z,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{ij}(y;\mu_0,\zeta_0)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y},\mu_0\right)\right]\,,
 \end{equation}
+are the distributions directly computed by APFEL++.
+
+
 
 \begin{thebibliography}{alp}
 
