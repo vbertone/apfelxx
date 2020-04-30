@@ -149,12 +149,12 @@ namespace apfel
   double dabs(Set<Distribution> const& d)
   {
     // For a set of distributions, the absolute value is assumed to be
-    // the smallest absolute value amongst the distributions of the
-    // set.
-    double lgt = 1e30;
-    for (auto const& e : d.GetObjects())
-      lgt = std::min(lgt, dabs(e.second));
-    return lgt;
+    // the average absolute value over the distributions of the set.
+    double lgt = 0;
+    const std::map<int, Distribution> objs = d.GetObjects();
+    for (auto const& e : objs)
+      lgt += dabs(e.second);
+    return lgt / objs.size();
   }
 
   //_________________________________________________________________________________
