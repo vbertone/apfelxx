@@ -4,10 +4,7 @@
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/expression.h"
-#include "apfel/doubleobject.h"
-#include "apfel/operator.h"
-#include "apfel/timer.h"
+#include "apfel/apfelxx.h"
 
 // SIDIS hard cross sections.
 apfel::DoubleObject<apfel::Operator> C20qq;
