@@ -15,31 +15,31 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  template<class T>
-  DoubleObject<T>::DoubleObject():
+  template<class T, class U>
+  DoubleObject<T, U>::DoubleObject():
     _terms({})
   {
   }
 
   //_________________________________________________________________________
-  template<class T>
-  DoubleObject<T>::DoubleObject(std::vector<term<T>> const& terms):
+  template<class T, class U>
+  DoubleObject<T, U>::DoubleObject(std::vector<term<T, U>> const& terms):
     _terms(terms)
   {
   }
 
   //_________________________________________________________________________
-  template<class T>
-  void DoubleObject<T>::AddTerm(term<T> const& newterm)
+  template<class T, class U>
+  void DoubleObject<T, U>::AddTerm(term<T, U> const& newterm)
   {
     _terms.push_back(newterm);
   }
 
   //_________________________________________________________________________
-  template<class T>
-  template<class V> DoubleObject<V> DoubleObject<T>::operator *= (DoubleObject<V> const& o) const
+  template<class T, class U>
+  template<class V> DoubleObject<V> DoubleObject<T, U>::operator *= (DoubleObject<V> const& o) const
   {
-    auto tt = o.GetTerms();
+    const std::vector<term<V>> tt = o.GetTerms();
     std::vector<term<V>> vt;
     for (auto const& t : _terms)
       {
@@ -47,8 +47,8 @@ namespace apfel
         for (auto const& s : tt)
           {
             const double sc = tc * s.coefficient;
-            const auto o1 = t.object1 * s.object1;
-            const auto o2 = t.object2 * s.object2;
+            const V o1 = t.object1 * s.object1;
+            const V o2 = t.object2 * s.object2;
             vt.push_back({sc, o1, o2});
           }
       }
@@ -56,8 +56,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  template<class T>
-  DoubleObject<T>& DoubleObject<T>::operator *= (double const& s)
+  template<class T, class U>
+  DoubleObject<T, U>& DoubleObject<T, U>::operator *= (double const& s)
   {
     for (auto& t : _terms)
       t.coefficient *= s;
@@ -66,8 +66,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  template<class T>
-  DoubleObject<T>& DoubleObject<T>::operator /= (double const& s)
+  template<class T, class U>
+  DoubleObject<T, U>& DoubleObject<T, U>::operator /= (double const& s)
   {
     for (auto& t : _terms)
       t.coefficient /= s;
@@ -76,8 +76,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  template<class T>
-  DoubleObject<T>& DoubleObject<T>::operator += (DoubleObject<T> const& o)
+  template<class T, class U>
+  DoubleObject<T, U>& DoubleObject<T, U>::operator += (DoubleObject<T, U> const& o)
   {
     for (auto const& t : o.GetTerms())
       _terms.push_back(t);
@@ -86,8 +86,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  template<class T>
-  DoubleObject<T>& DoubleObject<T>::operator -= (DoubleObject<T> const& o)
+  template<class T, class U>
+  DoubleObject<T, U>& DoubleObject<T, U>::operator -= (DoubleObject<T, U> const& o)
   {
     for (auto& t : o.GetTerms())
       {
@@ -102,6 +102,8 @@ namespace apfel
   //_________________________________________________________________________________
   template class DoubleObject<Distribution>;
   template class DoubleObject<Operator>;
+  template class DoubleObject<Operator, Distribution>;
+  template class DoubleObject<Distribution, Operator>;
   template DoubleObject<Distribution> DoubleObject<Operator>::operator *= (DoubleObject<Distribution> const&) const;
 
   //_________________________________________________________________________________
@@ -135,25 +137,22 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
-  Distribution DoubleObject<Distribution>::Evaluate(int const& iv, double const& y) const
+  Distribution DoubleObject<Distribution>::Evaluate1(double const& x) const
   {
-    if (iv < 1 || iv >2)
-      throw std::runtime_error(error("Evaluate", "Function index out of range: it can be either 1 or 2."));
+    Distribution result = _terms[0].coefficient * _terms[0].object1.Evaluate(x) * _terms[0].object2;
+    for (int i = 1; i < (int) _terms.size(); i++)
+      result += _terms[i].coefficient * _terms[i].object1.Evaluate(x) * _terms[i].object2;
+    return result;
+  }
 
-    if (iv == 1)
-      {
-        Distribution result = _terms[0].coefficient * _terms[0].object1.Evaluate(y) * _terms[0].object2;
-        for (int i = 1; i < (int) _terms.size(); i++)
-          result += _terms[i].coefficient * _terms[i].object1.Evaluate(y) * _terms[i].object2;
-        return result;
-      }
-    else
-      {
-        Distribution result = _terms[0].coefficient * _terms[0].object2.Evaluate(y) * _terms[0].object1;
-        for (int i = 1; i < (int) _terms.size(); i++)
-          result += _terms[i].coefficient * _terms[i].object2.Evaluate(y) * _terms[i].object1;
-        return result;
-      }
+  //_________________________________________________________________________________
+  template<>
+  Distribution DoubleObject<Distribution>::Evaluate2(double const& z) const
+  {
+    Distribution result = _terms[0].coefficient * _terms[0].object2.Evaluate(z) * _terms[0].object1;
+    for (int i = 1; i < (int) _terms.size(); i++)
+      result += _terms[i].coefficient * _terms[i].object2.Evaluate(z) * _terms[i].object1;
+    return result;
   }
 
   //_________________________________________________________________________________
@@ -171,25 +170,22 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
-  Distribution DoubleObject<Distribution>::Derive(int const& iv, double const& y) const
+  Distribution DoubleObject<Distribution>::Derive1(double const& x) const
   {
-    if (iv < 1 || iv >2)
-      throw std::runtime_error(error("Derive", "Function index out of range: it can be either 1 or 2."));
+    Distribution result = _terms[0].coefficient * _terms[0].object1.Derive(x) * _terms[0].object2;
+    for (int i = 1; i < (int) _terms.size(); i++)
+      result += _terms[i].coefficient * _terms[i].object1.Derive(x) * _terms[i].object2;
+    return result;
+  }
 
-    if (iv == 1)
-      {
-        Distribution result = _terms[0].coefficient * _terms[0].object1.Derive(y) * _terms[0].object2;
-        for (int i = 1; i < (int) _terms.size(); i++)
-          result += _terms[i].coefficient * _terms[i].object1.Derive(y) * _terms[i].object2;
-        return result;
-      }
-    else
-      {
-        Distribution result = _terms[0].coefficient * _terms[0].object2.Derive(y) * _terms[0].object1;
-        for (int i = 1; i < (int) _terms.size(); i++)
-          result += _terms[i].coefficient * _terms[i].object2.Derive(y) * _terms[i].object1;
-        return result;
-      }
+  //_________________________________________________________________________________
+  template<>
+  Distribution DoubleObject<Distribution>::Derive2(double const& z) const
+  {
+    Distribution result = _terms[0].coefficient * _terms[0].object2.Derive(z) * _terms[0].object1;
+    for (int i = 1; i < (int) _terms.size(); i++)
+      result += _terms[i].coefficient * _terms[i].object2.Derive(z) * _terms[i].object1;
+    return result;
   }
 
   //_________________________________________________________________________________
@@ -207,32 +203,29 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
-  Distribution DoubleObject<Distribution>::Integrate(int const& iv, double const& yl, double const& yu) const
+  Distribution DoubleObject<Distribution>::Integrate1(double const& xl, double const& xu) const
   {
-    if (iv < 1 || iv >2)
-      throw std::runtime_error(error("Integrate", "Function index out of range: it can be either 1 or 2."));
+    Distribution result = _terms[0].coefficient * _terms[0].object1.Integrate(xl, xu) * _terms[0].object2;
+    for (int i = 1; i < (int) _terms.size(); i++)
+      result += _terms[i].coefficient * _terms[i].object1.Integrate(xl, xu) * _terms[i].object2;
+    return result;
+  }
 
-    if (iv == 1)
-      {
-        Distribution result = _terms[0].coefficient * _terms[0].object1.Integrate(yl, yu) * _terms[0].object2;
-        for (int i = 1; i < (int) _terms.size(); i++)
-          result += _terms[i].coefficient * _terms[i].object1.Integrate(yl, yu) * _terms[i].object2;
-        return result;
-      }
-    else
-      {
-        Distribution result = _terms[0].coefficient * _terms[0].object2.Integrate(yl, yu) * _terms[0].object1;
-        for (int i = 1; i < (int) _terms.size(); i++)
-          result += _terms[i].coefficient * _terms[i].object2.Integrate(yl, yu) * _terms[i].object1;
-        return result;
-      }
+  //_________________________________________________________________________________
+  template<>
+  Distribution DoubleObject<Distribution>::Integrate2(double const& zl, double const& zu) const
+  {
+    Distribution result = _terms[0].coefficient * _terms[0].object2.Integrate(zl, zu) * _terms[0].object1;
+    for (int i = 1; i < (int) _terms.size(); i++)
+      result += _terms[i].coefficient * _terms[i].object2.Integrate(zl, zu) * _terms[i].object1;
+    return result;
   }
 
   //_________________________________________________________________________
   template<>
   DoubleObject<Operator>& DoubleObject<Operator>::operator *= (DoubleObject<Operator> const& o)
   {
-    auto tt = o.GetTerms();
+    std::vector<term<Operator>> tt = o.GetTerms();
     std::vector<term<Operator>> vt;
     for (auto const& t : _terms)
       {
@@ -240,8 +233,8 @@ namespace apfel
         for (auto const& s : tt)
           {
             const double sc = tc * s.coefficient;
-            const auto o1 = t.object1 * s.object1;
-            const auto o2 = t.object2 * s.object2;
+            const Operator o1 = t.object1 * s.object1;
+            const Operator o2 = t.object2 * s.object2;
             vt.push_back({sc, o1, o2});
           }
       }
