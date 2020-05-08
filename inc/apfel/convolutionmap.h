@@ -65,12 +65,13 @@ namespace apfel
      * in the form of a matrix.
      * @return The multiplication rule matrix
      */
-    matrix<double> const GetRuleMatrix() const
+    matrix<double> const GetRuleMatrix(bool const& coeff = true) const
     {
-      matrix<double> m{_rules.size(), _rules.size()};
+      matrix<double> m{};
+      m.resize(_rules.size(), _rules.size(), (coeff ? 0 : -1));
       for (auto const& r : _rules)
         for (auto const& e : r.second)
-          m(r.first, e.object) = e.coefficient;
+          m(r.first, e.object) = (coeff ? e.coefficient : e.operand);
 
       return m;
     }
