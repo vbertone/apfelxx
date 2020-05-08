@@ -418,4 +418,5 @@ namespace apfel
   template class QGrid<Operator>;
   template class QGrid<Set<Operator>>;
   template class QGrid<DoubleObject<Operator>>;
+  template class QGrid<DoubleObject<Distribution, Operator>>;
 }
