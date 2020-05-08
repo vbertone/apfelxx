@@ -25,7 +25,7 @@ namespace apfel
     _data.resize(row * col, v);
   }
 
-  // type constrain
+  // Specialisations
   template class matrix<size_t>;
   template class matrix<int>;
   template class matrix<float>;

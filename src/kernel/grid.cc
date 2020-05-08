@@ -151,7 +151,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::ostream& operator<<(std::ostream& os, Grid const& gr)
+  std::ostream& operator << (std::ostream& os, Grid const& gr)
   {
     os << "Grid: " << &gr << "\n";
     os << "Locked    = " << gr._Locked << "\n";

@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include "apfel/matrix.h"
+
 #include <map>
 #include <string>
 #include <vector>
@@ -57,6 +59,21 @@ namespace apfel
      * @return The multiplication rules
      */
     std::map<int,std::vector<rule>> const& GetRules() const { return _rules; }
+
+    /**
+     * @brief Retrieve the full set of rules for the multiplications
+     * in the form of a matrix.
+     * @return The multiplication rule matrix
+     */
+    matrix<double> const GetRuleMatrix() const
+    {
+      matrix<double> m{_rules.size(), _rules.size()};
+      for (auto const& r : _rules)
+        for (auto const& e : r.second)
+          m(r.first, e.object) = e.coefficient;
+
+      return m;
+    }
     ///@}
   protected:
     std::map<int,std::vector<rule>> _rules; //!< the map container
