@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/distribution.h"
+#include "apfel/operator.h"
 
 namespace apfel
 {
@@ -51,5 +52,13 @@ namespace apfel
    * @return the map of distributions in the physical basis
    */
   std::map<int, Distribution> QCDEvToPhys(std::map<int, Distribution> const& QCDEvMap);
+
+  /**
+   * @brief Rotation from the QCD evolution to the physical basis of a
+   * map of operators.
+   * @param QCDEvMap: The map of operatoirs in the QCD evolution basis
+   * @return the map of operators in the physical basis
+   */
+  std::map<int, Operator> QCDEvToPhys(std::map<int, Operator> const& QCDEvMap);
   ///@}
 }

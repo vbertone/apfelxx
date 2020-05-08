@@ -135,8 +135,7 @@ namespace apfel
   {
     // Fill in map in the physical basis. It attumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
-    std::map<int,Distribution> PhysMap;
-    PhysMap.insert({0, QCDEvMap.at(0)});
+    std::map<int, Distribution> PhysMap;
     PhysMap.insert({0, QCDEvMap.at(0)});
 
     // Perform the rotation.
@@ -144,6 +143,30 @@ namespace apfel
       {
         Distribution Td = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
         Distribution Vd = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
+        for (int j = 2; j <= 6; j++)
+          {
+            Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+            Vd += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+          }
+        PhysMap.insert({i, Td});
+        PhysMap.insert({-i, Vd});
+      }
+    return PhysMap;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, Operator> QCDEvToPhys(std::map<int, Operator> const& QCDEvMap)
+  {
+    // Fill in map in the physical basis. It attumes that the gluon
+    // has key zero and all keys from 0 to 12 exist.
+    std::map<int, Operator> PhysMap;
+    PhysMap.insert({0, QCDEvMap.at(0)});
+
+    // Perform the rotation.
+    for (int i = 1; i <= 6; i++)
+      {
+        Operator Td = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
+        Operator Vd = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
         for (int j = 2; j <= 6; j++)
           {
             Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
