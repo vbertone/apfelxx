@@ -154,22 +154,24 @@ namespace apfel
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(double const& x, double const& Q) const
   {
-    const auto fq     = this->_TabFunc(Q);
-    const auto bounds = this->SumBounds(Q);
+    // Get summation bounds
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+    const double                    fq     = _TabFunc(Q);
 
     // Loop over the nodes.
     double result = 0;
     for (int tau = std::get<1>(bounds); tau < std::get<2>(bounds); tau++)
       result += Interpolant(std::get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(x);
     return result;
-  };
+  }
 
   //_________________________________________________________________________________
   template<>
   double TabulateObject<Set<Distribution>>::EvaluatexQ(int const& i, double const& x, double const& Q) const
   {
-    const auto fq     = this->_TabFunc(Q);
-    const auto bounds = this->SumBounds(Q);
+    // Get summation bounds
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+    const double                    fq     = _TabFunc(Q);
 
     // Loop over the nodes.
     double result = 0;
@@ -182,8 +184,9 @@ namespace apfel
   template<>
   double TabulateObject<DoubleObject<Distribution>>::EvaluatexzQ(double const& x, double const& z, double const& Q) const
   {
-    const auto fq     = this->_TabFunc(Q);
-    const auto bounds = this->SumBounds(Q);
+    // Get summation bounds
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+    const double                    fq     = _TabFunc(Q);
 
     // Loop over the nodes.
     double result = 0;
@@ -197,11 +200,13 @@ namespace apfel
   template<>
   std::map<int, double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
   {
-    const auto fq     = this->_TabFunc(Q);
-    const auto bounds = this->SumBounds(Q);
-    const int cp      = std::get<0>(bounds);
-    const int lower   = std::get<1>(bounds);
-    const int upper   = std::get<2>(bounds);
+    // Get summation bounds
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+    const double                    fq     = _TabFunc(Q);
+
+    const int cp    = std::get<0>(bounds);
+    const int lower = std::get<1>(bounds);
+    const int upper = std::get<2>(bounds);
 
     // Fill in map.
     std::map<int, double> result;

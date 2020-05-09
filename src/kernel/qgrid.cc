@@ -353,12 +353,12 @@ namespace apfel
     double Qbo = std::max(Qa, Qb);
     int    sgn = (Qb > Qa ? 1 : -1);
 
-    // Initialise result to zero
-    T result = T{0*_GridValues[0]};
-
     // Sum boundaries and control parameters at the integral boundaries
     const std::tuple<int, int, int> boundsa = SumBounds(Qao);
     const std::tuple<int, int, int> boundsb = SumBounds(Qbo);
+
+    // Initialise result to zero
+    T result = T{0*_GridValues[0]};
 
     // First term
     for (int tau = std::get<1>(boundsa); tau < std::get<2>(boundsa); tau++)
