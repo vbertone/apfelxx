@@ -63,15 +63,29 @@ namespace apfel
     /**
      * @brief Retrieve the full set of rules for the multiplications
      * in the form of a matrix.
-     * @return The multiplication rule matrix
      */
-    matrix<double> const GetRuleMatrix(bool const& coeff = true) const
+    matrix<double> const GetRuleMatrix() const
     {
-      matrix<double> m{};
-      m.resize(_rules.size(), _rules.size(), (coeff ? 0 : -1));
+      matrix<double> m{_rules.size(), _rules.size()};
       for (auto const& r : _rules)
         for (auto const& e : r.second)
-          m(r.first, e.object) = (coeff ? e.coefficient : e.operand);
+          m(r.first, e.object) = e.coefficient;
+
+      return m;
+    }
+
+    /**
+     * @brief Retrieve the operand indices of the full set of rules
+     * for the multiplications in the form of a matrix. Elements set
+     * to -1 correspond to empty slots.
+     */
+    matrix<int> const GetRuleIndices() const
+    {
+      matrix<int> m{};
+      m.resize(_rules.size(), _rules.size(), -1);
+      for (auto const& r : _rules)
+        for (auto const& e : r.second)
+          m(r.first, e.object) = e.operand;
 
       return m;
     }
