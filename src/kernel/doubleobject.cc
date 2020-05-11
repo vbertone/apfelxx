@@ -79,8 +79,10 @@ namespace apfel
   template<class T, class U>
   DoubleObject<T, U>& DoubleObject<T, U>::operator += (DoubleObject<T, U> const& o)
   {
-    const std::vector<term<T, U>>& terms = o.GetTerms();
-    _terms.insert(_terms.end(), std::make_move_iterator(terms.begin()), std::make_move_iterator(terms.end()));
+    for (auto const& t : o.GetTerms())
+      _terms.push_back(t);
+    //const std::vector<term<T, U>>& terms = o.GetTerms();
+    //_terms.insert(_terms.end(), std::make_move_iterator(terms.begin()), std::make_move_iterator(terms.end()));
 
     return *this;
   }
