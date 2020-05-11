@@ -94,4 +94,24 @@ namespace apfel
     std::map<int,std::vector<rule>> _rules; //!< the map container
     std::string                     _name;  //!< the name of the derived class
   };
+
+  /**
+   * @brief The DiagonalBasis class is the simplest derivation of
+   * ConvolutionMap meant to essentially perform a scalar product of
+   * two sets of objects.
+   */
+  class DiagonalBasis: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The DiagonalBasis constructor
+     * @param nf: number of elements
+     */
+    DiagonalBasis(int const& nf):
+      ConvolutionMap{"DiagonalBasis_" + std::to_string(nf)}
+    {
+      for (int k = 0; k < nf; k++)
+        _rules[k] = { {k, k, 1} };
+    };
+  };
 }
