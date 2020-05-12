@@ -149,7 +149,7 @@ namespace apfel
   template class TabulateObject<Set<Operator>>;
   template class TabulateObject<DoubleObject<Operator>>;
   template class TabulateObject<DoubleObject<Distribution, Operator>>;
-  template class TabulateObject<Set<DoubleObject<Distribution, Operator>>>;
+  template class TabulateObject<Set<DoubleObject<Distribution, Operator> >>;
 
   //_________________________________________________________________________________
   template<>

@@ -32,6 +32,20 @@ namespace apfel
    */
   ///@{
   /**
+   * @brief Rotation matrix from the QCD evolution to the physical
+   * basis.
+   */
+  const double RotQCDEvToPhys[6][6] =
+  {
+    {1./12., -1./4., 1./12., 1./24.,  1./40.,  1./60.},    // d
+    {1./12.,  1./4., 1./12., 1./24.,  1./40.,  1./60.},    // u
+    {1./12.,     0., -1./6., 1./24.,  1./40.,  1./60.},    // s
+    {1./12.,     0.,     0., -1./8.,  1./40.,  1./60.},    // c
+    {1./12.,     0.,     0.,     0., -1./10.,  1./60.},    // b
+    {1./12.,     0.,     0.,     0.,      0., -1./12.}     // t
+  };
+
+  /**
    * @brief Rotation from the physical to the QCD evolution basis.
    * @param InPhysMap: the map in the physical basis
    * @return The map in the QCD evolution basis
