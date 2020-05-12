@@ -150,11 +150,12 @@ namespace apfel
      */
     ///@{
     template<class V> DoubleObject<V> operator *= (DoubleObject<V> const& o) const;
-    DoubleObject<T, U>& operator *= (double const& s);             //!< this *= scalar
-    DoubleObject<T, U>& operator *= (DoubleObject<T, U> const& o); //!< this *= DoubleObject
-    DoubleObject<T, U>& operator /= (double const& s);             //!< this /= scalar
-    DoubleObject<T, U>& operator += (DoubleObject<T, U> const& o); //!< this += DoubleObject
-    DoubleObject<T, U>& operator -= (DoubleObject<T, U> const& o); //!< this -= DoubleObject
+    DoubleObject<T, U>& operator *= (double const& s);                               //!< this *= scalar
+    DoubleObject<T, U>& operator *= (DoubleObject<T, U> const& o);                   //!< this *= DoubleObject
+    DoubleObject<T, U>& operator *= (std::function<double(double const&)> const& f); //!< this *= Function of the integration variable
+    DoubleObject<T, U>& operator /= (double const& s);                               //!< this /= scalar
+    DoubleObject<T, U>& operator += (DoubleObject<T, U> const& o);                   //!< this += DoubleObject
+    DoubleObject<T, U>& operator -= (DoubleObject<T, U> const& o);                   //!< this -= DoubleObject
     ///@}
 
   private:

@@ -6,6 +6,7 @@
 
 #include "apfel/set.h"
 #include "apfel/operator.h"
+#include "apfel/doubleobject.h"
 #include "apfel/messages.h"
 
 #include <stdexcept>
@@ -165,6 +166,7 @@ namespace apfel
   // Specialisations.
   template class Set<Distribution>;
   template class Set<Operator>;
+  template class Set<DoubleObject<Distribution, Operator>>;
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
 }

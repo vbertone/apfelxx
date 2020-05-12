@@ -49,7 +49,7 @@ namespace apfel
     Operator&    operator  = (Operator const& o);                      //!< this  = Operator
     Operator&    operator *= (Operator const& o);                      //!< this *= Operator
     Operator&    operator *= (double const& s);                        //!< this *= Scalar
-    Operator&    operator *= (std::function<double(double const&)> f); //!< This *= function
+    Operator&    operator *= (std::function<double(double const&)> f); //!< This *= Function
     Operator&    operator /= (double const& s);                        //!< this /= Scalar
     Operator&    operator += (Operator const& o);                      //!< this += Operator
     Operator&    operator -= (Operator const& o);                      //!< this -= Operator

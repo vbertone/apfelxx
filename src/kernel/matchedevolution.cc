@@ -110,12 +110,13 @@ namespace apfel
   }
 
   // template fixed types
-  template class MatchedEvolution<double>;                               //<! Single coupling
-  template class MatchedEvolution<Distribution>;                         //<! Single distribution
-  template class MatchedEvolution<Set<Distribution>>;                    //<! Set of distributions
-  template class MatchedEvolution<DoubleObject<Distribution>>;           //<! Double object of distributions
-  template class MatchedEvolution<Operator>;                             //<! Single Operator
-  template class MatchedEvolution<Set<Operator>>;                        //<! Set of Operators
-  template class MatchedEvolution<DoubleObject<Operator>>;               //<! Double object of operators
-  template class MatchedEvolution<DoubleObject<Distribution, Operator>>; //<! Double object of distributions and operators
+  template class MatchedEvolution<double>;                                    //<! Single coupling
+  template class MatchedEvolution<Distribution>;                              //<! Single distribution
+  template class MatchedEvolution<Set<Distribution>>;                         //<! Set of distributions
+  template class MatchedEvolution<DoubleObject<Distribution>>;                //<! Double object of distributions
+  template class MatchedEvolution<Operator>;                                  //<! Single Operator
+  template class MatchedEvolution<Set<Operator>>;                             //<! Set of Operators
+  template class MatchedEvolution<DoubleObject<Operator>>;                    //<! Double object of operators
+  template class MatchedEvolution<DoubleObject<Distribution, Operator>>;      //<! Double object of distributions and operators
+  template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>>>; //<! Double object of distributions and operators
 }

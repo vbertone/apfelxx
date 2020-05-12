@@ -57,6 +57,19 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T, class U>
+  DoubleObject<T, U>& DoubleObject<T, U>::operator *= (std::function<double(double const&)> const& f)
+  {
+    for (auto& t : _terms)
+      {
+        t.object1 *= f;
+        t.object2 *= f;
+      }
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T, class U>
   DoubleObject<T, U>& DoubleObject<T, U>::operator *= (double const& s)
   {
     for (auto& t : _terms)

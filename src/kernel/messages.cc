@@ -51,21 +51,21 @@ namespace apfel
   void info(std::string const& tag, std::string const& what)
   {
     if (VerbosityLevel > MEDIUM)
-      std::cout << "\033[" << code::blue << "m[" << tag << "] Info: " << what << "\033[" << code::normal << "m\n";
+      std::cout << "\033[" << code::blue << "m[apfel::" << tag << "] Info: " << what << "\033[" << code::normal << "m\n";
   }
 
   //_________________________________________________________________________
   void warning(std::string const& tag, std::string const& what)
   {
     if (VerbosityLevel > LOW)
-      std::cout << "\033[" << code::yellow << "m[" << tag << "] Warning: " << what << "\033[" << code::normal << "m\n";
+      std::cout << "\033[" << code::yellow << "m[apfel::" << tag << "] Warning: " << what << "\033[" << code::normal << "m\n";
   }
 
   //_________________________________________________________________________
   std::string error(std::string const& tag, std::string const& what)
   {
     std::stringstream ss;
-    ss << "\n\n\033[" << code::red << "m[" << tag << "] Error: " << what << "\033[" << code::normal << "m\n";
+    ss << "\n\n\033[" << code::red << "m[apfel::" << tag << "] Error: " << what << "\033[" << code::normal << "m\n";
     return ss.str();
   }
 
