@@ -33,7 +33,7 @@ namespace apfel
     // Convolute matching conditions with a set of objects having the
     // same convolution map of the matching conditions but containing
     // the same objects of the input set of functions 'f'.
-    Set<T> MO = MC * Set<T>{MC.GetMap(), f.GetObjects()};
+    Set<T> MO = MC * Set<T> {MC.GetMap(), f.GetObjects()};
 
     // Set for 'MO' the convolution map of the next evolution step
     MO.SetMap(_SplittingFunctions((Up ? nf + 1 : nf - 1), 0).GetMap());
