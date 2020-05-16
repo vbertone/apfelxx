@@ -112,8 +112,8 @@ namespace apfel
         PhysMap[-i] = 0;
         for (int j = 1; j <= 6; j++)
           {
-            PhysMap[i]  += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
-            PhysMap[-i] += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+            PhysMap[i]  += ( RotQCDEvToPhys[i-1][j-1] / 2 ) * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+            PhysMap[-i] += ( RotQCDEvToPhys[i-1][j-1] / 2 ) * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
           }
       }
     return PhysMap;
@@ -130,12 +130,12 @@ namespace apfel
     // Perform the rotation.
     for (int i = 1; i <= 6; i++)
       {
-        Distribution Td = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
-        Distribution Vd = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
+        Distribution Td = ( RotQCDEvToPhys[i-1][0] / 2 ) * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
+        Distribution Vd = ( RotQCDEvToPhys[i-1][0] / 2 ) * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
         for (int j = 2; j <= 6; j++)
           {
-            Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
-            Vd += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+            Td += ( RotQCDEvToPhys[i-1][j-1] / 2 ) * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+            Vd += ( RotQCDEvToPhys[i-1][j-1] / 2 ) * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
           }
         PhysMap.insert({i, Td});
         PhysMap.insert({-i, Vd});
@@ -154,12 +154,12 @@ namespace apfel
     // Perform the rotation.
     for (int i = 1; i <= 6; i++)
       {
-        Operator Td = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
-        Operator Vd = RotQCDEvToPhys[i-1][0] * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
+        Operator Td = ( RotQCDEvToPhys[i-1][0] / 2 ) * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
+        Operator Vd = ( RotQCDEvToPhys[i-1][0] / 2 ) * ( QCDEvMap.at(1) - QCDEvMap.at(2) );
         for (int j = 2; j <= 6; j++)
           {
-            Td += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
-            Vd += RotQCDEvToPhys[i-1][j-1] * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
+            Td += ( RotQCDEvToPhys[i-1][j-1] / 2 ) * ( QCDEvMap.at(2*j-1) + QCDEvMap.at(2*j) );
+            Vd += ( RotQCDEvToPhys[i-1][j-1] / 2 ) * ( QCDEvMap.at(2*j-1) - QCDEvMap.at(2*j) );
           }
         PhysMap.insert({i, Td});
         PhysMap.insert({-i, Vd});

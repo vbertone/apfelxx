@@ -30,17 +30,14 @@ namespace apfel
     // Get matching conditions.
     Set<Operator> MC = _MatchingConditions(Up, nf);
 
-    // Create the object 'g' with the same convolution map of the
-    // matching conditions but containing the same objects of the
-    // input set of functions 'f'.
-    Set<T> g{MC.GetMap(), f.GetObjects()};
+    // Convolute matching conditions with a set of objects having the
+    // same convolution map of the matching conditions but containing
+    // the same objects of the input set of functions 'f'.
+    Set<T> MO = MC * Set<T>{MC.GetMap(), f.GetObjects()};
 
-    // Convolute 'MC' and 'g'.
-    Set<T> MO = MC * g;
+    // Set for 'MO' the convolution map of the next evolution step
     MO.SetMap(_SplittingFunctions((Up ? nf + 1 : nf - 1), 0).GetMap());
 
-    // Return the convoluted object with the map on the next evolution
-    // step.
     return MO;
   }
 

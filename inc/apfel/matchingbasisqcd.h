@@ -40,19 +40,19 @@ namespace apfel
     MatchingBasisQCD(int const& nf):
       ConvolutionMap{"MatchingBasisQCD_" + std::to_string(nf)}
     {
-      _rules[GLUON] = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1} };
-      _rules[SIGMA] = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
+      _rules[GLUON]   = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1} };
+      _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
       _rules[VALENCE] = { {PNS, VALENCE, 1} };
       for (int k = 1; k < 6; k++)
         if (k < nf)
           {
-            _rules[2*k+1] = { {PNS, 2*k+1, 1} };
-            _rules[2*k+2] = { {PNS, 2*k+2, 1} };
+            _rules[2 * k + 1] = { {PNS, 2 * k + 1, 1} };
+            _rules[2 * k + 2] = { {PNS, 2 * k + 2, 1} };
           }
         else
           {
-            _rules[2*k+1] = { {4+k, SIGMA, 1}, {9+k, GLUON, 1} };
-            _rules[2*k+2] = _rules[VALENCE];
+            _rules[2 * k + 1] = { {4 + k, SIGMA, 1}, {9 + k, GLUON, 1} };
+            _rules[2 * k + 2] = _rules[VALENCE];
           }
     };
   };

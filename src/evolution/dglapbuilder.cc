@@ -764,7 +764,7 @@ namespace apfel
     return InitializeDglapObjectsQCDTtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
-  // ============================================================================
+  //_____________________________________________________________________________
   std::function<Set<Operator>(int const&, double const&)> SplittingFunctions(std::map<int, DglapObjects>          const& DglapObj,
                                                                              int                                  const& PerturbativeOrder,
                                                                              std::function<double(double const&)> const& Alphas)

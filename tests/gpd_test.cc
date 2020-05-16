@@ -16,8 +16,8 @@ int main()
   // Initial scale
   const double mu0 = sqrt(2);
 
-  // Vectors of masses and thresholds
-  const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};;
+  // Vector of thresholds
+  const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
   const int PerturbativeOrder = 0;
@@ -38,7 +38,7 @@ int main()
   // Construct the DGLAP objects
   const auto EvolvedGPDs = BuildDglap(GpdObj,   apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
 
-  // Tabulate PDFs
+  // Tabulate GPDs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedGPDs{*EvolvedGPDs, 50, 1, 1000, 3};
 
   // Final scale

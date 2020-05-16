@@ -1,0 +1,1138 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath,amssymb,bm,makeidx,subfigure}
+\usepackage[italian,english]{babel}
+\usepackage[center,small]{caption}[2007/01/07]
+\usepackage{fancyhdr}
+\usepackage{color}
+
+\definecolor{blu}{rgb}{0,0,1}
+\definecolor{verde}{rgb}{0,1,0}
+\definecolor{rosso}{rgb}{1,0,0}
+\definecolor{viola}{rgb}{1,0,1}
+\definecolor{arancio}{rgb}{1,0.5,0}
+\definecolor{celeste}{rgb}{0,1,1}
+\definecolor{rosa}{rgb}{1,0.3,0.5}
+
+\oddsidemargin = 12pt
+\topmargin = 0pt
+\textwidth = 440pt
+\textheight = 650pt
+
+\makeindex
+
+\begin{document}
+
+\begin{center}
+\textbf{\Large $\overline{\mbox{MS}}$ Mass Implementation}\\
+{\large VB}
+\end{center}
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+Until recently, heavy quark masses in PDF fits were mostly treated in
+the pole-mass (or on-shell) renormalization scheme
+(REFERENCE). However, in a recent paper \cite{Alekhin:2010sv} it has
+been shown that the implementation of the $\overline{\mbox{MS}}$
+masses results in an improvement of the perturbative stability and in
+the consequent reduction of the theoretical uncertainty due to
+variations of renormalization and factorization scales.  As a
+consequence, this allows one to a more reliabe determination of the
+numerical value of the heavy quark masses themselves.
+
+In this set of notes we will describe the implemntation of the
+$\overline{\mbox{MS}}$ heavy-quark running masses in {\tt APFEL}.
+Strarting from the more used defition of structure functions and in
+terms of pole masses, our goal is to consistently replace them with
+the $\overline{\mbox{MS}}$ mass definition.
+
+\section{$\overline{\mbox{MS}}$ Running Mass vs. Pole Mass}
+
+The (scale independent) pole mass $M$ and the (scale dependent)
+$\overline{\mbox{MS}}$ mass $m(\mu)$ arise from two different
+renormalization procedures and in perturbation theory they can be
+expressed on in terms of the other. The relation connecting pole and
+$\overline{\mbox{MS}}$ mass definitions has been computed in
+Ref.~\cite{Chetyrkin:1999qi} up to four loops.
+, and in particular from eq. (8) of that paper
+we read the ratio between $M$ and $m(\mu)$:
+\begin{equation}\label{straight}
+\frac{m(\mu)}{M} = 1 + z^{(1)}a_s+\underbrace{C_F\left[C_Fz_1^{(2)}+C_Az_2^{(2)}+T_R\left(N_Lz_3^{(2)}+z_4^{(2)}\right)\right]}_{z^{(2)}}a_s^2+\mathcal{O}(a_s^3)\,,
+\end{equation}
+where:
+\begin{equation}\label{coeff}
+\begin{array}{l}
+\displaystyle z^{(1)}(\mu,M) = C_F\left(- 4 - 3L_{\mu M}\right)\\
+\\
+\displaystyle z_{1}^{(2)}(\mu,M) = \frac{7}{8} - 30\zeta_2 - 12\zeta_3 + 48\zeta_2\ln(2) + \frac{21}2L_{\mu M} + \frac92 L_{\mu M}^2\\
+\\
+\displaystyle z_{2}^{(2)}(\mu,M) = -\frac{1111}{24} + 8\zeta_2 +6\zeta_3 - 24\zeta_2\ln(2) - \frac{185}6L_{\mu M} - \frac{11}2 L_{\mu M}^2\\
+\\
+\displaystyle z_{3}^{(2)}(\mu,M) = \frac{71}{6} + 8\zeta_2 + \frac{26}3L_{\mu M} + 2 L_{\mu M}^2\\
+\\
+\displaystyle z_{4}^{(2)}(\mu,M) = \frac{143}{6} -16\zeta_2 + \frac{26}3L_{\mu M} + 2 L_{\mu M}^2\,,\\
+\end{array}
+\end{equation}
+where we have defined:
+\begin{equation}
+L_{\mu M} = \ln\frac{\mu^2}{M^2}
+\end{equation}
+and where $N_L$ is the number of light (massless) quarks (i.e. $N_L=3$ for the charm and $N_L=4$ for the bottom). Moreover, in our notation we use(\footnote{As a consistency check, note that setting $\mu^2=M^2$ and taking into account the fact that $\zeta_2 = \pi^2/6$, the coefficients in eq. (\ref{coeff}) reduce to the first five coefficients in the equation between eq. (10) and (11) of \cite{Melnikov:2000qh}.}):
+\begin{equation}
+a_s\equiv a_s(\mu) = \frac{\alpha_s(\mu)}{4\pi}\,.
+\end{equation}
+
+But what we really need is the inverse of eq. (\ref{straight}) in terms of $\mu$ and $m(\mu)$. We could derive it inverting eq. (\ref{straight}) and then writing $M$ in terms of $m(\mu)$, but more easily we can read it from eq. (31) of \cite{Chetyrkin:1999qi} and write it as:
+\begin{equation}\label{inverse}
+\frac{M}{m(\mu)} = 1 + h^{(1)}a_s+\underbrace{C_F\left[C_Fh_1^{(2)}+C_Ah_2^{(2)}+T_R\left(N_Lh_3^{(2)}+h_4^{(2)}\right)\right]}_{h^{(2)}}a_s^2+\mathcal{O}(a_s^3)\,,
+\end{equation}
+with:
+\begin{equation}\label{coeffinv}
+\begin{array}{l}
+\displaystyle h^{(1)}(\mu,m(\mu)) = C_F\left(4 + 3L_{\mu m}\right)\\
+\\
+\displaystyle h_{1}^{(2)}(\mu,m(\mu)) = -\frac{7}{8} + 30\zeta_2 + 12\zeta_3 - 48\zeta_2\ln(2) - \frac{9}2L_{\mu m} + \frac92 L_{\mu m}^2\\
+\\
+\displaystyle h_{2}^{(2)}(\mu,m(\mu)) = \frac{1111}{24} - 8\zeta_2 - 6\zeta_3 + 24\zeta_2\ln(2) + \frac{185}6L_{\mu m} + \frac{11}2 L_{\mu m}^2\\
+\\
+\displaystyle h_{3}^{(2)}(\mu,m(\mu)) = - \frac{71}{6} - 8\zeta_2 - \frac{26}3L_{\mu m} - 2 L_{\mu m}^2\\
+\\
+\displaystyle h_{4}^{(2)}(\mu,m(\mu)) = -\frac{143}{6} + 16\zeta_2 - \frac{26}3L_{\mu m} - 2 L_{\mu m}^2\,,\\
+\end{array}
+\end{equation}
+where now we have defined:
+\begin{equation}
+L_{\mu m} = \ln\frac{\mu^2}{m^2(\mu)}\,.
+\end{equation}
+In the following we will use eq. (\ref{inverse}) to replace the pole mass $M$ with the $\overline{\mbox{MS}}$ mass $m(\mu)$.
+
+
+\section{RGE Solution for the $\overline{\mbox{MS}}$ Running Mass}
+
+Actally, what we also need is to know how $m(\mu)$ runs with the renormalization scale $\mu$. To this end, we use the RGE to obtain the following differential equation for the running:
+\begin{equation}\label{andim}
+\mu^2\frac{dm}{d\mu^2} = m(\mu)\gamma_m(a_s) = -m(\mu)\sum_{n=0}^{\infty}\gamma_m^{(n)}a_s^{n+1}
+\end{equation}
+and from Eqs. (46), (47) and (48) of \cite{Chetyrkin:1999pq} for $SU(3)$ and taking into account a factor 4 difference in the definition of $a_s$, we read:
+\begin{subequations} 
+\begin{equation}
+\gamma_m^{(0)} = 4 
+\end{equation}
+\begin{equation}
+\gamma_m^{(1)} = \frac{202}3 - \frac{20}{9}N_f
+\end{equation}
+\begin{equation}
+\gamma_m^{(2)} = 1249 - \left(\frac{2216}{27}+\frac{160}{3}\zeta_3\right)N_f-\frac{140}{81}N_f^2\,,
+\end{equation}
+\end{subequations} 
+where $N_f$ is the number of active flavours. But we also know how $a_s$ runs, that is:
+\begin{equation}\label{betaf}
+\mu^2\frac{da_s}{d\mu^2} = \beta(a_s) = -\sum_{n=0}^{\infty}\beta_n a_s^{n+2}\,,
+\end{equation}
+with:
+\begin{subequations} 
+\begin{equation}
+\beta_0 = 11-\frac23 N_f 
+\end{equation}
+\begin{equation}
+\beta_1 = 102 - \frac{38}3 N_f
+\end{equation}
+\begin{equation}
+\beta_2 = \frac{2857}{2} - \frac{5033}{18}N_f + \frac{325}{54}N_f^2
+\end{equation}
+\end{subequations} 
+and from eq. (\ref{betaf}) it follows that:
+\begin{equation}
+\mu^2\frac{dm}{d\mu^2} = \beta(a_s)\frac{d m}{da_s}\,,
+\end{equation}
+so that the differential equation in eq. (\ref{andim}) can be written as:
+\begin{equation}\label{runmass}
+\frac{dm}{da_s} = \frac{\gamma_m(a_s)}{\beta(a_s)}m(a_s)\,.
+\end{equation}
+
+The formal solution of eq. (\ref{runmass}) reads:
+\begin{equation}\label{numsol}
+m(\mu) = m(\mu_0)\exp\left[\int_{a_s(\mu_0)}^{a_s(\mu)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s\right]\,,
+\end{equation}
+then we expand the integrand in eq. (\ref{numsol}) using the perturbative expansion of the $\gamma_m(a_s)$ and $\beta(a_s)$ functions given in eqs. (\ref{andim}) and (\ref{betaf}) obtaining the following polynomial:
+\begin{equation}
+\frac{\gamma_m(a)}{\beta(a)} = \frac1{a}\left[c_0 + (c_1-b_1c_0)a+(c_2-c_1b_1-b_2c_0+b_1^2c_0)a^2+\mathcal{O}(a^3)\right]
+\end{equation}
+where we have defined:
+\begin{equation}\label{jhgkgfkgf}
+\left\{\begin{array}{l}
+\displaystyle b_i = \frac{\beta_i}{\beta_0}\\
+\\
+\displaystyle c_i = \frac{\gamma_m^{(i)}}{\beta_0}
+\end{array}\right.\,.
+\end{equation}
+We integrate eq. (\ref{numsol}) getting:
+\begin{equation}\label{integral}
+\int_{a_0}^a\frac{\gamma_m(a)}{\beta(a)}da = c_0\ln\frac{a}{a_0} + (c_1-b_1c_0)(a-a_0)+\frac12(c_2-c_1b_1-b_2c_0+b_1^2c_0)(a^2-a_0^2)\,,
+\end{equation}
+where  $a\equiv a_s(\mu)$ and $a_0\equiv a_s(\mu_0)$. After that, we put it in the exponential function and expand again, finally obtaining:
+\begin{equation}\label{ansol}
+m(\mu)=m(\mu_0)\left(\frac{a}{a_0}\right)^{c_0}\frac{1+(c_1-b_1c_0)a+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2]a^2}{1+(c_1-b_1c_0)a_0+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2]a_0^2}\,,
+\end{equation}
+which gives the NNLO running of $m(\mu)$. Of course, to obatin the NLO
+running one has just to disregard the terms proportional to $a^2$ and
+$a_0^2$ in the ration, while at LO also the terms proportional to $a$
+and $a_0$ should be omitted(\footnote{Note that, to be consistent, the evaluation of $a$ and $a_0$ must be done at the same perturbative order of $m(\mu)$. So, for instance, if we want to evaluate the NNLO running of $m(\mu)$ also the value of $a$ and $a_0$ must be computed using the NNLO running.}).
+
+\section{Matching Conditions}
+
+As one can see from eq. (\ref{ansol}), the running of the $\overline{\mbox{MS}}$ mass $m(\mu)$ requires the value of $\alpha_s$ at the scales $\mu$ and $\mu_0$ (i.e. $a$ and $a_0$). But in turn the running of $\alpha_s$ itself depends on the values of the heavy quark mass thresholds by means of the so called matching conditions, which tell essentially us how to perform the switching of the running from $N_f$ to $N_f+1$ active flavours. So, there seems to be a circular problem. But in the following we will see how to get out of this using the fact that the scale where to perform the matching is arbitrary. We will use this arbitrariness to see how to compute the running of $\alpha_s$ without knowing the running of $m(\mu)$.
+
+In general the matching conditions give rise to a discontinuity of $\alpha_s$ at the matching scale and in the present code they are written in terms of the pole masses. These masses are scale independent and are given as input parameters, therefore they don't give any problem. Moreover, one can show that if the matching point $\mu$ is chosen to be equal to the pole mass $M$, the discontinuity appears only at NNLO.
+
+Now, the first step to replace the pole mass $M$ with the $\overline{\mbox{MS}}$ mass $m(\mu)$ is to rewrite the matching conditions for $\alpha_s$ in terms of the $\overline{\mbox{MS}}$ mass rather than the pole mass. This is exactly what we are going to do in the following. Then we will find that choosing this time $\mu=m(\mu)$ the discontinuity appears again only at NNLO but with a different coefficient.
+
+As known, the same problem holds for PDFs. In fact, also PDFs need to be matched and in the following we will discuss also how to write the matching conditions for PDFs, which originally are given for the pole mass $M$, in terms of the $\overline{\mbox{MS}}$ mass $m(\mu)$.
+
+\subsection{Matching of $\alpha_s(\mu)$}
+
+In this section we will show how to express in terms of the $\overline{\mbox{MS}}$ mass $m(\mu)$ the matching condition for $\alpha_s$. We took the matching condition for $\alpha_s$ from eq. (2.41) of \cite{Vogt:2004ns}, which in turn was taken from eq. (9) of \cite{Chetyrkin:1997sg}.  Here we write this equation (up to NNLO and taking into account a factor 4 coming from the different definition of $a$) as follows:
+\begin{equation}\label{alphaspole}
+\frac{a^{(n-1)}(\mu)}{a^{(n)}(\mu)}=1-\frac23 L_{\mu M}a^{(n)}(\mu)+\left(\frac49L_{\mu M}^2-\frac{38}3L_{\mu M}-\frac{14}3\right)[a^{(n)}(\mu)]^2\,.
+\end{equation}
+being $M$ the pole mass of the $n$-th flavour. But from eq. (\ref{inverse}) we read:
+\begin{equation}
+\ln M^2 = \ln m^2(\mu) + 2\ln[1+h^{(1)}(\mu)a^{(n)}(\mu)]\quad\mbox{with}\quad h^{(1)}(\mu) = \frac{16}3+4L_{\mu m}
+\end{equation}
+that, using the expansion:
+\begin{equation}
+\ln(1+x)=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}x^k\,,
+\end{equation}
+can be written as:
+\begin{equation}\label{cacchiocacchio}
+\ln M^2 = \ln m^2(\mu) + 2h^{(1)}(\mu)a^{(n)}(\mu)+\mathcal{O}([a^{(n)}]^2)\,.
+\end{equation}
+Therefore it is straightforward to see that:
+\begin{equation}
+L_{\mu M}  = L_{\mu m} - 2h^{(1)}a^{(n)}=L_{\mu m}-\left(\frac{32}3+8L_{\mu m}\right)a^{(n)}\,,
+\end{equation}
+so that:
+\begin{equation}\label{alphasmsbar}
+\frac{a^{(n-1)}(\mu)}{a^{(n)}(\mu)}=1-\frac23 L_{\mu m}a^{(n)}(\mu)+\left(\frac49L_{\mu m}^2-\frac{22}3L_{\mu m}+\frac{22}9\right)[a^{(n)}(\mu)]^2\,.
+\end{equation}
+
+Now, in order to get rid of the logarithmic terms, we choose to match $a^{(n-1)}$ and $a^{(n)}$ at $\mu=m(\mu)=m(m)$ so that we get:
+\begin{equation}
+a^{(n-1)}(m)=a^{(n)}(m)\left(1+\frac{22}9[a^{(n)}(m)]^2\right)\,,
+\end{equation}
+which can be easily inverted obtaining:
+\begin{equation}\label{pollopollo}
+a^{(n)}(m)=a^{(n-1)}(m)\left(1-\frac{22}9[a^{(n-1)}(m)]^2\right)\,.
+\end{equation}
+
+So, exactly as it happened in the case of the pole mass, also in the $\overline{\mbox{MS}}$ mass case we can make the matching condition for $\alpha_s$ start to play a role only at NNLO. But the difference is that now the coefficient of the matching is $-22/9$ rather than $14/3$. It is interesting to observe that, in order to perform the matching as described above, we just need to know the value of $m(m)$. This is the so called RG-invariant $\overline{\mbox{MS}}$ mass and this will be given as input parameter in place of the pole mass $M$. It is not by chance that the PDG provides exactly the values for $m_c(m_c)$ and $m_b(m_b)$. This finally allows to evaluate the values of $a$ and $a_0$ that enter in eq. (\ref{ansol}) needed to compute the running of $m(\mu)$. 
+
+\subsection{Matching of $m(\mu)$}
+
+On the other hand, also the running of $m(\mu)$ needs to be matched. In particular, we might need to match the $(n-1)$ with $(n)$ scheme of the mass $m_q(\mu)$, with $q=c,b,t$, being $m_h(\mu)$, with again $h=c,b,t$ the $n$-th threshold. From eqs. (26) and (27) of \cite{Chetyrkin:2000yt} one reads that:
+\begin{equation}\label{mqmc}
+\frac{m_q^{(n-1)}(\mu)}{m_q^{(n)}(\mu)}=1+\left(\frac43L_{\mu m}^{(h)2}-\frac{20}9L_{\mu m}^{(h)}+\frac{89}{27}\right)[a^{(n)}(\mu)]^2\,,
+\end{equation}
+where:
+\begin{equation}
+L_{\mu m}^{(h)} =\ln\frac{\mu^2}{m_h^2(\mu)}\,.
+\end{equation}
+Exactly as before, if we choose to match the two schemes at the scale $\mu=m_h(\mu)=m_h(m_h)$, the logarithmic terms vanish and we are left with:
+\begin{equation}
+m_q^{(n-1)}(m_h)=\left(1+\frac{89}{27}[a^{(n)}(m_h)]^2\right)m_q^{(n)}(m_h)=\zeta_n^{(\mbox{\tiny down})}(m_h)m_q^{(n)}(m_h)
+\end{equation}
+whose inverse is:
+\begin{equation}
+m_q^{(n)}(m_h)=\left(1-\frac{89}{27}[a^{(n-1)}(m_h)]^2\right)m_q^{(n-1)}(m_h)=\zeta_n^{(\mbox{\tiny up})}(m_h)m_q^{(n-1)}(m_h)
+\end{equation}
+
+\subsubsection{Implementation of the Running in the VFN Scheme}
+
+In this section we will see how the running for $m_q(\mu)$ in VFN scheme can be implemented in terms of the $\overline{\mbox{MS}}$ masses. Let us start with an example: we want to show how to compute $m_c^{(5)}(\mu)$, assuming that $m_b<\mu<M_Z$. Our input parameters are $a_s^{(5)}(M_Z)$, $m_c^{(4)}(m_c)$ and $m_b^{(5)}(m_b)$. First of all, starting from $a_s^{(5)}(M_Z)$, using the equation for the running and the matching condition in eq. (\ref{pollopollo}), we evaluate in order: $a_s^{(5)}(\mu)$, $a_s^{(5)}(m_b)$, $a_s^{(4)}(m_b)$ and $a_s^{(4)}(m_c)$. Once we have this values, we use eq. (\ref{numsol}) to write the evolution as follows:
+\begin{equation}
+m_c^{(5)}(\mu) = m_c^{(4)}(m_c)\underbrace{\exp\left[\int_{a_s^{(4)}(m_c)}^{a_s^{(4)}(m_b)}\frac{\gamma_m^{(4)}(a)}{\beta^{(4)}(a)}da\right]}_{E_m^{(4)}(m_c,m_b)}\zeta_5^{(\mbox{\tiny up})}(m_b)\underbrace{\exp\left[\int_{a_s^{(5)}(m_b)}^{a_s^{(5)}(\mu)}\frac{\gamma_m^{(5)}(a)}{\beta^{(5)}(a)}da\right]}_{E_m^{(5)}(m_b,\mu)}\,,
+\end{equation}
+where, using eq. (\ref{ansol}) up to NNLO, we have that:
+\begin{equation}
+\begin{array}{l}
+\displaystyle E_m^{(4)}(m_c,m_b)=\left(\frac{a_s^{(4)}(m_b)}{a_s^{(4)}(m_c)}\right)^{c_0}\frac{1+(c_1-b_1c_0)a_s^{(4)}(m_b)+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2][a_s^{(4)}(m_b)]^2}{1+(c_1-b_1c_0)a_s^{(4)}(m_c)+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2][a_s^{(4)}(m_c)]^2}\\
+\\
+\displaystyle E_m^{(5)}(m_b,\mu)=\left(\frac{a_s^{(5)}(\mu)}{a_s^{(5)}(m_b)}\right)^{c_0}\frac{1+(c_1-b_1c_0)a_s^{(5)}(\mu)+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2][a_s^{(5)}(\mu)]^2}{1+(c_1-b_1c_0)a_s^{(5)}(m_b)+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2][a_s^{(5)}(m_b)]^2}\,,
+\end{array}
+\end{equation}
+where we are also assuming that the coefficients $b_i$ and $c_i$, given in eq. (\ref{jhgkgfkgf}), in $E_1$ are compute with $N_f=4$ while in $E_2$ with $N_f=5$.
+
+Looking a the above example and noticing that:
+\begin{equation}
+E_m^{(i)}(\mu_1,\mu_2) = \frac1{E_m^{(i)}(\mu_2,\mu_1) }\,,
+\end{equation}
+one can write down the general pattern for the mass evolution of the charm:
+\begin{equation}
+m_c^{(n)}(\mu)=\left\{
+\begin{array}{ll}
+\displaystyle \frac{1}{E_m^{(3)}(\mu,m_c)}\zeta_4^{(\mbox{\tiny down})}(m_c)m_c^{(4)}(m_c)&\quad \mu<m_c\\
+\\
+\displaystyle m_c^{(4)}(m_c)E_m^{(4)}(m_c,\mu)&\quad m_c\leq\mu<m_b\\
+\\
+\displaystyle m_c^{(4)}(m_c)E_m^{(4)}(m_c,m_b)\zeta_5^{(\mbox{\tiny up})}(m_b)E_m^{(5)}(m_b,\mu)&\quad m_b\leq\mu<m_t\\
+\\
+\displaystyle m_c^{(4)}(m_c)E_m^{(4)}(m_c,m_b)\zeta_5^{(\mbox{\tiny up})}(m_b)E_m^{(5)}(m_b,m_t)\zeta_6^{(\mbox{\tiny up})}(m_t)E^{(6)}(m_t,\mu)&\quad\mu \geq m_t
+\end{array}\right.
+\end{equation}
+and guess also the pattern for bottom:
+\begin{equation}
+m_b^{(n)}(\mu)=\left\{
+\begin{array}{ll}
+\displaystyle \frac{1}{E_m^{(3)}(\mu,m_c)}\zeta_4^{(\mbox{\tiny down})}(m_c)\frac{1}{E_m^{(4)}(m_c,m_b)}\zeta_5^{(\mbox{\tiny down})}(m_b)m_b^{(5)}(m_b)&\quad \mu<m_c\\
+\\
+\displaystyle \frac{1}{E_m^{(4)}(\mu,m_b)}\zeta_5^{(\mbox{\tiny down})}(m_b)m_b^{(5)}(m_b)&\quad m_c\leq\mu<m_b\\
+\\
+\displaystyle m_b^{(5)}(m_b)E_m^{(5)}(m_b,\mu)&\quad m_b\leq\mu<m_t\\
+\\
+\displaystyle m_b^{(5)}(m_b)E_m^{(5)}(m_b,m_t)\zeta_6^{(\mbox{\tiny up})}(m_t)E^{(6)}(m_t,\mu)&\quad\mu \geq m_t
+\end{array}\right.
+\end{equation}
+and top:
+\begin{equation}
+m_t^{(n)}(\mu)=\left\{
+\begin{array}{ll}
+\displaystyle \frac{1}{E_m^{(3)}(\mu,m_c)}\zeta_4^{(\mbox{\tiny down})}(m_c)\frac{1}{E_m^{(4)}(m_c,m_b)}\zeta_5^{(\mbox{\tiny down})}(m_b)\frac{1}{E_m^{(5)}(m_b,m_t)}\zeta_6^{(\mbox{\tiny down})}(m_t)m_t^{(6)}(m_t)&\quad \mu<m_c\\
+\\
+\displaystyle \frac{1}{E_m^{(4)}(\mu,m_b)}\zeta_5^{(\mbox{\tiny down})}(m_b)\frac{1}{E_m^{(5)}(m_b,m_t)}\zeta_6^{(\mbox{\tiny down})}(m_t)m_t^{(6)}(m_t)&\quad m_c\leq\mu<m_b\\
+\\
+\displaystyle \frac{1}{E_m^{(5)}(\mu,m_t)}\zeta_6^{(\mbox{\tiny down})}(m_t)m_t^{(6)}(m_t)&\quad m_b\leq\mu<m_t\\
+\\
+\displaystyle m_t^{(6)}(m_t)E^{(6)}(m_t,\mu)&\quad\mu \geq m_t
+\end{array}\right.\,.
+\end{equation}
+
+As one can see from the above equations, having the evolution equation for a given number of active flavours, having the matching conditions and having the input parameters $m_i^{(n)}(m_i)$ we can evaluate the value of $m_i(\mu)$ in the VFN scheme for any value of $\mu$. Notice that we are assuming that the input parameters $m_i(m_i)$ are always given just beyond the threshold, i.e. we assume them to be equal to $m_c^{(4)}(m_c)$, $m_b^{(5)}(m_b)$ and $m_t^{(6)}(m_t)$. 
+
+In the FFN scheme with $N_f$ flavours, instead, the situation is much
+easier. In fact, the evolution reduces to(\footnote{It should be
+  noticed that when considering the FFNS the number of active flavours
+  stays the same for all scales. In particular, given that in the
+  approach discussed above the number of active flavours for each of
+  the input masses $m_i(m_i)$ is assumed to be equal to the number of
+  flavours right above the tresholds ($e.g.$ $m_c^{(4)}(m_c)$), this
+  is not the same parameter as $m_c^{(3)}(m_c)$ that instead would be
+  used in the $N_f=3$ FFNS. In fact, beyond NLO, due to the presence
+  of the matching conditions, they differ by $\mathcal{O}(\alpha_s)$
+  terms.}):
+\begin{equation}
+m_i^{(N_f)}(\mu) = m_i(m_i)E_m^{(N_f)}(m_i,\mu)\,.
+\end{equation} 
+
+
+\subsection{PDFs}
+
+Now we see how to replace the pole mass with the
+$\overline{\mbox{MS}}$ mass in the matching conditions for the
+PDFs. One can write the singlet and the gluon in the $N_f+1$ scheme in
+terms of singlet and gluon in $N_f$ scheme at any scale $\mu$ as
+follows(\footnote{It should be noticed that $a_s$ enetring
+  eq.~(\ref{couple1})} is undersato to be in the $N_f$ scheme.):
+\begin{equation}\label{couple1}
+\begin{array}{c}
+\displaystyle {\Sigma^{(N_f+1)}(\mu) \choose g^{(N_f+1)}(\mu)}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s\tilde{A}^{S,(1)}_{hg}+a_s^2\tilde{A}^{S,(2)}_{hg}\\
+a_s^2A^{S,(2)}_{gq,h} & 1+a_sA_{gg,h}^{S,(1)}+a_s^2A_{gg,h}^{S,(2)}\end{pmatrix}\left(x,\frac{\mu^2}{M^2}\right){\Sigma^{(N_f)}(\mu) \choose g^{(N_f)}(\mu)}\,,
+\end{array}
+\end{equation}
+where the form of the ($x$-space) functions entering the
+transformation matrix above are given in Appendix B of
+\cite{Buza:1996wv} and where the "1"s are indeed delta functions. We
+notice here that, at the generic scale $\mu$, also the
+$\mathcal{O}(a_s)$ functions $\tilde{A}^{S,(1)}_{hg}$ and
+$A_{gg,h}^{S,(1)}$ are there. But given that they are both
+proportional to $\ln(\mu^2/M^2)$, they disappear if one chooses to
+perform the matching at the threshold $\mu=M$. We omit the matching
+conditions for the non-singlet PDFs because such $\mathcal{O}(a_s)$
+functions are not present there and they are the point of the
+discussion.
+
+Now, if we want to replace the pole mass $M$ with the
+$\overline{\mbox{MS}}$ mass $m(\mu)$, we just have to plug
+eq. (\ref{cacchiocacchio}) into eq. (\ref{couple1}). In the
+$\mathcal{O}(a_s^2)$ functions the second term in the l.h.s. of
+eq. (\ref{cacchiocacchio}) would give rise to subleading
+terms. Therefore in those functions it is enough to replace $M$ with
+$m(\mu)$. On the other hand, the second term in the l.h.s. of
+eq. (\ref{cacchiocacchio}) is important in the $\mathcal{O}(a_s)$
+functions. Since both the functions $\tilde{A}^{S,(1)}_{hg}$ and
+$A_{gg,h}^{S,(1)}$ are proportional to $\ln(\mu^2/M^2)$, they can be
+written as:
+\begin{equation}\label{ahciccio!}
+\begin{array}{l}
+\displaystyle \tilde{A}^{S,(1)}_{hg}\left(x,\frac{\mu^2}{M^2}\right) = f_1(x)\ln\frac{\mu^2}{M^2}\\
+\\
+\displaystyle A^{S,(1)}_{gg,h}\left(x,\frac{\mu^2}{M^2}\right) = f_2(x)\ln\frac{\mu^2}{M^2}
+\end{array}\,,
+\end{equation}
+where:
+\begin{equation}\label{ahbelli!}
+\begin{array}{l}
+\displaystyle f_1(x)= 4 T_R[x^2+(1-x)^2]\\
+\\
+\displaystyle f_2(x)= -\frac43 T_R \delta(1-x)
+\end{array}\,.
+\end{equation}
+Replacing $M$ with $m$ in eqs. (\ref{ahciccio!}) using eq. (\ref{cacchiocacchio}), we get:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \tilde{A}^{S,(1)}_{hg}\left(x,\frac{\mu^2}{m^2}\right) = f_1(x)\ln\frac{\mu^2}{m^2}-2h^{(1)}(\mu)f_1(x)a_s(\mu)\\
+\\
+\displaystyle A^{S,(1)}_{gg,h}\left(x,\frac{\mu^2}{m^2}\right) = f_2(x)\ln\frac{\mu^2}{m^2}-2h^{(1)}(\mu)f_2(x)a_s(\mu)
+\end{array}\,.
+\end{equation}
+Therefore eq. (\ref{couple1}) in terms of $m$ becomes:
+\begin{equation}
+\begin{array}{c}
+\displaystyle {\Sigma^{(N_f+1)}\choose g^{(N_f+1)}}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s\tilde{A}^{S,(1)}_{hg}+a_s^2[\tilde{A}^{S,(2)}_{hg}-2h^{(1)}f_1]\\
+a_s^2A^{S,(2)}_{gq,h} & 1+a_sA_{gg,h}^{S,(1)}+a_s^2[A_{gg,h}^{S,(2)}-2h^{(1)}f_2]\end{pmatrix}\left(x,\frac{\mu^2}{m^2}\right){\Sigma^{(N_f)} \choose g^{(N_f)}}
+\end{array}\,.
+\end{equation}
+
+Given that our code works in the Mellin space, the functions in eq. (\ref{ahbelli!}) need to be Mellin-transformed obtaining:
+\begin{equation}\label{ahbellissimi!}
+\begin{array}{l}
+\displaystyle f_1(N) = \mathbf{M}[f_1(x)])(N)= 4 T_R\left[\frac2{N+2}-\frac2{N+1}+\frac1N\right]\\
+\\
+\displaystyle f_2(N) = \mathbf{M}[f_2(x)])(N)= -\frac43 T_R
+\end{array}
+\end{equation}
+
+Now, we choose to match $N_f+1$ and $N_f$ schemes at $\mu = m(\mu) = m(m)$ so that all the logarithmic terms vanish (including the functions $\tilde{A}^{S,(1)}_{hg}$ and $A_{gg,h}^{S,(1)}$) obtaining:
+\begin{equation}
+\begin{array}{c}
+\displaystyle {\Sigma^{(N_f+1)}\choose g^{(N_f+1)}}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s^2[\tilde{A}^{S,(2)}_{hg}-2h^{(1)}f_1]\\
+a_s^2A^{S,(2)}_{gq,h} & 1+a_s^2[A_{gg,h}^{S,(2)}-2h^{(1)}f_2]\end{pmatrix}(x){\Sigma^{(N_f)} \choose g^{(N_f)}}\,.
+\end{array}
+\end{equation}
+
+Again, as it happened in the the pole mass case, if one chooses
+cleverly the matching point also in the $\overline{\mbox{MS}}$ mass
+case the matching conditions for PDFs start to play a role only at
+NNLO, but the difference now is that some coefficients of the matching
+matrix for gluon and singlet result modified by some simple functions.
+
+One might want to invert the matching conditions for PDFs and
+considerig that eq~(\ref{couple1}) can be written as:
+\begin{equation}\label{couple1exp}
+\begin{array}{c}
+\displaystyle {\Sigma^{(N_f+1)}(\mu) \choose g^{(N_f+1)}(\mu)}=\left[
+\begin{pmatrix}
+1 & 0 \\
+0 &1
+\end{pmatrix}
++a_s
+\begin{pmatrix}
+0 & \tilde{A}^{S,(1)}_{hg}\\
+0 & A_{gg,h}^{S,(1)}
+\end{pmatrix}
++a_s^2
+\begin{pmatrix}
+[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & \tilde{A}^{S,(2)}_{hg}\\
+A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}
+\end{pmatrix}
+\right]
+{\Sigma^{(N_f)}(\mu) \choose g^{(N_f)}(\mu)}\,,
+\end{array}
+\end{equation}
+and using the expansion:
+\begin{equation}
+\frac{1}{1+b_1x+b_2x^2} =  1-b_1x-(b_2-b_1^2)x^2 + \mathcal{O}(x^3)\,,
+\end{equation}
+we can immediately write:
+\begin{equation}\label{couple1expInv}
+\begin{array}{c}
+\displaystyle {\Sigma^{(N_f)}(\mu) \choose g^{(N_f)}(\mu)}=\left[
+\begin{pmatrix}
+1 & 0 \\
+0 &1
+\end{pmatrix}
+-a_s
+\begin{pmatrix}
+0 & \tilde{A}^{S,(1)}_{hg}\\
+0 & A_{gg,h}^{S,(1)}
+\end{pmatrix}
+-a_s^2
+\begin{pmatrix}
+[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & \tilde{A}^{S,(2)}_{hg}
+- \tilde{A}^{S,(1)}_{hg} \otimes A_{gg,h}^{S,(1)} \\
+A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)} - A_{gg,h}^{S,(1)} \otimes A_{gg,h}^{S,(1)}
+\end{pmatrix}
+\right]
+{\Sigma^{(N_f+1)}(\mu) \choose g^{(N_f+1)}(\mu)}\,,
+\end{array}
+\end{equation}
+and using eqs.~(\ref{ahciccio!}) and~(\ref{ahbelli!}), we get:
+\begin{equation}
+ \begin{array}{l}
+\displaystyle   - \tilde{A}^{S,(1)}_{hg} \otimes A_{gg,h}^{S,(1)} =
+   \frac{16}{3}T_R^2\left[x^2+(1-x)^2\right]\ln^2\frac{\mu^2}{M^2} = \frac{4}{3}T_R \ln\frac{\mu^2}{M^2}\tilde{A}^{S,(1)}_{hg}\\
+\\
+\displaystyle - A_{gg,h}^{S,(1)} \otimes A_{gg,h}^{S,(1)} =
+   - \frac{16}{9}T_R^2\delta(1-x) \ln^2\frac{\mu^2}{M^2} = \frac{4}{3}T_R \ln\frac{\mu^2}{M^2}A_{gg,h}^{S,(1)}
+   \end{array}
+\end{equation}
+
+\subsection{Renormalization Scale Variation}
+
+The scale $\mu$ that appears in the running of $a_s$ and $m_q$ is the
+\textit{renormalization} scale, which now we will indicate as $\mu_R$,
+while the scale that explicitly appears in the PDF evolution is the
+\textit{factorization} scale, which now we will call $\mu_F$, and in
+principle they could be taken different and in general one can write
+$\mu_R = \kappa \mu_F$, where $\kappa$ can be any real
+number(\footnote{It should be noticed that in the case $\kappa\neq1$
+PDFs aquire an implicit dependence on $\mu_R$ that essentially comes
+from the redefinition of the splitting functions that in turn derives
+from the expansion of $\alpha_s(\mu_R)$ around $\mu_R=\mu_F$ that
+appears in the DGLAP equation.}).
+
+What one usually does for the choice of the matching points is to set
+$\mu_F$ to heavy quark thresholds ($M_c$, $M_b$ and $M_t$ in the Pole
+Mass scheme and $m_c(m_c)$, $m_b(m_b)$ and $m_t(m_t)$ in the
+$\overline{\mbox{MS}}$ scheme). In this way the logarithmic terms in
+the PDF matching conditions are assured to vanish guaranteeing the
+same matching pattern for PDFs. But if $\kappa$ is different from one,
+the logarithmic terms in the matching conditions for $a_s(\mu_R)$ and
+$m_q(\mu_R)$ don't vanish anymore. This is exactly the case when one
+wants to perform the renormalization scale variation and in the
+following we will just show how to implement the matching condition
+for $a_s$ and $m_q$ in terms of $\kappa$.
+
+\subsection{$\alpha_s$}
+Let us start with $\alpha_s$. Using the expansion:
+\begin{equation}
+x=\frac{y}{1+b_1x+b_2x^2} = y\left[1-b_1x-(b_2-b_1^2)x^2 + \mathcal{O}(x^3)\right] = y \left[1-b_1y-(b_2-2b_1^2)y^2 + \mathcal{O}(y^3)\right]
+\end{equation}
+we can invert eqs. (\ref{alphaspole}) and (\ref{alphasmsbar}) obtaining:
+\begin{equation}
+\frac{a^{(n)}(\mu_R)}{a^{(n-1)}(\mu_R)} = 1 + c_1a^{(n-1)}(\mu_R) + c_2 [a^{(n-1)}(\mu_R)]^2
+\end{equation}
+where:
+\begin{equation}
+c_1 = \left\{
+\begin{array}{ll}
+\displaystyle \frac23 L_{\mu M}&\quad\mbox{Pole Mass}\\
+\\
+\displaystyle \frac23 L_{\mu m}&\quad\overline{\mbox{MS}}
+\end{array}\right.\quad\mbox{and}\quad
+c_2 = \left\{
+\begin{array}{ll}
+\displaystyle \frac49L_{\mu M}^2+\frac{38}3L_{\mu M}+\frac{14}3 &\quad\mbox{Pole Mass}\\
+\\
+\displaystyle \frac49L_{\mu m}^2+\frac{22}3L_{\mu m}-\frac{22}9&\quad\overline{\mbox{MS}}
+\end{array}\right.
+\end{equation}
+
+Now, setting $\mu_F=\kappa \mu_F$ we have that:
+$$
+L_{\mu M} = \ln\frac{\mu_R}{M}=\ln\frac{\kappa\mu_F}{M}\quad\mbox{and}\quad L_{\mu m} = \ln\frac{\mu_R}{m(\mu_R)}=\ln\frac{\kappa\mu_F}{m(\kappa \mu_F)}\,.
+$$
+In the case of the pole mass scheme, choosing $\mu_F = M$, we have directly that $L_{\mu M}\rightarrow \ln\kappa$ so that the full matching condition reads:
+\begin{equation}
+a^{(n-1)}(\kappa M)=a^{(n)}(\kappa M)\left\{1-\frac23\ln\kappa\,a^{(n)}(\kappa M)+\left(\frac49\ln^2\kappa-\frac{38}3\ln\kappa-\frac{14}3\right)[a^{(n)}(\kappa M)]^2\right\}
+\end{equation}
+and:
+\begin{equation}
+a^{(n)}(\kappa M)=a^{(n-1)}(\kappa M)\left\{1+\frac23\ln\kappa\,a^{(n-1)}(\kappa M)+\left(\frac49\ln^2\kappa+\frac{38}3\ln\kappa+\frac{14}3\right)[a^{(n-1)}(\kappa M)]^2\right\}\,.
+\end{equation}
+In the case of the $\overline{\mbox{MS}}$ mass scheme, instead, one chooses $\mu_F = m(m)$, so that:
+\begin{equation}
+L_{\mu m} \rightarrow \ln\kappa + \ln\frac{m(m)}{m(\kappa m)}\,.
+\end{equation}
+From eq. (\ref{numsol}) we see that:
+\begin{equation}\label{chezebedei}
+\ln\frac{m(m)}{m(\kappa m)}=\int_{a_s(\kappa m)}^{a_s(m)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s\,,
+\end{equation}
+and integrating, from eq. (\ref{integral}), we have that:
+\begin{equation}\label{hdsfgajfh}
+\int_{a_s(\kappa m)}^{a_s(m)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s = c_0\ln\frac{a_s(m)}{a_s(\kappa m)} + (c_1-b_1c_0)[a_s(m)-a_s(\kappa m)]+\dots\,.
+\end{equation}
+But from the perturbative expansion of the running of $a_s$ we have:
+\begin{equation}
+a_s(m) = a_s(\kappa m)\left[1-a_s(\kappa m)\beta_0\ln\kappa\right]\quad\Rightarrow\quad a_s(m)-a_s(\kappa m) = \mathcal{O}[a_s^2(\kappa m)]\,,
+\end{equation}
+therefore the second term in the braket of the r.h.s. of eq. (\ref{hdsfgajfh}), being of order $a_s^2(\kappa m)$, can be neglected because it would contribute only to the term proportional to $a_s^3(\kappa m)$. On the other hand: 
+\begin{equation}
+\ln\frac{a_s(m)}{a_s(\kappa m)} = \ln\left[1-a_s(\kappa m)\beta_0\ln\kappa \right]=a_s(\kappa m)\beta_0\ln\kappa+\mathcal{O}[a_s^2(\kappa m)]\,.
+\end{equation}
+At the end of the day we find:
+\begin{equation}
+\ln\frac{m(m)}{m(\kappa m)}=a_s(\kappa m)\gamma_m^{(0)}\ln\kappa+\mathcal{O}[a_s^2(\kappa m)]
+\end{equation}
+so that:
+\begin{equation}\label{bugni}
+L_{\mu m} \rightarrow \ln\kappa[1+\gamma_m^{(0)}a_s(\kappa m)]\,.
+\end{equation}
+In the above equation, since $a_s^{(n-1)}=a_s^{(n)}+\mathcal{O}([a_s^{(n)}]^2)$, it doesn't matter whether one puts $a_s^{(n)}(\kappa m)$ or $a_s^{(n-1)}(\kappa m)$ because in any case the difference would be subleading.
+
+Therefore, setting $\mu=\mu_R=\kappa m(m) = \kappa m$ into eq. (\ref{alphasmsbar}) and plugging eq. (\ref{bugni}), one gets:
+\begin{equation}
+a^{(n-1)}(\kappa m)=a^{(n)}(\kappa m)\left\{1-\frac23 \ln\kappa\,a^{(n)}(\kappa m)+\left[\frac49\ln^2\kappa-\frac{2}3\left(\gamma_m^{(0)}+11\right)\ln\kappa+\frac{22}9\right][a^{(n)}(\kappa m)]^2\right\}\,,
+\end{equation}
+whose inverse is:
+\begin{equation}
+a^{(n)}(\kappa m)=a^{(n-1)}(\kappa m)\left\{1+\frac23 \ln\kappa\,a^{(n-1)}(\kappa m)+\left[\frac49\ln^2\kappa+\frac{2}3\left(\gamma_m^{(0)}+11\right)\ln\kappa-\frac{22}9\right][a^{(n-1)}(\kappa m)]^2\right\}\,.
+\end{equation}
+
+
+\subsection{$m_q$}
+
+Now let us turn to $m_q$. In this case everything is much easier. First of all, we work only in the $\overline{\mbox{MS}}$ scheme, secondly, given that also for an arbitary matching point the matching condition for the running of the $\overline{\mbox{MS}}$ mass starts at $\mathcal{O}(\alpha_s^2)$ (cfr. eq. (\ref{mqmc})), writing $L_{\mu m}$ in terms of $\ln\kappa$ would give rise to subleading terms (see eq. (\ref{bugni})). It turns out that the matching condition for the running of the $\overline{\mbox{MS}}$ mass in terms of $\ln\kappa$ looks like this:
+\begin{equation}
+m_q^{(n-1)}(\kappa m_h)=\left[1+\left(\frac43\ln^2\kappa-\frac{20}9\ln\kappa+\frac{89}{27}\right)[a^{(n)}(\kappa m_h)]^2\right]m_q^{(n)}(\kappa m_h)=\zeta_n^{(\mbox{\tiny down})}(\kappa m_h)m_q^{(n)}(\kappa m_h)
+\end{equation}
+and the inverse is:
+\begin{equation}
+m_q^{(n)}(\kappa m_h)=\left[1-\left(\frac43\ln^2\kappa-\frac{20}9\ln\kappa+\frac{89}{27}\right)[a^{(n-1)}(\kappa m_h)]^2\right]m_q^{(n-1)}(\kappa m_h)=\zeta_n^{(\mbox{\tiny up})}(\kappa m_h)m_q^{(n-1)}(\kappa m_h)\,.
+\end{equation}
+
+\section{Structure Functions}
+
+\subsection{Neutral Current}
+
+In this section we discuss the explicit substitution of the $\overline{\mbox{MS}}$ mass in the NC massive structure functions ($F_2$ and $F_L$). In our notation we define:
+\begin{equation}
+M =\;\mbox{pole mass},\quad m\equiv m(\mu) =\;\overline{\mbox{MS}}\mbox{ mass},\quad a_s\equiv a_s(\mu),\quad h^{(l)}\equiv h^{(l)}(\mu,m(\mu))\,.
+\end{equation}
+
+Dropping all the unnecessary dependences, the NC massive structure function up to $\mathcal{O}(a_s^2)$ has the form:
+\begin{equation}
+F(M) = a_sF^{(0)}(M) + a_s^2F^{(1)}(M) + \mathcal{O}(a_s^3)\,.
+\end{equation}
+Now we want to explicitly replace the pole mass $M$ with the $\overline{\mbox{MS}}$ mass $m$ using eq. (\ref{inverse}), which in short reads:
+\begin{equation}
+M = m(1 + a_sh^{(1)}) + \mathcal{O}(a_s^2)
+\end{equation}
+To this end we expand $F^{(0)}(M)$ and $F^{(1)}(M)$ around $M=m$ using the Taylor series in thy way:
+\begin{equation}
+F^{(l)}(M) = \sum_{n=0}^{\infty}\frac1{n!}\frac{d^n F^{(l)}}{dM^n}\bigg|_{M=m}(M-m)^n\,,
+\end{equation}
+so that, up to $\mathcal{O}(a_s^2)$, what we need is:
+\begin{equation}
+\begin{array}{l}
+\displaystyle F^{(0)}(m) = F^{(0)}(m) + \frac{dF^{(0)}}{dM}\bigg|_{M=m}\underbrace{(M-m)}_{a_smh^{(1)}} = F^{(0)}(m) + a_smh^{(1)}\frac{dF^{(0)}}{dM}\bigg|_{M=m}\\
+\\
+\displaystyle F^{(1)}(M) = F^{(1)}(m)
+\end{array}\,.
+\end{equation}
+Finally we have that:
+\begin{equation}\label{changescheme}
+F(m) = a_sF^{(0)}(m) + a_s^2\left[F^{(1)}(m)+mh^{(1)}\frac{dF^{(0)}}{dM}\bigg|_{M=m}\right]\,.
+\end{equation}
+
+In order to implement this structure function, we need to evaluate explicitly the derivative in eq. (\ref{changescheme}). First of all we observe that:
+\begin{equation}\label{pippo}
+F^{(0)}(M) = x\int_x^{x_{\mbox{\tiny max}}(M)} \frac{dz}{z}g\left(\frac{x}{z}\right)C_g^{(0)}(\eta(z,M),\xi(M),\chi(M))\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+x_{\mbox{\tiny max}}(M)=\frac1{1+\frac{4M^2}{Q^2}},\quad\eta(z,M) = \frac{Q^2}{4M^2}\left(\frac1z-1\right)-1,\quad \xi(M) =\frac{Q^2}{M^2},\quad \chi(M) =\frac{\mu^2}{M^2}\,.
+\end{equation}
+But defining:
+\begin{equation}
+G(z,M)=\frac{x}{z}g\left(\frac{x}{z}\right)C_g^{(0)}(\eta(z,M),\xi(M),\chi(M))\,,
+\end{equation}
+eq. (\ref{pippo}) can be written as:
+\begin{equation}
+F^{(0)}(M) = \int_x^{x_{\mbox{\tiny max}}(M)} dz\,G(z,M)\,.
+\end{equation}
+Therefore:
+\begin{equation}
+\begin{array}{c}
+\displaystyle \frac{dF^{(0)}}{dM} = \frac{d}{dM}\int_x^{x_{\mbox{\tiny max}}(M)} dzG(z,M) = \frac{d}{dM}\left[\widetilde{G}(x_{\mbox{\tiny max}}(M),M)-\widetilde{G}(x,M)\right]=\\
+\\
+\displaystyle \frac{d\widetilde{G}(x_{\mbox{\tiny max}}(M),M)}{dM}-\frac{d\widetilde{G}(x,M)}{dM}\,,
+\end{array}
+\end{equation}
+where $\widetilde{G}(z,M)$ is the primitive of $G(z,M)$ with respect of $z$ (i.e. $\partial\widetilde{G}/\partial z = G$). But:
+\begin{equation}
+\frac{d\widetilde{G}(x_{\mbox{\tiny max}}(M),M)}{dM} = \frac{\partial \widetilde{G}(x_{\mbox{\tiny max}},M)}{\partial M}+\frac{dx_{\mbox{\tiny max}}}{dM}\underbrace{\frac{\partial \widetilde{G}(x_{\mbox{\tiny max}},M)}{\partial x_{\mbox{\tiny max}}}}_{G(x_{\mbox{\tiny max}},M)}
+\end{equation}
+and:
+\begin{equation}
+\frac{d \widetilde{G}(x,M)}{d M}=\frac{\partial\widetilde{G}(x,M)}{\partial M}\,,
+\end{equation}
+thus:
+\begin{equation}\label{ignazio}
+\begin{array}{c}
+\displaystyle \frac{dF^{(0)}}{dM} = \frac{\partial \widetilde{G}(x_{\mbox{\tiny max}},M)}{\partial M}-\frac{\partial\widetilde{G}(x,M)}{\partial M}+\frac{dx_{\mbox{\tiny max}}}{dM}G(x_{\mbox{\tiny max}},M) =\\
+\\
+\displaystyle \int_x^{x_{\mbox{\tiny max}}(M)} dz\frac{\partial G(z,M)}{\partial M}+\frac{dx_{\mbox{\tiny max}}}{dM}G(x_{\mbox{\tiny max}},M)\,.
+\end{array}
+\end{equation}
+But in \cite{Alekhin:2010sv} has been shown that the bounduary term in eq. (\ref{ignazio}) vanishes, thus it can be omitted.
+
+Finally, since:
+\begin{equation}
+\frac{\partial G(z,M)}{\partial M} = \frac{x}{z}g\left(\frac{x}{z}\right)\frac{\partial C_g^{(0)}}{\partial M}\,,
+\end{equation}
+we have that:
+\begin{equation}\label{pollo}
+\frac{dF^{(0)}}{dM}\bigg|_{M=m}=\left[x\int_x^{x_{\mbox{\tiny max}}(M)}\frac{dz}{z}g\left(\frac{x}{z}\right)\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}=x\int_x^{x_{\mbox{\tiny max}}(m)}\frac{dz}{z}g\left(\frac{x}{z}\right)\left[\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}\,.
+\end{equation}
+
+Now, taking into account that:
+\begin{equation}
+F^{(1)}(M) = \sum_{i=q,\overline{q},g}x\int_x^{x_{\mbox{\tiny max}}(M)} \frac{dz}{z}q_i\left(\frac{x}{z}\right)C_i^{(1)}(z,M)
+\end{equation}
+and using eqs. (\ref{changescheme}) and (\ref{pollo}), one can explicitly write down the entire NNLO massive structure function in terms of the $\overline{\mbox{MS}}$ mass as follows:
+\begin{equation}\label{master}
+\begin{array}{c}
+\displaystyle F(m) = x\int_x^{x_{\mbox{\tiny max}}(m)} \frac{dz}{z}g\left(\frac{x}{z}\right)\left[a_sC_g^{(0)}(z,m)+a_s^2\left(C_g^{(1)}(z,m)+mh^{(1)}\left[\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}\right)\right]+\\
+\\
+\displaystyle \sum_{i=q,\overline{q}}x\int_x^{x_{\mbox{\tiny max}}(M)} \frac{dz}{z}q_i\left(\frac{x}{z}\right)a_s^2C_i^{(1)}(z,M)\,.
+\end{array}
+\end{equation}
+
+We can now read the recipe for the implementation: in order to implement the $\mathcal{O}(a_s^2)$ massive structure function ($F_2$ or $F_L$) in terms of the $\overline{\mbox{MS}}$ mass $m$, one has just to replace everywhere the pole mass $M$ with $m$ and add to the $\mathcal{O}(a_s^2)$ gluon coefficient function $C_g^{(1)}(z,m)$ the term:
+\begin{equation}
+m(\mu)h^{(1)}(\mu,m(\mu))\left[\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m(\mu)}\,.
+\end{equation}
+
+Of course, for the massless limit of the massive structure function (massive0) the same recipe holds, with the only obvious difference that one has to replace the massive coefficient functions with the massive0 ones.
+
+Now we need to evaluate explicitly the derivative of $C_g^{(0)}$ in eq. (\ref{master}) and this must be done separately for $F_2$ and $F_L$. 
+
+\subsubsection{$F_2$}
+
+We consider first $F_2$. Since the NNPDF code works in the Mellin space, it is better to calculate directly the derivative of the Mellin transform of $C_{2,g}^{(0)}$, which in the massive case is:
+\begin{equation}
+\begin{array}{rl}
+\displaystyle C_{2,g}^{(0)}(N,Q^2,M^2)=&\displaystyle T_R\Big\{2(1-6\epsilon-4\epsilon^2)I_2(a,N)-2(1-2\epsilon)I_1(a,N)+I_0(a,N)+\\
+\\
+& \displaystyle -4(2-\epsilon)J_2(a,N)+4(2-\epsilon)J_1(a,N)-J_0(a,N)\Big\}\,,
+\end{array}
+\end{equation}
+where:
+\begin{equation}\label{iq}
+I_q(a,N) = \frac{a^{N+q}}{N+q}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)} {_2F_1}\left(\frac12,N+q,N+q+\frac12;a\right)
+\end{equation}
+\begin{equation}\label{jq}
+\begin{array}{rl}
+J_q(a,N) =&\displaystyle a^{N+q}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}\bigg\{{_2F_1}\left(\frac12,N+q,N+q+\frac12;a\right)\\
+\\
+&\displaystyle -\frac{N+q}{N+q+\frac12}{_2F_1}\left(\frac12,N+q+1,N+q+\frac32;a\right)\bigg\}
+\end{array}\,,
+\end{equation}
+with:
+\begin{equation}\label{definitions1}
+\epsilon = \frac{M^2}{Q^2}\quad\mbox{and}\quad a=\frac1{1+4\epsilon}\,.
+\end{equation}
+From the definitions in eq. (\ref{definitions1}) we obtain:
+\begin{equation}\label{gngngngngng}
+\begin{array}{rl}
+\displaystyle \frac{\partial}{\partial M} &\displaystyle = \frac{\partial \epsilon}{\partial M} \frac{\partial}{\partial \epsilon} = \frac{2\epsilon}{M}\frac{\partial}{\partial \epsilon}\\
+\\
+\displaystyle \frac{\partial}{\partial M} &\displaystyle = \frac{\partial \epsilon}{\partial M} \frac{\partial a}{\partial \epsilon} \frac{\partial}{\partial a} = -\frac{8a^2\epsilon}{M}\frac{\partial}{\partial a}
+\end{array}\,.
+\end{equation}
+Therefore:
+\begin{equation}
+\begin{array}{rl}
+\displaystyle \frac{\partial C_{2,g}^{(0)}}{\partial M}=&\displaystyle T_R\Bigg\{\frac{2\epsilon}M\Big[2(-6-8\epsilon)I_2+4I_1+4J_2-4J_1\Big]\\
+\\
+&\displaystyle -\frac{8a^2\epsilon}{M}\Bigg[2(1-6\epsilon-4\epsilon^2)\frac{\partial I_2}{\partial a}-2(1-2\epsilon)\frac{\partial I_1}{\partial a}+\frac{\partial I_0}{\partial a}\\
+\\
+& \displaystyle -4(2-\epsilon)\frac{\partial J_2}{\partial a}+4(2-\epsilon)\frac{\partial J_1}{\partial a}-\frac{\partial J_0}{\partial a}\Bigg]\Bigg\}\,.
+\end{array}
+\end{equation}
+Now, starting from eqs. (\ref{iq}) and (\ref{jq}), we need to evaluate the derivative of $I_q$ and $J_q$ and we do it using the relation valid for the derivative of the hypergeometric function:
+\begin{equation}
+\frac{\partial}{\partial x} {_2F_1}(a,b,c;x) = \frac{b}{x}\left[ {_2F_1}(a,b+1,c;x) - {_2F_1}(a,b,c;x)\right]\,,
+\end{equation}
+we have that:
+\begin{equation}
+\begin{array}{ll}
+\displaystyle \frac{d}{da} a^{N+q} {_2F_1}\left(\frac12,N+q,N+q+\frac12;a\right) = &\displaystyle a^{N+q-1}(N+q) {_2F_1}\left(\frac12,N+q+1,N+q+\frac12;a\right)\\
+\\
+\displaystyle \frac{d}{da} a^{N+q} {_2F_1}\left(\frac12,N+q+1,N+q+\frac32;a\right) = &\displaystyle a^{N+q-1}(N+q+1) {_2F_1}\left(\frac12,N+q+2,N+q+\frac32;a\right)\\
+&\displaystyle -a^{N+q-1}{_2F_1}\left(\frac12,N+q+1,N+q+\frac32;a\right)\,,
+\end{array}
+\end{equation}
+so that we get:
+\begin{equation}\label{diq}
+\begin{array}{rl}
+\displaystyle \frac{\partial I_q}{\partial a} &\displaystyle = a^{N+q-1}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}{_2F_1}\left(\frac12,N+q+1,N+q+\frac12;a\right)
+\end{array}
+\end{equation}
+and:
+\begin{equation}\label{djq}
+\begin{array}{rl}
+\displaystyle \frac{\partial J_q}{\partial a} &\displaystyle =  a^{N+q-1}\frac{\Gamma(N+q+1)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}\bigg\{{_2F_1}\left(\frac12,N+q+1,N+q+\frac12;a\right)\\
+\\
+&\displaystyle - \frac{N+q+1}{N+q+\frac12}{_2F_1}\left(\frac12,N+q+2,N+q+\frac32;a\right)\\
+\\
+&\displaystyle +\frac1{N+q+\frac12}{_2F_1}\left(\frac12,N+q+1,N+q+\frac32;a\right)\bigg\}\,.
+\end{array}
+\end{equation}
+
+Looking at these expressions, one can see that in these derivatives, a part from hypergeometric functions of the form ${_2F_1(a,b,a+b;x)}$ which were already present in $C_{2,g}^{(0)}$ itself, also hypergeometric functions of the form ${_2F_1(a,b,a+b-1;x)}$ appear. This raises a technical problem because the NNPDF code uses a fast routine for the hypergeometric function which is accurate both around $x=0$ and $x=1$, but with the limitation $c=a+b$. Now, instead, we need also the case ${c=a+b-1}$, therefore we need to extend our routine including this possibility. We can do this using the expansion around $x=1$ reported in eq. (15.3.12) of \cite{AbramowitzStegun}.
+
+Now we consider the NC massive0 structure function $F_2^0$. In this limit the gluon coefficient function takes the form:
+\begin{equation}
+\begin{array}{c}
+\displaystyle C_{2,g}^{0,(0)}(N,Q^2,M^2)=\\
+\\
+\displaystyle T_R\Bigg[2\left(\ln\frac{Q^2}{M^2}-4\right)\frac1{N+2}-2\left(\ln\frac{Q^2}{M^2}-4\right)\frac1{N+1}+\left(\ln\frac{Q^2}{M^2}-1\right)\frac1N\\
+\\
+\displaystyle -2\frac{S_1(N+2)}{N+2}+2\frac{S_1(N+1)}{N+1}-\frac{S_1(N)}{N}+\frac2{(N+2)^2}-\frac2{(N+1)^2}+\frac1{N^2}\Bigg]\,.
+\end{array}
+\end{equation}
+Therefore, considering that:
+\begin{equation}
+\frac{\partial}{\partial M} \ln\frac{Q^2}{M^2} = - \frac2M\,,
+\end{equation}
+the derivative of $C_{2,g}^{0,(0)}$ is given by:
+\begin{equation}
+\frac{\partial C_{2,g}^{0,(0)}}{\partial M}= -T_R\frac{2}{M}\left[\frac2{N+2}-\frac2{N+1}+\frac1N\right]
+\end{equation}
+
+\subsubsection{$F_L$}
+
+Now we consider $F_L$. In this case the Mellin transform of the gluon coefficient function takes the simpler form:
+\begin{equation}\label{cgnf1L}
+C_{L,g}^{(0)}\left(N,Q^2,M^2\right)= T_R\left[-8\epsilon I_2(a,N)-4J_2(a,N)+4J_1(a,N)\right]\,.
+\end{equation}
+where $I_q$ and $J_q$ are given in eqs. (\ref{iq}) and (\ref{jq}), respectively. Therefore, using eq. (\ref{gngngngngng}), we get:
+\begin{equation}
+\frac{\partial C_{L,g}^{(0)}}{\partial M}= T_R\left\{-\frac{16\epsilon}{M} I_2 -\frac{8a^2\epsilon}{M}\left[-8\epsilon \frac{\partial I_2}{\partial a}-4\frac{\partial J_2}{\partial a}+4\frac{\partial J_1}{\partial a}\right]\right\}
+\end{equation}
+where the derivatives of $I_q$ and $J_q$ with respect of $a$ are given in eqs. (\ref{diq}) and (\ref{djq}), respectively.
+
+The massive0 gluon coefficient function $C_{L,g}^{0,(0)}$, instead, turns out to be independent from $M$. This means that:
+\begin{equation}
+\frac{\partial C_{L,g}^{0,(0)}}{\partial M}= 0
+\end{equation}
+
+Finally, having the derivative with respect of $M$ of the $\mathcal{O}(a_s)$ gluon coefficient function for both $F_2$ and $F_L$ in both the massive and massive0 schemes, we can plug it into eq. (\ref{master}) and obtain the neutral current structure function in terms of the $\overline{\mbox{MS}}$ mass $m$.
+
+\subsection{Charged Current}
+
+In this section we consider the generic CC massive structure function. The treatment is exactly the same of the NC structure functions, with the only difference that the CC case they start at $\mathcal{O}(a_s^0)$ and they are presently known up to $\mathcal{O}(a_s)$. This means that their perturbative expansion in terms of the pole mass $M$ looks like this:
+\begin{equation}
+F_k(M) = F_k^{(0)}(M) + a_sF_k^{(1)}(M) + \mathcal{O}(a_s^2)\,,
+\end{equation}
+with $k=2,3,L$. Therefore, expanding $F^{(0)}$ and $F^{(1)}$ around $M=m$ and keeping only the terms up to $\mathcal{O}(a_s)$, one obtains:
+\begin{equation}\label{gigi}
+F_k(m) = F_k^{(0)}(m) + a_s\left[F_k^{(1)}(m)+mh^{(1)}\frac{dF_k^{(0)}}{dM}\bigg|_{M=m}\right]\,.
+\end{equation}
+
+One can show that:
+\begin{equation}
+F^{(0)}_k(M) = b_k(M)s'(\xi(M))\,,
+\end{equation}
+where:
+\begin{equation}\label{definitions}
+\xi = x\underbrace{\left(1+\frac{M^2}{Q^2}\right)}_{\frac1\lambda}=\frac{x}\lambda\quad\mbox{and}\quad
+\left\{\begin{array}{l}
+b_2 = \xi\\
+b_3 = 1\\
+b_L = (1-\lambda)\xi
+\end{array}
+\right.
+\end{equation}
+and where we have also defined:
+\begin{equation}
+s'\equiv 2|V_{cs}|^2s+2|V_{cd}|^2[f\,d+(1-f)u]\quad\mbox{with}\quad f=\frac{N_p}{N_p+N_n}\,.
+\end{equation}
+Therefore:
+\begin{equation}\label{pincopanco}
+mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = mh^{(1)}\frac{d\xi}{dM}\frac{dF^{(0)}_k}{d\xi}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\xi\left[\frac{db_k}{d\xi}s'(\xi)+b_k(\xi)\frac{ds'}{d\xi}\right]\bigg|_{M=m}\,,
+\end{equation}
+that can be conveniently rewritten as:
+\begin{equation}
+mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\left[\left(\frac{db_k}{d\xi}-\frac{b_k}{\xi}\right)+b_k(\xi)\frac{d}{d\xi}\right]\xi s'(\xi)\bigg|_{M=m}\,,
+\end{equation}
+so that, using eq.~(\ref{definitions}), we have that:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle mh^{(1)}\frac{dF^{(0)}_2}{dM}\bigg|_{M=m} &=& \displaystyle
+2h^{(1)}(1-\lambda)\xi\frac{d}{d\xi} \xi s'(\xi)\bigg|_{M=m}\\
+\\
+\displaystyle mh^{(1)}\frac{dF^{(0)}_3}{dM}\bigg|_{M=m} &=& \displaystyle
+2h^{(1)}(1-\lambda)\frac{1}{\xi}\left[ \xi\frac{d}{d\xi}-1\right]\xi
+s'(\xi)\bigg|_{M=m}\\
+\\
+\displaystyle mh^{(1)}\frac{dF^{(0)}_L}{dM}\bigg|_{M=m} &=& \displaystyle
+2h^{(1)}(1-\lambda)^2\xi \frac{d}{d\xi}\xi s'(\xi)\bigg|_{M=m}
+\end{array}\,.
+\end{equation}
+
+
+Eqs. (\ref{pincopanco}), though apparently very easy, involve the derivative of the PDF $s'$ and this makes the implementation a little bit more troblesome.
+
+Using the same arguments of eq. (\ref{ignazio}), one can show that:
+\begin{equation}
+\frac{ds'}{d\xi} = \frac{d}{d\xi}\int_\xi^1\frac{dy}{y}\delta(1-y)s'\left(\frac{\xi}{y}\right) = \int_\xi^1\frac{dy}{y}\delta(1-y)\frac{d}{d\xi}s'\left(\frac{\xi}{y}\right)\,.
+\end{equation}
+therefore eq. (\ref{pincopanco}) can be written as:
+\begin{equation}\label{pancopinco}
+mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\xi\int_\xi^1\frac{dy}{y}\delta(1-y)\left[\frac{db_k}{d\xi}+b_k(\xi)\frac{d}{d\xi}\right]s'\left(\frac{\xi}{y}\right)\,,
+\end{equation}
+where in the r.h.s. we are understanding that the pole mass $M$, which appears only through $\xi$, must be replaced everywhere with the $\overline{\mbox{MS}}$ mass $m$. But since:
+\begin{equation}
+\frac{d}{dx}f\left(\frac{x}{y}\right) = \frac1{y}\frac{d}{d\left(\frac{x}{y}\right)}f\left(\frac{x}{y}\right) = \frac1{xy}\frac{d}{d\left(\frac{1}{y}\right)}f\left(\frac{x}{y}\right)
+\end{equation}
+and:
+\begin{equation}
+d\left(\frac1y\right) = -\frac1{y^2}dy\quad\Rightarrow \quad \frac{d}{dx}f\left(\frac{x}{y}\right) = -\frac{y}{x}\frac{d}{dy}f\left(\frac{x}{y}\right)\,,
+\end{equation}
+it follows that:
+\begin{equation}
+\int_\xi^1\frac{dy}y\delta(1-y)\frac{d}{d\xi}s'\left(\frac{\xi}{y}\right) = -\int_\xi^1\frac{dy}\xi\delta(1-y)\frac{d}{dy}s'\left(\frac{\xi}{y}\right)\,.
+\end{equation}
+Now, integrating by parts the r.h.s. of the equation above, one gets:
+\begin{equation}
+\int_\xi^1\frac{dy}y\delta(1-y)\frac{d}{d\xi}s'\left(\frac{\xi}{y}\right)=\int_\xi^1\frac{dy}y\left\{\frac{y}{\xi}\left[\frac{d}{dy}\delta(1-y)\right]\right\}s'\left(\frac{\xi}{y}\right)\,.
+\end{equation}
+Therefore eq. (\ref{pancopinco}) can we rewritten as:
+\begin{equation}
+mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\xi\int_\xi^1\frac{dy}{y}\left\{\frac{db_k}{d\xi}\delta(1-y)+\frac{b_k(\xi)}{\xi}\left[y\frac{d}{dy}\delta(1-y)\right]\right\}s'\left(\frac{\xi}{y}\right)\,.
+\end{equation}
+In the above equation a coefficient function can be isolated and, considering the form of $b_k$ given in eq. (\ref{definitions}), we write:
+\begin{equation}\label{RoughCF}
+\begin{array}{l}
+\displaystyle \widetilde{C}_{2,q}(y)=2h^{(1)}(1-\lambda)\left\{\delta(1-y)+\left[y\frac{d}{dy}\delta(1-y)\right]\right\}\\
+\\
+\displaystyle \widetilde{C}_{3,q}(y)=2h^{(1)}(1-\lambda)\left[y\frac{d}{dy}\delta(1-y)\right]\\
+\\
+\displaystyle \widetilde{C}_{L,q}(y)=2h^{(1)}(1-\lambda)^2\left\{\delta(1-y)+\left[y\frac{d}{dy}\delta(1-y)\right]\right\}
+\end{array}\,,
+\end{equation}
+in such a way that:
+\begin{equation}
+\begin{array}{l}
+\displaystyle mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = \xi \int_\xi^1\frac{dy}{y}\widetilde{C}_{k,q}(y)s'\left(\frac{\xi}{y}\right)\\
+\\
+\displaystyle mh^{(1)}\frac{dF^{(0)}_3}{dM}\bigg|_{M=m} = \int_\xi^1\frac{dy}{y}\widetilde{C}_{3,q}(y)s'\left(\frac{\xi}{y}\right)
+\end{array}\,,
+\end{equation}
+where now $k=2,L$ and whose Mellin transforms, taking into account that:
+\begin{equation}
+\mathbf{M}\left[y\frac{d}{dy}\delta(1-y)\right](N) = - N\,,
+\end{equation}
+can be easly evaluated obtaining(\footnote{
+\subsection*{Alternative Calculation}
+We sketch here an alternative calculation that, under some point of view, looks more transparent ant confirms the result found in eq. (\ref{greatresult}). We start directly calculating the Mellin transform of the term proportional to the derivative of eq. (\ref{pincopanco}), that is, disregarding the overall constant:
+\begin{equation}
+I_k(N)=\int_0^1d\xi \xi^{N-1}\left[\xi b_k(\xi)\frac{ds'}{d\xi}\right]\,.
+\end{equation}
+Bu since:
+\begin{equation}
+\frac{d}{d\xi}\xi^{N}b_k(\xi)s'(\xi)=\left[\frac{d}{d\xi}\xi^{N}b_k(\xi)\right]s'(\xi)+\xi^{N}b_k(\xi)\frac{ds'}{d\xi}\,,
+\end{equation}
+it follows that:
+\begin{equation}
+I_k(N)=\underbrace{\xi^{N}b_k(\xi)s'(\xi)\Big|_0^1}_{=0}-\int_0^1d\xi\left[\frac{d}{d\xi}\xi^{N}b_k(\xi)\right]s'(\xi)\,.
+\end{equation}
+Now, using the definition of $b_k(\xi)$ given in eq. (\ref{definitions}), we can easily find that:
+\begin{equation}
+\begin{array}{l}
+\displaystyle I_2(N) = -(N+1)s'(N+1)\\
+\displaystyle I_L(N) = -(1-\lambda)(N+1)s'(N+1)\\
+\displaystyle I_3(N) = -Ns'(N)
+\end{array}   
+\end{equation}
+from which one can extract the coefficient functions in the Mellin space.
+}):
+\begin{equation}\label{greatresult}
+\begin{array}{l}
+\displaystyle \widetilde{C}_{2,q}(N)=\mathbf{M}[\widetilde{C}_{2,q}(y)](N)=2h^{(1)}(1-\lambda)(1-N)\\
+\\
+\displaystyle \widetilde{C}_{3,q}(N)=\mathbf{M}[\widetilde{C}_{3,q}(y)](N)=-2h^{(1)}(1-\lambda)N\\
+\\
+\displaystyle \widetilde{C}_{L,q}(N)=\mathbf{M}[\widetilde{C}_{L,q}(y)](N)=2h^{(1)}(1-\lambda)^2(1-N)
+\end{array}\,.
+\end{equation}
+In order to carry out the $x$-space implementation, one can show that:
+\begin{equation}\label{DeltaDerivative}
+\frac{d}{dy}\delta(1-y) = \left[\frac{\delta(1-y)}{1-y}\right]_+\,,
+\end{equation}
+which is a pretty formal expression that however helps in
+manipulating the coefficient functions in the presence of
+$\overline{\mbox{MS}}$ masses. In fact, using
+eq.~(\ref{DeltaDerivative}), one can easily show that:
+\begin{equation}
+y\frac{d}{dy}\delta(1-y) = \left[\frac{\delta(1-y)}{1-y}\right]_+ - \delta(1-y)\,,
+\end{equation}
+so that eqs.~(\ref{RoughCF}) become:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \widetilde{C}_{2,q}(y)=2h^{(1)}(1-\lambda) \left[\frac{\delta(1-y)}{1-y}\right]_+\\
+\\
+\displaystyle \widetilde{C}_{3,q}(y)=2h^{(1)}(1-\lambda)\left\{\left[\frac{\delta(1-y)}{1-y}\right]_+ - \delta(1-y)\right\}\\
+\\
+\displaystyle \widetilde{C}_{L,q}(y)=2h^{(1)}(1-\lambda)^2 \left[\frac{\delta(1-y)}{1-y}\right]_+
+\end{array}\,.
+\end{equation}
+
+Now, since in (\ref{gigi}) we have that:
+\begin{subequations}
+\begin{equation}
+F_k^{(1)}(m)=\xi\int_{\xi}^{1}\frac{dy}{y}\left\{C_{k,q}(y)s'\left(\frac{\xi}{y}\right)+C_{k,g}(y)g\left(\frac{\xi}{y}\right)\right\}
+\end{equation}
+\begin{equation}
+F_3^{(1)}(m)=\int_{\xi}^{1}\frac{dy}{y}\left\{C_{3,q}(y)s'\left(\frac{\xi}{y}\right)+C_{3,g}(y)g\left(\frac{\xi}{y}\right)\right\}\,.
+\end{equation}
+\end{subequations}
+This means that the whole $\mathcal{O}(a_s)$ in eq. (\ref{gigi}) can be written as:
+\begin{subequations}
+\begin{equation}
+F_k^{(1)}(m)+mh^{(1)}\frac{dF_k^{(0)}}{dM}\bigg|_{M=m}=\xi\int_{\xi}^{1}\frac{dy}{y}\left\{\left[C_{k,q}(y)+\widetilde{C}_{k,q}(y)\right]s'\left(\frac{\xi}{y}\right)+C_{k,g}(y)g\left(\frac{\xi}{y}\right)\right\}
+\end{equation}
+\begin{equation}
+F_3^{(1)}(m)+mh^{(1)}\frac{dF_3^{(0)}}{dM}\bigg|_{M=m}=\int_{\xi}^{1}\frac{dy}{y}\left\{\left[C_{3,q}(y)+\widetilde{C}_{3,q}(y)\right]s'\left(\frac{\xi}{y}\right)+C_{3,g}(y)g\left(\frac{\xi}{y}\right)\right\}\,.
+\end{equation}
+\end{subequations}
+Therefore, in order to consistently replace the pole mass $M$ with the $\overline{\mbox{MS}}$ mass $m$ in the charge current massive coefficient functions, one has just to naively replace $M$ with $m$ and then correct the $\mathcal{O}(a_s)$ quark coefficient functions adding (in the Mellin space) the contributions given in eq. (\ref{greatresult}).
+
+It is interesting to observe that in massless limit, where $\lambda\rightarrow 1$, all the coefficient functions in eq. (\ref{greatresult}) vanish, with the consequence that the CC massive0 structure functions up to $\mathcal{O}(a_s)$ in terms of $M$ or $m$ look exactly the same.
+
+\section{Thresholds}
+
+The evolution schemes that are involved in the FONLL scheme, meaning ZM (Zero-Mass-Variable-Flavour-Number) and FFN (massive) schemes, require the presence of a mass threshold for each heavy flavour. These thresholds are basically the points from where the respective heavy quark structure functions start contributing to the total structure function.
+
+In the ZM scheme, these thresholds don't have a uniquely defined
+physical meaning, but rather they just represent a convenient choice
+of $Q^2$ where to perform the matching between the $N_f$ and the
+$N_f+1$ scheme. If one chooses to write the observables in terms of
+the pole masses $M_c$, $M_b$ and $M_t$, the most natural choice for
+the thresholds are the pole masses themselves, so that ZM structure
+function can be written as:
+\begin{equation}
+F^{(zm)}(x,Q^2) = F^{(zm),l}(x,Q^2)+\sum_{i=c,b,t}\theta(Q^2-M_i^2)F^{(zm),i}(x,Q^2,M_i)\,.
+\end{equation}
+This is also justified by the fact that $\alpha_s$ as well as PDFs are
+conveniently matched in correspondence of these thresholds.
+
+When one instead chooses to write the observables in terms of the
+$\overline{\mbox{MS}}$ masses, as we have seen, the most covenient
+choice for the matching thresholds of the PDFs, $\alpha_s$ and masses
+evolution are the RG-invariant masses $m_c(m_c)$, $m_b(m_b)$ and
+$m_t(m_t)$. For this reason, in the $\overline{\mbox{MS}}$ framework,
+it looks more natural to choose the same thresholds also for the
+structure functions, so that in term of the $\overline{\mbox{MS}}$
+masses, the generic ZM structure function looks like this:
+\begin{equation}
+F^{(zm)}(x,Q^2) = F^{(zm),l}(x,Q^2)+\sum_{i=c,b,t}\theta(Q^2-m_i^2(m_i))F^{(zm),i}(x,Q^2,m_i(\mu))\,.
+\end{equation}
+This means that now the $i$-th heavy quark structure function switchs on at the scale $Q^2=m_i(m_i)$ rather than $Q^2=M_i$.
+
+In the FFN scheme, instead, the heavy quark mass thresholds assume a precise physical meaning. In fact, they tell us whether the invariant mass of the incoming particles (the photon and the parton) $W=\sqrt{Q^2(1-x)/x}$ is big enough for producing (up to NNLO) one, in the CC case, or two, in the NC, heavy quarks. In terms of the pole masses $M_c$, $M_b$ and $M_t$, the kinematical threshold for producing $i$-th species of heavy quarks is given by:
+\begin{equation}
+W^2\geq \kappa M_i^2\quad\mbox{with}\quad
+\left\{\begin{array}{l}
+\kappa = 4\quad\mbox{for NC}\\
+\kappa = 1\quad\mbox{for CC}
+\end{array}\right.\,,
+\end{equation}
+so that FFN structure function can be written as:
+\begin{equation}
+F^{(m)}(x,Q^2) = F^{(m),l}(x,Q^2)+\sum_{i=c,b,t}\theta(W^2-\kappa M_i^2)F^{(m),i}(x,Q^2,M_i)\,.
+\end{equation}
+
+Now the question is: what are the right thresholds if we write this structure function in terms of the $\overline{\mbox{MS}}$ masses $m_c(\mu)$, $m_b(\mu)$ and $m_t(\mu)$? One more time, the most natural choice seems to be the RG-invariant masses  $m_c(m_c)$, $m_b(m_b)$ and $m_t(m_t)$. The reason is the following. 
+
+Given that the $\overline{\mbox{MS}}$ masses run, we are interested in knowing the value of the heavy quark mass $m_i(\mu)$ when the scale of the process $Q^2\simeq m_i^2$, but since in any case $\mu^2\simeq Q^2$, it seems to be the most reasonable choice to take as a threshold the value $m_i(m_i)$. This means that in terms of $\overline{\mbox{MS}}$ masses, the FFN structure function takes the form:
+\begin{equation}
+F^{(m)}(x,Q^2) = F^{(m),l}(x,Q^2)+\sum_{i=c,b,t}\theta(W^2-\kappa m_i^2(m_i))F^{(m),i}(x,Q^2,m_i)\,.
+\end{equation}
+
+As a conclusion, also in the massive case it turns out to be convenient to replace at the thresholds the pole masses $M_c$, $M_b$ and $M_t$ with the $\overline{\mbox{MS}}$ RG-invariant masses $m_c(m_c)$, $m_b(m_b)$ and $m_t(m_t)$.
+
+
+
+%\section{Strategy}
+%
+%On the base of the previous sections, this is the strategy for the implementation of the $\overline{\mbox{MS}}$ running mass.
+
+
+
+\newpage
+
+\begin{thebibliography}{alp}
+
+%\cite{Chetyrkin:1999qi}
+\bibitem{Chetyrkin:1999qi}
+  K.~G.~Chetyrkin and M.~Steinhauser,
+  %``The relation between the MS-bar and the on-shell quark mass at order
+  %alpha(s)**3,''
+  Nucl.\ Phys.\  B {\bf 573}, 617 (2000)
+  [arXiv:hep-ph/9911434].
+  %%CITATION = NUPHA,B573,617;%%
+
+%\cite{Chetyrkin:1999pq}
+\bibitem{Chetyrkin:1999pq}
+  K.~G.~Chetyrkin and A.~Retey,
+  %``Renormalization and running of quark mass and field in the  regularization
+  %invariant and MS-bar schemes at three and four loops,''
+  Nucl.\ Phys.\  B {\bf 583}, 3 (2000)
+  [arXiv:hep-ph/9910332].
+  %%CITATION = NUPHA,B583,3;%%
+
+%\cite{Melnikov:2000qh}
+\bibitem{Melnikov:2000qh}
+  K.~Melnikov and T.~v.~Ritbergen,
+  %``The three-loop relation between the MS-bar and the pole quark masses,''
+  Phys.\ Lett.\  B {\bf 482} (2000) 99
+  [arXiv:hep-ph/9912391].
+  %%CITATION = PHLTA,B482,99;%%
+
+%\cite{Alekhin:2010sv}
+\bibitem{Alekhin:2010sv}
+  S.~Alekhin and S.~Moch,
+  %``Heavy-quark deep-inelastic scattering with a running mass,''
+  Phys.\ Lett.\  B {\bf 699} (2011) 345
+  [arXiv:1011.5790 [hep-ph]].
+  %%CITATION = PHLTA,B699,345;%%
+
+%\cite{Alekhin:2010sv}
+\bibitem{AbramowitzStegun}
+  M.~ Abramowitz and I. A.~ Stegun,
+  ``Handbook of mathematical functions''
+
+%\cite{Vogt:2004ns}
+\bibitem{Vogt:2004ns}
+  A.~Vogt,
+  %``Efficient evolution of unpolarized and polarized parton distributions  with
+  %QCD-PEGASUS,''
+  Comput.\ Phys.\ Commun.\  {\bf 170} (2005) 65
+  [arXiv:hep-ph/0408244].
+  %%CITATION = CPHCB,170,65;%%
+
+%\cite{Chetyrkin:1997sg}
+\bibitem{Chetyrkin:1997sg}
+  K.~G.~Chetyrkin, B.~A.~Kniehl and M.~Steinhauser,
+  %``Strong coupling constant with flavour thresholds at four loops in the
+  %MS-bar scheme,''
+  Phys.\ Rev.\ Lett.\  {\bf 79}, 2184 (1997)
+  [arXiv:hep-ph/9706430].
+  %%CITATION = PRLTA,79,2184;%%
+
+%\cite{Buza:1996wv}
+\bibitem{Buza:1996wv}
+  M.~Buza, Y.~Matiounine, J.~Smith and W.~L.~van Neerven,
+  %``Charm electroproduction viewed in the variable-flavour number scheme
+  %versus fixed-order perturbation theory,''
+  Eur.\ Phys.\ J.\  C {\bf 1} (1998) 301
+  [arXiv:hep-ph/9612398].
+  %%CITATION = EPHJA,C1,301;%%
+  
+  %\cite{Chetyrkin:2000yt}
+\bibitem{Chetyrkin:2000yt}
+  K.~G.~Chetyrkin, J.~H.~Kuhn and M.~Steinhauser,
+  %``RunDec: A Mathematica package for running and decoupling of the strong coupling and quark masses,''
+  Comput.\ Phys.\ Commun.\  {\bf 133} (2000) 43
+  [hep-ph/0004189].
+  %%CITATION = HEP-PH/0004189;%%
+
+\end{thebibliography}
+
+\end{document}

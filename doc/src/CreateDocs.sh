@@ -12,6 +12,8 @@ do
     pdflatex CovarianceMatrix.tex
     pdflatex DIS.tex
     pdflatex GPDs.tex
+    pdflatex MatchingConditions.tex
+    pdflatex MSbarMass.tex
 done
 
 mv *.pdf ../pdf/.
