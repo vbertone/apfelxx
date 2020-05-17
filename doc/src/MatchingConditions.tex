@@ -32,46 +32,46 @@ that they start at NNLO, so that PDFs and $a_s$ are continuous at LO
 and NLO~\cite{Buza:1996wv}.
 
 The discontinuity of the PDF $l$ (in the Mellin space) of a light
-quark(\footnote{Note that the light quarks run from $1$ to $N_f$.})
+quark(\footnote{Note that the light quarks run from $1$ to $n_f$.})
 just beyond the threshold $m_h^2$($=m_c^2,m_b^2,m_t^2$), where the
-effective flavour number passes from $N_f$ to $N_f+1$, is given as a
+effective flavour number passes from $n_f$ to $n_f+1$, is given as a
 function of the same PDF just before the threshold by the following
 relation \cite{Vogt:2004ns}:
 \begin{equation}\label{eq:lightqmc}
-l^{(N_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]l^{(N_f)}(N,m_h^2)\,.
+l^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]l^{(n_f)}(N,m_h^2)\,.
 \end{equation}
 with $l=u,\overline{u},d,\overline{d},\dots$, while the gluon
 distribution function is given by:
 \begin{equation}\label{gluon}
-\displaystyle g^{(N_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{gg,h}^{S,(2)}(N)]g^{(N_f)}(N,m_h^2)+a_s^2(m_h^2)A^{S,(2)}_{gq,h}(N)\Sigma^{(N_f)}(N,m^2_h)
+\displaystyle g^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{gg,h}^{S,(2)}(N)]g^{(n_f)}(N,m_h^2)+a_s^2(m_h^2)A^{S,(2)}_{gq,h}(N)\Sigma^{(n_f)}(N,m^2_h)
 \end{equation}
 and, in the end, the sum of heavy quark $h$ and its anti-quark
 $\overline{h}$, which are going to be produced after the threshold
 $m_h^2$, is:
 \begin{equation}\label{eq:heavyqmc}
-(h^{(N_f+1)}+\overline{h}^{(N_f+1)})(N,m_h^2)=a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(N_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(N_f)}(N,m_h^2)]\,.
+(h^{(n_f+1)}+\overline{h}^{(n_f+1)})(N,m_h^2)=a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(n_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(n_f)}(N,m_h^2)]\,.
 \end{equation}
 Of course, we have $h=\overline{h}$. 
 
 Now, since:
 \begin{equation}
-\Sigma^{(N_f+1)}=\sum_{l=1}^{N_f}(l^{(N_f+1)}+\overline{l}^{(N_f+1)})+(h^{(N_f+1)}+\overline{h}^{(N_f+1)})
+\Sigma^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}+\overline{l}^{(n_f+1)})+(h^{(n_f+1)}+\overline{h}^{(n_f+1)})
 \end{equation}
 we find that the matching condition for the singlet is:
 \begin{equation}\label{singlet}
 \begin{array}{c}
-\displaystyle\Sigma^{(N_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]\Sigma^{(N_f)}(N,m_h^2)+\\
+\displaystyle\Sigma^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]\Sigma^{(n_f)}(N,m_h^2)+\\
 \\
-\displaystyle a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(N_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(N_f)}(N,m_h^2)]
+\displaystyle a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(n_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(n_f)}(N,m_h^2)]
 \end{array}
 \end{equation}
 so that, from eqs. (\ref{gluon}) and (\ref{singlet}):
 \begin{equation}\label{couple1}
 \begin{array}{c}
-\displaystyle {\Sigma^{(N_f+1)} \choose g^{(N_f+1)}}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s^2\tilde{A}^{S,(2)}_{hg}\\
-a_s^2A^{S,(2)}_{gq,h} & 1+a_s^2A_{gg,h}^{S,(2)}\end{pmatrix}{\Sigma^{(N_f)} \choose g^{(N_f)}}\\
+\displaystyle {\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s^2\tilde{A}^{S,(2)}_{hg}\\
+a_s^2A^{S,(2)}_{gq,h} & 1+a_s^2A_{gg,h}^{S,(2)}\end{pmatrix}{\Sigma^{(n_f)} \choose g^{(n_f)}}\\
 \\
-\displaystyle =\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(N_f)} \choose g^{(N_f)}}
+\displaystyle =\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose g^{(n_f)}}
 \end{array}
 \end{equation}
 where we have omitted all the dependencies. So we have obtained the
@@ -79,17 +79,17 @@ matching conditions for the singlet and the gluon distribution
 functions.
 
 Now we consider the other distributions. The valence distribution $V$
-for $N_f+1$ active (light) flavours just beyond the threshold $m_h^2$
+for $n_f+1$ active (light) flavours just beyond the threshold $m_h^2$
 is defined as:
 \begin{equation}
-V^{(N_f+1)}=\sum_{l=1}^{N_f}(l^{(N_f+1)}-\overline{l}^{(N_f+1)})+(h^{(N_f+1)}-\overline{h}^{(N_f+1)})
+V^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}-\overline{l}^{(n_f+1)})+(h^{(n_f+1)}-\overline{h}^{(n_f+1)})
 \end{equation}
 but, since $h=\overline{h}$, the last term vanish and we are left with:
 \begin{equation}\label{valence}
 \begin{array}{c}
-\displaystyle V^{(N_f+1)}=\sum_{l=1}^{N_f}(l^{(N_f+1)}-\overline{l}^{(N_f+1)})=\\
+\displaystyle V^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}-\overline{l}^{(n_f+1)})=\\
 \\
-\displaystyle [1+a_s^2A_{qq,h}^{N\!S,(2)}]\sum_{l=1}^{N_f}(l^{(N_f)}-\overline{l}^{(N_f)})=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(N_f)}\,.
+\displaystyle [1+a_s^2A_{qq,h}^{N\!S,(2)}]\sum_{l=1}^{n_f}(l^{(n_f)}-\overline{l}^{(n_f)})=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}\,.
 \end{array}
 \end{equation}
 So, this is the matching condition for the valence distribution $V$.
@@ -102,7 +102,7 @@ V_3=(u-\overline{u})-(d-\overline{d})\quad\mbox{and}\quad V_8=(u-\overline{u})+(
 so that, in these cases, the matching conditions work as in the case
 of $V$, i.e.:
 \begin{equation}\label{v38}
-V_{3,8}^{(N_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(N_f)}_{3,8}\,.
+V_{3,8}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}_{3,8}\,.
 \end{equation}
 
 The same holds for $T_{3}$ and $T_8$, which are defined as:
@@ -111,7 +111,7 @@ T_3=(u+\overline{u})-(d+\overline{d})\quad\mbox{and}\quad V_8=(u+\overline{u})+(
 \end{equation}
 so:
 \begin{equation}\label{t38}
-T_{3,8}^{(N_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]T^{(N_f)}_{3,8}\,.
+T_{3,8}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]T^{(n_f)}_{3,8}\,.
 \end{equation}
 
 The remaining valence distribution $V_{15}$, $V_{24}$ and $V_{35}$ are
@@ -133,7 +133,7 @@ distribution is zero). Anyway, this terms give no matching condition
 since the $b$ contribution is exactly equal to the $\overline{b}$
 contribution, so that they cancel. So:
 \begin{equation}\label{v152435}
-V_{15,24,35}^{(N_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(N_f)}_{15,24,35}\,.
+V_{15,24,35}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}_{15,24,35}\,.
 \end{equation}
 
 In the end, to deal with $T_{15}$, $T_{24}$ and $T_{35}$, we have to
@@ -204,11 +204,11 @@ have that:
 \begin{itemize}
 \item singlet and gluon couple as follows:
 \begin{equation}\label{couple}
-{\Sigma^{(N_f+1)} \choose g^{(N_f+1)}}=\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(N_f)} \choose g^{(N_f)}}
+{\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose g^{(n_f)}}
 \end{equation}
 \item from eqs. (\ref{valence}), (\ref{v38}), (\ref{v152435}) and (\ref{t38}), one can see that $V$, $V_{3,8,\dots,35}$ and $T_{3,8}$ behave in the same way, i.e.:
 \begin{equation}\label{ciao}
-P^{(N_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]P^{(N_f)}\quad\mbox{with}\quad P=V,V_3,\dots,V_{35},T_3,T_8
+P^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]P^{(n_f)}\quad\mbox{with}\quad P=V,V_3,\dots,V_{35},T_3,T_8
 \end{equation}
 \item $T_{15}$, $T_{24}$ and $T_{35}$ have different matching
   conditions depending on the threshold. In particular: for
@@ -234,9 +234,9 @@ so, if $Q^2>Q_0^2$ the code computes directly $\Gamma(Q^2,Q_0^2)$, else if $Q^2_
 Before to discuss the crossing of the thresholds, it would be useful
 to write down the evolution kernels in the ``trivial'' situation of no
 threshold crossing. There are 4 particular cases: 1) $Q_0^2<Q^2<m_c^2$
-with $N_f=3$ active flavours, 2) $m_c^2<Q_0^2<Q^2<m_b^2$ with $N_f=4$
-active flavours, 3) $m_b^2<Q_0^2<Q^2<m_t^2$ with $N_f=5$ active
-flavours and 4) $m_t^2<Q_0^2<Q^2$ with $N_f=6$ active flavours, which
+with $n_f=3$ active flavours, 2) $m_c^2<Q_0^2<Q^2<m_b^2$ with $n_f=4$
+active flavours, 3) $m_b^2<Q_0^2<Q^2<m_t^2$ with $n_f=5$ active
+flavours and 4) $m_t^2<Q_0^2<Q^2$ with $n_f=6$ active flavours, which
 do not need the introduction of the matching conditions. So, in the
 following Subsections we will write down the evolution of the whole
 PDF set the these cases.
@@ -922,7 +922,7 @@ $\mathcal{O}(\alpha_s^2)$, \textit{i.e.}  NNLO, and that intrinsic
 heavy-quark and heavy-antiquark contributions are equal below
 threshold. These assumptions lead to:
 \begin{equation}
-h^{(N_f)}(\mu_h) = \overline{h}^{(N_f)}(\mu_h)\quad\mbox{and}\quad h^{(N_f+1)}(\mu_h) = \overline{h}^{(N_f+1)}(\mu_h)\,,
+h^{(n_f)}(\mu_h) = \overline{h}^{(n_f)}(\mu_h)\quad\mbox{and}\quad h^{(n_f+1)}(\mu_h) = \overline{h}^{(n_f+1)}(\mu_h)\,,
 \end{equation}
 where we dropped the non-scale dependence. It immediately follows that
 the valence distributions $\{V,V_3,V_8,V_{15},V_{24},V_{35}\}$ match
@@ -930,7 +930,7 @@ multiplicatively as:\footnote{Note that ``1'' in
   Eq.~(\ref{eq:nsingletmc}) is to be understood as $\delta(1-x)$ in
   $x$ space.}
 \begin{equation}\label{eq:nsingletmc}
-V_i^{(N_f+1)}(\mu_h) = [1+K_{ll}](\mu_h) V^{(N_f)}(\mu_h) = [1+K_{ll}(\mu_h)] V_i^{(N_f)}(\mu_h)\,,\quad i = 3,8,15,24,35\,,
+V_i^{(n_f+1)}(\mu_h) = [1+K_{ll}](\mu_h) V^{(n_f)}(\mu_h) = [1+K_{ll}(\mu_h)] V_i^{(n_f)}(\mu_h)\,,\quad i = 3,8,15,24,35\,,
 \end{equation}
 with $K_{ll}$ some given function that starts at
 $\mathcal{O}(\alpha_s^2)$. This equivalently amounts to say that no
@@ -948,26 +948,26 @@ and~(\ref{eq:heavyqmc}) (changing and simplifying a bit the notation)
 as:
 \begin{equation}\label{eq:IntMatchingConds}
 \begin{array}{rcl}
-  \displaystyle g^{(N_f+1)}&=&\displaystyle
-                               [1+K_{gg}]g^{(N_f)}+K_{gl}\sum_l
-                               l^{+(N_f+1)} + K_{gh}h^{+(N_f)}\,,\\
+  \displaystyle g^{(n_f+1)}&=&\displaystyle
+                               [1+K_{gg}]g^{(n_f)}+K_{gl}\sum_l
+                               l^{+(n_f+1)} + K_{gh}h^{+(n_f)}\,,\\
   \\
-  \displaystyle l^{+(N_f+1)}&=&\displaystyle [1+K_{ll}]l^{+(N_f)}\,,\\
+  \displaystyle l^{+(n_f+1)}&=&\displaystyle [1+K_{ll}]l^{+(n_f)}\,,\\
   \\
-  \displaystyle h^{+(N_f+1)}&=&\displaystyle K_{hg}g^{(N_f)} + K_{hl}\sum_l
-                                l^{+(N_f+1)}+[1+K_{hh}]h^{+(N_f)}\,,\\
+  \displaystyle h^{+(n_f+1)}&=&\displaystyle K_{hg}g^{(n_f)} + K_{hl}\sum_l
+                                l^{+(n_f+1)}+[1+K_{hh}]h^{+(n_f)}\,,\\
   \\
-  H^{+(N_f+1)} &=& H^{+(N_f)}\,,
+  H^{+(n_f+1)} &=& H^{+(n_f)}\,,
 \end{array}
 \end{equation}
-where $q^+=q+\overline{q}$ and $l$ runs between $1$ and $N_f$. We
-remind that $h$ is the $(N_f+1)$-th heavier flavour, \textit{i.e.}
+where $q^+=q+\overline{q}$ and $l$ runs between $1$ and $n_f$. We
+remind that $h$ is the $(n_f+1)$-th heavier flavour, \textit{i.e.}
 the one that becomes active at the threshold under consideration. We
 have also introduced the ``super'' heavy quark flavour $H$, heavier
-than $h$, that is not affected by the matching at the $N_f$-th
+than $h$, that is not affected by the matching at the $n_f$-th
 threshold. Note that there are two new functions coming into play,
 namely $K_{gh}$ and $K_{hh}$, both multiplying the intrinsic
-heavy-quark contribution $h^{+(N_f)}$. Moreover, we have written
+heavy-quark contribution $h^{+(n_f)}$. Moreover, we have written
 Eq.~(\ref{eq:IntMatchingConds}) in such a way that the coefficients
 $K$ start at least at $\mathcal{O}(\alpha_s)$. In fact, we have
 already seen that $K_{ll}=\mathcal{O}(\alpha_s^2)$; the same applies
@@ -975,10 +975,10 @@ to $K_{hl}$ and $K_{gl}$. Defining the column vector $P$ with
 components $(g,d^+,u^+,s^+,c^+,b^+,t^+)$, we can represent the
 matching in a matricial form as:
 \begin{equation}
-P^{(N_f+1)} = \left[\mathbb{I}+\mathbb{K}^{(N_f)}\right]P^{(N_f)}\,,
+P^{(n_f+1)} = \left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]P^{(n_f)}\,,
 \end{equation}
 where $\mathbb{I}$ is the $7\times7$ unity matrix and
-$\mathbb{K}^{(N_f)}$ are given, depending on the value of $N_f$, by:
+$\mathbb{K}^{(n_f)}$ are given, depending on the value of $n_f$, by:
 \begin{equation}\label{eq:MathcingMatrices}
 \begin{array}{ll}
 \mathbb{K}^{(0)} = 
@@ -1048,64 +1048,119 @@ K_{hg} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hh} \\
 \end{pmatrix}
 \end{array}
 \end{equation}
-The algorithm to determine the matrix $\mathbb{K}^{(N_f)}$, indexing
+The algorithm to determine the matrix $\mathbb{K}^{(n_f)}$, indexing
 the gluon distribution with 0 and the quark distributions from 1 to 6,
 reads:
 \begin{equation}\label{eq:algorithm}
-\mathbb{K}_{ij}^{(N_f)} =
+\mathbb{K}_{ij}^{(n_f)} =
 \left\{
 \begin{array}{ll}
 K_{gg} & \quad i = j = 0\\
-K_{gl} & \quad i = 0\,,\;1\leq j \leq N_f\\
-K_{gh} & \quad i = 0\,,\;j = N_f+1\\
-K_{ll} & \quad i = j\,,\;1\leq i,j \leq N_f\\
-K_{hg} & \quad i = N_f+1\,,\;j = 0\\
-K_{hl} & \quad i = N_f+1\,,\;1\leq j \leq N_f\\
-K_{hh} & \quad i = j = N_f+1\\
+K_{gl} & \quad i = 0\,,\;1\leq j \leq n_f\\
+K_{gh} & \quad i = 0\,,\;j = n_f+1\\
+K_{ll} & \quad i = j\,,\;1\leq i,j \leq n_f\\
+K_{hg} & \quad i = n_f+1\,,\;j = 0\\
+K_{hl} & \quad i = n_f+1\,,\;1\leq j \leq n_f\\
+K_{hh} & \quad i = j = n_f+1\\
 0 & \quad\mbox{elsewhere}
 \end{array}
 \right.\,.
 \end{equation}
 
-Now one may want to rotate the matching matrices from the physical
-basis to the evolution basis through $T\mathbb{K}^{(N_f)}T^{-1}$,
-where $T$ transforms the vector $P$ into the evolution-basis vector
-$E=(g,\Sigma,T_3,T_8,T_{15},T_{24},T_{35})$. However, it turns out the
-resulting matching matrix are much more complicated and generally less
-sparse than those in Eq.~(\ref{eq:MathcingMatrices}). Therefore, it
-seems convenient to perform the matching in the physical basis.
+Now, in order to apply the matching condition to the distributions in
+the evolution basis $E=(g,\Sigma,-T_3,T_8,T_{15},T_{24},T_{35})$, it is
+necessary to rotate the matching matrices from the physical basis to
+the evolution basis through $T\mathbb{K}^{(n_f)}T^{-1}$, where $T$
+transforms the vector $P$ into the evolution-basis vector $E$:
+\begin{equation}\label{eq:RotationMatrix}
+T = 
+\begin{pmatrix}
+1 & 0 & 0  & 0  & 0  & 0  & 0 \\
+0 & 1 & 1  & 1  & 1  & 1  & 1 \\
+0 & 1 & -1  & 0  & 0  & 0  & 0 \\
+0 & 1 & 1  & -2  & 0  & 0  & 0 \\
+0 & 1 & 1  & 1  & -3  & 0  & 0 \\
+0 & 1 & 1  & 1  & 1  & -4  & 0 \\
+0 & 1 & 1  & 1  & 1  & 1  & -5
+\end{pmatrix}\,.
+\end{equation}
+The resulting matching matrices are much more complicated and
+generally less sparse than those in
+Eq.~(\ref{eq:MathcingMatrices}). However, we can still compute them
+algorithmically depending on the number of light flavours $n_f$. To do
+so, we define the following linearly independent combinations:
+\begin{equation}
+\begin{array}{lcl}
+M_1 &=& K_{gg}\,,\\
+M_2 &=& K_{gh} + n_f K_{gl}\,,\\
+M_3 &=& K_{gh}-K_{gl}\,,\\
+M_4 &=& K_{hg}\,,\\
+M_5 &=& K_{hh}+n_f(K_{hl}+K_{ll}) \,,\\
+M_6 &=& K_{hh}-(K_{hl}+K_{ll})\,,\\
+M_7 &=& K_{ll}\,,
+\end{array}
+\end{equation}
+such that:
+\begin{equation}\label{eq:algorithmEv}
+T\mathbb{K}_{ij}^{(n_f)}T^{-1} =
+\left\{
+\begin{array}{lll}
+M_1 & \quad i = 0 &\quad j = 0\\
+\frac{1}{6}M_2 & \quad i = 0 &\quad  j = 1\\
+0 & \quad i = 0 &\quad  2\leq j \leq n_f\\
+-\frac{1}{n_f+1}M_3 & \quad i = 0 &\quad  j = n_f+1\\
+\frac{1}{j(j+1)}M_2 & \quad i = 0 &\quad  n_f+ 2\leq j \leq 6\\
+M_4 & \quad i = 1\,,\; n_f+2\leq i \leq 6 &\quad  j=0\\
+\frac16 M_5 & \quad i = 1\,,\; n_f+2\leq i \leq 6 &\quad  j=1\\
+0 & \quad i = 1\,,\; n_f+2\leq i \leq 6 &\quad  2\leq j \leq n_f\\
+-\frac{1}{n_f+1}M_6 & \quad i = 1\,,\; n_f+2\leq i \leq 6 &\quad  j = n_f+1\\
+\frac{1}{j(j+1)}M_5 & \quad i = 1\,,\; n_f+2\leq i \leq 6 &\quad  n_f+
+                                                            2\leq j
+                                                            \leq 6\\
+M_7&\quad 2\leq i \leq n_f &\quad j=i\\
+-n_fM_4 &\quad i = n_f+1 &\quad j =0\\
+\frac{n_f}6\left(-M_5+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =1\\
+0 & \quad i = n_f+1 &\quad  2\leq j \leq n_f\\
+\frac1{n_f+1}\left(n_f M_6+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad
+                                                                 j
+                                                                 =n_f+1\\
+\frac{n_f}{j(j+1)}\left( -M_5+(n_f+1)M_7\right) &\quad i = n_f+1
+                  &\quad n_f+2 \leq j \leq 6
+\end{array}
+\right.
+\end{equation}
 
 In order to be able to perform the backward evolution, it is necessary
-to invert the matching matrix $\mathbb{I}+\mathbb{K}^{(N_f)}$. This is
+to invert the matching matrix $\mathbb{I}+\mathbb{K}^{(n_f)}$. This is
 conveniently done perturbatively by expanding the matrix
-$\left[\mathbb{I}+\mathbb{K}^{(N_f)}\right]^{-1}$ in powers of
+$\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1}$ in powers of
 $\alpha_s$ and truncating the expansion at the appropriate
 order. Given the assumption discussed above, we are not interested in
 going beyond $\mathcal{O}(\alpha_s^2)$. In addition, we know that:
 \begin{equation}
-\mathbb{K}^{(N_f)} = a_s \mathbb{K}^{(1)(N_f)}+a_s^2 \mathbb{K}^{(2)(N_f)}+\mathcal{O}(\alpha_s^3)\,,
+\mathbb{K}^{(n_f)} = a_s \mathbb{K}^{(1)(n_f)}+a_s^2 \mathbb{K}^{(2)(n_f)}+\mathcal{O}(\alpha_s^3)\,,
 \end{equation}
 so that:
 \begin{equation}\label{eq:inversion}
-\left[\mathbb{I}+\mathbb{K}^{(N_f)}\right]^{-1} = 1 - a_s \mathbb{K}^{(1)(N_f)}-a_s^2\left[\mathbb{K}^{(2)(N_f)}-\left(\mathbb{K}^{(1)(N_f)}\right)^2\right]+\mathcal{O}(\alpha_s^3)\,.
+\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1} = 1 - a_s \mathbb{K}^{(1)(n_f)}-a_s^2\left[\mathbb{K}^{(2)(n_f)}-\left(\mathbb{K}^{(1)(n_f)}\right)^2\right]+\mathcal{O}(\alpha_s^3)\,.
 \end{equation}
-But the matrix $\mathbb{K}^{(1)(N_f)}$ is particularly simple because
+But the matrix $\mathbb{K}^{(1)(n_f)}$ is particularly simple because
 at $\mathcal{O}(\alpha_s)$ the matching functions $K_{ll}$, $K_{hl}$,
 and $K_{gl}$ vanish. Therefore, using Eq.~(\ref{eq:algorithm}) we
 find:
 \begin{equation}
-\mathbb{K}_{ij}^{(1)(N_f)} =\delta_{i,0}\left(\delta_{j,0}K_{gg}^{(1)} +
-\delta_{j,N_f+1}K_{gh}^{(1)}\right)+ \delta_{i,N_f+1}\left(\delta_{j,0}K_{hg}^{(1)}
-+ \delta_{j,N_f+1}K_{hh}^{(1)}\right)\,,
+\mathbb{K}_{ij}^{(1)(n_f)} =\delta_{i,0}\left(\delta_{j,0}K_{gg}^{(1)} +
+\delta_{j,n_f+1}K_{gh}^{(1)}\right)+ \delta_{i,n_f+1}\left(\delta_{j,0}K_{hg}^{(1)}
++ \delta_{j,n_f+1}K_{hh}^{(1)}\right)\,,
 \end{equation}
 such that its square has the same structure and can be written as:
 \begin{equation}\label{eq:squareK1}
 \begin{array}{rcl}
-\left(\mathbb{K}_{ij}^{(1)(N_f)}\right)^2 &=&\displaystyle \delta_{i,0}\left(\delta_{j,0}\sum_{k=g,h}K_{gk}^{(1)} K_{kg}^{(1)} +
-\delta_{j,N_f+1}\sum_{k=g,h}K_{gk}^{(1)} K_{kh}^{(1)}\right)\\
+\left(\mathbb{K}_{ij}^{(1)(n_f)}\right)^2 &=&\displaystyle \delta_{i,0}\left(\delta_{j,0}\sum_{k=g,h}K_{gk}^{(1)} K_{kg}^{(1)} +
+\delta_{j,n_f+1}\sum_{k=g,h}K_{gk}^{(1)} K_{kh}^{(1)}\right)\\
 \\
-  &+&\displaystyle  \delta_{i,N_f+1}\left(\delta_{j,0}\sum_{k=g,h}K_{hk}^{(1)} K_{kg}^{(1)}
-+ \delta_{j,N_f+1}\sum_{k=g,h}K_{hk}^{(1)} K_{kh}^{(1)}\right)\,,
+  &+&\displaystyle  \delta_{i,n_f+1}\left(\delta_{j,0}\sum_{k=g,h}K_{hk}^{(1)} K_{kg}^{(1)}
++ \delta_{j,n_f+1}\sum_{k=g,h}K_{hk}^{(1)} K_{kh}^{(1)}\right)\,,
 \end{array}
 \end{equation}
 where, in $x$ space, the product of two $K$ functions is to be
@@ -1121,7 +1176,11 @@ matching of PDFs:
 2C_F\left[\frac{1+x^2}{1-x}\left(\ln\frac{\mu_h^2}{m_h^2}-1-2\ln(1-x)\right)\right]_+\,.
 \end{array}
 \end{equation}
-Considering that:
+We notice that the $\mathcal{O}(\alpha_s^2)$ correction to these
+functions is currently unknown, therefore we only use the
+$\mathcal{O}(\alpha_s)$ expressions. For the sake of completeness, we
+also report here the remaining $\mathcal{O}(\alpha_s)$ matching
+functions:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle K_{gg}^{(1)}(x) &=&\displaystyle -\frac{4}{3}T_R\delta(1-x)\ln\frac{\mu_h^2}{m_h^2}\,,\\
@@ -1129,15 +1188,16 @@ Considering that:
 \displaystyle K_{hg}^{(1)}(x) &=&\displaystyle 4T_R\left[x^2+(1-x)^2\right]\ln\frac{\mu_h^2}{m_h^2}\,,
 \end{array}
 \end{equation}
-the convolutions Eq.~(\ref{eq:squareK1}) could possibly be computed
-analytically. We notice that the $\mathcal{O}(\alpha_s^2)$ correction
-to these functions is currently unknown, therefore we only use the
-$\mathcal{O}(\alpha_s)$ expressions.
+Of course, the matrix
+$\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1}$ in
+Eq.~(\ref{eq:inversion}) has to be rotated into the evolution basis by
+means of the transformation matrix $T$ in
+Eq.~(\ref{eq:RotationMatrix})
 
 We finally comment on FFs. So far, to the best of my knowledge, none
 of the $\mathcal{O}(\alpha_s^2)$ corrections to the FF matching
 conditions has been computed. Therefore, we must limit to
-$\mathbb{K}^{(1)(N_f)}$ that is simply given by the transpose of that
+$\mathbb{K}^{(1)(n_f)}$ that is simply given by the transpose of that
 for PDFs.
 
 \newpage

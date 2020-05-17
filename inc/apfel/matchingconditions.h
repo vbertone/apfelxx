@@ -47,6 +47,55 @@ namespace apfel
     AS1ggH_L();
     double Local(double const&) const;
   };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the HH matching. This is the QCD adaptation of
+   * Eq. (4.121) of https://arxiv.org/pdf/1909.03886.pdf.
+   */
+  class AS1HH_L: public Expression
+  {
+  public:
+    AS1HH_L();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) constant term for the HH
+   * matching. This is the QCD adaptation of Eq. (4.121) of
+   * https://arxiv.org/pdf/1909.03886.pdf.
+   */
+  class AS1HH_0: public Expression
+  {
+  public:
+    AS1HH_0();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the gH matching. This is
+   * the QCD adaptation of Eq. (4.189) of
+   * https://arxiv.org/pdf/1909.03886.pdf.
+   */
+  class AS1gH_L: public Expression
+  {
+  public:
+    AS1gH_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) constant term for the gH
+   * matching. This is the QCD adaptation of Eq. (4.189) of
+   * https://arxiv.org/pdf/1909.03886.pdf.
+   */
+  class AS1gH_0: public Expression
+  {
+  public:
+    AS1gH_0();
+    double Regular(double const& x) const;
+  };
   ///@}
 
   /**

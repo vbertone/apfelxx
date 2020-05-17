@@ -31,6 +31,46 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  AS1HH_L::AS1HH_L():
+    Expression()
+  {
+  }
+  double AS1HH_L::Singular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(x, 2) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1HH_0::AS1HH_0():
+    Expression()
+  {
+  }
+  double AS1HH_0::Singular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - log(1 - x) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1gH_L::AS1gH_L():
+    Expression()
+  {
+  }
+  double AS1gH_L::Regular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(1 - x, 2) ) / x;
+  }
+
+  //_________________________________________________________________________________
+  AS1gH_0::AS1gH_0():
+    Expression()
+  {
+  }
+  double AS1gH_0::Regular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(1 - x, 2) ) * ( - 1 - log(x) ) / x;
+  }
+
+  //_________________________________________________________________________________
   APS2Hq_0::APS2Hq_0():
     Expression()
   {
