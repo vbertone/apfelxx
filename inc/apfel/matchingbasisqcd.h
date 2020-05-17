@@ -88,15 +88,15 @@ namespace apfel
       for (int k = 1; k < 6; k++)
         if (k < nf)
           {
-            _rules[3*k+2] = { {PNS, 3*k+2, 1} };
-            _rules[3*k+3] = { {PNS, 3*k+3, 1} };
-            _rules[3*k+4] = { {PNS, 3*k+4, 1} };
+            _rules[3 * k + 2] = { {PNS, 3 * k + 2, 1} };
+            _rules[3 * k + 3] = { {PNS, 3 * k + 3, 1} };
+            _rules[3 * k + 4] = { {PNS, 3 * k + 4, 1} };
           }
         else
           {
-            _rules[3*k+2] = { {4+k, QQ, 1}, {9+k, GQ, 1} };
-            _rules[3*k+3] = { {4+k, QG, 1}, {9+k, GG, 1} };
-            _rules[3*k+4] = _rules[VAL];
+            _rules[3 * k + 2] = { {4 + k, QQ, 1}, {9 + k, GQ, 1} };
+            _rules[3 * k + 3] = { {4 + k, QG, 1}, {9 + k, GG, 1} };
+            _rules[3 * k + 4] = _rules[VAL];
           }
     };
   };

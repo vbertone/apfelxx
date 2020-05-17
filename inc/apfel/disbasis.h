@@ -10,7 +10,6 @@
 #include "apfel/messages.h"
 
 #include <numeric>
-#include <stdexcept>
 
 namespace apfel
 {
