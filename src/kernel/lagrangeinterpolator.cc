@@ -249,11 +249,12 @@ namespace apfel
     const std::vector<double>& xsg = sg.GetGrid();
 
     std::array<int,2> bounds = {{0, 0}};
-    if (x < xsg[0] - eps12 || x > xsg[sg.nx()] + eps12)
+    if (x < xsg.front() - eps12 || x > xsg.back() + eps12)
       return bounds;
 
     const int low = std::lower_bound(xsg.begin(), xsg.end() - sg.InterDegree() - 1, x) - xsg.begin();
-    bounds[0] = bounds[1] = low;
+    bounds[0] = low;
+    bounds[1] = low;
 
     if (std::abs(x - xsg[low]) <= eps12)
       bounds[1] += 1;

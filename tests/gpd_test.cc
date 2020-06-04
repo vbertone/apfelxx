@@ -36,7 +36,7 @@ int main()
   const auto GpdObj = InitializeGpdObjects(g, Thresholds, xi);
 
   // Construct the DGLAP objects
-  const auto EvolvedGPDs = BuildDglap(GpdObj,   apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
+  const auto EvolvedGPDs = BuildDglap(GpdObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
 
   // Tabulate GPDs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedGPDs{*EvolvedGPDs, 50, 1, 1000, 3};

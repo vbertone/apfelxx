@@ -58,7 +58,7 @@ namespace apfel
     /**
      * @return The joint SubGrid
      */
-    SubGrid const& GetJointGrid()     const { return _JointGrid; }
+    SubGrid const& GetJointGrid() const { return _JointGrid; }
     ///@}
 
     /**
