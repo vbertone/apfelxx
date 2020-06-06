@@ -77,16 +77,16 @@ namespace apfel
     if (_setup.Virtuality == EvolutionSetup::SPACE)
       {
         if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-          _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+          _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.Masses, _setup.Thresholds, IntEps);
         else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
-          _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+          _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.Masses, _setup.Thresholds, IntEps);
       }
     else if (_setup.Virtuality == EvolutionSetup::TIME)
       {
         if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-          _DglapObj = InitializeDglapObjectsQCDT(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+          _DglapObj = InitializeDglapObjectsQCDT(*_g, _setup.Masses, _setup.Thresholds, IntEps);
         else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
-          _DglapObj = InitializeDglapObjectsQCDTtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+          _DglapObj = InitializeDglapObjectsQCDTtrans(*_g, _setup.Masses, _setup.Thresholds, IntEps);
       }
   }
 

@@ -31,12 +31,10 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj   = InitializeDglapObjectsQCD(g, Masses, Thresholds);
-  const auto DglapObjOp = InitializeDglapObjectsQCD(g, Masses, Thresholds, true);
+  const auto DglapObj = InitializeDglapObjectsQCD(g, Masses, Thresholds);
 
   // Construct the DGLAP objects
-  const auto EvolvedPDFs = BuildDglap(DglapObj,   apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
-  const auto EvolvedOps  = BuildDglap(DglapObjOp,                   mu0, PerturbativeOrder, as);
+  const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
@@ -56,19 +54,6 @@ int main()
   t.start();
   const std::map<int, apfel::Distribution> tpdfs = apfel::QCDEvToPhys(TabulatedPDFs.Evaluate(mu).GetObjects());
   t.stop();
-
-  std::cout << "Direct evolution of the operators... ";
-  t.start();
-  apfel::Set<apfel::Operator> ops = EvolvedOps->Evaluate(mu);
-  t.stop();
-
-  // Convolute evolution operators with the initial scale
-  // distributions.
-  apfel::Set<apfel::Distribution> InDist = EvolvedPDFs->Evaluate(mu0);
-  const apfel::MatchEvolOperatorBasisQCD matchbasis{apfel::NF(mu0, Thresholds)};
-  InDist.SetMap(matchbasis);
-  ops.SetMap(matchbasis);
-  const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((ops * InDist).GetObjects());
 
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
@@ -93,21 +78,6 @@ int main()
                 << "  " << 2 * (pdfs.at(-2) + pdfs.at(-1)).Evaluate(x)
                 << "  " << (pdfs.at(4) + pdfs.at(-4)).Evaluate(x)
                 << "  " << pdfs.at(0).Evaluate(x)
-                << std::endl;
-    }
-  std::cout << "\n";
-
-  std::cout << "Direct Evolution through the evolution operators:" << std::endl;
-  for (auto const& x : xlha)
-    {
-      std::cout.precision(1);
-      std::cout << x;
-      std::cout.precision(4);
-      std::cout << "  " << (oppdfs.at(2) - oppdfs.at(-2)).Evaluate(x)
-                << "  " << (oppdfs.at(1) - oppdfs.at(-1)).Evaluate(x)
-                << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
-                << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
-                << "  " << oppdfs.at(0).Evaluate(x)
                 << std::endl;
     }
   std::cout << "\n";

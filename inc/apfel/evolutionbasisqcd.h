@@ -11,9 +11,9 @@
 namespace apfel
 {
   /**
-   * @defgroup EvolBases Evolution convolution maps
-   * Collection of derived classes from ConvolutionMap that implement
-   * the convolution map for the DGLAP evolution in the VFNS.
+   * @defgroup EvolBases Evolution convolution maps Collection of
+   * derived classes from ConvolutionMap that implement the
+   * convolution map for the DGLAP evolution in the VFNS.
    */
   ///@{
   /**
@@ -39,20 +39,29 @@ namespace apfel
     EvolutionBasisQCD(int const& nf):
       ConvolutionMap{"EvolutionBasisQCD_" + std::to_string(nf)}
     {
-      _rules[GLUON]   = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1} };
-      _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
+      _rules[GLUON] = { {PGG, GLUON, 1}, {PGQ, SIGMA, static_cast<double>(nf) / 6} };
+      for (int j = nf + 1; j <= 6; j++)
+        _rules[GLUON].push_back({PGQ, 2 * j - 1, static_cast<double>(nf) / j / ( j - 1 )});
+
+      _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, static_cast<double>(nf) / 6} };
+      for (int j = nf + 1; j <= 6; j++)
+        _rules[SIGMA].push_back({PQQ, 2 * j - 1, static_cast<double>(nf) / j / ( j - 1 )});
+
       _rules[VALENCE] = { {PNSV, VALENCE, 1} };
-      for (int k = 1; k < 6; k++)
-        if (k < nf)
-          {
-            _rules[2 * k + 1] = { {PNSP, 2 * k + 1, 1} };
-            _rules[2 * k + 2] = { {PNSM, 2 * k + 2, 1} };
-          }
-        else
-          {
-            _rules[2 * k + 1] = _rules[SIGMA];
-            _rules[2 * k + 2] = _rules[VALENCE];
-          }
+
+      for (int i = 2; i <= nf; i++)
+        {
+          _rules[2 * i - 1] = { {PNSP, 2 * i - 1, 1} };
+          _rules[2 * i]     = { {PNSM, 2 * i, 1} };
+        }
+
+      for (int i = nf + 1; i <= 6; i++)
+        {
+          _rules[2 * i - 1]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, static_cast<double>(nf) / 6} };
+          for (int j = nf + 1; j <= 6; j++)
+            _rules[2 * i - 1].push_back({PQQ, 2 * j - 1, static_cast<double>(nf) / j / ( j - 1 )});
+          _rules[2 * i]     = { {PNSV, 2 * i, 1} };
+        }
     };
   };
 
@@ -72,9 +81,8 @@ namespace apfel
     enum Object:  int {GG, GQ, QG, QQ, VAL, T3S, T3G, V3V, T8S, T8G, V8V, T15S, T15G, V15V, T24S, T24G, V24V, T35S, T35G, V35V};
 
     /**
-     * @brief The EvolutionOperatorBasisQCD constructor for
-     * the DGLAP evolution in the QCD evolution basis with nf active
-     * flavours.
+     * @brief The EvolutionOperatorBasisQCD constructor for the DGLAP
+     * evolution in the QCD evolution basis with nf active flavours.
      * @param nf: number of active flavours
      */
     EvolutionOperatorBasisQCD(int const& nf):
@@ -94,9 +102,9 @@ namespace apfel
           }
         else
           {
-            _rules[3 * k + 2] = _rules[QQ];
-            _rules[3 * k + 3] = _rules[QG];
-            _rules[3 * k + 4] = _rules[VAL];
+            _rules[3 * k + 2] = { {PQG, GQ, 1}, {PQQ, 3 * k + 2, 1} };
+            _rules[3 * k + 3] = { {PQG, GG, 1}, {PQQ, 3 * k + 3, 1} };
+            _rules[3 * k + 4] = { {PNSV, 3 * k + 4, 1} };
           }
     };
   };
@@ -117,9 +125,8 @@ namespace apfel
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
-     * @brief The MatchEvolOperatorBasisQCD constructor for
-     * the matching in the QCD evolution basis with nf active
-     * flavours.
+     * @brief The MatchEvolOperatorBasisQCD constructor for the
+     * matching in the QCD evolution basis with nf active flavours.
      * @param nf: number of active flavours
      */
     MatchEvolOperatorBasisQCD(int const& nf):

@@ -24,14 +24,12 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
-   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
    */
   std::map<int, DglapObjects> InitializeGpdObjects(Grid                const& g,
                                                    std::vector<double> const& Thresholds,
                                                    double              const& xi,
-                                                   bool                const& OpEvol = false,
                                                    double              const& IntEps = 1e-5);
   ///@}
 }
