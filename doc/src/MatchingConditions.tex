@@ -1293,7 +1293,7 @@ more familiar ones if these contributions are set to zero.
 Therefore, the evolution of the vector of distributions $E$ with $n_f$
 active flavours and possible intrinsic heavy-quark contributions takes
 the matricial form:
-\begin{equation}
+\begin{equation}\label{eq:DGLAPE}
 \frac{dE}{dt} = \mathbb{P}^{(n_f)}\otimes E\,,
 \end{equation}
 where the entries of the splitting-function matrix
@@ -1322,60 +1322,54 @@ P_{gg} & \quad i = 0 &\quad j = 0\\
 \right.\,.
 \end{equation}
 
-Starting from the structure of the splitting-function matrix, we can
-infer the structure of the evolution-operator matrix with a give
-number of active flavours, that is formally defined as:
+\subsection{Evolution operator}
+
+Assuming that the set of distributions $E$ evolves through the
+operator ${\bm\Gamma}$ as:
 \begin{equation}
-{\bm\Gamma}^{(n_f)}(t,t_0) = \mathcal{P}\exp\left[\int_{t_0}^tdt'\,\mathbb{P}^{(n_f)}(t')\right]\,,
+E(t) = {\bm\Gamma}(t,t_0)\otimes E(t_0)\,,
 \end{equation}
-where $\mathcal{P}$ symbolises the path ordering. It turns out that
-the structure of $\Gamma^{(n_f)}$ is similar to that of
-$\mathbb{P}^{(n_f)}$. Indeed, one finds that:
+Given the possible presence of heavy-quark thresholds in the evolution
+interval $[t_0,t]$, the operator ${\bm\Gamma}$ is in fact a product of
+operators. More specifically. it can be written as:
+\begin{equation}\label{eq:conbevop}
+{\bm\Gamma}(t,t_0)= {\bm\Gamma}^{(N)}(t,t_N) \otimes\prod_{n_f=N-1}^{0} \mathcal{M}^{(n_f)}\otimes{\bm\Gamma}^{(n_f)}(t_{n_f+1}-\epsilon,t_{n_f})
+\end{equation}
+with
+$\mathcal{M}^{(n_f)} =
+T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}$
+given in Eq.~(\ref{eq:algorithmEv}) and $t>t_N>\dots>t_1>t_0$, being
+$t_1,\dots,t_N$ the heavy-quark thresholds enclosed in the evolution
+interval. Using Eq.~(\ref{eq:DGLAPE}), each evolution operator
+${\bm\Gamma}^{(n_f)}$ obeys the evolution equation:
+\begin{equation}\label{eq:DGLAPG}
+  \frac{d}{dt}{\bm\Gamma}^{(n_f)}(t,t_{n_f}) = \mathbb{P}^{(n_f)}(t)\otimes {\bm\Gamma}^{(n_f)}(t,t_{n_f})\,,
+\end{equation}
+with boundary condition
+${\bm\Gamma}^{(n_f)}(t_{n_f},t_{n_f})=\mathbb{I}$. The solution of the
+equation above can be written as:
 \begin{equation}
-{\bm\Gamma}^{(n_f)}-\mathbb{I} \sim \mathbb{P}^{(n_f)}\,,
+  {\bm\Gamma}^{(n_f)}(t,t_{n_f}) = \mathcal{P}\exp\left[\int_{t_{n_f}}^tdt'\,\mathbb{P}^{(n_f)}(t')\right]\,,
 \end{equation}
-where $\mathbb{I}$ is the identity matrix and $\sim$ stands for
-``structural similarity''. Therefore the entries of
-${\bm\Gamma}^{(n_f)}$ can be arranged as:
+where $\mathcal{P}$ symbolises the path ordering. In order to achieve
+an efficient computation of the evolution operator, we need to
+identify the general structure of ${\bm \Gamma}^{(n_f)}$ Given the
+structure of the splitting-function matrix in
+Eq.~(\ref{eq:splittingalg}), one can infer the structure of
+${\bm \Gamma}^{(n_f)}$. It turns out that the structure of
+${\bm \Gamma^{(n_f)}}$ is almost the same as that of
+$\mathbb{P}^{(n_f)}$. Specifically:
 \begin{equation}\label{eq:evolopalg}
-{\bm\Gamma}_{jk}^{(n_f)}=
-\left\{
-\begin{array}{lll}
-\Gamma_0+\Gamma_{gg} & \quad j = 0 &\quad k = 0\\
-\Gamma_{qg} & \quad j = 1 &\quad k = 0\\
-0 & \quad 2 \leq j \leq n_f &\quad k = 0\\
-\Gamma_{qg} & \quad n_f+1 \leq j \leq 6  &\quad k = 0\\
-\\
-\Gamma_{gq} & \quad j = 0 & \quad k=1\\
-\Gamma_0 + \Gamma_{qq} & \quad j = 1 & \quad k=1\\
-0 & \quad 2 \leq j \leq n_f &\quad k = 1\\
-\Gamma_{qq} & \quad n_f+1 \leq j \leq 6  & \quad k=1\\
-\\
-\delta_{jk}(\Gamma_0+\Gamma^+) & \quad 0 \leq j \leq 6 & \quad 2 \leq k \leq
-                                              n_f\\
-\\
-\frac{6}{k(k-1)}\Gamma_{gq} &\quad j = 0 & \quad n_f+1 \leq k \leq 6\\
-\frac{6}{k(k-1)}\Gamma_{qq} &\quad j = 1 & \quad n_f+1 \leq k \leq 6\\
-0 &\quad 2 \leq j \leq n_f & \quad n_f+1 \leq k \leq 6 \\
-\delta_{jk}\Gamma_0+ \frac{6}{k(k-1)}\Gamma_{qq}
-            &\quad n_f+1 \leq j \leq 6 & \quad n_f+1 \leq k \leq 6\\
-\end{array}
-\right.
-\end{equation}
-
-
-\newpage
-\begin{equation}
-\left[{\bm\Gamma}^{(n_f)}-\mathbb{I}\right]_{ij}=
-\left\{
+  \left[{\bm\Gamma}^{(n_f)}-\mathbb{I}\right]_{ij}=
+  \left\{
 \begin{array}{lll}
 \Gamma_{gg} & \quad i = 0 &\quad j = 0\\
 \Gamma_{gq} & \quad i = 0 & \quad j=1\\
 0 &\quad i = 0 & \quad 2 \leq j \leq n_f\\
 \frac{6}{j(j-1)}\Gamma_{gq} &\quad i = 0 & \quad n_f+1 \leq j \leq 6\\
 \\
-\Gamma_{qg} & \quad i = 1 &\quad j = 0\\
-\Gamma_{qq} & \quad i = 1 & \quad j=1\\
+\Gamma_{qg} & \quad i = 1 & \quad j = 0\\
+\Gamma_{qq} & \quad i = 1 & \quad j = 1\\
 0 &\quad i = 1 & \quad 2 \leq j \leq n_f\\
 \frac{6}{j(j-1)}\Gamma_{qq} &\quad i = 1 & \quad n_f+1 \leq j \leq 6\\
 \\
@@ -1388,79 +1382,12 @@ ${\bm\Gamma}^{(n_f)}$ can be arranged as:
 \end{array}
 \right.\,.
 \end{equation}
-with $\Gamma_0=1$. Somewhat expectedly, the number of independent
-evolution kernels equals the number of independent splitting
-functions, that is \textit{five} for the singlet sector and
-\textit{two} for the non-singlet sector. We thus define the following
-vector of operators:
-\begin{equation}
-{\bm \gamma} =
-\begin{pmatrix}
-\Gamma^{\rm V}\\
-\Gamma^-\\
-\Gamma^+\\
-\Gamma_{qq}\\
-\Gamma_{qg}\\
-\Gamma_{gq}\\
-\Gamma_{gg}
-\end{pmatrix}\,.
-\end{equation}
-As a first step, we need to solve its evolution equation:
-\begin{equation}\label{eq:DGLAPop}
-  \frac{d{\bm \gamma}}{dt}=\mathcal{P}({\bm \gamma})\,,
-\end{equation}
-for a given number of active flavours $n_f$ taking into account the
-possible presence of intrinsic heavy quark contributions. To do so we
-need to know how the vectorial function $\mathcal{P}$ acts on
-${\bm \gamma}$ in terms of the known splitting functions. Then, in
-order to implement the VFNS, we need to know how the vector
-${\bm \gamma}$ matches at a given threshold. To this end, we define
-the matching function $\mathcal{M}^{(n_f)}$ in such a way that:
-\begin{equation}
-  {\bm \gamma}^{(n_f+1)}=\mathcal{M}^{(n_f)}({\bm \gamma})\,.
-\end{equation}
-We are thus need to determine how $\mathcal{M}^{(n_f)}$ acts on
-${\bm \gamma}$ in terms of the known matching functions.
-
-The action of the function $\mathcal{P}$ in Eq.~(\ref{eq:DGLAPop}) on
-the vector can be written as follows:
-\begin{equation}
-\mathcal{P}\left({\bm \gamma}\right) =
-\begin{pmatrix}
-P^{\rm V}\Gamma_0 +P^{\rm V}\Gamma^{\rm V}\\
-P^-\Gamma_0 +P^-\Gamma^-\\
-P^+\Gamma_0 +P^+\Gamma^+\\
-P_{qq}\Gamma_0+P_{qq}\Gamma_{qq}+2n_fP_{qg}\Gamma_{gq}\\
-P_{qq}\Gamma_{qg}+2n_fP_{qg}\Gamma_{gg}\\
-P_{gq}\Gamma_{qq}+P_{gg}\Gamma_{gq}\\
-P_{gg}\Gamma_0+P_{gq}\Gamma_{qg}+P_{gg}\Gamma_{gg}
-\end{pmatrix}\,.
-\end{equation}
-This is enough to compute the evolution of the vector ${\bm \gamma}$
-for a given number of active flavours, say $n_f$. Next, we need to
-work out the action of the matching function $\mathcal{M}^{(n_f)}$.
-\begin{equation}
-\mathcal{M}^{(n_f)}({\bm \gamma}) =
-\begin{pmatrix}
-P^{\rm V}\Gamma_0 +P^{\rm V}\Gamma^{\rm V}\\
-P^-\Gamma_0 +P^-\Gamma^-\\
-P^+\Gamma_0 +P^+\Gamma^+\\
-P_{qq}\Gamma_0+P_{qq}\Gamma_{qq}+2n_fP_{qg}\Gamma_{gq}\\
-P_{qq}\Gamma_{qg}+2n_fP_{qg}\Gamma_{gg}\\
-P_{gq}\Gamma_{qq}+P_{gg}\Gamma_{gq}\\
-P_{gg}\Gamma_0+P_{gq}\Gamma_{qg}+P_{gg}\Gamma_{gg}
-\end{pmatrix}\,.
-\end{equation}
-
-
-
-
 Now, using Eqs.~(\ref{eq:splittingalg}) and~(\ref{eq:evolopalg}), we
 need to work out a compact algorithm to compute the product
-$\mathbb{P}^{(n_f)} {\bm\Gamma}^{(n_f)}$ required for the computation
+$\mathbb{P}^{(n_f)}\otimes {\bm\Gamma}^{(n_f)}$ required for the computation
 of the evolution operator. This reads:
 \begin{equation}\label{eq:PGamma}
-\left[\mathbb{P}^{(n_f)}\left({\bm\Gamma}^{(n_f)}-\mathbb{I}\right)\right]_{ik}=
+\left[\mathbb{P}^{(n_f)}{\bm\Gamma}^{(n_f)}\right]_{ik}=\mathbb{P}^{(n_f)}_{ik}+
 \left\{
 \begin{array}{lll}
 P_{gg}\Gamma_{gg}+P_{gq}\Gamma_{qg} & \quad i = 0 &\quad k = 0\\
@@ -1479,48 +1406,53 @@ P_{gg}\Gamma_{gq}+P_{gq}\Gamma_{qq} & \quad i = 0 & \quad k=1\\
 \end{array}
 \right.
 \end{equation}
-
-Finally we need to compute how the evolution operator
-${\bm\Gamma}^{(n_f)}$ matches at the successive threshold. To do so,
-we need to compute the product
-$\mathbb{S}^{(n_f)}=T\mathbb{K}^{(n_f)} T^{-1}
-\left[{\bm\Gamma}^{(n_f)}-\mathbb{I}\right]$
-using Eq.~(\ref{eq:algorithmEv}) and~(\ref{eq:evolopalg}):
+ The number of independent
+evolution kernels equals the number of independent splitting
+functions, that is \textit{five} for the singlet sector and
+\textit{two} for the non-singlet sector. It is thus convenient to
+define the following vector of operators:
 \begin{equation}
-\footnotesize
-\mathbb{S}_{ik}^{(n_f)} =
-\left\{
-\begin{array}{lll}
-M_1\Gamma_{gg}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qg} &
-                                                                      \quad i = 0 &\quad k = 0\\
-M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq} & \quad i = 0 &\quad k =1\\
-0 & \quad i = 0 &\quad  2\leq k \leq n_f\\
-\frac1{k(k-1)}\left[M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq k \leq 6\\
-\\
-M_4\Gamma_{gg}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qg} & \quad i = 1&\quad  k=0\\
-M_4\Gamma_{gq}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qq}& \quad i = 1 &\quad  k=1\\
-0 & \quad i = 1 &\quad  2\leq k \leq n_f\\
-\frac{1}{k(k-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq k\leq 6\\
-\\
-\delta_{ik}M_7\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq k
-                                                         \leq 6\\
-\\
--n_f\left(M_4\Gamma_{gg}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qg}\right)+(n_f+1)M_7\Gamma_{qg}&\quad i = n_f+1 &\quad k =0\\
--n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}&\quad i = n_f+1 &\quad k =1\\
-0 & \quad i = n_f+1 &\quad  2\leq k \leq n_f\\
-  \frac{6}{k(k-1)}\left[-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}\right]
-&\quad i = n_f+1 &\quad n_f+1 \leq k \leq 6\\
-\\
-  \frac{6}{k(k-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq} \right]
-& \quad n_f+2\leq i \leq 6 &\quad  n_f+
-                                                            2\leq k
-                                                            \leq 6\\
-\end{array}
-\right.
+{\bm \gamma} =
+\begin{pmatrix}
+\Gamma^{\rm V}\\
+\Gamma^-\\
+\Gamma^+\\
+\Gamma_{qq}\\
+\Gamma_{qg}\\
+\Gamma_{gq}\\
+\Gamma_{gg}
+\end{pmatrix}\,,
 \end{equation}
-
-
-
+whose evolution equation reads:
+\begin{equation}\label{eq:DGLAPop}
+  \frac{d{\bm \gamma}}{dt}=\mathcal{P}({\bm \gamma})\,.
+\end{equation}
+Based on Eq.~(\ref{eq:PGamma}), the action of the function
+$\mathcal{P}$ on the vector ${\bm \gamma}$ can be written as follows:
+\begin{equation}
+\mathcal{P}\left({\bm \gamma}\right) =
+\begin{pmatrix}
+P^{\rm V}\Gamma_0 +P^{\rm V}\Gamma^{\rm V}\\
+P^-\Gamma_0 +P^-\Gamma^-\\
+P^+\Gamma_0 +P^+\Gamma^+\\
+P_{qq}\Gamma_0+P_{qq}\Gamma_{qq}+2n_fP_{qg}\Gamma_{gq}\\
+P_{qq}\Gamma_{qg}+2n_fP_{qg}\Gamma_{gg}\\
+P_{gq}\Gamma_{qq}+P_{gg}\Gamma_{gq}\\
+P_{gg}\Gamma_0+P_{gq}\Gamma_{qg}+P_{gg}\Gamma_{gg}
+\end{pmatrix}\,.
+\end{equation}
+where $\Gamma_0$ is the identity operator. This is enough to compute
+the evolution of the vector ${\bm \gamma}$ for all the required
+numbers of active flavours $n_f$. Once this is done, the operators
+${\bm \Gamma^{(n_f)}}$ can be reconstructed and combined to the
+matching conditions according to Eq.~(\ref{eq:conbevop}). To do so, we
+need to compute the product:
+\begin{equation}
+T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}{\bm \Gamma}^{(n_f)}=\mathbb{I} +T\mathbb{K}^{(n_f)}T^{-1}+{\bm \Gamma}^{(n_f)}+\mathbb{S}^{(n_f)}\,,
+\end{equation}
+where we have defined
+$\mathbb{S}^{(n_f)}=T\mathbb{K}^{(n_f)} T^{-1}{\bm\Gamma}^{(n_f)}$
+that is given by:
 \begin{equation}
 \footnotesize
 \mathbb{S}_{ik}^{(n_f)} =
@@ -1547,6 +1479,41 @@ K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq}& \quad i = 1 &\quad  k=1\\
 &\quad i = n_f+1 &\quad n_f+1 \leq k \leq 6\\
 \\
   \frac{6}{k(k-1)}\left[K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq} \right]
+& \quad n_f+2\leq i \leq 6 &\quad  n_f+
+                                                            2\leq k
+                                                            \leq 6\\
+\end{array}
+\right.
+\end{equation}
+
+
+
+\begin{equation}
+\footnotesize
+\mathbb{S}_{ik}^{(n_f)} =
+\left\{
+\begin{array}{lll}
+M_1\Gamma_{gg}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qg} &
+                                                                      \quad i = 0 &\quad k = 0\\
+M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq} & \quad i = 0 &\quad k =1\\
+0 & \quad i = 0 &\quad  2\leq k \leq n_f\\
+\frac1{k(k-1)}\left[M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq k \leq 6\\
+\\
+M_4\Gamma_{gg}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qg} & \quad i = 1&\quad  k=0\\
+M_4\Gamma_{gq}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qq}& \quad i = 1 &\quad  k=1\\
+0 & \quad i = 1 &\quad  2\leq k \leq n_f\\
+\frac{1}{k(k-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq k\leq 6\\
+\\
+\delta_{ik}M_7\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq k
+                                                         \leq 6\\
+\\
+-n_f\left(M_4\Gamma_{gg}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qg}\right)+(n_f+1)M_7\Gamma_{qg}&\quad i = n_f+1 &\quad k =0\\
+-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}&\quad i = n_f+1 &\quad k =1\\
+0 & \quad i = n_f+1 &\quad  2\leq k \leq n_f\\
+  \frac{6}{k(k-1)}\left[-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}\right]
+&\quad i = n_f+1 &\quad n_f+1 \leq k \leq 6\\
+\\
+  \frac{6}{k(k-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq} \right]
 & \quad n_f+2\leq i \leq 6 &\quad  n_f+
                                                             2\leq k
                                                             \leq 6\\
