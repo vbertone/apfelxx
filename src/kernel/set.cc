@@ -48,9 +48,9 @@ namespace apfel
         const auto& dist = d.GetObjects();
 
         // Start with the first object of the vector of rules. If it
-        // does not exist or its coefficient it zero continue.
+        // does not exist continue.
         auto o = std::begin(item->second);
-        if (dist.count(o->object) == 0 || o->coefficient == 0)
+        if (dist.count(o->object) == 0)
           continue;
         V result = _objects.at(o->operand) * dist.at(o->object);
 
