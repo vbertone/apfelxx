@@ -1092,7 +1092,6 @@ so, we define the following linearly independent combinations:
 \begin{equation}
 \footnotesize
 \begin{array}{lcl}
-M_0 &=& 1\,,\\
 M_1 &=& K_{gg}\,,\\
 M_2 &=& K_{gh} + n_f K_{gl}\,,\\
 M_3 &=& K_{gh}-K_{gl}\,,\\
@@ -1105,30 +1104,30 @@ M_7 &=& K_{ll}\,,
 such that:
 \begin{equation}\label{eq:algorithmEv}
 \footnotesize
-\left\{T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}\right\}_{ij} =
+\left[T\mathbb{K}^{(n_f)}T^{-1}\right]_{ij} =
 \left\{
 \begin{array}{lll}
-M_0+M_1 & \quad i = 0 &\quad j = 0\\
+M_1 & \quad i = 0 &\quad j = 0\\
 \frac{1}{6}M_2 & \quad i = 0 &\quad  j = 1\\
 0 & \quad i = 0 &\quad  2\leq j \leq n_f\\
 -\frac{1}{n_f+1}M_3 & \quad i = 0 &\quad  j = n_f+1\\
 \frac{1}{j(j-1)}M_2 & \quad i = 0 &\quad  n_f+ 2\leq j \leq 6\\
 \\
 M_4 & \quad i = 1&\quad  j=0\\
-M_0+\frac16 M_5 & \quad i = 1 &\quad  j=1\\
+\frac16 M_5 & \quad i = 1 &\quad  j=1\\
 0 & \quad i = 1 &\quad  2\leq j \leq n_f\\
 -\frac{1}{n_f+1}M_6 & \quad i = 1 &\quad  j = n_f+1\\
 \frac{1}{j(j-1)}M_5 & \quad i = 1 &\quad  n_f+
                                                             2\leq j
                                                             \leq 6\\
 \\
-\delta_{ij}\left(M_0+M_7\right)&\quad 2\leq i \leq n_f &\quad 0\leq j
+\delta_{ij}M_7&\quad 2\leq i \leq n_f &\quad 0\leq j
                                                          \leq 6\\
 \\
 -n_fM_4 &\quad i = n_f+1 &\quad j =0\\
 \frac{n_f}6\left(-M_5+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =1\\
 0 & \quad i = n_f+1 &\quad  2\leq j \leq n_f\\
-M_0+\frac1{n_f+1}\left(n_f M_6+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =n_f+1\\
+\frac1{n_f+1}\left(n_f M_6+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =n_f+1\\
 \frac{n_f}{j(j-1)}\left( -M_5+(n_f+1)M_7\right) &\quad i = n_f+1
                   &\quad n_f+2 \leq j \leq 6\\
 \\
@@ -1136,7 +1135,7 @@ M_4 & \quad n_f+2\leq i \leq 6 &\quad  j=0\\
 \frac16 M_5 & \quad n_f+2\leq i \leq 6 &\quad  j=1\\
 0 & \quad n_f+2\leq i \leq 6 &\quad  2\leq j \leq n_f\\
 -\frac{1}{n_f+1}M_6 & \quad n_f+2\leq i \leq 6 &\quad  j = n_f+1\\
-\delta_{ij}M_0+\frac{1}{j(j-1)}M_5 & \quad n_f+2\leq i \leq 6 &\quad  n_f+
+\frac{1}{j(j-1)}M_5 & \quad n_f+2\leq i \leq 6 &\quad  n_f+
                                                             2\leq j
                                                             \leq 6\\
 \end{array}
@@ -1324,11 +1323,13 @@ P_{gg} & \quad i = 0 &\quad j = 0\\
 
 \subsection{Evolution operator}
 
-Assuming that the set of distributions $E$ evolves through the
+We assume that the set of distributions $E$ evolves through the
 operator ${\bm\Gamma}$ as:
 \begin{equation}
-E(t) = {\bm\Gamma}(t,t_0)\otimes E(t_0)\,,
+  E(t) = {\bm\Gamma}(t,t_0)\otimes E(t_0)\,.
 \end{equation}
+In order to achieve an efficient computation of the evolution
+operator, we need to identify the general structure of ${\bm \Gamma}$.
 Given the possible presence of heavy-quark thresholds in the evolution
 interval $[t_0,t]$, the operator ${\bm\Gamma}$ is in fact a product of
 operators. More specifically. it can be written as:
@@ -1347,20 +1348,17 @@ ${\bm\Gamma}^{(n_f)}$ obeys the evolution equation:
 \end{equation}
 with boundary condition
 ${\bm\Gamma}^{(n_f)}(t_{n_f},t_{n_f})=\mathbb{I}$. The solution of the
-equation above can be written as:
+equation above can then be written as:
 \begin{equation}
   {\bm\Gamma}^{(n_f)}(t,t_{n_f}) = \mathcal{P}\exp\left[\int_{t_{n_f}}^tdt'\,\mathbb{P}^{(n_f)}(t')\right]\,,
 \end{equation}
-where $\mathcal{P}$ symbolises the path ordering. In order to achieve
-an efficient computation of the evolution operator, we need to
-identify the general structure of ${\bm \Gamma}^{(n_f)}$ Given the
-structure of the splitting-function matrix in
-Eq.~(\ref{eq:splittingalg}), one can infer the structure of
-${\bm \Gamma}^{(n_f)}$. It turns out that the structure of
-${\bm \Gamma^{(n_f)}}$ is almost the same as that of
+where $\mathcal{P}$ symbolises the path ordering. Given the structure
+of the splitting-function matrix in Eq.~(\ref{eq:splittingalg}), one
+can infer the structure of ${\bm \Gamma}^{(n_f)}$. It turns out that
+the structure of ${\bm \Gamma^{(n_f)}}$ is almost the same as that of
 $\mathbb{P}^{(n_f)}$. Specifically:
 \begin{equation}\label{eq:evolopalg}
-  \left[{\bm\Gamma}^{(n_f)}-\mathbb{I}\right]_{ij}=
+  {\bm\Gamma}^{(n_f)}_{ij}=\mathbb{I}_{ij}+
   \left\{
 \begin{array}{lll}
 \Gamma_{gg} & \quad i = 0 &\quad j = 0\\
@@ -1382,147 +1380,108 @@ $\mathbb{P}^{(n_f)}$. Specifically:
 \end{array}
 \right.\,.
 \end{equation}
-Now, using Eqs.~(\ref{eq:splittingalg}) and~(\ref{eq:evolopalg}), we
-need to work out a compact algorithm to compute the product
-$\mathbb{P}^{(n_f)}\otimes {\bm\Gamma}^{(n_f)}$ required for the computation
-of the evolution operator. This reads:
-\begin{equation}\label{eq:PGamma}
-\left[\mathbb{P}^{(n_f)}{\bm\Gamma}^{(n_f)}\right]_{ik}=\mathbb{P}^{(n_f)}_{ik}+
-\left\{
-\begin{array}{lll}
-P_{gg}\Gamma_{gg}+P_{gq}\Gamma_{qg} & \quad i = 0 &\quad k = 0\\
-P_{gg}\Gamma_{gq}+P_{gq}\Gamma_{qq} & \quad i = 0 & \quad k=1\\
-0 &\quad i = 0 & \quad 2 \leq k \leq n_f\\
-\frac{6}{k(k-1)}\left[ P_{gg}\Gamma_{gq}+P_{gq}\Gamma_{qq}\right]&\quad i = 0 & \quad n_f+1 \leq k \leq 6\\
-\\
-2n_fP_{qg}\Gamma_{gg}+P_{qq}\Gamma_{qg} & \quad i = 1 &\quad k = 0\\
-2n_fP_{qg}\Gamma_{gq}+P_{qq}\Gamma_{qq} & \quad i = 1 & \quad k=1\\
-0 &\quad i = 1 & \quad 2 \leq k \leq n_f\\
-\frac{6}{k(k-1)} \left[2n_fP_{qg}\Gamma_{gq}+P_{qq}\Gamma_{qq}\right]&\quad i = 1 & \quad n_f+1 \leq k \leq 6\\
-\\
-\delta_{ik}P^+\Gamma^+ & \quad 2 \leq i \leq n_f & \quad 0 \leq k \leq 6\\
-\\
-\frac{6}{k(k-1)}\left[2n_fP_{qg}\Gamma_{gq}+P_{qq}\Gamma_{qq} \right]&\quad n_f+1 \leq i \leq 6 & \quad n_f+1 \leq k \leq 6\\
-\end{array}
-\right.
-\end{equation}
- The number of independent
-evolution kernels equals the number of independent splitting
-functions, that is \textit{five} for the singlet sector and
-\textit{two} for the non-singlet sector. It is thus convenient to
-define the following vector of operators:
-\begin{equation}
-{\bm \gamma} =
-\begin{pmatrix}
-\Gamma^{\rm V}\\
-\Gamma^-\\
-\Gamma^+\\
-\Gamma_{qq}\\
-\Gamma_{qg}\\
-\Gamma_{gq}\\
-\Gamma_{gg}
-\end{pmatrix}\,,
-\end{equation}
-whose evolution equation reads:
-\begin{equation}\label{eq:DGLAPop}
-  \frac{d{\bm \gamma}}{dt}=\mathcal{P}({\bm \gamma})\,.
-\end{equation}
-Based on Eq.~(\ref{eq:PGamma}), the action of the function
-$\mathcal{P}$ on the vector ${\bm \gamma}$ can be written as follows:
-\begin{equation}
-\mathcal{P}\left({\bm \gamma}\right) =
-\begin{pmatrix}
-P^{\rm V}\Gamma_0 +P^{\rm V}\Gamma^{\rm V}\\
-P^-\Gamma_0 +P^-\Gamma^-\\
-P^+\Gamma_0 +P^+\Gamma^+\\
-P_{qq}\Gamma_0+P_{qq}\Gamma_{qq}+2n_fP_{qg}\Gamma_{gq}\\
-P_{qq}\Gamma_{qg}+2n_fP_{qg}\Gamma_{gg}\\
-P_{gq}\Gamma_{qq}+P_{gg}\Gamma_{gq}\\
-P_{gg}\Gamma_0+P_{gq}\Gamma_{qg}+P_{gg}\Gamma_{gg}
-\end{pmatrix}\,.
-\end{equation}
-where $\Gamma_0$ is the identity operator. This is enough to compute
-the evolution of the vector ${\bm \gamma}$ for all the required
-numbers of active flavours $n_f$. Once this is done, the operators
-${\bm \Gamma^{(n_f)}}$ can be reconstructed and combined to the
-matching conditions according to Eq.~(\ref{eq:conbevop}). To do so, we
-need to compute the product:
-\begin{equation}
-T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}{\bm \Gamma}^{(n_f)}=\mathbb{I} +T\mathbb{K}^{(n_f)}T^{-1}+{\bm \Gamma}^{(n_f)}+\mathbb{S}^{(n_f)}\,,
+% Using Eqs.~(\ref{eq:splittingalg}) and~(\ref{eq:evolopalg}), we can
+% work out the product $\mathbb{P}^{(n_f)}{\bm\Gamma}^{(n_f)}$ required
+% for the computation of the evolution operator. This reads:
+% \begin{equation}\label{eq:PGamma}
+% \left[\mathbb{P}^{(n_f)}{\bm\Gamma}^{(n_f)}\right]_{ij}=\mathbb{P}^{(n_f)}_{ij}+
+% \left\{
+% \begin{array}{lll}
+% P_{gg}\Gamma_{gg}+P_{gq}\Gamma_{qg} & \quad i = 0 &\quad j = 0\\
+% P_{gg}\Gamma_{gq}+P_{gq}\Gamma_{qq} & \quad i = 0 & \quad j=1\\
+% 0 &\quad i = 0 & \quad 2 \leq j \leq n_f\\
+% \frac{6}{j(j-1)}\left[ P_{gg}\Gamma_{gq}+P_{gq}\Gamma_{qq}\right]&\quad i = 0 & \quad n_f+1 \leq j \leq 6\\
+% \\
+% 2n_fP_{qg}\Gamma_{gg}+P_{qq}\Gamma_{qg} & \quad i = 1 &\quad j = 0\\
+% 2n_fP_{qg}\Gamma_{gq}+P_{qq}\Gamma_{qq} & \quad i = 1 & \quad j=1\\
+% 0 &\quad i = 1 & \quad 2 \leq j \leq n_f\\
+% \frac{6}{j(j-1)} \left[2n_fP_{qg}\Gamma_{gq}+P_{qq}\Gamma_{qq}\right]&\quad i = 1 & \quad n_f+1 \leq j \leq 6\\
+% \\
+% \delta_{ij}P^+\Gamma^+ & \quad 2 \leq i \leq n_f & \quad 0 \leq j \leq 6\\
+% \\
+% \frac{6}{j(j-1)}\left[2n_fP_{qg}\Gamma_{gq}+P_{qq}\Gamma_{qq} \right]&\quad n_f+1 \leq i \leq 6 & \quad n_f+1 \leq j \leq 6\\
+% \end{array}
+% \right.\,.
+% \end{equation}
+The next step is the computation of the product
+$\mathcal{M}^{(n_f)}{\bm\Gamma}^{(n_f)}=T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}{\bm
+  \Gamma}^{(n_f)}$ appearing in Eq.~(\ref{eq:conbevop}) that we
+conveniently split as:
+\begin{equation}\label{eq:nthfactor}
+\mathcal{M}^{(n_f)}{\bm\Gamma}^{(n_f)}={\bm \Gamma}^{(n_f)}+ T\mathbb{K}^{(n_f)}T^{-1}+\mathbb{S}^{(n_f)}\,,
 \end{equation}
 where we have defined
-$\mathbb{S}^{(n_f)}=T\mathbb{K}^{(n_f)} T^{-1}{\bm\Gamma}^{(n_f)}$
-that is given by:
-\begin{equation}
+$\mathbb{S}^{(n_f)}=T\mathbb{K}^{(n_f)}
+T^{-1}\left[{\bm\Gamma}^{(n_f)}-\mathbb{I}\right]$ that is given by:
+% \begin{equation}
+% \footnotesize
+% \mathbb{S}_{ik}^{(n_f)} =
+% \left\{
+% \begin{array}{lll}
+% K_{gg}\Gamma_{gg}+K_{gl}\Gamma_{qg} &
+%                                                                       \quad i = 0 &\quad k = 0\\
+% K_{gg}\Gamma_{gq}+K_{gl}\Gamma_{qq} & \quad i = 0 &\quad k =1\\
+% 0 & \quad i = 0 &\quad  2\leq k \leq n_f\\
+% \frac1{k(k-1)}\left[K_{gg}\Gamma_{gq}+K_{gl}\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq k \leq 6\\
+% \\
+% K_{hg}\Gamma_{gg}+K_{hl}\Gamma_{qg}+K_{ll}\Gamma_{qg} & \quad i = 1&\quad  k=0\\
+% K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq}& \quad i = 1 &\quad  k=1\\
+% 0 & \quad i = 1 &\quad  2\leq k \leq n_f\\
+% \frac{1}{k(k-1)}\left[K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq k\leq 6\\
+% \\
+% \delta_{ik}K_{ll}\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq k
+%                                                          \leq 6\\
+% \\
+% -n_f \left(K_{hg}\Gamma_{gg}+K_{hl}\Gamma_{qg}\right)+K_{ll}\Gamma_{qg}&\quad i = n_f+1 &\quad k =0\\
+% -n_f \left(K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}\right)+K_{ll}\Gamma_{qq}&\quad i = n_f+1 &\quad k =1\\
+% 0 & \quad i = n_f+1 &\quad  2\leq k \leq n_f\\
+%   \frac{6}{k(k-1)}\left[-n_f \left(K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}\right)+K_{ll}\Gamma_{qq}\right]
+% &\quad i = n_f+1 &\quad n_f+1 \leq k \leq 6\\
+% \\
+%   \frac{6}{k(k-1)}\left[K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq} \right]
+% & \quad n_f+2\leq i \leq 6 &\quad  n_f+
+%                                                             2\leq k
+%                                                             \leq 6\\
+% \end{array}
+% \right.
+% \end{equation}
+\begin{equation}\label{eq:Smatrix}
 \footnotesize
-\mathbb{S}_{ik}^{(n_f)} =
-\left\{
-\begin{array}{lll}
-K_{gg}\Gamma_{gg}+K_{gl}\Gamma_{qg} &
-                                                                      \quad i = 0 &\quad k = 0\\
-K_{gg}\Gamma_{gq}+K_{gl}\Gamma_{qq} & \quad i = 0 &\quad k =1\\
-0 & \quad i = 0 &\quad  2\leq k \leq n_f\\
-\frac1{k(k-1)}\left[K_{gg}\Gamma_{gq}+K_{gl}\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq k \leq 6\\
-\\
-K_{hg}\Gamma_{gg}+K_{hl}\Gamma_{qg}+K_{ll}\Gamma_{qg} & \quad i = 1&\quad  k=0\\
-K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq}& \quad i = 1 &\quad  k=1\\
-0 & \quad i = 1 &\quad  2\leq k \leq n_f\\
-\frac{1}{k(k-1)}\left[K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq k\leq 6\\
-\\
-\delta_{ik}K_{ll}\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq k
-                                                         \leq 6\\
-\\
--n_f \left(K_{hg}\Gamma_{gg}+K_{hl}\Gamma_{qg}\right)+K_{ll}\Gamma_{qg}&\quad i = n_f+1 &\quad k =0\\
--n_f \left(K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}\right)+K_{ll}\Gamma_{qq}&\quad i = n_f+1 &\quad k =1\\
-0 & \quad i = n_f+1 &\quad  2\leq k \leq n_f\\
-  \frac{6}{k(k-1)}\left[-n_f \left(K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}\right)+K_{ll}\Gamma_{qq}\right]
-&\quad i = n_f+1 &\quad n_f+1 \leq k \leq 6\\
-\\
-  \frac{6}{k(k-1)}\left[K_{hg}\Gamma_{gq}+K_{hl}\Gamma_{qq}+K_{ll}\Gamma_{qq} \right]
-& \quad n_f+2\leq i \leq 6 &\quad  n_f+
-                                                            2\leq k
-                                                            \leq 6\\
-\end{array}
-\right.
-\end{equation}
-
-
-
-\begin{equation}
-\footnotesize
-\mathbb{S}_{ik}^{(n_f)} =
+\mathbb{S}_{ij}^{(n_f)} =
 \left\{
 \begin{array}{lll}
 M_1\Gamma_{gg}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qg} &
-                                                                      \quad i = 0 &\quad k = 0\\
-M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq} & \quad i = 0 &\quad k =1\\
-0 & \quad i = 0 &\quad  2\leq k \leq n_f\\
-\frac1{k(k-1)}\left[M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq k \leq 6\\
+                                                                      \quad i = 0 &\quad j = 0\\
+M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq} & \quad i = 0 &\quad j =1\\
+0 & \quad i = 0 &\quad  2\leq j \leq n_f\\
+\frac1{j(j-1)}\left[M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq j \leq 6\\
 \\
-M_4\Gamma_{gg}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qg} & \quad i = 1&\quad  k=0\\
-M_4\Gamma_{gq}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qq}& \quad i = 1 &\quad  k=1\\
-0 & \quad i = 1 &\quad  2\leq k \leq n_f\\
-\frac{1}{k(k-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq k\leq 6\\
+M_4\Gamma_{gg}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qg} & \quad i = 1&\quad  j=0\\
+M_4\Gamma_{gq}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qq}& \quad i = 1 &\quad  j=1\\
+0 & \quad i = 1 &\quad  2\leq j \leq n_f\\
+\frac{1}{j(j-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq j\leq 6\\
 \\
-\delta_{ik}M_7\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq k
+\delta_{ij}M_7\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq j
                                                          \leq 6\\
 \\
--n_f\left(M_4\Gamma_{gg}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qg}\right)+(n_f+1)M_7\Gamma_{qg}&\quad i = n_f+1 &\quad k =0\\
--n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}&\quad i = n_f+1 &\quad k =1\\
-0 & \quad i = n_f+1 &\quad  2\leq k \leq n_f\\
-  \frac{6}{k(k-1)}\left[-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}\right]
-&\quad i = n_f+1 &\quad n_f+1 \leq k \leq 6\\
+-n_f\left(M_4\Gamma_{gg}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qg}\right)+(n_f+1)M_7\Gamma_{qg}&\quad i = n_f+1 &\quad j =0\\
+-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}&\quad i = n_f+1 &\quad j =1\\
+0 & \quad i = n_f+1 &\quad  2\leq j \leq n_f\\
+  \frac{6}{j(j-1)}\left[-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}\right]
+&\quad i = n_f+1 &\quad n_f+1 \leq j \leq 6\\
 \\
-  \frac{6}{k(k-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq} \right]
+  \frac{6}{j(j-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq} \right]
 & \quad n_f+2\leq i \leq 6 &\quad  n_f+
-                                                            2\leq k
+                                                            2\leq j
                                                             \leq 6\\
 \end{array}
 \right.
 \end{equation}
-
-
-\newpage
+Eq.~(\ref{eq:nthfactor}) along with Eq.~(\ref{eq:Smatrix}) allow us to
+infer the general structure on the $n_f$-th factor in
+Eq.~(\ref{eq:conbevop}). It should be clear that the structure is
+driven by the term $T\mathbb{K}^{(n_f)}T^{-1}$ in
+Eq.~(\ref{eq:algorithmEv}).
 
 We finally comment on FFs. So far, to the best of my knowledge, none
 of the $\mathcal{O}(\alpha_s^2)$ corrections to the FF matching

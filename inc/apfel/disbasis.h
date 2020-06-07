@@ -137,7 +137,7 @@ namespace apfel
      * 8 - Vts2
      * 9 - Vtb2
      */
-    std::map<int,std::pair<int,int>> Vij =
+    std::map<int, std::pair<int, int>> Vij =
     {
       {1, {1, 1}}, {2, {1, 2}}, {3, {1, 3}},
       {4, {2, 1}}, {5, {2, 2}}, {6, {2, 3}},

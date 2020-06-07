@@ -55,7 +55,7 @@ namespace apfel
 
     // Numerical solution of the evolution equation with fourth-order
     // Runge-Kutta.
-    const auto dObj = rk4<T>([&](double const& t, T const& Obj)->T{ return Derivative(nf, t, Obj); });
+    const auto dObj = rk4<T>([&] (double const& t, T const& Obj) -> T{ return Derivative(nf, t, Obj); });
 
     // Use "_nsteps" steps for the evolution.
     double t        = t0;

@@ -17,21 +17,18 @@ int main()
   const double mu0 = sqrt(2);
 
   // Vectors of masses and thresholds
-  const std::vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175};
-  const std::vector<double> Thresholds = Masses;
+  const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
   const int PerturbativeOrder = 2;
 
   // Running coupling
-  const double AlphaQCDRef = 0.35;
-  const double MuAlphaQCDRef = sqrt(2);
-  apfel::AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
+  apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
   const apfel::TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj = InitializeDglapObjectsQCD(g, Masses, Thresholds);
+  const auto DglapObj = InitializeDglapObjectsQCD(g, Thresholds);
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);

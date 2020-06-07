@@ -58,7 +58,7 @@ namespace apfel
      * @brief Retrieve the full set of rules for the multiplications.
      * @return The multiplication rules
      */
-    std::map<int,std::vector<rule>> const& GetRules() const { return _rules; }
+    std::map<int, std::vector<rule>> const& GetRules() const { return _rules; }
 
     /**
      * @brief Retrieve the full set of rules for the multiplications
@@ -91,8 +91,8 @@ namespace apfel
     }
     ///@}
   protected:
-    std::map<int,std::vector<rule>> _rules; //!< the map container
-    std::string                     _name;  //!< the name of the derived class
+    std::map<int, std::vector<rule>> _rules; //!< the map container
+    std::string                      _name;  //!< the name of the derived class
   };
 
   /**

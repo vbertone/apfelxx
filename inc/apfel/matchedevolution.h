@@ -11,7 +11,6 @@
 
 namespace apfel
 {
-
   /**
    * @brief The MatchedEvolution class is a template mother class for
    * the computation of the running of a generic quantity in a
