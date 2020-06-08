@@ -64,31 +64,14 @@ namespace apfel
      * @brief Retrieve the full set of rules for the multiplications
      * in the form of a matrix.
      */
-    matrix<double> const GetRuleMatrix() const
-    {
-      matrix<double> m{_rules.size(), _rules.size()};
-      for (auto const& r : _rules)
-        for (auto const& e : r.second)
-          m(r.first, e.object) = e.coefficient;
-
-      return m;
-    }
+    matrix<std::vector<double>> const GetRuleMatrix() const;
 
     /**
      * @brief Retrieve the operand indices of the full set of rules
      * for the multiplications in the form of a matrix. Elements set
      * to -1 correspond to empty slots.
      */
-    matrix<int> const GetRuleIndices() const
-    {
-      matrix<int> m{};
-      m.resize(_rules.size(), _rules.size(), -1);
-      for (auto const& r : _rules)
-        for (auto const& e : r.second)
-          m(r.first, e.object) = e.operand;
-
-      return m;
-    }
+    matrix<std::vector<int>> const GetRuleIndices() const;
     ///@}
   protected:
     std::map<int, std::vector<rule>> _rules; //!< the map container
@@ -107,11 +90,6 @@ namespace apfel
      * @brief The DiagonalBasis constructor
      * @param nf: number of elements
      */
-    DiagonalBasis(int const& nf):
-      ConvolutionMap{"DiagonalBasis_" + std::to_string(nf)}
-    {
-      for (int k = 0; k < nf; k++)
-        _rules[k] = { {k, k, 1} };
-    };
+    DiagonalBasis(int const& nf);
   };
 }

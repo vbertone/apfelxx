@@ -804,16 +804,29 @@ namespace apfel
                                               std::function<double(double const&)> const& Alphas,
                                               int                                  const& nsteps)
   {
-    // Collect thresholds.
+    // Trick to change "DglapObj" despite it is a constant reference
+    std::map<int, DglapObjects>* DglapObjPtr;
+    DglapObjPtr = (std::map<int, DglapObjects>*) (&DglapObj);
+
+    // Collect thresholds and set appropriate maps for splitting
+    // functions and matching conditions.
     std::vector<double> Thresholds;
-    for (auto const& obj : DglapObj)
+    for (auto& obj : *DglapObjPtr)
       {
         const int    nf  = obj.first;
         const double thr = obj.second.Threshold;
         if ((int) Thresholds.size() < nf)
           Thresholds.resize(nf);
         Thresholds[nf-1] = thr;
+
+        for (auto& sf : obj.second.SplittingFunctions)
+          sf.second.SetMap(EvolutionOperatorBasisQCD{nf});
+
+        for (auto& mc : obj.second.MatchingConditions)
+          mc.second.SetMap(MatchingOperatorBasisQCD{nf});
       }
+    DglapObjPtr = NULL;
+    delete DglapObjPtr;
 
     // Allocate Identity and Zero operators.
     const Operator One{DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), Identity{}};
@@ -822,15 +835,13 @@ namespace apfel
     // Create set of initial operators that represent the unity set of
     // operators.
     std::map<int, Operator> MapUnity;
-    MapUnity.insert({0,  One});
-    MapUnity.insert({1,  Zero});
-    MapUnity.insert({2,  Zero});
-    MapUnity.insert({3,  Zero});
-    MapUnity.insert({4,  Zero});
-    MapUnity.insert({5,  Zero});
-    MapUnity.insert({6,  Zero});
-    MapUnity.insert({6,  Zero});
-    Set<Operator> Unity{EvolutionOperatorBasisQCD{3}, MapUnity};
+    for (int i = 0; i < 55; i++)
+      if (i == 0  || i == 8  || i == 14 || i == 17 || i == 22 || i == 26 || i == 30 ||
+          i == 35 || i == 38 || i == 44 || i == 46 || i == 53 || i == 54)
+        MapUnity.insert({i, One});
+      else
+        MapUnity.insert({i, Zero});
+    Set<Operator> Unity{EvolutionOperatorBasisQCD{NF(MuRef, Thresholds)}, MapUnity};
 
     // Initialize DGLAP evolution.
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),

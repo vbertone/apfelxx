@@ -30,4 +30,6 @@ namespace apfel
   template class matrix<int>;
   template class matrix<float>;
   template class matrix<double>;
+  template class matrix<std::vector<int>>;
+  template class matrix<std::vector<double>>;
 }

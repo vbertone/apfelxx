@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/convolutionmap.h"
+#include "apfel/evolutionbasisqcd.h"
 
 namespace apfel
 {
@@ -68,7 +69,7 @@ namespace apfel
       for (int k = nf + 2; k <= 6; k++)
         {
           _rules[onf].push_back({M5, 2 * k - 1, - nf / (static_cast<double>(k * ( k - 1 )))});
-          _rules[onf].push_back({M7, 2 * k - 1,  nf * nf1 / (static_cast<double>(k * ( k - 1 )))});
+          _rules[onf].push_back({M7, 2 * k - 1, nf * nf1 / (static_cast<double>(k * ( k - 1 )))});
         }
 
       // Super-heavy singlet-like distributions. They match exactly
@@ -89,6 +90,46 @@ namespace apfel
         for (auto& t : r.second)
           if (t.object == 3)
             t.coefficient *= -1;
+    };
+  };
+
+  /**
+   * @brief The MatchingOperatorBasisQCD class is a derived of
+   * ConvolutionMap specialised for the matching of the evolution of
+   * operators at the heavy-quark thresholds using the QCD evolution
+   * basis.
+   */
+  class MatchingOperatorBasisQCD: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The MatchingOperatorBasisQCD constructor
+     * @param nf: number of active flavours
+     */
+    MatchingOperatorBasisQCD(int const& nf):
+      ConvolutionMap{"MatchingOperatorBasisQCD_" + std::to_string(nf)}
+    {
+      // Allocate MatchingBasisQCD object to retrieve the splitting
+      // matrix rules
+      const MatchingBasisQCD mb{nf};
+
+      // Get matrix of coefficients
+      const matrix<std::vector<double>> rc = mb.GetRuleMatrix();
+
+      // Get matrix of operator indices
+      const matrix<std::vector<int>> ri = mb.GetRuleIndices();
+
+      // Now construct set of rules
+      for (int i = 0; i < 13; i++)
+        for (int j = 0; j < 13; j++)
+          for (int k = 0; k < 13; k++)
+            {
+              if (rc(i, k).empty() || Gkj.count({k, j}) == 0)
+                continue;
+
+              for (int l = 0; l < (int) rc(i, k).size(); l++)
+                _rules[Gkj.at({i, j})].push_back({ri(i, k)[l], Gkj.at({k, j}), rc(i, k)[l]});
+            }
     };
   };
   ///@}

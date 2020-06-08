@@ -32,9 +32,13 @@ int main()
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
+  const auto EvolvedOps  = BuildDglap(DglapObj,                   mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
+
+  // Tabulate Operators
+  //const apfel::TabulateObject<apfel::Set<apfel::Operator>> TabulatedOps{*EvolvedOps, 50, 1, 1000, 3};
 
   // Final scale
   const double mu = 100;
@@ -51,6 +55,17 @@ int main()
   t.start();
   const std::map<int, apfel::Distribution> tpdfs = apfel::QCDEvToPhys(TabulatedPDFs.Evaluate(mu).GetObjects());
   t.stop();
+
+  //std::cout << "Interpolation of the tabulated evolution operators... ";
+  //t.start();
+  apfel::Set<apfel::Operator> tops = EvolvedOps->Evaluate(mu);
+  //apfel::Set<apfel::Operator> tops = TabulatedOps.Evaluate(mu);
+  //t.stop();
+
+  // Set appropriate convolution basis for the evolution operators and
+  // convolute thme with initial-scale distributions.
+  tops.SetMap(apfel::EvolveDistributionsBasisQCD{});
+  const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((tops * apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCD{}, DistributionMap(g, apfel::LHToyPDFs, mu0)}).GetObjects());
 
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
@@ -75,6 +90,21 @@ int main()
                 << "  " << 2 * (pdfs.at(-2) + pdfs.at(-1)).Evaluate(x)
                 << "  " << (pdfs.at(4) + pdfs.at(-4)).Evaluate(x)
                 << "  " << pdfs.at(0).Evaluate(x)
+                << std::endl;
+    }
+  std::cout << "\n";
+
+  std::cout << "Evolution through the evolution operator:" << std::endl;
+  for (auto const& x : xlha)
+    {
+      std::cout.precision(1);
+      std::cout << x;
+      std::cout.precision(4);
+      std::cout << "  " << (oppdfs.at(2) - oppdfs.at(-2)).Evaluate(x)
+                << "  " << (oppdfs.at(1) - oppdfs.at(-1)).Evaluate(x)
+                << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
+                << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
+                << "  " << oppdfs.at(0).Evaluate(x)
                 << std::endl;
     }
   std::cout << "\n";
