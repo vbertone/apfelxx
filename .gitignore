@@ -80,3 +80,6 @@ bin/apfelxx-config
 
 # Python
 __pycache__
+
+# Build directory
+build
