@@ -28,17 +28,15 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj = InitializeDglapObjectsQCD(g, Thresholds);
+  const auto DglapObj   = InitializeDglapObjectsQCD(g, Thresholds);
+  const auto DglapObjOp = InitializeDglapObjectsQCD(g, Thresholds, true);
 
   // Construct the DGLAP objects
-  const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
-  const auto EvolvedOps  = BuildDglap(DglapObj,                   mu0, PerturbativeOrder, as);
+  const auto EvolvedPDFs = BuildDglap(DglapObj,   apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
+  const auto EvolvedOps  = BuildDglap(DglapObjOp,                   mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
-
-  // Tabulate Operators
-  //const apfel::TabulateObject<apfel::Set<apfel::Operator>> TabulatedOps{*EvolvedOps, 50, 1, 1000, 3};
 
   // Final scale
   const double mu = 100;
@@ -56,11 +54,10 @@ int main()
   const std::map<int, apfel::Distribution> tpdfs = apfel::QCDEvToPhys(TabulatedPDFs.Evaluate(mu).GetObjects());
   t.stop();
 
-  //std::cout << "Interpolation of the tabulated evolution operators... ";
-  //t.start();
+  std::cout << "Interpolation of the tabulated evolution operators... ";
+  t.start();
   apfel::Set<apfel::Operator> tops = EvolvedOps->Evaluate(mu);
-  //apfel::Set<apfel::Operator> tops = TabulatedOps.Evaluate(mu);
-  //t.stop();
+  t.stop();
 
   // Set appropriate convolution basis for the evolution operators and
   // convolute thme with initial-scale distributions.

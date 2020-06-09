@@ -31,17 +31,17 @@ namespace apfel
     // Number of grids.
     const int ng = _grid.nGrids();
 
-    // Loop over the subgrids.
+    // Loop over the subgrids
     _Operator.resize(ng);
     for (int ig = 0; ig < ng; ig++)
       {
-        // Define the global subgrid.
+        // Define the global subgrid
         const SubGrid& sg = _grid.GetSubGrid(ig);
 
-        // Get vector with the grid nodes.
+        // Get vector with the grid nodes
         const std::vector<double>& xg = sg.GetGrid();
 
-        // Number of grid points.
+        // Number of grid points
         const int nx = sg.nx();
 
         // Interpolation degree.
@@ -79,11 +79,11 @@ namespace apfel
                 // though more integrals have to be computed, the
                 // integration converges faster and is more accurate.
 
-                // Number of grid intervals we need to integrate over.
+                // Number of grid intervals we need to integrate over
                 const int nmin = fmax(0, alpha + 1 - nx);
                 const int nmax = fmin(id, alpha - beta) + 1;
 
-                // Integral.
+                // Integral
                 double I = 0;
                 for (int jint = nmin; jint < nmax; jint++)
                   {
@@ -104,10 +104,10 @@ namespace apfel
                     };
                     const Integrator Io{integrand};
 
-                    // Compute the integral.
+                    // Compute the integral
                     I += Io.integrate(c, d, eps);
                   }
-                // Add the local part.
+                // Add the local part
                 _Operator[ig](beta, alpha) = I + L * ws;
               }
           }
@@ -125,7 +125,7 @@ namespace apfel
   //_________________________________________________________________________
   Distribution Operator::operator *= (Distribution const& d) const
   {
-    // Fast method to check that we are using the same Grid.
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &d.GetGrid())
       throw std::runtime_error(error("Operator::operator*=", "Operator and Distribution grids do not match"));
 
@@ -133,7 +133,7 @@ namespace apfel
     std::vector<std::vector<double>> s(sg);
     std::vector<double> j;
 
-    // Compute the the distribution on the subgrids.
+    // Compute the the distribution on the subgrids
     int const ng = _grid.nGrids();
     for (int ig = 0; ig < ng; ig++)
       {
@@ -159,11 +159,11 @@ namespace apfel
                 s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
             }
 
-        // Set to zero the values above one.
+        // Set to zero the values above one
         for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
           s[ig][alpha] = 0;
 
-        // Compute the the distribution on the joint grid.
+        // Compute the distribution on the joint grid
         double xtrans;
         if (ig < ng-1)
           xtrans = this->_grid.GetSubGrid(ig+1).xMin();
@@ -179,7 +179,7 @@ namespace apfel
           }
       }
 
-    // Set to zero the values above one.
+    // Set to zero the values above one
     for (int alpha = 0; alpha < this->_grid.GetJointGrid().InterDegree(); alpha++)
       j.push_back(0);
 
@@ -189,13 +189,13 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator *= (Operator const& o)
   {
-    // fast method to check that we are using the same Grid.
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator*=", "Operators grid does not match"));
 
     const auto v = _Operator;
 
-    const int ng = _grid.nGrids(); //sg.size();
+    const int ng = _grid.nGrids();
     for (int ig = 0; ig < ng; ig++)
       {
         const int nx = this->_grid.GetSubGrid(ig).nx();
@@ -272,7 +272,7 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator += (Operator const& o)
   {
-    // fast method to check that we are using the same Grid.
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
@@ -287,7 +287,7 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator -= (Operator const& o)
   {
-    // fast method to check that we are using the same Grid.
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
@@ -351,5 +351,27 @@ namespace apfel
   Operator operator - (Operator lhs, Operator const& rhs)
   {
     return lhs -= rhs;
+  }
+
+  //_________________________________________________________________________________
+  std::ostream& operator << (std::ostream& os, Operator const& op)
+  {
+    const std::vector<matrix<double>> om = op.GetOperator();
+    os << "Operator: " << &op << "\n";
+    os << "Operator on the first SubGrid:" << "\n";
+    const std::ostringstream default_format;
+    os << std::scientific;
+    os.precision(1);
+    for (int i = 0; i < (int) om[0].size(0); i++)
+      {
+        os << "i: " << i << "\n[";
+        for (int j = 0; j < (int) om[0].size(1); j++)
+          os << om[0](i, j) << " ";
+        os << "\b]";
+        if (i != (int) om[0].size(0) - 1)
+          os << "\n";
+      }
+    os.copyfmt(default_format);
+    return os;
   }
 }

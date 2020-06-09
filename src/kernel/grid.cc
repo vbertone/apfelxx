@@ -158,7 +158,6 @@ namespace apfel
     os << "ExtGrids  = " << gr._ExtGrids << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
     for (const auto &v: gr._JointGrid.GetGrid()) os << v << " ";
-    os << "\n\n";
     return os;
   }
 }

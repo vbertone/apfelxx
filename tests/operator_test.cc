@@ -40,5 +40,8 @@ int main()
   const apfel::Operator op{g, p};
   t.stop();
 
+  // Print operator
+  std::cout << op << std::endl;;
+
   return 0;
 }

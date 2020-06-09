@@ -56,6 +56,9 @@ int main()
   // Distribution
   const apfel::Distribution d{g, [&] (double const& x) -> double{ return 1 - x; }};
 
+  // Print distribution
+  std::cout << d;
+
   // Expression
   const p0qq p;
 
@@ -103,6 +106,10 @@ int main()
       double x = g.GetJointGrid().GetGrid()[ix];
       std::cout << x << "\t\t" << OOd.Evaluate(x) << "\t\t" << O2d.Evaluate(x) << "\t\t" << OOd.Evaluate(x) / O2d.Evaluate(x) << std::endl;
     }
+
+  // Now define a double object with O and d and print it.
+  const apfel::DoubleObject<apfel::Operator, apfel::Distribution> DObj{{{1, O, d}}};
+  std::cout << DObj << std::endl;
 
   return 0;
 }

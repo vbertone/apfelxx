@@ -22,6 +22,7 @@ namespace apfel
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
                                                         std::vector<double> const& Masses,
                                                         std::vector<double> const& Thresholds,
+                                                        bool                const& OpEvol,
                                                         double              const& IntEps)
   {
     report("Initializing DglapObjects for space-like QCD unpolarised evolution... ");
@@ -237,13 +238,26 @@ namespace apfel
       {
         DglapObjects obj;
         obj.Threshold = Thresholds[nf-1];
-        obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-        obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-        obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
-        obj.SplittingFunctions.insert({3, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNNLO.at(nf)}});
-        obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
-        obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
-        obj.MatchingConditions.insert({2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+        if (OpEvol)
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({3, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
+          }
+        else
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({3, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+          }
         DglapObj.insert({nf, obj});
       }
     t.stop();
@@ -254,15 +268,17 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
                                                         std::vector<double> const& Thresholds,
+                                                        bool                const& OpEvol,
                                                         double              const& IntEps)
   {
-    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, IntEps);
+    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCDT(Grid                const& g,
                                                          std::vector<double> const& Masses,
                                                          std::vector<double> const& Thresholds,
+                                                         bool                const& OpEvol,
                                                          double              const& IntEps)
   {
     report("Initializing DglapObjects for time-like QCD unpolarised evolution... ");
@@ -425,12 +441,24 @@ namespace apfel
       {
         DglapObjects obj;
         obj.Threshold = Thresholds[nf-1];
-        obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-        obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-        obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
-        obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
-        obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
-        obj.MatchingConditions.insert({2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+        if (OpEvol)
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
+          }
+        else
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+          }
         DglapObj.insert({nf,obj});
       }
     t.stop();
@@ -441,15 +469,17 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCDT(Grid                const& g,
                                                          std::vector<double> const& Thresholds,
+                                                         bool                const& OpEvol,
                                                          double              const& IntEps)
   {
-    return InitializeDglapObjectsQCDT(g, Thresholds, Thresholds, IntEps);
+    return InitializeDglapObjectsQCDT(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCDtrans(Grid                const& g,
                                                              std::vector<double> const& Masses,
                                                              std::vector<double> const& Thresholds,
+                                                             bool                const& OpEvol,
                                                              double              const& IntEps)
   {
     report("Initializing DglapObjects for space-like QCD transversely polarised evolution... ");
@@ -547,10 +577,20 @@ namespace apfel
       {
         DglapObjects obj;
         obj.Threshold = Thresholds[nf-1];
-        obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-        obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-        obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
-        obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
+        if (OpEvol)
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO}});
+          }
+        else
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
+          }
         DglapObj.insert({nf,obj});
       }
     t.stop();
@@ -561,15 +601,17 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCDtrans(Grid                const& g,
                                                              std::vector<double> const& Thresholds,
+                                                             bool                const& OpEvol,
                                                              double              const& IntEps)
   {
-    return InitializeDglapObjectsQCDtrans(g, Thresholds, Thresholds, IntEps);
+    return InitializeDglapObjectsQCDtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCDTtrans(Grid                const& g,
                                                               std::vector<double> const& Masses,
                                                               std::vector<double> const& Thresholds,
+                                                              bool                const& OpEvol,
                                                               double              const& IntEps)
   {
     report("Initializing DglapObjects for time-like QCD transversely polarised evolution... ");
@@ -667,10 +709,20 @@ namespace apfel
       {
         DglapObjects obj;
         obj.Threshold = Thresholds[nf-1];
-        obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-        obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-        obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
-        obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
+        if (OpEvol)
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO}});
+          }
+        else
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
+          }
         DglapObj.insert({nf,obj});
       }
     t.stop();
@@ -681,9 +733,10 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeDglapObjectsQCDTtrans(Grid                const& g,
                                                               std::vector<double> const& Thresholds,
+                                                              bool                const& OpEvol,
                                                               double              const& IntEps)
   {
-    return InitializeDglapObjectsQCDTtrans(g, Thresholds, Thresholds, IntEps);
+    return InitializeDglapObjectsQCDTtrans(g, Thresholds, Thresholds, OpEvol, IntEps);
   }
 
   //_____________________________________________________________________________
@@ -804,29 +857,16 @@ namespace apfel
                                               std::function<double(double const&)> const& Alphas,
                                               int                                  const& nsteps)
   {
-    // Trick to change "DglapObj" despite it is a constant reference
-    std::map<int, DglapObjects>* DglapObjPtr;
-    DglapObjPtr = (std::map<int, DglapObjects>*) (&DglapObj);
-
-    // Collect thresholds and set appropriate maps for splitting
-    // functions and matching conditions.
+    // Collect thresholds.
     std::vector<double> Thresholds;
-    for (auto& obj : *DglapObjPtr)
+    for (auto const& obj : DglapObj)
       {
         const int    nf  = obj.first;
         const double thr = obj.second.Threshold;
         if ((int) Thresholds.size() < nf)
           Thresholds.resize(nf);
         Thresholds[nf-1] = thr;
-
-        for (auto& sf : obj.second.SplittingFunctions)
-          sf.second.SetMap(EvolutionOperatorBasisQCD{nf});
-
-        for (auto& mc : obj.second.MatchingConditions)
-          mc.second.SetMap(MatchingOperatorBasisQCD{nf});
       }
-    DglapObjPtr = NULL;
-    delete DglapObjPtr;
 
     // Allocate Identity and Zero operators.
     const Operator One{DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), Identity{}};

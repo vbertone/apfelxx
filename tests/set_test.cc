@@ -84,5 +84,8 @@ int main()
   std::cout << "\nTotal ";
   ttot.stop();
 
+  // Print Set
+  std::cout << Sum << std::endl;
+
   return 0;
 }

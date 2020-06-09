@@ -23,6 +23,7 @@ namespace apfel
   std::map<int, DglapObjects> InitializeGpdObjects(Grid                const& g,
                                                    std::vector<double> const& Thresholds,
                                                    double              const& xi,
+                                                   bool                const& OpEvol,
                                                    double              const& IntEps)
   {
     report("Initializing DglapObjects for GPD unpolarised evolution... ");
@@ -91,8 +92,16 @@ namespace apfel
       {
         DglapObjects obj;
         obj.Threshold = Thresholds[nf-1];
-        obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-        obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+        if (OpEvol)
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+          }
+        else
+          {
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+          }
         DglapObj.insert({nf,obj});
       }
     t.stop();

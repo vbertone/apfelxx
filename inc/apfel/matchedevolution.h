@@ -81,22 +81,22 @@ namespace apfel
     /**
      * @brief Function that returns the reference value of the object
      */
-    T const& GetObjectRef() const { return _ObjRef; }
+    T GetObjectRef() const { return _ObjRef; }
 
     /**
      * @brief Function that returns the reference scale
      */
-    double const& GetMuRef() const { return _MuRef; }
+    double GetMuRef() const { return _MuRef; }
 
     /**
      * @brief Function that returns the values of the thresholds.
      */
-    std::vector<double> const& GetThresholds() const { return _Thresholds; }
+    std::vector<double> GetThresholds() const { return _Thresholds; }
 
     /**
      * @brief Function that returns the number of steps.
      */
-    int const& GetNumberOfSteps() const { return _nsteps; }
+    int GetNumberOfSteps() const { return _nsteps; }
     ///@}
 
     /**

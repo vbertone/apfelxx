@@ -147,5 +147,14 @@ namespace apfel
     Grid                             const& _grid;                  //!< The stored grid reference
     std::vector<std::vector<double>>        _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
     std::vector<double>                     _distributionJointGrid; //!< The array with the distribution values on the joint grid.
+
+    friend std::ostream& operator << (std::ostream& os, Interpolator const& sg);
   };
+
+  /**
+   * @brief Method which prints Interpolator with cout <<. This only
+   * prints the first subgrid and is supposed to be used for debugging
+   * purposes.
+   */
+  std::ostream& operator << (std::ostream& os, Interpolator const& in);
 }

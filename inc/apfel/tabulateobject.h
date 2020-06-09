@@ -40,7 +40,7 @@ namespace apfel
      * @param InterDegree: the interpolation degree on the grid in Q
      * @param Lambda: the value of the parameter in the function ln(ln(Q<SUP>2</SUP>/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.25)
      */
-    TabulateObject(MatchedEvolution<T> &Object,
+    TabulateObject(MatchedEvolution<T>      & Object,
                    int                 const& nQ,
                    double              const& QMin,
                    double              const& QMax,

@@ -163,10 +163,28 @@ namespace apfel
     return CombObj;
   }
 
+  //_________________________________________________________________________
+  template<class U>
+  std::ostream& operator << (std::ostream& os, Set<U> const& s)
+  {
+    os << "Set: " << &s << "\n";
+    os << s.GetMap() << "\n";
+    os << "Set of objects:\n";
+    for (auto const& e : s.GetObjects())
+      {
+        os << "- Object index: " << e.first << "\n";
+        os << "- Object:\n" << e.second << "\n";
+      }
+    return os;
+  }
+
   // Specialisations.
   template class Set<Distribution>;
   template class Set<Operator>;
   template class Set<DoubleObject<Distribution, Operator>>;
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
+  template std::ostream& operator << (std::ostream& os, Set<Distribution> const& s);
+  template std::ostream& operator << (std::ostream& os, Set<Operator> const& s);
+  template std::ostream& operator << (std::ostream& os, Set<DoubleObject<Distribution, Operator>> const& s);
 }

@@ -76,7 +76,14 @@ namespace apfel
   protected:
     std::map<int, std::vector<rule>> _rules; //!< the map container
     std::string                      _name;  //!< the name of the derived class
+
+    friend std::ostream& operator << (std::ostream& os, ConvolutionMap const& cm);
   };
+
+  /**
+   * @brief Method which prints ConvolutionMap with cout <<.
+   */
+  std::ostream& operator << (std::ostream& os, ConvolutionMap const& cm);
 
   /**
    * @brief The DiagonalBasis class is the simplest derivation of
