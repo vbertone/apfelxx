@@ -94,7 +94,7 @@ namespace apfel
 
                     // Define integrand and the corresponding
                     // "Integrator" object.
-                    const auto integrand = [&] (double const& x) -> double
+                    const std::function<double(double const&)> integrand = [&] (double const& x) -> double
                     {
                       const double z = x / eta;
                       if (z >= 1)
@@ -193,7 +193,7 @@ namespace apfel
     if (&this->_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator*=", "Operators grid does not match"));
 
-    const auto v = _Operator;
+    const std::vector<matrix<double>> v = _Operator;
 
     const int ng = _grid.nGrids();
     for (int ig = 0; ig < ng; ig++)
@@ -209,21 +209,19 @@ namespace apfel
                 {
                   _Operator[ig](alpha, beta) = 0;
                   for (int gamma = alpha; gamma <= beta; gamma++)
-                    _Operator[ig](alpha, beta) += v[ig](alpha,gamma) * o._Operator[ig](gamma,beta);
+                    _Operator[ig](alpha, beta) += v[ig](alpha, gamma) * o._Operator[ig](gamma, beta);
                 }
           }
         // If the grid is internal the product between the operators
-        // has to be done exploiting the symmetry of the operators.
+        // can be done exploiting the symmetry of the operators.
         else
           {
-            _Operator[ig].resize(nx + 1, nx + 1, 0);
-            for (int alpha = 0; alpha <= nx; alpha++)
-              for (int beta = alpha; beta <= nx; beta++)
-                {
-                  _Operator[ig](alpha, beta) = 0;
-                  for (int gamma = alpha; gamma <= beta; gamma++)
-                    _Operator[ig](alpha, beta) += v[ig](0,gamma-alpha) * o._Operator[ig](0,beta-gamma);
-                }
+	    for (int beta = 0; beta <= nx; beta++)
+	      {
+		_Operator[ig](0, beta) = 0;
+		for (int gamma = 0; gamma <= beta; gamma++)
+		  _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
+	      }
           }
       }
     return *this;
@@ -364,12 +362,12 @@ namespace apfel
     os.precision(1);
     for (int i = 0; i < (int) om[0].size(0); i++)
       {
-        os << "i: " << i << "\n[";
+        os << "{i: " << i << ", [";
         for (int j = 0; j < (int) om[0].size(1); j++)
           os << om[0](i, j) << " ";
         os << "\b]";
         if (i != (int) om[0].size(0) - 1)
-          os << "\n";
+          os << "}\n";
       }
     os.copyfmt(default_format);
     return os;
