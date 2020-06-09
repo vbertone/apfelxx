@@ -5,6 +5,7 @@ set(structurefunctions_source
   hqcoef.f
   massivezerocoefficientfunctions.cc
   zeromasscoefficientfunctions_tl.cc
+  disbasis.cc
   )
 
 add_library(structurefunctions OBJECT ${structurefunctions_source})
