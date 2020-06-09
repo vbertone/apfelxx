@@ -35,9 +35,19 @@ namespace apfel
   // *INDENT-ON*
 
   /**
-   * @defgroup EvolBases Evolution convolution maps Collection of
-   * derived classes from ConvolutionMap that implement the
-   * convolution map for the DGLAP evolution in the VFNS.
+   * @defgroup ConvMap Convolution maps
+   * Collection of convolution maps to combine sets of objects
+   * according to the task.
+   */
+  ///@{
+  ///@}
+
+
+  /**
+   * @defgroup EvolBases Evolution convolution maps
+   * Collection of derived classes from ConvolutionMap that implement
+   * the convolution map for the DGLAP evolution in the VFNS.
+   * @ingroup ConvMap
    */
   ///@{
   /**

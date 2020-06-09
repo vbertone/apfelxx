@@ -14,7 +14,7 @@ namespace apfel
    * @defgroup NCMassless Zero-mass coefficient functions for DIS
    * Collection of the Zero-mass coefficient functions for
    * F<SUB>2</SUB>, F<SUB>L</SUB>, and F<SUB>3</SUB> up to
-   * O(&alpha;<SUB>s</SUB>).
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>).
    * @note While for the O(&alpha;<SUB>s</SUB>) coefficient functions
    * exact expressions are used, a fast parameterisation for the
    * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) ones is used. See

@@ -12,7 +12,7 @@ namespace apfel
 {
   /**
    * @defgroup MatchCondTL Time-like matching conditions
-   * @notes The expressions are taken from:
+   * @note The expressions are taken from:
    * https://arxiv.org/pdf/hep-ph/0504192.pdf.
    */
   ///@{

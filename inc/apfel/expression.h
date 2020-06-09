@@ -37,21 +37,18 @@ namespace apfel
     ///@{
     /**
      * @brief Virtual regular term.
-     * @param x: the integration variable
      * @return The regular term at x
      */
     virtual double Regular(double const&) const { return 0; }
 
     /**
      * @brief Virtual singular term.
-     * @param x: the integration variable
      * @return The singular term at x
      */
     virtual double Singular(double const&) const { return 0; }
 
     /**
      * @brief Virtual local term.
-     * @param x: the physical variable
      * @return The local term at x
      */
     virtual double Local(double const&) const { return 0; }

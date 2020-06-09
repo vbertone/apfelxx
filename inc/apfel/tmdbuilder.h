@@ -52,6 +52,7 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @param nnnlo: switch to compute the NNNLO matching functions (default: true)
    * @return A map DglapObject objects, one for each possible nf
    */
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
@@ -104,7 +105,7 @@ namespace apfel
    * b-space as functions of the final scale and rapidity. It assumes
    * the zeta-prescription.
    * @param TmdObj: the TMD objects
-   * @param CollPDFs: the set of collinear PDFs to be matched
+   * @param CollFFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
    * @param Ci: the initial-scale variation factor

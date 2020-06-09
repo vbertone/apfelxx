@@ -31,14 +31,14 @@ namespace apfel
 
     /**
      * @brief The Integrator constructor.
-     * @param func: the function of two variables to be integrated over the first
+     * @param func2: the function of two variables to be integrated over the first
      * @param arg2: the value of the second variable while integrating over the first
      */
     Integrator(std::function<double(double const&, double const&)> const& func2, double const& arg2);
 
     /**
      * @brief The Integrator constructor.
-     * @param func: the function of three variables to be integrated over the first
+     * @param func3: the function of three variables to be integrated over the first
      * @param arg2: the value of the second variable while integrating over the first
      * @param arg3: the value of the third variable while integrating over the first
      */

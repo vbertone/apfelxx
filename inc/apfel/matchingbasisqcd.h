@@ -12,9 +12,11 @@
 namespace apfel
 {
   /**
-   * @defgroup MatchBases Matching convolution maps Collection of
-   * derived classes from ConvolutionMap that implement the
-   * convolution map for the matching at the heavy-quark thresholds.
+   * @defgroup MatchBases Matching convolution maps
+   * Collection of derived classes from ConvolutionMap that implement
+   * the convolution map for the matching at the heavy-quark
+   * thresholds.
+   * @ingroup ConvMap
    */
   ///@{
   /**

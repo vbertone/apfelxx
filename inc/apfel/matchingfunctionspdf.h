@@ -37,7 +37,7 @@ namespace apfel
   ///@{
   ///@}
   /**
-   * @defgroup NLO NLO matching functions for PDFs
+   * @defgroup NLOmatch NLO matching functions for PDFs
    * @ingroup SLMatchFunc
    */
   ///@{
@@ -92,7 +92,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNLO NNLO matching functions for PDFs
+   * @defgroup NNLOmatch NNLO matching functions for PDFs
    * @ingroup SLMatchFunc
    */
   ///@{
@@ -188,7 +188,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNNLO NNNLO matching functions for PDFs
+   * @defgroup NNNLOmatch NNNLO matching functions for PDFs
    * @ingroup SLMatchFunc
    */
   ///@{
@@ -287,8 +287,8 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NLOBM NLO matching functions for linearly polarised
-   * gluon PDF (Boer-Mulders)
+   * @defgroup NLOBM NLO matching functions for Boer-Mulders PDFs
+   * NLO matching functions for linearly polarised gluon PDF (Boer-Mulders)
    * @ingroup SLMatchFunc
    */
   ///@{

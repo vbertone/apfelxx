@@ -33,6 +33,7 @@ namespace apfel
      * @param MuRef: the reference value of the scale
      * @param Masses: vector of masses
      * @param Thresholds: vector of thresholds
+     * @param pt: perturbative order
      * @param nsteps: number of steps of the ODE solver
      */
     AlphaQCD(double              const& AlphaRef,
@@ -40,13 +41,14 @@ namespace apfel
              std::vector<double> const& Masses,
              std::vector<double> const& Thresholds,
              int                 const& pt,
-             int                 const& nstep = 10);
+             int                 const& nsteps = 10);
 
     /**
      * @brief AlphaQCD constructor.
      * @param AlphaRef: the reference value of the coupling
      * @param MuRef: the reference value of the scale
      * @param Masses: vector of masses
+     * @param pt: perturbative order
      * @param nsteps: number of steps of the ODE solver
      * @note This constructor assumes that masses and thresholds coincide.
      */

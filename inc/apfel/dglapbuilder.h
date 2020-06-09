@@ -60,7 +60,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark masses
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -95,7 +95,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark masses
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -130,7 +130,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark masses
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -165,7 +165,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark masses
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -205,7 +205,6 @@ namespace apfel
    * @brief The BuildDglap function builds the actual dglap object
    * that performs the DGLAP evolution for operators.
    * @param DglapObj: structure with the coefficients of the perturbative objects
-   * @param InDistFunc: the distributions at the reference scale
    * @param MuRef: the reference scale
    * @param PerturbativeOrder: the perturbative order of the evolution
    * @param Alphas: the function returning the strong coupling
@@ -222,6 +221,7 @@ namespace apfel
    * @brief The BuildDglap function builds the actual dglap object
    * that performs the DGLAP evolution for distributions.
    * @param DglapObj: DglapObjects-values function that returns the structure with the coefficients of the perturbative objects as function of a scale
+   * @param Thresholds: the heavy-quark masses
    * @param InDistFunc: the distributions at the reference scale
    * @param MuRef: the reference scale
    * @param PerturbativeOrder: the perturbative order of the evolution

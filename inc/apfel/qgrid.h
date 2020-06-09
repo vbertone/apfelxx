@@ -139,7 +139,7 @@ namespace apfel
      * @param Q: the value of Q of the required interpolation
      * @return the derivarive of the interpolation weights
      */
-    double DerInterpolant(int const& tQ, int const& tau, double const& Qa) const;
+    double DerInterpolant(int const& tQ, int const& tau, double const& Q) const;
 
     /**
      * @brief Derivative of the interpolation functions on QGrid.

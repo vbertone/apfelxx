@@ -34,7 +34,7 @@ namespace apfel
     double clnlobarq_(double *wr,double *xi);
   }
   ///@}
-  /// endcond
+  /// \endcond
 
   /**
    * @defgroup NCMassive Massive neutral current coefficient functions

@@ -12,7 +12,7 @@ namespace apfel
 {
   /**
    * @defgroup MatchCond Space-like matching conditions
-   * @notes The expressions are taken from:
+   * @note The expressions are taken from:
    * https://arxiv.org/pdf/hep-ph/9612398.pdf. Note that in these
    * expressions ln(m<SUP>2</SUP>/&mu;<SUP>2</SUP>) appears while we
    * need ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>), so we need to include a

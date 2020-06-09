@@ -107,9 +107,6 @@ namespace apfel
     /**
      * @brief Virtual method for the derivative of the interpolating
      * functions.
-     * @param beta: the x-space grid index
-     * @param lnx: the value (of the log) of the interpolation point
-     * @param sg: the SubGrid over which the interpolant is defined
      * @return the derivarive of the interpolation weights
      */
     virtual double DerInterpolant(int const&, double const&, SubGrid const&) const { return 0; };
@@ -117,10 +114,6 @@ namespace apfel
     /**
      * @brief Virtual method for the integral of the interpolating
      * functions.
-     * @param beta: the x-space grid index
-     * @param lna: the value (of the log) of the lower bound
-     * @param lnb: the value (of the log) of the upper bound
-     * @param sg: the SubGrid over which the interpolant is defined
      * @return the integral of the interpolation weights
      */
     virtual double IntInterpolant(int const&, double const&, double const&, SubGrid const&) const { return 0; };

@@ -30,7 +30,7 @@ namespace apfel
 
     /**
      * @brief Function that returns the phase-space reduction factor.
-     * @param M: invariant mass of the leptonic pair
+     * @param Q: invariant mass of the leptonic pair
      * @param y: rapidity of the leptonic pair
      * @param qT: transverse momentum of the leptonic pair
      * @return the phase-space reduction factor as a function of the
@@ -42,7 +42,7 @@ namespace apfel
     /**
      * @brief Function that returns the derivative w.r.t. qT of the
      * phase-space reduction factor.
-     * @param M: invariant mass of the leptonic pair
+     * @param Q: invariant mass of the leptonic pair
      * @param y: rapidity of the leptonic pair
      * @param qT: transverse momentum of the leptonic pair
      * @return the derivative of the phase-space reduction factor as a
@@ -54,7 +54,7 @@ namespace apfel
     /**
      * @brief Function that returns the phase-space reduction factor
      * associated to the parity violating contribution.
-     * @param M: invariant mass of the leptonic pair
+     * @param Q: invariant mass of the leptonic pair
      * @param y: rapidity of the leptonic pair
      * @param qT: transverse momentum of the leptonic pair
      * @return the phase-space reduction factor as a function of the

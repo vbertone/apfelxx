@@ -20,6 +20,7 @@ namespace apfel
   ///@}
   /**
    * @defgroup MathConstants Mathematical constants
+   * Collection of mathematical constants often used in the code.
    * @ingroup NumericalConstants
    */
   ///@{
@@ -73,6 +74,7 @@ namespace apfel
 
   /**
    * @defgroup PhysConstants Physical constants
+   * Collection of physical constants often used in the code.
    * @ingroup NumericalConstants
    */
   ///@{

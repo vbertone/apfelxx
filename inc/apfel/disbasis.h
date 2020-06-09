@@ -17,6 +17,7 @@ namespace apfel
    * @defgroup DISBases DIS convolution maps
    * Collection of derived classes from ConvolutionMap that implement
    * the convolution map for NC and CC DIS structure functions.
+   * @ingroup ConvMap
    */
   ///@{
   /**

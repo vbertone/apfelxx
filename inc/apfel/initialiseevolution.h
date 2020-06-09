@@ -38,6 +38,7 @@ namespace apfel
     /**
      * @brief The InitialiseEvolution constructor.
      * @param setup: the EvolutionSetup data structure encapsulate the evolution parameters
+     * @param WriteGrid: switch to enable the writing of grids in the LHAPDF format (default: false)
      */
     InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid = false);
 
