@@ -58,7 +58,7 @@ namespace apfel
     /**
      * @brief This returns the convolution map.
      */
-    ConvolutionMap  const& GetMap() const { return _map; }
+    ConvolutionMap const& GetMap() const { return _map; }
     /**
      * @brief This returns the full map of objects.
      */

@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <vector>
+#include <iostream>
 
 namespace apfel
 {
@@ -107,7 +108,7 @@ namespace apfel
      * @brief Function that sets the reference value of the object
      * @param ObjRef: the reference object
      */
-    void SetObjectRef(T const& ObjRef) { _ObjRef = ObjRef; }
+    void SetObjectRef(T ObjRef) { _ObjRef = std::move(ObjRef); }
 
     /**
      * @brief Function that sets the reference scale

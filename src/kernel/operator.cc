@@ -216,12 +216,12 @@ namespace apfel
         // can be done exploiting the symmetry of the operators.
         else
           {
-	    for (int beta = 0; beta <= nx; beta++)
-	      {
-		_Operator[ig](0, beta) = 0;
-		for (int gamma = 0; gamma <= beta; gamma++)
-		  _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
-	      }
+            for (int beta = 0; beta <= nx; beta++)
+              {
+                _Operator[ig](0, beta) = 0;
+                for (int gamma = 0; gamma <= beta; gamma++)
+                  _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
+              }
           }
       }
     return *this;

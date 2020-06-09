@@ -38,11 +38,14 @@ int main()
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
+  // Tabulate Operators
+  const apfel::TabulateObject<apfel::Set<apfel::Operator>> TabulatedOps{*EvolvedOps, 50, 1, 1000, 3};
+
   // Final scale
   const double mu = 100;
 
   // Compute results
-  std::cout << std::scientific << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
+  std::cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
 
   // Evolve PDFs to the final Scale
   apfel::Timer t;
@@ -56,16 +59,17 @@ int main()
 
   std::cout << "Interpolation of the tabulated evolution operators... ";
   t.start();
-  apfel::Set<apfel::Operator> tops = EvolvedOps->Evaluate(mu);
+  apfel::Set<apfel::Operator> tops = TabulatedOps.Evaluate(mu);
   t.stop();
 
   // Set appropriate convolution basis for the evolution operators and
-  // convolute thme with initial-scale distributions.
+  // convolute them with initial-scale distributions.
   tops.SetMap(apfel::EvolveDistributionsBasisQCD{});
   const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((tops * apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCD{}, DistributionMap(g, apfel::LHToyPDFs, mu0)}).GetObjects());
 
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
+  std::cout << std::scientific;
 
   std::cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << std::endl;
   std::cout << "\n   x    "
