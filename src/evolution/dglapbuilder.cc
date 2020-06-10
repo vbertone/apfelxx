@@ -425,14 +425,9 @@ namespace apfel
     // ===============================================================
     // NNLO Matching conditions. Set to zero for now because they are
     // not know yet.
-    std::map<int, std::map<int, Operator>> MatchNNLO;
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        for (int i = MatchingBasisQCD::M1; i <= MatchingBasisQCD::M7; i++)
-          OM.insert({i, Zero});
-        MatchNNLO.insert({nf, OM});
-      }
+    std::map<int, Operator> MatchNNLO;
+    for (int i = MatchingBasisQCD::M1; i <= MatchingBasisQCD::M7; i++)
+      MatchNNLO.insert({i, Zero});
 
     // ===============================================================
     // NNLO splitting function operators.
@@ -470,21 +465,23 @@ namespace apfel
         obj.Threshold = Thresholds[nf-1];
         if (OpEvol)
           {
-            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
-            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
-            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
-            obj.MatchingConditions.insert({2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO}});
+            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO}});
           }
         else
           {
-            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
-            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
-            obj.MatchingConditions.insert({2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO}});
+            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO}});
           }
         DglapObj.insert({nf,obj});
       }
