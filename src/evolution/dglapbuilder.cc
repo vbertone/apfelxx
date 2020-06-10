@@ -181,6 +181,31 @@ namespace apfel
         MatchNNLO.insert({nf, OM});
       }
 
+    // Auxiliary NNLO contributions to be used for backward
+    // matching. The are essentially the square of the NLO matching
+    // matrix. They are labelled with perturbative order -2.
+    std::map<int, std::map<int, Operator>> MatchNNLOb;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator AS1Hg  =          LogKth[nf-1] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf-1] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nf-1] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;;
+        const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+        const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+        const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M1, AS1ggH2});
+        OM.insert({MatchingBasisQCD::M2, AS1gH2});
+        OM.insert({MatchingBasisQCD::M3, AS1gH2});
+        OM.insert({MatchingBasisQCD::M4, AS1Hg2});
+        OM.insert({MatchingBasisQCD::M5, AS1HH2});
+        OM.insert({MatchingBasisQCD::M6, AS1HH2});
+        OM.insert({MatchingBasisQCD::M7, Zero});
+        MatchNNLOb.insert({nf, OM});
+      }
+
     // ===============================================================
     // NNLO splitting function operators.
     std::map<int, std::map<int, Operator>> OpMapNNLO;
@@ -240,23 +265,25 @@ namespace apfel
         obj.Threshold = Thresholds[nf-1];
         if (OpEvol)
           {
-            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
-            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
-            obj.SplittingFunctions.insert({3, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
-            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
-            obj.MatchingConditions.insert({2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 3, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLOb.at(nf)}});
           }
         else
           {
-            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.SplittingFunctions.insert({2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
-            obj.SplittingFunctions.insert({3, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
-            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
-            obj.MatchingConditions.insert({2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
+            obj.SplittingFunctions.insert({ 3, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
+            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb.at(nf)}});
           }
         DglapObj.insert({nf, obj});
       }
@@ -799,23 +826,23 @@ namespace apfel
     else if (PerturbativeOrder == 1)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf) );
+        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf));
         const auto mc = DglapObj.at(nf).MatchingConditions;
-        return mc.at(0) + ( Up ? 1 : -1) * cp * mc.at(1);
+        return mc.at(0) + (Up ? 1 : -1) * cp * mc.at(1);
       };
     else if (PerturbativeOrder == 2)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf) );
+        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf));
         const auto mc = DglapObj.at(nf).MatchingConditions;
-        return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
+        return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
     else if (PerturbativeOrder == 3)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = ( Up ? asThUp.at(nf+1) : asThDown.at(nf) );
+        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf));
         const auto mc = DglapObj.at(nf).MatchingConditions;
-        return mc.at(0) + ( Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
+        return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
     else
       throw std::runtime_error(error("MatchingConditions","Perturbative order not allowed."));
@@ -887,100 +914,5 @@ namespace apfel
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
                                                                  MatchingConditions(DglapObj, PerturbativeOrder, Alphas), Unity, MuRef, Thresholds, nsteps
                                                                 });
-  }
-
-  //_____________________________________________________________________________
-  std::unique_ptr<Dglap<Distribution>> BuildDglap(std::function<DglapObjects(double const&)>                         const& DglapObj,
-                                                  std::vector<double>                                                const& Thresholds,
-                                                  std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
-                                                  double                                                             const& MuRef,
-                                                  int                                                                const& PerturbativeOrder,
-                                                  std::function<double(double const&)>                               const& Alphas,
-                                                  int                                                                const& nsteps)
-  {
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-        nfi++;
-
-    // Compute coupling above and below the thresholds.
-    std::map<int, double> asThUp;
-    std::map<int, double> asThDown;
-    for (int nf = nfi + 1; nf <= nff; nf++)
-      {
-        asThDown.insert({nf, Alphas(Thresholds[nf-1]  * ( 1 - eps8 ) ) / FourPi});
-        asThUp.insert({nf, Alphas(Thresholds[nf-1] * ( 1 + eps8 ) ) / FourPi});
-      }
-
-    // Create splitting functions and matching conditions lambda
-    // functions according to the requested perturbative order.
-    std::function<Set<Operator>(int const&, double const&)> SplittingFunctions;
-    std::function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
-    if (PerturbativeOrder == 0)
-      {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
-        {
-          const double cp = Alphas(mu) / FourPi;
-          return cp * DglapObj(mu).SplittingFunctions.at(0);
-        };
-        MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
-        {
-          return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0);
-        };
-      }
-    else if (PerturbativeOrder == 1)
-      {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
-        {
-          const double cp = Alphas(mu) / FourPi;
-          const auto sf = DglapObj(mu).SplittingFunctions;
-          return cp * ( sf.at(0) + cp * sf.at(1) );
-        };
-        MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
-        {
-          return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0);
-        };
-      }
-    else if (PerturbativeOrder == 2)
-      {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
-        {
-          const double cp = Alphas(mu) / FourPi;
-          const auto sf = DglapObj(mu).SplittingFunctions;
-          return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
-        };
-        MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
-        {
-          const double cp = asThUp.at(nf+1);
-          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
-          return mc.at(0) + ( Up ? 1 : -1) * cp * cp * mc.at(2);
-        };
-      }
-    else if (PerturbativeOrder == 3)
-      {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
-        {
-          const double cp = Alphas(mu) / FourPi;
-          const auto sf = DglapObj(mu).SplittingFunctions;
-          return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
-        };
-        MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
-        {
-          const double cp = asThUp.at(nf+1);
-          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
-          return mc.at(0) + ( Up ? 1 : -1) * cp * cp * mc.at(2);
-        };
-      }
-
-    // Create set of initial distributions.
-    const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
-                                   DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
-
-    // Initialize DGLAP evolution.
-    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
   }
 }
