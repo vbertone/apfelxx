@@ -54,21 +54,17 @@ namespace apfel
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    std::map<int, std::map<int, Operator>> MatchLO;
+    std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCD::M1, Id});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, ( nf + 1 ) * Id});
-        OM.insert({MatchingBasisQCD::M6, Zero});
-        OM.insert({MatchingBasisQCD::M7, Id});
-        MatchLO.insert({nf, OM});
-      }
+    MatchLO.insert({MatchingBasisQCD::M0, Id});
+    MatchLO.insert({MatchingBasisQCD::M1, Zero});
+    MatchLO.insert({MatchingBasisQCD::M2, Zero});
+    MatchLO.insert({MatchingBasisQCD::M3, Zero});
+    MatchLO.insert({MatchingBasisQCD::M4, Zero});
+    MatchLO.insert({MatchingBasisQCD::M5, Zero});
+    MatchLO.insert({MatchingBasisQCD::M6, Zero});
+    MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
     // LO splitting function operators.
@@ -106,6 +102,7 @@ namespace apfel
         const Operator AS1gH  = AS1gH0 + LogKth[nf-1] * AS1gHL;
         const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
         std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS1ggH});
         OM.insert({MatchingBasisQCD::M2, AS1gH});
         OM.insert({MatchingBasisQCD::M3, AS1gH});
@@ -171,6 +168,7 @@ namespace apfel
         const Operator AS2ggH  = AS2ggH0  + lnk * AS2ggHL  + lnk2 * AS2ggHL2;
         const Operator AS2qqH  = AS2qqH0  + lnk * AS2qqHL  + lnk2 * AS2qqHL2;
         std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS2ggH});
         OM.insert({MatchingBasisQCD::M2, nf * AS2gqH});
         OM.insert({MatchingBasisQCD::M3, (-1) * AS2gqH});
@@ -196,6 +194,7 @@ namespace apfel
         const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
         const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
         std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS1ggH2});
         OM.insert({MatchingBasisQCD::M2, AS1gH2});
         OM.insert({MatchingBasisQCD::M3, AS1gH2});
@@ -269,7 +268,7 @@ namespace apfel
             obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
             obj.SplittingFunctions.insert({ 3, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNNLO.at(nf)}});
-            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLOb.at(nf)}});
@@ -280,7 +279,7 @@ namespace apfel
             obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
             obj.SplittingFunctions.insert({ 3, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNNLO.at(nf)}});
-            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb.at(nf)}});
@@ -337,21 +336,17 @@ namespace apfel
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    std::map<int, std::map<int, Operator>> MatchLO;
+    std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCD::M1, Id});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, ( nf + 1 ) * Id});
-        OM.insert({MatchingBasisQCD::M6, Zero});
-        OM.insert({MatchingBasisQCD::M7, Id});
-        MatchLO.insert({nf, OM});
-      }
+    MatchLO.insert({MatchingBasisQCD::M0, Id});
+    MatchLO.insert({MatchingBasisQCD::M1, Zero});
+    MatchLO.insert({MatchingBasisQCD::M2, Zero});
+    MatchLO.insert({MatchingBasisQCD::M3, Zero});
+    MatchLO.insert({MatchingBasisQCD::M4, Zero});
+    MatchLO.insert({MatchingBasisQCD::M5, Zero});
+    MatchLO.insert({MatchingBasisQCD::M6, Zero});
+    MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
     // LO splitting function operators.
@@ -389,6 +384,7 @@ namespace apfel
         const Operator AS1gH  =          LogKth[nf-1] * AS1gHL;
         const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
         std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS1ggH});
         OM.insert({MatchingBasisQCD::M2, AS1gH});
         OM.insert({MatchingBasisQCD::M3, AS1gH});
@@ -426,7 +422,7 @@ namespace apfel
     // NNLO Matching conditions. Set to zero for now because they are
     // not know yet.
     std::map<int, Operator> MatchNNLO;
-    for (int i = MatchingBasisQCD::M1; i <= MatchingBasisQCD::M7; i++)
+    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
       MatchNNLO.insert({i, Zero});
 
     // ===============================================================
@@ -468,7 +464,7 @@ namespace apfel
             obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
-            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO}});
@@ -478,7 +474,7 @@ namespace apfel
             obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({ 1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
-            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO}});
@@ -535,21 +531,17 @@ namespace apfel
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    std::map<int, std::map<int, Operator>> MatchLO;
+    std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCD::M1, Id});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, ( nf + 1 ) * Id});
-        OM.insert({MatchingBasisQCD::M6, Zero});
-        OM.insert({MatchingBasisQCD::M7, Id});
-        MatchLO.insert({nf, OM});
-      }
+    MatchLO.insert({MatchingBasisQCD::M0, Id});
+    MatchLO.insert({MatchingBasisQCD::M1, Zero});
+    MatchLO.insert({MatchingBasisQCD::M2, Zero});
+    MatchLO.insert({MatchingBasisQCD::M3, Zero});
+    MatchLO.insert({MatchingBasisQCD::M4, Zero});
+    MatchLO.insert({MatchingBasisQCD::M5, Zero});
+    MatchLO.insert({MatchingBasisQCD::M6, Zero});
+    MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
     // LO splitting function operators.
@@ -571,7 +563,7 @@ namespace apfel
     // ===============================================================
     // NLO Matching conditions (Null).
     std::map<int, Operator> MatchNLO;
-    for (int i = MatchingBasisQCD::M1; i <= MatchingBasisQCD::M7; i++)
+    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
@@ -605,14 +597,14 @@ namespace apfel
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO}});
           }
         else
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
           }
         DglapObj.insert({nf,obj});
@@ -667,21 +659,17 @@ namespace apfel
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    std::map<int, std::map<int, Operator>> MatchLO;
+    std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCD::M1, Id});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, ( nf + 1 ) * Id});
-        OM.insert({MatchingBasisQCD::M6, Zero});
-        OM.insert({MatchingBasisQCD::M7, Id});
-        MatchLO.insert({nf, OM});
-      }
+    MatchLO.insert({MatchingBasisQCD::M0, Id});
+    MatchLO.insert({MatchingBasisQCD::M1, Zero});
+    MatchLO.insert({MatchingBasisQCD::M2, Zero});
+    MatchLO.insert({MatchingBasisQCD::M3, Zero});
+    MatchLO.insert({MatchingBasisQCD::M4, Zero});
+    MatchLO.insert({MatchingBasisQCD::M5, Zero});
+    MatchLO.insert({MatchingBasisQCD::M6, Zero});
+    MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
     // LO splitting function operators.
@@ -703,7 +691,7 @@ namespace apfel
     // ===============================================================
     // NLO Matching conditions (Null).
     std::map<int, Operator> MatchNLO;
-    for (int i = MatchingBasisQCD::M1; i <= MatchingBasisQCD::M7; i++)
+    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
@@ -737,14 +725,14 @@ namespace apfel
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO}});
           }
         else
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
           }
         DglapObj.insert({nf,obj});

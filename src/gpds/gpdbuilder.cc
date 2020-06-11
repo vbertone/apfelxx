@@ -46,21 +46,17 @@ namespace apfel
     // are defined.
     // ===============================================================
     // LO Matching conditions.
-    std::map<int, std::map<int, Operator>> MatchLO;
+    std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCD::M1, Id});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, ( nf + 1 ) * Id});
-        OM.insert({MatchingBasisQCD::M6, Zero});
-        OM.insert({MatchingBasisQCD::M7, Id});
-        MatchLO.insert({nf, OM});
-      }
+    MatchLO.insert({MatchingBasisQCD::M0, Id});
+    MatchLO.insert({MatchingBasisQCD::M1, Zero});
+    MatchLO.insert({MatchingBasisQCD::M2, Zero});
+    MatchLO.insert({MatchingBasisQCD::M3, Zero});
+    MatchLO.insert({MatchingBasisQCD::M4, Zero});
+    MatchLO.insert({MatchingBasisQCD::M5, Zero});
+    MatchLO.insert({MatchingBasisQCD::M6, Zero});
+    MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
     // LO splitting function operators.
@@ -95,12 +91,12 @@ namespace apfel
         if (OpEvol)
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
           }
         else
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
           }
         DglapObj.insert({nf,obj});
       }

@@ -16,28 +16,28 @@ namespace apfel
     // All valence-like distributions match multiplicatively through
     // M7.
     for (int k = 1; k <= 6; k++)
-      _rules[2 * k] = { {M7, 2 * k, 1} };
+      _rules[2 * k] = { {M0, 2 * k, 1}, {M7, 2 * k, 1} };
 
     // Now we consider singlet like distributions.
     const int nf1 = nf + 1;
     const int onf = 2 * nf1 - 1;
 
     // Gluon
-    _rules[0] = { {M1, 0, 1}, {M2, 1, 1./6.}, {M3, onf, - 1. / nf1} };
+    _rules[0] = { {M0, 0, 1}, {M1, 0, 1}, {M2, 1, 1./6.}, {M3, onf, - 1. / nf1} };
     for (int k = nf + 2; k <= 6; k++)
       _rules[0].push_back({M2, 2 * k - 1, 1. / k / ( k - 1 )});
 
     // Singlet
-    _rules[1] = { {M4, 0, 1}, {M5, 1, 1./6.}, {M6, onf, - 1. / nf1} };
+    _rules[1] = { {M0, 1, 1}, {M4, 0, 1}, {M5, 1, 1./6.}, {M6, onf, - 1. / nf1} };
     for (int k = nf + 2; k <= 6; k++)
       _rules[1].push_back({M5, 2 * k - 1, 1. / k / ( k - 1 )});
 
     // Light singlet-like distributions
     for (int k = 2; k <= nf; k++)
-      _rules[2 * k - 1] = { {M7, 2 * k - 1, 1} };
+      _rules[2 * k - 1] = { {M0, 2 * k - 1, 1}, {M7, 2 * k - 1, 1} };
 
     // Heavy singlet-like distributions
-    _rules[onf] = { {M4, 0, - static_cast<double>(nf)}, {M5, 1, - nf / 6.}, {M7, 1, nf * nf1 / 6.}, {M6, onf, static_cast<double>(nf) / nf1}, {M7, onf, 1} };
+    _rules[onf] = { {M0, onf, 1}, {M4, 0, - static_cast<double>(nf)}, {M5, 1, - nf / 6.}, {M7, 1, nf * nf1 / 6.}, {M6, onf, static_cast<double>(nf) / nf1}, {M7, onf, 1} };
     for (int k = nf + 2; k <= 6; k++)
       {
         _rules[onf].push_back({M5, 2 * k - 1, - nf / (static_cast<double>(k * ( k - 1 )))});
@@ -48,7 +48,7 @@ namespace apfel
     // like the singlet.
     for (int l = nf + 2; l <= 6; l++)
       {
-        _rules[2 * l - 1] = { {M4, 0, 1}, {M5, 1, 1./6.}, {M6, onf, - 1. / nf1} };
+        _rules[2 * l - 1] = { {M0, 2 * l - 1, 1}, {M4, 0, 1}, {M5, 1, 1./6.}, {M6, onf, - 1. / nf1} };
         for (int k = nf + 2; k <= 6; k++)
           _rules[2 * l - 1].push_back({M5, 2 * k - 1, 1. / k / ( k - 1 )});
       }
