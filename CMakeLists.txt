@@ -28,7 +28,7 @@ set(CMAKE_SHARED_LINKER_FLAGS -w)
 # export version to file
 configure_file(
   "${PROJECT_SOURCE_DIR}/inc/apfel/version.h.in"
-  "${PROJECT_BINARY_DIR}/inc/apfel/version.h"
+  "${PROJECT_SOURCE_DIR}/inc/apfel/version.h"
 )
 
 # Configuration script
