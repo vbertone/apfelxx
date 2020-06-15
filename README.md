@@ -16,6 +16,13 @@ evolution equations to the computation of deep-inelastic-scattering
 complex computations, such as semi-inclusive DIS and Drell-Yan cross
 sections, are easily implementable in APFEL++.
 
+## Homebrew (macOS)
+
+APFEL++ is available through the [Homebrew-hep](https://github.com/davidchall/homebrew-hep) tap of [Homebrew](https://brew.sh). After having installed Homebrew and tapped Homebrew-hep, the latest stable release of APFEL++ is downloaded and installed with:
+```Shell
+brew install apfelxx
+```
+
 ## Download
 
 You can obtain APFEL++ directly from the github repository:
