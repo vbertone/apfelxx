@@ -7,6 +7,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 namespace apfel
 {
@@ -85,5 +86,19 @@ namespace apfel
    * @param n: input integer
    */
   int factorial(int const& n);
+  ///@}
+
+  /**
+   * @brief Funtion that computes the total cross section of a electron-positron
+   * annihilation.
+   * @param d:
+   * @return the total cross section (in nbarn)
+   */
+  double GetSIATotalCrossSection(int const& pto, double const& Q,
+				 double const& AlphaQCDRef, double const& MuQCDRef,
+				 double const& AlphaQEDRef, double const& MuQEDRef,
+				 std::vector<double> const& QuarkThresholds,
+				 std::vector<double> const& LeptThresholds,
+				 std::string const& comp);
   ///@}
 }

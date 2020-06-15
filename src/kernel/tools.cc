@@ -9,8 +9,11 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 #include "apfel/doubleobject.h"
+#include "apfel/alphaqcd.h"
+#include "apfel/alphaqed.h"
 
 #include <algorithm>
+#include <math.h>
 
 namespace apfel
 {
@@ -20,7 +23,7 @@ namespace apfel
     // Compute number of active flavours the the PDF initial scale
     int nf = 0;
     for (auto const& v : Thresholds)
-      if (Q > v)
+      if (Q >= v)
         nf++;
       else
         break;
@@ -194,5 +197,92 @@ namespace apfel
   int factorial(int const& n)
   {
     return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
+  }
+
+
+  //_________________________________________________________________________________
+  double GetSIATotalCrossSection(int const& pto, double const& Q,
+				 double const& AlphaQCDRef, double const& MuQCDRef,
+				 double const& AlphaQEDRef, double const& MuQEDRef,
+				 std::vector<double> const& QuarkThresholds,
+				 std::vector<double> const& LeptThresholds,
+				 std::string const& comp)
+  {
+    double GetSIATotalCrossSection;
+    double Q2 = Q * Q;
+    apfel::AlphaQCD asQCD{AlphaQCDRef, MuQCDRef, QuarkThresholds, pto};
+    double as1 = asQCD.Evaluate(Q)/FourPi;
+    double as2 = as1 * as1;
+    apfel::AlphaQED asQED{AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 1};
+    double alpha2 = pow(asQED.Evaluate(Q),2);
+
+    const std::vector<double> bq = apfel::ElectroWeakCharges(Q, true);
+    double nf = NF(Q, QuarkThresholds);
+    
+    int nfi = 1;
+    int nff = nf;
+    
+    if (comp=="total")
+      {
+	nfi = 1;
+	nff = nf;
+      }
+    else if (comp=="light")
+      {
+	nfi = 1;
+	nff = 3;
+      }
+    else if (comp=="charm")
+      {
+	nfi = 4;
+	nff = 4;
+	if (nf<4)
+	  {
+	    GetSIATotalCrossSection = 0.;
+	  }
+      }
+    else if (comp=="bottom")
+      {
+	nfi = 5;
+	nff = 5;
+	if (nf<5)
+	  {
+	    GetSIATotalCrossSection = 0.;
+	  }
+      }
+    else if (comp=="top")
+      {
+	nfi = 6;
+	nff = 6;
+	if (nf<6)
+	  {
+	    GetSIATotalCrossSection = 0.;
+	  }
+      }
+
+    double sumq = 0.;
+    for(int i=nfi-1; i<nff; i++)
+      sumq += bq[i];
+      
+    double sigma0tot = FourPi * alpha2 * NC * sumq / 3. / Q2;
+
+    double kfacQ = 1.;
+    double lnQ2M2 = -log(kfacQ);
+
+    double Ree = 1.;
+
+    if(pto>=1)
+      Ree += as1 * CF * 3.;
+      
+    if(pto>=2)   
+      Ree += as2 * (     CF * CF * ( -3./2. )
+		       + CA * CF * ( -11*lnQ2M2 - 44.*zeta3 + 123./2.)
+		       + nf * CF * TR * ( 4. * lnQ2M2 + 16. * zeta3 - 22. ) );
+    
+    GetSIATotalCrossSection = Ree * sigma0tot;
+    GetSIATotalCrossSection *= ConvFact*1e-3;  //nbarn
+    
+    return GetSIATotalCrossSection;
+    
   }
 }

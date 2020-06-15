@@ -33,6 +33,7 @@ tests/ogata_test
 tests/gpd_test
 tests/polylog_test
 tests/expansion_test
+tests/siaxsec_test
 doc/src/codes/FOvsAsy
 doc/src/codes/logs
 doc/src/codes/EvolutionFactor

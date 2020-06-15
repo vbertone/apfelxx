@@ -69,6 +69,7 @@ namespace apfel
   const double TR = 0.5;
   const double CF = 4. / 3.;
   const double CA = 3.;
+  const double NC = 3.;
   ///@}
   ///@}
 

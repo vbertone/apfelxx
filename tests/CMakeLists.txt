@@ -77,3 +77,8 @@ add_test(polylog_test polylog_test)
 add_executable(expansion_test expansion_test.cc)
 target_link_libraries(expansion_test apfelxx)
 add_test(expansion_test expansion_test)
+
+# build tests
+add_executable(siaxsec_test siaxsec_test.cc)
+target_link_libraries(siaxsec_test apfelxx)
+add_test(siaxsec_test siaxsec_test)
