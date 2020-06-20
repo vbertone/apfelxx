@@ -112,6 +112,12 @@ namespace apfel
     void SetSubGrid(int const& ig, int const& ix, double const& x);
 
     /**
+     * @brief Function that returns the derivative of the Distribution
+     * in the form of a Distribution object.
+     */
+    Distribution Derivative() const;
+
+    /**
      * @name Binary operators
      */
     ///@{

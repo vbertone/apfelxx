@@ -131,6 +131,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution Distribution::Derivative() const
+  {
+    return Distribution{this->_grid, [=] (double const& x) -> double { return this->Derive(x); } };
+  }
+
+  //_________________________________________________________________________
   Distribution& Distribution::operator = (Distribution const& d)
   {
     _distributionSubGrid   = d.GetDistributionSubGrid();
