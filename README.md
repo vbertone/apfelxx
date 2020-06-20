@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/vbertone/apfelxx/raw/master/resources/logo.png "Logo APFEL")
 
-# APFEL++: A new PDF evolution library in C++
+# APFEL++: A PDF evolution library in C++
  
 APFEL++ is a C++ rewriting of the Fortran 77 evolution code APFEL (see
 http://apfel.hepforge.org and
