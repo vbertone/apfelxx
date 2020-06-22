@@ -1,29 +1,24 @@
-cmake_minimum_required (VERSION 2.6)
-# Set a default build type if none was specified
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message(STATUS "Setting build type to 'Release' as none was specified.")
-  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
-  # Set the possible values of build type for cmake-gui
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
-    "MinSizeRel" "RelWithDebInfo")
-endif()
+# BASIC DEFINITIONS ========================================================================
+
+# define minimum version of cmake
+cmake_minimum_required (VERSION 3.12)
+
+# define project name and its language
+project(apfel CXX Fortran)
+
+# define c++ standard and issue all the warning demanded by this standard
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fPIC")
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}  -fPIC")
 
 if (NOT DEFINED CMAKE_MACOSX_RPATH)
    set(CMAKE_MACOSX_RPATH 0)
 endif()
 
-# the project name
-project(apfel CXX Fortran)
+# VERSION ==============================================================================
 
-# activating some global properties for the project
 set(apfel_VERSION 4.4.0)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fPIC")
-#set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wall -Wextra -fPIC")
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}  -fPIC")
-set(CMAKE_SHARED_LINKER_FLAGS -w)
 
 # export version to file
 configure_file(
@@ -31,27 +26,43 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/inc/apfel/version.h"
 )
 
+# CONFIG SCRIPT =========================================================================
+
 # Configuration script
 set(prefix ${CMAKE_INSTALL_PREFIX})
 set(exec_prefix "${prefix}")
 set(includedir "${prefix}/include")
 set(libdir "${prefix}/lib")
-configure_file(
-  "${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in"
-  "${PROJECT_SOURCE_DIR}/bin/apfelxx-config"
-)
+configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_SOURCE_DIR}/bin/apfelxx-config")
 
+# FIND LIBRARIES =======================================================================
+
+find_package(OpenMP)
+
+# directories containing headers
+include_directories(${OpenMP_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR}/inc)
 
-# build target library
-add_subdirectory(src)
+# FINALIZE ==================================================================================
 
-option(BUILD_TESTS "Build tests code" ON)
-if(BUILD_TESTS)
-  enable_testing()
-  add_subdirectory(tests)
-endif(BUILD_TESTS)
+# generate list of source files
+file(GLOB_RECURSE  source_files src/*)
 
-install(FILES ${PROJECT_SOURCE_DIR}/bin/apfelxx-config
-	   DESTINATION bin
-	   PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+# build test codes
+enable_testing()
+add_subdirectory(tests)
+
+# define target library
+set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+
+add_library(apfelxx SHARED ${source_files})
+
+# define libraries to be linked
+target_link_libraries(apfelxx ${OpenMP_LIBRARIES} OpenMP::OpenMP_CXX)
+
+# install
+install(TARGETS apfelxx
+           RUNTIME DESTINATION bin
+           LIBRARY DESTINATION lib)
+install(DIRECTORY inc DESTINATION include)
+install(FILES ${PROJECT_SOURCE_DIR}/bin/apfelxx-config DESTINATION bin)
