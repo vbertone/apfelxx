@@ -14,6 +14,7 @@
 
 #include <algorithm>
 #include <math.h>
+#include <numeric>
 
 namespace apfel
 {
@@ -23,7 +24,7 @@ namespace apfel
     // Compute number of active flavours the the PDF initial scale
     int nf = 0;
     for (auto const& v : Thresholds)
-      if (Q >= v)
+      if (Q > v)
         nf++;
       else
         break;
@@ -37,7 +38,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& sel)
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, QuarkFlavour const& sel)
   {
     // Relevant constants
     const double Q2    = Q * Q;
@@ -199,95 +200,39 @@ namespace apfel
     return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
   }
 
-
   //_________________________________________________________________________________
-  double GetSIATotalCrossSection(int const& pto, double const& Q,
-				 double const& AlphaQCDRef, double const& MuQCDRef,
-				 double const& AlphaQEDRef, double const& MuQEDRef,
-				 std::vector<double> const& QuarkThresholds,
-				 std::vector<double> const& LeptThresholds,
-				 int const& comp)
+  double GetSIATotalCrossSection(int                 const& PerturbativeOrder,
+                                 double              const& Q,
+                                 double              const& AlphaQCD,
+                                 double              const& AlphaQED,
+                                 std::vector<double> const& Thresholds,
+                                 QuarkFlavour        const& Comp)
   {
-    double GetSIATotalCrossSection;
-    double Q2 = Q * Q;
-    apfel::AlphaQCD asQCD{AlphaQCDRef, MuQCDRef, QuarkThresholds, pto};
-    double as1 = asQCD.Evaluate(Q)/FourPi;
-    double as2 = as1 * as1;
-    apfel::AlphaQED asQED{AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 1};
-    double alpha2 = pow(asQED.Evaluate(Q),2);
+    // Get time-like electroweak charges
+    const std::vector<double> Bq = apfel::ElectroWeakCharges(Q, true, Comp);
 
-    const std::vector<double> bq = apfel::ElectroWeakCharges(Q, true);
-    double nf = NF(Q, QuarkThresholds);
-    
-    int nfi = 1;
-    int nff = nf;
-    
-    if (comp==0)
-      {
-	nfi = 1;
-	nff = nf;
-      }
-    else if (comp==3)
-      {
-	nfi = 1;
-	nff = 3;
-      }
-    else if (comp==4)
-      {
-	nfi = 4;
-	nff = 4;
-	if (nf<4)
-	  {
-	    GetSIATotalCrossSection = 0.;
-	  }
-      }
-    else if (comp==5)
-      {
-	nfi = 5;
-	nff = 5;
-	if (nf<5)
-	  {
-	    GetSIATotalCrossSection = 0.;
-	  }
-      }
-    else if (comp==6)
-      {
-	nfi = 6;
-	nff = 6;
-	if (nf<6)
-	  {
-	    GetSIATotalCrossSection = 0.;
-	  }
-      }
-    else
-      {
-	std::cout << "Comp value not allowed (values allowed are 0: total cross section; 3,4,5,6 for light,charm,bottom and top cross sections)"
-		  << std::endl;
-      }
+    // Effective number of flavours
+    double nf = NF(Q, Thresholds);
 
-    double sumq = 0.;
-    for(int i=nfi-1; i<nff; i++)
-      sumq += bq[i];
-      
-    double sigma0tot = FourPi * alpha2 * NC * sumq / 3. / Q2;
+    // Sum the charges
+    const double sumq = std::accumulate(Bq.begin(), Bq.begin() + nf, 0.);
 
-    double kfacQ = 1.;
-    double lnQ2M2 = -log(kfacQ);
+    // Total born coss setion
+    double sigma0tot = FourPi * pow(AlphaQED, 2) * NC * sumq / 3 / Q / Q;
 
-    double Ree = 1.;
+    // QCD coupling
+    const double as1 = AlphaQCD / FourPi;
+    const double as2 = as1 * as1;
 
-    if(pto>=1)
-      Ree += as1 * CF * 3.;
-      
-    if(pto>=2)   
-      Ree += as2 * (     CF * CF * ( -3./2. )
-		       + CA * CF * ( -11*lnQ2M2 - 44.*zeta3 + 123./2.)
-		       + nf * CF * TR * ( 4. * lnQ2M2 + 16. * zeta3 - 22. ) );
-    
-    GetSIATotalCrossSection = Ree * sigma0tot;
-    GetSIATotalCrossSection *= ConvFact*1e-3;  //nbarn
-    
-    return GetSIATotalCrossSection;
-    
+    // QCD correction factor
+    double Ree = 1;
+    if(PerturbativeOrder >= 1)
+      Ree += as1 * CF * 3;
+    if(PerturbativeOrder >= 2)
+      Ree += as2 * ( CF * CF * ( - 3. / 2 )
+                     + CA * CF * ( - 44 * zeta3 + 123. / 2 )
+                     + nf * CF * TR * ( 16 * zeta3 - 22. ) );
+
+    return 1e-3 * ConvFact * sigma0tot * Ree;
   }
 }

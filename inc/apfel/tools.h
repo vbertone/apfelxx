@@ -16,6 +16,9 @@ namespace apfel
    * Collection of useful tools.
    */
   ///@{
+  /// Quark enumerator
+  enum QuarkFlavour: int {DOWN, UP, STRANGE, CHARM, BOTTOM, TOP, TOTAL};
+
   /**
    * @brief Return the number of active flavours at the scale Q given
    * the (ordered) vector of thresholds.
@@ -41,10 +44,10 @@ namespace apfel
    * (Reference: https://arxiv.org/pdf/hep-ph/9711387.pdf).
    * @param Q: absolute value the virtuality of the vector boson
    * @param virt: virtuality (true: time-like, false: space-like)
-   * @param sel: the flavour selector (default: -1, i.e. all flavours are computed)
+   * @param Comp: the flavour selector (default: TOTAL, i.e. all flavours are computed)
    * @return the std::vector of the electroweak charges
    */
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& sel = -1);
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, QuarkFlavour const& Comp = TOTAL);
 
   /**
    * @brief Utility function for the computation of the electroweak
@@ -86,18 +89,26 @@ namespace apfel
    * @param n: input integer
    */
   int factorial(int const& n);
-  ///@}
 
   /**
-   * @brief Function that computes the total cross section in a 
+   * @brief Function that computes the total cross section in a
    * electron-positron annihilation process.
+   * @param PerturbativeOrder: perturbative order of the computation
+   * @param Q: vector-boson invariant mass
+   * @param AlphaQCD: value of the strong coupling at Q
+   * @param AlphaQED: value of the electromagnetic coupling at Q
+   * @param Thresholds: heavy-quark thresholds
+   * @param Comp: component of the cross section, e.g. charm, bottom, etc. (default = TOTAL)
    * @return the total cross section (in nbarn)
+   * @note The QCD corrections to the total cross section in a
+   * electron-positron annihilation process are taken from
+   * Phys.Lett. B259 (1991) 144–150.
    */
-  double GetSIATotalCrossSection(int const& pto, double const& Q,
-				 double const& AlphaQCDRef, double const& MuQCDRef,
-				 double const& AlphaQEDRef, double const& MuQEDRef,
-				 std::vector<double> const& QuarkThresholds,
-				 std::vector<double> const& LeptThresholds,
-				 int const& comp);
+  double GetSIATotalCrossSection(int                 const& PerturbativeOrder,
+                                 double              const& Q,
+                                 double              const& AlphaQCD,
+                                 double              const& AlphaQED,
+                                 std::vector<double> const& Thresholds,
+                                 QuarkFlavour        const& Comp = TOTAL);
   ///@}
 }
