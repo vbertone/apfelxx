@@ -89,9 +89,8 @@ namespace apfel
   ///@}
 
   /**
-   * @brief Funtion that computes the total cross section of a electron-positron
-   * annihilation.
-   * @param d:
+   * @brief Function that computes the total cross section in a 
+   * electron-positron annihilation process.
    * @return the total cross section (in nbarn)
    */
   double GetSIATotalCrossSection(int const& pto, double const& Q,
@@ -99,6 +98,6 @@ namespace apfel
 				 double const& AlphaQEDRef, double const& MuQEDRef,
 				 std::vector<double> const& QuarkThresholds,
 				 std::vector<double> const& LeptThresholds,
-				 std::string const& comp);
+				 int const& comp);
   ///@}
 }

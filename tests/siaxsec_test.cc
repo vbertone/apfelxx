@@ -41,7 +41,7 @@ int main()
 				       AlphaQEDRef, MuQEDRef,
 				       QuarkThresholds,
 				       LeptThresholds,
-				       "total");
+				       0);
       
       std::cout << std::setprecision(4)
 		<< std::setw(10) << Mu[i]

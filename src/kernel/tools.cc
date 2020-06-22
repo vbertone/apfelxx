@@ -206,7 +206,7 @@ namespace apfel
 				 double const& AlphaQEDRef, double const& MuQEDRef,
 				 std::vector<double> const& QuarkThresholds,
 				 std::vector<double> const& LeptThresholds,
-				 std::string const& comp)
+				 int const& comp)
   {
     double GetSIATotalCrossSection;
     double Q2 = Q * Q;
@@ -222,17 +222,17 @@ namespace apfel
     int nfi = 1;
     int nff = nf;
     
-    if (comp=="total")
+    if (comp==0)
       {
 	nfi = 1;
 	nff = nf;
       }
-    else if (comp=="light")
+    else if (comp==3)
       {
 	nfi = 1;
 	nff = 3;
       }
-    else if (comp=="charm")
+    else if (comp==4)
       {
 	nfi = 4;
 	nff = 4;
@@ -241,7 +241,7 @@ namespace apfel
 	    GetSIATotalCrossSection = 0.;
 	  }
       }
-    else if (comp=="bottom")
+    else if (comp==5)
       {
 	nfi = 5;
 	nff = 5;
@@ -250,7 +250,7 @@ namespace apfel
 	    GetSIATotalCrossSection = 0.;
 	  }
       }
-    else if (comp=="top")
+    else if (comp==6)
       {
 	nfi = 6;
 	nff = 6;
@@ -258,6 +258,11 @@ namespace apfel
 	  {
 	    GetSIATotalCrossSection = 0.;
 	  }
+      }
+    else
+      {
+	std::cout << "Comp value not allowed (values allowed are 0: total cross section; 3,4,5,6 for light,charm,bottom and top cross sections)"
+		  << std::endl;
       }
 
     double sumq = 0.;
