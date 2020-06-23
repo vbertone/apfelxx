@@ -37,7 +37,7 @@ configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_SOURCE_D
 
 # FIND LIBRARIES =======================================================================
 
-find_package(OpenMP)
+find_package(OpenMP REQUIRED)
 
 # directories containing headers
 include_directories(${OpenMP_INCLUDE_DIRS})
