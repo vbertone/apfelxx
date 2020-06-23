@@ -37,15 +37,10 @@ set(includedir "${prefix}/include")
 set(libdir "${prefix}/lib")
 configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_SOURCE_DIR}/bin/apfelxx-config")
 
-# FIND LIBRARIES =======================================================================
-
-find_package(OpenMP REQUIRED)
-
-# directories containing headers
-include_directories(${OpenMP_INCLUDE_DIRS})
-include_directories(${PROJECT_SOURCE_DIR}/inc)
-
 # FINALIZE ==================================================================================
+
+# include directory
+include_directories(${PROJECT_SOURCE_DIR}/inc)
 
 # generate list of source files
 file(GLOB_RECURSE  source_files src/*)
@@ -60,7 +55,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 add_library(apfelxx SHARED ${source_files})
 
 # define libraries to be linked
-target_link_libraries(apfelxx ${OpenMP_LIBRARIES})
+target_link_libraries(apfelxx)
 
 # install
 install(TARGETS apfelxx
