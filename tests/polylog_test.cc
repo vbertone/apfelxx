@@ -52,5 +52,6 @@ int main()
   t.stop();
   std::cout << "\n";
 
+  delete[] H;
   return 0;
 }
