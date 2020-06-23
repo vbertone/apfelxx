@@ -1,11 +1,11 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
       image: ubuntu-1604:201903-01
-    steps:
-      - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install g++ cmake3 valgrind
-      - run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++11" . && make
-      - run: ctest -V
+      steps:
+	- checkout
+      	- run: sudo apt-get update
+      	- run: sudo apt-get install g++ cmake3 valgrind
+      	- run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++11" . && make
+      	- run: ctest -V
