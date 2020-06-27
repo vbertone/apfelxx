@@ -80,9 +80,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,  nf * O0qg});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O0qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O0gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O0gg});
+        OM.insert({EvolutionBasisQCD::PGG,                O0gg});
         OpMapLO.insert({nf, OM});
       }
 
@@ -130,9 +130,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1qq});
-        OM.insert({EvolutionBasisQCD::PQG,  O1qg});
+        OM.insert({EvolutionBasisQCD::PQG,                O1qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O1gg});
+        OM.insert({EvolutionBasisQCD::PGG,                O1gg});
         OpMapNLO.insert({nf, OM});
       }
 
@@ -224,9 +224,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O2nsv});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O2qq});
-        OM.insert({EvolutionBasisQCD::PQG,  O2qg});
+        OM.insert({EvolutionBasisQCD::PQG,                O2qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O2gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O2gg});
+        OM.insert({EvolutionBasisQCD::PGG,                O2gg});
         OpMapNNLO.insert({nf, OM});
       }
 
@@ -362,9 +362,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,  nf * O0qg});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O0qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O0gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O0gg});
+        OM.insert({EvolutionBasisQCD::PGG,                O0gg});
         OpMapLO.insert({nf, OM});
       }
 
@@ -412,9 +412,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1qq});
-        OM.insert({EvolutionBasisQCD::PQG,  O1qg});
+        OM.insert({EvolutionBasisQCD::PQG,                O1qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O1gg});
+        OM.insert({EvolutionBasisQCD::PGG,                O1gg});
         OpMapNLO.insert({nf, OM});
       }
 
@@ -444,9 +444,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O2nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O2nsv});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O2qq});
-        OM.insert({EvolutionBasisQCD::PQG,  O2qg});
+        OM.insert({EvolutionBasisQCD::PQG,                O2qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O2gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O2gg});
+        OM.insert({EvolutionBasisQCD::PGG,                O2gg});
         OpMapNNLO.insert({nf, OM});
       }
 
@@ -554,9 +554,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,  Zero});
-        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
-        OM.insert({EvolutionBasisQCD::PGG,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                Zero});
         OpMapLO.insert({nf, OM});
       }
 
@@ -578,9 +578,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nsp});
-        OM.insert({EvolutionBasisQCD::PQG,  Zero});
-        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
-        OM.insert({EvolutionBasisQCD::PGG,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                Zero});
         OpMapNLO.insert({nf, OM});
       }
 
@@ -682,9 +682,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,  Zero});
-        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
-        OM.insert({EvolutionBasisQCD::PGG,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                Zero});
         OpMapLO.insert({nf, OM});
       }
 
@@ -706,9 +706,9 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nsp});
-        OM.insert({EvolutionBasisQCD::PQG,  Zero});
-        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
-        OM.insert({EvolutionBasisQCD::PGG,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                Zero});
         OpMapNLO.insert({nf, OM});
       }
 
