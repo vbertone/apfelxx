@@ -6,6 +6,7 @@
 
 #include "apfel/distribution.h"
 #include "apfel/messages.h"
+#include "apfel/constants.h"
 
 #include <stdexcept>
 #include <algorithm>
@@ -133,7 +134,7 @@ namespace apfel
   //_________________________________________________________________________
   Distribution Distribution::Derivative() const
   {
-    return Distribution{this->_grid, [=] (double const& x) -> double { return this->Derive(x); } };
+    return Distribution{this->_grid, [=] (double const& x) -> double { return this->Derive(x - eps10); } };
   }
 
   //_________________________________________________________________________
