@@ -38,7 +38,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, QuarkFlavour const& sel)
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& sel)
   {
     // Relevant constants
     const double Q2    = Q * Q;

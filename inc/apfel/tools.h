@@ -47,11 +47,11 @@ namespace apfel
    * @param Comp: the flavour selector (default: TOTAL, i.e. all flavours are computed)
    * @return the std::vector of the electroweak charges
    */
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, QuarkFlavour const& Comp = TOTAL);
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp = TOTAL);
 
   /**
    * @brief Utility function for the computation of the electroweak
-   * charges for Drell-Yan in narrow-width appriximatiob
+   * charges for Drell-Yan in narrow-width appriximation
    * @return the std::vector of the electroweak charges
    */
   std::vector<double> ElectroWeakChargesNWA();
