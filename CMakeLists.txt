@@ -61,6 +61,6 @@ target_link_libraries(apfelxx)
 install(TARGETS apfelxx
            RUNTIME DESTINATION bin
            LIBRARY DESTINATION lib)
-install(DIRECTORY inc DESTINATION include)
+install(DIRECTORY inc/apfel DESTINATION include)
 install(FILES ${PROJECT_SOURCE_DIR}/bin/apfelxx-config DESTINATION bin
 PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
