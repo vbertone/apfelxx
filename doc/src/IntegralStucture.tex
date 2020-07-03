@@ -351,12 +351,40 @@ with integration bounds:
 \end{equation}
 Following the procedure discussed in the previous section, the actual
 computation is achieved by:
-\begin{equation}
+\begin{equation}\label{eq:ERBLints}
 J_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{x_\beta/x_{\beta-j+1}}^{x_\beta/x_{\beta-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)=\sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
 Therefore, the only difference with respect to the ``standard'' case
-is a change of the upper summation bound.
+is a change of the upper summation bound. It should be clear, however,
+that this procedure necessarily implies an approximation. This is due
+to the fact that the interpolation grid, understood to be
+logarithmically distributed, does not reach zero. This approximation
+manifests itself in the fact that upper bound of the intergrals in
+Eq.~(\ref{eq:ERBLints}) never reaches infinity but it gets as large as
+$s^{\kappa}$. The size of $s^{\kappa}$ can range widely depending on
+the lower bound of the grid $x_0$, on the number of nodes $N_x$, and
+on the interpolation degree $\kappa$, according to:
+\begin{equation}
+s^\kappa = \exp\left[-\frac{\kappa}{N_x}\ln x_0\right]=x_0^{-\frac{\kappa}{N_x}}\,.
+\end{equation}
+In particular, $s^{\kappa}$ becomes larger as: $x_0$ gets smaller,
+$N_x$ gets smaller, and $\kappa$ gets larger. We will need to assess
+the impact of this approximation numerically.
 
+% It is instructive to generalise the above procedure by considering
+% integrals of this kind:
+% \begin{equation}\label{eq:ZMconvERBLGen}
+%   K(x) = x\int_{b(x)}^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z)\,,
+% \end{equation}
+% where $b$ can be any function of the external parameter $x$. Following
+% the same steps taken above, one arrives at:
+% \begin{equation}
+%   K(x_\beta)= \sum_{\alpha=0}^{N_x} K_{\beta\alpha}\overline{d}_\alpha\,,
+% \end{equation}
+% where:
+% \begin{equation}
+% K_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{???}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+% \end{equation}
 
 \subsection{Double convolution}
 

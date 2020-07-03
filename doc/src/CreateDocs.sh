@@ -15,6 +15,7 @@ do
     pdflatex MatchingConditions.tex
     pdflatex MSbarMass.tex
     pdflatex EvolutionCode.tex
+    pdflatex EvolDIS.tex
 done
 
 mv *.pdf ../pdf/.
