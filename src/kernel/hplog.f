@@ -12,10 +12,10 @@
 **  Thomas.Gehrmann@cern.ch and Ettore.Remiddi@bo.infn.it
 **
 ******************************************************************************
-c      subroutine hplog5(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
+c      subroutine apf_hplog5(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
 c     $                       Hr1,Hr2,Hr3,Hr4,Hr5,
 c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
-      subroutine hplog(x,nw,Hr1,Hr2,Hr3,Hr4,Hr5,n1,n2)
+      subroutine apf_hplog(x,nw,Hr1,Hr2,Hr3,Hr4,Hr5,n1,n2)
 ****** 
 ** x is the argument of the 1dHPL's (1 dimensional Harmonic PolyLogarithms) 
 **   to be evaluated; 
@@ -72,51 +72,51 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
         stop 
       endif 
 ** setting the immaginary parts equal to zero 
-      call setzero(nw,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
+      call apf_setzero(nw,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** looking at the range of the argument 
 *      r2 = sqrt(2.d0) 
       r2m1 = r2 - 1 
       r2p1 = r2 + 1 
       if ( ( x.gt.-r2m1 ).and.( x.le.r2m1) ) then 
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplat0 ' 
-        call eval1dhplat0(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplat0 ' 
+        call apf_eval1dhplat0(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
      $                 Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       elseif ( x.eq.1d0 ) then
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplin1 ' 
-        call eval1dhplin1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplin1 ' 
+        call apf_eval1dhplin1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
      $                 Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       elseif ( ( x.gt.r2m1 ).and.( x.le.r2p1) ) then 
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplat1 ' 
-        call eval1dhplat1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplat1 ' 
+        call apf_eval1dhplat1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
      $                 Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       elseif ( ( x.gt.r2p1 ) ) then 
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplatinf ' 
-        call eval1dhplatinf(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5,
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplatinf ' 
+        call apf_eval1dhplatinf(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5,
      $                   Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       elseif ( ( x.le.-r2p1) ) then 
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplatminf ' 
-        call eval1dhplatminf(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplatminf ' 
+        call apf_eval1dhplatminf(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
      $                    Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       elseif ( x.eq.-1d0 ) then
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplinm1 ' 
-        call eval1dhplinm1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5,
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplinm1 ' 
+        call apf_eval1dhplinm1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5,
      $                  Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       elseif ( ( x.gt.-r2p1 ).and.( x.le.-r2m1) ) then 
-*       print*, ' eval1dhpl:      x = ',x,', call eval1dhplatm1 ' 
-        call eval1dhplatm1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
+*       print*, ' eval1dhpl:      x = ',x,', call apf_eval1dhplatm1 ' 
+        call apf_eval1dhplatm1(x,nw,Hc1,Hc2,Hc3,Hc4,Hc5, 
      $                  Hr1,Hr2,Hr3,Hr4,Hr5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
         return 
       endif 
 ** 
       end 
 ************************************************************************ 
-      subroutine eval1dhplat0(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplat0(y,nw,H1,H2,H3,H4,H5, 
      $                          HY1,HY2,HY3,HY4,HY5,
      $                          Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's in the 0-range  -(r2-1) < y <= (r2-1) 
@@ -133,16 +133,16 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $          Hi4(n1:n2,n1:n2,n1:n2,n1:n2), 
      $          Hi5(n1:n2,n1:n2,n1:n2,n1:n2,n1:n2) 
 ** evaluate the irreducible 1dHPL's first 
-      call fillh1(y,H1,HY1,Hi1,n1,n2) 
+      call apf_fillh1(y,H1,HY1,Hi1,n1,n2) 
       if ( nw.eq.1 ) return 
-      call fillirr1dhplat0(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
+      call apf_fillirr1dhplat0(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
 ** then the reducible 1dHPL's 
-      call fillred1dhpl(nw,H1,H2,H3,H4,H5, 
+      call apf_fillred1dhpl(nw,H1,H2,H3,H4,H5, 
      $              HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
       return 
       end 
 ************************************************************************ 
-      subroutine eval1dhplin1(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplin1(y,nw,H1,H2,H3,H4,H5, 
      $                   HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's for y=1 (explicit values are tabulated)
       implicit double precision (a-h,o-z) 
@@ -158,11 +158,11 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $          Hi5(n1:n2,n1:n2,n1:n2,n1:n2,n1:n2) 
       parameter (pi   = 3.14159265358979324d0) 
 ** evaluate the irreducible 1dHPL's first 
-      call fillh1(y,H1,HY1,Hi1,n1,n2) 
+      call apf_fillh1(y,H1,HY1,Hi1,n1,n2) 
       if ( nw.eq.1 ) return 
-      call fillirr1dhplin1(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
+      call apf_fillirr1dhplin1(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
 ** then the reducible 1dHPL's 
-      call fillred1dhpl(nw,H1,H2,H3,H4,H5, 
+      call apf_fillred1dhpl(nw,H1,H2,H3,H4,H5, 
      $                HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
       if (n2.eq.0) return
 ** correct the ill-defined entries
@@ -184,7 +184,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine eval1dhplat1(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplat1(y,nw,H1,H2,H3,H4,H5, 
      $                 HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's in the 1-range  (r2-1) < y <= (r2+1) 
 ** evaluating first the H(..,r=(1-y)/(1+y)) by calling eval1dhplat0(r)  
@@ -205,25 +205,25 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $          HR4(-1:1,-1:1,-1:1,-1:1), 
      $          HR5(-1:1,-1:1,-1:1,-1:1,-1:1) 
 ** the nw = 1 case 
-      call fillh1(y,H1,HY1,Hi1,n1,n2) 
+      call apf_fillh1(y,H1,HY1,Hi1,n1,n2) 
       if ( nw.eq.1 ) return 
 ** the nw > 1 case 
       r = (1.d0-y)/(1.d0+y) 
 *      print*,' eval1dhplat1: y = ',y,', r = ',r 
 ** the whole (-1,1) range is in general needed for any pair (n1,n2)
-      call fillirr1dhplat0(r,nw,HR1,HR2,HR3,HR4,HR5,-1,1) 
+      call apf_fillirr1dhplat0(r,nw,HR1,HR2,HR3,HR4,HR5,-1,1) 
 ** fillirr1dhplat1 takes care automatically of all the immaginary 
 ** parts as well as of the jump across y=1 
-      call fillirr1dhplat1(r,nw,HR1,HR2,HR3,HR4,HR5, 
+      call apf_fillirr1dhplat1(r,nw,HR1,HR2,HR3,HR4,HR5, 
      $                          HY1,HY2,HY3,HY4,HY5, 
      $                          Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** then the reducible 1dHPL's 
-      call fillred1dhpl(nw,H1,H2,H3,H4,H5, 
+      call apf_fillred1dhpl(nw,H1,H2,H3,H4,H5, 
      $                HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
       return 
       end 
 ************************************************************************ 
-      subroutine eval1dhplatinf(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplatinf(y,nw,H1,H2,H3,H4,H5, 
      $                  HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's in the inf-range  (r2+1) < abs(y) 
 ** evaluating first the H(..,x=1/y) by calling eval1dhplat0(x)  
@@ -245,24 +245,24 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $          HX5(n1:n2,n1:n2,n1:n2,n1:n2,n1:n2) 
       parameter (pi   = 3.14159265358979324d0) 
 ** the nw = 1 case 
-      call fillh1(y,H1,HY1,Hi1,n1,n2) 
+      call apf_fillh1(y,H1,HY1,Hi1,n1,n2) 
       if ( nw.eq.1 ) return 
 ** the nw > 1 case 
       x = 1.d0/y 
 *      print*,' eval1dhplatinf: y = ',y,', x = ',x 
-      call fillirr1dhplat0(x,nw,HX1,HX2,HX3,HX4,HX5,n1,n2) 
+      call apf_fillirr1dhplat0(x,nw,HX1,HX2,HX3,HX4,HX5,n1,n2) 
 ** fillirr1dhplatinf takes care automatically of all the immaginary 
 ** parts as well as of the jump across y=1 
-      call fillirr1dhplatinf(x,nw,HX1,HX2,HX3,HX4,HX5, 
+      call apf_fillirr1dhplatinf(x,nw,HX1,HX2,HX3,HX4,HX5, 
      $                            HY1,HY2,HY3,HY4,HY5, 
      $                            Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** then the reducible 1dHPL's 
-      call fillred1dhpl(nw,H1,H2,H3,H4,H5, 
+      call apf_fillred1dhpl(nw,H1,H2,H3,H4,H5, 
      $                 HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
       return 
       end 
 ************************************************************************ 
-      subroutine eval1dhplinm1(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplinm1(y,nw,H1,H2,H3,H4,H5, 
      $                 HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's for y=-1 (explicit values are tabulated)
       implicit double precision (a-h,o-z) 
@@ -303,9 +303,9 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
          enddo
       endif
 ** evaluate H(...,-y) 
-      call setzero(nw,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
+      call apf_setzero(nw,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
       Gi1(0) = -1
-      call eval1dhplin1(-y,nw,G1,G2,G3,G4,G5, 
+      call apf_eval1dhplin1(-y,nw,G1,G2,G3,G4,G5, 
      $                  GY1,GY2,GY3,GY4,GY5,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
       if (infilldim.eq.2) then
          do i=1,2
@@ -374,7 +374,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine eval1dhplatm1(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplatm1(y,nw,H1,H2,H3,H4,H5, 
      $                    HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's in the (-1)-range  -(r2+1) < y <= -(r2-1) 
 ** evaluating first the H(..,-y) by calling eval1dhplat1(-y), 
@@ -418,9 +418,9 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
          enddo
       endif
 ** evaluate H(...,-y) 
-      call setzero(nw,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
+      call apf_setzero(nw,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
       Gi1(0) = -1
-      call eval1dhplat1(-y,nw,G1,G2,G3,G4,G5, 
+      call apf_eval1dhplat1(-y,nw,G1,G2,G3,G4,G5, 
      $                  GY1,GY2,GY3,GY4,GY5,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
       if (infilldim.eq.2) then
          do i=1,2
@@ -472,7 +472,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       end 
 
 
-      subroutine eval1dhplatminf(y,nw,H1,H2,H3,H4,H5, 
+      subroutine apf_eval1dhplatminf(y,nw,H1,H2,H3,H4,H5, 
      $                   HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates 1dhpl's in the (-1)-range y  <= -(r2+1) 
 ** evaluating first the H(..,-y) by calling eval1dhplatinf(-y), 
@@ -516,9 +516,9 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
          enddo
       endif
 ** evaluate H(...,-y) 
-      call setzero(nw,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
+      call apf_setzero(nw,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
       Gi1(0) = -1
-      call eval1dhplatinf(-y,nw,G1,G2,G3,G4,G5, 
+      call apf_eval1dhplatinf(-y,nw,G1,G2,G3,G4,G5, 
      $                  GY1,GY2,GY3,GY4,GY5,Gi1,Gi2,Gi3,Gi4,Gi5,-n2,-n1) 
       if (infilldim.eq.2) then
          do i=1,2
@@ -569,7 +569,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine setzero(nw,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
+      subroutine apf_setzero(nw,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** initializes with 0 the elements of the arrays 
       implicit double precision (a-h,o-z) 
       dimension Hi1(n1:n2),Hi2(n1:n2,n1:n2),Hi3(n1:n2,n1:n2,n1:n2), 
@@ -601,7 +601,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine fillred1dhpl(nw,H1,H2,H3,H4,H5, 
+      subroutine apf_fillred1dhpl(nw,H1,H2,H3,H4,H5, 
      $                 HY1,HY2,HY3,HY4,HY5,Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 * fills the reducible 1dhpl from the irreducible set
       implicit double precision (a-h,o-z) 
@@ -646,14 +646,14 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       iflag = 0 
       do ia =  1,infilldim 
       do ib = ia,infilldim 
-        call FILLREDHPL2(iflag,H1,H2,n1,n2,infill(ia),infill(ib)) 
+        call apf_FILLREDHPL2(iflag,H1,H2,n1,n2,infill(ia),infill(ib)) 
         if ( nw.gt.2 ) then 
           do ic = ib,infilldim 
-            call FILLREDHPL3(iflag,H1,H2,H3,n1,n2, 
+            call apf_FILLREDHPL3(iflag,H1,H2,H3,n1,n2, 
      $                          infill(ia),infill(ib),infill(ic)) 
             if ( nw.gt.3 ) then 
               do id = ic,infilldim 
-                call FILLREDHPL4(iflag,H1,H2,H3,H4,n1,n2, 
+                call apf_FILLREDHPL4(iflag,H1,H2,H3,H4,n1,n2, 
      $               infill(ia),infill(ib),infill(ic),infill(id)) 
               enddo 
             endif 
@@ -661,7 +661,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
         endif 
       enddo 
       enddo 
-      if (nw.gt.4) call FILLREDHPL5(iflag,H1,H2,H3,H4,H5,n1,n2)
+      if (nw.gt.4) call apf_FILLREDHPL5(iflag,H1,H2,H3,H4,H5,n1,n2)
 ** extractin real and immaginary parts from the complex value 
       do k1=n1,n2 
       do k2=n1,n2 
@@ -690,7 +690,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine FILLREDHPL2(iflag,H1,H2,i1,i2,na,nb) 
+      subroutine apf_FILLREDHPL2(iflag,H1,H2,i1,i2,na,nb) 
       implicit double precision (a-h,o-z) 
       complex*16 H1,H2 
       dimension H1(i1:i2),H2(i1:i2,i1:i2) 
@@ -702,13 +702,13 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       else 
         H2(nb,na) = + H1(na)*H1(nb) - H2(na,nb) 
         if ( iflag.eq.1 ) then 
-          call printer2(na,nb) 
+          call apf_printer2(na,nb) 
         endif 
       endif 
       return 
       end 
 ************************************************************************ 
-      subroutine FILLREDHPL3(iflag,H1,H2,H3,i1,i2,ia,ib,ic) 
+      subroutine apf_FILLREDHPL3(iflag,H1,H2,H3,i1,i2,ia,ib,ic) 
       implicit double precision (a-h,o-z) 
       complex*16 H1,H2,H3 
       dimension H1(i1:i2),H2(i1:i2,i1:i2),H3(i1:i2,i1:i2,i1:i2) 
@@ -728,7 +728,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
 * case (na,na,nb) 
         nb = ic 
         if ( iflag.eq.1 ) then 
-          call printer3(na,na,nb) 
+          call apf_printer3(na,na,nb) 
         endif 
         H3(na,nb,na) = + H1(na)*H2(na,nb) - 2*H3(na,na,nb) 
         H3(nb,na,na) = + 1.d0/2*H1(na)*H1(na)*H1(nb) 
@@ -742,7 +742,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
 * case (na,nb,nb) 
         nb = ib 
         if ( iflag.eq.1 ) then 
-          call printer3(na,nb,nb) 
+          call apf_printer3(na,nb,nb) 
         endif 
         H3(nb,na,nb) = + H1(nb)*H2(na,nb) - 2*H3(na,nb,nb) 
         H3(nb,nb,na) = + 1.d0/2*H1(na)*H1(nb)*H1(nb) 
@@ -754,8 +754,8 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
         nb = ib 
         nc = ic 
         if ( iflag.eq.1 ) then 
-          call printer3(na,nb,nc) 
-          call printer3(na,nc,nb) 
+          call apf_printer3(na,nb,nc) 
+          call apf_printer3(na,nc,nb) 
         endif 
         H3(nb,na,nc) = + H1(nb)*H2(na,nc) 
      $                 - H3(na,nb,nc) - H3(na,nc,nb) 
@@ -770,7 +770,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine FILLREDHPL4(iflag,H1,H2,H3,H4,i1,i2,ia,ib,ic,id) 
+      subroutine apf_FILLREDHPL4(iflag,H1,H2,H3,H4,i1,i2,ia,ib,ic,id) 
       implicit double precision (a-h,o-z) 
       complex*16 H1,H2,H3,H4 
       dimension H1(i1:i2),H2(i1:i2,i1:i2),H3(i1:i2,i1:i2,i1:i2) 
@@ -798,7 +798,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    - 1.d0/2*H1(na)*H1(na)*H2(na,nb) 
      $                    + H1(na)*H3(na,na,nb) - H4(na,na,na,nb) 
         if ( iflag.eq.1 ) then 
-          call printer4(na,na,na,nb) 
+          call apf_printer4(na,na,na,nb) 
         endif 
 * ic cannot be anymore equal to ia 
       else if ( ic.eq.ia ) then 
@@ -824,7 +824,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    + H1(na)*H3(na,nb,nb) 
      $                    + H1(nb)*H3(na,na,nb) - H4(na,na,nb,nb) 
         if ( iflag.eq.1 ) then 
-          call printer4(na,na,nb,nb) 
+          call apf_printer4(na,na,nb,nb) 
         endif 
       else if ( ia.eq.ib ) then 
 * case (na,na,nb,nc) 
@@ -859,9 +859,9 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    + H1(na)*H3(na,nb,nc) + H1(nc)*H3(na,na,nb) 
      $                    - H4(na,na,nb,nc)  
         if ( iflag.eq.1 ) then 
-          call printer4(na,na,nb,nc) 
-          call printer4(na,na,nc,nb) 
-          call printer4(na,nb,na,nc) 
+          call apf_printer4(na,na,nb,nc) 
+          call apf_printer4(na,na,nc,nb) 
+          call apf_printer4(na,nb,na,nc) 
         endif 
 * ib cannot be anymore equal to ia 
       else if ( ib.eq.ia ) then 
@@ -878,7 +878,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    - 1.d0/2*H1(nb)*H1(nb)*H2(na,nb) 
      $                    + H1(nb)*H3(na,nb,nb) - H4(na,nb,nb,nb) 
         if ( iflag.eq.1 ) then 
-          call printer4(na,nb,nb,nb) 
+          call apf_printer4(na,nb,nb,nb) 
         endif 
 * id cannot be anymore equal to ib 
       else if ( id.eq.ib ) then 
@@ -920,9 +920,9 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    + H1(nc)*H3(na,nb,nb) + H2(na,nb)*H2(nb,nc) 
      $                    - H4(na,nb,nb,nc) 
         if ( iflag.eq.1 ) then 
-          call printer4(na,nb,nb,nc) 
-          call printer4(na,nb,nc,nb) 
-          call printer4(na,nc,nb,nb) 
+          call apf_printer4(na,nb,nb,nc) 
+          call apf_printer4(na,nb,nc,nb) 
+          call apf_printer4(na,nc,nb,nb) 
         endif 
 * ic cannot be anymore equal to ib 
       else if ( ic.eq.ib ) then 
@@ -962,9 +962,9 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    - 1.d0/2*H1(nc)*H1(nc)*H2(na,nb) 
      $                    + H1(nc)*H3(na,nb,nc) - H4(na,nb,nc,nc) 
         if ( iflag.eq.1 ) then 
-          call printer4(na,nb,nc,nc) 
-          call printer4(na,nc,nb,nc) 
-          call printer4(na,nc,nc,nb) 
+          call apf_printer4(na,nb,nc,nc) 
+          call apf_printer4(na,nc,nb,nc) 
+          call apf_printer4(na,nc,nc,nb) 
         endif 
 * no need to protect against id.eq.ic 
 * when arriving here all indices are different 
@@ -1032,116 +1032,116 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
      $                    + H1(nd)*H3(na,nb,nc) 
      $                    + H2(na,nb)*H2(nc,nd) - H4(na,nb,nc,nd) 
         if ( iflag.eq.1 ) then 
-          call printer4(na,nb,nc,nd) 
-          call printer4(na,nb,nd,nc) 
-          call printer4(na,nc,nb,nd) 
-          call printer4(na,nc,nb,nd) 
-          call printer4(na,nd,nb,nc) 
-          call printer4(na,nd,nc,nb) 
+          call apf_printer4(na,nb,nc,nd) 
+          call apf_printer4(na,nb,nd,nc) 
+          call apf_printer4(na,nc,nb,nd) 
+          call apf_printer4(na,nc,nb,nd) 
+          call apf_printer4(na,nd,nb,nc) 
+          call apf_printer4(na,nd,nc,nb) 
         endif 
       endif 
 *23456789012345678901234567890123456789012345678901234567890123456789012 
       return 
       end 
 ************************************************************************ 
-      subroutine printer2(na,nb) 
+      subroutine apf_printer2(na,nb) 
 
       write(11,'(''g [H('',$)') 
-      call subprint(11,na) 
+      call apf_subprint(11,na) 
       write(11,'('','',$)') 
-      call subprint(11,nb) 
+      call apf_subprint(11,nb) 
       write(11,'('',y)] = H('',$)') 
-      call subprint(11,na) 
+      call apf_subprint(11,na) 
       write(11,'('','',$)') 
-      call subprint(11,nb) 
+      call apf_subprint(11,nb) 
       write(11,'('',y) ; '')') 
 
       write(12,'(''id H('',$)') 
-      call subprint(12,na) 
+      call apf_subprint(12,na) 
       write(12,'('','',$)') 
-      call subprint(12,nb) 
+      call apf_subprint(12,nb) 
       write(12,'('',y) = H[('',$)') 
-      call subprint(12,na) 
+      call apf_subprint(12,na) 
       write(12,'('','',$)') 
-      call subprint(12,nb) 
+      call apf_subprint(12,nb) 
       write(12,'('',y)] ; '')') 
 
       return 
       end 
 *** 
-      subroutine printer3(na,nb,nc) 
+      subroutine apf_printer3(na,nb,nc) 
 
       write(11,'(''g [H('',$)') 
-      call subprint(11,na) 
+      call apf_subprint(11,na) 
       write(11,'('','',$)') 
-      call subprint(11,nb) 
+      call apf_subprint(11,nb) 
       write(11,'('','',$)') 
-      call subprint(11,nc) 
+      call apf_subprint(11,nc) 
       write(11,'('',y)] = H('',$)') 
-      call subprint(11,na) 
+      call apf_subprint(11,na) 
       write(11,'('','',$)') 
-      call subprint(11,nb) 
+      call apf_subprint(11,nb) 
       write(11,'('','',$)') 
-      call subprint(11,nc) 
+      call apf_subprint(11,nc) 
       write(11,'('',y) ; '')') 
 
       write(12,'(''id H('',$)') 
-      call subprint(12,na) 
+      call apf_subprint(12,na) 
       write(12,'('','',$)') 
-      call subprint(12,nb) 
+      call apf_subprint(12,nb) 
       write(12,'('','',$)') 
-      call subprint(12,nc) 
+      call apf_subprint(12,nc) 
       write(12,'('',y) = H[('',$)') 
-      call subprint(12,na) 
+      call apf_subprint(12,na) 
       write(12,'('','',$)') 
-      call subprint(12,nb) 
+      call apf_subprint(12,nb) 
       write(12,'('',y)] ; '')') 
 
       return 
       end 
 *** 
-      subroutine printer4(na,nb,nc,nd) 
+      subroutine apf_printer4(na,nb,nc,nd) 
 
       write(11,'(''g [H('',$)') 
-      call subprint(11,na) 
+      call apf_subprint(11,na) 
       write(11,'('','',$)') 
-      call subprint(11,nb) 
+      call apf_subprint(11,nb) 
       write(11,'('','',$)') 
-      call subprint(11,nc) 
+      call apf_subprint(11,nc) 
       write(11,'('','',$)') 
-      call subprint(11,nd) 
+      call apf_subprint(11,nd) 
       write(11,'('',y)] = H('',$)') 
-      call subprint(11,na) 
+      call apf_subprint(11,na) 
       write(11,'('','',$)') 
-      call subprint(11,nb) 
+      call apf_subprint(11,nb) 
       write(11,'('','',$)') 
-      call subprint(11,nc) 
+      call apf_subprint(11,nc) 
       write(11,'('','',$)') 
-      call subprint(11,nd) 
+      call apf_subprint(11,nd) 
       write(11,'('',y) ; '')') 
 
       write(12,'(''id H('',$)') 
-      call subprint(12,na) 
+      call apf_subprint(12,na) 
       write(12,'('','',$)') 
-      call subprint(12,nb) 
+      call apf_subprint(12,nb) 
       write(12,'('','',$)') 
-      call subprint(12,nc) 
+      call apf_subprint(12,nc) 
       write(12,'('','',$)') 
-      call subprint(12,nd) 
+      call apf_subprint(12,nd) 
       write(12,'('',y) = H[('',$)') 
-      call subprint(12,na) 
+      call apf_subprint(12,na) 
       write(12,'('','',$)') 
-      call subprint(12,nb) 
+      call apf_subprint(12,nb) 
       write(12,'('','',$)') 
-      call subprint(12,nc) 
+      call apf_subprint(12,nc) 
       write(12,'('','',$)') 
-      call subprint(12,nd) 
+      call apf_subprint(12,nd) 
       write(12,'('',y)] ; '')') 
 
       return 
       end 
 *** 
-      subroutine subprint(n,na) 
+      subroutine apf_subprint(n,na) 
       if ( na.lt.0 ) then 
         write (n,102) na 
       else 
@@ -1153,7 +1153,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       end 
 
 
-      subroutine FILLREDHPL5(iflag,HZ1,HZ2,HZ3,HZ4,HZ5,n1,n2)
+      subroutine apf_FILLREDHPL5(iflag,HZ1,HZ2,HZ3,HZ4,HZ5,n1,n2)
       implicit double precision (a-h,o-z) 
       complex*16 HZ1,HZ2,HZ3,HZ4,HZ5 
       dimension HZ1(n1:n2),HZ2(n1:n2,n1:n2),HZ3(n1:n2,n1:n2,n1:n2) 
@@ -2608,7 +2608,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
 ** the following routines contain th set of routines evaluating 
 ** irreducible 1dhpl's for various values of the arguments 
 ************************************************************************ 
-      subroutine fillh1(y,H1,HY1,Hi1,n1,n2) 
+      subroutine apf_fillh1(y,H1,HY1,Hi1,n1,n2) 
 ** fillh1 evaluates the 1dhpl's of weight 1 
       implicit double precision (a-h,o-z) 
       complex*16 H1 
@@ -2647,7 +2647,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine fillirr1dhplat0(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
+      subroutine apf_fillirr1dhplat0(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
 ** evaluate the HPL from their power series expansions
 ** fillirr1dhplat0 is called by eval1dhplat0; 
 ** it is guaranteed that nw is in the range 1:4, and that (n1,n2) 
@@ -3917,7 +3917,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine fillirr1dhplat1(r,nw,HR1,HR2,HR3,HR4,HR5, 
+      subroutine apf_fillirr1dhplat1(r,nw,HR1,HR2,HR3,HR4,HR5, 
      $                                HY1,HY2,HY3,HY4,HY5, 
      $                                Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates the HPL for r2m1 < y < r2p1
@@ -9791,7 +9791,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine fillirr1dhplatinf(x,nw,HX1,HX2,HX3,HX4,HX5, 
+      subroutine apf_fillirr1dhplatinf(x,nw,HX1,HX2,HX3,HX4,HX5, 
      $                                HY1,HY2,HY3,HY4,HY5, 
      $                                Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2) 
 ** evaluates the HPL for y > r2p1
@@ -12155,7 +12155,7 @@ c     $                       Hi1,Hi2,Hi3,Hi4,Hi5,n1,n2)
       return 
       end 
 ************************************************************************ 
-      subroutine fillirr1dhplin1(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
+      subroutine apf_fillirr1dhplin1(y,nw,HY1,HY2,HY3,HY4,HY5,n1,n2) 
 ** evaluates the irreducible HPL for y =1
 ** it is guaranteed that nw is in the range 2:4, and that (n1,n2) 
 ** take one of the pairs of values (0,1), (-1,0) or (-1,1) 
