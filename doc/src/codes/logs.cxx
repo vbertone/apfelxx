@@ -31,7 +31,7 @@ int main() {
 
   for (int ord = 2; ord < 3; ord++)
     {
-      const auto integrand = [=] (double const& b) -> double
+      const std::function<double(double const&)> integrand = [=] (double const& b) -> double
 	{
 	  const double f1 = fNP(b, Q * Q);
 	  const double f2 = f1;

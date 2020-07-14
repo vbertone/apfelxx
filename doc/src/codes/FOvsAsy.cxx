@@ -156,14 +156,14 @@ int main() {
       const double Q  = sqrt(Q2);
       const double qT = sqrt(qT2);
 
-      const auto integrand1 = [=] (double const& b) -> double
+      const std::function<double(double const&)> integrand1 = [=] (double const& b) -> double
 	{
 	  const double f1 = fNP(x, b, Q2);
 	  const double f2 = f1;
 	  const double lg = 2 * log(bstar(b, Q) * Q / 2 / exp( - apfel::emc));
 	  return b * f1 * f2 * pow(lg, 1) / 2;
 	};
-      const auto integrand2 = [=] (double const& b) -> double
+      const std::function<double(double const&)> integrand2 = [=] (double const& b) -> double
 	{
 	  const double f1 = fNP(x, b, Q2);
 	  const double f2 = f1;
@@ -253,7 +253,7 @@ int main() {
 
       // Construct the TMD luminosity in b space to be fed to be
       // trasformed in qT space.
-      const auto TMDLumib = [=] (double const& b) -> double
+      const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double
       {
 	// Get Evolved TMD PDFs and FFs and rotate them into the
 	// physical basis

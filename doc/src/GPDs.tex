@@ -150,7 +150,7 @@ splitting function:
 Plugging this definition into the integral in the r.h.s. of
 Eq.~(\ref{eq:eveq2}) and performing a change of variable gives:
 \begin{equation}\label{eq:DGLAPforGPDs}
-\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi)= {\rm sign}(\xi)\int_{x}^{x/b(x)}\frac{dy}{y}\mathcal{P}^{\pm}\left(\kappa,y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,,
+\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi)= {\rm sign}(\xi)\int_{b(x)}^{1}\frac{dy}{y}\mathcal{P}^{\pm}\left(\kappa, \frac{x}{y}\right)f^{\pm}\left(y,\xi\right)={\rm sign}(\xi)\int_{x}^{x/b(x)}\frac{dy}{y}\mathcal{P}^{\pm}\left(\kappa,y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,,
 \end{equation}
 with:
 \begin{equation}
@@ -223,7 +223,7 @@ It is interesting to take the DGLAP limit at $\kappa\rightarrow 0$:
 \end{equation}
 that coincides with the usual DGLAP splitting function.  While the
 crossover point at $\kappa=1$ gives:
-\begin{equation}
+\begin{equation}\label{eq:pns0co}
   P^{{\rm NS},(0)}(1,y) = 2C_F\left[\frac{1}{1-y}\right]_+\,,
 \end{equation}
 regardless of whether the limit is taken from the DGLAP region
@@ -320,7 +320,83 @@ Interestingly, like $P^{{\rm NS},(0)}$ and $P_{qq}^{(0)}$ , also
 $P_{qg}^{(0)}$, $P_{gq}^{(0)}$, and $P_{gg}^{(0)}$ are continuos in
 $\kappa=1$.
 
-\subsection{A note on continuity of GPDs}
+\subsection{End-point (local) contributions}
+
+Some of the expressions for the anomalous dimensions discussed above
+contain a $+$-prescribed terms. It is important to treat these terms
+properly accounting for additional local terms stemming from the
+``incompleteness'' of the convolution integrals. More specifically,
+the defintion of the $+$-prescription for the function $g$ (singular
+in $y=1$) convoluted with a smooth test function $f$ is:
+\begin{equation}
+  \int_0^{1^+}
+  dy\,\left[g(y)\right]_+f(y)=\int_0^{1^+} dy\,g(y)\left[f(y)-f(1)\right]\,.
+\end{equation}
+Now, we need to work out the action of the $+$-prescription on
+integrals of the following kind (\textit{cfr.}
+Eq.~(\ref{eq:DGLAPforGPDs})):
+\begin{equation}\label{eq:divint}
+I=\int_x^cdy\,\left[g(y)\right]_+f(y)\,,\quad x<1\quad\mbox{and}\quad c\geq 1\,.
+\end{equation}
+In order to apply the definition of $+$-prescription, we manipulate
+the integral above as follows:
+\begin{equation}\label{eq:explicitexpr}
+\begin{array}{rcl}
+I&=&\displaystyle
+     \int_0^{1^+}dy\,\left[g(y)\right]_+f(y)-\int_0^xdy\,g(y)f(y)+\int_{1^+}^cdy\,g(y)f(y)\\
+\\
+&=&\displaystyle
+    \int_0^{1^+}dy\,g(y)\left[f(y)-f(1)\right]-\int_0^xdy\,g(y)f(y)+\int_{1^+}^cdy\,g(y)f(y)\\
+
+\\
+&=&\displaystyle
+    \int_x^{c}dy\,g(y)\left[f(y)-f(1)\right]+f(1)\left[L_1(x)+L_2(c)\right]
+\end{array}
+\end{equation}
+where for shortness we have defined:
+\begin{equation}
+L_1(x)=-\int_0^xdy\,g(y) \quad\mbox{and}\quad L_2(c)=\int_{1^+}^cdy\,g(y)\,.\\
+\end{equation}
+The term $L_1$ is the usual term arising from the incompleteness of
+the convolution integral and is finite for $x<1$. The term $L_2$ is
+new.  In the DGLAP region ($\kappa<1$) the upper integration bound $c$
+is equal to one so that $L_2(1)=0$ and we recover the usual DGLAP
+structure. In the ERBL region ($\kappa>1$), instead, $c=+\infty$ so
+that:
+\begin{equation}
+L_2(\infty)=\int_{1^+}^\infty dy\,g(y)\,.
+\end{equation}
+The question now is whether the second integral in the rightmost term
+converges: the answer is generally not. A simple example is
+Eq.~(\ref{eq:pns0co}) that, for $\kappa=1^+$ gives:
+\begin{equation}
+\int_{1^+}^\infty\frac{dy}{1-y} = -\infty\,.
+\end{equation}
+By inspection, one finds that this divergence is logarithmic,
+signifying that the function $g$ goes to zero linearly as
+$y\rightarrow \infty$. Of course, the presence of this divergence
+seems to invalidate the full evolution procedures because the
+derivative of GPDs with respect to $\mu$ in the ERBL region is not
+defined. The question is how to overcome this problem. Since the
+function $g$ is the result of a perturbative calculation, the only
+possibility relies on imposing an appropriate constraint on test
+function $f$ that guarantees the convergence of the integral in
+Eq.~(\ref{eq:divint}). To do so, we need to \textit{require} that the
+function $f$ is such that the last term in the r.h.s. of the first
+line of Eq.~(\ref{eq:explicitexpr}) converges when $c=\infty$:
+\begin{equation}
+  \left|\int_{1^+}^\infty dy\,g(y)f(y)\right|<\infty\,.
+\end{equation}
+As we will see in the next section, the requirement of continuity of
+GPDs sets the particular value of this integral at $x=\xi$ to zero.
+Since $g$ decays linearly, in order for the integral to converge, also
+the function $f$ needs to tend to zero as $y\rightarrow \infty$ as:
+\begin{equation}
+f(y)\mathop{\longrightarrow}_{y\rightarrow\infty}\frac1{y^a}\,,\quad a>0\,.
+\end{equation}
+
+
+\subsection{On continuity of GPDs}
 
 It is well known that GPDs are required to be continuous at $x=\xi$
 for factorisation to be valid~\cite{Radyushkin:1997ki}. It is thus
@@ -346,12 +422,15 @@ also continuous in $x=\xi$ (\textit{i.e.} in $\kappa=1$), such that:
   \mathbb{P}^{\pm}\left(\frac{\xi^-}{\xi},y\right) = \mathbb{P}^{\pm}\left(1,y\right)\,.
 \end{equation}
 Taking the difference between Eqs.~(\ref{eq:limit1})
-and~(\ref{eq:limit2}), one finds, at least at one loop, that:
+and~(\ref{eq:limit2}) paying attention to remove also the end point
+contributions, one finds, at least at one loop, that:
 \begin{equation}
   \int_{0}^{\xi^-}\frac{dx'}{2\xi}\,\mathbb{P}^{\pm}\left(1,\frac{x'}{\xi}\right)f^{\pm}(x',\xi) =\int_{0}^{\xi^-}\frac{dx'}{x'}\,\mathcal{P}^{\pm}\left(1,\frac{\xi}{x'}\right)f^{\pm}(x',\xi) =\int_{1^+}^{\infty}\frac{dx'}{x'}\,\mathcal{P}^{\pm}\left(1,x'\right)f^{\pm}\left(\frac{\xi}{x'},\xi\right)=0\,.
 \end{equation}
-This appears to be some sort of sum rule that the GPDs and/or
-anomalous dimensions in the ERBL region have to fullfil.
+This appears to be some sort of sum rule that the GPDs and anomalous
+dimensions in the ERBL region have to fullfil. We will attempt a
+numerical estimate of the impact of possible violations of this
+requirement.
 
 \newpage
 

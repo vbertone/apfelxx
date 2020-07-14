@@ -2143,6 +2143,246 @@ one needs to use the fact that:
 \delta\left(\frac{1-x}{x}\right)=\delta(1-x)\,.
 \end{equation}
 
+\section{Solution of an RGE in perturbation theory}
+
+In this section we address the question of how a renormalisation group
+equation (RGE) can be solved within the framework of perturbation
+theory. The relevance of this issue concernes the estimation of
+theoretical uncertainties stemming from higher-order corrections. More
+specifically, we will show that the so-called \textit{resummation
+  scale} originates from a perturbative solution of the TMD evolution
+equations.
+
+In order to define the problem, we consider a generic RGE in QCD:
+\begin{equation}\label{eq:RGEproto}
+\frac{d\ln R}{d\ln \mu} = \gamma(\alpha_s(\mu))\,,
+\end{equation}
+where $R$ is a generic renormalisation-scheme dependent (and thus
+unobservable) quantity, $\mu$ is the scale resulting from the
+renormalisation procedure, and $\gamma$ is the log-free anomalous
+dimension that is computable in perturbation theory as a power series
+in the strong coupling $\alpha_s$ truncated at order $k$:
+\begin{equation}
+\gamma(\alpha_s(\mu)) = \frac{\alpha_s(\mu)}{4\pi}\sum_{n=0}^k\left(\frac{\alpha_s(\mu)}{4\pi}\right)^n\gamma^{(n)}\,.
+\end{equation}
+Notice that Eq.~(\ref{eq:RGEproto}) applies to different relevant
+quantities in QCD such as the strong coupling itself and to collinear
+and TMD distributions. Of course, Eq.~(\ref{eq:RGEproto}) is an
+ordinary differential equation that defines a family of solutions. In
+order to identify a particular solution, we need a boundary condition
+given by the knowledge of $R$ at some particular scale $\mu_0$:
+$R(\mu_0)=R_0$.
+
+The question that we want to address here is how to solve
+Eq.~(\ref{eq:RGEproto}), along with its boundary condition
+$R(\mu_0)=R_0$, within the framework of perturbation theory. To
+rephrase it: how do we compute $R(\mu)$ to some perturbative accuracy
+for a generic scale $\mu$ given Eq.~(\ref{eq:RGEproto}) and its
+boundary condition $R(\mu_0)=R_0$? The first case to be considered,
+because it underlies all others, is the strong coupling
+$a_s=\alpha_s/4\pi$ that obeys the RGE\footnote{Notice that
+  $\overline{\beta}$ in Eq.~(\ref{eq:RGEalphas}) is related to the
+  usual QCD $\beta$-function by $\overline{\beta}=-\beta/a_s$.}:
+\begin{equation}\label{eq:RGEalphas}
+\frac{d\ln a_s}{d\ln \mu} = \overline{\beta}(a_s(\mu)) =a_s(\mu)\sum_{n=0}^ka_s^n(\mu)\beta^{(n)}\,.
+\end{equation}
+The possibly more natural perturbative approach to this problem is
+that to assume that $\alpha_s(\mu)$ admits a perturbative expansion
+around $a_s(\mu_0)=0$ truncated to the same order $k$ of the
+anomalous dimension:
+\begin{equation}\label{eq:pertanstz}
+a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{k}b_n(\mu) a_s^n(\mu_0)\,.
+\end{equation}
+Plugging Eq.~(\ref{eq:pertanstz}) into both left- and right-hand side
+of Eq.~(\ref{eq:RGEalphas}), one finds the following recursive
+equations for the first few coefficients $b_n$:
+\begin{equation}
+\begin{array}{lcl}
+\displaystyle \frac{d b_0}{d \ln \mu} &=& 0 \\
+\\
+\displaystyle \frac{d b_1}{d \ln \mu} &=& \beta^{(0)}b_0^2 \\
+\\
+\displaystyle \frac{d b_2}{d \ln \mu} &=& 2 \beta^{(0)} b_0 b_1 +
+                                          \beta^{(1)} b_0^3\\
+\\
+\displaystyle \frac{d b_3}{d \ln \mu} &=& \beta^{(0)} (b_1^2 + 2 b_0
+                                          b_2) + 3 \beta^{(1)} b_0^2
+                                          b_1 + \beta^{(2)} b_0^4 \\
+\\
+\vdots
+\end{array}
+\end{equation}
+Integrating these differential equations between $\mu_0$ and $\mu$ and
+using the boundary condition gives:
+\begin{equation}\label{eq:pertcoefs}
+\begin{array}{lcl}
+b_0 &=& 1 \\
+\\
+b_1 &=& \displaystyle \beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right) \\
+\\
+b_2 &=& \displaystyle \left(\beta^{(0)}\right)^2\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(1)}\ln\left(\frac{\mu}{\mu_0}\right)\\
+\\
+b_3 &=& \displaystyle \left(\beta^{(0)}\right)^3\ln^3\left(\frac{\mu}{\mu_0}\right) + \frac{5}{2}\beta^{(0)}\beta^{(1)}\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(2)}\ln\left(\frac{\mu}{\mu_0}\right)  \\
+\\
+\vdots
+\end{array}
+\end{equation}
+Computing these coefficients up to order $k$ allows one to obtain the
+perturbative expansion of $a_s(\mu)$ in terms of $a_s(\mu_0)$ up the
+fixed-order perturbative accuracy N$^{k}$LO. However, it should be
+clear from Eq.~(\ref{eq:pertcoefs}) that, for $\mu\gg \mu_0$ or
+$\mu\ll \mu_0$, $b_n\sim \ln^{n}(\mu/\mu_0)\gg 1$. Therefore, despite the
+smallness of $\alpha_s(\mu_0)$, the presence of such large logarithms
+is such that the truncated series in Eq.~(\ref{eq:pertanstz}),
+\textit{i.e.} a fixed-order computation, may not provide an accurate
+approximation of $\alpha_s(\mu)$.
+
+However, nothing prevents us from extending the series in
+Eq.~(\ref{eq:pertanstz}) from $k+1$ terms to and infinite number of
+terms even though the anomalous dimension in Eq.~(\ref{eq:RGEalphas})
+is truncated to order $k$:
+\begin{equation}\label{eq:pertanstzinf}
+a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{\infty}b_n(\mu) a_s^n(\mu_0)\,.
+\end{equation}
+The coefficients $b_n$ can be computed iteratively exactly as shown
+above for any value of $n$. The calculation above can be used to infer
+the structure of the coefficients $b_n$:
+\begin{equation}
+  b_n(\mu) = \sum_{i=n-k}^n b_{n,i}\ln^i\left(\frac{\mu}{\mu_0}\right)\,,
+\end{equation}
+where $b_{n,i}$ are numerical coefficients given by combinations of
+the coefficients $\beta_j$, $j=0,\dots,k$. Using this equation and
+rearranging the series finally gives:
+\begin{equation}\label{eq:pertanstzinfrearr}
+  a_s(\mu) = a_s(\mu_0) \sum_{l=0}^k a_s^{l}(\mu_0) \sum_{n=0}^{\infty} b_{n+l,n}\left[a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right) \right]^{n}\,.
+\end{equation}
+Provided to be able to know the coefficients $b_{n+l,n}$ for all
+$n$'s, this rearrangment exposes the resummation procedure: for each
+power of $\alpha_s$ at which the $\beta$-function is known, all powers
+of the kind $(a_s\ln(\mu/\mu_0))^n$ are included. In jargon, one
+usually says that the knowledge of the anomalous dimension to order
+$k$ allows N$^k$LL resummation. The question that remains to be
+answered is how do we calculate all the $b_{n+l,n}$ coefficients to
+effectively enable resummation. This is usually done by observing that
+Eq.~(\ref{eq:RGEalphas}) with $k=0$ can be easily solved in a closed
+form and gives:
+\begin{equation}\label{eq:llsol}
+a_s^{\rm LL}(\mu) = \frac{a_s(\mu_0)}{1-\beta^{(0)}a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right)}\,,
+\end{equation}
+which provides the LL resummation of the running coupling. Comparing
+this result with Eq.~(\ref{eq:pertanstzinfrearr}) with $k=0$ tells us
+that:
+\begin{equation}
+b_{n,n} = \left(\beta^{(0)}\right)^n\,,
+\end{equation}
+which is also consistent with Eq.~(\ref{eq:pertcoefs}). In order to go
+further, one needs to include the term $k=1$ in
+Eq.~(\ref{eq:RGEalphas}) and integrate the differential equation
+between $\mu_0$ and $\mu$. The result is a transcendental equation in
+$a_s$:
+\begin{equation}\label{eq:transcend}
+\frac1{\beta^{(0)}}\left(\frac{1}{a_s(\mu)}-\frac{1}{a_s(\mu_0)}\right) + \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
+\end{equation}
+with $b_n=\beta^{(n)}/\beta^{(0)}$. Of course, the solution of this
+transcendental equation solves exactly the differential equation in
+Eq.~(\ref{eq:RGEalphas}). However, in order to obtain an analytic
+equation for $a_s(\mu)$ we need to resort on perturbation theory. This
+is done by first rearranging the above equation as:
+\begin{equation}
+\frac{a_s(\mu_0)}{a_s(\mu)}=1+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)  - a_s(\mu_0) b_1\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)\,.
+\end{equation}
+This equation tells us that the logarithm appearing in the r.h.s.,
+being proportional to $\alpha_s$ can be expanded and truncated to
+leading order. Notice that this operation is allowed because no
+potentially large logarithms of the scales are present. Therefore, we
+can use Eq.~(\ref{eq:llsol}) inside this term, obtaining:
+\begin{equation}\label{eq:firstexp}
+\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)+\mathcal{O}(a_s)\,,
+\end{equation}
+such that:
+\begin{equation}
+a_s(\mu)=\frac{a_s^{\rm LL}(\mu)}{ 1  - a_s^{\rm LL}(\mu) b_1 \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)}+\mathcal{O}(a_s^3)\,
+\end{equation}
+that can be further expanded, finally obtaining:
+\begin{equation}\label{eq:ansolut}
+a_s^{\rm NLL}(\mu)=a_s^{\rm LL}(\mu) \left[1 + b_1  a_s^{\rm LL}(\mu) \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)\right]\,,
+\end{equation}
+which gives the NLL solution for the evolution of the strong
+coupling. The same kind of procedure can be applied iteratively to
+obtain perturbatively more accurate solutions. However, it is now
+important to stress an important aspect that is central to this
+section, \textit{i.e.} the difference between
+Eqs.~(\ref{eq:transcend})
+and~(\ref{eq:ansolut}). Eq.~(\ref{eq:ansolut}) has been obtained from
+Eq.~(\ref{eq:transcend}) by neglecting genuinely subleading
+corrections. This makes the two solutions equivalent from the point of
+view of accuracy. However, while Eq.~(\ref{eq:transcend}) satisfies
+the evolution equation Eq.~(\ref{eq:RGEalphas}) with $k=1$
+\textit{exactly}, Eq.~(\ref{eq:ansolut}) violates it by subleading
+terms. In other words, one finds:
+\begin{equation}
+\frac{d \ln a_s^{\rm NLL}(\mu)}{d\ln\mu}=\beta^{(0)}a_s^{\rm NLL}(\mu) +\beta^{(1)} (a_s^{\rm NLL}(\mu))^2 +\mathcal{O}(a_s^3)\,.
+\end{equation}
+Therefore, the neglect of subleading terms required to go from
+Eq.~(\ref{eq:transcend}) to Eq.~(\ref{eq:ansolut}) has the effect of
+introducing subleading terms in the evolution equation. We point out
+that the introduction of these spurious subleading terms has the only
+scope to obtain a closed-form analytic expression for the evolution of
+the coupling. Moreover, Eq.~(\ref{eq:ansolut}) has the additional
+feature that it makes the evolution of the coupling
+\textit{non-conservative}. In practice, this means that evolving
+$\alpha_s$ from $\mu_0$ to $\mu$ using Eq.~(\ref{eq:ansolut}) and then
+back from $\mu$ to $\mu_0$ one does not recover the initial
+value. This is clearly not the case if one uses the (numerical)
+solution of Eq.~(\ref{eq:transcend}). As an example,
+Fig.~\ref{fig:Alphas} displays the behaviour of the NLL analytical
+solution with $n_f=5$ active flavours evolved from
+$\alpha_s(M_Z)=0.118$ down to 1 GeV and then up back to $M_Z$. As
+clear, the backward and forward evolution curves do not coincide
+leading to a mismatch of the value of $\alpha_s(M_Z)$.
+\begin{figure}[h]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/Alphas}
+    \caption{Non-conservativity of the NLL analytic evolution of the
+      strong coupling.\label{fig:Alphas}}
+  \end{centering}
+\end{figure}
+
+Of course, one can argue that this effect is subleading and thus
+allowed. On the other hand, one may wonder whether a violation of the
+evolution equation introduced with the sole purpose of obtaining an
+analytic expression for the evolution is justified. In fact, it
+appears to be a better practice to employ an evolution that obeys the
+evolution equation exactly order by order in perturbation theory. The
+reason is simply a better control on the theoretical uncertainty
+related to missing higher-order corrections. To be more specific, the
+subleading terms introduced to obtain Eq.~(\ref{eq:ansolut}) would
+affect the computation of an observable at fixed-order in perturbation
+theory in the exact same way as a renormalisation scale variation
+would do. Therefore, it appears convenient to use an exact solution of
+the evolution equation and leave the estimate of theoretical
+uncertainties to renormalisation-scale variations.
+
+\subsection{The Sudakov form factor}
+
+Now, we turn to address the question of solving the TMD evolution
+equations in Eq.~(\ref{eq:eveqs}) in perturbation theory. We have
+already derived the solution, Eq.~(\ref{eq:solution2}), in terms of
+the relevant anomalous dimensions. However, this solution contains an
+integral. A possibility is that of computing that integral
+numerically. This ensures that the results obeys \textit{exactly} the
+evolution equations in Eq.~(\ref{eq:eveqs}). Another possibility is
+that of attempting to solve the integral analytically. This turns out
+to be possible provided that one uses the appropriate analytic
+solution for the running of $\alpha_s$. As discussed above, this comes
+at the price that the result violates the equations in
+Eq.~(\ref{eq:eveqs}) by subleading terms. As we will see below, this
+very violation gives origin to the resummation scale.
+
+
+
+
+
 
 \newpage
 
