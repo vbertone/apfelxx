@@ -7,7 +7,7 @@
  
 APFEL++ is a C++ rewriting of the Fortran 77 evolution code APFEL (see
 http://apfel.hepforge.org and
-https://github.com/scarrazza/apfel). APFEL++ is based on a completely
+https://github.com/vbertone/apfel). APFEL++ is based on a completely
 new code design and guarantees a better performance along with a more
 optimal memory management. The new modular structure allows for a
 better maintainability and an easier extensibility. This makes APFEL++
@@ -16,6 +16,14 @@ evolution equations to the computation of deep-inelastic-scattering
 (DIS) and single-inclusive-annihilation cross sections. Also more
 complex computations, such as semi-inclusive DIS and Drell-Yan cross
 sections, are easily implementable in APFEL++.
+
+## Homebrew (macOS)
+
+APFEL++ is available through the [Homebrew-hep](https://github.com/davidchall/homebrew-hep) tap of [Homebrew](https://brew.sh). After having installed Homebrew and tapped Homebrew-hep, the latest stable release of APFEL++ can be downloaded and installed with:
+```Shell
+brew install apfelxx
+```
+
 
 ## Download
 
