@@ -58,9 +58,6 @@ ccmake .
 Code documentation generated with Doxygen can be found here:
 https://vbertone.github.io/apfelxx/html/index.html.
 
-Visit also the HepForge webpage http://apfel.hepforge.org and the
-APFEL Web interface http://apfel.mi.infn.it/.
-
 ## Relevant references
 
 - V. Bertone, *APFEL++: A new PDF evolution library in C++*, [arXiv:1708.00911](https://arxiv.org/pdf/1708.00911.pdf).
