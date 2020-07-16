@@ -18,7 +18,6 @@ namespace apfel
   class OperatorERBL: public Operator
   {
   public:
-
     OperatorERBL() = delete;
 
     /**
