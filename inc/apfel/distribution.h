@@ -21,7 +21,6 @@ namespace apfel
   class Distribution: public LagrangeInterpolator
   {
   public:
-
     Distribution() = delete;
 
     /**

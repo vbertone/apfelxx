@@ -21,7 +21,6 @@ namespace apfel
   class Dglap: public MatchedEvolution<Set<T>>
   {
   public:
-
     Dglap() =  delete;
 
     /**
