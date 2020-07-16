@@ -22,7 +22,6 @@ namespace apfel
   class Operator
   {
   public:
-
     Operator() = delete;
 
     /**

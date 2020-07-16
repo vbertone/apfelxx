@@ -23,7 +23,6 @@ namespace apfel
   class MatchedEvolution
   {
   public:
-
     MatchedEvolution() = delete;
 
     virtual ~MatchedEvolution() = default;

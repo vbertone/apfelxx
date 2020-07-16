@@ -20,7 +20,6 @@ namespace apfel
   class Observable
   {
   public:
-
     Observable() = delete;
 
     /**
