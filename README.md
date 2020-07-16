@@ -24,7 +24,6 @@ APFEL++ is available through the [Homebrew-hep](https://github.com/davidchall/ho
 brew install apfelxx
 ```
 
-
 ## Download
 
 You can obtain APFEL++ directly from the github repository:
@@ -49,7 +48,8 @@ The code can be compiled using the following procedure:
 
 ```Shell
 cd apfelxx
-cmake -DCMAKE_INSTALL_PREFIX=/your/installation/path/ .
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=/your/installation/path/ ..
 make && make install
 ```
 By the default, if no prefix specification is given, the program will
