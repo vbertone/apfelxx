@@ -432,6 +432,89 @@ dimensions in the ERBL region have to fullfil. We will attempt a
 numerical estimate of the impact of possible violations of this
 requirement.
 
+\section{On Vinnikov's code}
+
+The purpose of this short note is to draw the attention on a possible
+incongruence of the GPD evolution code developed by Vinnikov and
+presented in Ref.~\cite{Vinnikov:2006xw}. For definiteness, we
+concentrate on the non-singlet $H_{\rm NS}$ GPD in the DGLAP region
+$x>\xi$, whose evolution equation is given in Eq.~(29). For
+completeness, I report that equation here:
+\begin{equation}\label{eq:Vinnikov}
+\begin{array}{rcl}
+\displaystyle \frac{d H_{\rm NS}(x,\xi,Q^2)}{d\ln
+  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
+          \frac{x^2+y^2-2\xi^2}{(y-x)(y^2-\xi^2)}\left(H_{\rm
+          NS}(y,\xi,Q^2)-H_{\rm NS}(x,\xi,Q^2)\right)\\
+\\
+&+&\displaystyle H_{\rm
+    NS}(x,\xi,Q^2)\bigg(\frac32+2\ln(1-x)+\frac{x-\xi}{2\xi}\ln((x-\xi)(1+\xi))\\
+\\
+&-&\displaystyle \frac{x+\xi}{2\xi}\ln((x+\xi)(1-\xi))\bigg)\Bigg]\,.
+\end{array}
+\end{equation}
+The limit for $\xi\rightarrow 0$ of the equation above should
+reproduce the usual DGLAP evolution equation:
+\begin{equation}
+\displaystyle \frac{d H_{\rm 
+NS}(x,0,Q^2)}{d\ln
+  Q^2}=\frac{\alpha_s(Q^2)}{4\pi}\int_x^1 \frac{dz}{z}\left[\hat{P}_{\rm
+  NS}\left(z\right)\right]_+H_{\rm NS}\left(\frac{x}{z},0,Q^2\right)\,,
+\end{equation}
+where:
+\begin{equation}
+\hat{P}_{\rm NS}\left(z\right)=2C_F\frac{1+z^2}{1-z}=2C_F\left[\frac{2}{1-z}-(1+z)\right]\,,
+\end{equation}
+with $C_F=4/3$. Written explicitly:
+\begin{equation}\label{eq:DGLAPexpl}
+\begin{array}{rcl}
+  \displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
+    Q^2}&=&\displaystyle \frac{\alpha_s(Q^2)}{4\pi}2C_F\Bigg[\int_x^1 dz\,\frac{2}{1-z}\left(\frac1z H_{\rm NS}\left(\frac{x}{z},0,Q^2\right)-H_{\rm
+      NS}(x,0,Q^2)\right)\\
+\\
+&-&\displaystyle \int_x^1 \frac{dz}{z}\, (1+z) H_{\rm
+    NS}\left(\frac{x}{z},0,Q^2\right)\\
+\\
+ &+&\displaystyle H_{\rm NS}(x,0,Q^2)\left(\frac{3}{2}+2\ln(1-x)\right)\Bigg]\,.
+\end{array}
+\end{equation}
+Now I explicitly take the limit for $\xi\rightarrow 0$ of
+Eq.~(\ref{eq:Vinnikov}). The result is:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
+  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
+          \frac{x^2+y^2}{y^2 (y-x)}\left(H_{\rm
+          NS}(y,0,Q^2)-H_{\rm NS}(x,0,Q^2)\right)\\
+\\
+&+&\displaystyle H_{\rm
+    NS}(x,0,Q^2)\left(\frac32+2\ln(1-x)\right)\Bigg]\,.
+\end{array}
+\end{equation}
+Some further simple algebraic manipulation finally gives:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
+  Q^2}&=&\displaystyle\frac{\alpha_s(Q^2)}{4\pi}2C_F\Bigg[\int_x^1 dz\, 
+          \frac{2}{1-z}\left(\frac{1}{z}H_{\rm
+          NS}\left(\frac{x}{z},0,Q^2\right)-H_{\rm NS}(x,0,Q^2)\right)\\
+\\
+&-&\displaystyle \int_x^1 \frac{dz}{z}\,(1+z)H_{\rm
+          NS}\left(\frac{x}{z},0,Q^2\right)\\
+\\
+&+&\displaystyle H_{\rm
+    NS}(x,0,Q^2) \left(\frac32+2\ln(1-x)+\ln(x)+(1-x)\right)\Bigg]\,,
+\end{array}
+\end{equation}
+that is close to the correct results, Eq.~(\ref{eq:DGLAPexpl}), except
+for the two additional terms in the third line. Since the
+$\xi\rightarrow 0$ limit does not seem to produce the correct result,
+this suggests that the evolution code presented in
+Ref.~\cite{Vinnikov:2006xw} may not be entirely correct.\footnote{It
+  is, in fact, possible to correct Eq.~(\ref{eq:Vinnikov}) in such a
+  way that its $\xi\rightarrow 0$ limit gives the correct DGLAP
+  evolution equation.}
+
 \newpage
 
 \begin{thebibliography}{alp}
@@ -473,6 +556,13 @@ Phys. Rev. D \textbf{55} (1997), 7114-7125
 doi:10.1103/PhysRevD.55.7114
 [arXiv:hep-ph/9609381 [hep-ph]].
 %1183 citations counted in INSPIRE as of 08 Jul 2020
+
+%\cite{Vinnikov:2006xw}
+\bibitem{Vinnikov:2006xw}
+A.~V.~Vinnikov,
+%``Code for prompt numerical computation of the leading order GPD evolution,''
+[arXiv:hep-ph/0604248 [hep-ph]].
+%21 citations counted in INSPIRE as of 20 Jul 2020
 
 \end{thebibliography}
 
