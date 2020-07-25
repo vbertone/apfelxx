@@ -2386,12 +2386,12 @@ the evolution equation is:
 \begin{equation}\label{eq:dglapsol}
 \begin{array}{rcl}
 f(\mu)&=&\displaystyle
-f(\mu_0)\exp\left[\int_{\mu_0}^{\mu}d\ln\mu'\,\gamma(a_s(\mu'))\right]\\
+\exp\left[\int_{\mu_0}^{\mu}d\ln\mu'\,\gamma(a_s(\mu'))\right]f(\mu_0)\\
 \\
 &=&\displaystyle
-    f(\mu_0)\exp\left[\sum_{n=0}^k\gamma^{(n)}\int_{\mu_0}^{\mu}d\ln\mu'\,a_s^{n+1}(\mu')\right]\\
+    \exp\left[\sum_{n=0}^k\gamma^{(n)}\int_{\mu_0}^{\mu}d\ln\mu'\,a_s^{n+1}(\mu')\right]f(\mu_0)\\
 \\
-&=&\displaystyle f(\mu_0) \prod_{n=0}^k\exp\left[\gamma^{(n)}I_n\right]\,,
+&=&\displaystyle f(\mu_0) \prod_{n=0}^k\exp\left[\gamma^{(n)}I_n\right]f(\mu_0)\,,
 \end{array}
 \end{equation}
 with:
@@ -2440,37 +2440,138 @@ Eq.~(\ref{eq:dglapsol}) can  safely be expanded:
 \end{equation}
 Somewhat surprisingly, this reveals that the inclusion of perturbative
 corrections beyond leading order to the anomalous dimension $\gamma$
-does not actually improve the logarithmic accuracy of the resummation
-provided by the evolution. On the other hand, since $f$ is usually
-multiplied to perturbative quantities such as hard cross sections,
-$\gamma$ has to match the relative order of those quantities in order
-not to degrade the accuracy of the full calculation.
-
-The only exception to this pattern is $I_0$ that cannot be fully
-expanded due to the presence of a logarithm of $a_s(\mu)/a_s(\mu_0)$
-that, as can be see from Eq.~(\ref{eq:llsol}), is potentially large:
-\begin{equation}
+does not directly improve the logarithmic accuracy of the resummation
+provided by the evolution. The exception to this pattern is $I_0$ that
+cannot be (fully) expanded due to the presence of a logarithm of
+$a_s(\mu)/a_s(\mu_0)$ that, as can be see from Eq.~(\ref{eq:llsol}),
+is potentially large:
+\begin{equation}\label{eq:expres}
 \exp\left[\gamma^{(0)}I_0\right]=\exp \left[\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)\right]+\mathcal{O}(a_s)=\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}+\mathcal{O}(a_s)\,.
 \end{equation}
 This factor alone provides the resummation up to some logarithmic
 accuracy determined uniquely by the evolution of $a_s(\mu)$. Finally
 one has:
 \begin{equation}\label{eq:dglapanal}
-f(\mu) = \displaystyle f(\mu_0) \left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}\left[1+\mathcal{O}(a_s)\right]\,,
+f(\mu) = \displaystyle \left[1+\mathcal{O}(a_s)\right]\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}f(\mu_0) \,.
 \end{equation}
-where the logarithmic accuracy is determined by the evolution of
-$a_s(\mu)$ and thus by $\overline{\beta}$, while the perturbative
-(fixed-order) accuracy is given by the squared bracket content and
-determined by the anomalous dimension $\gamma$ beyond leading order.
-For example, the first $\mathcal{O}(a_s)$ in the squared bracket of
-Eq.~(\ref{eq:dglapanal}) can be computed by retaining the
-$\mathcal{O}(a_s)$ terms Eq.~(\ref{eq:intsI}), which gives:
+However, the inclusion of correction terms in the square brackets in
+the r.h.s. of Eq.~(\ref{eq:dglapanal}) is still required to attain
+some given logarithmic accuracy. Since the exponential in
+Eq.~(\ref{eq:expres}) resums single logarithms of the kind
+$a_s^m\ln ^m(\mu/\mu_0)$, a term proportional to $a_s^n$ (without any
+logarithm) belongs to the tower $a_s^{m+n}\ln ^m(\mu/\mu_0)$ and thus
+contributes to N$^n$LL. To make an example, suppose we want to achieve
+NLL resummation. To do so, we need to include the $\mathcal{O}(a_s)$
+in the squared bracket of Eq.~(\ref{eq:dglapanal}) because that
+contributes to NLL. That term can be easily computed by retaining the
+$\mathcal{O}(a_s)$ terms in Eq.~(\ref{eq:intsI}). Moreover, $a_s(\mu)$
+in the last factor has to be computed using the NLL evolution given
+in Eq.~(\ref{eq:ansolNLL}). This finally gives:
 \begin{equation}
-f(\mu) = \displaystyle f(\mu_0) \left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}\left[1+\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1 \gamma^{(0)}\right) \left(a_s(\mu)-a_s(\mu_0)\right)+\mathcal{O}(a_s^2)\right]\,.
+f^{\rm NLL}(\mu) = \displaystyle\left[1+\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+    \gamma^{(0)}\right) \left(a_s^{\rm LL}(\mu)-a_s(\mu_0)\right)\right]
+\left(\frac{a_s^{\rm NLL}(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}} f(\mu_0) \,.
 \end{equation}
+Also note that in the squared bracket we are entitled to replaced
+$a_s$ with $a_s^{\rm LL}$ becase the difference is
+$\mathcal{O}(a_s^2)$ and thus NNLL.
 
-Eq.~(\ref{eq:dglapanal}) provides a closed-form, fully analytical
-solution to the RGE, Eq.~(\ref{eq:RGEproto}), for collinear
+In order to make a step towards the notation typically used in $q_T$
+resummation, we introduce the quantity:
+\begin{equation}\label{eq:lambdadef}
+\lambda \equiv \lambda(\mu) = a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)\,,
+\end{equation}
+that allows us to write the LL and NLL RGE solution for $a_s$ as:
+\begin{equation}
+a_s^{\rm LL}(\mu) = a_s(\mu_0)\frac{1}{1-\lambda}\,,
+\end{equation}
+and:
+\begin{equation}
+a_s^{\rm NLL}(\mu)=a_s(\mu_0)\frac{1}{1-\lambda}\left[1 + a_s(\mu_0) \frac{b_1 \ln\left(1-\lambda\right)}{1-\lambda}\right]\,,
+\end{equation}
+such that:
+\begin{equation}
+\begin{array}{rcl}
+  f^{\rm NLL}(\mu) &=&\displaystyle \displaystyle \left[1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+                            \gamma^{(0)}\right)
+                            \frac{\lambda}{1-\lambda}\right]\\
+  \\
+                   &\times&\displaystyle                        \exp\left[-\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)+a_s(\mu_0) \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
+                       \ln\left(1-\lambda\right)}{1-\lambda}\right]f(\mu_0)\,.
+\end{array}
+\end{equation}
+We now introduce the functions:
+\begin{equation}
+\begin{array}{rcl}
+g^{(0)}(\lambda) &=& \displaystyle  1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+                            \gamma^{(0)}\right)
+                            \frac{\lambda}{1-\lambda}\,,\\
+\\
+g^{(1)}(\lambda) &=& \displaystyle
+                     -\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)\,,\\
+\\
+g^{(2)}(\lambda) &=& \displaystyle \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
+                       \ln\left(1-\lambda\right)}{1-\lambda}\,,
+\end{array}
+\end{equation}
+such that:
+\begin{equation}\label{eq:DGLAPalaSoftGlue}
+  f^{\rm NLL}(\mu) = g^{(0)}(\lambda)\exp\left[-g^{(1)}(\lambda)+a_s(\mu_0) g^{(2)}(\lambda)\right]f(\mu_0) \,.
+\end{equation}
+This procedure can be extended to N$^k$LL accuracy just by introducing
+the appropriate $g^{(n)}$ functions, with $n\leq k+1$, in the
+exponential and including corrections up to $\mathcal{O}(a_s^k)$ in
+$g^{(0)}$. The notation is purposely reminiscent of soft-gluon and
+$q_T$ resummation.
+
+We can use the parallel with soft-gluon resummation to introduce
+the analogous of a ``resummation'' scale. This is done by introducing
+an \textit{arbitrary} scale $\mu_{\rm R}\sim \mu_0$ along with the
+trivial equality:
+\begin{equation}
+\ln\left(\frac{\mu}{\mu_0}\right) = \ln\left(\frac{\mu}{\mu_{\rm R}}\right)
++ \ln\left(\frac{\mu_{\rm R}}{\mu_0}\right)\,,
+\end{equation}
+such that $\ln\left(\mu_{\rm R}/\mu_0\right)\sim 1$. Using
+Eq.~(\ref{eq:lambdadef}), one has:
+\begin{equation}\label{eq:lambdadef}
+  \lambda =
+  a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_{\rm R}}\right)+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu_{\rm
+        R}}{\mu_0}\right)=\overline{\lambda}+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu_{\rm
+        R}}{\mu_0}\right)\,,
+\end{equation}
+where the second term in the r.h.s. is not enhanced by a large
+logarithm and can thus be treated perturbatively. Writing the
+functions $g^{(n)}$ in terms of $\overline{\lambda}$ and neglecting
+subleading terms gives the new functions:
+\begin{equation}
+\begin{array}{rcl}
+\overline{g}^{(0)}(\overline{\lambda}) &=& \displaystyle  1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+                            \gamma^{(0)}\right)
+                            \frac{\overline{\lambda}}{1-\overline{\lambda}}\,,\\
+\\
+\overline{g}^{(1)}(\overline{\lambda}) &=& \displaystyle
+                     -\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)\,,\\
+\\
+\overline{g}^{(2)}(\overline{\lambda}) &=& \displaystyle \frac{\gamma^{(0)}}{1-\overline{\lambda}}\left[\frac{b_1}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)+\ln\left(\frac{\mu_{\rm
+        R}}{\mu_0}\right)\right]\,,
+\end{array}
+\end{equation}
+so that:
+\begin{equation}\label{eq:DGLAPalaSoftGlueMuR}
+  f^{\rm NLL}(\mu) = \overline{g}^{(0)}(\overline{\lambda})\exp\left[-\overline{g}^{(1)}(\overline{\lambda})+a_s(\mu_0) \overline{g}^{(2)}(\overline{\lambda})\right]f(\mu_0) \,.
+\end{equation}
+Eqs.~(\ref{eq:DGLAPalaSoftGlueMuR}) and~(\ref{eq:DGLAPalaSoftGlue})
+are both NLL accurate and only differ by subleading terms. In fact,
+Eq.~(\ref{eq:DGLAPalaSoftGlueMuR}) generalises
+Eq.~(\ref{eq:DGLAPalaSoftGlue}) because the latter reduces to the
+former for $\mu_{\rm R}=\mu_0$. Therefore, one should be able to use
+modest variations of $\mu_{\rm R}$ around $\mu_0$ to estimate the
+possible impact of higher-order corrections to the anomalous
+dimension.
+
+Eq.~(\ref{eq:DGLAPalaSoftGlueMuR}) provides a closed-form, fully
+analytical solution to the RGE, Eq.~(\ref{eq:RGEproto}), for collinear
 distributions. However, exactly like in the case of the analytical
 solution for $a_s$, Eq.~(\ref{eq:dglapanal}) will satisfy
 Eq.~(\ref{eq:RGEproto}) only up to subleading terms with a consequent
@@ -2487,13 +2588,14 @@ already derived the solution, Eq.~(\ref{eq:solution2}), in terms of
 the relevant anomalous dimensions. However, this solution contains an
 integral. A possibility is that of computing that integral
 numerically. This ensures that the results obeys \textit{exactly} the
-evolution equations in Eq.~(\ref{eq:eveqs}). Another possibility is
-that of attempting to solve the integral analytically. This turns out
-to be possible provided that one uses the appropriate analytic
-solution for the running of $\alpha_s$. As discussed above, this comes
-at the price that the result violates the equations in
-Eq.~(\ref{eq:eveqs}) by subleading terms. As we will see below, this
-very violation gives origin to the resummation scale.
+evolution equations in Eq.~(\ref{eq:eveqs}) and the evolution is
+conservative. Another possibility is that of attempting to solve the
+integral analytically. This turns out to be possible provided that one
+uses the appropriate analytic solution for the running of
+$a_s$. As discussed above, this comes at the price that the
+result violates the equations in Eq.~(\ref{eq:eveqs}) by subleading
+terms. As we will see below, this very violation gives origin to the
+resummation scale.
 
 
 
