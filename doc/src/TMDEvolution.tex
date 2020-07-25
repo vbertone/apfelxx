@@ -2173,14 +2173,16 @@ order to identify a particular solution, we need a boundary condition
 given by the knowledge of $R$ at some particular scale $\mu_0$:
 $R(\mu_0)=R_0$.
 
+\subsection{The strong coupling}
+
 The question that we want to address here is how to solve
 Eq.~(\ref{eq:RGEproto}), along with its boundary condition
 $R(\mu_0)=R_0$, within the framework of perturbation theory. To
 rephrase it: how do we compute $R(\mu)$ to some perturbative accuracy
 for a generic scale $\mu$ given Eq.~(\ref{eq:RGEproto}) and its
 boundary condition $R(\mu_0)=R_0$? The first case to be considered,
-because it underlies all others, is the strong coupling
-$a_s=\alpha_s/4\pi$ that obeys the RGE\footnote{Notice that
+because it underlies all others, is the strong coupling, \textit{i.e.}
+we take $R=a_s=\alpha_s/4\pi$ that obeys the RGE\footnote{Notice that
   $\overline{\beta}$ in Eq.~(\ref{eq:RGEalphas}) is related to the
   usual QCD $\beta$-function by $\overline{\beta}=-\beta/a_s$.}:
 \begin{equation}\label{eq:RGEalphas}
@@ -2191,23 +2193,23 @@ that to assume that $\alpha_s(\mu)$ admits a perturbative expansion
 around $a_s(\mu_0)=0$ truncated to the same order $k$ of the
 anomalous dimension:
 \begin{equation}\label{eq:pertanstz}
-a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{k}b_n(\mu) a_s^n(\mu_0)\,.
+a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{k}c_n(\mu) a_s^n(\mu_0)\,.
 \end{equation}
 Plugging Eq.~(\ref{eq:pertanstz}) into both left- and right-hand side
 of Eq.~(\ref{eq:RGEalphas}), one finds the following recursive
-equations for the first few coefficients $b_n$:
+equations for the first few coefficients $c_n$:
 \begin{equation}
 \begin{array}{lcl}
-\displaystyle \frac{d b_0}{d \ln \mu} &=& 0 \\
+\displaystyle \frac{d c_0}{d \ln \mu} &=& 0 \\
 \\
-\displaystyle \frac{d b_1}{d \ln \mu} &=& \beta^{(0)}b_0^2 \\
+\displaystyle \frac{d c_1}{d \ln \mu} &=& \beta^{(0)}c_0^2 \\
 \\
-\displaystyle \frac{d b_2}{d \ln \mu} &=& 2 \beta^{(0)} b_0 b_1 +
-                                          \beta^{(1)} b_0^3\\
+\displaystyle \frac{d c_2}{d \ln \mu} &=& 2 \beta^{(0)} c_0 c_1 +
+                                          \beta^{(1)} c_0^3\\
 \\
-\displaystyle \frac{d b_3}{d \ln \mu} &=& \beta^{(0)} (b_1^2 + 2 b_0
-                                          b_2) + 3 \beta^{(1)} b_0^2
-                                          b_1 + \beta^{(2)} b_0^4 \\
+\displaystyle \frac{d c_3}{d \ln \mu} &=& \beta^{(0)} (c_1^2 + 2 c_0
+                                          c_2) + 3 \beta^{(1)} c_0^2
+                                          c_1 + \beta^{(2)} c_0^4 \\
 \\
 \vdots
 \end{array}
@@ -2216,13 +2218,13 @@ Integrating these differential equations between $\mu_0$ and $\mu$ and
 using the boundary condition gives:
 \begin{equation}\label{eq:pertcoefs}
 \begin{array}{lcl}
-b_0 &=& 1 \\
+c_0 &=& 1 \\
 \\
-b_1 &=& \displaystyle \beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right) \\
+c_1 &=& \displaystyle \beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right) \\
 \\
-b_2 &=& \displaystyle \left(\beta^{(0)}\right)^2\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(1)}\ln\left(\frac{\mu}{\mu_0}\right)\\
+c_2 &=& \displaystyle \left(\beta^{(0)}\right)^2\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(1)}\ln\left(\frac{\mu}{\mu_0}\right)\\
 \\
-b_3 &=& \displaystyle \left(\beta^{(0)}\right)^3\ln^3\left(\frac{\mu}{\mu_0}\right) + \frac{5}{2}\beta^{(0)}\beta^{(1)}\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(2)}\ln\left(\frac{\mu}{\mu_0}\right)  \\
+c_3 &=& \displaystyle \left(\beta^{(0)}\right)^3\ln^3\left(\frac{\mu}{\mu_0}\right) + \frac{5}{2}\beta^{(0)}\beta^{(1)}\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(2)}\ln\left(\frac{\mu}{\mu_0}\right)  \\
 \\
 \vdots
 \end{array}
@@ -2231,7 +2233,7 @@ Computing these coefficients up to order $k$ allows one to obtain the
 perturbative expansion of $a_s(\mu)$ in terms of $a_s(\mu_0)$ up the
 fixed-order perturbative accuracy N$^{k}$LO. However, it should be
 clear from Eq.~(\ref{eq:pertcoefs}) that, for $\mu\gg \mu_0$ or
-$\mu\ll \mu_0$, $b_n\sim \ln^{n}(\mu/\mu_0)\gg 1$. Therefore, despite the
+$\mu\ll \mu_0$, $c_n\sim \ln^{n}(\mu/\mu_0)\gg 1$. Therefore, despite the
 smallness of $\alpha_s(\mu_0)$, the presence of such large logarithms
 is such that the truncated series in Eq.~(\ref{eq:pertanstz}),
 \textit{i.e.} a fixed-order computation, may not provide an accurate
@@ -2242,28 +2244,27 @@ Eq.~(\ref{eq:pertanstz}) from $k+1$ terms to and infinite number of
 terms even though the anomalous dimension in Eq.~(\ref{eq:RGEalphas})
 is truncated to order $k$:
 \begin{equation}\label{eq:pertanstzinf}
-a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{\infty}b_n(\mu) a_s^n(\mu_0)\,.
+a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{\infty}c_n(\mu) a_s^n(\mu_0)\,.
 \end{equation}
-The coefficients $b_n$ can be computed iteratively exactly as shown
+The coefficients $c_n$ can be computed iteratively exactly as shown
 above for any value of $n$. The calculation above can be used to infer
-the structure of the coefficients $b_n$:
+the structure of the coefficients $c_n$:
 \begin{equation}
-  b_n(\mu) = \sum_{i=n-k}^n b_{n,i}\ln^i\left(\frac{\mu}{\mu_0}\right)\,,
+  c_n(\mu) = \sum_{i=n-k}^n c_{n,i}\ln^i\left(\frac{\mu}{\mu_0}\right)\,,
 \end{equation}
-where $b_{n,i}$ are numerical coefficients given by combinations of
+where $c_{n,i}$ are numerical coefficients given by combinations of
 the coefficients $\beta_j$, $j=0,\dots,k$. Using this equation and
 rearranging the series finally gives:
 \begin{equation}\label{eq:pertanstzinfrearr}
-  a_s(\mu) = a_s(\mu_0) \sum_{l=0}^k a_s^{l}(\mu_0) \sum_{n=0}^{\infty} b_{n+l,n}\left[a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right) \right]^{n}\,.
+  a_s(\mu) = a_s(\mu_0) \sum_{l=0}^k a_s^{l}(\mu_0) \sum_{n=0}^{\infty} c_{n+l,n}\left[a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right) \right]^{n}\,.
 \end{equation}
-Provided to be able to know the coefficients $b_{n+l,n}$ for all
-$n$'s, this rearrangment exposes the resummation procedure: for each
-power of $\alpha_s$ at which the $\beta$-function is known, all powers
-of the kind $(a_s\ln(\mu/\mu_0))^n$ are included. In jargon, one
-usually says that the knowledge of the anomalous dimension to order
-$k$ allows N$^k$LL resummation. The question that remains to be
-answered is how do we calculate all the $b_{n+l,n}$ coefficients to
-effectively enable resummation. This is usually done by observing that
+This rearrangment exposes the resummation procedure: for each power of
+$\alpha_s$ at which the $\beta$-function is known, all powers of the
+kind $(a_s\ln(\mu/\mu_0))^n$ are included. In jargon, one usually says
+that the knowledge of the anomalous dimension to order $k$ allows
+N$^k$LL resummation. The question that remains to be answered is how
+do we calculate all the $c_{n+l,n}$ coefficients to effectively enable
+resummation? This is usually done by observing that
 Eq.~(\ref{eq:RGEalphas}) with $k=0$ can be easily solved in a closed
 form and gives:
 \begin{equation}\label{eq:llsol}
@@ -2273,7 +2274,7 @@ which provides the LL resummation of the running coupling. Comparing
 this result with Eq.~(\ref{eq:pertanstzinfrearr}) with $k=0$ tells us
 that:
 \begin{equation}
-b_{n,n} = \left(\beta^{(0)}\right)^n\,,
+c_{n,n} = \left(\beta^{(0)}\right)^n\,,
 \end{equation}
 which is also consistent with Eq.~(\ref{eq:pertcoefs}). In order to go
 further, one needs to include the term $k=1$ in
@@ -2281,7 +2282,7 @@ Eq.~(\ref{eq:RGEalphas}) and integrate the differential equation
 between $\mu_0$ and $\mu$. The result is a transcendental equation in
 $a_s$:
 \begin{equation}\label{eq:transcend}
-\frac1{\beta^{(0)}}\left(\frac{1}{a_s(\mu)}-\frac{1}{a_s(\mu_0)}\right) + \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
+\frac1{\beta^{(0)}}\left(-\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}\right) - \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
 \end{equation}
 with $b_n=\beta^{(n)}/\beta^{(0)}$. Of course, the solution of this
 transcendental equation solves exactly the differential equation in
@@ -2289,17 +2290,22 @@ Eq.~(\ref{eq:RGEalphas}). However, in order to obtain an analytic
 equation for $a_s(\mu)$ we need to resort on perturbation theory. This
 is done by first rearranging the above equation as:
 \begin{equation}
-\frac{a_s(\mu_0)}{a_s(\mu)}=1+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)  - a_s(\mu_0) b_1\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)\,.
+\frac{a_s(\mu_0)}{a_s(\mu)}=1-a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)  - a_s(\mu_0) b_1\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)\,.
 \end{equation}
-This equation tells us that the logarithm appearing in the r.h.s.,
-being proportional to $\alpha_s$ can be expanded and truncated to
-leading order. Notice that this operation is allowed because no
+This equation tells us that the second logarithm appearing in the
+r.h.s., being proportional to $\alpha_s$ can be expanded and truncated
+to leading order. Notice that this operation is allowed because no
 potentially large logarithms of the scales are present. Therefore, we
 can use Eq.~(\ref{eq:llsol}) inside this term, obtaining:
 \begin{equation}\label{eq:firstexp}
 \ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)+\mathcal{O}(a_s)\,,
 \end{equation}
-such that:
+where we have also used the fact that:
+\begin{equation}
+a_s(\mu) = a_s^{\rm LL}(\mu)\left[1+\mathcal{O}(a_s) \right]\,,
+\end{equation}
+that descends directly from Eq.~(\ref{eq:pertanstzinfrearr}). This
+leads us to:
 \begin{equation}
 a_s(\mu)=\frac{a_s^{\rm LL}(\mu)}{ 1  - a_s^{\rm LL}(\mu) b_1 \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)}+\mathcal{O}(a_s^3)\,
 \end{equation}
@@ -2320,26 +2326,28 @@ view of accuracy. However, while Eq.~(\ref{eq:transcend}) satisfies
 the evolution equation Eq.~(\ref{eq:RGEalphas}) with $k=1$
 \textit{exactly}, Eq.~(\ref{eq:ansolut}) violates it by subleading
 terms. In other words, one finds:
-\begin{equation}
+\begin{equation}\label{eq:ansolNLL}
 \frac{d \ln a_s^{\rm NLL}(\mu)}{d\ln\mu}=\beta^{(0)}a_s^{\rm NLL}(\mu) +\beta^{(1)} (a_s^{\rm NLL}(\mu))^2 +\mathcal{O}(a_s^3)\,.
 \end{equation}
 Therefore, the neglect of subleading terms required to go from
 Eq.~(\ref{eq:transcend}) to Eq.~(\ref{eq:ansolut}) has the effect of
-introducing subleading terms in the evolution equation. We point out
-that the introduction of these spurious subleading terms has the only
-scope to obtain a closed-form analytic expression for the evolution of
-the coupling. Moreover, Eq.~(\ref{eq:ansolut}) has the additional
-feature that it makes the evolution of the coupling
+introducing subleading terms in the evolution equation that is no
+longer exactly satisfied. We point out that these spurious subleading
+terms originates from insisting on obtaining a closed-form analytic
+expression for the evolution of the coupling.
+
+Eq.~(\ref{eq:ansolut}) has the additional (perhaps undesired) feature
+that it makes the evolution of the coupling
 \textit{non-conservative}. In practice, this means that evolving
 $\alpha_s$ from $\mu_0$ to $\mu$ using Eq.~(\ref{eq:ansolut}) and then
 back from $\mu$ to $\mu_0$ one does not recover the initial
-value. This is clearly not the case if one uses the (numerical)
-solution of Eq.~(\ref{eq:transcend}). As an example,
+value. This is clearly not the case if one uses the exact solution
+deriving from Eq.~(\ref{eq:transcend}). To show this,
 Fig.~\ref{fig:Alphas} displays the behaviour of the NLL analytical
-solution with $n_f=5$ active flavours evolved from
-$\alpha_s(M_Z)=0.118$ down to 1 GeV and then up back to $M_Z$. As
-clear, the backward and forward evolution curves do not coincide
-leading to a mismatch of the value of $\alpha_s(M_Z)$.
+solution, Eq.~(\ref{eq:ansolNLL}), with $n_f=5$ active flavours
+evolved from $\alpha_s(M_Z)=0.118$ down to 1 GeV and then up back to
+$M_Z$. As clear, the backward and forward evolution curves do not
+coincide leading to a mismatch of the value of $\alpha_s(M_Z)$.
 \begin{figure}[h]
   \begin{centering}
     \includegraphics[width=0.6\textwidth]{plots/Alphas}
@@ -2359,9 +2367,117 @@ related to missing higher-order corrections. To be more specific, the
 subleading terms introduced to obtain Eq.~(\ref{eq:ansolut}) would
 affect the computation of an observable at fixed-order in perturbation
 theory in the exact same way as a renormalisation scale variation
-would do. Therefore, it appears convenient to use an exact solution of
-the evolution equation and leave the estimate of theoretical
-uncertainties to renormalisation-scale variations.
+would do. Therefore, it appears more transparent to use an exact
+solution to the evolution equation and leave the estimate of
+theoretical uncertainties to renormalisation-scale variations.
+
+\subsection{DGLAP evolution}
+
+As a second application of Eq.~(\ref{eq:RGEproto}), we consider the
+DGLAP evolution in which the quantity $R$ is identified with a
+collinear distribution $f$. In order to simplify the discussion, we
+consider the Mellin moments of a non-singlet distribution whose
+evolution equation can be written as exactly as in
+Eq.~(\ref{eq:RGEproto}) with $R=f$ and $\gamma$ the appropriate
+anomalous dimension. Our aim is to find a solution to this equation in
+perturbation theory by computing $f$ at some final scale $\mu$ when
+knowing $f$ at some initial scale $\mu_0$. Of course, the solution to
+the evolution equation is:
+\begin{equation}\label{eq:dglapsol}
+\begin{array}{rcl}
+f(\mu)&=&\displaystyle
+f(\mu_0)\exp\left[\int_{\mu_0}^{\mu}d\ln\mu'\,\gamma(a_s(\mu'))\right]\\
+\\
+&=&\displaystyle
+    f(\mu_0)\exp\left[\sum_{n=0}^k\gamma^{(n)}\int_{\mu_0}^{\mu}d\ln\mu'\,a_s^{n+1}(\mu')\right]\\
+\\
+&=&\displaystyle f(\mu_0) \prod_{n=0}^k\exp\left[\gamma^{(n)}I_n\right]\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+I_n=\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{a_s^{n}}{\overline{\beta}(a_s)}\right)\,.
+\end{equation}
+In the second line of Eq.~(\ref{eq:dglapsol}) we have used the
+perturbative expansion of the anomalous dimension $\gamma$ and in the
+third line made a change of variable in the integral using
+Eq.~(\ref{eq:RGEalphas}). It is now opportune to analyse the integrals
+$I_n$. The first question that we ask is whether the perturbative
+expansion of $\gamma$ and $\overline{\beta}$ are related. More
+specifically, given a $k+1$ terms in the expansion of
+$\overline{\beta}$, is there any bound on the number of terms in the
+expansion of $\gamma$ in terms of logarithmic accuracy? In order to
+answer this question, it is necessary to first understand what kind of
+logarithms Eq.~(\ref{eq:dglapsol}) is actually resumming. Indeed, one
+may wonder whether the evolution of $\alpha_s$ alone is enough to
+rusum all the large logarithms. If so, we would be enabled to expand
+and truncate the exponential to the desired perturbative accuracy
+because higher orders would be suppressed by powers of $\alpha_s$. The
+answer to this question boils down to determining whether $I_n$ is
+logarithmically enhanced for some value of $n$. We assume that
+$\overline\beta$ is truncated at some power $k'+1$, with $k'$
+generally different from $k$ in Eq.~(\ref{eq:dglapsol}). To give a
+quantitative argument let us take $k'=2$, such that
+\begin{equation}
+\overline{\beta}(a_s) =\beta^{(0)}a_s\left[1+b_1a_s\right]\,.
+\end{equation}
+We then compute $I_0$, $I_1$, and $I_2$:
+\begin{equation}\label{eq:intsI}
+\begin{array}{rcl}
+  I_0&=&\displaystyle\frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{1}{a_s+b_1a_s^2}\right)=\frac1{\beta^{(0)}}\left[\ln
+         a_s-\ln(1+b_1a_s)\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\frac{1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)+\mathcal{O}(a_s)\,,\\
+\\
+  I_1&=&\displaystyle \frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{1}{1+b_1a_s}\right)=\frac1{\beta^{(0)}}\left[\frac{\ln(1+b_1a_s)}{b_1}\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\mathcal{O}(a_s) \,,\\
+\\
+  I_2&=&\displaystyle\frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{a_s}{1+b_1a_s}\right)=\frac1{\beta^{(0)}}\left[\frac{a_s}{b_1}-\frac{\ln(1+b_1a_s)}{b_1^2}\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+In general one finds that, for $n\geq1$,
+$I_n=\mathcal{O}(a_s^n)$. Therefore, the exponential in
+Eq.~(\ref{eq:dglapsol}) can  safely be expanded:
+\begin{equation}
+\exp\left[\gamma^{(n)}I_n\right]=1+\gamma^{((n))}\times\mathcal{O}(a_s^n)\,,\quad n\geq 1\,.
+\end{equation}
+Somewhat surprisingly, this reveals that the inclusion of perturbative
+corrections beyond leading order to the anomalous dimension $\gamma$
+does not actually improve the logarithmic accuracy of the resummation
+provided by the evolution. On the other hand, since $f$ is usually
+multiplied to perturbative quantities such as hard cross sections,
+$\gamma$ has to match the relative order of those quantities in order
+not to degrade the accuracy of the full calculation.
+
+The only exception to this pattern is $I_0$ that cannot be fully
+expanded due to the presence of a logarithm of $a_s(\mu)/a_s(\mu_0)$
+that, as can be see from Eq.~(\ref{eq:llsol}), is potentially large:
+\begin{equation}
+\exp\left[\gamma^{(0)}I_0\right]=\exp \left[\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)\right]+\mathcal{O}(a_s)=\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}+\mathcal{O}(a_s)\,.
+\end{equation}
+This factor alone provides the resummation up to some logarithmic
+accuracy determined uniquely by the evolution of $a_s(\mu)$. Finally
+one has:
+\begin{equation}\label{eq:dglapanal}
+f(\mu) = \displaystyle f(\mu_0) \left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}\left[1+\mathcal{O}(a_s)\right]\,,
+\end{equation}
+where the logarithmic accuracy is determined by the evolution of
+$a_s(\mu)$ and thus by $\overline{\beta}$, while the perturbative
+(fixed-order) accuracy is given by the squared bracket content and
+determined by the anomalous dimension $\gamma$ beyond leading order.
+For example, the first $\mathcal{O}(a_s)$ in the squared bracket of
+Eq.~(\ref{eq:dglapanal}) can be computed by retaining the
+$\mathcal{O}(a_s)$ terms Eq.~(\ref{eq:intsI}), which gives:
+\begin{equation}
+f(\mu) = \displaystyle f(\mu_0) \left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}\left[1+\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1 \gamma^{(0)}\right) \left(a_s(\mu)-a_s(\mu_0)\right)+\mathcal{O}(a_s^2)\right]\,.
+\end{equation}
+
+Eq.~(\ref{eq:dglapanal}) provides a closed-form, fully analytical
+solution to the RGE, Eq.~(\ref{eq:RGEproto}), for collinear
+distributions. However, exactly like in the case of the analytical
+solution for $a_s$, Eq.~(\ref{eq:dglapanal}) will satisfy
+Eq.~(\ref{eq:RGEproto}) only up to subleading terms with a consequent
+non-conservative pattern of the evolution. Conversely, a numerical
+evaluation of the solution in Eq.~(\ref{eq:dglapsol}) will obey
+exactly Eq.~(\ref{eq:RGEproto}) and the evolution will be
+conservative.
 
 \subsection{The Sudakov form factor}
 
