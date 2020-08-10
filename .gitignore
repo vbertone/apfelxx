@@ -41,6 +41,7 @@ doc/src/codes/LeptonicModulation
 doc/src/codes/PhaseSpaceRedFactor
 doc/src/codes/NewPrescription
 doc/src/codes/PhaseSpacePowerCorrs
+doc/src/codes/Alphas
 
 # Compiled Object files
 *.slo
