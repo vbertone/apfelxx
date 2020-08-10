@@ -8,7 +8,6 @@
 
 #include <cmath>
 #include <vector>
-#include <iostream>
 
 namespace apfel
 {
