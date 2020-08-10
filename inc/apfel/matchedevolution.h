@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -11,7 +11,6 @@
 
 namespace apfel
 {
-
   /**
    * @brief The MatchedEvolution class is a template mother class for
    * the computation of the running of a generic quantity in a
@@ -23,7 +22,6 @@ namespace apfel
   class MatchedEvolution
   {
   public:
-
     MatchedEvolution() = delete;
 
     virtual ~MatchedEvolution() = default;
@@ -82,22 +80,22 @@ namespace apfel
     /**
      * @brief Function that returns the reference value of the object
      */
-    T const& GetObjectRef() const { return _ObjRef; }
+    T GetObjectRef() const { return _ObjRef; }
 
     /**
      * @brief Function that returns the reference scale
      */
-    double const& GetMuRef() const { return _MuRef; }
+    double GetMuRef() const { return _MuRef; }
 
     /**
      * @brief Function that returns the values of the thresholds.
      */
-    std::vector<double> const& GetThresholds() const { return _Thresholds; }
+    std::vector<double> GetThresholds() const { return _Thresholds; }
 
     /**
      * @brief Function that returns the number of steps.
      */
-    int const& GetNumberOfSteps() const { return _nsteps; }
+    int GetNumberOfSteps() const { return _nsteps; }
     ///@}
 
     /**
@@ -108,7 +106,7 @@ namespace apfel
      * @brief Function that sets the reference value of the object
      * @param ObjRef: the reference object
      */
-    void SetObjectRef(T const& ObjRef) { _ObjRef = ObjRef; }
+    void SetObjectRef(T ObjRef) { _ObjRef = std::move(ObjRef); }
 
     /**
      * @brief Function that sets the reference scale

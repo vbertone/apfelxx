@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/tabulateobject.h"
@@ -17,7 +17,7 @@ namespace apfel
 {
   //_________________________________________________________________________________
   template<class T>
-  TabulateObject<T>::TabulateObject(MatchedEvolution<T> &Object,
+  TabulateObject<T>::TabulateObject(MatchedEvolution<T>      & Object,
                                     int                 const& nQ,
                                     double              const& QMin,
                                     double              const& QMax,
@@ -45,7 +45,7 @@ namespace apfel
     // Loop on "_Qg" below "MuRef".
     for (int iQ = tQ; iQ >= 0; iQ--)
       {
-        T o = Object.Evaluate(this->_Qg[iQ]);
+        const T o = Object.Evaluate(this->_Qg[iQ]);
         this->_GridValues.push_back(o);
         Object.SetObjectRef(o);
         Object.SetMuRef(this->_Qg[iQ]);
@@ -59,7 +59,7 @@ namespace apfel
     Object.SetMuRef(MuRef);
     for (int iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
       {
-        T o = Object.Evaluate(this->_Qg[iQ]);
+        const T o = Object.Evaluate(this->_Qg[iQ]);
         this->_GridValues.push_back(o);
         Object.SetObjectRef(o);
         Object.SetMuRef(this->_Qg[iQ]);

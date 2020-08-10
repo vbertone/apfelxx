@@ -9,8 +9,12 @@
 #include "apfel/distribution.h"
 #include "apfel/set.h"
 #include "apfel/doubleobject.h"
+#include "apfel/alphaqcd.h"
+#include "apfel/alphaqed.h"
 
 #include <algorithm>
+#include <math.h>
+#include <numeric>
 
 namespace apfel
 {
@@ -194,5 +198,41 @@ namespace apfel
   int factorial(int const& n)
   {
     return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
+  }
+
+  //_________________________________________________________________________________
+  double GetSIATotalCrossSection(int                 const& PerturbativeOrder,
+                                 double              const& Q,
+                                 double              const& AlphaQCD,
+                                 double              const& AlphaQED,
+                                 std::vector<double> const& Thresholds,
+                                 QuarkFlavour        const& Comp)
+  {
+    // Get time-like electroweak charges
+    const std::vector<double> Bq = apfel::ElectroWeakCharges(Q, true, Comp);
+
+    // Effective number of flavours
+    double nf = NF(Q, Thresholds);
+
+    // Sum the charges
+    const double sumq = std::accumulate(Bq.begin(), Bq.begin() + nf, 0.);
+
+    // Total born coss setion
+    double sigma0tot = FourPi * pow(AlphaQED, 2) * NC * sumq / 3 / Q / Q;
+
+    // QCD coupling
+    const double as1 = AlphaQCD / FourPi;
+    const double as2 = as1 * as1;
+
+    // QCD correction factor
+    double Ree = 1;
+    if(PerturbativeOrder >= 1)
+      Ree += as1 * CF * 3;
+    if(PerturbativeOrder >= 2)
+      Ree += as2 * ( CF * CF * ( - 3. / 2 )
+                     + CA * CF * ( - 44 * zeta3 + 123. / 2 )
+                     + nf * CF * TR * ( 16 * zeta3 - 22. ) );
+
+    return 1e-3 * ConvFact * sigma0tot * Ree;
   }
 }

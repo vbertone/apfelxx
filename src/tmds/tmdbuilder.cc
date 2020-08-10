@@ -54,16 +54,21 @@ namespace apfel
 
     // ===============================================================
     // LO matching functions operators.
-    std::map<int, Operator> C00;
+    std::map<int, std::map<int, Operator>> C00;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    C00.insert({EvolutionBasisQCD::PNSP, Id});
-    C00.insert({EvolutionBasisQCD::PNSM, Id});
-    C00.insert({EvolutionBasisQCD::PNSV, Id});
-    C00.insert({EvolutionBasisQCD::PQQ,  Id});
-    C00.insert({EvolutionBasisQCD::PQG,  Zero});
-    C00.insert({EvolutionBasisQCD::PGQ,  Zero});
-    C00.insert({EvolutionBasisQCD::PGG,  Id});
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Id});
+        OM.insert({EvolutionBasisQCD::PNSM, Id});
+        OM.insert({EvolutionBasisQCD::PNSV, Id});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Id});
+        C00.insert({nf, OM});
+      }
 
     // ===============================================================
     // NLO matching functions operators.
@@ -75,15 +80,14 @@ namespace apfel
     const Operator O1ggpdf{g, C1ggpdf{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O1qgpdfnf = nf * O1qgpdf;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O1nspdf});
         OM.insert({EvolutionBasisQCD::PNSM, O1nspdf});
         OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
-        OM.insert({EvolutionBasisQCD::PQQ,  O1nspdf});
-        OM.insert({EvolutionBasisQCD::PQG,  O1qgpdfnf});
-        OM.insert({EvolutionBasisQCD::PGQ,  O1gqpdf});
-        OM.insert({EvolutionBasisQCD::PGG,  O1ggpdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O1qgpdf});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,                O1ggpdf});
         C10pdf.insert({nf, OM});
       }
 
@@ -98,24 +102,29 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - 2 * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - 2 * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - 2 * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O11gmVq - 2 * P0.at(3)});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P0.at(4)});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P0.at(5)});
-        OM.insert({EvolutionBasisQCD::PGG,  O11gmVg - 2 * P0.at(6)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O11gmVq - 2 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,                - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O11gmVg - 2 * P0.at(6)});
         C11pdf.insert({nf, OM});
       }
 
     // Terms proportion to two powers of log(mu0/mub)
-    std::map<int, Operator> C12;
+    std::map<int, std::map<int, Operator>> C12;
     const Operator O12gmKq = - CF * gammaK0() / 2 * Id;
     const Operator O12gmKg = - CA * gammaK0() / 2 * Id;
-    C12.insert({EvolutionBasisQCD::PNSP, O12gmKq});
-    C12.insert({EvolutionBasisQCD::PNSM, O12gmKq});
-    C12.insert({EvolutionBasisQCD::PNSV, O12gmKq});
-    C12.insert({EvolutionBasisQCD::PQQ,  O12gmKq});
-    C12.insert({EvolutionBasisQCD::PQG,  Zero});
-    C12.insert({EvolutionBasisQCD::PGQ,  Zero});
-    C12.insert({EvolutionBasisQCD::PGG,  O12gmKg});
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSM, O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSV, O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O12gmKg});
+        C12.insert({nf, OM});
+      }
 
     // FFs
     std::map<int, std::map<int, Operator>> C10ff;
@@ -125,15 +134,14 @@ namespace apfel
     const Operator O1ggff{g, C1ggff{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O1qgffnf = nf * O1qgff;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O1nsff});
         OM.insert({EvolutionBasisQCD::PNSM, O1nsff});
         OM.insert({EvolutionBasisQCD::PNSV, O1nsff});
-        OM.insert({EvolutionBasisQCD::PQQ,  O1nsff});
-        OM.insert({EvolutionBasisQCD::PQG,  O1qgffnf});
-        OM.insert({EvolutionBasisQCD::PGQ,  O1gqff});
-        OM.insert({EvolutionBasisQCD::PGG,  O1ggff});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nsff});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O1qgff});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gqff});
+        OM.insert({EvolutionBasisQCD::PGG,                O1ggff});
         C10ff.insert({nf, OM});
       }
 
@@ -148,10 +156,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - 2 * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - 2 * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - 2 * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O11gmVq - 2 * P0.at(3)});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P0.at(4)});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P0.at(5)});
-        OM.insert({EvolutionBasisQCD::PGG,  O11gmVg - 2 * P0.at(6)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O11gmVq - 2 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,                - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O11gmVg - 2 * P0.at(6)});
         C11ff.insert({nf, OM});
       }
 
@@ -168,7 +176,6 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O2Vqqpdf{g, C2Vqqpdf{nf}, IntEps};
-        const Operator O2qgpdfnf = nf * O2qgpdf;
         const Operator O2gqpdf{g, C2gqpdf{nf}, IntEps};
         const Operator O2ggpdf{g, C2ggpdf{nf}, IntEps};
         const Operator O2nsppdf = O2Vqqpdf + O2Vqqbpdf;
@@ -178,10 +185,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O2nsppdf});
         OM.insert({EvolutionBasisQCD::PNSM, O2nsmpdf});
         OM.insert({EvolutionBasisQCD::PNSV, O2nsmpdf});
-        OM.insert({EvolutionBasisQCD::PQQ,  O2qqpdf});
-        OM.insert({EvolutionBasisQCD::PQG,  O2qgpdfnf});
-        OM.insert({EvolutionBasisQCD::PGQ,  O2gqpdf});
-        OM.insert({EvolutionBasisQCD::PGG,  O2ggpdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O2qqpdf});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O2qgpdf});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O2gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,                O2ggpdf});
         C20pdf.insert({nf, OM});
       }
 
@@ -201,10 +208,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - 2 * P1.at(0) + ( gFq0 + 2 * b0 ) * C1.at(0) - 2 * C1.at(0) * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - 2 * P1.at(1) + ( gFq0 + 2 * b0 ) * C1.at(1) - 2 * C1.at(1) * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - 2 * P1.at(2) + ( gFq0 + 2 * b0 ) * C1.at(2) - 2 * C1.at(2) * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O21gmVq - 2 * P1.at(3) + ( gFq0 + 2 * b0 ) * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P1.at(4) + ( gFq0 + 2 * b0 ) * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PGG,  O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O21gmVq - 2 * P1.at(3) + ( gFq0 + 2 * b0 ) * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P1.at(4) + ( gFq0 + 2 * b0 ) * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PGQ,          ( nf / 6. ) * ( - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PGG,                  O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
         C21pdf.insert({nf, OM});
       }
 
@@ -225,10 +232,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(0) - CF * gK0 / 2 * C1.at(0) + 2 * P0.at(0) * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(1) - CF * gK0 / 2 * C1.at(1) + 2 * P0.at(1) * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(2) - CF * gK0 / 2 * C1.at(2) + 2 * P0.at(2) * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(3) - CF * gK0 / 2 * C1.at(3) + 2 * ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * ( b0 + gFq0 ) * P0.at(4) - CF * gK0 / 2 * C1.at(4) + 2 * ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) )});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * ( b0 + gFg0 ) * P0.at(5) - CA * gK0 / 2 * C1.at(5) + 2 * ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PGG,  O22gmVg - 2 * ( b0 + gFg0 ) * P0.at(6) - CA * gK0 / 2 * C1.at(6) + 2 * ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * (O22gmVq - 2 * ( b0 + gFq0 ) * P0.at(3) - CF * gK0 / 2 * C1.at(3) + 2 * ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PQG,                         - 2 * ( b0 + gFq0 ) * P0.at(4) - CF * gK0 / 2 * C1.at(4) + 2 * ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PGQ,          ( nf / 6. ) * (- 2 * ( b0 + gFg0 ) * P0.at(5) - CA * gK0 / 2 * C1.at(5) + 2 * ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PGG,                 O22gmVg - 2 * ( b0 + gFg0 ) * P0.at(6) - CA * gK0 / 2 * C1.at(6) + 2 * ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) )});
         C22pdf.insert({nf, OM});
       }
 
@@ -247,25 +254,30 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq + CF * gK0 * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O23gmVq + CF * gK0 * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O23gmVq + CF * gK0 * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O23gmVq + CF * gK0 * P0.at(3)});
-        OM.insert({EvolutionBasisQCD::PQG,          + CF * gK0 * P0.at(4)});
-        OM.insert({EvolutionBasisQCD::PGQ,          + CA * gK0 * P0.at(5)});
-        OM.insert({EvolutionBasisQCD::PGG,  O23gmVg + CA * gK0 * P0.at(6)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O23gmVq + CF * gK0 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          + CF * gK0 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,           + ( nf / 6. ) *  CA * gK0 * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O23gmVg + CA * gK0 * P0.at(6)});
         C23pdf.insert({nf, OM});
       }
 
     // Terms proportion to four powers of log(mu0/mub)
-    std::map<int, Operator> C24;
+    std::map<int, std::map<int, Operator>> C24;
     const double gK0 = gammaK0();
     const Operator O24gmVq = pow(CF * gK0, 2) / 8 * Id;
     const Operator O24gmVg = pow(CA * gK0, 2) / 8 * Id;
-    C24.insert({EvolutionBasisQCD::PNSP, O24gmVq});
-    C24.insert({EvolutionBasisQCD::PNSM, O24gmVq});
-    C24.insert({EvolutionBasisQCD::PNSV, O24gmVq});
-    C24.insert({EvolutionBasisQCD::PQQ,  O24gmVq});
-    C24.insert({EvolutionBasisQCD::PQG,  Zero});
-    C24.insert({EvolutionBasisQCD::PGQ,  Zero});
-    C24.insert({EvolutionBasisQCD::PGG,  O24gmVg});
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O24gmVq});
+        OM.insert({EvolutionBasisQCD::PNSM, O24gmVq});
+        OM.insert({EvolutionBasisQCD::PNSV, O24gmVq});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O24gmVq});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O24gmVg});
+        C24.insert({nf, OM});
+      }
 
     // FFs
     std::map<int, std::map<int, Operator>> C20ff;
@@ -275,7 +287,6 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O2Vqqff{g, C2Vqqff{nf}, IntEps};
-        const Operator O2qgffnf = nf * O2qgff;
         const Operator O2gqff{g, C2gqff{nf}, IntEps};
         const Operator O2ggff{g, C2ggff{nf}, IntEps};
         const Operator O2nspff = O2Vqqff + O2Vqqbff;
@@ -285,10 +296,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O2nspff});
         OM.insert({EvolutionBasisQCD::PNSM, O2nsmff});
         OM.insert({EvolutionBasisQCD::PNSV, O2nsmff});
-        OM.insert({EvolutionBasisQCD::PQQ,  O2qqff});
-        OM.insert({EvolutionBasisQCD::PQG,  O2qgffnf});
-        OM.insert({EvolutionBasisQCD::PGQ,  O2gqff});
-        OM.insert({EvolutionBasisQCD::PGG,  O2ggff});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O2qqff});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O2qgff});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O2gqff});
+        OM.insert({EvolutionBasisQCD::PGG,                O2ggff});
         C20ff.insert({nf, OM});
       }
 
@@ -308,10 +319,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O21gmVq - 2 * P1.at(0) + ( gFq0 + 2 * b0 ) * C1.at(0) - 2 * C1.at(0) * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O21gmVq - 2 * P1.at(1) + ( gFq0 + 2 * b0 ) * C1.at(1) - 2 * C1.at(1) * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O21gmVq - 2 * P1.at(2) + ( gFq0 + 2 * b0 ) * C1.at(2) - 2 * C1.at(2) * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O21gmVq - 2 * P1.at(3) + ( gFq0 + 2 * b0 ) * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PQG,          - 2 * P1.at(4) + ( gFq0 + 2 * b0 ) * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
-        OM.insert({EvolutionBasisQCD::PGQ,          - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) )});
-        OM.insert({EvolutionBasisQCD::PGG,  O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O21gmVq - 2 * P1.at(3) + ( gFq0 + 2 * b0 ) * C1.at(3) - 2 * ( C1.at(3) * P0.at(3) + C1.at(4) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P1.at(4) + ( gFq0 + 2 * b0 ) * C1.at(4) - 2 * ( C1.at(3) * P0.at(4) + C1.at(4) * P0.at(6) )});
+        OM.insert({EvolutionBasisQCD::PGQ,          ( nf / 6. ) * ( - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PGG,                  O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
         C21ff.insert({nf, OM});
       }
 
@@ -333,10 +344,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O22gmVq + factq * P0.at(0) + CF * C1.at(0) + P0.at(0) * P0.at(0) / 2});
         OM.insert({EvolutionBasisQCD::PNSM, O22gmVq + factq * P0.at(1) + CF * C1.at(1) + P0.at(1) * P0.at(1) / 2});
         OM.insert({EvolutionBasisQCD::PNSV, O22gmVq + factq * P0.at(2) + CF * C1.at(2) + P0.at(2) * P0.at(2) / 2});
-        OM.insert({EvolutionBasisQCD::PQQ,  O22gmVq + factq * P0.at(3) + CF * C1.at(3) + ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) ) / 2});
-        OM.insert({EvolutionBasisQCD::PQG,            factq * P0.at(4) + CF * C1.at(4) + ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) ) / 2});
-        OM.insert({EvolutionBasisQCD::PGQ,            factg * P0.at(5) + CA * C1.at(5) + ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) ) / 2});
-        OM.insert({EvolutionBasisQCD::PGG,  O22gmVg + factg * P0.at(6) + CA * C1.at(6) + ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) ) / 2});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O22gmVq + factq * P0.at(3) + CF * C1.at(3) + ( P0.at(3) * P0.at(3) + P0.at(4) * P0.at(5) ) / 2 )});
+        OM.insert({EvolutionBasisQCD::PQG,                            factq * P0.at(4) + CF * C1.at(4) + ( P0.at(3) * P0.at(4) + P0.at(4) * P0.at(6) ) / 2});
+        OM.insert({EvolutionBasisQCD::PGQ,            ( nf / 6. ) * ( factg * P0.at(5) + CA * C1.at(5) + ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) ) / 2 )});
+        OM.insert({EvolutionBasisQCD::PGG,                  O22gmVg + factg * P0.at(6) + CA * C1.at(6) + ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) ) / 2});
         C22ff.insert({nf, OM});
       }
 
@@ -355,10 +366,10 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSP, O23gmVq + CF * gK0 * P0.at(0)});
         OM.insert({EvolutionBasisQCD::PNSM, O23gmVq + CF * gK0 * P0.at(1)});
         OM.insert({EvolutionBasisQCD::PNSV, O23gmVq + CF * gK0 * P0.at(2)});
-        OM.insert({EvolutionBasisQCD::PQQ,  O23gmVq + CF * gK0 * P0.at(3)});
-        OM.insert({EvolutionBasisQCD::PQG,          + CF * gK0 * P0.at(4)});
-        OM.insert({EvolutionBasisQCD::PGQ,          + CA * gK0 * P0.at(5)});
-        OM.insert({EvolutionBasisQCD::PGG,  O23gmVg + CA * gK0 * P0.at(6)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O23gmVq + CF * gK0 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          + CF * gK0 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,            + ( nf / 6. ) * CA * gK0 * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O23gmVg + CA * gK0 * P0.at(6)});
         C23ff.insert({nf, OM});
       }
 
@@ -384,15 +395,14 @@ namespace apfel
             const Operator O3nsmpdf  = O3Vqqpdf - O3Vqqbpdf;
             const Operator O3qqpdf   = O3nsppdf + nf * O3pspdf;
             const Operator O3nsvpdf  = O3nsmpdf + nf * O3pvpdf;
-            const Operator O3qgpdfnf = nf * O3qgpdf;
             std::map<int, Operator> OM;
             OM.insert({EvolutionBasisQCD::PNSP, O3nsppdf});
             OM.insert({EvolutionBasisQCD::PNSM, O3nsmpdf});
             OM.insert({EvolutionBasisQCD::PNSV, O3nsvpdf});
-            OM.insert({EvolutionBasisQCD::PQQ,  O3qqpdf});
-            OM.insert({EvolutionBasisQCD::PQG,  O3qgpdfnf});
-            OM.insert({EvolutionBasisQCD::PGQ,  O3gqpdf});
-            OM.insert({EvolutionBasisQCD::PGG,  O3ggpdf});
+            OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qqpdf});
+            OM.insert({EvolutionBasisQCD::PQG,           nf * O3qgpdf});
+            OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gqpdf});
+            OM.insert({EvolutionBasisQCD::PGG,                O3ggpdf});
             C30pdf.insert({nf, OM});
           }
       }
@@ -465,18 +475,18 @@ namespace apfel
         const EvolutionBasisQCD evb{nf};
 
         // PDFs
-        obj.MatchingFunctionsPDFs.insert({0, {{evb, C00}}});
-        obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, C11pdf.at(nf)}, {evb, C12}}});
-        obj.MatchingFunctionsPDFs.insert({2, {{evb, C20pdf.at(nf)}, {evb, C21pdf.at(nf)}, {evb, C22pdf.at(nf)}, {evb, C23pdf.at(nf)}, {evb, C24}}});
+        obj.MatchingFunctionsPDFs.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, C11pdf.at(nf)}, {evb, C12.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({2, {{evb, C20pdf.at(nf)}, {evb, C21pdf.at(nf)}, {evb, C22pdf.at(nf)}, {evb, C23pdf.at(nf)}, {evb, C24.at(nf)}}});
         obj.MatchingFunctionsPDFs.insert({3, {{evb, C30pdf.at(nf)}}});
 
         // FFs
-        obj.MatchingFunctionsFFs.insert({0, {{evb, C00}}});
-        obj.MatchingFunctionsFFs.insert({1, {{evb, C10ff.at(nf)}, {evb, C11ff.at(nf)}, {evb, C12}}});
-        obj.MatchingFunctionsFFs.insert({2, {{evb, C20ff.at(nf)}, {evb, C21ff.at(nf)}, {evb, C22ff.at(nf)}, {evb, C23ff.at(nf)}, {evb, C24}}});
+        obj.MatchingFunctionsFFs.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctionsFFs.insert({1, {{evb, C10ff.at(nf)}, {evb, C11ff.at(nf)}, {evb, C12.at(nf)}}});
+        obj.MatchingFunctionsFFs.insert({2, {{evb, C20ff.at(nf)}, {evb, C21ff.at(nf)}, {evb, C22ff.at(nf)}, {evb, C23ff.at(nf)}, {evb, C24.at(nf)}}});
         obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
 
-        // Hard factors (set to zero when unkwown). In addition,
+        // Hard factors (set to zero when unknown). In addition,
         // H3Ch() should be multiplied by N_{nf,j} =
         // (\sum_{i=1}^{nf}e_q) / e_j channel by channel. Here we set
         // this factor to the constant 1 / 4 because it results from

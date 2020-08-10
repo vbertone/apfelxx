@@ -22,7 +22,7 @@ int main()
 
   // HPLOG all at once up to weight 5
   double *H = new double[363];
-  apfel::hplog_(x, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+  apfel::apf_hplog_(x, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
   std::cout << " x = " << xx << std::endl;
   std::cout << "                        "
@@ -47,10 +47,15 @@ int main()
 
   t.start();
   for (int i = 0; i < nc; i++)
-    apfel::hplog_(x, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+    apfel::apf_hplog_(x, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
   std::cout << "Calling HPLOG_ " << nc << " times... ";
   t.stop();
   std::cout << "\n";
 
+  delete x;
+  delete nw;
+  delete wn1;
+  delete wn2;
+  delete[] H;
   return 0;
 }

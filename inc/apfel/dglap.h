@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -21,7 +21,6 @@ namespace apfel
   class Dglap: public MatchedEvolution<Set<T>>
   {
   public:
-
     Dglap() =  delete;
 
     /**

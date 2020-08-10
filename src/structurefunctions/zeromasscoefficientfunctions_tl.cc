@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/zeromasscoefficientfunctions_tl.h"
@@ -86,7 +86,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];
@@ -268,7 +268,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr10 = Hr1[1];
     const double Hr11 = Hr1[2];
@@ -336,7 +336,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];
@@ -478,7 +478,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];
@@ -547,7 +547,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr10 = Hr1[1];
     const double Hr11 = Hr1[2];
@@ -594,7 +594,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr10  = Hr1[1];
     const double Hr11  = Hr1[2];
@@ -692,7 +692,7 @@ namespace apfel
     double *Hr5 = new double[sz*sz*sz*sz*sz];
 
     // Call polylogs
-    hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
 
     const double Hr1m1 = Hr1[0];
     const double Hr10  = Hr1[1];

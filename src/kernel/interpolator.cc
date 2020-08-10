@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/interpolator.h"
@@ -85,5 +85,21 @@ namespace apfel
       result += IntInterpolant(beta, ao, bo, _grid.GetJointGrid()) * _distributionJointGrid[beta];
 
     return sgn * result;
+  }
+
+  //_________________________________________________________________________________
+  std::ostream& operator << (std::ostream& os, Interpolator const& in)
+  {
+    const std::vector<double> sb = in.GetDistributionSubGrid()[0];
+    os << "Interpolator: " << &in << "\n";
+    os << "Distribution on the first SubGrid:\n[";
+    const std::ostringstream default_format;
+    os << std::scientific;
+    os.precision(1);
+    for (int i = 0; i < (int) sb.size(); i++)
+      os << sb[i] << " ";
+    os << "\b]";
+    os.copyfmt(default_format);
+    return os;
   }
 }

@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -160,6 +160,9 @@ namespace apfel
 
   private:
     std::vector<term<T, U>> _terms;
+
+    template<class V, class W>
+    friend std::ostream& operator << (std::ostream& os, DoubleObject<V, W> const& dob);
   };
 
   /**
@@ -190,4 +193,10 @@ namespace apfel
   template<class T, class U>
   DoubleObject<T, U> operator - (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { return lhs -= rhs; }
   ///@}
+
+  /**
+   * @brief Method which prints the double object with cout <<.
+   */
+  template<class T, class U>
+  std::ostream& operator << (std::ostream& os, DoubleObject<T, U> const& dob);
 }

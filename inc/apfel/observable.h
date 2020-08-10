@@ -20,13 +20,12 @@ namespace apfel
   class Observable
   {
   public:
-
     Observable() = delete;
 
     /**
      * @brief The Observable constructor.
      * @param CoefficientFunctions: a Set<Operator>-valued function returning the operators
-     * @param Object: a Set<T>-valued function returning the relevant object
+     * @param Objects: a Set<T>-valued function returning the relevant object
      */
     Observable(std::function<Set<Operator>(double const&)> const& CoefficientFunctions,
                std::function<Set<T>(double const&)>        const& Objects);

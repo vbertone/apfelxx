@@ -17,22 +17,19 @@ int main()
   const double mu0 = sqrt(2);
 
   // Vectors of masses and thresholds
-  const std::vector<double> Masses = {0, 0, 0, sqrt(2), 4.5, 175};
-  const std::vector<double> Thresholds = Masses;
+  const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
   const int PerturbativeOrder = 2;
 
   // Running coupling
-  const double AlphaQCDRef = 0.35;
-  const double MuAlphaQCDRef = sqrt(2);
-  apfel::AlphaQCD a{AlphaQCDRef, MuAlphaQCDRef, Masses, PerturbativeOrder};
+  apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
   const apfel::TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj   = InitializeDglapObjectsQCD(g, Masses, Thresholds);
-  const auto DglapObjOp = InitializeDglapObjectsQCD(g, Masses, Thresholds, true);
+  const auto DglapObj   = InitializeDglapObjectsQCD(g, Thresholds);
+  const auto DglapObjOp = InitializeDglapObjectsQCD(g, Thresholds, true);
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj,   apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
@@ -41,11 +38,14 @@ int main()
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
+  // Tabulate Operators
+  const apfel::TabulateObject<apfel::Set<apfel::Operator>> TabulatedOps{*EvolvedOps, 50, 1, 1000, 3};
+
   // Final scale
   const double mu = 100;
 
   // Compute results
-  std::cout << std::scientific << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
+  std::cout << "Direct evolution (4th order Runge-Kutta) from Q0 = " << mu0 << " GeV to Q = " << mu << " GeV... ";
 
   // Evolve PDFs to the final Scale
   apfel::Timer t;
@@ -57,21 +57,19 @@ int main()
   const std::map<int, apfel::Distribution> tpdfs = apfel::QCDEvToPhys(TabulatedPDFs.Evaluate(mu).GetObjects());
   t.stop();
 
-  std::cout << "Direct evolution of the operators... ";
+  std::cout << "Interpolation of the tabulated evolution operators... ";
   t.start();
-  apfel::Set<apfel::Operator> ops = EvolvedOps->Evaluate(mu);
+  apfel::Set<apfel::Operator> tops = TabulatedOps.Evaluate(mu);
   t.stop();
 
-  // Convolute evolution operators with the initial scale
-  // distributions.
-  apfel::Set<apfel::Distribution> InDist = EvolvedPDFs->Evaluate(mu0);
-  const apfel::MatchEvolOperatorBasisQCD matchbasis{apfel::NF(mu0, Thresholds)};
-  InDist.SetMap(matchbasis);
-  ops.SetMap(matchbasis);
-  const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((ops * InDist).GetObjects());
+  // Set appropriate convolution basis for the evolution operators and
+  // convolute them with initial-scale distributions.
+  tops.SetMap(apfel::EvolveDistributionsBasisQCD{});
+  const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((tops * apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCD{}, DistributionMap(g, apfel::LHToyPDFs, mu0)}).GetObjects());
 
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
+  std::cout << std::scientific;
 
   std::cout << "\nAlphaQCD(Q) = " << Alphas.Evaluate(mu) << std::endl;
   std::cout << "\n   x    "
@@ -97,7 +95,7 @@ int main()
     }
   std::cout << "\n";
 
-  std::cout << "Direct Evolution through the evolution operators:" << std::endl;
+  std::cout << "Evolution through the evolution operator:" << std::endl;
   for (auto const& x : xlha)
     {
       std::cout.precision(1);

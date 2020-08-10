@@ -14,7 +14,7 @@ namespace apfel
    * @defgroup NCMasslessSIA Zero-mass coefficient functions for SIA
    * Collection of the Zero-mass coefficient functions for
    * F<SUB>2</SUB>, F<SUB>L</SUB>, and F<SUB>3</SUB> up to
-   * O(&alpha;<SUB>s</SUB>).
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>).
    */
   ///@{
   /**

@@ -122,7 +122,7 @@ int main()
 
     // Construct the TMD luminosity in b scale to be fed to be
     // trasformed in qT space.
-    const auto TMDLumib = [=] (double const& b) -> double
+    const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double
     {
       // Get map of the TMDs in "x1" and "x2" and rotate them into the
       // physical basis.

@@ -2143,6 +2143,464 @@ one needs to use the fact that:
 \delta\left(\frac{1-x}{x}\right)=\delta(1-x)\,.
 \end{equation}
 
+\section{Solution of an RGE in perturbation theory}
+
+In this section we address the question of how a renormalisation group
+equation (RGE) can be solved within the framework of perturbation
+theory. The relevance of this issue concernes the estimation of
+theoretical uncertainties stemming from higher-order corrections. More
+specifically, we will show that the so-called \textit{resummation
+  scale} originates from a perturbative solution of the TMD evolution
+equations.
+
+In order to define the problem, we consider a generic RGE in QCD:
+\begin{equation}\label{eq:RGEproto}
+\frac{d\ln R}{d\ln \mu} = \gamma(\alpha_s(\mu))\,,
+\end{equation}
+where $R$ is a generic renormalisation-scheme dependent (and thus
+unobservable) quantity, $\mu$ is the scale resulting from the
+renormalisation procedure, and $\gamma$ is the log-free anomalous
+dimension that is computable in perturbation theory as a power series
+in the strong coupling $\alpha_s$ truncated at order $k$:
+\begin{equation}
+\gamma(\alpha_s(\mu)) = \frac{\alpha_s(\mu)}{4\pi}\sum_{n=0}^k\left(\frac{\alpha_s(\mu)}{4\pi}\right)^n\gamma^{(n)}\,.
+\end{equation}
+Notice that Eq.~(\ref{eq:RGEproto}) applies to different relevant
+quantities in QCD such as the strong coupling itself and to collinear
+and TMD distributions. Of course, Eq.~(\ref{eq:RGEproto}) is an
+ordinary differential equation that defines a family of solutions. In
+order to identify a particular solution, we need a boundary condition
+given by the knowledge of $R$ at some particular scale $\mu_0$:
+$R(\mu_0)=R_0$.
+
+\subsection{The strong coupling}
+
+The question that we want to address here is how to solve
+Eq.~(\ref{eq:RGEproto}), along with its boundary condition
+$R(\mu_0)=R_0$, within the framework of perturbation theory. To
+rephrase it: how do we compute $R(\mu)$ to some perturbative accuracy
+for a generic scale $\mu$ given Eq.~(\ref{eq:RGEproto}) and its
+boundary condition $R(\mu_0)=R_0$? The first case to be considered,
+because it underlies all others, is the strong coupling, \textit{i.e.}
+we take $R=a_s=\alpha_s/4\pi$ that obeys the RGE\footnote{Notice that
+  $\overline{\beta}$ in Eq.~(\ref{eq:RGEalphas}) is related to the
+  usual QCD $\beta$-function by $\overline{\beta}=-\beta/a_s$.}:
+\begin{equation}\label{eq:RGEalphas}
+\frac{d\ln a_s}{d\ln \mu} = \overline{\beta}(a_s(\mu)) =a_s(\mu)\sum_{n=0}^ka_s^n(\mu)\beta^{(n)}\,.
+\end{equation}
+The possibly more natural perturbative approach to this problem is
+that to assume that $\alpha_s(\mu)$ admits a perturbative expansion
+around $a_s(\mu_0)=0$ truncated to the same order $k$ of the
+anomalous dimension:
+\begin{equation}\label{eq:pertanstz}
+a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{k}c_n(\mu) a_s^n(\mu_0)\,.
+\end{equation}
+Plugging Eq.~(\ref{eq:pertanstz}) into both left- and right-hand side
+of Eq.~(\ref{eq:RGEalphas}), one finds the following recursive
+equations for the first few coefficients $c_n$:
+\begin{equation}
+\begin{array}{lcl}
+\displaystyle \frac{d c_0}{d \ln \mu} &=& 0 \\
+\\
+\displaystyle \frac{d c_1}{d \ln \mu} &=& \beta^{(0)}c_0^2 \\
+\\
+\displaystyle \frac{d c_2}{d \ln \mu} &=& 2 \beta^{(0)} c_0 c_1 +
+                                          \beta^{(1)} c_0^3\\
+\\
+\displaystyle \frac{d c_3}{d \ln \mu} &=& \beta^{(0)} (c_1^2 + 2 c_0
+                                          c_2) + 3 \beta^{(1)} c_0^2
+                                          c_1 + \beta^{(2)} c_0^4 \\
+\\
+\vdots
+\end{array}
+\end{equation}
+Integrating these differential equations between $\mu_0$ and $\mu$ and
+using the boundary condition gives:
+\begin{equation}\label{eq:pertcoefs}
+\begin{array}{lcl}
+c_0 &=& 1 \\
+\\
+c_1 &=& \displaystyle \beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right) \\
+\\
+c_2 &=& \displaystyle \left(\beta^{(0)}\right)^2\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(1)}\ln\left(\frac{\mu}{\mu_0}\right)\\
+\\
+c_3 &=& \displaystyle \left(\beta^{(0)}\right)^3\ln^3\left(\frac{\mu}{\mu_0}\right) + \frac{5}{2}\beta^{(0)}\beta^{(1)}\ln^2\left(\frac{\mu}{\mu_0}\right) + \beta^{(2)}\ln\left(\frac{\mu}{\mu_0}\right)  \\
+\\
+\vdots
+\end{array}
+\end{equation}
+Computing these coefficients up to order $k$ allows one to obtain the
+perturbative expansion of $a_s(\mu)$ in terms of $a_s(\mu_0)$ up the
+fixed-order perturbative accuracy N$^{k}$LO. However, it should be
+clear from Eq.~(\ref{eq:pertcoefs}) that, for $\mu\gg \mu_0$ or
+$\mu\ll \mu_0$, $c_n\sim \ln^{n}(\mu/\mu_0)\gg 1$. Therefore, despite the
+smallness of $\alpha_s(\mu_0)$, the presence of such large logarithms
+is such that the truncated series in Eq.~(\ref{eq:pertanstz}),
+\textit{i.e.} a fixed-order computation, may not provide an accurate
+approximation of $\alpha_s(\mu)$.
+
+However, nothing prevents us from extending the series in
+Eq.~(\ref{eq:pertanstz}) from $k+1$ terms to and infinite number of
+terms even though the anomalous dimension in Eq.~(\ref{eq:RGEalphas})
+is truncated to order $k$:
+\begin{equation}\label{eq:pertanstzinf}
+a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{\infty}c_n(\mu) a_s^n(\mu_0)\,.
+\end{equation}
+The coefficients $c_n$ can be computed iteratively exactly as shown
+above for any value of $n$. The calculation above can be used to infer
+the structure of the coefficients $c_n$:
+\begin{equation}
+  c_n(\mu) = \sum_{i=n-k}^n c_{n,i}\ln^i\left(\frac{\mu}{\mu_0}\right)\,,
+\end{equation}
+where $c_{n,i}$ are numerical coefficients given by combinations of
+the coefficients $\beta_j$, $j=0,\dots,k$. Using this equation and
+rearranging the series finally gives:
+\begin{equation}\label{eq:pertanstzinfrearr}
+  a_s(\mu) = a_s(\mu_0) \sum_{l=0}^k a_s^{l}(\mu_0) \sum_{n=0}^{\infty} c_{n+l,n}\left[a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right) \right]^{n}\,.
+\end{equation}
+This rearrangment exposes the resummation procedure: for each power of
+$\alpha_s$ at which the $\beta$-function is known, all powers of the
+kind $(a_s\ln(\mu/\mu_0))^n$ are included. In jargon, one usually says
+that the knowledge of the anomalous dimension to order $k$ allows
+N$^k$LL resummation. The question that remains to be answered is how
+do we calculate all the $c_{n+l,n}$ coefficients to effectively enable
+resummation? This is usually done by observing that
+Eq.~(\ref{eq:RGEalphas}) with $k=0$ can be easily solved in a closed
+form and gives:
+\begin{equation}\label{eq:llsol}
+a_s^{\rm LL}(\mu) = \frac{a_s(\mu_0)}{1-\beta^{(0)}a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right)}\,,
+\end{equation}
+which provides the LL resummation of the running coupling. Comparing
+this result with Eq.~(\ref{eq:pertanstzinfrearr}) with $k=0$ tells us
+that:
+\begin{equation}
+c_{n,n} = \left(\beta^{(0)}\right)^n\,,
+\end{equation}
+which is also consistent with Eq.~(\ref{eq:pertcoefs}). In order to go
+further, one needs to include the term $k=1$ in
+Eq.~(\ref{eq:RGEalphas}) and integrate the differential equation
+between $\mu_0$ and $\mu$. The result is a transcendental equation in
+$a_s$:
+\begin{equation}\label{eq:transcend}
+\frac1{\beta^{(0)}}\left(-\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}\right) - \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
+\end{equation}
+with $b_n=\beta^{(n)}/\beta^{(0)}$. Of course, the solution of this
+transcendental equation solves exactly the differential equation in
+Eq.~(\ref{eq:RGEalphas}). However, in order to obtain an analytic
+equation for $a_s(\mu)$ we need to resort on perturbation theory. This
+is done by first rearranging the above equation as:
+\begin{equation}
+\frac{a_s(\mu_0)}{a_s(\mu)}=1-a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)  - a_s(\mu_0) b_1\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)\,.
+\end{equation}
+This equation tells us that the second logarithm appearing in the
+r.h.s., being proportional to $\alpha_s$ can be expanded and truncated
+to leading order. Notice that this operation is allowed because no
+potentially large logarithms of the scales are present. Therefore, we
+can use Eq.~(\ref{eq:llsol}) inside this term, obtaining:
+\begin{equation}\label{eq:firstexp}
+\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)+\mathcal{O}(a_s)\,,
+\end{equation}
+where we have also used the fact that:
+\begin{equation}
+a_s(\mu) = a_s^{\rm LL}(\mu)\left[1+\mathcal{O}(a_s) \right]\,,
+\end{equation}
+that descends directly from Eq.~(\ref{eq:pertanstzinfrearr}). This
+leads us to:
+\begin{equation}
+a_s(\mu)=\frac{a_s^{\rm LL}(\mu)}{ 1  - a_s^{\rm LL}(\mu) b_1 \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)}+\mathcal{O}(a_s^3)\,
+\end{equation}
+that can be further expanded, finally obtaining:
+\begin{equation}\label{eq:ansolut}
+a_s^{\rm NLL}(\mu)=a_s^{\rm LL}(\mu) \left[1 + b_1  a_s^{\rm LL}(\mu) \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)\right]\,,
+\end{equation}
+which gives the NLL solution for the evolution of the strong
+coupling. The same kind of procedure can be applied iteratively to
+obtain perturbatively more accurate solutions. However, it is now
+important to stress an important aspect that is central to this
+section, \textit{i.e.} the difference between
+Eqs.~(\ref{eq:transcend})
+and~(\ref{eq:ansolut}). Eq.~(\ref{eq:ansolut}) has been obtained from
+Eq.~(\ref{eq:transcend}) by neglecting genuinely subleading
+corrections. This makes the two solutions equivalent from the point of
+view of accuracy. However, while Eq.~(\ref{eq:transcend}) satisfies
+the evolution equation Eq.~(\ref{eq:RGEalphas}) with $k=1$
+\textit{exactly}, Eq.~(\ref{eq:ansolut}) violates it by subleading
+terms. In other words, one finds:
+\begin{equation}\label{eq:ansolNLL}
+\frac{d \ln a_s^{\rm NLL}(\mu)}{d\ln\mu}=\beta^{(0)}a_s^{\rm NLL}(\mu) +\beta^{(1)} (a_s^{\rm NLL}(\mu))^2 +\mathcal{O}(a_s^3)\,.
+\end{equation}
+Therefore, the neglect of subleading terms required to go from
+Eq.~(\ref{eq:transcend}) to Eq.~(\ref{eq:ansolut}) has the effect of
+introducing subleading terms in the evolution equation that is no
+longer exactly satisfied. We point out that these spurious subleading
+terms originates from insisting on obtaining a closed-form analytic
+expression for the evolution of the coupling.
+
+Eq.~(\ref{eq:ansolut}) has the additional (perhaps undesired) feature
+that it makes the evolution of the coupling
+\textit{non-conservative}. In practice, this means that evolving
+$\alpha_s$ from $\mu_0$ to $\mu$ using Eq.~(\ref{eq:ansolut}) and then
+back from $\mu$ to $\mu_0$ one does not recover the initial
+value. This is clearly not the case if one uses the exact solution
+deriving from Eq.~(\ref{eq:transcend}). To show this,
+Fig.~\ref{fig:Alphas} displays the behaviour of the NLL analytical
+solution, Eq.~(\ref{eq:ansolNLL}), with $n_f=5$ active flavours
+evolved from $\alpha_s(M_Z)=0.118$ down to 1 GeV and then up back to
+$M_Z$. As clear, the backward and forward evolution curves do not
+coincide leading to a mismatch of the value of $\alpha_s(M_Z)$.
+\begin{figure}[h]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/Alphas}
+    \caption{Non-conservativity of the NLL analytic evolution of the
+      strong coupling.\label{fig:Alphas}}
+  \end{centering}
+\end{figure}
+
+Of course, one can argue that this effect is subleading and thus
+allowed. On the other hand, one may wonder whether a violation of the
+evolution equation introduced with the sole purpose of obtaining an
+analytic expression for the evolution is justified. In fact, it
+appears to be a better practice to employ an evolution that obeys the
+evolution equation exactly order by order in perturbation theory. The
+reason is simply a better control on the theoretical uncertainty
+related to missing higher-order corrections. To be more specific, the
+subleading terms introduced to obtain Eq.~(\ref{eq:ansolut}) would
+affect the computation of an observable at fixed-order in perturbation
+theory in the exact same way as a renormalisation scale variation
+would do. Therefore, it appears more transparent to use an exact
+solution to the evolution equation and leave the estimate of
+theoretical uncertainties to renormalisation-scale variations.
+
+\subsection{DGLAP evolution}
+
+As a second application of Eq.~(\ref{eq:RGEproto}), we consider the
+DGLAP evolution in which the quantity $R$ is identified with a
+collinear distribution $f$. In order to simplify the discussion, we
+consider the Mellin moments of a non-singlet distribution whose
+evolution equation can be written as exactly as in
+Eq.~(\ref{eq:RGEproto}) with $R=f$ and $\gamma$ the appropriate
+anomalous dimension. Our aim is to find a solution to this equation in
+perturbation theory by computing $f$ at some final scale $\mu$ when
+knowing $f$ at some initial scale $\mu_0$. Of course, the solution to
+the evolution equation is:
+\begin{equation}\label{eq:dglapsol}
+\begin{array}{rcl}
+f(\mu)&=&\displaystyle
+\exp\left[\int_{\mu_0}^{\mu}d\ln\mu'\,\gamma(a_s(\mu'))\right]f(\mu_0)\\
+\\
+&=&\displaystyle
+    \exp\left[\sum_{n=0}^k\gamma^{(n)}\int_{\mu_0}^{\mu}d\ln\mu'\,a_s^{n+1}(\mu')\right]f(\mu_0)\\
+\\
+&=&\displaystyle f(\mu_0) \prod_{n=0}^k\exp\left[\gamma^{(n)}I_n\right]f(\mu_0)\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+I_n=\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{a_s^{n}}{\overline{\beta}(a_s)}\right)\,.
+\end{equation}
+In the second line of Eq.~(\ref{eq:dglapsol}) we have used the
+perturbative expansion of the anomalous dimension $\gamma$ and in the
+third line made a change of variable in the integral using
+Eq.~(\ref{eq:RGEalphas}). It is now opportune to analyse the integrals
+$I_n$. The first question that we ask is whether the perturbative
+expansion of $\gamma$ and $\overline{\beta}$ are related. More
+specifically, given a $k+1$ terms in the expansion of
+$\overline{\beta}$, is there any bound on the number of terms in the
+expansion of $\gamma$ in terms of logarithmic accuracy? In order to
+answer this question, it is necessary to first understand what kind of
+logarithms Eq.~(\ref{eq:dglapsol}) is actually resumming. Indeed, one
+may wonder whether the evolution of $\alpha_s$ alone is enough to
+rusum all the large logarithms. If so, we would be enabled to expand
+and truncate the exponential to the desired perturbative accuracy
+because higher orders would be suppressed by powers of $\alpha_s$. The
+answer to this question boils down to determining whether $I_n$ is
+logarithmically enhanced for some value of $n$. We assume that
+$\overline\beta$ is truncated at some power $k'+1$, with $k'$
+generally different from $k$ in Eq.~(\ref{eq:dglapsol}). To give a
+quantitative argument let us take $k'=2$, such that
+\begin{equation}
+\overline{\beta}(a_s) =\beta^{(0)}a_s\left[1+b_1a_s\right]\,.
+\end{equation}
+We then compute $I_0$, $I_1$, and $I_2$:
+\begin{equation}\label{eq:intsI}
+\begin{array}{rcl}
+  I_0&=&\displaystyle\frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{1}{a_s+b_1a_s^2}\right)=\frac1{\beta^{(0)}}\left[\ln
+         a_s-\ln(1+b_1a_s)\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\frac{1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)+\mathcal{O}(a_s)\,,\\
+\\
+  I_1&=&\displaystyle \frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{1}{1+b_1a_s}\right)=\frac1{\beta^{(0)}}\left[\frac{\ln(1+b_1a_s)}{b_1}\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\mathcal{O}(a_s) \,,\\
+\\
+  I_2&=&\displaystyle\frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{a_s}{1+b_1a_s}\right)=\frac1{\beta^{(0)}}\left[\frac{a_s}{b_1}-\frac{\ln(1+b_1a_s)}{b_1^2}\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+In general one finds that, for $n\geq1$,
+$I_n=\mathcal{O}(a_s^n)$. Therefore, the exponential in
+Eq.~(\ref{eq:dglapsol}) can  safely be expanded:
+\begin{equation}
+\exp\left[\gamma^{(n)}I_n\right]=1+\gamma^{((n))}\times\mathcal{O}(a_s^n)\,,\quad n\geq 1\,.
+\end{equation}
+Somewhat surprisingly, this reveals that the inclusion of perturbative
+corrections beyond leading order to the anomalous dimension $\gamma$
+does not directly improve the logarithmic accuracy of the resummation
+provided by the evolution. The exception to this pattern is $I_0$ that
+cannot be (fully) expanded due to the presence of a logarithm of
+$a_s(\mu)/a_s(\mu_0)$ that, as can be see from Eq.~(\ref{eq:llsol}),
+is potentially large:
+\begin{equation}\label{eq:expres}
+\exp\left[\gamma^{(0)}I_0\right]=\exp \left[\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)\right]+\mathcal{O}(a_s)=\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}+\mathcal{O}(a_s)\,.
+\end{equation}
+This factor alone provides the resummation up to some logarithmic
+accuracy determined uniquely by the evolution of $a_s(\mu)$. Finally
+one has:
+\begin{equation}\label{eq:dglapanal}
+f(\mu) = \displaystyle \left[1+\mathcal{O}(a_s)\right]\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}f(\mu_0) \,.
+\end{equation}
+However, the inclusion of correction terms in the square brackets in
+the r.h.s. of Eq.~(\ref{eq:dglapanal}) is still required to attain
+some given logarithmic accuracy. Since the exponential in
+Eq.~(\ref{eq:expres}) resums single logarithms of the kind
+$a_s^m\ln ^m(\mu/\mu_0)$, a term proportional to $a_s^n$ (without any
+logarithm) belongs to the tower $a_s^{m+n}\ln ^m(\mu/\mu_0)$ and thus
+contributes to N$^n$LL. To make an example, suppose we want to achieve
+NLL resummation. To do so, we need to include the $\mathcal{O}(a_s)$
+in the squared bracket of Eq.~(\ref{eq:dglapanal}) because that
+contributes to NLL. That term can be easily computed by retaining the
+$\mathcal{O}(a_s)$ terms in Eq.~(\ref{eq:intsI}). Moreover, $a_s(\mu)$
+in the last factor has to be computed using the NLL evolution given
+in Eq.~(\ref{eq:ansolNLL}). This finally gives:
+\begin{equation}
+f^{\rm NLL}(\mu) = \displaystyle\left[1+\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+    \gamma^{(0)}\right) \left(a_s^{\rm LL}(\mu)-a_s(\mu_0)\right)\right]
+\left(\frac{a_s^{\rm NLL}(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}} f(\mu_0) \,.
+\end{equation}
+Also note that in the squared bracket we are entitled to replaced
+$a_s$ with $a_s^{\rm LL}$ becase the difference is
+$\mathcal{O}(a_s^2)$ and thus NNLL.
+
+In order to make a step towards the notation typically used in $q_T$
+resummation, we introduce the quantity:
+\begin{equation}\label{eq:lambdadef}
+\lambda \equiv \lambda(\mu) = a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)\,,
+\end{equation}
+that allows us to write the LL and NLL RGE solution for $a_s$ as:
+\begin{equation}
+a_s^{\rm LL}(\mu) = a_s(\mu_0)\frac{1}{1-\lambda}\,,
+\end{equation}
+and:
+\begin{equation}
+a_s^{\rm NLL}(\mu)=a_s(\mu_0)\frac{1}{1-\lambda}\left[1 + a_s(\mu_0) \frac{b_1 \ln\left(1-\lambda\right)}{1-\lambda}\right]\,,
+\end{equation}
+such that:
+\begin{equation}
+\begin{array}{rcl}
+  f^{\rm NLL}(\mu) &=&\displaystyle \displaystyle \left[1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+                            \gamma^{(0)}\right)
+                            \frac{\lambda}{1-\lambda}\right]\\
+  \\
+                   &\times&\displaystyle                        \exp\left[-\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)+a_s(\mu_0) \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
+                       \ln\left(1-\lambda\right)}{1-\lambda}\right]f(\mu_0)\,.
+\end{array}
+\end{equation}
+We now introduce the functions:
+\begin{equation}
+\begin{array}{rcl}
+g^{(0)}(\lambda) &=& \displaystyle  1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+                            \gamma^{(0)}\right)
+                            \frac{\lambda}{1-\lambda}\,,\\
+\\
+g^{(1)}(\lambda) &=& \displaystyle
+                     -\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)\,,\\
+\\
+g^{(2)}(\lambda) &=& \displaystyle \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
+                       \ln\left(1-\lambda\right)}{1-\lambda}\,,
+\end{array}
+\end{equation}
+such that:
+\begin{equation}\label{eq:DGLAPalaSoftGlue}
+  f^{\rm NLL}(\mu) = g^{(0)}(\lambda)\exp\left[-g^{(1)}(\lambda)+a_s(\mu_0) g^{(2)}(\lambda)\right]f(\mu_0) \,.
+\end{equation}
+This procedure can be extended to N$^k$LL accuracy just by introducing
+the appropriate $g^{(n)}$ functions, with $n\leq k+1$, in the
+exponential and including corrections up to $\mathcal{O}(a_s^k)$ in
+$g^{(0)}$. The notation is purposely reminiscent of soft-gluon and
+$q_T$ resummation.
+
+We can use the parallel with soft-gluon resummation to introduce
+the analogous of a ``resummation'' scale. This is done by introducing
+an \textit{arbitrary} scale $\mu_{\rm R}\sim \mu_0$ along with the
+trivial equality:
+\begin{equation}
+\ln\left(\frac{\mu}{\mu_0}\right) = \ln\left(\frac{\mu}{\mu_{\rm R}}\right)
++ \ln\left(\frac{\mu_{\rm R}}{\mu_0}\right)\,,
+\end{equation}
+such that $\ln\left(\mu_{\rm R}/\mu_0\right)\sim 1$. Using
+Eq.~(\ref{eq:lambdadef}), one has:
+\begin{equation}\label{eq:lambdadef}
+  \lambda =
+  a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_{\rm R}}\right)+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu_{\rm
+        R}}{\mu_0}\right)=\overline{\lambda}+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu_{\rm
+        R}}{\mu_0}\right)\,,
+\end{equation}
+where the second term in the r.h.s. is not enhanced by a large
+logarithm and can thus be treated perturbatively. Writing the
+functions $g^{(n)}$ in terms of $\overline{\lambda}$ and neglecting
+subleading terms gives the new functions:
+\begin{equation}
+\begin{array}{rcl}
+\overline{g}^{(0)}(\overline{\lambda}) &=& \displaystyle  1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^{(1)}-b_1
+                            \gamma^{(0)}\right)
+                            \frac{\overline{\lambda}}{1-\overline{\lambda}}\,,\\
+\\
+\overline{g}^{(1)}(\overline{\lambda}) &=& \displaystyle
+                     -\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)\,,\\
+\\
+\overline{g}^{(2)}(\overline{\lambda}) &=& \displaystyle \frac{\gamma^{(0)}}{1-\overline{\lambda}}\left[\frac{b_1}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)+\ln\left(\frac{\mu_{\rm
+        R}}{\mu_0}\right)\right]\,,
+\end{array}
+\end{equation}
+so that:
+\begin{equation}\label{eq:DGLAPalaSoftGlueMuR}
+  f^{\rm NLL}(\mu) = \overline{g}^{(0)}(\overline{\lambda})\exp\left[-\overline{g}^{(1)}(\overline{\lambda})+a_s(\mu_0) \overline{g}^{(2)}(\overline{\lambda})\right]f(\mu_0) \,.
+\end{equation}
+Eqs.~(\ref{eq:DGLAPalaSoftGlueMuR}) and~(\ref{eq:DGLAPalaSoftGlue})
+are both NLL accurate and only differ by subleading terms. In fact,
+Eq.~(\ref{eq:DGLAPalaSoftGlueMuR}) generalises
+Eq.~(\ref{eq:DGLAPalaSoftGlue}) because the latter reduces to the
+former for $\mu_{\rm R}=\mu_0$. Therefore, one should be able to use
+modest variations of $\mu_{\rm R}$ around $\mu_0$ to estimate the
+possible impact of higher-order corrections to the anomalous
+dimension.
+
+Eq.~(\ref{eq:DGLAPalaSoftGlueMuR}) provides a closed-form, fully
+analytical solution to the RGE, Eq.~(\ref{eq:RGEproto}), for collinear
+distributions. However, exactly like in the case of the analytical
+solution for $a_s$, Eq.~(\ref{eq:dglapanal}) will satisfy
+Eq.~(\ref{eq:RGEproto}) only up to subleading terms with a consequent
+non-conservative pattern of the evolution. Conversely, a numerical
+evaluation of the solution in Eq.~(\ref{eq:dglapsol}) will obey
+exactly Eq.~(\ref{eq:RGEproto}) and the evolution will be
+conservative.
+
+\subsection{The Sudakov form factor}
+
+Now, we turn to address the question of solving the TMD evolution
+equations in Eq.~(\ref{eq:eveqs}) in perturbation theory. We have
+already derived the solution, Eq.~(\ref{eq:solution2}), in terms of
+the relevant anomalous dimensions. However, this solution contains an
+integral. A possibility is that of computing that integral
+numerically. This ensures that the results obeys \textit{exactly} the
+evolution equations in Eq.~(\ref{eq:eveqs}) and the evolution is
+conservative. Another possibility is that of attempting to solve the
+integral analytically. This turns out to be possible provided that one
+uses the appropriate analytic solution for the running of
+$a_s$. As discussed above, this comes at the price that the
+result violates the equations in Eq.~(\ref{eq:eveqs}) by subleading
+terms. As we will see below, this very violation gives origin to the
+resummation scale.
+
+
+
+
+
 
 \newpage
 

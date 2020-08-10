@@ -33,6 +33,7 @@ tests/ogata_test
 tests/gpd_test
 tests/polylog_test
 tests/expansion_test
+tests/siaxsec_test
 doc/src/codes/FOvsAsy
 doc/src/codes/logs
 doc/src/codes/EvolutionFactor
@@ -40,6 +41,7 @@ doc/src/codes/LeptonicModulation
 doc/src/codes/PhaseSpaceRedFactor
 doc/src/codes/NewPrescription
 doc/src/codes/PhaseSpacePowerCorrs
+doc/src/codes/Alphas
 
 # Compiled Object files
 *.slo
@@ -80,3 +82,6 @@ bin/apfelxx-config
 
 # Python
 __pycache__
+
+# Build directory
+build

@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/doubleobject.h"
@@ -113,6 +113,22 @@ namespace apfel
     return *this;
   }
 
+  //_________________________________________________________________________
+  template<class V, class W>
+  std::ostream& operator << (std::ostream& os, DoubleObject<V, W> const& dob)
+  {
+    const std::vector<term<V, W>> tms = dob.GetTerms();
+    os << "DoubleObject: " << &dob << "\n";
+    for (int i = 0; i < (int) tms.size(); i++)
+      {
+        os << "Term: " << i << "\n";
+        os << "- Coeffient: " << tms[i].coefficient << "\n";
+        os << "- Object1:\n" << tms[i].object1 << "\n";
+        os << "- Object2:\n" << tms[i].object2 << "\n";
+      }
+    return os;
+  }
+
   // Specializations
   //_________________________________________________________________________________
   template class DoubleObject<Distribution>;
@@ -120,6 +136,10 @@ namespace apfel
   template class DoubleObject<Operator, Distribution>;
   template class DoubleObject<Distribution, Operator>;
   template DoubleObject<Distribution> DoubleObject<Operator>::operator *= (DoubleObject<Distribution> const&) const;
+  template std::ostream& operator << (std::ostream& os, DoubleObject<Distribution> const& dob);
+  template std::ostream& operator << (std::ostream& os, DoubleObject<Operator> const& dob);
+  template std::ostream& operator << (std::ostream& os, DoubleObject<Distribution, Operator> const& dob);
+  template std::ostream& operator << (std::ostream& os, DoubleObject<Operator, Distribution> const& dob);
 
   //_________________________________________________________________________________
   template<>

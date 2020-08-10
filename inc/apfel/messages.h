@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -45,6 +45,7 @@ namespace apfel
   /**
    * @brief Function that prints information on screen. Effective
    * according to the verbosity level.
+   * @param tag: the emitter of the message
    * @param what: the message to report
    */
   void info(std::string const& tag, std::string const& what);
@@ -52,6 +53,7 @@ namespace apfel
   /**
    * @brief Function that prints warnings on screen. Effective
    * according to the verbosity level.
+   * @param tag: the emitter of the message
    * @param what: the warning to report
    */
   void warning(std::string const& tag, std::string const& what);

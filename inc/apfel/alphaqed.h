@@ -33,6 +33,7 @@ namespace apfel
      * @param MuRef: the reference value of the scale
      * @param QuarkThresholds: vector of quark thresholds
      * @param LeptThresholds: vector of charged-lepton thresholds
+     * @param pt: perturbative order
      * @param nsteps: number of steps of the ODE solver
      */
     AlphaQED(double              const& AlphaRef,
@@ -40,7 +41,7 @@ namespace apfel
              std::vector<double> const& LeptThresholds,
              std::vector<double> const& QuarkThresholds,
              int                 const& pt,
-             int                 const& nstep = 10);
+             int                 const& nsteps = 10);
     ///@}
 
     /**

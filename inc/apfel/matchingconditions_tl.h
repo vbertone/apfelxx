@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -12,7 +12,7 @@ namespace apfel
 {
   /**
    * @defgroup MatchCondTL Time-like matching conditions
-   * @notes The expressions are taken from:
+   * @note The expressions are taken from:
    * https://arxiv.org/pdf/hep-ph/0504192.pdf.
    */
   ///@{

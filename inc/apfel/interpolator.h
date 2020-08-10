@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -107,9 +107,6 @@ namespace apfel
     /**
      * @brief Virtual method for the derivative of the interpolating
      * functions.
-     * @param beta: the x-space grid index
-     * @param lnx: the value (of the log) of the interpolation point
-     * @param sg: the SubGrid over which the interpolant is defined
      * @return the derivarive of the interpolation weights
      */
     virtual double DerInterpolant(int const&, double const&, SubGrid const&) const { return 0; };
@@ -117,10 +114,6 @@ namespace apfel
     /**
      * @brief Virtual method for the integral of the interpolating
      * functions.
-     * @param beta: the x-space grid index
-     * @param lna: the value (of the log) of the lower bound
-     * @param lnb: the value (of the log) of the upper bound
-     * @param sg: the SubGrid over which the interpolant is defined
      * @return the integral of the interpolation weights
      */
     virtual double IntInterpolant(int const&, double const&, double const&, SubGrid const&) const { return 0; };
@@ -147,5 +140,14 @@ namespace apfel
     Grid                             const& _grid;                  //!< The stored grid reference
     std::vector<std::vector<double>>        _distributionSubGrid;   //!< The array with the distribution values on the subgrid.
     std::vector<double>                     _distributionJointGrid; //!< The array with the distribution values on the joint grid.
+
+    friend std::ostream& operator << (std::ostream& os, Interpolator const& sg);
   };
+
+  /**
+   * @brief Method which prints Interpolator with cout <<. This only
+   * prints the first subgrid and is supposed to be used for debugging
+   * purposes.
+   */
+  std::ostream& operator << (std::ostream& os, Interpolator const& in);
 }

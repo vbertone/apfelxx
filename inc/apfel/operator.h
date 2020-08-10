@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -22,7 +22,6 @@ namespace apfel
   class Operator
   {
   public:
-
     Operator() = delete;
 
     /**
@@ -60,9 +59,16 @@ namespace apfel
      */
     Grid const& GetGrid() const { return _grid; }
 
+    /**
+     * @brief Function that returns the operator.
+     */
+    std::vector<matrix<double>> GetOperator() const { return _Operator; }
+
   protected:
     Grid                        const& _grid;         //!< Grid on which to compute the operator
     std::vector<matrix<double>>        _Operator;     //!< Operator values.
+
+    friend std::ostream& operator << (std::ostream& os, Operator const& sg);
   };
 
   /**
@@ -79,4 +85,11 @@ namespace apfel
   Operator     operator + (Operator lhs, Operator const& rhs);                    //!< Operator+Operator
   Operator     operator - (Operator lhs, Operator const& rhs);                    //!< Operator-Operator
   ///@}
+
+  /**
+   * @brief Method which prints Operator with cout <<. This only
+   * prints the Operator on the first subgrid and is supposed to be
+   * used for debugging purposes.
+   */
+  std::ostream& operator << (std::ostream& os, Operator const& op);
 }

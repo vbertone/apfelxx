@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/initialiseevolution.h"
@@ -534,17 +534,17 @@ namespace apfel
     report += "- Grid in x: " + std::to_string(_setup.GridParameters.size()) + " subgrids in x found with the following parameters:\n";
     for (auto const& gp : _setup.GridParameters)
       if (gp.xgext.empty())
-        report += "   + internal grid with " + std::to_string(gp.nx)
+        report += "  + internal grid with " + std::to_string(gp.nx)
                   + " nodes in the range [" + std::to_string(gp.xmin)
                   + ":1] with interpolation degree " + std::to_string(gp.id) + "\n";
       else
-        report += "   + ixternal grid with " + std::to_string(gp.xgext.size())
+        report += "  + ixternal grid with " + std::to_string(gp.xgext.size())
                   + " nodes in the range [" + std::to_string(gp.xgext.front())
                   + ":" + std::to_string(gp.xgext.back())
                   + "] with interpolation degree " + std::to_string(gp.id) + "\n";
 
     if (_setup.Locked)
-      report += "   The sugrids are locked\n\n";
+      report += "  The sugrids are locked\n\n";
 
     // Report Q-grid parameters.
     report += "- Grid in Q: " + std::to_string(_setup.nQg)

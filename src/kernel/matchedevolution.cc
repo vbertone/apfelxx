@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/matchedevolution.h"
@@ -55,7 +55,7 @@ namespace apfel
 
     // Numerical solution of the evolution equation with fourth-order
     // Runge-Kutta.
-    const auto dObj = rk4<T>([&](double const& t, T const& Obj)->T{ return Derivative(nf, t, Obj); });
+    const auto dObj = rk4<T>([&] (double const& t, T const& Obj) -> T{ return Derivative(nf, t, Obj); });
 
     // Use "_nsteps" steps for the evolution.
     double t        = t0;
@@ -118,5 +118,5 @@ namespace apfel
   template class MatchedEvolution<Set<Operator>>;                             //<! Set of Operators
   template class MatchedEvolution<DoubleObject<Operator>>;                    //<! Double object of operators
   template class MatchedEvolution<DoubleObject<Distribution, Operator>>;      //<! Double object of distributions and operators
-  template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>>>; //<! Double object of distributions and operators
+  template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>>>; //<! Set of double object of distributions and operators
 }

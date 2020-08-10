@@ -58,7 +58,7 @@ namespace apfel
     /**
      * @brief This returns the convolution map.
      */
-    ConvolutionMap  const& GetMap() const { return _map; }
+    ConvolutionMap const& GetMap() const { return _map; }
     /**
      * @brief This returns the full map of objects.
      */
@@ -79,6 +79,9 @@ namespace apfel
   private:
     ConvolutionMap   _map;     //!< The shared pointer containing the convolution map
     std::map<int, T> _objects; //!< The container for the map
+
+    template<class U>
+    friend std::ostream& operator << (std::ostream& os, Set<U> const& s);
   };
 
   /**

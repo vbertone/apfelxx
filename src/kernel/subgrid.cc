@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/subgrid.h"
@@ -130,10 +130,10 @@ namespace apfel
     os << "xsize       = " << sg._xsg.size() << "\n";
     os << "IsExternal  = " << sg._IsExternal << "\n";
     os << "Step        = " << sg._Step << "\n";
-    os << "xsg         = ";
+    os << "xsg         = [";
     for (auto const& v: sg._xsg)
       os << v << " ";
-    os << "\n\n";
+    os << "\b]";
     return os;
   }
 }

@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/matrix.h"
@@ -30,4 +30,6 @@ namespace apfel
   template class matrix<int>;
   template class matrix<float>;
   template class matrix<double>;
+  template class matrix<std::vector<int>>;
+  template class matrix<std::vector<double>>;
 }

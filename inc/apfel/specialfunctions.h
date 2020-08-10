@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -27,9 +27,9 @@ namespace apfel
    * fortran function (see src/kernel/hplog.f) to facilitate the call
    * of the harmonic logarithms from a C++ code.
    */
-  extern"C"
+  extern "C"
   {
-    double hplog_(double *wx, int *wnw, double *Hr1, double *Hr2, double *Hr3, double *Hr4, double *Hr5, int *wn1, int *wn2);
+    double apf_hplog_(double *wx, int *wnw, double *Hr1, double *Hr2, double *Hr3, double *Hr4, double *Hr5, int *wn1, int *wn2);
   }
 
   /**

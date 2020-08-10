@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -40,7 +40,7 @@ namespace apfel
      * @param InterDegree: the interpolation degree on the grid in Q
      * @param Lambda: the value of the parameter in the function ln(ln(Q<SUP>2</SUP>/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.25)
      */
-    TabulateObject(MatchedEvolution<T> &Object,
+    TabulateObject(MatchedEvolution<T>      & Object,
                    int                 const& nQ,
                    double              const& QMin,
                    double              const& QMax,
@@ -55,6 +55,7 @@ namespace apfel
      * @param QMin: the lower bound of the grid in Q
      * @param QMax: the upper bound of the grid in Q
      * @param InterDegree: the interpolation degree on the grid in Q
+     * @param Thresholds: vector of quark thresholds
      * @param Lambda: the value of the parameter in the function ln(ln(Q<SUP>2</SUP>/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.25)
      */
     TabulateObject(std::function<T(double const&)> const& Object,
@@ -73,6 +74,7 @@ namespace apfel
      * @param QMin: the lower bound of the grid in Q
      * @param QMax: the upper bound of the grid in Q
      * @param InterDegree: the interpolation degree on the grid in Q
+     * @param Thresholds: vector of quark thresholds
      * @param TabFunc: the function to be used for the tabulation in Q
      * @param InvTabFunc: the inverse function of TabFunc (it has to be provided analytically)
      */

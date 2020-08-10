@@ -26,7 +26,6 @@ namespace apfel
      * @name Enumerators of the evolution setup structure
      */
     ///@{
-
     /// Flavour scheme
     enum FlavourScheme: int {VFNS, FFNS};
 
@@ -47,7 +46,6 @@ namespace apfel
 
     /// Heavy quark mass renormalisation
     enum MassRenScheme: int {POLE, MSBAR};
-
     ///@}
 
     /// Structure for the **subgrid** parameters

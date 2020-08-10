@@ -20,6 +20,7 @@ namespace apfel
   ///@}
   /**
    * @defgroup MathConstants Mathematical constants
+   * Collection of mathematical constants often used in the code.
    * @ingroup NumericalConstants
    */
   ///@{
@@ -68,11 +69,13 @@ namespace apfel
   const double TR = 0.5;
   const double CF = 4. / 3.;
   const double CA = 3.;
+  const double NC = 3.;
   ///@}
   ///@}
 
   /**
    * @defgroup PhysConstants Physical constants
+   * Collection of physical constants often used in the code.
    * @ingroup NumericalConstants
    */
   ///@{

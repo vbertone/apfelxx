@@ -7,6 +7,10 @@ CXXFLAGS += -O3 -fPIC -std=c++11
 APFELPPINCS = $(shell apfelxx-config --cppflags)
 APFELPPLIBS = $(shell apfelxx-config --ldflags)
 
+# APFEL
+APFELINCS = $(shell apfel-config --cppflags)
+APFELLIBS = $(shell apfel-config --ldflags)
+
 # LHAPDF
 LHAPDFINCS = $(shell lhapdf-config --cppflags)
 LHAPDFLIBS = $(shell lhapdf-config --ldflags)
@@ -16,14 +20,13 @@ LHAPDFLIBS = $(shell lhapdf-config --ldflags)
 #NANPARLIBS = $(shell NangaParbat-config --ldflags)
 
 # Now set up the compiler and link flags and libs
-CXXFLAGS += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS)
-LDFLAGS  += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS)
+CXXFLAGS += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS) $(APFELINCS)
+LDFLAGS  += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS) $(APFELINCS)
 
-
-CLIBS += $(LHAPDFLIBS) $(APFELPPLIBS) $(NANPARLIBS)
+CLIBS += $(LHAPDFLIBS) $(APFELPPLIBS) $(NANPARLIBS) $(APFELLIBS)
 
 install : all
-all : logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription #fNP
+all : logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription Alphas #fNP
 
 logs: logs.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
@@ -49,6 +52,9 @@ PhaseSpacePowerCorrs: PhaseSpacePowerCorrs.o
 NewPrescription: NewPrescription.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
+Alphas: Alphas.o 
+	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
+
 .SUFFIXES : .cxx .o .f .c
 
 .cxx.o:	 
@@ -58,5 +64,5 @@ NewPrescription: NewPrescription.o
 	$(F77)  -c $< 
 
 clean:
-	rm -rf *.lo *.o *.la *~ logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription #fNP
+	rm -rf *.lo *.o *.la *~ logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription Alphas #fNP
 

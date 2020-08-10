@@ -1,11 +1,12 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/distribution.h"
 #include "apfel/messages.h"
+#include "apfel/constants.h"
 
 #include <stdexcept>
 #include <algorithm>
@@ -128,6 +129,12 @@ namespace apfel
   void Distribution::SetSubGrid(int const& ig, int const& ix, double const& x)
   {
     _distributionSubGrid[ig][ix] = x;
+  }
+
+  //_________________________________________________________________________
+  Distribution Distribution::Derivative() const
+  {
+    return Distribution{this->_grid, [=] (double const& x) -> double { return this->Derive(x - eps10); } };
   }
 
   //_________________________________________________________________________

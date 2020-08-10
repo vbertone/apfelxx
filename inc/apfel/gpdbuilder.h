@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #pragma once
@@ -24,7 +24,7 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
-   * @param OpEvol: the switsch for the computation of the evolution operator (default: false)
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
    */

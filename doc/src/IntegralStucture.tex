@@ -89,23 +89,23 @@ the distribution $d$:
 d(x_\alpha) w_{\alpha}^{(k)}\left(\frac{x}{y}\right)\,,
 \end{equation}
 where $\alpha$ runs over the node of a give grid in $x$ space and the
-weights $w_{\alpha}$ are typically polynomials of degree $k$
-($i.e.$ Laplace interpolants). Now we use eq.~(\ref{eq:Interpolation})
-in eq.~(\ref{eq:Genconv1}) and at the same time we limit the
-computation of the integral $I$ to the point $x_\beta$ of the grid
-used in eq.~(\ref{eq:Interpolation}). This way we get:
+weights $w_{\alpha}$ are typically polynomials of degree $k$ ($i.e.$
+Lagrange interpolants). Now we use eq.~(\ref{eq:Interpolation}) in
+eq.~(\ref{eq:Genconv1}) and at the same time we limit the computation
+of the integral $I$ to the point $x_\beta$ of the grid used in
+eq.~(\ref{eq:Interpolation}). This way we get:
 \begin{equation}\label{eq:Genconv1}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\eta dy\,
   O\left(\frac{y}{\eta},\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
 where we have defined $\overline{d}_\alpha = x_\alpha d(x_\alpha)$.
-In the particular case of the Laplace interpolants (in the {\tt APFEL}
-procedure), one can show that:
+In the particular case of the Lagrange interpolants (in the {\tt
+  APFEL} procedure), one can show that:
 \begin{equation}
 w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\neq 0\quad\mbox{for}\quad c < y < d\,,
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:intlims}
   c =
   \mbox{max}(x_\beta,x_\beta/x_{\alpha+1}) \quad\mbox{and}\quad d =
   \mbox{min}(\eta,x_\beta/x_{\alpha-k}) \,,
@@ -205,11 +205,186 @@ that:
 \end{equation}
 
 As far as the massive coefficient functions up to
-$\mathcal{O}(\alpha_s^2)$ things can be more complicated and we will
-discuss it later. In the next section we will consider the case of
-hadronic observables in the ZM scheme showing how to pre-compute the
-integral for the double-differential distributions in Drell-Yan
-production.
+$\mathcal{O}(\alpha_s^2)$ are concerned, things can be more
+complicated and we will discuss it later. In the next section we will
+consider the case of hadronic observables in the ZM scheme showing how
+to pre-compute the integral for the double-differential distributions
+in Drell-Yan production.
+
+\subsection{Advantage of a logarithmic grid}
+
+Given the particular structure of the integral $I$ in
+Eq.~(\ref{eq:ZMconv}), it turns out to be very convenient to use a
+logarithmically distributed grid along with Lagrange interpolating
+functions. Let us specifically consider the (massless) integrals:
+\begin{equation}\label{eq:integralex}
+I_{\beta\alpha} = \int_{x_\beta}^1dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\end{equation}
+If the grid is logarithmically spaced, \textit{i.e.}
+$\ln x_{n+1}=\ln x_{n}+\delta x$ with $\delta x$ a positive constant,
+and $\{w_{\alpha}(z)\}$ is a set of Lagrange interpolating functions of
+degree $\kappa$ in $\ln z$, one has:
+\begin{equation}
+w_{\alpha}(z) =
+\widetilde{w}\left(\ln\frac{z}{x_\alpha}\right)\quad\Rightarrow\quad
+w_{\alpha}\left(\frac{x_\beta}{y}\right) =
+\widetilde{w}\left(\ln\frac{x_\beta}{x_\alpha}-\ln y\right)
+=\widetilde{w}\left((\beta-\alpha)\delta x-\ln y\right)\,.
+\end{equation}
+Therefore, the integrand of the integral in Eq.~(\ref{eq:integralex})
+only depends on the difference $\beta-\alpha$ and not on $\beta$ and
+$\alpha$ separately. Since the lower bound is $x_\beta$, this symmetry
+seems to broken at the level of the integral.  However, the symmetry
+is preserved thanks to the support properties of the interpolating
+functions $w_\alpha$ and the fact that relevant functions (PDFs or FFs)
+are zero at $x=1$. To see this, we consider the integration limits in
+Eq.~(\ref{eq:intlims}) with $\eta=1$. They can be written as:
+\begin{equation}\label{eq:intlims1}
+  c =
+  \mbox{max}(x_\beta,e^{(\beta-\alpha-1)\delta x}) \quad\mbox{and}\quad d =
+  \mbox{min}(1,e^{(\beta-\alpha+\kappa)\delta x}) \,.
+\end{equation}
+While the limit $d$ is manifestly depending only on the difference
+$\beta-\alpha$, the limit $c$ is not. However, $c$ does not have this
+symmetry only when $x_\beta$ is selected in place of
+$e^{(\beta-\alpha-1)\delta x}$ and this can only happen when:
+\begin{equation}\label{eq:ineq}
+x_\beta > e^{(\beta-\alpha-1)\delta x}\,.
+\end{equation}
+Since the last point of the grid is $x_{N_x}=1$, being $N_x$ the
+number of grid nodes minus one, one can write:
+\begin{equation}
+x_\beta = \frac{x_\beta}{x_{N_x}} = e^{(\beta-N_x)\delta x}.
+\end{equation}
+Finally, the inequality in Eq.~(\ref{eq:ineq}) becomes:
+\begin{equation}
+  \beta-N_x > \beta-\alpha-1\quad\Leftrightarrow\quad \alpha > N_x-1\quad\Leftrightarrow\quad \alpha = N_x\,.
+\end{equation}
+Therefore, the integrals $I_{\beta N_x}$ do not respect the
+``$\beta-\alpha$'' symmetry.  However, as mentioned above,
+$I_{\beta N_x}$ will always multiply a function computed in
+$x_{N_x}=1$. If this function is a PDF or a FF, it is identically zero
+at $x_{N_x}=1$ and thus the symmetry is effectively preserved. The
+consequence of this symmetry is that computing, \textit{e.g.}, the
+integrals $a_\alpha=I_{0\alpha}$ for $\alpha=0,\dots,N_x$ is enough to
+reconstruct the full set of $I_{\beta\alpha}$ because, in matricial
+representation, it will look like this:
+\begin{equation}\label{eq:MatrixRep}
+\displaystyle I_{\beta\alpha} = 
+\begin{pmatrix}
+a_0 &  a_1 & a_2 & \cdots & a_{N_x} \\
+ 0  & a_0 & a_1 & \cdots & a_{N_x-1} \\
+ 0  & 0   &  a_0 & \cdots & a_{N_x-2} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+ 0  &   0  &   0 & \cdots & a_0 
+\end{pmatrix}\,.
+\end{equation}
+In conclusion, adopting a logarithmically spaced grid allows one to
+compute $N_x+1$ integrals rather than $(N_x+1)(N_x+2)/2$ integrals.
+
+There is another detail that matters in terms of numerical efficiency
+of the computation of the integrals $I_{\beta\alpha}$. Given the
+support region of the functions $w_\alpha$, the integral in
+Eq.~(\ref{eq:integralex}) effectively reads:
+\begin{equation}
+I_{\beta\alpha} = \int_c^ddy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+\end{equation}
+with the integration limits given in Eq.~(\ref{eq:intlims}). These
+limits can be rearranged as follows:
+\begin{equation}\label{eq:intlimsind}
+c=\frac{x_\beta}{x_{\alpha+1-{\rm max}[0,\alpha+1-N_x]}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-{\rm min}[\kappa,\alpha-\beta]}}\,,
+\end{equation}
+which makes it manifest the index range covered by the integration
+range. The basic observation is that the functions $w_\alpha$ are
+piecewise in correspondence of the grid nodes. This feature makes a
+numerical integration over the full range defined in
+Eq.~(\ref{eq:intlimsind}) hard to converge due to the cusps at the
+grid nodes. However, the functions $w_\alpha$ are smooth between two
+consecutive nodes. Therefore, it turns out that it is convenient to
+compute the integrals $I_{\beta\alpha}$ by breaking the integration
+range as follows:
+\begin{equation}\label{eq:finalformula}
+I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa, \alpha - \beta]}  \int_{x_\beta/x_{\beta-j+1}}^{x_\beta/x_{\beta-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+\end{equation}
+in such a way that the integrand of each single integrand is a smooth
+function and thus easier to integrate. Despite the number of
+intergrals to be computed increases, this procedure makes the
+computation faster and more accurate.
+
+Finally, if the grid is logarithmically distributed, and one defines:
+\begin{equation}
+s = \exp\left[\delta x\right]\,,
+\end{equation}
+Eq.~(\ref{eq:finalformula}) can also be written as:
+\begin{equation}
+I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa, \alpha - \beta]}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\end{equation}
+
+\subsection{GPD-related integrals}
+
+When considering, for example, GPD-related computations such has the
+evolution of GPDs, another kind of integral structure comes into play:
+that is:
+\begin{equation}\label{eq:ZMconvERBL}
+J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z)\,,
+\end{equation}
+which differes from that in Eq.~(\ref{eq:ZMconv}) by the lower
+integration bound that is zero rather than $x$. Understanding that
+this integral is convergent, we need to adapt the strategy for the
+computation of numerical integrals discussed above to
+Eq.~(\ref{eq:ZMconvERBL}). As a first step, we make the change of
+integration variable $z\rightarrow x/y$ and use the interpolation
+formula in Eq.~(\ref{eq:Interpolation}), to obtain:
+\begin{equation}
+  J(x_\beta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\infty dy\,
+  O(y)\,w_{\alpha}\left(\frac{x_\beta}{y}\right) =\sum_{\alpha=0}^{N_x} J_{\beta\alpha}\overline{d}_\alpha\,.
+\end{equation}
+The $\infty$ in the upper bound is a new feature. However, the support
+region of the functions $w_{\alpha}$ is the same so that:
+\begin{equation}
+  J_{\beta\alpha}=  \int_{c}^{\overline{d}} dy\,
+  O(y)\,w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+\end{equation}
+with integration bounds:
+\begin{equation}\label{eq:intlimsGPD}
+  c=\frac{x_\beta}{x_{\alpha+1-{\rm max}[0,\alpha+1-N_x]}}\quad\mbox{and}\quad \overline{d} = \frac{x_\beta}{x_{\alpha-\kappa}}\,.
+\end{equation}
+Following the procedure discussed in the previous section, the actual
+computation is achieved by:
+\begin{equation}\label{eq:ERBLints}
+J_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{x_\beta/x_{\beta-j+1}}^{x_\beta/x_{\beta-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)=\sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\end{equation}
+Therefore, the only difference with respect to the ``standard'' case
+is a change of the upper summation bound. It should be clear, however,
+that this procedure necessarily implies an approximation. This is due
+to the fact that the interpolation grid, understood to be
+logarithmically distributed, does not reach zero. This approximation
+manifests itself in the fact that upper bound of the intergrals in
+Eq.~(\ref{eq:ERBLints}) never reaches infinity but it gets as large as
+$s^{\kappa}$. The size of $s^{\kappa}$ can range widely depending on
+the lower bound of the grid $x_0$, on the number of nodes $N_x$, and
+on the interpolation degree $\kappa$, according to:
+\begin{equation}
+s^\kappa = \exp\left[-\frac{\kappa}{N_x}\ln x_0\right]=x_0^{-\frac{\kappa}{N_x}}\,.
+\end{equation}
+In particular, $s^{\kappa}$ becomes larger as: $x_0$ gets smaller,
+$N_x$ gets smaller, and $\kappa$ gets larger. We will need to assess
+the impact of this approximation numerically.
+
+% It is instructive to generalise the above procedure by considering
+% integrals of this kind:
+% \begin{equation}\label{eq:ZMconvERBLGen}
+%   K(x) = x\int_{b(x)}^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z)\,,
+% \end{equation}
+% where $b$ can be any function of the external parameter $x$. Following
+% the same steps taken above, one arrives at:
+% \begin{equation}
+%   K(x_\beta)= \sum_{\alpha=0}^{N_x} K_{\beta\alpha}\overline{d}_\alpha\,,
+% \end{equation}
+% where:
+% \begin{equation}
+% K_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{???}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+% \end{equation}
 
 \subsection{Double convolution}
 
@@ -405,7 +580,7 @@ reduced.
 We can now apply this procedure up to NLO in QCD to two specific
 cases: SIDIS first and DY second.
 
-\subsection{Semi-inclusive deep inelastic scattering (SIDIS)}
+\section{Semi-inclusive deep inelastic scattering (SIDIS)}
 
 the structure of the SIDIS observables and the expressions for the
 respective hard cross sections can be found in
@@ -605,7 +780,7 @@ Eq.~(\ref{eq:f1sidis}) as:
 where now the sums run only over the quark flavours and not the
 antiflavours.
 
-\subsection{Drell Yan (DY)}
+\section{Drell Yan (DY)}
 
 In this section we apply to the Drell-Yan (DY) process the same
 procedure followed above for SIDIS. As a matter of fact, SIDIS and DY

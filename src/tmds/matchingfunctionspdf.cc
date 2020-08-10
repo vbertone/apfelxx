@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/matchingfunctionspdf.h"
@@ -76,7 +76,7 @@ namespace apfel
         int    *wn1 = new int{-1};
         int    *wn2 = new int{1};
         double *H   = new double[363];
-        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+        apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
         // Defintions
         const double x2 = x * x;
@@ -197,7 +197,7 @@ namespace apfel
         int    *wn1 = new int{-1};
         int    *wn2 = new int{1};
         double *H   = new double[363];
-        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+        apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
         // Defintions
         const double Hm1 = H[HPLogMap({-1})];
@@ -300,7 +300,7 @@ namespace apfel
         int    *wn1 = new int{-1};
         int    *wn2 = new int{1};
         double *H   = new double[363];
-        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+        apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
         // Defintions
         const double x2 = x * x;
@@ -402,7 +402,7 @@ namespace apfel
         int    *wn1 = new int{-1};
         int    *wn2 = new int{1};
         double *H   = new double[363];
-        hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+        apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
         // Defintions
         const double x2 = x * x;
@@ -684,7 +684,7 @@ namespace apfel
     int    *wn1 = new int{-1};
     int    *wn2 = new int{1};
     double *H   = new double[363];
-    hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+    apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
     // Defintions
     const double x2  = x * x;
@@ -983,7 +983,7 @@ namespace apfel
     int    *wn1 = new int{-1};
     int    *wn2 = new int{1};
     double *H   = new double[363];
-    hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+    apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
     // Defintions
     const double x2  = x * x;
@@ -1215,7 +1215,7 @@ namespace apfel
     int    *wn1 = new int{-1};
     int    *wn2 = new int{1};
     double *H   = new double[363];
-    hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+    apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
     // Defintions
     const double x2  = x * x;
@@ -1404,7 +1404,7 @@ namespace apfel
     int    *wn1 = new int{-1};
     int    *wn2 = new int{1};
     double *H   = new double[363];
-    hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+    apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
     // Defintions
     const double x2    = x * x;
@@ -1551,7 +1551,7 @@ namespace apfel
     int    *wn1 = new int{-1};
     int    *wn2 = new int{1};
     double *H   = new double[363];
-    hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
+    apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
 
     // Defintions
     const double x2   = x * x;

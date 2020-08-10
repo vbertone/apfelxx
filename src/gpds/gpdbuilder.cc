@@ -1,7 +1,7 @@
 //
 // APFEL++ 2017
 //
-// Authors: Valerio Bertone: valerio.bertone@cern.ch
+// Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
 #include "apfel/gpdbuilder.h"
@@ -49,15 +49,14 @@ namespace apfel
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    MatchLO.insert({MatchingBasisQCD::PNS, Id});
-    MatchLO.insert({MatchingBasisQCD::PQQ, Id});
-    MatchLO.insert({MatchingBasisQCD::PQG, Zero});
-    MatchLO.insert({MatchingBasisQCD::PGQ, Zero});
-    MatchLO.insert({MatchingBasisQCD::PGG, Id});
-    for (int i = MatchingBasisQCD::PT3Q; i <= MatchingBasisQCD::PT35Q; i++)
-      MatchLO.insert({i, Id});
-    for (int i = MatchingBasisQCD::PT3G; i <= MatchingBasisQCD::PT35G; i++)
-      MatchLO.insert({i, Zero});
+    MatchLO.insert({MatchingBasisQCD::M0, Id});
+    MatchLO.insert({MatchingBasisQCD::M1, Zero});
+    MatchLO.insert({MatchingBasisQCD::M2, Zero});
+    MatchLO.insert({MatchingBasisQCD::M3, Zero});
+    MatchLO.insert({MatchingBasisQCD::M4, Zero});
+    MatchLO.insert({MatchingBasisQCD::M5, Zero});
+    MatchLO.insert({MatchingBasisQCD::M6, Zero});
+    MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
     // LO splitting function operators.
@@ -91,17 +90,13 @@ namespace apfel
         obj.Threshold = Thresholds[nf-1];
         if (OpEvol)
           {
-            const EvolutionOperatorBasisQCD evopb{nf};
-            const MatchingOperatorBasisQCD mtopb{nf};
-            obj.SplittingFunctions.insert({0, Set<Operator>{evopb, OpMapLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{mtopb, MatchLO}});
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
           }
         else
           {
-            const EvolutionBasisQCD evb{nf};
-            const MatchingBasisQCD  mtb{nf};
-            obj.SplittingFunctions.insert({0, Set<Operator>{evb, OpMapLO.at(nf)}});
-            obj.MatchingConditions.insert({0, Set<Operator>{mtb, MatchLO}});
+            obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
           }
         DglapObj.insert({nf,obj});
       }
