@@ -61,14 +61,17 @@ optimising the numerics needs to be devised.
 
 \section{Evolution equation}
 
-In general, the evolution equation for GPDs reads:
+The evolution equation for GPDs reads:
 \begin{equation}\label{eq:eveq}
 \mu^2\frac{d}{d\mu^2}f(x,\xi) = \int_{-\infty}^{+\infty}\frac{dx'}{\left|2\xi\right|}\mathbb{P}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)\,.
 \end{equation}
-The GPD $f$ and the evolution kernel $\mathbb{P}$ may in general be a vector
-and a matrix in flavour space. For now we will just be concerned with
-the integral in the r.h.s. of Eq.~(\ref{eq:eveq}) regardless of the
-flavour structure. The support of the evolution kernel
+In general, the GPD $f$ and the evolution kernel $\mathbb{P}$ should
+be respectively interpreted as a vector and a matrix in flavour
+space. However, for now, we will just be concerned with the integral
+in the r.h.s. of Eq.~(\ref{eq:eveq}) regardless of the flavour
+structure.
+
+The support of the evolution kernel
 $\mathbb{P}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)$ is shown in
 Fig.~\ref{fig:GPDIntDomain}.
 \begin{figure}[h]
@@ -78,8 +81,8 @@ Fig.~\ref{fig:GPDIntDomain}.
       $\mathbb{P}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)$.\label{fig:GPDIntDomain}}
   \end{centering}
 \end{figure}
-Knowing the support of the evolution kernel, Eq.~(\ref{eq:eveq}) can
-be rearranged as follows:
+The Knowledge of the support region of the evolution kernel allows us
+to rearrange Eq.~(\ref{eq:eveq}) as follows:
 \begin{equation}
 \displaystyle\mu^2\frac{d}{d\mu^2}f(\pm x,\xi) =\int_{b(x)}^{1}\frac{dx'}{x'}\left[\frac{x'}{\left|2\xi\right|}\mathbb{P}\left(\pm \frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)+\frac{x'}{\left|2\xi\right|}\mathbb{P}\left(\mp \frac{x}{\xi},\frac{x'}{\xi}\right)f(-x',\xi)\right]\,,
 \end{equation}
@@ -87,14 +90,15 @@ with:
 \begin{equation}\label{eq:lowintb}
 b(x) = |x|\theta\left(\left|\frac{x}{\xi}\right|-1\right)\,,
 \end{equation}
-and where we have used the symmetry property of the evolution kernels
-$\mathbb{P}(y,y')=\mathbb{P}(-y,-y')$. In the unpolarised case, it is useful to
-define:\footnote{Notice the seemingly unusual fact that $f^{+}$ is
-  defined as difference and $f^{-}$ as sum of GPDs computed at
-  opposite values of $x$. This can be understood from the fact that,
-  in the forward limit, $f(-x)= -\overline{f}(x)$, \textit{i.e.} the
-  PDF of a quark computed at $-x$ equals the PDF of the corresponding
-  antiquark computed at $x$ with opposite sign.}
+and where we have used the symmetry property of the evolution kernels:
+$\mathbb{P}(y,y')=\mathbb{P}(-y,-y')$. In the unpolarised case, it is
+useful to define:\footnote{Notice the seemingly unusual fact that
+  $f^{+}$ is defined as difference and $f^{-}$ as sum of GPDs computed
+  at opposite values of $x$. This can be understood from the fact
+  that, in the forward limit, $f(-x)= -\overline{f}(x)$, \textit{i.e.}
+  the PDF of a quark computed at $-x$ equals the PDF of the
+  corresponding antiquark computed at $x$ with opposite sign. The
+  opposite sign is absent in the longitudinally polarised case.}
 \begin{equation}\label{eq:pmdef}
 \begin{array}{rcl}
 \displaystyle f^{\pm}(x,\xi) &=&\displaystyle  f(x,\xi) \mp
@@ -108,79 +112,272 @@ so that the evolution equation for $f^{\pm}$ reads:
 \displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi) = \int_{b(x)}^{1}\frac{dx'}{x'}\frac{x'}{\left|2\xi\right|}
                                                          \mathbb{P}^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f^{\pm}(x',\xi)\,.
 \end{equation}
-In fact, the $f^{\pm}$ distributions are the GPD analogous of the
-$\pm$ forward distributions that can then be used to construct the
+The $f^{\pm}$ distributions can be regarded as the GPD analogous of
+the $\pm$ forward distributions that can then be used to construct the
 usual singlet and non-singlet distributions in the QCD evolution
-basis. This also determines the flavour structure of the evolution
-kernels $\mathbb{P}^{\pm}$. Specifically, from now on we will
-understand that $\mathbb{P}^+$ is a $2\times2$ matrix in flavour
-space, while $\mathbb{P}^-$ is a flavour-scalar non-singlet evolution
-kernel.
+basis. This uniquely determines the flavour structure of the evolution
+kernels $\mathbb{P}^{\pm}$.
 
 It is relevant to observe that the presence of the $\theta$-function
 in the lower integration bound $b$, Eq.~(\ref{eq:lowintb}), is such
 that for $|x|>|\xi|$ the evolution equation has the exact form of the
 DGLAP evolution equation which corresponds to integrating over the
-blue regions in Fig.~\ref{fig:GPDIntDomain} (henceforth DGLAP
-region). Conversely, for $|x|\leq|\xi|$ the lower integration bound
-becomes zero and the evolution equation assumes the form of the
+blue regions in Fig.~\ref{fig:GPDIntDomain} (DGLAP region,
+henceforth). Conversely, for $|x|\leq|\xi|$ the lower integration
+bound becomes zero and the evolution equation assumes the form of the
 so-called ERBL equation that describes the evolution of meson
 distribution amplitudes (DAs). This corresponds to integrating over
-the red region (henceforth ERBL region). Crucially, in the limits
-$\xi\rightarrow 0$ and $\xi\rightarrow \pm1$ one recovers the DGLAP
-and ERBL equations, respectively.
+the red region (ERBL region, henceforth). Crucially, in the limits
+$\xi\rightarrow 0$ and $\xi\rightarrow \pm1$ Eq.~(\ref{eq:eveq2})
+needs to recover the DGLAP and ERBL equations, respectively.
 
-For later convenience, we define the parameter:
+GPD anomalous dimensions are generally tricky to integrate numerically
+because of the intricate support. In order to simplify the integration
+procedure, we can decompose the anomalous dimensions using the labels
+given in Fig.~\ref{fig:GPDIntDomain} as a guide:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle\mathbb{P}(y,y')&=&\displaystyle
+  \theta(y')\\
+\\
+&\times&\Big[\theta(y-1)\theta(y'-y)\mathbb{P}_A(y,y')+\theta(1-y)
+  \theta(y'-y)\mathbb{P}_B(y,y') +\theta(1-y)
+  \theta(y-y')\mathbb{P}_C(y,y')\\
+\\
+&+&\displaystyle \theta(-y-1)\theta(y+y')\mathbb{P}_{\overline{A}}(y,y')+\theta(1+y)
+  \theta(y+y')\mathbb{P}_{\overline{B}} (y,y') +\theta(1+y)
+  \theta(-y'-y)\mathbb{P}_{\overline{C}} (y,y')\Big]\\
+\\
+&+&\displaystyle \theta(-y')\\
+\\
+&\times&\displaystyle\Big[\theta(y-1)\theta(-y-y')\mathbb{P}_{\overline{A}}(y,y')+\theta(1-y)
+  \theta(-y-y')\mathbb{P}_{\overline{B}} (y,y') +\theta(1-y)
+  \theta(y'+y)\mathbb{P}_{\overline{C}} (y,y')\\
+\\
+&+&\displaystyle\theta(-y-1)\theta(-y'+y)\mathbb{P}_A(y,y')+\theta(1+y)
+  \theta(-y'+y)\mathbb{P}_B(y,y') +\theta(1+y)
+  \theta(-y+y')\mathbb{P}_C(y,y')\Big]\,,
+\end{array}
+\end{equation}
+where the functions $\mathbb{P}_I$ and $\mathbb{P}_{\overline{I}}$,
+with $I=A,B,C$, are defined on the respective regions in
+Fig.~\ref{fig:GPDIntDomain}.\footnote{Note that $\mathbb{P}_I(y,y')$
+  and $\mathbb{P}_{\overline{I}}(y,y')$ are not required to be
+  symmetric upon the transformation
+  $(y \rightarrow -y, y' \rightarrow -y')$.}  Next, we take the
+combinations given in Eq.~(\ref{eq:pmdef}) relevant to implement the
+evolution equation in Eq.~(\ref{eq:eveq2}). By doing this, one
+obtains:
+\begin{equation}\label{eq:DGLAPsuitable}
+  \mathbb{P}^\pm(y,y')=\theta(y-1)\mathbb{P}_A^\pm(y,y')+\theta(1-y)
+  \left[\theta(y'-y)\mathbb{P}_B^\pm(y,y') +
+    \theta(y-y')\mathbb{P}_C^\pm(y,y')\right]\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+\mathbb{P}_I^{\pm}(y,y') = \mathbb{P}_I(y,y')\mp
+\mathbb{P}_{\overline{I}}(-y,y')\,,
+\end{equation}
+and omitted all the irrelevant/redundant terms and factors for the
+computation of the integral in the r.h.s. of
+Eq.~(\ref{eq:eveq2}). From Eq.~(\ref{eq:DGLAPsuitable}), it should be
+clear that the anomalous dimension $\mathbb{P}_A^\pm$ is responsible
+for the evolution in the DGLAP region while $\mathbb{P}_B^\pm$ and
+$\mathbb{P}_C^\pm$ are responsible for the evolution in the ERBL
+region. The latter observation suggests that $\mathbb{P}_B^\pm$ and
+$\mathbb{P}_C^\pm$ are related. The relation can easily be established
+by observing that the general structure of the ERBL anomalous
+dimensions is:
+\begin{equation}
+V^{\rm ERBL}(y,y')=\theta(y'-y)F(y,y')+\theta(y-y')F(-y,-y')\,,
+\end{equation}
+which immediately implies that:
+\begin{equation}
+\mathbb{P}_C^\pm(y,y')=\mathbb{P}_B^\pm(-y,-y')\,.
+\end{equation}
+Finally, one finds that a convenient decomposition for the anomalous
+dimension in Eq.~(\ref{eq:eveq2}) is:
+\begin{equation}
+\mathbb{P}^\pm(y,y')=\theta(y-1)\mathbb{P}_A^\pm(y,y')+\theta(1-y)
+  \left[\theta(y'-y)\mathbb{P}_B^\pm(y,y') +
+  \theta(y-y')\mathbb{P}_B^\pm(-y,-y')\right]\,.
+\end{equation}
+
+Eq.~(\ref{eq:eveq2}) can be further manipulated to make it resemble
+the structure of the DGLAP equation as much as possible. To this
+purpose, we define the parameter:
 \begin{equation}
 \kappa(x) = \frac{\xi}{x}\,,
 \end{equation}
 so that:
-\begin{equation}
+\begin{equation}\label{eq:manip}
 \frac{x'}{\left|2\xi\right|}
-\mathbb{P}^{\pm}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)={\rm sign}(\xi)\frac{1}{2\kappa}
-\frac{x'}{x} \mathbb{P}^{\pm}\left(\frac{1}{\kappa},\frac{1}{\kappa}
-  \frac{x'}{x}\right)\equiv {\rm sign}(\xi)\mathcal{P}^{\pm}\left(\kappa,\frac{x}{x'}\right)\,,
+\mathbb{P}_I^{\pm}\left(\pm\frac{x}{\xi}, \pm\frac{x'}{\xi}\right)={\rm sign}(\xi)\frac{1}{2\kappa}
+\frac{x'}{x} \mathbb{P}_I^{\pm}\left(\pm\frac{1}{\kappa}, \pm\frac{1}{\kappa}
+  \frac{x'}{x}\right)\equiv {\rm sign}(\xi)\mathcal{P}_I^{\pm}\left(\pm\kappa,\frac{x}{x'}\right)\,,
 \end{equation}
 where the last equality effectively defines the \textit{DGLAP-like}
 splitting function:
 \begin{equation}\label{eq:DGLAPevk}
-  \mathcal{P}^{\pm}(\kappa,y) = \frac{1}{2\kappa y}
-  \mathbb{P}^{\pm}\left(\frac{1}{\kappa},\frac{1}{\kappa y}\right)\,.
+  \mathcal{P}_I^{\pm}(\pm\kappa,y) = \frac{1}{2\kappa y}
+  \mathbb{P}_I^{\pm}\left(\pm\frac{1}{\kappa}, \pm\frac{1}{\kappa y}\right)\,.
 \end{equation}
-Plugging this definition into the integral in the r.h.s. of
-Eq.~(\ref{eq:eveq2}) and performing a change of variable gives:
+In the following we will assume $\xi>0$ as, so far, this is the only
+experimentally accessible region. This allows us to get rid of
+${\rm sign}(\xi)$ in Eq.~(\ref{eq:manip}). In addition, without loss
+of generality, we can also restrict ourselves to positive values of
+$x$ because negative values can be easily accessed by symmetry using
+Eq.~(\ref{eq:pmdef}), \textit{i.e.}
+$f^{\pm}(-x,\xi)=\mp f^{\pm}(x,\xi)$. Using the definition in
+Eq.~(\ref{eq:DGLAPevk}) in the integral in the r.h.s. of
+Eq.~(\ref{eq:eveq2}) and finally performing a change of variable
+gives:
 \begin{equation}\label{eq:DGLAPforGPDs}
-\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi)= {\rm sign}(\xi)\int_{b(x)}^{1}\frac{dy}{y}\mathcal{P}^{\pm}\left(\kappa, \frac{x}{y}\right)f^{\pm}\left(y,\xi\right)={\rm sign}(\xi)\int_{x}^{x/b(x)}\frac{dy}{y}\mathcal{P}^{\pm}\left(\kappa,y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,,
+\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi)= \int_{b(x)}^{1}\frac{dx'}{x'}\mathcal{P}^{\pm}\left(\kappa, \frac{x}{x'}\right)f^{\pm}\left(x',\xi\right)=\int_{x}^{x/b(x)}\frac{dy}{y}\mathcal{P}^{\pm}\left(\kappa,y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,,
 \end{equation}
 with:
 \begin{equation}
-b(x) = |x|\theta\left(\frac{1}{|\kappa|}-1\right)=|x|\theta\left(1-|\kappa|\right)\,,
+b(x) = x\,\theta(1-\kappa)\,,
 \end{equation}
-which (almost) has the form of a ``standard'' DGLAP equation. The only
-difference is that the upper integration bound is not one but rather
-$x/b(x)$ with $b(x)$. As discussed in the document
-\textit{IntegralStructure.pdf}, this difference can be handled within
-APFEL (up to a numerical approximation to be assessed) by adjusting
-the integration procedure.
+and:
+\begin{equation}\label{eq:DGLAPevkdec}
+  \mathcal{P}^{\pm}\left(\kappa,y\right)=\theta(1-\kappa)\mathcal{P}_A^\pm(\kappa,y)+\theta(\kappa-1)
+  \left[\theta(1-y)\mathcal{P}_B^\pm(\kappa,y) +
+    \theta(y-1)\mathcal{P}_B^\pm(-\kappa,y)\right]\,.
+\end{equation}
+Plugging Eq.~(\ref{eq:DGLAPevkdec}) into Eq.~(\ref{eq:DGLAPforGPDs}),
+one obtains:
+\begin{equation}\label{eq:DGLAPforGPDs2}
+\begin{array}{rcl}
+  \displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi)&=&\displaystyle
+                                                      \int_{x}^{1}\frac{dy}{y}\left[\theta(1-\kappa)\mathcal{P}_A^{\pm}\left(\kappa,y\right)+\theta(\kappa-1)\mathcal{P}_B^{\pm}\left(\kappa,y\right)\right]f^{\pm}\left(\frac{x}{y},\xi\right)\\
+  \\
+                                                  &+&\displaystyle\theta(\kappa-1)\int_{1}^{\infty}\frac{dy}{y}\mathcal{P}_B^{\pm}\left(-\kappa,
+                                                      y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\\
+\\
+&=&\displaystyle
+                                                      \int_{x}^{1}\frac{dy}{y}\left[\theta(1-\kappa)\mathcal{P}_A^{\pm}\left(\kappa,y\right)+\theta(\kappa-1)\left(\mathcal{P}_B^{\pm}\left(\kappa,y\right)-\mathcal{P}_B^{\pm}\left(-\kappa,y\right)\right) \right]f^{\pm}\left(\frac{x}{y},\xi\right)\\
+  \\
+                                                  &+&\displaystyle\theta(\kappa-1)\int_{x}^{\infty}\frac{dy}{y}\mathcal{P}_B^{\pm}\left(-\kappa,
+                                                      y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,.
+\end{array}
+\end{equation}
+Eq.~(\ref{eq:DGLAPforGPDs2}) has almost the form of a ``standard''
+DGLAP equation except for the term in the last line whose integration
+range extends between $x$ and $\infty$. This kind of integral can be
+handled within APFEL with minor modifications of the integration
+strategy and up to a numerical approximation to be assessed. In
+addition, one can prove that at one-loop accuracy, the function
+$\theta(1-\kappa)\mathcal{P}_A^{\pm}\left(\kappa,y\right)+\theta(\kappa-1)\mathcal{P}_B^{\pm}\left(\kappa,y\right)$
+in the integral in the first line is continuos at the point $\kappa=1$
+(but not smooth) because:
+\begin{equation}\label{eq:continuity}
+\mathcal{P}_A^{\pm}\left(1,y\right) = \mathcal{P}_B^{\pm}\left(1,y\right)\,.
+\end{equation}
 
-In the following we will assume $\xi>0$ as, so far, this is the only
-experimentally accessible region. This allows us to get rid of
-${\rm sign}(\xi)$ in Eq.~(\ref{eq:DGLAPforGPDs}). In addition, we can
-also restrict to positive values of $x$ because negative values can be
-easily accessed by symmetry using Eq.~(\ref{eq:pmdef}):
-$f^{\pm}(-x,\xi)=\mp f^{\pm}(x,\xi)$.
+\subsection{On continuity of GPDs}
+
+It is well known that GPDs are required to be continuous at $x=\xi$
+for factorisation to be valid~\cite{Radyushkin:1997ki}. It is thus
+interesting to consider the consequence of this constraint. To this
+end, let us consider the limits of Eq.~(\ref{eq:DGLAPforGPDs2}) for
+$x\rightarrow \xi^\pm$, which corresponds to
+$\kappa\rightarrow 1^{\pm}$:
+\begin{equation}\label{eq:limit1}
+\lim_{x\rightarrow
+  \xi^+}\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi) =
+\int_{x}^{1}\frac{dy}{y}\mathcal{P}_B^{\pm}\left(1,y\right)f^{\pm}\left(\frac{x}{y},\xi\right)+\int_{1}^{\infty}\frac{dy}{y}\mathcal{P}_B^{\pm}\left(-1,
+                                                      y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,,
+\end{equation}
+and:
+\begin{equation}\label{eq:limit2}
+\lim_{x\rightarrow \xi^-}\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi) = \mu^2\frac{d}{d\mu^2}f^{\pm}(\xi,\xi)=\int_{x}^{1}\frac{dy}{y}\mathcal{P}_A^{\pm}\left(1,y\right)f^{\pm}\left(\frac{x}{y},\xi\right)\,.
+\end{equation}
+Taking the difference between Eqs.~(\ref{eq:limit1})
+and~(\ref{eq:limit2}) and using Eq.~(\ref{eq:continuity}) as well as
+the continuity of $f^{\rm}$ at $x=\xi$, one finds that:
+\begin{equation}
+\int_{1}^{\infty}\frac{dy}{y}\mathcal{P}_B^{\pm}\left(-1,
+                                                      y\right)f^{\pm}\left(\frac{x}{y},\xi\right)=0\,,
+\end{equation}
+which has to be valid at any scale and for any $f^{\pm}$. This
+immediately implies that:
+\begin{equation}\label{eq:contcondition}
+\mathcal{P}_B^{\pm}\left(-1, y\right) = 0\,,
+\end{equation}
+for all values of $y$ and order-by-order in perturbation theory. We
+will explicitly verify this constraint when we will discuss the
+explicit expressions. Also notice that this constraint, along with
+Eq.~(\ref{eq:continuity}), is such that the function
+$\theta(1-\kappa)\mathcal{P}_A^{\pm}\left(\kappa,y\right)+\theta(\kappa-1)\left(\mathcal{P}_B^{\pm}\left(\kappa,y\right)-\mathcal{P}_B^{\pm}\left(-\kappa,y\right)\right)
+$ appearing in the integral in the third line of
+Eq.~(\ref{eq:DGLAPforGPDs2}) is continuous at $\kappa=1$.
+
+\subsection{End-point contributions}
+
+Some of the expressions for the anomalous dimensions discussed above
+contain a $+$-prescribed terms. It is important to treat these terms
+properly accounting for additional local terms stemming from the
+``incompleteness'' of the convolution integrals. More specifically,
+the defintion of the $+$-prescription for the function $g$ (singular
+in $y=1$) convoluted with a smooth test function $f$ is:
+\begin{equation}
+  \int_0^{1}
+  dy\,\left[g(y)\right]_+f(y)=\int_0^{1} dy\,g(y)\left[f(y)-f(1)\right]\,.
+\end{equation}
+Now, we need to work out the action of the $+$-prescription on
+integrals of the following kind (\textit{cfr.}
+Eq.~(\ref{eq:DGLAPforGPDs2})):
+\begin{equation}\label{eq:divint}
+I=\int_x^cdy\,\left[g(y)\right]_+f(y)\,,\quad x<1\quad\mbox{and}\quad c\geq 1\,.
+\end{equation}
+In order to apply the definition of $+$-prescription, we manipulate
+the integral above as follows:
+\begin{equation}\label{eq:explicitexpr}
+\begin{array}{rcl}
+I&=&\displaystyle
+     \int_0^{1}dy\,\left[g(y)\right]_+f(y)-\int_0^xdy\,g(y)f(y)+\int_{1}^cdy\,\left[g(y)\right]_+f(y)\\
+\\
+&=&\displaystyle
+    \int_0^{1}dy\,g(y)\left[f(y)-f(1)\right]-\int_0^xdy\,g(y)f(y)+\int_{1}^cdy\,g(y)f(y)\\
+
+\\
+&=&\displaystyle
+    \int_x^{c}dy\,g(y)\left[f(y)-f(1)\right]+f(1)\left[L_1(x)+L_2(c)\right]
+\end{array}
+\end{equation}
+where for shortness we have defined:
+\begin{equation}
+L_1=-\int_0^xdy\,g(y) \quad\mbox{and}\quad L_2=\int_{1}^cdy\,g(y)\,.\\
+\end{equation}
+The term $L_1$ is the usual term arising from the incompleteness of
+the convolution integral and is finite for $x<1$. The term $L_2$ is
+new.  In the DGLAP region ($\kappa<1$) the upper integration bound $c$
+is equal to one so that $L_2=0$ and we recover the usual DGLAP
+structure. In the ERBL region ($\kappa>1$), instead, one can have
+$c=+\infty$ so that:
+\begin{equation}
+  L_2=\int_{1}^\infty dy\,g(y)\,.
+\end{equation}
+One such integral emerges in the computation of the last line of
+Eq.~(\ref{eq:DGLAPforGPDs2}) and one needs to compute:
+\begin{equation}
+L_2(\kappa) = \int_1^\infty dy\,\mathcal{P}_B^{\pm}\left(-\kappa, y\right)\,.
+\end{equation}
+Given Eq.~(\ref{eq:contcondition}), one immediately finds that
+$L_2(1)=0$.
 
 \section{Anomalous dimensions}
 
 A crucial ingredient for an efficient implementation of GPD evolution
 is the availability of the DGLAP-like splitting functions
-$\mathcal{P}^{\pm}$ defined in Eq.~(\ref{eq:DGLAPevk}) in a closed
-form amenable to be easily integrated as in
-Eq.~(\ref{eq:DGLAPforGPDs}).
+$\mathcal{P}^{\pm}$, Eq.~(\ref{eq:DGLAPevk}), in a closed form
+amenable to be easily integrated as in Eq.~(\ref{eq:DGLAPforGPDs}).
 
-In order to address this problem, we need to make the flavour
-structure of the evolution kernels explicit. Working in the QCD
-evolution basis, we have:
+The explicit form of the one-loop anomalous dimensions can be found,
+for example, in Ref.~\cite{Blumlein:1999sc}. In order to address this
+question, we need to make the flavour structure of the evolution
+kernels explicit. Working in the QCD evolution basis, we have:
 \begin{equation}
 \mathcal{P}^+=\begin{pmatrix}
 P_{qq}&P_{qg}\\
@@ -191,18 +388,19 @@ and:
 \begin{equation}
 \mathcal{P}^-=P^{\rm NS}\,,
 \end{equation}
-where $P^{\rm NS}$ is the appropriate evolution kernel. At one loop it
-turns out that all the non-singlet splitting functions are equal
-amongst and to $P_{qq}^{(0)}$, \textit{i.e.}
-$P^{{\rm NS},(0)}=P_{qq}^{(0)}$.
+where $P^{\rm NS}$ is the appropriate evolution kernel for the
+particular non-singlet distribution. At one loop it turns out that all
+the non-singlet splitting functions are equal amongst themselves and
+to $P_{qq}^{(0)}$, \textit{i.e.}
+$P^{{\rm NS},(0)}=P_{qq}^{(0)}$.\footnote{When going beyond one loop,
+  three different non-singlet structures emerge. In the QCD evolution
+  basis, they are associated to the total-valence and $\pm$-like
+  distributions.}
 
-The explicit form of the one-loop anomalous dimensions can be found,
-for example, in Ref.~\cite{Blumlein:1999sc}. However, these functions
-are tricky to integrate numerically due to the presence of
-$\theta$-functions. In order to define the basic steps to reduce the
-anomalous dimension to a suitable form, let us consider the
-non-singlet unpolarised anomalous dimension at one loop. Using
-Eq.~(\ref{eq:DGLAPevk}), one finds:
+In order to define the basic steps to reduce the anomalous dimension
+to a suitable form, let us consider the non-singlet unpolarised
+anomalous dimension at one loop. Using Eq.~(\ref{eq:DGLAPevk}), one
+finds:
 \begin{equation}\label{eq:GPDP0}
   P^{{\rm NS},(0)}(\kappa,y) =\left\{
 \begin{array}{ll}
@@ -212,7 +410,7 @@ Eq.~(\ref{eq:DGLAPevk}), one finds:
                                                                  1\,,\\
   \\
   \displaystyle
-  2C_F\left[\frac{1}{1-y}+\frac12\frac{1-\kappa}{\kappa(1+\kappa y)}\right]_+\,,&\displaystyle \quad 1
+  2C_F\left[\frac{1}{1-y}+\frac{1-\kappa}{2\kappa}\frac{1}{1+\kappa y}\right]_+\,,&\displaystyle \quad 1
                                    \leq\kappa\leq\frac{1}{x}\,.
 \end{array}
 \right.
@@ -234,7 +432,10 @@ $\kappa$. Fig.~\ref{fig:GPDP0} displays the behaviour of the regular
 part of the anomalous dimension $\mathcal{P}_{qq}^{+(0)}$ defined in
 Eq.~(\ref{eq:GPDP0}) as a function of the parameter $\kappa$ for
 different values of the variable $y$. This plot shows the continuity
-of $\mathcal{P}_{qq}^{+(0)}$ at $\kappa=1$.
+of $\mathcal{P}_{qq}^{+(0)}$ at $\kappa=1$. Notice that, for $y>1$,
+$\mathcal{P}_{qq}^{+(0)}$ develops a pole at $\kappa=1/y<1$ below
+which, being it in the DGLAP region, no integration over $y$ is
+required.
 \begin{figure}[t]
   \begin{centering}
     \includegraphics[width=0.6\textwidth]{plots/GPDP0}
@@ -320,121 +521,16 @@ Interestingly, like $P^{{\rm NS},(0)}$ and $P_{qq}^{(0)}$ , also
 $P_{qg}^{(0)}$, $P_{gq}^{(0)}$, and $P_{gg}^{(0)}$ are continuos in
 $\kappa=1$.
 
-\subsection{End-point (local) contributions}
-
-Some of the expressions for the anomalous dimensions discussed above
-contain a $+$-prescribed terms. It is important to treat these terms
-properly accounting for additional local terms stemming from the
-``incompleteness'' of the convolution integrals. More specifically,
-the defintion of the $+$-prescription for the function $g$ (singular
-in $y=1$) convoluted with a smooth test function $f$ is:
-\begin{equation}
-  \int_0^{1^+}
-  dy\,\left[g(y)\right]_+f(y)=\int_0^{1^+} dy\,g(y)\left[f(y)-f(1)\right]\,.
-\end{equation}
-Now, we need to work out the action of the $+$-prescription on
-integrals of the following kind (\textit{cfr.}
-Eq.~(\ref{eq:DGLAPforGPDs})):
-\begin{equation}\label{eq:divint}
-I=\int_x^cdy\,\left[g(y)\right]_+f(y)\,,\quad x<1\quad\mbox{and}\quad c\geq 1\,.
-\end{equation}
-In order to apply the definition of $+$-prescription, we manipulate
-the integral above as follows:
-\begin{equation}\label{eq:explicitexpr}
-\begin{array}{rcl}
-I&=&\displaystyle
-     \int_0^{1^+}dy\,\left[g(y)\right]_+f(y)-\int_0^xdy\,g(y)f(y)+\int_{1^+}^cdy\,g(y)f(y)\\
-\\
-&=&\displaystyle
-    \int_0^{1^+}dy\,g(y)\left[f(y)-f(1)\right]-\int_0^xdy\,g(y)f(y)+\int_{1^+}^cdy\,g(y)f(y)\\
-
-\\
-&=&\displaystyle
-    \int_x^{c}dy\,g(y)\left[f(y)-f(1)\right]+f(1)\left[L_1(x)+L_2(c)\right]
-\end{array}
-\end{equation}
-where for shortness we have defined:
-\begin{equation}
-L_1(x)=-\int_0^xdy\,g(y) \quad\mbox{and}\quad L_2(c)=\int_{1^+}^cdy\,g(y)\,.\\
-\end{equation}
-The term $L_1$ is the usual term arising from the incompleteness of
-the convolution integral and is finite for $x<1$. The term $L_2$ is
-new.  In the DGLAP region ($\kappa<1$) the upper integration bound $c$
-is equal to one so that $L_2(1)=0$ and we recover the usual DGLAP
-structure. In the ERBL region ($\kappa>1$), instead, $c=+\infty$ so
-that:
-\begin{equation}
-L_2(\infty)=\int_{1^+}^\infty dy\,g(y)\,.
-\end{equation}
-The question now is whether the second integral in the rightmost term
-converges: the answer is generally not. A simple example is
-Eq.~(\ref{eq:pns0co}) that, for $\kappa=1^+$ gives:
-\begin{equation}
-\int_{1^+}^\infty\frac{dy}{1-y} = -\infty\,.
-\end{equation}
-By inspection, one finds that this divergence is logarithmic,
-signifying that the function $g$ goes to zero linearly as
-$y\rightarrow \infty$. Of course, the presence of this divergence
-seems to invalidate the full evolution procedures because the
-derivative of GPDs with respect to $\mu$ in the ERBL region is not
-defined. The question is how to overcome this problem. Since the
-function $g$ is the result of a perturbative calculation, the only
-possibility relies on imposing an appropriate constraint on test
-function $f$ that guarantees the convergence of the integral in
-Eq.~(\ref{eq:divint}). To do so, we need to \textit{require} that the
-function $f$ is such that the last term in the r.h.s. of the first
-line of Eq.~(\ref{eq:explicitexpr}) converges when $c=\infty$:
-\begin{equation}
-  \left|\int_{1^+}^\infty dy\,g(y)f(y)\right|<\infty\,.
-\end{equation}
-As we will see in the next section, the requirement of continuity of
-GPDs sets the particular value of this integral at $x=\xi$ to zero.
-Since $g$ decays linearly, in order for the integral to converge, also
-the function $f$ needs to tend to zero as $y\rightarrow \infty$ as:
-\begin{equation}
-f(y)\mathop{\longrightarrow}_{y\rightarrow\infty}\frac1{y^a}\,,\quad a>0\,.
-\end{equation}
 
 
-\subsection{On continuity of GPDs}
 
-It is well known that GPDs are required to be continuous at $x=\xi$
-for factorisation to be valid~\cite{Radyushkin:1997ki}. It is thus
-interesting to consider the consequence of this constraint. To this
-end, let us consider the limits of Eq.~(\ref{eq:eveq2}) for
-$x\rightarrow \xi^\pm$:
-\begin{equation}\label{eq:limit1}
-\lim_{x\rightarrow
-  \xi^+}\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi) =
-\mu^2\frac{d}{d\mu^2}f^{\pm}(\xi,\xi)=\int_{\xi}^{1}\frac{dx'}{2\xi}
-                                                         \mathbb{P}^{\pm}\left(\frac{\xi^+}{\xi},\frac{x'}{\xi}\right)f^{\pm}(x',\xi)\,,
-\end{equation}
-and:
-\begin{equation}\label{eq:limit2}
-\lim_{x\rightarrow \xi^-}\displaystyle\mu^2\frac{d}{d\mu^2}f^{\pm}(x,\xi) = \mu^2\frac{d}{d\mu^2}f^{\pm}(\xi,\xi)=\int_{0}^{1}\frac{dx'}{2\xi}
-                                                         \mathbb{P}^{\pm}\left(\frac{\xi^-}{\xi},\frac{x'}{\xi}\right)f^{\pm}(x',\xi)\,,
-\end{equation}
-where we have used the continuity of $f^{\rm}$ at $x=\xi$. As we have
-shown in the previous section, anomalous dimension at one loop are
-also continuous in $x=\xi$ (\textit{i.e.} in $\kappa=1$), such that:
-\begin{equation}
-  \mathbb{P}^{\pm}\left(\frac{\xi^+}{\xi},y\right) =
-  \mathbb{P}^{\pm}\left(\frac{\xi^-}{\xi},y\right) = \mathbb{P}^{\pm}\left(1,y\right)\,.
-\end{equation}
-Taking the difference between Eqs.~(\ref{eq:limit1})
-and~(\ref{eq:limit2}) paying attention to remove also the end point
-contributions, one finds, at least at one loop, that:
-\begin{equation}
-  \int_{0}^{\xi^-}\frac{dx'}{2\xi}\,\mathbb{P}^{\pm}\left(1,\frac{x'}{\xi}\right)f^{\pm}(x',\xi) =\int_{0}^{\xi^-}\frac{dx'}{x'}\,\mathcal{P}^{\pm}\left(1,\frac{\xi}{x'}\right)f^{\pm}(x',\xi) =\int_{1^+}^{\infty}\frac{dx'}{x'}\,\mathcal{P}^{\pm}\left(1,x'\right)f^{\pm}\left(\frac{\xi}{x'},\xi\right)=0\,.
-\end{equation}
-This appears to be some sort of sum rule that the GPDs and anomalous
-dimensions in the ERBL region have to fullfil. We will attempt a
-numerical estimate of the impact of possible violations of this
-requirement.
+
+\newpage
+\appendix
 
 \section{On Vinnikov's code}
 
-The purpose of this short note is to draw the attention on a possible
+The purpose of this Appendix is to draw the attention on a possible
 incongruence of the GPD evolution code developed by Vinnikov and
 presented in Ref.~\cite{Vinnikov:2006xw}. For definiteness, we
 concentrate on the non-singlet $H_{\rm NS}$ GPD in the DGLAP region

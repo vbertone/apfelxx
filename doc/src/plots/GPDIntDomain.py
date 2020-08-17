@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import MatplotlibSettings
 
-xi = 0.4
+xi = 0.5
 
 x, y = [-1, 1, xi, xi, 1, -1, -xi, -xi, -1], [1, 1, xi, -xi, -1, -1, -xi, xi, 1]
 x1, y1 = [-xi, 0, -xi], [xi, 0, -xi]
@@ -25,8 +25,26 @@ plt.text(-1.05, 0.07, r"$-1$")
 plt.text(-0.06, 0.88, r"$1$")
 plt.text(-0.15, -0.98, r"$-1$")
 
-plt.text(xi + 0.04, 0.07, r"$\xi$")
-plt.text(- xi - 0.18, 0.07, r"$-\xi$")
+plt.text(xi + 0.02, 0.07, r"$|\xi|$")
+plt.text(- xi - 0.22, 0.07, r"$-|\xi|$")
+
+plt.text(xi+(1-xi-0.33)/2, xi+(1-xi)/2, r"$A$", color = "blue")
+plt.text(-xi-(1-xi-0.13)/2, xi+(1-xi)/2, r"$\overline{A}$", color = "blue")
+
+plt.text(xi+(1-xi-0.33)/2, -xi-(1-xi+0.2)/2, r"$\overline{A}$", color = "blue")
+plt.text(-xi-(1-xi-0.13)/2, -xi-(1-xi+0.2)/2, r"$A$", color = "blue")
+
+plt.text((xi-0.13)/2, xi+(1-xi-0.33)/2, r"$B$", color = "red")
+plt.text(-(xi+0.07)/2, xi+(1-xi-0.33)/2, r"$\overline{B}$", color = "red")
+
+plt.text((xi-0.13)/2, -xi-(1-xi-0.13)/2, r"$\overline{B}$", color = "red")
+plt.text(-(xi+0.07)/2, -xi-(1-xi-0.13)/2, r"$B$", color = "red")
+
+plt.text(xi/2, (xi - 0.33)/2, r"$C$", color = "red")
+plt.text(-(xi+0.2)/2, (xi - 0.33)/2, r"$\overline{C}$", color = "red")
+
+plt.text(-(xi+0.2)/2, -(xi - 0.13)/2, r"$C$", color = "red")
+plt.text(xi/2, -(xi - 0.13)/2, r"$\overline{C}$", color = "red")
 
 t = np.linspace(-1, 1, 100)
 #plt.plot(t, t, "k--", lw = 1.5)
@@ -34,6 +52,9 @@ t = np.linspace(-1, 1, 100)
 
 plt.plot([xi for y in t], t, "k--", lw = 1.5)
 plt.plot([-xi for y in t], t, "k--", lw = 1.5)
+
+plt.plot(t, t, "k--", lw = 1.5)
+plt.plot(t, -t, "k--", lw = 1.5)
 
 plt.plot(x, y, c = "k", lw = 1.5)
 plt.fill(x, y, alpha = 0.3)
