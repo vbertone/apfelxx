@@ -61,9 +61,13 @@ optimising the numerics needs to be devised.
 
 \section{Evolution equation}
 
-The evolution equation for GPDs reads:
+The evolution equation for GPDs reads:\footnote{It should be noticed
+  that the integration bounds of the integration in
+  Eq.~(\ref{eq:eveq}) are dictated by the operator defintion of the
+  distribution $f$ on the light cone and not by the kernel
+  $\mathbb{P}$.}
 \begin{equation}\label{eq:eveq}
-\mu^2\frac{d}{d\mu^2}f(x,\xi) = \int_{-\infty}^{+\infty}\frac{dx'}{\left|2\xi\right|}\mathbb{P}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)\,.
+\mu^2\frac{d}{d\mu^2}f(x,\xi) = \int_{-1}^{1}\frac{dx'}{\left|2\xi\right|}\mathbb{P}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)\,.
 \end{equation}
 In general, the GPD $f$ and the evolution kernel $\mathbb{P}$ should
 be respectively interpreted as a vector and a matrix in flavour
@@ -302,18 +306,77 @@ for all values of $y$ and order-by-order in perturbation theory. We
 will explicitly verify this constraint when we will discuss the
 explicit expressions.
 
-\subsection{End-point contributions}
+\subsection{End-point contributions}\label{sec:endpoint}
 
 Some of the expressions for the anomalous dimensions discussed below
 contain $+$-prescribed terms. It is thus important to treat these
-terms properly accounting for additional local terms stemming from the
-``incompleteness'' of the convolution integrals. However, own to the
-support region in Fig.~\ref{fig:GPDIntDomain}, such incomplete
-convolutions take place in the DGLAP region ($\kappa<1$) only where
-the standard procedure already implemented in APFEL can be
-used. Conversely, in the ERBL region ($\kappa>1$) the convolution
-integrals are always complete therefore no additional local terms have
-to be included.
+terms properly. We are generally dealing with objects defined as (see
+Eq.~(\ref{eq:eveq})):
+\begin{equation}
+  \frac{1}{|2\xi|}\left[\mathbb{P}\left(\frac{x}{\xi},
+      \frac{x'}{\xi}\right)\right]_+=
+  \frac{1}{|2\xi|}\mathbb{P}\left(\frac{x}{\xi},
+    \frac{x'}{\xi}\right)- \frac{1}{|2\xi|}\delta(x-x')\int_{-\infty}^{\infty}dx'\mathbb{P}\left(\frac{x}{\xi}, \frac{x'}{\xi}\right)\,.
+\end{equation}
+where the function $\mathbb{P}$ has a pole at $x'=x$. Notice that the
+integral in the r.h.s. of the above definition runs over the entire
+real axis. It is then the support of the function $\mathbb{P}$ to
+possibly redefine the integration bounds. When implementing the
+definition in Eq.~(\ref{eq:DGLAPevk}), mostly due to the presence of
+the factor $1/y$, one needs to be careful in deriving the appropriate
+subtraction term.
+
+Let us take as an example the one-loop non singlet anomalous
+dimension. For definiteness, we will refer for the precise expression
+to Eq.~(101) of Ref.~\cite{Diehl:2003ny} and report it here for
+convenience (up to a factor $\alpha_s/2\pi$):
+\begin{equation}\label{eq:diehlexpr}
+V_{\rm NS}^{(0)}(x,x') = 2C_F\left[\rho(x,x')\left\{\frac{1+x}{1+x'}\left(1+\frac{2}{x'-x}\right)\right\}+(x\rightarrow -x, x'\rightarrow -x')\right]_+\,,
+\end{equation}
+with:\footnote{There is probably a typo in Eq.~(102) of
+  Ref.~\cite{Diehl:2003ny} and the second $-1$ should actually be a
+  $+1$.}
+\begin{equation}\label{eq:supportdiehl}
+\rho(x,x')=\theta(-x + x')\theta(1 + x) - \theta(x - x')\theta(1 - x)
+\end{equation}
+In order for Eq.~(\ref{eq:diehlexpr}) to be consistent with the
+forward evolution, one should find:
+\begin{equation}\label{eq:forwardlimit}
+  \lim_{\xi\rightarrow 0}\frac{1}{|2\xi|} V_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{x'}{\xi}\right) \mathop{=}^?
+  \frac{1}{x'} P_{\rm NS}\left(\frac{x}{x'}\right) = \frac{1}{x'}2C_F\left[\theta\left(\frac{x}{x'}\right)\theta\left(1-\frac{x}{x'}\right)\frac{1+\left(\frac{x}{x'}\right)^2}{1-\left(\frac{x}{x'}\right)}\right]_+\,,
+\end{equation}
+such that Eq.~(\ref{eq:eveq}) exactly reduces to the collinear DGLAP
+equation. However, if one takes the explicit limit for
+$\xi\rightarrow 0$ of Eq.~(\ref{eq:diehlexpr}) one finds:\footnote{The
+  factor $\theta\left(\frac{x}{x'}\right)$ comes from the factor
+  $\theta(-x+x')$ in Eq.~(\ref{eq:supportdiehl}) that can be rewritten
+  as
+  $\theta\left(\frac{x}{x'}\right)\theta\left(1-\frac{x}{x'}\right)$.}
+\begin{equation}\label{eq:forwardlimit2}
+\lim_{\xi\rightarrow 0}\frac{1}{|2\xi|} V_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{x'}{\xi}\right) = 2C_F\left[\frac{1}{x'}\theta\left(\frac{x}{x'}\right)\left(1-\frac{x}{x'}\right)\frac{1+\left(\frac{x}{x'}\right)^2}{1-\left(\frac{x}{x'}\right)}\right]_+\,.
+\end{equation}
+Therefore, as compared to Eq.~(\ref{eq:forwardlimit}), the factor
+$1/x'$ in Eq.~(\ref{eq:forwardlimit2}) appears \textit{inside} the
++-prescription sign rather than outside which makes the two
+expressions different. The difference amounts to a local term that can
+be quantified by knowing that:
+\begin{equation}
+\left[\theta(y)\theta(1-y)yg(y) \right]_+=y\left[\theta(y)\theta(1-y)g(y)\right]_+ + \delta(1-y)\int_0^1dz\,(1-z)g(z)\,.
+\end{equation}
+Notice that, thanks to the factor $(1-z)$, the integral in the
+r.h.s. of the above equation converges. For example:
+\begin{equation}
+  \left[y\theta(y)\theta(1-y)\frac{y}{1-y}\right]_+=y\left[\theta(y)\theta(1-y)\frac1{1-y}\right]_+
+  + \delta(1-y)\,.
+\end{equation}
+Finally, one finds that the forward limit of Eq.~(\ref{eq:diehlexpr}) gives:
+\begin{equation}\label{eq:forwardlimit}
+  \lim_{\xi\rightarrow 0}\frac{1}{|2\xi|} V_{\rm
+    NS}^{(0)}\left(\frac{x}{\xi},\frac{x'}{\xi}\right) =
+  \frac{1}{x'} \left[P_{\rm NS}\left(\frac{x}{x'}\right)+\frac{4}{3}C_F\delta\left(1-\frac{x}{x'}\right)\right]\,,
+\end{equation}
+which does \textit{not} reproduce the DGLAP equation due to the
+presence of an additional local term.
 
 \section{Anomalous dimensions}
 
@@ -427,7 +490,7 @@ The continuity condition at $\kappa=1$ is obeyed, producing:
   P_{A,qg}^{(0)}(1,y) = P_{B,qg}^{(0)}(1,y)= \frac{4 n_f T_R}{(1 + y)^2}\,,
 \end{equation}
 \begin{equation}
-  P_{A,gq}^{(0)}(1,y) =P_{B,gq}^{(0)}(1,y)\frac{4 C_F}{y (1 + y)}\,,
+  P_{A,gq}^{(0)}(1,y) =P_{B,gq}^{(0)}(1,y)=\frac{4 C_F}{y (1 + y)}\,,
 \end{equation}
 \begin{equation}
   P_{A,gg}^{(0)}(1,y) =P_{B,gg}^{(0)}(1,y) =4 C_A\left[\frac{1+y^2}{y(1 + y)^2 \left(1-y\right)_+}\right]+\delta(1-y)\frac{11C_A-4n_fT_R}{3}\,,
@@ -472,70 +535,52 @@ completeness, I report that equation here:
 &+&\displaystyle H_{\rm
     NS}(x,\xi,Q^2)\bigg(\frac32+2\ln(1-x)+\frac{x-\xi}{2\xi}\ln((x-\xi)(1+\xi))\\
 \\
-&-&\displaystyle \frac{x+\xi}{2\xi}\ln((x+\xi)(1-\xi))\bigg)\Bigg]\,.
+&-&\displaystyle \frac{x+\xi}{2\xi}\ln((x+\xi)(1-\xi))\bigg)\Bigg]\,,
 \end{array}
 \end{equation}
+and take the forward limit $\xi\rightarrow 0$:
+\begin{equation}\label{eq:Vinnikov}
+\begin{array}{rcl}
+\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
+  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
+          \frac{x^2+y^2}{y (y-x)}\frac{1}{y}\left(H_{\rm
+          NS}(y,0,Q^2)-H_{\rm NS}(x,0,Q^2)\right)\\
+\\
+&+&\displaystyle H_{\rm  NS}(x,0,Q^2)\left(\frac32+2\ln(1-x)\right)\Bigg]\,,
+\end{array}
+\end{equation}
+
 The limit for $\xi\rightarrow 0$ of the equation above should
 reproduce the usual DGLAP evolution equation:
 \begin{equation}
 \displaystyle \frac{d H_{\rm 
 NS}(x,0,Q^2)}{d\ln
-  Q^2}=\frac{\alpha_s(Q^2)}{4\pi}\int_x^1 \frac{dz}{z}\left[\hat{P}_{\rm
-  NS}\left(z\right)\right]_+H_{\rm NS}\left(\frac{x}{z},0,Q^2\right)\,,
+  Q^2}=\frac{\alpha_s(Q^2)}{4\pi}\int_x^1 \frac{dy}{y}\left[\hat{P}_{\rm
+  NS}\left(\frac{x}{y}\right)\right]_+H_{\rm NS}\left(y,0,Q^2\right)\,,
 \end{equation}
 where:
 \begin{equation}
-\hat{P}_{\rm NS}\left(z\right)=2C_F\frac{1+z^2}{1-z}=2C_F\left[\frac{2}{1-z}-(1+z)\right]\,,
+\hat{P}_{\rm NS}\left(z\right)=2C_F\frac{1+z^2}{1-z}\,,
 \end{equation}
-with $C_F=4/3$. Written explicitly:
+with $C_F=4/3$. Written explicitly and accounting for the additional
+local term arising from the incompleteness of the convolution
+integral, one finds:
 \begin{equation}\label{eq:DGLAPexpl}
 \begin{array}{rcl}
   \displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
-    Q^2}&=&\displaystyle \frac{\alpha_s(Q^2)}{4\pi}2C_F\Bigg[\int_x^1 dz\,\frac{2}{1-z}\left(\frac1z H_{\rm NS}\left(\frac{x}{z},0,Q^2\right)-H_{\rm
+    Q^2}&=&\displaystyle \frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1
+            dy\,\frac{x^2+y^2}{y(y-x)}\left(\frac1y
+            H_{\rm NS}\left(y,0,Q^2\right)-H_{\rm
       NS}(x,0,Q^2)\right)\\
 \\
-&-&\displaystyle \int_x^1 \frac{dz}{z}\, (1+z) H_{\rm
-    NS}\left(\frac{x}{z},0,Q^2\right)\\
-\\
- &+&\displaystyle H_{\rm NS}(x,0,Q^2)\left(\frac{3}{2}+2\ln(1-x)\right)\Bigg]\,.
+ &+&\displaystyle H_{\rm NS}(x,0,Q^2)\left(\frac{3}{2}+2\ln(1-x)\right)\Bigg]\,,
 \end{array}
 \end{equation}
-Now I explicitly take the limit for $\xi\rightarrow 0$ of
-Eq.~(\ref{eq:Vinnikov}). The result is:
-\begin{equation}
-\begin{array}{rcl}
-\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
-  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
-          \frac{x^2+y^2}{y^2 (y-x)}\left(H_{\rm
-          NS}(y,0,Q^2)-H_{\rm NS}(x,0,Q^2)\right)\\
-\\
-&+&\displaystyle H_{\rm
-    NS}(x,0,Q^2)\left(\frac32+2\ln(1-x)\right)\Bigg]\,.
-\end{array}
-\end{equation}
-Some further simple algebraic manipulation finally gives:
-\begin{equation}
-\begin{array}{rcl}
-\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
-  Q^2}&=&\displaystyle\frac{\alpha_s(Q^2)}{4\pi}2C_F\Bigg[\int_x^1 dz\, 
-          \frac{2}{1-z}\left(\frac{1}{z}H_{\rm
-          NS}\left(\frac{x}{z},0,Q^2\right)-H_{\rm NS}(x,0,Q^2)\right)\\
-\\
-&-&\displaystyle \int_x^1 \frac{dz}{z}\,(1+z)H_{\rm
-          NS}\left(\frac{x}{z},0,Q^2\right)\\
-\\
-&+&\displaystyle H_{\rm
-    NS}(x,0,Q^2) \left(\frac32+2\ln(1-x)+\ln(x)+(1-x)\right)\Bigg]\,,
-\end{array}
-\end{equation}
-that is close to the correct results, Eq.~(\ref{eq:DGLAPexpl}), except
-for the two additional terms in the third line. Since the
-$\xi\rightarrow 0$ limit does not seem to produce the correct result,
-this suggests that the evolution code presented in
-Ref.~\cite{Vinnikov:2006xw} may not be entirely correct.\footnote{It
-  is, in fact, possible to correct Eq.~(\ref{eq:Vinnikov}) in such a
-  way that its $\xi\rightarrow 0$ limit gives the correct DGLAP
-  evolution equation.}
+which differs from Eq.~(\ref{eq:Vinnikov}) by the fact that the factor
+$1/y$ does not multiply the subtraction term. In fact, the difference
+between Eqs.~(\ref{eq:Vinnikov}) and~(\ref{eq:DGLAPexpl}) can be
+(partially) traced back to the discrepancy discussed in
+Sect.~(\ref{sec:endpoint}).
 
 \newpage
 
