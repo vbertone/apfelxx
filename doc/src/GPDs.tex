@@ -326,7 +326,7 @@ definition in Eq.~(\ref{eq:DGLAPevk}), mostly due to the presence of
 the factor $1/y$, one needs to be careful in deriving the appropriate
 subtraction term.
 
-Let us take as an example the one-loop non singlet anomalous
+Let us take as an example the one-loop non-singlet anomalous
 dimension. For definiteness, we will refer for the precise expression
 to Eq.~(101) of Ref.~\cite{Diehl:2003ny} and report it here for
 convenience (up to a factor $\alpha_s/2\pi$):
@@ -376,7 +376,76 @@ Finally, one finds that the forward limit of Eq.~(\ref{eq:diehlexpr}) gives:
   \frac{1}{x'} \left[P_{\rm NS}\left(\frac{x}{x'}\right)+\frac{4}{3}C_F\delta\left(1-\frac{x}{x'}\right)\right]\,,
 \end{equation}
 which does \textit{not} reproduce the DGLAP equation due to the
-presence of an additional local term.
+presence of an additional local term. One could reverse the argument
+by saying that, in order to reproduce the DGLAP equation, the
+well-known expression for the one-loop non-singlet GPD anomalous
+dimension misses a local term whose forward limit is $-4C_F/3x$.
+
+\subsection{On Vinnikov's code}
+
+The purpose of this Appendix is to draw the attention on a possible
+incongruence of the GPD evolution code developed by Vinnikov and
+presented in Ref.~\cite{Vinnikov:2006xw}. For definiteness, we
+concentrate on the non-singlet $H_{\rm NS}$ GPD in the DGLAP region
+$x>\xi$, whose evolution equation is given in Eq.~(29). For
+completeness, I report that equation here:
+\begin{equation}\label{eq:Vinnikov}
+\begin{array}{rcl}
+\displaystyle \frac{d H_{\rm NS}(x,\xi,Q^2)}{d\ln
+  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
+          \frac{x^2+y^2-2\xi^2}{(y-x)(y^2-\xi^2)}\left(H_{\rm
+          NS}(y,\xi,Q^2)-H_{\rm NS}(x,\xi,Q^2)\right)\\
+\\
+&+&\displaystyle H_{\rm
+    NS}(x,\xi,Q^2)\bigg(\frac32+2\ln(1-x)+\frac{x-\xi}{2\xi}\ln((x-\xi)(1+\xi))\\
+\\
+&-&\displaystyle \frac{x+\xi}{2\xi}\ln((x+\xi)(1-\xi))\bigg)\Bigg]\,,
+\end{array}
+\end{equation}
+and take the forward limit $\xi\rightarrow 0$:
+\begin{equation}\label{eq:Vinnikov}
+\begin{array}{rcl}
+\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
+  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
+          \frac{x^2+y^2}{y^2 (y-x)}\left(H_{\rm
+          NS}(y,0,Q^2)-H_{\rm NS}(x,0,Q^2)\right)\\
+\\
+&+&\displaystyle H_{\rm  NS}(x,0,Q^2)\left(\frac32+2\ln(1-x)\right)\Bigg]\,,
+\end{array}
+\end{equation}
+
+The limit for $\xi\rightarrow 0$ of the equation above should
+reproduce the usual DGLAP evolution equation:
+\begin{equation}
+\displaystyle \frac{d H_{\rm 
+NS}(x,0,Q^2)}{d\ln
+  Q^2}=\frac{\alpha_s(Q^2)}{4\pi}\int_x^1 \frac{dy}{y}\left[\hat{P}_{\rm
+  NS}\left(\frac{x}{y}\right)\right]_+H_{\rm NS}\left(y,0,Q^2\right)\,,
+\end{equation}
+where:
+\begin{equation}
+\hat{P}_{\rm NS}\left(z\right)=2C_F\frac{1+z^2}{1-z}\,,
+\end{equation}
+with $C_F=4/3$. Written explicitly and accounting for the additional
+local term arising from the incompleteness of the convolution
+integral, one finds:
+\begin{equation}\label{eq:DGLAPexpl}
+\begin{array}{rcl}
+  \displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
+    Q^2}&=&\displaystyle \frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1
+            dy\,\frac{x^2+y^2}{y^3(y-x)}\left(y
+            H_{\rm NS}\left(y,0,Q^2\right)-xH_{\rm
+      NS}(x,0,Q^2)\right)\\
+\\
+ &+&\displaystyle H_{\rm NS}(x,0,Q^2)\left(\frac{x(x+2)}{2}+2\ln(1-x)\right)\Bigg]\,,
+\end{array}
+\end{equation}
+which evidently differs from Eq.~(\ref{eq:Vinnikov}). By inspection,
+one can argue that the difference between can be partially traced back
+to the issue discussed in Sect.~(\ref{sec:endpoint}). An interesting
+observation is that, for $x\rightarrow 1$, the two expressions tend to
+coincide. This may have concurred to cause the oversight of this
+discrepancy in past numerical comparisons.
 
 \section{Anomalous dimensions}
 
@@ -514,73 +583,8 @@ which correctly reproduces the one-loop DGLAP splitting functions.
 
 
 
-\newpage
-\appendix
 
-\section{On Vinnikov's code}
 
-The purpose of this Appendix is to draw the attention on a possible
-incongruence of the GPD evolution code developed by Vinnikov and
-presented in Ref.~\cite{Vinnikov:2006xw}. For definiteness, we
-concentrate on the non-singlet $H_{\rm NS}$ GPD in the DGLAP region
-$x>\xi$, whose evolution equation is given in Eq.~(29). For
-completeness, I report that equation here:
-\begin{equation}\label{eq:Vinnikov}
-\begin{array}{rcl}
-\displaystyle \frac{d H_{\rm NS}(x,\xi,Q^2)}{d\ln
-  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
-          \frac{x^2+y^2-2\xi^2}{(y-x)(y^2-\xi^2)}\left(H_{\rm
-          NS}(y,\xi,Q^2)-H_{\rm NS}(x,\xi,Q^2)\right)\\
-\\
-&+&\displaystyle H_{\rm
-    NS}(x,\xi,Q^2)\bigg(\frac32+2\ln(1-x)+\frac{x-\xi}{2\xi}\ln((x-\xi)(1+\xi))\\
-\\
-&-&\displaystyle \frac{x+\xi}{2\xi}\ln((x+\xi)(1-\xi))\bigg)\Bigg]\,,
-\end{array}
-\end{equation}
-and take the forward limit $\xi\rightarrow 0$:
-\begin{equation}\label{eq:Vinnikov}
-\begin{array}{rcl}
-\displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
-  Q^2}&=&\displaystyle\frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1 dy
-          \frac{x^2+y^2}{y (y-x)}\frac{1}{y}\left(H_{\rm
-          NS}(y,0,Q^2)-H_{\rm NS}(x,0,Q^2)\right)\\
-\\
-&+&\displaystyle H_{\rm  NS}(x,0,Q^2)\left(\frac32+2\ln(1-x)\right)\Bigg]\,,
-\end{array}
-\end{equation}
-
-The limit for $\xi\rightarrow 0$ of the equation above should
-reproduce the usual DGLAP evolution equation:
-\begin{equation}
-\displaystyle \frac{d H_{\rm 
-NS}(x,0,Q^2)}{d\ln
-  Q^2}=\frac{\alpha_s(Q^2)}{4\pi}\int_x^1 \frac{dy}{y}\left[\hat{P}_{\rm
-  NS}\left(\frac{x}{y}\right)\right]_+H_{\rm NS}\left(y,0,Q^2\right)\,,
-\end{equation}
-where:
-\begin{equation}
-\hat{P}_{\rm NS}\left(z\right)=2C_F\frac{1+z^2}{1-z}\,,
-\end{equation}
-with $C_F=4/3$. Written explicitly and accounting for the additional
-local term arising from the incompleteness of the convolution
-integral, one finds:
-\begin{equation}\label{eq:DGLAPexpl}
-\begin{array}{rcl}
-  \displaystyle \frac{d H_{\rm NS}(x,0,Q^2)}{d\ln
-    Q^2}&=&\displaystyle \frac{2\alpha_s(Q^2)}{3\pi}\Bigg[\int_x^1
-            dy\,\frac{x^2+y^2}{y(y-x)}\left(\frac1y
-            H_{\rm NS}\left(y,0,Q^2\right)-H_{\rm
-      NS}(x,0,Q^2)\right)\\
-\\
- &+&\displaystyle H_{\rm NS}(x,0,Q^2)\left(\frac{3}{2}+2\ln(1-x)\right)\Bigg]\,,
-\end{array}
-\end{equation}
-which differs from Eq.~(\ref{eq:Vinnikov}) by the fact that the factor
-$1/y$ does not multiply the subtraction term. In fact, the difference
-between Eqs.~(\ref{eq:Vinnikov}) and~(\ref{eq:DGLAPexpl}) can be
-(partially) traced back to the discrepancy discussed in
-Sect.~(\ref{sec:endpoint}).
 
 \newpage
 
