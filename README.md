@@ -61,7 +61,7 @@ different path, remember to export the APFEL++ `/lib` and `/bin` folders into th
 ccmake .
 ```
 
-## Documetation
+## Documentation
 
 Code documentation generated with [Doxygen](https://www.doxygen.nl/index.html) can be found [here](https://vbertone.github.io/apfelxx/html/index.html).
 
