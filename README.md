@@ -9,12 +9,12 @@ APFEL++ is a C++ rewriting of the Fortran 77 evolution code APFEL (see
 http://apfel.hepforge.org and
 https://github.com/vbertone/apfel). APFEL++ is based on a completely
 new code design and guarantees a better performance along with a more
-optimal memory management. The new modular structure allows for a
-better maintainability and an easier extensibility. This makes APFEL++
+optimal memory management. The new modular structure allows for
+better maintainability and easier extensibility. This makes APFEL++
 suitable for a wide range of tasks: from the solution of the DGLAP
-evolution equations to the computation of deep-inelastic-scattering
-(DIS) and single-inclusive-annihilation cross sections. Also more
-complex computations, such as semi-inclusive DIS and Drell-Yan cross
+evolution equations to the computation of deep-inelastic-scattering (DIS)
+and single-inclusive-annihilation cross sections. Also more
+complex computations, such as differential semi-inclusive DIS and Drell-Yan cross
 sections, are easily implementable in APFEL++.
 
 ## Homebrew (macOS)
@@ -30,7 +30,7 @@ You can obtain APFEL++ directly from the github repository:
 
 https://github.com/vbertone/apfelxx/releases
 
-For the last development branch you can clone the master code:
+For the latest development branch you can clone the master code:
 
 ```Shell
 git clone https://github.com/vbertone/apfelxx.git
@@ -52,10 +52,10 @@ mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/your/installation/path/ ..
 make && make install
 ```
-By the default, if no prefix specification is given, the program will
+By the default, if no prefix is given, the program will
 be installed in the /usr/local folder. If you want (or need) to use a
-different path, remember to export the APFEL++ /lib folder into the
-LD_LIBRARY_PATH. More configuration options can be accessed by typing:
+different path, remember to export the APFEL++ `/lib` and `/bin` folders into the
+`$LD_LIBRARY_PATH` and `$PATH`, respectively. More configuration options can be accessed by typing:
 
 ```Shell
 ccmake .
@@ -63,8 +63,7 @@ ccmake .
 
 ## Documetation
 
-Code documentation generated with Doxygen can be found here:
-https://vbertone.github.io/apfelxx/html/index.html.
+Code documentation generated with Doxygen can be found [here](https://vbertone.github.io/apfelxx/html/index.html).
 
 ## Relevant references
 
