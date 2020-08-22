@@ -8,6 +8,7 @@ Testing/
 apfelxx.i
 cmake_install.cmake
 doc/html/
+doc/xml/
 src/Makefile
 src/cmake_install.cmake
 tests/CTestTestfile.cmake
