@@ -63,13 +63,13 @@ ccmake .
 
 ## Documetation
 
-Code documentation generated with Doxygen can be found [here](https://vbertone.github.io/apfelxx/html/index.html).
+Code documentation generated with [Doxygen](https://www.doxygen.nl/index.html) can be found [here](https://vbertone.github.io/apfelxx/html/index.html).
 
 ## Relevant references
 
 - V. Bertone, *APFEL++: A new PDF evolution library in C++*, [arXiv:1708.00911](https://arxiv.org/pdf/1708.00911.pdf).
 - V. Bertone, S. Carrazza, J. Rojo, *APFEL: A PDF Evolution Library with QED corrections*, [arXiv:1310.1394](http://arxiv.org/abs/arXiv:1310.1394).
 
-## Contact Information
+## Contact information
 
 - Valerio Bertone: valerio.bertone@cern.ch
