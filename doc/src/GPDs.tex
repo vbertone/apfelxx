@@ -447,6 +447,138 @@ observation is that, for $x\rightarrow 1$, the two expressions tend to
 coincide. This may have concurred to cause the oversight of this
 discrepancy in past numerical comparisons.
 
+\subsection{On Ji's evolution equation}
+
+In this section we discuss the evolution equations derived by Ji in
+Ref.~\cite{Ji:1996nm}. This form of the evolution equation is dubbed
+``near-forward'' in Ref.~\cite{Blumlein:1999sc} because it closely
+resembles the DGLAP equation. However, in Ref.~\cite{Ji:1996nm} two
+different equations apply to the regions $x<\xi$ and $x>\xi$. In this
+section, we will unify them showing that the resulting one-loop
+non-singlet off-forward anomalous dimension cannot be written as a
+fully $+$-prescribed distribution.
+
+We start by considering Eqs.~(15)-(17) of Ref.~\cite{Ji:1996nm}. The
+first step is to replace $\xi/2$ with $\xi$ to match our
+notation. Then we consider the subtraction integrals in Eq.~(16)
+keeping in mind that they apply to both regions $x<\xi$ and $x>\xi$,
+\textit{i.e.} over the full range in $\kappa$:\footnote{Note that all
+  divergent integrals considered here are implicitly assumed to be
+  principal-valued integrals such that:
+$$
+\int_{-1}^{1}\frac{dt}{t}=0\,.
+$$
+This allows us to omit the $\pm i\epsilon$ terms.}
+\begin{equation}
+  \int_{\pm \xi}^x\frac{dy}{y-x} = -\int_{\pm \kappa}^1\frac{dz}{1-z}
+  = -\int_{0}^1\frac{dz}{1-z}+\int_{1\mp \kappa}^1\frac{dt}{t}=-\int_{0}^1\frac{dz}{1-z}-\ln(|1\mp\kappa|)\,,
+\end{equation}
+such that the full local term in Eq.~(16) becomes:
+\begin{equation}
+ \frac{3}{2}+ \int_{\xi}^x\frac{dy}{y-x}+\int_{-\xi}^x\frac{dy}{y-x}
+  = \frac{3}{2}-2\int_{0}^1\frac{dz}{1-z}-\ln\left(|1-\kappa^2|\right)\,,
+\end{equation}
+Considering the symmetry for $\xi\leftrightarrow -\xi$ of the
+evolution kernel in Eq.~(17) of Ref.~\cite{Ji:1996nm}, we can write
+Eq.~(15) valid for $\kappa<1$ in a more compact way as:
+\begin{equation}\label{eq:ji1}
+\mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\int_x^1\frac{dy}{y}\mathcal{P}_1^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\,,
+\end{equation}
+with:
+\begin{equation}\label{eq:p1minus0}
+\mathcal{P}_1^{-,(0)}(y,\kappa) = 2C_F\left\{\left[\frac{1 +(1-2\kappa^2)y^2}{(1-y)(1-\kappa^2y^2)}\right]_++\delta(1-y)\left[\frac32+\left(\frac{1}{2\kappa^2}-1\right) \ln\left(|1-\kappa^2|\right)+\frac{1}{2\kappa}\ln\left(\left|\frac{1-\kappa}{1+\kappa}\right|\right)\right]\right\}\,.
+\end{equation}
+The splitting function $\mathcal{P}_1^{-,(0)}$ is such that:
+\begin{equation}
+\int_0^1dy\,\mathcal{P}_1^{-,(0)}(y,\kappa) =2C_F\left[\frac32+\left(\frac{1}{2k^2}-1\right) \ln\left(|1-\kappa^2|\right)+\frac{1}{2\kappa}\ln\left(\left|\frac{1-\kappa}{1+\kappa}\right|\right)\right]\,,
+\end{equation}
+which means that it cannot be written as a fully $+$-prescribed
+distribution, contradicting, for example, Eq.~(\ref{eq:diehlexpr}).
+However, the integral above correctly tends to zero as
+$\kappa\rightarrow 0$ allowing one to recover the usual DGLAP
+splitting function in the forward limit:
+\begin{equation}
+  \lim_{\kappa\rightarrow 0}\mathcal{P}_1^{-,(0)}(y,\kappa) = 2C_F\left[\frac{1+y^2}{1-y}\right]_+\,.
+\end{equation}
+
+It should also be pointed out that also the limit for
+$\kappa\rightarrow 1$ of Eq.~(\ref{eq:p1minus0}) is well-behaved:
+\begin{equation}
+\lim_{\kappa\rightarrow 1}\mathcal{P}_1^{-,(0)}(y,\kappa) = 2C_F\left\{\left[\frac{1}{1-y}\right]_++\delta(1-y)\left[\frac32-\ln(2)\right]\right\}\,.
+\end{equation}
+which is required to have a smooth transition from the DGLAP to the
+ERBL region.
+
+We now consider Eqs.~(18) and~(19) of
+Ref.~\cite{Ji:1996nm} valid for $\kappa>1$. Interestingly, after
+some algebra, we find:
+\begin{equation}\label{eq:ji2}
+\mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)+\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\right]\,,
+\end{equation}
+with $\mathcal{P}_1^{-,(0)}$ given in Eq.~(\ref{eq:p1minus0}) and:
+\begin{equation}\label{eq:p2minus0}
+\mathcal{P}_2^{-,(0)}(y,\kappa) = 2C_F(1-\kappa)\frac{y+(1+2\kappa)y^3}{(1-y^2)(1-\kappa^2y^2)}\,.
+\end{equation}
+It is very interesting to notice that $\mathcal{P}_2^{-,(0)}$ is
+proportional to $(1-\kappa)$ that guarantees the continuity of GPDs at
+$k=1$.
+
+We observe that, within the integration interval, the splitting
+function $\mathcal{P}_2^{-,(0)}$ is singular at $y=1$.\footnote{The
+  singularities at $y=-1$ and $y=\pm1/\kappa$ are all placed below
+  $y=x$ that is the lower integration bound and thus do not cause any
+  problem.} However, as pointed out above, the second integral on the
+r.h.s. of Eq.~(\ref{eq:ji2}) has to be regarded as principal-valued
+therefore it is well-defined. In order to treat this integral
+numerically we consider the specific integral:
+\begin{equation}
+I=\int_x^\infty dy\,\frac{f(y)}{1-y}\,,
+\end{equation}
+where $f$ is a test function well-behaved over the full integration
+range. If one subtracts and adds back the divergence at $y=1$,
+\textit{i.e.}:
+\begin{equation}
+f(1)\int_0^1dy\,g(y)\,,
+\end{equation}
+one can rearrange the integral as follows:
+\begin{equation}\label{eq:plusplusdist}
+I=\int_x^\infty\frac{dy}{1-y}\left[f(y)-f(1)\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+f(1)\ln(1-x)\equiv
+\int_x^\infty dy\left(\frac{1}{1-y}\right)_{++}f(y)\,,
+\end{equation}
+which effectively defines the $++$-distribution. However, it should be
+noticed that this definition is specific to the function $1/(1-y)$. In
+case of a different singular function the function that multiplies
+$\theta(y-1)$ would be different. The advantage of this rearrangement
+is that the integrand is free of the divergence at $y=1$ and is thus
+amenable to numerical integration. Also, the $++$-distribution reduces
+to the standard $+$-distribution when the upper integration bound is
+one rather than infinity. In this sense the $++$-distribution
+generalises the $+$-distribution to ERBL-like integrals. However, it
+is important to notice that, contrary to the $+$-distribution, the
+$++$-distribution does not modify the function it applies to,
+specifically:
+\begin{equation}
+\left(\frac{1}{1-y}\right)_{++} = \frac{1}{1-y}
+\end{equation}
+for all values of $y$, including $y=1$.
+
+In view of the use of Eq.~(\ref{eq:plusplusdist}), it is convenient to
+rewrite Eq.~(\ref{eq:p2minus0}) as follows:
+\begin{equation}\label{eq:p2minus01}
+  \mathcal{P}_2^{-,(0)}(y,\kappa) =
+  2C_F\left[\left(\frac{1}{1-y}\right)_{++}-\frac{1+(1+\kappa)y+(1+\kappa -\kappa^2)y^2}{(1+y)(1-\kappa^2y^2)}\right]\,,
+\end{equation}
+where the second term in the squared bracket in the r.h.s. is regular
+at $y=1$.
+
+Finally, Eqs.~(\ref{eq:ji1}) and Eq.~(\ref{eq:ji2} )can be combined as
+follows:
+\begin{equation}\label{eq:jitot}
+\mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\right]\,,
+\end{equation}
+to obtain a singe DGLAP-like evolution equation valid for all values
+of $\kappa$.
+
 \section{Anomalous dimensions}
 
 A crucial ingredient for an efficient implementation of GPD evolution
