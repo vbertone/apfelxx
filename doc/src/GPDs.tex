@@ -441,8 +441,8 @@ integral, one finds:
 \end{array}
 \end{equation}
 which evidently differs from Eq.~(\ref{eq:Vinnikov}). By inspection,
-one can argue that the difference between can be partially traced back
-to the issue discussed in Sect.~(\ref{sec:endpoint}). An interesting
+one can argue that the difference can be partially traced back to the
+issue discussed in Sect.~(\ref{sec:endpoint}). An interesting
 observation is that, for $x\rightarrow 1$, the two expressions tend to
 coincide. This may have concurred to cause the oversight of this
 discrepancy in past numerical comparisons.
@@ -571,146 +571,157 @@ rewrite Eq.~(\ref{eq:p2minus0}) as follows:
 where the second term in the squared bracket in the r.h.s. is regular
 at $y=1$.
 
-Finally, Eqs.~(\ref{eq:ji1}) and Eq.~(\ref{eq:ji2} )can be combined as
+Finally, Eqs.~(\ref{eq:ji1}) and Eq.~(\ref{eq:ji2}) can be combined as
 follows:
 \begin{equation}\label{eq:jitot}
-\mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\right]\,,
+  \mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\right]\,,
 \end{equation}
 to obtain a singe DGLAP-like evolution equation valid for all values
 of $\kappa$.
 
-\section{Anomalous dimensions}
+% \subsection{Valence sum rule}
 
-A crucial ingredient for an efficient implementation of GPD evolution
-is the availability of the DGLAP-like splitting functions
-$\mathcal{P}_I^{\pm}$, Eq.~(\ref{eq:DGLAPevk}), in a closed form
-amenable to be easily integrated as in Eq.~(\ref{eq:DGLAPforGPDs2}).
+% The valence sum rule for the GPD $f^-$ reads:
+% \begin{equation}\label{eq:sumrule}
+% \int_0^1 dx\,f^-(x,\xi) = F\,,
+% \end{equation}
+% where $F$ is independent of $\mu$ and $\xi$. We now need to check
+% whether Eq.~(\ref{eq:jitot}) fullfils these constraints. In doing this
+% one need to take into account that the variable $\kappa=\xi/x$ depends
+% on $x$.
 
-As a first step, we need to make the flavour structure of the
-evolution kernels explicit. Working in the QCD evolution basis, we
-have:
-\begin{equation}
-\mathcal{P}_I^+=\begin{pmatrix}
-P_{I,qq}&P_{I,qg}\\
-P_{I,gq}&P_{I,gg}
-\end{pmatrix}\,,
-\end{equation}
-and:
-\begin{equation}
-\mathcal{P}_I^-=P_I^{\rm NS}\,,
-\end{equation}
-where $P_I^{\rm NS}$ is the appropriate evolution kernel for the
-following particular non-singlet distribution. Each single function
-$P$ admits the perturbative expansion in powers of $\alpha_s$:
-\begin{equation}
-  P(y,\kappa,\mu)=\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}P^{(n)}(y,\kappa)\,.
-\end{equation}
-At one loop it turns out that all the non-singlet splitting functions
-are equal amongst themselves and to $P_{I,qq}^{(0)}$, \textit{i.e.}
-$P_I^{{\rm NS},(0)}=P_{I,qq}^{(0)}$.\footnote{When going beyond one
-  loop, three different non-singlet structures emerge. In the QCD
-  evolution basis, they are associated to the total-valence and
-  $\pm$-like distributions.}
+% \section{Anomalous dimensions}
 
-Explicit expressions for the one-loop anomalous dimensions can be
-found, for example, in Ref.~\cite{Blumlein:1999sc}. However, these
-expressions require some algebraic manipulation to make them suitable
-for our purpose (se the Mathematica notebook in
-doc/src/codes/GPDKernels.nb). Let us first consider the non-singlet
-unpolarised anomalous dimension at one loop. Using
-Eqs.~(\ref{eq:pmdef}) and~(\ref{eq:DGLAPevk}), one finds:
-\begin{equation}\label{eq:GPDP0}
-  P_I^{{\rm NS},(0)}(\kappa,y) =\left\{
-\begin{array}{ll}
-  I=A: &\displaystyle
-         2C_F\left[\frac{1+(1-2\kappa^2)y^2}{(1-y)(1-\kappa^2 y^2)}\right]_+\,,\\
-  \\
-  I=B: &  \displaystyle
-         2C_F\left[\frac{1}{1-y}+\frac{1-\kappa}{2\kappa}\frac{1}{1+\kappa y}\right]_+\,.
-\end{array}
-\right.
-\end{equation}
-We now verify Eq.~(\ref{eq:continuity}), finding:
-\begin{equation}
-P_A^{{\rm NS},(0)}(1,y) = P_B^{{\rm NS},(0)}(1,y) = 2C_F\left[\frac{1}{1-y}\right]_+\,.
-\end{equation}
-Also Eq.~(\ref{eq:contcondition}) is easily verified:
-\begin{equation}
-P_B^{{\rm NS},(0)}(-1,y) = 0\,.
-\end{equation}
-It is finally interesting to take the DGLAP limit
-$\kappa\rightarrow 0$ of $P_A^{{\rm NS},(0)}$ that gives:
-\begin{equation}
- P_A^{{\rm NS},(0)}(0,y) = 2C_F\left[\frac{1+y^2}{1-y}\right]_+\,,
-\end{equation}
-that coincides with the usual DGLAP splitting function, as it
-should. Since $P_{I,qq}^{(0)}=P_I^{{\rm NS},(0)}$, the same findings
-apply to $P_{I,qq}^{(0)}$.
+% A crucial ingredient for an efficient implementation of GPD evolution
+% is the availability of the DGLAP-like splitting functions
+% $\mathcal{P}_I^{\pm}$, Eq.~(\ref{eq:DGLAPevk}), in a closed form
+% amenable to be easily integrated as in Eq.~(\ref{eq:DGLAPforGPDs2}).
 
-Let us now turn to the remaining splitting functions $P_{I,qg}^{(0)}$,
-$P_{I,gq}^{(0)}$, and $P_{I,gg}^{(0)}$. Their explicit expressions
-read\footnote{The expression for $P_{I,gq}^{(0)}$ derived from
-  Ref.~\cite{Blumlein:1999sc} seems to be wrong because it does not
-  seem to respect the condition in Eq.~(\ref{eq:continuity}). A
-  seemingly correct expression can be found in Ref.~\cite{Ji:1996nm}
-  by performing the replacement $\xi\rightarrow 2\kappa y$ in
-  Eq.~(24).}:
-\begin{equation}\label{eq:GPDP0qg}
-  P_{I,qg}^{(0)}(\kappa,y) =\left\{
-\begin{array}{ll}
-  I=A: & \displaystyle 4 n_f T_R \frac{1 - 2y + (2 - \kappa^2) y^2}{(1 - \kappa^2 y^2)^2}\,,\\
-  \\
-I=B: &  \displaystyle 2n_f T_R \left[\frac{1 + \kappa}{\kappa^2 (1 + \kappa y)}\right] \left[\frac{1 - \kappa}{\kappa y }+\frac{1}{1 + \kappa y}\right]\,,
-\end{array}
-\right.
-\end{equation}
-\begin{equation}\label{eq:GPDP0gq}
-  P_{I,gq}^{(0)}(\kappa,y) =\left\{
-\begin{array}{ll}
-I=A: &  \displaystyle
-2 C_F \left[\frac{2 - 2y + (1 - \kappa^2) y^2}{y (1 - \kappa^2 y^2)}\right]\,,\\
-  \\
-I=B: &\displaystyle  C_F \left[\frac{2(1+\kappa) - (1 - \kappa^2) y}{\kappa y (1 + \kappa y)}\right]\,,
-\end{array}
-\right.
-\end{equation}
-\begin{equation}\label{eq:GPDP0gg}
-  P_{I,gg}^{(0)}(\kappa,y) =\left\{
-\begin{array}{ll}
-I=A: &  \displaystyle
-4 C_A\left[ \frac{-2 + y (1 - y + \kappa^2 (1 + y))}{(1 - \kappa^2 y^2)^2}+\frac{1}{y}+\frac1{\left(1-y\right)_+}\right]+\delta(1-x)\frac{11C_A-4n_fT_R}{3}\,,
-  \\
-I=B: &\displaystyle  C_A\left[\frac{-1 + 3 \kappa^2 - 
-   \kappa (2 + (1 - \kappa)^2 \kappa) y}{\kappa^3 y (1 + \kappa y)^2}+\frac{2}{y}+\frac{2}{\left(1-y\right)_+}\right]+\delta(1-x)\frac{11C_A-4n_fT_R}{3}
-\,.
-\end{array}
-\right.
-\end{equation}
-The continuity condition at $\kappa=1$ is obeyed, producing:
-\begin{equation}
-  P_{A,qg}^{(0)}(1,y) = P_{B,qg}^{(0)}(1,y)= \frac{4 n_f T_R}{(1 + y)^2}\,,
-\end{equation}
-\begin{equation}
-  P_{A,gq}^{(0)}(1,y) =P_{B,gq}^{(0)}(1,y)=\frac{4 C_F}{y (1 + y)}\,,
-\end{equation}
-\begin{equation}
-  P_{A,gg}^{(0)}(1,y) =P_{B,gg}^{(0)}(1,y) =4 C_A\left[\frac{1+y^2}{y(1 + y)^2 \left(1-y\right)_+}\right]+\delta(1-y)\frac{11C_A-4n_fT_R}{3}\,,
-\end{equation}
-as well as the condition in Eq.~(\ref{eq:contcondition}) (NOT TRUE FOR
-$P_{gg}$. TO BE CHECKED!). Finally, their forward limit
-($\kappa\rightarrow 0$) is:
-\begin{equation}
-\begin{array}{l}
-  \displaystyle P_{A,qg}^{(0)}(0,y) = 4 n_f T_R \left[y^2+(1 - y)^2\right] \\
-\\
-  \displaystyle
-P_{A,gq}^{(0)}(0,y) =2 C_F \left[\frac{1+(1 - y)^2}{y}\right]\,,\\
-\\
-  \displaystyle
-  P_{A,gg}^{(0)}(0,y) =4 C_A\left[ -2 + y (1 - y)+\frac{1}{y}+\frac1{\left(1-y\right)_+}\right]+\delta(1-x)\frac{11C_A-4n_fT_R}{3}\,,
-\end{array}
-\end{equation}
-which correctly reproduces the one-loop DGLAP splitting functions.
+% As a first step, we need to make the flavour structure of the
+% evolution kernels explicit. Working in the QCD evolution basis, we
+% have:
+% \begin{equation}
+% \mathcal{P}_I^+=\begin{pmatrix}
+% P_{I,qq}&P_{I,qg}\\
+% P_{I,gq}&P_{I,gg}
+% \end{pmatrix}\,,
+% \end{equation}
+% and:
+% \begin{equation}
+% \mathcal{P}_I^-=P_I^{\rm NS}\,,
+% \end{equation}
+% where $P_I^{\rm NS}$ is the appropriate evolution kernel for the
+% following particular non-singlet distribution. Each single function
+% $P$ admits the perturbative expansion in powers of $\alpha_s$:
+% \begin{equation}
+%   P(y,\kappa,\mu)=\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}P^{(n)}(y,\kappa)\,.
+% \end{equation}
+% At one loop it turns out that all the non-singlet splitting functions
+% are equal amongst themselves and to $P_{I,qq}^{(0)}$, \textit{i.e.}
+% $P_I^{{\rm NS},(0)}=P_{I,qq}^{(0)}$.\footnote{When going beyond one
+%   loop, three different non-singlet structures emerge. In the QCD
+%   evolution basis, they are associated to the total-valence and
+%   $\pm$-like distributions.}
+
+% Explicit expressions for the one-loop anomalous dimensions can be
+% found, for example, in Ref.~\cite{Blumlein:1999sc}. However, these
+% expressions require some algebraic manipulation to make them suitable
+% for our purpose (se the Mathematica notebook in
+% doc/src/codes/GPDKernels.nb). Let us first consider the non-singlet
+% unpolarised anomalous dimension at one loop. Using
+% Eqs.~(\ref{eq:pmdef}) and~(\ref{eq:DGLAPevk}), one finds:
+% \begin{equation}\label{eq:GPDP0}
+%   P_I^{{\rm NS},(0)}(\kappa,y) =\left\{
+% \begin{array}{ll}
+%   I=A: &\displaystyle
+%          2C_F\left[\frac{1+(1-2\kappa^2)y^2}{(1-y)(1-\kappa^2 y^2)}\right]_+\,,\\
+%   \\
+%   I=B: &  \displaystyle
+%          2C_F\left[\frac{1}{1-y}+\frac{1-\kappa}{2\kappa}\frac{1}{1+\kappa y}\right]_+\,.
+% \end{array}
+% \right.
+% \end{equation}
+% We now verify Eq.~(\ref{eq:continuity}), finding:
+% \begin{equation}
+% P_A^{{\rm NS},(0)}(1,y) = P_B^{{\rm NS},(0)}(1,y) = 2C_F\left[\frac{1}{1-y}\right]_+\,.
+% \end{equation}
+% Also Eq.~(\ref{eq:contcondition}) is easily verified:
+% \begin{equation}
+% P_B^{{\rm NS},(0)}(-1,y) = 0\,.
+% \end{equation}
+% It is finally interesting to take the DGLAP limit
+% $\kappa\rightarrow 0$ of $P_A^{{\rm NS},(0)}$ that gives:
+% \begin{equation}
+%  P_A^{{\rm NS},(0)}(0,y) = 2C_F\left[\frac{1+y^2}{1-y}\right]_+\,,
+% \end{equation}
+% that coincides with the usual DGLAP splitting function, as it
+% should. Since $P_{I,qq}^{(0)}=P_I^{{\rm NS},(0)}$, the same findings
+% apply to $P_{I,qq}^{(0)}$.
+
+% Let us now turn to the remaining splitting functions $P_{I,qg}^{(0)}$,
+% $P_{I,gq}^{(0)}$, and $P_{I,gg}^{(0)}$. Their explicit expressions
+% read\footnote{The expression for $P_{I,gq}^{(0)}$ derived from
+%   Ref.~\cite{Blumlein:1999sc} seems to be wrong because it does not
+%   seem to respect the condition in Eq.~(\ref{eq:continuity}). A
+%   seemingly correct expression can be found in Ref.~\cite{Ji:1996nm}
+%   by performing the replacement $\xi\rightarrow 2\kappa y$ in
+%   Eq.~(24).}:
+% \begin{equation}\label{eq:GPDP0qg}
+%   P_{I,qg}^{(0)}(\kappa,y) =\left\{
+% \begin{array}{ll}
+%   I=A: & \displaystyle 4 n_f T_R \frac{1 - 2y + (2 - \kappa^2) y^2}{(1 - \kappa^2 y^2)^2}\,,\\
+%   \\
+% I=B: &  \displaystyle 2n_f T_R \left[\frac{1 + \kappa}{\kappa^2 (1 + \kappa y)}\right] \left[\frac{1 - \kappa}{\kappa y }+\frac{1}{1 + \kappa y}\right]\,,
+% \end{array}
+% \right.
+% \end{equation}
+% \begin{equation}\label{eq:GPDP0gq}
+%   P_{I,gq}^{(0)}(\kappa,y) =\left\{
+% \begin{array}{ll}
+% I=A: &  \displaystyle
+% 2 C_F \left[\frac{2 - 2y + (1 - \kappa^2) y^2}{y (1 - \kappa^2 y^2)}\right]\,,\\
+%   \\
+% I=B: &\displaystyle  C_F \left[\frac{2(1+\kappa) - (1 - \kappa^2) y}{\kappa y (1 + \kappa y)}\right]\,,
+% \end{array}
+% \right.
+% \end{equation}
+% \begin{equation}\label{eq:GPDP0gg}
+%   P_{I,gg}^{(0)}(\kappa,y) =\left\{
+% \begin{array}{ll}
+% I=A: &  \displaystyle
+% 4 C_A\left[ \frac{-2 + y (1 - y + \kappa^2 (1 + y))}{(1 - \kappa^2 y^2)^2}+\frac{1}{y}+\frac1{\left(1-y\right)_+}\right]+\delta(1-x)\frac{11C_A-4n_fT_R}{3}\,,
+%   \\
+% I=B: &\displaystyle  C_A\left[\frac{-1 + 3 \kappa^2 - 
+%    \kappa (2 + (1 - \kappa)^2 \kappa) y}{\kappa^3 y (1 + \kappa y)^2}+\frac{2}{y}+\frac{2}{\left(1-y\right)_+}\right]+\delta(1-x)\frac{11C_A-4n_fT_R}{3}
+% \,.
+% \end{array}
+% \right.
+% \end{equation}
+% The continuity condition at $\kappa=1$ is obeyed, producing:
+% \begin{equation}
+%   P_{A,qg}^{(0)}(1,y) = P_{B,qg}^{(0)}(1,y)= \frac{4 n_f T_R}{(1 + y)^2}\,,
+% \end{equation}
+% \begin{equation}
+%   P_{A,gq}^{(0)}(1,y) =P_{B,gq}^{(0)}(1,y)=\frac{4 C_F}{y (1 + y)}\,,
+% \end{equation}
+% \begin{equation}
+%   P_{A,gg}^{(0)}(1,y) =P_{B,gg}^{(0)}(1,y) =4 C_A\left[\frac{1+y^2}{y(1 + y)^2 \left(1-y\right)_+}\right]+\delta(1-y)\frac{11C_A-4n_fT_R}{3}\,,
+% \end{equation}
+% as well as the condition in Eq.~(\ref{eq:contcondition}) (NOT TRUE FOR
+% $P_{gg}$. TO BE CHECKED!). Finally, their forward limit
+% ($\kappa\rightarrow 0$) is:
+% \begin{equation}
+% \begin{array}{l}
+%   \displaystyle P_{A,qg}^{(0)}(0,y) = 4 n_f T_R \left[y^2+(1 - y)^2\right] \\
+% \\
+%   \displaystyle
+% P_{A,gq}^{(0)}(0,y) =2 C_F \left[\frac{1+(1 - y)^2}{y}\right]\,,\\
+% \\
+%   \displaystyle
+%   P_{A,gg}^{(0)}(0,y) =4 C_A\left[ -2 + y (1 - y)+\frac{1}{y}+\frac1{\left(1-y\right)_+}\right]+\delta(1-x)\frac{11C_A-4n_fT_R}{3}\,,
+% \end{array}
+% \end{equation}
+% which correctly reproduces the one-loop DGLAP splitting functions.
 
 
 
