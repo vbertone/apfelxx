@@ -51,6 +51,11 @@ namespace apfel
     bool ExtGrids() const { return _ExtGrids; }
 
     /**
+     * @return The vector of subgrids
+     */
+    std::vector<SubGrid> const& GetSubGrids() const { return _GlobalGrid; }
+
+    /**
      * @return The ig-th SubGrid
      */
     SubGrid const& GetSubGrid(int ig) const { return _GlobalGrid[ig]; }
