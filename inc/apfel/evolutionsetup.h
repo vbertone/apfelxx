@@ -88,7 +88,7 @@ namespace apfel
     MassRenScheme               MassRenScheme;       //!< Renormalization scheme for the heavy-quark masses (POLE, MSBAR)
     double                      TauMass;             //!< Mass of the &tau; lepton
     double                      GaussAccuracy;       //!< Accuracy of the dguass integration
-    std::function<std::map<int, double>(double const&, double const&)> InSet; //!< Input set of distributions at the initial scale
+    std::vector<std::function<std::map<int, double>(double const&, double const&)>> InSet; //!< Input set of distributions at the initial scale
     ///@}
 
     /**
@@ -116,7 +116,7 @@ namespace apfel
       MassRenScheme(POLE),
       TauMass(1.777),
       GaussAccuracy(1e-5),
-      InSet(LHToyPDFs)
+      InSet({LHToyPDFs})
     {
     }
     // *INDENT-ON*

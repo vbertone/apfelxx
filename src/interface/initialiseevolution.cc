@@ -42,7 +42,8 @@ namespace apfel
       WriteGridInfo();
 
     // Do the tabulation.
-    TabulateEvolution(setup.InSet);
+    for (auto const& s: setup.InSet)
+      TabulateEvolution(s);
   }
 
   //_________________________________________________________________________________
