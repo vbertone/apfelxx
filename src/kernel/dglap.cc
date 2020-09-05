@@ -28,7 +28,7 @@ namespace apfel
   Set<T> Dglap<T>::MatchObject(bool const& Up, int const& nf, Set<T> const& f) const
   {
     // Get matching conditions.
-    Set<Operator> MC = _MatchingConditions(Up, nf);
+    Set<Operator> MC = _MatchingConditions(Up, (Up ? nf : nf - 1));
 
     // Convolute matching conditions with a set of objects having the
     // same convolution map of the matching conditions but containing

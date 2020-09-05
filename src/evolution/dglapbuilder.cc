@@ -811,21 +811,21 @@ namespace apfel
     else if (PerturbativeOrder == 1)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf));
+        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * mc.at(1);
       };
     else if (PerturbativeOrder == 2)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf));
+        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
     else if (PerturbativeOrder == 3)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf));
+        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
