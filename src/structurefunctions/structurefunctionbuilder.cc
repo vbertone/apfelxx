@@ -29,13 +29,13 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C2LO;
+    std::map<int, Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C2NLO;
+    std::map<int, Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -43,14 +43,14 @@ namespace apfel
     C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C2NNLO;
+    std::map<int, std::map<int, Operator>> C2NNLO;
     const Operator O22ps{g, C22ps{}, IntEps};
     const Operator O22g {g, C22g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O22nsp{g, C22nsp{nf}, IntEps};
         const Operator O22t = O22nsp + 6 * O22ps;
-        std::map<int,Operator> C2NNLOnf;
+        std::map<int, Operator> C2NNLOnf;
         C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
         C2NNLOnf.insert({DISNCBasis::CS,  O22t});
         C2NNLOnf.insert({DISNCBasis::CG,  O22g});
@@ -102,13 +102,13 @@ namespace apfel
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    std::map<int,Operator> CLLO;
+    std::map<int, Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> CLNLO;
+    std::map<int, Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -116,14 +116,14 @@ namespace apfel
     CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO (for nf from 1 to 6)
-    std::map<int,std::map<int,Operator>> CLNNLO;
+    std::map<int, std::map<int, Operator>> CLNNLO;
     const Operator OL2ps{g, CL2ps{}, IntEps};
     const Operator OL2g {g, CL2g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
         const Operator OL2t = OL2nsp + 6 * OL2ps;
-        std::map<int,Operator> CLNNLOnf;
+        std::map<int, Operator> CLNNLOnf;
         CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
         CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
@@ -176,25 +176,25 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C3LO;
+    std::map<int, Operator> C3LO;
     C3LO.insert({DISNCBasis::CNS, Id});
     C3LO.insert({DISNCBasis::CS,  Id});
     C3LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C3NLO;
+    std::map<int, Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISNCBasis::CNS, O31ns});
     C3NLO.insert({DISNCBasis::CS,  O31ns});
     C3NLO.insert({DISNCBasis::CG,  Zero});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C3NNLO;
+    std::map<int, std::map<int, Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O32nsm{g, C32nsm{nf}, IntEps};
         const Operator O32t = O32nsm;
-        std::map<int,Operator> C3NNLOnf;
+        std::map<int, Operator> C3NNLOnf;
         C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
         C3NNLOnf.insert({DISNCBasis::CS,  O32t});
         C3NNLOnf.insert({DISNCBasis::CG,  Zero});
@@ -247,13 +247,13 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C2LO;
+    std::map<int, Operator> C2LO;
     C2LO.insert({DISCCBasis::CNS, Id});
     C2LO.insert({DISCCBasis::CS,  Id});
     C2LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C2NLO;
+    std::map<int, Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISCCBasis::CNS, O21ns});
@@ -261,14 +261,14 @@ namespace apfel
     C2NLO.insert({DISCCBasis::CG,  O21g});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C2NNLO;
+    std::map<int, std::map<int, Operator>> C2NNLO;
     const Operator O22ps{g, C22ps{}, IntEps};
     const Operator O22g {g, C22g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O22nsp{g, C22nsp{nf}, IntEps};
         const Operator O22t = O22nsp + 6 * O22ps;
-        std::map<int,Operator> C2NNLOnf;
+        std::map<int, Operator> C2NNLOnf;
         C2NNLOnf.insert({DISCCBasis::CNS, O22nsp});
         C2NNLOnf.insert({DISCCBasis::CS,  O22t});
         C2NNLOnf.insert({DISCCBasis::CG,  O22g});
@@ -326,24 +326,24 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C2LO;
+    std::map<int, Operator> C2LO;
     C2LO.insert({DISCCBasis::CNS, Id});
     C2LO.insert({DISCCBasis::CS,  Zero});
     C2LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C2NLO;
+    std::map<int, Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     C2NLO.insert({DISCCBasis::CNS, O21ns});
     C2NLO.insert({DISCCBasis::CS,  Zero});
     C2NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C2NNLO;
+    std::map<int, std::map<int, Operator>> C2NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O22nsm{g, C22nsm{nf}, IntEps};
-        std::map<int,Operator> C2NNLOnf;
+        std::map<int, Operator> C2NNLOnf;
         C2NNLOnf.insert({DISCCBasis::CNS, O22nsm});
         C2NNLOnf.insert({DISCCBasis::CS,  Zero});
         C2NNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -400,13 +400,13 @@ namespace apfel
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    std::map<int,Operator> CLLO;
+    std::map<int, Operator> CLLO;
     CLLO.insert({DISCCBasis::CNS, Zero});
     CLLO.insert({DISCCBasis::CS,  Zero});
     CLLO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> CLNLO;
+    std::map<int, Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISCCBasis::CNS, OL1ns});
@@ -414,14 +414,14 @@ namespace apfel
     CLNLO.insert({DISCCBasis::CG,  OL1g});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> CLNNLO;
+    std::map<int, std::map<int, Operator>> CLNNLO;
     const Operator OL2ps{g, CL2ps{}, IntEps};
     const Operator OL2g {g, CL2g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
         const Operator OL2t = OL2nsp + 6 * OL2ps;
-        std::map<int,Operator> CLNNLOnf;
+        std::map<int, Operator> CLNNLOnf;
         CLNNLOnf.insert({DISCCBasis::CNS, OL2nsp});
         CLNNLOnf.insert({DISCCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISCCBasis::CG,  OL2g});
@@ -478,24 +478,24 @@ namespace apfel
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    std::map<int,Operator> CLLO;
+    std::map<int, Operator> CLLO;
     CLLO.insert({DISCCBasis::CNS, Zero});
     CLLO.insert({DISCCBasis::CS,  Zero});
     CLLO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> CLNLO;
+    std::map<int, Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     CLNLO.insert({DISCCBasis::CNS, OL1ns});
     CLNLO.insert({DISCCBasis::CS,  Zero});
     CLNLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> CLNNLO;
+    std::map<int, std::map<int, Operator>> CLNNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator OL2nsm{g, CL2nsm{nf}, IntEps};
-        std::map<int,Operator> CLNNLOnf;
+        std::map<int, Operator> CLNNLOnf;
         CLNNLOnf.insert({DISCCBasis::CNS, OL2nsm});
         CLNNLOnf.insert({DISCCBasis::CS,  Zero});
         CLNNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -553,25 +553,25 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C3LO;
+    std::map<int, Operator> C3LO;
     C3LO.insert({DISCCBasis::CNS, Id});
     C3LO.insert({DISCCBasis::CS,  Id});
     C3LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C3NLO;
+    std::map<int, Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISCCBasis::CNS, O31ns});
     C3NLO.insert({DISCCBasis::CS,  O31ns});
     C3NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C3NNLO;
+    std::map<int, std::map<int, Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O32nsp{g, C32nsp{nf}, IntEps};
         const Operator O32t = O32nsp;
-        std::map<int,Operator> C3NNLOnf;
+        std::map<int, Operator> C3NNLOnf;
         C3NNLOnf.insert({DISCCBasis::CNS, O32nsp});
         C3NNLOnf.insert({DISCCBasis::CS,  O32t});
         C3NNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -629,24 +629,24 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C3LO;
+    std::map<int, Operator> C3LO;
     C3LO.insert({DISCCBasis::CNS, Id});
     C3LO.insert({DISCCBasis::CS,  Id});
     C3LO.insert({DISCCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C3NLO;
+    std::map<int, Operator> C3NLO;
     const Operator O31ns{g, C31ns{}, IntEps};
     C3NLO.insert({DISCCBasis::CNS, O31ns});
     C3NLO.insert({DISCCBasis::CS,  O31ns});
     C3NLO.insert({DISCCBasis::CG,  Zero});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C3NNLO;
+    std::map<int, std::map<int, Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O32nsm{g, C32nsm{nf}, IntEps};
-        std::map<int,Operator> C3NNLOnf;
+        std::map<int, Operator> C3NNLOnf;
         C3NNLOnf.insert({DISCCBasis::CNS, O32nsm});
         C3NNLOnf.insert({DISCCBasis::CS,  O32nsm});
         C3NNLOnf.insert({DISCCBasis::CG,  Zero});
@@ -717,13 +717,13 @@ namespace apfel
 
     // Zero Mass coefficient functions
     // LO
-    std::map<int,Operator> C2LO;
+    std::map<int, Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C2NLO;
+    std::map<int, Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -738,7 +738,7 @@ namespace apfel
 
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    std::map<int,Operator> Not;
+    std::map<int, Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -800,14 +800,14 @@ namespace apfel
           FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
           // Now insert NLO
-          std::map<int,Operator> NLO;
+          std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
           NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
           FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
           // Now insert NNLO
-          std::map<int,Operator> NNLO;
+          std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
           NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
           NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
@@ -821,7 +821,7 @@ namespace apfel
 
       // Now fill in the light components. To be updated in the
       // loop over the heavy component.
-      std::map<int,Operator> C2NNLO;
+      std::map<int, Operator> C2NNLO;
       C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
       C2NNLO.insert({DISNCBasis::CS,  O22t});
       C2NNLO.insert({DISNCBasis::CG,  O22g});
@@ -873,13 +873,13 @@ namespace apfel
 
     // Zero Mass coefficient functions
     // LO
-    std::map<int,Operator> CLLO;
+    std::map<int, Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> CLNLO;
+    std::map<int, Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -894,7 +894,7 @@ namespace apfel
 
     // Massive coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    std::map<int,Operator> Not;
+    std::map<int, Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -956,14 +956,14 @@ namespace apfel
           FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
           // Now insert NLO
-          std::map<int,Operator> NLO;
+          std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
           NLO.insert({DISNCBasis::CG,  TabOL1g.Evaluate(xi)});
           FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
           // Now insert NNLO
-          std::map<int,Operator> NNLO;
+          std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
           NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
           NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
@@ -977,7 +977,7 @@ namespace apfel
 
       // Now fill in the light components. To be updated in the
       // loop over the heavy component.
-      std::map<int,Operator> CLNNLO;
+      std::map<int, Operator> CLNNLO;
       CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
       CLNNLO.insert({DISNCBasis::CS,  OL2t});
       CLNNLO.insert({DISNCBasis::CG,  OL2g});
@@ -1030,13 +1030,13 @@ namespace apfel
 
     // Zero Mass coefficient functions
     // LO
-    std::map<int,Operator> C2LO;
+    std::map<int, Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C2NLO;
+    std::map<int, Operator> C2NLO;
     const Operator O21ns{g, C21ns{}, IntEps};
     const Operator O21g {g, C21g{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -1051,7 +1051,7 @@ namespace apfel
 
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    std::map<int,Operator> Not;
+    std::map<int, Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -1131,14 +1131,14 @@ namespace apfel
           FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
           // Now insert NLO
-          std::map<int,Operator> NLO;
+          std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
           NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
           FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
           // Now insert NNLO
-          std::map<int,Operator> NNLO;
+          std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
           NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
           NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
@@ -1152,7 +1152,7 @@ namespace apfel
 
       // Now fill in the light components. To be updated in the
       // loop over the heavy component.
-      std::map<int,Operator> C2NNLO;
+      std::map<int, Operator> C2NNLO;
       C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
       C2NNLO.insert({DISNCBasis::CS,  O22t});
       C2NNLO.insert({DISNCBasis::CG,  O22g});
@@ -1204,13 +1204,13 @@ namespace apfel
 
     // Zero Mass coefficient functions
     // LO
-    std::map<int,Operator> CLLO;
+    std::map<int, Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> CLNLO;
+    std::map<int, Operator> CLNLO;
     const Operator OL1ns{g, CL1ns{}, IntEps};
     const Operator OL1g {g, CL1g{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -1225,7 +1225,7 @@ namespace apfel
 
     // Massive zero coefficient functions
     // Null set of operator needed for the LO coefficient functions.
-    std::map<int,Operator> Not;
+    std::map<int, Operator> Not;
     Not.insert({DISNCBasis::CNS, Zero});
     Not.insert({DISNCBasis::CS,  Zero});
     Not.insert({DISNCBasis::CG,  Zero});
@@ -1289,14 +1289,14 @@ namespace apfel
           FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
 
           // Now insert NLO
-          std::map<int,Operator> NLO;
+          std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
           NLO.insert({DISNCBasis::CG,  Om0L1g});
           FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
 
           // Now insert NNLO
-          std::map<int,Operator> NNLO;
+          std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
           NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
           NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
@@ -1310,7 +1310,7 @@ namespace apfel
 
       // Now fill in the light components. To be updated in the
       // loop over the heavy component.
-      std::map<int,Operator> CLNNLO;
+      std::map<int, Operator> CLNNLO;
       CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
       CLNNLO.insert({DISNCBasis::CS,  OL2t});
       CLNNLO.insert({DISNCBasis::CG,  OL2g});
@@ -1350,13 +1350,13 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C2LO;
+    std::map<int, Operator> C2LO;
     C2LO.insert({DISNCBasis::CNS, Id});
     C2LO.insert({DISNCBasis::CS,  Id});
     C2LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C2NLO;
+    std::map<int, Operator> C2NLO;
     const Operator O21ns{g, C21Tns{}, IntEps};
     const Operator O21g {g, C21Tg{},  IntEps};
     C2NLO.insert({DISNCBasis::CNS, O21ns});
@@ -1364,14 +1364,14 @@ namespace apfel
     C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C2NNLO;
+    std::map<int, std::map<int, Operator>> C2NNLO;
     const Operator O22ps{g, C22Tps{}, IntEps};
     const Operator O22g {g, C22Tg{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O22nsp{g, C22Tnsp{nf}, IntEps};
         const Operator O22t = O22nsp + 6 * O22ps;
-        std::map<int,Operator> C2NNLOnf;
+        std::map<int, Operator> C2NNLOnf;
         C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
         C2NNLOnf.insert({DISNCBasis::CS,  O22t});
         C2NNLOnf.insert({DISNCBasis::CG,  O22g});
@@ -1423,13 +1423,13 @@ namespace apfel
     const Operator Zero{g, Null{}, IntEps};
 
     // LO
-    std::map<int,Operator> CLLO;
+    std::map<int, Operator> CLLO;
     CLLO.insert({DISNCBasis::CNS, Zero});
     CLLO.insert({DISNCBasis::CS,  Zero});
     CLLO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> CLNLO;
+    std::map<int, Operator> CLNLO;
     const Operator OL1ns{g, CL1Tns{}, IntEps};
     const Operator OL1g {g, CL1Tg{},  IntEps};
     CLNLO.insert({DISNCBasis::CNS, OL1ns});
@@ -1437,14 +1437,14 @@ namespace apfel
     CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO (for nf from 1 to 6)
-    std::map<int,std::map<int,Operator>> CLNNLO;
+    std::map<int, std::map<int, Operator>> CLNNLO;
     const Operator OL2ps{g, CL2Tps{}, IntEps};
     const Operator OL2g {g, CL2Tg{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator OL2nsp{g, CL2Tnsp{nf}, IntEps};
         const Operator OL2t = OL2nsp + 6 * OL2ps;
-        std::map<int,Operator> CLNNLOnf;
+        std::map<int, Operator> CLNNLOnf;
         CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
         CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
@@ -1498,23 +1498,23 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // LO
-    std::map<int,Operator> C3LO;
+    std::map<int, Operator> C3LO;
     C3LO.insert({DISNCBasis::CNS, Id});
     C3LO.insert({DISNCBasis::CS,  Id});
     C3LO.insert({DISNCBasis::CG,  Zero});
 
     // NLO
-    std::map<int,Operator> C3NLO;
+    std::map<int, Operator> C3NLO;
     const Operator O31ns{g, C31Tns{}, IntEps};
     C3NLO.insert({DISNCBasis::CNS, O31ns});
     C3NLO.insert({DISNCBasis::CS,  O31ns});
     C3NLO.insert({DISNCBasis::CG,  Zero});
 
     // NNLO
-    std::map<int,std::map<int,Operator>> C3NNLO;
+    std::map<int, std::map<int, Operator>> C3NNLO;
     for (int nf = 1; nf <= 6; nf++)
       {
-        std::map<int,Operator> C3NNLOnf;
+        std::map<int, Operator> C3NNLOnf;
         C3NNLOnf.insert({DISNCBasis::CNS, Zero});
         C3NNLOnf.insert({DISNCBasis::CS,  Zero});
         C3NNLOnf.insert({DISNCBasis::CG,  Zero});
@@ -1522,12 +1522,12 @@ namespace apfel
       }
     /*
         // NNLO
-        std::map<int,std::map<int,Operator>> C3NNLO;
+        std::map<int, std::map<int, Operator>> C3NNLO;
         for (int nf = 1; nf <= 6; nf++)
           {
             const Operator O32nsm{g, C32Tnsm{nf}, IntEps};
             const Operator O32t = O32nsm;
-            std::map<int,Operator> C3NNLOnf;
+            std::map<int, Operator> C3NNLOnf;
             C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
             C3NNLOnf.insert({DISNCBasis::CS,  O32t});
             C3NNLOnf.insert({DISNCBasis::CG,  Zero});
@@ -1568,11 +1568,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int,Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-                                                     std::function<std::map<int,double>(double const&, double const&)>                  const& InDistFunc,
-                                                     int                                                                                const& PerturbativeOrder,
-                                                     std::function<double(double const&)>                                               const& Alphas,
-                                                     std::function<std::vector<double>(double const&)>                                  const& Couplings)
+  std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                 const& InDistFunc,
+                                                      int                                                                                const& PerturbativeOrder,
+                                                      std::function<double(double const&)>                                               const& Alphas,
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings)
   {
     // Call FObj at energy 1 to use it for those quantities that do
     // not depend on Q.
@@ -1617,15 +1617,15 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int,Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
-                                                     std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
-                                                     int                                                                                const& PerturbativeOrder,
-                                                     std::function<double(double const&)>                                               const& Alphas,
-                                                     std::function<std::vector<double>(double const&)>                                  const& Couplings)
+  std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                      std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
+                                                      int                                                                                const& PerturbativeOrder,
+                                                      std::function<double(double const&)>                                               const& Alphas,
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings)
   {
-    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> std::map<int,double>
+    const auto InDistFuncMap = [=] (double const& x, double const& Q) -> std::map<int, double>
     {
-      std::map<int,double> DistMap;
+      std::map<int, double> DistMap;
       for (int i = 0; i <= 12; i++)
         DistMap.insert({i,InDistFunc(i, x, Q)});
       return DistMap;
@@ -1634,11 +1634,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  Distribution BuildStructureFunctions(StructureFunctionObjects   const& FObjQ,
-                                       std::map<int,Distribution> const& InDistFuncQ,
-                                       int                        const& PerturbativeOrder,
-                                       double                     const& AlphasQ,
-                                       int                        const& k)
+  Distribution BuildStructureFunctions(StructureFunctionObjects    const& FObjQ,
+                                       std::map<int, Distribution> const& InDistFuncQ,
+                                       int                         const& PerturbativeOrder,
+                                       double                      const& AlphasQ,
+                                       int                         const& k)
   {
     const double cp = AlphasQ / FourPi;
     Set<Operator> CoefFuncs = FObjQ.C0.at(k);
@@ -1652,10 +1652,10 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int,Distribution> BuildStructureFunctions(StructureFunctionObjects   const& FObjQ,
-                                                     std::map<int,Distribution> const& InDistFuncQ,
-                                                     int                        const& PerturbativeOrder,
-                                                     double                     const& AlphasQ)
+  std::map<int, Distribution> BuildStructureFunctions(StructureFunctionObjects    const& FObjQ,
+                                                      std::map<int, Distribution> const& InDistFuncQ,
+                                                      int                         const& PerturbativeOrder,
+                                                      double                      const& AlphasQ)
   {
     // Cycle over the key of the convolution basis map.
     std::map<int, Distribution> F;
