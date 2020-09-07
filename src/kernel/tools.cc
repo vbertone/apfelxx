@@ -78,7 +78,7 @@ namespace apfel
     else
       Charges[Comp-1] = apfel::QCh2[Comp-1]
                         - 2 * apfel::QCh[Comp-1] * Vq[Comp-1] * Ve * PZ
-                         + ( Ve * Ve + Ae * Ae ) * ( Vq[Comp-1] * Vq[Comp-1] + Aq[Comp-1] * Aq[Comp-1] ) * PZ2;
+                        + ( Ve * Ve + Ae * Ae ) * ( Vq[Comp-1] * Vq[Comp-1] + Aq[Comp-1] * Aq[Comp-1] ) * PZ2;
 
     return Charges;
   }

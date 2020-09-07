@@ -1647,7 +1647,7 @@ namespace apfel
     if (PerturbativeOrder > 1)
       CoefFuncs += ( cp * cp ) * FObjQ.C2.at(k);
 
-    // Push "Distribution".
+    // Convolute distributions, combine them and return.
     return (CoefFuncs * Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQ}).Combine();
   }
 
@@ -1662,6 +1662,7 @@ namespace apfel
     for (auto it = FObjQ.ConvBasis.begin(); it != FObjQ.ConvBasis.end(); ++it)
       // Push "Distribution".
       F.insert({it->first, BuildStructureFunctions(FObjQ, InDistFuncQ, PerturbativeOrder, AlphasQ, it->first)});
+
     return F;
   }
 }
