@@ -17,7 +17,7 @@ namespace apfel
    */
   ///@{
   /// Quark enumerator
-  enum QuarkFlavour: int {DOWN, UP, STRANGE, CHARM, BOTTOM, TOP, TOTAL};
+  enum QuarkFlavour: int {TOTAL, DOWN, UP, STRANGE, CHARM, BOTTOM, TOP};
 
   /**
    * @brief Return the number of active flavours at the scale Q given
