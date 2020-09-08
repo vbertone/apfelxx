@@ -206,7 +206,8 @@ namespace apfel
                                  double              const& AlphaQCD,
                                  double              const& AlphaQED,
                                  std::vector<double> const& Thresholds,
-                                 QuarkFlavour        const& Comp)
+                                 QuarkFlavour        const& Comp,
+                                 bool                const& NoCharges)
   {
     // Get time-like electroweak charges
     const std::vector<double> Bq = apfel::ElectroWeakCharges(Q, true, Comp);
@@ -215,7 +216,7 @@ namespace apfel
     double nf = NF(Q, Thresholds);
 
     // Sum the charges
-    const double sumq = std::accumulate(Bq.begin(), Bq.begin() + nf, 0.);
+    const double sumq = (NoCharges ? 1 : std::accumulate(Bq.begin(), Bq.begin() + nf, 0.));
 
     // Total born coss setion
     double sigma0tot = FourPi * pow(AlphaQED, 2) * NC * sumq / 3 / Q / Q;

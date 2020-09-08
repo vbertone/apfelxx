@@ -99,6 +99,7 @@ namespace apfel
    * @param AlphaQED: value of the electromagnetic coupling at Q
    * @param Thresholds: heavy-quark thresholds
    * @param Comp: component of the cross section, e.g. charm, bottom, etc. (default = TOTAL)
+   * @param NoCharges: whether to exclude the sum over the charge of the active flavours (default = false)
    * @return the total cross section (in nbarn)
    * @note The QCD corrections to the total cross section in a
    * electron-positron annihilation process are taken from
@@ -109,6 +110,7 @@ namespace apfel
                                  double              const& AlphaQCD,
                                  double              const& AlphaQED,
                                  std::vector<double> const& Thresholds,
-                                 QuarkFlavour        const& Comp = TOTAL);
+                                 QuarkFlavour        const& Comp = TOTAL,
+                                 bool                const& NoCharges = false);
   ///@}
 }
