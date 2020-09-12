@@ -51,6 +51,11 @@ namespace apfel
     bool ExtGrids() const { return _ExtGrids; }
 
     /**
+     * @return The map of indices from the subgrids to the joint grid
+     */
+    std::vector<std::vector<int>> const& JointToSubMap() const { return _JointToSubMap; }
+
+    /**
      * @return The vector of subgrids
      */
     std::vector<SubGrid> const& GetSubGrids() const { return _GlobalGrid; }
@@ -84,10 +89,11 @@ namespace apfel
     SubGrid CreateJointGrid();
 
   private:
-    bool                 _Locked;     //!< Flag for locking the grids.
-    bool                 _ExtGrids;   //!< Contains external sub-grids.
-    std::vector<SubGrid> _GlobalGrid; //!< Vector with sub-grids.
-    SubGrid              _JointGrid;  //!< Container for the joint grid.
+    bool                          _Locked;        //!< Flag for locking the grids.
+    bool                          _ExtGrids;      //!< Contains external sub-grids.
+    std::vector<std::vector<int>> _JointToSubMap; //!< Map of indices from the subgrids to the joint grid (empty if the subgrids are not locked)
+    std::vector<SubGrid>          _GlobalGrid;    //!< Vector with sub-grids.
+    SubGrid                       _JointGrid;     //!< Container for the joint grid.
 
     friend std::ostream& operator << (std::ostream& os, Grid const& gr);
   };

@@ -27,7 +27,7 @@ namespace apfel
     /**
      * @brief This function starts the timer.
      */
-    void start() { startTime = std::chrono::steady_clock::now(); }
+    void start() { _startTime = std::chrono::steady_clock::now(); }
 
     /**
      * @brief This function stops the timer and reports the elapsed
@@ -36,12 +36,12 @@ namespace apfel
     void stop(bool const& ForceDisplay = false)
     {
       auto end = std::chrono::steady_clock::now();
-      auto diff = end - startTime;
+      auto diff = end - _startTime;
       if (GetVerbosityLevel() > 1 || ForceDisplay)
-        printf("time elapsed: %5.6f seconds\n", std::chrono::duration <double, std::milli> (diff).count() * 1e-3);
+        printf("Time elapsed: %5.6f seconds\n", std::chrono::duration <double, std::milli> (diff).count() * 1e-3);
     }
 
   private:
-    std::chrono::time_point<std::chrono::steady_clock> startTime;
+    std::chrono::time_point<std::chrono::steady_clock> _startTime;
   };
 }

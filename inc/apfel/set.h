@@ -68,7 +68,12 @@ namespace apfel
     /**
      * @brief This function (re)sets the convolution map.
      */
-    void SetMap(ConvolutionMap const& newmap) { _map = newmap; }
+    void SetMap(ConvolutionMap const& map) { _map = map; }
+
+    /**
+     * @brief This function (re)sets the map of objects.
+     */
+    void SetObjects(std::map<int, T> const& objects) { _objects = objects; }
 
     /**
      * @brief This function sums up all the objects of the set into

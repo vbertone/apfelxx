@@ -16,7 +16,8 @@ namespace apfel
   Grid::Grid():
     _Locked(true),
     _ExtGrids(false),
-    _GlobalGrid({})
+    _JointToSubMap({{}}),
+  _GlobalGrid({})
   {
   }
 
@@ -24,7 +25,8 @@ namespace apfel
   Grid::Grid(std::vector<SubGrid> const& grs, bool const& lockgrids):
     _Locked(lockgrids),
     _ExtGrids(false),
-    _GlobalGrid(grs)
+    _JointToSubMap({{}}),
+  _GlobalGrid(grs)
   {
     _JointGrid = CreateJointGrid();
   }
@@ -104,19 +106,46 @@ namespace apfel
 
     for (int ig = 0; ig < ng; ig++)
       {
-        const int nxg = _GlobalGrid[ig].nx();
         const std::vector<double> xg = _GlobalGrid[ig].GetGrid();
-
         double xtrans;
         if (ig < ng - 1)
           xtrans = _GlobalGrid[ig+1].xMin();
         else
           xtrans = 1 + 2 * eps12;
-        for (int ix = 0; ix <= nxg; ix++)
+        for (int ix = 0; ix <= _GlobalGrid[ig].nx(); ix++)
           {
             if (xtrans - xg[ix] < eps12)
               break;
             xg_joint_vect.push_back(xg[ix]);
+          }
+      }
+
+    // In case the subgrids are locked all the nodes of each single
+    // subgrid are also on the joint grid. We now define a vector of
+    // integers that map each index on each single subgrid on a node
+    // on the joint grid.
+    if (_Locked)
+      {
+        _JointToSubMap.resize(ng);
+        for (int ig = 0; ig < ng; ig++)
+          {
+            const std::vector<double> xg = _GlobalGrid[ig].GetGrid();
+            const int nxg = _GlobalGrid[ig].nx();
+            const int id  = _GlobalGrid[ig].InterDegree();
+
+            _JointToSubMap[ig].resize(nxg + 1 + id);
+            for (int ix = 0; ix <= nxg; ix++)
+              for (int jx = 0; ix <= (int) xg_joint_vect.size(); jx++)
+                if (std::abs(xg_joint_vect[jx] / xg[ix] - 1) < eps12)
+                  {
+                    _JointToSubMap[ig][ix] = jx;
+                    break;
+                  }
+
+            // Add id more points at the end equal to that at x = 1
+            // (typically zero).
+            for (int ix = nxg + 1; ix < nxg + id + 1; ix++)
+              _JointToSubMap[ig][ix] = _JointToSubMap[ig][nxg];
           }
       }
 

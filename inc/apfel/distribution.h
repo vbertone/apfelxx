@@ -155,22 +155,33 @@ namespace apfel
    * @param g: Grid object
    * @param InDistFunc: map-valued function dependent on x and a scale Q.
    * @param Q: the value of Q in which InDistFunc has to be tabulated
-   * @param skip: vector of map indices to be skipped in the tabulation.
+   * @param skip: vector of indices to be skipped in the tabulation.
    */
-  std::map<int, Distribution> DistributionMap(Grid                                                              const& g,
-                                              std::function<std::map<int,double>(double const&, double const&)> const& InDistFunc,
-                                              double                                                            const& Q,
-                                              std::vector<int>                                                  const& skip = {});
+  std::map<int, Distribution> DistributionMap(Grid                                                               const& g,
+                                              std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
+                                              double                                                             const& Q,
+                                              std::vector<int>                                                   const& skip = {});
 
   /**
    * @brief Function that fills in a map of distributions from a
    * map-valued function.
    * @param g: Grid object
    * @param InDistFunc: map-valued function dependent on x
-   * @param skip: vector of map indices to be skipped in the tabulation.
+   * @param skip: vector of indices to be skipped in the tabulation.
    */
-  std::map<int, Distribution> DistributionMap(Grid                                               const& g,
-                                              std::function<std::map<int,double>(double const&)> const& InDistFunc,
-                                              std::vector<int>                                   const& skip = {});
+  std::map<int, Distribution> DistributionMap(Grid                                                const& g,
+                                              std::function<std::map<int, double>(double const&)> const& InDistFunc,
+                                              std::vector<int>                                    const& skip = {});
+
+  /**
+   * @brief Function that fills in a map of distributions from a
+   * vector-valued function.
+   * @param g: Grid object
+   * @param InDistFunc: vector-valued function dependent on x
+   * @param NOutputs: number of outputs of the input function (default: 0, that is unknown)
+   */
+  std::map<int, Distribution> DistributionMap(Grid                                              const& g,
+                                              std::function<std::vector<double>(double const&)> const& InDistFunc,
+                                              int                                               const& NOutputs = 0);
   ///@}
 }

@@ -378,4 +378,59 @@ namespace apfel
       }
     return DistMap;
   }
+
+  //_________________________________________________________________________
+  std::map<int, Distribution> DistributionMap(Grid                                              const& g,
+                                              std::function<std::vector<double>(double const&)> const& InDistFunc,
+                                              int                                               const& NOutputs)
+  {
+    // Joint grid and subgrid vectors.
+    const std::vector<double>& jg = g.GetJointGrid().GetGrid();
+
+    // Initialise output. In the number of outputs is provided use
+    // that otherwise call the function at the first grid point.
+    const int n = ( NOutputs == 0 ? InDistFunc(jg[0]).size() : NOutputs );
+    std::map<int, Distribution> DistMap;
+    for (int i = 0; i < n; i++)
+      DistMap.insert({i, Distribution{g}});
+
+    // Fill in joint grid.
+    for (int ix = 0; ix < (int) jg.size(); ix++)
+      {
+        const std::vector<double> f = InDistFunc(std::min(jg[ix], 1.));
+        int i = 0;
+        for (double const& v : f)
+          DistMap.at(i++).SetJointGrid(ix, v);
+      }
+
+    // Fill in subgrids. If the subgrids are locked the joint grid
+    // already contains all the nodes therefore there is no need to
+    // call the input function again.
+    if (g.Locked())
+      {
+        const std::vector<std::vector<int>>& m = g.JointToSubMap();
+        for (int o = 0; o < n; o++)
+          {
+            const std::vector<double>& jv = DistMap.at(0).GetDistributionJointGrid();
+            for (int ig = 0; ig < (int) m.size(); ig++)
+              for (int ix = 0; ix < (int) m[ig].size(); ix++)
+                DistMap.at(o).SetSubGrid(ig, ix, jv[m[ig][ix]]);
+          }
+      }
+    else
+      {
+        for (int ig = 0; ig < g.nGrids(); ig++)
+          {
+            const std::vector<double>& sg = g.GetSubGrid(ig).GetGrid();
+            for (int ix = 0; ix < (int) sg.size(); ix++)
+              {
+                const std::vector<double> f = InDistFunc(std::min(sg[ix], 1.));
+                int i = 0;
+                for (double const& v : f)
+                  DistMap.at(i++).SetSubGrid(ig, ix, v);
+              }
+          }
+      }
+    return DistMap;
+  }
 }

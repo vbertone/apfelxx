@@ -19,7 +19,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
+  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps, bool const& erbl):
     _grid(gr)
   {
     // Interpolator object for the interpolating functions
@@ -81,7 +81,7 @@ namespace apfel
 
                 // Number of grid intervals we need to integrate over
                 const int nmin = fmax(0, alpha + 1 - nx);
-                const int nmax = fmin(id, alpha - beta) + 1;
+                const int nmax = (erbl ? id : fmin(id, alpha - beta) ) + 1;
 
                 // Integral
                 double I = 0;
