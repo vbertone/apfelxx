@@ -44,7 +44,7 @@ namespace apfel
     double const ng = _GlobalGrid.size();
 
     // Check if there are extenal grids and if so disable the locking.
-    for (int ig=0; ig<ng; ig++)
+    for (int ig = 0; ig < ng; ig++)
       if (_GlobalGrid[ig].IsExternal())
         _ExtGrids = true;
 
