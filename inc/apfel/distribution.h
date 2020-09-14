@@ -36,6 +36,12 @@ namespace apfel
 
     /**
      * @brief The Distribution constructors.
+     * @param obj: a reference distribution from wich the grid and the actual distributions are extracted
+     */
+    Distribution(Distribution const& obj);
+
+    /**
+     * @brief The Distribution constructors.
      * @param obj: a reference distribution from wich the grid is extracted
      * @param distsubgrid: the vector of the distribution on the subgrids
      * @param distjointgrid: the vector of the distribution on the joint grid

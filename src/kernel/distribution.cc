@@ -20,6 +20,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution::Distribution(Distribution const& obj):
+    LagrangeInterpolator{obj._grid, obj._distributionSubGrid, obj._distributionJointGrid}
+  {
+  }
+
+  //_________________________________________________________________________
   Distribution::Distribution(Distribution                     const& obj,
                              std::vector<std::vector<double>> const& distsubgrid,
                              std::vector<double>              const& distjointgrid):
