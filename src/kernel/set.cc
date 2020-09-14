@@ -164,6 +164,46 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  template<class T>
+  T Set<T>::Combine(std::vector<double> const& weigths) const
+  {
+    // Check whether map of objects and vector of weights have the
+    // same size.
+    if (_objects.size() != weigths.size())
+      throw std::runtime_error(error("Set::Combine", "Size of map of objects and vector of weights do not match"));
+
+    // Initialize iterator on '_objects' and counter of the weights
+    auto it = _objects.begin();
+    int i;
+
+    // In case the first weights are zero don't do the sum.
+    for (i = 0; i < (int) weigths.size(); i++)
+      if (weigths[i] != 0)
+        break;
+      else
+        it++;
+
+    // Initialize 'CombObj' with the first object in '_objects'.
+    T CombObj = weigths[i++] * it->second;
+    it++;
+
+    // Continue with the following objects of the vector of rules.
+    for (auto end = _objects.end(); it != end; it++)
+      {
+        if (weigths[i] != 0)
+          {
+            if (weigths[i] == 1)
+              CombObj += it->second;
+            else
+              CombObj += weigths[i] * it->second;
+          }
+        i++;
+      }
+
+    return CombObj;
+  }
+
+  //_________________________________________________________________________
   template<class U>
   std::ostream& operator << (std::ostream& os, Set<U> const& s)
   {

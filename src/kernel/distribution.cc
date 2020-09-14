@@ -411,7 +411,7 @@ namespace apfel
         const std::vector<std::vector<int>>& m = g.JointToSubMap();
         for (int o = 0; o < n; o++)
           {
-            const std::vector<double>& jv = DistMap.at(0).GetDistributionJointGrid();
+            const std::vector<double>& jv = DistMap.at(o).GetDistributionJointGrid();
             for (int ig = 0; ig < (int) m.size(); ig++)
               for (int ix = 0; ix < (int) m[ig].size(); ix++)
                 DistMap.at(o).SetSubGrid(ig, ix, jv[m[ig][ix]]);

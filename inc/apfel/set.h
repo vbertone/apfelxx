@@ -81,6 +81,12 @@ namespace apfel
      */
     T Combine() const;
 
+    /**
+     * @brief This function sums up all the objects of the set into
+     * one using the components of input vactor for as weights.
+     */
+    T Combine(std::vector<double> const& weigths) const;
+
   private:
     ConvolutionMap   _map;     //!< The shared pointer containing the convolution map
     std::map<int, T> _objects; //!< The container for the map

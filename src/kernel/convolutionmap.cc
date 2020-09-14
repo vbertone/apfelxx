@@ -45,10 +45,11 @@ namespace apfel
   {
     os << "ConvolutionMap: " << &cm << "\n";
     os << "Name: " << cm.GetName() << "\n";
-    os << "Operator-index matrix:\n";
+    os << "Operand-index matrix:\n";
     const matrix<std::vector<int>> ri = cm.GetRuleIndices();
     for (int i = 0; i < (int) ri.size(0); i++)
       {
+        os << i << ":\t";
         for (int j = 0; j < (int) ri.size(1); j++)
           {
             os << "{";
@@ -67,6 +68,7 @@ namespace apfel
     os.precision(1);
     for (int i = 0; i < (int) rc.size(0); i++)
       {
+        os << i << ":\t";
         for (int j = 0; j < (int) rc.size(1); j++)
           {
             os << "{";
