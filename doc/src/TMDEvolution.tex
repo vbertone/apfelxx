@@ -831,7 +831,7 @@ later stage:
 Now we use the expansions in Eqs.~(\ref{eq:GKexp}), (\ref{eq:Kexp})
 and~(\ref{eq:GFexp}):
 \begin{equation}\label{eq:Sudexp}
-  R^2 = \exp\left\{\left[\sum_{n=0}^\infty a_s^{n+1}(\mu_b)K^{(n,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}a_s^{n+1}(\mu')\left(\gamma_F^{(n)} - \frac12\gamma_K^{(n)}\ln\frac{Q^2}{\mu'^2}\right)\right]\right\}\,,
+  R^2 = \exp\left\{\sum_{n=0}^\infty a_s^{n+1}(\mu_b)K^{(n,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}a_s^{n+1}(\mu')\left(\gamma_F^{(n)} - \frac12\gamma_K^{(n)}\ln\frac{Q^2}{\mu'^2}\right)\right\}\,,
 \end{equation}
 where we have defined:
 \begin{equation}
@@ -2173,7 +2173,7 @@ order to identify a particular solution, we need a boundary condition
 given by the knowledge of $R$ at some particular scale $\mu_0$:
 $R(\mu_0)=R_0$.
 
-\subsection{The strong coupling}
+\subsection{The strong coupling}\label{sec:strongcoupling}
 
 The question that we want to address here is how to solve
 Eq.~(\ref{eq:RGEproto}), along with its boundary condition
@@ -2282,7 +2282,7 @@ Eq.~(\ref{eq:RGEalphas}) and integrate the differential equation
 between $\mu_0$ and $\mu$. The result is a transcendental equation in
 $a_s$:
 \begin{equation}\label{eq:transcend}
-\frac1{\beta^{(0)}}\left(-\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}\right) - \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
+\frac1{\beta^{(0)}}\left(-\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}\right) + \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
 \end{equation}
 with $b_n=\beta^{(n)}/\beta^{(0)}$. Of course, the solution of this
 transcendental equation solves exactly the differential equation in
@@ -2290,7 +2290,7 @@ Eq.~(\ref{eq:RGEalphas}). However, in order to obtain an analytic
 equation for $a_s(\mu)$ we need to resort on perturbation theory. This
 is done by first rearranging the above equation as:
 \begin{equation}
-\frac{a_s(\mu_0)}{a_s(\mu)}=1-a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)  - a_s(\mu_0) b_1\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)\,.
+\frac{a_s(\mu_0)}{a_s(\mu)}=1-a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)  + a_s(\mu_0) b_1\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)\,.
 \end{equation}
 This equation tells us that the second logarithm appearing in the
 r.h.s., being proportional to $\alpha_s$ can be expanded and truncated
@@ -2301,23 +2301,53 @@ can use Eq.~(\ref{eq:llsol}) inside this term, obtaining:
 \ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)+\mathcal{O}(a_s)\,,
 \end{equation}
 where we have also used the fact that:
-\begin{equation}
+\begin{equation}\label{eq:approxLL}
 a_s(\mu) = a_s^{\rm LL}(\mu)\left[1+\mathcal{O}(a_s) \right]\,,
 \end{equation}
 that descends directly from Eq.~(\ref{eq:pertanstzinfrearr}). This
 leads us to:
 \begin{equation}
-a_s(\mu)=\frac{a_s^{\rm LL}(\mu)}{ 1  - a_s^{\rm LL}(\mu) b_1 \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)}+\mathcal{O}(a_s^3)\,
+a_s(\mu)=\frac{a_s^{\rm LL}(\mu)}{ 1  + a_s^{\rm LL}(\mu) b_1 \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)}+\mathcal{O}(a_s^3)\,
 \end{equation}
 that can be further expanded, finally obtaining:
 \begin{equation}\label{eq:ansolut}
-a_s^{\rm NLL}(\mu)=a_s^{\rm LL}(\mu) \left[1 + b_1  a_s^{\rm LL}(\mu) \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)\right]\,,
+a_s^{\rm NLL}(\mu)=a_s^{\rm LL}(\mu) \left[1 - b_1  a_s^{\rm LL}(\mu) \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)\right]\,,
 \end{equation}
-which gives the NLL solution for the evolution of the strong
-coupling. The same kind of procedure can be applied iteratively to
-obtain perturbatively more accurate solutions. However, it is now
-important to stress an important aspect that is central to this
-section, \textit{i.e.} the difference between
+which gives the NLL solution for the evolution of the strong coupling
+(see also Ref.~\cite{DelDebbio:2007ee}). The same kind of procedure
+can be applied iteratively to obtain perturbatively more accurate
+solutions. In the following we will derive the NNLL-accurate solution
+for the running of the strong coupling that we will need below. This
+can be achieved by including $k=2$ term in Eq.~(\ref{eq:RGEalphas})
+and integrating the resulting differential equation between $\mu_0$
+and $\mu$. This results in the following transcendental equation:
+\begin{equation}\label{eq:transc2}
+\begin{array}{rcl}
+\displaystyle \beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right) &=&\displaystyle \left. -\frac{1}{a_s}\
+-b_1\ln(a_s)
+                                                 +\mbox{const.}+a_s(b_1^2-b_2)+\mathcal{O}(a_s^2)\right|_{a_s(\mu_0)}^{a_s(\mu)}\\
+\\
+&=&\displaystyle
+    -\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}+b_1\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm
+    NLL}(\mu)}\right)
+    + (b_1^2-b_2)(a_s^{\rm LL}(\mu)-a_s(\mu_0)) +\mathcal{O}(a_s^2)\,.
+\end{array}
+\end{equation}
+where we have replaced $a_s(\mu)$ with $a_s^{\rm LL}$ and $a_s^{\rm
+  NLL}$ where appropriate using Eq.~(\ref{eq:approxLL}) and:
+\begin{equation}\label{eq:approxNLL}
+a_s(\mu) = a_s^{\rm NLL}(\mu)\left[1+\mathcal{O}(a_s^2) \right]\,.
+\end{equation}
+Eq.~(\ref{eq:transc2}) can finally be solved for $a_s(\mu)$ obtaining:
+\begin{equation}\label{eq:ansolutnnll}
+  a_s^{\rm NNLL}(\mu)=a_s^{\rm LL}(\mu)\left[1-b_1 a_s^{\rm LL}(\mu) \left[1+ a_s^{\rm NLL}(\mu)\right]\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm
+        LL}(\mu)}\right)+\displaystyle (b_2-b_1^2) a_s^{\rm LL}(\mu) \left[a_s^{\rm
+      LL}(\mu)-a_s(\mu_0)\right]\right]\,,
+\end{equation}
+\textit{i.e.} the NNLL-accurate running of the strong coupling.
+
+It is now important to stress an important aspect that is central to
+this section, \textit{i.e.} the difference between, \textit{e.g.}
 Eqs.~(\ref{eq:transcend})
 and~(\ref{eq:ansolut}). Eq.~(\ref{eq:ansolut}) has been obtained from
 Eq.~(\ref{eq:transcend}) by neglecting genuinely subleading
@@ -2487,7 +2517,7 @@ a_s^{\rm LL}(\mu) = a_s(\mu_0)\frac{1}{1-\lambda}\,,
 \end{equation}
 and:
 \begin{equation}
-a_s^{\rm NLL}(\mu)=a_s(\mu_0)\frac{1}{1-\lambda}\left[1 + a_s(\mu_0) \frac{b_1 \ln\left(1-\lambda\right)}{1-\lambda}\right]\,,
+a_s^{\rm NLL}(\mu)=a_s(\mu_0)\frac{1}{1-\lambda}\left[1 - a_s(\mu_0) \frac{b_1 \ln\left(1-\lambda\right)}{1-\lambda}\right]\,,
 \end{equation}
 such that:
 \begin{equation}
@@ -2496,7 +2526,7 @@ such that:
                             \gamma^{(0)}\right)
                             \frac{\lambda}{1-\lambda}\right]\\
   \\
-                   &\times&\displaystyle                        \exp\left[-\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)+a_s(\mu_0) \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
+                   &\times&\displaystyle                        \exp\left[-\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)-a_s(\mu_0) \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
                        \ln\left(1-\lambda\right)}{1-\lambda}\right]f(\mu_0)\,.
 \end{array}
 \end{equation}
@@ -2510,7 +2540,7 @@ g^{(0)}(\lambda) &=& \displaystyle  1+a_s(\mu_0)\frac1{\beta^{(0)}}\left(\gamma^
 g^{(1)}(\lambda) &=& \displaystyle
                      -\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\lambda\right)\,,\\
 \\
-g^{(2)}(\lambda) &=& \displaystyle \frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
+g^{(2)}(\lambda) &=& \displaystyle -\frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
                        \ln\left(1-\lambda\right)}{1-\lambda}\,,
 \end{array}
 \end{equation}
@@ -2553,7 +2583,7 @@ subleading terms gives the new functions:
 \overline{g}^{(1)}(\overline{\lambda}) &=& \displaystyle
                      -\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)\,,\\
 \\
-\overline{g}^{(2)}(\overline{\lambda}) &=& \displaystyle \frac{\gamma^{(0)}}{1-\overline{\lambda}}\left[\frac{b_1}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)+\ln\left(\frac{\mu_{\rm
+\overline{g}^{(2)}(\overline{\lambda}) &=& \displaystyle -\frac{\gamma^{(0)}}{1-\overline{\lambda}}\left[\frac{b_1}{\beta^{(0)}}\ln\left(1-\overline{\lambda}\right)-\ln\left(\frac{\mu_{\rm
         R}}{\mu_0}\right)\right]\,,
 \end{array}
 \end{equation}
@@ -2597,10 +2627,81 @@ result violates the equations in Eq.~(\ref{eq:eveqs}) by subleading
 terms. As we will see below, this very violation gives origin to the
 resummation scale.
 
-
-
-
-
+In order to derive a fully analytic expression for the expression in
+Eq.~(\ref{eq:solution2}) we need to consider the perturbative
+expansion of the relevant anomalous dimensions. This is done in
+Eq.~(\ref{eq:Sudexp}) for the square of the evolution operator that is
+relevant to Drell-Yan production. In order to match the notation of
+this section. we identify $\mu_b=\mu$ and $Q=\mu_0$ in
+Eq.~(\ref{eq:Sudexp}). In addition, we limit ourselves to consider the
+NNLL accuracy that means truncating the expansion at $n=2$ for
+$\gamma_K$ and at $n=1$ for $K$ and $\gamma_F$. This finally gives:
+\begin{equation}
+\begin{array}{rcl}
+  R^{\rm NNLL} &=&\displaystyle  \exp\bigg\{-\sum_{n=0}^1 K^{(n,0)}
+        \left[a_s^{{\rm N}^{1-n}{\rm
+        LL}}(\mu)\right]^{n+1}\ln\frac{\mu}{\mu_0}-\sum_{n=0}^1
+        \gamma_F^{(n)}\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[a_s^{{\rm
+        N}^{1-n}{\rm LL}}(\mu')\right]^{n+1}\\
+\\
+ &-&\displaystyle \sum_{n=0}^2
+     \gamma_K^{(n)}\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[a_s^{{\rm
+     N}^{2-n}{\rm
+     LL}}(\mu')\right]^{n+1}\ln\frac{\mu'}{\mu_0}\bigg\}\,,
+\end{array}
+\end{equation}
+where we have also used the fact that:
+\begin{equation}
+a_s = a_s^{{\rm N}^{k}{\rm LL}}\left[1+\mathcal{O}(a_s^k)\right]\,.
+\end{equation}
+It is convenient to express the above equation in terms of the
+variable $\lambda$ defined in Eq.~(\ref{eq:lambdadef}). This leads to:
+\begin{equation}
+\begin{array}{rcl}
+  R^{\rm NNLL} &=&\displaystyle  \exp\Bigg\{-\frac{1}{\beta^{(0)}a_s(\mu_0)}\sum_{n=0}^1\left( K^{(n,0)}
+        \lambda\left[a_s^{{\rm N}^{1-n}{\rm
+        LL}}(\lambda)\right]^{n+1}+
+        \gamma_F^{(n)}\int_{0}^{\lambda}d\lambda'\left[a_s^{{\rm
+        N}^{1-n}{\rm LL}}(\lambda')\right]^{n+1}\right)\\
+\\
+ &-&\displaystyle \left(\frac{1}{\beta^{(0)}a_s(\mu_0)}\right)^2\sum_{n=0}^2
+     \gamma_K^{(n)}\int_{0}^{\lambda}d\lambda'\,\lambda'\left[a_s^{{\rm
+     N}^{2-n}{\rm
+     LL}}(\lambda')\right]^{n+1}\Bigg\}\,,
+\end{array}
+\end{equation}
+where $\lambda'=\lambda(\mu')$ and $a_s(\lambda)\equiv a_s(\mu)$. We
+write it more explicitly as:
+\begin{equation}
+\begin{array}{rcl}
+  R^{\rm NNLL} &=&\displaystyle  \exp\Bigg\{-\frac{1}{\beta^{(0)}a_s(\mu_0)}\left( K^{(0,0)}
+        \lambda a_s^{{\rm NLL}}(\lambda)+
+        \gamma_F^{(0)}\int_{0}^{\lambda}d\lambda' a_s^{{\rm NLL}}(\lambda')+ K^{(1,0)}
+        \lambda\left[a_s^{{\rm
+        LL}}(\lambda)\right]^{2}+
+        \gamma_F^{(1)}\int_{0}^{\lambda}d\lambda'\left[a_s^{{\rm LL}}(\lambda')\right]^{2}\right)\\
+\\
+ &-&\displaystyle \left(\frac{1}{\beta^{(0)}a_s(\mu_0)}\right)^2\left(
+     \gamma_K^{(0)}\int_{0}^{\lambda}d\lambda'\,\lambda' a_s^{{\rm
+     NNLL}}(\lambda')+\gamma_K^{(1)}\int_{0}^{\lambda}d\lambda'\,\lambda'\left[a_s^{{\rm
+     NLL}}(\lambda')\right]^{2}+\gamma_K^{(2)}\int_{0}^{\lambda}d\lambda'\,\lambda'\left[a_s^{{\rm
+     LL}}(\lambda')\right]^{3}\right)\Bigg\}\,.
+\end{array}
+\end{equation}
+We now need to compute the integrals involving the strong coupling
+$a_s$. This can be done using the analytic expressions derived in
+Sect.~\ref{sec:strongcoupling}.The task is simplified by the fact that
+$a_s^{{\rm N}^k{\rm LL}}$, for $k>0$, can be written in terms of
+$a_s^{\rm LL}$ (see Eqs.~(\ref{eq:ansolut}) and
+(\ref{eq:ansolutnnll})) so that we can exploit the relations:
+\begin{equation}
+\int_0^\lambda d\lambda'\,f\left(a_s^{\rm LL}(\lambda')\right) =
+a_s(\mu_0)\int_{a_s(\mu_0)}^{a_s^{\rm LL}(\lambda)}\frac{da}{a^2}\,f(a)\,,
+\end{equation}
+\begin{equation}
+\int_0^\lambda d\lambda'\,\lambda'\,f\left(a_s^{\rm LL}(\lambda')\right) =
+\int_0^\lambda d\lambda'\,f\left(a_s^{\rm LL}(\lambda')\right)-a_s^2(\mu_0)\int_{a_s(\mu_0)}^{a_s^{\rm LL}(\lambda)}\frac{da}{a^3}\,f(a)\,.
+\end{equation}
 
 \newpage
 
@@ -2759,6 +2860,15 @@ resummation scale.
   Camb.\ Monogr.\ Part.\ Phys.\ Nucl.\ Phys.\ Cosmol.\  {\bf 8} (1996) 1.
   %%CITATION = CMPCE,8,1;%%
   %592 citations counted in INSPIRE as of 19 Jan 2019
+
+%\cite{DelDebbio:2007ee}
+\bibitem{DelDebbio:2007ee}
+L.~Del Debbio \textit{et al.} [NNPDF],
+%``Neural network determination of parton distributions: The Nonsinglet case,''
+JHEP \textbf{03} (2007), 039
+doi:10.1088/1126-6708/2007/03/039
+[arXiv:hep-ph/0701127 [hep-ph]].
+%125 citations counted in INSPIRE as of 15 Sep 2020
 
 \end{thebibliography}
 

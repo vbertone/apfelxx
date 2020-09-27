@@ -257,34 +257,105 @@ between data and theory, it appears natural to compare the central
 experimental values $m_i$ to the shifted theoretical predictions
 $\overline{t}_i$ in units of the uncorrelated uncertainty $s_i$.
 
+\section{Effect of cuts on the $\chi^2$}
 
-% \section{The effect of cuts}
+A relevant question to ask is what is the effect of possible cuts on
+the input dataset on the form of the $\chi^2$ in the presence of
+correlations. In order to address this question, we consider a simple
+dataset made of two datapoints equipped with a single uncorrelated
+uncertainty and a single fully-correlated uncertainty:\footnote{Note
+  that we need to include \textit{also} an uncorrelated uncertainty
+  because otherwise the covariance matrix would be singular. This a
+  symptom of the fact that if no uncorrelated uncertainties are
+  present, the two points would be totally dependent on each
+  other. This observation will be relevant in the following.}
+\begin{equation}\label{eq:fullset}
+S:\quad\{m_i\pm \sigma_i^u\pm \sigma_i^c\}\,,\quad i  =1,2\,.
+\end{equation}
+The resulting covariance matrix reads:
+\begin{equation}
+\mathbf{V}=\begin{pmatrix}
+(\sigma_1^u)^2+ (\sigma_1^c)^2 & \sigma_1^c \sigma_2^c \\
+\sigma_1^c \sigma_2^c & (\sigma_2^u)^2+ (\sigma_2^c)^2
+\end{pmatrix}\,,
+\end{equation}
+with inverse:
+\begin{equation}
+\mathbf{V}^{-1}=\frac{1}{(\sigma_1^u \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+ (\sigma_1^u \sigma_2^c)^2}\begin{pmatrix}
+(\sigma_2^u)^2+ (\sigma_2^c)^2 & -\sigma_1^c \sigma_2^c \\
+-\sigma_1^c \sigma_2^c & (\sigma_1^u)^2+ (\sigma_1^c)^2
+\end{pmatrix}\,.
+\end{equation}
+In addition, we a have a set of two theoretical predictions $\{t_i\}$
+that allows us to define a column vector of residuals
+$\mathbf{r}^{\rm T}=(r_1,\;r_2)$ with $r_i=m_i-t_i$. The $\chi^2$ then takes
+the following explicit expression:
+\begin{equation}\label{eq:fullchi2}
+  \chi^2= \mathbf{r}^{\rm T}\cdot \mathbf{V}^{-1}\cdot \mathbf{r}=
+  \frac{r_1^2\left[(\sigma_2^u)^2+ (\sigma_2^c)^2\right]+r_2^2\left[(\sigma_1^u)^2+ (\sigma_1^c)^2\right]-2 r_1 r_2\sigma_1^c \sigma_2^c}{(\sigma_1^u \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+ (\sigma_1^u \sigma_2^c)^2}\,.
+\end{equation}
+Now, suppose we want to exclude the datapoint with $i=2$ from the
+definition of the $\chi^2$. The possibly most natural way to proceed
+is to exclude the point, along with its uncertainties, directly from
+the set in Eq.~(\ref{eq:fullset}). This straightforwardly leads to the
+following $\chi^2$:
+\begin{equation}\label{eq:redchi21}
+{\chi}_{\rm cut\;1}^2 = \frac{r_1^2}{(\sigma_1^u)^2+ (\sigma_1^c)^2}\,.
+\end{equation}
+However, this procedure might be questioned in that it artificially
+modifies the original dataset by effectively defining a \textit{new}
+dataset where the point $i=2$ is not present. In the absence of
+correlations this is a sound procedure because each single datapoint
+can be regarder an independent subset of the original
+set. However, this is not the case when correlations are present.
 
-% Due to the possible mutual correlation of the measurements of a given
-% ensamble, the exclusion of any of the measurements in the computation
-% of the $\chi^2$ necessarily introduces an inconsistency. However, in
-% many cases, due to limitations in the computation of the theoretical
-% predictions, it is unavoidable introducing cuts. Unfortunately, there
-% is no way to avoid this inconsistency and the best one can do is to
-% compute the $\chi^2$ in Eq.~(\ref{eq:chi2cov}) skipping the values of
-% $i$ and $j$ corresponding to the measurements excluded from the
-% computation.
-
-% Since cuts are typically of kinematic origin, one can argue that in
-% the case of \textit{unnormalised} measurements the correlation between
-% measurements taken in sufficiently different kinematic regions are not
-% very correlated. This ensures that the exclusion of measurements based
-% on kinematic cuts does not bias the computation of the $\chi^2$
-% significantly\footnote{This heuristic argument is far from being
-%   rigorous.}. However, in the presence of \textit{normalised}
-% measurements this problem is made more severe by the fact that the
-% (common) normalisation introduces a further correlation that is
-% transversal to the whole ensamble~\cite{Boughezal:2017nla}. Moreover,
-% normalised measurements are typically such that the integral over the
-% full ensamble gives one. Therefore, excluding data breaks the
-% normalisation.  However, this problem can be overcome by simply
-% normalising the theoretical predictions to the integral of the
-% measurements that survive the cut.
+Therefore, it is necessary to devise a method that avoids any
+modification of the dataset but yet allows one to prevent specific
+datapoints to contribute to the $\chi^2$. In general, the purpose of
+excluding datapoints from a fit is to avoid that the model used to
+compute the predictions is forced outside its application region. One
+can therefore \textit{enforce} that the model exactly agrees with the
+datapoints to be excluded. This effectively amounts to set $t_2=m_2$,
+or equivalently $r_2=0$, reducing Eq.~(\ref{eq:fullchi2}) to:
+\begin{equation}\label{eq:fullchi2trunc}
+  \chi_{\rm cut\;2}^2= 
+  \frac{r_1^2\left[(\sigma_2^u)^2+ (\sigma_2^c)^2\right]}{(\sigma_1^u \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+ (\sigma_1^u \sigma_2^c)^2}\,.
+\end{equation}
+This has the clear advantage that the experimental information,
+including correlations, remains totally intact. In order to see that
+Eq.~(\ref{eq:fullchi2trunc}) has the right properties, we first take
+the limit for $\sigma_2^c\rightarrow 0$. This gives:
+\begin{equation}
+  \lim_{\sigma_2^c\rightarrow 0}\chi_{\rm cut}^2= 
+  \frac{r_1^2}{(\sigma_1^u)^2+ (\sigma_1^c)^2}\,,
+\end{equation}
+which reproduces the result of Eq.~(\ref{eq:redchi21}). This was to be
+expected because no reference to the point $i=2$ can remain after the
+removal of its correlation to the point $i=1$. In addition, it is also
+very instructive to take the limit $\sigma_2^u\rightarrow 0$
+Eq.~(\ref{eq:fullchi2trunc}), which gives:
+\begin{equation}
+\lim_{\sigma_2^u\rightarrow 0}\chi_{\rm cut}^2= 
+\frac{r_1^2}{ (\sigma_1^u)^2}\,.
+\end{equation}
+In this case, not only any reference to the point $i=2$ drops out, but
+also the dependence of the $\chi^2$ on the correlation uncertainty of
+the point $i=1$ disappears. Despite at first sight this looks
+counterintuitive, it seems to be the correct behaviour. To see this,
+we observe that, if the point $i=2$ has no uncorrelated uncertainty,
+its fluctuations are totally driven by the fluctuations of the point
+$i=1$. Therefore, the point $i=2$ is completely dependent on the point
+$i=1$ and thus cannot give any contribution to the $\chi^2$. In
+addition, the correlation uncertainty of the point $i=1$ must also be
+irrelevant because, being $i=2$ totally correlated to $i=1$, any
+correlation of $i=1$ to $i=2$ translates into a correlation to itself
+and this cannot contribute to the $\chi^2$ either. Importantly, if we
+take the limit $\sigma_1^u\rightarrow 0$, the $\chi^2$ diverges no
+matter the value of $\sigma_1^c$. This is consistent with setting
+$\sigma_1^u=\sigma_2^u$ since the beginning in Eq.~(\ref{eq:fullset})
+which indeed gives a singular $\chi^2$ because the covariance matrix
+is singular. Eq.~(\ref{eq:redchi21}) does not produce these features
+hanging in favour of Eq.~(\ref{eq:fullchi2trunc}).
 
 \begin{thebibliography}{alp}
 
