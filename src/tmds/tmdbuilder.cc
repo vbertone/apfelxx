@@ -512,7 +512,7 @@ namespace apfel
                                                                                              double                                          const& Ci,
                                                                                              double                                          const& IntEps)
   {
-    // Match TMDs on collinear PDFs.
+    // Match TMDs onto collinear PDFs.
     const std::function<Set<Distribution>(double const&)> MatchedTmdPDFs = MatchTmdPDFs(TmdObj, CollPDFs, Alphas, PerturbativeOrder, Ci);
 
     // Compute TMD evolution factors.
@@ -536,7 +536,7 @@ namespace apfel
                                                                                             double                                          const& Ci,
                                                                                             double                                          const& IntEps)
   {
-    // Match TMDs on collinear FFs.
+    // Match TMDs onto collinear FFs.
     const std::function<Set<Distribution>(double const&)> MatchedTmdFFs = MatchTmdFFs(TmdObj, CollFFs, Alphas, PerturbativeOrder, Ci);
 
     // Compute TMD evolution factors.

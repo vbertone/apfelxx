@@ -2703,6 +2703,152 @@ a_s(\mu_0)\int_{a_s(\mu_0)}^{a_s^{\rm LL}(\lambda)}\frac{da}{a^2}\,f(a)\,,
 \int_0^\lambda d\lambda'\,f\left(a_s^{\rm LL}(\lambda')\right)-a_s^2(\mu_0)\int_{a_s(\mu_0)}^{a_s^{\rm LL}(\lambda)}\frac{da}{a^3}\,f(a)\,.
 \end{equation}
 
+\section{Iterative solution of the strong coupling running}
+
+In this section, I will derive a general formula to compute
+iteratively the running of the strong coupling. In order to simplify
+the notation, I will refer to the strong coupling computed at some
+generic scale as to $a$, while I will call $a_0$ the value of coupling
+at the reference scale. The corresponding RGE will then be:
+\begin{equation}\label{eq:allorders}
+\frac{d\ln a}{d\ln \mu} = \beta(a)\,,
+\end{equation}
+with:
+\begin{equation}
+\beta(a) = a\sum_{n=0}^\infty \beta_n a^n\,.
+\end{equation}
+If one truncates the $\beta$ function at the first order, the
+resulting evolution equation reads:
+\begin{equation}
+\frac{d\ln a_{\rm LL}}{d\ln \mu} = a_{\rm LL}\beta_0\,,
+\end{equation}
+that admits a simple closed-form exact solution:
+\begin{equation}\label{eq:leadingorder}
+a_{\rm LL}(\mu) = \frac{a_0}{1-a_0\beta_0\ln\left(\frac{\mu}{\mu_0}\right) }\,.
+\end{equation}
+Since we know how to write $a_{\rm LL}$ in a closed form, we can
+combine Eqs.~(\ref{eq:allorders}) and~(\ref{eq:leadingorder}) as
+follows:
+\begin{equation}
+\frac{d\ln a}{d\ln a_{\rm LL}} =\frac{a}{a_{\rm LL}}\sum_{n=0}^\infty b_na^n\,,\quad\mbox{with}\quad b_n=\frac{\beta_n}{\beta_0}\,.
+\end{equation}
+Now we can attempt to solve this equation whose general solution is:
+\begin{equation}\label{eq:intrun}
+\int_{a_0}^{a_{\rm LL}}\frac{dy}{y^2}=\int_{a_0}^{a}\frac{dx}{x^2}\left(\sum_{n=0}^\infty b_nx^n\right)^{-1}\,.
+\end{equation}
+Assuming that $x\ll 1$ (as it should to be in the perturbative
+regime), one can write:
+\begin{equation}
+\left(\sum_{n=0}^\infty b_nx^n\right)^{-1}=\sum_{n=0}^\infty \overline{b}_nx^n\,,
+\end{equation}
+where the coefficients $\overline{b}_n$ can be iteratively determined
+in terms of the coefficients ${b}_n$. Plugging this expansion into
+Eq.~(\ref{eq:intrun}) and solving the integrals gives:
+\begin{equation}
+\frac{1}{a_{\rm LL}} = \frac{1}{a}-\overline{b}_1\ln\left(\frac{a}{a_0}\right)-\sum_{k=1}^\infty\frac{\overline{b}_{k+1}}{k}\left(a^k-a_0^k\right)\,.
+\end{equation}
+This is a transcendental equation in $a$ that can be solved
+iteratively assuming that $a,a_0\ll 1$. Upon this assumption, the
+terms in the r.h.s. of the equation above are increasingly
+smaller. Therefore, at the first order one has:
+\begin{equation}
+\frac{1}{a_{\rm LL}} = \frac{1}{a}\quad\Longrightarrow\quad a = a_{\rm
+LL}\,,
+\end{equation}
+as expected. At second order instead:
+\begin{equation}
+\frac{1}{a_{\rm LL}} = \frac{1}{a}-\overline{b}_1\ln\left(\frac{a}{a_0}\right)\,.
+\end{equation}
+This is a transcendental equation that can be solved by observing that
+the second term in the r.h.s. is subleading w.r.t. the first and thus
+one can plug into that term the first order solution, that is:
+\begin{equation}
+\frac{1}{a_{\rm LL}} = \frac{1}{a}-\overline{b}_1\ln\left(\frac{a_{\rm
+    LL}}{a_0}\right)\,.
+\end{equation}
+This equation can now be resolved for $a$ obtaining:
+\begin{equation}
+  a = a_{\rm NLL}=\frac{a_{\rm LL}}{\displaystyle 1+a_{\rm LL}\overline{b}_1\ln\left(\frac{a_{\rm
+          LL}}{a_0}\right)}\,.
+\end{equation}
+One can keep iterating in the same way finally obtaining the general
+recursive formula for the analytic N$^{n}$LL solution:
+\begin{equation}\label{eq:masterf}
+a_{{\rm N}^{n}{\rm LL}}=a_{\rm LL}\left\{1+a_{\rm LL}\left[\overline{b}_1\ln\left(\frac{a_{{\rm
+          N}^{n-1}{\rm LL}}}{a_0}\right)+\sum_{k=1}^{n-1}\frac{\overline{b}_{k+1}}{k}\left(a_{{\rm
+          N}^{n-k-1}{\rm
+          LL}}^k-a_0^k\right)\right]\right\}^{-1}+\mathcal{O}(a^{n+2})\,,\quad n\geq 1\,.
+\end{equation}
+Note also that the curly bracket, that appears in the denominator, can
+be further expanded and truncated to the relevant order because the
+single terms appearing there are increasingly subleading.
+
+At this stage it is important to highlight a feature of the analytic
+solution of running of the strong coupling. Due to its iterative
+nature, the N$^{n}$LL solution will only depend on $a_{\rm LL}$. This
+allows us to write the solution to all other RGEs, such as the DGLAP
+evolution equations and the Collins-Soper equation, in terms of
+$a_{\rm LL}$ only.
+
+Additionally, it is interesting to observe that there are \textit{two}
+resummation structures. The first is contained in $a_{\rm LL}$ and
+given by the geometric summation in Eq.~(\ref{eq:leadingorder}). The
+second is $\ln\left(\frac{a_{{\rm N}^{n-1}{\rm
+        LL}}}{a_0}\right)$. This structure first appears at NLL as:
+\begin{equation}
+a_{{\rm NLL}}=a_{\rm LL}\left[1+a_{\rm LL}\overline{b}_1\ln\left(\frac{a_{\rm LL}}{a_0}\right)\right]^{-1}+\mathcal{O}(a^3)=a_{\rm LL}\left[1-a_{\rm LL}\overline{b}_1\ln\left(\frac{a_{\rm LL}}{a_0}\right)\right]+\mathcal{O}(a^3)\,.
+\end{equation}
+When going further, the content of the logarithm will be the coupling
+computed at higher logarithmic orders. However, beyond LL, the
+logarithm can be expanded around $a_{\rm LL}=0$ finally leading to
+$\ln\left(\frac{a_{\rm LL}}{a_0}\right)$. As an example, we consider
+$a_{\rm NNLL}$ that, using Eq.~(\ref{eq:masterf}), reads:
+\begin{equation}
+\begin{array}{rcl}
+  a_{\rm NNLL}&=&\displaystyle a_{\rm LL}\left\{1+a_{\rm
+                  LL}\left[\overline{b}_1\ln\left(\frac{a_{\rm NLL}}{a_0}\right)+\overline{b}_{2}\left(a_{\rm
+                  LL}-a_0\right)\right]\right\}^{-1}+\mathcal{O}(a^4)\\
+  \\
+              &=&\displaystyle a_{\rm LL}\left\{1-a_{\rm LL}\left[\overline{b}_1 \ln\left(\frac{a_{\rm
+                  LL}}{a_0}\right)+\overline{b}_{2}\left(a_{\rm
+                  LL}-a_0\right) \right]+a_{\rm
+                  LL}^2 \overline{b}_1^2\ln\left(\frac{a_{\rm LL}}{a_0}\right)\left(1+\frac12 \ln^2\left(\frac{a_{\rm LL}}{a_0}\right)\right)\right\}+\mathcal{O}(a^4)\,.
+\end{array}
+\end{equation}
+
+\section{Analytic perturbation theory}
+
+The fact highlighted above that the solution to all other RGEs
+relevant to resum large logarithms of $q_T$ can be written in terms of
+$a_{\rm LL}$ only is particularly relevant. As a matter of fact, this
+will eventually allow us to eliminate the Landau pole simply by
+requiring that $a_{\rm LL}$, or equivalently the one-loop
+$\beta$-function, has the correct analytic structure in the complex
+$\mu$ plane. This approach is often referred to analytic perturbation
+theory (APT) and was originally suggested by Bogolyubov, Logiunov, and
+Shirkov back in 1959~\cite{Bogolyubov:1960cha} to obtain the correct
+causality properties of the QED Green's functions also when working at
+fixed-order in perturbation theory. At one-loop order, this boils down
+to requiring that the strong coupling $a_{\rm LL}$ admits a spectral
+representation allowing to restore the analytic properties of the
+two-point Green's function required for causality to be fulfilled. The
+direct consequence of the procedure is the natural appearance of power
+suppressed terms of the form $\Lambda/\mu$ that automatically
+eliminate the Landau pole making the strong coupling $a_{\rm LL}$
+finite for all values of $\mu$.
+
+However, $a_{\rm LL}$ does not only appears as integer powers but also
+within logs. It is therefore crucial to be able to treat these terms
+correctly preserving the correct analytical structure on the complex
+$\mu$. Here fractional analytical perturbation theory (FAPT) comes to
+rescue~\cite{Bakulev:2005gw}.
+
+
+
+
+
+
+
 \newpage
 
 \begin{thebibliography}{alp}
@@ -2869,6 +3015,22 @@ JHEP \textbf{03} (2007), 039
 doi:10.1088/1126-6708/2007/03/039
 [arXiv:hep-ph/0701127 [hep-ph]].
 %125 citations counted in INSPIRE as of 15 Sep 2020
+
+%\cite{Bogolyubov:1960cha}
+\bibitem{Bogolyubov:1960cha}
+N.~N.~Bogolyubov, A.~A.~Logunov and D.~V.~Shirkov,
+%``The method of dispersion relations and perturbation theory,''
+Sov. Phys. JETP \textbf{10} (1960) no.3, 574-581.
+%69 citations counted in INSPIRE as of 03 Oct 2020
+
+%\cite{Bakulev:2005gw}
+\bibitem{Bakulev:2005gw}
+A.~P.~Bakulev, S.~V.~Mikhailov and N.~G.~Stefanis,
+%``QCD analytic perturbation theory: From integer powers to any power of the running coupling,''
+Phys. Rev. D \textbf{72} (2005), 074014
+doi:10.1103/PhysRevD.72.074014
+[arXiv:hep-ph/0506311 [hep-ph]].
+%97 citations counted in INSPIRE as of 03 Oct 2020
 
 \end{thebibliography}
 
