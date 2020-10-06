@@ -218,6 +218,7 @@ namespace apfel
                      *Hr10 - 4./3.*Hr11 );
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
@@ -283,6 +284,7 @@ namespace apfel
     const double Hr3011 = Hr3[25];
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
@@ -362,6 +364,7 @@ namespace apfel
     const double Hr3111   = Hr3[26];
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
@@ -496,6 +499,7 @@ namespace apfel
     const double Hr3100   = Hr3[14];
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
@@ -556,6 +560,7 @@ namespace apfel
     const double Hr201 = Hr2[7];
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
@@ -606,6 +611,7 @@ namespace apfel
     const double Hr211  = Hr2[8];
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
@@ -779,6 +785,7 @@ namespace apfel
                      Hr211*x + 8./3.*Hr211*dm );
 
     // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
     delete[] Hr4;
     delete[] Hr3;
     delete[] Hr2;
