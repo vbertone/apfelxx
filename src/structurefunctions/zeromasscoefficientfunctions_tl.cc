@@ -68,7 +68,7 @@ namespace apfel
     const double x2  = x * x;
     const double x3  = x * x2;
     const double dx  = 1 / x;
-    const double dx2 = dx * dx;;
+    const double dx2 = dx * dx;
     const double dm  = 1 / ( 1 - x );
     const double dp  = 1 / ( 1 + x );
     const double dl1 = log( 1 - x );
@@ -92,43 +92,24 @@ namespace apfel
     const double Hr10  = Hr1[1];
     const double Hr11  = Hr1[2];
 
-    //const double Hr2m1m1 = Hr2[0];
-    //const double Hr20m1  = Hr2[1];
-    //const double Hr21m1  = Hr2[2];
-    const double Hr2m10  = Hr2[3];
-    const double Hr200   = Hr2[4];
-    const double Hr210   = Hr2[5];
-    //const double Hr2m11  = Hr2[6];
-    const double Hr201   = Hr2[7];
-    const double Hr211   = Hr2[8];
+    const double Hr2m10 = Hr2[3];
+    const double Hr200  = Hr2[4];
+    const double Hr210  = Hr2[5];
+    const double Hr201  = Hr2[7];
+    const double Hr211  = Hr2[8];
 
-    //const double Hr3m1m1m1 = Hr3[0];
-    //const double Hr30m1m1  = Hr3[1];
-    //const double Hr31m1m1  = Hr3[2];
-    //const double Hr3m10m1  = Hr3[3];
-    //const double Hr300m1   = Hr3[4];
-    //const double Hr310m1   = Hr3[5];
-    //const double Hr3m11m1  = Hr3[6];
-    //const double Hr301m1   = Hr3[7];
-    //const double Hr311m1   = Hr3[8];
-    const double Hr3m1m10  = Hr3[9];
-    const double Hr30m10   = Hr3[10];
-    //const double Hr31m10   = Hr3[11];
-    const double Hr3m100   = Hr3[12];
-    const double Hr3000    = Hr3[13];
-    const double Hr3100    = Hr3[14];
-    //const double Hr3m110   = Hr3[15];
-    const double Hr3010    = Hr3[16];
-    const double Hr3110    = Hr3[17];
-    //const double Hr3m1m11  = Hr3[18];
-    //const double Hr30m11   = Hr3[19];
-    //const double Hr31m11   = Hr3[20];
-    const double Hr3m101   = Hr3[21];
-    const double Hr3001    = Hr3[22];
-    const double Hr3101    = Hr3[23];
-    //const double Hr3m111   = Hr3[24];
-    const double Hr3011    = Hr3[25];
-    const double Hr3111    = Hr3[26];
+    const double Hr3m1m10 = Hr3[9];
+    const double Hr30m10  = Hr3[10];
+    const double Hr3m100  = Hr3[12];
+    const double Hr3000   = Hr3[13];
+    const double Hr3100   = Hr3[14];
+    const double Hr3010   = Hr3[16];
+    const double Hr3110   = Hr3[17];
+    const double Hr3m101  = Hr3[21];
+    const double Hr3001   = Hr3[22];
+    const double Hr3101   = Hr3[23];
+    const double Hr3011   = Hr3[25];
+    const double Hr3111   = Hr3[26];
 
     const double C2eq2 =
       // Transverse contribution
@@ -233,7 +214,7 @@ namespace apfel
   double C22Tnsp::Singular(double const& x) const
   {
     const double dl1 = log( 1 - x );
-    return ( pow(dl1, 3) * _a3 + pow(dl1, 2) * _a2 + dl1 * _a1 + _a0 ) / ( 1 - x );;
+    return ( pow(dl1, 3) * _a3 + pow(dl1, 2) * _a2 + dl1 * _a1 + _a0 ) / ( 1 - x );
   }
   double C22Tnsp::Local(double const& x) const
   {

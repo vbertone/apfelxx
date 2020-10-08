@@ -183,6 +183,11 @@ namespace apfel
       else
         it++;
 
+    // If the vector of weights is full of zeros just return the last
+    // object multiplied by zero.
+    if (i == (int) weigths.size())
+      return 0 * (--it)->second;
+
     // Initialize 'CombObj' with the first object in '_objects'.
     T CombObj = weigths[i++] * it->second;
     it++;

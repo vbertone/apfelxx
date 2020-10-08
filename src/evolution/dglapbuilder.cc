@@ -185,11 +185,11 @@ namespace apfel
     std::map<int, std::map<int, Operator>> MatchNNLOb;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg  =          LogKth[nf-1] * AS1HgL;
-        const Operator AS1ggH =          LogKth[nf-1] * AS1ggHL;
-        const Operator AS1gH  = AS1gH0 + LogKth[nf-1] * AS1gHL;
-        const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
-        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;;
+        const Operator AS1Hg   =          LogKth[nf-1] * AS1HgL;
+        const Operator AS1ggH  =          LogKth[nf-1] * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + LogKth[nf-1] * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
         const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
         const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
         const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
