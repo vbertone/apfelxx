@@ -2843,7 +2843,204 @@ correctly preserving the correct analytical structure on the complex
 $\mu$. Here fractional analytical perturbation theory (FAPT) comes to
 rescue~\cite{Bakulev:2005gw}.
 
+\section{Derivation of analytic expression for g-functions in $q_{T}$-resummation}
 
+\subsection{The Sudakov integral}
+The Sudakov exponential has the following explicit form:
+
+\begin{equation}
+S=-\int_{b_{0}^{2}/{b^{2}}}^{Q^{2}} \frac{dq^{2}}{q^{2}}\left[A\left(\alpha_{s}\left(q^{2}\right)\right)\ln\frac{M^{2}}{q^{2}}+\tilde B \left(\alpha_{s}\left(q^{2}\right)\right)\right],
+\end{equation}
+
+where $M$ is the invariant mass of the final state, $Q$ is the resummation scale, and $A, \tilde B$ are power series in $\alpha_{s}\left(Q^{2}\right)$.
+
+The $A$ function is completely determined by the cusp anomalous dimensions. 
+
+The $\tilde B$ function contains the usual $B$ coefficients and two additional terms coming from PDF evolution and coefficient functions.
+
+From the PDF evolution equations in Mellin space
+
+\begin{eqnarray}
+f_{a,N}\left(\mu_{F}^{2}\right)&=&\sum _{b} U_{ab,N}\left(\frac{b_{0}^{2}}{b^{2}},\mu _{F}^{2}\right) f_{b,N}\mu _{F}^{2}\\
+\frac{dU_{ab,N}\left(\mu ^{2},\mu _{F}^{2}\right)}{d\ln\mu^{2}}&=&\sum _{c}\gamma _{ac,N}\left(\alpha _{s}\left(\mu^{2}\right)\right) U_{cb,N}\left(\mu ^{2},\mu _{F}^{2}\right)
+\end{eqnarray}
+
+one obtains (for a single species of partons) the solution
+
+\begin{equation}
+U_{N}\left(b_{0}^{2}/b^{2},\mu _{F}^{2}\right)=\exp\left\{-\int_{b_{0}^{2}/{b^{2}}}^{\mu_{F}^{2}} \frac{dq^{2}}{q^{2}} \gamma_{N}\left(\alpha_{s}\left(q^{2}\right)\right)\right\}
+\end{equation}
+
+Thus we have the first additional contribution to $B$ coefficients: $B\longrightarrow B + 2 \, \gamma_{N} \, \alpha_{s}$.
+
+As for the coefficient functions (again, in Mellin space),we can use the following renormalisation-group identity:
+
+\begin{equation}
+C_{N}\left(\alpha_{s}\left(b_{0}^{2}/b^{2}\right)\right)=C_{N}\left(\alpha_{s}\left(M^{2}\right)\right)\exp\left\{-\int_{b_{0}^{2}/{b^{2}}}^{M^{2}} \frac{dq^{2}}{q^{2}} \beta\left(\alpha_{s}\left(q^{2}\right)\right)\frac{d\ln C_{N}\left(\alpha_{s}\left(q^{2}\right)\right)}{d\ln\alpha_{s}\left(q^{2}\right)}\right\}
+\end{equation}
+
+to derive the second additional contribution to $B$ coefficients: $B\longrightarrow B + 2 \, \beta\left(\alpha_{s}\right) \frac{d\ln C_{N}\left(\alpha_{s}\right)}{d\ln\alpha_{s}}$.
+
+The $\tilde B$ function is thus given by
+
+\begin{equation}
+\tilde B = B + 2 \, \gamma_{N} \, \alpha_{s} + 2 \, \beta\left(\alpha_{s}\right) \frac{d\ln C_{N}\left(\alpha_{s}\right)}{d\ln\alpha_{s}}.
+\end{equation}
+
+With simple math and a change of the integration variable, we have
+
+\begin{eqnarray}
+S&=&-\int_{b_{0}^{2}/{b^{2}}}^{Q^{2}} \frac{dq^{2}}{q^{2}}\left[A\left(\alpha_{s}\left(q^{2}\right)\right)\left(\ln\frac{M^{2}}{Q^{2}}+\ln\frac{Q^{2}}{q^{2}}\right)+\tilde B \left(\alpha_{s}\left(q^{2}\right)\right)\right]\\
+&=&-\int_{b_{0}^{2}/{b^{2}}}^{Q^{2}} \frac{dq^{2}}{q^{2}}\left[A\left(\alpha_{s}\left(q^{2}\right)\right)\ln\frac{Q^{2}}{q^{2}}+\bar B \left(\alpha_{s}\left(q^{2}\right)\right)\right]\\
+&=&\int_{\lambda}^{0} \frac{dt}{\beta_{0}\alpha_{s}}\left[A\left(\alpha_{s}\left(t\right)\right)\frac{t}{\beta_{0}\alpha_{s}}+\bar B \left(\alpha_{s}\left(t\right)\right)\right],
+\end{eqnarray}
+
+where $\lambda=\beta_{0}\alpha_{s}\ln\left(Q^{2}b^{2}/b_{0}^{2}\right)=\beta_{0}\alpha_{s}L$, and the $A,\bar B$ functions are given by
+
+\begin{eqnarray}
+A&=&\sum _{n=1}^{\infty}A_{n}\alpha _{s}^{n},\\
+\bar{B}&=&\sum _{n=1}^{\infty}\left(\tilde B_{n}+A_{n}\ln\frac{M^{2}}{Q^{2}}\right)\alpha _{s}^{n} 
+\end{eqnarray}
+
+i.e., the $\ln\left(M^{2}/Q^{2}\right)$ dependence is entirely embodied in the shift $\tilde B\longrightarrow \bar B$.
+
+We will now explicitly compute the $g_{n}$ functions, including the $\mu_{R}$-dependent terms coming from the replacement $Q\longrightarrow\mu_{R}$.
+
+\subsection{$\alpha_{s}$ evolution}
+The evolution of $\alpha_{s}$ from $Q^{2}$ to $q^{2}$ up to NNLL order is given by:
+
+\begin{equation}
+\alpha_{s}\left(q^{2}\right)=\frac{\alpha_{s}}{1-t}-\left(\frac{\alpha_{s}}{1-t}\right)^{2}\frac{\beta_{1}}{\beta_{0}}\ln\left(1-t\right)+\left(\frac{\alpha_{s}}{1-t}\right)^{3}\left(\frac{\beta_{1}^{2}}{\beta_{0}^{2}}\left(\ln^{2}\left(1-t\right)-\ln\left(1-t\right)-t\right)+\frac{\beta_{2}}{\beta_{0}}t\right)+{\cal O}\left(\alpha_{s}^{4}\right)
+\end{equation}
+
+with $\alpha_{s}=\alpha_{s}\left(Q^{2}\right)$ and $t=\beta_{0}\alpha_{s}\ln\frac{Q^{2}}{q^{2}}$.
+
+From now on, I will call the first three terms of this expansion LL$\alpha_{s}$, NLL$\alpha_{s}$ and NNLL$\alpha_{s}$, respectively.
+
+For future reference, using the expansions $\frac{1}{1-t}=1+t+t^{2}+\dots$ and $\ln\left(1-t\right)=-t-\frac{1}{2}t^{2}+\dots$, we get the following expansion for $\alpha_{s}$:
+
+\begin{equation}\label{alphasPT}
+\alpha_{s}\left(q^{2}\right)=\alpha_{s}-\alpha_{s}^{2}\beta_{0}\ln\frac{q^{2}}{Q^{2}}-\alpha_{s}^{3}\left(\beta_{1}\ln\frac{q^{2}}{Q^{2}}-\beta_{0}^{2}\ln^{2}\frac{q^{2}}{Q^{2}}\right)
+\end{equation}
+
+\subsection{$g_{1}$}
+
+The LL function is easily obtained by integrating the $A_{1}$ term:
+
+\begin{equation}
+\int _{\lambda }^{0}\frac{t\text{dt}}{\beta _{0}^{2}\alpha _{s}^{2}}\left[A_{1}\alpha _{s}^{\text{LL}}\left(t\right)\right]
+\end{equation}
+
+The only possibility here is to use the LL expression for $\alpha_{s}$, since any other choice would be subleading. The integrand is of ${\cal O}(\alpha_{s}^{-1})$.\\
+
+The result (multiplied by $\beta_{0}\alpha_{s}/\lambda$ in order to write the integral as L$g_{1}$) is:
+\begin{equation}
+g_1(\lambda)=\frac{A_1 (\lambda +\ln(1-\lambda))}{\beta _{0}\lambda }
+\end{equation}
+
+\subsection{$g_{2}$}
+
+The NLL function has three contributions:
+
+\begin{equation}
+\int _{\lambda }^{0}\frac{t\text{dt}}{\beta _{0}^{2}\alpha _{s}^{2}}\left[A_{1}\alpha _{s}^{\text{NLL}}\left(t\right)+A_{2}\left(\alpha _{s}^{\text{LL}}\left(t\right)\right)^{2}\right]+\int _{\lambda }^{0}\frac{\text{dt}}{\beta _{0}\alpha _{s}}\left[{\bar B}_{1}\alpha _{s}^{\text{LL}}\left(t\right)\right]
+\end{equation}
+
+The combinations are chosen in such a way that all the integrands are ${\cal O}(\alpha_{s}^{0})$.\\
+
+We obtain
+
+\begin{equation}
+g_2(\lambda)=\frac{\bar{B}_1}{\beta _0}\ln(1-\lambda )+\frac{A_1 \beta _1}{\beta _0^3} \left(\frac{\lambda }{1-\lambda }+\frac{1}{2} \log ^2(1-\lambda )+\frac{\log (1-\lambda )}{1-\lambda }\right)-\frac{A_2}{\beta _0^2}\left(\frac{\lambda }{1-\lambda }+\log (1-\lambda )\right).
+\end{equation}
+
+\subsection{$g_{3}$}
+
+The NNLL function has five contributions:
+
+\begin{equation}
+\int _{\lambda }^{0}\frac{t\text{dt}}{\beta _{0}^{2}\alpha _{s}^{2}}\left[A_{1}\alpha _{s}^{\text{NNLL}}\left(t\right)+A_{2}\left(2\alpha _{s}^{\text{LL}}\left(t\right)\alpha_{s}^{\text{NLL}}\left(t\right)\right)+A_{3}\left(\alpha _{s}^{\text{LL}}\left(t\right)\right)^{3}\right]+\int _{\lambda }^{0}\frac{\text{dt}}{\beta _{0}\alpha _{s}}\left[{\bar B}_{1}\alpha _{s}^{\text{NLL}}\left(t\right)+{\bar B}_{2}\left(\alpha _{s}^{\text{LL}}\left(t\right)\right)^{2}\right]
+\end{equation}
+
+The combinations are chosen in such a way that all the integrands are ${\cal O}(\alpha_{s})$.\\
+
+Summing up the five terms, we obtain
+
+\begin{eqnarray}
+g_3(\lambda)&=&-\frac{\bar{B}_2}{\beta _0}\frac{\lambda}{(1-\lambda)}+\frac{ \bar{B}_1\beta _1}{\beta _0^2 }\frac{\lambda+\ln(1-\lambda)}{1-\lambda} -\frac{A_3}{2 \beta _0^2}\frac{\lambda ^2}{(1-\lambda)^2}\nonumber\\&+&A_1 \left(\frac{\lambda\left(\beta _1^2 \lambda +\beta _0 \beta _2 (2-3 \lambda)\right)}{2 \beta _0^4 (1-\lambda)^2}+\frac{\beta _1^2 (1-2 \lambda) \ln^2(1-\lambda)}{\left(2 \beta _0^4\right) (1-\lambda)^2}+\left(\frac{\beta _1^2}{\beta _0^4 (1-\lambda)}+\frac{\beta _0 \beta _2-\beta _1^2}{\beta _0^4}\right) \ln(1-\lambda)\right)\nonumber\\&+&\frac{A_2 \beta _1}{\beta _0^3}\left(\frac{\lambda  (3 \lambda -2)}{2 (1-\lambda)^2}-\frac{(1-2 \lambda) \ln(1-\lambda)}{(1-\lambda )^2}\right).
+\end{eqnarray}
+
+\subsection{Introduction of $\mu_{R}$-dependence}
+
+We now allow the resummation scale $Q$ to be different from the renormalisation scale $\mu_{R}$, and consequently compute the variation of $g_{1}$ with respect to this change of scale.
+
+Considering the expansion of $\alpha_{s}$ up to ${\cal O}(\alpha_{s}^{2})$ in Eq.\ref{alphasPT}, we derive the following formulae for $g_{1}$ variation:
+
+\begin{eqnarray}
+\lambda&\longrightarrow&\lambda-\beta_{0}^{2}\alpha_{s}^{2}(\mu_{R}^{2})L\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)\\
+Lg_{1}&\longrightarrow&Lg_{1}+Lg_{1}^{'}(\lambda)\Delta\lambda=Lg_{1}-\lambda^{2}g_{1}^{'}(\lambda)\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)
+\end{eqnarray}
+
+The result is a next-to-leading order contribution that has to be added to $g_{2}$:
+
+\begin{equation}
+\Delta g_{1}^{LL}(\lambda)=\frac{A_1}{\beta _0}\left(\frac{\lambda}{1-\lambda}+\ln(1-\lambda)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)
+\end{equation}
+
+Considering the expansion of $\alpha_{s}$ up to ${\cal O}(\alpha_{s}^{3})$ in Eq.\ref{alphasPT}, we get two shifts:
+
+\begin{eqnarray}
+\lambda&\longrightarrow&\lambda-\beta_{0}\beta_{1}\alpha_{s}^{3}(\mu_{R}^{2})L\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)\\
+Lg_{1}&\longrightarrow&Lg_{1}+Lg_{1}^{'}(\lambda)\Delta\lambda=Lg_{1}-\alpha_{s}\frac{\beta_{1}}{\beta_{0}}\lambda^{2}g_{1}^{'}(\lambda)\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)
+\end{eqnarray}
+
+and
+
+\begin{eqnarray}
+\lambda&\longrightarrow&\lambda+\beta_{0}^{3}\alpha_{s}^{3}(\mu_{R}^{2})L\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)\\
+Lg_{1}&\longrightarrow&Lg_{1}+Lg_{1}^{'}(\lambda)\Delta\lambda=Lg_{1}+\beta_{0}\alpha_{s}\lambda^{2}g_{1}^{'}(\lambda)\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)
+\end{eqnarray}
+
+These are both next-to-next-to-leading order contributions and will be added to $g_{3}$:
+
+\begin{equation}
+\Delta g_{1}^{NLL1}(\lambda)=\alpha_s\frac{A_1}{\beta _0^2}\left(\frac{\lambda}{1-\lambda}+\ln(1-\lambda)\right)\left(\beta_1-\beta _0^2\ln\left(\frac{Q^2}{\mu _R^2}\right)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)
+\end{equation}
+
+A further term generating a contribution of the same order is the third term of the Taylor expansion (computed with first order squared variation of $\alpha_{s}$:
+
+\begin{eqnarray}
+\lambda&\longrightarrow&\lambda-\beta_{0}^{2}\alpha_{s}^{2}(\mu_{R}^{2})L\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)\\
+Lg_{1}&\longrightarrow&Lg_{1}+\frac{1}{2}g_{1}^{''}(\lambda)(\Delta\lambda)^{2}=Lg_{1}+\frac{1}{2}\beta_{0}\alpha_{s}\lambda^{3}g_{1}^{''}(\lambda)\ln^{2}(\frac{Q^{2}}{\mu_{R}^{2}})
+\end{eqnarray}
+
+which gives
+
+\begin{equation}
+\Delta g_{1}^{NLL2}(\lambda)=\alpha _s A_1\left(\frac{\lambda(2-3\lambda)}{2(\lambda-1)^2}+\ln(1-\lambda)\right)\ln ^2\left(\frac{Q^2}{\mu _R^2}\right)\end{equation}
+
+Applying the same variation at $g_{2}$ we get
+
+\begin{eqnarray}
+\lambda&\longrightarrow&\lambda-\beta_{0}^{2}\alpha_{s}^{2}(\mu_{R}^{2})L\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)\\
+g_{2}&\longrightarrow&g_{2}+g_{2}^{'}(\lambda)\Delta\lambda=g_{2}-\beta_{0}\alpha_{s}(\mu_{R}^{2})\lambda g_{2}^{'}(\lambda)\ln\left(\frac{Q^{2}}{\mu_{R}^{2}}\right)
+\end{eqnarray}
+
+The resulting next-to-next-to-leading contribution to add to $g_{3}$ is:
+
+\begin{equation}
+\Delta g_{2}^{LL}(\lambda)=\alpha _s\left(\bar{B}_1\frac{\lambda}{1-\lambda }+\frac{A_2}{\beta _0} \frac{\lambda ^2}{(1-\lambda )^2}-\frac{A_1\beta_1}{\beta _0^2}\frac{\lambda ^2}{(1-\lambda )^2}\ln(1-\lambda)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right).
+\end{equation}
+
+\subsection{Final expressions}
+
+The final expression for $g$-functions including renormalisation-scale dependence is:
+
+\begin{eqnarray}
+g_1(\lambda)&=&\frac{A_1 (\lambda +\ln(1-\lambda))}{\beta _{0}\lambda}\\
+g_2(\lambda)&=&\frac{\bar{B}_1}{\beta _0}\ln(1-\lambda )+\frac{A_1 \beta _1}{\beta _0^3} \left(\frac{\lambda }{1-\lambda }+\frac{1}{2} \log ^2(1-\lambda )+\frac{\log (1-\lambda )}{1-\lambda }\right)-\frac{A_2}{\beta _0^2}\left(\frac{\lambda }{1-\lambda }+\log (1-\lambda )\right)\nonumber\\&+&\frac{A_1}{\beta _0}\left(\frac{\lambda}{1-\lambda}+\ln(1-\lambda)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)\\
+g_3(\lambda)&=&-\frac{\bar{B}_2}{\beta _0}\frac{\lambda}{(1-\lambda)}+\frac{ \bar{B}_1\beta _1}{\beta _0^2 }\frac{\lambda+\ln(1-\lambda)}{1-\lambda} -\frac{A_3}{2 \beta _0^2}\frac{\lambda ^2}{(1-\lambda)^2}\nonumber\\&+&A_1 \left(\frac{\lambda\left(\beta _1^2 \lambda +\beta _0 \beta _2 (2-3 \lambda)\right)}{2 \beta _0^4 (1-\lambda)^2}+\frac{\beta _1^2 (1-2 \lambda) \ln^2(1-\lambda)}{\left(2 \beta _0^4\right) (1-\lambda)^2}+\left(\frac{\beta _1^2}{\beta _0^4 (1-\lambda)}+\frac{\beta _0 \beta _2-\beta _1^2}{\beta _0^4}\right) \ln(1-\lambda)\right)\nonumber\\&+&\frac{A_2 \beta _1}{\beta _0^3}\left(\frac{\lambda  (3 \lambda -2)}{2 (1-\lambda)^2}-\frac{(1-2 \lambda) \ln(1-\lambda)}{(1-\lambda )^2}\right)-\frac{A_{1}}{2}\frac{\lambda^{2}}{(1-\lambda)^{2}}\ln^{2}\left(\frac{Q^2}{\mu _R^2}\right)\nonumber\\&+&\left(\bar{B}_1\frac{\lambda}{1-\lambda }+\frac{A_2}{\beta _0}\frac{\lambda ^2}{(1-\lambda )^2}+\frac{A_1\beta_1}{\beta _0^2}\left(\frac{\lambda}{1-\lambda}+\frac{(1-2\lambda)\ln(1-\lambda)}{(1-\lambda)^{2}}\right)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)
+\end{eqnarray}
 
 
 
