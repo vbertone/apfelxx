@@ -590,8 +590,7 @@ In the limit $\kappa\rightarrow 0$, the second integral in the
 r.h.s. of Eq.~(\ref{eq:jitot}) drops and the splitting function
 $\mathcal{P}_1^{-,(0)}$ reduces to the one-loop non-singlet DGLAP
 splitting function (see Eq.~(\ref{eq:dglapsplitting})) so that, as
-expected, Eq.~(\ref{eq:jitot}) becomes the DGLAP equation in this
-limit.
+expected, Eq.~(\ref{eq:jitot}) becomes the DGLAP equation.
 
 It is also interesting to verify that also the ERBL equation is
 recovered in the limit $\xi\rightarrow 1$. Given the definition of
@@ -628,7 +627,7 @@ where:
 \end{equation}
 In order to make a step towards the ERBL equation, we change the
 variables $x$ and $y$ with:
-\begin{equation}
+\begin{equation}\label{eq:ERBLvariables}
 \begin{array}{l}
 \displaystyle t= \frac12\left(x + 1\right)\,,\\
 \\
@@ -643,7 +642,7 @@ with $\Phi^-(t) = f^-(x,1)$ and:
 \begin{equation}\label{eq:anomdim}
 \begin{array}{rcl}
 \overline{V}_{\rm NS}^{(0)}(t,u) &=&\displaystyle
-2C_F\bigg[\theta(u-t)\left(\frac{t-1}{u}+\frac1{u-t}-\delta(u-t)\int_0^1 du'\frac{\theta(u'-t)}{u'-t}\right)\\
+C_F\bigg[\theta(u-t)\left(\frac{t-1}{u}+\frac1{u-t}-\delta(u-t)\int_0^1 du'\frac{\theta(u'-t)}{u'-t}\right)\\
 \\
 &-&\displaystyle \theta(t-u)\left(\frac{t}{1-u}+\frac1{u-t}-\delta(t-u)\int_0^1 du'\frac{\theta(t-u')}{u'-t}\right) +\frac32\delta\left(u-t\right)\bigg]\,.
 \end{array}
@@ -656,7 +655,7 @@ where $f$ has a single pole at $u=t$, so that we can write
 Eq.~(\ref{eq:anomdim}) more compactly as:
 \begin{equation}\label{eq:anomdim1}
   \overline{V}_{\rm NS}^{(0)}(t,u) =
-  2C_F\left\{\left[\theta(u-t)\frac{t-1}{u}+\left(\frac{\theta(u-t)}{u-t}\right)_+\right]-\left[\theta(t-u)\frac{t}{1-u}+\left(\frac{\theta(t-u)}{u-t}\right)_+\right]+\frac32\delta\left(u-t\right)\right\}\,.
+  C_F\left\{\left[\theta(u-t)\frac{t-1}{u}+\left(\frac{\theta(u-t)}{u-t}\right)_+\right]-\left[\theta(t-u)\frac{t}{1-u}+\left(\frac{\theta(t-u)}{u-t}\right)_+\right]+\frac32\delta\left(u-t\right)\right\}\,.
 \end{equation}
 This confirms the result of Ref.~\cite{Blumlein:1999sc} modulo the
 fact that, for achieving a correct cancellation of the divergencies,
@@ -675,7 +674,7 @@ from Ref.~\cite{Ji:1996nm} admits a fully $+$-prescribed form, that
 is:
 \begin{equation}\label{eq:anomdim1}
   \overline{V}_{\rm NS}^{(0)}(t,u) =
-  2C_F\left\{\theta(u-t)\left[\frac{t-1}{u}+\frac{1}{u-t}\right]-\theta(t-u)\left[\frac{t}{1-u}+\frac{1}{u-t}\right]\right\}_+\,.
+  C_F\left\{\theta(u-t)\left[\frac{t-1}{u}+\frac{1}{u-t}\right]-\theta(t-u)\left[\frac{t}{1-u}+\frac{1}{u-t}\right]\right\}_+\,.
 \end{equation}
 This was also explicitly derived in Ref.~\cite{Mikhailov:1984ii} and
 argued that this property must hold for symmetry reasons.
@@ -723,7 +722,7 @@ question, we notice that the fact that the non-singlet DGLAP anomalous
 dimension integrates to zero (see Eq.~(\ref{eq:dglapsplitting})), and
 thus admits a $+$-prescribed form, derives from the conservation of
 the total number of quarks minus anti-quarks (valence sum rule):
-\begin{equation}
+\begin{equation}\label{eq:valsumrulef}
 \int_0^1dx\, f^-(x,0) = \mbox{constant}\,.
 \end{equation}
 Taking the derivative of this equation w.r.t. $\ln\mu^2$ and using the
@@ -817,11 +816,12 @@ written as a fully $+$-prescribed function.
 
 Having ascertained that the evolution equation from
 Ref.~\cite{Ji:1996nm} is well-behaved for the non-singlet distribution
-$f^-$, we move on to consider the singlet $f^+$ and the gluon $f_g$
-distributions. As in the standard DGLAP evolution equation, singlet
-and gluon GPDs couple under evolution. Defining $f^+$ as the column
-vector of singlet and gluon GPDs, the corresponding anomalous
-dimension $\mathcal{P}^+$ is a matrix in flavour space:
+$f^-$, we move on to consider the singlet $f_{\rm S}$ and gluon
+$f_{\rm G}$ distributions. As in the standard DGLAP evolution
+equation, singlet and gluon GPDs couple under evolution. Defining
+$f^+$ as the column vector of singlet and gluon GPDs, the
+corresponding anomalous dimension $\mathcal{P}^+$ is a matrix in
+flavour space:
 \begin{equation}\label{eq:singmat}
   \mathcal{P}^+=\begin{pmatrix}
     \mathcal{P}_{\rm SS}& \mathcal{P}_{\rm SG}\\
@@ -831,121 +831,142 @@ dimension $\mathcal{P}^+$ is a matrix in flavour space:
 Following the same procedure discussed above for the non-singlet
 distribution $f^-$, the one-loop evolution equation for $f^+$ reads:
 \begin{equation}\label{eq:jitotsing}
-  \mu^2\frac{d}{d\mu^2}f^+(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{+,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{+,(0)}(y,\kappa)f^+\left(\frac{x}{y},\xi\right)\right]\,.
+  \mu^2\frac{d}{d\mu^2}f^+(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{+,(0)}(y,\kappa)f^+\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{+,(0)}(y,\kappa)f^+\left(\frac{x}{y},\xi\right)\right]\,.
 \end{equation}
-The single splitting functions $\mathcal{P}_{1}$ and $\mathcal{P}_2$ are
-derived from the expression Ref.~\cite{Ji:1996nm} as:
+The single splitting function matrices $\mathcal{P}_{1}$ and
+$\mathcal{P}_2$ are derived from the expression Ref.~\cite{Ji:1996nm}
+as:
 \begin{equation}
 \begin{array}{rcl}
-\mathcal{P}_{I,1}(y,\kappa) &=& 2P_I(y,\kappa y)= 2P_I'(y,\kappa y) +
-                                2P_I'(y,-\kappa y)\,,\\
+\mathcal{P}_{1,\rm IJ}(y,\kappa) &=& 2P_{\rm IJ}(y,2\kappa y)= 2P_{\rm IJ}'(y,2\kappa y) +
+                                2P_{\rm IJ}'(y,-2\kappa y)\,,\\
 \\
-\mathcal{P}_{I,2}(y,\kappa) &=& - 2P_I'(y,-\kappa y) - 2P_I'(-y,\kappa y)\,,
+\mathcal{P}_{2,\rm IJ}(y,\kappa) &=& - 2P_{\rm IJ}'(y,-2\kappa y) - 2P_{\rm IJ}'(-y,2\kappa y)\,,
 \end{array}
 \end{equation}
-with $I=\rm SS,SG,GS,SS$. This leads to:
+with $\rm I,J=S,G$. This leads to:
 \begin{equation}
 \left\{\begin{array}{rcl}
-\mathcal{P}_{\rm SS, 1}^{(0)}(y,\kappa) &=& \mathcal{P}_{1}^{-,(0)}(y,\kappa)\,,\\
+\mathcal{P}_{1,\rm SS}^{(0)}(y,\kappa) &=& \mathcal{P}_{1}^{-,(0)}(y,\kappa)\,,\\
 \\
-\mathcal{P}_{\rm SS, 2}^{(0)}(y,\kappa) &=& \displaystyle 2C_F(1-\kappa)\left[\frac{1-(1+2\kappa+2\kappa^2)y^2}{\kappa(1-y^2)(1-\kappa^2y^2)}\right]=2C_F\left[\frac{(1+\kappa)(1+y)+\kappa^3y^2}{(1+y)(1-\kappa^2y^2)}-\left(\frac{1}{1-y}\right)_{++}\right]\,,
+\mathcal{P}_{2,\rm SS}^{(0)}(y,\kappa) &=& \displaystyle 2C_F\left[\frac{(1+\kappa)(1+y)+\kappa^3y^2}{(1+y)(1-\kappa^2y^2)}-\left(\frac{1}{1-y}\right)_{++}\right]\,,
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \left\{\begin{array}{rcl}
-\mathcal{P}_{\rm SG, 1}^{(0)}(y,\kappa) &=& \displaystyle 4n_f T_R\left[\frac{y^2+(1-y)^2-\kappa^2y^2}{(1-\kappa^2y^2)^2}\right]\,,\\
+\mathcal{P}_{1,\rm SG}^{(0)}(y,\kappa) &=& \displaystyle 4n_f T_R\left[\frac{y^2+(1-y)^2-\kappa^2y^2}{(1-\kappa^2y^2)^2}\right]\,,\\
 \\
-\mathcal{P}_{\rm SG, 2}^{(0)}(y,\kappa) &=& \displaystyle 4n_f T_R(1-\kappa)\left[\frac{1-\kappa(\kappa+2)y^2}{\kappa(1-\kappa^2y^2)^2}\right]\,,
+\mathcal{P}_{2,\rm SG}^{(0)}(y,\kappa) &=& \displaystyle 4n_f T_R(1-\kappa)\left[\frac{1-\kappa(\kappa+2)y^2}{\kappa(1-\kappa^2y^2)^2}\right]\,,
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \left\{\begin{array}{rcl}
-  \mathcal{P}_{\rm GS, 1}^{(0)}(y,\kappa) &=& \displaystyle 2C_F\left[\frac{1+(1-y)^2-\kappa^2y^2}{y(1-\kappa^2y^2)}\right]\,,\\
+  \mathcal{P}_{1,\rm GS}^{(0)}(y,\kappa) &=& \displaystyle 2C_F\left[\frac{1+(1-y)^2-\kappa^2y^2}{y(1-\kappa^2y^2)}\right]\,,\\
   \\
-  \mathcal{P}_{\rm GS, 2}^{(0)}(y,\kappa) &=& \displaystyle
-                                          2C_F(1-\kappa)\left[\frac{2-\kappa(\kappa+1)y^2}{\kappa
-                                          y(1-\kappa^2 y^2)}\right]\,,
+  \mathcal{P}_{2,\rm GS}^{(0)}(y,\kappa) &=& \displaystyle-2C_F\frac{(1-\kappa)^2}{\kappa(1-\kappa^2 y^2)}\,,
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \left\{\begin{array}{rcl}
-  \mathcal{P}_{\rm GG, 1}^{(0)}(y,\kappa) &=& \displaystyle
-                                          \frac{4C_A}{(1-\kappa^2
-                                          y^2)^2}\left[(1-\kappa^2) (1-\kappa^2y^2)\frac{y}{(1-y)_+}+\frac{1-y}{y}+y(1-y)\right]+\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,\\
+  %\mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
+  %                                        4C_A\left[\left(\frac{1}{1-y}\right)_+-\frac{1+\kappa^2y}{1-\kappa^2y^2}+\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)\right)\right]\\
+  \mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
+                                          4C_A\bigg[\left(\frac{1}{1-y}-\frac{\kappa^2y}{1-\kappa^2y^2}\right)_++\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)-1+\kappa^2y^2\right)\\
+\\
+&+&\displaystyle\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,\\
   \\
-  \mathcal{P}_{\rm GG, 2}^{(0)}(y,\kappa) &=& \displaystyle 2C_A\frac{1-\kappa^2}{1-\kappa^2y^2}\left[\frac{2(1+y^2)}{(1+\kappa)(1-\kappa^2y^2)}-\frac{1}{\kappa}+2-\frac{1}{1+y}-\left(\frac{1}{1-y}\right)_{++}\right]\,.
+  \mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle 2C_A\frac{1-\kappa^2}{1-\kappa^2y^2}\left[\frac{2(1+y^2)}{(1+\kappa)(1-\kappa^2y^2)}-\frac{1}{\kappa}+2-\frac{1}{1+y}-\left(\frac{1}{1-y}\right)_{++}\right]\,.
 \end{array}\right.
 \end{equation}
+Notice that for $\mathcal{P}_{1,\rm GG}^{(0)}$ we have used the
+integral:
+\begin{equation}
+\int_0^1dz\frac{\kappa^2z}{1-\kappa^2z^2} = -\frac{1}{2}\ln(|1-\kappa^2|)\,,
+\end{equation}
+to make the limit $\kappa\rightarrow 1$ explicitly convergent.
+
 In all cases, the limit for $\kappa\rightarrow 0$ of $\mathcal{P}_1$
 reproduces the one-loop DGLAP splitting functions. In addition, we
-also notice that all $\mathcal{P}_2$ are proportional to
+also notice that all $\mathcal{P}_2$'s are proportional to
 $\kappa-1$. Along with the fact that all $\mathcal{P}_1$ are
-well-behaved at $\kappa=1$, this guarantees the continuity of GPDs at
-the cross-over point $x=\xi$.
+well-behaved at $\kappa=1$:
+
+\begin{equation}
+\begin{array}{rcl}
+\mathcal{P}_{1,\rm SS}^{(0)}(y,1) &=& \displaystyle 2C_F\left\{\left[\frac{1}{1-y}\right]_++\delta(1-y)\left[\frac32-\ln(2)\right]\right\}\,,\\
+\\
+\mathcal{P}_{1,\rm SG}^{(0)}(y,1) &=& \displaystyle \frac{4n_f T_R}{(1+y)^2}\,,\\
+\\
+  \mathcal{P}_{1,\rm GS}^{(0)}(y,1) &=& \displaystyle \frac{4C_F}{y(1+y)}\,,\\
+  \\
+  \mathcal{P}_{1,\rm GG}^{(0)}(y,1) &=& \displaystyle 4C_A\left[\left(\frac{1}{1-y^2}\right)_++\frac{1}{y(1+y)^2}\right]+\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,
+\end{array}
+\end{equation}
+this guarantees the continuity of GPDs across the point $x=\xi$.
 
 We now compute the ERBL limit by taking $\kappa\rightarrow 1/x$. To do
 so, we use the ERBL-compliant form of the evolution equation:
 \begin{equation}\label{eq:erblsing}
-  \mu^2\frac{d}{d\mu^2}f^+(x,1) =
-  \frac{\alpha_s(\mu)}{4\pi}\left[\int_{-1}^1 dy\,\mathcal{V}^{(0)}(x,y)f^+\left(y,1\right)\right] \,,
+  \mu^2\frac{d}{d\mu^2}\Phi^+(t) =
+  \frac{\alpha_s(\mu)}{4\pi}\left[\int_{0}^1 du\,\overline{V}_{\rm S}^{(0)}(t,u) \Phi^+\left(u\right)\right] \,,
 \end{equation}
-where $\mathcal{V}^{(0)}$ is a matrix in flavour space with the same
-structure of $\mathcal{P}^+$ in Eq.~(\ref{eq:singmat}), whose
-components can be written in terms of the $P_{I}'$ functions as follows:
+with $\Phi^+(t) = f^+(x,1)$ and where $u$ and $t$ are defined in
+Eq.~(\ref{eq:ERBLvariables}).  $\overline{V}_{\rm S}^{(0)}$ is a matrix
+in flavour space with the same structure of $\mathcal{P}^+$ in
+Eq.~(\ref{eq:singmat}), whose components can be written in terms of
+the $P_{\rm IJ}'$ functions as follows:
 \begin{equation}
 \begin{array}{rcl}
-V_{\rm SS}^{(0)}(x,y) &=&\displaystyle \theta(y-x)\left[\frac{2}{y}P_{\rm
-    SS}'\left(\frac{x}{y},\frac{2}{y}\right)
-                          \right]-2C_F\delta\left(y-x\right)\int_{-1}^1 dz \,\frac{\theta(z-x)}{z-x}\\
+V_{\rm SS}^{(0)}(t,u) &=&\displaystyle \theta(u-t)\left[\frac{2}{2u-1}P_{\rm
+    SS}'\left(\frac{2t-1}{2u-1},\frac{2}{2u-1}\right)
+                          \right]-C_F\delta\left(u-t\right)\int_{0}^1 du' \,\frac{\theta(u'-t)}{u'-t}\\
 \\
-&+&\displaystyle \theta(x-y)\left[-\frac{2}{y}P_{\rm
-    SS}'\left(\frac{x}{y},-\frac{2}{y}\right)
-                          \right]+2C_F\delta\left(x-y\right)\int_{-1}^{1}dz\,\frac{\theta(x-z)}{z-x}\\
+&+&\displaystyle \theta(t-u)\left[-\frac{2}{2u-1}P_{\rm
+    SS}'\left(\frac{2t-1}{2u-1},-\frac{2}{2u-1}\right)
+                          \right]+C_F\delta\left(t-u\right)\int_{0}^{1}du'\,\frac{\theta(t-u')}{u'-t}\\
 \\
-&+&\displaystyle 3C_F\delta\left(y-x\right)\,, \\
+&+&\displaystyle \frac32C_F\delta\left(u-t\right)\,, \\
 \\
-V_{\rm SG,GS}^{(0)}(x,y) &=&\displaystyle \theta(y-x)\left[\frac{2}{y}P_{\rm
-    SG,GS}'\left(\frac{x}{y},\frac{2}{y}\right)
-                          \right]+\displaystyle \theta(x-y)\left[-\frac{2}{y}P_{\rm
-    SG,GS}'\left(\frac{x}{y},-\frac{2}{y}\right)
+V_{\rm SG,GS}^{(0)}(t,u) &=&\displaystyle \theta(u-t)\left[\frac{2}{2u-1}P_{\rm
+    SG,GS}'\left(\frac{2t-1}{2u-1},\frac{2}{2u-1}\right)
+                          \right]\\
+\\
+&+&\displaystyle \theta(t-u)\left[-\frac{2}{2u-1}P_{\rm
+    SG,GS}'\left(\frac{2t-1}{2u-1},-\frac{2}{2u-1}\right)
                           \right]\,,\\
 \\
-V_{\rm GG}^{(0)}(x,y) &=&\displaystyle \theta(y-x)\left[\frac{2}{y}P_{\rm
-    GG}'\left(\frac{x}{y},\frac{2}{y}\right)
-                          \right]-2C_A\delta\left(y-x\right)\int_{-1}^1 dz \,\frac{\theta(z-x)}{z-x}\\
+V_{\rm GG}^{(0)}(t,u) &=&\displaystyle \theta(u-t)\left[\frac{2}{2u-1}P_{\rm
+    GG}'\left(\frac{2t-1}{2u-1},\frac{2}{2u-1}\right)
+                          \right]-C_A\delta\left(u-t\right)\int_{0}^1 du' \,\frac{\theta(u'-t)}{u'-t}\\
 \\
-&+&\displaystyle \theta(x-y)\left[-\frac{2}{y}P_{\rm
-    GG}'\left(\frac{x}{y},-\frac{2}{y}\right)
-                          \right]+2C_A\delta\left(x-y\right)\int_{-1}^{1}dz\,\frac{\theta(x-z)}{z-x}\\
+&+&\displaystyle \theta(t-u)\left[-\frac{2}{2u-1}P_{\rm
+    GG}'\left(\frac{2t-1}{2u-1},-\frac{2}{2u-1}\right)
+                          \right]+C_A\delta\left(t-u\right)\int_{0}^{1}du'\,\frac{\theta(t-u')}{u'-t}\\
 \\
 &+&\displaystyle \left(\frac{11C_A-4T_R
-    n_f}{3}\right)\delta\left(y-x\right)\,.
+    n_f}{6}\right)\delta\left(u-t\right)\,.
 \end{array}
 \end{equation}
 The explicit expressions read:
 \begin{equation}
 \begin{array}{rcl}
-V_{\rm SS}^{(0)}(x,y) &=&\displaystyle V_{\rm NS}^{(0)}(x,y)\,,\\
-\\
-V_{\rm SG}^{(0)}(x,y) &=&\displaystyle \,,\\
-\\
-V_{\rm GS}^{(0)}(x,y) &=&\displaystyle \,,\\
-\\
-V_{\rm GG}^{(0)}(x,y) &=&\displaystyle \theta(y-x)\left[\frac{2}{y}P_{\rm
-    GG}'\left(\frac{x}{y},\frac{2}{y}\right)
-                          \right]-2C_A\delta\left(y-x\right)\int_{-1}^1 dz \,\frac{\theta(z-x)}{z-x}\\
-\\
-&+&\displaystyle \theta(x-y)\left[-\frac{2}{y}P_{\rm
-    GG}'\left(\frac{x}{y},-\frac{2}{y}\right)
-                          \right]+2C_A\delta\left(x-y\right)\int_{-1}^{1}dz\,\frac{\theta(x-z)}{z-x}\\
-\\
-&+&\displaystyle \left(\frac{11C_A-4T_R
-    n_f}{3}\right)\delta\left(y-x\right)\,.
+  V_{\rm SS}^{(0)}(t,u) &=&\displaystyle V_{\rm NS}^{(0)}(t,u)\,,\\
+  \\
+  V_{\rm SG}^{(0)}(t,u) &=&\displaystyle 2n_fT_R\left(\frac{2u-1}{2}\right) \left[\theta(u-t)\frac{t}{u}\left(\frac{2t-1}{u}-2\frac{1-t}{1-u}\right)-\theta(t-u)\left(\frac{1-t}{1-u}\right)\left(\frac{1-2t}{1-u}-2\frac{t}{u}\right)\right]\,,\\
+  \\
+  V_{\rm GS}^{(0)}(t,u) &=&\displaystyle C_F \left(\frac{2}{2t-1}\right)
+                            \left[\theta(u-t)\left(2t-\frac{t^2}{u}\right)
+                            -\theta(t-u) \left(2(1-t)-\frac{(1-t)^2}{1-u}\right)\right]\,,\\
+  \\
+  V_{\rm GG}^{(0)}(t,u) &=&\displaystyle \mbox{This is a little
+                            convoluted\dots leave it for when I feel
+                            like doing the calculation}\,.
 \end{array}
 \end{equation}
+
 
 \newpage
 

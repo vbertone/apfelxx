@@ -47,12 +47,14 @@ namespace apfel
         // Interpolation degree.
         const int id = sg.InterDegree();
 
-        // Limit the loop over "beta" according to whether "sg" is
-        // external.
-        const int gbound = ( sg.IsExternal() ? nx : 0 );
+        // Logarithmic step of the current grid
+        const double s = exp(sg.Step());
 
-        _Operator[ig].resize(gbound + 1, nx + 1, 0);
-        for (int beta = 0; beta <= gbound; beta++)
+        if (s == 0)
+          throw std::runtime_error(error("Operator::Operator", "Subgrid not properly constructed (not logarithmically distributed)"));
+
+        _Operator[ig].resize(1, nx + 1, 0);
+        for (int beta = 0; beta <= 0; beta++)
           {
             const double xbeta = xg[beta];
 
@@ -80,17 +82,16 @@ namespace apfel
                 // integration converges faster and is more accurate.
 
                 // Number of grid intervals we need to integrate over
-                const int nmin = fmax(0, alpha + 1 - nx);
-                const int nmax = (erbl ? id : fmin(id, alpha - beta) ) + 1;
+                const int nmin = std::max(0, alpha + 1 - nx);
+                const int nmax = (erbl ? id : std::min(id, alpha - beta) ) + 1;
 
                 // Integral
                 double I = 0;
                 for (int jint = nmin; jint < nmax; jint++)
                   {
-                    // Define integration bounds of the first
-                    // iteration.
-                    const double c = xbeta / xg[alpha-jint+1];
-                    const double d = xbeta / xg[alpha-jint];
+                    // Define integration bounds
+                    const double c = pow(s, beta - alpha + jint - 1);
+                    const double d = c * s;
 
                     // Define integrand and the corresponding
                     // "Integrator" object.
@@ -112,6 +113,12 @@ namespace apfel
               }
           }
       }
+  }
+
+  //_________________________________________________________________________
+  Operator::Operator(Grid const& gr, Expression const& expr, bool const& erbl, double const& eps):
+    Operator(gr, expr, eps, erbl)
+  {
   }
 
   //_________________________________________________________________________
@@ -139,25 +146,14 @@ namespace apfel
       {
         int const nx = _grid.GetSubGrid(ig).nx();
 
-        // If the grid is external the product between the operator
-        // and the distribution has to be done in a standard way.
-        if (this->_grid.GetSubGrid(ig).IsExternal())
-          for (int alpha = 0; alpha <= nx; alpha++)
-            {
-              s[ig][alpha] = 0;
-              for (int beta = alpha; beta <= nx; beta++)
-                s[ig][alpha] += _Operator[ig](alpha, beta) * sg[ig][beta];
-            }
-        // If the grid is internal the product between the operator
-        // and the distribution has to be done exploiting the symmetry
-        // of the operator.
-        else
-          for (int alpha = 0; alpha <= nx; alpha++)
-            {
-              s[ig][alpha] = 0;
-              for (int beta = alpha; beta <= nx; beta++)
-                s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
-            }
+        // The product between the operator and the distribution is
+        // done exploiting the symmetry of the operator.
+        for (int alpha = 0; alpha <= nx; alpha++)
+          {
+            s[ig][alpha] = 0;
+            for (int beta = alpha; beta <= nx; beta++)
+              s[ig][alpha] += _Operator[ig](0,beta-alpha) * sg[ig][beta];
+          }
 
         // Set to zero the values above one
         for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
@@ -200,28 +196,13 @@ namespace apfel
       {
         const int nx = this->_grid.GetSubGrid(ig).nx();
 
-        // If the grid is external the product between the operators
-        // has to be done in a standard way.
-        if (this->_grid.GetSubGrid(ig).IsExternal())
+        // The product between the operators is done exploiting the
+        // symmetry of the operators.
+        for (int beta = 0; beta <= nx; beta++)
           {
-            for (int alpha = 0; alpha <= nx; alpha++)
-              for (int beta = alpha; beta <= nx; beta++)
-                {
-                  _Operator[ig](alpha, beta) = 0;
-                  for (int gamma = alpha; gamma <= beta; gamma++)
-                    _Operator[ig](alpha, beta) += v[ig](alpha, gamma) * o._Operator[ig](gamma, beta);
-                }
-          }
-        // If the grid is internal the product between the operators
-        // can be done exploiting the symmetry of the operators.
-        else
-          {
-            for (int beta = 0; beta <= nx; beta++)
-              {
-                _Operator[ig](0, beta) = 0;
-                for (int gamma = 0; gamma <= beta; gamma++)
-                  _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
-              }
+            _Operator[ig](0, beta) = 0;
+            for (int gamma = 0; gamma <= beta; gamma++)
+              _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
           }
       }
     return *this;
@@ -241,9 +222,6 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator *= (std::function<double(double const&)> f)
   {
-    if (!_grid.ExtGrids())
-      throw std::runtime_error(error("Operator::operator*=", "Multiplication by a function not allowed on internal grids"));
-
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       {
         // Get ig-th subgrid

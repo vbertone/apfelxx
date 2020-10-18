@@ -304,7 +304,7 @@ consecutive nodes. Therefore, it turns out that it is convenient to
 compute the integrals $I_{\beta\alpha}$ by breaking the integration
 range as follows:
 \begin{equation}\label{eq:finalformula}
-I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa, \alpha - \beta]}  \int_{x_\beta/x_{\beta-j+1}}^{x_\beta/x_{\beta-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa, \alpha - \beta]}  \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
 in such a way that the integrand of each single integrand is a smooth
 function and thus easier to integrate. Despite the number of
@@ -317,7 +317,8 @@ s = \exp\left[\delta x\right]\,,
 \end{equation}
 Eq.~(\ref{eq:finalformula}) can also be written as:
 \begin{equation}
-I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa, \alpha - \beta]}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
+    min}[\kappa, \alpha - \beta]}  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
 
 \subsection{GPD-related integrals}
@@ -352,7 +353,7 @@ with integration bounds:
 Following the procedure discussed in the previous section, the actual
 computation is achieved by:
 \begin{equation}\label{eq:ERBLints}
-J_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{x_\beta/x_{\beta-j+1}}^{x_\beta/x_{\beta-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)=\sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+J_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)=\sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
 Therefore, the only difference with respect to the ``standard'' case
 is a change of the upper summation bound. It should be clear, however,

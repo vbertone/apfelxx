@@ -7,7 +7,6 @@
 #include "apfel/gpdbuilder.h"
 #include "apfel/dglap.h"
 #include "apfel/operator.h"
-#include "apfel/operatorerbl.h"
 #include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/constants.h"
@@ -66,7 +65,7 @@ namespace apfel
     const Operator O0gq = Operator{g, Pgpd0gqDGLAP{xi}, IntEps};// + OperatorERBL{g, Pgpd0gqERBL{xi}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0gg = Operator{g, Pgpd0ggDGLAP{nf, xi}, IntEps} + OperatorERBL{g, Pgpd0ggERBL{nf, xi}, IntEps};
+        const Operator O0gg = Operator{g, Pgpd0ggDGLAP{nf, xi}, IntEps};// + OperatorERBL{g, Pgpd0ggERBL{nf, xi}, IntEps};
         const Operator O0qgnf = nf * O0qg;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0ns});

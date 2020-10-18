@@ -42,6 +42,15 @@ namespace apfel
     Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5, bool const& erbl = false);
 
     /**
+     * @brief The Operator constructor.
+     * @param gr: the Grid object
+     * @param expr: the expression to be transformed
+     * @param erbl: whether the convolution integral is ERBL like
+     * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
+     */
+    Operator(Grid const& gr, Expression const& expr, bool const& erbl, double const& eps = 1e-5);
+
+    /**
      * @name Binary operators
      */
     ///@{

@@ -15,7 +15,6 @@ namespace apfel
   //_________________________________________________________________________________
   Grid::Grid():
     _Locked(true),
-    _ExtGrids(false),
     _JointToSubMap({{}}),
   _GlobalGrid({})
   {
@@ -24,7 +23,6 @@ namespace apfel
   //_________________________________________________________________________________
   Grid::Grid(std::vector<SubGrid> const& grs, bool const& lockgrids):
     _Locked(lockgrids),
-    _ExtGrids(false),
     _JointToSubMap({{}}),
   _GlobalGrid(grs)
   {
@@ -44,17 +42,6 @@ namespace apfel
   {
     // Number of grids.
     double const ng = _GlobalGrid.size();
-
-    // Check if there are extenal grids and if so disable the locking.
-    for (int ig = 0; ig < ng; ig++)
-      if (_GlobalGrid[ig].IsExternal())
-        _ExtGrids = true;
-
-    if (_ExtGrids && _Locked)
-      {
-        warning("Grid::CreateJointGrid", "External grids found... unlocking grids");
-        _Locked = false;
-      }
 
     // Now oder the SubGrids in such a way that they start with that
     // having the lowest value of xMin (only if there is more than one
@@ -158,8 +145,6 @@ namespace apfel
   {
     if (_Locked != g._Locked)
       return false;
-    if (_ExtGrids != g._ExtGrids)
-      return false;
     if (_GlobalGrid.size() != g._GlobalGrid.size())
       return false;
 
@@ -184,7 +169,6 @@ namespace apfel
   {
     os << "Grid: " << &gr << "\n";
     os << "Locked    = " << gr._Locked << "\n";
-    os << "ExtGrids  = " << gr._ExtGrids << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
     for (const auto &v: gr._JointGrid.GetGrid()) os << v << " ";
     return os;

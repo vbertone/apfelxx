@@ -46,11 +46,6 @@ namespace apfel
     bool Locked() const { return _Locked; }
 
     /**
-     * @return The external-grid flag
-     */
-    bool ExtGrids() const { return _ExtGrids; }
-
-    /**
      * @return The map of indices from the subgrids to the joint grid
      */
     std::vector<std::vector<int>> const& JointToSubMap() const { return _JointToSubMap; }
@@ -90,7 +85,6 @@ namespace apfel
 
   private:
     bool                          _Locked;        //!< Flag for locking the grids.
-    bool                          _ExtGrids;      //!< Contains external sub-grids.
     std::vector<std::vector<int>> _JointToSubMap; //!< Map of indices from the subgrids to the joint grid (empty if the subgrids are not locked)
     std::vector<SubGrid>          _GlobalGrid;    //!< Vector with sub-grids.
     SubGrid                       _JointGrid;     //!< Container for the joint grid.

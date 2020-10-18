@@ -16,7 +16,6 @@ namespace apfel
   SubGrid::SubGrid():
     _nx(2),
     _InterDegree(1),
-    _IsExternal(false),
     _xMin(0),
     _xMax(1),
     _Step(0)
@@ -27,7 +26,6 @@ namespace apfel
   SubGrid::SubGrid(int const& nx, double const& xMin, int const& InterDegree):
     _nx(nx),
     _InterDegree(InterDegree),
-    _IsExternal(false),
     _xMin(xMin),
     _xMax(1)
   {
@@ -53,7 +51,6 @@ namespace apfel
   SubGrid::SubGrid(std::vector<double> const& xsg, int const& InterDegree):
     _nx(xsg.size()-1),
     _InterDegree(InterDegree),
-    _IsExternal(true),
     _xMin(xsg[0]),
     _xMax(1),
     _Step(0)
@@ -83,30 +80,15 @@ namespace apfel
   //_________________________________________________________________________________
   bool SubGrid::operator == (SubGrid const& sg) const
   {
-    // Are both external or internal grids?
-    if (_IsExternal != sg._IsExternal)
+    if (_nx != sg._nx)
+      return false;
+    if (_xMin != sg._xMin)
+      return false;
+    if (_xMax != sg._xMax)
+      return false;
+    if (_InterDegree != sg._InterDegree)
       return false;
 
-    // In case they are external ...
-    if (_IsExternal)
-      {
-        if (_xsg != sg._xsg)
-          return false;
-        if (_InterDegree != sg._InterDegree)
-          return false;
-      }
-    // In case they are internal ...
-    else
-      {
-        if (_nx != sg._nx)
-          return false;
-        if (_xMin != sg._xMin)
-          return false;
-        if (_xMax != sg._xMax)
-          return false;
-        if (_InterDegree != sg._InterDegree)
-          return false;
-      }
     return true;
   }
 
@@ -128,7 +110,6 @@ namespace apfel
     os << "xMax        = " << sg._xMax << "\n";
     os << "InterDegree = " << sg._InterDegree << "\n";
     os << "xsize       = " << sg._xsg.size() << "\n";
-    os << "IsExternal  = " << sg._IsExternal << "\n";
     os << "Step        = " << sg._Step << "\n";
     os << "xsg         = [";
     for (auto const& v: sg._xsg)
