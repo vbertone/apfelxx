@@ -51,7 +51,7 @@ namespace apfel
         const double s = exp(sg.Step());
 
         if (s == 0)
-          throw std::runtime_error(error("Operator::Operator", "Subgrid not properly constructed (not logarithmically distributed)"));
+          throw std::runtime_error(error("Operator::Operator", "Subgrid not well formed (not logarithmically distributed)"));
 
         _Operator[ig].resize(1, nx + 1, 0);
         for (int beta = 0; beta <= 0; beta++)
@@ -85,25 +85,28 @@ namespace apfel
                 const int nmin = std::max(0, alpha + 1 - nx);
                 const int nmax = (erbl ? id : std::min(id, alpha - beta) ) + 1;
 
-                // Integral
+                // Initialise integral
                 double I = 0;
-                for (int jint = nmin; jint < nmax; jint++)
+                for (int j = nmin; j < nmax; j++)
                   {
-                    // Define integration bounds
-                    const double c = pow(s, beta - alpha + jint - 1);
-                    const double d = c * s;
+                    // Define "Integrator" object.
+                    const Integrator Io{[&] (double const& y) -> double
+                      {
+                        const double z  = y / eta;
+                        // In case eta is different from one
+                        // (e.g. for the massive structure
+                        // functions) it may happen that z goes
+                        // above one. Prevent it but only in case on
+                        // non-ERBL-like integrals.
+                        if (!erbl && z >= 1)
+                          return 0;
+                        const double wr = li.InterpolantLog(alpha, log(xbeta / y), _grid.GetSubGrid(ig));
+                        return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
+                      }};
 
-                    // Define integrand and the corresponding
-                    // "Integrator" object.
-                    const std::function<double(double const&)> integrand = [&] (double const& x) -> double
-                    {
-                      const double z = x / eta;
-                      if (z >= 1)
-                        return 0;
-                      const double wr = li.InterpolantLog(alpha, log(xbeta / x), _grid.GetSubGrid(ig));
-                      return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
-                    };
-                    const Integrator Io{integrand};
+                    // Define integration bounds
+                    const double c = pow(s, beta - alpha + j - 1);
+                    const double d = c * s;
 
                     // Compute the integral
                     I += Io.integrate(c, d, eps);
