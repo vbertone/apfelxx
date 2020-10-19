@@ -346,7 +346,7 @@ namespace apfel
         for (int j = 0; j < (int) om[0].size(1); j++)
           os << om[0](i, j) << " ";
         os << "\b]";
-	os << "}\n";
+        os << "}\n";
       }
     os.copyfmt(default_format);
     return os;
