@@ -64,7 +64,6 @@ namespace apfel
     std::string                 name;                //!< Identifier name of the setup
     double                      Q0;                  //!< Starting scale of the evolutions
     std::vector<GridParameters> GridParameters;      //!< Vector of the parameters of the subgrids
-    bool                        Locked;              //!< Subgrid locked (ON, OFF)
     int                         nQg;                 //!< Number of the grid in Q
     double                      Qmin;                //!< Lower bound of the grid in Q
     double                      Qmax;                //!< Upper bound of the grid in Q
@@ -99,7 +98,6 @@ namespace apfel
       name("default"),
       Q0(sqrt(2)),
       GridParameters{{100, 1e-5, 3, {}}, {60, 1e-1, 3, {}}, {50, 6e-1, 3, {}}, {50, 8e-1, 3, {}}},
-      Locked(true),
       nQg(50), Qmin(1), Qmax(1000), InterDegreeQ(3), Lambda(0.25),
       PerturbativeOrder(2),
       FlavourScheme(VFNS),

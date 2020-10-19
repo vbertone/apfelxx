@@ -29,36 +29,50 @@ namespace apfel
   //_________________________________________________________________________________
   double LagrangeInterpolator::InterpolantLog(int const& beta, double const& lnx, SubGrid const& sg) const
   {
-    // Get the logarithmic grid.
-    const std::vector<double>& lxsg = sg.GetLogGrid();
+    // Get the logarithmic step first. Since this function is (and
+    // should only be) used to compute operators, the logarithmic step
+    // should be defined. Its knowledge, along with the number of
+    // intervals and the fact that the upper bound of the grid is
+    // always at x = 1, allows us to avoid knowing the grid itself
+    // because the interpolant can be written in terms of the relevat
+    // indeces. This is advantageous because this way one can
+    // indefinitely extend the grid beyond its original definition
+    // bounds.
+    const double s = sg.Step();
 
-    // Return immediately 1 if "x" coincides with "xg[beta]".
-    if (std::abs(lnx - lxsg[beta]) < eps12)
+    // Number of interval between xmin and xmax
+    const int nx = sg.nx();
+
+    // Rescaled value to be interpolated. This can be interpreted as a
+    // continuos index on the grid assocuated to "lnx".
+    const double ix = lnx / s + nx;
+
+    // Return immediately 1 if "ix" coincides with "beta".
+    if (std::abs(ix - beta) < eps10)
       return 1;
 
     // Define the lower bound of the interpolation range.
-    const int id    = sg.InterDegree();
-    const int bound = std::max(beta - id, 0);
+    const int id = sg.InterDegree();
 
     // Return 0 if "x" is outside the range in which the interpolant
-    // is different from zero.  Ideally this functions should never be
+    // is different from zero. Ideally this functions should never be
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
-    if (lnx < lxsg[bound] || lnx >= lxsg[beta+1])
+    if (ix < beta - id || ix >= beta + 1)
       return 0;
 
     // Find the the neighbors of "x" on the grid.
     int j;
-    for (j = 0; j <= beta - bound; j++)
-      if (lnx >= lxsg[beta-j])
+    for (j = 0; j <= id; j++)
+      if (ix >= beta - j)
         break;
 
     // Compute the interpolant.
     double w_int = 1;
     for (int delta = beta - j; delta <= beta - j + id; delta++)
       if (delta != beta)
-        w_int *= ( lnx - lxsg[delta] ) / ( lxsg[beta] - lxsg[delta] );
+        w_int *= ( ix - delta ) / ( beta - delta );
 
     return w_int;
   }

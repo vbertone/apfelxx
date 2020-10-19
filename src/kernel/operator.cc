@@ -93,11 +93,10 @@ namespace apfel
                     const Integrator Io{[&] (double const& y) -> double
                       {
                         const double z  = y / eta;
-                        // In case eta is different from one
-                        // (e.g. for the massive structure
-                        // functions) it may happen that z goes
-                        // above one. Prevent it but only in case on
-                        // non-ERBL-like integrals.
+                        // In case eta is different from one (e.g. for
+                        // the massive structure functions) it may
+                        // happen that z goes above one. Prevent it
+                        // but only in case of DGLAP-like integrals.
                         if (!erbl && z >= 1)
                           return 0;
                         const double wr = li.InterpolantLog(alpha, log(xbeta / y), _grid.GetSubGrid(ig));
@@ -347,8 +346,7 @@ namespace apfel
         for (int j = 0; j < (int) om[0].size(1); j++)
           os << om[0](i, j) << " ";
         os << "\b]";
-        if (i != (int) om[0].size(0) - 1)
-          os << "}\n";
+	os << "}\n";
       }
     os.copyfmt(default_format);
     return os;

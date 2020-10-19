@@ -16,16 +16,11 @@ int main()
   // Allocate vector of subgrids
   std::vector<apfel::SubGrid> sgs = {apfel::SubGrid{10,1e-5,3}, apfel::SubGrid{20,1e-3,2}, apfel::SubGrid{30,1e-1,2}};
 
-  // Construct grid with and without locking the subgrids
-  apfel::Grid gl{sgs, true};
-  apfel::Grid g{sgs, false};
+  // Construct grid
+  apfel::Grid g{sgs};
 
-  // Print grids
+  // Print grid
   std::cout << g << std::endl;
-  std::cout << gl << std::endl;
-
-  if (g == gl)
-    return 0;
 
   return 0;
 }

@@ -27,9 +27,8 @@ namespace apfel
     /**
      * @brief The Grid constructor.
      * @param grs: vector of subgrids
-     * @param lockgrids: flag to enable/disable the locking of the subgrids (default: true)
      */
-    Grid(std::vector<SubGrid> const& grs, bool const& lockgrids = true);
+    Grid(std::vector<SubGrid> const& grs);
 
     /**
      * @name Getters
@@ -39,11 +38,6 @@ namespace apfel
      * @return The number of subgrids
      */
     int nGrids() const { return _GlobalGrid.size(); }
-
-    /**
-     * @return The locking flag
-     */
-    bool Locked() const { return _Locked; }
 
     /**
      * @return The map of indices from the subgrids to the joint grid
@@ -77,15 +71,14 @@ namespace apfel
 
   private:
     /**
-     * @brief Takes the input SubGrids, apply the locking if needed
-     * and fill the joint grid object with the appropriate grid nodes.
+     * @brief Fill in the joint grid object with the appropriate grid
+     * nodes.
      * @return the joint grid
      */
     SubGrid CreateJointGrid();
 
   private:
-    bool                          _Locked;        //!< Flag for locking the grids.
-    std::vector<std::vector<int>> _JointToSubMap; //!< Map of indices from the subgrids to the joint grid (empty if the subgrids are not locked)
+    std::vector<std::vector<int>> _JointToSubMap; //!< Map of indices from the subgrids to the joint grid
     std::vector<SubGrid>          _GlobalGrid;    //!< Vector with sub-grids.
     SubGrid                       _JointGrid;     //!< Container for the joint grid.
 

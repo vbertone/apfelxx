@@ -14,15 +14,13 @@ namespace apfel
 {
   //_________________________________________________________________________________
   Grid::Grid():
-    _Locked(true),
     _JointToSubMap({{}}),
   _GlobalGrid({})
   {
   }
 
   //_________________________________________________________________________________
-  Grid::Grid(std::vector<SubGrid> const& grs, bool const& lockgrids):
-    _Locked(lockgrids),
+  Grid::Grid(std::vector<SubGrid> const& grs):
     _JointToSubMap({{}}),
   _GlobalGrid(grs)
   {
@@ -49,42 +47,41 @@ namespace apfel
     if (ng > 1)
       std::sort(_GlobalGrid.begin(), _GlobalGrid.end(), ComparexMin);
 
-    // In case there grids have been locked ...
-    if (_Locked)
-      // Find the point of the "(ig-1)"-th SubGrid such that
-      // "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]", and replace
-      // "xMin[ig]" with "x[ig-1][ix]".
-      for (int ig = 1; ig < ng; ig++)
-        {
-          const int nxg     = _GlobalGrid[ig-1].nx();
-          const double xmin = _GlobalGrid[ig].xMin();
+    // Lock the subgrids...
+    // Find the point of the "(ig-1)"-th SubGrid such that
+    // "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]", and replace
+    // "xMin[ig]" with "x[ig-1][ix]".
+    for (int ig = 1; ig < ng; ig++)
+      {
+        const int nxg     = _GlobalGrid[ig-1].nx();
+        const double xmin = _GlobalGrid[ig].xMin();
 
-          // Parameters of the adjusted grid.
-          int nx_new = -1;
-          double xmin_new = -1;
-          const int id_new = _GlobalGrid[ig].InterDegree();
-          const std::vector<double> xg = _GlobalGrid[ig-1].GetGrid();
+        // Parameters of the adjusted grid.
+        int nx_new = -1;
+        double xmin_new = -1;
+        const int id_new = _GlobalGrid[ig].InterDegree();
+        const std::vector<double> xg = _GlobalGrid[ig-1].GetGrid();
 
-          for (int ix = 0; ix < nxg; ix++)
-            if (xg[ix] > xmin)
-              {
-                xmin_new = xg[ix];
-                nx_new = nxg - ix;
-                break;
-              }
+        for (int ix = 0; ix < nxg; ix++)
+          if (xg[ix] > xmin)
+            {
+              xmin_new = xg[ix];
+              nx_new = nxg - ix;
+              break;
+            }
 
-          if (nx_new < 0 || xmin_new < 0)
-            throw std::runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
+        if (nx_new < 0 || xmin_new < 0)
+          throw std::runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
 
-          // Find the closest multiple of "nx - ix + 1" to "nx",
-          // i.e. "DensityFactor", and replace "nx" accordingly.
-          const int DensityFactor = _GlobalGrid[ig].nx() / nx_new;
-          nx_new *= DensityFactor;
+        // Find the closest multiple of "nx - ix + 1" to "nx",
+        // i.e. "DensityFactor", and replace "nx" accordingly.
+        const int DensityFactor = _GlobalGrid[ig].nx() / nx_new;
+        nx_new *= DensityFactor;
 
-          // Compute the new SubGrid and replace it in the global
-          // grid.
-          _GlobalGrid[ig] = SubGrid{nx_new, xmin_new, id_new};
-        }
+        // Compute the new SubGrid and replace it in the global
+        // grid.
+        _GlobalGrid[ig] = SubGrid{nx_new, xmin_new, id_new};
+      }
 
     // Compute the joint grid. Parameters of the joint grid. Use the
     // interpolation degree of the first grid.
@@ -107,33 +104,30 @@ namespace apfel
           }
       }
 
-    // In case the subgrids are locked all the nodes of each single
+    // Since the subgrids are locked all the nodes of each single
     // subgrid are also on the joint grid. We now define a vector of
     // integers that map each index on each single subgrid on a node
     // on the joint grid.
-    if (_Locked)
+    _JointToSubMap.resize(ng);
+    for (int ig = 0; ig < ng; ig++)
       {
-        _JointToSubMap.resize(ng);
-        for (int ig = 0; ig < ng; ig++)
-          {
-            const std::vector<double> xg = _GlobalGrid[ig].GetGrid();
-            const int nxg = _GlobalGrid[ig].nx();
-            const int id  = _GlobalGrid[ig].InterDegree();
+        const std::vector<double> xg = _GlobalGrid[ig].GetGrid();
+        const int nxg = _GlobalGrid[ig].nx();
+        const int id  = _GlobalGrid[ig].InterDegree();
 
-            _JointToSubMap[ig].resize(nxg + 1 + id);
-            for (int ix = 0; ix <= nxg; ix++)
-              for (int jx = 0; ix <= (int) xg_joint_vect.size(); jx++)
-                if (std::abs(xg_joint_vect[jx] / xg[ix] - 1) < eps12)
-                  {
-                    _JointToSubMap[ig][ix] = jx;
-                    break;
-                  }
+        _JointToSubMap[ig].resize(nxg + 1 + id);
+        for (int ix = 0; ix <= nxg; ix++)
+          for (int jx = 0; ix <= (int) xg_joint_vect.size(); jx++)
+            if (std::abs(xg_joint_vect[jx] / xg[ix] - 1) < eps12)
+              {
+                _JointToSubMap[ig][ix] = jx;
+                break;
+              }
 
-            // Add id more points at the end equal to that at x = 1
-            // (typically zero).
-            for (int ix = nxg + 1; ix < nxg + id + 1; ix++)
-              _JointToSubMap[ig][ix] = _JointToSubMap[ig][nxg];
-          }
+        // Add id more points at the end equal to that at x = 1
+        // (typically zero).
+        for (int ix = nxg + 1; ix < nxg + id + 1; ix++)
+          _JointToSubMap[ig][ix] = _JointToSubMap[ig][nxg];
       }
 
     // Initialize another SubGrid for the joint grid.
@@ -143,8 +137,6 @@ namespace apfel
   //_________________________________________________________________________________
   bool Grid::operator == (Grid const& g) const
   {
-    if (_Locked != g._Locked)
-      return false;
     if (_GlobalGrid.size() != g._GlobalGrid.size())
       return false;
 
@@ -168,7 +160,6 @@ namespace apfel
   std::ostream& operator << (std::ostream& os, Grid const& gr)
   {
     os << "Grid: " << &gr << "\n";
-    os << "Locked    = " << gr._Locked << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
     for (const auto &v: gr._JointGrid.GetGrid()) os << v << " ";
     return os;

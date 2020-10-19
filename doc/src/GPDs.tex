@@ -583,11 +583,39 @@ follows:
 \begin{equation}\label{eq:jitot}
   \mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\right]\,,
 \end{equation}
+or even more compactly as:
+\begin{equation}\label{eq:jitotcomp}
+  \mu^2\frac{d}{d\mu^2}f^-(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\int_x^\infty\frac{dy}{y}\mathcal{P}^{-,(0)}(y,\kappa)f^-\left(\frac{x}{y},\xi\right)\,,
+\end{equation}
+with:
+\begin{equation}
+\mathcal{P}^{-,(0)}(y,\kappa) = \theta(1-y)\mathcal{P}_1^{-,(0)}(y,\kappa)+\theta(\kappa-1)\mathcal{P}_2^{-,(0)}(y,\kappa)\,,
+\end{equation}
 to obtain a single DGLAP-like evolution equation valid for all values
-of $\kappa$.
+of $\kappa$. In fact, it should be pointed out that, when performing
+the integrals numerically, the form in Eq.~(\ref{eq:jitotcomp}) has to
+be adopted. The reason is that both functions $\mathcal{P}_1^{-,(0)}$
+and $\mathcal{P}_2^{-,(0)}$, due to the factor $1-\kappa^2y^2$, are
+affected by a pole at $y = |\kappa|^{-1}$ that, for $|\kappa|>1$ or
+equivalently $|x|<|\xi|$ (\textit{i.e.} in the ERBL region) have to cancel
+to give a finite result. Using the explicit expressions for
+$\mathcal{P}_1^{-,(0)}$ and $\mathcal{P}_2^{-,(0)}$, we find:
+\begin{equation}
+\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
+\mathcal{P}_1^{-,(0)}(y,\kappa) = -2 C_F (1+\kappa)\,,
+\end{equation}
+and:
+\begin{equation}
+\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
+\mathcal{P}_2^{-,(0)}(y,\kappa) = 2 C_F (1+\kappa)\,.
+\end{equation}
+Since the coefficient of the pole are equal in absolute value and
+opposite in sign they cancel in the integral. Below, we will
+explicitly verify this property also for the anomalous dimensions of
+the singlet sector.
 
-In the limit $\kappa\rightarrow 0$, the second integral in the
-r.h.s. of Eq.~(\ref{eq:jitot}) drops and the splitting function
+Importantly, in the limit $\kappa\rightarrow 0$, the second integral
+in the r.h.s. of Eq.~(\ref{eq:jitot}) drops and the splitting function
 $\mathcal{P}_1^{-,(0)}$ reduces to the one-loop non-singlet DGLAP
 splitting function (see Eq.~(\ref{eq:dglapsplitting})) so that, as
 expected, Eq.~(\ref{eq:jitot}) becomes the DGLAP equation.
@@ -831,7 +859,11 @@ flavour space:
 Following the same procedure discussed above for the non-singlet
 distribution $f^-$, the one-loop evolution equation for $f^+$ reads:
 \begin{equation}\label{eq:jitotsing}
-  \mu^2\frac{d}{d\mu^2}f^+(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\left[\int_x^1\frac{dy}{y}\mathcal{P}_1^{+,(0)}(y,\kappa)f^+\left(\frac{x}{y},\xi\right)+\theta(\kappa-1)\int_x^\infty\frac{dy}{y}\mathcal{P}_2^{+,(0)}(y,\kappa)f^+\left(\frac{x}{y},\xi\right)\right]\,.
+  \mu^2\frac{d}{d\mu^2}f^+(x,\xi) = \frac{\alpha_s(\mu)}{4\pi}\int_x^\infty\frac{dy}{y}\mathcal{P}^{+,(0)}(y,\kappa)f^+\left(\frac{x}{y},\xi\right)\,,
+\end{equation}
+with:
+\begin{equation}
+  \mathcal{P}^{+,(0)}(y,\kappa)= \theta(1-y)\mathcal{P}_1^{+,(0)}(y,\kappa)\theta(\kappa-1)\mathcal{P}_2^{+,(0)}(y,\kappa)\,.
 \end{equation}
 The single splitting function matrices $\mathcal{P}_{1}$ and
 $\mathcal{P}_2$ are derived from the expression Ref.~\cite{Ji:1996nm}
@@ -906,6 +938,31 @@ well-behaved at $\kappa=1$:
 \end{array}
 \end{equation}
 this guarantees the continuity of GPDs across the point $x=\xi$.
+
+Now, we explicitly verify that the pole at $y=|\kappa|^{-1}$ that
+affects all splitting functions above cancels between
+$\mathcal{P}_{1,\rm IJ}^{(0)}$ and $\mathcal{P}_{2,\rm
+  IJ}^{(0)}$. Since $\mathcal{P}_{1(2),\rm
+  SS}^{(0)}=\mathcal{P}_{1(2)}^{-,(0)}$, we do not need to do it
+again for the SS splitting functions. For the others we find:
+\begin{equation}
+\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
+\mathcal{P}_{1,\rm SG}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
+\mathcal{P}_{2,\rm SG}^{(0)}(y,\kappa) = \frac{8 n_f T_R(1-\kappa)}{\kappa}\,,
+\end{equation}
+\begin{equation}
+\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
+\mathcal{P}_{1,\rm GS}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
+\mathcal{P}_{2,\rm GS}^{(0)}(y,\kappa) = 2C_F\frac{(1-\kappa)^2}{\kappa}\,,
+\end{equation}
+\begin{equation}
+\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
+\mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
+\mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) = 4C_A\frac{(\kappa-1)(\kappa^2+1)}{\kappa^2}\,.
+\end{equation}
+These results confirm the cancellation of the pole at
+$y=|\kappa|^{-1}$ in the integral in the r.h.s. of
+Eq.~(\ref{eq:jitotsing}).
 
 We now compute the ERBL limit by taking $\kappa\rightarrow 1/x$. To do
 so, we use the ERBL-compliant form of the evolution equation:

@@ -13,7 +13,7 @@
 int main()
 {
   // Grid
-  apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,3}, apfel::SubGrid{40,8e-1,3}}, false};
+  apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,3}, apfel::SubGrid{40,8e-1,3}}};
 
   // Thresholds
   const std::vector<double> Thrs{1.4, 6};

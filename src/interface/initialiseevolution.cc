@@ -70,7 +70,7 @@ namespace apfel
         sg.push_back(SubGrid{gp.xgext, gp.id});
 
     // Intialise the x-space grid.
-    _g = std::unique_ptr<const Grid>(new Grid{sg, _setup.Locked});
+    _g = std::unique_ptr<const Grid>(new Grid{sg});
 
     // Integration accuracy.
     const double IntEps = _setup.GaussAccuracy;
@@ -539,9 +539,6 @@ namespace apfel
                   + " nodes in the range [" + std::to_string(gp.xgext.front())
                   + ":" + std::to_string(gp.xgext.back())
                   + "] with interpolation degree " + std::to_string(gp.id) + "\n";
-
-    if (_setup.Locked)
-      report += "  The sugrids are locked\n\n";
 
     // Report Q-grid parameters.
     report += "- Grid in Q: " + std::to_string(_setup.nQg)

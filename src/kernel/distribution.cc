@@ -409,33 +409,16 @@ namespace apfel
           DistMap.at(i++).SetJointGrid(ix, v);
       }
 
-    // Fill in subgrids. If the subgrids are locked the joint grid
+    // Fill in subgrids. Since the subgrids are locked the joint grid
     // already contains all the nodes therefore there is no need to
     // call the input function again.
-    if (g.Locked())
+    const std::vector<std::vector<int>>& m = g.JointToSubMap();
+    for (int o = 0; o < n; o++)
       {
-        const std::vector<std::vector<int>>& m = g.JointToSubMap();
-        for (int o = 0; o < n; o++)
-          {
-            const std::vector<double>& jv = DistMap.at(o).GetDistributionJointGrid();
-            for (int ig = 0; ig < (int) m.size(); ig++)
-              for (int ix = 0; ix < (int) m[ig].size(); ix++)
-                DistMap.at(o).SetSubGrid(ig, ix, jv[m[ig][ix]]);
-          }
-      }
-    else
-      {
-        for (int ig = 0; ig < g.nGrids(); ig++)
-          {
-            const std::vector<double>& sg = g.GetSubGrid(ig).GetGrid();
-            for (int ix = 0; ix < (int) sg.size(); ix++)
-              {
-                const std::vector<double> f = InDistFunc(std::min(sg[ix], 1.));
-                int i = 0;
-                for (double const& v : f)
-                  DistMap.at(i++).SetSubGrid(ig, ix, v);
-              }
-          }
+        const std::vector<double>& jv = DistMap.at(o).GetDistributionJointGrid();
+        for (int ig = 0; ig < (int) m.size(); ig++)
+          for (int ix = 0; ix < (int) m[ig].size(); ix++)
+            DistMap.at(o).SetSubGrid(ig, ix, jv[m[ig][ix]]);
       }
     return DistMap;
   }
