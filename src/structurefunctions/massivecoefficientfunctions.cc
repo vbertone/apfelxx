@@ -18,6 +18,8 @@ namespace apfel
   }
   double Cm21gNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     /*
     const double eta = this->_eta;
     const double z   = eta * x;
@@ -44,6 +46,8 @@ namespace apfel
   }
   double CmL1gNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     /*
     const double eta = this->_eta;
     const double z   = eta * x;
@@ -72,6 +76,8 @@ namespace apfel
   }
   double Cm22nsNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     /*
     const double eta = this->_eta;
     const double z   = eta * x;
@@ -121,6 +127,8 @@ namespace apfel
   }
   double CmL2nsNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     /*
     const double eta = this->_eta;
     const double z   = eta * x;
@@ -162,6 +170,8 @@ namespace apfel
   }
   double Cm22gNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -176,6 +186,8 @@ namespace apfel
   }
   double CmL2gNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -190,6 +202,8 @@ namespace apfel
   }
   double Cm22psNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -204,6 +218,8 @@ namespace apfel
   }
   double CmL2psNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -218,6 +234,8 @@ namespace apfel
   }
   double Cm22bargNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -232,6 +250,8 @@ namespace apfel
   }
   double CmL2bargNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -246,6 +266,8 @@ namespace apfel
   }
   double Cm22barpsNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
@@ -260,6 +282,8 @@ namespace apfel
   }
   double CmL2barpsNC::Regular(double const& x) const
   {
+    if (x >= 1)
+      return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );

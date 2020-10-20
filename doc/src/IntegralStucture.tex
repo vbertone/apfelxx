@@ -244,7 +244,7 @@ Eq.~(\ref{eq:intlims}) with $\eta=1$. They can be written as:
   \mbox{max}(x_\beta,e^{(\beta-\alpha-1)\delta x}) \quad\mbox{and}\quad d =
   \mbox{min}(1,e^{(\beta-\alpha+\kappa)\delta x}) \,.
 \end{equation}
-While the limit $d$ is manifestly depending only on the difference
+While the limit $d$ is manifestly only dependent on the difference
 $\beta-\alpha$, the limit $c$ is not. However, $c$ does not have this
 symmetry only when $x_\beta$ is selected in place of
 $e^{(\beta-\alpha-1)\delta x}$ and this can only happen when:
@@ -264,11 +264,16 @@ Therefore, the integrals $I_{\beta N_x}$ do not respect the
 ``$\beta-\alpha$'' symmetry.  However, as mentioned above,
 $I_{\beta N_x}$ will always multiply a function computed in
 $x_{N_x}=1$. If this function is a PDF or a FF, it is identically zero
-at $x_{N_x}=1$ and thus the symmetry is effectively preserved. The
-consequence of this symmetry is that computing, \textit{e.g.}, the
-integrals $a_\alpha=I_{0\alpha}$ for $\alpha=0,\dots,N_x$ is enough to
-reconstruct the full set of $I_{\beta\alpha}$ because, in matricial
-representation, it will look like this:
+at $x_{N_x}=1$ and thus the symmetry is effectively preserved. In
+addition, $c$ in Eq.~(\ref{eq:intlims1}) is such that if
+$\beta>\alpha$ one has $c\geq1$. But being $c$ the lower
+integration bound of and since in Eq.~(\ref{eq:integralex}) the upper
+bound is 1, one immediately has that $I_{\beta\alpha}=0$ for
+$\beta>\alpha$. The consequence of these observations is that
+computing the integrals $a_\alpha=I_{0\alpha}$ for
+$\alpha=0,\dots,N_x$ is enough to reconstruct the full set of
+$I_{\beta\alpha}$ because, in matricial representation, $I$ will look
+like this:
 \begin{equation}\label{eq:MatrixRep}
 \displaystyle I_{\beta\alpha} = 
 \begin{pmatrix}
@@ -277,9 +282,9 @@ a_0 &  a_1 & a_2 & \cdots & a_{N_x} \\
  0  & 0   &  a_0 & \cdots & a_{N_x-2} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
  0  &   0  &   0 & \cdots & a_0 
-\end{pmatrix}\,.
+\end{pmatrix}\,,
 \end{equation}
-In conclusion, adopting a logarithmically spaced grid allows one to
+In conclusion, adopting a logarithmically-spaced grid allows one to
 compute $N_x+1$ integrals rather than $(N_x+1)(N_x+2)/2$ integrals.
 
 There is another detail that matters in terms of numerical efficiency
@@ -355,16 +360,17 @@ computation is achieved by:
 \begin{equation}\label{eq:ERBLints}
 J_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)=\sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
-Therefore, the only difference with respect to the ``standard'' case
-is a change of the upper summation bound. It should be clear, however,
-that this procedure necessarily implies an approximation. This is due
-to the fact that the interpolation grid, understood to be
-logarithmically distributed, does not reach zero. This approximation
-manifests itself in the fact that upper bound of the intergrals in
-Eq.~(\ref{eq:ERBLints}) never reaches infinity but it gets as large as
-$s^{\kappa}$. The size of $s^{\kappa}$ can range widely depending on
-the lower bound of the grid $x_0$, on the number of nodes $N_x$, and
-on the interpolation degree $\kappa$, according to:
+Therefore, at the level of the single integral, the only difference
+with respect to the ``standard'' case is a change of the upper
+summation bound. It should be clear, however, that this procedure
+necessarily implies an approximation. This is due to the fact that the
+interpolation grid, understood to be logarithmically distributed, does
+not reach zero. This approximation manifests itself in the fact that
+upper bound of the intergrals in Eq.~(\ref{eq:ERBLints}) never reaches
+infinity but it gets as large as $s^{\kappa}$. The size of
+$s^{\kappa}$ can range widely depending on the lower bound of the grid
+$x_0$, on the number of nodes $N_x$, and on the interpolation degree
+$\kappa$, according to:
 \begin{equation}
 s^\kappa = \exp\left[-\frac{\kappa}{N_x}\ln x_0\right]=x_0^{-\frac{\kappa}{N_x}}\,.
 \end{equation}
@@ -372,20 +378,28 @@ In particular, $s^{\kappa}$ becomes larger as: $x_0$ gets smaller,
 $N_x$ gets smaller, and $\kappa$ gets larger. We will need to assess
 the impact of this approximation numerically.
 
-% It is instructive to generalise the above procedure by considering
-% integrals of this kind:
-% \begin{equation}\label{eq:ZMconvERBLGen}
-%   K(x) = x\int_{b(x)}^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z)\,,
-% \end{equation}
-% where $b$ can be any function of the external parameter $x$. Following
-% the same steps taken above, one arrives at:
-% \begin{equation}
-%   K(x_\beta)= \sum_{\alpha=0}^{N_x} K_{\beta\alpha}\overline{d}_\alpha\,,
-% \end{equation}
-% where:
-% \begin{equation}
-% K_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{???}  \int_{s^{j-1}}^{s^{j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
-% \end{equation}
+As in the in the standard case, the integral $J_{\beta\alpha}$ only
+depends on the difference $\beta-\alpha$. However, differently from
+the standard case, one has $J_{\beta\alpha}\neq 0$ also for
+$\beta>\alpha$. The reason is that the lower bound $c$ is now allowed
+to exceed 1. Using Eq.~(\ref{eq:intlims1}), this implies that
+$\beta-\alpha$ can also be larger than zero.  This means that
+computing the integrals $b_\alpha=J_{0\alpha}$ and
+$b_{-\alpha}=J_{\alpha0}$ for $\alpha=0,\dots,N_x$ is enough to
+reconstruct the full set of $J_{\beta\alpha}$. In matricial
+representation, $J$ takes the form:
+\begin{equation}\label{eq:MatrixRepERBL}
+\displaystyle J_{\beta\alpha} = 
+\begin{pmatrix}
+b_0 &  b_1 & b_2 & \cdots & b_{N_x} \\
+ b_{-1}  & b_0 & b_1 & \cdots & b_{N_x-1} \\
+ b_{-2}  & b_{-1}   &  b_0 & \cdots & b_{N_x-2} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+ b_{-N_x}  &   b_{-N_x+1}  &   b_{-N_x+2} & \cdots & b_0 
+\end{pmatrix}\,,
+\end{equation}
+Therefore, adopting a logarithmically-spaced grid allows one to
+compute $2N_x+1$ integrals rather than $N_x^2$ integrals.
 
 \subsection{Double convolution}
 
@@ -449,9 +463,9 @@ Ref.~\cite{deFlorian:1997zj}:
 \end{array}
 \end{equation}
 It is clear that in Eq.~(\ref{eq:DoubleFuncStruct}) all terms
-factorise into a part only depending on $y_1$ and a part only
-depending on $y_2$. This is crucial to use the same technology
-developed above for the single convolutions. Plugging
+factorise into a part that only depends on $y_1$ and a part that only
+depends on $y_2$. This is crucial to use the same technology developed
+above for the single convolutions. Plugging
 Eq.~(\ref{eq:DoubleFuncStruct}) into Eq.~(\ref{eq:DoubleZMconv}), one
 finds that:
 \begin{equation}\label{eq:MasterFormula}

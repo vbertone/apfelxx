@@ -9,7 +9,6 @@
 #include "apfel/grid.h"
 #include "apfel/expression.h"
 #include "apfel/distribution.h"
-#include "apfel/matrix.h"
 
 namespace apfel
 {
@@ -23,14 +22,6 @@ namespace apfel
   {
   public:
     Operator() = delete;
-
-    /**
-     * @brief The Operator constructor.
-     * @param gr: the Grid object
-     * @note This constructor is used when the operator class is
-     * inherited (e.g. to compute GPD evolution).
-     */
-    Operator(Grid const& gr);
 
     /**
      * @brief The Operator constructor.
@@ -49,6 +40,11 @@ namespace apfel
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
     Operator(Grid const& gr, Expression const& expr, bool const& erbl, double const& eps = 1e-5);
+
+    /**
+     * @brief Function that returns the ERBL-like flag
+     */
+    bool IsERBL() const { return _erbl; }
 
     /**
      * @name Binary operators
@@ -72,11 +68,12 @@ namespace apfel
     /**
      * @brief Function that returns the operator.
      */
-    std::vector<matrix<double>> GetOperator() const { return _Operator; }
+    std::vector<std::vector<double>> GetOperator() const { return _Operator; }
 
   protected:
     Grid                        const& _grid;         //!< Grid on which to compute the operator
-    std::vector<matrix<double>>        _Operator;     //!< Operator values.
+    bool                        const  _erbl;         //!< If the operator is ERBL-like
+    std::vector<std::vector<double>>   _Operator;     //!< Operator values.
 
     friend std::ostream& operator << (std::ostream& os, Operator const& sg);
   };
