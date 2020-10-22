@@ -357,6 +357,58 @@ which indeed gives a singular $\chi^2$ because the covariance matrix
 is singular. Eq.~(\ref{eq:redchi21}) does not produce these features
 hanging in favour of Eq.~(\ref{eq:fullchi2trunc}).
 
+\section{Monte Carlo replica generation}
+
+In this section we consider the Monte Carlo generation of articial
+replicas. The aim is to obtain a formula for the generation of
+replicas that gives rise to a figure of merit distributed correctly,
+\textit{i.e.} that follows a $\chi^2$ distribution with as many
+degrees of freedom as number of data points. Following
+Ref.~\cite{wiki:xxx}, we require that the $\chi^2$, that in matricial
+form can be expressed as:
+\begin{equation}\label{eq:chi2matrix}
+  \chi^2 = \mathbf{y}^{T}\cdot \mathbf{V}^{-1} \cdot \mathbf{y}\,,
+\end{equation}
+where $\mathbf{V}$ is the $n\times n$ covariance matrix, being $n$ the
+number of datapoints, and $\mathbf{y}$ is a column vector with $n$
+entries that can be expressed as:
+\begin{equation}
+y_j = m_j-f_j
+\end{equation}
+with $m_j$ a given value (to be thought as the central value) and
+$f_j$ its fluctuated value, is distributed like:
+\begin{equation}\label{eq:wikipedia}
+\chi^2\sim \sum_{i=1}^{n}z_i^2=|\mathbf{z}|^2\,,
+\end{equation}
+where $z_1,\dots , z_n$ are independent, standard normal random
+variables. As already discussed above, Eq.~(\ref{eq:chi2matrix}) can
+alternatively be written as:
+\begin{equation}\label{explicitchi2chol}
+\chi^2 = \left|\mathbf{L}^{-1}\cdot \mathbf{y}\right|^2\,,
+\end{equation}
+where $\mathbf{L}$ is the Cholesky decomposition of the matrix
+$\mathbf{V}$, such that:
+\begin{equation}\label{eq:choleskydecagain}
+\mathbf{V} = \mathbf{L}\cdot\mathbf{L}^{T}\,.
+\end{equation}
+Comparing Eqs.~(\ref{explicitchi2chol}) and~(\ref{eq:wikipedia}), one
+can infer that the following relation should hold:
+\begin{equation}
+\mathbf{L}^{-1}\cdot \mathbf{y}\sim\mathbf{z}\,,
+\end{equation}
+which immediately implies:
+\begin{equation}
+\mathbf{y}\sim\mathbf{L}\cdot\mathbf{z}\,,
+\end{equation}
+or equivalently:
+\begin{equation}\label{eq:deviations}
+f_j\sim m_j-\sum_{i=1}^nL_{ji}z_i\,.
+\end{equation}
+In conclusion, in order for the $\chi^2$ to have the correct
+distribution, the deviations $f_j$ from the experimental central
+values $m_j$ of a given Monte Carlo replica has be computed adopting
+Eq.~(\ref{eq:deviations}).
+
 \begin{thebibliography}{alp}
 
 %\cite{Ball:2009qv}
@@ -397,6 +449,13 @@ hanging in favour of Eq.~(\ref{eq:fullchi2trunc}).
   [arXiv:1705.00343 [hep-ph]].
   %%CITATION = doi:10.1007/JHEP07(2017)130;%%
   %19 citations counted in INSPIRE as of 13 May 2018
+
+\bibitem{wiki:xxx}
+    Wikipedia contributors,
+    Chi-square distribution --- {Wikipedia}{,} The Free Encyclopedia,
+    2020.
+   % \url{https://en.wikipedia.org/w/index.php?title=Chi-square_distribution&oldid=979585636}
+
 
 \end{thebibliography}
 

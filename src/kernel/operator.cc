@@ -122,49 +122,35 @@ namespace apfel
     if (&this->_grid != &d.GetGrid())
       throw std::runtime_error(error("Operator::operator*=", "Operator and Distribution grids do not match"));
 
+    // Get vector of distributions on the subgrids
     const std::vector<std::vector<double>>& sg = d.GetDistributionSubGrid();
-    std::vector<std::vector<double>> s(sg);
-    std::vector<double> j;
+    const int ng = _grid.nGrids();
+
+    // Initialise output vectors
+    std::vector<std::vector<double>> s(ng);
+    std::vector<double> j(d.GetDistributionJointGrid().size(), 0);
 
     // Compute the the distribution on the subgrids
-    int const ng = _grid.nGrids();
+    int i = 0;
     for (int ig = 0; ig < ng; ig++)
       {
+        // Resize output on the "ig"-th subgrid
+        s[ig].resize(sg[ig].size(), 0);
+
+        // Number of interval in the definition region
         int const nx = _grid.GetSubGrid(ig).nx();
 
         // The product between the operator and the distribution is
         // done exploiting the symmetry of the operator.
         for (int alpha = 0; alpha <= nx; alpha++)
-          {
-            s[ig][alpha] = 0;
-            for (int beta = alpha; beta <= nx; beta++)
-              s[ig][alpha] += _Operator[ig][beta - alpha] * sg[ig][beta];
-          }
-
-        // Set to zero the values above one
-        for (int alpha = nx + 1; alpha < this->_grid.GetSubGrid(ig).InterDegree() + nx + 1; alpha++)
-          s[ig][alpha] = 0;
+          for (int beta = alpha; beta <= nx; beta++)
+            s[ig][alpha] += _Operator[ig][beta - alpha] * sg[ig][beta];
 
         // Compute the distribution on the joint grid
-        double xtrans;
-        if (ig < ng-1)
-          xtrans = this->_grid.GetSubGrid(ig+1).xMin();
-        else
-          xtrans = 1 + 2 * eps12;
-
-        for (int alpha = 0; alpha <= nx; alpha++)
-          {
-            const double x = this->_grid.GetSubGrid(ig).GetGrid()[alpha];
-            if (xtrans - x < eps12)
-              break;
-            j.push_back(s[ig][alpha]);
-          }
+        const double xtrans = ( ig < ng - 1 ? this->_grid.GetSubGrid(ig + 1).xMin() : 1 + 2 * eps12 );
+        for (int alpha = 0; alpha <= nx && xtrans - this->_grid.GetSubGrid(ig).GetGrid()[alpha] > eps12; alpha++)
+          j[i++] = s[ig][alpha];
       }
-
-    // Set to zero the values above one
-    for (int alpha = 0; alpha < this->_grid.GetJointGrid().InterDegree(); alpha++)
-      j.push_back(0);
-
     return Distribution{d, s, j};
   }
 
@@ -176,20 +162,14 @@ namespace apfel
       throw std::runtime_error(error("Operator::operator*=", "Operators grid does not match"));
 
     const std::vector<std::vector<double>> v = _Operator;
-
-    const int ng = _grid.nGrids();
-    for (int ig = 0; ig < ng; ig++)
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
       {
-        const int nx = this->_grid.GetSubGrid(ig).nx();
-
+        std::fill(_Operator[ig].begin(), _Operator[ig].end(), 0);
         // The product between the operators is done exploiting the
         // symmetry of the operators.
-        for (int beta = 0; beta <= nx; beta++)
-          {
-            _Operator[ig][beta] = 0;
-            for (int gamma = 0; gamma <= beta; gamma++)
-              _Operator[ig][beta] += v[ig][gamma] * o._Operator[ig][beta - gamma];
-          }
+        for (int beta = 0; beta <= this->_grid.GetSubGrid(ig).nx(); beta++)
+          for (int gamma = 0; gamma <= beta; gamma++)
+            _Operator[ig][beta] += v[ig][gamma] * o._Operator[ig][beta - gamma];
       }
     return *this;
   }
@@ -199,7 +179,7 @@ namespace apfel
   {
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-	_Operator[ig][alpha] *= s;
+        _Operator[ig][alpha] *= s;
 
     return *this;
   }
@@ -212,7 +192,7 @@ namespace apfel
         // Get ig-th subgrid
         const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
         for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-	  _Operator[ig][alpha] *= f(sg[alpha]);
+          _Operator[ig][alpha] *= f(sg[alpha]);
       }
     return *this;
   }
@@ -222,7 +202,7 @@ namespace apfel
   {
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-          _Operator[ig][alpha] /= s;
+        _Operator[ig][alpha] /= s;
 
     return *this;
   }
@@ -236,7 +216,7 @@ namespace apfel
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-	_Operator[ig][alpha] += o._Operator[ig][alpha];
+        _Operator[ig][alpha] += o._Operator[ig][alpha];
 
     return *this;
   }
@@ -250,7 +230,7 @@ namespace apfel
 
     for (size_t ig = 0; ig < _Operator.size(); ig++)
       for (size_t alpha = 0; alpha < _Operator[ig].size(); alpha++)
-	_Operator[ig][alpha] -= o._Operator[ig][alpha];
+        _Operator[ig][alpha] -= o._Operator[ig][alpha];
 
     return *this;
   }
@@ -320,10 +300,10 @@ namespace apfel
     os.precision(1);
     for (int i = 0; i < (int) om.size(); i++)
       {
-	os << "O[" << i << "]: [";
-	for (int alpha = 0; alpha < (int) om[i].size(); alpha++)
-	  os << om[i][alpha] << " ";
-	os << "]\n";
+        os << "O[" << i << "]: [";
+        for (int alpha = 0; alpha < (int) om[i].size(); alpha++)
+          os << om[i][alpha] << " ";
+        os << "]\n";
       }
     os.copyfmt(default_format);
     return os;
