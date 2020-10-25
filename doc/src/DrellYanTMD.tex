@@ -2281,7 +2281,7 @@ contribution is expected to be subdominant.
 
 The calculation of the phase-space reduction factor carried out in the
 previous section can be used to express the Drell-Yan cross section in
-Eq.(\ref{eq:crosssection}) as differential in the kinematic variables
+Eq.~(\ref{eq:crosssection}) as differential in the kinematic variables
 of the single leptons. Loosely speaking, this amounts to removing the
 integral sign in the numerator in Eq.~(\ref{eq:PSredDef}) but taking
 into account kinematic constraints. Using the transverse metric tensor
@@ -2399,6 +2399,80 @@ where, without loss of generality, we are assuming that the vector
 $\mathbf{q}_T$ is directed along the $x$ axis. Knowing the functions
 $F$ in $k_T$ space, the formula above can be implemented numerically.
 
+\section{Implementing the $\phi*$ distribution}
+
+A physical observable that is particularly useful to probe the
+intrinsic transverse dynamics of hadrons is the so-called $\phi^*$
+distribution in Drell-Yan production, defined as~\cite{Banfi:2010cf}:
+\begin{equation}
+\phi^*=\tan\left(\frac{\pi-\Delta\phi}{2}\right)\sin\theta^*=\tan\left(\frac{\pi-\Delta\phi}{2}\right)\sqrt{1-\tanh^2\left(\frac{\Delta\eta}{2}\right)}\,,
+\end{equation}
+where $\Delta\phi = \phi_1-\phi_2$ and $\Delta\eta = \eta_1-\eta_2$
+are the separation in azimuthal angle and pseudo-rapidity of the two
+outgoing leptons. The reason why $\phi^*$ is interesting is that
+experimental measurements of this quantity reach an extremely high
+accuracy. It is therefore useful to express the Drell-Yan cross
+section differential in $q_T$ into a cross section differential in
+$\phi^*$. This is achieved through the chain rule:
+\begin{equation}
+\frac{d\sigma}{dQdydq_T d\eta dp_T} = \frac{d\phi^*}{dq_T}\frac{d\sigma}{dQdyd\phi^*d\eta dp_T}\,.
+\end{equation}
+Of course, this requires the knowledge of $\phi^*$ as a function of
+$q_T$ which is what we will work out in the following. The starting
+point is the four-momentum conservation $q=p_1+p_2$. Taking the
+absolute value
+of this relation and using the parameterisations in
+Eq.~(\ref{eq:qexplicit}) for $q$ and in Eq.~(\ref{eq:pexplicit}) for
+both $p_1$ and $p_2$ immediately gives:
+\begin{equation}\label{eq:coshdeta}
+\cosh\Delta\eta = 1+\frac{Q^2}{2p_{T1}p_{T2}}\,. 
+\end{equation}
+In addition, equating the absolute values of the transverse component
+($|\mathbf{q}_T|^2=|\mathbf{p}_{T1}+\mathbf{p}_{T2}|^2$) leads to:
+\begin{equation}\label{eq:cosdphi}
+\cos\Delta\phi =\frac{p_{T1}^2+p_{T2}^2-q_T^2}{2p_{T1}p_{T2}}\,.
+\end{equation}
+Using Eq.~(\ref{eq:coshdeta}) one has:
+\begin{equation}
+\tanh\left(\frac{\Delta\eta}{2}\right) =
+\sqrt{\frac{\cosh\Delta\eta-1}{\cosh\Delta\eta+1}} = \sqrt{\frac{Q^2}{Q^2+4p_{T1}p_{T2}}}\,,
+\end{equation}
+so that:
+\begin{equation}
+\sin\theta^*=\sqrt{1-\tanh^2\left(\frac{\Delta\eta}{2}\right)}
+=\sqrt{\frac{4p_{T1}p_{T2}}{Q^2 + 4p_{T1}p_{T2}}}\,.
+\end{equation}
+On the other hand, using Eq.~(\ref{eq:cosdphi}) one finds:
+\begin{equation}
+\tan\left(\frac{\pi-\Delta\phi}{2}\right) = \sqrt{\frac{1-\cos(\pi-\Delta\phi)}{1+\cos(\pi-\Delta\phi)}}=\sqrt{\frac{1+\cos\Delta\phi}{1-\cos\Delta\phi}}=\sqrt{\frac{p_{T1}^2+p_{T2}^2-q_T^2+2p_{T1}p_{T2}}{p_{T1}^2+p_{T2}^2-q_T^2-2p_{T1}p_{T2}}}\,.
+\end{equation}
+Now let us define $p_{T1}=p_T$ and $\eta=\eta_1$ and trade $p_{T2}$
+for $\cosh(y-\eta)$ using the relation:
+\begin{equation}
+p_{T2}^2=M^2+p_T^2-2p_TM\cosh(y-\eta)
+\end{equation}
+with $M=\sqrt{Q^2+q_T^2}$. This gives:
+\begin{equation}
+\sin\theta^*=\sqrt{\frac{4p_{T}\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}}{Q^2 +4p_{T}\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}}}\,.
+\end{equation}
+and:
+\begin{equation}
+\tan\left(\frac{\pi-\Delta\phi}{2}\right) = \sqrt{\frac{Q^2+2p_T\left[p_T-M\cosh(y-\eta)+\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}\right]}{Q^2+2p_T\left[p_T-M\cosh(y-\eta)-\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}\right]}}\,.
+\end{equation}
+Gathering all pieces together finally gives:
+\begin{equation}\label{eq:phistarmaster}
+\begin{array}{rcl}
+\phi^*&=&\displaystyle
+          \sqrt{\frac{Q^2+2p_T\left[p_T-M\cosh(y-\eta)+\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}\right]}{Q^2+2p_T\left[p_T-M\cosh(y-\eta)-\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}\right]}}\\
+\\
+&\times& \displaystyle\sqrt{\frac{4p_{T}\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}}{Q^2 +4p_{T}\sqrt{M^2+p_T^2-2p_TM\cosh(y-\eta)}}}\,.
+\end{array}
+\end{equation}
+
+
+
+
+
 \newpage
 
 \begin{thebibliography}{alp}
@@ -2423,6 +2497,24 @@ $F$ in $k_T$ space, the formula above can be implemented numerically.
   H.~Ogata,
   ``A Numerical Integration Formula Based on the Bessel Functions,''
   \texttt{http://www.kurims.kyoto-u.ac.jp/$\sim$okamoto/paper/Publ\_RIMS\_DE/41-4-40.pdf}
+
+%\cite{Banfi:2010cf}
+\bibitem{Banfi:2010cf}
+A.~Banfi, S.~Redford, M.~Vesterinen, P.~Waller and T.~R.~Wyatt,
+%``Optimisation of variables for studying dilepton transverse momentum distributions at hadron colliders,''
+Eur. Phys. J. C \textbf{71} (2011), 1600
+doi:10.1140/epjc/s10052-011-1600-y
+[arXiv:1009.1580 [hep-ex]].
+%108 citations counted in INSPIRE as of 23 Oct 2020
+
+%\cite{Catani:2015vma}
+\bibitem{Catani:2015vma}
+S.~Catani, D.~de Florian, G.~Ferrera and M.~Grazzini,
+%``Vector boson production at hadron colliders: transverse-momentum resummation and leptonic decay,''
+JHEP \textbf{12} (2015), 047
+doi:10.1007/JHEP12(2015)047
+[arXiv:1507.06937 [hep-ph]].
+%88 citations counted in INSPIRE as of 23 Oct 2020
 
 \end{thebibliography}
 

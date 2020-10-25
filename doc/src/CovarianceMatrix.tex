@@ -373,7 +373,7 @@ where $\mathbf{V}$ is the $n\times n$ covariance matrix, being $n$ the
 number of datapoints, and $\mathbf{y}$ is a column vector with $n$
 entries that can be expressed as:
 \begin{equation}
-y_j = m_j-f_j
+y_j = f_j-m_j\,,
 \end{equation}
 with $m_j$ a given value (to be thought as the central value) and
 $f_j$ its fluctuated value, is distributed like:
@@ -402,12 +402,113 @@ which immediately implies:
 \end{equation}
 or equivalently:
 \begin{equation}\label{eq:deviations}
-f_j\sim m_j-\sum_{i=1}^nL_{ji}z_i\,.
+f_j\sim m_j+\sum_{i=1}^nL_{ji}z_i\,.
 \end{equation}
 In conclusion, in order for the $\chi^2$ to have the correct
 distribution, the fluctuations $f_j$ around the experimental central
-values $m_j$ of a given Monte Carlo replica have be computed
-acccording to Eq.~(\ref{eq:deviations}).
+values $m_j$ of a given Monte Carlo replica have to be computed
+according to Eq.~(\ref{eq:deviations}).
+
+It is instructive to work out how Eq.~(\ref{eq:deviations}) relates to
+more ``standard'' approaches to the generation of Monte Carlo replicas
+such as those in Refs.~\cite{Ball:2008by, Ball:2014uwa}. The aim is to
+find a closed-form expression for the Cholesky-decomposition matrix
+$\mathbf{L}$ of the covariance matrix $\mathbf{V}$ in terms of the
+single uncertainties. Through Eq.~(\ref{eq:deviations}), this will
+finally allow us to derive a formula of the same kind of those given
+in Refs.~\cite{Ball:2008by, Ball:2014uwa}. The basic observation is
+that the covariance matrix can be written as:
+\begin{equation}
+\mathbf{V} = \mathbf{D}+ \sum_{l=1}^k 
+\mathbf{V}^{(l)} = \sum_{l=0}^k \mathbf{L}^{(l)}\cdot \mathbf{L}^{(l)T}\,,
+\end{equation}
+with:
+\begin{equation}
+L_{ij}^{(l)}=\left\{
+\begin{array}{ll}
+s_i\delta_{ij}&\quad l = 0\,,\\
+\sigma_i^{(l)}\delta_{j1}&\quad 1\leq l\leq k\,.
+\end{array}
+\right.
+\end{equation}
+On the other hand, we also know that:
+\begin{equation}
+  \mathbf{V} = \mathbf{L}\cdot \mathbf{L}^T\,,
+\end{equation}
+therefore:
+\begin{equation}
+  \mathbf{L}\cdot \mathbf{L}^T=\sum_{l=0}^k \mathbf{L}^{(l)}\cdot \mathbf{L}^{(l)T}\,.
+\end{equation}
+The question is to express $\mathbf{L}$ in terms of all the
+$\mathbf{L}^{(l)}$. Unfortunately though this equation has no general
+solution. However, a step forward can be done be exploiting the fact
+that the matrices $\mathbf{V}^{(l)}$ are positive semidefinite
+(\textit{i.e.} they have zero determinant) and thus their Cholesky
+decomposition is not unique. In particular, provided that $k\leq n$,
+one can choose:
+\begin{equation}\label{eq:choldecomp2}
+\widetilde{L}_{ij}^{(l)}=
+\sigma_i^{(l)}\delta_{jl}\,,\quad 1\leq l\leq k\leq n\,,
+\end{equation}
+such that:
+\begin{equation}
+  \left(\sum_{l=1}^k\widetilde{\mathbf{L}}^{(l)}\right)\cdot\left(
+    \sum_{l'=1}^k\widetilde{\mathbf{L}}^{(l')}\right)=\sum_{l=1}^k 
+  \mathbf{V}^{(l)}\,.
+\end{equation}
+However, choosing:
+\begin{equation}\label{eq:CholVapprox}
+\widetilde{\mathbf{L}} = \mathbf{L}^{(0)} + \sum_{l=1}^k\widetilde{\mathbf{L}}^{(l)}\,,
+\end{equation}
+and multiplying it for its transpose would give:
+\begin{equation}
+\widetilde{\mathbf{L}}\cdot \widetilde{\mathbf{L}}^T = \mathbf{V} + \sum_{l=1}^k\left(\mathbf{L}^{(0)}\cdot \widetilde{\mathbf{L}}^{(l)T}+\widetilde{\mathbf{L}}^{(l)}\cdot \mathbf{L}^{(0)T}\right)\,,
+\end{equation}
+that gives back the covariance matrix plus a spurious term. Writing
+the expression above in terms of single entries, one finds:
+\begin{equation}
+\sum_{m=1}^n\widetilde{L}_{im}\widetilde{L}_{jm} = V_{ij} + s_i \sigma_{j}^{(i)}+s_j\sigma_{i}^{(j)}\,.
+\end{equation}
+The peculiarity here is that the upper index of $\sigma_{j}^{(i)}$ and
+$\sigma_{i}^{(j)}$, since $k\leq n$ (and in fact usually $k\ll n$,
+\textit{i.e.} the number of correlated uncertainties is typically much
+smaller than the number of data points), exceeds the allowed range. To
+fix this problem we just assume $\sigma_{j}^{(i)}=0$ for $i>k$. This
+finally gives:
+\begin{equation}
+\sum_{m=1}^n\widetilde{L}_{im}\widetilde{L}_{jm} = V_{ij}\,,\quad
+\mbox{for } i,j>k\,,
+\end{equation}
+that means that, by adopting the Cholesky decomposition in
+Eq.~(\ref{eq:choldecomp2}), part of the covariance matrix (usually the
+largest part) is exactly recovered. Therefore,
+$\widetilde{\mathbf{L}}$ Eq.~(\ref{eq:CholVapprox}) seems to be a
+generally good approximator to the real Cholesky decomposition of the
+covariance matrix $\mathbf{V}$. Plugging this equation into
+Eq.~(\ref{eq:deviations}) immediately gives:
+\begin{equation}\label{eq:deviations2}
+  f_j\sim m_j+z_js_j + \sum_{l=1}^{k}z_l \sigma_{j,\rm
+    corr}^{(l)}\,.
+\end{equation}
+It is interesting to focus on similarities and differences with the
+formulas present in the literature. We will specifically consider
+Eq.~(13) of Ref.~\cite{Ball:2008by} and Eq.~(20) of
+Ref.~\cite{Ball:2014uwa}.
+
+We start by considering the case in which there are only uncorrelated
+and correlated additive uncertainties. In this case,
+Refs.~\cite{Ball:2008by, Ball:2014uwa} are in mutual agreement and
+only in partial agreement with our Eq.~(\ref{eq:deviations2}), the
+difference being that the random numbers used to generate the
+fluctuation associated to the $k$ correlated uncertainties are not
+totally independent from those used for the correlated uncertainties
+are in fact equal to the first $k$ of the $n$ used for the
+uncorrelated uncertainties (remember that we required $k\leq n$).
+
+When also considering correlated multiplicative uncertainties there
+are differences across formulas of Refs.~\cite{Ball:2008by,
+  Ball:2014uwa} and Eq.~(\ref{eq:deviations2}).
+
 
 \begin{thebibliography}{alp}
 
@@ -456,6 +557,24 @@ acccording to Eq.~(\ref{eq:deviations}).
     2020.
    % \url{https://en.wikipedia.org/w/index.php?title=Chi-square_distribution&oldid=979585636}
 
+%\cite{Ball:2008by}
+\bibitem{Ball:2008by}
+R.~D.~Ball \textit{et al.} [NNPDF],
+%``A Determination of parton distributions with faithful uncertainty estimation,''
+Nucl. Phys. B \textbf{809} (2009), 1-63
+[erratum: Nucl. Phys. B \textbf{816} (2009), 293]
+doi:10.1016/j.nuclphysb.2008.09.037
+[arXiv:0808.1231 [hep-ph]].
+%286 citations counted in INSPIRE as of 24 Oct 2020
+
+%\cite{Ball:2014uwa}
+\bibitem{Ball:2014uwa}
+R.~D.~Ball \textit{et al.} [NNPDF],
+%``Parton distributions for the LHC Run II,''
+JHEP \textbf{04} (2015), 040
+doi:10.1007/JHEP04(2015)040
+[arXiv:1410.8849 [hep-ph]].
+%2322 citations counted in INSPIRE as of 24 Oct 2020
 
 \end{thebibliography}
 
