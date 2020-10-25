@@ -500,15 +500,33 @@ and correlated additive uncertainties. In this case,
 Refs.~\cite{Ball:2008by, Ball:2014uwa} are in mutual agreement and
 only in partial agreement with our Eq.~(\ref{eq:deviations2}), the
 difference being that the random numbers used to generate the
-fluctuation associated to the $k$ correlated uncertainties are not
-totally independent from those used for the correlated uncertainties
-are in fact equal to the first $k$ of the $n$ used for the
-uncorrelated uncertainties (remember that we required $k\leq n$).
+fluctuation associated to the $k$ correlated uncertainties are equal
+to the first $k$ of the $n$ used for the uncorrelated uncertainties
+(remember that we required $k\leq n$). Of course, if $k\ll n$, as it
+often happens, the agreement between Eq.~(\ref{eq:deviations2}) and
+Refs.~\cite{Ball:2008by, Ball:2014uwa} is asymptotically good.
 
-When also considering correlated multiplicative uncertainties there
+When considering also correlated multiplicative uncertainties there
 are differences across formulas of Refs.~\cite{Ball:2008by,
   Ball:2014uwa} and Eq.~(\ref{eq:deviations2}).
 
+
+\begin{figure}[h]
+  \begin{centering}
+    \includegraphics[width=0.49\textwidth]{plots/Chi2DistBABAR}
+    \includegraphics[width=0.49\textwidth]{plots/Chi2DistALEPH}
+    \caption{Distribution of the $\chi^2$'s of the Monte Carlo replica
+      w.r.t. to the corresponding central values for BABAR (left) and
+      ALEPH (right) experiments compared to the probability
+      distribution function with to the appropriate number of degrees
+      of freedom given by the number of data points. The blue
+      histograms are produced using Eq.~(\ref{eq:deviations}), the red
+      histogram is produced using Eq.~(13) of Ref.~\cite{Ball:2008by}
+      where multiplicative uncertainties are treated as relative,
+      while the green histogram is produced using Eq.~(20) of
+      Ref.~\cite{Ball:2014uwa}. \label{fig:Chi2Dist}}
+  \end{centering}
+\end{figure}
 
 \begin{thebibliography}{alp}
 
