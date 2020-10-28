@@ -383,10 +383,25 @@ $f_j$ its fluctuated value, is distributed like:
 where $z_1,\dots , z_n$ are independent, standard normal random
 variables, \textit{i.e.} such that:
 \begin{equation}\label{eq:averages}
-\langle z_i\rangle\quad\mbox{and}\quad \langle z_iz_j\rangle = \delta_{ij}\,,
+\langle z_i\rangle=0\quad\mbox{and}\quad \langle z_iz_j\rangle = \delta_{ij}\,,
 \end{equation}
-where the symbol $\langle\,\dots\rangle$ indicates the average.  This
-immediatelly tells us that:
+where the symbol $\langle\,\dots\rangle$ indicates the
+average.\footnote{The relevant indentities are:
+\begin{equation}
+  \langle z_i^{2n-1}\rangle = 0\quad\mbox{and}\quad \langle
+  z_i^{2n}\rangle= (2n-1)!!\quad n=1,2,3,\dots\,,
+\end{equation}
+where $(2n-1)!!=1\cdot3\cdot\dots\cdot(2n-1)$ is the odd
+semi-factorial. When cosidering combinations of two random variables
+the result is:
+\begin{equation}
+  \langle z_i^n z_j^m\rangle = \left\{
+\begin{array}{ll}
+\langle z_i^{n+m}\rangle&\quad i = j\\
+\langle z_i^n\rangle\langle z_j^m\rangle&\quad i \neq j
+\end{array}
+\right.
+\end{equation}} This immediatelly tells us that:
 \begin{equation}
 \langle\chi^2\rangle=n\,.
 \end{equation}
@@ -438,10 +453,94 @@ as expected. The correlation instead gives:
 \end{equation}
 again as expected.
 
-It is instructive to work out how Eq.~(\ref{eq:deviations}) relates to
-more ``standard'' approaches to the generation of Monte Carlo replicas
-such as those in Refs.~\cite{Ball:2008by, Ball:2014uwa}. The aim is to
-find a closed-form expression for the Cholesky-decomposition matrix
+Eq.~(\ref{eq:deviations}) should be compared to the more ``standard''
+Monte-Carlo replica generation formulas such as those given in
+Refs.~\cite{Ball:2008by, Ball:2014uwa}. We now specifically consider
+Eq.~(20) of Ref.~\cite{Ball:2014uwa} that we report here in terms of
+relative uncertainties $\delta$'s matching our notation:
+\begin{equation}\label{eq:nnpdfmc}
+\widetilde{f}_j\sim m_j\prod_{m=1}^{k_m}\left(1+\delta_{{\rm mult},j}^{(m)} x_m\right)\left(1+\delta_{{\rm unc},j} z_j+\sum_{a=1}^{k_a} \delta_{{\rm add},j}^{(a)} y_a\right)\,,
+\end{equation}
+where $z_j$, $y_a$, and $x_m$ are independent random variables. We now
+expand the product in the front up to second order in $x$
+\begin{equation}
+  \prod_{m=1}^{k_m}\left(1+\delta_{{\rm mult},j}^{(m)}
+    x_m\right)=1+\sum_{m=1}^{k_m}\delta_{{\rm mult},j}^{(m)}
+  x_m+\sum_{m=1}^{k_m}\sum_{m'=1\atop m'\neq m}^{k_m}\delta_{{\rm
+      mult},j}^{(m)}\delta_{{\rm mult},j}^{(m')}x_m x_{m'}+\mbox{trilinear}\,,
+\end{equation}
+where the ``trilinear'' corrections correspond to combinations of the
+kind $x_ix_jx_k$, with $i\neq j\neq k\neq i$, such that their average
+vanishes:
+$\langle x_ix_jx_k\rangle = \langle x_i\rangle \langle x_j
+\rangle\langle x_k\rangle = 0$. This allows us to expand
+Eq.~(\ref{eq:nnpdfmc}) as:
+\begin{equation}\label{eq:nnpdfmcexp}
+\begin{array}{rcl}
+\widetilde{f}_j&\sim&\displaystyle m_j\Bigg(1+\delta_{{\rm unc},j} z_j+\sum_{a=1}^{k_a} \delta_{{\rm add},j}^{(a)} y_a +\sum_{m=1}^{k_m}\delta_{{\rm mult},j}^{(m)}
+  x_m\\
+\\
+&+&\displaystyle\delta_{{\rm unc},j} \sum_{m=1}^{k_m} \delta_{{\rm mult},j}^{(m)}
+    z_jx_m+\sum_{a=1}^{k_a} \sum_{m=1}^{k_m}\delta_{{\rm add},j}^{(a)} \delta_{{\rm mult},j}^{(m)} y_a 
+  x_m\\
+\\
+&+&\displaystyle \sum_{m=1}^{k_m}\sum_{m'=1\atop m'\neq m}^{k_m}\delta_{{\rm
+      mult},j}^{(m)}\delta_{{\rm mult},j}^{(m')}x_m x_{m'}\Bigg)+\mbox{trilinear}\,.
+\end{array}
+\end{equation}
+Since Eq.~(\ref{eq:nnpdfmcexp}) involves only terms that have at most
+one power of the same random variable, the average of
+$\widetilde{f}_j$ automatically yields:
+\begin{equation}\label{eq:centralvaluenn}
+  \langle \widetilde {f}_j\rangle = m_j\,,
+\end{equation}
+in agreement with the expectation. We now compute the correlations
+making use of the combination rules of random variables. This gives:
+\begin{equation}\label{eq:corrnn}
+\begin{array}{rcl}
+  \langle \widetilde{f}_j \widetilde{f}_k\rangle&\sim&\displaystyle m_jm_k\Bigg(1+\delta_{{\rm unc},j}^2\delta_{jk}+\sum_{a=1}^{k_a} \delta_{{\rm add},j}^{(a)}\delta_{{\rm add},k}^{(a)} +\sum_{m=1}^{k_m}\delta_{{\rm mult},j}^{(m)}\delta_{{\rm mult},k}^{(m)}\\
+\\
+&+&\displaystyle\delta_{{\rm unc},j}^2 \sum_{m=1}^{k_m} \delta_{{\rm mult},j}^{(m)}\delta_{{\rm  mult},k}^{(m)}
+  +\sum_{a=1}^{k_a} \sum_{m=1}^{k_m}\delta_{{\rm add},j}^{(a)}\delta_{{\rm add},k}^{(a)} \delta_{{\rm mult},j}^{(m)} \delta_{{\rm mult},k}^{(m)} \\
+\\
+&+&\displaystyle \sum_{m=1}^{k_m}\sum_{m'=1\atop m'\neq m}^{k_m}\delta_{{\rm
+      mult},j}^{(m)}\delta_{{\rm
+      mult},k}^{(m)}\delta_{{\rm mult},j}^{(m')}\delta_{{\rm
+    mult},k}^{(m')}+\mathcal{O}(\delta^6)\Bigg)\\
+\\
+&=&\displaystyle \langle \widetilde{f}_j\rangle \langle
+    \widetilde{f}_k\rangle +V_{jk}+\mathcal{O}(\sigma_{\rm mult}^2 s^2, \sigma_{\rm mult}^2 \sigma_{\rm add}^2)\,.
+\end{array}
+\end{equation}
+In conclusion, Eq.~(\ref{eq:nnpdfmc}) reproduces exactly the central
+values of the original ensemble (see Eq.~(\ref{eq:centralvaluenn}))
+while it reproduces correlations only up to corrections proportional
+to the fourth power of the typical uncertainty. Interestingly, these
+corrections are all proportional to $\sigma_{\rm mult}^2$. This means
+that, in the absence of multiplicative uncertainties, somewhat
+expectedly Eq.~(\ref{eq:nnpdfmc}) \textit{exactly} reproduces the
+correlations. On the other hand, if multiplicative uncertainties are
+large these correction become potentially sizeable preventing
+Eq.~(\ref{eq:nnpdfmc}) from correctly reproducing the correlations of
+the original ensemble.
+
+The case of Eq.~(13) of Ref.~\cite{Ball:2008by} is more involved
+because of the presence of the square-root sign for the relative
+multiplicative uncertainties. This case can be handled again be
+expanding to second order the factor depending on multiplicative
+uncertainties with the only difference that, due to the expansion:
+\begin{equation}
+  \sqrt{1+x}=1+\frac12x-\frac18x^2+\mathcal{O}(x^3)\,,
+\end{equation}
+the square root produces a factor $1/2$ in front of the linear terms
+and a factor $-1/8$ in front of the quadratic terms. This is expected
+to reduce the impact of the corrections terms in
+Eq.~(\ref{eq:corrnn}).
+
+It is instructive to work out whether Eq.~(\ref{eq:deviations}) can be
+directly related to the Monte-Carlo replicas generation formulas given
+in Refs.~\cite{Ball:2008by, Ball:2014uwa}. The aim is to find a
+closed-form expression for the Cholesky-decomposition matrix
 $\mathbf{L}$ of the covariance matrix $\mathbf{V}$ in terms of the
 single uncertainties. Through Eq.~(\ref{eq:deviations}), this will
 finally allow us to derive a formula of the same kind of those given

@@ -539,13 +539,16 @@ proportional to $(\kappa-1)$ that finally guarantees the continuity of
 GPDs at $k=1$.
 
 We observe that, within the integration interval, the splitting
-function $\mathcal{P}_2^{-,(0)}$ is singular at $y=1$.\footnote{The
-  singularities at $y=-1$ and $y=\pm1/\kappa$ are all placed below
-  $y=x$ that is the lower integration bound and thus do not cause any
-  problem.} However, as pointed out above, the second integral on the
-r.h.s. of Eq.~(\ref{eq:ji2}) has to be regarded as principal-valued
-therefore it is well-defined. In order to treat this integral
-numerically we consider the specific case:
+function $\mathcal{P}_2^{-,(0)}$ is singular at $y=1$.\footnote{While
+  the singularity at $y=-1$ is all placed below the lower bound $y=x$
+  and thus does not cause any problem, there is an additional
+  singularity at $y=\pm1/\kappa$ that needs to be considered. As
+  discussed below, this singularity in $\mathcal{P}_2^{-,(0)}$ exactly
+  cancels against an opposite singularity in $\mathcal{P}_1^{-,(0)}$.}
+However, as pointed out above, the second integral on the r.h.s. of
+Eq.~(\ref{eq:ji2}) has to be regarded as principal-valued therefore it
+is well-defined. In order to treat this integral numerically we
+consider the specific case:
 \begin{equation}
 I=\int_x^\infty dy\,\frac{f(y)}{1-y}\,,
 \end{equation}
