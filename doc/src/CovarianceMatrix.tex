@@ -381,7 +381,16 @@ $f_j$ its fluctuated value, is distributed like:
 \chi^2\sim \sum_{i=1}^{n}z_i^2=|\mathbf{z}|^2\,,
 \end{equation}
 where $z_1,\dots , z_n$ are independent, standard normal random
-variables. As already discussed above, Eq.~(\ref{eq:chi2matrix}) can
+variables, \textit{i.e.} such that:
+\begin{equation}\label{eq:averages}
+\langle z_i\rangle\quad\mbox{and}\quad \langle z_iz_j\rangle = \delta_{ij}\,,
+\end{equation}
+where the symbol $\langle\,\dots\rangle$ indicates the average.  This
+immediatelly tells us that:
+\begin{equation}
+\langle\chi^2\rangle=n\,.
+\end{equation}
+As already discussed above, Eq.~(\ref{eq:chi2matrix}) can
 alternatively be written as:
 \begin{equation}\label{explicitchi2chol}
 \chi^2 = \left|\mathbf{L}^{-1}\cdot \mathbf{y}\right|^2\,,
@@ -408,6 +417,26 @@ In conclusion, in order for the $\chi^2$ to have the correct
 distribution, the fluctuations $f_j$ around the experimental central
 values $m_j$ of a given Monte Carlo replica have to be computed
 according to Eq.~(\ref{eq:deviations}).
+
+We now show that Eq.~(\ref{eq:deviations}) reproduces the statistical
+properties of the original ensamble of data. To do so, we compute
+average and correlations of Eq.~(\ref{eq:deviations}) using
+Eq.~(\ref{eq:averages}). The average gives:
+\begin{equation}
+\langle f_j\rangle = m_j+\sum_{i=1}^nL_{ji}\langle z_i \rangle = m_j\,,
+\end{equation}
+as expected. The correlation instead gives:
+\begin{equation}
+\begin{array}{rcl}
+\langle f_j f_k\rangle &=& \displaystyle \left\langle
+  \left(m_j+\sum_{i=1}^nL_{ji}z_i\right)
+  \left(m_k+\sum_{i'=1}^nL_{ki'}z_{i'}\right)\right\rangle\\
+\\
+&=& \displaystyle m_jm_k+\sum_{i,i'=1}^nL_{ji'}L_{ki'}\langle z_{i'}
+    z_{i'}\rangle=\langle f_j \rangle\langle f_k\rangle+V_{jk}\,,
+\end{array}
+\end{equation}
+again as expected.
 
 It is instructive to work out how Eq.~(\ref{eq:deviations}) relates to
 more ``standard'' approaches to the generation of Monte Carlo replicas
