@@ -45,12 +45,6 @@ namespace apfel
         // Get logarithmic step
         const double s = sg.Step();
 
-        // If the logarithmic step is equal to zero, the subgrid has
-        // not been costructed using the internal procedure therefore
-        // the computation cannon proceed.
-        if (s == 0)
-          throw std::runtime_error(error("Operator::Operator", "Subgrid not well formed (not logarithmically distributed)"));
-
         // Initialise operator
         _Operator[ig].resize(nx + 1, 0);
 
