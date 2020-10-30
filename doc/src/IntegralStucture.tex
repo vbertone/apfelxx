@@ -328,28 +328,29 @@ I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
 
 \subsection{GPD-related integrals}
 
-When considering, for example, GPD-related computations such has the
-evolution of GPDs, another kind of integral structure comes into play:
+When considering, for example, GPD-related computations such as the
+evolution of GPDs, another kind of integral structure comes into play,
 that is:
 \begin{equation}\label{eq:ZMconvERBL}
-J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z)\,,
+J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z},x\right) d(z)\,,
 \end{equation}
-which differes from that in Eq.~(\ref{eq:ZMconv}) by the lower
-integration bound that is zero rather than $x$. Understanding that
-this integral is convergent, we need to adapt the strategy for the
-computation of numerical integrals discussed above to
-Eq.~(\ref{eq:ZMconvERBL}). As a first step, we make the change of
-integration variable $z\rightarrow x/y$ and use the interpolation
-formula in Eq.~(\ref{eq:Interpolation}), to obtain:
+which differes from that in Eq.~(\ref{eq:ZMconv}) in two respects: by
+the lower integration bound that is zero rather than $x$ and by the
+fact that the operator $O$ may also depend explicitly on the external
+variable $x$. Understanding that this integral is convergent, we need
+to adapt the strategy for the computation of numerical integrals
+discussed above to Eq.~(\ref{eq:ZMconvERBL}). As a first step, we make
+the change of integration variable $z\rightarrow x/y$ and use the
+interpolation formula in Eq.~(\ref{eq:Interpolation}), to obtain:
 \begin{equation}
   J(x_\beta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\infty dy\,
-  O(y)\,w_{\alpha}\left(\frac{x_\beta}{y}\right) =\sum_{\alpha=0}^{N_x} J_{\beta\alpha}\overline{d}_\alpha\,.
+  O(y,x_\beta)\,w_{\alpha}\left(\frac{x_\beta}{y}\right) =\sum_{\alpha=0}^{N_x} J_{\beta\alpha}\overline{d}_\alpha\,.
 \end{equation}
 The $\infty$ in the upper bound is a new feature. However, the support
 region of the functions $w_{\alpha}$ is the same so that:
 \begin{equation}
   J_{\beta\alpha}=  \int_{c}^{\overline{d}} dy\,
-  O(y)\,w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+  O(y,x_\beta)\,w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
 with integration bounds:
 \begin{equation}\label{eq:intlimsGPD}
@@ -358,7 +359,14 @@ with integration bounds:
 Following the procedure discussed in the previous section, the actual
 computation is achieved by:
 \begin{equation}\label{eq:ERBLints}
-J_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)=\sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\begin{array}{rcl}
+J_{\beta\alpha} &=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 -
+                    N_x]}^{\kappa}
+                    \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}}
+                    dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\\
+\\
+&=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\end{array}
 \end{equation}
 Therefore, at the level of the single integral, the only difference
 with respect to the ``standard'' case is a change of the upper
@@ -366,8 +374,8 @@ summation bound. It should be clear, however, that this procedure
 necessarily implies an approximation. This is due to the fact that the
 interpolation grid, understood to be logarithmically distributed, does
 not reach zero. This approximation manifests itself in the fact that
-upper bound of the intergrals in Eq.~(\ref{eq:ERBLints}) never reaches
-infinity but it gets as large as $s^{\kappa}$. The size of
+the upper bound of the intergrals in Eq.~(\ref{eq:ERBLints}) never
+reaches infinity but it gets as large as $s^{\kappa}$. The size of
 $s^{\kappa}$ can range widely depending on the lower bound of the grid
 $x_0$, on the number of nodes $N_x$, and on the interpolation degree
 $\kappa$, according to:
@@ -380,10 +388,10 @@ the impact of this approximation numerically.
 
 As in the in the standard case, the integral $J_{\beta\alpha}$ only
 depends on the difference $\beta-\alpha$. However, differently from
-the standard case, one has $J_{\beta\alpha}\neq 0$ also for
+the standard case, one has that $J_{\beta\alpha}\neq 0$ also for
 $\beta>\alpha$. The reason is that the lower bound $c$ is now allowed
 to exceed 1. Using Eq.~(\ref{eq:intlims1}), this implies that
-$\beta-\alpha$ can also be larger than zero.  This means that
+$\beta-\alpha$ can also be larger than zero.  This means in turn that
 computing the integrals $b_\alpha=J_{0\alpha}$ and
 $b_{-\alpha}=J_{\alpha0}$ for $\alpha=0,\dots,N_x$ is enough to
 reconstruct the full set of $J_{\beta\alpha}$. In matricial
