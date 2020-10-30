@@ -23,11 +23,6 @@ namespace apfel
   {
   public:
     /**
-     * @brief The default SubGrid constructor.
-     */
-    SubGrid();
-
-    /**
      * @brief The SubGrid constructor.
      * @param nx number of grid points in x.
      * @param xMin lower edge x of the grid.

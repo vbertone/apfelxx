@@ -13,18 +13,11 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  Grid::Grid():
-    _JointToSubMap({{}}),
-  _GlobalGrid({})
-  {
-  }
-
-  //_________________________________________________________________________________
   Grid::Grid(std::vector<SubGrid> const& grs):
     _JointToSubMap({{}}),
-  _GlobalGrid(grs)
+  _GlobalGrid(grs),
+              _JointGrid(new SubGrid{CreateJointGrid()})
   {
-    _JointGrid = CreateJointGrid();
   }
 
   //_________________________________________________________________________________
@@ -161,7 +154,7 @@ namespace apfel
   {
     os << "Grid: " << &gr << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
-    for (const auto &v: gr._JointGrid.GetGrid()) os << v << " ";
+    for (const auto &v: gr._JointGrid->GetGrid()) os << v << " ";
     return os;
   }
 }

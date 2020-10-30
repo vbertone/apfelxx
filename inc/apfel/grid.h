@@ -20,11 +20,6 @@ namespace apfel
   {
   public:
     /**
-     * @brief Default constructor.
-     */
-    Grid();
-
-    /**
      * @brief The Grid constructor.
      * @param grs: vector of subgrids
      */
@@ -57,7 +52,7 @@ namespace apfel
     /**
      * @return The joint SubGrid
      */
-    SubGrid const& GetJointGrid() const { return _JointGrid; }
+    SubGrid const& GetJointGrid() const { return *_JointGrid; }
     ///@}
 
     /**
@@ -80,7 +75,7 @@ namespace apfel
   private:
     std::vector<std::vector<int>> _JointToSubMap; //!< Map of indices from the subgrids to the joint grid
     std::vector<SubGrid>          _GlobalGrid;    //!< Vector with sub-grids.
-    SubGrid                       _JointGrid;     //!< Container for the joint grid.
+    std::unique_ptr<SubGrid>      _JointGrid;     //!< Container for the joint grid.
 
     friend std::ostream& operator << (std::ostream& os, Grid const& gr);
   };

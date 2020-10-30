@@ -13,16 +13,6 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  SubGrid::SubGrid():
-    _nx(2),
-    _InterDegree(1),
-    _xMin(0),
-    _xMax(1),
-    _Step(0)
-  {
-  }
-
-  //_________________________________________________________________________________
   SubGrid::SubGrid(int const& nx, double const& xMin, int const& InterDegree):
     _nx(nx),
     _InterDegree(InterDegree),
