@@ -297,7 +297,8 @@ I_{\beta\alpha} = \int_c^ddy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 with the integration limits given in Eq.~(\ref{eq:intlims}). These
 limits can be rearranged as follows:
 \begin{equation}\label{eq:intlimsind}
-c=\frac{x_\beta}{x_{\alpha+1-{\rm max}[0,\alpha+1-N_x]}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-{\rm min}[\kappa,\alpha-\beta]}}\,,
+  c=\frac{x_\beta}{x_{{\rm min}[N_x,\alpha+1]}}\quad\mbox{and}\quad
+  {d} = \frac{x_\beta}{x_{{\rm max}[\beta,\alpha-\kappa]}}\,,
 \end{equation}
 which makes it manifest the index range covered by the integration
 range. The basic observation is that the functions $w_\alpha$ are
@@ -354,18 +355,19 @@ region of the functions $w_{\alpha}$ is the same so that:
 \end{equation}
 with integration bounds:
 \begin{equation}\label{eq:intlimsGPD}
-  c=\frac{x_\beta}{x_{\alpha+1-{\rm max}[0,\alpha+1-N_x]}}\quad\mbox{and}\quad \overline{d} = \frac{x_\beta}{x_{\alpha-\kappa}}\,.
+  c=\frac{x_\beta}{x_{{\rm min}[N_x,\alpha+1]}}\quad\mbox{and}\quad
+  \overline{d} = \frac{x_\beta}{x_{{\rm max}[0,\alpha-\kappa]}}\,.
 \end{equation}
 Following the procedure discussed in the previous section, the actual
 computation is achieved by:
 \begin{equation}\label{eq:ERBLints}
 \begin{array}{rcl}
 J_{\beta\alpha} &=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 -
-                    N_x]}^{\kappa}
+                    N_x]}^{{\rm min}[\kappa,\alpha]}
                     \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}}
                     dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\\
 \\
-&=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{\kappa}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+&=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa,\alpha]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{array}
 \end{equation}
 Therefore, at the level of the single integral, the only difference
