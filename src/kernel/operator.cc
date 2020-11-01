@@ -146,39 +146,43 @@ namespace apfel
     if (&_grid != &d.GetGrid())
       throw std::runtime_error(error("Operator::operator*=", "Operator and Distribution grids do not match"));
 
-    // Get vector of distributions on the subgrids
-    const std::vector<std::vector<double>>& dsg = d.GetDistributionSubGrid();
+    // Get number of subgrids
     const int ng = _grid.nGrids();
 
+    // Get map of indices map from joint to subgrids
+    const std::vector<std::vector<int>>& jsmap = _grid.JointToSubMap();
+
+    // Get map of indices map from sub to joint to grids
+    const std::vector<std::pair<int, int>>& sjmap = _grid.SubToJointMap();
+
+    // Get joint distribution
+    const std::vector<double>& dj = d.GetDistributionJointGrid();
+
     // Initialise output vectors
-    std::vector<std::vector<double>> s(ng);
     std::vector<double> j(d.GetDistributionJointGrid().size(), 0);
+    std::vector<std::vector<double>> s(ng);
+
+    // Construct joint distribution first. The product between the
+    // operator and the distribution is done exploiting the symmetry
+    // of the operator.
+    for (int alpha = 0; alpha <= _grid.GetJointGrid().nx(); alpha++)
+      {
+        const std::pair<int, int> m = sjmap[alpha];
+        for (int beta = (_erbl ? 0 : m.second); beta <= _grid.GetSubGrid(m.first).nx(); beta++)
+          j[alpha] += _Operator[m.first][beta - m.second] * dj[jsmap[m.first][beta]];
+      }
 
     // Compute the the distribution on the subgrids
-    int i = 0;
     for (int ig = 0; ig < ng; ig++)
       {
         // Resize output on the "ig"-th subgrid
-        s[ig].resize(dsg[ig].size(), 0);
-
-        // Get current subgrid
-        const SubGrid& sg = _grid.GetSubGrid(ig);
-
-        // Number of interval in the definition region
-        int const nx = sg.nx();
-
-        // The product between the operator and the distribution is
-        // done exploiting the symmetry of the operator.
-        for (int alpha = 0; alpha <= nx; alpha++)
-          for (int beta = (_erbl ? 0 : alpha); beta <= nx; beta++)
-            s[ig][alpha] += _Operator[ig][beta - alpha] * dsg[ig][beta];
-
-        // Compute the distribution on the joint grid
-        const double xtrans = ( ig < ng - 1 ? _grid.GetSubGrid(ig + 1).xMin() : 1 + 2 * eps12 );
-        for (int alpha = 0; alpha <= nx && xtrans - sg.GetGrid()[alpha] > eps12; alpha++)
-          j[i++] = s[ig][alpha];
+        s[ig].resize(d.GetDistributionSubGrid()[ig].size(), 0);
+        for (int alpha = 0; alpha <= _grid.GetSubGrid(ig).nx(); alpha++)
+          s[ig][alpha] += j[jsmap[ig][alpha]];
       }
-    return Distribution{d, s, j};
+
+    // Return distribution object
+    return Distribution{_grid, s, j};
   }
 
   //_________________________________________________________________________

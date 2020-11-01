@@ -34,16 +34,15 @@ namespace apfel
     // Number of grids.
     double const ng = _GlobalGrid.size();
 
-    // Now oder the SubGrids in such a way that they start with that
+    // Order the SubGrids in such a way that they start with that
     // having the lowest value of xMin (only if there is more than one
     // grid).
     if (ng > 1)
       std::sort(_GlobalGrid.begin(), _GlobalGrid.end(), ComparexMin);
 
-    // Lock the subgrids...
-    // Find the point of the "(ig-1)"-th SubGrid such that
-    // "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]", and replace
-    // "xMin[ig]" with "x[ig-1][ix]".
+    // Lock the subgrids, i.e. find the point of the "(ig-1)"-th
+    // SubGrid such that "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]", and
+    // replace "xMin[ig]" with "x[ig-1][ix]".
     for (int ig = 1; ig < ng; ig++)
       {
         const int nxg     = _GlobalGrid[ig-1].nx();
@@ -80,7 +79,6 @@ namespace apfel
     // interpolation degree of the first grid.
     const int id_joint = _GlobalGrid[0].InterDegree();
     std::vector<double> xg_joint_vect;
-
     for (int ig = 0; ig < ng; ig++)
       {
         const std::vector<double> xg = _GlobalGrid[ig].GetGrid();
@@ -94,6 +92,7 @@ namespace apfel
             if (xtrans - xg[ix] < eps12)
               break;
             xg_joint_vect.push_back(xg[ix]);
+            _SubToJointMap.push_back({ig, ix});
           }
       }
 
@@ -117,8 +116,8 @@ namespace apfel
                 break;
               }
 
-        // Add id more points at the end equal to that at x = 1
-        // (typically zero).
+        // Add "id" more points at the end of the vector with index
+        // equal to that at x = 1.
         for (int ix = nxg + 1; ix < nxg + id + 1; ix++)
           _JointToSubMap[ig][ix] = _JointToSubMap[ig][nxg];
       }

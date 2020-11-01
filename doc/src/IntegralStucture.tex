@@ -338,11 +338,12 @@ J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z},x\right) d(z)\,,
 which differes from that in Eq.~(\ref{eq:ZMconv}) in two respects: by
 the lower integration bound that is zero rather than $x$ and by the
 fact that the operator $O$ may also depend explicitly on the external
-variable $x$. Understanding that this integral is convergent, we need
-to adapt the strategy for the computation of numerical integrals
-discussed above to Eq.~(\ref{eq:ZMconvERBL}). As a first step, we make
-the change of integration variable $z\rightarrow x/y$ and use the
-interpolation formula in Eq.~(\ref{eq:Interpolation}), to obtain:
+variable $x$. Under the assumption that this integral is convergent,
+we need to adapt the strategy for the computation of numerical
+integrals discussed above to Eq.~(\ref{eq:ZMconvERBL}). As a first
+step, we make the change of integration variable $z\rightarrow x/y$
+and use the interpolation formula in Eq.~(\ref{eq:Interpolation}), to
+obtain:
 \begin{equation}
   J(x_\beta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\infty dy\,
   O(y,x_\beta)\,w_{\alpha}\left(\frac{x_\beta}{y}\right) =\sum_{\alpha=0}^{N_x} J_{\beta\alpha}\overline{d}_\alpha\,.
@@ -388,16 +389,17 @@ In particular, $s^{\kappa}$ becomes larger as: $x_0$ gets smaller,
 $N_x$ gets smaller, and $\kappa$ gets larger. We will need to assess
 the impact of this approximation numerically.
 
-As in the in the standard case, the integral $J_{\beta\alpha}$ only
-depends on the difference $\beta-\alpha$. However, differently from
-the standard case, one has that $J_{\beta\alpha}\neq 0$ also for
-$\beta>\alpha$. The reason is that the lower bound $c$ is now allowed
-to exceed 1. Using Eq.~(\ref{eq:intlims1}), this implies that
-$\beta-\alpha$ can also be larger than zero.  This means in turn that
-computing the integrals $b_\alpha=J_{0\alpha}$ and
-$b_{-\alpha}=J_{\alpha0}$ for $\alpha=0,\dots,N_x$ is enough to
-reconstruct the full set of $J_{\beta\alpha}$. In matricial
-representation, $J$ takes the form:
+If the operator $O$ in Eq.~(\ref{eq:ZMconvERBL}) did not explicitly
+depend on $x$, the integral $J_{\beta\alpha}$ would only depend on the
+difference $\beta-\alpha$. However, under this assumption that we will
+release below, at variance with the standard case,
+$J_{\beta\alpha}\neq 0$ also for $\beta>\alpha$. The reason is that
+the lower bound $c$ is now allowed to exceed 1. Using
+Eq.~(\ref{eq:intlims1}), this implies that $\beta-\alpha$ can also be
+larger than zero.  This means in turn that computing the integrals
+$b_\alpha=J_{0\alpha}$ and $b_{-\alpha}=J_{\alpha0}$ for
+$\alpha=0,\dots,N_x$ is enough to reconstruct the full set of
+$J_{\beta\alpha}$. In matricial representation, $J$ takes the form:
 \begin{equation}\label{eq:MatrixRepERBL}
 \displaystyle J_{\beta\alpha} = 
 \begin{pmatrix}

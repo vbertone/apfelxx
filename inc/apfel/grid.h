@@ -37,6 +37,11 @@ namespace apfel
     int nGrids() const { return _GlobalGrid.size(); }
 
     /**
+     * @return The map of indices from the joint grid to the subgrids
+     */
+    std::vector<std::pair<int, int>> const& SubToJointMap() const { return _SubToJointMap; }
+
+    /**
      * @return The map of indices from the subgrids to the joint grid
      */
     std::vector<std::vector<int>> const& JointToSubMap() const { return _JointToSubMap; }
@@ -75,9 +80,10 @@ namespace apfel
     SubGrid CreateJointGrid();
 
   private:
-    std::vector<std::vector<int>> _JointToSubMap; //!< Map of indices from the subgrids to the joint grid
-    std::vector<SubGrid>          _GlobalGrid;    //!< Vector with sub-grids.
-    std::unique_ptr<SubGrid>      _JointGrid;     //!< Container for the joint grid.
+    std::vector<std::pair<int, int>> _SubToJointMap; //!< Vector of pairs corresponding to grid- and node-indices on the subgrids.
+    std::vector<std::vector<int>>    _JointToSubMap; //!< Vector of indices from the subgrids to the joint grid
+    std::vector<SubGrid>             _GlobalGrid;    //!< Vector with sub-grids.
+    std::unique_ptr<SubGrid>         _JointGrid;     //!< Container for the joint grid.
 
     friend std::ostream& operator << (std::ostream& os, Grid const& gr);
   };
