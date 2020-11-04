@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1matrix" kind="class" language="C++" prot="public">
+    <compoundname>apfel::matrix</compoundname>
+    <includes refid="matrix_8h" local="no">matrix.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Binary operators involving matrices</header>
+      <memberdef kind="function" id="classapfel_1_1matrix_1a22df71a8d28f953db35ac01b895a085d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; apfel::matrix&lt; T &gt;::operator()</definition>
+        <argsstring>(size_t const &amp;i, size_t const &amp;j)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="49" column="13" bodyfile="inc/apfel/matrix.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1matrix_1a33b9a0ccda47540f96c875c0e174a5a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T const  &amp;</type>
+        <definition>T const&amp; apfel::matrix&lt; T &gt;::operator()</definition>
+        <argsstring>(size_t const &amp;i, size_t const &amp;j) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="50" column="13" bodyfile="inc/apfel/matrix.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classapfel_1_1matrix_1a1a09298fa1219f356b2329914ff1b01c" prot="private" static="no" mutable="no">
+        <type>std::array&lt; size_t, 2 &gt;</type>
+        <definition>std::array&lt;size_t, 2&gt; apfel::matrix&lt; T &gt;::_size</definition>
+        <argsstring></argsstring>
+        <name>_size</name>
+        <briefdescription>
+<para>the dimension pair </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="53" column="16" bodyfile="inc/apfel/matrix.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1matrix_1aed7eab675e9de58009dec113fef48dc1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; apfel::matrix&lt; T &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <briefdescription>
+<para>the data array </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="54" column="24" bodyfile="inc/apfel/matrix.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1matrix_1ad233ffd5afb1d9ec9ba46a39202338b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::matrix&lt; T &gt;::matrix</definition>
+        <argsstring>(size_t const &amp;row=0, size_t const &amp;col=0)</argsstring>
+        <name>matrix</name>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>row</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>col</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>The matrix constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of rows </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of columns </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1matrix_1acdf1bf466b42a73833b71dbabdabeedc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::matrix&lt; T &gt;::resize</definition>
+        <argsstring>(size_t const &amp;row, size_t const &amp;col, T const &amp;v=0)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type>T const &amp;</type>
+          <declname>v</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Function that resizes object and set default value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of rows </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of columns </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the default value (default: 0) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1matrix_1aa1828d253916d16d8018c2a232db5303" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t const  &amp;</type>
+        <definition>size_t const&amp; apfel::matrix&lt; T &gt;::size</definition>
+        <argsstring>(size_t const &amp;dim) const</argsstring>
+        <name>size</name>
+        <param>
+          <type>size_t const &amp;</type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+<para>Returns the (row,col) size pair. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the dimension </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the number of raws and columns </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matrix.h" line="43" column="18" bodyfile="inc/apfel/matrix.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The matrix class is a simple implementation of 2d arrays based on a continous memory allocation. Elements are accessible throught the (i,j) operator. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::array&lt; size_t, 2 &gt;</label>
+      </node>
+      <node id="1">
+        <label>apfel::matrix&lt; T &gt;</label>
+        <link refid="classapfel_1_1matrix"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_size</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/matrix.h" line="20" column="3" bodyfile="inc/apfel/matrix.h" bodystart="21" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1matrix_1aed7eab675e9de58009dec113fef48dc1" prot="private" virt="non-virtual"><scope>apfel::matrix</scope><name>_data</name></member>
+      <member refid="classapfel_1_1matrix_1a1a09298fa1219f356b2329914ff1b01c" prot="private" virt="non-virtual"><scope>apfel::matrix</scope><name>_size</name></member>
+      <member refid="classapfel_1_1matrix_1ad233ffd5afb1d9ec9ba46a39202338b1" prot="public" virt="non-virtual"><scope>apfel::matrix</scope><name>matrix</name></member>
+      <member refid="classapfel_1_1matrix_1a22df71a8d28f953db35ac01b895a085d" prot="public" virt="non-virtual"><scope>apfel::matrix</scope><name>operator()</name></member>
+      <member refid="classapfel_1_1matrix_1a33b9a0ccda47540f96c875c0e174a5a5" prot="public" virt="non-virtual"><scope>apfel::matrix</scope><name>operator()</name></member>
+      <member refid="classapfel_1_1matrix_1acdf1bf466b42a73833b71dbabdabeedc" prot="public" virt="non-virtual"><scope>apfel::matrix</scope><name>resize</name></member>
+      <member refid="classapfel_1_1matrix_1aa1828d253916d16d8018c2a232db5303" prot="public" virt="non-virtual"><scope>apfel::matrix</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

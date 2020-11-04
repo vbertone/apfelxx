@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1EvolutionBasisQCD" kind="class" language="C++" prot="public">
+    <compoundname>apfel::EvolutionBasisQCD</compoundname>
+    <basecompoundref refid="classapfel_1_1ConvolutionMap" prot="public" virt="non-virtual">apfel::ConvolutionMap</basecompoundref>
+    <includes refid="evolutionbasisqcd_8h" local="no">evolutionbasisqcd.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8" prot="public" static="no" strong="no">
+        <type>int</type>
+        <name>Operand</name>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a780c887bda77b31b4230e9bfe5fbc231" prot="public">
+          <name>PNSP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a10c9ad40a7680ef8811a66a0b27553ac" prot="public">
+          <name>PNSM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8ace59a3576047e627dddbd8a6b5c663c5" prot="public">
+          <name>PNSV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a55f1f6a7011dc376312e91d67b11224d" prot="public">
+          <name>PQQ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a3dd95b1224451bf978ce364aae5a2a20" prot="public">
+          <name>PQG</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a50e295396071e5f694cb5f4c77c330b6" prot="public">
+          <name>PGQ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a92a85eba6acccd6cf23b5059be4a7946" prot="public">
+          <name>PGG</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The map enumerators for the operands and the distributions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/evolutionbasisqcd.h" line="64" column="5" bodyfile="inc/apfel/evolutionbasisqcd.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="enum" id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169" prot="public" static="no" strong="no">
+        <type>int</type>
+        <name>Object</name>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a534d9a14dbdfbf52b606e9d09a9bfec1" prot="public">
+          <name>GLUON</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169abad7ee5de0d480ed79d1248f879deb9c" prot="public">
+          <name>SIGMA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169aa95760e4684e512f7d17af2d61a07dce" prot="public">
+          <name>VALENCE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169ad35baed816a84080347c173d6869f13a" prot="public">
+          <name>T3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a5b50bd9653298c56d929ad550d9cb658" prot="public">
+          <name>V3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a0b44dbe9e25b42fda25ee9cc959eb506" prot="public">
+          <name>T8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a532121d25d9660ad9ffce886a48cc71c" prot="public">
+          <name>V8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a0596750e35910b4b864e7b1ddb1d6e70" prot="public">
+          <name>T15</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a5f9930b9c16c5d4107dbf60d61db9229" prot="public">
+          <name>V15</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a96f828eca4966b3ee89c0de84a695433" prot="public">
+          <name>T24</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a142e86d2dc4a0031c4a2691c2a29a5be" prot="public">
+          <name>V24</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a19be49aaea744e5398dd09ae7bd411d4" prot="public">
+          <name>T35</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a4d830e1059d893ae65741ad5fbdb82c1" prot="public">
+          <name>V35</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/evolutionbasisqcd.h" line="65" column="5" bodyfile="inc/apfel/evolutionbasisqcd.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1EvolutionBasisQCD_1a6610cdd3d123e1e9320adb77cc35ff06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::EvolutionBasisQCD::EvolutionBasisQCD</definition>
+        <argsstring>(int const &amp;nf)</argsstring>
+        <name>EvolutionBasisQCD</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nf</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1EvolutionBasisQCD" kindref="compound">EvolutionBasisQCD</ref> constructor for the DGLAP evolution in the QCD evolution basis with nf active flavours. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of active flavours </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/evolutionbasisqcd.h" line="72" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1EvolutionBasisQCD" kindref="compound">EvolutionBasisQCD</ref> class is a derived of <ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> specialised for the DGLAP evolution of distributions using the QCD evolution basis. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+      </node>
+      <node id="1">
+        <label>apfel::EvolutionBasisQCD</label>
+        <link refid="classapfel_1_1EvolutionBasisQCD"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_rules</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::EvolutionBasisQCD</label>
+        <link refid="classapfel_1_1EvolutionBasisQCD"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; apfel::ConvolutionMap::rule &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::map&lt; int, std::vector&lt; apfel::ConvolutionMap::rule &gt; &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>apfel::ConvolutionMap::rule</label>
+        <link refid="structapfel_1_1ConvolutionMap_1_1rule"/>
+      </node>
+      <node id="6">
+        <label>std::string</label>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/evolutionbasisqcd.h" line="57" column="3" bodyfile="inc/apfel/evolutionbasisqcd.h" bodystart="58" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1ConvolutionMap_1a291fc7fd16bb766e49cb0f6064040100" prot="protected" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>_name</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1af09aefa369acec757323cb45493d5aeb" prot="protected" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>_rules</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a0f602872988c9ec3286bd30c66a92cf7" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>ConvolutionMap</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a6610cdd3d123e1e9320adb77cc35ff06" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>EvolutionBasisQCD</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a4b38dc94dfe93316bdcc966dc9bd9039" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>GetName</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1ae7d6672bb6ff5c242227570bac638fb9" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>GetRuleIndices</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1aa74a4ecc6ecf40f75f04239aaa819666" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>GetRuleMatrix</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a5bd9105aadb8c0d8cbf19e712e31bb57" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>GetRules</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a534d9a14dbdfbf52b606e9d09a9bfec1" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>GLUON</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>Object</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>Operand</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a92a85eba6acccd6cf23b5059be4a7946" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PGG</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a50e295396071e5f694cb5f4c77c330b6" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PGQ</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a10c9ad40a7680ef8811a66a0b27553ac" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PNSM</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a780c887bda77b31b4230e9bfe5fbc231" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PNSP</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8ace59a3576047e627dddbd8a6b5c663c5" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PNSV</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a3dd95b1224451bf978ce364aae5a2a20" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PQG</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a55f1f6a7011dc376312e91d67b11224d" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>PQQ</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169abad7ee5de0d480ed79d1248f879deb9c" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>SIGMA</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a0596750e35910b4b864e7b1ddb1d6e70" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>T15</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a96f828eca4966b3ee89c0de84a695433" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>T24</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169ad35baed816a84080347c173d6869f13a" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>T3</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a19be49aaea744e5398dd09ae7bd411d4" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>T35</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a0b44dbe9e25b42fda25ee9cc959eb506" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>T8</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a5f9930b9c16c5d4107dbf60d61db9229" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>V15</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a142e86d2dc4a0031c4a2691c2a29a5be" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>V24</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a5b50bd9653298c56d929ad550d9cb658" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>V3</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a4d830e1059d893ae65741ad5fbdb82c1" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>V35</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a532121d25d9660ad9ffce886a48cc71c" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>V8</name></member>
+      <member refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169aa95760e4684e512f7d17af2d61a07dce" prot="public" virt="non-virtual"><scope>apfel::EvolutionBasisQCD</scope><name>VALENCE</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

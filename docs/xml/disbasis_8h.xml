@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="disbasis_8h" kind="file" language="C++">
+    <compoundname>disbasis.h</compoundname>
+    <includes refid="convolutionmap_8h" local="yes">apfel/convolutionmap.h</includes>
+    <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
+    <includedby refid="structurefunctionbuilder_8h" local="yes">inc/apfel/structurefunctionbuilder.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>apfel/matrix.h</label>
+        <link refid="matrix_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="5">
+        <label>array</label>
+      </node>
+      <node id="1">
+        <label>inc/apfel/disbasis.h</label>
+        <link refid="disbasis_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>apfel/convolutionmap.h</label>
+        <link refid="convolutionmap_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+      <node id="3">
+        <label>inc/apfel/structurefunctionbuilder.h</label>
+        <link refid="structurefunctionbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/apfel/disbasis.h</label>
+        <link refid="disbasis_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classapfel_1_1DISNCBasis" prot="public">apfel::DISNCBasis</innerclass>
+    <innerclass refid="classapfel_1_1DISCCBasis" prot="public">apfel::DISCCBasis</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="convolutionmap_8h" kindref="compound">apfel/convolutionmap.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"></codeline>
+<codeline lineno="25" refid="classapfel_1_1DISNCBasis" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1DISNCBasis" kindref="compound">DISNCBasis</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32" refid="classapfel_1_1DISNCBasis_1a4ab558bc993eb6f6b5c6a9f15eb53d60" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1DISNCBasis_1a4ab558bc993eb6f6b5c6a9f15eb53d60" kindref="member">Operand</ref>:<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1DISNCBasis_1a4ab558bc993eb6f6b5c6a9f15eb53d60a865e4ec076559d4ab36f0f9b8c110b83" kindref="member">CNS</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1a4ab558bc993eb6f6b5c6a9f15eb53d60a6edfc8afd7a0b1bfebc74332afb4031c" kindref="member">CS</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1a4ab558bc993eb6f6b5c6a9f15eb53d60a52a1108889293dff2b652a23bc8a0725" kindref="member">CG</ref>};</highlight></codeline>
+<codeline lineno="33" refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64daae91c687000f988d1bd93c2a593e3261" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64d" kindref="member">Object</ref>:<sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da9ab9de3956c1e1bee693de0cbd05970f" kindref="member">GLUON</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da45c131a31d2d2000bc2d809a6ad0d416" kindref="member">SIGMA</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64daae91c687000f988d1bd93c2a593e3261" kindref="member">VALENCE</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da80d652ec2f65d68deeba81bfe5c6bbd3" kindref="member">T3</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da4c540b7ec4bf31c25a45efdd4d575ea0" kindref="member">V3</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da8b446fe52a2b062a5c7351f2172f1c2e" kindref="member">T8</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da57903f87043af143241eb11c9e13ed7d" kindref="member">V8</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64daccbd315d84f28b67bd0410cd14e18bc9" kindref="member">T15</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da08d39e915a3827a0f5acb5524a5f55f9" kindref="member">V15</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da249f2821f1f618ca58d4e5762dc800a6" kindref="member">T24</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da745d5fe6643f2c9f01daa192ff5a874b" kindref="member">V24</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da2cb8c47d5e04a163f41343f57e5da2fc" kindref="member">T35</ref>,<sp/><ref refid="classapfel_1_1DISNCBasis_1adb9d33d6b7cd7bafd381c214e83bd64da36c1cd2d6c32164c256b9e55ec3f7b06" kindref="member">V35</ref>};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"></codeline>
+<codeline lineno="46" refid="classapfel_1_1DISNCBasis_1adb173c7f44caa2e6f62fa75f1ce93d22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1DISNCBasis_1adb173c7f44caa2e6f62fa75f1ce93d22" kindref="member">DISNCBasis</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>k,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>fact<sp/>=<sp/>1);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classapfel_1_1DISNCBasis_1a2361c9a87bc1278ceff741356e8821b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1DISNCBasis_1a2361c9a87bc1278ceff741356e8821b9" kindref="member">DISNCBasis</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>Ch);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classapfel_1_1DISCCBasis" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1DISCCBasis" kindref="compound">DISCCBasis</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="68" refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2f" kindref="member">Operand</ref>:<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa403b083fd6ed38621d003339b13fd05b" kindref="member">CNS</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b" kindref="member">CS</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa62810fc51924226e888e0f815590e060" kindref="member">CG</ref>};</highlight></codeline>
+<codeline lineno="69" refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a33d8b83dfea85bdf4f96ebd0dfbbf295" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501" kindref="member">Object</ref>:<sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501af45e9d90d80f83b3ff17146082a1e1d9" kindref="member">GLUON</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a3c1dac35b4f55c6edeaf09481a1e3318" kindref="member">SIGMA</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a33d8b83dfea85bdf4f96ebd0dfbbf295" kindref="member">VALENCE</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501adb3cdfdaff7054f4f387f5f87b98a67c" kindref="member">T3</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a70e54d370315f8c39c4074a7501e784e" kindref="member">V3</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a59a3d0317b4e473ea509f9a1a17cbd8a" kindref="member">T8</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ad76822604c5b8714b447d7fb3a5925ae" kindref="member">V8</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ac3bbc435768487ffe4999f5a572e060c" kindref="member">T15</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a13d94cd54e123452bb6b43f8ef70252c" kindref="member">V15</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ab3820325c0551545a743ccf01a0ace78" kindref="member">T24</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ae7b1f7a64770f6aeecd95a10eacad211" kindref="member">V24</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a6d5b1c96b5c8d3d7f5e7869cf6711334" kindref="member">T35</ref>,<sp/><ref refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a585009c022ee1e44bb6106ecc3daec73" kindref="member">V35</ref>};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="classapfel_1_1DISCCBasis_1a9d2d5eddc9343ef064d59fbfe43e3c0d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;int,<sp/>std::pair&lt;int,<sp/>int&gt;&gt;<sp/><ref refid="classapfel_1_1DISCCBasis_1a9d2d5eddc9343ef064d59fbfe43e3c0d" kindref="member">Vij</ref><sp/>=</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{1,<sp/>{1,<sp/>1}},<sp/>{2,<sp/>{1,<sp/>2}},<sp/>{3,<sp/>{1,<sp/>3}},</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{4,<sp/>{2,<sp/>1}},<sp/>{5,<sp/>{2,<sp/>2}},<sp/>{6,<sp/>{2,<sp/>3}},</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{7,<sp/>{3,<sp/>1}},<sp/>{8,<sp/>{3,<sp/>2}},<sp/>{9,<sp/>{3,<sp/>3}}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"></codeline>
+<codeline lineno="104" refid="classapfel_1_1DISCCBasis_1afb27ed666c9eaeb96a9f08015cc9514c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1DISCCBasis_1afb27ed666c9eaeb96a9f08015cc9514c" kindref="member">DISCCBasis</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>l,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>Is3,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>fact<sp/>=<sp/>1);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="classapfel_1_1DISCCBasis_1a429254ee06c6758a7898c371f9121acd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1DISCCBasis_1a429254ee06c6758a7898c371f9121acd" kindref="member">DISCCBasis</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>CKM,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>Is3);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/disbasis.h"/>
+  </compounddef>
+</doxygen>

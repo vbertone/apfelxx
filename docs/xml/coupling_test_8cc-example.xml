@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="coupling_test_8cc-example" kind="example">
+    <compoundname>coupling_test.cc</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><programlisting filename="coupling_test.cc"><codeline><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="apfelxx_8h" kindref="compound">apfel/apfelxx.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Test<sp/>scale</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>Mu<sp/>=<sp/>100.;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Reference<sp/>value<sp/>of<sp/>the<sp/>strong<sp/>coupling<sp/>and<sp/>heavy-quark</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>thresholds.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>AlphaQCDRef<sp/>=<sp/>0.35;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>MuQCDRef<sp/><sp/><sp/><sp/>=<sp/>sqrt(2);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;<sp/>QuarkThresholds<sp/>=<sp/>{0,<sp/>0,<sp/>0,<sp/>sqrt(2),<sp/>4.5,<sp/>175};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Iniatialize<sp/>the<sp/>running<sp/>of<sp/>the<sp/>coupling<sp/>at<sp/>all<sp/>available</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>perturbative<sp/>orders.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1AlphaQCD" kindref="compound">apfel::AlphaQCD</ref><sp/>asLO{AlphaQCDRef,<sp/>MuQCDRef,<sp/>QuarkThresholds,<sp/>0};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1AlphaQCD" kindref="compound">apfel::AlphaQCD</ref><sp/>asNLO{AlphaQCDRef,<sp/>MuQCDRef,<sp/>QuarkThresholds,<sp/>1};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1AlphaQCD" kindref="compound">apfel::AlphaQCD</ref><sp/>asNNLO{AlphaQCDRef,<sp/>MuQCDRef,<sp/>QuarkThresholds,<sp/>2};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1AlphaQCD" kindref="compound">apfel::AlphaQCD</ref><sp/>asNNNLO{AlphaQCDRef,<sp/>MuQCDRef,<sp/>QuarkThresholds,<sp/>3};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Compute<sp/>and<sp/>print<sp/>values<sp/>at<sp/>Mu.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\nLO:<sp/><sp/><sp/><sp/>alpha_s(Mu<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>Mu<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>GeV)<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>asLO.Evaluate(Mu)<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;NLO:<sp/><sp/><sp/>alpha_s(Mu<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>Mu<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>GeV)<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>asNLO.Evaluate(Mu)<sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>(NLO/LO<sp/><sp/><sp/><sp/><sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>100<sp/>*<sp/>asNLO.Evaluate(Mu)<sp/>/<sp/>asLO.Evaluate(Mu)&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%)&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;NNLO:<sp/><sp/>alpha_s(Mu<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>Mu<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>GeV)<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>asNNLO.Evaluate(Mu)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>(NNLO/NLO<sp/><sp/><sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>100<sp/>*<sp/>asNNLO.Evaluate(Mu)<sp/>/<sp/>asNLO.Evaluate(Mu)&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%)&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;NNNLO:<sp/>alpha_s(Mu<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>Mu<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>GeV)<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>asNNNLO.Evaluate(Mu)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>(NNNLO/NNLO<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>100<sp/>*<sp/>asNNNLO.Evaluate(Mu)<sp/>/<sp/>asNNLO.Evaluate(Mu)&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%)&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Reference<sp/>value<sp/>of<sp/>the<sp/>QED<sp/>coupling<sp/>and<sp/>heavy-quark</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>thresholds.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>AlphaQEDRef<sp/>=<sp/>1.<sp/>/<sp/>128.;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>MuQEDRef<sp/><sp/><sp/><sp/>=<sp/>91.2;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;<sp/>LeptThresholds<sp/>=<sp/>{0,<sp/>0,<sp/>1.777};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Iniatialize<sp/>the<sp/>running<sp/>of<sp/>the<sp/>QED<sp/>coupling<sp/>at<sp/>all<sp/>available</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>perturbative<sp/>orders.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1AlphaQED" kindref="compound">apfel::AlphaQED</ref><sp/>aLO{AlphaQEDRef,<sp/>MuQEDRef,<sp/>QuarkThresholds,<sp/>LeptThresholds,<sp/>0};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1AlphaQED" kindref="compound">apfel::AlphaQED</ref><sp/>aNLO{AlphaQEDRef,<sp/>MuQEDRef,<sp/>QuarkThresholds,<sp/>LeptThresholds,<sp/>1};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Compute<sp/>and<sp/>print<sp/>values<sp/>at<sp/>Mu.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>Mu<sp/>=<sp/>1e10;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\nLO:<sp/><sp/><sp/><sp/>alpha_em(Mu<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>Mu<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>GeV)<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>aLO.Evaluate(Mu)<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;NLO:<sp/><sp/><sp/>alpha_em(Mu<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>Mu<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>GeV)<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>aNLO.Evaluate(Mu)<sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>(NLO/LO<sp/>=<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>100<sp/>*<sp/>aNLO.Evaluate(Mu)<sp/>/<sp/>aLO.Evaluate(Mu)&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%)\n&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

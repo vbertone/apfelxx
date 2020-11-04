@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NLOff" kind="group">
+    <compoundname>NLOff</compoundname>
+    <title>NLO matching functions for FFs</title>
+    <innerclass refid="classapfel_1_1C1nsff" prot="public">apfel::C1nsff</innerclass>
+    <innerclass refid="classapfel_1_1C1qgff" prot="public">apfel::C1qgff</innerclass>
+    <innerclass refid="classapfel_1_1C1gqff" prot="public">apfel::C1gqff</innerclass>
+    <innerclass refid="classapfel_1_1C1ggff" prot="public">apfel::C1ggff</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

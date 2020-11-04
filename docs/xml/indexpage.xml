@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>APFEL</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="index_1md_README"/><ulink url="https://circleci.com/gh/vbertone/apfelxx"><image type="html" name="https://circleci.com/gh/vbertone/apfelxx.svg?style=svg&amp;circle-token=079509ce5a2d4da15596d7812b33dca48eec8dc7" inline="yes"></image>
+</ulink> <ulink url="https://www.codefactor.io/repository/github/vbertone/apfelxx"><image type="html" name="https://www.codefactor.io/repository/github/vbertone/apfelxx/badge" inline="yes"></image>
+</ulink></para>
+<para><image type="html" name="https://github.com/vbertone/apfelxx/raw/master/resources/logo.png" inline="yes"></image>
+</para>
+<sect1 id="index_1autotoc_md0">
+<title>APFEL++: A PDF evolution library in C++</title>
+<para>APFEL++ is a C++ rewriting of the Fortran 77 evolution code APFEL (see <ulink url="http://apfel.hepforge.org">http://apfel.hepforge.org</ulink> and <ulink url="https://github.com/vbertone/apfel">https://github.com/vbertone/apfel</ulink>). APFEL++ is based on a completely new code design and guarantees a better performance along with a more optimal memory management. The new modular structure allows for better maintainability and easier extensibility. This makes APFEL++ suitable for a wide range of tasks: from the solution of the DGLAP evolution equations to the computation of deep-inelastic-scattering (DIS) and single-inclusive-annihilation cross sections. Also more complex computations, such as differential semi-inclusive DIS and Drell-Yan cross sections, are easily implementable in APFEL++.</para>
+<sect2 id="index_1autotoc_md1">
+<title>Homebrew (macOS)</title>
+<para>APFEL++ is available through the <ulink url="https://github.com/davidchall/homebrew-hep">Homebrew-hep</ulink> tap of <ulink url="https://brew.sh">Homebrew</ulink>. After having installed Homebrew and tapped Homebrew-hep, the latest stable release of APFEL++ can be downloaded and installed with: <programlisting filename=".Shell"><codeline><highlight class="normal">brew<sp/>install<sp/>apfelxx</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md2">
+<title>Download</title>
+<para>You can obtain APFEL++ directly from the github repository:</para>
+<para><ulink url="https://github.com/vbertone/apfelxx/releases">https://github.com/vbertone/apfelxx/releases</ulink></para>
+<para>For the latest development branch you can clone the master code:</para>
+<para><programlisting filename=".Shell"><codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/vbertone/apfelxx.git</highlight></codeline>
+</programlisting></para>
+<para>If you instead want to download a specific tag:</para>
+<para><programlisting filename=".Shell"><codeline><highlight class="normal">git<sp/>tag<sp/>-l</highlight></codeline>
+<codeline><highlight class="normal">git<sp/>checkout<sp/>tags/tag_name</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md3">
+<title>Installation</title>
+<para>The code can be compiled using the following procedure:</para>
+<para><programlisting filename=".Shell"><codeline><highlight class="normal">cd<sp/>apfelxx</highlight></codeline>
+<codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>-DCMAKE_INSTALL_PREFIX=/your/installation/path/<sp/>..</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>&amp;&amp;<sp/>make<sp/>install</highlight></codeline>
+</programlisting></para>
+<para>By the default, if no prefix is given, the program will be installed in the /usr/local folder. If you want (or need) to use a different path, remember to export the APFEL++ <computeroutput>/lib</computeroutput> and <computeroutput>/bin</computeroutput> folders into the <computeroutput>$LD_LIBRARY_PATH</computeroutput> and <computeroutput>$PATH</computeroutput>, respectively. More configuration options can be accessed by typing:</para>
+<para><programlisting filename=".Shell"><codeline><highlight class="normal">ccmake<sp/>.</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md4">
+<title>Documentation</title>
+<para>Code documentation generated with <ulink url="https://www.doxygen.nl/index.html">Doxygen</ulink> can be found <ulink url="https://vbertone.github.io/apfelxx/html/index.html">here</ulink>.</para>
+</sect2>
+<sect2 id="index_1autotoc_md5">
+<title>Relevant references</title>
+<para><itemizedlist>
+<listitem><para>V. Bertone, <emphasis>APFEL++: A new PDF evolution library in C++</emphasis>, <ulink url="https://arxiv.org/pdf/1708.00911.pdf">arXiv:1708.00911</ulink>.</para>
+</listitem><listitem><para>V. Bertone, S. Carrazza, J. Rojo, <emphasis>APFEL: A PDF Evolution Library with QED corrections</emphasis>, <ulink url="http://arxiv.org/abs/arXiv:1310.1394">arXiv:1310.1394</ulink>.</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md6">
+<title>Contact information</title>
+<para><itemizedlist>
+<listitem><para>Valerio Bertone: <ulink url="mailto:valerio.bertone@cern.ch">valerio.bertone@cern.ch</ulink> </para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

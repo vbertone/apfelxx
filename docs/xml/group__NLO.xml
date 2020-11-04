@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NLO" kind="group">
+    <compoundname>NLO</compoundname>
+    <title>NLO massive coefficient functions</title>
+    <innerclass refid="classapfel_1_1Cm22nsNC" prot="public">apfel::Cm22nsNC</innerclass>
+    <innerclass refid="classapfel_1_1CmL2nsNC" prot="public">apfel::CmL2nsNC</innerclass>
+    <innerclass refid="classapfel_1_1Cm22gNC" prot="public">apfel::Cm22gNC</innerclass>
+    <innerclass refid="classapfel_1_1CmL2gNC" prot="public">apfel::CmL2gNC</innerclass>
+    <innerclass refid="classapfel_1_1Cm22psNC" prot="public">apfel::Cm22psNC</innerclass>
+    <innerclass refid="classapfel_1_1CmL2psNC" prot="public">apfel::CmL2psNC</innerclass>
+    <innerclass refid="classapfel_1_1Cm22bargNC" prot="public">apfel::Cm22bargNC</innerclass>
+    <innerclass refid="classapfel_1_1CmL2bargNC" prot="public">apfel::CmL2bargNC</innerclass>
+    <innerclass refid="classapfel_1_1Cm22barpsNC" prot="public">apfel::Cm22barpsNC</innerclass>
+    <innerclass refid="classapfel_1_1CmL2barpsNC" prot="public">apfel::CmL2barpsNC</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__LO" kind="group">
+    <compoundname>LO</compoundname>
+    <title>LO massive coefficient functions</title>
+    <innerclass refid="classapfel_1_1Cm21gNC" prot="public">apfel::Cm21gNC</innerclass>
+    <innerclass refid="classapfel_1_1CmL1gNC" prot="public">apfel::CmL1gNC</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

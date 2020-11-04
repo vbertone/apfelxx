@@ -1,0 +1,696 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1Interpolator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>apfel::Interpolator</compoundname>
+    <derivedcompoundref refid="classapfel_1_1LagrangeInterpolator" prot="public" virt="non-virtual">apfel::LagrangeInterpolator</derivedcompoundref>
+    <includes refid="interpolator_8h" local="no">interpolator.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Evaluate functions</header>
+      <description><para>List of functions that perform the interpolation on the x-space grid. These also include the derivative and the integral of the interpolated function. </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1aaa04fd13b61de9eca4bce12c4afd8e97" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::Interpolator::Evaluate</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>Evaluate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Function that evaluates the interpolated function on the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value in x to be interpolated </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolated result </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="56" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a0a02b02f3a9b75647af7b64da7057c4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::Interpolator::Evaluate</definition>
+        <argsstring>(double const &amp;x, int const &amp;ig) const</argsstring>
+        <name>Evaluate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>ig</declname>
+        </param>
+        <briefdescription>
+<para>Function that evaluates the interpolated function on a given subgrid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value in x to be interpolated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the subgrid index </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolated result </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="64" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a4089ff67183effbcecf877e898dde0bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::Interpolator::Derive</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>Derive</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Function that evaluates the derivative of the interpolated function on the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value in x where the derivative has to be computed </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the derivative of the interpolated function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="72" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1afabd876ece0e971616bbc0f950419156" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::Interpolator::Integrate</definition>
+        <argsstring>(double const &amp;a, double const &amp;b) const</argsstring>
+        <name>Integrate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Function that evaluates the integral of the interpolated function in the interval [a,b] on the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lower integration bound </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the upper integration bound </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the integral of the interpolated function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="81" column="12"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Getters</header>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a9a2ca32b709976d46aadcff895ec1be8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const  &amp;</type>
+        <definition>Grid const&amp; apfel::Interpolator::GetGrid</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGrid</name>
+        <briefdescription>
+<para>The grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="134" column="44" bodyfile="inc/apfel/interpolator.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1ad9b3ce90a94c82a043362b0c68bee398" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::vector&lt; double &gt; &gt; const  &amp;</type>
+        <definition>std::vector&lt;std::vector&lt;double&gt; &gt; const&amp; apfel::Interpolator::GetDistributionSubGrid</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDistributionSubGrid</name>
+        <briefdescription>
+<para>The distribution on the subgrids. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="135" column="23" bodyfile="inc/apfel/interpolator.h" bodystart="135" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1af7486f60789a0135fe4e2107ce0221dd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; const  &amp;</type>
+        <definition>std::vector&lt;double&gt; const&amp; apfel::Interpolator::GetDistributionJointGrid</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDistributionJointGrid</name>
+        <briefdescription>
+<para>The distribution on the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="136" column="36" bodyfile="inc/apfel/interpolator.h" bodystart="136" bodyend="135"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classapfel_1_1Interpolator_1a6a98ca87f7d781661a98038e753c1c27" prot="protected" static="no" mutable="no">
+        <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const  &amp;</type>
+        <definition>Grid const&amp; apfel::Interpolator::_grid</definition>
+        <argsstring></argsstring>
+        <name>_grid</name>
+        <briefdescription>
+<para>The stored grid reference. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="140" column="44" bodyfile="inc/apfel/interpolator.h" bodystart="140" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1Interpolator_1a08d213653646c8598d07aae2ae6afcff" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; double &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;double&gt; &gt; apfel::Interpolator::_distributionSubGrid</definition>
+        <argsstring></argsstring>
+        <name>_distributionSubGrid</name>
+        <briefdescription>
+<para>The array with the distribution values on the subgrid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="141" column="24" bodyfile="inc/apfel/interpolator.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1Interpolator_1a9054c97a66105a3af624834ea49ab3d5" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::Interpolator::_distributionJointGrid</definition>
+        <argsstring></argsstring>
+        <name>_distributionJointGrid</name>
+        <briefdescription>
+<para>The array with the distribution values on the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="142" column="37" bodyfile="inc/apfel/interpolator.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1abcf14478694c9385f568a4fd69a0fe67" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual apfel::Interpolator::~Interpolator</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Interpolator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="24" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a829c8b174a5e9a12b20b927bb46a7279" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::Interpolator::Interpolator</definition>
+        <argsstring>(Grid const &amp;gr)</argsstring>
+        <name>Interpolator</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>gr</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1Interpolator" kindref="compound">Interpolator</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid object over which interpolation takes place </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a1fadb1d59ddfd5f4166c0ebde878ae99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::Interpolator::Interpolator</definition>
+        <argsstring>(Grid const &amp;gr, std::vector&lt; std::vector&lt; double &gt;&gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</argsstring>
+        <name>Interpolator</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>gr</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::vector&lt; double &gt;&gt; const &amp;</type>
+          <declname>distsubgrid</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>distjointgrid</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1Interpolator" kindref="compound">Interpolator</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid object over which interpolation takes place </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>distsubgrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the vector of subgrids </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>distjointgrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the joint subgrid </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>distjointgrid and distsubgrid are assumed to match the structure of the grid gr. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a9c58121f234604b9845942f38961f45c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double apfel::Interpolator::InterpolantLog</definition>
+        <argsstring>(int const &amp;beta, double const &amp;lnx, SubGrid const &amp;sg) const =0</argsstring>
+        <name>InterpolantLog</name>
+        <reimplementedby refid="classapfel_1_1LagrangeInterpolator_1aa27376e2b20c645a57df5e808270bd13">InterpolantLog</reimplementedby>
+        <param>
+          <type>int const &amp;</type>
+          <declname>beta</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>lnx</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const &amp;</type>
+          <declname>sg</declname>
+        </param>
+        <briefdescription>
+<para>Pure virtual method for the interpolating functions polynomial in log(x). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lnx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value (of the log) of the interpolation point </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> over which the interpolant is defined </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolation weights </para>
+</simplesect>
+<simplesect kind="note"><para>This interpolant is polynomial in log(x) and is used when computing operators on the grid. The reason is it&apos;s translation invariance on a logarithmically spaced grid that reduces the ammount of computations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="96" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1aa467e93e85271414cca20d2aa4f05f75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double apfel::Interpolator::Interpolant</definition>
+        <argsstring>(int const &amp;beta, double const &amp;x, SubGrid const &amp;sg) const =0</argsstring>
+        <name>Interpolant</name>
+        <reimplementedby refid="classapfel_1_1LagrangeInterpolator_1ab5f774f33176ece373a77a814c914b73">Interpolant</reimplementedby>
+        <param>
+          <type>int const &amp;</type>
+          <declname>beta</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const &amp;</type>
+          <declname>sg</declname>
+        </param>
+        <briefdescription>
+<para>Pure virtual method for the interpolating functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the interpolation point </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> over which the interpolant is defined </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolation weights </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="105" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1af14311bdfd1757d16844ae4e39d54240" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>virtual double apfel::Interpolator::DerInterpolant</definition>
+        <argsstring>(int const &amp;, double const &amp;, SubGrid const &amp;) const</argsstring>
+        <name>DerInterpolant</name>
+        <reimplementedby refid="classapfel_1_1LagrangeInterpolator_1ad829c2abc855b9dc2b72f7ceaf5cf564">DerInterpolant</reimplementedby>
+        <param>
+          <type>int const &amp;</type>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Virtual method for the derivative of the interpolating functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the derivarive of the interpolation weights </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="112" column="20" bodyfile="inc/apfel/interpolator.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1a3d294de2c1bd8df09e3420a529a0beb9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>virtual double apfel::Interpolator::IntInterpolant</definition>
+        <argsstring>(int const &amp;, double const &amp;, double const &amp;, SubGrid const &amp;) const</argsstring>
+        <name>IntInterpolant</name>
+        <reimplementedby refid="classapfel_1_1LagrangeInterpolator_1ac685eca21fc99696b8fb8dee1f5248c5">IntInterpolant</reimplementedby>
+        <param>
+          <type>int const &amp;</type>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Virtual method for the integral of the interpolating functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the integral of the interpolation weights </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="119" column="20" bodyfile="inc/apfel/interpolator.h" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Interpolator_1acf4448797b971b6faee8b2eb84d9e910" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::array&lt; int, 2 &gt;</type>
+        <definition>virtual std::array&lt;int,2&gt; apfel::Interpolator::SumBounds</definition>
+        <argsstring>(double const &amp;x, SubGrid const &amp;sg) const =0</argsstring>
+        <name>SumBounds</name>
+        <reimplementedby refid="classapfel_1_1LagrangeInterpolator_1a1937891f73add6ac97b543c4e291308d">SumBounds</reimplementedby>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const &amp;</type>
+          <declname>sg</declname>
+        </param>
+        <briefdescription>
+<para>This purely virtual function computes the lower and upper bounds on which the the sum over interpolants is limited. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value in x to be interpolated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> over which the interpolant is defined </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the lower and upper bounds of the grid index </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="128" column="24"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classapfel_1_1Interpolator_1a5092e68e38f4e04ce411ba3ac92c3ac9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, Interpolator const &amp;sg)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1Interpolator" kindref="compound">Interpolator</ref> const &amp;</type>
+          <declname>sg</declname>
+        </param>
+        <briefdescription>
+<para>Method which prints <ref refid="classapfel_1_1Interpolator" kindref="compound">Interpolator</ref> with cout &lt;&lt;. This only prints the first subgrid and is supposed to be used for debugging purposes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/interpolator.h" line="144" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1Interpolator" kindref="compound">Interpolator</ref> class is a mother class for the x-space interpolationand requires the implementation of a specialized interpolation algorithm. The current version uses the joint grid object stored allocated by the <ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> class. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::LagrangeInterpolator</label>
+        <link refid="classapfel_1_1LagrangeInterpolator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::Interpolator</label>
+        <link refid="classapfel_1_1Interpolator"/>
+      </node>
+      <node id="3">
+        <label>apfel::Distribution</label>
+        <link refid="classapfel_1_1Distribution"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>std::vector&lt; std::pair&lt; int, int &gt; &gt;</label>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="2">
+        <label>apfel::Grid</label>
+        <link refid="classapfel_1_1Grid"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_JointToSubMap</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_SubToJointMap</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_JointGrid</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_GlobalGrid</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::unique_ptr&lt; apfel::SubGrid &gt;</label>
+        <childnode refid="7" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>std::vector&lt; std::vector&lt; double &gt; &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; std::vector&lt; int &gt; &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; apfel::SubGrid &gt;</label>
+        <childnode refid="7" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>apfel::SubGrid</label>
+        <link refid="classapfel_1_1SubGrid"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_lxsg</edgelabel>
+          <edgelabel>_xsg</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::Interpolator</label>
+        <link refid="classapfel_1_1Interpolator"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_grid</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>_distributionSubGrid</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_distributionJointGrid</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; int &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/interpolator.h" line="21" column="3" bodyfile="inc/apfel/interpolator.h" bodystart="22" bodyend="145"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1Interpolator_1a9054c97a66105a3af624834ea49ab3d5" prot="protected" virt="non-virtual"><scope>apfel::Interpolator</scope><name>_distributionJointGrid</name></member>
+      <member refid="classapfel_1_1Interpolator_1a08d213653646c8598d07aae2ae6afcff" prot="protected" virt="non-virtual"><scope>apfel::Interpolator</scope><name>_distributionSubGrid</name></member>
+      <member refid="classapfel_1_1Interpolator_1a6a98ca87f7d781661a98038e753c1c27" prot="protected" virt="non-virtual"><scope>apfel::Interpolator</scope><name>_grid</name></member>
+      <member refid="classapfel_1_1Interpolator_1af14311bdfd1757d16844ae4e39d54240" prot="public" virt="virtual"><scope>apfel::Interpolator</scope><name>DerInterpolant</name></member>
+      <member refid="classapfel_1_1Interpolator_1a4089ff67183effbcecf877e898dde0bd" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>Derive</name></member>
+      <member refid="classapfel_1_1Interpolator_1aaa04fd13b61de9eca4bce12c4afd8e97" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>Evaluate</name></member>
+      <member refid="classapfel_1_1Interpolator_1a0a02b02f3a9b75647af7b64da7057c4a" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>Evaluate</name></member>
+      <member refid="classapfel_1_1Interpolator_1af7486f60789a0135fe4e2107ce0221dd" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>GetDistributionJointGrid</name></member>
+      <member refid="classapfel_1_1Interpolator_1ad9b3ce90a94c82a043362b0c68bee398" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>GetDistributionSubGrid</name></member>
+      <member refid="classapfel_1_1Interpolator_1a9a2ca32b709976d46aadcff895ec1be8" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>GetGrid</name></member>
+      <member refid="classapfel_1_1Interpolator_1afabd876ece0e971616bbc0f950419156" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>Integrate</name></member>
+      <member refid="classapfel_1_1Interpolator_1aa467e93e85271414cca20d2aa4f05f75" prot="public" virt="pure-virtual"><scope>apfel::Interpolator</scope><name>Interpolant</name></member>
+      <member refid="classapfel_1_1Interpolator_1a9c58121f234604b9845942f38961f45c" prot="public" virt="pure-virtual"><scope>apfel::Interpolator</scope><name>InterpolantLog</name></member>
+      <member refid="classapfel_1_1Interpolator_1a829c8b174a5e9a12b20b927bb46a7279" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>Interpolator</name></member>
+      <member refid="classapfel_1_1Interpolator_1a1fadb1d59ddfd5f4166c0ebde878ae99" prot="public" virt="non-virtual"><scope>apfel::Interpolator</scope><name>Interpolator</name></member>
+      <member refid="classapfel_1_1Interpolator_1a3d294de2c1bd8df09e3420a529a0beb9" prot="public" virt="virtual"><scope>apfel::Interpolator</scope><name>IntInterpolant</name></member>
+      <member refid="classapfel_1_1Interpolator_1a5092e68e38f4e04ce411ba3ac92c3ac9" prot="protected" virt="non-virtual"><scope>apfel::Interpolator</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classapfel_1_1Interpolator_1acf4448797b971b6faee8b2eb84d9e910" prot="public" virt="pure-virtual"><scope>apfel::Interpolator</scope><name>SumBounds</name></member>
+      <member refid="classapfel_1_1Interpolator_1abcf14478694c9385f568a4fd69a0fe67" prot="public" virt="virtual"><scope>apfel::Interpolator</scope><name>~Interpolator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

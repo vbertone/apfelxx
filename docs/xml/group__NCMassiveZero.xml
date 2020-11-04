@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NCMassiveZero" kind="group">
+    <compoundname>NCMassiveZero</compoundname>
+    <title>Massless limit of the massive neutral current coefficient functions</title>
+    <innerclass refid="classapfel_1_1Cm021gNC__c" prot="public">apfel::Cm021gNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm022nsNC__c" prot="public">apfel::Cm022nsNC_c</innerclass>
+    <innergroup refid="group__LOZero">LO massive-zero coefficient functions</innergroup>
+    <innergroup refid="group__NLOZero">NLO massive-zero coefficient functions</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Collection of the neutral current massless limit of the massive coefficient functions for F<subscript>2</subscript> and F<subscript>L</subscript> up to O(<alpha/><subscript>s</subscript>). <simplesect kind="note"><para>In the following &quot;xi&quot; indicates the ratio Q<superscript>2</superscript> / M<superscript>2</superscript> and &quot;xiF&quot; is equal to M<superscript>2</superscript> / <mu/><subscript>F</subscript><superscript>2</superscript>. See Appendix D of <ulink url="https://arxiv.org/pdf/hep-ph/9601302.pdf">https://arxiv.org/pdf/hep-ph/9601302.pdf</ulink>. The suffix &quot;_c&quot; in the classes below stands for &quot;constant&quot;, that is no dependence on &quot;xi&quot; or &quot;xiF&quot;. &quot;_l&quot; or &quot;_l2&quot; instead means that that term is proportional to log(xi) or log<superscript>2</superscript>(xi), respectively. While &quot;_f&quot; means proportional to log(xiF) amd &quot;_lf&quot; proportional to log(xi)log(xiF). </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

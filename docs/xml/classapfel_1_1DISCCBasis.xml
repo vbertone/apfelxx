@@ -1,0 +1,362 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1DISCCBasis" kind="class" language="C++" prot="public">
+    <compoundname>apfel::DISCCBasis</compoundname>
+    <basecompoundref refid="classapfel_1_1ConvolutionMap" prot="public" virt="non-virtual">apfel::ConvolutionMap</basecompoundref>
+    <includes refid="disbasis_8h" local="no">disbasis.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <description><para>List of constructors. </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1DISCCBasis_1afb27ed666c9eaeb96a9f08015cc9514c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::DISCCBasis::DISCCBasis</definition>
+        <argsstring>(int const &amp;l, bool const &amp;Is3, double const &amp;fact=1)</argsstring>
+        <name>DISCCBasis</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>Is3</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>fact</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1DISCCBasis" kindref="compound">DISCCBasis</ref> constructor for the (i,k)-th component of the structure functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>l</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index that identifies the component of the structure function </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Is3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>switch to tell the constructure whether the structure function is F3 or not </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fact</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>factor that multiplies the whole structure function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/disbasis.h" line="104" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1DISCCBasis_1a429254ee06c6758a7898c371f9121acd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::DISCCBasis::DISCCBasis</definition>
+        <argsstring>(std::vector&lt; double &gt; const &amp;CKM, bool const &amp;Is3)</argsstring>
+        <name>DISCCBasis</name>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>CKM</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>Is3</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1DISCCBasis" kindref="compound">DISCCBasis</ref> constructor for the total structure functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>CKM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector with the CKM matrix entries </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Is3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>switch to tell the constructure whether the structure function is F3 or not </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/disbasis.h" line="111" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2f" prot="public" static="no" strong="no">
+        <type>int</type>
+        <name>Operand</name>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa403b083fd6ed38621d003339b13fd05b" prot="public">
+          <name>CNS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b" prot="public">
+          <name>CS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa62810fc51924226e888e0f815590e060" prot="public">
+          <name>CG</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The map enumerators for the operands and the distributions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/disbasis.h" line="68" column="5" bodyfile="inc/apfel/disbasis.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="enum" id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501" prot="public" static="no" strong="no">
+        <type>int</type>
+        <name>Object</name>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501af45e9d90d80f83b3ff17146082a1e1d9" prot="public">
+          <name>GLUON</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a3c1dac35b4f55c6edeaf09481a1e3318" prot="public">
+          <name>SIGMA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a33d8b83dfea85bdf4f96ebd0dfbbf295" prot="public">
+          <name>VALENCE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501adb3cdfdaff7054f4f387f5f87b98a67c" prot="public">
+          <name>T3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a70e54d370315f8c39c4074a7501e784e" prot="public">
+          <name>V3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a59a3d0317b4e473ea509f9a1a17cbd8a" prot="public">
+          <name>T8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ad76822604c5b8714b447d7fb3a5925ae" prot="public">
+          <name>V8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ac3bbc435768487ffe4999f5a572e060c" prot="public">
+          <name>T15</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a13d94cd54e123452bb6b43f8ef70252c" prot="public">
+          <name>V15</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ab3820325c0551545a743ccf01a0ace78" prot="public">
+          <name>T24</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ae7b1f7a64770f6aeecd95a10eacad211" prot="public">
+          <name>V24</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a6d5b1c96b5c8d3d7f5e7869cf6711334" prot="public">
+          <name>T35</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a585009c022ee1e44bb6106ecc3daec73" prot="public">
+          <name>V35</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/disbasis.h" line="69" column="5" bodyfile="inc/apfel/disbasis.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classapfel_1_1DISCCBasis_1a9d2d5eddc9343ef064d59fbfe43e3c0d" prot="public" static="no" mutable="no">
+        <type>std::map&lt; int, std::pair&lt; int, int &gt; &gt;</type>
+        <definition>std::map&lt;int, std::pair&lt;int, int&gt; &gt; apfel::DISCCBasis::Vij</definition>
+        <argsstring></argsstring>
+        <name>Vij</name>
+        <initializer>=
+    {
+      {1, {1, 1}}, {2, {1, 2}}, {3, {1, 3}},
+      {4, {2, 1}}, {5, {2, 2}}, {6, {2, 3}},
+      {7, {3, 1}}, {8, {3, 2}}, {9, {3, 3}}
+    }</initializer>
+        <briefdescription>
+<para>Map between one single index and the CKM matrix elements: </para>
+        </briefdescription>
+        <detaileddescription>
+<para>1 - Vud2 2 - Vus2 3 - Vub2 4 - Vcd2 5 - Vcs2 6 - Vcb2 7 - Vtd2 8 - Vts2 9 - Vtb2 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/disbasis.h" line="85" column="14" bodyfile="inc/apfel/disbasis.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1DISCCBasis" kindref="compound">DISCCBasis</ref> class is a derived of <ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> specialised for the computation of the CC DIS structure functions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+      </node>
+      <node id="1">
+        <label>apfel::DISCCBasis</label>
+        <link refid="classapfel_1_1DISCCBasis"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_rules</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::map&lt; int, std::pair&lt; int, int &gt; &gt;</label>
+      </node>
+      <node id="1">
+        <label>apfel::DISCCBasis</label>
+        <link refid="classapfel_1_1DISCCBasis"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>Vij</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; apfel::ConvolutionMap::rule &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::map&lt; int, std::vector&lt; apfel::ConvolutionMap::rule &gt; &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>apfel::ConvolutionMap::rule</label>
+        <link refid="structapfel_1_1ConvolutionMap_1_1rule"/>
+      </node>
+      <node id="6">
+        <label>std::string</label>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/disbasis.h" line="61" column="3" bodyfile="inc/apfel/disbasis.h" bodystart="62" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1ConvolutionMap_1a291fc7fd16bb766e49cb0f6064040100" prot="protected" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>_name</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1af09aefa369acec757323cb45493d5aeb" prot="protected" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>_rules</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa62810fc51924226e888e0f815590e060" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>CG</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa403b083fd6ed38621d003339b13fd05b" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>CNS</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a0f602872988c9ec3286bd30c66a92cf7" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>ConvolutionMap</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>CS</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1afb27ed666c9eaeb96a9f08015cc9514c" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>DISCCBasis</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a429254ee06c6758a7898c371f9121acd" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>DISCCBasis</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a4b38dc94dfe93316bdcc966dc9bd9039" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>GetName</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1ae7d6672bb6ff5c242227570bac638fb9" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>GetRuleIndices</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1aa74a4ecc6ecf40f75f04239aaa819666" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>GetRuleMatrix</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a5bd9105aadb8c0d8cbf19e712e31bb57" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>GetRules</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501af45e9d90d80f83b3ff17146082a1e1d9" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>GLUON</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>Object</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a56bdaa6315470fe02451ec5c940fcc2f" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>Operand</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a3c1dac35b4f55c6edeaf09481a1e3318" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>SIGMA</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ac3bbc435768487ffe4999f5a572e060c" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>T15</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ab3820325c0551545a743ccf01a0ace78" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>T24</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501adb3cdfdaff7054f4f387f5f87b98a67c" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>T3</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a6d5b1c96b5c8d3d7f5e7869cf6711334" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>T35</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a59a3d0317b4e473ea509f9a1a17cbd8a" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>T8</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a13d94cd54e123452bb6b43f8ef70252c" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>V15</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ae7b1f7a64770f6aeecd95a10eacad211" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>V24</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a70e54d370315f8c39c4074a7501e784e" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>V3</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a585009c022ee1e44bb6106ecc3daec73" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>V35</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501ad76822604c5b8714b447d7fb3a5925ae" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>V8</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a71d34c94c9d06fe8418da8d5ee37f501a33d8b83dfea85bdf4f96ebd0dfbbf295" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>VALENCE</name></member>
+      <member refid="classapfel_1_1DISCCBasis_1a9d2d5eddc9343ef064d59fbfe43e3c0d" prot="public" virt="non-virtual"><scope>apfel::DISCCBasis</scope><name>Vij</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

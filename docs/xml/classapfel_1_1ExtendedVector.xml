@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1ExtendedVector" kind="class" language="C++" prot="public">
+    <compoundname>apfel::ExtendedVector</compoundname>
+    <includes refid="extendedvector_8h" local="no">extendedvector.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classapfel_1_1ExtendedVector_1a4d0a33f69ec57a5dc76545768d910404" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int apfel::ExtendedVector&lt; T &gt;::_imin</definition>
+        <argsstring></argsstring>
+        <name>_imin</name>
+        <briefdescription>
+<para>The lower bound. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="90" column="20" bodyfile="inc/apfel/extendedvector.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1ExtendedVector_1a70d60d49ab620b00fe79bd6eae6957c9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; apfel::ExtendedVector&lt; T &gt;::_vector</definition>
+        <argsstring></argsstring>
+        <name>_vector</name>
+        <briefdescription>
+<para>The container. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="91" column="17" bodyfile="inc/apfel/extendedvector.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1a955b49148c3429162501c86df6e9a7eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>apfel::ExtendedVector&lt; T &gt;::ExtendedVector</definition>
+        <argsstring>(int const &amp;size=0, T const &amp;value=0, int const &amp;imin=0)</argsstring>
+        <name>ExtendedVector</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>size</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>imin</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1ExtendedVector" kindref="compound">ExtendedVector</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the size of the container (default: 0) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>initialisation value (default: 0) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lowest allowed index (default: 0) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="26" column="5" bodyfile="inc/apfel/extendedvector.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1aacb1552cf37e2ef58b1ec4b7b1d28d4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; apfel::ExtendedVector&lt; T &gt;::operator[]</definition>
+        <argsstring>(int const &amp;index)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value at the possibly negative given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position index </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the value at the possibly negative given index </para>
+</simplesect>
+<simplesect kind="note"><para>Settable version </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="34" column="7" bodyfile="inc/apfel/extendedvector.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1afa78bcd801a2b6a1e79a4a1d8ae0713a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; apfel::ExtendedVector&lt; T &gt;::operator[]</definition>
+        <argsstring>(int const &amp;index) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value at the possibly negative given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position index </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the value at the possibly negative given index </para>
+</simplesect>
+<simplesect kind="note"><para>Non-settable version </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="42" column="13" bodyfile="inc/apfel/extendedvector.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1af591d865e71439884f65bf0b13007dce" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int apfel::ExtendedVector&lt; T &gt;::min</definition>
+        <argsstring>() const</argsstring>
+        <name>min</name>
+        <briefdescription>
+<para>Returns the lower bound. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the lower bound </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="48" column="9" bodyfile="inc/apfel/extendedvector.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1a3535622f96f490c0192557945e02daf6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int apfel::ExtendedVector&lt; T &gt;::max</definition>
+        <argsstring>() const</argsstring>
+        <name>max</name>
+        <briefdescription>
+<para>Returns the upper bound. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the upper bound </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="54" column="9" bodyfile="inc/apfel/extendedvector.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1af04961758c5e23ae52d956042dde5fa3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t apfel::ExtendedVector&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+<para>Returns the size of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="59" column="12" bodyfile="inc/apfel/extendedvector.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1a46b0e7e436210c1305319a3e6a5d9156" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::ExtendedVector&lt; T &gt;::resize</definition>
+        <argsstring>(int const &amp;size, T const &amp;value=0, int const &amp;imin=0)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>imin</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Resizes the continer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new size </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value used to fill in the additional (if any) slots </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lowest allowed index (default: 0) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="67" column="10" bodyfile="inc/apfel/extendedvector.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1a782968defec5e1a2281dff12134d0369" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; T &gt;::iterator</type>
+        <definition>std::vector&lt;T&gt;::iterator apfel::ExtendedVector&lt; T &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>Non-constant begin iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="72" column="37" bodyfile="inc/apfel/extendedvector.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1ae570df688c330c6f05b301e424f06b97" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; T &gt;::const_iterator</type>
+        <definition>std::vector&lt;T&gt;::const_iterator apfel::ExtendedVector&lt; T &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>Constant begin iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="77" column="43" bodyfile="inc/apfel/extendedvector.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1a74359af2d54dcc59c3ea95744ab007d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; T &gt;::iterator</type>
+        <definition>std::vector&lt;T&gt;::iterator apfel::ExtendedVector&lt; T &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>Non-constant end iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="82" column="37" bodyfile="inc/apfel/extendedvector.h" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ExtendedVector_1a340a4a74aeeb28e702b3171050255f0d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; T &gt;::const_iterator</type>
+        <definition>std::vector&lt;T&gt;::const_iterator apfel::ExtendedVector&lt; T &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>Constant end iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/extendedvector.h" line="87" column="43" bodyfile="inc/apfel/extendedvector.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class that extends vectors to negative indices. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="inc/apfel/extendedvector.h" line="17" column="3" bodyfile="inc/apfel/extendedvector.h" bodystart="18" bodyend="92"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1ExtendedVector_1a4d0a33f69ec57a5dc76545768d910404" prot="private" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>_imin</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a70d60d49ab620b00fe79bd6eae6957c9" prot="private" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>_vector</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a782968defec5e1a2281dff12134d0369" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>begin</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1ae570df688c330c6f05b301e424f06b97" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>begin</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a74359af2d54dcc59c3ea95744ab007d0" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>end</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a340a4a74aeeb28e702b3171050255f0d" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>end</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a955b49148c3429162501c86df6e9a7eb" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>ExtendedVector</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a3535622f96f490c0192557945e02daf6" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>max</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1af591d865e71439884f65bf0b13007dce" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>min</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1aacb1552cf37e2ef58b1ec4b7b1d28d4b" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>operator[]</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1afa78bcd801a2b6a1e79a4a1d8ae0713a" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>operator[]</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1a46b0e7e436210c1305319a3e6a5d9156" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>resize</name></member>
+      <member refid="classapfel_1_1ExtendedVector_1af04961758c5e23ae52d956042dde5fa3" prot="public" virt="non-virtual"><scope>apfel::ExtendedVector</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

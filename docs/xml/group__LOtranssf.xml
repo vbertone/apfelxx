@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__LOtranssf" kind="group">
+    <compoundname>LOtranssf</compoundname>
+    <title>LO splitting functions</title>
+    <innerclass refid="classapfel_1_1P0transns" prot="public">apfel::P0transns</innerclass>
+    <innerclass refid="classapfel_1_1P0Ttransns" prot="public">apfel::P0Ttransns</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

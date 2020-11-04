@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="operator_8h" kind="file" language="C++">
+    <compoundname>operator.h</compoundname>
+    <includes refid="grid_8h" local="yes">apfel/grid.h</includes>
+    <includes refid="expression_8h" local="yes">apfel/expression.h</includes>
+    <includes refid="distribution_8h" local="yes">apfel/distribution.h</includes>
+    <includes refid="extendedvector_8h" local="yes">apfel/extendedvector.h</includes>
+    <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
+    <includedby refid="dglap_8h" local="yes">inc/apfel/dglap.h</includedby>
+    <includedby refid="observable_8h" local="yes">inc/apfel/observable.h</includedby>
+    <includedby refid="rotations_8h" local="yes">inc/apfel/rotations.h</includedby>
+    <includedby refid="tmdbuilder_8h" local="yes">inc/apfel/tmdbuilder.h</includedby>
+    <incdepgraph>
+      <node id="10">
+        <label>apfel/interpolator.h</label>
+        <link refid="interpolator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="12">
+        <label>map</label>
+      </node>
+      <node id="1">
+        <label>inc/apfel/operator.h</label>
+        <link refid="operator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>apfel/subgrid.h</label>
+        <link refid="subgrid_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>apfel/distribution.h</label>
+        <link refid="distribution_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>apfel/lagrangeinterpolator.h</label>
+        <link refid="lagrangeinterpolator_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="11">
+        <label>array</label>
+      </node>
+      <node id="7">
+        <label>apfel/expression.h</label>
+        <link refid="expression_8h"/>
+      </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
+      <node id="14">
+        <label>apfel/extendedvector.h</label>
+        <link refid="extendedvector_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>memory</label>
+      </node>
+      <node id="2">
+        <label>apfel/grid.h</label>
+        <link refid="grid_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>inc/apfel/dglapbuilder.h</label>
+        <link refid="dglapbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>inc/apfel/gpdbuilder.h</label>
+        <link refid="gpdbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/apfel/operator.h</label>
+        <link refid="operator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+      <node id="7">
+        <label>inc/apfel/tmdbuilder.h</label>
+        <link refid="tmdbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>inc/apfel/initialiseevolution.h</label>
+        <link refid="initialiseevolution_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>inc/apfel/rotations.h</label>
+        <link refid="rotations_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>inc/apfel/structurefunctionbuilder.h</label>
+        <link refid="structurefunctionbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>inc/apfel/observable.h</label>
+        <link refid="observable_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>inc/apfel/dglap.h</label>
+        <link refid="dglap_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classapfel_1_1Operator" prot="public">apfel::Operator</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="grid_8h" kindref="compound">apfel/grid.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="expression_8h" kindref="compound">apfel/expression.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="distribution_8h" kindref="compound">apfel/distribution.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="extendedvector_8h" kindref="compound">apfel/extendedvector.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22" refid="classapfel_1_1Operator" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="25" refid="classapfel_1_1Operator_1abed3b7be91a5e75cea637a87fb4fa5d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1abed3b7be91a5e75cea637a87fb4fa5d0" kindref="member">Operator</ref>()<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classapfel_1_1Operator_1a73a58960bf7ada6b45205a653494d23c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1a73a58960bf7ada6b45205a653494d23c" kindref="member">Operator</ref>(<ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gr,<sp/><ref refid="classapfel_1_1Expression" kindref="compound">Expression</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>expr,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>eps<sp/>=<sp/>1e-5,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>erbl<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="classapfel_1_1Operator_1aba4d731f588dc546d932bd0def8a179e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1aba4d731f588dc546d932bd0def8a179e" kindref="member">Operator</ref>(<ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gr,<sp/><ref refid="classapfel_1_1Expression" kindref="compound">Expression</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>expr,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>erbl,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>eps<sp/>=<sp/>1e-5);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classapfel_1_1Operator_1a4168d067d2954d59b9e2a9657935ea90" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Operator_1a4168d067d2954d59b9e2a9657935ea90" kindref="member">IsERBL</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Operator_1ae6c0584d4cb48d760cbed8ed838177df" kindref="member">_erbl</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref><sp/><ref refid="classapfel_1_1Operator_1ac1cb0fe68195da6906fda8962c7b6b30" kindref="member">operator *= </ref>(<ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>d)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55" refid="classapfel_1_1Operator_1a742e56ade4ec8477ea8612e2e06ad733" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1a742e56ade4ec8477ea8612e2e06ad733" kindref="member">operator  = </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56" refid="classapfel_1_1Operator_1ae1793de9758e1ff471d49d2146065cc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1ac1cb0fe68195da6906fda8962c7b6b30" kindref="member">operator *= </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="57" refid="classapfel_1_1Operator_1abc9ccd77eb726d02531f93b646253657" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1ac1cb0fe68195da6906fda8962c7b6b30" kindref="member">operator *= </ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58" refid="classapfel_1_1Operator_1ae16f653163d430acf44939e88ac34e2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1ac1cb0fe68195da6906fda8962c7b6b30" kindref="member">operator *= </ref>(std::function&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)&gt;<sp/>f);<sp/></highlight></codeline>
+<codeline lineno="59" refid="classapfel_1_1Operator_1a1172c12a1f531590b87c9cf3cb13c1ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1a1172c12a1f531590b87c9cf3cb13c1ef" kindref="member">operator /= </ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="60" refid="classapfel_1_1Operator_1ac4c1a7c55a744ee999a9b3ece470f586" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1ac4c1a7c55a744ee999a9b3ece470f586" kindref="member">operator += </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61" refid="classapfel_1_1Operator_1a78a08b999e345ec9904591b45d32b793" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref>&amp;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Operator_1a78a08b999e345ec9904591b45d32b793" kindref="member">operator -= </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>o);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="classapfel_1_1Operator_1adaff7602598e18c5af64be8111fb6151" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Operator_1adaff7602598e18c5af64be8111fb6151" kindref="member">GetGrid</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Operator_1a07ea5d7c9382f4566be27fd651bfb600" kindref="member">_grid</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classapfel_1_1Operator_1aaaa1e7b38859872935b13d5b3e324b47" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;ExtendedVector&lt;double&gt;&gt;<sp/><ref refid="classapfel_1_1Operator_1aaaa1e7b38859872935b13d5b3e324b47" kindref="member">GetOperator</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Operator_1a07e107c11a823ef3565e825f172d1d0e" kindref="member">_Operator</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="75" refid="classapfel_1_1Operator_1a07ea5d7c9382f4566be27fd651bfb600" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Operator_1a07ea5d7c9382f4566be27fd651bfb600" kindref="member">_grid</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76" refid="classapfel_1_1Operator_1ae6c0584d4cb48d760cbed8ed838177df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator_1ae6c0584d4cb48d760cbed8ed838177df" kindref="member">_erbl</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="77" refid="classapfel_1_1Operator_1a07e107c11a823ef3565e825f172d1d0e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;ExtendedVector&lt;double&gt;&gt;<sp/><ref refid="classapfel_1_1Operator_1a07e107c11a823ef3565e825f172d1d0e" kindref="member">_Operator</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="classapfel_1_1Operator_1ad85b02048b86d0d76b64faed45ffed47" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>std::ostream&amp;<sp/><ref refid="classapfel_1_1Operator_1ad85b02048b86d0d76b64faed45ffed47" kindref="member">operator &lt;&lt; </ref>(std::ostream&amp;<sp/>os,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>sg);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref><sp/><ref refid="namespaceapfel_1a3dd7edc0a38d72a704e8c1910e741ac8" kindref="member">operator * </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/><ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="87" refid="namespaceapfel_1a746fded2cc1fe941688f62fb393d7759" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a3dd7edc0a38d72a704e8c1910e741ac8" kindref="member">operator * </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="88" refid="namespaceapfel_1a04160710a953a30dfc9d57a635d3c9cc" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a3dd7edc0a38d72a704e8c1910e741ac8" kindref="member">operator * </ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>rhs);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="89" refid="namespaceapfel_1a9a184f1614f9dfa311709c8a16424a4b" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a3dd7edc0a38d72a704e8c1910e741ac8" kindref="member">operator * </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="90" refid="namespaceapfel_1ab2251569bc64fc3f0cbae3e2afc30fe7" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a3dd7edc0a38d72a704e8c1910e741ac8" kindref="member">operator * </ref>(std::function&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)&gt;<sp/>f,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>rhs);<sp/></highlight></codeline>
+<codeline lineno="91" refid="namespaceapfel_1a79463c9d0e87f822a0f23e095cac4887" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a3dd7edc0a38d72a704e8c1910e741ac8" kindref="member">operator * </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/>std::function&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)&gt;<sp/>f);<sp/></highlight></codeline>
+<codeline lineno="92" refid="namespaceapfel_1ad848161c563c61abf9ac02bd925e946b" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a051ae35acb69e292c5a13a2067f2df3f" kindref="member">operator / </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>s);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="93" refid="namespaceapfel_1a5bbdbe0ac80a96715c2c5394fb5e1b1d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a598f0ef11a4768ba38533461ac080365" kindref="member">operator + </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="94" refid="namespaceapfel_1aed03bbeb18ed44d1f8b38f91bdf5a4f1" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceapfel_1a7efb1151ea93c4823ca264ce9c5775fc" kindref="member">operator - </ref>(<ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/>lhs,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="namespaceapfel_1a7d16267aa20a28acf4eac8962bfc9838" refkind="member"><highlight class="normal"><sp/><sp/>std::ostream&amp;<sp/><ref refid="namespaceapfel_1aad760dd7b28bd075301f12e8c0908d31" kindref="member">operator &lt;&lt; </ref>(std::ostream&amp;<sp/>os,<sp/><ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>op);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/operator.h"/>
+  </compounddef>
+</doxygen>

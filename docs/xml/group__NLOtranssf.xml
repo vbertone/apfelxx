@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NLOtranssf" kind="group">
+    <compoundname>NLOtranssf</compoundname>
+    <title>NLO splitting functions</title>
+    <innerclass refid="classapfel_1_1P1transnsp" prot="public">apfel::P1transnsp</innerclass>
+    <innerclass refid="classapfel_1_1P1transnsm" prot="public">apfel::P1transnsm</innerclass>
+    <innerclass refid="classapfel_1_1P1Ttransnsp" prot="public">apfel::P1Ttransnsp</innerclass>
+    <innerclass refid="classapfel_1_1P1Ttransnsm" prot="public">apfel::P1Ttransnsm</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1AS1HH__L" kind="class" language="C++" prot="public">
+    <compoundname>apfel::AS1HH_L</compoundname>
+    <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
+    <includes refid="matchingconditions_8h" local="no">matchingconditions.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1AS1HH__L_1aa135990338e511094980da5c47661ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::AS1HH_L::AS1HH_L</definition>
+        <argsstring>()</argsstring>
+        <name>AS1HH_L</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matchingconditions.h" line="59" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1AS1HH__L_1a5d315247ee050347c2a7d960a679ec74" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double apfel::AS1HH_L::Singular</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>Singular</name>
+        <reimplements refid="classapfel_1_1Expression_1ac5e2173392700a61ec15959412d1f2f3">Singular</reimplements>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Virtual singular term. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The singular term at x </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matchingconditions.h" line="60" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>O(<alpha/><subscript>s</subscript>) term propotional to ln(<mu/><superscript>2</superscript>/m<superscript>2</superscript>) for the HH matching. This is the QCD adaptation of Eq. (4.121) of <ulink url="https://arxiv.org/pdf/1909.03886.pdf">https://arxiv.org/pdf/1909.03886.pdf</ulink>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="1">
+        <label>apfel::AS1HH_L</label>
+        <link refid="classapfel_1_1AS1HH__L"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="1">
+        <label>apfel::AS1HH_L</label>
+        <link refid="classapfel_1_1AS1HH__L"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/matchingconditions.h" line="56" column="3" bodyfile="inc/apfel/matchingconditions.h" bodystart="57" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::AS1HH_L</scope><name>_eta</name></member>
+      <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::AS1HH_L</scope><name>_extvar</name></member>
+      <member refid="classapfel_1_1AS1HH__L_1aa135990338e511094980da5c47661ea2" prot="public" virt="non-virtual"><scope>apfel::AS1HH_L</scope><name>AS1HH_L</name></member>
+      <member refid="classapfel_1_1Expression_1a8f6586afbb64fa96a47fdadf29daf994" prot="public" virt="non-virtual"><scope>apfel::AS1HH_L</scope><name>eta</name></member>
+      <member refid="classapfel_1_1Expression_1a49727bdb8ac6d6d68854e61a9a262e3d" prot="public" virt="non-virtual"><scope>apfel::AS1HH_L</scope><name>Expression</name></member>
+      <member refid="classapfel_1_1Expression_1a235668b9dd1d209ce756f1c250e7da3b" prot="public" virt="virtual"><scope>apfel::AS1HH_L</scope><name>Local</name></member>
+      <member refid="classapfel_1_1Expression_1aef54ac003702b1cc7d2d573c484d76a1" prot="public" virt="virtual"><scope>apfel::AS1HH_L</scope><name>Regular</name></member>
+      <member refid="classapfel_1_1Expression_1af959cfade2e38ffd122112eab748d8ef" prot="public" virt="non-virtual"><scope>apfel::AS1HH_L</scope><name>SetExternalVariable</name></member>
+      <member refid="classapfel_1_1AS1HH__L_1a5d315247ee050347c2a7d960a679ec74" prot="public" virt="virtual"><scope>apfel::AS1HH_L</scope><name>Singular</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

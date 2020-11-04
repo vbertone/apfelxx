@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="initialiseevolution_8h" kind="file" language="C++">
+    <compoundname>initialiseevolution.h</compoundname>
+    <includes refid="evolutionsetup_8h" local="yes">apfel/evolutionsetup.h</includes>
+    <includes refid="tabulateobject_8h" local="yes">apfel/tabulateobject.h</includes>
+    <includes refid="dglapbuilder_8h" local="yes">apfel/dglapbuilder.h</includes>
+    <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
+    <incdepgraph>
+      <node id="14">
+        <label>apfel/dglapbuilder.h</label>
+        <link refid="dglapbuilder_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>apfel/interpolator.h</label>
+        <link refid="interpolator_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="21">
+        <label>apfel/matrix.h</label>
+        <link refid="matrix_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>cmath</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>map</label>
+      </node>
+      <node id="23">
+        <label>apfel/operator.h</label>
+        <link refid="operator_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>apfel/subgrid.h</label>
+        <link refid="subgrid_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>apfel/lhtoypdfs.h</label>
+        <link refid="lhtoypdfs_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>tuple</label>
+      </node>
+      <node id="1">
+        <label>inc/apfel/initialiseevolution.h</label>
+        <link refid="initialiseevolution_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>apfel/distribution.h</label>
+        <link refid="distribution_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>apfel/lagrangeinterpolator.h</label>
+        <link refid="lagrangeinterpolator_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="19">
+        <label>apfel/set.h</label>
+        <link refid="set_8h"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>apfel/matchedevolution.h</label>
+        <link refid="matchedevolution_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>apfel/qgrid.h</label>
+        <link refid="qgrid_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>array</label>
+      </node>
+      <node id="24">
+        <label>apfel/expression.h</label>
+        <link refid="expression_8h"/>
+      </node>
+      <node id="12">
+        <label>iostream</label>
+      </node>
+      <node id="28">
+        <label>apfel/extendedvector.h</label>
+        <link refid="extendedvector_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>apfel/convolutionmap.h</label>
+        <link refid="convolutionmap_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>apfel/evolutionsetup.h</label>
+        <link refid="evolutionsetup_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>memory</label>
+      </node>
+      <node id="9">
+        <label>apfel/tabulateobject.h</label>
+        <link refid="tabulateobject_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>apfel/grid.h</label>
+        <link refid="grid_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>apfel/dglap.h</label>
+        <link refid="dglap_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+      <node id="1">
+        <label>inc/apfel/initialiseevolution.h</label>
+        <link refid="initialiseevolution_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structapfel_1_1LHKnotArray" prot="public">apfel::LHKnotArray</innerclass>
+    <innerclass refid="classapfel_1_1InitialiseEvolution" prot="public">apfel::InitialiseEvolution</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="evolutionsetup_8h" kindref="compound">apfel/evolutionsetup.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="tabulateobject_8h" kindref="compound">apfel/tabulateobject.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="dglapbuilder_8h" kindref="compound">apfel/dglapbuilder.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21" refid="structapfel_1_1LHKnotArray" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structapfel_1_1LHKnotArray" kindref="compound">LHKnotArray</ref></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="23" refid="structapfel_1_1LHKnotArray_1aca33fa03b0ca059cc5f1f7011cadc233" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="structapfel_1_1LHKnotArray_1aca33fa03b0ca059cc5f1f7011cadc233" kindref="member">xs</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="structapfel_1_1LHKnotArray_1a046277f51b173abadb78d49ec1f3bca6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="structapfel_1_1LHKnotArray_1a046277f51b173abadb78d49ec1f3bca6" kindref="member">q2s</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="25" refid="structapfel_1_1LHKnotArray_1ab8f6192839b549ee0db4c50ab78f9d1a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="structapfel_1_1LHKnotArray_1ab8f6192839b549ee0db4c50ab78f9d1a" kindref="member">xfs</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="classapfel_1_1InitialiseEvolution" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1InitialiseEvolution" kindref="compound">InitialiseEvolution</ref></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43" refid="classapfel_1_1InitialiseEvolution_1a47852ad46b4f788ff26304050d647baa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a47852ad46b4f788ff26304050d647baa" kindref="member">InitialiseEvolution</ref>(<ref refid="structapfel_1_1EvolutionSetup" kindref="compound">EvolutionSetup</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>setup,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1InitialiseEvolution_1a17d43a477175f4c4fd84bd659d6b5fa9" kindref="member">WriteGrid</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="classapfel_1_1InitialiseEvolution_1aa470bf0c32f9b33dd4781844665528b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1aa470bf0c32f9b33dd4781844665528b0" kindref="member">CheckSetup</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="classapfel_1_1InitialiseEvolution_1ae1793ecd0c6157cb55cb9caf2cfe80c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1ae1793ecd0c6157cb55cb9caf2cfe80c2" kindref="member">ReportSetup</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="classapfel_1_1InitialiseEvolution_1a304ac2f18767d9299788a276ae81d0fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a304ac2f18767d9299788a276ae81d0fb" kindref="member">InitialiseCouplings</ref>();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="classapfel_1_1InitialiseEvolution_1a28be23c78fce194fa8d065f12bc4b3e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a28be23c78fce194fa8d065f12bc4b3e4" kindref="member">InitialiseDglapObject</ref>();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="classapfel_1_1InitialiseEvolution_1a8bc3bbe0441a3b4feded357b2946131d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a8bc3bbe0441a3b4feded357b2946131d" kindref="member">TabulateEvolution</ref>(std::function&lt;std::map&lt;int,<sp/>double&gt;(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>InSet);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="classapfel_1_1InitialiseEvolution_1ace5cfdb335ee53b22dbdadade1a36bc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1ace5cfdb335ee53b22dbdadade1a36bc1" kindref="member">WriteGridInfo</ref>();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="classapfel_1_1InitialiseEvolution_1a17d43a477175f4c4fd84bd659d6b5fa9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a17d43a477175f4c4fd84bd659d6b5fa9" kindref="member">WriteGrid</ref>();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classapfel_1_1InitialiseEvolution_1a2259ee7383d7f414c214e33934520d7b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a2259ee7383d7f414c214e33934520d7b" kindref="member">Alphas</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mu)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1adbd791ac90d75b3656c13b3e34c8841c" kindref="member">_as</ref>(mu);<sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="classapfel_1_1InitialiseEvolution_1a40303a91c0842fa878959cd230d6ed0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;double,<sp/>std::map&lt;int,<sp/>LHKnotArray&gt;&gt;<sp/><ref refid="classapfel_1_1InitialiseEvolution_1a40303a91c0842fa878959cd230d6ed0f" kindref="member">KnotArray</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1InitialiseEvolution_1afc88a52384035b9a18fb4a6bb7e30aee" kindref="member">_KnotArray</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="114" refid="classapfel_1_1InitialiseEvolution_1aff56e8f30c1ace113fa62309c411221c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structapfel_1_1EvolutionSetup" kindref="compound">EvolutionSetup</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1InitialiseEvolution_1aff56e8f30c1ace113fa62309c411221c" kindref="member">_setup</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="115" refid="classapfel_1_1InitialiseEvolution_1ace788f48892622cbaecb335eb28edc01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1InitialiseEvolution_1ace788f48892622cbaecb335eb28edc01" kindref="member">_WriteGrid</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="116" refid="classapfel_1_1InitialiseEvolution_1a223f7ec4987e8439ce7c0cc89bcfd360" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;const<sp/>Grid&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1InitialiseEvolution_1a223f7ec4987e8439ce7c0cc89bcfd360" kindref="member">_g</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="117" refid="classapfel_1_1InitialiseEvolution_1adbd791ac90d75b3656c13b3e34c8841c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::function&lt;double(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1InitialiseEvolution_1adbd791ac90d75b3656c13b3e34c8841c" kindref="member">_as</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="118" refid="classapfel_1_1InitialiseEvolution_1ab62e99d9183dfb26361bd197cf2f6d2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;int,<sp/>DglapObjects&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1InitialiseEvolution_1ab62e99d9183dfb26361bd197cf2f6d2c" kindref="member">_DglapObj</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="119" refid="classapfel_1_1InitialiseEvolution_1afc88a52384035b9a18fb4a6bb7e30aee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;double,<sp/>std::map&lt;int,<sp/>LHKnotArray&gt;&gt;<sp/><ref refid="classapfel_1_1InitialiseEvolution_1afc88a52384035b9a18fb4a6bb7e30aee" kindref="member">_KnotArray</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/initialiseevolution.h"/>
+  </compounddef>
+</doxygen>

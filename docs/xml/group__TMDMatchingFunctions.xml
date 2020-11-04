@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__TMDMatchingFunctions" kind="group">
+    <compoundname>TMDMatchingFunctions</compoundname>
+    <title>TMD matching functions</title>
+    <innergroup refid="group__TLMatchFunc">Time-like matching functions</innergroup>
+    <innergroup refid="group__SLMatchFunc">Space-like matching functions</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The perturbative matching functions for PDFs and FFs (references: <ulink url="https://arxiv.org/pdf/1604.07869.pdf">https://arxiv.org/pdf/1604.07869.pdf</ulink> and <ulink url="https://arxiv.org/pdf/1706.01473.pdf">https://arxiv.org/pdf/1706.01473.pdf</ulink>). Notice that the expressions for FFs are implicitly multiplied by a factor x<superscript>2</superscript>. This is because the convolution with FFs has the form:</para>
+<para><formula id="9">$D(x) = C(x) \otimes d(x) / x^2 = (1/x^2) \int_x^1 (dy/y) [y^2 C(y)] d(x/y)$</formula></para>
+<para>For the implementation of the O(<alpha/><subscript>s</subscript><superscript>2</superscript>) expressions I have used the parameterization taken from the arTeMiDe code but only for the regular part. The exact coefficicients of the rest are implemented explicitly as reported in eq. (B.3) of <ulink url="https://arxiv.org/pdf/1706.01473.pdf">https://arxiv.org/pdf/1706.01473.pdf</ulink>. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

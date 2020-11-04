@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NLOZero" kind="group">
+    <compoundname>NLOZero</compoundname>
+    <title>NLO massive-zero coefficient functions</title>
+    <innerclass refid="classapfel_1_1Cm022nsNC__c" prot="public">apfel::Cm022nsNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm022nsNC__l" prot="public">apfel::Cm022nsNC_l</innerclass>
+    <innerclass refid="classapfel_1_1Cm022nsNC__l2" prot="public">apfel::Cm022nsNC_l2</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2nsNC__c" prot="public">apfel::Cm0L2nsNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2nsNC__l" prot="public">apfel::Cm0L2nsNC_l</innerclass>
+    <innerclass refid="classapfel_1_1Cm022psNC__c" prot="public">apfel::Cm022psNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm022psNC__l" prot="public">apfel::Cm022psNC_l</innerclass>
+    <innerclass refid="classapfel_1_1Cm022psNC__l2" prot="public">apfel::Cm022psNC_l2</innerclass>
+    <innerclass refid="classapfel_1_1Cm022psNC__f" prot="public">apfel::Cm022psNC_f</innerclass>
+    <innerclass refid="classapfel_1_1Cm022psNC__lf" prot="public">apfel::Cm022psNC_lf</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2psNC__c" prot="public">apfel::Cm0L2psNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2psNC__l" prot="public">apfel::Cm0L2psNC_l</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2psNC__f" prot="public">apfel::Cm0L2psNC_f</innerclass>
+    <innerclass refid="classapfel_1_1Cm022gNC__c" prot="public">apfel::Cm022gNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm022gNC__l" prot="public">apfel::Cm022gNC_l</innerclass>
+    <innerclass refid="classapfel_1_1Cm022gNC__l2" prot="public">apfel::Cm022gNC_l2</innerclass>
+    <innerclass refid="classapfel_1_1Cm022gNC__f" prot="public">apfel::Cm022gNC_f</innerclass>
+    <innerclass refid="classapfel_1_1Cm022gNC__lf" prot="public">apfel::Cm022gNC_lf</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2gNC__c" prot="public">apfel::Cm0L2gNC_c</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2gNC__l" prot="public">apfel::Cm0L2gNC_l</innerclass>
+    <innerclass refid="classapfel_1_1Cm0L2gNC__f" prot="public">apfel::Cm0L2gNC_f</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NLOzmSIA" kind="group">
+    <compoundname>NLOzmSIA</compoundname>
+    <title>NLO zero-mass coefficient functions</title>
+    <innerclass refid="classapfel_1_1C21Tns" prot="public">apfel::C21Tns</innerclass>
+    <innerclass refid="classapfel_1_1C21Tg" prot="public">apfel::C21Tg</innerclass>
+    <innerclass refid="classapfel_1_1CL1Tns" prot="public">apfel::CL1Tns</innerclass>
+    <innerclass refid="classapfel_1_1CL1Tg" prot="public">apfel::CL1Tg</innerclass>
+    <innerclass refid="classapfel_1_1C31Tns" prot="public">apfel::C31Tns</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

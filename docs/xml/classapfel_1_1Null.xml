@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1Null" kind="class" language="C++" prot="public">
+    <compoundname>apfel::Null</compoundname>
+    <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
+    <includes refid="expression_8h" local="no">expression.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1Null_1a0f74dde5cc4f104049878d17bd639248" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>apfel::Null::Null</definition>
+        <argsstring>()</argsstring>
+        <name>Null</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/expression.h" line="98" column="5" bodyfile="inc/apfel/expression.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Derived class from <ref refid="classapfel_1_1Expression" kindref="compound">Expression</ref> to implement the <ref refid="classapfel_1_1Null" kindref="compound">Null</ref> operator (zero). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="1">
+        <label>apfel::Null</label>
+        <link refid="classapfel_1_1Null"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="1">
+        <label>apfel::Null</label>
+        <link refid="classapfel_1_1Null"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/expression.h" line="95" column="3" bodyfile="inc/apfel/expression.h" bodystart="96" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::Null</scope><name>_eta</name></member>
+      <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::Null</scope><name>_extvar</name></member>
+      <member refid="classapfel_1_1Expression_1a8f6586afbb64fa96a47fdadf29daf994" prot="public" virt="non-virtual"><scope>apfel::Null</scope><name>eta</name></member>
+      <member refid="classapfel_1_1Expression_1a49727bdb8ac6d6d68854e61a9a262e3d" prot="public" virt="non-virtual"><scope>apfel::Null</scope><name>Expression</name></member>
+      <member refid="classapfel_1_1Expression_1a235668b9dd1d209ce756f1c250e7da3b" prot="public" virt="virtual"><scope>apfel::Null</scope><name>Local</name></member>
+      <member refid="classapfel_1_1Null_1a0f74dde5cc4f104049878d17bd639248" prot="public" virt="non-virtual"><scope>apfel::Null</scope><name>Null</name></member>
+      <member refid="classapfel_1_1Expression_1aef54ac003702b1cc7d2d573c484d76a1" prot="public" virt="virtual"><scope>apfel::Null</scope><name>Regular</name></member>
+      <member refid="classapfel_1_1Expression_1af959cfade2e38ffd122112eab748d8ef" prot="public" virt="non-virtual"><scope>apfel::Null</scope><name>SetExternalVariable</name></member>
+      <member refid="classapfel_1_1Expression_1ac5e2173392700a61ec15959412d1f2f3" prot="public" virt="virtual"><scope>apfel::Null</scope><name>Singular</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

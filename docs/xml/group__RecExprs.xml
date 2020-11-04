@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__RecExprs" kind="group">
+    <compoundname>RecExprs</compoundname>
+    <title>Recurrent expressions</title>
+    <innerclass refid="classapfel_1_1Identity" prot="public">apfel::Identity</innerclass>
+    <innerclass refid="classapfel_1_1Null" prot="public">apfel::Null</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Collection of recurrent expressions. This includes the identity and the null expressions. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

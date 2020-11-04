@@ -1,0 +1,356 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1Grid" kind="class" language="C++" prot="public">
+    <compoundname>apfel::Grid</compoundname>
+    <includes refid="grid_8h" local="no">grid.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Getters</header>
+      <memberdef kind="function" id="classapfel_1_1Grid_1a633e5058782ac5f774fba183606fa478" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int apfel::Grid::nGrids</definition>
+        <argsstring>() const</argsstring>
+        <name>nGrids</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of subgrids </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="37" column="9" bodyfile="inc/apfel/grid.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Grid_1afde71f2776250114ea25fafaef1363c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::pair&lt; int, int &gt; &gt; const  &amp;</type>
+        <definition>std::vector&lt;std::pair&lt;int, int&gt; &gt; const&amp; apfel::Grid::SubToJointMap</definition>
+        <argsstring>() const</argsstring>
+        <name>SubToJointMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The map of indices from the joint grid to the subgrids </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="42" column="23" bodyfile="inc/apfel/grid.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Grid_1accb9c73af4dde4166cef009d331935e3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::vector&lt; int &gt; &gt; const  &amp;</type>
+        <definition>std::vector&lt;std::vector&lt;int&gt; &gt; const&amp; apfel::Grid::JointToSubMap</definition>
+        <argsstring>() const</argsstring>
+        <name>JointToSubMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The map of indices from the subgrids to the joint grid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="47" column="23" bodyfile="inc/apfel/grid.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Grid_1abc12ef7438d51b5e125ac6f80fda5a50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> &gt; const  &amp;</type>
+        <definition>std::vector&lt;SubGrid&gt; const&amp; apfel::Grid::GetSubGrids</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSubGrids</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The vector of subgrids </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="52" column="23" bodyfile="inc/apfel/grid.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Grid_1a5d2c4011b5ba8c1e752229b558793fee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const  &amp;</type>
+        <definition>SubGrid const&amp; apfel::Grid::GetSubGrid</definition>
+        <argsstring>(int ig) const</argsstring>
+        <name>GetSubGrid</name>
+        <param>
+          <type>int</type>
+          <declname>ig</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The ig-th <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="57" column="19" bodyfile="inc/apfel/grid.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Grid_1abecc758efa56ba7d5cc4fa1fce2c57c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> const  &amp;</type>
+        <definition>SubGrid const&amp; apfel::Grid::GetJointGrid</definition>
+        <argsstring>() const</argsstring>
+        <name>GetJointGrid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The joint <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="62" column="19" bodyfile="inc/apfel/grid.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Comparison operators</header>
+      <description><para>Collection of operators for comparing grid objects </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1Grid_1ad46611474e00985adaf48899ae4089f2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool apfel::Grid::operator==</definition>
+        <argsstring>(Grid const &amp;g) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Grid_1a6b7746f3e57aa280d49279660eacee77" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool apfel::Grid::operator!=</definition>
+        <argsstring>(Grid const &amp;g) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="71" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classapfel_1_1Grid_1a33e3f6558476bc799789c4e7a092cb78" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::pair&lt; int, int &gt; &gt;</type>
+        <definition>std::vector&lt;std::pair&lt;int, int&gt; &gt; apfel::Grid::_SubToJointMap</definition>
+        <argsstring></argsstring>
+        <name>_SubToJointMap</name>
+        <briefdescription>
+<para>Vector of pairs corresponding to grid- and node-indices on the subgrids. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="83" column="17" bodyfile="inc/apfel/grid.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1Grid_1ad15501a23ccbfc0ce20dfacfee308188" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; int &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;int&gt; &gt; apfel::Grid::_JointToSubMap</definition>
+        <argsstring></argsstring>
+        <name>_JointToSubMap</name>
+        <briefdescription>
+<para>Vector of indices from the subgrids to the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="84" column="20" bodyfile="inc/apfel/grid.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> &gt;</type>
+        <definition>std::vector&lt;SubGrid&gt; apfel::Grid::_GlobalGrid</definition>
+        <argsstring></argsstring>
+        <name>_GlobalGrid</name>
+        <briefdescription>
+<para>Vector with sub-grids. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="85" column="29" bodyfile="inc/apfel/grid.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1Grid_1a9144e68087d69ad9239f76093b63a772" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;SubGrid&gt; apfel::Grid::_JointGrid</definition>
+        <argsstring></argsstring>
+        <name>_JointGrid</name>
+        <briefdescription>
+<para>Container for the joint grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="86" column="29" bodyfile="inc/apfel/grid.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1Grid_1a8d0a7149e5dda7870cc7a7a9f312ef61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::Grid::Grid</definition>
+        <argsstring>(std::vector&lt; SubGrid &gt; const &amp;grs)</argsstring>
+        <name>Grid</name>
+        <param>
+          <type>std::vector&lt; <ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref> &gt; const &amp;</type>
+          <declname>grs</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>grs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of subgrids </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="28" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classapfel_1_1Grid_1a8a12837ed78aa281b3cbba10be175092" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref></type>
+        <definition>SubGrid apfel::Grid::CreateJointGrid</definition>
+        <argsstring>()</argsstring>
+        <name>CreateJointGrid</name>
+        <briefdescription>
+<para>Fill in the joint grid object with the appropriate grid nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the joint grid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="80" column="13"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classapfel_1_1Grid_1aa4b2c002d87b2a20957f2832e312b39f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, Grid const &amp;gr)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>gr</declname>
+        </param>
+        <briefdescription>
+<para>Overload the &lt;&lt; operator to print the parameters of the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/grid.h" line="88" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other global parameters. This class also includes all the relevant methods for the manipulation of the SubGrids. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>std::vector&lt; std::pair&lt; int, int &gt; &gt;</label>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="1">
+        <label>apfel::Grid</label>
+        <link refid="classapfel_1_1Grid"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_JointToSubMap</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>_SubToJointMap</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_JointGrid</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_GlobalGrid</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::unique_ptr&lt; apfel::SubGrid &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; std::vector&lt; int &gt; &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; apfel::SubGrid &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>apfel::SubGrid</label>
+        <link refid="classapfel_1_1SubGrid"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_lxsg</edgelabel>
+          <edgelabel>_xsg</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; int &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/grid.h" line="21" column="3" bodyfile="inc/apfel/grid.h" bodystart="22" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" prot="private" virt="non-virtual"><scope>apfel::Grid</scope><name>_GlobalGrid</name></member>
+      <member refid="classapfel_1_1Grid_1a9144e68087d69ad9239f76093b63a772" prot="private" virt="non-virtual"><scope>apfel::Grid</scope><name>_JointGrid</name></member>
+      <member refid="classapfel_1_1Grid_1ad15501a23ccbfc0ce20dfacfee308188" prot="private" virt="non-virtual"><scope>apfel::Grid</scope><name>_JointToSubMap</name></member>
+      <member refid="classapfel_1_1Grid_1a33e3f6558476bc799789c4e7a092cb78" prot="private" virt="non-virtual"><scope>apfel::Grid</scope><name>_SubToJointMap</name></member>
+      <member refid="classapfel_1_1Grid_1a8a12837ed78aa281b3cbba10be175092" prot="private" virt="non-virtual"><scope>apfel::Grid</scope><name>CreateJointGrid</name></member>
+      <member refid="classapfel_1_1Grid_1abecc758efa56ba7d5cc4fa1fce2c57c8" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>GetJointGrid</name></member>
+      <member refid="classapfel_1_1Grid_1a5d2c4011b5ba8c1e752229b558793fee" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>GetSubGrid</name></member>
+      <member refid="classapfel_1_1Grid_1abc12ef7438d51b5e125ac6f80fda5a50" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>GetSubGrids</name></member>
+      <member refid="classapfel_1_1Grid_1a8d0a7149e5dda7870cc7a7a9f312ef61" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>Grid</name></member>
+      <member refid="classapfel_1_1Grid_1accb9c73af4dde4166cef009d331935e3" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>JointToSubMap</name></member>
+      <member refid="classapfel_1_1Grid_1a633e5058782ac5f774fba183606fa478" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>nGrids</name></member>
+      <member refid="classapfel_1_1Grid_1a6b7746f3e57aa280d49279660eacee77" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>operator!=</name></member>
+      <member refid="classapfel_1_1Grid_1aa4b2c002d87b2a20957f2832e312b39f" prot="private" virt="non-virtual"><scope>apfel::Grid</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classapfel_1_1Grid_1ad46611474e00985adaf48899ae4089f2" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>operator==</name></member>
+      <member refid="classapfel_1_1Grid_1afde71f2776250114ea25fafaef1363c0" prot="public" virt="non-virtual"><scope>apfel::Grid</scope><name>SubToJointMap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

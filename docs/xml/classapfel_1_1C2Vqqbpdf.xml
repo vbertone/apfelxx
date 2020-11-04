@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1C2Vqqbpdf" kind="class" language="C++" prot="public">
+    <compoundname>apfel::C2Vqqbpdf</compoundname>
+    <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
+    <includes refid="matchingfunctionspdf_8h" local="no">matchingfunctionspdf.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1C2Vqqbpdf_1a0f69871d1194dd6cba024597fdf0966b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::C2Vqqbpdf::C2Vqqbpdf</definition>
+        <argsstring>()</argsstring>
+        <name>C2Vqqbpdf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matchingfunctionspdf.h" line="126" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1C2Vqqbpdf_1aa981baa6264e631f68b5602ac4c078f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double apfel::C2Vqqbpdf::Regular</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>Regular</name>
+        <reimplements refid="classapfel_1_1Expression_1aef54ac003702b1cc7d2d573c484d76a1">Regular</reimplements>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Virtual regular term. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The regular term at x </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matchingfunctionspdf.h" line="127" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The O(<alpha/><subscript>s</subscript><superscript>2</superscript>) quark-antiquark matching function for PDFs (references: <ulink url="https://arxiv.org/pdf/1604.07869.pdf">https://arxiv.org/pdf/1604.07869.pdf</ulink> and <ulink url="https://arxiv.org/pdf/1706.01473.pdf">https://arxiv.org/pdf/1706.01473.pdf</ulink>). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="1">
+        <label>apfel::C2Vqqbpdf</label>
+        <link refid="classapfel_1_1C2Vqqbpdf"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="1">
+        <label>apfel::C2Vqqbpdf</label>
+        <link refid="classapfel_1_1C2Vqqbpdf"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/matchingfunctionspdf.h" line="123" column="3" bodyfile="inc/apfel/matchingfunctionspdf.h" bodystart="124" bodyend="128"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::C2Vqqbpdf</scope><name>_eta</name></member>
+      <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::C2Vqqbpdf</scope><name>_extvar</name></member>
+      <member refid="classapfel_1_1C2Vqqbpdf_1a0f69871d1194dd6cba024597fdf0966b" prot="public" virt="non-virtual"><scope>apfel::C2Vqqbpdf</scope><name>C2Vqqbpdf</name></member>
+      <member refid="classapfel_1_1Expression_1a8f6586afbb64fa96a47fdadf29daf994" prot="public" virt="non-virtual"><scope>apfel::C2Vqqbpdf</scope><name>eta</name></member>
+      <member refid="classapfel_1_1Expression_1a49727bdb8ac6d6d68854e61a9a262e3d" prot="public" virt="non-virtual"><scope>apfel::C2Vqqbpdf</scope><name>Expression</name></member>
+      <member refid="classapfel_1_1Expression_1a235668b9dd1d209ce756f1c250e7da3b" prot="public" virt="virtual"><scope>apfel::C2Vqqbpdf</scope><name>Local</name></member>
+      <member refid="classapfel_1_1C2Vqqbpdf_1aa981baa6264e631f68b5602ac4c078f0" prot="public" virt="virtual"><scope>apfel::C2Vqqbpdf</scope><name>Regular</name></member>
+      <member refid="classapfel_1_1Expression_1af959cfade2e38ffd122112eab748d8ef" prot="public" virt="non-virtual"><scope>apfel::C2Vqqbpdf</scope><name>SetExternalVariable</name></member>
+      <member refid="classapfel_1_1Expression_1ac5e2173392700a61ec15959412d1f2f3" prot="public" virt="virtual"><scope>apfel::C2Vqqbpdf</scope><name>Singular</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

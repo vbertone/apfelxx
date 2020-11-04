@@ -1,0 +1,371 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1AlphaQED" kind="class" language="C++" prot="public">
+    <compoundname>apfel::AlphaQED</compoundname>
+    <basecompoundref refid="classapfel_1_1MatchedEvolution" prot="public" virt="non-virtual">apfel::MatchedEvolution&lt; double &gt;</basecompoundref>
+    <includes refid="alphaqed_8h" local="no">alphaqed.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <description><para>List of constructors. </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1AlphaQED_1ab93a7bd2e8f912a6d33a2ff2238eeab8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::AlphaQED::AlphaQED</definition>
+        <argsstring>()=delete</argsstring>
+        <name>AlphaQED</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1AlphaQED_1a9ed98a29d1ee1953bbf11875798aaad8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::AlphaQED::AlphaQED</definition>
+        <argsstring>(double const &amp;AlphaRef, double const &amp;MuRef, std::vector&lt; double &gt; const &amp;LeptThresholds, std::vector&lt; double &gt; const &amp;QuarkThresholds, int const &amp;pt, int const &amp;nsteps=10)</argsstring>
+        <name>AlphaQED</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>AlphaRef</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>MuRef</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>LeptThresholds</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>QuarkThresholds</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>pt</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nsteps</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para><ref refid="classapfel_1_1AlphaQED" kindref="compound">AlphaQED</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>AlphaRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the reference value of the coupling </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MuRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the reference value of the scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QuarkThresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of quark thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>LeptThresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of charged-lepton thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>perturbative order </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nsteps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of steps of the ODE solver </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="39" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classapfel_1_1AlphaQED_1aa14d686efe7c0db6812d2a57dd6d0fb0" prot="private" static="no" mutable="no">
+        <type>int const</type>
+        <definition>int const apfel::AlphaQED::_pt</definition>
+        <argsstring></argsstring>
+        <name>_pt</name>
+        <briefdescription>
+<para>Perturbative order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="79" column="60" bodyfile="inc/apfel/alphaqed.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1AlphaQED_1a669e2d5791dc458e93b9402d4f121750" prot="private" static="no" mutable="no">
+        <type>std::function&lt; double(int const  &amp;, double const  &amp;)&gt;</type>
+        <definition>std::function&lt;double(int const&amp;, double const&amp;)&gt; apfel::AlphaQED::_BetaFunction</definition>
+        <argsstring></argsstring>
+        <name>_BetaFunction</name>
+        <briefdescription>
+<para>Beta function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="80" column="25" bodyfile="inc/apfel/alphaqed.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1AlphaQED_1a27224bd5df84b04b6334e61b6a370133" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double apfel::AlphaQED::MatchObject</definition>
+        <argsstring>(bool const &amp;Up, int const &amp;nf, double const &amp;Coup) const</argsstring>
+        <name>MatchObject</name>
+        <reimplements refid="classapfel_1_1MatchedEvolution_1a82f4e0ff82cd9b5f1e393625b4d81bc4">MatchObject</reimplements>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>Up</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nf</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Coup</declname>
+        </param>
+        <briefdescription>
+<para>Function for the computation of the matching. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Up</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tells whether the matching is upward or not (downward) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of active flavours </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Coup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value of the coupling to be matched </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The matched value of the strong coupling <formula id="0">$\alpha_s$</formula> at the threshold </para>
+</simplesect>
+<simplesect kind="note"><para>This is a dummy function required only to instantiate the pure-virtual &apos;MatchObject&apos; of the mother class &apos;<ref refid="classapfel_1_1MatchedEvolution" kindref="compound">MatchedEvolution</ref>&apos;: it always returns the input coupling. This means that the evolution is assumed to be continuos at the thresholds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="59" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1AlphaQED_1a39e338c0f98a592016d166e04784ffe8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double apfel::AlphaQED::Derivative</definition>
+        <argsstring>(int const &amp;nfl, double const &amp;, double const &amp;a) const</argsstring>
+        <name>Derivative</name>
+        <reimplements refid="classapfel_1_1MatchedEvolution_1ae71ea51bdbbad54dad165eec66d4c49a">Derivative</reimplements>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nfl</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Function that returns QED <formula id="1">$\beta$</formula> function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value of the coupling </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nfl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>total number of active flavours including both quarks and leptons </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The the value of the QED <formula id="1">$\beta$</formula> function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="67" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1AlphaQED_1a4122cc72eab4a7343e33edbdf45407d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::AlphaQED::betaQED</definition>
+        <argsstring>(int const &amp;pt, int const &amp;nf, int const &amp;nl) const</argsstring>
+        <name>betaQED</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>pt</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nf</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nl</declname>
+        </param>
+        <briefdescription>
+<para>Function for the computation of the single coefficients of the expansion of the QED <formula id="1">$\beta$</formula> function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>perturbative order </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of active quark flavours </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of active charged leptons </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The pt-th coefficient of the QED <formula id="1">$\beta$</formula> function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/alphaqed.h" line="76" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1AlphaQED" kindref="compound">AlphaQED</ref> is a specialization class of the <ref refid="classapfel_1_1MatchedEvolution" kindref="compound">MatchedEvolution</ref> class for the computation of the QED coupling running. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>apfel::AlphaQED</label>
+        <link refid="classapfel_1_1AlphaQED"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>apfel::MatchedEvolution&lt; double &gt;</label>
+        <link refid="classapfel_1_1MatchedEvolution"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>apfel::AlphaQED</label>
+        <link refid="classapfel_1_1AlphaQED"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="2">
+        <label>apfel::MatchedEvolution&lt; double &gt;</label>
+        <link refid="classapfel_1_1MatchedEvolution"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_LogThresholds2</edgelabel>
+          <edgelabel>_Thresholds</edgelabel>
+          <edgelabel>_Thresholds2</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/alphaqed.h" line="20" column="3" bodyfile="inc/apfel/alphaqed.h" bodystart="21" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1AlphaQED_1a669e2d5791dc458e93b9402d4f121750" prot="private" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_BetaFunction</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a81fdc990b6c6c1fba5d4d424dbe12947" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_LogMuRef2</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a83d38d00b2c4f62c1ea196febcc0a533" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_LogThresholds2</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1af599dcd5f9f52f0d271aa15497c680d7" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_MuRef</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1aca6a5231a81ee5e40ba29f185d4c7890" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_MuRef2</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a016c0e4076ad1f37e41eb2b6e4772cc1" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_nsteps</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1af2162e911beb35f80578121db1b84d97" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_ObjRef</name></member>
+      <member refid="classapfel_1_1AlphaQED_1aa14d686efe7c0db6812d2a57dd6d0fb0" prot="private" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_pt</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a345fedfefe33962f4f7ceb9b2f8638e8" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_Thresholds</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1af026d0e84560490983f5db02c6f55507" prot="protected" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>_Thresholds2</name></member>
+      <member refid="classapfel_1_1AlphaQED_1ab93a7bd2e8f912a6d33a2ff2238eeab8" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>AlphaQED</name></member>
+      <member refid="classapfel_1_1AlphaQED_1a9ed98a29d1ee1953bbf11875798aaad8" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>AlphaQED</name></member>
+      <member refid="classapfel_1_1AlphaQED_1a4122cc72eab4a7343e33edbdf45407d9" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>betaQED</name></member>
+      <member refid="classapfel_1_1AlphaQED_1a39e338c0f98a592016d166e04784ffe8" prot="public" virt="virtual"><scope>apfel::AlphaQED</scope><name>Derivative</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1ab20faeee4e277e3835bd9b7c35f8bb23" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>Evaluate</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1af1c4e4e48f86ea639b21258a8abb996a" prot="public" virt="virtual"><scope>apfel::AlphaQED</scope><name>EvolveObject</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a7f5ec01ccecc6d10729deae416fbf252" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>GetMuRef</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1ae76089a986554c934ba693d54b6c9749" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>GetNumberOfSteps</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a07c814f74b2409272e157dc7f84c694a" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>GetObjectRef</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1aa110a35a3e5403a30f58ae59b6caa3d8" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>GetThresholds</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1adb2660fb7842ff7cfd1babfcdb2b0a05" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>MatchedEvolution</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1aebbd27d9fa7dc916378a4b4d726b5d26" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>MatchedEvolution</name></member>
+      <member refid="classapfel_1_1AlphaQED_1a27224bd5df84b04b6334e61b6a370133" prot="public" virt="virtual"><scope>apfel::AlphaQED</scope><name>MatchObject</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1ae2bc1b1ea399fbba5009fb720aab159d" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>SetMuRef</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1ad60d84335c8dc3b8328a4ca4dfc7174d" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>SetNumberOfSteps</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a4f9d5b0c8947a2aab79ecd3f04495485" prot="public" virt="non-virtual"><scope>apfel::AlphaQED</scope><name>SetObjectRef</name></member>
+      <member refid="classapfel_1_1MatchedEvolution_1a0934c99a428f260789e7b78d4f784a80" prot="public" virt="virtual"><scope>apfel::AlphaQED</scope><name>~MatchedEvolution</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

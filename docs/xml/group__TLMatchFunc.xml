@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__TLMatchFunc" kind="group">
+    <compoundname>TLMatchFunc</compoundname>
+    <title>Time-like matching functions</title>
+    <innergroup refid="group__NLOff">NLO matching functions for FFs</innergroup>
+    <innergroup refid="group__NNLOff">NNLO matching functions for FFs</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>TMD mathing functions for FFs (time-like hard scales) </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="subgrid_8h" kind="file" language="C++">
+    <compoundname>subgrid.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">iostream</includes>
+    <includedby refid="grid_8h" local="yes">inc/apfel/grid.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>inc/apfel/subgrid.h</label>
+        <link refid="subgrid_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="3">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>inc/apfel/dglapbuilder.h</label>
+        <link refid="dglapbuilder_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>inc/apfel/interpolator.h</label>
+        <link refid="interpolator_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>inc/apfel/gpdbuilder.h</label>
+        <link refid="gpdbuilder_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>inc/apfel/operator.h</label>
+        <link refid="operator_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/apfel/subgrid.h</label>
+        <link refid="subgrid_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+      <node id="7">
+        <label>inc/apfel/tmdbuilder.h</label>
+        <link refid="tmdbuilder_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>inc/apfel/initialiseevolution.h</label>
+        <link refid="initialiseevolution_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>inc/apfel/distribution.h</label>
+        <link refid="distribution_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>inc/apfel/lagrangeinterpolator.h</label>
+        <link refid="lagrangeinterpolator_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>inc/apfel/rotations.h</label>
+        <link refid="rotations_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>inc/apfel/structurefunctionbuilder.h</label>
+        <link refid="structurefunctionbuilder_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>inc/apfel/observable.h</label>
+        <link refid="observable_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inc/apfel/grid.h</label>
+        <link refid="grid_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>inc/apfel/dglap.h</label>
+        <link refid="dglap_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classapfel_1_1SubGrid" prot="public">apfel::SubGrid</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22" refid="classapfel_1_1SubGrid" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31" refid="classapfel_1_1SubGrid_1aee9d569772596ac57b7d984b7cb9b330" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1aee9d569772596ac57b7d984b7cb9b330" kindref="member">SubGrid</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1SubGrid_1ac9c8d18ab6868c90679a2b66f5616c81" kindref="member">nx</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1SubGrid_1a706414872d99bf4b1cc846df7b1edbeb" kindref="member">xMin</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1SubGrid_1a034b0650bce863ed305f4aaa188f1d8c" kindref="member">InterDegree</ref>);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="classapfel_1_1SubGrid_1a5c7fe00b92bc11957caaec41761cb9a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1a5c7fe00b92bc11957caaec41761cb9a9" kindref="member">SubGrid</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>xsg,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1SubGrid_1a034b0650bce863ed305f4aaa188f1d8c" kindref="member">InterDegree</ref>);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="classapfel_1_1SubGrid_1a64eeaa0d9731a1ea70b9dafb07cc83bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1a64eeaa0d9731a1ea70b9dafb07cc83bf" kindref="member">operator == </ref>(<ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>sg)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46" refid="classapfel_1_1SubGrid_1afb724de1eda74f4c92a748782e75343a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1afb724de1eda74f4c92a748782e75343a" kindref="member">operator != </ref>(<ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>sg)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Getters</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="classapfel_1_1SubGrid_1ac9c8d18ab6868c90679a2b66f5616c81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1ac9c8d18ab6868c90679a2b66f5616c81" kindref="member">nx</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1a661733d2dc527c9ebcc8c70662e3589a" kindref="member">_nx</ref>;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="50" refid="classapfel_1_1SubGrid_1a034b0650bce863ed305f4aaa188f1d8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1a034b0650bce863ed305f4aaa188f1d8c" kindref="member">InterDegree</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1aa4519b25fee1c9b8f975e46791aff4fc" kindref="member">_InterDegree</ref>;<sp/>}<sp/></highlight></codeline>
+<codeline lineno="51" refid="classapfel_1_1SubGrid_1a706414872d99bf4b1cc846df7b1edbeb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1a706414872d99bf4b1cc846df7b1edbeb" kindref="member">xMin</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1aa7c7452cc704137c2cf6722e0ca38c31" kindref="member">_xMin</ref>;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52" refid="classapfel_1_1SubGrid_1a6af420df896db5753024435df1af48ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1a6af420df896db5753024435df1af48ba" kindref="member">xMax</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1ab73f59f5d7f8284a86150f813902d924" kindref="member">_xMax</ref>;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="53" refid="classapfel_1_1SubGrid_1a9093ca75b0d5329bb6e561a3e14370ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1a9093ca75b0d5329bb6e561a3e14370ea" kindref="member">Step</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1ae34adf9e8480d0218ea472dbed0cb2ac" kindref="member">_Step</ref>;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54" refid="classapfel_1_1SubGrid_1a93779b8b5a61f42cc6bd2bda138eefd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1SubGrid_1a93779b8b5a61f42cc6bd2bda138eefd5" kindref="member">GetGrid</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1a1d51d2837145e52e3e64d8666c522b77" kindref="member">_xsg</ref>;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55" refid="classapfel_1_1SubGrid_1a39bdf80760a66b2c9b6a2bb468deef7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1SubGrid_1a39bdf80760a66b2c9b6a2bb468deef7f" kindref="member">GetLogGrid</ref>()</highlight><highlight class="keyword"><sp/><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1SubGrid_1ae531f074711c454f6e28b9212fa730be" kindref="member">_lxsg</ref>;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="58" refid="classapfel_1_1SubGrid_1a661733d2dc527c9ebcc8c70662e3589a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1a661733d2dc527c9ebcc8c70662e3589a" kindref="member">_nx</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59" refid="classapfel_1_1SubGrid_1aa4519b25fee1c9b8f975e46791aff4fc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1aa4519b25fee1c9b8f975e46791aff4fc" kindref="member">_InterDegree</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="60" refid="classapfel_1_1SubGrid_1aa7c7452cc704137c2cf6722e0ca38c31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1aa7c7452cc704137c2cf6722e0ca38c31" kindref="member">_xMin</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61" refid="classapfel_1_1SubGrid_1ab73f59f5d7f8284a86150f813902d924" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1ab73f59f5d7f8284a86150f813902d924" kindref="member">_xMax</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62" refid="classapfel_1_1SubGrid_1ae34adf9e8480d0218ea472dbed0cb2ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid_1ae34adf9e8480d0218ea472dbed0cb2ac" kindref="member">_Step</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63" refid="classapfel_1_1SubGrid_1a1d51d2837145e52e3e64d8666c522b77" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="classapfel_1_1SubGrid_1a1d51d2837145e52e3e64d8666c522b77" kindref="member">_xsg</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64" refid="classapfel_1_1SubGrid_1ae531f074711c454f6e28b9212fa730be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="classapfel_1_1SubGrid_1ae531f074711c454f6e28b9212fa730be" kindref="member">_lxsg</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="classapfel_1_1SubGrid_1a92e19b1139623f0899b8ef1532a72061" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>std::ostream&amp;<sp/><ref refid="classapfel_1_1SubGrid_1a92e19b1139623f0899b8ef1532a72061" kindref="member">operator &lt;&lt; </ref>(std::ostream&amp;<sp/>os,<sp/><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>sg);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="namespaceapfel_1a53e7dc45312417de294b6dfdf530cc84" refkind="member"><highlight class="normal"><sp/><sp/>std::ostream&amp;<sp/><ref refid="namespaceapfel_1aad760dd7b28bd075301f12e8c0908d31" kindref="member">operator &lt;&lt; </ref>(std::ostream&amp;<sp/>os,<sp/><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>sg);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/subgrid.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__MatchCond" kind="group">
+    <compoundname>MatchCond</compoundname>
+    <title>Space-like matching conditions</title>
+    <innerclass refid="classapfel_1_1AS1Hg__L" prot="public">apfel::AS1Hg_L</innerclass>
+    <innerclass refid="classapfel_1_1APS2Hq__0" prot="public">apfel::APS2Hq_0</innerclass>
+    <innergroup refid="group__NLOMC">NLO matching conditions</innergroup>
+    <innergroup refid="group__NNLOMC">NNLO matching conditions</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>The expressions are taken from: <ulink url="https://arxiv.org/pdf/hep-ph/9612398.pdf">https://arxiv.org/pdf/hep-ph/9612398.pdf</ulink>. Note that in these expressions ln(m<superscript>2</superscript>/<mu/><superscript>2</superscript>) appears while we need ln(<mu/><superscript>2</superscript>/m<superscript>2</superscript>), so we need to include a minus sign in front of every term linear in this log. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

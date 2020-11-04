@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__LOunpsftl" kind="group">
+    <compoundname>LOunpsftl</compoundname>
+    <title>LO splitting functions</title>
+    <innerclass refid="classapfel_1_1P0Tns" prot="public">apfel::P0Tns</innerclass>
+    <innerclass refid="classapfel_1_1P0Tqg" prot="public">apfel::P0Tqg</innerclass>
+    <innerclass refid="classapfel_1_1P0Tgq" prot="public">apfel::P0Tgq</innerclass>
+    <innerclass refid="classapfel_1_1P0Tgg" prot="public">apfel::P0Tgg</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

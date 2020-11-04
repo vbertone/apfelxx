@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NNLOunpsftl" kind="group">
+    <compoundname>NNLOunpsftl</compoundname>
+    <title>NNLO splitting functions</title>
+    <innerclass refid="classapfel_1_1P2Tnsp" prot="public">apfel::P2Tnsp</innerclass>
+    <innerclass refid="classapfel_1_1P2Tnsm" prot="public">apfel::P2Tnsm</innerclass>
+    <innerclass refid="classapfel_1_1P2Tnss" prot="public">apfel::P2Tnss</innerclass>
+    <innerclass refid="classapfel_1_1P2Tps" prot="public">apfel::P2Tps</innerclass>
+    <innerclass refid="classapfel_1_1P2Tqg" prot="public">apfel::P2Tqg</innerclass>
+    <innerclass refid="classapfel_1_1P2Tgq" prot="public">apfel::P2Tgq</innerclass>
+    <innerclass refid="classapfel_1_1P2Tgg" prot="public">apfel::P2Tgg</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

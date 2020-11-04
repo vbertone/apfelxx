@@ -1,0 +1,996 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1QGrid" kind="class" language="C++" prot="public">
+    <compoundname>apfel::QGrid</compoundname>
+    <derivedcompoundref refid="classapfel_1_1TabulateObject" prot="public" virt="non-virtual">apfel::TabulateObject&lt; T &gt;</derivedcompoundref>
+    <includes refid="qgrid_8h" local="no">qgrid.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <description><para>List of constructors. </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a29217afc5663b54d611dc307700e32da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::QGrid&lt; T &gt;::QGrid</definition>
+        <argsstring>()=delete</argsstring>
+        <name>QGrid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a237fbe86ce7780636cdeb60d9f51d5e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::QGrid&lt; T &gt;::QGrid</definition>
+        <argsstring>(int const &amp;nQ, double const &amp;QMin, double const &amp;QMax, int const &amp;InterDegree, std::vector&lt; double &gt; const &amp;Thresholds, std::function&lt; double(double const &amp;)&gt; const &amp;TabFunc, std::function&lt; double(double const &amp;)&gt; const &amp;InvTabFunc)</argsstring>
+        <name>QGrid</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nQ</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>QMin</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>QMax</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>InterDegree</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>std::function&lt; double(double const &amp;)&gt; const &amp;</type>
+          <declname>TabFunc</declname>
+        </param>
+        <param>
+          <type>std::function&lt; double(double const &amp;)&gt; const &amp;</type>
+          <declname>InvTabFunc</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the number of grid intervals in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QMin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lower edge of the grid in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QMax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the upper edge of the grid in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InterDegree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the interpolation degree </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the fixed point of the grid over which interpolation is forbidden </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TabFunc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the function used to tabulate the grid in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InvTabFunc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the inverse function of TabFunc (an analytic expression is necessary) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="42" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1ad79a908a9bd73bcd0c2cc00a5f47bd7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::QGrid&lt; T &gt;::QGrid</definition>
+        <argsstring>(int const &amp;nQ, double const &amp;QMin, double const &amp;QMax, int const &amp;InterDegree, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;Lambda=0.25)</argsstring>
+        <name>QGrid</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nQ</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>QMin</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>QMax</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>InterDegree</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Lambda</declname>
+          <defval>0.25</defval>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the number of grid intervals in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QMin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lower edge of the grid in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QMax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the upper edge of the grid in Q </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InterDegree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the interpolation degree </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the fixed point of the grid over which interpolation is forbidden </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the parameter of the function log(log(Q/Lambda)) used for the tabulation on the grid in Q </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="59" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1aa25abb29b9bc72b7aeb5d6e025a1d9c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::QGrid&lt; T &gt;::QGrid</definition>
+        <argsstring>(std::vector&lt; double &gt; const &amp;Qg, int const &amp;InterDegree)</argsstring>
+        <name>QGrid</name>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Qg</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>InterDegree</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Qg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the user-defined interpolation grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InterDegree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the interpolation degree </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This constructor assumes that the function used to compute the interpolating functions is linear. In addition, the input vector &apos;Qg&apos; is assumed to be ordered and &apos;well-behaved&apos;. To be used with care. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="75" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Comparison operators</header>
+      <description><para>Collection of operators for comparing <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref> objects </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a3c1e36b8b96e4019777b2e07d7b07edc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool apfel::QGrid&lt; T &gt;::operator==</definition>
+        <argsstring>(QGrid const &amp;sg) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type><ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref> const &amp;</type>
+          <declname>sg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="106" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a785ad2d1e9680eaefc6f225c788e25b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool apfel::QGrid&lt; T &gt;::operator!=</definition>
+        <argsstring>(QGrid const &amp;sg) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type><ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref> const &amp;</type>
+          <declname>sg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="107" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Getters</header>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a545c18a37669f843ea7874c5e9e8d23c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int apfel::QGrid&lt; T &gt;::nQ</definition>
+        <argsstring>() const</argsstring>
+        <name>nQ</name>
+        <briefdescription>
+<para>return the number of Q interval </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="114" column="49" bodyfile="inc/apfel/qgrid.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a58fbd0d8210e5d469bcaabd5fce5b7fb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int apfel::QGrid&lt; T &gt;::InterDegree</definition>
+        <argsstring>() const</argsstring>
+        <name>InterDegree</name>
+        <briefdescription>
+<para>return the interpolation degree </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="115" column="49" bodyfile="inc/apfel/qgrid.h" bodystart="115" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a0a1450c5d3c7988817a9302953437aea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::QMin</definition>
+        <argsstring>() const</argsstring>
+        <name>QMin</name>
+        <briefdescription>
+<para>return the minimum node value </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="116" column="49" bodyfile="inc/apfel/qgrid.h" bodystart="116" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1acd4156e722cbdc155f32d54ecc7432c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::QMax</definition>
+        <argsstring>() const</argsstring>
+        <name>QMax</name>
+        <briefdescription>
+<para>return the maximum node value </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="117" column="49" bodyfile="inc/apfel/qgrid.h" bodystart="117" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a69f28b6c7da9dbf3a6e48953ce15c172" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::function&lt; double(double const  &amp;)&gt; const  &amp;</type>
+        <definition>std::function&lt;double(double const&amp;)&gt; const&amp; apfel::QGrid&lt; T &gt;::TabFunc</definition>
+        <argsstring>() const</argsstring>
+        <name>TabFunc</name>
+        <briefdescription>
+<para>return the tabulation function </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="118" column="25" bodyfile="inc/apfel/qgrid.h" bodystart="118" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1aecee5c415c15fa8b837fd1bffa4cd2d3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; const  &amp;</type>
+        <definition>std::vector&lt;double&gt; const&amp; apfel::QGrid&lt; T &gt;::GetThresholds</definition>
+        <argsstring>() const</argsstring>
+        <name>GetThresholds</name>
+        <briefdescription>
+<para>return the heavy quark thresholds </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="119" column="40" bodyfile="inc/apfel/qgrid.h" bodystart="119" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a61e70065647ccbc8388bac2227071594" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; const  &amp;</type>
+        <definition>std::vector&lt;double&gt; const&amp; apfel::QGrid&lt; T &gt;::GetQGrid</definition>
+        <argsstring>() const</argsstring>
+        <name>GetQGrid</name>
+        <briefdescription>
+<para>return the grid in Q </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="120" column="40" bodyfile="inc/apfel/qgrid.h" bodystart="120" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a5988daad45edcd80bd39b2e6f88be606" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt; const  &amp;</type>
+        <definition>std::vector&lt;double&gt; const&amp; apfel::QGrid&lt; T &gt;::GetFQGrid</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFQGrid</name>
+        <briefdescription>
+<para>return the grid in _TabFunc(Q) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="121" column="40" bodyfile="inc/apfel/qgrid.h" bodystart="121" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1aeea1ac5fbc6d8f0dddb5015c0f310bf3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; int &gt; const  &amp;</type>
+        <definition>std::vector&lt;int&gt; const&amp; apfel::QGrid&lt; T &gt;::GetThesholdIndices</definition>
+        <argsstring>() const</argsstring>
+        <name>GetThesholdIndices</name>
+        <briefdescription>
+<para>return the indices of the thresholds on the grid </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="122" column="43" bodyfile="inc/apfel/qgrid.h" bodystart="122" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1aeb9849e0409b64e6718154d1bc815beb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; T &gt; const  &amp;</type>
+        <definition>std::vector&lt;T&gt; const&amp; apfel::QGrid&lt; T &gt;::GetQGridValues</definition>
+        <argsstring>() const</argsstring>
+        <name>GetQGridValues</name>
+        <briefdescription>
+<para>return the tabulated objects on the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="123" column="45" bodyfile="inc/apfel/qgrid.h" bodystart="123" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1aa4b3a59aea70c79d260592cbfdb316a3" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int apfel::QGrid&lt; T &gt;::_nQ</definition>
+        <argsstring></argsstring>
+        <name>_nQ</name>
+        <briefdescription>
+<para>Number intervals. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="163" column="42" bodyfile="inc/apfel/qgrid.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1a4f7c4faa8b1e9ba80331661994123089" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::_QMin</definition>
+        <argsstring></argsstring>
+        <name>_QMin</name>
+        <briefdescription>
+<para>Minumim value of Q. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="164" column="42" bodyfile="inc/apfel/qgrid.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1acceeb20586bb7797a442185d32b9bbae" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::_QMax</definition>
+        <argsstring></argsstring>
+        <name>_QMax</name>
+        <briefdescription>
+<para>Maximum value of Q. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="165" column="42" bodyfile="inc/apfel/qgrid.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1acff3cc7b2a176990a937c6d25b84ff24" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int apfel::QGrid&lt; T &gt;::_InterDegree</definition>
+        <argsstring></argsstring>
+        <name>_InterDegree</name>
+        <briefdescription>
+<para>Interpolation degree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="166" column="42" bodyfile="inc/apfel/qgrid.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1af4d8ebad864790a72b74f5532bee6919" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::QGrid&lt; T &gt;::_Thresholds</definition>
+        <argsstring></argsstring>
+        <name>_Thresholds</name>
+        <briefdescription>
+<para>Thresholds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="167" column="34" bodyfile="inc/apfel/qgrid.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1a7d7765d66bbd218ed474d2aaf859cb88" prot="protected" static="no" mutable="no">
+        <type>std::function&lt; double(double const  &amp;)&gt;</type>
+        <definition>std::function&lt;double(double const&amp;)&gt; apfel::QGrid&lt; T &gt;::_TabFunc</definition>
+        <argsstring></argsstring>
+        <name>_TabFunc</name>
+        <briefdescription>
+<para>Function whose constant step is used for the tabulation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="168" column="19" bodyfile="inc/apfel/qgrid.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1ac50acb129168150b4c201835217e19ac" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::QGrid&lt; T &gt;::_Qg</definition>
+        <argsstring></argsstring>
+        <name>_Qg</name>
+        <briefdescription>
+<para><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> in Q. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="169" column="34" bodyfile="inc/apfel/qgrid.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1af11497a9f67e8e10192e5ee1d816dade" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::QGrid&lt; T &gt;::_fQg</definition>
+        <argsstring></argsstring>
+        <name>_fQg</name>
+        <briefdescription>
+<para><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> in _TabFunc(Q) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="170" column="34" bodyfile="inc/apfel/qgrid.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1a5ce1374dcd1a206c86b6bc1a80aadf57" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; apfel::QGrid&lt; T &gt;::_nQg</definition>
+        <argsstring></argsstring>
+        <name>_nQg</name>
+        <briefdescription>
+<para>Indices of the nodes on which there is either a bound or a threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="171" column="37" bodyfile="inc/apfel/qgrid.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1QGrid_1adfd57f2e4dee56d62a86e45d5185b2b3" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; apfel::QGrid&lt; T &gt;::_GridValues</definition>
+        <argsstring></argsstring>
+        <name>_GridValues</name>
+        <briefdescription>
+<para>Vector of values to be interpolated on the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="172" column="39" bodyfile="inc/apfel/qgrid.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1QGrid_1ac2e13c956b563254deb9d6c677feff9d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>T</type>
+        <definition>T apfel::QGrid&lt; T &gt;::Evaluate</definition>
+        <argsstring>(double const &amp;Q) const</argsstring>
+        <name>Evaluate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>Function that interpolates on the grid in Q. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the required interpolation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolated value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="84" column="7"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1abf5b77dfd5305988e216b798312228a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>T</type>
+        <definition>T apfel::QGrid&lt; T &gt;::Derive</definition>
+        <argsstring>(double const &amp;Q) const</argsstring>
+        <name>Derive</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>Function that derives on the grid in Q. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the required interpolation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolated derivative </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="91" column="7"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a6d31f3adb8c00a927dd9cbcd515d071b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>T</type>
+        <definition>T apfel::QGrid&lt; T &gt;::Integrate</definition>
+        <argsstring>(double const &amp;Qa, double const &amp;Qb) const</argsstring>
+        <name>Integrate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Qa</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Qb</declname>
+        </param>
+        <briefdescription>
+<para>Function that integrates on the grid in Q. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Qa</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lower integration bound </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Qb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the upper integration bound </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolated integral </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="99" column="7"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a73418aed8752703995851675372a47aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::Interpolant</definition>
+        <argsstring>(int const &amp;tQ, int const &amp;tau, double const &amp;fq) const</argsstring>
+        <name>Interpolant</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>tQ</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>fq</declname>
+        </param>
+        <briefdescription>
+<para>Interpolation functions on <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>interpolation control parameter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the grid index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of _TabFunc(Q) of the required interpolation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interpolation weights </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="133" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1ad99c1934a66fb7481f8a79eac77e53d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::DerInterpolant</definition>
+        <argsstring>(int const &amp;tQ, int const &amp;tau, double const &amp;Q) const</argsstring>
+        <name>DerInterpolant</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>tQ</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>Derivative of the interpolation functions on <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>interpolation control parameter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the grid index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of Q of the required interpolation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the derivarive of the interpolation weights </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="142" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a9ba5658b710808b1eeaef1dbb784b848" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::QGrid&lt; T &gt;::IntInterpolant</definition>
+        <argsstring>(int const &amp;tQ, int const &amp;tau, double const &amp;Qa, double const &amp;Qb) const</argsstring>
+        <name>IntInterpolant</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>tQ</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>tau</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Qa</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Qb</declname>
+        </param>
+        <briefdescription>
+<para>Derivative of the interpolation functions on <ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>interpolation control parameter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the grid index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Qa</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the lower integration bound </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Qb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the upper integration bound </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the integral of interpolation weights </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="152" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1QGrid_1a2991f4e1f5773772f8ccb08c81058db5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::tuple&lt; int, int, int &gt;</type>
+        <definition>std::tuple&lt;int, int, int&gt; apfel::QGrid&lt; T &gt;::SumBounds</definition>
+        <argsstring>(double const &amp;Q) const</argsstring>
+        <name>SumBounds</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>Computes the control parameter of the interpolant, the lower and upper bounds over which the sum is limited. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the required interpolation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the lower and upper bounds of tau </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="160" column="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classapfel_1_1QGrid_1a674a5b9752cf04cea100fcb1485811d2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class U</type>
+          </param>
+        </templateparamlist>
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, QGrid&lt; U &gt; const &amp;dt)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1QGrid" kindref="compound">QGrid</ref>&lt; U &gt; const &amp;</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/qgrid.h" line="175" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The template class QGrids is a mother class for the interpolation in Q. This class also implements methods for the subgrid interpolation relevant for example in a VFNS evolution. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>apfel::QGrid&lt; T &gt;</label>
+        <link refid="classapfel_1_1QGrid"/>
+      </node>
+      <node id="2">
+        <label>apfel::TabulateObject&lt; T &gt;</label>
+        <link refid="classapfel_1_1TabulateObject"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="1">
+        <label>apfel::QGrid&lt; T &gt;</label>
+        <link refid="classapfel_1_1QGrid"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_nQg</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_Qg</edgelabel>
+          <edgelabel>_Thresholds</edgelabel>
+          <edgelabel>_fQg</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; int &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/qgrid.h" line="22" column="3" bodyfile="inc/apfel/qgrid.h" bodystart="23" bodyend="176"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1QGrid_1af11497a9f67e8e10192e5ee1d816dade" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_fQg</name></member>
+      <member refid="classapfel_1_1QGrid_1adfd57f2e4dee56d62a86e45d5185b2b3" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_GridValues</name></member>
+      <member refid="classapfel_1_1QGrid_1acff3cc7b2a176990a937c6d25b84ff24" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_InterDegree</name></member>
+      <member refid="classapfel_1_1QGrid_1aa4b3a59aea70c79d260592cbfdb316a3" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_nQ</name></member>
+      <member refid="classapfel_1_1QGrid_1a5ce1374dcd1a206c86b6bc1a80aadf57" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_nQg</name></member>
+      <member refid="classapfel_1_1QGrid_1ac50acb129168150b4c201835217e19ac" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_Qg</name></member>
+      <member refid="classapfel_1_1QGrid_1acceeb20586bb7797a442185d32b9bbae" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_QMax</name></member>
+      <member refid="classapfel_1_1QGrid_1a4f7c4faa8b1e9ba80331661994123089" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_QMin</name></member>
+      <member refid="classapfel_1_1QGrid_1a7d7765d66bbd218ed474d2aaf859cb88" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_TabFunc</name></member>
+      <member refid="classapfel_1_1QGrid_1af4d8ebad864790a72b74f5532bee6919" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>_Thresholds</name></member>
+      <member refid="classapfel_1_1QGrid_1ad99c1934a66fb7481f8a79eac77e53d3" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>DerInterpolant</name></member>
+      <member refid="classapfel_1_1QGrid_1abf5b77dfd5305988e216b798312228a3" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>Derive</name></member>
+      <member refid="classapfel_1_1QGrid_1ac2e13c956b563254deb9d6c677feff9d" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>Evaluate</name></member>
+      <member refid="classapfel_1_1QGrid_1a5988daad45edcd80bd39b2e6f88be606" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>GetFQGrid</name></member>
+      <member refid="classapfel_1_1QGrid_1a61e70065647ccbc8388bac2227071594" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>GetQGrid</name></member>
+      <member refid="classapfel_1_1QGrid_1aeb9849e0409b64e6718154d1bc815beb" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>GetQGridValues</name></member>
+      <member refid="classapfel_1_1QGrid_1aeea1ac5fbc6d8f0dddb5015c0f310bf3" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>GetThesholdIndices</name></member>
+      <member refid="classapfel_1_1QGrid_1aecee5c415c15fa8b837fd1bffa4cd2d3" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>GetThresholds</name></member>
+      <member refid="classapfel_1_1QGrid_1a6d31f3adb8c00a927dd9cbcd515d071b" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>Integrate</name></member>
+      <member refid="classapfel_1_1QGrid_1a58fbd0d8210e5d469bcaabd5fce5b7fb" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>InterDegree</name></member>
+      <member refid="classapfel_1_1QGrid_1a73418aed8752703995851675372a47aa" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>Interpolant</name></member>
+      <member refid="classapfel_1_1QGrid_1a9ba5658b710808b1eeaef1dbb784b848" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>IntInterpolant</name></member>
+      <member refid="classapfel_1_1QGrid_1a545c18a37669f843ea7874c5e9e8d23c" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>nQ</name></member>
+      <member refid="classapfel_1_1QGrid_1a785ad2d1e9680eaefc6f225c788e25b2" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>operator!=</name></member>
+      <member refid="classapfel_1_1QGrid_1a674a5b9752cf04cea100fcb1485811d2" prot="protected" virt="non-virtual"><scope>apfel::QGrid</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classapfel_1_1QGrid_1a3c1e36b8b96e4019777b2e07d7b07edc" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>operator==</name></member>
+      <member refid="classapfel_1_1QGrid_1a29217afc5663b54d611dc307700e32da" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>QGrid</name></member>
+      <member refid="classapfel_1_1QGrid_1a237fbe86ce7780636cdeb60d9f51d5e4" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>QGrid</name></member>
+      <member refid="classapfel_1_1QGrid_1ad79a908a9bd73bcd0c2cc00a5f47bd7e" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>QGrid</name></member>
+      <member refid="classapfel_1_1QGrid_1aa25abb29b9bc72b7aeb5d6e025a1d9c4" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>QGrid</name></member>
+      <member refid="classapfel_1_1QGrid_1acd4156e722cbdc155f32d54ecc7432c0" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>QMax</name></member>
+      <member refid="classapfel_1_1QGrid_1a0a1450c5d3c7988817a9302953437aea" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>QMin</name></member>
+      <member refid="classapfel_1_1QGrid_1a2991f4e1f5773772f8ccb08c81058db5" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>SumBounds</name></member>
+      <member refid="classapfel_1_1QGrid_1a69f28b6c7da9dbf3a6e48953ce15c172" prot="public" virt="non-virtual"><scope>apfel::QGrid</scope><name>TabFunc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

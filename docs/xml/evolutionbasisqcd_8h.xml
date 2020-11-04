@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="evolutionbasisqcd_8h" kind="file" language="C++">
+    <compoundname>evolutionbasisqcd.h</compoundname>
+    <includes refid="convolutionmap_8h" local="yes">apfel/convolutionmap.h</includes>
+    <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>apfel/matrix.h</label>
+        <link refid="matrix_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="5">
+        <label>array</label>
+      </node>
+      <node id="1">
+        <label>inc/apfel/evolutionbasisqcd.h</label>
+        <link refid="evolutionbasisqcd_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>apfel/convolutionmap.h</label>
+        <link refid="convolutionmap_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+      <node id="1">
+        <label>inc/apfel/evolutionbasisqcd.h</label>
+        <link refid="evolutionbasisqcd_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classapfel_1_1EvolutionBasisQCD" prot="public">apfel::EvolutionBasisQCD</innerclass>
+    <innerclass refid="classapfel_1_1EvolutionOperatorBasisQCD" prot="public">apfel::EvolutionOperatorBasisQCD</innerclass>
+    <innerclass refid="classapfel_1_1EvolveDistributionsBasisQCD" prot="public">apfel::EvolveDistributionsBasisQCD</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="convolutionmap_8h" kindref="compound">apfel/convolutionmap.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>*INDENT-OFF*</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="namespaceapfel_1ad6198ef2377e81a2fd6a5cbe081bffbf" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::map&lt;std::pair&lt;int,<sp/>int&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/><ref refid="namespaceapfel_1ad6198ef2377e81a2fd6a5cbe081bffbf" kindref="member">Gkj</ref><sp/>=</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>0,0},<sp/>0},<sp/>{{<sp/>0,1},<sp/>1},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>0,3},<sp/>2},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>0,5},<sp/>3},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>0,7},<sp/>4},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>0,9},<sp/>5},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>0,11},<sp/>6},</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>1,0},<sp/>7},<sp/>{{<sp/>1,1},<sp/>8},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>1,3},<sp/>9},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>1,5},10},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>1,7},11},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>1,9},12},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>1,11},13},</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{2,2},14},</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>3,0},15},<sp/>{{<sp/>3,1},16},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>3,3},17},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>3,5},18},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>3,7},19},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>3,9},20},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>3,11},21},</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{4,4},22},</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>5,0},23},<sp/>{{<sp/>5,1},24},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>5,3},25},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>5,5},26},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>5,7},27},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>5,9},28},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>5,11},29},</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{6,6},30},</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>7,0},31},<sp/>{{<sp/>7,1},32},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>7,3},33},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>7,5},34},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>7,7},35},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>7,9},36},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>7,11},37},</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{8,8},38},</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>9,0},39},<sp/>{{<sp/>9,1},40},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>9,3},41},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>9,5},42},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>9,7},43},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>9,9},44},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{<sp/>9,11},45},</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{10,10},46},</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{{11,0},47},<sp/>{{11,1},48},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{11,3},49},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{11,5},50},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{11,7},51},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{11,9},52},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{11,11},53},</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{{12,12},54}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>*INDENT-ON*</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"></codeline>
+<codeline lineno="51"></codeline>
+<codeline lineno="57" refid="classapfel_1_1EvolutionBasisQCD" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1EvolutionBasisQCD" kindref="compound">EvolutionBasisQCD</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="64" refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a55f1f6a7011dc376312e91d67b11224d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8" kindref="member">Operand</ref>:<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a780c887bda77b31b4230e9bfe5fbc231" kindref="member">PNSP</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a10c9ad40a7680ef8811a66a0b27553ac" kindref="member">PNSM</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8ace59a3576047e627dddbd8a6b5c663c5" kindref="member">PNSV</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a55f1f6a7011dc376312e91d67b11224d" kindref="member">PQQ</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a3dd95b1224451bf978ce364aae5a2a20" kindref="member">PQG</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a50e295396071e5f694cb5f4c77c330b6" kindref="member">PGQ</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1afb35598009d55d438109390cd26796b8a92a85eba6acccd6cf23b5059be4a7946" kindref="member">PGG</ref>};</highlight></codeline>
+<codeline lineno="65" refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169aa95760e4684e512f7d17af2d61a07dce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169" kindref="member">Object</ref>:<sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a534d9a14dbdfbf52b606e9d09a9bfec1" kindref="member">GLUON</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169abad7ee5de0d480ed79d1248f879deb9c" kindref="member">SIGMA</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169aa95760e4684e512f7d17af2d61a07dce" kindref="member">VALENCE</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169ad35baed816a84080347c173d6869f13a" kindref="member">T3</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a5b50bd9653298c56d929ad550d9cb658" kindref="member">V3</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a0b44dbe9e25b42fda25ee9cc959eb506" kindref="member">T8</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a532121d25d9660ad9ffce886a48cc71c" kindref="member">V8</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a0596750e35910b4b864e7b1ddb1d6e70" kindref="member">T15</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a5f9930b9c16c5d4107dbf60d61db9229" kindref="member">V15</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a96f828eca4966b3ee89c0de84a695433" kindref="member">T24</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a142e86d2dc4a0031c4a2691c2a29a5be" kindref="member">V24</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a19be49aaea744e5398dd09ae7bd411d4" kindref="member">T35</ref>,<sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a0e3bb51b09bf1cfae51916729c1c8169a4d830e1059d893ae65741ad5fbdb82c1" kindref="member">V35</ref>};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classapfel_1_1EvolutionBasisQCD_1a6610cdd3d123e1e9320adb77cc35ff06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1EvolutionBasisQCD_1a6610cdd3d123e1e9320adb77cc35ff06" kindref="member">EvolutionBasisQCD</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>nf);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="classapfel_1_1EvolutionOperatorBasisQCD" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1EvolutionOperatorBasisQCD" kindref="compound">EvolutionOperatorBasisQCD</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="87" refid="classapfel_1_1EvolutionOperatorBasisQCD_1a17e140926c702ba46ee21c7d160d646b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1EvolutionOperatorBasisQCD_1a17e140926c702ba46ee21c7d160d646b" kindref="member">EvolutionOperatorBasisQCD</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>nf);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="classapfel_1_1EvolveDistributionsBasisQCD" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1EvolveDistributionsBasisQCD" kindref="compound">EvolveDistributionsBasisQCD</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="101" refid="classapfel_1_1EvolveDistributionsBasisQCD_1a6de1aa97bb9782c5f514799808c44900" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1EvolveDistributionsBasisQCD_1a6de1aa97bb9782c5f514799808c44900" kindref="member">EvolveDistributionsBasisQCD</ref>();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/evolutionbasisqcd.h"/>
+  </compounddef>
+</doxygen>

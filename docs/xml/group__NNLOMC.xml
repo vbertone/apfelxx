@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NNLOMC" kind="group">
+    <compoundname>NNLOMC</compoundname>
+    <title>NNLO matching conditions</title>
+    <innerclass refid="classapfel_1_1APS2Hq__0" prot="public">apfel::APS2Hq_0</innerclass>
+    <innerclass refid="classapfel_1_1APS2Hq__L" prot="public">apfel::APS2Hq_L</innerclass>
+    <innerclass refid="classapfel_1_1APS2Hq__L2" prot="public">apfel::APS2Hq_L2</innerclass>
+    <innerclass refid="classapfel_1_1AS2Hg__0" prot="public">apfel::AS2Hg_0</innerclass>
+    <innerclass refid="classapfel_1_1AS2Hg__L" prot="public">apfel::AS2Hg_L</innerclass>
+    <innerclass refid="classapfel_1_1AS2Hg__L2" prot="public">apfel::AS2Hg_L2</innerclass>
+    <innerclass refid="classapfel_1_1ANS2qqH__0" prot="public">apfel::ANS2qqH_0</innerclass>
+    <innerclass refid="classapfel_1_1ANS2qqH__L" prot="public">apfel::ANS2qqH_L</innerclass>
+    <innerclass refid="classapfel_1_1ANS2qqH__L2" prot="public">apfel::ANS2qqH_L2</innerclass>
+    <innerclass refid="classapfel_1_1AS2gqH__0" prot="public">apfel::AS2gqH_0</innerclass>
+    <innerclass refid="classapfel_1_1AS2gqH__L" prot="public">apfel::AS2gqH_L</innerclass>
+    <innerclass refid="classapfel_1_1AS2gqH__L2" prot="public">apfel::AS2gqH_L2</innerclass>
+    <innerclass refid="classapfel_1_1AS2ggH__0" prot="public">apfel::AS2ggH_0</innerclass>
+    <innerclass refid="classapfel_1_1AS2ggH__L" prot="public">apfel::AS2ggH_L</innerclass>
+    <innerclass refid="classapfel_1_1AS2ggH__L2" prot="public">apfel::AS2ggH_L2</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

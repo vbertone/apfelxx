@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1InitialiseEvolution" kind="class" language="C++" prot="public">
+    <compoundname>apfel::InitialiseEvolution</compoundname>
+    <includes refid="initialiseevolution_8h" local="no">initialiseevolution.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classapfel_1_1InitialiseEvolution_1aff56e8f30c1ace113fa62309c411221c" prot="private" static="no" mutable="no">
+        <type><ref refid="structapfel_1_1EvolutionSetup" kindref="compound">EvolutionSetup</ref></type>
+        <definition>EvolutionSetup apfel::InitialiseEvolution::_setup</definition>
+        <argsstring></argsstring>
+        <name>_setup</name>
+        <briefdescription>
+<para>Evolution setup object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="114" column="50" bodyfile="inc/apfel/initialiseevolution.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1InitialiseEvolution_1ace788f48892622cbaecb335eb28edc01" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool apfel::InitialiseEvolution::_WriteGrid</definition>
+        <argsstring></argsstring>
+        <name>_WriteGrid</name>
+        <briefdescription>
+<para>Switch to write LHAPDF grids. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="115" column="50" bodyfile="inc/apfel/initialiseevolution.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1InitialiseEvolution_1a223f7ec4987e8439ce7c0cc89bcfd360" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; const <ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;const Grid&gt; apfel::InitialiseEvolution::_g</definition>
+        <argsstring></argsstring>
+        <name>_g</name>
+        <briefdescription>
+<para>x-space grid </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="116" column="38" bodyfile="inc/apfel/initialiseevolution.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1InitialiseEvolution_1adbd791ac90d75b3656c13b3e34c8841c" prot="private" static="no" mutable="no">
+        <type>std::function&lt; double(double const  &amp;)&gt;</type>
+        <definition>std::function&lt;double(double const&amp;)&gt; apfel::InitialiseEvolution::_as</definition>
+        <argsstring></argsstring>
+        <name>_as</name>
+        <briefdescription>
+<para>Strong coupling function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="117" column="27" bodyfile="inc/apfel/initialiseevolution.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1InitialiseEvolution_1ab62e99d9183dfb26361bd197cf2f6d2c" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
+        <definition>std::map&lt;int, DglapObjects&gt; apfel::InitialiseEvolution::_DglapObj</definition>
+        <argsstring></argsstring>
+        <name>_DglapObj</name>
+        <briefdescription>
+<para><ref refid="classapfel_1_1Dglap" kindref="compound">Dglap</ref> evolution objects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="118" column="31" bodyfile="inc/apfel/initialiseevolution.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1InitialiseEvolution_1afc88a52384035b9a18fb4a6bb7e30aee" prot="private" static="no" mutable="no">
+        <type>std::map&lt; double, std::map&lt; int, <ref refid="structapfel_1_1LHKnotArray" kindref="compound">LHKnotArray</ref> &gt; &gt;</type>
+        <definition>std::map&lt;double, std::map&lt;int, LHKnotArray&gt; &gt; apfel::InitialiseEvolution::_KnotArray</definition>
+        <argsstring></argsstring>
+        <name>_KnotArray</name>
+        <briefdescription>
+<para>Object that emulates the KnotArray of LHAPDF to be fed to LHAPDF itself. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="119" column="14" bodyfile="inc/apfel/initialiseevolution.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a47852ad46b4f788ff26304050d647baa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::InitialiseEvolution::InitialiseEvolution</definition>
+        <argsstring>(EvolutionSetup const &amp;setup, bool const &amp;WriteGrid=false)</argsstring>
+        <name>InitialiseEvolution</name>
+        <param>
+          <type><ref refid="structapfel_1_1EvolutionSetup" kindref="compound">EvolutionSetup</ref> const &amp;</type>
+          <declname>setup</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>WriteGrid</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1InitialiseEvolution" kindref="compound">InitialiseEvolution</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="structapfel_1_1EvolutionSetup" kindref="compound">EvolutionSetup</ref> data structure encapsulate the evolution parameters </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>WriteGrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>switch to enable the writing of grids in the LHAPDF format (default: false) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1aa470bf0c32f9b33dd4781844665528b0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool apfel::InitialiseEvolution::CheckSetup</definition>
+        <argsstring>() const</argsstring>
+        <name>CheckSetup</name>
+        <briefdescription>
+<para>The CheckSetup function checks that the input setup is meaningful and compatible with the current capabilities of the code. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true or false according to whether the check is succesful or not </para>
+</simplesect>
+<simplesect kind="note"><para>Of course, not all possible checks are implemented. The user has to be careful when modifying the evolution setup and make sure that the settings are reasonable. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1ae1793ecd0c6157cb55cb9caf2cfe80c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::InitialiseEvolution::ReportSetup</definition>
+        <argsstring>() const</argsstring>
+        <name>ReportSetup</name>
+        <briefdescription>
+<para>The ReportSetup function reports the parameters in a human readable format. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a304ac2f18767d9299788a276ae81d0fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::InitialiseEvolution::InitialiseCouplings</definition>
+        <argsstring>()</argsstring>
+        <name>InitialiseCouplings</name>
+        <briefdescription>
+<para>The InitialiseCouplings function intialises and tabulates the running coupling(s). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a28be23c78fce194fa8d065f12bc4b3e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::InitialiseEvolution::InitialiseDglapObject</definition>
+        <argsstring>()</argsstring>
+        <name>InitialiseDglapObject</name>
+        <briefdescription>
+<para>The InitialiseDglapObject function intialises the relevant objects for the DGLAP evolution and constructs a <ref refid="classapfel_1_1Dglap" kindref="compound">Dglap</ref> object to be used for the evolution. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="73" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a8bc3bbe0441a3b4feded357b2946131d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::InitialiseEvolution::TabulateEvolution</definition>
+        <argsstring>(std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InSet)</argsstring>
+        <name>TabulateEvolution</name>
+        <param>
+          <type>std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;</type>
+          <declname>InSet</declname>
+        </param>
+        <briefdescription>
+<para>The TabulateEvolution function computes the DGLAP evolution and tabulates the distributions over and (x,Q2) grid. The tabulated distributions can be accessed via the <ref refid="classapfel_1_1InitialiseEvolution_1a40303a91c0842fa878959cd230d6ed0f" kindref="member">KnotArray()</ref> array function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>InSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input set of distributions </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1ace5cfdb335ee53b22dbdadade1a36bc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::InitialiseEvolution::WriteGridInfo</definition>
+        <argsstring>()</argsstring>
+        <name>WriteGridInfo</name>
+        <briefdescription>
+<para>The WriteGridInfo function creates the folder and writes the info file of the LHAPDF grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a17d43a477175f4c4fd84bd659d6b5fa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::InitialiseEvolution::WriteGrid</definition>
+        <argsstring>()</argsstring>
+        <name>WriteGrid</name>
+        <briefdescription>
+<para>The WriteGrid function dumps to file in the LHAPDF format the actual PDF grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>If the writing of the grid is enabled, this function is called every time that the TabulateEvolution function is called. Therefore this cab be used to compute more members of a given set without reinitialising the evolution. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="98" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a2259ee7383d7f414c214e33934520d7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::InitialiseEvolution::Alphas</definition>
+        <argsstring>(double const &amp;mu) const</argsstring>
+        <name>Alphas</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>mu</declname>
+        </param>
+        <briefdescription>
+<para>Function that returns the evolved strong coupling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value of the renormalisation scale <mu/><subscript>R</subscript> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the evolved strong coupling </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="105" column="12" bodyfile="inc/apfel/initialiseevolution.h" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1InitialiseEvolution_1a40303a91c0842fa878959cd230d6ed0f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::map&lt; double, std::map&lt; int, <ref refid="structapfel_1_1LHKnotArray" kindref="compound">LHKnotArray</ref> &gt; &gt;</type>
+        <definition>std::map&lt;double, std::map&lt;int, LHKnotArray&gt; &gt; apfel::InitialiseEvolution::KnotArray</definition>
+        <argsstring>() const</argsstring>
+        <name>KnotArray</name>
+        <briefdescription>
+<para>Function that returns the full set of distributions tabulated of the (x,Q2) grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the _KnotArray attribute </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="111" column="14" bodyfile="inc/apfel/initialiseevolution.h" bodystart="111" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1InitialiseEvolution" kindref="compound">InitialiseEvolution</ref> performs all the operations to initialise a DGLAP evolution using an <ref refid="structapfel_1_1EvolutionSetup" kindref="compound">EvolutionSetup</ref> object to retrieve the relevant information. This class also provides the necessary functions to access the evolved distributions, coupling(s), and masses. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="23">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+        <childnode refid="24" relation="usage">
+          <edgelabel>_rules</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>std::vector&lt; std::pair&lt; int, int &gt; &gt;</label>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="14">
+        <label>apfel::Grid</label>
+        <link refid="classapfel_1_1Grid"/>
+        <childnode refid="15" relation="usage">
+          <edgelabel>_JointToSubMap</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>_SubToJointMap</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>_JointGrid</edgelabel>
+        </childnode>
+        <childnode refid="20" relation="usage">
+          <edgelabel>_GlobalGrid</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>std::map&lt; int, apfel::Set&lt; apfel::Operator &gt; &gt;</label>
+        <childnode refid="11" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>std::unique_ptr&lt; apfel::SubGrid &gt;</label>
+        <childnode refid="19" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>std::map&lt; int, apfel::Operator &gt;</label>
+        <childnode refid="13" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="27">
+        <label>std::map&lt; double, std::map&lt; int, apfel::LHKnotArray &gt; &gt;</label>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; apfel::EvolutionSetup::GridParameters &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="28">
+        <label>std::unique_ptr&lt; const apfel::Grid &gt;</label>
+        <childnode refid="14" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::InitialiseEvolution</label>
+        <link refid="classapfel_1_1InitialiseEvolution"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_setup</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_DglapObj</edgelabel>
+        </childnode>
+        <childnode refid="27" relation="usage">
+          <edgelabel>_KnotArray</edgelabel>
+        </childnode>
+        <childnode refid="28" relation="usage">
+          <edgelabel>_g</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="9">
+        <label>apfel::DglapObjects</label>
+        <link refid="structapfel_1_1DglapObjects"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>MatchingConditions</edgelabel>
+          <edgelabel>SplittingFunctions</edgelabel>
+        </childnode>
+      </node>
+      <node id="22">
+        <label>apfel::ExtendedVector&lt; double &gt;</label>
+        <link refid="classapfel_1_1ExtendedVector"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_vector</edgelabel>
+        </childnode>
+      </node>
+      <node id="15">
+        <label>std::vector&lt; std::vector&lt; int &gt; &gt;</label>
+        <childnode refid="16" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="20">
+        <label>std::vector&lt; apfel::SubGrid &gt;</label>
+        <childnode refid="19" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="25">
+        <label>std::vector&lt; apfel::ConvolutionMap::rule &gt;</label>
+        <childnode refid="26" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="24">
+        <label>std::map&lt; int, std::vector&lt; apfel::ConvolutionMap::rule &gt; &gt;</label>
+        <childnode refid="25" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>apfel::SubGrid</label>
+        <link refid="classapfel_1_1SubGrid"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_lxsg</edgelabel>
+          <edgelabel>_xsg</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>apfel::Operator</label>
+        <link refid="classapfel_1_1Operator"/>
+        <childnode refid="14" relation="usage">
+          <edgelabel>_grid</edgelabel>
+        </childnode>
+        <childnode refid="21" relation="usage">
+          <edgelabel>_Operator</edgelabel>
+        </childnode>
+      </node>
+      <node id="21">
+        <label>std::vector&lt; apfel::ExtendedVector&lt; double &gt; &gt;</label>
+        <childnode refid="22" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>apfel::EvolutionSetup</label>
+        <link refid="structapfel_1_1EvolutionSetup"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>GridParameters</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>Masses</edgelabel>
+          <edgelabel>Thresholds</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::map&lt; int, apfel::DglapObjects &gt;</label>
+        <childnode refid="9" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="26">
+        <label>apfel::ConvolutionMap::rule</label>
+        <link refid="structapfel_1_1ConvolutionMap_1_1rule"/>
+      </node>
+      <node id="6">
+        <label>apfel::EvolutionSetup::GridParameters</label>
+        <link refid="structapfel_1_1EvolutionSetup_1_1GridParameters"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>xgext</edgelabel>
+        </childnode>
+      </node>
+      <node id="16">
+        <label>std::vector&lt; int &gt;</label>
+      </node>
+      <node id="11">
+        <label>apfel::Set&lt; apfel::Operator &gt;</label>
+        <link refid="classapfel_1_1Set"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>_objects</edgelabel>
+        </childnode>
+        <childnode refid="23" relation="usage">
+          <edgelabel>_map</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::string</label>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/initialiseevolution.h" line="35" column="3" bodyfile="inc/apfel/initialiseevolution.h" bodystart="36" bodyend="120"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1InitialiseEvolution_1adbd791ac90d75b3656c13b3e34c8841c" prot="private" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>_as</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1ab62e99d9183dfb26361bd197cf2f6d2c" prot="private" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>_DglapObj</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a223f7ec4987e8439ce7c0cc89bcfd360" prot="private" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>_g</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1afc88a52384035b9a18fb4a6bb7e30aee" prot="private" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>_KnotArray</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1aff56e8f30c1ace113fa62309c411221c" prot="private" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>_setup</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1ace788f48892622cbaecb335eb28edc01" prot="private" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>_WriteGrid</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a2259ee7383d7f414c214e33934520d7b" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>Alphas</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1aa470bf0c32f9b33dd4781844665528b0" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>CheckSetup</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a304ac2f18767d9299788a276ae81d0fb" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>InitialiseCouplings</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a28be23c78fce194fa8d065f12bc4b3e4" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>InitialiseDglapObject</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a47852ad46b4f788ff26304050d647baa" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>InitialiseEvolution</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a40303a91c0842fa878959cd230d6ed0f" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>KnotArray</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1ae1793ecd0c6157cb55cb9caf2cfe80c2" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>ReportSetup</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a8bc3bbe0441a3b4feded357b2946131d" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>TabulateEvolution</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1a17d43a477175f4c4fd84bd659d6b5fa9" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>WriteGrid</name></member>
+      <member refid="classapfel_1_1InitialiseEvolution_1ace5cfdb335ee53b22dbdadade1a36bc1" prot="public" virt="non-virtual"><scope>apfel::InitialiseEvolution</scope><name>WriteGridInfo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NLOmatch" kind="group">
+    <compoundname>NLOmatch</compoundname>
+    <title>NLO matching functions for PDFs</title>
+    <innerclass refid="classapfel_1_1C1nspdf" prot="public">apfel::C1nspdf</innerclass>
+    <innerclass refid="classapfel_1_1C1qgpdf" prot="public">apfel::C1qgpdf</innerclass>
+    <innerclass refid="classapfel_1_1C1gqpdf" prot="public">apfel::C1gqpdf</innerclass>
+    <innerclass refid="classapfel_1_1C1ggpdf" prot="public">apfel::C1ggpdf</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1ConvolutionMap" kind="class" language="C++" prot="public">
+    <compoundname>apfel::ConvolutionMap</compoundname>
+    <derivedcompoundref refid="classapfel_1_1DiagonalBasis" prot="public" virt="non-virtual">apfel::DiagonalBasis</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1DISCCBasis" prot="public" virt="non-virtual">apfel::DISCCBasis</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1DISNCBasis" prot="public" virt="non-virtual">apfel::DISNCBasis</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1EvolutionBasisQCD" prot="public" virt="non-virtual">apfel::EvolutionBasisQCD</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1EvolutionOperatorBasisQCD" prot="public" virt="non-virtual">apfel::EvolutionOperatorBasisQCD</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1EvolveDistributionsBasisQCD" prot="public" virt="non-virtual">apfel::EvolveDistributionsBasisQCD</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1MatchingBasisQCD" prot="public" virt="non-virtual">apfel::MatchingBasisQCD</derivedcompoundref>
+    <derivedcompoundref refid="classapfel_1_1MatchingOperatorBasisQCD" prot="public" virt="non-virtual">apfel::MatchingOperatorBasisQCD</derivedcompoundref>
+    <includes refid="convolutionmap_8h" local="no">convolutionmap.h</includes>
+    <innerclass refid="structapfel_1_1ConvolutionMap_1_1rule" prot="public">apfel::ConvolutionMap::rule</innerclass>
+      <sectiondef kind="user-defined">
+      <header>Getters</header>
+      <memberdef kind="function" id="classapfel_1_1ConvolutionMap_1a4b38dc94dfe93316bdcc966dc9bd9039" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; apfel::ConvolutionMap::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <briefdescription>
+<para>Retrieve the name of the map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The name of the map </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="55" column="23" bodyfile="inc/apfel/convolutionmap.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ConvolutionMap_1a5bd9105aadb8c0d8cbf19e712e31bb57" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::map&lt; int, std::vector&lt; <ref refid="structapfel_1_1ConvolutionMap_1_1rule" kindref="compound">rule</ref> &gt; &gt; const  &amp;</type>
+        <definition>std::map&lt;int, std::vector&lt;rule&gt; &gt; const&amp; apfel::ConvolutionMap::GetRules</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRules</name>
+        <briefdescription>
+<para>Retrieve the full set of rules for the multiplications. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The multiplication rules </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="61" column="20" bodyfile="inc/apfel/convolutionmap.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ConvolutionMap_1aa74a4ecc6ecf40f75f04239aaa819666" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classapfel_1_1matrix" kindref="compound">matrix</ref>&lt; std::vector&lt; double &gt; &gt; const</type>
+        <definition>matrix&lt;std::vector&lt;double&gt; &gt; const apfel::ConvolutionMap::GetRuleMatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRuleMatrix</name>
+        <briefdescription>
+<para>Retrieve the full set of rules for the multiplications in the form of a matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="67" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1ConvolutionMap_1ae7d6672bb6ff5c242227570bac638fb9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classapfel_1_1matrix" kindref="compound">matrix</ref>&lt; std::vector&lt; int &gt; &gt; const</type>
+        <definition>matrix&lt;std::vector&lt;int&gt; &gt; const apfel::ConvolutionMap::GetRuleIndices</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRuleIndices</name>
+        <briefdescription>
+<para>Retrieve the operand indices of the full set of rules for the multiplications in the form of a matrix. Elements set to -1 correspond to empty slots. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="74" column="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classapfel_1_1ConvolutionMap_1af09aefa369acec757323cb45493d5aeb" prot="protected" static="no" mutable="no">
+        <type>std::map&lt; int, std::vector&lt; <ref refid="structapfel_1_1ConvolutionMap_1_1rule" kindref="compound">rule</ref> &gt; &gt;</type>
+        <definition>std::map&lt;int, std::vector&lt;rule&gt; &gt; apfel::ConvolutionMap::_rules</definition>
+        <argsstring></argsstring>
+        <name>_rules</name>
+        <briefdescription>
+<para>the map container </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="77" column="14" bodyfile="inc/apfel/convolutionmap.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1ConvolutionMap_1a291fc7fd16bb766e49cb0f6064040100" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string apfel::ConvolutionMap::_name</definition>
+        <argsstring></argsstring>
+        <name>_name</name>
+        <briefdescription>
+<para>the name of the derived class </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="78" column="38" bodyfile="inc/apfel/convolutionmap.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1ConvolutionMap_1a0f602872988c9ec3286bd30c66a92cf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::ConvolutionMap::ConvolutionMap</definition>
+        <argsstring>(std::string const &amp;name)</argsstring>
+        <name>ConvolutionMap</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="28" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classapfel_1_1ConvolutionMap_1ab4f76d761fe6b85809ec7d72f3b291b3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, ConvolutionMap const &amp;cm)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> const &amp;</type>
+          <declname>cm</declname>
+        </param>
+        <briefdescription>
+<para>Method which prints <ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> with cout &lt;&lt;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/convolutionmap.h" line="80" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> class encapsulates the set of rules to multiply a sets of operators with a set of distributions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="7">
+        <label>apfel::EvolveDistributionsBasisQCD</label>
+        <link refid="classapfel_1_1EvolveDistributionsBasisQCD"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+      </node>
+      <node id="3">
+        <label>apfel::DISCCBasis</label>
+        <link refid="classapfel_1_1DISCCBasis"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>apfel::EvolutionOperatorBasisQCD</label>
+        <link refid="classapfel_1_1EvolutionOperatorBasisQCD"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>apfel::EvolutionBasisQCD</label>
+        <link refid="classapfel_1_1EvolutionBasisQCD"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>apfel::MatchingBasisQCD</label>
+        <link refid="classapfel_1_1MatchingBasisQCD"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>apfel::DiagonalBasis</label>
+        <link refid="classapfel_1_1DiagonalBasis"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>apfel::MatchingOperatorBasisQCD</label>
+        <link refid="classapfel_1_1MatchingOperatorBasisQCD"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>apfel::DISNCBasis</label>
+        <link refid="classapfel_1_1DISNCBasis"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_rules</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; apfel::ConvolutionMap::rule &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::map&lt; int, std::vector&lt; apfel::ConvolutionMap::rule &gt; &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>apfel::ConvolutionMap::rule</label>
+        <link refid="structapfel_1_1ConvolutionMap_1_1rule"/>
+      </node>
+      <node id="5">
+        <label>std::string</label>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/convolutionmap.h" line="21" column="3" bodyfile="inc/apfel/convolutionmap.h" bodystart="22" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1ConvolutionMap_1a291fc7fd16bb766e49cb0f6064040100" prot="protected" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>_name</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1af09aefa369acec757323cb45493d5aeb" prot="protected" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>_rules</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a0f602872988c9ec3286bd30c66a92cf7" prot="public" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>ConvolutionMap</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a4b38dc94dfe93316bdcc966dc9bd9039" prot="public" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>GetName</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1ae7d6672bb6ff5c242227570bac638fb9" prot="public" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>GetRuleIndices</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1aa74a4ecc6ecf40f75f04239aaa819666" prot="public" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>GetRuleMatrix</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a5bd9105aadb8c0d8cbf19e712e31bb57" prot="public" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>GetRules</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1ab4f76d761fe6b85809ec7d72f3b291b3" prot="protected" virt="non-virtual"><scope>apfel::ConvolutionMap</scope><name>operator&lt;&lt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

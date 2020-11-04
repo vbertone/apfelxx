@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NCMassive" kind="group">
+    <compoundname>NCMassive</compoundname>
+    <title>Massive neutral current coefficient functions</title>
+    <innerclass refid="classapfel_1_1Cm21gNC" prot="public">apfel::Cm21gNC</innerclass>
+    <innerclass refid="classapfel_1_1Cm22nsNC" prot="public">apfel::Cm22nsNC</innerclass>
+    <innergroup refid="group__LO">LO massive coefficient functions</innergroup>
+    <innergroup refid="group__NLO">NLO massive coefficient functions</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Collection of the neutral current massive coefficient functions for F<subscript>2</subscript> and F<subscript>L</subscript> up to O(<alpha/><subscript>s</subscript>). <simplesect kind="note"><para>In the following &apos;xi&apos; indicates the ratio Q<superscript>2</superscript> / M<superscript>2</superscript>. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

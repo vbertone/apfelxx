@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1P1nsm" kind="class" language="C++" prot="public">
+    <compoundname>apfel::P1nsm</compoundname>
+    <basecompoundref refid="classapfel_1_1P1nsp" prot="public" virt="non-virtual">apfel::P1nsp</basecompoundref>
+    <includes refid="splittingfunctions_8h" local="no">splittingfunctions.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1P1nsm_1a36a12101bab17fc4170e0cef8c42ae75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::P1nsm::P1nsm</definition>
+        <argsstring>(int const &amp;nf)</argsstring>
+        <name>P1nsm</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/splittingfunctions.h" line="118" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1P1nsm_1abd2a4d790fc5cc70671ee126487ac2dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double apfel::P1nsm::Regular</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>Regular</name>
+        <reimplements refid="classapfel_1_1P1nsp_1aba374b4ab1cfca9136558012aba29220">Regular</reimplements>
+        <param>
+          <type>double const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Virtual regular term. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The regular term at x </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/splittingfunctions.h" line="119" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Space-like O(<alpha/><subscript>s</subscript><superscript>2</superscript>) non-singlet-minus unpolarised splitting function. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="2">
+        <label>apfel::P1nsp</label>
+        <link refid="classapfel_1_1P1nsp"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::P1nsm</label>
+        <link refid="classapfel_1_1P1nsm"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>apfel::Expression</label>
+        <link refid="classapfel_1_1Expression"/>
+      </node>
+      <node id="2">
+        <label>apfel::P1nsp</label>
+        <link refid="classapfel_1_1P1nsp"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::P1nsm</label>
+        <link refid="classapfel_1_1P1nsm"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/splittingfunctions.h" line="115" column="3" bodyfile="inc/apfel/splittingfunctions.h" bodystart="116" bodyend="120"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1P1nsp_1ad0eb872f324f49a5b374b08bd5c56c45" prot="protected" virt="non-virtual"><scope>apfel::P1nsm</scope><name>_a2</name></member>
+      <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P1nsm</scope><name>_eta</name></member>
+      <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::P1nsm</scope><name>_extvar</name></member>
+      <member refid="classapfel_1_1P1nsp_1ae8ec64d60ce93d626ed82652a494fd34" prot="protected" virt="non-virtual"><scope>apfel::P1nsm</scope><name>_nf</name></member>
+      <member refid="classapfel_1_1Expression_1a8f6586afbb64fa96a47fdadf29daf994" prot="public" virt="non-virtual"><scope>apfel::P1nsm</scope><name>eta</name></member>
+      <member refid="classapfel_1_1Expression_1a49727bdb8ac6d6d68854e61a9a262e3d" prot="public" virt="non-virtual"><scope>apfel::P1nsm</scope><name>Expression</name></member>
+      <member refid="classapfel_1_1P1nsp_1ad37f02f2e9389d4bb87a2e905ec17979" prot="public" virt="virtual"><scope>apfel::P1nsm</scope><name>Local</name></member>
+      <member refid="classapfel_1_1P1nsm_1a36a12101bab17fc4170e0cef8c42ae75" prot="public" virt="non-virtual"><scope>apfel::P1nsm</scope><name>P1nsm</name></member>
+      <member refid="classapfel_1_1P1nsp_1ae2391b1f1bbf3702e01c32d054acc09e" prot="public" virt="non-virtual"><scope>apfel::P1nsm</scope><name>P1nsp</name></member>
+      <member refid="classapfel_1_1P1nsm_1abd2a4d790fc5cc70671ee126487ac2dc" prot="public" virt="virtual"><scope>apfel::P1nsm</scope><name>Regular</name></member>
+      <member refid="classapfel_1_1Expression_1af959cfade2e38ffd122112eab748d8ef" prot="public" virt="non-virtual"><scope>apfel::P1nsm</scope><name>SetExternalVariable</name></member>
+      <member refid="classapfel_1_1P1nsp_1a9bc7c20cb73a2df73c1181d2b5e2a805" prot="public" virt="virtual"><scope>apfel::P1nsm</scope><name>Singular</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

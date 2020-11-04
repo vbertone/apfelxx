@@ -62,6 +62,7 @@ namespace apfel
      * @brief Resizes the continer
      * @param size: the new size
      * @param value: the value used to fill in the additional (if any) slots
+     * @param imin: the lowest allowed index (default: 0)
      */
     void resize(int const& size, T const& value = 0, int const& imin = 0) { _imin = imin; _vector.resize(size, value); }
 

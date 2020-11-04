@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">[![CircleCI](https://circleci.com/gh/vbertone/apfelxx.svg?style=svg&amp;circle-token=079509ce5a2d4da15596d7812b33dca48eec8dc7)](https://circleci.com/gh/vbertone/apfelxx)</highlight></codeline>
+<codeline><highlight class="normal">[![CodeFactor](https://www.codefactor.io/repository/github/vbertone/apfelxx/badge)](https://www.codefactor.io/repository/github/vbertone/apfelxx)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![alt<sp/>text](https://github.com/vbertone/apfelxx/raw/master/resources/logo.png<sp/>&quot;Logo<sp/>APFEL&quot;)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>APFEL++:<sp/>A<sp/>PDF<sp/>evolution<sp/>library<sp/>in<sp/>C++</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight></codeline>
+<codeline><highlight class="normal">APFEL++<sp/>is<sp/>a<sp/>C++<sp/>rewriting<sp/>of<sp/>the<sp/>Fortran<sp/>77<sp/>evolution<sp/>code<sp/>APFEL<sp/>(see</highlight></codeline>
+<codeline><highlight class="normal">http://apfel.hepforge.org<sp/>and</highlight></codeline>
+<codeline><highlight class="normal">https://github.com/vbertone/apfel).<sp/>APFEL++<sp/>is<sp/>based<sp/>on<sp/>a<sp/>completely</highlight></codeline>
+<codeline><highlight class="normal">new<sp/>code<sp/>design<sp/>and<sp/>guarantees<sp/>a<sp/>better<sp/>performance<sp/>along<sp/>with<sp/>a<sp/>more</highlight></codeline>
+<codeline><highlight class="normal">optimal<sp/>memory<sp/>management.<sp/>The<sp/>new<sp/>modular<sp/>structure<sp/>allows<sp/>for</highlight></codeline>
+<codeline><highlight class="normal">better<sp/>maintainability<sp/>and<sp/>easier<sp/>extensibility.<sp/>This<sp/>makes<sp/>APFEL++</highlight></codeline>
+<codeline><highlight class="normal">suitable<sp/>for<sp/>a<sp/>wide<sp/>range<sp/>of<sp/>tasks:<sp/>from<sp/>the<sp/>solution<sp/>of<sp/>the<sp/>DGLAP</highlight></codeline>
+<codeline><highlight class="normal">evolution<sp/>equations<sp/>to<sp/>the<sp/>computation<sp/>of<sp/>deep-inelastic-scattering<sp/>(DIS)</highlight></codeline>
+<codeline><highlight class="normal">and<sp/>single-inclusive-annihilation<sp/>cross<sp/>sections.<sp/>Also<sp/>more</highlight></codeline>
+<codeline><highlight class="normal">complex<sp/>computations,<sp/>such<sp/>as<sp/>differential<sp/>semi-inclusive<sp/>DIS<sp/>and<sp/>Drell-Yan<sp/>cross</highlight></codeline>
+<codeline><highlight class="normal">sections,<sp/>are<sp/>easily<sp/>implementable<sp/>in<sp/>APFEL++.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Homebrew<sp/>(macOS)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">APFEL++<sp/>is<sp/>available<sp/>through<sp/>the<sp/>[Homebrew-hep](https://github.com/davidchall/homebrew-hep)<sp/>tap<sp/>of<sp/>[Homebrew](https://brew.sh).<sp/>After<sp/>having<sp/>installed<sp/>Homebrew<sp/>and<sp/>tapped<sp/>Homebrew-hep,<sp/>the<sp/>latest<sp/>stable<sp/>release<sp/>of<sp/>APFEL++<sp/>can<sp/>be<sp/>downloaded<sp/>and<sp/>installed<sp/>with:</highlight></codeline>
+<codeline><highlight class="normal">```Shell</highlight></codeline>
+<codeline><highlight class="normal">brew<sp/>install<sp/>apfelxx</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Download</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">You<sp/>can<sp/>obtain<sp/>APFEL++<sp/>directly<sp/>from<sp/>the<sp/>github<sp/>repository:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">https://github.com/vbertone/apfelxx/releases</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>the<sp/>latest<sp/>development<sp/>branch<sp/>you<sp/>can<sp/>clone<sp/>the<sp/>master<sp/>code:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```Shell</highlight></codeline>
+<codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/vbertone/apfelxx.git</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>you<sp/>instead<sp/>want<sp/>to<sp/>download<sp/>a<sp/>specific<sp/>tag:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```Shell</highlight></codeline>
+<codeline><highlight class="normal">git<sp/>tag<sp/>-l</highlight></codeline>
+<codeline><highlight class="normal">git<sp/>checkout<sp/>tags/tag_name</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Installation<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>code<sp/>can<sp/>be<sp/>compiled<sp/>using<sp/>the<sp/>following<sp/>procedure:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```Shell</highlight></codeline>
+<codeline><highlight class="normal">cd<sp/>apfelxx</highlight></codeline>
+<codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>-DCMAKE_INSTALL_PREFIX=/your/installation/path/<sp/>..</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>&amp;&amp;<sp/>make<sp/>install</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">By<sp/>the<sp/>default,<sp/>if<sp/>no<sp/>prefix<sp/>is<sp/>given,<sp/>the<sp/>program<sp/>will</highlight></codeline>
+<codeline><highlight class="normal">be<sp/>installed<sp/>in<sp/>the<sp/>/usr/local<sp/>folder.<sp/>If<sp/>you<sp/>want<sp/>(or<sp/>need)<sp/>to<sp/>use<sp/>a</highlight></codeline>
+<codeline><highlight class="normal">different<sp/>path,<sp/>remember<sp/>to<sp/>export<sp/>the<sp/>APFEL++<sp/>`/lib`<sp/>and<sp/>`/bin`<sp/>folders<sp/>into<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">`$LD_LIBRARY_PATH`<sp/>and<sp/>`$PATH`,<sp/>respectively.<sp/>More<sp/>configuration<sp/>options<sp/>can<sp/>be<sp/>accessed<sp/>by<sp/>typing:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```Shell</highlight></codeline>
+<codeline><highlight class="normal">ccmake<sp/>.</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Documentation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Code<sp/>documentation<sp/>generated<sp/>with<sp/>[Doxygen](https://www.doxygen.nl/index.html)<sp/>can<sp/>be<sp/>found<sp/>[here](https://vbertone.github.io/apfelxx/html/index.html).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Relevant<sp/>references</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>V.<sp/>Bertone,<sp/>*APFEL++:<sp/>A<sp/>new<sp/>PDF<sp/>evolution<sp/>library<sp/>in<sp/>C++*,<sp/>[arXiv:1708.00911](https://arxiv.org/pdf/1708.00911.pdf).</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>V.<sp/>Bertone,<sp/>S.<sp/>Carrazza,<sp/>J.<sp/>Rojo,<sp/>*APFEL:<sp/>A<sp/>PDF<sp/>Evolution<sp/>Library<sp/>with<sp/>QED<sp/>corrections*,<sp/>[arXiv:1310.1394](http://arxiv.org/abs/arXiv:1310.1394).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Contact<sp/>information</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

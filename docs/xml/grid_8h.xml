@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="grid_8h" kind="file" language="C++">
+    <compoundname>grid.h</compoundname>
+    <includes refid="subgrid_8h" local="yes">apfel/subgrid.h</includes>
+    <includes local="no">memory</includes>
+    <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
+    <includedby refid="dglapbuilder_8h" local="yes">inc/apfel/dglapbuilder.h</includedby>
+    <includedby refid="interpolator_8h" local="yes">inc/apfel/interpolator.h</includedby>
+    <includedby refid="operator_8h" local="yes">inc/apfel/operator.h</includedby>
+    <includedby refid="structurefunctionbuilder_8h" local="yes">inc/apfel/structurefunctionbuilder.h</includedby>
+    <includedby refid="tmdbuilder_8h" local="yes">inc/apfel/tmdbuilder.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>apfel/subgrid.h</label>
+        <link refid="subgrid_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="5">
+        <label>memory</label>
+      </node>
+      <node id="1">
+        <label>inc/apfel/grid.h</label>
+        <link refid="grid_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>inc/apfel/dglapbuilder.h</label>
+        <link refid="dglapbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>inc/apfel/interpolator.h</label>
+        <link refid="interpolator_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>inc/apfel/gpdbuilder.h</label>
+        <link refid="gpdbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>inc/apfel/operator.h</label>
+        <link refid="operator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+      <node id="6">
+        <label>inc/apfel/tmdbuilder.h</label>
+        <link refid="tmdbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>inc/apfel/initialiseevolution.h</label>
+        <link refid="initialiseevolution_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>inc/apfel/distribution.h</label>
+        <link refid="distribution_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>inc/apfel/lagrangeinterpolator.h</label>
+        <link refid="lagrangeinterpolator_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>inc/apfel/rotations.h</label>
+        <link refid="rotations_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>inc/apfel/structurefunctionbuilder.h</label>
+        <link refid="structurefunctionbuilder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>inc/apfel/observable.h</label>
+        <link refid="observable_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/apfel/grid.h</label>
+        <link refid="grid_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>inc/apfel/dglap.h</label>
+        <link refid="dglap_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classapfel_1_1Grid" prot="public">apfel::Grid</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="subgrid_8h" kindref="compound">apfel/subgrid.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21" refid="classapfel_1_1Grid" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="28" refid="classapfel_1_1Grid_1a8d0a7149e5dda7870cc7a7a9f312ef61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Grid_1a8d0a7149e5dda7870cc7a7a9f312ef61" kindref="member">Grid</ref>(std::vector&lt;SubGrid&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>grs);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"></codeline>
+<codeline lineno="37" refid="classapfel_1_1Grid_1a633e5058782ac5f774fba183606fa478" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1a633e5058782ac5f774fba183606fa478" kindref="member">nGrids</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" kindref="member">_GlobalGrid</ref>.size();<sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classapfel_1_1Grid_1afde71f2776250114ea25fafaef1363c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;int,<sp/>int&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Grid_1afde71f2776250114ea25fafaef1363c0" kindref="member">SubToJointMap</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1a33e3f6558476bc799789c4e7a092cb78" kindref="member">_SubToJointMap</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="classapfel_1_1Grid_1accb9c73af4dde4166cef009d331935e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::vector&lt;int&gt;&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Grid_1accb9c73af4dde4166cef009d331935e3" kindref="member">JointToSubMap</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1ad15501a23ccbfc0ce20dfacfee308188" kindref="member">_JointToSubMap</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classapfel_1_1Grid_1abc12ef7438d51b5e125ac6f80fda5a50" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;SubGrid&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Grid_1abc12ef7438d51b5e125ac6f80fda5a50" kindref="member">GetSubGrids</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" kindref="member">_GlobalGrid</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="classapfel_1_1Grid_1a5d2c4011b5ba8c1e752229b558793fee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Grid_1a5d2c4011b5ba8c1e752229b558793fee" kindref="member">GetSubGrid</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ig)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" kindref="member">_GlobalGrid</ref>[ig];<sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="classapfel_1_1Grid_1abecc758efa56ba7d5cc4fa1fce2c57c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classapfel_1_1Grid_1abecc758efa56ba7d5cc4fa1fce2c57c8" kindref="member">GetJointGrid</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classapfel_1_1Grid_1a9144e68087d69ad9239f76093b63a772" kindref="member">_JointGrid</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="64"></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1ad46611474e00985adaf48899ae4089f2" kindref="member">operator == </ref>(<ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>g)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71" refid="classapfel_1_1Grid_1a6b7746f3e57aa280d49279660eacee77" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Grid_1a6b7746f3e57aa280d49279660eacee77" kindref="member">operator != </ref>(<ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>g)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="80" refid="classapfel_1_1Grid_1a8a12837ed78aa281b3cbba10be175092" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1SubGrid" kindref="compound">SubGrid</ref><sp/><ref refid="classapfel_1_1Grid_1a8a12837ed78aa281b3cbba10be175092" kindref="member">CreateJointGrid</ref>();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="83" refid="classapfel_1_1Grid_1a33e3f6558476bc799789c4e7a092cb78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;int,<sp/>int&gt;&gt;<sp/><ref refid="classapfel_1_1Grid_1a33e3f6558476bc799789c4e7a092cb78" kindref="member">_SubToJointMap</ref>;<sp/></highlight></codeline>
+<codeline lineno="84" refid="classapfel_1_1Grid_1ad15501a23ccbfc0ce20dfacfee308188" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::vector&lt;int&gt;&gt;<sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Grid_1ad15501a23ccbfc0ce20dfacfee308188" kindref="member">_JointToSubMap</ref>;<sp/></highlight></codeline>
+<codeline lineno="85" refid="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;SubGrid&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Grid_1ae21efbaa383663c4459f40d42f505daf" kindref="member">_GlobalGrid</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="86" refid="classapfel_1_1Grid_1a9144e68087d69ad9239f76093b63a772" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;SubGrid&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1Grid_1a9144e68087d69ad9239f76093b63a772" kindref="member">_JointGrid</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="classapfel_1_1Grid_1aa4b2c002d87b2a20957f2832e312b39f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>std::ostream&amp;<sp/><ref refid="classapfel_1_1Grid_1aa4b2c002d87b2a20957f2832e312b39f" kindref="member">operator &lt;&lt; </ref>(std::ostream&amp;<sp/>os,<sp/><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gr);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="namespaceapfel_1abc23ca5eae2ff193a815b82a1a3777f2" refkind="member"><highlight class="normal"><sp/><sp/>std::ostream&amp;<sp/><ref refid="namespaceapfel_1aad760dd7b28bd075301f12e8c0908d31" kindref="member">operator &lt;&lt; </ref>(std::ostream&amp;<sp/>os,<sp/><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>gr);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/grid.h"/>
+  </compounddef>
+</doxygen>

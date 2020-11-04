@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1MatchingOperatorBasisQCD" kind="class" language="C++" prot="public">
+    <compoundname>apfel::MatchingOperatorBasisQCD</compoundname>
+    <basecompoundref refid="classapfel_1_1ConvolutionMap" prot="public" virt="non-virtual">apfel::ConvolutionMap</basecompoundref>
+    <includes refid="matchingbasisqcd_8h" local="no">matchingbasisqcd.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1MatchingOperatorBasisQCD_1a891d84b83ee0ecc589a5f3833e54852f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::MatchingOperatorBasisQCD::MatchingOperatorBasisQCD</definition>
+        <argsstring>(int const &amp;nf)</argsstring>
+        <name>MatchingOperatorBasisQCD</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nf</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1MatchingOperatorBasisQCD" kindref="compound">MatchingOperatorBasisQCD</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of active flavours </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/matchingbasisqcd.h" line="58" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1MatchingOperatorBasisQCD" kindref="compound">MatchingOperatorBasisQCD</ref> class is a derived of <ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> specialised for the matching of the evolution of operators at the heavy-quark thresholds using the QCD evolution basis. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+      </node>
+      <node id="1">
+        <label>apfel::MatchingOperatorBasisQCD</label>
+        <link refid="classapfel_1_1MatchingOperatorBasisQCD"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>apfel::ConvolutionMap</label>
+        <link refid="classapfel_1_1ConvolutionMap"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_rules</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; apfel::ConvolutionMap::rule &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::map&lt; int, std::vector&lt; apfel::ConvolutionMap::rule &gt; &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>apfel::MatchingOperatorBasisQCD</label>
+        <link refid="classapfel_1_1MatchingOperatorBasisQCD"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>apfel::ConvolutionMap::rule</label>
+        <link refid="structapfel_1_1ConvolutionMap_1_1rule"/>
+      </node>
+      <node id="6">
+        <label>std::string</label>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/matchingbasisqcd.h" line="51" column="3" bodyfile="inc/apfel/matchingbasisqcd.h" bodystart="52" bodyend="59"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1ConvolutionMap_1a291fc7fd16bb766e49cb0f6064040100" prot="protected" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>_name</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1af09aefa369acec757323cb45493d5aeb" prot="protected" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>_rules</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a0f602872988c9ec3286bd30c66a92cf7" prot="public" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>ConvolutionMap</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a4b38dc94dfe93316bdcc966dc9bd9039" prot="public" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>GetName</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1ae7d6672bb6ff5c242227570bac638fb9" prot="public" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>GetRuleIndices</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1aa74a4ecc6ecf40f75f04239aaa819666" prot="public" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>GetRuleMatrix</name></member>
+      <member refid="classapfel_1_1ConvolutionMap_1a5bd9105aadb8c0d8cbf19e712e31bb57" prot="public" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>GetRules</name></member>
+      <member refid="classapfel_1_1MatchingOperatorBasisQCD_1a891d84b83ee0ecc589a5f3833e54852f" prot="public" virt="non-virtual"><scope>apfel::MatchingOperatorBasisQCD</scope><name>MatchingOperatorBasisQCD</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="matchingbasisqcd_8h" kind="file" language="C++">
+    <compoundname>matchingbasisqcd.h</compoundname>
+    <includes refid="convolutionmap_8h" local="yes">apfel/convolutionmap.h</includes>
+    <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>apfel/matrix.h</label>
+        <link refid="matrix_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>inc/apfel/matchingbasisqcd.h</label>
+        <link refid="matchingbasisqcd_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="5">
+        <label>array</label>
+      </node>
+      <node id="2">
+        <label>apfel/convolutionmap.h</label>
+        <link refid="convolutionmap_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>inc/apfel/matchingbasisqcd.h</label>
+        <link refid="matchingbasisqcd_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inc/apfel/apfelxx.h</label>
+        <link refid="apfelxx_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classapfel_1_1MatchingBasisQCD" prot="public">apfel::MatchingBasisQCD</innerclass>
+    <innerclass refid="classapfel_1_1MatchingOperatorBasisQCD" prot="public">apfel::MatchingOperatorBasisQCD</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="convolutionmap_8h" kindref="compound">apfel/convolutionmap.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"></codeline>
+<codeline lineno="27" refid="classapfel_1_1MatchingBasisQCD" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1MatchingBasisQCD" kindref="compound">MatchingBasisQCD</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="34" refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72" kindref="member">Operand</ref>:<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72ae961a2e71d06630a034d6e0808da18c7" kindref="member">M0</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72a836f4224dbb5b51ba7f4063ce0257529" kindref="member">M1</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72ab6ae18cce2c6aa7c1d2e9bd516458c79" kindref="member">M2</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72a06dca57d31fa978197331563cc99292d" kindref="member">M3</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72a489d61e502cc41fbfd724dd37619f2fb" kindref="member">M4</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72af7a2b41c8c76692f58e3684054e36231" kindref="member">M5</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72ad23b353aaa3122eb8ae88db3a58ae021" kindref="member">M6</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a44c41cfe8e3f1e7be27f879b4161ab72a6af05be6dc4081963c09c836c943f296" kindref="member">M7</ref>};</highlight></codeline>
+<codeline lineno="35" refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831a057c70e1c6a70cfcb3f9a83949d1f924" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831" kindref="member">Object</ref>:<sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{<ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831a01390ae55b8aa69fc13de0f31486147b" kindref="member">GLUON</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831aed23e22ca1d4730590230ec71cec699f" kindref="member">SIGMA</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831a057c70e1c6a70cfcb3f9a83949d1f924" kindref="member">VALENCE</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831a841a1474739e05d308c21f9b10867d21" kindref="member">T3</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831ae952f6097275c9dc2e6238d1734988fb" kindref="member">V3</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831acd4d3168b39d377d845810daf10b7264" kindref="member">T8</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831a22c9f5083cf0ae70d786d98d2506185f" kindref="member">V8</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831ac4fa0366e99a68008e08c850c457e72c" kindref="member">T15</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831aba9f5a03297daafb2ea7d4455f6e3657" kindref="member">V15</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831ab7b49bf11644a51811adf696d0fae3d7" kindref="member">T24</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831a8d2c3815ee21a48c1a1a1cb9977ce317" kindref="member">V24</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831aba9e1a0392d1f71399fb7134264a8b0a" kindref="member">T35</ref>,<sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a662d45066a92fc8f8c6deda77b429831af73b81e775f635a1ebe7fd205ea3c774" kindref="member">V35</ref>};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classapfel_1_1MatchingBasisQCD_1a9dc8f980a586c204b52dfff6626b78ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1MatchingBasisQCD_1a9dc8f980a586c204b52dfff6626b78ae" kindref="member">MatchingBasisQCD</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>nf);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="classapfel_1_1MatchingOperatorBasisQCD" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1MatchingOperatorBasisQCD" kindref="compound">MatchingOperatorBasisQCD</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="58" refid="classapfel_1_1MatchingOperatorBasisQCD_1a891d84b83ee0ecc589a5f3833e54852f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1MatchingOperatorBasisQCD_1a891d84b83ee0ecc589a5f3833e54852f" kindref="member">MatchingOperatorBasisQCD</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>nf);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/matchingbasisqcd.h"/>
+  </compounddef>
+</doxygen>

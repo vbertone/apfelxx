@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="structapfel_1_1LHKnotArray" kind="struct" language="C++" prot="public">
+    <compoundname>apfel::LHKnotArray</compoundname>
+    <includes refid="initialiseevolution_8h" local="no">initialiseevolution.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structapfel_1_1LHKnotArray_1aca33fa03b0ca059cc5f1f7011cadc233" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::LHKnotArray::xs</definition>
+        <argsstring></argsstring>
+        <name>xs</name>
+        <briefdescription>
+<para>List of x knots. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="23" column="17" bodyfile="inc/apfel/initialiseevolution.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapfel_1_1LHKnotArray_1a046277f51b173abadb78d49ec1f3bca6" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::LHKnotArray::q2s</definition>
+        <argsstring></argsstring>
+        <name>q2s</name>
+        <briefdescription>
+<para>List of Q2 knots. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="24" column="17" bodyfile="inc/apfel/initialiseevolution.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapfel_1_1LHKnotArray_1ab8f6192839b549ee0db4c50ab78f9d1a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::LHKnotArray::xfs</definition>
+        <argsstring></argsstring>
+        <name>xfs</name>
+        <briefdescription>
+<para>List of xf values across the 2D knot array, stored as a strided [ix][iQ2] 1D array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/initialiseevolution.h" line="25" column="17" bodyfile="inc/apfel/initialiseevolution.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="structapfel_1_1LHKnotArray" kindref="compound">LHKnotArray</ref> structure emulates the KnotArray1F class of LHAPDF and contains the grids in x, Q2 (only a given subgrid), and one single distribution tabulated on the (x,Q) bidimensional grid. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::vector&lt; double &gt;</label>
+      </node>
+      <node id="1">
+        <label>apfel::LHKnotArray</label>
+        <link refid="structapfel_1_1LHKnotArray"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>q2s</edgelabel>
+          <edgelabel>xfs</edgelabel>
+          <edgelabel>xs</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="inc/apfel/initialiseevolution.h" line="21" column="3" bodyfile="inc/apfel/initialiseevolution.h" bodystart="22" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structapfel_1_1LHKnotArray_1a046277f51b173abadb78d49ec1f3bca6" prot="public" virt="non-virtual"><scope>apfel::LHKnotArray</scope><name>q2s</name></member>
+      <member refid="structapfel_1_1LHKnotArray_1ab8f6192839b549ee0db4c50ab78f9d1a" prot="public" virt="non-virtual"><scope>apfel::LHKnotArray</scope><name>xfs</name></member>
+      <member refid="structapfel_1_1LHKnotArray_1aca33fa03b0ca059cc5f1f7011cadc233" prot="public" virt="non-virtual"><scope>apfel::LHKnotArray</scope><name>xs</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

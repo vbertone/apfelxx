@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="classapfel_1_1Observable" kind="class" language="C++" prot="public">
+    <compoundname>apfel::Observable</compoundname>
+    <includes refid="observable_8h" local="no">observable.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref></defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Functions that evaluate the the observable at the scale</header>
+      <description><para>Q. </para>
+</description>
+      <memberdef kind="function" id="classapfel_1_1Observable_1a8fe77b5f778b6dbdaf0883f1f83d7ff5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>T</type>
+        <definition>T apfel::Observable&lt; T &gt;::Evaluate</definition>
+        <argsstring>(double const &amp;Q) const</argsstring>
+        <name>Evaluate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>This function returns the observable as a distribution. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the scale where the observable has to be evaluated </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the observable in Q as a distribution </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="43" column="7"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Observable_1a80a53ffb175af2a1517c91601f1c1b20" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double apfel::Observable&lt; T &gt;::Evaluate</definition>
+        <argsstring>(double const &amp;x, double const &amp;Q) const</argsstring>
+        <name>Evaluate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>This function returns the observable in Q interpolated in x. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the value to be interpolate on the x-space grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the scale where the observable has to be evaluated </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the observable in Q interpolated in x </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="51" column="12"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classapfel_1_1Observable_1a34a42b06ee3c68e7af33218e0d827c86" prot="private" static="no" mutable="no">
+        <type>std::function&lt; <ref refid="classapfel_1_1Set" kindref="compound">Set</ref>&lt; <ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref> &gt;double const  &amp;)&gt;</type>
+        <definition>std::function&lt;Set&lt;Operator&gt;double const&amp;)&gt; apfel::Observable&lt; T &gt;::_CoefficientFunctions</definition>
+        <argsstring></argsstring>
+        <name>_CoefficientFunctions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="68" column="21" bodyfile="inc/apfel/observable.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classapfel_1_1Observable_1ae246a1c57ff8c621fc0cec85a3da7c2e" prot="private" static="no" mutable="no">
+        <type>std::function&lt; <ref refid="classapfel_1_1Set" kindref="compound">Set</ref>&lt; T &gt;double const  &amp;)&gt;</type>
+        <definition>std::function&lt;Set&lt;T&gt;double const&amp;)&gt; apfel::Observable&lt; T &gt;::_Objects</definition>
+        <argsstring></argsstring>
+        <name>_Objects</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="69" column="28" bodyfile="inc/apfel/observable.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classapfel_1_1Observable_1a25afa815010dd18f8b1ab5f47a4d9180" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::Observable&lt; T &gt;::Observable</definition>
+        <argsstring>()=delete</argsstring>
+        <name>Observable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Observable_1af9a5530cd96a831386509d4e9a7e51fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>apfel::Observable&lt; T &gt;::Observable</definition>
+        <argsstring>(std::function&lt; Set&lt; Operator &gt;(double const &amp;)&gt; const &amp;CoefficientFunctions, std::function&lt; Set&lt; T &gt;(double const &amp;)&gt; const &amp;Objects)</argsstring>
+        <name>Observable</name>
+        <param>
+          <type>std::function&lt; <ref refid="classapfel_1_1Set" kindref="compound">Set</ref>&lt; <ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref> &gt;(double const &amp;)&gt; const &amp;</type>
+          <declname>CoefficientFunctions</declname>
+        </param>
+        <param>
+          <type>std::function&lt; <ref refid="classapfel_1_1Set" kindref="compound">Set</ref>&lt; T &gt;(double const &amp;)&gt; const &amp;</type>
+          <declname>Objects</declname>
+        </param>
+        <briefdescription>
+<para>The <ref refid="classapfel_1_1Observable" kindref="compound">Observable</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>CoefficientFunctions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a Set&lt;Operator&gt;-valued function returning the operators </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Objects</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a Set&lt;T&gt;-valued function returning the relevant object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Observable_1acb35497758b18f38416cfc28be4056ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void apfel::Observable&lt; T &gt;::SetObjects</definition>
+        <argsstring>(std::function&lt; Set&lt; T &gt;(double const &amp;)&gt; const &amp;Objects)</argsstring>
+        <name>SetObjects</name>
+        <param>
+          <type>std::function&lt; <ref refid="classapfel_1_1Set" kindref="compound">Set</ref>&lt; T &gt;(double const &amp;)&gt; const &amp;</type>
+          <declname>Objects</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classapfel_1_1Set" kindref="compound">Set</ref> the set of ditributions keeping the same set of coefficient functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Objects</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new set of objects </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="59" column="10" bodyfile="inc/apfel/observable.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classapfel_1_1Observable_1aa991bce4f0294b874220ab39621bf620" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::function&lt; <ref refid="classapfel_1_1Set" kindref="compound">Set</ref>&lt; <ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref> &gt;double const  &amp;)&gt;</type>
+        <definition>std::function&lt;Set&lt;Operator&gt;double const&amp;)&gt; apfel::Observable&lt; T &gt;::GetCoefficientFunctions</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCoefficientFunctions</name>
+        <briefdescription>
+<para>Get the set of coefficient functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the set of coefficient functions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/observable.h" line="65" column="21" bodyfile="inc/apfel/observable.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classapfel_1_1Observable" kindref="compound">Observable</ref> class encapsulates sets of operators and sets of operators for an easy computation of observebles deriving from the covolution of the two. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="inc/apfel/observable.h" line="20" column="3" bodyfile="inc/apfel/observable.h" bodystart="21" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classapfel_1_1Observable_1a34a42b06ee3c68e7af33218e0d827c86" prot="private" virt="non-virtual"><scope>apfel::Observable</scope><name>_CoefficientFunctions</name></member>
+      <member refid="classapfel_1_1Observable_1ae246a1c57ff8c621fc0cec85a3da7c2e" prot="private" virt="non-virtual"><scope>apfel::Observable</scope><name>_Objects</name></member>
+      <member refid="classapfel_1_1Observable_1a8fe77b5f778b6dbdaf0883f1f83d7ff5" prot="public" virt="non-virtual"><scope>apfel::Observable</scope><name>Evaluate</name></member>
+      <member refid="classapfel_1_1Observable_1a80a53ffb175af2a1517c91601f1c1b20" prot="public" virt="non-virtual"><scope>apfel::Observable</scope><name>Evaluate</name></member>
+      <member refid="classapfel_1_1Observable_1aa991bce4f0294b874220ab39621bf620" prot="public" virt="non-virtual"><scope>apfel::Observable</scope><name>GetCoefficientFunctions</name></member>
+      <member refid="classapfel_1_1Observable_1a25afa815010dd18f8b1ab5f47a4d9180" prot="public" virt="non-virtual"><scope>apfel::Observable</scope><name>Observable</name></member>
+      <member refid="classapfel_1_1Observable_1af9a5530cd96a831386509d4e9a7e51fe" prot="public" virt="non-virtual"><scope>apfel::Observable</scope><name>Observable</name></member>
+      <member refid="classapfel_1_1Observable_1acb35497758b18f38416cfc28be4056ed" prot="public" virt="non-virtual"><scope>apfel::Observable</scope><name>SetObjects</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
