@@ -5,7 +5,7 @@
 //
 
 #include <apfel/apfelxx.h>
-#include <apfel/splittingfunctions.h>
+#include <apfel/splittingfunctionsunp_sl.h>
 
 #include <cmath>
 #include <map>
@@ -25,18 +25,17 @@ int main()
   t.start();
   std::map<int, std::map<int, apfel::Operator>> OpMap;
   const apfel::Operator O0ns{g, apfel::P0ns{}};
-  const apfel::Operator O0qg{g, apfel::P0qg{}};
   const apfel::Operator O0gq{g, apfel::P0gq{}};
   for (int nf = 3; nf <= 6; nf++)
     {
+      const apfel::Operator O0qg{g, apfel::P0qg{nf}};
       const apfel::Operator O0gg{g, apfel::P0gg{nf}};
-      const apfel::Operator O0qgnf = nf * O0qg;
       std::map<int, apfel::Operator> OM;
       OM.insert({apfel::EvolutionBasisQCD::PNSP,O0ns});
       OM.insert({apfel::EvolutionBasisQCD::PNSM,O0ns});
       OM.insert({apfel::EvolutionBasisQCD::PNSV,O0ns});
       OM.insert({apfel::EvolutionBasisQCD::PQQ, O0ns});
-      OM.insert({apfel::EvolutionBasisQCD::PQG, O0qgnf});
+      OM.insert({apfel::EvolutionBasisQCD::PQG, O0qg});
       OM.insert({apfel::EvolutionBasisQCD::PGQ, O0gq});
       OM.insert({apfel::EvolutionBasisQCD::PGG, O0gg});
       OpMap.insert({nf,OM});

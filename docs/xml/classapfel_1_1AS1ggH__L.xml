@@ -3,7 +3,7 @@
   <compounddef id="classapfel_1_1AS1ggH__L" kind="class" language="C++" prot="public">
     <compoundname>apfel::AS1ggH_L</compoundname>
     <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
-    <includes refid="matchingconditions_8h" local="no">matchingconditions.h</includes>
+    <includes refid="matchingconditions__sl_8h" local="no">matchingconditions_sl.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classapfel_1_1AS1ggH__L_1a24e2235b77eb79c01aada58bd43a3a83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/matchingconditions.h" line="47" column="5"/>
+        <location file="inc/apfel/matchingconditions_sl.h" line="47" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1AS1ggH__L_1a9b2bd41046353ff7d78945a191359f6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/matchingconditions.h" line="48" column="12"/>
+        <location file="inc/apfel/matchingconditions_sl.h" line="48" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -69,7 +69,7 @@
         <link refid="classapfel_1_1Expression"/>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/matchingconditions.h" line="44" column="3" bodyfile="inc/apfel/matchingconditions.h" bodystart="45" bodyend="49"/>
+    <location file="inc/apfel/matchingconditions_sl.h" line="44" column="3" bodyfile="inc/apfel/matchingconditions_sl.h" bodystart="45" bodyend="49"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::AS1ggH_L</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::AS1ggH_L</scope><name>_extvar</name></member>

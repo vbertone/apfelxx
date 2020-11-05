@@ -11,10 +11,10 @@
 namespace apfel
 {
   /**
-   * @defgroup SLSplittings Space-like splitting function
-   * Collection of the MSbar space-like splitting functions up to the
-   * highest order currently known for unpolarised, polarised (not
-   * yet!), and transversity evolution.
+   * @defgroup SLSplittings Space-like splitting function Collection
+   * of the MSbar space-like splitting functions up to the highest
+   * order currently known for unpolarised, polarised, and
+   * transversity evolution.
    * @note While for the O(&alpha;<SUB>s</SUB>) and
    * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) splitting functions exact
    * expressions are used, a fast parameterisation for the
@@ -56,8 +56,10 @@ namespace apfel
   class P0qg: public Expression
   {
   public:
-    P0qg();
+    P0qg(int const& nf);
     double Regular(double const& x) const;
+  private:
+    int const _nf;
   };
 
   /**
@@ -331,65 +333,6 @@ namespace apfel
   private:
     int const _nf;
     int const _imod;
-  };
-  ///@}
-
-  /**
-   * @defgroup TransSF Transversely polarised splitting functions
-   * @ingroup SLSplittings
-   * @note Reference https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
-   */
-  ///@{
-  ///@}
-  /**
-   * @defgroup LOtranssf LO splitting functions
-   * @ingroup TransSF
-   */
-  ///@{
-  /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB>) non-singlet transversely polarised
-   * splitting function.
-   */
-  class P0transns: public Expression
-  {
-  public:
-    P0transns();
-    double Regular(double const&)    const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  };
-  ///@}
-
-  /**
-   * @defgroup NLOtranssf NLO splitting functions
-   * @ingroup TransSF
-   */
-  ///@{
-  /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-plus
-   * transversely polarised splitting function.
-   */
-  class P1transnsp: public Expression
-  {
-  public:
-    P1transnsp(int const& nf);
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  protected:
-    int const _nf;
-    double    _a2;
-  };
-
-  /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) non-singlet-minus
-   * transversely polarised splitting function.
-   */
-  class P1transnsm: public P1transnsp
-  {
-  public:
-    P1transnsm(int const& nf);
-    double Regular(double const& x) const;
   };
   ///@}
 }

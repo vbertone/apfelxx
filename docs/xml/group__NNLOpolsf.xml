@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NNLOpolsf" kind="group">
+    <compoundname>NNLOpolsf</compoundname>
+    <title>NNLO splitting functions</title>
+    <innerclass refid="classapfel_1_1P2polnsp" prot="public">apfel::P2polnsp</innerclass>
+    <innerclass refid="classapfel_1_1P2polnsm" prot="public">apfel::P2polnsm</innerclass>
+    <innerclass refid="classapfel_1_1P2polnss" prot="public">apfel::P2polnss</innerclass>
+    <innerclass refid="classapfel_1_1P2polps" prot="public">apfel::P2polps</innerclass>
+    <innerclass refid="classapfel_1_1P2polqg" prot="public">apfel::P2polqg</innerclass>
+    <innerclass refid="classapfel_1_1P2polgq" prot="public">apfel::P2polgq</innerclass>
+    <innerclass refid="classapfel_1_1P2polgg" prot="public">apfel::P2polgg</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

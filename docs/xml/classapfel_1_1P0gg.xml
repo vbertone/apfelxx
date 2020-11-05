@@ -3,7 +3,7 @@
   <compounddef id="classapfel_1_1P0gg" kind="class" language="C++" prot="public">
     <compoundname>apfel::P0gg</compoundname>
     <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
-    <includes refid="splittingfunctions_8h" local="no">splittingfunctions.h</includes>
+    <includes refid="splittingfunctionsunp__sl_8h" local="no">splittingfunctionsunp_sl.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classapfel_1_1P0gg_1accb2403a7f7c0ca90e809934baac0096" prot="private" static="no" mutable="no">
         <type>int const</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="86" column="15" bodyfile="inc/apfel/splittingfunctions.h" bodystart="86" bodyend="-1"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="88" column="15" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="81" column="5"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="83" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P0gg_1adcc90f440a539a9b553cbf5c492d7467" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="82" column="12"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="84" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P0gg_1afacbd4cbb88144d9bdcf287ff2a0cddd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="83" column="12"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="85" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P0gg_1ab8c371efdfab9da5964e63ec25242400" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="84" column="12"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="86" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -130,7 +130,7 @@
         <link refid="classapfel_1_1Expression"/>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/splittingfunctions.h" line="78" column="3" bodyfile="inc/apfel/splittingfunctions.h" bodystart="79" bodyend="87"/>
+    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="80" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="81" bodyend="89"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P0gg</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::P0gg</scope><name>_extvar</name></member>

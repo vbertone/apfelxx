@@ -4,7 +4,7 @@
     <compoundname>apfel::P1transnsp</compoundname>
     <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
     <derivedcompoundref refid="classapfel_1_1P1transnsm" prot="public" virt="non-virtual">apfel::P1transnsm</derivedcompoundref>
-    <includes refid="splittingfunctions_8h" local="no">splittingfunctions.h</includes>
+    <includes refid="splittingfunctionstrans__sl_8h" local="no">splittingfunctionstrans_sl.h</includes>
       <sectiondef kind="protected-attrib">
       <memberdef kind="variable" id="classapfel_1_1P1transnsp_1a267a2f26afb65af38a85d44fef5f6650" prot="protected" static="no" mutable="no">
         <type>int const</type>
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="380" column="15" bodyfile="inc/apfel/splittingfunctions.h" bodystart="380" bodyend="-1"/>
+        <location file="inc/apfel/splittingfunctionstrans_sl.h" line="56" column="15" bodyfile="inc/apfel/splittingfunctionstrans_sl.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classapfel_1_1P1transnsp_1aaf85b5327035ed14653978da017f4d5b" prot="protected" static="no" mutable="no">
         <type>double</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="381" column="15" bodyfile="inc/apfel/splittingfunctions.h" bodystart="381" bodyend="-1"/>
+        <location file="inc/apfel/splittingfunctionstrans_sl.h" line="57" column="15" bodyfile="inc/apfel/splittingfunctionstrans_sl.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="375" column="5"/>
+        <location file="inc/apfel/splittingfunctionstrans_sl.h" line="51" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P1transnsp_1a55ed864a6dbedd0bf1881ba61a522a9f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="376" column="12"/>
+        <location file="inc/apfel/splittingfunctionstrans_sl.h" line="52" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P1transnsp_1a76e6d3dc06327191b84d57de09e95cdf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="377" column="12"/>
+        <location file="inc/apfel/splittingfunctionstrans_sl.h" line="53" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P1transnsp_1ac8b486794b444943fea3ed45c1dabd98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions.h" line="378" column="12"/>
+        <location file="inc/apfel/splittingfunctionstrans_sl.h" line="54" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -151,7 +151,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/splittingfunctions.h" line="372" column="3" bodyfile="inc/apfel/splittingfunctions.h" bodystart="373" bodyend="382"/>
+    <location file="inc/apfel/splittingfunctionstrans_sl.h" line="48" column="3" bodyfile="inc/apfel/splittingfunctionstrans_sl.h" bodystart="49" bodyend="58"/>
     <listofallmembers>
       <member refid="classapfel_1_1P1transnsp_1aaf85b5327035ed14653978da017f4d5b" prot="protected" virt="non-virtual"><scope>apfel::P1transnsp</scope><name>_a2</name></member>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P1transnsp</scope><name>_eta</name></member>

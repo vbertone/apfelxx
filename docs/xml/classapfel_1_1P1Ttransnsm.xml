@@ -3,7 +3,7 @@
   <compounddef id="classapfel_1_1P1Ttransnsm" kind="class" language="C++" prot="public">
     <compoundname>apfel::P1Ttransnsm</compoundname>
     <basecompoundref refid="classapfel_1_1P1Ttransnsp" prot="public" virt="non-virtual">apfel::P1Ttransnsp</basecompoundref>
-    <includes refid="splittingfunctions__tl_8h" local="no">splittingfunctions_tl.h</includes>
+    <includes refid="splittingfunctionstrans__tl_8h" local="no">splittingfunctionstrans_tl.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classapfel_1_1P1Ttransnsm_1a498da79a511d89d9da172e45b2197176" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions_tl.h" line="334" column="5"/>
+        <location file="inc/apfel/splittingfunctionstrans_tl.h" line="67" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P1Ttransnsm_1a8ef8439ada90efb3bb945c5f9cef2945" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctions_tl.h" line="335" column="12"/>
+        <location file="inc/apfel/splittingfunctionstrans_tl.h" line="68" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -85,7 +85,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/splittingfunctions_tl.h" line="331" column="3" bodyfile="inc/apfel/splittingfunctions_tl.h" bodystart="332" bodyend="336"/>
+    <location file="inc/apfel/splittingfunctionstrans_tl.h" line="64" column="3" bodyfile="inc/apfel/splittingfunctionstrans_tl.h" bodystart="65" bodyend="69"/>
     <listofallmembers>
       <member refid="classapfel_1_1P1Ttransnsp_1a0d53c572b00b5f2a51423f182bf58515" prot="protected" virt="non-virtual"><scope>apfel::P1Ttransnsm</scope><name>_a2</name></member>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P1Ttransnsm</scope><name>_eta</name></member>

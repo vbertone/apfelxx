@@ -2,13 +2,14 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
   <compounddef id="group__SLSplittings" kind="group">
     <compoundname>SLSplittings</compoundname>
-    <title>Space-like splitting function</title>
-    <innergroup refid="group__UnpSF">Unpolarised splitting functions</innergroup>
+    <title>Space-like splitting function Collection</title>
+    <innergroup refid="group__PolSF">Longitudinally polarised splitting functions</innergroup>
     <innergroup refid="group__TransSF">Transversely polarised splitting functions</innergroup>
+    <innergroup refid="group__UnpSF">Unpolarised splitting functions</innergroup>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>Collection of the MSbar space-like splitting functions up to the highest order currently known for unpolarised, polarised (not yet!), and transversity evolution. <simplesect kind="note"><para>While for the O(<alpha/><subscript>s</subscript>) and O(<alpha/><subscript>s</subscript><superscript>2</superscript>) splitting functions exact expressions are used, a fast parameterisation for the O(<alpha/><subscript>s</subscript><superscript>3</superscript>) (and O(<alpha/><subscript>s</subscript><superscript>4</superscript>) when available) ones is used. See <ulink url="https://www.liverpool.ac.uk/~avogt/split.html">https://www.liverpool.ac.uk/~avogt/split.html</ulink> for more details. </para>
+<para>of the MSbar space-like splitting functions up to the highest order currently known for unpolarised, polarised, and transversity evolution. <simplesect kind="note"><para>While for the O(<alpha/><subscript>s</subscript>) and O(<alpha/><subscript>s</subscript><superscript>2</superscript>) splitting functions exact expressions are used, a fast parameterisation for the O(<alpha/><subscript>s</subscript><superscript>3</superscript>) (and O(<alpha/><subscript>s</subscript><superscript>4</superscript>) when available) ones is used. See <ulink url="https://www.liverpool.ac.uk/~avogt/split.html">https://www.liverpool.ac.uk/~avogt/split.html</ulink> for more details. </para>
 </simplesect>
 </para>
     </detaileddescription>

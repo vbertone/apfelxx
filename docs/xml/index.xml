@@ -1033,8 +1033,28 @@
     <member refid="classapfel_1_1P0ns_1a10a55082f7e2c05f37d0263a8592b53f" kind="function"><name>Singular</name></member>
     <member refid="classapfel_1_1P0ns_1a5324746e2b9c751cb08212a215520adc" kind="function"><name>Local</name></member>
   </compound>
+  <compound refid="classapfel_1_1P0polgg" kind="class"><name>apfel::P0polgg</name>
+    <member refid="classapfel_1_1P0polgg_1a011665cda94f16c533580e96cfd2ec5e" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P0polgg_1a31fbc3a43bc886400f32d767eb53294f" kind="function"><name>P0polgg</name></member>
+    <member refid="classapfel_1_1P0polgg_1a8a329b3bc7d234a2bf95757e943243ac" kind="function"><name>Regular</name></member>
+    <member refid="classapfel_1_1P0polgg_1abcc3b74fe0488ad26abcea28747eddd9" kind="function"><name>Singular</name></member>
+    <member refid="classapfel_1_1P0polgg_1a73e152a8b4f67e8265552db0a78c600c" kind="function"><name>Local</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P0polgq" kind="class"><name>apfel::P0polgq</name>
+    <member refid="classapfel_1_1P0polgq_1ac95f037be1f70eda2ae95de70707739f" kind="function"><name>P0polgq</name></member>
+    <member refid="classapfel_1_1P0polgq_1aee2c53a6f6f3b166da7a68f6e116b225" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P0polns" kind="class"><name>apfel::P0polns</name>
+    <member refid="classapfel_1_1P0polns_1a74d0a0eb8fbdfd92aa5188302e3ced6c" kind="function"><name>P0polns</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P0polqg" kind="class"><name>apfel::P0polqg</name>
+    <member refid="classapfel_1_1P0polqg_1ae02196846e4ef8cdc7bb059dd40d7069" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P0polqg_1a2a0353c0baa0a3e8be7df09eff2d728d" kind="function"><name>P0polqg</name></member>
+    <member refid="classapfel_1_1P0polqg_1abbad110ecb80c4e62c727e5864b6c834" kind="function"><name>Regular</name></member>
+  </compound>
   <compound refid="classapfel_1_1P0qg" kind="class"><name>apfel::P0qg</name>
-    <member refid="classapfel_1_1P0qg_1a99d6fe01e7d8980cf3051c290467c773" kind="function"><name>P0qg</name></member>
+    <member refid="classapfel_1_1P0qg_1ab958b1f5d68a9df92501d46022726c40" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P0qg_1a306a9c3c9efafaeb063e7ca5d117c1a0" kind="function"><name>P0qg</name></member>
     <member refid="classapfel_1_1P0qg_1a1d8603b5f31361248eaa55b821a294ee" kind="function"><name>Regular</name></member>
   </compound>
   <compound refid="classapfel_1_1P0Tgg" kind="class"><name>apfel::P0Tgg</name>
@@ -1055,7 +1075,8 @@
     <member refid="classapfel_1_1P0Tns_1abe0d213234bacf98df9f500794ad87d1" kind="function"><name>Local</name></member>
   </compound>
   <compound refid="classapfel_1_1P0Tqg" kind="class"><name>apfel::P0Tqg</name>
-    <member refid="classapfel_1_1P0Tqg_1a8b6ebbe0f4d4b2c0de5622cbbd615125" kind="function"><name>P0Tqg</name></member>
+    <member refid="classapfel_1_1P0Tqg_1abe0b0c13d868c70b3a6354e38a0849f3" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P0Tqg_1a2125eec1277027173b35bad1416c41a2" kind="function"><name>P0Tqg</name></member>
     <member refid="classapfel_1_1P0Tqg_1ad27c03c51a0a27e8a83ea956164f0bb0" kind="function"><name>Regular</name></member>
   </compound>
   <compound refid="classapfel_1_1P0transns" kind="class"><name>apfel::P0transns</name>
@@ -1094,6 +1115,35 @@
     <member refid="classapfel_1_1P1nsp_1aba374b4ab1cfca9136558012aba29220" kind="function"><name>Regular</name></member>
     <member refid="classapfel_1_1P1nsp_1a9bc7c20cb73a2df73c1181d2b5e2a805" kind="function"><name>Singular</name></member>
     <member refid="classapfel_1_1P1nsp_1ad37f02f2e9389d4bb87a2e905ec17979" kind="function"><name>Local</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P1polgg" kind="class"><name>apfel::P1polgg</name>
+    <member refid="classapfel_1_1P1polgg_1a75d82bae9f6737572d0f8ffff56b39ff" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P1polgg_1a732ad91451bc495449596f1a45425183" kind="variable"><name>_a2g</name></member>
+    <member refid="classapfel_1_1P1polgg_1a317150315573686523e06e3873722468" kind="function"><name>P1polgg</name></member>
+    <member refid="classapfel_1_1P1polgg_1ab8dd57003fc1bba7788bf54e68db876e" kind="function"><name>Regular</name></member>
+    <member refid="classapfel_1_1P1polgg_1ad9bf0a2704e0c4a00152cc134fc070c2" kind="function"><name>Singular</name></member>
+    <member refid="classapfel_1_1P1polgg_1a2b33912648fe753e5c1557ccc1447a7b" kind="function"><name>Local</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P1polgq" kind="class"><name>apfel::P1polgq</name>
+    <member refid="classapfel_1_1P1polgq_1a47a164498fd0bb0739ea5d731de7017b" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P1polgq_1a4e04eae7ea3f0d1f452d6f3a4ab34490" kind="function"><name>P1polgq</name></member>
+    <member refid="classapfel_1_1P1polgq_1aed65386672f48b0b24ce9d09e9419d53" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P1polnsm" kind="class"><name>apfel::P1polnsm</name>
+    <member refid="classapfel_1_1P1polnsm_1a7a680604d0060a04e7662a2358dc00c9" kind="function"><name>P1polnsm</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P1polnsp" kind="class"><name>apfel::P1polnsp</name>
+    <member refid="classapfel_1_1P1polnsp_1af6a4c011fedefcb89fc80b86c17055f9" kind="function"><name>P1polnsp</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P1polps" kind="class"><name>apfel::P1polps</name>
+    <member refid="classapfel_1_1P1polps_1a883b17a2c76f5f03761bae1de94eb2d5" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P1polps_1a67323a2eea61115fde9c5a1be8fe9c7a" kind="function"><name>P1polps</name></member>
+    <member refid="classapfel_1_1P1polps_1a4169e81dc46ef6888e0b22371dc3950b" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P1polqg" kind="class"><name>apfel::P1polqg</name>
+    <member refid="classapfel_1_1P1polqg_1a6fe92568a29c92e422d6d7d5fd2deb35" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P1polqg_1a8a119cfe0a6d6b0bf097ffd184273954" kind="function"><name>P1polqg</name></member>
+    <member refid="classapfel_1_1P1polqg_1af6d34179abd8326ad660aabe512e156f" kind="function"><name>Regular</name></member>
   </compound>
   <compound refid="classapfel_1_1P1ps" kind="class"><name>apfel::P1ps</name>
     <member refid="classapfel_1_1P1ps_1aa104e518f3eacaeafa70e4ffa786e7b2" kind="variable"><name>_nf</name></member>
@@ -1194,6 +1244,37 @@
     <member refid="classapfel_1_1P2nss_1a2f953a8140e86060f8a76b20ec256fef" kind="variable"><name>_nf</name></member>
     <member refid="classapfel_1_1P2nss_1a4bed473909707970f320c7b7a69a7af9" kind="function"><name>P2nss</name></member>
     <member refid="classapfel_1_1P2nss_1abdebd25c40b21da7e6a189469a265971" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polgg" kind="class"><name>apfel::P2polgg</name>
+    <member refid="classapfel_1_1P2polgg_1abfad3b98a6383fd525e3ec4f973d9a73" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P2polgg_1aef16f05838885f3bff211d9871e453d6" kind="function"><name>P2polgg</name></member>
+    <member refid="classapfel_1_1P2polgg_1a2746e31619d8a956e544447b2c4397c8" kind="function"><name>Regular</name></member>
+    <member refid="classapfel_1_1P2polgg_1a726d481fbc6d5b8ac16a126c69d59464" kind="function"><name>Singular</name></member>
+    <member refid="classapfel_1_1P2polgg_1af5a1bd59a88caffbb00c01af5b3cbe3b" kind="function"><name>Local</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polgq" kind="class"><name>apfel::P2polgq</name>
+    <member refid="classapfel_1_1P2polgq_1a84379216aa1ddabcf6a6069127f935dc" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P2polgq_1af0b8e143368e59005ef1b8f5e752c6ff" kind="function"><name>P2polgq</name></member>
+    <member refid="classapfel_1_1P2polgq_1a6b7d0cdcb53369e95d40246f0d09a0d8" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polnsm" kind="class"><name>apfel::P2polnsm</name>
+    <member refid="classapfel_1_1P2polnsm_1a16365514dd1868da7fc3bcc7a8cf5f0b" kind="function"><name>P2polnsm</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polnsp" kind="class"><name>apfel::P2polnsp</name>
+    <member refid="classapfel_1_1P2polnsp_1a3c0c3ddb3deabcfcfd727f9a8ebb0261" kind="function"><name>P2polnsp</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polnss" kind="class"><name>apfel::P2polnss</name>
+    <member refid="classapfel_1_1P2polnss_1a762f1d7fe896c8f1d350a7c485d03167" kind="function"><name>P2polnss</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polps" kind="class"><name>apfel::P2polps</name>
+    <member refid="classapfel_1_1P2polps_1a893159e1c46815c0b1cf5b48ab9b4ec2" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P2polps_1a5aee2adaf3f1de59e924e548a1d6004c" kind="function"><name>P2polps</name></member>
+    <member refid="classapfel_1_1P2polps_1a2f4765c570b3b546e84f502f613b72da" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1P2polqg" kind="class"><name>apfel::P2polqg</name>
+    <member refid="classapfel_1_1P2polqg_1a2fa30886da0bc2109456630de41be30a" kind="variable"><name>_nf</name></member>
+    <member refid="classapfel_1_1P2polqg_1aae1bfe6e146d0789fec2b0c787b3838b" kind="function"><name>P2polqg</name></member>
+    <member refid="classapfel_1_1P2polqg_1acababd93d35ac41971e1d034f21823ff" kind="function"><name>Regular</name></member>
   </compound>
   <compound refid="classapfel_1_1P2ps" kind="class"><name>apfel::P2ps</name>
     <member refid="classapfel_1_1P2ps_1ac8054d704e6a2cb3ad54f937db6dbc11" kind="variable"><name>_nf</name></member>
@@ -1755,7 +1836,7 @@
   </compound>
   <compound refid="matchingbasisqcd_8h" kind="file"><name>matchingbasisqcd.h</name>
   </compound>
-  <compound refid="matchingconditions_8h" kind="file"><name>matchingconditions.h</name>
+  <compound refid="matchingconditions__sl_8h" kind="file"><name>matchingconditions_sl.h</name>
   </compound>
   <compound refid="matchingconditions__tl_8h" kind="file"><name>matchingconditions_tl.h</name>
   </compound>
@@ -1783,9 +1864,15 @@
   </compound>
   <compound refid="specialfunctions_8h" kind="file"><name>specialfunctions.h</name>
   </compound>
-  <compound refid="splittingfunctions_8h" kind="file"><name>splittingfunctions.h</name>
+  <compound refid="splittingfunctionspol__sl_8h" kind="file"><name>splittingfunctionspol_sl.h</name>
   </compound>
-  <compound refid="splittingfunctions__tl_8h" kind="file"><name>splittingfunctions_tl.h</name>
+  <compound refid="splittingfunctionstrans__sl_8h" kind="file"><name>splittingfunctionstrans_sl.h</name>
+  </compound>
+  <compound refid="splittingfunctionstrans__tl_8h" kind="file"><name>splittingfunctionstrans_tl.h</name>
+  </compound>
+  <compound refid="splittingfunctionsunp__sl_8h" kind="file"><name>splittingfunctionsunp_sl.h</name>
+  </compound>
+  <compound refid="splittingfunctionsunp__tl_8h" kind="file"><name>splittingfunctionsunp_tl.h</name>
   </compound>
   <compound refid="structurefunctionbuilder_8h" kind="file"><name>structurefunctionbuilder.h</name>
   </compound>
@@ -1931,6 +2018,22 @@
   </compound>
   <compound refid="group__NLOBM" kind="group"><name>NLOBM</name>
   </compound>
+  <compound refid="group__PolSF" kind="group"><name>PolSF</name>
+  </compound>
+  <compound refid="group__LOpolsf" kind="group"><name>LOpolsf</name>
+  </compound>
+  <compound refid="group__NLOpolsf" kind="group"><name>NLOpolsf</name>
+  </compound>
+  <compound refid="group__NNLOpolsf" kind="group"><name>NNLOpolsf</name>
+  </compound>
+  <compound refid="group__TransSF" kind="group"><name>TransSF</name>
+  </compound>
+  <compound refid="group__LOtranssf" kind="group"><name>LOtranssf</name>
+  </compound>
+  <compound refid="group__NLOtranssf" kind="group"><name>NLOtranssf</name>
+  </compound>
+  <compound refid="group__TransSFtl" kind="group"><name>TransSFtl</name>
+  </compound>
   <compound refid="group__SLSplittings" kind="group"><name>SLSplittings</name>
   </compound>
   <compound refid="group__UnpSF" kind="group"><name>UnpSF</name>
@@ -1943,12 +2046,6 @@
   </compound>
   <compound refid="group__NNNLOunpsf" kind="group"><name>NNNLOunpsf</name>
   </compound>
-  <compound refid="group__TransSF" kind="group"><name>TransSF</name>
-  </compound>
-  <compound refid="group__LOtranssf" kind="group"><name>LOtranssf</name>
-  </compound>
-  <compound refid="group__NLOtranssf" kind="group"><name>NLOtranssf</name>
-  </compound>
   <compound refid="group__TLSplittings" kind="group"><name>TLSplittings</name>
   </compound>
   <compound refid="group__UnpSFtl" kind="group"><name>UnpSFtl</name>
@@ -1958,8 +2055,6 @@
   <compound refid="group__NLOunpsftl" kind="group"><name>NLOunpsftl</name>
   </compound>
   <compound refid="group__NNLOunpsftl" kind="group"><name>NNLOunpsftl</name>
-  </compound>
-  <compound refid="group__TransSFtl" kind="group"><name>TransSFtl</name>
   </compound>
   <compound refid="group__NCMassless" kind="group"><name>NCMassless</name>
   </compound>

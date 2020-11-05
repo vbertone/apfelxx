@@ -9,9 +9,11 @@
 #include "apfel/constants.h"
 #include "apfel/tools.h"
 #include "apfel/messages.h"
-#include "apfel/splittingfunctions.h"
-#include "apfel/splittingfunctions_tl.h"
-#include "apfel/matchingconditions.h"
+#include "apfel/splittingfunctionsunp_sl.h"
+#include "apfel/splittingfunctionsunp_tl.h"
+#include "apfel/splittingfunctionstrans_sl.h"
+#include "apfel/splittingfunctionstrans_tl.h"
+#include "apfel/matchingconditions_sl.h"
 #include "apfel/matchingconditions_tl.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
@@ -70,17 +72,17 @@ namespace apfel
     // LO splitting function operators.
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0ns{}, IntEps};
-    const Operator O0qg{g, P0qg{}, IntEps};
     const Operator O0gq{g, P0gq{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator O0qg{g, P0qg{nf},  IntEps};
         const Operator O0gg{g, P0gg{nf}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0ns});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,           nf * O0qg});
+        OM.insert({EvolutionBasisQCD::PQG,                O0qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O0gq});
         OM.insert({EvolutionBasisQCD::PGG,                O0gg});
         OpMapLO.insert({nf, OM});
@@ -352,17 +354,17 @@ namespace apfel
     // LO splitting function operators.
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0Tns{}, IntEps};
-    const Operator O0qg{g, P0Tqg{}, IntEps};
     const Operator O0gq{g, P0Tgq{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator O0qg{g, P0Tqg{nf}, IntEps};
         const Operator O0gg{g, P0Tgg{nf}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0ns});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,           nf * O0qg});
+        OM.insert({EvolutionBasisQCD::PQG,                O0qg});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O0gq});
         OM.insert({EvolutionBasisQCD::PGG,                O0gg});
         OpMapLO.insert({nf, OM});

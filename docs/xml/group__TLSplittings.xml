@@ -3,8 +3,8 @@
   <compounddef id="group__TLSplittings" kind="group">
     <compoundname>TLSplittings</compoundname>
     <title>Time-like splitting function</title>
-    <innergroup refid="group__UnpSFtl">Unpolarised splitting functions</innergroup>
     <innergroup refid="group__TransSFtl">Transversely polarised splitting functions</innergroup>
+    <innergroup refid="group__UnpSFtl">Unpolarised splitting functions</innergroup>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

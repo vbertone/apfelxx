@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__PolSF" kind="group">
+    <compoundname>PolSF</compoundname>
+    <title>Longitudinally polarised splitting functions</title>
+    <innergroup refid="group__LOpolsf">LO splitting functions</innergroup>
+    <innergroup refid="group__NLOpolsf">NLO splitting functions</innergroup>
+    <innergroup refid="group__NNLOpolsf">NNLO splitting functions</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>Reference: <ulink url="https://arxiv.org/pdf/hep-ph/9603366.pdf">https://arxiv.org/pdf/hep-ph/9603366.pdf</ulink> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

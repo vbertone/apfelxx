@@ -4,7 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/matchingconditions.h"
+#include "apfel/matchingconditions_sl.h"
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 

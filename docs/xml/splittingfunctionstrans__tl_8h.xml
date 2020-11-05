@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="splittingfunctionstrans__tl_8h" kind="file" language="C++">
+    <compoundname>splittingfunctionstrans_tl.h</compoundname>
+    <includes refid="expression_8h" local="yes">apfel/expression.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>apfel/expression.h</label>
+        <link refid="expression_8h"/>
+      </node>
+      <node id="1">
+        <label>inc/apfel/splittingfunctionstrans_tl.h</label>
+        <link refid="splittingfunctionstrans__tl_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classapfel_1_1P0Ttransns" prot="public">apfel::P0Ttransns</innerclass>
+    <innerclass refid="classapfel_1_1P1Ttransnsp" prot="public">apfel::P1Ttransnsp</innerclass>
+    <innerclass refid="classapfel_1_1P1Ttransnsm" prot="public">apfel::P1Ttransnsm</innerclass>
+    <innernamespace refid="namespaceapfel">apfel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>APFEL++<sp/>2017</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Author:<sp/>Valerio<sp/>Bertone:<sp/>valerio.bertone@cern.ch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="expression_8h" kindref="compound">apfel/expression.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceapfel" kindref="compound">apfel</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"></codeline>
+<codeline lineno="24"></codeline>
+<codeline lineno="29" refid="classapfel_1_1P0Ttransns" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1P0Ttransns" kindref="compound">P0Ttransns</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Expression" kindref="compound">Expression</ref></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32" refid="classapfel_1_1P0Ttransns_1ad7e186711fb4b766f17d0ff9c936bf59" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1P0Ttransns_1ad7e186711fb4b766f17d0ff9c936bf59" kindref="member">P0Ttransns</ref>();</highlight></codeline>
+<codeline lineno="33" refid="classapfel_1_1P0Ttransns_1abf87b7d8fc5d95d9fc673b7fefd79f8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P0Ttransns_1abf87b7d8fc5d95d9fc673b7fefd79f8c" kindref="member">Regular</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)<sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34" refid="classapfel_1_1P0Ttransns_1ac73dcf1b6dd0f1b5c4d5c32e22e19994" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P0Ttransns_1ac73dcf1b6dd0f1b5c4d5c32e22e19994" kindref="member">Singular</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35" refid="classapfel_1_1P0Ttransns_1ae3c2ed45a2b379d8e735b2f6ac085699" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P0Ttransns_1ae3c2ed45a2b379d8e735b2f6ac085699" kindref="member">Local</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="38"></codeline>
+<codeline lineno="43"></codeline>
+<codeline lineno="48" refid="classapfel_1_1P1Ttransnsp" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1P1Ttransnsp" kindref="compound">P1Ttransnsp</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1Expression" kindref="compound">Expression</ref></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="51" refid="classapfel_1_1P1Ttransnsp_1a4d281e0f55448051626f35a0aa9c981e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1P1Ttransnsp_1a4d281e0f55448051626f35a0aa9c981e" kindref="member">P1Ttransnsp</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>nf);</highlight></codeline>
+<codeline lineno="52" refid="classapfel_1_1P1Ttransnsp_1ae98624fc83558855853373e4feaaad0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P1Ttransnsp_1ae98624fc83558855853373e4feaaad0a" kindref="member">Regular</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53" refid="classapfel_1_1P1Ttransnsp_1af26beed091bb6338625bdf5d44165780" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P1Ttransnsp_1af26beed091bb6338625bdf5d44165780" kindref="member">Singular</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54" refid="classapfel_1_1P1Ttransnsp_1ab96d6048b470a005ed3bc903b32f7a2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P1Ttransnsp_1ab96d6048b470a005ed3bc903b32f7a2d" kindref="member">Local</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56" refid="classapfel_1_1P1Ttransnsp_1a4157b36f7a0488b4f5c649abf4def7dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P1Ttransnsp_1a4157b36f7a0488b4f5c649abf4def7dc" kindref="member">_nf</ref>;</highlight></codeline>
+<codeline lineno="57" refid="classapfel_1_1P1Ttransnsp_1a0d53c572b00b5f2a51423f182bf58515" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1P1Ttransnsp_1a0d53c572b00b5f2a51423f182bf58515" kindref="member">_a2</ref>;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="classapfel_1_1P1Ttransnsm" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classapfel_1_1P1Ttransnsm" kindref="compound">P1Ttransnsm</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P1Ttransnsp" kindref="compound">P1Ttransnsp</ref></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67" refid="classapfel_1_1P1Ttransnsm_1a498da79a511d89d9da172e45b2197176" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classapfel_1_1P1Ttransnsm_1a498da79a511d89d9da172e45b2197176" kindref="member">P1Ttransnsm</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>nf);</highlight></codeline>
+<codeline lineno="68" refid="classapfel_1_1P1Ttransnsm_1a8ef8439ada90efb3bb945c5f9cef2945" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classapfel_1_1P1Ttransnsm_1a8ef8439ada90efb3bb945c5f9cef2945" kindref="member">Regular</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>x)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="inc/apfel/splittingfunctionstrans_tl.h"/>
+  </compounddef>
+</doxygen>

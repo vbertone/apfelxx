@@ -36,7 +36,7 @@
     <innerfile refid="massivezerocoefficientfunctions_8h">massivezerocoefficientfunctions.h</innerfile>
     <innerfile refid="matchedevolution_8h">matchedevolution.h</innerfile>
     <innerfile refid="matchingbasisqcd_8h">matchingbasisqcd.h</innerfile>
-    <innerfile refid="matchingconditions_8h">matchingconditions.h</innerfile>
+    <innerfile refid="matchingconditions__sl_8h">matchingconditions_sl.h</innerfile>
     <innerfile refid="matchingconditions__tl_8h">matchingconditions_tl.h</innerfile>
     <innerfile refid="matchingfunctionsff_8h">matchingfunctionsff.h</innerfile>
     <innerfile refid="matchingfunctionspdf_8h">matchingfunctionspdf.h</innerfile>
@@ -50,8 +50,11 @@
     <innerfile refid="rotations_8h">rotations.h</innerfile>
     <innerfile refid="set_8h">set.h</innerfile>
     <innerfile refid="specialfunctions_8h">specialfunctions.h</innerfile>
-    <innerfile refid="splittingfunctions_8h">splittingfunctions.h</innerfile>
-    <innerfile refid="splittingfunctions__tl_8h">splittingfunctions_tl.h</innerfile>
+    <innerfile refid="splittingfunctionspol__sl_8h">splittingfunctionspol_sl.h</innerfile>
+    <innerfile refid="splittingfunctionstrans__sl_8h">splittingfunctionstrans_sl.h</innerfile>
+    <innerfile refid="splittingfunctionstrans__tl_8h">splittingfunctionstrans_tl.h</innerfile>
+    <innerfile refid="splittingfunctionsunp__sl_8h">splittingfunctionsunp_sl.h</innerfile>
+    <innerfile refid="splittingfunctionsunp__tl_8h">splittingfunctionsunp_tl.h</innerfile>
     <innerfile refid="structurefunctionbuilder_8h">structurefunctionbuilder.h</innerfile>
     <innerfile refid="subgrid_8h">subgrid.h</innerfile>
     <innerfile refid="tabulateobject_8h">tabulateobject.h</innerfile>
