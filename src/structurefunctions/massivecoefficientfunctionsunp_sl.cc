@@ -4,7 +4,7 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
-#include "apfel/massivecoefficientfunctions.h"
+#include "apfel/massivecoefficientfunctionsunp_sl.h"
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 #include "apfel/integrator.h"

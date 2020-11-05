@@ -8,10 +8,10 @@
 #include "apfel/timer.h"
 #include "apfel/tools.h"
 #include "apfel/constants.h"
-#include "apfel/zeromasscoefficientfunctions.h"
-#include "apfel/massivecoefficientfunctions.h"
-#include "apfel/massivezerocoefficientfunctions.h"
-#include "apfel/zeromasscoefficientfunctions_tl.h"
+#include "apfel/zeromasscoefficientfunctionsunp_sl.h"
+#include "apfel/massivecoefficientfunctionsunp_sl.h"
+#include "apfel/massivezerocoefficientfunctionsunp_sl.h"
+#include "apfel/zeromasscoefficientfunctionsunp_tl.h"
 #include "apfel/tabulateobject.h"
 
 namespace apfel
