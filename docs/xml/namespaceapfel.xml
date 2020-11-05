@@ -1431,13 +1431,11 @@
 </parameterlist>
 <simplesect kind="return"><para>A map of DglapObject objects, one for each possible nf </para>
 </simplesect>
-<simplesect kind="note"><para>In the case of displaced thresholds (i.e. Masses not equal to Thresholds), the PDF matching conditions in the case of threshold crossing during &apos;backward evolution&apos; miss a term O(as^2) deriving from the inversion of the forward matching conditions. This has to be included. </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="52" column="12" declfile="inc/apfel/dglapbuilder.h" declline="52" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="47" column="12" declfile="inc/apfel/dglapbuilder.h" declline="47" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a29107415091e14216f967d053d4127e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1507,7 +1505,157 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="69" column="12" declfile="inc/apfel/dglapbuilder.h" declline="69" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="64" column="12" declfile="inc/apfel/dglapbuilder.h" declline="64" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceapfel_1a7119fe155c51785e257daf30599abe50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
+        <definition>std::map&lt;int, DglapObjects&gt; apfel::InitializeDglapObjectsQCDpol</definition>
+        <argsstring>(Grid const &amp;g, std::vector&lt; double &gt; const &amp;Masses, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</argsstring>
+        <name>InitializeDglapObjectsQCDpol</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Masses</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>OpEvol</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>IntEps</declname>
+          <defval>1e-5</defval>
+        </param>
+        <briefdescription>
+<para>The InitializeDglapObjectsQCDpol function precomputes the perturbative coefficients of space-like longitudinally polarised splitting functions and matching conditions (assumed to be equal to the unpolarised ones) and store them into a &apos;<ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref>&apos; structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Masses</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the heavy-quark masses </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the heavy quark thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>OpEvol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the switch for the computation of the evolution operator (default: false) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IntEps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the integration accuracy (default: 10<superscript>-5</superscript>) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A map of DglapObject objects, one for each possible nf </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/dglapbuilder.h" line="82" column="12" declfile="inc/apfel/dglapbuilder.h" declline="82" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceapfel_1a0d66e26d88d049c5311b348e6a3733b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
+        <definition>std::map&lt;int, DglapObjects&gt; apfel::InitializeDglapObjectsQCDpol</definition>
+        <argsstring>(Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</argsstring>
+        <name>InitializeDglapObjectsQCDpol</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>OpEvol</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>IntEps</declname>
+          <defval>1e-5</defval>
+        </param>
+        <briefdescription>
+<para>The InitializeDglapObjectsQCDpol function precomputes the perturbative coefficients of space-like longitudinally polarised splitting functions and matching conditions (assumed to be equal to the unpolarised ones) and store them into a &apos;<ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref>&apos; structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the heavy-quark thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>OpEvol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the switch for the computation of the evolution operator (default: false) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IntEps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the integration accuracy (default: 10<superscript>-5</superscript>) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A map of DglapObject objects, one for each possible nf </para>
+</simplesect>
+<simplesect kind="note"><para>This function assumes that masses and thresholds coincide. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/dglapbuilder.h" line="101" column="12" declfile="inc/apfel/dglapbuilder.h" declline="101" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a2cec7ad81a677c20e8321a0549d70c7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1587,7 +1735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="86" column="12" declfile="inc/apfel/dglapbuilder.h" declline="86" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="118" column="12" declfile="inc/apfel/dglapbuilder.h" declline="118" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1ad9cf8bd24ce79901ded4d8731dc6ddc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1657,7 +1805,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="104" column="12" declfile="inc/apfel/dglapbuilder.h" declline="104" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="136" column="12" declfile="inc/apfel/dglapbuilder.h" declline="136" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a7a873005f11ff94f6164872c0c6d5580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1737,7 +1885,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="121" column="12" declfile="inc/apfel/dglapbuilder.h" declline="121" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="153" column="12" declfile="inc/apfel/dglapbuilder.h" declline="153" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a345517446a415a9f76b30cb76591617b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1807,7 +1955,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="139" column="12" declfile="inc/apfel/dglapbuilder.h" declline="139" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="171" column="12" declfile="inc/apfel/dglapbuilder.h" declline="171" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1ab27caac59a543edbe2ce3553a66831ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1887,7 +2035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="156" column="12" declfile="inc/apfel/dglapbuilder.h" declline="156" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="188" column="12" declfile="inc/apfel/dglapbuilder.h" declline="188" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a8c14015eb7e81df14c516efc3fcf87d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="structapfel_1_1DglapObjects" kindref="compound">DglapObjects</ref> &gt;</type>
@@ -1957,7 +2105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="174" column="12" declfile="inc/apfel/dglapbuilder.h" declline="174" declcolumn="12"/>
+        <location file="inc/apfel/dglapbuilder.h" line="206" column="12" declfile="inc/apfel/dglapbuilder.h" declline="206" declcolumn="12"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -2053,7 +2201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="197" column="19" declfile="inc/apfel/dglapbuilder.h" declline="197" declcolumn="19"/>
+        <location file="inc/apfel/dglapbuilder.h" line="229" column="19" declfile="inc/apfel/dglapbuilder.h" declline="229" declcolumn="19"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1ad827529766bae9922f962aadf3c2fc87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::unique_ptr&lt; <ref refid="classapfel_1_1Dglap" kindref="compound">Dglap</ref>&lt; <ref refid="classapfel_1_1Operator" kindref="compound">Operator</ref> &gt; &gt;</type>
@@ -2132,7 +2280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/dglapbuilder.h" line="214" column="19" declfile="inc/apfel/dglapbuilder.h" declline="214" declcolumn="19"/>
+        <location file="inc/apfel/dglapbuilder.h" line="246" column="19" declfile="inc/apfel/dglapbuilder.h" declline="246" declcolumn="19"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">

@@ -4,8 +4,8 @@
     <compoundname>expression.h</compoundname>
     <includedby refid="apfelxx_8h" local="yes">inc/apfel/apfelxx.h</includedby>
     <includedby refid="gpdevolutionkernels_8h" local="yes">inc/apfel/gpdevolutionkernels.h</includedby>
-    <includedby refid="massivecoefficientfunctions_8h" local="yes">inc/apfel/massivecoefficientfunctions.h</includedby>
-    <includedby refid="massivezerocoefficientfunctions_8h" local="yes">inc/apfel/massivezerocoefficientfunctions.h</includedby>
+    <includedby refid="massivecoefficientfunctionsunp__sl_8h" local="yes">inc/apfel/massivecoefficientfunctionsunp_sl.h</includedby>
+    <includedby refid="massivezerocoefficientfunctionsunp__sl_8h" local="yes">inc/apfel/massivezerocoefficientfunctionsunp_sl.h</includedby>
     <includedby refid="matchingconditions__sl_8h" local="yes">inc/apfel/matchingconditions_sl.h</includedby>
     <includedby refid="matchingconditions__tl_8h" local="yes">inc/apfel/matchingconditions_tl.h</includedby>
     <includedby refid="matchingfunctionsff_8h" local="yes">inc/apfel/matchingfunctionsff.h</includedby>
@@ -16,8 +16,8 @@
     <includedby refid="splittingfunctionstrans__tl_8h" local="yes">inc/apfel/splittingfunctionstrans_tl.h</includedby>
     <includedby refid="splittingfunctionsunp__sl_8h" local="yes">inc/apfel/splittingfunctionsunp_sl.h</includedby>
     <includedby refid="splittingfunctionsunp__tl_8h" local="yes">inc/apfel/splittingfunctionsunp_tl.h</includedby>
-    <includedby refid="zeromasscoefficientfunctions_8h" local="yes">inc/apfel/zeromasscoefficientfunctions.h</includedby>
-    <includedby refid="zeromasscoefficientfunctions__tl_8h" local="yes">inc/apfel/zeromasscoefficientfunctions_tl.h</includedby>
+    <includedby refid="zeromasscoefficientfunctionsunp__sl_8h" local="yes">inc/apfel/zeromasscoefficientfunctionsunp_sl.h</includedby>
+    <includedby refid="zeromasscoefficientfunctionsunp__tl_8h" local="yes">inc/apfel/zeromasscoefficientfunctionsunp_tl.h</includedby>
     <invincdepgraph>
       <node id="12">
         <label>inc/apfel/dglapbuilder.h</label>
@@ -30,10 +30,6 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-      </node>
-      <node id="24">
-        <label>inc/apfel/zeromasscoefficientfunctions.h</label>
-        <link refid="zeromasscoefficientfunctions_8h"/>
       </node>
       <node id="9">
         <label>inc/apfel/matchingfunctionspdf.h</label>
@@ -52,10 +48,6 @@
       <node id="19">
         <label>inc/apfel/splittingfunctionspol_sl.h</label>
         <link refid="splittingfunctionspol__sl_8h"/>
-      </node>
-      <node id="4">
-        <label>inc/apfel/massivecoefficientfunctions.h</label>
-        <link refid="massivecoefficientfunctions_8h"/>
       </node>
       <node id="23">
         <label>inc/apfel/splittingfunctionsunp_tl.h</label>
@@ -81,10 +73,6 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="25">
-        <label>inc/apfel/zeromasscoefficientfunctions_tl.h</label>
-        <link refid="zeromasscoefficientfunctions__tl_8h"/>
-      </node>
       <node id="2">
         <label>inc/apfel/apfelxx.h</label>
         <link refid="apfelxx_8h"/>
@@ -104,6 +92,10 @@
         <link refid="initialiseevolution_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="4">
+        <label>inc/apfel/massivecoefficientfunctionsunp_sl.h</label>
+        <link refid="massivecoefficientfunctionsunp__sl_8h"/>
       </node>
       <node id="18">
         <label>inc/apfel/rotations.h</label>
@@ -147,6 +139,10 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
+      <node id="5">
+        <label>inc/apfel/massivezerocoefficientfunctionsunp_sl.h</label>
+        <link refid="massivezerocoefficientfunctionsunp__sl_8h"/>
+      </node>
       <node id="16">
         <label>inc/apfel/structurefunctionbuilder.h</label>
         <link refid="structurefunctionbuilder_8h"/>
@@ -157,17 +153,21 @@
         <label>inc/apfel/matchingconditions_sl.h</label>
         <link refid="matchingconditions__sl_8h"/>
       </node>
+      <node id="25">
+        <label>inc/apfel/zeromasscoefficientfunctionsunp_tl.h</label>
+        <link refid="zeromasscoefficientfunctionsunp__tl_8h"/>
+      </node>
       <node id="20">
         <label>inc/apfel/splittingfunctionstrans_sl.h</label>
         <link refid="splittingfunctionstrans__sl_8h"/>
       </node>
+      <node id="24">
+        <label>inc/apfel/zeromasscoefficientfunctionsunp_sl.h</label>
+        <link refid="zeromasscoefficientfunctionsunp__sl_8h"/>
+      </node>
       <node id="21">
         <label>inc/apfel/splittingfunctionstrans_tl.h</label>
         <link refid="splittingfunctionstrans__tl_8h"/>
-      </node>
-      <node id="5">
-        <label>inc/apfel/massivezerocoefficientfunctions.h</label>
-        <link refid="massivezerocoefficientfunctions_8h"/>
       </node>
       <node id="7">
         <label>inc/apfel/matchingconditions_tl.h</label>

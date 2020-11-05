@@ -3,7 +3,7 @@
   <compounddef id="classapfel_1_1CL2nsp" kind="class" language="C++" prot="public">
     <compoundname>apfel::CL2nsp</compoundname>
     <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
-    <includes refid="zeromasscoefficientfunctions_8h" local="no">zeromasscoefficientfunctions.h</includes>
+    <includes refid="zeromasscoefficientfunctionsunp__sl_8h" local="no">zeromasscoefficientfunctionsunp_sl.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classapfel_1_1CL2nsp_1abda36d1a04f2f56e4e75d6cce1d1778c" prot="private" static="no" mutable="no">
         <type>int const</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/zeromasscoefficientfunctions.h" line="156" column="15" bodyfile="inc/apfel/zeromasscoefficientfunctions.h" bodystart="156" bodyend="-1"/>
+        <location file="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" line="156" column="15" bodyfile="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/zeromasscoefficientfunctions.h" line="152" column="5"/>
+        <location file="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" line="152" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1CL2nsp_1a025da294837617d2a235e9cde50fb38c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/zeromasscoefficientfunctions.h" line="153" column="12"/>
+        <location file="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" line="153" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1CL2nsp_1a28a3ee333736f0f7e61b2515c0cdbbb5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/zeromasscoefficientfunctions.h" line="154" column="12"/>
+        <location file="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" line="154" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -109,7 +109,7 @@
         <link refid="classapfel_1_1Expression"/>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/zeromasscoefficientfunctions.h" line="149" column="3" bodyfile="inc/apfel/zeromasscoefficientfunctions.h" bodystart="150" bodyend="157"/>
+    <location file="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" line="149" column="3" bodyfile="inc/apfel/zeromasscoefficientfunctionsunp_sl.h" bodystart="150" bodyend="157"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::CL2nsp</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::CL2nsp</scope><name>_extvar</name></member>

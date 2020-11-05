@@ -1598,6 +1598,8 @@
     <member refid="group__PhysConstants_1ga5323493f8fa0c7f8bb81d386a7303b51" kind="variable"><name>CKM2</name></member>
     <member refid="namespaceapfel_1aaf2c9fc21fdc63421663a7859bc97e1e" kind="function"><name>InitializeDglapObjectsQCD</name></member>
     <member refid="namespaceapfel_1a29107415091e14216f967d053d4127e7" kind="function"><name>InitializeDglapObjectsQCD</name></member>
+    <member refid="namespaceapfel_1a7119fe155c51785e257daf30599abe50" kind="function"><name>InitializeDglapObjectsQCDpol</name></member>
+    <member refid="namespaceapfel_1a0d66e26d88d049c5311b348e6a3733b0" kind="function"><name>InitializeDglapObjectsQCDpol</name></member>
     <member refid="namespaceapfel_1a2cec7ad81a677c20e8321a0549d70c7d" kind="function"><name>InitializeDglapObjectsQCDT</name></member>
     <member refid="namespaceapfel_1ad9cf8bd24ce79901ded4d8731dc6ddc3" kind="function"><name>InitializeDglapObjectsQCDT</name></member>
     <member refid="namespaceapfel_1a7a873005f11ff94f6164872c0c6d5580" kind="function"><name>InitializeDglapObjectsQCDtrans</name></member>
@@ -1828,9 +1830,9 @@
   </compound>
   <compound refid="lhtoypdfs_8h" kind="file"><name>lhtoypdfs.h</name>
   </compound>
-  <compound refid="massivecoefficientfunctions_8h" kind="file"><name>massivecoefficientfunctions.h</name>
+  <compound refid="massivecoefficientfunctionsunp__sl_8h" kind="file"><name>massivecoefficientfunctionsunp_sl.h</name>
   </compound>
-  <compound refid="massivezerocoefficientfunctions_8h" kind="file"><name>massivezerocoefficientfunctions.h</name>
+  <compound refid="massivezerocoefficientfunctionsunp__sl_8h" kind="file"><name>massivezerocoefficientfunctionsunp_sl.h</name>
   </compound>
   <compound refid="matchedevolution_8h" kind="file"><name>matchedevolution.h</name>
   </compound>
@@ -1891,9 +1893,9 @@
   <compound refid="version_8h" kind="file"><name>version.h</name>
     <member refid="version_8h_1a1c6d5de492ac61ad29aec7aa9a436bbf" kind="define"><name>VERSION</name></member>
   </compound>
-  <compound refid="zeromasscoefficientfunctions_8h" kind="file"><name>zeromasscoefficientfunctions.h</name>
+  <compound refid="zeromasscoefficientfunctionsunp__sl_8h" kind="file"><name>zeromasscoefficientfunctionsunp_sl.h</name>
   </compound>
-  <compound refid="zeromasscoefficientfunctions__tl_8h" kind="file"><name>zeromasscoefficientfunctions_tl.h</name>
+  <compound refid="zeromasscoefficientfunctionsunp__tl_8h" kind="file"><name>zeromasscoefficientfunctionsunp_tl.h</name>
   </compound>
   <compound refid="README_8md" kind="file"><name>README.md</name>
   </compound>

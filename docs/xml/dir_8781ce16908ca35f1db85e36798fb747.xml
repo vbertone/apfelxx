@@ -32,8 +32,8 @@
     <innerfile refid="kcs_8h">kcs.h</innerfile>
     <innerfile refid="lagrangeinterpolator_8h">lagrangeinterpolator.h</innerfile>
     <innerfile refid="lhtoypdfs_8h">lhtoypdfs.h</innerfile>
-    <innerfile refid="massivecoefficientfunctions_8h">massivecoefficientfunctions.h</innerfile>
-    <innerfile refid="massivezerocoefficientfunctions_8h">massivezerocoefficientfunctions.h</innerfile>
+    <innerfile refid="massivecoefficientfunctionsunp__sl_8h">massivecoefficientfunctionsunp_sl.h</innerfile>
+    <innerfile refid="massivezerocoefficientfunctionsunp__sl_8h">massivezerocoefficientfunctionsunp_sl.h</innerfile>
     <innerfile refid="matchedevolution_8h">matchedevolution.h</innerfile>
     <innerfile refid="matchingbasisqcd_8h">matchingbasisqcd.h</innerfile>
     <innerfile refid="matchingconditions__sl_8h">matchingconditions_sl.h</innerfile>
@@ -63,8 +63,8 @@
     <innerfile refid="tools_8h">tools.h</innerfile>
     <innerfile refid="twobodyphasespace_8h">twobodyphasespace.h</innerfile>
     <innerfile refid="version_8h">version.h</innerfile>
-    <innerfile refid="zeromasscoefficientfunctions_8h">zeromasscoefficientfunctions.h</innerfile>
-    <innerfile refid="zeromasscoefficientfunctions__tl_8h">zeromasscoefficientfunctions_tl.h</innerfile>
+    <innerfile refid="zeromasscoefficientfunctionsunp__sl_8h">zeromasscoefficientfunctionsunp_sl.h</innerfile>
+    <innerfile refid="zeromasscoefficientfunctionsunp__tl_8h">zeromasscoefficientfunctionsunp_tl.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

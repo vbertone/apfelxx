@@ -3,7 +3,7 @@
   <compounddef id="classapfel_1_1Cm22psNC" kind="class" language="C++" prot="public">
     <compoundname>apfel::Cm22psNC</compoundname>
     <basecompoundref refid="classapfel_1_1Expression" prot="public" virt="non-virtual">apfel::Expression</basecompoundref>
-    <includes refid="massivecoefficientfunctions_8h" local="no">massivecoefficientfunctions.h</includes>
+    <includes refid="massivecoefficientfunctionsunp__sl_8h" local="no">massivecoefficientfunctionsunp_sl.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classapfel_1_1Cm22psNC_1a47c268a928db088e380cdad4f71f59b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/massivecoefficientfunctions.h" line="139" column="5"/>
+        <location file="inc/apfel/massivecoefficientfunctionsunp_sl.h" line="139" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1Cm22psNC_1ad7fcab22c9728be5a012f4027400ee2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/massivecoefficientfunctions.h" line="140" column="12"/>
+        <location file="inc/apfel/massivecoefficientfunctionsunp_sl.h" line="140" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -73,7 +73,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/massivecoefficientfunctions.h" line="136" column="3" bodyfile="inc/apfel/massivecoefficientfunctions.h" bodystart="137" bodyend="141"/>
+    <location file="inc/apfel/massivecoefficientfunctionsunp_sl.h" line="136" column="3" bodyfile="inc/apfel/massivecoefficientfunctionsunp_sl.h" bodystart="137" bodyend="141"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::Cm22psNC</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::Cm22psNC</scope><name>_extvar</name></member>

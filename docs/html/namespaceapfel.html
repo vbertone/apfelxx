@@ -844,6 +844,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a29107415091e14216f967d053d4127e7"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a29107415091e14216f967d053d4127e7">InitializeDglapObjectsQCD</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
 <tr class="memdesc:a29107415091e14216f967d053d4127e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeDglapObjectsQCD function precomputes the perturbative coefficients of space-like unpolarised splitting functions and matching conditions and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure.  <a href="namespaceapfel.html#a29107415091e14216f967d053d4127e7">More...</a><br /></td></tr>
 <tr class="separator:a29107415091e14216f967d053d4127e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7119fe155c51785e257daf30599abe50"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a7119fe155c51785e257daf30599abe50">InitializeDglapObjectsQCDpol</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Masses, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
+<tr class="memdesc:a7119fe155c51785e257daf30599abe50"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeDglapObjectsQCDpol function precomputes the perturbative coefficients of space-like longitudinally polarised splitting functions and matching conditions (assumed to be equal to the unpolarised ones) and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure.  <a href="namespaceapfel.html#a7119fe155c51785e257daf30599abe50">More...</a><br /></td></tr>
+<tr class="separator:a7119fe155c51785e257daf30599abe50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d66e26d88d049c5311b348e6a3733b0"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a0d66e26d88d049c5311b348e6a3733b0">InitializeDglapObjectsQCDpol</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
+<tr class="memdesc:a0d66e26d88d049c5311b348e6a3733b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeDglapObjectsQCDpol function precomputes the perturbative coefficients of space-like longitudinally polarised splitting functions and matching conditions (assumed to be equal to the unpolarised ones) and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure.  <a href="namespaceapfel.html#a0d66e26d88d049c5311b348e6a3733b0">More...</a><br /></td></tr>
+<tr class="separator:a0d66e26d88d049c5311b348e6a3733b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cec7ad81a677c20e8321a0549d70c7d"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a2cec7ad81a677c20e8321a0549d70c7d">InitializeDglapObjectsQCDT</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Masses, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
 <tr class="memdesc:a2cec7ad81a677c20e8321a0549d70c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeDglapObjectsQCDT function precomputes the perturbative coefficients of time-like unpolarised splitting functions and matching conditions and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure.  <a href="namespaceapfel.html#a2cec7ad81a677c20e8321a0549d70c7d">More...</a><br /></td></tr>
 <tr class="separator:a2cec7ad81a677c20e8321a0549d70c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3624,7 +3630,6 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A map of DglapObject objects, one for each possible nf </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>In the case of displaced thresholds (i.e. Masses not equal to Thresholds), the PDF matching conditions in the case of threshold crossing during 'backward evolution' miss a term O(as^2) deriving from the inversion of the forward matching conditions. This has to be included. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="dglap_test_8cc-example.html#a5">dglap_test.cc</a>, and <a class="el" href="structurefunction_test_8cc-example.html#a7">structurefunction_test.cc</a>.</dd>
 </dl>
 
@@ -3669,6 +3674,118 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>The InitializeDglapObjectsQCD function precomputes the perturbative coefficients of space-like unpolarised splitting functions and matching conditions and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
+    <tr><td class="paramname">Thresholds</td><td>the heavy-quark thresholds </td></tr>
+    <tr><td class="paramname">OpEvol</td><td>the switch for the computation of the evolution operator (default: false) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of DglapObject objects, one for each possible nf </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function assumes that masses and thresholds coincide. </dd></dl>
+
+</div>
+</div>
+<a id="a7119fe155c51785e257daf30599abe50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7119fe155c51785e257daf30599abe50">&#9670;&nbsp;</a></span>InitializeDglapObjectsQCDpol() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a>&gt; apfel::InitializeDglapObjectsQCDpol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Masses</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Thresholds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;&#160;</td>
+          <td class="paramname"><em>OpEvol</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>IntEps</em> = <code>1e-5</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The InitializeDglapObjectsQCDpol function precomputes the perturbative coefficients of space-like longitudinally polarised splitting functions and matching conditions (assumed to be equal to the unpolarised ones) and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
+    <tr><td class="paramname">Masses</td><td>the heavy-quark masses </td></tr>
+    <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
+    <tr><td class="paramname">OpEvol</td><td>the switch for the computation of the evolution operator (default: false) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of DglapObject objects, one for each possible nf </dd></dl>
+
+</div>
+</div>
+<a id="a0d66e26d88d049c5311b348e6a3733b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d66e26d88d049c5311b348e6a3733b0">&#9670;&nbsp;</a></span>InitializeDglapObjectsQCDpol() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a>&gt; apfel::InitializeDglapObjectsQCDpol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Thresholds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;&#160;</td>
+          <td class="paramname"><em>OpEvol</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>IntEps</em> = <code>1e-5</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The InitializeDglapObjectsQCDpol function precomputes the perturbative coefficients of space-like longitudinally polarised splitting functions and matching conditions (assumed to be equal to the unpolarised ones) and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
@@ -7267,7 +7384,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 5 2020 22:34:09 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Nov 5 2020 23:12:31 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>
