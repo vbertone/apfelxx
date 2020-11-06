@@ -117,7 +117,7 @@ that $k_a+k_m=k$. This way Eq.~(\ref{eq:covmat2}) takes the form:
     mult}^{(l)}\delta_{j,\rm
     mult}^{(l)}\right)m_im_j\,.
 \end{equation}
-It is well known that this definition of the covariance matrix is
+It is believed that this definition of the covariance matrix is
 problematic in that it results in the so-called D'Agostini bias of the
 multiplicative uncertainties~\cite{DAgostini:1993arp}. A possible
 solution to this problem is the so-called
@@ -660,6 +660,201 @@ relative and absolute multiplicative uncertainties.
       Ref.~\cite{Ball:2014uwa}. \label{fig:Chi2Dist}}
   \end{centering}
 \end{figure}
+
+\section{The D'Agostini ``bias''}
+
+The main topic of this section is the so-called D'Agostini ``bias''
+(DAB) originally presented in Ref.~\cite{DAgostini:1993arp}. Quoting
+from the abstract of that paper: ``Best fits to data which are
+affected by systematic uncertainties on the normalisation factor have
+the tendency to produce curves lower than expected [...]. This bias
+can become unacceptable if the normalisation error is large, or a
+large number of data points are used''. In the following, I will
+summarise the arguments behind this conclusion. I will then move to
+giving my own view on this question arguing that the DAB is in fact
+not a bias but rather a feature of correlation uncertainties in
+general and not of multiplicative uncertainties in particular. This
+implies that the distinction between additive and normalisation
+uncertainties is effectively immaterial. Specifically, what really
+triggers the DAB is \textit{not} the fact the uncertainty is on the
+multiplication factor but rather that it typically gives raise to
+correlated uncertainties that are different in \textit{absolute}
+size. To show this, below I will show that the DAB takes place also in
+the presence of additive uncertainties that are different in absolute
+size. Conversely, we will show that the DAB does not takes place when
+considering multiplicative uncertainties and the central values are
+identical. The bottom line is that any difference in absolute size
+between correlated uncertainties causes a deviation from the
+expectation according to which the best fit value should be given by
+the weighted average of the experimental central values weighted by
+the inverse of the squared uncorrelated uncertainties. This deviation
+from the expectation is the origin of the DAB.
+
+In order to present the argument, Ref.~\cite{DAgostini:1993arp}
+considers a data set made of two data points with the respective
+uncorrelated uncertainty, $x_i\pm\sigma_i$ with $i=1,2$. In addition,
+it is assumed that $x_i$ measure the same quantity and thus they can
+be fitted with a single constant $\mu$. Two cases are treated. In the
+first case the two data points are also affected by a single offset
+(additive) correlated uncertainty $\sigma_c$. In the second case,
+instead, the data points are affected by a normalisation correlated
+uncertainty whose size is proportional to the central values through
+the factor $\delta_f$. Given the simplicity of the problem, it is
+possible in both cases to analytically compute the best value of $\mu$
+and its uncertainty $\delta\mu$ by minimising the $\chi^2$ and
+computing its second derivative at the minimum. As usual the $\chi^2$
+is defined as:
+\begin{equation}
+\chi^2 = \sum_{i,j=1}^2y_iV^{-1}_{ij}y_j = \mathbf{y}^T\cdot
+\mathbf{V}^{-1}\cdot \mathbf{y}\,,
+\end{equation}
+where $y_i=\mu-x_i$ and $V^{-1}_{ij}$ are the entries of the inverse
+of the covariance matrix.
+
+Let us start with the offset case in which the covariance matrix takes
+the form:
+\begin{equation}
+\mathbf{V}=
+\begin{pmatrix}
+\sigma_1^2+\sigma_c^2& \sigma_c^2\\
+\sigma_c^2& \sigma_2^2+\sigma_c^2
+\end{pmatrix}\,,
+\end{equation}
+whose inverse is:
+\begin{equation}
+\mathbf{V}^{-1}=\frac{1}{D}
+\begin{pmatrix}
+\sigma_2^2+\sigma_c^2& -\sigma_c^2\\
+-\sigma_c^2& \sigma_1^2+\sigma_c^2
+\end{pmatrix}\,,
+\end{equation}
+with $D=\sigma_1^2 \sigma_2^2+(\sigma_1^2+\sigma_2^2)
+\sigma_c^2$. With this we can straightforwardly compute the $\chi^2$:
+\begin{equation}
+\chi^2=\frac{\sigma_2^2y_1^2+\sigma_1^2y_2^2+(y_1-y_2)^2\sigma_c^2}{D}\,,
+\end{equation}
+that can be minimised w.r.t. to $\mu$ by requiring that:
+\begin{equation}\label{eq:minchi2}
+  \left.\frac{d\chi^2}{d\mu}\right|_{\mu=\overline{\mu}} = \left.2\frac{\sigma_2^2y_1+\sigma_1^2y_2}{D}\right|_{\mu=\overline{\mu}}=0\,,
+\end{equation}
+where $\overline{\mu}$ is the best fit value of $\mu$. Notice the
+cancellation in the numerator of the correlated uncertainty
+$\sigma_c$. This ``accidental'' cancellation in the offset case,
+caused by the fact that $\sigma_c$ is the same for both $x_1$ and
+$x_2$, can be regarded as the (misleading) evidence that the DAB only
+takes place in the normalisation case. The solution to
+Eq.~(\ref{eq:minchi2}) is:
+\begin{equation}\label{eq:offcv}
+\overline{\mu} = \frac{\sigma_2^2x_1+\sigma_1^2x_2}{\sigma_1^2+\sigma_2^2}=\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,,
+\end{equation}
+that fulfils the intuitive expectation that the best value of $\mu$
+should be a weighted average of the central values weighted by the
+inverse of the uncorrelated uncertainties squared. We can also compute
+the uncertainty of $\overline{\mu}$, $\delta\mu$, by simply computing
+the inverse of the second derivative of the $\chi^2$ at
+$\mu=\overline{\mu}$:\footnote{Actually, the second derivative of the
+  $\chi^2$ does not depend on $\mu$ and thus it is not necessary to
+  set $\mu=\overline{\mu}$.}
+\begin{equation}\label{eq:offcvunc}
+  \delta\mu^2 = \left[\frac12\frac{d^2\chi^2}{d\mu^2}\right]_{\mu=\overline{\mu}}^{-1} = \frac {\sigma_1^2 \sigma_2^2+(\sigma_1^2+\sigma_2^2) \sigma_c^2}{\sigma_2^2+\sigma_1^2}=\frac {1+\frac{\sigma_c^2}{\sigma_1^2}+\frac{\sigma_c^2}{\sigma_2^2} }{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,.
+\end{equation}
+
+I now move to considering the normalisation case in which the
+covariance matrix reads:
+\begin{equation}
+\mathbf{V}=
+\begin{pmatrix}
+\sigma_1^2+\delta_f^2x_1^2& \delta_f^2x_1x_2\\
+\delta_f^2x_1x_2& \sigma_2^2+\delta_f^2x_2^2
+\end{pmatrix}\,,
+\end{equation}
+whose inverse is:
+\begin{equation}
+\mathbf{V}^{-1}=\frac{1}{D}
+\begin{pmatrix}
+\sigma_2^2+\delta_f^2x_2^2& -\delta_f^2x_1x_2\\
+-\delta_f^2x_1x_2& \sigma_1^2+\delta_f^2x_1^2
+\end{pmatrix}\,,
+\end{equation}
+with
+$D=\sigma_1^2\sigma_2^2+\delta_f^2(\sigma_1^2x_2^2+\sigma_2^2x_1^2)$. The
+resulting $\chi^2$ is:
+\begin{equation}
+\chi^2=\frac{1}{D}\left[\sigma_2^2y_1^2+ \sigma_1^2y_2^2+\delta_f^2(x_2y_1 -x_1y_2)^2\right]\,.
+\end{equation}
+The minimum is computed as:
+\begin{equation}
+  \left.\frac{d\chi^2}{d\mu}\right|_{\mu=\overline{\mu}} = \left.2\frac{\sigma_2^2y_1+ \sigma_1^2y_2+\delta_f^2(x_2 -x_1)(x_2y_1 -x_1y_2)}{D}\right|_{\mu=\overline{\mu}}=0\,.
+\end{equation}
+This time, differently from the offset case, the correlated
+uncertainties in the denominator do not cancel and the result of the
+equation above is:
+\begin{equation}\label{eq:normcv}
+\overline{\mu} = \frac{\sigma_2^2x_1+\sigma_1^2x_2}{\sigma_1^2+\sigma_2^2+(\delta_f x_1-\delta_f x_2)^2}=\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}+\left(\frac{\delta_f x_1-\delta_f x_2}{\sigma_1\sigma_2}\right)^2}\,,
+\end{equation}
+while:
+\begin{equation}\label{eq:normcvunc}
+  \delta\mu^2 = \left[\frac12\frac{d^2\chi^2}{d\mu^2}\right]_{\mu=\overline{\mu}}^{-1} = \frac{\sigma_1^2\sigma_2^2+\delta_f^2(\sigma_1^2x_2^2+\sigma_2^2x_1^2)}{\sigma_2^2+ \sigma_1^2+\delta_f^2(x_1 -x_2)^2}=\frac{1+\frac{\delta_f^2 x_1^2}{\sigma_1^2}+\frac{\delta_f^2 x_2^2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+ \frac{1}{\sigma_2^2}+\left(\frac{\delta_f x_1 -\delta_f x_2}{\sigma_1\sigma_2}\right)^2}\,.
+\end{equation}
+According to Ref.~\cite{DAgostini:1993arp}, the term proportional to
+$\delta_f$ in the denominator of the r.h.s. of Eq.~(\ref{eq:normcv})
+is a source of bias in that it deviates from the intuitive expectation
+of Eq.~(\ref{eq:offcv}). Being this additional term positive, it tends
+to diminish the best fit value.
+
+I will now show that the additional term in the denominator of
+Eq.~(\ref{eq:normcv}) is not a specific feature of normalisation
+uncertainties. To see this, we consider the same data set of two data
+points but where the data point $x_1$ is affected by the additive
+uncertainty $\sigma_{c,1}$ and the point $x_2$ by the additive
+uncertainty $\sigma_{c,2}$. According to the same procedure followed
+above the final result for best-fit value and uncertainty of $\mu$ is:
+\begin{equation}\label{eq:add2cv}
+\overline{\mu} = \frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}+\left(\frac{\sigma_{c,1}-\sigma_{c,2}}{\sigma_1\sigma_2}\right)^2}\,,
+\end{equation}
+and:
+\begin{equation}
+  \delta\mu^2=\frac{1+\frac{\sigma_{c,1}^2}{\sigma_1^2}+\frac{\sigma_{c,2}^2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+ \frac{1}{\sigma_2^2}+\left(\frac{\sigma_{c,1} -\sigma_{c,2}}{\sigma_1\sigma_2}\right)^2}\,.
+\end{equation}
+These equations are (somewhat expectedly) equal to
+Eqs.~(\ref{eq:normcv}) and~(\ref{eq:normcvunc}) with the only
+difference that $\delta_fx_i$ is replaced by
+$\sigma_{c,i}$. Therefore, the DAB shows up also when additive
+uncertainties are considered as long as they are different in absolute
+value. Therefore, the DAB is not a prerogative of normalisation
+uncertainties only. As expected, the equations above reduce to
+Eqs.~(\ref{eq:offcv}) and~(\ref{eq:offcvunc}) when
+$\sigma_{c,1}=\sigma_{c,2}=\sigma_{c}$.
+
+Another important aspect of Eqs.~(\ref{eq:normcv})
+and~(\ref{eq:normcvunc}) is that the term that causes the ``bias'' is
+proportional to the difference $x_1-x_2$. Therefore, if the central
+values happen to be the same that term vanishes and thus no bias is
+present. This observation, along with the fact that the DAB is
+potentially present also when additive uncertainties are considered,
+leads us to a simple conclusion: the DAB is present in all cases
+whenever there are correlated uncertainties different in absolute
+value. This is trivially the case when one introduces different
+correlated additive uncertainties, $\sigma_{c,1}$ and $\sigma_{c,2}$
+with $\sigma_{c,1}\neq \sigma_{c,2}$. But this also the case in the
+presence of a normalisation uncertainties when central values are
+different ($x_1\neq x_2$). On the contrary, if
+$\sigma_{c,1}= \sigma_{c,2}$ in the additive case or $x_1=x_2$ in the
+multiplicative case, no ``bias'' is present. The conclusion is that
+the very distinction between additive and multiplicative uncertainties
+is immaterial.
+
+Now that we have established that the DAB is not a prerogative of
+normalisation uncertainties only, I will try to show that this is in
+fact not a bias but a manifestation of correlated uncertainties that,
+under the assumption that experimental uncertainties are faithfully
+estimated, needs not be corrected. The argument is based on the fact
+that, in the presence of correlations, a visual comparison between
+data and best fit value is meaningful only when including the
+systematic shifts.
+
+
+
 
 \begin{thebibliography}{alp}
 
