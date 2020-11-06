@@ -49,7 +49,7 @@ namespace apfel
   }
   double P0polgg::Regular(double const& x) const
   {
-    return 4 * CA * ( - 2 + x - x * x + 1 / x );
+    return 4 * CA * ( - 2 * x + 1 );
   }
   double P0polgg::Singular(double const& x) const
   {
@@ -125,7 +125,7 @@ namespace apfel
     const double dpgqmx = 2 + x;
     const double S2x    = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     return
-      + 4 * _nf * CF * TR * ( - 4 / 9. * ( x + 4 ) - 4 / 3. * dpgq * ln1mx )
+      + 4 * _nf * CF * TR * ( - 4 * ( x + 4 ) / 9. - 4 * dpgq * ln1mx / 3. )
       + 4 * CF * CF * ( - 1 / 2. - ( 4 - x ) * lnx / 2 - dpgqmx * ln1mx + ( - 4 - ln1mx2 + lnx2 / 2 ) * dpgq )
       + 4 * CF * CA * ( ( 4 - 13 * x ) * lnx + ( 10 + x ) * ln1mx / 3 + ( 41 + 35 * x ) / 9
                         + ( - 2 * S2x + 3 * lnx2 ) * dpgqmx / 2 + ( ln1mx2 - 2 * ln1mx * lnx - zeta2 ) * dpgq );
@@ -147,9 +147,9 @@ namespace apfel
     const double dpggmx = 1 / ( 1 + x ) + 2 * x + 1;
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
     const double ggg1  =
-      - 4 * CA * TR * _nf * ( 4 * ( 1 - x ) + 4 / 3 * ( 1 + x ) * lnx + 20 / 9. * dpgg )
+      - 4 * CA * TR * _nf * ( 4 * ( 1 - x ) + 4 * ( 1 + x ) / 3. * lnx + 20 / 9. * dpgg )
       - 4 * CF * TR * _nf * ( 10 * ( 1 - x ) + 2 * ( 5 - x ) * lnx + 2 * ( 1 + x ) * lnx2 )
-      + 4 * CA * CA * ( ( 29 - 67 * x ) * lnx / 3 - 19 * ( 1 - x ) / 2 + 4 * ( 1 + x ) * lnx2
+      + 4 * CA * CA * ( ( 29 - 67 * x ) * lnx / 3. - 19 * ( 1 - x ) / 2. + 4 * ( 1 + x ) * lnx2
                         - 2 * S2x * dpggmx + ( 67 / 9. - 4 * ln1mx * lnx + lnx2 - 2 * zeta2 ) * dpgg );
     const double ggg1l = _a2g / ( 1 - x );
     return ggg1 - ggg1l;
@@ -205,7 +205,7 @@ namespace apfel
     const double ln1mx3 = ln1mx * ln1mx2;
     const double P2ps1 = - 344./27. * lnx4 - (90.9198 + 81.50* x)* lnx3 - (368.6 - 349.9* x)* lnx2 - (739.0 - 232.57* ln1mx)* lnx
                          - 1362.6 + 1617.4 * x - 674.8 * x2 + 167.41 * x3 - 204.76 * ln1mx - 12.61 * ln1mx2 - 6.541 * ln1mx3;
-    const double P2ps2 = (1.1741 - 0.8253* x)* lnx3  + (13.287 + 10.657* x)* lnx + 45.482 * lnx + 49.13 - 30.77 * x - 4.307 * x2
+    const double P2ps2 = (1.1741 - 0.8253* x)* lnx3  + (13.287 + 10.657* x)* lnx2 + 45.482 * lnx + 49.13 - 30.77 * x - 4.307 * x2
                          - 0.5094 *x3 + 9.517 * ln1mx + 1.7805 * ln1mx2;
     return ( 1 - x ) * _nf * ( P2ps1 + _nf * P2ps2 );
   }
@@ -229,7 +229,7 @@ namespace apfel
     const double ln1mx3 = ln1mx * ln1mx2;
     const double ln1mx4 = ln1mx * ln1mx3;
     const double P2qg1 = - 151./3. * lnx4 - (385.64 + 73.30* x)* lnx3 - (894.8 - 1145.3* x)* lnx2 - (1461.2 - 825.4* ln1mx)* lnx
-                         - 2972.4 + 4672.* x - 1221.6 * x2 - 18.0 * x3 + 278.32* ln1mx - 90.26* ln1mx2 - 5.30 * ln1mx3 + 3.784*ln1mx4;
+                         - 2972.4 + 4672.* x - 1221.6 * x2 - 18.0 * x3 + 278.32* ln1mx - 90.26* ln1mx2 - 5.30* ln1mx3 + 3.784*ln1mx4;
     const double P2qg2 = 16./9. * lnx4 + (30.739  + 10.186* x) * lnx3 + (196.96 + 179.1* x)* lnx2 + (526.3  - 47.30* ln1mx)* lnx
                          + 499.65 - 432.18 * x - 141.63 * x2 - 11.34 * x3 - 6.256 * ln1mx + 7.32 * ln1mx2 + 0.7374 * ln1mx3;
     return _nf * ( P2qg1 + _nf * P2qg2 );
@@ -286,13 +286,11 @@ namespace apfel
   }
   double P2polgg::Singular(double const& x) const
   {
-    return ( 2643.521 - _nf * 412.172 + _nf * _nf * 16. / 9. ) / ( 1 - x );
+    return ( 2643.521 - _nf * ( 412.172 + _nf * 16. / 9. ) ) / ( 1 - x );
   }
   double P2polgg::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return 2643.521 * ln1mx + 4425.448 + 2.314
-           - _nf * ( 412.172 * ln1mx + 528.720 - 0.184 )
-           - _nf * _nf * ( 16./9. * ln1mx - 6.4630 + 0.0023 );
+    return 2643.521 * ln1mx + 4425.448 + 2.314 - _nf * ( 412.172 * ln1mx + 528.720 - 0.184 ) - _nf * _nf * ( 16. / 9. * ln1mx - 6.4630 + 0.0023 );
   }
 }
