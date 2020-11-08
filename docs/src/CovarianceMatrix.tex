@@ -997,7 +997,56 @@ $\chi^2$ to accommodate an inconsistency of the data set.
 \subsection{The effect of the $t_0$ prescription}
 
 In this section, I consider the effect of the iterative $t_0$
-prescription on the best fit value $\mu_0$.
+prescription on the best fit value $\overline{\mu}$. The $t_0$
+prescription essentially replaces the normalisation uncertainties
+$\delta_fx_1$ and $\delta_fx_2$ with one single correlated
+uncertainties $\delta_f t_0$, where $t_0$ is a ``guess'' for
+$\mu$. The net effect of this replacement is that the terms
+$\delta_fx_1$ and $\delta_fx_2$ in the r.h.s. of both
+Eqs.~(\ref{eq:normcv}) and~(\ref{eq:normcvunc}) are replaced by
+$\delta_ft_0$ and thus cancel, reducing to Eqs.(\ref{eq:offcv})
+and~(\ref{eq:offcvunc}). But this should not be surprising because the
+$t_0$ prescription is essentially replacing two correlated
+uncertainties that are different in value with two correlated
+uncertainties that are instead \textit{equal}. This makes the
+normalisation case artificially equal to the offset case in which the
+DAB is not present.
+
+Now, what happens if one iterates the $t_0$? Let us indicate with
+$\overline{\mu}_i$ and $\delta\mu_i^2$ best fit value and variance at
+the $i$-th iteration. As explained above, the zero-th iteration gives:
+\begin{equation}
+\overline{\mu}_0 =\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,,
+\end{equation}
+and:
+\begin{equation}
+  \delta\mu_0^2 = \frac{1+\frac{\delta_f^2 t_0^2}{\sigma_1^2}+\frac{\delta_f^2 t_0^2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+ \frac{1}{\sigma_2^2}}\,.
+\end{equation}
+Since $\overline{\mu}_0$ does not depend on $t_0$, all following
+iterations will give the exact same result, \textit{i.e.}
+$\overline{\mu}_i=\overline{\mu}_0$ $\forall i>0$. The stabilisation
+happens only one step further for the uncertainty for which one finds
+$\delta\mu_i^2=\delta\mu_1^2$ $\forall i>1$, with:
+\begin{equation}
+  \delta\mu_1^2 = \frac{1+\frac{\delta_f^2 \overline{\mu}_0^2}{\sigma_1^2}+\frac{\delta_f^2 \overline{\mu}_0^2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+ \frac{1}{\sigma_2^2}}=\frac{1}{\frac{1}{\sigma_1^2}+ \frac{1}{\sigma_2^2}}+\delta_f^2\overline{\mu}_0^2\,.
+\end{equation}
+As above, I set $\sigma_1=\sigma_2=\varepsilon$ getting:
+\begin{equation}
+\overline{\mu}_0 =\frac{x_1+x_2}{2}\,,
+\end{equation}
+and:
+\begin{equation}
+  \delta\mu_1^2 = \frac{\varepsilon^2}{2}+\frac{\delta_f^2  (x_1+x_2)^2}{4}\,.
+\end{equation}
+Now, I plug $\overline{\mu}_0$ into the original definition of the
+$\chi^2$. The result is:
+\begin{equation}
+\chi^2=\left(\frac{x_1- x_2}{2}\right)^2\left[\frac{1}{\varepsilon^2+\delta_f^2(x_1^2+x_2^2)}+\frac{1}{\varepsilon^2}\right]\,.
+\end{equation}
+
+
+
+
 
 \newpage
 \begin{thebibliography}{alp}
