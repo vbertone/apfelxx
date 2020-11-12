@@ -26,7 +26,7 @@ namespace apfel
      * @param Map: the convolution map (defualt: empty ConvolutionMap)
      * @param in: a map of objects of type T (defualt: empty map of objects)
      */
-    Set(ConvolutionMap const& Map = ConvolutionMap{"UNDEFINED"}, std::map<int, T> const& in = std::map<int, T>{});
+    Set(ConvolutionMap const& Map = ConvolutionMap{"UNDEFINED"}, std::map<int, T> const& in = std::map<int, T> {});
 
     /**
      * @name Binary operators
