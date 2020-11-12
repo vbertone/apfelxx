@@ -42,7 +42,7 @@ namespace apfel
       WriteGridInfo();
 
     // Do the tabulation.
-    for (auto const& s: setup.InSet)
+    for (auto const& s: _setup.InSet)
       TabulateEvolution(s);
   }
 
@@ -566,8 +566,8 @@ namespace apfel
     info += "Reference: arXiv:1708.00911\n";
     info += "Format: lhagrid1\n";
     info += "DataVersion: 1\n";
-    info += "NumMembers: 1\n";
-    info += "Particle: 2212\n";
+    info += "NumMembers: " +  std::to_string(_setup.InSet.size()) + "\n";
+    info += "Particle: 0000\n";
 
     info += "Flavors: [";
     for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
