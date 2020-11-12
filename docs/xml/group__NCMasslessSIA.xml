@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
   <compounddef id="group__NCMasslessSIA" kind="group">
     <compoundname>NCMasslessSIA</compoundname>
-    <title>Zero-mass coefficient functions for SIA</title>
+    <title>Zero-mass coefficient functions for unpolarised SIA</title>
     <innerclass refid="classapfel_1_1C21Tns" prot="public">apfel::C21Tns</innerclass>
     <innerclass refid="classapfel_1_1C22Tnsp" prot="public">apfel::C22Tnsp</innerclass>
     <innergroup refid="group__NLOzmSIA">NLO zero-mass coefficient functions</innergroup>

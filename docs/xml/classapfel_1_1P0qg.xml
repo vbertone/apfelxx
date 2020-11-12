@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="62" column="15" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="62" bodyend="-1"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="61" column="15" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="59" column="5"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="58" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P0qg_1a1d8603b5f31361248eaa55b821a294ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="60" column="12"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="59" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -88,7 +88,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="56" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="57" bodyend="63"/>
+    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="55" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="56" bodyend="62"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P0qg</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::P0qg</scope><name>_extvar</name></member>

@@ -20,7 +20,7 @@ var searchData=
   ['timer_754',['Timer',['../classapfel_1_1Timer.html',1,'apfel::Timer'],['../classapfel_1_1Timer.html#a4f3105d4294bfd96952d01e79c5bf63f',1,'apfel::Timer::Timer()']]],
   ['timer_2eh_755',['timer.h',['../timer_8h.html',1,'']]],
   ['time_2dlike_20matching_20functions_756',['Time-like matching functions',['../group__TLMatchFunc.html',1,'']]],
-  ['time_2dlike_20splitting_20function_757',['Time-like splitting function',['../group__TLSplittings.html',1,'']]],
+  ['time_2dlike_20splitting_20functions_757',['Time-like splitting functions',['../group__TLSplittings.html',1,'']]],
   ['tmdbuilder_2eh_758',['tmdbuilder.h',['../tmdbuilder_8h.html',1,'']]],
   ['tmd_20matching_20functions_759',['TMD matching functions',['../group__TMDMatchingFunctions.html',1,'']]],
   ['tmdobjects_760',['TmdObjects',['../structapfel_1_1TmdObjects.html',1,'apfel']]],

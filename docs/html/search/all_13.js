@@ -1,7 +1,7 @@
 var searchData=
 [
   ['space_2dlike_20matching_20conditions_698',['Space-like matching conditions',['../group__MatchCond.html',1,'']]],
-  ['set_699',['Set',['../classapfel_1_1Set.html',1,'apfel::Set&lt; T &gt;'],['../classapfel_1_1Set.html#afe0583488cebd90db88770e907a1d2d2',1,'apfel::Set::Set()']]],
+  ['set_699',['Set',['../classapfel_1_1Set.html',1,'apfel::Set&lt; T &gt;'],['../classapfel_1_1Set.html#a306c665cf4ed9b77a9633ffd877aeaa3',1,'apfel::Set::Set()']]],
   ['set_2eh_700',['set.h',['../set_8h.html',1,'']]],
   ['set_3c_20apfel_3a_3aoperator_20_3e_701',['Set&lt; apfel::Operator &gt;',['../classapfel_1_1Set.html',1,'apfel']]],
   ['setexternalvariable_702',['SetExternalVariable',['../classapfel_1_1Expression.html#af959cfade2e38ffd122112eab748d8ef',1,'apfel::Expression']]],
@@ -20,7 +20,7 @@ var searchData=
   ['size_715',['size',['../classapfel_1_1ExtendedVector.html#af04961758c5e23ae52d956042dde5fa3',1,'apfel::ExtendedVector::size()'],['../classapfel_1_1matrix.html#aa1828d253916d16d8018c2a232db5303',1,'apfel::matrix::size()']]],
   ['skip_716',['skip',['../structapfel_1_1StructureFunctionObjects.html#a9f1b3557881f7d54fdc30d4aaed976ff',1,'apfel::StructureFunctionObjects']]],
   ['space_2dlike_20matching_20functions_717',['Space-like matching functions',['../group__SLMatchFunc.html',1,'']]],
-  ['space_2dlike_20splitting_20function_20collection_718',['Space-like splitting function Collection',['../group__SLSplittings.html',1,'']]],
+  ['space_2dlike_20splitting_20functions_718',['Space-like splitting functions',['../group__SLSplittings.html',1,'']]],
   ['space_719',['SPACE',['../structapfel_1_1EvolutionSetup.html#a4188fd899c89d904b14feea52c039af7ac759fa97a9cb29a84f162fb085281510',1,'apfel::EvolutionSetup']]],
   ['specialfunctions_2eh_720',['specialfunctions.h',['../specialfunctions_8h.html',1,'']]],
   ['splittingfunctions_721',['SplittingFunctions',['../structapfel_1_1DglapObjects.html#a9fd9557aeab57928994f9f53065c266e',1,'apfel::DglapObjects']]],

@@ -11,14 +11,13 @@
 namespace apfel
 {
   /**
-   * @defgroup SLSplittings Space-like splitting function Collection
-   * of the MSbar space-like splitting functions up to the highest
-   * order currently known for unpolarised, polarised, and
-   * transversity evolution.
-   * @note While for the O(&alpha;<SUB>s</SUB>) and
-   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) splitting functions exact
-   * expressions are used, a fast parameterisation for the
-   * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) (and
+   * @defgroup SLSplittings Space-like splitting functions
+   * Collection of the MSbar space-like splitting functions up to the
+   * highest order currently known for unpolarised, polarised, and
+   * transversity evolution.  @note While for the
+   * O(&alpha;<SUB>s</SUB>) and O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * splitting functions exact expressions are used, a fast
+   * parameterisation for the O(&alpha;<SUB>s</SUB><SUP>3</SUP>) (and
    * O(&alpha;<SUB>s</SUB><SUP>4</SUP>) when available) ones is
    * used. See https://www.liverpool.ac.uk/~avogt/split.html for more
    * details.

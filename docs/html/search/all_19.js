@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['zero_2dmass_20coefficient_20functions_20for_20dis_817',['Zero-mass coefficient functions for DIS',['../group__NCMassless.html',1,'']]],
-  ['zero_2dmass_20coefficient_20functions_20for_20sia_818',['Zero-mass coefficient functions for SIA',['../group__NCMasslessSIA.html',1,'']]],
+  ['zero_2dmass_20coefficient_20functions_20for_20unpolarised_20dis_817',['Zero-mass coefficient functions for unpolarised DIS',['../group__NCMassless.html',1,'']]],
+  ['zero_2dmass_20coefficient_20functions_20for_20unpolarised_20sia_818',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
   ['zeromasscoefficientfunctionsunp_5fsl_2eh_819',['zeromasscoefficientfunctionsunp_sl.h',['../zeromasscoefficientfunctionsunp__sl_8h.html',1,'']]],
   ['zeromasscoefficientfunctionsunp_5ftl_2eh_820',['zeromasscoefficientfunctionsunp_tl.h',['../zeromasscoefficientfunctionsunp__tl_8h.html',1,'']]],
   ['zeta2_821',['zeta2',['../group__MathConstants.html#ga35fb1a2f328a8628032d37315c2e6366',1,'apfel']]],

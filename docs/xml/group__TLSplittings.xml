@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
   <compounddef id="group__TLSplittings" kind="group">
     <compoundname>TLSplittings</compoundname>
-    <title>Time-like splitting function</title>
+    <title>Time-like splitting functions</title>
     <innergroup refid="group__TransSFtl">Transversely polarised splitting functions</innergroup>
     <innergroup refid="group__UnpSFtl">Unpolarised splitting functions</innergroup>
     <briefdescription>

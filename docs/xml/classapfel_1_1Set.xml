@@ -234,18 +234,20 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classapfel_1_1Set_1afe0583488cebd90db88770e907a1d2d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classapfel_1_1Set_1a306c665cf4ed9b77a9633ffd877aeaa3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>apfel::Set&lt; T &gt;::Set</definition>
-        <argsstring>(ConvolutionMap const &amp;Map, std::map&lt; int, T &gt; const &amp;in)</argsstring>
+        <argsstring>(ConvolutionMap const &amp;Map=ConvolutionMap{&quot;UNDEFINED&quot;}, std::map&lt; int, T &gt; const &amp;in=std::map&lt; int, T &gt; {})</argsstring>
         <name>Set</name>
         <param>
           <type><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref> const &amp;</type>
           <declname>Map</declname>
+          <defval><ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref>{&quot;UNDEFINED&quot;}</defval>
         </param>
         <param>
           <type>std::map&lt; int, T &gt; const &amp;</type>
           <declname>in</declname>
+          <defval>std::map&lt; int, T &gt; {}</defval>
         </param>
         <briefdescription>
 <para>The <ref refid="classapfel_1_1Set" kindref="compound">Set</ref> constructor. </para>
@@ -256,7 +258,7 @@
 <parametername>Map</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the convolution map </para>
+<para>the convolution map (defualt: empty <ref refid="classapfel_1_1ConvolutionMap" kindref="compound">ConvolutionMap</ref>) </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -264,7 +266,7 @@
 <parametername>in</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>a map of objects of type T </para>
+<para>a map of objects of type T (defualt: empty map of objects) </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -448,7 +450,7 @@
       <member refid="classapfel_1_1Set_1af6ff99865195bca63bbee4ef08b7be74" prot="public" virt="non-virtual"><scope>apfel::Set</scope><name>operator-=</name></member>
       <member refid="classapfel_1_1Set_1a7309377f46892a67744d42c8c971287c" prot="public" virt="non-virtual"><scope>apfel::Set</scope><name>operator/=</name></member>
       <member refid="classapfel_1_1Set_1ae2cb3103d4459526d6812a5666485441" prot="private" virt="non-virtual"><scope>apfel::Set</scope><name>operator&lt;&lt;</name></member>
-      <member refid="classapfel_1_1Set_1afe0583488cebd90db88770e907a1d2d2" prot="public" virt="non-virtual"><scope>apfel::Set</scope><name>Set</name></member>
+      <member refid="classapfel_1_1Set_1a306c665cf4ed9b77a9633ffd877aeaa3" prot="public" virt="non-virtual"><scope>apfel::Set</scope><name>Set</name></member>
       <member refid="classapfel_1_1Set_1ac2b7cfa13e427b34727d36c9ba28feb1" prot="public" virt="non-virtual"><scope>apfel::Set</scope><name>SetMap</name></member>
       <member refid="classapfel_1_1Set_1a7b3aa798e80a7b08b52ac7e2fe5e5347" prot="public" virt="non-virtual"><scope>apfel::Set</scope><name>SetObjects</name></member>
     </listofallmembers>

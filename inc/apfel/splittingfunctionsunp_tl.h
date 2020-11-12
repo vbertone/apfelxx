@@ -11,7 +11,7 @@
 namespace apfel
 {
   /**
-   * @defgroup TLSplittings Time-like splitting function
+   * @defgroup TLSplittings Time-like splitting functions
    * Collection of the MSbar time-like splitting functions up to the
    * highest order currently known for unpolarised, polarised (not
    * yet!), and transversity evolution.

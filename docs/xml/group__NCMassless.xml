@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
   <compounddef id="group__NCMassless" kind="group">
     <compoundname>NCMassless</compoundname>
-    <title>Zero-mass coefficient functions for DIS</title>
+    <title>Zero-mass coefficient functions for unpolarised DIS</title>
     <innerclass refid="classapfel_1_1C21ns" prot="public">apfel::C21ns</innerclass>
     <innerclass refid="classapfel_1_1C22nsp" prot="public">apfel::C22nsp</innerclass>
     <innergroup refid="group__NLOzm">NLO zero-mass coefficient functions</innergroup>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['set_1534',['Set',['../classapfel_1_1Set.html#afe0583488cebd90db88770e907a1d2d2',1,'apfel::Set']]],
+  ['set_1534',['Set',['../classapfel_1_1Set.html#a306c665cf4ed9b77a9633ffd877aeaa3',1,'apfel::Set']]],
   ['setexternalvariable_1535',['SetExternalVariable',['../classapfel_1_1Expression.html#af959cfade2e38ffd122112eab748d8ef',1,'apfel::Expression']]],
   ['setinitialdistributions_1536',['SetInitialDistributions',['../classapfel_1_1Dglap.html#a19ef0f9a007856ba1bd46f07dea5f93a',1,'apfel::Dglap::SetInitialDistributions(std::function&lt; double(int const &amp;, double const &amp;)&gt; const &amp;InDistFunc)'],['../classapfel_1_1Dglap.html#a04933fdfd995c4c3efd63bd5d18729de',1,'apfel::Dglap::SetInitialDistributions(std::function&lt; std::map&lt; int, double &gt;(double const &amp;)&gt; const &amp;InDistFunc)'],['../classapfel_1_1Dglap.html#a67f9c5ca05164c1ea2804341de2bced8',1,'apfel::Dglap::SetInitialDistributions(std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;mu)']]],
   ['setjointgrid_1537',['SetJointGrid',['../classapfel_1_1Distribution.html#a66c033d0c916523ea0f75f16c09985f8',1,'apfel::Distribution']]],

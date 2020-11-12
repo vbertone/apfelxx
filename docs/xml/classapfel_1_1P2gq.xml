@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="265" column="15" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="265" bodyend="-1"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="264" column="15" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="264" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="262" column="5"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="261" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P2gq_1ac0a7e7613c4d19f4b0ffb32ce8432ca0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="263" column="12"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="262" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -88,7 +88,7 @@
         <link refid="classapfel_1_1Expression"/>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="259" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="260" bodyend="266"/>
+    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="258" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="259" bodyend="265"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P2gq</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::P2gq</scope><name>_extvar</name></member>

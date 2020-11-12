@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="72" column="5"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="71" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classapfel_1_1P0gq_1a6e0b4396abe227802b9b93247aacfe25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="73" column="12"/>
+        <location file="inc/apfel/splittingfunctionsunp_sl.h" line="72" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -69,7 +69,7 @@
         <link refid="classapfel_1_1Expression"/>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="69" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="70" bodyend="74"/>
+    <location file="inc/apfel/splittingfunctionsunp_sl.h" line="68" column="3" bodyfile="inc/apfel/splittingfunctionsunp_sl.h" bodystart="69" bodyend="73"/>
     <listofallmembers>
       <member refid="classapfel_1_1Expression_1ac64c55986740b395e3bfe85a78d980e9" prot="protected" virt="non-virtual"><scope>apfel::P0gq</scope><name>_eta</name></member>
       <member refid="classapfel_1_1Expression_1a11a7ff9afcac4667b3b3c3b6118dc9f3" prot="protected" virt="non-virtual"><scope>apfel::P0gq</scope><name>_extvar</name></member>

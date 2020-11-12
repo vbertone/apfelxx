@@ -1451,7 +1451,7 @@
     <member refid="classapfel_1_1Set_1a38e7fdcce8429e6f6066c9b0af60cc08" kind="function"><name>GetObjects</name></member>
     <member refid="classapfel_1_1Set_1a271510f77a70002dc352648a41867307" kind="variable"><name>_map</name></member>
     <member refid="classapfel_1_1Set_1ac26612986822c3154a3e39dd487f5d40" kind="variable"><name>_objects</name></member>
-    <member refid="classapfel_1_1Set_1afe0583488cebd90db88770e907a1d2d2" kind="function"><name>Set</name></member>
+    <member refid="classapfel_1_1Set_1a306c665cf4ed9b77a9633ffd877aeaa3" kind="function"><name>Set</name></member>
     <member refid="classapfel_1_1Set_1ac2b7cfa13e427b34727d36c9ba28feb1" kind="function"><name>SetMap</name></member>
     <member refid="classapfel_1_1Set_1a7b3aa798e80a7b08b52ac7e2fe5e5347" kind="function"><name>SetObjects</name></member>
     <member refid="classapfel_1_1Set_1a7065697bdd240416184fee23592c77fa" kind="function"><name>Combine</name></member>
