@@ -64,10 +64,7 @@ namespace apfel
     // Construct vector of subgrids.
     std::vector<SubGrid> sg;
     for (auto const& gp : _setup.GridParameters)
-      if(gp.xgext.empty())
-        sg.push_back(SubGrid{gp.nx, gp.xmin, gp.id});
-      else
-        sg.push_back(SubGrid{gp.xgext, gp.id});
+      sg.push_back(SubGrid{gp.nx, gp.xmin, gp.id});
 
     // Intialise the x-space grid.
     _g = std::unique_ptr<const Grid>(new Grid{sg});
@@ -189,49 +186,16 @@ namespace apfel
             passed = false;
           }
 
-        // Internal grid.
-        if(gp.xgext.empty())
+        if (gp.nx < gp.id + 1)
           {
-            if (gp.nx < gp.id + 1)
-              {
-                std::cout << error("InitialiseEvolution::CheckSetup", "The number of nodes of each subgrid must be bigger than the interpolation degree plus one.") << std::endl;
-                passed = false;
-              }
-
-            if (gp.xmin <= 0 || gp.xmin >= 1)
-              {
-                std::cout << error("InitialiseEvolution::CheckSetup", "The lower bound xmin of each subgrid must be such that 0 < xmin < 1.") << std::endl;
-                passed = false;
-              }
+            std::cout << error("InitialiseEvolution::CheckSetup", "The number of nodes of each subgrid must be bigger than the interpolation degree plus one.") << std::endl;
+            passed = false;
           }
-        else
+
+        if (gp.xmin <= 0 || gp.xmin >= 1)
           {
-            // Esternal grid.
-            const std::vector<double> v = gp.xgext;
-
-            if (!std::is_sorted(v.begin(),v.end()))
-              {
-                std::cout << error("InitialiseEvolution::CheckSetup", "The grid vector of a subgrid is not sorted.") << std::endl;
-                passed = false;
-              }
-
-            if (v.front() <= 0 || v.front() >= 1)
-              {
-                std::cout << error("InitialiseEvolution::CheckSetup", "The first element of each subgrid vector must be between 0 and 1.") << std::endl;
-                passed = false;
-              }
-
-            if (std::abs(v.back() - 1) > eps10)
-              {
-                std::cout << error("InitialiseEvolution::CheckSetup", "The last element of each subgrid vector must be equal to 1.") << std::endl;
-                passed = false;
-              }
-
-            if ((int) v.size() < gp.id+1)
-              {
-                std::cout << error("InitialiseEvolution::CheckSetup", "The number of nodes of each subgrid must be bigger than the interpolation degree plus one.") << std::endl;
-                passed = false;
-              }
+            std::cout << error("InitialiseEvolution::CheckSetup", "The lower bound xmin of each subgrid must be such that 0 < xmin < 1.") << std::endl;
+            passed = false;
           }
       }
 
@@ -530,15 +494,9 @@ namespace apfel
     // Report x-grid parameters.
     report += "- Grid in x: " + std::to_string(_setup.GridParameters.size()) + " subgrids in x found with the following parameters:\n";
     for (auto const& gp : _setup.GridParameters)
-      if (gp.xgext.empty())
-        report += "  + internal grid with " + std::to_string(gp.nx)
-                  + " nodes in the range [" + std::to_string(gp.xmin)
-                  + ":1] with interpolation degree " + std::to_string(gp.id) + "\n";
-      else
-        report += "  + ixternal grid with " + std::to_string(gp.xgext.size())
-                  + " nodes in the range [" + std::to_string(gp.xgext.front())
-                  + ":" + std::to_string(gp.xgext.back())
-                  + "] with interpolation degree " + std::to_string(gp.id) + "\n";
+      report += "  + internal grid with " + std::to_string(gp.nx)
+                + " nodes in the range [" + std::to_string(gp.xmin)
+                + ":1] with interpolation degree " + std::to_string(gp.id) + "\n";
 
     // Report Q-grid parameters.
     report += "- Grid in Q: " + std::to_string(_setup.nQg)

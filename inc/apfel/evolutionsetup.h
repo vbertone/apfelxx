@@ -54,7 +54,6 @@ namespace apfel
       int    nx;                  //!< Number of nodes
       double xmin;                //!< Minimum value of x
       int    id;                  //!< Interpolation degree
-      std::vector<double> xgext;  //!< External grid (if any)
     };
 
     /**
@@ -97,7 +96,7 @@ namespace apfel
     EvolutionSetup():
       name("default"),
       Q0(sqrt(2)),
-      GridParameters{{100, 1e-5, 3, {}}, {60, 1e-1, 3, {}}, {50, 6e-1, 3, {}}, {50, 8e-1, 3, {}}},
+      GridParameters{{100, 1e-5, 3}, {60, 1e-1, 3}, {50, 6e-1, 3}, {50, 8e-1, 3}},
       nQg(50), Qmin(1), Qmax(1000), InterDegreeQ(3), Lambda(0.25),
       PerturbativeOrder(2),
       FlavourScheme(VFNS),
