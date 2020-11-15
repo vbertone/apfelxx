@@ -92,14 +92,14 @@ It is then easy to see that the $\chi^2$ can be written as:
 \begin{equation}
 \chi^2 = \left|\mathbf{L}^{-1}\cdot \mathbf{y}\right|^2\,.
 \end{equation}
-But the vector $\mathbf{x} \equiv \mathbf{L}^{-1}\cdot \mathbf{y}$ is
+But the vector ${\bm \chi} \equiv \mathbf{L}^{-1}\cdot \mathbf{y}$ is
 the solution of the linear system:
-\begin{equation}
-  \mathbf{L} \cdot \mathbf{x} = \mathbf{y}\,,
+\begin{equation}\label{eq:chivdef}
+  \mathbf{L} \cdot {\bm \chi} = \mathbf{y}\,,
 \end{equation}
 that can be efficiently solved by forward substitution, so that:
 \begin{equation}
-  \chi^2 = \left|\mathbf{x}\right|^2\,.
+  \chi^2 = \left|{\bm \chi}\right|^2\,.
 \end{equation}
 Following this procedure, one does not need to compute explicitly the
 inverse of the covariance matrix $\mathbf{V}$, simplifying
@@ -159,80 +159,80 @@ matrix takes the form:
     mult}^{(l)}t_i^{(0)}t_j^{(0)}\,.
 \end{equation}
 
-\section{Artificial generation of correlated systematics}
+% \section{Artificial generation of correlated systematics}
 
-In order to implement the definition of the $\chi^2$ discussed above,
-it is necessary to have the experimental information in terms of the
-correlated systematic uncertainties $\sigma_{i,\rm corr}^{(l)}$. This
-is what the experimental collaborations usually release. However, in
-some cases this information is given in terms of a covariance
-matrix. Therefore, one needs to find a workaround to generate
-correlated systematic uncertainties out of a covariance matrix. 
+% In order to implement the definition of the $\chi^2$ discussed above,
+% it is necessary to have the experimental information in terms of the
+% correlated systematic uncertainties $\sigma_{i,\rm corr}^{(l)}$. This
+% is what the experimental collaborations usually release. However, in
+% some cases this information is given in terms of a covariance
+% matrix. Therefore, one needs to find a workaround to generate
+% correlated systematic uncertainties out of a covariance matrix. 
 
-Given a $n \times n$ symmetric matrix $\mathbf{C}$, it will have $n$
-orthonormal eigenvectors $\mathbf{x}^{(i)}$, such that
-$\mathbf{x}^{(i)}\cdot \mathbf{x}^{(j)}=\delta_{ij}$, each of which
-will have a non-negative eigenvalue $\lambda_i$ associated:
-\begin{equation}
-  \mathbf{C}\cdot \mathbf{x}^{(i)} = \lambda_i \mathbf{x}^{(i)}\,, \quad
-  i =1,\dots,n\,.
-\end{equation}
-If one defines:
-\begin{equation}\label{eq:artsys}
-  \sigma_{i,\rm corr}^{(l)} = \sqrt{\lambda_l} x_i^{(l)}\,,\quad i,l=1,\dots,n\,,
-\end{equation}
-one can show that:
-\begin{equation}\label{eq:artsydef}
-  \sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} =C_{ij}\,.
-\end{equation}
-To prove this equality, I start from the following matricial relation:
-\begin{equation}
-\mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{-1}\,,
-\end{equation}
-where $\mathbf{\Lambda}$ is a diagonal matrix with the eigenvalues
-$\lambda_i$ on the diagonal ($\Lambda_{ij} = \lambda_i\delta_{ij}$),
-while $\mathbf{Q}$ is a matrix whose columns are the eigenvectors
-$\mathbf{x}^{(i)}$ ($Q_{ij} = x_{i}^{(j)}$). In addition, since in
-this particular case
-$\mathbf{x}^{(i)}\cdot \mathbf{x}^{(j)}=\delta_{ij}$, this implies
-that:
-\begin{equation}
-\mathbf{Q}^T \cdot \mathbf{Q}  = \mathbf{I}\quad\Rightarrow\quad
-\mathbf{Q}^{-1} =  \mathbf{Q}^{T}\,,
-\end{equation}
-so that:
-\begin{equation}\label{eq:diagC}
-  \mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{T}\,.
-\end{equation}
-It follows that:
-\begin{equation}
-  C_{ij} =\sum_{k,l=1}^{n}Q_{ik}\Lambda_{kl} Q_{jl} = \sum_{k,l=1}^{n} x_{i}^{(k)}
-  \lambda_{k}\delta_{kl}x_{j}^{(l)} = \sum_{l=1}^{n} \lambda_{l}x_{i}^{(l)}
-  x_{j}^{(l)}=\sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} \,,
-\end{equation}
-as required.
+% Given a $n \times n$ symmetric matrix $\mathbf{C}$, it will have $n$
+% orthonormal eigenvectors $\mathbf{x}^{(i)}$, such that
+% $\mathbf{x}^{(i)}\cdot \mathbf{x}^{(j)}=\delta_{ij}$, each of which
+% will have a non-negative eigenvalue $\lambda_i$ associated:
+% \begin{equation}
+%   \mathbf{C}\cdot \mathbf{x}^{(i)} = \lambda_i \mathbf{x}^{(i)}\,, \quad
+%   i =1,\dots,n\,.
+% \end{equation}
+% If one defines:
+% \begin{equation}\label{eq:artsys}
+%   \sigma_{i,\rm corr}^{(l)} = \sqrt{\lambda_l} x_i^{(l)}\,,\quad i,l=1,\dots,n\,,
+% \end{equation}
+% one can show that:
+% \begin{equation}\label{eq:artsydef}
+%   \sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} =C_{ij}\,.
+% \end{equation}
+% To prove this equality, I start from the following matricial relation:
+% \begin{equation}
+% \mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{-1}\,,
+% \end{equation}
+% where $\mathbf{\Lambda}$ is a diagonal matrix with the eigenvalues
+% $\lambda_i$ on the diagonal ($\Lambda_{ij} = \lambda_i\delta_{ij}$),
+% while $\mathbf{Q}$ is a matrix whose columns are the eigenvectors
+% $\mathbf{x}^{(i)}$ ($Q_{ij} = x_{i}^{(j)}$). In addition, since in
+% this particular case
+% $\mathbf{x}^{(i)}\cdot \mathbf{x}^{(j)}=\delta_{ij}$, this implies
+% that:
+% \begin{equation}
+% \mathbf{Q}^T \cdot \mathbf{Q}  = \mathbf{I}\quad\Rightarrow\quad
+% \mathbf{Q}^{-1} =  \mathbf{Q}^{T}\,,
+% \end{equation}
+% so that:
+% \begin{equation}\label{eq:diagC}
+%   \mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{T}\,.
+% \end{equation}
+% It follows that:
+% \begin{equation}
+%   C_{ij} =\sum_{k,l=1}^{n}Q_{ik}\Lambda_{kl} Q_{jl} = \sum_{k,l=1}^{n} x_{i}^{(k)}
+%   \lambda_{k}\delta_{kl}x_{j}^{(l)} = \sum_{l=1}^{n} \lambda_{l}x_{i}^{(l)}
+%   x_{j}^{(l)}=\sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} \,,
+% \end{equation}
+% as required.
 
-The matrix \textbf{C} can be regarded as the correlated contribution to
-the full covariance matrix \textbf{V}. In particular, considering
-Eqs.~(\ref{eq:covmat}) and~(\ref{eq:covmat2}), one can write:
-\begin{equation}
-\mathbf{V} = \mathbf{U} + \mathbf{C}\,,
-\end{equation}
-where $\mathbf{U}$ is a diagonal matrix of uncorrelated uncertainties:
-\begin{equation}
-U_{ij} = s_i^2\delta_{ij}\,.
-\end{equation}
-This defines the matrix $\mathbf{C}$ as:
-\begin{equation}\label{eq:corrdef}
-\mathbf{C} = \mathbf{V} - \mathbf{U}\,,
-\end{equation}
-such that, given a $n\times n$ covariance matrix $\mathbf{V}$ along
-with its uncorrelated contribution $\mathbf{U}$, one can generate a
-set of $n$ \textit{artificial} correlated systematics according to
-Eq.~(\ref{eq:artsys}), where $\mathbf{C}$ is given in
-Eq.~(\ref{eq:corrdef}), for each of the $n$ measurements. This allows
-one to implement Eq.~(\ref{eq:covmat4}) for the construction of the
-covariance matrix.
+% The matrix \textbf{C} can be regarded as the correlated contribution to
+% the full covariance matrix \textbf{V}. In particular, considering
+% Eqs.~(\ref{eq:covmat}) and~(\ref{eq:covmat2}), one can write:
+% \begin{equation}
+% \mathbf{V} = \mathbf{U} + \mathbf{C}\,,
+% \end{equation}
+% where $\mathbf{U}$ is a diagonal matrix of uncorrelated uncertainties:
+% \begin{equation}
+% U_{ij} = s_i^2\delta_{ij}\,.
+% \end{equation}
+% This defines the matrix $\mathbf{C}$ as:
+% \begin{equation}\label{eq:corrdef}
+% \mathbf{C} = \mathbf{V} - \mathbf{U}\,,
+% \end{equation}
+% such that, given a $n\times n$ covariance matrix $\mathbf{V}$ along
+% with its uncorrelated contribution $\mathbf{U}$, one can generate a
+% set of $n$ \textit{artificial} correlated systematics according to
+% Eq.~(\ref{eq:artsys}), where $\mathbf{C}$ is given in
+% Eq.~(\ref{eq:corrdef}), for each of the $n$ measurements. This allows
+% one to implement Eq.~(\ref{eq:covmat4}) for the construction of the
+% covariance matrix.
 
 \section{Determining the systematic shifts}\label{eq:sysshifts}
 
@@ -379,6 +379,167 @@ $\sigma_1^u=\sigma_2^u$ since the beginning in Eq.~(\ref{eq:fullset})
 which indeed gives a singular $\chi^2$ because the covariance matrix
 is singular. Eq.~(\ref{eq:redchi21}) does not produce these features
 hanging in favour of Eq.~(\ref{eq:fullchi2trunc}).
+
+As a further argument in favour of Eq.~(\ref{eq:fullchi2trunc}) and
+against Eq.~(\ref{eq:redchi21}), I consider a larger data set with,
+say, $n$ data points and split it into two subsets with $n_1$ and
+$n_2$ data points, respectively, such that $n_1+n_2=n$. As I will
+explicitly show below, Eq.~(\ref{eq:fullchi2trunc}) guarantees that
+the $\chi^2$'s of the two subsets, $\chi_1^2$ and $\chi_2^2$, combine
+sensibly to give the total $\chi^2$. I will also show that this is not
+the case for Eq.~(\ref{eq:redchi21}). The fulfilment of this condition
+is crucial to ensure that the experimental information carried by the
+data set as a whole is preserved also when one is either not able or
+does not want to make predictions for subset of data points. This
+property is particularly relevant in fits that adopt the
+cross-validation method as stopping criterion. In this context, the
+full data set is indeed split into a training subset and a validation
+subset and only the $\chi^2$ of the training set is minimised while
+the validation $\chi^2$ is monitored. Since the cross-validation
+method relies on the exploitation of the full experimental information
+to stop the fit, it is necessary that training and validation
+$\chi^2$'s combine meaningfully.
+
+Now, I move to explicitly show that the generalisation of
+Eq.~(\ref{eq:fullchi2trunc}) to an $n$-point data set where $n_2$ are
+cut away and $n_1$ remain fulfils the requirement:
+\begin{equation}\label{eq:compisition1}
+  \chi^2 = \left|{\bm \chi}_1+{\bm \chi}_2\right|^2\,,
+\end{equation}
+where the vectors ${\bm \chi}_1$ and ${\bm \chi}_2$ are defined
+according to Eq.~(\ref{eq:chivdef}). To define them more precisely,
+without loss of generality, one can order the data points in such a
+way that those labelled with $i=1,\dots,n_1$ belong to the first
+subset and the points labelled with $i=n_1+1,\dots,n_1+n_2(=n)$ belong
+to the second subset. The entries of the ${\bm \chi}_1$ and ${\bm
+  \chi}_2$ are then given by:
+\begin{equation}
+\bm \chi_{1,k} = \sum_{j=1}^{n_1} L_{kj}^{-1}y_j\,,\quad\mbox{and}\quad
+\bm \chi_{2,k} = \sum_{j=n_1+1}^{n} L_{kj}^{-1}y_j\,,
+\end{equation}
+where $L_{ij}^{-1}$ are the entries of the inverse of the Cholesky
+decomposition $\mathbf{L}$ of the covariance $\mathbf{V}$. It should
+be clear that, according to the generalisation of the prescription of
+Eq.~(\ref{eq:fullchi2trunc}), one has:
+\begin{equation}
+\chi_1^2= \left|\bm \chi_{1}\right|^2\,,\quad\mbox{and}\quad \chi_2^2= \left|\bm \chi_{2}\right|^2\,.
+\end{equation}
+The proof of Eq.~(\ref{eq:compisition1}) runs as follows:
+\begin{equation}\label{eq:combinechi2s}
+\begin{array}{rcl}
+  \chi^2 &=&\displaystyle 
+             \sum_{i=1}^n\sum_{j=1}^nr_iV_{ij}^{-1}r_j=\sum_{i=1}^{n_1}\sum_{j=1}^{n_1}r_iV_{ij}^{-1}r_j
+             + \sum_{i=n_1+1}^{n}\sum_{j=n_1+1}^{n}r_iV_{ij}^{-1}r_j+2
+             \sum_{i=1}^{n_1}\sum_{j=n_1+1}^{n}r_iV_{ij}^{-1}r_j\\
+  \\
+         &=& \displaystyle \sum_{k=1}^{n}\left(\sum_{i=1}^{n_1}L^{-1}_{ki}r_i\right)\left(\sum_{j=1}^{n_1}L^{-1}_{kj}r_j\right)
+             +
+             \sum_{k=1}^{n}\left(\sum_{i=n_1+1}^{n}L^{-1}_{ki}r_i\right)\left(\sum_{j=n_1+1}^{n}L^{-1}_{kj}r_j\right)\\
+\\
+ &+&\displaystyle 2
+             \sum_{k=1}^n\left(\sum_{i=1}^{n_1}L_{ki}^{-1}r_i\right)\left(\sum_{j=n_1+1}^{n}L_{kj}^{-1}r_j\right)\\
+  \\
+         &=&\displaystyle {\bm \chi}_1^{\rm T}\cdot{\bm \chi}_1+{\bm \chi}_2^{\rm T}\cdot{\bm \chi}_2 +2
+             {\bm \chi}_1^{\rm T}\cdot{\bm \chi}_2 =\left|{\bm \chi}_1+{\bm \chi}_2\right|^2\,,
+\end{array}
+\end{equation}
+where in the last step of the first line I have used the fact that the
+covariance matrix (and thus its inverse) is symmetric upon exchange of
+the indices while in the second and third lines I have used the
+Cholesky decomposition of the covariance matrix. It straightforward to
+see that Eq.~(\ref{eq:redchi21}) does not fulfils the same
+relation. The fact that Eq.~(\ref{eq:compisition1}) is consistent with
+how the $\chi^2$'s should combine can be better seen by giving it a
+geometrical interpretation.
+
+\subsection{A geometrical point of view}
+
+It is instructive to consider the question of cuts from a geometrical
+point of view. In fact, the whole bunch of questions related to the
+computation of the $\chi^2$ can be nicely visualised as a set of
+geometrical operations in a multidimensional space $\mathcal{M}$
+(manifold) equipped with the appropriate metric tensor. Based on the
+definition in Eq.~(\ref{eq:chi2cov}), the $\chi^2$ can be interpreted
+as the squared absolute value of the $n$-dimensional vector
+$\mathbf{y}$ given by the difference between the vector of
+experimental central values $\mathbf{m}$ and the vector of theoretical
+predictions $\mathbf{t}$. Importantly, the scalar product required to
+compute this absolute value has to be computed using the inverse of
+the covariance matrix $\mathbf{V}^{-1}$ as a covariant
+positive-definite metric tensor.\footnote{The contravariant
+  counterpart of $\mathbf{V}^{-1}$ is clearly $\mathbf{V}$, given that
+  $\mathbf{V}^{-1}\cdot\mathbf{V}=\mathbb{I}$.} Borrowing the Einstein
+notation to represent scalar products, \textit{i.e.} defining
+contravariant vectors with upper index as:
+\begin{equation}
+y^i = V^{-1}_{ij}y_j\,,
+\end{equation}
+where the sum over $j$ between 1 and $n$ is understood, the $\chi^2$ is
+the \textit{norm} squared of the vector $\mathbf{y}$ in the space
+$\mathcal{M}$.
+\begin{equation}
+  \chi^2 = \mathbf{y}^{\rm T}\cdot \mathbf{V}^{-1}\cdot \mathbf{y} =
+  y^iy_i\equiv \left\|\mathbf{y}\right\|^2\,.
+\end{equation}
+It is interesting to notice that the minimisation of the $\chi^2$ can
+then be regarded as the attempt to align the vector $\mathbf{t}$ to
+the vector $\mathbf{m}$ in the space $\mathcal{M}$ in such a way that
+their difference is as small as possible.
+
+The enforcement of cuts can be accommodated in this framework by
+requiring that the $\chi^2$ is the squared absolute value (or length)
+of the projection of $\mathbf{y}$ in the subspace of $\mathcal{M}$,
+$\mathcal{M}_{1}$, defined by the components of the vector
+$\mathbf{m}$ corresponding to the points that pass the
+cut. Introducing the operator $\mathbf{P}$ that projects any vector in
+$\mathcal{M}$ onto $\mathcal{M}_{1}$, the corresponding $\chi^2$ will
+read:
+\begin{equation}
+  \chi^2_{1} = \left(\mathbf{P}\cdot \mathbf{y}\right)^{\rm T}\cdot \mathbf{V}^{-1}\cdot \left(\mathbf{P}\cdot \mathbf{y}\right)=\left(\mathbf{P}\cdot \mathbf{y}\right)^i \left(\mathbf{P}\cdot \mathbf{y}\right)_i=\left\|\mathbf{P}\cdot\mathbf{y}\right\|^2\,.
+\end{equation}
+The matrix corresponding to the projector $\mathbf{P}$ is simply the
+diagonal matrix with zero's and one's on the diagonal depending on
+whether the point is excluded or included,
+respectively.\footnote{Notice that $\mathbf{P}$ is indeed idempotent,
+  \textit{i.e.} $\mathbf{P}^2=\mathbf{P}$, as required.} The net
+effect of the projector $\mathbf{P}$ is to set to zero the components
+of the vector of residuals $\mathbf{y}$ corresponding to the points
+excluded by the cut. This is in agreement with
+Eq.~(\ref{eq:fullchi2trunc}) in the case of a two-dimensional space.
+
+It is interesting to define the projector
+$\mathbf{Q}=\mathbb{I}-\mathbf{P}$ orthogonal to
+$\mathbf{P}$\footnote{$\mathbf{Q}$ is such that
+  $\mathbf{Q}^2=\mathbf{Q}$, $\mathbf{P}\cdot\mathbf{Q}=0$, and
+  $\mathbf{P}+\mathbf{Q}=\mathbb{I}$.} such that the corresponding
+$\chi^2$ reads:
+\begin{equation}
+  \chi^2_{2} = \left(\mathbf{Q}\cdot \mathbf{y}\right)^{\rm T}\cdot \mathbf{V}^{-1}\cdot \left(\mathbf{Q}\cdot \mathbf{y}\right) =\left(\mathbf{Q}\cdot \mathbf{y}\right)^i \left(\mathbf{Q}\cdot \mathbf{y}\right)_i =\left\|\mathbf{Q}\cdot\mathbf{y}\right\|^2\,.
+\end{equation}
+With these definitions at hands, one can write the total $\chi^2$ as:
+\begin{equation}
+  \chi^2= \left\|\mathbf{y}\right\|^2 = \left\|\mathbf{P}\cdot\mathbf{y}+\mathbf{Q}\cdot\mathbf{y}\right\|^2 = \chi^2_{1} + \chi^2_{2} + 2 \left(\mathbf{P}\cdot \mathbf{y}\right)^i \left(\mathbf{Q}\cdot \mathbf{y}\right)_i\,.
+\end{equation}
+that agrees with Eq.~(\ref{eq:combinechi2s}). In conclusion, the
+introduction of a cut on the full data set has a nice geometrical
+interpretation: the resulting $\chi^2$ corresponds to the norm of the
+projection of the vector or residual $\mathbf{y}$, defined on the
+manifold $\mathcal{M}$ with covariant metric $\mathbf{V}^{-1}$, on to
+the subspace $\mathcal{M}_1$ defined by the projector
+$\mathbf{P}$. This is consistent with Eq.~(\ref{eq:compisition1}) and
+provides it with a nice geometrical interpretation.\footnote{As an
+  interesting aside, the difference between the following equalities:
+$$
+\chi^2 = \left|\mathbf{L}^{-1}\cdot
+  \mathbf{y}\right|^2\quad\mbox{and}\quad \chi^2= \left\|\mathbf{y}\right\|^2\,,
+$$
+can be paralleled with the norm of a vector in special relativity in
+the Euclidean space in the first case (where the time component is
+multiplied by the imaginary unit $i$ and the space components are left
+unchanged) and in Minkowski space in the second case. Indeed, the
+Cholesky decomposition of the metric tensor
+$g_{\mu\nu}=\mbox{diag}(-1,1,1,1)$ is
+$L_{\mu\nu}=\mbox{diag}(i,1,1,1)$.}
 
 \section{Monte Carlo replica generation}
 
