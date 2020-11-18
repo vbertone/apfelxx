@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.20" xml:lang="en-US">
+  <compounddef id="group__NCMasslesspol" kind="group">
+    <compoundname>NCMasslesspol</compoundname>
+    <title>Zero-mass coefficient functions for longitudinally polarised DIS</title>
+    <innerclass refid="classapfel_1_1G41ns" prot="public">apfel::G41ns</innerclass>
+    <innergroup refid="group__NLOzmpol">NLO zero-mass coefficient functions</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Collection of the Zero-mass coefficient functions for g<subscript>4</subscript>, g<subscript>L</subscript>, and g<subscript>1</subscript> up to O(<alpha/><subscript>s</subscript>). </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

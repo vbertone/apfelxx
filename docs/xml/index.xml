@@ -820,6 +820,26 @@
     <member refid="classapfel_1_1ExtendedVector_1a74359af2d54dcc59c3ea95744ab007d0" kind="function"><name>end</name></member>
     <member refid="classapfel_1_1ExtendedVector_1a340a4a74aeeb28e702b3171050255f0d" kind="function"><name>end</name></member>
   </compound>
+  <compound refid="classapfel_1_1G11g" kind="class"><name>apfel::G11g</name>
+    <member refid="classapfel_1_1G11g_1ab26e54acc451f7f621c579468f6898ea" kind="function"><name>G11g</name></member>
+    <member refid="classapfel_1_1G11g_1acf36dc2f74af755796327f7a12619a86" kind="function"><name>Regular</name></member>
+  </compound>
+  <compound refid="classapfel_1_1G11ns" kind="class"><name>apfel::G11ns</name>
+    <member refid="classapfel_1_1G11ns_1abaf457d7dafe629bd70509d036de7fef" kind="function"><name>G11ns</name></member>
+    <member refid="classapfel_1_1G11ns_1adad2abeadda4deac3fd1c2a0c27dcf4f" kind="function"><name>Regular</name></member>
+    <member refid="classapfel_1_1G11ns_1a89943ae6858091c39823bdddead5587d" kind="function"><name>Singular</name></member>
+    <member refid="classapfel_1_1G11ns_1a361b4ae560dfa6fce6992ee7ba300195" kind="function"><name>Local</name></member>
+  </compound>
+  <compound refid="classapfel_1_1G41ns" kind="class"><name>apfel::G41ns</name>
+    <member refid="classapfel_1_1G41ns_1af17269e10a2e86ab6c5e3cd49544f7bb" kind="function"><name>G41ns</name></member>
+    <member refid="classapfel_1_1G41ns_1a4e2d29b2e98cfcb8be33f504f39b2046" kind="function"><name>Regular</name></member>
+    <member refid="classapfel_1_1G41ns_1a7f727665cc6651be14f0dbe9ea8095ea" kind="function"><name>Singular</name></member>
+    <member refid="classapfel_1_1G41ns_1a0e5fe03fbe3ad0dfa575a35b387a1a50" kind="function"><name>Local</name></member>
+  </compound>
+  <compound refid="classapfel_1_1GL1ns" kind="class"><name>apfel::GL1ns</name>
+    <member refid="classapfel_1_1GL1ns_1ab7e667c605f79b7483d5798811392e5a" kind="function"><name>GL1ns</name></member>
+    <member refid="classapfel_1_1GL1ns_1a40cfb87f712ec65bd05d7335cfaf4354" kind="function"><name>Regular</name></member>
+  </compound>
   <compound refid="classapfel_1_1Grid" kind="class"><name>apfel::Grid</name>
     <member refid="classapfel_1_1Grid_1a633e5058782ac5f774fba183606fa478" kind="function"><name>nGrids</name></member>
     <member refid="classapfel_1_1Grid_1afde71f2776250114ea25fafaef1363c0" kind="function"><name>SubToJointMap</name></member>
@@ -841,7 +861,6 @@
     <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1ac1ac2d643f29aa6045eb13e32ae0fd3b" kind="variable"><name>nx</name></member>
     <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1a34003e1b1ec650bd91278f0dd66abe97" kind="variable"><name>xmin</name></member>
     <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1ae2247161da652be847b31c6d2f444a2f" kind="variable"><name>id</name></member>
-    <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1a4f55f8e092ef8cf00546331cb700dd4a" kind="variable"><name>xgext</name></member>
   </compound>
   <compound refid="classapfel_1_1Identity" kind="class"><name>apfel::Identity</name>
     <member refid="classapfel_1_1Identity_1a65f59f6156ae3385ae3e1ea61944aea1" kind="function"><name>Identity</name></member>
@@ -1705,6 +1724,9 @@
     <member refid="namespaceapfel_1a6cdbaf2a572767fc8d2901b20f03e7c1" kind="function"><name>InitializeF2NCObjectsZM</name></member>
     <member refid="namespaceapfel_1a0dd97cfdfd06c2fefd02bc64a8aa6cb5" kind="function"><name>InitializeFLNCObjectsZM</name></member>
     <member refid="namespaceapfel_1a76042a24523c60d7e5367f48984a8a7f" kind="function"><name>InitializeF3NCObjectsZM</name></member>
+    <member refid="namespaceapfel_1a9aa5b2c5d7f42f1ee2a96eef471fc1fe" kind="function"><name>Initializeg4NCObjectsZM</name></member>
+    <member refid="namespaceapfel_1a35408802d7c91de98c2f1a28b3ff1c73" kind="function"><name>InitializegLNCObjectsZM</name></member>
+    <member refid="namespaceapfel_1a468703c397a976d3597bf2e70f3464bd" kind="function"><name>Initializeg1NCObjectsZM</name></member>
     <member refid="namespaceapfel_1aeba8c44495e37abd657fc925042da7a5" kind="function"><name>InitializeF2CCPlusObjectsZM</name></member>
     <member refid="namespaceapfel_1ace57bb10aac2e353accc2790a053d12a" kind="function"><name>InitializeF2CCMinusObjectsZM</name></member>
     <member refid="namespaceapfel_1a0c39e7e50c1d77027e58def618311d88" kind="function"><name>InitializeFLCCPlusObjectsZM</name></member>
@@ -1743,6 +1765,7 @@
     <member refid="namespaceapfel_1a5ae0b26dd9a59ac71e0c8820ada8c433" kind="function"><name>NF</name></member>
     <member refid="namespaceapfel_1a60e7f076062aec09d1944e468f292571" kind="function"><name>DeltaFun</name></member>
     <member refid="namespaceapfel_1a8bd3d59827ddd11636064f2e7e4f1172" kind="function"><name>ElectroWeakCharges</name></member>
+    <member refid="namespaceapfel_1a85e557258b50c7d35cda6ad59e0551fb" kind="function"><name>ParityViolatingElectroWeakCharges</name></member>
     <member refid="namespaceapfel_1a3092c2f6ab9d47c5ffe964f2e124c2e8" kind="function"><name>ElectroWeakChargesNWA</name></member>
     <member refid="namespaceapfel_1aee89f2fd03ee7b3c45e39162322a2850" kind="function"><name>ConcatenateAndSortVectors</name></member>
     <member refid="namespaceapfel_1a36d6703cec0e54d3abeed1f96adb0c27" kind="function"><name>dabs</name></member>
@@ -1892,6 +1915,8 @@
   </compound>
   <compound refid="version_8h" kind="file"><name>version.h</name>
     <member refid="version_8h_1a1c6d5de492ac61ad29aec7aa9a436bbf" kind="define"><name>VERSION</name></member>
+  </compound>
+  <compound refid="zeromasscoefficientfunctionspol__sl_8h" kind="file"><name>zeromasscoefficientfunctionspol_sl.h</name>
   </compound>
   <compound refid="zeromasscoefficientfunctionsunp__sl_8h" kind="file"><name>zeromasscoefficientfunctionsunp_sl.h</name>
   </compound>
@@ -2057,6 +2082,10 @@
   <compound refid="group__NLOunpsftl" kind="group"><name>NLOunpsftl</name>
   </compound>
   <compound refid="group__NNLOunpsftl" kind="group"><name>NNLOunpsftl</name>
+  </compound>
+  <compound refid="group__NCMasslesspol" kind="group"><name>NCMasslesspol</name>
+  </compound>
+  <compound refid="group__NLOzmpol" kind="group"><name>NLOzmpol</name>
   </compound>
   <compound refid="group__NCMassless" kind="group"><name>NCMassless</name>
   </compound>

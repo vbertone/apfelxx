@@ -16,6 +16,7 @@
     <includedby refid="splittingfunctionstrans__tl_8h" local="yes">inc/apfel/splittingfunctionstrans_tl.h</includedby>
     <includedby refid="splittingfunctionsunp__sl_8h" local="yes">inc/apfel/splittingfunctionsunp_sl.h</includedby>
     <includedby refid="splittingfunctionsunp__tl_8h" local="yes">inc/apfel/splittingfunctionsunp_tl.h</includedby>
+    <includedby refid="zeromasscoefficientfunctionspol__sl_8h" local="yes">inc/apfel/zeromasscoefficientfunctionspol_sl.h</includedby>
     <includedby refid="zeromasscoefficientfunctionsunp__sl_8h" local="yes">inc/apfel/zeromasscoefficientfunctionsunp_sl.h</includedby>
     <includedby refid="zeromasscoefficientfunctionsunp__tl_8h" local="yes">inc/apfel/zeromasscoefficientfunctionsunp_tl.h</includedby>
     <invincdepgraph>
@@ -72,6 +73,10 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
+      </node>
+      <node id="24">
+        <label>inc/apfel/zeromasscoefficientfunctionspol_sl.h</label>
+        <link refid="zeromasscoefficientfunctionspol__sl_8h"/>
       </node>
       <node id="2">
         <label>inc/apfel/apfelxx.h</label>
@@ -138,6 +143,8 @@
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
       </node>
       <node id="5">
         <label>inc/apfel/massivezerocoefficientfunctionsunp_sl.h</label>
@@ -153,7 +160,7 @@
         <label>inc/apfel/matchingconditions_sl.h</label>
         <link refid="matchingconditions__sl_8h"/>
       </node>
-      <node id="25">
+      <node id="26">
         <label>inc/apfel/zeromasscoefficientfunctionsunp_tl.h</label>
         <link refid="zeromasscoefficientfunctionsunp__tl_8h"/>
       </node>
@@ -161,7 +168,7 @@
         <label>inc/apfel/splittingfunctionstrans_sl.h</label>
         <link refid="splittingfunctionstrans__sl_8h"/>
       </node>
-      <node id="24">
+      <node id="25">
         <label>inc/apfel/zeromasscoefficientfunctionsunp_sl.h</label>
         <link refid="zeromasscoefficientfunctionsunp__sl_8h"/>
       </node>

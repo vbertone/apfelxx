@@ -50,6 +50,17 @@ namespace apfel
   std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp = TOTAL);
 
   /**
+   * @brief Utility function for the computation of the
+   * parity-violating electroweak charges, for both time-like and
+   * space-like virtualities.
+   * @param Q: absolute value the virtuality of the vector boson
+   * @param virt: virtuality (true: time-like, false: space-like)
+   * @param Comp: the flavour selector (default: TOTAL, i.e. all flavours are computed)
+   * @return the std::vector of the electroweak charges
+   */
+  std::vector<double> ParityViolatingElectroWeakCharges(double const& Q, bool const& virt, int const& Comp = TOTAL);
+
+  /**
    * @brief Utility function for the computation of the electroweak
    * charges for Drell-Yan in narrow-width appriximation
    * @return the std::vector of the electroweak charges

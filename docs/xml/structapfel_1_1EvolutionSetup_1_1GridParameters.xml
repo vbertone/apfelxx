@@ -46,43 +46,16 @@
         </inbodydescription>
         <location file="inc/apfel/evolutionsetup.h" line="56" column="14" bodyfile="inc/apfel/evolutionsetup.h" bodystart="56" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1_1GridParameters_1a4f55f8e092ef8cf00546331cb700dd4a" prot="public" static="no" mutable="no">
-        <type>std::vector&lt; double &gt;</type>
-        <definition>std::vector&lt;double&gt; apfel::EvolutionSetup::GridParameters::xgext</definition>
-        <argsstring></argsstring>
-        <name>xgext</name>
-        <briefdescription>
-<para>External grid (if any) </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="57" column="19" bodyfile="inc/apfel/evolutionsetup.h" bodystart="57" bodyend="-1"/>
-      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Structure for the <bold>subgrid</bold> parameters. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <collaborationgraph>
-      <node id="2">
-        <label>std::vector&lt; double &gt;</label>
-      </node>
-      <node id="1">
-        <label>apfel::EvolutionSetup::GridParameters</label>
-        <link refid="structapfel_1_1EvolutionSetup_1_1GridParameters"/>
-        <childnode refid="2" relation="usage">
-          <edgelabel>xgext</edgelabel>
-        </childnode>
-      </node>
-    </collaborationgraph>
-    <location file="inc/apfel/evolutionsetup.h" line="52" column="5" bodyfile="inc/apfel/evolutionsetup.h" bodystart="53" bodyend="58"/>
+    <location file="inc/apfel/evolutionsetup.h" line="52" column="5" bodyfile="inc/apfel/evolutionsetup.h" bodystart="53" bodyend="57"/>
     <listofallmembers>
       <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1ae2247161da652be847b31c6d2f444a2f" prot="public" virt="non-virtual"><scope>apfel::EvolutionSetup::GridParameters</scope><name>id</name></member>
       <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1ac1ac2d643f29aa6045eb13e32ae0fd3b" prot="public" virt="non-virtual"><scope>apfel::EvolutionSetup::GridParameters</scope><name>nx</name></member>
-      <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1a4f55f8e092ef8cf00546331cb700dd4a" prot="public" virt="non-virtual"><scope>apfel::EvolutionSetup::GridParameters</scope><name>xgext</name></member>
       <member refid="structapfel_1_1EvolutionSetup_1_1GridParameters_1a34003e1b1ec650bd91278f0dd66abe97" prot="public" virt="non-virtual"><scope>apfel::EvolutionSetup::GridParameters</scope><name>xmin</name></member>
     </listofallmembers>
   </compounddef>

@@ -75,6 +75,45 @@ namespace apfel
                                                                                                              double              const& IntEps = 1e-5);
 
   /**
+   * @brief The Initializeg4NCObjectsZM precomputes the perturbative
+   * coefficients of coefficient functions for NC g4 in the ZM scheme
+   * and store them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> Initializeg4NCObjectsZM(Grid                const& g,
+                                                                                                             std::vector<double> const& Thresholds,
+                                                                                                             double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializegLNCObjectsZM precomputes the perturbative
+   * coefficients of coefficient functions for NC gL in the ZM scheme
+   * and store them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializegLNCObjectsZM(Grid                const& g,
+                                                                                                             std::vector<double> const& Thresholds,
+                                                                                                             double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The Initializeg1NCObjectsZM precomputes the perturbative
+   * coefficients of coefficient functions for NC xg1 in the ZM scheme
+   * and store them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> Initializeg1NCObjectsZM(Grid                const& g,
+                                                                                                             std::vector<double> const& Thresholds,
+                                                                                                             double              const& IntEps = 1e-5);
+
+  /**
    * @brief The InitializeF2CCPlusObjectsZM precomputes the perturbative
    * coefficients of coefficient functions for combination ( F2(nu) +
    * F2(nubar) ) / 2 in the ZM scheme and store them in the

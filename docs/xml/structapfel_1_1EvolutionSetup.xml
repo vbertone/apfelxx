@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="64" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="64" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="63" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a204de6ac2d42773ef73525b99feff1a0" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="65" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="65" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="64" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1ad81d6dd6e1abb9aed8d0e3e784ac9941" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structapfel_1_1EvolutionSetup_1_1GridParameters" kindref="compound">GridParameters</ref> &gt;</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="66" column="17" bodyfile="inc/apfel/evolutionsetup.h" bodystart="66" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="65" column="17" bodyfile="inc/apfel/evolutionsetup.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1aab9528d803850444afe8f68ac552338c" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="67" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="67" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="66" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1aa74278493b4ea60f09c74510a84be9ec" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="68" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="68" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="67" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1ab80c721e240135b40821d4cda11b78e2" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="69" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="69" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="68" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a48e64395b5ab877fa9f4052bd9d2fa8e" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -308,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="70" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="70" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="69" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a627d756a982879f403991a8f5fe45811" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="71" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="71" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="70" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a904f87e2c7b0ce4f8448eebda1f1e418" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="72" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="72" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="71" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a1fadbb568bd968bcd6c04e233001e6df" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1a39af57a0c4a879ae43fbd94b11d758e1" kindref="member">FlavourScheme</ref></type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="73" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="73" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="72" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a9b30d8429e9a3d033202927abf5c8667" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="74" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="74" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="73" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a1f5b96a8bab80e64227371a4669d95c5" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1a829586a1986a0a568bcd4d69eff7442e" kindref="member">EvolutionTheory</ref></type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="75" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="75" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="74" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a97437e36806d7584b120f762488b11f8" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1a4188fd899c89d904b14feea52c039af7" kindref="member">Virtuality</ref></type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="76" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="76" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="75" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1ac177f59f4426ece1c64c1ba002b040fe" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1a2231cecea101e46d2b8b5b1652e26792" kindref="member">EvolPolarisation</ref></type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="77" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="77" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="76" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a3a404166e6945e59a218908e780382ea" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="78" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="78" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="77" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a78386fbdc6c17e740cbd14ab8d015914" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="79" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="79" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="78" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a3b717826fcca628ecdebb04619161fee" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -448,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="80" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="80" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="79" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a198ae368f643bda07977fd4a21815a1e" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -462,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="81" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="81" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="80" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1aa26ea1950ffa331a10e1f8f6dd84f4cf" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1a99cf4a06a70b42212bf192c19945bf5a" kindref="member">CouplingEvolution</ref></type>
@@ -476,7 +476,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="82" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="82" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="81" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a4a281df54c20f4dae59dedde33ee2753" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1a57a10440e153bba3cb67c3b66e0d0328" kindref="member">PDFEvolution</ref></type>
@@ -490,7 +490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="83" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="83" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="82" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1acce8fce3daa9d217a4183df7a448083f" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="84" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="84" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="83" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a42a4fa2e5320a7878a7fad669fc640be" prot="public" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -518,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="85" column="25" bodyfile="inc/apfel/evolutionsetup.h" bodystart="85" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="84" column="25" bodyfile="inc/apfel/evolutionsetup.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a4020afe682b670da3163f676775a67cb" prot="public" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -532,7 +532,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="86" column="25" bodyfile="inc/apfel/evolutionsetup.h" bodystart="86" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="85" column="25" bodyfile="inc/apfel/evolutionsetup.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a88411dbe8022d8cdc9b4bace53949cd9" prot="public" static="no" mutable="no">
         <type><ref refid="structapfel_1_1EvolutionSetup_1adbf330a722f8daccfa1c3343204e8b0b" kindref="member">MassRenScheme</ref></type>
@@ -546,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="87" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="87" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="86" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a9cf884af48d1913c168f1488cfa1c898" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -560,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="88" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="88" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="87" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a54c93d3a7ba5755aeef82ef251831c2d" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="89" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="89" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="88" column="33" bodyfile="inc/apfel/evolutionsetup.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structapfel_1_1EvolutionSetup_1a785f4176200bd5b4b204b0ebeda1edbf" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::function&lt; std::map&lt; int, double &gt;double const  &amp;, double const  &amp;)&gt; &gt;</type>
@@ -588,7 +588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="90" column="19" bodyfile="inc/apfel/evolutionsetup.h" bodystart="90" bodyend="-1"/>
+        <location file="inc/apfel/evolutionsetup.h" line="89" column="19" bodyfile="inc/apfel/evolutionsetup.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -604,7 +604,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/evolutionsetup.h" line="97" column="5" bodyfile="inc/apfel/evolutionsetup.h" bodystart="97" bodyend="119"/>
+        <location file="inc/apfel/evolutionsetup.h" line="96" column="5" bodyfile="inc/apfel/evolutionsetup.h" bodystart="96" bodyend="118"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -642,9 +642,6 @@
       <node id="5">
         <label>apfel::EvolutionSetup::GridParameters</label>
         <link refid="structapfel_1_1EvolutionSetup_1_1GridParameters"/>
-        <childnode refid="6" relation="usage">
-          <edgelabel>xgext</edgelabel>
-        </childnode>
       </node>
       <node id="2">
         <label>std::string</label>
@@ -652,7 +649,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="inc/apfel/evolutionsetup.h" line="23" column="3" bodyfile="inc/apfel/evolutionsetup.h" bodystart="24" bodyend="121"/>
+    <location file="inc/apfel/evolutionsetup.h" line="23" column="3" bodyfile="inc/apfel/evolutionsetup.h" bodystart="24" bodyend="120"/>
     <listofallmembers>
       <member refid="structapfel_1_1EvolutionSetup_1a3a404166e6945e59a218908e780382ea" prot="public" virt="non-virtual"><scope>apfel::EvolutionSetup</scope><name>AlphaQCDRef</name></member>
       <member refid="structapfel_1_1EvolutionSetup_1a3b717826fcca628ecdebb04619161fee" prot="public" virt="non-virtual"><scope>apfel::EvolutionSetup</scope><name>AlphaQEDRef</name></member>

@@ -33,8 +33,8 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Effective charges.
-  std::function<std::vector<double>(double const&)> fBq = [=] (double const&) -> std::vector<double> { return apfel::QCh2; };
-  std::function<std::vector<double>(double const&)> fDq = [=] (double const&) -> std::vector<double> { return {0, 0, 0, 0, 0, 0}; };
+  std::function<std::vector<double>(double const&)> fBq = [=] (double const& Q) -> std::vector<double> { return apfel::ElectroWeakCharges(Q, false); };
+  std::function<std::vector<double>(double const&)> fDq = [=] (double const& Q) -> std::vector<double> { return apfel::ParityViolatingElectroWeakCharges(Q, false); };
 
   // Initialize QCD evolution objects
   const auto DglapObj = InitializeDglapObjectsQCD(g, Thresholds);

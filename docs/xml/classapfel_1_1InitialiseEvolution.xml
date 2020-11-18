@@ -479,9 +479,6 @@
       <node id="6">
         <label>apfel::EvolutionSetup::GridParameters</label>
         <link refid="structapfel_1_1EvolutionSetup_1_1GridParameters"/>
-        <childnode refid="7" relation="usage">
-          <edgelabel>xgext</edgelabel>
-        </childnode>
       </node>
       <node id="16">
         <label>std::vector&lt; int &gt;</label>

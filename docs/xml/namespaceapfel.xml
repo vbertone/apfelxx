@@ -138,6 +138,10 @@
     <innerclass refid="classapfel_1_1EvolveDistributionsBasisQCD" prot="public">apfel::EvolveDistributionsBasisQCD</innerclass>
     <innerclass refid="classapfel_1_1Expression" prot="public">apfel::Expression</innerclass>
     <innerclass refid="classapfel_1_1ExtendedVector" prot="public">apfel::ExtendedVector</innerclass>
+    <innerclass refid="classapfel_1_1G11g" prot="public">apfel::G11g</innerclass>
+    <innerclass refid="classapfel_1_1G11ns" prot="public">apfel::G11ns</innerclass>
+    <innerclass refid="classapfel_1_1G41ns" prot="public">apfel::G41ns</innerclass>
+    <innerclass refid="classapfel_1_1GL1ns" prot="public">apfel::GL1ns</innerclass>
     <innerclass refid="classapfel_1_1Grid" prot="public">apfel::Grid</innerclass>
     <innerclass refid="classapfel_1_1Identity" prot="public">apfel::Identity</innerclass>
     <innerclass refid="classapfel_1_1InitialiseEvolution" prot="public">apfel::InitialiseEvolution</innerclass>
@@ -5070,6 +5074,171 @@
         </inbodydescription>
         <location file="inc/apfel/structurefunctionbuilder.h" line="73" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="73" declcolumn="17"/>
       </memberdef>
+      <memberdef kind="function" id="namespaceapfel_1a9aa5b2c5d7f42f1ee2a96eef471fc1fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
+        <definition>std::function&lt;StructureFunctionObjects(double const&amp;, std::vector&lt;double&gt; const&amp;)&gt; apfel::Initializeg4NCObjectsZM</definition>
+        <argsstring>(Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</argsstring>
+        <name>Initializeg4NCObjectsZM</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>IntEps</declname>
+          <defval>1e-5</defval>
+        </param>
+        <briefdescription>
+<para>The Initializeg4NCObjectsZM precomputes the perturbative coefficients of coefficient functions for NC g4 in the ZM scheme and store them in the &apos;<ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>&apos; structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the heavy quark thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IntEps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the integration accuracy (default: 10<superscript>-5</superscript>}) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A StructureFunctionObjects-valued function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="86" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="86" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceapfel_1a35408802d7c91de98c2f1a28b3ff1c73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
+        <definition>std::function&lt;StructureFunctionObjects(double const&amp;, std::vector&lt;double&gt; const&amp;)&gt; apfel::InitializegLNCObjectsZM</definition>
+        <argsstring>(Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</argsstring>
+        <name>InitializegLNCObjectsZM</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>IntEps</declname>
+          <defval>1e-5</defval>
+        </param>
+        <briefdescription>
+<para>The InitializegLNCObjectsZM precomputes the perturbative coefficients of coefficient functions for NC gL in the ZM scheme and store them in the &apos;<ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>&apos; structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the heavy quark thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IntEps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the integration accuracy (default: 10<superscript>-5</superscript>}) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A StructureFunctionObjects-valued function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="99" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="99" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceapfel_1a468703c397a976d3597bf2e70f3464bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
+        <definition>std::function&lt;StructureFunctionObjects(double const&amp;, std::vector&lt;double&gt; const&amp;)&gt; apfel::Initializeg1NCObjectsZM</definition>
+        <argsstring>(Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</argsstring>
+        <name>Initializeg1NCObjectsZM</name>
+        <param>
+          <type><ref refid="classapfel_1_1Grid" kindref="compound">Grid</ref> const &amp;</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>Thresholds</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>IntEps</declname>
+          <defval>1e-5</defval>
+        </param>
+        <briefdescription>
+<para>The Initializeg1NCObjectsZM precomputes the perturbative coefficients of coefficient functions for NC xg1 in the ZM scheme and store them in the &apos;<ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>&apos; structure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the x-space grid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Thresholds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the heavy quark thresholds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IntEps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the integration accuracy (default: 10<superscript>-5</superscript>}) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A StructureFunctionObjects-valued function </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="112" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="112" declcolumn="17"/>
+      </memberdef>
       <memberdef kind="function" id="namespaceapfel_1aeba8c44495e37abd657fc925042da7a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
         <definition>std::function&lt;StructureFunctionObjects(double const&amp;, std::vector&lt;double&gt; const&amp;)&gt; apfel::InitializeF2CCPlusObjectsZM</definition>
@@ -5123,7 +5292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="87" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="87" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="126" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="126" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1ace57bb10aac2e353accc2790a053d12a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5178,7 +5347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="101" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="101" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="140" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="140" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a0c39e7e50c1d77027e58def618311d88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5233,7 +5402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="115" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="115" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="154" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="154" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a609f39b82b52a5e038525d6fd1bdc7ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5288,7 +5457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="129" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="129" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="168" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="168" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a83f1992cb3edf56399fbf900cea753c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5343,7 +5512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="143" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="143" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="182" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="182" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a95eb0fbc9ef5188897b97b3257f5c9f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5398,7 +5567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="157" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="157" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="196" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="196" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1ac1204473402b48b386481f0189651b75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5518,7 +5687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="176" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="176" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="215" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="215" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a584eb3a644598895a1f1cef25f279358" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5638,7 +5807,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="200" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="200" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="239" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="239" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a7cc40593ef9cc157ed107cebcb4bbe47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5758,7 +5927,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="224" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="224" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="263" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="263" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a66ca8833b7ba563e3c75ad7fdafc1e3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5878,7 +6047,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="248" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="248" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="287" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="287" declcolumn="17"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -5940,7 +6109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="277" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="277" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="316" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="316" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1ac7feefb5721f2bd2332b52472457107c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -5995,7 +6164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="291" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="291" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="330" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="330" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a0f8ea454aa738b08d2a3489e46059b18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::function&lt; <ref refid="structapfel_1_1StructureFunctionObjects" kindref="compound">StructureFunctionObjects</ref>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt;</type>
@@ -6050,7 +6219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="305" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="305" declcolumn="17"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="344" column="17" declfile="inc/apfel/structurefunctionbuilder.h" declline="344" declcolumn="17"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -6133,7 +6302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="327" column="12" declfile="inc/apfel/structurefunctionbuilder.h" declline="327" declcolumn="12"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="366" column="12" declfile="inc/apfel/structurefunctionbuilder.h" declline="366" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1acedbfdfb70af4a407196fdbde401b1c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="classapfel_1_1Observable" kindref="compound">Observable</ref>&lt;&gt; &gt;</type>
@@ -6211,7 +6380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="343" column="12" declfile="inc/apfel/structurefunctionbuilder.h" declline="343" declcolumn="12"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="382" column="12" declfile="inc/apfel/structurefunctionbuilder.h" declline="382" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a4c9df05ce2e5d1d735ea049ee6a9b86e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref></type>
@@ -6289,7 +6458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="360" column="16" declfile="inc/apfel/structurefunctionbuilder.h" declline="360" declcolumn="16"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="399" column="16" declfile="inc/apfel/structurefunctionbuilder.h" declline="399" declcolumn="16"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1aa924d94953e43a0f48368142e116dc1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::map&lt; int, <ref refid="classapfel_1_1Distribution" kindref="compound">Distribution</ref> &gt;</type>
@@ -6355,7 +6524,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/structurefunctionbuilder.h" line="375" column="12" declfile="inc/apfel/structurefunctionbuilder.h" declline="375" declcolumn="12"/>
+        <location file="inc/apfel/structurefunctionbuilder.h" line="414" column="12" declfile="inc/apfel/structurefunctionbuilder.h" declline="414" declcolumn="12"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -7340,6 +7509,61 @@
         </inbodydescription>
         <location file="inc/apfel/tools.h" line="50" column="15" declfile="inc/apfel/tools.h" declline="50" declcolumn="15"/>
       </memberdef>
+      <memberdef kind="function" id="namespaceapfel_1a85e557258b50c7d35cda6ad59e0551fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; apfel::ParityViolatingElectroWeakCharges</definition>
+        <argsstring>(double const &amp;Q, bool const &amp;virt, int const &amp;Comp=TOTAL)</argsstring>
+        <name>ParityViolatingElectroWeakCharges</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>virt</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>Comp</declname>
+          <defval><ref refid="namespaceapfel_1a52f9641b9ca0b856fffcd7fdb42f575ba1dc03810f0ca2619dbde6fff93fe523d" kindref="member">TOTAL</ref></defval>
+        </param>
+        <briefdescription>
+<para>Utility function for the computation of the parity-violating electroweak charges, for both time-like and space-like virtualities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>absolute value the virtuality of the vector boson </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>virt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtuality (true: time-like, false: space-like) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the flavour selector (default: TOTAL, i.e. all flavours are computed) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the std::vector of the electroweak charges </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/apfel/tools.h" line="61" column="15" declfile="inc/apfel/tools.h" declline="61" declcolumn="15"/>
+      </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a3092c2f6ab9d47c5ffe964f2e124c2e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; double &gt;</type>
         <definition>std::vector&lt;double&gt; apfel::ElectroWeakChargesNWA</definition>
@@ -7355,7 +7579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/tools.h" line="57" column="15" declfile="inc/apfel/tools.h" declline="57" declcolumn="15"/>
+        <location file="inc/apfel/tools.h" line="68" column="15" declfile="inc/apfel/tools.h" declline="68" declcolumn="15"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1aee89f2fd03ee7b3c45e39162322a2850" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; double &gt;</type>
@@ -7397,7 +7621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/tools.h" line="66" column="15" declfile="inc/apfel/tools.h" declline="66" declcolumn="15"/>
+        <location file="inc/apfel/tools.h" line="77" column="15" declfile="inc/apfel/tools.h" declline="77" declcolumn="15"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a36d6703cec0e54d3abeed1f96adb0c27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -7432,7 +7656,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/tools.h" line="78" column="10" declfile="inc/apfel/tools.h" declline="78" declcolumn="10"/>
+        <location file="inc/apfel/tools.h" line="89" column="10" declfile="inc/apfel/tools.h" declline="89" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a6de7bb0661f079c85b439a896151dc6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; double &gt;</type>
@@ -7460,7 +7684,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/tools.h" line="85" column="15" declfile="inc/apfel/tools.h" declline="85" declcolumn="15"/>
+        <location file="inc/apfel/tools.h" line="96" column="15" declfile="inc/apfel/tools.h" declline="96" declcolumn="15"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a0fe368880404ba6484e6af19d23695ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -7488,7 +7712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/tools.h" line="91" column="7" declfile="inc/apfel/tools.h" declline="91" declcolumn="7"/>
+        <location file="inc/apfel/tools.h" line="102" column="7" declfile="inc/apfel/tools.h" declline="102" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespaceapfel_1a19f6f1aae3aaf0db2bf9a1301ac52033" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -7594,7 +7818,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/apfel/tools.h" line="108" column="10" declfile="inc/apfel/tools.h" declline="108" declcolumn="10"/>
+        <location file="inc/apfel/tools.h" line="119" column="10" declfile="inc/apfel/tools.h" declline="119" declcolumn="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">

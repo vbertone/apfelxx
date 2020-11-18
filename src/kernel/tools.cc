@@ -84,9 +84,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  std::vector<double> ElectroWeakChargesNWA()
+  std::vector<double> ParityViolatingElectroWeakCharges(double const& Q, bool const& virt, int const& Comp)
   {
     // Relevant constants
+    const double Q2    = Q * Q;
+    const double MZ2   = apfel::ZMass * apfel::ZMass;
+    const double GmZ2  = apfel::GammaZ * apfel::GammaZ;
     const double S2ThW = apfel::Sin2ThetaW;
     const double VD    = - 0.5 + 2 * S2ThW / 3;
     const double VU    = + 0.5 - 4 * S2ThW / 3;
@@ -98,7 +101,46 @@ namespace apfel
     const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
 
     // Propagator and its square
-    double PZ2 = pow(apfel::ZMass, 4) * M_PI / apfel::ZMass / apfel::ZMass / apfel::GammaZ / pow(4 * S2ThW * ( 1 - S2ThW ), 2) / 2;
+    double PZ;
+    double PZ2;
+    if (virt)
+      {
+        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
+        PZ2 = pow(Q2,2) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / pow(4 * S2ThW * ( 1 - S2ThW ),2);
+      }
+    else
+      {
+        PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
+        PZ2 = PZ * PZ;
+      }
+
+    // Build electroweak charges
+    std::vector<double> Charges(6, 0.);
+    if (Comp < 1 || Comp > 6)
+      for (auto i = 0; i < 6; i++)
+        Charges[i] = - 2 * QCh[i] * Aq[i] * Ae * PZ + 4 * Vq[i] * Aq[i] * Ve * Ae * PZ2;
+    else
+      Charges[Comp-1] = - 2 * QCh[Comp-1] * Aq[Comp-1] * Ae * PZ + 4 * Vq[Comp-1] * Aq[Comp-1] * Ve * Ae * PZ2;
+
+    return Charges;
+  }
+
+  //_________________________________________________________________________
+  std::vector<double> ElectroWeakChargesNWA()
+  {
+    // Relevant constants
+    const double S2ThW = Sin2ThetaW;
+    const double VD    = - 0.5 + 2 * S2ThW / 3;
+    const double VU    = + 0.5 - 4 * S2ThW / 3;
+    const double AD    = - 0.5;
+    const double AU    = + 0.5;
+    const double Ve    = - 0.5 + 2 * S2ThW;
+    const double Ae    = - 0.5;
+    const std::vector<double> Vq = {VD, VU, VD, VU, VD, VU};
+    const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
+
+    // Propagator and its square
+    double PZ2 = pow(ZMass, 4) * M_PI / ZMass / ZMass / GammaZ / pow(4 * S2ThW * ( 1 - S2ThW ), 2) / 2;
 
     std::vector<double> Charges(6, 0.);
     for (auto i = 0; i < 6; i++)
@@ -210,7 +252,7 @@ namespace apfel
                                  bool                const& NoCharges)
   {
     // Get time-like electroweak charges
-    const std::vector<double> Bq = apfel::ElectroWeakCharges(Q, true, Comp);
+    const std::vector<double> Bq = ElectroWeakCharges(Q, true, Comp);
 
     // Effective number of flavours
     double nf = NF(Q, Thresholds);

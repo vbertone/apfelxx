@@ -63,6 +63,7 @@
     <innerfile refid="tools_8h">tools.h</innerfile>
     <innerfile refid="twobodyphasespace_8h">twobodyphasespace.h</innerfile>
     <innerfile refid="version_8h">version.h</innerfile>
+    <innerfile refid="zeromasscoefficientfunctionspol__sl_8h">zeromasscoefficientfunctionspol_sl.h</innerfile>
     <innerfile refid="zeromasscoefficientfunctionsunp__sl_8h">zeromasscoefficientfunctionsunp_sl.h</innerfile>
     <innerfile refid="zeromasscoefficientfunctionsunp__tl_8h">zeromasscoefficientfunctionsunp_tl.h</innerfile>
     <briefdescription>
