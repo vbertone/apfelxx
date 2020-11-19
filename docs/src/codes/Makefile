@@ -26,7 +26,7 @@ LDFLAGS  += $(LHAPDFINCS) $(APFELPPINCS) $(NANPARINCS) $(APFELINCS)
 CLIBS += $(LHAPDFLIBS) $(APFELPPLIBS) $(NANPARLIBS) $(APFELLIBS)
 
 install : all
-all : logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription Alphas #fNP
+all : logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription Alphas InterpolationFunctions #fNP
 
 logs: logs.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
@@ -55,6 +55,9 @@ NewPrescription: NewPrescription.o
 Alphas: Alphas.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
 
+InterpolationFunctions: InterpolationFunctions.o 
+	$(CXX) $(LDFLAGS) -o $@ $< $(CLIBS)
+
 .SUFFIXES : .cxx .o .f .c
 
 .cxx.o:	 
@@ -64,5 +67,5 @@ Alphas: Alphas.o
 	$(F77)  -c $< 
 
 clean:
-	rm -rf *.lo *.o *.la *~ logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription Alphas #fNP
+	rm -rf *.lo *.o *.la *~ logs FOvsAsy EvolutionFactor LeptonicModulation PhaseSpaceRedFactor PhaseSpacePowerCorrs NewPrescription Alphas InterpolationFunctions #fNP
 

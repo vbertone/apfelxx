@@ -41,6 +41,7 @@ docs/src/codes/PhaseSpaceRedFactor
 docs/src/codes/NewPrescription
 docs/src/codes/PhaseSpacePowerCorrs
 docs/src/codes/Alphas
+docs/src/codes/InterpolationFunctions
 
 # Compiled Object files
 *.slo
