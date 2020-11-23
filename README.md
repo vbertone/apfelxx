@@ -17,8 +17,8 @@ cross sections. Also more complex computations, such as differential
 semi-inclusive DIS and Drell-Yan cross sections, are easily
 implementable in APFEL++.
 
-APFEL++ is used as a prediction engine in the
-[NangaParbat](https://github.com/vbertone/NangaParbat) code, devoted
+APFEL++ is used as a prediction engine in
+[NangaParbat](https://github.com/vbertone/NangaParbat), a code devoted
 to the extraction of Trasverse-Momentum-Dependent (TMD) distributions,
 and is also currently interfaced to
 [PARTONS](http://partons.cea.fr/partons/doc/html/index.html), a
