@@ -5,24 +5,36 @@
 
 # APFEL++: A PDF evolution library in C++
  
-APFEL++ is a C++ rewriting of the Fortran 77 evolution code APFEL (see
-http://apfel.hepforge.org and
-https://github.com/vbertone/apfel). APFEL++ is based on a completely
-new code design and guarantees a better performance along with a more
-optimal memory management. The new modular structure allows for
-better maintainability and easier extensibility. This makes APFEL++
-suitable for a wide range of tasks: from the solution of the DGLAP
-evolution equations to the computation of deep-inelastic-scattering (DIS)
-and single-inclusive-annihilation cross sections. Also more
-complex computations, such as differential semi-inclusive DIS and Drell-Yan cross
-sections, are easily implementable in APFEL++.
+APFEL++ is a C++ rewriting of the Fortran 77 evolution code
+[APFEL](https://github.com/vbertone/apfel). However, APFEL++ is based
+on a completely new code design and guarantees a better performance
+along with a more optimal memory management. The new modular structure
+allows for better maintainability and easier extensibility. This makes
+APFEL++ suitable for a wide range of tasks: from the solution of the
+DGLAP evolution equations to the computation of
+deep-inelastic-scattering (DIS) and single-inclusive-annihilation
+cross sections. Also more complex computations, such as differential
+semi-inclusive DIS and Drell-Yan cross sections, are easily
+implementable in APFEL++.
+
+APFEL++ is used as a prediction engine in the
+[NangaParbat](https://github.com/vbertone/NangaParbat) code, devoted
+to the extraction of Trasverse-Momentum-Dependent (TMD) distributions,
+and is also currently interfaced to
+[PARTONS](http://partons.cea.fr/partons/doc/html/index.html), a
+software dedicated to the phenomenology of Generalised Parton
+Distributions (GPDs) and TMDs, and to
+[xFitter](https://www.xfitter.org/xFitter/), an open source fit
+framework devoted to the extraction of collinear distributions and to
+the assessment of the impact of new experimental data.
 
 ## Homebrew (macOS)
 
-APFEL++ is available through the [Homebrew-hep](https://github.com/davidchall/homebrew-hep) tap of [Homebrew](https://brew.sh). After having installed Homebrew and tapped Homebrew-hep, the latest stable release of APFEL++ can be downloaded and installed with:
-```Shell
-brew install apfelxx
-```
+APFEL++ is available through the
+[Homebrew-hep](https://github.com/davidchall/homebrew-hep) tap of
+[Homebrew](https://brew.sh). After having installed Homebrew and
+tapped Homebrew-hep, the latest stable release of APFEL++ can be
+downloaded and installed with: ```Shell brew install apfelxx ```
 
 ## Download
 
