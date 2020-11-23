@@ -2736,14 +2736,22 @@ Now we can attempt to solve this equation whose general solution is:
 \begin{equation}\label{eq:intrun}
 \int_{a_0}^{a_{\rm LL}}\frac{dy}{y^2}=\int_{a_0}^{a}\frac{dx}{x^2}\left(\sum_{n=0}^\infty b_nx^n\right)^{-1}\,.
 \end{equation}
-Assuming that $x\ll 1$ (as it should to be in the perturbative
-regime), one can write:
+Assuming that $x\ll 1$ (as it should be in the perturbative regime),
+one can write:
 \begin{equation}
 \left(\sum_{n=0}^\infty b_nx^n\right)^{-1}=\sum_{n=0}^\infty \overline{b}_nx^n\,,
 \end{equation}
 where the coefficients $\overline{b}_n$ can be iteratively determined
-in terms of the coefficients ${b}_n$. Plugging this expansion into
-Eq.~(\ref{eq:intrun}) and solving the integrals gives:
+in terms of the coefficients ${b}_n$. The terms up to $x^3$ read:
+\begin{equation}
+\begin{array}{rcl}
+\overline{b}_1  &=& - b_1\,,\\
+\overline{b}_2  &=& - b_2+b_1^2\,,\\
+\overline{b}_3  &=& - b_3+2b_2b_1-b_1^3\,.
+\end{array}
+\end{equation}
+Plugging this expansion into Eq.~(\ref{eq:intrun}) and solving the
+integrals gives:
 \begin{equation}
 \frac{1}{a_{\rm LL}} = \frac{1}{a}-\overline{b}_1\ln\left(\frac{a}{a_0}\right)-\sum_{k=1}^\infty\frac{\overline{b}_{k+1}}{k}\left(a^k-a_0^k\right)\,.
 \end{equation}
