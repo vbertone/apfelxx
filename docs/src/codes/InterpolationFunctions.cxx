@@ -8,7 +8,7 @@
 int main() {
 
   // Initialize space- and time-like splitting functions.
-  const apfel::Grid g{{{100, 1e-3, 5}}};
+  const apfel::Grid g{{{100, 1e-3, 0}}};
   const std::function<double(double const&)> f = [] (double const& x) -> double { return 2 + cos(M_PI * log(x)); };
   const apfel::Distribution d{g, f};
   const std::vector<double> xg = g.GetSubGrid(0).GetGrid();
@@ -32,16 +32,17 @@ int main() {
       std::cout << std::endl;
     }
 */
-/*
   nx = 10000;
   xmin = 1e-3;
   xmax = 1;
   xstp = exp( log( xmax / xmin ) / ( nx - 1 ) );
+  const apfel::Grid g0{{{100, 1e-3, 0}}};
   const apfel::Grid g1{{{100, 1e-3, 1}}};
   const apfel::Grid g2{{{100, 1e-3, 2}}};
   const apfel::Grid g3{{{100, 1e-3, 3}}};
   const apfel::Grid g4{{{100, 1e-3, 4}}};
   const apfel::Grid g5{{{100, 1e-3, 5}}};
+  const apfel::Distribution d0{g0, f};
   const apfel::Distribution d1{g1, f};
   const apfel::Distribution d2{g2, f};
   const apfel::Distribution d3{g3, f};
@@ -56,9 +57,11 @@ int main() {
 		<< d3.Evaluate(x) << "\t"
 		<< d4.Evaluate(x) << "\t"
 		<< d5.Evaluate(x) << "\t"
+		<< d0.Evaluate(x) << "\t"
 		<< std::endl;
     }
-*/
+
+/*
   // Derivative of the distribution
   const auto df = [&] (double const& x) -> double{ return - M_PI * sin(M_PI * log(x)) / x; };
 
@@ -94,6 +97,6 @@ int main() {
                 << integr / intorig << "\t"
                 << std::endl;
     }
-
+*/
   return 0;
 }

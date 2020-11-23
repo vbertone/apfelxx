@@ -2303,7 +2303,7 @@ where we have used
 Eqs.~(\ref{eq:phasespacemeasure})-(\ref{eq:integralyeah!}) and
 Eq.~(\ref{eq:deltaargument}). Finally, to perform the integral over
 $\phi$ we use Eq.~(\ref{eq:intoverphi}) to get:
-\begin{equation}
+\begin{equation}\label{eq:difflepphasespace}
 \frac{d\mathcal{P}}{d|\mathbf{p}_T|d\eta} = \frac {3|\mathbf{p}_T|}{2\pi Q^2}
  \frac{Q^2+4 |\mathbf{p}_T|^2 \sinh^2(\eta-y)}{\sqrt{4|\mathbf{p}_T|^2|\mathbf{q}_T|^2-(2|\mathbf{p}_T|M\cosh(\eta-y)-Q^2)^2}}\,.
 \end{equation}
@@ -2399,6 +2399,39 @@ where, without loss of generality, we are assuming that the vector
 $\mathbf{q}_T$ is directed along the $x$ axis. Knowing the functions
 $F$ in $k_T$ space, the formula above can be implemented numerically.
 
+\section{The $A_0$ coefficient}
+
+Using Eq.~(5) of Ref.~\cite{Richter-Was:2016mal}, the azimuthal angle
+$\theta$ of the (negative) lepton in the Collins-Soper frame can be
+related to the momenta on the vector boson and of one of the leptons
+in the laboratory frame as:
+\begin{equation}\label{eq:RitterSport}
+\cos\theta(\eta,p_T) = \mbox{sign}(y)\frac{2p_T}{Q}\sinh(y-\eta).
+\end{equation}
+This can be related to the coefficient $A_0$ as~\cite{Gauld:2017tww}:
+\begin{equation}
+A_0= 4 - 10\,\langle\cos^2\theta\rangle\,,
+\end{equation}
+where:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \langle\cos^2\theta\rangle &\equiv& \displaystyle  \left[\int dp_Td\eta
+  \frac{d\sigma}{dQdydq_T d\eta dp_T}\right]^{-1}\int
+  dp_Td\eta\left[\cos\theta(\eta, p_T)\right]^2 \frac{d\sigma}{dQdydq_T d\eta dp_T}\,.
+\end{array}
+\end{equation}
+If the integration in both numerator and denominator in the r.h.s. of
+the quantity above is performed over the full phase space, the result
+at small $q_T$ is:
+\begin{equation}
+\langle\cos^2\theta\rangle =\int
+  dp_Td\eta\left[\cos\theta(\eta, p_T)\right]^2 \frac{d\mathcal{P}}{dp_Td\eta}\,
+\end{equation}
+with the element of phase space $d\mathcal{P}$ is given in
+Eq.~(\ref{eq:difflepphasespace}). Therefore, the ``QCD dynamics''
+totally cancels in the ration and one is left with a relatively
+interesting kinematic factor.
+
 \section{Implementing the $\phi*$ distribution}
 
 A physical observable that is particularly useful to probe the
@@ -2469,7 +2502,44 @@ Gathering all pieces together finally gives:
 \end{array}
 \end{equation}
 
-
+One can show that the boost required to go from the laboratory frame,
+in which the vectors $q$ and $p$ are given by
+Eqs.~(\ref{eq:qexplicit}) and~(\ref{eq:pexplicit}), respectively, with
+$p_T$ given by Eq.~(\ref{eq:overpT}), to the Collins-Soper frame, in
+which:
+\begin{equation}\label{eq:CSdecomp}
+q = Q(1,0,0,0)\quad\mbox{and}\quad p = \frac{Q}2(1,\sin\theta\cos\phi, \sin\theta\sin\phi,\cos\theta)\,,
+\end{equation}
+is given by:
+\begin{equation}\label{eq:boostLabToCS}
+\Lambda_{{\rm Lab}\rightarrow {\rm CS}} = 
+\begin{pmatrix}
+\frac{M}{Q}\cosh y & -\frac{q_T}{Q} & 0 & -\frac{M}{Q}\sinh y\\
+-\frac{q_T}{Q}\cosh y & \frac{M}{Q} & 0 & \frac{q_T}{Q}\sinh y\\
+0 & 0 & 1 & 0 \\
+-\sinh y & 0 & 0 & \cosh y
+\end{pmatrix}\,,
+\end{equation}
+with $M=\sqrt{Q^2+q_T^2}$. Likewise, the boost to go from the
+Collins-Soper to the laboratory frame is the inverse of the above
+transformation and reads:
+\begin{equation}\label{eq:boostCSToLab}
+\Lambda_{ {\rm CS}\rightarrow{\rm Lab}} = \Lambda_{{\rm Lab}\rightarrow {\rm CS}}^{-1}=
+\begin{pmatrix}
+\frac{M}{Q}\cosh y & \frac{q_T}{Q}\cosh y & 0 & \sinh y\\
+\frac{q_T}{Q} & \frac{M}{Q} & 0 & 0\\
+0 & 0 & 1 & 0 \\
+\frac{M}{Q}\sinh y & \frac{q_T}{Q}\sinh y & 0 & \cosh y
+\end{pmatrix}\,.
+\end{equation}
+Notice that rotating the vector in Eq.~(\ref{eq:pexplicit}) using the
+transformation in Eq.~(\ref{eq:boostLabToCS}) and equating the $z$
+component to that of the vector $p$ in Eq.~(\ref{eq:CSdecomp})
+immediately gives Eq.~(\ref{eq:RitterSport}). This immediately allows
+one to write:
+\begin{equation}
+\sin\theta = \frac{\sqrt{Q^2-4p_T\sinh^2(\eta-y)}}{Q}
+\end{equation}
 
 
 
@@ -2515,6 +2585,24 @@ JHEP \textbf{12} (2015), 047
 doi:10.1007/JHEP12(2015)047
 [arXiv:1507.06937 [hep-ph]].
 %88 citations counted in INSPIRE as of 23 Oct 2020
+
+%\cite{Richter-Was:2016mal}
+\bibitem{Richter-Was:2016mal}
+E.~Richter-Was and Z.~Was,
+%``Separating electroweak and strong interactions in Drell\textendash{}Yan processes at LHC: leptons angular distributions and reference frames,''
+Eur. Phys. J. C \textbf{76} (2016) no.8, 473
+doi:10.1140/epjc/s10052-016-4319-y
+[arXiv:1605.05450 [hep-ph]].
+%12 citations counted in INSPIRE as of 21 Nov 2020
+
+%\cite{Gauld:2017tww}
+\bibitem{Gauld:2017tww}
+R.~Gauld, A.~Gehrmann-De Ridder, T.~Gehrmann, E.~W.~N.~Glover and A.~Huss,
+%``Precise predictions for the angular coefficients in Z-boson production at the LHC,''
+JHEP \textbf{11} (2017), 003
+doi:10.1007/JHEP11(2017)003
+[arXiv:1708.00008 [hep-ph]].
+%32 citations counted in INSPIRE as of 21 Nov 2020
 
 \end{thebibliography}
 
