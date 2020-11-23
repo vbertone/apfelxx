@@ -767,7 +767,7 @@ However, one can decide take a less invasive perspective to leave the
 explicit logarithms in the Sudakov unchanged while only regularising
 only $\alpha_s$ and the collinear distributions. This can be done by
 computing them at some modified scale $\mu_*(mu)$ su that:
-\begin{equation}\label{eq:bstardef}
+\begin{equation}
 \begin{array}{lll}
 \mu_*(\mu)\simeq \mu &\mbox{ for } & \mu\rightarrow \infty\,,\\
 \mu_*(\mu) \rightarrow \mu_{\rm min} &\mbox{ for } & \mu\rightarrow 0\,.
@@ -798,7 +798,7 @@ Fig.~\ref{fig:NewPrescription_qT} for the $q_T$ distribution of the
 Drell-Yan cross section at $\sqrt{s} = 13$~TeV, $Q=M_Z$, and $y=0$.
 \begin{figure}[h]
   \begin{centering}
-    \includegraphics[width=0.6\textwidth]{plots/NewPrescription_qT}
+    \includegraphics[width=0.6\textwidth]{plots/NewPrescription_qT.pdf}
     \caption{.\label{fig:NewPrescription_qT}}
   \end{centering}
 \end{figure}
@@ -1135,17 +1135,16 @@ Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
 \begin{equation}
 \begin{array}{rcl}
   {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle H_{ij}^{(2)}
-                              \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
+                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
   \\
-                          &+&\displaystyle
-                              H_{ij}^{(1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
-                              +
-                              \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+                           &+&\displaystyle
+                               H_{ij}^{(1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
+                               +
+                               \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
   \\
-                          &+&\displaystyle H_{ij}^{(0)}\mathcal{C}_{ik}^{(2,0)}(x)\delta_{jl}\delta(1-z) + 
-                              H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
-                              +H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(2,0)}(z)\,,\\
-
+                           &+&\displaystyle H_{ij}^{(0)}\mathcal{C}_{ik}^{(2,0)}(x)\delta_{jl}\delta(1-z) + 
+                               H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
+                               +H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(2,0)}(z)\,,\\
   \\
   {B}_{ij,kl}^{(2,1)}(x,z) &=&\displaystyle \left(H_{ij}^{(0)}\widetilde{S}^{(2,1)}+H_{ij}^{(1)}S^{(1,1)}\right)
                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
@@ -1326,7 +1325,7 @@ f_{\rm NP}^{(1)}({b}_T,\zeta) = f_{\rm NP}^{(2)}({b}_T,\zeta) = \exp\left[\left(
 with $g_1 = 0.02$, $g_1=0.5$, and $Q_0 = 1.6$~GeV.
 \begin{figure}[h]
   \begin{centering}
-    \includegraphics[width=0.45\textwidth]{plots/logs}
+    \includegraphics[width=0.45\textwidth]{plots/logs.pdf}
     \caption{Comparison of the integral in Eq.~(\ref{eq:IkNonPert})
       for $p=0,1,2,3$ (solid lines) to the expressions in
       Eq.~(\ref{eq:PureLogs}) (dashed lines) as functions of $q_T$ at
@@ -1346,7 +1345,7 @@ if one zooms in around $q_T\lesssim Q$, one finds a substantial
 difference between $\widetilde{I}_p$ and $I_p$.
 \begin{figure}[h]
   \begin{centering}
-    \includegraphics[width=0.45\textwidth]{plots/logsRatio}
+    \includegraphics[width=0.45\textwidth]{plots/logsRatio.pdf}
     \caption{Ratio between $\widetilde{I}_1$ and $I_1$ in the region
       of $q_T$ close to $Q$.\label{fig:logsRatio}}
   \end{centering}
@@ -1385,7 +1384,7 @@ Eq.~(\ref{eq:logsTrans}) for $S = 0.2$ along with its components given
 in Eqs.~(\ref{eq:PureLogs}) and~(\ref{eq:IkNonPert}).
 \begin{figure}[h]
   \begin{centering}
-    \includegraphics[width=0.45\textwidth]{plots/logsTrans}
+    \includegraphics[width=0.45\textwidth]{plots/logsTrans.pdf}
     \caption{Behaviour of $\hat{I}_1$ defined in
       Eq.~(\ref{eq:logsTrans}) for $S = 0.2$ compared to the single
       components defined in Comparison of the integral in
@@ -1734,7 +1733,7 @@ calculation to be matched to the NNLL resummed computation, this
 provides a solid ground to start from.
 \begin{figure}[t]
   \begin{centering}
-    \includegraphics[width=0.5\textwidth]{plots/APFELvsTIMBA}
+    \includegraphics[width=0.5\textwidth]{plots/APFELvsTIMBA.pdf}
     \caption{Comparison at $\mathcal{O}(\alpha_s)$ between the {\tt
         TIMBA} code, implementation of the results of
       Ref.~\cite{Daleo:2004pn}, and the implementation of the
@@ -1771,7 +1770,7 @@ with $y=Q^2/xS_H$ (see Eq.~(\ref{eq:variablechange})).
 % power corrections are important in that region.
 % \begin{figure}[t]
 %   \begin{centering}
-%     \includegraphics[width=0.6\textwidth]{plots/FOvsAsy}
+%     \includegraphics[width=0.6\textwidth]{plots/FOvsAsy.pdf}
 %     \caption{Comparison at $\mathcal{O}(\alpha_s)$ between the
 %       asymptotic limit in Eq.~(\ref{eq:FOxsecasy2}) to the fixed-order
 %       computation expressions in
@@ -1795,7 +1794,7 @@ with $y=Q^2/xS_H$ (see Eq.~(\ref{eq:variablechange})).
 % situation improves when going one order up.
 % \begin{figure}[t]
 %   \begin{centering}
-%     \includegraphics[width=0.6\textwidth]{plots/ResVsExp}
+%     \includegraphics[width=0.6\textwidth]{plots/ResVsExp.pdf}
 %     \caption{Comparison between the NLL resummed calculation and the
 %       expansion to $\mathcal{O}(\alpha_s)$ in
 %       Eq.~(\ref{eq:FOxsecasy2}).\label{fig:ResVsExp}}
@@ -1847,7 +1846,7 @@ with $y=Q^2/xS_H$ (see Eq.~(\ref{eq:variablechange})).
 % perturbative accuracy to NLO+NNLL.
 % \begin{figure}[t]
 %   \begin{centering}
-%     \includegraphics[width=0.6\textwidth]{plots/FONLL}
+%     \includegraphics[width=0.6\textwidth]{plots/FONLL.pdf}
 %     \caption{Summary of the computations: fixed order (blue curve),
 %       resummed (green curve), double counting (cyan curve), and
 %       matched according to Eq.~(\ref{eq:matching1}) (red
@@ -2076,7 +2075,7 @@ grey region \textit{below} the blue line in
 Fig.~\ref{fig:deltaexpansion}.
 \begin{figure}[h]
   \begin{centering}
-    \includegraphics[width=0.5\textwidth]{plots/DeltaExpansion}
+    \includegraphics[width=0.5\textwidth]{plots/DeltaExpansion.pdf}
     \caption{Integration region of the integral in 
       Eq.~(\ref{eq:testint}). The integral is along the red curve 
       defined by the $\delta$-function.\label{fig:deltaexpansion}}
@@ -2380,7 +2379,7 @@ $M_Z$. As clear, the backward and forward evolution curves do not
 coincide leading to a mismatch of the value of $\alpha_s(M_Z)$.
 \begin{figure}[h]
   \begin{centering}
-    \includegraphics[width=0.6\textwidth]{plots/Alphas}
+    \includegraphics[width=0.6\textwidth]{plots/Alphas.pdf}
     \caption{Non-conservativity of the NLL analytic evolution of the
       strong coupling.\label{fig:Alphas}}
   \end{centering}
@@ -2564,7 +2563,7 @@ trivial equality:
 \end{equation}
 such that $\ln\left(\mu_{\rm R}/\mu_0\right)\sim 1$. Using
 Eq.~(\ref{eq:lambdadef}), one has:
-\begin{equation}\label{eq:lambdadef}
+\begin{equation}
   \lambda =
   a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_{\rm R}}\right)+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu_{\rm
         R}}{\mu_0}\right)=\overline{\lambda}+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu_{\rm

@@ -74,7 +74,7 @@ Now, if rather than eq. (\ref{LagrangeFormula}), one uses a logarithmic interpol
 w_{\alpha}^{(k)}(x) = \sum_{j=0,j \leq \alpha}^{k}\theta(x-x_{\alpha-j})\theta(x_{\alpha-j+1}-x)\prod^{k}_{\delta=0,\delta\ne j}\left[\frac{\ln(x)-\ln(x_{\alpha-j+\delta})}{\ln(x_{\alpha})-\ln(x_{\alpha-j+\delta})}\right]
 \end{equation}
 over a logarithmically distributed grid, i.e. such that $\ln(x_{\beta})-\ln(x_{\alpha})=(\beta-\alpha)\delta x$, where the step $\delta x$ is a constant, one has that:
-\begin{equation}\label{LagrangeFormulaLog}
+\begin{equation}
 w_{\alpha}^{(k)}(x) = \sum_{j=0,j \leq \alpha}^{k}\theta(x-x_{\alpha-j})\theta(x_{\alpha-j+1}-x)\prod^{k}_{\delta=0,\delta\ne j}\left[\frac{1}{\delta x} \ln\left(\frac{x}{x_\alpha}\right)\frac{1}{j-\delta}+1\right]
 \end{equation}
 that in general means that $w_\alpha^{(k)}(x)\equiv w_\alpha^{(k)}[\ln(x)-\ln(x_\alpha)]$. Therefore in eq.~(\ref{optimization2}) we have that:
@@ -511,7 +511,7 @@ we have that the interpolation formula would look like this:
 g(x) = \sum_{\alpha=0}^{N_x}\theta(x-x_{\alpha+t})\theta(x_{\alpha+t+1}-x)\sum_{i=0}^k g(x_{\alpha+i})\prod^{k}_{m=0,m\ne i}\frac{x-x_{\alpha+m}}{x_{\alpha+i}-x_{\alpha+m}}\,,
 \end{equation}
 that can be rearranged as:
-\begin{equation}\label{generalCase2}
+\begin{equation}
 g(x) = \sum_{\beta=0}^{N_x}g(x_{\beta}) \sum_{i=0,i\leq\beta}^k \theta(x-x_{\beta-i+t})\theta(x_{\beta-i+t+1}-x) \prod^{k}_{m=0,m\ne i}\frac{x-x_{\beta-i+m}}{x_{\beta}-x_{\beta-i+m}}\,.
 \end{equation}
 Therefore the ``generalized'' interpolation functions are:

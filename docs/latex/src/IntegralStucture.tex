@@ -94,7 +94,7 @@ Lagrange interpolants). Now we use eq.~(\ref{eq:Interpolation}) in
 eq.~(\ref{eq:Genconv1}) and at the same time we limit the computation
 of the integral $I$ to the point $x_\beta$ of the grid used in
 eq.~(\ref{eq:Interpolation}). This way we get:
-\begin{equation}\label{eq:Genconv1}
+\begin{equation}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\eta dy\,
   O\left(\frac{y}{\eta},\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
@@ -590,7 +590,7 @@ where the logarithm of the integration bounds this time read:
 \end{array}
 \end{equation}
 which gives:
-\begin{equation}\label{eq:decompERBLgg}
+\begin{equation}
 I_{\beta\alpha}^{(g)}=\sum_{j={\rm max}[0,\alpha+1-{\rm
     max}[\beta,\gamma^{(g+1)}]]}^{{\rm min}[\kappa^{(g)},\alpha-{\rm max}[\beta,\gamma^{(g)}]]}\int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}}dy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
