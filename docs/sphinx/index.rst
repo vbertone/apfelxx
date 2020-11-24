@@ -11,16 +11,15 @@ APFEL++ documentation
    :caption: Contents:
 
    secs/README
-   secs/Transversity
-   secs/SIDISTMD
-   secs/EvolutionCode
-   secs/DIS
-   secs/MatchingConditions
-   secs/MSbarMass
    secs/IntegralStucture
-   secs/CCDIS
-   secs/EvolDIS
-   secs/GPDs
-   secs/CovarianceMatrix
-   secs/TMDEvolution
-   secs/DrellYanTMD
+   secs/Interpolation
+   .. secs/CovarianceMatrix
+   .. secs/DIS
+   .. secs/MatchingConditions
+   .. secs/MSbarMass
+   .. secs/Transversity
+   .. secs/CCDIS
+   .. secs/TMDEvolution
+   .. secs/DrellYanTMD
+   .. secs/SIDISTMD
+   .. secs/GPDs

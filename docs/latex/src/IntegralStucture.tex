@@ -43,10 +43,9 @@
 
 \usepackage{listings}
 
-
 \begin{document}
 
-\title{Precomputation of the integrals in APFEL++}
+\title{Convolution integrals}
 
 \maketitle
 
@@ -241,13 +240,44 @@ $m/Q$, where $m$ is the mass of the quark and $Q$ the hard scale. In
 addition, the $+$-prescripted contributions can become more
 convoluted.
 
+As an aside, it is interesting to notice that we have silently decided
+to use one of the two possible ways to compute the convolution
+integral $I(x)$ in Eq.~(\ref{eq:ZMconv}). Specifically, we have chosen
+the rightmost equality. However, the equality:
+\begin{equation}
+I(x) = x\int_x^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z)\,,
+\end{equation}
+is equally valid. If one choses this particular version of the
+convolution integral and follows the interpolation procedure discussed
+above, the result for $I$ computed in $x_\beta$ would be identical to
+Eq.~(\ref{eq:Genconv3}) (with $\eta=1$) except for the fact that the
+weights $\Gamma_{\beta \alpha}$ are computed as:
+\begin{equation}
+\Gamma_{\beta\alpha} = \int_{a}^{b}dz\,
+O\left(\frac{x_\beta}{z}\right)w_{\alpha}^{(k)}(z)
+\label{eq:oldway}
+\end{equation}
+with:
+\begin{equation}
+a \equiv \mbox{max}(x_\beta,x_{\alpha-k})\quad\mbox{and}\quad b \equiv \mbox{min}(1,x_{\alpha+1})\,.
+\end{equation}
+This immediately implies that the integral in Eq.~(\ref{eq:Genconv3})
+and that in Eq.~(\ref{eq:oldway}) have to coincide. This is indeed the
+case and the only reason to choose Eq.~(\ref{eq:Genconv3}) rather than
+Eq.~(\ref{eq:oldway}) is convenience. Specifically,
+Eq.~(\ref{eq:oldway}) implies computing the operator $O$ at
+$x_\beta/z$ rather than at $z$ and this makes the treatment of
+$\delta$-functions and $+$-distributions possibly present in $O$ a
+little more delicate. However, Eq.~(\ref{eq:oldway}) remains a valid
+alternative that we just decided not to pursue.
+
 \subsection{Double convolutions}
 
 The technique discussed above to compute convolution integrals as a
 weighted sums of a given input distributions $d$ can be, under certain
 circumstances, generalised to convolution integrals involving
 \textit{two} distributions. Relevant examples are the Drell-Yan (DY)
-and the Semi-Inclusive deep-inelastic scattering (SIDIS) cross
+and the semi-inclusive deep-inelastic scattering (SIDIS) cross
 sections integrated over the transverse momentum of the virtual
 boson. In these cases the cross section is proportional to a double
 convolutions between partonic cross sections and a pair of
@@ -680,7 +710,6 @@ observables as well as the form of the expressions involved are very
 similar. Therefore, the application of the method described above is
 straightforward. 
 
-
 \subsection{Advantage of a logarithmic grid}
 
 Given the particular structure of the integral $I$ in
@@ -692,10 +721,25 @@ I_{\beta\alpha} =
 \int_{x_\beta}^1dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \label{eq:integralex}
 \end{equation}
-If the grid is logarithmically spaced, \textit{i.e.}
-$\ln x_{n+1}=\ln x_{n}+\delta x$ with $\delta x$ a positive constant,
-and $\{w_{\alpha}(z)\}$ is a set of Lagrange interpolating functions of
-degree $\kappa$ in $\ln z$, one has:
+A logarithmically-spaced is defined such that
+$\ln x_{n+1}=\ln x_{n}+\delta x$ with $\delta x$ a positive
+constant. In addition, we consider a set of Lagrange interpolating
+functions of degree $\kappa$ polynomial in $\ln z$,
+$\{w_{\alpha}(z)\}$, that thus have the following form (see section on
+the interpolation):
+\begin{equation}
+  w_{\alpha}^{(k)}(z) = \sum_{j=0\atop j \leq
+    \alpha}^{k}\theta(z-x_{\alpha-j})\theta(x_{\alpha-j+1}-z)\prod^{k}_{\delta=0,\delta\ne
+    j}\left[\frac{\ln(z)-\ln(x_{\alpha-j+\delta})}{\ln(x_{\alpha})-\ln(x_{\alpha-j+\delta})}\right]\,.
+\label{eq:LagrangeFormulaLog}
+\end{equation}
+Due to the fact that the grid is logarithmically distributed with step
+$\delta x$, the function above can be rearranged as follows:
+\begin{equation}
+w_{\alpha}^{(k)}(z) = \sum_{j=0,j \leq \alpha}^{k}\theta(z-x_{\alpha-j})\theta(x_{\alpha-j+1}-z)\prod^{k}_{\delta=0,\delta\ne j}\left[\frac{1}{\delta x} \ln\left(\frac{z}{x_\alpha}\right)\frac{1}{j-\delta}+1\right].
+\end{equation}
+It is finally easy to see that Eq.~(\ref{eq:LagrangeFormulaLog}) is
+such that:
 \begin{equation}
 w_{\alpha}(z) =
 \widetilde{w}\left(\ln\frac{z}{x_\alpha}\right)\quad\Rightarrow\quad
@@ -703,6 +747,8 @@ w_{\alpha}\left(\frac{x_\beta}{y}\right) =
 \widetilde{w}\left(\ln\frac{x_\beta}{x_\alpha}-\ln y\right)
 =\widetilde{w}\left((\beta-\alpha)\delta x-\ln y\right)\,.
 \end{equation}
+
+
 Therefore, the integrand of the integral in Eq.~(\ref{eq:integralex})
 only depends on the difference $\beta-\alpha$ and not on $\beta$ and
 $\alpha$ separately. Since the lower bound is $x_\beta$, this symmetry

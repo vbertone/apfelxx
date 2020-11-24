@@ -3,6 +3,7 @@
 for ((index=0; index<2; index++))
 do
     pdflatex IntegralStucture.tex
+    pdflatex Interpolation.tex
     pdflatex CCDIS.tex
     pdflatex Transversity.tex
     pdflatex TMDEvolution.tex
