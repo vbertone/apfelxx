@@ -48,114 +48,139 @@
 
 \title{Precomputation of the integrals in APFEL++}
 
-\author{Valerio Bertone}
+\maketitle
 
 \tableofcontents{}
 
 \section{Structure of the integrals}
 
-The general structure of the quantities to be computed in {\tt APFEL}
-is the combination of terms $I$ that have the form of Mellin
-convolutions between an operator $O$ and distribution function $d$,
-that is:
-\begin{equation}\label{eq:ZMconv}
-I(x) = x\int_0^1dz\int_0^1dy\, O(z)d(y)\delta(x-yz) = x\int_x^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z) = x\int_x^1\frac{dz}{z} O(z)d\left(\frac{x}{z}\right)\,.
+The general structure of the integrals considered in {\tt APFEL++} has
+the form of a Mellin convolution between an \textit{operator} $O$,
+this is a potentially complicated known function such as a splitting
+function or a partonic cross section,\footnote{More precisely, $O$ is
+  in general a distribution that may contain $\delta$ functions and
+  $+$-distributions.} and a \textit{distribution} function $d$, as for
+example a parton distribution function (PDF) or a fragmentation
+function (FF). The explicit form of these integrals reads:
+\begin{equation}
+I(x) = x\int_0^1dz\int_0^1dy\, O(z)d(y)\delta(x-yz) =
+x\int_x^1\frac{dz}{z} O \left(\frac{x}{z}\right) d(z) =
+x\int_x^1\frac{dz}{z} O(z)d\left(\frac{x}{z}\right)\,.
+\label{eq:ZMconv}
 \end{equation}
-However, very often, typically in the presence of mass effects, the
-integration phase space is modified and the convolution in
-eq.~(\ref{eq:ZMconv}), limiting ourselves to the leftmost identity, is
+Typically in the presence of mass effects, the integration phase space
+may be modified and the convolution in Eq.~(\ref{eq:ZMconv}) is
 generalised as:
-\begin{equation}\label{eq:Genconv}
+\begin{equation}
 I(x,\eta) = x\int_{x/\eta}^1\frac{dz}{z} O(z,\eta)d\left(\frac{x}{\eta
-    z}\right)\,.
+    z}\right)\,,
+\label{eq:Genconv}
 \end{equation}
 where $\eta\leq1$, with $\eta = 1$ reproducing
-eq.~(\ref{eq:ZMconv}). However, for purposes that will become clear
-later, we want to write the integral in eq.~(\ref{eq:Genconv}) in the
-form of eq.~(\ref{eq:ZMconv}), that is in such a way that lower bound
-of the integral is not the rescaled variable $x/\eta$ but the physical
-Bjorken $x$. To do so, one needs to perform the change of variable
-$y =\eta z$, so that:
-\begin{equation}\label{eq:Genconv1}
+Eq.~(\ref{eq:ZMconv}). However, it is convenient to rewrite the
+integral in Eq.~(\ref{eq:Genconv}) in a form in which the lower bound
+of the integral is equal to $x$. This is easily done by performing the
+change of variable $y =\eta z$, so that:
+\begin{equation}
   I(x,\eta)= \int_x^\eta dy\,
   O\left(\frac{y}{\eta},\eta\right)\,\frac{x}{y}d\left(\frac{x}{y}\right)\,.
+\label{eq:Genconv1}
 \end{equation}
 
-In order to precompute the expensive part of the integral in
-eq.~(\ref{eq:Genconv1}), we use the standard interpolation formula to
-the distribution $d$:
-\begin{equation}\label{eq:Interpolation}
+In order to enable the precomputation the expensive part of the
+integral in Eq.~(\ref{eq:Genconv1}), we use the standard interpolation
+formula on the distribution $d$:
+\begin{equation}
 \frac{x}{y} d\left(\frac{x}{y}\right) = \sum_{\alpha=0}^{N_x} x_\alpha
 d(x_\alpha) w_{\alpha}^{(k)}\left(\frac{x}{y}\right)\,,
+\label{eq:Interpolation}
 \end{equation}
-where $\alpha$ runs over the node of a give grid in $x$ space and the
-weights $w_{\alpha}$ are typically polynomials of degree $k$ ($i.e.$
-Lagrange interpolants). Now we use eq.~(\ref{eq:Interpolation}) in
-eq.~(\ref{eq:Genconv1}) and at the same time we limit the computation
-of the integral $I$ to the point $x_\beta$ of the grid used in
-eq.~(\ref{eq:Interpolation}). This way we get:
+where $\alpha$ runs over the nodes of a grid in $x$ and the weights
+$w_{\alpha}$ are assumed to be Langrange polynomials of degree
+$k$. Now we plug Eq.~(\ref{eq:Interpolation}) into
+Eq.~(\ref{eq:Genconv1}) and specialise the computation of the integral
+$I$ to the girid point $x_\beta$. This gives:
 \begin{equation}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\eta dy\,
   O\left(\frac{y}{\eta},\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
 where we have defined $\overline{d}_\alpha = x_\alpha d(x_\alpha)$.
-In the particular case of the Lagrange interpolants (in the {\tt
-  APFEL} procedure), one can show that:
+As shown in the section devoted to the interpolation procedure, under
+some specific conditions the interpolating functions are such that:
 \begin{equation}
 w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\neq 0\quad\mbox{for}\quad c < y < d\,,
 \end{equation}
 with:
-\begin{equation}\label{eq:intlims}
+\begin{equation}
   c =
   \mbox{max}(x_\beta,x_\beta/x_{\alpha+1}) \quad\mbox{and}\quad d =
-  \mbox{min}(\eta,x_\beta/x_{\alpha-k}) \,,
+  \mbox{min}(\eta,x_\beta/x_{\alpha-k}) \,.
+\label{eq:intlims}
 \end{equation}
-and thus eq.~(\ref{eq:Genconv1}) can be adjusted as:
-\begin{equation}\label{eq:Genconv2}
+Therefore, Eq.~(\ref{eq:Genconv1}) can be adjusted as:
+\begin{equation}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_c^d dy\,
   O\left(\frac{y}{\eta},\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)\,.
+\label{eq:Genconv2}
 \end{equation}
-Finally, we change back the integration variable $z=y/\eta$ so that
-eq.~(\ref{eq:Genconv2}) becomes:
-\begin{equation}\label{eq:Genconv3}
+Finally, we change the integration variable back to $z=y/\eta$ so that
+Eq.~(\ref{eq:Genconv2}) becomes:
+\begin{equation}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha \underbrace{\left[\eta\int_{c/\eta}^{d/\eta} dz\,
-  O\left(z,\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)\right]}_{\Gamma_{\alpha\beta}}\,.
+  O\left(z,\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta
+      z}\right)\right]}_{\Gamma_{\alpha\beta}}\,.
+\label{eq:Genconv3}
 \end{equation}
-The quantity in squared brackets is the interesting bit.
+To summarise, Eq.~(\ref{eq:Genconv3}) allows one to compute the
+integral $I$ on the nodes of a given grid as a weighted sum of the
+values of distribution $d$ on the nodes themselves. The weights are
+given by the appropriate integral of the operator $O$ and the
+interpolating functions $w_{\alpha}^{(k)}$. The value of $I$ for a
+generic value of $x$ can finally be obtained by interpolation using a
+formula similar to Eq.~(\ref{eq:Interpolation}). Importantly,
+Eq.~(\ref{eq:Genconv3}) provides a fast way of computing convolution
+integrals. Indeed, the weights $\Gamma_{\alpha\beta}$ can be
+precomputed and stored once and for all and the integral $I$ can be
+quickly computed with different distributions $d$ by simply taking the
+weighted average.
 
-The expressions for the operator $O$ that we have to deal with have
-this general form:
-\begin{equation}\label{eq:CoeffFuncs}
-  O(z,\eta) = R(z,\eta)+\sum_{i}\left[P^{(i)}(z,\eta)\right]_+ S^{(i)}(z,\eta)+ L(\eta)\delta(1-z)\,,
+We now need an operational way to compute the weights
+$\Gamma_{\alpha\beta}$. To do so, it is necessary to know the general
+structure of the operator $O$. Quite generally, the operator $O$
+splits as follows:
+\begin{equation}
+  O(z,\eta) = R(z,\eta)+\sum_{i}\left[P^{(i)}(z,\eta)\right]_+
+  S^{(i)}(z,\eta)+ L(\eta)\delta(1-z)\,,
+\label{eq:CoeffFuncs}
 \end{equation}
-where $R$ and $S^{(i)}$ are a regular functions in $z=1$, that is:
+where $R$ and $S^{(i)}$ are a regular functions at $z=1$, that is:
 \begin{equation}
 R(1,\eta) =  \lim_{z\rightarrow 1} R(z,\eta) = K(\eta)\quad\mbox{and}\quad S^{(i)}(1,\eta) =  \lim_{z\rightarrow 1} S^{(i)}(z,\eta) = J^{(i)}(\eta)\,,
 \end{equation}
 being $K$, $J^{(i)}$, and $L$ a finite function of $\eta$. The
-functions $P^{(i)}$ are instead plus-prescripted functions whose
-behaviour in $z=1$ is singular in the limit $\eta\rightarrow1$. Notice
-that the sum over $i$ in eq.~(\ref{eq:CoeffFuncs}) depends on the
-perturbative order of the expressions. Plugging
-eq.~(\ref{eq:CoeffFuncs}) into the definition of
-$\Gamma_{\alpha\beta}$ in eq.~(\ref{eq:Genconv3}) and making use of
-the definition of plus-prescription, we obtain:
-\begin{equation}\label{eq:FinalExpression}
+functions $P^{(i)}$ are instead singular at $z=1$ and non-integrable
+in the limit $\eta\rightarrow1$ and thus are regularised through the
+$+$-prescription. Plugging Eq.~(\ref{eq:CoeffFuncs}) into the
+definition of $\Gamma_{\alpha\beta}$ in Eq.~(\ref{eq:Genconv3}) and
+making use of the definition of $+$-prescription gives:
+\begin{equation}
 \begin{array}{rcl}
 \Gamma_{\beta\alpha} &=& \eta\displaystyle \int_{c/\eta}^{d/\eta} dz\left\{R\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)+\sum_{i}P^{(i)}(z,\eta)\left[S^{(i)}\left(z,\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta z}\right)-S^{(i)}(1,\eta)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\right]\right\}\\
 \\
 &+&\displaystyle \eta\left[L(\eta)-\sum_{i}S^{(i)}(1,\eta)\int_0^{c/\eta}dz
     P^{(i)}(z,\eta)\right]w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\,,
 \end{array}
+\label{eq:FinalExpression}
 \end{equation}
-that can be further manipulated changing the integration variable
-back, defining $\eta z = y$:
-\begin{equation}\label{eq:FinalExpression2}
+that can be further manipulated changing the integration variable into
+$y=\eta z$:
+\begin{equation}
 \begin{array}{rcl}
   \Gamma_{\beta\alpha} &=& \displaystyle \int_{c}^{d} dy\left\{R\left(\frac{y}{\eta},\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)+\sum_{i}P^{(i)}\left(\frac{y}{\eta},\eta\right)\left[S^{(i)}\left(\frac{y}{\eta},\eta\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{y}\right)-S^{(i)}(1,\eta)w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\right]\right\}\\
   \\
                        &+&\displaystyle \eta \left[L(\eta)+\sum_{i}S^{(i)}(1,\eta)Q^{(i)}\left(\frac{c}{\eta},\eta\right)\right]w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta}\right)\,.
 \end{array}
+\label{eq:FinalExpression2}
 \end{equation}
 where we have defined:
 \begin{equation}
@@ -163,13 +188,14 @@ where we have defined:
 \end{equation}
 These integrals can, most of the times, be computed analytically.
 
-Eqs.~(\ref{eq:FinalExpression})-(\ref{eq:FinalExpression2}) express
-the full complexity of the task. However, there are a few remarks that
-apply is some particular cases and that reduce the complexity. In the
-case of the ($\overline{\mbox{MS}}$) splitting functions, there are
-two main simplications: the first is that $\eta=1$, the second is that
-there is one single term in the sum over $i$ ($i=0$) and the form of
-the function $P$ is:
+Eqs.~(\ref{eq:FinalExpression})-(\ref{eq:FinalExpression2}) expose the
+full potential complexity of the task of computing the weights
+$\Gamma_{\alpha\beta}$. However, in many practical applications some
+simplifications apply. For example, in the case of the perturbative
+coefficients of the ($\overline{\mbox{MS}}$) splitting functions there
+are two simplications: the first is that $\eta=1$, the second is that
+there is one single term in the sum over $i$ ($i=0$) such that and the
+general form of the function $P$ is:
 \begin{equation}
 P^{(0)}(z,\eta)\rightarrow \frac1{1-z}\,,
 \end{equation}
@@ -181,18 +207,22 @@ Considering that:
 \begin{equation}
 w_\alpha^{(k)}(x_\beta) = \delta_{\alpha\beta}\,,
 \end{equation}
-and that the expressions can be manipulated in such a way that the
-coefficient of the plus-prescripted term $S$ is a constant, we have that:
-\begin{equation}\label{eq:SplittingFunctions}
-\Gamma_{\beta\alpha} = \int_{c}^{d} dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S}{1-z}\left[w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)-\delta_{\alpha\beta}\right]\right\}+\displaystyle \left[S\ln\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
+and that the expressions can always be manipulated in such a way that
+the coefficient of the $+$-prescripted term $S$ is a constant, one
+finds that:
+\begin{equation}
+\Gamma_{\beta\alpha} = \int_{c}^{d}
+dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S}{1-z}\left[w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)-\delta_{\alpha\beta}\right]\right\}+\displaystyle
+\left[S\ln\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
+\label{eq:SplittingFunctions}
 \end{equation}
 
-The same kind of simplifications apply to the case of the Zero-Mass
-(ZM) coefficient functions with the only exception that the sum over
-$i$ extends to more terms. In particular, since we will use exact
-expressions only up to $\mathcal{O}(\alpha_s)$, $i.e.$ NLO, we have
-that:
-\begin{equation}\label{eq:ZMCoeffFunctions}
+The same kind of simplifications apply to the case of the perturbative
+Zero-Mass (ZM) coefficient functions with the only exception that the
+sum over $i$ extends to more terms depending on the perturbative
+order. For example at $\mathcal{O}(\alpha_s)$, $i.e.$ at NLO, the
+general form of the coefficient functions reads:
+\begin{equation}
 \begin{array}{rcl}
   \Gamma_{\beta\alpha} &=&\displaystyle \int_{c}^{d}
                            dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)
@@ -202,14 +232,454 @@ that:
     \left[S^{(0)}\ln\left(1-c\right)+\frac12
     S^{(1)}\ln^2\left(1-c\right)+L \right]\delta_{\alpha\beta}\,.
 \end{array}
+\label{eq:ZMCoeffFunctions}
 \end{equation}
 
-As far as the massive coefficient functions up to
-$\mathcal{O}(\alpha_s^2)$ are concerned, things can be more
-complicated and we will discuss it later. In the next section we will
-consider the case of hadronic observables in the ZM scheme showing how
-to pre-compute the integral for the double-differential distributions
-in Drell-Yan production.
+Thing get more complicated when considering massive coefficient
+functions. In this case, the role of $\eta$ is played by the ration
+$m/Q$, where $m$ is the mass of the quark and $Q$ the hard scale. In
+addition, the $+$-prescripted contributions can become more
+convoluted.
+
+\subsection{Double convolutions}
+
+The technique discussed above to compute convolution integrals as a
+weighted sums of a given input distributions $d$ can be, under certain
+circumstances, generalised to convolution integrals involving
+\textit{two} distributions. Relevant examples are the Drell-Yan (DY)
+and the Semi-Inclusive deep-inelastic scattering (SIDIS) cross
+sections integrated over the transverse momentum of the virtual
+boson. In these cases the cross section is proportional to a double
+convolutions between partonic cross sections and a pair of
+non-perturbative distributions. The general form of this double
+convolution is:
+\begin{equation}
+J(x_1,x_2) =
+x_1 x_2\int_{x_1}^1\frac{dy_1}{y_1}\int_{x_2}^1\frac{dy_2}{y_2}
+O(y_1,y_2) d^{(1)}\left(\frac{x_1}{y_1}\right)
+  d^{(2)}\left(\frac{x_2}{y_2}\right)\,.
+\end{equation}
+Applying the same interpolation procedure as in the single-convolution
+case gives:
+\begin{equation}
+\begin{array}{rcl}
+J(x_\delta,x_\gamma) &=&\displaystyle
+\int_{x_\delta}^1dy_1\int_{x_\gamma}^1dy_2\,
+O(y_1,y_2) \left[\frac{x_\delta}{y_1}d^{(1)}\left(\frac{x_\delta}{y_1}\right)\right]
+  \left[\frac{x_\gamma}{y_2}d^{(2)}\left(\frac{x_\gamma}{y_2}\right)\right]\\
+\\
+&=&\displaystyle
+    \sum_{\alpha=0}^{N_x}\sum_{\beta=0}^{N_x} \overline{d}^{(1)}_\beta
+    \overline{d}^{(2)}_\alpha \underbrace{\left[\int_{x_\delta}^1 dy_1 \int_{x_\gamma}^1 dy_2\,
+    O(y_1,y_2)\, w_{\beta}^{(k)}\left(\frac{x_\delta}{y_1}\right) 
+    w_{\alpha}^{(k)}\left(\frac{x_\gamma}{y_2}\right)\right]}_{\Theta^{\beta\delta,\alpha\gamma}}\,.
+\end{array}
+\label{eq:DoubleZMconv}
+\end{equation}
+In Eq.~(\ref{eq:DoubleZMconv}) we have assumes that there are no mass
+corrections and thus the convolutions take the simplest form. In the
+case of double convolutions, the operator $O$ is a function of two
+variables, $y_1$ and $y_2$, and, as in the case of the single
+convolutions, it receives three kinds of contribution in both these
+variables: local terms proportional to $\delta$-functions, singular
+terms proportional to $+$-prescripted functions, and regular
+terms. The complication here is that these contributions from the two
+variables $y_1$ and $y_2$ mix and thus, for example, terms local in
+$y_1$ and singular in $y_2$ may also appear. It is thus necessary to
+identify the general structure of the function $O$ to see whether it
+is possible to decompose the double operator
+$\Theta^{\beta\delta,\alpha\gamma}$ into products of single operators.
+
+As we will explicitly show below, in the case of SIDIS up to
+$\mathcal{O}(\alpha_s)$ (NLO) the general structure of the function
+$O$ can be inferred looking at Eqs.~(C.2)-(C.7) of
+Ref.~\cite{deFlorian:1997zj}:
+\begin{equation}
+\begin{array}{rclclcl}
+  O(y_1,y_2) &=&\displaystyle {\rm LL}\,\delta(1-y_1)\delta(1-y_2) &+&\displaystyle {\rm LS}\,
+                                                                       \delta(1-y_1)\left[\frac{\ln(1-y_2)}{1-y_2}\right]_+ &+&\displaystyle \delta(1-y_1)\,{\rm LR}(y_2) \\
+  \\
+             &+&\displaystyle {\rm SL}\,\left[\frac{\ln(1-y_1)}{1-y_1}\right]_+\delta(1-y_2)
+                                                                   &+&\displaystyle {\rm SS}\,\left[\frac1{1-y_1}\right]_+
+                                                                       \left[\frac1{1-y_2}\right]_+ &+&\displaystyle \left[\frac1{1-y_1}\right]_+\,{\rm
+                                                                                                        SR}(y_2)\\
+  \\
+             &+&\displaystyle {\rm RL}(y_1)\,\delta(1-y_2)   &+&\displaystyle
+                                                                 {\rm RS}(y_1)
+                                                                 \,\left[\frac1{1-y_2}\right]_+&+&\displaystyle
+                                                                                                   \sum_iK_i{\rm
+                                                                                                   R}_i^{(1)}(y_1){\rm
+                                                                                                   R}_i^{(2)}(y_2)\,.
+\end{array}
+\label{eq:DoubleFuncStruct}
+\end{equation}
+It is clear that in Eq.~(\ref{eq:DoubleFuncStruct}) all terms
+factorise into a part that only depends on $y_1$ and a part that only
+depends on $y_2$. This is the crucial feature that enables use the
+technology developed above for the single convolutions. Plugging
+Eq.~(\ref{eq:DoubleFuncStruct}) into Eq.~(\ref{eq:DoubleZMconv}), one
+finds that:
+\begin{equation}
+\begin{array}{rclclcl}
+  \Theta^{\beta\delta,\alpha\gamma} &=& {\rm LL} \,
+                                        \Gamma^{\rm L}_{\beta\delta}\Gamma^{\rm L}_{\alpha\gamma}
+  &+& \displaystyle {\rm LS}\,\Gamma^{\rm L}_{\beta\delta}\Gamma_{\alpha\gamma}^{\rm S1}
+  &+&\displaystyle \Gamma^{\rm L}_{\beta\delta} \Gamma_{\alpha\gamma}^{\rm LR}\\
+  \\
+                                    &+&{\rm SL}\,\displaystyle\Gamma_{\beta\delta}^{\rm S1}\Gamma^{\rm L}_{\alpha\gamma} 
+  &+&
+     {\rm SS}\,\Gamma_{\beta\delta}^{\rm
+      S0}\Gamma_{\alpha\gamma}^{\rm S0}&+& \Gamma_{\beta\delta}^{\rm S0}\Gamma_{\alpha\gamma}^{\rm SR}\\
+\\
+&+& \displaystyle \Gamma_{\beta\delta}^{\rm RL}\Gamma^{\rm L}_{\alpha\gamma} &+& \Gamma_{\beta\delta}^{\rm RS}\Gamma_{\alpha\gamma}^{\rm
+      S0} &+& \displaystyle \sum_i K_i \Gamma_{\beta\delta}^{R_i^{(1)}}\Gamma_{\alpha\gamma}^{R_i^{(2)}}
+\end{array}
+\label{eq:MasterFormula}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+  \Gamma_{\alpha\beta}^{\rm L} &=& \displaystyle  \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
+                                       dz\,\delta(1-z)w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)
+                                   =
+                                   w_{\beta}^{(k)}\left(x_\alpha\right)
+                                   =  \delta_{\alpha\beta}\\
+\\
+  \Gamma_{\alpha\beta}^{{\rm S}n} &=& \displaystyle  \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
+                                       dz\frac{\ln^n(1-z)}{1-z}\left[w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)-\delta_{\alpha\beta}\right]+\frac1{(n+1)!}\ln^{n+1}\left(1-c_{\alpha\beta}\right)\delta_{\alpha\beta}\\
+  \\
+  \Gamma_{\alpha\beta}^{f} &=&\displaystyle \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
+                                     dz\,f(z)\,w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)
+\end{array}
+\label{eq:PrecompOp}
+\end{equation}
+where $f$ is a regular function and the integration bounds are defined
+as:
+\begin{equation}
+  c_{\alpha\beta} =
+  \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
+  \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
+\end{equation}
+In general terms, we assume that it is always be possible to write an
+object of the kind of $\Theta^{\beta\delta,\alpha\gamma}$ as series of
+bilinear terms:
+\begin{equation}
+\Theta^{\beta\delta,\alpha\gamma} = \sum_j
+C_j\Gamma_j^{(1),\beta\delta}\Gamma_j^{(2),\alpha\gamma}
+\label{eq:OpSeries}
+\end{equation}
+where $C_j$ are scalar coefficients, and the weights
+$\Gamma_j^{(1),\beta\delta}$ and $\Gamma_j^{(2),\alpha\gamma}$ can be
+computed using the technology discussed in the previous
+section. Plugging Eq.~(\ref{eq:OpSeries}) into
+Eq.~(\ref{eq:DoubleZMconv}), one finds that:
+\begin{equation}
+  J(x_\delta,x_\gamma) =
+  \sum_j C_j  f_j^{(1),\delta} f_j^{(2),\gamma}\,,
+\label{eq:DoubleZMconv2}
+\end{equation}
+where we have defined:
+\begin{equation}
+f_j^{(1),\delta}\equiv \sum_{\beta=0}^{N_x} \overline{d}^{(1)}_\beta\Gamma_j^{(1),\beta\delta}\quad\mbox{and}\quad f_j^{(2),\gamma}\equiv \sum_{\alpha=0}^{N_x}\overline{d}^{(2)}_\alpha \Gamma_j^{(2),\alpha\gamma}\,.
+\end{equation}
+
+Eq.~(\ref{eq:DoubleZMconv2}) shows that, under the hypothesis that the
+operator $O(y_1,y_2)$ can be expressed as a series of terms whose
+dependence on $y_1$ and $y_2$ factorizes,\footnote{This is the case
+  for SIDIS and DY up to NLO. However, one may expect that this
+  feature holds also beyond.} the double convolution in
+Eq.~(\ref{eq:DoubleZMconv}) is given by a series of bilinear
+distributions ($f_j^{(1),\delta}$ and $f_j^{(2),\gamma}$) singularly
+obtained as convolutions of single operators with the input
+distributions $d^{(1)}$ and $d^{(2)}$. This is a particularly useful
+achievement that allows us to compute double convolutions without the
+need of extending the integration and the interpolation procedures to
+two dimensions with an obvious gain in accuracy and performance. As a
+matter of fact, the same argument can be extended to a multiple
+convolution of the function $O(\{y_i\})$, which again can be expressed
+as a series of $n$-linear terms, with $i=1,\dots,n$, with $n$
+distributions:
+\begin{equation}
+J(\{x_{\alpha_i}\}) = \sum_j C_j  \prod_{i=1}^nf_j^{(i),\alpha_i}\,,
+\end{equation}
+with:
+\begin{equation}
+f_j^{(i),\alpha_i} \equiv \sum_{\beta=0}^{N_x} \overline{d}^{(i)}_\beta\Gamma_j^{(i),\beta\alpha_i}\,.
+\end{equation}
+This technology could be useful for more complicated observables, like
+cross sections in $pp$ collisions with an identified hadron in the
+final state, that requires for example three convolutions.
+
+The challenging part of the procedure just presented resides in the
+``pre-processing'' of the function $O(y_1,y_2)$ that has to be
+analytically manipulated to disentangle the single terms. This step,
+however, has to be taken only once.
+
+Before going into a concrete application, it is useful to connect
+Eq.~(\ref{eq:MasterFormula}) to Eq.~(\ref{eq:OpSeries}) by identifying
+number and form of the coefficients and weights
+involved. Specifically, assuming that the series in the last term in
+the r.h.s. of Eq.~(\ref{eq:MasterFormula}) has $r$ terms, the series
+in Eq.~(\ref{eq:OpSeries}) will have $8+r$ terms, that is:
+\begin{equation}
+\Theta^{\beta\delta,\alpha\gamma} = \sum_{j=1}^{8+r}
+C_j\Gamma_j^{(1),\beta\delta}\Gamma_j^{(2),\alpha\gamma}
+\label{eq:OpSeriesCon}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{lclll}
+j = 1 &:& C_1 = {\rm LL}, & \Gamma_1^{(1),\beta\delta} = \Gamma^{\rm L}_{\beta\delta}, & \Gamma_1^{(2),\alpha\gamma} = \Gamma^{\rm L}_{\alpha\gamma},\\
+j = 2 &:& C_2 = {\rm LS}, & \Gamma_2^{(1),\beta\delta} = \Gamma^{\rm L}_{\beta\delta}, & \Gamma_2^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S1},\\
+j = 3 &:& C_3 = 1, & \Gamma_3^{(1),\beta\delta} = \Gamma^{\rm L}_{\beta\delta}, & \Gamma_3^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm LR},\\
+j = 4 &:& C_4 = {\rm SL}, & \Gamma_4^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S1}, & \Gamma_4^{(2),\alpha\gamma} = \Gamma^{\rm L}_{\alpha\gamma},\\
+j = 5 &:& C_5 = {\rm SS},& \Gamma_5^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S0}, & \Gamma_5^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S0},\\
+j = 6 &:& C_6 = 1, & \Gamma_6^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S0}, & \Gamma_6^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm SR},\\
+j = 7 &:& C_7 = 1, & \Gamma_7^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RL}, & \Gamma_7^{(2),\alpha\gamma} = \Gamma^{\rm L}_{\alpha\gamma},\\
+j = 8 &:& C_8 = 1, & \Gamma_8^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RS}, & \Gamma_8^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S0},\\
+j = 9 &:& C_9 = K_1 & \Gamma_9^{(1),\beta\delta} = \Gamma_{\beta\delta}^{R_1^{(1)}}, & \Gamma_9^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{R_1^{(2)}},\\
+\vdots & & & & \\
+j = 8 + r &:& C_{8+r} = K_r & \Gamma_{8+r}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{R_r^{(1)}}, & \Gamma_{8+r}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{R_r^{(2)}}
+\end{array}
+\end{equation}
+It should be noted that, despite the large number of terms in the
+series in Eq.~(\ref{eq:OpSeriesCon}), the number of weights to be
+precomputed is usually pretty limited. In addition, in many cases many
+of the terms of the series are zero so that the number of
+contributions is further reduced. We can now apply this procedure up
+to NLO in QCD to two specific cases: SIDIS first and DY second
+(incomplete).
+
+\subsubsection{Semi-inclusive deep inelastic scattering (SIDIS)}
+
+the structure of the ($p_T$-integrated) SIDIS cross section and the
+expressions of the respective hard coefficient functions can be found
+in Ref.~\cite{deFlorian:1997zj}. Following this paper, the SIDIS
+differential cross section for the exchange of a virtual photon can be
+written as:
+\begin{equation}
+  \frac{d^3\sigma}{dxdydz} = 
+  \frac{2\, \pi\alpha^2}{xyQ^2} 
+  \left[ (1+(1-y)^2) 2xF_1(x,z,Q^2) + 
+    2 (1-y) F_L(x,z,Q^2) \right]\,,
+\label{eq:sidis}
+\end{equation}
+with $Q^2 = - q^2$ the (negative) virtuality of the exchanged photon,
+$x$ and $z$ the momentum fractions that enter the PDFs and the FFs,
+and $y = Q^2/xs$ the inelasticity given in terms of $Q$, $x$, and the
+collision energy in the center of mass $s$. Notice that, as compared
+to Ref.~\cite{deFlorian:1997zj}, we have absorbed a factor $x$ into
+the definition of $F_L$ as customary for the longitudinal structure
+function in inclusive DIS.
+
+We now use the Callan-Gross relation:
+\begin{equation}
+F_2 = 2xF_1 + F_L
+\label{eq:CallanGross}
+\end{equation}
+to replace $2xF_1$ with $F_2$ in Eq.~(\ref{eq:sidis}):
+\begin{equation}
+  \frac{d^3\sigma}{dxdydz} = 
+  \frac{2\, \pi\alpha^2}{xyQ^2} 
+  \left[ Y_+ F_2(x,z,Q^2)
+    -y^2 F_L(x,z,Q^2) \right]\,,
+\label{eq:sidis2}
+\end{equation}
+where we have defined:
+\begin{equation}
+Y_+ = 1+(1-y)^2\,.
+\end{equation}
+It is also useful to write Eq.~(\ref{eq:sidis2}) as differential in
+$x$, $Q^2$, and $z$:
+\begin{equation}
+  \frac{d^3\sigma}{dx\, dQ^2\, dz} = 
+  \frac{2\, \pi\alpha^2}{xQ^4} 
+  \left[ Y_+ F_2(x,z,Q)
+    -y^2 F_L(x,z,Q) \right]\,.
+\label{eq:sidis3}
+\end{equation}
+The structure functions $F_2$ and $F_L$ are given at NLO by:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle  F_{2,L}(x,z,Q) &=& \displaystyle x\sum_{q,\overline{q}} e_q^2 \bigg[ q(x,Q)
+    \otimes  C^{2,L}_{qq}(x,z) \otimes D_q(z,Q)  \\
+&+&\displaystyle q(x,Q)  \otimes  C^{2,L}_{gq}(x,z) \otimes D_g(z,Q)+  g(x,Q)  \otimes
+  C^{2,L}_{qg}(x,z) \otimes D_q(z,Q) \bigg]\,,
+\end{array}
+\label{eq:f1sidis}
+\end {equation}
+where $\{q,g\}$ are the quark and gluon PDFs and $\{D_q,D_g\}$ are the
+quark and gluon FFs, $e_q$ is the electric charge of the quark $q$ and
+$\{C^{2,L}_{qq},C^{2,L}_{qg},C^{2,L}_{gq}\}$ are the relevant partonic
+cross sections. The partonic cross sections allow for a perturbative
+expansion in power of $\alpha_s$:
+\begin{equation}
+C = \sum_{n=0} \left(\frac{\alpha_s}{4\pi}\right)^nC^{(n)}
+\end{equation}
+that we truncate to NLO, $i.e.$ to $n=1$. At LO ($n=0$) we have the simple
+expression:
+\begin{equation}
+\begin{array}{rcl}
+C^{2,(0)}_{qq}(x,z) &=& \delta(1-x)\delta(1-z)\,,\\
+\\
+C^{2,(0)}_{qg}(x,z) &=&C^{2,(0)}_{gq}(x,z) = 0\,.
+\end{array}
+\end{equation}
+
+At NLO ($n=1$) we take the expressions from Appendix C of
+Ref.~\cite{deFlorian:1997zj} being careful to take into account an
+additional factor two due to the difference in the expansion parameter
+($\alpha_s/4\pi$ rather than $\alpha_s/2\pi$). We also need to combine
+the expressions for $F_1$ and $F_L$ using Eq.~(\ref{eq:CallanGross})
+to obtain the partonic cross sections for $F_2$. We start with the
+partonic cross sections for $F_L$ that read:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{L,(1)} &=& 8 C_F x z\,, \\
+C_{gq}^{L,(1)} &=& 8 C_F x (1-z)\,, \\
+C_{qg}^{L,(1)} &=& 8 x(1-x)\,, 
+\end{array}
+\label{eq:cfFL}
+\end{equation}
+while those for $F_2$ read:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \frac{C_{qq}^{2,(1)}}{2C_F} &=& \displaystyle -8\delta(1-x)\delta(1-z)+2\delta(1-x)
+                                  \left(\frac{\ln
+                                  (1-z)}{1-z}\right)_++ 
+                                  \delta(1-x) \left[\frac{1+z^2}{1-z}\ln z+(1-z)-(1+z)\ln(1-z)\right] \\
+  \\
+                              &+&\displaystyle 
+                                  2\left(\frac{\ln
+                                  (1-x)}{1-x}\right)_+\delta(1-z)+2\left(\frac{1}{1-x}\right)_+\left(\frac{1}{1-z}\right)_+- \left(\frac{1}{1-x}\right)_+(1+z)\\
+  \\
+                              &+& \displaystyle \left[ 
+                                  -\frac{1+x^2}{1-x}\ln x+(1-x)
+                                  -(1+x)\ln(1-x)\right]\delta(1-z) -
+                                  (1+x)\left(\frac{1}{1-z}\right)_++(2+6xz)\,,\\
+  \\
+  \displaystyle \frac{C_{gq}^{2,(1)}}{2C_F} &=& \displaystyle \delta (1-x) \left[\frac{1+(1-z)^2}{z} \ln\left[
+                                               z(1-z)\right]+z\right]\\
+  \\
+                                            &+&\displaystyle \left(\frac{1}{1-x}\right)_+\frac{1+(1-z)^2}{z}\\
+  \\
+                              &+&  \displaystyle 2(1+3x)-6xz-(1+x)\frac{1}{z}\,,\\
+  \\
+  C_{qg}^{2,(1)} &=& \displaystyle \left[(x^2+(1-x)^2)
+                     \ln\left(\frac{1-x}{x}\right)
+                     +2x(1-x)\right]\delta (1-z) +(x^2+(1-x)^2)
+                     \left(\frac{1}{1-z}\right)_+\\
+\\
+&+&\displaystyle 2(-1+6x-6x^2) + (x^2+(1-x)^2) \frac{1}{z} \,.
+\end{array}
+\label{eq:cfF2}
+\end{equation}
+By inspection of Eqs.~(\ref{eq:cfFL}) and~(\ref{eq:cfF2}) we can
+deduce the various coefficients of
+Eq.~(\ref{eq:DoubleFuncStruct}). $F_L$ involves only regular functions
+so that all contributions are zero but the fully regular ones:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{L,(1)}(x,z) &:& K_1 = 8 C_F\,,\quad R_1^{(1)}(x) = x\,,\quad
+                        R_1^{(2)}(z) = z\,,\\
+C_{gq}^{L,(1)}(x,z) &:& K_1 = 8 C_F\,,\quad R_1^{(1)}(x) = x\,,\quad
+                        R_1^{(2)}(z) = 1-z\,,\\
+C_{qg}^{L,(1)}(x,z) &:& K_1 = 8\,,\quad R_1^{(1)}(x) = x(1-x)\,,\quad
+                        R_1^{(2)}(z) = 1\,.\\
+\end{array}
+\end{equation}
+
+The situation is more complicated for $F_2$ but we can still identify
+the different contributions:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{2,(1)} &:& \displaystyle {\rm LL} = -16 C_F\,,\quad {\rm LS} =
+                        4C_F\,,\quad {\rm LR}(z) = 2C_F
+                        \left[\frac{1+z^2}{1-z}\ln
+                        z+(1-z)-(1+z)\ln(1-z)\right]\\
+\\
+&& \displaystyle {\rm SL} = 4C_F\,,\quad {\rm SS} = 4C_F\,,\quad {\rm
+   SR}(z) = -2C_F(1+z)\\
+\\
+&& \displaystyle {\rm RL}(x) = 2C_F \left[ 
+                                  -\frac{1+x^2}{1-x}\ln x+(1-x)
+                                  -(1+x)\ln(1-x)\right]\,,\quad {\rm
+   RS}(x) = -2C_F(1+x)\,,\\
+\\
+&& \displaystyle \left\{K_1 =  4C_F,\, R_1^{(1)}(x) = 1,\,
+   R_1^{(2)}(z) = 1\right\}\,,\\
+\\
+&& \displaystyle \left\{K_2 =  12C_F,\, R_2^{(1)}(x) = x,\,
+   R_2^{(2)}(z) = z\right\}\,,\\
+\\
+\end{array}
+\end{equation}
+\begin{equation}
+\begin{array}{rcl}
+C_{gq}^{2,(1)} &:& \displaystyle {\rm LR}(z) = 2C_F\left[\frac{1+(1-z)^2}{z} \ln\left[
+                                               z(1-z)\right]+z\right]\,,\\
+  \\
+&& \displaystyle {\rm SR}(z) = 2C_F\left[\frac{1+(1-z)^2}{z}\right]\,,\\
+\\
+&& \displaystyle \left\{K_1 =  4C_F,\, R_1^{(1)}(x) = 1 + 3x,\,
+   R_1^{(2)}(z) = 1\right\}\,,\\
+\\
+&& \displaystyle \left\{K_2 =  -12C_F,\, R_2^{(1)}(x) = x,\,
+   R_2^{(2)}(z) = z\right\}\,,\\
+\\
+&& \displaystyle \left\{K_3 =  -2C_F,\, R_3^{(1)}(x) = 1+x,\,
+   R_3^{(2)}(z) = \frac1{z}\right\}\,,\\
+\\
+\end{array}
+\end{equation}
+\begin{equation}
+\begin{array}{rcl}
+C_{qg}^{2,(1)} &:&\displaystyle {\rm RL}(x) = \left[x^2+(1-x)^2\right]
+                     \ln\left(\frac{1-x}{x}\right)
+                     +2x(1-x)\,,\quad  {\rm RS}(x) = x^2+(1-x)^2\,,\\
+\\
+&& \displaystyle \left\{K_1 = 2,\, R_1^{(1)}(x) = - 1 + 6x-6x^2,\,
+   R_1^{(2)}(z) = 1\right\}\,,\\
+\\
+&& \displaystyle \left\{K_2 =  1,\, R_2^{(1)}(x) = x^2+(1-x)^2,\,
+   R_2^{(2)}(z) = \frac1{z}\right\}\,.
+\end{array}
+\end{equation}
+Analogously, for the only LO partonic cross sections we find that:
+\begin{equation}
+\begin{array}{rcl}
+C_{qq}^{2,(0)} &:& \displaystyle {\rm LL} =1 \,.
+\end{array}
+\end{equation}
+All the coefficients that are not mentioned are equal to zero. We can
+now explicitly implement Eq.~(\ref{eq:MasterFormula}). The one thing
+that is left to sort out is the structure of $F_2$ and $F_L$ in terms
+of the appropriate PDF and FF combinations. Looking
+Eq.~(\ref{eq:f1sidis}), we observe that none of the coefficient
+functions depends on the particular quark flavour (this is a feature
+of the ZM scheme). Therefore, simplifying the notation, we can rewrite
+Eq.~(\ref{eq:f1sidis}) as:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle  F &=& \displaystyle C_{qq}  \sum_{q} e_q^2 \left[q  D_q +\overline{q}  D_{\overline{q}}\right]  + C_{gq}  \sum_{q} e_q^2
+                       \left[q+\overline{q}\right]\,D_g  +  C_{qg}  g \sum_{q} e_q^2
+                       \left [D_q +D_{\overline{q}}\right]\,,
+\end{array}
+\label{eq:structF2L}
+\end {equation}
+where now the sums run only over the quark flavours and not over the
+antiflavours.
+
+\subsubsection{Drell Yan (DY)}
+
+In this section we apply to the Drell-Yan (DY) process the same
+procedure followed above for SIDIS. As a matter of fact, SIDIS and DY
+are strictly connected in that DY can be regarded as the time-like
+counterpart of SIDIS. As a consequence, the structure of the relevant
+observables as well as the form of the expressions involved are very
+similar. Therefore, the application of the method described above is
+straightforward. 
+
 
 \subsection{Advantage of a logarithmic grid}
 
@@ -217,8 +687,10 @@ Given the particular structure of the integral $I$ in
 Eq.~(\ref{eq:ZMconv}), it turns out to be very convenient to use a
 logarithmically distributed grid along with Lagrange interpolating
 functions. Let us specifically consider the (massless) integrals:
-\begin{equation}\label{eq:integralex}
-I_{\beta\alpha} = \int_{x_\beta}^1dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\begin{equation}
+I_{\beta\alpha} =
+\int_{x_\beta}^1dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
+\label{eq:integralex}
 \end{equation}
 If the grid is logarithmically spaced, \textit{i.e.}
 $\ln x_{n+1}=\ln x_{n}+\delta x$ with $\delta x$ a positive constant,
@@ -239,17 +711,19 @@ is preserved thanks to the support properties of the interpolating
 functions $w_\alpha$ and the fact that relevant functions (PDFs or FFs)
 are zero at $x=1$. To see this, we consider the integration limits in
 Eq.~(\ref{eq:intlims}) with $\eta=1$. They can be written as:
-\begin{equation}\label{eq:intlims1}
+\begin{equation}
   c =
   \mbox{max}(x_\beta,e^{(\beta-\alpha-1)\delta x}) \quad\mbox{and}\quad d =
   \mbox{min}(1,e^{(\beta-\alpha+\kappa)\delta x}) \,.
+\label{eq:intlims1}
 \end{equation}
 While the limit $d$ is manifestly only dependent on the difference
 $\beta-\alpha$, the limit $c$ is not. However, $c$ does not have this
 symmetry only when $x_\beta$ is selected in place of
 $e^{(\beta-\alpha-1)\delta x}$ and this can only happen when:
-\begin{equation}\label{eq:ineq}
+\begin{equation}
 x_\beta > e^{(\beta-\alpha-1)\delta x}\,.
+\label{eq:ineq}
 \end{equation}
 Since the last point of the grid is $x_{N_x}=1$, being $N_x$ the
 number of grid nodes minus one, one can write:
@@ -274,7 +748,7 @@ computing the integrals $a_\alpha=I_{0\alpha}$ for
 $\alpha=0,\dots,N_x$ is enough to reconstruct the full set of
 $I_{\beta\alpha}$ because, in matricial representation, $I$ will look
 like this:
-\begin{equation}\label{eq:MatrixRep}
+\begin{equation}
 \displaystyle I_{\beta\alpha} = 
 \begin{pmatrix}
 a_0 &  a_1 & a_2 & \cdots & a_{N_x} \\
@@ -283,6 +757,7 @@ a_0 &  a_1 & a_2 & \cdots & a_{N_x} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
  0  &   0  &   0 & \cdots & a_0 
 \end{pmatrix}\,,
+\label{eq:MatrixRep}
 \end{equation}
 In conclusion, adopting a logarithmically-spaced grid allows one to
 compute $N_x+1$ integrals rather than $(N_x+1)(N_x+2)/2$ integrals.
@@ -296,9 +771,10 @@ I_{\beta\alpha} = \int_c^ddy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
 with the integration limits given in Eq.~(\ref{eq:intlims}). These
 limits can be rearranged as follows:
-\begin{equation}\label{eq:intlimsind}
+\begin{equation}
   c=\frac{x_\beta}{x_{{\rm min}[N_x,\alpha+1]}}\quad\mbox{and}\quad
   {d} = \frac{x_\beta}{x_{{\rm max}[\beta,\alpha-\kappa]}}\,,
+\label{eq:intlimsind}
 \end{equation}
 which makes it manifest the index range covered by the integration
 range. The basic observation is that the functions $w_\alpha$ are
@@ -309,8 +785,12 @@ grid nodes. However, the functions $w_\alpha$ are smooth between two
 consecutive nodes. Therefore, it turns out that it is convenient to
 compute the integrals $I_{\beta\alpha}$ by breaking the integration
 range as follows:
-\begin{equation}\label{eq:finalformula}
-I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa, \alpha - \beta]}  \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+\begin{equation}
+I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
+    min}[\kappa, \alpha - \beta]}
+\int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}}
+dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+\label{eq:finalformula}
 \end{equation}
 in such a way that the integrand of each single integrand is a smooth
 function and thus easier to integrate. Despite the number of
@@ -332,8 +812,9 @@ I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
 When considering, for example, GPD-related computations such as the
 evolution of GPDs, another kind of integral structure comes into play,
 that is:
-\begin{equation}\label{eq:ZMconvERBL}
+\begin{equation}
 J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z},x\right) d(z)\,,
+\label{eq:ZMconvERBL}
 \end{equation}
 which differes from that in Eq.~(\ref{eq:ZMconv}) in two respects: by
 the lower integration bound that is zero rather than $x$ and by the
@@ -355,13 +836,14 @@ region of the functions $w_{\alpha}$ is the same so that:
   O(y,x_\beta)\,w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
 with integration bounds:
-\begin{equation}\label{eq:intlimsGPD}
+\begin{equation}
   c=\frac{x_\beta}{x_{{\rm min}[N_x,\alpha+1]}}\quad\mbox{and}\quad
   \overline{d} = \frac{x_\beta}{x_{{\rm max}[0,\alpha-\kappa]}}\,.
+\label{eq:intlimsGPD}
 \end{equation}
 Following the procedure discussed in the previous section, the actual
 computation is achieved by:
-\begin{equation}\label{eq:ERBLints}
+\begin{equation}
 \begin{array}{rcl}
 J_{\beta\alpha} &=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 -
                     N_x]}^{{\rm min}[\kappa,\alpha]}
@@ -370,6 +852,7 @@ J_{\beta\alpha} &=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 -
 \\
 &=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa,\alpha]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{array}
+\label{eq:ERBLints}
 \end{equation}
 Therefore, at the level of the single integral, the only difference
 with respect to the ``standard'' case is a change of the upper
@@ -400,7 +883,7 @@ larger than zero.  This means in turn that computing the integrals
 $b_\alpha=J_{0\alpha}$ and $b_{-\alpha}=J_{\alpha0}$ for
 $\alpha=0,\dots,N_x$ is enough to reconstruct the full set of
 $J_{\beta\alpha}$. In matricial representation, $J$ takes the form:
-\begin{equation}\label{eq:MatrixRepERBL}
+\begin{equation}
 \displaystyle J_{\beta\alpha} = 
 \begin{pmatrix}
 b_0 &  b_1 & b_2 & \cdots & b_{N_x} \\
@@ -409,6 +892,7 @@ b_0 &  b_1 & b_2 & \cdots & b_{N_x} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
  b_{-N_x}  &   b_{-N_x+1}  &   b_{-N_x+2} & \cdots & b_0 
 \end{pmatrix}\,,
+\label{eq:MatrixRepERBL}
 \end{equation}
 Therefore, adopting a logarithmically-spaced grid allows one to
 compute $2N_x+1$ integrals rather than $N_x^2$ integrals.
@@ -475,14 +959,20 @@ In this respect, the basic observation is that, thanks to the locking
 of the subgrids, the integral for a DGLAP-like convolution as in
 Eq.~(\ref{eq:ZMconv}) computed in the point $x_\beta$ of the joint
 grid can be decomposed as follows:
-\begin{equation}\label{eq:decompDGLAP}
+\begin{equation}
 I(x_\beta) = \sum_{g=0}^{N_g=1}\int_{x_\beta/{\rm
-    max}[x_\beta,x_{\gamma^{(g+1)}}]}^{x_\beta/{\rm max}[x_\beta,x_{\gamma^{(g)}}]}dy\,O(y)f\left(\frac{x_\beta}{y}\right) = \sum_{g=1}^{N_g}I^{(g)}(x_\beta)\,,
+    max}[x_\beta,x_{\gamma^{(g+1)}}]}^{x_\beta/{\rm
+    max}[x_\beta,x_{\gamma^{(g)}}]}dy\,O(y)f\left(\frac{x_\beta}{y}\right)
+= \sum_{g=1}^{N_g}I^{(g)}(x_\beta)\,,
+\label{eq:decompDGLAP}
 \end{equation}
 while for and ERBL-like convolution as that in
 Eq.~(\ref{eq:ZMconvERBL}) the decomposition reads:
-\begin{equation}\label{eq:decompERBL}
-  J(x_\beta) = \sum_{g=0}^{N_g-1}\int_{x_\beta/x_{\gamma^{(g+1)}}}^{x_\beta/x_{\gamma^{(g)}}}dy\,O(y)f\left(\frac{x_\beta}{y}\right)  = \sum_{g=1}^{N_g}J^{(g)}(x_\beta)\,,
+\begin{equation}
+  J(x_\beta) =
+  \sum_{g=0}^{N_g-1}\int_{x_\beta/x_{\gamma^{(g+1)}}}^{x_\beta/x_{\gamma^{(g)}}}dy\,O(y)f\left(\frac{x_\beta}{y}\right)
+  = \sum_{g=1}^{N_g}J^{(g)}(x_\beta)\,,
+\label{eq:decompERBL}
 \end{equation}
 where $\gamma^{(g)}$ is the index corresponding to the lower bound of
 the $g$-th grid on the joint grid with the conditions $\gamma^{(0)}=0$
@@ -504,8 +994,11 @@ $\gamma^{(g)}\leq \alpha \leq\gamma^{(g+1)}$ joint grid and $g$-th
 subgrid coincide up to an index offset given by $\gamma^{(g)}$
 (\textit{i.e.} $x_{\alpha} =x_{\alpha-\gamma^{(g)}}^{(g)}$). This
 gives:
-\begin{equation}\label{eq:decompERBLg}
-  J^{(g)}(x_\beta) = \sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}\overline{d}_\alpha \int_{\overline{c}}^{\overline{d}}dy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_{\beta}}{y}\right)=\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}J_{\beta\alpha}^{(g)}\,\overline{d}_\alpha\,,
+\begin{equation}
+  J^{(g)}(x_\beta) =
+  \sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}\overline{d}_\alpha
+  \int_{\overline{c}}^{\overline{d}}dy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_{\beta}}{y}\right)=\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}J_{\beta\alpha}^{(g)}\,\overline{d}_\alpha\,,
+\label{eq:decompERBLg}
 \end{equation}
 where we have exploited the fact that, if
 $\alpha\geq \gamma^{(g+1)}+\kappa^{(g)}$, the lower bounds of the sum
@@ -523,13 +1016,19 @@ limit of the sum.  In addition, the integration bounds are defined as:
 \end{equation}
 This allows us to write the factors $J_{\beta\alpha}^{(g)}$ in
 Eq.~(\ref{eq:decompERBLg}) as follows:
-\begin{equation}\label{eq:decompERBLgg}
-J_{\beta\alpha}^{(g)}=\sum_{j={\rm max}[0,\alpha+1-\gamma^{(g+1)}]}^{{\rm min}[\kappa^{(g)},\alpha-\gamma^{(g)}]}\int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}}dy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_\beta}{y}\right)\,,
+\begin{equation}
+J_{\beta\alpha}^{(g)}=\sum_{j={\rm
+    max}[0,\alpha+1-\gamma^{(g+1)}]}^{{\rm
+    min}[\kappa^{(g)},\alpha-\gamma^{(g)}]}\int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}}dy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_\beta}{y}\right)\,,
+\label{eq:decompERBLgg}
 \end{equation}
 with $s=\exp(\delta x^{(g)})$. Therefore,
 Eq.~(\ref{eq:decompERBL}) can finally be written as:
-\begin{equation}\label{eq:decompERBL3}
-  J(x_\beta) = \sum_{g=0}^{N_g-1}\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}J_{\beta\alpha}^{(g)}\,\overline{d}_\alpha \,.
+\begin{equation}
+  J(x_\beta) =
+  \sum_{g=0}^{N_g-1}\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}J_{\beta\alpha}^{(g)}\,\overline{d}_\alpha
+  \,.
+\label{eq:decompERBL3}
 \end{equation}
 We now introduce the discreet $\theta$-function $\theta_{\rho,\sigma}$
 defined such that:
@@ -548,9 +1047,10 @@ which allows to write:
 \end{equation}
 Assuming that $\overline{d}_\alpha=0$ for $\alpha\geq N_x$, as is often
 the case, and defining:
-\begin{equation}\label{eq:tensor}
+\begin{equation}
   J_{\beta\alpha} =
 \sum_{g=0}^{N_g-1}\theta_{\alpha,\gamma^{(g)}}\theta_{\gamma^{(g+1)}+\kappa^{(g)}-1,\alpha}J_{\beta\alpha}^{(g)}\,,
+\label{eq:tensor}
 \end{equation}
 one finally obtains:
 \begin{equation}
@@ -575,8 +1075,11 @@ reduced to:
 
 We can now apply the same procedure to the integral $I$ in
 Eq.~(\ref{eq:decompDGLAP}). As above, one finds:
-\begin{equation}\label{eq:decompDGLAPg}
-  I^{(g)}(x_\beta) = \sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}\overline{d}_\alpha \int_c^ddy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_{\beta}}{y}\right)=\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}I_{\beta\alpha}^{(g)}\,\overline{d}_\alpha\,,
+\begin{equation}
+  I^{(g)}(x_\beta) =
+  \sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}\overline{d}_\alpha
+  \int_c^ddy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_{\beta}}{y}\right)=\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}I_{\beta\alpha}^{(g)}\,\overline{d}_\alpha\,,
+\label{eq:decompDGLAPg}
 \end{equation}
 where the logarithm of the integration bounds this time read:
 \begin{equation}
@@ -608,409 +1111,7 @@ such that:
 
 
 \newpage
-\section{Double convolution}
 
-In the case of Drell-Yan or Semi-Inclusive DIS (SIDIS), cross sections
-are the result of double convolutions between partonic cross sections
-and a pair of non-perturbative distributions. In this case the kind of
-expressions we are dealing with has the following form:
-\begin{equation}\label{eq:DoubleZMconv}
-\begin{array}{rcl}
-J(x_\delta,x_\gamma) &=&\displaystyle
-x_\delta x_\gamma\int_{x_\delta}^1\frac{dy_1}{y_1}\int_{x_\gamma}^1\frac{dy_2}{y_2}
-O(y_1,y_2) d^{(1)}\left(\frac{x_\delta}{y_1}\right)
-  d^{(2)}\left(\frac{x_\gamma}{y_2}\right)\\
-\\
-&=&\displaystyle
-\int_{x_\delta}^1dy_1\int_{x_\gamma}^1dy_2\,
-O(y_1,y_2) \left[\frac{x_\delta}{y_1}d^{(1)}\left(\frac{x_\delta}{y_1}\right)\right]
-  \left[\frac{x_\gamma}{y_2}d^{(2)}\left(\frac{x_\gamma}{y_2}\right)\right]\\
-\\
-&=&\displaystyle
-    \sum_{\alpha=0}^{N_x}\sum_{\beta=0}^{N_x} \overline{d}^{(1)}_\beta
-    \overline{d}^{(2)}_\alpha \underbrace{\left[\int_{x_\delta}^1 dy_1 \int_{x_\gamma}^1 dy_2\,
-    O(y_1,y_2)\, w_{\beta}^{(k)}\left(\frac{x_\delta}{y_1}\right) 
-    w_{\alpha}^{(k)}\left(\frac{x_\gamma}{y_2}\right)\right]}_{\Theta^{\beta\delta,\alpha\gamma}}\,.
-\end{array}
-\end{equation}
-In Eq.~(\ref{eq:DoubleZMconv}) we assume that there are no mass
-corrections and thus the convolutions take the simplest form. In the
-case of double convolutions, the partonic cross sections $O$ are functions
-of two variables, $y_1$ and $y_2$, and, as in the case of the single
-convolutions, they get three kinds of contributions in both these
-variables: local terms proportional to $\delta$-functions, singular
-terms proportional to plus-prescripted functions, and regular
-terms. The complication here is that these contributions from the two
-variables $y_1$ and $y_2$ mix and thus, for example, terms local in
-$y_1$ and singular in $y_2$ appear. It is thus necessary to identify
-the general structure of the function $O$ to see whether it is
-possible to decompose the double operator $\Theta^{\beta\delta,\alpha\gamma}$
-into products of single operators of the kind $\Gamma^{\beta\delta}$
-and $\Gamma^{\alpha\gamma}$. 
-
-In the case of the NLO corrections to SIDIS, the general structure of
-the function $O$ can be inferred looking at Eqs.~(C.2)-(C.7) of
-Ref.~\cite{deFlorian:1997zj}:
-\begin{equation}\label{eq:DoubleFuncStruct}
-\begin{array}{rclclcl}
-  O(y_1,y_2) &=&\displaystyle {\rm LL}\,\delta(1-y_1)\delta(1-y_2) &+&\displaystyle {\rm LS}\,
-                                                                       \delta(1-y_1)\left[\frac{\ln(1-y_2)}{1-y_2}\right]_+ &+&\displaystyle \delta(1-y_1)\,{\rm LR}(y_2) \\
-  \\
-             &+&\displaystyle {\rm SL}\,\left[\frac{\ln(1-y_1)}{1-y_1}\right]_+\delta(1-y_2)
-                                                                   &+&\displaystyle {\rm SS}\,\left[\frac1{1-y_1}\right]_+
-                                                                       \left[\frac1{1-y_2}\right]_+ &+&\displaystyle \left[\frac1{1-y_1}\right]_+\,{\rm
-                                                                                                        SR}(y_2)\\
-  \\
-             &+&\displaystyle {\rm RL}(y_1)\,\delta(1-y_2)   &+&\displaystyle
-                                                                 {\rm RS}(y_1)
-                                                                 \,\left[\frac1{1-y_2}\right]_+&+&\displaystyle
-                                                                                                   \sum_iK_i{\rm
-                                                                                                   R}_i^{(1)}(y_1){\rm
-                                                                                                   R}_i^{(2)}(y_2)\,.
-\end{array}
-\end{equation}
-It is clear that in Eq.~(\ref{eq:DoubleFuncStruct}) all terms
-factorise into a part that only depends on $y_1$ and a part that only
-depends on $y_2$. This is crucial to use the same technology developed
-above for the single convolutions. Plugging
-Eq.~(\ref{eq:DoubleFuncStruct}) into Eq.~(\ref{eq:DoubleZMconv}), one
-finds that:
-\begin{equation}\label{eq:MasterFormula}
-\begin{array}{rclclcl}
-  \Theta^{\beta\delta,\alpha\gamma} &=& {\rm LL} \,
-                                        \Gamma^{\rm L}_{\beta\delta}\Gamma^{\rm L}_{\alpha\gamma}
-  &+& \displaystyle {\rm LS}\,\Gamma^{\rm L}_{\beta\delta}\Gamma_{\alpha\gamma}^{\rm S1}
-  &+&\displaystyle \Gamma^{\rm L}_{\beta\delta} \Gamma_{\alpha\gamma}^{\rm LR}\\
-  \\
-                                    &+&{\rm SL}\,\displaystyle\Gamma_{\beta\delta}^{\rm S1}\Gamma^{\rm L}_{\alpha\gamma} 
-  &+&
-     {\rm SS}\,\Gamma_{\beta\delta}^{\rm
-      S0}\Gamma_{\alpha\gamma}^{\rm S0}&+& \Gamma_{\beta\delta}^{\rm S0}\Gamma_{\alpha\gamma}^{\rm SR}\\
-\\
-&+& \displaystyle \Gamma_{\beta\delta}^{\rm RL}\Gamma^{\rm L}_{\alpha\gamma} &+& \Gamma_{\beta\delta}^{\rm RS}\Gamma_{\alpha\gamma}^{\rm
-      S0} &+& \displaystyle \sum_i K_i \Gamma_{\beta\delta}^{R_i^{(1)}}\Gamma_{\alpha\gamma}^{R_i^{(2)}}
-\end{array}
-\end{equation}
-with:
-\begin{equation}\label{eq:PrecompOp}
-\begin{array}{rcl}
-  \Gamma_{\alpha\beta}^{\rm L} &=& \displaystyle  \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
-                                       dz\,\delta(1-z)w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)
-                                   =
-                                   w_{\beta}^{(k)}\left(x_\alpha\right)
-                                   =  \delta_{\alpha\beta}\\
-\\
-  \Gamma_{\alpha\beta}^{{\rm S}n} &=& \displaystyle  \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
-                                       dz\frac{\ln^n(1-z)}{1-z}\left[w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)-\delta_{\alpha\beta}\right]+\frac1{(n+1)!}\ln^{n+1}\left(1-c_{\alpha\beta}\right)\delta_{\alpha\beta}\\
-  \\
-  \Gamma_{\alpha\beta}^{f} &=&\displaystyle \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
-                                     dz\,f(z)\,w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)
-\end{array}
-\end{equation}
-where $f$ is a regular function and the integration bounds are defined
-as:
-\begin{equation}
-  c_{\alpha\beta} =
-  \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
-  \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
-\end{equation}
-In general terms, it should always be possible to write an object of
-the kind of $\Theta^{\beta\delta,\alpha\gamma}$ as series of bilinear
-terms:
-\begin{equation}\label{eq:OpSeries}
-\Theta^{\beta\delta,\alpha\gamma} = \sum_j C_j\Gamma_j^{(1),\beta\delta}\Gamma_j^{(2),\alpha\gamma}
-\end{equation}
-where $C_j$ is a scalar, and $\Gamma_j^{(1),\beta\delta}$ and
-$\Gamma_j^{(2),\alpha\gamma}$ are single operators that can be
-computed using the technology discussed in the previous
-section. Plugging Eq.~(\ref{eq:OpSeries}) into
-Eq.~(\ref{eq:DoubleZMconv}), one finds that:
-\begin{equation}\label{eq:DoubleZMconv2}
-  J(x_\delta,x_\gamma) =
-  \sum_j C_j  f_j^{(1),\delta} f_j^{(2),\gamma}\,,
-\end{equation}
-where we have defined:
-\begin{equation}
-f_j^{(1),\delta}\equiv \sum_{\beta=0}^{N_x} \overline{d}^{(1)}_\beta\Gamma_j^{(1),\beta\delta}\quad\mbox{and}\quad f_j^{(2),\gamma}\equiv \sum_{\alpha=0}^{N_x}\overline{d}^{(2)}_\alpha \Gamma_j^{(2),\alpha\gamma}\,.
-\end{equation}
-
-Eq.~(\ref{eq:DoubleZMconv2}) shows that, in the hypothesis that the
-double function $O(y_1,y_2)$ can be expressed in terms of a series of
-terms where the dependence on $y_1$ and $y_2$ factorizes\footnote{This
-  is the case for SIDIS and DY up to NLO but we expect this feature to
-  hold also beyond, despite complications due to the more involved
-  plus-prescripted functions are also expected.}, the double
-convolution in Eq.~(\ref{eq:DoubleZMconv}) can be expressed as a
-series of bilinear terms of distributions ($f_j^{(1),\delta}$ and
-$f_j^{(2),\gamma}$) singularly obtained as convolutions of a limited
-number of single operators with distributions. This is a particularly
-useful achievement that allows us to compute double convolutions
-without the need of extending the integration and the interpolation
-procedures with an obvious gain in accuracy and performance. As a
-matter of fact, the same argument can be extended to a multiple
-convolution of the function $O(\{y_i\})$, which again can be expressed
-as a series of $n$-linear terms, with $i=1,\dots,n$, with $n$
-distributions:
-\begin{equation}
-J(\{x_{\alpha_i}\}) = \sum_j C_j  \prod_{i=1}^nf_j^{(i),\alpha_i}\,,
-\end{equation}
-with:
-\begin{equation}
-f_j^{(i),\alpha_i} \equiv \sum_{\beta=0}^{N_x} \overline{d}^{(i)}_\beta\Gamma_j^{(i),\beta\alpha_i}\,.
-\end{equation}
-This technology could be useful for more complicated observables, like
-cross sections in $pp$ collisions with an identified hadron in the
-final state, that requires for example three convolutions.
-
-The challenging part of the technology just presented resides in the
-``pre-processing'' of the function $O(y_1,y_2)$, that is the
-analytical work required to disentangle the different terms. This step
-however has to be taken only once.
-
-Before employing this procedure for any concrete application, it is
-appropriate to connect Eq.~(\ref{eq:MasterFormula}) to
-Eq.~(\ref{eq:OpSeries}) by identifying number and form of the
-coefficients and operators involved. Specifically, assuming that the
-series in the last term in the r.h.s. of Eq.~(\ref{eq:MasterFormula})
-has $r$ terms, the series in Eq.~(\ref{eq:OpSeries}) will have $8+r$
-terms, that is:
-\begin{equation}\label{eq:OpSeriesCon}
-\Theta^{\beta\delta,\alpha\gamma} = \sum_{j=1}^{8+r} C_j\Gamma_j^{(1),\beta\delta}\Gamma_j^{(2),\alpha\gamma}
-\end{equation}
-with:
-\begin{equation}
-\begin{array}{lclll}
-j = 1 &:& C_1 = {\rm LL}, & \Gamma_1^{(1),\beta\delta} = \Gamma^{\rm L}_{\beta\delta}, & \Gamma_1^{(2),\alpha\gamma} = \Gamma^{\rm L}_{\alpha\gamma},\\
-j = 2 &:& C_2 = {\rm LS}, & \Gamma_2^{(1),\beta\delta} = \Gamma^{\rm L}_{\beta\delta}, & \Gamma_2^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S1},\\
-j = 3 &:& C_3 = 1, & \Gamma_3^{(1),\beta\delta} = \Gamma^{\rm L}_{\beta\delta}, & \Gamma_3^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm LR},\\
-j = 4 &:& C_4 = {\rm SL}, & \Gamma_4^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S1}, & \Gamma_4^{(2),\alpha\gamma} = \Gamma^{\rm L}_{\alpha\gamma},\\
-j = 5 &:& C_5 = {\rm SS},& \Gamma_5^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S0}, & \Gamma_5^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S0},\\
-j = 6 &:& C_6 = 1, & \Gamma_6^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm S0}, & \Gamma_6^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm SR},\\
-j = 7 &:& C_7 = 1, & \Gamma_7^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RL}, & \Gamma_7^{(2),\alpha\gamma} = \Gamma^{\rm L}_{\alpha\gamma},\\
-j = 8 &:& C_8 = 1, & \Gamma_8^{(1),\beta\delta} = \Gamma_{\beta\delta}^{\rm RS}, & \Gamma_8^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{\rm S0},\\
-j = 9 &:& C_9 = K_1 & \Gamma_9^{(1),\beta\delta} = \Gamma_{\beta\delta}^{R_1^{(1)}}, & \Gamma_9^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{R_1^{(2)}},\\
-\vdots & & & & \\
-j = 8 + r &:& C_{8+r} = K_r & \Gamma_{8+r}^{(1),\beta\delta} = \Gamma_{\beta\delta}^{R_r^{(1)}}, & \Gamma_{8+r}^{(2),\alpha\gamma} = \Gamma_{\alpha\gamma}^{R_r^{(2)}}
-\end{array}
-\end{equation}
-It should be noted that, despite the large number of terms in the
-series in Eq.~(\ref{eq:OpSeriesCon}), the number of operators to be
-precomputed it pretty limited. In addition, in many cases many of the
-terms of the series are zero so the number of contributions is greatly
-reduced.
-
-We can now apply this procedure up to NLO in QCD to two specific
-cases: SIDIS first and DY second.
-
-\subsection{Semi-inclusive deep inelastic scattering (SIDIS)}
-
-the structure of the SIDIS observables and the expressions for the
-respective hard cross sections can be found in
-Ref.~\cite{deFlorian:1997zj}. Following this paper, the SIDIS
-differential cross section for the exchange of a virtual photon can be
-written as:
-\begin{equation}\label{eq:sidis}
-  \frac{d^3\sigma}{dx\, dy\, dz} = 
-  \frac{2\, \pi\alpha^2}{xyQ^2} 
-  \left[ (1+(1-y)^2) 2xF_1(x,z,Q^2) + 
-    2 (1-y) F_L(x,z,Q^2) \right]\,,
-\end{equation}
-with $Q^2 = - q^2$ the (negative) virtuality of the exchanged photon,
-$x$ and $z$ the momentum fractions of PDFs and FFs, and $Q^2 = xys$
-the definition of the inelasticity $y$ in terms of the squared
-collision energy in the center of mass $s$. Notice that, as compared
-to Ref.~\cite{deFlorian:1997zj}, we have absorbed into the definition
-of $F_L$ a factor $x$ as customary in the definition of the
-longitudinal structure function in inclusive DIS.
-
-We now use the Callan-Gross relation:
-\begin{equation}\label{eq:CallanGross}
-F_2 = 2xF_1 + F_L
-\end{equation}
-to replace $2xF_1$ with $F_2$ in Eq.~(\ref{eq:sidis}):
-\begin{equation}\label{eq:sidis2}
-  \frac{d^3\sigma}{dx\, dy\, dz} = 
-  \frac{2\, \pi\alpha^2}{xyQ^2} 
-  \left[ Y_+ F_2(x,z,Q^2)
-    -y^2 F_L(x,z,Q^2) \right]\,,
-\end{equation}
-where we have defined:
-\begin{equation}
-Y_+ = 1+(1-y)^2\,.
-\end{equation}
-It is also useful to write Eq.~(\ref{eq:sidis2}) as differential in
-$x$, $Q^2$, and $z$:
-\begin{equation}\label{eq:sidis3}
-  \frac{d^3\sigma}{dx\, dQ^2\, dz} = 
-  \frac{2\, \pi\alpha^2}{xQ^4} 
-  \left[ Y_+ F_2(x,z,Q)
-    -y^2 F_L(x,z,Q) \right]\,.
-\end{equation}
-The structure functions $F_2$ and $F_L$ are given at NLO by:
-\begin{equation}\label{eq:f1sidis}
-\begin{array}{rcl}
-\displaystyle  F_{2,L}(x,z,Q) &=& \displaystyle x\sum_{q,\overline{q}} e_q^2 \bigg[ q(x,Q)
-    \otimes  C^{2,L}_{qq}(x,z) \otimes D_q(z,Q)  \\
-&+&\displaystyle q(x,Q)  \otimes  C^{2,L}_{gq}(x,z) \otimes D_g(z,Q)+  g(x,Q)  \otimes
-  C^{2,L}_{qg}(x,z) \otimes D_q(z,Q) \bigg]\,,
-\end{array}
-\end {equation}
-where $\{q,g\}$ are the quark and gluon PDFs and $\{D_q,D_g\}$ are the
-quark and gluon FFs, $e_q$ is the electric charge of the quark $q$ and
-$\{C^{2,L}_{qq},C^{2,L}_{qg},C^{2,L}_{gq}\}$ are the relevant partonic
-cross sections. The partonic cross sections allow for a perturbative
-expansion in power of $\alpha_s$:
-\begin{equation}
-C = \sum_{n=0} \left(\frac{\alpha_s}{4\pi}\right)^nC^{(n)}
-\end{equation}
-that we truncate to NLO, $i.e.$ to $n=1$. At LO ($n=0$) we have the simple
-expression:
-\begin{equation}
-C^{2,(0)}_{qq}(x,z) = \delta(1-x)\delta(1-z)\quad\mbox{and all others zero.}
-\end{equation}
-
-At NLO ($n=1$) we take the expressions from Appendix C of
-Ref.~\cite{deFlorian:1997zj} being careful to take into account an
-additional factor two due to the difference in the expansion parameter
-($\alpha_s/4\pi$ rather than $\alpha_s/2\pi$) and to combine the
-expressions for $F_1$ and $F_L$ using Eq.~(\ref{eq:CallanGross}) to
-obtain the partonic cross sections for $F_2$. We start with the
-partonic cross sections for $F_L$ that read:
-\begin{equation}\label{eq:cfFL}
-\begin{array}{rcl}
-C_{qq}^{L,(1)} &=& 8 C_F x z\,, \\
-C_{gq}^{L,(1)} &=& 8 C_F x (1-z)\,, \\
-C_{qg}^{L,(1)} &=& 8 x(1-x)\,, 
-\end{array}
-\end{equation}
-while those for $F_2$ read:
-\begin{equation}\label{eq:cfF2}
-\begin{array}{rcl}
-  \displaystyle \frac{C_{qq}^{2,(1)}}{2C_F} &=& \displaystyle -8\delta(1-x)\delta(1-z)+2\delta(1-x)
-                                  \left(\frac{\ln
-                                  (1-z)}{1-z}\right)_++ 
-                                  \delta(1-x) \left[\frac{1+z^2}{1-z}\ln z+(1-z)-(1+z)\ln(1-z)\right] \\
-  \\
-                              &+&\displaystyle 
-                                  2\left(\frac{\ln
-                                  (1-x)}{1-x}\right)_+\delta(1-z)+2\left(\frac{1}{1-x}\right)_+\left(\frac{1}{1-z}\right)_+- \left(\frac{1}{1-x}\right)_+(1+z)\\
-  \\
-                              &+& \displaystyle \left[ 
-                                  -\frac{1+x^2}{1-x}\ln x+(1-x)
-                                  -(1+x)\ln(1-x)\right]\delta(1-z) -
-                                  (1+x)\left(\frac{1}{1-z}\right)_++(2+6xz)\\
-  \\
-  \displaystyle \frac{C_{gq}^{2,(1)}}{2C_F} &=& \displaystyle \delta (1-x) \left[\frac{1+(1-z)^2}{z} \ln\left[
-                                               z(1-z)\right]+z\right]\\
-  \\
-                                            &+&\displaystyle \left(\frac{1}{1-x}\right)_+\frac{1+(1-z)^2}{z}\\
-  \\
-                              &+&  \displaystyle 2(1+3x)-6xz-(1+x)\frac{1}{z}\\
-  \\
-  C_{qg}^{2,(1)} &=& \displaystyle \left[(x^2+(1-x)^2)
-                     \ln\left(\frac{1-x}{x}\right)
-                     +2x(1-x)\right]\delta (1-z) +(x^2+(1-x)^2)
-                     \left(\frac{1}{1-z}\right)_+\\
-\\
-&+&\displaystyle 2(-1+6x-6x^2) + (x^2+(1-x)^2) \frac{1}{z} 
-\end{array}
-\end{equation}
-By inspection of Eqs.~(\ref{eq:cfFL}) and~(\ref{eq:cfF2}) we can
-deduce the various coefficients of Eq.~(\ref{eq:DoubleFuncStruct}). In
-particular, as usual, $F_L$ involves only regular functions so that
-all contributions are zero but the fully regular ones:
-\begin{equation}
-\begin{array}{rcl}
-C_{qq}^{L,(1)}(x,z) &:& K_1 = 8 C_F\,,\quad R_1^{(1)}(x) = x\,,\quad
-                        R_1^{(2)}(z) = z\,,\\
-C_{gq}^{L,(1)}(x,z) &:& K_1 = 8 C_F\,,\quad R_1^{(1)}(x) = x\,,\quad
-                        R_1^{(2)}(z) = 1-z\,,\\
-C_{qg}^{L,(1)}(x,z) &:& K_1 = 8\,,\quad R_1^{(1)}(x) = x(1-x)\,,\quad
-                        R_1^{(2)}(z) = 1\,.\\
-\end{array}
-\end{equation}
-
-For $F_2$ the situation is more complicated but we can still identify
-the different contributions:
-\begin{equation}
-\begin{array}{rcl}
-C_{qq}^{2,(1)} &:& \displaystyle {\rm LL} = -16 C_F\,,\quad {\rm LS} =
-                        4C_F\,,\quad {\rm LR}(z) = 2C_F
-                        \left[\frac{1+z^2}{1-z}\ln
-                        z+(1-z)-(1+z)\ln(1-z)\right]\\
-\\
-&& \displaystyle {\rm SL} = 4C_F\,,\quad {\rm SS} = 4C_F\,,\quad {\rm
-   SR}(z) = -2C_F(1+z)\\
-\\
-&& \displaystyle {\rm RL}(x) = 2C_F \left[ 
-                                  -\frac{1+x^2}{1-x}\ln x+(1-x)
-                                  -(1+x)\ln(1-x)\right]\,,\quad {\rm
-   RS}(x) = -2C_F(1+x)\,,\\
-\\
-&& \displaystyle \left\{K_1 =  4C_F,\, R_1^{(1)}(x) = 1,\,
-   R_1^{(2)}(z) = 1\right\}\,,\\
-\\
-&& \displaystyle \left\{K_2 =  12C_F,\, R_2^{(1)}(x) = x,\,
-   R_2^{(2)}(z) = z\right\}\,,\\
-\\
-C_{gq}^{2,(1)} &:& \displaystyle {\rm LR}(z) = 2C_F\left[\frac{1+(1-z)^2}{z} \ln\left[
-                                               z(1-z)\right]+z\right]\,,\\
-  \\
-&& \displaystyle {\rm SR}(z) = 2C_F\left[\frac{1+(1-z)^2}{z}\right]\,,\\
-\\
-&& \displaystyle \left\{K_1 =  4C_F,\, R_1^{(1)}(x) = 1 + 3x,\,
-   R_1^{(2)}(z) = 1\right\}\,,\\
-\\
-&& \displaystyle \left\{K_2 =  -12C_F,\, R_2^{(1)}(x) = x,\,
-   R_2^{(2)}(z) = z\right\}\,,\\
-\\
-&& \displaystyle \left\{K_3 =  -2C_F,\, R_3^{(1)}(x) = 1+x,\,
-   R_3^{(2)}(z) = \frac1{z}\right\}\,,\\
-\\
-C_{qg}^{2,(1)} &:&\displaystyle {\rm RL}(x) = \left[x^2+(1-x)^2\right]
-                     \ln\left(\frac{1-x}{x}\right)
-                     +2x(1-x)\,,\quad  {\rm RS}(x) = x^2+(1-x)^2\,,\\
-\\
-&& \displaystyle \left\{K_1 = 2,\, R_1^{(1)}(x) = - 1 + 6x-6x^2,\,
-   R_1^{(2)}(z) = 1\right\}\,,\\
-\\
-&& \displaystyle \left\{K_2 =  1,\, R_2^{(1)}(x) = x^2+(1-x)^2,\,
-   R_2^{(2)}(z) = \frac1{z}\right\}\,.
-\end{array}
-\end{equation}
-Analogously, for the only LO partonic cross sections we find that:
-\begin{equation}
-\begin{array}{rcl}
-C_{qq}^{2,(0)} &:& \displaystyle {\rm LL} =1 \,.
-\end{array}
-\end{equation}
-All the coefficients that are not mentioned are equal to zero. We can
-now implement explicitly Eq.~(\ref{eq:MasterFormula}). The one thing
-that is left to sort out is the structure of the structure functions
-in terms of the appropriate PDF and FF combinations. Considering
-Eq.~(\ref{eq:f1sidis}), we observe that none of the coefficient
-functions depends on the particular quark flavour (this is a feature
-of the ZM scheme). Therefore, simplifying the notation, we can rewrite
-Eq.~(\ref{eq:f1sidis}) as:
-\begin{equation}\label{eq:structF2L}
-\begin{array}{rcl}
-  \displaystyle  F &=& \displaystyle C_{qq}  \sum_{q} e_q^2 \left[q  D_q +\overline{q}  D_{\overline{q}}\right]  + C_{gq}  \sum_{q} e_q^2
-                       \left[q+\overline{q}\right]\,D_g  +  C_{qg}  g \sum_{q} e_q^2
-                       \left [D_q +D_{\overline{q}}\right]\,,
-\end{array}
-\end {equation}
-where now the sums run only over the quark flavours and not the
-antiflavours.
-
-\subsection{Drell Yan (DY)}
-
-In this section we apply to the Drell-Yan (DY) process the same
-procedure followed above for SIDIS. As a matter of fact, SIDIS and DY
-are strictly connected in that DY can be regarded as the time-like
-counterpart of SIDIS. As a consequence, the structure of the relevant
-observables as well as the form of the expressions involved are very
-similar. Therefore, the application of the method described above is
-straightforward. 
 
 % The SIDIS kinematics can be translated into the DY
 % kinematics by identifying $\{x,z\}\rightarrow\{x_1,x_2\}$, where $x_1$
