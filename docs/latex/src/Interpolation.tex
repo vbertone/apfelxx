@@ -51,6 +51,27 @@
 
 \tableofcontents{}
 
+\vspace{20pt}
+
+In this part of the documentation we address the question of
+interpolation. Interpolation is an extremely powerful tool that allows
+one to reconstruct, within some accuracy, continuos functions when
+knowing them only in a finite number of points. Unsurprisingly,
+interpolation techniques are massively used in numerical codes that
+deal with physical quantities that are continuos functions of
+space-time variables, such as position and momentum. In this respect,
+{\tt APFEL++} makes no exception.
+
+In order to make the best of interpolation, {\tt APFEL++} has been
+designed around a specific choice of the interpolation
+strategy. Specifically, the very computational core of {\tt APFEL++}
+relies on \textit{Langrange} polynomials and their properties. Despite
+Langrange polynomials do not enjoy the smoothness of splines, they
+enjoy a number of very useful properties that allow extending the use
+of Lagrange polynomials from just interpolation to derivation and
+integration. In the following, the interpolation strategy is detailed
+along with its implementation and applications {\tt APFEL++}.
+
 \section{Lagrange interpolation}\label{sec:LagrangeInterpolation}
 
 In this section we will derive a general expression for the Lagrange
@@ -689,6 +710,5 @@ solve the integrals. This is done by using the general formula:
 with $t(\ell_1)=t(\ell_2)=t_\ell$, and
 $\overline{\ell}_1={\rm max}(\ell_1,x_{\beta-i+t_\ell})$ and
 $\overline{\ell}_2={\rm min}(\ell_2,x_{\beta-i+t_\ell+1})$.
-
 
 \end{document}

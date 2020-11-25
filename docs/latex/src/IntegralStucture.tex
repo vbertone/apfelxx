@@ -51,6 +51,25 @@
 
 \tableofcontents{}
 
+\vspace{20pt}
+
+This section discusses the approach implemented in {\tt APFEL++} to
+compute Mellin-convolution integrals. This kind of convolutions
+appears very often in the presence of collinearly factorised
+quantities as integrals over the longitudinal momentum fraction of
+partons. This is for example the case of all cross sections in
+collinear factorisation with hadrons in the initial and/or final
+state. As a consequence, Mellin-convolution integrals also appear in
+the DGLAP evolution equations. Also in transverse-momentum-dependent
+(TMD) factorisation they play an important role when matching TMD
+distributions onto the respective collinear ones. It is therefore of
+central importance to put in place an efficient and accurate strategy
+to numerically compute these convolutions. In doing so, it is also
+important to take into account as much as possible all possible
+flavours in which they may appear. For example, different variants
+apply in the presence of heavy-quark masses or when considering
+``non-forward'' integrals in the framework of exclusive physics.
+
 \section{Structure of the integrals}
 
 The general structure of the integrals considered in {\tt APFEL++} has
@@ -1153,39 +1172,8 @@ such that:
   \sum_{\alpha=0}^{N_x-1} I_{\beta\alpha}\overline{d}_\alpha\,.
 \end{equation}
 
-
-
-
 \newpage
-
-
-% The SIDIS kinematics can be translated into the DY
-% kinematics by identifying $\{x,z\}\rightarrow\{x_1,x_2\}$, where $x_1$
-% and $x_1$ are the momentum fractions of the incoming partons and
-% $Q^2\rightarrow M^2$, with $M^2$ the invariant mass of the partonic
-% initial state which is thus positive 
-
-% The inelasticity $y$ in DIS measures the energy 
-
-
-
-\newpage
-
-\begin{thebibliography}{alp}
-
-%\cite{deFlorian:1997zj}
-\bibitem{deFlorian:1997zj}
-  D.~de Florian, M.~Stratmann and W.~Vogelsang,
-  %``QCD analysis of unpolarized and polarized Lambda baryon production in leading and next-to-leading order,''
-  Phys.\ Rev.\ D {\bf 57} (1998) 5811
-  doi:10.1103/PhysRevD.57.5811
-  [hep-ph/9711387].
-  %%CITATION = doi:10.1103/PhysRevD.57.5811;%%
-  %138 citations counted in INSPIRE as of 04 Jun 2017
-
-\end{thebibliography}
-
-
-
+\bibliographystyle{ieeetr}
+\bibliography{bibliography}
 
 \end{document}

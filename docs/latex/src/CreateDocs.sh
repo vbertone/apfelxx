@@ -1,22 +1,16 @@
 #!/bin/bash
 
-for ((index=0; index<2; index++))
-do
-    pdflatex IntegralStucture.tex
-    pdflatex Interpolation.tex
-    pdflatex CCDIS.tex
-    pdflatex Transversity.tex
-    pdflatex TMDEvolution.tex
-    pdflatex DrellYanTMD.tex
-    pdflatex SIDISTMD.tex
-    pdflatex CovarianceMatrix.tex
-    pdflatex DIS.tex
-    pdflatex GPDs.tex
-    pdflatex MatchingConditions.tex
-    pdflatex MSbarMass.tex
-    pdflatex EvolutionCode.tex
-    pdflatex EvolDIS.tex
+# Declare an array of string with the document names
+declare -a DocArray=("IntegralStucture" "Interpolation" "Statistics" "CCDIS" "Transversity" "TMDEvolution" "DrellYanTMD" "SIDISTMD" "DIS" "GPDs" "MatchingConditions" "MSbarMass" "EvolutionCode" "EvolDIS")
+
+# Produce pdfs
+for doc in ${DocArray[@]}; do
+    pdflatex $doc
+    bibtex   $doc
+    pdflatex $doc
+    pdflatex $doc
 done
 
+# Move pdfs and clean up
 mv *.pdf ../pdf/.
-rm *.aux *.log *.out *.toc *.idx
+rm *.aux *.log *.out *.toc *.idx *.blg *.bbl

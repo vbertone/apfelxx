@@ -26,6 +26,15 @@ for s in secs:
     # Remove blanck line after .. math::
     out = out.replace(".. math::\n\n", ".. math::\n")
 
+    # Replace "\bm" with "\vec" because it is not rendered
+    out = out.replace("\\bm", "\\vec")
+
+    # Replace the folder "plots" to that pointing to the original files
+    out = out.replace("plots/", "../../latex/src/plots/")
+
+    # Place the word "References" where the list of references starts
+    out = out.replace(".. container:: references csl-bib-body hanging-indent", "**References**\n\n.. container:: references csl-bib-body hanging-indent")
+
     # Close input file
     fin.close()
 

@@ -1,39 +1,71 @@
-\documentclass[10pt,a4paper]{article}
-\usepackage{amsmath,amssymb,bm,makeidx,subfigure}
-\usepackage[italian,english]{babel}
-\usepackage[center,small]{caption}[2007/01/07]
-\usepackage{fancyhdr}
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
 \usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+\usepackage{makeidx}
 
-\definecolor{blu}{rgb}{0,0,1}
-\definecolor{verde}{rgb}{0,1,0}
-\definecolor{rosso}{rgb}{1,0,0}
-\definecolor{viola}{rgb}{1,0,1}
-\definecolor{arancio}{rgb}{1,0.5,0}
-\definecolor{celeste}{rgb}{0,1,1}
-\definecolor{rosa}{rgb}{1,0.3,0.5}
+\makeatletter
 
-\oddsidemargin = 12pt
-\topmargin = 0pt
-\textwidth = 440pt
-\textheight = 650pt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
 
-\makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+\usepackage{listings}
 
 \begin{document}
 
-\title{Statistical considerations}
+\title{Statistics}
 
-\author{Valerio Bertone}
-
-%\institution{$^{a}$PH Department, TH Unit, CERN, CH-1211 Geneva 23, Switzerland}
 \maketitle
 
-%\begin{abstract}
-%In this document 
-%\end{abstract}
 \tableofcontents{}
+
+\vspace{20pt}
+
+{\tt APFEL++} is often used to fit non-perturbative functions, such as
+parton distribution functions (PDFs) and fragmentation functions
+(FFs), to experimental data. As a consequence, it is necessary to make
+full use of the appropriate statistical tools that allow for a correct
+treatment of the experimental information when comparing predictions
+to data. This section is devoted to a detailed discussion of the
+concepts and tools that are often used when fitting PDFs and FFs to
+data.
+
+Most of these tools are not directly implemented in {\tt APFEL++} but
+can be found in other codes, as for instance {\tt NangaParbat} (see
+https://github.com/vbertone/NangaParbat).
+
 \section{The $\chi^2$ in the presence of correlations}
 
 Suppose to have an ensamble of $n$ measurements having the following
@@ -53,30 +85,33 @@ uncertainty\footnote{There could be more than one uncorrelated
 $l=1,\dots,k$, its correlated systematic uncertainties. With this
 information at hand, one can construct the full covariance matrix
 $V_{ij}$ as follows (see for example Ref.~\cite{Ball:2012wy}):
-\begin{equation}\label{eq:covmat}
+\begin{equation}
   V_{ij}=\left(\sigma_{i,\rm stat}^2 +\sigma_{i,\rm unc}^2\right)\delta_{ij} + \sum_{l=1}^{k}\sigma_{i,\rm
     corr}^{(l)}\sigma_{j,\rm
     corr}^{(l)}\,.
+\label{eq:covmat}
 \end{equation}
 This is a clearly symmetric matrix. Given a set of predictions $t_i$
 corresponding to the $n$ measurements of the ensamble, the $\chi^2$
 takes the form:
-\begin{equation}\label{eq:chi2cov}
+\begin{equation}
   \chi^2=
   \sum_{i,j=1}^{n}\left(m_i-t_i\right)V_{ij}^{-1}\left(m_j-t_j\right) =
   \mathbf{y}^{T} \cdot \mathbf{V}^{-1} \cdot \mathbf{y}\,,
+\label{eq:chi2cov}
 \end{equation}
 where in the second equality I have used the matricial notation and
 defined $y_i = m_i-t_i$. A convenient way to compute the $\chi^2$
 relies on the Cholesky decomposition of the covariance matrix
 $\mathbf{V}$. In particular, it can be proven that any symmetric and
 positive definite matrix $\mathbf{V}$ can be decomposed as:
-\begin{equation}\label{eq:choleskydec}
+\begin{equation}
 \mathbf{V} = \mathbf{L}\cdot\mathbf{L}^{T}\,,
+\label{eq:choleskydec}
 \end{equation}
 where $\mathbf{L}$ is a lower triangular matrix whose entries are
 related recursively to those of $\mathbf{V}$ as follows:
-\begin{equation}\label{eq:cholalg}
+\begin{equation}
 \begin{array}{rcl}
   L_{kk} &=&\displaystyle \sqrt{V_{kk}-\sum_{j=1}^{k-1}L_{kj}^2}\,,\\
   \\
@@ -87,6 +122,7 @@ related recursively to those of $\mathbf{V}$ as follows:
   L_{ik} &=&\displaystyle 0\,,\quad
              k > i\,.\\
 \end{array}
+\label{eq:cholalg}
 \end{equation}
 It is then easy to see that the $\chi^2$ can be written as:
 \begin{equation}
@@ -94,8 +130,9 @@ It is then easy to see that the $\chi^2$ can be written as:
 \end{equation}
 But the vector ${\bm \chi} \equiv \mathbf{L}^{-1}\cdot \mathbf{y}$ is
 the solution of the linear system:
-\begin{equation}\label{eq:chivdef}
+\begin{equation}
   \mathbf{L} \cdot {\bm \chi} = \mathbf{y}\,,
+\label{eq:chivdef}
 \end{equation}
 that can be efficiently solved by forward substitution, so that:
 \begin{equation}
@@ -125,20 +162,22 @@ $m_i$, so that one defines\footnote{Note that this redefinition does
 and let us also define
 $s_i^2\equiv \sigma_{i,\rm stat}^2 +\sigma_{i,\rm unc}^2$ so that
 Eq.~(\ref{eq:covmat}) can be rewritten as:
-\begin{equation}\label{eq:covmat2}
+\begin{equation}
   V_{ij}=s_i^2\delta_{ij} + \left(\sum_{l=1}^{k}\delta_{i,\rm
     corr}^{(l)}\delta_{j,\rm
     corr}^{(l)}\right)m_im_j\,.
+\label{eq:covmat2}
 \end{equation}
 Now I split the correlated systematic uncertainties into $k_a$
 additive uncertainties and $k_m$ multiplicative uncertainties, such
 that $k_a+k_m=k$. This way Eq.~(\ref{eq:covmat2}) takes the form:
-\begin{equation}\label{eq:covmat3}
+\begin{equation}
   V_{ij}=s_i^2\delta_{ij} + \left(\sum_{l=1}^{k_a}\delta_{i,\rm
     add}^{(l)}\delta_{j,\rm
     add}^{(l)}+\sum_{l=1}^{k_m}\delta_{i,\rm
     mult}^{(l)}\delta_{j,\rm
     mult}^{(l)}\right)m_im_j\,.
+\label{eq:covmat3}
 \end{equation}
 It is believed that this definition of the covariance matrix is
 problematic in that it results in the so-called D'Agostini bias of the
@@ -151,12 +190,13 @@ fit in which the ``standard'' definition of the covariance matrix in
 Eq.~(\ref{eq:covmat}) (often referred to as \textit{experimental}
 definition) is used. Applying the $t_0$ prescription, the covariance
 matrix takes the form:
-\begin{equation}\label{eq:covmat4}
+\begin{equation}
   V_{ij}=s_i^2\delta_{ij} + \sum_{l=1}^{k_a}\delta_{i,\rm
     add}^{(l)}\delta_{j,\rm
     add}^{(l)}m_im_j+\sum_{l=1}^{k_m}\delta_{i,\rm
     mult}^{(l)}\delta_{j,\rm
     mult}^{(l)}t_i^{(0)}t_j^{(0)}\,.
+\label{eq:covmat4}
 \end{equation}
 
 % \section{Artificial generation of correlated systematics}
@@ -178,12 +218,16 @@ matrix takes the form:
 %   i =1,\dots,n\,.
 % \end{equation}
 % If one defines:
-% \begin{equation}\label{eq:artsys}
-%   \sigma_{i,\rm corr}^{(l)} = \sqrt{\lambda_l} x_i^{(l)}\,,\quad i,l=1,\dots,n\,,
+% \begin{equation}
+%   \sigma_{i,\rm corr}^{(l)} = \sqrt{\lambda_l} x_i^{(l)}\,,\quad
+%   i,l=1,\dots,n\,,
+% \label{eq:artsys}
 % \end{equation}
 % one can show that:
-% \begin{equation}\label{eq:artsydef}
-%   \sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)} =C_{ij}\,.
+% \begin{equation}
+%   \sum_{l=1}^{n}\sigma_{i,\rm corr}^{(l)}\sigma_{j,\rm corr}^{(l)}
+%   =C_{ij}\,.
+% \label{eq:artsydef}
 % \end{equation}
 % To prove this equality, I start from the following matricial relation:
 % \begin{equation}
@@ -201,8 +245,10 @@ matrix takes the form:
 % \mathbf{Q}^{-1} =  \mathbf{Q}^{T}\,,
 % \end{equation}
 % so that:
-% \begin{equation}\label{eq:diagC}
-%   \mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot \mathbf{Q}^{T}\,.
+% \begin{equation}
+%   \mathbf{C} =\mathbf{Q}\cdot \mathbf{\Lambda}\cdot
+%   \mathbf{Q}^{T}\,.
+% \label{eq:diagC}
 % \end{equation}
 % It follows that:
 % \begin{equation}
@@ -223,7 +269,8 @@ matrix takes the form:
 % U_{ij} = s_i^2\delta_{ij}\,.
 % \end{equation}
 % This defines the matrix $\mathbf{C}$ as:
-% \begin{equation}\label{eq:corrdef}
+% \label{eq:corrdef}
+% \begin{equation}
 % \mathbf{C} = \mathbf{V} - \mathbf{U}\,,
 % \end{equation}
 % such that, given a $n\times n$ covariance matrix $\mathbf{V}$ along
@@ -242,9 +289,11 @@ systematic uncertainties. To do so, one needs to write the $\chi^2$ in
 terms of the so-called ``nuisance parameters'' $\lambda_\alpha$. One
 can show that the definition of the $\chi^2$ in Eq.~(\ref{eq:chi2cov})
 is equivalent to~\cite{Ball:2012wy}:
-\begin{equation}\label{eq:chi2nuis}
+\begin{equation}
 \chi^2 = \sum_{i=1}^n\frac{1}{s_i^2}\left(m_i -t_i
-  -\sum_{\alpha=1}^k\lambda_\alpha \sigma_{i,\rm corr}^{(\alpha)} \right)^2 + \sum_{\alpha=1}^k\lambda_\alpha^2\,.
+  -\sum_{\alpha=1}^k\lambda_\alpha \sigma_{i,\rm corr}^{(\alpha)}
+\right)^2 + \sum_{\alpha=1}^k\lambda_\alpha^2\,.
+\label{eq:chi2nuis}
 \end{equation}
 The optimal value of the nuisance parameters can be computed by
 minimising the $\chi^2$ with respect to them, that is imposing:
@@ -252,12 +301,18 @@ minimising the $\chi^2$ with respect to them, that is imposing:
 \frac{\partial \chi^2}{\partial \lambda_\beta} = 0\,.
 \end{equation}
 This yields the system:
-\begin{equation}\label{eq:nuissys}
+\begin{equation}
   \sum_{\beta=1}^kA_{\alpha\beta}\lambda_\beta =\rho_\alpha\,,
+\label{eq:nuissys}
 \end{equation}
 with:
-\begin{equation}\label{eq:sysing}
-A_{\alpha\beta}= \delta_{\alpha\beta}+\sum_{i=1}^n\frac{\sigma_{i,\rm corr}^{(\alpha)}\sigma_{i,\rm corr}^{(\beta)}}{s_i^2}\quad\mbox{and}\quad \rho_\alpha=\sum_{i=1}^n\frac{m_i-t_i}{s_i^2}\sigma_{i,\rm corr}^{(\alpha)}\,,
+\begin{equation}
+A_{\alpha\beta}= \delta_{\alpha\beta}+\sum_{i=1}^n\frac{\sigma_{i,\rm
+    corr}^{(\alpha)}\sigma_{i,\rm
+    corr}^{(\beta)}}{s_i^2}\quad\mbox{and}\quad
+\rho_\alpha=\sum_{i=1}^n\frac{m_i-t_i}{s_i^2}\sigma_{i,\rm
+  corr}^{(\alpha)}\,,
+\label{eq:sysing}
 \end{equation}
 that determines the values of $\lambda_\beta$. The quantity:
 \begin{equation}
@@ -270,8 +325,10 @@ as:
 \overline{t}_i =t_i+d_i\,,
 \end{equation}
 the $\chi^2$ reads:
-\begin{equation}\label{eq:chi2nuisshift}
-  \chi^2 = \sum_{i=1}^n\left(\frac{m_i -\overline{t}_i}{s_i}\right)^2 + \sum_{\alpha=1}^k\lambda_\alpha^2\,.
+\begin{equation}
+  \chi^2 = \sum_{i=1}^n\left(\frac{m_i -\overline{t}_i}{s_i}\right)^2
+  + \sum_{\alpha=1}^k\lambda_\alpha^2\,.
+\label{eq:chi2nuisshift}
 \end{equation}
 Therefore, up to a penalty term given by the sum of the square of the
 nuisance parameters, the $\chi^2$ takes the form of the uncorrelated
@@ -292,8 +349,9 @@ uncertainty and a single fully-correlated uncertainty:\footnote{Note
   symptom of the fact that if no uncorrelated uncertainties are
   present, the two points would be totally dependent on each
   other. This observation will be relevant in the following.}
-\begin{equation}\label{eq:fullset}
+\begin{equation}
 S:\quad\{m_i\pm \sigma_i^u\pm \sigma_i^c\}\,,\quad i  =1,2\,.
+\label{eq:fullset}
 \end{equation}
 The resulting covariance matrix reads:
 \begin{equation}
@@ -313,17 +371,24 @@ In addition, the set of two theoretical predictions $\{t_i\}$ that
 allows one to define a column vector of residuals
 $\mathbf{r}^{\rm T}=(r_1,\;r_2)$ with $r_i=m_i-t_i$. The $\chi^2$ then
 takes the following explicit expression:
-\begin{equation}\label{eq:fullchi2}
+\begin{equation}
   \chi^2= \mathbf{r}^{\rm T}\cdot \mathbf{V}^{-1}\cdot \mathbf{r}=
-  \frac{r_1^2\left[(\sigma_2^u)^2+ (\sigma_2^c)^2\right]+r_2^2\left[(\sigma_1^u)^2+ (\sigma_1^c)^2\right]-2 r_1 r_2\sigma_1^c \sigma_2^c}{(\sigma_1^u \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+ (\sigma_1^u \sigma_2^c)^2}\,.
+  \frac{r_1^2\left[(\sigma_2^u)^2+
+      (\sigma_2^c)^2\right]+r_2^2\left[(\sigma_1^u)^2+
+      (\sigma_1^c)^2\right]-2 r_1 r_2\sigma_1^c
+    \sigma_2^c}{(\sigma_1^u \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+
+    (\sigma_1^u \sigma_2^c)^2}\,.
+\label{eq:fullchi2}
 \end{equation}
 Now, suppose one wants to exclude the datapoint with $i=2$ from the
 definition of the $\chi^2$. The possibly most natural way to proceed
 is to exclude the point, along with its uncertainties, directly from
 the set in Eq.~(\ref{eq:fullset}). This straightforwardly leads to the
 following $\chi^2$:
-\begin{equation}\label{eq:redchi21}
-{\chi}_{\rm cut\;1}^2 = \frac{r_1^2}{(\sigma_1^u)^2+ (\sigma_1^c)^2}\,.
+\begin{equation}
+{\chi}_{\rm cut\;1}^2 = \frac{r_1^2}{(\sigma_1^u)^2+
+  (\sigma_1^c)^2}\,.
+\label{eq:redchi21}
 \end{equation}
 However, this procedure might be questioned in that it artificially
 modifies the original data set by effectively defining a \textit{new}
@@ -340,9 +405,12 @@ compute the predictions is forced outside its application region. One
 can therefore \textit{enforce} that the model exactly agrees with the
 datapoints to be excluded. This effectively amounts to set $t_2=m_2$,
 or equivalently $r_2=0$, reducing Eq.~(\ref{eq:fullchi2}) to:
-\begin{equation}\label{eq:fullchi2trunc}
+\begin{equation}
   \chi_{\rm cut\;2}^2= 
-  \frac{r_1^2\left[(\sigma_2^u)^2+ (\sigma_2^c)^2\right]}{(\sigma_1^u \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+ (\sigma_1^u \sigma_2^c)^2}\,.
+  \frac{r_1^2\left[(\sigma_2^u)^2+ (\sigma_2^c)^2\right]}{(\sigma_1^u
+    \sigma_2^u)^2+ (\sigma_1^c \sigma_2^u)^2+ (\sigma_1^u
+    \sigma_2^c)^2}\,.
+\label{eq:fullchi2trunc}
 \end{equation}
 This has the clear advantage that the experimental information,
 including correlations, remains totally intact. In order to show that
@@ -403,8 +471,9 @@ $\chi^2$'s combine meaningfully.
 Now, I move to explicitly show that the generalisation of
 Eq.~(\ref{eq:fullchi2trunc}) to an $n$-point data set where $n_2$ are
 cut away and $n_1$ remain fulfils the requirement:
-\begin{equation}\label{eq:compisition1}
+\begin{equation}
   \chi^2 = \left|{\bm \chi}_1+{\bm \chi}_2\right|^2\,,
+\label{eq:compisition1}
 \end{equation}
 where the vectors ${\bm \chi}_1$ and ${\bm \chi}_2$ are defined
 according to Eq.~(\ref{eq:chivdef}). To define them more precisely,
@@ -424,7 +493,7 @@ Eq.~(\ref{eq:fullchi2trunc}), one has:
 \chi_1^2= \left|\bm \chi_{1}\right|^2\,,\quad\mbox{and}\quad \chi_2^2= \left|\bm \chi_{2}\right|^2\,.
 \end{equation}
 The proof of Eq.~(\ref{eq:compisition1}) runs as follows:
-\begin{equation}\label{eq:combinechi2s}
+\begin{equation}
 \begin{array}{rcl}
   \chi^2 &=&\displaystyle 
              \sum_{i=1}^n\sum_{j=1}^nr_iV_{ij}^{-1}r_j=\sum_{i=1}^{n_1}\sum_{j=1}^{n_1}r_iV_{ij}^{-1}r_j
@@ -441,6 +510,7 @@ The proof of Eq.~(\ref{eq:compisition1}) runs as follows:
          &=&\displaystyle {\bm \chi}_1^{\rm T}\cdot{\bm \chi}_1+{\bm \chi}_2^{\rm T}\cdot{\bm \chi}_2 +2
              {\bm \chi}_1^{\rm T}\cdot{\bm \chi}_2 =\left|{\bm \chi}_1+{\bm \chi}_2\right|^2\,,
 \end{array}
+\label{eq:combinechi2s}
 \end{equation}
 where in the last step of the first line I have used the fact that the
 covariance matrix (and thus its inverse) is symmetric upon exchange of
@@ -549,8 +619,9 @@ replicas that gives rise to a figure of merit distributed correctly,
 degrees of freedom as number of data points. Following
 Ref.~\cite{wiki:xxx}, one requires that the $\chi^2$, that in
 matricial form can be expressed as:
-\begin{equation}\label{eq:chi2matrix}
+\begin{equation}
   \chi^2 = \mathbf{y}^{T}\cdot \mathbf{V}^{-1} \cdot \mathbf{y}\,,
+\label{eq:chi2matrix}
 \end{equation}
 where $\mathbf{V}$ is the $n\times n$ covariance matrix, being $n$ the
 number of datapoints, and $\mathbf{y}$ is a column vector with $n$
@@ -560,13 +631,16 @@ y_j = f_j-m_j\,,
 \end{equation}
 with $m_j$ a given value (to be thought as the central value) and
 $f_j$ its fluctuated value, is distributed like:
-\begin{equation}\label{eq:wikipedia}
+\begin{equation}
 \chi^2\sim \sum_{i=1}^{n}z_i^2=|\mathbf{z}|^2\,,
+\label{eq:wikipedia}
 \end{equation}
 where $z_1,\dots , z_n$ are independent, standard normal random
 variables, \textit{i.e.} such that:
-\begin{equation}\label{eq:averages}
-\langle z_i\rangle=0\quad\mbox{and}\quad \langle z_iz_j\rangle = \delta_{ij}\,,
+\begin{equation}
+\langle z_i\rangle=0\quad\mbox{and}\quad \langle z_iz_j\rangle =
+\delta_{ij}\,,
+\label{eq:averages}
 \end{equation}
 where the symbol $\langle\,\dots\rangle$ indicates the
 average.\footnote{The relevant identities are:
@@ -590,13 +664,15 @@ the result is:
 \end{equation}
 As already discussed above, Eq.~(\ref{eq:chi2matrix}) can
 alternatively be written as:
-\begin{equation}\label{explicitchi2chol}
+\begin{equation}
 \chi^2 = \left|\mathbf{L}^{-1}\cdot \mathbf{y}\right|^2\,,
+\label{explicitchi2chol}
 \end{equation}
 where $\mathbf{L}$ is the Cholesky decomposition of the matrix
 $\mathbf{V}$, such that:
-\begin{equation}\label{eq:choleskydecagain}
+\begin{equation}
 \mathbf{V} = \mathbf{L}\cdot\mathbf{L}^{T}\,.
+\label{eq:choleskydecagain}
 \end{equation}
 Comparing Eqs.~(\ref{explicitchi2chol}) and~(\ref{eq:wikipedia}), one
 can infer that the following relation should hold:
@@ -608,8 +684,9 @@ which immediately implies:
 \mathbf{y}\sim\mathbf{L}\cdot\mathbf{z}\,,
 \end{equation}
 or equivalently:
-\begin{equation}\label{eq:deviations}
+\begin{equation}
 f_j\sim m_j+\sum_{i=1}^nL_{ji}z_i\,.
+\label{eq:deviations}
 \end{equation}
 In conclusion, in order for the $\chi^2$ to have the correct
 distribution, the fluctuations $f_j$ around the experimental central
@@ -642,8 +719,9 @@ Monte-Carlo replica generation formulas such as those given in
 Refs.~\cite{Ball:2008by, Ball:2014uwa}. I now specifically consider
 Eq.~(20) of Ref.~\cite{Ball:2014uwa} that I report here in terms of
 relative uncertainties $\delta$'s matching our notation:
-\begin{equation}\label{eq:nnpdfmc}
+\begin{equation}
 \widetilde{f}_j\sim m_j\prod_{m=1}^{k_m}\left(1+\delta_{{\rm mult},j}^{(m)} x_m\right)\left(1+\delta_{{\rm unc},j} z_j+\sum_{a=1}^{k_a} \delta_{{\rm add},j}^{(a)} y_a\right)\,,
+\label{eq:nnpdfmc}
 \end{equation}
 where $z_j$, $y_a$, and $x_m$ are independent random variables. I now
 expand the product in the front up to second order in $x$
@@ -659,7 +737,7 @@ vanishes:
 $\langle x_ix_jx_k\rangle = \langle x_i\rangle \langle x_j
 \rangle\langle x_k\rangle = 0$. This allows one to expand
 Eq.~(\ref{eq:nnpdfmc}) as:
-\begin{equation}\label{eq:nnpdfmcexp}
+\begin{equation}
 \begin{array}{rcl}
 \widetilde{f}_j&\sim&\displaystyle m_j\Bigg(1+\delta_{{\rm unc},j} z_j+\sum_{a=1}^{k_a} \delta_{{\rm add},j}^{(a)} y_a +\sum_{m=1}^{k_m}\delta_{{\rm mult},j}^{(m)}
   x_m\\
@@ -671,16 +749,18 @@ Eq.~(\ref{eq:nnpdfmc}) as:
 &+&\displaystyle \sum_{m=1}^{k_m}\sum_{m'=1\atop m'\neq m}^{k_m}\delta_{{\rm
       mult},j}^{(m)}\delta_{{\rm mult},j}^{(m')}x_m x_{m'}\Bigg)+\mbox{trilinear}\,.
 \end{array}
+\label{eq:nnpdfmcexp}
 \end{equation}
 Since Eq.~(\ref{eq:nnpdfmcexp}) involves only terms that have at most
 one power of the same random variable, the average of
 $\widetilde{f}_j$ automatically yields:
-\begin{equation}\label{eq:centralvaluenn}
+\begin{equation}
   \langle \widetilde {f}_j\rangle = m_j\,,
+\label{eq:centralvaluenn}
 \end{equation}
 in agreement with the expectation. I now compute the correlations
 making use of the combination rules of random variables. This gives:
-\begin{equation}\label{eq:corrnn}
+\begin{equation}
 \begin{array}{rcl}
   \langle \widetilde{f}_j \widetilde{f}_k\rangle&\sim&\displaystyle m_jm_k\Bigg(1+\delta_{{\rm unc},j}^2\delta_{jk}+\sum_{a=1}^{k_a} \delta_{{\rm add},j}^{(a)}\delta_{{\rm add},k}^{(a)} +\sum_{m=1}^{k_m}\delta_{{\rm mult},j}^{(m)}\delta_{{\rm mult},k}^{(m)}\\
 \\
@@ -695,6 +775,7 @@ making use of the combination rules of random variables. This gives:
 &=&\displaystyle \langle \widetilde{f}_j\rangle \langle
     \widetilde{f}_k\rangle +V_{jk}+\mathcal{O}(\sigma_{\rm mult}^2 s^2, \sigma_{\rm mult}^2 \sigma_{\rm add}^2)\,.
 \end{array}
+\label{eq:corrnn}
 \end{equation}
 In conclusion, Eq.~(\ref{eq:nnpdfmc}) reproduces exactly the central
 values of the original ensemble (see Eq.~(\ref{eq:centralvaluenn}))
@@ -758,7 +839,7 @@ that the matrices $\mathbf{V}^{(l)}$ are positive semidefinite
 (\textit{i.e.} they have zero determinant) and thus their Cholesky
 decomposition is not unique. In particular, provided that $k\leq n$,
 one can choose:
-\begin{equation}\label{eq:choldecomp2}
+\begin{equation}
 \widetilde{L}_{ij}^{(l)}=
 \sigma_i^{(l)}\delta_{jl}\,,\quad 1\leq l\leq k\leq n\,,
 \end{equation}
@@ -767,10 +848,13 @@ such that:
   \left(\sum_{l=1}^k\widetilde{\mathbf{L}}^{(l)}\right)\cdot\left(
     \sum_{l'=1}^k\widetilde{\mathbf{L}}^{(l')}\right)=\sum_{l=1}^k 
   \mathbf{V}^{(l)}\,.
+\label{eq:choldecomp2}
 \end{equation}
 However, choosing:
-\begin{equation}\label{eq:CholVapprox}
-\widetilde{\mathbf{L}} = \mathbf{L}^{(0)} + \sum_{l=1}^k\widetilde{\mathbf{L}}^{(l)}\,,
+\begin{equation}
+\widetilde{\mathbf{L}} = \mathbf{L}^{(0)} +
+\sum_{l=1}^k\widetilde{\mathbf{L}}^{(l)}\,,
+\label{eq:CholVapprox}
 \end{equation}
 and multiplying it for its transpose would give:
 \begin{equation}
@@ -798,9 +882,10 @@ $\widetilde{\mathbf{L}}$ Eq.~(\ref{eq:CholVapprox}) seems to be a
 generally good approximator to the real Cholesky decomposition of the
 covariance matrix $\mathbf{V}$. Plugging this equation into
 Eq.~(\ref{eq:deviations}) immediately gives:
-\begin{equation}\label{eq:deviations2}
+\begin{equation}
   f_j\sim m_j+z_js_j + \sum_{l=1}^{k}z_l \sigma_{j,\rm
     corr}^{(l)}\,.
+\label{eq:deviations2}
 \end{equation}
 It is interesting to focus on similarities and differences with the
 formulas present in the literature. I will specifically consider
@@ -916,8 +1001,10 @@ with $D=\sigma_1^2 \sigma_2^2+(\sigma_1^2+\sigma_2^2)
 \chi^2=\frac{\sigma_2^2y_1^2+\sigma_1^2y_2^2+(y_1-y_2)^2\sigma_c^2}{D}\,,
 \end{equation}
 that can be minimised w.r.t. to $\mu$ by requiring that:
-\begin{equation}\label{eq:minchi2}
-  \left.\frac{d\chi^2}{d\mu}\right|_{\mu=\overline{\mu}} = \left.2\frac{\sigma_2^2y_1+\sigma_1^2y_2}{D}\right|_{\mu=\overline{\mu}}=0\,,
+\begin{equation}
+  \left.\frac{d\chi^2}{d\mu}\right|_{\mu=\overline{\mu}} =
+  \left.2\frac{\sigma_2^2y_1+\sigma_1^2y_2}{D}\right|_{\mu=\overline{\mu}}=0\,,
+\label{eq:minchi2}
 \end{equation}
 where $\overline{\mu}$ is the best fit value of $\mu$. Notice the
 cancellation in the numerator of the correlated uncertainty
@@ -926,8 +1013,10 @@ caused by the fact that $\sigma_c$ is the same for both $x_1$ and
 $x_2$, can be regarded as the (misleading) evidence that the DAB only
 takes place in the normalisation case. The solution to
 Eq.~(\ref{eq:minchi2}) is:
-\begin{equation}\label{eq:offcv}
-\overline{\mu} = \frac{\sigma_2^2x_1+\sigma_1^2x_2}{\sigma_1^2+\sigma_2^2}=\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,,
+\begin{equation}
+\overline{\mu} =
+\frac{\sigma_2^2x_1+\sigma_1^2x_2}{\sigma_1^2+\sigma_2^2}=\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,,
+\label{eq:offcv}
 \end{equation}
 that fulfils the intuitive expectation that the best value of $\mu$
 should be a weighted average of the central values weighted by the
@@ -937,8 +1026,14 @@ the inverse of the second derivative of the $\chi^2$ at
 $\mu=\overline{\mu}$:\footnote{Actually, the second derivative of the
   $\chi^2$ does not depend on $\mu$ and thus it is not necessary to
   set $\mu=\overline{\mu}$.}
-\begin{equation}\label{eq:offcvunc}
-  \delta\mu^2 = \left[\frac12\frac{d^2\chi^2}{d\mu^2}\right]_{\mu=\overline{\mu}}^{-1} = \frac {\sigma_1^2 \sigma_2^2+(\sigma_1^2+\sigma_2^2) \sigma_c^2}{\sigma_2^2+\sigma_1^2}=\frac {1+\frac{\sigma_c^2}{\sigma_1^2}+\frac{\sigma_c^2}{\sigma_2^2} }{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,.
+\begin{equation}
+  \delta\mu^2 =
+  \left[\frac12\frac{d^2\chi^2}{d\mu^2}\right]_{\mu=\overline{\mu}}^{-1}
+  = \frac {\sigma_1^2 \sigma_2^2+(\sigma_1^2+\sigma_2^2)
+    \sigma_c^2}{\sigma_2^2+\sigma_1^2}=\frac
+  {1+\frac{\sigma_c^2}{\sigma_1^2}+\frac{\sigma_c^2}{\sigma_2^2}
+  }{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}}\,.
+\label{eq:offcvunc}
 \end{equation}
 
 I now move to considering the normalisation case in which the
@@ -971,12 +1066,26 @@ The minimum is computed as:
 This time, differently from the offset case, the correlated
 uncertainties in the denominator do not cancel and the result of the
 equation above is:
-\begin{equation}\label{eq:normcv}
-\overline{\mu} = \frac{\sigma_2^2x_1+\sigma_1^2x_2}{\sigma_1^2+\sigma_2^2+(\delta_f x_1-\delta_f x_2)^2}=\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}+\left(\frac{\delta_f x_1-\delta_f x_2}{\sigma_1\sigma_2}\right)^2}\,,
+\begin{equation}
+\overline{\mu} =
+\frac{\sigma_2^2x_1+\sigma_1^2x_2}{\sigma_1^2+\sigma_2^2+(\delta_f
+  x_1-\delta_f
+  x_2)^2}=\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}+\left(\frac{\delta_f
+      x_1-\delta_f x_2}{\sigma_1\sigma_2}\right)^2}\,,
+\label{eq:normcv}
 \end{equation}
 while:
-\begin{equation}\label{eq:normcvunc}
-  \delta\mu^2 = \left[\frac12\frac{d^2\chi^2}{d\mu^2}\right]_{\mu=\overline{\mu}}^{-1} = \frac{\sigma_1^2\sigma_2^2+\delta_f^2(\sigma_1^2x_2^2+\sigma_2^2x_1^2)}{\sigma_2^2+ \sigma_1^2+\delta_f^2(x_1 -x_2)^2}=\frac{1+\frac{\delta_f^2 x_1^2}{\sigma_1^2}+\frac{\delta_f^2 x_2^2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+ \frac{1}{\sigma_2^2}+\left(\frac{\delta_f x_1 -\delta_f x_2}{\sigma_1\sigma_2}\right)^2}\,.
+\begin{equation}
+  \delta\mu^2 =
+  \left[\frac12\frac{d^2\chi^2}{d\mu^2}\right]_{\mu=\overline{\mu}}^{-1}
+  =
+  \frac{\sigma_1^2\sigma_2^2+\delta_f^2(\sigma_1^2x_2^2+\sigma_2^2x_1^2)}{\sigma_2^2+
+    \sigma_1^2+\delta_f^2(x_1 -x_2)^2}=\frac{1+\frac{\delta_f^2
+      x_1^2}{\sigma_1^2}+\frac{\delta_f^2
+      x_2^2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+
+    \frac{1}{\sigma_2^2}+\left(\frac{\delta_f x_1 -\delta_f
+        x_2}{\sigma_1\sigma_2}\right)^2}\,.
+\label{eq:normcvunc}
 \end{equation}
 According to Ref.~\cite{DAgostini:1993arp}, the term proportional to
 $\delta_f$ in the denominator of the r.h.s. of Eq.~(\ref{eq:normcv})
@@ -991,8 +1100,10 @@ points but where the data point $x_1$ is affected by the additive
 uncertainty $\sigma_{c,1}$ and the point $x_2$ by the additive
 uncertainty $\sigma_{c,2}$. According to the same procedure followed
 above the final result for best-fit value and uncertainty of $\mu$ is:
-\begin{equation}\label{eq:add2cv}
-\overline{\mu} = \frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}+\left(\frac{\sigma_{c,1}-\sigma_{c,2}}{\sigma_1\sigma_2}\right)^2}\,,
+\begin{equation}
+\overline{\mu} =
+\frac{\frac{x_1}{\sigma_1^2}+\frac{x_2}{\sigma_2^2}}{\frac{1}{\sigma_1^2}+\frac{1}{\sigma_2^2}+\left(\frac{\sigma_{c,1}-\sigma_{c,2}}{\sigma_1\sigma_2}\right)^2}\,,
+\label{eq:add2cv}
 \end{equation}
 and:
 \begin{equation}
@@ -1041,8 +1152,9 @@ in the normalisation case is given by:
 \lambda=\frac{\frac{\delta_f x_1^2}{\sigma_1^2}+\frac{\delta_f x_2^2}{\sigma_2^2}}{1+\frac{\delta_f^2 x_1^2}{\sigma_1^2}+\frac{\delta_f^2 x_2^2}{\sigma_2^2}}-\overline{\mu}\frac{\frac{\delta_f x_1}{\sigma_1^2}+\frac{\delta_f x_2}{\sigma_2^2}}{1+\frac{\delta_f^2 x_1^2}{\sigma_1^2}+\frac{\delta_f^2 x_2^2}{\sigma_2^2}}\,.
 \end{equation}
 It is the quantity:
-\begin{equation}\label{eq:shiftedvals}
+\begin{equation}
 \hat{\mu}_i =\overline{\mu}+\lambda \delta_fx_i\,,
+\label{eq:shiftedvals}
 \end{equation}
 that can be directly compared to the data-point central
 values. Unfortunately, the analytic form of this quantity is not very
@@ -1098,8 +1210,11 @@ uncorrelated uncertainties $\sigma_1$ and $\sigma_2$ tend to zero.
 This can be seen more explicitly by setting
 $\sigma_1=\sigma_2=\varepsilon$ and expanding the $\chi^2$ around
 $\varepsilon = 0$:
-\begin{equation}\label{eq:chi2exp}
-\chi^2\rightarrow \frac{\mu^2(x_1-x_2)^2}{\varepsilon^2(x_1^2+x_2^2)}+\frac{\left[\mu(x_1+x_2)-(x_1^2+x_2^2)\right]^2}{\delta_f^2  (x_1^2+ x_2^2)^2}+\mathcal{O}(\varepsilon^2)\,.
+\begin{equation}
+\chi^2\rightarrow
+\frac{\mu^2(x_1-x_2)^2}{\varepsilon^2(x_1^2+x_2^2)}+\frac{\left[\mu(x_1+x_2)-(x_1^2+x_2^2)\right]^2}{\delta_f^2
+  (x_1^2+ x_2^2)^2}+\mathcal{O}(\varepsilon^2)\,.
+\label{eq:chi2exp}
 \end{equation}
 Therefore, if $x_1\neq x_2$, for $\varepsilon\rightarrow 0$ the
 dominant term is the first one and the minimum of the $\chi^2$ in this
@@ -1203,87 +1318,8 @@ $\chi^2$. The result is:
 \chi^2=\left(\frac{x_1- x_2}{2}\right)^2\left[\frac{1}{\varepsilon^2+\delta_f^2(x_1^2+x_2^2)}+\frac{1}{\varepsilon^2}\right]\,.
 \end{equation}
 
-
-
-
-
 \newpage
-\begin{thebibliography}{alp}
-
-%\cite{Ball:2009qv}
-\bibitem{Ball:2009qv}
-  R.~D.~Ball {\it et al.} [NNPDF Collaboration],
-  %``Fitting Parton Distribution Data with Multiplicative Normalization Uncertainties,''
-  JHEP {\bf 1005} (2010) 075
-  doi:10.1007/JHEP05(2010)075
-  [arXiv:0912.2276 [hep-ph]].
-  %%CITATION = doi:10.1007/JHEP05(2010)075;%%
-  %84 citations counted in INSPIRE as of 13 May 2018
-
-%\cite{DAgostini:1993arp}
-\bibitem{DAgostini:1993arp}
-  G.~D'Agostini,
-  %``On the use of the covariance matrix to fit correlated data,''
-  Nucl.\ Instrum.\ Meth.\ A {\bf 346} (1994) 306.
-  doi:10.1016/0168-9002(94)90719-6
-  %%CITATION = doi:10.1016/0168-9002(94)90719-6;%%
-  %146 citations counted in INSPIRE as of 13 May 2018
-
-%\cite{Ball:2012wy}
-\bibitem{Ball:2012wy}
-  R.~D.~Ball {\it et al.},
-  %``Parton Distribution Benchmarking with LHC Data,''
-  JHEP {\bf 1304} (2013) 125
-  doi:10.1007/JHEP04(2013)125
-  [arXiv:1211.5142 [hep-ph]].
-  %%CITATION = doi:10.1007/JHEP04(2013)125;%%
-  %102 citations counted in INSPIRE as of 13 May 2018
-
-%\cite{Boughezal:2017nla}
-\bibitem{Boughezal:2017nla}
-  R.~Boughezal, A.~Guffanti, F.~Petriello and M.~Ubiali,
-  %``The impact of the LHC Z-boson transverse momentum data on PDF determinations,''
-  JHEP {\bf 1707} (2017) 130
-  doi:10.1007/JHEP07(2017)130
-  [arXiv:1705.00343 [hep-ph]].
-  %%CITATION = doi:10.1007/JHEP07(2017)130;%%
-  %19 citations counted in INSPIRE as of 13 May 2018
-
-\bibitem{wiki:xxx}
-    Wikipedia contributors,
-    Chi-square distribution --- {Wikipedia}{,} The Free Encyclopedia,
-    2020.
-   % \url{https://en.wikipedia.org/w/index.php?title=Chi-square_distribution&oldid=979585636}
-
-%\cite{Ball:2008by}
-\bibitem{Ball:2008by}
-R.~D.~Ball \textit{et al.} [NNPDF],
-%``A Determination of parton distributions with faithful uncertainty estimation,''
-Nucl. Phys. B \textbf{809} (2009), 1-63
-[erratum: Nucl. Phys. B \textbf{816} (2009), 293]
-doi:10.1016/j.nuclphysb.2008.09.037
-[arXiv:0808.1231 [hep-ph]].
-%286 citations counted in INSPIRE as of 24 Oct 2020
-
-%\cite{Ball:2014uwa}
-\bibitem{Ball:2014uwa}
-R.~D.~Ball \textit{et al.} [NNPDF],
-%``Parton distributions for the LHC Run II,''
-JHEP \textbf{04} (2015), 040
-doi:10.1007/JHEP04(2015)040
-[arXiv:1410.8849 [hep-ph]].
-%2322 citations counted in INSPIRE as of 24 Oct 2020
-
-%\cite{Ball:2009qv}
-\bibitem{Ball:2009qv}
-R.~D.~Ball \textit{et al.} [NNPDF],
-%``Fitting Parton Distribution Data with Multiplicative Normalization Uncertainties,''
-JHEP \textbf{05} (2010), 075
-doi:10.1007/JHEP05(2010)075
-[arXiv:0912.2276 [hep-ph]].
-%115 citations counted in INSPIRE as of 29 Oct 2020
-
-\end{thebibliography}
-
+\bibliographystyle{ieeetr}
+\bibliography{bibliography}
 
 \end{document}

@@ -13,7 +13,7 @@ APFEL++ documentation
    secs/README
    secs/IntegralStucture
    secs/Interpolation
-   .. secs/CovarianceMatrix
+   secs/Statistics
    .. secs/DIS
    .. secs/MatchingConditions
    .. secs/MSbarMass
