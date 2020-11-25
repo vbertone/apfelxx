@@ -1,5 +1,6 @@
 import numpy as np
 import glob
+import re
 
 # Get section files
 secs = glob.glob("./secs/*rst")
@@ -34,6 +35,9 @@ for s in secs:
 
     # Place the word "References" where the list of references starts
     out = out.replace(".. container:: references csl-bib-body hanging-indent", "**References**\n\n.. container:: references csl-bib-body hanging-indent")
+
+    # Comment out :alt: to make figured render
+    out = out.replace("   :alt:", ".. :alt:")
 
     # Close input file
     fin.close()

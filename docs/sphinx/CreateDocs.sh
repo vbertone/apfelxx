@@ -8,7 +8,10 @@ declare -a DocArray=("IntegralStucture" "Interpolation" "Statistics" "CCDIS" "Tr
 
 # Translate tex files into rst using pandoc
 for doc in ${DocArray[@]}; do
-    pandoc -s --toc --citeproc --bibliography=../latex/src/bibliography.bib ../latex/src/$doc.tex -o secs/$doc.rst
+    #pandoc -s --toc --citeproc --bibliography=../latex/src/bibliography.bib ../latex/src/$doc.tex -o secs/$doc.rst
+    pandoc -s ../latex/src/$doc.tex -o secs/$doc.tex
+    pandoc -s --toc --citeproc --bibliography=../latex/src/bibliography.bib secs/$doc.tex -o secs/$doc.rst
+    rm secs/$doc.tex
 done
 
 # Apply some corrections to the rst files
