@@ -3,9 +3,8 @@
 
 ![](https://github.com/vbertone/apfelxx/raw/master/resources/logo.png "Logo APFEL")
 
+__A PDF evolution library in C++__
 
-APFEL++: A PDF evolution library in C++
-=======================================
 
 # Introduction
  
