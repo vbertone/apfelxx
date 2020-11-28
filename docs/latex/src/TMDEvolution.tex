@@ -2339,9 +2339,19 @@ a_s(\mu) = a_s^{\rm NLL}(\mu)\left[1+\mathcal{O}(a_s^2) \right]\,.
 \end{equation}
 Eq.~(\ref{eq:transc2}) can finally be solved for $a_s(\mu)$ obtaining:
 \begin{equation}\label{eq:ansolutnnll}
-  a_s^{\rm NNLL}(\mu)=a_s^{\rm LL}(\mu)\left[1-b_1 a_s^{\rm LL}(\mu) \left[1+ a_s^{\rm NLL}(\mu)\right]\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm
-        LL}(\mu)}\right)+\displaystyle (b_2-b_1^2) a_s^{\rm LL}(\mu) \left[a_s^{\rm
+\begin{array}{rcl}
+  a_s^{\rm NNLL}(\mu)&=&\displaystyle a_s^{\rm LL}(\mu)\bigg[1+b_1 a_s^{\rm LL}(\mu)\ln\left(\frac{a_s^{\rm
+        LL}(\mu)}{a_s(\mu_0)}\right)+\displaystyle (b_2-b_1^2) a_s^{\rm LL}(\mu) \left[a_s^{\rm
+      LL}(\mu)-a_s(\mu_0)\right]\\
+\\
+&+&\displaystyle b_1^2 \left(a_s^{\rm LL}(\mu)\right)^2 \ln\left(\frac{a_s^{\rm
+        LL}(\mu)}{a_s(\mu_0)}\right)\left(1+\ln\left(\frac{a_s^{\rm
+        LL}(\mu)}{a_s(\mu_0)}\right)\right) \bigg]\\
+\\
+&=&\displaystyle a_s^{\rm LL}(\mu)\left[1+b_1 \left[a_s^{\rm NLL}(\mu)+b_1 \left(a_s^{\rm LL}(\mu)\right)^2\right]\ln\left(\frac{a_s^{\rm
+        LL}(\mu)}{a_s(\mu_0)}\right)+\displaystyle (b_2-b_1^2) a_s^{\rm LL}(\mu) \left[a_s^{\rm
       LL}(\mu)-a_s(\mu_0)\right]\right]\,,
+\end{array}
 \end{equation}
 \textit{i.e.} the NNLL-accurate running of the strong coupling.
 
@@ -2819,7 +2829,7 @@ $a_{\rm NNLL}$ that, using Eq.~(\ref{eq:masterf}), reads:
               &=&\displaystyle a_{\rm LL}\left\{1-a_{\rm LL}\left[\overline{b}_1 \ln\left(\frac{a_{\rm
                   LL}}{a_0}\right)+\overline{b}_{2}\left(a_{\rm
                   LL}-a_0\right) \right]+a_{\rm
-                  LL}^2 \overline{b}_1^2\ln\left(\frac{a_{\rm LL}}{a_0}\right)\left(1+\frac12 \ln^2\left(\frac{a_{\rm LL}}{a_0}\right)\right)\right\}+\mathcal{O}(a^4)\,.
+                  LL}^2 \overline{b}_1^2\ln\left(\frac{a_{\rm LL}}{a_0}\right)\left(1+\ln\left(\frac{a_{\rm LL}}{a_0}\right)\right)\right\}+\mathcal{O}(a^4)\,.
 \end{array}
 \end{equation}
 
