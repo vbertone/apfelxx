@@ -14,7 +14,7 @@ APFEL++ documentation
    secs/IntegralStucture
    secs/Interpolation
    secs/Statistics
-   .. secs/DIS
+   secs/StructureFunctions
    .. secs/MatchingConditions
    .. secs/MSbarMass
    .. secs/Transversity
