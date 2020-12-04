@@ -73,6 +73,7 @@ int main()
 
   // Open LHAPDF set
   const std::string pdfset = "NNPDF31_nnlo_as_0118_luxqed";
+  //const std::string pdfset = "CT18NNLO";
   LHAPDF::PDF* distpdf = LHAPDF::mkPDF(pdfset, 0);
 
   // Heavy-quark thresholds
@@ -99,16 +100,13 @@ int main()
   const auto CollPDFs = [&] (double const& mu) -> apfel::Set<apfel::Distribution> { return TabPDFs.Evaluate(mustar(mu, kappa, css)); };
 
   // Initialize TMD objects
-  const auto TmdObj = apfel::InitializeTmdObjects(g, Thresholds);
+  const auto TmdObj = apfel::InitializeTmdObjectsLite(g, Thresholds);
 
   // Alpha_em
   const double aref = 0.007555310522369057;
   const double Qref = 91.15348061918276;
   const bool   arun = false;
   const apfel::AlphaQED alphaem{aref, Qref, Thresholds, {0, 0, 1.777}, 0};
-
-  // Perturbative order
-  const int pt = 3;
 
   // Kinematics
   const double Vs = 13000;
@@ -121,90 +119,110 @@ int main()
   // Timer
   apfel::Timer t;
 
-  // Alpha_s
-  const double asref = 0.118;
-  const double Qsref = 91.1876;
-  apfel::AlphaQCD as{asref, Qsref, Thresholds, std::max(std::abs(pt), 0)};
-  const apfel::TabulateObject<double> tabas{as, 100, 0.9, 1001, 3};
-  const auto Alphas = [&] (double const& mu) -> double{ return tabas.Evaluate(mustar(mu, kappa, css)); };
-
-  // Build evolved TMD PDFs
-  const auto EvTMDPDFs = BuildTmdPDFs(TmdObj, CollPDFs, Alphas, pt, 1);
-
-  // Renormalisation scales
-  const double muf   = Qb;
-  const double zetaf = Qb * Qb;
-	  
-  // Number of active flavours at 'muf'
-  const int nf = apfel::NF(muf, Thresholds);
-
-  // EW charges
-  //const std::vector<double> Bq = apfel::ElectroWeakCharges(Qb, true);
-  const std::vector<double> Bq = EWCharges(Qb);
-	  
-  // Compute Bjorken 'x1' and 'x2'
-  const double xi = exp(yb);
-  const double x1 = Qb * xi / Vs;
-  const double x2 = Qb / xi / Vs;
-	  
-  // Electromagnetic coupling squared
-  const double aem2 = pow((arun ? alphaem.Evaluate(Qb) : aref), 2);
-	  
-  // Compute the hard factor
-  const double hcs = apfel::HardFactorDY(pt, Alphas(muf), nf, 1);
-	  
-  // Construct the TMD luminosity in b space to be fed to be
-  // trasformed in qT space.
-  const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double
+  // Perturbative order
+  for (int pt : {0, 1, 2, 3})
     {
-      // Get Evolved TMD PDFs and rotate them into the physical
-      // basis
-      const std::map<int,apfel::Distribution> xF = QCDEvToPhys(EvTMDPDFs(bstar(b, kappa, css), muf, zetaf).GetObjects());
+      // Uncertainty scaling factor
+      for (int K : {0, -10, 10})
+	{
+	  // Alpha_s
+	  const double asref = 0.118;
+	  const double Qsref = 91.1876;
+	  apfel::AlphaQCD as{asref, Qsref, Thresholds, std::max(std::abs(pt), 0)};
+	  const apfel::TabulateObject<double> tabas{as, 100, 0.9, 1001, 3};
+	  const auto Alphas = [&] (double const& mu) -> double{ return tabas.Evaluate(mustar(mu, kappa, css)); };
+
+	  // Build evolved TMD PDFs
+	  const auto EvTMDPDFs = BuildTmdPDFs(TmdObj, CollPDFs, Alphas, pt, 1);
+
+	  // Renormalisation scales
+	  const double muf   = Qb;
+	  const double zetaf = Qb * Qb;
+	  
+	  // Number of active flavours at 'muf'
+	  const int nf = apfel::NF(muf, Thresholds);
+
+	  // EW charges
+	  //const std::vector<double> Bq = apfel::ElectroWeakCharges(Qb, true);
+	  const std::vector<double> Bq = EWCharges(Qb);
+	  
+	  // Compute Bjorken 'x1' and 'x2'
+	  const double xi = exp(yb);
+	  const double x1 = Qb * xi / Vs;
+	  const double x2 = Qb / xi / Vs;
+	  
+	  // Electromagnetic coupling squared
+	  const double aem2 = pow((arun ? alphaem.Evaluate(Qb) : aref), 2);
+	  
+	  // Compute the hard factor
+	  const double hcs = apfel::HardFactorDY(pt, Alphas(muf), nf, 1);
+	  
+	  // Construct the TMD luminosity in b space to be fed to be
+	  // trasformed in qT space.
+	  const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double
+	    {
+	      // Get Evolved TMD PDFs and rotate them into the physical
+	      // basis
+	      // Modified logs in TMD
+	      const double bs = sqrt(pow(bstar(b, kappa, css), 2) + pow( 2 * exp( - apfel::emc) / Qb, 2));
+	      //const double bs = bstar(b, kappa, css);
+	      const std::map<int,apfel::Distribution> xF = QCDEvToPhys(EvTMDPDFs(bs, muf, zetaf).GetObjects());
 	      
-      // Combine TMDs through the EW charges
-      double lumi = 0;
-      for (int i = 1; i <= nf; i++)
-	lumi += Bq[i-1] * ( xF.at(i).Evaluate(x1) * xF.at(-i).Evaluate(x2) + xF.at(-i).Evaluate(x1) * xF.at(i).Evaluate(x2) );
-	      
-      // Combine all pieces and return
-      return b * lumi;
-    };
+	      // Combine TMDs through the EW charges
+	      double lumi = 0;
+	      for (int i = 1; i <= nf; i++)
+		lumi += Bq[i-1] * ( xF.at(i).Evaluate(x1) * xF.at(-i).Evaluate(x2) + xF.at(-i).Evaluate(x1) * xF.at(i).Evaluate(x2) );
 
-  // Linear scale in qT
-  std::cout << "======================================\n";
-  const int nqT = 50;
-  const double qTmin = 0.001;
-  const double qTmax = 20;
-  const double qTstp = ( qTmax - qTmin ) / ( nqT - 1 );
-  for (double qT = qTmin; qT <= qTmax; qT += qTstp)
-    {
-      // Perform Fourier transform and obtain cross section
-      const auto prefactor = [=] (double const& qTc) -> double { return apfel::ConvFact * qTc * 8 * M_PI * aem2 * hcs / pow(Qb, 3) / 9; };
+	      // Uncertainty factor
+	      double uncf = 1;
+	      if (pt == 0)
+		uncf += K * tabas.Evaluate(2 * exp( - apfel::emc) / bstar(b, kappa, true)) / tabas.Evaluate(Qb);
+	      else
+		uncf += K * ( pow(tabas.Evaluate(2 * exp( - apfel::emc) / bstar(b, kappa, true)), std::abs(pt)) - pow(tabas.Evaluate(Qb), std::abs(pt)) );
 
-      // Integration
-      const double de = prefactor(qT) * DEObj.transform(TMDLumib, qT);
+	      // Combine all pieces and return
+	      return b * lumi * uncf;
+	    };
 
-      // Print results
-      std::cout << std::scientific << Qb << "  " << yb << "  " << qT << "  " << de << std::endl;
+	  // Linear scale in qT
+	  std::cout << "======================================\n";
+	  const int nqT = 100;
+	  const double qTmin = 0.001;
+	  const double qTmax = 20;
+	  const double qTstp = exp( log( qTmax / qTmin ) / ( nqT - 1 ) );
+	  for (double qT = qTmin; qT <= qTmax; qT *= qTstp)
+	    {
+	      // Perform Fourier transform and obtain cross section
+	      //const auto prefactor = [=] (double const& qTc) -> double { return apfel::ConvFact * qTc * 8 * M_PI * aem2 * hcs / pow(Qb, 3) / 9; };
+	      const auto prefactor = [=] (double const& qTc) -> double { return apfel::ConvFact * 4 * M_PI * aem2 * hcs / pow(Qb, 3) / 9; };
+
+	      // Integration
+	      const double de = prefactor(qT) * DEObj.transform(TMDLumib, qT);
+
+	      // Print results
+	      std::cout << std::scientific << Qb << "  " << yb << "  " << qT << "  " << de << std::endl;
+	    }
+	  /*
+	    std::cout << "======================================\n";
+	    const int nbT = 20000;
+	    const double bTmin = 1e-5;
+	    const double bTmax = 3;
+	    const double bTstp = ( bTmax - bTmin ) / ( nbT - 1 );
+	    for (double bT = bTmin; bT <= bTmax; bT += bTstp)
+	    {
+	    // Perform Fourier transform and obtain cross section
+	    const auto prefactor = apfel::ConvFact * 8 * M_PI * aem2 * hcs / pow(Qb, 3) / 9;
+
+	    // Integration
+	    const double de = prefactor * TMDLumib(bT);
+
+	    // Print results
+	    std::cout << std::scientific << Qb << "  " << yb << "  " << bT << "  " << de << "  " << de * j0(bT * 1) << "  " << de * j0(bT * 2) << "  " << de * j0(bT * 3) << "  " << de * j0(bT * 5) << "  " << de * j0(bT * 10) << std::endl;
+	    }
+	    std::cout << std::endl;
+	  */
+	}
     }
-
-  std::cout << "======================================\n";
-  const int nbT = 100;
-  const double bTmin = 1e-5;
-  const double bTmax = 1.5;
-  const double bTstp = ( bTmax - bTmin ) / ( nbT - 1 );
-  for (double bT = bTmin; bT <= bTmax; bT += bTstp)
-    {
-      // Perform Fourier transform and obtain cross section
-      const auto prefactor = apfel::ConvFact * 8 * M_PI * aem2 * hcs / pow(Qb, 3) / 9;
-
-      // Integration
-      const double de = prefactor * TMDLumib(bT);
-
-      // Print results
-      std::cout << std::scientific << Qb << "  " << yb << "  " << bT << "  " << de << std::endl;
-    }
-  std::cout << std::endl;
   t.stop();
   
   delete distpdf;

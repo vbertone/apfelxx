@@ -33,15 +33,16 @@ tests/gpd_test
 tests/polylog_test
 tests/expansion_test
 tests/siaxsec_test
-docs/src/codes/FOvsAsy
-docs/src/codes/logs
-docs/src/codes/EvolutionFactor
-docs/src/codes/LeptonicModulation
-docs/src/codes/PhaseSpaceRedFactor
-docs/src/codes/NewPrescription
-docs/src/codes/PhaseSpacePowerCorrs
-docs/src/codes/Alphas
-docs/src/codes/InterpolationFunctions
+docs/latex/src/codes/FOvsAsy
+docs/latex/src/codes/logs
+docs/latex/src/codes/EvolutionFactor
+docs/latex/src/codes/LeptonicModulation
+docs/latex/src/codes/PhaseSpaceRedFactor
+docs/latex/src/codes/NewPrescription
+docs/latex/src/codes/PhaseSpacePowerCorrs
+docs/latex/src/codes/Alphas
+docs/latex/src/codes/InterpolationFunctions
+docs/latex/src/codes/PDFs
 
 # Compiled Object files
 *.slo
