@@ -55,7 +55,7 @@ namespace apfel
         C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
         C2NNLOnf.insert({DISNCBasis::CS,  O22t});
         C2NNLOnf.insert({DISNCBasis::CG,  O22g});
-        C2NNLO.insert({nf,C2NNLOnf});
+        C2NNLO.insert({nf, C2NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -79,10 +79,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -128,7 +128,7 @@ namespace apfel
         CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
         CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
-        CLNNLO.insert({nf,CLNNLOnf});
+        CLNNLO.insert({nf, CLNNLOnf});
       }
 
     // Vector of distributions to skip
@@ -152,10 +152,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -199,7 +199,7 @@ namespace apfel
         C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
         C3NNLOnf.insert({DISNCBasis::CS,  O32t});
         C3NNLOnf.insert({DISNCBasis::CG,  Zero});
-        C3NNLO.insert({nf,C3NNLOnf});
+        C3NNLO.insert({nf, C3NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -223,10 +223,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -281,9 +281,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), G4LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), G4NLO}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4NLO}});
         }
       return FObj;
     };
@@ -337,9 +337,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), GLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), GLNLO}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLNLO}});
         }
       return FObj;
     };
@@ -395,9 +395,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), G1LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), G1NLO}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1NLO}});
         }
       return FObj;
     };
@@ -444,7 +444,7 @@ namespace apfel
         C2NNLOnf.insert({DISCCBasis::CNS, O22nsp});
         C2NNLOnf.insert({DISCCBasis::CS,  O22t});
         C2NNLOnf.insert({DISCCBasis::CG,  O22g});
-        C2NNLO.insert({nf,C2NNLOnf});
+        C2NNLO.insert({nf, C2NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -473,10 +473,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -519,7 +519,7 @@ namespace apfel
         C2NNLOnf.insert({DISCCBasis::CNS, O22nsm});
         C2NNLOnf.insert({DISCCBasis::CS,  Zero});
         C2NNLOnf.insert({DISCCBasis::CG,  Zero});
-        C2NNLO.insert({nf,C2NNLOnf});
+        C2NNLO.insert({nf, C2NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -548,10 +548,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -597,7 +597,7 @@ namespace apfel
         CLNNLOnf.insert({DISCCBasis::CNS, OL2nsp});
         CLNNLOnf.insert({DISCCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISCCBasis::CG,  OL2g});
-        CLNNLO.insert({nf,CLNNLOnf});
+        CLNNLO.insert({nf, CLNNLOnf});
       }
 
     // Vector of distributions to skip
@@ -626,10 +626,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -671,7 +671,7 @@ namespace apfel
         CLNNLOnf.insert({DISCCBasis::CNS, OL2nsm});
         CLNNLOnf.insert({DISCCBasis::CS,  Zero});
         CLNNLOnf.insert({DISCCBasis::CG,  Zero});
-        CLNNLO.insert({nf,CLNNLOnf});
+        CLNNLO.insert({nf, CLNNLOnf});
       }
 
     // Vector of distributions to skip
@@ -700,10 +700,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISCCBasis{EffCh, false} : DISCCBasis{k, false, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -747,7 +747,7 @@ namespace apfel
         C3NNLOnf.insert({DISCCBasis::CNS, O32nsp});
         C3NNLOnf.insert({DISCCBasis::CS,  O32t});
         C3NNLOnf.insert({DISCCBasis::CG,  Zero});
-        C3NNLO.insert({nf,C3NNLOnf});
+        C3NNLO.insert({nf, C3NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -776,10 +776,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISCCBasis{EffCh, true} : DISCCBasis{k, true, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISCCBasis{EffCh, true} : DISCCBasis{k, true, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -822,7 +822,7 @@ namespace apfel
         C3NNLOnf.insert({DISCCBasis::CNS, O32nsm});
         C3NNLOnf.insert({DISCCBasis::CS,  O32nsm});
         C3NNLOnf.insert({DISCCBasis::CG,  Zero});
-        C3NNLO.insert({nf,C3NNLOnf});
+        C3NNLO.insert({nf, C3NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -851,10 +851,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISCCBasis{EffCh, true} : DISCCBasis{k, true, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISCCBasis{EffCh, true} : DISCCBasis{k, true, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -874,6 +874,10 @@ namespace apfel
                                                                                                                   double              const& lambda)
   {
     Timer t;
+
+    // Make sure that the vector of masses contains all the 6 masses.
+    if (Masses.size() != 6)
+      throw std::runtime_error(error("InitializeF2NCObjectsMassive", "The vector of masses has to contain exactly 6 ordered masses."));
 
     // Determine number of active flavours
     int actnf = 0;
@@ -964,30 +968,34 @@ namespace apfel
           const double M2 = Masses[k-1] * Masses[k-1];
           const double xi = Q2 / M2;
 
+          // Boolean that defines whether xi is withing the allowed
+          // interpolation range
+          const bool xiin = xi >= ximin && xi <= ximax;
+
           // Convolution Basis
-          FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 
           // Set LO non-singlet and singlet coefficient
           // functions to zero (gluon is already zero).
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), Not}});
 
           // Now insert NLO
           std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
-          NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+          NLO.insert({DISNCBasis::CG,  (xiin ? TabO21g.Evaluate(xi) : Zero)});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NLO}});
 
           // Now insert NNLO
           std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
-          NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
-          NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+          NNLO.insert({DISNCBasis::CS,  (xiin ? TabO22s.Evaluate(xi) : Zero)});
+          NNLO.insert({DISNCBasis::CG,  (xiin ? TabO22g.Evaluate(xi) : Zero)});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NNLO}});
 
           // Include the massive bit to the non-singlet coefficient
           // function needed for the light structure functions.
-          for (int i = 0; i <= actnf; i++)
+          if (xiin)
             lNNLOns += TabO22ns.Evaluate(xi);
         }
 
@@ -1000,10 +1008,10 @@ namespace apfel
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
-          FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
+          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
         }
 
       // Total structure function set to zero for now. Need to
@@ -1031,6 +1039,10 @@ namespace apfel
                                                                                                                   double              const& lambda)
   {
     Timer t;
+
+    // Make sure that the vector of masses contains all the 6 masses.
+    if (Masses.size() != 6)
+      throw std::runtime_error(error("InitializeFLNCObjectsMassive", "The vector of masses has to contain exactly 6 ordered masses."));
 
     // Determine number of active flavours
     int actnf = 0;
@@ -1120,30 +1132,34 @@ namespace apfel
           const double M2 = Masses[k-1] * Masses[k-1];
           const double xi = Q2 / M2;
 
+          // Boolean that defines whether xi is withing the allowed
+          // interpolation range
+          const bool xiin = xi >= ximin && xi <= ximax;
+
           // Convolution Basis
-          FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 
           // Set LO non-singlet and singlet coefficient
           // functions to zero (gluon is already zero).
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), Not}});
 
           // Now insert NLO
           std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
-          NLO.insert({DISNCBasis::CG,  TabOL1g.Evaluate(xi)});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+          NLO.insert({DISNCBasis::CG,  (xiin ? TabOL1g.Evaluate(xi) : Zero)});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NLO}});
 
           // Now insert NNLO
           std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
-          NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
-          NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+          NNLO.insert({DISNCBasis::CS,  (xiin ? TabOL2s.Evaluate(xi) : Zero)});
+          NNLO.insert({DISNCBasis::CG,  (xiin ? TabOL2g.Evaluate(xi) : Zero)});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NNLO}});
 
           // Include the massive bit to the non-singlet coefficient
           // function needed for the light structure functions.
-          for (int i = 0; i <= actnf; i++)
+          if (xiin)
             lNNLOns += TabOL2ns.Evaluate(xi);
         }
 
@@ -1157,9 +1173,9 @@ namespace apfel
         {
           // Convolution Basis
           FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
         }
 
       // Total structure function set to zero for now. Need to
@@ -1296,25 +1312,25 @@ namespace apfel
           const double xi = Q2 / M2;
 
           // Convolution Basis
-          FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 
           // Set LO non-singlet and singlet coefficient
           // functions to zero (gluon is already zero).
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), Not}});
 
           // Now insert NLO
           std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
           NLO.insert({DISNCBasis::CG,  TabO21g.Evaluate(xi)});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NLO}});
 
           // Now insert NNLO
           std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
           NNLO.insert({DISNCBasis::CS,  TabO22s.Evaluate(xi)});
           NNLO.insert({DISNCBasis::CG,  TabO22g.Evaluate(xi)});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NNLO}});
 
           // Include the massive bit to the non-singlet coefficient
           // function needed for the light structure functions.
@@ -1332,9 +1348,9 @@ namespace apfel
         {
           // Convolution Basis
           FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
         }
 
       // Total structure function set to zero for now. Need to
@@ -1454,25 +1470,25 @@ namespace apfel
           const double xi = Q2 / M2;
 
           // Convolution Basis
-          FObj.ConvBasis.insert({k,DISNCBasis{k, Ch[k-1]}});
+          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
 
           // Set LO non-singlet and singlet coefficient
           // functions to zero (gluon is already zero).
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k),Not}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), Not}});
 
           // Now insert NLO
           std::map<int, Operator> NLO;
           NLO.insert({DISNCBasis::CNS, Zero});
           NLO.insert({DISNCBasis::CS,  Zero});
           NLO.insert({DISNCBasis::CG,  Om0L1g});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NLO}});
 
           // Now insert NNLO
           std::map<int, Operator> NNLO;
           NNLO.insert({DISNCBasis::CNS, Zero});
           NNLO.insert({DISNCBasis::CS,  TabOL2s.Evaluate(xi)});
           NNLO.insert({DISNCBasis::CG,  TabOL2g.Evaluate(xi)});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k),NNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NNLO}});
 
           // Include the massive bit to the non-singlet coefficient
           // function needed for the light structure functions.
@@ -1490,9 +1506,9 @@ namespace apfel
         {
           // Convolution Basis
           FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
         }
 
       // Total structure function set to zero for now. Need to
@@ -1547,7 +1563,7 @@ namespace apfel
         C2NNLOnf.insert({DISNCBasis::CNS, O22nsp});
         C2NNLOnf.insert({DISNCBasis::CS,  O22t});
         C2NNLOnf.insert({DISNCBasis::CG,  O22g});
-        C2NNLO.insert({nf,C2NNLOnf});
+        C2NNLO.insert({nf, C2NNLOnf});
       }
 
     // Vector of distributions to skip
@@ -1571,10 +1587,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -1620,7 +1636,7 @@ namespace apfel
         CLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
         CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
-        CLNNLO.insert({nf,CLNNLOnf});
+        CLNNLO.insert({nf, CLNNLOnf});
       }
 
     // Vector of distributions to skip
@@ -1644,10 +1660,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -1690,7 +1706,7 @@ namespace apfel
         C3NNLOnf.insert({DISNCBasis::CNS, Zero});
         C3NNLOnf.insert({DISNCBasis::CS,  Zero});
         C3NNLOnf.insert({DISNCBasis::CG,  Zero});
-        C3NNLO.insert({nf,C3NNLOnf});
+        C3NNLO.insert({nf, C3NNLOnf});
       }
     /*
         // NNLO
@@ -1703,7 +1719,7 @@ namespace apfel
             C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
             C3NNLOnf.insert({DISNCBasis::CS,  O32t});
             C3NNLOnf.insert({DISNCBasis::CG,  Zero});
-            C3NNLO.insert({nf,C3NNLOnf});
+            C3NNLO.insert({nf, C3NNLOnf});
           }
     */
     // Vector of distributions to skip
@@ -1727,10 +1743,10 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
-          FObj.ConvBasis.insert({k,(k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
-          FObj.C0.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
-          FObj.C1.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
-          FObj.C2.insert({k,Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
         }
       return FObj;
     };
