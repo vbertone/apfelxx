@@ -23,7 +23,7 @@ namespace apfel
         double coef = 0;
         if (i == k)
           coef = - 1. / i;
-        else if (i >= k+1)
+        else if (i >= k + 1)
           coef = 1. / i / ( i - 1 );
 
         // Change sign to T3 and V3

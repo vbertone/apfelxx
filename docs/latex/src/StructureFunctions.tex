@@ -943,17 +943,18 @@ where $\epsilon$ is an infinitesimal positive number that ensures that
 the case $Q^2=m_j^2$ is included in the second term of the r.h.s. of
 Eq.~(\ref{SumCoef}). Eq.~(\ref{SumCoef}) can be rewritten as:
 \begin{equation}
-\sum_{i=1}^j\hat{C}_i-j\hat{C}_j = \theta(n_f-j)\left[K_jC_+\right]+\theta(j-n_f-1)\left[ C_++n_f C_{\rm PS}\right]\,.
+\sum_{i=1}^j\hat{C}_i-j\hat{C}_j = \theta_{n_fj}\left[K_jC_+\right]+\theta_{j,n_f-1}\left[ C_++n_f C_{\rm PS}\right]\,.
 \end{equation}
-In addition, one can easily see that:
+In addition, neglecting intrinsic heavy-quark contributions, one can
+easily see that:
 \begin{equation}
-f_j = \theta(n_f-j)f_j+\theta(j-n_f-1)\Sigma\,,
+f_j = \theta_{n_fj}f_j+\theta_{j,n_f+1}\Sigma\,,
 \label{SingletReduction}
 \end{equation}
 and thus:
 \begin{equation}
 \sum_{j=2}^{6}\frac{1}{j(j-1)}\left[\sum_{i=1}^j\hat{C}_i-j\hat{C}_j\right]f_j
-= C_+\left[\sum_{j=2}^{nf}\frac{K_j}{j(j-1)}f_j\right]+\left[\sum_{j=n_f+1}^{6}\frac{1}{j(j-1)}\right] \left[ C_++n_f C_{\rm PS}\right]\Sigma\,.
+= C_+\left[\sum_{j=2}^{n_f}\frac{K_j}{j(j-1)}f_j\right]+\left[\sum_{j=n_f+1}^{6}\frac{1}{j(j-1)}\right] \left[ C_++n_f C_{\rm PS}\right]\Sigma\,.
 \end{equation}
 But:
 \begin{equation}
@@ -965,16 +966,24 @@ and moreover:
 \end{equation}
 Finally, putting all pieces together, gives:
 \begin{equation}
-F=\langle e_q^2 \rangle \left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]+C_+\sum_{j=2}^{n_f} d_j f_j\,.
+\begin{array}{rcl}
+F&=&\displaystyle \langle e_q^2 \rangle \left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
+  \right) \Sigma\right]+C_+\sum_{j=2}^{n_f} d_j f_j\\
+\\
+&=&\displaystyle \langle e_q^2
+\rangle \left[C_g g +\frac{1}{6}\left(C_+ + 6C_{\rm PS}
+  \right) \Sigma\right]+C_+\sum_{j=2}^{6} d_j f_j\,.
+\end{array}
 \label{StructureFunctionEvol}
 \end{equation}
-
-It is useful to separate the contributions deriving from the coupling
-of the vector boson to the different quark flavours. To do so, one
-just needs to select the contributions proportional to, say, the
-$k$-th charge $e_k^2$. This is easily done with the following
-replacement:
+The second version of the equation above is particularly useful for
+the implementation because the flavours structure does not have any
+explicit dependence on $n_f$ and does not rely on the absence of
+intrinsic heavy-quark contributions (Eq.~(\ref{SingletReduction})). It
+is useful to separate the contributions deriving from the coupling of
+the vector boson to the different quark flavours. To do so, one just
+needs to select the contributions proportional to, say, the $k$-th
+charge $e_k^2$. This is easily done with the following replacement:
 \begin{equation}
 e_i^2\rightarrow \delta_{ik}e_i^2\,.
 \end{equation}
@@ -984,26 +993,26 @@ This gives:
 \end{equation}
 and:
 \begin{equation}
-d_j \rightarrow \frac{e_k^2\left[\theta(j-k)-j\delta_{kj}\right]}{j(j-1)}=\theta(Q^2-m_k^2) e_k^2\frac{\left[\theta(j-k)-j\delta_{kj}\right]}{j(j-1)}\,,
+d_j \rightarrow \frac{e_k^2\left[\theta_{jk}-j\delta_{kj}\right]}{j(j-1)}=\theta(Q^2-m_k^2) e_k^2\frac{\left[\theta_{jk}-j\delta_{kj}\right]}{j(j-1)}\,,
 \end{equation}
 so that the component of the structure function $F$ associated to the
 $k$-th quark flavour is:
 \begin{equation}
 \begin{array}{rcl}
-F^{(k)} &=&\displaystyle  \theta(Q^2-m_k^2) e_k^2\left\{\left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]+C_+\sum_{j=2}^{n_f}
-            \frac{\left[\theta(j-k)-j\delta_{kj}\right]}{j(j-1)} f_j
+F^{(k)} &=&\displaystyle  \theta(Q^2-m_k^2) e_k^2\left\{\left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm PS} \right) \Sigma\right]+C_+\sum_{j=2}^{6}
+            \frac{\left[\theta_{jk}-j\delta_{kj}\right]}{j(j-1)} f_j
             \right\}\\
 \\
-&=& \displaystyle \theta(Q^2-m_k^2) e_k^2\left\{\left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]-\frac{1}{k}C_+f_k+C_+\sum_{j=k+1}^{n_f}
+&=& \displaystyle \theta(Q^2-m_k^2) e_k^2\left\{\left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm PS} \right) \Sigma\right]-\frac{1}{k}C_+f_k+C_+\sum_{j=k+1}^{6}
             \frac{1}{j(j-1)} f_j
             \right\}
 \end{array}
+\label{eq:StructureFunctionSingle}
 \end{equation}
 and it is such that:
 \begin{equation}
 F = \sum_{k=1}^6 F^{(k)}\,.
+\label{eq:StructureFunctionSingleSum}
 \end{equation}
 
 Phenomenologically relevant combinations are the light component, that
@@ -1011,8 +1020,7 @@ includes the contribution of down, up, and strange, and the three
 heavy quark components (even though the top component is typically not
 relevant). The light component is defined as:
 \begin{equation}
-F^l = \sum_{k=1}^3 F^{(k)}= \langle e_l^2 \rangle \left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]+C_+\sum_{j=2}^{n_f} d_j^{(l)} f_j\,.
+F^l = \sum_{k=1}^3 F^{(k)}= \langle e_l^2 \rangle \left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm PS} \right) \Sigma\right]+C_+\sum_{j=2}^{6} d_j^{(l)} f_j\,.
 \end{equation}
 where:
 \begin{equation}
@@ -1035,28 +1043,24 @@ d_j^{(l)}=
 no need of the $\theta$-functions as the scale $Q$ will always be
 above the strange threshold. Therefore, the explicit form of $F^l$ is:
 \begin{equation}
-F^l = \langle e_l^2 \rangle \left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right)
-  \Sigma\right]+\frac{1}{2}(e_u^2-e_d^2)C_+T_3+\frac{1}{6}(e_u^2+e_d^2-2e_s^2)C_+T_8+\langle
-e_l^2 \rangle C_+\sum_{j=4}^{n_f} \frac{1}{j(j-1)} f_j\,.
+F^l = \langle e_l^2 \rangle \left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm
+      PS} \right) \Sigma\right]+\frac{1}{2}(e_u^2-e_d^2)C_+T_3+\frac{1}{6}(e_u^2+e_d^2-2e_s^2)C_+T_8+\langle
+e_l^2 \rangle C_+\sum_{j=4}^{6} \frac{1}{j(j-1)} f_j\,.
 \label{LightSF}
 \end{equation}
 
 The heavy-quark components are instead defined as:
 \begin{equation}
 \begin{array}{rcl}
-F^c &=& \displaystyle \theta(Q^2-m_c^2) e_c^2\left\{\left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]-\frac{1}{4}C_+T_{15}+C_+\sum_{j=5}^{n_f}
+F^c &=& \displaystyle \theta(Q^2-m_c^2) e_c^2\left\{\left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm PS} \right) \Sigma\right]-\frac{1}{4}C_+T_{15}+C_+\sum_{j=5}^{6}
             \frac{1}{j(j-1)} f_j
             \right\}\,,\\
 \\
-F^b &=& \displaystyle \theta(Q^2-m_b^2) e_b^2\left\{\left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]-\frac{1}{5}C_+T_{24}+C_+\sum_{j=6}^{n_f}
+F^b &=& \displaystyle \theta(Q^2-m_b^2) e_b^2\left\{\left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm PS} \right) \Sigma\right]-\frac{1}{5}C_+T_{24}+C_+\sum_{j=6}^{6}
             \frac{1}{j(j-1)} f_j
             \right\}\,,\\
 \\
-F^t &=& \displaystyle \theta(Q^2-m_t^2) e_t^2\left\{\left[C_g g +\left(C_{\rm PS} +\frac1{n_f}C_+
-  \right) \Sigma\right]-\frac{1}{6}C_+T_{35}\right\}\,.
+F^t &=& \displaystyle \theta(Q^2-m_t^2) e_t^2\left\{\left[C_g g +\frac{1}{6}\left(C_++6 C_{\rm PS} \right) \Sigma\right]-\frac{1}{6}C_+T_{35}\right\}\,.
 \end{array}
 \label{HeavySF}
 \end{equation}
@@ -1077,15 +1081,55 @@ only differences being that:
 \end{itemize}
 Following this recipe, one finds:
 \begin{equation}
-F_3=\langle c_q^2 \rangle \frac1{n_f}C_- V+C_-\sum_{j=2}^{n_f} d_j
+F_3=\langle c_q^2 \rangle \frac1{6}C_- V+C_-\sum_{j=2}^{6} d_j
 g_j\,,
 \label{StructureFunctionEvolF3}
 \end{equation}
 where $g_j$ runs over $\{V,V_3,V_8,V_{15},V_{24},V_{35}\}$.
 
-Eq.~(\ref{StructureFunctionEvol}), explicitly written in
-Eqs.~(\ref{LightSF}) and~(\ref{HeavySF}), is the final result that
-allows us to implement the scale variation formulae given in
+Despite Eq.~(\ref{eq:StructureFunctionSingle}) has been derived in the
+ZM scheme, it can be generalised to the massive scheme. The
+complication is that, due to the explicit dependence of the
+coefficient functions on the $k$-th quark mass,\footnote{In general,
+  the $k$-th structure function will not only depend on the $k$-th
+  mass but also on the other masses. However, in the neutral-current
+  case and neglecting intrinsic heavy-quark contributions, the
+  dependence on masses other than the $k$-th one in the coefficient
+  functions only enters at $\mathcal{O}(\alpha_s^3)$ and therefore
+  will be neglected here.} the $k$-th structure function will read:
+\begin{equation}
+F^{{\rm M},(k)} =  e_k^2\left\{\left[C_g^{(k)} g
+    +\frac{1}{6}\left(C_+^{(k)} + 6C_{\rm PS}^{(k)}
+  \right) \Sigma\right]+C_+^{(k)}\sum_{j=2}^{6}
+            \frac{\left[\theta_{jk}-j\delta_{kj}\right]}{j(j-1)} f_j
+            \right\}\,,
+\label{eq:StructureFunctionSingleHeavy}
+\end{equation}
+where an explicit dependence of the index $k$ has been introduced in
+the coefficient functions. This dependence invalidates the equality in
+Eq.~(\ref{eq:StructureFunctionSingleSum}) where $F$ is given in
+Eq.~(\ref{StructureFunctionEvol}). Therefore, in order to compute
+inclusive structure functions in the massive case a different
+combination is to be taken. Specifically one defines:
+\begin{equation}
+F^{{\rm M}} = \sum_{k=1}^6F^{{\rm M},(k)} =  \left[\langle C_g\rangle g +\frac{1}{6}\langle C_{q}\rangle \Sigma\right]+\sum_{j=2}^{6}
+            \frac{\langle C_{\rm +}\rangle_j}{j(j-1)} f_j\,,
+\label{eq:StructureFunctionHeavy}
+\end{equation}
+with the  definitions:
+\begin{equation}
+\begin{array}{rcl}
+  \langle C_g\rangle &=&\displaystyle \sum_{k=1}^6e_k^2 C_g^{(k)}\,,\\
+  \\
+  \langle C_{q}\rangle &=&\displaystyle \sum_{k=1}^6e_k^2
+                               \left(C_+^{(k)} +6C_{\rm PS}^{(k)} \right)\,,\\
+  \\
+  \langle C_{\rm +}\rangle_j &=&\displaystyle \sum_{k=1}^6e_k^2\left[\theta_{jk}-j\delta_{kj}\right]C_+^{(k)}=\sum_{k=1}^{j-1}e_k^2C_+^{(k)}+e_j^2(1-j)C_+^{(j)}\,.
+\end{array}
+\end{equation}
+
+Eq.~(\ref{StructureFunctionEvol}) is the result that allows us to
+implement the scale variation formulae given in
 Eq.~(\ref{generalizedCF}) in {\tt APFEL++}. An important aspect of
 Eq.~(\ref{StructureFunctionEvol}) is that it is written in terms of
 the fundamental coefficient functions $C_g$, $C_+$ and $C_{\rm PS}$

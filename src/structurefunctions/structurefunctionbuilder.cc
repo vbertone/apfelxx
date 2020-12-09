@@ -15,6 +15,8 @@
 #include "apfel/zeromasscoefficientfunctionsunp_tl.h"
 #include "apfel/tabulateobject.h"
 
+#include <numeric>
+
 namespace apfel
 {
   //_____________________________________________________________________________
@@ -907,8 +909,8 @@ namespace apfel
     C2NLO.insert({DISNCBasis::CG,  O21g});
 
     // NNLO
-    const Operator O22ps {g, C22ps{}, IntEps};
-    const Operator O22g  {g, C22g{},  IntEps};
+    const Operator O22ps {g, C22ps{},       IntEps};
+    const Operator O22g  {g, C22g{},        IntEps};
     const Operator O22nsp{g, C22nsp{actnf}, IntEps};
     const Operator O22t = O22nsp + 6 * O22ps;
 
@@ -1014,13 +1016,27 @@ namespace apfel
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
         }
 
-      // Total structure function set to zero for now. Need to
-      // construct it a posteriori as a sum of light and heavy
-      // components.
-      FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
-      FObj.C0.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
-      FObj.C1.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
-      FObj.C2.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+      // Total structure function. This simple construction is based
+      // on the fact that up to O(as^2) there are no non-singlet
+      // contributions to the massive components.
+      std::vector<double> ChL(6, 0.);
+      std::map<int, Operator> C2NLOtot  = C2NLO;
+      std::map<int, Operator> C2NNLOtot = C2NNLO;
+      for (int k = 0; k < actnf; k++)
+        ChL[k] += Ch[k];
+      const double SumChL = accumulate(ChL.begin(), ChL.end(), 0.);
+      for (int k = actnf + 1; k <= 6; k++)
+        {
+          const double wch = Ch[k-1] / SumChL;
+          C2NLOtot.at(DISNCBasis::CG)  += wch * FObj.C1.at(k).GetObjects().at(DISNCBasis::CG);
+          C2NNLOtot.at(DISNCBasis::CS) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CS);
+          C2NNLOtot.at(DISNCBasis::CG) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CG);
+        }
+
+      FObj.ConvBasis.insert({0, DISNCBasis{ChL}});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2LO}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NLOtot}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NNLOtot}});
       return FObj;
     };
     t.stop();
@@ -1071,8 +1087,8 @@ namespace apfel
     CLNLO.insert({DISNCBasis::CG,  OL1g});
 
     // NNLO
-    const Operator OL2ps {g, CL2ps{}, IntEps};
-    const Operator OL2g  {g, CL2g{},  IntEps};
+    const Operator OL2ps {g, CL2ps{},       IntEps};
+    const Operator OL2g  {g, CL2g{},        IntEps};
     const Operator OL2nsp{g, CL2nsp{actnf}, IntEps};
     const Operator OL2t = OL2nsp + 6 * OL2ps;
 
@@ -1178,13 +1194,27 @@ namespace apfel
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
         }
 
-      // Total structure function set to zero for now. Need to
-      // construct it a posteriori as a sum of light and heavy
-      // components.
-      FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
-      FObj.C0.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
-      FObj.C1.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
-      FObj.C2.insert({0,Set<Operator>{FObj.ConvBasis.at(0), Not}});
+      // Total structure function. This simple construction is based
+      // on the fact that up to O(as^2) there are no non-singlet
+      // contributions to the massive components.
+      std::vector<double> ChL(6, 0.);
+      std::map<int, Operator> CLNLOtot  = CLNLO;
+      std::map<int, Operator> CLNNLOtot = CLNNLO;
+      for (int k = 0; k < actnf; k++)
+        ChL[k] += Ch[k];
+      const double SumChL = accumulate(ChL.begin(), ChL.end(), 0.);
+      for (int k = actnf + 1; k <= 6; k++)
+        {
+          const double wch = Ch[k-1] / SumChL;
+          CLNLOtot.at(DISNCBasis::CG)  += wch * FObj.C1.at(k).GetObjects().at(DISNCBasis::CG);
+          CLNNLOtot.at(DISNCBasis::CS) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CS);
+          CLNNLOtot.at(DISNCBasis::CG) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CG);
+        }
+
+      FObj.ConvBasis.insert({0, DISNCBasis{ChL}});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLLO}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNLOtot}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNNLOtot}});
       return FObj;
     };
     t.stop();
