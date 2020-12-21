@@ -163,10 +163,7 @@ namespace apfel
   {
     double result = 0;
     for (auto const& t : _terms)
-      if (t.coefficient == 1)
-        result += t.object1.Evaluate(x) * t.object2.Evaluate(z);
-      else
-        result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
+      result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
     return result;
   }
 
@@ -196,10 +193,7 @@ namespace apfel
   {
     double result = 0;
     for (auto const& t : _terms)
-      if (t.coefficient == 1)
-        result += t.object1.Derive(x) * t.object2.Derive(z);
-      else
-        result += t.coefficient * t.object1.Derive(x) * t.object2.Derive(z);
+      result += t.coefficient * t.object1.Derive(x) * t.object2.Derive(z);
     return result;
   }
 
@@ -229,10 +223,7 @@ namespace apfel
   {
     double result = 0;
     for (auto const& t : _terms)
-      if (t.coefficient == 1)
-        result += t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
-      else
-        result += t.coefficient * t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
+      result += t.coefficient * t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
     return result;
   }
 
@@ -253,6 +244,32 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object2.Integrate(zl, zu) * _terms[0].object1;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object2.Integrate(zl, zu) * _terms[i].object1;
+    return result;
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  double DoubleObject<Distribution>::Integrate(double const& xl, double const& xu, std::function<double(double const&)> zlx, std::function<double(double const&)> zux) const
+  {
+    double result = 0;
+    for (auto const& t : _terms)
+      // Multiply the first object by the function of the first
+      // variable given by the integral of the second object over the
+      // x-dependent range. Finally integrate over x.
+      result += t.coefficient * ([=] (double const& x) -> double{ return t.object2.Integrate(zlx(x), zux(x)); } * t.object1).Integrate(xl, xu);
+    return result;
+  }
+
+  //_________________________________________________________________________________
+  template<>
+  double DoubleObject<Distribution>::Integrate(std::function<double(double const&)> xlz, std::function<double(double const&)> xuz, double const& zl, double const& zu) const
+  {
+    double result = 0;
+    for (auto const& t : _terms)
+      // Multiply the second object by the function of the second
+      // variable given by the integral of the first object over the
+      // z-dependent range. Finally integrate over z.
+      result += t.coefficient * ([=] (double const& z) -> double{ return t.object1.Integrate(xlz(z), xuz(z)); } * t.object2).Integrate(zl, zu);
     return result;
   }
 

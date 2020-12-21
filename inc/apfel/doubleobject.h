@@ -138,6 +138,28 @@ namespace apfel
     U Integrate2(double const& zl, double const& zu) const;
 
     /**
+     * @brief Function that evaluates the integral of the double
+     * distribution.
+     * @param xl: value of the lower bound of the of the first variable
+     * @param xu: value of the upper bound of the of the first variable
+     * @param zlx: function that delimits the lower bound of the integral in z as a function of x
+     * @param zux: function that delimits the upper bound of the integral in z as a function of x
+     * @return The value of the integral of the double distribution
+     */
+    double Integrate(double const& xl, double const& xu, std::function<double(double const&)> zlx, std::function<double(double const&)> zux) const;
+
+    /**
+     * @brief Function that evaluates the integral of the double
+     * distribution.
+     * @param xlz: function that delimits the lower bound of the integral in x as a function of z
+     * @param xuz: function that delimits the upper bound of the integral in x as a function of z
+     * @param zl: value of the lower bound of the of the second variable
+     * @param zu: value of the upper bound of the of the seconf variable
+     * @return The value of the integral of the double distribution
+     */
+    double Integrate(std::function<double(double const&)> xlz, std::function<double(double const&)> xuz, double const& zl, double const& zu) const;
+
+    /**
      * @brief This function multiplies the objects of the single terms
      * of the DoubleObject by a respective function.
      * @param fx: that function that multiplies the first distribution
