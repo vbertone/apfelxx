@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['gammafg_1703',['GammaFg',['../structapfel_1_1TmdObjects.html#a31eabe8936b49708f2d3586627f73b0d',1,'apfel::TmdObjects']]],
-  ['gammafq_1704',['GammaFq',['../structapfel_1_1TmdObjects.html#a61484a54d9a8d73273a85317a81f55d6',1,'apfel::TmdObjects']]],
-  ['gammak_1705',['GammaK',['../structapfel_1_1TmdObjects.html#a7a7ec7657f92d1245b36b3cc61701d3a',1,'apfel::TmdObjects']]],
-  ['gammaw_1706',['GammaW',['../group__PhysConstants.html#ga88a6077298cefab58b2272f65c05c75b',1,'apfel']]],
-  ['gammaz_1707',['GammaZ',['../group__PhysConstants.html#gabd11d74b7dcb591975dc2695b9f887ec',1,'apfel']]],
-  ['gaussaccuracy_1708',['GaussAccuracy',['../structapfel_1_1EvolutionSetup.html#a54c93d3a7ba5755aeef82ef251831c2d',1,'apfel::EvolutionSetup']]],
-  ['gfermi_1709',['GFermi',['../group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779',1,'apfel']]],
-  ['gkj_1710',['Gkj',['../namespaceapfel.html#ad6198ef2377e81a2fd6a5cbe081bffbf',1,'apfel']]],
-  ['gridparameters_1711',['GridParameters',['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup']]]
+  ['gammafg_1714',['GammaFg',['../structapfel_1_1TmdObjects.html#a31eabe8936b49708f2d3586627f73b0d',1,'apfel::TmdObjects']]],
+  ['gammafq_1715',['GammaFq',['../structapfel_1_1TmdObjects.html#a61484a54d9a8d73273a85317a81f55d6',1,'apfel::TmdObjects']]],
+  ['gammak_1716',['GammaK',['../structapfel_1_1TmdObjects.html#a7a7ec7657f92d1245b36b3cc61701d3a',1,'apfel::TmdObjects']]],
+  ['gammaw_1717',['GammaW',['../group__PhysConstants.html#ga88a6077298cefab58b2272f65c05c75b',1,'apfel']]],
+  ['gammaz_1718',['GammaZ',['../group__PhysConstants.html#gabd11d74b7dcb591975dc2695b9f887ec',1,'apfel']]],
+  ['gaussaccuracy_1719',['GaussAccuracy',['../structapfel_1_1EvolutionSetup.html#a54c93d3a7ba5755aeef82ef251831c2d',1,'apfel::EvolutionSetup']]],
+  ['gfermi_1720',['GFermi',['../group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779',1,'apfel']]],
+  ['gkj_1721',['Gkj',['../namespaceapfel.html#ad6198ef2377e81a2fd6a5cbe081bffbf',1,'apfel']]],
+  ['gridparameters_1722',['GridParameters',['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup']]]
 ];

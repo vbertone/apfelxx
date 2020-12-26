@@ -119,6 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5647585eef952847e24e1c850abcf013"><td class="memItemLeft" align="right" valign="top">U&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1DoubleObject.html#a5647585eef952847e24e1c850abcf013">Integrate2</a> (double const &amp;zl, double const &amp;zu) const</td></tr>
 <tr class="memdesc:a5647585eef952847e24e1c850abcf013"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of the double object in the second variable leaving the first undetermined.  <a href="classapfel_1_1DoubleObject.html#a5647585eef952847e24e1c850abcf013">More...</a><br /></td></tr>
 <tr class="separator:a5647585eef952847e24e1c850abcf013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0085e8a1d36b479d9475ace4583ad24"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1DoubleObject.html#aa0085e8a1d36b479d9475ace4583ad24">Integrate</a> (double const &amp;xl, double const &amp;xu, std::function&lt; double(double const &amp;)&gt; zlx, std::function&lt; double(double const &amp;)&gt; zux) const</td></tr>
+<tr class="memdesc:aa0085e8a1d36b479d9475ace4583ad24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the integral of the double distribution.  <a href="classapfel_1_1DoubleObject.html#aa0085e8a1d36b479d9475ace4583ad24">More...</a><br /></td></tr>
+<tr class="separator:aa0085e8a1d36b479d9475ace4583ad24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cfcb9f79cdf1dc942c1f2378a8879a2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1DoubleObject.html#a5cfcb9f79cdf1dc942c1f2378a8879a2">Integrate</a> (std::function&lt; double(double const &amp;)&gt; xlz, std::function&lt; double(double const &amp;)&gt; xuz, double const &amp;zl, double const &amp;zu) const</td></tr>
+<tr class="memdesc:a5cfcb9f79cdf1dc942c1f2378a8879a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the integral of the double distribution.  <a href="classapfel_1_1DoubleObject.html#a5cfcb9f79cdf1dc942c1f2378a8879a2">More...</a><br /></td></tr>
+<tr class="separator:a5cfcb9f79cdf1dc942c1f2378a8879a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1b631d17da1e7845ccc99b318e810b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; T, U &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1DoubleObject.html#ac1b631d17da1e7845ccc99b318e810b1">MultiplyBy</a> (std::function&lt; double(double const &amp;)&gt; const &amp;fx, std::function&lt; double(double const &amp;)&gt; const &amp;fz)</td></tr>
 <tr class="memdesc:ac1b631d17da1e7845ccc99b318e810b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function multiplies the objects of the single terms of the <a class="el" href="classapfel_1_1DoubleObject.html" title="The DoubleObject class is a collection of pairs of single objects (Distributions or Operators) accomp...">DoubleObject</a> by a respective function.  <a href="classapfel_1_1DoubleObject.html#ac1b631d17da1e7845ccc99b318e810b1">More...</a><br /></td></tr>
 <tr class="separator:ac1b631d17da1e7845ccc99b318e810b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -474,7 +480,7 @@ template&lt;class T , class U  = T&gt; </div>
 </div>
 </div>
 <a id="a6f172200f714a48916001c9d0181437c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f172200f714a48916001c9d0181437c">&#9670;&nbsp;</a></span>Integrate()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f172200f714a48916001c9d0181437c">&#9670;&nbsp;</a></span>Integrate() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -520,6 +526,114 @@ template&lt;class T , class U  = T&gt; </div>
     <tr><td class="paramname">xu</td><td>value of the upper bound of the of the first variable </td></tr>
     <tr><td class="paramname">zl</td><td>value of the lower bound of the of the second variable </td></tr>
     <tr><td class="paramname">zu</td><td>value of the upper bound of the of the second variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the integral of the double distribution </dd></dl>
+
+</div>
+</div>
+<a id="aa0085e8a1d36b479d9475ace4583ad24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0085e8a1d36b479d9475ace4583ad24">&#9670;&nbsp;</a></span>Integrate() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class U  = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classapfel_1_1DoubleObject.html">apfel::DoubleObject</a>&lt; T, U &gt;::Integrate </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>zlx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>zux</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that evaluates the integral of the double distribution. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xl</td><td>value of the lower bound of the of the first variable </td></tr>
+    <tr><td class="paramname">xu</td><td>value of the upper bound of the of the first variable </td></tr>
+    <tr><td class="paramname">zlx</td><td>function that delimits the lower bound of the integral in z as a function of x </td></tr>
+    <tr><td class="paramname">zux</td><td>function that delimits the upper bound of the integral in z as a function of x </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the integral of the double distribution </dd></dl>
+
+</div>
+</div>
+<a id="a5cfcb9f79cdf1dc942c1f2378a8879a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cfcb9f79cdf1dc942c1f2378a8879a2">&#9670;&nbsp;</a></span>Integrate() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class U  = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classapfel_1_1DoubleObject.html">apfel::DoubleObject</a>&lt; T, U &gt;::Integrate </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>xlz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>xuz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>zl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>zu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that evaluates the integral of the double distribution. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xlz</td><td>function that delimits the lower bound of the integral in x as a function of z </td></tr>
+    <tr><td class="paramname">xuz</td><td>function that delimits the upper bound of the integral in x as a function of z </td></tr>
+    <tr><td class="paramname">zl</td><td>value of the lower bound of the of the second variable </td></tr>
+    <tr><td class="paramname">zu</td><td>value of the upper bound of the of the seconf variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -870,7 +984,7 @@ template&lt;class T , class U  = T&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 23 2020 17:19:11 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Sat Dec 26 2020 17:05:13 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

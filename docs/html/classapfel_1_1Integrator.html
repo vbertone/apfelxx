@@ -70,8 +70,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classapfel_1_1Integrator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">apfel::Integrator Class Reference</div>  </div>
@@ -83,46 +81,72 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="integrator_8h_source.html">integrator.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:add54e5b8b4534d491e42eb3d56e322a9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#add54e5b8b4534d491e42eb3d56e322a9">integrate</a> (double const &amp;xmin, double const &amp;xmax, double const &amp;eps) const</td></tr>
-<tr class="memdesc:add54e5b8b4534d491e42eb3d56e322a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy.  <a href="classapfel_1_1Integrator.html#add54e5b8b4534d491e42eb3d56e322a9">More...</a><br /></td></tr>
-<tr class="separator:add54e5b8b4534d491e42eb3d56e322a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c9d50d435897936339e1b9ec6ff609a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a5c9d50d435897936339e1b9ec6ff609a">integrate</a> (double const &amp;xmin, double const &amp;xmax, std::vector&lt; double &gt; const &amp;FixPts, double const &amp;eps) const</td></tr>
-<tr class="memdesc:a5c9d50d435897936339e1b9ec6ff609a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range.  <a href="classapfel_1_1Integrator.html#a5c9d50d435897936339e1b9ec6ff609a">More...</a><br /></td></tr>
-<tr class="separator:a5c9d50d435897936339e1b9ec6ff609a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf8c7312b39b8625cbd20ca7bf04240e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#adf8c7312b39b8625cbd20ca7bf04240e">integrate</a> (double const &amp;xmin, double const &amp;xmax, int const &amp;m) const</td></tr>
-<tr class="memdesc:adf8c7312b39b8625cbd20ca7bf04240e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using a given number of point for the gauss quadrature.  <a href="classapfel_1_1Integrator.html#adf8c7312b39b8625cbd20ca7bf04240e">More...</a><br /></td></tr>
-<tr class="separator:adf8c7312b39b8625cbd20ca7bf04240e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f8eb6c449fca9e2891295277fae8b12"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a3f8eb6c449fca9e2891295277fae8b12">integrand</a> (double const &amp;x) const</td></tr>
-<tr class="memdesc:a3f8eb6c449fca9e2891295277fae8b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the integrand.  <a href="classapfel_1_1Integrator.html#a3f8eb6c449fca9e2891295277fae8b12">More...</a><br /></td></tr>
-<tr class="separator:a3f8eb6c449fca9e2891295277fae8b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Constructors</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>List of constructors. </p>
-</div></td></tr>
-<tr class="memitem:a664f8704c32d7b50b3f85afbfd3c3533"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a664f8704c32d7b50b3f85afbfd3c3533">Integrator</a> (std::function&lt; double(double const &amp;)&gt; const &amp;func)</td></tr>
-<tr class="memdesc:a664f8704c32d7b50b3f85afbfd3c3533"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> constructor.  <a href="classapfel_1_1Integrator.html#a664f8704c32d7b50b3f85afbfd3c3533">More...</a><br /></td></tr>
-<tr class="separator:a664f8704c32d7b50b3f85afbfd3c3533"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a923664bfb17fb4208482465ff74dfb36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a923664bfb17fb4208482465ff74dfb36">Integrator</a> (std::function&lt; double(double const &amp;, double const &amp;)&gt; const &amp;func2, double const &amp;arg2)</td></tr>
-<tr class="memdesc:a923664bfb17fb4208482465ff74dfb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> constructor.  <a href="classapfel_1_1Integrator.html#a923664bfb17fb4208482465ff74dfb36">More...</a><br /></td></tr>
-<tr class="separator:a923664bfb17fb4208482465ff74dfb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa61c8d98d61b769fa8eeaacbb901f7d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#afa61c8d98d61b769fa8eeaacbb901f7d">Integrator</a> (std::function&lt; double(double const &amp;, double const &amp;, double const &amp;)&gt; const &amp;func3, double const &amp;arg2, double const &amp;arg3)</td></tr>
-<tr class="memdesc:afa61c8d98d61b769fa8eeaacbb901f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> constructor.  <a href="classapfel_1_1Integrator.html#afa61c8d98d61b769fa8eeaacbb901f7d">More...</a><br /></td></tr>
-<tr class="separator:afa61c8d98d61b769fa8eeaacbb901f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Enumerator the current integration methods</div></td></tr>
+<tr class="memitem:a154c2d6265d9f74c7c290baae3d78a6f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a> : int { <a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6fae0adf3a718f64744c704c10da3574b5f">GAUSS_LEGENDRE</a>, 
+<a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6fafd1dc90abc138f251766342ddbe76500">GAUSS_KRONROD</a>
+ }</td></tr>
+<tr class="separator:a154c2d6265d9f74c7c290baae3d78a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Constructors</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrp559a25fdb98a7d1fd1c3771ac568d5e9"></a>List of constructors. </p>
+</td></tr>
 <tr class="memitem:a155dc87904d2035723fa06d80670a5f8"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a155dc87904d2035723fa06d80670a5f8">_func</a></td></tr>
 <tr class="memdesc:a155dc87904d2035723fa06d80670a5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The integrand function.  <a href="classapfel_1_1Integrator.html#a155dc87904d2035723fa06d80670a5f8">More...</a><br /></td></tr>
 <tr class="separator:a155dc87904d2035723fa06d80670a5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e2fd4f5130b504f674903e0727e0d09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a7e2fd4f5130b504f674903e0727e0d09">_method</a></td></tr>
+<tr class="memdesc:a7e2fd4f5130b504f674903e0727e0d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">The integration method.  <a href="classapfel_1_1Integrator.html#a7e2fd4f5130b504f674903e0727e0d09">More...</a><br /></td></tr>
+<tr class="separator:a7e2fd4f5130b504f674903e0727e0d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c2d7c58d24e0d7a0bbbd95f01a1d0c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a9c2d7c58d24e0d7a0bbbd95f01a1d0c9">Integrator</a> (std::function&lt; double(double const &amp;)&gt; const &amp;func, <a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a> const &amp;method=<a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6fafd1dc90abc138f251766342ddbe76500">GAUSS_KRONROD</a>)</td></tr>
+<tr class="memdesc:a9c2d7c58d24e0d7a0bbbd95f01a1d0c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> constructor.  <a href="classapfel_1_1Integrator.html#a9c2d7c58d24e0d7a0bbbd95f01a1d0c9">More...</a><br /></td></tr>
+<tr class="separator:a9c2d7c58d24e0d7a0bbbd95f01a1d0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add54e5b8b4534d491e42eb3d56e322a9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#add54e5b8b4534d491e42eb3d56e322a9">integrate</a> (double const &amp;xmin, double const &amp;xmax, double const &amp;eps) const</td></tr>
+<tr class="memdesc:add54e5b8b4534d491e42eb3d56e322a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using the method defined in the constructor.  <a href="classapfel_1_1Integrator.html#add54e5b8b4534d491e42eb3d56e322a9">More...</a><br /></td></tr>
+<tr class="separator:add54e5b8b4534d491e42eb3d56e322a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a132a4f762481a50b4926458c2ec830e7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a132a4f762481a50b4926458c2ec830e7">integrateGL</a> (double const &amp;xmin, double const &amp;xmax, double const &amp;eps) const</td></tr>
+<tr class="memdesc:a132a4f762481a50b4926458c2ec830e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using the Gauss-Legendre method.  <a href="classapfel_1_1Integrator.html#a132a4f762481a50b4926458c2ec830e7">More...</a><br /></td></tr>
+<tr class="separator:a132a4f762481a50b4926458c2ec830e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2e34f065bc5fe64373f6daca5df69c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a0b2e34f065bc5fe64373f6daca5df69c">integrateGK</a> (double const &amp;xmin, double const &amp;xmax, double const &amp;eps) const</td></tr>
+<tr class="memdesc:a0b2e34f065bc5fe64373f6daca5df69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using the Gauss-Kronrod method.  <a href="classapfel_1_1Integrator.html#a0b2e34f065bc5fe64373f6daca5df69c">More...</a><br /></td></tr>
+<tr class="separator:a0b2e34f065bc5fe64373f6daca5df69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c9d50d435897936339e1b9ec6ff609a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a5c9d50d435897936339e1b9ec6ff609a">integrate</a> (double const &amp;xmin, double const &amp;xmax, std::vector&lt; double &gt; const &amp;FixPts, double const &amp;eps) const</td></tr>
+<tr class="memdesc:a5c9d50d435897936339e1b9ec6ff609a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range.  <a href="classapfel_1_1Integrator.html#a5c9d50d435897936339e1b9ec6ff609a">More...</a><br /></td></tr>
+<tr class="separator:a5c9d50d435897936339e1b9ec6ff609a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f8eb6c449fca9e2891295277fae8b12"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a3f8eb6c449fca9e2891295277fae8b12">integrand</a> (double const &amp;x) const</td></tr>
+<tr class="memdesc:a3f8eb6c449fca9e2891295277fae8b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the integrand.  <a href="classapfel_1_1Integrator.html#a3f8eb6c449fca9e2891295277fae8b12">More...</a><br /></td></tr>
+<tr class="separator:a3f8eb6c449fca9e2891295277fae8b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43e4272eef0c1dbdac807aee547ec17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#ad43e4272eef0c1dbdac807aee547ec17">Method</a> () const</td></tr>
+<tr class="memdesc:ad43e4272eef0c1dbdac807aee547ec17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration method.  <a href="classapfel_1_1Integrator.html#ad43e4272eef0c1dbdac807aee547ec17">More...</a><br /></td></tr>
+<tr class="separator:ad43e4272eef0c1dbdac807aee547ec17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> class perform unidimensional numerical integration using the Guassian quadrature. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="integrator_test_8cc-example.html#_a0">integrator_test.cc</a>, <a class="el" href="ogata_test_8cc-example.html#_a5">ogata_test.cc</a>, and <a class="el" href="qgriddist_test_8cc-example.html#_a2">qgriddist_test.cc</a>.</dd>
 </dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a664f8704c32d7b50b3f85afbfd3c3533"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a664f8704c32d7b50b3f85afbfd3c3533">&#9670;&nbsp;</a></span>Integrator() <span class="overload">[1/3]</span></h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a154c2d6265d9f74c7c290baae3d78a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a154c2d6265d9f74c7c290baae3d78a6f">&#9670;&nbsp;</a></span>IntegrationMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">apfel::Integrator::IntegrationMethod</a> : int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a154c2d6265d9f74c7c290baae3d78a6fae0adf3a718f64744c704c10da3574b5f"></a>GAUSS_LEGENDRE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a154c2d6265d9f74c7c290baae3d78a6fafd1dc90abc138f251766342ddbe76500"></a>GAUSS_KRONROD&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9c2d7c58d24e0d7a0bbbd95f01a1d0c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c2d7c58d24e0d7a0bbbd95f01a1d0c9">&#9670;&nbsp;</a></span>Integrator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,8 +155,18 @@ Private Attributes</h2></td></tr>
           <td class="memname">apfel::Integrator::Integrator </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a> const &amp;&#160;</td>
+          <td class="paramname"><em>method</em> = <code><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6fafd1dc90abc138f251766342ddbe76500">GAUSS_KRONROD</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -141,87 +175,7 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">func</td><td>The function of one variable to be integrated </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a923664bfb17fb4208482465ff74dfb36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a923664bfb17fb4208482465ff74dfb36">&#9670;&nbsp;</a></span>Integrator() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">apfel::Integrator::Integrator </td>
-          <td>(</td>
-          <td class="paramtype">std::function&lt; double(double const &amp;, double const &amp;)&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>func2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>arg2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> constructor. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func2</td><td>the function of two variables to be integrated over the first </td></tr>
-    <tr><td class="paramname">arg2</td><td>the value of the second variable while integrating over the first </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="afa61c8d98d61b769fa8eeaacbb901f7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa61c8d98d61b769fa8eeaacbb901f7d">&#9670;&nbsp;</a></span>Integrator() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">apfel::Integrator::Integrator </td>
-          <td>(</td>
-          <td class="paramtype">std::function&lt; double(double const &amp;, double const &amp;, double const &amp;)&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>func3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>arg2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>arg3</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class perform unidimensional numerical integration using the Guassian quadrature.">Integrator</a> constructor. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func3</td><td>the function of three variables to be integrated over the first </td></tr>
-    <tr><td class="paramname">arg2</td><td>the value of the second variable while integrating over the first </td></tr>
-    <tr><td class="paramname">arg3</td><td>the value of the third variable while integrating over the first </td></tr>
+    <tr><td class="paramname">method</td><td>The integration method to be used (default: GAUSS_KRONROD) </td></tr>
   </table>
   </dd>
 </dl>
@@ -265,7 +219,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <a id="add54e5b8b4534d491e42eb3d56e322a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add54e5b8b4534d491e42eb3d56e322a9">&#9670;&nbsp;</a></span>integrate() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#add54e5b8b4534d491e42eb3d56e322a9">&#9670;&nbsp;</a></span>integrate() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +250,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that integrates the integrand with a given relative accuracy. </p>
+<p>Function that integrates the integrand with a given relative accuracy using the method defined in the constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
@@ -311,53 +265,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adf8c7312b39b8625cbd20ca7bf04240e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf8c7312b39b8625cbd20ca7bf04240e">&#9670;&nbsp;</a></span>integrate() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double apfel::Integrator::integrate </td>
-          <td>(</td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>xmin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>xmax</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int const &amp;&#160;</td>
-          <td class="paramname"><em>m</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function that integrates the integrand using a given number of point for the gauss quadrature. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
-    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
-    <tr><td class="paramname">m</td><td>number of point of the Guass quadrature </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
-
-</div>
-</div>
 <a id="a5c9d50d435897936339e1b9ec6ff609a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c9d50d435897936339e1b9ec6ff609a">&#9670;&nbsp;</a></span>integrate() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c9d50d435897936339e1b9ec6ff609a">&#9670;&nbsp;</a></span>integrate() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -408,6 +317,123 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0b2e34f065bc5fe64373f6daca5df69c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2e34f065bc5fe64373f6daca5df69c">&#9670;&nbsp;</a></span>integrateGK()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrateGK </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>eps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand with a given relative accuracy using the Gauss-Kronrod method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
+    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
+    <tr><td class="paramname">eps</td><td>the required relative accuracy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+
+</div>
+</div>
+<a id="a132a4f762481a50b4926458c2ec830e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a132a4f762481a50b4926458c2ec830e7">&#9670;&nbsp;</a></span>integrateGL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrateGL </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>eps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand with a given relative accuracy using the Gauss-Legendre method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
+    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
+    <tr><td class="paramname">eps</td><td>the required relative accuracy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+
+</div>
+</div>
+<a id="ad43e4272eef0c1dbdac807aee547ec17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad43e4272eef0c1dbdac807aee547ec17">&#9670;&nbsp;</a></span>Method()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a> apfel::Integrator::Method </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that returns the integration method. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a155dc87904d2035723fa06d80670a5f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a155dc87904d2035723fa06d80670a5f8">&#9670;&nbsp;</a></span>_func</h2>
@@ -433,13 +459,37 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a7e2fd4f5130b504f674903e0727e0d09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e2fd4f5130b504f674903e0727e0d09">&#9670;&nbsp;</a></span>_method</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a> apfel::Integrator::_method</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The integration method. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/vbertone/Codes/apfelxx/inc/apfel/<a class="el" href="integrator_8h_source.html">integrator.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 23 2020 17:19:11 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Sat Dec 26 2020 17:05:13 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

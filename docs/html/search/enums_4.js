@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['massrenscheme_1792',['MassRenScheme',['../structapfel_1_1EvolutionSetup.html#adbf330a722f8daccfa1c3343204e8b0b',1,'apfel::EvolutionSetup']]]
+  ['logaccuracy_1803',['LogAccuracy',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446',1,'apfel']]]
 ];

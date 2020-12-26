@@ -307,7 +307,7 @@ with:
 \end{array}
 \end{equation}
 that can be computed using the Ogata quadrature as:
-\begin{equation}
+\begin{equation}\label{eq:OgataPrimitive}
   K(Q,y,q_T) \simeq \sum_{n=1}^N w_n^{(1)} S\left(x_1,x_2,\frac{z_n^{(1)}}{q_T};\mu,\zeta\right) f_{\rm NP}\left(x_1,\frac{z_n^{(1)}}{q_T},\zeta\right) f_{\rm NP}\left(x_2,\frac{z_n^{(1)}}{q_T},\zeta\right)\,,
 \end{equation}
 with $S$ defined in Eq.~(\ref{eq:pertfact}). The unscaled coordinates
@@ -490,7 +490,7 @@ Eq.~(\ref{eq:primitive})(\footnote{For the moment we ignore the
   issue at the end of the section.}), we can concentrate on
 integrating the function $K$ over $Q$ and $y$ for a fixed value of
 $q_T$:
-\begin{equation}
+\begin{equation}\label{eq:integralK}
 \widetilde{K}(q_T)=\int_{Q_{\rm min}}^{Q_{\rm max}}dQ \int_{y_{\rm
     min}}^{y_{\rm max}}dy\,K(Q,y,q_T)\,,
 \end{equation}

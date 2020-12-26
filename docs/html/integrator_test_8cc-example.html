@@ -85,11 +85,14 @@ $(function() {
 <div class="line">  <span class="comment">// Integrand function.</span></div>
 <div class="line">  <span class="keyword">const</span> <a name="_a0"></a><a class="code" href="classapfel_1_1Integrator.html">apfel::Integrator</a> f{[&amp;] (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; x) -&gt; <span class="keywordtype">double</span>{ <span class="keywordflow">return</span> log(x); }};</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Integrate using dgauss with a given accuracy.</span></div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> res1 = f.integrate(0, 2, 1e-5);</div>
+<div class="line">  <span class="comment">// Print true value.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;True value: &quot;</span> &lt;&lt; 2 * ( log(2) - 1 ) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Integrate using dgauss with a given number of nodes.</span></div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> res2 = f.integrate(0, 2, 4);</div>
+<div class="line">  <span class="comment">// Integrate using Gauss-Legendre with a given accuracy.</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> res1 = f.integrateGL(0, 2, 1e-5);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Integrate using Gauss-Legendre with a different accruracy.</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> res2 = f.integrateGL(0, 2, 1e-3);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Print results.</span></div>
 <div class="line">  std::cout &lt;&lt; res1 &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; res2 &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; res1 / res2 &lt;&lt; std::endl;</div>
@@ -107,14 +110,40 @@ $(function() {
 <div class="line">  <span class="comment">// Print results.</span></div>
 <div class="line">  std::cout &lt;&lt; res4 &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; res5 &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; res4 / res5 &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line">  <span class="comment">// Integrate using Gauss-Kronrod with a given accuracy.</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> res6 = f.integrateGK(0, 2, 1e-5);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Integrate using Gauss-Kronrod with a different accruracy.</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> res7 = f.integrateGK(0, 2, 1e-3);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Print results.</span></div>
+<div class="line">  std::cout &lt;&lt; res6 &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; res7 &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; res6 / res7 &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Performance test</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">int</span> k = 10000;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Integrating &quot;</span> &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot; times with Gauss-Legendre... &quot;</span>;</div>
+<div class="line">  <a name="_a1"></a><a class="code" href="classapfel_1_1Timer.html">apfel::Timer</a> t;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k; i++)</div>
+<div class="line">    f.integrate(0, 2, 1e-9);</div>
+<div class="line">  t.<a name="a2"></a><a class="code" href="classapfel_1_1Timer.html#a015b2c516bb668f392faa6d0a5eae3c1">stop</a>();</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Integrating &quot;</span> &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot; times with Gauss-Kronrod... &quot;</span>;</div>
+<div class="line">  t.<a name="a3"></a><a class="code" href="classapfel_1_1Timer.html#a8b8ffd3f8ceb45b50ecd2d7b00f84ccb">start</a>();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k; i++)</div>
+<div class="line">    f.integrate(0, 2, 1e-9);</div>
+<div class="line">  t.<a class="code" href="classapfel_1_1Timer.html#a015b2c516bb668f392faa6d0a5eae3c1">stop</a>();</div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
+<div class="ttc" id="aclassapfel_1_1Timer_html"><div class="ttname"><a href="classapfel_1_1Timer.html">apfel::Timer</a></div><div class="ttdoc">The Timer class computes the time elapsed between start and stop.</div><div class="ttdef"><b>Definition:</b> timer.h:20</div></div>
 <div class="ttc" id="aclassapfel_1_1Integrator_html"><div class="ttname"><a href="classapfel_1_1Integrator.html">apfel::Integrator</a></div><div class="ttdoc">The Integrator class perform unidimensional numerical integration using the Guassian quadrature.</div><div class="ttdef"><b>Definition:</b> integrator.h:19</div></div>
+<div class="ttc" id="aclassapfel_1_1Timer_html_a8b8ffd3f8ceb45b50ecd2d7b00f84ccb"><div class="ttname"><a href="classapfel_1_1Timer.html#a8b8ffd3f8ceb45b50ecd2d7b00f84ccb">apfel::Timer::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">This function starts the timer.</div><div class="ttdef"><b>Definition:</b> timer.h:30</div></div>
+<div class="ttc" id="aclassapfel_1_1Timer_html_a015b2c516bb668f392faa6d0a5eae3c1"><div class="ttname"><a href="classapfel_1_1Timer.html#a015b2c516bb668f392faa6d0a5eae3c1">apfel::Timer::stop</a></div><div class="ttdeci">void stop(bool const &amp;ForceDisplay=false)</div><div class="ttdoc">This function stops the timer and reports the elapsed time in seconds since the last time the timer w...</div><div class="ttdef"><b>Definition:</b> timer.h:36</div></div>
 <div class="ttc" id="aapfelxx_8h_html"><div class="ttname"><a href="apfelxx_8h.html">apfelxx.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 23 2020 17:19:10 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Sat Dec 26 2020 17:05:12 for APFEL by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

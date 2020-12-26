@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logaccuracy_1791',['LogAccuracy',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446',1,'apfel']]]
+  ['integrationmethod_1802',['IntegrationMethod',['../classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f',1,'apfel::Integrator']]]
 ];
