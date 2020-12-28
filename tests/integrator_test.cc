@@ -15,7 +15,7 @@ int main()
 
   // Integrand function.
   const apfel::Integrator fGK{[&] (double const& x) -> double{ return log(x); }};
-  const apfel::Integrator fGL{[&] (double const& x) -> double{ return log(x); }};
+  const apfel::Integrator fGL{[&] (double const& x) -> double{ return log(x); }, apfel::Integrator::IntegrationMethod::GAUSS_LEGENDRE};
 
   // Print true value.
   std::cout << "True value: " << 2 * ( log(2) - 1 ) << std::endl;
