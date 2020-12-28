@@ -17,140 +17,92 @@ namespace apfel
     _func(func),
     _method(method)
   {
-  }
-
-  //_________________________________________________________________________
-  double Integrator::integrate(double const& a, double const& b, double const& eps) const
-  {
     switch (_method)
       {
       case GAUSS_LEGENDRE:
-        return integrateGL(a, b, eps);
+        _integrate = std::bind(&Integrator::integrateGL, this, std::placeholders::_1, std::placeholders::_2);
+        break;
       case GAUSS_KRONROD:
-        return integrateGK(a, b, eps);
+        _integrate = std::bind(&Integrator::integrateGK, this, std::placeholders::_1, std::placeholders::_2);
+        break;
       default:
-        throw std::runtime_error(error("Integrator::integrate", "Unknown integration method"));
+        throw std::runtime_error(error("Integrator::Integrator", "Unknown integration method"));
       }
   }
 
   //_________________________________________________________________________
-  double Integrator::integrateGL(double const& a, double const& b, double const& eps) const
+  double Integrator::integrate(double const& xmin, double const& xmax, double const& eps) const
   {
-    const double delta = eps15 * std::abs(a - b);
-    double dgauss = 0;
-    double aa = a;
+    // Stop if the interval is too small
+    if (std::abs( ( xmax - xmin ) / ( xmax + xmin ) ) < eps15)
+      throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
 
-    while (true)
-      {
-        double y = b - aa;
-        if (std::abs(y) < delta)
-          break;
-
-        double s1;
-        double s0;
-        do
-          {
-            const double bb = aa + y;
-
-            // Central point and half interval
-            const double c1 = ( bb + aa ) / 2;
-            const double c2 = ( bb - aa ) / 2;
-
-            // Integral with smaller number of points
-            s0 = 0;
-            for (int i = 0; i < (int) gl_x[0].size(); i++)
-              {
-                const double u = gl_x[0][i] * c2;
-                s0 += gl_w[0][i] * ( _func(c1 + u) + _func(c1 - u) );
-              }
-            s0 *= c2;
-
-            // Integral with larger number of points
-            s1 = 0;
-            for (int i = 0; i < (int) gl_x[1].size(); i++)
-              {
-                const double u = gl_x[1][i] * c2;
-                s1 += gl_w[1][i] * ( _func(c1 + u) + _func(c1 - u) );
-              }
-            s1 *= c2;
-
-            // Split the interval into two
-            y /= 2;
-
-            // Stop if the interval is smaller than the minimum step
-            if (std::abs(y) < delta)
-              throw std::runtime_error(error("Integrator::integrateGL", "Too high accuracy required."));
-
-            // Check accuracy and continue if necessary
-          }
-        while (std::abs(s1 - s0) / ( 1 + std::abs(s1) ) > eps);
-
-        aa += 2 * y;
-        dgauss += s1;
-      }
-    return dgauss;
+    // Recursive call
+    const std::pair<double, double> integ = _integrate(xmin, xmax);
+    if (integ.second < eps)
+      return integ.first;
+    else
+      return integrate(xmin, ( xmin + xmax ) / 2, eps) + integrate(( xmin + xmax ) / 2, xmax, eps);
   }
 
   //_________________________________________________________________________
-  double Integrator::integrateGK(double const& a, double const& b, double const& eps) const
+  std::pair<double, double> Integrator::integrateGL(double const& a, double const& b) const
   {
-    const double delta = eps15 * std::abs(a - b);
-    double dgauss = 0;
-    double aa = a;
+    // Central point and half interval
+    const double c1 = ( b + a ) / 2;
+    const double c2 = ( b - a ) / 2;
 
-    while (true)
+    // Integral with smaller number of points
+    double s0 = 0;
+    for (int i = 0; i < (int) gl_x[0].size(); i++)
       {
-        double y = b - aa;
-        if (std::abs(y) < delta)
-          break;
-
-        double s0;
-        double s1;
-        do
-          {
-            const double bb = aa + y;
-
-            // Central point and half interval
-            const double c1 = ( bb + aa ) / 2;
-            const double c2 = ( bb - aa ) / 2;
-
-            const double f = _func(c1);
-            s0 = gk_w[0][0] * f;
-            s1 = gk_w[1][0] * f;
-            for (int i = 1; i < 4; i++)
-              {
-                // Integral with smaller number of points
-                const double u0 = gk_x[0][i] * c2;
-                const double fu = _func(c1 + u0);
-                const double fd = _func(c1 - u0);
-                s0 += gk_w[0][i] * ( fu + fd );
-
-                // Integral with larger number of points (exploit the
-                // function calls used for s0).
-                const int j = 2 * i - 1;
-                const double u1 = gk_x[1][j] * c2;
-                s1 += gk_w[1][j] * ( _func(c1 + u1) + _func(c1 - u1) ) + gk_w[1][j+1] * ( fu + fd );
-              }
-            double w = gk_x[1][7] * c2;
-            s1 += gk_w[1][7] * ( _func(c1 + w) + _func(c1 - w) );
-            s0 *= c2;
-            s1 *= c2;
-
-            // Split the interval into two
-            y /= 2;
-
-            // Stop if the interval is smaller than the minimum step
-            if (std::abs(y) < delta)
-              throw std::runtime_error(error("Integrator::integrateGK", "Too high accuracy required."));
-
-            // Check accuracy and continue if necessary
-          }
-        while (std::abs(s1 - s0) / ( 1 + std::abs(s1) ) > eps);
-
-        aa += 2 * y;
-        dgauss += s1;
+        const double u = gl_x[0][i] * c2;
+        s0 += gl_w[0][i] * ( _func(c1 + u) + _func(c1 - u) );
       }
-    return dgauss;
+    s0 *= c2;
+
+    // Integral with larger number of points
+    double s1 = 0;
+    for (int i = 0; i < (int) gl_x[1].size(); i++)
+      {
+        const double u = gl_x[1][i] * c2;
+        s1 += gl_w[1][i] * ( _func(c1 + u) + _func(c1 - u) );
+      }
+    s1 *= c2;
+
+    return {s1, std::abs(s1 - s0) / ( 1 + std::abs(s1) )};
+  }
+
+  //_________________________________________________________________________
+  std::pair<double, double> Integrator::integrateGK(double const& a, double const& b) const
+  {
+    // Central point and half interval
+    const double c1 = ( b + a ) / 2;
+    const double c2 = ( b - a ) / 2;
+
+    const double f = _func(c1);
+    double s0 = gk_w[0][0] * f;
+    double s1 = gk_w[1][0] * f;
+    for (int i = 1; i < 4; i++)
+      {
+        // Integral with smaller number of points
+        const double u0 = gk_x[0][i] * c2;
+        const double fu = _func(c1 + u0);
+        const double fd = _func(c1 - u0);
+        s0 += gk_w[0][i] * ( fu + fd );
+
+        // Integral with larger number of points (exploit the
+        // function calls used for s0).
+        const int j = 2 * i - 1;
+        const double u1 = gk_x[1][j] * c2;
+        s1 += gk_w[1][j] * ( _func(c1 + u1) + _func(c1 - u1) ) + gk_w[1][j+1] * ( fu + fd );
+      }
+    double w = gk_x[1][7] * c2;
+    s1 += gk_w[1][7] * ( _func(c1 + w) + _func(c1 - w) );
+    s0 *= c2;
+    s1 *= c2;
+
+    return {s1, std::abs(s1 - s0) / ( 1 + std::abs(s1) )};
   }
 
   //_________________________________________________________________________

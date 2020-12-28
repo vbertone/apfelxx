@@ -19,7 +19,8 @@ namespace apfel
   {
   public:
     /**
-     * @name Enumerator the current integration methods
+     * @name Enumerator for the currently available integration
+     * methods.
      */
     enum IntegrationMethod: int {GAUSS_LEGENDRE, GAUSS_KRONROD};
 
@@ -46,24 +47,24 @@ namespace apfel
     double integrate(double const& xmin, double const& xmax, double const& eps) const;
 
     /**
-     * @brief Function that integrates the integrand with a given
-     * relative accuracy using the Gauss-Legendre method.
+     * @brief Function that integrates the integrand using the Gauss-Legendre method.
      * @param xmin: the lower bound integration bound
      * @param xmax: the upper bound integration bound
-     * @param eps: the required relative accuracy
-     * @return the value of the integral
+     * @return a pair containing the value of the integral computed
+     * with the 16-point method and the relative difference w.r.t. the
+     * 8-point one.
      */
-    double integrateGL(double const& xmin, double const& xmax, double const& eps) const;
+    std::pair<double, double> integrateGL(double const& xmin, double const& xmax) const;
 
     /**
-     * @brief Function that integrates the integrand with a given
-     * relative accuracy using the Gauss-Kronrod method.
+     * @brief Function that integrates the integrand using the Gauss-Kronrod method.
      * @param xmin: the lower bound integration bound
      * @param xmax: the upper bound integration bound
-     * @param eps: the required relative accuracy
-     * @return the value of the integral
+     * @return a pair containing the value of the integral computed
+     * with the 15-point method and the relative difference w.r.t. the
+     * 7-point one.
      */
-    double integrateGK(double const& xmin, double const& xmax, double const& eps) const;
+    std::pair<double, double> integrateGK(double const& xmin, double const& xmax) const;
 
     /**
      * @brief Function that integrates the integrand with a given
@@ -90,7 +91,8 @@ namespace apfel
     IntegrationMethod Method() const { return _method; };
 
   private:
-    std::function<double(double const&)> _func;   //!< The integrand function
-    IntegrationMethod                    _method; //!< The integration method
+    std::function<double(double const&)>                             const _func;        //!< The integrand function
+    IntegrationMethod                                                const _method;      //!< The integration method
+    std::function<std::pair<double, double>(double const&, double const&)> _integrate;   //!< The integrating function
   };
 }
