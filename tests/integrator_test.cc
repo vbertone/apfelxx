@@ -88,6 +88,27 @@ int main()
   // Print results.
   std::cout << "Gauss-Kronrod:  " << res2d3 << "  " << res2d4 << "  " << res2d3 / res2d4 << std::endl;
 
+  // Integrate nested method
+  const apfel::Integrator fnest1{[&] (double const& x) -> double
+      {
+	apfel::Integrator fin{[&] (double const& y) -> double { return log(x) * log(y); }};
+	return fin.integrate(0, 2, 1e-7);
+      }
+  };
+  const double res2d5 = fnest1.integrate(0, 2, 1e-7);
+
+  // Integrate nested method
+  const apfel::Integrator fnest2{[&] (double const& x) -> double
+      {
+	apfel::Integrator fin{[&] (double const& y) -> double { return log(x) * log(y); }};
+	return fin.integrate(0, 2, 1e-3);
+      }
+  };
+  const double res2d6 = fnest2.integrate(0, 2, 1e-3);
+
+ // Print results.
+  std::cout << "Nested:         " << res2d5 << "  " << res2d6 << "  " << res2d5 / res2d6 << std::endl;
+
   // Performance test
   k = 100;
   std::cout << "Integrating " << k << " times with Gauss-Legendre... ";
@@ -100,6 +121,12 @@ int main()
   t.start();
   for (int i = 0; i < k; i++)
     f2dGK.integrate(0, 2, 0, 2, 1e-7);
+  t.stop();
+
+  std::cout << "Integrating " << k << " times with nested function... ";
+  t.start();
+  for (int i = 0; i < k; i++)
+    fnest1.integrate(0, 2, 1e-7);
   t.stop();
 
   return 0;
