@@ -12,8 +12,8 @@
 namespace apfel
 {
   /**
-   * @brief The Integrator class perform unidimensional numerical
-   * integration using the Guassian quadrature.
+   * @brief The Integrator class performs unidimensional numerical
+   * integrations using the Guassian quadrature.
    */
   class Integrator
   {

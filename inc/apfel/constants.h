@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <vector>
+#include <array>
 
 namespace apfel
 {
@@ -44,6 +45,62 @@ namespace apfel
   const double eps14 = 1e-14;
   const double eps15 = 1e-15;
   const double eps25 = 1e-25;
+  ///@}
+
+  /**
+   * @name Gauss-Legendre quadrature
+   * @brief Coordinates and weights of the Gauss-Legendre quadrature
+   * with 8 and 16-point integration.
+   */
+  ///@{
+  const std::array<std::vector<double>, 2> gl_x =
+  {
+    {
+      std::vector<double>{0.1834346424956498, 0.5255324099163289, 0.7966664774136267, 0.9602898564975362},
+      std::vector<double>{
+        0.0950125098376374, 0.2816035507792589, 0.4580167776572273, 0.6178762444026437,
+        0.7554044083550030, 0.8656312023878317, 0.9445750230732325, 0.9894009349916499
+      }
+    }
+  };
+  const std::array<std::vector<double>, 2> gl_w =
+  {
+    {
+      std::vector<double>{0.3626837833783619, 0.3137066458778872, 0.2223810344533744, 0.1012285362903762},
+      std::vector<double>{
+        0.1894506104550684, 0.1826034150449235, 0.1691565193950025, 0.1495959888165767,
+        0.1246289712555338, 0.0951585116824927, 0.0622535239386478, 0.0271524594117540
+      }
+    }
+  };
+  ///@}
+
+  /**
+   * @name Gauss-Kronrod quadrature
+   * @brief Coordinates and weights of the Gauss-Kronrod quadrature
+   * with 7 and 15-point integration.
+   */
+  ///@{
+  const std::array<std::vector<double>, 2> gk_x =
+  {
+    {
+      std::vector<double>{0.0000000000000000e+00, 4.0584515137739717e-01, 7.4153118559939444e-01, 9.4910791234275852e-01},
+      std::vector<double>{
+        0.0000000000000000e+00, 2.0778495500789847e-01, 4.0584515137739717e-01, 5.8608723546769113e-01,
+        7.4153118559939444e-01, 8.6486442335976907e-01, 9.4910791234275852e-01, 9.9145537112081264e-01
+      }
+    }
+  };
+  const std::array<std::vector<double>, 2> gk_w =
+  {
+    {
+      std::vector<double>{4.1795918367346939e-01, 3.8183005050511894e-01, 2.7970539148927667e-01, 1.2948496616886969e-01},
+      std::vector<double>{
+        2.0948214108472783e-01, 2.0443294007529889e-01, 1.9035057806478541e-01, 1.6900472663926790e-01,
+        1.4065325971552592e-01, 1.0479001032225018e-01, 6.3092092629978553e-02, 2.2935322010529225e-02
+      }
+    }
+  };
   ///@}
 
   /**

@@ -30,6 +30,7 @@
 #include "apfel/expression.h"
 #include "apfel/grid.h"
 #include "apfel/integrator.h"
+#include "apfel/integrator2d.h"
 #include "apfel/matchedevolution.h"
 #include "apfel/observable.h"
 #include "apfel/ogataquadrature.h"
