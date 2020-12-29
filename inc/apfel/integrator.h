@@ -91,8 +91,7 @@ namespace apfel
     IntegrationMethod Method() const { return _method; };
 
   private:
-    std::function<double(double const&)>                             const _func;        //!< The integrand function
-    IntegrationMethod                                                const _method;      //!< The integration method
-    std::function<std::pair<double, double>(double const&, double const&)> _integrate;   //!< The integrating function
+    std::function<double(double const&)> const _func;   //!< The integrand function
+    IntegrationMethod                    const _method; //!< The integration method
   };
 }

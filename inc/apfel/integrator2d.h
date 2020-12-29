@@ -76,9 +76,8 @@ namespace apfel
     double integrand(double const& x, double const& y) const { return _func(x, y); };
 
   private:
-    std::function<double(double const&, double const&)>                                            const _func;        //!< The integrand function
-    Integrator::IntegrationMethod                                                                  const _method;      //!< The integration method
-    std::function<std::pair<double, double>(double const&, double const&, double const&, double const&)> _integrate;   //!< The integrating function
+    std::function<double(double const&, double const&)> const _func;   //!< The integrand function
+    Integrator::IntegrationMethod                       const _method; //!< The integration method
 
   };
 }

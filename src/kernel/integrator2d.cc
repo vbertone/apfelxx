@@ -18,17 +18,6 @@ namespace apfel
     _func(func),
     _method(method)
   {
-    switch (_method)
-      {
-      case Integrator::GAUSS_LEGENDRE:
-        _integrate = std::bind(&Integrator2D::integrateGL, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        break;
-      case Integrator::GAUSS_KRONROD:
-        _integrate = std::bind(&Integrator2D::integrateGK, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        break;
-      default:
-        throw std::runtime_error(error("Integrator2D::Integrator2D", "Unknown integration method"));
-      }
   }
 
   //_________________________________________________________________________
@@ -38,7 +27,21 @@ namespace apfel
     if (std::abs( ( xmax - xmin ) / ( xmax + xmin ) ) < eps15 || std::abs( ( ymax - ymin ) / ( ymax + ymin ) ) < eps15)
       throw std::runtime_error(error("Integrator2D::integrate", "Too high accuracy required."));
 
-    const std::pair<double, double> integ = _integrate(xmin, xmax, ymin, ymax);
+    // Select integration method
+    std::pair<double, double> integ;
+    switch (_method)
+      {
+      case Integrator::GAUSS_LEGENDRE:
+        integ = integrateGL(xmin, xmax, ymin, ymax);
+        break;
+      case Integrator::GAUSS_KRONROD:
+        integ = integrateGK(xmin, xmax, ymin, ymax);
+        break;
+      default:
+        throw std::runtime_error(error("Integrator2D::integrate", "Unknown integration method"));
+      }
+
+    // Recursive call
     if (integ.second < eps)
       return integ.first;
     else

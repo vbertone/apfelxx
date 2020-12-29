@@ -853,10 +853,10 @@ namespace apfel
       }
 
     // Define the integrands.
-    Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
-    Integrator I1g{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
-    Integrator I3 {[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
-    Integrator I2 {[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+    const Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
+    const Integrator I1g{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
+    const Integrator I3 {[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
+    const Integrator I2 {[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
 
     // Construct function that returns the perturbative evolution
     // kernel.
@@ -999,9 +999,9 @@ namespace apfel
       }
 
     // Define the integrands.
-    Integrator I1{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
-    Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
-    Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+    const Integrator I1{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
+    const Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
+    const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
 
     // Construct function that returns the perturbative evolution
     // kernel.
@@ -1142,9 +1142,9 @@ namespace apfel
       }
 
     // Define the integrands.
-    Integrator I1{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
-    Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
-    Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+    const Integrator I1{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
+    const Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
+    const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
 
     // Construct function that returns the perturbative evolution
     // kernel.

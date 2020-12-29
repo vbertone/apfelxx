@@ -17,17 +17,6 @@ namespace apfel
     _func(func),
     _method(method)
   {
-    switch (_method)
-      {
-      case GAUSS_LEGENDRE:
-        _integrate = std::bind(&Integrator::integrateGL, this, std::placeholders::_1, std::placeholders::_2);
-        break;
-      case GAUSS_KRONROD:
-        _integrate = std::bind(&Integrator::integrateGK, this, std::placeholders::_1, std::placeholders::_2);
-        break;
-      default:
-        throw std::runtime_error(error("Integrator::Integrator", "Unknown integration method"));
-      }
   }
 
   //_________________________________________________________________________
@@ -37,8 +26,21 @@ namespace apfel
     if (std::abs( ( xmax - xmin ) / ( xmax + xmin ) ) < eps15)
       throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
 
+    // Select integration method
+    std::pair<double, double> integ;
+    switch (_method)
+      {
+      case GAUSS_LEGENDRE:
+        integ = integrateGL(xmin, xmax);
+        break;
+      case GAUSS_KRONROD:
+        integ = integrateGK(xmin, xmax);
+        break;
+      default:
+        throw std::runtime_error(error("Integrator::integrate", "Unknown integration method"));
+      }
+
     // Recursive call
-    const std::pair<double, double> integ = _integrate(xmin, xmax);
     if (integ.second < eps)
       return integ.first;
     else
