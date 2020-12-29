@@ -20,7 +20,7 @@ endif()
 
 # VERSION ==============================================================================
 
-set(apfel_VERSION 4.5.0)
+set(apfel_VERSION 4.6.0)
 
 # export version to file
 configure_file(
