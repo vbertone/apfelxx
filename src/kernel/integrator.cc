@@ -172,10 +172,10 @@ namespace apfel
     const double c1 = ( b + a ) / 2;
     const double c2 = ( b - a ) / 2;
     double s = gk_w[n][0] * _func(c1);
-    for (int i = 1; i < (int) gk_x[0].size(); i++)
+    for (int i = 1; i < (int) gk_x[n].size(); i++)
       {
-        const double u0 = gk_x[n][i] * c2;
-        s += gk_w[0][i] * ( _func(c1 + u0) + _func(c1 - u0) );
+        const double u = gk_x[n][i] * c2;
+        s += gk_w[n][i] * ( _func(c1 + u) + _func(c1 - u) );
       }
     s *= c2;
     return s;
