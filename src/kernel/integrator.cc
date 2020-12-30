@@ -85,7 +85,7 @@ namespace apfel
     const double f = _func(c1);
     double s0 = gk_w[0][0] * f;
     double s1 = gk_w[1][0] * f;
-    for (int i = 1; i < 4; i++)
+    for (int i = 1; i < (int) gk_x[0].size(); i++)
       {
         // Integral with smaller number of points
         const double u0 = gk_x[0][i] * c2;
@@ -128,6 +128,80 @@ namespace apfel
     double dgauss = 0;
     for (int i = 1; i < (int) bounds.size(); i++)
       dgauss += integrate(bounds[i-1], bounds[i], eps);
+
+    return dgauss;
+  }
+
+  //_________________________________________________________________________
+  double Integrator::integrate(double const& xmin, double const& xmax, int const& n) const
+  {
+    // Stop if the index n does not take an allowed value
+    if (n != 0 && n != 1)
+      throw std::runtime_error(error("Integrator::integrate", "Accuracy index not allowed"));
+
+    // Select integration method
+    switch (_method)
+      {
+      case GAUSS_LEGENDRE:
+        return integrateGL(xmin, xmax, n);
+      case GAUSS_KRONROD:
+        return integrateGK(xmin, xmax, n);
+      default:
+        throw std::runtime_error(error("Integrator::integrate", "Unknown integration method"));
+      }
+  }
+
+  //_________________________________________________________________________
+  double Integrator::integrateGL(double const& a, double const& b, int const& n) const
+  {
+    const double c1 = ( b + a ) / 2;
+    const double c2 = ( b - a ) / 2;
+    double s = 0;
+    for (int i = 0; i < (int) gl_x[n].size(); i++)
+      {
+        const double u = gl_x[n][i] * c2;
+        s += gl_w[n][i] * ( _func(c1 + u) + _func(c1 - u) );
+      }
+    s *= c2;
+    return s;
+  }
+
+  //_________________________________________________________________________
+  double Integrator::integrateGK(double const& a, double const& b, int const& n) const
+  {
+    const double c1 = ( b + a ) / 2;
+    const double c2 = ( b - a ) / 2;
+    double s = gk_w[n][0] * _func(c1);
+    for (int i = 1; i < (int) gk_x[0].size(); i++)
+      {
+        const double u0 = gk_x[n][i] * c2;
+        s += gk_w[0][i] * ( _func(c1 + u0) + _func(c1 - u0) );
+      }
+    s *= c2;
+    return s;
+  }
+
+  //_________________________________________________________________________
+  double Integrator::integrate(double const& a, double const& b, std::vector<double> const& FixPts, int const& n) const
+  {
+    // Create vector of fixed points including the integration bounds
+    // in ordered sequence and removing the points outside the
+    // integration range.
+    const double ap = (a < b ? a : b);
+    const double bp = (a < b ? b : a);
+    std::vector<double> bounds{ap, bp};
+    for (auto const& ib : FixPts)
+      if(ib > ap && ib < bp)
+        bounds.push_back(ib);
+
+    // Sort vector according on how the integration bounds are
+    // ordered.
+    std::sort(bounds.begin(), bounds.end(), [a, b] (double const& x1, double const& x2) -> bool { return (b > a ? x1 < x2 : x1 > x2); });
+
+    // Now compute sub-integrals and sum them up
+    double dgauss = 0;
+    for (int i = 1; i < (int) bounds.size(); i++)
+      dgauss += integrate(bounds[i-1], bounds[i], n);
 
     return dgauss;
   }

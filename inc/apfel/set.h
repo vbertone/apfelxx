@@ -42,6 +42,7 @@ namespace apfel
     Set<T>& operator *= (double const& s);                             //!< this *= scalar
     Set<T>& operator *= (std::function<double(double const&)> f);      //!< this *= function of the integration variable (for distributions only)
     Set<T>& operator *= (std::vector<double> const& v);                //!< this *= vector of scalars
+    Set<T>& operator *= (std::map<int, double> const& v);              //!< this *= map of scalars
     Set<T>& operator /= (double const& s);                             //!< this /= scalar
     Set<T>& operator += (Set<T> const& d);                             //!< this += Set
     Set<T>& operator -= (Set<T> const& d);                             //!< this -= Set
@@ -120,6 +121,12 @@ namespace apfel
 
   template<class T>
   Set<T> operator * (Set<T> lhs, std::vector<double> const& v) { return lhs *= v; }
+
+  template<class T>
+  Set<T> operator * (std::map<int, double> const& v, Set<T> rhs) { return rhs *= v; }
+
+  template<class T>
+  Set<T> operator * (Set<T> lhs, std::map<int, double> const& v) { return lhs *= v; }
 
   template<class T>
   Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s; }

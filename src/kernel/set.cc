@@ -111,6 +111,15 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
+  Set<T>& Set<T>::operator *= (std::map<int, double> const& v)
+  {
+    for (auto& o: _objects)
+      o.second *= v.at(o.first);
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   Set<T>& Set<T>::operator /= (double const& s)
   {
     const double r = 1. / s;

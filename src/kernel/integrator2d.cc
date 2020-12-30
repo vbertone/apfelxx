@@ -116,7 +116,7 @@ namespace apfel
     double const f00 = _func(c1x, c1y);
     double s0 = gk_w[0][0] * gk_w[0][0] * f00;
     double s1 = gk_w[1][0] * gk_w[1][0] * f00;
-    for (int j = 1; j < 4; j++)
+    for (int j = 1; j < (int) gk_x[0].size(); j++)
       {
         const double fu0 = _func(c1x + gk_x[0][j] * c2x, c1y);
         const double fd0 = _func(c1x - gk_x[0][j] * c2x, c1y);
@@ -132,12 +132,12 @@ namespace apfel
     s1 += gk_w[1][0] * gk_w[1][7] * ( _func(c1x + gk_x[1][7] * c2x, c1y) + _func(c1x - gk_x[1][7] * c2x, c1y) +
                                       _func(c1x, c1y + gk_x[1][7] * c2y) + _func(c1x, c1y - gk_x[1][7] * c2y) );
 
-    for (int i = 1; i < 4; i++)
+    for (int i = 1; i < (int) gk_x[0].size(); i++)
       {
         const int l = 2 * i - 1;
         const double ux1 = gk_x[1][l] * c2x;
         const double ux2 = gk_x[1][l+1] * c2x;
-        for (int j = 1; j < 4; j++)
+        for (int j = 1; j < (int) gk_x[0].size(); j++)
           {
             const int k = 2 * j - 1;
             const double uy1 = gk_x[1][k] * c2y;
@@ -165,7 +165,7 @@ namespace apfel
                                               _func(c1x - ux2, c1y + uy2) + _func(c1x - ux2, c1y - uy2) );
       }
     const double ux = gk_x[1][7] * c2x;
-    for (int j = 1; j < 4; j++)
+    for (int j = 1; j < (int) gk_x[0].size(); j++)
       {
         const int k = 2 * j - 1;
         const double uy1 = gk_x[1][k] * c2y;

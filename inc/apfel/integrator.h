@@ -47,6 +47,57 @@ namespace apfel
     double integrate(double const& xmin, double const& xmax, double const& eps) const;
 
     /**
+     * @brief Function that integrates the integrand with a given
+     * relative accuracy using a set of fixed point on the integration
+     * range.
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param FixPts: the vector of fixed points of the integration
+     * @param eps: the required relative accuracy
+     * @return the value of the integral
+     */
+    double integrate(double const& xmin, double const& xmax, std::vector<double> const& FixPts, double const& eps) const;
+
+    /**
+     * @brief Function that integrates the integrand with a given
+     * relative accuracy using the method defined in the constructor.
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param n: index associated to the number of points used for the
+     * integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for
+     * 16/15 points for Gauss-Legendre/Kronrod (default: 1)
+     * @return the value of the integral
+     */
+    double integrate(double const& xmin, double const& xmax, int const& n = 1) const;
+
+    /**
+     * @brief Function that integrates the integrand with a given
+     * relative accuracy using a set of fixed point on the integration
+     * range.
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param FixPts: the vector of fixed points of the integration
+     * @param n: index associated to the number of points used for the
+     * integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for
+     * 16/15 points for Gauss-Legendre/Kronrod (default: 1)
+     * @return the value of the integral
+     */
+    double integrate(double const& xmin, double const& xmax, std::vector<double> const& FixPts, int const& n = 1) const;
+
+    /**
+     * @brief Function for the integrand.
+     * @param x: the integration variable
+     * @return the integrand evaluated at x
+     */
+    double integrand(double const& x) const { return _func(x); };
+
+    /**
+     * @brief Function that returns the integration method.
+     */
+    IntegrationMethod Method() const { return _method; };
+
+  private:
+    /**
      * @brief Function that integrates the integrand using the Gauss-Legendre method.
      * @param xmin: the lower bound integration bound
      * @param xmax: the upper bound integration bound
@@ -67,28 +118,26 @@ namespace apfel
     std::pair<double, double> integrateGK(double const& xmin, double const& xmax) const;
 
     /**
-     * @brief Function that integrates the integrand with a given
-     * relative accuracy using a set of fixed point on the integration
-     * range.
+     * @brief Function that integrates the integrand using the
+     * Gauss-Legendre method (no accuracy estimate).
      * @param xmin: the lower bound integration bound
      * @param xmax: the upper bound integration bound
-     * @param FixPts: the vector of fixed points of the integration
-     * @param eps: the required relative accuracy
+     * @param n: index associated to the number of points used for the
+     * integration: 0 for 8 points for Gauss-Legendr, 1 for 16 points
      * @return the value of the integral
      */
-    double integrate(double const& xmin, double const& xmax, std::vector<double> const& FixPts, double const& eps) const;
+    double integrateGL(double const& xmin, double const& xmax, int const& n) const;
 
     /**
-     * @brief Function for the integrand.
-     * @param x: the integration variable
-     * @return the integrand evaluated at x
+     * @brief Function that integrates the integrand using the
+     * Gauss-Kronrod method (no accuracy estimate).
+     * @param xmin: the lower bound integration bound
+     * @param xmax: the upper bound integration bound
+     * @param n: index associated to the number of points used for the
+     * integration: 0 for 7 points for Gauss-Legendr, 1 for 15 points
+     * @return the value of the integral
      */
-    double integrand(double const& x) const { return _func(x); };
-
-    /**
-     * @brief Function that returns the integration method.
-     */
-    IntegrationMethod Method() const { return _method; };
+    double integrateGK(double const& xmin, double const& xmax, int const& n) const;
 
   private:
     std::function<double(double const&)> const _func;   //!< The integrand function
