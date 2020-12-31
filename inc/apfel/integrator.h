@@ -60,6 +60,22 @@ namespace apfel
 
     /**
      * @brief Function that integrates the integrand with a given
+     * relative accuracy using a set of fixed point on the integration
+     * range. In this case, the vector also contains the lower and
+     * upper bounds.
+     * @param FixPts: the vector of fixed points of the integration
+     * @param eps: the required relative accuracy
+     * integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for
+     * 16/15 points for Gauss-Legendre/Kronrod (default: 1)
+     * @return the value of the integral
+     * @note In order to make this function as fast as possible, no
+     * manipulation of the vector "FixPts" is made. To be used with
+     * care.
+     */
+    double integrate(std::vector<double> const& FixPts, double const& eps) const;
+
+    /**
+     * @brief Function that integrates the integrand with a given
      * relative accuracy using the method defined in the constructor.
      * @param xmin: the lower bound integration bound
      * @param xmax: the upper bound integration bound
@@ -83,6 +99,22 @@ namespace apfel
      * @return the value of the integral
      */
     double integrate(double const& xmin, double const& xmax, std::vector<double> const& FixPts, int const& n = 1) const;
+
+    /**
+     * @brief Function that integrates the integrand with a given
+     * relative accuracy using a set of fixed point on the integration
+     * range. In this case, the vector also contains the lower and
+     * upper bounds.
+     * @param FixPts: the vector of fixed points of the integration
+     * @param n: index associated to the number of points used for the
+     * integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for
+     * 16/15 points for Gauss-Legendre/Kronrod (default: 1)
+     * @return the value of the integral
+     * @note In order to make this function as fast as possible, no
+     * manipulation of the vector "FixPts" is made. To be used with
+     * care.
+     */
+    double integrate(std::vector<double> const& FixPts, int const& n = 1) const;
 
     /**
      * @brief Function for the integrand.

@@ -133,6 +133,16 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  double Integrator::integrate(std::vector<double> const& FixPts, double const& eps) const
+  {
+    // Compute sub-integrals and sum them up
+    double dgauss = 0;
+    for (int i = 1; i < (int) FixPts.size(); i++)
+      dgauss += integrate(FixPts[i-1], FixPts[i], eps);
+    return dgauss;
+  }
+
+  //_________________________________________________________________________
   double Integrator::integrate(double const& xmin, double const& xmax, int const& n) const
   {
     // Stop if the index n does not take an allowed value
@@ -203,6 +213,16 @@ namespace apfel
     for (int i = 1; i < (int) bounds.size(); i++)
       dgauss += integrate(bounds[i-1], bounds[i], n);
 
+    return dgauss;
+  }
+
+  //_________________________________________________________________________
+  double Integrator::integrate(std::vector<double> const& FixPts, int const& n) const
+  {
+    // Compute sub-integrals and sum them up
+    double dgauss = 0;
+    for (int i = 1; i < (int) FixPts.size(); i++)
+      dgauss += integrate(FixPts[i-1], FixPts[i], n);
     return dgauss;
   }
 }
