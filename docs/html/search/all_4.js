@@ -12,7 +12,7 @@ var searchData=
   ['dglap_2eh_259',['dglap.h',['../dglap_8h.html',1,'']]],
   ['dglapbuilder_2eh_260',['dglapbuilder.h',['../dglapbuilder_8h.html',1,'']]],
   ['dglapobjects_261',['DglapObjects',['../structapfel_1_1DglapObjects.html',1,'apfel']]],
-  ['diagonalbasis_262',['DiagonalBasis',['../classapfel_1_1DiagonalBasis.html',1,'apfel::DiagonalBasis'],['../classapfel_1_1DiagonalBasis.html#ae483032e47e48fcde910ac55cd4a13a3',1,'apfel::DiagonalBasis::DiagonalBasis()']]],
+  ['diagonalbasis_262',['DiagonalBasis',['../classapfel_1_1DiagonalBasis.html',1,'apfel::DiagonalBasis'],['../classapfel_1_1DiagonalBasis.html#aa56c37d18fd7a3c8f02c77a267759333',1,'apfel::DiagonalBasis::DiagonalBasis()']]],
   ['dilog_263',['dilog',['../namespaceapfel.html#a892a0ab473cc1c2933458ae7b02909f4',1,'apfel']]],
   ['dis_20convolution_20maps_264',['DIS convolution maps',['../group__DISBases.html',1,'']]],
   ['disbasis_2eh_265',['disbasis.h',['../disbasis_8h.html',1,'']]],

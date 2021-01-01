@@ -307,16 +307,17 @@ Eq.~(\ref{eq:WDIS}) to be computed, a numerical implementation
 requires devising a strategy that maximises the efficiency. In order
 to do so, we need to ``unpac'' the function $S$ and perform the
 integrations in a way that unnecessary computations are avoided as
-much as possible. Taking $\mu = Q$ and $b = z\xi_n^{(1)} /p_{Th}$, and
-dropping the unnecessary dependencies, Eq.~(\ref{eq:Sall}) can be
-conveniently reorganised as:
+much as possible. Taking $\mu = Q$ and $b = z\xi_n^{(1)} /p_{Th}$,
+using the fact that the Sudakov evolution factor for quarks $R_q$ is
+universal, and dropping the unnecessary dependencies,
+Eq.~(\ref{eq:Sall}) can be conveniently reorganised as:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle
   S\left(x,z,\frac{z\xi_n^{(1)}}{p_{Th}},Q\right)&=&\displaystyle
-                                                     4\pi\sum_qe_q^2\frac1{z}\overline{D}_q\left(z,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right)\right)\\
+                                                     4\pi \frac{\alpha^2(Q)H(Q)}{Q^3}R_q^2\left(b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right),Q\right)\\
 \\
-&\times&\displaystyle \frac{\alpha^2(Q)H(Q)}{Q^3}R_q^2\left(b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right),Q\right)\frac{Y_+(x,Q)}{x}\overline{F}_q\left(x,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right)\right)\,.
+&\times&\displaystyle \frac1{z}\sum_qe_q^2\overline{D}_q\left(z,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right)\right)\frac{Y_+(x,Q)}{x}\overline{F}_q\left(x,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right)\right)\,.
 \end{array}
 \end{equation}
 with:
@@ -327,8 +328,8 @@ and:
 \begin{equation}
 \overline{D}_{i}(z,b) = \sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{qj}(y)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y}, \frac{b_0}{b}\right)\right]\,,
 \end{equation}
-being the initial scale TMDs before Sudakov evolution. The weights in
-Eq.~(\ref{eq:WDIS}) can then be computed as:
+being the initial-scale TMD distributions before Sudakov
+evolution. The weights in Eq.~(\ref{eq:WDIS}) can then be computed as:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle

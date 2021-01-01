@@ -106,21 +106,39 @@ Public Types</h2></td></tr>
 <tr class="memitem:add54e5b8b4534d491e42eb3d56e322a9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#add54e5b8b4534d491e42eb3d56e322a9">integrate</a> (double const &amp;xmin, double const &amp;xmax, double const &amp;eps) const</td></tr>
 <tr class="memdesc:add54e5b8b4534d491e42eb3d56e322a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using the method defined in the constructor.  <a href="classapfel_1_1Integrator.html#add54e5b8b4534d491e42eb3d56e322a9">More...</a><br /></td></tr>
 <tr class="separator:add54e5b8b4534d491e42eb3d56e322a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af93ed704782238fb59e0e74a3f7515b5"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#af93ed704782238fb59e0e74a3f7515b5">integrateGL</a> (double const &amp;xmin, double const &amp;xmax) const</td></tr>
-<tr class="memdesc:af93ed704782238fb59e0e74a3f7515b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using the Gauss-Legendre method.  <a href="classapfel_1_1Integrator.html#af93ed704782238fb59e0e74a3f7515b5">More...</a><br /></td></tr>
-<tr class="separator:af93ed704782238fb59e0e74a3f7515b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a758dac85111c6563e77dae89c5fed7e6"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a758dac85111c6563e77dae89c5fed7e6">integrateGK</a> (double const &amp;xmin, double const &amp;xmax) const</td></tr>
-<tr class="memdesc:a758dac85111c6563e77dae89c5fed7e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using the Gauss-Kronrod method.  <a href="classapfel_1_1Integrator.html#a758dac85111c6563e77dae89c5fed7e6">More...</a><br /></td></tr>
-<tr class="separator:a758dac85111c6563e77dae89c5fed7e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c9d50d435897936339e1b9ec6ff609a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a5c9d50d435897936339e1b9ec6ff609a">integrate</a> (double const &amp;xmin, double const &amp;xmax, std::vector&lt; double &gt; const &amp;FixPts, double const &amp;eps) const</td></tr>
 <tr class="memdesc:a5c9d50d435897936339e1b9ec6ff609a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range.  <a href="classapfel_1_1Integrator.html#a5c9d50d435897936339e1b9ec6ff609a">More...</a><br /></td></tr>
 <tr class="separator:a5c9d50d435897936339e1b9ec6ff609a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716c4e3a48163b5936e1c97969a120c0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a716c4e3a48163b5936e1c97969a120c0">integrate</a> (std::vector&lt; double &gt; const &amp;FixPts, double const &amp;eps) const</td></tr>
+<tr class="memdesc:a716c4e3a48163b5936e1c97969a120c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range. In this case, the vector also contains the lower and upper bounds.  <a href="classapfel_1_1Integrator.html#a716c4e3a48163b5936e1c97969a120c0">More...</a><br /></td></tr>
+<tr class="separator:a716c4e3a48163b5936e1c97969a120c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdbfe2969f82ea82a88af895402b7596"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#acdbfe2969f82ea82a88af895402b7596">integrate</a> (double const &amp;xmin, double const &amp;xmax, int const &amp;n=1) const</td></tr>
+<tr class="memdesc:acdbfe2969f82ea82a88af895402b7596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using the method defined in the constructor.  <a href="classapfel_1_1Integrator.html#acdbfe2969f82ea82a88af895402b7596">More...</a><br /></td></tr>
+<tr class="separator:acdbfe2969f82ea82a88af895402b7596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26081034b492eab38467f1b2c893d603"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a26081034b492eab38467f1b2c893d603">integrate</a> (double const &amp;xmin, double const &amp;xmax, std::vector&lt; double &gt; const &amp;FixPts, int const &amp;n=1) const</td></tr>
+<tr class="memdesc:a26081034b492eab38467f1b2c893d603"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range.  <a href="classapfel_1_1Integrator.html#a26081034b492eab38467f1b2c893d603">More...</a><br /></td></tr>
+<tr class="separator:a26081034b492eab38467f1b2c893d603"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f77ff7b86d9bd45ac435dbd0e403ffa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a8f77ff7b86d9bd45ac435dbd0e403ffa">integrate</a> (std::vector&lt; double &gt; const &amp;FixPts, int const &amp;n=1) const</td></tr>
+<tr class="memdesc:a8f77ff7b86d9bd45ac435dbd0e403ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range. In this case, the vector also contains the lower and upper bounds.  <a href="classapfel_1_1Integrator.html#a8f77ff7b86d9bd45ac435dbd0e403ffa">More...</a><br /></td></tr>
+<tr class="separator:a8f77ff7b86d9bd45ac435dbd0e403ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f8eb6c449fca9e2891295277fae8b12"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a3f8eb6c449fca9e2891295277fae8b12">integrand</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:a3f8eb6c449fca9e2891295277fae8b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the integrand.  <a href="classapfel_1_1Integrator.html#a3f8eb6c449fca9e2891295277fae8b12">More...</a><br /></td></tr>
 <tr class="separator:a3f8eb6c449fca9e2891295277fae8b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad43e4272eef0c1dbdac807aee547ec17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f">IntegrationMethod</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#ad43e4272eef0c1dbdac807aee547ec17">Method</a> () const</td></tr>
 <tr class="memdesc:ad43e4272eef0c1dbdac807aee547ec17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration method.  <a href="classapfel_1_1Integrator.html#ad43e4272eef0c1dbdac807aee547ec17">More...</a><br /></td></tr>
 <tr class="separator:ad43e4272eef0c1dbdac807aee547ec17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93ed704782238fb59e0e74a3f7515b5"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#af93ed704782238fb59e0e74a3f7515b5">integrateGL</a> (double const &amp;xmin, double const &amp;xmax) const</td></tr>
+<tr class="memdesc:af93ed704782238fb59e0e74a3f7515b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using the Gauss-Legendre method.  <a href="classapfel_1_1Integrator.html#af93ed704782238fb59e0e74a3f7515b5">More...</a><br /></td></tr>
+<tr class="separator:af93ed704782238fb59e0e74a3f7515b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a758dac85111c6563e77dae89c5fed7e6"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a758dac85111c6563e77dae89c5fed7e6">integrateGK</a> (double const &amp;xmin, double const &amp;xmax) const</td></tr>
+<tr class="memdesc:a758dac85111c6563e77dae89c5fed7e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using the Gauss-Kronrod method.  <a href="classapfel_1_1Integrator.html#a758dac85111c6563e77dae89c5fed7e6">More...</a><br /></td></tr>
+<tr class="separator:a758dac85111c6563e77dae89c5fed7e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc9a8f98d08aed50e22df156e58320f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a0bc9a8f98d08aed50e22df156e58320f">integrateGL</a> (double const &amp;xmin, double const &amp;xmax, int const &amp;n) const</td></tr>
+<tr class="memdesc:a0bc9a8f98d08aed50e22df156e58320f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using the Gauss-Legendre method (no accuracy estimate).  <a href="classapfel_1_1Integrator.html#a0bc9a8f98d08aed50e22df156e58320f">More...</a><br /></td></tr>
+<tr class="separator:a0bc9a8f98d08aed50e22df156e58320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6da10caf505adc3ba17b530c028a59b7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Integrator.html#a6da10caf505adc3ba17b530c028a59b7">integrateGK</a> (double const &amp;xmin, double const &amp;xmax, int const &amp;n) const</td></tr>
+<tr class="memdesc:a6da10caf505adc3ba17b530c028a59b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that integrates the integrand using the Gauss-Kronrod method (no accuracy estimate).  <a href="classapfel_1_1Integrator.html#a6da10caf505adc3ba17b530c028a59b7">More...</a><br /></td></tr>
+<tr class="separator:a6da10caf505adc3ba17b530c028a59b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classapfel_1_1Integrator.html" title="The Integrator class performs unidimensional numerical integrations using the Guassian quadrature.">Integrator</a> class performs unidimensional numerical integrations using the Guassian quadrature. </p>
@@ -220,7 +238,7 @@ Public Types</h2></td></tr>
 </div>
 </div>
 <a id="add54e5b8b4534d491e42eb3d56e322a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add54e5b8b4534d491e42eb3d56e322a9">&#9670;&nbsp;</a></span>integrate() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#add54e5b8b4534d491e42eb3d56e322a9">&#9670;&nbsp;</a></span>integrate() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,8 +284,53 @@ Public Types</h2></td></tr>
 
 </div>
 </div>
+<a id="acdbfe2969f82ea82a88af895402b7596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbfe2969f82ea82a88af895402b7596">&#9670;&nbsp;</a></span>integrate() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrate </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>n</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand with a given relative accuracy using the method defined in the constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
+    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
+    <tr><td class="paramname">n</td><td>index associated to the number of points used for the integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for 16/15 points for Gauss-Legendre/Kronrod (default: 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+
+</div>
+</div>
 <a id="a5c9d50d435897936339e1b9ec6ff609a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c9d50d435897936339e1b9ec6ff609a">&#9670;&nbsp;</a></span>integrate() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c9d50d435897936339e1b9ec6ff609a">&#9670;&nbsp;</a></span>integrate() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -318,11 +381,144 @@ Public Types</h2></td></tr>
 
 </div>
 </div>
-<a id="a758dac85111c6563e77dae89c5fed7e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a758dac85111c6563e77dae89c5fed7e6">&#9670;&nbsp;</a></span>integrateGK()</h2>
+<a id="a26081034b492eab38467f1b2c893d603"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26081034b492eab38467f1b2c893d603">&#9670;&nbsp;</a></span>integrate() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrate </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>FixPts</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>n</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
+    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
+    <tr><td class="paramname">FixPts</td><td>the vector of fixed points of the integration </td></tr>
+    <tr><td class="paramname">n</td><td>index associated to the number of points used for the integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for 16/15 points for Gauss-Legendre/Kronrod (default: 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+
+</div>
+</div>
+<a id="a716c4e3a48163b5936e1c97969a120c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716c4e3a48163b5936e1c97969a120c0">&#9670;&nbsp;</a></span>integrate() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrate </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>FixPts</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>eps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range. In this case, the vector also contains the lower and upper bounds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FixPts</td><td>the vector of fixed points of the integration </td></tr>
+    <tr><td class="paramname">eps</td><td>the required relative accuracy integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for 16/15 points for Gauss-Legendre/Kronrod (default: 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In order to make this function as fast as possible, no manipulation of the vector "FixPts" is made. To be used with care. </dd></dl>
+
+</div>
+</div>
+<a id="a8f77ff7b86d9bd45ac435dbd0e403ffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f77ff7b86d9bd45ac435dbd0e403ffa">&#9670;&nbsp;</a></span>integrate() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrate </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>FixPts</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>n</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand with a given relative accuracy using a set of fixed point on the integration range. In this case, the vector also contains the lower and upper bounds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FixPts</td><td>the vector of fixed points of the integration </td></tr>
+    <tr><td class="paramname">n</td><td>index associated to the number of points used for the integration: 0 for 8/7 points for Gauss-Legendre/Kronrod, 1 for 16/15 points for Gauss-Legendre/Kronrod (default: 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In order to make this function as fast as possible, no manipulation of the vector "FixPts" is made. To be used with care. </dd></dl>
+
+</div>
+</div>
+<a id="a758dac85111c6563e77dae89c5fed7e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a758dac85111c6563e77dae89c5fed7e6">&#9670;&nbsp;</a></span>integrateGK() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::pair&lt;double, double&gt; apfel::Integrator::integrateGK </td>
@@ -342,6 +538,11 @@ Public Types</h2></td></tr>
           <td></td><td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function that integrates the integrand using the Gauss-Kronrod method. </p>
@@ -356,11 +557,67 @@ Public Types</h2></td></tr>
 
 </div>
 </div>
-<a id="af93ed704782238fb59e0e74a3f7515b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af93ed704782238fb59e0e74a3f7515b5">&#9670;&nbsp;</a></span>integrateGL()</h2>
+<a id="a6da10caf505adc3ba17b530c028a59b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da10caf505adc3ba17b530c028a59b7">&#9670;&nbsp;</a></span>integrateGK() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrateGK </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand using the Gauss-Kronrod method (no accuracy estimate). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
+    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
+    <tr><td class="paramname">n</td><td>index associated to the number of points used for the integration: 0 for 7 points for Gauss-Legendr, 1 for 15 points </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
+
+</div>
+</div>
+<a id="af93ed704782238fb59e0e74a3f7515b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af93ed704782238fb59e0e74a3f7515b5">&#9670;&nbsp;</a></span>integrateGL() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::pair&lt;double, double&gt; apfel::Integrator::integrateGL </td>
@@ -380,6 +637,11 @@ Public Types</h2></td></tr>
           <td></td><td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function that integrates the integrand using the Gauss-Legendre method. </p>
@@ -391,6 +653,59 @@ Public Types</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a pair containing the value of the integral computed with the 16-point method and the relative difference w.r.t. the 8-point one. </dd></dl>
+
+</div>
+</div>
+<a id="a0bc9a8f98d08aed50e22df156e58320f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc9a8f98d08aed50e22df156e58320f">&#9670;&nbsp;</a></span>integrateGL() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Integrator::integrateGL </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that integrates the integrand using the Gauss-Legendre method (no accuracy estimate). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmin</td><td>the lower bound integration bound </td></tr>
+    <tr><td class="paramname">xmax</td><td>the upper bound integration bound </td></tr>
+    <tr><td class="paramname">n</td><td>index associated to the number of points used for the integration: 0 for 8 points for Gauss-Legendr, 1 for 16 points </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the integral </dd></dl>
 
 </div>
 </div>
@@ -476,7 +791,7 @@ Public Types</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 29 2020 12:26:37 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.0
+Generated on Fri Jan 1 2021 23:44:39 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.0
 </small></address>
 </body>
 </html>
