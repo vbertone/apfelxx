@@ -23,6 +23,18 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
+  Set<T>::Set(std::map<int, T> const& in):
+    _map(ConvolutionMap{"DefaultConvolutionMap"}),
+    _objects(in)
+  {
+    std::map<int, std::vector<ConvolutionMap::rule>> rules;
+    for (auto const& o : in)
+      rules.insert({o.first, {{o.first, o.first, 1}}});
+    _map.SetRules(rules);
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   template<class V> Set<V> Set<T>::operator *= (Set<V> const& d) const
   {
     if (_map.GetName() != d.GetMap().GetName())

@@ -22,12 +22,6 @@ namespace apfel
   {
   public:
     /**
-     * @brief ConvolutionMap constructor
-     * @param name: name of the map
-     */
-    ConvolutionMap(std::string const& name);
-
-    /**
      * @brief This structure contains the attribute of a single rule.
      */
     struct rule
@@ -43,6 +37,23 @@ namespace apfel
         return true;
       }
     };
+
+    /**
+     * @brief ConvolutionMap constructor
+     * @param name: name of the map
+     */
+    ConvolutionMap(std::string const& name);
+
+    /**
+     * @name Setters
+     */
+    ///@{
+    /**
+     * @brief Set the rule of the convolution map.
+     * @param rules: the input set of rules
+     */
+    void SetRules(std::map<int, std::vector<rule>> const& rules)  { _rules = rules; }
+    ///@}
 
     /**
      * @name Getters
@@ -97,6 +108,6 @@ namespace apfel
      * @brief The DiagonalBasis constructor
      * @param nf: number of elements
      */
-    DiagonalBasis(int const& nf);
+    DiagonalBasis(int const& nf, int const& offset = 0);
   };
 }
