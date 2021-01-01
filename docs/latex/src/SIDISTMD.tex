@@ -54,11 +54,11 @@ with $\zeta_1\zeta_2=Q^4$ and:
 where $s$ is the squared center of mass energy. The single TMDs are
 evolved and matched onto the respective collinear functions as usual:
 \begin{equation}
-\overline{F}_i(x,b;\mu,\zeta) =xF_i(x,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_x^1dy\,\mathcal{C}_{ij}(y;\mu_0,\zeta_0)\left[\frac{x}{y}f_j\left(\frac{x}{y},\mu_0\right)\right]\,,
+\overline{F}_q(x,b;\mu,\zeta) =xF_q(x,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_x^1dy\,\mathcal{C}_{qj}(y;\mu_0,\zeta_0)\left[\frac{x}{y}f_j\left(\frac{x}{y},\mu_0\right)\right]\,,
 \end{equation}
 and:
 \begin{equation}
-\overline{D}_{i}(z,b;\mu,\zeta) =z^3D_{i}(z,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{ij}(y;\mu_0,\zeta_0)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y},\mu_0\right)\right]\,.
+\overline{D}_{i}(z,b;\mu,\zeta) =z^3D_{q}(z,b;\mu,\zeta) = R_q(\mu_0,\zeta_0\rightarrow \mu,\zeta;b) \sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{qj}(y;\mu_0,\zeta_0)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y},\mu_0\right)\right]\,.
 \end{equation}
 Notice that here we limit to the case $Q\ll M_Z$ such that we can
 neglect the contribution of the $Z$ boson and thus the electroweak
@@ -76,11 +76,11 @@ This allows us to replace the TMDs in Eq.~(\ref{eq:sidisxsec}) with
 their ``regularised'' version:
 \begin{equation}\label{eq:fandDNP}
 \begin{array}{rcl}
-  \overline{F}_i(x,b;\mu,\zeta) &\rightarrow&
-  \overline{F}_i(x,b_*(b);\mu,\zeta) f_{\rm NP}(x,b,\zeta)\,,\\
+  \overline{F}_q(x,b;\mu,\zeta) &\rightarrow&
+  \overline{F}_q(x,b_*(b);\mu,\zeta) f_{\rm NP}(x,b,\zeta)\,,\\
 \\
-  \overline{D}_i(z,b;\mu,\zeta) &\rightarrow&
-  \overline{D}_i(z,b_*(b);\mu,\zeta) D_{\rm NP}(z,b,\zeta)\,,
+  \overline{D}_q(z,b;\mu,\zeta) &\rightarrow&
+  \overline{D}_q(z,b_*(b);\mu,\zeta) D_{\rm NP}(z,b,\zeta)\,,
 \end{array}
 \end{equation}
 where we have introduced the non-perturbative functions $f_{\rm NP}$
@@ -100,7 +100,7 @@ some initial scale. Finally the set of non-perturbative functions to
 be determined from fits to data are $\widetilde{f}_{\rm NP}$,
 $\widetilde{D}_{\rm NP}$, and $g_K(b)$. It is worth noticing that by definition
 \begin{equation}
- f_{\rm NP}(x,b,\zeta) = \frac{\overline{F}_i(x,b;\mu,\zeta)}{\overline{F}_i(x,b_*(b);\mu,\zeta)} \,,\\
+ f_{\rm NP}(x,b,\zeta) = \frac{\overline{F}_q(x,b;\mu,\zeta)}{\overline{F}_q(x,b_*(b);\mu,\zeta)} \,,\\
 \end{equation}
 and similarly for $D_{\rm NP}$. Therefore, one has a partial handle on
 the $b$-dependence of these functions from the region in which $b$ is
@@ -114,7 +114,7 @@ as:
 \frac{4\pi \alpha^2q_{T}}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2\\
 \\
 &\times&\displaystyle 
-  \int_0^\infty db\, J_0\left(bq_T\right) \,b\overline{F}_i(x,b_*(b);\mu,Q^2) \overline{D}_i(z,b_*(b);\mu,Q^2) f_{\rm NP}(x,b,Q^2) D_{\rm NP}(z,b,Q^2)\,.
+  \int_0^\infty db\, J_0\left(bq_T\right) \,b\overline{F}_q(x,b_*(b);\mu,Q^2) \overline{D}_q(z,b_*(b);\mu,Q^2) f_{\rm NP}(x,b,Q^2) D_{\rm NP}(z,b,Q^2)\,.
 \end{array}
 \end{equation}
 The integral in the r.h.s. can be numerically computed using the Ogata
@@ -125,8 +125,8 @@ quadrature of zero-th degree (because $J_0$ enters the integral):
 \frac{4\pi \alpha^2}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2\\
 \\
 &\times&\displaystyle
-  \sum_{n=1}^{N}w_n^{(0)}\,\frac{\xi_n^{(0)}}{q_{T}}\overline{F}_i\left(x,b_*\left(\frac{\xi_n^{(0)}}{q_{T}}\right);\mu,Q^2\right)
-         \overline{D}_i\left(z,b_*\left(\frac{\xi_n^{(0)}}{q_{T}}\right);\mu,Q^2\right)\\
+  \sum_{n=1}^{N}w_n^{(0)}\,\frac{\xi_n^{(0)}}{q_{T}}\overline{F}_q\left(x,b_*\left(\frac{\xi_n^{(0)}}{q_{T}}\right);\mu,Q^2\right)
+         \overline{D}_q\left(z,b_*\left(\frac{\xi_n^{(0)}}{q_{T}}\right);\mu,Q^2\right)\\
 \\
 &\times& \displaystyle f_{\rm NP}\left(x, \frac{\xi_n^{(0)}}{q_{T}},Q^2\right) D_{\rm NP}\left(z, \frac{\xi_n^{(0)}}{q_{T}},Q^2\right)\,,
 \end{array}
@@ -142,8 +142,8 @@ follows:
 \end{equation}
 where:
 \begin{equation}\label{eq:Sall}
-\displaystyle S\left(x,z,b;\mu,Q^2\right)\simeq
-\frac{4\pi \alpha^2}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2 \left[\overline{F}_i\left(x,b_*(b);\mu,Q^2\right)\right]\left[\overline{D}_i\left(z,b_*(b);\mu,Q^2\right)\right]\,.
+\displaystyle S\left(x,z,b;\mu,Q^2\right)=
+\frac{4\pi \alpha^2}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2 \left[\overline{F}_q\left(x,b_*(b);\mu,Q^2\right)\right]\left[\overline{D}_q\left(z,b_*(b);\mu,Q^2\right)\right]\,.
 \end{equation}
 
 \section{Integrating over the final-state kinematic variables}
@@ -167,8 +167,8 @@ The integrated cross section then reads:
       dz dq_{T}} \right]\,.
 \end{equation}
 One can exploit a property of the Bessel functions to compute the
-indefinite integral in $q_{T}$ of the cross section in
-Eq.~(\ref{eq:approxint}). Specifically, we now compute:
+indefinite integral in $q_{T}$ of the cross section. Specifically, we
+now compute:
 \begin{equation}
   K(x,z,Q,q_{T}) = \int dq_{T}\left[\frac{d\sigma}{dxdQdz dq_{T}}\right]\,.
 \end{equation}
@@ -189,8 +189,8 @@ Therefore:
 \\
 &\times&\displaystyle 
   \int_0^\infty db\, J_1\left(bq_T\right)
-         \,\overline{F}_i(x,b_*(b);\mu,Q^2)
-         \overline{D}_i(z,b_*(b);\mu,Q^2) f_{\rm NP}(x,b,Q^2) D_{\rm NP}(z,b,Q^2)\,.
+         \,\overline{F}_q(x,b_*(b);\mu,Q^2)
+         \overline{D}_q(z,b_*(b);\mu,Q^2) f_{\rm NP}(x,b,Q^2) D_{\rm NP}(z,b,Q^2)\,.
 \end{array}
 \end{equation}
 The integral can again be computed using the Ogata quadrature as:
@@ -301,6 +301,64 @@ Eq.~(\ref{eq:IntcrosssectionSIDIS}) as follows:
         max}}\right]\,,\quad   x_{\rm max}\rightarrow \overline{x}_{\rm max}(Q)=\mbox{min}\left[x_{\rm max},\frac{Q^2}{s y_{\rm
         min}}, \frac{Q^2}{W_{\rm min}^2+Q^2}\right]\,.
 \end{equation}
+
+Given the number and complexity of integrals as that in
+Eq.~(\ref{eq:WDIS}) to be computed, a numerical implementation
+requires devising a strategy that maximises the efficiency. In order
+to do so, we need to ``unpac'' the function $S$ and perform the
+integrations in a way that unnecessary computations are avoided as
+much as possible. Taking $\mu = Q$ and $b = z\xi_n^{(1)} /p_{Th}$, and
+dropping the unnecessary dependencies, Eq.~(\ref{eq:Sall}) can be
+conveniently reorganised as:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle
+  S\left(x,z,\frac{z\xi_n^{(1)}}{p_{Th}},Q\right)&=&\displaystyle
+                                                     4\pi\sum_qe_q^2\frac1{z}\overline{D}_q\left(z,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right)\right)\\
+\\
+&\times&\displaystyle \frac{\alpha^2(Q)H(Q)}{Q^3}R_q^2\left(b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right),Q\right)\frac{Y_+(x,Q)}{x}\overline{F}_q\left(x,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}}\right)\right)\,.
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+\overline{F}_q(x,b) = \sum_{j}\int_x^1dy\,\mathcal{C}_{qj}(y)\left[\frac{x}{y}f_j\left(\frac{x}{y},\frac{b_0}{b}\right)\right]\,,
+\end{equation}
+and:
+\begin{equation}
+\overline{D}_{i}(z,b) = \sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{qj}(y)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y}, \frac{b_0}{b}\right)\right]\,,
+\end{equation}
+being the initial scale TMDs before Sudakov evolution. The weights in
+Eq.~(\ref{eq:WDIS}) can then be computed as:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle
+  W_{n\alpha\beta\tau}(p_{Th})&=&\displaystyle w_n^{(1)}
+                                  4\pi
+         \int_{Q_{\rm min}}^{Q_{\rm
+      max}}dQ\,\mathcal{I}_\tau(Q) \frac{\alpha^2(Q)H(Q)}{Q^3}\\
+\\
+&\times&\displaystyle\int_{z_{\rm min}}^{z_{\rm max}}dz\,
+  \mathcal{I}_\beta(z) 
+                                                     R_q^2\left(b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}},Q\right),Q\right)\frac1{z}\sum_qe_q^2 \overline{D}_q\left(z,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}},Q\right)\right)\\
+\\
+&\times&\displaystyle \int_{\overline{x}_{\rm min}(Q)}^{\overline{x}_{\rm
+      max}(Q)}dx\, \mathcal{I}_\alpha(x)\frac{Y_+(x,Q)}{x}\overline{F}_q\left(x,b_*\left(\frac{z\xi_n^{(1)}}{p_{Th}},Q\right)\right)\,.
+\end{array}
+\end{equation}
+This nesting should optimise the computation of the integrals.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
