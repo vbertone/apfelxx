@@ -22,11 +22,17 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The constructor in the presence of a phase-space
-     * reduction given by eta.
+     * @brief The "Expression" constructor
+     * @param ext: switch to know if depends explicitly on the external variable (default: false)
      * @param eta: upper limit of the convolution integral (default: 1)
      */
-    Expression(double const& eta = 1);
+    Expression(bool const& ext = false, double const& eta = 1);
+
+    /**
+     * @brief The "Expression" constructor
+     * @param eta: upper limit of the convolution integral
+     */
+    Expression(double const& eta);
     ///@}
 
     /**
@@ -61,14 +67,21 @@ namespace apfel
     double eta() const { return _eta; }
 
     /**
+     * @brief Function that returns the switch that encodes if the
+     * expression depends explicitly on the external variable.
+     */
+    bool DependsOnExternalVariable() const { return _ext; }
+
+    /**
      * @brief Function that sets the value of a possible external
      * variable.
      */
     void SetExternalVariable(double const& extvar) const { _extvar = extvar; }
 
   protected:
-    double const   _eta;     //!< Mass parameter
+    bool   const   _ext;     //!< If the expression depends explicitly on the external variable
     double mutable _extvar;  //!< External kinematic variable
+    double const   _eta;     //!< Mass parameter
   };
 
   /**

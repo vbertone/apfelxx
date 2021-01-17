@@ -36,6 +36,12 @@ namespace apfel
     void resize(size_t const& row, size_t const& col, T const& v = 0);
 
     /**
+     * @brief Function that set all entries of the matrix to the input value.
+     * @param v: the default value
+     */
+    void set(T const& v);
+
+    /**
      * @brief Returns the (row,col) size pair.
      * @param dim: the dimension
      * @returns the number of raws and columns

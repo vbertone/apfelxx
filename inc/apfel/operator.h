@@ -6,10 +6,9 @@
 
 #pragma once
 
-#include "apfel/grid.h"
 #include "apfel/expression.h"
 #include "apfel/distribution.h"
-#include "apfel/extendedvector.h"
+#include "apfel/matrix.h"
 
 namespace apfel
 {
@@ -69,12 +68,12 @@ namespace apfel
     /**
      * @brief Function that returns the operator.
      */
-    std::vector<ExtendedVector<double>> GetOperator() const { return _Operator; }
+    std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
   protected:
-    Grid                         const& _grid;      //!< Grid on which to compute the operator
-    bool                         const  _erbl;      //!< If the operator is ERBL-like
-    std::vector<ExtendedVector<double>> _Operator;  //!< Operator values.
+    Grid                 const& _grid;      //!< Grid on which to compute the operator
+    bool                 const  _erbl;      //!< If the operator is ERBL-like
+    std::vector<matrix<double>> _Operator;  //!< Operator values.
 
     friend std::ostream& operator << (std::ostream& os, Operator const& sg);
   };

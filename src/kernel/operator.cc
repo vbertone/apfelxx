@@ -20,6 +20,9 @@ namespace apfel
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{gr};
 
+    // If the expression depends explicitly on the external variable
+    //const bool ext = expr.DependsOnExternalVariable();
+
     // Scaling factor
     const double eta = expr.eta();
 
@@ -49,7 +52,7 @@ namespace apfel
         const double L = eta * expr.Local(1 / exp(s) / eta);
 
         // Initialise operator
-        _Operator[ig].resize((_erbl ? 2 : 1 ) * nx + 1, 0, (_erbl ? - nx : 0 ));
+        _Operator[ig].resize(nx + 1, 1);
 
         // The index beta is set to zero corresponding to the first
         // line of the operator matrix. We keep it explicit to make
@@ -91,36 +94,7 @@ namespace apfel
                 I += Ij.integrate(exp((beta - alpha + j - 1) * s), exp((beta - alpha + j) * s), eps);
               }
             // Add the local part
-            _Operator[ig][alpha] = I + L * ws;
-
-            // If the operator is ERB-like compute the negative
-            // components of the operator vector. This is done in the
-            // exact same way as above but running over the first
-            // column of the operator matrix rather than over the
-            // first line. In practice, I've taken the code above and
-            // exchanged alpha and beta. Therfore, setting beta to
-            // zero and running over alpha is equivalent to computing
-            // the first column.
-            if (_erbl)
-              // Start from one because the alpha = 0 has already been
-              // computed above.
-              for (int alpha = 1; alpha <= nx; alpha++)
-                {
-                  expr.SetExternalVariable(xg[alpha]);
-                  const double ws = li.InterpolantLog(beta, ( alpha - nx ) * s - log(eta), sg);
-                  double I = 0;
-                  for (int j = std::max(0, beta + 1 - nx); j < id + 1; j++)
-                    {
-                      const Integrator Ij{[&] (double const& y) -> double
-                        {
-                          const double z  = y / eta;
-                          const double wr = li.InterpolantLog(beta, log(xg[alpha] / y), sg);
-                          return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
-                        }};
-                      I += Ij.integrate(exp((alpha - beta + j - 1) * s), exp((alpha - beta + j) * s), eps);
-                    }
-                  _Operator[ig][-alpha] = I + L * ws;
-                }
+            _Operator[ig](alpha, beta) = I + L * ws;
           }
       }
   }
@@ -169,7 +143,7 @@ namespace apfel
       {
         const std::pair<int, int> m = sjmap[alpha];
         for (int beta = (_erbl ? 0 : m.second); beta <= _grid.GetSubGrid(m.first).nx(); beta++)
-          j[alpha] += _Operator[m.first][beta - m.second] * dj[jsmap[m.first][beta]];
+          j[alpha] += _Operator[m.first](beta - m.second, 0) * dj[jsmap[m.first][beta]];
       }
 
     // Compute the the distribution on the subgrids
@@ -192,18 +166,18 @@ namespace apfel
     if (&_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator*=", "Operators grid does not match"));
 
-    const std::vector<ExtendedVector<double>> v = _Operator;
+    const std::vector<matrix<double>> v = _Operator;
     for (int ig = 0; ig < (int) v.size(); ig++)
       {
         // Set operator entries to zero
-        std::fill(_Operator[ig].begin(), _Operator[ig].end(), 0);
+        _Operator[ig].set(0);
 
         // The product between the operators is done exploiting the
         // symmetry of the operators.
         int const nx = _grid.GetSubGrid(ig).nx();
-        for (int beta = _Operator[ig].min(); beta < _Operator[ig].max(); beta++)
-          for (int gamma = std::min(0, beta) ; gamma <= (_erbl ? nx : beta) + std::min(0, beta); gamma++)
-            _Operator[ig][beta] += v[ig][gamma] * o._Operator[ig][beta - gamma];
+        for (int beta = 0; beta < (int) _Operator[ig].size(0); beta++)
+          for (int gamma = 0; gamma <= (_erbl ? nx : beta); gamma++)
+            _Operator[ig](beta, 0) += v[ig](gamma, 0) * o._Operator[ig](beta - gamma, 0);
       }
     return *this;
   }
@@ -212,8 +186,8 @@ namespace apfel
   Operator& Operator::operator *= (double const& s)
   {
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
-      for (int alpha = _Operator[ig].min(); alpha < _Operator[ig].max(); alpha++)
-        _Operator[ig][alpha] *= s;
+      for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+        _Operator[ig](alpha, 0) *= s;
 
     return *this;
   }
@@ -225,8 +199,8 @@ namespace apfel
       {
         // Get ig-th subgrid
         const std::vector<double>& sg = _grid.GetSubGrid(ig).GetGrid();
-        for (int alpha = _Operator[ig].min(); alpha < _Operator[ig].max(); alpha++)
-          _Operator[ig][alpha] *= f(sg[alpha]);
+        for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+          _Operator[ig](alpha, 0) *= f(sg[alpha]);
       }
     return *this;
   }
@@ -235,8 +209,8 @@ namespace apfel
   Operator& Operator::operator /= (double const& s)
   {
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
-      for (int alpha = _Operator[ig].min(); alpha < _Operator[ig].max(); alpha++)
-        _Operator[ig][alpha] /= s;
+      for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+        _Operator[ig](alpha, 0) /= s;
 
     return *this;
   }
@@ -249,8 +223,8 @@ namespace apfel
       throw std::runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
-      for (int alpha = _Operator[ig].min(); alpha < _Operator[ig].max(); alpha++)
-        _Operator[ig][alpha] += o._Operator[ig][alpha];
+      for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+        _Operator[ig](alpha, 0) += o._Operator[ig](alpha, 0);
 
     return *this;
   }
@@ -263,8 +237,8 @@ namespace apfel
       throw std::runtime_error(error("Operator::operator+=", "Operators grid does not match"));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
-      for (int alpha = _Operator[ig].min(); alpha < _Operator[ig].max(); alpha++)
-        _Operator[ig][alpha] -= o._Operator[ig][alpha];
+      for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+        _Operator[ig](alpha, 0) -= o._Operator[ig](alpha, 0);
 
     return *this;
   }
@@ -326,7 +300,7 @@ namespace apfel
   //_________________________________________________________________________________
   std::ostream& operator << (std::ostream& os, Operator const& op)
   {
-    const std::vector<ExtendedVector<double>> om = op.GetOperator();
+    const std::vector<matrix<double>> om = op.GetOperator();
     os << "Operator: " << &op << "\n";
     os << "Operator on the SubGrids:" << "\n";
     const std::ostringstream default_format;
@@ -334,10 +308,9 @@ namespace apfel
     os.precision(2);
     for (int i = 0; i < (int) om.size(); i++)
       {
-        os << om[i].min() << "\n";
         os << "O[" << i << "]: [";
-        for (int alpha = om[i].min(); alpha < (int) om[i].max(); alpha++)
-          os << "{" << alpha << " : " << om[i][alpha] << "} ";
+        for (int alpha = 0; alpha < (int) om[i].size(0); alpha++)
+          os << "{" << alpha << " : " << om[i](alpha, 0) << "} ";
         os << "]\n";
       }
     os.copyfmt(default_format);

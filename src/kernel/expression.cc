@@ -9,9 +9,16 @@
 namespace apfel
 {
   //_________________________________________________________________________
+  Expression::Expression(bool const& ext, double const& eta):
+    _ext(ext),
+    _extvar(0),
+    _eta(eta)
+  {
+  }
+
+  //_________________________________________________________________________
   Expression::Expression(double const& eta):
-    _eta(eta),
-    _extvar(0)
+    Expression{false, eta}
   {
   }
 }
