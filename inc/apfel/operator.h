@@ -28,31 +28,26 @@ namespace apfel
      * @param gr: the Grid object
      * @param expr: the expression to be transformed
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
-     * @param erbl: whether the convolution integral is ERBL like (default: false)
      */
-    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5, bool const& erbl = false);
+    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
 
     /**
-     * @brief The Operator constructor.
-     * @param gr: the Grid object
-     * @param expr: the expression to be transformed
-     * @param erbl: whether the convolution integral is ERBL like
-     * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
+     * @brief The Operator virtual destructor.
      */
-    Operator(Grid const& gr, Expression const& expr, bool const& erbl, double const& eps = 1e-5);
+    virtual ~Operator() {}
 
     /**
-     * @brief Function that returns the ERBL-like flag
+     * @brief Function that computes the actual operator on the grid.
      */
-    bool IsERBL() const { return _erbl; }
+    virtual void ComputeOperator();
 
     /**
      * @name Binary operators
      */
     ///@{
-    Distribution operator *= (Distribution const& d) const;            //!< this *= Distribution
-    Operator&    operator  = (Operator const& o);                      //!< this  = Operator
+    virtual Distribution operator *= (Distribution const& d) const;    //!< this *= Distribution
     Operator&    operator *= (Operator const& o);                      //!< this *= Operator
+    Operator&    operator  = (Operator const& o);                      //!< this  = Operator
     Operator&    operator *= (double const& s);                        //!< this *= Scalar
     Operator&    operator *= (std::function<double(double const&)> f); //!< This *= Function
     Operator&    operator /= (double const& s);                        //!< this /= Scalar
@@ -66,14 +61,25 @@ namespace apfel
     Grid const& GetGrid() const { return _grid; }
 
     /**
+     * @brief Function that returns the Expression object of the operator.
+     */
+    Expression const& GetExpression() const { return _expr; }
+
+    /**
+     * @brief Function that returns the integration accuracy of the operator.
+     */
+    double GetIntegrationAccuracy() const { return _eps; }
+
+    /**
      * @brief Function that returns the operator.
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
   protected:
     Grid                 const& _grid;      //!< Grid on which to compute the operator
-    bool                 const  _erbl;      //!< If the operator is ERBL-like
-    std::vector<matrix<double>> _Operator;  //!< Operator values.
+    Expression           const& _expr;      //!< The expression to be transformed into an operator
+    double               const  _eps;       //!< The integration accuracy
+    std::vector<matrix<double>> _Operator;  //!< Operator values
 
     friend std::ostream& operator << (std::ostream& os, Operator const& sg);
   };

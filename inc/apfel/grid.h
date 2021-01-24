@@ -47,6 +47,11 @@ namespace apfel
     std::vector<std::vector<int>> const& JointToSubMap() const { return _JointToSubMap; }
 
     /**
+     * @return The vector of transition indices on the joint grid
+     */
+    std::vector<int> const& TransitionPoints() const { return _TransPoints; }
+
+    /**
      * @return The vector of subgrids
      */
     std::vector<SubGrid> const& GetSubGrids() const { return _GlobalGrid; }
@@ -82,6 +87,7 @@ namespace apfel
   private:
     std::vector<std::pair<int, int>> _SubToJointMap; //!< Vector of pairs corresponding to grid- and node-indices on the subgrids.
     std::vector<std::vector<int>>    _JointToSubMap; //!< Vector of indices from the subgrids to the joint grid
+    std::vector<int>                 _TransPoints;   //!< Vector of indices corresponding to the transition from one subgrid to the other
     std::vector<SubGrid>             _GlobalGrid;    //!< Vector with sub-grids.
     std::unique_ptr<SubGrid>         _JointGrid;     //!< Container for the joint grid.
 

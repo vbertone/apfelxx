@@ -99,8 +99,11 @@ namespace apfel
     // Since the subgrids are locked all the nodes of each single
     // subgrid are also on the joint grid. We now define a vector of
     // integers that map each index on each single subgrid on a node
-    // on the joint grid.
+    // on the joint grid. For convenience, we also define a vector
+    // containing the indices on the joint grid where the following
+    // subgrid starts.
     _JointToSubMap.resize(ng);
+    _TransPoints.resize(ng + 1);
     for (int ig = 0; ig < ng; ig++)
       {
         const std::vector<double> xg = _GlobalGrid[ig].GetGrid();
@@ -120,7 +123,10 @@ namespace apfel
         // equal to that at x = 1.
         for (int ix = nxg + 1; ix < nxg + id + 1; ix++)
           _JointToSubMap[ig][ix] = _JointToSubMap[ig][nxg];
+
+        _TransPoints[ig] = _JointToSubMap[ig][0];
       }
+    _TransPoints[ng] = xg_joint_vect.size() - 1;
 
     // Initialize another SubGrid for the joint grid.
     return SubGrid{xg_joint_vect, id_joint};

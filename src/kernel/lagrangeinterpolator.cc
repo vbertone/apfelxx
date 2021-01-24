@@ -33,7 +33,7 @@ namespace apfel
     // should only be) used to compute operators, the logarithmic step
     // should be defined. Its knowledge, along with the number of
     // intervals and the fact that the upper bound of the grid is
-    // always at x = 1, allows us to avoid knowing the grid itself
+    // always at x = 1, allows one to avoid knowing the grid itself
     // because the interpolant can be written in terms of the relevat
     // indeces. This is advantageous because this way one can
     // indefinitely extend the grid beyond its original definition
@@ -44,7 +44,7 @@ namespace apfel
     const int nx = sg.nx();
 
     // Rescaled value to be interpolated. This can be interpreted as a
-    // continuos index on the grid assocuated to "lnx".
+    // continuos index on the grid associated to "lnx".
     const double ix = lnx / s + nx;
 
     // Return immediately 1 if "ix" coincides with "beta".
@@ -202,59 +202,6 @@ namespace apfel
         iw_int += dp * sum;
       }
     return iw_int;
-    /*
-        // Let us first try using polynomials in 'log(x)'. This also works
-        // but seems to me less accurate.
-        // Get the grid.
-        const std::vector<double>& lxg = sg.GetLogGrid();
-
-        // Interpolation degree
-        const int k = sg.InterDegree();
-
-        // Transform bounds
-        //const double lna = log(a);
-        //const double lnb = log(b);
-
-        // Construct interpolant
-        double iw_int = 0;
-        for (int i = 0; i <= std::min(k, beta); i++)
-          {
-            if (lxg[beta-i] > lnb || lxg[beta-i+1] < lna)
-              continue;
-
-            // Product of denominators
-            double dp = 1;
-            std::vector<double> r(k);
-            int j = 0;
-            for (int m = 0; m <= k; m++)
-              if(m != i)
-                {
-                  dp /= lxg[beta] - lxg[beta-i+m];
-                  r[j++] = lxg[beta-i+m];
-                }
-
-            // Expansion coefficients
-            const std::vector<double> p = ProductExpansion(r);
-
-            // Coefficients q
-            std::vector<double> q(k+1, 0);
-            for (int n = 0; n <= k; n++)
-              for (int eta = n; eta <= k; eta++)
-                q[n] += factorial(eta) * p[k-eta];
-
-            // Integration bounds
-            const double lab = std::max(lna, lxg[beta-i]);
-            const double lbb = std::min(lnb, lxg[beta-i+1]);
-
-            // Sum of the integrals
-            double sum = 0;
-            for (int n = 0; n <= k; n++)
-              sum += q[n] * pow(-1, k + n) * ( exp(lbb) * pow(lbb, n) - exp(lab) * pow(lab, n) ) / factorial(n);
-
-            iw_int += dp * sum;
-          }
-        return iw_int;
-    */
   }
 
   //_________________________________________________________________________________
