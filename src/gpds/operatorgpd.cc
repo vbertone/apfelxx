@@ -12,12 +12,7 @@ namespace apfel
 {
   //_________________________________________________________________________
   OperatorGPD::OperatorGPD(Grid const& gr, Expression const& expr, double const& eps):
-    Operator(gr, expr, eps)
-  {
-  }
-
-  //_________________________________________________________________________
-  void OperatorGPD::ComputeOperator()
+    Operator(gr)
   {
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
@@ -39,7 +34,6 @@ namespace apfel
 
     // Initialise operator
     _Operator[0].resize(nx, nx, 0);
-
     // Loop over the index beta. In fact beta = 0 because the size
     // of the first dimension of "_Operator" is one.
     for (int beta = 0; beta < (int) _Operator[0].size(0); beta++)
@@ -47,7 +41,7 @@ namespace apfel
         // Set xg[beta] as external variable for the computation
         // of the operator (this is in general not needed but in
         // the case of GPD evolution).
-        _expr.SetExternalVariable(xg[beta]);
+        expr.SetExternalVariable(xg[beta]);
 
         // Loop over the index alpha
         for (int alpha = 0; alpha < (int) _Operator[0].size(1); alpha++)
@@ -66,20 +60,20 @@ namespace apfel
 
             // Run over the grid intervals over which the
             // interpolating function is different from zero.
-            for (int j = 0; j <= kappa; j++)
+            for (int j = 0; j <= std::min(alpha, kappa); j++)
               {
                 // Define "Integrator" object.
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
-                    return _expr.Regular(y) * wr + _expr.Singular(y) * ( wr - ws );
+                    return expr.Regular(y) * wr + expr.Singular(y) * ( wr - ws );
                   }};
                 // Compute the integral
-                _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], _eps);
+                _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
               }
           }
         // Add the local part
-        _Operator[0](beta, beta) += _expr.Local(xg[beta] / xg[beta + 1]);
+        _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1]);
       }
   }
 
@@ -141,9 +135,15 @@ namespace apfel
     // symmetry of the operators.
     for (int alpha = 0; alpha < (int) _Operator[0].size(0); alpha++)
       for (int beta = 0; beta < (int) _Operator[0].size(1); beta++)
-        for (int gamma = 0; gamma <= beta; gamma++)
+        for (int gamma = 0; gamma < (int) _Operator[0].size(1); gamma++)
           _Operator[0](alpha, beta) += v[0](alpha, gamma) * o._Operator[0](gamma, beta);
 
     return *this;
+  }
+
+  //_________________________________________________________________________
+  Distribution operator * (OperatorGPD lhs, Distribution const& rhs)
+  {
+    return lhs *= rhs;
   }
 }

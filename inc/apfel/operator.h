@@ -24,6 +24,12 @@ namespace apfel
     Operator() = delete;
 
     /**
+     * @brief The Operator constructor used for inheritance.
+     * @param gr: the Grid object
+     */
+    Operator(Grid const& gr);
+
+    /**
      * @brief The Operator constructor.
      * @param gr: the Grid object
      * @param expr: the expression to be transformed
@@ -37,22 +43,17 @@ namespace apfel
     virtual ~Operator() {}
 
     /**
-     * @brief Function that computes the actual operator on the grid.
-     */
-    virtual void ComputeOperator();
-
-    /**
      * @name Binary operators
      */
     ///@{
-    virtual Distribution operator *= (Distribution const& d) const;    //!< this *= Distribution
-    Operator&    operator *= (Operator const& o);                      //!< this *= Operator
-    Operator&    operator  = (Operator const& o);                      //!< this  = Operator
-    Operator&    operator *= (double const& s);                        //!< this *= Scalar
-    Operator&    operator *= (std::function<double(double const&)> f); //!< This *= Function
-    Operator&    operator /= (double const& s);                        //!< this /= Scalar
-    Operator&    operator += (Operator const& o);                      //!< this += Operator
-    Operator&    operator -= (Operator const& o);                      //!< this -= Operator
+    Distribution operator *= (Distribution const& d) const;         //!< this *= Distribution
+    Operator& operator *= (Operator const& o);                      //!< this *= Operator
+    Operator& operator  = (Operator const& o);                      //!< this  = Operator
+    Operator& operator *= (double const& s);                        //!< this *= Scalar
+    Operator& operator *= (std::function<double(double const&)> f); //!< This *= Function
+    Operator& operator /= (double const& s);                        //!< this /= Scalar
+    Operator& operator += (Operator const& o);                      //!< this += Operator
+    Operator& operator -= (Operator const& o);                      //!< this -= Operator
     ///@}
 
     /**
@@ -61,24 +62,12 @@ namespace apfel
     Grid const& GetGrid() const { return _grid; }
 
     /**
-     * @brief Function that returns the Expression object of the operator.
-     */
-    Expression const& GetExpression() const { return _expr; }
-
-    /**
-     * @brief Function that returns the integration accuracy of the operator.
-     */
-    double GetIntegrationAccuracy() const { return _eps; }
-
-    /**
      * @brief Function that returns the operator.
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
   protected:
     Grid                 const& _grid;      //!< Grid on which to compute the operator
-    Expression           const& _expr;      //!< The expression to be transformed into an operator
-    double               const  _eps;       //!< The integration accuracy
     std::vector<matrix<double>> _Operator;  //!< Operator values
 
     friend std::ostream& operator << (std::ostream& os, Operator const& sg);

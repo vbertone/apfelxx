@@ -13,22 +13,20 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
-    _grid(gr),
-    _expr(expr),
-    _eps(eps)
+  Operator::Operator(Grid const& gr):
+    _grid(gr)
   {
-    ComputeOperator();
   }
 
   //_________________________________________________________________________
-  void Operator::ComputeOperator()
+  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps):
+    _grid(gr)
   {
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
 
     // Scaling factor
-    const double eta = _expr.eta();
+    const double eta = expr.eta();
 
     // Number of grids.
     const int ng = _grid.nGrids();
@@ -53,7 +51,7 @@ namespace apfel
         const double s = sg.Step();
 
         // Local function
-        const double L = eta * _expr.Local(1 / exp(s) / eta);
+        const double L = eta * expr.Local(1 / exp(s) / eta);
 
         // Initialise operator
         _Operator[ig].resize(1, nx);
@@ -92,10 +90,10 @@ namespace apfel
                       {
                         const double z  = y / eta;
                         const double wr = li.InterpolantLog(alpha, log(xg[beta] / y), sg);
-                        return _expr.Regular(z) * wr + _expr.Singular(z) * ( wr - ws );
+                        return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
                       }};
                     // Compute the integral
-                    I += Ij.integrate(exp((beta - alpha + j - 1) * s), exp((beta - alpha + j) * s), _eps);
+                    I += Ij.integrate(exp((beta - alpha + j - 1) * s), exp((beta - alpha + j) * s), eps);
                   }
                 // Add the local part
                 _Operator[ig](beta, alpha) = I + L * ws;
