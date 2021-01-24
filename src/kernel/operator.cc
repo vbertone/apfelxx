@@ -8,6 +8,8 @@
 #include "apfel/integrator.h"
 #include "apfel/messages.h"
 
+#include <cmath>
+
 namespace apfel
 {
   //_________________________________________________________________________
