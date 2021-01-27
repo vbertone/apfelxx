@@ -51,6 +51,12 @@ namespace apfel
      * @return The local term at x
      */
     virtual double Local(double const&) const { return 0; }
+
+    /**
+     * @brief Virtual local term for principal valued integrals.
+     * @return The local term at x
+     */
+    virtual double LocalPV(double const&) const { return 0; }
     ///@}
 
     /**

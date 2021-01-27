@@ -63,10 +63,10 @@ namespace apfel
             for (int j = 0; j <= std::min(alpha, kappa); j++)
               {
                 // Define "Integrator" object. IMPORTANT: the
-		// particular form of the subtraction term only
-		// applies to singular terms that behave as
-		// 1/(1-y). If other singular functions are used, this
-		// term has to be adjusted.
+                // particular form of the subtraction term only
+                // applies to singular terms that behave as
+                // 1/(1-y). If other singular functions are used, this
+                // term has to be adjusted.
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
@@ -76,8 +76,11 @@ namespace apfel
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
               }
           }
-        // Add the local part
-        _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1]) - expr.Local(xg[beta - std::min(beta, kappa)] / xg[beta]);
+        // Add the local parts: that from standard +-prescripted terms
+        // ("Local") and that deriving from principal-valued integrals
+        // ("LocalPV").
+        _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1])
+                                    + expr.LocalPV(xg[beta] / xg[beta + 1]) - expr.LocalPV(xg[beta - std::min(beta, kappa)] / xg[beta]);
       }
   }
 
