@@ -905,23 +905,30 @@ with $\rm I,J=S,G$. This leads to:
 \end{equation}
 
 \begin{equation}
-\left\{\begin{array}{rcl}
-  %\mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
-  %                                        4C_A\left[\left(\frac{1}{1-y}\right)_+-\frac{1+\kappa^2y}{1-\kappa^2y^2}+\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)\right)\right]\\
-  \mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
-                                          4C_A\bigg[\left(\frac{1}{1-y}-\frac{\kappa^2y}{1-\kappa^2y^2}\right)_++\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)-1+\kappa^2y^2\right)\\
-\\
-&+&\displaystyle\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,\\
-  \\
-  \mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle 2C_A\frac{1-\kappa^2}{1-\kappa^2y^2}\left[\frac{2(1+y^2)}{(1+\kappa)(1-\kappa^2y^2)}-\frac{1}{\kappa}+2-\frac{1}{1+y}-\left(\frac{1}{1-y}\right)_{++}\right]\,.
+  \left\{\begin{array}{rcl}
+           \mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
+                                                      4C_A\left[\left(\frac{1}{1-y}\right)_+-\frac{1+\kappa^2y}{1-\kappa^2y^2}+\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)\right)\right]\\
+           \\
+                                                  &+&\displaystyle\delta(1-y)\left[\left(\frac{11C_A-4 n_f
+                                                      T_R}{3}\right) -2C_A\ln(|1-\kappa^2|)\right]\,,\\
+           \\
+           % &=& \displaystyle
+           %                                            4C_A\bigg[\left(\frac{1}{1-y}-\frac{\kappa^2y}{1-\kappa^2y^2}\right)_++\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)-1+\kappa^2y^2\right)\\
+           % \\
+           %                                        &+&\displaystyle\delta(1-y)\left(\frac{11C_A-4 n_f T_R}{3}\right)\,,\\
+           % \\
+           \mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
+                                                      2C_A\left[\frac{2(1-\kappa)(1+y^2)}{(1-\kappa^2y^2)^2}+\frac{\kappa^2(1+y)}{1-\kappa^2y^2}+\frac{1-\kappa^2}{1-\kappa^2y^2}\left(2-\frac{1}{\kappa}-\frac{1}{1+y}\right)
+                                                      -\left(\frac{1}{1-y}\right)_{++}\right]
+                                                      \,.
 \end{array}\right.
 \end{equation}
-Notice that for $\mathcal{P}_{1,\rm GG}^{(0)}$ we have used the
-integral:
-\begin{equation}
-\int_0^1dz\frac{\kappa^2z}{1-\kappa^2z^2} = -\frac{1}{2}\ln(|1-\kappa^2|)\,,
-\end{equation}
-to make the limit $\kappa\rightarrow 1$ explicitly convergent.
+% Notice that in the second equality for $\mathcal{P}_{1,\rm GG}^{(0)}$
+% we have used the integral:
+% \begin{equation}
+% \int_0^1dz\frac{\kappa^2z}{1-\kappa^2z^2} = -\frac{1}{2}\ln(|1-\kappa^2|)\,,
+% \end{equation}
+% to make the limit $\kappa\rightarrow 1$ explicitly convergent.
 
 In all cases, the limit for $\kappa\rightarrow 0$ of $\mathcal{P}_1$
 reproduces the one-loop DGLAP splitting functions. In addition, we
@@ -937,7 +944,7 @@ well-behaved at $\kappa=1$:
 \\
   \mathcal{P}_{1,\rm GS}^{(0)}(y,1) &=& \displaystyle \frac{4C_F}{y(1+y)}\,,\\
   \\
-  \mathcal{P}_{1,\rm GG}^{(0)}(y,1) &=& \displaystyle 4C_A\left[\left(\frac{1}{1-y^2}\right)_++\frac{1}{y(1+y)^2}\right]+\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,
+  \mathcal{P}_{1,\rm GG}^{(0)}(y,1) &=& \displaystyle 4C_A\left[\left(\frac{1}{1-y^2}\right)_++\frac{1}{y(1+y)^2}\right]+\delta(1-y)\left(\frac{11C_A-4 n_f T_R }{3}\right)\,,
 \end{array}
 \end{equation}
 this guarantees the continuity of GPDs across the point $x=\xi$.
@@ -1009,8 +1016,7 @@ V_{\rm GG}^{(0)}(t,u) &=&\displaystyle \theta(u-t)\left[\frac{2}{2u-1}P_{\rm
     GG}'\left(\frac{2t-1}{2u-1},-\frac{2}{2u-1}\right)
                           \right]+C_A\delta\left(t-u\right)\int_{0}^{1}du'\,\frac{\theta(t-u')}{u'-t}\\
 \\
-&+&\displaystyle \left(\frac{11C_A-4T_R
-    n_f}{6}\right)\delta\left(u-t\right)\,.
+&+&\displaystyle \left(\frac{11C_A-4n_fT_R}{6}\right)\delta\left(u-t\right)\,.
 \end{array}
 \end{equation}
 The explicit expressions read:

@@ -976,129 +976,95 @@ where the indices $\alpha$ and $\beta$ are intended to run over the
 joint grid. We point out again that in this case it is necessary to
 compute all the $N_x^2$ integrals making up $J_{\beta\alpha}$.
 
+\subsection{Principal-valued integrals}
 
-% We are now going to discuss a more convoluted but more effective way
-% to exploit the subgrids that solves the problem mentioned above for
-% GPD-related integrals, \textit{i.e.}  the lack of exploitation of the
-% low-$x$ grids when $x_\beta$ is large.
-
-% In this respect, the main observation is that the integral for a
-% ERBL-like convolution as in Eq.~(\ref{eq:ZMconvERBL}) computed in the
-% point $x_\delta$ of the joint grid can be decomposed as follows:
-% \begin{equation}
-%   J(x_\delta) = \sum_{g=0}^{N_g-1}x_\delta\int_{x_{\gamma^{(g)}}}^{1}\frac{dy}{y}\,O\left(\frac{x_\delta}{y},x_\delta\right)f\left(y\right)
-%   - x_\delta\int_{x_{\gamma^{(g+1)}}}^1\frac{dy}{y}\,O\left(\frac{x_\delta}{y},x_\delta\right)f\left(y\right)=
-%   \sum_{g=0}^{N_g-1}J^{(\gamma^{(g)})}(x_\delta)-J^{(\gamma^{(g+1)})}(x_\delta)\,.
-% \label{eq:decompERBL}
-% \end{equation}
-% where $\gamma^{(g)}$ is the index corresponding to the lower bound of
-% the $g$-th grid on the joint grid with the conditions $\gamma^{(0)}=0$
-% and $\gamma^{(N_g)}=N_x$, while $J^{(\gamma)}$ indicates the integral
-% with lower integration bound at $x_\gamma$.
-
-% We now compute both the integrals $J^{(\gamma^{(g)})}$ and
-% $J^{(\gamma^{(g+1)})}$ on the $g$-th subgrid. To do so, we need to
-% realise that on the $g$-th subgrid we have that
-% $x_{\gamma^{(g)}}=x_0^{(g)}$ and that
-% $x_{\gamma^{(g+1)}}=x_{\gamma^{(g+1)}-\gamma^{(g)}}^{(g)}\equiv
-% x_\gamma^{(g)}$, which implicitly defines
-% $\gamma = \gamma^{(g+1)}-\gamma^{(g)}$. In addition, the point
-% $x_\delta$ on the joint grid will correspond to some
-% $x_\beta^{(g)}$. It follows immediately that
-% $J^{(\gamma^{(g)})}(x_\delta)$ will be exactly equal to
-% Eq.~(\ref{eq:interpolationERBL}), that is:
-% \begin{equation}
-%   J^{(\gamma^{(g)})}(x_\delta) = J^{(0)}(x^{(g)}_\beta) =\sum_{\alpha=0}^{N_x-1} J_{\beta\alpha}^{(0)}\overline{d}^{(g)}_\alpha\,.
-% \end{equation}
-% with:
-% \begin{equation}
-%   J_{\beta\alpha}^{(0)} =\sum_{j=0}^{{\rm min}[\kappa^{(g)},\alpha]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x^{(g)}_\beta)w_{\alpha}\left(\frac{x^{(g)}_\beta}{y}\right)\,,
-% \end{equation}
-% where the index $\alpha$ runs over the $g$-th grid and we have assumed
-% that $d^{(g)}_{N_x} = d(x_{N_x}^{(g)}) = d(1) =
-% 0$. $J^{(\gamma^{(g+1)})}(x_\delta)$ is a straightforward
-% generalisation of the same calculation and gives:
-% \begin{equation}
-%   J^{(\gamma^{(g+1)})}(x_\delta) = J^{(\gamma)}(x^{(g)}_\beta) =\sum_{\alpha=0}^{N_x-1} J_{\beta\alpha}^{(\gamma)}\overline{d}^{(g)}_\alpha\,.
-% \end{equation}
-% with:
-% \begin{equation}
-%   J_{\beta\alpha}^{(\gamma)} =\sum_{j=0}^{{\rm min}[\kappa^{(g)},\alpha-\gamma]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x^{(g)}_\beta)w_{\alpha}\left(\frac{x^{(g)}_\beta}{y}\right)\,.
-% \end{equation}
-% Since the lower summation bound of the expression above is zero, all
-% values of $\alpha$ such that the upper bound
-% ${\rm min}[\kappa^{(g)},\alpha-\gamma]$ is negative would give a
-% vanishing result. To make this fact explicit we replace the upper
-% summation bound with
-% ${\rm max}[{\rm min}[\kappa^{(g)},\alpha-\gamma],-1]$ such that it
-% never gets smaller than $-1$. We can now take the following
-% difference:
-% \begin{equation}
-% J^{(\gamma^{(g)})}(x_\delta)-J^{(\gamma^{(g+1)})}(x_\delta)=\sum_{\alpha=0}^{N_x-1}
-% \overline{d}^{(g)}_\alpha \sum_{j={\rm max}[{\rm min}[\kappa^{(g)},\alpha-\gamma]+1,0]}^{{\rm min}[\kappa^{(g)},\alpha]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x^{(g)}_\beta)w_{\alpha}\left(\frac{x^{(g)}_\beta}{y}\right)\,.
-% \label{eq:diffeERBL}
-% \end{equation}
-% For sum over $j$ to contain at least one term, it is necessary that
-% the summation bounds are such that:
-% \begin{equation}
-% {\rm max}[{\rm min}[\kappa^{(g)},\alpha-\gamma]+1,0]\leq {\rm min}[\kappa^{(g)},\alpha]\,.
-% \end{equation}
-% This inequality is fulfilled only if $\alpha <
-% \gamma+\kappa^{(g)}$. Therefore, the sum over $\alpha$ in
-% Eq.~(\ref{eq:diffeERBL}) can be limited to $\gamma+\kappa^{(g)}-1$ so that:
-% \begin{equation}
-% J^{(\gamma^{(g)})}(x_\delta)-J^{(\gamma^{(g+1)})}(x_\delta)=\sum_{\alpha=0}^{\gamma+\kappa^{(g)}-1}\Delta
-% J_{\beta\alpha}^{(g)}\overline{d}^{(g)}_\alpha\,,
-% \label{eq:diffeERBL2}
-% \end{equation}
-% with:
-% \begin{equation}
-%   \Delta J_{\beta\alpha}^{(g)}=\sum_{j={\rm max}[\alpha-\gamma+1,0]}^{{\rm min}[\kappa^{(g)},\alpha]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x^{(g)}_\beta)w_{\alpha}\left(\frac{x^{(g)}_\beta}{y}\right)\,.
-% \end{equation}
-% We now need to translate the indices $\beta$ and $\alpha$, that run
-% over the $g$-th subgrid, into a pair of indices that instead run over
-% the joint grid. To do so, we introduce a first helper function
-% $\omega\equiv \omega(g,\alpha)$ that, given the subgrid index $g$ and
-% the index on this subgrid $\alpha$, returns the index of the point
-% $x_\alpha^{(g)}$ on the joint grid. A second function is
-% $\psi\equiv \psi (g,\delta)$ that, given as inputs the grid index $g$
-% and the index $\delta$ on the joint grid, returns the corresponding
-% index on the $g$-th subgrid. Since it is possible that a point
-% $x_\delta$ on the joint grid does not correspond to any point on the
-% $g$-th subgrid (specifically, when $x_\delta$ is lower than the lowest
-% bound of the $g$-th grid)
-
-% This function allows us to write the sum
-% in Eq.~(\ref{eq:diffeERBL2}) in terms of the distribution $d$
-% tabulated over the joint grid:
-% \begin{equation}
-% J^{(\gamma^{(g)})}(x_\delta)-J^{(\gamma^{(g+1)})}(x_{\delta})=\sum_{\alpha=0}^{\gamma^{(g+1)}-\gamma^{(g)}+\kappa^{(g)}-1}\Delta
-% J_{\psi(g,\delta)\alpha}^{(g)}\overline{d}_{\omega(g,\alpha)}\,,
-% \end{equation}
-% Putting this into Eq.~(\ref{eq:decompERBL}) finally gives:
-% \begin{equation}
-%   J(x_{\delta}) = \sum_{g=0}^{N_g-1}\sum_{\alpha=0}^{\gamma^{(g+1)}-\gamma^{(g)}+\kappa^{(g)}-1}\Delta
-%   J_{\psi(g,\delta)\alpha}^{(g)}\overline{d}_{\omega(g,\alpha)}\,.
-% \end{equation}
+Expressions for the operator $O$ in Eq.~(\ref{eq:ZMconvERBL}) often
+involve singular terms that are to interpreted as Cauchy
+principal-valued distributions. We are specifically concerned with
+integrals of the following kind:
+\begin{equation}
+I={\rm PV}\int_x^{\infty}dy\,\frac{f(y)}{1-y}\,
+\end{equation}
+where $f(y)$ is a smooth function over the integration range. In order
+to numerically treat this kind of integrals, in the document devoted
+to GPDs the so-called $++$-distribution has been introduced such that:
+\begin{equation}
+I=\int_x^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}f(y)\,
+\end{equation}
+Similarly to the popular $+$-distribution, the $++$-distribution acts
+upon integration in the following way:
+\begin{equation}
+\int_x^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}f(y) =
+\int_x^{\infty}\frac{dy}{1-y}\left[f(y)-f(1)\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+f(1)\ln(1-x)
+\,.
+\label{eq:pluplusprescription}
+\end{equation}
+However, differently from the $+$-distribution, the $++$-distribution
+does not regularise an otherwise divergen integral. It rather
+rearranges the integrand in such a way that it is finite over the
+integration range (the divergence at $y=1$ is no longer there) making
+it numerically treatable. We now need to devise a way to compute this
+integral within the interpolation framework. Indeed, the interpolation
+procedure produces integrals as this:
+\begin{equation}
+I_{\beta\alpha}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right) \,,
+\end{equation}
+that need to be treated with care due to the support region of the
+interpolation functions $w_\alpha$. In particular, we know that the
+function $w_\alpha(x_\beta/y)$ has support
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{\alpha-\kappa}]$, so that:
+\begin{equation}
+\begin{array}{rcl}
+I_{\beta\alpha}&=&\displaystyle
+                   \int_{c}^{d}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)=\int_{c}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+\\
+&=&\displaystyle
+    \int_c^{\infty}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\ln(1-c)\\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\int_d^{\infty}\frac{dy}{1-y}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]\\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\int_d^{\infty}dy\left(\frac{1}{1-y}+\frac{1}{y}\right)\right]\\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\int^{1-d}_{-\infty}\frac{dz}{z}-\int_d^{\infty}\frac{dy}{y}\right] \\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)+\int_{1-d}^{d}\frac{dy}{y}\right] \\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)+\int_{d-1}^{d}\frac{dy}{y}\right] \\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\ln\left(1-\frac{1}{d}\right)\right] \,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}\,,
+\end{equation}
+and where we have used the fact that $d\geq 1$ for $\beta=\alpha$ and,
+according to the Cauchy principal-value prescription:
+\begin{equation}
+\int_{-a}^{a}\frac{dy}{y} = 0\,,
+\end{equation}
+where $a$ could also be $\infty$.
 
 
-% It is now useful to split the sum over $\alpha$ into a sum that ranges
-% between $0$ and $\gamma-1$ and a sum between $\gamma$ and
-% $\gamma+\kappa^{(g)}-1$ and to shift the summation index of the second sum
-% from $\alpha$ to $\alpha'=\alpha-\gamma$. Also assuming that
-% $\gamma > \gamma$, this gives:
-% \begin{equation}
-% \begin{array}{rcl}
-%   J^{(\gamma^{(g)})}(x_\delta)-J^{(\gamma^{(g+1)})}(x_\delta)&=&\displaystyle
-%                                                                  \sum_{\alpha=0}^{\gamma-1}\overline{d}^{(g)}_\alpha\sum_{j=0}^{{\rm min}[\kappa^{(g)},\alpha]}
-%                                                                  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}}
-%                                                                  dy\,O(y,x^{(g)}_\beta)w_{\alpha}\left(\frac{x^{(g)}_\beta}{y}\right)\\
-% \\
-% &+&\displaystyle \sum_{\alpha'=0}^{\kappa^{(g)}-1}\overline{d}^{(g)}_{\alpha'+\gamma}\sum_{j=\alpha'+1}^{\kappa^{(g)}}  \int_{s^{\beta-\alpha'-\gamma+j-1}}^{s^{\beta-\alpha'-\gamma+j}} dy\,O(y,x^{(g)}_\beta)w_{\alpha'+\gamma}\left(\frac{x^{(g)}_\beta}{y}\right)
 
-% \,.
-% \end{array}
-% \end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \newpage
