@@ -48,7 +48,7 @@ namespace apfel
           {
             // Weight of the subtraction term this is
             // \delta_{\alpha\beta}
-            const double ws = (beta ==  alpha ? 1 : 0);
+            const double ws = (beta == alpha ? 1 : 0);
 
             // Given that the interpolation functions have
             // discontinuos derivative at the nodes, it turns out
@@ -62,18 +62,22 @@ namespace apfel
             // interpolating function is different from zero.
             for (int j = 0; j <= std::min(alpha, kappa); j++)
               {
-                // Define "Integrator" object.
+                // Define "Integrator" object. IMPORTANT: the
+		// particular form of the subtraction term only
+		// applies to singular terms that behave as
+		// 1/(1-y). If other singular functions are used, this
+		// term has to be adjusted.
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
-                    return expr.Regular(y) * wr + expr.Singular(y) * ( wr - ws );
+                    return expr.Regular(y) * wr + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) );
                   }};
                 // Compute the integral
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
               }
           }
         // Add the local part
-        _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1]);
+        _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1]) - expr.Local(xg[beta - std::min(beta, kappa)] / xg[beta]);
       }
   }
 
