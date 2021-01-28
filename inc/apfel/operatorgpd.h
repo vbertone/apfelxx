@@ -25,20 +25,5 @@ namespace apfel
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
     OperatorGPD(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
-
-    /**
-     * @name Binary operators
-     */
-    ///@{
-    Distribution operator *= (Distribution const& d) const; //!< this *= Distribution
-    OperatorGPD& operator *= (OperatorGPD const& o);        //!< this *= Operator
-    ///@}
   };
-
-  /**
-   * @name Ternary operators
-   */
-  ///@{
-  Distribution operator * (OperatorGPD lhs, Distribution const& rhs);                //!< Operator*Distribution
-  ///@}
 }

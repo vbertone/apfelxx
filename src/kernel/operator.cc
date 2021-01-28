@@ -115,9 +115,6 @@ namespace apfel
     // Get map of indices map from joint to subgrids
     const std::vector<std::vector<int>>& jsmap = _grid.JointToSubMap();
 
-    // Get map of indices map from sub to joint to grids
-    const std::vector<std::pair<int, int>>& sjmap = _grid.SubToJointMap();
-
     // Get joint distribution
     const std::vector<double>& dj = d.GetDistributionJointGrid();
 
@@ -125,15 +122,29 @@ namespace apfel
     std::vector<double> j(d.GetDistributionJointGrid().size(), 0);
     std::vector<std::vector<double>> s(ng);
 
+    // Get number of grid intervals in the definition range of the
+    // joint grid.
+    const int nx = _grid.GetJointGrid().nx();
+
+    // Get map of indices map from sub to joint to grids
+    const std::vector<std::pair<int, int>>& sjmap = _grid.SubToJointMap();
+
     // Construct joint distribution first. The product between the
     // operator and the distribution is done exploiting the symmetry
-    // of the operator.
-    for (int alpha = 0; alpha < _grid.GetJointGrid().nx(); alpha++)
-      {
-        const std::pair<int, int> m = sjmap[alpha];
-        for (int beta = m.second; beta < _grid.GetSubGrid(m.first).nx(); beta++)
-          j[alpha] += _Operator[m.first](0, beta - m.second) * dj[jsmap[m.first][beta]];
-      }
+    // of the operator if the the first operator has one line
+    // only. Otherwise the product is done in a standard way. This
+    // should be enough to distinguish between DGLAP- and GPD-like
+    // operators.
+    for (int beta = 0; beta < nx; beta++)
+      if (_Operator[0].size(0) == 1)
+        {
+          const std::pair<int, int> m = sjmap[beta];
+          for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
+            j[beta] += _Operator[m.first](0, alpha - m.second) * dj[jsmap[m.first][alpha]];
+        }
+      else
+        for (int alpha = 0; alpha < nx; alpha++)
+          j[beta] += _Operator[0](beta, alpha) * dj[alpha];
 
     // Compute the the distribution on the subgrids
     for (int ig = 0; ig < ng; ig++)
@@ -162,11 +173,19 @@ namespace apfel
         _Operator[ig].set(0);
 
         // The product between the operators is done exploiting the
-        // symmetry of the operators.
-        for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+        // symmetry of the operators if the operator matrix only
+        // contains one line. Otherwise the product is done in a
+        // standard way. This should be enough to distinguish between
+        // DGLAP- and GPD-like operators.
+        if (_Operator[ig].size(0) == 1)
           for (int beta = 0; beta < (int) _Operator[ig].size(1); beta++)
             for (int gamma = 0; gamma <= beta; gamma++)
-              _Operator[ig](alpha, beta) += v[ig](alpha, gamma) * o._Operator[ig](0, beta - gamma);
+              _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
+        else
+          for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
+            for (int beta = 0; beta < (int) _Operator[ig].size(1); beta++)
+              for (int gamma = 0; gamma < (int) _Operator[ig].size(1); gamma++)
+                _Operator[ig](alpha, beta) += v[ig](alpha, gamma) * o._Operator[ig](gamma, beta);
       }
     return *this;
   }

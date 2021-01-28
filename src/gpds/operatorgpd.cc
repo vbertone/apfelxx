@@ -80,77 +80,7 @@ namespace apfel
         // ("Local") and that deriving from principal-valued integrals
         // ("LocalPV").
         _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1])
-                                    + expr.LocalPV(xg[beta] / xg[beta + 1]) - expr.LocalPV(xg[beta - std::min(beta, kappa)] / xg[beta]);
+                                    + expr.LocalPV(xg[beta] / xg[beta + 1]) - (beta == 0 ? 0 : expr.LocalPV(xg[beta - std::min(beta, kappa)] / xg[beta]));
       }
-  }
-
-  //_________________________________________________________________________
-  Distribution OperatorGPD::operator *= (Distribution const& d) const
-  {
-    // Fast method to check that we are using the same Grid
-    if (&_grid != &d.GetGrid())
-      throw std::runtime_error(error("OperatorGPD::operator *=", "Operator and Distribution grids do not match"));
-
-    // Get number of subgrids
-    const int ng = _grid.nGrids();
-
-    // Get map of indices map from joint to subgrids
-    const std::vector<std::vector<int>>& jsmap = _grid.JointToSubMap();
-
-    // Get joint distribution
-    const std::vector<double>& dj = d.GetDistributionJointGrid();
-
-    // Initialise output vectors
-    std::vector<double> j(d.GetDistributionJointGrid().size(), 0);
-    std::vector<std::vector<double>> s(ng);
-
-    // Get number of grid intervals in the definition range
-    const int nx = _grid.GetJointGrid().nx();
-
-    // Construct joint distribution first. The product between the
-    // operator and the distribution is done exploiting the symmetry
-    // of the operator.
-    for (int beta = 0; beta < nx; beta++)
-      for (int alpha = 0; alpha < nx; alpha++)
-        j[beta] += _Operator[0](beta, alpha) * dj[alpha];
-
-    // Compute the the distribution on the subgrids
-    for (int ig = 0; ig < ng; ig++)
-      {
-        // Resize output on the "ig"-th subgrid
-        s[ig].resize(d.GetDistributionSubGrid()[ig].size(), 0);
-        for (int alpha = 0; alpha < _grid.GetSubGrid(ig).nx(); alpha++)
-          s[ig][alpha] += j[jsmap[ig][alpha]];
-      }
-
-    // Return distribution object
-    return Distribution{_grid, s, j};
-  }
-
-  //_________________________________________________________________________
-  OperatorGPD& OperatorGPD::operator *= (OperatorGPD const& o)
-  {
-    // Fast method to check that we are using the same Grid
-    if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("OperatorGPD::operator*=", "Operators grid does not match"));
-
-    const std::vector<matrix<double>> v = _Operator;
-    // Set operator entries to zero
-    _Operator[0].set(0);
-
-    // The product between the operators is done exploiting the
-    // symmetry of the operators.
-    for (int alpha = 0; alpha < (int) _Operator[0].size(0); alpha++)
-      for (int beta = 0; beta < (int) _Operator[0].size(1); beta++)
-        for (int gamma = 0; gamma < (int) _Operator[0].size(1); gamma++)
-          _Operator[0](alpha, beta) += v[0](alpha, gamma) * o._Operator[0](gamma, beta);
-
-    return *this;
-  }
-
-  //_________________________________________________________________________
-  Distribution operator * (OperatorGPD lhs, Distribution const& rhs)
-  {
-    return lhs *= rhs;
   }
 }
