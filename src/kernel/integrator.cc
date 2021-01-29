@@ -22,10 +22,6 @@ namespace apfel
   //_________________________________________________________________________
   double Integrator::integrate(double const& xmin, double const& xmax, double const& eps) const
   {
-    // Stop if the interval is too small
-    if (std::abs( ( xmax - xmin ) / ( xmax + xmin ) ) < eps15)
-      throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
-
     // Select integration method
     std::pair<double, double> integ;
     switch (_method)
@@ -40,11 +36,23 @@ namespace apfel
         throw std::runtime_error(error("Integrator::integrate", "Unknown integration method"));
       }
 
-    // Recursive call
+    // Recursive call. If the integration accuracy has been met,
+    // return the best result...
     if (integ.second < eps)
       return integ.first;
     else
-      return integrate(xmin, ( xmin + xmax ) / 2, eps) + integrate(( xmin + xmax ) / 2, xmax, eps);
+      {
+        // ...otherwise split the integration range into two equal
+        // parts and intregrate the two intervals
+        // separately. Eventually, the integrand will become smooth
+        // over the the narrower intevals and the integration will
+        // converge. If the integration range becomes too narrow, stop
+        // the code.
+        if (std::abs( ( xmax - xmin ) / ( xmax + xmin ) ) < eps15)
+          throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
+
+        return integrate(xmin, ( xmin + xmax ) / 2, eps) + integrate(( xmin + xmax ) / 2, xmax, eps);
+      }
   }
 
   //_________________________________________________________________________
