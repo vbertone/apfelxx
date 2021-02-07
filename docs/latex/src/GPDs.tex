@@ -480,7 +480,7 @@ with:
 \begin{equation}\label{eq:p1minus0}
 \begin{array}{rcl}
 \displaystyle \mathcal{P}_1^{-,(0)}(y,\kappa) &=& \displaystyle
-                                                  2P_{\rm NS}(y,2\kappa y) + \delta(1-x)2C_F\left(\frac{3}{2}-2\int_{0}^{1}\frac{dy}{1-y}-\ln(|1-\kappa^2|)\right) \\
+                                                  2P_{\rm NS}(y,2\kappa y) + \delta(1-y)2C_F\left(\frac{3}{2}-2\int_{0}^{1}\frac{dz}{1-z}-\ln(|1-\kappa^2|)\right) \\
 \\
 &=& \displaystyle  2C_F\left\{\left(\frac{2}{1-y}\right)_+-\frac{1
   +y}{1-\kappa^2y^2}+\delta(1-y)\left[\frac32-
@@ -525,7 +525,7 @@ with $\mathcal{P}_1^{-,(0)}$ given by:
 with $P_{\rm NS}'$ is given in Eq.~(19) of Ref.~\cite{Ji:1996nm} and
 remarkably equal to the expression in Eq.~(\ref{eq:p1minus0})
 signifying that:
-\begin{equation}
+\begin{equation}\label{eq:primevsnonprime}
   P_{\rm NS}(y,2\kappa y) =  P_{\rm NS}'(y,2\kappa y) +P_{\rm NS}'(y,-2\kappa y)\,.
 \end{equation}
 While:
@@ -622,6 +622,8 @@ $\mathcal{P}_1^{-,(0)}$ reduces to the one-loop non-singlet DGLAP
 splitting function (see Eq.~(\ref{eq:dglapsplitting})) so that, as
 expected, Eq.~(\ref{eq:jitot}) becomes the DGLAP equation.
 
+\subsubsection{The ERBL equation}
+
 It is also interesting to verify that also the ERBL equation is
 recovered in the limit $\xi\rightarrow 1$. Given the definition of
 $\kappa$, Eq.~(\ref{eq:kappadef}), this limit is attained by taking
@@ -638,7 +640,7 @@ more compactly as:
   \frac{\alpha_s(\mu)}{4\pi}\left[\int_{-1}^1 dy\,V_{\rm NS}^{(0)}(x,y)f^-\left(y,1\right)\right] \,.
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:ERBLkernelxy}
 \begin{array}{rcl}
 V_{\rm NS}^{(0)}(x,y) &=&\displaystyle \theta(y-x)\left[\frac{2}{y}P_{\rm
     NS}'\left(\frac{x}{y},\frac{2}{y}\right)
@@ -690,7 +692,14 @@ Eq.~(\ref{eq:anomdim}) more compactly as:
 This confirms the result of Ref.~\cite{Blumlein:1999sc} modulo the
 fact that, for achieving a correct cancellation of the divergencies,
 the $\theta$-function for the $+$-prescribed terms needs to be inside
-the $+$-prescription sign itself rather than outside.
+the $+$-prescription sign itself rather than outside. In fact, it is
+the very presence of the $\theta$-function that generates the
+necessity of a $+$-prescription. Without the $\theta$-function, the
+integral could be interpreted as principal-valued integral that
+requires no regularisation. The presence of the $\theta$-function
+interdicts the cancellation between left and right sides of the pole
+resulting in a singular integral. The $+$-prescription reabsorbes this
+singularity producing a well-behaved integral.
 
 One can check that integrating $\overline{V}_{\rm NS}^{(0)}$ over $t$
 gives zero:\footnote{Note that the two $+$-prescribed terms when
@@ -710,40 +719,268 @@ This was also explicitly derived in Ref.~\cite{Mikhailov:1984ii} and
 argued that this property must hold for symmetry reasons.
 
 It is now interesting to derive an ERBL-like evolution equation for
-GPDs at one loop. Assuming $\xi>0$, this equation can be written as:
-\begin{equation}
+GPDs at one loop. This equation can be written as:
+\begin{equation}\label{eq:ERBLlikeeveq}
 \frac{d}{d\ln\mu^2} f^{-}(x,\xi)=
-\frac{\alpha_s(\mu)}{4\pi}\int_{-1}^1\frac{dy}{\xi} \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) f^{-}(y,\xi)\,.
+\frac{\alpha_s(\mu)}{4\pi}\int_{-1}^1\frac{dy}{\xi} \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) f^{-}(y,\xi)\,,
 \end{equation}
-A simple change of variables allows one to write this equation as:
-\begin{equation}
-\frac{d}{d\ln\mu^2} f^{-}(\xi x,\xi)=
-\frac{\alpha_s(\mu)}{4\pi}\int_{-1/\xi}^{1/\xi}dy\, \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) f^{-}(\xi y,\xi)\,,
-\end{equation}
-where the evolution kernel is given by:
-\begin{equation}
+with:
+\begin{equation}\label{eq:evkernelERBLgenxi}
 \begin{array}{rcl}
-\mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) &=& \displaystyle
-                                              \theta(1-|x|){V}_{\rm
-                                              NS}^{(0)}\left(x,y\right)\\
+\displaystyle \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
+\frac{2}{y}\bigg\{\theta(x-\xi) \theta(y-x)P_{\rm
+                                              NS}\left(\frac{x}{y},\frac{2\xi}{y}\right)-\theta(-x-\xi)
+                                              \theta(x-y)P_{\rm
+                                              NS}\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
 \\
-&+&\displaystyle
-    \theta(|x|-1) 2C_F\Bigg\{\left[\theta(y-|x|)\left(\frac{2}{y-|x|}+\frac{|x|+y}{1-y^2}\right)\right]_+\\
+&+&\displaystyle \theta(\xi-x)\theta(x+\xi) \left[\theta(y-x)P_{\rm
+    NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)-\theta(x-y)P_{\rm
+    NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)\right]\\
 \\
-&+&\displaystyle\delta(|x|-y)\bigg[\frac{3}{2}-\ln\left(\frac{|x|-1}{|x|+1}\right)\\
-\\
-&+&\displaystyle 2 \ln\left(\frac{1-\xi |x|}{\xi(|x|-1)}\right)\left[\theta\left(\frac{1+\xi}{2\xi}-|x|\right)-\theta\left(|x|-\frac{1+\xi}{2\xi}\right)\right]\\
-\\
-&+&\displaystyle \frac12(|x|+1)\ln\left(\frac{1-\xi}{\xi(|x|-1)}\right)-\frac12(|x|-1)\ln\left(\frac{1+\xi}{\xi(|x|+1)}\right) \bigg]\Bigg\}\,,
+&+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
 \end{array}
 \end{equation}
-with ${V}_{\rm NS}^{(0)}$ given in Eq.~(\ref{eq:anomdim}) and where we
-have exploited the fact that $f^-(x,\xi)=f^-(-x,\xi)$. In addition,
-the $+$-prescription in the second line of the above equation has the
-following \textit{ad hoc} definition:
+We can now use Eq.~(\ref{eq:primevsnonprime}) to replace $P_{\rm NS}$
+with $P_{\rm NS}'$ which gives:
 \begin{equation}
-\left[f(x,y)\right]_+=f(x,y)-\delta(x-y)\int_1^{1/\xi}dy\,f(x,y)\,.
+\begin{array}{rcl}
+\displaystyle \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
+\frac{2}{y}\bigg\{\left[\theta(x-\xi) \theta(y-x)+\theta(\xi-x)\theta(x+\xi)\theta(y-x)-\theta(-x-\xi)
+                                              \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
+\\
+&+&\displaystyle \left[\theta(x-\xi) \theta(y-x)-\theta(\xi-x)\theta(x+\xi)\theta(x-y)-\theta(-x-\xi)
+                                              \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)\\
+\\
+&+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
+\end{array}
 \end{equation}
+% Assuming $\xi$ positive and different from zero ($\xi>0$), a simple
+% change of variables produces:
+% \begin{equation}
+% \frac{d}{d\ln\mu^2} f^{-}(\xi x,\xi)=
+% \frac{\alpha_s(\mu)}{4\pi}\int_{-1/\xi}^{1/\xi}dy\, \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) f^{-}(\xi y,\xi)\,,
+% \end{equation}
+% where the evolution kernel is given by:
+% \begin{equation}
+% \begin{array}{rcl}
+% \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) &=& \displaystyle
+% \frac{2}{y}\bigg\{\theta(x-1) \theta(y-x)P_{\rm
+%                                               NS}\left(\frac{x}{y},\frac{2}{y}\right)-\theta(-x-1)
+%                                               \theta(x-y)P_{\rm
+%                                               NS}\left(\frac{x}{y},\frac{2}{y}\right)\\
+% \\
+% &+&\displaystyle \theta(1-x)\theta(x+1) \left[\theta(y-x)P_{\rm
+%     NS}'\left(\frac{x}{y},\frac{2}{y}\right)-\theta(x-y)P_{\rm
+%     NS}'\left(\frac{x}{y},-\frac{2}{y}\right)\right]\\
+% \\
+% &+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_1^{x}\frac{dz}{z-x}+\int_{-1}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
+% \end{array}
+% \end{equation}
+% Observing that:
+% \begin{equation}
+% \int_{\pm 1}^{x}\frac{dz}{z-x} = \theta(x-1) \int_{\pm
+%   1}^{x}\frac{dz}{z-x} \mp \theta(1-x)\theta(x+1)\int_{-1}^{1}\frac{dz\theta(\pm z \mp x)}{z-x}-\theta(-x-1) \int^{\pm
+%   1}_{x}\frac{dz}{z-x}
+% \end{equation}
+% the result can be recasted as:
+% \begin{equation}\label{eq:ERBLkernel}
+% \begin{array}{rcl}
+% \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) &=& \displaystyle
+%                                               \theta(1-x)\theta(x+1){V}_{\rm
+%                                               NS}^{(0)}\left(x,y\right)\\
+% \\
+% &+&\displaystyle
+%     \theta(x-1) 2C_F\left[\theta(y-x)\frac{x^2+y^2-2}{(y-x)(y^2-1)}+\delta(x-y)\left(2\int_{1}^{x}\frac{dz}{z-x}+\int_{-1}^{1}\frac{dz}{z-x}\right)\right]\\
+% \\
+% &-&\displaystyle
+%     \theta(-x-1) 2C_F\left[\theta(x-y)\frac{x^2+y^2-2}{(y-x)(y^2-1)}+\delta(x-y)\left(2\int^{-1}_{x}\frac{dz}{z-x}+\int^{1}_{-1}\frac{dz}{z-x}\right)\right]\,,
+% \end{array}
+% \end{equation}
+% where ${V}_{\rm NS}^{(0)}$ is given in Eq.~(\ref{eq:ERBLkernelxy}). We
+% remind, however, that this form of the ERBL kernel is valid for
+% $\xi>0$. The limit $\xi\rightarrow 0$ requires considering
+% Eq.~(\ref{eq:evkernelERBLgenxi}).
+
+\subsubsection{Conformal moments}
+
+A relevant question is whether Eq.~(\ref{eq:evkernelERBLgenxi}) is such that
+the so-called conformal moments of GPDs (see Eq.~(111) of
+Ref.~\cite{Diehl:2003ny}):
+\begin{equation}
+  \mathcal{C}_n(\xi) = \xi^{n}\int_{-1}^{1}dx\,C_n^{3/2}\left(\frac{x}{\xi}\right)f^{-}(x,\xi)\,,
+\end{equation}
+where $C_n^{3/2}$ are Gegenbauer polynomials, ``diagonalise'' the
+leading-order evolution equation in Eq.~(\ref{eq:ERBLlikeeveq}). To
+state it differently, we would like to check whether conformal moments
+evolve multiplicatively. Multiplying Eq.~(\ref{eq:ERBLlikeeveq}) by
+$\xi^{n}C_n^{3/2}\left(x/\xi\right)$ and integrating over $x$ between
+$-1$ and 1, yields:
+\begin{equation}\label{eq:confmomprel}
+\frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =
+\frac{\alpha_s(\mu)}{4\pi}\xi^{n}\int_{-1}^1 dy f^{-}(y,\xi)\int_{-1}^{1}\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right) \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) \,.
+\end{equation}
+Therefore, the aim is to check whether the following equality holds:
+\begin{equation}\label{eq:confmomgpd}
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right) \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) =\mathcal{V}_{n}^{(0)}(\xi)C_n^{3/2}\left(\frac{y}{\xi}\right)\,,
+\end{equation}
+where $\mathcal{V}_{n}^{(0)}$ is a number that may generally depend on
+$\xi$. If Eq.~(\ref{eq:confmomgpd}) held, Eq.~(\ref{eq:confmomprel})
+would become:
+\begin{equation}\label{eq:confmom}
+  \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =\frac{\alpha_s(\mu)}{4\pi}\mathcal{V}_{n}^{(0)}(\xi)\mathcal{C}_n(\xi)\,,
+\end{equation}
+that is to say that conformal moments evolve multiplicative exactly
+like Mellin moments for forward distributions. As a matter of fact, up
+to numerical factor, conformal moments do coincide with Mellin moments
+in the limit $\xi\rightarrow 0$. This can be seen by observing that
+the Gegenbauer polynomials admit the following expansion:
+\begin{equation}
+\xi^{n}C_n^{3/2}\left(\frac{x}{\xi}\right)=\frac{n+1}{2^{n+1}}\sum_{k=0}^n{n
+\choose k}{n+2 \choose k+1}(x+\xi)^k (x-\xi)^{n-k}\,,
+\end{equation}
+that is such that:
+\begin{equation}\label{eq:gegenlimit}
+\lim_{\xi\rightarrow 0}
+\xi^{n}C_n^{3/2}\left(\frac{x}{\xi}\right)= \frac{(2n+1)!}{2^n(n!)^2}x^{n}\,.
+\end{equation}
+Therefore, the conformal moments of the non-singlet distribution in
+the forward limit become:
+\begin{equation}
+\lim_{\xi\rightarrow 0}\mathcal{C}_n(\xi) = \frac{(2n+1)!}{2^n(n!)^2}[1+(-1)^n]f^{-}(n+1)\,,
+\end{equation}
+where, with abuse of notation, we have defined the Mellin moments of
+the forward distribution as:
+\begin{equation}
+f^{-}(n) = \lim_{\xi\rightarrow 0} \int_0^1dx\,x^{n-1}f^{-}(x,\xi)\,,
+\end{equation}
+that are known to diagonalise the DGLAP equation to all orders. Using
+Eq.~(\ref{eq:gegenlimit}) and the fact that:
+\begin{equation}
+\lim_{\xi\rightarrow 0} \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},
+  \frac{y}{\xi}\right) = \left[\theta(x)\theta(y-x)-\theta(-x)\theta(x-y)\right]\frac{1}{y} P_{\rm NS}^{(0)}\left(\frac{x}{y}\right)\,,
+\end{equation}
+where $P_{\rm NS}^{(0)}$ is the leading-order non-singlet DGLAP
+splitting function, one finds:
+\begin{equation}
+ \lim_{\xi\rightarrow 0}
+ \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+ \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) = \frac{(2n+1)!}{2^n(n!)^2}y^{n} P_{\rm NS}^{(0)}(n+1) =\left[\lim_{\xi\rightarrow 0}
+\xi^{n}C_n^{3/2}\left(\frac{y}{\xi}\right)\right]P_{\rm NS}^{(0)}(n+1)\,,
+\end{equation}
+where, again with abuse of notation, the Mellin moments of the
+splitting functions are given by (see, \textit{e.g.}, Eq.~(4.129) of
+Ref.~\cite{Ellis:1991qj}):
+\begin{equation}
+P_{\rm NS}^{(0)}(n) = \int_{0}^{1}dx\,x^{n-1}P_{\rm NS}^{(0)}(x) = 2C_F\left[-\frac12+\frac{1}{n(n+1)}-2\sum_{k=2}^{n}\frac{1}{k}\right]\,.
+\end{equation}
+Finally, Eq.~(\ref{eq:confmom}) is fulfilled and the evolution kernel
+can be directly read off:
+\begin{equation}\label{eq:forwardlimitconfmom}
+ \lim_{\xi\rightarrow 0} \mathcal{V}_{n}^{(0)}(\xi) = P_{\rm
+   NS}^{(0)}(n+1)= 2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]
+\end{equation}
+
+On the other hand, it is well known that the one-loop ERBL kernel
+$V_{\rm NS}^{(0)}$ obeys the relation:
+\begin{equation}\label{eq:confmomerbl}
+  \int_{-1}^{1}dx\,C_n^{3/2}\left(x\right) V_{\rm
+    NS}^{(0)}\left(x,y\right) =V_{n}^{(0)} C_n^{3/2}\left(y\right)\,.
+\end{equation}
+Evidently, $V_{n}^{(0)}$ is the evolution kernel in the
+$\xi\rightarrow 1$ limit and its expression can be read off from
+Eq.~(2.19) of Ref.~\cite{Lepage:1980fj} where, to match our notation,
+we have to flip the sign and remove the $\beta$-function:
+\begin{equation}
+\lim_{\xi\rightarrow 1}\mathcal{V}_{n}(\xi)= V_{n}^{(0)}=2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]\,.
+\end{equation}
+Remarkably, this is identical to
+Eq.~(\ref{eq:forwardlimitconfmom}). This finally means that
+Eq.~(\ref{eq:confmom}) is fulfilled in both the $\xi\rightarrow 0$ and
+$\xi\rightarrow 1$ limits and that in these limits the evolution
+kernels are equal. In other words, conformal moments of forward
+distributions and distribution amplitudes at leading order evolve
+multiplicatively with the same anomalous dimension. This suggests that
+the kernels $\mathcal{V}_{n}$ may be constant in $\xi$ and equal to
+Eq.~(\ref{eq:forwardlimitconfmom}).
+
+To prove this we need to compute Eq.~(\ref{eq:confmomgpd}) for a
+generic value of $\xi$. To do so, we use
+Eq.~(\ref{eq:evkernelERBLgenxi}) for $\mathbb{V}_{\rm NS}^{(0)}$ that
+allows us to decompose Eq.~(\ref{eq:confmomgpd}) as follows:
+\begin{equation}\label{eq:GPDevkernelalaERBL}
+\begin{array}{rcl}
+  \displaystyle
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle 3C_F C_n^{3/2}\left(\frac{y}{\xi}\right) \\
+\\
+&-&\displaystyle C_F\int_{\xi}^{y}dx\left[\frac{x+\xi}{\xi(y-\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right) -2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\\
+\\
+&+&\displaystyle C_F\int_{-\xi}^{y}dx\left[\frac{x-\xi}{\xi(y+\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right)+2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\,.
+\end{array}
+\end{equation}
+Of course, in the limits $\xi\rightarrow 0$ and $\xi\rightarrow 1$
+this expression produces the Gegenbauer polynomials in the respective
+limits times $V_n^{0}$. The calculation for \textit{all} $n$ and for a
+generic value of $\xi$ is not straight forward. To start with, we
+compute the integral above for $n=0$ where we expected to obtain zero
+because $V^{(0)}=0$. Since $C_0^{\alpha}(z)=1$, the zero-th conformal
+moment evaluates to:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)  &=& \displaystyle
+  C_F\left[3 - \int_{\xi}^{y}dx \frac{x+\xi}{\xi(y-\xi)}
++\int_{-\xi}^{y}dx\frac{x-\xi}{\xi(y+\xi)}\right]\\
+\\
+&=& \displaystyle C_F\left[3 -\frac{y+\xi}{2\xi}-1+\frac{y-\xi}{2\xi}-1\right]=0\,,
+\end{array}
+\end{equation}
+providing further evidence that indeed Gegenbauer polynomials do
+diagonalise GPD leading-order evolution with evolution kernels
+$\mathcal{V}_n^{(0)}(\xi)=V_n^{(0)}$ independent of $\xi$.
+
+Now let us consider the case $n=1$. In the case the Gegenbauer
+polynomial is:
+\begin{equation}
+C_1^{3/2}\left(\frac{x}{\xi}\right)=\frac{3x}{\xi}\,.
+\end{equation}
+Since:
+\begin{equation}
+V_1^{(0)} = -\frac{8C_F}{3}\,,
+\end{equation}
+we expect:
+\begin{equation}
+  \int_{-1}^1\frac{dx}{\xi}\,C_1^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) \mathop{=}^{?} -\frac{8C_F y}{\xi}\,.
+\end{equation}
+Using Eq.~(\ref{eq:GPDevkernelalaERBL}) with $n=1$, we find:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle
+  \int_{-1}^1\frac{dx}{\xi}\,C_1^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm
+  NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle
+                                                       \frac{3C_F}{\xi}\left[3y
+                                                       -\int_{\xi}^{y}dx\left[\frac{x(x+\xi)}{\xi(y-\xi)}
+                                                       +2\right]+\int_{-\xi}^{y}dx\left[\frac{x(x-\xi)}{\xi(y+\xi)}-2\right]\right]\\
+\\
+&=&\displaystyle \frac{3C_F}{\xi}\left[3y-4y-\frac{5}{3}y\right] = -\frac{8C_Fy}{\xi}\,,
+\end{array}
+\end{equation}
+as expected. Proving that the $n=0,1$ moments diagonalise the
+evolution is enough to ensure that all moments diagonalise the
+evolution. The reason is that Gegenbauer polynomials obey the
+following recursion relation:
+\begin{equation}
+  n C_{n}^{(\alpha)}(z) = 2(n+\alpha-1) zC_{n-1}^{(\alpha)}(z) -
+  (n+2\alpha-2) C_{n-2}^{(\alpha)}(z)\,,\quad n=2,3,\dots\,.
+\end{equation}
+
+
+\newpage
+
+\subsubsection{Sum rules}
 
 A question arises: does the fact that the GPD anomalous dimension
 (\textit{cfr.}  Eq.~(\ref{eq:nonzeroplusGPD})) does not admit a fully
@@ -830,9 +1067,9 @@ $\mu$ immediately leads to:
 \int_{-1}^1dx'
 f(x',\xi)\int_{-1}^1dx\left[\hat{V}_{\rm NS}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)\right]_+ = 0\,,
 \end{equation}
-where $\hat{V}_{\rm NS}$ is nothing but $V _{\rm NS}$ stripped of the supposedly global
-$+$-prescription. A simple change of variables (assuming $\xi$
-positive) gives:
+where $\hat{V}_{\rm NS}$ is nothing but $V _{\rm NS}$ stripped of the
+supposedly global $+$-prescription. Assuming $\xi$ positive and
+different from zero ($\xi>0$), a simple change of variables gives:
 \begin{equation}
   \int_{-1/\xi}^{1/\xi}dy'
   f(\xi y',\xi)\int_{-1/\xi}^{1/\xi}dy\left[\hat{V}_{\rm NS}\left(y,y'\right)\right]_+ = 0\,.
@@ -843,6 +1080,8 @@ Eq.~(\ref{eq:pludistributionn}) cannot give zero. This prevents the
 above equation to be identically fulfilled violating polynomiality of
 GPDs. We can thus conclude that $V _{\rm NS}$ \textit{cannot} be
 written as a fully $+$-prescribed function.
+
+\subsubsection{The singlet sector}
 
 Having ascertained that the evolution equation from
 Ref.~\cite{Ji:1996nm} is well-behaved for the non-singlet distribution
