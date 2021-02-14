@@ -968,17 +968,25 @@ Using Eq.~(\ref{eq:GPDevkernelalaERBL}) with $n=1$, we find:
 &=&\displaystyle \frac{3C_F}{\xi}\left[3y-4y-\frac{5}{3}y\right] = -\frac{8C_Fy}{\xi}\,,
 \end{array}
 \end{equation}
-as expected. Proving that the $n=0,1$ moments diagonalise the
-evolution is enough to ensure that all moments diagonalise the
-evolution. The reason is that Gegenbauer polynomials obey the
-following recursion relation:
+as expected. Despite an all-$n$ proof would desirable, these
+calculations provide compelling evidence that indeed conformal moments
+evolve multiplicatively as:
 \begin{equation}
-  n C_{n}^{(\alpha)}(z) = 2(n+\alpha-1) zC_{n-1}^{(\alpha)}(z) -
-  (n+2\alpha-2) C_{n-2}^{(\alpha)}(z)\,,\quad n=2,3,\dots\,.
+  \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =\frac{\alpha_s(\mu)}{4\pi}{V}_{n}^{(0)}\mathcal{C}_n(\xi)\,.
 \end{equation}
+The solution to this equation is simply:
+\begin{equation}
+\mathcal{C}_n(\xi,\mu)
+=\exp\left[\frac{V_{n}^{(0)}}{4\pi}\int_{\mu_0}^\mu d\ln\mu^2\alpha_s(\mu)\right]\mathcal{C}_n(\xi,\mu_0)\,,
+\end{equation}
+in which remarkably the evolution kernel does not depend on
+$\xi$. This in turns means that the $\xi$ dependence of conformal
+moments is entirely encoded in the initial scale moments and that
+evolution leave it unchanged.
 
-
-\newpage
+The question that remains to be answered is whether the knowledge of
+the conformal moments of a GPD is enough to reconstruct its $x$
+dependence.
 
 \subsubsection{Sum rules}
 
@@ -1274,6 +1282,278 @@ The explicit expressions read:
                             like doing the calculation}\,.
 \end{array}
 \end{equation}
+
+\section{Compton form factor}
+
+In this section, we discuss the numerical implementation of the
+Compton form factors (CFFs) for double deeply-virtual Compton
+scattering (DDVCS). The CFFs can be regarded as the GPD counterpart of
+the deep-inelastic scattering (DIS) structure function. The relation
+is easily established by observing that the diagrams necessary to
+compute the DIS structure functions at a given order are exactly the
+same diagrams of DDVCS in the forward limit with a cut on the final
+state. It is well-known that cut and uncut digrams are related through
+dispersion relation. Specifically, ($2\pi i$ times) a given cut
+diagram with an external on-shell momentum $p$ is equal to the
+discontinuity of the uncut diagram in the forward limit along the
+branch cut on the real axis determined by $p^2\geq m^2$, where $m$ is
+the rest mass of the external particle. For the CCF $\mathcal{H}$,
+this translates into the following relation with the DIS structure
+function $F_1$:(\footnote{An additional factor 2 is included by
+  convention in the definition of $F_1$.})
+\begin{equation}
+\lim_{\xi\rightarrow 0}
+\left[\mathcal{H}(x+i\varepsilon,\xi,t,Q)-\mathcal{H}(x-i\varepsilon,\xi,t,Q)\right]
+= 4\pi i F_1(x,Q)\,.
+\end{equation}
+Analyticity of the amplitude implies that
+$\mathcal{H}(x-i\varepsilon,\xi,t,Q) =
+\mathcal{H}^*(x+i\varepsilon,\xi,t,Q)$ which finally gives:
+\begin{equation}\label{eq:opticalth}
+  \frac{1}{2\pi} \lim_{\xi\rightarrow 0} \mbox{Im}\left[\mathcal{H}(x,\xi,t,Q)\right] = F_1(x,Q)\,.
+\end{equation}
+An analogous relation exists between the CFF $\widetilde{\mathcal{H}}$
+and the polarised structure function $g_5$ as well as between the
+longitudinal projections $\mathcal{H}_L$ and
+$\widetilde{\mathcal{H}}_L$, and $F_L$ and $g_L$, respectively. These
+relation can be used to check that coefficient functions for the CCFs,
+that are currently know to $\mathcal{O}(\alpha_s)$, reproduce the
+well-know DIS coefficient functions in the forward limit.
+
+Factorisation for DDVCS allows one to write CFFs as convolution
+between short-distance partonic cross sections (or coefficient
+functions) and nucleon GPDs. For $\mathcal{H}$ factorisation reads:
+\begin{equation}\label{eq:CCFfact}
+  \mathcal{H}(x,\xi,t,Q) = \sum_{q}e_q^2\int_{-1}^{1}\frac{dy}{y}\left[C_q\left(\frac{x}{y},\frac{\xi}{x},Q\right)F_q(y,\xi,t,Q)+C_g\left(\frac{x}{y},\frac{\xi}{x},Q\right)F_g(y,\xi,t,Q)\right]
+\end{equation}
+where $e_q^2$ is the electric charge of the flavour $q$(\footnote{We
+  are assuming that $Q\ll M_Z$ so that weak corrections to the
+  electroweak coupling can be neglected}) with the sum running over
+the \textit{active} flavours (and not over the anti-flavours). $F_q$
+and $F_g$ are the quark $q$ and gluon GPDs, respectively, and $C_q$
+and $C_g$ the respective coefficient functions that admit a
+perturbative expansion in powers of $\alpha_s$:
+\begin{equation}\label{eq:cffalstructfuncERBL}
+C_q\left(y,\kappa,Q\right) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(Q)}{4\pi}\right)^nC_q^{(n)}\left(y,\kappa\right)\quad\mbox{and}\quad C_g\left(y,\kappa,Q\right) = \sum_{n=1}^{\infty}\left(\frac{\alpha_s(Q)}{4\pi}\right)^nC_g^{(n)}\left(y,\kappa\right)\,.
+\end{equation}
+Currently, corrections up to $n=2$ are known~\cite{Mankiewicz:1997bk,
+  Ji:1998xh, Pire:2011st, Braun:2020yib}. For implementation purposes,
+it is convenient to rewrite Eq.~(\ref{eq:CCFfact}) as follows:
+\begin{equation}\label{eq:cffalstructfunc}
+\begin{array}{rcl}
+  x\mathcal{H}(x,\xi,t,Q) &=&\displaystyle
+                             \sum_{q}e_q^2\int_{x}^{\infty}dy\bigg[C_q\left(y,\kappa,Q\right) \frac{x}{y} F_q\left(\frac{x}{y},\xi,t,Q\right)
+                             + C_q\left(y,-\kappa,Q\right) \frac{x}{y} F_{\overline{q}}\left(\frac{x}{y},\xi,t,Q\right)\\
+  \\
+                         &+& \displaystyle  \left[C_g\left(y,\kappa,Q\right)+C_g\left(y,-\kappa,Q\right)\right]\frac{x}{y} F_g\left(\frac{x}{y},\xi,t,Q\right)\bigg]\,,
+\end{array}
+\end{equation}
+with $\kappa=\xi/x$ and where we have exploited the symmetries
+$C_{q,g}\left(y,\kappa,Q\right)=C_{q,g}\left(-y,-\kappa,Q\right)$ and
+$F_g(y,\xi,t,Q)=-F_g(-y,\xi,t,Q)$, and defined
+$F_{\overline{q}}(y,\xi,t,Q)=-F_q(-y,\xi,t,Q)$.
+
+At first order ($n=0$), only the quark channel contributes and the
+respective coefficient function is:
+\begin{equation}
+  C_q^{(0)}\left(y,\kappa\right) = -\frac{1}{1-y+i\varepsilon}-\frac{1}{1+y-i\varepsilon}\,.
+\end{equation}
+In order to get right of the $i\varepsilon$ that complicates the
+implementation, we use the following identity:
+\begin{equation}\label{eq:princval}
+\frac{1}{X \mp i\varepsilon} = {\rm PV}\frac{1}{X} \pm \pi i\delta(X)\,
+\end{equation}
+where PV stands for principal value, so that:
+\begin{equation}
+  C_q^{(0)}\left(y,\kappa\right) = {\rm PV}\left[-\frac{1}{1- y}-\frac{1}{1+ y}\right] + \pi i\left[\delta(1-y) - \delta(1+y)\right]\,.
+\end{equation}
+Plugging this into Eq.~(\ref{eq:cffalstructfunc}), defining
+$\overline{F}_q^{+}(y,\xi,t,Q) =
+y(F_q(y,\xi,t,Q)+F_{\overline{q}}(y,\xi,t,Q))$, and understanding the
+principal value gives:
+\begin{equation}\label{eq:cffalstructfunc}
+\begin{array}{rcl}
+  x\mathcal{H}^{\rm LO}(x,\xi,t,Q) &=&\displaystyle
+                                       \sum_{q}e_q^2\int_{x}^{\infty}dy\left[-\left(\frac{1}{1-
+                                       y}\right)_{++}-\frac{1}{1+ y}+\pi i\delta(1-y)\right]
+                                       \overline{F}_q^{+}\left(\frac{x}{y},\xi,t,Q\right)\,,
+\end{array}
+\end{equation}
+where we have also introduced the $++$-prescription defined in
+Eq.~(\ref{eq:plusplusdist}) that makes the integrand finite over the
+integration range making it numerically computable. It is intersting
+to observe that applying Eq.~(\ref{eq:opticalth}) to the leading-order
+CFF gives the expected result:
+\begin{equation}
+  \frac{1}{2\pi} \lim_{\xi\rightarrow 0} \mbox{Im}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] = \frac12\sum_{q}e_q^2xf_q^{+}(x,Q) =
+  xF_1^{\rm LO}(x,Q)\,,
+\end{equation}
+where $f_q^+$ are the forward PDFs. The particular structure of
+Eq.~(\ref{eq:cffalstructfunc}) allows one to relate real and imaginary
+part of the CFF by observing that:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \mbox{Im}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] &=& \displaystyle  \pi \sum_{q}e_q^2
+  \overline{F}_q^{+}\left(x,\xi,t,Q\right)\,,\\
+\\
+\displaystyle \mbox{Re}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] &=& \displaystyle \int_{x}^{\infty}dy\left[-\left(\frac{1}{1-
+                                       y}\right)_{++}-\frac{1}{1+ y}\right]
+                                       \sum_{q}e_q^2\overline{F}_q^{+}\left(\frac{x}{y},\xi,t,Q\right)\,.
+\end{array}
+\end{equation}
+Therefore, one can plug the first into the second obtaining:
+\begin{equation}
+\mbox{Re}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] =\frac{1}{\pi}\int_{x}^{\infty}dy\left[-\left(\frac{1}{1-
+                                       y}\right)_{++}-\frac{1}{1+ y}\right]\mbox{Im}\left[x\mathcal{H}^{\rm
+      LO}\left(\frac{x}{y},\xi,t,Q\right)\right]\,.
+\end{equation}
+This relation, often referred to as \textit{dispersion} relation, is
+strictly valid only at leading order and is a useful tool when
+extracting GPDs (or CFFs) from experimental data.
+
+We can now move to consider the $\mathcal{O}(\alpha_s)$ corrections to
+the CCF $\mathcal{H}$. At this order, both the quark and the gluon
+channels contribute. We take the analytic expressions from
+Ref.~\cite{Pire:2011st}. For the quark channel we use the finite part
+of Eq.~(46) and for the gluon the finite part of Eq.~(47). Since we
+are assuming $x_{\rm B}$ ($=x$ in our notation), we need to take
+$Q^2>0$. In addition, our definition of coefficient functions in
+Eq.~(\ref{eq:cffalstructfuncERBL}) is such that the expressions of
+Ref.~\cite{Pire:2011st} have to be identified with
+$(1/x)C_{q,g}^{(1)}(x_{\rm B}/x,\xi/x_{\rm B})$. This gives:
+\begin{equation}\label{eq:DDVCSceofffuncsNLO}
+\begin{array}{rcl}
+C_{q}^{(1)}(y,\kappa) &=& \displaystyle -\frac{C_F}{1-y+i\varepsilon}\bigg\{ -
+                          9 +
+                          3\frac{1-\kappa^2y^2-2y}{1-\kappa^2y^2}\ln\left(-\frac{1-y}{y}-i\varepsilon\right)+\frac{1+y^2 -2\kappa^2y^2}{1-\kappa^2y^2} \ln^2\left(-\frac{1-y}{y}-i\varepsilon\right)\\
+\\
+&+&\displaystyle 6\frac{\kappa(1-\kappa)y^2}{1-\kappa^2
+    y^2}\ln(1-\kappa-i\varepsilon)+
+\frac{(1-\kappa)(1-y-2\kappa^2 y^2)}{\kappa(1-\kappa^2
+    y^2)}\ln^2(1-\kappa-i\varepsilon)\bigg\}\\
+\\
+&+& (y\rightarrow -y, \kappa\rightarrow -\kappa) \,,\\
+\\
+C_{g}^{(1)}(y,\kappa) &=& \displaystyle T_R \left(-\frac{1}{1-y+i\varepsilon}-\frac{1}{1+y-i\varepsilon}\right)\\
+\\
+&\times&\displaystyle \bigg\{ 
+                          2\ln\left(-\frac{1-y}{y}-i\varepsilon\right)
+                          +\frac{1-2y+2y^2-\kappa^2 y^2}{1-\kappa^2
+                          y^2}\ln^2\left(-\frac{1-y}{y}-i\varepsilon\right)\\
+\\
+&+&\displaystyle
+    \frac{2(1-\kappa)}{\kappa}\ln(1-\kappa-i\varepsilon)+\frac{(1-\kappa)(1-2\kappa
+    y^2-\kappa^2 y^2)}{\kappa(1-\kappa^2
+    y^2)}\ln^2(1-\kappa-i\varepsilon)
+\bigg\}\\
+\\
+&+& (y\rightarrow -y, \kappa\rightarrow -\kappa) \,.
+\end{array}
+\end{equation}
+Now, we need to split the expressions above into real and imaginary
+parts.  To do so, we use Eq.~(\ref{eq:princval}) and:
+\begin{equation}
+  \ln\left(-\frac{1-y}{y}-i\varepsilon\right) =
+  \ln\left(\frac{1-y}{y}\right)-i\pi\quad\Rightarrow\quad
+  \ln^2\left(-\frac{1-y}{y}-i\varepsilon\right) =
+  \ln^2\left(\frac{1-y}{y}\right)-\pi^2-2\pi i \ln\left(\frac{1-y}{y}\right)\,,
+\end{equation}
+and:
+\begin{equation}
+\ln(1-\kappa-i\varepsilon) = \theta(1-\kappa) \ln(1-\kappa)+\theta(\kappa-1)\left[\ln(\kappa-1)-i\pi\right]\,.
+\end{equation}
+Before computing the full general expressions for real and imaginary
+parts, it is instructive to compute the imaginary part in the forward
+limit to check that Eq.~(\ref{eq:opticalth}) is fulfilled also at
+$\mathcal{O}(\alpha_s)$. Let us start with the quark coefficient
+function. The forward limit is taken by taking $\kappa\rightarrow
+0$. By doing so, we observe that the terms
+$(y\rightarrow -y, \kappa\rightarrow -\kappa)$ in
+Eq.~(\ref{eq:DDVCSceofffuncsNLO}) do not contribute to the imaginary
+part because in the forward limit. The reason is that the integral in
+Eq.~(\ref{eq:cffalstructfunc}) only covers positive values of $y$
+where those terms are regular, so that the $i\varepsilon$ prescription
+has no effect and no imaginary terms are generated. The limit
+produces:(\footnote{Despite not contributing to the imaginary part,
+  notice that:
+\begin{equation}
+  \lim_{\kappa\rightarrow 0}\frac{\ln(1-k)}{\kappa}=-1\quad\mbox{and}\quad  \lim_{\kappa\rightarrow 0}\frac{\ln^2(1-k)}{\kappa}=0\,.
+\end{equation}
+})
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \frac{1}{2\pi}\lim_{\kappa\rightarrow 0}{\rm
+  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\left\{
+                                            2\frac{\ln\left(1-y\right)}{1-y} -\frac{3}{2}\frac{1}{1-y} -(1+y) \ln\left(1-y\right)-\frac{1+y^2}{1-y}\ln\left(y\right)+3\right\}\\
+  \\
+                                        &-& \displaystyle \pi C_F\delta(1-y)\left\{
+                                            \frac{9}{2} +\pi^2+
+                                            \frac{3}{2}\ln\left(1-y\right)-\ln^2\left(1-y\right)\right\}\,.
+\end{array}
+\end{equation}
+Now we write the logarithms in the second line as:
+\begin{equation}
+\ln(1-y) = -\int_0^{1}\frac{dz}{1-z}\quad\mbox{and}\quad \ln^2(1-y) =
+-2 \int_0^{1}dz \frac{\ln(1-z)}{1-z}\,,
+\end{equation}
+that combined with the $1/(1-y)$ and $\ln(1-y)/(1-y)$ terms in the
+first line gives rise to the $+$-prescription so that the final result
+is:
+\begin{equation}\label{eq:coefff1}
+\begin{array}{rcl}
+  \displaystyle \frac{1}{2\pi}\lim_{\kappa\rightarrow 0}{\rm
+  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\bigg[
+                                            2\left(\frac{\ln\left(1-y\right)}{1-y}\right)_+
+                                            -\frac{3}{2}\left(\frac{1}{1-y}\right)_+
+                                            -(1+y)
+                                            \ln\left(1-y\right)\\
+\\
+&-&\displaystyle \frac{1+y^2}{1-y}\ln\left(y\right)+3- \delta(1-y)\left(\pi^2+\frac{9}{2}\right)\bigg]\,.
+\end{array}
+\end{equation}
+This result \textit{almost} perfectly agrees with the expected
+result. The expression for the $\mathcal{O}(\alpha_s)$ correction to
+the quark channel of $F_1$ can be read off from Eq.~(4.85) of
+Ref.~\cite{Ellis:1991qj}. First we notice that the expansion parameter
+in that reference is $\alpha_s/(2\pi)$ while we use
+$\alpha_s/(4\pi)$. Therefore, Eq.~(4.85) has to be multiplied by a
+factor 2 in the first place to match our notation. In addition,
+Eq.~(4.85) corresponds to $F_2$. But since $2xF_1=F_2-F_L$ and the
+corresponding coefficient function for $F_L$ is
+$C_{L,q}^{(1)}(x)=4C_Fx$ (see Eq.~(4.86) of Ref.~\cite{Ellis:1991qj}),
+it is sufficient to subtract this term and finally divide by 2 to
+obtain the coefficient function for $F_1$. The net result should be
+exactly Eq.~(4.85) of Ref.~\cite{Ellis:1991qj} with the term $2z$
+removed. Our Eq.~(\ref{eq:coefff1}) matches up to the $\pi^2$ term in
+the coefficient of $\delta(1-y)$ that multiplies a different
+factor. This discrepancy needs to be investigated further.
+
+We now consider the gluon coefficient function. In this case, due to
+the overall factor that is singular in both $y=1$ and $y=-1$, we also
+need to consider the $(y\rightarrow -y, \kappa\rightarrow -\kappa)$
+term. This limit gives:
+\begin{equation}
+\begin{array}{rcl}
+\lim_{\kappa\rightarrow 0}{\rm
+  Im}\left[C_{g}^{(1)}(y,\kappa)\right] &=& \displaystyle 2\pi T_R \left(\frac{1}{1-y}+\frac{1}{1+y}\right) \left\{ 1+(1-2y+2y^2)\ln\left(\frac{1-y}{y}\right)\right\}\\
+\\
+&+& (y\rightarrow -y)\\
+\\
+&+& \displaystyle \pi T_R \left(\delta(1-y)-\delta(1+y)\right)\\
+\\
+&\times&\displaystyle \bigg\{ 
+                          2\ln\left(\frac{1-y}{y}\right)
+                          +(1-2y+2y^2)\left[\ln^2\left(\frac{1-y}{y}\right)-\pi^2\right]\bigg\}\\
+\\
+&+& (y\rightarrow -y) \,.
+\end{array}
+\end{equation}
+
+
 
 \newpage
 \bibliographystyle{ieeetr}
