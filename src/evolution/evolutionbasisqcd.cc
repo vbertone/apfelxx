@@ -30,10 +30,10 @@ namespace apfel
 
     for (int i = nf + 1; i <= 6; i++)
       {
-        _rules[2 * i - 1]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
+        _rules[2 * i - 1] = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
         for (int j = nf + 1; j <= 6; j++)
           _rules[2 * i - 1].push_back({PQQ, 2 * j - 1, 6. / j / ( j - 1 )});
-        _rules[2 * i]     = { {PNSV, 2 * i, 1} };
+        _rules[2 * i] = { {PNSV, 2 * i, 1} };
       }
   }
 

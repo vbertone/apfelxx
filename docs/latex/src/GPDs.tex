@@ -1358,7 +1358,7 @@ respective coefficient function is:
 \begin{equation}
   C_q^{(0)}\left(y,\kappa\right) = -\frac{1}{1-y+i\varepsilon}-\frac{1}{1+y-i\varepsilon}\,.
 \end{equation}
-In order to get right of the $i\varepsilon$ that complicates the
+In order to get rid of the $i\varepsilon$ that complicates the
 implementation, we use the following identity:
 \begin{equation}\label{eq:princval}
 \frac{1}{X \mp i\varepsilon} = {\rm PV}\frac{1}{X} \pm \pi i\delta(X)\,
@@ -1490,7 +1490,7 @@ produces:(\footnote{Despite not contributing to the imaginary part,
   Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\left\{
                                             2\frac{\ln\left(1-y\right)}{1-y} -\frac{3}{2}\frac{1}{1-y} -(1+y) \ln\left(1-y\right)-\frac{1+y^2}{1-y}\ln\left(y\right)+3\right\}\\
   \\
-                                        &-& \displaystyle \pi C_F\delta(1-y)\left\{
+                                        &-& \displaystyle C_F\delta(1-y)\left\{
                                             \frac{9}{2} +\pi^2+
                                             \frac{3}{2}\ln\left(1-y\right)-\ln^2\left(1-y\right)\right\}\,.
 \end{array}
