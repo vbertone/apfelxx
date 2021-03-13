@@ -988,7 +988,7 @@ The question that remains to be answered is whether the knowledge of
 the conformal moments of a GPD is enough to reconstruct its $x$
 dependence.
 
-\subsubsection{Sum rules}
+\subsubsection{Sum rules}\label{eq:sumruleNS}
 
 A question arises: does the fact that the GPD anomalous dimension
 (\textit{cfr.}  Eq.~(\ref{eq:nonzeroplusGPD})) does not admit a fully
@@ -1089,7 +1089,7 @@ above equation to be identically fulfilled violating polynomiality of
 GPDs. We can thus conclude that $V _{\rm NS}$ \textit{cannot} be
 written as a fully $+$-prescribed function.
 
-\subsubsection{The singlet sector}
+\subsection{The singlet sector}
 
 Having ascertained that the evolution equation from
 Ref.~\cite{Ji:1996nm} is well-behaved for the non-singlet distribution
@@ -1182,7 +1182,6 @@ reproduces the one-loop DGLAP splitting functions. In addition, we
 also notice that all $\mathcal{P}_2$'s are proportional to
 $\kappa-1$. Along with the fact that all $\mathcal{P}_1$ are
 well-behaved at $\kappa=1$:
-
 \begin{equation}
 \begin{array}{rcl}
 \mathcal{P}_{1,\rm SS}^{(0)}(y,1) &=& \displaystyle 2C_F\left\{\left[\frac{1}{1-y}\right]_++\delta(1-y)\left[\frac32-\ln(2)\right]\right\}\,,\\
@@ -1201,8 +1200,8 @@ affects all splitting functions above cancels between
 $\mathcal{P}_{1,\rm IJ}^{(0)}$ and $\mathcal{P}_{2,\rm IJ}^{(0)}$. We
 find:
 \begin{equation}
-\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)^2
-\mathcal{P}_{1,\rm SS}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)^2
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
+\mathcal{P}_{1,\rm SS}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
 \mathcal{P}_{2,\rm SS}^{(0)}(y,\kappa) = -2C_F\frac{1+\kappa}{\kappa}\,,
 \end{equation}
 \begin{equation}
@@ -1282,6 +1281,115 @@ The explicit expressions read:
                             like doing the calculation}\,.
 \end{array}
 \end{equation}
+
+\subsubsection{Sum rules}\label{eq:sumruleSG}
+
+As done above for the non-singlet splitting function, here we exploit
+polynomiality and the GPDs and the momentum sum rule (MSR) of PDFs to check
+the correctness of the singlet splitting functions. Before considering
+GPDs, let us derive the constrain that the MSR has on the forward
+splitting functions. The MSR states that the integral over the
+longitudinal momentum fractions $x$ of the sum of all PDFs weighted by
+$x$ represents the momentum fraction of all partons in the hadron and
+thus is to be equal to one at all scales. The respective formula
+reads:
+\begin{equation}
+\int_0^1dx\,x\left[f_{\rm S}(x,0)+f_{\rm G}(x,0)\right] = 1\,.
+\end{equation}
+We can now that the derivative w.r.t. $\ln\mu^2$ of both side of the
+the equation above and, using the evolution equation we find:
+\begin{equation}
+\int_0^1dy\,y\left[\mathcal{P}_{1,\rm SS}(y,0)+\mathcal{P}_{1,\rm
+    GS}(y,0)\right]\left[\int_0^1dz\,z f_{\rm S}(z,0)\right] + \int_0^1dy\,y\left[\mathcal{P}_{1,\rm SG}(y,0)+\mathcal{P}_{1,\rm
+    GG}(y,0)\right]\left[\int_0^1dz\,z f_{\rm G}(z,0)\right] = 0\,.
+\end{equation}
+In order for this equation to be identically fulfilled for any pair of
+distributions $f_{\rm S}$ and $f_{\rm G}$, one needs to have:
+\begin{equation}\label{eq:MSRforward}
+\begin{array}{rcl}
+\displaystyle \int_0^1dy\,y\left[\mathcal{P}_{1,\rm SS}(y,0)+\mathcal{P}_{1,\rm
+    GS}(y,0)\right] &=& 0 \,,\\
+\\
+ \displaystyle \int_0^1dy\,y\left[\mathcal{P}_{1,\rm SG}(y,0)+\mathcal{P}_{1,\rm
+    GG}(y,0)\right] &=& 0\,.
+\end{array}
+\end{equation}
+Effectively, these equations are fulfilled by the DGLAP splitting
+functions. We now wish to extend this argument to GPDs to find similar
+relations for the splitting functions that apply to $\xi\neq 0$. To do
+so, we use polynomiality of GPDs that for both singlet and gluon
+reads:
+\begin{equation}
+\int_0^1dx\,xf_{\rm S(G)}(x,\xi) = A_{q(g)}+\xi^2 D_{q(g)}\,,
+\end{equation}
+where the coefficients $A$ and $D$ generally depend on the scale
+$\mu$. However, it is well known that helicity-conserving ($H$) and
+helicity-flip ($E$) GPDs have the same D-term but with opposite sign
+such that, if we define $f_{\rm S(G)}$ as the sum of $H$ and $E$ the
+$\xi^2$ term cancels and one is left with:
+\begin{equation}
+\int_0^1dx\,xf_{\rm S(G)}(x,\xi) = A_{q(g)}\,.
+\end{equation}
+Therefore the sum of $f_{\rm S}$ and $f_{\rm G}$ gives:
+\begin{equation}
+\int_0^1dx\,x\left[f_{\rm S}(x,\xi) + f_{\rm G}(x,\xi)\right]= A\,,
+\end{equation}
+with $A=A_q+A_g$. Importantly $A$ is an observable and thus
+independent of the scale $\mu$. In addition, $H$ and $E$ obey the same
+evolution equations. This allows us to take the derivative with
+respect to $\ln\mu^2$ of both sides of the equation above and use the
+evolution equations. Following the same steps as in
+Sect.~\ref{eq:sumruleNS} leads to the following equalities:
+\begin{equation}\label{eq:MSRoffforward}
+\begin{array}{rcl}
+\displaystyle 
+  \int_0^1dz\,z\left[\mathcal{P}_{1,\rm SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{1,\rm GS}\left(z,\frac{\xi}{yz}\right)\right]+
+  \int_0^{\xi/y} dz\, z\left[\mathcal{P}_{2,\rm SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{2,\rm GS}\left(z,\frac{\xi}{yz}\right)\right]&=&0\,,\\
+\\
+ \displaystyle \int_0^1dz\,z\left[\mathcal{P}_{1,\rm SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{1,\rm GG}\left(z,\frac{\xi}{yz}\right)\right]+
+  \int_0^{\xi/y} dz\, z\left[\mathcal{P}_{2,\rm SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{2,\rm GG}\left(z,\frac{\xi}{yz}\right)\right]&=&0\,,
+\end{array}
+\end{equation}
+that automatically reduce to Eq.~(\ref{eq:MSRforward}) for
+$\xi\rightarrow 0$. It is now important to verify that the splitting
+functions written above obey these relations. We find:
+\begin{equation}
+\int_0^1dz\,z\left[\mathcal{P}_{1,\rm
+    SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{1,\rm
+    GS}\left(z,\frac{\xi}{yz}\right)\right] = 2C_F\left[-\frac12\frac{\xi^2}{y^2-\xi^2}-\ln\left(\left|\frac{y^2}{y^2-\xi^2}\right|\right)\right]\,,
+\end{equation}
+and:
+\begin{equation}
+\int_0^{\xi/y} dz\, z\left[\mathcal{P}_{2,\rm SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{2,\rm GS}\left(z,\frac{\xi}{yz}\right)\right]= 2C_F\left[\frac12\frac{\xi^2}{y^2-\xi^2}+\ln\left(\left|\frac{y^2}{y^2-\xi^2}\right|\right)\right]\,,
+\end{equation}
+that evidently cancel so that the first of
+Eq.~(\ref{eq:MSRoffforward}) is satisfied. In addition, they both tend
+to zero as $\xi\rightarrow 0$ as required by the first of
+Eq.~(\ref{eq:MSRforward}). Then we find:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle\int_0^1dz\,z\left[\mathcal{P}_{1,\rm
+    SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{1,\rm
+    GG}\left(z,\frac{\xi}{yz}\right)\right] &=&\displaystyle
+  \frac{y^2\xi^2}{3(y^2-\xi^2)^2}\left[C_A\left(\frac{11\xi^2}{y^2}-4\right)+2n_fT_R\left(1-\frac{2\xi^2}{y^2}\right)\right]\\
+\\
+&-&\displaystyle 2C_A\ln\left(\left|\frac{y^2-\xi^2}{y^2}\right|\right)\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_0^{\xi/y} dz\, z\left[\mathcal{P}_{2,\rm
+  SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{2,\rm
+  GG}\left(z,\frac{\xi}{yz}\right)\right]&=& \displaystyle
+                                             -\frac{y^2\xi^2}{3(y^2-\xi^2)^2}\left[C_A\left(\frac{11\xi^2}{y^2}-4\right)+2n_fT_R\left(1-\frac{2\xi^2}{y^2}\right)\right]\\
+\\
+&+&\displaystyle 2C_A\ln\left(\left|\frac{y^2-\xi^2}{y^2}\right|\right)\,,
+\end{array}
+\end{equation}
+so that also the second of Eq.~(\ref{eq:MSRoffforward}) is
+satisfied. Again, their limit for $\xi\rightarrow 0$ tends to zero
+that is consistent with the second of Eq.~(\ref{eq:MSRforward}).
 
 \section{Compton form factor}
 
