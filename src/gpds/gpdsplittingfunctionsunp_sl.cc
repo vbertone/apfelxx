@@ -79,7 +79,7 @@ namespace apfel
     const double kappa = _xi / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? 4 * _nf * TR * ( pow(y, 2) + pow(1 - y, 2) - ky2 ) / pow(1 - ky2, 2) : 0)
-           + (kappa > 1 ? 4 * _nf * TR * ( 1 - kappa ) * ( 1 - kappa * ( kappa + 2 ) * pow(y, 2) ) / kappa / pow(1 - pow(kappa * y, 2), 2) : 0);
+           + (kappa > 1 ? 4 * _nf * TR * ( 1 - kappa ) * ( 1 - kappa * ( kappa + 2 ) * pow(y, 2) ) / kappa / pow(1 - ky2, 2) : 0);
   }
 
   //_________________________________________________________________________________
@@ -93,7 +93,7 @@ namespace apfel
     const double kappa = _xi / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? 2 * CF * ( 1 + pow(1 - y, 2) - ky2 ) / y / ( 1 - ky2 ) : 0)
-           + (kappa > 1 ? - 2 * CF * pow(1 - kappa, 2) / kappa / ( 1 - pow(kappa * y, 2) ) : 0);
+           + (kappa > 1 ? - 2 * CF * pow(1 - kappa, 2) / kappa / ( 1 - ky2 ) : 0);
   }
 
   //_________________________________________________________________________________
@@ -110,7 +110,7 @@ namespace apfel
     const double k2    = kappa * kappa;
     return 4 * CA * (y <= 1 ? - ( 1 + k2 * y ) / ( 1 - ky2 ) + ( ( 1 - y ) / y + y * ( 1 - y ) ) / pow(1 - ky2, 2) : 0)
            + 2 * CA * (kappa > 1 ? 2 * ( 1 - kappa ) * ( 1 + pow(y, 2) ) / pow(1 - ky2, 2) + k2 * ( 1 + y ) / ( 1 - ky2 )
-                       + ( 1 - k2 ) * (2 - 1 / kappa - 1 / ( 1 + y ) ) / ( 1 - ky2 ) : 0);
+                       + ( 1 - k2 ) * ( 2 - 1 / kappa - 1 / ( 1 + y ) ) / ( 1 - ky2 ) : 0);
   }
   double Pgpd0gg::Singular(double const& y) const
   {
