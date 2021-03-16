@@ -68,7 +68,7 @@ namespace apfel
         const OperatorGPD O0qg{g, Pgpd0qg{nf, xi}, IntEps};
         const OperatorGPD O0gg{g, Pgpd0gg{nf, xi}, IntEps};
         std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O0ns});
+        OM.insert({EvolutionBasisQCD::PNSP, O0qq});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0qq});
