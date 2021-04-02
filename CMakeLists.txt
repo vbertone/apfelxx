@@ -1,7 +1,7 @@
 # BASIC DEFINITIONS ========================================================================
 
 # define minimum version of cmake
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.19)
 
 # define project name and its language
 project(apfel CXX Fortran)
@@ -20,7 +20,7 @@ endif()
 
 # VERSION ==============================================================================
 
-set(apfel_VERSION 4.6.0)
+set(apfel_VERSION 4.7.0)
 
 # export version to file
 configure_file(
