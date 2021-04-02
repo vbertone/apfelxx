@@ -45,7 +45,7 @@ namespace apfel
   public:
     s1(): Expression() {}
     double Singular(double const& x) const { return log( 1 - x ) / ( 1 - x ); }
-    double Local(double const& x) const { double l = log( 1 - x ); return l * l / 2; }
+    double Local(double const& x) const { return pow(log( 1 - x ), 2) / 2; }
   };
 
   class lrqq: public apfel::Expression
@@ -318,7 +318,7 @@ namespace apfel
     SidisObj.C21qq.AddTerm({1, odelta, olrqq });    //3
     SidisObj.C21qq.AddTerm({SLqq, os1, odelta});    //4
     SidisObj.C21qq.AddTerm({SSqq, os0, os0   });    //5
-    SidisObj.C21qq.AddTerm({1, os0, osrqq });       //6
+    SidisObj.C21qq.AddTerm({1, os0,   osrqq });     //6
     SidisObj.C21qq.AddTerm({1, orlqq, odelta});     //7
     SidisObj.C21qq.AddTerm({1, orsqq, os0   });     //8
     SidisObj.C21qq.AddTerm({K1qq, or11qq, or12qq}); //9
@@ -337,8 +337,8 @@ namespace apfel
     const apfel::Operator or31gq{g, r31gq{}};
     const apfel::Operator or32gq{g, r32gq{}};
 
-    SidisObj.C21gq.AddTerm({1, odelta, olrgq });    //1
-    SidisObj.C21gq.AddTerm({1, os0, osrgq });       //2
+    SidisObj.C21gq.AddTerm({1, odelta, olrgq});     //1
+    SidisObj.C21gq.AddTerm({1, os0,    osrgq});     //2
     SidisObj.C21gq.AddTerm({K1gq, or11gq, or12gq}); //3
     SidisObj.C21gq.AddTerm({K2gq, or21gq, or22gq}); //4
     SidisObj.C21gq.AddTerm({K3gq, or31gq, or32gq}); //5

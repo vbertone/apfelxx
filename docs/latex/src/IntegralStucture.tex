@@ -740,7 +740,7 @@ I_{\beta\alpha} =
 \int_{x_\beta}^1dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \label{eq:integralex}
 \end{equation}
-A logarithmically-spaced is defined such that
+A logarithmically-spaced grid is defined such that
 $\ln x_{n+1}=\ln x_{n}+\delta x$ with $\delta x$ a positive
 constant. In addition, we consider a set of Lagrange interpolating
 functions of degree $\kappa$ polynomial in $\ln z$,
@@ -748,14 +748,14 @@ $\{w_{\alpha}(z)\}$, that thus have the following form (see section on
 the interpolation):
 \begin{equation}
   w_{\alpha}^{(k)}(z) = \sum_{j=0\atop j \leq
-    \alpha}^{k}\theta(z-x_{\alpha-j})\theta(x_{\alpha-j+1}-z)\prod^{k}_{\delta=0,\delta\ne
+    \alpha}^{k}\theta(z-x_{\alpha-j})\theta(x_{\alpha-j+1}-z)\prod^{k}_{\delta=0\atop \delta\ne
     j}\left[\frac{\ln(z)-\ln(x_{\alpha-j+\delta})}{\ln(x_{\alpha})-\ln(x_{\alpha-j+\delta})}\right]\,.
 \label{eq:LagrangeFormulaLog}
 \end{equation}
 Due to the fact that the grid is logarithmically distributed with step
 $\delta x$, the function above can be rearranged as follows:
 \begin{equation}
-w_{\alpha}^{(k)}(z) = \sum_{j=0,j \leq \alpha}^{k}\theta(z-x_{\alpha-j})\theta(x_{\alpha-j+1}-z)\prod^{k}_{\delta=0,\delta\ne j}\left[\frac{1}{\delta x} \ln\left(\frac{z}{x_\alpha}\right)\frac{1}{j-\delta}+1\right].
+w_{\alpha}^{(k)}(z) = \sum_{j=0\atop j \leq \alpha}^{k}\theta(z-x_{\alpha-j})\theta(x_{\alpha-j+1}-z)\prod^{k}_{\delta=0\atop \delta\ne j}\left[\frac{1}{\delta x} \ln\left(\frac{z}{x_\alpha}\right)\frac{1}{j-\delta}+1\right].
 \end{equation}
 It is finally easy to see that Eq.~(\ref{eq:LagrangeFormulaLog}) is
 such that:
@@ -766,16 +766,15 @@ w_{\alpha}\left(\frac{x_\beta}{y}\right) =
 \widetilde{w}\left(\ln\frac{x_\beta}{x_\alpha}-\ln y\right)
 =\widetilde{w}\left((\beta-\alpha)\delta x-\ln y\right)\,.
 \end{equation}
-
-
 Therefore, the integrand of the integral in Eq.~(\ref{eq:integralex})
 only depends on the difference $\beta-\alpha$ and not on $\beta$ and
 $\alpha$ separately. Since the lower bound is $x_\beta$, this symmetry
 seems to broken at the level of the integral.  However, the symmetry
 is preserved thanks to the support properties of the interpolating
-functions $w_\alpha$ and the fact that relevant functions (PDFs or FFs)
-are zero at $x=1$. To see this, we consider the integration limits in
-Eq.~(\ref{eq:intlims}) with $\eta=1$. They can be written as:
+functions $w_\alpha$ and the fact that the relevant functions (PDFs or
+FFs) are zero at $x=1$. To see this, we consider the integration
+limits in Eq.~(\ref{eq:intlims}) with $\eta=1$. They can be written
+as:
 \begin{equation}
   c =
   \mbox{max}(x_\beta,e^{(\beta-\alpha-1)\delta x}) \quad\mbox{and}\quad d =
@@ -791,28 +790,28 @@ x_\beta > e^{(\beta-\alpha-1)\delta x}\,.
 \label{eq:ineq}
 \end{equation}
 Since the last point of the grid is $x_{N_x}=1$, being $N_x$ the
-number of grid nodes minus one, one can write:
+number of grid intervals, one can write:
 \begin{equation}
 x_\beta = \frac{x_\beta}{x_{N_x}} = e^{(\beta-N_x)\delta x}.
 \end{equation}
-Finally, the inequality in Eq.~(\ref{eq:ineq}) becomes:
+Finally, relying on the monotonicity of the exponential function, the
+inequality in Eq.~(\ref{eq:ineq}) becomes:
 \begin{equation}
   \beta-N_x > \beta-\alpha-1\quad\Leftrightarrow\quad \alpha > N_x-1\quad\Leftrightarrow\quad \alpha = N_x\,.
 \end{equation}
 Therefore, the integrals $I_{\beta N_x}$ do not respect the
 ``$\beta-\alpha$'' symmetry.  However, as mentioned above,
 $I_{\beta N_x}$ will always multiply a function computed in
-$x_{N_x}=1$. If this function is a PDF or a FF, it is identically zero
-at $x_{N_x}=1$ and thus the symmetry is effectively preserved. In
+$x_{N_x}=1$. In all cases of interest this function is identically
+zero at $x_{N_x}=1$ and thus the symmetry is effectively preserved. In
 addition, $c$ in Eq.~(\ref{eq:intlims1}) is such that if
-$\beta>\alpha$ one has $c\geq1$. But being $c$ the lower
-integration bound of and since in Eq.~(\ref{eq:integralex}) the upper
-bound is 1, one immediately has that $I_{\beta\alpha}=0$ for
-$\beta>\alpha$. The consequence of these observations is that
-computing the integrals $a_\alpha=I_{0\alpha}$ for
-$\alpha=0,\dots,N_x$ is enough to reconstruct the full set of
-$I_{\beta\alpha}$ because, in matricial representation, $I$ will look
-like this:
+$\beta>\alpha$ one has $c\geq1$. But being $c$ the lower integration
+bound of and since in Eq.~(\ref{eq:integralex}) the upper bound is 1,
+one immediately has that $I_{\beta\alpha}=0$ for $\beta>\alpha$. The
+consequence of these observations is that computing the integrals
+$a_\alpha=I_{0\alpha}$ for $\alpha=0,\dots,N_x$ is enough to
+reconstruct the full set of integrals $I_{\beta\alpha}$ because, in
+matricial representation, $I$ will look like this:
 \begin{equation}
 \displaystyle I_{\beta\alpha} = 
 \begin{pmatrix}
@@ -821,16 +820,16 @@ a_0 &  a_1 & a_2 & \cdots & a_{N_x} \\
  0  & 0   &  a_0 & \cdots & a_{N_x-2} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
  0  &   0  &   0 & \cdots & a_0 
-\end{pmatrix}\,,
+\end{pmatrix}\,.
 \label{eq:MatrixRep}
 \end{equation}
 In conclusion, adopting a logarithmically-spaced grid allows one to
 compute $N_x+1$ integrals rather than $(N_x+1)(N_x+2)/2$ integrals.
 
-There is another detail that matters in terms of numerical efficiency
+There is another aspect that matters in terms of numerical efficiency
 of the computation of the integrals $I_{\beta\alpha}$. Given the
-support region of the functions $w_\alpha$, the integral in
-Eq.~(\ref{eq:integralex}) effectively reads:
+support region of the interpolating functions $w_\alpha$, the integral
+in Eq.~(\ref{eq:integralex}) effectively reads:
 \begin{equation}
 I_{\beta\alpha} = \int_c^ddy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
@@ -847,9 +846,9 @@ piecewise in correspondence of the grid nodes. This feature makes a
 numerical integration over the full range defined in
 Eq.~(\ref{eq:intlimsind}) hard to converge due to the cusps at the
 grid nodes. However, the functions $w_\alpha$ are smooth between two
-consecutive nodes. Therefore, it turns out that it is convenient to
-compute the integrals $I_{\beta\alpha}$ by breaking the integration
-range as follows:
+consecutive nodes. Therefore, it turns out to be convenient to compute
+the integrals $I_{\beta\alpha}$ by breaking the integration range as
+follows:
 \begin{equation}
 I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
     min}[\kappa, \alpha - \beta]}
@@ -857,12 +856,11 @@ I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
 dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
 \label{eq:finalformula}
 \end{equation}
-in such a way that the integrand of each single integrand is a smooth
+in such a way that the integrand of each single integral is a smooth
 function and thus easier to integrate. Despite the number of
 intergrals to be computed increases, this procedure makes the
-computation faster and more accurate.
-
-Finally, if the grid is logarithmically distributed, and one defines:
+computation faster and more accurate. Finally, if the grid is
+logarithmically distributed, and one defines:
 \begin{equation}
 s = \exp\left[\delta x\right]\,,
 \end{equation}
@@ -871,276 +869,203 @@ Eq.~(\ref{eq:finalformula}) can also be written as:
 I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
     min}[\kappa, \alpha - \beta]}  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
+These are the basic objects computed by {\tt APFEL++} to define a
+DGLAP-like operator.
 
-\subsubsection{GPD-related integrals}
+\section{GPD-related integrals}
 
-When considering, for example GPD-related computations such as the
-evolution of GPDs, another kind of integral structure comes into play,
-that is:
+When considering computations involving GPDs, another kind of integral
+structure comes into play, that is:
 \begin{equation}
-J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z},x\right) d(z)\,,
+J(x) = x\int_0^1\frac{dz}{z} O \left(\frac{x}{z},x\right) d(z)\,.
 \label{eq:ZMconvERBL}
 \end{equation}
-which differs from that in Eq.~(\ref{eq:ZMconv}) in two respects: the
-lower integration bound is zero rather than $x$ and the operator $O$
-may also depend explicitly on the external variable $x$. Under the
-assumption that this integral is convergent, we need to adapt the
-strategy for the computation of numerical integrals to
-Eq.~(\ref{eq:ZMconvERBL}). As a first step, we make the change of
-integration variable $z\rightarrow x/y$ and use the interpolation
-formula in Eq.~(\ref{eq:Interpolation}), to obtain:
-\begin{equation}
-  J(x_\beta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha\int_{x_\beta}^\infty dy\,
-  O(y,x_\beta)\,w_{\alpha}\left(\frac{x_\beta}{y}\right) =\sum_{\alpha=0}^{N_x} J_{\beta\alpha}\overline{d}_\alpha\,.
-\end{equation}
-The $\infty$ in the upper bound is a new feature. However, the support
-region of the functions $w_{\alpha}$ is the same so that:
-\begin{equation}
-  J_{\beta\alpha}=  \int_{c}^{\overline{d}} dy\,
-  O(y,x_\beta)\,w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
-\end{equation}
-with integration bounds:
-\begin{equation}
-  c=\frac{x_\beta}{x_{{\rm min}[N_x,\alpha+1]}}\quad\mbox{and}\quad
-  \overline{d} = \frac{x_\beta}{x_{{\rm max}[0,\alpha-\kappa]}}\,.
-\label{eq:intlimsGPD}
-\end{equation}
-Following the procedure discussed in the previous section, the actual
-computation is achieved by:
-\begin{equation}
-\begin{array}{rcl}
-J_{\beta\alpha} &=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 -
-                    N_x]}^{{\rm min}[\kappa,\alpha]}
-                    \int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}}
-                    dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\\
-\\
-&=&\displaystyle \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm min}[\kappa,\alpha]}  \int_{s^{\beta-\alpha+j-1}}^{s^{\beta-\alpha+j}} dy\,O(y,x_\beta)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
-\end{array}
-\label{eq:ERBLints}
-\end{equation}
-Therefore, at the level of the single integral, the only difference
-with respect to the ``standard'' case is a change of the upper
-summation bound. It should be clear, however, that this procedure
-necessarily implies an approximation. This is due to the fact that the
-interpolation grid, understood to be logarithmically distributed, does
-not reach zero. This approximation manifests itself in the fact that
-the upper bound of the intergrals in Eq.~(\ref{eq:ERBLints}) never
-reaches infinity but it becomes as large as $s^{\kappa}$. The size of
-$s^{\kappa}$ can range widely depending on the lower bound of the grid
-$x_0$, on the number of nodes $N_x$, and on the interpolation degree
-$\kappa$, according to:
-\begin{equation}
-s^\kappa = \exp\left[-\frac{\kappa}{N_x}\ln x_0\right]=x_0^{-\frac{\kappa}{N_x}}\,.
-\end{equation}
-In particular, $s^{\kappa}$ becomes larger as: $x_0$ gets smaller,
-$N_x$ gets smaller, and $\kappa$ gets larger. We will need to assess
-the impact of this approximation numerically.
-
-If the operator $O$ in Eq.~(\ref{eq:ZMconvERBL}) did not explicitly
-depend on $x$, the integral $J_{\beta\alpha}$ would only depend on the
-difference $\beta-\alpha$. However, this is not generally the case and
-thus, at variance with the standard case, it is not possible to take
-advantage of this symmetry and it becomes necessary to compute all the
-$N_x^2$ integrals making up $J_{\beta\alpha}$.
-
-\subsection{Joining grids}
+This integral differs from that in Eq.~(\ref{eq:ZMconv}) in two
+respects: the lower integration bound is zero rather than $x$ and the
+operator $O$ may also depend explicitly on the external variable
+$x$. These differences make the strategy devised for the numerical
+computation of convolution integrals as in Eq.~(\ref{eq:ZMconv})
+partially invalid. Let us discuss it in detail to motivate the
+particular strategy adopted to compute Eq.~(\ref{eq:ZMconvERBL}) on a
+grid.
 
 As discussed above, logarithmically distributed grids are particularly
-advantageous because they allow one to substantially reduce the number
-of integrals to be computed. However, logarithmic grids have two main
-drawbacks. First, they cannot get down to $x = 0$ and this is a
-potential problem for integrals like those in
-Eq.~(\ref{eq:ZMconvERBL}). Second, logarithmic grids that start from a
-relatively low value of $x$ tend to be relatively sparse at large
-values of $x$. This is also a problem because all integrals that we
-are considering are such that the function being interpolated is
-integrated up to $x=1$ and the interpolation there can thus
-potentially degrade in accuracy.
-
-A possible solution to this problem is to increase the density in a
+advantageous for integrals like those in Eq.~(\ref{eq:ZMconv}) because
+they allow for a substantial reduction of the number of integrals to
+be computed. However, logarithmic grids have two main
+drawbacks. First, logarithmic grids that start from a relatively low
+value of $x$ tend to be relatively sparse at large values of $x$. This
+is a problem because all integrals that we are considering are such
+that the function being interpolated is integrated up to $x=1$ and the
+interpolation there can thus potentially degrade in accuracy. A
+possible solution to this problem is to increase the density in a
 stepwise fashion as $x$ gets closer to one. This produces locally
-logarithmically distributed grids that allow to exploit the symmetry
-discussed above while making the grid denser, and thus more accurate,
-at large $x$. The implementation of this procedure in {\tt APFEL++} is
-achieved by means of \textit{locked} subgrids. In practice, one starts
-with a logarithmic grid with a given lower bound, \textit{e.g.}
-$x_{\rm min}^{(0)}=10^{-5}$. Starting from a given node,
-$x_{\rm min}^{(1)}$, the density of the grid is increased by some
-integer factor. This procedure can be repeated an arbitrary number of
-times as one moves towards large $x$, effectively defining logarithmic
-subgrids that are increasingly denser and thus guarantee a better
-interpolation accuracy.
-
-When dealing with integrals such as that in Eq.~(\ref{eq:integralex}),
-the simplest, but possibly not optimal, way to exploit the subgrid
-structure is to switch to a denser grid at the level of the
-\textit{integral} essentially using one grid when $x_\beta$ is below
+logarithmically distributed grids that allow one to exploit the
+symmetry discussed above while making the grid denser, and thus more
+accurate, at large $x$. The implementation of this procedure in {\tt
+  APFEL++} is achieved by means of \textit{locked} subgrids. In
+practice, one starts with a logarithmic grid with a given lower bound,
+\textit{e.g.}  $x_{\rm min}^{(0)}=10^{-5}$. Starting from a given
+node, $x_{\rm min}^{(1)}$, the density of the grid is increased by
+some integer factor. This procedure can be repeated an arbitrary
+number of times as one moves towards large $x$, effectively defining
+logarithmic subgrids that are increasingly denser and thus guarantee a
+better interpolation accuracy. When dealing with integrals such as
+that in Eq.~(\ref{eq:integralex}), the simplest way to exploit the
+subgrid structure is to switch to a denser grid at the level of the
+\textit{integral}, essentially using one grid when $x_\beta$ is below
 the transition node and the other when it is above. The advantage of
 this approach is that the integration procedure discussed above
-applies verbatim with the only difference that according to the
-position of $x_\beta$ one grid is used rather than another. The
+applies verbatim with the only difference that, according to the
+position of $x_\beta$, one grid is used rather than another. The
 disadvantage of this procedure is that integrals with low values of
 $x_\beta$ do not take advantage of the denser grids at large $x$. When
 dealing with functions like PDFs that vanish rapidly as $x$ tends to
 one, this is typically fine because the bulk of the integrals is
 typically due to the region at $x\gtrsim x_\beta$. This usually makes
-possible interpolation inaccuracies at large $x$ negligible.
+possible interpolation inaccuracies at large $x$
+negligible. Unfortunately, when applied to integrals of the kind of
+Eq.~(\ref{eq:ZMconvERBL}), this strategy may lead to severe
+inaccuracies at large values of $x_\beta$. This is due to the fact
+that the integral extends down to zero and this procedure does not
+make use of the low-$x$ grids, effectively truncating the integral to
+increasingly larger values of $x$ as $x_\beta$ approaches one.
 
-The procedure discussed above when applied to integrals of the kind of
-Eq.~(\ref{eq:ZMconvERBL}) may lead to severe inaccuracies a large
-values of $x_\beta$. This is due to the fact that the integral extends
-down to zero and the naive procedure does not make use of the low-$x$
-grids effectively truncating the integral to increasingly larger
-values of $x$.
+The second problem is that logarithmic grids get down to $x = 0$. This
+is not an issue for the computation in Eq.~(\ref{eq:ZMconv}) because
+the lower integration bound is $x$ and thus, as long as the integral
+in not computed below the lower bound of the grid, this does not
+introduce any inaccuracy. Conversely, this is a potential problem for
+integrals like those in Eq.~(\ref{eq:ZMconvERBL}) that extend down to
+zero for any value of $x$. This may suggest that logarithmic grids are
+not suitable in the first place for integrals as in
+Eq.~(\ref{eq:ZMconvERBL}). However, we observe that GPD-related
+integrands are usually well-behaved around $y=0$ implying that a
+logarithmic grid with lower bound $x_0$ close enough to zero
+(\textit{e.g.}  $x_0=10^{-5}$) is expected to be enough to make the
+contribution to the integral due to the region $y\in[0,x_0]$
+negligibly small. Therefore, also for the computation of
+Eq.~(\ref{eq:ZMconvERBL}), we stick to logarithmically distributed
+grids which allows us to use the same class for constructing and
+managing grids developed to compute Eq.~(\ref{eq:ZMconv}).
 
-In the following we discuss a more convoluted but more effective way
-to exploit the subgrids that solves the problem mentioned above,
-\textit{i.e.}  the lack of exploitation of the large-$x$ grids when
-$x_\beta$ is small and the lack of exploitation of the low-$x$ grids
-when $x_\beta$ is large. In this approach the switch from one grid to
-the other does not happen, as above, at the level of the integral but
-at the level of the \textit{integrand}. 
+In addition, GPD-related integrals, due to the explicit dependence on
+the external variable of the operator (see Eq.~(\ref{eq:ZMconvERBL})),
+do not enjoy $\beta-\alpha$ symmetry discussed above. This is a major
+limitation in that it does not allow us to reduce the number of
+integrals to be computed.
 
-In this respect, the basic observation is that, thanks to the locking
-of the subgrids, the integral for a DGLAP-like convolution as in
-Eq.~(\ref{eq:ZMconv}) computed in the point $x_\beta$ of the joint
-grid can be decomposed as follows:
+These observation, along with the discussion on the interpolation
+grid, leads us to take an approach in which the operator is computed
+for all possible pairs $(\alpha,\beta)$ over a grid that extends as
+low as possible in $x$ and is dense at large $x$: \textit{i.e.} the
+joint grid.
+
+Using the usual interpolation formula gives us that the integral in
+Eq.~(\ref{eq:ZMconvERBL}) is computed on the grid as follows:
 \begin{equation}
-I(x_\beta) = \sum_{g=0}^{N_g-1}\int_{x_\beta/{\rm
-    max}[x_\beta,x_{\gamma^{(g+1)}}]}^{x_\beta/{\rm
-    max}[x_\beta,x_{\gamma^{(g)}}]}dy\,O(y)f\left(\frac{x_\beta}{y}\right)
-= \sum_{g=1}^{N_g}I^{(g)}(x_\beta)\,,
-\label{eq:decompDGLAP}
+J(x_\beta) = \sum_{\alpha=}^{N_x-1}J_{\beta\alpha}\overline{d}_\alpha\,.
 \end{equation}
-while for and ERBL-like convolution as that in
-Eq.~(\ref{eq:ZMconvERBL}) the decomposition reads:
+with $\overline{d}_\alpha = x_\alpha d(x_\alpha)$ and the assumption
+$d(1)=0$, and with:
 \begin{equation}
-  J(x_\beta) =
-  \sum_{g=0}^{N_g-1}\int_{x_\beta/x_{\gamma^{(g+1)}}}^{x_\beta/x_{\gamma^{(g)}}}dy\,O(y,x_\beta)f\left(\frac{x_\beta}{y}\right)
-  = \sum_{g=1}^{N_g}J^{(g)}(x_\beta)\,,
-\label{eq:decompERBL}
+J_{\beta\alpha} =
+\sum_{j=0}^{{\rm min}[\alpha,\kappa]}\int_{x_\beta/x_{\alpha-j+1}}^{x_\beta/x_{\alpha-j}} dy\,O(y,x_\beta)w_\alpha^{(\kappa)}\left(\frac{x_\beta}{y}\right)\,,
 \end{equation}
-where $\gamma^{(g)}$ is the index corresponding to the lower bound of
-the $g$-th grid on the joint grid with the conditions $\gamma^{(0)}=0$
-and $\gamma^{(N_g)}=N_x$. It is interesting to observe that if
-$x_\beta \geq x_{\gamma^{(g+1)}}$, since this also implies
-$x_\beta \geq x_{\gamma^{(g)}}$, the integration bounds of the
-integral in the $g$-th term of Eq.~(\ref{eq:decompDGLAP}) are both
-equal to one giving a vanishing contribution. Therefore, as expected,
-only the subgrids having $x_\beta < x_{\gamma^{(g+1)}}$ will
-eventually contribute to the full integral. Conversely, all grids
-contribute to the full convolution integral in
-Eq.~(\ref{eq:decompERBL}), no matter the position of $x_\beta$
-w.r.t. the subgrid bounds.
+where the indices $\alpha$ and $\beta$ are intended to run over the
+joint grid. We point out again that in this case it is necessary to
+compute all the $N_x^2$ integrals making up $J_{\beta\alpha}$.
 
-Let us first consider the $g$-th contribution to the integral in
-Eq.~(\ref{eq:decompERBL}), $J^{(g)}$, and apply the usual
-interpolation procedure to the $g$-th subgrid. To do so, we need to
-take into account the fact that the $g$-th subgrid starts from the
-index $\gamma^{(g)}$ of the joint grid and that in the range
-$\gamma^{(g)}\leq \alpha \leq\gamma^{(g+1)}$ joint grid and $g$-th
-subgrid coincide up to an index offset given by $\gamma^{(g)}$ itself
-(\textit{i.e.} $x_{\alpha} =x_{\alpha-\gamma^{(g)}}^{(g)}$). This
-gives:
+\subsection{Principal-valued integrals}
+
+Expressions for the operator $O$ in Eq.~(\ref{eq:ZMconvERBL}) often
+involve singular terms that are to interpreted as Cauchy
+principal-valued distributions. We are specifically concerned with
+integrals of the following kind:
 \begin{equation}
-  J^{(g)}(x_\beta) =
-  \sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}\overline{d}_\alpha
-  \int_{\overline{c}}^{\overline{d}}dy\,O(y,x_\beta)w_{\alpha-\gamma^{(g)}}\left(\frac{x_{\beta}}{y}\right)=\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}J_{\beta\alpha}^{(g)}\,\overline{d}_\alpha\,.
-\label{eq:decompERBLg}
+I={\rm PV}\int_x^{\infty}dy\,\frac{f(y)}{1-y}\,
 \end{equation}
-To set the upper limit of the sum ,we have exploited the fact that, if
-$\alpha\geq \gamma^{(g+1)}+\kappa^{(g)}$, the lower bound of the
-integral exceeds to upper one giving no contribution.  As a matter of
-fact, the integration bounds are defined as:
+where $f(y)$ is a smooth function over the integration range. In order
+to numerically treat this kind of integrals, in the document devoted
+to GPDs the so-called $++$-distribution has been introduced such that:
 \begin{equation}
-\begin{array}{l}
-  \ln {\overline{c}} = (\beta-\alpha-1+ {\rm
-  max}[0,\alpha+1-\gamma^{(g+1)}])\delta x^{(g)}\,,\\
+I=\int_x^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}f(y)\,
+\end{equation}
+Similarly to the popular $+$-distribution, the $++$-distribution acts
+upon integration in the following way:
+\begin{equation}
+\int_x^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}f(y) =
+\int_x^{\infty}\frac{dy}{1-y}\left[f(y)-f(1)\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+f(1)\ln(1-x)
+\,.
+\label{eq:pluplusprescription}
+\end{equation}
+However, differently from the $+$-distribution, the $++$-distribution
+does not regularise an otherwise divergen integral. It rather
+rearranges the integrand in such a way that it is finite over the
+integration range (the divergence at $y=1$ is no longer there) making
+it numerically treatable. We now need to devise a way to compute this
+integral within the interpolation framework. Indeed, the interpolation
+procedure produces integrals as this:
+\begin{equation}
+I_{\beta\alpha}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right) \,,
+\end{equation}
+that need to be treated with care due to the support region of the
+interpolation functions $w_\alpha$. In particular, we know that the
+function $w_\alpha(x_\beta/y)$ has support
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{\alpha-\kappa}]$, so that:
+\begin{equation}
+\begin{array}{rcl}
+I_{\beta\alpha}&=&\displaystyle
+                   \int_{c}^{d}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)=\int_{c}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
 \\
-\ln \overline{d} =
-  (\beta-\alpha+{\rm min}[\kappa^{(g)},\alpha-\gamma^{(g)}])\delta
-  x^{(g)}\,.
-\end{array}
-\end{equation}
-This allows us to write the factors $J_{\beta\alpha}^{(g)}$ in
-Eq.~(\ref{eq:decompERBLg}) as follows:
-\begin{equation}
-  J_{\beta\alpha}^{(g)}=\sum_{j={\rm
-      max}[0,\alpha+1-\gamma^{(g+1)}]}^{{\rm
-      min}[\kappa^{(g)},\alpha-\gamma^{(g)}]}\int_{s_g^{\beta-\alpha+j-1}}^{s_g^{\beta-\alpha+j}}dy\,O(y,x_\beta)w_{\alpha-\gamma^{(g)}}\left(\frac{x_\beta}{y}\right)\,,
-\label{eq:decompERBLgg}
-\end{equation}
-with $s_g=\exp(\delta x^{(g)})$. Eq.~(\ref{eq:decompERBL}) can finally
-be written as:
-\begin{equation}
-  J(x_\beta) =
-  \sum_{g=0}^{N_g-1}\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}J_{\beta\alpha}^{(g)}\,\overline{d}_\alpha
-  \,.
-\label{eq:decompERBL3}
-\end{equation}
-We now introduce the discreet $\theta$-function $\theta_{\rho,\sigma}$
-defined such that:
-\begin{equation}
-\theta_{\rho,\sigma}=\left\{
-\begin{array}{rr}
-1 & \quad\rho\geq\sigma\\
-0 & \quad\rho<\sigma
-\end{array}
-\right.\,,
-\end{equation}
-which allows us to exchange the sums in Eq.~(\ref{eq:decompERBL3}) and
-write:
-\begin{equation}
-  J(x_\beta) =
-  \sum_{\alpha=0}^{N_x+\kappa^{(N_g-1)}-1} \overline{d}_\alpha \left(\sum_{g=0}^{N_g-1}\theta_{\alpha,\gamma^{(g)}}\theta_{\gamma^{(g+1)}+\kappa^{(g)}-1,\alpha}J_{\beta\alpha}^{(g)}\right)\,.
-\end{equation}
-Assuming that $\overline{d}_\alpha=0$ for $\alpha\geq N_x$ and
-defining:
-\begin{equation}
-  J_{\beta\alpha} =
-\sum_{g=0}^{N_g-1}\theta_{\alpha,\gamma^{(g)}}\theta_{\gamma^{(g+1)}+\kappa^{(g)}-1,\alpha}J_{\beta\alpha}^{(g)}\,,
-\label{eq:tensor}
-\end{equation}
-one finally obtains:
-\begin{equation}
-  J(x_\beta) =
-  \sum_{\alpha=0}^{N_x-1} J_{\beta\alpha}\overline{d}_\alpha\,.
-\end{equation}
-
-We can now apply the same procedure to the integral $I$ in
-Eq.~(\ref{eq:decompDGLAP}). As above, one finds:
-\begin{equation}
-  I^{(g)}(x_\beta) =
-  \sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}\overline{d}_\alpha
-  \int_c^ddy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_{\beta}}{y}\right)=\sum_{\alpha=\gamma^{(g)}}^{\gamma^{(g+1)}+\kappa^{(g)}-1}I_{\beta\alpha}^{(g)}\,\overline{d}_\alpha\,,
-\label{eq:decompDGLAPg}
-\end{equation}
-where the logarithm of the integration bounds this time read:
-\begin{equation}
-\begin{array}{l}
-  \ln {c} = (\beta-\alpha-1+ {\rm max}[0,\alpha+1-{\rm
-  max}[\beta,\gamma^{(g+1)}]])\delta x^{(g)}\,,\\
+&=&\displaystyle
+    \int_c^{\infty}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\ln(1-c)\\
 \\
-\ln d =
-  (\beta-\alpha+{\rm min}[\kappa^{(g)},\alpha-{\rm
-  max}[\beta,\gamma^{(g)}]])\delta x^{(g)}\,.
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\int_d^{\infty}\frac{dy}{1-y}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]\\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\int_d^{\infty}dy\left(\frac{1}{1-y}+\frac{1}{y}\right)\right]\\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\int^{1-d}_{-\infty}\frac{dz}{z}-\int_d^{\infty}\frac{dy}{y}\right] \\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)+\int_{1-d}^{d}\frac{dy}{y}\right] \\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)+\int_{d-1}^{d}\frac{dy}{y}\right] \\
+\\
+&=&\displaystyle
+    \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\ln\left(1-\frac{1}{d}\right)\right] \,,
 \end{array}
 \end{equation}
-which gives:
+with:
 \begin{equation}
-I_{\beta\alpha}^{(g)}=\sum_{j={\rm max}[0,\alpha+1-{\rm
-    max}[\beta,\gamma^{(g+1)}]]}^{{\rm min}[\kappa^{(g)},\alpha-{\rm max}[\beta,\gamma^{(g)}]]}\int_{s_g^{\beta-\alpha+j-1}}^{s_g^{\beta-\alpha+j}}dy\,O(y)w_{\alpha-\gamma^{(g)}}\left(\frac{x_\beta}{y}\right)\,,
+c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}\,,
 \end{equation}
-allowing one to define:
+and where we have used the fact that $d\geq 1$ for $\beta=\alpha$ and,
+according to the Cauchy principal-value prescription:
 \begin{equation}
-  I_{\beta\alpha} =
-\sum_{g=0}^{N_g-1}\theta_{\alpha,\gamma^{(g)}}\theta_{\gamma^{(g+1)}+\kappa^{(g)}-1,\alpha}I_{\beta\alpha}^{(g)}\,,
+\int_{-a}^{a}\frac{dy}{y} = 0\,,
 \end{equation}
-such that:
-\begin{equation}
-  I(x_\beta) =
-  \sum_{\alpha=0}^{N_x-1} I_{\beta\alpha}\overline{d}_\alpha\,.
-\end{equation}
+where $a$ could also be $\infty$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \bibliographystyle{ieeetr}

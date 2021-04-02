@@ -25,6 +25,13 @@ namespace apfel
     _data.resize(row * col, v);
   }
 
+  //_________________________________________________________________________
+  template<class T>
+  void matrix<T>::set(T const& v)
+  {
+    std::fill(_data.begin(), _data.end(), v);
+  }
+
   // Specialisations
   template class matrix<size_t>;
   template class matrix<int>;

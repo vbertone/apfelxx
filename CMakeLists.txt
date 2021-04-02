@@ -50,7 +50,7 @@ enable_testing()
 add_subdirectory(tests)
 
 # define target library
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 add_library(apfelxx SHARED ${source_files})
 

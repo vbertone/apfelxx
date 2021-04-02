@@ -248,5 +248,25 @@ namespace apfel
                                               int                                  const& PerturbativeOrder,
                                               std::function<double(double const&)> const& Alphas,
                                               int                                  const& nsteps = 10);
+
+  /**
+    * @brief The BuildDglap function builds the actual dglap object
+    * that performs the DGLAP evolution for distributions.
+    * @param DglapObj: DglapObjects-valued function that returns the structure with the coefficients of the perturbative objects as functions of the scale
+    * @param Thresholds: the heavy-quark thresholds
+    * @param InDistFunc: the distributions at the reference scale
+    * @param MuRef: the reference scale
+    * @param PerturbativeOrder: the perturbative order of the evolution
+    * @param Alphas: the function returning the strong coupling
+    * @param nsteps: the number of steps of the ODE solver (default: 10).
+    * @return A unique pointer to a Dglap object
+    */
+  std::unique_ptr<Dglap<Distribution>> BuildDglap(std::function<DglapObjects(double const&)>                         const& DglapObj,
+                                                  std::vector<double>                                                const& Thresholds,
+                                                  std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
+                                                  double                                                             const& MuRef,
+                                                  int                                                                const& PerturbativeOrder,
+                                                  std::function<double(double const&)>                               const& Alphas,
+                                                  int                                                                const& nsteps = 10);
   ///@}
 }

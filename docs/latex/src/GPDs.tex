@@ -480,7 +480,7 @@ with:
 \begin{equation}\label{eq:p1minus0}
 \begin{array}{rcl}
 \displaystyle \mathcal{P}_1^{-,(0)}(y,\kappa) &=& \displaystyle
-                                                  2P_{\rm NS}(y,2\kappa y) + \delta(1-x)2C_F\left(\frac{3}{2}-2\int_{0}^{1}\frac{dy}{1-y}-\ln(|1-\kappa^2|)\right) \\
+                                                  2P_{\rm NS}(y,2\kappa y) + \delta(1-y)2C_F\left(\frac{3}{2}-2\int_{0}^{1}\frac{dz}{1-z}-\ln(|1-\kappa^2|)\right) \\
 \\
 &=& \displaystyle  2C_F\left\{\left(\frac{2}{1-y}\right)_+-\frac{1
   +y}{1-\kappa^2y^2}+\delta(1-y)\left[\frac32-
@@ -525,7 +525,7 @@ with $\mathcal{P}_1^{-,(0)}$ given by:
 with $P_{\rm NS}'$ is given in Eq.~(19) of Ref.~\cite{Ji:1996nm} and
 remarkably equal to the expression in Eq.~(\ref{eq:p1minus0})
 signifying that:
-\begin{equation}
+\begin{equation}\label{eq:primevsnonprime}
   P_{\rm NS}(y,2\kappa y) =  P_{\rm NS}'(y,2\kappa y) +P_{\rm NS}'(y,-2\kappa y)\,.
 \end{equation}
 While:
@@ -535,16 +535,16 @@ While:
 \end{equation}
 It is very interesting to notice that $\mathcal{P}_2^{-,(0)}$ is
 proportional to $(\kappa-1)$ that finally guarantees the continuity of
-GPDs at $k=1$.
+GPDs at $\kappa=1$.
 
 We observe that, within the integration interval, the splitting
 function $\mathcal{P}_2^{-,(0)}$ is singular at $y=1$.\footnote{While
-  the singularity at $y=-1$ is all placed below the lower bound $y=x$
-  and thus does not cause any problem, there is an additional
-  singularity at $y=\pm1/\kappa$ that needs to be considered. As
-  discussed below, this singularity in $\mathcal{P}_2^{-,(0)}$ exactly
-  cancels against an opposite singularity in $\mathcal{P}_1^{-,(0)}$.}
-However, as pointed out above, the second integral on the r.h.s. of
+  the singularity at $y=-1$ is placed below the lower bound $y=x$ and
+  thus does not cause any problem, there is an additional singularity
+  at $y=\pm1/\kappa$ that needs to be considered. As discussed below,
+  this singularity in $\mathcal{P}_2^{-,(0)}$ exactly cancels against
+  an opposite singularity in $\mathcal{P}_1^{-,(0)}$.}  However, as
+pointed out above, the second integral on the r.h.s. of
 Eq.~(\ref{eq:ji2}) has to be regarded as principal-valued therefore it
 is well-defined. In order to treat this integral numerically we
 consider the specific case:
@@ -603,13 +603,13 @@ equivalently $|x|<|\xi|$ (\textit{i.e.} in the ERBL region) have to cancel
 to give a finite result. Using the explicit expressions for
 $\mathcal{P}_1^{-,(0)}$ and $\mathcal{P}_2^{-,(0)}$, we find:
 \begin{equation}
-\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
-\mathcal{P}_1^{-,(0)}(y,\kappa) = -2 C_F (1+\kappa)\,,
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
+\mathcal{P}_1^{-,(0)}(y,\kappa) = -2 C_F \frac{1+\kappa}{\kappa}\,,
 \end{equation}
 and:
 \begin{equation}
-\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
-\mathcal{P}_2^{-,(0)}(y,\kappa) = 2 C_F (1+\kappa)\,.
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
+\mathcal{P}_2^{-,(0)}(y,\kappa) = 2 C_F \frac{1+\kappa}{\kappa}\,.
 \end{equation}
 Since the coefficient of the pole are equal in absolute value and
 opposite in sign they cancel in the integral. Below, we will
@@ -621,6 +621,8 @@ in the r.h.s. of Eq.~(\ref{eq:jitot}) drops and the splitting function
 $\mathcal{P}_1^{-,(0)}$ reduces to the one-loop non-singlet DGLAP
 splitting function (see Eq.~(\ref{eq:dglapsplitting})) so that, as
 expected, Eq.~(\ref{eq:jitot}) becomes the DGLAP equation.
+
+\subsubsection{The ERBL equation}
 
 It is also interesting to verify that also the ERBL equation is
 recovered in the limit $\xi\rightarrow 1$. Given the definition of
@@ -638,7 +640,7 @@ more compactly as:
   \frac{\alpha_s(\mu)}{4\pi}\left[\int_{-1}^1 dy\,V_{\rm NS}^{(0)}(x,y)f^-\left(y,1\right)\right] \,.
 \end{equation}
 with:
-\begin{equation}
+\begin{equation}\label{eq:ERBLkernelxy}
 \begin{array}{rcl}
 V_{\rm NS}^{(0)}(x,y) &=&\displaystyle \theta(y-x)\left[\frac{2}{y}P_{\rm
     NS}'\left(\frac{x}{y},\frac{2}{y}\right)
@@ -690,7 +692,14 @@ Eq.~(\ref{eq:anomdim}) more compactly as:
 This confirms the result of Ref.~\cite{Blumlein:1999sc} modulo the
 fact that, for achieving a correct cancellation of the divergencies,
 the $\theta$-function for the $+$-prescribed terms needs to be inside
-the $+$-prescription sign itself rather than outside.
+the $+$-prescription sign itself rather than outside. In fact, it is
+the very presence of the $\theta$-function that generates the
+necessity of a $+$-prescription. Without the $\theta$-function, the
+integral could be interpreted as principal-valued integral that
+requires no regularisation. The presence of the $\theta$-function
+interdicts the cancellation between left and right sides of the pole
+resulting in a singular integral. The $+$-prescription reabsorbes this
+singularity producing a well-behaved integral.
 
 One can check that integrating $\overline{V}_{\rm NS}^{(0)}$ over $t$
 gives zero:\footnote{Note that the two $+$-prescribed terms when
@@ -710,40 +719,276 @@ This was also explicitly derived in Ref.~\cite{Mikhailov:1984ii} and
 argued that this property must hold for symmetry reasons.
 
 It is now interesting to derive an ERBL-like evolution equation for
-GPDs at one loop. Assuming $\xi>0$, this equation can be written as:
-\begin{equation}
+GPDs at one loop. This equation can be written as:
+\begin{equation}\label{eq:ERBLlikeeveq}
 \frac{d}{d\ln\mu^2} f^{-}(x,\xi)=
-\frac{\alpha_s(\mu)}{4\pi}\int_{-1}^1\frac{dy}{\xi} \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) f^{-}(y,\xi)\,.
+\frac{\alpha_s(\mu)}{4\pi}\int_{-1}^1\frac{dy}{\xi} \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) f^{-}(y,\xi)\,,
 \end{equation}
-A simple change of variables allows one to write this equation as:
-\begin{equation}
-\frac{d}{d\ln\mu^2} f^{-}(\xi x,\xi)=
-\frac{\alpha_s(\mu)}{4\pi}\int_{-1/\xi}^{1/\xi}dy\, \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) f^{-}(\xi y,\xi)\,,
-\end{equation}
-where the evolution kernel is given by:
-\begin{equation}
+with:
+\begin{equation}\label{eq:evkernelERBLgenxi}
 \begin{array}{rcl}
-\mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) &=& \displaystyle
-                                              \theta(1-|x|){V}_{\rm
-                                              NS}^{(0)}\left(x,y\right)\\
+\displaystyle \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
+\frac{2}{y}\bigg\{\theta(x-\xi) \theta(y-x)P_{\rm
+                                              NS}\left(\frac{x}{y},\frac{2\xi}{y}\right)-\theta(-x-\xi)
+                                              \theta(x-y)P_{\rm
+                                              NS}\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
 \\
-&+&\displaystyle
-    \theta(|x|-1) 2C_F\Bigg\{\left[\theta(y-|x|)\left(\frac{2}{y-|x|}+\frac{|x|+y}{1-y^2}\right)\right]_+\\
+&+&\displaystyle \theta(\xi-x)\theta(x+\xi) \left[\theta(y-x)P_{\rm
+    NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)-\theta(x-y)P_{\rm
+    NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)\right]\\
 \\
-&+&\displaystyle\delta(|x|-y)\bigg[\frac{3}{2}-\ln\left(\frac{|x|-1}{|x|+1}\right)\\
-\\
-&+&\displaystyle 2 \ln\left(\frac{1-\xi |x|}{\xi(|x|-1)}\right)\left[\theta\left(\frac{1+\xi}{2\xi}-|x|\right)-\theta\left(|x|-\frac{1+\xi}{2\xi}\right)\right]\\
-\\
-&+&\displaystyle \frac12(|x|+1)\ln\left(\frac{1-\xi}{\xi(|x|-1)}\right)-\frac12(|x|-1)\ln\left(\frac{1+\xi}{\xi(|x|+1)}\right) \bigg]\Bigg\}\,,
+&+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
 \end{array}
 \end{equation}
-with ${V}_{\rm NS}^{(0)}$ given in Eq.~(\ref{eq:anomdim}) and where we
-have exploited the fact that $f^-(x,\xi)=f^-(-x,\xi)$. In addition,
-the $+$-prescription in the second line of the above equation has the
-following \textit{ad hoc} definition:
+We can now use Eq.~(\ref{eq:primevsnonprime}) to replace $P_{\rm NS}$
+with $P_{\rm NS}'$ which gives:
 \begin{equation}
-\left[f(x,y)\right]_+=f(x,y)-\delta(x-y)\int_1^{1/\xi}dy\,f(x,y)\,.
+\begin{array}{rcl}
+\displaystyle \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
+\frac{2}{y}\bigg\{\left[\theta(x-\xi) \theta(y-x)+\theta(\xi-x)\theta(x+\xi)\theta(y-x)-\theta(-x-\xi)
+                                              \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
+\\
+&+&\displaystyle \left[\theta(x-\xi) \theta(y-x)-\theta(\xi-x)\theta(x+\xi)\theta(x-y)-\theta(-x-\xi)
+                                              \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)\\
+\\
+&+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
+\end{array}
 \end{equation}
+% Assuming $\xi$ positive and different from zero ($\xi>0$), a simple
+% change of variables produces:
+% \begin{equation}
+% \frac{d}{d\ln\mu^2} f^{-}(\xi x,\xi)=
+% \frac{\alpha_s(\mu)}{4\pi}\int_{-1/\xi}^{1/\xi}dy\, \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) f^{-}(\xi y,\xi)\,,
+% \end{equation}
+% where the evolution kernel is given by:
+% \begin{equation}
+% \begin{array}{rcl}
+% \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) &=& \displaystyle
+% \frac{2}{y}\bigg\{\theta(x-1) \theta(y-x)P_{\rm
+%                                               NS}\left(\frac{x}{y},\frac{2}{y}\right)-\theta(-x-1)
+%                                               \theta(x-y)P_{\rm
+%                                               NS}\left(\frac{x}{y},\frac{2}{y}\right)\\
+% \\
+% &+&\displaystyle \theta(1-x)\theta(x+1) \left[\theta(y-x)P_{\rm
+%     NS}'\left(\frac{x}{y},\frac{2}{y}\right)-\theta(x-y)P_{\rm
+%     NS}'\left(\frac{x}{y},-\frac{2}{y}\right)\right]\\
+% \\
+% &+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_1^{x}\frac{dz}{z-x}+\int_{-1}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
+% \end{array}
+% \end{equation}
+% Observing that:
+% \begin{equation}
+% \int_{\pm 1}^{x}\frac{dz}{z-x} = \theta(x-1) \int_{\pm
+%   1}^{x}\frac{dz}{z-x} \mp \theta(1-x)\theta(x+1)\int_{-1}^{1}\frac{dz\theta(\pm z \mp x)}{z-x}-\theta(-x-1) \int^{\pm
+%   1}_{x}\frac{dz}{z-x}
+% \end{equation}
+% the result can be recasted as:
+% \begin{equation}\label{eq:ERBLkernel}
+% \begin{array}{rcl}
+% \mathbb{V}_{\rm NS}^{(0)}\left(x,y\right) &=& \displaystyle
+%                                               \theta(1-x)\theta(x+1){V}_{\rm
+%                                               NS}^{(0)}\left(x,y\right)\\
+% \\
+% &+&\displaystyle
+%     \theta(x-1) 2C_F\left[\theta(y-x)\frac{x^2+y^2-2}{(y-x)(y^2-1)}+\delta(x-y)\left(2\int_{1}^{x}\frac{dz}{z-x}+\int_{-1}^{1}\frac{dz}{z-x}\right)\right]\\
+% \\
+% &-&\displaystyle
+%     \theta(-x-1) 2C_F\left[\theta(x-y)\frac{x^2+y^2-2}{(y-x)(y^2-1)}+\delta(x-y)\left(2\int^{-1}_{x}\frac{dz}{z-x}+\int^{1}_{-1}\frac{dz}{z-x}\right)\right]\,,
+% \end{array}
+% \end{equation}
+% where ${V}_{\rm NS}^{(0)}$ is given in Eq.~(\ref{eq:ERBLkernelxy}). We
+% remind, however, that this form of the ERBL kernel is valid for
+% $\xi>0$. The limit $\xi\rightarrow 0$ requires considering
+% Eq.~(\ref{eq:evkernelERBLgenxi}).
+
+\subsubsection{Conformal moments}
+
+A relevant question is whether Eq.~(\ref{eq:evkernelERBLgenxi}) is such that
+the so-called conformal moments of GPDs (see Eq.~(111) of
+Ref.~\cite{Diehl:2003ny}):
+\begin{equation}
+  \mathcal{C}_n(\xi) = \xi^{n}\int_{-1}^{1}dx\,C_n^{3/2}\left(\frac{x}{\xi}\right)f^{-}(x,\xi)\,,
+\end{equation}
+where $C_n^{3/2}$ are Gegenbauer polynomials, ``diagonalise'' the
+leading-order evolution equation in Eq.~(\ref{eq:ERBLlikeeveq}). To
+state it differently, we would like to check whether conformal moments
+evolve multiplicatively. Multiplying Eq.~(\ref{eq:ERBLlikeeveq}) by
+$\xi^{n}C_n^{3/2}\left(x/\xi\right)$ and integrating over $x$ between
+$-1$ and 1, yields:
+\begin{equation}\label{eq:confmomprel}
+\frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =
+\frac{\alpha_s(\mu)}{4\pi}\xi^{n}\int_{-1}^1 dy f^{-}(y,\xi)\int_{-1}^{1}\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right) \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) \,.
+\end{equation}
+Therefore, the aim is to check whether the following equality holds:
+\begin{equation}\label{eq:confmomgpd}
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right) \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) =\mathcal{V}_{n}^{(0)}(\xi)C_n^{3/2}\left(\frac{y}{\xi}\right)\,,
+\end{equation}
+where $\mathcal{V}_{n}^{(0)}$ is a number that may generally depend on
+$\xi$. If Eq.~(\ref{eq:confmomgpd}) held, Eq.~(\ref{eq:confmomprel})
+would become:
+\begin{equation}\label{eq:confmom}
+  \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =\frac{\alpha_s(\mu)}{4\pi}\mathcal{V}_{n}^{(0)}(\xi)\mathcal{C}_n(\xi)\,,
+\end{equation}
+that is to say that conformal moments evolve multiplicative exactly
+like Mellin moments for forward distributions. As a matter of fact, up
+to numerical factor, conformal moments do coincide with Mellin moments
+in the limit $\xi\rightarrow 0$. This can be seen by observing that
+the Gegenbauer polynomials admit the following expansion:
+\begin{equation}
+\xi^{n}C_n^{3/2}\left(\frac{x}{\xi}\right)=\frac{n+1}{2^{n+1}}\sum_{k=0}^n{n
+\choose k}{n+2 \choose k+1}(x+\xi)^k (x-\xi)^{n-k}\,,
+\end{equation}
+that is such that:
+\begin{equation}\label{eq:gegenlimit}
+\lim_{\xi\rightarrow 0}
+\xi^{n}C_n^{3/2}\left(\frac{x}{\xi}\right)= \frac{(2n+1)!}{2^n(n!)^2}x^{n}\,.
+\end{equation}
+Therefore, the conformal moments of the non-singlet distribution in
+the forward limit become:
+\begin{equation}
+\lim_{\xi\rightarrow 0}\mathcal{C}_n(\xi) = \frac{(2n+1)!}{2^n(n!)^2}[1+(-1)^n]f^{-}(n+1)\,,
+\end{equation}
+where, with abuse of notation, we have defined the Mellin moments of
+the forward distribution as:
+\begin{equation}
+f^{-}(n) = \lim_{\xi\rightarrow 0} \int_0^1dx\,x^{n-1}f^{-}(x,\xi)\,,
+\end{equation}
+that are known to diagonalise the DGLAP equation to all orders. Using
+Eq.~(\ref{eq:gegenlimit}) and the fact that:
+\begin{equation}
+\lim_{\xi\rightarrow 0} \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},
+  \frac{y}{\xi}\right) = \left[\theta(x)\theta(y-x)-\theta(-x)\theta(x-y)\right]\frac{1}{y} P_{\rm NS}^{(0)}\left(\frac{x}{y}\right)\,,
+\end{equation}
+where $P_{\rm NS}^{(0)}$ is the leading-order non-singlet DGLAP
+splitting function, one finds:
+\begin{equation}
+ \lim_{\xi\rightarrow 0}
+ \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+ \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) = \frac{(2n+1)!}{2^n(n!)^2}y^{n} P_{\rm NS}^{(0)}(n+1) =\left[\lim_{\xi\rightarrow 0}
+\xi^{n}C_n^{3/2}\left(\frac{y}{\xi}\right)\right]P_{\rm NS}^{(0)}(n+1)\,,
+\end{equation}
+where, again with abuse of notation, the Mellin moments of the
+splitting functions are given by (see, \textit{e.g.}, Eq.~(4.129) of
+Ref.~\cite{Ellis:1991qj}):
+\begin{equation}
+P_{\rm NS}^{(0)}(n) = \int_{0}^{1}dx\,x^{n-1}P_{\rm NS}^{(0)}(x) = 2C_F\left[-\frac12+\frac{1}{n(n+1)}-2\sum_{k=2}^{n}\frac{1}{k}\right]\,.
+\end{equation}
+Finally, Eq.~(\ref{eq:confmom}) is fulfilled and the evolution kernel
+can be directly read off:
+\begin{equation}\label{eq:forwardlimitconfmom}
+ \lim_{\xi\rightarrow 0} \mathcal{V}_{n}^{(0)}(\xi) = P_{\rm
+   NS}^{(0)}(n+1)= 2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]
+\end{equation}
+
+On the other hand, it is well known that the one-loop ERBL kernel
+$V_{\rm NS}^{(0)}$ obeys the relation:
+\begin{equation}\label{eq:confmomerbl}
+  \int_{-1}^{1}dx\,C_n^{3/2}\left(x\right) V_{\rm
+    NS}^{(0)}\left(x,y\right) =V_{n}^{(0)} C_n^{3/2}\left(y\right)\,.
+\end{equation}
+Evidently, $V_{n}^{(0)}$ is the evolution kernel in the
+$\xi\rightarrow 1$ limit and its expression can be read off from
+Eq.~(2.19) of Ref.~\cite{Lepage:1980fj} where, to match our notation,
+we have to flip the sign and remove the $\beta$-function:
+\begin{equation}
+\lim_{\xi\rightarrow 1}\mathcal{V}_{n}(\xi)= V_{n}^{(0)}=2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]\,.
+\end{equation}
+Remarkably, this is identical to
+Eq.~(\ref{eq:forwardlimitconfmom}). This finally means that
+Eq.~(\ref{eq:confmom}) is fulfilled in both the $\xi\rightarrow 0$ and
+$\xi\rightarrow 1$ limits and that in these limits the evolution
+kernels are equal. In other words, conformal moments of forward
+distributions and distribution amplitudes at leading order evolve
+multiplicatively with the same anomalous dimension. This suggests that
+the kernels $\mathcal{V}_{n}$ may be constant in $\xi$ and equal to
+Eq.~(\ref{eq:forwardlimitconfmom}).
+
+To prove this we need to compute Eq.~(\ref{eq:confmomgpd}) for a
+generic value of $\xi$. To do so, we use
+Eq.~(\ref{eq:evkernelERBLgenxi}) for $\mathbb{V}_{\rm NS}^{(0)}$ that
+allows us to decompose Eq.~(\ref{eq:confmomgpd}) as follows:
+\begin{equation}\label{eq:GPDevkernelalaERBL}
+\begin{array}{rcl}
+  \displaystyle
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle 3C_F C_n^{3/2}\left(\frac{y}{\xi}\right) \\
+\\
+&-&\displaystyle C_F\int_{\xi}^{y}dx\left[\frac{x+\xi}{\xi(y-\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right) -2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\\
+\\
+&+&\displaystyle C_F\int_{-\xi}^{y}dx\left[\frac{x-\xi}{\xi(y+\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right)+2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\,.
+\end{array}
+\end{equation}
+Of course, in the limits $\xi\rightarrow 0$ and $\xi\rightarrow 1$
+this expression produces the Gegenbauer polynomials in the respective
+limits times $V_n^{0}$. The calculation for \textit{all} $n$ and for a
+generic value of $\xi$ is not straight forward. To start with, we
+compute the integral above for $n=0$ where we expected to obtain zero
+because $V^{(0)}=0$. Since $C_0^{\alpha}(z)=1$, the zero-th conformal
+moment evaluates to:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)  &=& \displaystyle
+  C_F\left[3 - \int_{\xi}^{y}dx \frac{x+\xi}{\xi(y-\xi)}
++\int_{-\xi}^{y}dx\frac{x-\xi}{\xi(y+\xi)}\right]\\
+\\
+&=& \displaystyle C_F\left[3 -\frac{y+\xi}{2\xi}-1+\frac{y-\xi}{2\xi}-1\right]=0\,,
+\end{array}
+\end{equation}
+providing further evidence that indeed Gegenbauer polynomials do
+diagonalise GPD leading-order evolution with evolution kernels
+$\mathcal{V}_n^{(0)}(\xi)=V_n^{(0)}$ independent of $\xi$.
+
+Now let us consider the case $n=1$. In the case the Gegenbauer
+polynomial is:
+\begin{equation}
+C_1^{3/2}\left(\frac{x}{\xi}\right)=\frac{3x}{\xi}\,.
+\end{equation}
+Since:
+\begin{equation}
+V_1^{(0)} = -\frac{8C_F}{3}\,,
+\end{equation}
+we expect:
+\begin{equation}
+  \int_{-1}^1\frac{dx}{\xi}\,C_1^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) \mathop{=}^{?} -\frac{8C_F y}{\xi}\,.
+\end{equation}
+Using Eq.~(\ref{eq:GPDevkernelalaERBL}) with $n=1$, we find:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle
+  \int_{-1}^1\frac{dx}{\xi}\,C_1^{3/2}\left(\frac{x}{\xi}\right)
+  \mathbb{V}_{\rm
+  NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle
+                                                       \frac{3C_F}{\xi}\left[3y
+                                                       -\int_{\xi}^{y}dx\left[\frac{x(x+\xi)}{\xi(y-\xi)}
+                                                       +2\right]+\int_{-\xi}^{y}dx\left[\frac{x(x-\xi)}{\xi(y+\xi)}-2\right]\right]\\
+\\
+&=&\displaystyle \frac{3C_F}{\xi}\left[3y-4y-\frac{5}{3}y\right] = -\frac{8C_Fy}{\xi}\,,
+\end{array}
+\end{equation}
+as expected. Despite an all-$n$ proof would desirable, these
+calculations provide compelling evidence that indeed conformal moments
+evolve multiplicatively as:
+\begin{equation}
+  \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =\frac{\alpha_s(\mu)}{4\pi}{V}_{n}^{(0)}\mathcal{C}_n(\xi)\,.
+\end{equation}
+The solution to this equation is simply:
+\begin{equation}
+\mathcal{C}_n(\xi,\mu)
+=\exp\left[\frac{V_{n}^{(0)}}{4\pi}\int_{\mu_0}^\mu d\ln\mu^2\alpha_s(\mu)\right]\mathcal{C}_n(\xi,\mu_0)\,,
+\end{equation}
+in which remarkably the evolution kernel does not depend on
+$\xi$. This in turns means that the $\xi$ dependence of conformal
+moments is entirely encoded in the initial scale moments and that
+evolution leave it unchanged.
+
+The question that remains to be answered is whether the knowledge of
+the conformal moments of a GPD is enough to reconstruct its $x$
+dependence.
+
+\subsubsection{Sum rules}\label{eq:sumruleNS}
 
 A question arises: does the fact that the GPD anomalous dimension
 (\textit{cfr.}  Eq.~(\ref{eq:nonzeroplusGPD})) does not admit a fully
@@ -830,9 +1075,9 @@ $\mu$ immediately leads to:
 \int_{-1}^1dx'
 f(x',\xi)\int_{-1}^1dx\left[\hat{V}_{\rm NS}\left(\frac{x}{\xi},\frac{x'}{\xi}\right)\right]_+ = 0\,,
 \end{equation}
-where $\hat{V}_{\rm NS}$ is nothing but $V _{\rm NS}$ stripped of the supposedly global
-$+$-prescription. A simple change of variables (assuming $\xi$
-positive) gives:
+where $\hat{V}_{\rm NS}$ is nothing but $V _{\rm NS}$ stripped of the
+supposedly global $+$-prescription. Assuming $\xi$ positive and
+different from zero ($\xi>0$), a simple change of variables gives:
 \begin{equation}
   \int_{-1/\xi}^{1/\xi}dy'
   f(\xi y',\xi)\int_{-1/\xi}^{1/\xi}dy\left[\hat{V}_{\rm NS}\left(y,y'\right)\right]_+ = 0\,.
@@ -843,6 +1088,8 @@ Eq.~(\ref{eq:pludistributionn}) cannot give zero. This prevents the
 above equation to be identically fulfilled violating polynomiality of
 GPDs. We can thus conclude that $V _{\rm NS}$ \textit{cannot} be
 written as a fully $+$-prescribed function.
+
+\subsection{The singlet sector}
 
 Having ascertained that the evolution equation from
 Ref.~\cite{Ji:1996nm} is well-behaved for the non-singlet distribution
@@ -865,7 +1112,7 @@ distribution $f^-$, the one-loop evolution equation for $f^+$ reads:
 \end{equation}
 with:
 \begin{equation}
-  \mathcal{P}^{+,(0)}(y,\kappa)= \theta(1-y)\mathcal{P}_1^{+,(0)}(y,\kappa)\theta(\kappa-1)\mathcal{P}_2^{+,(0)}(y,\kappa)\,.
+  \mathcal{P}^{+,(0)}(y,\kappa)= \theta(1-y)\mathcal{P}_1^{+,(0)}(y,\kappa)+\theta(\kappa-1)\mathcal{P}_2^{+,(0)}(y,\kappa)\,.
 \end{equation}
 The single splitting function matrices $\mathcal{P}_{1}$ and
 $\mathcal{P}_2$ are derived from the expression Ref.~\cite{Ji:1996nm}
@@ -883,7 +1130,8 @@ with $\rm I,J=S,G$. This leads to:
 \left\{\begin{array}{rcl}
 \mathcal{P}_{1,\rm SS}^{(0)}(y,\kappa) &=& \mathcal{P}_{1}^{-,(0)}(y,\kappa)\,,\\
 \\
-\mathcal{P}_{2,\rm SS}^{(0)}(y,\kappa) &=& \displaystyle 2C_F\left[\frac{(1+\kappa)(1+y)+\kappa^3y^2}{(1+y)(1-\kappa^2y^2)}-\left(\frac{1}{1-y}\right)_{++}\right]\,,
+\mathcal{P}_{2,\rm SS}^{(0)}(y,\kappa) &=& \displaystyle
+                                           2C_F\left[\frac{1+y+\kappa y+\kappa^3y^2}{\kappa(1+y)(1-\kappa^2y^2)}-\left(\frac{1}{1-y}\right)_{++}\right]\,,
 \end{array}\right.
 \end{equation}
 
@@ -904,30 +1152,36 @@ with $\rm I,J=S,G$. This leads to:
 \end{equation}
 
 \begin{equation}
-\left\{\begin{array}{rcl}
-  %\mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
-  %                                        4C_A\left[\left(\frac{1}{1-y}\right)_+-\frac{1+\kappa^2y}{1-\kappa^2y^2}+\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)\right)\right]\\
-  \mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
-                                          4C_A\bigg[\left(\frac{1}{1-y}-\frac{\kappa^2y}{1-\kappa^2y^2}\right)_++\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)-1+\kappa^2y^2\right)\\
-\\
-&+&\displaystyle\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,\\
-  \\
-  \mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle 2C_A\frac{1-\kappa^2}{1-\kappa^2y^2}\left[\frac{2(1+y^2)}{(1+\kappa)(1-\kappa^2y^2)}-\frac{1}{\kappa}+2-\frac{1}{1+y}-\left(\frac{1}{1-y}\right)_{++}\right]\,.
+  \left\{\begin{array}{rcl}
+           \mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
+                                                      4C_A\left[\left(\frac{1}{1-y}\right)_+-\frac{1+\kappa^2y}{1-\kappa^2y^2}+\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)\right)\right]\\
+           \\
+                                                  &+&\displaystyle\delta(1-y)\left[\left(\frac{11C_A-4 n_f
+                                                      T_R}{3}\right) -2C_A\ln(|1-\kappa^2|)\right]\,,\\
+           \\
+           % &=& \displaystyle
+           %                                            4C_A\bigg[\left(\frac{1}{1-y}-\frac{\kappa^2y}{1-\kappa^2y^2}\right)_++\frac{1}{(1-\kappa^2y^2)^2}\left(\frac{1-y}{y}+y(1-y)-1+\kappa^2y^2\right)\\
+           % \\
+           %                                        &+&\displaystyle\delta(1-y)\left(\frac{11C_A-4 n_f T_R}{3}\right)\,,\\
+           % \\
+           \mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) &=& \displaystyle
+                                                      2C_A\left[\frac{2(1-\kappa)(1+y^2)}{(1-\kappa^2y^2)^2}+\frac{\kappa^2(1+y)}{1-\kappa^2y^2}+\frac{1-\kappa^2}{1-\kappa^2y^2}\left(2-\frac{1}{\kappa}-\frac{1}{1+y}\right)
+                                                      -\left(\frac{1}{1-y}\right)_{++}\right]
+                                                      \,.
 \end{array}\right.
 \end{equation}
-Notice that for $\mathcal{P}_{1,\rm GG}^{(0)}$ we have used the
-integral:
-\begin{equation}
-\int_0^1dz\frac{\kappa^2z}{1-\kappa^2z^2} = -\frac{1}{2}\ln(|1-\kappa^2|)\,,
-\end{equation}
-to make the limit $\kappa\rightarrow 1$ explicitly convergent.
+% Notice that in the second equality for $\mathcal{P}_{1,\rm GG}^{(0)}$
+% we have used the integral:
+% \begin{equation}
+% \int_0^1dz\frac{\kappa^2z}{1-\kappa^2z^2} = -\frac{1}{2}\ln(|1-\kappa^2|)\,,
+% \end{equation}
+% to make the limit $\kappa\rightarrow 1$ explicitly convergent.
 
 In all cases, the limit for $\kappa\rightarrow 0$ of $\mathcal{P}_1$
 reproduces the one-loop DGLAP splitting functions. In addition, we
 also notice that all $\mathcal{P}_2$'s are proportional to
 $\kappa-1$. Along with the fact that all $\mathcal{P}_1$ are
 well-behaved at $\kappa=1$:
-
 \begin{equation}
 \begin{array}{rcl}
 \mathcal{P}_{1,\rm SS}^{(0)}(y,1) &=& \displaystyle 2C_F\left\{\left[\frac{1}{1-y}\right]_++\delta(1-y)\left[\frac32-\ln(2)\right]\right\}\,,\\
@@ -936,28 +1190,33 @@ well-behaved at $\kappa=1$:
 \\
   \mathcal{P}_{1,\rm GS}^{(0)}(y,1) &=& \displaystyle \frac{4C_F}{y(1+y)}\,,\\
   \\
-  \mathcal{P}_{1,\rm GG}^{(0)}(y,1) &=& \displaystyle 4C_A\left[\left(\frac{1}{1-y^2}\right)_++\frac{1}{y(1+y)^2}\right]+\delta(1-y)\left(\frac{11C_A-4T_R n_f}{3}\right)\,,
+  \mathcal{P}_{1,\rm GG}^{(0)}(y,1) &=& \displaystyle 4C_A\left[\left(\frac{1}{1-y^2}\right)_++\frac{1}{y(1+y)^2}\right]+\delta(1-y)\left(\frac{11C_A-4 n_f T_R }{3}\right)\,,
 \end{array}
 \end{equation}
 this guarantees the continuity of GPDs across the point $x=\xi$.
 
 Now, we explicitly verify that the pole at $y=|\kappa|^{-1}$ that
 affects all splitting functions above cancels between
-$\mathcal{P}_{1,\rm IJ}^{(0)}$ and $\mathcal{P}_{2,\rm IJ}^{(0)}$. Since $\mathcal{P}_{1(2),\rm SS}^{(0)}=\mathcal{P}_{1(2)}^{-,(0)}$, we do not need to do it
-again for the SS splitting functions. For the others we find:
+$\mathcal{P}_{1,\rm IJ}^{(0)}$ and $\mathcal{P}_{2,\rm IJ}^{(0)}$. We
+find:
 \begin{equation}
-\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
-\mathcal{P}_{1,\rm SG}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
+\mathcal{P}_{1,\rm SS}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
+\mathcal{P}_{2,\rm SS}^{(0)}(y,\kappa) = -2C_F\frac{1+\kappa}{\kappa}\,,
+\end{equation}
+\begin{equation}
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)^2
+\mathcal{P}_{1,\rm SG}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)^2
 \mathcal{P}_{2,\rm SG}^{(0)}(y,\kappa) = \frac{8 n_f T_R(1-\kappa)}{\kappa}\,,
 \end{equation}
 \begin{equation}
-\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
-\mathcal{P}_{1,\rm GS}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa} (1-\kappa^2y^2)
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
+\mathcal{P}_{1,\rm GS}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)
 \mathcal{P}_{2,\rm GS}^{(0)}(y,\kappa) = 2C_F\frac{(1-\kappa)^2}{\kappa}\,,
 \end{equation}
 \begin{equation}
-\lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
-\mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa} (1-\kappa^2y^2)^2
+\lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)^2
+\mathcal{P}_{1,\rm GG}^{(0)}(y,\kappa) = - \lim_{y\rightarrow \kappa^{-1}} (1-\kappa^2y^2)^2
 \mathcal{P}_{2,\rm GG}^{(0)}(y,\kappa) = 4C_A\frac{(\kappa-1)(\kappa^2+1)}{\kappa^2}\,.
 \end{equation}
 These results confirm the cancellation of the pole at
@@ -1003,8 +1262,7 @@ V_{\rm GG}^{(0)}(t,u) &=&\displaystyle \theta(u-t)\left[\frac{2}{2u-1}P_{\rm
     GG}'\left(\frac{2t-1}{2u-1},-\frac{2}{2u-1}\right)
                           \right]+C_A\delta\left(t-u\right)\int_{0}^{1}du'\,\frac{\theta(t-u')}{u'-t}\\
 \\
-&+&\displaystyle \left(\frac{11C_A-4T_R
-    n_f}{6}\right)\delta\left(u-t\right)\,.
+&+&\displaystyle \left(\frac{11C_A-4n_fT_R}{6}\right)\delta\left(u-t\right)\,.
 \end{array}
 \end{equation}
 The explicit expressions read:
@@ -1023,6 +1281,397 @@ The explicit expressions read:
                             like doing the calculation}\,.
 \end{array}
 \end{equation}
+
+\subsubsection{Sum rules}\label{eq:sumruleSG}
+
+As done above for the non-singlet splitting function, here we exploit
+polynomiality and the GPDs and the momentum sum rule (MSR) of PDFs to check
+the correctness of the singlet splitting functions. Before considering
+GPDs, let us derive the constrain that the MSR has on the forward
+splitting functions. The MSR states that the integral over the
+longitudinal momentum fractions $x$ of the sum of all PDFs weighted by
+$x$ represents the momentum fraction of all partons in the hadron and
+thus is to be equal to one at all scales. The respective formula
+reads:
+\begin{equation}
+\int_0^1dx\,x\left[f_{\rm S}(x,0)+f_{\rm G}(x,0)\right] = 1\,.
+\end{equation}
+We can now that the derivative w.r.t. $\ln\mu^2$ of both side of the
+the equation above and, using the evolution equation we find:
+\begin{equation}
+\int_0^1dy\,y\left[\mathcal{P}_{1,\rm SS}(y,0)+\mathcal{P}_{1,\rm
+    GS}(y,0)\right]\left[\int_0^1dz\,z f_{\rm S}(z,0)\right] + \int_0^1dy\,y\left[\mathcal{P}_{1,\rm SG}(y,0)+\mathcal{P}_{1,\rm
+    GG}(y,0)\right]\left[\int_0^1dz\,z f_{\rm G}(z,0)\right] = 0\,.
+\end{equation}
+In order for this equation to be identically fulfilled for any pair of
+distributions $f_{\rm S}$ and $f_{\rm G}$, one needs to have:
+\begin{equation}\label{eq:MSRforward}
+\begin{array}{rcl}
+\displaystyle \int_0^1dy\,y\left[\mathcal{P}_{1,\rm SS}(y,0)+\mathcal{P}_{1,\rm
+    GS}(y,0)\right] &=& 0 \,,\\
+\\
+ \displaystyle \int_0^1dy\,y\left[\mathcal{P}_{1,\rm SG}(y,0)+\mathcal{P}_{1,\rm
+    GG}(y,0)\right] &=& 0\,.
+\end{array}
+\end{equation}
+Effectively, these equations are fulfilled by the DGLAP splitting
+functions. We now wish to extend this argument to GPDs to find similar
+relations for the splitting functions that apply to $\xi\neq 0$. To do
+so, we use polynomiality of GPDs that for both singlet and gluon
+reads:
+\begin{equation}
+\int_0^1dx\,xf_{\rm S(G)}(x,\xi) = A_{q(g)}+\xi^2 D_{q(g)}\,,
+\end{equation}
+where the coefficients $A$ and $D$ generally depend on the scale
+$\mu$. However, it is well known that helicity-conserving ($H$) and
+helicity-flip ($E$) GPDs have the same D-term but with opposite sign
+such that, if we define $f_{\rm S(G)}$ as the sum of $H$ and $E$ the
+$\xi^2$ term cancels and one is left with:
+\begin{equation}
+\int_0^1dx\,xf_{\rm S(G)}(x,\xi) = A_{q(g)}\,.
+\end{equation}
+Therefore the sum of $f_{\rm S}$ and $f_{\rm G}$ gives:
+\begin{equation}
+\int_0^1dx\,x\left[f_{\rm S}(x,\xi) + f_{\rm G}(x,\xi)\right]= A\,,
+\end{equation}
+with $A=A_q+A_g$. Importantly $A$ is an observable and thus
+independent of the scale $\mu$. In addition, $H$ and $E$ obey the same
+evolution equations. This allows us to take the derivative with
+respect to $\ln\mu^2$ of both sides of the equation above and use the
+evolution equations. Following the same steps as in
+Sect.~\ref{eq:sumruleNS} leads to the following equalities:
+\begin{equation}\label{eq:MSRoffforward}
+\begin{array}{rcl}
+\displaystyle 
+  \int_0^1dz\,z\left[\mathcal{P}_{1,\rm SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{1,\rm GS}\left(z,\frac{\xi}{yz}\right)\right]+
+  \int_0^{\xi/y} dz\, z\left[\mathcal{P}_{2,\rm SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{2,\rm GS}\left(z,\frac{\xi}{yz}\right)\right]&=&0\,,\\
+\\
+ \displaystyle \int_0^1dz\,z\left[\mathcal{P}_{1,\rm SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{1,\rm GG}\left(z,\frac{\xi}{yz}\right)\right]+
+  \int_0^{\xi/y} dz\, z\left[\mathcal{P}_{2,\rm SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}_{2,\rm GG}\left(z,\frac{\xi}{yz}\right)\right]&=&0\,,
+\end{array}
+\end{equation}
+that hold at each single order in $\alpha_s$ and automatically reduce
+to Eq.~(\ref{eq:MSRforward}) for $\xi\rightarrow 0$. It is now
+important to verify that the one-loop splitting functions written
+above obey these relations. We find:
+\begin{equation}
+\int_0^1dz\,z\left[\mathcal{P}^{(0)}_{1,\rm
+    SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}^{(0)}_{1,\rm
+    GS}\left(z,\frac{\xi}{yz}\right)\right] = 2C_F\left[-\frac12\frac{\xi^2}{y^2-\xi^2}-\ln\left(\left|1-\frac{\xi^2}{y^2}\right|\right)\right]\,,
+\end{equation}
+and:
+\begin{equation}
+\int_0^{\xi/y} dz\, z\left[\mathcal{P}^{(0)}_{2,\rm SS}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}^{(0)}_{2,\rm GS}\left(z,\frac{\xi}{yz}\right)\right]= 2C_F\left[\frac12\frac{\xi^2}{y^2-\xi^2}+\ln\left(\left|1-\frac{\xi^2}{y^2}\right|\right)\right]\,,
+\end{equation}
+that evidently cancel so that the first of
+Eq.~(\ref{eq:MSRoffforward}) is satisfied. In addition, they both tend
+to zero as $\xi\rightarrow 0$ as required by the first of
+Eq.~(\ref{eq:MSRforward}). Then we find:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle\int_0^1dz\,z\left[\mathcal{P}^{(0)}_{1,\rm
+    SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}^{(0)}_{1,\rm
+    GG}\left(z,\frac{\xi}{yz}\right)\right] &=&\displaystyle
+  \frac{y^2\xi^2}{3(y^2-\xi^2)^2}\left[C_A\left(\frac{11\xi^2}{y^2}-4\right)+2n_fT_R\left(1-\frac{2\xi^2}{y^2}\right)\right]\\
+\\
+&-&\displaystyle 2C_A\ln\left(\left|\frac{y^2-\xi^2}{y^2}\right|\right)\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_0^{\xi/y} dz\, z\left[\mathcal{P}^{(0)}_{2,\rm
+  SG}\left(z,\frac{\xi}{yz}\right)+\mathcal{P}^{(0)}_{2,\rm
+  GG}\left(z,\frac{\xi}{yz}\right)\right]&=& \displaystyle
+                                             -\frac{y^2\xi^2}{3(y^2-\xi^2)^2}\left[C_A\left(\frac{11\xi^2}{y^2}-4\right)+2n_fT_R\left(1-\frac{2\xi^2}{y^2}\right)\right]\\
+\\
+&+&\displaystyle 2C_A\ln\left(\left|\frac{y^2-\xi^2}{y^2}\right|\right)\,,
+\end{array}
+\end{equation}
+so that also the second of Eq.~(\ref{eq:MSRoffforward}) is
+satisfied. Again, their limit for $\xi\rightarrow 0$ tends to zero
+that is consistent with the second of Eq.~(\ref{eq:MSRforward}).
+
+\section{Compton form factor}
+
+In this section, we discuss the numerical implementation of the
+Compton form factors (CFFs) for double deeply-virtual Compton
+scattering (DDVCS). The CFFs can be regarded as the GPD counterpart of
+the deep-inelastic scattering (DIS) structure function. The relation
+is easily established by observing that the diagrams necessary to
+compute the DIS structure functions at a given order are exactly the
+same diagrams of DDVCS in the forward limit with a cut on the final
+state. It is well-known that cut and uncut digrams are related through
+dispersion relation. Specifically, ($2\pi i$ times) a given cut
+diagram with an external on-shell momentum $p$ is equal to the
+discontinuity of the uncut diagram in the forward limit along the
+branch cut on the real axis determined by $p^2\geq m^2$, where $m$ is
+the rest mass of the external particle. For the CCF $\mathcal{H}$,
+this translates into the following relation with the DIS structure
+function $F_1$:(\footnote{An additional factor 2 is included by
+  convention in the definition of $F_1$.})
+\begin{equation}
+\lim_{\xi\rightarrow 0}
+\left[\mathcal{H}(x+i\varepsilon,\xi,t,Q)-\mathcal{H}(x-i\varepsilon,\xi,t,Q)\right]
+= 4\pi i F_1(x,Q)\,.
+\end{equation}
+Analyticity of the amplitude implies that
+$\mathcal{H}(x-i\varepsilon,\xi,t,Q) =
+\mathcal{H}^*(x+i\varepsilon,\xi,t,Q)$ which finally gives:
+\begin{equation}\label{eq:opticalth}
+  \frac{1}{2\pi} \lim_{\xi\rightarrow 0} \mbox{Im}\left[\mathcal{H}(x,\xi,t,Q)\right] = F_1(x,Q)\,.
+\end{equation}
+An analogous relation exists between the CFF $\widetilde{\mathcal{H}}$
+and the polarised structure function $g_5$ as well as between the
+longitudinal projections $\mathcal{H}_L$ and
+$\widetilde{\mathcal{H}}_L$, and $F_L$ and $g_L$, respectively. These
+relation can be used to check that coefficient functions for the CCFs
+reproduce the well-know DIS coefficient functions in the forward
+limit.
+
+Factorisation for DDVCS allows one to write CFFs as convolution
+between short-distance partonic cross sections (or coefficient
+functions) and nucleon GPDs. For $\mathcal{H}$ factorisation reads:
+\begin{equation}\label{eq:CCFfact}
+  \mathcal{H}(x,\xi,t,Q) = \sum_{q}e_q^2\int_{-1}^{1}\frac{dy}{y}\left[C_q\left(\frac{x}{y},\frac{\xi}{x},Q\right)F_q(y,\xi,t,Q)+C_g\left(\frac{x}{y},\frac{\xi}{x},Q\right)F_g(y,\xi,t,Q)\right]
+\end{equation}
+where $e_q^2$ is the electric charge of the flavour $q$(\footnote{We
+  are assuming that $Q\ll M_Z$ so that weak corrections to the
+  electroweak coupling can be neglected}) with the sum running over
+the \textit{active} flavours (and not over the anti-flavours). $F_q$
+and $F_g$ are the quark $q$ and gluon GPDs, respectively, and $C_q$
+and $C_g$ the respective coefficient functions that admit a
+perturbative expansion in powers of $\alpha_s$:
+\begin{equation}\label{eq:cffalstructfuncERBL}
+C_q\left(y,\kappa,Q\right) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(Q)}{4\pi}\right)^nC_q^{(n)}\left(y,\kappa\right)\quad\mbox{and}\quad C_g\left(y,\kappa,Q\right) = \sum_{n=1}^{\infty}\left(\frac{\alpha_s(Q)}{4\pi}\right)^nC_g^{(n)}\left(y,\kappa\right)\,.
+\end{equation}
+Currently, corrections up to $n=2$ are known~\cite{Mankiewicz:1997bk,
+  Ji:1998xh, Pire:2011st, Braun:2020yib}. For implementation purposes,
+it is convenient to rewrite Eq.~(\ref{eq:CCFfact}) as follows:
+\begin{equation}\label{eq:cffalstructfunc}
+\begin{array}{rcl}
+  x\mathcal{H}(x,\xi,t,Q) &=&\displaystyle
+                             \sum_{q}e_q^2\int_{x}^{\infty}dy\bigg[C_q\left(y,\kappa,Q\right) \frac{x}{y} F_q\left(\frac{x}{y},\xi,t,Q\right)
+                             + C_q\left(y,-\kappa,Q\right) \frac{x}{y} F_{\overline{q}}\left(\frac{x}{y},\xi,t,Q\right)\\
+  \\
+                         &+& \displaystyle  \left[C_g\left(y,\kappa,Q\right)+C_g\left(y,-\kappa,Q\right)\right]\frac{x}{y} F_g\left(\frac{x}{y},\xi,t,Q\right)\bigg]\,,
+\end{array}
+\end{equation}
+with $\kappa=\xi/x$ and where we have exploited the symmetries
+$C_{q,g}\left(y,\kappa,Q\right)=C_{q,g}\left(-y,-\kappa,Q\right)$ and
+$F_g(y,\xi,t,Q)=-F_g(-y,\xi,t,Q)$, and defined
+$F_{\overline{q}}(y,\xi,t,Q)=-F_q(-y,\xi,t,Q)$.
+
+At first order ($n=0$), only the quark channel contributes and the
+respective coefficient function is:
+\begin{equation}
+  C_q^{(0)}\left(y,\kappa\right) = -\frac{1}{1-y+i\varepsilon}-\frac{1}{1+y-i\varepsilon}\,.
+\end{equation}
+In order to get rid of the $i\varepsilon$ that complicates the
+implementation, we use the following identity:
+\begin{equation}\label{eq:princval}
+\frac{1}{X \mp i\varepsilon} = {\rm PV}\frac{1}{X} \pm \pi i\delta(X)\,
+\end{equation}
+where PV stands for principal value, so that:
+\begin{equation}
+  C_q^{(0)}\left(y,\kappa\right) = {\rm PV}\left[-\frac{1}{1- y}-\frac{1}{1+ y}\right] + \pi i\left[\delta(1-y) - \delta(1+y)\right]\,.
+\end{equation}
+Plugging this into Eq.~(\ref{eq:cffalstructfunc}), defining
+$\overline{F}_q^{+}(y,\xi,t,Q) =
+y(F_q(y,\xi,t,Q)+F_{\overline{q}}(y,\xi,t,Q))$, and understanding the
+principal value gives:
+\begin{equation}\label{eq:cffalstructfunc}
+\begin{array}{rcl}
+  x\mathcal{H}^{\rm LO}(x,\xi,t,Q) &=&\displaystyle
+                                       \sum_{q}e_q^2\int_{x}^{\infty}dy\left[-\left(\frac{1}{1-
+                                       y}\right)_{++}-\frac{1}{1+ y}+\pi i\delta(1-y)\right]
+                                       \overline{F}_q^{+}\left(\frac{x}{y},\xi,t,Q\right)\,,
+\end{array}
+\end{equation}
+where we have also introduced the $++$-prescription defined in
+Eq.~(\ref{eq:plusplusdist}) that makes the integrand finite over the
+integration range making it numerically computable. It is intersting
+to observe that applying Eq.~(\ref{eq:opticalth}) to the leading-order
+CFF gives the expected result:
+\begin{equation}
+  \frac{1}{2\pi} \lim_{\xi\rightarrow 0} \mbox{Im}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] = \frac12\sum_{q}e_q^2xf_q^{+}(x,Q) =
+  xF_1^{\rm LO}(x,Q)\,,
+\end{equation}
+where $f_q^+$ are the forward PDFs. The particular structure of
+Eq.~(\ref{eq:cffalstructfunc}) allows one to relate real and imaginary
+part of the CFF by observing that:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \mbox{Im}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] &=& \displaystyle  \pi \sum_{q}e_q^2
+  \overline{F}_q^{+}\left(x,\xi,t,Q\right)\,,\\
+\\
+\displaystyle \mbox{Re}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] &=& \displaystyle \int_{x}^{\infty}dy\left[-\left(\frac{1}{1-
+                                       y}\right)_{++}-\frac{1}{1+ y}\right]
+                                       \sum_{q}e_q^2\overline{F}_q^{+}\left(\frac{x}{y},\xi,t,Q\right)\,.
+\end{array}
+\end{equation}
+Therefore, one can plug the first into the second obtaining:
+\begin{equation}
+\mbox{Re}\left[x\mathcal{H}^{\rm
+      LO}(x,\xi,t,Q)\right] =\frac{1}{\pi}\int_{x}^{\infty}dy\left[-\left(\frac{1}{1-
+                                       y}\right)_{++}-\frac{1}{1+ y}\right]\mbox{Im}\left[x\mathcal{H}^{\rm
+      LO}\left(\frac{x}{y},\xi,t,Q\right)\right]\,.
+\end{equation}
+This relation, often referred to as \textit{dispersion} relation, is
+strictly valid only at leading order and is a useful tool when
+extracting GPDs (or CFFs) from experimental data.
+
+We can now move to consider the $\mathcal{O}(\alpha_s)$ corrections to
+the CCF $\mathcal{H}$. At this order, both the quark and the gluon
+channels contribute. We take the analytic expressions from
+Ref.~\cite{Pire:2011st}. For the quark channel we use the finite part
+of Eq.~(46) and for the gluon the finite part of Eq.~(47). Since we
+are assuming $x_{\rm B}>0$ ($=x$ in our notation), we need to take
+$Q^2>0$. In addition, our definition of coefficient functions in
+Eq.~(\ref{eq:cffalstructfuncERBL}) is such that the expressions of
+Ref.~\cite{Pire:2011st} have to be identified with
+$(1/x)C_{q,g}^{(1)}(x_{\rm B}/x,\xi/x_{\rm B})$. This gives:
+\begin{equation}\label{eq:DDVCSceofffuncsNLO}
+\begin{array}{rcl}
+C_{q}^{(1)}(y,\kappa) &=& \displaystyle -\frac{C_F}{1-y+i\varepsilon}\bigg\{ -
+                          9 +
+                          3\frac{1-\kappa^2y^2-2y}{1-\kappa^2y^2}\ln\left(-\frac{1-y}{y}-i\varepsilon\right)+\frac{1+y^2 -2\kappa^2y^2}{1-\kappa^2y^2} \ln^2\left(-\frac{1-y}{y}-i\varepsilon\right)\\
+\\
+&+&\displaystyle 6\frac{\kappa(1-\kappa)y^2}{1-\kappa^2
+    y^2}\ln(1-\kappa-i\varepsilon)+
+\frac{(1-\kappa)(1-y-2\kappa^2 y^2)}{\kappa(1-\kappa^2
+    y^2)}\ln^2(1-\kappa-i\varepsilon)\bigg\}\\
+\\
+&+& (y\rightarrow -y, \kappa\rightarrow -\kappa) \,,\\
+\\
+C_{g}^{(1)}(y,\kappa) &=& \displaystyle T_R \left(-\frac{1}{1-y+i\varepsilon}-\frac{1}{1+y-i\varepsilon}\right)\\
+\\
+&\times&\displaystyle \bigg\{ 
+                          2\ln\left(-\frac{1-y}{y}-i\varepsilon\right)
+                          +\frac{1-2y+2y^2-\kappa^2 y^2}{1-\kappa^2
+                          y^2}\ln^2\left(-\frac{1-y}{y}-i\varepsilon\right)\\
+\\
+&+&\displaystyle
+    \frac{2(1-\kappa)}{\kappa}\ln(1-\kappa-i\varepsilon)+\frac{(1-\kappa)(1-2\kappa
+    y^2-\kappa^2 y^2)}{\kappa(1-\kappa^2
+    y^2)}\ln^2(1-\kappa-i\varepsilon)
+\bigg\}\\
+\\
+&+& (y\rightarrow -y, \kappa\rightarrow -\kappa) \,.
+\end{array}
+\end{equation}
+Now, we need to split the expressions above into real and imaginary
+parts.  To do so, we use Eq.~(\ref{eq:princval}) and:
+\begin{equation}
+  \ln\left(-\frac{1-y}{y}-i\varepsilon\right) =
+  \ln\left(\left|\frac{1-y}{y}\right|\right)-i\pi\theta(1-y)\,.
+\end{equation}
+The presence of the $\theta$-function in front of $i\pi$ is a
+consequence of the fact that that term only arises if the argument of
+the logarithm is negative that only happens if $y<1$. It follows that:
+\begin{equation}
+  \ln^2\left(-\frac{1-y}{y}-i\varepsilon\right) =
+  \ln^2\left(\left|\frac{1-y}{y}\right|\right)-\pi^2\theta(1-y)-2\pi i\theta(1-y) \ln\left(\frac{1-y}{y}\right)\,,
+\end{equation}
+Similarly:
+\begin{equation}
+\ln(1-\kappa-i\varepsilon) = \ln(|1-\kappa|)-i\pi \theta(\kappa-1)\,.
+\end{equation}
+Before computing the full general expressions for real and imaginary
+parts, it is instructive to compute the imaginary part in the forward
+limit to check that Eq.~(\ref{eq:opticalth}) is fulfilled also at
+$\mathcal{O}(\alpha_s)$. Let us start with the quark coefficient
+function. The forward limit is obtained by taking
+$\kappa\rightarrow 0$. By doing so, we observe that the terms
+$(y\rightarrow -y, \kappa\rightarrow -\kappa)$ in
+Eq.~(\ref{eq:DDVCSceofffuncsNLO}) do not contribute to the imaginary
+part. The reason is that the integral in
+Eq.~(\ref{eq:cffalstructfunc}) only covers positive values of $y$
+where those terms are regular, so that the $i\varepsilon$ prescription
+has no effect and no imaginary terms are generated. The limit
+produces:(\footnote{Despite not contributing to the imaginary part,
+  notice that:
+\begin{equation}
+  \lim_{\kappa\rightarrow 0}\frac{\ln(1-k)}{\kappa}=-1\quad\mbox{and}\quad  \lim_{\kappa\rightarrow 0}\frac{\ln^2(1-k)}{\kappa}=0\,.
+\end{equation}
+})
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \frac{1}{2\pi}\lim_{\kappa\rightarrow 0}{\rm
+  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\theta(1-y)\left\{
+                                            2\frac{\ln\left(1-y\right)}{1-y} -\frac{3}{2}\frac{1}{1-y} -(1+y) \ln\left(1-y\right)-\frac{1+y^2}{1-y}\ln\left(y\right)+3\right\}\\
+  \\
+                                        &-& \displaystyle C_F\delta(1-y)\left\{
+                                            \frac{9}{2} +\pi^2+
+                                            \frac{3}{2}\ln\left(1-y\right)-\ln^2\left(1-y\right)\right\}\,.
+\end{array}
+\end{equation}
+In is important to notice the $\theta$-function in the first term of
+the r.h.s.. Despite it presence exposes the singularity of $1/(1-y)$,
+this is exactly what is needed to cancel the singularities generated
+by $\delta(1-y)\ln(1-y)$ and $\delta(1-y)\ln^2(1-y)$. To see this, we
+write the logarithms in the second line as:
+\begin{equation}
+\delta(1-y)\ln(1-y) = -\delta(1-y)\int_0^{1}\frac{dz}{1-z}\quad\mbox{and}\quad \delta(1-y)\ln^2(1-y) =
+-2 \delta(1-y)\int_0^{1}dz \frac{\ln(1-z)}{1-z}\,,
+\end{equation}
+that combined with the $1/(1-y)$ and $\ln(1-y)/(1-y)$ terms in the
+first line gives rise to the $+$-prescription so that the final result
+is:
+\begin{equation}\label{eq:coefff1}
+\begin{array}{rcl}
+  \displaystyle \frac{1}{2\pi}\lim_{\kappa\rightarrow 0}{\rm
+  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\theta(1-y)\bigg[
+                                            2\left(\frac{\ln\left(1-y\right)}{1-y}\right)_+
+                                            -\frac{3}{2}\left(\frac{1}{1-y}\right)_+
+                                            -(1+y)
+                                            \ln\left(1-y\right)\\
+  \\
+                                        &-&\displaystyle \frac{1+y^2}{1-y}\ln\left(y\right)+3- \delta(1-y)\left(\pi^2+\frac{9}{2}\right)\bigg]\,.
+\end{array}
+\end{equation}
+This result \textit{almost} perfectly agrees with the expected
+result. The expression for the $\mathcal{O}(\alpha_s)$ correction to
+the quark channel of $F_1$ can be read off from Eq.~(4.85) of
+Ref.~\cite{Ellis:1991qj}. First we notice that the expansion parameter
+in that reference is $\alpha_s/(2\pi)$ while we use
+$\alpha_s/(4\pi)$. Therefore, Eq.~(4.85) has to be multiplied by a
+factor 2 in the first place to match our notation. In addition,
+Eq.~(4.85) corresponds to $F_2$. But since $2xF_1=F_2-F_L$ and the
+corresponding coefficient function for $F_L$ is
+$C_{L,q}^{(1)}(x)=4C_Fx$ (see Eq.~(4.86) of Ref.~\cite{Ellis:1991qj}),
+it is sufficient to subtract this term and finally divide by 2 to
+obtain the coefficient function for $F_1$. The net result should be
+exactly Eq.~(4.85) of Ref.~\cite{Ellis:1991qj} with the term $2z$
+removed. Our Eq.~(\ref{eq:coefff1}) matches up to the $\pi^2$ term in
+the coefficient of $\delta(1-y)$ that multiplies a different
+factor. This discrepancy needs to be investigated further.
+
+We now consider the gluon coefficient function.  In this case, due to
+the overall factor that is singular in both $y=1$ and $y=-1$, we also
+need to consider the $(y\rightarrow -y, \kappa\rightarrow -\kappa)$
+term. This limit gives:
+\begin{equation}
+\begin{array}{rcl}
+\lim_{\kappa\rightarrow 0}{\rm
+ Im}\left[C_{g}^{(1)}(y,\kappa)\right] &=& \displaystyle 2\pi T_R \left(\frac{1}{1-y}+\frac{1}{1+y}\right) \left\{ 1+(1-2y+2y^2)\ln\left(\frac{1-y}{y}\right)\right\}\\
+\\
+&+& (y\rightarrow -y)\\
+\\
+&+& \displaystyle \pi T_R \left(\delta(1-y)-\delta(1+y)\right)\\
+\\
+&\times&\displaystyle \bigg\{ 
+                         2\ln\left(\frac{1-y}{y}\right)
+                         +(1-2y+2y^2)\left[\ln^2\left(\frac{1-y}{y}\right)-\pi^2\right]\bigg\}\\
+\\
+&+& (y\rightarrow -y) \,.
+\end{array}
+\end{equation}
+
+
 
 \newpage
 \bibliographystyle{ieeetr}

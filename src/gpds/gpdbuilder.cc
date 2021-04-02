@@ -6,13 +6,13 @@
 
 #include "apfel/gpdbuilder.h"
 #include "apfel/dglap.h"
-#include "apfel/operator.h"
+#include "apfel/operatorgpd.h"
 #include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/constants.h"
 #include "apfel/tools.h"
 #include "apfel/messages.h"
-#include "apfel/gpdevolutionkernels.h"
+#include "apfel/gpdsplittingfunctionsunp_sl.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
 
@@ -46,8 +46,8 @@ namespace apfel
     // ===============================================================
     // LO Matching conditions.
     std::map<int, Operator> MatchLO;
-    const Operator Id  {g, Identity{}, IntEps};
-    const Operator Zero{g, Null{},     IntEps};
+    const OperatorGPD Id  {g, Identity{}, IntEps};
+    const OperatorGPD Zero{g, Null{},     IntEps};
     MatchLO.insert({MatchingBasisQCD::M0, Id});
     MatchLO.insert({MatchingBasisQCD::M1, Zero});
     MatchLO.insert({MatchingBasisQCD::M2, Zero});
@@ -60,21 +60,21 @@ namespace apfel
     // ===============================================================
     // LO splitting function operators.
     std::map<int, std::map<int, Operator>> OpMapLO;
-    const Operator O0ns = Operator{g, Pgpd0nsDGLAP{xi}, IntEps};// + OperatorERBL{g, Pgpd0nsERBL{xi}, IntEps};
-    const Operator O0qg = Operator{g, Pgpd0qgDGLAP{xi}, IntEps};// + OperatorERBL{g, Pgpd0qgERBL{xi}, IntEps};
-    const Operator O0gq = Operator{g, Pgpd0gqDGLAP{xi}, IntEps};// + OperatorERBL{g, Pgpd0gqERBL{xi}, IntEps};
+    const OperatorGPD O0ns{g, Pgpd0ns{xi}, IntEps};
+    const OperatorGPD O0qq{g, Pgpd0qq{xi}, IntEps};
+    const OperatorGPD O0gq{g, Pgpd0gq{xi}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0gg = Operator{g, Pgpd0ggDGLAP{nf, xi}, IntEps};// + OperatorERBL{g, Pgpd0ggERBL{nf, xi}, IntEps};
-        const Operator O0qgnf = nf * O0qg;
+        const OperatorGPD O0qg{g, Pgpd0qg{nf, xi}, IntEps};
+        const OperatorGPD O0gg{g, Pgpd0gg{nf, xi}, IntEps};
         std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O0ns});
+        OM.insert({EvolutionBasisQCD::PNSP, O0qq});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
         OM.insert({EvolutionBasisQCD::PNSV, O0ns});
-        OM.insert({EvolutionBasisQCD::PQQ,  O0ns});
-        OM.insert({EvolutionBasisQCD::PQG,  O0qgnf});
-        OM.insert({EvolutionBasisQCD::PGQ,  O0gq});
-        OM.insert({EvolutionBasisQCD::PGG,  O0gg});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0qq});
+        OM.insert({EvolutionBasisQCD::PQG,                O0qg});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O0gq});
+        OM.insert({EvolutionBasisQCD::PGG,                O0gg});
         OpMapLO.insert({nf, OM});
       }
 

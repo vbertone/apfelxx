@@ -14,7 +14,7 @@ int main()
   std::cout << std::setprecision(15) << std::scientific;
 
   // Allocate vector of subgrids
-  std::vector<apfel::SubGrid> sgs = {apfel::SubGrid{10,1e-5,3}, apfel::SubGrid{20,1e-3,2}, apfel::SubGrid{30,1e-1,2}};
+  std::vector<apfel::SubGrid> sgs = {apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-3, 2}, apfel::SubGrid{100, 1e-1, 2}};
 
   // Construct grid
   apfel::Grid g{sgs};

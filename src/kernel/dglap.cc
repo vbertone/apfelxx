@@ -36,7 +36,7 @@ namespace apfel
     Set<T> MO = MC * Set<T> {MC.GetMap(), f.GetObjects()};
 
     // Set for 'MO' the convolution map of the next evolution step
-    MO.SetMap(_SplittingFunctions((Up ? nf + 1 : nf - 1), 0).GetMap());
+    MO.SetMap(_SplittingFunctions((Up ? nf + 1 : nf - 1), 1).GetMap());
 
     return MO;
   }

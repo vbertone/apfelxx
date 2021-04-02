@@ -1160,4 +1160,101 @@ namespace apfel
                                                                  MatchingConditions(DglapObj, PerturbativeOrder, Alphas), Unity, MuRef, Thresholds, nsteps
                                                                 });
   }
+
+//_____________________________________________________________________________
+  std::unique_ptr<Dglap<Distribution>> BuildDglap(std::function<DglapObjects(double const&)>                         const& DglapObj,
+                                                  std::vector<double>                                                const& Thresholds,
+                                                  std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
+                                                  double                                                             const& MuRef,
+                                                  int                                                                const& PerturbativeOrder,
+                                                  std::function<double(double const&)>                               const& Alphas,
+                                                  int                                                                const& nsteps)
+  {
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Compute coupling above and below the thresholds.
+    std::map<int, double> asThUp;
+    std::map<int, double> asThDown;
+    for (int nf = nfi + 1; nf <= nff; nf++)
+      {
+        asThDown.insert({nf, Alphas(Thresholds[nf-1]  * ( 1 - eps8 ) ) / FourPi});
+        asThUp.insert({nf, Alphas(Thresholds[nf-1] * ( 1 + eps8 ) ) / FourPi});
+      }
+
+    // Create splitting functions and matching conditions lambda
+    // functions according to the requested perturbative order.
+    std::function<Set<Operator>(int const&, double const&)> SplittingFunctions;
+    std::function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
+    if (PerturbativeOrder == 0)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        {
+          const double cp = Alphas(mu) / FourPi;
+          return cp * DglapObj(mu).SplittingFunctions.at(0);
+        };
+        MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
+        {
+          return DglapObj(Thresholds[nf-1]).MatchingConditions.at(0);
+        };
+      }
+    else if (PerturbativeOrder == 1)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        {
+          const double cp = Alphas(mu) / FourPi;
+          const auto sf = DglapObj(mu).SplittingFunctions;
+          return cp * ( sf.at(0) + cp * sf.at(1) );
+        };
+        MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+        {
+          const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
+          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+          return mc.at(0) + (Up ? 1 : -1) * cp * mc.at(1);
+        };
+      }
+    else if (PerturbativeOrder == 2)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        {
+          const double cp = Alphas(mu) / FourPi;
+          const auto sf = DglapObj(mu).SplittingFunctions;
+          return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
+        };
+        MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+        {
+          const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
+          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+          return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
+        };
+      }
+    else if (PerturbativeOrder == 3)
+      {
+        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        {
+          const double cp = Alphas(mu) / FourPi;
+          const auto sf = DglapObj(mu).SplittingFunctions;
+          return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
+        };
+        MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
+        {
+          const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
+          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+          return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
+        };
+      }
+
+    // Create set of initial distributions.
+    const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
+                                   DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
+
+    // Initialize DGLAP evolution.
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
+  }
 }

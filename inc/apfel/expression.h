@@ -22,8 +22,7 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The constructor in the presence of a phase-space
-     * reduction given by eta.
+     * @brief The "Expression" constructor
      * @param eta: upper limit of the convolution integral (default: 1)
      */
     Expression(double const& eta = 1);
@@ -52,13 +51,13 @@ namespace apfel
      * @return The local term at x
      */
     virtual double Local(double const&) const { return 0; }
-    ///@}
 
     /**
-     * @brief Function that returns the value of the scaling parameter
-     * eta.
+     * @brief Virtual local term for principal valued integrals.
+     * @return The local term at x
      */
-    double eta() const { return _eta; }
+    virtual double LocalPV(double const&) const { return 0; }
+    ///@}
 
     /**
      * @brief Function that sets the value of a possible external
@@ -66,9 +65,15 @@ namespace apfel
      */
     void SetExternalVariable(double const& extvar) const { _extvar = extvar; }
 
+    /**
+     * @brief Function that returns the value of the scaling parameter
+     * eta.
+     */
+    double eta() const { return _eta; }
+
   protected:
-    double const   _eta;     //!< Mass parameter
     double mutable _extvar;  //!< External kinematic variable
+    double const   _eta;     //!< Mass parameter
   };
 
   /**

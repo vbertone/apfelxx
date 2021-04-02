@@ -6,10 +6,9 @@
 
 #pragma once
 
-#include "apfel/grid.h"
 #include "apfel/expression.h"
 #include "apfel/distribution.h"
-#include "apfel/extendedvector.h"
+#include "apfel/matrix.h"
 
 namespace apfel
 {
@@ -25,40 +24,36 @@ namespace apfel
     Operator() = delete;
 
     /**
-     * @brief The Operator constructor.
+     * @brief The Operator constructor used for inheritance.
      * @param gr: the Grid object
-     * @param expr: the expression to be transformed
-     * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
-     * @param erbl: whether the convolution integral is ERBL like (default: false)
      */
-    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5, bool const& erbl = false);
+    Operator(Grid const& gr);
 
     /**
      * @brief The Operator constructor.
      * @param gr: the Grid object
      * @param expr: the expression to be transformed
-     * @param erbl: whether the convolution integral is ERBL like
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
-    Operator(Grid const& gr, Expression const& expr, bool const& erbl, double const& eps = 1e-5);
+    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
 
     /**
-     * @brief Function that returns the ERBL-like flag
+     * @brief The Operator virtual destructor.
      */
-    bool IsERBL() const { return _erbl; }
+    virtual ~Operator() {}
 
     /**
      * @name Binary operators
      */
     ///@{
-    Distribution operator *= (Distribution const& d) const;            //!< this *= Distribution
-    Operator&    operator  = (Operator const& o);                      //!< this  = Operator
-    Operator&    operator *= (Operator const& o);                      //!< this *= Operator
-    Operator&    operator *= (double const& s);                        //!< this *= Scalar
-    Operator&    operator *= (std::function<double(double const&)> f); //!< This *= Function
-    Operator&    operator /= (double const& s);                        //!< this /= Scalar
-    Operator&    operator += (Operator const& o);                      //!< this += Operator
-    Operator&    operator -= (Operator const& o);                      //!< this -= Operator
+    Distribution operator *= (Distribution const& d) const;         //!< this *= Distribution
+    Operator& operator *= (Operator const& o);                      //!< this *= Operator
+    Operator& operator  = (Operator const& o);                      //!< this  = Operator
+    Operator& operator *= (double const& s);                        //!< this *= Scalar
+    Operator& operator *= (std::function<double(double const&)> f); //!< This *= Function
+    Operator& operator /= (double const& s);                        //!< this /= Scalar
+    Operator& operator += (Operator const& o);                      //!< this += Operator
+    Operator& operator -= (Operator const& o);                      //!< this -= Operator
     ///@}
 
     /**
@@ -69,12 +64,11 @@ namespace apfel
     /**
      * @brief Function that returns the operator.
      */
-    std::vector<ExtendedVector<double>> GetOperator() const { return _Operator; }
+    std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
   protected:
-    Grid                         const& _grid;      //!< Grid on which to compute the operator
-    bool                         const  _erbl;      //!< If the operator is ERBL-like
-    std::vector<ExtendedVector<double>> _Operator;  //!< Operator values.
+    Grid                 const& _grid;      //!< Grid on which to compute the operator
+    std::vector<matrix<double>> _Operator;  //!< Operator values
 
     friend std::ostream& operator << (std::ostream& os, Operator const& sg);
   };
