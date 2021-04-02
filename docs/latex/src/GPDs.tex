@@ -1425,9 +1425,9 @@ An analogous relation exists between the CFF $\widetilde{\mathcal{H}}$
 and the polarised structure function $g_5$ as well as between the
 longitudinal projections $\mathcal{H}_L$ and
 $\widetilde{\mathcal{H}}_L$, and $F_L$ and $g_L$, respectively. These
-relation can be used to check that coefficient functions for the CCFs,
-that are currently know to $\mathcal{O}(\alpha_s)$, reproduce the
-well-know DIS coefficient functions in the forward limit.
+relation can be used to check that coefficient functions for the CCFs
+reproduce the well-know DIS coefficient functions in the forward
+limit.
 
 Factorisation for DDVCS allows one to write CFFs as convolution
 between short-distance partonic cross sections (or coefficient
@@ -1529,7 +1529,7 @@ the CCF $\mathcal{H}$. At this order, both the quark and the gluon
 channels contribute. We take the analytic expressions from
 Ref.~\cite{Pire:2011st}. For the quark channel we use the finite part
 of Eq.~(46) and for the gluon the finite part of Eq.~(47). Since we
-are assuming $x_{\rm B}$ ($=x$ in our notation), we need to take
+are assuming $x_{\rm B}>0$ ($=x$ in our notation), we need to take
 $Q^2>0$. In addition, our definition of coefficient functions in
 Eq.~(\ref{eq:cffalstructfuncERBL}) is such that the expressions of
 Ref.~\cite{Pire:2011st} have to be identified with
@@ -1567,23 +1567,28 @@ Now, we need to split the expressions above into real and imaginary
 parts.  To do so, we use Eq.~(\ref{eq:princval}) and:
 \begin{equation}
   \ln\left(-\frac{1-y}{y}-i\varepsilon\right) =
-  \ln\left(\frac{1-y}{y}\right)-i\pi\quad\Rightarrow\quad
-  \ln^2\left(-\frac{1-y}{y}-i\varepsilon\right) =
-  \ln^2\left(\frac{1-y}{y}\right)-\pi^2-2\pi i \ln\left(\frac{1-y}{y}\right)\,,
+  \ln\left(\left|\frac{1-y}{y}\right|\right)-i\pi\theta(1-y)\,.
 \end{equation}
-and:
+The presence of the $\theta$-function in front of $i\pi$ is a
+consequence of the fact that that term only arises if the argument of
+the logarithm is negative that only happens if $y<1$. It follows that:
 \begin{equation}
-\ln(1-\kappa-i\varepsilon) = \theta(1-\kappa) \ln(1-\kappa)+\theta(\kappa-1)\left[\ln(\kappa-1)-i\pi\right]\,.
+  \ln^2\left(-\frac{1-y}{y}-i\varepsilon\right) =
+  \ln^2\left(\left|\frac{1-y}{y}\right|\right)-\pi^2\theta(1-y)-2\pi i\theta(1-y) \ln\left(\frac{1-y}{y}\right)\,,
+\end{equation}
+Similarly:
+\begin{equation}
+\ln(1-\kappa-i\varepsilon) = \ln(|1-\kappa|)-i\pi \theta(\kappa-1)\,.
 \end{equation}
 Before computing the full general expressions for real and imaginary
 parts, it is instructive to compute the imaginary part in the forward
 limit to check that Eq.~(\ref{eq:opticalth}) is fulfilled also at
 $\mathcal{O}(\alpha_s)$. Let us start with the quark coefficient
-function. The forward limit is taken by taking $\kappa\rightarrow
-0$. By doing so, we observe that the terms
+function. The forward limit is obtained by taking
+$\kappa\rightarrow 0$. By doing so, we observe that the terms
 $(y\rightarrow -y, \kappa\rightarrow -\kappa)$ in
 Eq.~(\ref{eq:DDVCSceofffuncsNLO}) do not contribute to the imaginary
-part because in the forward limit. The reason is that the integral in
+part. The reason is that the integral in
 Eq.~(\ref{eq:cffalstructfunc}) only covers positive values of $y$
 where those terms are regular, so that the $i\varepsilon$ prescription
 has no effect and no imaginary terms are generated. The limit
@@ -1596,7 +1601,7 @@ produces:(\footnote{Despite not contributing to the imaginary part,
 \begin{equation}
 \begin{array}{rcl}
   \displaystyle \frac{1}{2\pi}\lim_{\kappa\rightarrow 0}{\rm
-  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\left\{
+  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\theta(1-y)\left\{
                                             2\frac{\ln\left(1-y\right)}{1-y} -\frac{3}{2}\frac{1}{1-y} -(1+y) \ln\left(1-y\right)-\frac{1+y^2}{1-y}\ln\left(y\right)+3\right\}\\
   \\
                                         &-& \displaystyle C_F\delta(1-y)\left\{
@@ -1604,10 +1609,14 @@ produces:(\footnote{Despite not contributing to the imaginary part,
                                             \frac{3}{2}\ln\left(1-y\right)-\ln^2\left(1-y\right)\right\}\,.
 \end{array}
 \end{equation}
-Now we write the logarithms in the second line as:
+In is important to notice the $\theta$-function in the first term of
+the r.h.s.. Despite it presence exposes the singularity of $1/(1-y)$,
+this is exactly what is needed to cancel the singularities generated
+by $\delta(1-y)\ln(1-y)$ and $\delta(1-y)\ln^2(1-y)$. To see this, we
+write the logarithms in the second line as:
 \begin{equation}
-\ln(1-y) = -\int_0^{1}\frac{dz}{1-z}\quad\mbox{and}\quad \ln^2(1-y) =
--2 \int_0^{1}dz \frac{\ln(1-z)}{1-z}\,,
+\delta(1-y)\ln(1-y) = -\delta(1-y)\int_0^{1}\frac{dz}{1-z}\quad\mbox{and}\quad \delta(1-y)\ln^2(1-y) =
+-2 \delta(1-y)\int_0^{1}dz \frac{\ln(1-z)}{1-z}\,,
 \end{equation}
 that combined with the $1/(1-y)$ and $\ln(1-y)/(1-y)$ terms in the
 first line gives rise to the $+$-prescription so that the final result
@@ -1615,13 +1624,13 @@ is:
 \begin{equation}\label{eq:coefff1}
 \begin{array}{rcl}
   \displaystyle \frac{1}{2\pi}\lim_{\kappa\rightarrow 0}{\rm
-  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\bigg[
+  Im}\left[C_{q}^{(1)}(y,\kappa)\right] &=& \displaystyle C_F\theta(1-y)\bigg[
                                             2\left(\frac{\ln\left(1-y\right)}{1-y}\right)_+
                                             -\frac{3}{2}\left(\frac{1}{1-y}\right)_+
                                             -(1+y)
                                             \ln\left(1-y\right)\\
-\\
-&-&\displaystyle \frac{1+y^2}{1-y}\ln\left(y\right)+3- \delta(1-y)\left(\pi^2+\frac{9}{2}\right)\bigg]\,.
+  \\
+                                        &-&\displaystyle \frac{1+y^2}{1-y}\ln\left(y\right)+3- \delta(1-y)\left(\pi^2+\frac{9}{2}\right)\bigg]\,.
 \end{array}
 \end{equation}
 This result \textit{almost} perfectly agrees with the expected
@@ -1641,22 +1650,22 @@ removed. Our Eq.~(\ref{eq:coefff1}) matches up to the $\pi^2$ term in
 the coefficient of $\delta(1-y)$ that multiplies a different
 factor. This discrepancy needs to be investigated further.
 
-We now consider the gluon coefficient function. In this case, due to
+We now consider the gluon coefficient function.  In this case, due to
 the overall factor that is singular in both $y=1$ and $y=-1$, we also
 need to consider the $(y\rightarrow -y, \kappa\rightarrow -\kappa)$
 term. This limit gives:
 \begin{equation}
 \begin{array}{rcl}
 \lim_{\kappa\rightarrow 0}{\rm
-  Im}\left[C_{g}^{(1)}(y,\kappa)\right] &=& \displaystyle 2\pi T_R \left(\frac{1}{1-y}+\frac{1}{1+y}\right) \left\{ 1+(1-2y+2y^2)\ln\left(\frac{1-y}{y}\right)\right\}\\
+ Im}\left[C_{g}^{(1)}(y,\kappa)\right] &=& \displaystyle 2\pi T_R \left(\frac{1}{1-y}+\frac{1}{1+y}\right) \left\{ 1+(1-2y+2y^2)\ln\left(\frac{1-y}{y}\right)\right\}\\
 \\
 &+& (y\rightarrow -y)\\
 \\
 &+& \displaystyle \pi T_R \left(\delta(1-y)-\delta(1+y)\right)\\
 \\
 &\times&\displaystyle \bigg\{ 
-                          2\ln\left(\frac{1-y}{y}\right)
-                          +(1-2y+2y^2)\left[\ln^2\left(\frac{1-y}{y}\right)-\pi^2\right]\bigg\}\\
+                         2\ln\left(\frac{1-y}{y}\right)
+                         +(1-2y+2y^2)\left[\ln^2\left(\frac{1-y}{y}\right)-\pi^2\right]\bigg\}\\
 \\
 &+& (y\rightarrow -y) \,.
 \end{array}

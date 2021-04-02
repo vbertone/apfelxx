@@ -886,6 +886,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ad827529766bae9922f962aadf3c2fc87"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ad827529766bae9922f962aadf3c2fc87">BuildDglap</a> (std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; const &amp;DglapObj, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;nsteps=10)</td></tr>
 <tr class="memdesc:ad827529766bae9922f962aadf3c2fc87"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for operators.  <a href="namespaceapfel.html#ad827529766bae9922f962aadf3c2fc87">More...</a><br /></td></tr>
 <tr class="separator:ad827529766bae9922f962aadf3c2fc87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6932c89112eac9fb319fcfdc5c0978a5"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a6932c89112eac9fb319fcfdc5c0978a5">BuildDglap</a> (std::function&lt; <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a>(double const &amp;)&gt; const &amp;DglapObj, std::vector&lt; double &gt; const &amp;Thresholds, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;nsteps=10)</td></tr>
+<tr class="memdesc:a6932c89112eac9fb319fcfdc5c0978a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for distributions.  <a href="namespaceapfel.html#a6932c89112eac9fb319fcfdc5c0978a5">More...</a><br /></td></tr>
+<tr class="separator:a6932c89112eac9fb319fcfdc5c0978a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Ternary operators</div></td></tr>
 <tr class="memitem:a3dd7edc0a38d72a704e8c1910e741ac8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a3dd7edc0a38d72a704e8c1910e741ac8">operator*</a> (double const &amp;s, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> rhs)</td></tr>
 <tr class="memdesc:a3dd7edc0a38d72a704e8c1910e741ac8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar*Distribution.  <a href="namespaceapfel.html#a3dd7edc0a38d72a704e8c1910e741ac8">More...</a><br /></td></tr>
@@ -1895,8 +1898,81 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a6932c89112eac9fb319fcfdc5c0978a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6932c89112eac9fb319fcfdc5c0978a5">&#9670;&nbsp;</a></span>BuildDglap() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt;<a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&gt; &gt; apfel::BuildDglap </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a>(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>DglapObj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Thresholds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>InDistFunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>MuRef</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>PerturbativeOrder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Alphas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>nsteps</em> = <code>10</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for distributions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">DglapObj</td><td>DglapObjects-valued function that returns the structure with the coefficients of the perturbative objects as functions of the scale </td></tr>
+    <tr><td class="paramname">Thresholds</td><td>the heavy-quark thresholds </td></tr>
+    <tr><td class="paramname">InDistFunc</td><td>the distributions at the reference scale </td></tr>
+    <tr><td class="paramname">MuRef</td><td>the reference scale </td></tr>
+    <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order of the evolution </td></tr>
+    <tr><td class="paramname">Alphas</td><td>the function returning the strong coupling </td></tr>
+    <tr><td class="paramname">nsteps</td><td>the number of steps of the ODE solver (default: 10). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A unique pointer to a <a class="el" href="classapfel_1_1Dglap.html" title="The Dglap class is specialization class of the MatchedEvolution class for the computation of the DGLA...">Dglap</a> object </dd></dl>
+
+</div>
+</div>
 <a id="ad827529766bae9922f962aadf3c2fc87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad827529766bae9922f962aadf3c2fc87">&#9670;&nbsp;</a></span>BuildDglap() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad827529766bae9922f962aadf3c2fc87">&#9670;&nbsp;</a></span>BuildDglap() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1955,7 +2031,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ad66196392cf742bfd93e1faeedaf3e0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad66196392cf742bfd93e1faeedaf3e0b">&#9670;&nbsp;</a></span>BuildDglap() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad66196392cf742bfd93e1faeedaf3e0b">&#9670;&nbsp;</a></span>BuildDglap() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7530,19 +7606,20 @@ template&lt;class U &gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">    {</div>
-<div class="line">      {{ 0,0}, 0}, {{ 0,1}, 1},           {{ 0,3}, 2},           {{ 0,5}, 3},           {{ 0,7}, 4},           {{ 0,9}, 5},             {{ 0,11}, 6},</div>
-<div class="line">      {{ 1,0}, 7}, {{ 1,1}, 8},           {{ 1,3}, 9},           {{ 1,5},10},           {{ 1,7},11},           {{ 1,9},12},             {{ 1,11},13},</div>
-<div class="line">                               {{2,2},14},</div>
-<div class="line">      {{ 3,0},15}, {{ 3,1},16},           {{ 3,3},17},           {{ 3,5},18},           {{ 3,7},19},           {{ 3,9},20},             {{ 3,11},21},</div>
-<div class="line">                                                      {{4,4},22},</div>
-<div class="line">      {{ 5,0},23}, {{ 5,1},24},           {{ 5,3},25},           {{ 5,5},26},           {{ 5,7},27},           {{ 5,9},28},             {{ 5,11},29},</div>
-<div class="line">                                                                             {{6,6},30},</div>
-<div class="line">      {{ 7,0},31}, {{ 7,1},32},           {{ 7,3},33},           {{ 7,5},34},           {{ 7,7},35},           {{ 7,9},36},             {{ 7,11},37},</div>
-<div class="line">                                                                                                    {{8,8},38},</div>
-<div class="line">      {{ 9,0},39}, {{ 9,1},40},           {{ 9,3},41},           {{ 9,5},42},           {{ 9,7},43},           {{ 9,9},44},             {{ 9,11},45},</div>
-<div class="line">                                                                                                                           {{10,10},46},</div>
-<div class="line">      {{11,0},47}, {{11,1},48},           {{11,3},49},           {{11,5},50},           {{11,7},51},           {{11,9},52},             {{11,11},53},</div>
-<div class="line">                                                                                                                                                     {{12,12},54}</div>
+<div class="line">      </div>
+<div class="line">      {{ 0,0}, 0}, {{ 0,1}, 1},           {{ 0,3}, 2},           {{ 0,5}, 3},           {{ 0,7}, 4},           {{ 0,9}, 5},             {{ 0,11}, 6},             </div>
+<div class="line">      {{ 1,0}, 7}, {{ 1,1}, 8},           {{ 1,3}, 9},           {{ 1,5},10},           {{ 1,7},11},           {{ 1,9},12},             {{ 1,11},13},             </div>
+<div class="line">                               {{2,2},14},                                                                                                                        </div>
+<div class="line">      {{ 3,0},15}, {{ 3,1},16},           {{ 3,3},17},           {{ 3,5},18},           {{ 3,7},19},           {{ 3,9},20},             {{ 3,11},21},             </div>
+<div class="line">                                                      {{4,4},22},                                                                                                 </div>
+<div class="line">      {{ 5,0},23}, {{ 5,1},24},           {{ 5,3},25},           {{ 5,5},26},           {{ 5,7},27},           {{ 5,9},28},             {{ 5,11},29},             </div>
+<div class="line">                                                                             {{6,6},30},                                                                          </div>
+<div class="line">      {{ 7,0},31}, {{ 7,1},32},           {{ 7,3},33},           {{ 7,5},34},           {{ 7,7},35},           {{ 7,9},36},             {{ 7,11},37},             </div>
+<div class="line">                                                                                                    {{8,8},38},                                                   </div>
+<div class="line">      {{ 9,0},39}, {{ 9,1},40},           {{ 9,3},41},           {{ 9,5},42},           {{ 9,7},43},           {{ 9,9},44},             {{ 9,11},45},             </div>
+<div class="line">                                                                                                                           {{10,10},46},                          </div>
+<div class="line">      {{11,0},47}, {{11,1},48},           {{11,3},49},           {{11,5},50},           {{11,7},51},           {{11,9},52},             {{11,11},53},             </div>
+<div class="line">                                                                                                                                                     {{12,12},54} </div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>The map between pair of indices corresponding to the position of the operator in the evolution matrix and its linear index. </p>
@@ -7667,7 +7744,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 28 2021 18:30:45 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Apr 2 2021 12:55:21 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
