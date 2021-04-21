@@ -1,0 +1,1640 @@
+.. contents::
+   :depth: 3
+..
+
+PDF matching conditions
+=======================
+
+If the (Zero Mass) Variable Flavour Number Scheme (ZM\ :math:`-`\ VFNS)
+at NNLO is considered, matching conditions for the PDFs and the coupling
+constant at the heavy quarks thresholds (:math:`m_c^2`, :math:`m_b^2`
+and :math:`m_t^2`) must be implemented. This is due to the fact that we
+are working with an “effective theory” where before a certain threshold,
+say :math:`m_h^2`, the heavy quark flavour :math:`h` is treated as
+infinitely massive, while after the crossing of the same threshold the
+same flavour is treated as massless. This results in discontinuities of
+PDFs and coupling constant in correspondence of the thresholds. Such
+discontinuities can be evaluated in perturbation theory, and in
+particular one can see that they start at NNLO, so that PDFs and
+:math:`a_s` are continuous at LO and NLO (Buza et al. 1998).
+
+The discontinuity of the PDF :math:`l` (in the Mellin space) of a light
+quark( [1]_) just beyond the threshold
+:math:`m_h^2`\ (:math:`=m_c^2,m_b^2,m_t^2`), where the effective flavour
+number passes from :math:`n_f` to :math:`n_f+1`, is given as a function
+of the same PDF just before the threshold by the following relation
+(Vogt 2005):
+
+.. math::
+   :label: eq:lightqmc
+   l^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]l^{(n_f)}(N,m_h^2)\,.
+
+with :math:`l=u,\overline{u},d,\overline{d},\dots`, while the gluon
+distribution function is given by:
+
+.. math::
+   :label: gluon
+   \displaystyle g^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{gg,h}^{S,(2)}(N)]g^{(n_f)}(N,m_h^2)+a_s^2(m_h^2)A^{S,(2)}_{gq,h}(N)\Sigma^{(n_f)}(N,m^2_h)
+
+and, in the end, the sum of heavy quark :math:`h` and its anti-quark
+:math:`\overline{h}`, which are going to be produced after the threshold
+:math:`m_h^2`, is:
+
+.. math::
+   :label: eq:heavyqmc
+   (h^{(n_f+1)}+\overline{h}^{(n_f+1)})(N,m_h^2)=a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(n_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(n_f)}(N,m_h^2)]\,.
+
+Of course, we have :math:`h=\overline{h}`.
+
+Now, since:
+
+.. math:: \Sigma^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}+\overline{l}^{(n_f+1)})+(h^{(n_f+1)}+\overline{h}^{(n_f+1)})
+
+we find that the matching condition for the singlet is:
+
+.. math::
+   :label: singlet
+   \begin{array}{c}
+   \displaystyle\Sigma^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]\Sigma^{(n_f)}(N,m_h^2)+\\
+   \\
+   \displaystyle a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(n_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(n_f)}(N,m_h^2)]
+   \end{array}
+
+so that, from eqs. :eq:`gluon` and
+:eq:`singlet`:
+
+.. math::
+   :label: couple1
+   \begin{array}{c}
+   \displaystyle {\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s^2\tilde{A}^{S,(2)}_{hg}\\
+   a_s^2A^{S,(2)}_{gq,h} & 1+a_s^2A_{gg,h}^{S,(2)}\end{pmatrix}{\Sigma^{(n_f)} \choose g^{(n_f)}}\\
+   \\
+   \displaystyle =\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose g^{(n_f)}}
+   \end{array}
+
+where we have omitted all the dependencies. So we have obtained the
+matching conditions for the singlet and the gluon distribution
+functions.
+
+Now we consider the other distributions. The valence distribution
+:math:`V` for :math:`n_f+1` active (light) flavours just beyond the
+threshold :math:`m_h^2` is defined as:
+
+.. math:: V^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}-\overline{l}^{(n_f+1)})+(h^{(n_f+1)}-\overline{h}^{(n_f+1)})
+
+but, since :math:`h=\overline{h}`, the last term vanish and we are left
+with:
+
+.. math::
+   :label: valence
+   \begin{array}{c}
+   \displaystyle V^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}-\overline{l}^{(n_f+1)})=\\
+   \\
+   \displaystyle [1+a_s^2A_{qq,h}^{N\!S,(2)}]\sum_{l=1}^{n_f}(l^{(n_f)}-\overline{l}^{(n_f)})=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}\,.
+   \end{array}
+
+So, this is the matching condition for the valence distribution
+:math:`V`.
+
+Now we consider the valence distribution :math:`V_3` and :math:`V_8`
+which are both composed only by light quarks, namely:
+
+.. math:: V_3=(u-\overline{u})-(d-\overline{d})\quad\mbox{and}\quad V_8=(u-\overline{u})+(d-\overline{d})-2(s-\overline{s})
+
+so that, in these cases, the matching conditions work as in the case of
+:math:`V`, i.e.:
+
+.. math::
+   :label: v38
+   V_{3,8}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}_{3,8}\,.
+
+The same holds for :math:`T_{3}` and :math:`T_8`, which are defined as:
+
+.. math:: T_3=(u+\overline{u})-(d+\overline{d})\quad\mbox{and}\quad V_8=(u+\overline{u})+(d+\overline{d})-2(s+\overline{s})
+
+so:
+
+.. math::
+   :label: t38
+   T_{3,8}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]T^{(n_f)}_{3,8}\,.
+
+The remaining valence distribution :math:`V_{15}`, :math:`V_{24}` and
+:math:`V_{35}` are defined as:
+
+.. math::
+   \begin{array}{l}
+   V_{15}=(u-\overline{u})+(d-\overline{d})+(s-\overline{s})-3(c-\overline{c})\\
+   V_{24}=(u-\overline{u})+(d-\overline{d})+(s-\overline{s})+(c-\overline{c})-4(b-\overline{b})\\
+   V_{35}=(u-\overline{u})+(d-\overline{d})+(s-\overline{s})+(c-\overline{c})+(b-\overline{b})-5(t-\overline{t})
+   \end{array}
+
+\ and since in each one of them the heavy quarks appear always as
+difference between quark and anti-quark, they cancel exactly. For
+example, at the :math:`m_b^2` threshold, :math:`V_{15}` is entirely
+composed by light quarks so there is no problem, while :math:`V_{24}`
+and :math:`V_{35}` have also a :math:`b`-quark contribution, given by
+:math:`-4(b-\overline{b})` and :math:`(b-\overline{b})` respectively (of
+course, the :math:`t(\overline{t})` distribution is zero). Anyway, this
+terms give no matching condition since the :math:`b` contribution is
+exactly equal to the :math:`\overline{b}` contribution, so that they
+cancel. So:
+
+.. math::
+   :label: v152435
+   V_{15,24,35}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}_{15,24,35}\,.
+
+In the end, to deal with :math:`T_{15}`, :math:`T_{24}` and
+:math:`T_{35}`, we have to specify the threshold. Indeed, in these cases
+the heavy quark contribution does not cancel. Their definition is:
+
+.. math::
+   \begin{array}{l}
+   T_{15}=(u+\overline{u})+(d+\overline{d})+(s+\overline{s})-3(c+\overline{c})\\
+   T_{24}=(u+\overline{u})+(d+\overline{d})+(s+\overline{s})+(c+\overline{c})-4(b+\overline{b})\\
+   T_{35}=(u+\overline{u})+(d+\overline{d})+(s+\overline{s})+(c+\overline{c})+(b+\overline{b})-5(t+\overline{t})\,.
+   \end{array}
+
+\ Just before the threshold :math:`m_c^2` we have only 3 active light
+flavours (:math:`u`, :math:`d` and :math:`s`), while just beyond
+:math:`m_c^2` we have 4 active flavours and among them the flavour
+:math:`c` is considered to be heavy. Of course, we have no :math:`b` and
+:math:`t` contribution (so :math:`T_{24}` and :math:`T_{35}` are equal).
+So the matching conditions are:
+
+.. math::
+   \begin{array}{c}
+   \displaystyle T_{15}^{(4)}=[1+a_s^2A_{qq,c}^{N\!S,(2)}]\underbrace{\sum_{l=u,d,s}(l^{(3)}+\overline{l}^{(3)})}_{\Sigma^{(3)}}-3a_s^2[\tilde{A}^{S,(2)}_{cq}\Sigma^{(3)}+\tilde{A}^{S,(2)}_{cg}g^{(3)}]=\\
+   \\
+   \displaystyle \begin{pmatrix} 1+a_s^2[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2\tilde{A}^{S,(2)}_{cg}\end{pmatrix}{\Sigma^{(3)} \choose g^{(3)}}
+   \end{array}
+
+while:
+
+.. math:: T_{24,35}^{(4)}=\begin{pmatrix} 1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] & a_s^2\tilde{A}^{S,(2)}_{cg}\end{pmatrix}{\Sigma^{(3)} \choose g^{(3)}}\,.
+
+We can put the above relation in a matricial form:
+
+.. math::
+   :label: pippo1
+   \begin{pmatrix} T_{15}^{(4)} \\ T_{24}^{(4)} \\ T_{35}^{(4)} \end{pmatrix} = \begin{pmatrix}  1+a_s^2[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2\tilde{A}^{S,(2)}_{cg}\\  
+   1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] & a_s^2\tilde{A}^{S,(2)}_{cg} \\
+   1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] & a_s^2\tilde{A}^{S,(2)}_{cg} \end{pmatrix}{\Sigma^{(3)} \choose g^{(3)}}\,.
+
+But now it is easy to generalize. At :math:`m_b^2`, :math:`T_{15}` does
+not contain, so:
+
+.. math::
+   :label: pippo2
+   T_{15}^{(5)}=[1+a_s^2A_{qq,b}^{N\!S,(2)}]T_{15}^{(4)}
+
+while:
+
+.. math::
+   :label: pippo3
+   \begin{pmatrix} T_{24}^{(5)} \\ T_{35}^{(5)} \end{pmatrix} = \begin{pmatrix}  1+a_s^2[A_{qq,b}^{N\!S,(2)}-4\tilde{A}^{S,(2)}_{bq}] & -4a_s^2\tilde{A}^{S,(2)}_{bg}\\  
+   1+a_s^2[A_{qq,b}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{bq}] & a_s^2\tilde{A}^{S,(2)}_{bg} \end{pmatrix}{\Sigma^{(4)} \choose g^{(4)}}\,.
+
+Finally, at :math:`m_t^2` we have:
+
+.. math::
+   :label: pippo4
+   \begin{array}{l}
+   \displaystyle T_{15}^{(6)}=[1+a_s^2A_{qq,t}^{N\!S,(2)}]T_{15}^{(5)}\\
+   \\
+   \displaystyle T_{24}^{(6)}=[1+a_s^2A_{qq,t}^{N\!S,(2)}]T_{25}^{(5)}
+   \end{array}
+
+and:
+
+.. math::
+   :label: pippo5
+   T_{35}^{(6)} = \begin{pmatrix}  1+a_s^2[A_{qq,t}^{N\!S,(2)}-5\tilde{A}^{S,(2)}_{tq}] & -5a_s^2\tilde{A}^{S,(2)}_{tg}\end{pmatrix}{\Sigma^{(5)} \choose g^{(5)}}\,.
+
+An explicit calculation for the coefficients :math:`A^{(2)}` in the
+:math:`x`-space can be found in [hep-ph/9612398]. Anyhow, that
+calculation is performed more generally in the case
+:math:`m_h^2\neq\mu_F^2`. This results in extra-terms proportional to
+:math:`\ln(m_h^2/\mu_F^2)`, which vanish if, as we do, one takes the
+factorisation scale :math:`\mu^2` coinciding with the scale of the
+process :math:`Q^2`. Moreover, in that case also NLO
+(:math:`\propto a_s`) appear in the matching conditions.
+
+To summarise the PDF matching conditions at the threshold :math:`m_h^2`,
+we have that:
+
+-  singlet and gluon couple as follows:
+
+   .. math::
+      :label: couple
+        {\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose g^{(n_f)}}
+
+-  from eqs. :eq:`valence`, :eq:`v38`,
+   :eq:`v152435` and :eq:`t38`, one can see that
+   :math:`V`, :math:`V_{3,8,\dots,35}` and :math:`T_{3,8}` behave in the
+   same way, i.e.:
+
+   .. math::
+      :label: ciao
+        P^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]P^{(n_f)}\quad\mbox{with}\quad P=V,V_3,\dots,V_{35},T_3,T_8
+
+-  :math:`T_{15}`, :math:`T_{24}` and :math:`T_{35}` have different
+   matching conditions depending on the threshold. In particular: for
+   :math:`m_h^2=m_c^2` they are given by eq. :eq:`pippo1`,
+   for :math:`m_h^2=m_b^2` they are given by eqs.
+   :eq:`pippo2` and :eq:`pippo3` and for
+   :math:`m_h^2=m_t^2` they are given by eqs. :eq:`pippo4`
+   and :eq:`pippo5`
+
+In the following Sections we will discuss how to write the evolution
+kernels in the presence of the matching conditions. We will explicitly
+consider only the forward evolution, i.e. the final scale :math:`Q^2`
+greater than the initial one :math:`Q_0^2`. Anyway the backward
+evolution (:math:`Q_0^2>Q^2`) can be easily obtained from the forward
+one. In fact, given the evolution kernel :math:`\Gamma`, the following
+relation holds:
+
+.. math:: \Gamma(Q^2,Q_0^2)\Gamma(Q_0^2,Q^2)=1\quad\Longrightarrow\quad\Gamma(Q^2,Q_0^2)=\Gamma^{-1}(Q_0^2,Q^2).
+
+so, if :math:`Q^2>Q_0^2` the code computes directly
+:math:`\Gamma(Q^2,Q_0^2)`, else if :math:`Q^2_0>Q^2` the code evaluates
+first the forward evolution :math:`\Gamma(Q_0^2,Q^2)` and then, to get
+:math:`\Gamma(Q^2,Q_0^2)`, it calculates :math:`\Gamma^{-1}(Q_0^2,Q^2)`.
+
+.. container::
+   :name: matching-conditions-on-the-evolution-kernels-0-thresholds-crossing
+
+   .. rubric:: Matching Conditions on the Evolution Kernels: 0
+      Thresholds Crossing
+      :name: matching-conditions-on-the-evolution-kernels-0-thresholds-crossing
+
+Before to discuss the crossing of the thresholds, it would be useful to
+write down the evolution kernels in the “trivial” situation of no
+threshold crossing. There are 4 particular cases: 1)
+:math:`Q_0^2<Q^2<m_c^2` with :math:`n_f=3` active flavours, 2)
+:math:`m_c^2<Q_0^2<Q^2<m_b^2` with :math:`n_f=4` active flavours, 3)
+:math:`m_b^2<Q_0^2<Q^2<m_t^2` with :math:`n_f=5` active flavours and 4)
+:math:`m_t^2<Q_0^2<Q^2` with :math:`n_f=6` active flavours, which do not
+need the introduction of the matching conditions. So, in the following
+Subsections we will write down the evolution of the whole PDF set the
+these cases.
+
+.. container::
+   :name: q_02q2m_c2
+
+   .. rubric:: :math:`Q_0^2<Q^2<m_c^2`
+      :name: q_02q2m_c2
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(3)}(Q^2) \choose g^{(3)}(Q^2)} =\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(3)}(Q^2)=\Gamma^{v}(Q^2,Q_0^2)V^{(3)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}` and :math:`\mathbf{V_8}`:
+
+   .. math:: V^{(3)}_{3,8}(Q^2)=\Gamma^{-}(Q^2,Q_0^2)V^{(3)}_{3,8}(Q^2_0)
+
+-  :math:`\mathbf{V_{15}}`, :math:`\mathbf{V_{24}}` and
+   :math:`\mathbf{V_{35}}`:
+
+   .. math:: V_{15,24,35}^{(3)}(Q^2)=\Gamma^{v}(Q^2,Q^2_0)V^{(3)}(Q_0^2)
+
+-  :math:`\mathbf{T_3}` and :math:`\mathbf{T_8}`:
+
+   .. math:: T^{(3)}_{3,8}(Q^2)=\Gamma^{+}(Q^2,Q_0^2)T^{(3)}_{3,8}(Q^2_0)
+
+-  :math:`\mathbf{T_{15}}`, :math:`\mathbf{T_{24}}` and
+   :math:`\mathbf{T_{35}}`:
+
+   .. math:: T_{15,24,35}^{(3)}(Q^2) = \underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+
+.. container::
+   :name: m_c2q_02q2m_b2
+
+   .. rubric:: :math:`m_c^2<Q_0^2<Q^2<m_b^2`
+      :name: m_c2q_02q2m_b2
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(4)}(Q^2) \choose g^{(4)}(Q^2)} =\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(4)}(Q^2)=\Gamma^{v}(Q^2,Q_0^2)V^{(4)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}`, :math:`\mathbf{V_8}` and
+   :math:`\mathbf{V_{15}}`:
+
+   .. math:: V^{(4)}_{3,8,15}(Q^2)=\Gamma^{-}(Q^2,Q_0^2)V^{(4)}_{3,8,15}(Q^2_0)
+
+-  :math:`\mathbf{V_{24}}` and :math:`\mathbf{V_{35}}`:
+
+   .. math:: V_{24,35}^{(4)}(Q^2)=\Gamma^{v}(Q^2,Q^2_0)V^{(4)}(Q_0^2)
+
+-  :math:`\mathbf{T_3}`, :math:`\mathbf{T_8}` and
+   :math:`\mathbf{T_{15}}`:
+
+   .. math:: T^{(4)}_{3,8,15}(Q^2)=\Gamma^{+}(Q^2,Q_0^2)T^{(4)}_{3,8,15}(Q^2_0)
+
+-  :math:`\mathbf{T_{24}}` and :math:`\mathbf{T_{35}}`:
+
+   .. math:: T_{24,35}^{(4)}(Q^2) = \underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+
+.. container::
+   :name: m_b2q_02q2m_t2
+
+   .. rubric:: :math:`m_b^2<Q_0^2<Q^2<m_t^2`
+      :name: m_b2q_02q2m_t2
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(5)}(Q^2) \choose g^{(5)}(Q^2)} =\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(5)}(Q_0^2) \choose g^{(5)}(Q_0^2)}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(5)}(Q^2)=\Gamma^{v}(Q^2,Q_0^2)V^{(5)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}`, :math:`\mathbf{V_8}`, :math:`\mathbf{V_{15}}`
+   and :math:`\mathbf{V_{24}}`:
+
+   .. math:: V^{(5)}_{3,8,15,24}(Q^2)=\Gamma^{-}(Q^2,Q_0^2)V^{(5)}_{3,8,15,24}(Q^2_0)
+
+-  :math:`\mathbf{V_{35}}`:
+
+   .. math:: V_{35}^{(5)}(Q^2)=\Gamma^{v}(Q^2,Q^2_0)V^{(5)}(Q_0^2)
+
+-  :math:`\mathbf{T_3}`, :math:`\mathbf{T_8}`, :math:`\mathbf{T_{15}}`
+   and :math:`\mathbf{T_{24}}`:
+
+   .. math:: T^{(5)}_{3,8,15,24}(Q^2)=\Gamma^{+}(Q^2,Q_0^2)T^{(5)}_{3,8,15,24}(Q^2_0)
+
+-  :math:`\mathbf{T_{35}}`:
+
+   .. math:: T_{35}^{(5)}(Q^2) = \underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(5)}(Q_0^2) \choose g^{(5)}(Q_0^2)}
+
+.. container::
+   :name: m_t2q_02q2
+
+   .. rubric:: :math:`m_t^2<Q_0^2<Q^2`
+      :name: m_t2q_02q2
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(6)}(Q^2) \choose g^{(6)}(Q^2)} =\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,Q_0^2)}{\Sigma^{(6)}(Q_0^2) \choose g^{(6)}(Q_0^2)}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(6)}(Q^2)=\Gamma^{v}(Q^2,Q_0^2)V^{(6)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}`, :math:`\mathbf{V_8}`, :math:`\mathbf{V_{15}}`,
+   :math:`\mathbf{V_{24}}` and :math:`\mathbf{V_{35}}`:
+
+   .. math:: V^{(6)}_{3,8,15,24,35}(Q^2)=\Gamma^{-}(Q^2,Q_0^2)V^{(6)}_{3,8,15,24,35}(Q^2_0)
+
+-  :math:`\mathbf{T_3}`, :math:`\mathbf{T_8}`, :math:`\mathbf{T_{15}}`,
+   :math:`\mathbf{T_{24}}` and :math:`\mathbf{T_{35}}`:
+
+   .. math:: T^{(6)}_{3,8,15,24,35}(Q^2)=\Gamma^{+}(Q^2,Q_0^2)T^{(6)}_{3,8,15,24,35}(Q^2_0)
+
+.. container::
+   :name: matching-conditions-on-the-evolution-kernels-1-threshold-crossing
+
+   .. rubric:: Matching Conditions on the Evolution Kernels: 1 Threshold
+      Crossing
+      :name: matching-conditions-on-the-evolution-kernels-1-threshold-crossing
+
+In order to implement the matching conditions in our code, we will show
+how to transfer them from the PDFs to the evolution kernels.
+
+In this Section we suppose that the evolution crosses only one
+threshold. We will show how the matching conditions on the PDFs modify
+the form of the evolution kernels in the cases: 1)
+:math:`Q_0^2<m_c^2\leq Q^2`, 2) :math:`Q_0^2<m_b^2\leq Q^2` and
+:math:`Q_0^2<m_c^2\leq Q^2`.
+
+.. container::
+   :name: q_02m_c2leq-q2
+
+   .. rubric:: :math:`Q_0^2<m_c^2\leq Q^2`
+      :name: q_02m_c2leq-q2
+
+In order to evolve PDFs from the scale :math:`Q_0^2` to :math:`Q^2`
+passing through the threshold :math:`m_c^2`, we have to: first evolve
+them from :math:`Q^2_0` to :math:`m_c^2`, where there are 3 active
+flavours, then increase the number of active flavour from 3 to 4 by
+imposing the matching conditions, and in the end evolve the PDFs, now
+having 4 active flavours, from :math:`m_c^2` to the scale :math:`Q^2`.
+
+In what follows we will work only in the Mellin space, so we will drop
+any dependence on :math:`N`.
+
+Let’s start with singlet and gluon. We have:
+
+.. math::
+   :label: couple4Qmc
+   {\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2){\Sigma^{(4)} \choose g^{(4)}}(m_c^2)\,.
+
+From eq. :eq:`couple`:
+
+.. math:: \displaystyle {\Sigma^{(4)} \choose g^{(4)}}(m_c^2)=\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(3)} \choose g^{(3)}}(m_c^2)
+
+now, substituting the above relation into the eq.
+:eq:`couple4Qmc`, we get:
+
+.. math::
+   :label: couple43Qmc
+   \begin{array}{l}
+   \displaystyle {\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2)\Bigg[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+\\
+   \\
+   \hspace{180pt}\displaystyle a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\Bigg]{\Sigma^{(3)} \choose g^{(3)}}(m_c^2)\,.
+   \end{array}
+
+But:
+
+.. math::
+   :label: couple3mcQ0
+   {\Sigma^{(3)} \choose g^{(3)}}(m_c^2) = \begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(m_c^2,Q_0^2){\Sigma^{(3)} \choose g^{(3)}}(Q_0^2)\,.
+
+So, in the end:
+
+.. math::
+   :label: couple43QQ0
+   \begin{array}{l}
+   \displaystyle {\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \Bigg\{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2)\Bigg[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+\\
+   \\
+   \hspace{70pt}\displaystyle a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\Bigg]\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(m_c^2,Q_0^2)\Bigg\}{\Sigma^{(3)} \choose g^{(3)}}(Q_0^2)
+   \end{array}\,.
+
+Now we consider the distributions :math:`V`, :math:`V_{3,8}` and
+:math:`T_{3,8}` which evolve respectively through :math:`\Gamma^v`,
+:math:`\Gamma^-` and :math:`\Gamma^+`, but which obey the same matching
+conditions. So:
+
+.. math:: P^{(4)}(Q^2)=\Gamma^{(P)}(Q^2,m_c^2)P^{(4)}(m_c^2)
+
+\ so that:
+
+.. math::
+   P=\left\{
+   \begin{array}{ll}
+   \displaystyle V &\rightarrow \Gamma^{(P)}=\Gamma^v\\
+   \displaystyle V_{3,8} &\rightarrow \Gamma^{(P)}=\Gamma^-\\
+   \displaystyle T_{3,8} &\rightarrow \Gamma^{(P)}=\Gamma^+
+   \end{array}\right.
+
+but:
+
+.. math:: P^{(4)}(m_c^2)=[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]P^{(3)}(m_c^2)
+
+and:
+
+.. math:: P^{(3)}(m_c^2)=\Gamma^{(P)}(m_c^2,Q_0^2)P^{(3)}(Q^2_0)
+
+so that:
+
+.. math:: P^{(4)}(Q^2)=\left\{\Gamma^{(P)}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{(P)}(m_c^2,Q_0^2)\right\}P^{(3)}(Q^2_0)
+
+Now we consider :math:`V_{15}`, which before :math:`m_c^2` evolves as:
+
+.. math:: V_{15}^{(3)}(m_c^2)=\Gamma^{v}(m_c^2,Q_0^2)V^{(3)}(Q_0^2)
+
+\ while after :math:`m_c^2` it evolves as:
+
+.. math:: V_{15}^{(4)}(Q^2)=\Gamma^{-}(Q_0^2,m_c^2)V^{(4)}_{15}(m_c^2)\,.
+
+From eq. :eq:`ciao`, we find that the matching condition at
+:math:`m_c^2` is:
+
+.. math:: V^{(4)}_{15}(m_c^2)=[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}] V^{(3)}_{15}(m_c^2)
+
+so:
+
+.. math:: V_{15}^{(4)}(Q^2)=\left\{\Gamma^{-}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\right\}V^{(3)}(Q_0^2)
+
+Instead, for :math:`Q_0^2<m_c^2\leq Q^2`, both :math:`V_{24}` and
+:math:`V_{35}` evolve as:
+
+.. math:: V_{24,35}^{(4)}(Q^2)=\left\{\Gamma^{v}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\right\}V^{(3)}(Q_0^2)
+
+Now, we consider :math:`T_{15}`. After :math:`m_c^2`, it evolves as:
+
+.. math:: T_{15}^{(4)}(Q^2)=\Gamma^{+}(Q^2,m_c^2)T^{(4)}_{15}(m_c^2)\,.
+
+\ This time the matching condition is given by the first line of eq.
+:eq:`pippo1`:
+
+.. math:: T_{15}^{(4)}(m_c^2)= \begin{pmatrix}  1+a_s^2(m_c^2)[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2(m_c^2)\tilde{A}^{S,(2)}_{cg} \end{pmatrix}{\Sigma^{(3)}(m_c^2) \choose g^{(3)}(m_c^2)}\,.
+
+But:
+
+.. math:: {\Sigma^{(3)}(m_c^2) \choose g^{(3)}(m_c^2) }=\begin{pmatrix} \Gamma_{qq}(m_c^2,Q_0^2) & \Gamma_{qg}(m_c^2,Q_0^2)\\ \Gamma_{gq}(m_c^2,Q_0^2) & \Gamma_{gg}(m_c^2,Q_0^2)\end{pmatrix}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+
+In the end, one finds that:
+
+.. math::
+   \begin{array}{rcl}
+   \displaystyle T_{15}^{(4)}(Q^2)&=&\Bigg\{\Gamma^{+}(Q^2,m_c^2)\begin{pmatrix} 1+a_s^2(m_c^2)[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2(m_c^2)\tilde{A}^{S,(2)}_{cg}\end{pmatrix}\times\\
+   \\
+   & &\displaystyle \begin{pmatrix}\Gamma_{qq}(m_c^2,Q_0^2) & \Gamma_{qg}(m_c^2,Q_0^2)\\ \Gamma_{gq}(m_c^2,Q_0^2) & \Gamma_{gg}(m_c^2,Q_0^2)\end{pmatrix}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+   \end{array}
+
+Now we are left only with :math:`T_{24}` and :math:`T_{35}`, which
+evolve as the single before and after the threshold, so they evolve
+exactly as the first line of eq. :eq:`couple43QQ0`,
+i.e:
+
+.. math::
+   \begin{array}{l}
+   \displaystyle T_{24,35}^{(4)}(Q^2)= \Bigg\{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \end{pmatrix}(Q^2,m_c^2)\Bigg[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+\\
+   \\
+   \hspace{70pt}\displaystyle a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\Bigg]\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(m_c^2,Q_0^2)\Bigg\}{\Sigma^{(3)} \choose g^{(3)}}(Q_0^2)
+   \end{array}\,.
+
+Now, let us summarise what happens to the evolution kernels, by
+introducing the matching conditions, if one crosses the :math:`m_c^2`
+threshold. We remind that the matching conditions appear only from the
+NNLO.
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(4)}(Q^2) \choose g^{(4)}(Q^2)} = \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,m_c^2)}\begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+
+   where:
+
+   .. math:: \begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}=\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(4)}(Q^2)=\left\{\Gamma^{v}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\right\}V^{(3)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}` and :math:`\mathbf{V_8}`:
+
+   .. math:: V^{(4)}_{3,8}(Q^2)=\left\{\Gamma^{-}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{-}(m_c^2,Q_0^2)\right\}V^{(3)}_{3,8}(Q^2_0)
+
+-  :math:`\mathbf{V_{15}}`:
+
+   .. math:: V_{15}^{(4)}(Q^2)=\left\{\Gamma^{-}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\right\}V^{(3)}(Q_0^2)
+
+-  :math:`\mathbf{V_{24}}` and :math:`\mathbf{V_{35}}`:
+
+   .. math:: V_{24,35}^{(4)}(Q^2)=\left\{\Gamma^{v}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\right\}V^{(3)}(Q_0^2)
+
+-  :math:`\mathbf{T_3}` and :math:`\mathbf{T_8}`:
+
+   .. math:: T^{(4)}_{3,8}(Q^2)=\left\{\Gamma^{+}(Q^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{+}(m_c^2,Q_0^2)\right\}T^{(3)}_{3,8}(Q^2_0)
+
+-  :math:`\mathbf{T_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle T_{15}^{(4)}(Q^2)&=&\Bigg\{\Gamma^{+}(Q^2,m_c^2)\begin{pmatrix} 1+a_s^2(m_c^2)[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2(m_c^2)\tilde{A}^{S,(2)}_{cg}\end{pmatrix}\times\\
+        \\
+         & & \displaystyle \underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{24}}` and :math:`\mathbf{T_{35}}`:
+
+   .. math:: T_{24,35}^{(4)}(Q^2) = \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg}\end{pmatrix}}_{(Q^2,m_c^2)}\begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+
+Now, it is very easy to rewrite the above summary for the crossing of
+the remaining thresholds :math:`m_b^2` (:math:`Q_0^2<m_b^2\leq Q^2`) and
+:math:`m_t^2` (:math:`Q_0^2<m_t^2\leq Q^2`).
+
+.. container::
+   :name: q_02m_b2leq-q2
+
+   .. rubric:: :math:`Q_0^2<m_b^2\leq Q^2`
+      :name: q_02m_b2leq-q2
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(5)}(Q^2) \choose g^{(5)}(Q^2)} = \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,m_b^2)}\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,Q_0^2)}\Bigg\}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+
+   where:
+
+   .. math:: \begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}=\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2(m_b^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{bq} & \tilde{A}^{S,(2)}_{bg} \\A^{S,(2)}_{gq,b} & A_{gg,b}^{S,(2)}\end{pmatrix}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(5)}(Q^2)=\left\{\Gamma^{v}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,Q_0^2)\right\}V^{(4)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}`, :math:`\mathbf{V_8}` and
+   :math:`\mathbf{V_{15}}`:
+
+   .. math:: V^{(5)}_{3,8,15}(Q^2)=\left\{\Gamma^{-}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{-}(m_b^2,Q_0^2)\right\}V^{(4)}_{3,8,15}(Q^2_0)
+
+-  :math:`\mathbf{V_{24}}`:
+
+   .. math:: V_{24}^{(5)}(Q^2)=\left\{\Gamma^{-}(Q_0^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,Q_0^2)\right\}V^{(4)}(Q_0^2)
+
+-  :math:`\mathbf{V_{35}}`:
+
+   .. math:: V_{35}^{(5)}(Q^2)=\left\{\Gamma^{v}(Q_0^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,Q_0^2)\right\}V^{(4)}(Q_0^2)
+
+-  :math:`\mathbf{T_3}`, :math:`\mathbf{T_8}` and
+   :math:`\mathbf{T_{15}}`:
+
+   .. math:: T^{(5)}_{3,8,15}(Q^2)=\left\{\Gamma^{+}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{+}(m_b^2,Q_0^2)\right\}T^{(4)}_{3,8,15}(Q^2_0)
+
+-  :math:`\mathbf{T_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle T_{24}^{(5)}(Q^2)&=&\Bigg\{\Gamma^{+}(Q^2,m_b^2)\begin{pmatrix} 1+a_s^2(m_b^2)[A_{qq,b}^{N\!S,(2)}-4\tilde{A}^{S,(2)}_{bq}] & -4a_s^2(m_b^2)\tilde{A}^{S,(2)}_{bg}\end{pmatrix}\times\\
+        \\
+         & & \displaystyle \underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_b^2,Q_0^2)}\Bigg\}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{35}}`:
+
+   .. math:: T_{35}^{(5)}(Q^2) = \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg}\end{pmatrix}}_{(Q^2,m_b^2)}\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,Q_0^2)}\Bigg\}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+
+.. container::
+   :name: q_02m_t2leq-q2
+
+   .. rubric:: :math:`Q_0^2<m_t^2\leq Q^2`
+      :name: q_02m_t2leq-q2
+
+-  **Singlet** and **gluon**:
+
+   .. math:: {\Sigma^{(6)}(Q^2) \choose g^{(6)}(Q^2)} = \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,m_t^2)}\begin{pmatrix} M_{11}^t & M_{12}^t \\ M_{21}^t & M_{22}^t\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_t^2,Q_0^2)}\Bigg\}{\Sigma^{(5)}(Q_0^2) \choose g^{(5)}(Q_0^2)}
+
+   where:
+
+   .. math:: \begin{pmatrix} M_{11}^t & M_{12}^t \\ M_{21}^t & M_{22}^t\end{pmatrix}=\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2(m_t^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{tq} & \tilde{A}^{S,(2)}_{tg} \\A^{S,(2)}_{gq,t} & A_{gg,t}^{S,(2)}\end{pmatrix}
+
+-  :math:`\mathbf{V}`:
+
+   .. math:: V^{(6)}(Q^2)=\left\{\Gamma^{v}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\Gamma^{v}(m_t^2,Q_0^2)\right\}V^{(5)}(Q^2_0)
+
+-  :math:`\mathbf{V_3}`, :math:`\mathbf{V_8}`, :math:`\mathbf{V_{15}}`
+   and :math:`\mathbf{V_{24}}`:
+
+   .. math:: V^{(6)}_{3,8,15,24}(Q^2)=\left\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\Gamma^{-}(m_t^2,Q_0^2)\right\}V^{(5)}_{3,8,15,24}(Q^2_0)
+
+-  :math:`\mathbf{V_{35}}`:
+
+   .. math:: V_{35}^{(6)}(Q^2)=\left\{\Gamma^{-}(Q_0^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\Gamma^{v}(m_t^2,Q_0^2)\right\}V^{(5)}(Q_0^2)
+
+-  :math:`\mathbf{T_3}`, :math:`\mathbf{T_8}`, :math:`\mathbf{T_{15}}`
+   and :math:`\mathbf{T_{24}}`:
+
+   .. math:: T^{(6)}_{3,8,15,24}(Q^2)=\left\{\Gamma^{+}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\Gamma^{+}(m_t^2,Q_0^2)\right\}T^{(5)}_{3,8,15,24}(Q^2_0)
+
+-  :math:`\mathbf{T_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle T_{35}^{(6)}(Q^2)&=&\Bigg\{\Gamma^{+}(Q^2,m_t^2)\begin{pmatrix} 1+a_s^2(m_t^2)[A_{qq,t}^{N\!S,(2)}-5\tilde{A}^{S,(2)}_{tq}] & -5a_s^2(m_t^2)\tilde{A}^{S,(2)}_{tg}\end{pmatrix}\times\\
+        \\
+         & & \displaystyle \underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_t^2,Q_0^2)}\Bigg\}{\Sigma^{(5)}(Q_0^2) \choose g^{(5)}(Q_0^2)}
+        \end{array}
+
+.. container::
+   :name: matching-conditions-on-the-evolution-kernels-2-thresholds-crossing
+
+   .. rubric:: Matching Conditions on the Evolution Kernels: 2
+      Thresholds Crossing
+      :name: matching-conditions-on-the-evolution-kernels-2-thresholds-crossing
+
+In this Section we will discuss the case in which the evolution crosses
+two thresholds. Therefore there are only two situations: 1)
+:math:`Q_0^2<m_c^2<m_b^2\leq Q^2` and 2)
+:math:`Q_0^2<m_b^2<m_t^2\leq Q^2`. Anyway, there is nothing new, indeed
+to obtain such evolution kernels we have just to “merge” together what
+we have already done in the previous Section.
+
+.. container::
+   :name: q_02m_c2m_b2leq-q2
+
+   .. rubric:: :math:`Q_0^2<m_c^2<m_b^2\leq Q^2`
+      :name: q_02m_c2m_b2leq-q2
+
+-  **Singlet** and **gluon**:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle {\Sigma^{(5)}(Q^2) \choose g^{(5)}(Q^2)} &=& \displaystyle \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,m_b^2)}\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,m_c^2)}\times\\
+        \\
+         & &\displaystyle\begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{V}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(5)}(Q^2)&=&\displaystyle \Big\{\Gamma^{v}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\times\\
+        \\
+         & &\displaystyle \Gamma^{v}(m_b^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_3}` and :math:`\mathbf{V_8}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(5)}_{3,8}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_b^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{-}(m_c^2,Q_0^2)\Big\}V^{(3)}_{3,8}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(5)}_{15}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_b^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(5)}_{24}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{v}(m_b^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(5)}_{35}(Q^2)&=&\displaystyle \Big\{\Gamma^{v}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{v}(m_b^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{T_3}` and :math:`\mathbf{T_8}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(5)}_{3,8}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{+}(m_b^2,m_c^2)[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{+}(m_c^2,Q_0^2)\Big\}T^{(3)}_{3,8}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{T_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(5)}_{15}(Q^2)&=&\displaystyle \Bigg\{\Gamma^{+}(Q^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{+}(m_b^2,m_c^2)\times\\
+        \\
+        & & \displaystyle \begin{pmatrix} 1+a_s^2(m_c^2)[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2(m_c^2)\tilde{A}^{S,(2)}_{cg}\end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle T_{24}^{(5)}(Q^2)&=&\Bigg\{\Gamma^{+}(Q^2,m_b^2)\begin{pmatrix} 1+a_s^2(m_b^2)[A_{qq,b}^{N\!S,(2)}-4\tilde{A}^{S,(2)}_{bq}] & -4a_s^2(m_b^2)\tilde{A}^{S,(2)}_{bg}\end{pmatrix}\times\\
+        \\
+         & & \displaystyle \underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_b^2,m_c^2)}\begin{pmatrix} M^c_{11} & M^c_{12} \\ M_{21}^c & M_{22}^c \end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T_{35}^{(5)}(Q^2) &=&\displaystyle \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg}\end{pmatrix}}_{(Q^2,m_b^2)}\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,m_c^2)}\times\\
+        \\
+        & & \displaystyle \begin{pmatrix} M^c_{11} & M^c_{12} \\ M_{21}^c & M_{22}^c \end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\} {\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+.. container::
+   :name: q_02m_b2m_t2leq-q2
+
+   .. rubric:: :math:`Q_0^2<m_b^2<m_t^2\leq Q^2`
+      :name: q_02m_b2m_t2leq-q2
+
+-  **Singlet** and **gluon**:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle {\Sigma^{(6)}(Q^2) \choose g^{(6)}(Q^2)} &=& \displaystyle \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,m_t^2)}\begin{pmatrix} M_{11}^t & M_{12}^t \\ M_{21}^t & M_{22}^t\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_t^2,m_b^2)}\times\\
+        \\
+         & &\displaystyle\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,Q_0^2)}\Bigg\}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{V}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}(Q^2)&=&\displaystyle \Big\{\Gamma^{v}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+         & &\displaystyle \Gamma^{v}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,Q_0^2)\Big\}V^{(4)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_3}`, :math:`\mathbf{V_8}` and
+   :math:`\mathbf{V_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{3,8,15}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{-}(m_b^2,Q_0^2)\Big\}V^{(4)}_{3,8,15}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{24}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,Q_0^2)\Big\}V^{(4)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{35}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{v}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,Q_0^2)\Big\}V^{(4)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{T_3}`, :math:`\mathbf{T_8}` and
+   :math:`\mathbf{T_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(6)}_{3,8,15}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{+}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{+}(m_b^2,Q_0^2)\Big\}T^{(4)}_{3,8,15}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{T_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(6)}_{24}(Q^2)&=&\displaystyle \Bigg\{\Gamma^{+}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\Gamma^{+}(m_t^2,m_b^2)\times\\
+        \\
+        & & \displaystyle \begin{pmatrix} 1+a_s^2(m_b^2)[A_{qq,b}^{N\!S,(2)}-4\tilde{A}^{S,(2)}_{bq}] & -4a_s^2(m_b^2)\tilde{A}^{S,(2)}_{bg}\end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_b^2,Q_0^2)}\Bigg\}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle T_{35}^{(6)}(Q^2)&=&\Bigg\{\Gamma^{+}(Q^2,m_t^2)\begin{pmatrix} 1+a_s^2(m_t^2)[A_{qq,t}^{N\!S,(2)}-5\tilde{A}^{S,(2)}_{tq}] & -5a_s^2(m_t^2)\tilde{A}^{S,(2)}_{tg}\end{pmatrix}\times\\
+        \\
+         & & \displaystyle \underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_t^2,m_b^2)}\begin{pmatrix} M^b_{11} & M^b_{12} \\ M_{21}^b & M_{22}^b \end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_b^2,Q_0^2)}\Bigg\}{\Sigma^{(4)}(Q_0^2) \choose g^{(4)}(Q_0^2)}
+        \end{array}
+
+.. container::
+   :name: matching-conditions-on-the-evolution-kernels-3-thresholds-crossing
+
+   .. rubric:: Matching Conditions on the Evolution Kernels: 3
+      Thresholds Crossing
+      :name: matching-conditions-on-the-evolution-kernels-3-thresholds-crossing
+
+In this Section we will discuss the case in which the evolution crosses
+three thresholds. Therefore there ais only one situation:
+:math:`Q_0^2<m_c^2<m_b^2,m_t^2\leq Q^2`
+
+.. container::
+   :name: q_02m_c2m_b2m_t2leq-q2
+
+   .. rubric:: :math:`Q_0^2<m_c^2<m_b^2<m_t^2\leq Q^2`
+      :name: q_02m_c2m_b2m_t2leq-q2
+
+-  **Singlet** and **gluon**:
+
+   .. math::
+      \begin{array}{rcl}
+        \displaystyle {\Sigma^{(6)}(Q^2) \choose g^{(6)}(Q^2)} &=& \displaystyle \Bigg\{\underbrace{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(Q^2,m_t^2)}\begin{pmatrix} M_{11}^t & M_{12}^t \\ M_{21}^t & M_{22}^t\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_t^2,m_b^2)}\times\\
+        \\
+         & &\displaystyle\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,m_c^2)}\begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}\\
+        \\
+        & &\displaystyle \underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{V}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}(Q^2)&=&\displaystyle \Big\{\Gamma^{v}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+         & &\displaystyle \Gamma^{v}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,m_c^2)\\
+        \\
+        & & \displaystyle[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_3}` and :math:`\mathbf{V_8}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{3,8}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{-}(m_b^2,m_c^2)\\
+        \\
+        & & \displaystyle [1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{-}(m_c^2,Q_0^2)\Big\}V^{(3)}_{3,8}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{15}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{-}(m_b^2,m_c^2)\\ 
+        \\
+        & & \displaystyle [1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{15}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{-}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,m_c^2)\\ 
+        \\
+        & & \displaystyle [1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{V_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        V^{(6)}_{15}(Q^2)&=&\displaystyle \Big\{\Gamma^{-}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{v}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{v}(m_b^2,m_c^2)\\ 
+        \\
+        & & \displaystyle [1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{v}(m_c^2,Q_0^2)\Big\}V^{(3)}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{T_3}` and :math:`\mathbf{T_8}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(6)}_{3,8}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{+}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{+}(m_b^2,m_c^2)\\
+        \\
+        & & \displaystyle [1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}]\Gamma^{+}(m_c^2,Q_0^2)\Big\}T^{(3)}_{3,8}(Q^2_0)
+        \end{array}
+
+-  :math:`\mathbf{T_{15}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(6)}_{15}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\times\\
+        \\
+        & & \displaystyle \Gamma^{+}(m_t^2,m_b^2)[1+a_s^2(m_b^2)A_{qq,b}^{N\!S,(2)}]\Gamma^{+}(m_b^2,m_c^2)\\
+        \\
+        & & \displaystyle \begin{pmatrix} 1+a_s^2(m_c^2)[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2(m_c^2)\tilde{A}^{S,(2)}_{cg}\end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{24}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(6)}_{24}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_t^2)[1+a_s^2(m_t^2)A_{qq,t}^{N\!S,(2)}]\Gamma^{+}(m_t^2,m_b^2)\times\\
+        \\
+        & & \displaystyle \begin{pmatrix} 1+a_s^2(m_b^2)[A_{qq,b}^{N\!S,(2)}-4\tilde{A}^{S,(2)}_{bq}] & -4a_s^2(m_b^2)\tilde{A}^{S,(2)}_{bg}\end{pmatrix}\underbrace{\begin{pmatrix}\Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq} & \Gamma_{gg}\end{pmatrix}}_{(m_b^2,m_c^2)}\times\\
+        \\
+         & &\displaystyle\begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+-  :math:`\mathbf{T_{35}}`:
+
+   .. math::
+      \begin{array}{rcl}
+        T^{(6)}_{35}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_t^2)\begin{pmatrix} 1+a_s^2(m_b^2)[A_{qq,t}^{N\!S,(2)}-5\tilde{A}^{S,(2)}_{tq}] & -5a_s^2(m_t^2)\tilde{A}^{S,(2)}_{tg}\end{pmatrix}\times\\
+        \\
+        & &\displaystyle\begin{pmatrix} M_{11}^b & M_{12}^b \\ M_{21}^b & M_{22}^b\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_b^2,m_c^2)}\\
+        \\
+        & &\displaystyle\begin{pmatrix} M_{11}^c & M_{12}^c \\ M_{21}^c & M_{22}^c\end{pmatrix}\underbrace{\begin{pmatrix} \Gamma_{qq}& \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}}_{(m_c^2,Q_0^2)}\Bigg\}{\Sigma^{(3)}(Q_0^2) \choose g^{(3)}(Q_0^2)}
+        \end{array}
+
+Matching conditions with intrinsic distributions
+================================================
+
+The (quite outdated) discussion presented above concerning the PDF
+matching conditions is restricted to forward evolution (*i.e.*
+:math:`Q>Q_0`) and under the assumption that possible intrinsic
+heavy-quark contributions are absent. [2]_ This corresponds to assuming
+that heavy-quark PDFs are entirely dynamically generated at the
+respective threshold and are identically vanishing below threshold.
+While this turns out to be a good approximation for PDFs, this is not
+the case for fragmentation functions (FFs). Indeed, intrinsic
+heavy-quark FFs are sizeable. In addition, assuming that there are no
+heavy-quark PDFs makes backward evolution problematic. The basic problem
+is that the matching-function matrix is non-squared which forbids its
+inversion thus complicating backward evolution.
+
+The purpose of this section is the relaxation of the no-intrinsic-PDF
+assumption. This will imply the introduction of new matching functions
+due to the presence of heavy-quark PDFs below threshold. Importantly,
+the perturbative expansion of these additional functions is different
+from zero at :math:`\mathcal{O}(\alpha_s)` even choosing
+:math:`\mu_h=m_h`, with :math:`\mu_h` the matching scale, producing a
+discontinuity already at NLO. However, in what follows we will assume
+that matching conditions are not computed beyond
+:math:`\mathcal{O}(\alpha_s^2)`, *i.e.* NNLO, and that intrinsic
+heavy-quark and heavy-antiquark contributions are equal below threshold.
+These assumptions lead to:
+
+.. math:: h^{(n_f)}(\mu_h) = \overline{h}^{(n_f)}(\mu_h)\quad\mbox{and}\quad h^{(n_f+1)}(\mu_h) = \overline{h}^{(n_f+1)}(\mu_h)\,,
+
+where we dropped the non-scale dependence. It immediately follows that
+the valence distributions :math:`\{V,V_3,V_8,V_{15},V_{24},V_{35}\}`
+match multiplicatively as: [3]_
+
+.. math::
+   :label: eq:nsingletmc
+   V_i^{(n_f+1)}(\mu_h) = [1+K_{ll}](\mu_h) V^{(n_f)}(\mu_h) = [1+K_{ll}(\mu_h)] V_i^{(n_f)}(\mu_h)\,,\quad i = 3,8,15,24,35\,,
+
+with :math:`K_{ll}` some given function that starts at
+:math:`\mathcal{O}(\alpha_s^2)`. This equivalently amounts to saying
+that no non-perturbative quark-antiquark asymmetry is originally present
+nor is generated by the matching procedure. [4]_
+
+This allows us to concentrate the discussion on the singlet sector. We
+start by generalising Eqs. :eq:`eq:lightqmc`,
+:eq:`gluon`, and :eq:`eq:heavyqmc` (changing
+and simplifying a bit the notation) as:
+
+.. math::
+   :label: eq:IntMatchingConds
+   \begin{array}{rcl}
+     \displaystyle g^{(n_f+1)}&=&\displaystyle
+                                  [1+K_{gg}]g^{(n_f)}+K_{gl}\sum_l
+                                  l^{+(n_f+1)} + K_{gh}h^{+(n_f)}\,,\\
+     \\
+     \displaystyle l^{+(n_f+1)}&=&\displaystyle [1+K_{ll}]l^{+(n_f)}\,,\\
+     \\
+     \displaystyle h^{+(n_f+1)}&=&\displaystyle K_{hg}g^{(n_f)} + K_{hl}\sum_l
+                                   l^{+(n_f+1)}+[1+K_{hh}]h^{+(n_f)}\,,\\
+     \\
+     H^{+(n_f+1)} &=& H^{+(n_f)}\,,
+   \end{array}
+
+\ where :math:`q^+=q+\overline{q}` and :math:`l` runs between :math:`1`
+and :math:`n_f`. We remind that :math:`h` is the :math:`(n_f+1)`-th
+heavier flavour, *i.e.* the one that becomes active at the threshold
+under consideration. We have also introduced the “super” heavy quark
+flavour :math:`H`, heavier than :math:`h`, that is not affected by the
+matching at the :math:`n_f`-th threshold. Note that there are two new
+functions coming into play, namely :math:`K_{gh}` and :math:`K_{hh}`,
+both multiplying the intrinsic heavy-quark contribution
+:math:`h^{+(n_f)}`. Moreover, we have written
+Eq. :eq:`eq:IntMatchingConds` in such a way
+that the coefficients :math:`K` start at least at
+:math:`\mathcal{O}(\alpha_s)`. In fact, we have already seen that
+:math:`K_{ll}=\mathcal{O}(\alpha_s^2)`; the same applies to
+:math:`K_{hl}` and :math:`K_{gl}`. Defining the column vector :math:`P`
+with components :math:`(g,d^+,u^+,s^+,c^+,b^+,t^+)`, we can represent
+the matching in a matricial form as:
+
+.. math:: P^{(n_f+1)} = \left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]P^{(n_f)}\,,
+
+where :math:`\mathbb{I}` is the :math:`7\times7` unity matrix and
+:math:`\mathbb{K}^{(n_f)}` are given, depending on the value of
+:math:`n_f`, by:
+
+.. math::
+   :label: eq:MathcingMatrices
+   \begin{array}{ll}
+   \mathbb{K}^{(0)} = 
+   \begin{pmatrix}
+   K_{gg} & K_{gh} & 0  & 0  & 0  & 0  & 0 \\
+   K_{hg} & K_{hh} & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0
+   \end{pmatrix}
+   &
+   \mathbb{K}^{(1)} = 
+   \begin{pmatrix}
+   K_{gg} & K_{gl} & K_{gh} & 0  & 0  & 0  & 0 \\
+   0 & K_{ll} & 0 & 0  & 0  & 0  & 0  \\
+   K_{hg} & K_{hl} & K_{hh}  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0
+   \end{pmatrix}
+   \\ \\
+   \mathbb{K}^{(2)} = 
+   \begin{pmatrix}
+   K_{gg} & K_{gl} & K_{gl} & K_{gh} & 0  & 0  & 0 \\
+   0 & K_{ll} & 0 & 0  & 0  & 0  & 0  \\
+   0 & 0 & K_{ll} & 0  & 0  & 0  & 0  \\
+   K_{hg} & K_{hl} & K_{hl} & K_{hh}  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0
+   \end{pmatrix}
+   &
+   \mathbb{K}^{(3)} = 
+   \begin{pmatrix}
+   K_{gg} & K_{gl} & K_{gl} & K_{gl} & K_{gh}  & 0  & 0 \\
+   0 & K_{ll} & 0 & 0  & 0  & 0  & 0  \\
+   0 & 0 & K_{ll} & 0  & 0  & 0  & 0  \\
+   0 & 0 & 0 & K_{ll} & 0  & 0  & 0  \\
+   K_{hg} & K_{hl} & K_{hl} & K_{hl} & K_{hh}  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0
+   \end{pmatrix}
+   \\ \\
+   \mathbb{K}^{(4)} = 
+   \begin{pmatrix}
+   K_{gg} & K_{gl} & K_{gl} & K_{gl} & K_{gl} & K_{gh} & 0  \\
+   0 & K_{ll} & 0 & 0  & 0  & 0  & 0  \\
+   0 & 0 & K_{ll} & 0  & 0  & 0  & 0  \\
+   0 & 0 & 0 & K_{ll} & 0  & 0  & 0  \\
+   0 & 0 & 0 & 0 & K_{ll}  & 0  & 0  \\
+   K_{hg} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hh}  & 0 \\
+   0 & 0 & 0  & 0  & 0  & 0  & 0
+   \end{pmatrix}
+   &
+   \mathbb{K}^{(5)} = 
+   \begin{pmatrix}
+   K_{gg} & K_{gl} & K_{gl} & K_{gl} & K_{gl} & K_{gl} & K_{gh} \\
+   0 & K_{ll} & 0 & 0 & 0  & 0  & 0  \\
+   0 & 0 & K_{ll} & 0 & 0  & 0  & 0  \\
+   0 & 0 & 0 & K_{ll} & 0  & 0  & 0  \\
+   0 & 0 & 0 & 0 & K_{ll} & 0  & 0  \\
+   0 & 0 & 0 & 0 & 0 & K_{ll} & 0  \\
+   K_{hg} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hh} \\
+   \end{pmatrix}
+   \end{array}
+
+The algorithm to determine the matrix :math:`\mathbb{K}^{(n_f)}`,
+indexing the gluon distribution with 0 and the quark distributions from
+1 to 6, reads:
+
+.. math::
+   :label: eq:algorithm
+   \mathbb{K}_{ij}^{(n_f)} =
+   \left\{
+   \begin{array}{ll}
+   K_{gg} & \quad i = j = 0\\
+   K_{gl} & \quad i = 0\,,\;1\leq j \leq n_f\\
+   K_{gh} & \quad i = 0\,,\;j = n_f+1\\
+   K_{ll} & \quad i = j\,,\;1\leq i,j \leq n_f\\
+   K_{hg} & \quad i = n_f+1\,,\;j = 0\\
+   K_{hl} & \quad i = n_f+1\,,\;1\leq j \leq n_f\\
+   K_{hh} & \quad i = j = n_f+1\\
+   0 & \quad\mbox{elsewhere}
+   \end{array}
+   \right.\,.
+
+Now, in order to apply the matching condition to the distributions in
+the evolution basis :math:`E=(g,\Sigma,-T_3,T_8,T_{15},T_{24},T_{35})`
+(notice the minus sign in front of :math:`T_3`), it is necessary to
+rotate the matching matrices from the physical basis to the evolution
+basis through :math:`T\mathbb{K}^{(n_f)}T^{-1}`, where :math:`T`
+transforms the vector :math:`P` into the evolution-basis vector
+:math:`E`:
+
+.. math::
+   :label: eq:RotationMatrix
+   T = 
+   \begin{pmatrix}
+   1 & 0 & 0  & 0  & 0  & 0  & 0 \\
+   0 & 1 & 1  & 1  & 1  & 1  & 1 \\
+   0 & 1 & -1  & 0  & 0  & 0  & 0 \\
+   0 & 1 & 1  & -2  & 0  & 0  & 0 \\
+   0 & 1 & 1  & 1  & -3  & 0  & 0 \\
+   0 & 1 & 1  & 1  & 1  & -4  & 0 \\
+   0 & 1 & 1  & 1  & 1  & 1  & -5
+   \end{pmatrix}\,.
+
+\ The resulting matching matrices are much more complicated and
+generally less sparse than those in
+Eq. :eq:`eq:MathcingMatrices`. However, we can
+still compute them algorithmically depending on the number of light
+flavours :math:`n_f`. To do so, we define the following linearly
+independent combinations:
+
+.. math::
+   \footnotesize
+   \begin{array}{lcl}
+   M_1 &=& K_{gg}\,,\\
+   M_2 &=& K_{gh} + n_f K_{gl}\,,\\
+   M_3 &=& K_{gh}-K_{gl}\,,\\
+   M_4 &=& K_{hg}\,,\\
+   M_5 &=& K_{hh}+n_f(K_{hl}+K_{ll}) \,,\\
+   M_6 &=& K_{hh}-(K_{hl}+K_{ll})\,,\\
+   M_7 &=& K_{ll}\,,
+   \end{array}
+
+such that:
+
+.. math::
+   :label: eq:algorithmEv
+   \footnotesize
+   \left[T\mathbb{K}^{(n_f)}T^{-1}\right]_{ij} =
+   \left\{
+   \begin{array}{lll}
+   M_1 & \quad i = 0 &\quad j = 0\\
+   \frac{1}{6}M_2 & \quad i = 0 &\quad  j = 1\\
+   0 & \quad i = 0 &\quad  2\leq j \leq n_f\\
+   -\frac{1}{n_f+1}M_3 & \quad i = 0 &\quad  j = n_f+1\\
+   \frac{1}{j(j-1)}M_2 & \quad i = 0 &\quad  n_f+ 2\leq j \leq 6\\
+   \\
+   M_4 & \quad i = 1&\quad  j=0\\
+   \frac16 M_5 & \quad i = 1 &\quad  j=1\\
+   0 & \quad i = 1 &\quad  2\leq j \leq n_f\\
+   -\frac{1}{n_f+1}M_6 & \quad i = 1 &\quad  j = n_f+1\\
+   \frac{1}{j(j-1)}M_5 & \quad i = 1 &\quad  n_f+
+                                                               2\leq j
+                                                               \leq 6\\
+   \\
+   \delta_{ij}M_7&\quad 2\leq i \leq n_f &\quad 0\leq j
+                                                            \leq 6\\
+   \\
+   -n_fM_4 &\quad i = n_f+1 &\quad j =0\\
+   \frac{n_f}6\left(-M_5+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =1\\
+   0 & \quad i = n_f+1 &\quad  2\leq j \leq n_f\\
+   \frac1{n_f+1}\left(n_f M_6+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =n_f+1\\
+   \frac{n_f}{j(j-1)}\left( -M_5+(n_f+1)M_7\right) &\quad i = n_f+1
+                     &\quad n_f+2 \leq j \leq 6\\
+   \\
+   M_4 & \quad n_f+2\leq i \leq 6 &\quad  j=0\\
+   \frac16 M_5 & \quad n_f+2\leq i \leq 6 &\quad  j=1\\
+   0 & \quad n_f+2\leq i \leq 6 &\quad  2\leq j \leq n_f\\
+   -\frac{1}{n_f+1}M_6 & \quad n_f+2\leq i \leq 6 &\quad  j = n_f+1\\
+   \frac{1}{j(j-1)}M_5 & \quad n_f+2\leq i \leq 6 &\quad  n_f+
+                                                               2\leq j
+                                                               \leq 6\\
+   \end{array}
+   \right.
+
+In order to be able to perform the backward evolution, it is necessary
+to invert the matching matrix :math:`\mathbb{I}+\mathbb{K}^{(n_f)}`.
+This is conveniently done perturbatively by expanding the matrix
+:math:`\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1}` in powers of
+:math:`\alpha_s` and truncating the expansion at the appropriate order.
+Given the assumption discussed above, we are not interested in going
+beyond :math:`\mathcal{O}(\alpha_s^2)`. In addition, we know that:
+
+.. math:: \mathbb{K}^{(n_f)} = a_s \mathbb{K}^{(1)(n_f)}+a_s^2 \mathbb{K}^{(2)(n_f)}+\mathcal{O}(\alpha_s^3)\,,
+
+so that:
+
+.. math::
+   :label: eq:inversion
+   \left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1} = 1 - a_s \mathbb{K}^{(1)(n_f)}-a_s^2\left[\mathbb{K}^{(2)(n_f)}-\left(\mathbb{K}^{(1)(n_f)}\right)^2\right]+\mathcal{O}(\alpha_s^3)\,.
+
+But the matrix :math:`\mathbb{K}^{(1)(n_f)}` is particularly simple
+because at :math:`\mathcal{O}(\alpha_s)` the matching functions
+:math:`K_{ll}`, :math:`K_{hl}`, and :math:`K_{gl}` vanish. Therefore,
+using Eq. :eq:`eq:algorithm` we find:
+
+.. math::
+   \mathbb{K}_{ij}^{(1)(n_f)} =\delta_{i,0}\left(\delta_{j,0}K_{gg}^{(1)} +
+   \delta_{j,n_f+1}K_{gh}^{(1)}\right)+ \delta_{i,n_f+1}\left(\delta_{j,0}K_{hg}^{(1)}
+   + \delta_{j,n_f+1}K_{hh}^{(1)}\right)\,,
+
+such that its square has the same structure and can be written as:
+
+.. math::
+   :label: eq:squareK1
+   \begin{array}{rcl}
+   \left(\mathbb{K}^{(1)(n_f)}\right) _{ij}^2 &=&\displaystyle \delta_{i,0}\left(\delta_{j,0}\sum_{k=g,h}K_{gk}^{(1)} K_{kg}^{(1)} +
+   \delta_{j,n_f+1}\sum_{k=g,h}K_{gk}^{(1)} K_{kh}^{(1)}\right)\\
+   \\
+     &+&\displaystyle  \delta_{i,n_f+1}\left(\delta_{j,0}\sum_{k=g,h}K_{hk}^{(1)} K_{kg}^{(1)}
+   + \delta_{j,n_f+1}\sum_{k=g,h}K_{hk}^{(1)} K_{kh}^{(1)}\right)\,,
+   \end{array}
+
+where, in :math:`x` space, the product of two :math:`K` functions is to
+be understood as a convolution. We report below the expression in
+:math:`x` space of the functions :math:`K_{gh}^{(1)}` and
+:math:`K_{gh}^{(1)}` for the matching of PDFs:
+
+.. math::
+   \begin{array}{rcl}
+   \displaystyle K_{gh}^{(1)}(x) &=&\displaystyle 
+   2C_F\frac{1+(1-x)^2}{x}\left(\ln\frac{\mu_h^2}{m_h^2}-1-2\ln x\right)\,,\\
+   \\
+   \displaystyle K_{hh}^{(1)}(x) &=&\displaystyle 
+   2C_F\left[\frac{1+x^2}{1-x}\left(\ln\frac{\mu_h^2}{m_h^2}-1-2\ln(1-x)\right)\right]_+\,.
+   \end{array}
+
+We notice that the :math:`\mathcal{O}(\alpha_s^2)` correction to these
+functions is currently unknown, therefore we only use the
+:math:`\mathcal{O}(\alpha_s)` expressions. For the sake of completeness,
+we also report here the remaining :math:`\mathcal{O}(\alpha_s)` matching
+functions:
+
+.. math::
+   \begin{array}{rcl}
+   \displaystyle K_{gg}^{(1)}(x) &=&\displaystyle -\frac{4}{3}T_R\delta(1-x)\ln\frac{\mu_h^2}{m_h^2}\,,\\
+   \\
+   \displaystyle K_{hg}^{(1)}(x) &=&\displaystyle 4T_R\left[x^2+(1-x)^2\right]\ln\frac{\mu_h^2}{m_h^2}\,,
+   \end{array}
+
+Of course, the matrix
+:math:`\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1}` in
+Eq. :eq:`eq:inversion` has to be rotated into the
+evolution basis by means of the transformation matrix :math:`T` in
+Eq. :eq:`eq:RotationMatrix`
+
+In order to implement the possibility to compute the evolution operator
+in the VFNS, we need to know how the evolution operator for a given
+number of active flavours :math:`n_f` matches at the following
+threshold. The first step is to generalise the structure of the DGLAP
+evolution equations in the QCD evolution basis allowing for the presence
+of (scale-independent) intrinsic contributions. It is important to
+realise that the DGLAP equations govern the evolution in :math:`\mu` of
+the collinear distributions but do not give us any information on the
+non-dynamic part of these distributions, *i.e.* its intrinsic
+contribution. The starting point is the DGLAP equation for the quark
+distribution :math:`q_k^+`\  [5]_ in its basic form:
+
+.. math::
+   \frac{dq_k^+}{d\ln\mu^2} =\frac{dq_k^+}{dt}= 2P_{qg}\otimes g+
+   (P_{qq}^V+P_{q\overline{q}}^V)\otimes
+   q_k^++(P_{qq}^S+P_{q\overline{q}}^S)\otimes \sum_{i=1}^{n_f} q_i^+\,.
+
+It is crucial to notice that the sum on the r.h.s. of the equation above
+runs over the :math:`n_f` active flavours only. Now, we sum the index
+:math:`k` up to :math:`n_f` and we get:
+
+.. math::
+   \frac{d}{dt}\sum_{k=1}^{n_f} q_k^+= 2n_f P_{qg}\otimes g+
+   P_{qq}\otimes \sum_{k=1}^{n_f} q_k^+\,,
+
+where we have defined:
+
+.. math:: P_{qq} = (P_{qq}^V+P_{q\overline{q}}^V)+n_f(P_{qq}^S+P_{q\overline{q}}^S).
+
+In the presence of intrinsic heavy-quark distributions and after some
+algebra, one finds that:
+
+.. math::
+   :label: eq:singletDGLAP
+   \frac{d\Sigma}{dt}= 2n_f P_{qg}\otimes g+n_fP_{qq}\otimes \left(\frac{\Sigma}{6}+\sum_{j=n_f+1}^6\frac{E_j}{j(j-1)}\right)\,,
+
+with :math:`E_j\in \{\Sigma,-T_3,T_8,T_{15},T_{24},T_{35}\}`. Therefore,
+the singlet distribution, on top of the gluon, couples also to the other
+quark distributions. Notice that:
+
+.. math:: \sum_{j=n_f+1}^6\frac{1}{j(j-1)} = \frac{1}{n_f}-\frac16\,,
+
+such that, for :math:`E_j = \Sigma`,
+Eq. :eq:`eq:singletDGLAP` reproduces the usual form
+of the DGLAP equation for the singlet. We now need to determine how the
+distributions :math:`E_j`, for :math:`j>1`, evolve. We find:
+
+.. math::
+   :label: eq:nonsingletDGLAP
+     \frac{dE_j}{dt}= (1-\theta_{n_fj})\left[2n_f P_{qg}\otimes
+       g+n_fP_{qq}\otimes
+       \left(\frac{\Sigma}{6}+\sum_{i=n_f+1}^6\frac{E_i}{i(i-1)}\right)\right]+\theta_{n_fj}P^+\otimes
+     E_j\,,
+
+with:
+
+.. math::
+   \theta_{n_fj}=\left\{
+   \begin{array}{ll}
+   1   & \quad n_f\geq j\\
+   0 & \quad n_f < j
+   \end{array}
+   \right.\,.
+
+Therefore, as expected, for a given :math:`n_f` (and thus a given
+energy) the distribution :math:`E_j` evolves multiplicatively through
+:math:`P^+` if :math:`j\leq n_f` and evolves exactly like the singlet if
+:math:`j>n_f`. As an example, for :math:`n_f=4`, that is to say for
+energies between the charm and the bottom thresholds, :math:`E_2=T_3`,
+:math:`E_3=T_8`, and :math:`E_4=T_{15}` evolve multiplicatively, while
+:math:`E_5=T_{24}` and :math:`E_6=T_{35}` evolve like the singlet.
+
+Finally, the gluon distribution evolves as:
+
+.. math::
+   \frac{dg}{dt}= P_{gg}\otimes g+
+   P_{gq}\otimes \sum_{i=1}^{n_f} q_i^+\,,
+
+\ that translates into:
+
+.. math::
+   :label: eq:gluonDGLAP
+   \frac{dg}{dt}= P_{gg}\otimes g+n_fP_{gq}\otimes \left(\frac{\Sigma}{6}+\sum_{j=n_f+1}^6\frac{E_j}{j(j-1)}\right)\,.
+
+Eqs. :eq:`eq:singletDGLAP`,
+:eq:`eq:nonsingletDGLAP`, and
+:eq:`eq:gluonDGLAP` fully define the splitting kernel
+matrix in the general case of possible presence of intrinsic heavy-quark
+contributions. Noticeably, these equations correctly reduce to the more
+familiar ones if these contributions are set to zero.
+
+Therefore, the evolution of the vector of distributions :math:`E` with
+:math:`n_f` active flavours and possible intrinsic heavy-quark
+contributions takes the matricial form:
+
+.. math::
+   :label: eq:DGLAPE
+   \frac{dE}{dt} = \mathbb{P}^{(n_f)}\otimes E\,,
+
+\ where the entries of the splitting-function matrix
+:math:`\mathbb{P}^{(n_f)}` can be defined algorithmically as:
+
+.. math::
+   :label: eq:splittingalg
+   \mathbb{P}_{ij}^{(n_f)}=
+   \left\{
+   \begin{array}{lll}
+   P_{gg} & \quad i = 0 &\quad j = 0\\
+   \frac{n_f}{6}P_{gq} & \quad i = 0 & \quad j=1\\
+   0 &\quad i = 0 & \quad 2 \leq j \leq n_f\\
+   \frac{6}{j(j-1)}\frac{n_f}{6}P_{gq} &\quad i = 0 & \quad n_f+1 \leq j \leq 6\\
+   \\
+   2n_fP_{qg} & \quad i = 1 &\quad j = 0\\
+   \frac{n_f}{6}P_{qq} & \quad i = 1 & \quad j=1\\
+   0 &\quad i = 1 & \quad 2 \leq j \leq n_f\\
+   \frac{6}{j(j-1)}\frac{n_f}{6}P_{qq} &\quad i = 1 & \quad n_f+1 \leq j \leq 6\\
+   \\
+   \delta_{ij}P^+ & \quad 2 \leq i \leq n_f & \quad 0 \leq j \leq 6\\
+   \\
+   2n_fP_{qg} & \quad n_f+1 \leq i \leq 6  &\quad j = 0\\
+   \frac{n_f}{6}P_{qq} & \quad n_f+1 \leq i \leq 6  & \quad j=1\\
+   0 &\quad n_f+1 \leq i \leq 6 & \quad 2 \leq j \leq n_f\\
+   \frac{6}{j(j-1)}\frac{n_f}{6}P_{qq} &\quad n_f+1 \leq i \leq 6 & \quad n_f+1 \leq j \leq 6\\
+   \end{array}
+   \right.\,.
+
+.. container::
+   :name: evolution-operator
+
+   .. rubric:: Evolution operator
+      :name: evolution-operator
+
+We assume that the set of distributions :math:`E` evolves through the
+operator :math:`{\vec\Gamma}` as:
+
+.. math:: E(t) = {\vec\Gamma}(t,t_0)\otimes E(t_0)\,.
+
+\ In order to achieve an efficient computation of the evolution
+operator, we need to identify the general structure of
+:math:`{\vec \Gamma}`. Given the possible presence of heavy-quark
+thresholds in the evolution interval :math:`[t_0,t]`, the operator
+:math:`{\vec\Gamma}` is in fact a product of operators. More
+specifically, it can be written as:
+
+.. math::
+   :label: eq:conbevop
+   {\vec\Gamma}(t,t_0)= {\vec\Gamma}^{(N)}(t,t_N) \otimes\prod_{n_f=N-1}^{0} \mathcal{M}^{(n_f)}\otimes{\vec\Gamma}^{(n_f)}(t_{n_f+1}-\epsilon,t_{n_f})
+
+with :math:`\mathcal{M}^{(n_f)} =
+T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}` given in
+Eq. :eq:`eq:algorithmEv` and
+:math:`t>t_N>\dots>t_1>t_0`, being :math:`t_1,\dots,t_N` the heavy-quark
+thresholds enclosed in the evolution interval. Using
+Eq. :eq:`eq:DGLAPE`, each evolution operator
+:math:`{\vec\Gamma}^{(n_f)}` obeys the evolution equation:
+
+.. math::
+   :label: eq:DGLAPG
+     \frac{d}{dt}{\vec\Gamma}^{(n_f)}(t,t_{n_f}) = \mathbb{P}^{(n_f)}(t)\otimes {\vec\Gamma}^{(n_f)}(t,t_{n_f})\,,
+
+with boundary condition
+:math:`{\vec\Gamma}^{(n_f)}(t_{n_f},t_{n_f})=\mathbb{I}`. The solution of
+the equation above can then be written as:
+
+.. math:: {\vec\Gamma}^{(n_f)}(t,t_{n_f}) = \mathcal{P}\exp\left[\int_{t_{n_f}}^tdt'\,\mathbb{P}^{(n_f)}(t')\right]\,,
+
+where :math:`\mathcal{P}` symbolises the path ordering. Given the
+structure of the splitting-function matrix in
+Eq. :eq:`eq:splittingalg`, one can infer the
+structure of :math:`{\vec \Gamma}^{(n_f)}`. It turns out that the
+structure of :math:`{\vec \Gamma^{(n_f)}}` is almost the same as that of
+:math:`\mathbb{P}^{(n_f)}`. Specifically:
+
+.. math::
+   :label: eq:evolopalg
+     {\vec\Gamma}^{(n_f)}_{ij}=\mathbb{I}_{ij}+
+     \left\{
+   \begin{array}{lll}
+   \Gamma_{gg} & \quad i = 0 &\quad j = 0\\
+   \Gamma_{gq} & \quad i = 0 & \quad j=1\\
+   0 &\quad i = 0 & \quad 2 \leq j \leq n_f\\
+   \frac{6}{j(j-1)}\Gamma_{gq} &\quad i = 0 & \quad n_f+1 \leq j \leq 6\\
+   \\
+   \Gamma_{qg} & \quad i = 1 & \quad j = 0\\
+   \Gamma_{qq} & \quad i = 1 & \quad j = 1\\
+   0 &\quad i = 1 & \quad 2 \leq j \leq n_f\\
+   \frac{6}{j(j-1)}\Gamma_{qq} &\quad i = 1 & \quad n_f+1 \leq j \leq 6\\
+   \\
+   \delta_{ij}\Gamma^+ & \quad 2 \leq i \leq n_f & \quad 0 \leq j \leq 6\\
+   \\
+   \Gamma_{qg} & \quad n_f+1 \leq i \leq 6  &\quad j = 0\\
+   \Gamma_{qq} & \quad n_f+1 \leq i \leq 6  & \quad j=1\\
+   0 &\quad n_f+1 \leq i \leq 6 & \quad 2 \leq j \leq n_f\\
+   \frac{6}{j(j-1)}\Gamma_{qq} &\quad n_f+1 \leq i \leq 6 & \quad n_f+1 \leq j \leq 6\\
+   \end{array}
+   \right.\,.
+
+The next step is the computation of the product
+:math:`\mathcal{M}^{(n_f)}{\vec\Gamma}^{(n_f)}=T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}{\vec\Gamma}^{(n_f)}`
+appearing in Eq. :eq:`eq:conbevop` that we conveniently
+split as:
+
+.. math::
+   :label: eq:nthfactor
+   \mathcal{M}^{(n_f)}{\vec\Gamma}^{(n_f)}={\vec \Gamma}^{(n_f)}+ T\mathbb{K}^{(n_f)}T^{-1}+\mathbb{S}^{(n_f)}\,,
+
+where we have defined :math:`\mathbb{S}^{(n_f)}=T\mathbb{K}^{(n_f)}
+T^{-1}\left[{\vec\Gamma}^{(n_f)}-\mathbb{I}\right]` that is given by:
+
+.. math::
+   :label: eq:Smatrix
+   \footnotesize
+   \mathbb{S}_{ij}^{(n_f)} =
+   \left\{
+   \begin{array}{lll}
+   M_1\Gamma_{gg}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qg} &
+                                                                         \quad i = 0 &\quad j = 0\\
+   M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq} & \quad i = 0 &\quad j =1\\
+   0 & \quad i = 0 &\quad  2\leq j \leq n_f\\
+   \frac1{j(j-1)}\left[M_1\Gamma_{gq}+\frac{1}{1+n_f}\left(M_2-M_3\right)\Gamma_{qq}\right] & \quad i = 0 &\quad  n_f+ 1\leq j \leq 6\\
+   \\
+   M_4\Gamma_{gg}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qg} & \quad i = 1&\quad  j=0\\
+   M_4\Gamma_{gq}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qq}& \quad i = 1 &\quad  j=1\\
+   0 & \quad i = 1 &\quad  2\leq j \leq n_f\\
+   \frac{1}{j(j-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right] & \quad i = 1 &\quad  n_f+1\leq j\leq 6\\
+   \\
+   \delta_{ij}M_7\Gamma^+&\quad 2\leq i \leq n_f &\quad 0\leq j
+                                                            \leq 6\\
+   \\
+   -n_f\left(M_4\Gamma_{gg}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qg}\right)+(n_f+1)M_7\Gamma_{qg}&\quad i = n_f+1 &\quad j =0\\
+   -n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}&\quad i = n_f+1 &\quad j =1\\
+   0 & \quad i = n_f+1 &\quad  2\leq j \leq n_f\\
+     \frac{6}{j(j-1)}\left[-n_f\left(M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq}\right)+(n_f+1)M_7\Gamma_{qq}\right]
+   &\quad i = n_f+1 &\quad n_f+1 \leq j \leq 6\\
+   \\
+     \frac{6}{j(j-1)}\left[M_4\Gamma_{gq}+\frac{1}{n_f+1}(M_5-M_6)\Gamma_{qq} \right]
+   & \quad n_f+2\leq i \leq 6 &\quad  n_f+
+                                                               2\leq j
+                                                               \leq 6\\
+   \end{array}
+   \right.
+
+Eq. :eq:`eq:nthfactor` along with
+Eq. :eq:`eq:Smatrix` allow us to infer the general
+structure on the :math:`n_f`-th factor in
+Eq. :eq:`eq:conbevop`. It should be clear that the
+structure is driven by the term :math:`T\mathbb{K}^{(n_f)}T^{-1}` in
+Eq. :eq:`eq:algorithmEv`.
+
+We finally comment on FFs. So far, to the best of my knowledge, none of
+the :math:`\mathcal{O}(\alpha_s^2)` corrections to the FF matching
+conditions has been computed. Therefore, we must limit to
+:math:`\mathbb{K}^{(1)(n_f)}` that is simply given by the transpose of
+that for PDFs.
+
+**References**
+
+**References**
+
+.. container:: references csl-bib-body hanging-indent
+   :name: refs
+
+   .. container:: csl-entry
+      :name: ref-Buza:1996wv
+
+      Buza, M., Y. Matiounine, J. Smith, and W. L. van Neerven. 1998.
+      “Charm electroproduction viewed in the variable flavor number
+      scheme versus fixed order perturbation theory.” *Eur. Phys. J. C*
+      1: 301–20. https://doi.org/10.1007/BF01245820.
+
+   .. container:: csl-entry
+      :name: ref-Vogt:2004ns
+
+      Vogt, A. 2005. “Efficient evolution of unpolarized and polarized
+      parton distributions with QCD-PEGASUS.” *Comput. Phys. Commun.*
+      170: 65–92. https://doi.org/10.1016/j.cpc.2005.03.103.
+
+.. [1]
+   Note that the light quarks run from :math:`1` to :math:`n_f`.
+
+.. [2]
+   In fact, the discussion also assumes that the PDF matching takes
+   place at the heavy quark-mass value. This is also a non-necessary
+   assumption that we will however not discuss here.
+
+.. [3]
+   Note that “1” in Eq. :eq:`eq:nsingletmc` is to be
+   understood as :math:`\delta(1-x)` in :math:`x` space.
+
+.. [4]
+   The assumption of absence of non-perturbative quark-antiquark
+   asymmetry is badly violated for light-valence distributions, such as
+   up and down in the proton. However, we will never realistically need
+   to match PDFs or FFs at the light-quark scales. On the other hand,
+   this assumption helps us keep the discussion general.
+
+.. [5]
+   We stick to the assumption that intrinsic contributions are symmetric
+   upon charge conjugation. This allow us to forget about the valence
+   sector that will always evolve multiplicatively.
