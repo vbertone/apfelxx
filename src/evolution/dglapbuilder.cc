@@ -41,13 +41,15 @@ namespace apfel
         nfi++;
 
     // Compute logs of muth2 / m2 needed for the the matching
-    // conditions.
+    // conditions. Push a zero at last to extend the vector but that
+    // entry will never effectively be used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
         LogKth.push_back(0);
       else
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+    LogKth.push_back(0);
 
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
@@ -100,10 +102,10 @@ namespace apfel
     const Operator AS1HHL {g, AS1HH_L{},  IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg  =          LogKth[nf-1] * AS1HgL;
-        const Operator AS1ggH =          LogKth[nf-1] * AS1ggHL;
-        const Operator AS1gH  = AS1gH0 + LogKth[nf-1] * AS1gHL;
-        const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nf] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf] * AS1HHL;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS1ggH});
@@ -162,7 +164,7 @@ namespace apfel
     const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const double lnk  = LogKth[nf-1];
+        const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
         const Operator APS2Hq  = APS2Hq0  + lnk * APS2HqL  + lnk2 * APS2HqL2;
         const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
@@ -188,10 +190,10 @@ namespace apfel
     std::map<int, std::map<int, Operator>> MatchNNLOb;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg   =          LogKth[nf-1] * AS1HgL;
-        const Operator AS1ggH  =          LogKth[nf-1] * AS1ggHL;
-        const Operator AS1gH   = AS1gH0 + LogKth[nf-1] * AS1gHL;
-        const Operator AS1HH   = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg   =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH  =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + LogKth[nf] * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + LogKth[nf] * AS1HHL;
         const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
         const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
         const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
@@ -323,13 +325,15 @@ namespace apfel
         nfi++;
 
     // Compute logs of muth2 / m2 needed for the the matching
-    // conditions.
+    // conditions. Push a zero at last to extend the vector but that
+    // entry will never effectively be used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
         LogKth.push_back(0);
       else
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+    LogKth.push_back(0);
 
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
@@ -382,10 +386,10 @@ namespace apfel
     const Operator AS1HHL {g, AS1HH_L{},  IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg  =          LogKth[nf-1] * AS1HgL;
-        const Operator AS1ggH =          LogKth[nf-1] * AS1ggHL;
-        const Operator AS1gH  = AS1gH0 + LogKth[nf-1] * AS1gHL;
-        const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nf] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf] * AS1HHL;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS1ggH});
@@ -444,7 +448,7 @@ namespace apfel
     const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const double lnk  = LogKth[nf-1];
+        const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
         const Operator APS2Hq  = APS2Hq0  + lnk * APS2HqL  + lnk2 * APS2HqL2;
         const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
@@ -470,10 +474,10 @@ namespace apfel
     std::map<int, std::map<int, Operator>> MatchNNLOb;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg   =          LogKth[nf-1] * AS1HgL;
-        const Operator AS1ggH  =          LogKth[nf-1] * AS1ggHL;
-        const Operator AS1gH   = AS1gH0 + LogKth[nf-1] * AS1gHL;
-        const Operator AS1HH   = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg   =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH  =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + LogKth[nf] * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + LogKth[nf] * AS1HHL;
         const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
         const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
         const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
@@ -580,13 +584,15 @@ namespace apfel
         nfi++;
 
     // Compute logs of muth2 / m2 needed for the the matching
-    // conditions.
+    // conditions. Push a zero at last to extend the vector but that
+    // entry will never effectively be used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
         LogKth.push_back(0);
       else
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+    LogKth.push_back(0);
 
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
@@ -639,10 +645,10 @@ namespace apfel
     const Operator AS1HHL {g, ATS1HH_L{},  IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator AS1Hg  = AS1Hg0 + LogKth[nf-1] * AS1HgL;
-        const Operator AS1ggH =          LogKth[nf-1] * AS1ggHL;
-        const Operator AS1gH  =          LogKth[nf-1] * AS1gHL;
-        const Operator AS1HH  = AS1HH0 + LogKth[nf-1] * AS1HHL;
+        const Operator AS1Hg  = AS1Hg0 + LogKth[nf] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH  =          LogKth[nf] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf] * AS1HHL;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::M0, Zero});
         OM.insert({MatchingBasisQCD::M1, AS1ggH});
@@ -775,13 +781,16 @@ namespace apfel
         nfi++;
 
     // Compute logs of muth2 / m2 needed for the the matching
-    // conditions (not possible for transversities yet).
+    // conditions (not possible for transversities yet). Push a zero
+    // at last to extend the vector but that entry will never
+    // effectively be used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
         LogKth.push_back(0);
       else
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+    LogKth.push_back(0);
 
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
@@ -903,13 +912,16 @@ namespace apfel
         nfi++;
 
     // Compute logs of muth2 / m2 needed for the the matching
-    // conditions (not possible for transversities yet).
+    // conditions (not possible for transversities yet). Push a zero
+    // at last to extend the vector but that entry will never
+    // effectively be used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
         LogKth.push_back(0);
       else
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+    LogKth.push_back(0);
 
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
