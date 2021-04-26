@@ -12,11 +12,18 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const& pTmin, double const& etamin, double const& etamax, double const& eps):
-    _pTmin(pTmin),
+  TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const& pTmin1, double const& pTmin2, double const& etamin, double const& etamax, double const& eps):
+    _pTmin1(pTmin1),
+    _pTmin2(pTmin2),
     _etamin(etamin),
     _etamax(etamax),
     _eps(eps)
+  {
+  }
+
+  //_________________________________________________________________________
+  TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const& pTmin, double const& etamin, double const& etamax, double const& eps):
+    TwoBodyPhaseSpace{pTmin, pTmin, etamin, etamax, eps}
   {
   }
 
@@ -31,7 +38,7 @@ namespace apfel
     const double Q2      = Q * Q;
     const double qT2     = qT * qT;
     const double qT4     = qT2 * qT2;
-    const double pTmin2  = _pTmin * _pTmin;
+    const double pTmin22 = _pTmin2 * _pTmin2;
     const double M2      = Q2 + qT2;
     const double M       = sqrt(M2);
     const double ctghmax = 1 / tanh(y - _etamax);
@@ -51,26 +58,22 @@ namespace apfel
       const double EmqT  = sqrt(EmqT2);
 
       // Auxiliary functions
-      const double f2    = ( 2 * _pTmin * Eq - Q2 ) / 2 / _pTmin / qT;
+      const double f2    = ( 2 * _pTmin1 * Eq - Q2 ) / 2 / _pTmin1 / qT;
       const double f3max = Eq / qT - Q2 * ( sinh(eta - y) * ctghmax + ch ) / 2 / qT / M;
       const double f3min = Eq / qT - Q2 * ( sinh(eta - y) * ctghmin + ch ) / 2 / qT / M;
-      const double f4    = ( Eq * ( Q2 - 2 * pTmin2 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin2 ) ) / 2 / qT / ( M2 - pTmin2 );
+      const double f4    = ( Eq * ( Q2 - 2 * pTmin22 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin22 ) ) / 2 / qT / ( M2 - pTmin22 );
 
       // Integration limits in cos(phi)
       const double x1 = std::max(f2, -1.);
       const double x2 = std::min(std::min(f4, std::min(f3max, f3min)), 1.);
-
-      // Return zero if x2 < x1
-      if (x2 <= x1)
-        return 0;
 
       // Primitive function of the intregration in cos(phi) (up to a
       // factor that can be compute externally) when contractin the
       // leptonic tensor with g^{\mu\nu}_\perp.
       const auto Fbar = [&] (double const& x) -> double
       {
-        const double x2 = x * x;
-        const double xp = sqrt( 1 - x2 );
+        const double xs = x * x;
+        const double xp = sqrt( 1 - xs );
         const double atanfact = Eq * ( atan( ( qT - x * Eq ) / EmqT / xp ) - atan( ( qT + x * Eq ) / EmqT / xp ) ) / EmqT;
         const double Fi = qT2 * x * xp / ( x2 * qT2 - Eq2 ) - atanfact;
         const double Gi = Q2 * sh2
@@ -80,7 +83,12 @@ namespace apfel
 
         return 3 * Fi + Gi;
       };
-      return ( Fbar(x2) - Fbar(x1) ) / EmqT2;
+
+      // Construct integrand
+      if (x2 > x1)
+        return ( Fbar(x2) - Fbar(x1) ) / EmqT2;
+      else
+	return 0;
     };
 
     // Return integral (symmetrise with respect to the center of the
@@ -108,7 +116,7 @@ namespace apfel
     // Useful definitions
     const double Q2      = Q * Q;
     const double qT2     = qT * qT;
-    const double pTmin2  = _pTmin * _pTmin;
+    const double pTmin22 = _pTmin2 * _pTmin2;
     const double M2      = Q2 + qT2;
     const double M       = sqrt(M2);
     const double ctghmax = 1 / tanh(y - _etamax);
@@ -126,26 +134,22 @@ namespace apfel
       const double EmqT  = sqrt(EmqT2);
 
       // Auxiliary functions
-      const double f2    = ( 2 * _pTmin * Eq - Q2 ) / 2 / _pTmin / qT;
+      const double f2    = ( 2 * _pTmin1 * Eq - Q2 ) / 2 / _pTmin1 / qT;
       const double f3max = Eq / qT - Q2 * ( sinh(eta - y) * ctghmax + ch ) / 2 / qT / M;
       const double f3min = Eq / qT - Q2 * ( sinh(eta - y) * ctghmin + ch ) / 2 / qT / M;
-      const double f4    = ( Eq * ( Q2 - 2 * pTmin2 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin2 ) ) / 2 / qT / ( M2 - pTmin2 );
+      const double f4    = ( Eq * ( Q2 - 2 * pTmin22 + 2 * qT2 ) - Q2 * sqrt( Eq2 - M2 + pTmin22 ) ) / 2 / qT / ( M2 - pTmin22 );
 
       // Integration limits in cos(phi)
       const double x1 = std::max(f2, -1.);
       const double x2 = std::min(std::min(f4, std::min(f3max, f3min)), 1.);
-
-      // Return zero if x2 < x1
-      if (x2 <= x1)
-        return 0;
 
       // Primitive function of the intregration in cos(phi) (up to a
       // factor that can be compute externally) when contractin the
       // leptonic tensor with g^{\mu\nu}_\perp.
       const auto Hbar = [&] (double const& x) -> double
       {
-        const double x2 = x * x;
-        const double xp = sqrt( 1 - x2 );
+        const double xs = x * x;
+        const double xp = sqrt( 1 - xs );
         const double Hi = sh
         * ( qT2 * xp * ( ( 3 * Eq * qT * x - ( 4 * Eq2 - qT2 ) ) / pow(x * qT - Eq, 2) +
                          ( 3 * Eq * qT * x + ( 4 * Eq2 - qT2 ) ) / pow(x * qT + Eq, 2) )
@@ -153,7 +157,12 @@ namespace apfel
             * ( atan( ( qT - x * Eq ) / EmqT / xp ) - atan( ( qT + x * Eq ) / EmqT / xp ) ) / EmqT ) / EmqT2 / EmqT2;
         return Hi;
       };
-      return ( Hbar(x2) - Hbar(x1) ) / EmqT2;
+
+      // Construct integrand
+      if (x2 > x1)
+        return ( Hbar(x2) - Hbar(x1) ) / EmqT2;
+      else
+	return 0;
     };
 
     // Return integral (symmetrise with respect to the center of the

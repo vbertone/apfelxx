@@ -20,7 +20,17 @@ namespace apfel
   {
   public:
     /**
-     * @brief The "TwoBodyPhaseSpace" constructor.
+     * @brief The "TwoBodyPhaseSpace" constructor for asymmetric cuts.
+     * @param pTmin1: the minimum cut in the p<SUB>T</SUB> of the first single lepton
+     * @param pTmin2: the minimum cut in the p<SUB>T</SUB> of the second single lepton
+     * @param etamin: the minimum cut in the &eta; of the single lepton
+     * @param etamax: the maximum cut in the &eta; of the single lepton
+     * @param eps: the integration accuracy
+     */
+    TwoBodyPhaseSpace(double const& pTmin1, double const& pTmin2, double const& etamin, double const& etamax, double const& eps);
+
+    /**
+     * @brief The "TwoBodyPhaseSpace" constructor for symmetric cuts.
      * @param pTmin: the minimum cut in the p<SUB>T</SUB> of the single lepton
      * @param etamin: the minimum cut in the &eta; of the single lepton
      * @param etamax: the maximum cut in the &eta; of the single lepton
@@ -69,7 +79,8 @@ namespace apfel
      * Cut Variables that define the cuts on the single leptons
      */
     ///@{
-    double const _pTmin;
+    double const _pTmin1;
+    double const _pTmin2;
     double const _etamin;
     double const _etamax;
     double const _eps;

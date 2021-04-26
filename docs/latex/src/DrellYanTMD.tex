@@ -1069,7 +1069,7 @@ with:
 \begin{equation}
   \Theta(p) = \vartheta(\eta - \eta_{\rm min})\vartheta(\eta_{\rm max}-\eta) \vartheta(|\mathbf{p}_{T}| - p_{T,\rm min}) \,. 
 \end{equation}
-Regerring to Eq.~(\ref{eq:PSredDef4}), and considering that:
+Referring to Eq.~(\ref{eq:PSredDef4}) and considering that:
 \begin{equation}
 q-p=\left(M\cosh y-|\mathbf{p}_T|\cosh\eta,\mathbf{q}_T-\mathbf{p}_T,M\sinh y-|\mathbf{p}_T|\sinh\eta\right)\,.
 \end{equation}
@@ -1139,10 +1139,10 @@ f^{(3)}(\eta,\eta_{\rm cut}) & = &\displaystyle \frac{M \cosh(\eta-y)}{|\mathbf{
                                    -y)\coth(y-\eta_{\rm cut})+\cosh(\eta-y)\right)}{2|\mathbf{q}_T|  M}\,,\\
 \\
 f^{(4)}(\eta, p_{T,\rm cut}) & = &\displaystyle \frac{M \cosh(\eta-y)(Q^2 - 2
-                    p_{T,\rm cut}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh ^{2} (\eta-y) + p_{T,\rm min}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm min}^{2}\right)}\,.
+                    p_{T,\rm cut}^{2} + 2 |\mathbf{q}_T|^2)- Q^{2} \sqrt{M^{2} \sinh ^{2} (\eta-y) + p_{T,\rm cut}^{2} }}{2 |\mathbf{q}_T| \left(M^{2} - p_{T,\rm cut}^{2}\right)}\,.
 \end{array}
 \end{equation}
-Considering that $1\leq\cos\phi\leq 1$, the integration domain is
+Considering that $-1\leq\cos\phi\leq 1$, the integration domain is
 limited to this region. Therefore, Eq.~(\ref{eq:almostfinal}) can be
 written in an even more convenient way as:
 \begin{equation}\label{eq:final}
@@ -1677,6 +1677,97 @@ L_\phi=16 \frac{p_T^2}{Q}\sinh(y-\eta)\left[\frac{Q^2}{2 p_T
 Due to the presence of the overall factor $\sinh(y-\eta)$, also this
 contribution is expected to be subdominant.
 
+\subsection{Asymmetric cuts}
+
+In some circumstances, asymmetric cuts are necessary to match the
+experimental measurements. More specifically, the two outgoing leptons
+ondergo different cuts depending on their hierarchy. Usually, one
+defines the (sub)leading lepton as the lepton with the (smallest)
+largest $p_T$ and the according to whether the lepton is leading or
+subleading a different cut on the $p_T$ is enforced. In this case, the
+cut function $\Phi$ needs to be generalised as follows:
+\begin{equation}
+\Phi(p_1,p_2) = \vartheta(p_{T,1}-p_{T,2})\Theta^{(1)}(p_1)
+\Theta^{(2)}(p_2)+\vartheta(p_{T,2}-p_{T,1})\Theta^{(1)}(p_2)
+\Theta^{(2)}(p_1)\,,
+\end{equation}
+where the functions $\Theta^{(1)}$ and $\Theta^{(2)}$ are defined as:
+\begin{equation}
+\Theta^{(i)}(p) = \vartheta(\eta - \eta_{\rm min})\vartheta(\eta_{\rm
+  max}-\eta) \vartheta(p_{T}- p_{T,\rm min}^{(i)})\,,\quad
+i = 1,2\,,
+\end{equation}
+with $p_{T,\rm min}^{(1)}\neq p_{T,\rm min}^{(2)}$ in general. As seen
+above, the lepton four-momenta $p_1$ and $p_2$ are subject to
+kinematic constraint such that one effectively has $p_1=p$ and
+$p_2=q-p$ with $p_{T,1}=\overline{p}_T$, with $\overline{p}_T$ defined
+in Eq.~(\ref{eq:overpT}), and:
+\begin{equation}
+p_{T,2} = \sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi}\,.
+\end{equation}
+Therefore, the functions $\vartheta(p_{T,1}-p_{T,2})$ and
+$\vartheta(p_{T,2}-p_{T,1})$ can be reduced to the following
+$\vartheta$-functions on the azimuthal angle $\phi$:
+\begin{equation}
+\vartheta(p_{T,1}-p_{T,2}) =
+  \vartheta\left(\frac{q_T\cosh(\eta-y)}{M}-\cos\phi\right)\,,\quad \vartheta(p_{T,2}-p_{T,1}) =
+  \vartheta\left(\cos\phi-\frac{q_T\cosh(\eta-y)}{M}\right)\,.
+\end{equation}
+Generalising the procedure detailed above for the implementation of
+the cuts, one introduces the function:
+\begin{equation}
+f^{(1)}(\eta) = \frac{q_T\cosh(\eta-y)}{M}\,,
+\end{equation}
+such that:
+\begin{equation}
+\Phi(p,q-p)= \vartheta(\eta-\eta_{\rm min})\vartheta(\eta_{\rm
+  max}-\eta) \left[\vartheta(x -x_1^{(1)})\vartheta(x_2^{(1)}-x)+\vartheta(x -x_1^{(2)})\vartheta(x_2^{(2)}-x)\right]\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+\begin{array}{rcl}
+x_1^{(1)}(\eta) &=& \displaystyle \mbox{max}[f^{(2)}(\eta,p_{T,\rm min}^{(1)}),-1]\,,\\
+\\
+x_2^{(1)}(\eta) &=& \displaystyle \mbox{min}[f^{(1)}(\eta),f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
+         max}), f^{(4)}(\eta,p_{T,\rm
+         min}^{(2)}),1]\,,\\
+\\
+x_1^{(2)}(\eta) &=& \displaystyle \mbox{max}[f^{(1)}(\eta),f^{(2)}(\eta,p_{T,\rm min}^{(2)}),-1]\,,\\
+\\
+x_2^{(2)}(\eta) &=& \displaystyle \mbox{min}[f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
+         max}), f^{(4)}(\eta,p_{T,\rm
+         min}^{(1)}),1]\,.
+\end{array}
+\end{equation}
+This gives:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle
+  \int_{-\infty}^{\infty}d\eta\int_{-1}^{1}dx\,\Phi(p,q-p)\dots &=& \displaystyle
+\int_{\eta_{\rm min}}^{\eta_{\rm
+    max}}d\eta\Bigg[\vartheta(x_2^{(1)}(\eta)-x_1^{(1)}(\eta))\int_{x_1^{(1)}(\eta)}^{x_2^{(1)}(\eta)}dx\dots\\
+\\
+&+&\displaystyle
+  \vartheta(x_2^{(2)}(\eta)-x_1^{(2)}(\eta))\int_{x_1^{(2)}(\eta)}^{x_2^{(2)}(\eta)}dx\dots
+\Bigg]\,.
+\end{array}
+\end{equation}
+Finally, one can exploit the ability to compute the primitive function
+of the integral in $x$ to write the expression for the phase-space
+reduction factor for asymmetric cuts as follows:
+\begin{equation}\label{eq:finalformulaasy}
+\begin{array}{rcl}
+  \mathcal{P}(Q,y,q_T)&=&\displaystyle \int_{\eta_{\rm
+      min}}^{\eta_{\rm
+      max}}d\eta\bigg\{\vartheta(x_2^{(1)}(\eta)-x_1^{(1)}(\eta))\left[\overline{F}(x_2^{(1)}(\eta),\eta)-\overline{F}(x_1^{(1)}(\eta),\eta)\right]\\
+\\
+&+&\displaystyle\vartheta(x_2^{(2)}(\eta)-x_1^{(2)}(\eta))\left[\overline{F}(x_2^{(2)}(\eta),\eta)-\overline{F}(x_1^{(2)}(\eta),\eta)\right] \bigg\}\,,
+\end{array}
+\end{equation}
+with $\overline{F}$ defined in Eq.~(\ref{eq:FGcombination}). The same
+expression with $\overline{F}$ replaced by the function $H$ given in
+Eq.~(\ref{eq:Hfinal}) can be used for the parity-violating factor.
+
 \section{Differential cross section in the leptonic variables}
 
 The calculation of the phase-space reduction factor carried out in the
@@ -1829,7 +1920,7 @@ at small $q_T$ is:
 \end{equation}
 with the element of phase space $d\mathcal{P}$ is given in
 Eq.~(\ref{eq:difflepphasespace}). Therefore, the ``QCD dynamics''
-totally cancels in the ration and one is left with a relatively
+totally cancels in the ratio and one is left with a relatively
 interesting kinematic factor.
 
 \section{Implementing the $\phi*$ distribution}
