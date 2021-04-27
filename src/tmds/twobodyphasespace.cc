@@ -75,10 +75,10 @@ namespace apfel
         const double xs = x * x;
         const double xp = sqrt( 1 - xs );
         const double atanfact = Eq * ( atan( ( qT - x * Eq ) / EmqT / xp ) - atan( ( qT + x * Eq ) / EmqT / xp ) ) / EmqT;
-        const double Fi = qT2 * x * xp / ( x2 * qT2 - Eq2 ) - atanfact;
+        const double Fi = qT2 * x * xp / ( xs * qT2 - Eq2 ) - atanfact;
         const double Gi = Q2 * sh2
-        * ( qT2 * xp * ( ( ( 11 * Eq2 * qT2 + 4 * qT4 ) * x2 + 3 * Eq * qT * ( 9 * Eq2 + qT2 ) * x + 18 * Eq4 - 5 * Eq2 * qT2 + 2 * qT4 ) / pow(x * qT + Eq, 3) +
-                         ( ( 11 * Eq2 * qT2 + 4 * qT4 ) * x2 - 3 * Eq * qT * ( 9 * Eq2 + qT2 ) * x + 18 * Eq4 - 5 * Eq2 * qT2 + 2 * qT4 ) / pow(x * qT - Eq, 3) )
+        * ( qT2 * xp * ( ( ( 11 * Eq2 * qT2 + 4 * qT4 ) * xs + 3 * Eq * qT * ( 9 * Eq2 + qT2 ) * x + 18 * Eq4 - 5 * Eq2 * qT2 + 2 * qT4 ) / pow(x * qT + Eq, 3) +
+                         ( ( 11 * Eq2 * qT2 + 4 * qT4 ) * xs - 3 * Eq * qT * ( 9 * Eq2 + qT2 ) * x + 18 * Eq4 - 5 * Eq2 * qT2 + 2 * qT4 ) / pow(x * qT - Eq, 3) )
             - 6 * ( 2 * Eq2 + 3 * qT2 ) * atanfact ) / EmqT4 / 4;
 
         return 3 * Fi + Gi;

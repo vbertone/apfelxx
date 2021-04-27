@@ -1681,14 +1681,14 @@ contribution is expected to be subdominant.
 
 In some circumstances, asymmetric cuts are necessary to match the
 experimental measurements. More specifically, the two outgoing leptons
-ondergo different cuts depending on their hierarchy. Usually, one
+undergo different cuts depending on their hierarchy. Usually, one
 defines the (sub)leading lepton as the lepton with the (smallest)
-largest $p_T$ and the according to whether the lepton is leading or
+largest $p_T$ and according to whether the lepton is leading or
 subleading a different cut on the $p_T$ is enforced. In this case, the
 cut function $\Phi$ needs to be generalised as follows:
 \begin{equation}
-\Phi(p_1,p_2) = \vartheta(p_{T,1}-p_{T,2})\Theta^{(1)}(p_1)
-\Theta^{(2)}(p_2)+\vartheta(p_{T,2}-p_{T,1})\Theta^{(1)}(p_2)
+\Phi(p_1,p_2) = \vartheta(p_{T,1}^2-p_{T,2}^2)\Theta^{(1)}(p_1)
+\Theta^{(2)}(p_2)+\vartheta(p_{T,2}^2-p_{T,1}^2)\Theta^{(1)}(p_2)
 \Theta^{(2)}(p_1)\,,
 \end{equation}
 where the functions $\Theta^{(1)}$ and $\Theta^{(2)}$ are defined as:
@@ -1699,22 +1699,22 @@ i = 1,2\,,
 \end{equation}
 with $p_{T,\rm min}^{(1)}\neq p_{T,\rm min}^{(2)}$ in general. As seen
 above, the lepton four-momenta $p_1$ and $p_2$ are subject to
-kinematic constraint such that one effectively has $p_1=p$ and
+kinematic constraints such that one effectively has $p_1=p$ and
 $p_2=q-p$ with $p_{T,1}=\overline{p}_T$, with $\overline{p}_T$ defined
 in Eq.~(\ref{eq:overpT}), and:
 \begin{equation}
-p_{T,2} = \sqrt{|\mathbf{q}_T|^2+\overline{p}_T^2-2 |\mathbf{q}_T|\overline{p}_T\cos\phi}\,.
+p_{T,2}^2 = q_T^2+\overline{p}_T^2-2 q_T\overline{p}_T\cos\phi\,.
 \end{equation}
-Therefore, the functions $\vartheta(p_{T,1}-p_{T,2})$ and
-$\vartheta(p_{T,2}-p_{T,1})$ can be reduced to the following
+Therefore, the functions $\vartheta(p_{T,1}^2-p_{T,2}^2)$ and
+$\vartheta(p_{T,2}^2-p_{T,1}^2)$ can be reduced to the following
 $\vartheta$-functions on the azimuthal angle $\phi$:
 \begin{equation}
-\vartheta(p_{T,1}-p_{T,2}) =
-  \vartheta\left(\frac{q_T\cosh(\eta-y)}{M}-\cos\phi\right)\,,\quad \vartheta(p_{T,2}-p_{T,1}) =
-  \vartheta\left(\cos\phi-\frac{q_T\cosh(\eta-y)}{M}\right)\,.
+\vartheta(p_{T,1}^2-p_{T,2}^2) =
+  \vartheta\left(\cos\phi-\frac{q_T\cosh(\eta-y)}{M}\right)
+  \,,\quad \vartheta(p_{T,2}^2-p_{T,1}^2) =\vartheta\left(\frac{q_T\cosh(\eta-y)}{M}-\cos\phi\right)\,.
 \end{equation}
 Generalising the procedure detailed above for the implementation of
-the cuts, one introduces the function:
+the cuts, one introduces the additional function:
 \begin{equation}
 f^{(1)}(\eta) = \frac{q_T\cosh(\eta-y)}{M}\,,
 \end{equation}
@@ -1726,15 +1726,15 @@ such that:
 where we have defined:
 \begin{equation}
 \begin{array}{rcl}
-x_1^{(1)}(\eta) &=& \displaystyle \mbox{max}[f^{(2)}(\eta,p_{T,\rm min}^{(1)}),-1]\,,\\
+x_1^{(1)}(\eta) &=& \displaystyle \mbox{max}[f^{(1)}(\eta),f^{(2)}(\eta,p_{T,\rm min}^{(1)}),-1]\,,\\
 \\
-x_2^{(1)}(\eta) &=& \displaystyle \mbox{min}[f^{(1)}(\eta),f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
+x_2^{(1)}(\eta) &=& \displaystyle \mbox{min}[f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
          max}), f^{(4)}(\eta,p_{T,\rm
          min}^{(2)}),1]\,,\\
 \\
-x_1^{(2)}(\eta) &=& \displaystyle \mbox{max}[f^{(1)}(\eta),f^{(2)}(\eta,p_{T,\rm min}^{(2)}),-1]\,,\\
+x_1^{(2)}(\eta) &=& \displaystyle \mbox{max}[f^{(2)}(\eta,p_{T,\rm min}^{(2)}),-1]\,,\\
 \\
-x_2^{(2)}(\eta) &=& \displaystyle \mbox{min}[f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
+x_2^{(2)}(\eta) &=& \displaystyle \mbox{min}[f^{(1)}(\eta),f^{(3)}(\eta,\eta_{\rm min}),f^{(3)}(\eta,\eta_{\rm
          max}), f^{(4)}(\eta,p_{T,\rm
          min}^{(1)}),1]\,.
 \end{array}
