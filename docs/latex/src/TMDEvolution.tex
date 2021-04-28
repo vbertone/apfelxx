@@ -1087,7 +1087,7 @@ Appendix B of Ref.~\cite{Bozzi:2005wk}. Specifically, and including
 the trivial tranform with $p=0$, they read:
 \begin{equation}\label{eq:PureLogs}
 \begin{array}{l}
-\displaystyle I_0(q_T,Q) = \delta(q_T)\,,\\
+\displaystyle I_0(q_T,Q) = \delta(q_T^2)\,,\\
 \\
 \displaystyle I_1(q_T,Q) = - \frac{1}{q_T^2}\,,\\
 \\
@@ -1101,7 +1101,7 @@ the trivial tranform with $p=0$, they read:
 The functions above are compute under the assumption that there is no
 non-perturbative component. Upon this assumption, that we will relax
 below, all terms with $p=0$ will be proportional to
-$\delta(q_T)$. Analogous terms are \textit{not} included in the
+$\delta(q_T^2)$. Analogous terms are \textit{not} included in the
 fixed-order calculation. Therefore, when matching the resummed
 calculation to the fixed-order one, one should remove from
 Eq.~(\ref{eq:xsecexp}) all terms with $p=0$. Importantly, this means
@@ -1330,7 +1330,7 @@ with $g_1 = 0.02$, $g_1=0.5$, and $Q_0 = 1.6$~GeV.
       for $p=0,1,2,3$ (solid lines) to the expressions in
       Eq.~(\ref{eq:PureLogs}) (dashed lines) as functions of $q_T$ at
       $Q = 10$~GeV. The black dashed line is not present because it
-      corresponds to $\delta(q_T)$.\label{fig:logs}}
+      corresponds to $\delta(q_T^2)$.\label{fig:logs}}
   \end{centering}
 \end{figure}
 
@@ -1338,10 +1338,10 @@ In Fig.~\ref{fig:logs}, I compare the integral in
 Eq.~(\ref{eq:IkNonPert}) for $p=0,1,2,3$ (solid lines) to the
 expressions in Eq.~(\ref{eq:PureLogs}) (dashed lines) at $Q = 10$~GeV
 as functions of $q_T$. Notice that the black dashed line is not
-present because it corresponds to $\delta(q_T)$. It is thus true that
-$\widetilde{I}_p$ tends to $I_p$ as $q_T$ increases. However, this is
-not enough to satisfy Eq.~(\ref{eq:LogAsympt}). As a matter of fact,
-if one zooms in around $q_T\lesssim Q$, one finds a substantial
+present because it corresponds to $\delta(q_T^2)$. It is thus true
+that $\widetilde{I}_p$ tends to $I_p$ as $q_T$ increases. However,
+this is not enough to satisfy Eq.~(\ref{eq:LogAsympt}). As a matter of
+fact, if one zooms in around $q_T\lesssim Q$, one finds a substantial
 difference between $\widetilde{I}_p$ and $I_p$.
 \begin{figure}[h]
   \begin{centering}
@@ -1403,8 +1403,8 @@ In order to validate the results above, it is opportune to compare the
 $\mathcal{O}(a_s)$ expressions to those present in the literature. To
 this end, we write explicitly the expression for the SIDIS cross
 section differential in $q_T$ for $q_T>0$, \textit{i.e.} without the
-$\delta(q_T)$ terms, and with no non-perturbative effect. Considering
-that, $S^{(1,1)} = 6C_F$, $S^{(1,2)} = -2C_F$, and
+$\delta(q_T^2)$ terms, and with no non-perturbative
+effect. Considering that, $S^{(1,1)} = 6C_F$, $S^{(1,2)} = -2C_F$, and
 $H_{ij}^{(0)} = e_i^2\delta_{ij}$, this yields:
 \begin{equation}\label{eq:asymptfromres}
 \begin{array}{rcl}
@@ -1920,7 +1920,7 @@ Ref.~\cite{deFlorian:1997zj} are reproduced(\footnote{The expressions
   time ago in Ref.~\cite{Furmanski:1981cw}.}). The local terms
 correspond to virtual corrections that thus give contributions at
 $q_T=0$. As such, they should coincide with the terms proportional to
-$\delta(q_T)$ generated in the expansion of the resummed
+$\delta(q_T^2)$ generated in the expansion of the resummed
 calculation. Specifically, they should be equal to the coefficients
 ${B}_{ij,kl}^{(n,0)}$ in the expansion in Eq.~(\ref{eq:xsecexp}). This
 is evidently the case for ${B}_{ij,kl}^{(0,0)}$ that gives the
@@ -1934,11 +1934,9 @@ $\ln(1-x)$ (or $\ln(1-z)$) in Eqs.~(C.2)-(C.4) of
 Ref.~\cite{deFlorian:1997zj} are replaced with $\ln(x)$ (or $\ln(z)$)
 the two sets of expressions coincide. In fact, the expression to
 $\mathcal{O}(\alpha_s)$ that we derived above are free of large
-threshold logarithms associated to soft-gluon emission. 
+threshold logarithms associated to soft-gluon emission.
 
-This should not be surprising because the CS equation
-
-
+%This should not be surprising because the CS equation
 
 \section{Integrating over $z$}
 

@@ -28,11 +28,15 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  double TwoBodyPhaseSpace::PhaseSpaceReduction(double const& Q, double const& y, double const& qT)
+  double TwoBodyPhaseSpace::PhaseSpaceReduction(double const& Q, double const& y, double const& qTin)
   {
     // Return automatically zero if "y" is larger that "_etamax"
     if (y <= _etamin || y >= _etamax)
       return 0;
+
+    // Avoid setting qT to exactly zero because this may cause
+    // numerical problems.
+    const double qT = std::max(qTin, 1e-5);
 
     // Useful definitions
     const double Q2      = Q * Q;
@@ -88,7 +92,7 @@ namespace apfel
       if (x2 > x1)
         return ( Fbar(x2) - Fbar(x1) ) / EmqT2;
       else
-	return 0;
+        return 0;
     };
 
     // Return integral (symmetrise with respect to the center of the
@@ -162,7 +166,7 @@ namespace apfel
       if (x2 > x1)
         return ( Hbar(x2) - Hbar(x1) ) / EmqT2;
       else
-	return 0;
+        return 0;
     };
 
     // Return integral (symmetrise with respect to the center of the
