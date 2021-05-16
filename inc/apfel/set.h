@@ -62,6 +62,7 @@ namespace apfel
     ///@{
     /**
      * @brief This returns object with ID "id" in the map.
+     * @param id: objects ID
      */
     T const& at(int const& id) const { return _objects.at(id); }
     /**
@@ -81,6 +82,7 @@ namespace apfel
 
     /**
      * @brief This function (re)sets the map of objects.
+     * @param objects: set of objects
      */
     void SetObjects(std::map<int, T> const& objects) { _objects = objects; }
 
@@ -92,7 +94,8 @@ namespace apfel
 
     /**
      * @brief This function sums up all the objects of the set into
-     * one using the components of input vactor for as weights.
+     * one using the components of input vector as weights.
+     * @param weigths: set of weights
      */
     T Combine(std::vector<double> const& weigths) const;
 

@@ -678,17 +678,23 @@ operator (see Sect.~\ref{eq:dglapexp}), one has:
                \Gamma(\mu_0,Q)\otimes \Gamma(Q,\mu_F)\otimes
                f(\mu_F)\\
   \\
-           &=& \displaystyle \Gamma(\mu_0,\mu_F)\otimes \Bigg[\Delta -
+           &=& \displaystyle \Gamma(\mu_0,Q)\otimes \Bigg[\Delta -
                a_s(\kappa_R Q) \ln\kappa_F^2 P^{(0)}\\
-\\
-               &+&\displaystyle a_s^2(\kappa_R Q)\left(-\ln\kappa_F^2 P^{(1)}+ \left(\frac{1}2 \ln\kappa_F^2 -\ln\kappa_R^2 \right) \ln\kappa_F^2 \beta_0 P^{(0)}+\frac{1}2 \ln^2\kappa_F^2 P^{(0)}\otimes P^{(0)} \right)\Bigg]\otimes
-               f(\mu_F)\,,
+  \\
+           &+&\displaystyle a_s^2(\kappa_R Q)\left(-\ln\kappa_F^2 P^{(1)}+ \left(\frac{1}2 \ln\kappa_F^2 -\ln\kappa_R^2 \right) \ln\kappa_F^2 \beta_0 P^{(0)}+\frac{1}2 \ln^2\kappa_F^2 P^{(0)}\otimes P^{(0)} \right)\Bigg]\otimes
+               f(\kappa_FQ)\\
+  \\
+           &=&\displaystyle \Gamma(\mu_0,Q)\otimes\widetilde{f}(Q,\kappa_f)\,,
 \end{array}
 \end{equation}
 where we have used Eqs.~(\ref{eq:DGLAPeqOpExp})
 and~(\ref{eq:alphasscalvar}) to replace $a_s(Q)$ with
-$a_s(\kappa_R Q)$. At LL and NLL the square bracket does not need to
-include and $\alpha_s$ corrections while N$^k$LL requires including
+$a_s(\kappa_R Q)$. In addition, we have defined
+$\widetilde{f}(Q,\kappa_f)$ as the collinear distribution at $Q$
+obtained by evolving the distribution from $\mu_F=\kappa_F Q$ to $Q$
+by means of an evolution operator expanded to the appropriate
+fixed-order. At LL and NLL the square bracket does not need to include
+and $\alpha_s$ corrections while N$^k$LL requires including
 corrections up to $\mathcal{O}(\alpha_s^{k-1})$. As a simpler
 alternative that may however give rise to larger variations, one may
 just evolve the collinear distributions from $\mu_0$ to
@@ -2107,8 +2113,8 @@ with $y=Q^2/xS_H$ (see Eq.~(\ref{eq:variablechange})).
 \section{Integrating over $q_T$}
 
 It is interesting to carry out the integration over $q_T$ of
-Eq.~(\ref{eq:FOxsec}) analytically. The result can then be compared to
-those presented in Appendix~C of
+Eq.~(\ref{eq:FOxsec}) analytically. The result can eventually be
+compared to those presented in Appendix~C of
 Ref.~\cite{deFlorian:1997zj}. Exploiting the $\delta$-function yields:
 \begin{equation}
 \begin{array}{rcl}
@@ -2143,33 +2149,92 @@ the other hand, integrating $F_{UU,2}$ gives:
   2C_F\left[(1-x)z+4x(1-z)+\frac{1+x^2(1-z)^2}{z(1-x)}\right]\,,
 \end{array}
 \end{equation}
-Instating the plus prescription in all terms that behave as
-$(1-x)^{-1}$ and $(1-z)^{-1}$(\footnote{This step has the effect of
-  removing the uncanceled soft divergencies.}), one can see that up to
-``local'' terms (\textit{i.e.} those terms proportional to the
-$\delta$-function) the expressions of Appendix~C of
-Ref.~\cite{deFlorian:1997zj} are reproduced(\footnote{The expressions
-  reported in Ref.~\cite{deFlorian:1997zj} are those computed long
-  time ago in Ref.~\cite{Furmanski:1981cw}.}). The local terms
-correspond to virtual corrections that thus give contributions at
-$q_T=0$. As such, they should coincide with the terms proportional to
-$\delta(q_T^2)$ generated in the expansion of the resummed
-calculation. Specifically, they should be equal to the coefficients
-${B}_{ij,kl}^{(n,0)}$ in the expansion in Eq.~(\ref{eq:xsecexp}). This
-is evidently the case for ${B}_{ij,kl}^{(0,0)}$ that gives the
-leading-order contribution to the integrated cross
-section. Unfortunately, this is not true at next-to-leading order
-because the expressions for the local terms in Appendix~C of
-Ref.~\cite{deFlorian:1997zj} (Eqs.~(C.2)-(C.4)) do not match
-${B}_{ij,kl}^{(1,0)}$. However, when checking the expressions
-explicitly an interesting pattern emerges: if all the occurrences of
-$\ln(1-x)$ (or $\ln(1-z)$) in Eqs.~(C.2)-(C.4) of
-Ref.~\cite{deFlorian:1997zj} are replaced with $\ln(x)$ (or $\ln(z)$)
-the two sets of expressions coincide. In fact, the expression to
-$\mathcal{O}(\alpha_s)$ that we derived above are free of large
-threshold logarithms associated to soft-gluon emission.
+This expressions only account for real emissions and as a consequence
+they are affected by soft divergences for $x\rightarrow 1$ and
+$z\rightarrow 1$. These divergences must eventually cancel against the
+virtual contributions. The net effect is the presence of the plus
+prescription in all terms that behave as $(1-x)^{-1}$ and
+$(1-z)^{-1}$. By doing so, one can see that up to ``local'' terms
+(\textit{i.e.} those terms proportional to $\delta$-functions) the
+expressions of Appendix~C of Ref.~\cite{deFlorian:1997zj} are
+reproduced(\footnote{The expressions reported in
+  Ref.~\cite{deFlorian:1997zj} are those computed long time ago in
+  Ref.~\cite{Furmanski:1981cw}.}). The local terms correspond to
+virtual corrections that thus give contributions at $q_T=0$. As such,
+they should coincide with the terms proportional to $\delta(q_T^2)$
+generated in the expansion of the resummed calculation. Specifically,
+they should be equal to the coefficients ${B}_{ij,kl}^{(n,0)}$ in the
+expansion in Eq.~(\ref{eq:xsecexp}). This is evidently the case for
+${B}_{ij,kl}^{(0,0)}$ that gives the leading-order contribution to the
+integrated cross section. Unfortunately, this is not true at
+next-to-leading order because the expressions for the local terms in
+Appendix~C of Ref.~\cite{deFlorian:1997zj} (Eqs.~(C.2)-(C.4)) do not
+match ${B}_{ij,kl}^{(1,0)}$.
+% However, when checking the expressions explicitly an interesting
+% pattern emerges: if all the occurrences of $\ln(1-x)$ (or
+% $\ln(1-z)$) in Eqs.~(C.2)-(C.4) of Ref.~\cite{deFlorian:1997zj} are
+% replaced with $\ln(x)$ (or $\ln(z)$) the two sets of expressions
+% coincide.
+To be more precise by first writing down the explicit expression for
+${B}_{ij,kl}^{(0,0)}$ summed over the indices of the hard function:
+\begin{equation}
+\begin{array}{rcl}
+  \overline{C}_{kl}(x,z)&=&\displaystyle e_q^{-2}\sum_{ij}
+                            {B}_{ij,kl}^{(1,0)}(x,z) =
+                            H^{(1)}\delta_{kl}\delta(1-x)
+                            \delta(1-z)+\delta(1-x)\mathbb{C}_{kl}^{(1,0)}(z)+\mathcal{C}_{lk}^{(1,0)}(x)\delta(1-z)\,,\\
+\\
+&=&\displaystyle 2C_F\left(-8+\frac{\pi^2}{6}\right) \delta_{kl}\delta(1-x)
+                            \delta(1-z)+\delta(1-x)\mathbb{C}_{kl}^{(1,0)}(z)+\mathcal{C}_{lk}^{(1,0)}(x)\delta(1-z)\,.
+\end{array}
+\end{equation}
+The single channels read:
+\begin{equation}\label{eq:locals}
+\begin{array}{rcl}
+  \overline{C}_{qq}(x,z) &=& \displaystyle 2C_F\left[-8\delta(1-x)
+                            \delta(1-z)+\delta(1-x)\left(1-z+2p_{qq}(z)\ln
+                             z\right)+\left(1-x\right)\delta(1-z)\right]\,,\\
+\\
+  \overline{C}_{gq}(x,z) &=& \displaystyle
+                             2C_F\left[\delta(1-x)\left(z+2p_{gq}(z)\ln
+                             z\right)+x\delta(1-z)\right]\,,\\
+\\
+  \overline{C}_{qg}(x,z)&=&\displaystyle
+                            4T_R\left[\delta(1-x)\left(z(1-z)+p_{qg}(z)\ln
+                            z\right)+x(1-x)\delta(1-z)\right]\,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{rcl}
+p_{qq}(x) &=&\displaystyle  \frac{1+z^2}{1-z}\,,\\
+\\
+p_{gq}(x) &=&\displaystyle  \frac{1+(1-z)^2}{z}\,,\\
+\\
+p_{qg}(x) &=&\displaystyle  1-2z(1-z)\,.
+\end{array}
+\end{equation}
+Confronting Eq.~(\ref{eq:locals}) with the terms proportional to the
+$\delta$-functions in Eqs.~(C.2)-(C.4) of
+Ref.~\cite{deFlorian:1997zj}, that we refer to as
+$C_{kl}^{(\rm loc)}$, we find:
+\begin{equation}\label{eq:locals}
+\begin{array}{rcl}
+  C_{qq}^{(\rm loc)}(x,z)-\overline{C}_{qq}(x,z) &=& \displaystyle 2C_F\delta(1-x)(1+z^2)\left[\left(\frac{\ln(1-z)}{1-z}\right)_+-\frac{\ln(z)}{1-x}\right]\,,\\
+\\
+  C_{gq}^{(\rm loc)}(x,z)-\overline{C}_{gq}(x,z) &=& \displaystyle
+                             2C_F\left[\delta(1-x)p_{gq}(z)\ln\left(\frac{1-z} z\right)-x\delta(1-z)\right]\,,\\
+\\
+  C_{qg}^{(\rm loc)}(x,z)-\overline{C}_{qg}(x,z)&=&\displaystyle
+                            4T_R\left[-\delta(1-x)\left(z(1-z)+p_{qg}(z)\ln
+                            z\right)+p_{qg}(x)\ln\left(\frac{1-x}{x}\right)\delta(1-z)
+                            \right]\,,
+\end{array}
+\end{equation}
 
-%This should not be surprising because the CS equation
+% In fact, the expression to $\mathcal{O}(\alpha_s)$ that we derived
+% above are free of large threshold logarithms associated to soft-gluon
+% emission.
 
 \section{Integrating over $z$}
 
