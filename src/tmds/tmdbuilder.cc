@@ -559,6 +559,56 @@ namespace apfel
                                                                int                                             const& PerturbativeOrder,
                                                                double                                          const& Ci)
   {
+    // Get matching functions
+    const std::function<Set<Operator>(double const&)> MatchFunc = MatchingFunctionsPDFs(TmdObj, Alphas, PerturbativeOrder, Ci);
+
+    // Construct function that returns the product of matching
+    // functions and collinear PDFs.
+    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
+    {
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Convolute matching functions with the collinear PDFs and
+      // return.
+      return MatchFunc(mu0) * CollPDFs(mu0);
+    };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
+                                                              std::function<Set<Distribution>(double const&)> const& CollFFs,
+                                                              std::function<double(double const&)>            const& Alphas,
+                                                              int                                             const& PerturbativeOrder,
+                                                              double                                          const& Ci)
+  {
+    // Get matching functions
+    const std::function<Set<Operator>(double const&)> MatchFunc = MatchingFunctionsFFs(TmdObj, Alphas, PerturbativeOrder, Ci);
+
+    // Construct function that returns the product of matching
+    // functions and collinear FFs. Includes a factor z^2 typical of
+    // FFs.
+    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
+    {
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Convolute matching functions with the collinear FFs and
+      // return.
+      return MatchFunc(mu0) * CollFFs(mu0);
+    };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<Set<Operator>(double const&)> MatchingFunctionsPDFs(std::map<int, TmdObjects>            const& TmdObj,
+                                                                    std::function<double(double const&)> const& Alphas,
+                                                                    int                                  const& PerturbativeOrder,
+                                                                    double                               const& Ci)
+  {
     // Retrieve thresholds from "TmdObj".
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
@@ -620,27 +670,15 @@ namespace apfel
         return lo + coup * ( nlo + coup * ( nnlo + coup * nnnlo ) );
       };
 
-    // Construct function that returns the product of matching
-    // functions and collinear PDFs.
-    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
-    {
-      // Define lower scales
-      const double mu0 = Ci * 2 * exp(- emc) / b;
-
-      // Convolute matching functions with the collinear PDFs and
-      // return.
-      return MatchFunc(mu0) * CollPDFs(mu0);
-    };
-
-    return MatchedTMDs;
+    // Return matching functions
+    return MatchFunc;
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
-                                                              std::function<Set<Distribution>(double const&)> const& CollFFs,
-                                                              std::function<double(double const&)>            const& Alphas,
-                                                              int                                             const& PerturbativeOrder,
-                                                              double                                          const& Ci)
+  std::function<Set<Operator>(double const&)> MatchingFunctionsFFs(std::map<int, TmdObjects>             const& TmdObj,
+                                                                   std::function<double(double const&)>  const& Alphas,
+                                                                   int                                   const& PerturbativeOrder,
+                                                                   double                                const& Ci)
   {
     // Retrieve thresholds from "TmdObj".
     std::vector<double> thrs;
@@ -703,20 +741,8 @@ namespace apfel
         return lo + coup * ( nlo + coup * ( nnlo + coup * nnnlo ) );
       };
 
-    // Construct function that returns the product of matching
-    // functions and collinear FFs. Includes a factor z^2 typical of
-    // FFs.
-    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
-    {
-      // Define lower scales
-      const double mu0 = Ci * 2 * exp(- emc) / b;
-
-      // Convolute matching functions with the collinear FFs and
-      // return.
-      return MatchFunc(mu0) * CollFFs(mu0);
-    };
-
-    return MatchedTMDs;
+    // Return matching functions
+    return MatchFunc;
   }
 
   //_____________________________________________________________________________

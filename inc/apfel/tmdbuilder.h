@@ -81,8 +81,7 @@ namespace apfel
   ///@{
   /**
    * @brief Function that returns the matched and evolved TMD PDFs in
-   * b-space as functions of the final scale and rapidity. It assumes
-   * the zeta-prescription.
+   * b-space as functions of the final scale and rapidity.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
@@ -102,8 +101,7 @@ namespace apfel
 
   /**
    * @brief Function that returns the matched and evolved TMD FFs in
-   * b-space as functions of the final scale and rapidity. It assumes
-   * the zeta-prescription.
+   * b-space as functions of the final scale and rapidity.
    * @param TmdObj: the TMD objects
    * @param CollFFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
@@ -122,8 +120,7 @@ namespace apfel
                                                                                             double                                          const& IntEps = 1e-7);
 
   /**
-   * @brief Function that returns the matched TMD PDFs in b-space. It
-   * assumes the zeta-prescription.
+   * @brief Function that returns the matched TMD PDFs in b-space.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
@@ -139,8 +136,7 @@ namespace apfel
                                                                double                                          const& Ci = 1);
 
   /**
-   * @brief Function that returns the matched TMD FFs in b-space. It
-   * assumes the zeta-prescription.
+   * @brief Function that returns the matched TMD FFs in b-space.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
@@ -154,6 +150,36 @@ namespace apfel
                                                               std::function<double(double const&)>            const& Alphas,
                                                               int                                             const& PerturbativeOrder,
                                                               double                                          const& Ci = 1);
+
+  /**
+   * @brief Function that returns the mathing functions for the TMD PDFs.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial-scale variation factor
+   * @return Set<Operator>-valued function of the scale mu
+   * corresponding to the set of matching functions for PDFs in the
+   * evolution basis.
+   */
+  std::function<Set<Operator>(double const&)> MatchingFunctionsPDFs(std::map<int, TmdObjects>            const& TmdObj,
+                                                                    std::function<double(double const&)> const& Alphas,
+                                                                    int                                  const& PerturbativeOrder,
+                                                                    double                               const& Ci = 1);
+
+  /**
+   * @brief Function that returns the mathing functions for the TMD FFs.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial-scale variation factor
+   * @return Set<Operator>-valued function of the scale mu
+   * corresponding to the set of matching functions for FFs in the
+   * evolution basis.
+   */
+  std::function<Set<Operator>(double const&)> MatchingFunctionsFFs(std::map<int, TmdObjects>            const& TmdObj,
+                                                                   std::function<double(double const&)> const& Alphas,
+                                                                   int                                  const& PerturbativeOrder,
+                                                                   double                               const& Ci = 1);
 
   /**
    * @brief Function that returns the evolution factors for gluon and quarks.
