@@ -58,7 +58,7 @@ namespace apfel
     ///@}
 
     /**
-     * @brief Function that returns the Grid object of the operator.
+     * @brief Function that returns the Grid object associated to the operator.
      */
     Grid const& GetGrid() const { return _grid; }
 
