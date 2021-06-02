@@ -22,6 +22,7 @@ namespace apfel
   {
   public:
     Operator() = delete;
+    Operator(Operator const&) = default;
 
     /**
      * @brief The Operator constructor used for inheritance.
