@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Create section folder
+mkdir secs
+
 # Introduction
 pandoc -s ../../README.md -o secs/README.rst
 
