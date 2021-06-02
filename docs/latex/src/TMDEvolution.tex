@@ -2152,31 +2152,33 @@ the other hand, integrating $F_{UU,2}$ gives:
 This expressions only account for real emissions and as a consequence
 they are affected by soft divergences for $x\rightarrow 1$ and
 $z\rightarrow 1$. These divergences must eventually cancel against the
-virtual contributions. The net effect is the presence of the plus
-prescription in all terms that behave as $(1-x)^{-1}$ and
-$(1-z)^{-1}$. By doing so, one can see that up to ``local'' terms
-(\textit{i.e.} those terms proportional to $\delta$-functions) the
-expressions of Appendix~C of Ref.~\cite{deFlorian:1997zj} are
-reproduced(\footnote{The expressions reported in
-  Ref.~\cite{deFlorian:1997zj} are those computed long time ago in
-  Ref.~\cite{Furmanski:1981cw}.}). The local terms correspond to
-virtual corrections that thus give contributions at $q_T=0$. As such,
-they should coincide with the terms proportional to $\delta(q_T^2)$
-generated in the expansion of the resummed calculation. Specifically,
-they should be equal to the coefficients ${B}_{ij,kl}^{(n,0)}$ in the
-expansion in Eq.~(\ref{eq:xsecexp}). This is evidently the case for
-${B}_{ij,kl}^{(0,0)}$ that gives the leading-order contribution to the
-integrated cross section. Unfortunately, this is not true at
-next-to-leading order because the expressions for the local terms in
-Appendix~C of Ref.~\cite{deFlorian:1997zj} (Eqs.~(C.2)-(C.4)) do not
-match ${B}_{ij,kl}^{(1,0)}$.
+virtual contributions. The inclusion of these virtual contributions
+has as a net effect the appearance of the plus prescription in all
+terms that behave as $(1-x)^{-1}$ and $(1-z)^{-1}$ and of terms
+proportional to $\delta(1-x)$ and/or $\delta(1-z)$ (local terms). As a
+matter of fact, one can see that up to the local terms and the plus
+prescription the expressions of Appendix~C of
+Ref.~\cite{deFlorian:1997zj} are reproduced(\footnote{The expressions
+  reported in Ref.~\cite{deFlorian:1997zj} are those computed long
+  time ago in Ref.~\cite{Furmanski:1981cw}.}). The local terms
+correspond to virtual corrections that thus give contributions at
+$q_T=0$. As such, they should coincide with the terms proportional to
+$\delta(q_T^2)$ generated in the expansion of the resummed
+calculation. Specifically, they should be equal to the coefficients
+${B}_{ij,kl}^{(n,0)}$ in the expansion in Eq.~(\ref{eq:xsecexp}). This
+is evidently the case for ${B}_{ij,kl}^{(0,0)}$ that gives the
+leading-order contribution to the integrated cross
+section. Unfortunately, this is not true at next-to-leading order
+because the expressions for the local terms in Appendix~C of
+Ref.~\cite{deFlorian:1997zj} (Eqs.~(C.2)-(C.4)) do not match
+${B}_{ij,kl}^{(1,0)}$.
 % However, when checking the expressions explicitly an interesting
 % pattern emerges: if all the occurrences of $\ln(1-x)$ (or
 % $\ln(1-z)$) in Eqs.~(C.2)-(C.4) of Ref.~\cite{deFlorian:1997zj} are
 % replaced with $\ln(x)$ (or $\ln(z)$) the two sets of expressions
 % coincide.
 To be more precise by first writing down the explicit expression for
-${B}_{ij,kl}^{(0,0)}$ summed over the indices of the hard function:
+${B}_{ij,kl}^{(1,0)}$ summed over the indices of the hard function:
 \begin{equation}
 \begin{array}{rcl}
   \overline{C}_{kl}(x,z)&=&\displaystyle e_q^{-2}\sum_{ij}
@@ -2192,45 +2194,35 @@ The single channels read:
 \begin{equation}\label{eq:locals}
 \begin{array}{rcl}
   \overline{C}_{qq}(x,z) &=& \displaystyle 2C_F\left[-8\delta(1-x)
-                            \delta(1-z)+\delta(1-x)\left(1-z+2p_{qq}(z)\ln
+                            \delta(1-z)+\delta(1-x)\left(1-z+2 \frac{1+z^2}{1-z}\ln
                              z\right)+\left(1-x\right)\delta(1-z)\right]\,,\\
 \\
   \overline{C}_{gq}(x,z) &=& \displaystyle
-                             2C_F\left[\delta(1-x)\left(z+2p_{gq}(z)\ln
+                             2C_F\left[\delta(1-x)\left(z+2 \frac{1+(1-z)^2}{z}\ln
                              z\right)+x\delta(1-z)\right]\,,\\
 \\
   \overline{C}_{qg}(x,z)&=&\displaystyle
-                            4T_R\left[\delta(1-x)\left(z(1-z)+p_{qg}(z)\ln
-                            z\right)+x(1-x)\delta(1-z)\right]\,,
+                            4T_R\left[\delta(1-x)\left(z(1-z)+(z^2+(1-z)^2)\ln
+                            z\right)+x(1-x)\delta(1-z)\right]\,.
 \end{array}
 \end{equation}
-with:
-\begin{equation}
-\begin{array}{rcl}
-p_{qq}(x) &=&\displaystyle  \frac{1+z^2}{1-z}\,,\\
-\\
-p_{gq}(x) &=&\displaystyle  \frac{1+(1-z)^2}{z}\,,\\
-\\
-p_{qg}(x) &=&\displaystyle  1-2z(1-z)\,.
-\end{array}
-\end{equation}
-Confronting Eq.~(\ref{eq:locals}) with the terms proportional to the
-$\delta$-functions in Eqs.~(C.2)-(C.4) of
-Ref.~\cite{deFlorian:1997zj}, that we refer to as
-$C_{kl}^{(\rm loc)}$, we find:
-\begin{equation}\label{eq:locals}
-\begin{array}{rcl}
-  C_{qq}^{(\rm loc)}(x,z)-\overline{C}_{qq}(x,z) &=& \displaystyle 2C_F\delta(1-x)(1+z^2)\left[\left(\frac{\ln(1-z)}{1-z}\right)_+-\frac{\ln(z)}{1-x}\right]\,,\\
-\\
-  C_{gq}^{(\rm loc)}(x,z)-\overline{C}_{gq}(x,z) &=& \displaystyle
-                             2C_F\left[\delta(1-x)p_{gq}(z)\ln\left(\frac{1-z} z\right)-x\delta(1-z)\right]\,,\\
-\\
-  C_{qg}^{(\rm loc)}(x,z)-\overline{C}_{qg}(x,z)&=&\displaystyle
-                            4T_R\left[-\delta(1-x)\left(z(1-z)+p_{qg}(z)\ln
-                            z\right)+p_{qg}(x)\ln\left(\frac{1-x}{x}\right)\delta(1-z)
-                            \right]\,,
-\end{array}
-\end{equation}
+% Confronting Eq.~(\ref{eq:locals}) with the terms proportional to the
+% $\delta$-functions in Eqs.~(C.2)-(C.4) of
+% Ref.~\cite{deFlorian:1997zj}, that we refer to as
+% $C_{kl}^{(\rm loc)}$, we find:
+% \begin{equation}
+% \begin{array}{rcl}
+%   C_{qq}^{(\rm loc)}(x,z)-\overline{C}_{qq}(x,z) &=& \displaystyle 2C_F\delta(1-x)(1+z^2)\left[\left(\frac{\ln(1-z)}{1-z}\right)_+-\frac{\ln(z)}{1-x}\right]\,,\\
+% \\
+%   C_{gq}^{(\rm loc)}(x,z)-\overline{C}_{gq}(x,z) &=& \displaystyle
+%                              2C_F\left[\delta(1-x)p_{gq}(z)\ln\left(\frac{1-z} z\right)-x\delta(1-z)\right]\,,\\
+% \\
+%   C_{qg}^{(\rm loc)}(x,z)-\overline{C}_{qg}(x,z)&=&\displaystyle
+%                             4T_R\left[-\delta(1-x)\left(z(1-z)+p_{qg}(z)\ln
+%                             z\right)+p_{qg}(x)\ln\left(\frac{1-x}{x}\right)\delta(1-z)
+%                             \right]\,,
+% \end{array}
+% \end{equation}
 
 % In fact, the expression to $\mathcal{O}(\alpha_s)$ that we derived
 % above are free of large threshold logarithms associated to soft-gluon
