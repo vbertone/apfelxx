@@ -23,7 +23,7 @@ implementable in APFEL++.
 APFEL++ is used as a prediction engine in
 [NangaParbat](https://github.com/vbertone/NangaParbat), a code devoted
 to the extraction of Trasverse-Momentum-Dependent (TMD) distributions,
-and is also currently interfaced to
+and in [MontBlanc](https://github.com/vbertone/MontBlanc), a code for the determination of collinear distributions. APFEL++ is also currently interfaced to
 [PARTONS](http://partons.cea.fr/partons/doc/html/index.html), a
 software dedicated to the phenomenology of Generalised Parton
 Distributions (GPDs) and TMDs, and to
