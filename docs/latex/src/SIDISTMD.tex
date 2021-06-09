@@ -348,11 +348,65 @@ evolution. The weights in Eq.~(\ref{eq:WDIS}) can then be computed as:
 \end{equation}
 This nesting should optimise the computation of the integrals.
 
+\section{Normalising the SIDIS cross section}
 
-
-
-
-
+It is by now well known that the computation of $q_T$-dependent SIDIS
+cross sections at moderate and low energies largely undershoots the
+data. The origin of this normalisation mismatch is as yet
+unclear. Somewhat surprisingly though, the computation of
+$q_T$-integrated cross sections nicely describes the data. This points
+to a mismatch between $q_T$-dependent and $q_T$-integrated
+calculations. In the low-$q_T$ region this mismatch can be explicitly
+derived up to $\mathcal{O}(\alpha_s)$ showing that indeed the
+$q_T$-dependent resummed calculation does not include terms that are
+instead present in the $q_T$-integrated calculation, amongst which
+threshold logarithms. Despite a careful investigation on the origin of
+this mismatch would be of great interest, for phenomenological studies
+a more empirical approach suffices to obtain a better description of
+the data. Specifically, one can exploit the fact that the
+$q_T$-integrated calculation describes well the data to normalise the
+$q_T$-dependent cross section. The prescription is as simple as this:
+\begin{equation}\label{eq:normalisationSIDIS}
+\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD\; norm.} =
+\frac{\left[\frac{d\sigma}{dxdQdz}\right]_{\rm F.O.}}{\int_0^{\infty} dq_T\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD}}\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD}\,,
+\end{equation}
+where the subscript F.O. stands for fixed order. This prescription
+clearly ensures that:
+\begin{equation}
+\int_{0}^{\infty}dq_T\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD\; norm.} =
+\left[\frac{d\sigma}{dxdQdz}\right]_{\rm F.O.}\,,
+\end{equation}
+guaranteeing a correct normalisation. The F.O. integrated cross
+section is currently fully known up to $\mathcal{O}(\alpha_s)$. The
+integral in the denominator of Eq.~(\ref{eq:normalisationSIDIS}) can
+be explicitly calculated and, using a $b_*$-prescription such that
+$b_*(b_T)\sim b_T$ for $b_T\rightarrow 0$, it turns out to vanish
+invalidating the argument. Fortunately, using a modified version of
+the $b_*$-prescription that behaves as $b_*(b_T)\rightarrow b_0/Q$ for
+$b_T\rightarrow 0$, the integral becomes finite and computable. In
+particular, setting for simplicity $\mu=Q$, one finds:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{0}^{\infty}dq_T\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm
+  TMD}&=&\displaystyle \frac{2\pi \alpha^2}{xzQ^3}Y_+ H(Q,Q) \sum_q e_q^2\\
+\\
+&\times&\displaystyle\left\{\sum_{j}\int_x^1dy\,\mathcal{C}_{qj}(y;Q,Q^2)\left[\frac{x}{y}f_j\left(\frac{x}{y},Q\right)\right]\right\}\\
+\\
+&\times&\displaystyle\left\{\sum_{j}\int_z^1dy\,\left[y^2\mathbb{C}_{qj}(y;Q,Q^2)\right]\left[\frac{z}{y}d_j\left(\frac{z}{y},Q\right)\right]\right\}\,.
+\end{array}
+\end{equation}
+This allows us to easily compute the normalisation factor on the
+r.h.s. of Eq.~(\ref{eq:normalisationSIDIS}). It is interesting to
+observe that at leading order the normalisation factor is identically
+equal to one. This means that in a LL or NLL analysis of TMDs no
+normalisation is needed. In principle, when considering logarithmic
+accuracies higher than NNLL, one would need to included
+$\mathcal{O}(\alpha_s^2)$ corrections in the normalisation
+factor. Since the fixed-order integrated cross section in the
+numerator is currently know up to $\mathcal{O}(\alpha_s)$, also the
+denominator should be computed to the same order, \textit{i.e.}
+including up to $\mathcal{O}(\alpha_s)$ in $H$, $\mathcal{C}_{qj}$,
+and $\mathbb{C}_{qj}$, also beyond NNLL.
 
 
 
