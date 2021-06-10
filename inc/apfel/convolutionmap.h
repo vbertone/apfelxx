@@ -107,6 +107,7 @@ namespace apfel
     /**
      * @brief The DiagonalBasis constructor
      * @param nf: number of elements
+     * @param offset: starting index for the enumeration on the distributions (default: 0)
      */
     DiagonalBasis(int const& nf, int const& offset = 0);
   };

@@ -15,11 +15,11 @@ APFEL++ documentation
    secs/Interpolation
    secs/Statistics
    secs/StructureFunctions
-   .. secs/MatchingConditions
-   .. secs/MSbarMass
-   .. secs/Transversity
-   .. secs/CCDIS
-   .. secs/TMDEvolution
+   secs/MatchingConditions
+   secs/MSbarMass
+   secs/Transversity
+   secs/CCDIS
+   secs/TMDEvolution
    .. secs/DrellYanTMD
-   .. secs/SIDISTMD
-   .. secs/GPDs
+   secs/SIDISTMD
+   secs/GPDs

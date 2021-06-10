@@ -25,7 +25,7 @@
 
 \title{SIDIS cross section in TMD factorisation}
 
-\author{Valerio Bertone}
+%\author{Valerio Bertone}
 
 %\institution{$^{a}$PH Department, TH Unit, CERN, CH-1211 Geneva 23, Switzerland}
 \maketitle
@@ -43,9 +43,12 @@ under the assumption that the (negative) virtuality of the $Q^2$ of
 the exchanged vector boson is much smaller than the $Z$ mass. This
 allows us to neglect weak contributions and write the cross section
 in TMD factorisation as:
-\begin{equation}\label{eq:sidisxsec}
+\begin{equation}
   \frac{d\sigma}{dxdQdz d q_T} = \frac{4\pi \alpha^2q_T}{z x Q^3}Y_+ H(Q,\mu) \sum_q e_q^2
-  \int_0^\infty db \,b J_0\left(bq_T\right)\overline{F}_q(x,b;\mu,\zeta_1) \overline{D}_{q}(z,b;\mu,\zeta_2)\,,
+  \int_0^\infty db \,b
+  J_0\left(bq_T\right)\overline{F}_q(x,b;\mu,\zeta_1)
+  \overline{D}_{q}(z,b;\mu,\zeta_2)\,,
+\label{eq:sidisxsec}
 \end{equation}
 with $\zeta_1\zeta_2=Q^4$ and:
 \begin{equation}
@@ -74,7 +77,7 @@ as:
 \end{equation}
 This allows us to replace the TMDs in Eq.~(\ref{eq:sidisxsec}) with
 their ``regularised'' version:
-\begin{equation}\label{eq:fandDNP}
+\begin{equation}
 \begin{array}{rcl}
   \overline{F}_q(x,b;\mu,\zeta) &\rightarrow&
   \overline{F}_q(x,b_*(b);\mu,\zeta) f_{\rm NP}(x,b,\zeta)\,,\\
@@ -82,16 +85,18 @@ their ``regularised'' version:
   \overline{D}_q(z,b;\mu,\zeta) &\rightarrow&
   \overline{D}_q(z,b_*(b);\mu,\zeta) D_{\rm NP}(z,b,\zeta)\,,
 \end{array}
+\label{eq:fandDNP}
 \end{equation}
 where we have introduced the non-perturbative functions $f_{\rm NP}$
 and $D_{\rm NP}$. It is important to stress that these functions
 further factorise as follows:
-\begin{equation}\label{NPfuncts}
+\begin{equation}
 \begin{array}{rcl}
 f_{\rm NP}(x,b,\zeta)&=&\displaystyle\widetilde{f}_{\rm NP}(x,b)\exp\left[g_K(b)\ln\left(\frac{\zeta}{Q_0^2}\right)\right]\,,\\
 \\
 D_{\rm NP}(z,b,\zeta) &=&\displaystyle\widetilde{D}_{\rm NP}(x,b)\exp\left[g_K(b)\ln\left(\frac{\zeta}{Q_0^2}\right)\right]\,.
 \end{array}
+\label{NPfuncts}
 \end{equation}
 The common exponential function represents the non-perturbative
 corrections to TMD evolution and the specific functional form is
@@ -108,7 +113,7 @@ small enough to make both numerator and denominator perturbatively
 computable. Making use of Eq.~(\ref{NPfuncts}) and setting
 $\zeta_1=\zeta_2=Q^2$ allows us to rewrite Eq.~(\ref{eq:sidisxsec})
 as:
-\begin{equation}\label{eq:sidisxsec3}
+\begin{equation}
 \begin{array}{rcl}
 \displaystyle   \frac{d\sigma}{dxdQdz d q_{T}} &=&\displaystyle
 \frac{4\pi \alpha^2q_{T}}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2\\
@@ -116,6 +121,7 @@ as:
 &\times&\displaystyle 
   \int_0^\infty db\, J_0\left(bq_T\right) \,b\overline{F}_q(x,b_*(b);\mu,Q^2) \overline{D}_q(z,b_*(b);\mu,Q^2) f_{\rm NP}(x,b,Q^2) D_{\rm NP}(z,b,Q^2)\,.
 \end{array}
+\label{eq:sidisxsec3}
 \end{equation}
 The integral in the r.h.s. can be numerically computed using the Ogata
 quadrature of zero-th degree (because $J_0$ enters the integral):
@@ -141,9 +147,11 @@ follows:
   \sum_{n=1}^{N}w_n^{(0)}\,\frac{\xi_n^{(0)}}{q_{T}}S\left(x,z,\frac{\xi_n^{(0)}}{q_{T}};\mu,Q^2\right) f_{\rm NP}\left(x, \frac{\xi_n^{(0)}}{q_{T}},Q^2\right) D_{\rm NP}\left(z, \frac{\xi_n^{(0)}}{q_{T}},Q^2\right)\,,
 \end{equation}
 where:
-\begin{equation}\label{eq:Sall}
+\begin{equation}
 \displaystyle S\left(x,z,b;\mu,Q^2\right)=
-\frac{4\pi \alpha^2}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2 \left[\overline{F}_q\left(x,b_*(b);\mu,Q^2\right)\right]\left[\overline{D}_q\left(z,b_*(b);\mu,Q^2\right)\right]\,.
+\frac{4\pi \alpha^2}{xzQ^3}Y_+ H(Q,\mu) \sum_q e_q^2
+\left[\overline{F}_q\left(x,b_*(b);\mu,Q^2\right)\right]\left[\overline{D}_q\left(z,b_*(b);\mu,Q^2\right)\right]\,.
+\label{eq:Sall}
 \end{equation}
 
 \section{Integrating over the final-state kinematic variables}
@@ -160,11 +168,12 @@ connected to the former through:
 p_{Th} = zq_T\,.
 \end{equation}
 The integrated cross section then reads:
-\begin{equation}\label{eq:IntcrosssectionSIDIS}
+\begin{equation}
   \widetilde{\sigma}=\int_{Q_{\rm min}}^{Q_{\rm max}}dQ \int_{x_{\rm min}}^{x_{\rm max}}dx
   \int_{z_{\rm
       min}}^{z_{\rm max}}dz \int_{p_{Th,\rm min}/z}^{p_{Th,\rm max}/z}dq_{T}\left[\frac{d\sigma}{dxdQ
       dz dq_{T}} \right]\,.
+\label{eq:IntcrosssectionSIDIS}
 \end{equation}
 One can exploit a property of the Bessel functions to compute the
 indefinite integral in $q_{T}$ of the cross section. Specifically, we
@@ -194,10 +203,13 @@ Therefore:
 \end{array}
 \end{equation}
 The integral can again be computed using the Ogata quadrature as:
-\begin{equation}\label{eq:primitivepTh}
+\begin{equation}
 \displaystyle   K(x,z,Q,q_{T}) \simeq \displaystyle
   \sum_{n=1}^N w_n^{(1)}
-         \,S\left(x,z,\frac{\xi_n^{(1)}}{q_{T}};\mu,Q^2\right) f_{\rm NP}\left(x, \frac{\xi_n^{(1)}}{q_{T}},Q^2\right) D_{\rm NP}\left(z, \frac{\xi_n^{(1)}}{q_{T}},Q^2\right)\,,
+         \,S\left(x,z,\frac{\xi_n^{(1)}}{q_{T}};\mu,Q^2\right) f_{\rm
+           NP}\left(x, \frac{\xi_n^{(1)}}{q_{T}},Q^2\right) D_{\rm
+           NP}\left(z, \frac{\xi_n^{(1)}}{q_{T}},Q^2\right)\,,
+\label{eq:primitivepTh}
 \end{equation}
 with $S$ given in Eq.~(\ref{eq:Sall}). Once $K$ is known, the integral
 of the cross section over the bin
@@ -216,10 +228,11 @@ $z$, and $Q$. Since these integrals usually come together with an
 integration in $q_{T}$, in the following we will consider the
 primitive function $K$ in Eq.~(\ref{eq:primitivepTh}) rather than the
 cross section itself, that is:
-\begin{equation}\label{eq:IntcrosssectionSIDISPrim}
+\begin{equation}
   \widetilde{K}(p_{Th})=\int_{Q_{\rm min}}^{Q_{\rm max}}dQ \int_{z_{\rm
       min}}^{z_{\rm max}}dz \int_{x_{\rm min}}^{x_{\rm max}}dx\,
   K(x,z,Q,p_{Th}/z)\,,
+\label{eq:IntcrosssectionSIDISPrim}
 \end{equation}
 so that:
 \begin{equation}
@@ -245,13 +258,9 @@ $K$ in Eq.~(\ref{eq:primitivepTh}) for any kinematics can be obtained
 through interpolation as:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle   K(x,z,Q,q_T) &\simeq& \displaystyle 
+\displaystyle K(x,z,Q,q_T) &\simeq& \displaystyle 
   \sum_{n=1}^N w_n^{(1)} S\left(x,z,\frac{\xi_n^{(1)}}{q_T};\mu,Q^2\right)
-         \sum_{\alpha=1}^{N_x}\sum_{\beta=1}^{N_z}\sum_{\tau=1}^{N_Q}
-                                         
-                                         \mathcal{I}_\alpha(x)
-                                         \mathcal{I}_\beta(z)
-                                         \mathcal{I}_\tau(Q) \\
+         \sum_{\alpha=1}^{N_x}\sum_{\beta=1}^{N_z}\sum_{\tau=1}^{N_Q}\mathcal{I}_\alpha(x)\mathcal{I}_\beta(z)\mathcal{I}_\tau(Q) \\
 \\
 &\times&\displaystyle f_{\rm NP}\left(x_\alpha, \frac{\xi_n^{(1)}}{ q_{T}},Q_\tau^2\right) D_{\rm NP}\left(z_\beta, \frac{\xi_n^{(1)}}{q_{T}},Q_\tau^2\right)\,.
 \end{array}
@@ -260,18 +269,27 @@ Once we have $K$ in this form, the integration over $x$, $z$, and $Q$
 in Eq.~(\ref{eq:IntcrosssectionSIDISPrim}) does not involve the
 non-perturbative functions $f_{\rm NP}$ and $D_{\rm NP}$ and can be
 written as:
-\begin{equation}\label{eq:numintDIS}
+\begin{equation}
   \widetilde{K}(p_{Th}) = \sum_{n=1}^N 
                                                  \sum_{\alpha=1}^{N_x}\sum_{\beta=1}^{N_z}\sum_{\tau=1}^{N_Q}
-                                                 W_{n\alpha\beta\tau}(p_{Th}) f_{\rm NP}\left(x_\alpha, \frac{z_\beta\xi_n^{(1)}}{p_{Th}},Q_\tau^2\right) D_{\rm NP}\left(z_\beta, \frac{z_\beta\xi_n^{(1)}}{p_{Th}},Q_\tau^2\right)\,,
+                                                 W_{n\alpha\beta\tau}(p_{Th})
+                                                 f_{\rm
+                                                   NP}\left(x_\alpha,
+                                                   \frac{z_\beta\xi_n^{(1)}}{p_{Th}},Q_\tau^2\right)
+                                                 D_{\rm
+                                                   NP}\left(z_\beta,
+                                                   \frac{z_\beta\xi_n^{(1)}}{p_{Th}},Q_\tau^2\right)\,,
+\label{eq:numintDIS}
 \end{equation}
 with:
-\begin{equation}\label{eq:WDIS}
+\begin{equation}
   W_{n\alpha\beta\tau}(p_{Th}) = 
   w_n^{(1)} \int_{Q_{\rm min}}^{Q_{\rm
       max}}dQ\,\mathcal{I}_\tau(Q) \int_{z_{\rm min}}^{z_{\rm max}}dz\,
   \mathcal{I}_\beta(z) \int_{x_{\rm min}}^{x_{\rm
-      max}}dx\, \mathcal{I}_\alpha(x) S\left(x,z,\frac{z\xi_n^{(1)}}{p_{Th}};\mu,Q^2\right)\,.
+      max}}dx\, \mathcal{I}_\alpha(x)
+  S\left(x,z,\frac{z\xi_n^{(1)}}{p_{Th}};\mu,Q^2\right)\,.
+\label{eq:WDIS}
 \end{equation}
 Since the aim is to fit the functions $f_{\rm NP}$ and $D_{\rm NP}$ to
 data, one can precompute and store the coefficients $W$ defined in
@@ -366,9 +384,12 @@ a more empirical approach suffices to obtain a better description of
 the data. Specifically, one can exploit the fact that the
 $q_T$-integrated calculation describes well the data to normalise the
 $q_T$-dependent cross section. The prescription is as simple as this:
-\begin{equation}\label{eq:normalisationSIDIS}
+\begin{equation}
 \left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD\; norm.} =
-\frac{\left[\frac{d\sigma}{dxdQdz}\right]_{\rm F.O.}}{\int_0^{\infty} dq_T\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD}}\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD}\,,
+\frac{\left[\frac{d\sigma}{dxdQdz}\right]_{\rm F.O.}}{\int_0^{\infty}
+  dq_T\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm
+    TMD}}\left[\frac{d\sigma}{dxdQdz d q_T}\right]_{\rm TMD}\,,
+\label{eq:normalisationSIDIS}
 \end{equation}
 where the subscript F.O. stands for fixed order. This prescription
 clearly ensures that:

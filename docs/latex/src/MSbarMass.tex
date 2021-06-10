@@ -21,17 +21,17 @@
 \makeindex
 
 \begin{document}
-
-\begin{center}
-\textbf{\Large $\overline{\mbox{MS}}$ Mass Implementation}\\
-{\large VB}
-\end{center}
-
+%
+%\begin{center}
+%\textbf{\Large $\overline{\mbox{MS}}$ Mass Implementation}\\
+%{\large VB}
+%\end{center}
+%
 \tableofcontents
 
 \newpage
 
-\section{Introduction}
+\title{$\overline{\mbox{MS}}$ mass implementation}
 
 Until recently, heavy quark masses in PDF fits were mostly treated in
 the pole-mass (or on-shell) renormalization scheme
@@ -59,11 +59,13 @@ $\overline{\mbox{MS}}$ mass definitions has been computed in
 Ref.~\cite{Chetyrkin:1999qi} up to four loops.
 , and in particular from eq. (8) of that paper
 we read the ratio between $M$ and $m(\mu)$:
-\begin{equation}\label{straight}
-\frac{m(\mu)}{M} = 1 + z^{(1)}a_s+\underbrace{C_F\left[C_Fz_1^{(2)}+C_Az_2^{(2)}+T_R\left(N_Lz_3^{(2)}+z_4^{(2)}\right)\right]}_{z^{(2)}}a_s^2+\mathcal{O}(a_s^3)\,,
+\begin{equation}
+\frac{m(\mu)}{M} = 1 +
+z^{(1)}a_s+\underbrace{C_F\left[C_Fz_1^{(2)}+C_Az_2^{(2)}+T_R\left(N_Lz_3^{(2)}+z_4^{(2)}\right)\right]}_{z^{(2)}}a_s^2+\mathcal{O}(a_s^3)\,,
+\label{straight}
 \end{equation}
 where:
-\begin{equation}\label{coeff}
+\begin{equation}
 \begin{array}{l}
 \displaystyle z^{(1)}(\mu,M) = C_F\left(- 4 - 3L_{\mu M}\right)\\
 \\
@@ -75,6 +77,7 @@ where:
 \\
 \displaystyle z_{4}^{(2)}(\mu,M) = \frac{143}{6} -16\zeta_2 + \frac{26}3L_{\mu M} + 2 L_{\mu M}^2\,,\\
 \end{array}
+\label{coeff}
 \end{equation}
 where we have defined:
 \begin{equation}
@@ -86,11 +89,13 @@ a_s\equiv a_s(\mu) = \frac{\alpha_s(\mu)}{4\pi}\,.
 \end{equation}
 
 But what we really need is the inverse of eq. (\ref{straight}) in terms of $\mu$ and $m(\mu)$. We could derive it inverting eq. (\ref{straight}) and then writing $M$ in terms of $m(\mu)$, but more easily we can read it from eq. (31) of \cite{Chetyrkin:1999qi} and write it as:
-\begin{equation}\label{inverse}
-\frac{M}{m(\mu)} = 1 + h^{(1)}a_s+\underbrace{C_F\left[C_Fh_1^{(2)}+C_Ah_2^{(2)}+T_R\left(N_Lh_3^{(2)}+h_4^{(2)}\right)\right]}_{h^{(2)}}a_s^2+\mathcal{O}(a_s^3)\,,
+\begin{equation}
+\frac{M}{m(\mu)} = 1 +
+h^{(1)}a_s+\underbrace{C_F\left[C_Fh_1^{(2)}+C_Ah_2^{(2)}+T_R\left(N_Lh_3^{(2)}+h_4^{(2)}\right)\right]}_{h^{(2)}}a_s^2+\mathcal{O}(a_s^3)\,,
+\label{inverse}
 \end{equation}
 with:
-\begin{equation}\label{coeffinv}
+\begin{equation}
 \begin{array}{l}
 \displaystyle h^{(1)}(\mu,m(\mu)) = C_F\left(4 + 3L_{\mu m}\right)\\
 \\
@@ -102,6 +107,7 @@ with:
 \\
 \displaystyle h_{4}^{(2)}(\mu,m(\mu)) = -\frac{143}{6} + 16\zeta_2 - \frac{26}3L_{\mu m} - 2 L_{\mu m}^2\,,\\
 \end{array}
+\label{coeffinv}
 \end{equation}
 where now we have defined:
 \begin{equation}
@@ -113,8 +119,10 @@ In the following we will use eq. (\ref{inverse}) to replace the pole mass $M$ wi
 \section{RGE Solution for the $\overline{\mbox{MS}}$ Running Mass}
 
 Actally, what we also need is to know how $m(\mu)$ runs with the renormalization scale $\mu$. To this end, we use the RGE to obtain the following differential equation for the running:
-\begin{equation}\label{andim}
-\mu^2\frac{dm}{d\mu^2} = m(\mu)\gamma_m(a_s) = -m(\mu)\sum_{n=0}^{\infty}\gamma_m^{(n)}a_s^{n+1}
+\begin{equation}
+\mu^2\frac{dm}{d\mu^2} = m(\mu)\gamma_m(a_s) =
+-m(\mu)\sum_{n=0}^{\infty}\gamma_m^{(n)}a_s^{n+1}
+\label{andim}
 \end{equation}
 and from Eqs. (46), (47) and (48) of \cite{Chetyrkin:1999pq} for $SU(3)$ and taking into account a factor 4 difference in the definition of $a_s$, we read:
 \begin{subequations} 
@@ -129,8 +137,10 @@ and from Eqs. (46), (47) and (48) of \cite{Chetyrkin:1999pq} for $SU(3)$ and tak
 \end{equation}
 \end{subequations} 
 where $N_f$ is the number of active flavours. But we also know how $a_s$ runs, that is:
-\begin{equation}\label{betaf}
-\mu^2\frac{da_s}{d\mu^2} = \beta(a_s) = -\sum_{n=0}^{\infty}\beta_n a_s^{n+2}\,,
+\begin{equation}
+\mu^2\frac{da_s}{d\mu^2} = \beta(a_s) = -\sum_{n=0}^{\infty}\beta_n
+a_s^{n+2}\,,
+\label{betaf}
 \end{equation}
 with:
 \begin{subequations} 
@@ -149,33 +159,40 @@ and from eq. (\ref{betaf}) it follows that:
 \mu^2\frac{dm}{d\mu^2} = \beta(a_s)\frac{d m}{da_s}\,,
 \end{equation}
 so that the differential equation in eq. (\ref{andim}) can be written as:
-\begin{equation}\label{runmass}
+\begin{equation}
 \frac{dm}{da_s} = \frac{\gamma_m(a_s)}{\beta(a_s)}m(a_s)\,.
+\label{runmass}
 \end{equation}
 
 The formal solution of eq. (\ref{runmass}) reads:
-\begin{equation}\label{numsol}
-m(\mu) = m(\mu_0)\exp\left[\int_{a_s(\mu_0)}^{a_s(\mu)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s\right]\,,
+\begin{equation}
+m(\mu) =
+m(\mu_0)\exp\left[\int_{a_s(\mu_0)}^{a_s(\mu)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s\right]\,,
+\label{numsol}
 \end{equation}
 then we expand the integrand in eq. (\ref{numsol}) using the perturbative expansion of the $\gamma_m(a_s)$ and $\beta(a_s)$ functions given in eqs. (\ref{andim}) and (\ref{betaf}) obtaining the following polynomial:
 \begin{equation}
 \frac{\gamma_m(a)}{\beta(a)} = \frac1{a}\left[c_0 + (c_1-b_1c_0)a+(c_2-c_1b_1-b_2c_0+b_1^2c_0)a^2+\mathcal{O}(a^3)\right]
 \end{equation}
 where we have defined:
-\begin{equation}\label{jhgkgfkgf}
+\begin{equation}
 \left\{\begin{array}{l}
 \displaystyle b_i = \frac{\beta_i}{\beta_0}\\
 \\
 \displaystyle c_i = \frac{\gamma_m^{(i)}}{\beta_0}
 \end{array}\right.\,.
+\label{jhgkgfkgf}
 \end{equation}
 We integrate eq. (\ref{numsol}) getting:
-\begin{equation}\label{integral}
-\int_{a_0}^a\frac{\gamma_m(a)}{\beta(a)}da = c_0\ln\frac{a}{a_0} + (c_1-b_1c_0)(a-a_0)+\frac12(c_2-c_1b_1-b_2c_0+b_1^2c_0)(a^2-a_0^2)\,,
+\begin{equation}
+\int_{a_0}^a\frac{\gamma_m(a)}{\beta(a)}da = c_0\ln\frac{a}{a_0} +
+(c_1-b_1c_0)(a-a_0)+\frac12(c_2-c_1b_1-b_2c_0+b_1^2c_0)(a^2-a_0^2)\,,
+\label{integral}
 \end{equation}
 where  $a\equiv a_s(\mu)$ and $a_0\equiv a_s(\mu_0)$. After that, we put it in the exponential function and expand again, finally obtaining:
-\begin{equation}\label{ansol}
+\begin{equation}
 m(\mu)=m(\mu_0)\left(\frac{a}{a_0}\right)^{c_0}\frac{1+(c_1-b_1c_0)a+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2]a^2}{1+(c_1-b_1c_0)a_0+\frac12[c_2-c_1b_1-b_2c_0+b_1^2c_0+(c_1-b_1c_0)^2]a_0^2}\,,
+\label{ansol}
 \end{equation}
 which gives the NNLO running of $m(\mu)$. Of course, to obatin the NLO
 running one has just to disregard the terms proportional to $a^2$ and
@@ -195,8 +212,11 @@ As known, the same problem holds for PDFs. In fact, also PDFs need to be matched
 \subsection{Matching of $\alpha_s(\mu)$}
 
 In this section we will show how to express in terms of the $\overline{\mbox{MS}}$ mass $m(\mu)$ the matching condition for $\alpha_s$. We took the matching condition for $\alpha_s$ from eq. (2.41) of \cite{Vogt:2004ns}, which in turn was taken from eq. (9) of \cite{Chetyrkin:1997sg}.  Here we write this equation (up to NNLO and taking into account a factor 4 coming from the different definition of $a$) as follows:
-\begin{equation}\label{alphaspole}
-\frac{a^{(n-1)}(\mu)}{a^{(n)}(\mu)}=1-\frac23 L_{\mu M}a^{(n)}(\mu)+\left(\frac49L_{\mu M}^2-\frac{38}3L_{\mu M}-\frac{14}3\right)[a^{(n)}(\mu)]^2\,.
+\begin{equation}
+\frac{a^{(n-1)}(\mu)}{a^{(n)}(\mu)}=1-\frac23 L_{\mu
+  M}a^{(n)}(\mu)+\left(\frac49L_{\mu M}^2-\frac{38}3L_{\mu
+    M}-\frac{14}3\right)[a^{(n)}(\mu)]^2\,.
+\label{alphaspole}
 \end{equation}
 being $M$ the pole mass of the $n$-th flavour. But from eq. (\ref{inverse}) we read:
 \begin{equation}
@@ -207,16 +227,21 @@ that, using the expansion:
 \ln(1+x)=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}x^k\,,
 \end{equation}
 can be written as:
-\begin{equation}\label{cacchiocacchio}
-\ln M^2 = \ln m^2(\mu) + 2h^{(1)}(\mu)a^{(n)}(\mu)+\mathcal{O}([a^{(n)}]^2)\,.
+\begin{equation}
+\ln M^2 = \ln m^2(\mu) +
+2h^{(1)}(\mu)a^{(n)}(\mu)+\mathcal{O}([a^{(n)}]^2)\,.
+\label{cacchiocacchio}
 \end{equation}
 Therefore it is straightforward to see that:
 \begin{equation}
 L_{\mu M}  = L_{\mu m} - 2h^{(1)}a^{(n)}=L_{\mu m}-\left(\frac{32}3+8L_{\mu m}\right)a^{(n)}\,,
 \end{equation}
 so that:
-\begin{equation}\label{alphasmsbar}
-\frac{a^{(n-1)}(\mu)}{a^{(n)}(\mu)}=1-\frac23 L_{\mu m}a^{(n)}(\mu)+\left(\frac49L_{\mu m}^2-\frac{22}3L_{\mu m}+\frac{22}9\right)[a^{(n)}(\mu)]^2\,.
+\begin{equation}
+\frac{a^{(n-1)}(\mu)}{a^{(n)}(\mu)}=1-\frac23 L_{\mu
+  m}a^{(n)}(\mu)+\left(\frac49L_{\mu m}^2-\frac{22}3L_{\mu
+    m}+\frac{22}9\right)[a^{(n)}(\mu)]^2\,.
+\label{alphasmsbar}
 \end{equation}
 
 Now, in order to get rid of the logarithmic terms, we choose to match $a^{(n-1)}$ and $a^{(n)}$ at $\mu=m(\mu)=m(m)$ so that we get:
@@ -224,8 +249,9 @@ Now, in order to get rid of the logarithmic terms, we choose to match $a^{(n-1)}
 a^{(n-1)}(m)=a^{(n)}(m)\left(1+\frac{22}9[a^{(n)}(m)]^2\right)\,,
 \end{equation}
 which can be easily inverted obtaining:
-\begin{equation}\label{pollopollo}
+\begin{equation}
 a^{(n)}(m)=a^{(n-1)}(m)\left(1-\frac{22}9[a^{(n-1)}(m)]^2\right)\,.
+\label{pollopollo}
 \end{equation}
 
 So, exactly as it happened in the case of the pole mass, also in the $\overline{\mbox{MS}}$ mass case we can make the matching condition for $\alpha_s$ start to play a role only at NNLO. But the difference is that now the coefficient of the matching is $-22/9$ rather than $14/3$. It is interesting to observe that, in order to perform the matching as described above, we just need to know the value of $m(m)$. This is the so called RG-invariant $\overline{\mbox{MS}}$ mass and this will be given as input parameter in place of the pole mass $M$. It is not by chance that the PDG provides exactly the values for $m_c(m_c)$ and $m_b(m_b)$. This finally allows to evaluate the values of $a$ and $a_0$ that enter in eq. (\ref{ansol}) needed to compute the running of $m(\mu)$. 
@@ -233,8 +259,11 @@ So, exactly as it happened in the case of the pole mass, also in the $\overline{
 \subsection{Matching of $m(\mu)$}
 
 On the other hand, also the running of $m(\mu)$ needs to be matched. In particular, we might need to match the $(n-1)$ with $(n)$ scheme of the mass $m_q(\mu)$, with $q=c,b,t$, being $m_h(\mu)$, with again $h=c,b,t$ the $n$-th threshold. From eqs. (26) and (27) of \cite{Chetyrkin:2000yt} one reads that:
-\begin{equation}\label{mqmc}
-\frac{m_q^{(n-1)}(\mu)}{m_q^{(n)}(\mu)}=1+\left(\frac43L_{\mu m}^{(h)2}-\frac{20}9L_{\mu m}^{(h)}+\frac{89}{27}\right)[a^{(n)}(\mu)]^2\,,
+\begin{equation}
+\frac{m_q^{(n-1)}(\mu)}{m_q^{(n)}(\mu)}=1+\left(\frac43L_{\mu
+    m}^{(h)2}-\frac{20}9L_{\mu
+    m}^{(h)}+\frac{89}{27}\right)[a^{(n)}(\mu)]^2\,,
+\label{mqmc}
 \end{equation}
 where:
 \begin{equation}
@@ -335,11 +364,12 @@ PDFs. One can write the singlet and the gluon in the $N_f+1$ scheme in
 terms of singlet and gluon in $N_f$ scheme at any scale $\mu$ as
 follows(\footnote{It should be noticed that $a_s$ enetring
   eq.~(\ref{couple1})} is undersato to be in the $N_f$ scheme.):
-\begin{equation}\label{couple1}
+\begin{equation}
 \begin{array}{c}
 \displaystyle {\Sigma^{(N_f+1)}(\mu) \choose g^{(N_f+1)}(\mu)}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s\tilde{A}^{S,(1)}_{hg}+a_s^2\tilde{A}^{S,(2)}_{hg}\\
 a_s^2A^{S,(2)}_{gq,h} & 1+a_sA_{gg,h}^{S,(1)}+a_s^2A_{gg,h}^{S,(2)}\end{pmatrix}\left(x,\frac{\mu^2}{M^2}\right){\Sigma^{(N_f)}(\mu) \choose g^{(N_f)}(\mu)}\,,
 \end{array}
+\label{couple1}
 \end{equation}
 where the form of the ($x$-space) functions entering the
 transformation matrix above are given in Appendix B of
@@ -364,20 +394,22 @@ eq. (\ref{cacchiocacchio}) is important in the $\mathcal{O}(a_s)$
 functions. Since both the functions $\tilde{A}^{S,(1)}_{hg}$ and
 $A_{gg,h}^{S,(1)}$ are proportional to $\ln(\mu^2/M^2)$, they can be
 written as:
-\begin{equation}\label{ahciccio!}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \tilde{A}^{S,(1)}_{hg}\left(x,\frac{\mu^2}{M^2}\right) = f_1(x)\ln\frac{\mu^2}{M^2}\\
 \\
 \displaystyle A^{S,(1)}_{gg,h}\left(x,\frac{\mu^2}{M^2}\right) = f_2(x)\ln\frac{\mu^2}{M^2}
 \end{array}\,,
+\label{ahciccio!}
 \end{equation}
 where:
-\begin{equation}\label{ahbelli!}
+\begin{equation}
 \begin{array}{l}
 \displaystyle f_1(x)= 4 T_R[x^2+(1-x)^2]\\
 \\
 \displaystyle f_2(x)= -\frac43 T_R \delta(1-x)
 \end{array}\,.
+\label{ahbelli!}
 \end{equation}
 Replacing $M$ with $m$ in eqs. (\ref{ahciccio!}) using eq. (\ref{cacchiocacchio}), we get:
 \begin{equation}
@@ -396,12 +428,13 @@ a_s^2A^{S,(2)}_{gq,h} & 1+a_sA_{gg,h}^{S,(1)}+a_s^2[A_{gg,h}^{S,(2)}-2h^{(1)}f_2
 \end{equation}
 
 Given that our code works in the Mellin space, the functions in eq. (\ref{ahbelli!}) need to be Mellin-transformed obtaining:
-\begin{equation}\label{ahbellissimi!}
+\begin{equation}
 \begin{array}{l}
 \displaystyle f_1(N) = \mathbf{M}[f_1(x)])(N)= 4 T_R\left[\frac2{N+2}-\frac2{N+1}+\frac1N\right]\\
 \\
 \displaystyle f_2(N) = \mathbf{M}[f_2(x)])(N)= -\frac43 T_R
 \end{array}
+\label{ahbellissimi!}
 \end{equation}
 
 Now, we choose to match $N_f+1$ and $N_f$ schemes at $\mu = m(\mu) = m(m)$ so that all the logarithmic terms vanish (including the functions $\tilde{A}^{S,(1)}_{hg}$ and $A_{gg,h}^{S,(1)}$) obtaining:
@@ -420,7 +453,7 @@ matrix for gluon and singlet result modified by some simple functions.
 
 One might want to invert the matching conditions for PDFs and
 considerig that eq~(\ref{couple1}) can be written as:
-\begin{equation}\label{couple1exp}
+\begin{equation}
 \begin{array}{c}
 \displaystyle {\Sigma^{(N_f+1)}(\mu) \choose g^{(N_f+1)}(\mu)}=\left[
 \begin{pmatrix}
@@ -440,13 +473,14 @@ A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}
 \right]
 {\Sigma^{(N_f)}(\mu) \choose g^{(N_f)}(\mu)}\,,
 \end{array}
+\label{couple1exp}
 \end{equation}
 and using the expansion:
 \begin{equation}
 \frac{1}{1+b_1x+b_2x^2} =  1-b_1x-(b_2-b_1^2)x^2 + \mathcal{O}(x^3)\,,
 \end{equation}
 we can immediately write:
-\begin{equation}\label{couple1expInv}
+\begin{equation}
 \begin{array}{c}
 \displaystyle {\Sigma^{(N_f)}(\mu) \choose g^{(N_f)}(\mu)}=\left[
 \begin{pmatrix}
@@ -467,6 +501,7 @@ A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)} - A_{gg,h}^{S,(1)} \otimes A_{gg,h}^{S,(1)}
 \right]
 {\Sigma^{(N_f+1)}(\mu) \choose g^{(N_f+1)}(\mu)}\,,
 \end{array}
+\label{couple1expInv}
 \end{equation}
 and using eqs.~(\ref{ahciccio!}) and~(\ref{ahbelli!}), we get:
 \begin{equation}
@@ -547,12 +582,17 @@ In the case of the $\overline{\mbox{MS}}$ mass scheme, instead, one chooses $\mu
 L_{\mu m} \rightarrow \ln\kappa + \ln\frac{m(m)}{m(\kappa m)}\,.
 \end{equation}
 From eq. (\ref{numsol}) we see that:
-\begin{equation}\label{chezebedei}
-\ln\frac{m(m)}{m(\kappa m)}=\int_{a_s(\kappa m)}^{a_s(m)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s\,,
+\begin{equation}
+\ln\frac{m(m)}{m(\kappa m)}=\int_{a_s(\kappa
+  m)}^{a_s(m)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s\,,
+\label{chezebedei}
 \end{equation}
 and integrating, from eq. (\ref{integral}), we have that:
-\begin{equation}\label{hdsfgajfh}
-\int_{a_s(\kappa m)}^{a_s(m)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s = c_0\ln\frac{a_s(m)}{a_s(\kappa m)} + (c_1-b_1c_0)[a_s(m)-a_s(\kappa m)]+\dots\,.
+\begin{equation}
+\int_{a_s(\kappa m)}^{a_s(m)}\frac{\gamma_m(a_s)}{\beta(a_s)}da_s =
+c_0\ln\frac{a_s(m)}{a_s(\kappa m)} + (c_1-b_1c_0)[a_s(m)-a_s(\kappa
+m)]+\dots\,.
+\label{hdsfgajfh}
 \end{equation}
 But from the perturbative expansion of the running of $a_s$ we have:
 \begin{equation}
@@ -567,8 +607,9 @@ At the end of the day we find:
 \ln\frac{m(m)}{m(\kappa m)}=a_s(\kappa m)\gamma_m^{(0)}\ln\kappa+\mathcal{O}[a_s^2(\kappa m)]
 \end{equation}
 so that:
-\begin{equation}\label{bugni}
+\begin{equation}
 L_{\mu m} \rightarrow \ln\kappa[1+\gamma_m^{(0)}a_s(\kappa m)]\,.
+\label{bugni}
 \end{equation}
 In the above equation, since $a_s^{(n-1)}=a_s^{(n)}+\mathcal{O}([a_s^{(n)}]^2)$, it doesn't matter whether one puts $a_s^{(n)}(\kappa m)$ or $a_s^{(n-1)}(\kappa m)$ because in any case the difference would be subleading.
 
@@ -623,13 +664,17 @@ so that, up to $\mathcal{O}(a_s^2)$, what we need is:
 \end{array}\,.
 \end{equation}
 Finally we have that:
-\begin{equation}\label{changescheme}
-F(m) = a_sF^{(0)}(m) + a_s^2\left[F^{(1)}(m)+mh^{(1)}\frac{dF^{(0)}}{dM}\bigg|_{M=m}\right]\,.
+\begin{equation}
+F(m) = a_sF^{(0)}(m) +
+a_s^2\left[F^{(1)}(m)+mh^{(1)}\frac{dF^{(0)}}{dM}\bigg|_{M=m}\right]\,.
+\label{changescheme}
 \end{equation}
 
 In order to implement this structure function, we need to evaluate explicitly the derivative in eq. (\ref{changescheme}). First of all we observe that:
-\begin{equation}\label{pippo}
-F^{(0)}(M) = x\int_x^{x_{\mbox{\tiny max}}(M)} \frac{dz}{z}g\left(\frac{x}{z}\right)C_g^{(0)}(\eta(z,M),\xi(M),\chi(M))\,,
+\begin{equation}
+F^{(0)}(M) = x\int_x^{x_{\mbox{\tiny max}}(M)}
+\frac{dz}{z}g\left(\frac{x}{z}\right)C_g^{(0)}(\eta(z,M),\xi(M),\chi(M))\,,
+\label{pippo}
 \end{equation}
 where we have defined:
 \begin{equation}
@@ -660,12 +705,13 @@ and:
 \frac{d \widetilde{G}(x,M)}{d M}=\frac{\partial\widetilde{G}(x,M)}{\partial M}\,,
 \end{equation}
 thus:
-\begin{equation}\label{ignazio}
+\begin{equation}
 \begin{array}{c}
 \displaystyle \frac{dF^{(0)}}{dM} = \frac{\partial \widetilde{G}(x_{\mbox{\tiny max}},M)}{\partial M}-\frac{\partial\widetilde{G}(x,M)}{\partial M}+\frac{dx_{\mbox{\tiny max}}}{dM}G(x_{\mbox{\tiny max}},M) =\\
 \\
 \displaystyle \int_x^{x_{\mbox{\tiny max}}(M)} dz\frac{\partial G(z,M)}{\partial M}+\frac{dx_{\mbox{\tiny max}}}{dM}G(x_{\mbox{\tiny max}},M)\,.
 \end{array}
+\label{ignazio}
 \end{equation}
 But in \cite{Alekhin:2010sv} has been shown that the bounduary term in eq. (\ref{ignazio}) vanishes, thus it can be omitted.
 
@@ -674,8 +720,13 @@ Finally, since:
 \frac{\partial G(z,M)}{\partial M} = \frac{x}{z}g\left(\frac{x}{z}\right)\frac{\partial C_g^{(0)}}{\partial M}\,,
 \end{equation}
 we have that:
-\begin{equation}\label{pollo}
-\frac{dF^{(0)}}{dM}\bigg|_{M=m}=\left[x\int_x^{x_{\mbox{\tiny max}}(M)}\frac{dz}{z}g\left(\frac{x}{z}\right)\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}=x\int_x^{x_{\mbox{\tiny max}}(m)}\frac{dz}{z}g\left(\frac{x}{z}\right)\left[\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}\,.
+\begin{equation}
+\frac{dF^{(0)}}{dM}\bigg|_{M=m}=\left[x\int_x^{x_{\mbox{\tiny
+        max}}(M)}\frac{dz}{z}g\left(\frac{x}{z}\right)\frac{\partial
+    C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}=x\int_x^{x_{\mbox{\tiny
+      max}}(m)}\frac{dz}{z}g\left(\frac{x}{z}\right)\left[\frac{\partial
+    C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}\,.
+\label{pollo}
 \end{equation}
 
 Now, taking into account that:
@@ -683,12 +734,13 @@ Now, taking into account that:
 F^{(1)}(M) = \sum_{i=q,\overline{q},g}x\int_x^{x_{\mbox{\tiny max}}(M)} \frac{dz}{z}q_i\left(\frac{x}{z}\right)C_i^{(1)}(z,M)
 \end{equation}
 and using eqs. (\ref{changescheme}) and (\ref{pollo}), one can explicitly write down the entire NNLO massive structure function in terms of the $\overline{\mbox{MS}}$ mass as follows:
-\begin{equation}\label{master}
+\begin{equation}
 \begin{array}{c}
 \displaystyle F(m) = x\int_x^{x_{\mbox{\tiny max}}(m)} \frac{dz}{z}g\left(\frac{x}{z}\right)\left[a_sC_g^{(0)}(z,m)+a_s^2\left(C_g^{(1)}(z,m)+mh^{(1)}\left[\frac{\partial C_g^{(0)}}{\partial M}\right]\Bigg|_{M=m}\right)\right]+\\
 \\
 \displaystyle \sum_{i=q,\overline{q}}x\int_x^{x_{\mbox{\tiny max}}(M)} \frac{dz}{z}q_i\left(\frac{x}{z}\right)a_s^2C_i^{(1)}(z,M)\,.
 \end{array}
+\label{master}
 \end{equation}
 
 We can now read the recipe for the implementation: in order to implement the $\mathcal{O}(a_s^2)$ massive structure function ($F_2$ or $F_L$) in terms of the $\overline{\mbox{MS}}$ mass $m$, one has just to replace everywhere the pole mass $M$ with $m$ and add to the $\mathcal{O}(a_s^2)$ gluon coefficient function $C_g^{(1)}(z,m)$ the term:
@@ -711,27 +763,34 @@ We consider first $F_2$. Since the NNPDF code works in the Mellin space, it is b
 \end{array}
 \end{equation}
 where:
-\begin{equation}\label{iq}
-I_q(a,N) = \frac{a^{N+q}}{N+q}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)} {_2F_1}\left(\frac12,N+q,N+q+\frac12;a\right)
+\begin{equation}
+I_q(a,N) =
+\frac{a^{N+q}}{N+q}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}
+{_2F_1}\left(\frac12,N+q,N+q+\frac12;a\right)
+\label{iq}
 \end{equation}
-\begin{equation}\label{jq}
+\begin{equation}
 \begin{array}{rl}
 J_q(a,N) =&\displaystyle a^{N+q}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}\bigg\{{_2F_1}\left(\frac12,N+q,N+q+\frac12;a\right)\\
 \\
 &\displaystyle -\frac{N+q}{N+q+\frac12}{_2F_1}\left(\frac12,N+q+1,N+q+\frac32;a\right)\bigg\}
 \end{array}\,,
+\label{jq}
 \end{equation}
 with:
-\begin{equation}\label{definitions1}
-\epsilon = \frac{M^2}{Q^2}\quad\mbox{and}\quad a=\frac1{1+4\epsilon}\,.
+\begin{equation}
+\epsilon = \frac{M^2}{Q^2}\quad\mbox{and}\quad
+a=\frac1{1+4\epsilon}\,.
+\label{definitions1}
 \end{equation}
 From the definitions in eq. (\ref{definitions1}) we obtain:
-\begin{equation}\label{gngngngngng}
+\begin{equation}
 \begin{array}{rl}
 \displaystyle \frac{\partial}{\partial M} &\displaystyle = \frac{\partial \epsilon}{\partial M} \frac{\partial}{\partial \epsilon} = \frac{2\epsilon}{M}\frac{\partial}{\partial \epsilon}\\
 \\
 \displaystyle \frac{\partial}{\partial M} &\displaystyle = \frac{\partial \epsilon}{\partial M} \frac{\partial a}{\partial \epsilon} \frac{\partial}{\partial a} = -\frac{8a^2\epsilon}{M}\frac{\partial}{\partial a}
 \end{array}\,.
+\label{gngngngngng}
 \end{equation}
 Therefore:
 \begin{equation}
@@ -757,13 +816,14 @@ we have that:
 \end{array}
 \end{equation}
 so that we get:
-\begin{equation}\label{diq}
+\begin{equation}
 \begin{array}{rl}
 \displaystyle \frac{\partial I_q}{\partial a} &\displaystyle = a^{N+q-1}\frac{\Gamma(N+q)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}{_2F_1}\left(\frac12,N+q+1,N+q+\frac12;a\right)
 \end{array}
+\label{diq}
 \end{equation}
 and:
-\begin{equation}\label{djq}
+\begin{equation}
 \begin{array}{rl}
 \displaystyle \frac{\partial J_q}{\partial a} &\displaystyle =  a^{N+q-1}\frac{\Gamma(N+q+1)\Gamma(\frac12)}{\Gamma(N+q+\frac12)}\bigg\{{_2F_1}\left(\frac12,N+q+1,N+q+\frac12;a\right)\\
 \\
@@ -771,6 +831,7 @@ and:
 \\
 &\displaystyle +\frac1{N+q+\frac12}{_2F_1}\left(\frac12,N+q+1,N+q+\frac32;a\right)\bigg\}\,.
 \end{array}
+\label{djq}
 \end{equation}
 
 Looking at these expressions, one can see that in these derivatives, a part from hypergeometric functions of the form ${_2F_1(a,b,a+b;x)}$ which were already present in $C_{2,g}^{(0)}$ itself, also hypergeometric functions of the form ${_2F_1(a,b,a+b-1;x)}$ appear. This raises a technical problem because the NNPDF code uses a fast routine for the hypergeometric function which is accurate both around $x=0$ and $x=1$, but with the limitation $c=a+b$. Now, instead, we need also the case ${c=a+b-1}$, therefore we need to extend our routine including this possibility. We can do this using the expansion around $x=1$ reported in eq. (15.3.12) of \cite{AbramowitzStegun}.
@@ -797,8 +858,10 @@ the derivative of $C_{2,g}^{0,(0)}$ is given by:
 \subsubsection{$F_L$}
 
 Now we consider $F_L$. In this case the Mellin transform of the gluon coefficient function takes the simpler form:
-\begin{equation}\label{cgnf1L}
-C_{L,g}^{(0)}\left(N,Q^2,M^2\right)= T_R\left[-8\epsilon I_2(a,N)-4J_2(a,N)+4J_1(a,N)\right]\,.
+\begin{equation}
+C_{L,g}^{(0)}\left(N,Q^2,M^2\right)= T_R\left[-8\epsilon
+  I_2(a,N)-4J_2(a,N)+4J_1(a,N)\right]\,.
+\label{cgnf1L}
 \end{equation}
 where $I_q$ and $J_q$ are given in eqs. (\ref{iq}) and (\ref{jq}), respectively. Therefore, using eq. (\ref{gngngngngng}), we get:
 \begin{equation}
@@ -820,8 +883,10 @@ In this section we consider the generic CC massive structure function. The treat
 F_k(M) = F_k^{(0)}(M) + a_sF_k^{(1)}(M) + \mathcal{O}(a_s^2)\,,
 \end{equation}
 with $k=2,3,L$. Therefore, expanding $F^{(0)}$ and $F^{(1)}$ around $M=m$ and keeping only the terms up to $\mathcal{O}(a_s)$, one obtains:
-\begin{equation}\label{gigi}
-F_k(m) = F_k^{(0)}(m) + a_s\left[F_k^{(1)}(m)+mh^{(1)}\frac{dF_k^{(0)}}{dM}\bigg|_{M=m}\right]\,.
+\begin{equation}
+F_k(m) = F_k^{(0)}(m) +
+a_s\left[F_k^{(1)}(m)+mh^{(1)}\frac{dF_k^{(0)}}{dM}\bigg|_{M=m}\right]\,.
+\label{gigi}
 \end{equation}
 
 One can show that:
@@ -829,7 +894,7 @@ One can show that:
 F^{(0)}_k(M) = b_k(M)s'(\xi(M))\,,
 \end{equation}
 where:
-\begin{equation}\label{definitions}
+\begin{equation}
 \xi = x\underbrace{\left(1+\frac{M^2}{Q^2}\right)}_{\frac1\lambda}=\frac{x}\lambda\quad\mbox{and}\quad
 \left\{\begin{array}{l}
 b_2 = \xi\\
@@ -837,14 +902,18 @@ b_3 = 1\\
 b_L = (1-\lambda)\xi
 \end{array}
 \right.
+\label{definitions}
 \end{equation}
 and where we have also defined:
 \begin{equation}
 s'\equiv 2|V_{cs}|^2s+2|V_{cd}|^2[f\,d+(1-f)u]\quad\mbox{with}\quad f=\frac{N_p}{N_p+N_n}\,.
 \end{equation}
 Therefore:
-\begin{equation}\label{pincopanco}
-mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = mh^{(1)}\frac{d\xi}{dM}\frac{dF^{(0)}_k}{d\xi}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\xi\left[\frac{db_k}{d\xi}s'(\xi)+b_k(\xi)\frac{ds'}{d\xi}\right]\bigg|_{M=m}\,,
+\begin{equation}
+mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} =
+mh^{(1)}\frac{d\xi}{dM}\frac{dF^{(0)}_k}{d\xi}\bigg|_{M=m} =
+2h^{(1)}(1-\lambda)\xi\left[\frac{db_k}{d\xi}s'(\xi)+b_k(\xi)\frac{ds'}{d\xi}\right]\bigg|_{M=m}\,,
+\label{pincopanco}
 \end{equation}
 that can be conveniently rewritten as:
 \begin{equation}
@@ -873,8 +942,10 @@ Using the same arguments of eq. (\ref{ignazio}), one can show that:
 \frac{ds'}{d\xi} = \frac{d}{d\xi}\int_\xi^1\frac{dy}{y}\delta(1-y)s'\left(\frac{\xi}{y}\right) = \int_\xi^1\frac{dy}{y}\delta(1-y)\frac{d}{d\xi}s'\left(\frac{\xi}{y}\right)\,.
 \end{equation}
 therefore eq. (\ref{pincopanco}) can be written as:
-\begin{equation}\label{pancopinco}
-mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\xi\int_\xi^1\frac{dy}{y}\delta(1-y)\left[\frac{db_k}{d\xi}+b_k(\xi)\frac{d}{d\xi}\right]s'\left(\frac{\xi}{y}\right)\,,
+\begin{equation}
+mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} =
+2h^{(1)}(1-\lambda)\xi\int_\xi^1\frac{dy}{y}\delta(1-y)\left[\frac{db_k}{d\xi}+b_k(\xi)\frac{d}{d\xi}\right]s'\left(\frac{\xi}{y}\right)\,,
+\label{pancopinco}
 \end{equation}
 where in the r.h.s. we are understanding that the pole mass $M$, which appears only through $\xi$, must be replaced everywhere with the $\overline{\mbox{MS}}$ mass $m$. But since:
 \begin{equation}
@@ -897,7 +968,7 @@ Therefore eq. (\ref{pancopinco}) can we rewritten as:
 mh^{(1)}\frac{dF^{(0)}_k}{dM}\bigg|_{M=m} = 2h^{(1)}(1-\lambda)\xi\int_\xi^1\frac{dy}{y}\left\{\frac{db_k}{d\xi}\delta(1-y)+\frac{b_k(\xi)}{\xi}\left[y\frac{d}{dy}\delta(1-y)\right]\right\}s'\left(\frac{\xi}{y}\right)\,.
 \end{equation}
 In the above equation a coefficient function can be isolated and, considering the form of $b_k$ given in eq. (\ref{definitions}), we write:
-\begin{equation}\label{RoughCF}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \widetilde{C}_{2,q}(y)=2h^{(1)}(1-\lambda)\left\{\delta(1-y)+\left[y\frac{d}{dy}\delta(1-y)\right]\right\}\\
 \\
@@ -905,6 +976,7 @@ In the above equation a coefficient function can be isolated and, considering th
 \\
 \displaystyle \widetilde{C}_{L,q}(y)=2h^{(1)}(1-\lambda)^2\left\{\delta(1-y)+\left[y\frac{d}{dy}\delta(1-y)\right]\right\}
 \end{array}\,,
+\label{RoughCF}
 \end{equation}
 in such a way that:
 \begin{equation}
@@ -942,7 +1014,7 @@ Now, using the definition of $b_k(\xi)$ given in eq. (\ref{definitions}), we can
 \end{equation}
 from which one can extract the coefficient functions in the Mellin space.
 }):
-\begin{equation}\label{greatresult}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \widetilde{C}_{2,q}(N)=\mathbf{M}[\widetilde{C}_{2,q}(y)](N)=2h^{(1)}(1-\lambda)(1-N)\\
 \\
@@ -950,10 +1022,12 @@ from which one can extract the coefficient functions in the Mellin space.
 \\
 \displaystyle \widetilde{C}_{L,q}(N)=\mathbf{M}[\widetilde{C}_{L,q}(y)](N)=2h^{(1)}(1-\lambda)^2(1-N)
 \end{array}\,.
+\label{greatresult}
 \end{equation}
 In order to carry out the $x$-space implementation, one can show that:
-\begin{equation}\label{DeltaDerivative}
+\begin{equation}
 \frac{d}{dy}\delta(1-y) = \left[\frac{\delta(1-y)}{1-y}\right]_+\,,
+\label{DeltaDerivative}
 \end{equation}
 which is a pretty formal expression that however helps in
 manipulating the coefficient functions in the presence of

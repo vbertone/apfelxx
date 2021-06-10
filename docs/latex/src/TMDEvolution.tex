@@ -87,9 +87,10 @@ distribution $F$ at some final scales $(\mu,\zeta)$ in terms of the
 same distribution at the initial scales $(\mu_0,\zeta_0)$. It will
 turn out that this is accomplished by computing the evolution kernel
 $R\left[(\mu,\zeta)\leftarrow (\mu_0,\zeta_0)\right]$, such that:
-\begin{equation}\label{eq:evkernel}
+\begin{equation}
   F(\mu,\zeta) = R\left[(\mu,\zeta)\leftarrow
     (\mu_0,\zeta_0)\right]F(\mu_0,\zeta_0)\,.
+\label{eq:evkernel}
 \end{equation}
 The evolution kernel $R$ can be expressed in terms of perturbatively
 computable quantities. A collateral aspect that will be discussed
@@ -99,28 +100,35 @@ concerns the resummation of large logarithms that is required to
 ensure that the perturbative convergence is not spoiled.
 
 The RGE and the CS equations read:
-\begin{equation}\label{eq:eveqs}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \frac{\partial \ln F}{\partial \ln \sqrt{\zeta}} =
   K(\mu)\,,\\
 \\
 \displaystyle \frac{\partial \ln F}{\partial \ln \mu} = \gamma(\mu,\zeta)\,,
 \end{array}
+\label{eq:eveqs}
 \end{equation}
 where $\gamma$ and $K$ are the anomalous dimensions of the evolution
 in $\mu$ and $\sqrt{\zeta}$, respectively. The equations above can be
 solved as follows. The first equation gives:
-\begin{equation}\label{eq:zetadir}
-F(\mu,\zeta) = \exp\left[  K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}\right]F(\mu,\zeta_0)\,.
+\begin{equation}
+F(\mu,\zeta) = \exp\left[
+  K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}\right]F(\mu,\zeta_0)\,.
+\label{eq:zetadir}
 \end{equation}
 The factor $F(\mu,\zeta_0)$ can then be evolved in $\mu$ using the
 second equation:
-\begin{equation}\label{eq:mudir}
-F(\mu,\zeta_0) = \exp\left[ \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,,
+\begin{equation}
+F(\mu,\zeta_0) = \exp\left[
+  \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,,
+\label{eq:mudir}
 \end{equation}
 such that:
-\begin{equation}\label{eq:solution1}
-  F(\mu,\zeta) = \exp\left[ K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,.
+\begin{equation}
+  F(\mu,\zeta) = \exp\left[
+    K(\mu)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma(\mu',\zeta_0)\right]F(\mu_0,\zeta_0)\,.
+\label{eq:solution1}
 \end{equation}
 This equation has exactly the structure of Eq.~(\ref{eq:evkernel}). We
 now need to express the argument of the exponent in terms of
@@ -129,13 +137,16 @@ perturbatively computable quantities.
 In order to do so, we use the fact that the rapidity anomalous
 dimension $K$ needs to be renormalised and thus it obeys its own RGE,
 that reads:
-\begin{equation}\label{eq:CuspRGE}
+\begin{equation}
 \frac{\partial K}{\partial \ln \mu} = - \gamma_K(\alpha_s(\mu))\,.
+\label{eq:CuspRGE}
 \end{equation}
 $\gamma_K$ is said cusp anomalous dimension and obeys the perturbative
 expansion:
-\begin{equation}\label{eq:GKexp}
-  \gamma_K(\alpha_s(\mu)) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_K^{(n)}\,,
+\begin{equation}
+  \gamma_K(\alpha_s(\mu)) =
+  \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_K^{(n)}\,,
+\label{eq:GKexp}
 \end{equation}
 where $\gamma_K^{(n)}$ are numerical coefficients. The value of the
 coefficients up to $n=3$ can be read from Eq.~(59) of
@@ -147,22 +158,28 @@ the cusp anomalous dimensions for quarks and gluon are equal up to a
 factor $C_F$ in the quark case and $C_A$ in the gluon case.
 
 Eq.~(\ref{eq:CuspRGE}) can be easily solved obtaining:
-\begin{equation}\label{eq:CuspEv}
-K(\mu) = K(\mu_0) - \int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\,.
+\begin{equation}
+K(\mu) = K(\mu_0) -
+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\,.
+\label{eq:CuspEv}
 \end{equation}
 We anticipate that in the $\overline{\mbox{MS}}$ renormalisation
 scheme, there exists a particular scale, $\mu_b = 2e^{-\gamma_E}/b_T$,
 such that $K$ computed at $\mu_b$ is free of logaritms and admits the
 following perturbative expansion:
-\begin{equation}\label{eq:Kexp}
-K(\mu_b) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}K^{(n,0)}\,,
+\begin{equation}
+K(\mu_b) =
+\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n+1}K^{(n,0)}\,,
+\label{eq:Kexp}
 \end{equation}
 where $K^{(n,0)}$ are numerical coefficients. Therefore, if
 $\mu_0\simeq \mu_b$ the first term in the r.h.s. of
 Eq.~(\ref{eq:CuspEv}) is free of large logs and thus its perturbative
 expansion, that reads:
-\begin{equation}\label{eq:rapandimlog}
-K(\mu_0) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
+\begin{equation}
+K(\mu_0) =
+\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
+\label{eq:rapandimlog}
 \end{equation}
 is reliable. The logarithmic terms in Eq.~(\ref{eq:rapandimlog}) can
 be computed by using Eq.~(\ref{eq:CuspRGE}) or Eq.~(\ref{eq:CuspEv})
@@ -189,9 +206,13 @@ the coupling $\alpha_s$, that we write:
 \end{equation}
 whose solution for the evolution between $\mu_b$ and $\mu'$ expanded
 to two loops reads:
-\begin{equation}\label{eq:alphasexp}
+\begin{equation}
 \left(\frac{\alpha_s(\mu')}{4\pi}\right) =
-\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)+\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^2\left(-2\beta_0\ln\frac{\mu'}{\mu_b}\right) +\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^3\left(4\beta_0^2 \ln^2\frac{\mu'}{\mu_b}-2\beta_1 \ln\frac{\mu'}{\mu_b}\right) +\mathcal{O}(\alpha_s^4)\,,
+\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)+\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^2\left(-2\beta_0\ln\frac{\mu'}{\mu_b}\right)
++\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^3\left(4\beta_0^2
+  \ln^2\frac{\mu'}{\mu_b}-2\beta_1 \ln\frac{\mu'}{\mu_b}\right)
++\mathcal{O}(\alpha_s^4)\,,
+\label{eq:alphasexp}
 \end{equation}
 such that:
 \begin{equation}
@@ -204,7 +225,7 @@ and:
 \left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^3+\mathcal{O}(\alpha_s^4)\,.
 \end{equation}
 Therefore, using Eq.~(\ref{eq:GKexp}) up to three loops, one finds:
-\begin{equation}\label{eq:GKexpForInt}
+\begin{equation}
 \begin{array}{rcl}
   \gamma_K(\alpha_s(\mu')) &=&\displaystyle
   \left(\frac{\alpha_s(\mu_b)}{4\pi}\right) \gamma_K^{(0)}+\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^2\left[-2\beta_0 \gamma_K^{(0)}\ln\frac{\mu'}{\mu_b}+\gamma_K^{(1)}\right]
@@ -215,6 +236,7 @@ Therefore, using Eq.~(\ref{eq:GKexp}) up to three loops, one finds:
   +\mathcal{O}(\alpha_s^4)
   \,.
 \end{array}
+\label{eq:GKexpForInt}
 \end{equation}
 Using Eq.~(\ref{eq:GKexpForInt}) in the integral in the r.h.s. of
 Eq.~(\ref{eq:CuspEv}) computed between $\mu_b$ and $\mu_0$, one finds:
@@ -235,12 +257,15 @@ Eq.~(\ref{eq:CuspEv}) computed between $\mu_b$ and $\mu_0$, one finds:
 \end{equation}
 Replacing $\alpha_s(\mu_b)$ with $\alpha_s(\mu_0)$ through the
 expansion:
-\begin{equation}\label{eq:asinvexp}
+\begin{equation}
 \left(\frac{\alpha_s(\mu_b)}{4\pi}\right)=\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)+2\beta_0\ln\frac{\mu_0}{\mu_b}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^2+\left(2\beta_1\ln\frac{\mu_0}{\mu_b}+4\beta_0^2\ln^2\frac{\mu_0}{\mu_b}\right)\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^3+\mathcal{O}(\alpha_s^4)\,,
+\label{eq:asinvexp}
 \end{equation}
 the final result is:
-\begin{equation}\label{eq:CSkernelScales}
-K(\mu_0) =\sum_{n=0}^{2}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
+\begin{equation}
+K(\mu_0)
+=\sum_{n=0}^{2}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n+1}\sum_{m=0}^{n+1}K^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,,
+\label{eq:CSkernelScales}
 \end{equation}
 where we read off:
 \begin{equation}
@@ -274,8 +299,10 @@ of the equation above is:
 \end{equation}
 It turns out that $\gamma(\mu,\mu^2)$ has a purely perturbative
 expansion:
-\begin{equation}\label{eq:GFexp}
-  \gamma(\mu,\mu^2) \equiv \gamma_F(\alpha_s(\mu)) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_F^{(n)}\,,
+\begin{equation}
+  \gamma(\mu,\mu^2) \equiv \gamma_F(\alpha_s(\mu)) =
+  \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu)}{4\pi}\right)^{n+1}\gamma_F^{(n)}\,,
+\label{eq:GFexp}
 \end{equation}
 where $\gamma_F^{(n)}$ are again numerical coefficients that are given
 in Eq.~(58) of Ref.~\cite{Collins:2017oxh} and Eq.~(D.7) of
@@ -283,19 +310,29 @@ Ref.~\cite{Echevarria:2016scs} (Eq.~(D.8) reports the coefficients for
 the gluon anomalous dimension). The two sets of coefficients differ by
 a minus sign due to the different definition of the constant
 (non-logarithmic) term of the RGE anomalous dimension. Therefore:
-\begin{equation}\label{eq:GFEv}
-\gamma(\mu,\zeta) = \gamma_F(\alpha_s(\mu)) - \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\,.
+\begin{equation}
+\gamma(\mu,\zeta) = \gamma_F(\alpha_s(\mu)) -
+\gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\,.
+\label{eq:GFEv}
 \end{equation}
 Finally, plugging Eqs.~(\ref{eq:CuspEv}) and~(\ref{eq:GFEv}) into
 Eq.~(\ref{eq:solution1}), one finds:
-\begin{equation}\label{eq:solution2}
-  F(\mu,\zeta) = \exp\left\{ K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu')) - \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}F(\mu_0,\zeta_0)\,.
+\begin{equation}
+  F(\mu,\zeta) = \exp\left\{
+    K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'))
+      -
+      \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}F(\mu_0,\zeta_0)\,.
+\label{eq:solution2}
 \end{equation}
 Comparing Eq.~(\ref{eq:solution2}) to Eq.~(\ref{eq:evkernel}) allows
 one to give an explicit expression to the evolution kernel:
-\begin{equation}\label{eq:evkernelexp}
+\begin{equation}
   R\left[(\mu,\zeta)\leftarrow
-    (\mu_0,\zeta_0)\right] = \exp\left\{ K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu')) - \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}\,.
+    (\mu_0,\zeta_0)\right] = \exp\left\{
+    K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'))
+      -
+      \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}\,.
+\label{eq:evkernelexp}
 \end{equation}
 
 Eq.~(\ref{eq:solution2}) has been obtained evolving the TMD
@@ -327,27 +364,31 @@ collinear distribution $f$ (a PDF or a FF) through the perturbative
 coefficients $C$(\footnote{A sum over flavours is understood. As a
   matter of fact, the matching function $C$ has to be regarded as a
   matrix in flavour space multipling a vector of collinear PDFs/FFs.}):
-\begin{equation}\label{eq:matching}
+\begin{equation}
 F(\mu,\zeta) = C(\mu,\zeta) \otimes f(\mu)\,,
+\label{eq:matching}
 \end{equation}
 so that:
-\begin{equation}\label{eq:solution3}
+\begin{equation}
   F(\mu,\zeta) = \exp\left\{
     K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}+\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'))
       -
       \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]\right\}C(\mu_0,\zeta_0)\otimes
   f(\mu_0)\,.
+\label{eq:solution3}
 \end{equation}
 Exactly as in the case of $K$, for $\mu_0=\sqrt{\zeta_0}=\mu_b$ the
 matching function admits the expansion:
-\begin{equation}\label{eq:MatchCoeffExp}
-C(\mu_b,\mu_b^2) =\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n}C^{(n,0)}\,,
+\begin{equation}
+C(\mu_b,\mu_b^2)
+=\sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_b)}{4\pi}\right)^{n}C^{(n,0)}\,,
+\label{eq:MatchCoeffExp}
 \end{equation}
 where the coefficients $C^{(n,0)}$ are functions of $x$ only. In order
 to be able to compute the function $C$ for generic values of the
 scales $\mu$ and $\zeta$, evolution equations can be derived. Deriving
 Eq.~(\ref{eq:matching}) with respect to $\mu$ and $\zeta$ gives:
-\begin{equation}\label{eq:derivs1}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \frac{\partial F}{\partial \ln\sqrt{\zeta}} =
   \frac{\partial C}{\partial \ln\sqrt{\zeta}}\otimes f(\mu)\,,\\
@@ -357,14 +398,17 @@ Eq.~(\ref{eq:matching}) with respect to $\mu$ and $\zeta$ gives:
   \frac{\partial f}{\partial \ln\mu} = \left[\frac{\partial
   C}{\partial \ln\mu}+C(\mu,\zeta) \otimes 2P(\alpha_s(\mu)) \right]\otimes f(\mu)\,.
 \end{array}
+\label{eq:derivs1}
 \end{equation}
 In the r.h.s. of the second equation I have used the DGLAP equation:
-\begin{equation}\label{eq:DGLAPeq}
-\frac{\partial f}{\partial \ln\mu} = 2P(\alpha_s(\mu)) \otimes f(\mu)\,.
+\begin{equation}
+\frac{\partial f}{\partial \ln\mu} = 2P(\alpha_s(\mu)) \otimes
+f(\mu)\,.
+\label{eq:DGLAPeq}
 \end{equation}
 One can also take the derivative of Eq.~(\ref{eq:solution2}) and,
 using Eq.~(\ref{eq:matching}), the result is:
-\begin{equation}\label{eq:derivs2}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \frac{\partial F}{\partial \ln\sqrt{\zeta}} =\left[
   K(\mu_0)-\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\right]F(\mu,\zeta)= \left[
@@ -379,11 +423,12 @@ using Eq.~(\ref{eq:matching}), the result is:
       \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]
   C(\mu,\zeta)\otimes f(\mu)\,.
 \end{array}
+\label{eq:derivs2}
 \end{equation}
 Equating Eq.~(\ref{eq:derivs1}) and Eq.~(\ref{eq:derivs2}) and
 dropping the distribution $f$, the evolution equations for $C$ are
 obtained:
-\begin{equation}\label{eq:CEvEq}
+\begin{equation}
 \begin{array}{l}
   \displaystyle \frac{\partial C}{\partial \ln\sqrt{\zeta}} = \left[
   K(\mu_0)-\int_{\mu_0}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\right]C(\mu,\zeta)
@@ -395,6 +440,7 @@ obtained:
   \gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\right]\Delta-2P(\alpha_s(\mu))\right\}\otimes
   C(\mu,\zeta)\,,
 \end{array}
+\label{eq:CEvEq}
 \end{equation}
 where the $\Delta$ is a matrix in flavour space whose components are
 defined as:
@@ -406,8 +452,10 @@ to determine the evolution of the matching function $C$. If one
 assumes $\mu_0=\sqrt{\zeta_0}\simeq \mu_b$ in
 Eq.~(\ref{eq:solution2}), the matching function $C$ can be reliably
 expanded as:
-\begin{equation}\label{eq:MatchExp}
-  C(\mu_0,\mu_0^2) = \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
+\begin{equation}
+  C(\mu_0,\mu_0^2) =
+  \sum_{n=0}^{\infty}\left(\frac{\alpha_s(\mu_0)}{4\pi}\right)^{n}\sum_{m=0}^{2n}C^{(n,m)}\ln^m\left(\frac{\mu_0}{\mu_b}\right)\,.
+\label{eq:MatchExp}
 \end{equation}
 The coefficient functions $C^{(n,m)}$ have been computed for both PDFs
 and FFs in Ref.~\cite{Echevarria:2016scs}. The same functions have
@@ -431,7 +479,7 @@ and we set $C^{(0,0)}=\Delta\equiv 1$ keeping in mind that any scalar
 carries the flavour and $x$ structure of $\Delta$.  Due to the fact
 the evolution kernel of the first equation in Eq.~(\ref{eq:CEvEq}) is
 in dependent of $\zeta$, the evolution of $C$ in $\zeta$ reads:
-\begin{equation}\label{eq:Cexp1}
+\begin{equation}
 \begin{array}{rcl}
 C(\mu_b,\zeta_0) &=&\displaystyle
 \exp\left[K(\mu_b)L_{\zeta}\right]
@@ -443,25 +491,30 @@ C(\mu_b,\mu_b^2) \\
     C^{(1,0)}+K^{(1,0)}
     \right)L_{\zeta} + \frac12\left(K^{(0,0)}\right)^2 L_{\zeta}^2\right]+\mathcal{O}(\alpha_s^3)
 \end{array}
+\label{eq:Cexp1}
 \end{equation}
 
 Now we need to solve also the second equation in Eq.~(\ref{eq:CEvEq})
 to evolve $C$ from $(\mu_b,\zeta_0)$ to $(\mu_0,\zeta_0)$. 
 The solution is:
-\begin{equation}\label{eq:Cexp2}
+\begin{equation}
   C(\mu_0,\zeta_0) =
                        \exp\left[\sum_{n=0}^{\infty}\int_{\mu_b}^{\mu_0}\frac{d\mu'}{\mu'}\left(\frac{\alpha_s(\mu')}{4\pi}\right)^{n+1}\left\{\left[\gamma_F^{(n)}
                        -
                        \gamma_K^{(n)}\ln\frac{\sqrt{\zeta_0}}{\mu'}\right]\Delta-2P^{(n)}\right\}\right]\otimes
-                       C(\mu_b,\zeta_0) \\
+                       C(\mu_b,\zeta_0)
+\label{eq:Cexp2}
 \end{equation}
 Finally, we need to plug Eq.~(\ref{eq:Cexp1}) into
 Eq.~(\ref{eq:Cexp2}), replace $\alpha_s(\mu_b)$ with $\alpha_s(\mu_0)$
 using Eq.~(\ref{eq:asinvexp}), and truncate the result to
 $\mathcal{O}(\alpha_s^2)$. We refrain from writing the full expression
 because too lengthy that however can be written in a compact form as:
-\begin{equation}\label{eq:MatchExp2}
-  C(\mu_0,\zeta_0) = \sum_{n=0}^{2}a_0^{n}\sum_{m=0}^{2n}\sum_{k=0}^{m}\bar{C}^{(n,m-k,k)}L_\mu^{m-k}L_\zeta^{k} +\mathcal{O}(\alpha_s^3)\,,
+\begin{equation}
+  C(\mu_0,\zeta_0) =
+  \sum_{n=0}^{2}a_0^{n}\sum_{m=0}^{2n}\sum_{k=0}^{m}\bar{C}^{(n,m-k,k)}L_\mu^{m-k}L_\zeta^{k}
+  +\mathcal{O}(\alpha_s^3)\,,
+\label{eq:MatchExp2}
 \end{equation}
 with:
 \begin{equation}
@@ -472,7 +525,7 @@ In order to simplify the structure, one may take:
 L_\mu=L_\zeta=L_0\,,
 \end{equation}
 and accounting for the fact that $K^{(0,0)}=0$, we have:
-\begin{equation}\label{eq:Cscalevars}
+\begin{equation}
 \begin{array}{rcl}
   C(\mu_0,\mu_0^2) &=&\displaystyle 1+a_0\left[
                        C^{(1,0)}+\left(\gamma_F^{(0)}
@@ -491,6 +544,7 @@ and accounting for the fact that $K^{(0,0)}=0$, we have:
                        +\gamma_K^{(0)} P^{(0)}-\frac23 \beta_0 \gamma_K^{(0)}\right) L_0^3+
                        \frac18\left(\gamma_K^{(0)}\right)^2L_0^4\bigg]+\mathcal{O}(\alpha_s^3)\,.
 \end{array}
+\label{eq:Cscalevars}
 \end{equation}
 
 In order to use Eq.~(\ref{eq:solution3}) in phenomenological
@@ -518,8 +572,11 @@ $Q$ is proportional to \textit{two} TMD distributions:
 \end{equation}
 where $H$ is the appropriate hard function and with the constraint
 $\zeta_1\zeta_2=Q^4$. Using the evolution kernel $R$, we find:
-\begin{equation}\label{eq:physobsev}
-\sigma(Q)\propto H\left(Q,\mu\right) R\left[(\mu,\zeta_1)\leftarrow(\mu_0,\zeta_0)\right]R\left[(\mu,\zeta_2)\leftarrow(\mu_0,\zeta_0)\right]F_1(\mu_0,\zeta_0) F_2(\mu_0,\zeta_0)\,.
+\begin{equation}
+\sigma(Q)\propto H\left(Q,\mu\right)
+R\left[(\mu,\zeta_1)\leftarrow(\mu_0,\zeta_0)\right]R\left[(\mu,\zeta_2)\leftarrow(\mu_0,\zeta_0)\right]F_1(\mu_0,\zeta_0)
+F_2(\mu_0,\zeta_0)\,.
+\label{eq:physobsev}
 \end{equation}
 But using Eq.~(\ref{eq:evkernelexp}):
 \begin{equation}
@@ -557,16 +614,19 @@ Specifically, one requires:
 \end{equation}
 that, using Eq.~(\ref{eq:physobsev}), translates into the following
 evolution equation for $H$:
-\begin{equation}\label{eq:HEv}
+\begin{equation}
 \frac{d \ln H}{d \ln\mu} =-2\gamma_F(\alpha_s(\mu))
       -
       2\gamma_K(\alpha_s(\mu))\ln\frac{\mu}{Q}\,.
+\label{eq:HEv}
 \end{equation}
 whose solution for the evolution between $Q$ and $\mu$ is:
-\begin{equation}\label{eq:HEvSol}
+\begin{equation}
 H(Q,\mu) = \exp\left\{-2\int_Q^\mu\frac{d\mu'}{\mu'}\left[\gamma_F(\alpha_s(\mu'))
       +
-      \gamma_K(\alpha_s(\mu'))\ln\frac {\mu'}{Q}\right]\right\}H(Q,Q)\,.
+      \gamma_K(\alpha_s(\mu'))\ln\frac
+      {\mu'}{Q}\right]\right\}H(Q,Q)\,.
+\label{eq:HEvSol}
 \end{equation}
 Knowing that:
 \begin{equation}
@@ -583,7 +643,7 @@ Defining:
 a_\mu = \frac{\alpha_s(\mu)}{4\pi}\quad\mbox{and}\quad L_{Q} = \ln\frac{\mu}{Q}\,,
 \end{equation}
 we find:
-\begin{equation}\label{eq:Hexp2}
+\begin{equation}
 \begin{array}{rcl}
   H(Q,\mu) &=&\displaystyle 1+a_\mu\left[H^{(1)}-2\gamma_F^{(0)}L_{Q}
                        -
@@ -603,6 +663,7 @@ we find:
                        \bigg]
                        +\mathcal{O}(\alpha_s^3)\,.
 \end{array}
+\label{eq:Hexp2}
 \end{equation}
 The formula above allows us to vary the final renormalisation scale
 $\mu$ around the natural value $Q$. To summarise, there are three
@@ -616,10 +677,11 @@ final renormalisation scale $\mu$ around the hard scale $Q$ and is
 parameterised by the factor $C_f$, such that $L_Q=\ln C_f$. In
 conclusion, the cross section formula with generic scales is
 proportional to:
-\begin{equation}\label{eq:physobsev2}
+\begin{equation}
 \sigma(Q)\propto H\left(Q,C_fQ\right)
   \left(R\left[(C_fQ,Q^2)\leftarrow(C_i^\mu\mu_b,(C_i^\zeta\mu_b)^2)\right]\right)^2 F_1(C_i^\mu\mu_b,(C_i^\zeta\mu_b)^2)
   F_2(C_i^\mu\mu_b,(C_i^\zeta\mu_b)^2)\,.
+\label{eq:physobsev2}
 \end{equation}
 However, notice that in Eq.~(\ref{eq:Cscalevars}) we have assumed
 $C_i^\mu=C_i^\zeta=C_i$. So effectively we are allowing for the
@@ -645,7 +707,7 @@ itself computed in $\kappa_R \mu$, where $\kappa_R$ is a factor not
 too far from one, and accounting for the evolution between
 $\kappa_R \mu$ and $\mu$ at a given fixed order. This is a perhaps
 complicated way of using the following equality:
-\begin{equation}\label{eq:alphasscalvar}
+\begin{equation}
 \begin{array}{rcl}
 a_s(\mu) &=&\displaystyle 
 a_s(\kappa_R \mu)\bigg[1+ a_s(\kappa_R \mu)\beta_0\ln\kappa_R^2
@@ -655,6 +717,7 @@ a_s(\kappa_R \mu)\bigg[1+ a_s(\kappa_R \mu)\beta_0\ln\kappa_R^2
 &+&\displaystyle a_s^3(\kappa_R \mu)\left(\beta_0^3 \ln^3\kappa_R^2+\frac{5}{2}\beta_0\beta_1 \ln^2\kappa_R^2+\beta_2
   \ln\kappa_R^2 \right) \bigg] +\mathcal{O}(\alpha_s^5)\,,
 \end{array}
+\label{eq:alphasscalvar}
 \end{equation}
 that can be derived extending Eq.~(\ref{eq:alphasexp}). At N$^k$LL the
 square bracket has to include corrections up to
@@ -745,24 +808,27 @@ trusts perturbation theory. The value has to be such that:
 \end{equation}
 Then one introduces a monotonic function $b_*$ of $b_T$ with the
 following behaviour:
-\begin{equation}\label{eq:bstardef}
+\begin{equation}
 \begin{array}{lll}
 b_*(b_T)\simeq b_T &\mbox{ for } & b_T\rightarrow 0\,,\\
 b_*(b_T) \rightarrow b_{\rm max} &\mbox{ for } & b_T\rightarrow \infty\,.
 \end{array}
+\label{eq:bstardef}
 \end{equation}
 A common choice is:
-\begin{equation}\label{eq:bstardefCSS}
+\begin{equation}
 b_*(b_T) = \frac{b_T}{\sqrt{1+ b_T^2/b_{\rm max}^2}}\,,
+\label{eq:bstardefCSS}
 \end{equation}
 but more complicated functions can be employed to have better control
 on the low-$b_T$ region. Now, one writes:
-\begin{equation}\label{eq:separatation}
+\begin{equation}
   F(x, {b}_T,\mu,\zeta) = \left[\frac{F(x,
       {b}_T,\mu,\zeta)}{F(x,
       b_*({b}_T),\mu,\zeta)}\right]F(x,
   b_*({b}_T),\mu,\zeta) \equiv f_{\rm NP}(x,
   {b}_T,\zeta) F(x, b_*({b}_T),\mu,\zeta)\,.
+\label{eq:separatation}
 \end{equation}
 This separation, often referred to as CSS prescription after Collins,
 Soper, and Sterman, is advantageous because, due to the behaviour of
@@ -801,7 +867,7 @@ and $\zeta_b$. Therefore, from the equation above, we see that
 $f_{\rm NP}\rightarrow 1$ for $b_T\rightarrow 0$. Conversely, if $b_T$
 becomes large $b_*$ saturates to $b_{\rm max}$. In this limit, we can
 write:
-\begin{equation}\label{eq:fNPexplicit}
+\begin{equation}
 \begin{array}{l}
 \displaystyle  f_{\rm NP}(x,
   {b}_T,\zeta) \mathop{\longrightarrow}_{b_T\rightarrow \infty}\\
@@ -813,6 +879,7 @@ write:
   \gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]
   \right\}\frac{F(\mu_b,\zeta_b)}{F(\mu_{\rm min},\zeta_{\rm min})}\,,
 \end{array}
+\label{eq:fNPexplicit}
 \end{equation}
 where I have defined
 $\mu_{\rm min} = \sqrt{\zeta_{\rm min}} = 2e^{-\gamma_E}/b_{\rm max}$.
@@ -924,8 +991,11 @@ later stage:
 \end{equation}
 Now we use the expansions in Eqs.~(\ref{eq:GKexp}), (\ref{eq:Kexp})
 and~(\ref{eq:GFexp}):
-\begin{equation}\label{eq:Sudexp}
-  R^2 = \exp\left\{\sum_{n=0}^\infty a_s^{n+1}(\mu_b)K^{(n,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}a_s^{n+1}(\mu')\left(\gamma_F^{(n)} - \frac12\gamma_K^{(n)}\ln\frac{Q^2}{\mu'^2}\right)\right\}\,,
+\begin{equation}
+  R^2 = \exp\left\{\sum_{n=0}^\infty
+    a_s^{n+1}(\mu_b)K^{(n,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}a_s^{n+1}(\mu')\left(\gamma_F^{(n)}
+      - \frac12\gamma_K^{(n)}\ln\frac{Q^2}{\mu'^2}\right)\right\}\,,
+\label{eq:Sudexp}
 \end{equation}
 where we have defined:
 \begin{equation}
@@ -936,17 +1006,20 @@ argument of the exponential in terms of a common value of $\alpha_s$
 computed at some hard scale: the natural choice in view of the
 matching is $\alpha_s(Q)$. This can be achieved by using the RGE for
 $a_s$ at leading order:
-\begin{equation}\label{eq:RGEas}
+\begin{equation}
 \mu^2\frac{da_s}{d\mu^2}=-\beta_0a_s^2(\mu)\,,
+\label{eq:RGEas}
 \end{equation}
 whose solution is:
-\begin{equation}\label{eq:asexp}
-a_s(\mu) = \frac{a_s(Q)}{1+a_s(Q)\beta_0\ln(\mu^2/Q^2)}\simeq a_s(Q)\left[1+a_s(Q)\beta_0\ln(Q^2/\mu^2)+\mathcal{O}(a_s^2)\right]\,.
+\begin{equation}
+a_s(\mu) = \frac{a_s(Q)}{1+a_s(Q)\beta_0\ln(\mu^2/Q^2)}\simeq
+a_s(Q)\left[1+a_s(Q)\beta_0\ln(Q^2/\mu^2)+\mathcal{O}(a_s^2)\right]\,.
+\label{eq:asexp}
 \end{equation}
 Plugging the expansion in the r.h.s. of Eq.~(\ref{eq:asexp}) into
 Eq.~(\ref{eq:Sudexp}) and retaining only terms up to
 $\mathcal{O}(a_s^2)$, one finds: 
-\begin{equation}\label{eq:SudExp1}
+\begin{equation}
 \begin{array}{rcl}
   R^2 &=&\displaystyle \exp\Bigg\{ a_s(Q)\left[
           K^{(0,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\left(\gamma_F^{(0)}
@@ -958,6 +1031,7 @@ $\mathcal{O}(a_s^2)$, one finds:
 &+&\displaystyle a_s^2(Q)\left[K^{(1,0)}\ln\frac{Q^2}{\mu_b^2}+\int_{\mu_b^2}^{Q^2}\frac{d\mu'^2}{\mu'^2}\left(\gamma_F^{(1)}
           - \frac12\gamma_K^{(1)}\ln\frac{Q^2}{\mu'^2}\right)\right]+\mathcal{O}(a_s^3)\Bigg\}\,.
 \end{array}
+\label{eq:SudExp1}
 \end{equation}
 The final step before carrying out the expansion is computing the
 integrals:
@@ -967,7 +1041,7 @@ integrals:
   Q^2}d\ln\mu'^2\ln^k\left(\frac{Q^2}{\mu'^2}\right) = \int^{\ln(Q^2/\mu_b^2)}_{0}dx\,x^k=\frac{1}{k+1}\ln^{k+1}\left(\frac{Q^2}{\mu_b^2}\right)\,.
 \end{equation}
 so that:
-\begin{equation}\label{eq:SudExp0}
+\begin{equation}
 \begin{array}{rcl}
   R^2 &\simeq&\displaystyle \exp\Bigg\{ a_s(Q)\left[
           \left(K^{(0,0)}+\gamma_F^{(0)}\right)L - \frac14\gamma_K^{(0)}L^2
@@ -975,15 +1049,18 @@ so that:
 \\
 &+& \displaystyle a_s^2(Q)\bigg[\left(K^{(1,0)}+\gamma_F^{(1)}\right)L +\left(\beta_0 K^{(0,0)}+\frac12\beta_0\gamma_F^{(0)} - \frac14\gamma_K^{(1)}\right)L^2- \frac16 \beta_0\gamma_K^{(0)}L^3\bigg]\Bigg\}\,,
 \end{array}
+\label{eq:SudExp0}
 \end{equation}
 where we have defined:
 %If we define:
-\begin{equation}\label{eq:reslogs}
+\begin{equation}
 L\equiv \ln\frac{Q^2}{\mu_b^2}\,,
+\label{eq:reslogs}
 \end{equation}
 Eq.~(\ref{eq:SudExp1}) can be conveniently written as:
-\begin{equation}\label{eq:SudCompact}
+\begin{equation}
   R^2=\exp\left\{\sum_{n=1}^2a_s^n(Q)\sum_{k=1}^{n+1}S^{(n,k)}L^k\right\}\,,
+\label{eq:SudCompact}
 \end{equation}
 with:
 \begin{equation}
@@ -996,7 +1073,7 @@ with:
 \end{equation}
 Eq.~(\ref{eq:SudCompact}) can be easily expanded up to order $a_s^2$
 as:
-\begin{equation}\label{eq:exp1}
+\begin{equation}
 \begin{array}{rcl}
   \displaystyle R^2&=&\displaystyle
                        1+a_s(Q)\sum_{k=1}^{2}S^{(1,k)}L^k+a_s^2(Q)\left[\sum_{k=1}^{3}S^{(2,k)}L^k+\frac12\left(\sum_{k=1}^{2}S^{(1,k)}L^k\right)^2\right]+\mathcal{O}(a_s^3)\\
@@ -1006,6 +1083,7 @@ as:
                        \sum_{k=1}^{4}\widetilde{S}^{(2,k)}L^k
                        +\mathcal{O}(a_s^3)\,,
 \end{array}
+\label{eq:exp1}
 \end{equation}
 with:
 \begin{equation}
@@ -1031,8 +1109,10 @@ scale $\mu_0=\mu_b$ to the scale $Q$ can be written as(\footnote{A
 f(Q) = \Gamma(Q,\mu_b)\otimes f(\mu_b)\,,
 \end{equation}
 where the evolution operator $\Gamma$ obeys the equation:
-\begin{equation}\label{eq:DGLAPeqOp}
-\frac{\partial \Gamma(Q,\mu_b)}{\partial \ln Q^2} = P(Q) \otimes \Gamma(Q,\mu_b)\,,
+\begin{equation}
+\frac{\partial \Gamma(Q,\mu_b)}{\partial \ln Q^2} = P(Q) \otimes
+\Gamma(Q,\mu_b)\,,
+\label{eq:DGLAPeqOp}
 \end{equation}
 with the splitting functions $P$ having the perturbative expansion:
 \begin{equation}
@@ -1070,20 +1150,23 @@ so that:
 \end{array}
 \end{equation}
 Putting all pieces together, we find:
-\begin{equation}\label{eq:DGLAPeqOpExp}
+\begin{equation}
 \Gamma(Q,\mu_b) = \Delta + a_s(Q)L P^{(0)}
-+a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)} +P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
++a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)}
+    +P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
+\label{eq:DGLAPeqOpExp}
 \end{equation}
 However, the quantity we are interested in is the inverse of the
 operator $\Gamma$, that evolves the PDFs from the scale $Q$ to
 $\mu_b$:
-\begin{equation}\label{eq:DGLAPeqOp1}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \Gamma(\mu_b,Q)=\Gamma^{-1}(Q,\mu_b) \\
 \\\displaystyle
  = \Delta - a_s(Q)L P^{(0)}
 - a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)}-P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
 \end{array}
+\label{eq:DGLAPeqOp1}
 \end{equation}
 
 \subsection{Expansion of the matching coefficients at the hard scale}
@@ -1093,8 +1176,10 @@ defined in Eq.~(\ref{eq:matching}) for $\mu_0=\mu_b$ around the scale
 $Q$ up to order $a_s^2$. To do this, we use the expansion in
 Eq.~(\ref{eq:MatchCoeffExp}), in which $a_s$ is computed at $\mu_b$,
 and combine it with Eq.~(\ref{eq:asexp}). This yields:
-\begin{equation}\label{eq:MatchCoeffExp1}
-  C(\mu_b,\mu_b^2) = \Delta + a_s(Q) C^{(1,0)} + a_s^2(Q) \left[C^{(2,0)}+L\beta_0C^{(1,0)}\right]+\mathcal{O}(a_s^3)\,.
+\begin{equation}
+  C(\mu_b,\mu_b^2) = \Delta + a_s(Q) C^{(1,0)} + a_s^2(Q)
+  \left[C^{(2,0)}+L\beta_0C^{(1,0)}\right]+\mathcal{O}(a_s^3)\,.
+\label{eq:MatchCoeffExp1}
 \end{equation}
 
 \subsection{Expansion of the single low-scale TMD}
@@ -1105,7 +1190,7 @@ low-scale TMD, \textit{i.e.} the convolution between matching
 coefficients and collinear distributions at the scale
 $\mu_0=\mu_b$. This can be achieved combining
 Eqs.~(\ref{eq:DGLAPeqOp1}) and~(\ref{eq:MatchCoeffExp1}):
-\begin{equation}\label{eq:LowScaleTMD}
+\begin{equation}
 \begin{array}{rcl}
 C(\mu_b,\mu_b^2)\otimes f(\mu_b) &=& C(\mu_b,\mu_b^2)\otimes
 \Gamma(\mu_b,Q) \otimes f(Q)\\
@@ -1116,6 +1201,7 @@ C(\mu_b,\mu_b^2)\otimes f(\mu_b) &=& C(\mu_b,\mu_b^2)\otimes
 \\
 &+&\displaystyle \frac{L^2}2 \left(P^{(0)}\otimes P^{(0)}-\beta_0 P^{(0)}\right)\bigg]\bigg\}\otimes f(Q)+\mathcal{O}(a_s^3)\,.
 \end{array}
+\label{eq:LowScaleTMD}
 \end{equation}
 
 \subsection{Expansion of the cross section}
@@ -1128,8 +1214,11 @@ is now opportune to reinstate the flavour indices. In general, the
 hard factor $H$ has a flavour structure, meaning that it carries a
 pair of flavour indices. Choosing $\mu = Q$, the expansion of the hard
 factor reads:
-\begin{equation}\label{eq:HardFactExp}
-H_{ij}(Q) = \sum_{n=0}^\infty a_s^n(Q) H_{ij}^{(n)}=H_{ij}^{(0)}+a_s(Q) H_{ij}^{(1)}+a_s^2(Q) H_{ij}^{(2)}+\mathcal{O}(a_s^3)\,,
+\begin{equation}
+H_{ij}(Q) = \sum_{n=0}^\infty a_s^n(Q)
+H_{ij}^{(n)}=H_{ij}^{(0)}+a_s(Q) H_{ij}^{(1)}+a_s^2(Q)
+H_{ij}^{(2)}+\mathcal{O}(a_s^3)\,,
+\label{eq:HardFactExp}
 \end{equation}
 where $H_{ij}^{(n)}$ are numerical factors. In relevant processes,
 such as Drell-Yan and SIDIS, it turns out that up to
@@ -1154,7 +1243,7 @@ where $F_i$ and $D_j$ are two different sets of TMD distributions
 index. Assuming that the flavour indices $i$ and $j$ run
 \textit{either} on quarks \textit{or} on the gluon and writing
 explicitly all perturbative factors, one has:
-\begin{equation}\label{eq:xsecexp}
+\begin{equation}
 \begin{array}{rcl}
 \displaystyle \frac{d\sigma}{dq_T^2} &\propto&\displaystyle  \sum_{ij}H_{ij} (Q) \int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
   \mathbf{q}_T} R^2\left[(\mu_b,\mu_b^2)\rightarrow
@@ -1168,18 +1257,22 @@ explicitly all perturbative factors, one has:
 &=&\displaystyle \sum_{n=0}^\infty a_s^n(Q)\sum_{p=0}^{2n} I_p(q_T,Q)
     \sum_{ij,kl} B_{ij,kl}^{(n,p)}(x,z) \mathop{\otimes}_x f_k(x,Q) \mathop{\otimes}_z d_l(z,Q)\,.
 \end{array}
+\label{eq:xsecexp}
 \end{equation}
 In the equation above we used different symbols to distinguish the
 perturbative components of the distributions $F$ and $D$ because in
 general they are different. In addition, we have defined:
-\begin{equation}\label{eq:IkPert}
+\begin{equation}
 I_p(q_T,Q)\equiv \int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
-  \mathbf{q}_T} \ln^p\left(\frac{b_T^2Q^2}{4e^{-2\gamma_E}}\right) = \frac12\int_0^\infty db_T\,b_T J_0(b_Tq_T) \ln^p\left(\frac{b_T^2Q^2}{4e^{-2\gamma_E}}\right)\,.
+  \mathbf{q}_T} \ln^p\left(\frac{b_T^2Q^2}{4e^{-2\gamma_E}}\right) =
+\frac12\int_0^\infty db_T\,b_T J_0(b_Tq_T)
+\ln^p\left(\frac{b_T^2Q^2}{4e^{-2\gamma_E}}\right)\,.
+\label{eq:IkPert}
 \end{equation}
 Results for $I_p$ have been computed up to $p=4$ in Eq.~(136) of
 Appendix B of Ref.~\cite{Bozzi:2005wk}. Specifically, and including
 the trivial tranform with $p=0$, they read:
-\begin{equation}\label{eq:PureLogs}
+\begin{equation}
 \begin{array}{l}
 \displaystyle I_0(q_T,Q) = \delta(q_T^2)\,,\\
 \\
@@ -1191,6 +1284,7 @@ the trivial tranform with $p=0$, they read:
 \\
 \displaystyle I_4(q_T,Q) = - \frac{4}{q_T^2}\left[\ln^3\left(\frac{Q^2}{q_T^2}\right)-4\zeta_3\right]\,.
 \end{array}
+\label{eq:PureLogs}
 \end{equation}
 The functions above are compute under the assumption that there is no
 non-perturbative component. Upon this assumption, that we will relax
@@ -1208,25 +1302,28 @@ Eqs.~(\ref{eq:exp1}), (\ref{eq:LowScaleTMD}),
 and~(\ref{eq:HardFactExp}). The leading order is obtained by just
 retaining the $\mathcal{O}(a_s^0)$ terms in all the expansions. This
 gives:
-\begin{equation}\label{eq:BLO}
-B_{ij,kl}^{(0,0)}(x,z) = H_{ij}^{(0)}\delta_{ik}\delta_{jl}\delta(1-x)\delta(1-z)\,.
+\begin{equation}
+B_{ij,kl}^{(0,0)}(x,z) =
+H_{ij}^{(0)}\delta_{ik}\delta_{jl}\delta(1-x)\delta(1-z)\,.
+\label{eq:BLO}
 \end{equation}
 
 The $\mathcal{O}(a_s)$ terms are obtained by combining the
 leading-order ones of all expansions but one. Finally organising the
 terms in powers of $L$, this yields:
 \begin{equation}
-\begin{array}{rcl}\label{eq:BNLO}
+\begin{array}{rcl}
 B_{ij,kl}^{(1,0)}(x,z) &=& \displaystyle H_{ij}^{(1)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)+H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)+H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)\,,\\
 \\
 B_{ij,kl}^{(1,1)}(x,z) &=& \displaystyle H_{ij}^{(0)} S^{(1,1)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)-H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)-H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)\,,\\
 \\
 B_{ij,kl}^{(1,2)}(x,z) &=& \displaystyle H_{ij}^{(0)} S^{(1,2)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\,.
 \end{array}
+\label{eq:BNLO}
 \end{equation}
 
 Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
-\begin{equation}\label{eq:BNNLO}
+\begin{equation}
 \begin{array}{rcl}
   {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle H_{ij}^{(2)}
                                \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
@@ -1291,6 +1388,7 @@ Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
   \\
   {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle H_{ij}^{(0)}\widetilde{S}^{(2,4)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,.
 \end{array}
+\label{eq:BNNLO}
 \end{equation}
 
 \subsection{Scale variations}
@@ -1305,8 +1403,10 @@ obtained by expanding the solutions of the evolution equantion between
 $Q$ and $\mu_{\rm R}$ or $\mu_{\rm F}$ up to
 $\mathcal{O}(\alpha_s^2)$.  For the coupling, this expansion can be
 read off from Eq.~(\ref{eq:alphasexp}):
-\begin{equation}\label{eq:alphasexp2}
-a_s(Q)= a_s(\mu_{\rm R})+a_s^2(\mu_{\rm R})\beta_0\ln\frac {\mu_{\rm R}^2}{Q^2} +\mathcal{O}(\alpha_s^3)\,,
+\begin{equation}
+a_s(Q)= a_s(\mu_{\rm R})+a_s^2(\mu_{\rm R})\beta_0\ln\frac {\mu_{\rm
+    R}^2}{Q^2} +\mathcal{O}(\alpha_s^3)\,,
+\label{eq:alphasexp2}
 \end{equation}
 so that $a_s^2(Q)= a_s^2(\mu_{\rm R})+\mathcal{O}(\alpha_s^3)$. While
 for the PDFs/FFs, the expansion of the evolution operator can be read
@@ -1331,7 +1431,7 @@ in the expression above and get:
 Since we have two such operators, one for the PDFs and one for the
 FFs, it is convenient to take the product beforehand and truncate it
 to $\mathcal{O}(\alpha_s^2)$ so that:
-\begin{equation}\label{eq:expPDFsFFs}
+\begin{equation}
 \begin{array}{rcl}
 f_k(x,Q) d_l(z,Q) &=&\displaystyle
                       \Bigg[\delta_{km}\delta(1-x)\delta_{ln}\delta(1-z)\\
@@ -1354,6 +1454,7 @@ f_k(x,Q) d_l(z,Q) &=&\displaystyle
     f_m(x,\mu_{\rm F}) \mathop{\otimes}_z
     d_n(z,\mu_{\rm F})\,,
 \end{array}
+\label{eq:expPDFsFFs}
 \end{equation}
 where the greek indices are undestood to be summed over and where we
 have defined:
@@ -1459,9 +1560,11 @@ with:
 where $[m/2]$ stands for ``integer part of $m/2$''. Now, I multiply
 $R_{\rm N^mLL}^2$ by $a_s$ to a generic power $p$ and do some
 manipulation defining $n+p=j$. This way, I get:
-\begin{equation}\label{eq:LogAcc}
+\begin{equation}
 a_s^p R_{\rm N^mLL}^2 = \sum_{j=[(m+2p)/2]}^\infty
-\widetilde{S}^{(j-p,2j-(m+2p))}\,a_s^{j}L^{2j-(m+2p)}\sim R_{\rm N^{m+2p}LL}^2\,,
+\widetilde{S}^{(j-p,2j-(m+2p))}\,a_s^{j}L^{2j-(m+2p)}\sim R_{\rm
+  N^{m+2p}LL}^2\,,
+\label{eq:LogAcc}
 \end{equation}
 where the symbol $\sim$ means that the terms at two sides have the
 same logarithmic accuracy. This finding is relevant in that, in order
@@ -1519,10 +1622,11 @@ component. These changes leave almost unchanged the derivation of the
 asymptotic behavior of a cross section for $q_T\rightarrow 0$. The
 only change concerns the functions $I_p$ defined in
 Eq.~(\ref{eq:IkPert}), that have to be replaced with:
-\begin{equation}\label{eq:IkNonPert}
+\begin{equation}
   \widetilde{I}_p(x,z,q_T,Q)\equiv \frac12\int_0^\infty db_T\,b_T J_0(b_Tq_T) f_{\rm NP}^{(1)}(x,
   {b}_T,Q^2) f_{\rm NP}^{(2)}(z,
   {b}_T,Q^2)\ln^p\left(\frac{b_*^2(b_T)Q^2}{4e^{-2\gamma_E}}\right)\,,
+\label{eq:IkNonPert}
 \end{equation}
 where $f_{\rm NP}^{(1)}$ and $f_{\rm NP}^{(2)}$ are the
 non-perturbative functions associated to the two TMD distributions $F$
@@ -1545,8 +1649,9 @@ a substantial contribution only in the vicinity of $q_T=0$.
 In this respect, one should check that the introduction of the
 non-perturbative components does not affect the large-$q_T$
 region. This is amounts to showing that:
-\begin{equation}\label{eq:LogAsympt}
+\begin{equation}
 \widetilde{I}_p(x,z,q_T,Q)\mathop{\sim}_{q_T\gtrsim Q} I_p(q_T,Q)\,.
+\label{eq:LogAsympt}
 \end{equation}
 Since for small values of $b_T$ we (must) have that
 $b_*(b_T)\simeq b_T$ and that $f_{\rm NP}(x,b_T,\zeta)\simeq 1$, this
@@ -1612,8 +1717,11 @@ more rapidly as $q_T$ increases. To do this, one may exploit the fact
 that power-suppressed contributions do not affect the logarithmic
 expansion of the resummed calculation to combine the two definitions
 as follows:
-\begin{equation}\label{eq:logsTrans}
-\hat{I}_p(x,z,q_T,Q) = \left[1-\left(\frac{q_T}{Q}\right)^S\right]I_p(q_T,Q) + \left(\frac{q_T}{Q}\right)^S\widetilde{I}_p(x,z,q_T,Q)\,,
+\begin{equation}
+\hat{I}_p(x,z,q_T,Q) =
+\left[1-\left(\frac{q_T}{Q}\right)^S\right]I_p(q_T,Q) +
+\left(\frac{q_T}{Q}\right)^S\widetilde{I}_p(x,z,q_T,Q)\,,
+\label{eq:logsTrans}
 \end{equation}
 where the exponent $S$ can be adjusted to make the transition from one
 regime to the other more or less strong. Clearly, this definition
@@ -1645,7 +1753,7 @@ section differential in $q_T$ for $q_T>0$, \textit{i.e.} without the
 $\delta(q_T^2)$ terms, and with no non-perturbative
 effect. Considering that, $S^{(1,1)} = 6C_F$, $S^{(1,2)} = -2C_F$, and
 $H_{ij}^{(0)} = e_i^2\delta_{ij}$, this yields:
-\begin{equation}\label{eq:asymptfromres}
+\begin{equation}
 \begin{array}{rcl}
   \displaystyle  \frac{d\sigma}{dx dy dz dq_T^2} &\propto &\displaystyle a_s(Q)\sum_{ij,kl}\left[
                                                    -{B}_{ij,kl}^{(1,1)}(x,z)\frac{1}{q_T^2}
@@ -1666,6 +1774,7 @@ $H_{ij}^{(0)} = e_i^2\delta_{ij}$, this yields:
                                         &+&\displaystyle \left(\sum_{k}\mathcal{P}_{ik}^{(0)}(x) \mathop{\otimes}_x
                                             f_k(x,Q)\right)d_i(z,Q) + f_i(x,Q)\left(\sum_l\mathbb{P}_{il}^{(0)}(z) \mathop{\otimes}_zd_l(z,Q)\right)\bigg] +\mathcal{O}(a_s^2)\,.
 \end{array}
+\label{eq:asymptfromres}
 \end{equation}
 This result, up to pre-factors that will be made explicit below,
 nicely agrees with that of, \textit{e.g.},
@@ -1684,8 +1793,11 @@ unpolarised projectiles ($\lambda_e=0$) on unpolarised targets
 and $\phi_S$. By doing so and after a simple manipulation, the cross
 section simplifies greatly and can be written in terms of structure
 functions as:
-\begin{equation}\label{eq:xsexinsf}
-  \frac{d\sigma}{dx dy dz dq_T^2} = \frac{2\pi\alpha^2}{xyQ^2}\left[Y_+ F_{UU,T}+2(1-y)F_{UU,L}\right]=\frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\begin{equation}
+  \frac{d\sigma}{dx dy dz dq_T^2} =
+  \frac{2\pi\alpha^2}{xyQ^2}\left[Y_+
+    F_{UU,T}+2(1-y)F_{UU,L}\right]=\frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\label{eq:xsexinsf}
 \end{equation}
 with:
 \begin{equation}
@@ -1704,7 +1816,7 @@ $1/(\pi z^2)$(\footnote{The factor $z^{2}$ is the consequence of the
   $p_T^2$ that is the transverse momentum of the of the outgoing
   hadrons. Since $p_T=z q_T$, the factor $z^2$ cancels.}) so that they
 factorize as:
-\begin{equation}\label{eq:FOxsec}
+\begin{equation}
 \begin{array}{rcl}
   F_{UU,S}&=&\displaystyle 
   a_s\frac{x}{Q^2}\sum_{i}e_i^2\int_x^1\frac{d\bar{x}}{\bar{x}}\int_z^1\frac{d\bar{z}}{\bar{z}}\delta\left(\frac{q_T^2}{Q^2}-\frac{(1-\bar{x})(1-\bar{z})}{\bar{x}\bar{z}}\right)\bigg[\hat{B}_{qq}^{S,
@@ -1718,11 +1830,12 @@ factorize as:
               d_g\left(\frac{z}{\bar{z}}\right)\bigg]
 +\mathcal{O}(a_s^2)\,.
 \end{array}
+\label{eq:FOxsec}
 \end{equation}
 with $S=2,L$ and where the sum over $i$ runs over the active quark and
 antiquark flavours. The explicit expressions for the coefficient
 functions are:
-\begin{equation}\label{eq:Bacchettaetal}
+\begin{equation}
 \begin{array}{l}
 \displaystyle \hat{B}_{qq}^{2,\rm FO}(x,z,q_T) = 2C_F\left[(1-x)(1-z)+4xz+\frac{1+x^2z^2}{xz}\frac{Q^2}{q_T^2}\right]\,,\\
 \\
@@ -1736,6 +1849,7 @@ functions are:
 \\
 \displaystyle \hat{B}_{gq}^{L,\rm FO}(x,z,q_T) = 8C_Fx(1-z)\,,
 \end{array}
+\label{eq:Bacchettaetal}
 \end{equation}
 These expressions are enough to compute the SIDIS cross section at
 $\mathcal{O}(a_s)$ in the region $q_T \lesssim Q$. In order to match
@@ -1750,13 +1864,14 @@ F_{UU,L}\mathop{\ll}_{q_T/Q\rightarrow 0} F_{UU,2}\,.
 Another crucial observation is that the $\delta$-function in
 Eq.~(\ref{eq:FOxsec}) can be expanded as follows(\footnote{The proof of
   this relation is given in Appendix~\ref{sec:deltaexpansion}.}):
-\begin{equation}\label{eq:deltaexpansion}
+\begin{equation}
   \delta\left(\frac{q_T^2}{Q^2}-\frac{(1-x)(1-z)}{xz}\right)
   \mathop{\longrightarrow}_{q_T^2/Q^2\rightarrow0}\ln\left(\frac{Q^2}{q_T^2}\right)\delta(1-x) \delta(1-z) +
   \frac{x\delta(1-z)}{(1-x)_+}+ \frac{z\delta(1-x)}{(1-z)_+}\,,
+\label{eq:deltaexpansion}
 \end{equation}
 so that:
-\begin{equation}\label{eq:FOxsecasy}
+\begin{equation}
 \begin{array}{rcl}
   F_{UU,2}&\displaystyle \mathop{\longrightarrow}_{q_T/Q\rightarrow 0}&\displaystyle 
   a_s\frac{x}{q_T^2}\sum_{i}e_i^2\int_x^1\frac{d\bar{x}}{\bar{x}}\int_z^1\frac{d\bar{z}}{\bar{z}}\bigg[\hat{B}_{qq}^{2,
@@ -1770,6 +1885,7 @@ so that:
               d_g\left(\frac{z}{\bar{z}}\right)\bigg]
 +\mathcal{O}(a_s^2)\,.
 \end{array}
+\label{eq:FOxsecasy}
 \end{equation}
 with:
 \begin{equation}
@@ -1789,7 +1905,7 @@ with:
 \end{equation}
 It is thus easy to see that we can rewrite Eq.~(\ref{eq:FOxsecasy})
 as:
-\begin{equation}\label{eq:FOxsecasy2}
+\begin{equation}
 \begin{array}{rcl}
   F_{UU,2}&\displaystyle \mathop{\longrightarrow}_{q_T/Q\rightarrow 0}&\displaystyle 
   a_s\frac{x}{q_T^2}\sum_{i}e_i^2 \Bigg[4C_F\left(\ln\left(\frac{Q^2}{q_T^2}\right) -\frac{3}{2}\right) f_i\left(x\right)
@@ -1801,6 +1917,7 @@ as:
               \left(\sum_{k=q,g}\mathbb{P}^{(0)}_{qk}(z) \otimes d_k\left(z\right)\right)\Bigg]
 +\mathcal{O}(a_s^2)\,.
 \end{array}
+\label{eq:FOxsecasy2}
 \end{equation}
 Therefore, up to factors, Eq.~(\ref{eq:FOxsecasy2}) agrees with
 Eq.~(\ref{eq:asymptfromres}). This confirms that the expansion of the
@@ -1816,11 +1933,13 @@ write:
 = \frac{\bar{z}\bar{x}_0^2}{1-\bar{z}}\delta(\bar{x} - \bar{x}_0)\,,
 \end{equation}
 with:
-\begin{equation}\label{eq:x0bar}
-  \bar{x}_0 = \frac{1-\bar{z}}{1-\bar{z}\left(1-\frac{q_T^2}{Q^2}\right)}\,.
+\begin{equation}
+  \bar{x}_0 =
+  \frac{1-\bar{z}}{1-\bar{z}\left(1-\frac{q_T^2}{Q^2}\right)}\,.
+\label{eq:x0bar}
 \end{equation}
 This allows us to write:
-\begin{equation}\label{eq:FOxsecFin}
+\begin{equation}
 \begin{array}{rcl}
   F_{UU,S}&=&\displaystyle 
   a_s\frac{x }{Q^2}\sum_{i}e_i^2\int_z^{z_{\rm max}} \frac{d\bar{z}}{1-\bar{z}}\bar{x}_0\bigg[\hat{B}_{qq}^{S,
@@ -1834,6 +1953,7 @@ This allows us to write:
               d_g\left(\frac{z}{\bar{z}}\right)\bigg]
 +\mathcal{O}(a_s^2)\,,
 \end{array}
+\label{eq:FOxsecFin}
 \end{equation}
 with:
 \begin{equation}
@@ -1853,9 +1973,12 @@ differential in $x$, $Q^2$, $\eta$, and $p_T^2$, where the last two
 are the rapidity and the transverse momentum of the outgoing hadron,
 respectively. Eq.~(13) of Ref.~\cite{Daleo:2004pn}, can be translated
 into our notation by noticing that:
-\begin{equation}\label{eq:Daleoetal}
+\begin{equation}
 \frac{d\sigma}{dxdQ^2d p_T^2 d\eta} = \frac{x}{z Q^2}\sum_{i,j}\int_z^{z_{\rm
-    max}} \frac{d\bar{z}}{1-\bar{z}} f_i\left(\frac{x}{\bar{x}_0}\right)d_j\left(\frac{z}{\bar{z}}\right) \frac{d\sigma_{ij}^{(1)}}{dxdQ^2d p_T^2 d\eta}+\mathcal{O}(a_s^2)\,,
+    max}} \frac{d\bar{z}}{1-\bar{z}}
+f_i\left(\frac{x}{\bar{x}_0}\right)d_j\left(\frac{z}{\bar{z}}\right)
+\frac{d\sigma_{ij}^{(1)}}{dxdQ^2d p_T^2 d\eta}+\mathcal{O}(a_s^2)\,,
+\label{eq:Daleoetal}
 \end{equation}
 where we have exploited the $\delta$-functions in Eqs.~(18)-(20) to
 get rid of the integral over $z$.(\footnote{Notice that the $z$
@@ -1938,20 +2061,24 @@ is left to work out is the Jacobian to express the cross section
 differential in the same variables as in Eq.~(\ref{eq:xsexinsf}). What
 we need is to know is how the variables $Q^2$, $p_T$, and $\eta$ are
 related to $y$, $z$, and $q_T$. The relevant relations are:
-\begin{equation}\label{eq:variablechange}
+\begin{equation}
 \left\{\begin{array}{rcl}
 Q^2 &=& xyS_H\\
 \\
 p_T^2 &=& z^2 q_T^2\\
 \\
 \eta &=& \displaystyle \frac{1}{2}\ln\left(\frac{y(1-x)S_H}{q_T^2}\right)
-\end{array}\right.\quad\Longrightarrow\quad dQ^2dp_T^2d\eta = \frac{zQ^2}{y} dydzdq_T^2\,.
+\end{array}\right.\quad\Longrightarrow\quad dQ^2dp_T^2d\eta =
+\frac{zQ^2}{y} dydzdq_T^2\,.
+\label{eq:variablechange}
 \end{equation}
 where $S_H$ is the squared center-of-mass energy of the collision, so
 that:
-\begin{equation}\label{eq:differentialversion2}
+\begin{equation}
   \frac{d\sigma}{dx dy dz dq_T^2} = \frac{zQ^2}{y}\frac{d\sigma}{dxdQ^2d p_T^2
-    d\eta} = \frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+    d\eta} =
+  \frac{2\pi\alpha^2}{xyQ^2}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\label{eq:differentialversion2}
 \end{equation}
 exactly like in Eq.~(\ref{eq:xsexinsf}). This confirms that the
 computation of Ref.~\cite{Daleo:2004pn} can be matched to the resummed
@@ -1991,8 +2118,10 @@ that:
 =\sqrt{\frac{Q^2(1-x)}{x}}\,,\quad\Rightarrow\quad d\eta = \frac{dz}{z}\,.
 \end{equation}
 It follows that:
-\begin{equation}\label{eq:differentialversion3}
- \frac{d\sigma}{dxdQ^2dz dp_T^2} = \frac{2\pi\alpha^2}{xQ^4}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\begin{equation}
+ \frac{d\sigma}{dxdQ^2dz dp_T^2} =
+ \frac{2\pi\alpha^2}{xQ^4}Y_+\left[F_{UU,2}-\frac{y^2}{Y_+}F_{UU,L}\right]\,,
+\label{eq:differentialversion3}
 \end{equation}
 with $y=Q^2/xS_H$ (see Eq.~(\ref{eq:variablechange})).
 
@@ -2191,7 +2320,7 @@ ${B}_{ij,kl}^{(1,0)}$ summed over the indices of the hard function:
 \end{array}
 \end{equation}
 The single channels read:
-\begin{equation}\label{eq:locals}
+\begin{equation}
 \begin{array}{rcl}
   \overline{C}_{qq}(x,z) &=& \displaystyle 2C_F\left[-8\delta(1-x)
                             \delta(1-z)+\delta(1-x)\left(1-z+2 \frac{1+z^2}{1-z}\ln
@@ -2205,6 +2334,7 @@ The single channels read:
                             4T_R\left[\delta(1-x)\left(z(1-z)+(z^2+(1-z)^2)\ln
                             z\right)+x(1-x)\delta(1-z)\right]\,.
 \end{array}
+\label{eq:locals}
 \end{equation}
 % Confronting Eq.~(\ref{eq:locals}) with the terms proportional to the
 % $\delta$-functions in Eqs.~(C.2)-(C.4) of
@@ -2244,10 +2374,12 @@ Ref.~\cite{Furmanski:1981cw} are the correct ones. To integrate the
 expressions in Ref.~\cite{deFlorian:1997zj} we need to use the fact
 that the SIDIS cross section integrate in $q_T$ for the production of
 a hadron $h$ has the following structure:
-\begin{equation}\label{eq:intxsec}
+\begin{equation}
 \frac{d\sigma^h}{dx dy dz} = \sum_{ij} \int_x^1\frac{d\xi}{\xi}
 \int_z^1\frac{d\zeta}{\zeta}
-C_{ij}\left(\frac{x}{\xi},\frac{z}{\zeta}\right) d_{i/h}(\zeta) f_j(\xi)\,,
+C_{ij}\left(\frac{x}{\xi},\frac{z}{\zeta}\right) d_{i/h}(\zeta)
+f_j(\xi)\,,
+\label{eq:intxsec}
 \end{equation}
 where $d_{i/h}$ is the fragmentation function for the parton $i$
 fragmenting into the hadron species $h$. What we need to compute is:
@@ -2276,9 +2408,11 @@ By using this property we have:
 \end{array}
 \end{equation}
 where we have defined the inclusive DIS coefficient functions as:
-\begin{equation}\label{eq:incDIS}
+\begin{equation}
 \widetilde{C}_{j}\left(\xi\right) \equiv \int_0^1 d\zeta \,\zeta
-                                          \sum_i  C_{ij}\left(\xi,\zeta\right)\,,
+                                          \sum_i
+                                          C_{ij}\left(\xi,\zeta\right)\,,
+\label{eq:incDIS}
 \end{equation}
 and we have used the momentum sum rule:
 \begin{equation}
@@ -2344,8 +2478,10 @@ Chapter~4 of Ref.~\cite{Ellis:1991qj}.
 
 In order to prove the equality in Eq.~(\ref{eq:deltaexpansion}), we
 consider the following integral:
-\begin{equation}\label{eq:testint}
-I(\varepsilon) =\int_0^1 dx \int_0^1 dy\,\delta(xy-\varepsilon) f(x,y)\,,
+\begin{equation}
+I(\varepsilon) =\int_0^1 dx \int_0^1 dy\,\delta(xy-\varepsilon)
+f(x,y)\,,
+\label{eq:testint}
 \end{equation}
 where $f(x,y)$ is a test function ``well-behaved'' over the
 integration region. Now I split the integral as follows:
@@ -2436,8 +2572,9 @@ specifically, we will show that the so-called \textit{resummation
 equations.
 
 In order to define the problem, we consider a generic RGE in QCD:
-\begin{equation}\label{eq:RGEproto}
+\begin{equation}
 \frac{d\ln R}{d\ln \mu} = \gamma(\alpha_s(\mu))\,,
+\label{eq:RGEproto}
 \end{equation}
 where $R$ is a generic renormalisation-scheme dependent (and thus
 unobservable) quantity, $\mu$ is the scale resulting from the
@@ -2467,15 +2604,18 @@ because it underlies all others, is the strong coupling, \textit{i.e.}
 we take $R=a_s=\alpha_s/4\pi$ that obeys the RGE\footnote{Notice that
   $\overline{\beta}$ in Eq.~(\ref{eq:RGEalphas}) is related to the
   usual QCD $\beta$-function by $\overline{\beta}=-\beta/a_s$.}:
-\begin{equation}\label{eq:RGEalphas}
-\frac{d\ln a_s}{d\ln \mu} = \overline{\beta}(a_s(\mu)) =a_s(\mu)\sum_{n=0}^ka_s^n(\mu)\beta^{(n)}\,.
+\begin{equation}
+\frac{d\ln a_s}{d\ln \mu} = \overline{\beta}(a_s(\mu))
+=a_s(\mu)\sum_{n=0}^ka_s^n(\mu)\beta^{(n)}\,.
+\label{eq:RGEalphas}
 \end{equation}
 The possibly more natural perturbative approach to this problem is
 that to assume that $\alpha_s(\mu)$ admits a perturbative expansion
 around $a_s(\mu_0)=0$ truncated to the same order $k$ of the
 anomalous dimension:
-\begin{equation}\label{eq:pertanstz}
+\begin{equation}
 a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{k}c_n(\mu) a_s^n(\mu_0)\,.
+\label{eq:pertanstz}
 \end{equation}
 Plugging Eq.~(\ref{eq:pertanstz}) into both left- and right-hand side
 of Eq.~(\ref{eq:RGEalphas}), one finds the following recursive
@@ -2498,7 +2638,7 @@ equations for the first few coefficients $c_n$:
 \end{equation}
 Integrating these differential equations between $\mu_0$ and $\mu$ and
 using the boundary condition gives:
-\begin{equation}\label{eq:pertcoefs}
+\begin{equation}
 \begin{array}{lcl}
 c_0 &=& 1 \\
 \\
@@ -2510,6 +2650,7 @@ c_3 &=& \displaystyle \left(\beta^{(0)}\right)^3\ln^3\left(\frac{\mu}{\mu_0}\rig
 \\
 \vdots
 \end{array}
+\label{eq:pertcoefs}
 \end{equation}
 Computing these coefficients up to order $k$ allows one to obtain the
 perturbative expansion of $a_s(\mu)$ in terms of $a_s(\mu_0)$ up the
@@ -2525,8 +2666,9 @@ However, nothing prevents us from extending the series in
 Eq.~(\ref{eq:pertanstz}) from $k+1$ terms to and infinite number of
 terms even though the anomalous dimension in Eq.~(\ref{eq:RGEalphas})
 is truncated to order $k$:
-\begin{equation}\label{eq:pertanstzinf}
+\begin{equation}
 a_s(\mu) = a_s(\mu_0) \sum_{n=0}^{\infty}c_n(\mu) a_s^n(\mu_0)\,.
+\label{eq:pertanstzinf}
 \end{equation}
 The coefficients $c_n$ can be computed iteratively exactly as shown
 above for any value of $n$. The calculation above can be used to infer
@@ -2537,8 +2679,12 @@ the structure of the coefficients $c_n$:
 where $c_{n,i}$ are numerical coefficients given by combinations of
 the coefficients $\beta_j$, $j=0,\dots,k$. Using this equation and
 rearranging the series finally gives:
-\begin{equation}\label{eq:pertanstzinfrearr}
-  a_s(\mu) = a_s(\mu_0) \sum_{l=0}^k a_s^{l}(\mu_0) \sum_{n=0}^{\infty} c_{n+l,n}\left[a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right) \right]^{n}\,.
+\begin{equation}
+  a_s(\mu) = a_s(\mu_0) \sum_{l=0}^k a_s^{l}(\mu_0)
+  \sum_{n=0}^{\infty}
+  c_{n+l,n}\left[a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right)
+  \right]^{n}\,.
+\label{eq:pertanstzinfrearr}
 \end{equation}
 This rearrangment exposes the resummation procedure: for each power of
 $\alpha_s$ at which the $\beta$-function is known, all powers of the
@@ -2549,8 +2695,10 @@ do we calculate all the $c_{n+l,n}$ coefficients to effectively enable
 resummation? This is usually done by observing that
 Eq.~(\ref{eq:RGEalphas}) with $k=0$ can be easily solved in a closed
 form and gives:
-\begin{equation}\label{eq:llsol}
-a_s^{\rm LL}(\mu) = \frac{a_s(\mu_0)}{1-\beta^{(0)}a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right)}\,,
+\begin{equation}
+a_s^{\rm LL}(\mu) =
+\frac{a_s(\mu_0)}{1-\beta^{(0)}a_s(\mu_0)\ln\left(\frac{\mu}{\mu_0}\right)}\,,
+\label{eq:llsol}
 \end{equation}
 which provides the LL resummation of the running coupling. Comparing
 this result with Eq.~(\ref{eq:pertanstzinfrearr}) with $k=0$ tells us
@@ -2563,8 +2711,12 @@ further, one needs to include the term $k=1$ in
 Eq.~(\ref{eq:RGEalphas}) and integrate the differential equation
 between $\mu_0$ and $\mu$. The result is a transcendental equation in
 $a_s$:
-\begin{equation}\label{eq:transcend}
-\frac1{\beta^{(0)}}\left(-\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}\right) + \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
+\begin{equation}
+\frac1{\beta^{(0)}}\left(-\frac{1}{a_s(\mu)}+\frac{1}{a_s(\mu_0)}\right)
++ \frac{b_1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu_0)
+    (1+b_1a_s(\mu))}{a_s(\mu)
+    (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{\mu}{\mu_0}\right)
+\label{eq:transcend}
 \end{equation}
 with $b_n=\beta^{(n)}/\beta^{(0)}$. Of course, the solution of this
 transcendental equation solves exactly the differential equation in
@@ -2579,12 +2731,16 @@ r.h.s., being proportional to $\alpha_s$ can be expanded and truncated
 to leading order. Notice that this operation is allowed because no
 potentially large logarithms of the scales are present. Therefore, we
 can use Eq.~(\ref{eq:llsol}) inside this term, obtaining:
-\begin{equation}\label{eq:firstexp}
-\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)  (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)+\mathcal{O}(a_s)\,,
+\begin{equation}
+\ln\left(\frac{a_s(\mu_0) (1+b_1a_s(\mu))}{a_s(\mu)
+    (1+b_1a_s(\mu_0))}\right)=\ln\left(\frac{a_s(\mu_0)}{a_s^{\rm
+      LL}(\mu)}\right)+\mathcal{O}(a_s)\,,
+\label{eq:firstexp}
 \end{equation}
 where we have also used the fact that:
-\begin{equation}\label{eq:approxLL}
+\begin{equation}
 a_s(\mu) = a_s^{\rm LL}(\mu)\left[1+\mathcal{O}(a_s) \right]\,,
+\label{eq:approxLL}
 \end{equation}
 that descends directly from Eq.~(\ref{eq:pertanstzinfrearr}). This
 leads us to:
@@ -2592,8 +2748,10 @@ leads us to:
 a_s(\mu)=\frac{a_s^{\rm LL}(\mu)}{ 1  + a_s^{\rm LL}(\mu) b_1 \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)}+\mathcal{O}(a_s^3)\,
 \end{equation}
 that can be further expanded, finally obtaining:
-\begin{equation}\label{eq:ansolut}
-a_s^{\rm NLL}(\mu)=a_s^{\rm LL}(\mu) \left[1 - b_1  a_s^{\rm LL}(\mu) \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)\right]\,,
+\begin{equation}
+a_s^{\rm NLL}(\mu)=a_s^{\rm LL}(\mu) \left[1 - b_1  a_s^{\rm LL}(\mu)
+  \ln\left(\frac{a_s(\mu_0)}{a_s^{\rm LL}(\mu)}\right)\right]\,,
+\label{eq:ansolut}
 \end{equation}
 which gives the NLL solution for the evolution of the strong coupling
 (see also Ref.~\cite{DelDebbio:2007ee}). The same kind of procedure
@@ -2603,7 +2761,7 @@ for the running of the strong coupling that we will need below. This
 can be achieved by including $k=2$ term in Eq.~(\ref{eq:RGEalphas})
 and integrating the resulting differential equation between $\mu_0$
 and $\mu$. This results in the following transcendental equation:
-\begin{equation}\label{eq:transc2}
+\begin{equation}
 \begin{array}{rcl}
 \displaystyle \beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right) &=&\displaystyle \left. -\frac{1}{a_s}\
 -b_1\ln(a_s)
@@ -2614,14 +2772,16 @@ and $\mu$. This results in the following transcendental equation:
     NLL}(\mu)}\right)
     + (b_1^2-b_2)(a_s^{\rm LL}(\mu)-a_s(\mu_0)) +\mathcal{O}(a_s^2)\,.
 \end{array}
+\label{eq:transc2}
 \end{equation}
 where we have replaced $a_s(\mu)$ with $a_s^{\rm LL}$ and $a_s^{\rm
   NLL}$ where appropriate using Eq.~(\ref{eq:approxLL}) and:
-\begin{equation}\label{eq:approxNLL}
+\begin{equation}
 a_s(\mu) = a_s^{\rm NLL}(\mu)\left[1+\mathcal{O}(a_s^2) \right]\,.
+\label{eq:approxNLL}
 \end{equation}
 Eq.~(\ref{eq:transc2}) can finally be solved for $a_s(\mu)$ obtaining:
-\begin{equation}\label{eq:ansolutnnll}
+\begin{equation}
 \begin{array}{rcl}
   a_s^{\rm NNLL}(\mu)&=&\displaystyle a_s^{\rm LL}(\mu)\bigg[1+b_1 a_s^{\rm LL}(\mu)\ln\left(\frac{a_s^{\rm
         LL}(\mu)}{a_s(\mu_0)}\right)+\displaystyle (b_2-b_1^2) a_s^{\rm LL}(\mu) \left[a_s^{\rm
@@ -2635,6 +2795,7 @@ Eq.~(\ref{eq:transc2}) can finally be solved for $a_s(\mu)$ obtaining:
         LL}(\mu)}{a_s(\mu_0)}\right)+\displaystyle (b_2-b_1^2) a_s^{\rm LL}(\mu) \left[a_s^{\rm
       LL}(\mu)-a_s(\mu_0)\right]\right]\,,
 \end{array}
+\label{eq:ansolutnnll}
 \end{equation}
 \textit{i.e.} the NNLL-accurate running of the strong coupling.
 
@@ -2648,8 +2809,10 @@ view of accuracy. However, while Eq.~(\ref{eq:transcend}) satisfies
 the evolution equation Eq.~(\ref{eq:RGEalphas}) with $k=1$
 \textit{exactly}, Eq.~(\ref{eq:ansolut}) violates it by subleading
 terms. In other words, one finds:
-\begin{equation}\label{eq:ansolNLL}
-\frac{d \ln a_s^{\rm NLL}(\mu)}{d\ln\mu}=\beta^{(0)}a_s^{\rm NLL}(\mu) +\beta^{(1)} (a_s^{\rm NLL}(\mu))^2 +\mathcal{O}(a_s^3)\,.
+\begin{equation}
+\frac{d \ln a_s^{\rm NLL}(\mu)}{d\ln\mu}=\beta^{(0)}a_s^{\rm NLL}(\mu)
++\beta^{(1)} (a_s^{\rm NLL}(\mu))^2 +\mathcal{O}(a_s^3)\,.
+\label{eq:ansolNLL}
 \end{equation}
 Therefore, the neglect of subleading terms required to go from
 Eq.~(\ref{eq:transcend}) to Eq.~(\ref{eq:ansolut}) has the effect of
@@ -2705,7 +2868,7 @@ anomalous dimension. Our aim is to find a solution to this equation in
 perturbation theory by computing $f$ at some final scale $\mu$ when
 knowing $f$ at some initial scale $\mu_0$. Of course, the solution to
 the evolution equation is:
-\begin{equation}\label{eq:dglapsol}
+\begin{equation}
 \begin{array}{rcl}
 f(\mu)&=&\displaystyle
 \exp\left[\int_{\mu_0}^{\mu}d\ln\mu'\,\gamma(a_s(\mu'))\right]f(\mu_0)\\
@@ -2715,6 +2878,7 @@ f(\mu)&=&\displaystyle
 \\
 &=&\displaystyle f(\mu_0) \prod_{n=0}^k\exp\left[\gamma^{(n)}I_n\right]f(\mu_0)\,,
 \end{array}
+\label{eq:dglapsol}
 \end{equation}
 with:
 \begin{equation}
@@ -2744,7 +2908,7 @@ quantitative argument let us take $k'=2$, such that
 \overline{\beta}(a_s) =\beta^{(0)}a_s\left[1+b_1a_s\right]\,.
 \end{equation}
 We then compute $I_0$, $I_1$, and $I_2$:
-\begin{equation}\label{eq:intsI}
+\begin{equation}
 \begin{array}{rcl}
   I_0&=&\displaystyle\frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{1}{a_s+b_1a_s^2}\right)=\frac1{\beta^{(0)}}\left[\ln
          a_s-\ln(1+b_1a_s)\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\frac{1}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)+\mathcal{O}(a_s)\,,\\
@@ -2753,6 +2917,7 @@ We then compute $I_0$, $I_1$, and $I_2$:
 \\
   I_2&=&\displaystyle\frac1{\beta^{(0)}}\int_{a_s(\mu_0)}^{a_s(\mu)}da_s\left(\frac{a_s}{1+b_1a_s}\right)=\frac1{\beta^{(0)}}\left[\frac{a_s}{b_1}-\frac{\ln(1+b_1a_s)}{b_1^2}\right]\bigg|_{a_s(\mu_0)}^{a_s(\mu)}=\mathcal{O}(a_s^2)\,.
 \end{array}
+\label{eq:intsI}
 \end{equation}
 In general one finds that, for $n\geq1$,
 $I_n=\mathcal{O}(a_s^n)$. Therefore, the exponential in
@@ -2767,14 +2932,19 @@ provided by the evolution. The exception to this pattern is $I_0$ that
 cannot be (fully) expanded due to the presence of a logarithm of
 $a_s(\mu)/a_s(\mu_0)$ that, as can be see from Eq.~(\ref{eq:llsol}),
 is potentially large:
-\begin{equation}\label{eq:expres}
-\exp\left[\gamma^{(0)}I_0\right]=\exp \left[\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)\right]+\mathcal{O}(a_s)=\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}+\mathcal{O}(a_s)\,.
+\begin{equation}
+\exp\left[\gamma^{(0)}I_0\right]=\exp
+\left[\frac{\gamma^{(0)}}{\beta^{(0)}}\ln\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)\right]+\mathcal{O}(a_s)=\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}+\mathcal{O}(a_s)\,.
+\label{eq:expres}
 \end{equation}
 This factor alone provides the resummation up to some logarithmic
 accuracy determined uniquely by the evolution of $a_s(\mu)$. Finally
 one has:
-\begin{equation}\label{eq:dglapanal}
-f(\mu) = \displaystyle \left[1+\mathcal{O}(a_s)\right]\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}f(\mu_0) \,.
+\begin{equation}
+f(\mu) = \displaystyle
+\left[1+\mathcal{O}(a_s)\right]\left(\frac{a_s(\mu)}{a_s(\mu_0)}\right)^{\frac{\gamma^{(0)}}{\beta^{(0)}}}f(\mu_0)
+\,.
+\label{eq:dglapanal}
 \end{equation}
 However, the inclusion of correction terms in the square brackets in
 the r.h.s. of Eq.~(\ref{eq:dglapanal}) is still required to attain
@@ -2800,8 +2970,10 @@ $\mathcal{O}(a_s^2)$ and thus NNLL.
 
 In order to make a step towards the notation typically used in $q_T$
 resummation, we introduce the quantity:
-\begin{equation}\label{eq:lambdadef}
-\lambda \equiv \lambda(\mu) = a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)\,,
+\begin{equation}
+\lambda \equiv \lambda(\mu) =
+a_s(\mu_0)\beta^{(0)}\ln\left(\frac{\mu}{\mu_0}\right)\,,
+\label{eq:lambdadef}
 \end{equation}
 that allows us to write the LL and NLL RGE solution for $a_s$ as:
 \begin{equation}
@@ -2837,8 +3009,11 @@ g^{(2)}(\lambda) &=& \displaystyle -\frac{\gamma^{(0)}b_1}{\beta^{(0)}}\frac{
 \end{array}
 \end{equation}
 such that:
-\begin{equation}\label{eq:DGLAPalaSoftGlue}
-  f^{\rm NLL}(\mu) = g^{(0)}(\lambda)\exp\left[g^{(1)}(\lambda)+a_s(\mu_0) g^{(2)}(\lambda)\right]f(\mu_0) \,.
+\begin{equation}
+  f^{\rm NLL}(\mu) =
+  g^{(0)}(\lambda)\exp\left[g^{(1)}(\lambda)+a_s(\mu_0)
+    g^{(2)}(\lambda)\right]f(\mu_0) \,.
+\label{eq:DGLAPalaSoftGlue}
 \end{equation}
 This procedure can be extended to N$^k$LL accuracy just by introducing
 the appropriate $g^{(n)}$ functions, with $n\leq k+1$, in the
@@ -2880,8 +3055,11 @@ subleading terms gives the new functions:
 \end{array}
 \end{equation}
 so that:
-\begin{equation}\label{eq:DGLAPalaSoftGlueMuR}
-  f^{\rm NLL}(\mu) = \overline{g}^{(0)}(\overline{\lambda})\exp\left[\overline{g}^{(1)}(\overline{\lambda})+a_s(\mu_0) \overline{g}^{(2)}(\overline{\lambda})\right]f(\mu_0) \,.
+\begin{equation}
+  f^{\rm NLL}(\mu) =
+  \overline{g}^{(0)}(\overline{\lambda})\exp\left[\overline{g}^{(1)}(\overline{\lambda})+a_s(\mu_0)
+    \overline{g}^{(2)}(\overline{\lambda})\right]f(\mu_0) \,.
+\label{eq:DGLAPalaSoftGlueMuR}
 \end{equation}
 Eqs.~(\ref{eq:DGLAPalaSoftGlueMuR}) and~(\ref{eq:DGLAPalaSoftGlue})
 are both NLL accurate and only differ by subleading terms. In fact,
@@ -3002,8 +3180,9 @@ iteratively the running of the strong coupling. In order to simplify
 the notation, I will refer to the strong coupling computed at some
 generic scale as to $a$, while I will call $a_0$ the value of coupling
 at the reference scale. The corresponding RGE will then be:
-\begin{equation}\label{eq:allorders}
+\begin{equation}
 \frac{d\ln a}{d\ln \mu} = \beta(a)\,,
+\label{eq:allorders}
 \end{equation}
 with:
 \begin{equation}
@@ -3015,8 +3194,10 @@ resulting evolution equation reads:
 \frac{d\ln a_{\rm LL}}{d\ln \mu} = a_{\rm LL}\beta_0\,,
 \end{equation}
 that admits a simple closed-form exact solution:
-\begin{equation}\label{eq:leadingorder}
-a_{\rm LL}(\mu) = \frac{a_0}{1-a_0\beta_0\ln\left(\frac{\mu}{\mu_0}\right) }\,.
+\begin{equation}
+a_{\rm LL}(\mu) =
+\frac{a_0}{1-a_0\beta_0\ln\left(\frac{\mu}{\mu_0}\right) }\,.
+\label{eq:leadingorder}
 \end{equation}
 Since we know how to write $a_{\rm LL}$ in a closed form, we can
 combine Eqs.~(\ref{eq:allorders}) and~(\ref{eq:leadingorder}) as
@@ -3025,8 +3206,11 @@ follows:
 \frac{d\ln a}{d\ln a_{\rm LL}} =\frac{a}{a_{\rm LL}}\sum_{n=0}^\infty b_na^n\,,\quad\mbox{with}\quad b_n=\frac{\beta_n}{\beta_0}\,.
 \end{equation}
 Now we can attempt to solve this equation whose general solution is:
-\begin{equation}\label{eq:intrun}
-\int_{a_0}^{a_{\rm LL}}\frac{dy}{y^2}=\int_{a_0}^{a}\frac{dx}{x^2}\left(\sum_{n=0}^\infty b_nx^n\right)^{-1}\,.
+\begin{equation}
+\int_{a_0}^{a_{\rm
+    LL}}\frac{dy}{y^2}=\int_{a_0}^{a}\frac{dx}{x^2}\left(\sum_{n=0}^\infty
+  b_nx^n\right)^{-1}\,.
+\label{eq:intrun}
 \end{equation}
 Assuming that $x\ll 1$ (as it should be in the perturbative regime),
 one can write:
@@ -3073,11 +3257,13 @@ This equation can now be resolved for $a$ obtaining:
 \end{equation}
 One can keep iterating in the same way finally obtaining the general
 recursive formula for the analytic N$^{n}$LL solution:
-\begin{equation}\label{eq:masterf}
+\begin{equation}
 a_{{\rm N}^{n}{\rm LL}}=a_{\rm LL}\left\{1+a_{\rm LL}\left[\overline{b}_1\ln\left(\frac{a_{{\rm
           N}^{n-1}{\rm LL}}}{a_0}\right)+\sum_{k=1}^{n-1}\frac{\overline{b}_{k+1}}{k}\left(a_{{\rm
           N}^{n-k-1}{\rm
-          LL}}^k-a_0^k\right)\right]\right\}^{-1}+\mathcal{O}(a^{n+2})\,,\quad n\geq 1\,.
+          LL}}^k-a_0^k\right)\right]\right\}^{-1}+\mathcal{O}(a^{n+2})\,,\quad
+n\geq 1\,.
+\label{eq:masterf}
 \end{equation}
 Note also that the curly bracket, that appears in the denominator, can
 be further expanded and truncated to the relevant order because the
@@ -3219,8 +3405,9 @@ From now on, I will call the first three terms of this expansion LL$\alpha_{s}$,
 
 For future reference, using the expansions $\frac{1}{1-t}=1+t+t^{2}+\dots$ and $\ln\left(1-t\right)=-t-\frac{1}{2}t^{2}+\dots$, we get the following expansion for $\alpha_{s}$:
 
-\begin{equation}\label{alphasPT}
+\begin{equation}
 \alpha_{s}\left(q^{2}\right)=\alpha_{s}-\alpha_{s}^{2}\beta_{0}\ln\frac{q^{2}}{Q^{2}}-\alpha_{s}^{3}\left(\beta_{1}\ln\frac{q^{2}}{Q^{2}}-\beta_{0}^{2}\ln^{2}\frac{q^{2}}{Q^{2}}\right)
+\label{alphasPT}
 \end{equation}
 
 \subsection{$g_{1}$}

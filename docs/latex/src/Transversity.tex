@@ -85,7 +85,7 @@ V_{35}&=& u^-+d^- +s^-+c^{-}+b^--5t^{-}\,.
 It is possible to show that in this basis the general form of the
 DGLAP evolution equations for the transversity distribution reduces to
 the following set of \textit{decoupled} integro-differential equation:
-\begin{equation}\label{eq:evoleqs}
+\begin{equation}
 \begin{array}{rcl}
 \displaystyle \mu^2\frac{d\Sigma}{d\mu^2} &=& \displaystyle P_{qq}\otimes \Sigma\,,\\
 \\
@@ -96,6 +96,7 @@ the following set of \textit{decoupled} integro-differential equation:
 \displaystyle \mu^2\frac{dV_i}{d\mu^2} &=& \displaystyle P^-\otimes V_i\,,\\
 \\
 \end{array}
+\label{eq:evoleqs}
 \end{equation}
 with $i=3,8,15,24,35$ and where the Mellin convolution symbol
 $\otimes$ is defined as:
@@ -147,8 +148,9 @@ In order to carry out the implementation of the splitting functions in
 {\tt APFEL}, it is necessary to make sure that the expressions of the
 single coefficients of the perturbative expansions have the following
 structure:
-\begin{equation}\label{eq:splittingfuncs}
+\begin{equation}
 P(y) = R(y) + S \left(\frac1{1-x}\right)_++ L\delta(1-y)\,,
+\label{eq:splittingfuncs}
 \end{equation}
 where $R$ is a regular function in $x=1$, and $S$ and $L$ are
 numerical coefficients. The plus prescription used above has the
@@ -219,8 +221,10 @@ Ref.~\cite{Vogelsang:1997ak}.\footnote{A factor 2 is introduced to
   account for the different expansion parameter, here $\alpha_s/4\pi$
   rather than $\alpha_s/2\pi$} After a simple manipulation,
 it takes the form:
-\begin{equation}\label{eq:LOsplitting}
-P_{qq}^{V,(0)}(y) = 2C_F\left[-2+2\left(\frac{1}{1-y}\right)_++\frac32\delta(1-y)\right]\,.
+\begin{equation}
+P_{qq}^{V,(0)}(y) =
+2C_F\left[-2+2\left(\frac{1}{1-y}\right)_++\frac32\delta(1-y)\right]\,.
+\label{eq:LOsplitting}
 \end{equation}
 In this form it is easy to identify the elements introduced in
 Eq.~(\ref{eq:splittingfuncs}). In particular, we find that
@@ -237,9 +241,11 @@ Ref.~\cite{Vogelsang:1997ak}. We observe that
 $\mathcal{P}_{q\overline{q}}^{V,(1)}$, taken from Eq.~(44) of this
 paper, is a purely regular functions with no plus-prescripted and
 $\delta$-function terms. Therefore, it needs no manipulation:
-\begin{equation}\label{eq:PDFLOsplittingqqb}
+\begin{equation}
 \mathcal{P}_{q\overline{q}}^{V,(1)} (y) =
-4C_F\left(C_F-\frac12C_A\right)\left[ - 1 + y -\frac{4S_2(y)}{1+y}\right]\,,
+4C_F\left(C_F-\frac12C_A\right)\left[ - 1 + y
+  -\frac{4S_2(y)}{1+y}\right]\,,
+\label{eq:PDFLOsplittingqqb}
 \end{equation}
 with:
 \begin{equation}
@@ -249,7 +255,7 @@ S_2(y) = -2\mbox{Li}_2(-y) - 2\ln y\ln(1+y)+\frac12\ln^2y-\frac{\pi^2}{6}\,.
 The function $\mathcal{P}_{qq}^{V,(1)}$ from Eq.~(43) of
 Ref.~\cite{Vogelsang:1997ak} is instead more complicated but can be
 recasted in the form of Eq.~(\ref{eq:LOsplitting}) as:
-\begin{equation}\label{eq:PDFLOsplittingqq}
+\begin{equation}
 \begin{array}{rcl} 
   \mathcal{P}_{qq}^{V,(1)} (y) &=& \Bigg\{\displaystyle 4C_F^2 \left[ 1-y -\left( \frac{3}{2} + 
                                    2 \ln (1-y) \right) \frac{2y\ln
@@ -271,6 +277,7 @@ recasted in the form of Eq.~(\ref{eq:LOsplitting}) as:
                                    6 \zeta (3) \right) - \frac{8}{3} n_f C_F
                                    T_R\left( \frac{1}{4} + \frac{\pi^2}{3} \right)\Bigg\} \delta(1-y)\,,
 \end{array}
+\label{eq:PDFLOsplittingqq}
 \end{equation}
 where the regular, plus-prescripted, and $\delta$-function terms are
 enclosed between curly brackets.

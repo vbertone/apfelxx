@@ -13,6 +13,8 @@
 
 \begin{document}
 
+\title{Matching conditions}
+
 \tableofcontents
 \newpage
 
@@ -20,36 +22,38 @@
 
 If the (Zero Mass) Variable Flavour Number Scheme (ZM$-$VFNS) at NNLO
 is considered, matching conditions for the PDFs and the coupling
-constant at the heavy quarks thresholds ($m_c^2$, $m_b^2$ and $m_t^2$)
+constant at the heavy-quarks thresholds ($m_c^2$, $m_b^2$, and $m_t^2$)
 must be implemented. This is due to the fact that we are working with
 an ``effective theory'' where before a certain threshold, say $m_h^2$,
-the heavy quark flavour $h$ is treated as infinitely massive, while
+the heavy-quark flavour $h$ is treated as infinitely massive, while
 after the crossing of the same threshold the same flavour is treated
 as massless. This results in discontinuities of PDFs and coupling
 constant in correspondence of the thresholds. Such discontinuities can
-be evaluated in perturbation theory, and in particular one can see
-that they start at NNLO, so that PDFs and $a_s$ are continuous at LO
-and NLO~\cite{Buza:1996wv}.
+be evaluated in perturbation theory~\cite{Buza:1996wv}.
 
-The discontinuity of the PDF $l$ (in the Mellin space) of a light
+The discontinuity of the PDF $l$ (in Mellin space) of a light
 quark(\footnote{Note that the light quarks run from $1$ to $n_f$.})
-just beyond the threshold $m_h^2$($=m_c^2,m_b^2,m_t^2$), where the
-effective flavour number passes from $n_f$ to $n_f+1$, is given as a
+just beyond the threshold $m_h^2$ ($=m_c^2,m_b^2,m_t^2$), where the
+effective flavour number goes from $n_f$ to $n_f+1$, is given as a
 function of the same PDF just before the threshold by the following
 relation \cite{Vogt:2004ns}:
-\begin{equation}\label{eq:lightqmc}
+\begin{equation}
 l^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]l^{(n_f)}(N,m_h^2)\,.
+\label{eq:lightqmc}
 \end{equation}
 with $l=u,\overline{u},d,\overline{d},\dots$, while the gluon
 distribution function is given by:
-\begin{equation}\label{gluon}
-\displaystyle g^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{gg,h}^{S,(2)}(N)]g^{(n_f)}(N,m_h^2)+a_s^2(m_h^2)A^{S,(2)}_{gq,h}(N)\Sigma^{(n_f)}(N,m^2_h)
+\begin{equation}
+\displaystyle
+g^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{gg,h}^{S,(2)}(N)]g^{(n_f)}(N,m_h^2)+a_s^2(m_h^2)A^{S,(2)}_{gq,h}(N)\Sigma^{(n_f)}(N,m^2_h)
+\label{gluon}
 \end{equation}
 and, in the end, the sum of heavy quark $h$ and its anti-quark
 $\overline{h}$, which are going to be produced after the threshold
 $m_h^2$, is:
-\begin{equation}\label{eq:heavyqmc}
+\begin{equation}
 (h^{(n_f+1)}+\overline{h}^{(n_f+1)})(N,m_h^2)=a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(n_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(n_f)}(N,m_h^2)]\,.
+\label{eq:heavyqmc}
 \end{equation}
 Of course, we have $h=\overline{h}$. 
 
@@ -58,21 +62,23 @@ Now, since:
 \Sigma^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}+\overline{l}^{(n_f+1)})+(h^{(n_f+1)}+\overline{h}^{(n_f+1)})
 \end{equation}
 we find that the matching condition for the singlet is:
-\begin{equation}\label{singlet}
+\begin{equation}
 \begin{array}{c}
 \displaystyle\Sigma^{(n_f+1)}(N,m_h^2)=[1+a_s^2(m_h^2)A_{qq,h}^{N\!S,(2)}(N)]\Sigma^{(n_f)}(N,m_h^2)+\\
 \\
 \displaystyle a_s^2(m_h^2)[\tilde{A}^{S,(2)}_{hq}(N)\Sigma^{(n_f)}(N,m_h^2)+\tilde{A}^{S,(2)}_{hg}(N)g^{(n_f)}(N,m_h^2)]
 \end{array}
+\label{singlet}
 \end{equation}
 so that, from eqs. (\ref{gluon}) and (\ref{singlet}):
-\begin{equation}\label{couple1}
+\begin{equation}
 \begin{array}{c}
 \displaystyle {\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\begin{pmatrix}1+a_s^2[A_{qq,h}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{hq}] & a_s^2\tilde{A}^{S,(2)}_{hg}\\
 a_s^2A^{S,(2)}_{gq,h} & 1+a_s^2A_{gg,h}^{S,(2)}\end{pmatrix}{\Sigma^{(n_f)} \choose g^{(n_f)}}\\
 \\
 \displaystyle =\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose g^{(n_f)}}
 \end{array}
+\label{couple1}
 \end{equation}
 where we have omitted all the dependencies. So we have obtained the
 matching conditions for the singlet and the gluon distribution
@@ -85,12 +91,13 @@ is defined as:
 V^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}-\overline{l}^{(n_f+1)})+(h^{(n_f+1)}-\overline{h}^{(n_f+1)})
 \end{equation}
 but, since $h=\overline{h}$, the last term vanish and we are left with:
-\begin{equation}\label{valence}
+\begin{equation}
 \begin{array}{c}
 \displaystyle V^{(n_f+1)}=\sum_{l=1}^{n_f}(l^{(n_f+1)}-\overline{l}^{(n_f+1)})=\\
 \\
 \displaystyle [1+a_s^2A_{qq,h}^{N\!S,(2)}]\sum_{l=1}^{n_f}(l^{(n_f)}-\overline{l}^{(n_f)})=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}\,.
 \end{array}
+\label{valence}
 \end{equation}
 So, this is the matching condition for the valence distribution $V$.
 
@@ -101,8 +108,9 @@ V_3=(u-\overline{u})-(d-\overline{d})\quad\mbox{and}\quad V_8=(u-\overline{u})+(
 \end{equation}
 so that, in these cases, the matching conditions work as in the case
 of $V$, i.e.:
-\begin{equation}\label{v38}
+\begin{equation}
 V_{3,8}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}_{3,8}\,.
+\label{v38}
 \end{equation}
 
 The same holds for $T_{3}$ and $T_8$, which are defined as:
@@ -110,8 +118,9 @@ The same holds for $T_{3}$ and $T_8$, which are defined as:
 T_3=(u+\overline{u})-(d+\overline{d})\quad\mbox{and}\quad V_8=(u+\overline{u})+(d+\overline{d})-2(s+\overline{s})
 \end{equation}
 so:
-\begin{equation}\label{t38}
+\begin{equation}
 T_{3,8}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]T^{(n_f)}_{3,8}\,.
+\label{t38}
 \end{equation}
 
 The remaining valence distribution $V_{15}$, $V_{24}$ and $V_{35}$ are
@@ -132,8 +141,9 @@ $(b-\overline{b})$ respectively (of course, the $t(\overline{t})$
 distribution is zero). Anyway, this terms give no matching condition
 since the $b$ contribution is exactly equal to the $\overline{b}$
 contribution, so that they cancel. So:
-\begin{equation}\label{v152435}
+\begin{equation}
 V_{15,24,35}^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]V^{(n_f)}_{15,24,35}\,.
+\label{v152435}
 \end{equation}
 
 In the end, to deal with $T_{15}$, $T_{24}$ and $T_{35}$, we have to
@@ -163,32 +173,44 @@ while:
 T_{24,35}^{(4)}=\begin{pmatrix} 1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] & a_s^2\tilde{A}^{S,(2)}_{cg}\end{pmatrix}{\Sigma^{(3)} \choose g^{(3)}}\,.
 \end{equation}
 We can put the above relation in a matricial form:
-\begin{equation}\label{pippo1}
+\begin{equation}
 \begin{pmatrix} T_{15}^{(4)} \\ T_{24}^{(4)} \\ T_{35}^{(4)} \end{pmatrix} = \begin{pmatrix}  1+a_s^2[A_{qq,c}^{N\!S,(2)}-3\tilde{A}^{S,(2)}_{cq}] & -3a_s^2\tilde{A}^{S,(2)}_{cg}\\  
 1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] & a_s^2\tilde{A}^{S,(2)}_{cg} \\
-1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] & a_s^2\tilde{A}^{S,(2)}_{cg} \end{pmatrix}{\Sigma^{(3)} \choose g^{(3)}}\,.
+1+a_s^2[A_{qq,c}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{cq}] &
+a_s^2\tilde{A}^{S,(2)}_{cg} \end{pmatrix}{\Sigma^{(3)} \choose
+g^{(3)}}\,.
+\label{pippo1}
 \end{equation}
 But now it is easy to generalize. At $m_b^2$, $T_{15}$ does not
 contain, so:
-\begin{equation}\label{pippo2}
+\begin{equation}
 T_{15}^{(5)}=[1+a_s^2A_{qq,b}^{N\!S,(2)}]T_{15}^{(4)}
+\label{pippo2}
 \end{equation}
 while:
-\begin{equation}\label{pippo3}
+\begin{equation}
 \begin{pmatrix} T_{24}^{(5)} \\ T_{35}^{(5)} \end{pmatrix} = \begin{pmatrix}  1+a_s^2[A_{qq,b}^{N\!S,(2)}-4\tilde{A}^{S,(2)}_{bq}] & -4a_s^2\tilde{A}^{S,(2)}_{bg}\\  
-1+a_s^2[A_{qq,b}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{bq}] & a_s^2\tilde{A}^{S,(2)}_{bg} \end{pmatrix}{\Sigma^{(4)} \choose g^{(4)}}\,.
+1+a_s^2[A_{qq,b}^{N\!S,(2)}+\tilde{A}^{S,(2)}_{bq}] &
+a_s^2\tilde{A}^{S,(2)}_{bg} \end{pmatrix}{\Sigma^{(4)} \choose
+g^{(4)}}\,.
+\label{pippo3}
 \end{equation}
 Finally, at $m_t^2$ we have:
-\begin{equation}\label{pippo4}
+\begin{equation}
 \begin{array}{l}
 \displaystyle T_{15}^{(6)}=[1+a_s^2A_{qq,t}^{N\!S,(2)}]T_{15}^{(5)}\\
 \\
 \displaystyle T_{24}^{(6)}=[1+a_s^2A_{qq,t}^{N\!S,(2)}]T_{25}^{(5)}
 \end{array}
+\label{pippo4}
 \end{equation}
 and:
-\begin{equation}\label{pippo5}
-T_{35}^{(6)} = \begin{pmatrix}  1+a_s^2[A_{qq,t}^{N\!S,(2)}-5\tilde{A}^{S,(2)}_{tq}] & -5a_s^2\tilde{A}^{S,(2)}_{tg}\end{pmatrix}{\Sigma^{(5)} \choose g^{(5)}}\,.
+\begin{equation}
+T_{35}^{(6)} = \begin{pmatrix}
+  1+a_s^2[A_{qq,t}^{N\!S,(2)}-5\tilde{A}^{S,(2)}_{tq}] &
+  -5a_s^2\tilde{A}^{S,(2)}_{tg}\end{pmatrix}{\Sigma^{(5)} \choose
+  g^{(5)}}\,.
+\label{pippo5}
 \end{equation}
 
 An explicit calculation for the coefficients $A^{(2)}$ in the
@@ -203,12 +225,18 @@ To summarise the PDF matching conditions at the threshold $m_h^2$, we
 have that:
 \begin{itemize}
 \item singlet and gluon couple as follows:
-\begin{equation}\label{couple}
-{\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq} & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} & A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose g^{(n_f)}}
+\begin{equation}
+{\Sigma^{(n_f+1)} \choose g^{(n_f+1)}}=\left[\begin{pmatrix} 1 & 0 \\
+    0 & 1\end{pmatrix}+a_s^2A_{qq,h}^{N\!S,(2)}\begin{pmatrix} 1 & 0
+    \\ 0 & 0\end{pmatrix}+a_s^2\begin{pmatrix} \tilde{A}^{S,(2)}_{hq}
+    & \tilde{A}^{S,(2)}_{hg} \\A^{S,(2)}_{gq,h} &
+    A_{gg,h}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(n_f)} \choose
+  g^{(n_f)}}\,,\label{eq:couple}
 \end{equation}
 \item from eqs. (\ref{valence}), (\ref{v38}), (\ref{v152435}) and (\ref{t38}), one can see that $V$, $V_{3,8,\dots,35}$ and $T_{3,8}$ behave in the same way, i.e.:
-\begin{equation}\label{ciao}
-P^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]P^{(n_f)}\quad\mbox{with}\quad P=V,V_3,\dots,V_{35},T_3,T_8
+\begin{equation}
+P^{(n_f+1)}=[1+a_s^2A_{qq,h}^{N\!S,(2)}]P^{(n_f)}\quad\mbox{with}\quad
+P=V,V_3,\dots,V_{35},T_3,T_8\,,\label{eq:ciao}
 \end{equation}
 \item $T_{15}$, $T_{24}$ and $T_{35}$ have different matching
   conditions depending on the threshold. In particular: for
@@ -370,33 +398,43 @@ In what follows we will work only in the Mellin space, so we will drop
 any dependence on $N$.
 
 Let's start with singlet and gluon. We have:
-\begin{equation}\label{couple4Qmc}
-{\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2){\Sigma^{(4)} \choose g^{(4)}}(m_c^2)\,.
+\begin{equation}
+{\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \begin{pmatrix} \Gamma_{qq} &
+  \Gamma_{qg} \\ \Gamma_{gq}&
+  \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2){\Sigma^{(4)} \choose
+  g^{(4)}}(m_c^2)\,.
+\label{couple4Qmc}
 \end{equation}
-From eq. (\ref{couple}):
+From eq. (\ref{eq:couple}):
 \begin{equation}
 \displaystyle {\Sigma^{(4)} \choose g^{(4)}}(m_c^2)=\left[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\right]{\Sigma^{(3)} \choose g^{(3)}}(m_c^2)
 \end{equation}
 now, substituting the above relation into the eq. (\ref{couple4Qmc}),
 we get:
-\begin{equation}\label{couple43Qmc}
+\begin{equation}
 \begin{array}{l}
 \displaystyle {\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2)\Bigg[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+\\
 \\
 \hspace{180pt}\displaystyle a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\Bigg]{\Sigma^{(3)} \choose g^{(3)}}(m_c^2)\,.
 \end{array}
+\label{couple43Qmc}
 \end{equation}
 But:
-\begin{equation}\label{couple3mcQ0}
-{\Sigma^{(3)} \choose g^{(3)}}(m_c^2) = \begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(m_c^2,Q_0^2){\Sigma^{(3)} \choose g^{(3)}}(Q_0^2)\,.
+\begin{equation}
+{\Sigma^{(3)} \choose g^{(3)}}(m_c^2) = \begin{pmatrix} \Gamma_{qq} &
+  \Gamma_{qg} \\ \Gamma_{gq}&
+  \Gamma_{gg}\end{pmatrix}(m_c^2,Q_0^2){\Sigma^{(3)} \choose
+  g^{(3)}}(Q_0^2)\,.
+\label{couple3mcQ0}
 \end{equation}
 So, in the end:
-\begin{equation}\label{couple43QQ0}
+\begin{equation}
 \begin{array}{l}
 \displaystyle {\Sigma^{(4)} \choose g^{(4)}}(Q^2) = \Bigg\{\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(Q^2,m_c^2)\Bigg[\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}\begin{pmatrix} 1 & 0 \\ 0 & 0\end{pmatrix}+\\
 \\
 \hspace{70pt}\displaystyle a_s^2(m_c^2)\begin{pmatrix} \tilde{A}^{S,(2)}_{cq} & \tilde{A}^{S,(2)}_{cg} \\A^{S,(2)}_{gq,c} & A_{gg,c}^{S,(2)}\end{pmatrix}\Bigg]\begin{pmatrix} \Gamma_{qq} & \Gamma_{qg} \\ \Gamma_{gq}& \Gamma_{gg}\end{pmatrix}(m_c^2,Q_0^2)\Bigg\}{\Sigma^{(3)} \choose g^{(3)}}(Q_0^2)
 \end{array}\,.
+\label{couple43QQ0}
 \end{equation}
 
 Now we consider the distributions $V$, $V_{3,8}$ and $T_{3,8}$ which
@@ -435,7 +473,7 @@ while after $m_c^2$ it evolves as:
 \begin{equation}
 V_{15}^{(4)}(Q^2)=\Gamma^{-}(Q_0^2,m_c^2)V^{(4)}_{15}(m_c^2)\,.
 \end{equation}
-From eq. (\ref{ciao}), we find that the matching condition at $m_c^2$ is:
+From eq. (\ref{eq:ciao}), we find that the matching condition at $m_c^2$ is:
 \begin{equation}
 V^{(4)}_{15}(m_c^2)=[1+a_s^2(m_c^2)A_{qq,c}^{N\!S,(2)}] V^{(3)}_{15}(m_c^2)
 \end{equation}
@@ -928,8 +966,10 @@ the valence distributions $\{V,V_3,V_8,V_{15},V_{24},V_{35}\}$ match
 multiplicatively as:\footnote{Note that ``1'' in
   Eq.~(\ref{eq:nsingletmc}) is to be understood as $\delta(1-x)$ in
   $x$ space.}
-\begin{equation}\label{eq:nsingletmc}
-V_i^{(n_f+1)}(\mu_h) = [1+K_{ll}](\mu_h) V^{(n_f)}(\mu_h) = [1+K_{ll}(\mu_h)] V_i^{(n_f)}(\mu_h)\,,\quad i = 3,8,15,24,35\,,
+\begin{equation}
+V_i^{(n_f+1)}(\mu_h) = [1+K_{ll}](\mu_h) V^{(n_f)}(\mu_h) =
+[1+K_{ll}(\mu_h)] V_i^{(n_f)}(\mu_h)\,,\quad i = 3,8,15,24,35\,,
+\label{eq:nsingletmc}
 \end{equation}
 with $K_{ll}$ some given function that starts at
 $\mathcal{O}(\alpha_s^2)$. This equivalently amounts to saying that no
@@ -945,7 +985,7 @@ This allows us to concentrate the discussion on the singlet sector. We
 start by generalising Eqs.~(\ref{eq:lightqmc}), (\ref{gluon}),
 and~(\ref{eq:heavyqmc}) (changing and simplifying a bit the notation)
 as:
-\begin{equation}\label{eq:IntMatchingConds}
+\begin{equation}
 \begin{array}{rcl}
   \displaystyle g^{(n_f+1)}&=&\displaystyle
                                [1+K_{gg}]g^{(n_f)}+K_{gl}\sum_l
@@ -958,6 +998,7 @@ as:
   \\
   H^{+(n_f+1)} &=& H^{+(n_f)}\,,
 \end{array}
+\label{eq:IntMatchingConds}
 \end{equation}
 where $q^+=q+\overline{q}$ and $l$ runs between $1$ and $n_f$. We
 remind that $h$ is the $(n_f+1)$-th heavier flavour, \textit{i.e.}
@@ -978,7 +1019,7 @@ P^{(n_f+1)} = \left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]P^{(n_f)}\,,
 \end{equation}
 where $\mathbb{I}$ is the $7\times7$ unity matrix and
 $\mathbb{K}^{(n_f)}$ are given, depending on the value of $n_f$, by:
-\begin{equation}\label{eq:MathcingMatrices}
+\begin{equation}
 \begin{array}{ll}
 \mathbb{K}^{(0)} = 
 \begin{pmatrix}
@@ -1046,11 +1087,12 @@ K_{gg} & K_{gl} & K_{gl} & K_{gl} & K_{gl} & K_{gl} & K_{gh} \\
 K_{hg} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hl} & K_{hh} \\
 \end{pmatrix}
 \end{array}
+\label{eq:MathcingMatrices}
 \end{equation}
 The algorithm to determine the matrix $\mathbb{K}^{(n_f)}$, indexing
 the gluon distribution with 0 and the quark distributions from 1 to 6,
 reads:
-\begin{equation}\label{eq:algorithm}
+\begin{equation}
 \mathbb{K}_{ij}^{(n_f)} =
 \left\{
 \begin{array}{ll}
@@ -1064,6 +1106,7 @@ K_{hh} & \quad i = j = n_f+1\\
 0 & \quad\mbox{elsewhere}
 \end{array}
 \right.\,.
+\label{eq:algorithm}
 \end{equation}
 
 Now, in order to apply the matching condition to the distributions in
@@ -1072,7 +1115,7 @@ the evolution basis $E=(g,\Sigma,-T_3,T_8,T_{15},T_{24},T_{35})$
 the matching matrices from the physical basis to the evolution basis
 through $T\mathbb{K}^{(n_f)}T^{-1}$, where $T$ transforms the vector
 $P$ into the evolution-basis vector $E$:
-\begin{equation}\label{eq:RotationMatrix}
+\begin{equation}
 T = 
 \begin{pmatrix}
 1 & 0 & 0  & 0  & 0  & 0  & 0 \\
@@ -1083,6 +1126,7 @@ T =
 0 & 1 & 1  & 1  & 1  & -4  & 0 \\
 0 & 1 & 1  & 1  & 1  & 1  & -5
 \end{pmatrix}\,.
+\label{eq:RotationMatrix}
 \end{equation}
 The resulting matching matrices are much more complicated and
 generally less sparse than those in
@@ -1102,7 +1146,7 @@ M_7 &=& K_{ll}\,,
 \end{array}
 \end{equation}
 such that:
-\begin{equation}\label{eq:algorithmEv}
+\begin{equation}
 \footnotesize
 \left[T\mathbb{K}^{(n_f)}T^{-1}\right]_{ij} =
 \left\{
@@ -1140,6 +1184,7 @@ M_4 & \quad n_f+2\leq i \leq 6 &\quad  j=0\\
                                                             \leq 6\\
 \end{array}
 \right.
+\label{eq:algorithmEv}
 \end{equation}
 
 In order to be able to perform the backward evolution, it is necessary
@@ -1153,8 +1198,10 @@ going beyond $\mathcal{O}(\alpha_s^2)$. In addition, we know that:
 \mathbb{K}^{(n_f)} = a_s \mathbb{K}^{(1)(n_f)}+a_s^2 \mathbb{K}^{(2)(n_f)}+\mathcal{O}(\alpha_s^3)\,,
 \end{equation}
 so that:
-\begin{equation}\label{eq:inversion}
-\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1} = 1 - a_s \mathbb{K}^{(1)(n_f)}-a_s^2\left[\mathbb{K}^{(2)(n_f)}-\left(\mathbb{K}^{(1)(n_f)}\right)^2\right]+\mathcal{O}(\alpha_s^3)\,.
+\begin{equation}
+\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]^{-1} = 1 - a_s
+\mathbb{K}^{(1)(n_f)}-a_s^2\left[\mathbb{K}^{(2)(n_f)}-\left(\mathbb{K}^{(1)(n_f)}\right)^2\right]+\mathcal{O}(\alpha_s^3)\,.
+\label{eq:inversion}
 \end{equation}
 But the matrix $\mathbb{K}^{(1)(n_f)}$ is particularly simple because
 at $\mathcal{O}(\alpha_s)$ the matching functions $K_{ll}$, $K_{hl}$,
@@ -1166,7 +1213,7 @@ find:
 + \delta_{j,n_f+1}K_{hh}^{(1)}\right)\,,
 \end{equation}
 such that its square has the same structure and can be written as:
-\begin{equation}\label{eq:squareK1}
+\begin{equation}
 \begin{array}{rcl}
 \left(\mathbb{K}^{(1)(n_f)}\right) _{ij}^2 &=&\displaystyle \delta_{i,0}\left(\delta_{j,0}\sum_{k=g,h}K_{gk}^{(1)} K_{kg}^{(1)} +
 \delta_{j,n_f+1}\sum_{k=g,h}K_{gk}^{(1)} K_{kh}^{(1)}\right)\\
@@ -1174,6 +1221,7 @@ such that its square has the same structure and can be written as:
   &+&\displaystyle  \delta_{i,n_f+1}\left(\delta_{j,0}\sum_{k=g,h}K_{hk}^{(1)} K_{kg}^{(1)}
 + \delta_{j,n_f+1}\sum_{k=g,h}K_{hk}^{(1)} K_{kh}^{(1)}\right)\,,
 \end{array}
+\label{eq:squareK1}
 \end{equation}
 where, in $x$ space, the product of two $K$ functions is to be
 understood as a convolution. We report below the expression in $x$
@@ -1238,8 +1286,10 @@ P_{qq} = (P_{qq}^V+P_{q\overline{q}}^V)+n_f(P_{qq}^S+P_{q\overline{q}}^S).
 \end{equation}
 In the presence of intrinsic heavy-quark distributions and after some
 algebra, one finds that:
-\begin{equation}\label{eq:singletDGLAP}
-\frac{d\Sigma}{dt}= 2n_f P_{qg}\otimes g+n_fP_{qq}\otimes \left(\frac{\Sigma}{6}+\sum_{j=n_f+1}^6\frac{E_j}{j(j-1)}\right)\,,
+\begin{equation}
+\frac{d\Sigma}{dt}= 2n_f P_{qg}\otimes g+n_fP_{qq}\otimes
+\left(\frac{\Sigma}{6}+\sum_{j=n_f+1}^6\frac{E_j}{j(j-1)}\right)\,,
+\label{eq:singletDGLAP}
 \end{equation}
 with $E_j\in \{\Sigma,-T_3,T_8,T_{15},T_{24},T_{35}\}$. Therefore, the
 singlet distribution, on top of the gluon, couples also to the other
@@ -1251,11 +1301,12 @@ such that, for $E_j = \Sigma$, Eq.~(\ref{eq:singletDGLAP}) reproduces
 the usual form of the DGLAP equation for the singlet. We now need to
 determine how the distributions $E_j$, for $j>1$,
 evolve. We find:
-\begin{equation}\label{eq:nonsingletDGLAP}
+\begin{equation}
   \frac{dE_j}{dt}= (1-\theta_{n_fj})\left[2n_f P_{qg}\otimes
     g+n_fP_{qq}\otimes
     \left(\frac{\Sigma}{6}+\sum_{i=n_f+1}^6\frac{E_i}{i(i-1)}\right)\right]+\theta_{n_fj}P^+\otimes
   E_j\,,
+\label{eq:nonsingletDGLAP}
 \end{equation}
 with:
 \begin{equation}
@@ -1280,8 +1331,10 @@ Finally, the gluon distribution evolves as:
 P_{gq}\otimes \sum_{i=1}^{n_f} q_i^+\,,
 \end{equation}
 that translates into:
-\begin{equation}\label{eq:gluonDGLAP}
-\frac{dg}{dt}= P_{gg}\otimes g+n_fP_{gq}\otimes \left(\frac{\Sigma}{6}+\sum_{j=n_f+1}^6\frac{E_j}{j(j-1)}\right)\,.
+\begin{equation}
+\frac{dg}{dt}= P_{gg}\otimes g+n_fP_{gq}\otimes
+\left(\frac{\Sigma}{6}+\sum_{j=n_f+1}^6\frac{E_j}{j(j-1)}\right)\,.
+\label{eq:gluonDGLAP}
 \end{equation}
 Eqs.~(\ref{eq:singletDGLAP}), (\ref{eq:nonsingletDGLAP}), and
 (\ref{eq:gluonDGLAP}) fully define the splitting kernel matrix in the
@@ -1292,12 +1345,13 @@ more familiar ones if these contributions are set to zero.
 Therefore, the evolution of the vector of distributions $E$ with $n_f$
 active flavours and possible intrinsic heavy-quark contributions takes
 the matricial form:
-\begin{equation}\label{eq:DGLAPE}
+\begin{equation}
 \frac{dE}{dt} = \mathbb{P}^{(n_f)}\otimes E\,,
+\label{eq:DGLAPE}
 \end{equation}
 where the entries of the splitting-function matrix
 $\mathbb{P}^{(n_f)}$ can be defined algorithmically as:
-\begin{equation}\label{eq:splittingalg}
+\begin{equation}
 \mathbb{P}_{ij}^{(n_f)}=
 \left\{
 \begin{array}{lll}
@@ -1319,6 +1373,7 @@ P_{gg} & \quad i = 0 &\quad j = 0\\
 \frac{6}{j(j-1)}\frac{n_f}{6}P_{qq} &\quad n_f+1 \leq i \leq 6 & \quad n_f+1 \leq j \leq 6\\
 \end{array}
 \right.\,.
+\label{eq:splittingalg}
 \end{equation}
 
 \subsection{Evolution operator}
@@ -1333,8 +1388,11 @@ operator, we need to identify the general structure of ${\bm \Gamma}$.
 Given the possible presence of heavy-quark thresholds in the evolution
 interval $[t_0,t]$, the operator ${\bm\Gamma}$ is in fact a product of
 operators. More specifically, it can be written as:
-\begin{equation}\label{eq:conbevop}
-{\bm\Gamma}(t,t_0)= {\bm\Gamma}^{(N)}(t,t_N) \otimes\prod_{n_f=N-1}^{0} \mathcal{M}^{(n_f)}\otimes{\bm\Gamma}^{(n_f)}(t_{n_f+1}-\epsilon,t_{n_f})
+\begin{equation}
+{\bm\Gamma}(t,t_0)= {\bm\Gamma}^{(N)}(t,t_N)
+\otimes\prod_{n_f=N-1}^{0}
+\mathcal{M}^{(n_f)}\otimes{\bm\Gamma}^{(n_f)}(t_{n_f+1}-\epsilon,t_{n_f})
+\label{eq:conbevop}
 \end{equation}
 with
 $\mathcal{M}^{(n_f)} =
@@ -1343,8 +1401,10 @@ given in Eq.~(\ref{eq:algorithmEv}) and $t>t_N>\dots>t_1>t_0$, being
 $t_1,\dots,t_N$ the heavy-quark thresholds enclosed in the evolution
 interval. Using Eq.~(\ref{eq:DGLAPE}), each evolution operator
 ${\bm\Gamma}^{(n_f)}$ obeys the evolution equation:
-\begin{equation}\label{eq:DGLAPG}
-  \frac{d}{dt}{\bm\Gamma}^{(n_f)}(t,t_{n_f}) = \mathbb{P}^{(n_f)}(t)\otimes {\bm\Gamma}^{(n_f)}(t,t_{n_f})\,,
+\begin{equation}
+  \frac{d}{dt}{\bm\Gamma}^{(n_f)}(t,t_{n_f}) =
+  \mathbb{P}^{(n_f)}(t)\otimes {\bm\Gamma}^{(n_f)}(t,t_{n_f})\,,
+\label{eq:DGLAPG}
 \end{equation}
 with boundary condition
 ${\bm\Gamma}^{(n_f)}(t_{n_f},t_{n_f})=\mathbb{I}$. The solution of the
@@ -1357,7 +1417,7 @@ of the splitting-function matrix in Eq.~(\ref{eq:splittingalg}), one
 can infer the structure of ${\bm \Gamma}^{(n_f)}$. It turns out that
 the structure of ${\bm \Gamma^{(n_f)}}$ is almost the same as that of
 $\mathbb{P}^{(n_f)}$. Specifically:
-\begin{equation}\label{eq:evolopalg}
+\begin{equation}
   {\bm\Gamma}^{(n_f)}_{ij}=\mathbb{I}_{ij}+
   \left\{
 \begin{array}{lll}
@@ -1379,6 +1439,7 @@ $\mathbb{P}^{(n_f)}$. Specifically:
 \frac{6}{j(j-1)}\Gamma_{qq} &\quad n_f+1 \leq i \leq 6 & \quad n_f+1 \leq j \leq 6\\
 \end{array}
 \right.\,.
+\label{eq:evolopalg}
 \end{equation}
 % Using Eqs.~(\ref{eq:splittingalg}) and~(\ref{eq:evolopalg}), we can
 % work out the product $\mathbb{P}^{(n_f)}{\bm\Gamma}^{(n_f)}$ required
@@ -1407,8 +1468,10 @@ $\mathbb{P}^{(n_f)}$. Specifically:
 The next step is the computation of the product
 $\mathcal{M}^{(n_f)}{\bm\Gamma}^{(n_f)}=T\left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]T^{-1}{\bm\Gamma}^{(n_f)}$
 appearing in Eq.~(\ref{eq:conbevop}) that we conveniently split as:
-\begin{equation}\label{eq:nthfactor}
-\mathcal{M}^{(n_f)}{\bm\Gamma}^{(n_f)}={\bm \Gamma}^{(n_f)}+ T\mathbb{K}^{(n_f)}T^{-1}+\mathbb{S}^{(n_f)}\,,
+\begin{equation}
+\mathcal{M}^{(n_f)}{\bm\Gamma}^{(n_f)}={\bm \Gamma}^{(n_f)}+
+T\mathbb{K}^{(n_f)}T^{-1}+\mathbb{S}^{(n_f)}\,,
+\label{eq:nthfactor}
 \end{equation}
 where we have defined
 $\mathbb{S}^{(n_f)}=T\mathbb{K}^{(n_f)}
@@ -1445,7 +1508,7 @@ T^{-1}\left[{\bm\Gamma}^{(n_f)}-\mathbb{I}\right]$ that is given by:
 % \end{array}
 % \right.
 % \end{equation}
-\begin{equation}\label{eq:Smatrix}
+\begin{equation}
 \footnotesize
 \mathbb{S}_{ij}^{(n_f)} =
 \left\{
@@ -1476,6 +1539,7 @@ M_4\Gamma_{gq}+\frac{1}{n_f+1}\left(M_5-M_6\right)\Gamma_{qq}& \quad i = 1 &\qua
                                                             \leq 6\\
 \end{array}
 \right.
+\label{eq:Smatrix}
 \end{equation}
 Eq.~(\ref{eq:nthfactor}) along with Eq.~(\ref{eq:Smatrix}) allow us to
 infer the general structure on the $n_f$-th factor in

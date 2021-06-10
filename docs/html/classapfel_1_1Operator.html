@@ -97,6 +97,8 @@ Inheritance diagram for apfel::Operator:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abed3b7be91a5e75cea637a87fb4fa5d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#abed3b7be91a5e75cea637a87fb4fa5d0">Operator</a> ()=delete</td></tr>
 <tr class="separator:abed3b7be91a5e75cea637a87fb4fa5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1690288a30f134b8f3a90e1a1aefc71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#aa1690288a30f134b8f3a90e1a1aefc71">Operator</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;)=default</td></tr>
+<tr class="separator:aa1690288a30f134b8f3a90e1a1aefc71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f7959f42dce774aa9991c2fe562b9f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a6f7959f42dce774aa9991c2fe562b9f3">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr)</td></tr>
 <tr class="memdesc:a6f7959f42dce774aa9991c2fe562b9f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> constructor used for inheritance.  <a href="classapfel_1_1Operator.html#a6f7959f42dce774aa9991c2fe562b9f3">More...</a><br /></td></tr>
 <tr class="separator:a6f7959f42dce774aa9991c2fe562b9f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,7 +109,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a33282323f21457b098ee90b2356af978"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> virtual destructor.  <a href="classapfel_1_1Operator.html#a33282323f21457b098ee90b2356af978">More...</a><br /></td></tr>
 <tr class="separator:a33282323f21457b098ee90b2356af978"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaff7602598e18c5af64be8111fb6151"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#adaff7602598e18c5af64be8111fb6151">GetGrid</a> () const</td></tr>
-<tr class="memdesc:adaff7602598e18c5af64be8111fb6151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object of the operator.  <a href="classapfel_1_1Operator.html#adaff7602598e18c5af64be8111fb6151">More...</a><br /></td></tr>
+<tr class="memdesc:adaff7602598e18c5af64be8111fb6151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated to the operator.  <a href="classapfel_1_1Operator.html#adaff7602598e18c5af64be8111fb6151">More...</a><br /></td></tr>
 <tr class="separator:adaff7602598e18c5af64be8111fb6151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a7bcc854b04cfb5ee96b1bf6330f05"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a73a7bcc854b04cfb5ee96b1bf6330f05">GetOperator</a> () const</td></tr>
 <tr class="memdesc:a73a7bcc854b04cfb5ee96b1bf6330f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the operator.  <a href="classapfel_1_1Operator.html#a73a7bcc854b04cfb5ee96b1bf6330f05">More...</a><br /></td></tr>
@@ -159,7 +161,7 @@ Friends</h2></td></tr>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abed3b7be91a5e75cea637a87fb4fa5d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abed3b7be91a5e75cea637a87fb4fa5d0">&#9670;&nbsp;</a></span>Operator() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abed3b7be91a5e75cea637a87fb4fa5d0">&#9670;&nbsp;</a></span>Operator() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,8 +185,34 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="aa1690288a30f134b8f3a90e1a1aefc71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1690288a30f134b8f3a90e1a1aefc71">&#9670;&nbsp;</a></span>Operator() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::Operator::Operator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6f7959f42dce774aa9991c2fe562b9f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f7959f42dce774aa9991c2fe562b9f3">&#9670;&nbsp;</a></span>Operator() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7959f42dce774aa9991c2fe562b9f3">&#9670;&nbsp;</a></span>Operator() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +238,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="af92165933d07e889f047c69064f70566"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af92165933d07e889f047c69064f70566">&#9670;&nbsp;</a></span>Operator() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af92165933d07e889f047c69064f70566">&#9670;&nbsp;</a></span>Operator() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -304,7 +332,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object of the operator. </p>
+<p>Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated to the operator. </p>
 
 </div>
 </div>
@@ -589,7 +617,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 16 2021 22:40:08 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Jun 10 2021 09:47:28 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
