@@ -34,6 +34,7 @@ tests/polylog_test
 tests/expansion_test
 tests/siaxsec_test
 docs/latex/src/codes/FOvsAsy
+docs/latex/src/codes/FONLL
 docs/latex/src/codes/logs
 docs/latex/src/codes/EvolutionFactor
 docs/latex/src/codes/LeptonicModulation

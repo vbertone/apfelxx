@@ -1912,9 +1912,9 @@ as:
               d_i\left(z\right)\\
 \\
 &+&\displaystyle
-    \left(\sum_{k=q,g}\mathcal{P}^{(0)}_{qk}(x)\otimes f_k\left(x\right) \right)
+    \left(\sum_{k=q,g}\mathcal{P}^{(0)}_{ik}(x)\otimes f_k\left(x\right) \right)
               d_i\left(z\right)+ f_i\left(x\right)
-              \left(\sum_{k=q,g}\mathbb{P}^{(0)}_{qk}(z) \otimes d_k\left(z\right)\right)\Bigg]
+              \left(\sum_{k=q,g}\mathbb{P}^{(0)}_{ik}(z) \otimes d_k\left(z\right)\right)\Bigg]
 +\mathcal{O}(a_s^2)\,.
 \end{array}
 \label{eq:FOxsecasy2}
@@ -2550,16 +2550,220 @@ Comparing the equation above with Eq.~(\ref{eq:testint}), one deduces that:
 \begin{equation}
 \delta(xy-\varepsilon)\mathop{\longrightarrow}_{\varepsilon\rightarrow 0}
 \frac{\delta(y)}{[x]_+}+\frac{\delta(x)}{[y]_+}-\ln\left(\varepsilon\right)\delta(x)\delta(y)\,.
+\label{eq:leadinglim}
 \end{equation}
 Finally, substituting:
 \begin{equation}
-x\rightarrow \frac{1-x}{x}\,,\quad y\rightarrow \frac{1-z}{z}\,,\quad\mbox{and}\quad\varepsilon\rightarrow\frac{q_T^2}{Q^2}\,,
+x\rightarrow \frac{1-x}{x}\,,\quad y\rightarrow
+\frac{1-z}{z}\,,\quad\mbox{and}\quad\varepsilon\rightarrow\frac{q_T^2}{Q^2}\,,
+\label{eq:replacements}
 \end{equation}
 it is easy to recover Eq.~(\ref{eq:deltaexpansion}). In particular,
 one needs to use the fact that:
 \begin{equation}
 \delta\left(\frac{1-x}{x}\right)=\delta(1-x)\,.
 \end{equation}
+
+\subsection{Including the next corrections in $\varepsilon$}
+
+The limit in Eq.~(\ref{eq:leadinglim}) can be written as:
+\begin{equation}
+  \delta(xy-\varepsilon) = 
+  \frac{\delta(y)}{[x]_+}+\frac{\delta(x)}{[y]_+}-\ln\left(\varepsilon\right)\delta(x)\delta(y)
+  +\mathcal{O}(\varepsilon\ln\varepsilon)\,.
+\label{eq:leadingexp}
+\end{equation}
+The aim of this section is to calculate the first contributions to the
+$\mathcal{O}(\varepsilon\ln\varepsilon)$ term: specifically we are
+after terms proportional to $\varepsilon\ln\varepsilon$ and
+$\varepsilon$. We start by considering the integral in
+Eq.~(\ref{eq:testint}) and write:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle J(\varepsilon) = I(\varepsilon)-\lim_{\varepsilon \rightarrow 0} I(\varepsilon) &=&\displaystyle  \int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x}\left[f\left(x,\frac{\varepsilon}{x}\right)-f(x,0)\right]
++ \int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y}\left[f\left(\frac{\varepsilon}{y},y\right)-f(0,y)\right]\\
+\\
+
+&-&\displaystyle  \int_0^{\sqrt{\varepsilon}}
+\frac{dx}{x}\left[f\left(x,0\right)-f(0,0)\right] - \int_{0}^{\sqrt{\varepsilon}}
+  \frac{dy}{y}\left[f\left(0,y\right)-f(0,0)\right]\,.
+\end{array}
+\end{equation}
+We now use the following Taylor expansions(\footnote{Notice that the
+  expansions in the third and fourth lines in
+  Eq.~(\ref{eq:expansionsf}) are allowed because the variables $x$ and
+  $y$ are bounded as $1\leq x,y \leq \sqrt{\varepsilon}$, therefore
+  the ratios $\varepsilon/x$ and $\varepsilon/y$ tend to zero as
+  $\varepsilon$ tends to zero over the full integration range.}):
+\begin{equation}
+\begin{array}{l}
+\displaystyle f(x,0)=f(0,0)+\left.\frac{\partial f(x',0)}{\partial
+  x'}\right|_{x'=0}x+\frac12\left.\frac{\partial^2 f(x',0)}{\partial
+  x'^2}\right|_{x'=0}x^2+\mathcal{O}(x^3)\,,\\
+\\
+\displaystyle f(0,y)=f(0,0)+\left.\frac{\partial f(0,y')}{\partial
+  y'}\right|_{y'=0}y +\frac12\left.\frac{\partial^2 f(0,y')}{\partial
+  y'^2}\right|_{y'=0}y^2+\mathcal{O}(y^3)\,,\\
+\\
+\displaystyle f\left(x,\frac{\varepsilon}{x}\right)=f(x,0) +\left.\frac{\partial f(x,y')}{\partial
+  y'}\right|_{y'=0}\frac{\varepsilon}{x}+\frac12\left.\frac{\partial^2 f(x,y')}{\partial
+  y'^2}\right|_{y'=0}\frac{\varepsilon^2}{x^2}+\mathcal{O}\left(\frac{\varepsilon^3}{x^3}\right)\,,\\
+\\
+\displaystyle f\left(\frac{\varepsilon}{y},y\right)=f(0,y) +\left.\frac{\partial f(x',y)}{\partial
+  x'}\right|_{x'=0}\frac{\varepsilon}{y}+\frac12\left.\frac{\partial^2 f(x',y)}{\partial
+  x'^2}\right|_{x'=0}\frac{\varepsilon^2}{y^2}+\mathcal{O}\left(\frac{\varepsilon^3}{y^3}\right)\,,
+\end{array}
+\label{eq:expansionsf}
+\end{equation}
+so that, neglecting anything more suppressed than $\varepsilon$, we find:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle J(\varepsilon) &=&\displaystyle  \varepsilon \int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^2}\left.\frac{\partial f(x,y')}{\partial
+  y'}\right|_{y'=0}
++ \frac{\varepsilon^2}{2} \int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^3}\left.\frac{\partial^2 f(x,y')}{\partial
+  y'^2}\right|_{y'=0}
++
+\varepsilon\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^2}\left.\frac{\partial f(x',y)}{\partial
+  x'}\right|_{x'=0}+\frac{\varepsilon^2}{2}\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^3}\left.\frac{\partial^2 f(x',y)}{\partial
+  x'^2}\right|_{x'=0}\\
+\\
+&-&\displaystyle  \sqrt{\varepsilon}\left.\frac{\partial f(x',0)}{\partial
+  x'}\right|_{x'=0} -\frac{\varepsilon}{4}\left.\frac{\partial^2 f(x',0)}{\partial
+  x'^2}\right|_{x'=0} - \sqrt{\varepsilon}\left.\frac{\partial f(0,y')}{\partial
+  y'}\right|_{y'=0}- \frac{\varepsilon}{4}\left.\frac{\partial^2 f(0,y')}{\partial
+  y'^2}\right|_{y'=0}\\
+\\
+&=&\displaystyle \varepsilon \int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^2}\left[\left.\frac{\partial f(x,y')}{\partial
+  y'}\right|_{y'=0}-\left.\frac{\partial f(0,y')}{\partial
+  y'}\right|_{y'=0}\right]
++ \varepsilon\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^2}\left[\left.\frac{\partial f(x',y)}{\partial
+  x'}\right|_{x'=0}-\left.\frac{\partial f(x',0)}{\partial
+  x'}\right|_{x'=0}\right]\\
+\\
+&+&\displaystyle \frac{\varepsilon^2}{2}\int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^3}\left[\left.\frac{\partial^2 f(x,y')}{\partial
+  y'^2}\right|_{y'=0}-\left.\frac{\partial^2 f(0,y')}{\partial
+  y'^2}\right|_{y'=0}\right]
++ \frac{\varepsilon^2}{2}\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^3}\left[\left.\frac{\partial^2 f(x',y)}{\partial
+  x'^2}\right|_{x'=0}-\left.\frac{\partial^2 f(x',0)}{\partial
+  x'^2}\right|_{x'=0}\right]\\
+\\
+&+&\displaystyle \varepsilon \int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^2}\left.\frac{\partial f(0,y')}{\partial
+  y'}\right|_{y'=0}
++ \varepsilon\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^2}\left.\frac{\partial f(x',0)}{\partial
+  x'}\right|_{x'=0}-\displaystyle  \sqrt{\varepsilon}\left.\frac{\partial f(x',0)}{\partial
+  x'}\right|_{x'=0} - \sqrt{\varepsilon}\left.\frac{\partial f(0,y')}{\partial
+  y'}\right|_{y'=0}\\
+\\
+&+&\displaystyle \frac{\varepsilon^2}{2} \int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^3}\left.\frac{\partial^2 f(0,y')}{\partial
+  y'^2}\right|_{y'=0}
++ \frac{\varepsilon^2}{2}\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^3}\left.\frac{\partial^2 f(x',0)}{\partial
+  x'^2}\right|_{x'=0}-\frac{\varepsilon}{4}\left.\frac{\partial^2 f(x',0)}{\partial
+  x'^2}\right|_{x'=0} - \frac{\varepsilon}{4}\left.\frac{\partial^2 f(0,y')}{\partial
+  y'^2}\right|_{y'=0}\\
+\\
+&=&\displaystyle \varepsilon \left.\frac{\partial}{\partial
+  y'}\int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^2}\left[f(x,y')-f(0,y')\right]\right|_{y'=0}
++ \varepsilon \left.\frac{\partial}{\partial
+  x'}\int_{\sqrt{\varepsilon}}^1
+\frac{dy}{y^2}\left[f(x',y)-f(x',0) \right]\right|_{x'=0}\\
+\\
+&-&\displaystyle \varepsilon \left.\frac{\partial f(0,y')}{\partial y'}\right|_{y'=0}
+ - \varepsilon \left.\frac{\partial
+    f(x',0)}{\partial x'}\right|_{x'=0} \,,
+\end{array}
+\end{equation}
+where, remarkably, the terms proportional to $\sqrt{\varepsilon}$
+cancel out as well as those proportional to $\varepsilon$ but
+involving a second derivative. The integrals in the next-to-last line
+are potentially logarithmically divergent as $\varepsilon\rightarrow 0$
+and we wish to isolate this divergence as well as the next-to-leading
+term that is a constant in $\varepsilon$. Of course, the logarithmic
+divergence is tamed by the overall factor $\varepsilon$ therefore the
+full $J$ remains power suppressed. To isolate these terms we simply
+expand the integrand around zero of the integration variable so that
+for example:
+\begin{equation}
+\int_{\sqrt{\varepsilon}}^1
+\frac{dx}{x^2}\left[f(x,y')-f(0,y')\right] = -\frac12\left.\frac{\partial f(x',y')}{\partial x'}\right|_{x'=0}
+\ln\varepsilon+\frac12\left.\frac{\partial^2 f(x',y')}{\partial x'^2}\right|_{x'=0}\,,
+\end{equation}
+where we neglected the $\mathcal{O}(\sqrt{\varepsilon})$ terms. We
+finally have:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle J(\varepsilon) &=&\displaystyle -\varepsilon\ln\varepsilon\left.\frac{\partial^2 f(x',y')}{\partial x' \partial
+  y'}\right|_{x'=y'=0}
++\frac\varepsilon2\left.\frac{\partial^3 f(x',y')}{\partial x'^2 \partial
+  y'}\right|_{x'=y'=0}+\frac\varepsilon 2\left.\frac{\partial^3 f(x',y')}{\partial x' \partial
+  y'^2}\right|_{x'=y'=0}\\
+\\
+&-&\displaystyle \varepsilon \left.\frac{\partial f(0,y')}{\partial y'}\right|_{y'=0}
+ - \varepsilon \left.\frac{\partial
+    f(x',0)}{\partial x'}\right|_{x'=0} \,,
+\end{array}
+\end{equation}
+which isolates the terms proportional to $\varepsilon\ln\varepsilon$
+and $\varepsilon$ as required. Now, for the sake of simplicity, we
+focus on the leading term $\varepsilon\ln\varepsilon$(\footnote{In
+  fact, also considering $\mathcal{O}(\varepsilon)$ terms would imply
+  also considering the contribution to $F_L$ to the asymptotic cross
+  section.}) and use the following identity:
+\begin{equation}
+\int_0^1 dy\left[\frac{\delta(y)}{y}\right]_+g(y) = \left.\frac{dg(y')}{dy'}\right|_{y'=0}\,,
+\end{equation}
+where one should interpret:
+\begin{equation}
+\left[\frac{\delta(y)}{y}\right]_+\equiv \lim_{\eta\rightarrow 0^+}\left[\frac{\delta(y-\eta)}{y}\right]_+\,.
+\end{equation}
+This finally gives:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle J(\varepsilon) &=&\displaystyle
+                                   -\varepsilon\ln\varepsilon\int_0^1dx
+                                   \int_0^1dy \left[\frac{\delta(x)}{x}\right]_+\left[\frac{\delta(y)}{y}\right]_+f(x,y)
+                                   +\mathcal{O}(\varepsilon)\,,
+\end{array}
+\end{equation}
+which allows us to write:
+\begin{equation}
+  \delta(xy-\varepsilon) = 
+  -\ln\varepsilon\delta(x)\delta(y)
++\frac{\delta(y)}{[x]_+}+\frac{\delta(x)}{[y]_+}-\varepsilon\ln\varepsilon \left[\frac{\delta(x)}{x}\right]_+\left[\frac{\delta(y)}{y}\right]_+  +\mathcal{O}(\varepsilon)\,.
+\end{equation}
+We have thus isolated in this way the next leading term to the
+expansion in $q_T$ of the kinematic $\delta$-function in
+Eq.~(\ref{eq:deltaexpansion}). More precisely, using the replacements
+in Eq.~(\ref{eq:replacements}), one finds:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle
+  \delta\left(\frac{q_T^2}{Q^2}-\frac{(1-x)(1-z)}{xz}\right) &=& \displaystyle 
+  \ln\left(\frac{Q^2}{q_T^2}\right)\delta(1-x)\delta(1-z)
++\frac{x\delta(1-z)}{(1-x)_+}+\frac{z\delta(1-x)}{(1-z)_+}\\
+\\
+&+&\displaystyle\frac{q_T^2}{Q^2}\ln\left(\frac{Q^2}{q_T^2}\right)
+  \left[\frac{x\delta(1-x)}{1-x}\right]_+\left[\frac{z\delta(1-z)}{1-z}\right]_+
+  +\mathcal{O}\left(\frac{q_T^2}{Q^2}\right)\,.
+\end{array}
+\end{equation}
+
+
+\newpage
 
 \section{Solution of an RGE in perturbation theory}
 
