@@ -165,14 +165,16 @@ int main() {
   const double y  = Q2 / VS / VS / x;
 
   const int    nqT    = 1000;
-  const double qTmin  = 0.0001;
-  const double qTmax  = 1;
+  const double qTmin  = 0.0000000001;
+  const double qTmax  = 0.001;
   const double qTstep = exp( log(qTmax / qTmin ) / ( nqT - 1 ) );
 
   std::cout << std::scientific;
-  for (double qT = qTmin; qT <= qTmax; qT *= qTstep)
+  for (double qT = qTmin; qT <= qTmax * (1.000001); qT *= qTstep)
     std::cout << qT << "\t"
 	      << xsecFO(Q2, x, y, z, qT) << "\t" << xsecAsy(Q2, x, y, z, qT) << "\t"
+	      //<< xsecFO(Q2, x, y, z, qT) - xsecAsy(Q2, x, y, z, qT) << "\t"
+	      //<< xsecFO(Q2, x, y, z, qT) / xsecAsy(Q2, x, y, z, qT) << "\t"
 	      << std::endl;
 
   return 0;
