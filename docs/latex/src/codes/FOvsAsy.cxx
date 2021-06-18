@@ -97,7 +97,8 @@ int main() {
 	  + ( B2FOqg(xb0, zb, qT, Q) - y2 / Yp * BLFOqg(xb0, zb) ) * qg
 	  + ( B2FOgq(xb0, zb, qT, Q) - y2 / Yp * BLFOgq(xb0, zb) ) * gq ) / Q / Q / ( 1 - zb );
 
-	return 2 * qT * 2 * M_PI * alpha2 * Yp * integrand / x / y / Q2;
+	//return 2 * qT * 2 * M_PI * alpha2 * Yp * integrand / x / y / Q2;
+	return 2 * M_PI * alpha2 * Yp * integrand / x / y / Q2;
       };
 
       // Integrate over z.
@@ -134,8 +135,8 @@ int main() {
       const apfel::Set<apfel::Distribution> DistPDFs{apfel::EvolutionBasisQCD{apfel::NF(Q, Thresholds)}, apfel::DistributionMap(g, [=] (double const& x, double const& Q) -> std::map<int ,double>{ return apfel::PhysToQCDEv(PDFs->xfxQ(x, Q)); }, Q)};
       const apfel::Set<apfel::Distribution> DistFFs{apfel::EvolutionBasisQCD{apfel::NF(Q, Thresholds)}, apfel::DistributionMap(g, [=] (double const& x, double const& Q) -> std::map<int ,double>{ return apfel::PhysToQCDEv(FFs->xfxQ(x, Q)); }, Q)};
 
-      const std::map<int, apfel::Distribution> xf = apfel::QCDEvToPhys(DistPDFs.GetObjects());
-      const std::map<int, apfel::Distribution> zd = apfel::QCDEvToPhys(DistFFs.GetObjects());
+      const std::map<int, apfel::Distribution> xf  = apfel::QCDEvToPhys(DistPDFs.GetObjects());
+      const std::map<int, apfel::Distribution> zd  = apfel::QCDEvToPhys(DistFFs.GetObjects());
       const std::map<int, apfel::Distribution> xPf = apfel::QCDEvToPhys((PDFObj.at(nf).SplittingFunctions.at(0) * DistPDFs).GetObjects());
       const std::map<int, apfel::Distribution> zPd = apfel::QCDEvToPhys((FFObj.at(nf).SplittingFunctions.at(0) * DistFFs).GetObjects());
 
@@ -150,7 +151,8 @@ int main() {
 	  DoubDist.AddTerm({ - apfel::QCh2[abs(j)-1] * I1, xPf.at(j), zd.at(j)});
 	}
 
-      return 2 * qT * 2 * M_PI * alpha2 * Yp * as * DoubDist.Evaluate(x,z) / z / x / y / Q2;
+      //return 2 * qT * 2 * M_PI * alpha2 * Yp * as * DoubDist.Evaluate(x, z) / z / x / y / Q2;
+      return 2 * M_PI * alpha2 * Yp * as * DoubDist.Evaluate(x, z) / z / x / y / Q2;
     };
 
   // Kinematics in terms of the variables in which TIMBA is
@@ -165,7 +167,7 @@ int main() {
   const double y  = Q2 / VS / VS / x;
 
   const int    nqT    = 1000;
-  const double qTmin  = 0.0000000001;
+  const double qTmin  = 0.000000001;
   const double qTmax  = 0.001;
   const double qTstep = exp( log(qTmax / qTmin ) / ( nqT - 1 ) );
 

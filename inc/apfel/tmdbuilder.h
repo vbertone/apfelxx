@@ -63,7 +63,7 @@ namespace apfel
   /**
    * @brief As the InitializeTmdObjects but with the computation of
    * the NNNLO corrections to the matching conditions set to
-   * zero. This saves much computation time usually unneded.
+   * zero. This saves computation time.
    */
   std::map<int, TmdObjects> InitializeTmdObjectsLite(Grid                const& g,
                                                      std::vector<double> const& Thresholds,
