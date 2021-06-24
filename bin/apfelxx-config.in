@@ -13,7 +13,8 @@ if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
     echo "Usage: apfel-config [[--help|-h] | [--prefix] | [--ldflags]]"
     echo "Options:"
     echo "  --help | -h    : show this help message"
-    echo "  --prefix       : show the installation prefix (cf. autoconf)"
+    echo "  --version      : show the code version"
+    echo "  --prefix       : show the installation prefix"
     echo "  --incdir       : show the path to the APFEL header directory (for C++ interface)"
     echo "  --libdir       : show the path to the APFEL library directory"
     echo "  --cppflags     : get compiler flags for use with the C preprocessor stage of C++ compilation"
@@ -43,6 +44,6 @@ test -n "$tmp" && OUT="$OUT -L@libdir@ -lapfelxx"
 
 ## Version
 tmp=$( echo "$*" | egrep -- '--\<version\>')
-test -n "$tmp" && OUT="$OUT @apfel_VERSION@"
+test -n "$tmp" && OUT="$OUT @apfelxx_VERSION@"
 
 echo $OUT
