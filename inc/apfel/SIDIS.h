@@ -84,7 +84,6 @@ namespace apfel
     double Regular(double const& x) const { return - 2 * apfel::CF * ( 1 + x ); }
   };
 
-
   class r11qq: public apfel::Expression
   {
   public:
@@ -274,8 +273,9 @@ namespace apfel
     double Regular(double const&) const { return 1; }
   };
 
-  // Functions that fills in the SIDIS hard cross sections.
-  SidisObjects InitializeSIDIS(apfel::Grid const& g)
+  // Functions that fills in the SIDIS hard cross sections on two
+  // different grids.
+  SidisObjects InitializeSIDIS(apfel::Grid const& gx, apfel::Grid const& gz)
   {
     apfel::report("Initializing SIDIS hard cross sections... ");
     apfel::Timer t;
@@ -288,14 +288,17 @@ namespace apfel
     // Expressions taken from Appendix C of hep-ph/9711387.
     // ====================================================
     // LO contribution.
-    const apfel::Operator odelta{g, delta{}};
+    const apfel::Operator odeltax{gx, delta{}};
+    const apfel::Operator odeltaz{gz, delta{}};
 
-    SidisObj.C20qq.AddTerm({1, odelta, odelta});
+    SidisObj.C20qq.AddTerm({1, odeltax, odeltaz});
 
     // NLO contributions
     // F2
-    const apfel::Operator os0{g, s0{}};
-    const apfel::Operator os1{g, s1{}};
+    const apfel::Operator os0x{gx, s0{}};
+    const apfel::Operator os1x{gx, s1{}};
+    const apfel::Operator os0z{gz, s0{}};
+    const apfel::Operator os1z{gz, s1{}};
 
     const double LLqq = - 16 * apfel::CF;
     const double LSqq = 4 * apfel::CF;
@@ -304,83 +307,90 @@ namespace apfel
     const double K1qq = 4 * apfel::CF;
     const double K2qq = 12 * apfel::CF;
 
-    const apfel::Operator olrqq{g, lrqq{}};
-    const apfel::Operator osrqq{g, srqq{}};
-    const apfel::Operator orlqq{g, rlqq{}};
-    const apfel::Operator orsqq{g, rsqq{}};
-    const apfel::Operator or11qq{g, r11qq{}};
-    const apfel::Operator or12qq{g, r12qq{}};
-    const apfel::Operator or21qq{g, r21qq{}};
-    const apfel::Operator or22qq{g, r22qq{}};
+    const apfel::Operator orlqqx{gx,  rlqq{}};
+    const apfel::Operator orsqqx{gx,  rsqq{}};
+    const apfel::Operator or11qqx{gx, r11qq{}};
+    const apfel::Operator or21qqx{gx, r21qq{}};
+    const apfel::Operator olrqqz{gz,  lrqq{}};
+    const apfel::Operator osrqqz{gz,  srqq{}};
+    const apfel::Operator or12qqz{gz, r12qq{}};
+    const apfel::Operator or22qqz{gz, r22qq{}};
 
-    SidisObj.C21qq.AddTerm({LLqq, odelta, odelta}); //1
-    SidisObj.C21qq.AddTerm({LSqq, odelta, os1   }); //2
-    SidisObj.C21qq.AddTerm({1, odelta, olrqq });    //3
-    SidisObj.C21qq.AddTerm({SLqq, os1, odelta});    //4
-    SidisObj.C21qq.AddTerm({SSqq, os0, os0   });    //5
-    SidisObj.C21qq.AddTerm({1, os0,   osrqq });     //6
-    SidisObj.C21qq.AddTerm({1, orlqq, odelta});     //7
-    SidisObj.C21qq.AddTerm({1, orsqq, os0   });     //8
-    SidisObj.C21qq.AddTerm({K1qq, or11qq, or12qq}); //9
-    SidisObj.C21qq.AddTerm({K2qq, or21qq, or22qq}); //10
+    SidisObj.C21qq.AddTerm({LLqq, odeltax, odeltaz}); //1
+    SidisObj.C21qq.AddTerm({LSqq, odeltax, os1z   }); //2
+    SidisObj.C21qq.AddTerm({1,    odeltax, olrqqz});  //3
+    SidisObj.C21qq.AddTerm({SLqq, os1x,    odeltaz}); //4
+    SidisObj.C21qq.AddTerm({SSqq, os0x,    os0z   }); //5
+    SidisObj.C21qq.AddTerm({1,    os0x,    osrqqz});  //6
+    SidisObj.C21qq.AddTerm({1,    orlqqx,  odeltaz}); //7
+    SidisObj.C21qq.AddTerm({1,    orsqqx,  os0z   }); //8
+    SidisObj.C21qq.AddTerm({K1qq, or11qqx, or12qqz}); //9
+    SidisObj.C21qq.AddTerm({K2qq, or21qqx, or22qqz}); //10
 
     const double K1gq = 4 * apfel::CF;
     const double K2gq = - 12 * apfel::CF;
     const double K3gq = - 2 * apfel::CF;
 
-    const apfel::Operator olrgq{g, lrgq{}};
-    const apfel::Operator osrgq{g, srgq{}};
-    const apfel::Operator or11gq{g, r11gq{}};
-    const apfel::Operator or12gq{g, r12gq{}};
-    const apfel::Operator or21gq{g, r21gq{}};
-    const apfel::Operator or22gq{g, r22gq{}};
-    const apfel::Operator or31gq{g, r31gq{}};
-    const apfel::Operator or32gq{g, r32gq{}};
+    const apfel::Operator olrgqz{gz,  lrgq{}};
+    const apfel::Operator osrgqz{gz,  srgq{}};
+    const apfel::Operator or11gqx{gx, r11gq{}};
+    const apfel::Operator or12gqz{gz, r12gq{}};
+    const apfel::Operator or21gqx{gx, r21gq{}};
+    const apfel::Operator or22gqz{gz, r22gq{}};
+    const apfel::Operator or31gqx{gx, r31gq{}};
+    const apfel::Operator or32gqz{gz, r32gq{}};
 
-    SidisObj.C21gq.AddTerm({1, odelta, olrgq});     //1
-    SidisObj.C21gq.AddTerm({1, os0,    osrgq});     //2
-    SidisObj.C21gq.AddTerm({K1gq, or11gq, or12gq}); //3
-    SidisObj.C21gq.AddTerm({K2gq, or21gq, or22gq}); //4
-    SidisObj.C21gq.AddTerm({K3gq, or31gq, or32gq}); //5
+    SidisObj.C21gq.AddTerm({1,    odeltax, olrgqz});  //1
+    SidisObj.C21gq.AddTerm({1,    os0x,    osrgqz});  //2
+    SidisObj.C21gq.AddTerm({K1gq, or11gqx, or12gqz}); //3
+    SidisObj.C21gq.AddTerm({K2gq, or21gqx, or22gqz}); //4
+    SidisObj.C21gq.AddTerm({K3gq, or31gqx, or32gqz}); //5
 
     const double K1qg = 2;
     const double K2qg = 1;
 
-    const apfel::Operator orlqg{g, rlqg{}};
-    const apfel::Operator orsqg{g, rsqg{}};
-    const apfel::Operator or11qg{g, r11qg{}};
-    const apfel::Operator or12qg{g, r12qg{}};
-    const apfel::Operator or21qg{g, r21qg{}};
-    const apfel::Operator or22qg{g, r22qg{}};
+    const apfel::Operator orlqgx{gx,  rlqg{}};
+    const apfel::Operator orsqgx{gx,  rsqg{}};
+    const apfel::Operator or11qgx{gx, r11qg{}};
+    const apfel::Operator or12qgz{gz, r12qg{}};
+    const apfel::Operator or21qgx{gx, r21qg{}};
+    const apfel::Operator or22qgz{gz, r22qg{}};
 
-    SidisObj.C21qg.AddTerm({1, orlqg, odelta});     //1
-    SidisObj.C21qg.AddTerm({1, orsqg, os0   });     //2
-    SidisObj.C21qg.AddTerm({K1qg, or11qg, or12qg}); //3
-    SidisObj.C21qg.AddTerm({K2qg, or21qg, or22qg}); //4
+    SidisObj.C21qg.AddTerm({1,    orlqgx,  odeltaz}); //1
+    SidisObj.C21qg.AddTerm({1,    orsqgx,  os0z   }); //2
+    SidisObj.C21qg.AddTerm({K1qg, or11qgx, or12qgz}); //3
+    SidisObj.C21qg.AddTerm({K2qg, or21qgx, or22qgz}); //4
 
     // FL
     const double K1Lqq = 8 * apfel::CF;
 
-    const apfel::Operator or11Lqq{g, r11Lqq{}};
-    const apfel::Operator or12Lqq{g, r12Lqq{}};
+    const apfel::Operator or11Lqqx{gx, r11Lqq{}};
+    const apfel::Operator or12Lqqz{gz, r12Lqq{}};
 
-    SidisObj.CL1qq.AddTerm({K1Lqq, or11Lqq, or12Lqq});
+    SidisObj.CL1qq.AddTerm({K1Lqq, or11Lqqx, or12Lqqz});
 
     const double K1Lgq = 8 * apfel::CF;
 
-    const apfel::Operator or11Lgq{g, r11Lgq{}};
-    const apfel::Operator or12Lgq{g, r12Lgq{}};
+    const apfel::Operator or11Lgqx{gx, r11Lgq{}};
+    const apfel::Operator or12Lgqz{gz, r12Lgq{}};
 
-    SidisObj.CL1gq.AddTerm({K1Lgq, or11Lgq, or12Lgq});
+    SidisObj.CL1gq.AddTerm({K1Lgq, or11Lgqx, or12Lgqz});
 
     const double K1Lqg = 8;
 
-    const apfel::Operator or11Lqg{g, r11Lqg{}};
-    const apfel::Operator or12Lqg{g, r12Lqg{}};
+    const apfel::Operator or11Lqgx{gx, r11Lqg{}};
+    const apfel::Operator or12Lqgz{gz, r12Lqg{}};
 
-    SidisObj.CL1qg.AddTerm({K1Lqg, or11Lqg, or12Lqg});
+    SidisObj.CL1qg.AddTerm({K1Lqg, or11Lqgx, or12Lqgz});
     t.stop();
 
     return SidisObj;
+  }
+
+  // Functions that fills in the SIDIS hard cross sections on one
+  // single grid.
+  SidisObjects InitializeSIDIS(apfel::Grid const& gx)
+  {
+    return InitializeSIDIS(gx, gx);
   }
 }
