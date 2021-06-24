@@ -44,6 +44,7 @@ docs/latex/src/codes/PhaseSpacePowerCorrs
 docs/latex/src/codes/Alphas
 docs/latex/src/codes/InterpolationFunctions
 docs/latex/src/codes/PDFs
+docs/latex/src/codes/Yterm
 
 # Compiled Object files
 *.slo

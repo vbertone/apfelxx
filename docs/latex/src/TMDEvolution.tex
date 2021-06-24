@@ -1236,7 +1236,10 @@ beyond $\mathcal{O}(\alpha_s^2)$.
 A physical cross section differential in $q_T$ can finally be computed
 as:
 \begin{equation}
-  \displaystyle \frac{d\sigma}{dq_T^2} \propto \sum_{ij}H_{ij} (Q) \int d^2\mathbf{b}_T e^{i \mathbf{b}_T\cdot \mathbf{q}_T}F_i(x, \mathbf{b}_T,Q,Q^2) D_j(z, \mathbf{b}_T,Q,Q^2)
+  \displaystyle \frac{d\sigma}{dq_T^2} \propto \sum_{ij}H_{ij} (Q)
+  \int d^2\mathbf{b}_T e^{i \mathbf{b}_T\cdot \mathbf{q}_T}F_i(x,
+  \mathbf{b}_T,Q,Q^2) D_j(z, \mathbf{b}_T,Q,Q^2)
+\label{eq:qTspectrum}
 \end{equation}
 where $F_i$ and $D_j$ are two different sets of TMD distributions
 (\textit{e.g.} a set of PDFs and a set of FFs) indexed by a flavour
@@ -1609,7 +1612,6 @@ functions should be accordingly. Specifically, the perturbative
 accuracy at which they are computed should be the same as that of the
 non-cusp anomalous dimension $\gamma_F$.
 
-
 \section{Non-perturbative effect on the asymptotic cross section}
 
 As discussed in Sect.~\ref{sec:nonpert}, TMDs have a non-perturbative
@@ -1739,6 +1741,143 @@ in Eqs.~(\ref{eq:PureLogs}) and~(\ref{eq:IkNonPert}).
       and~(\ref{eq:IkNonPert}).\label{fig:logsTrans}}
   \end{centering}
 \end{figure}
+
+\section{Resummation scheme}
+
+The resummed cross section in
+Eqs.~(\ref{eq:qTspectrum})-(\ref{eq:xsecexp}) is written in terms of
+process-independent TMDs, $F$ and $D$, and a hard factor $H$ that is
+instead process dependent. However, in the original $q_T$-resummation
+formalism applied to Drell-Yan production the same cross section was
+written in a different but equivalent way as:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \frac{d\sigma}{dq_T^2} &\propto&\displaystyle  \sum_{ij}\int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
+                                                 \mathbf{q}_T} \widetilde{R}^2\left[(\mu_b,\mu_b^2)\rightarrow
+                                                 (Q,Q^2)\right] \\
+  \\
+                                       &\times&\displaystyle \sum_{k}\left[ \widetilde{\mathcal{C}}_{ik}(x;\mu_b,\mu_b^2)\otimes
+                                                f_k(x,\mu_b)\right]\sum_{l}\left[
+                                                \widetilde{\mathbb{C}}_{jl}(z;\mu_b,\mu_b^2)\otimes
+                                                d_l(z,\mu_b)\right]\,,
+\end{array}
+\label{eq:xsecexpqTres}
+\end{equation}
+where there is no hard function $H$ and the Sudakov form factor
+$\widetilde{R}^2$ as well as the matching functions
+$\widetilde{\mathcal{C}}$ and $\widetilde{\mathbb{C}}$ are now process
+dependent. The correspondence between the various ingredients of
+Eqs.~(\ref{eq:xsecexp}) and~(\ref{eq:xsecexpqTres}) requires that:
+\begin{equation}
+  H(Q)R^2(Q, \mu_b) \mathcal{C}(\mu_b) \mathbb{C}(\mu_b)=\widetilde{R}^2(Q,\mu_b)
+  \widetilde{\mathcal{C}}(\mu_b)\widetilde{\mathbb{C}}(\mu_b)\,,
+\label{eq:resschemeequiv}
+\end{equation}
+where we only indicated the relevant scales, and can be established by
+considering the RGE of the hard factor $H$. Dropping the flavour
+indices and considering that $H(\mu)=H(a_s(\mu))$ with
+$a_s=\alpha_s/4\pi$, the chain rule gives the following differential
+equation:
+\begin{equation}
+\frac{d\ln H}{d\ln\mu}=\frac{d\ln a_s}{d\ln \mu}\frac{d\ln H}{d\ln
+  a_s} = -2\beta(a_s)H^{-1}\frac{dH}{d a_s}\,,
+\end{equation}
+whose solution is:
+\begin{equation}
+H(Q) = H(\mu_0)\exp\left[-2\int_{\mu_0}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))H^{-1}(\mu)\frac{dH (\mu)}{da_s}\right]\,.
+\label{eq:Hevol}
+\end{equation}
+Setting $\mu_0=\mu_b = 2e^{-\gamma_E}/b_T$ and replacing $H(Q)$ in the
+l.h.s. of Eq.~(\ref{eq:resschemeequiv}) with the r.h.s. of
+Eq.~(\ref{eq:Hevol}) allows us to write:
+\begin{equation}
+  H(Q)R^2(Q, \mu_b) \mathcal{C}(\mu_b) \mathbb{C}(\mu_b)= R^2(Q, \mu_b)\exp\left[-2\int_{\mu_b}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))H^{-1}(\mu)\frac{dH (\mu)}{da_s}\right] [H(\mu_b)]^{1/2}\mathcal{C}(\mu_b) [H(\mu_b)]^{1/2}\mathbb{C}(\mu_b)\,,
+\end{equation}
+so that we can identify:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \widetilde{R}(Q,\mu_b)&=&\displaystyle R(Q, \mu_b)\exp\left[-\int_{\mu_b}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))H^{-1}(\mu)\frac{dH (\mu)}{da_s}\right]\,,\\
+  \\
+  \displaystyle \widetilde{\mathcal{C}}(\mu_b)&=&\displaystyle
+                                                  [H(\mu_b)]^{1/2}\mathcal{C}(\mu_b) \,,\\
+  \\
+  \displaystyle \widetilde{\mathbb{C}}(\mu_b)&=&\displaystyle
+                                                 [H(\mu_b)]^{1/2}\mathbb{C}(\mu_b) \,.\\
+\end{array}
+\label{eq:qTresToTMD}
+\end{equation}
+Given Eq.~(\ref{eq:evkernelexp}), the identification of the Sudakov
+form factor is equivalent to the following change of the non-cusp
+anomalous dimension:
+\begin{equation}
+\widetilde{\gamma}_F(a_s(\mu)) = \gamma_F(a_s(\mu))
+-\beta(a_s(\mu))H^{-1}(\mu)\frac{dH (\mu)}{da_s}\,.
+\label{eq:noncusptransf}
+\end{equation}
+The relations above define a particular \textit{resummation scheme}
+trasformation that leaves the cross section unchanged. In fact, there
+is an infinite number of possible resummation scheme
+trasformations. Given any perturbative function $g_1(a_s(\mu))$, the
+cross section in Eq.~(\ref{eq:xsecexp}) is invariant under the
+following tranformations:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle {H}(Q)&\rightarrow&g_1^{-1}(Q)H(Q)\,,\\
+  \\
+  \displaystyle \gamma_F(a_s(\mu)) &\rightarrow& \displaystyle \gamma_F(a_s(\mu)) -\beta(a_s(\mu))g_1^{-1}(\mu)\frac{dg_1 (\mu)}{da_s}\,,\\
+  \\
+  \displaystyle {\mathcal{C}}(\mu_b)&\rightarrow&\displaystyle
+                                                  [g_1(\mu_b)]^{1/2}\mathcal{C}(\mu_b) \,,\\
+  \\
+  \displaystyle {\mathbb{C}}(\mu_b)&\rightarrow&\displaystyle
+                                                 [g_1(\mu_b)]^{1/2}\mathbb{C}(\mu_b) \,.\\
+\end{array}
+\end{equation}
+The particular choice $g_1=H$ gives the transformations in
+Eqs.~(\ref{eq:qTresToTMD}) and~(\ref{eq:noncusptransf}). These
+tranformations can be expanded up to the nominal order such that to
+N$^3$LL the relevant shifts of the perturbative coefficients are:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \widetilde{\mathcal{C}}_{ij}^{(0)}(x) &=&\displaystyle
+                                                \mathcal{C}_{ij}^{(0)}(x)=\delta_{ij}\delta(1-x)\,,\\
+\\
+\displaystyle \widetilde{\mathcal{C}}_{ij}^{(1)}(x) &=&\displaystyle
+                                                \mathcal{C}_{ij}^{(1)}(x)+\frac12 H^{(1)}\delta_{ij}\delta(1-x) \,,\\
+\\
+\displaystyle \widetilde{\mathcal{C}}^{(2)}(x) &=&\displaystyle
+                                                \mathcal{C}_{ij}^{(2)}(x)+\frac12 H^{(1)} \mathcal{C}_{ij}^{(1)}(x) +\frac12\left[2H^{(2)}-\frac14(H^{(1)})^2\right]\delta_{ij}\delta(1-x) \,,
+\end{array}
+\end{equation}
+and similarly for $\widetilde{\mathbb{C}}$, while:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \widetilde{\gamma}_F^{(0)} &=&\displaystyle{\gamma_F}^{(0)}\,,\\
+\\
+\displaystyle \widetilde{\gamma}_F^{(1)} &=&\displaystyle{\gamma_F}^{(1)}-\beta_0H^{(1)}\,,\\
+\\
+\displaystyle \widetilde{\gamma}_F^{(2)} &=&\displaystyle{\gamma_F}^{(2)}-\beta_1H^{(1)}-2\beta_0\left[H^{(2)}-\frac12 (H^{(1)})^2\right]\,.
+\end{array}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 
