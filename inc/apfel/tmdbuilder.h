@@ -52,22 +52,29 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param IntEps: the integration accuracy (default: 10^{-5})
-   * @param nnnlo: switch to compute the NNNLO matching functions (default: true)
-   * @return A map DglapObject objects, one for each possible nf
+   * @param nnnlo: switch to compute the NNNLO matching functions (default: false)
+   * @return A map of TmdObject objects, one for each possible nf
    */
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
                                                  double              const& IntEps = 1e-5,
-                                                 bool                const& nnnlo = true);
+                                                 bool                const& nnnlo = false);
 
   /**
-   * @brief As the InitializeTmdObjects but with the computation of
-   * the NNNLO corrections to the matching conditions set to
-   * zero. This saves computation time.
+   * @brief The InitializeTmdObjects function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of TMD PDFs and FFs and store them into a 'TmdObjects'
+   * structure. This function applies a resummation-scheme
+   * transformation to produce the scheme often used in qT resummation
+   * that has H = 1.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @return A map of TmdObject objects, one for each possible nf
    */
-  std::map<int, TmdObjects> InitializeTmdObjectsLite(Grid                const& g,
-                                                     std::vector<double> const& Thresholds,
-                                                     double              const& IntEps = 1e-5);
+  std::map<int, TmdObjects> InitializeTmdObjectsDYResScheme(Grid                const& g,
+                                                            std::vector<double> const& Thresholds,
+                                                            double              const& IntEps = 1e-5);
   ///@}
 
   /**

@@ -21,14 +21,6 @@
 namespace apfel
 {
   //_____________________________________________________________________________
-  std::map<int, TmdObjects> InitializeTmdObjectsLite(Grid                const& g,
-                                                     std::vector<double> const& Thresholds,
-                                                     double              const& IntEps)
-  {
-    return InitializeTmdObjects(g, Thresholds, IntEps, false);
-  }
-
-  //_____________________________________________________________________________
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
                                                  double              const& IntEps,
@@ -526,6 +518,37 @@ namespace apfel
     };
 
     return EvolvedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, TmdObjects> InitializeTmdObjectsDYResScheme(Grid                const& g,
+                                                            std::vector<double> const& Thresholds,
+                                                            double              const& IntEps)
+  {
+    // Get TMD objects
+    std::map<int, TmdObjects> TmdObjs = InitializeTmdObjects(g, Thresholds, IntEps, false);
+
+    // Run of all active flavours
+    for (auto& to : TmdObjs)
+      {
+        // Transform non-cusp anomalous dimension of the quarks
+        to.second.GammaFq.at(2) += - to.second.Beta.at(1) * to.second.HardFactors.at("DY").at(1)
+                                   - 2 * to.second.Beta.at(0) * ( to.second.HardFactors.at("DY").at(2) - pow(to.second.HardFactors.at("DY").at(1), 2) / 2 );
+        to.second.GammaFq.at(1) += - to.second.Beta.at(0) * to.second.HardFactors.at("DY").at(1);
+
+        // Transform PDF matching functions. Only non log terms need
+        // to me modified.
+        to.second.MatchingFunctionsPDFs.at(2)[0] += ( to.second.HardFactors.at("DY").at(1) / 2 ) * to.second.MatchingFunctionsPDFs.at(1)[0];
+        + ( ( to.second.HardFactors.at("DY").at(2) - pow(to.second.HardFactors.at("DY").at(1), 2) / 4 ) / 2 ) * to.second.MatchingFunctionsPDFs.at(0)[0];
+        to.second.MatchingFunctionsPDFs.at(1)[0] += ( to.second.HardFactors.at("DY").at(1) / 2 ) * to.second.MatchingFunctionsPDFs.at(0)[0];
+
+        // Transform hard function for DY, set all coefficients to
+        // zero.
+        for (auto& h : to.second.HardFactors.at("DY"))
+          h.second = 0;
+      }
+
+    return TmdObjs;
   }
 
   //_____________________________________________________________________________
