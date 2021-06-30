@@ -145,6 +145,10 @@ namespace apfel
   template<>
   DoubleObject<Distribution>& DoubleObject<Distribution>::MultiplyBy(std::function<double(double const&)> const& fx, std::function<double(double const&)> const& fz)
   {
+    // Return immediately if "_terms" is empty
+    if (_terms.empty())
+      return *this;
+
     // Take the grids from the first element of the vector of terms.
     const Distribution dfx{_terms[0].object1.GetGrid(), fx};
     const Distribution dfz{_terms[0].object2.GetGrid(), fz};

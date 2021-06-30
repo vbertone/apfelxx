@@ -721,7 +721,7 @@ a_s(\kappa_R \mu)\bigg[1+ a_s(\kappa_R \mu)\beta_0\ln\kappa_R^2
 \end{equation}
 that can be derived extending Eq.~(\ref{eq:alphasexp}). At N$^k$LL the
 square bracket has to include corrections up to
-$\mathcal{O}\left(\alpha_s^n\right)$.
+$\mathcal{O}\left(\alpha_s^k\right)$.
 
 \subsubsection{The factorisation scale}
 
@@ -733,7 +733,7 @@ $\mu_0=C_i\mu_b$, are first evolved from $\mu_0$ to
 $\mu_F=\kappa_F Q$, with $\kappa_F$ close to one, but the interval of
 evolution between $\mu_F$ and $Q$ is expanded to fixed order. More
 specifically, suppressing the flavour indices and the dependence on
-the momentum fraction $x$, and denoting by $\Gamma$ the evolution
+the momentum fraction $x$, and denoting with $\Gamma$ the evolution
 operator (see Sect.~\ref{eq:dglapexp}), one has:
 \begin{equation}
 \begin{array}{rcl}
@@ -757,7 +757,7 @@ $\widetilde{f}(Q,\kappa_f)$ as the collinear distribution at $Q$
 obtained by evolving the distribution from $\mu_F=\kappa_F Q$ to $Q$
 by means of an evolution operator expanded to the appropriate
 fixed-order. At LL and NLL the square bracket does not need to include
-and $\alpha_s$ corrections while N$^k$LL requires including
+any $\alpha_s$ corrections while N$^k$LL requires including
 corrections up to $\mathcal{O}(\alpha_s^{k-1})$. As a simpler
 alternative that may however give rise to larger variations, one may
 just evolve the collinear distributions from $\mu_0$ to
@@ -774,10 +774,11 @@ result is:
                f(\kappa_F\mu_0)\,.
 \end{array}
 \end{equation}
-The reason why this procedure gives potentially larger variations is
-that the expansion of the evolution operator is done around the scale
-$\mu_0\simeq \mu_b$. At this scale the coupling can become large and
-so do the neglected higher-order corrections.
+This procedure may potentially give larger variations because the
+expansion of the evolution operator is done around the scale
+$\mu_0\simeq \mu_b$ that can become small. Therefore, at this scale
+the coupling can become large and so do the neglected higher-order
+corrections.
 
 \subsection{Non-perturbative component}\label{sec:nonpert}
 
@@ -1402,17 +1403,19 @@ $\mathcal{O}(\alpha_s^2)$. This is done by displacing the coupling
 from $Q$ to $\mu_{\rm R}$ and the PDFs/FFs from $Q$ to $\mu_{\rm
   F}$. Under the assumption that
 $\mu_{\rm R}\simeq \mu_{\rm R}\simeq Q$, this displacements can be
-obtained by expanding the solutions of the evolution equantion between
+obtained by expanding the solutions of the evolution equation between
 $Q$ and $\mu_{\rm R}$ or $\mu_{\rm F}$ up to
 $\mathcal{O}(\alpha_s^2)$.  For the coupling, this expansion can be
 read off from Eq.~(\ref{eq:alphasexp}):
 \begin{equation}
-a_s(Q)= a_s(\mu_{\rm R})+a_s^2(\mu_{\rm R})\beta_0\ln\frac {\mu_{\rm
-    R}^2}{Q^2} +\mathcal{O}(\alpha_s^3)\,,
+\begin{array}{rcl}
+a_s(Q) &=&\displaystyle a_s(\mu_{\rm R}) \bigg[ 1 + a_s(\mu_{\rm R})
+           \beta_0  \ln\frac {\mu_{\rm R}^2}{Q^2}\bigg]
+                                          +\mathcal{O}(\alpha_s^3)\,.
+\end{array}
 \label{eq:alphasexp2}
 \end{equation}
-so that $a_s^2(Q)= a_s^2(\mu_{\rm R})+\mathcal{O}(\alpha_s^3)$. While
-for the PDFs/FFs, the expansion of the evolution operator can be read
+For the PDFs/FFs, the expansion of the evolution operator can be read
 off from Eq.~(\ref{eq:DGLAPeqOpExp}):
 \begin{equation}
 \Gamma(Q,\mu_{\rm F}) = \Delta - a_s(Q)\ln\frac {\mu_{\rm F}^2}{Q^2} P^{(0)}
@@ -1430,6 +1433,7 @@ in the expression above and get:
                           +\left(\ln\frac {\mu_{\rm R}^2}{Q^2} -\frac{1}2 \ln\frac{\mu_{\rm F}^2}{Q^2}\right) \ln\frac {\mu_{\rm F}^2}{Q^2}\beta_0 P^{(0)} -\frac{1}2 \ln^2\frac{\mu_{\rm F}^2}{Q^2} P^{(0)}\otimes
                           P^{(0)} \right]+\mathcal{O}(\alpha_s^3)\,.
 \end{array}
+\label{eq:PDFFFEvExp}
 \end{equation}
 Since we have two such operators, one for the PDFs and one for the
 FFs, it is convenient to take the product beforehand and truncate it
@@ -1852,11 +1856,11 @@ N$^3$LL the relevant shifts of the perturbative coefficients are:
 and similarly for $\widetilde{\mathbb{C}}$, while:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle \widetilde{\gamma}_F^{(0)} &=&\displaystyle{\gamma_F}^{(0)}\,,\\
+\displaystyle \widetilde{\gamma}_F^{(0)} &=&\displaystyle \gamma_F^{(0)}\,,\\
 \\
-\displaystyle \widetilde{\gamma}_F^{(1)} &=&\displaystyle{\gamma_F}^{(1)}-\beta_0H^{(1)}\,,\\
+\displaystyle \widetilde{\gamma}_F^{(1)} &=&\displaystyle \gamma_F^{(1)}-\beta_0H^{(1)}\,,\\
 \\
-\displaystyle \widetilde{\gamma}_F^{(2)} &=&\displaystyle{\gamma_F}^{(2)}-\beta_1H^{(1)}-2\beta_0\left[H^{(2)}-\frac12 (H^{(1)})^2\right]\,.
+\displaystyle \widetilde{\gamma}_F^{(2)} &=&\displaystyle \gamma_F^{(2)}-\beta_1H^{(1)}-2\beta_0\left[H^{(2)}-\frac12 (H^{(1)})^2\right]\,.
 \end{array}
 \end{equation}
 
