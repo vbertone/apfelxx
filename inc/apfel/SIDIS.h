@@ -291,7 +291,7 @@ namespace apfel
     const apfel::Operator odeltax{gx, delta{}};
     const apfel::Operator odeltaz{gz, delta{}};
 
-    SidisObj.C20qq.AddTerm({1, odeltax, odeltaz});
+    if (std::find(exclude.begin(), exclude.end(), 0) == exclude.end()) SidisObj.C20qq.AddTerm({1, odeltax, odeltaz});  //0
 
     // NLO contributions
     // F2
@@ -316,16 +316,16 @@ namespace apfel
     const apfel::Operator or12qqz{gz, r12qq{}};
     const apfel::Operator or22qqz{gz, r22qq{}};
 
-    if (!std::count(exclude.begin(), exclude.end(), 0)) SidisObj.C21qq.AddTerm({LLqq, odeltax, odeltaz}); //0
-    if (!std::count(exclude.begin(), exclude.end(), 1)) SidisObj.C21qq.AddTerm({LSqq, odeltax, os1z   }); //1
-    if (!std::count(exclude.begin(), exclude.end(), 2)) SidisObj.C21qq.AddTerm({1,    odeltax, olrqqz});  //2
-    if (!std::count(exclude.begin(), exclude.end(), 3)) SidisObj.C21qq.AddTerm({SLqq, os1x,    odeltaz}); //3
-    if (!std::count(exclude.begin(), exclude.end(), 4)) SidisObj.C21qq.AddTerm({SSqq, os0x,    os0z   }); //4
-    if (!std::count(exclude.begin(), exclude.end(), 5)) SidisObj.C21qq.AddTerm({1,    os0x,    osrqqz});  //5
-    if (!std::count(exclude.begin(), exclude.end(), 6)) SidisObj.C21qq.AddTerm({1,    orlqqx,  odeltaz}); //6
-    if (!std::count(exclude.begin(), exclude.end(), 7)) SidisObj.C21qq.AddTerm({1,    orsqqx,  os0z   }); //7
-    if (!std::count(exclude.begin(), exclude.end(), 8)) SidisObj.C21qq.AddTerm({K1qq, or11qqx, or12qqz}); //8
-    if (!std::count(exclude.begin(), exclude.end(), 9)) SidisObj.C21qq.AddTerm({K2qq, or21qqx, or22qqz}); //9
+    if (std::find(exclude.begin(), exclude.end(), 1)  == exclude.end()) SidisObj.C21qq.AddTerm({LLqq, odeltax, odeltaz}); //1
+    if (std::find(exclude.begin(), exclude.end(), 2)  == exclude.end()) SidisObj.C21qq.AddTerm({LSqq, odeltax, os1z   }); //2
+    if (std::find(exclude.begin(), exclude.end(), 3)  == exclude.end()) SidisObj.C21qq.AddTerm({1,    odeltax, olrqqz});  //3
+    if (std::find(exclude.begin(), exclude.end(), 4)  == exclude.end()) SidisObj.C21qq.AddTerm({SLqq, os1x,    odeltaz}); //4
+    if (std::find(exclude.begin(), exclude.end(), 5)  == exclude.end()) SidisObj.C21qq.AddTerm({SSqq, os0x,    os0z   }); //5
+    if (std::find(exclude.begin(), exclude.end(), 6)  == exclude.end()) SidisObj.C21qq.AddTerm({1,    os0x,    osrqqz});  //6
+    if (std::find(exclude.begin(), exclude.end(), 7)  == exclude.end()) SidisObj.C21qq.AddTerm({1,    orlqqx,  odeltaz}); //7
+    if (std::find(exclude.begin(), exclude.end(), 8)  == exclude.end()) SidisObj.C21qq.AddTerm({1,    orsqqx,  os0z   }); //8
+    if (std::find(exclude.begin(), exclude.end(), 9)  == exclude.end()) SidisObj.C21qq.AddTerm({K1qq, or11qqx, or12qqz}); //9
+    if (std::find(exclude.begin(), exclude.end(), 10) == exclude.end()) SidisObj.C21qq.AddTerm({K2qq, or21qqx, or22qqz}); //10
 
     const double K1gq = 4 * apfel::CF;
     const double K2gq = - 12 * apfel::CF;
@@ -340,11 +340,11 @@ namespace apfel
     const apfel::Operator or31gqx{gx, r31gq{}};
     const apfel::Operator or32gqz{gz, r32gq{}};
 
-    if (!std::count(exclude.begin(), exclude.end(), 10)) SidisObj.C21gq.AddTerm({1,    odeltax, olrgqz});  //10
-    if (!std::count(exclude.begin(), exclude.end(), 11)) SidisObj.C21gq.AddTerm({1,    os0x,    osrgqz});  //11
-    if (!std::count(exclude.begin(), exclude.end(), 12)) SidisObj.C21gq.AddTerm({K1gq, or11gqx, or12gqz}); //12
-    if (!std::count(exclude.begin(), exclude.end(), 13)) SidisObj.C21gq.AddTerm({K2gq, or21gqx, or22gqz}); //13
-    if (!std::count(exclude.begin(), exclude.end(), 14)) SidisObj.C21gq.AddTerm({K3gq, or31gqx, or32gqz}); //14
+    if (std::find(exclude.begin(), exclude.end(), 11) == exclude.end()) SidisObj.C21gq.AddTerm({1,    odeltax, olrgqz});  //11
+    if (std::find(exclude.begin(), exclude.end(), 12) == exclude.end()) SidisObj.C21gq.AddTerm({1,    os0x,    osrgqz});  //12
+    if (std::find(exclude.begin(), exclude.end(), 13) == exclude.end()) SidisObj.C21gq.AddTerm({K1gq, or11gqx, or12gqz}); //13
+    if (std::find(exclude.begin(), exclude.end(), 14) == exclude.end()) SidisObj.C21gq.AddTerm({K2gq, or21gqx, or22gqz}); //14
+    if (std::find(exclude.begin(), exclude.end(), 15) == exclude.end()) SidisObj.C21gq.AddTerm({K3gq, or31gqx, or32gqz}); //15
 
     const double K1qg = 2;
     const double K2qg = 1;
@@ -356,10 +356,10 @@ namespace apfel
     const apfel::Operator or21qgx{gx, r21qg{}};
     const apfel::Operator or22qgz{gz, r22qg{}};
 
-    if (!std::count(exclude.begin(), exclude.end(), 15)) SidisObj.C21qg.AddTerm({1,    orlqgx,  odeltaz}); //15
-    if (!std::count(exclude.begin(), exclude.end(), 16)) SidisObj.C21qg.AddTerm({1,    orsqgx,  os0z   }); //16
-    if (!std::count(exclude.begin(), exclude.end(), 17)) SidisObj.C21qg.AddTerm({K1qg, or11qgx, or12qgz}); //17
-    if (!std::count(exclude.begin(), exclude.end(), 18)) SidisObj.C21qg.AddTerm({K2qg, or21qgx, or22qgz}); //18
+    if (std::find(exclude.begin(), exclude.end(), 16) == exclude.end()) SidisObj.C21qg.AddTerm({1,    orlqgx,  odeltaz}); //16
+    if (std::find(exclude.begin(), exclude.end(), 17) == exclude.end()) SidisObj.C21qg.AddTerm({1,    orsqgx,  os0z   }); //17
+    if (std::find(exclude.begin(), exclude.end(), 18) == exclude.end()) SidisObj.C21qg.AddTerm({K1qg, or11qgx, or12qgz}); //18
+    if (std::find(exclude.begin(), exclude.end(), 19) == exclude.end()) SidisObj.C21qg.AddTerm({K2qg, or21qgx, or22qgz}); //19
 
     // FL
     const double K1Lqq = 8 * apfel::CF;
@@ -367,21 +367,21 @@ namespace apfel
     const apfel::Operator or11Lqqx{gx, r11Lqq{}};
     const apfel::Operator or12Lqqz{gz, r12Lqq{}};
 
-    if (!std::count(exclude.begin(), exclude.end(), 19)) SidisObj.CL1qq.AddTerm({K1Lqq, or11Lqqx, or12Lqqz});  //19
+    if (std::find(exclude.begin(), exclude.end(), 20) == exclude.end()) SidisObj.CL1qq.AddTerm({K1Lqq, or11Lqqx, or12Lqqz});  //20
 
     const double K1Lgq = 8 * apfel::CF;
 
     const apfel::Operator or11Lgqx{gx, r11Lgq{}};
     const apfel::Operator or12Lgqz{gz, r12Lgq{}};
 
-    if (!std::count(exclude.begin(), exclude.end(), 20)) SidisObj.CL1gq.AddTerm({K1Lgq, or11Lgqx, or12Lgqz});  //20
+    if (std::find(exclude.begin(), exclude.end(), 21) == exclude.end()) SidisObj.CL1gq.AddTerm({K1Lgq, or11Lgqx, or12Lgqz});  //21
 
     const double K1Lqg = 8;
 
     const apfel::Operator or11Lqgx{gx, r11Lqg{}};
     const apfel::Operator or12Lqgz{gz, r12Lqg{}};
 
-    if (!std::count(exclude.begin(), exclude.end(), 21)) SidisObj.CL1qg.AddTerm({K1Lqg, or11Lqgx, or12Lqgz});  //21
+    if (std::find(exclude.begin(), exclude.end(), 22) == exclude.end()) SidisObj.CL1qg.AddTerm({K1Lqg, or11Lqgx, or12Lqgz});  //22
     t.stop();
 
     return SidisObj;
