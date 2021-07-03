@@ -856,9 +856,9 @@ with $P_{\rm NS}'$ which gives:
 
 \subsubsection{Conformal moments}
 
-A relevant question is whether Eq.~(\ref{eq:evkernelERBLgenxi}) is such that
-the so-called conformal moments of GPDs (see Eq.~(111) of
-Ref.~\cite{Diehl:2003ny}):
+A relevant question is whether Eq.~(\ref{eq:evkernelERBLgenxi}) is
+such that the so-called conformal moments of non-singlet GPDs (see
+Eq.~(111) of Ref.~\cite{Diehl:2003ny}):
 \begin{equation}
   \mathcal{C}_n(\xi) = \xi^{n}\int_{-1}^{1}dx\,C_n^{3/2}\left(\frac{x}{\xi}\right)f^{-}(x,\xi)\,,
 \end{equation}
@@ -941,7 +941,7 @@ can be directly read off:
 \begin{equation}
  \lim_{\xi\rightarrow 0} \mathcal{V}_{n}^{(0)}(\xi) = P_{\rm
    NS}^{(0)}(n+1)=
- 2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]
+ 2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]\,.
 \label{eq:forwardlimitconfmom}
 \end{equation}
 
@@ -955,9 +955,11 @@ $V_{\rm NS}^{(0)}$ obeys the relation:
 Evidently, $V_{n}^{(0)}$ is the evolution kernel in the
 $\xi\rightarrow 1$ limit and its expression can be read off from
 Eq.~(2.19) of Ref.~\cite{Lepage:1980fj} where, to match our notation,
-we have to flip the sign and remove the $\beta$-function:
+we have to flip the sign and removed the $\beta$-function:
 \begin{equation}
-\lim_{\xi\rightarrow 1}\mathcal{V}_{n}(\xi)= V_{n}^{(0)}=2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]\,.
+\lim_{\xi\rightarrow 1}\mathcal{V}_{n}(\xi)= V_{n}^{(0)}=2C_F\left[-\frac12+\frac{1}{(n+1)(n+2)}-2\sum_{k=2}^{n+1}\frac{1}{k}\right]=
+ 2C_F\left[\frac32-\frac{1}{n+1}-\frac{1}{n+2}-2\sum_{k=1}^{n}\frac{1}{k}\right]\,.
+\label{eq:ERBLkernel}
 \end{equation}
 Remarkably, this is identical to
 Eq.~(\ref{eq:forwardlimitconfmom}). This finally means that
@@ -977,11 +979,11 @@ allows us to decompose Eq.~(\ref{eq:confmomgpd}) as follows:
 \begin{array}{rcl}
   \displaystyle
   \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
-  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle 3C_F C_n^{3/2}\left(\frac{y}{\xi}\right) \\
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle 2C_F \Bigg[\frac{3}{2}C_n^{3/2}\left(\frac{y}{\xi}\right) \\
 \\
-&-&\displaystyle C_F\int_{\xi}^{y}dx\left[\frac{x+\xi}{\xi(y-\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right) -2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\\
+&-&\displaystyle \frac12\int_{\xi}^{y}dx\left[\frac{x+\xi}{\xi(y-\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right) -2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\\
 \\
-&+&\displaystyle C_F\int_{-\xi}^{y}dx\left[\frac{x-\xi}{\xi(y+\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right)+2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\,.
+&+&\displaystyle \frac12\int_{-\xi}^{y}dx\left[\frac{x-\xi}{\xi(y+\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right)+2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\Bigg]\,.
 \end{array}
 \label{eq:GPDevkernelalaERBL}
 \end{equation}
@@ -1035,9 +1037,212 @@ Using Eq.~(\ref{eq:GPDevkernelalaERBL}) with $n=1$, we find:
 &=&\displaystyle \frac{3C_F}{\xi}\left[3y-4y-\frac{5}{3}y\right] = -\frac{8C_Fy}{\xi}\,,
 \end{array}
 \end{equation}
-as expected. Despite an all-$n$ proof would desirable, these
-calculations provide compelling evidence that indeed conformal moments
-evolve multiplicatively as:
+as expected. We can now attempt a general proof. To do so, we define
+$z=y/\xi$ and, using a the change of variable $v=x/\xi$ in the
+integrals, rewrite the r.h.s. of Eq.~(\ref{eq:GPDevkernelalaERBL})
+without the factor $2C_F$ as follows:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle
+I &=&\displaystyle \frac{3}{2}C_n^{3/2}\left(z\right) - \frac12\int_{1}^{z}dv\left[\frac{v+1}{z-1}C_n^{3/2}\left(v\right) -2\frac{C_n^{3/2}\left(v\right)-C_n^{3/2}\left(z\right)}{z-v}\right]\\
+\\
+&+&\displaystyle \frac12\int_{-1}^{z}dv\left[\frac{v-1}{z+1}C_n^{3/2}\left(v\right)+2\frac{C_n^{3/2}\left(v\right)-C_n^{3/2}\left(z\right)}{z-v}\right]\,.
+\end{array}
+\label{eq:integralmoms}
+\end{equation}
+Now we use the fact that $C_n^{3/2}$ is indeed a polynomial of degree
+$n$ whose expansion reads:
+\begin{equation}
+  C_n^{3/2}(x) = \sum_{k=0}^{\lfloor n/2 \rfloor} a_k^{(n)}x^{\ell}\,\quad\mbox{with}\quad  a_k^{(n)} =
+(-1)^k2^{\ell}\frac{\Gamma(\ell+k+3/2)}{\Gamma(3/2)k!\ell!}\,,
+\end{equation}
+with $\ell = n-2k$, that allows us to write:
+\begin{equation}
+I= \frac{3}{2}C_n^{3/2}\left(z\right)-  \frac12\sum_{k=0}^{\lfloor n/2 \rfloor} a_k^{(n)}\left[\int_{1}^{z}dv\frac{v^{\ell+1}+v^{\ell}}{z-1}-\int_{-1}^{z}dv\frac{v^{\ell+1}-v^{\ell}}{z+1} +2 \int_{1}^{z}dv\frac{z^{\ell}-v^{\ell}}{z-v}+2 \int_{-1}^{z}dv\frac{z^{\ell}-v^{\ell}}{z-v}\right]\,.
+\end{equation}
+Now we can solve the integrals. The first 
+integral gives:
+\begin{equation}
+\int_{1}^{z}dv\frac{v^{\ell+1}+v^{\ell}}{z-1} = \frac1{\ell+2}\frac{1-z^{\ell+2}}{1-z}+\frac1{\ell+1}\frac{1-z^{\ell+1}}{1-z}=\frac{1}{\ell+2}\sum_{j=0}^{\ell+1}z^{j}+\frac{1}{\ell+1}\sum_{j=0}^{\ell}z^{j}\,,
+\end{equation}
+and similarly the second:
+\begin{equation}
+\int_{-1}^{z}dv\frac{v^{\ell+1}-v^{\ell}}{z+1}=-\frac{(-1)^{\ell+2}}{\ell+2}\sum_{j=0}^{\ell+1}(-z)^{j}+\frac{(-1)^{\ell+1}}{\ell+1}\sum_{j=0}^{\ell}(-z)^{j}\,,
+\end{equation}
+where we have used the geometric series:
+\begin{equation}
+\sum_{j=0}^{n} v^{j}=\frac{1-v^{n+1}}{1-v}\,.
+\end{equation}
+Their combination evaluates to:
+\begin{equation}
+  \int_{1}^{z}dv\frac{v^{\ell+1}+v^{\ell}}{z-1}-\int_{-1}^{z}dv\frac{v^{\ell+1}-v^{\ell}}{z+1}
+  = \left[\frac{1}{\ell+2}+\frac{1}{\ell+1} \right]\sum_{j=0}^{\ell}\left[1+(-1)^{\ell-j}\right]z^{j}\,.
+\end{equation}
+Notice that the $z^{\ell+1}$ term vanishes because the projector is
+null for $j=\ell+1$. Now we turn to the third and fourth integrals in
+Eq.~(\ref{eq:integralmoms}):
+\begin{equation}
+\int_{1}^{z}dv\frac{z^{\ell}-v^{\ell}}{z-v} =
+z^{\ell-1}\int_{1}^{z}dv\frac{1-(v/z)^{\ell}}{1-v/z}=
+\sum_{j=0}^{\ell-1}z^{\ell-j-1}\int_{1}^{z}dv\,v^j =
+\sum_{j=0}^{\ell-1}\frac{z^{\ell}-z^{\ell-j-1}}{j+1} =-\sum_{j=0}^{\ell-1}\frac{z^{j}}{\ell-j}+z^{\ell}\sum_{j=1}^{\ell}\frac{1}{j}\,,
+\end{equation}
+and:
+\begin{equation}
+\int_{-1}^{z}dv\frac{z^{\ell}-v^{\ell}}{z-v} =-\sum_{j=0}^{\ell-1}\frac{(-1)^{\ell-j}z^{j}}{\ell-j}+z^{\ell}\sum_{j=1}^{\ell}\frac{1}{j}\,,
+\end{equation}
+so that their combination gives:
+\begin{equation}
+2\int_{1}^{z}dv\frac{z^{\ell}-v^{\ell}}{z-v}+ 2\int_{-1}^{z}dv\frac{z^{\ell}-v^{\ell}}{z-v}=-2\sum_{j=0}^{\ell-1}\frac{1+(-1)^{\ell-j}}{\ell-j} z^{j}+z^{\ell}\sum_{j=1}^{\ell}\frac{4}{j}\,.
+\end{equation}
+Putting everything together one finds:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle
+  I &=&\displaystyle \frac{3}{2}C_n^{3/2}\left(z\right)\\
+  \\
+  &-&\displaystyle  \sum_{k=0}^{\lfloor n/2 \rfloor} a_k^{(n)}\left[\sum_{j=0}^{\ell-1}\left(\frac{1}{\ell+2}+\frac{1}{\ell+1} -\frac{2}{\ell-j}\right)\frac{1+(-1)^{\ell-j}}{2}z^{j} +\left(\frac{1}{\ell+2}+\frac{1}{\ell+1} +\sum_{j=0}^{\ell-1}\frac{2}{j+1}\right)z^{\ell}\right]\,.
+\end{array}
+\end{equation}
+Now we exchange the sums over $k$ and the first sum over $j$ in the
+second line of the equation above by using the following equality:
+\begin{equation}
+  \sum_{k=0}^{\lfloor n/2 \rfloor}
+  \sum_{j=0}^{\ell-1}\dots=\sum_{k=0}^{\lfloor n/2 \rfloor}
+  \sum_{j=0}^{n-2k-1}\dots = \sum_{j=0}^{n-1}\sum_{k=0}^{\lfloor \frac{n-j-1}2 \rfloor}\dots\,,
+\end{equation}
+finding:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle
+  I &=&\displaystyle \frac{3}{2}C_n^{3/2}\left(z\right)\\
+  \\
+  &-&\displaystyle \sum_{j=0}^{n-1}z^{j} \frac{1+(-1)^{n-j}}{2}\sum_{k=0}^{\lfloor \frac{n-j-1}2 \rfloor} a_k^{(n)}\left(\frac{1}{n-2k+2}+\frac{1}{n-2k+1}
+      -\frac{2}{n-2k-j}\right) \\
+\\
+&-&\displaystyle \sum_{k=0}^{\lfloor n/2 \rfloor} z^{\ell} a_k^{(n)}\left(\frac{1}{\ell+2}+\frac{1}{\ell+1} +\sum_{j=0}^{\ell-1}\frac{2}{j+1}\right)\,.
+\end{array}
+\end{equation}
+where in the first line we have made explicit $\ell=n-2k$ and used the
+equality:
+\begin{equation}
+\frac{1+(-1)^{\ell-j}}{2} = \frac{1+(-1)^{n-2k-j}}{2}=\frac{1+(-1)^{n-j}}{2}\,.
+\end{equation}
+This projector nullifies all the terms in the first series over $j$
+for which $n-j$ is odd selecting only the even ones. Therefore we can
+identify the combination $n-j$ with an even index, \textit{i.e.}
+$n-j=2h$, and remove the projector. Replacing the summation index $k$
+with $h$ and making explicit the index $\ell$
+also in the second line gives:
+\begin{equation}\begin{array}{rcl}
+  \displaystyle
+  I &=&\displaystyle \frac{3}{2}C_n^{3/2}\left(z\right)\\
+  \\
+  &-&\displaystyle \sum_{h=0}^{\lfloor n/2 \rfloor}a_h^{(n)}z^{n-2h} \left[\frac{1}{n-2h+2}+\frac{1}{n-2h+1}+ 2\sum_{j=1}^{n-2h}\frac{1}{j}+\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_h^{(n)}}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1j\right)\right]\,.
+\end{array}
+\label{eq:almostthere}
+\end{equation}
+It turns out that the term in the square brackets is independent of
+the summation index $h$ (this statement can easily be verified
+numerically but an analytic proof of this statements looks very hard
+to achieve).
+% To see this we take the difference between that coefficient computed
+% in a generic $h$ and in $h=0$ that gives:
+% \begin{equation}
+% \begin{array}{rcl}
+% \Delta &=&\displaystyle \frac{2h}{(n+2)(n-2h+2)}+\frac{2h}{(n+1)(n-2h+1)}-
+%            2\sum_{j=n-2h+1}^{n}\frac{1}{j}\\
+% \\
+% &+&\displaystyle \sum_{j=1}^{h}
+%            \frac{a_{h-j}^{(n)}}{a_h^{(n)}}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1j\right)
+% \end{array}
+% \end{equation}
+% Now we use the following identity for the coefficient of the
+% Gegenbauer polynomial expansion:
+% \begin{equation}
+% \frac{a_{h-1}^{(n)}}{a_{h}^{(n)}} =1-\frac{(n+2)(n+1)}{(n-2h+2)(n-2h+1)}=I_h^{(n)}\,,
+% \end{equation}
+% that implies:
+% \begin{equation}
+% a_{h-j}^{(n)} =a_{h}^{(n)} \prod_{p=0}^{j-1}I_{h-p}^{(n)}\,,
+% \end{equation}
+% and that allows us to write:
+% \begin{equation}
+% \begin{array}{rcl}
+% \Delta &=&\displaystyle \frac{2h}{(n+2)(n-2h+2)}+\frac{2h}{(n+1)(n-2h+1)}-
+%            2\sum_{j=n-2h+1}^{n}\frac{1}{j}\\
+% \\
+% &+&\displaystyle \sum_{j=1}^{h}
+%            \prod_{p=0}^{j-1}I_{h-p}^{(n)}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1j\right)
+% \end{array}
+% \end{equation}
+%
+%
+% \newpage
+% Or we take the different between $h$ and $h+1$:
+% \begin{equation}
+% \begin{array}{rcl}
+%   \displaystyle
+%   \Delta &=&   \displaystyle\left[\frac{1}{n-2h+2}+\frac{1}{n-2h+1}+ \frac{1}{n-2h}+\frac{1}{n-2h-1}+\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_h^{(n)}}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1j\right)
+%       \right]\\
+% \\
+% &-&\displaystyle\left[\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_{h+1}^{(n)}}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1{j+1}\right)+\frac{a_{h}^{(n)}}{a_{h+1}^{(n)}}\left(\frac{1}{n-2h+2}+\frac{1}{n-2h+1}-1\right)
+%       \right]
+% \end{array}
+% \end{equation}
+% Now we use the following identity for the coefficient of the
+% Gegenbauer polynomial expansion:
+% \begin{equation}
+% \frac{a_{h}^{(n)}}{a_{h+1}^{(n)}} =1-\frac{(n+1)(n+2)}{(n-2h)(n-2h-1)}\,,
+% \end{equation}
+% so that:
+% \begin{equation}
+% \begin{array}{rcl}
+%   \displaystyle
+%   \Delta &=&   \displaystyle\left[\frac{1}{n-2h}+\frac{1}{n-2h-1}+1-\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_h^{(n)}}\frac1{j(j+1)}
+%       \right]\\
+% \\
+% &+&\displaystyle\frac{(n+1)(n+2)}{(n-2h)(n-2h-1)}\left[\frac{1}{n-2h+2}+\frac{1}{n-2h+1}-1+\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_{h}^{(n)}}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1{j+1}\right)
+%       \right]\,.
+% \end{array}
+% \end{equation}
+% Now we define:
+% \begin{equation}
+% \Delta' = \frac{(n-2h)(n-2h-1)}{(n+1)(n+2)}\Delta\,,
+% \end{equation}
+% such that:
+% \begin{equation}
+% \begin{array}{rcl}
+%   \displaystyle
+%   \Delta' &=&   \displaystyle\frac{(n-2h)(n-2h-1)}{(n+1)(n+2)}\left[\frac{1}{n-2h}+\frac{1}{n-2h-1}+1-\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_h^{(n)}}\frac1{j(j+1)}
+%       \right]\\
+% \\
+% &+&\displaystyle\left[\frac{1}{n-2h+2}+\frac{1}{n-2h+1}-1+\sum_{j=1}^{h} \frac{a_{h-j}^{(n)}}{a_{h}^{(n)}}\left(\frac{1}{n-2h+2j+2}+\frac{1}{n-2h+2j+1}-\frac1{j+1}\right)
+%       \right]\,.
+% \end{array}
+% \end{equation}
+%
+%This proves that the term in square brackets in
+%Eq.~(\ref{eq:almostthere}) is constant in $h$.
+Therefore, without loss of generality, we can set $h=0$ and pull it
+out from the summation symbol, obtaining:
+\begin{equation}\begin{array}{rcl}
+  \displaystyle
+  I &=&\displaystyle \frac{3}{2}C_n^{3/2}\left(z\right)- \left[\frac{1}{n+2}+\frac{1}{n+1}+
+      2\sum_{j=1}^{n}\frac{1}{j}\right]\sum_{h=0}^{\lfloor n/2
+      \rfloor}a_h^{(n)}z^{n-2h}\\
+\\
+   &=&\displaystyle \left[\frac{3}{2}-\frac{1}{n+2}-\frac{1}{n+1}- 2\sum_{j=1}^{n}\frac{1}{j}\right]C_n^{3/2}\left(z\right)
+\end{array}
+\end{equation}
+which finally proves the identity:
+\begin{equation}
+  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)  = V_n^{(0)}C_n^{3/2}\left(\frac{y}{\xi}\right)\,,
+\end{equation}
+with $V_n^{(0)}$ given in Eq.~(\ref{eq:ERBLkernel}).
+
+These calculations confirm that conformal moments evolve
+multiplicatively as:
 \begin{equation}
   \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =\frac{\alpha_s(\mu)}{4\pi}{V}_{n}^{(0)}\mathcal{C}_n(\xi)\,.
 \end{equation}
@@ -1047,7 +1252,7 @@ The solution to this equation is simply:
 =\exp\left[\frac{V_{n}^{(0)}}{4\pi}\int_{\mu_0}^\mu d\ln\mu^2\alpha_s(\mu)\right]\mathcal{C}_n(\xi,\mu_0)\,,
 \end{equation}
 in which remarkably the evolution kernel does not depend on
-$\xi$. This in turns means that the $\xi$ dependence of conformal
+$\xi$. This in turn means that the $\xi$ dependence of conformal
 moments is entirely encoded in the initial scale moments and that
 evolution leave it unchanged.
 
