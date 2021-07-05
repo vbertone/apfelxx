@@ -86,7 +86,7 @@ Fig.~\ref{fig:GPDIntDomain}.
     \caption{Support domain of the evolution kernel.\label{fig:GPDIntDomain}}
   \end{centering}
 \end{figure}
-The Knowledge of the support region of the evolution kernel allows us
+The knowledge of the support region of the evolution kernel allows us
 to rearrange Eq.~(\ref{eq:eveq}) as follows:
 \begin{equation}
 \displaystyle\mu^2\frac{d}{d\mu^2}f(\pm x,\xi) =\int_{b(x)}^{1}\frac{dx'}{x'}\left[\frac{x'}{\left|2\xi\right|}\mathbb{V}\left(\pm \frac{x}{\xi},\frac{x'}{\xi}\right)f(x',\xi)+\frac{x'}{\left|2\xi\right|}\mathbb{V}\left(\mp \frac{x}{\xi},\frac{x'}{\xi}\right)f(-x',\xi)\right]\,,
@@ -793,20 +793,79 @@ with:
 \end{array}
 \label{eq:evkernelERBLgenxi}
 \end{equation}
-We can now use Eq.~(\ref{eq:primevsnonprime}) to replace $P_{\rm NS}$
-with $P_{\rm NS}'$ which gives:
+The integration domain of Eq.~(\ref{eq:evkernelERBLgenxi}) is
+displayed in Fig.~\ref{fig:GPDIntDomain2}.
+\begin{figure}[h]
+  \begin{centering}
+    \includegraphics[width=0.7\textwidth]{plots/GPDIntDomain2.pdf}
+    \caption{Support domain of the evolution kernel in Eq.~(\ref{eq:evkernelERBLgenxi}).\label{fig:GPDIntDomain2}}
+  \end{centering}
+\end{figure}
+% We can now use Eq.~(\ref{eq:primevsnonprime}) to replace $P_{\rm NS}$
+% with $P_{\rm NS}'$ which gives:
+% \begin{equation}
+% \begin{array}{rcl}
+% \displaystyle \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
+% \frac{2}{y}\left[\theta(x-\xi) \theta(y-x)+\theta(\xi-x)\theta(\xi+x)\theta(y-x)-\theta(-x-\xi)
+%                                               \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
+% \\
+% &+&\displaystyle \left[x\rightarrow -x, y\rightarrow -y\right] \\
+% \\
+% %&-&\displaystyle \frac{2}{y}\left[\theta(-x-\xi)
+% %                                              \theta(x-y)+\theta(\xi+x)\theta(\xi-x)\theta(x-y) -\theta(x-\xi) \theta(y-x)\right]P_{\rm NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right) \\
+% %\\
+% &+&\displaystyle \delta\left(y-x\right) 2C_F\left[\frac{3}{2}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\,.
+% \end{array}
+% \end{equation}
+As we will see below, in order to compute conformal moments one needs
+to convolute the evolution kernel with some function integrating over
+the $x$ variable. To do so, we use Eq.~(\ref{eq:primevsnonprime}) to
+write $P_{\rm NS}$ in terms of $P_{\rm NS}'$ then, referring to
+Fig.~\ref{fig:GPDIntDomain2}, we integrate over the blue, read, and
+orange regions separately reducing the convolution to integrals
+between $\xi$ and $y$ and $-\xi$ and $y$ that can the be
+gathered. Given a well-behaved test function $f$, the final result
+reads:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle \frac{1}{\xi}\mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
-\frac{2}{y}\bigg\{\left[\theta(x-\xi) \theta(y-x)+\theta(\xi-x)\theta(x+\xi)\theta(y-x)-\theta(-x-\xi)
-                                              \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
+\displaystyle \int_{-1}^{1}\frac{dx}{\xi}\mathbb{V}_{\rm
+  NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right)f(x) &=&
+                                                             \displaystyle
+                                                             2C_F\Bigg\{\frac{3}{2}f(y)+\int_\xi^y
+                                                             dx\left[\frac1{C_F
+                                                             y}P_{\rm
+                                                             NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)
+                                                             f(x)-\frac{f(y)}{y-x}\right]\\
 \\
-&+&\displaystyle \left[\theta(x-\xi) \theta(y-x)-\theta(\xi-x)\theta(x+\xi)\theta(x-y)-\theta(-x-\xi)
-                                              \theta(x-y)\right]P_{\rm NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)\\
-\\
-&+&\displaystyle \delta\left(1-\frac{x}{y}\right) C_F\left[\frac{3}{2}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\bigg\}\,.
+&+&\displaystyle \int_{-\xi}^y dx\left[\frac1{C_F y}P_{\rm
+                                                             NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right)
+                                                             f(x)-\frac{f(y)}{y-x}\right]\Bigg\}\,.
 \end{array}
+\label{eq:evkernelERBLgenxi2}
 \end{equation}
+Considering that:
+\begin{equation}
+\frac{1}{C_Fy}P_{\rm NS}'\left(\frac{x}{y},\frac{2\xi}{y}\right) = \frac{x-\xi}{2\xi(y+\xi)}+\frac{1}{y-x}\,,
+\end{equation}
+and thus:
+\begin{equation}
+\frac{1}{C_Fy}P_{\rm NS}'\left(\frac{x}{y},-\frac{2\xi}{y}\right) = -\frac{x+\xi}{2\xi(y-\xi)}+\frac{1}{y-x}\,,
+\end{equation}
+one finally has:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{-1}^{1}\frac{dx}{\xi}\mathbb{V}_{\rm
+  NS}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right)f(x) &=&
+                                                             \displaystyle
+                                                             2C_F\Bigg\{\frac{3}{2}f(y)-\frac12\int_\xi^y
+                                                             dx\left[\frac{x+\xi}{\xi(y-\xi)}f(x)-2\frac{f(x)-f(y)}{y-x} \right]\\
+\\
+&+&\displaystyle \frac12\int_{-\xi}^y dx\left[\frac{x-\xi}{\xi(y+\xi)}f(x)+2\frac{f(x)-f(x)}{y-x}\right]\Bigg\}\,.
+\end{array}
+\label{eq:evkernelERBLgenxi1}
+\end{equation}
+
+
 % Assuming $\xi$ positive and different from zero ($\xi>0$), a simple
 % change of variables produces:
 % \begin{equation}
@@ -860,7 +919,9 @@ A relevant question is whether Eq.~(\ref{eq:evkernelERBLgenxi}) is
 such that the so-called conformal moments of non-singlet GPDs (see
 Eq.~(111) of Ref.~\cite{Diehl:2003ny}):
 \begin{equation}
-  \mathcal{C}_n(\xi) = \xi^{n}\int_{-1}^{1}dx\,C_n^{3/2}\left(\frac{x}{\xi}\right)f^{-}(x,\xi)\,,
+  \mathcal{C}_n^-(\xi) =
+  \xi^{n}\int_{-1}^{1}dx\,C_n^{3/2}\left(\frac{x}{\xi}\right)f^{-}(x,\xi)\,,
+\label{eq:conformalmoments}
 \end{equation}
 where $C_n^{3/2}$ are Gegenbauer polynomials, ``diagonalise'' the
 leading-order evolution equation in Eq.~(\ref{eq:ERBLlikeeveq}). To
@@ -869,7 +930,7 @@ evolve multiplicatively. Multiplying Eq.~(\ref{eq:ERBLlikeeveq}) by
 $\xi^{n}C_n^{3/2}\left(x/\xi\right)$ and integrating over $x$ between
 $-1$ and 1, yields:
 \begin{equation}
-\frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =
+\frac{d \mathcal{C}_n^-(\xi)}{d\ln\mu^2} =
 \frac{\alpha_s(\mu)}{4\pi}\xi^{n}\int_{-1}^1 dy
 f^{-}(y,\xi)\int_{-1}^{1}\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
 \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) \,.
@@ -886,8 +947,8 @@ where $\mathcal{V}_{n}^{(0)}$ is a number that may generally depend on
 $\xi$. If Eq.~(\ref{eq:confmomgpd}) held, Eq.~(\ref{eq:confmomprel})
 would become:
 \begin{equation}
-  \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2}
-  =\frac{\alpha_s(\mu)}{4\pi}\mathcal{V}_{n}^{(0)}(\xi)\mathcal{C}_n(\xi)\,,
+  \frac{d \mathcal{C}_n^-(\xi)}{d\ln\mu^2}
+  =\frac{\alpha_s(\mu)}{4\pi}\mathcal{V}_{n}^{(0)}(\xi)\mathcal{C}_n^-(\xi)\,,
 \label{eq:confmom}
 \end{equation}
 that is to say that conformal moments evolve multiplicative exactly
@@ -909,7 +970,7 @@ that is such that:
 Therefore, the conformal moments of the non-singlet distribution in
 the forward limit become:
 \begin{equation}
-\lim_{\xi\rightarrow 0}\mathcal{C}_n(\xi) = \frac{(2n+1)!}{2^n(n!)^2}[1+(-1)^n]f^{-}(n+1)\,,
+\lim_{\xi\rightarrow 0}\mathcal{C}_n^-(\xi) = \frac{(2n+1)!}{2^n(n!)^2}[1+(-1)^n]f^{-}(n+1)\,,
 \end{equation}
 where, with abuse of notation, we have defined the Mellin moments of
 the forward distribution as:
@@ -973,31 +1034,31 @@ Eq.~(\ref{eq:forwardlimitconfmom}).
 
 To prove this we need to compute Eq.~(\ref{eq:confmomgpd}) for a
 generic value of $\xi$. To do so, we use
-Eq.~(\ref{eq:evkernelERBLgenxi}) for $\mathbb{V}_{\rm NS}^{(0)}$ that
-allows us to decompose Eq.~(\ref{eq:confmomgpd}) as follows:
+Eq.~(\ref{eq:evkernelERBLgenxi1}) for $\mathbb{V}_{\rm NS}^{(0)}$
+replacing $f(x)$ with $C_n^{3/2}\left(x/\xi\right)$:
 \begin{equation}
 \begin{array}{rcl}
   \displaystyle
   \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
-  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle 2C_F \Bigg[\frac{3}{2}C_n^{3/2}\left(\frac{y}{\xi}\right) \\
+  \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)&=&\displaystyle 2C_F \Bigg\{\frac{3}{2}C_n^{3/2}\left(\frac{y}{\xi}\right) \\
 \\
 &-&\displaystyle \frac12\int_{\xi}^{y}dx\left[\frac{x+\xi}{\xi(y-\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right) -2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\\
 \\
-&+&\displaystyle \frac12\int_{-\xi}^{y}dx\left[\frac{x-\xi}{\xi(y+\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right)+2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\Bigg]\,.
+&+&\displaystyle \frac12\int_{-\xi}^{y}dx\left[\frac{x-\xi}{\xi(y+\xi)}C_n^{3/2}\left(\frac{x}{\xi}\right)+2\frac{C_n^{3/2}\left(x/\xi\right)-C_n^{3/2}\left(y/\xi\right)}{y-x}\right]\Bigg\}\,.
 \end{array}
 \label{eq:GPDevkernelalaERBL}
 \end{equation}
 Of course, in the limits $\xi\rightarrow 0$ and $\xi\rightarrow 1$
 this expression produces the Gegenbauer polynomials in the respective
 limits times $V_n^{0}$. The calculation for \textit{all} $n$ and for a
-generic value of $\xi$ is not straight forward. To start with, we
+generic value of $\xi$ is not straightforward. To start with, we
 compute the integral above for $n=0$ where we expected to obtain zero
 because $V^{(0)}=0$. Since $C_0^{\alpha}(z)=1$, the zero-th conformal
 moment evaluates to:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle
-  \int_{-1}^1\frac{dx}{\xi}\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+  \int_{-1}^1\frac{dx}{\xi}\,C_0^{3/2}\left(\frac{x}{\xi}\right)
   \mathbb{V}_{\rm NS}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right)  &=& \displaystyle
   C_F\left[3 - \int_{\xi}^{y}dx \frac{x+\xi}{\xi(y-\xi)}
 +\int_{-\xi}^{y}dx\frac{x-\xi}{\xi(y+\xi)}\right]\\
@@ -1243,12 +1304,15 @@ with $V_n^{(0)}$ given in Eq.~(\ref{eq:ERBLkernel}).
 These calculations confirm that conformal moments evolve
 multiplicatively as:
 \begin{equation}
-  \frac{d \mathcal{C}_n(\xi)}{d\ln\mu^2} =\frac{\alpha_s(\mu)}{4\pi}{V}_{n}^{(0)}\mathcal{C}_n(\xi)\,.
+  \frac{d \mathcal{C}_n^-(\xi)}{d\ln\mu^2}
+  =\frac{\alpha_s(\mu)}{4\pi}{V}_{n}^{(0)}\mathcal{C}_n^-(\xi)\,.
 \end{equation}
 The solution to this equation is simply:
 \begin{equation}
-\mathcal{C}_n(\xi,\mu)
-=\exp\left[\frac{V_{n}^{(0)}}{4\pi}\int_{\mu_0}^\mu d\ln\mu^2\alpha_s(\mu)\right]\mathcal{C}_n(\xi,\mu_0)\,,
+\mathcal{C}_n^-(\xi,\mu)
+=\exp\left[\frac{V_{n}^{(0)}}{4\pi}\int_{\mu_0}^\mu
+  d\ln\mu^2\alpha_s(\mu)\right]\mathcal{C}_n^-(\xi,\mu_0)\,,
+\label{eq:ConfMomentsSolution}
 \end{equation}
 in which remarkably the evolution kernel does not depend on
 $\xi$. This in turn means that the $\xi$ dependence of conformal
@@ -1258,6 +1322,68 @@ evolution leave it unchanged.
 The question that remains to be answered is whether the knowledge of
 the conformal moments of a GPD is enough to reconstruct its $x$
 dependence.
+
+\subsubsection{On the expansion of GPDs in terms of Gegenbauer
+  polynomials}
+
+In the previous section, we have shown that the conformal moments of a
+non-singlet GPD, defined as in Eq.~(\ref{eq:conformalmoments}), evolve
+multiplicatively at LO according to
+Eq.~(\ref{eq:ConfMomentsSolution}). The question that remains to be
+answered is whether it is possible to reconstruct any non-singlet GPD
+by knowing all its conformal moments. In order to do so, one should be
+able to expand any given GPD $f^{-}(x,\xi)$ in terms of conformal
+moments:
+\begin{equation}
+f^{-}(x,\xi,\mu) = \sum_{m=0}^{\infty}
+\mathcal{C}_m^-(\xi,\mu)f_m(x,\xi)\,,
+\label{eq:GPDexpansion}
+\end{equation}
+where $f_n$ is some set of functions. In this way, the evolution of
+$f^{-}$ would simply amount to evolving the single conformal moments
+$\mathcal{C}_m^-$ using Eq.~(\ref{eq:ConfMomentsSolution}). However,
+in order for Eq.~(\ref{eq:GPDexpansion}) to be true the set of
+functions $f_n$ must obey the relation:
+\begin{equation}
+  \xi^{n}\int_{-1}^{1}dx\,C_n^{3/2}\left(\frac{x}{\xi}\right)
+  f_m(x,\xi)=  \xi^{n-1}\int_{-1/\xi}^{1/\xi}dz\,C_n^{3/2}\left(z\right)
+  f_m(\xi z,\xi)=\delta_{mn}\,.
+\label{eq:orthogonality}
+\end{equation}
+For $\xi=1$, as is the case for the ERBL evolution equation of DAs,
+one could exploit the orthogonality of Gegenbauer polynomials in the
+interval $[-1:1]$ and would have that:
+\begin{equation}
+f_m(x,1) = \frac{2 m!(m+3/2)[\Gamma(3/2)]^2}{\pi\Gamma(m+3)}(1-x^2)C_m^{3/2}(x)\,,
+\end{equation}
+that exactly verifies Eq.~(\ref{eq:orthogonality}) for $\xi=1$. This
+allows one to expand DAs in terms of Gegenbauer polynomials and
+compute the evolution by evolving the single conformal
+moments. However, for $\xi < 1$ Eq.~(\ref{eq:orthogonality}) requires
+integrating the Gegenbauer polynomials outside the region $[-1:1]$
+thus preventing the use of orthogonality. To overcome this problem, one
+could define:
+\begin{equation}
+f_m(x,\xi) = \xi^{1-n}\theta(x + \xi) \theta(\xi-x) \frac{2 m!(m+3/2)[\Gamma(3/2)]^2}{\pi\Gamma(m+3)}\left(1-\frac{x^2}{\xi^2}\right)C_m^{3/2}\left(\frac{x}{\xi}\right)\,,
+\end{equation}
+that indeed satisfies Eq.~(\ref{eq:orthogonality}) but at the price of
+introducing $\theta$-functions that require $f^-$ to be zero outside
+the ERBL region, \textit{i.e.} for $x>\xi$ and $x<-\xi$. In other
+words, in order for the expansion in Eq.~(\ref{eq:GPDexpansion}) to be
+possible, one needs to require that:
+\begin{equation}
+f^{-}(x,\xi,\mu) = 0\quad\mbox{for}\quad x>\xi\quad\mbox{and}\quad x<-\xi\,,
+\end{equation}
+that is clearly not acceptable for a GPD. However, in
+Ref.~\cite{Mueller:2005ed} one reads: ``[\dots] the restricted support
+property of each individual term does not imply that the GPD vanishes
+in the outer region [$x>\xi$ or $x<-\xi$]. Rather one should
+understand this expansion [Eq.~(\ref{eq:GPDexpansion})] as an
+ill-convergent sum of distributions (in the mathematical sense) that
+yields a result which is non-zero in the outer region.'' Indeed, the
+authors of Ref.~\cite{Mueller:2005ed} managed to find a way to make
+Eq.~(\ref{eq:GPDexpansion}) different from zero for $x>\xi$ or
+$x<-\xi$. This needs to be understood.
 
 \subsubsection{Sum rules}\label{eq:sumruleNS}
 
@@ -1675,6 +1801,103 @@ so that also the second of Eq.~(\ref{eq:MSRoffforward}) is
 satisfied. Again, their limit for $\xi\rightarrow 0$ tends to zero
 that is consistent with the second of Eq.~(\ref{eq:MSRforward}).
 
+\subsubsection{Conformal moments}
+
+In this section, we discuss the diagonalisation of the GPD evolution
+equation for the single distributions in conformal space. More
+specifically, we first write the evolution kernels in an ERBL-like
+form and then compute the conformal moments using the appropriate
+Gegenbauer polynomials showing that they are eigenfunctions of the
+kernels.
+
+Similarly to the non-singlet sector, the GPD evolution equation for
+the vector of singlet distributions reads:
+\begin{equation}
+\frac{d}{d\ln\mu^2} f^{+}(x,\xi)=
+\frac{\alpha_s(\mu)}{4\pi}\int_{-1}^1\frac{dy}{\xi} \mathbf{V}^{(0)}\left(\frac{x}{\xi},\frac{y}{\xi}\right) f^{+}(y,\xi)\,,
+\label{eq:ERBLlikeeveq}
+\end{equation}
+where $\mathbf{V}^{(0)}$ is a two by two matrix with components:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \frac{1}{\xi}\mathbf{V}_{\rm IJ}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right) &=& \displaystyle
+\frac{2}{y}\bigg\{\left[\theta(x-\xi) \theta(y-x)+\theta(\xi-x)\theta(x+\xi)\theta(y-x)-\theta(-x-\xi)
+                                              \theta(x-y)\right]P_{\rm IJ}'\left(\frac{x}{y},\frac{2\xi}{y}\right)\\
+\\
+&+&\displaystyle \left[\theta(x-\xi) \theta(y-x)-\theta(\xi-x)\theta(x+\xi)\theta(x-y)-\theta(-x-\xi)
+                                              \theta(x-y)\right]P_{\rm IJ}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)\\
+\\
+&+&\displaystyle \delta_{\rm IJ}\delta\left(1-\frac{x}{y}\right)
+    C_{\rm I}\left[K_{\rm I}+\int_\xi^{x}\frac{dz}{z-x}+\int_{-\xi}^{x}\frac{dz}{z-x}\right]\bigg\}\,,\quad
+    {\rm I,J=S,G}\,,
+\end{array}
+\end{equation}
+with $C_{\rm S} = C_F$ and $C_{\rm G} = C_A$ and:
+\begin{equation}
+K_{\rm S}=\frac{3}{2}\quad\mbox{and}\quad K_{\rm G} = \frac{11C_A-4n_fT_R}{6C_A}\,.
+\end{equation}
+The conformal moments of the singlet kernels can be found by
+generalising Eq.~(\ref{eq:evkernelERBLgenxi2}):
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
+  IJ}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right)f(x) &=&
+                                                             \displaystyle
+                                                             2C_{\rm
+                                                             I}\Bigg\{\delta_{\rm
+                                                             IJ}K_{\rm
+                                                             I}f(y)+\int_\xi^y
+                                                             dx\left[\frac1{C_{\rm I}
+                                                             y}P_{\rm
+                                                             IJ}'\left(\frac{x}{y},-\frac{2\xi}{y}\right)
+                                                             f(x)-\delta_{\rm
+                                                             IJ}\frac{f(y)}{y-x}\right]\\
+\\
+&+&\displaystyle \int_{-\xi}^y dx\left[\frac1{C_{\rm I} y}P_{\rm
+                                                             IJ}'\left(\frac{x}{y},\frac{2\xi}{y}\right)
+                                                             f(x)-\delta_{\rm
+                                                             IJ}\frac{f(y)}{y-x}\right]\Bigg\}\,,
+\end{array}
+\end{equation}
+and replacing $f(x)$ with the appropriate Gegenbauer polynomial
+computed in $x/\xi$. Since
+$\mathbf{V}_{\rm SS}^{(0)}=\mathbb{V}_{\rm NS}^{(0)}$, the SS
+component has $C_n^{3/2}(x/\xi)$ as eigenfunctions with eigenvalues
+$V_{{\rm SS}, n}^{(0)} = V_n^{(0)}$ given in
+Eq.~(\ref{eq:ERBLkernel}). The eigenvalues of the remaining kernels
+are expected to be:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle V_{{\rm SS}, n}^{(0)} &=&\displaystyle V_n^{(0)}\,,\\
+\\
+\displaystyle V_{{\rm SG}, n}^{(0)} &=&\displaystyle P_{\rm
+                                        SG}^{(0)}(n+1)=2T_R\frac{4+3n+n^2}{(n+1)(n+2)(n+3)}\,,\\
+\\
+\displaystyle V_{{\rm GS}, n}^{(0)} &=&\displaystyle P_{\rm
+                                        GS}^{(0)}(n+1)=2C_F\frac{4+3n+n^2}{n(n+1)(n+2)}\,,\\
+\\
+\displaystyle V_{{\rm GS}, n}^{(0)} &=&\displaystyle P_{\rm
+                                        GG}^{(0)}(n+1)=2C_A\left[K_{\rm
+                                        G}+\frac{1}{n(n+1)}+\frac{1}{(n+2)(n+3)}-\sum_{k=1}^{n+1}\frac1k\right]\,.
+\end{array}
+\end{equation}
+
+
+% For the SG component we find:
+% \begin{equation}
+% \int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
+%   SG}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right)C_n^{3/2}\left(\frac{x}{\xi}\right) =
+%                                                              \frac{T_R\xi z^2}{z^2-1}\left[\int_{-1}^{z} d{v}(v-z)\left(1-\frac{2v}{z+1}\right)
+%                                                              C_n^{3/2}\left(v\right)-\int_1^{z}
+%                                                              d{v}(v-z)\left(1-\frac{2v}{z-1}\right)
+%                                                              C_n^{3/2}\left(v\right)\right]\,,
+% \end{equation}
+% with $x = y/\xi$
+
+
+
+
+\newpage
 \section{Compton form factor}
 
 In this section, we discuss the numerical implementation of the
