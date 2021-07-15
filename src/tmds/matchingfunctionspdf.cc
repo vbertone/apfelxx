@@ -1915,4 +1915,38 @@ namespace apfel
   {
     return - 4 * CA * ( 1 - x ) / x;
   }
+
+  //_________________________________________________________________________________
+  C2gqpdfBM::C2gqpdfBM(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C2gqpdfBM::Regular(double const& x) const
+  {
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double ln1mx  = log(1 - x);
+    const double ln1mx2 = ln1mx * ln1mx;
+
+    return CF * ( CF - CA ) * ( 8 * ( 1 - x ) * ( ln1mx + ln1mx2 ) / x - 20 * lnx + 4 * lnx2 + 8 * ( 1 -  x ) )
+           + CF * CA * ( 16 * ( 1 - x ) * ( 11. / 18. + 5 * zeta2 / 4 - ln1mx / 3 - dilog(x) ) / x + 4 * lnx * ( 4 + 5 * x - x * lnx ) / x )
+           + CF * _nf * 16 * ( 1 - x ) * ( 2 + 3 * ln1mx ) / 9 / x;
+  }
+
+  //_________________________________________________________________________________
+  C2ggpdfBM::C2ggpdfBM(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C2ggpdfBM::Regular(double const& x) const
+  {
+    const double lnx  = log(x);
+    const double lnx2 = lnx * lnx;
+    return CA * CA * ( - 16 * ( 1 - x ) * ( dilog(x) - lnx ) / x + 124 * lnx / 3 + ( 148. / 9. + 20 * zeta2 ) * ( 1 - x ) / x
+                       - 8 * lnx2 - 100 * ( 1 - x ) / 9 - 4 * x * ( 11 * x - 14 ) / 9 )
+           + _nf * CF * 4 * ( lnx2 - 2 * pow(1 - x, 3) / x )
+           + _nf * CA * 4 * ( 17 * ( 1 - x ) / x + 1 - 3 * x - x * x + 6 * lnx ) / 9;
+  }
 }
