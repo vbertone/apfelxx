@@ -56,10 +56,11 @@ evolution equations in terms of distributions in the so-called
 ``evolution'' basis and then report the splitting functions up to
 $\mathcal{O}(\alpha_s^2)$, \textit{i.e.} next-to-leading order (NLO),
 separately for PDFs and FFs. Contrary to unpolarised and
-longitudinally polarised collinear distributions, no transversely
-polarised gluon distribution exists. This simplifies the structure of
-the evolution equations that, when written in the evolution basis, are
-completely decoupled. 
+longitudinally polarised collinear distributions, the gluon
+distribution, that in fact corresponds to a linearly polarised gluon,
+decouples and evolves multiplicatively. This simplifies the structure
+of the evolution equations that, when written in the evolution basis,
+are completely decoupled.
 
 As a first step we define the evolution basis. Given a set of quark
 distributions in the more familiar ``physical'' basis, \textit{i.e.}
@@ -68,25 +69,27 @@ and defining $q^{\pm}\equiv q\pm \overline{q}$, the ``evolution''
 basis is defined as follows:
 \begin{equation}
 \begin{array}{rcl}
-\Sigma&=& \sum_{q}q^+\,,\\
-V &=& \sum_{q}q^-\,,\\
-T_3&=& u^+-d^+\,,\\
-V_3&=& u^--d^-\,,\\
-T_8&=& u^++d^+-2s^+\,, \\
-V_8&=& u^-+d^- -2s^-\,, \\
-T_{15}&=& u^++d^++s^+-3c^{+}\,, \\
-V_{15}&=& u^-+d^- +s^--3c^{-}\,, \\
-T_{24}&=& u^++d^++s^++c^{+}-4b^+\,, \\
-V_{24}&=& u^-+d^- +s^-+c^{-}-4b^-\,, \\
-T_{35}&=& u^++d^++s^++c^{+}+b^+-5t^{+}\,, \\
-V_{35}&=& u^-+d^- +s^-+c^{-}+b^--5t^{-}\,.
+  \Sigma&=& \sum_{q}q^+\,,\\
+  V &=& \sum_{q}q^-\,,\\
+  T_3&=& u^+-d^+\,,\\
+  V_3&=& u^--d^-\,,\\
+  T_8&=& u^++d^+-2s^+\,, \\
+  V_8&=& u^-+d^- -2s^-\,, \\
+  T_{15}&=& u^++d^++s^+-3c^{+}\,, \\
+  V_{15}&=& u^-+d^- +s^--3c^{-}\,, \\
+  T_{24}&=& u^++d^++s^++c^{+}-4b^+\,, \\
+  V_{24}&=& u^-+d^- +s^-+c^{-}-4b^-\,, \\
+  T_{35}&=& u^++d^++s^++c^{+}+b^+-5t^{+}\,, \\
+  V_{35}&=& u^-+d^- +s^-+c^{-}+b^--5t^{-}\,.
 \end{array}
 \end{equation}
 It is possible to show that in this basis the general form of the
-DGLAP evolution equations for the transversity distribution reduces to
+DGLAP evolution equations for the transversity distributions reduces to
 the following set of \textit{decoupled} integro-differential equation:
 \begin{equation}
 \begin{array}{rcl}
+\displaystyle \mu^2\frac{dg}{d\mu^2} &=& \displaystyle P_{gg}\otimes g\,,\\
+\\
 \displaystyle \mu^2\frac{d\Sigma}{d\mu^2} &=& \displaystyle P_{qq}\otimes \Sigma\,,\\
 \\
 \displaystyle \mu^2\frac{dV}{d\mu^2} &=& \displaystyle P^{V}\otimes V\,,\\
@@ -103,8 +106,8 @@ $\otimes$ is defined as:
 \begin{equation}
 f(x)\otimes g(x)\equiv \int_x^1\frac{dy}{y}f(y)g\left(\frac{x}{y}\right)=\int_x^1\frac{dy}{y}f\left(\frac{x}{y}\right)g(y)\,.
 \end{equation}
-The splitting functions $P_{qq}$, $P^V$, $P^+$, and $P^-$ are usually
-decomposed as follows:
+Let us first focus on the quark distributions. The splitting functions
+$P_{qq}$, $P^V$, $P^+$, and $P^-$ are usually decomposed as follows:
 \begin{equation}
 \begin{array}{l}
 \displaystyle P^\pm \equiv P_{qq}^V \pm P_{q\overline{q}}^V\,, \\
@@ -316,6 +319,34 @@ instead find:
 \end{equation}
 that is just a small difference in the regular term as compared to
 $\mathcal{P}_{qq}^{V,(1)}$ in Eq.~(\ref{eq:PDFLOsplittingqq}).
+
+We now move to considering the evolution of the linearly polarised
+gluon distribution that also evolves multiplicatively. In the
+following, we will only consider the gluon PDF and leave aside the
+gluon FF for which, to the best of my knowledge, the NLO correction to
+the splitting function has not been computed yet. The leading-order
+splitting function is given in Ref.~\cite{Artru:1989zv}:
+\begin{equation}
+P_{gg}^{(0)}(y) =
+2C_A\left[\left(\frac{2}{1-y}\right)_+-2+\delta(1-y)\left(\frac{11-4n_f
+    T_R}{6C_A}\right)\right]\,.
+\end{equation}
+The NLO correction has been computed in Ref.~\cite{Vogelsang:1998yd}
+and reads:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle P_{gg}^{(1)}(y) &=& \displaystyle \Bigg\{4 C_A^2\left[\frac{y\ln^2y-4y\ln
+  y\ln(1-y)}{1-y}+\frac{1-y^3}{6y}+S_2(y)
+    \left(\frac{2}{1+y}-2\right) -\frac{67}{9}+\frac{\pi^2}3\right]\\
+\\
+&+&\displaystyle 4n_f T_RC_A\left(\frac{20}9+\frac{1-y^3}{3y}\right) -8 n_f T_R C_F\frac{1-y^3}{3y}\Bigg\}\\
+\\
+&+&\displaystyle \Bigg\{2C_A^2\left(\frac{134}{9}-\frac{2\pi^2}3\right) -\frac{80}9n_f C_AT_R\Bigg\}\left(\frac{1}{1-y}\right)_+\\
+\\
+&+&\displaystyle \Bigg\{4 C_A^2\left(\frac{8}{3}+3\zeta_3\right) -\frac{16}3n_f T_RC_A -4 n_f T_R C_F\Bigg\}\delta(1-y)\,.
+\end{array}
+\end{equation}
+
 
 \newpage
 \bibliographystyle{ieeetr}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: /Users/vbertone/Codes/apfelxx/inc/apfel/tmdbuilder.h File Reference</title>
+<title>APFEL: /Users/bertone/Codes/apfelxx/inc/apfel/tmdbuilder.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -118,12 +118,12 @@ Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">TMD object initializers</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise TmdObjects structure for the perturbartive evolution and matching currently available. </p>
 </div></td></tr>
-<tr class="memitem:af80acd1be427af3562f7fbc9144191c9"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, TmdObjects &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#af80acd1be427af3562f7fbc9144191c9">apfel::InitializeTmdObjects</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5, bool const &amp;nnnlo=true)</td></tr>
-<tr class="memdesc:af80acd1be427af3562f7fbc9144191c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure.  <a href="namespaceapfel.html#af80acd1be427af3562f7fbc9144191c9">More...</a><br /></td></tr>
-<tr class="separator:af80acd1be427af3562f7fbc9144191c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12b3240e347e6184717a0fa752a19a0d"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, TmdObjects &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a12b3240e347e6184717a0fa752a19a0d">apfel::InitializeTmdObjectsLite</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</td></tr>
-<tr class="memdesc:a12b3240e347e6184717a0fa752a19a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">As the InitializeTmdObjects but with the computation of the NNNLO corrections to the matching conditions set to zero. This saves much computation time usually unneded.  <a href="namespaceapfel.html#a12b3240e347e6184717a0fa752a19a0d">More...</a><br /></td></tr>
-<tr class="separator:a12b3240e347e6184717a0fa752a19a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e3d63e70ba7feeac26421e28cbee83"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, TmdObjects &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ad9e3d63e70ba7feeac26421e28cbee83">apfel::InitializeTmdObjects</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5, bool const &amp;nnnlo=false)</td></tr>
+<tr class="memdesc:ad9e3d63e70ba7feeac26421e28cbee83"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure.  <a href="namespaceapfel.html#ad9e3d63e70ba7feeac26421e28cbee83">More...</a><br /></td></tr>
+<tr class="separator:ad9e3d63e70ba7feeac26421e28cbee83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ba45cac061a9454f7ead9e9aecddc8"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, TmdObjects &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a88ba45cac061a9454f7ead9e9aecddc8">apfel::InitializeTmdObjectsDYResScheme</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</td></tr>
+<tr class="memdesc:a88ba45cac061a9454f7ead9e9aecddc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure. This function applies a resummation-scheme transformation to produce the scheme often used in qT resummation that has H = 1.  <a href="namespaceapfel.html#a88ba45cac061a9454f7ead9e9aecddc8">More...</a><br /></td></tr>
+<tr class="separator:a88ba45cac061a9454f7ead9e9aecddc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">TMD builders</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Collection of functions that build a TMD distributions (both PDFs and FF) as Set&lt;Distribution&gt;-valued functions. These functions perform evolution and matching either separately or alltogether. Also a function for the computation of the hard factors is provided. </p>
 </div></td></tr>
@@ -167,7 +167,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 10 2021 09:47:27 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Jul 15 2021 17:46:32 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

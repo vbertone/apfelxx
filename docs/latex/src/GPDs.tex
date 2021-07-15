@@ -1195,7 +1195,8 @@ identify the combination $n-j$ with an even index, \textit{i.e.}
 $n-j=2h$, and remove the projector. Replacing the summation index $k$
 with $h$ and making explicit the index $\ell$
 also in the second line gives:
-\begin{equation}\begin{array}{rcl}
+\begin{equation}
+\begin{array}{rcl}
   \displaystyle
   I &=&\displaystyle \frac{3}{2}C_n^{3/2}\left(z\right)\\
   \\
@@ -1332,8 +1333,7 @@ multiplicatively at LO according to
 Eq.~(\ref{eq:ConfMomentsSolution}). The question that remains to be
 answered is whether it is possible to reconstruct any non-singlet GPD
 by knowing all its conformal moments. In order to do so, one should be
-able to expand any given GPD $f^{-}(x,\xi)$ in terms of conformal
-moments:
+able to expand any given GPD $f^{-}$ in terms of conformal moments:
 \begin{equation}
 f^{-}(x,\xi,\mu) = \sum_{m=0}^{\infty}
 \mathcal{C}_m^-(\xi,\mu)f_m(x,\xi)\,,
@@ -1858,6 +1858,7 @@ generalising Eq.~(\ref{eq:evkernelERBLgenxi2}):
                                                              f(x)-\delta_{\rm
                                                              IJ}\frac{f(y)}{y-x}\right]\Bigg\}\,,
 \end{array}
+\label{eq:ConfMomsSing}
 \end{equation}
 and replacing $f(x)$ with the appropriate Gegenbauer polynomial
 computed in $x/\xi$. Since
@@ -1876,23 +1877,57 @@ are expected to be:
 \displaystyle V_{{\rm GS}, n}^{(0)} &=&\displaystyle P_{\rm
                                         GS}^{(0)}(n+1)=2C_F\frac{4+3n+n^2}{n(n+1)(n+2)}\,,\\
 \\
-\displaystyle V_{{\rm GS}, n}^{(0)} &=&\displaystyle P_{\rm
+\displaystyle V_{{\rm GG}, n}^{(0)} &=&\displaystyle P_{\rm
                                         GG}^{(0)}(n+1)=2C_A\left[K_{\rm
-                                        G}+\frac{1}{n(n+1)}+\frac{1}{(n+2)(n+3)}-\sum_{k=1}^{n+1}\frac1k\right]\,.
+                                        G}+\frac{1}{n(n+1)}+\frac{1}{(n+2)(n+3)}-\sum_{k=1}^{n+1}\frac1k\right]\,,
+\end{array}
+\end{equation}
+However, we still need to determine the degree of the Gegenbauer
+polynomials that provide eigenfunction to the kernles. To do so, we
+replace $f(x)=C_1^{\alpha}(x)=2\alpha x$ in
+Eq.~(\ref{eq:ConfMomsSing}) and determine the value of $\alpha$ by
+requiring that the integral equals
+$V_{{\rm SS}, 1}^{(0)}C_1^{\alpha}(x)$.  We start with the GS kernel:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
+  GS}^{(0)}\left(\frac{x}{\xi},
+  \frac{y}{\xi}\right)C_n^{\alpha}\left(\frac{x}{\xi}\right) &=&
+                                                                 \displaystyle 
+C_F\left[\int_{-1}^z\frac{dv}{v}\frac{(v+1)(2z-v+1)}{z+1}C_n^{\alpha}\left(\frac{x}{\xi}\right)-\int_1^z\frac{dv}{v}\frac{(v-1)(2z-v-1)}{z-1}C_n^{\alpha}\left(\frac{x}{\xi}\right)\right]\,,
+\end{array}
+\end{equation}
+with $z = y/\xi$. For $n=1$ we get:
+\begin{equation}
+\displaystyle \int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
+  GS}^{(0)}\left(\frac{x}{\xi},
+  \frac{y}{\xi}\right)C_1^{\alpha}\left(\frac{x}{\xi}\right) = C_F\frac{16}{3}\alpha
+    z=V_{{\rm GS}, 1}^{(0)}C_1^{\alpha}(z)\quad \forall \alpha\,,
+\end{equation}
+so we get no information on $\alpha$ from the first
+moment. For the third moment we find:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
+  GS}^{(0)}\left(\frac{x}{\xi},
+  \frac{y}{\xi}\right)C_3^{\alpha}\left(\frac{x}{\xi}\right)
+  &=&\displaystyle \frac{11}{15}C_F\left[-2\alpha(\alpha+1) z
+      \frac{116-2\alpha}{33}+\frac43\alpha(\alpha+1)(\alpha+2)z^3\right]
 \end{array}
 \end{equation}
 
 
-% For the SG component we find:
-% \begin{equation}
-% \int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
-%   SG}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right)C_n^{3/2}\left(\frac{x}{\xi}\right) =
-%                                                              \frac{T_R\xi z^2}{z^2-1}\left[\int_{-1}^{z} d{v}(v-z)\left(1-\frac{2v}{z+1}\right)
-%                                                              C_n^{3/2}\left(v\right)-\int_1^{z}
-%                                                              d{v}(v-z)\left(1-\frac{2v}{z-1}\right)
-%                                                              C_n^{3/2}\left(v\right)\right]\,,
-% \end{equation}
-% with $x = y/\xi$
+
+For the SG component we find:
+\begin{equation}
+\int_{-1}^{1}\frac{dx}{\xi}\mathbf{V}_{\rm
+ SG}^{(0)}\left(\frac{x}{\xi}, \frac{y}{\xi}\right)C_n^{3/2}\left(\frac{x}{\xi}\right) =
+                                                            \frac{T_R\xi z^2}{z^2-1}\left[\int_{-1}^{z} d{v}(v-z)\left(1-\frac{2v}{z+1}\right)
+                                                            C_n^{3/2}\left(v\right)-\int_1^{z}
+                                                            d{v}(v-z)\left(1-\frac{2v}{z-1}\right)
+                                                            C_n^{3/2}\left(v\right)\right]\,,
+\end{equation}
+with $x = y/\xi$
 
 
 

@@ -33,6 +33,25 @@ namespace apfel
     return 4 * CF * log( 1 - x ) + 3 * CF;
   }
 
+  //_________________________________________________________________________________
+  P0transgg::P0transgg(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double P0transgg::Regular(double const&) const
+  {
+    return - 4 * CA;
+  }
+  double P0transgg::Singular(double const& x) const
+  {
+    return 4 * CA / ( 1 - x );
+  }
+  double P0transgg::Local(double const& x) const
+  {
+    return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
+  }
+
   /**
    * @brief The NLO space-like splitting function for tranversely
    * polarised PDFs. Reference
@@ -88,5 +107,41 @@ namespace apfel
       + 2 * CF * CA * ( - 143. / 9. + 2 * Pi2 / 3 + x + ( 11. / 3. + lnx ) * func )
       + 8 * _nf * CF * TR * ( - func + 10. / 3. ) / 3
       - 4 * CF * ( CF - CA / 2 ) * ( - 1 + x - 4 * S2x / ( 1 + x ) );
+  }
+
+  /**
+   * @brief The NLO space-like splitting function for lineraly
+   * polarised PDFs. Reference
+   * https://arxiv.org/pdf/hep-ph/9805295v1.pdf.
+   */
+  //_________________________________________________________________________________
+  P1transgg::P1transgg(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+    _a2 = 2 * CA * CA * ( 134. / 9. - 2 * Pi2 / 3 ) - 80 * _nf * CA * TR / 9;
+  }
+  double P1transgg::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double ln1mx = log(1-x);
+    const double x3    = pow(x, 3);
+    const double S2x   = - 2 * dilog(-x) + lnx * lnx / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
+    return
+      + 4 * CA * CA * ( x * lnx * ( lnx - 4 * ln1mx ) / ( 1 - x ) - 67. / 9. + Pi2 / 3 + ( 1 - x3 ) / 6 / x + S2x * ( 2 / ( 1 + x ) - 2 ) )
+      + 4 * _nf * TR * CA * ( 20. / 9. + ( 1 - x3 ) / 3 / x )
+      - 8 * _nf * TR * CF * ( 1 - x3 ) / 3 / x;
+  }
+  double P1transgg::Singular(double const& x) const
+  {
+    return _a2 / ( 1 - x );
+  }
+  double P1transgg::Local(double const& x) const
+  {
+    const double p1delta =
+      + 4 * CA * CA * ( 8. / 3. + 3 * zeta3 )
+      - 16 * _nf * TR * CA / 3
+      - 4 * _nf * TR * CF;
+    return log(1-x) * _a2 + p1delta;
   }
 }

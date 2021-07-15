@@ -536,11 +536,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1P0transns.html">P0transns</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Space-like O(&alpha;<sub>s</sub>) non-singlet transversely polarised splitting function.  <a href="classapfel_1_1P0transns.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1P0transgg.html">P0transgg</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Space-like O(&alpha;<sub>s</sub>) gluon-gluon linearly polarised splitting function.  <a href="classapfel_1_1P0transgg.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1P1transnsp.html">P1transnsp</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Space-like O(&alpha;<sub>s</sub><sup>2</sup>) non-singlet-plus transversely polarised splitting function.  <a href="classapfel_1_1P1transnsp.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1P1transnsm.html">P1transnsm</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Space-like O(&alpha;<sub>s</sub><sup>2</sup>) non-singlet-minus transversely polarised splitting function.  <a href="classapfel_1_1P1transnsm.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1P1transgg.html">P1transgg</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Space-like O(&alpha;<sub>s</sub><sup>2</sup>) gluon-gluon linearly polarised splitting function.  <a href="classapfel_1_1P1transgg.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1P0Ttransns.html">P0Ttransns</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time-like O(&alpha;<sub>s</sub>) non-singlet transversely polarised splitting function.  <a href="classapfel_1_1P0Ttransns.html#details">More...</a><br /></td></tr>
@@ -1281,12 +1287,12 @@ Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">TMD object initializers</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a> structure for the perturbartive evolution and matching currently available. </p>
 </div></td></tr>
-<tr class="memitem:af80acd1be427af3562f7fbc9144191c9"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#af80acd1be427af3562f7fbc9144191c9">InitializeTmdObjects</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5, bool const &amp;nnnlo=true)</td></tr>
-<tr class="memdesc:af80acd1be427af3562f7fbc9144191c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure.  <a href="namespaceapfel.html#af80acd1be427af3562f7fbc9144191c9">More...</a><br /></td></tr>
-<tr class="separator:af80acd1be427af3562f7fbc9144191c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12b3240e347e6184717a0fa752a19a0d"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a12b3240e347e6184717a0fa752a19a0d">InitializeTmdObjectsLite</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</td></tr>
-<tr class="memdesc:a12b3240e347e6184717a0fa752a19a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">As the InitializeTmdObjects but with the computation of the NNNLO corrections to the matching conditions set to zero. This saves much computation time usually unneded.  <a href="namespaceapfel.html#a12b3240e347e6184717a0fa752a19a0d">More...</a><br /></td></tr>
-<tr class="separator:a12b3240e347e6184717a0fa752a19a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e3d63e70ba7feeac26421e28cbee83"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ad9e3d63e70ba7feeac26421e28cbee83">InitializeTmdObjects</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5, bool const &amp;nnnlo=false)</td></tr>
+<tr class="memdesc:ad9e3d63e70ba7feeac26421e28cbee83"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure.  <a href="namespaceapfel.html#ad9e3d63e70ba7feeac26421e28cbee83">More...</a><br /></td></tr>
+<tr class="separator:ad9e3d63e70ba7feeac26421e28cbee83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ba45cac061a9454f7ead9e9aecddc8"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a88ba45cac061a9454f7ead9e9aecddc8">InitializeTmdObjectsDYResScheme</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</td></tr>
+<tr class="memdesc:a88ba45cac061a9454f7ead9e9aecddc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure. This function applies a resummation-scheme transformation to produce the scheme often used in qT resummation that has H = 1.  <a href="namespaceapfel.html#a88ba45cac061a9454f7ead9e9aecddc8">More...</a><br /></td></tr>
+<tr class="separator:a88ba45cac061a9454f7ead9e9aecddc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">TMD builders</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Collection of functions that build a TMD distributions (both PDFs and FF) as Set&lt;Distribution&gt;-valued functions. These functions perform evolution and matching either separately or alltogether. Also a function for the computation of the hard factors is provided. </p>
 </div></td></tr>
@@ -5321,8 +5327,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="af80acd1be427af3562f7fbc9144191c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af80acd1be427af3562f7fbc9144191c9">&#9670;&nbsp;</a></span>InitializeTmdObjects()</h2>
+<a id="ad9e3d63e70ba7feeac26421e28cbee83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e3d63e70ba7feeac26421e28cbee83">&#9670;&nbsp;</a></span>InitializeTmdObjects()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5349,7 +5355,7 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>nnnlo</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>nnnlo</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -5365,22 +5371,22 @@ template&lt;typename T &gt; </div>
     <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
     <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
     <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10^{-5}) </td></tr>
-    <tr><td class="paramname">nnnlo</td><td>switch to compute the NNNLO matching functions (default: true) </td></tr>
+    <tr><td class="paramname">nnnlo</td><td>switch to compute the NNNLO matching functions (default: false) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A map DglapObject objects, one for each possible nf </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of TmdObject objects, one for each possible nf </dd></dl>
 
 </div>
 </div>
-<a id="a12b3240e347e6184717a0fa752a19a0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12b3240e347e6184717a0fa752a19a0d">&#9670;&nbsp;</a></span>InitializeTmdObjectsLite()</h2>
+<a id="a88ba45cac061a9454f7ead9e9aecddc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ba45cac061a9454f7ead9e9aecddc8">&#9670;&nbsp;</a></span>InitializeTmdObjectsDYResScheme()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a>&gt; apfel::InitializeTmdObjectsLite </td>
+          <td class="memname">std::map&lt;int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a>&gt; apfel::InitializeTmdObjectsDYResScheme </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td>
           <td class="paramname"><em>g</em>, </td>
@@ -5405,7 +5411,16 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>As the InitializeTmdObjects but with the computation of the NNNLO corrections to the matching conditions set to zero. This saves much computation time usually unneded. </p>
+<p>The InitializeTmdObjects function precomputes the perturbative coefficients required for the evolution and matching of TMD PDFs and FFs and store them into a '<a class="el" href="structapfel_1_1TmdObjects.html" title="Structure that contains all the precomputed quantities needed to perform the TMD evolution,...">TmdObjects</a>' structure. This function applies a resummation-scheme transformation to produce the scheme often used in qT resummation that has H = 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
+    <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10^{-5}) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of TmdObject objects, one for each possible nf </dd></dl>
 
 </div>
 </div>
@@ -7854,7 +7869,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 10 2021 09:47:27 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Jul 15 2021 17:46:32 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

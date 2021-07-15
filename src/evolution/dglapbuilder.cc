@@ -78,7 +78,7 @@ namespace apfel
     const Operator O0gq{g, P0gq{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0qg{g, P0qg{nf},  IntEps};
+        const Operator O0qg{g, P0qg{nf}, IntEps};
         const Operator O0gg{g, P0gg{nf}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0ns});
@@ -362,7 +362,7 @@ namespace apfel
     const Operator O0gq{g, P0polgq{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0qg{g, P0polqg{nf},  IntEps};
+        const Operator O0qg{g, P0polqg{nf}, IntEps};
         const Operator O0gg{g, P0polgg{nf}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0ns});
@@ -818,6 +818,7 @@ namespace apfel
     const Operator O0ns{g, P0transns{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator O0gg{g, P0transgg{nf}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0ns});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
@@ -825,7 +826,7 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O0ns});
         OM.insert({EvolutionBasisQCD::PQG,                Zero});
         OM.insert({EvolutionBasisQCD::PGQ,                Zero});
-        OM.insert({EvolutionBasisQCD::PGG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O0gg});
         OpMapLO.insert({nf, OM});
       }
 
@@ -842,6 +843,7 @@ namespace apfel
       {
         const Operator O1nsp{g, P1transnsp{nf}, IntEps};
         const Operator O1nsm{g, P1transnsm{nf}, IntEps};
+        const Operator O1gg {g, P0transgg{nf},  IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
         OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
@@ -849,7 +851,7 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nsp});
         OM.insert({EvolutionBasisQCD::PQG,                Zero});
         OM.insert({EvolutionBasisQCD::PGQ,                Zero});
-        OM.insert({EvolutionBasisQCD::PGG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O1gg});
         OpMapNLO.insert({nf, OM});
       }
 

@@ -13,7 +13,10 @@ namespace apfel
   /**
    * @defgroup TransSF Transversely polarised splitting functions
    * @ingroup SLSplittings
-   * @note Reference https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
+   * @note References: https://arxiv.org/pdf/hep-ph/9706511v2.pdf,
+   * https://lib-extopc.kek.jp/preprints/PDF/2000/0032/0032201.pdf,
+   * https://arxiv.org/pdf/hep-ph/9805295v1.pdf
+   *
    */
   ///@{
   ///@}
@@ -33,6 +36,22 @@ namespace apfel
     double Regular(double const&)    const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB>) gluon-gluon linearly
+   * polarised splitting function.
+   * @note
+   */
+  class P0transgg: public Expression
+  {
+  public:
+    P0transgg(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
   };
   ///@}
 
@@ -66,6 +85,23 @@ namespace apfel
   public:
     P1transnsm(int const& nf);
     double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-gluon linearly
+   * polarised splitting function.
+   * @note
+   */
+  class P1transgg: public Expression
+  {
+  public:
+    P1transgg(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+    double    _a2;
   };
   ///@}
 }

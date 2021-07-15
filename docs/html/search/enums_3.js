@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['integrationmethod_1826',['IntegrationMethod',['../classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f',1,'apfel::Integrator']]]
+  ['integrationmethod_1831',['IntegrationMethod',['../classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6f',1,'apfel::Integrator']]]
 ];
