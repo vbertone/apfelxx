@@ -294,7 +294,7 @@ namespace apfel
   ///@{
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark matching function
-   * for linearly polarised PDFs (reference:
+   * for linearly polarised gluon PDF (reference:
    * https://arxiv.org/pdf/1907.03780.pdf).
    */
   class C1gqpdfBM: public Expression
@@ -306,8 +306,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon matching function
-   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
-   * https://arxiv.org/pdf/1706.01473.pdf).
+   * for linearly polarised gluon PDF (reference:
+   * https://arxiv.org/pdf/1907.03780.pdf).
    */
   class C1ggpdfBM: public Expression
   {
@@ -324,8 +324,8 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-quark matching function
-   * for linearly polarised PDFs (reference:
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-quark
+   * matching function for linearly polarised gluon PDF (reference:
    * https://arxiv.org/pdf/1907.03780.pdf).
    */
   class C2gqpdfBM: public Expression
@@ -338,9 +338,9 @@ namespace apfel
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon matching function
-   * for PDFs (references: https://arxiv.org/pdf/1604.07869.pdf and
-   * https://arxiv.org/pdf/1706.01473.pdf).
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>2</SUP>) gluon-gluon
+   * matching function for linearly polarised gluon PDFs (reference:
+   * https://arxiv.org/pdf/1907.03780.pdf).
    */
   class C2ggpdfBM: public Expression
   {
