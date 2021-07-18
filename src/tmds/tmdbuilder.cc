@@ -528,6 +528,236 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, TmdObjects> InitializeTmdObjectsBM(Grid                const& g,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& IntEps)
+  {
+    // Initialise space-like splitting functions on the grid required
+    // to compute the log terms of the matching functions.
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
+
+    report("Initializing TMD objects for matching and evolution of the Boer-Mulders gluon TMD... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // ===============================================================
+    // Identity and zero operators
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+
+    // ===============================================================
+    // NLO matching functions operators.
+    // PDFs
+    std::map<int, std::map<int, Operator>> C10pdf;
+    const Operator O1gqpdf{g, C1gqpdfBM{}, IntEps};
+    const Operator O1ggpdf{g, C1ggpdfBM{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,                O1ggpdf});
+        C10pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to one power of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C11pdf;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O11gmVg = gammaFg0(nf) * Id;
+        const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,    O11gmVg - 2 * P0.at(6)});
+        C11pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C12;
+    const Operator O12gmKg = - CA * gammaK0() / 2 * Id;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ, Zero});
+        OM.insert({EvolutionBasisQCD::PGG, O12gmKg});
+        C12.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub) equal to that of
+    // PDFs.
+
+    // ===============================================================
+    // NNLO matching functions operators.
+    // PDFs
+    std::map<int, std::map<int, Operator>> C20pdf;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O2gqpdf{g, C2gqpdf{nf}, IntEps};
+        const Operator O2ggpdf{g, C2ggpdf{nf}, IntEps};
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O2gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,                O2ggpdf});
+        C20pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to one power of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C21pdf;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const double b0   = beta0qcd(nf);
+        const double gFg0 = gammaFg0(nf);
+        const Operator O21gmVg = ( gammaFg1(nf) + CA * KCS10(nf) ) * Id;
+        const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
+        const auto P1 = DglapObjpdf.at(nf).SplittingFunctions.at(1);
+        const auto C1 = C10pdf.at(nf);
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ, ( nf / 6. ) * ( - 2 * P1.at(5) + ( gFg0 + 2 * b0 ) * C1.at(5) - 2 * ( C1.at(5) * P0.at(3) + C1.at(6) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PGG,         O21gmVg - 2 * P1.at(6) + ( gFg0 + 2 * b0 ) * C1.at(6) - 2 * ( C1.at(5) * P0.at(4) + C1.at(6) * P0.at(6) )});
+        C21pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C22pdf;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const double b0   = beta0qcd(nf);
+        const double gK0  = gammaK0();
+        const double gK1  = gammaK1(nf);
+        const double gFg0 = gammaFg0(nf);
+        const Operator O22gmVg = ( b0 * gFg0 + pow(gFg0, 2) / 2 - CA * gK1 / 2 ) * Id;
+        const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
+        const auto C1 = C10pdf.at(nf);
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ, ( nf / 6. ) * (- 2 * ( b0 + gFg0 ) * P0.at(5) - CA * gK0 / 2 * C1.at(5) + 2 * ( P0.at(5) * P0.at(3) + P0.at(6) * P0.at(5) ) )});
+        OM.insert({EvolutionBasisQCD::PGG,        O22gmVg - 2 * ( b0 + gFg0 ) * P0.at(6) - CA * gK0 / 2 * C1.at(6) + 2 * ( P0.at(5) * P0.at(4) + P0.at(6) * P0.at(6) )});
+        C22pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to three powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C23pdf;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const double b0   = beta0qcd(nf);
+        const double gK0  = gammaK0();
+        const double gFg0 = gammaFg0(nf);
+        const Operator O23gmVg = CA * gK0 * ( - gFg0 / 2 - 2 * b0 / 3 ) * Id;
+        const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ, + ( nf / 6. ) *  CA * gK0 * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,        O23gmVg + CA * gK0 * P0.at(6)});
+        C23pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to four powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C24;
+    const double gK0 = gammaK0();
+    const Operator O24gmVg = pow(CA * gK0, 2) / 8 * Id;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        for (int iOp = 0; iOp < 5; iOp++)
+          OM.insert({iOp, Zero});
+        OM.insert({EvolutionBasisQCD::PGQ, Zero});
+        OM.insert({EvolutionBasisQCD::PGG, O24gmVg});
+        C24.insert({nf, OM});
+      }
+
+    // FFs (unknown, thus set to zero)
+    std::map<int, Operator> ZeroOp;
+    for (int iOp = 0; iOp < 7; iOp++)
+      ZeroOp.insert({iOp, Zero});
+
+    // Define map containing the TmdObjects for each nf.
+    std::map<int, TmdObjects> TmdObj;
+
+    // Construct sets of operators for each perturbative order for the
+    // matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        TmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+        obj.Beta.insert({2, beta2qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, 0});
+        obj.GammaFq.insert({1, 0});
+        obj.GammaFq.insert({2, 0});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+        obj.GammaFg.insert({2, gammaFg2(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+        obj.GammaK.insert({3, gammaK3(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+        obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
+
+        // Matching functions.
+        const EvolutionBasisQCD evb{nf};
+
+        // PDFs
+        obj.MatchingFunctionsPDFs.insert({0, {{evb, ZeroOp}}});
+        obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, C11pdf.at(nf)}, {evb, C12.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({2, {{evb, C20pdf.at(nf)}, {evb, C21pdf.at(nf)}, {evb, C22pdf.at(nf)}, {evb, C23pdf.at(nf)}, {evb, C24.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({3, {{evb, ZeroOp}}});
+
+        // FFs
+        obj.MatchingFunctionsFFs.insert({0, {{evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({1, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
+
+        // Hard factors different from zero only for Higgs production.
+        obj.HardFactors.insert({"DY",    {{1, 0}, {2, 0}, {3, 0}}});
+        obj.HardFactors.insert({"SIDIS", {{1, 0}, {2, 0}, {3, 0}}});
+        obj.HardFactors.insert({"ggH",   {{1, H1ggH()}, {2, H2ggH(nf)}, {3, 0}}});
+
+        // Insert full object
+        TmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return TmdObj;
+  }
+
+  //_____________________________________________________________________________
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
@@ -923,6 +1153,192 @@ namespace apfel
 
       // Compute the evolution factors.
       const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
+      const double Rq  = exp( CF * Klz + IntI1q );
+      const double Rg  = exp( CA * Klz + IntI1g );
+
+      // Return vector of evolution factors.
+      return std::vector<double>{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
+    };
+
+    return EvolFactors;
+  }
+
+  //_____________________________________________________________________________
+  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactorsK(std::map<int, TmdObjects>            const& TmdObj,
+                                                                                                    std::function<double(double const&)> const& Alphas,
+                                                                                                    int                                  const& PerturbativeOrder,
+                                                                                                    double                               const& Ci,
+                                                                                                    double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) thrs.size() < nf)
+          thrs.resize(nf);
+        thrs[nf-1] = thr;
+      }
+
+    // Define the log(Ci) to assess scale variations.
+    const double Lmu = log(Ci);
+
+    // Create functions needed for the TMD evolution.
+    std::function<double(double const&)> gammaFq;
+    std::function<double(double const&)> gammaFg;
+    std::function<double(double const&)> gammaK1;
+    std::function<double(double const&)> gammaK2;
+    std::function<double(double const&)> K;
+    // LL
+    if (PerturbativeOrder == LL)
+      {
+        gammaFq = [=] (double const&) -> double{ return 0; };
+        gammaFg = [=] (double const&) -> double{ return 0; };
+        gammaK1 = [=] (double const&) -> double{ return 0; };
+        gammaK2 = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * TmdObj.at(NF(mu, thrs)).GammaK.at(0);
+        };
+        K = [=] (double const&) -> double{ return 0; };
+      }
+    // NLL
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
+      {
+        gammaFq = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * TmdObj.at(NF(mu, thrs)).GammaFq.at(0);
+        };
+        gammaFg = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * TmdObj.at(NF(mu, thrs)).GammaFg.at(0);
+        };
+        gammaK1 = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * TmdObj.at(NF(mu, thrs)).GammaK.at(0);
+        };
+        gammaK2 = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * gc.at(1) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          return coup * lo;
+        };
+      }
+    // NNLL
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
+      {
+        gammaFq = [=] (double const& mu) -> double
+        {
+          const auto& gv    = TmdObj.at(NF(mu, thrs)).GammaFq;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gv.at(0) + coup * gv.at(1) );
+        };
+        gammaFg = [=] (double const& mu) -> double
+        {
+          const auto& gv    = TmdObj.at(NF(mu, thrs)).GammaFg;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gv.at(0) + coup * gv.at(1) );
+        };
+        gammaK1 = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * gc.at(1) );
+        };
+        gammaK2 = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          return coup * ( lo + coup * nlo );
+        };
+      }
+    // N3LL
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNNLLp)
+      {
+        gammaFq = [=] (double const& mu) -> double
+        {
+          const auto& gv    = TmdObj.at(NF(mu, thrs)).GammaFq;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gv.at(0) + coup * ( gv.at(1) + coup * gv.at(2) ) );
+        };
+        gammaFg = [=] (double const& mu) -> double
+        {
+          const auto& gv    = TmdObj.at(NF(mu, thrs)).GammaFg;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gv.at(0) + coup * ( gv.at(1) + coup * gv.at(2) ) );
+        };
+        gammaK1 = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+        };
+        gammaK2 = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const std::vector<double> d2 = d.at(2);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+          return coup * ( lo + coup * ( nlo + coup * nnlo ) );
+        };
+      }
+
+    // Define the integrands.
+    const Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
+    const Integrator I1g{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
+    const Integrator I2 {[=] (double const& mu) -> double{ return gammaK2(mu) / mu; }};
+    const Integrator I3 {[=] (double const& mu) -> double{ return gammaK2(mu) * log(mu) / mu; }};
+    const Integrator I4 {[=] (double const& mu) -> double{ return gammaK1(mu) / mu; }};
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> std::vector<double>
+    {
+      // Define lower scales
+      const double mu0   = Ci * 2 * exp(- emc) / b;
+      const double zeta0 = mu0 * mu0;
+
+      // Compute argument of the exponent of the evolution factors.
+      const double IntI1q = I1q.integrate(mu0, muf, thrs, IntEps);
+      const double IntI1g = I1g.integrate(mu0, muf, thrs, IntEps);
+      const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(muf);
+      const double IntI4  = I4.integrate(mu0, muf, thrs, IntEps) * log(zetaf / pow(muf, 2));
+      const double IntI3  = I3.integrate(mu0, muf, thrs, IntEps);
+
+      // Compute the evolution factors.
+      const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI4 ) / 2 - IntI2 + IntI3;
       const double Rq  = exp( CF * Klz + IntI1q );
       const double Rg  = exp( CA * Klz + IntI1g );
 

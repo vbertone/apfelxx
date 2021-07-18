@@ -61,9 +61,9 @@ namespace apfel
                                                  bool                const& nnnlo = false);
 
   /**
-   * @brief The InitializeTmdObjects function precomputes the
-   * perturbative coefficients required for the evolution and matching
-   * of TMD PDFs and FFs and store them into a 'TmdObjects'
+   * @brief The InitializeTmdObjectsDYResScheme function precomputes
+   * the perturbative coefficients required for the evolution and
+   * matching of TMD PDFs and FFs and store them into a 'TmdObjects'
    * structure. This function applies a resummation-scheme
    * transformation to produce the scheme often used in qT resummation
    * that has H = 1.
@@ -75,6 +75,22 @@ namespace apfel
   std::map<int, TmdObjects> InitializeTmdObjectsDYResScheme(Grid                const& g,
                                                             std::vector<double> const& Thresholds,
                                                             double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeTmdObjectsBM function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the (gluon) Boer-Mulders TMD PDF and store them into a
+   * 'TmdObjects' structure. For now, quark and FF TMDs are not filled
+   * in.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10^{-5})
+
+   * @return A map of TmdObject objects, one for each possible nf
+   */
+  std::map<int, TmdObjects> InitializeTmdObjectsBM(Grid                const& g,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& IntEps = 1e-5);
   ///@}
 
   /**
@@ -206,6 +222,29 @@ namespace apfel
                                                                                                    int                                  const& PerturbativeOrder,
                                                                                                    double                               const& Ci = 1,
                                                                                                    double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the evolution factors for gluon and
+   * quarks. As compared to "EvolutionFactors", this function isolates
+   * the double logs into gammaK. This is reminiscent of the
+   * qT resummation typical way of computing the Sudakov form factor.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial scale-variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return std::vector<double>-valued function of the impact parameter
+   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
+   * final rapidity scale &zeta;. The 0-th component contains the
+   * gluon evolution factor, the remaining 12, from 1 to 12, are all
+   * equal and represent the quark evolution factors.
+   */
+  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactorsK(std::map<int, TmdObjects>            const& TmdObj,
+                                                                                                    std::function<double(double const&)> const& Alphas,
+                                                                                                    int                                  const& PerturbativeOrder,
+                                                                                                    double                               const& Ci = 1,
+                                                                                                    double                               const& IntEps = 1e-7);
+
 
   /**
    * @brief Function that returns the evolution factor for quarks.
