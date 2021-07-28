@@ -2032,6 +2032,91 @@ one to write:
 \sin\theta = \frac{\sqrt{Q^2-4p_T\sinh^2(\eta-y)}}{Q}
 \end{equation}
 
+\section{QED radiative corrections to the leptonic final state}
+
+In this section, we will show how to include into the Drell-Yan cross
+section the corrections due to QED final-state collinear
+radiation. This will be done at LO + (N)LL accuracy which means that
+the leptonic tensor will be computed at the first fixed perturbative
+order while the collinear radiation will be resummed to the first
+(second) logarithmic order.
+
+Assuming massless, unpolarised leptons, considering only collinear
+radiation, and concentrating on cross sections integrated over the
+polar angle, the leptonic tensor can be generally decomposed into the
+following Lorentz structures~\cite{Ebert:2020dfc}:
+\begin{equation}
+\begin{array}{rcl}
+L^{\mu\nu}(q,p_1,p_2) &=&\displaystyle 
+\left(-g^{\mu\nu}+\frac{q^\mu
+    q^\nu}{Q^2}\right)\mathcal{F}_1(z_1,z_2,Q^2)+\frac{1}{p\cdot
+  q}\left(p^{\mu}-\frac{p\cdot
+  q}{Q^2}q^{\mu}\right)\left(p^{\nu}-\frac{p\cdot
+  q}{Q^2}q^{\nu}\right)\mathcal{F}_2(z_1,z_2,Q^2)\\
+\\
+&-&\displaystyle
+    i\varepsilon^{\mu\nu\rho\sigma}\frac{q_{\rho}p_{\sigma}}{2p\cdot q}\mathcal{F}_3(z_1,z_2,Q^2)\,.
+\end{array}
+\end{equation}
+where $p=p_1$, $Q^2=q^2$, $z_i=2p_i\cdot q/Q^2$ with $i=1,2$, and
+where the functions $\mathcal{F}$ are purposely reminiscent of the
+semi-inclusive DIS structure functions. This structure functions allow
+a collinear factorisation in terms of hard cross sections and
+collinear fragmentation functions (FFs):
+\begin{equation}
+\mathcal{F}_S(z_1,z_2,Q^2)=c_S(Q^2)\sum_{i,j=e^\pm,\gamma}\int_{z_1}^1\frac{dy_1}{y_1}\int_{z_2}^1\frac{dy_2}{y_2}C_{ij}^{(S)}\left(\frac{y_1}{z_1},
+  \frac{y_2}{z_2},\alpha(Q)\right)d_{i/e^-}(y_1,Q) d_{j/e^+}(y_2,Q)\,,\quad S=1,2,3\,,
+\end{equation}
+where $c_S$ is the appropriate electroweak charge (that also contains
+the vector-boson propagator) with $c_1=c_2$. Therefore, the fully
+differential cross section for inclusive Drell-Yan production in
+hadronic collisions reads:
+\begin{equation}
+\frac{d\sigma}{d^4p_1d^4p_2} = \int d^4q\,W_{\mu\nu}(P_1,P_2,q) L^{\mu\nu}(q,p_1,p_2)\,,
+\end{equation}
+where $W_{\mu\nu}$ and $P_{1,2}$ are the moment of the incoming
+hadrons. Notice that here we are assuming that there is non
+interference between in the leptonic and the hadronic
+parts. Importantly, one generally has $q\neq p_1+ p_2$ due to possible
+radiation that is eventually integrated over into the structure
+functions. The differential cross section with respect to the
+lepton-pair momentum $\overline{q}=p_1+p_2$ within a certain fiducial
+region defined by the function $\Theta(p_1,p_2)$ is computed as:
+\begin{equation}
+  \frac{d\sigma}{d^4\overline{q}}=\int d^4p_1d^4p_2\left[\int d^4q\,W_{\mu\nu}(P_1,P_2,q) L^{\mu\nu}(q,p_1,p_2)\right]\delta^{(4)}(\overline{q}-p_1-p_2)\Theta(p_1,p_2)\,.
+\end{equation}
+
+If no QED radiation, either hard or collinear, is allowed the hard
+cross sections reduce to:
+\begin{equation}
+C_{ij,\rm LO}^{(S)}(y_1,y_2,\alpha(Q))=\delta_{ie^-}\delta_{je^+}\delta(1-y_1) \delta(1-y_2)\,.
+\end{equation}
+and the relevant FFs to:
+\begin{equation}
+d_{e^{\pm}/e^\pm}(y,Q)=\delta(1-y)\,.
+\end{equation}
+such that the structure functions are all equal and become:
+\begin{equation}
+\mathcal{F}_{S,\rm LO}(z_1,z_2,Q^2)=\delta(1-z_1) \delta(1-z_2) = Q^4\delta(p_2^2) \delta(p_1^2) \theta(p_{1,0}) \theta(p_{2,0})\,.
+\end{equation}
+Plugging this identity into the leptonic tensor and requiring
+$q=p_1+p_2$ (see below), one finds:
+\begin{equation}
+L^{\mu\nu}(p_1+p_2,p_1,p_2)=Q^2\left[2c_1\left(-g^{\mu\nu}p_1\cdot p_2+p_1^\mu p_2^\nu+p_2^\mu p_1^\nu\right)+ic_3\varepsilon^{\mu\nu\rho\sigma}p_{1\rho}p_{2\sigma}\right]\delta(p_1^2)\delta(p_2^2)\theta(p_{1,0}) \theta(p_{2,0}) \,,
+\end{equation}
+that is the well-known leptonic tensor multiplied by the on-shell-ness
+condition for the leptons. Now the cross section differential in
+$q=p_1+p_2$ within a specific set of fiducial cuts on the outgoing
+leptons defined by the function $\Theta(p_1,p_2)$ is computed as:
+\begin{equation}
+  \frac{d\sigma}{d^4q}=\int d^4p_1d^4p_2W_{\mu\nu}(P_1,P_2,q) L^{\mu\nu}(q,p_1,p_2)\delta^{(4)}(q-p_1-p_2)\Theta(p_1,p_2)\,,
+\end{equation}
+where $W_{\mu\nu}$ is the hadronic tensor. Decomposing the hadronic
+tensor in terms of Lorentz structures and taking the contractions with
+the leptonic tensor produces the fiducial cross section discussed
+above.
+
+
 \newpage
 \bibliographystyle{ieeetr}
 \bibliography{bibliography}
