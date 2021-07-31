@@ -9,6 +9,7 @@
 #include "apfel/specialfunctions.h"
 
 #include <numeric>
+#include <iostream>
 
 namespace apfel
 {
@@ -57,17 +58,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  C2Vqqpdf::C2Vqqpdf(int const& nf):
+  C2nsppdf::C2nsppdf(int const& nf):
     Expression(),
     _nf(nf)
   {
-    /*
-        _A2 = 224 * CF * _nf * TR / 27.
-          + CA * CF * ( - 29.925925925925927 + 28 * zeta3 );
-    */
-    _A2 = - 3232. / 27. + 112 * zeta3 + 448. * _nf / 81.;
+    _A2 = 14.926669450170854 + 5.530864197530864*_nf;
   }
-  double C2Vqqpdf::Regular(double const& x) const
+  double C2nsppdf::Regular(double const& x) const
   {
     /*
         // Polylogs
@@ -170,25 +167,25 @@ namespace apfel
 
     return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
-  double C2Vqqpdf::Singular(double const& x) const
+  double C2nsppdf::Singular(double const& x) const
   {
     return _A2 / ( 1 - x );
   }
-  double C2Vqqpdf::Local(double const& x) const
+  double C2nsppdf::Local(double const& x) const
   {
-    const double ln1mx = log( 1 - x );
-    const double A1    = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 200 * zeta4 / 9
-                         + _nf * ( 352. / 243. + 20 * zeta2 / 9 + 56 * zeta3 / 27 );
-
-    return A1 + _A2 * ln1mx;
+    const double A1 = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 200 * zeta4 / 9
+                      + _nf * ( 352. / 243. + 20 * zeta2 / 9 + 56 * zeta3 / 27 );
+    return A1 + _A2 * log(1 - x);
   }
 
   //_________________________________________________________________________________
-  C2Vqqbpdf::C2Vqqbpdf():
-    Expression()
+  C2nsmpdf::C2nsmpdf(int const& nf):
+    Expression(),
+    _nf(nf)
   {
+    _A2 = 0;
   }
-  double C2Vqqbpdf::Regular(double const& x) const
+  double C2nsmpdf::Regular(double const& x) const
   {
     /*
         // Polylogs
@@ -285,6 +282,17 @@ namespace apfel
 
     return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
+  double C2nsmpdf::Singular(double const& x) const
+  {
+    return _A2 / ( 1 - x );
+  }
+  double C2nsmpdf::Local(double const& x) const
+  {
+    const double ln1mx = log( 1 - x );
+    const double A1    = 0;
+
+    return A1 + _A2 * ln1mx;
+  }
 
   //_________________________________________________________________________________
   C2pspdf::C2pspdf():
@@ -293,99 +301,18 @@ namespace apfel
   }
   double C2pspdf::Regular(double const& x) const
   {
-    /*
-        // Polylogs
-        double *xx  = new double{x};
-        int    *nw  = new int{3};
-        int    *wn1 = new int{-1};
-        int    *wn2 = new int{1};
-        double *H   = new double[363];
-        apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
-
-        // Defintions
-        const double x2 = x * x;
-        const double H0   = H[HPLogMap({0})];
-        const double H00  = H[HPLogMap({0,0})];
-        const double H10  = H[HPLogMap({1,0})];
-        const double H000 = H[HPLogMap({0,0,0})];
-
-        // Delete pointers
-        delete xx;
-        delete nw;
-        delete wn1;
-        delete wn2;
-        delete[] H;
-
-        return 2*CF*TR*((2*(1 - x)*(172 - 143*x + 136*x2))/(27.*x)
-    		    + (4*(21 - 30*x + 32*x2)*H0)/9. - (2*(3 + 3*x + 8*x2)*H00)/3.
-    		    + 4*(1 + x)*H000 - (8*(1 - x)*(2 - x + 2*x2)*(H10 + zeta2))/(3.*x));
-    */
-    /*
-      return 2*CF*TR*((2*(1 - x)*(172 - 143*x + 136*x2))/(27.*x)
-      + (4*(21 - 30*x + 32*x2)*log(x))/9. - ((3 + 3*x + 8*x2)*pow(log(x),2))/3.
-      + (2*(1 + x)*pow(log(x),3))/3. - (8*(1 - x)*(2 - x + 2*x2)*(-(log(1 - x)*log(x))
-      - dilog(x) + zeta2))/(3.*x));
-    */
-    const double x2   = x * x;
-    const double lx   = log(x);
-    const double lx2  = lx * lx;
-    const double lx3  = lx2 * lx;
-    const double l1x  = log(1-x);
-    const double l1x2 = l1x * l1x;
-    const double l1x3 = l1x2 * l1x;
-    const std::vector<double> fReg
-    {
-      l1x,
-      l1x2,
-      l1x3,
-      1 / x,
-      lx / x,
-      lx,
-      lx2,
-      lx3,
-      1,
-      x,
-      x2,
-      x * lx / ( 1 - x ),
-      x * lx,
-      x2 *lx,
-      x * lx2 / ( 1 - x ),
-      x * lx2,
-      ( lx / ( 1 - x ) + 1 ) * l1x,
-      lx * l1x,
-      x * lx * l1x,
-      ( 1 - x ) * l1x / x,
-      ( 1 - x ) * l1x,
-      ( 1 - x ) * ( 1 - x ) * l1x,
-      ( 1 - x ) * l1x2};
-
-    const std::vector<double> CoeffReg
-    {
-      0.,
-      0.,
-      0.,
-      688. / 81. - 32. * zeta2 / 9.,
-      0.,
-      8. / 3.,
-      - 2. / 3.,
-      4. / 9.,
-      - 603.924227035499,
-      - 4636.485211211568,
-      - 49.76555465398209,
-      - 5287.52982020046,
-      2269.612280502602,
-      - 58.06494427244658,
-      119.75596348356056,
-      - 129.79997791500733,
-      - 3369.724995744234,
-      427.8946185110229,
-      - 812.4665998422748,
-      - 600.6972087253562,
-      - 1469.0061919285804,
-      92.73615445019001,
-      - 0.021528986881156446};
-
-    return 2 * std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    const double x2  = x * x;
+    const double x3  = x * x2;
+    const double x4  = x * x3;
+    const double x5  = x * x4;
+    const double lx  = log(x);
+    const double lx2 = lx * lx;
+    const double lx3 = lx * lx2;
+    return -6.454036620285585 + 5.290345401178045/x + 0.1127566475934029*x4 - 0.0026328780648346224*x5
+      + 5.333333333333333*lx - 1.3333333333333333*lx2 + 0.8888888888888888*lx3
+      + 2*x3*(-3.6040303008016474 + 1.215623396613648*lx - 0.14346862340441793*lx2 - 0.0170296134428453*lx3)
+      + 2*x2*(3.5704568978264084 + 5.654771516227999*lx - 1.773058773058773*lx2 + 0.00030671710459053266*lx3)
+      + 2*x*(0.5603571563984158 - 5.333333333333333*lx - 0.6666666666666666*lx2 + 0.4444444444444444*lx3);
   }
 
   //_________________________________________________________________________________
@@ -395,115 +322,28 @@ namespace apfel
   }
   double C2qgpdf::Regular(double const& x) const
   {
-    /*
-        // Polylogs
-        double *xx  = new double{x};
-        int    *nw  = new int{3};
-        int    *wn1 = new int{-1};
-        int    *wn2 = new int{1};
-        double *H   = new double[363];
-        apf_hplog_(xx, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
-
-        // Defintions
-        const double x2 = x * x;
-        const double x3 = x * x2;
-        const double Hm1 = H[HPLogMap({-1})];
-        const double H0  = H[HPLogMap({0})];
-        const double H1  = H[HPLogMap({1})];
-
-        const double Hm10 = H[HPLogMap({-1,0})];
-        const double H00  = H[HPLogMap({0,0})];
-        const double H2   = H[HPLogMap({2})];
-        const double H10  = H[HPLogMap({1,0})];
-        const double H11  = H[HPLogMap({1,1})];
-
-        const double Hm20   = H[HPLogMap({-2,0})];
-        const double H000   = H[HPLogMap({0,0,0})];
-        const double H12    = H[HPLogMap({1,2})];
-        const double H20    = H[HPLogMap({2,0})];
-        const double H21    = H[HPLogMap({2,1})];
-        const double H100   = H[HPLogMap({1,0,0})];
-        const double H110   = H[HPLogMap({1,1,0})];
-        const double Hm1m10 = H[HPLogMap({-1,-1,0})];
-        const double Hm100  = H[HPLogMap({-1,0,0})];
-        const double H111   = H[HPLogMap({1,1,1})];
-
-        // Delete pointers
-        delete xx;
-        delete nw;
-        delete wn1;
-        delete wn2;
-        delete[] H;
-
-        return 2*(CA*TR*((-2*(-172 + 315*x - 387*x2 + 298*x3))/(27.*x) + (4*(21 - 30*x + 68*x2)*H0)/9.
-    		     + 2*x*(-3 + 4*x)*H1 + 8*x*(1 + x)*Hm10 - (2*(3 - 12*x + 44*x2)*H00)/3.
-    		     - (8*(1 - x)*(2 - x + 11*x2)*H10)/(3.*x) - 8*(1 - x)*x*H11 + 4*(1 + 2*x)*H000
-    		     + 4*(1 - 2*x + 2*x2)*(H12 + H110 - H111) + (8*(-2 + 3*x - 9*x2 + 11*x3)*zeta2)/(3.*x)
-    		     + 4*(1 + 2*x + 2*x2)*(2*Hm20 - 2*Hm1m10 + Hm100 - Hm1*zeta2) - 8*x*(2*H20 - zeta3))
-    	      + CF*TR*(-13 + 75*x - 72*x2 + (8 + 15*x - 8*x2)*H0 - 2*x*(-3 + 4*x)*H1 + (1 + 12*x - 8*x2)*H00
-    		       - 2*(1 - 2*x + 4*x2)*H000 + 4*(1 - x)*x*(2*H2 + 2*H10 + 2*H11 - 3*zeta2)
-    		       + 4*(1 - 2*x + 2*x2)*(H21 - H100 + H111 + 7*zeta3)));
-    */
     const double x2   = x * x;
+    const double x3   = x * x2;
+    const double x4   = x * x3;
+    const double x5   = x * x4;
+    const double xb   = 1 - x;
+    const double xb2  = xb * xb;
+    const double xb3  = xb * xb2;
     const double lx   = log(x);
     const double lx2  = lx * lx;
-    const double lx3  = lx2 * lx;
-    const double l1x  = log(1-x);
+    const double lx3  = lx * lx2;
+    const double l1x  = log(1 - x);
     const double l1x2 = l1x * l1x;
-    const double l1x3 = l1x2 * l1x;
-    const std::vector<double> fReg
-    {
-      l1x,
-      l1x2,
-      l1x3,
-      1 / x,
-      lx / x,
-      lx,
-      lx2,
-      lx3,
-      1,
-      x,
-      x2,
-      x * lx / ( 1 - x ),
-      x * lx,
-      x2 *lx,
-      x * lx2 / ( 1 - x ),
-      x * lx2,
-      ( lx / ( 1 - x ) + 1 ) * l1x,
-      lx * l1x,
-      x * lx * l1x,
-      ( 1 - x ) * l1x / x,
-      ( 1 - x ) * l1x,
-      ( 1 - x ) * ( 1 - x ) * l1x,
-      ( 1 - x ) * l1x2};
-
-    const std::vector<double> CoeffReg
-    {
-      - 5. / 3.,
-        0.,
-        5. / 9.,
-        172. / 9. - 8. * zeta2,
-        0.,
-        34. / 3.,
-        - 7. / 6.,
-        7. / 9.,
-        11804.917158263002,
-        43420.91122559322,
-        - 3972.3493167408856,
-        51274.90217179903,
-        - 11322.606629412014,
-        1490.8267572457225,
-        365.38010578193774,
-        - 402.6162297779727,
-        21027.101170409886,
-        19269.1080641264,
-        11357.814388977074,
-        11798.406220601846,
-        29476.38189858057,
-        - 227.4273932698467,
-        15.408922558612357};
-
-    return 2 * std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    const double l1x3 = l1x * l1x2;
+    return 2*(-52.398221645596344 + 5.9516385763253/x - 16.769336143308745*x4 + 4.082696945337621*x5
+	      - 1.6666666666666667*l1x + 0.5555555555555556*l1x3
+	      + xb3*(-54.8176444640494*l1x + 2.5205581395348835*l1x2 - 2.916343891402715*l1x3)
+	      + xb*(58.909159327066284 + 5.*l1x - 4.666666666666667*l1x2 - 1.1111111111111112*l1x3)
+	      + xb2*(-15.064441915693648*l1x + 2.7222338715314183*l1x2 + 0.9826539787202158*l1x3)
+	      + 11.333333333333334*lx - 1.1666666666666667*lx2 + 0.7777777777777778*lx3
+	      + x2*(204.80522133400248 - 24.73187968628803*lx - 20.465598027127005*lx2 - 1.0086275130599969*lx3)
+	      + x3*(-103.13731364576645 + 21.54247493927264*lx + 15.293497059840886*lx2 - 0.5403004572175049*lx3)
+	      + x*(-58.00615151163759 + 6.666666666666667*lx + 11.666666666666666*lx2 + 2.4444444444444446*lx3));
   }
 
   //_________________________________________________________________________________
@@ -515,65 +355,33 @@ namespace apfel
   double C2gqpdf::Regular(double const& x) const
   {
     const double x2   = x * x;
+    const double x3   = x * x2;
+    const double x4   = x * x3;
+    const double x5   = x * x4;
+    const double x6   = x * x5;
+    const double xb   = 1 - x;
+    const double xb2  = xb * xb;
+    const double xb3  = xb * xb2;
     const double lx   = log(x);
     const double lx2  = lx * lx;
-    const double lx3  = lx2 * lx;
-    const double l1x  = log(1-x);
+    const double lx3  = lx * lx2;
+    const double l1x  = log(1 - x);
     const double l1x2 = l1x * l1x;
-    const double l1x3 = l1x2 * l1x;
-    const std::vector<double> fReg
-    {
-      l1x,
-      l1x2,
-      l1x3,
-      1 / x,
-      lx / x,
-      lx,
-      lx2,
-      lx3,
-      1,
-      x,
-      x2,
-      x * lx / ( 1 - x ),
-      x * lx,
-      x2 *lx,
-      x * lx2 / ( 1 - x ),
-      x * lx2,
-      ( lx / ( 1 - x ) + 1 ) * l1x,
-      lx * l1x,
-      x * lx * l1x,
-      ( 1 - x ) * l1x / x,
-      ( 1 - x ) * l1x,
-      ( 1 - x ) * ( 1 - x ) * l1x,
-      ( 1 - x ) * l1x2};
-
-    const std::vector<double> CoeffReg
-    {
-      - 184. / 9. + 32. * _nf / 27.,
-        - 44. / 9. + 8. * _nf / 9.,
-        - 40. / 27.,
-        - 12640. / 27. + 896. * _nf / 81. + 352. * zeta2 / 3. + 192. * zeta3,
-        0.,
-        - 200. / 3.,
-        112. / 9.,
-        - 112. / 27.,
-        25387.766684267783 - 155.5078210719438 * _nf,
-        128641.80191589122 - 529.7740230354465 * _nf,
-        - 4691.90206636766 + 33.2493657381115 * _nf,
-        149304.47081486747 - 643.5386512087849 * _nf,
-        - 49319.02516115282 + 160.4570922525814 * _nf,
-        3077.798040737399 - 15.139140368040819 * _nf,
-        - 1297.381684493681 + 2.266359003377411 * _nf,
-        1379.187692679483 - 2.2865882004537834 * _nf,
-        79157.51026314059 - 313.45913506070985 * _nf,
-        20294.80059647656 - 169.33020796238313 * _nf,
-        27727.02916158908 - 115.18065110064754 * _nf,
-        25431.533693585556 - 138.52016675095615 * _nf,
-        62304.61943144707 - 297.70931938249043 * _nf,
-        - 1802.796656932475 + 4.76862827955143 * _nf,
-        5.352770139788647 + 0.9080131334622416 * _nf};
-
-    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    const double l1x3 = l1x * l1x2;
+    return 25.143090689292322 - 44.347625564647444/x - 72.93175074183976*x4 + 7.84991423670669*x5 - 1.2441960447119518*x6
+      - 20.444444444444443*l1x - 4.888888888888889*l1x2 - 1.4814814814814814*l1x3
+      + xb2*(-43.856670341786106*l1x - 25.43354037267081*l1x2 - 2.727390180878553*l1x3)
+      + xb*(-68.91009952240897 - 41.77777777777778*l1x - 21.77777777777778*l1x2 - 1.4814814814814814*l1x3)
+      + xb3*(101.27627627627628*l1x - 26.974308300395258*l1x2 + 8.67537122375832*l1x3)
+      + _nf*(-25.48148148148148 + 11.061728395061728/x + 32.004682843763305*x - 25.001344086021504*x2 + 10.776111408677021*x3
+	     - 0.7109533468559838*x4 - 0.06066734074823053*x5 - 0.0201765447667087*x6 + 1.1851851851851851*l1x + 0.8888888888888888*l1x2
+	     + xb3*(3.6768968456947997*l1x + 0.31933701657458563*l1x2)
+	     + xb*(8.493827160493828 + 4.7407407407407405*l1x + 0.8888888888888888*l1x2)
+	     + xb2*(6.599383667180278*l1x + 1.8374578177727785*l1x2))
+      - 66.66666666666667*lx + 12.444444444444445*lx2 - 4.148148148148148*lx3
+      + x*(35.77818494077965 - 39.111111111111114*lx + 9.333333333333334*lx2 - 3.259259259259259*lx3)
+      + x2*(-86.2200328407225 + 2.688618925831202*lx + 0.1952662721893491*lx2 + 0.001443001443001443*lx3)
+      + x3*(124.8205078876491 + 67.72398685651697*lx + 11.018819503849445*lx2 + 2.7276657060518734*lx3);    
   }
 
   //_________________________________________________________________________________
@@ -581,70 +389,34 @@ namespace apfel
     Expression(),
     _nf(nf)
   {
-    _A2 = - 808. / 3. + 252. * zeta3 + 112. * _nf / 9.;
+    _A2 = 33.585006262884406 + 12.444444444444445*_nf;
   }
   double C2ggpdf::Regular(double const& x) const
   {
     const double x2   = x * x;
+    const double x3   = x * x2;
+    const double x4   = x * x3;
+    const double x5   = x * x4;
+    const double x6   = x * x5;
+    const double xb   = 1 - x;
+    const double xb2  = xb * xb;
+    const double xb3  = xb * xb2;
     const double lx   = log(x);
     const double lx2  = lx * lx;
-    const double lx3  = lx2 * lx;
-    const double l1x  = log(1-x);
+    const double lx3  = lx * lx2;
+    const double l1x  = log(1 - x);
     const double l1x2 = l1x * l1x;
-    const double l1x3 = l1x2 * l1x;
-    const std::vector<double> fReg
-    {
-      l1x,
-      l1x2,
-      l1x3,
-      1 / x,
-      lx / x,
-      lx,
-      lx2,
-      lx3,
-      1,
-      x,
-      x2,
-      x * lx / ( 1 - x ),
-      x * lx,
-      x2 *lx,
-      x * lx2 / ( 1 - x ),
-      x * lx2,
-      ( lx / ( 1 - x ) + 1 ) * l1x,
-      lx * l1x,
-      x * lx * l1x,
-      ( 1 - x ) * l1x / x,
-      ( 1 - x ) * l1x,
-      ( 1 - x ) * ( 1 - x ) * l1x,
-      ( 1 - x ) * l1x2};
-
-    const std::vector<double> CoeffReg
-    {
-      6. - 2. * _nf,
-      - 36.,
-      0.,
-      - 3160. / 3. + 226. * _nf / 9. + 264. * zeta2 + 432. * zeta3,
-      0.,
-      - 293. + 74. * _nf / 3.,
-      3. + 6. * _nf,
-      - 12. + 8. * _nf / 9.,
-      28350.905925013587 - 1165.597999487027 * _nf,
-      204106.38400427837 - 9112.918558788755 * _nf,
-      - 3654.296204682914 - 202.82515955533333 * _nf,
-      228606.3613205384 - 10439.786162275559 * _nf,
-      - 92515.7827039022 + 4572.107887712472 * _nf,
-      4598.901824247715 - 82.57482307730146 * _nf,
-      -5961.66732755631 + 242.87579888233213 * _nf,
-      6430.443013955799 - 258.29777371318767 * _nf,
-      144229.2381370356 - 6707.548773597168 * _nf,
-      - 11622.452033932963 + 958.7180437906424 * _nf,
-      35791.91490687339 - 1542.1541360841081 * _nf,
-      28788.30003557479 - 1171.3757772648048 * _nf,
-      67492.96763028382 - 2764.3635575309518 * _nf,
-      - 3881.2814494298837 + 176.34274530829245 * _nf,
-      18.352295609756112 - 0.04234942977167983 * _nf};
-
-    return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
+    return -85.34649558996301 - 99.78215752045685/x - 756.6756476683938*x4 + 160.2193044712562*x5
+      - 23.03903743315508*x6 + 6.*l1x - 36.*l1x2
+      + xb2*(-16.305959302325583*l1x - 67.42499020759891*l1x2)
+      + xb3*(4.982017982017982*l1x - 3.1174289245982694*l1x2)
+      + xb*(-352.04761388076736 - 6.*l1x + 18.*l1x2) - 293.*lx + 3.*lx2 - 12.*lx3
+      + x3*(2428.998643147897 - 477.5598548972189*lx + 433.57529794149514*lx2 - 51.513090785447126*lx3)
+      + x*(221.8731904043225 - 269.*lx - 33.*lx2 - 24.*lx3)
+      + x2*(-1749.3975515463917 - 706.4640151515151*lx - 97.54483541430193*lx2 - 4.948320413436693*lx3)
+      + _nf*(-48.44444444444444 + 25.11111111111111/x - 29.111113251155626*x2 - 2.*l1x + xb*(54.22222222222222 + 2.*l1x)
+	     + x3*(1.343964992399878e-6 - 1.2336221242726255e-6*lx) + 24.666666666666668*lx + 6.*lx2 + 0.8888888888888888*lx3
+	     + x*(36. + 22.666666666666668*lx + 3.3333333333333335*lx2 + 0.8888888888888888*lx3));
   }
   double C2ggpdf::Singular(double const& x) const
   {
@@ -652,16 +424,12 @@ namespace apfel
   }
   double C2ggpdf::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
-    const double A1    = - 112. - 201. * zeta2 / 2. + 154. * zeta3 + 225. * zeta4 / 4.
-                         + _nf * ( 548. / 27. + 5. * zeta2 - 28. * zeta3 / 3. )
-                         - 56. * _nf * _nf  / 81.;
-
-    return A1 + _A2 * ln1mx;
+    const double A1 = -62.104684476395086 + 7.760195141578497*_nf;
+    return A1 + _A2 * log(1 - x);
   }
 
   //_________________________________________________________________________________
-  C3Vqqpdf::C3Vqqpdf(int const& nf):
+  C3nsppdf::C3nsppdf(int const& nf):
     Expression(),
     _nf(nf)
   {
@@ -676,7 +444,7 @@ namespace apfel
           + CA2*CF*(-407.4471879286694 + (6392*zeta2)/81. + (12328*zeta3)/27.
                     - (176*zeta2*zeta3)/3. + (154*zeta4)/3. - 192*zeta5);
   }
-  double C3Vqqpdf::Regular(double const& x) const
+  double C3nsppdf::Regular(double const& x) const
   {
     // Polylogs
     double *xx  = new double{x};
@@ -942,11 +710,11 @@ namespace apfel
                                    - 3*H100*zeta2 + 38*H110*zeta2 - 40*Hm2*zeta3 - 136*H10*zeta3 - 72*H11*zeta3 + 18*H1*zeta4)
                      - 8*(381 + 355*x2)*zeta5)/(3.*(1 - x)));
   }
-  double C3Vqqpdf::Singular(double const& x) const
+  double C3nsppdf::Singular(double const& x) const
   {
     return _A2 / ( 1 - x );
   }
-  double C3Vqqpdf::Local(double const& x) const
+  double C3nsppdf::Local(double const& x) const
   {
     const double CF2 = CF * CF;
     const double CF3 = CF * CF2;
@@ -970,12 +738,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  C3Vqqbpdf::C3Vqqbpdf(int const& nf):
+  C3nsmpdf::C3nsmpdf(int const& nf):
     Expression(),
     _nf(nf)
   {
   }
-  double C3Vqqbpdf::Regular(double const& x) const
+  double C3nsmpdf::Regular(double const& x) const
   {
     // Polylogs
     double *xx  = new double{x};
@@ -1894,6 +1662,37 @@ namespace apfel
                                             + 180*H11110 - 240*H11111 - 24*H1m2*zeta2 - 74*H12*zeta2 - 68*H100*zeta2
                                             - 38*H110*zeta2 + 46*H111*zeta2 - 80*H10*zeta3 - 20*H11*zeta3 + H1*zeta4))/3.
                      + (4*(-49 - 974*x + 304*x2)*zeta5)/3.));
+  }
+
+  //_________________________________________________________________________________
+  C3gqpdf::C3gqpdf(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3gqpdf::Regular(double const&) const
+  {
+    return 0;
+  }
+
+  //_________________________________________________________________________________
+  C3ggpdf::C3ggpdf(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3ggpdf::Regular(double const&) const
+  {
+    return 0;
+  }
+  double C3ggpdf::Singular(double const& x) const
+  {
+    return _A2 / ( 1 - x );
+  }
+  double C3ggpdf::Local(double const& x) const
+  {
+    const double A1 = 0;
+    return A1 + _A2 * log(1 - x);
   }
 
   //_________________________________________________________________________________

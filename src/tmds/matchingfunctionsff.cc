@@ -60,14 +60,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  C2Vqqff::C2Vqqff(int const& nf):
+  C2nspff::C2nspff(int const& nf):
     Expression(),
     _nf(nf)
   {
     _A2 = - 3232. / 27. + 112 * zeta3 + 448. * _nf / 81.;
-    _A3 = 0.;
   }
-  double C2Vqqff::Regular(double const& x) const
+  double C2nspff::Regular(double const& x) const
   {
     const double x2   = x * x;
     const double lx   = log(x);
@@ -134,28 +133,24 @@ namespace apfel
 
     return std::inner_product(fReg.begin(), fReg.end(), CoeffReg.begin(), 0.);
   }
-  double C2Vqqff::Singular(double const& x) const
+  double C2nspff::Singular(double const& x) const
   {
-    const double fA2 = 1 / ( 1 - x );
-    const double fA3 = fA2 * log(1-x);
-
-    return _A2 * fA2 + _A3 * fA3;
+    return _A2 / ( 1 - x );
   }
-  double C2Vqqff::Local(double const& x) const
+  double C2nspff::Local(double const& x) const
   {
-    const double ln1mx  = log(1-x);
-    const double ln1mx2 = ln1mx * ln1mx;
-    const double A1     = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 2360 * zeta4 / 9
-                          + _nf * ( 352. / 243. + 20. * zeta2 / 9 + 56 * zeta3 / 27 );
+    const double ln1mx = log(1-x);
+    const double A1    = - 2416. / 81. - 134 * zeta2 / 3 + 448 * zeta3 / 9 + 2360 * zeta4 / 9
+                         + _nf * ( 352. / 243. + 20. * zeta2 / 9 + 56 * zeta3 / 27 );
 
-    return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
+    return A1 + _A2 * ln1mx;
   }
 
   //_________________________________________________________________________________
-  C2Vqqbff::C2Vqqbff()
+  C2nsmff::C2nsmff()
   {
   }
-  double C2Vqqbff::Regular(double const& x) const
+  double C2nsmff::Regular(double const& x) const
   {
     const double x2   = x * x;
     const double lx   = log(x);
@@ -449,7 +444,6 @@ namespace apfel
     _nf(nf)
   {
     _A2 = - 808. / 3. + 252 * zeta3 + 112. * _nf / 9.;
-    _A3 = 0.;
   }
   double C2ggff::Regular(double const& x) const
   {
@@ -520,19 +514,125 @@ namespace apfel
   }
   double C2ggff::Singular(double const& x) const
   {
-    const double fA2 = 1 / ( 1 - x );
-    const double fA3 = fA2 * log(1-x);
-
-    return _A2 * fA2 + _A3 * fA3;
+    return _A2 / ( 1 - x );
   }
   double C2ggff::Local(double const& x) const
   {
-    const double ln1mx  = log(1-x);
-    const double ln1mx2 = ln1mx * ln1mx;
-    const double A1     = - 112. - 201 * zeta2 / 2 + 154 * zeta3 + 2385 * zeta4 / 4
-                          + _nf * ( 548. / 27. + 5 * zeta2 - 28 * zeta3 / 3 )
-                          - 56.  *_nf * _nf / 81.;
+    const double ln1mx = log(1-x);
+    const double A1    = - 112. - 201 * zeta2 / 2 + 154 * zeta3 + 2385 * zeta4 / 4
+                         + _nf * ( 548. / 27. + 5 * zeta2 - 28 * zeta3 / 3 )
+                         - 56.  *_nf * _nf / 81.;
 
-    return A1 + _A2 * ln1mx + _A3 * ln1mx2 / 2;
+    return A1 + _A2 * ln1mx;
+  }
+
+  //_________________________________________________________________________________
+  C3nspff::C3nspff(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+    _A2 = 0;
+  }
+  double C3nspff::Regular(double const&) const
+  {
+    return 0;
+  }
+  double C3nspff::Singular(double const& x) const
+  {
+    return _A2 / ( 1 - x );
+  }
+  double C3nspff::Local(double const& x) const
+  {
+    const double ln1mx = log( 1 - x );
+    const double A1    = 0;
+
+    return A1 + _A2 * ln1mx;
+  }
+
+  //_________________________________________________________________________________
+  C3nsmff::C3nsmff(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3nsmff::Regular(double const&) const
+  {
+    return 0;
+  }
+  double C3nsmff::Singular(double const& x) const
+  {
+    return _A2 / ( 1 - x );
+  }
+  double C3nsmff::Local(double const& x) const
+  {
+    const double ln1mx = log( 1 - x );
+    const double A1    = 0;
+
+    return A1 + _A2 * ln1mx;
+  }
+
+  //_________________________________________________________________________________
+  C3psff::C3psff(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3psff::Regular(double const&) const
+  {
+    return 0;
+  }
+
+  //_________________________________________________________________________________
+  C3pvff::C3pvff():
+    Expression()
+  {
+  }
+  double C3pvff::Regular(double const&) const
+  {
+    return 0;
+  }
+
+  //_________________________________________________________________________________
+  C3qgff::C3qgff(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3qgff::Regular(double const&) const
+  {
+    return 0;
+  }
+
+  //_________________________________________________________________________________
+  C3gqff::C3gqff(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3gqff::Regular(double const&) const
+  {
+    return 0;
+  }
+
+  //_________________________________________________________________________________
+  C3ggff::C3ggff(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C3ggff::Regular(double const&) const
+  {
+    return 0;
+  }
+  double C3ggff::Singular(double const& x) const
+  {
+    return _A2 / ( 1 - x );
+  }
+  double C3ggff::Local(double const& x) const
+  {
+    const double ln1mx = log( 1 - x );
+    const double A1    = 0;
+
+    return A1 + _A2 * ln1mx;
   }
 }
