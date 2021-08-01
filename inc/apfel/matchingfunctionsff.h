@@ -105,8 +105,13 @@ namespace apfel
   class C2nsmff: public Expression
   {
   public:
-    C2nsmff();
+    C2nsmff(int const& nf);
     double Regular(double const& x) const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
   };
 
   /**
