@@ -370,12 +370,12 @@ namespace apfel
     const Operator O3pvpdf{g, C3pvpdf{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O3pspdf{g, C3pspdf{nf}, IntEps};
-        const Operator O3qgpdf{g, C3qgpdf{nf}, IntEps};
-        const Operator O3gqpdf{g, C3gqpdf{nf}, IntEps};
-        const Operator O3ggpdf{g, C3ggpdf{nf}, IntEps};
-        const Operator O3nsppdf = Operator{g, C2nsppdf{nf}, IntEps} - O3pspdf;
-        const Operator O3nsmpdf = Operator{g, C3nsmpdf{nf}, IntEps} - O3pvpdf;
+        const Operator O3pspdf {g, C3pspdf{nf},  IntEps};
+        const Operator O3qgpdf {g, C3qgpdf{nf},  IntEps};
+        const Operator O3gqpdf {g, C3gqpdf{nf},  IntEps};
+        const Operator O3ggpdf {g, C3ggpdf{nf},  IntEps};
+        const Operator O3nsppdf{g, C2nsppdf{nf}, IntEps};
+        const Operator O3nsmpdf{g, C3nsmpdf{nf}, IntEps};
         const Operator O3qqpdf  = O3nsppdf + nf * O3pspdf;
         const Operator O3nsvpdf = O3nsmpdf + nf * O3pvpdf;
         std::map<int, Operator> OM;
@@ -394,12 +394,12 @@ namespace apfel
     const Operator O3pvff{g, C3pvff{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O3psff{g, C3psff{nf}, IntEps};
-        const Operator O3qgff{g, C3qgff{nf}, IntEps};
-        const Operator O3gqff{g, C3gqff{nf}, IntEps};
-        const Operator O3ggff{g, C3ggff{nf}, IntEps};
-        const Operator O3nspff = Operator{g, C2nspff{nf}, IntEps} - O3psff;
-        const Operator O3nsmff = Operator{g, C3nsmff{nf}, IntEps} - O3pvff;
+        const Operator O3psff {g, C3psff{nf},  IntEps};
+        const Operator O3qgff {g, C3qgff{nf},  IntEps};
+        const Operator O3gqff {g, C3gqff{nf},  IntEps};
+        const Operator O3ggff {g, C3ggff{nf},  IntEps};
+        const Operator O3nspff{g, C2nspff{nf}, IntEps};
+        const Operator O3nsmff{g, C3nsmff{nf}, IntEps};
         const Operator O3qqff  = O3nspff + nf * O3psff;
         const Operator O3nsvff = O3nsmff + nf * O3pvff;
         std::map<int, Operator> OM;
