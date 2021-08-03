@@ -165,10 +165,10 @@ namespace apfel
     const Operator O2qgpdf{g, C2qgpdf{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O2nsmpdf{g, C2nsmpdf{nf}, IntEps};
         const Operator O2gqpdf {g, C2gqpdf{nf},  IntEps};
         const Operator O2ggpdf {g, C2ggpdf{nf},  IntEps};
         const Operator O2nsppdf{g, C2nsppdf{nf}, IntEps};
+        const Operator O2nsmpdf{g, C2nsmpdf{nf}, IntEps};
         const Operator O2qqpdf = O2nsppdf + nf * O2pspdf;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O2nsppdf});
@@ -274,10 +274,10 @@ namespace apfel
     const Operator O2qgff{g, C2qgff{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O2nsmff{g, C2nsmff{nf}, IntEps};
         const Operator O2gqff {g, C2gqff{nf},  IntEps};
         const Operator O2ggff {g, C2ggff{nf},  IntEps};
         const Operator O2nspff{g, C2nspff{nf}, IntEps};
+        const Operator O2nsmff{g, C2nsmff{nf}, IntEps};
         const Operator O2qqff = O2nspff + nf * O2psff;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O2nspff});
