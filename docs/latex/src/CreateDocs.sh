@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Declare an array of string with the document names
-declare -a DocArray=("IntegralStucture" "Interpolation" "Statistics" "StructureFunctions" "CCDIS" "Transversity" "TMDEvolution" "DrellYanTMD" "SIDISTMD"  "GPDs" "MatchingConditions" "MSbarMass" "EvolutionCode" "EvolDIS" "SIDISCollinear")
+declare -a DocArray=("IntegralStucture" "Interpolation" "Statistics" "StructureFunctions" "CCDIS" "Transversity" "TMDEvolution" "DrellYanTMD" "SIDISTMD"  "GPDs" "MatchingConditions" "MSbarMass" "EvolutionCode" "EvolDIS" "SIDISCollinear" "JetTMD")
 
 # Produce pdfs
 for doc in ${DocArray[@]}; do
