@@ -232,7 +232,7 @@ namespace apfel
   const double Vtd2 = Vtd * Vtd;
   const double Vts2 = Vts * Vts;
   const double Vtb2 = Vtb * Vtb;
-  const std::vector<double> CMK  = {Vud,  Vus,  Vub,  Vcd,  Vcs,  Vcb,  Vtd,  Vts,  Vtb};
+  const std::vector<double> CKM  = {Vud,  Vus,  Vub,  Vcd,  Vcs,  Vcb,  Vtd,  Vts,  Vtb};
   const std::vector<double> CKM2 = {Vud2, Vus2, Vub2, Vcd2, Vcs2, Vcb2, Vtd2, Vts2, Vtb2};
   ///@}
   ///@}

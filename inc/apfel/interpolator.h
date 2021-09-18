@@ -125,15 +125,16 @@ namespace apfel
      * @param sg: the SubGrid over which the interpolant is defined
      * @return the lower and upper bounds of the grid index
      */
-    virtual std::array<int,2> SumBounds(double const& x, SubGrid const& sg) const = 0;
+    virtual std::array<int, 2> SumBounds(double const& x, SubGrid const& sg) const = 0;
 
     /**
      * @name Getters
      */
     ///@{
-    Grid                             const& GetGrid()                  const { return _grid; }                  //!< The grid
-    std::vector<std::vector<double>> const& GetDistributionSubGrid()   const { return _distributionSubGrid; }   //!< The distribution on the subgrids
-    std::vector<double>              const& GetDistributionJointGrid() const { return _distributionJointGrid; } //!< The distribution on the joint grid
+    Grid                             const& GetGrid()                  const { return _grid; }                    //!< The grid
+    std::vector<std::vector<double>> const& GetDistributionSubGrid()   const { return _distributionSubGrid; }     //!< The distribution on the subgrids
+    std::vector<double>              const& GetDistributionJointGrid() const { return _distributionJointGrid; }   //!< The distribution on the joint grid
+    void                                    Print()                    const { std::cout << *this << std::endl; } //!< Print the Interpolator object
     ///@}
 
   protected:

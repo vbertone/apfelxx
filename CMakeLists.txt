@@ -56,6 +56,12 @@ add_library(apfelxx SHARED ${source_files})
 # define libraries to be linked
 target_link_libraries(apfelxx)
 
+# pybind11
+find_package(pybind11 REQUIRED)
+pybind11_add_module(apfelpy pywrap/pywrap.cxx)
+target_link_libraries(apfelpy PRIVATE apfelxx)
+install(TARGETS apfelpy LIBRARY DESTINATION lib)
+
 # install
 install(TARGETS apfelxx
            RUNTIME DESTINATION bin
