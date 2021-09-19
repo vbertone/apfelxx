@@ -205,4 +205,65 @@ PYBIND11_MODULE(apfelpy, m) {
     .def(py::self + py::self)
     .def(py::self - py::self)
     .def(py::self * py::self);
+
+  // Wrappers of "expression.h"
+  py::class_<apfel::Expression>(m, "Expression")
+    .def(py::init<double const&>(), "eta"_a = 1)
+    .def("Regular", &apfel::Expression::Regular)
+    .def("Singular", &apfel::Expression::Singular)
+    .def("Local", &apfel::Expression::Local)
+    .def("LocalPV", &apfel::Expression::LocalPV)
+    .def("SetExternalVariable", &apfel::Expression::SetExternalVariable, "extvar"_a)
+    .def("eta", &apfel::Expression::eta);
+
+  py::class_<apfel::Identity, apfel::Expression>(m, "Identity")
+    .def(py::init<>())
+    .def("Local", &apfel::Expression::Local);
+
+  py::class_<apfel::Null, apfel::Expression>(m, "Null")
+    .def(py::init<>());
+
+  // Wrappers of "matrix.h"
+  py::class_<apfel::matrix<T>>(m, "matrix");
+  //.def(py::init<apfel::Operator const&>(), "g"_a)
+
+/*  
+    matrix(size_t const& row = 0, size_t const& col = 0);
+    void resize(size_t const& row, size_t const& col, T const& v = 0);
+    void set(T const& v);
+    size_t const& size(size_t const& dim) const { return _size[dim]; }
+    T&       operator()(size_t const& i, size_t const& j)       { return _data[i*_size[1]+j]; }
+    T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
+*/
+
+  // Wrappers of "operator.h"
+  py::class_<apfel::Operator>(m, "Operator")
+    .def(py::init<apfel::Operator const&>(), "g"_a)
+    .def(py::init<apfel::Grid const&>(), "g"_a)
+    .def(py::init<apfel::Grid const&, apfel::Expression const&, double const&>(), "g"_a, "expr"_a, "eps"_a)
+;
+/*
+    Operator(Operator const&) = default;
+    Operator(Grid const& gr);
+    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
+    Distribution operator *= (Distribution const& d) const;         //!< this *= Distribution
+    Operator& operator *= (Operator const& o);                      //!< this *= Operator
+    Operator& operator  = (Operator const& o);                      //!< this  = Operator
+    Operator& operator *= (double const& s);                        //!< this *= Scalar
+    Operator& operator *= (std::function<double(double const&)> f); //!< This *= Function
+    Operator& operator /= (double const& s);                        //!< this /= Scalar
+    Operator& operator += (Operator const& o);                      //!< this += Operator
+    Operator& operator -= (Operator const& o);                      //!< this -= Operator
+    Grid const& GetGrid() const { return _grid; }
+    std::vector<matrix<double>> GetOperator() const { return _Operator; }
+  Distribution operator * (Operator lhs, Distribution const& rhs);                //!< Operator*Distribution
+  Operator     operator * (Operator lhs, Operator const& rhs);                    //!< Operator*Operator
+  Operator     operator * (double const& s, Operator rhs);                        //!< Scalar*Operator
+  Operator     operator * (Operator lhs, double const& s);                        //!< Operator*Scalar
+  Operator     operator * (std::function<double(double const&)> f, Operator rhs); //!< function*Operator
+  Operator     operator * (Operator lhs, std::function<double(double const&)> f); //!< Operator*function
+  Operator     operator / (Operator lhs, double const& s);                        //!< Operator/Scalar
+  Operator     operator + (Operator lhs, Operator const& rhs);                    //!< Operator+Operator
+  Operator     operator - (Operator lhs, Operator const& rhs);                    //!< Operator-Operator
+*/
 }

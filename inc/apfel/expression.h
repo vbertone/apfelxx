@@ -16,6 +16,8 @@ namespace apfel
   class Expression
   {
   public:
+    virtual ~Expression() = default;
+
     /**
      * @name Constructors
      * List of constructors.
