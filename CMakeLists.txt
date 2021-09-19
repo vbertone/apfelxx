@@ -59,7 +59,7 @@ target_link_libraries(apfelxx)
 # pybind11
 find_package(pybind11 QUIET)
 if (pybind11_FOUND)
-   pybind11_add_module(apfelpy pywrap/pywrap.cxx)
+   pybind11_add_module(apfelpy pywrap/pywrap.cc)
    target_link_libraries(apfelpy PRIVATE apfelxx)
    install(TARGETS apfelpy LIBRARY DESTINATION lib)
 else (pybind11_FOUND)
