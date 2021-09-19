@@ -9,6 +9,7 @@
 #include "apfel/tools.h"
 
 #include <functional>
+#include <iostream>
 
 namespace apfel
 {
@@ -168,6 +169,11 @@ namespace apfel
     DoubleObject<T, U>& MultiplyBy(std::function<double(double const&)> const& fx, std::function<double(double const&)> const& fz);
 
     /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
+    /**
      * @name Binary operators
      */
     ///@{
@@ -199,9 +205,6 @@ namespace apfel
 
   template<class T, class U>
   DoubleObject<T, U> operator * (DoubleObject<T, U> lhs, double const& s) { return lhs *= s; }
-
-  template<class T, class U>
-  DoubleObject<T, U> operator / (double const& s, DoubleObject<T, U> rhs) { return rhs /= s; }
 
   template<class T, class U>
   DoubleObject<T, U> operator / (DoubleObject<T, U> lhs, double const& s) { return lhs /= s; }

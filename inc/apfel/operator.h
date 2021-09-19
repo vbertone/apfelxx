@@ -67,6 +67,11 @@ namespace apfel
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
   protected:
     Grid                 const& _grid;      //!< Grid on which to compute the operator
     std::vector<matrix<double>> _Operator;  //!< Operator values

@@ -101,7 +101,7 @@ PYBIND11_MODULE(apfelpy, m) {
 		 "NoCharges"_a = false);
 
   // Wrappers of "rotations.h"
-  _utilities.def("PhysToQCDEv", py::overload_cast<std::map<int, double> const&>(&apfel::PhysToQCDEv),              "InPhysMap"_a);
+  _utilities.def("PhysToQCDEv", &apfel::PhysToQCDEv,              "InPhysMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, double> const&>(&apfel::QCDEvToPhys),              "QCDEvMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, apfel::Distribution> const&>(&apfel::QCDEvToPhys), "QCDEvMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, apfel::Operator> const&>(&apfel::QCDEvToPhys),     "QCDEvMap"_a);
@@ -142,6 +142,7 @@ PYBIND11_MODULE(apfelpy, m) {
     .def(py::self != py::self);
 
   // Wrappers form "interpolator.h"
+  // Trampoline class for virtual class
   class PyInterpolator: public apfel::Interpolator
   {
   public:
@@ -207,7 +208,17 @@ PYBIND11_MODULE(apfelpy, m) {
     .def(py::self * py::self);
 
   // Wrappers of "expression.h"
-  py::class_<apfel::Expression>(m, "Expression")
+  // Trampoline class for virtual class
+  class PyExpression: public apfel::Expression
+  {
+  public:
+    using Expression::Expression;
+    double Regular(double const& x) const override { PYBIND11_OVERRIDE(double, Expression, Regular, x); };
+    double Singular(double const& x) const override { PYBIND11_OVERRIDE(double, Expression, Singular, x); };
+    double Local(double const& x) const override { PYBIND11_OVERRIDE(double, Expression, Local, x); };
+    double LocalPV(double const& x) const override { PYBIND11_OVERRIDE(double, Expression, LocalPV, x); };
+  };
+  py::class_<apfel::Expression, PyExpression>(m, "Expression")
     .def(py::init<double const&>(), "eta"_a = 1)
     .def("Regular", &apfel::Expression::Regular)
     .def("Singular", &apfel::Expression::Singular)
@@ -222,48 +233,235 @@ PYBIND11_MODULE(apfelpy, m) {
 
   py::class_<apfel::Null, apfel::Expression>(m, "Null")
     .def(py::init<>());
-/*
-  // Wrappers of "matrix.h"
-  py::class_<apfel::matrix<T>>(m, "matrix");
-  //.def(py::init<apfel::Operator const&>(), "g"_a)
+  
+  // Wrappers of "matrix.h" (this is a template class and needs a
+  // wrapper for any specialisation)
+  py::class_<apfel::matrix<size_t>>(m, "matrixSize_t")
+    .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
+    .def("resize", &apfel::matrix<size_t>::resize, "row"_a, "col"_a, "v"_a = 0)
+    .def("set", &apfel::matrix<size_t>::set, "v"_a)
+    .def("size", &apfel::matrix<size_t>::size, "dim"_a)
+    .def("__call__", [] (apfel::matrix<size_t>& c, size_t const& i, size_t const& j){ return c(i, j); })
+    .def("__call__", [] (apfel::matrix<size_t> const& c, size_t const& i, size_t const& j){ return c(i, j); });
 
+  py::class_<apfel::matrix<int>>(m, "matrixInt")
+    .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
+    .def("resize", &apfel::matrix<int>::resize, "row"_a, "col"_a, "v"_a = 0)
+    .def("set", &apfel::matrix<int>::set, "v"_a)
+    .def("size", &apfel::matrix<int>::size, "dim"_a)
+    .def("__call__", [] (apfel::matrix<int>& c, size_t const& i, size_t const& j){ return c(i, j); })
+    .def("__call__", [] (apfel::matrix<int> const& c, size_t const& i, size_t const& j){ return c(i, j); });
 
-    matrix(size_t const& row = 0, size_t const& col = 0);
-    void resize(size_t const& row, size_t const& col, T const& v = 0);
-    void set(T const& v);
-    size_t const& size(size_t const& dim) const { return _size[dim]; }
-    T&       operator()(size_t const& i, size_t const& j)       { return _data[i*_size[1]+j]; }
-    T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
-*/
+  py::class_<apfel::matrix<float>>(m, "matrixFloat")
+    .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
+    .def("resize", &apfel::matrix<float>::resize, "row"_a, "col"_a, "v"_a = 0)
+    .def("set", &apfel::matrix<float>::set, "v"_a)
+    .def("size", &apfel::matrix<float>::size, "dim"_a)
+    .def("__call__", [] (apfel::matrix<float>& c, size_t const& i, size_t const& j){ return c(i, j); })
+    .def("__call__", [] (apfel::matrix<float> const& c, size_t const& i, size_t const& j){ return c(i, j); });
+
+  py::class_<apfel::matrix<double>>(m, "matrixDouble")
+    .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
+    .def("resize", &apfel::matrix<double>::resize, "row"_a, "col"_a, "v"_a = 0)
+    .def("set", &apfel::matrix<double>::set, "v"_a)
+    .def("size", &apfel::matrix<double>::size, "dim"_a)
+    .def("__call__", [] (apfel::matrix<double>& c, size_t const& i, size_t const& j){ return c(i, j); })
+    .def("__call__", [] (apfel::matrix<double> const& c, size_t const& i, size_t const& j){ return c(i, j); });
+
+  py::class_<apfel::matrix<std::vector<int>>>(m, "matrixVectorInt")
+    .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
+    .def("resize", &apfel::matrix<std::vector<int>>::resize, "row"_a, "col"_a, "v"_a = 0)
+    .def("set", &apfel::matrix<std::vector<int>>::set, "v"_a)
+    .def("size", &apfel::matrix<std::vector<int>>::size, "dim"_a)
+    .def("__call__", [] (apfel::matrix<std::vector<int>>& c, size_t const& i, size_t const& j){ return c(i, j); })
+    .def("__call__", [] (apfel::matrix<std::vector<int>> const& c, size_t const& i, size_t const& j){ return c(i, j); });
+
+  py::class_<apfel::matrix<std::vector<double>>>(m, "matrixVectorDouble")
+    .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
+    .def("resize", &apfel::matrix<std::vector<double>>::resize, "row"_a, "col"_a, "v"_a = 0)
+    .def("set", &apfel::matrix<std::vector<double>>::set, "v"_a)
+    .def("size", &apfel::matrix<std::vector<double>>::size, "dim"_a)
+    .def("__call__", [] (apfel::matrix<std::vector<double>>& c, size_t const& i, size_t const& j){ return c(i, j); })
+    .def("__call__", [] (apfel::matrix<std::vector<double>> const& c, size_t const& i, size_t const& j){ return c(i, j); });
 
   // Wrappers of "operator.h"
   py::class_<apfel::Operator>(m, "Operator")
     .def(py::init<apfel::Operator const&>(), "g"_a)
     .def(py::init<apfel::Grid const&>(), "g"_a)
-    .def(py::init<apfel::Grid const&, apfel::Expression const&, double const&>(), "g"_a, "expr"_a, "eps"_a)
-;
-/*
-    Operator(Operator const&) = default;
-    Operator(Grid const& gr);
-    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
-    Distribution operator *= (Distribution const& d) const;         //!< this *= Distribution
-    Operator& operator *= (Operator const& o);                      //!< this *= Operator
-    Operator& operator  = (Operator const& o);                      //!< this  = Operator
-    Operator& operator *= (double const& s);                        //!< this *= Scalar
-    Operator& operator *= (std::function<double(double const&)> f); //!< This *= Function
-    Operator& operator /= (double const& s);                        //!< this /= Scalar
-    Operator& operator += (Operator const& o);                      //!< this += Operator
-    Operator& operator -= (Operator const& o);                      //!< this -= Operator
-    Grid const& GetGrid() const { return _grid; }
-    std::vector<matrix<double>> GetOperator() const { return _Operator; }
-  Distribution operator * (Operator lhs, Distribution const& rhs);                //!< Operator*Distribution
-  Operator     operator * (Operator lhs, Operator const& rhs);                    //!< Operator*Operator
-  Operator     operator * (double const& s, Operator rhs);                        //!< Scalar*Operator
-  Operator     operator * (Operator lhs, double const& s);                        //!< Operator*Scalar
-  Operator     operator * (std::function<double(double const&)> f, Operator rhs); //!< function*Operator
-  Operator     operator * (Operator lhs, std::function<double(double const&)> f); //!< Operator*function
-  Operator     operator / (Operator lhs, double const& s);                        //!< Operator/Scalar
-  Operator     operator + (Operator lhs, Operator const& rhs);                    //!< Operator+Operator
-  Operator     operator - (Operator lhs, Operator const& rhs);                    //!< Operator-Operator
-*/
+    .def(py::init<apfel::Grid const&, apfel::Expression const&, double const&>(), "g"_a, "expr"_a, "eps"_a = 1e-5)
+    .def("GetGrid", &apfel::Operator::GetGrid)
+    .def("GetOperator", &apfel::Operator::GetOperator)
+    .def("Print", &apfel::Operator::Print)
+    .def(py::self *= py::self)
+    //.def(py::self = py::self)  // DOES NOT WORK!
+    .def(py::self *= double())
+    .def(py::self *= std::function<double(double const&)>())
+    .def(py::self /= double())
+    .def(py::self += py::self)
+    //.def(py::self -= py::self)
+    .def(py::self * apfel::Distribution(apfel::Grid{{apfel::SubGrid{10, 1e-5, 3}}}))
+    .def(py::self * py::self)
+    .def(py::self * double())
+    .def(double() * py::self)
+    .def(py::self * std::function<double(double const&)>())
+    .def(std::function<double(double const&)>() * py::self)
+    .def(py::self / double())
+    .def(py::self + py::self)
+    .def(py::self - py::self);
+
+  // Wrappers of "integrator.h"
+  py::enum_<apfel::Integrator::IntegrationMethod>(m, "IntegrationMethod")
+    .value("GAUSS_LEGENDRE", apfel::Integrator::IntegrationMethod::GAUSS_LEGENDRE)
+    .value("GAUSS_KRONROD",  apfel::Integrator::IntegrationMethod::GAUSS_KRONROD);
+  py::class_<apfel::Integrator>(m, "Integrator")
+    .def(py::init<std::function<double(double const&)> const&, apfel::Integrator::IntegrationMethod const&>(), "func"_a, "method"_a = apfel::Integrator::IntegrationMethod::GAUSS_KRONROD)
+    .def("integrate", py::overload_cast<double const&, double const&, double const&>(&apfel::Integrator::integrate, py::const_), "xmin"_a, "xmax"_a, "eps"_a)
+    .def("integrate", py::overload_cast<double const&, double const&, std::vector<double> const&, double const&>(&apfel::Integrator::integrate, py::const_), "xmin"_a, "xmax"_a, "FixPts"_a, "eps"_a)
+    .def("integrate", py::overload_cast<std::vector<double> const&, double const&>(&apfel::Integrator::integrate, py::const_), "FixPts"_a, "eps"_a)
+    .def("integrate", py::overload_cast<double const&, double const&, int const&>(&apfel::Integrator::integrate, py::const_), "xmin"_a, "xmax"_a, "n"_a = 1)
+    .def("integrate", py::overload_cast<double const&, double const&, std::vector<double> const&, int const&>(&apfel::Integrator::integrate, py::const_), "xmin"_a, "xmax"_a, "FixPts"_a, "n"_a = 1)
+    .def("integrate", py::overload_cast<std::vector<double> const&, int const&>(&apfel::Integrator::integrate, py::const_), "FixPts"_a, "n"_a = 1)
+    .def("integrand", &apfel::Integrator::integrand, "x"_a)
+    .def("Method", &apfel::Integrator::Method);
+
+  // Wrappers of "integrator2d.h"
+  py::class_<apfel::Integrator2D>(m, "Integrator2D")
+    .def(py::init<std::function<double(double const&, double const&)> const&, apfel::Integrator::IntegrationMethod const&>(), "func"_a, "method"_a = apfel::Integrator::IntegrationMethod::GAUSS_KRONROD)
+    .def("integrate", &apfel::Integrator2D::integrate, "xmin"_a, "xmax"_a, "ymin"_a, "ymax"_a, "eps"_a)
+    .def("integrand", &apfel::Integrator2D::integrand, "x"_a, "y"_a);
+
+  // Wrappers of "doubleobject.h"
+  py::class_<apfel::term<apfel::Distribution>>(m, "termD");
+  py::class_<apfel::term<apfel::Operator>>(m, "termO");
+  py::class_<apfel::term<apfel::Distribution, apfel::Operator>>(m, "termDO");
+  py::class_<apfel::term<apfel::Operator, apfel::Distribution>>(m, "termOD");
+
+  py::class_<apfel::DoubleObject<apfel::Distribution>>(m, "DoubleObjectD")
+    .def(py::init<>())
+    .def(py::init<std::vector<apfel::term<apfel::Distribution>>>(), "terms"_a)
+    .def("AddTerm", &apfel::DoubleObject<apfel::Distribution>::AddTerm, "newterm"_a)
+    .def("GetTerms", &apfel::DoubleObject<apfel::Distribution>::GetTerms)
+    .def("Evaluate", &apfel::DoubleObject<apfel::Distribution>::Evaluate, "x"_a, "z"_a)
+    .def("Evaluate1", &apfel::DoubleObject<apfel::Distribution>::Evaluate1, "x"_a)
+    .def("Evaluate2", &apfel::DoubleObject<apfel::Distribution>::Evaluate2, "z"_a)
+    .def("Derive", &apfel::DoubleObject<apfel::Distribution>::Derive, "x"_a, "z"_a)
+    .def("Derive1", &apfel::DoubleObject<apfel::Distribution>::Derive1, "x"_a)
+    .def("Derive2", &apfel::DoubleObject<apfel::Distribution>::Derive2, "z"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Distribution>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
+    .def("Integrate1", &apfel::DoubleObject<apfel::Distribution>::Integrate1, "xl"_a, "xu"_a)
+    .def("Integrate2", &apfel::DoubleObject<apfel::Distribution>::Integrate2, "zl"_a, "zu"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Distribution>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
+    .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Distribution>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
+    .def("MultiplyBy", &apfel::DoubleObject<apfel::Distribution>::MultiplyBy, "fx"_a, "fz"_a)
+    .def("Print", &apfel::DoubleObject<apfel::Distribution>::Print)
+    .def(py::self *= double())
+    .def(py::self *= py::self)
+    .def(py::self *= std::function<double(double const&)>())
+    .def(py::self /= double())
+    .def(py::self += py::self)
+    //.def(py::self -= py::self)
+    .def(py::self * double())
+    .def(double() * py::self)
+    .def(py::self / double())
+    //.def(py::self * py::self)
+    .def(py::self + py::self)
+    .def(py::self - py::self);
+
+  py::class_<apfel::DoubleObject<apfel::Operator>>(m, "DoubleObjectO")
+    .def(py::init<>())
+    .def(py::init<std::vector<apfel::term<apfel::Operator>>>(), "terms"_a)
+    .def("AddTerm", &apfel::DoubleObject<apfel::Operator>::AddTerm, "newterm"_a)
+    .def("GetTerms", &apfel::DoubleObject<apfel::Operator>::GetTerms)
+    .def("Evaluate", &apfel::DoubleObject<apfel::Operator>::Evaluate, "x"_a, "z"_a)
+    .def("Evaluate1", &apfel::DoubleObject<apfel::Operator>::Evaluate1, "x"_a)
+    .def("Evaluate2", &apfel::DoubleObject<apfel::Operator>::Evaluate2, "z"_a)
+    .def("Derive", &apfel::DoubleObject<apfel::Operator>::Derive, "x"_a, "z"_a)
+    .def("Derive1", &apfel::DoubleObject<apfel::Operator>::Derive1, "x"_a)
+    .def("Derive2", &apfel::DoubleObject<apfel::Operator>::Derive2, "z"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
+    .def("Integrate1", &apfel::DoubleObject<apfel::Operator>::Integrate1, "xl"_a, "xu"_a)
+    .def("Integrate2", &apfel::DoubleObject<apfel::Operator>::Integrate2, "zl"_a, "zu"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
+    .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Operator>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
+    .def("MultiplyBy", &apfel::DoubleObject<apfel::Operator>::MultiplyBy, "fx"_a, "fz"_a)
+    .def("Print", &apfel::DoubleObject<apfel::Operator>::Print)
+    .def(py::self *= double())
+    .def(py::self *= py::self)
+    .def(py::self *= std::function<double(double const&)>())
+    .def(py::self /= double())
+    .def(py::self += py::self)
+    //.def(py::self -= py::self)
+    .def(py::self * double())
+    .def(double() * py::self)
+    .def(py::self / double())
+    //.def(py::self * py::self)
+    .def(py::self + py::self)
+    .def(py::self - py::self);
+
+  py::class_<apfel::DoubleObject<apfel::Distribution, apfel::Operator>>(m, "DoubleObjectDO")
+    .def(py::init<>())
+    .def(py::init<std::vector<apfel::term<apfel::Distribution, apfel::Operator>>>(), "terms"_a)
+    .def("AddTerm", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::AddTerm, "newterm"_a)
+    .def("GetTerms", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::GetTerms)
+    .def("Evaluate", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Evaluate, "x"_a, "z"_a)
+    .def("Evaluate1", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Evaluate1, "x"_a)
+    .def("Evaluate2", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Evaluate2, "z"_a)
+    .def("Derive", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Derive, "x"_a, "z"_a)
+    .def("Derive1", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Derive1, "x"_a)
+    .def("Derive2", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Derive2, "z"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
+    .def("Integrate1", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate1, "xl"_a, "xu"_a)
+    .def("Integrate2", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate2, "zl"_a, "zu"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
+    .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
+    .def("MultiplyBy", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::MultiplyBy, "fx"_a, "fz"_a)
+    .def("Print", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Print)
+    .def(py::self *= double())
+    .def(py::self *= py::self)
+    .def(py::self *= std::function<double(double const&)>())
+    .def(py::self /= double())
+    .def(py::self += py::self)
+    //.def(py::self -= py::self)
+    .def(py::self * double())
+    .def(double() * py::self)
+    .def(py::self / double())
+    //.def(py::self * py::self)
+    .def(py::self + py::self)
+    .def(py::self - py::self);
+
+  py::class_<apfel::DoubleObject<apfel::Operator, apfel::Distribution>>(m, "DoubleObjectOD")
+    .def(py::init<>())
+    .def(py::init<std::vector<apfel::term<apfel::Operator, apfel::Distribution>>>(), "terms"_a)
+    .def("AddTerm", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::AddTerm, "newterm"_a)
+    .def("GetTerms", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::GetTerms)
+    .def("Evaluate", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Evaluate, "x"_a, "z"_a)
+    .def("Evaluate1", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Evaluate1, "x"_a)
+    .def("Evaluate2", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Evaluate2, "z"_a)
+    .def("Derive", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Derive, "x"_a, "z"_a)
+    .def("Derive1", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Derive1, "x"_a)
+    .def("Derive2", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Derive2, "z"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
+    .def("Integrate1", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate1, "xl"_a, "xu"_a)
+    .def("Integrate2", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate2, "zl"_a, "zu"_a)
+    .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
+    .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
+    .def("MultiplyBy", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::MultiplyBy, "fx"_a, "fz"_a)
+    .def("Print", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Print)
+    .def(py::self *= double())
+    .def(py::self *= py::self)
+    .def(py::self *= std::function<double(double const&)>())
+    .def(py::self /= double())
+    .def(py::self += py::self)
+    //.def(py::self -= py::self)
+    .def(py::self * double())
+    .def(double() * py::self)
+    .def(py::self / double())
+    //.def(py::self * py::self)
+    .def(py::self + py::self)
+    .def(py::self - py::self);
+
+  // Wrappers of "convolutionmap.h"
+
+  // Wrappers of "set.h"
+  
 }

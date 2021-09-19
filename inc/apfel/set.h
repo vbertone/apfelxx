@@ -99,6 +99,11 @@ namespace apfel
      */
     T Combine(std::vector<double> const& weigths) const;
 
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
   private:
     ConvolutionMap   _map;     //!< The shared pointer containing the convolution map
     std::map<int, T> _objects; //!< The container for the map
