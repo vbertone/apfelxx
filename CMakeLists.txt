@@ -57,10 +57,14 @@ add_library(apfelxx SHARED ${source_files})
 target_link_libraries(apfelxx)
 
 # pybind11
-find_package(pybind11 REQUIRED)
-pybind11_add_module(apfelpy pywrap/pywrap.cxx)
-target_link_libraries(apfelpy PRIVATE apfelxx)
-install(TARGETS apfelpy LIBRARY DESTINATION lib)
+find_package(pybind11 QUIET)
+if (pybind11_FOUND)
+   pybind11_add_module(apfelpy pywrap/pywrap.cxx)
+   target_link_libraries(apfelpy PRIVATE apfelxx)
+   install(TARGETS apfelpy LIBRARY DESTINATION lib)
+else (pybind11_FOUND)
+  message ("pybind11 not found. The python wrapper will not be built.")
+endif (pybind11_FOUND)
 
 # install
 install(TARGETS apfelxx

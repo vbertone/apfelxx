@@ -222,12 +222,12 @@ PYBIND11_MODULE(apfelpy, m) {
 
   py::class_<apfel::Null, apfel::Expression>(m, "Null")
     .def(py::init<>());
-
+/*
   // Wrappers of "matrix.h"
   py::class_<apfel::matrix<T>>(m, "matrix");
   //.def(py::init<apfel::Operator const&>(), "g"_a)
 
-/*  
+
     matrix(size_t const& row = 0, size_t const& col = 0);
     void resize(size_t const& row, size_t const& col, T const& v = 0);
     void set(T const& v);
