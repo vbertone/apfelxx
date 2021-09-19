@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: sudo apt-get install g++ cmake valgrind pybind11
+      - run: sudo apt-get install g++ cmake valgrind
+      - run: sudo pip install pybind11
       - run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++17" . && make -j8
       - run: ctest -V
