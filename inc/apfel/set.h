@@ -145,9 +145,6 @@ namespace apfel
   Set<T> operator * (Set<T> lhs, std::map<int, double> const& v) { return lhs *= v; }
 
   template<class T>
-  Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s; }
-
-  template<class T>
   Set<T> operator / (Set<T> lhs, double const& s) { return lhs /= s; }
 
   template<class T>

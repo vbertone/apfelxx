@@ -159,6 +159,11 @@ namespace apfel
      */
     std::tuple<int, int, int> SumBounds(double const& Q) const;
 
+    /**
+     * @brief Print the QGrid object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
   protected:
     int                                  _nQ;           //!< Number intervals
     double                               _QMin;         //!< Minumim value of Q
