@@ -12,13 +12,24 @@ PYBIND11_MODULE(apfelpy, m)
   // Documentation
   m.doc() = "Python wrapper of APFEL++";
 
+  // Constants
+  py::module_ _constants = m.def_submodule("constants", "Numerical constants");
+
+  // Utility functions
+  py::module_ _utilities = m.def_submodule("utilities", "Utility functions");
+
+  // Intialisers
+  py::module_ _intialisers = m.def_submodule("intialisers", "Initialisers");
+
+  // Builders
+  py::module_ _builders = m.def_submodule("builders", "Builders");
+
   // Wrappers of "messages.h"
   m.def("SetVerbosityLevel", &apfel::SetVerbosityLevel, "vl"_a);
   m.def("GetVerbosityLevel", &apfel::GetVerbosityLevel);
   m.def("Banner",            &apfel::Banner);
 
   // Wrappers of "constants.h"
-  py::module_ _constants = m.def_submodule("constants", "Numerical constants");
   _constants.attr("Pi2")        = apfel::Pi2;
   _constants.attr("FourPi")     = apfel::FourPi;
   _constants.attr("emc")        = apfel::emc;
@@ -65,9 +76,6 @@ PYBIND11_MODULE(apfelpy, m)
   _constants.attr("Vtb2")       = apfel::Vtb2;
   _constants.attr("CKM")        = apfel::CKM;
   _constants.attr("CKM2")       = apfel::CKM2;
-
-  // Utility functions
-  py::module_ _utilities = m.def_submodule("utilities", "Utility functions");
 
   // Wrappers of "lhtoypdfs.h"
   _utilities.def("xupv",      &apfel::xupv,      "x"_a);
@@ -413,7 +421,7 @@ PYBIND11_MODULE(apfelpy, m)
                                                     .def("MultiplyBy", &apfel::DoubleObject<apfel::Distribution>::MultiplyBy, "fx"_a, "fz"_a)
                                                     .def("Print", &apfel::DoubleObject<apfel::Distribution>::Print)
                                                     .def(py::self *= double())
-                                                    .def(py::self *= py::self)
+                                                    //.def(py::self *= py::self)
                                                     .def(py::self *= std::function<double(double const&)>())
                                                     .def(py::self /= double())
                                                     .def(py::self += py::self)
@@ -430,21 +438,9 @@ PYBIND11_MODULE(apfelpy, m)
                                                 .def(py::init<std::vector<apfel::term<apfel::Operator>>>(), "terms"_a)
                                                 .def("AddTerm", &apfel::DoubleObject<apfel::Operator>::AddTerm, "newterm"_a)
                                                 .def("GetTerms", &apfel::DoubleObject<apfel::Operator>::GetTerms)
-                                                .def("Evaluate", &apfel::DoubleObject<apfel::Operator>::Evaluate, "x"_a, "z"_a)
-                                                .def("Evaluate1", &apfel::DoubleObject<apfel::Operator>::Evaluate1, "x"_a)
-                                                .def("Evaluate2", &apfel::DoubleObject<apfel::Operator>::Evaluate2, "z"_a)
-                                                .def("Derive", &apfel::DoubleObject<apfel::Operator>::Derive, "x"_a, "z"_a)
-                                                .def("Derive1", &apfel::DoubleObject<apfel::Operator>::Derive1, "x"_a)
-                                                .def("Derive2", &apfel::DoubleObject<apfel::Operator>::Derive2, "z"_a)
-                                                .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
-                                                .def("Integrate1", &apfel::DoubleObject<apfel::Operator>::Integrate1, "xl"_a, "xu"_a)
-                                                .def("Integrate2", &apfel::DoubleObject<apfel::Operator>::Integrate2, "zl"_a, "zu"_a)
-                                                .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
-                                                .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Operator>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
-                                                .def("MultiplyBy", &apfel::DoubleObject<apfel::Operator>::MultiplyBy, "fx"_a, "fz"_a)
                                                 .def("Print", &apfel::DoubleObject<apfel::Operator>::Print)
                                                 .def(py::self *= double())
-                                                .def(py::self *= py::self)
+                                                //.def(py::self *= py::self)
                                                 .def(py::self *= std::function<double(double const&)>())
                                                 .def(py::self /= double())
                                                 .def(py::self += py::self)
@@ -461,21 +457,9 @@ PYBIND11_MODULE(apfelpy, m)
                                                                      .def(py::init<std::vector<apfel::term<apfel::Distribution, apfel::Operator>>>(), "terms"_a)
                                                                      .def("AddTerm", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::AddTerm, "newterm"_a)
                                                                      .def("GetTerms", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::GetTerms)
-                                                                     .def("Evaluate", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Evaluate, "x"_a, "z"_a)
-                                                                     .def("Evaluate1", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Evaluate1, "x"_a)
-                                                                     .def("Evaluate2", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Evaluate2, "z"_a)
-                                                                     .def("Derive", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Derive, "x"_a, "z"_a)
-                                                                     .def("Derive1", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Derive1, "x"_a)
-                                                                     .def("Derive2", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Derive2, "z"_a)
-                                                                     .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
-                                                                     .def("Integrate1", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate1, "xl"_a, "xu"_a)
-                                                                     .def("Integrate2", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate2, "zl"_a, "zu"_a)
-                                                                     .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
-                                                                     .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
-                                                                     .def("MultiplyBy", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::MultiplyBy, "fx"_a, "fz"_a)
                                                                      .def("Print", &apfel::DoubleObject<apfel::Distribution, apfel::Operator>::Print)
                                                                      .def(py::self *= double())
-                                                                     .def(py::self *= py::self)
+                                                                     //.def(py::self *= py::self)
                                                                      .def(py::self *= std::function<double(double const&)>())
                                                                      .def(py::self /= double())
                                                                      .def(py::self += py::self)
@@ -492,21 +476,9 @@ PYBIND11_MODULE(apfelpy, m)
                                                                      .def(py::init<std::vector<apfel::term<apfel::Operator, apfel::Distribution>>>(), "terms"_a)
                                                                      .def("AddTerm", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::AddTerm, "newterm"_a)
                                                                      .def("GetTerms", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::GetTerms)
-                                                                     .def("Evaluate", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Evaluate, "x"_a, "z"_a)
-                                                                     .def("Evaluate1", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Evaluate1, "x"_a)
-                                                                     .def("Evaluate2", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Evaluate2, "z"_a)
-                                                                     .def("Derive", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Derive, "x"_a, "z"_a)
-                                                                     .def("Derive1", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Derive1, "x"_a)
-                                                                     .def("Derive2", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Derive2, "z"_a)
-                                                                     .def("Integrate", py::overload_cast<double const&, double const&, double const&, double const&>(&apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate, py::const_), "xl"_a, "xu"_a, "zl"_a, "zu"_a)
-                                                                     .def("Integrate1", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate1, "xl"_a, "xu"_a)
-                                                                     .def("Integrate2", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate2, "zl"_a, "zu"_a)
-                                                                     .def("Integrate", py::overload_cast<double const&, double const&, std::function<double(double const&)>, std::function<double(double const&)>>(&apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate, py::const_), "xl"_a, "xu"_a, "zlx"_a, "zux"_a)
-                                                                     .def("Integrate", py::overload_cast<std::function<double(double const&)>, std::function<double(double const&)>, double const&, double const&>(&apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Integrate, py::const_), "xlz"_a, "xuz"_a, "zl"_a, "zu"_a)
-                                                                     .def("MultiplyBy", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::MultiplyBy, "fx"_a, "fz"_a)
                                                                      .def("Print", &apfel::DoubleObject<apfel::Operator, apfel::Distribution>::Print)
                                                                      .def(py::self *= double())
-                                                                     .def(py::self *= py::self)
+                                                                     //.def(py::self *= py::self)
                                                                      .def(py::self *= std::function<double(double const&)>())
                                                                      .def(py::self /= double())
                                                                      .def(py::self += py::self)
@@ -575,7 +547,7 @@ PYBIND11_MODULE(apfelpy, m)
                                            .def("Combine", py::overload_cast<std::vector<double> const&>(&apfel::Set<apfel::Distribution>::Combine, py::const_), "weights"_a)
                                            .def("Print", &apfel::Set<apfel::Distribution>::Print)
                                            .def(py::self *= double())
-                                           .def(py::self *= py::self)
+                                           //.def(py::self *= py::self)
                                            .def(py::self *= std::function<double(double const&)>())
                                            .def(py::self *= std::vector<double>())
                                            .def(py::self *= std::map<int, double>())
@@ -606,7 +578,7 @@ PYBIND11_MODULE(apfelpy, m)
                                        .def("Combine", py::overload_cast<std::vector<double> const&>(&apfel::Set<apfel::Operator>::Combine, py::const_), "weights"_a)
                                        .def("Print", &apfel::Set<apfel::Operator>::Print)
                                        .def(py::self *= double())
-                                       .def(py::self *= py::self)
+                                       //.def(py::self *= py::self)
                                        .def(py::self *= std::function<double(double const&)>())
                                        .def(py::self *= std::vector<double>())
                                        .def(py::self *= std::map<int, double>())
@@ -637,7 +609,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def("Combine", py::overload_cast<std::vector<double> const&>(&apfel::Set<apfel::DoubleObject<apfel::Distribution, apfel::Operator>>::Combine, py::const_), "weights"_a)
   .def("Print", &apfel::Set<apfel::DoubleObject<apfel::Distribution, apfel::Operator>>::Print)
   .def(py::self *= double())
-  .def(py::self *= py::self)
+  //.def(py::self *= py::self)
   .def(py::self *= std::function<double(double const&)>())
   .def(py::self *= std::vector<double>())
   .def(py::self *= std::map<int, double>())
@@ -664,10 +636,8 @@ PYBIND11_MODULE(apfelpy, m)
                                                   .def("SetObjects", &apfel::Observable<apfel::Distribution>::SetObjects, "Objects"_a)
                                                   .def("GetCoefficientFunctions", &apfel::Observable<apfel::Distribution>::GetCoefficientFunctions);
 
-  py::class_<apfel::Observable<apfel::Operator>>(m, "ObservableD")
+  py::class_<apfel::Observable<apfel::Operator>>(m, "ObservableO")
                                               .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, std::function<apfel::Set<apfel::Operator>(double const&)>>(), "CoefficientFunctions"_a, "Objects"_a)
-                                              .def("Evaluate", py::overload_cast<double const&>(&apfel::Observable<apfel::Operator>::Evaluate, py::const_), "Q"_a)
-                                              .def("Evaluate", py::overload_cast<double const&, double const&>(&apfel::Observable<apfel::Operator>::Evaluate, py::const_), "x"_a, "Q"_a)
                                               .def("SetObjects", &apfel::Observable<apfel::Operator>::SetObjects, "Objects"_a)
                                               .def("GetCoefficientFunctions", &apfel::Observable<apfel::Operator>::GetCoefficientFunctions);
 
@@ -1122,11 +1092,91 @@ PYBIND11_MODULE(apfelpy, m)
   .def("SetInitialDistributions", py::overload_cast<std::function<std::map<int, double>(double const&)> const&>(&apfel::Dglap<apfel::Distribution>::SetInitialDistributions), "InDistFunc"_a)
   .def("SetInitialDistributions", py::overload_cast<std::function<std::map<int, double>(double const&, double const&)> const&, double const&>(&apfel::Dglap<apfel::Distribution>::SetInitialDistributions), "InDistFunc"_a, "mu"_a);
 
-  py::class_<apfel::Dglap<apfel::Operator>, apfel::MatchedEvolution<apfel::Set<apfel::Operator>>>(m, "DglapD")
+  py::class_<apfel::Dglap<apfel::Operator>, apfel::MatchedEvolution<apfel::Set<apfel::Operator>>>(m, "DglapO")
   .def(py::init<std::function<apfel::Set<apfel::Operator>(int const&, double const&)> const&, std::function<apfel::Set<apfel::Operator>(bool const&, int const&)> const&, apfel::Set<apfel::Operator>, double const&, std::vector<double>const&, int const&>(), "SplittingFunctions"_a, "MatchingConditions"_a, "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
   .def("MatchObject", &apfel::Dglap<apfel::Operator>::MatchObject, "Up"_a, "nf"_a, "sd"_a)
-  .def("Derivative", &apfel::Dglap<apfel::Operator>::Derivative, "nf"_a, "mu"_a, "f"_a)
-  .def("SetInitialDistributions", py::overload_cast<std::function<double(int const&, double const&)> const&>(&apfel::Dglap<apfel::Operator>::SetInitialDistributions), "InDistFunc"_a)
-  .def("SetInitialDistributions", py::overload_cast<std::function<std::map<int, double>(double const&)> const&>(&apfel::Dglap<apfel::Operator>::SetInitialDistributions), "InDistFunc"_a)
-  .def("SetInitialDistributions", py::overload_cast<std::function<std::map<int, double>(double const&, double const&)> const&, double const&>(&apfel::Dglap<apfel::Operator>::SetInitialDistributions), "InDistFunc"_a, "mu"_a);
+  .def("Derivative", &apfel::Dglap<apfel::Operator>::Derivative, "nf"_a, "mu"_a, "f"_a);
+
+  // Wrappers of "alphaqcd.h"
+  py::class_<apfel::AlphaQCD, apfel::MatchedEvolution<double>>(m, "AlphaQCD")
+                                                            .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "Thresholds"_a, "pt"_a, "nsteps"_a = 10)
+                                                            .def(py::init<double const&, double const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "pt"_a, "nsteps"_a = 10)
+                                                            .def("MatchObject", &apfel::AlphaQCD::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
+                                                            .def("Derivative", &apfel::AlphaQCD::Derivative, "nf"_a, "void"_a, "as"_a)
+                                                            .def("betaQCD", &apfel::AlphaQCD::betaQCD, "pt"_a, "nf"_a);
+
+  // Wrappers of "alphaqed.h"
+  py::class_<apfel::AlphaQED, apfel::MatchedEvolution<double>>(m, "AlphaQED")
+                                                            .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "LeptThresholds"_a, "QuarkThresholds"_a, "pt"_a, "nsteps"_a = 10)
+                                                            .def("MatchObject", &apfel::AlphaQED::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
+                                                            .def("Derivative", &apfel::AlphaQED::Derivative, "nfl"_a, "void"_a, "a"_a)
+                                                            .def("betaQED", &apfel::AlphaQED::betaQED, "pt"_a, "nf"_a, "nl"_a);
+
+  // Wrappers of "dglapbuilder.h"
+  py::class_<apfel::DglapObjects>(m, "DglapObjects")
+  .def_readwrite("Threshold", &apfel::DglapObjects::Threshold)
+  .def_readwrite("SplittingFunctions", &apfel::DglapObjects::SplittingFunctions)
+  .def_readwrite("MatchingConditions", &apfel::DglapObjects::MatchingConditions);
+
+  _builders.def("BuildDglap", py::overload_cast<std::map<int, apfel::DglapObjects> const&, std::function<std::map<int, double>(double const&, double const&)> const&, double const&, int const&, std::function<double(double const&)> const&, int const&>(&apfel::BuildDglap), "DglapObj"_a, "InDistFunc"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "nsteps"_a = 10);
+  _builders.def("BuildDglap", py::overload_cast<std::map<int, apfel::DglapObjects> const&, double const&, int const&, std::function<double(double const&)> const&, int const&>(&apfel::BuildDglap), "DglapObj"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "nsteps"_a = 10);
+  _builders.def("BuildDglap", py::overload_cast<std::function<apfel::DglapObjects(double const&)> const&, std::vector<double> const&, std::function<std::map<int, double>(double const&, double const&)> const&, double const&, int const&, std::function<double(double const&)> const&, int const&>(&apfel::BuildDglap), "DglapObj"_a, "Thresholds"_a, "InDistFunc"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "nsteps"_a = 10);
+
+  _intialisers.def("InitializeDglapObjectsQCD", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCD), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCD", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCD), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDpol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDpol), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDpol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDpol), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDT", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDT), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDT", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDT), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDtrans), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDtrans), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDTtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDTtrans), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _intialisers.def("InitializeDglapObjectsQCDTtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDTtrans), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+
+  // Wrappers of "tabulateobject.h"
+  py::class_<apfel::TabulateObject<double>, apfel::QGrid<double>>(m, "TabulateObject")
+                                                               .def(py::init<apfel::MatchedEvolution<double>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                               .def(py::init<std::function<double(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                               .def(py::init<std::function<double(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                               .def(py::init<std::function<double(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
+
+  py::class_<apfel::TabulateObject<apfel::Distribution>, apfel::QGrid<apfel::Distribution>>(m, "TabulateObjectD")
+                                                                                         .def(py::init<apfel::MatchedEvolution<apfel::Distribution>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                                                         .def(py::init<std::function<apfel::Distribution(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                                                         .def(py::init<std::function<apfel::Distribution(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                                                         .def(py::init<std::function<apfel::Distribution(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a)
+                                                                                         .def("EvaluatexQ", py::overload_cast<double const&, double const&>(&apfel::TabulateObject<apfel::Distribution>::EvaluatexQ, py::const_),"x"_a, "Q"_a);
+
+  py::class_<apfel::TabulateObject<apfel::Set<apfel::Distribution>>, apfel::QGrid<apfel::Set<apfel::Distribution>>>(m, "TabulateObjectSetD")
+                                                                 .def(py::init<apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                                 .def(py::init<std::function<apfel::Set<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                                 .def(py::init<std::function<apfel::Set<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                                 .def(py::init<std::function<apfel::Set<apfel::Distribution>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a)
+                                                                 .def("EvaluatexQ", py::overload_cast<int const&, double const&, double const&>(&apfel::TabulateObject<apfel::Set<apfel::Distribution>>::EvaluatexQ, py::const_), "i"_a, "x"_a, "Q"_a)
+                                                                 .def("EvaluateMapxQ", py::overload_cast<double const&, double const&>(&apfel::TabulateObject<apfel::Set<apfel::Distribution>>::EvaluateMapxQ, py::const_), "x"_a, "Q"_a);
+
+  py::class_<apfel::TabulateObject<apfel::DoubleObject<apfel::Distribution>>, apfel::QGrid<apfel::DoubleObject<apfel::Distribution>>>(m, "TabulateObjectDD")
+                                                                          .def(py::init<apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                                          .def(py::init<std::function<apfel::DoubleObject<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                                          .def(py::init<std::function<apfel::DoubleObject<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                                          .def(py::init<std::function<apfel::DoubleObject<apfel::Distribution>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a)
+                                                                          .def("EvaluatexzQ", py::overload_cast<double const&, double const&, double const&>(&apfel::TabulateObject<apfel::DoubleObject<apfel::Distribution>>::EvaluatexzQ, py::const_), "x"_a, "z"_a, "Q"_a);
+
+  py::class_<apfel::TabulateObject<apfel::Operator>, apfel::QGrid<apfel::Operator>>(m, "TabulateObjectO")
+                                                                                 .def(py::init<apfel::MatchedEvolution<apfel::Operator>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                                                 .def(py::init<std::function<apfel::Operator(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                                                 .def(py::init<std::function<apfel::Operator(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                                                 .def(py::init<std::function<apfel::Operator(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
+
+  py::class_<apfel::TabulateObject<apfel::Set<apfel::Operator>>, apfel::QGrid<apfel::Set<apfel::Operator>>>(m, "TabulateObjectSetO")
+                                                             .def(py::init<apfel::MatchedEvolution<apfel::Set<apfel::Operator>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                             .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                             .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                             .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
+
+  py::class_<apfel::TabulateObject<apfel::DoubleObject<apfel::Operator>>, apfel::QGrid<apfel::DoubleObject<apfel::Operator>>>(m, "TabulateObjectOO")
+                                                                      .def(py::init<apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                                      .def(py::init<std::function<apfel::DoubleObject<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                                      .def(py::init<std::function<apfel::DoubleObject<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                                      .def(py::init<std::function<apfel::DoubleObject<apfel::Operator>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
 }
