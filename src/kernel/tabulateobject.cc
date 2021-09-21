@@ -139,6 +139,27 @@ namespace apfel
     t.stop();
   }
 
+  //_________________________________________________________________________________
+  template<class T>
+  TabulateObject<T>::TabulateObject(std::vector<T>      const& Object,
+                                    std::vector<double> const& Qg,
+                                    int                 const& InterDegree):
+    QGrid<T>(Qg, InterDegree)
+  {
+    report("Tabulating object... ");
+    Timer t;
+
+    // Check that grid of nodes and vector of the pretabulated object
+    // have the same size
+    if (Object.size() != Qg.size())
+      throw std::runtime_error(error("TabulateObject<T>::TabulateObject", "Vectors of node and pre-tabulated do not match"));
+
+    // Fill in Qgrid with the object.
+    this->_GridValues = Object;
+
+    t.stop();
+  }
+
   // Specializations
   //_________________________________________________________________________________
   template class TabulateObject<double>;
