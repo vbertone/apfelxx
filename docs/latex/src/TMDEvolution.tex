@@ -1864,13 +1864,74 @@ and similarly for $\widetilde{\mathbb{C}}$, while:
 \end{array}
 \end{equation}
 
+\subsection{Non-equivalence of resummation schemes beyond accuracy}
 
-
-
-
-
-
-
+In this section, we explicitly show that a change of resummation
+scheme leads to differences that are beyond the nominal accuracy. To
+this purpose, we restrict ourselves to considering NNLL accuracy and
+prove that the expansions required to implement a change of scheme
+lead to order $\mathcal{O}(\alpha_s^2)$ mismatch terms. Such
+corrections are of the kind $\alpha_s^{k}L^{2k-4}$ and are clearly
+beyond NNLL accuracy.\footnote{Note that it may look like that this
+  correction is a N$^4$LL one. However, for exponentiating observables
+  the counting is best done at the level of the cumulant cross section
+  which translates this term into a N$^3$LL correction.}  The proof is
+simply achieved by using the equivalent of the equality in
+Eq.~(\ref{eq:Hevol}) for a generic scheme-change function $h$ that we
+write as follows:
+\begin{equation}
+h(Q) =
+\left[\sqrt{h(\mu_b)}\right]^2\exp\left[-2\int_{\mu_b}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))h^{-1}(\mu)\frac{dh
+    (\mu)}{da_s}\right]\,,
+\label{eq:Hevolsplit}
+\end{equation}
+as a consequence of the fact that each of the two $\sqrt{h(\mu_b)}$ is
+absorbed into one of the matching functions $C$. At NNLL it is
+sufficient to limit to $\mathcal{O}(\alpha_s)$ corrections to $h$:
+\begin{equation}
+h(\mu) = 1 + a_s(\mu)h^{(1)}\,,
+\end{equation}
+such that:
+\begin{equation}
+\sqrt{h(\mu_b)} = 1 + \frac{1}{2}a_s(\mu_b)h^{(1)}+\mathcal{O}(\alpha_s^2)\,,
+\end{equation}
+and:
+\begin{equation}
+\beta(a_s(\mu))h^{-1}(\mu)\frac{dh (\mu)}{da_s} = a_s^2(\mu)h^{(1)}\beta_0+\mathcal{O}(\alpha_s^3)\,.
+\end{equation}
+We also need to expand the running of $\alpha_s$:
+\begin{equation}
+a_s(\mu) = a_s(\mu_0)-2a_s^2(\mu_0)\beta_0\ln\frac{\mu}{\mu_0}+\mathcal{O}(\alpha_s^3)\,,
+\label{eq:alphasexpagain}
+\end{equation}
+that allows us to write:
+\begin{equation}
+\exp\left[-2\int_{\mu_b}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))h^{-1}(\mu)\frac{dh (\mu)}{da_s}\right] = 1-2a_s^2(\mu_b)h^{(1)}\beta_0\ln\frac{Q}{\mu_b}+\mathcal{O}(\alpha_s^3)\,.
+\end{equation}
+so that the r.h.s. of Eq.~(\ref{eq:Hevolsplit}) can be expanded as:
+\begin{equation}
+\left[\sqrt{h(\mu_b)}\right]^2\exp\left[-2\int_{\mu_b}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))h^{-1}(\mu)\frac{dh
+    (\mu)}{da_s}\right] = 1 +
+a_s(\mu_b)h^{(1)}+a_s^2(\mu_b)h^{(1)}\left(\frac{1}{4}h^{(1)}-2\beta_0\ln\frac{Q}{\mu_b}\right)+\mathcal{O}(\alpha_s^3)\,.
+\label{eq:Hevolrhs}
+\end{equation}
+Now we use Eq.~(\ref{eq:alphasexpagain}) to expand the l.h.s. of
+Eq.~(\ref{eq:Hevolsplit}) as follows:
+\begin{equation}
+h(Q) = 1 + a_s(\mu_b)h^{(1)}-2a_s^2(\mu_0) h^{(1)}\beta_0\ln\frac{\mu}{\mu_0}+\mathcal{O}(\alpha_s^3)\,.
+\label{eq:Hevollhs}
+\end{equation}
+Finally, taking the difference between l.h.s. and r.h.s. of
+Eq.~(\ref{eq:Hevolsplit}) one immediately finds:
+\begin{equation}
+h(Q) -
+\left[\sqrt{h(\mu_b)}\right]^2\exp\left[-2\int_{\mu_b}^{Q}\frac{d\mu}{\mu}\beta(a_s(\mu))h^{-1}(\mu)\frac{dh
+    (\mu)}{da_s}\right] = -\left[\frac12a_s(\mu_b)h^{(1)}\right]^2+\mathcal{O}(\alpha_s^3)=\mathcal{O}(\alpha_s^2)\,.
+\end{equation}
+This confirms that a resummation-scheme change at NNLL leads to
+non-vanishing differences that are however beyond accuracy. This is a
+particular case of a result that is extensible to all fixed
+logarithmic orders.
 
 
 
