@@ -1155,8 +1155,11 @@ namespace apfel
       }
 
     // Allocate Identity and Zero operators.
-    const Operator One{DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), Identity{}};
-    const Operator Zero{DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), Null{}};
+    const Grid&  g   = DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid();
+    const double eps = DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetIntegrationAccuracy();
+    const bool   gpd = DglapObj.begin()->second.SplittingFunctions.at(0).at(0).IsGPD();
+    const Operator One{g, Identity{}, eps, gpd};
+    const Operator Zero{g, Null{}, eps, gpd};
 
     // Create set of initial operators that represent the unity set of
     // operators.

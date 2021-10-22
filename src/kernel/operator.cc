@@ -14,7 +14,9 @@ namespace apfel
 {
   //_________________________________________________________________________
   Operator::Operator(Grid const& gr, Expression const& expr, double const& eps, bool const& gpd):
-    _grid(gr)
+    _grid(gr),
+    _eps(eps),
+    _gpd(gpd)
   {
     if (gpd)
       BuildOperatorGPD(expr, eps);

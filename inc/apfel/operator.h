@@ -72,12 +72,24 @@ namespace apfel
     Grid const& GetGrid() const { return _grid; }
 
     /**
+     * @brief Function that returns the integration accuracy
+     */
+    double const& GetIntegrationAccuracy() const { return _eps; }
+
+    /**
+     * @brief Function that returns the GPD switch
+     */
+    bool const& IsGPD() const { return _gpd; }
+
+    /**
      * @brief Function that returns the operator.
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
   protected:
     Grid                 const& _grid;      //!< Grid on which to compute the operator
+    double               const  _eps;       //!< Integration accuracy
+    bool                 const  _gpd;       //!< GPD switch
     std::vector<matrix<double>> _Operator;  //!< Operator values
 
     friend std::ostream& operator << (std::ostream& os, Operator const& sg);
