@@ -25,18 +25,13 @@ namespace apfel
     Operator(Operator const&) = default;
 
     /**
-     * @brief The Operator constructor used for inheritance.
-     * @param gr: the Grid object
-     */
-    Operator(Grid const& gr);
-
-    /**
      * @brief The Operator constructor.
      * @param gr: the Grid object
      * @param expr: the expression to be transformed
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
+     * @param gpd: whether the operator had to computed for a GPD-like expression (default: false)
      */
-    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5);
+    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5, bool const& gpd = false);
 
     /**
      * @brief The Operator virtual destructor.
@@ -56,6 +51,20 @@ namespace apfel
     Operator& operator += (Operator const& o);                      //!< this += Operator
     Operator& operator -= (Operator const& o);                      //!< this -= Operator
     ///@}
+
+    /**
+     * @brief Function that builds a DGLAP-like operator.
+     * @param expr: the expression to be transformed
+     * @param eps: relative accuracy of the numerical integrations
+     */
+    void BuildOperatorDGLAP(Expression const& expr, double const& eps);
+
+    /**
+     * @brief Function that builds a GPD-like operator.
+     * @param expr: the expression to be transformed
+     * @param eps: relative accuracy of the numerical integrations
+     */
+    void BuildOperatorGPD(Expression const& expr, double const& eps);
 
     /**
      * @brief Function that returns the Grid object associated to the operator.
