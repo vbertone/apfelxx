@@ -53,7 +53,7 @@ Following the notes written by Lorenzo and Yannis, the
 impact-parameter-space inclusive jet-production cross section in DIS
 in TMD factorisation takes the standard form:
 \begin{equation}
-d\sigma \sim H_{ij}(Q;\mu)D_{i\rightarrow {\rm jet}}(b,Q,t_{\mathcal{R}};\mu,\zeta_1) F_{j\leftarrow P}(x,b,Q;\mu,\zeta_2)\,,
+d\sigma \sim H_{ij}(Q;\mu)D_{i\rightarrow {\rm jet}}(b,t_{\mathcal{R}};\mu,\zeta_1) F_{j\leftarrow P}(x,b;\mu,\zeta_2)\,,
 \end{equation}
 where $H_{ij}$ is the DIS hard function, $F_{j\leftarrow P}$ is the
 usual TMD PDF of the quark flavour $j$ inside the proton, and
@@ -99,7 +99,7 @@ D_{i\rightarrow {\rm jet}} (\mu_0,\zeta_0) = D_{i\rightarrow {\rm jet}}
 (\mu_0,\zeta_0;\mu_0) = U_J[\mu_0\leftarrow \mu_J]D_{i\rightarrow {\rm jet}}
 (\mu_0,\zeta_0;\mu_J)\,,
 \end{equation}
-with $\mu_J=C_JQt_{\mathcal{R}}$, $C_J\sim 1$. The evolution factor $U_J$ takes the
+with $\mu_J=C_J\mu t_{\mathcal{R}}$, $C_J\sim 1$. The evolution factor $U_J$ takes the
 following explicit form:
 \begin{equation}
 U_J[\mu_0\leftarrow \mu_J]=\exp\left[-\int_{\mu_0}^{\mu_J}\frac{d\mu'}{\mu'}\gamma_J(\mu')\right]\,.
@@ -120,8 +120,8 @@ D_{i\rightarrow {\rm jet}}
 where the coefficient $d_J^{q,\rm alg}$ depends on the jet
 algorithm. For cone a $k_T$ algorithms respectively reads:
 \begin{equation}
-d_J^{q,\rm cone} = 7 + 6\ln 2-\frac{5\pi^2}{6}\,,\quad\mbox{and}\quad
-d_J^{q,k_T} = 13 - \frac{3\pi^2}{2}\,.
+d_J^{q,\rm cone} = C_F\left(7 + 6\ln 2-\frac{5\pi^2}{6}\right)\,,\quad\mbox{and}\quad
+d_J^{q,k_T} = C_F\left(13 - \frac{3\pi^2}{2}\right)\,.
 \end{equation}
 
 \end{document}
