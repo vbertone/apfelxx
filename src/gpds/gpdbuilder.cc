@@ -6,7 +6,6 @@
 
 #include "apfel/gpdbuilder.h"
 #include "apfel/dglap.h"
-#include "apfel/operatorgpd.h"
 #include "apfel/set.h"
 #include "apfel/timer.h"
 #include "apfel/constants.h"
@@ -46,8 +45,8 @@ namespace apfel
     // ===============================================================
     // LO Matching conditions.
     std::map<int, Operator> MatchLO;
-    const OperatorGPD Id  {g, Identity{}, IntEps};
-    const OperatorGPD Zero{g, Null{},     IntEps};
+    const Operator Id  {g, Identity{}, IntEps, true};
+    const Operator Zero{g, Null{},     IntEps, true};
     MatchLO.insert({MatchingBasisQCD::M0, Id});
     MatchLO.insert({MatchingBasisQCD::M1, Zero});
     MatchLO.insert({MatchingBasisQCD::M2, Zero});
@@ -60,13 +59,13 @@ namespace apfel
     // ===============================================================
     // LO splitting function operators.
     std::map<int, std::map<int, Operator>> OpMapLO;
-    const OperatorGPD O0ns{g, Pgpd0ns{xi}, IntEps};
-    const OperatorGPD O0qq{g, Pgpd0qq{xi}, IntEps};
-    const OperatorGPD O0gq{g, Pgpd0gq{xi}, IntEps};
+    const Operator O0ns{g, Pgpd0ns{xi}, IntEps, true};
+    const Operator O0qq{g, Pgpd0qq{xi}, IntEps, true};
+    const Operator O0gq{g, Pgpd0gq{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const OperatorGPD O0qg{g, Pgpd0qg{nf, xi}, IntEps};
-        const OperatorGPD O0gg{g, Pgpd0gg{nf, xi}, IntEps};
+        const Operator O0qg{g, Pgpd0qg{nf, xi}, IntEps, true};
+        const Operator O0gg{g, Pgpd0gg{nf, xi}, IntEps, true};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0qq});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
