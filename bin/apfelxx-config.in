@@ -2,7 +2,6 @@
 
 # These variables need to exist
 prefix=@prefix@
-exec_prefix=@exec_prefix@
 
 if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
     echo
