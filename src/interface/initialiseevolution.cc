@@ -603,7 +603,10 @@ namespace apfel
       }
 
     out << std::scientific;
-    out << "PdfType: replica\n";
+    if (filename == _setup.name + "/" + _setup.name + "_0000")
+      out << "PdfType: central\n";
+    else
+      out << "PdfType: replica\n";
     out << "Format: lhagrid1\n";
 
     for(auto const& ka : _KnotArray)
