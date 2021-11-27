@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <functional>
-
 int main()
 {
   // x-space grid
