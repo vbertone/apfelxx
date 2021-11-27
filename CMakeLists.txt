@@ -31,7 +31,6 @@ configure_file(
 
 # Configuration script
 set(prefix ${CMAKE_INSTALL_PREFIX})
-set(exec_prefix "${prefix}")
 set(includedir "${prefix}/include")
 set(libdir "${prefix}/lib")
 configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_SOURCE_DIR}/bin/apfelxx-config")

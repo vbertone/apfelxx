@@ -36,7 +36,6 @@
 #include "apfel/ogataquadrature.h"
 #include "apfel/doubleexponentialquadrature.h"
 #include "apfel/operator.h"
-#include "apfel/operatorgpd.h"
 #include "apfel/qgrid.h"
 #include "apfel/set.h"
 #include "apfel/tabulateobject.h"

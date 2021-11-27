@@ -97,6 +97,17 @@ namespace apfel
     TabulateObject(std::function<T(double const&)> const& Object,
                    std::vector<double>             const& Qg,
                    int                             const& InterDegree);
+
+    /**
+     * @brief The TabulateObject constructor for a pretabulated
+     * object tabulated on a user-defined grid.
+     * @param Object: the T-valued vector of the pre-tabulated object
+     * @param Qg: the user-defined interpolation grid
+     * @param InterDegree: the interpolation degree on the grid in Q
+     */
+    TabulateObject(std::vector<T>      const& Object,
+                   std::vector<double> const& Qg,
+                   int                 const& InterDegree);
     ///@}
 
     /**

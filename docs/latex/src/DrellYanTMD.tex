@@ -650,7 +650,9 @@ with:
 \begin{equation}
   y(x_F,Q) =
   \sinh^{-1}\left(\frac{x_F\sqrt{s}}{2Q}\right) =
-  \ln\left[\frac{\sqrt{s}}{2Q}\left(x_F+\sqrt{x_F^2 + \frac{4Q^2}{s}}\right)\right]\,,
+  \ln\left[\frac{\sqrt{s}}{2Q}\left(x_F+\sqrt{x_F^2 +
+        \frac{4Q^2}{s}}\right)\right]\,,
+  \label{eq:yxFQ}
 \end{equation}
 so that:
 \begin{equation}\label{eq:x12ofxFQ}
@@ -691,6 +693,48 @@ where $x_1$ and $x_2$ are functions of $x_F$ and $Q$ through
 Eq.~(\ref{eq:x12ofxFQ}). In addition, we have defined a grid in $x_F$,
 $\{x_{F,\alpha}\}$ with $\alpha = 0,\dots,N_x$, that allowed us to
 define $x_{1(2),\alpha\tau}\equiv x_{1(2)}(x_{F,\alpha},Q_\tau)$.
+
+\subsubsection{Approximated calculation of the cross section differential
+  in $x_F$}
+
+In this section we explore the possibility of approximating the cross
+section differential in $x_F$ and integrated over the bin in
+$x_F\in[x_{F,\rm min}, x_{F,\rm max}]$ in a way that the procedure
+developed in Sect.~\ref{sec:QyInt} can be used. The aim is to be able
+to compute predictions for the data delivered by the E772
+experiment~\cite{E772:1994cpf}. The specific observable measured in
+Ref.~\cite{E772:1994cpf} is:
+\begin{equation}
+E\frac{d^3\sigma}{d^3q} = \frac{1}{2\pi q_T}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ\frac{d\sigma}{dQdydq_T}\,,
+\end{equation}
+where we have used the equality given in Eq.~(43) of
+Ref.~\cite{Bacchetta:2017gcc}. Integrating over the bin in $x_F$ gives:
+\begin{equation}
+  \begin{array}{rcl}
+\displaystyle \int_{x_{F,\rm min}}^{x_{F,\rm max}} dx_F E\frac{d^3\sigma}{d^3q} &=&\displaystyle 
+    \frac{1}{2\pi q_T}\int_{Q_{\rm min}}^{Q_{\rm max}}dQ
+    \int_{x_{F,\rm min}}^{x_{F,\rm max}}
+                                                                                    dx_F\frac{d\sigma}{dQdydq_T}\\
+    \\
+    &=&\displaystyle \frac{1}{\pi q_T\sqrt{s}}\int_{Q_{\rm
+    min}}^{Q_{\rm max}}dQ\,Q\int_{y(x_{F,\rm min},Q)}^{y(x_{F,\rm
+    max},Q)} dy\,\cosh(y)\frac{d\sigma}{dQdydq_T}\,,
+    \end{array}
+\end{equation}
+with $y(x_F,Q)$ given in Eq.~(\ref{eq:yxFQ}). In order to reduce the
+leftmost integral to the structure of Eq.~(\ref{eq:integralK}) where
+the integration bounds are constant, we assume that the bins in $Q$
+and $x_F$ are small enough such that one can make the following
+approximation:
+\begin{equation}
+\int_{x_{F,\rm min}}^{x_{F,\rm max}} dx_F E\frac{d^3\sigma}{d^3q}\simeq \frac{\overline{Q}\cosh(\overline{y})}{\pi q_T\sqrt{s}}\int_{Q_{\rm
+    min}}^{Q_{\rm max}}dQ\int_{y(x_{F,\rm min},\overline{Q})}^{y(x_{F,\rm
+    max}, \overline{Q})} dy\frac{d\sigma}{dQdydq_T}\,,
+\end{equation}
+where:
+\begin{equation}
+\overline{Q}=\frac{Q_{\rm min}+Q_{\rm max}}2\quad\mbox{and} \quad \overline{y}=\frac{y(x_{F,\rm min},\overline{Q})+y(x_{F,\rm max},\overline{Q})}2\,.
+\end{equation}
 
 \subsection{Flavour dependence}
 

@@ -38,27 +38,34 @@ namespace apfel
     const double CF2    = CF * CF;
     const double CA2    = CA * CA;
     const double CA3    = CA * CA2;
+    const double zeta22 = zeta2 * zeta2;
+    const double zeta23 = zeta2 * zeta22;
     const double zeta32 = zeta3 * zeta3;
     const double dFF4nc = 5. / 36.;
     const double dFA4nc = 5. / 2.;
     return
-      -(nf3*(0.3950617283950617 - (64*zeta3)/27.))
-      + CA*nf2*(11.395061728395062 - (608*zeta2)/81. + (2240*zeta3)/27. - (112*zeta4)/3.)
-      + CF*nf2*(29.530864197530864 - (640*zeta3)/9. + 32*zeta4)
-      + dFF4nc/CF*nf*(256*zeta2 - (256*zeta3)/3. - (1280*zeta5)/3.)
-      + CF2*nf*(63.55555555555556 + (592*zeta3)/3. - 320*zeta5)
-      + CA*CF*nf*(-420.5679012345679 + (440*zeta2)/3. + (3712*zeta3)/9. - 128*zeta2*zeta3
-                  - 176*zeta4 + 160*zeta5)
-      + CA2*nf*(-297.98765432098764 + (20320*zeta2)/81. - (23104*zeta3)/27.
-                + (448*zeta2*zeta3)/3. - (176*zeta4)/3. + (2096*zeta5)/9.)
-      + dFA4nc/CF*(-128*zeta2 + (128*zeta3)/3. - 384*zeta32 + (3520*zeta5)/3. - 992*zeta6)
-      + CA3*(1040.469135802469 - (88400*zeta2)/81. + (20944*zeta3)/27. - (352*zeta2*zeta3)/3.
-             - 16*zeta32 + 1804*zeta4 - (3608*zeta5)/9. - (2504*zeta6)/3.);
+      2 * ( nf3 * ( 64. / 27. * zeta3 - 32. / 81. )
+            + nf2 * CA * ( - 224. / 15. * zeta22 + 2240. / 27. * zeta3 - 608. / 81. * zeta2 + 923. / 81. )
+            + nf2 * CF * ( 64. / 5. * zeta22 - 640. / 9. * zeta3 + 2392. / 81. )
+            + nf * CA2 * ( 2096. / 9. * zeta5 + 448. / 3. * zeta3 * zeta2 - 352. / 15. * zeta22
+                           - 23104. / 27. * zeta3 + 20320. / 81. * zeta2 - 24137. / 81. )
+            + nf * CA * CF * ( 160. * zeta5 - 128. * zeta3 * zeta2 - 352. / 5. * zeta22
+                               + 3712. / 9. * zeta3 + 440. / 3. * zeta2 - 34066. / 81. )
+            + nf * CF2 * ( - 320. * zeta5 + 592. / 3. * zeta3 + 572. / 9. )
+            + nf * dFF4nc / CF * ( - 1280. / 3. * zeta5 - 256. / 3. * zeta3 + 256. * zeta2 )
+            + dFA4nc / CF * ( - 384. * zeta32 - 7936. / 35. * zeta23
+                              + 3520. / 3. * zeta5 + 128. / 3. * zeta3 - 128. * zeta2 )
+            + CA3 * ( - 16. * zeta32 - 20032. / 105. * zeta23 - 3608. / 9. * zeta5
+                      - 352. / 3. * zeta3 * zeta2 + 3608. / 5. * zeta22
+                      + 20944. / 27. * zeta3 - 88400. / 81. * zeta2 + 84278. / 81. ) );
   }
 
   //_________________________________________________________________________
-  double gammaK3gmq()
+  double gammaK3gmq(int const& nf)
   {
-    return 40880 / CA - 20702 / CF;
+    return
+      2 * ( nf * 5. / 24. * ( - 1280. / 3. * zeta5 - 256. / 3. * zeta3 + 256. * zeta2 )
+            + 15. / 4. * ( - 384. * pow(zeta3, 2) - 7936. / 35. * pow(zeta2, 3)
+                           + 3520. / 3. * zeta5 + 128. / 3. * zeta3 - 128. * zeta2 ) );
   }
 }
