@@ -104,6 +104,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a80f6e9dc8055f27d5a394f53c4702d30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a80f6e9dc8055f27d5a394f53c4702d30">GetGrid</a> () const</td></tr>
 <tr class="memdesc:a80f6e9dc8055f27d5a394f53c4702d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated to the operator.  <a href="classapfel_1_1Operator.html#a80f6e9dc8055f27d5a394f53c4702d30">More...</a><br /></td></tr>
 <tr class="separator:a80f6e9dc8055f27d5a394f53c4702d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d185d01ae0703325751a2d68193f127"><td class="memItemLeft" align="right" valign="top">double const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a0d185d01ae0703325751a2d68193f127">GetIntegrationAccuracy</a> () const</td></tr>
+<tr class="memdesc:a0d185d01ae0703325751a2d68193f127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration accuracy.  <a href="classapfel_1_1Operator.html#a0d185d01ae0703325751a2d68193f127">More...</a><br /></td></tr>
+<tr class="separator:a0d185d01ae0703325751a2d68193f127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55048afd5d8c9310649edeafdcf10d7e"><td class="memItemLeft" align="right" valign="top">bool const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e">IsGPD</a> () const</td></tr>
+<tr class="memdesc:a55048afd5d8c9310649edeafdcf10d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the GPD switch.  <a href="classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e">More...</a><br /></td></tr>
+<tr class="separator:a55048afd5d8c9310649edeafdcf10d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f51d7a58bc907d7de889f941ee4c052"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a6f51d7a58bc907d7de889f941ee4c052">GetOperator</a> () const</td></tr>
 <tr class="memdesc:a6f51d7a58bc907d7de889f941ee4c052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the operator.  <a href="classapfel_1_1Operator.html#a6f51d7a58bc907d7de889f941ee4c052">More...</a><br /></td></tr>
 <tr class="separator:a6f51d7a58bc907d7de889f941ee4c052"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +144,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a07ea5d7c9382f4566be27fd651bfb600"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a07ea5d7c9382f4566be27fd651bfb600">_grid</a></td></tr>
 <tr class="memdesc:a07ea5d7c9382f4566be27fd651bfb600"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> on which to compute the operator.  <a href="classapfel_1_1Operator.html#a07ea5d7c9382f4566be27fd651bfb600">More...</a><br /></td></tr>
 <tr class="separator:a07ea5d7c9382f4566be27fd651bfb600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af659fccf626c174f729a35d930f84fd8"><td class="memItemLeft" align="right" valign="top">double const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#af659fccf626c174f729a35d930f84fd8">_eps</a></td></tr>
+<tr class="memdesc:af659fccf626c174f729a35d930f84fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integration accuracy.  <a href="classapfel_1_1Operator.html#af659fccf626c174f729a35d930f84fd8">More...</a><br /></td></tr>
+<tr class="separator:af659fccf626c174f729a35d930f84fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d93f7c9ec6b8a8ccd29189531282278"><td class="memItemLeft" align="right" valign="top">bool const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a6d93f7c9ec6b8a8ccd29189531282278">_gpd</a></td></tr>
+<tr class="memdesc:a6d93f7c9ec6b8a8ccd29189531282278"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPD switch.  <a href="classapfel_1_1Operator.html#a6d93f7c9ec6b8a8ccd29189531282278">More...</a><br /></td></tr>
+<tr class="separator:a6d93f7c9ec6b8a8ccd29189531282278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Operator.html#a319ffccbd5f34a791d82e9dd70dfe8d8">_Operator</a></td></tr>
 <tr class="memdesc:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> values.  <a href="classapfel_1_1Operator.html#a319ffccbd5f34a791d82e9dd70dfe8d8">More...</a><br /></td></tr>
 <tr class="separator:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -384,6 +396,33 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a0d185d01ae0703325751a2d68193f127" name="a0d185d01ae0703325751a2d68193f127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d185d01ae0703325751a2d68193f127">&#9670;&nbsp;</a></span>GetIntegrationAccuracy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double const  &amp; apfel::Operator::GetIntegrationAccuracy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that returns the integration accuracy. </p>
+
+</div>
+</div>
 <a id="a6f51d7a58bc907d7de889f941ee4c052" name="a6f51d7a58bc907d7de889f941ee4c052"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f51d7a58bc907d7de889f941ee4c052">&#9670;&nbsp;</a></span>GetOperator()</h2>
 
@@ -408,6 +447,33 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function that returns the operator. </p>
+
+</div>
+</div>
+<a id="a55048afd5d8c9310649edeafdcf10d7e" name="a55048afd5d8c9310649edeafdcf10d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55048afd5d8c9310649edeafdcf10d7e">&#9670;&nbsp;</a></span>IsGPD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const  &amp; apfel::Operator::IsGPD </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that returns the GPD switch. </p>
 
 </div>
 </div>
@@ -611,6 +677,54 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="af659fccf626c174f729a35d930f84fd8" name="af659fccf626c174f729a35d930f84fd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af659fccf626c174f729a35d930f84fd8">&#9670;&nbsp;</a></span>_eps</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double const apfel::Operator::_eps</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Integration accuracy. </p>
+
+</div>
+</div>
+<a id="a6d93f7c9ec6b8a8ccd29189531282278" name="a6d93f7c9ec6b8a8ccd29189531282278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d93f7c9ec6b8a8ccd29189531282278">&#9670;&nbsp;</a></span>_gpd</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const apfel::Operator::_gpd</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>GPD switch. </p>
+
+</div>
+</div>
 <a id="a07ea5d7c9382f4566be27fd651bfb600" name="a07ea5d7c9382f4566be27fd651bfb600"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07ea5d7c9382f4566be27fd651bfb600">&#9670;&nbsp;</a></span>_grid</h2>
 
@@ -665,7 +779,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 22 2021 13:58:10 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+Generated on Sat Nov 27 2021 08:47:27 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
 </small></address>
 </body>
 </html>
