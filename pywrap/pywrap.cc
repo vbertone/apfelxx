@@ -353,7 +353,7 @@ PYBIND11_MODULE(apfelpy, m)
   // Wrappers of "operator.h"
   py::class_<apfel::Operator>(m, "Operator")
   .def(py::init<apfel::Operator const&>(), "g"_a)
-  .def(py::init<apfel::Grid const&>(), "g"_a)
+  //.def(py::init<apfel::Grid const&>(), "g"_a)
   .def(py::init<apfel::Grid const&, apfel::Expression const&, double const&>(), "g"_a, "expr"_a, "eps"_a = 1e-5)
   .def("GetGrid", &apfel::Operator::GetGrid)
   .def("GetOperator", &apfel::Operator::GetOperator)
