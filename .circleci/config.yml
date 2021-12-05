@@ -1,11 +1,6 @@
 version: 2.1
 orbs: 
   codecov: codecov/codecov@3.1.1
-workflows:
-  upload-to-codecov:
-    jobs:
-      - checkout
-      - codecov/upload
 jobs:
   build:
     machine:
@@ -16,3 +11,7 @@ jobs:
       - run: sudo apt-get install g++ cmake valgrind
       - run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++17" . && make -j8
       - run: ctest -V
+workflows:
+  upload-to-codecov:
+    jobs:
+      - build
