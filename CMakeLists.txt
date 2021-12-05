@@ -55,6 +55,18 @@ add_library(apfelxx SHARED ${source_files})
 # define libraries to be linked
 target_link_libraries(apfelxx)
 
+# pybind11
+find_package(pybind11 QUIET)
+if (pybind11_FOUND)
+   pybind11_add_module(apfelpy pywrap/pywrap.cc)
+   target_link_libraries(apfelpy PRIVATE apfelxx)
+   find_package (Python3 REQUIRED)
+   execute_process(COMMAND "${Python3_EXECUTABLE}" -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib(prefix='${CMAKE_INSTALL_PREFIX}', plat_specific=True), end = '')" OUTPUT_VARIABLE PYTHON_INSTALLATION_PATH)
+   install(TARGETS apfelpy LIBRARY DESTINATION "${PYTHON_INSTALLATION_PATH}")
+else (pybind11_FOUND)
+  message ("pybind11 not found. The python wrapper will not be built.")
+endif (pybind11_FOUND)
+
 # install
 install(TARGETS apfelxx
            RUNTIME DESTINATION bin
