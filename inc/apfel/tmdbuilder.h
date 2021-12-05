@@ -20,6 +20,11 @@ namespace apfel
   enum LogAccuracy: int {NNNLLp = -3, NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3};
 
   /**
+   * @brief Enumerator for the jet algoritms fot the jet TMDs
+   */
+  enum JetAlgorithm: int {CONE = 0, KT = 1};
+
+  /**
    * @brief Structure that contains all the precomputed quantities
    * needed to perform the TMD evolution, matching to the collinear
    * PDFs, and computation of cross sections, i.e. perturbative
@@ -51,7 +56,7 @@ namespace apfel
    * of TMD PDFs and FFs and store them into a 'TmdObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
-   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @param nnnlo: switch to compute the NNNLO matching functions (default: false)
    * @return A map of TmdObject objects, one for each possible nf
    */
@@ -69,7 +74,7 @@ namespace apfel
    * that has H = 1.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
-   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of TmdObject objects, one for each possible nf
    */
   std::map<int, TmdObjects> InitializeTmdObjectsDYResScheme(Grid                const& g,
@@ -84,7 +89,7 @@ namespace apfel
    * in.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
-   * @param IntEps: the integration accuracy (default: 10^{-5})
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
 
    * @return A map of TmdObject objects, one for each possible nf
    */
@@ -109,7 +114,7 @@ namespace apfel
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
-   * @param Ci: the initial-scale variation factor
+   * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
@@ -129,7 +134,7 @@ namespace apfel
    * @param CollFFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
-   * @param Ci: the initial-scale variation factor
+   * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
@@ -141,6 +146,30 @@ namespace apfel
                                                                                             int                                             const& PerturbativeOrder,
                                                                                             double                                          const& Ci = 1,
                                                                                             double                                          const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the TMD of a jet in b-space as
+   * functions of the final scale and rapidity.
+   * @param TmdObj: the TMD objects
+   * @param JetAlgo: the jet algorithm to be used
+   * @param JetR: the jet radius
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param CJ: jet-scale variation factor (default: 1)
+   * @param Ci: the initial-scale variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
+   * final rapidity scale &zeta; representing the evolved jet TMD
+   */
+  std::function<double(double const&, double const&, double const&)> BuildTmdJet(std::map<int, TmdObjects>            const& TmdObj,
+                                                                                 JetAlgorithm                         const& JetAlgo,
+                                                                                 double                               const& JetR,
+                                                                                 std::function<double(double const&)> const& Alphas,
+                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 double                               const& CJ = 1,
+                                                                                 double                               const& Ci = 1,
+                                                                                 double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched TMD PDFs in b-space.
@@ -161,7 +190,7 @@ namespace apfel
   /**
    * @brief Function that returns the matched TMD FFs in b-space.
    * @param TmdObj: the TMD objects
-   * @param CollPDFs: the set of collinear PDFs to be matched
+   * @param CollFFs: the set of collinear FFs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
    * @param Ci: the initial-scale variation factor
@@ -169,10 +198,33 @@ namespace apfel
    * b<SUB>T</SUB> representing the matched TMD FFs
    */
   std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
-                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                              std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                               std::function<double(double const&)>            const& Alphas,
                                                               int                                             const& PerturbativeOrder,
                                                               double                                          const& Ci = 1);
+
+  /**
+   * @brief Function that returns the jet TMD in b-space at the
+   * initial scale.
+   * @param TmdObj: the TMD objects
+   * @param JetAlgo: the jet algorithm
+   * @param tR: tangent of half the jet radius (tan(R/2))
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param CJ: jet-scale variation factor (default: 1)
+   * @param Ci: the initial-scale variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB> representing the low-scale jet TMD
+   */
+  std::function<double(double const&, double const&)> MatchTmdJet(std::map<int, TmdObjects>            const& TmdObj,
+                                                                  JetAlgorithm                         const& JetAlgo,
+                                                                  double                               const& tR,
+                                                                  std::function<double(double const&)> const& Alphas,
+                                                                  int                                  const& PerturbativeOrder,
+                                                                  double                               const& CJ = 1,
+                                                                  double                               const& Ci = 1,
+                                                                  double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the mathing functions for the TMD PDFs.
@@ -311,6 +363,7 @@ namespace apfel
    * @param nf: the number of active flavours
    * @param kappa: the ration between hard scale and renormalusation scale
    * @return The hard factor for Drell-Yan.
+   * @note TO BE REMOVED!
    */
   double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
   ///@}

@@ -13,6 +13,7 @@
 #include "apfel/gammak.h"
 #include "apfel/gammaf.h"
 #include "apfel/kcs.h"
+#include "apfel/djet.h"
 #include "apfel/hardfactors.h"
 #include "apfel/tools.h"
 #include "apfel/constants.h"
@@ -771,7 +772,7 @@ namespace apfel
     // Compute TMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
-    // Computed TMDPDFs at the final scale by multiplying initial
+    // Computed TMDPDFs at the final scale by multiplying the initial
     // scale TMDPDFs by the evolution factor.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
@@ -795,11 +796,42 @@ namespace apfel
     // Compute TMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
-    // Computed TMDFFs at the final scale by multiplying initial scale
-    // TMDFFs by the evolution factor.
+    // Computed TMDFFs at the final scale by multiplying the initial
+    // scale TMDFFs by the evolution factor.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
       return EvolFactors(b, muf, zetaf) * MatchedTmdFFs(b);
+    };
+
+    return EvolvedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&, double const&)> BuildTmdJet(std::map<int, TmdObjects>            const& TmdObj,
+                                                                                 JetAlgorithm                         const& JetAlgo,
+                                                                                 double                               const& JetR,
+                                                                                 std::function<double(double const&)> const& Alphas,
+                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 double                               const& CJ,
+                                                                                 double                               const& Ci,
+                                                                                 double                               const& IntEps)
+  {
+    // Stop the code if Ci is different from one. Ci variations not
+    // available yet.
+    if (Ci != 1)
+      throw std::runtime_error(error("BuildTmdJet", "Ci variations not available yet."));
+
+    // Get initial-scale jet TMD.
+    const std::function<double(double const&, double const&)> MatchedTmdJet = MatchTmdJet(TmdObj, JetAlgo, tan(JetR/2), Alphas, PerturbativeOrder, CJ, Ci, IntEps);
+
+    // Compute TMD evolution factors.
+    const std::function<double(double const&, double const&, double const&)> EvolFactors = QuarkEvolutionFactor(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
+
+    // Computed jet TMD at the final scale by multiplying the initial
+    // scale jet TMD by the evolution factor.
+    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> double
+    {
+      return EvolFactors(b, muf, zetaf) * MatchedTmdJet(b, muf);
     };
 
     return EvolvedTMDs;
@@ -851,6 +883,109 @@ namespace apfel
       // Convolute matching functions with the collinear FFs and
       // return.
       return MatchFunc(mu0) * CollFFs(mu0);
+    };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&)> MatchTmdJet(std::map<int, TmdObjects>            const& TmdObj,
+                                                                  JetAlgorithm                         const& JetAlgo,
+                                                                  double                               const& tR,
+                                                                  std::function<double(double const&)> const& Alphas,
+                                                                  int                                  const& PerturbativeOrder,
+                                                                  double                               const& CJ,
+                                                                  double                               const& Ci,
+                                                                  double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) thrs.size() < nf)
+          thrs.resize(nf);
+        thrs[nf-1] = thr;
+      }
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = thrs.size();
+    for (auto const& v : thrs)
+      if (v <= 0)
+        nfi++;
+
+    // Compute log and its powers.
+    const double lQ  = log(CJ);
+    const double lQ2 = lQ * lQ;
+
+    // Select coefficients according to the jet algorithm
+    std::map<int, double> gK0;
+    std::map<int, double> gK1;
+    std::map<int, double> gF0;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        gK0.insert({nf, CF * TmdObj.at(nf).GammaK.at(0)});
+        gK1.insert({nf, CF * TmdObj.at(nf).GammaK.at(1)});
+        gF0.insert({nf, TmdObj.at(nf).GammaFq.at(0)});
+      }
+    double djet1 = 0;
+    if (JetAlgo == CONE)
+      djet1 = dJetqCone1();
+    else if (JetAlgo == KT)
+      djet1 = dJetqkT1();
+    else
+      throw std::runtime_error(error("MatchTmdJet", "Unknown jet algorithm."));
+
+    // Construct function that returns the product of matching
+    // functions and collinear FFs. Includes a factor z^2 typical of
+    // FFs.
+    const auto MatchedTMDs = [=] (double const& b, double const& mu) -> double
+    {
+      // Define jet scale
+      const double muJ = CJ * tR * mu;
+
+      // The strong coupling at muJ
+      const double coup = Alphas(muJ) / FourPi;
+
+      // Number of active flavours
+      const int nf = NF(mu, thrs);
+
+      // Compute low-scale jet function
+      double J = 1;
+      if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
+        J += coup * ( djet1 + gF0.at(nf) * lQ + gK0.at(nf) * lQ2 / 2 );
+
+      // Define integrand of the evolution factor
+      const Integrator gammaJ{
+        [=] (double const& mup) -> double
+        {
+          // The strong coupling at mup
+          const double coup = Alphas(mup) / FourPi;
+
+          // Log of the scales
+          const double L = log(muJ / mup);
+
+          // LL
+          double gJ = - coup * gK0.at(nf) * L;
+
+          // NLL
+          if (PerturbativeOrder != 0)
+            gJ += coup * ( gF0.at(nf) - coup * gK1.at(nf) * L );
+
+          return gJ / mup;
+        }
+      };
+
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Convolute matching functions with the collinear FFs and
+      // return.
+      return J * exp(- gammaJ.integrate(mu0, muJ, IntEps) );
     };
 
     return MatchedTMDs;
@@ -1707,7 +1842,7 @@ namespace apfel
     // Construct function that returns the hard function
     const auto HardFactor = [=] (double const& mu) -> double
     {
-      // The stron coupling
+      // The strong coupling
       const double coup = Alphas(mu) / FourPi;
 
       // Number of active flavours
