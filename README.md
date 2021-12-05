@@ -1,7 +1,6 @@
 [![CircleCI](https://circleci.com/gh/vbertone/apfelxx.svg?style=svg&circle-token=079509ce5a2d4da15596d7812b33dca48eec8dc7)](https://circleci.com/gh/vbertone/apfelxx)
 [![CodeFactor](https://www.codefactor.io/repository/github/vbertone/apfelxx/badge)](https://www.codefactor.io/repository/github/vbertone/apfelxx)
 [![CodeQL](https://github.com/vbertone/apfelxx/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/vbertone/apfelxx/actions/workflows/codeql-analysis.yml)
-[![Codecov](https://github.com/vbertone/apfelxx/actions/workflows/codecov.yml/badge.svg)](https://github.com/vbertone/apfelxx/actions/workflows/codecov.yml)
 
 ![](https://github.com/vbertone/apfelxx/raw/master/resources/logo.png "Logo APFEL")
 
