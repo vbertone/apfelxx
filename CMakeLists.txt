@@ -64,7 +64,7 @@ if (pybind11_FOUND)
    execute_process(COMMAND "${Python3_EXECUTABLE}" -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib(prefix='${CMAKE_INSTALL_PREFIX}', plat_specific=True), end = '')" OUTPUT_VARIABLE PYTHON_INSTALLATION_PATH)
    install(TARGETS apfelpy LIBRARY DESTINATION "${PYTHON_INSTALLATION_PATH}")
 else (pybind11_FOUND)
-  message ("pybind11 not found. The python wrapper will not be built.")
+   message ("-- pybind11 not found. The python wrapper will not be built.")
 endif (pybind11_FOUND)
 
 # install
