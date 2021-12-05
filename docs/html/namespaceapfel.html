@@ -802,6 +802,11 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a8c509ac51bd27e1f97b8e5cb520df446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerator for the logarithmic accuracy.  <a href="namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446">More...</a><br /></td></tr>
 <tr class="separator:a8c509ac51bd27e1f97b8e5cb520df446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad665a96afaf1447481a8a2752508535d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">JetAlgorithm</a> : int { <a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535dafc514e4fc13c96234aa8ea275d799b38">CONE</a> = 0
+, <a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535da5162037141e8b3a8b28da4e1b2483cd7">KT</a> = 1
+ }</td></tr>
+<tr class="memdesc:ad665a96afaf1447481a8a2752508535d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerator for the jet algoritms fot the jet TMDs.  <a href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">More...</a><br /></td></tr>
+<tr class="separator:ad665a96afaf1447481a8a2752508535d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -1021,6 +1026,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a90ee4f901b34777425220834d5f76083"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a90ee4f901b34777425220834d5f76083">DistributionMap</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::function&lt; std::vector&lt; double &gt;(double const &amp;)&gt; const &amp;InDistFunc, int const &amp;NOutputs=0)</td></tr>
 <tr class="memdesc:a90ee4f901b34777425220834d5f76083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that fills in a map of distributions from a vector-valued function.  <a href="namespaceapfel.html#a90ee4f901b34777425220834d5f76083">More...</a><br /></td></tr>
 <tr class="separator:a90ee4f901b34777425220834d5f76083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Jet coefficients.</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p >Perturbative coefficients for the definction of the low-scale jet TMD depending on the jet algorithm. </p>
+</div></td></tr>
+<tr class="memitem:a4b4f47a6e2c870f537303900fade79cd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a4b4f47a6e2c870f537303900fade79cd">dJetqCone1</a> ()</td></tr>
+<tr class="separator:a4b4f47a6e2c870f537303900fade79cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c0875536afc1d630a0d9a398e49adf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a61c0875536afc1d630a0d9a398e49adf">dJetqkT1</a> ()</td></tr>
+<tr class="memdesc:a61c0875536afc1d630a0d9a398e49adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">&alpha;<sub>s</sub> correction to the kT-algorithm jet definition  <a href="namespaceapfel.html#a61c0875536afc1d630a0d9a398e49adf">More...</a><br /></td></tr>
+<tr class="separator:a61c0875536afc1d630a0d9a398e49adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">GammaV anomalous dimension.</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p >Coefficients of the &gamma;<sub>F</sub> anomalous dimension. The expressions are taken from eq. (58) <a href="https://arxiv.org/pdf/1705.07167.pdf">https://arxiv.org/pdf/1705.07167.pdf</a>. </p>
 </div></td></tr>
@@ -1301,12 +1314,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a7b93600e0a3f8b46c1c50ad768af289c"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a7b93600e0a3f8b46c1c50ad768af289c">BuildTmdFFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollFFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
 <tr class="memdesc:a7b93600e0a3f8b46c1c50ad768af289c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched and evolved TMD FFs in b-space as functions of the final scale and rapidity.  <a href="namespaceapfel.html#a7b93600e0a3f8b46c1c50ad768af289c">More...</a><br /></td></tr>
 <tr class="separator:a7b93600e0a3f8b46c1c50ad768af289c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf2e2c669bbf1998685c799288ddd85"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a7cf2e2c669bbf1998685c799288ddd85">BuildTmdJet</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, <a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">JetAlgorithm</a> const &amp;JetAlgo, double const &amp;JetR, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;CJ=1, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
+<tr class="memdesc:a7cf2e2c669bbf1998685c799288ddd85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the TMD of a jet in b-space as functions of the final scale and rapidity.  <a href="namespaceapfel.html#a7cf2e2c669bbf1998685c799288ddd85">More...</a><br /></td></tr>
+<tr class="separator:a7cf2e2c669bbf1998685c799288ddd85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49344b8e01187276f0b247d170bc3b26"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a49344b8e01187276f0b247d170bc3b26">MatchTmdPDFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollPDFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
 <tr class="memdesc:a49344b8e01187276f0b247d170bc3b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched TMD PDFs in b-space.  <a href="namespaceapfel.html#a49344b8e01187276f0b247d170bc3b26">More...</a><br /></td></tr>
 <tr class="separator:a49344b8e01187276f0b247d170bc3b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7b5be86c2233475044cd691c052cfe8"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#af7b5be86c2233475044cd691c052cfe8">MatchTmdFFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollPDFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
-<tr class="memdesc:af7b5be86c2233475044cd691c052cfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched TMD FFs in b-space.  <a href="namespaceapfel.html#af7b5be86c2233475044cd691c052cfe8">More...</a><br /></td></tr>
-<tr class="separator:af7b5be86c2233475044cd691c052cfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a439e7dcdb08932f7a2ca78cffda1af00"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a439e7dcdb08932f7a2ca78cffda1af00">MatchTmdFFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollFFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
+<tr class="memdesc:a439e7dcdb08932f7a2ca78cffda1af00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched TMD FFs in b-space.  <a href="namespaceapfel.html#a439e7dcdb08932f7a2ca78cffda1af00">More...</a><br /></td></tr>
+<tr class="separator:a439e7dcdb08932f7a2ca78cffda1af00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa007f4e8cdb02b3c2117f6bfedf3b67a"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#aa007f4e8cdb02b3c2117f6bfedf3b67a">MatchTmdJet</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, <a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">JetAlgorithm</a> const &amp;JetAlgo, double const &amp;tR, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;CJ=1, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
+<tr class="memdesc:aa007f4e8cdb02b3c2117f6bfedf3b67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the jet TMD in b-space at the initial scale.  <a href="namespaceapfel.html#aa007f4e8cdb02b3c2117f6bfedf3b67a">More...</a><br /></td></tr>
+<tr class="separator:aa007f4e8cdb02b3c2117f6bfedf3b67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05c2fea27dd7ef345b9da22ce8a63a5d"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a05c2fea27dd7ef345b9da22ce8a63a5d">MatchingFunctionsPDFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
 <tr class="memdesc:a05c2fea27dd7ef345b9da22ce8a63a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the mathing functions for the TMD PDFs.  <a href="namespaceapfel.html#a05c2fea27dd7ef345b9da22ce8a63a5d">More...</a><br /></td></tr>
 <tr class="separator:a05c2fea27dd7ef345b9da22ce8a63a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1585,6 +1604,26 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Namespace for all APFEL++ functions and classes. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ad665a96afaf1447481a8a2752508535d" name="ad665a96afaf1447481a8a2752508535d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad665a96afaf1447481a8a2752508535d">&#9670;&nbsp;</a></span>JetAlgorithm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">apfel::JetAlgorithm</a> : int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumerator for the jet algoritms fot the jet TMDs. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad665a96afaf1447481a8a2752508535dafc514e4fc13c96234aa8ea275d799b38" name="ad665a96afaf1447481a8a2752508535dafc514e4fc13c96234aa8ea275d799b38"></a>CONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad665a96afaf1447481a8a2752508535da5162037141e8b3a8b28da4e1b2483cd7" name="ad665a96afaf1447481a8a2752508535da5162037141e8b3a8b28da4e1b2483cd7"></a>KT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a8c509ac51bd27e1f97b8e5cb520df446" name="a8c509ac51bd27e1f97b8e5cb520df446"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c509ac51bd27e1f97b8e5cb520df446">&#9670;&nbsp;</a></span>LogAccuracy</h2>
 
@@ -2400,12 +2439,92 @@ Variables</h2></td></tr>
     <tr><td class="paramname">CollFFs</td><td>the set of collinear PDFs to be matched </td></tr>
     <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order </td></tr>
-    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
     <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Set&lt;Distribution&gt;-valued function of the impact parameter b<sub>T</sub>, the final renormalisation scale &mu;, and the final rapidity scale &zeta; representing the evolved TMD FFs </dd></dl>
+
+</div>
+</div>
+<a id="a7cf2e2c669bbf1998685c799288ddd85" name="a7cf2e2c669bbf1998685c799288ddd85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cf2e2c669bbf1998685c799288ddd85">&#9670;&nbsp;</a></span>BuildTmdJet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt; double(double const  &amp;, double const  &amp;, double const  &amp;)&gt; apfel::BuildTmdJet </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>TmdObj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">JetAlgorithm</a> const &amp;&#160;</td>
+          <td class="paramname"><em>JetAlgo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>JetR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Alphas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>PerturbativeOrder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>CJ</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>Ci</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>IntEps</em> = <code>1e-7</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the TMD of a jet in b-space as functions of the final scale and rapidity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
+    <tr><td class="paramname">JetAlgo</td><td>the jet algorithm to be used </td></tr>
+    <tr><td class="paramname">JetR</td><td>the jet radius </td></tr>
+    <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
+    <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order </td></tr>
+    <tr><td class="paramname">CJ</td><td>jet-scale variation factor (default: 1) </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double-valued function of the impact parameter b<sub>T</sub>, the final renormalisation scale &mu;, and the final rapidity scale &zeta; representing the evolved jet TMD </dd></dl>
 
 </div>
 </div>
@@ -2466,7 +2585,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">CollPDFs</td><td>the set of collinear PDFs to be matched </td></tr>
     <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order </td></tr>
-    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
     <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>) </td></tr>
   </table>
   </dd>
@@ -2753,6 +2872,43 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4b4f47a6e2c870f537303900fade79cd" name="a4b4f47a6e2c870f537303900fade79cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b4f47a6e2c870f537303900fade79cd">&#9670;&nbsp;</a></span>dJetqCone1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::dJetqCone1 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >&alpha;<sub>s</sub> correction to the cone-algorithm jet definition </p>
+
+</div>
+</div>
+<a id="a61c0875536afc1d630a0d9a398e49adf" name="a61c0875536afc1d630a0d9a398e49adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61c0875536afc1d630a0d9a398e49adf">&#9670;&nbsp;</a></span>dJetqkT1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::dJetqkT1 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>&alpha;<sub>s</sub> correction to the kT-algorithm jet definition </p>
 
 </div>
 </div>
@@ -3655,6 +3811,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The hard factor for Drell-Yan. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>TO BE REMOVED! </dd></dl>
 
 </div>
 </div>
@@ -5431,7 +5588,7 @@ template&lt;typename T &gt; </div>
   <table class="params">
     <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
     <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10^{-5}) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>) </td></tr>
     <tr><td class="paramname">nnnlo</td><td>switch to compute the NNNLO matching functions (default: false) </td></tr>
   </table>
   </dd>
@@ -5477,7 +5634,7 @@ template&lt;typename T &gt; </div>
   <table class="params">
     <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
     <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10^{-5})</td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>)</td></tr>
   </table>
   </dd>
 </dl>
@@ -5522,7 +5679,7 @@ template&lt;typename T &gt; </div>
   <table class="params">
     <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
     <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10^{-5}) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -5811,8 +5968,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="af7b5be86c2233475044cd691c052cfe8" name="af7b5be86c2233475044cd691c052cfe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7b5be86c2233475044cd691c052cfe8">&#9670;&nbsp;</a></span>MatchTmdFFs()</h2>
+<a id="a439e7dcdb08932f7a2ca78cffda1af00" name="a439e7dcdb08932f7a2ca78cffda1af00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439e7dcdb08932f7a2ca78cffda1af00">&#9670;&nbsp;</a></span>MatchTmdFFs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5827,7 +5984,7 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>CollPDFs</em>, </td>
+          <td class="paramname"><em>CollFFs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5859,7 +6016,7 @@ template&lt;typename T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
-    <tr><td class="paramname">CollPDFs</td><td>the set of collinear PDFs to be matched </td></tr>
+    <tr><td class="paramname">CollFFs</td><td>the set of collinear FFs to be matched </td></tr>
     <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order </td></tr>
     <tr><td class="paramname">Ci</td><td>the initial-scale variation factor </td></tr>
@@ -5867,6 +6024,86 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Set&lt;Distribution&gt;-valued function of the impact parameter b<sub>T</sub> representing the matched TMD FFs </dd></dl>
+
+</div>
+</div>
+<a id="aa007f4e8cdb02b3c2117f6bfedf3b67a" name="aa007f4e8cdb02b3c2117f6bfedf3b67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa007f4e8cdb02b3c2117f6bfedf3b67a">&#9670;&nbsp;</a></span>MatchTmdJet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt; double(double const  &amp;, double const  &amp;)&gt; apfel::MatchTmdJet </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>TmdObj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceapfel.html#ad665a96afaf1447481a8a2752508535d">JetAlgorithm</a> const &amp;&#160;</td>
+          <td class="paramname"><em>JetAlgo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>tR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Alphas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>PerturbativeOrder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>CJ</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>Ci</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>IntEps</em> = <code>1e-7</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the jet TMD in b-space at the initial scale. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
+    <tr><td class="paramname">JetAlgo</td><td>the jet algorithm </td></tr>
+    <tr><td class="paramname">tR</td><td>tangent of half the jet radius (tan(R/2)) </td></tr>
+    <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
+    <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order </td></tr>
+    <tr><td class="paramname">CJ</td><td>jet-scale variation factor (default: 1) </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double-valued function of the impact parameter b<sub>T</sub> representing the low-scale jet TMD </dd></dl>
 
 </div>
 </div>
@@ -7915,7 +8152,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 5 2021 11:24:53 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+Generated on Sun Dec 5 2021 11:48:20 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
 </small></address>
 </body>
 </html>

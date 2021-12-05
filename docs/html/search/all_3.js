@@ -108,13 +108,14 @@ var searchData=
   ['coefficient_105',['coefficient',['../structapfel_1_1ConvolutionMap_1_1rule.html#a4bf45b4c287915ad713e8367aea136ea',1,'apfel::ConvolutionMap::rule::coefficient()'],['../structapfel_1_1term.html#ac2ed928338c39a18b9995db6c407efd3',1,'apfel::term::coefficient()']]],
   ['combine_106',['Combine',['../classapfel_1_1Set.html#a7065697bdd240416184fee23592c77fa',1,'apfel::Set::Combine() const'],['../classapfel_1_1Set.html#a339d0b1d03e094ec494f1c06b7dacde2',1,'apfel::Set::Combine(std::vector&lt; double &gt; const &amp;weigths) const']]],
   ['concatenateandsortvectors_107',['ConcatenateAndSortVectors',['../namespaceapfel.html#a6f7f89d3dacb5cd1bfd2c27a590604ac',1,'apfel']]],
-  ['constants_2eh_108',['constants.h',['../constants_8h.html',1,'']]],
-  ['convbasis_109',['ConvBasis',['../structapfel_1_1StructureFunctionObjects.html#a45c9550f90d3b07604961b513bee4162',1,'apfel::StructureFunctionObjects']]],
-  ['convfact_110',['ConvFact',['../group__PhysConstants.html#gae98d82c9534cde7c04ae48896e66360e',1,'apfel']]],
-  ['convolution_20maps_111',['Convolution maps',['../group__ConvMap.html',1,'']]],
-  ['convolutionmap_112',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html',1,'apfel::ConvolutionMap'],['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap::ConvolutionMap()']]],
-  ['convolutionmap_2eh_113',['convolutionmap.h',['../convolutionmap_8h.html',1,'']]],
-  ['couplingevolution_114',['CouplingEvolution',['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5a',1,'apfel::EvolutionSetup::CouplingEvolution()'],['../structapfel_1_1EvolutionSetup.html#aa26ea1950ffa331a10e1f8f6dd84f4cf',1,'apfel::EvolutionSetup::CouplingEvolution()']]],
-  ['createjointgrid_115',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]],
-  ['cs_116',['CS',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a6edfc8afd7a0b1bfebc74332afb4031c',1,'apfel::DISNCBasis::CS()'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b',1,'apfel::DISCCBasis::CS()']]]
+  ['cone_108',['CONE',['../namespaceapfel.html#ad665a96afaf1447481a8a2752508535dafc514e4fc13c96234aa8ea275d799b38',1,'apfel']]],
+  ['constants_2eh_109',['constants.h',['../constants_8h.html',1,'']]],
+  ['convbasis_110',['ConvBasis',['../structapfel_1_1StructureFunctionObjects.html#a45c9550f90d3b07604961b513bee4162',1,'apfel::StructureFunctionObjects']]],
+  ['convfact_111',['ConvFact',['../group__PhysConstants.html#gae98d82c9534cde7c04ae48896e66360e',1,'apfel']]],
+  ['convolution_20maps_112',['Convolution maps',['../group__ConvMap.html',1,'']]],
+  ['convolutionmap_113',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html',1,'apfel::ConvolutionMap'],['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap::ConvolutionMap()']]],
+  ['convolutionmap_2eh_114',['convolutionmap.h',['../convolutionmap_8h.html',1,'']]],
+  ['couplingevolution_115',['CouplingEvolution',['../structapfel_1_1EvolutionSetup.html#aa26ea1950ffa331a10e1f8f6dd84f4cf',1,'apfel::EvolutionSetup::CouplingEvolution()'],['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5a',1,'apfel::EvolutionSetup::CouplingEvolution()']]],
+  ['createjointgrid_116',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]],
+  ['cs_117',['CS',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a6edfc8afd7a0b1bfebc74332afb4031c',1,'apfel::DISNCBasis::CS()'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b',1,'apfel::DISCCBasis::CS()']]]
 ];
