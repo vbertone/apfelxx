@@ -11,6 +11,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <iostream>
 
 namespace apfel
 {
@@ -83,6 +84,11 @@ namespace apfel
      * to -1 correspond to empty slots.
      */
     matrix<std::vector<int>> const GetRuleIndices() const;
+
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
     ///@}
   protected:
     std::map<int, std::vector<rule>> _rules; //!< the map container
