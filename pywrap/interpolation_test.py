@@ -52,7 +52,7 @@ for ix in x:
 print("\n")
 
 t = ap.Timer()
-nint = 1000000;
+nint = 1000000
 print("Performance test (", nint, " interpolations)... ")
 for i in range(nint):
     xgluon.Evaluate(0.1111)
@@ -65,5 +65,5 @@ t.stop()
 t.start()
 print("Performance test (", 1000, " integrations)... ")
 for i in range(1000):
-    xgluon.Integrate(0.1111, 0.55555);
+    xgluon.Integrate(0.1111, 0.55555)
 t.stop()

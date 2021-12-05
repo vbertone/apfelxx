@@ -16,15 +16,14 @@ PerturbativeOrder = 2
 # Running coupling
 a = ap.AlphaQCD(0.35, np.sqrt(2), Thresholds, PerturbativeOrder)
 Alphas = ap.TabulateObject(a, 100, 0.9, 1001, 3)
-als = lambda mu: Alphas.Evaluate(mu)
 
 # Initialize QCD evolution objects
 DglapObj   = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds)
 DglapObjOp = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds, True)
 
 # Construct the DGLAP objects
-EvolvedPDFs = ap.builders.BuildDglap(DglapObj,   ap.utilities.LHToyPDFs, mu0, PerturbativeOrder, als)
-EvolvedOps  = ap.builders.BuildDglap(DglapObjOp,                         mu0, PerturbativeOrder, als)
+EvolvedPDFs = ap.builders.BuildDglap(DglapObj,   ap.utilities.LHToyPDFs, mu0, PerturbativeOrder, Alphas.Evaluate)
+EvolvedOps  = ap.builders.BuildDglap(DglapObjOp,                         mu0, PerturbativeOrder, Alphas.Evaluate)
 
 # Tabulate PDFs
 TabulatedPDFs = ap.TabulateObjectSetD(EvolvedPDFs, 50, 1, 1000, 3)

@@ -74,7 +74,7 @@ apply in the presence of heavy-quark masses or when considering
 
 The general structure of the integrals considered in {\tt APFEL++} has
 the form of a Mellin convolution between an \textit{operator} $O$,
-this is a potentially complicated known function such as a splitting
+that is a potentially complicated known function such as a splitting
 function or a partonic cross section,\footnote{More precisely, $O$ is
   in general a distribution that may contain $\delta$ functions and
   $+$-distributions.} and a \textit{distribution} function $d$, as for
@@ -151,16 +151,16 @@ Eq.~(\ref{eq:Genconv2}) becomes:
 \end{equation}
 To summarise, Eq.~(\ref{eq:Genconv3}) allows one to compute the
 integral $I$ on the nodes of a given grid as a weighted sum of the
-values of distribution $d$ on the nodes themselves. The weights are
-given by the appropriate integral of the operator $O$ and the
+values of the distribution $d$ on the nodes themselves. The weights
+are given by the appropriate integral of the operator $O$ and the
 interpolating functions $w_{\alpha}^{(k)}$. The value of $I$ for a
 generic value of $x$ can finally be obtained by interpolation using a
 formula similar to Eq.~(\ref{eq:Interpolation}). Importantly,
 Eq.~(\ref{eq:Genconv3}) provides a fast way of computing convolution
 integrals. Indeed, the weights $\Gamma_{\alpha\beta}$ can be
 precomputed and stored once and for all and the integral $I$ can be
-quickly computed with different distributions $d$ by simply taking the
-weighted average.
+quickly computed with different distributions $d$ by simply taking a
+weighted sum.
 
 We now need an operational way to compute the weights
 $\Gamma_{\alpha\beta}$. To do so, it is necessary to know the general
@@ -175,7 +175,7 @@ where $R$ and $S^{(i)}$ are a regular functions at $z=1$, that is:
 \begin{equation}
 R(1,\eta) =  \lim_{z\rightarrow 1} R(z,\eta) = K(\eta)\quad\mbox{and}\quad S^{(i)}(1,\eta) =  \lim_{z\rightarrow 1} S^{(i)}(z,\eta) = J^{(i)}(\eta)\,,
 \end{equation}
-being $K$, $J^{(i)}$, and $L$ a finite function of $\eta$. The
+being $K$, $J^{(i)}$, and $L$ finite functions of $\eta$. The
 functions $P^{(i)}$ are instead singular at $z=1$ and non-integrable
 in the limit $\eta\rightarrow1$ and thus are regularised through the
 $+$-prescription. Plugging Eq.~(\ref{eq:CoeffFuncs}) into the
@@ -235,11 +235,11 @@ dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S}{
 \label{eq:SplittingFunctions}
 \end{equation}
 
-The same kind of simplifications apply to the case of the perturbative
-Zero-Mass (ZM) coefficient functions with the only exception that the
-sum over $i$ extends to more terms depending on the perturbative
-order. For example at $\mathcal{O}(\alpha_s)$, $i.e.$ at NLO, the
-general form of the coefficient functions reads:
+The same kind of simplifications applies to the case of the
+perturbative Zero-Mass (ZM) coefficient functions with the only
+exception that the sum over $i$ extends to more terms depending on the
+perturbative order. For example at $\mathcal{O}(\alpha_s)$, $i.e.$ at
+NLO, the general form of the coefficient functions reads:
 \begin{equation}
 \begin{array}{rcl}
   \Gamma_{\beta\alpha} &=&\displaystyle \int_{c}^{d}
@@ -253,8 +253,8 @@ general form of the coefficient functions reads:
 \label{eq:ZMCoeffFunctions}
 \end{equation}
 
-Thing get more complicated when considering massive coefficient
-functions. In this case, the role of $\eta$ is played by the ration
+Things get more complicated when considering massive coefficient
+functions. In this case, the role of $\eta$ is played by the ratio
 $m/Q$, where $m$ is the mass of the quark and $Q$ the hard scale. In
 addition, the $+$-prescripted contributions can become more
 convoluted.
@@ -292,13 +292,13 @@ alternative that we just decided not to pursue.
 
 \subsection{Double convolutions}
 
-The technique discussed above to compute convolution integrals as a
+The technique discussed above to compute convolution integrals as
 weighted sums of a given input distributions $d$ can be, under certain
 circumstances, generalised to convolution integrals involving
 \textit{two} distributions. Relevant examples are the Drell-Yan (DY)
 and the semi-inclusive deep-inelastic scattering (SIDIS) cross
 sections integrated over the transverse momentum of the virtual
-boson. In these cases the cross section is proportional to a double
+boson. In these cases the cross section is proportional to double
 convolutions between partonic cross sections and a pair of
 non-perturbative distributions. The general form of this double
 convolution is:
@@ -325,7 +325,7 @@ O(y_1,y_2) \left[\frac{x_\delta}{y_1}d^{(1)}\left(\frac{x_\delta}{y_1}\right)\ri
 \end{array}
 \label{eq:DoubleZMconv}
 \end{equation}
-In Eq.~(\ref{eq:DoubleZMconv}) we have assumes that there are no mass
+In Eq.~(\ref{eq:DoubleZMconv}) we have assumed that there are no mass
 corrections and thus the convolutions take the simplest form. In the
 case of double convolutions, the operator $O$ is a function of two
 variables, $y_1$ and $y_2$, and, as in the case of the single
@@ -409,7 +409,7 @@ as:
   \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
   \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
 \end{equation}
-In general terms, we assume that it is always be possible to write an
+In general terms, we assume that it is always possible to write an
 object of the kind of $\Theta^{\beta\delta,\alpha\gamma}$ as series of
 bilinear terms:
 \begin{equation}
@@ -560,7 +560,7 @@ The structure functions $F_2$ and $F_L$ are given at NLO by:
 where $\{q,g\}$ are the quark and gluon PDFs and $\{D_q,D_g\}$ are the
 quark and gluon FFs, $e_q$ is the electric charge of the quark $q$ and
 $\{C^{2,L}_{qq},C^{2,L}_{qg},C^{2,L}_{gq}\}$ are the relevant partonic
-cross sections. The partonic cross sections allow for a perturbative
+cross sections. The partonic cross sections admit a perturbative
 expansion in power of $\alpha_s$:
 \begin{equation}
 C = \sum_{n=0} \left(\frac{\alpha_s}{4\pi}\right)^nC^{(n)}
@@ -694,7 +694,7 @@ C_{qg}^{2,(1)} &:&\displaystyle {\rm RL}(x) = \left[x^2+(1-x)^2\right]
    R_2^{(2)}(z) = \frac1{z}\right\}\,.
 \end{array}
 \end{equation}
-Analogously, for the only LO partonic cross sections we find that:
+Analogously, for the LO partonic cross sections we find that:
 \begin{equation}
 \begin{array}{rcl}
 C_{qq}^{2,(0)} &:& \displaystyle {\rm LL} =1 \,.
@@ -902,8 +902,8 @@ possible solution to this problem is to increase the density in a
 stepwise fashion as $x$ gets closer to one. This produces locally
 logarithmically distributed grids that allow one to exploit the
 symmetry discussed above while making the grid denser, and thus more
-accurate, at large $x$. The implementation of this procedure in {\tt
-  APFEL++} is achieved by means of \textit{locked} subgrids. In
+accurate, at large $x$. The implementation of this procedure in
+{\tt APFEL++} is achieved by means of \textit{locked} subgrids. In
 practice, one starts with a logarithmic grid with a given lower bound,
 \textit{e.g.}  $x_{\rm min}^{(0)}=10^{-5}$. Starting from a given
 node, $x_{\rm min}^{(1)}$, the density of the grid is increased by
@@ -931,29 +931,30 @@ that the integral extends down to zero and this procedure does not
 make use of the low-$x$ grids, effectively truncating the integral to
 increasingly larger values of $x$ as $x_\beta$ approaches one.
 
-The second problem is that logarithmic grids get down to $x = 0$. This
-is not an issue for the computation in Eq.~(\ref{eq:ZMconv}) because
-the lower integration bound is $x$ and thus, as long as the integral
-in not computed below the lower bound of the grid, this does not
-introduce any inaccuracy. Conversely, this is a potential problem for
-integrals like those in Eq.~(\ref{eq:ZMconvERBL}) that extend down to
-zero for any value of $x$. This may suggest that logarithmic grids are
-not suitable in the first place for integrals as in
-Eq.~(\ref{eq:ZMconvERBL}). However, we observe that GPD-related
-integrands are usually well-behaved around $y=0$ implying that a
-logarithmic grid with lower bound $x_0$ close enough to zero
-(\textit{e.g.}  $x_0=10^{-5}$) is expected to be enough to make the
-contribution to the integral due to the region $y\in[0,x_0]$
-negligibly small. Therefore, also for the computation of
+The second problem is that logarithmic grids cannot get down to
+$x = 0$. This is not an issue for the computation in
+Eq.~(\ref{eq:ZMconv}) because the lower integration bound is $x$ and
+thus, as long as the integral in not computed below the lower bound of
+the grid, this does not introduce any inaccuracy. Conversely, this is
+a potential problem for integrals like those in
+Eq.~(\ref{eq:ZMconvERBL}) that extend down to zero for any value of
+$x$. This may suggest that logarithmic grids are not suitable in the
+first place for integrals as in Eq.~(\ref{eq:ZMconvERBL}). However, we
+observe that GPD-related integrands are usually well-behaved around
+$y=0$ implying that a logarithmic grid with lower bound $x_0$ close
+enough to zero (\textit{e.g.}  $x_0=10^{-5}$) is expected to be enough
+to make the contribution to the integral due to the region
+$y\in[0,x_0]$ negligibly small. Therefore, also for the computation of
 Eq.~(\ref{eq:ZMconvERBL}), we stick to logarithmically distributed
 grids which allows us to use the same class for constructing and
 managing grids developed to compute Eq.~(\ref{eq:ZMconv}).
 
-In addition, GPD-related integrals, due to the explicit dependence on
-the external variable of the operator (see Eq.~(\ref{eq:ZMconvERBL})),
-do not enjoy $\beta-\alpha$ symmetry discussed above. This is a major
-limitation in that it does not allow us to reduce the number of
-integrals to be computed.
+In addition, GPD-related integrals, due to the explicit dependence of
+the integrand on the external variable of the operator (see
+Eq.~(\ref{eq:ZMconvERBL})), do not enjoy the translational
+$\beta-\alpha$ symmetry discussed above. This is a major limitation in
+that it does not allow us to reduce the number of integrals to be
+computed.
 
 These observation, along with the discussion on the interpolation
 grid, leads us to take an approach in which the operator is computed
@@ -964,7 +965,7 @@ joint grid.
 Using the usual interpolation formula gives us that the integral in
 Eq.~(\ref{eq:ZMconvERBL}) is computed on the grid as follows:
 \begin{equation}
-J(x_\beta) = \sum_{\alpha=}^{N_x-1}J_{\beta\alpha}\overline{d}_\alpha\,.
+J(x_\beta) = \sum_{\alpha=0}^{N_x-1}J_{\beta\alpha}\overline{d}_\alpha\,.
 \end{equation}
 with $\overline{d}_\alpha = x_\alpha d(x_\alpha)$ and the assumption
 $d(1)=0$, and with:

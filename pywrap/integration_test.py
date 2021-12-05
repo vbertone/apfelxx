@@ -4,8 +4,8 @@ import numpy as np
 print("- 1D integration")
 
 # Integrand function.
-fGK = ap.Integrator(lambda x: np.log(x), ap.IntegrationMethod.GAUSS_KRONROD)
-fGL = ap.Integrator(lambda x: np.log(x), ap.IntegrationMethod.GAUSS_LEGENDRE)
+fGK = ap.Integrator(np.log, ap.IntegrationMethod.GAUSS_KRONROD)
+fGL = ap.Integrator(np.log, ap.IntegrationMethod.GAUSS_LEGENDRE)
 
 # Print true value.
 print("True value: ", 2 * ( np.log(2) - 1 ))

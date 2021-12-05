@@ -27,7 +27,7 @@ t = ap.Timer()
 g = ap.Grid([ap.SubGrid(80, 1e-5, 3), ap.SubGrid(50, 1e-1, 3), ap.SubGrid(40, 8e-1, 3)])
 
 # Distribution
-d = ap.Distribution(g, lambda x: 1 - x);
+d = ap.Distribution(g, lambda x: 1 - x)
 
 # Print distribution
 d.Print()
@@ -39,26 +39,26 @@ p = p0qq()
 print("\nInitialization ...")
 t.start()
 O = ap.Operator(g, p)
-t.stop();
+t.stop()
 
 # Multiply operator by the distribution to create a new distribution
 print("\nConvolution between operator and distribution (O * d) ...")
-t.start();
-Od = O * d;
-t.stop();
+t.start()
+Od = O * d
+t.stop()
 
 # Multiply operator by itself to create a new operator
 print("\nConvolution between two operators (O * O) ...")
-t.start();
+t.start()
 OO = O * O
-t.stop();
+t.stop()
 
 # Check the numerical accuracy of "Od" by comparing with the analytical result
 print("\nChecking the numerical accuracy of O * d ... ")
 for ix in range(g.GetJointGrid().nx()):
       x = g.GetJointGrid().GetGrid()[ix]
       # Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
-      Ix = ap.constants.CF * ( - 2 * ( 3. / 2. - x - x**2 / 2. ) + 4 * ( 1 - x ) * np.log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( np.log(x) + 1 - x ) );
+      Ix = ap.constants.CF * ( - 2 * ( 3. / 2. - x - x**2 / 2. ) + 4 * ( 1 - x ) * np.log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( np.log(x) + 1 - x ) )
       print(format(x, ".6e"), "\t\t", format(Od.Evaluate(x), ".6e"), "\t\t", format(Ix, ".6e"), "\t\t", format(Od.Evaluate(x) / Ix, ".6e"))
 
 # Check the numerical accuracy of "Od" by comparing with the
