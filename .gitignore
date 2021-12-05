@@ -88,3 +88,6 @@ __pycache__
 
 # Build directory
 build
+
+# Codecov
+*.gcno, *.gcda, *.gcov 
