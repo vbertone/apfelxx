@@ -388,7 +388,6 @@ namespace apfel
   /**
    * @brief The BuildStructureFunctions function constructs an
    * "Observable" object.
-
    * @param FObjQ: the StructureFunctionObjects at the scale Q
    * @param InDistFuncQ: the distribution to be convoluted with at the scale Q as a map<int,Distribution>
    * @param PerturbativeOrder: the perturbative order
@@ -409,7 +408,7 @@ namespace apfel
    * @param InDistFuncQ: the distribution to be convoluted with at the scale Q as a map<int, Distribution>
    * @param PerturbativeOrder: the perturbative order
    * @param AlphasQ: the strong coupling at the scale Q
-   * @return A map of "Distribution" objects, one for number of active flavours
+   * @return A map of "Distribution" objects, one for each number of active flavours
    */
   std::map<int, Distribution> BuildStructureFunctions(StructureFunctionObjects    const& FObjQ,
                                                       std::map<int, Distribution> const& InDistFuncQ,
