@@ -150,7 +150,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def(py::self == py::self)
   .def(py::self != py::self);
 
-  // Wrappers form "interpolator.h"
+  // Wrappers of "interpolator.h"
   // Trampoline class for virtual class
   class PyInterpolator: public apfel::Interpolator
   {
@@ -186,7 +186,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def("GetDistributionJointGrid", &apfel::Interpolator::GetDistributionJointGrid)
   .def("Print", &apfel::Interpolator::Print);
 
-  // Wrappers form "lagrangeinterpolator.h"
+  // Wrappers of "lagrangeinterpolator.h"
   py::class_<apfel::LagrangeInterpolator, apfel::Interpolator>(m, "LagrangeInterpolator")
   .def(py::init<apfel::Grid const&>(), "gr"_a)
   .def(py::init<apfel::Grid const&, std::vector<std::vector<double>> const&, std::vector<double> const&>(), "gr"_a, "distsubgrid"_a, "distjointgrid"_a)

@@ -8,6 +8,8 @@
 
 int main()
 {
+  apfel::Banner();
+
   // Initial scale
   const double mu0 = sqrt(2);
 

@@ -52,12 +52,12 @@ namespace apfel
      * @brief This function returns the r.h.s. of the DGLAP equation,
      * i.e. the convolution between splitting functions and
      * distributions.
-     * @param nf: number of active flavours on this side of the threshold
-     * @param mu: value of the factorisation scale
+     * @param nf: number of active flavours
+     * @param t: value of the log of the factorisation scale squared
      * @param f: set of distributions at the scale mu
      * @return The r.h.s. of the DGLAP equation.
      */
-    Set<T> Derivative(int const& nf, double const& mu, Set<T> const& f) const;
+    Set<T> Derivative(int const& nf, double const& t, Set<T> const& f) const;
 
     /**
      * @name Setters
