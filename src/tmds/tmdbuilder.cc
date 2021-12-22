@@ -935,7 +935,7 @@ namespace apfel
     double djet1 = 0;
     if (JetAlgo == CONE)
       djet1 = dJetqCone1();
-    else if (JetAlgo == KT)
+    if (JetAlgo == KT)
       djet1 = dJetqkT1();
     else
       throw std::runtime_error(error("MatchTmdJet", "Unknown jet algorithm."));
@@ -969,12 +969,15 @@ namespace apfel
           // Log of the scales
           const double L = log(muJ / mup);
 
+      // Number of active flavours
+      const int nfp = NF(mup, thrs);
+
           // LL
-          double gJ = - coup * gK0.at(nf) * L;
+          double gJ = - coup * gK0.at(nfp) * L;
 
           // NLL
           if (PerturbativeOrder != 0)
-            gJ += coup * ( gF0.at(nf) - coup * gK1.at(nf) * L );
+            gJ += coup * ( gF0.at(nfp) - coup * gK1.at(nfp) * L );
 
           return gJ / mup;
         }
