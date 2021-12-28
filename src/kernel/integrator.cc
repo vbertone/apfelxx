@@ -48,10 +48,11 @@ namespace apfel
         // over the the narrower intevals and the integration will
         // converge. If the integration range becomes too narrow, stop
         // the code.
-        if (std::abs( ( xmax - xmin ) / ( xmax + xmin ) ) < eps15)
+        if (std::abs(( xmax - xmin ) / ( xmax + xmin )) < eps15)
           throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
 
-        return integrate(xmin, ( xmin + xmax ) / 2, eps) + integrate(( xmin + xmax ) / 2, xmax, eps);
+        const double xmid = ( xmin + xmax ) / 2;
+        return integrate(xmin, xmid, eps) + integrate(xmid, xmax, eps);
       }
   }
 

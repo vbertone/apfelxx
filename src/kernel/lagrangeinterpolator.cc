@@ -34,13 +34,12 @@ namespace apfel
     // should be defined. Its knowledge, along with the number of
     // intervals and the fact that the upper bound of the grid is
     // always at x = 1, allows one to avoid knowing the grid itself
-    // because the interpolant can be written in terms of the relevat
-    // indeces. This is advantageous because this way one can
-    // indefinitely extend the grid beyond its original definition
-    // bounds.
+    // because the interpolant can be written in terms of the relevant
+    // indices. This is advantageous because one can indefinitely
+    // extend the grid beyond its original definition bounds.
     const double s = sg.Step();
 
-    // Number of interval between xmin and xmax
+    // Number of intervals between xmin and xmax
     const int nx = sg.nx();
 
     // Rescaled value to be interpolated. This can be interpreted as a
@@ -51,11 +50,11 @@ namespace apfel
     if (std::abs(ix - beta) < eps10)
       return 1;
 
-    // Define the lower bound of the interpolation range.
+    // Get the interpolation degree.
     const int id = sg.InterDegree();
 
     // Return 0 if "x" is outside the range in which the interpolant
-    // is different from zero. Ideally this functions should never be
+    // is different from zero. Ideally, this functions should never be
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
@@ -87,8 +86,10 @@ namespace apfel
     if (std::abs(x - xg[beta]) < eps12)
       return 1;
 
+    // Get the interpolation degree.
+    const int id = sg.InterDegree();
+
     // Define the lower bound of the interpolation range.
-    const int id    = sg.InterDegree();
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
@@ -120,8 +121,10 @@ namespace apfel
     // Get the grid.
     const std::vector<double>& xg = sg.GetGrid();
 
+    // Get the interpolation degree.
+    const int id = sg.InterDegree();
+
     // Define the lower bound of the interpolation range.
-    const int id    = sg.InterDegree();
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
@@ -161,7 +164,7 @@ namespace apfel
     // Get the grid.
     const std::vector<double>& xg = sg.GetGrid();
 
-    // Interpolation degree
+    // Get the interpolation degree.
     const int k = sg.InterDegree();
 
     // Return 0 if "a" and "b" are outside the range in which the

@@ -50,6 +50,12 @@ namespace apfel
     size_t const& size(size_t const& dim) const { return _size[dim]; }
 
     /**
+     * @brief Returns the vector of data.
+     * @returns the vector of data
+     */
+    std::vector<T> const& data() const { return _data; }
+
+    /**
      * @name Binary operators involving matrices
      */
     ///@{

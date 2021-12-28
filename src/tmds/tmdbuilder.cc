@@ -969,8 +969,8 @@ namespace apfel
           // Log of the scales
           const double L = log(muJ / mup);
 
-      // Number of active flavours
-      const int nfp = NF(mup, thrs);
+          // Number of active flavours
+          const int nfp = NF(mup, thrs);
 
           // LL
           double gJ = - coup * gK0.at(nfp) * L;
