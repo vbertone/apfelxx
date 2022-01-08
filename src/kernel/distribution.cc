@@ -393,8 +393,8 @@ namespace apfel
     // Joint grid and subgrid vectors.
     const std::vector<double>& jg = g.GetJointGrid().GetGrid();
 
-    // Initialise output. In the number of outputs is provided use
-    // that otherwise call the function at the first grid point.
+    // Initialise output. If the number of outputs is provided use
+    // that, otherwise call the function at the first grid point.
     const int n = ( NOutputs == 0 ? InDistFunc(jg[0]).size() : NOutputs );
     std::map<int, Distribution> DistMap;
     for (int i = 0; i < n; i++)
