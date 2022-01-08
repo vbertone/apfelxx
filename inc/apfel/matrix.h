@@ -8,7 +8,6 @@
 
 #include <vector>
 #include <array>
-#include <cstddef>
 
 namespace apfel
 {
@@ -37,7 +36,8 @@ namespace apfel
     void resize(size_t const& row, size_t const& col, T const& v = 0);
 
     /**
-     * @brief Function that set all entries of the matrix to the input value.
+     * @brief Function that sets all entries of the matrix to the
+     * input value.
      * @param v: the default value
      */
     void set(T const& v);
@@ -45,7 +45,7 @@ namespace apfel
     /**
      * @brief Returns the (row,col) size pair.
      * @param dim: the dimension
-     * @returns the number of raws and columns
+     * @returns the number of rows and columns
      */
     size_t const& size(size_t const& dim) const { return _size[dim]; }
 
@@ -63,7 +63,7 @@ namespace apfel
     T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
     ///@}
   private:
-    std::array<size_t, 2> _size; //!< the dimension pair
-    std::vector<T>        _data; //!< the data array
+    std::array<size_t, 2> _size; //!< The dimension pair
+    std::vector<T>        _data; //!< The data array
   };
 }
