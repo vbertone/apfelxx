@@ -67,18 +67,6 @@ else (pybind11_FOUND)
    message ("-- pybind11 not found. The python wrapper will not be built.")
 endif (pybind11_FOUND)
 
-# Vectorisation
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-mavx512f" COMPILER_SUPPORTS_AVX512)
-if (COMPILER_SUPPORTS_AVX512)
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx512f -march=cascadelake")
-   #message ("-- AVX512 supported. Vectorisation will be activated.")
-   message ("-- AVX512 supported")
-else (COMPILER_SUPPORTS_AVX512)
-   #message ("-- AVX512 not supported. Vectorisation will not be activated.")
-   message ("-- AVX512 not supported")
-endif()
-
 # install
 install(TARGETS apfelxx
            RUNTIME DESTINATION bin
