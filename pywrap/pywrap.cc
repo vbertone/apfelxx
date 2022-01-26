@@ -3,6 +3,7 @@
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
 #include <apfel/apfelxx.h>
+#include <apfel/betaqcd.h>
 
 namespace py = pybind11;
 using namespace pybind11::literals;
@@ -23,6 +24,9 @@ PYBIND11_MODULE(apfelpy, m)
 
   // Builders
   py::module_ _builders = m.def_submodule("builders", "Builders");
+
+  // betaQCD
+  py::module_ _betaQCD = m.def_submodule("betaQCD", "Coefficients of the QCD beta function");
 
   // Wrappers of "messages.h"
   m.def("SetVerbosityLevel", &apfel::SetVerbosityLevel, "vl"_a);
@@ -76,6 +80,12 @@ PYBIND11_MODULE(apfelpy, m)
   _constants.attr("Vtb2")       = apfel::Vtb2;
   _constants.attr("CKM")        = apfel::CKM;
   _constants.attr("CKM2")       = apfel::CKM2;
+
+  // Wrappers of "betaqcd.h"
+  _betaQCD.def("beta0qcd", &apfel::beta0qcd, "nf"_a);
+  _betaQCD.def("beta1qcd", &apfel::beta1qcd, "nf"_a);
+  _betaQCD.def("beta2qcd", &apfel::beta2qcd, "nf"_a);
+  _betaQCD.def("beta3qcd", &apfel::beta3qcd, "nf"_a);
 
   // Wrappers of "lhtoypdfs.h"
   _utilities.def("xupv",      &apfel::xupv,      "x"_a);
