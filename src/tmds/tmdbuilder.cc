@@ -925,13 +925,18 @@ namespace apfel
     // Select coefficients according to the jet algorithm
     std::map<int, double> gK0;
     std::map<int, double> gK1;
+    std::map<int, double> gK2;
     std::map<int, double> gF0;
+    std::map<int, double> gF1;
     for (int nf = nfi; nf <= nff; nf++)
       {
         gK0.insert({nf, CF * TmdObj.at(nf).GammaK.at(0)});
         gK1.insert({nf, CF * TmdObj.at(nf).GammaK.at(1)});
+        gK2.insert({nf, CF * TmdObj.at(nf).GammaK.at(2)});
         gF0.insert({nf, TmdObj.at(nf).GammaFq.at(0)});
+        gF1.insert({nf, TmdObj.at(nf).GammaFq.at(1)});
       }
+
     double djet1 = 0;
     if (JetAlgo == CONE)
       djet1 = dJetqCone1();
@@ -978,6 +983,9 @@ namespace apfel
           // NLL
           if (PerturbativeOrder != 0)
             gJ += coup * ( gF0.at(nfp) - coup * gK1.at(nfp) * L );
+          // NNLL
+          if (PerturbativeOrder != 1)
+            gJ += coup * coup * ( gF1.at(nfp)  - coup * gK2.at(nfp)  * L );
 
           return gJ / mup;
         }
