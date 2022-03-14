@@ -279,7 +279,7 @@ namespace apfel
    * @brief Function that returns the evolution factors for gluon and
    * quarks. As compared to "EvolutionFactors", this function isolates
    * the double logs into gammaK. This is reminiscent of the
-   * qT resummation typical way of computing the Sudakov form factor.
+   * qT-resummation typical way of computing the Sudakov form factor.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
@@ -333,6 +333,24 @@ namespace apfel
                                                                                           int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the perturbative part of the
+   * Collins-Soper kernel.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the perturbative order
+   * @param Ci: the initial scale-variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB> and of the the final renormalisation scale &mu;. It
+   * returns perturbative part of the Collis-Soper kernel.
+   */
+  std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
+                                                                         std::function<double(double const&)> const& Alphas,
+                                                                         int                                  const& PerturbativeOrder,
+                                                                         double                               const& Ci = 1,
+                                                                         double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the hard factor.

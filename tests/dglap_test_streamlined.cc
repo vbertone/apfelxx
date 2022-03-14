@@ -28,7 +28,7 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // x-space grid
-  const apfel::Grid g{{apfel::SubGrid{100,1e-5,3}, apfel::SubGrid{60,1e-1,3}, apfel::SubGrid{100,5e-1,3}, apfel::SubGrid{80,8e-1,5}}};
+  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{100, 5e-1, 3}, apfel::SubGrid{80, 8e-1, 5}}};
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, mu0, PerturbativeOrder, as);

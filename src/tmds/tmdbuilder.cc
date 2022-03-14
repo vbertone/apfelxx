@@ -1782,6 +1782,124 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
+                                                                         std::function<double(double const&)> const& Alphas,
+                                                                         int                                  const& PerturbativeOrder,
+                                                                         double                               const& Ci,
+                                                                         double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) thrs.size() < nf)
+          thrs.resize(nf);
+        thrs[nf-1] = thr;
+      }
+
+    // Define the log(Ci) to assess scale variations.
+    const double Lmu = log(Ci);
+
+    // Create functions needed for the TMD evolution.
+    std::function<double(double const&)> gammaK;
+    std::function<double(double const&)> K;
+    // LL
+    if (PerturbativeOrder == LL)
+      {
+        gammaK  = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * TmdObj.at(NF(mu, thrs)).GammaK.at(0);
+        };
+        K = [=] (double const&) -> double{ return 0; };
+      }
+    // NLL
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * gc.at(1) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          return coup * lo;
+        };
+      }
+    // NNLL
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          return coup * ( lo + coup * nlo );
+        };
+      }
+    // N3LL
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNNLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const std::vector<double> d2 = d.at(2);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+          return coup * ( lo + coup * ( nlo + coup * nnlo ) );
+        };
+      }
+
+    // Define the integrands.
+    const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    const auto CSKernel = [=] (double const& b, double const& muf) -> double
+    {
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Compute argument of the exponent of the evolution factors.
+      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps);
+
+      // Compute the evolution factors.
+      const double Klz = K(mu0) - IntI2;
+
+      // Return the factor.
+      return Klz;
+    };
+
+    return CSKernel;
+  }
+
+  //_____________________________________________________________________________
   std::function<double(double const&)> HardFactor(std::string                          const& Process,
                                                   std::map<int, TmdObjects>            const& TmdObj,
                                                   std::function<double(double const&)> const& Alphas,
