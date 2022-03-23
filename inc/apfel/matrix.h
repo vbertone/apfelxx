@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <array>
+#include <stddef.h>
 
 namespace apfel
 {
