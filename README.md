@@ -92,3 +92,4 @@ Code documentation automatically generated with [Doxygen](https://www.doxygen.nl
 ## Contact information
 
 - Valerio Bertone: valerio.bertone@cern.ch
+
