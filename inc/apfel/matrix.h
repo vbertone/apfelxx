@@ -60,8 +60,8 @@ namespace apfel
      * @name Binary operators involving matrices
      */
     ///@{
-    T&       operator()(size_t const& i, size_t const& j)       { return _data[i*_size[1]+j]; }
-    T const& operator()(size_t const& i, size_t const& j) const { return _data[i*_size[1]+j]; }
+    T&       operator()(size_t const& i, size_t const& j)       { return _data[i * _size[1] + j]; }
+    T const& operator()(size_t const& i, size_t const& j) const { return _data[i * _size[1] + j]; }
     ///@}
   private:
     std::array<size_t, 2> _size; //!< The dimension pair

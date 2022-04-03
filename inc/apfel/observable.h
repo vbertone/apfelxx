@@ -13,8 +13,8 @@ namespace apfel
 {
   /**
    * @brief The Observable class encapsulates sets of operators and
-   * sets of operators for an easy computation of observebles deriving
-   * from the covolution of the two.
+   * sets of T-type objects for an easy computation of obsarvebles
+   * deriving from the convolution of the two.
    */
   template<class T = Distribution>
   class Observable

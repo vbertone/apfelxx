@@ -25,7 +25,7 @@ namespace apfel
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
     double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    const double cm21g = xi * c2log_(&wr,&xi) / z / M_PI;
+    const double cm21g = xi * c2log_(&wr, &xi) / z / M_PI;
     return cm21g;
     */
     const double eta   = this->_eta;
@@ -53,14 +53,14 @@ namespace apfel
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
     double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    const double cml1g = xi * cllog_(&wr,&xi) / z / M_PI;
+    const double cml1g = xi * cllog_(&wr, &xi) / z / M_PI;
     return cml1g;
     */
-    const double eta   = this->_eta;
-    const double z     = eta * x;
-    const double z2    = z * z;
-    const double epsi  = ( 1 - eta ) / eta / 4;
-    const double v     = sqrt( 1 - 4 * z / ( 1 - z ) * epsi );
+    const double eta  = this->_eta;
+    const double z    = eta * x;
+    const double z2   = z * z;
+    const double epsi = ( 1 - eta ) / eta / 4;
+    const double v    = sqrt( 1 - 4 * z / ( 1 - z ) * epsi );
     return 4 * TR * ( - 8 * epsi * z2 * log( ( 1 + v ) / ( 1 - v ) )
                       + 4 * v * z * ( 1 - z ) );
   }
@@ -71,8 +71,8 @@ namespace apfel
   {
     // Compute integral needed to enforce the Adler sum rule. See
     // eqs. (71) and (97) of https://arxiv.org/pdf/1001.2312.pdf.
-    const Integrator Integrand{[&] (double const& y)->double{ return Regular(y); }};
-    _adler = - Integrand.integrate(0,1,eps5);
+    const Integrator Integrand{[&] (double const& y) -> double{ return Regular(y); }};
+    _adler = - Integrand.integrate(0, 1, eps5);
   }
   double Cm22nsNC::Regular(double const& x) const
   {
@@ -83,7 +83,7 @@ namespace apfel
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
     double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    const double cm22ns = 16 * M_PI * xi * d2nloq_(&wr,&xi) / z;
+    const double cm22ns = 16 * M_PI * xi * d2nloq_(&wr, &xi) / z;
     return cm22ns;
     */
     const double eta = this->_eta;
@@ -134,7 +134,7 @@ namespace apfel
     const double z   = eta * x;
     double xi  = 4 * eta / ( 1 - eta );
     double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    const double cml2ns = 16 * M_PI * xi * dlnloq_(&wr,&xi) / z;
+    const double cml2ns = 16 * M_PI * xi * dlnloq_(&wr, &xi) / z;
     return cml2ns;
     */
     const double eta = this->_eta;
@@ -142,11 +142,11 @@ namespace apfel
     const double z   = eta * x;
     const double z2  = z * z;
     const double omz = 1 - z;
-    const double zr2  = z2 / xi / xi;
-    const double qr   = z / omz / xi;
-    const double qr2  = qr * qr;
-    const double sq1  = sqrt( 1 - 4 * z / xi / omz );
-    const double sq2  = sqrt( 1 - 4 * z / xi );
+    const double zr2 = z2 / xi / xi;
+    const double qr  = z / omz / xi;
+    const double qr2 = qr * qr;
+    const double sq1 = sqrt( 1 - 4 * z / xi / omz );
+    const double sq2 = sqrt( 1 - 4 * z / xi );
     if (sq1 == sq2)
       return 0;
     const double l1   = log( ( 1 + sq1 ) / ( 1 - sq1 ) );
@@ -174,9 +174,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * c2nlog_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * c2nlog_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -190,9 +190,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * clnlog_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * clnlog_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -206,9 +206,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * c2nloq_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * c2nloq_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -222,9 +222,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * clnloq_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * clnloq_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -238,9 +238,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * c2nlobarg_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * c2nlobarg_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -254,9 +254,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * clnlobarg_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * clnlobarg_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -270,9 +270,9 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * c2nlobarq_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * c2nlobarq_(&wr, &xi) / z;
   }
 
   //_________________________________________________________________________________
@@ -286,8 +286,8 @@ namespace apfel
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
-    double xi  = 4 * eta / ( 1 - eta );
-    double wr  = xi * ( 1 / z - 1 ) / 4 - 1;
-    return 16 * M_PI * xi * clnlobarq_(&wr,&xi) / z;
+    double xi = 4 * eta / ( 1 - eta );
+    double wr = xi * ( 1 / z - 1 ) / 4 - 1;
+    return 16 * M_PI * xi * clnlobarq_(&wr, & xi) / z;
   }
 }

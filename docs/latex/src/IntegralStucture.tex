@@ -146,7 +146,7 @@ Eq.~(\ref{eq:Genconv2}) becomes:
 \begin{equation}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha \underbrace{\left[\eta\int_{c/\eta}^{d/\eta} dz\,
   O\left(z,\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta
-      z}\right)\right]}_{\Gamma_{\alpha\beta}}\,.
+      z}\right)\right]}_{\Gamma_{\beta \alpha}}=\sum_{\alpha=0}^{N_x} \Gamma_{\beta \alpha}\overline{d}_\alpha\,.
 \label{eq:Genconv3}
 \end{equation}
 To summarise, Eq.~(\ref{eq:Genconv3}) allows one to compute the
@@ -155,15 +155,23 @@ values of the distribution $d$ on the nodes themselves. The weights
 are given by the appropriate integral of the operator $O$ and the
 interpolating functions $w_{\alpha}^{(k)}$. The value of $I$ for a
 generic value of $x$ can finally be obtained by interpolation using a
-formula similar to Eq.~(\ref{eq:Interpolation}). Importantly,
-Eq.~(\ref{eq:Genconv3}) provides a fast way of computing convolution
-integrals. Indeed, the weights $\Gamma_{\alpha\beta}$ can be
-precomputed and stored once and for all and the integral $I$ can be
-quickly computed with different distributions $d$ by simply taking a
-weighted sum.
+formula similar to Eq.~(\ref{eq:Interpolation}). The interpolation can
+be manipulated as follows:
+\begin{equation}
+I(x,\eta) = \sum_{\beta=0}^{N_x} w_\beta^{(k)}(x) I(x_\beta,\eta) = \sum_{\alpha=0}^{N_x}\underbrace{\left[\sum_{\alpha=0}^{N_x} w_\beta^{(k)}(x) \Gamma_{\beta \alpha}\right]}_{g_\alpha(x)}\overline{d}_\alpha=\sum_{\alpha=0}^{N_x}g_\alpha(x)\overline{d}_\alpha\,.
+\end{equation}
+Therefore, the operator $\Gamma_{\beta\alpha}$ itself can be
+interpolated in $x$ over the first index $\beta$ thus obtaining the
+distribution $g_\alpha(x)$ that can ``contracted'' with the
+distribution $\overline{d}_\alpha$ to obtain the integral $I$ in
+$x$. In conclusion, Eq.~(\ref{eq:Genconv3}) provides a fast way of
+computing convolution integrals. Indeed, the weights
+$\Gamma_{\beta\alpha}$ can be precomputed and stored once and for all
+and the integral $I$ can be quickly computed with different
+distributions $d$ by simply taking a weighted sum.
 
 We now need an operational way to compute the weights
-$\Gamma_{\alpha\beta}$. To do so, it is necessary to know the general
+$\Gamma_{\beta\alpha}$. To do so, it is necessary to know the general
 structure of the operator $O$. Quite generally, the operator $O$
 splits as follows:
 \begin{equation}
@@ -179,7 +187,7 @@ being $K$, $J^{(i)}$, and $L$ finite functions of $\eta$. The
 functions $P^{(i)}$ are instead singular at $z=1$ and non-integrable
 in the limit $\eta\rightarrow1$ and thus are regularised through the
 $+$-prescription. Plugging Eq.~(\ref{eq:CoeffFuncs}) into the
-definition of $\Gamma_{\alpha\beta}$ in Eq.~(\ref{eq:Genconv3}) and
+definition of $\Gamma_{\beta\alpha}$ in Eq.~(\ref{eq:Genconv3}) and
 making use of the definition of $+$-prescription gives:
 \begin{equation}
 \begin{array}{rcl}
@@ -208,7 +216,7 @@ These integrals can, most of the times, be computed analytically.
 
 Eqs.~(\ref{eq:FinalExpression})-(\ref{eq:FinalExpression2}) expose the
 full potential complexity of the task of computing the weights
-$\Gamma_{\alpha\beta}$. However, in many practical applications some
+$\Gamma_{\beta\alpha}$. However, in many practical applications some
 simplifications apply. For example, in the case of the perturbative
 coefficients of the ($\overline{\mbox{MS}}$) splitting functions there
 are two simplications: the first is that $\eta=1$, the second is that

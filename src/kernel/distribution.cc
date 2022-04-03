@@ -10,6 +10,7 @@
 
 #include <stdexcept>
 #include <algorithm>
+#include <numeric>
 
 namespace apfel
 {
@@ -135,6 +136,24 @@ namespace apfel
   void Distribution::SetSubGrid(int const& ig, int const& ix, double const& x)
   {
     _distributionSubGrid[ig][ix] = x;
+  }
+
+  //_________________________________________________________________________
+  void Distribution::SetJointGrid(std::vector<double> const& jg)
+  {
+    _distributionJointGrid = jg;
+  }
+
+  //_________________________________________________________________________
+  void Distribution::SetSubGrid(int const& ig, std::vector<double> const& sg)
+  {
+    _distributionSubGrid[ig] = sg;
+  }
+
+  //_________________________________________________________________________
+  void Distribution::SetSubGrids(std::vector<std::vector<double>> const& sgs)
+  {
+    _distributionSubGrid = sgs;
   }
 
   //_________________________________________________________________________
@@ -421,5 +440,18 @@ namespace apfel
             DistMap.at(o).SetSubGrid(ig, ix, jv[m[ig][ix]]);
       }
     return DistMap;
+  }
+
+  //_________________________________________________________________________
+  double Sum(Distribution const& InDist)
+  {
+    const std::vector<double>& jv = InDist.GetDistributionJointGrid();
+    return std::accumulate(jv.begin(), jv.end(), 0.);
+  }
+
+  //_________________________________________________________________________
+  double InnerProduct(Distribution const& d1, Distribution const& d2, double const& offset)
+  {
+    return Sum(d1 * d2) + offset;
   }
 }
