@@ -206,7 +206,7 @@ namespace apfel
         const std::array<int, 2> bounds = d.SumBounds(x, _grid.GetSubGrid(ig));
 
         // Run over the second index of the operator
-        for (int alpha = 0; alpha <= nx; alpha++)
+        for (int alpha = 0; alpha < nx; alpha++)
           {
             // If the operator has one single line, this means that
             // one can (must) use the symmetry _Operator[ig](beta,
@@ -294,7 +294,7 @@ namespace apfel
     for (int ig = 0; ig < ng; ig++)
       {
         // Resize output on the "ig"-th subgrid
-        s[ig].resize(d.GetDistributionSubGrid()[ig].size(), 0);
+        s[ig].resize(d.GetDistributionSubGrid()[ig].size(), 0.);
         for (int alpha = 0; alpha < _grid.GetSubGrid(ig).nx(); alpha++)
           s[ig][alpha] += j[jsmap[ig][alpha]];
       }
