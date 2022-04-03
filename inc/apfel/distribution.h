@@ -223,6 +223,7 @@ namespace apfel
    * distributions. The product is computed using the joint grids.
    * @param d1: first input distribution
    * @param d2: second input distribution
+   * @param offset: offset applied to the inner product (default: 0)
    */
   double InnerProduct(Distribution const& d1, Distribution const& d2, double const& offset = 0);
   ///@}

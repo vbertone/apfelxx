@@ -101,6 +101,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3069e9152cabf4d463773b698fd8d323"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Distribution.html#a3069e9152cabf4d463773b698fd8d323">SetSubGrid</a> (int const &amp;ig, int const &amp;ix, double const &amp;x)</td></tr>
 <tr class="memdesc:a3069e9152cabf4d463773b698fd8d323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to push back the values of the subgrid.  <a href="classapfel_1_1Distribution.html#a3069e9152cabf4d463773b698fd8d323">More...</a><br /></td></tr>
 <tr class="separator:a3069e9152cabf4d463773b698fd8d323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75dfd87939e990985bbabdd68d4333d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Distribution.html#a75dfd87939e990985bbabdd68d4333d8">SetJointGrid</a> (std::vector&lt; double &gt; const &amp;jg)</td></tr>
+<tr class="memdesc:a75dfd87939e990985bbabdd68d4333d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set the joint grid.  <a href="classapfel_1_1Distribution.html#a75dfd87939e990985bbabdd68d4333d8">More...</a><br /></td></tr>
+<tr class="separator:a75dfd87939e990985bbabdd68d4333d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52fe97487b86d6c414b5f72e871bbf56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Distribution.html#a52fe97487b86d6c414b5f72e871bbf56">SetSubGrid</a> (int const &amp;ig, std::vector&lt; double &gt; const &amp;sg)</td></tr>
+<tr class="memdesc:a52fe97487b86d6c414b5f72e871bbf56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set the single sub-grid.  <a href="classapfel_1_1Distribution.html#a52fe97487b86d6c414b5f72e871bbf56">More...</a><br /></td></tr>
+<tr class="separator:a52fe97487b86d6c414b5f72e871bbf56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8cd461f4dd5432b968b1eb9174e97a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Distribution.html#a8d8cd461f4dd5432b968b1eb9174e97a">SetSubGrids</a> (std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;sgs)</td></tr>
+<tr class="memdesc:a8d8cd461f4dd5432b968b1eb9174e97a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set all the sub-grids.  <a href="classapfel_1_1Distribution.html#a8d8cd461f4dd5432b968b1eb9174e97a">More...</a><br /></td></tr>
+<tr class="separator:a8d8cd461f4dd5432b968b1eb9174e97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6157460d3b27acf31c28d289a9e0d55b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Distribution.html#a6157460d3b27acf31c28d289a9e0d55b">Derivative</a> () const</td></tr>
 <tr class="memdesc:a6157460d3b27acf31c28d289a9e0d55b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the derivative of the <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> in the form of a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> object.  <a href="classapfel_1_1Distribution.html#a6157460d3b27acf31c28d289a9e0d55b">More...</a><br /></td></tr>
 <tr class="separator:a6157460d3b27acf31c28d289a9e0d55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,7 +248,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> class defines one of the basic objects of APFEL++. This is essentially the discretisation of a function that can be conveniently used for convolutions. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#_a9">distribution_test.cc</a>, <a class="el" href="interpolation_test_8cc-example.html#_a1">interpolation_test.cc</a>, <a class="el" href="qgriddist_test_8cc-example.html#_a4">qgriddist_test.cc</a>, and <a class="el" href="structurefunction_test_8cc-example.html#_a15">structurefunction_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#_a8">distribution_test.cc</a>, <a class="el" href="interpolation_test_8cc-example.html#_a1">interpolation_test.cc</a>, <a class="el" href="qgriddist_test_8cc-example.html#_a4">qgriddist_test.cc</a>, and <a class="el" href="structurefunction_test_8cc-example.html#_a13">structurefunction_test.cc</a>.</dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af477a2ffcc422a241a5860ea2caf3949" name="af477a2ffcc422a241a5860ea2caf3949"></a>
@@ -744,7 +753,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <a id="a66c033d0c916523ea0f75f16c09985f8" name="a66c033d0c916523ea0f75f16c09985f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66c033d0c916523ea0f75f16c09985f8">&#9670;&nbsp;</a></span>SetJointGrid()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a66c033d0c916523ea0f75f16c09985f8">&#9670;&nbsp;</a></span>SetJointGrid() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -780,8 +789,34 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a75dfd87939e990985bbabdd68d4333d8" name="a75dfd87939e990985bbabdd68d4333d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75dfd87939e990985bbabdd68d4333d8">&#9670;&nbsp;</a></span>SetJointGrid() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::Distribution::SetJointGrid </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>jg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to set the joint grid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jg</td><td>the vector of the joint grid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a3069e9152cabf4d463773b698fd8d323" name="a3069e9152cabf4d463773b698fd8d323"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3069e9152cabf4d463773b698fd8d323">&#9670;&nbsp;</a></span>SetSubGrid()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3069e9152cabf4d463773b698fd8d323">&#9670;&nbsp;</a></span>SetSubGrid() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -824,13 +859,76 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a52fe97487b86d6c414b5f72e871bbf56" name="a52fe97487b86d6c414b5f72e871bbf56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fe97487b86d6c414b5f72e871bbf56">&#9670;&nbsp;</a></span>SetSubGrid() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::Distribution::SetSubGrid </td>
+          <td>(</td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>ig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>sg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to set the single sub-grid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ig</td><td>the subgrid index </td></tr>
+    <tr><td class="paramname">sg</td><td>the vector of the sub-grid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8d8cd461f4dd5432b968b1eb9174e97a" name="a8d8cd461f4dd5432b968b1eb9174e97a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d8cd461f4dd5432b968b1eb9174e97a">&#9670;&nbsp;</a></span>SetSubGrids()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::Distribution::SetSubGrids </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>sgs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to set all the sub-grids. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sgs</td><td>the vector of vectoris of the sub-grids </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/vb262523/Codes/apfelxx/inc/apfel/<a class="el" href="distribution_8h_source.html">distribution.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 8 2022 18:32:39 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+Generated on Sun Apr 3 2022 22:39:21 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
 </small></address>
 </body>
 </html>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['object_0',['Object',['../classapfel_1_1DISNCBasis.html#adb9d33d6b7cd7bafd381c214e83bd64d',1,'apfel::DISNCBasis::Object()'],['../classapfel_1_1DISCCBasis.html#a71d34c94c9d06fe8418da8d5ee37f501',1,'apfel::DISCCBasis::Object()'],['../classapfel_1_1EvolutionBasisQCD.html#a0e3bb51b09bf1cfae51916729c1c8169',1,'apfel::EvolutionBasisQCD::Object()'],['../classapfel_1_1MatchingBasisQCD.html#a662d45066a92fc8f8c6deda77b429831',1,'apfel::MatchingBasisQCD::Object()']]],
-  ['object_1',['object',['../structapfel_1_1ConvolutionMap_1_1rule.html#a2c0746f83d8cd9aba6adef881214d4e6',1,'apfel::ConvolutionMap::rule']]],
+  ['object_0',['object',['../structapfel_1_1ConvolutionMap_1_1rule.html#a2c0746f83d8cd9aba6adef881214d4e6',1,'apfel::ConvolutionMap::rule']]],
+  ['object_1',['Object',['../classapfel_1_1DISNCBasis.html#adb9d33d6b7cd7bafd381c214e83bd64d',1,'apfel::DISNCBasis::Object()'],['../classapfel_1_1DISCCBasis.html#a71d34c94c9d06fe8418da8d5ee37f501',1,'apfel::DISCCBasis::Object()'],['../classapfel_1_1EvolutionBasisQCD.html#a0e3bb51b09bf1cfae51916729c1c8169',1,'apfel::EvolutionBasisQCD::Object()'],['../classapfel_1_1MatchingBasisQCD.html#a662d45066a92fc8f8c6deda77b429831',1,'apfel::MatchingBasisQCD::Object()']]],
   ['object1_2',['object1',['../structapfel_1_1term.html#ae83713d52c64fe1e8058b3e92e05441c',1,'apfel::term']]],
   ['object2_3',['object2',['../structapfel_1_1term.html#aa1968face846d1995d05dc178734b352',1,'apfel::term']]],
   ['observable_4',['Observable',['../classapfel_1_1Observable.html',1,'apfel::Observable&lt; T &gt;'],['../classapfel_1_1Observable.html#a25afa815010dd18f8b1ab5f47a4d9180',1,'apfel::Observable::Observable()=delete'],['../classapfel_1_1Observable.html#af9a5530cd96a831386509d4e9a7e51fe',1,'apfel::Observable::Observable(std::function&lt; Set&lt; Operator &gt;(double const &amp;)&gt; const &amp;CoefficientFunctions, std::function&lt; Set&lt; T &gt;(double const &amp;)&gt; const &amp;Objects)']]],

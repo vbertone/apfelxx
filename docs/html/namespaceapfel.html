@@ -545,7 +545,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived class from <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analystic expression in such a way that it...">Expression</a> to implement the <a class="el" href="classapfel_1_1Null.html" title="Derived class from Expression to implement the Null operator (zero).">Null</a> operator (zero).  <a href="classapfel_1_1Null.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html">Observable</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of operators for an easy computation of ...">Observable</a> class encapsulates sets of operators and sets of operators for an easy computation of observebles deriving from the covolution of the two.  <a href="classapfel_1_1Observable.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> class encapsulates sets of operators and sets of T-type objects for an easy computation of obsarvebles deriving from the convolution of the two.  <a href="classapfel_1_1Observable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1OgataQuadrature.html">OgataQuadrature</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1OgataQuadrature.html" title="The OgataQuadrature class implements the Hankel-transform of the input function using the Ogata quadr...">OgataQuadrature</a> class implements the Hankel-transform of the input function using the Ogata quadrature method described here: <a href="http://www.kurims.kyoto-u.ac.jp/~okamoto/paper/Publ_RIMS_DE/41-4-40.pdf">http://www.kurims.kyoto-u.ac.jp/~okamoto/paper/Publ_RIMS_DE/41-4-40.pdf</a>.  <a href="classapfel_1_1OgataQuadrature.html#details">More...</a><br /></td></tr>
@@ -1027,6 +1027,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a90ee4f901b34777425220834d5f76083"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a90ee4f901b34777425220834d5f76083">DistributionMap</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::function&lt; std::vector&lt; double &gt;(double const &amp;)&gt; const &amp;InDistFunc, int const &amp;NOutputs=0)</td></tr>
 <tr class="memdesc:a90ee4f901b34777425220834d5f76083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that fills in a map of distributions from a vector-valued function.  <a href="namespaceapfel.html#a90ee4f901b34777425220834d5f76083">More...</a><br /></td></tr>
 <tr class="separator:a90ee4f901b34777425220834d5f76083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a413b96a157b485f67c2f9a84e8285e9b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a413b96a157b485f67c2f9a84e8285e9b">Sum</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;InDist)</td></tr>
+<tr class="memdesc:a413b96a157b485f67c2f9a84e8285e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that sums the element of a distribution. Specifically, it sums the elements of the joint grid. Combined with the Distribution*Distribution operator, this function is useful to compute scalar products.  <a href="namespaceapfel.html#a413b96a157b485f67c2f9a84e8285e9b">More...</a><br /></td></tr>
+<tr class="separator:a413b96a157b485f67c2f9a84e8285e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a562236897ffcf109fc7fe01436ad023d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a562236897ffcf109fc7fe01436ad023d">InnerProduct</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d1, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d2, double const &amp;offset=0)</td></tr>
+<tr class="memdesc:a562236897ffcf109fc7fe01436ad023d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that computes the scala product bewteen two distributions. The product is computed using the joint grids.  <a href="namespaceapfel.html#a562236897ffcf109fc7fe01436ad023d">More...</a><br /></td></tr>
+<tr class="separator:a562236897ffcf109fc7fe01436ad023d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Jet coefficients.</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p >Perturbative coefficients for the definction of the low-scale jet TMD depending on the jet algorithm. </p>
 </div></td></tr>
@@ -1280,7 +1286,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a55b43737796ae903cb15f93e88794582"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeF3NCObjectsZMT precomputes the perturbative coefficients of coefficient functions for NC xF3 for SIA in the ZM scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.  <a href="namespaceapfel.html#a55b43737796ae903cb15f93e88794582">More...</a><br /></td></tr>
 <tr class="separator:a55b43737796ae903cb15f93e88794582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Structure function builders</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p >Collection of functions that build a map of <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of operators for an easy computation of ...">Observable</a> objects corresponding to the different component of the structure functions. </p>
+<tr><td colspan="2"><div class="groupText"><p >Collection of functions that build a map of <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> objects corresponding to the different component of the structure functions. </p>
 </div></td></tr>
 <tr class="memitem:ac0821d4bd5dbc1902a270fce6ac83f8f"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classapfel_1_1Observable.html">Observable</a>&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ac0821d4bd5dbc1902a270fce6ac83f8f">BuildStructureFunctions</a> (std::function&lt; <a class="el" href="structapfel_1_1StructureFunctionObjects.html">StructureFunctionObjects</a>(double const &amp;, std::vector&lt; double &gt; const &amp;)&gt; const &amp;FObj, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, std::function&lt; std::vector&lt; double &gt;(double const &amp;)&gt; const &amp;Couplings)</td></tr>
 <tr class="memdesc:ac0821d4bd5dbc1902a270fce6ac83f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildStructureFunctions function constructs a map of "Observable" objects.  <a href="namespaceapfel.html#ac0821d4bd5dbc1902a270fce6ac83f8f">More...</a><br /></td></tr>
@@ -1337,7 +1343,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a3403b0fd4e423dc723bec51135f1186c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the evolution factors for gluon and quarks.  <a href="namespaceapfel.html#a3403b0fd4e423dc723bec51135f1186c">More...</a><br /></td></tr>
 <tr class="separator:a3403b0fd4e423dc723bec51135f1186c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a544c835527c9307281cf7bb828e4d36a"><td class="memItemLeft" align="right" valign="top">std::function&lt; std::vector&lt; double &gt;(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a544c835527c9307281cf7bb828e4d36a">EvolutionFactorsK</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
-<tr class="memdesc:a544c835527c9307281cf7bb828e4d36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the evolution factors for gluon and quarks. As compared to "EvolutionFactors", this function isolates the double logs into gammaK. This is reminiscent of the qT resummation typical way of computing the Sudakov form factor.  <a href="namespaceapfel.html#a544c835527c9307281cf7bb828e4d36a">More...</a><br /></td></tr>
+<tr class="memdesc:a544c835527c9307281cf7bb828e4d36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the evolution factors for gluon and quarks. As compared to "EvolutionFactors", this function isolates the double logs into gammaK. This is reminiscent of the qT-resummation typical way of computing the Sudakov form factor.  <a href="namespaceapfel.html#a544c835527c9307281cf7bb828e4d36a">More...</a><br /></td></tr>
 <tr class="separator:a544c835527c9307281cf7bb828e4d36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38a26f2c8ec2ab9cf9c97836185a657f"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f">QuarkEvolutionFactor</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
 <tr class="memdesc:a38a26f2c8ec2ab9cf9c97836185a657f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the evolution factor for quarks.  <a href="namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f">More...</a><br /></td></tr>
@@ -1345,6 +1351,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac1f6a3f9282d39de9c090bd184182c9f"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f">GluonEvolutionFactor</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
 <tr class="memdesc:ac1f6a3f9282d39de9c090bd184182c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the evolution factor for the gluon.  <a href="namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f">More...</a><br /></td></tr>
 <tr class="separator:ac1f6a3f9282d39de9c090bd184182c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05a7734973ff2e62fdee1441a22bba2"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2">CollinsSoperKernel</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
+<tr class="memdesc:ac05a7734973ff2e62fdee1441a22bba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the perturbative part of the Collins-Soper kernel.  <a href="namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2">More...</a><br /></td></tr>
+<tr class="separator:ac05a7734973ff2e62fdee1441a22bba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94e0774ab3a271603a3463715b61c1c2"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a94e0774ab3a271603a3463715b61c1c2">HardFactor</a> (std::string const &amp;Process, std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Cf=1)</td></tr>
 <tr class="memdesc:a94e0774ab3a271603a3463715b61c1c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the hard factor.  <a href="namespaceapfel.html#a94e0774ab3a271603a3463715b61c1c2">More...</a><br /></td></tr>
 <tr class="separator:a94e0774ab3a271603a3463715b61c1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2267,7 +2276,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A map of "Observable" objects, one for number of active flavours </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a14">structurefunction_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a12">structurefunction_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -2592,6 +2601,65 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Set&lt;Distribution&gt;-valued function of the impact parameter b<sub>T</sub>, the final renormalisation scale &mu;, and the final rapidity scale &zeta; representing the evolved TMD PDFs </dd></dl>
+
+</div>
+</div>
+<a id="ac05a7734973ff2e62fdee1441a22bba2" name="ac05a7734973ff2e62fdee1441a22bba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac05a7734973ff2e62fdee1441a22bba2">&#9670;&nbsp;</a></span>CollinsSoperKernel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt; double(double const  &amp;, double const  &amp;)&gt; apfel::CollinsSoperKernel </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>TmdObj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Alphas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>PerturbativeOrder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>Ci</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>IntEps</em> = <code>1e-7</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the perturbative part of the Collins-Soper kernel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
+    <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
+    <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial scale-variation factor (default: 1) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double-valued function of the impact parameter b<sub>T</sub> and of the the final renormalisation scale &mu;. It returns perturbative part of the Collis-Soper kernel. </dd></dl>
 
 </div>
 </div>
@@ -3121,7 +3189,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Function that returns the evolution factors for gluon and quarks. As compared to "EvolutionFactors", this function isolates the double logs into gammaK. This is reminiscent of the qT resummation typical way of computing the Sudakov form factor. </p>
+<p>Function that returns the evolution factors for gluon and quarks. As compared to "EvolutionFactors", this function isolates the double logs into gammaK. This is reminiscent of the qT-resummation typical way of computing the Sudakov form factor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
@@ -4651,6 +4719,8 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a11">structurefunction_test.cc</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -4776,8 +4846,6 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a11">structurefunction_test.cc</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -4958,8 +5026,6 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a13">structurefunction_test.cc</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -5300,8 +5366,6 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a12">structurefunction_test.cc</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -5685,6 +5749,52 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A map of TmdObject objects, one for each possible nf </dd></dl>
+
+</div>
+</div>
+<a id="a562236897ffcf109fc7fe01436ad023d" name="a562236897ffcf109fc7fe01436ad023d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a562236897ffcf109fc7fe01436ad023d">&#9670;&nbsp;</a></span>InnerProduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::InnerProduct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;&#160;</td>
+          <td class="paramname"><em>d1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;&#160;</td>
+          <td class="paramname"><em>d2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>offset</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that computes the scala product bewteen two distributions. The product is computed using the joint grids. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d1</td><td>first input distribution </td></tr>
+    <tr><td class="paramname">d2</td><td>second input distribution </td></tr>
+    <tr><td class="paramname">offset</td><td>offset applied to the inner product (default: 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#a13">distribution_test.cc</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -7892,6 +8002,34 @@ template&lt;class U &gt; </div>
 
 </div>
 </div>
+<a id="a413b96a157b485f67c2f9a84e8285e9b" name="a413b96a157b485f67c2f9a84e8285e9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a413b96a157b485f67c2f9a84e8285e9b">&#9670;&nbsp;</a></span>Sum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apfel::Sum </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;&#160;</td>
+          <td class="paramname"><em>InDist</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that sums the element of a distribution. Specifically, it sums the elements of the joint grid. Combined with the Distribution*Distribution operator, this function is useful to compute scalar products. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">InDist</td><td>distribution to be summed over </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="set_test_8cc-example.html#a21">set_test.cc</a>.</dd>
+</dl>
+
+</div>
+</div>
 <a id="ad0a6c27685871a8b2fb8de6f53a951d0" name="ad0a6c27685871a8b2fb8de6f53a951d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad0a6c27685871a8b2fb8de6f53a951d0">&#9670;&nbsp;</a></span>UnpackWeights()</h2>
 
@@ -8153,7 +8291,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 8 2022 18:32:39 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+Generated on Sun Apr 3 2022 22:39:21 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
 </small></address>
 </body>
 </html>

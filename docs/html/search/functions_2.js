@@ -95,8 +95,9 @@ var searchData=
   ['cml2gnc_92',['CmL2gNC',['../classapfel_1_1CmL2gNC.html#a6f15a9aee0ac52ff97e94687b9b289b8',1,'apfel::CmL2gNC']]],
   ['cml2nsnc_93',['CmL2nsNC',['../classapfel_1_1CmL2nsNC.html#aacf89402670035155e057c6ad3a03e68',1,'apfel::CmL2nsNC']]],
   ['cml2psnc_94',['CmL2psNC',['../classapfel_1_1CmL2psNC.html#a0f5fbe503c96570e8af5e5b96e26c283',1,'apfel::CmL2psNC']]],
-  ['combine_95',['Combine',['../classapfel_1_1Set.html#a7065697bdd240416184fee23592c77fa',1,'apfel::Set::Combine() const'],['../classapfel_1_1Set.html#a339d0b1d03e094ec494f1c06b7dacde2',1,'apfel::Set::Combine(std::vector&lt; double &gt; const &amp;weigths) const']]],
-  ['concatenateandsortvectors_96',['ConcatenateAndSortVectors',['../namespaceapfel.html#a6f7f89d3dacb5cd1bfd2c27a590604ac',1,'apfel']]],
-  ['convolutionmap_97',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap']]],
-  ['createjointgrid_98',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]]
+  ['collinssoperkernel_95',['CollinsSoperKernel',['../namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2',1,'apfel']]],
+  ['combine_96',['Combine',['../classapfel_1_1Set.html#a7065697bdd240416184fee23592c77fa',1,'apfel::Set::Combine() const'],['../classapfel_1_1Set.html#a339d0b1d03e094ec494f1c06b7dacde2',1,'apfel::Set::Combine(std::vector&lt; double &gt; const &amp;weigths) const']]],
+  ['concatenateandsortvectors_97',['ConcatenateAndSortVectors',['../namespaceapfel.html#a6f7f89d3dacb5cd1bfd2c27a590604ac',1,'apfel']]],
+  ['convolutionmap_98',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap']]],
+  ['createjointgrid_99',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]]
 ];
