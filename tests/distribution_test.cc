@@ -51,7 +51,7 @@ int main()
   apfel::Timer t;
 
   // Grid
-  const apfel::Grid g{{apfel::SubGrid{80,1e-5,3}, apfel::SubGrid{50,1e-1,3}, apfel::SubGrid{40,8e-1,3}}};
+  const apfel::Grid g{{{80, 1e-5, 3}, {50, 1e-1, 3}, {40, 8e-1, 3}}};
 
   // Distribution
   const apfel::Distribution d{g, [&] (double const& x) -> double{ return 1 - x; }};
@@ -80,15 +80,20 @@ int main()
   const apfel::Operator OO = O * O;
   t.stop();
 
+  // Tabulation parameters
+  const int nx = 100;
+  const double xmin = 1e-5;
+  const double xmax = 0.999;
+  const double xstp = exp( log(xmax / xmin) / ( nx - 1 ) );
+
   // Check the numerical accuracy of "Od" by comparing with the analytical result
   std::cout << "\nChecking the numerical accuracy of O * d ... " << std::endl;
   std::cout << std::scientific;
-  for (int ix = 0; ix <= g.GetJointGrid().nx(); ix++)
+  for (double x = xmin; x < xmax * 1.000001; x *= xstp)
     {
-      double x = g.GetJointGrid().GetGrid()[ix];
       // Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
       double Ix = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
-      std::cout << x << "\t\t" << Od.Evaluate(x) << "\t\t" << Ix << "\t\t" << Od.Evaluate(x) / Ix << std::endl;
+      std::cout << x << "\t\t" << Od.Evaluate(x) << "\t\t" << InnerProduct(O.Evaluate(x), d) << "\t\t" << Ix << "\t\t" << Od.Evaluate(x) / Ix << "\t\t" << InnerProduct(O.Evaluate(x), d) / Ix << std::endl;
     }
 
   // Check the numerical accuracy of "Od" by comparing with the analytical result
@@ -101,11 +106,8 @@ int main()
   const apfel::Distribution O2d = O2 * d;
 
   std::cout << "\nChecking the numerical accuracy of O * O ... " << std::endl;
-  for (int ix = 0; ix <= g.GetJointGrid().nx(); ix++)
-    {
-      double x = g.GetJointGrid().GetGrid()[ix];
-      std::cout << x << "\t\t" << OOd.Evaluate(x) << "\t\t" << O2d.Evaluate(x) << "\t\t" << OOd.Evaluate(x) / O2d.Evaluate(x) << std::endl;
-    }
+  for (double x = xmin; x < xmax * 1.000001; x *= xstp)
+    std::cout << x << "\t\t" << OOd.Evaluate(x) << "\t\t" << O2d.Evaluate(x) << "\t\t" << OOd.Evaluate(x) / O2d.Evaluate(x) << std::endl;
 
   // Now define a double object with O and d and print it.
   const apfel::DoubleObject<apfel::Operator, apfel::Distribution> DObj{{{1, O, d}}};

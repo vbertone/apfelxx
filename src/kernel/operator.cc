@@ -181,6 +181,72 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution Operator::Evaluate(double const& x) const
+  {
+    // Initialise distribution
+    apfel::Distribution d{_grid};
+
+    // Number of sub-grids
+    const int ng = _grid.nGrids();
+
+    // Initialise vector of vectors containing the distribution on the
+    // sub-grids.
+    std::vector<std::vector<double>> dsg(ng);
+
+    // Fill in sub-grids
+    for (int ig = 0; ig < ng; ig++)
+      {
+        // Number of nodes
+        const int nx = _grid.GetSubGrid(ig).nx();
+
+        // Resize distribution subgrid
+        dsg[ig].resize(_grid.GetSubGrid(ig).GetGrid().size(), 0.);
+
+        // Get summation bounds for the interpolation
+        const std::array<int, 2> bounds = d.SumBounds(x, _grid.GetSubGrid(ig));
+
+        // Run over the second index of the operator
+        for (int alpha = 0; alpha <= nx; alpha++)
+          {
+            // If the operator has one single line, this means that
+            // one can (must) use the symmetry _Operator[ig](beta,
+            // alpha) = _Operator[ig](0, alpha - beta). Otherwise, the
+            // operator matrix is assumed to be a full nx^2matrix.
+            if (_Operator[ig].size(0) == 1)
+              for (int beta = bounds[0]; beta < std::min(bounds[1], alpha + 1); beta++)
+                dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](0, alpha - beta);
+            else
+              for (int beta = bounds[0]; beta < std::min(bounds[1], nx + 1); beta++)
+                dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](beta, alpha);
+          }
+      }
+
+    // Initialise vector containing the distribution on the joint
+    // grid.
+    std::vector<double> djg(_grid.GetJointGrid().GetGrid().size(), 0.);
+
+    // Determine sub-grid to use to fill in the joint distribution
+    int jg;
+    for (jg = ng - 1; jg >= 0; jg--)
+      if (x >= _grid.GetSubGrid(jg).xMin())
+        break;
+
+    // Get map of indices map from joint to the selected sub-grid
+    const std::vector<int>& jsmap = _grid.JointToSubMap()[jg];
+
+    // Fill in joint grid
+    for (int alpha = 0; alpha < (int) jsmap.size(); alpha++)
+      djg[jsmap[alpha]] = dsg[jg][alpha];
+
+    // Set sub-grids and joint grid
+    d.SetSubGrids(dsg);
+    d.SetJointGrid(djg);
+
+    // Return distribution
+    return d;
+  }
+
+  //_________________________________________________________________________
   Distribution Operator::operator *= (Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid

@@ -67,6 +67,13 @@ namespace apfel
     void BuildOperatorGPD(Expression const& expr, double const& eps);
 
     /**
+     * @brief Function that interpolate the operator over the first
+     * index return a Distribution object.
+     * @param x: the value in x to be interpolated
+     */
+    Distribution Evaluate(double const& x) const;
+
+    /**
      * @brief Function that returns the Grid object associated to the operator.
      */
     Grid const& GetGrid() const { return _grid; }
