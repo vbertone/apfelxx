@@ -92,8 +92,10 @@ int main()
   for (double x = xmin; x < xmax * 1.000001; x *= xstp)
     {
       // Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
-      double Ix = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
-      std::cout << x << "\t\t" << Od.Evaluate(x) << "\t\t" << InnerProduct(O.Evaluate(x), d) << "\t\t" << Ix << "\t\t" << Od.Evaluate(x) / Ix << "\t\t" << InnerProduct(O.Evaluate(x), d) / Ix << std::endl;
+      const double Ix  = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
+      const double Odx = Od.Evaluate(x);
+      const double Oxd = InnerProduct(O.Evaluate(x), d);
+      std::cout << x << "\t\t" << Odx << "\t\t" << Oxd << "\t\t" << Ix << "\t\t" << Odx / Ix << "\t\t" << Oxd / Ix << std::endl;
     }
 
   // Check the numerical accuracy of "Od" by comparing with the analytical result
