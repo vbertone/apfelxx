@@ -51,7 +51,7 @@ int main()
   apfel::Timer t;
 
   // Grid
-  const apfel::Grid g{{{80, 1e-5, 3}, {50, 1e-1, 3}, {40, 8e-1, 3}}};
+  const apfel::Grid g{{{100, 1e-5, 3}, {100, 1e-1, 3}, {40, 8e-1, 3}}};
 
   // Distribution
   const apfel::Distribution d{g, [&] (double const& x) -> double{ return 1 - x; }};
