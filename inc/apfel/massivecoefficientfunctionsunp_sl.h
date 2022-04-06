@@ -59,6 +59,8 @@ namespace apfel
   public:
     Cm21gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -69,6 +71,8 @@ namespace apfel
   public:
     CmL1gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
   ///@}
 
@@ -90,7 +94,8 @@ namespace apfel
     double Regular(double const& x) const;
     double Local(double const&)     const;
   private:
-    double _adler;
+    double const _eta;
+    double       _adler;
   };
 
   /**
@@ -104,6 +109,8 @@ namespace apfel
   public:
     CmL2nsNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -115,6 +122,8 @@ namespace apfel
   public:
     Cm22gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -126,6 +135,8 @@ namespace apfel
   public:
     CmL2gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -138,6 +149,8 @@ namespace apfel
   public:
     Cm22psNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -150,6 +163,8 @@ namespace apfel
   public:
     CmL2psNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -162,6 +177,8 @@ namespace apfel
   public:
     Cm22bargNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -174,6 +191,8 @@ namespace apfel
   public:
     CmL2bargNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -187,6 +206,8 @@ namespace apfel
   public:
     Cm22barpsNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -200,6 +221,8 @@ namespace apfel
   public:
     CmL2barpsNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
   ///@}
   ///@}

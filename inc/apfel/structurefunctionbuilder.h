@@ -216,8 +216,8 @@ namespace apfel
                                                                                                                   std::vector<double> const& Masses,
                                                                                                                   double              const& IntEps = 1e-5,
                                                                                                                   int                 const& nxi    = 150,
-                                                                                                                  double              const& ximin  = 0.001,
-                                                                                                                  double              const& ximax  = 100000,
+                                                                                                                  double              const& ximin  = 0.01,
+                                                                                                                  double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
                                                                                                                   double              const& lambda = 0.0005);
 
@@ -240,8 +240,8 @@ namespace apfel
                                                                                                                   std::vector<double> const& Masses,
                                                                                                                   double              const& IntEps = 1e-5,
                                                                                                                   int                 const& nxi    = 150,
-                                                                                                                  double              const& ximin  = 0.001,
-                                                                                                                  double              const& ximax  = 100000,
+                                                                                                                  double              const& ximin  = 0.01,
+                                                                                                                  double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
                                                                                                                   double              const& lambda = 0.0005);
 
@@ -264,8 +264,8 @@ namespace apfel
                                                                                                                       std::vector<double> const& Masses,
                                                                                                                       double              const& IntEps = 1e-5,
                                                                                                                       int                 const& nxi    = 150,
-                                                                                                                      double              const& ximin  = 0.001,
-                                                                                                                      double              const& ximax  = 100000,
+                                                                                                                      double              const& ximin  = 0.01,
+                                                                                                                      double              const& ximax  = 10000,
                                                                                                                       int                 const& intdeg = 3,
                                                                                                                       double              const& lambda = 0.0005);
 
@@ -288,8 +288,8 @@ namespace apfel
                                                                                                                       std::vector<double> const& Masses,
                                                                                                                       double              const& IntEps = 1e-5,
                                                                                                                       int                 const& nxi    = 150,
-                                                                                                                      double              const& ximin  = 0.001,
-                                                                                                                      double              const& ximax  = 100000,
+                                                                                                                      double              const& ximin  = 0.01,
+                                                                                                                      double              const& ximax  = 10000,
                                                                                                                       int                 const& intdeg = 3,
                                                                                                                       double              const& lambda = 0.0005);
   ///@}
