@@ -231,12 +231,46 @@ namespace apfel
       if (x >= _grid.GetSubGrid(jg).xMin())
         break;
 
+    // Determine the weight of the previous grid that enforces a
+    // smoother transition from the (jg-1)-th and the jg-th subgrid.
+    // Do it only from the second grid on.
+    double w2 = 0;
+    if (jg > 0)
+      {
+        // Get interpolation degree on the jg-th subgrid
+        const int id = _grid.GetSubGrid(jg).InterDegree();
+
+        // Determine the closest bottom node on the jg-th subgrid
+        const int ndb = d.SumBounds(x, _grid.GetSubGrid(jg))[0];
+
+        // If "ndb" is larger than the interpolation degree of the jg-th
+        // subgrid "id", use only this subgrid to compute the distribution
+        // on the joint grid. Otherwise compute the joint grid as a
+        // weighted average of (jg-1)-th and jg-th subgrids with weight
+        // depending on the distance from the bottom node of the gj-th
+        // subgrid. This should ensure a smoother transition from the
+        // (jg-1)-th and the jg-th subgrid.
+        w2 = std::max(id - ndb, 0) * pow(id + 1, -1);
+
+        // Get map of indices map from joint to the sub-grid preceding
+        // the selected one.
+        const std::vector<int>& jsmapp = _grid.JointToSubMap()[jg-1];
+
+        // Fill in joint grid
+        for (int alpha = 0; alpha < (int) jsmapp.size(); alpha++)
+          djg[jsmapp[alpha]] += w2 * dsg[jg-1][alpha];
+      }
+
+    // Determine weight on the current grid accoroding to the weight
+    // on the previous grid.
+    const double w1 = 1 - w2;
+
     // Get map of indices map from joint to the selected sub-grid
     const std::vector<int>& jsmap = _grid.JointToSubMap()[jg];
 
     // Fill in joint grid
     for (int alpha = 0; alpha < (int) jsmap.size(); alpha++)
-      djg[jsmap[alpha]] = dsg[jg][alpha];
+      djg[jsmap[alpha]] += w1 * dsg[jg][alpha];
 
     // Set sub-grids and joint grid
     d.SetSubGrids(dsg);
