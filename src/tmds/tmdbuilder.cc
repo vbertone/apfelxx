@@ -940,7 +940,7 @@ namespace apfel
     double djet1 = 0;
     if (JetAlgo == CONE)
       djet1 = dJetqCone1();
-    if (JetAlgo == KT)
+    else if (JetAlgo == KT)
       djet1 = dJetqkT1();
     else
       throw std::runtime_error(error("MatchTmdJet", "Unknown jet algorithm."));
