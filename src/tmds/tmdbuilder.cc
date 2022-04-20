@@ -1890,7 +1890,7 @@ namespace apfel
       const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps);
 
       // Compute the evolution factors.
-      const double Klz = K(mu0) - IntI2;
+      const double Klz = CF * ( K(mu0) - IntI2 );
 
       // Return the factor.
       return Klz;

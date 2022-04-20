@@ -103,6 +103,50 @@ namespace apfel
   };
 
   /**
+   * @brief Rotation matrix from the physical basis to the basis of
+   * q_{+/-} = q +/- qbar.
+   */
+  const double RotPhysToPlusMinus[13][13] =
+  {
+    // tb   bb   cb   sb   ub   db   g    d    u    s    c    b    t
+    {  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,  0.},   // g
+    {  0.,  0.,  0.,  0.,  0.,  1.,  0.,  1.,  0.,  0.,  0.,  0.,  0.},   // d+
+    {  0.,  0.,  0.,  0.,  0., -1.,  0.,  1.,  0.,  0.,  0.,  0.,  0.},   // d-
+    {  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,  0.},   // u+
+    {  0.,  0.,  0.,  0., -1.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,  0.},   // u-
+    {  0.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.},   // s+
+    {  0.,  0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.},   // s-
+    {  0.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.},   // c+
+    {  0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.},   // c-
+    {  0.,  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.},   // b+
+    {  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.},   // b-
+    {  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.},   // t+
+    { -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.}    // t-
+  };
+
+  /**
+   * @brief Rotation matrix from the basis of q_{+/-} = q +/- qbar to
+   * the physical basis. Inverse of RotPhysToPlusMinus.
+   */
+  const double RotPlusMinusToPhys[13][13] =
+  {
+    //  g     d+    d-    u+    u-    s+    s-    c+    c-    b+    b-    t+    t-
+    {   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,  0.5, -0.5},  // tb
+    {   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,  0.5, -0.5,   0.,   0.},  // bb
+    {   0.,   0.,   0.,   0.,   0.,   0.,   0.,  0.5, -0.5,   0.,   0.,   0.,   0.},  // cb
+    {   0.,   0.,   0.,   0.,   0.,  0.5, -0.5,   0.,   0.,   0.,   0.,   0.,   0.},  // sb
+    {   0.,   0.,   0.,  0.5, -0.5,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.},  // ub
+    {   0.,  0.5, -0.5,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.},  // db
+    {   1.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.},  // g
+    {   0.,  0.5,  0.5,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.},  // d
+    {   0.,   0.,   0.,  0.5, 0.5,    0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.},  // u
+    {   0.,   0.,   0.,   0.,   0.,  0.5,  0.5,   0.,   0.,   0.,   0.,   0.,   0.},  // s
+    {   0.,   0.,   0.,   0.,   0.,   0.,   0.,  0.5,  0.5,   0.,   0.,   0.,   0.},  // c
+    {   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,  0.5,  0.5,   0.,   0.},  // b
+    {   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,  0.5,  0.5}   // t
+  };
+
+  /**
    * @brief Rotation from the physical to the QCD evolution basis.
    * @param InPhysMap: the map in the physical basis
    * @return The map in the QCD evolution basis
@@ -131,5 +175,27 @@ namespace apfel
    * @return the map of operators in the physical basis
    */
   std::map<int, Operator> QCDEvToPhys(std::map<int, Operator> const& QCDEvMap);
+
+  /**
+   * @brief Rotation from the physical to the PlusMinus basis.
+   * @param InPhysMap: the map in the physical basis
+   * @return The map in the PlusMinus basis
+   */
+  std::map<int, double> PhysToPlusMinus(std::map<int, double> const& InPhysMap);
+
+  /**
+   * @brief Rotation from to the PlusMinus basis to the physical basis.
+   * @param PlusMinusMap: the map in the PlusMinus basis
+   * @return The map in the physical basis
+   */
+  std::map<int, double> PlusMinusToPhys(std::map<int, double> const& PlusMinusMap);
+
+  /**
+   * @brief Rotation from to the PlusMinus basis to the physical basis
+   * of a map of distributions.
+   * @param PlusMinusMap: the map in the PlusMinus basis
+   * @return The map of distributions in the physical basis
+   */
+  std::map<int, Distribution> PlusMinusToPhys(std::map<int, Distribution> const& PlusMinusMap);
   ///@}
 }
