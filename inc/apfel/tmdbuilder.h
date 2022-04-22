@@ -90,12 +90,27 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-
    * @return A map of TmdObject objects, one for each possible nf
    */
   std::map<int, TmdObjects> InitializeTmdObjectsBM(Grid                const& g,
                                                    std::vector<double> const& Thresholds,
                                                    double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeTmdObjectsSivers function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the quark Sivers TMD PDF and store them into a 'TmdObjects'
+   * structure. For now, gluon and FF TMDs (i.e. the Collins TMDs) are
+   * not filled in. In addition, the matching is only present up to
+   * one loop.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return A map of TmdObject objects, one for each possible nf
+   */
+  std::map<int, TmdObjects> InitializeTmdObjectsSivers(Grid                const& g,
+                                                       std::vector<double> const& Thresholds,
+                                                       double              const& IntEps = 1e-5);
   ///@}
 
   /**

@@ -351,4 +351,24 @@ namespace apfel
     int const _nf;
   };
   ///@}
+
+  /**
+  * @defgroup NLOSivers NLO matching functions for Sivers quark PDFs
+  * NLO matching functions for Sivers quark PDFs
+  * @ingroup SLMatchFunc
+  */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet matching function
+   * for Sivers PDFs (see Eq. (A.9) of
+   * https://arxiv.org/pdf/2009.10710.pdf).
+   */
+  class C1nspdfSivers: public Expression
+  {
+  public:
+    C1nspdfSivers();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+  ///@}
 }

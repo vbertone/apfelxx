@@ -1949,4 +1949,18 @@ namespace apfel
            + _nf * CF * 4 * ( lnx2 - 2 * pow(1 - x, 3) / x )
            + _nf * CA * 4 * ( 17 * ( 1 - x ) / x + 1 - 3 * x - x * x + 6 * lnx ) / 9;
   }
+
+  //_________________________________________________________________________________
+  C1nspdfSivers::C1nspdfSivers():
+    Expression()
+  {
+  }
+  double C1nspdfSivers::Regular(double const& x) const
+  {
+    return - ( 1 - x ) / NC;
+  }
+  double C1nspdfSivers::Local(double const&) const
+  {
+    return - CF * zeta2;
+  }
 }

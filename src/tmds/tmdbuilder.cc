@@ -759,6 +759,138 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, TmdObjects> InitializeTmdObjectsSivers(Grid                const& g,
+                                                       std::vector<double> const& Thresholds,
+                                                       double              const& IntEps)
+  {
+    // Do not compute the log terms to the matching function because
+    // the collinear evolution of the Qui-Sterman is not exactly
+    // known.
+
+    report("Initializing TMD objects for matching and evolution of the Sivers quark TMD... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // ===============================================================
+    // LO matching functions operators.
+    std::map<int, std::map<int, Operator>> C00;
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Id});
+        OM.insert({EvolutionBasisQCD::PNSM, Id});
+        OM.insert({EvolutionBasisQCD::PNSV, Id});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        C00.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO matching functions operators.
+    // PDFs
+    std::map<int, std::map<int, Operator>> C10pdf;
+    const Operator O1nspdf{g, C1nspdfSivers{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PNSM, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        C10pdf.insert({nf, OM});
+      }
+
+    // FFs (not implemented, set to zero)
+    std::map<int, Operator> ZeroOp;
+    for (int iOp = 0; iOp < 7; iOp++)
+      ZeroOp.insert({iOp, Zero});
+
+    // Define map containing the TmdObjects for each nf.
+    std::map<int, TmdObjects> TmdObj;
+
+    // Construct sets of operators for each perturbative order for the
+    // matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        TmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+        obj.Beta.insert({2, beta2qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+        obj.GammaFq.insert({2, gammaFq2(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+        obj.GammaFg.insert({2, gammaFg2(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+        obj.GammaK.insert({3, gammaK3(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+        obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
+
+        // Matching functions.
+        const EvolutionBasisQCD evb{nf};
+
+        // PDFs
+        obj.MatchingFunctionsPDFs.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsPDFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsPDFs.insert({3, {{evb, ZeroOp}}});
+
+        // FFs
+        obj.MatchingFunctionsFFs.insert({0, {{evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({1, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
+
+        // Hard factors (set to zero when unknown). In addition,
+        // H3Ch() should be multiplied by N_{nf,j} =
+        // (\sum_{i=1}^{nf}e_q) / e_j channel by channel. Here we set
+        // this factor to the constant 1 / 4 because it results from
+        // the average ( N_{5,u} + N_{5,d} ) / 2. The numerical
+        // difference for different choices is however very small.
+        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)},    {3, H3DY(nf)    + H3Ch() / 4}}});
+        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}, {3, H3SIDIS(nf) + H3Ch() / 4}}});
+        obj.HardFactors.insert({"ggH",   {{1, H1ggH()},   {2, H2ggH(nf)},   {3, 0}}});
+
+        // Insert full object
+        TmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return TmdObj;
+  }
+
+  //_____________________________________________________________________________
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
