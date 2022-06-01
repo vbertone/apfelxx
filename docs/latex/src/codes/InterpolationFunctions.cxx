@@ -9,7 +9,7 @@ int main() {
 
   // Initialize space- and time-like splitting functions.
   const apfel::Grid g{{{100, 1e-3, 0}}};
-  const std::function<double(double const&)> f = [] (double const& x) -> double { return 2 + cos(M_PI * log(x)); };
+  const std::function<double(double const&)> f = [] (double const& x) -> double { return 2 - log(x) / 2 + cos(M_PI * log(x)); };
   const apfel::Distribution d{g, f};
   const std::vector<double> xg = g.GetSubGrid(0).GetGrid();
   const int nnodes = 5;
@@ -52,24 +52,23 @@ int main() {
     {
       std::cout << std::scientific << x << "\t"
 		<< f(x) << "\t"
+		<< d0.Evaluate(x) << "\t"
 		<< d1.Evaluate(x) << "\t"
 		<< d2.Evaluate(x) << "\t"
 		<< d3.Evaluate(x) << "\t"
 		<< d4.Evaluate(x) << "\t"
 		<< d5.Evaluate(x) << "\t"
-		<< d0.Evaluate(x) << "\t"
 		<< std::endl;
     }
 
-/*
   // Derivative of the distribution
-  const auto df = [&] (double const& x) -> double{ return - M_PI * sin(M_PI * log(x)) / x; };
+  const auto df = [&] (double const& x) -> double{ return - ( M_PI * sin(M_PI * log(x)) + 1. / 2. ) / x; };
 
   // Integral of the distribution
-  const auto inf = [&] (double const& x) -> double{ return x * ( M_PI * sin(M_PI * log(x)) + cos(M_PI * log(x)) ) / ( 1 + M_PI * M_PI) + 2 * x; };
+  const auto inf = [&] (double const& x) -> double{ return x * ( 2 * cos(M_PI * log(x)) - ( 1 + pow(M_PI, 2) ) * ( - 5 + log(x) ) + 2 * M_PI * sin(M_PI * log(x)) ) / 2 / ( 1 + pow(M_PI, 2) ); };
 
   // Grid
-  const apfel::Grid gg{{{100, 9.9e-6, 5}, {100, 1e-1, 5}, {40, 8e-1, 5}}};
+  const apfel::Grid gg{{{200, 9.9e-6, 5}, {200, 0.9e-1, 5}, {40, 8e-1, 5}}};
 
   // Interpolated distribution
   const apfel::Distribution xgluon{gg, f};
@@ -97,6 +96,6 @@ int main() {
                 << integr / intorig << "\t"
                 << std::endl;
     }
-*/
+
   return 0;
 }
