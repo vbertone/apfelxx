@@ -56,7 +56,7 @@ namespace apfel
   }
   double ATS1HH_0::Singular(double const& x) const
   {
-    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - log(1 - x) ) / ( 1 - x );
+    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
   }
 
   //_________________________________________________________________________________
