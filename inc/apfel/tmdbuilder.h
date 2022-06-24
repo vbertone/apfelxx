@@ -312,7 +312,6 @@ namespace apfel
                                                                                                     double                               const& Ci = 1,
                                                                                                     double                               const& IntEps = 1e-7);
 
-
   /**
    * @brief Function that returns the evolution factor for quarks.
    * @param TmdObj: the TMD objects

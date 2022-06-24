@@ -30,8 +30,8 @@ namespace apfel
     // Initialise space-like and time-like splitting functions on the
     // grid required to compute the log terms of the matching
     // functions.
-    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
-    const std::map<int, DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, IntEps);
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, false, IntEps);
+    const std::map<int, DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, false, IntEps);
 
     report("Initializing TMD objects for matching and evolution... ");
     Timer t;
@@ -535,7 +535,7 @@ namespace apfel
   {
     // Initialise space-like splitting functions on the grid required
     // to compute the log terms of the matching functions.
-    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, false, IntEps);
 
     report("Initializing TMD objects for matching and evolution of the Boer-Mulders gluon TMD... ");
     Timer t;
