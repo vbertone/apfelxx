@@ -46,8 +46,8 @@ namespace apfel
     // ===============================================================
     // LO matching functions operators.
     std::map<int, std::map<int, Operator>> C00;
-    const Operator Id  {g, Identity{}, IntEps};
-    const Operator Zero{g, Null{},     IntEps};
+    const Operator Id  {g, Identity{}, IntEps, true};
+    const Operator Zero{g, Null{},     IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -64,11 +64,11 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators.
     std::map<int, std::map<int, Operator>> C10;
-    const Operator O1ns{g, Cgtmd1ns{xi}, IntEps};
-    const Operator O1qq{g, Cgtmd1qq{xi}, IntEps};
-    const Operator O1qg{g, Cgtmd1qg{xi}, IntEps};
-    const Operator O1gq{g, Cgtmd1gq{xi}, IntEps};
-    const Operator O1gg{g, Cgtmd1gg{xi}, IntEps};
+    const Operator O1ns{g, Cgtmd1ns{xi}, IntEps, true};
+    const Operator O1qq{g, Cgtmd1qq{xi}, IntEps, true};
+    const Operator O1qg{g, Cgtmd1qg{xi}, IntEps, true};
+    const Operator O1gq{g, Cgtmd1gq{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1gg{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -131,8 +131,8 @@ namespace apfel
         // Threshold
         obj.Threshold = Thresholds[nf-1];
 
-	// Skewness
-	obj.xi = xi;
+        // Skewness
+        obj.xi = xi;
 
         // Beta function
         obj.Beta.insert({0, beta0qcd(nf)});
@@ -170,16 +170,15 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildGtmds(std::map<int, GtmdObjects>                                     const& GtmdObj,
-                                                                                           std::function<Set<Distribution>(double const&, double const&)> const& CollGPDs,
-                                                                                           std::function<double(double const&)>                           const& Alphas,
-                                                                                           int                                                            const& PerturbativeOrder,
-											   double                                                         const& t,
-                                                                                           double                                                         const& Ci,
-                                                                                           double                                                         const& IntEps)
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildGtmds(std::map<int, GtmdObjects>                      const& GtmdObj,
+                                                                                           std::function<Set<Distribution>(double const&)> const& CollGPDs,
+                                                                                           std::function<double(double const&)>            const& Alphas,
+                                                                                           int                                             const& PerturbativeOrder,
+                                                                                           double                                          const& Ci,
+                                                                                           double                                          const& IntEps)
   {
     // Match GTMDs onto collinear GPDs.
-    const std::function<Set<Distribution>(double const&)> MatchedGtmds = MatchGtmds(GtmdObj, CollGPDs, Alphas, PerturbativeOrder, t, Ci);
+    const std::function<Set<Distribution>(double const&)> MatchedGtmds = MatchGtmds(GtmdObj, CollGPDs, Alphas, PerturbativeOrder, Ci);
 
     // Compute GTMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(GtmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
@@ -195,12 +194,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Distribution>(double const&)> MatchGtmds(std::map<int, GtmdObjects>                                     const& GtmdObj,
-                                                             std::function<Set<Distribution>(double const&, double const&)> const& CollGPDs,
-                                                             std::function<double(double const&)>                           const& Alphas,
-                                                             int                                                            const& PerturbativeOrder,
-							     double                                                         const& t,
-                                                             double                                                         const& Ci)
+  std::function<Set<Distribution>(double const&)> MatchGtmds(std::map<int, GtmdObjects>                      const& GtmdObj,
+                                                             std::function<Set<Distribution>(double const&)> const& CollGPDs,
+                                                             std::function<double(double const&)>            const& Alphas,
+                                                             int                                             const& PerturbativeOrder,
+                                                             double                                          const& Ci)
   {
     // Get matching functions
     const std::function<Set<Operator>(double const&)> MatchFunc = MatchingFunctions(GtmdObj, Alphas, PerturbativeOrder, Ci);
@@ -214,7 +212,7 @@ namespace apfel
 
       // Convolute matching functions with the collinear GPDs and
       // return.
-      return MatchFunc(mu0) * CollGPDs(t, mu0);
+      return MatchFunc(mu0) * CollGPDs(mu0);
     };
 
     return MatchedGTMDs;
@@ -282,7 +280,7 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Get skewness from the first element of GtmdObj 
+    // Get skewness from the first element of GtmdObj
     const double xi = GtmdObj.begin()->second.xi;
 
     // Define the log(Ci) to assess scale variations.
@@ -417,7 +415,7 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Get skewness from the first element of GtmdObj 
+    // Get skewness from the first element of GtmdObj
     const double xi = GtmdObj.begin()->second.xi;
 
     // Define the log(Ci) to assess scale variations.
@@ -536,7 +534,7 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Get skewness from the first element of GtmdObj 
+    // Get skewness from the first element of GtmdObj
     const double xi = GtmdObj.begin()->second.xi;
 
     // Define the log(Ci) to assess scale variations.

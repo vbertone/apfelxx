@@ -61,6 +61,7 @@
 #include "apfel/structurefunctionbuilder.h"
 #include "apfel/tmdbuilder.h"
 #include "apfel/gpdbuilder.h"
+#include "apfel/gtmdbuilder.h"
 #include "apfel/alphaqcd.h"
 #include "apfel/alphaqed.h"
 #include "apfel/twobodyphasespace.h"

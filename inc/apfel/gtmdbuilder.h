@@ -62,20 +62,18 @@ namespace apfel
    * @param CollGPDs: the set of collinear GPDs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
-   * @param t: momentum transfer
    * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
    * final rapidity scale &zeta; representing the evolved GTMDs.
    */
-  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildGtmds(std::map<int, GtmdObjects>                                     const& GtmdObj,
-                                                                                           std::function<Set<Distribution>(double const&, double const&)> const& CollGPDs,
-                                                                                           std::function<double(double const&)>                           const& Alphas,
-                                                                                           int                                                            const& PerturbativeOrder,
-											   double                                                         const& t,
-                                                                                           double                                                         const& Ci = 1,
-                                                                                           double                                                         const& IntEps = 1e-7);
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildGtmds(std::map<int, GtmdObjects>                      const& GtmdObj,
+                                                                                           std::function<Set<Distribution>(double const&)> const& CollGPDs,
+                                                                                           std::function<double(double const&)>            const& Alphas,
+                                                                                           int                                             const& PerturbativeOrder,
+                                                                                           double                                          const& Ci = 1,
+                                                                                           double                                          const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the matched TMD GPDs in b-space.
@@ -83,17 +81,15 @@ namespace apfel
    * @param CollGPDs: the set of collinear GPDs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the perturbative order
-   * @param t: momentum transfer
    * @param Ci: the initial-scale variation factor
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched GTMDs.
    */
-  std::function<Set<Distribution>(double const&)> MatchGtmds(std::map<int, GtmdObjects>                                     const& GtmdObj,
-                                                             std::function<Set<Distribution>(double const&, double const&)> const& CollGPDs,
-                                                             std::function<double(double const&)>                           const& Alphas,
-                                                             int                                                            const& PerturbativeOrder,
-							     double                                                         const& t,
-                                                             double                                                         const& Ci = 1);
+  std::function<Set<Distribution>(double const&)> MatchGtmds(std::map<int, GtmdObjects>                      const& GtmdObj,
+                                                             std::function<Set<Distribution>(double const&)> const& CollGPDs,
+                                                             std::function<double(double const&)>            const& Alphas,
+                                                             int                                             const& PerturbativeOrder,
+                                                             double                                          const& Ci = 1);
 
   /**
    * @brief Function that returns the mathing functions for the GTMDs.

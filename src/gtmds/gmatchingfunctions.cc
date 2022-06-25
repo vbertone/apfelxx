@@ -55,8 +55,10 @@ namespace apfel
   {
     const double kappa = _xi / _extvar;
     const double ky2   = pow(kappa * y, 2);
-    return (y <= 1 ? 4 * TR * y * ( 1 - y ) / pow(1 - ky2, 2) : 0)
-           + (kappa > 1 ? 4 * TR * ( 1 - kappa ) * pow(y, 2) / pow(1 - ky2, 2) : 0);
+    //return (y <= 1 ? 8 * TR * y * ( 1 - y ) / pow(1 - ky2, 2) : 0)
+    //       + (kappa > 1 ? 8 * TR * ( 1 - kappa ) * pow(y, 2) / pow(1 - ky2, 2) : 0);
+    return (y <= 1 ? 8 * TR * y * ( 1 - y ) / pow(1 - ky2, 1) : 0)
+           + (kappa > 1 ? 8 * TR * ( 1 - kappa ) * pow(y, 2) / pow(1 - ky2, 1) : 0);
   }
 
   //_________________________________________________________________________________
@@ -83,8 +85,10 @@ namespace apfel
   {
     const double kappa = _xi / _extvar;
     const double ky2   = pow(kappa * y, 2);
-    return (y <= 1 ? 8 * CA * pow(kappa, 2) * y * ( 1 - y ) / pow(1 - ky2, 2) : 0)
-           + (kappa > 1 ? CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 7 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 2) : 0);
+    //return (y <= 1 ? 8 * CA * pow(kappa, 2) * y * ( 1 - y ) / pow(1 - ky2, 2) : 0)
+    //       + (kappa > 1 ? CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 7 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 2) : 0);
+    return (y <= 1 ? 8 * CA * pow(kappa, 2) * y * ( 1 - y ) / pow(1 - ky2, 1) : 0)
+           + (kappa > 1 ? CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 7 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 1) : 0);
   }
   double Cgtmd1gg::Local(double const&) const
   {
