@@ -113,6 +113,9 @@ namespace apfel
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
 
+    // Get skewness from the expression
+    const double xi = 1 / expr.eta();
+
     // Loop over the subgrids
     _Operator.resize(1);
 
@@ -126,7 +129,7 @@ namespace apfel
     const int nx = jg.nx();
 
     // Get interpolation degree
-    const int kappa = jg.InterDegree();
+    const int k = jg.InterDegree();
 
     // Initialise operator
     _Operator[0].resize(nx, nx, 0);
@@ -139,12 +142,18 @@ namespace apfel
         // the case of GPD evolution).
         expr.SetExternalVariable(xg[beta]);
 
+        // Define "kappa" variable
+        const double kappa = xi / xg[beta];
+
         // Loop over the index alpha
         for (int alpha = 0; alpha < (int) _Operator[0].size(1); alpha++)
           {
-            // Weight of the subtraction term this is
+            // Weight of the subtraction term: this is
             // \delta_{\alpha\beta}
             const double ws = (beta == alpha ? 1 : 0);
+
+            // Weight of the PV subtraction terms
+            const double wspv = li.Interpolant(alpha, xi, jg);
 
             // Given that the interpolation functions have
             // discontinuos derivative at the nodes, it turns out
@@ -156,27 +165,38 @@ namespace apfel
 
             // Run over the grid intervals over which the
             // interpolating function is different from zero.
-            for (int j = 0; j <= std::min(alpha, kappa); j++)
+            for (int j = 0; j <= std::min(alpha, k); j++)
               {
                 // Define "Integrator" object. IMPORTANT: the
                 // particular form of the subtraction term only
                 // applies to singular terms that behave as
                 // 1/(1-y). If other singular functions are used, this
-                // term has to be adjusted.
+                // term has to be adjusted. In addition, also a term
+                // with a singularity at y = 1/kappa in the interval
+                // [x,1], i.e. in standard DGLAP convolutions, is
+                // computed by means of the principal-value
+                // prescription.
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
-                    return expr.Regular(y) * wr + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) );
+                    const double ky = kappa * y;
+                    return expr.Regular(y) * wr
+                    + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
+                    + expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
                   }};
                 // Compute the integral
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
+
+                // Add PV local part
+                _Operator[0](beta, alpha) += wspv / kappa * ( expr.LocalPV(xg[beta] / xg[beta + 1]) - expr.LocalPV(xg[std::max(0, beta - k)] / xg[beta]) );
               }
           }
         // Add the local parts: that from standard +-prescripted terms
         // ("Local") and that deriving from principal-valued integrals
-        // ("LocalPV").
+        // at x = 1, i.e. from the ++-prescription ("LocalPP").
         _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1])
-                                    + expr.LocalPV(xg[beta] / xg[beta + 1]) - (beta == 0 ? 0 : expr.LocalPV(xg[beta - std::min(beta, kappa)] / xg[beta]));
+                                    + expr.LocalPP(xg[beta] / xg[beta + 1])
+                                    - (beta == 0 ? 0 : expr.LocalPP(xg[std::max(0, beta - k)] / xg[beta]));
       }
   }
 
