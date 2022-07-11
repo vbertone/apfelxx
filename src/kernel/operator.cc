@@ -152,13 +152,13 @@ namespace apfel
             // \delta_{\alpha\beta}
             const double ws = (beta == alpha ? 1 : 0);
 
-            // Weight of the PV subtraction terms
+            // Weight of the PV subtraction terms at y = 1 / kappa
             const double wspv = li.Interpolant(alpha, xi, jg);
 
             // Given that the interpolation functions have
             // discontinuos derivative at the nodes, it turns out
             // that it is convenient to split the integrals into
-            // kappa + 1 intervals on each of which the integrand is
+            // k + 1 intervals on each of which the integrand is
             // smooth. Despite more integrals have to be computed,
             // the integration converges faster and is more
             // accurate.
@@ -171,11 +171,11 @@ namespace apfel
                 // particular form of the subtraction term only
                 // applies to singular terms that behave as
                 // 1/(1-y). If other singular functions are used, this
-                // term has to be adjusted. In addition, also a term
-                // with a singularity at y = 1/kappa in the interval
-                // [x,1], i.e. in standard DGLAP convolutions, is
-                // computed by means of the principal-value
-                // prescription.
+                // term has to be adjusted. The integral also contains
+                // a possible principal-valued contribution with
+                // singularity at y = 1 / kappa integrated between x
+                // and 1. Also in this case the procedure is specific
+                // for 1 / ( 1 - kappa y).
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
@@ -186,10 +186,9 @@ namespace apfel
                   }};
                 // Compute the integral
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
-
-                // Add PV local part
-                _Operator[0](beta, alpha) += wspv / kappa * ( expr.LocalPV(xg[beta] / xg[beta + 1]) - expr.LocalPV(xg[std::max(0, beta - k)] / xg[beta]) );
               }
+            // Add PV local part from the y = 1 / kappa singularity
+            _Operator[0](beta, alpha) += wspv * ( expr.LocalPV(xg[beta] / xg[alpha + 1]) - expr.LocalPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
           }
         // Add the local parts: that from standard +-prescripted terms
         // ("Local") and that deriving from principal-valued integrals

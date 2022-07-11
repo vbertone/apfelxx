@@ -1085,77 +1085,94 @@ After some algebra, one finds:
         y}{\kappa
         y}\right)\right]+f\left(\frac{1}{\kappa}\right)\frac{1}{\kappa}\ln\left(\frac{\kappa(1-\kappa
       x)}{\kappa-1}\right)\,.
+\label{eq:PVprescriptionxi}
 \end{equation}
 
 In order to carry out the usual interpolation procedure, we need to
 compute integrals as this:
 \begin{equation}
-J_{\beta\alpha}=\int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa y}\right)_{\rm
+J_{\beta\alpha}=\int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
 PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right) \,.
 \end{equation}
-As above, the support region of the interpolation functions
-$w_\alpha(x_\beta/y)$, that is
-$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{{\rm max}[0,\alpha-\kappa]}]$,
-requires some care:
+with $\kappa_\beta = \xi/x_\beta>1$. As above, the support region of
+the interpolation functions $w_\alpha(x_\beta/y)$, that is
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{{\rm max}[0,\alpha-\kappa]}]\equiv[c,d]$,
+requires some care. In particular, considering that the pole of the
+integrand is at $y=1/\kappa_\beta$ and that $c<d$, if
+$c>1/\kappa_\beta$ or if $d<1/\kappa_\beta$, one needs not use the
+principal-value prescription because the pole is outside the
+integration range. On the contrary, if $c<1/\kappa_\beta<d$, the pole
+is within the integration range and thus the principal-value
+prescription has to be used. In view of this analysis, we can
+decompose the integrals $J_{\beta\alpha}$ in two components according
+to whether the pole of the integrand falls into the integration range
+or not:
 \begin{equation}
 \begin{array}{rcl}
-  J_{\beta\alpha}&=&\displaystyle \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa y}\right)_{\rm
+J_{\beta\alpha}&=&\displaystyle \left[\theta(\xi-x_{\alpha+1})+\theta(x_{{\rm
+  max}[0,\alpha-\kappa]}-\xi)\right]\int_{x_{\beta}}^{1}\frac{dy}{1-\kappa_\beta
+  y}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+\\
+&+&\displaystyle \theta(x_{\alpha+1}-\xi)\theta(\xi -x_{{\rm max}[0,\alpha-\kappa]}) \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\,.
+\end{array}
+\end{equation}
+Now, the first integral in the r.h.s. can be computed as is as the
+integrand is regular, while the second integral requires the
+principal-value prescription in Eq.~(\ref{eq:PVprescriptionxi}), yielding:
+\begin{equation}
+\small
+\begin{array}{rcl}
+  &&\displaystyle \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
                      PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
   \\
-                 &=&\displaystyle \int_{c}^1\frac {dy}{1-\kappa y}
-                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa
-                     y}\right)\right]+w_{\alpha}\left(\xi\right)\frac{1}{\kappa}\ln\left(\frac{\kappa(1-\kappa c)}{\kappa -1 }\right)\\
+                 &=&\displaystyle \int_{x_\beta}^1\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]+w_{\alpha}\left(\xi\right)\frac{1}{\kappa_\beta}\ln\left(\frac{\kappa_\beta(1-\kappa_\beta x_\beta)}{\kappa_\beta -1 }\right)\\
   \\
-                 &=&\displaystyle \int_{c}^{d}\frac {dy}{1-\kappa y}
-                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
                      y}\right)\right]\\
   \\
                  &+&\displaystyle
-                     w_{\alpha}\left(\xi\right)\left[\frac{1}{\kappa}\ln\left(\frac{\kappa(1-\kappa c)}{\kappa -1 }\right)
-                     -\int_{d}^1\frac {dy}{1-\kappa y}
-                     \left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa y}\right)\right]\\
+                     w_{\alpha}\left(\xi\right)\bigg[\frac{1}{\kappa_\beta}\ln\left(\frac{\kappa_\beta(1-\kappa_\beta
+                     x_\beta)}{\kappa_\beta -1 }\right)-\int_{d}^1\frac {dy}{1-\kappa_\beta y}
+                     \left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta y}\right) \\
+\\
+  &-&\displaystyle \int_{x_\beta}^c\frac {dy}{1-\kappa_\beta y}
+                     \left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta y}\right)\bigg]\\
   \\
-                 &=&\displaystyle \int_{c}^{d}\frac {dy}{1-\kappa y}
-                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa
-                     y}\right)\right]\\
-  \\
-                 &+&\displaystyle
-                     w_{\alpha}\left(\xi\right) \frac{1}{\kappa}\left[\ln\left(\frac{\kappa(1-\kappa c)}{\kappa -1 }\right)
-                     -\int_{\kappa d}^\kappa \frac {dz}{1-z}
-                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right)\right]\\
-  \\
-                 &=&\displaystyle \int_{c}^{d}\frac {dy}{1-\kappa y}
-                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa
-                     y}\right)\right]\\
-  \\
-                 &+&\displaystyle
-                     w_{\alpha}\left(\xi\right) \frac{1}{\kappa}\left[\ln\left(\frac{\kappa(1-\kappa c)}{\kappa -1 }\right)
-                     -\int_{\kappa d}^\kappa \frac {dz}{1-z}
-                     -\int_1^\kappa \frac
-                     {dz}{z}\right]\\
-  \\
-                 &=&\displaystyle \int_{c}^{d}\frac {dy}{1-\kappa y}
-                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
                      y}\right)\right]\\
   \\
                  &+&\displaystyle
                      w_{\alpha}\left(\xi\right)
-                     \frac{1}{\kappa}\left[\ln\left(\frac{\kappa(1-\kappa
-                     c)}{\kappa - 1}\right)
-                     -\ln\left(\frac{1-\kappa d}{\kappa -1}\right)
-                     -\ln\left(\kappa\right)\right]\\
+                     \frac{1}{\kappa_\beta}\bigg[\ln\left(\frac{\kappa_\beta(1-\kappa_\beta
+                     x_\beta)}{\kappa_\beta -1
+                     }\right)-\int_{\kappa_\beta d}^{\kappa_\beta}\frac {dz}{1-z}
+                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right) \\
+\\
+  &-&\displaystyle \int_{\kappa_\beta
+      x_\beta}^{\kappa_\beta c}\frac {dz}{1-z}
+                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right)\bigg]\\
   \\
-                 &=&\displaystyle \int_{c}^{d}\frac {dy}{1-\kappa y}
-                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
-                     y}{\kappa
-                     y}\right)\right]+
-                     w_{\alpha}\left(\xi\right)\frac{1}{\kappa}\ln\left(\frac{1-\kappa c}{1-\kappa d}\right)
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)
+                     \frac{1}{\kappa_\beta}\left[\ln\left(1-\kappa_\beta c\right)-\ln\left(1-k_\beta\frac{1}{k_\beta^2 d}\right)\right]
+
+
+
 \,.
 \end{array}
 \end{equation}

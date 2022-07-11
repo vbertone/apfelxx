@@ -31,8 +31,6 @@ namespace apfel
     Cgtmd1ns(double const& xi);
     double Regular(double const& x) const;
     double Local(double const&)     const;
-  private:
-    double const _xi;
   };
 
   /**
@@ -45,8 +43,6 @@ namespace apfel
     Cgtmd1qq(double const& xi);
     double Regular(double const& x) const;
     double Local(double const&)     const;
-  private:
-    double const _xi;
   };
 
   /**
@@ -57,9 +53,9 @@ namespace apfel
   {
   public:
     Cgtmd1qg(double const& xi);
-    double Regular(double const& x) const;
-  private:
-    double const _xi;
+    double Regular(double const& x)    const;
+    double SingularPV(double const& x) const;
+    double LocalPV(double const& x)    const;
   };
 
   /**
@@ -71,8 +67,6 @@ namespace apfel
   public:
     Cgtmd1gq(double const& xi);
     double Regular(double const& x) const;
-  private:
-    double const _xi;
   };
 
   /**
@@ -83,10 +77,10 @@ namespace apfel
   {
   public:
     Cgtmd1gg(double const& xi);
-    double Regular(double const& x) const;
-    double Local(double const&)     const;
-  private:
-    double const _xi;
+    double Regular(double const& x)    const;
+    double Local(double const&)        const;
+    double SingularPV(double const& x) const;
+    double LocalPV(double const& x)    const;
   };
   ///@}
 }
