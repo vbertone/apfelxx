@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <cmath>
-
 // Test expression with singularity at y = 1 to be integrated between
 // 0 and infinity and to be treated as a principal value
 class PrincipalValueERBL: public apfel::Expression

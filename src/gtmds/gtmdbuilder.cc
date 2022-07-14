@@ -26,7 +26,6 @@ namespace apfel
                                                    double              const& xi,
                                                    double              const& IntEps)
   {
-
     // Initialise GPD splitting functions on the grid required to
     // compute the log terms of the matching functions.
     const std::map<int, DglapObjects> DglapObj = InitializeGpdObjects(g, Thresholds, xi, false, IntEps);
