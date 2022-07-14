@@ -1009,7 +1009,7 @@ upon integration in the following way:
 \label{eq:pluplusprescription}
 \end{equation}
 However, differently from the $+$-distribution, the $++$-distribution
-does not regularise an otherwise divergen integral. It rather
+does not regulate an otherwise divergent integral. It rather
 rearranges the integrand in such a way that it is finite over the
 integration range (the divergence at $y=1$ is no longer there) making
 it numerically treatable. We now need to devise a way to compute this
@@ -1021,7 +1021,7 @@ I_{\beta\alpha}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\
 that need to be treated with care due to the support region of the
 interpolation functions $w_\alpha$. In particular, we know that the
 function $w_\alpha(x_\beta/y)$ has support
-$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{\alpha-\kappa}]$, so that:
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{{\rm max}[0,\alpha-\kappa]}]$, so that:
 \begin{equation}
 \begin{array}{rcl}
 I_{\beta\alpha}&=&\displaystyle
@@ -1051,7 +1051,7 @@ I_{\beta\alpha}&=&\displaystyle
 \end{equation}
 with:
 \begin{equation}
-c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}\,,
+c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}=\frac{x_\beta}{x_{\rm{max}[0,\alpha-\kappa]}}\,,
 \end{equation}
 and where we have used the fact that $d\geq 1$ for $\beta=\alpha$ and,
 according to the Cauchy principal-value prescription:
@@ -1060,14 +1060,122 @@ according to the Cauchy principal-value prescription:
 \end{equation}
 where $a$ could also be $\infty$.
 
+\subsubsection{Principal-valued integrals in the DGLAP region}
+
+When considering some specific GPD-related functions, such as the
+matching functions for generalised transverse-momentum-dependent
+(GTMD) distributions on GPDs, another kind of principal-valued
+integrals appear. They look like this:
+\begin{equation}
+  J={\rm PV}\int_x^{1}dy\,\frac{f(y)}{1-\kappa y}\equiv
+  \int_x^{1}dy\left(\frac{1}{1-\kappa y}\right)_{\rm PV}f(y)\,
+\end{equation}
+with $\kappa = \xi/x$ in the region where $x<\xi<1$, that corresponds
+to $\kappa > 1$ and $\kappa < 1/x$, such that the singularity of the
+integrand at $y = 1/\kappa$ is within the integration interval. As
+done above, we can make this kind of integrals numerically amenable by
+adding and subtracting the singularity:
+\begin{equation}
+  f\left(\frac1\kappa\right)\int_{1/\kappa}^{1}dy\,\frac{1}{1-\kappa y}\,.
+\end{equation}
+After some algebra, one finds:
+\begin{equation}
+  J = \int_x^1\frac {dy}{1-\kappa y}
+  \left[f(y)-f\left(\frac{1}{\kappa}\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
+        y}{\kappa
+        y}\right)\right]+f\left(\frac{1}{\kappa}\right)\frac{1}{\kappa}\ln\left(\frac{\kappa(1-\kappa
+      x)}{\kappa-1}\right)\,.
+\label{eq:PVprescriptionxi}
+\end{equation}
+
+In order to carry out the usual interpolation procedure, we need to
+compute integrals as this:
+\begin{equation}
+J_{\beta\alpha}=\int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right) \,.
+\end{equation}
+with $\kappa_\beta = \xi/x_\beta>1$. As above, the support region of
+the interpolation functions $w_\alpha(x_\beta/y)$, that is
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{{\rm max}[0,\alpha-\kappa]}]\equiv[c,d]$,
+requires some care. In particular, considering that the pole of the
+integrand is at $y=1/\kappa_\beta$ and that $c<d$, if
+$c>1/\kappa_\beta$ or if $d<1/\kappa_\beta$, one needs not use the
+principal-value prescription because the pole is outside the
+integration range. On the contrary, if $c<1/\kappa_\beta<d$, the pole
+is within the integration range and thus the principal-value
+prescription has to be used. In view of this analysis, we can
+decompose the integrals $J_{\beta\alpha}$ in two components according
+to whether the pole of the integrand falls into the integration range
+or not:
+\begin{equation}
+\begin{array}{rcl}
+J_{\beta\alpha}&=&\displaystyle \left[\theta(\xi-x_{\alpha+1})+\theta(x_{{\rm
+  max}[0,\alpha-\kappa]}-\xi)\right]\int_{x_{\beta}}^{1}\frac{dy}{1-\kappa_\beta
+  y}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+\\
+&+&\displaystyle \theta(x_{\alpha+1}-\xi)\theta(\xi -x_{{\rm max}[0,\alpha-\kappa]}) \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\,.
+\end{array}
+\end{equation}
+Now, the first integral in the r.h.s. can be computed as is as the
+integrand is regular, while the second integral requires the
+principal-value prescription in Eq.~(\ref{eq:PVprescriptionxi}), yielding:
+\begin{equation}
+\small
+\begin{array}{rcl}
+  &&\displaystyle \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+                     PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+  \\
+                 &=&\displaystyle \int_{x_\beta}^1\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]+w_{\alpha}\left(\xi\right)\frac{1}{\kappa_\beta}\ln\left(\frac{\kappa_\beta(1-\kappa_\beta x_\beta)}{\kappa_\beta -1 }\right)\\
+  \\
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)\bigg[\frac{1}{\kappa_\beta}\ln\left(\frac{\kappa_\beta(1-\kappa_\beta
+                     x_\beta)}{\kappa_\beta -1 }\right)-\int_{d}^1\frac {dy}{1-\kappa_\beta y}
+                     \left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta y}\right) \\
+\\
+  &-&\displaystyle \int_{x_\beta}^c\frac {dy}{1-\kappa_\beta y}
+                     \left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta y}\right)\bigg]\\
+  \\
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)
+                     \frac{1}{\kappa_\beta}\bigg[\ln\left(\frac{\kappa_\beta(1-\kappa_\beta
+                     x_\beta)}{\kappa_\beta -1
+                     }\right)-\int_{\kappa_\beta d}^{\kappa_\beta}\frac {dz}{1-z}
+                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right) \\
+\\
+  &-&\displaystyle \int_{\kappa_\beta
+      x_\beta}^{\kappa_\beta c}\frac {dz}{1-z}
+                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right)\bigg]\\
+  \\
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)
+                     \frac{1}{\kappa_\beta}\left[\ln\left(1-\kappa_\beta c\right)-\ln\left(1-k_\beta\frac{1}{k_\beta^2 d}\right)\right]
 
 
 
-
-
-
-
-
+\,.
+\end{array}
+\end{equation}
 
 
 

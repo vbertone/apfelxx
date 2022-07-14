@@ -40,9 +40,7 @@ namespace apfel
     double Regular(double const& y)  const;
     double Singular(double const& y) const;
     double Local(double const& y)    const;
-    double LocalPV(double const& y)  const;
-  private:
-    double const _xi;
+    double LocalPP(double const& y)  const;
   };
 
   /**
@@ -56,9 +54,7 @@ namespace apfel
     double Regular(double const& y)  const;
     double Singular(double const& y) const;
     double Local(double const& y)    const;
-    double LocalPV(double const& y)  const;
-  private:
-    double const _xi;
+    double LocalPP(double const& y)  const;
   };
 
   /**
@@ -71,8 +67,7 @@ namespace apfel
     Pgpd0qg(int const& nf, double const& xi);
     double Regular(double const& y) const;
   private:
-    int    const _nf;
-    double const _xi;
+    int const _nf;
   };
 
   /**
@@ -84,8 +79,6 @@ namespace apfel
   public:
     Pgpd0gq(double const& xi);
     double Regular(double const& y) const;
-  private:
-    double const _xi;
   };
 
   /**
@@ -99,10 +92,9 @@ namespace apfel
     double Regular(double const& y)  const;
     double Singular(double const& y) const;
     double Local(double const& y)    const;
-    double LocalPV(double const& y)  const;
+    double LocalPP(double const& y)  const;
   private:
-    int    const _nf;
-    double const _xi;
+    int const _nf;
   };
   ///@}
 }

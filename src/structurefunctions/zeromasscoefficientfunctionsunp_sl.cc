@@ -16,7 +16,7 @@ namespace apfel
   }
   double C21ns::Regular(double const& x) const
   {
-    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x,2) ) * log(x) / ( 1 - x ) + 3 + 2 * x );
+    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 3 + 2 * x );
   }
   double C21ns::Singular(double const& x) const
   {
@@ -24,7 +24,7 @@ namespace apfel
   }
   double C21ns::Local(double const& x) const
   {
-    return 2 * CF * ( pow(log(1-x),2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) );
+    return 2 * CF * ( pow(log( 1 - x ), 2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) );
   }
 
   //_________________________________________________________________________________
@@ -34,7 +34,7 @@ namespace apfel
   }
   double C21g::Regular(double const& x) const
   {
-    return 4 * TR * ( ( pow((1-x),2) + pow(x,2) ) * log( ( 1 - x ) / x ) - 8 * x * ( x - 1 ) - 1 );
+    return 4 * TR * ( ( pow(1 - x, 2) + pow(x, 2) ) * log( ( 1 - x ) / x ) - 8 * x * ( x - 1 ) - 1 );
   }
 
   //_________________________________________________________________________________
@@ -256,7 +256,7 @@ namespace apfel
   }
   double C31ns::Regular(double const& x) const
   {
-    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x,2) ) * log(x) / ( 1 - x ) + 2 + x );
+    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 2 + x );
   }
   double C31ns::Singular(double const& x) const
   {
@@ -264,7 +264,7 @@ namespace apfel
   }
   double C31ns::Local(double const& x) const
   {
-    return 2 * CF * ( pow(log(1-x),2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) );
+    return 2 * CF * ( pow(log( 1 - x ), 2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) );
   }
 
   //_________________________________________________________________________________
