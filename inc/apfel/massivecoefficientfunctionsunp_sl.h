@@ -225,18 +225,13 @@ namespace apfel
     double const _eta;
   };
   ///@}
-  ///@}
 
   /**
-   * @defgroup NCMassiveHQIn Massive heavy-quark-initiated coefficient functions
+   * @defgroup NLOhq NLO massive heavy-quark-initiated coefficient functions
    * Collection of the massive coefficient functions for processes
    * with a massive heavy quark in the intial state. These coefficient
    * functions can be used both in the neutral-current and in the
    * charged-current cases.
-   */
-  ///@{
-  /**
-   * @defgroup NLO NLO massive heavy-quark-initiated coefficient functions
    * @note All the expressions of the one-loo coefficient functions are
    * extracted from https://arxiv.org/pdf/hep-ph/9805233.pdf. The
    * coefficient function C is witten in terms of the private _R
@@ -244,7 +239,7 @@ namespace apfel
    *
    * C(x) = ( _R(x) - _R(1) ) / ( 1 - x ) + _R(x) / ( 1 - x )_+ + ( L + _R(1) ) delta( 1- x )
    *
-   * @ingroup NCMassiveHQIn
+   * @ingroup NCMassive
    */
   ///@{
   /**

@@ -13,7 +13,7 @@ var searchData=
   ['term_10',['term',['../structapfel_1_1term.html',1,'apfel']]],
   ['term_3c_20t_2c_20t_20_3e_11',['term&lt; T, T &gt;',['../structapfel_1_1term.html',1,'apfel']]],
   ['theory_12',['Theory',['../structapfel_1_1EvolutionSetup.html#a1f5b96a8bab80e64227371a4669d95c5',1,'apfel::EvolutionSetup']]],
-  ['threshold_13',['Threshold',['../structapfel_1_1TmdObjects.html#ae56448881a89de75ba38927a0226291a',1,'apfel::TmdObjects::Threshold()'],['../structapfel_1_1DglapObjects.html#a86d077a0480f42088cf0b73a5163fddd',1,'apfel::DglapObjects::Threshold()']]],
+  ['threshold_13',['Threshold',['../structapfel_1_1TmdObjects.html#ae56448881a89de75ba38927a0226291a',1,'apfel::TmdObjects::Threshold()'],['../structapfel_1_1GtmdObjects.html#a8c6a513c8814ea210c6675138a9b3199',1,'apfel::GtmdObjects::Threshold()'],['../structapfel_1_1DglapObjects.html#a86d077a0480f42088cf0b73a5163fddd',1,'apfel::DglapObjects::Threshold()']]],
   ['thresholds_14',['Thresholds',['../structapfel_1_1EvolutionSetup.html#a42a4fa2e5320a7878a7fad669fc640be',1,'apfel::EvolutionSetup']]],
   ['time_15',['TIME',['../structapfel_1_1EvolutionSetup.html#a4188fd899c89d904b14feea52c039af7a501057cfd361062d58952825c11d3c4e',1,'apfel::EvolutionSetup']]],
   ['time_2dlike_20matching_20conditions_16',['Time-like matching conditions',['../group__MatchCondTL.html',1,'']]],

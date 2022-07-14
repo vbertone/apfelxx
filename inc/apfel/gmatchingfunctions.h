@@ -11,13 +11,13 @@
 namespace apfel
 {
   /**
-   * @defgroup GTMDMatchingFunctionsUnp Unpolarised GTMD matching functions
-   * The perturbative matching functions for unpolarised GTMDs.
+   * @defgroup GTMDMatchingFunctionsUnp GTMD matching functions
+   * The perturbative matching functions for GTMDs.
    */
   ///@{
   ///@}
   /**
-   * @defgroup NLOmatchUnp NLO matching functions for GTMDs
+   * @defgroup NLOmatchUnp NLO unpolarised matching functions for GTMDs
    * @ingroup GTMDMatchingFunctionsUnp
    */
   ///@{

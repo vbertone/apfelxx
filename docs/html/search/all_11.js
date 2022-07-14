@@ -15,6 +15,6 @@ var searchData=
   ['qmin_12',['QMin',['../classapfel_1_1QGrid.html#a0a1450c5d3c7988817a9302953437aea',1,'apfel::QGrid']]],
   ['qqcdref_13',['QQCDRef',['../structapfel_1_1EvolutionSetup.html#a78386fbdc6c17e740cbd14ab8d015914',1,'apfel::EvolutionSetup']]],
   ['qqedref_14',['QQEDRef',['../structapfel_1_1EvolutionSetup.html#a198ae368f643bda07977fd4a21815a1e',1,'apfel::EvolutionSetup']]],
-  ['quarkevolutionfactor_15',['QuarkEvolutionFactor',['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel']]],
+  ['quarkevolutionfactor_15',['QuarkEvolutionFactor',['../namespaceapfel.html#a4796e9ff36296a20b1b11bcc26977420',1,'apfel::QuarkEvolutionFactor(std::map&lt; int, GtmdObjects &gt; const &amp;GtmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)'],['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel::QuarkEvolutionFactor(std::map&lt; int, TmdObjects &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)']]],
   ['quarkflavour_16',['QuarkFlavour',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575b',1,'apfel']]]
 ];
