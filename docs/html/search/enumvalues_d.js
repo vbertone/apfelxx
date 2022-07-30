@@ -8,6 +8,8 @@ var searchData=
   ['time_5',['TIME',['../structapfel_1_1EvolutionSetup.html#a4188fd899c89d904b14feea52c039af7a501057cfd361062d58952825c11d3c4e',1,'apfel::EvolutionSetup']]],
   ['top_6',['TOP',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba7e4803e86b2881f137cf3968c619505f',1,'apfel']]],
   ['total_7',['TOTAL',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba1dc03810f0ca2619dbde6fff93fe523d',1,'apfel']]],
-  ['trans_8',['TRANS',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792aaa4d3e47e41ae4dfaea730e92a239b31',1,'apfel::EvolutionSetup']]],
-  ['truncated_9',['truncated',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a8b2c3668538924f5576e302e345eedab',1,'apfel::EvolutionSetup']]]
+  ['tpm_8',['TPM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa048524e2bbab75ebb9759019922d516e',1,'apfel::EvolBasisPlusMinus']]],
+  ['tpp_9',['TPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa2bc4893ebfa069c87698c77b141671a7',1,'apfel::EvolBasisPlusMinus']]],
+  ['trans_10',['TRANS',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792aaa4d3e47e41ae4dfaea730e92a239b31',1,'apfel::EvolutionSetup']]],
+  ['truncated_11',['truncated',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a8b2c3668538924f5576e302e345eedab',1,'apfel::EvolutionSetup']]]
 ];

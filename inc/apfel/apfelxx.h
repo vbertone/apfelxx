@@ -47,6 +47,8 @@
 #include "apfel/disbasis.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
+#include "apfel/diagonalbasis.h"
+#include "apfel/evolbasisplusminus.h"
 
 /**
  * @brief High-level interface

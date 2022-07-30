@@ -27,12 +27,14 @@ var searchData=
   ['tools_2eh_24',['tools.h',['../tools_8h.html',1,'']]],
   ['top_25',['TOP',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba7e4803e86b2881f137cf3968c619505f',1,'apfel']]],
   ['total_26',['TOTAL',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba1dc03810f0ca2619dbde6fff93fe523d',1,'apfel']]],
-  ['tr_27',['TR',['../group__MathConstants.html#gaa5cdb3b0774934c96e344d691863282a',1,'apfel']]],
-  ['trans_28',['TRANS',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792aaa4d3e47e41ae4dfaea730e92a239b31',1,'apfel::EvolutionSetup']]],
-  ['transform_29',['transform',['../classapfel_1_1DoubleExponentialQuadrature.html#af9c3896a4859bc74803ad537113585a8',1,'apfel::DoubleExponentialQuadrature::transform()'],['../classapfel_1_1OgataQuadrature.html#a08492fa34b921c4eb8354d905601ac26',1,'apfel::OgataQuadrature::transform()']]],
-  ['transitionpoints_30',['TransitionPoints',['../classapfel_1_1Grid.html#af2190ab06c49804f6bc9bf6bc3b1adbe',1,'apfel::Grid']]],
-  ['transversely_20polarised_20splitting_20functions_31',['Transversely polarised splitting functions',['../group__TransSF.html',1,'(Global Namespace)'],['../group__TransSFtl.html',1,'(Global Namespace)']]],
-  ['truncated_32',['truncated',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a8b2c3668538924f5576e302e345eedab',1,'apfel::EvolutionSetup']]],
-  ['twobodyphasespace_33',['TwoBodyPhaseSpace',['../classapfel_1_1TwoBodyPhaseSpace.html',1,'apfel::TwoBodyPhaseSpace'],['../classapfel_1_1TwoBodyPhaseSpace.html#a698a2ed6ba467d6c44bc02073c91e601',1,'apfel::TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const &amp;pTmin1, double const &amp;pTmin2, double const &amp;etamin, double const &amp;etamax, double const &amp;eps)'],['../classapfel_1_1TwoBodyPhaseSpace.html#aafe154d0e5c45fe56ec5112529d2b25d',1,'apfel::TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const &amp;pTmin, double const &amp;etamin, double const &amp;etamax, double const &amp;eps=1e-9)']]],
-  ['twobodyphasespace_2eh_34',['twobodyphasespace.h',['../twobodyphasespace_8h.html',1,'']]]
+  ['tpm_27',['TPM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa048524e2bbab75ebb9759019922d516e',1,'apfel::EvolBasisPlusMinus']]],
+  ['tpp_28',['TPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa2bc4893ebfa069c87698c77b141671a7',1,'apfel::EvolBasisPlusMinus']]],
+  ['tr_29',['TR',['../group__MathConstants.html#gaa5cdb3b0774934c96e344d691863282a',1,'apfel']]],
+  ['trans_30',['TRANS',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792aaa4d3e47e41ae4dfaea730e92a239b31',1,'apfel::EvolutionSetup']]],
+  ['transform_31',['transform',['../classapfel_1_1DoubleExponentialQuadrature.html#af9c3896a4859bc74803ad537113585a8',1,'apfel::DoubleExponentialQuadrature::transform()'],['../classapfel_1_1OgataQuadrature.html#a08492fa34b921c4eb8354d905601ac26',1,'apfel::OgataQuadrature::transform()']]],
+  ['transitionpoints_32',['TransitionPoints',['../classapfel_1_1Grid.html#af2190ab06c49804f6bc9bf6bc3b1adbe',1,'apfel::Grid']]],
+  ['transversely_20polarised_20splitting_20functions_33',['Transversely polarised splitting functions',['../group__TransSF.html',1,'(Global Namespace)'],['../group__TransSFtl.html',1,'(Global Namespace)']]],
+  ['truncated_34',['truncated',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a8b2c3668538924f5576e302e345eedab',1,'apfel::EvolutionSetup']]],
+  ['twobodyphasespace_35',['TwoBodyPhaseSpace',['../classapfel_1_1TwoBodyPhaseSpace.html',1,'apfel::TwoBodyPhaseSpace'],['../classapfel_1_1TwoBodyPhaseSpace.html#a698a2ed6ba467d6c44bc02073c91e601',1,'apfel::TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const &amp;pTmin1, double const &amp;pTmin2, double const &amp;etamin, double const &amp;etamax, double const &amp;eps)'],['../classapfel_1_1TwoBodyPhaseSpace.html#aafe154d0e5c45fe56ec5112529d2b25d',1,'apfel::TwoBodyPhaseSpace::TwoBodyPhaseSpace(double const &amp;pTmin, double const &amp;etamin, double const &amp;etamax, double const &amp;eps=1e-9)']]],
+  ['twobodyphasespace_2eh_36',['twobodyphasespace.h',['../twobodyphasespace_8h.html',1,'']]]
 ];

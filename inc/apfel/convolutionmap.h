@@ -10,7 +10,6 @@
 
 #include <map>
 #include <string>
-#include <vector>
 #include <iostream>
 
 namespace apfel
@@ -101,20 +100,4 @@ namespace apfel
    * @brief Method which prints ConvolutionMap with cout <<.
    */
   std::ostream& operator << (std::ostream& os, ConvolutionMap const& cm);
-
-  /**
-   * @brief The DiagonalBasis class is the simplest derivation of
-   * ConvolutionMap meant to essentially perform a scalar product of
-   * two sets of objects.
-   */
-  class DiagonalBasis: public ConvolutionMap
-  {
-  public:
-    /**
-     * @brief The DiagonalBasis constructor
-     * @param nf: number of elements
-     * @param offset: starting index for the enumeration on the distributions (default: 0)
-     */
-    DiagonalBasis(int const& nf, int const& offset = 0);
-  };
 }
