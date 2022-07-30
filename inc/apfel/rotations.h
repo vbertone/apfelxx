@@ -8,6 +8,7 @@
 
 #include "apfel/distribution.h"
 #include "apfel/operator.h"
+#include "apfel/set.h"
 
 namespace apfel
 {
@@ -152,6 +153,24 @@ namespace apfel
    * @return The map in the QCD evolution basis
    */
   std::map<int, double> PhysToQCDEv(std::map<int, double> const& InPhysMap);
+
+  /**
+   * @brief Rotation from the physical to the QCD evolution basis of a
+   * map of distributions.
+   * @param InPhysMap: the map in the physical basis
+   * @param nf: the the number of active flavours
+   * @return The set of distributions in the QCD evolution basis
+   */
+  Set<Distribution> PhysToQCDEv(std::map<int, Distribution> const& InPhysMap, int const& nf);
+
+  /**
+   * @brief Rotation from the physical to the QCD evolution basis of a
+   * map of operators.
+   * @param InPhysMap: the map in the physical basis
+   * @param nf: the the number of active flavours
+   * @return The set of operators in the QCD evolution basis
+   */
+  Set<Operator> PhysToQCDEv(std::map<int, Operator> const& InPhysMap, int const& nf);
 
   /**
    * @brief Rotation from the QCD evolution to the physical basis.

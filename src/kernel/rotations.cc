@@ -5,6 +5,7 @@
 //
 
 #include "apfel/rotations.h"
+#include "apfel/evolutionbasisqcd.h"
 
 namespace apfel
 {
@@ -26,7 +27,7 @@ namespace apfel
 
     // Fill in map in the QCD evolution basis. It attumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
-    std::map<int,double> QCDEvMap;
+    std::map<int, double> QCDEvMap;
     QCDEvMap[0] = PhysMap.at(0);
     QCDEvMap[1] =
       + PhysMap.at(1) + PhysMap.at(-1)
@@ -94,6 +95,156 @@ namespace apfel
       - 5 * ( PhysMap.at(6) - PhysMap.at(-6) );
 
     return QCDEvMap;
+  }
+
+  //_____________________________________________________________________________
+  Set<Distribution> PhysToQCDEv(std::map<int, Distribution> const& InPhysMap, int const& nf)
+  {
+    // Fill in map in the QCD evolution basis. It attumes that the
+    // gluon has key zero and all keys from -6 to 6 exist.
+    std::map<int, Distribution> QCDEvMap;
+    QCDEvMap.insert({0, InPhysMap.at(0)});
+    QCDEvMap.insert({1,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     + InPhysMap.at(4) + InPhysMap.at(-4)
+                     + InPhysMap.at(5) + InPhysMap.at(-5)
+                     + InPhysMap.at(6) + InPhysMap.at(-6)});
+    QCDEvMap.insert({2,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     + InPhysMap.at(4) - InPhysMap.at(-4)
+                     + InPhysMap.at(5) - InPhysMap.at(-5)
+                     + InPhysMap.at(6) - InPhysMap.at(-6)});
+    QCDEvMap.insert({3,
+                     InPhysMap.at(2) + InPhysMap.at(-2)
+                     - ( InPhysMap.at(1) + InPhysMap.at(-1) )});
+    QCDEvMap.insert({4,
+                     InPhysMap.at(2) - InPhysMap.at(-2)
+                     - ( InPhysMap.at(1) - InPhysMap.at(-1) )});
+    QCDEvMap.insert({5,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     - 2 * ( InPhysMap.at(3) + InPhysMap.at(-3) )});
+    QCDEvMap.insert({6,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     - 2 * ( InPhysMap.at(3) - InPhysMap.at(-3) )});
+    QCDEvMap.insert({7,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     - 3 * ( InPhysMap.at(4) + InPhysMap.at(-4) )});
+    QCDEvMap.insert({8,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     - 3 * ( InPhysMap.at(4) - InPhysMap.at(-4) )});
+    QCDEvMap.insert({9,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     + InPhysMap.at(4) + InPhysMap.at(-4)
+                     - 4 * ( InPhysMap.at(5) + InPhysMap.at(-5) )});
+    QCDEvMap.insert({10,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     + InPhysMap.at(4) - InPhysMap.at(-4)
+                     - 4 * ( InPhysMap.at(5) - InPhysMap.at(-5) )});
+    QCDEvMap.insert({11,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     + InPhysMap.at(4) + InPhysMap.at(-4)
+                     + InPhysMap.at(5) + InPhysMap.at(-5)
+                     - 5 * ( InPhysMap.at(6) + InPhysMap.at(-6) )});
+    QCDEvMap.insert({12,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     + InPhysMap.at(4) - InPhysMap.at(-4)
+                     + InPhysMap.at(5) - InPhysMap.at(-5)
+                     - 5 * ( InPhysMap.at(6) - InPhysMap.at(-6) )});
+
+    return Set<Distribution> {EvolutionBasisQCD{nf}, QCDEvMap};
+  }
+
+  //_____________________________________________________________________________
+  Set<Operator> PhysToQCDEv(std::map<int, Operator> const& InPhysMap, int const& nf)
+  {
+    // Fill in map in the QCD evolution basis. It attumes that the
+    // gluon has key zero and all keys from -6 to 6 exist.
+    std::map<int, Operator> QCDEvMap;
+    QCDEvMap.insert({0, InPhysMap.at(0)});
+    QCDEvMap.insert({1,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     + InPhysMap.at(4) + InPhysMap.at(-4)
+                     + InPhysMap.at(5) + InPhysMap.at(-5)
+                     + InPhysMap.at(6) + InPhysMap.at(-6)});
+    QCDEvMap.insert({2,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     + InPhysMap.at(4) - InPhysMap.at(-4)
+                     + InPhysMap.at(5) - InPhysMap.at(-5)
+                     + InPhysMap.at(6) - InPhysMap.at(-6)});
+    QCDEvMap.insert({3,
+                     InPhysMap.at(2) + InPhysMap.at(-2)
+                     - ( InPhysMap.at(1) + InPhysMap.at(-1) )});
+    QCDEvMap.insert({4,
+                     InPhysMap.at(2) - InPhysMap.at(-2)
+                     - ( InPhysMap.at(1) - InPhysMap.at(-1) )});
+    QCDEvMap.insert({5,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     - 2 * ( InPhysMap.at(3) + InPhysMap.at(-3) )});
+    QCDEvMap.insert({6,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     - 2 * ( InPhysMap.at(3) - InPhysMap.at(-3) )});
+    QCDEvMap.insert({7,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     - 3 * ( InPhysMap.at(4) + InPhysMap.at(-4) )});
+    QCDEvMap.insert({8,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     - 3 * ( InPhysMap.at(4) - InPhysMap.at(-4) )});
+    QCDEvMap.insert({9,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     + InPhysMap.at(4) + InPhysMap.at(-4)
+                     - 4 * ( InPhysMap.at(5) + InPhysMap.at(-5) )});
+    QCDEvMap.insert({10,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     + InPhysMap.at(4) - InPhysMap.at(-4)
+                     - 4 * ( InPhysMap.at(5) - InPhysMap.at(-5) )});
+    QCDEvMap.insert({11,
+                     InPhysMap.at(1) + InPhysMap.at(-1)
+                     + InPhysMap.at(2) + InPhysMap.at(-2)
+                     + InPhysMap.at(3) + InPhysMap.at(-3)
+                     + InPhysMap.at(4) + InPhysMap.at(-4)
+                     + InPhysMap.at(5) + InPhysMap.at(-5)
+                     - 5 * ( InPhysMap.at(6) + InPhysMap.at(-6) )});
+    QCDEvMap.insert({12,
+                     InPhysMap.at(1) - InPhysMap.at(-1)
+                     + InPhysMap.at(2) - InPhysMap.at(-2)
+                     + InPhysMap.at(3) - InPhysMap.at(-3)
+                     + InPhysMap.at(4) - InPhysMap.at(-4)
+                     + InPhysMap.at(5) - InPhysMap.at(-5)
+                     - 5 * ( InPhysMap.at(6) - InPhysMap.at(-6) )});
+
+    return Set<Operator> {EvolutionOperatorBasisQCD{nf}, QCDEvMap};
   }
 
   //_____________________________________________________________________________
@@ -185,7 +336,7 @@ namespace apfel
 
     // Fill in map in the PlusMinus basis. It attumes that the gluon
     // has key zero and all keys from -6 to 6 exist.
-    std::map<int,double> QCDEvMap;
+    std::map<int, double> QCDEvMap;
     QCDEvMap[0]  = PhysMap.at(0);
     for (int i = 1; i <= 6; i++)
       {
