@@ -120,7 +120,9 @@ PYBIND11_MODULE(apfelpy, m)
                  "NoCharges"_a = false);
 
   // Wrappers of "rotations.h"
-  _utilities.def("PhysToQCDEv", &apfel::PhysToQCDEv,              "InPhysMap"_a);
+  _utilities.def("PhysToQCDEv", py::overload_cast<std::map<int, double> const&>(&apfel::PhysToQCDEv),              "InPhysMap"_a);
+  //_utilities.def("PhysToQCDEv", py::overload_cast<apfel::Set<apfel::Distribution> const&>(&apfel::PhysToQCDEv),    "InPhysMap"_a, "nf"_a);
+  //_utilities.def("PhysToQCDEv", py::overload_cast<apfel::Set<apfel::Operator> const&>(&apfel::PhysToQCDEv),        "InPhysMap"_a, "nf"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, double> const&>(&apfel::QCDEvToPhys),              "QCDEvMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, apfel::Distribution> const&>(&apfel::QCDEvToPhys), "QCDEvMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, apfel::Operator> const&>(&apfel::QCDEvToPhys),     "QCDEvMap"_a);
