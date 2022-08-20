@@ -24,8 +24,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
-                                                 double              const& IntEps,
-                                                 bool                const& nnnlo)
+                                                 double              const& IntEps)
   {
     // Initialise space-like and time-like splitting functions on the
     // grid required to compute the log terms of the matching
@@ -163,17 +162,15 @@ namespace apfel
     // NNLO matching functions operators.
     // PDFs
     std::map<int, std::map<int, Operator>> C20pdf;
-    const Operator O2Vqqbpdf{g, C2Vqqbpdf{}, IntEps};
     const Operator O2pspdf{g, C2pspdf{}, IntEps};
     const Operator O2qgpdf{g, C2qgpdf{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O2Vqqpdf{g, C2Vqqpdf{nf}, IntEps};
-        const Operator O2gqpdf{g, C2gqpdf{nf}, IntEps};
-        const Operator O2ggpdf{g, C2ggpdf{nf}, IntEps};
-        const Operator O2nsppdf = O2Vqqpdf + O2Vqqbpdf;
-        const Operator O2nsmpdf = O2Vqqpdf - O2Vqqbpdf;
-        const Operator O2qqpdf  = O2nsppdf + nf * O2pspdf;
+        const Operator O2gqpdf {g, C2gqpdf{nf},  IntEps};
+        const Operator O2ggpdf {g, C2ggpdf{nf},  IntEps};
+        const Operator O2nsppdf{g, C2nsppdf{nf}, IntEps};
+        const Operator O2nsmpdf{g, C2nsmpdf{nf}, IntEps};
+        const Operator O2qqpdf = O2nsppdf + nf * O2pspdf;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O2nsppdf});
         OM.insert({EvolutionBasisQCD::PNSM, O2nsmpdf});
@@ -274,17 +271,15 @@ namespace apfel
 
     // FFs
     std::map<int, std::map<int, Operator>> C20ff;
-    const Operator O2Vqqbff{g, C2Vqqbff{}, IntEps};
     const Operator O2psff{g, C2psff{}, IntEps};
     const Operator O2qgff{g, C2qgff{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O2Vqqff{g, C2Vqqff{nf}, IntEps};
-        const Operator O2gqff{g, C2gqff{nf}, IntEps};
-        const Operator O2ggff{g, C2ggff{nf}, IntEps};
-        const Operator O2nspff = O2Vqqff + O2Vqqbff;
-        const Operator O2nsmff = O2Vqqff - O2Vqqbff;
-        const Operator O2qqff  = O2nspff + nf * O2psff;
+        const Operator O2gqff {g, C2gqff{nf},  IntEps};
+        const Operator O2ggff {g, C2ggff{nf},  IntEps};
+        const Operator O2nspff{g, C2nspff{nf}, IntEps};
+        const Operator O2nsmff{g, C2nsmff{nf}, IntEps};
+        const Operator O2qqff = O2nspff + nf * O2psff;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O2nspff});
         OM.insert({EvolutionBasisQCD::PNSM, O2nsmff});
@@ -373,55 +368,51 @@ namespace apfel
     // NNNLO matching functions operators.
     // PDFs
     std::map<int, std::map<int, Operator>> C30pdf;
-    if (nnnlo)
+    const Operator O3pvpdf{g, C3pvpdf{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O3pvpdf{g, C3pvpdf{}, IntEps};
-        const Operator O3gqpdf{g, C3gqpdf{}, IntEps};
-        const Operator O3ggpdf{g, C3ggpdf{}, IntEps};
-        for (int nf = nfi; nf <= nff; nf++)
-          {
-            const Operator O3Vqqpdf{g, C3Vqqpdf{nf}, IntEps};
-            const Operator O3Vqqbpdf{g, C3Vqqbpdf{nf}, IntEps};
-            const Operator O3pspdf{g, C3pspdf{nf}, IntEps};
-            const Operator O3qgpdf{g, C3qgpdf{nf}, IntEps};
-            const Operator O3nsppdf  = O3Vqqpdf + O3Vqqbpdf;
-            const Operator O3nsmpdf  = O3Vqqpdf - O3Vqqbpdf;
-            const Operator O3qqpdf   = O3nsppdf + nf * O3pspdf;
-            const Operator O3nsvpdf  = O3nsmpdf + nf * O3pvpdf;
-            std::map<int, Operator> OM;
-            OM.insert({EvolutionBasisQCD::PNSP, O3nsppdf});
-            OM.insert({EvolutionBasisQCD::PNSM, O3nsmpdf});
-            OM.insert({EvolutionBasisQCD::PNSV, O3nsvpdf});
-            OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qqpdf});
-            OM.insert({EvolutionBasisQCD::PQG,           nf * O3qgpdf});
-            OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gqpdf});
-            OM.insert({EvolutionBasisQCD::PGG,                O3ggpdf});
-            C30pdf.insert({nf, OM});
-          }
+        const Operator O3pspdf {g, C3pspdf{nf},  IntEps};
+        const Operator O3qgpdf {g, C3qgpdf{nf},  IntEps};
+        const Operator O3gqpdf {g, C3gqpdf{nf},  IntEps};
+        const Operator O3ggpdf {g, C3ggpdf{nf},  IntEps};
+        const Operator O3nsppdf{g, C2nsppdf{nf}, IntEps};
+        const Operator O3nsmpdf{g, C3nsmpdf{nf}, IntEps};
+        const Operator O3qqpdf  = O3nsppdf + nf * O3pspdf;
+        const Operator O3nsvpdf = O3nsmpdf + nf * O3pvpdf;
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O3nsppdf});
+        OM.insert({EvolutionBasisQCD::PNSM, O3nsmpdf});
+        OM.insert({EvolutionBasisQCD::PNSV, O3nsvpdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qqpdf});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O3qgpdf});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,                O3ggpdf});
+        C30pdf.insert({nf, OM});
       }
-    else
-      for (int nf = nfi; nf <= nff; nf++)
-        {
-          std::map<int, Operator> OM;
-          OM.insert({EvolutionBasisQCD::PNSP, Zero});
-          OM.insert({EvolutionBasisQCD::PNSM, Zero});
-          OM.insert({EvolutionBasisQCD::PNSV, Zero});
-          OM.insert({EvolutionBasisQCD::PQQ,  Zero});
-          OM.insert({EvolutionBasisQCD::PQG,  Zero});
-          OM.insert({EvolutionBasisQCD::PGQ,  Zero});
-          OM.insert({EvolutionBasisQCD::PGG,  Zero});
-          C30pdf.insert({nf, OM});
-        }
 
-    // FFs (unknown, thus set to zero)
-    std::map<int, Operator> ZeroOp;
-    ZeroOp.insert({EvolutionBasisQCD::PNSP, Zero});
-    ZeroOp.insert({EvolutionBasisQCD::PNSM, Zero});
-    ZeroOp.insert({EvolutionBasisQCD::PNSV, Zero});
-    ZeroOp.insert({EvolutionBasisQCD::PQQ,  Zero});
-    ZeroOp.insert({EvolutionBasisQCD::PQG,  Zero});
-    ZeroOp.insert({EvolutionBasisQCD::PGQ,  Zero});
-    ZeroOp.insert({EvolutionBasisQCD::PGG,  Zero});
+    // FFs
+    std::map<int, std::map<int, Operator>> C30ff;
+    const Operator O3pvff{g, C3pvff{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O3psff {g, C3psff{nf},  IntEps};
+        const Operator O3qgff {g, C3qgff{nf},  IntEps};
+        const Operator O3gqff {g, C3gqff{nf},  IntEps};
+        const Operator O3ggff {g, C3ggff{nf},  IntEps};
+        const Operator O3nspff{g, C2nspff{nf}, IntEps};
+        const Operator O3nsmff{g, C3nsmff{nf}, IntEps};
+        const Operator O3qqff  = O3nspff + nf * O3psff;
+        const Operator O3nsvff = O3nsmff + nf * O3pvff;
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O3nspff});
+        OM.insert({EvolutionBasisQCD::PNSM, O3nsmff});
+        OM.insert({EvolutionBasisQCD::PNSV, O3nsvff});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qqff});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O3qgff});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gqff});
+        OM.insert({EvolutionBasisQCD::PGG,                O3ggff});
+        C30ff.insert({nf, OM});
+      }
 
     // Define map containing the TmdObjects for each nf.
     std::map<int, TmdObjects> TmdObj;
@@ -477,7 +468,7 @@ namespace apfel
         obj.MatchingFunctionsFFs.insert({0, {{evb, C00.at(nf)}}});
         obj.MatchingFunctionsFFs.insert({1, {{evb, C10ff.at(nf)}, {evb, C11ff.at(nf)}, {evb, C12.at(nf)}}});
         obj.MatchingFunctionsFFs.insert({2, {{evb, C20ff.at(nf)}, {evb, C21ff.at(nf)}, {evb, C22ff.at(nf)}, {evb, C23ff.at(nf)}, {evb, C24.at(nf)}}});
-        obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({3, {{evb, C30ff.at(nf)}}});
 
         // Hard factors (set to zero when unknown). In addition,
         // H3Ch() should be multiplied by N_{nf,j} =
@@ -503,7 +494,7 @@ namespace apfel
                                                             double              const& IntEps)
   {
     // Get TMD objects
-    std::map<int, TmdObjects> TmdObjs = InitializeTmdObjects(g, Thresholds, IntEps, false);
+    std::map<int, TmdObjects> TmdObjs = InitializeTmdObjects(g, Thresholds, IntEps);
 
     // Run of all active flavours
     for (auto& to : TmdObjs)
