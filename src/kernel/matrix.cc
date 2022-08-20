@@ -10,7 +10,7 @@ namespace apfel
 {
   //_________________________________________________________________________
   template<class T>
-  matrix<T>::matrix(std::size_t const& row, std::size_t const& col):
+  matrix<T>::matrix(size_t const& row, size_t const& col):
     _size{{row, col}}
   {
     if (row * col != 0)
@@ -19,7 +19,7 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
-  void matrix<T>::resize(std::size_t const& row, std::size_t const& col, T const& v)
+  void matrix<T>::resize(size_t const& row, size_t const& col, T const& v)
   {
     _size = {{row, col}};
     _data.resize(row * col, v);

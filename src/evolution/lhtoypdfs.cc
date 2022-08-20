@@ -83,4 +83,34 @@ namespace apfel
 
     return QCDEvMap;
   }
+
+  //_________________________________________________________________________________
+  std::map<int, double> LHToyPDFsPhys(double const& x, double const&)
+  {
+    // Call all functions only once.
+    const double upv  = xupv(x);
+    const double dnv  = xdnv(x);
+    const double glu  = xglu(x);
+    const double dbar = xdbar(x);
+    const double ubar = xubar(x);
+    const double sbar = xsbar(x);
+
+    // Fill in map in the QCD evolution basis.
+    std::map<int, double> PhysMap;
+    PhysMap[-6] = 0;
+    PhysMap[-5] = 0;
+    PhysMap[-4] = 0;
+    PhysMap[-3] = sbar;
+    PhysMap[-2] = ubar;
+    PhysMap[-1] = dbar;
+    PhysMap[0]  = glu;
+    PhysMap[1]  = dnv + dbar;
+    PhysMap[2]  = upv + ubar;
+    PhysMap[3]  = sbar;
+    PhysMap[4]  = 0;
+    PhysMap[5]  = 0;
+    PhysMap[6]  = 0;
+
+    return PhysMap;
+  }
 }

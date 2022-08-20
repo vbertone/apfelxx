@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logaccuracy_0',['LogAccuracy',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446',1,'apfel']]]
+  ['jetalgorithm_0',['JetAlgorithm',['../namespaceapfel.html#ad665a96afaf1447481a8a2752508535d',1,'apfel']]]
 ];

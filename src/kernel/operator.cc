@@ -113,6 +113,9 @@ namespace apfel
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
 
+    // Get skewness from the expression
+    const double xi = 1 / expr.eta();
+
     // Loop over the subgrids
     _Operator.resize(1);
 
@@ -126,7 +129,7 @@ namespace apfel
     const int nx = jg.nx();
 
     // Get interpolation degree
-    const int kappa = jg.InterDegree();
+    const int k = jg.InterDegree();
 
     // Initialise operator
     _Operator[0].resize(nx, nx, 0);
@@ -139,45 +142,161 @@ namespace apfel
         // the case of GPD evolution).
         expr.SetExternalVariable(xg[beta]);
 
+        // Define "kappa" variable
+        const double kappa = xi / xg[beta];
+
         // Loop over the index alpha
         for (int alpha = 0; alpha < (int) _Operator[0].size(1); alpha++)
           {
-            // Weight of the subtraction term this is
+            // Weight of the subtraction term: this is
             // \delta_{\alpha\beta}
             const double ws = (beta == alpha ? 1 : 0);
+
+            // Weight of the PV subtraction terms at y = 1 / kappa
+            const double wspv = li.Interpolant(alpha, xi, jg);
 
             // Given that the interpolation functions have
             // discontinuos derivative at the nodes, it turns out
             // that it is convenient to split the integrals into
-            // kappa + 1 intervals on each of which the integrand is
+            // k + 1 intervals on each of which the integrand is
             // smooth. Despite more integrals have to be computed,
             // the integration converges faster and is more
             // accurate.
 
             // Run over the grid intervals over which the
             // interpolating function is different from zero.
-            for (int j = 0; j <= std::min(alpha, kappa); j++)
+            for (int j = 0; j <= std::min(alpha, k); j++)
               {
                 // Define "Integrator" object. IMPORTANT: the
                 // particular form of the subtraction term only
                 // applies to singular terms that behave as
                 // 1/(1-y). If other singular functions are used, this
-                // term has to be adjusted.
+                // term has to be adjusted. The integral also contains
+                // a possible principal-valued contribution with
+                // singularity at y = 1 / kappa integrated between x
+                // and 1. Also in this case the procedure is specific
+                // for 1 / ( 1 - kappa y).
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
-                    return expr.Regular(y) * wr + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) );
+                    const double ky = kappa * y;
+                    return expr.Regular(y) * wr
+                    + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
+                    + expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
                   }};
                 // Compute the integral
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
               }
+            // Add PV local part from the y = 1 / kappa singularity
+            _Operator[0](beta, alpha) += wspv * ( expr.LocalPV(xg[beta] / xg[alpha + 1]) - expr.LocalPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
           }
         // Add the local parts: that from standard +-prescripted terms
         // ("Local") and that deriving from principal-valued integrals
-        // ("LocalPV").
+        // at x = 1, i.e. from the ++-prescription ("LocalPP").
         _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1])
-                                    + expr.LocalPV(xg[beta] / xg[beta + 1]) - (beta == 0 ? 0 : expr.LocalPV(xg[beta - std::min(beta, kappa)] / xg[beta]));
+                                    + expr.LocalPP(xg[beta] / xg[beta + 1])
+                                    - (beta == 0 ? 0 : expr.LocalPP(xg[std::max(0, beta - k)] / xg[beta]));
       }
+  }
+
+  //_________________________________________________________________________
+  Distribution Operator::Evaluate(double const& x) const
+  {
+    // Initialise distribution
+    apfel::Distribution d{_grid};
+
+    // Number of sub-grids
+    const int ng = _grid.nGrids();
+
+    // Initialise vector of vectors containing the distribution on the
+    // sub-grids.
+    std::vector<std::vector<double>> dsg(ng);
+
+    // Fill in sub-grids
+    for (int ig = 0; ig < ng; ig++)
+      {
+        // Number of nodes
+        const int nx = _grid.GetSubGrid(ig).nx();
+
+        // Resize distribution subgrid
+        dsg[ig].resize(_grid.GetSubGrid(ig).GetGrid().size(), 0.);
+
+        // Get summation bounds for the interpolation
+        const std::array<int, 2> bounds = d.SumBounds(x, _grid.GetSubGrid(ig));
+
+        // Run over the second index of the operator
+        for (int alpha = 0; alpha < nx; alpha++)
+          {
+            // If the operator has one single line, this means that
+            // one can (must) use the symmetry _Operator[ig](beta,
+            // alpha) = _Operator[ig](0, alpha - beta). Otherwise, the
+            // operator matrix is assumed to be a full nx^2matrix.
+            if (_Operator[ig].size(0) == 1)
+              for (int beta = bounds[0]; beta < std::min(bounds[1], alpha + 1); beta++)
+                dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](0, alpha - beta);
+            else
+              for (int beta = bounds[0]; beta < std::min(bounds[1], nx + 1); beta++)
+                dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](beta, alpha);
+          }
+      }
+
+    // Initialise vector containing the distribution on the joint
+    // grid.
+    std::vector<double> djg(_grid.GetJointGrid().GetGrid().size(), 0.);
+
+    // Determine sub-grid to use to fill in the joint distribution
+    int jg;
+    for (jg = ng - 1; jg >= 0; jg--)
+      if (x >= _grid.GetSubGrid(jg).xMin())
+        break;
+
+    // Determine the weight of the previous grid that enforces a
+    // smoother transition from the (jg-1)-th and the jg-th subgrid.
+    // Do it only from the second grid on.
+    double w2 = 0;
+    if (jg > 0)
+      {
+        // Get interpolation degree on the jg-th subgrid
+        const int id = _grid.GetSubGrid(jg).InterDegree();
+
+        // Determine the closest bottom node on the jg-th subgrid
+        const int ndb = d.SumBounds(x, _grid.GetSubGrid(jg))[0];
+
+        // If "ndb" is larger than the interpolation degree of the jg-th
+        // subgrid "id", use only this subgrid to compute the distribution
+        // on the joint grid. Otherwise compute the joint grid as a
+        // weighted average of (jg-1)-th and jg-th subgrids with weight
+        // depending on the distance from the bottom node of the gj-th
+        // subgrid. This should ensure a smoother transition from the
+        // (jg-1)-th and the jg-th subgrid.
+        w2 = std::max(id - ndb, 0) * pow(id + 1, -1);
+
+        // Get map of indices map from joint to the sub-grid preceding
+        // the selected one.
+        const std::vector<int>& jsmapp = _grid.JointToSubMap()[jg-1];
+
+        // Fill in joint grid
+        for (int alpha = 0; alpha < (int) jsmapp.size(); alpha++)
+          djg[jsmapp[alpha]] += w2 * dsg[jg-1][alpha];
+      }
+
+    // Determine weight on the current grid accoroding to the weight
+    // on the previous grid.
+    const double w1 = 1 - w2;
+
+    // Get map of indices map from joint to the selected sub-grid
+    const std::vector<int>& jsmap = _grid.JointToSubMap()[jg];
+
+    // Fill in joint grid
+    for (int alpha = 0; alpha < (int) jsmap.size(); alpha++)
+      djg[jsmap[alpha]] += w1 * dsg[jg][alpha];
+
+    // Set sub-grids and joint grid
+    d.SetSubGrids(dsg);
+    d.SetJointGrid(djg);
+
+    // Return distribution
+    return d;
   }
 
   //_________________________________________________________________________
@@ -228,7 +347,7 @@ namespace apfel
     for (int ig = 0; ig < ng; ig++)
       {
         // Resize output on the "ig"-th subgrid
-        s[ig].resize(d.GetDistributionSubGrid()[ig].size(), 0);
+        s[ig].resize(d.GetDistributionSubGrid()[ig].size(), 0.);
         for (int alpha = 0; alpha < _grid.GetSubGrid(ig).nx(); alpha++)
           s[ig][alpha] += j[jsmap[ig][alpha]];
       }

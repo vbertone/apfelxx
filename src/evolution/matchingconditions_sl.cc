@@ -47,7 +47,7 @@ namespace apfel
   }
   double AS1HH_0::Singular(double const& x) const
   {
-    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - log(1 - x) ) / ( 1 - x );
+    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
   }
 
   //_________________________________________________________________________________
@@ -67,7 +67,7 @@ namespace apfel
   }
   double AS1gH_0::Regular(double const& x) const
   {
-    return 2 * CF * ( 1 + pow(1 - x, 2) ) * ( - 1 - log(x) ) / x;
+    return 2 * CF * ( 1 + pow(1 - x, 2) ) * ( - 1 - 2 * log(x) ) / x;
   }
 
   //_________________________________________________________________________________

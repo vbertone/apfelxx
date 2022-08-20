@@ -65,6 +65,11 @@ namespace apfel
      * @return The joint SubGrid
      */
     SubGrid const& GetJointGrid() const { return *_JointGrid; }
+
+    /**
+     * @brief Print the Grid object
+     */
+    void Print() const { std::cout << *this << std::endl; }
     ///@}
 
     /**

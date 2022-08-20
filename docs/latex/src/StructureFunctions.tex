@@ -53,11 +53,11 @@
 
 \vspace{20pt}
 
-In this part the technology developed to numerically compute Melling
+In this part the technology developed to numerically compute Mellin
 convolutions exploiting interpolation functions will be applied to the
-computation of totally structure functions. On top of the numerical
-aspects of the computation, more ``theoretical'' aspects will be
-touched such as the computation of scale variations and of the
+computation of totally inclusive structure functions. On top of the
+numerical aspects of the computation, more ``theoretical'' aspects
+will be touched such as the computation of scale variations and of the
 target-mass corrections.
 
 \section{Zero-mass structure functions}
@@ -157,7 +157,7 @@ the convolution integrals become more complicated. In addition,
 contrary to the massless case, the single precomputed intergrals
 $\Gamma_{i,\beta\alpha}^{(n)}$, introduced in Eq.~(\ref{eq:stffast}),
 will depend on the scale $Q$. This prevents a scale independent
-pre-computation of the coefficient functions on $x$-space grid.  A
+pre-computation of the coefficient functions on the $x$-space grid.  A
 possible solution to this problem relies on
 interpolation. Specifically, the integrals
 $\Gamma_{i,\beta\alpha}^{(n)}$ are tabulated over a grid in the
@@ -186,14 +186,14 @@ in Appendix A of Ref.~\cite{Buza:1995ie} are used.  At
 $\mathcal{O}(\alpha_s)$ the analytic expressions are instead
 used.\footnote{Actually, if neglecting intrinsic heavy-quark
   components, at $\mathcal{O}(\alpha_s)$ there is one single
-  coefficient function for each structure functions, available for
+  coefficient function for each structure function, available for
   example in available in Ref.~\cite{Forte:2010ta}, that is convoluted
   with the gluon distribution.}
 
 In the implementation of a so-called General-Mass (GM) scheme, it is
 usually required to know the massless limit of the massive coefficient
 functions analytically. To be more precise, this limit prescribes to
-set to zero all mass suppressed contributions and retain only the
+set to zero all mass-suppressed contributions and retain only the
 mass-independent and the logarithmically enhanced contributions. In
 this case, exact expressions up to $\mathcal{O}(\alpha_s^2)$ have been
 computed in Ref.~\cite{Buza:1995ie} and reported in Appendix D of this
@@ -204,8 +204,8 @@ current structure functions are presently known only for $F_2$ and
 $F_L$. For the parity-violating structure function $F_3$ the massless
 coefficient functions are instead used. This is usually acceptable
 because the neutral-current $F_3$ in the typical kinematics covered by
-modern experiments is sizeable at large $Q$ only where mass effects
-are negligible.
+modern experiments is sizeable at large $Q$, \textit{i.e.} where mass
+effects are negligible.
 
 \subsection{Charged Current Coefficient Functions}
 
@@ -243,7 +243,7 @@ where:
   \lambda = \frac{Q^2}{Q^2+m_H^2} =
   \frac{\xi}{1+\xi}\,,
 \end{equation}
-with $xi$ given in Eq.~(\ref{eq:scalingvar}). Defining:
+with $\xi$ given in Eq.~(\ref{eq:scalingvar}). Defining:
 \begin{equation}
   F_L^H(x,Q,m_H) = F_2^H(x,Q,m_H) - 2xF_1^H(x,Q,m_H)\,,
 \end{equation}
@@ -281,8 +281,8 @@ At LO the coefficient functions read:
 
 The $\mathcal{O}(\alpha_s)$ (NLO) charged-current massive coefficient
 have been computed and reported in Appendix A of
-Ref.~\cite{Gluck:1996ve}. However, their implementation in {\tt
-  APFEL++} requires some manipulations. We start by defining:
+Ref.~\cite{Gluck:1996ve}. However, their implementation in
+{\tt APFEL++} requires some manipulations. We start by defining:
 \begin{equation}
   K_A=\frac{1}{\lambda}(1-\lambda)\ln(1-\lambda)\quad \mbox{and}\quad K_F =\frac{Q}{\mu_F}\,.
 \end{equation}
@@ -367,11 +367,11 @@ where the $x$-prescription in the r.h.s. of the equation above should
 be understood in as a usual $+$-prescription regardless of the
 integration bounds.
 
-Despite most of the time the residual $R_f(x)$ function can be
+Despite most of the times the residual function $R_f(x)$ can be
 evaluated analytically, sometimes it needs to be evaluated
-numerically. The $+$-prescribed functions that present in the
-expressions above give raise to the following residual functions that
-can be computed analytically:
+numerically. The $+$-prescribed functions present in the expressions
+above give rise to the following residual functions that can be
+computed analytically:
 \begin{equation}
   -\int_0^x\frac{dz}{1-z} = \ln(1-x)\,,
 \end{equation}
@@ -747,7 +747,7 @@ which can be plugged into Eq.~(\ref{expDGLAP1}) to give:
   \mathcal{O}(a_s^3)\,.
 \label{expDGLAP2}
 \end{equation}
-It is also useful to consider $t_F=0$ in Eq.~(\ref{BETAexp}), that is
+It is also useful to consider $t_R=0$ in Eq.~(\ref{BETAexp}), that is
 equivalent to set $\mu_R=Q$, which gives:
 \begin{equation}
   a_s(0)=
@@ -827,12 +827,14 @@ required by construction.
 
 In order to provide an operative formulation of scale variations, it
 is necessary to specify the basis in which PDFs are expressed. The
-preferred choice in {\tt APFEL} is the so-called QCD evolution basis:
+preferred choice in {\tt APFEL++} is the so-called QCD evolution
+basis:
 \begin{equation}
 \{g,\Sigma,V,T_{3},V_{3},T_{8},V_{8},T_{15},V_{15},T_{24},V_{24},T_{35},V_{35}\}\,. 
 \end{equation}
 The distributions in the QCD evolution basis can be written in terms
-distributions in the more familiar ``physical'' basis, \textit{i.e.}
+of distributions in the more familiar ``physical'' basis,
+\textit{i.e.}
 $\{\overline{t},\overline{b},\overline{c},\overline{s},\overline{u},\overline{d},d,u,s,c,b,t\}$,
 as follows:
 \begin{equation}
@@ -913,7 +915,7 @@ $n_f$ as:
 \begin{equation}
 n_f = \sum_{i=1}^6\theta(Q^2-m_i^2)\,.
 \end{equation}
-We can now express the term in square brackets in terms $C_+$ and
+We can now express the term in square brackets in terms of $C_+$ and
 $C_{\rm PS}$. In particular:
 \begin{equation}
 \sum_{i=1}^j\hat{C}_i-j\hat{C}_j = \sum_{i=1}^j \theta(Q^2-m_i^2)\left(C_{\rm PS}+\frac{e_i^2}{\langle e_q^2
@@ -1134,7 +1136,7 @@ Eq.~(\ref{generalizedCF}) in {\tt APFEL++}. An important aspect of
 Eq.~(\ref{StructureFunctionEvol}) is that it is written in terms of
 the fundamental coefficient functions $C_g$, $C_+$ and $C_{\rm PS}$
 and PDFs appear in the evolution basis in which the splitting-function
-matrix diagonalizes. In particular, up to $\mathcal{O}(\alpha_s^2)$,
+matrix diagonalises. In particular, up to $\mathcal{O}(\alpha_s^2)$,
 one has that:
 \begin{equation}
 \begin{array}{ll}
@@ -1525,7 +1527,7 @@ to the same form of DIS in such a way to use the DIS-based structure
 of {\tt APFEL++} also for SIA. In particular, the SIA cross section in
 Ref.~\cite{Mitov:2006wy} is expressed in terms of the three structure
 functions: $F_T$, $F_L$ and $F_A$. However, comparing the SIA cross
-section with the DIS one it is easy to realize that defining:
+section with the DIS one it is easy to realise that defining:
 \begin{equation}
 \begin{array}{l}
 F_2(x,Q) = F_T(x,Q) + F_L(x,Q)\,,\\
@@ -1607,8 +1609,7 @@ Ref.~\cite{Agashe:2014kda}):
 \displaystyle \frac{2\pi\alpha^2}{xyQ^2}\eta^i
 \left[
 -Y_+ g_4^i \mp Y_- 2x g_1^i + y^2 g_L^i
-\right]
-\mbox{\,,}
+\right]\,,
 \end{array}
 \end{equation}
 where $i={\rm NC, CC}$, $Y_{\pm}=1 \pm (1-y)^2$, $\eta^{\rm NC}=1$,
@@ -1618,8 +1619,7 @@ helicity of the incoming lepton and $\eta_W=\frac{1}{2}
 \begin{equation}
 \begin{array}{lcl}
 \displaystyle F_L^i & = & \displaystyle F_2^i - 2xF_1^i\\ \\
-\displaystyle F_L^i & = & \displaystyle g_4^i - 2xg_5^i
-\mbox{\,.}
+\displaystyle F_L^i & = & \displaystyle g_4^i - 2xg_5^i\,.
 \end{array}
 \end{equation}
 Because the same tensor structure occurs in the spin-dependent and 
@@ -1631,8 +1631,7 @@ with the following replacement
 \ \ \ \ \ \ \ \ \ 
 \displaystyle F_3^i \rightarrow +4g_1^i
 \ \ \ \ \ \ \ \ \
-\displaystyle F_L^i \rightarrow -2g_L^i 
-\mbox{\,.}
+\displaystyle F_L^i \rightarrow -2g_L^i \,.
 \end{equation}
 Note that the extra factor two is due to the fact that the total cross section 
 is an average over initial-state polarisations.
@@ -1644,12 +1643,10 @@ and polarised PDFs, $\Delta f_j$, (summed over all flavors $j$)
 g_k(x,Q) 
 =
 \sum_{j=q,g}x \int_x^1 \frac{dy}{y} \Delta c_{k,j}(\alpha_s(Q),x)
-\Delta f_j\left(\frac{x}{y},Q\right)
-\mbox{\,,}
+\Delta f_j\left(\frac{x}{y},Q\right)\,,
 \ \ \ \ \ \ \ \ \ \ \
 {\rm with} 
-\ \ k=4,1,L
-\mbox{\,.}
+\ \ k=4,1,L\,.
 \end{equation} 
 The coefficient functions $\Delta c_{k,j}$ allow for the usual perturbative
 expansion
@@ -1657,7 +1654,7 @@ expansion
 \Delta c_{k,j}(\alpha_s(Q),x) 
 =
 \sum_{n=0}^N\left(\frac{\alpha_s(Q)}{4\pi}\right)^n\Delta c_{k,j}^{(n)}(x)
-\,\mbox{,}
+\,,
 \end{equation}
 where the coefficients $\Delta c_{k,j}^{(n)}(x)$ are known up to NLO,
 {\it i.e.} $n=1$ (see {\it e.g.}~\cite{deFlorian:2012wk} and references 
@@ -1667,7 +1664,7 @@ therein). At LO they are
 \Delta c_{4,q}^{(0)}(x) = \Delta c_{1,q}^{(0)}(x) &=& \delta(1-x)
 \\ \\
 \Delta c_{L,q}^{(0)}(x) &=& 0
-\,\mbox{,}
+\,,
 \\ \\
 \Delta c_{k,g}^{(0)}(x) &=& 0
 \ \ \ \ \ \ \ \ \ \

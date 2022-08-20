@@ -100,7 +100,7 @@ int main()
   const auto CollPDFs = [&] (double const& mu) -> apfel::Set<apfel::Distribution> { return TabPDFs.Evaluate(mustar(mu, kappa, css)); };
 
   // Initialize TMD objects
-  const auto TmdObj = apfel::InitializeTmdObjectsLite(g, Thresholds);
+  const auto TmdObj = apfel::InitializeTmdObjects(g, Thresholds);
 
   // Alpha_em
   const double aref = 0.007555310522369057;

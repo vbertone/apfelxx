@@ -19,9 +19,10 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  InitialiseEvolution::InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid):
+  InitialiseEvolution::InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid, std::string const& GridHeader):
     _setup(setup),
-    _WriteGrid(WriteGrid)
+    _WriteGrid(WriteGrid),
+    _GridHeader(GridHeader)
   {
     // Check the sanity of the setup object.
     if (!CheckSetup())
@@ -515,17 +516,23 @@ namespace apfel
     if (mkdir(_setup.name.c_str(), 0777) != 0)
       throw std::runtime_error(error("InitialiseEvolution::WriteGridInfo", "Cannot create folder for the LHAPDF set."));
 
-    // Information string.
-    std::string info;
+    // Write information string. Start with the user-given header.
+    std::string info = _GridHeader + "\n";
 
-    // Write information.
-    info += "SetDesc: 'Set generated with APFEL++. Name: " + _setup.name + "'\n";
-    info += "Author: V. Bertone\n";
-    info += "Reference: arXiv:1708.00911\n";
-    info += "Format: lhagrid1\n";
-    info += "DataVersion: 1\n";
-    info += "NumMembers: " +  std::to_string(_setup.InSet.size()) + "\n";
-    info += "Particle: 0000\n";
+    // If the user-given header is empty, use default header.
+    if (_GridHeader.empty())
+      {
+        info  = "SetDesc: 'Set generated with APFEL++. Name: " + _setup.name + "'\n";
+        info += "Authors: V. Bertone\n";
+        info += "Reference: arXiv:1708.00911\n";
+        info += "Format: lhagrid1\n";
+        info += "DataVersion: 1\n";
+        info += "Particle: 0000\n";
+        info += "FlavorScheme: variable\n";
+        info += "ErrorType: replicas\n";
+      }
+
+    info += "NumMembers: " + std::to_string(_setup.InSet.size()) + "\n";
 
     info += "Flavors: [";
     for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
@@ -534,7 +541,6 @@ namespace apfel
     info += "]\n";
 
     info += "OrderQCD: " + std::to_string(_setup.PerturbativeOrder) + "\n";
-    info += "FlavorScheme: variable\n";
     info += "NumFlavors: " + std::to_string(_setup.Thresholds.size()) + "\n";
 
     double xmin = 1;

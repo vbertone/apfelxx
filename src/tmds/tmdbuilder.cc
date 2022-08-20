@@ -13,6 +13,7 @@
 #include "apfel/gammak.h"
 #include "apfel/gammaf.h"
 #include "apfel/kcs.h"
+#include "apfel/djet.h"
 #include "apfel/hardfactors.h"
 #include "apfel/tools.h"
 #include "apfel/constants.h"
@@ -28,8 +29,8 @@ namespace apfel
     // Initialise space-like and time-like splitting functions on the
     // grid required to compute the log terms of the matching
     // functions.
-    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
-    const std::map<int, DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, IntEps);
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, false, IntEps);
+    const std::map<int, DglapObjects> DglapObjff  = InitializeDglapObjectsQCDT(g, Thresholds, false, IntEps);
 
     report("Initializing TMD objects for matching and evolution... ");
     Timer t;
@@ -525,7 +526,7 @@ namespace apfel
   {
     // Initialise space-like splitting functions on the grid required
     // to compute the log terms of the matching functions.
-    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, IntEps);
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCD(g, Thresholds, false, IntEps);
 
     report("Initializing TMD objects for matching and evolution of the Boer-Mulders gluon TMD... ");
     Timer t;
@@ -749,6 +750,138 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, TmdObjects> InitializeTmdObjectsSivers(Grid                const& g,
+                                                       std::vector<double> const& Thresholds,
+                                                       double              const& IntEps)
+  {
+    // Do not compute the log terms to the matching function because
+    // the collinear evolution of the Qui-Sterman is not exactly
+    // known.
+
+    report("Initializing TMD objects for matching and evolution of the Sivers quark TMD... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // ===============================================================
+    // LO matching functions operators.
+    std::map<int, std::map<int, Operator>> C00;
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Id});
+        OM.insert({EvolutionBasisQCD::PNSM, Id});
+        OM.insert({EvolutionBasisQCD::PNSV, Id});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        C00.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO matching functions operators.
+    // PDFs
+    std::map<int, std::map<int, Operator>> C10pdf;
+    const Operator O1nspdf{g, C1nspdfSivers{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PNSM, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        C10pdf.insert({nf, OM});
+      }
+
+    // FFs (not implemented, set to zero)
+    std::map<int, Operator> ZeroOp;
+    for (int iOp = 0; iOp < 7; iOp++)
+      ZeroOp.insert({iOp, Zero});
+
+    // Define map containing the TmdObjects for each nf.
+    std::map<int, TmdObjects> TmdObj;
+
+    // Construct sets of operators for each perturbative order for the
+    // matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        TmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+        obj.Beta.insert({2, beta2qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+        obj.GammaFq.insert({2, gammaFq2(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+        obj.GammaFg.insert({2, gammaFg2(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+        obj.GammaK.insert({3, gammaK3(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+        obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
+
+        // Matching functions.
+        const EvolutionBasisQCD evb{nf};
+
+        // PDFs
+        obj.MatchingFunctionsPDFs.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsPDFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsPDFs.insert({3, {{evb, ZeroOp}}});
+
+        // FFs
+        obj.MatchingFunctionsFFs.insert({0, {{evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({1, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
+
+        // Hard factors (set to zero when unknown). In addition,
+        // H3Ch() should be multiplied by N_{nf,j} =
+        // (\sum_{i=1}^{nf}e_q) / e_j channel by channel. Here we set
+        // this factor to the constant 1 / 4 because it results from
+        // the average ( N_{5,u} + N_{5,d} ) / 2. The numerical
+        // difference for different choices is however very small.
+        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)},    {3, H3DY(nf)    + H3Ch() / 4}}});
+        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}, {3, H3SIDIS(nf) + H3Ch() / 4}}});
+        obj.HardFactors.insert({"ggH",   {{1, H1ggH()},   {2, H2ggH(nf)},   {3, 0}}});
+
+        // Insert full object
+        TmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return TmdObj;
+  }
+
+  //_____________________________________________________________________________
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
@@ -762,7 +895,7 @@ namespace apfel
     // Compute TMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
-    // Computed TMDPDFs at the final scale by multiplying initial
+    // Computed TMDPDFs at the final scale by multiplying the initial
     // scale TMDPDFs by the evolution factor.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
@@ -786,11 +919,42 @@ namespace apfel
     // Compute TMD evolution factors.
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
-    // Computed TMDFFs at the final scale by multiplying initial scale
-    // TMDFFs by the evolution factor.
+    // Computed TMDFFs at the final scale by multiplying the initial
+    // scale TMDFFs by the evolution factor.
     const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
       return EvolFactors(b, muf, zetaf) * MatchedTmdFFs(b);
+    };
+
+    return EvolvedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&, double const&)> BuildTmdJet(std::map<int, TmdObjects>            const& TmdObj,
+                                                                                 JetAlgorithm                         const& JetAlgo,
+                                                                                 double                               const& JetR,
+                                                                                 std::function<double(double const&)> const& Alphas,
+                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 double                               const& CJ,
+                                                                                 double                               const& Ci,
+                                                                                 double                               const& IntEps)
+  {
+    // Stop the code if Ci is different from one. Ci variations not
+    // available yet.
+    if (Ci != 1)
+      throw std::runtime_error(error("BuildTmdJet", "Ci variations not available yet."));
+
+    // Get initial-scale jet TMD.
+    const std::function<double(double const&, double const&)> MatchedTmdJet = MatchTmdJet(TmdObj, JetAlgo, tan(JetR/2), Alphas, PerturbativeOrder, CJ, Ci, IntEps);
+
+    // Compute TMD evolution factors.
+    const std::function<double(double const&, double const&, double const&)> EvolFactors = QuarkEvolutionFactor(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
+
+    // Computed jet TMD at the final scale by multiplying the initial
+    // scale jet TMD by the evolution factor.
+    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> double
+    {
+      return EvolFactors(b, muf, zetaf) * MatchedTmdJet(b, muf);
     };
 
     return EvolvedTMDs;
@@ -842,6 +1006,120 @@ namespace apfel
       // Convolute matching functions with the collinear FFs and
       // return.
       return MatchFunc(mu0) * CollFFs(mu0);
+    };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&)> MatchTmdJet(std::map<int, TmdObjects>            const& TmdObj,
+                                                                  JetAlgorithm                         const& JetAlgo,
+                                                                  double                               const& tR,
+                                                                  std::function<double(double const&)> const& Alphas,
+                                                                  int                                  const& PerturbativeOrder,
+                                                                  double                               const& CJ,
+                                                                  double                               const& Ci,
+                                                                  double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) thrs.size() < nf)
+          thrs.resize(nf);
+        thrs[nf-1] = thr;
+      }
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the thresholds
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = thrs.size();
+    for (auto const& v : thrs)
+      if (v <= 0)
+        nfi++;
+
+    // Compute log and its powers.
+    const double lQ  = log(CJ);
+    const double lQ2 = lQ * lQ;
+
+    // Select coefficients according to the jet algorithm
+    std::map<int, double> gK0;
+    std::map<int, double> gK1;
+    std::map<int, double> gK2;
+    std::map<int, double> gF0;
+    std::map<int, double> gF1;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        gK0.insert({nf, CF * TmdObj.at(nf).GammaK.at(0)});
+        gK1.insert({nf, CF * TmdObj.at(nf).GammaK.at(1)});
+        gK2.insert({nf, CF * TmdObj.at(nf).GammaK.at(2)});
+        gF0.insert({nf, TmdObj.at(nf).GammaFq.at(0)});
+        gF1.insert({nf, TmdObj.at(nf).GammaFq.at(1)});
+      }
+
+    double djet1 = 0;
+    if (JetAlgo == CONE)
+      djet1 = dJetqCone1();
+    else if (JetAlgo == KT)
+      djet1 = dJetqkT1();
+    else
+      throw std::runtime_error(error("MatchTmdJet", "Unknown jet algorithm."));
+
+    // Construct function that returns the product of matching
+    // functions and collinear FFs. Includes a factor z^2 typical of
+    // FFs.
+    const auto MatchedTMDs = [=] (double const& b, double const& mu) -> double
+    {
+      // Define jet scale
+      const double muJ = CJ * tR * mu;
+
+      // The strong coupling at muJ
+      const double coup = Alphas(muJ) / FourPi;
+
+      // Number of active flavours
+      const int nf = NF(mu, thrs);
+
+      // Compute low-scale jet function
+      double J = 1;
+      if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
+        J += coup * ( djet1 + gF0.at(nf) * lQ + gK0.at(nf) * lQ2 / 2 );
+
+      // Define integrand of the evolution factor
+      const Integrator gammaJ{
+        [=] (double const& mup) -> double
+        {
+          // The strong coupling at mup
+          const double coup = Alphas(mup) / FourPi;
+
+          // Log of the scales
+          const double L = log(muJ / mup);
+
+          // Number of active flavours
+          const int nfp = NF(mup, thrs);
+
+          // LL
+          double gJ = - coup * gK0.at(nfp) * L;
+
+          // NLL
+          if (PerturbativeOrder != 0)
+            gJ += coup * ( gF0.at(nfp) - coup * gK1.at(nfp) * L );
+          // NNLL
+          if (PerturbativeOrder != 1)
+            gJ += coup * coup * ( gF1.at(nfp)  - coup * gK2.at(nfp)  * L );
+
+          return gJ / mup;
+        }
+      };
+
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Convolute matching functions with the collinear FFs and
+      // return.
+      return J * exp(- gammaJ.integrate(mu0, muJ, IntEps) );
     };
 
     return MatchedTMDs;
@@ -1627,6 +1905,124 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
+                                                                         std::function<double(double const&)> const& Alphas,
+                                                                         int                                  const& PerturbativeOrder,
+                                                                         double                               const& Ci,
+                                                                         double                               const& IntEps)
+  {
+    // Retrieve thresholds from "TmdObj".
+    std::vector<double> thrs;
+    for(auto const& obj : TmdObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) thrs.size() < nf)
+          thrs.resize(nf);
+        thrs[nf-1] = thr;
+      }
+
+    // Define the log(Ci) to assess scale variations.
+    const double Lmu = log(Ci);
+
+    // Create functions needed for the TMD evolution.
+    std::function<double(double const&)> gammaK;
+    std::function<double(double const&)> K;
+    // LL
+    if (PerturbativeOrder == LL)
+      {
+        gammaK  = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * TmdObj.at(NF(mu, thrs)).GammaK.at(0);
+        };
+        K = [=] (double const&) -> double{ return 0; };
+      }
+    // NLL
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * gc.at(1) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          return coup * lo;
+        };
+      }
+    // NNLL
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          return coup * ( lo + coup * nlo );
+        };
+      }
+    // N3LL
+    else if (PerturbativeOrder == NNNLL || PerturbativeOrder == NNNLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const std::vector<double> d2 = d.at(2);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          const double nnlo = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+          return coup * ( lo + coup * ( nlo + coup * nnlo ) );
+        };
+      }
+
+    // Define the integrands.
+    const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    const auto CSKernel = [=] (double const& b, double const& muf) -> double
+    {
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Compute argument of the exponent of the evolution factors.
+      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps);
+
+      // Compute the evolution factors.
+      const double Klz = CF * ( K(mu0) - IntI2 );
+
+      // Return the factor.
+      return Klz;
+    };
+
+    return CSKernel;
+  }
+
+  //_____________________________________________________________________________
   std::function<double(double const&)> HardFactor(std::string                          const& Process,
                                                   std::map<int, TmdObjects>            const& TmdObj,
                                                   std::function<double(double const&)> const& Alphas,
@@ -1698,7 +2094,7 @@ namespace apfel
     // Construct function that returns the hard function
     const auto HardFactor = [=] (double const& mu) -> double
     {
-      // The stron coupling
+      // The strong coupling
       const double coup = Alphas(mu) / FourPi;
 
       // Number of active flavours

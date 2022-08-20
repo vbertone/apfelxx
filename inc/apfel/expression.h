@@ -16,6 +16,8 @@ namespace apfel
   class Expression
   {
   public:
+    virtual ~Expression() = default;
+
     /**
      * @name Constructors
      * List of constructors.
@@ -30,8 +32,8 @@ namespace apfel
 
     /**
      * @name Expression components
-     * The three different possible components of an expression:
-     * regular, singular, and local.
+     * The different possible components of an expression: regular,
+     * singular, and local.
      */
     ///@{
     /**
@@ -53,8 +55,24 @@ namespace apfel
     virtual double Local(double const&) const { return 0; }
 
     /**
-     * @brief Virtual local term for principal valued integrals.
-     * @return The local term at x
+     * @brief Virtual local term for principal-valued integrals a la
+     * ERBL with singularity at x = 1, i.e. corresponding to the
+     * ++-prescription.
+     * @return The local term for ++-prespribed distributions at x
+     */
+    virtual double LocalPP(double const&) const { return 0; }
+
+    /**
+     * @brief Virtual singular term for principal-valued integrals in
+     * the DGLAP region (i.e. with pole in x in the interval (0,1)).
+     * @return The singular term for principal-valued distributions at x
+     */
+    virtual double SingularPV(double const&) const { return 0; }
+
+    /**
+     * @brief Virtual local term for principal-valued integrals a la
+     * DGLAP with singularity in the interval (0,1).
+     * @return The local term for principal-valued distributions at x
      */
     virtual double LocalPV(double const&) const { return 0; }
     ///@}
@@ -73,7 +91,7 @@ namespace apfel
 
   protected:
     double mutable _extvar;  //!< External kinematic variable
-    double const   _eta;     //!< Mass parameter
+    double const   _eta;     //!< Scaling parameter
   };
 
   /**

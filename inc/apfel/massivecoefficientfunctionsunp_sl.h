@@ -59,6 +59,8 @@ namespace apfel
   public:
     Cm21gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -69,6 +71,8 @@ namespace apfel
   public:
     CmL1gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
   ///@}
 
@@ -90,7 +94,8 @@ namespace apfel
     double Regular(double const& x) const;
     double Local(double const&)     const;
   private:
-    double _adler;
+    double const _eta;
+    double       _adler;
   };
 
   /**
@@ -104,6 +109,8 @@ namespace apfel
   public:
     CmL2nsNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -115,6 +122,8 @@ namespace apfel
   public:
     Cm22gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -126,6 +135,8 @@ namespace apfel
   public:
     CmL2gNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -138,6 +149,8 @@ namespace apfel
   public:
     Cm22psNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -150,6 +163,8 @@ namespace apfel
   public:
     CmL2psNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -162,6 +177,8 @@ namespace apfel
   public:
     Cm22bargNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -174,6 +191,8 @@ namespace apfel
   public:
     CmL2bargNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -187,6 +206,8 @@ namespace apfel
   public:
     Cm22barpsNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
   };
 
   /**
@@ -200,6 +221,139 @@ namespace apfel
   public:
     CmL2barpsNC(double const& eta);
     double Regular(double const& x) const;
+  private:
+    double const _eta;
+  };
+  ///@}
+
+  /**
+   * @defgroup NLOhq NLO massive heavy-quark-initiated coefficient functions
+   * Collection of the massive coefficient functions for processes
+   * with a massive heavy quark in the intial state. These coefficient
+   * functions can be used both in the neutral-current and in the
+   * charged-current cases.
+   * @note All the expressions of the one-loo coefficient functions are
+   * extracted from https://arxiv.org/pdf/hep-ph/9805233.pdf. The
+   * coefficient function C is witten in terms of the private _R
+   * function such that:
+   *
+   * C(x) = ( _R(x) - _R(1) ) / ( 1 - x ) + _R(x) / ( 1 - x )_+ + ( L + _R(1) ) delta( 1- x )
+   *
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for 2xF1. The relevant function is in Eq. (C4) of
+   * https://arxiv.org/pdf/hep-ph/9805233.pdf.
+   */
+  class Cm11ns: public Expression
+  {
+  public:
+    Cm11ns(double const& m1, double const& m2, double const& Q, double const& Splus, double const& Sminus);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double _R(double const& x) const;
+    double const _m1;
+    double const _m2;
+    double const _Splus;
+    double const _Sminus;
+    double const _m12;
+    double const _m22;
+    double const _Q2;
+    double const _Del;
+    double const _Del2;
+    double const _Spp;
+    double const _Spm;
+    double const _Smp;
+    double const _fact1;
+    double _S1;
+    double _V1;
+    double _R1;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for F2. The relevant function is in Eq. (C4) of
+   * https://arxiv.org/pdf/hep-ph/9805233.pdf.
+   */
+  class Cm21ns: public Expression
+  {
+  public:
+    Cm21ns(double const& m1, double const& m2, double const& Q, double const& Splus, double const& Sminus);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double _R(double const& x) const;
+    double const _m1;
+    double const _m2;
+    double const _Splus;
+    double const _Sminus;
+    double const _m12;
+    double const _m22;
+    double const _Q2;
+    double const _Del;
+    double const _Del2;
+    double const _Spp;
+    double const _Spm;
+    double const _Smp;
+    double const _fact2;
+    double _S2;
+    double _V2;
+    double _R1;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for F3. The relevant function is in Eq. (C4) of
+   * https://arxiv.org/pdf/hep-ph/9805233.pdf.
+   */
+  class Cm31ns: public Expression
+  {
+  public:
+    Cm31ns(double const& m1, double const& m2, double const& Q, double const& Rplus, double const& Rminus);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double _R(double const& x) const;
+    double const _m1;
+    double const _m2;
+    double const _Rplus;
+    double const _Rminus;
+    double const _m12;
+    double const _m22;
+    double const _Q2;
+    double const _Del;
+    double const _Del2;
+    double const _Spp;
+    double const _Spm;
+    double const _Smp;
+    double const _fact3;
+    double _S3;
+    double _V3;
+    double _R1;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet coefficient function
+   * for FL = F2 - 2xF1. The relevant function is in Eq. (C4) of
+   * https://arxiv.org/pdf/hep-ph/9805233.pdf.
+   */
+  class CmL1ns: public Expression
+  {
+  public:
+    CmL1ns(double const& m1, double const& m2, double const& Q, double const& Splus, double const& Sminus);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    Cm11ns const _C1;
+    Cm21ns const _C2;
+    double const _factL;
   };
   ///@}
   ///@}

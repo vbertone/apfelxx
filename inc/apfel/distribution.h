@@ -117,6 +117,25 @@ namespace apfel
     void SetSubGrid(int const& ig, int const& ix, double const& x);
 
     /**
+     * @brief Function to set the joint grid.
+     * @param jg: the vector of the joint grid
+     */
+    void SetJointGrid(std::vector<double> const& jg);
+
+    /**
+     * @brief Function to set the single sub-grid.
+     * @param ig: the subgrid index
+     * @param sg: the vector of the sub-grid
+     */
+    void SetSubGrid(int const& ig, std::vector<double> const& sg);
+
+    /**
+     * @brief Function to set all the sub-grids.
+     * @param sgs: the vector of vectoris of the sub-grids
+     */
+    void SetSubGrids(std::vector<std::vector<double>> const& sgs);
+
+    /**
      * @brief Function that returns the derivative of the Distribution
      * in the form of a Distribution object.
      */
@@ -189,5 +208,23 @@ namespace apfel
   std::map<int, Distribution> DistributionMap(Grid                                              const& g,
                                               std::function<std::vector<double>(double const&)> const& InDistFunc,
                                               int                                               const& NOutputs = 0);
+
+  /**
+   * @brief Function that sums the element of a
+   * distribution. Specifically, it sums the elements of the joint
+   * grid. Combined with the Distribution*Distribution operator, this
+   * function is useful to compute scalar products.
+   * @param InDist: distribution to be summed over
+   */
+  double Sum(Distribution const& InDist);
+
+  /**
+   * @brief Function that computes the scala product bewteen two
+   * distributions. The product is computed using the joint grids.
+   * @param d1: first input distribution
+   * @param d2: second input distribution
+   * @param offset: offset applied to the inner product (default: 0)
+   */
+  double InnerProduct(Distribution const& d1, Distribution const& d2, double const& offset = 0);
   ///@}
 }

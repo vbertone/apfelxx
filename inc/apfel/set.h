@@ -99,6 +99,11 @@ namespace apfel
      */
     T Combine(std::vector<double> const& weigths) const;
 
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
   private:
     ConvolutionMap   _map;     //!< The shared pointer containing the convolution map
     std::map<int, T> _objects; //!< The container for the map
@@ -138,9 +143,6 @@ namespace apfel
 
   template<class T>
   Set<T> operator * (Set<T> lhs, std::map<int, double> const& v) { return lhs *= v; }
-
-  template<class T>
-  Set<T> operator / (int const& s, Set<T> rhs) { return rhs /= s; }
 
   template<class T>
   Set<T> operator / (Set<T> lhs, double const& s) { return lhs /= s; }

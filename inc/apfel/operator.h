@@ -67,6 +67,13 @@ namespace apfel
     void BuildOperatorGPD(Expression const& expr, double const& eps);
 
     /**
+     * @brief Function that interpolate the operator over the first
+     * index return a Distribution object.
+     * @param x: the value in x to be interpolated
+     */
+    Distribution Evaluate(double const& x) const;
+
+    /**
      * @brief Function that returns the Grid object associated to the operator.
      */
     Grid const& GetGrid() const { return _grid; }
@@ -85,6 +92,11 @@ namespace apfel
      * @brief Function that returns the operator.
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
+
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
 
   protected:
     Grid                 const& _grid;      //!< Grid on which to compute the operator

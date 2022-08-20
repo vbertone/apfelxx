@@ -3710,6 +3710,128 @@ $a_{\rm NNLL}$ that, using Eq.~(\ref{eq:masterf}), reads:
 \end{array}
 \end{equation}
 
+\section{Analytic calculation of the Collins-Soper kernel}
+
+In this section, we compute analytically to different logarithmic
+accuracies the solution of the Collins-Soper evolution equation
+Eq.~(\ref{eq:CuspRGE}). This amounts to computing
+Eq.~(\ref{eq:CuspEv}) plugging in the appropriate perturbative
+corrections. To do so, we choose as an initial scale
+$\mu_0=\mu_b=2e^{-\gamma_E}/b_T$ that is such that the expansion of
+$K$ at this scale admits a log-free perturbative expansion (see
+Eq.~(\ref{eq:Kexp})). Therefore, the integral to be computed is:
+\begin{equation}
+K(\mu) = K(\mu_b) -
+\int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'}\gamma_K(\alpha_s(\mu'))\,,
+\end{equation}
+that upon expansion of the $K$ and $\gamma_K$ anomalous dimensions
+becomes:
+\begin{equation}
+K(\mu) = 
+\sum_{n=0}^{\infty}a_s^{n+1}(\mu_b)K^{(n,0)}- \sum_{n=0}^{\infty}\gamma_K^{(n)} 
+\int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s^{n+1}(\mu')\,.
+\end{equation}
+Following the usual counting, to N$^k$LL accuracy the truncation of
+the perturbative series is:
+\begin{equation}
+K(\mu) = 
+\sum_{n=0}^{k-1}a_s^{n+1}(\mu_b)K^{(n,0)}- \sum_{n=0}^{k}\gamma_K^{(n)} 
+\int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s^{n+1}(\mu')\,,
+\end{equation}
+such that at LL one has:
+\begin{equation}
+K_{\rm LL}(\mu) =  - \gamma_K^{(0)}
+\int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s(\mu')\,,
+\label{eq:KatLL}
+\end{equation}
+at NLL:
+\begin{equation}
+  K_{\rm NLL}(\mu) = 
+  a_s(\mu_b)K^{(0,0)}- \gamma_K^{(0)} 
+  \int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s(\mu')-\gamma_K^{(1)} 
+  \int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s^{2}(\mu')\,,
+\label{eq:KatNLL}
+\end{equation}
+at NNLL:
+\begin{equation}
+K_{\rm NNLL}(\mu) = 
+  a_s(\mu_b)K^{(0,0)}+a_s^2(\mu_b)K^{(1,0)}- \gamma_K^{(0)} 
+  \int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s(\mu')-\gamma_K^{(1)} 
+  \int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s^{2}(\mu') -\gamma_K^{(2)} 
+  \int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s^{3}(\mu')\,,
+\label{eq:KatNNLL}
+\end{equation}
+and so on. The question now boils down to computing analytically the
+integrals of different powers of $a_s$. To do so, we need to use the
+analytic solution of the running of the strong coupling. This can be
+done by using the $g$-function approach developed in
+Ref.~\cite{Bertone:2022sso} that is such that, using $a_s(\mu_b)$ as
+boundary condition, the N$^k$LL evolution reads:
+\begin{equation}
+a_s^{{\rm N}^{k}{\rm LL}}(\mu') = a_s(\mu_b)\sum_{l=0}^{k}a_s^l(\mu_b) g_{l+1}^{(\beta)}(\lambda)\,,
+\end{equation}
+with the $g$-functions relevant up to NNLL given by:
+\begin{equation}
+\begin{array}{rcl}
+g_1^{(\beta)}(\lambda)&=&\displaystyle \frac{1}{1-\lambda}\,,\\
+\\
+g_2^{(\beta)}(\lambda)&=&\displaystyle -\frac{b_1\ln(1-\lambda)}{(1-\lambda)^2}\,,\\
+\\
+g_3^{(\beta)}(\lambda)&=&\displaystyle \frac{b_2\lambda-b_1^2\left(\lambda+\ln\left(1-\lambda\right)-\ln^2\left(1-\lambda\right)\right)}{(1-\lambda)^3} \,,\\
+\end{array}
+\end{equation}
+where:
+\begin{equation}
+  \lambda = a_s(\mu_b)\beta^{(0)}\ln\left(\frac{\mu'}{\mu_b}\right)\,,
+\end{equation}
+and $b_n=\beta^{(n)}/\beta^{(0)}$. Since the integration variable only
+appears through $\lambda$, it is convenient to make a change of
+variable and, with a little abuse of notation, rewrite the integrals
+as follows:
+\begin{equation}
+\int_{\mu_b}^{\mu}\frac{d\mu'}{\mu'} a_s^{p}(\mu') =
+\frac{1}{a_s(\mu_b)\beta^{(0)}}\int_0^{\lambda_\mu} d\lambda\,a_s^{p}(\lambda)\,,
+\end{equation}
+with:
+\begin{equation}
+  \lambda_\mu = a_s(\mu_b)\beta^{(0)}\ln\left(\frac{\mu}{\mu_b}\right)\,.
+\end{equation}
+At LL, we can plug the LL solution of the strong coupling into
+Eq.~(\ref{eq:KatLL}) producing:
+\begin{equation}
+K_{\rm LL}(\mu) =\frac{\gamma_K^{(0)}}{\beta^{(0)}}\ln(1-\lambda_\mu)\,.
+\end{equation}
+At NLL, we plug the NLL solution of the strong coupling into the first
+integral of Eq.~(\ref{eq:KatNLL}) and the LL solution into the second
+integral finding:
+\begin{equation}
+  K_{\rm NLL}(\mu) =K_{\rm LL}(\mu)+
+  a_s(\mu_b)\left[K^{(0,0)} + \frac{b_1\gamma_K^{(0)}}{\beta^{(0)}}\frac{\lambda_\mu+\ln(1-\lambda_\mu)}{1-\lambda_\mu}-
+  \frac{\gamma_K^{(1)}}{\beta^{(0)}}\frac{\lambda_\mu}{1-\lambda_\mu}\right]\,.
+\end{equation}
+At NNLL, following the same pattern, we find:
+\begin{equation}
+\begin{array}{rcl}
+  K_{\rm NNLL}(\mu) &=& K_{\rm NLL}(\mu)\\
+\\
+&+&\displaystyle
+  a_s^2(\mu_b)\bigg[K^{(1,0)} 
+- \frac{b_2\gamma_K^{(0)}}{\beta^{(0)}}\frac{\lambda_\mu^2}{2(1-\lambda_\mu)^2}
++ \frac{b_1^2\gamma_K^{(0)}}{\beta^{(0)}}\frac{\lambda_\mu^2-\ln^2(1-\lambda_\mu)}{2(1-\lambda_\mu)^2}\\
+\\
+&+&\displaystyle
+    \frac{b_1\gamma_K^{(1)}}{\beta^{(0)}}\frac{2\ln(1-\lambda_\mu)-\lambda_\mu(\lambda_\mu-2)}{2(1-\lambda_\mu)^2}+
+\frac{\gamma_K^{(2)}}{\beta^{(0)}} \frac{\lambda_\mu(\lambda_\mu-2)}{2(1-\lambda_\mu)^2}
+\bigg]\,.
+\end{array}
+\end{equation}
+It is clear that to N$^k$LL this generalises to:
+\begin{equation}
+  K_{{\rm N}^k{\rm LL}}(\mu) = \sum_{n=0}^k a_s^n(\mu_b)g_{n}^{(K)}(\lambda_\mu)\,,
+\end{equation}
+where the appropriate $g$-functions up to NNLL can be read off from
+the calculations above.
+
 \section{Analytic perturbation theory}
 
 The fact highlighted above that the solution to all other RGEs

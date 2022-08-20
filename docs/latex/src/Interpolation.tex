@@ -70,16 +70,16 @@ Langrange polynomials do not enjoy the smoothness of splines, they
 enjoy a number of very useful properties that allow extending the use
 of Lagrange polynomials from just interpolation to derivation and
 integration. In the following, the interpolation strategy is detailed
-along with its implementation and applications {\tt APFEL++}.
+along with its implementation and applications in {\tt APFEL++}.
 
 \section{Lagrange interpolation}\label{sec:LagrangeInterpolation}
 
 In this section we will derive a general expression for the Lagrange
-interpolating functions $w$. These functions are ubiquitous in {\tt
-  APFEL++} in that they are used, not only for simple interpolations,
+interpolating functions $w$. These functions are ubiquitous in
+{\tt APFEL++} in that they are used, not only for simple interpolations,
 but also for computing convolutions, integrals in general, and also
 derivatives. It is then important to give them a thorough derivation
-in terms of Lagrange polynomial and to understand how they behave upon
+in terms of Lagrange polynomials and to understand how they behave upon
 derivation and integration.
 
 Suppose one wants to interpolate the test function $g$ in the point
@@ -166,7 +166,7 @@ from zero, reducing (often dramatically) the amount of sums required
 to carry out an interpolation. The range of $\beta$ is easily
 determined by observing that in Eq.~(\ref{particularCaseTheta}) the
 summation extends on the nodes between $x_\alpha$ and
-$x_{\alpha+k}$. But since $\beta$ is defined like $\alpha+i$ this
+$x_{\alpha+k}$. But since $\beta$ is defined as $\alpha+i$, this
 exactly defines the range in $\beta$:
 \begin{equation}
 \alpha(x) \leq \beta \leq \alpha(x) + k\,,
@@ -198,8 +198,8 @@ In most of the applications within {\tt APFEL++} the assumption in
 Eq.~(\ref{eq:assumption1}) is used. However, sometimes it may be
 useful to release this assumption. A situation in which this is
 advantageous is in the presence of non-smooth or discontinuos
-functions (such as PDFs and FFs as function of the factorisation scale
-$\mu$ in correspondence of the heavy-quark thresholds). When
+functions (such as PDFs and FFs as functions of the factorisation
+scale $\mu$ in correspondence of the heavy-quark thresholds). When
 interpolating these functions one should not interpolate over the
 discontinuities. To do so and yet retain a given interpolation degree,
 one can release the assumption in
@@ -339,7 +339,7 @@ are piecewise. In particular, while they are continuous in
 correspondence of the nodes of the grid, their first derivative is
 not. As a consequence, the result of the numerical integrals in
 Eqs.~(\ref{eq:monodim}) and~(\ref{eq:bidim}) may be inaccurate. To
-overcome this problem, it is sufficient to split the integrals in
+overcome this problem, it is sufficient to split the integrals into
 sub-integrals over the intervals delimited by two consecutive
 nodes. Using Eq.~(\ref{eq:limits}), it is easy to see that, for an
 interpolation of degree $k$, one needs to compute $k+1$ integrals over
@@ -368,9 +368,9 @@ differential-equation system:
 \right.\,,
 \label{eq:diffeqlagpol}
 \end{equation}
-whose solution is Eq.~(\ref{eq:LagPoly}). This allows us to compute the
-derivative of the test function $g$ in Eq.~(\ref{eq:limitedsum}) only
-knowing its values on the grid points as: 
+whose solution is Eq.~(\ref{eq:LagPoly}). This allows us to compute
+the derivative of the test function $g$ in Eq.~(\ref{eq:limitedsum})
+by only knowing its values on the grid points as:
 \begin{equation}
   \frac{dg}{dx} =
   \sum_{\beta=\alpha(x)}^{\alpha(x)+k}\mathcal{D}_\beta^{(k)}(x)
@@ -389,7 +389,7 @@ It should be pointed out that, due to the discontinuity of the
 derivative of the interpolation functions on the grid nodes, numerical
 derivation through Eq.~(\ref{DerGeneralCase2}) does not work when $x$
 coincides with a grid node. This problem can be overcome by simply
-slightly displacing the value of $x$ in case in falls on a grid node.
+slightly displacing the value of $x$ in case it falls on a grid node.
 
 Eq.~(\ref{eq:diffeqlagpol}) can also be used to compute integrals of
 the function $g$. In particular, suppose we want to compute the
@@ -671,8 +671,8 @@ want to compute:
 \end{array}
 \end{equation}
 As in the case of $t=0$, each of the integrals above has a constant
-value of $\alpha(y)$ and $t(y)$ so that sum over $\beta$ and the
-integral sign can be exchanged:
+value of $\alpha(y)$ and $t(y)$ so that sum over $\beta$ and integral
+signs can be exchanged:
 \begin{equation}
 \begin{array}{rcl}
 I(a,b) &=&\displaystyle  

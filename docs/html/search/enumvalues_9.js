@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['pgg_0',['PGG',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a92a85eba6acccd6cf23b5059be4a7946',1,'apfel::EvolutionBasisQCD']]],
-  ['pgq_1',['PGQ',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a50e295396071e5f694cb5f4c77c330b6',1,'apfel::EvolutionBasisQCD']]],
-  ['pnsm_2',['PNSM',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a10c9ad40a7680ef8811a66a0b27553ac',1,'apfel::EvolutionBasisQCD']]],
-  ['pnsp_3',['PNSP',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a780c887bda77b31b4230e9bfe5fbc231',1,'apfel::EvolutionBasisQCD']]],
-  ['pnsv_4',['PNSV',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8ace59a3576047e627dddbd8a6b5c663c5',1,'apfel::EvolutionBasisQCD']]],
-  ['pol_5',['POL',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792a7b42cb47c3de86051d84bb53cd1b3c9b',1,'apfel::EvolutionSetup']]],
-  ['pole_6',['POLE',['../structapfel_1_1EvolutionSetup.html#adbf330a722f8daccfa1c3343204e8b0bad3c4deba2bbb616bebc23a675d828e19',1,'apfel::EvolutionSetup']]],
-  ['pqg_7',['PQG',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a3dd95b1224451bf978ce364aae5a2a20',1,'apfel::EvolutionBasisQCD']]],
-  ['pqq_8',['PQQ',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a55f1f6a7011dc376312e91d67b11224d',1,'apfel::EvolutionBasisQCD']]]
+  ['nll_0',['NLL',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446a34582b355410694f2355d80af25b1288',1,'apfel']]],
+  ['nllp_1',['NLLp',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446a0e7d1540bc320138a315f0782f9b855e',1,'apfel']]],
+  ['nnll_2',['NNLL',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446a8cb9e49b56b78490614921ffb7bd2672',1,'apfel']]],
+  ['nnllp_3',['NNLLp',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446adfc29ff39675e3cece6122543a35a06f',1,'apfel']]],
+  ['nnnll_4',['NNNLL',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446a949a7f277ba11f30498415ab0951e8cc',1,'apfel']]],
+  ['nnnllp_5',['NNNLLp',['../namespaceapfel.html#a8c509ac51bd27e1f97b8e5cb520df446a81f679d71cd354cff5ab9304c9ddf9cb',1,'apfel']]]
 ];

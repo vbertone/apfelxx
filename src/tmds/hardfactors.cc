@@ -55,7 +55,7 @@ namespace apfel
   //_________________________________________________________________________
   double H2SIDIS(int const& nf)
   {
-    return 2 * CF * ( CF * ( 511. / 8. + 13 * zeta2 - 30 * zeta3 + 39 * zeta4 / 2 ) +
+    return 2 * CF * ( CF * ( 511. / 8. + 13 * zeta2 - 30 * zeta3 - 39 * zeta4 / 2 ) +
                       CA * ( - 51157. / 648. - 337 * zeta2 / 18 + 313 * zeta3 / 9 + 22 * zeta4 ) +
                       TR * nf * ( 4085. / 162. + 46 * zeta2 / 9 + 4 * zeta3 / 9 ) );
   }

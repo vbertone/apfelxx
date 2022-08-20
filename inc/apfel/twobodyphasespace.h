@@ -13,8 +13,8 @@ namespace apfel
    * production. The relevant process is:<br>
    * 		&gamma;(q) &rarr; l<SUP>+</SUP>(k<SUB>1</SUB>) + l<SUP>-</SUP>(k<SUB>2</SUB>) <br>
    *  with:<br>
-   * 		k<SUB>T,1(2)</SUB> > p<SUB>T,min</SUB><br>
-   * 		|&eta;<SUB>1(2)</SUB>| < &eta;<SUB>max</SUB><br>
+   * 		k<SUB>T,1(2)</SUB> > p<SUB>T,min,1(2)</SUB><br>
+   * 		< &eta;<SUB>min</SUB><br> &eta;<SUB>1(2)</SUB> < &eta;<SUB>max</SUB><br>
    */
   class TwoBodyPhaseSpace
   {

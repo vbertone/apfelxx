@@ -74,7 +74,7 @@ apply in the presence of heavy-quark masses or when considering
 
 The general structure of the integrals considered in {\tt APFEL++} has
 the form of a Mellin convolution between an \textit{operator} $O$,
-this is a potentially complicated known function such as a splitting
+that is a potentially complicated known function such as a splitting
 function or a partonic cross section,\footnote{More precisely, $O$ is
   in general a distribution that may contain $\delta$ functions and
   $+$-distributions.} and a \textit{distribution} function $d$, as for
@@ -146,24 +146,32 @@ Eq.~(\ref{eq:Genconv2}) becomes:
 \begin{equation}
   I(x_\beta,\eta)=  \sum_{\alpha=0}^{N_x} \overline{d}_\alpha \underbrace{\left[\eta\int_{c/\eta}^{d/\eta} dz\,
   O\left(z,\eta\right)\,w_{\alpha}^{(k)}\left(\frac{x_\beta}{\eta
-      z}\right)\right]}_{\Gamma_{\alpha\beta}}\,.
+      z}\right)\right]}_{\Gamma_{\beta \alpha}}=\sum_{\alpha=0}^{N_x} \Gamma_{\beta \alpha}\overline{d}_\alpha\,.
 \label{eq:Genconv3}
 \end{equation}
 To summarise, Eq.~(\ref{eq:Genconv3}) allows one to compute the
 integral $I$ on the nodes of a given grid as a weighted sum of the
-values of distribution $d$ on the nodes themselves. The weights are
-given by the appropriate integral of the operator $O$ and the
+values of the distribution $d$ on the nodes themselves. The weights
+are given by the appropriate integral of the operator $O$ and the
 interpolating functions $w_{\alpha}^{(k)}$. The value of $I$ for a
 generic value of $x$ can finally be obtained by interpolation using a
-formula similar to Eq.~(\ref{eq:Interpolation}). Importantly,
-Eq.~(\ref{eq:Genconv3}) provides a fast way of computing convolution
-integrals. Indeed, the weights $\Gamma_{\alpha\beta}$ can be
-precomputed and stored once and for all and the integral $I$ can be
-quickly computed with different distributions $d$ by simply taking the
-weighted average.
+formula similar to Eq.~(\ref{eq:Interpolation}). The interpolation can
+be manipulated as follows:
+\begin{equation}
+I(x,\eta) = \sum_{\beta=0}^{N_x} w_\beta^{(k)}(x) I(x_\beta,\eta) = \sum_{\alpha=0}^{N_x}\underbrace{\left[\sum_{\alpha=0}^{N_x} w_\beta^{(k)}(x) \Gamma_{\beta \alpha}\right]}_{g_\alpha(x)}\overline{d}_\alpha=\sum_{\alpha=0}^{N_x}g_\alpha(x)\overline{d}_\alpha\,.
+\end{equation}
+Therefore, the operator $\Gamma_{\beta\alpha}$ itself can be
+interpolated in $x$ over the first index $\beta$ thus obtaining the
+distribution $g_\alpha(x)$ that can ``contracted'' with the
+distribution $\overline{d}_\alpha$ to obtain the integral $I$ in
+$x$. In conclusion, Eq.~(\ref{eq:Genconv3}) provides a fast way of
+computing convolution integrals. Indeed, the weights
+$\Gamma_{\beta\alpha}$ can be precomputed and stored once and for all
+and the integral $I$ can be quickly computed with different
+distributions $d$ by simply taking a weighted sum.
 
 We now need an operational way to compute the weights
-$\Gamma_{\alpha\beta}$. To do so, it is necessary to know the general
+$\Gamma_{\beta\alpha}$. To do so, it is necessary to know the general
 structure of the operator $O$. Quite generally, the operator $O$
 splits as follows:
 \begin{equation}
@@ -175,11 +183,11 @@ where $R$ and $S^{(i)}$ are a regular functions at $z=1$, that is:
 \begin{equation}
 R(1,\eta) =  \lim_{z\rightarrow 1} R(z,\eta) = K(\eta)\quad\mbox{and}\quad S^{(i)}(1,\eta) =  \lim_{z\rightarrow 1} S^{(i)}(z,\eta) = J^{(i)}(\eta)\,,
 \end{equation}
-being $K$, $J^{(i)}$, and $L$ a finite function of $\eta$. The
+being $K$, $J^{(i)}$, and $L$ finite functions of $\eta$. The
 functions $P^{(i)}$ are instead singular at $z=1$ and non-integrable
 in the limit $\eta\rightarrow1$ and thus are regularised through the
 $+$-prescription. Plugging Eq.~(\ref{eq:CoeffFuncs}) into the
-definition of $\Gamma_{\alpha\beta}$ in Eq.~(\ref{eq:Genconv3}) and
+definition of $\Gamma_{\beta\alpha}$ in Eq.~(\ref{eq:Genconv3}) and
 making use of the definition of $+$-prescription gives:
 \begin{equation}
 \begin{array}{rcl}
@@ -208,7 +216,7 @@ These integrals can, most of the times, be computed analytically.
 
 Eqs.~(\ref{eq:FinalExpression})-(\ref{eq:FinalExpression2}) expose the
 full potential complexity of the task of computing the weights
-$\Gamma_{\alpha\beta}$. However, in many practical applications some
+$\Gamma_{\beta\alpha}$. However, in many practical applications some
 simplifications apply. For example, in the case of the perturbative
 coefficients of the ($\overline{\mbox{MS}}$) splitting functions there
 are two simplications: the first is that $\eta=1$, the second is that
@@ -235,11 +243,11 @@ dz\left\{R\left(z\right)w_{\alpha}^{(k)}\left(\frac{x_\beta}{z}\right)+\frac{S}{
 \label{eq:SplittingFunctions}
 \end{equation}
 
-The same kind of simplifications apply to the case of the perturbative
-Zero-Mass (ZM) coefficient functions with the only exception that the
-sum over $i$ extends to more terms depending on the perturbative
-order. For example at $\mathcal{O}(\alpha_s)$, $i.e.$ at NLO, the
-general form of the coefficient functions reads:
+The same kind of simplifications applies to the case of the
+perturbative Zero-Mass (ZM) coefficient functions with the only
+exception that the sum over $i$ extends to more terms depending on the
+perturbative order. For example at $\mathcal{O}(\alpha_s)$, $i.e.$ at
+NLO, the general form of the coefficient functions reads:
 \begin{equation}
 \begin{array}{rcl}
   \Gamma_{\beta\alpha} &=&\displaystyle \int_{c}^{d}
@@ -253,8 +261,8 @@ general form of the coefficient functions reads:
 \label{eq:ZMCoeffFunctions}
 \end{equation}
 
-Thing get more complicated when considering massive coefficient
-functions. In this case, the role of $\eta$ is played by the ration
+Things get more complicated when considering massive coefficient
+functions. In this case, the role of $\eta$ is played by the ratio
 $m/Q$, where $m$ is the mass of the quark and $Q$ the hard scale. In
 addition, the $+$-prescripted contributions can become more
 convoluted.
@@ -292,13 +300,13 @@ alternative that we just decided not to pursue.
 
 \subsection{Double convolutions}
 
-The technique discussed above to compute convolution integrals as a
+The technique discussed above to compute convolution integrals as
 weighted sums of a given input distributions $d$ can be, under certain
 circumstances, generalised to convolution integrals involving
 \textit{two} distributions. Relevant examples are the Drell-Yan (DY)
 and the semi-inclusive deep-inelastic scattering (SIDIS) cross
 sections integrated over the transverse momentum of the virtual
-boson. In these cases the cross section is proportional to a double
+boson. In these cases the cross section is proportional to double
 convolutions between partonic cross sections and a pair of
 non-perturbative distributions. The general form of this double
 convolution is:
@@ -325,7 +333,7 @@ O(y_1,y_2) \left[\frac{x_\delta}{y_1}d^{(1)}\left(\frac{x_\delta}{y_1}\right)\ri
 \end{array}
 \label{eq:DoubleZMconv}
 \end{equation}
-In Eq.~(\ref{eq:DoubleZMconv}) we have assumes that there are no mass
+In Eq.~(\ref{eq:DoubleZMconv}) we have assumed that there are no mass
 corrections and thus the convolutions take the simplest form. In the
 case of double convolutions, the operator $O$ is a function of two
 variables, $y_1$ and $y_2$, and, as in the case of the single
@@ -409,7 +417,7 @@ as:
   \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
   \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
 \end{equation}
-In general terms, we assume that it is always be possible to write an
+In general terms, we assume that it is always possible to write an
 object of the kind of $\Theta^{\beta\delta,\alpha\gamma}$ as series of
 bilinear terms:
 \begin{equation}
@@ -560,7 +568,7 @@ The structure functions $F_2$ and $F_L$ are given at NLO by:
 where $\{q,g\}$ are the quark and gluon PDFs and $\{D_q,D_g\}$ are the
 quark and gluon FFs, $e_q$ is the electric charge of the quark $q$ and
 $\{C^{2,L}_{qq},C^{2,L}_{qg},C^{2,L}_{gq}\}$ are the relevant partonic
-cross sections. The partonic cross sections allow for a perturbative
+cross sections. The partonic cross sections admit a perturbative
 expansion in power of $\alpha_s$:
 \begin{equation}
 C = \sum_{n=0} \left(\frac{\alpha_s}{4\pi}\right)^nC^{(n)}
@@ -694,7 +702,7 @@ C_{qg}^{2,(1)} &:&\displaystyle {\rm RL}(x) = \left[x^2+(1-x)^2\right]
    R_2^{(2)}(z) = \frac1{z}\right\}\,.
 \end{array}
 \end{equation}
-Analogously, for the only LO partonic cross sections we find that:
+Analogously, for the LO partonic cross sections we find that:
 \begin{equation}
 \begin{array}{rcl}
 C_{qq}^{2,(0)} &:& \displaystyle {\rm LL} =1 \,.
@@ -902,8 +910,8 @@ possible solution to this problem is to increase the density in a
 stepwise fashion as $x$ gets closer to one. This produces locally
 logarithmically distributed grids that allow one to exploit the
 symmetry discussed above while making the grid denser, and thus more
-accurate, at large $x$. The implementation of this procedure in {\tt
-  APFEL++} is achieved by means of \textit{locked} subgrids. In
+accurate, at large $x$. The implementation of this procedure in
+{\tt APFEL++} is achieved by means of \textit{locked} subgrids. In
 practice, one starts with a logarithmic grid with a given lower bound,
 \textit{e.g.}  $x_{\rm min}^{(0)}=10^{-5}$. Starting from a given
 node, $x_{\rm min}^{(1)}$, the density of the grid is increased by
@@ -931,29 +939,30 @@ that the integral extends down to zero and this procedure does not
 make use of the low-$x$ grids, effectively truncating the integral to
 increasingly larger values of $x$ as $x_\beta$ approaches one.
 
-The second problem is that logarithmic grids get down to $x = 0$. This
-is not an issue for the computation in Eq.~(\ref{eq:ZMconv}) because
-the lower integration bound is $x$ and thus, as long as the integral
-in not computed below the lower bound of the grid, this does not
-introduce any inaccuracy. Conversely, this is a potential problem for
-integrals like those in Eq.~(\ref{eq:ZMconvERBL}) that extend down to
-zero for any value of $x$. This may suggest that logarithmic grids are
-not suitable in the first place for integrals as in
-Eq.~(\ref{eq:ZMconvERBL}). However, we observe that GPD-related
-integrands are usually well-behaved around $y=0$ implying that a
-logarithmic grid with lower bound $x_0$ close enough to zero
-(\textit{e.g.}  $x_0=10^{-5}$) is expected to be enough to make the
-contribution to the integral due to the region $y\in[0,x_0]$
-negligibly small. Therefore, also for the computation of
+The second problem is that logarithmic grids cannot get down to
+$x = 0$. This is not an issue for the computation in
+Eq.~(\ref{eq:ZMconv}) because the lower integration bound is $x$ and
+thus, as long as the integral in not computed below the lower bound of
+the grid, this does not introduce any inaccuracy. Conversely, this is
+a potential problem for integrals like those in
+Eq.~(\ref{eq:ZMconvERBL}) that extend down to zero for any value of
+$x$. This may suggest that logarithmic grids are not suitable in the
+first place for integrals as in Eq.~(\ref{eq:ZMconvERBL}). However, we
+observe that GPD-related integrands are usually well-behaved around
+$y=0$ implying that a logarithmic grid with lower bound $x_0$ close
+enough to zero (\textit{e.g.}  $x_0=10^{-5}$) is expected to be enough
+to make the contribution to the integral due to the region
+$y\in[0,x_0]$ negligibly small. Therefore, also for the computation of
 Eq.~(\ref{eq:ZMconvERBL}), we stick to logarithmically distributed
 grids which allows us to use the same class for constructing and
 managing grids developed to compute Eq.~(\ref{eq:ZMconv}).
 
-In addition, GPD-related integrals, due to the explicit dependence on
-the external variable of the operator (see Eq.~(\ref{eq:ZMconvERBL})),
-do not enjoy $\beta-\alpha$ symmetry discussed above. This is a major
-limitation in that it does not allow us to reduce the number of
-integrals to be computed.
+In addition, GPD-related integrals, due to the explicit dependence of
+the integrand on the external variable of the operator (see
+Eq.~(\ref{eq:ZMconvERBL})), do not enjoy the translational
+$\beta-\alpha$ symmetry discussed above. This is a major limitation in
+that it does not allow us to reduce the number of integrals to be
+computed.
 
 These observation, along with the discussion on the interpolation
 grid, leads us to take an approach in which the operator is computed
@@ -964,7 +973,7 @@ joint grid.
 Using the usual interpolation formula gives us that the integral in
 Eq.~(\ref{eq:ZMconvERBL}) is computed on the grid as follows:
 \begin{equation}
-J(x_\beta) = \sum_{\alpha=}^{N_x-1}J_{\beta\alpha}\overline{d}_\alpha\,.
+J(x_\beta) = \sum_{\alpha=0}^{N_x-1}J_{\beta\alpha}\overline{d}_\alpha\,.
 \end{equation}
 with $\overline{d}_\alpha = x_\alpha d(x_\alpha)$ and the assumption
 $d(1)=0$, and with:
@@ -1000,7 +1009,7 @@ upon integration in the following way:
 \label{eq:pluplusprescription}
 \end{equation}
 However, differently from the $+$-distribution, the $++$-distribution
-does not regularise an otherwise divergen integral. It rather
+does not regulate an otherwise divergent integral. It rather
 rearranges the integrand in such a way that it is finite over the
 integration range (the divergence at $y=1$ is no longer there) making
 it numerically treatable. We now need to devise a way to compute this
@@ -1012,7 +1021,7 @@ I_{\beta\alpha}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\
 that need to be treated with care due to the support region of the
 interpolation functions $w_\alpha$. In particular, we know that the
 function $w_\alpha(x_\beta/y)$ has support
-$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{\alpha-\kappa}]$, so that:
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{{\rm max}[0,\alpha-\kappa]}]$, so that:
 \begin{equation}
 \begin{array}{rcl}
 I_{\beta\alpha}&=&\displaystyle
@@ -1042,7 +1051,7 @@ I_{\beta\alpha}&=&\displaystyle
 \end{equation}
 with:
 \begin{equation}
-c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}\,,
+c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}=\frac{x_\beta}{x_{\rm{max}[0,\alpha-\kappa]}}\,,
 \end{equation}
 and where we have used the fact that $d\geq 1$ for $\beta=\alpha$ and,
 according to the Cauchy principal-value prescription:
@@ -1051,14 +1060,122 @@ according to the Cauchy principal-value prescription:
 \end{equation}
 where $a$ could also be $\infty$.
 
+\subsubsection{Principal-valued integrals in the DGLAP region}
+
+When considering some specific GPD-related functions, such as the
+matching functions for generalised transverse-momentum-dependent
+(GTMD) distributions on GPDs, another kind of principal-valued
+integrals appear. They look like this:
+\begin{equation}
+  J={\rm PV}\int_x^{1}dy\,\frac{f(y)}{1-\kappa y}\equiv
+  \int_x^{1}dy\left(\frac{1}{1-\kappa y}\right)_{\rm PV}f(y)\,
+\end{equation}
+with $\kappa = \xi/x$ in the region where $x<\xi<1$, that corresponds
+to $\kappa > 1$ and $\kappa < 1/x$, such that the singularity of the
+integrand at $y = 1/\kappa$ is within the integration interval. As
+done above, we can make this kind of integrals numerically amenable by
+adding and subtracting the singularity:
+\begin{equation}
+  f\left(\frac1\kappa\right)\int_{1/\kappa}^{1}dy\,\frac{1}{1-\kappa y}\,.
+\end{equation}
+After some algebra, one finds:
+\begin{equation}
+  J = \int_x^1\frac {dy}{1-\kappa y}
+  \left[f(y)-f\left(\frac{1}{\kappa}\right)\left(1+\theta\left(\kappa y-1\right)\frac{1-\kappa
+        y}{\kappa
+        y}\right)\right]+f\left(\frac{1}{\kappa}\right)\frac{1}{\kappa}\ln\left(\frac{\kappa(1-\kappa
+      x)}{\kappa-1}\right)\,.
+\label{eq:PVprescriptionxi}
+\end{equation}
+
+In order to carry out the usual interpolation procedure, we need to
+compute integrals as this:
+\begin{equation}
+J_{\beta\alpha}=\int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right) \,.
+\end{equation}
+with $\kappa_\beta = \xi/x_\beta>1$. As above, the support region of
+the interpolation functions $w_\alpha(x_\beta/y)$, that is
+$y\in [x_\beta/x_{\alpha+1},x_\beta/x_{{\rm max}[0,\alpha-\kappa]}]\equiv[c,d]$,
+requires some care. In particular, considering that the pole of the
+integrand is at $y=1/\kappa_\beta$ and that $c<d$, if
+$c>1/\kappa_\beta$ or if $d<1/\kappa_\beta$, one needs not use the
+principal-value prescription because the pole is outside the
+integration range. On the contrary, if $c<1/\kappa_\beta<d$, the pole
+is within the integration range and thus the principal-value
+prescription has to be used. In view of this analysis, we can
+decompose the integrals $J_{\beta\alpha}$ in two components according
+to whether the pole of the integrand falls into the integration range
+or not:
+\begin{equation}
+\begin{array}{rcl}
+J_{\beta\alpha}&=&\displaystyle \left[\theta(\xi-x_{\alpha+1})+\theta(x_{{\rm
+  max}[0,\alpha-\kappa]}-\xi)\right]\int_{x_{\beta}}^{1}\frac{dy}{1-\kappa_\beta
+  y}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+\\
+&+&\displaystyle \theta(x_{\alpha+1}-\xi)\theta(\xi -x_{{\rm max}[0,\alpha-\kappa]}) \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\,.
+\end{array}
+\end{equation}
+Now, the first integral in the r.h.s. can be computed as is as the
+integrand is regular, while the second integral requires the
+principal-value prescription in Eq.~(\ref{eq:PVprescriptionxi}), yielding:
+\begin{equation}
+\small
+\begin{array}{rcl}
+  &&\displaystyle \int_{x_{\beta}}^{1}dy\,\left(\frac{1}{1-\kappa_\beta y}\right)_{\rm
+                     PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+  \\
+                 &=&\displaystyle \int_{x_\beta}^1\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]+w_{\alpha}\left(\xi\right)\frac{1}{\kappa_\beta}\ln\left(\frac{\kappa_\beta(1-\kappa_\beta x_\beta)}{\kappa_\beta -1 }\right)\\
+  \\
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)\bigg[\frac{1}{\kappa_\beta}\ln\left(\frac{\kappa_\beta(1-\kappa_\beta
+                     x_\beta)}{\kappa_\beta -1 }\right)-\int_{d}^1\frac {dy}{1-\kappa_\beta y}
+                     \left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta y}\right) \\
+\\
+  &-&\displaystyle \int_{x_\beta}^c\frac {dy}{1-\kappa_\beta y}
+                     \left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta y}\right)\bigg]\\
+  \\
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)
+                     \frac{1}{\kappa_\beta}\bigg[\ln\left(\frac{\kappa_\beta(1-\kappa_\beta
+                     x_\beta)}{\kappa_\beta -1
+                     }\right)-\int_{\kappa_\beta d}^{\kappa_\beta}\frac {dz}{1-z}
+                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right) \\
+\\
+  &-&\displaystyle \int_{\kappa_\beta
+      x_\beta}^{\kappa_\beta c}\frac {dz}{1-z}
+                     \left(1+\theta\left(z-1\right)\frac{1-z}{z}\right)\bigg]\\
+  \\
+                 &=&\displaystyle \int_c^d\frac {dy}{1-\kappa_\beta y}
+                     \left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\left(1+\theta\left(\kappa_\beta y-1\right)\frac{1-\kappa_\beta
+                     y}{\kappa_\beta
+                     y}\right)\right]\\
+  \\
+                 &+&\displaystyle
+                     w_{\alpha}\left(\xi\right)
+                     \frac{1}{\kappa_\beta}\left[\ln\left(1-\kappa_\beta c\right)-\ln\left(1-k_\beta\frac{1}{k_\beta^2 d}\right)\right]
 
 
 
-
-
-
-
-
+\,.
+\end{array}
+\end{equation}
 
 
 

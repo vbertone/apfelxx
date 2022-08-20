@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs: 
+  codecov: codecov/codecov@3.1.1
 jobs:
   build:
     machine:
@@ -7,5 +9,11 @@ jobs:
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install g++ cmake valgrind
-      - run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fsanitize=address -std=c++17" . && make -j8
+      - run: cmake -DCMAKE_CXX_FLAGS="-g -fsanitize=address -std=c++17" . && make -j8
       - run: ctest -V
+#      - codecov/upload:
+#          file: coverage/coverage-final.json
+#workflows:
+#  upload-to-codecov:
+#    jobs:
+#      - build

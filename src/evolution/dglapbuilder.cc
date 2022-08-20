@@ -1123,7 +1123,8 @@ namespace apfel
         const double thr = obj.second.Threshold;
         if ((int) Thresholds.size() < nf)
           Thresholds.resize(nf);
-        Thresholds[nf-1] = thr;
+        if (nf > 0)
+          Thresholds[nf-1] = thr;
       }
 
     // Create set of initial distributions.

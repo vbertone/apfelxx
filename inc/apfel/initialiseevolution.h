@@ -39,8 +39,9 @@ namespace apfel
      * @brief The InitialiseEvolution constructor.
      * @param setup: the EvolutionSetup data structure encapsulate the evolution parameters
      * @param WriteGrid: switch to enable the writing of grids in the LHAPDF format (default: false)
+     * @param GridHeader: part of the LHAPDF grid header that can be set externally (default: empty = use default)
      */
-    InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid = false);
+    InitialiseEvolution(EvolutionSetup const& setup, bool const& WriteGrid = false, std::string const& GridHeader = "");
 
     /**
      * @brief The CheckSetup function checks that the input setup is
@@ -113,6 +114,7 @@ namespace apfel
   private:
     EvolutionSetup                               _setup;        //!< Evolution setup object
     bool                                         _WriteGrid;    //!< Switch to write LHAPDF grids
+    std::string                                  _GridHeader;   //!< Part of the LHAPDF grid header that can be set externally (the format is resposibility of the user)
     std::unique_ptr<const Grid>                  _g;            //!< x-space grid
     std::function<double(double const&)>         _as;           //!< Strong coupling function
     std::map<int, DglapObjects>                  _DglapObj;     //!< Dglap evolution objects

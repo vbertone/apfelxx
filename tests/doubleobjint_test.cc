@@ -36,7 +36,7 @@ int main()
   // functions of x2.
   const double x2min = Q1 / Vs * exp(-y2);
   const double x2max = Q2 / Vs * exp(-y1);
-  const std::function<double(double const&)> x1minf = [=] (double const& x2) -> double { return std::max(pow(Q1 / Vs, 2) / x2, exp(2 * y1) * x2); };
+  const std::function<double(double const&)> x1minf = [=] (double const& x2) -> double { return std::min(1., std::max(pow(Q1 / Vs, 2) / x2, exp(2 * y1) * x2)); };
   const std::function<double(double const&)> x1maxf = [=] (double const& x2) -> double { return std::min(pow(Q2 / Vs, 2) / x2, exp(2 * y2) * x2); };
 
   // Print results

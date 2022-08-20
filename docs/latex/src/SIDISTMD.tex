@@ -429,12 +429,48 @@ denominator should be computed to the same order, \textit{i.e.}
 including up to $\mathcal{O}(\alpha_s)$ in $H$, $\mathcal{C}_{qj}$,
 and $\mathbb{C}_{qj}$, also beyond NNLL.
 
+\section{Sivers and matching onto Qiu-Sterman}
 
+The Sivers TMDs at small values of $b$ results from a collinear
+matching onto the so-called Qiu-Sterman (QS) distribution. The QS is a
+twist-3 collinear distribution. Since the QS $T_i$ depends on two
+longitudinal momentum fractions, in this section we will show that up
+to one-loop accuracy the matching, that in principle entails a
+two-dimensional convolution, can be reduced to a standard
+one-dimensional convolution. We use the formulas from
+Ref.~\cite{Echevarria:2020hpy}. Specifically, the general matching
+reads:
+\begin{equation}
+[C_{qi}\otimes T_{i}](x) =
+\int_x^1\frac{dy_1}{y_1}\int_x^1\frac{dy_2}{y_2} C_{qi}\left(y_1,y_2\right)T_i\left(\frac{x}{y_1}, \frac{x}{y_2}\right)\,,
+\end{equation}
+with the one-loop matching functions being equal to (see Eq.~(A.9) of
+Ref.~\cite{Echevarria:2020hpy}):
+\begin{equation}
+C_{qi}\left(y_1,y_2\right) = \delta_{qi}\delta(1-y_1)
+\delta(1-y_2)-\delta_{qi}\frac{\alpha_s}{4\pi}C_F\frac{\pi^2}{6}\delta(1-y_1)
+\delta(1-y_2)-\delta_{qi}\frac{\alpha_s}{4\pi}\frac{1}{N_C}\delta\left(1-\frac{y_2}{y_1}\right)(1-y_2)\,.
+\label{eq:QSmatching}
+\end{equation}
+Considering that:
+\begin{equation}
+\delta\left(1-\frac{y_2}{y_1}\right) = y_1\delta(y_2-y_1)\,,
+\end{equation}
+one can perform the integration over $y_2$ obtaining
+\begin{equation}
+  [C_{qi}\otimes T_{i}](x) =
+  \int_x^1\frac{dy}{y}\overline{C}_{qi}(y)T_i\left(\frac{x}{y}, \frac{x}{y}\right)
+\end{equation}
+with:
+\begin{equation}
+  \overline{C}_{qi}(y) = \delta_{qi}\delta(1-y)
++\delta_{qi}\frac{\alpha_s}{4\pi}\left[ -\frac{1}{N_C}(1-y) -C_F\frac{\pi^2}{6}\delta(1-y)\right]\,,
+\end{equation}
+thus reducing the matching to a standard one-dimensional Mellin
+convolution.
 
-
-
-
-
-
+\newpage
+\bibliographystyle{ieeetr}
+\bibliography{bibliography}
 
 \end{document}
