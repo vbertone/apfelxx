@@ -376,6 +376,21 @@ namespace apfel
     G1NLO.insert({DISNCBasis::CS,  O11ns});
     G1NLO.insert({DISNCBasis::CG,  O11g});
 
+    // NNLO
+    std::map<int, std::map<int, Operator>> G1NNLO;
+    const Operator O22ps{g, G12ps{}, IntEps};
+    const Operator O22g {g, G12g{},  IntEps};
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O22nsp{g, G12nsp{nf}, IntEps};
+        const Operator O22t = O22nsp + 6 * O22ps;
+        std::map<int, Operator> G1NNLOnf;
+        G1NNLOnf.insert({DISNCBasis::CNS, O22nsp});
+        G1NNLOnf.insert({DISNCBasis::CS,  O22t});
+        G1NNLOnf.insert({DISNCBasis::CG,  O22g});
+        G1NNLO.insert({nf, G1NNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
@@ -400,6 +415,7 @@ namespace apfel
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1NNLO.at(nf)}});
         }
       return FObj;
     };

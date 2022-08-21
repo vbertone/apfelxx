@@ -5,7 +5,6 @@
 //
 
 #include <apfel/apfelxx.h>
-#include <apfel/hpolyweights.h>
 
 int main()
 {
@@ -50,6 +49,11 @@ int main()
     apfel::apf_hplog_(x, nw, &H[0], &H[3], &H[12], &H[39], &H[120], wn1, wn2);
   std::cout << "Calling HPLOG_ " << nc << " times... ";
   t.stop();
+  std::cout << "\n";
+
+  // Testing Nielsen's polylog against Li2
+  std::cout << "Li2(x) = " << apfel::dilog(xx) << std::endl;
+  std::cout << "S_{1,1}(x) = " << apfel::wgplg(1, 1, xx) << std::endl;
   std::cout << "\n";
 
   delete x;
