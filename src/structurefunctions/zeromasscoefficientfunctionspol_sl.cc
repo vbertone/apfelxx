@@ -17,15 +17,15 @@ namespace apfel
   }
   double G41ns::Regular(double const& x) const
   {
-    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x,2) ) * log(x) / ( 1 - x ) + 3 + 2 * x );
+    return 2 * CF * ( - ( 1 + x ) * log(1 - x) - ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 3 + 2 * x );
   }
   double G41ns::Singular(double const& x) const
   {
-    return 2 * CF * ( 2 * log( 1 - x ) - 3 / 2. ) / ( 1 - x );
+    return 2 * CF * ( 2 * log(1 - x) - 3 / 2. ) / ( 1 - x );
   }
   double G41ns::Local(double const& x) const
   {
-    return 2 * CF * ( pow(log(1-x), 2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) );
+    return 2 * CF * ( pow(log(1 - x), 2) - 3 * log(1 - x) / 2 - ( 2 * zeta2 + 9 / 2. ) );
   }
 
   //_________________________________________________________________________________
@@ -45,15 +45,15 @@ namespace apfel
   }
   double G11ns::Regular(double const& x) const
   {
-    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - ( 1 + pow(x,2) ) * log(x) / ( 1 - x ) + 2 + x );
+    return 2 * CF * ( - ( 1 + x ) * log(1 - x) - ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 2 + x );
   }
   double G11ns::Singular(double const& x) const
   {
-    return 2 * CF * ( 2 * log( 1 - x ) - 3 / 2. ) / ( 1 - x );
+    return 2 * CF * ( 2 * log(1 - x) - 3 / 2. ) / ( 1 - x );
   }
   double G11ns::Local(double const& x) const
   {
-    return 2 * CF * ( pow(log(1-x),2) - 3 * log( 1 - x ) / 2 - ( 2 * zeta2 + 9 / 2. ) );
+    return 2 * CF * ( pow(log(1 - x), 2) - 3 * log(1 - x) / 2 - ( 2 * zeta2 + 9 / 2. ) );
   }
 
   //_________________________________________________________________________________
@@ -244,7 +244,7 @@ namespace apfel
                          + 2 * ( 135 + 44 * z2 - 48 * z ) * lnz2 / 3. - 8 * ( 17 - 16 * z ) * lnz * ln1mz
                          + 8 * ( 118 + 3 * z2 - 26 * z ) * lnz / 3. - 4 * ( 44  + 2 * z2 - 53 * z ) * ln1mz
                          - 4 * ( 3 + 4 * z2 + 10 * z ) * zeta3 - 16 * ( 27 + 11 * z2 - 24 * z ) * zeta2 / 3.
-                         + 8 * ( 5 + 2 * z ) * ln1mz * Li21mz + 4 * ( 355 - 367 * z ) / 3. )
+                         + 8 * ( 5 + 2 * z ) * ln1mz * Li21mz + 4 * ( 355 - 367 * z ) / 3. );
            // Erraturm of 1997
            + CF * TR * ( 16 * ( 1 + 2 * z ) * ( 2 * Li21mz + 2 * lnz * ln1mz - lnz2 )
                          + 96 * ( 1 - z ) * ln1mz - ( 144 + 64 * z ) * lnz - 304 * ( 1 - z ) );
