@@ -12,7 +12,7 @@
 int main()
 {
   // Test scale
-  double Mu = 2.;
+  double Mu = 1;
 
   // Reference value of the strong coupling and heavy-quark
   // thresholds.
@@ -47,6 +47,13 @@ int main()
   std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLOg.Evaluate(Mu)  << " (NLO/LO     = " << 100 * asNLOg.Evaluate(Mu) / asLOg.Evaluate(Mu)<< "%)" << std::endl;
   std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLOg.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLOg.Evaluate(Mu) / asNLOg.Evaluate(Mu)<< "%)" << std::endl;
   std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLOg.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLOg.Evaluate(Mu) / asNNLOg.Evaluate(Mu)<< "%)" << std::endl;
+
+  // Ratio between numerical and analytic solutions order by order
+  std::cout << "\nRatio between numerical and analytic solutions:" << std::endl;
+  std::cout << "LO:    " << 100 * asLO.Evaluate(Mu) / asLOg.Evaluate(Mu) << "%"<< std::endl;
+  std::cout << "NLO:   " << 100 * asNLO.Evaluate(Mu) / asNLOg.Evaluate(Mu)<< "%" << std::endl;
+  std::cout << "NNLO:  " << 100 * asNNLO.Evaluate(Mu) / asNNLOg.Evaluate(Mu)<< "%" << std::endl;
+  std::cout << "NNNLO: " << 100 * asNNNLO.Evaluate(Mu) / asNNNLOg.Evaluate(Mu)<< "%" << std::endl;
 
   // Reference value of the QED coupling and heavy-quark
   // thresholds.
