@@ -27,7 +27,7 @@ namespace apfel
     _nsteps(nsteps)
   {
     // Compute squared reference scale.
-    _MuRef2 = pow(MuRef,2);
+    _MuRef2 = pow(MuRef, 2);
 
     // Compute log of the squared final scale.
     _LogMuRef2 = log(_MuRef2);
@@ -73,7 +73,7 @@ namespace apfel
   template<class T>
   T MatchedEvolution<T>::Evaluate(double const& mu) const
   {
-    const double mu2  = pow(mu,2);
+    const double mu2  = pow(mu, 2);
     const double lmu2 = log(mu2);
 
     // Find initial and final number of flavours.

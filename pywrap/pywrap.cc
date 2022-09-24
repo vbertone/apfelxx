@@ -1119,6 +1119,17 @@ PYBIND11_MODULE(apfelpy, m)
                                                             .def("Derivative", &apfel::AlphaQCD::Derivative, "nf"_a, "void"_a, "as"_a)
                                                             .def("betaQCD", &apfel::AlphaQCD::betaQCD, "pt"_a, "nf"_a);
 
+  // Wrappers of "alphaqcdg.h"
+  py::class_<apfel::AlphaQCDg, apfel::MatchedEvolution<double>>(m, "AlphaQCDg")
+                                                             .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, double const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "Thresholds"_a, "pt"_a, "kappa"_a = 1)
+                                                             .def(py::init<double const&, double const&, std::vector<double> const&, int const&, double const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "pt"_a, "kappa"_a = 1)
+                                                             .def("MatchObject", &apfel::AlphaQCDg::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
+                                                             .def("EvolveObject", &apfel::AlphaQCDg::EvolveObject, "nf"_a, "lnmu02"_a, "lnmu2"_a, "as0"_a)
+                                                             .def("g1beta", &apfel::AlphaQCDg::g1beta, "lambda"_a)
+                                                             .def("g2beta", &apfel::AlphaQCDg::g2beta, "nf"_a, "lambda"_a)
+                                                             .def("g3beta", &apfel::AlphaQCDg::g3beta, "nf"_a, "lambda"_a)
+                                                             .def("g4beta", &apfel::AlphaQCDg::g4beta, "nf"_a, "lambda"_a);
+
   // Wrappers of "alphaqed.h"
   py::class_<apfel::AlphaQED, apfel::MatchedEvolution<double>>(m, "AlphaQED")
                                                             .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "LeptThresholds"_a, "QuarkThresholds"_a, "pt"_a, "nsteps"_a = 10)
