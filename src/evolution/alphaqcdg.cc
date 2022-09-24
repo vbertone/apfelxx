@@ -113,6 +113,11 @@ namespace apfel
     const double b2  = - 2 * beta2qcd(nf) / bt0;
     const double b3  = - 2 * beta3qcd(nf) / bt0;
     const double ln1ml = log(1 - lambda);
-    return 0;
+    return ( ( b3 - b2 * b1 ) * lambda - ( pow(b1, 3) - 2 * b2 * b1 + b3 ) * pow(lambda, 2) / 2
+             + ( 2 * b1 * ( pow(b1, 2) - b2 ) * lambda - b2 * b1 ) * ln1ml
+             + pow(b1, 3 ) * ( 5. / 2. - ln1ml ) * pow(ln1ml, 2)
+             + ( 2 * ( pow(b1, 2) - b2 ) * lambda + pow(b1, 2) * ( 5 - 3 * ln1ml ) * ln1ml - b2 ) * bt0 * _lnkappa
+             + b1 * ( - 3 * ln1ml + 5. / 2. ) * pow(bt0 * _lnkappa, 2) - pow(bt0 * _lnkappa, 3)
+           ) / pow(1 - lambda, 4);
   }
 }

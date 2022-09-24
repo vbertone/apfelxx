@@ -3626,12 +3626,15 @@ one can write:
 \left(\sum_{n=0}^\infty b_nx^n\right)^{-1}=\sum_{n=0}^\infty \overline{b}_nx^n\,,
 \end{equation}
 where the coefficients $\overline{b}_n$ can be iteratively determined
-in terms of the coefficients ${b}_n$. The terms up to $x^3$ read:
+in terms of the coefficients ${b}_n$. Considering that $b_0=1$, the
+terms up to $x^4$ read:
 \begin{equation}
 \begin{array}{rcl}
+\overline{b}_0  &=& 1\,,\\
 \overline{b}_1  &=& - b_1\,,\\
 \overline{b}_2  &=& - b_2+b_1^2\,,\\
-\overline{b}_3  &=& - b_3+2b_2b_1-b_1^3\,.
+\overline{b}_3  &=& - b_3+2b_2b_1-b_1^3\\
+\overline{b}_4  &=&  - b_4 + 2 b_1 b_3- 3 b_1^2 b_2 + b_2^2 +b_1^4 \,.
 \end{array}
 \end{equation}
 Plugging this expansion into Eq.~(\ref{eq:intrun}) and solving the
@@ -3710,6 +3713,15 @@ $a_{\rm NNLL}$ that, using Eq.~(\ref{eq:masterf}), reads:
 \end{array}
 \end{equation}
 
+We can also go further and compute the N$^3$LL running:
+\begin{equation}
+a_{{\rm N}^3{\rm LL}}=a_{\rm LL}\left\{1+a_{\rm LL}\left[\overline{b}_1\ln\left(\frac{a_{{\rm
+          N}^{2}{\rm LL}}}{a_0}\right)+\overline{b}_{2}\left(a_{{\rm
+          NLL}}-a_0\right)+\frac{\overline{b}_{3}}{2}\left(a_{\rm
+          LL}^2-a_0^2\right)\right]\right\}^{-1}+\mathcal{O}(a^5)\,,
+\end{equation}
+
+
 \section{Analytic calculation of the Collins-Soper kernel}
 
 In this section, we compute analytically to different logarithmic
@@ -3775,9 +3787,17 @@ with the $g$-functions relevant up to NNLL given by:
 \begin{array}{rcl}
 g_1^{(\beta)}(\lambda)&=&\displaystyle \frac{1}{1-\lambda}\,,\\
 \\
-g_2^{(\beta)}(\lambda)&=&\displaystyle -\frac{b_1\ln(1-\lambda)}{(1-\lambda)^2}\,,\\
+g_2^{(\beta)}(\lambda)&=&\displaystyle -\frac{b_1\ln(1-\lambda)}{(1-\lambda)^2}-\frac{\beta_0\ln\kappa}{(1-\lambda)^2}\,,\\
 \\
-g_3^{(\beta)}(\lambda)&=&\displaystyle \frac{b_2\lambda-b_1^2\left(\lambda+\ln\left(1-\lambda\right)-\ln^2\left(1-\lambda\right)\right)}{(1-\lambda)^3} \,,\\
+g_3^{(\beta)}(\lambda)&=&\displaystyle
+                          \frac{b_2\lambda-b_1^2\left(\lambda+\ln\left(1-\lambda\right)-\ln^2\left(1-\lambda\right)\right)}{(1-\lambda)^3}
++\frac{ b_1(2 \ln \left(1-\lambda\right)- 1) \beta _0\ln\kappa+\beta _0^2 \ln^2\kappa}{(1-\lambda)^3}                          \\
+\\
+g_4^{(\beta)}(\lambda)&=&\displaystyle\frac{(b_3 -b_2 b_1) \lambda -\frac12 (b_1^3 -2b_2 b_1+b_3) \lambda ^2+(2 b_1(b_1^2
+    -b_2 ) \lambda  -b_2 b_1) \ln \left(1-\lambda\right)+b_1^3 (\frac52 -\ln \left(1-\lambda\right)) \ln ^2\left(1-\lambda\right)
+                          }{(1-\lambda)^4}\\
+\\
+&+&\displaystyle \frac{(2 (b_1^2-b_2) \lambda   +b_1^2 (5 -3 \ln \left(1-\lambda\right))\ln \left(1-\lambda\right) - b_2 ) \beta _0\ln\kappa+b_1 (-3 \ln \left(1-\lambda\right)+\frac52) \beta _0^2\ln^2\kappa- \beta _0^3 \ln^3\kappa}{(1-\lambda)^4}\,,
 \end{array}
 \end{equation}
 where:
@@ -3968,7 +3988,7 @@ The combinations are chosen in such a way that all the integrands are ${\cal O}(
 We obtain
 
 \begin{equation}
-g_2(\lambda)=\frac{\bar{B}_1}{\beta _0}\ln(1-\lambda )+\frac{A_1 \beta _1}{\beta _0^3} \left(\frac{\lambda }{1-\lambda }+\frac{1}{2} \log ^2(1-\lambda )+\frac{\log (1-\lambda )}{1-\lambda }\right)-\frac{A_2}{\beta _0^2}\left(\frac{\lambda }{1-\lambda }+\log (1-\lambda )\right).
+g_2(\lambda)=\frac{\bar{B}_1}{\beta _0}\ln(1-\lambda )+\frac{A_1 \beta _1}{\beta _0^3} \left(\frac{\lambda }{1-\lambda }+\frac{1}{2} \ln ^2(1-\lambda )+\frac{\ln (1-\lambda )}{1-\lambda }\right)-\frac{A_2}{\beta _0^2}\left(\frac{\lambda }{1-\lambda }+\ln (1-\lambda )\right).
 \end{equation}
 
 \subsection{$g_{3}$}
@@ -4055,7 +4075,7 @@ The final expression for $g$-functions including renormalisation-scale dependenc
 
 \begin{eqnarray}
 g_1(\lambda)&=&\frac{A_1 (\lambda +\ln(1-\lambda))}{\beta _{0}\lambda}\\
-g_2(\lambda)&=&\frac{\bar{B}_1}{\beta _0}\ln(1-\lambda )+\frac{A_1 \beta _1}{\beta _0^3} \left(\frac{\lambda }{1-\lambda }+\frac{1}{2} \log ^2(1-\lambda )+\frac{\log (1-\lambda )}{1-\lambda }\right)-\frac{A_2}{\beta _0^2}\left(\frac{\lambda }{1-\lambda }+\log (1-\lambda )\right)\nonumber\\&+&\frac{A_1}{\beta _0}\left(\frac{\lambda}{1-\lambda}+\ln(1-\lambda)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)\\
+g_2(\lambda)&=&\frac{\bar{B}_1}{\beta _0}\ln(1-\lambda )+\frac{A_1 \beta _1}{\beta _0^3} \left(\frac{\lambda }{1-\lambda }+\frac{1}{2} \ln ^2(1-\lambda )+\frac{\ln (1-\lambda )}{1-\lambda }\right)-\frac{A_2}{\beta _0^2}\left(\frac{\lambda }{1-\lambda }+\ln (1-\lambda )\right)\nonumber\\&+&\frac{A_1}{\beta _0}\left(\frac{\lambda}{1-\lambda}+\ln(1-\lambda)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)\\
 g_3(\lambda)&=&-\frac{\bar{B}_2}{\beta _0}\frac{\lambda}{(1-\lambda)}+\frac{ \bar{B}_1\beta _1}{\beta _0^2 }\frac{\lambda+\ln(1-\lambda)}{1-\lambda} -\frac{A_3}{2 \beta _0^2}\frac{\lambda ^2}{(1-\lambda)^2}\nonumber\\&+&A_1 \left(\frac{\lambda\left(\beta _1^2 \lambda +\beta _0 \beta _2 (2-3 \lambda)\right)}{2 \beta _0^4 (1-\lambda)^2}+\frac{\beta _1^2 (1-2 \lambda) \ln^2(1-\lambda)}{\left(2 \beta _0^4\right) (1-\lambda)^2}+\left(\frac{\beta _1^2}{\beta _0^4 (1-\lambda)}+\frac{\beta _0 \beta _2-\beta _1^2}{\beta _0^4}\right) \ln(1-\lambda)\right)\nonumber\\&+&\frac{A_2 \beta _1}{\beta _0^3}\left(\frac{\lambda  (3 \lambda -2)}{2 (1-\lambda)^2}-\frac{(1-2 \lambda) \ln(1-\lambda)}{(1-\lambda )^2}\right)-\frac{A_{1}}{2}\frac{\lambda^{2}}{(1-\lambda)^{2}}\ln^{2}\left(\frac{Q^2}{\mu _R^2}\right)\nonumber\\&+&\left(\bar{B}_1\frac{\lambda}{1-\lambda }+\frac{A_2}{\beta _0}\frac{\lambda ^2}{(1-\lambda )^2}+\frac{A_1\beta_1}{\beta _0^2}\left(\frac{\lambda}{1-\lambda}+\frac{(1-2\lambda)\ln(1-\lambda)}{(1-\lambda)^{2}}\right)\right)\ln\left(\frac{Q^2}{\mu _R^2}\right)
 \end{eqnarray}
 
