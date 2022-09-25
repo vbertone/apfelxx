@@ -84,44 +84,9 @@ namespace apfel
      */
     double EvolveObject(int const& nf, double const& lnmu02, double const& lnmu2, double const& as0) const;
 
-    /**
-     * @brief Function required for the LO analytic running of the
-     * strong coupling.
-     * @param lmabda: evolution parameter
-     * @return the g1 function
-     */
-    double g1beta(double const& lambda) const;
-
-    /**
-     * @brief Function required for the NLO analytic running of the
-     * strong coupling.
-     * @param nf: the number of active flavours
-     * @param lmabda: evolution parameter
-     * @return the g2 function
-     */
-    double g2beta(int const& nf, double const& lambda) const;
-
-    /**
-     * @brief Function required for the NNLO analytic running of the
-     * strong coupling.
-     * @param nf: the number of active flavours
-     * @param lmabda: evolution parameter
-     * @return the g3 function
-     */
-    double g3beta(int const& nf, double const& lambda) const;
-
-    /**
-     * @brief Function required for the NNNLO analytic running of the
-     * strong coupling.
-     * @param nf: the number of active flavours
-     * @param lmabda: evolution parameter
-     * @return the g3 function
-     */
-    double g4beta(int const& nf, double const& lambda) const;
-
   private:
     int                                                           const _pt;                    //!< Perturbative order
-    double                                                        const _lnkappa;               //!< Log of the resummation scale parameter
+    double                                                        const _kappa;                 //!< Resummation scale parameter
     std::function<double(bool const&, int const&, double const&)>       _MatchingConditions;    //!< Matching condition functions
   };
 }
