@@ -1116,8 +1116,7 @@ PYBIND11_MODULE(apfelpy, m)
                                                             .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "Thresholds"_a, "pt"_a, "nsteps"_a = 10)
                                                             .def(py::init<double const&, double const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "pt"_a, "nsteps"_a = 10)
                                                             .def("MatchObject", &apfel::AlphaQCD::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
-                                                            .def("Derivative", &apfel::AlphaQCD::Derivative, "nf"_a, "void"_a, "as"_a)
-                                                            .def("betaQCD", &apfel::AlphaQCD::betaQCD, "pt"_a, "nf"_a);
+                                                            .def("Derivative", &apfel::AlphaQCD::Derivative, "nf"_a, "void"_a, "as"_a);
 
   // Wrappers of "alphaqcdg.h"
   py::class_<apfel::AlphaQCDg, apfel::MatchedEvolution<double>>(m, "AlphaQCDg")
@@ -1126,12 +1125,18 @@ PYBIND11_MODULE(apfelpy, m)
                                                              .def("MatchObject", &apfel::AlphaQCDg::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
                                                              .def("EvolveObject", &apfel::AlphaQCDg::EvolveObject, "nf"_a, "lnmu02"_a, "lnmu2"_a, "as0"_a);
 
+  // Wrappers of "alphaqcdxi.h"
+  py::class_<apfel::AlphaQCDxi, apfel::MatchedEvolution<double>>(m, "AlphaQCDxi")
+                                                              .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, double const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "Thresholds"_a, "pt"_a, "xi"_a = 1, "nsteps"_a = 10)
+                                                              .def(py::init<double const&, double const&, std::vector<double> const&, int const&, double const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "Masses"_a, "pt"_a, "xi"_a = 1, "nsteps"_a = 10)
+                                                              .def("MatchObject", &apfel::AlphaQCDxi::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
+                                                              .def("Derivative", &apfel::AlphaQCDxi::Derivative, "nf"_a, "void"_a, "as"_a);
+
   // Wrappers of "alphaqed.h"
   py::class_<apfel::AlphaQED, apfel::MatchedEvolution<double>>(m, "AlphaQED")
                                                             .def(py::init<double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, int const&>(), "AlphaRef"_a, "MuRef"_a, "LeptThresholds"_a, "QuarkThresholds"_a, "pt"_a, "nsteps"_a = 10)
                                                             .def("MatchObject", &apfel::AlphaQED::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
-                                                            .def("Derivative", &apfel::AlphaQED::Derivative, "nfl"_a, "void"_a, "a"_a)
-                                                            .def("betaQED", &apfel::AlphaQED::betaQED, "pt"_a, "nf"_a, "nl"_a);
+                                                            .def("Derivative", &apfel::AlphaQED::Derivative, "nfl"_a, "void"_a, "a"_a);
 
   // Wrappers of "dglapbuilder.h"
   py::class_<apfel::DglapObjects>(m, "DglapObjects")

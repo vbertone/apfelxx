@@ -86,7 +86,7 @@ namespace apfel
 
   private:
     int                                                           const _pt;                    //!< Perturbative order
-    double                                                        const _kappa;                 //!< Resummation scale parameter
+    double                                                        const _kappa;                 //!< Resummation-scale parameter
     std::function<double(bool const&, int const&, double const&)>       _MatchingConditions;    //!< Matching condition functions
   };
 }
