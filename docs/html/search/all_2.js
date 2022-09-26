@@ -9,7 +9,7 @@ var searchData=
   ['beta1qed_6',['beta1qed',['../namespaceapfel.html#aed080a12594e6a5af37ae5a07912df5e',1,'apfel']]],
   ['beta2qcd_7',['beta2qcd',['../namespaceapfel.html#a246c7375cddb32ed53ee4f1a79836569',1,'apfel']]],
   ['beta3qcd_8',['beta3qcd',['../namespaceapfel.html#a780121c6acabc585bf2f16d992ec6dab',1,'apfel']]],
-  ['betaqcd_9',['betaQCD',['../classapfel_1_1AlphaQCD.html#a8399fbe2c22eedd5c27d5c11304ce543',1,'apfel::AlphaQCD']]],
+  ['betaqcd_9',['betaQCD',['../classapfel_1_1AlphaQCD.html#a8399fbe2c22eedd5c27d5c11304ce543',1,'apfel::AlphaQCD::betaQCD()'],['../classapfel_1_1AlphaQCDxi.html#a7a52d8982e0d7372d2600781576945eb',1,'apfel::AlphaQCDxi::betaQCD()']]],
   ['betaqcd_2eh_10',['betaqcd.h',['../betaqcd_8h.html',1,'']]],
   ['betaqed_11',['betaQED',['../classapfel_1_1AlphaQED.html#a4122cc72eab4a7343e33edbdf45407d9',1,'apfel::AlphaQED']]],
   ['betaqed_2eh_12',['betaqed.h',['../betaqed_8h.html',1,'']]],

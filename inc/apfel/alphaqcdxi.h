@@ -15,7 +15,7 @@ namespace apfel
   /**
    * @brief The AlphaQCDxi is a specialization class of the
    * MatchedEvolution class for the computation of the QCD coupling
-   * running with the possibility ro vary the resummation scale
+   * running with the possibility to vary the resummation scale
    * through the parameter xi.
    */
   class AlphaQCDxi: public MatchedEvolution<double>
