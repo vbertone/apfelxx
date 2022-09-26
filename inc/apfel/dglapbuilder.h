@@ -49,6 +49,7 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol = false,
                                                         double              const& IntEps = 1e-5);
+
   /**
    * @brief The InitializeDglapObjectsQCD function precomputes the
    * perturbative coefficients of space-like unpolarised splitting

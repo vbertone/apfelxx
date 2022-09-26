@@ -1031,29 +1031,29 @@ namespace apfel
                                                                              std::function<double(double const&)> const& Alphas)
   {
     if (PerturbativeOrder == 0)
-      return [=] (int const& nf, double const& mu) -> Set<Operator>
+      return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(mu) / FourPi;
+        const double cp = Alphas(exp(t / 2)) / FourPi;
         return cp * DglapObj.at(nf).SplittingFunctions.at(0);
       };
     else if (PerturbativeOrder == 1)
-      return [=] (int const& nf, double const& mu) -> Set<Operator>
+      return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(mu) / FourPi;
+        const double cp = Alphas(exp(t / 2)) / FourPi;
         const auto sf = DglapObj.at(nf).SplittingFunctions;
         return cp * ( sf.at(0) + cp * sf.at(1) );
       };
     else if (PerturbativeOrder == 2)
-      return [=] (int const& nf, double const& mu) -> Set<Operator>
+      return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(mu) / FourPi;
+        const double cp = Alphas(exp(t / 2)) / FourPi;
         const auto sf = DglapObj.at(nf).SplittingFunctions;
         return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
       };
     else if (PerturbativeOrder == 3)
-      return [=] (int const& nf, double const& mu) -> Set<Operator>
+      return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(mu) / FourPi;
+        const double cp = Alphas(exp(t / 2)) / FourPi;
         const auto sf = DglapObj.at(nf).SplittingFunctions;
         return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
       };
@@ -1062,21 +1062,10 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<Set<Operator>(bool const&, int const&)> MatchingConditions(std::map<int, DglapObjects>          const& DglapObj,
-                                                                           int                                  const& PerturbativeOrder,
-                                                                           std::function<double(double const&)> const& Alphas)
+  std::function<Set<Operator>(bool const&, int const&)> MatchingConditions(std::map<int, DglapObjects>              const& DglapObj,
+                                                                           int                                      const& PerturbativeOrder,
+                                                                           std::map<int, std::pair<double, double>> const& AlphasTh)
   {
-    // Compute coupling above and below the thresholds.
-    std::map<int, double> asThUp;
-    std::map<int, double> asThDown;
-    for (auto obj = std::next(DglapObj.begin()); obj != DglapObj.end(); ++obj)
-      {
-        const int    nf  = obj->first;
-        const double thr = obj->second.Threshold;
-        asThDown.insert({nf, Alphas(thr * ( 1 - eps8 ) ) / FourPi});
-        asThUp.insert({nf, Alphas(thr * ( 1 + eps8 ) ) / FourPi});
-      }
-
     if (PerturbativeOrder == 0)
       return [=] (bool const&, int const& nf) -> Set<Operator>
       {
@@ -1085,21 +1074,21 @@ namespace apfel
     else if (PerturbativeOrder == 1)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
+        const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * mc.at(1);
       };
     else if (PerturbativeOrder == 2)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
+        const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
     else if (PerturbativeOrder == 3)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
-        const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
+        const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
         const auto mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
@@ -1115,8 +1104,9 @@ namespace apfel
                                                   std::function<double(double const&)>                               const& Alphas,
                                                   int                                                                const& nsteps)
   {
-    // Collect thresholds.
+    // Collect thresholds and coupling above and below them
     std::vector<double> Thresholds;
+    std::map<int, std::pair<double, double>> AlphasTh;
     for (auto const& obj : DglapObj)
       {
         const int    nf  = obj.first;
@@ -1125,6 +1115,7 @@ namespace apfel
           Thresholds.resize(nf);
         if (nf > 0)
           Thresholds[nf-1] = thr;
+        AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
       }
 
     // Create set of initial distributions.
@@ -1133,7 +1124,7 @@ namespace apfel
 
     // Initialize DGLAP evolution.
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
-                                                                         MatchingConditions(DglapObj, PerturbativeOrder, Alphas), InPDFs, MuRef, Thresholds, nsteps
+                                                                         MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), InPDFs, MuRef, Thresholds, nsteps
                                                                         });
   }
 
@@ -1144,15 +1135,18 @@ namespace apfel
                                               std::function<double(double const&)> const& Alphas,
                                               int                                  const& nsteps)
   {
-    // Collect thresholds.
+    // Collect thresholds and coupling above and below them
     std::vector<double> Thresholds;
+    std::map<int, std::pair<double, double>> AlphasTh;
     for (auto const& obj : DglapObj)
       {
         const int    nf  = obj.first;
         const double thr = obj.second.Threshold;
         if ((int) Thresholds.size() < nf)
           Thresholds.resize(nf);
-        Thresholds[nf-1] = thr;
+        if (nf > 0)
+          Thresholds[nf-1] = thr;
+        AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
       }
 
     // Allocate Identity and Zero operators.
@@ -1175,7 +1169,7 @@ namespace apfel
 
     // Initialize DGLAP evolution.
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
-                                                                 MatchingConditions(DglapObj, PerturbativeOrder, Alphas), Unity, MuRef, Thresholds, nsteps
+                                                                 MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), Unity, MuRef, Thresholds, nsteps
                                                                 });
   }
 
