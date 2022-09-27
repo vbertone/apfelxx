@@ -18,6 +18,7 @@
 #include "apfel/matchingconditions_tl.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
+#include "apfel/betaqcd.h"
 
 namespace apfel
 {
@@ -1028,34 +1029,50 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<Set<Operator>(int const&, double const&)> SplittingFunctions(std::map<int, DglapObjects>          const& DglapObj,
                                                                              int                                  const& PerturbativeOrder,
-                                                                             std::function<double(double const&)> const& Alphas)
+                                                                             std::function<double(double const&)> const& Alphas,
+                                                                             double                               const& xi)
   {
     if (PerturbativeOrder == 0)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(exp(t / 2)) / FourPi;
-        return cp * DglapObj.at(nf).SplittingFunctions.at(0);
+        return ( Alphas(exp(t / 2)) / FourPi ) * DglapObj.at(nf).SplittingFunctions.at(0);
       };
     else if (PerturbativeOrder == 1)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(exp(t / 2)) / FourPi;
+        const double cp  = Alphas(exp(t / 2)) / FourPi;
+        const double cp2 = cp * cp;
+        const double blx = - beta0qcd(nf) * log(xi);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
-        return cp * ( sf.at(0) + cp * sf.at(1) );
+        return cp2 * sf.at(1) + ( cp - cp2 * blx ) * sf.at(0);
       };
     else if (PerturbativeOrder == 2)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(exp(t / 2)) / FourPi;
+        const double cp   = Alphas(exp(t / 2)) / FourPi;
+        const double cp2  = cp * cp;
+        const double cp3  = cp * cp2;
+        const double blx  = - beta0qcd(nf) * log(xi);
+        const double blx2 = blx * blx;
+        const double b1   = beta1qcd(nf) / beta0qcd(nf);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
-        return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
+        return cp3 * sf.at(2) + ( cp2 - 2 * cp3 * blx ) * sf.at(1) + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) ) * sf.at(0);
       };
     else if (PerturbativeOrder == 3)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp = Alphas(exp(t / 2)) / FourPi;
+        const double cp   = Alphas(exp(t / 2)) / FourPi;
+        const double cp2  = cp * cp;
+        const double cp3  = cp * cp2;
+        const double cp4  = cp * cp3;
+        const double blx  = - beta0qcd(nf) * log(xi);
+        const double blx2 = blx * blx;
+        const double blx3 = blx * blx2;
+        const double b1   = beta1qcd(nf) / beta0qcd(nf);
+        const double b2   = beta2qcd(nf) / beta0qcd(nf);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
-        return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
+        return cp4 * sf.at(3) + ( cp3 - 3 * cp4 * blx ) * sf.at(2) + ( cp2 - 2 * cp3 * blx + cp4 * ( - 2 * b1 * blx + 3 * blx2 ) ) * sf.at(1)
+        + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) + cp3 * ( - b2 * blx + 5 * b1 * blx2 / 2 - blx3 ) ) * sf.at(0);
       };
     else
       throw std::runtime_error(error("SplittingFunctions","Perturbative order not allowed."));
@@ -1102,6 +1119,7 @@ namespace apfel
                                                   double                                                             const& MuRef,
                                                   int                                                                const& PerturbativeOrder,
                                                   std::function<double(double const&)>                               const& Alphas,
+                                                  double                                                             const& xi,
                                                   int                                                                const& nsteps)
   {
     // Collect thresholds and coupling above and below them
@@ -1123,7 +1141,7 @@ namespace apfel
                                    DistributionMap(DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
     // Initialize DGLAP evolution.
-    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
                                                                          MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), InPDFs, MuRef, Thresholds, nsteps
                                                                         });
   }
@@ -1133,6 +1151,7 @@ namespace apfel
                                               double                               const& MuRef,
                                               int                                  const& PerturbativeOrder,
                                               std::function<double(double const&)> const& Alphas,
+                                              double                               const& xi,
                                               int                                  const& nsteps)
   {
     // Collect thresholds and coupling above and below them
@@ -1168,7 +1187,7 @@ namespace apfel
     Set<Operator> Unity{EvolutionOperatorBasisQCD{NF(MuRef, Thresholds)}, MapUnity};
 
     // Initialize DGLAP evolution.
-    return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas),
+    return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
                                                                  MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), Unity, MuRef, Thresholds, nsteps
                                                                 });
   }
