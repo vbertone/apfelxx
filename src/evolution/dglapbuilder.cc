@@ -1035,24 +1035,24 @@ namespace apfel
     if (PerturbativeOrder == 0)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        return ( Alphas(exp(t / 2)) / FourPi ) * DglapObj.at(nf).SplittingFunctions.at(0);
+        return ( Alphas(xi * exp(t / 2)) / FourPi ) * DglapObj.at(nf).SplittingFunctions.at(0);
       };
     else if (PerturbativeOrder == 1)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp  = Alphas(exp(t / 2)) / FourPi;
+        const double cp  = Alphas(xi * exp(t / 2)) / FourPi;
         const double cp2 = cp * cp;
-        const double blx = - beta0qcd(nf) * log(xi);
+        const double blx = - 2 * beta0qcd(nf) * log(xi);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
         return cp2 * sf.at(1) + ( cp - cp2 * blx ) * sf.at(0);
       };
     else if (PerturbativeOrder == 2)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp   = Alphas(exp(t / 2)) / FourPi;
+        const double cp   = Alphas(xi * exp(t / 2)) / FourPi;
         const double cp2  = cp * cp;
         const double cp3  = cp * cp2;
-        const double blx  = - beta0qcd(nf) * log(xi);
+        const double blx  = - 2 * beta0qcd(nf) * log(xi);
         const double blx2 = blx * blx;
         const double b1   = beta1qcd(nf) / beta0qcd(nf);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
@@ -1061,11 +1061,11 @@ namespace apfel
     else if (PerturbativeOrder == 3)
       return [=] (int const& nf, double const& t) -> Set<Operator>
       {
-        const double cp   = Alphas(exp(t / 2)) / FourPi;
+        const double cp   = Alphas(xi * exp(t / 2)) / FourPi;
         const double cp2  = cp * cp;
         const double cp3  = cp * cp2;
         const double cp4  = cp * cp3;
-        const double blx  = - beta0qcd(nf) * log(xi);
+        const double blx  = - 2 * beta0qcd(nf) * log(xi);
         const double blx2 = blx * blx;
         const double blx3 = blx * blx2;
         const double b1   = beta1qcd(nf) / beta0qcd(nf);
