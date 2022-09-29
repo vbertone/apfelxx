@@ -73,7 +73,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -146,7 +146,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -217,7 +217,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -275,7 +275,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -331,7 +331,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -404,7 +404,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -1625,7 +1625,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -1698,7 +1698,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
@@ -1781,7 +1781,7 @@ namespace apfel
       // Q are set to zero.
       std::vector<double> EffCh;
       for (int k = 1; k <= 6; k++)
-        EffCh.push_back(( k > nf ? 0 : Ch[k-1]));
+        EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
