@@ -93,7 +93,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1AlphaQCDg.html" title="The AlphaQCDg is a specialization class of the MatchedEvolution class for the computation of the QCD ...">AlphaQCDg</a> is a specialization class of the <a class="el" href="classapfel_1_1MatchedEvolution.html" title="The MatchedEvolution class is a template mother class for the computation of the running of a generic...">MatchedEvolution</a> class for the computation of the QCD coupling running using the analytic g functions.  <a href="classapfel_1_1AlphaQCDg.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1AlphaQCDxi.html">AlphaQCDxi</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1AlphaQCDxi.html" title="The AlphaQCDxi is a specialization class of the MatchedEvolution class for the computation of the QCD...">AlphaQCDxi</a> is a specialization class of the <a class="el" href="classapfel_1_1MatchedEvolution.html" title="The MatchedEvolution class is a template mother class for the computation of the running of a generic...">MatchedEvolution</a> class for the computation of the QCD coupling running with the possibility ro vary the resummation scale through the parameter xi.  <a href="classapfel_1_1AlphaQCDxi.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1AlphaQCDxi.html" title="The AlphaQCDxi is a specialization class of the MatchedEvolution class for the computation of the QCD...">AlphaQCDxi</a> is a specialization class of the <a class="el" href="classapfel_1_1MatchedEvolution.html" title="The MatchedEvolution class is a template mother class for the computation of the running of a generic...">MatchedEvolution</a> class for the computation of the QCD coupling running with the possibility to vary the resummation scale through the parameter xi.  <a href="classapfel_1_1AlphaQCDxi.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1AlphaQED.html">AlphaQED</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1AlphaQED.html" title="The AlphaQED is a specialization class of the MatchedEvolution class for the computation of the QED c...">AlphaQED</a> is a specialization class of the <a class="el" href="classapfel_1_1MatchedEvolution.html" title="The MatchedEvolution class is a template mother class for the computation of the running of a generic...">MatchedEvolution</a> class for the computation of the QED coupling running.  <a href="classapfel_1_1AlphaQED.html#details">More...</a><br /></td></tr>
@@ -1007,12 +1007,12 @@ Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">DGLAP builders</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p >Collection of functions that build a <a class="el" href="classapfel_1_1Dglap.html" title="The Dglap class is specialization class of the MatchedEvolution class for the computation of the DGLA...">Dglap</a> object used to perform the DGLAP evolution of distributions or operators. </p>
 </div></td></tr>
-<tr class="memitem:a69347aadda69b3130602d7f5e14278b9"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a69347aadda69b3130602d7f5e14278b9">BuildDglap</a> (std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; const &amp;DglapObj, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;nsteps=10)</td></tr>
-<tr class="memdesc:a69347aadda69b3130602d7f5e14278b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for distributions.  <a href="namespaceapfel.html#a69347aadda69b3130602d7f5e14278b9">More...</a><br /></td></tr>
-<tr class="separator:a69347aadda69b3130602d7f5e14278b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67cc3f2461711ac2586a0f9528193a6f"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a67cc3f2461711ac2586a0f9528193a6f">BuildDglap</a> (std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; const &amp;DglapObj, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;nsteps=10)</td></tr>
-<tr class="memdesc:a67cc3f2461711ac2586a0f9528193a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for operators.  <a href="namespaceapfel.html#a67cc3f2461711ac2586a0f9528193a6f">More...</a><br /></td></tr>
-<tr class="separator:a67cc3f2461711ac2586a0f9528193a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e9a1131dff03b049575a3d355559441"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a8e9a1131dff03b049575a3d355559441">BuildDglap</a> (std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; const &amp;DglapObj, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, double const &amp;xi=1, int const &amp;nsteps=10)</td></tr>
+<tr class="memdesc:a8e9a1131dff03b049575a3d355559441"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for distributions.  <a href="namespaceapfel.html#a8e9a1131dff03b049575a3d355559441">More...</a><br /></td></tr>
+<tr class="separator:a8e9a1131dff03b049575a3d355559441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059f4c23bfdee9179674f983a34d8897"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a059f4c23bfdee9179674f983a34d8897">BuildDglap</a> (std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; const &amp;DglapObj, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, double const &amp;xi=1, int const &amp;nsteps=10)</td></tr>
+<tr class="memdesc:a059f4c23bfdee9179674f983a34d8897"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for operators.  <a href="namespaceapfel.html#a059f4c23bfdee9179674f983a34d8897">More...</a><br /></td></tr>
+<tr class="separator:a059f4c23bfdee9179674f983a34d8897"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9162d80f6d496ebe8071203ab5ea803"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ae9162d80f6d496ebe8071203ab5ea803">BuildDglap</a> (std::function&lt; <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a>(double const &amp;)&gt; const &amp;DglapObj, std::vector&lt; double &gt; const &amp;Thresholds, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;nsteps=10)</td></tr>
 <tr class="memdesc:ae9162d80f6d496ebe8071203ab5ea803"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for distributions.  <a href="namespaceapfel.html#ae9162d80f6d496ebe8071203ab5ea803">More...</a><br /></td></tr>
 <tr class="separator:ae9162d80f6d496ebe8071203ab5ea803"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1926,7 +1926,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function that prints the APFEL++ banner on screen. Effective according to the verbosity level. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="dglap_test_streamlined_8cc-example.html#a0">dglap_test_streamlined.cc</a>, <a class="el" href="structurefunction_massive_test_8cc-example.html#a0">structurefunction_massive_test.cc</a>, and <a class="el" href="structurefunction_test_8cc-example.html#a0">structurefunction_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="dglap_test_streamlined_8cc-example.html#a0">dglap_test_streamlined.cc</a>, <a class="el" href="structurefunction_cc_test_8cc-example.html#a0">structurefunction_cc_test.cc</a>, <a class="el" href="structurefunction_massive_test_8cc-example.html#a0">structurefunction_massive_test.cc</a>, and <a class="el" href="structurefunction_nc_test_8cc-example.html#a0">structurefunction_nc_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -1955,6 +1955,8 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_0(n_f)$" src="form_2.png" width="44" height="17"/></picture> </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="massiveCF_test_8cc-example.html#a42">massiveCF_test.cc</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -2188,8 +2190,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a67cc3f2461711ac2586a0f9528193a6f" name="a67cc3f2461711ac2586a0f9528193a6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67cc3f2461711ac2586a0f9528193a6f">&#9670;&#160;</a></span>BuildDglap() <span class="overload">[2/3]</span></h2>
+<a id="a059f4c23bfdee9179674f983a34d8897" name="a059f4c23bfdee9179674f983a34d8897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a059f4c23bfdee9179674f983a34d8897">&#9670;&#160;</a></span>BuildDglap() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2221,6 +2223,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xi</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int const &amp;&#160;</td>
           <td class="paramname"><em>nsteps</em> = <code>10</code>&#160;</td>
         </tr>
@@ -2239,6 +2247,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">MuRef</td><td>the reference scale </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order of the evolution </td></tr>
     <tr><td class="paramname">Alphas</td><td>the function returning the strong coupling </td></tr>
+    <tr><td class="paramname">xi</td><td>the scale-variation parameter (default: 1) </td></tr>
     <tr><td class="paramname">nsteps</td><td>the number of steps of the ODE solver (default: 10). </td></tr>
   </table>
   </dd>
@@ -2247,8 +2256,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a69347aadda69b3130602d7f5e14278b9" name="a69347aadda69b3130602d7f5e14278b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69347aadda69b3130602d7f5e14278b9">&#9670;&#160;</a></span>BuildDglap() <span class="overload">[3/3]</span></h2>
+<a id="a8e9a1131dff03b049575a3d355559441" name="a8e9a1131dff03b049575a3d355559441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e9a1131dff03b049575a3d355559441">&#9670;&#160;</a></span>BuildDglap() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2286,6 +2295,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xi</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int const &amp;&#160;</td>
           <td class="paramname"><em>nsteps</em> = <code>10</code>&#160;</td>
         </tr>
@@ -2305,6 +2320,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">MuRef</td><td>the reference scale </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the perturbative order of the evolution </td></tr>
     <tr><td class="paramname">Alphas</td><td>the function returning the strong coupling </td></tr>
+    <tr><td class="paramname">xi</td><td>the scale-variation parameter (default: 1) </td></tr>
     <tr><td class="paramname">nsteps</td><td>the number of steps of the ODE solver (default: 10). </td></tr>
   </table>
   </dd>
@@ -3239,7 +3255,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the std::vector of the electroweak charges </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_massive_test_8cc-example.html#a6">structurefunction_massive_test.cc</a>, and <a class="el" href="structurefunction_test_8cc-example.html#a6">structurefunction_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_massive_test_8cc-example.html#a6">structurefunction_massive_test.cc</a>, and <a class="el" href="structurefunction_nc_test_8cc-example.html#a6">structurefunction_nc_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -8461,7 +8477,7 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the std::vector of the electroweak charges </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_test_8cc-example.html#a7">structurefunction_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="structurefunction_nc_test_8cc-example.html#a7">structurefunction_nc_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -9345,7 +9361,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 26 2022 13:47:02 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Sep 30 2022 10:24:57 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
