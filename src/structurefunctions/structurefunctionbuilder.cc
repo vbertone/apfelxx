@@ -1981,7 +1981,7 @@ namespace apfel
             {
               const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
               const Set<Operator> P0 = FObjQ.P.SplittingFunctions.at(0);
-              return Set<Distribution>{FObjQ.ConvBasis.at(k), (P0 * Set<Distribution>{P0.GetMap(), DistributionMap(g, InDistFunc, xiF * Q, skip)}).GetObjects()};
+              return Set<Distribution>{FObjQ.ConvBasis.at(k), (P0 * Set<Distribution>{P0.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
             };
 
             Obs.AddConvolutionPair(CfP0, DistP0F);
@@ -2000,7 +2000,7 @@ namespace apfel
                 {
                   const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
                   const Set<Operator> P1 = FObjQ.P.SplittingFunctions.at(1);
-                  return Set<Distribution>{FObjQ.ConvBasis.at(k), (P1 * Set<Distribution>{P1.GetMap(), DistributionMap(g, InDistFunc, xiF * Q, skip)}).GetObjects()};
+                  return Set<Distribution>{FObjQ.ConvBasis.at(k), (P1 * Set<Distribution>{P1.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
                 };
 
                 Obs.AddConvolutionPair(CfP1, DistP1F);
@@ -2016,7 +2016,7 @@ namespace apfel
                 {
                   const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
                   const Set<Operator> P0 = FObjQ.P.SplittingFunctions.at(0);
-                  return Set<Distribution>{FObjQ.ConvBasis.at(k), (P0 * ( P0 * Set<Distribution>{P0.GetMap(), DistributionMap(g, InDistFunc, xiF * Q, skip)} )).GetObjects()};
+                  return Set<Distribution>{FObjQ.ConvBasis.at(k), (P0 * ( P0 * Set<Distribution>{P0.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)} )).GetObjects()};
                 };
 
                 Obs.AddConvolutionPair(CfP0P0, DistP0P0F);
