@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <cmath>
-#include <map>
 #include <iomanip>
 
 int main()
@@ -88,7 +86,7 @@ int main()
   std::cout << "Alphas(Q) = " << as(Q) << std::endl;
   std::cout << std::endl;
 
-  const std::vector<double> xlha = { 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1 };
+  const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   std::cout << "    x   "
             << "  F2light   "
@@ -96,12 +94,12 @@ int main()
             << "  F2bottom  "
             << "  F2total   "
             << std::endl;
-  for (auto i = 2; i < (int) xlha.size(); i++)
-    std::cout << std::setprecision(1) << xlha[i] << "  " << std::setprecision(4)
-              << 2 * F2light.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * F2charm.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * F2bottom.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * F2total.EvaluatexQ(xlha[i],Q) << "  "
+  for (double const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+              << 2 * F2light.EvaluatexQ(x, Q) << "  "
+              << 2 * F2charm.EvaluatexQ(x, Q) << "  "
+              << 2 * F2bottom.EvaluatexQ(x, Q) << "  "
+              << 2 * F2total.EvaluatexQ(x, Q) << "  "
               << std::endl;
   std::cout << std::endl;
 
@@ -111,12 +109,12 @@ int main()
             << "  FLbottom  "
             << "  FLtotal   "
             << std::endl;
-  for (auto i = 2; i < (int) xlha.size(); i++)
-    std::cout << std::setprecision(1) << xlha[i] << "  " << std::setprecision(4)
-              << 2 * FLlight.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * FLcharm.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * FLbottom.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * FLtotal.EvaluatexQ(xlha[i],Q) << "  "
+  for (double const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+              << 2 * FLlight.EvaluatexQ(x, Q) << "  "
+              << 2 * FLcharm.EvaluatexQ(x, Q) << "  "
+              << 2 * FLbottom.EvaluatexQ(x, Q) << "  "
+              << 2 * FLtotal.EvaluatexQ(x, Q) << "  "
               << std::endl;
   std::cout << std::endl;
 
@@ -126,12 +124,12 @@ int main()
             << "  F3bottom  "
             << "  F3total   "
             << std::endl;
-  for (auto i = 2; i < (int) xlha.size(); i++)
-    std::cout << std::setprecision(1) << xlha[i] << "  " << std::setprecision(4)
-              << 2 * F3light.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * F3charm.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * F3bottom.EvaluatexQ(xlha[i],Q) << "  "
-              << 2 * F3total.EvaluatexQ(xlha[i],Q) << "  "
+  for (double const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+              << 2 * F3light.EvaluatexQ(x, Q) << "  "
+              << 2 * F3charm.EvaluatexQ(x, Q) << "  "
+              << 2 * F3bottom.EvaluatexQ(x, Q) << "  "
+              << 2 * F3total.EvaluatexQ(x, Q) << "  "
               << std::endl;
   std::cout << std::endl;
   t.stop();

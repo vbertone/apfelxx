@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <cmath>
-#include <map>
 #include <iomanip>
 
 int main()
@@ -92,7 +90,7 @@ int main()
             << "  F2bottom  "
             << "  F2total   "
             << std::endl;
-  for (auto const& x : xlha)
+  for (double const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
               << F2light.EvaluatexQ(x,Q)  << "  "
               << F2charm.EvaluatexQ(x,Q)  << "  "
@@ -107,7 +105,7 @@ int main()
             << "  FLbottom  "
             << "  FLtotal   "
             << std::endl;
-  for (auto const& x : xlha)
+  for (double const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
               << FLlight.EvaluatexQ(x,Q)  << "  "
               << FLcharm.EvaluatexQ(x,Q)  << "  "
@@ -122,7 +120,7 @@ int main()
             << "  F3bottom  "
             << "  F3total   "
             << std::endl;
-  for (auto const& x : xlha)
+  for (double const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
               << F3light.EvaluatexQ(x,Q)  << "  "
               << F3charm.EvaluatexQ(x,Q)  << "  "
