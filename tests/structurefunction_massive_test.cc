@@ -59,14 +59,14 @@ int main()
   const auto FLM0 = BuildStructureFunctions(FLObjM0, PDFs, PerturbativeOrder, as, fBq);
 
   // Tabulate Structure functions
-  const apfel::TabulateObject<apfel::Distribution> F2charmM  {[&] (double const& Q) -> apfel::Distribution{ return F2M.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> F2bottomM {[&] (double const& Q) -> apfel::Distribution{ return F2M.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> FLcharmM  {[&] (double const& Q) -> apfel::Distribution{ return FLM.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> FLbottomM {[&] (double const& Q) -> apfel::Distribution{ return FLM.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> F2charmM0 {[&] (double const& Q) -> apfel::Distribution{ return F2M0.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> F2bottomM0{[&] (double const& Q) -> apfel::Distribution{ return F2M0.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> FLcharmM0 {[&] (double const& Q) -> apfel::Distribution{ return FLM0.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> FLbottomM0{[&] (double const& Q) -> apfel::Distribution{ return FLM0.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2charmM  {[&] (double const& Q) -> apfel::Distribution{ return F2M.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2bottomM {[&] (double const& Q) -> apfel::Distribution{ return F2M.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLcharmM  {[&] (double const& Q) -> apfel::Distribution{ return FLM.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLbottomM {[&] (double const& Q) -> apfel::Distribution{ return FLM.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2charmM0 {[&] (double const& Q) -> apfel::Distribution{ return F2M0.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2bottomM0{[&] (double const& Q) -> apfel::Distribution{ return F2M0.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLcharmM0 {[&] (double const& Q) -> apfel::Distribution{ return FLM0.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLbottomM0{[&] (double const& Q) -> apfel::Distribution{ return FLM0.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
 
   apfel::Timer t;
 

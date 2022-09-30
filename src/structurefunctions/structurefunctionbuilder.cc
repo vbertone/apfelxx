@@ -14,6 +14,7 @@
 #include "apfel/massivezerocoefficientfunctionsunp_sl.h"
 #include "apfel/zeromasscoefficientfunctionsunp_tl.h"
 #include "apfel/tabulateobject.h"
+#include "apfel/betaqcd.h"
 
 #include <numeric>
 
@@ -24,6 +25,9 @@ namespace apfel
                                                                                                              std::vector<double> const& Thresholds,
                                                                                                              double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for F2 NC Zero Mass... ");
     Timer t;
 
@@ -77,6 +81,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -98,6 +104,9 @@ namespace apfel
                                                                                                              std::vector<double> const& Thresholds,
                                                                                                              double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for FL NC Zero Mass... ");
     Timer t;
 
@@ -151,6 +160,8 @@ namespace apfel
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.skip = skip;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
@@ -171,6 +182,9 @@ namespace apfel
                                                                                                              std::vector<double> const& Thresholds,
                                                                                                              double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for F3 NC Zero Mass... ");
     Timer t;
 
@@ -221,6 +235,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -242,6 +258,9 @@ namespace apfel
                                                                                                              std::vector<double> const& Thresholds,
                                                                                                              double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCDpol(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for g4 NC Zero Mass... ");
     Timer t;
 
@@ -279,6 +298,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -299,6 +320,9 @@ namespace apfel
                                                                                                              std::vector<double> const& Thresholds,
                                                                                                              double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCDpol(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for gL NC Zero Mass... ");
     Timer t;
 
@@ -335,6 +359,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -355,6 +381,9 @@ namespace apfel
                                                                                                              std::vector<double> const& Thresholds,
                                                                                                              double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCDpol(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for g1 NC Zero Mass... ");
     Timer t;
 
@@ -408,6 +437,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -429,6 +460,9 @@ namespace apfel
                                                                                                                  std::vector<double> const& Thresholds,
                                                                                                                  double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for ( F2(nu) + F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
 
@@ -487,6 +521,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -508,6 +544,9 @@ namespace apfel
                                                                                                                   std::vector<double> const& Thresholds,
                                                                                                                   double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for ( F2(nu) - F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
 
@@ -562,6 +601,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -583,6 +624,9 @@ namespace apfel
                                                                                                                  std::vector<double> const& Thresholds,
                                                                                                                  double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for ( FL(nu) + FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
 
@@ -640,6 +684,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -661,6 +707,9 @@ namespace apfel
                                                                                                                   std::vector<double> const& Thresholds,
                                                                                                                   double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for ( FL(nu) - FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
 
@@ -714,6 +763,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -735,6 +786,9 @@ namespace apfel
                                                                                                                  std::vector<double> const& Thresholds,
                                                                                                                  double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for ( F3(nu) + F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
 
@@ -790,6 +844,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -811,6 +867,9 @@ namespace apfel
                                                                                                                   std::vector<double> const& Thresholds,
                                                                                                                   double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for ( F3(nu) - F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
 
@@ -865,6 +924,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -902,6 +963,9 @@ namespace apfel
     for (auto const& m : Masses)
       if (m < eps8)
         actnf++;
+
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for F2 NC Massive with " + std::to_string(actnf) + " active flavours... \n");
 
@@ -975,6 +1039,8 @@ namespace apfel
     {
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = actnf;
+      FObj.P    = PDFObj.at(actnf);
       FObj.skip = skip;
 
       // Start with the heavy quark structure function components.
@@ -1082,6 +1148,9 @@ namespace apfel
       if (m < eps8)
         actnf++;
 
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+
     report("Initializing StructureFunctionObjects for FL NC Massive with " + std::to_string(actnf) + " active flavours... \n");
 
     // ===============================================================
@@ -1153,6 +1222,8 @@ namespace apfel
     {
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = actnf;
+      FObj.P    = PDFObj.at(actnf);
       FObj.skip = skip;
 
       // Start with the heavy quark structure function components.
@@ -1250,11 +1321,18 @@ namespace apfel
   {
     Timer t;
 
+    // Make sure that the vector of masses contains all the 6 masses.
+    if (Masses.size() != 6)
+      throw std::runtime_error(error("InitializeF2NCObjectsMassiveZero", "The vector of masses has to contain exactly 6 ordered masses."));
+
     // Determine number of active flavours
     int actnf = 0;
     for (auto const& m : Masses)
       if (m < eps8)
         actnf++;
+
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + std::to_string(actnf) + " active flavours... \n");
 
@@ -1346,6 +1424,8 @@ namespace apfel
     {
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = actnf;
+      FObj.P    = PDFObj.at(actnf);
       FObj.skip = skip;
 
       // Start with the heavy quark structure function components.
@@ -1425,11 +1505,18 @@ namespace apfel
   {
     Timer t;
 
+    // Make sure that the vector of masses contains all the 6 masses.
+    if (Masses.size() != 6)
+      throw std::runtime_error(error("InitializeFLNCObjectsMassiveZero", "The vector of masses has to contain exactly 6 ordered masses."));
+
     // Determine number of active flavours
     int actnf = 0;
     for (auto const& m : Masses)
       if (m < eps8)
         actnf++;
+
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + std::to_string(actnf) + " active flavours... \n");
 
@@ -1504,6 +1591,8 @@ namespace apfel
     {
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = actnf;
+      FObj.P    = PDFObj.at(actnf);
       FObj.skip = skip;
 
       // Start with the heavy quark structure function components.
@@ -1576,6 +1665,9 @@ namespace apfel
                                                                                                               std::vector<double> const& Thresholds,
                                                                                                               double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCDT(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for F2 Zero Mass for SIA... ");
     Timer t;
 
@@ -1629,6 +1721,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -1650,6 +1744,9 @@ namespace apfel
                                                                                                               std::vector<double> const& Thresholds,
                                                                                                               double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCDT(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for FL Zero Mass for SIA... ");
     Timer t;
 
@@ -1702,6 +1799,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -1723,6 +1822,9 @@ namespace apfel
                                                                                                               std::vector<double> const& Thresholds,
                                                                                                               double              const& IntEps)
   {
+    // Initalise DGLAP objects need for scale variations
+    const auto PDFObj = apfel::InitializeDglapObjectsQCDT(g, Thresholds);
+
     report("Initializing StructureFunctionObjects for F3 Zero Mass for SIA...\n");
     warning("InitializeF3NCObjectsZMT", "NNLO corrections currently unavailable");
     Timer t;
@@ -1785,6 +1887,8 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
+      FObj.nf   = nf;
+      FObj.P    = PDFObj.at(nf);
       FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
@@ -1806,8 +1910,14 @@ namespace apfel
                                                       std::function<std::map<int, double>(double const&, double const&)>                 const& InDistFunc,
                                                       int                                                                                const& PerturbativeOrder,
                                                       std::function<double(double const&)>                                               const& Alphas,
-                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings)
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings,
+                                                      double                                                                             const& xiR,
+                                                      double                                                                             const& xiF)
   {
+    // Scale variation factors
+    const double tR = 2 * log(xiR);
+    const double tF = 2 * log(xiF);
+
     // Call FObj at energy 1 to use it for those quantities that do
     // not depend on Q.
     const StructureFunctionObjects FObj1 = FObj(1, Couplings(1));
@@ -1825,27 +1935,96 @@ namespace apfel
         // Structure function index.
         const int k = it->first;
 
-        // Define coefficient function functions.
+        // Define coefficient function functions that multiply F
         const auto Cf = [=] (double const& Q) -> Set<Operator>
         {
-          const double cp = Alphas(Q) / FourPi;
+          const double cp  = Alphas(xiR * Q) / FourPi;
+          const double cp2 = cp * cp;
           const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
           Set<Operator> CoefFuncs = FObjQ.C0.at(k);
           if (PerturbativeOrder > 0)
             CoefFuncs += cp * FObjQ.C1.at(k);
           if (PerturbativeOrder > 1)
-            CoefFuncs += ( cp * cp ) * FObjQ.C2.at(k);
+            CoefFuncs += cp2 * ( FObjQ.C2.at(k) + tR * beta0qcd(FObjQ.nf) * FObjQ.C1.at(k) );
           return CoefFuncs;
         };
 
-        // Define distribution-function functions.
+        // Define distribution-function functions
         const auto DistF = [=, &g] (double const& Q) -> Set<Distribution>
         {
-          return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)};
+          return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, xiF * Q, skip)};
         };
 
-        // Initialize "Observable".
-        F.insert({k, Observable<>{Cf, DistF}});
+        // Create Observable
+        Observable<> Obs{Cf, DistF};
+
+        // Include scale variation terms if necessary that is when the
+        // perturbative order is higher than zero. In addition, since
+        // the only pure tR-dependent term is already include above in
+        // the C2 term, we also require tF be different from zero.
+        if (PerturbativeOrder > 0 && tF != 0)
+          {
+            // Define coefficient function functions that multiply P0 * F
+            const auto CfP0 = [=] (double const& Q) -> Set<Operator>
+            {
+              const double cp  = Alphas(xiR * Q) / FourPi;
+              const double cp2 = cp * cp;
+              const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+              Set<Operator> CoefFuncs = ( - cp * tF ) * FObjQ.C0.at(k);
+              if (PerturbativeOrder > 1)
+                CoefFuncs += ( - cp2 * tF ) * ( FObjQ.C1.at(k) + ( tR - tF / 2 ) * beta0qcd(FObjQ.nf) * FObjQ.C0.at(k) );
+              return CoefFuncs;
+            };
+
+            // Define distribution-function functions obtained as P0 * F
+            const auto DistP0F = [=, &g] (double const& Q) -> Set<Distribution>
+            {
+              const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+              const Set<Operator> P0 = FObjQ.P.SplittingFunctions.at(0);
+              return Set<Distribution>{FObjQ.ConvBasis.at(k), (P0 * Set<Distribution>{P0.GetMap(), DistributionMap(g, InDistFunc, xiF * Q, skip)}).GetObjects()};
+            };
+
+            Obs.AddConvolutionPair(CfP0, DistP0F);
+
+            // The remaining terms are O(as^2)
+            if (PerturbativeOrder > 1)
+              {
+                // Define coefficient function functions that multiply P1 * F
+                const auto CfP1 = [=] (double const& Q) -> Set<Operator>
+                {
+                  return ( - pow(Alphas(xiR * Q) / FourPi, 2) * tF ) * FObj(Q, Couplings(Q)).C0.at(k);
+                };
+
+                // Define distribution-function functions obtained as P0 * F
+                const auto DistP1F = [=, &g] (double const& Q) -> Set<Distribution>
+                {
+                  const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+                  const Set<Operator> P1 = FObjQ.P.SplittingFunctions.at(1);
+                  return Set<Distribution>{FObjQ.ConvBasis.at(k), (P1 * Set<Distribution>{P1.GetMap(), DistributionMap(g, InDistFunc, xiF * Q, skip)}).GetObjects()};
+                };
+
+                Obs.AddConvolutionPair(CfP1, DistP1F);
+
+                // Define coefficient function functions that multiply P0 * P0 * F
+                const auto CfP0P0 = [=] (double const& Q) -> Set<Operator>
+                {
+                  return ( pow(Alphas(xiR * Q) * tF / FourPi, 2) / 2 ) * FObj(Q, Couplings(Q)).C0.at(k);
+                };
+
+                // Define distribution-function functions obtained as P0 * P0 * F
+                const auto DistP0P0F = [=, &g] (double const& Q) -> Set<Distribution>
+                {
+                  const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+                  const Set<Operator> P0 = FObjQ.P.SplittingFunctions.at(0);
+                  return Set<Distribution>{FObjQ.ConvBasis.at(k), (P0 * ( P0 * Set<Distribution>{P0.GetMap(), DistributionMap(g, InDistFunc, xiF * Q, skip)} )).GetObjects()};
+                };
+
+                Obs.AddConvolutionPair(CfP0P0, DistP0P0F);
+              }
+          }
+
+        // Finally insert Observable
+        F.insert({k, Obs});
       }
     return F;
   }
@@ -1855,7 +2034,9 @@ namespace apfel
                                                       std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
                                                       int                                                                                const& PerturbativeOrder,
                                                       std::function<double(double const&)>                                               const& Alphas,
-                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings)
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings,
+                                                      double                                                                             const& xiR,
+                                                      double                                                                             const& xiF)
   {
     const auto InDistFuncMap = [=] (double const& x, double const& Q) -> std::map<int, double>
     {
@@ -1864,7 +2045,7 @@ namespace apfel
         DistMap.insert({i,InDistFunc(i, x, Q)});
       return DistMap;
     };
-    return BuildStructureFunctions(FObj, InDistFuncMap, PerturbativeOrder, Alphas, Couplings);
+    return BuildStructureFunctions(FObj, InDistFuncMap, PerturbativeOrder, Alphas, Couplings, xiR, xiF);
   }
 
   //_____________________________________________________________________________
@@ -1872,30 +2053,75 @@ namespace apfel
                                        std::map<int, Distribution> const& InDistFuncQ,
                                        int                         const& PerturbativeOrder,
                                        double                      const& AlphasQ,
-                                       int                         const& k)
+                                       int                         const& k,
+                                       double                      const& xiR,
+                                       double                      const& xiF)
   {
-    const double cp = AlphasQ / FourPi;
-    Set<Operator> CoefFuncs = FObjQ.C0.at(k);
-    if (PerturbativeOrder > 0)
-      CoefFuncs += cp * FObjQ.C1.at(k);
-    if (PerturbativeOrder > 1)
-      CoefFuncs += ( cp * cp ) * FObjQ.C2.at(k);
+    // Scale variation factors
+    const double tR = 2 * log(xiR);
+    const double tF = 2 * log(xiF);
 
-    // Convolute distributions, combine them and return.
-    return (CoefFuncs * Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQ}).Combine();
+    const double cp  = AlphasQ / FourPi;
+    const double cp2 = cp * cp;
+
+    Set<Operator> Cf = FObjQ.C0.at(k);
+    if (PerturbativeOrder > 0)
+      Cf += cp * FObjQ.C1.at(k);
+    if (PerturbativeOrder > 1)
+      Cf += cp2 * ( FObjQ.C2.at(k) + tR * beta0qcd(FObjQ.nf) * FObjQ.C1.at(k) );
+
+    // Convolute coefficient function with set of distributions
+    Set<Distribution> SF = Cf * Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQ};
+
+    // Include scale variation terms if necessary that is when the
+    // perturbative order is higher than zero. In addition, since
+    // the only pure tR-dependent term is already include above in
+    // the C2 term, we also require tF be different from zero.
+    if (PerturbativeOrder > 0 && tF != 0)
+      {
+        // Get splitting functions P0
+        const Set<Operator> P0 = FObjQ.P.SplittingFunctions.at(0);
+        const Set<Distribution> SetInDistFuncQ{P0.GetMap(), InDistFuncQ};
+
+        // Define coefficient function functions that multiply P0 * F
+        Set<Operator> CfP0 = ( - cp * tF ) * FObjQ.C0.at(k);
+        if (PerturbativeOrder > 1)
+          CfP0 += ( - cp2 * tF ) * ( FObjQ.C1.at(k) + ( tR - tF / 2 ) * beta0qcd(FObjQ.nf) * FObjQ.C0.at(k) );
+
+        // Include scale variation term
+        SF += CfP0 * Set<Distribution> {FObjQ.ConvBasis.at(k), (P0 * SetInDistFuncQ).GetObjects()};
+
+        // The remaining terms are O(as^2)
+        if (PerturbativeOrder > 1)
+          {
+            // Get splitting functions P1
+            const Set<Operator> P1 = FObjQ.P.SplittingFunctions.at(1);
+
+            const Set<Operator> CfP1 = ( - pow(AlphasQ / FourPi, 2) * tF ) * FObjQ.C0.at(k);
+            SF += CfP1 * Set<Distribution> {FObjQ.ConvBasis.at(k), (P1 * SetInDistFuncQ).GetObjects()};
+
+            const Set<Operator> CfP0P0 = ( pow(AlphasQ * tF / FourPi, 2) / 2 ) * FObjQ.C0.at(k);
+            SF += CfP0P0 * Set<Distribution> {FObjQ.ConvBasis.at(k), (P0 * ( P0 * SetInDistFuncQ )).GetObjects()};
+          }
+      }
+
+    // Combine set and return
+    return SF.Combine();
   }
 
   //_____________________________________________________________________________
   std::map<int, Distribution> BuildStructureFunctions(StructureFunctionObjects    const& FObjQ,
                                                       std::map<int, Distribution> const& InDistFuncQ,
                                                       int                         const& PerturbativeOrder,
-                                                      double                      const& AlphasQ)
+                                                      double                      const& AlphasQ,
+                                                      double                      const& xiR,
+                                                      double                      const& xiF)
   {
     // Cycle over the key of the convolution basis map.
     std::map<int, Distribution> F;
     for (auto it = FObjQ.ConvBasis.begin(); it != FObjQ.ConvBasis.end(); ++it)
       // Push "Distribution".
-      F.insert({it->first, BuildStructureFunctions(FObjQ, InDistFuncQ, PerturbativeOrder, AlphasQ, it->first)});
+      F.insert({it->first, BuildStructureFunctions(FObjQ, InDistFuncQ, PerturbativeOrder, AlphasQ, it->first, xiR, xiF)});
 
     return F;
   }
