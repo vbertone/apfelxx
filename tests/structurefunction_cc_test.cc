@@ -30,7 +30,7 @@ int main()
   const apfel::TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
-  // CKM matrix elements.
+  // CKM matrix elements
   std::function<std::vector<double>(double const&)> fCKM = [=] (double const&) -> std::vector<double> { return apfel::CKM2; };
 
   // Initialize QCD evolution objects
@@ -43,7 +43,7 @@ int main()
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
   // Evolved PDFs
-  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedPDFs.EvaluateMapxQ(x,Q); };
+  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
 
   // Initialize coefficient functions
   const auto F2PlusCCObj  = InitializeF2CCPlusObjectsZM(g, Thresholds);
@@ -138,7 +138,7 @@ int main()
   std::cout << "Interpolating " << k << " times F2 on the grid... ";
   t.start();
   for (auto i = 0; i < k; i++)
-    F2total.EvaluatexQ(0.05,Q);
+    F2total.EvaluatexQ(0.05, Q);
   t.stop();
 
   return 0;

@@ -44,7 +44,7 @@ int main()
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
   // Evolved PDFs
-  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int,double> { return TabulatedPDFs.EvaluateMapxQ(x,Q); };
+  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int,double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
 
   // Initialize coefficient functions
   const auto F2ObjM  = InitializeF2NCObjectsMassive(g,     Masses);
