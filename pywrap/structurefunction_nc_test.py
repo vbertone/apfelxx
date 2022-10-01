@@ -28,12 +28,10 @@ def fDq(Q):
     return ap.utilities.ParityViolatingElectroWeakCharges(Q, False)
 
 # Initialize QCD evolution objects
-DglapObj   = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds)
-DglapObjOp = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds, True)
+DglapObj = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds)
 
 # Construct the DGLAP objects
-EvolvedPDFs = ap.builders.BuildDglap(DglapObj,   ap.utilities.LHToyPDFs, mu0, PerturbativeOrder, Alphas.Evaluate)
-EvolvedOps  = ap.builders.BuildDglap(DglapObjOp,                         mu0, PerturbativeOrder, Alphas.Evaluate)
+EvolvedPDFs = ap.builders.BuildDglap(DglapObj, ap.utilities.LHToyPDFs, mu0, PerturbativeOrder, Alphas.Evaluate)
 
 # Tabulate PDFs
 TabulatedPDFs = ap.TabulateObjectSetD(EvolvedPDFs, 50, 1, 1000, 3)
