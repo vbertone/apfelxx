@@ -231,10 +231,10 @@ namespace apfel
   }
   double ANS2qqH_0::Regular(double const& x) const
   {
-    const double x2    = x * x;
-    const double lnx   = log(x);
-    const double lnx2  = lnx * lnx;
-    const double a0    =
+    const double x2   = x * x;
+    const double lnx  = log(x);
+    const double lnx2 = lnx * lnx;
+    const double a0   =
       ( 1 + x2 ) * ( 2 * lnx2 / 3 + 20 * lnx / 9 ) / ( 1 - x )
       + 8 * ( 1 - x ) * lnx / 3 + 44 / 27. - 268 * x / 27;
     return CF * TR * a0;
@@ -247,7 +247,7 @@ namespace apfel
   double ANS2qqH_0::Local(double const& x) const
   {
     const double ln1mx = log(1-x);
-    const double a0 = - 8 * zeta3 / 3 + 40 * zeta2 / 9 + 73 / 18. + 224 * ln1mx / 27;
+    const double a0    = - 8 * zeta3 / 3 + 40 * zeta2 / 9 + 73 / 18. + 224 * ln1mx / 27;
     return CF * TR * a0;
   }
 
@@ -367,8 +367,8 @@ namespace apfel
   double AS2ggH_0::Local(double const& x) const
   {
     const double ln1mx = log(1-x);
-    const double a01 = - 15.;
-    const double a02 = 10 / 9. + 224 * ln1mx / 27;
+    const double a01   = - 15.;
+    const double a02   = 10 / 9. + 224 * ln1mx / 27;
     return TR * ( CF * a01 + CA * a02 );
   }
 
@@ -427,5 +427,157 @@ namespace apfel
     const double ln1mx = log(1-x);
     const double omeL2 = TR * TR * 16. / 9 + CA * TR * 8 * ln1mx / 3;
     return omeL2;
+  }
+
+  //_________________________________________________________________________________
+  APS3Hq_0::APS3Hq_0():
+    Expression()
+  {
+  }
+  double APS3Hq_0::Regular(double const& x) const
+  {
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double lnx3   = lnx * lnx2;
+    const double lnx4   = lnx * lnx3;
+    const double lnx5   = lnx * lnx4;
+    const double ln1mx  = log(1-x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    const double ln1mx3 = ln1mx * ln1mx2;
+    const double ln1mx4 = ln1mx * ln1mx3;
+    return pow(1 - x, 2) * ( - 158.3709570235676 * ln1mx3 + 2151.0528216721095 * ln1mx2 - 14178.20613565087 )
+           + 0.7136042069623996 * x + 15618.788026509601 * x * lnx2 + 2117.261727957378 * x * lnx + 688.396 * lnx / x
+           + ( 1 - x ) * 3812.8990 / x + 1.6 * lnx5 - 20.345678 * lnx4 + 165.11455 * lnx3 - 604.63554 * lnx2 + 3524.9967 * lnx
+           + ( 1 - x ) * ( 0.24691358 * ln1mx4 - 4.44444444 * ln1mx3 - 2.28230742 * ln1mx2 - 357.426943 * ln1mx + 116.478169 );
+  }
+
+  //_________________________________________________________________________________
+  AS3Hg_0::AS3Hg_0(double const& rho):
+    Expression(),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{1996.50147366 - _rho, 232.27499707 - _rho / 3, 7.44963895 - _rho / 5,
+                                -77.93698013 - _rho * 0.14285714285714285, -121.36688921 - _rho / 9};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {-1.13879194e-01, -7.30104359e-01, -1.16019755e+02, 1.47898113e+02, -2.48866805e+01},
+      {2.60826752e+00, 1.65606748e+01, 1.87421683e+03, -2.53062040e+03, 2.76071734e+02},
+      {-1.16231560e+01, -7.31022502e+01, -6.56760263e+03, 9.21295249e+03, -8.50419108e+02},
+      {1.73021125e+01, 1.07828576e+02, 8.21779251e+03, -1.18144214e+04,  9.95444799e+02},
+      {-8.20269840e+00, -5.06719525e+01, -3.41032145e+03, 4.98742337e+03, -3.96388523e+02}};
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[j][i] * N[j];
+  }
+  double AS3Hg_0::Regular(double const& x) const
+  {
+    if (x > 0.924)
+      return Regular(0.924 - eps5) * ( 1 - x );
+    else
+      return _C[0] * pow(log(1-x), 5) + _C[1] * pow(log(1-x), 4) + _C[2] * x + _C[3] * pow(x, 2) + _C[4] * log(x) + _rho / x
+             + 41984. / 27. + 160 * Pi2 / 6;
+  }
+
+  //_________________________________________________________________________________
+  ANS3qqH_0::ANS3qqH_0(double const& rho):
+    Expression(),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{-31.101 + _rho * 0.375, -27.989 + _rho * 0.023437499998337614, -20.146 + _rho * 0.004629629629528962,
+                                -13.313 + _rho * 0.0014648437499999065, -7.629 + _rho * 0.0005999999999999996, -2.854 + _rho * 0.0002893518518518518,
+                                1.228 + _rho * 0.00015618492294877136};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {2.16367103e+01, 2.20120178e+02, -7.28098793e-01, 1.08859149e+03, 3.16215872e+01, 7.57356352e+02, -1.31967754e+02},
+      {-1.30805003e+03, -1.30363921e+04, 4.71551230e+01, -6.03760425e+04, -1.06557895e+03, -4.38642686e+04, 5.99320146e+03},
+      {1.36620524e+04,  1.34037998e+05, -5.20816646e+02, 5.95121449e+05, 8.47026017e+03, 4.43696299e+05, -5.19148509e+04},
+      {-5.23812588e+04, -5.07554870e+05,2.09319457e+03, -2.18873394e+06, -2.74098723e+04, -1.65937417e+06, 1.75138916e+05},
+      {9.13767640e+04, 8.76404430e+05, -3.80468317e+03, 3.69828317e+06, 4.24347906e+04, 2.83722814e+06, -2.77933570e+05},
+      {-7.40399878e+04, -7.04036144e+05, 3.19808122e+03,-2.92103432e+06, -3.14155811e+04, -2.26097908e+06,2.09168184e+05},
+      {2.26683150e+04, 2.13961524e+05, -1.01233621e+03, 8.75640617e+05, 8.95431572e+03, 6.82526398e+05, -6.03194325e+04}};
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[j][i] * N[j];
+  }
+  double ANS3qqH_0::Regular(double const& x) const
+  {
+    if (x > 0.4)
+      return 0;
+    else
+      return _C[0] * pow(log(1-x), 3) + _C[1] * pow(log(1-x), 2) +_C[3] * x + _C[4] * pow(log(x), 2) + _C[5] * log(1-x) + _C[6] + _rho * pow(log(x), 3);
+  }
+  double ANS3qqH_0::Singular(double const& x) const
+  {
+    if (x > 0.4)
+      return 0;
+    else
+      return _C[2] / ( 1 - x );
+  }
+  double ANS3qqH_0::Local(double const&) const
+  {
+    return 0;
+  }
+
+  //_________________________________________________________________________________
+  AS3gqH_0::AS3gqH_0():
+    Expression()
+  {
+  }
+  double AS3gqH_0::Regular(double const& x) const
+  {
+    const double x2     = x * x;
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double ln1mx  = log(1-x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    const double ln1mx3 = ln1mx * ln1mx2;
+    const double ln1mx4 = ln1mx * ln1mx3;
+    if (x > 0.7)
+      return Regular(0.7 - eps5) * ( 1 - x ) / 0.3;
+    else
+      return - 237.1720947621626 * ln1mx3 - 201.496990873891 * ln1mx2 + 7247.6979315802555 * ln1mx + 39967.310031716734 * x2
+             - 22017.709314369586 - 28459.052011351927 * lnx - 14511.477130954034 * lnx2 - 341.543 * lnx / x
+             + 1814.73 / x - 580. / 243. * ln1mx4 - 17624. / 729. * ln1mx3 - 135.699 * ln1mx2;
+  }
+
+  //_________________________________________________________________________________
+  AS3ggH_0::AS3ggH_0(double const& rho):
+    Expression(),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{-441.3444 + _rho * 0.9999999999999999, -96.32 + _rho * 0.11111111111076043,
+                                -13.33 + _rho * 0.040000000000137814, 31.1 + _rho * 0.020408163265306242, 60.84 + _rho * 0.01234567901234568};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {1.43759679e+01, -3.46333748e+02, 1.61699126e+03, -2.51174722e+03, 1.23814937e+03},
+      {1.21751771e+02, -2.87863393e+03, 1.32164568e+04, -2.02263161e+04, 9.83890667e+03},
+      {2.91559485e+02, -5.88750691e+03, 2.44589984e+04, -3.49174315e+04, 1.61247555e+04},
+      {-2.80668008e+01, 3.50042899e+02, -1.18494800e+03, 1.50037935e+03, -6.38918620e+02},
+      {-3.82520602e+01, 1.94881955e+01, 2.01486391e+03, -5.00918023e+03, 3.06450021e+03}};
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[i][j] * N[j];
+  }
+  double AS3ggH_0::Regular(double const& x) const
+  {
+    return _C[0] * pow(log(1-x), 2) + _C[1] * log(1-x) + _C[2] * pow(x, 2) + _C[3] * log(x) + _C[4] * x + _rho * log(x) / x;
   }
 }

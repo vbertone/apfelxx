@@ -237,25 +237,57 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNNLO splitting function operators. For now only the
-    // non-singlet splitting functions have been computed to leading
-    // colour even though the subleading colour part is estimated
-    // through an approximate parameterisation.
+    // NNNLO Matching conditions. Approximations from
+    // https://arxiv.org/pdf/2207.04739.pdf. No logarithmic terms are
+    // currently available not the contributions required for backward
+    // evolutions are computed.
+    std::map<int, std::map<int, Operator>> MatchNNNLO;
+    const Operator APS3Hq {g, APS3Hq_0{},  IntEps};
+    const Operator ANS3qqH{g, ANS3qqH_0{}, IntEps};
+    const Operator AS3Hg  {g, AS3Hg_0{},   IntEps};
+    const Operator AS3gqH {g, AS3gqH_0{},  IntEps};
+    const Operator AS3ggH {g, AS3ggH_0{},  IntEps};
+    const Operator AS3qqH = ANS3qqH + APS3Hq;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0, Zero});
+        OM.insert({MatchingBasisQCD::M1, AS3ggH});
+        OM.insert({MatchingBasisQCD::M2, nf * AS3gqH});
+        OM.insert({MatchingBasisQCD::M3, (-1) * AS3gqH});
+        OM.insert({MatchingBasisQCD::M4, AS3Hg});
+        OM.insert({MatchingBasisQCD::M5, nf * AS3qqH});
+        OM.insert({MatchingBasisQCD::M6, (-1) * AS3qqH});
+        OM.insert({MatchingBasisQCD::M7, ANS3qqH});
+        MatchNNNLO.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NNNLO splitting function operators. For now the non-singlet
+    // splitting functions have been computed to leading colour even
+    // though the subleading colour part is estimated through an
+    // approximate parameterisation. In addition the approximations of
+    // https://arxiv.org/pdf/2207.04739.pdf are used
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O3nsp{g, P3nsp{nf}, IntEps};
         const Operator O3nsm{g, P3nsm{nf}, IntEps};
         const Operator O3nss{g, P3nss{nf}, IntEps};
+        const Operator O3ps {g, P3ps{nf},  IntEps};
+        const Operator O3qg {g, P3qg{},    IntEps};
+        const Operator O3gq {g, P3gq{},    IntEps};
+        const Operator O3gg {g, P3gg{},    IntEps};
+        const Operator O3qq  = O3nsp + O3ps;
         const Operator O3nsv = O3nsm + O3nss;
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O3nsp});
         OM.insert({EvolutionBasisQCD::PNSM, O3nsm});
         OM.insert({EvolutionBasisQCD::PNSV, O3nsv});
-        OM.insert({EvolutionBasisQCD::PQQ,  Zero});
-        OM.insert({EvolutionBasisQCD::PQG,  Zero});
-        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
-        OM.insert({EvolutionBasisQCD::PGG,  Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qq});
+        OM.insert({EvolutionBasisQCD::PQG,                O3qg});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gq});
+        OM.insert({EvolutionBasisQCD::PGG,                O3gg});
         OpMapNNNLO.insert({nf, OM});
       }
 
@@ -278,6 +310,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLOb.at(nf)}});
+            obj.MatchingConditions.insert({ 3, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNNLO.at(nf)}});
           }
         else
           {
@@ -289,6 +322,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb.at(nf)}});
+            obj.MatchingConditions.insert({ 3, Set<Operator>{MatchingBasisQCD{nf},  MatchNNNLO.at(nf)}});
           }
         DglapObj.insert({nf, obj});
       }
@@ -1107,7 +1141,7 @@ namespace apfel
       {
         const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
         const auto mc = DglapObj.at(nf).MatchingConditions;
-        return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
+        return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) + cp * mc.at(3) ) );
       };
     else
       throw std::runtime_error(error("MatchingConditions","Perturbative order not allowed."));
