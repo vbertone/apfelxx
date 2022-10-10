@@ -621,8 +621,8 @@ namespace apfel
 
     // Assembly
     const double p3nspai = p3nsa0 + _nf * ( p3nsa1 + _nf * ( p3nspa2 + _nf * p3nsa3 ) )
-                           + _C[1] * omy * dlm + _C[2] * omy * dlm2 + _C[3] * omy * dlm3
-                           + _C[4] + _C[5] * y + _C[6] * y2 + _C[7] * dl2 + _rho * dl3;
+                           + ( _C[1] * omy * dlm + _C[2] * omy * dlm2 + _C[3] * omy * dlm3
+                               + _C[4] + _C[5] * y + _C[6] * y2 + _C[7] * dl2 + _rho * dl3 ) * pow(FourPi, 4);
     if (_imod == 1)
       return p3nspai + p3npa01 + _nf * p3npa11;
     else if (_imod == 2)
@@ -638,7 +638,7 @@ namespace apfel
       - 5.179372e+3 * _nf
       + 1.955772e+2 * _nf * _nf
       + 3.272344    * _nf * _nf * _nf
-      + _C[0];
+      + _C[0] * pow(FourPi, 4);
     const double a4ap1 = - 507.152 + 7.33927 * _nf;
     const double a4ap2 = - 505.209 + 7.53662 * _nf;
 
@@ -657,7 +657,7 @@ namespace apfel
       - 5.179372e+3 * _nf
       + 1.955772e+2 * _nf * _nf
       + 3.272344    * _nf * _nf * _nf
-      + _C[0];
+      + _C[0] * pow(FourPi, 4);
     const double a4ap1 = - 507.152 + 7.33927 * _nf;
     const double a4ap2 = - 505.209 + 7.53662 * _nf;
 
@@ -874,12 +874,13 @@ namespace apfel
     const double dl2 = dl * dl;
     const double dlm = log(1 - x);
     return _nf * ( ( 1 - x ) * ( _C[0] / x + _C[1] * dl2 + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 2) - _rho * dl / x )
-                   + pow(CA, 2) * CF * ( 82. / 81. + 2.40412 ) * dl2 / x / 6 / pow(M_PI, 4) );
+                   + pow(CA, 2) * CF * ( 82. / 81. + 2 * zeta3 ) * dl2 / x / 6 / pow(M_PI, 4) ) * pow(FourPi, 4);
   }
 
   //_________________________________________________________________________________
-  P3qg::P3qg(double const& rho):
+  P3qg::P3qg(int const& nf, double const& rho):
     Expression(),
+    _nf(nf),
     _rho(rho)
   {
     // Moments for the known exact small-x contribution (Vogt)
@@ -905,8 +906,8 @@ namespace apfel
     const double dl  = log(x);
     const double dl2 = dl * dl;
     const double dlm = log(1 - x);
-    return ( _C[0] * dl2 + _C[1] * dl + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 4) - _rho * dl / x
-             + pow(CA, 3) * CF * ( 82. / 81. + 2.40412 ) * dl2 / x / 6 / pow(M_PI, 4) );
+    return _nf * ( _C[0] * dl2 + _C[1] * dl + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 4) - _rho * dl / x
+                   + pow(CA, 3) * ( 82. / 81. + 2 * zeta3 ) * dl2 / x / 6 / pow(M_PI, 4) ) * pow(FourPi, 4);
   }
 
   //_________________________________________________________________________________
@@ -939,7 +940,7 @@ namespace apfel
     const double dl3 = dl * dl2;
     const double dlm = log(1 - x);
     return ( - _C[0] * dl / x + _C[1] * dl3 + _C[2] * x + _C[3] * dlm + _rho * dl2 / x
-             + pow(CA, 3) * CF * 1.20206 * dl3 / x / 3 / pow(M_PI, 4) );
+             - pow(CA, 3) * CF * zeta3 * dl3 / x / 3 / pow(M_PI, 4) ) * pow(FourPi, 4);
   }
 
   //_________________________________________________________________________________
@@ -967,16 +968,15 @@ namespace apfel
   }
   double P3gg::Regular(double const& x) const
   {
-    //return 0;
     const double nf  = 4;
     const double dl  = log(x);
     const double dl2 = dl * dl;
     const double dl3 = dl * dl2;
     const double dlm = log(1 - x);
-    return ( - _C[0] * dl2 + _C[1] * dl + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 2) - _rho * dl / x
-             - pow(CA, 4) / (3 * pow(M_PI, 4)) * 1.20206 * dl3 / x
-             + ( pow(CA, 4) * ( - 1205. / 162. + 67. / 36. * Pi2 / 6 + 1. / 4. * pow(Pi2 / 6, 2) - 11. / 2. * 1.20206 )
-                 + nf * pow(CA, 3) * ( - 233. / 162. + 13. / 36. * Pi2 / 6 - 1. / 3. * 1.20206 )
-                 + nf * pow(CA, 2) * CF * ( 617. / 243. - 13. / 18. * Pi2 / 6 + 2. / 3. * 1.20206 ) ) * dl2 / x / pow(M_PI, 4) / 2 );
+    return ( _C[0] * dl2 + _C[1] * dl + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 2) - _rho * dl / x
+             - pow(CA, 4) / (3 * pow(Pi2, 2)) * zeta3 * dl3 / x
+             + ( pow(CA, 4) * ( - 1205. / 162. + 67. / 36. * zeta2 + 1. / 4. * pow(zeta2, 2) - 11. / 2. * zeta3 )
+                 + nf * pow(CA, 3) * ( - 233. / 162. + 13. / 36. * zeta2 - 1. / 3. * zeta3 )
+                 + nf * pow(CA, 2) * CF * ( 617. / 243. - 13. / 18. * zeta2 + 2. / 3. * zeta3) ) * dl2 / x / pow(Pi2, 2) / 2 ) * pow(FourPi, 4);
   }
 }

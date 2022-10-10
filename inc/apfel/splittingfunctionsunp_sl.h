@@ -365,9 +365,10 @@ namespace apfel
   class P3qg: public Expression
   {
   public:
-    P3qg(double const& rho = -1.754);
+    P3qg(int const& nf, double const& rho = -1.754);
     double Regular(double const& x) const;
   private:
+    int           const _nf;
     double        const _rho;
     std::vector<double> _C;
   };
