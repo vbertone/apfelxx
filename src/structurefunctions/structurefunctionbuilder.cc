@@ -545,6 +545,21 @@ namespace apfel
         C2NNLO.insert({nf, C2NNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> C2NNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O23ps{g, C23ps{nf}, IntEps};
+        const Operator O23g {g, C23g{nf},  IntEps};
+        const Operator O23nsp{g, C23nsp{nf}, IntEps};
+        const Operator O23t = O23nsp + 6 * O23ps;
+        std::map<int, Operator> C2NNNLOnf;
+        C2NNNLOnf.insert({DISCCBasis::CNS, O23nsp});
+        C2NNNLOnf.insert({DISCCBasis::CS,  O23t});
+        C2NNNLOnf.insert({DISCCBasis::CG,  O23g});
+        C2NNNLO.insert({nf, C2NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
@@ -577,6 +592,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -625,6 +641,18 @@ namespace apfel
         C2NNLO.insert({nf, C2NNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> C2NNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O23nsm{g, C23nsm{nf}, IntEps};
+        std::map<int, Operator> C2NNNLOnf;
+        C2NNNLOnf.insert({DISCCBasis::CNS, O23nsm});
+        C2NNNLOnf.insert({DISCCBasis::CS,  Zero});
+        C2NNNLOnf.insert({DISCCBasis::CG,  Zero});
+        C2NNNLO.insert({nf, C2NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
 
@@ -657,6 +685,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -708,6 +737,21 @@ namespace apfel
         CLNNLO.insert({nf, CLNNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> CLNNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator OL3ps{g, CL3ps{nf}, IntEps};
+        const Operator OL3g {g, CL3g{nf},  IntEps};
+        const Operator OL3nsp{g, CL3nsp{nf}, IntEps};
+        const Operator OL3t = OL3nsp + 6 * OL3ps;
+        std::map<int, Operator> CLNNNLOnf;
+        CLNNNLOnf.insert({DISCCBasis::CNS, OL3nsp});
+        CLNNNLOnf.insert({DISCCBasis::CS,  OL3t});
+        CLNNNLOnf.insert({DISCCBasis::CG,  OL3g});
+        CLNNNLO.insert({nf, CLNNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
@@ -740,6 +784,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -787,6 +832,18 @@ namespace apfel
         CLNNLO.insert({nf, CLNNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> CLNNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator OL3nsm{g, CL3nsm{nf}, IntEps};
+        std::map<int, Operator> CLNNNLOnf;
+        CLNNNLOnf.insert({DISCCBasis::CNS, OL3nsm});
+        CLNNNLOnf.insert({DISCCBasis::CS,  Zero});
+        CLNNNLOnf.insert({DISCCBasis::CG,  Zero});
+        CLNNNLO.insert({nf, CLNNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
 
@@ -819,6 +876,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -868,6 +926,19 @@ namespace apfel
         C3NNLO.insert({nf, C3NNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> C3NNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O33nsp{g, C33nsp{nf}, IntEps};
+        const Operator O33t = O33nsp;
+        std::map<int, Operator> C3NNNLOnf;
+        C3NNNLOnf.insert({DISCCBasis::CNS, O33nsp});
+        C3NNNLOnf.insert({DISCCBasis::CS,  O33t});
+        C3NNNLOnf.insert({DISCCBasis::CG,  Zero});
+        C3NNNLO.insert({nf, C3NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {0, 1, 2, 4, 6, 8, 10, 12};
 
@@ -900,6 +971,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -948,6 +1020,18 @@ namespace apfel
         C3NNLO.insert({nf, C3NNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> C3NNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O33nsm{g, C33nsm{nf}, IntEps};
+        std::map<int, Operator> C3NNNLOnf;
+        C3NNNLOnf.insert({DISCCBasis::CNS, O33nsm});
+        C3NNNLOnf.insert({DISCCBasis::CS,  O33nsm});  // This does not feel right. Shouldn't it be NS^V?
+        C3NNNLOnf.insert({DISCCBasis::CG,  Zero});
+        C3NNNLO.insert({nf, C3NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
 
@@ -980,6 +1064,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNNLO.at(nf)}});
         }
       return FObj;
     };

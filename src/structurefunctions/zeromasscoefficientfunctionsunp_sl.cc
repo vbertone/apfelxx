@@ -465,6 +465,13 @@ namespace apfel
   }
   double C23nsm::Singular(double const& x) const
   {
+    // The first term of "c2ns3b" (1536. * d81 * dl15) is numerically
+    // too divergent as x->1. Therefore if x is close enough to 1
+    // return 0.  This should have no impact in that at x->1 the
+    // singular function multiplies something that tends to zero (plus
+    // presciption).
+    if (x > 1 - eps10)
+      return 0;
     const double dl1  = log(1-x);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
@@ -746,6 +753,13 @@ namespace apfel
   }
   double C33nsp::Singular(double const& x) const
   {
+    // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
+    // too divergent as x->1. Therefore if x is close enough to 1
+    // return 0.  This should have no impact in that at x->1 the
+    // singular function multiplies something that tends to zero (plus
+    // presciption).
+    if (x > 1 - eps10)
+      return 0;
     const double dl1  = log(1 - x);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
@@ -809,7 +823,7 @@ namespace apfel
   }
   double C33nsm::Singular(double const& x) const
   {
-    // The first term of "c2ns3b" (1536. * d81 * dl15) is numerically
+    // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
     // too divergent as x->1. Therefore if x is close enough to 1
     // return 0.  This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
