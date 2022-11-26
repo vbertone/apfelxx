@@ -64,6 +64,21 @@ namespace apfel
         C2NNLO.insert({nf, C2NNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> C2NNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O23ps{g, C23ps{nf}, IntEps};
+        const Operator O23g {g, C23g{nf},  IntEps};
+        const Operator O23nsp{g, C23nsp{nf}, IntEps};
+        const Operator O23t = O23nsp + 6 * O23ps;
+        std::map<int, Operator> C2NNNLOnf;
+        C2NNNLOnf.insert({DISNCBasis::CNS, O23nsp});
+        C2NNNLOnf.insert({DISNCBasis::CS,  O23t});
+        C2NNNLOnf.insert({DISNCBasis::CG,  O23g});
+        C2NNNLO.insert({nf, C2NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
@@ -91,6 +106,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -127,7 +143,7 @@ namespace apfel
     CLNLO.insert({DISNCBasis::CS,  OL1ns});
     CLNLO.insert({DISNCBasis::CG,  OL1g});
 
-    // NNLO (for nf from 1 to 6)
+    // NNLO
     std::map<int, std::map<int, Operator>> CLNNLO;
     const Operator OL2ps{g, CL2ps{}, IntEps};
     const Operator OL2g {g, CL2g{},  IntEps};
@@ -140,6 +156,21 @@ namespace apfel
         CLNNLOnf.insert({DISNCBasis::CS,  OL2t});
         CLNNLOnf.insert({DISNCBasis::CG,  OL2g});
         CLNNLO.insert({nf, CLNNLOnf});
+      }
+
+    // NNNLO
+    std::map<int, std::map<int, Operator>> CLNNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator OL3ps{g, CL3ps{nf}, IntEps};
+        const Operator OL3g {g, CL3g{nf},  IntEps};
+        const Operator OL3nsp{g, CL3nsp{nf}, IntEps};
+        const Operator OL3t = OL3nsp + 6 * OL3ps;
+        std::map<int, Operator> CLNNNLOnf;
+        CLNNNLOnf.insert({DISNCBasis::CNS, OL3nsp});
+        CLNNNLOnf.insert({DISNCBasis::CS,  OL3t});
+        CLNNNLOnf.insert({DISNCBasis::CG,  OL3g});
+        CLNNNLO.insert({nf, CLNNNLOnf});
       }
 
     // Vector of distributions to skip
@@ -169,6 +200,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -218,6 +250,19 @@ namespace apfel
         C3NNLO.insert({nf, C3NNLOnf});
       }
 
+    // NNNLO
+    std::map<int, std::map<int, Operator>> C3NNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O33nsm{g, C33nsm{nf}, IntEps};
+        const Operator O33t = O33nsm;
+        std::map<int, Operator> C3NNNLOnf;
+        C3NNNLOnf.insert({DISNCBasis::CNS, O33nsm});
+        C3NNNLOnf.insert({DISNCBasis::CS,  O33t});
+        C3NNNLOnf.insert({DISNCBasis::CG,  Zero});
+        C3NNNLO.insert({nf, C3NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {1, 3, 5, 7, 9, 11};
 
@@ -245,6 +290,7 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -1940,12 +1986,15 @@ namespace apfel
         {
           const double cp  = Alphas(xiR * Q) / FourPi;
           const double cp2 = cp * cp;
+          const double cp3 = cp * cp2;
           const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
           Set<Operator> CoefFuncs = FObjQ.C0.at(k);
           if (PerturbativeOrder > 0)
             CoefFuncs += cp * FObjQ.C1.at(k);
           if (PerturbativeOrder > 1)
             CoefFuncs += cp2 * ( FObjQ.C2.at(k) + tR * beta0qcd(FObjQ.nf) * FObjQ.C1.at(k) );
+          if (PerturbativeOrder > 2)
+            CoefFuncs += cp3 * FObjQ.C3.at(k);
           return CoefFuncs;
         };
 
@@ -1958,10 +2007,12 @@ namespace apfel
         // Create Observable
         Observable<> Obs{Cf, DistF};
 
-        // Include scale variation terms if necessary that is when the
-        // perturbative order is higher than zero. In addition, since
-        // the only pure tR-dependent term is already include above in
-        // the C2 term, we also require tF be different from zero.
+        // Include scale variation terms if necessary, that is when
+        // the perturbative order is higher than zero. In addition,
+        // since the only pure tR-dependent term is already included
+        // above in the C2 term, we also require tF be different from
+        // zero.
+        // !!! Scale variations at N3LO are not implemented yet. !!!
         if (PerturbativeOrder > 0 && tF != 0)
           {
             // Define coefficient function functions that multiply P0 * F
@@ -2063,20 +2114,23 @@ namespace apfel
 
     const double cp  = AlphasQ / FourPi;
     const double cp2 = cp * cp;
-
+    const double cp3 = cp * cp2;
     Set<Operator> Cf = FObjQ.C0.at(k);
     if (PerturbativeOrder > 0)
       Cf += cp * FObjQ.C1.at(k);
     if (PerturbativeOrder > 1)
       Cf += cp2 * ( FObjQ.C2.at(k) + tR * beta0qcd(FObjQ.nf) * FObjQ.C1.at(k) );
+    if (PerturbativeOrder > 2)
+      Cf += cp3 * FObjQ.C3.at(k);
 
     // Convolute coefficient function with set of distributions
     Set<Distribution> SF = Cf * Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQ};
 
-    // Include scale variation terms if necessary that is when the
-    // perturbative order is higher than zero. In addition, since
-    // the only pure tR-dependent term is already include above in
-    // the C2 term, we also require tF be different from zero.
+    // Include scale variation terms if necessary, that is when the
+    // perturbative order is higher than zero. In addition, since the
+    // only pure tR-dependent term is already included above in the C2
+    // term, we also require tF be different from zero.
+    // !!! Scale variations at N3LO are not implemented yet. !!!
     if (PerturbativeOrder > 0 && tF != 0)
       {
         // Get splitting functions P0

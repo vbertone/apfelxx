@@ -29,6 +29,7 @@ namespace apfel
     std::map<int, Set<Operator>>  C0;
     std::map<int, Set<Operator>>  C1;
     std::map<int, Set<Operator>>  C2;
+    std::map<int, Set<Operator>>  C3;
   };
 
   /**
