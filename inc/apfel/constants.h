@@ -162,6 +162,16 @@ namespace apfel
   ///@}
 
   /**
+   * @name Flavour factors required by the N<SUP>3</SUP>LO DIS coefficient functions
+   * @brief Their definition can be found in Tab. 2 (page 8) of
+   * https://arxiv.org/pdf/hep-ph/0504242v1.pdf.
+   */
+  ///@{
+  const std::vector<double> fl11ns = {-1, 0.5, 0, 0.5, 0.2, 0.5};
+  const std::vector<double> fl11sg = {1, 0.1, 0, 0.1, 0.018181818, 0.1};
+  ///@}
+
+  /**
    * @name Conversion factor
    * @brief Conversion factor from GeV<SUP>-2</SUP> to pb.
    */
