@@ -1025,9 +1025,10 @@ namespace apfel
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O33nsm{g, C33nsm{nf}, IntEps};
+        const Operator O33nsv{g, C33nsv{nf}, IntEps};
         std::map<int, Operator> C3NNNLOnf;
         C3NNNLOnf.insert({DISCCBasis::CNS, O33nsm});
-        C3NNNLOnf.insert({DISCCBasis::CS,  O33nsm});  // This does not feel right. Shouldn't it be NS^V?
+        C3NNNLOnf.insert({DISCCBasis::CS,  O33nsv});
         C3NNNLOnf.insert({DISCCBasis::CG,  Zero});
         C3NNNLO.insert({nf, C3NNNLOnf});
       }

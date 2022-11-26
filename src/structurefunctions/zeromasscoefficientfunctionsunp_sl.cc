@@ -710,6 +710,77 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  C33nsv::C33nsv(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double C33nsv::Regular(double const& x) const
+  {
+    const double dl   = log(x);
+    const double dl2  = dl * dl;
+    const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double dl5  = dl * dl4;
+    const double dl6  = dl * dl5;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
+    const double dl12 = dl1 * dl1;
+    const double dl13 = dl1 * dl12;
+    const double dl14 = dl1 * dl13;
+    const double dl15 = dl1 * dl14;
+    const double d27  = 1. / 27;
+    const double d243 = 1. / 243;
+    return
+      - 1853. - 5709. * x + x * x1 * ( 5600. - 1432. * x ) - 536. / 405. * dl5 - 4036. / 81. * dl4 - 496.95 * dl3 - 1488. * dl2 - 293.3 * dl
+      - 512. * d27 * dl15 + 8896. * d27 * dl14 - 1396. * dl13 + 3990. * dl12 + 14363. * dl1 - 0.463 * x * dl6 - dl* dl1 * ( 4007. + 1312. * dl )
+      + _nf * ( 516.1 - 465.2 * x + x * x1 * ( 635.3 + 310.4 * x ) + 304. / 81. * dl4 + 48512. / 729. * dl3 + 305.32 * dl2 + 366.9 * dl - 1.200 * x * dl4
+                - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
+      + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
+                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
+      // Pure valence piece
+      + _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
+                + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
+
+  }
+  double C33nsv::Singular(double const& x) const
+  {
+    // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
+    // too divergent as x->1. Therefore if x is close enough to 1
+    // return 0.  This should have no impact in that at x->1 the
+    // singular function multiplies something that tends to zero (plus
+    // presciption).
+    if (x > 1 - eps10)
+      return 0;
+    const double dl1  = log(1 - x);
+    const double dl12 = dl1 * dl1;
+    const double dl13 = dl1 * dl12;
+    const double dl14 = dl1 * dl13;
+    const double dl15 = dl1 * dl14;
+    const double d81  = 1. / 81;
+    const double c3ns3b =
+      + 1536. * d81 * dl15 - 16320. * d81 * dl14 + 5.01099e+2 * dl13 + 1.17154e+3 * dl12 - 7.32845e+3 * dl1 + 4.44276e+3
+      + _nf * ( 640. * d81 * dl14 - 6592. * d81 * dl13  + 220.573 * dl12 + 294.906 * dl1 - 729.359 )
+      + _nf * _nf * ( 64. * d81 * dl13 - 464. * d81 * dl12 + 7.67505 * dl1 + 1.00830 );
+    return c3ns3b / ( 1 - x );
+  }
+  double C33nsv::Local(double const& x) const
+  {
+    const double dl1  = log(1 - x);
+    const double dl12 = dl1 * dl1;
+    const double dl13 = dl1 * dl12;
+    const double dl14 = dl1 * dl13;
+    const double dl15 = dl1 * dl14;
+    const double dl16 = dl1 * dl15;
+    const double d3   = 1. / 3;
+    const double d81  = 1. / 81;
+    return
+      + 256. * d81 * dl16 - 3264. * d81 * dl15 + 1.252745e+2 * dl14 + 3.905133e+2 * dl13 - 3.664225e+3 * dl12 + 4.44276e+3  * dl1 - 9195.48 + 22.80
+      + _nf * ( 128. * d81 * dl15 - 1648. * d81 * dl14 + 220.573 * d3 * dl13 + 147.453 * dl12 - 729.359 * dl1 + 2575.074 + 0.386 )
+      + _nf * _nf * ( 16. * d81 * dl14 - 464. * d81* d3 * dl13 + 7.67505 * 0.5 * dl12 + 1.0083 * dl1 - 103.2521 - 0.0081 );
+  }
+
+  //_________________________________________________________________________________
   C33nsp::C33nsp(int const& nf):
     Expression(),
     _nf(nf)
@@ -717,7 +788,6 @@ namespace apfel
   }
   double C33nsp::Regular(double const& x) const
   {
-    const double fl02 = 1;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
@@ -740,9 +810,7 @@ namespace apfel
       + _nf * ( 516.1 - 465.2 * x + x * x1 * ( 635.3 + 310.4 * x ) + 304. / 81. * dl4 + 48512. / 729. * dl3 + 305.32 * dl2 + 366.9 * dl - 1.200 * x * dl4
                 - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
-                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
-      + fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
-                       + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
+                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 );
 
     // Compute and include difference to get the minus piece
     const double c3q30a = - ( 46.72 * dl12 + 267.26 * dl1 + 719.49 * x ) * x1 - 171.98 * dl + 9.470 * dl3;
@@ -796,7 +864,6 @@ namespace apfel
   }
   double C33nsm::Regular(double const& x) const
   {
-    const double fl02 = 1;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
@@ -817,9 +884,7 @@ namespace apfel
       + _nf * ( 516.1 - 465.2 * x + x * x1 * ( 635.3 + 310.4 * x ) + 304. / 81. * dl4 + 48512. / 729. * dl3 + 305.32 * dl2 + 366.9 * dl - 1.200 * x * dl4
                 - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
-                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
-      + fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
-                       + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
+                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 );
   }
   double C33nsm::Singular(double const& x) const
   {
