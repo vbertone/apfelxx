@@ -37,7 +37,7 @@ var searchData=
   ['gauss_5flegendre_34',['GAUSS_LEGENDRE',['../classapfel_1_1Integrator.html#a154c2d6265d9f74c7c290baae3d78a6fae0adf3a718f64744c704c10da3574b5f',1,'apfel::Integrator']]],
   ['gaussaccuracy_35',['GaussAccuracy',['../structapfel_1_1EvolutionSetup.html#a54c93d3a7ba5755aeef82ef251831c2d',1,'apfel::EvolutionSetup']]],
   ['gbeta_2eh_36',['gbeta.h',['../gbeta_8h.html',1,'']]],
-  ['getcoefficientfunctions_37',['GetCoefficientFunctions',['../classapfel_1_1Observable.html#a9eb987db5bdea0b48a9ff7488995dd1a',1,'apfel::Observable']]],
+  ['getcoefficientfunctions_37',['GetCoefficientFunctions',['../classapfel_1_1Observable.html#a3c86cb741774a33b44302dbb2be65c4b',1,'apfel::Observable']]],
   ['getcoordinates_38',['GetCoordinates',['../classapfel_1_1OgataQuadrature.html#ae2ab46b4bd9f1f55e988060fb88fbffd',1,'apfel::OgataQuadrature']]],
   ['getdistributionjointgrid_39',['GetDistributionJointGrid',['../classapfel_1_1Interpolator.html#a078f10bda759e56e8bbcd58109a1b212',1,'apfel::Interpolator']]],
   ['getdistributionsubgrid_40',['GetDistributionSubGrid',['../classapfel_1_1Interpolator.html#afc4830a08ec67c046b3d98237a271e76',1,'apfel::Interpolator']]],

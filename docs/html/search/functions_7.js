@@ -21,7 +21,7 @@ var searchData=
   ['gammak2_18',['gammaK2',['../namespaceapfel.html#af871c9acc1435c63dd8ca7c6f5e19a69',1,'apfel']]],
   ['gammak3_19',['gammaK3',['../namespaceapfel.html#ab31f2c0a87feb4000e21747196348c85',1,'apfel']]],
   ['gammak3gmq_20',['gammaK3gmq',['../namespaceapfel.html#ad5e5001f329b08d4beee52ad6e438574',1,'apfel']]],
-  ['getcoefficientfunctions_21',['GetCoefficientFunctions',['../classapfel_1_1Observable.html#a9eb987db5bdea0b48a9ff7488995dd1a',1,'apfel::Observable']]],
+  ['getcoefficientfunctions_21',['GetCoefficientFunctions',['../classapfel_1_1Observable.html#a3c86cb741774a33b44302dbb2be65c4b',1,'apfel::Observable']]],
   ['getcoordinates_22',['GetCoordinates',['../classapfel_1_1OgataQuadrature.html#ae2ab46b4bd9f1f55e988060fb88fbffd',1,'apfel::OgataQuadrature']]],
   ['getdistributionjointgrid_23',['GetDistributionJointGrid',['../classapfel_1_1Interpolator.html#a078f10bda759e56e8bbcd58109a1b212',1,'apfel::Interpolator']]],
   ['getdistributionsubgrid_24',['GetDistributionSubGrid',['../classapfel_1_1Interpolator.html#afc4830a08ec67c046b3d98237a271e76',1,'apfel::Interpolator']]],

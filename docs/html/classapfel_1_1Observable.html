@@ -77,6 +77,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classapfel_1_1Observable-members.html">List of all members</a>  </div>
@@ -84,24 +85,36 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> class encapsulates sets of operators and sets of T-type objects for an easy computation of obsarvebles deriving from the convolution of the two.  
+<p>The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> class encapsulates sets of operators and sets of T-type objects for an easy computation of observables deriving from the convolution of the two. This class can contain an arbitrary number of such pairs that are separatately convoluted and joint when the obeservable is computed by means of the "Evaluate" function.  
  <a href="classapfel_1_1Observable.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="observable_8h_source.html">observable.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structapfel_1_1Observable_1_1ConvolutionPair.html">ConvolutionPair</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure contains a pair of sets of coefficient functions and of objects.  <a href="structapfel_1_1Observable_1_1ConvolutionPair.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a25afa815010dd18f8b1ab5f47a4d9180"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a25afa815010dd18f8b1ab5f47a4d9180">Observable</a> ()=delete</td></tr>
 <tr class="separator:a25afa815010dd18f8b1ab5f47a4d9180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2958e90d0d7885159bdb8c6819244b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#aef2958e90d0d7885159bdb8c6819244b">Observable</a> (std::vector&lt; <a class="el" href="structapfel_1_1Observable_1_1ConvolutionPair.html">ConvolutionPair</a> &gt; ConvPair)</td></tr>
+<tr class="memdesc:aef2958e90d0d7885159bdb8c6819244b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> constructor.  <a href="classapfel_1_1Observable.html#aef2958e90d0d7885159bdb8c6819244b">More...</a><br /></td></tr>
+<tr class="separator:aef2958e90d0d7885159bdb8c6819244b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a5530cd96a831386509d4e9a7e51fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#af9a5530cd96a831386509d4e9a7e51fe">Observable</a> (std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt; const &amp;CoefficientFunctions, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const &amp;)&gt; const &amp;Objects)</td></tr>
 <tr class="memdesc:af9a5530cd96a831386509d4e9a7e51fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> constructor.  <a href="classapfel_1_1Observable.html#af9a5530cd96a831386509d4e9a7e51fe">More...</a><br /></td></tr>
 <tr class="separator:af9a5530cd96a831386509d4e9a7e51fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb35497758b18f38416cfc28be4056ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#acb35497758b18f38416cfc28be4056ed">SetObjects</a> (std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const &amp;)&gt; const &amp;Objects)</td></tr>
-<tr class="memdesc:acb35497758b18f38416cfc28be4056ed"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Set.html" title="The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...">Set</a> the set of ditributions keeping the same set of coefficient functions.  <a href="classapfel_1_1Observable.html#acb35497758b18f38416cfc28be4056ed">More...</a><br /></td></tr>
-<tr class="separator:acb35497758b18f38416cfc28be4056ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9eb987db5bdea0b48a9ff7488995dd1a"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a9eb987db5bdea0b48a9ff7488995dd1a">GetCoefficientFunctions</a> () const</td></tr>
-<tr class="memdesc:a9eb987db5bdea0b48a9ff7488995dd1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the set of coefficient functions.  <a href="classapfel_1_1Observable.html#a9eb987db5bdea0b48a9ff7488995dd1a">More...</a><br /></td></tr>
-<tr class="separator:a9eb987db5bdea0b48a9ff7488995dd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a167d1280001c696b377a63c21efde91a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a167d1280001c696b377a63c21efde91a">AddConvolutionPair</a> (std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt; const &amp;CoefficientFunctions, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const &amp;)&gt; const &amp;Objects)</td></tr>
+<tr class="memdesc:a167d1280001c696b377a63c21efde91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to add a convolution pair.  <a href="classapfel_1_1Observable.html#a167d1280001c696b377a63c21efde91a">More...</a><br /></td></tr>
+<tr class="separator:a167d1280001c696b377a63c21efde91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae471f5b50447da8e16286edaa76d122e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#ae471f5b50447da8e16286edaa76d122e">SetObjects</a> (std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const &amp;)&gt; const &amp;Objects, int const &amp;ip=0)</td></tr>
+<tr class="memdesc:ae471f5b50447da8e16286edaa76d122e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Set.html" title="The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...">Set</a> the set of ditributions keeping the same set of coefficient functions.  <a href="classapfel_1_1Observable.html#ae471f5b50447da8e16286edaa76d122e">More...</a><br /></td></tr>
+<tr class="separator:ae471f5b50447da8e16286edaa76d122e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c86cb741774a33b44302dbb2be65c4b"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a3c86cb741774a33b44302dbb2be65c4b">GetCoefficientFunctions</a> (int const &amp;ip=0) const</td></tr>
+<tr class="memdesc:a3c86cb741774a33b44302dbb2be65c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the set of coefficient functions.  <a href="classapfel_1_1Observable.html#a3c86cb741774a33b44302dbb2be65c4b">More...</a><br /></td></tr>
+<tr class="separator:a3c86cb741774a33b44302dbb2be65c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Functions that evaluate the the observable at the scale</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p >Q. </p>
 </div></td></tr>
@@ -114,17 +127,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a8004a37d9d1ad0421833a6d18a3f5eba"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a8004a37d9d1ad0421833a6d18a3f5eba">_CoefficientFunctions</a></td></tr>
-<tr class="separator:a8004a37d9d1ad0421833a6d18a3f5eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094939c036b1c70dae1163c1cc3401fa"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a094939c036b1c70dae1163c1cc3401fa">_Objects</a></td></tr>
-<tr class="separator:a094939c036b1c70dae1163c1cc3401fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45b5ccc92e74d368e26810e6e007807e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structapfel_1_1Observable_1_1ConvolutionPair.html">ConvolutionPair</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Observable.html#a45b5ccc92e74d368e26810e6e007807e">_ConvPair</a></td></tr>
+<tr class="separator:a45b5ccc92e74d368e26810e6e007807e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T = Distribution&gt;<br />
-class apfel::Observable&lt; T &gt;</div><p >The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> class encapsulates sets of operators and sets of T-type objects for an easy computation of obsarvebles deriving from the convolution of the two. </p>
+class apfel::Observable&lt; T &gt;</div><p >The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> class encapsulates sets of operators and sets of T-type objects for an easy computation of observables deriving from the convolution of the two. This class can contain an arbitrary number of such pairs that are separatately convoluted and joint when the obeservable is computed by means of the "Evaluate" function. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a25afa815010dd18f8b1ab5f47a4d9180" name="a25afa815010dd18f8b1ab5f47a4d9180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25afa815010dd18f8b1ab5f47a4d9180">&#9670;&#160;</a></span>Observable() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a25afa815010dd18f8b1ab5f47a4d9180">&#9670;&#160;</a></span>Observable() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,8 +161,36 @@ template&lt;class T  = Distribution&gt; </div>
 
 </div>
 </div>
+<a id="aef2958e90d0d7885159bdb8c6819244b" name="aef2958e90d0d7885159bdb8c6819244b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef2958e90d0d7885159bdb8c6819244b">&#9670;&#160;</a></span>Observable() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = Distribution&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::Observable </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structapfel_1_1Observable_1_1ConvolutionPair.html">ConvolutionPair</a> &gt;&#160;</td>
+          <td class="paramname"><em>ConvPair</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classapfel_1_1Observable.html" title="The Observable class encapsulates sets of operators and sets of T-type objects for an easy computatio...">Observable</a> constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ConvPair</td><td>a vector of <a class="el" href="structapfel_1_1Observable_1_1ConvolutionPair.html" title="This structure contains a pair of sets of coefficient functions and of objects.">ConvolutionPair</a> structures containing pairs of Set&lt;Operator&gt;-valued and Set&lt;T&gt;-valued functions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af9a5530cd96a831386509d4e9a7e51fe" name="af9a5530cd96a831386509d4e9a7e51fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9a5530cd96a831386509d4e9a7e51fe">&#9670;&#160;</a></span>Observable() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af9a5530cd96a831386509d4e9a7e51fe">&#9670;&#160;</a></span>Observable() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,6 +229,45 @@ template&lt;class T  = Distribution&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a167d1280001c696b377a63c21efde91a" name="a167d1280001c696b377a63c21efde91a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a167d1280001c696b377a63c21efde91a">&#9670;&#160;</a></span>AddConvolutionPair()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = Distribution&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::AddConvolutionPair </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>CoefficientFunctions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const &amp;)&gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Objects</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to add a convolution pair. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">CoefficientFunctions</td><td>a Set&lt;Operator&gt;-valued function returning the operators </td></tr>
+    <tr><td class="paramname">Objects</td><td>a Set&lt;T&gt;-valued function returning the relevant object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8fe77b5f778b6dbdaf0883f1f83d7ff5" name="a8fe77b5f778b6dbdaf0883f1f83d7ff5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8fe77b5f778b6dbdaf0883f1f83d7ff5">&#9670;&#160;</a></span>Evaluate() <span class="overload">[1/2]</span></h2>
 
@@ -259,66 +337,68 @@ template&lt;class T  = Distribution&gt; </div>
 
 </div>
 </div>
-<a id="a9eb987db5bdea0b48a9ff7488995dd1a" name="a9eb987db5bdea0b48a9ff7488995dd1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eb987db5bdea0b48a9ff7488995dd1a">&#9670;&#160;</a></span>GetCoefficientFunctions()</h2>
+<a id="a3c86cb741774a33b44302dbb2be65c4b" name="a3c86cb741774a33b44302dbb2be65c4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c86cb741774a33b44302dbb2be65c4b">&#9670;&#160;</a></span>GetCoefficientFunctions()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class T  = Distribution&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const  &amp;)&gt; <a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::GetCoefficientFunctions </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>ip</em> = <code>0</code></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Get the set of coefficient functions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ip</td><td>index of the convolution-pair vector (default: 0) </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>the set of coefficient functions. </dd></dl>
 
 </div>
 </div>
-<a id="acb35497758b18f38416cfc28be4056ed" name="acb35497758b18f38416cfc28be4056ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb35497758b18f38416cfc28be4056ed">&#9670;&#160;</a></span>SetObjects()</h2>
+<a id="ae471f5b50447da8e16286edaa76d122e" name="ae471f5b50447da8e16286edaa76d122e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae471f5b50447da8e16286edaa76d122e">&#9670;&#160;</a></span>SetObjects()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class T  = Distribution&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void <a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::SetObjects </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(double const &amp;)&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>Objects</em></td><td>)</td>
+          <td class="paramname"><em>Objects</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>ip</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p><a class="el" href="classapfel_1_1Set.html" title="The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...">Set</a> the set of ditributions keeping the same set of coefficient functions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Objects</td><td>the new set of objects </td></tr>
+    <tr><td class="paramname">ip</td><td>index of the convolution-pair vector (default: 0) </td></tr>
   </table>
   </dd>
 </dl>
@@ -326,8 +406,8 @@ template&lt;class T  = Distribution&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8004a37d9d1ad0421833a6d18a3f5eba" name="a8004a37d9d1ad0421833a6d18a3f5eba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8004a37d9d1ad0421833a6d18a3f5eba">&#9670;&#160;</a></span>_CoefficientFunctions</h2>
+<a id="a45b5ccc92e74d368e26810e6e007807e" name="a45b5ccc92e74d368e26810e6e007807e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45b5ccc92e74d368e26810e6e007807e">&#9670;&#160;</a></span>_ConvPair</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,31 +418,7 @@ template&lt;class T  = Distribution&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;<a class="el" href="classapfel_1_1Operator.html">Operator</a>&gt;(double const&amp;)&gt; <a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::_CoefficientFunctions</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a094939c036b1c70dae1163c1cc3401fa" name="a094939c036b1c70dae1163c1cc3401fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a094939c036b1c70dae1163c1cc3401fa">&#9670;&#160;</a></span>_Objects</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T  = Distribution&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;T&gt;(double const&amp;)&gt; <a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::_Objects</td>
+          <td class="memname">std::vector&lt;<a class="el" href="structapfel_1_1Observable_1_1ConvolutionPair.html">ConvolutionPair</a>&gt; <a class="el" href="classapfel_1_1Observable.html">apfel::Observable</a>&lt; T &gt;::_ConvPair</td>
         </tr>
       </table>
   </td>
@@ -380,7 +436,7 @@ template&lt;class T  = Distribution&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 30 2022 10:24:58 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Nov 26 2022 15:33:15 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
