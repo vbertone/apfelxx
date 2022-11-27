@@ -388,7 +388,7 @@ namespace apfel
     // return 0.  This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
-    if (x > 1 - eps10)
+    if (x > 1 - eps8)
       return 0;
     const double dl1  = log(1-x);
     const double dl12 = dl1 * dl1;
@@ -470,7 +470,7 @@ namespace apfel
     // return 0.  This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
-    if (x > 1 - eps10)
+    if (x > 1 - eps8)
       return 0;
     const double dl1  = log(1-x);
     const double dl12 = dl1 * dl1;
@@ -749,7 +749,7 @@ namespace apfel
     // return 0.  This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
-    if (x > 1 - eps10)
+    if (x > 1 - eps8)
       return 0;
     const double dl1  = log(1 - x);
     const double dl12 = dl1 * dl1;
@@ -825,7 +825,7 @@ namespace apfel
     // return 0.  This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
-    if (x > 1 - eps10)
+    if (x > 1 - eps8)
       return 0;
     const double dl1  = log(1 - x);
     const double dl12 = dl1 * dl1;
