@@ -341,21 +341,6 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-valence
-   * coefficient function for F3.
-   */
-  class C33nsv: public Expression
-  {
-  public:
-    C33nsv(int const& nf);
-    double Regular(double const& x)  const;
-    double Singular(double const& x) const;
-    double Local(double const& x)    const;
-  private:
-    int const _nf;
-  };
-
-  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-plus
    * coefficient function for F3.
    */
