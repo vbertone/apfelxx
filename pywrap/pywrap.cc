@@ -52,6 +52,8 @@ PYBIND11_MODULE(apfelpy, m)
   _constants.attr("eu2")        = apfel::eu2;
   _constants.attr("QCh")        = apfel::QCh;
   _constants.attr("QCh2")       = apfel::QCh2;
+  _constants.attr("fl11ns")     = apfel::fl11ns;
+  _constants.attr("fl11sg")     = apfel::fl11sg;
   _constants.attr("ConvFact")   = apfel::ConvFact;
   _constants.attr("ZMass")      = apfel::ZMass;
   _constants.attr("GammaZ")     = apfel::GammaZ;
@@ -1227,10 +1229,11 @@ PYBIND11_MODULE(apfelpy, m)
   .def_readwrite("ConvBasis", &apfel::StructureFunctionObjects::ConvBasis)
   .def_readwrite("C0", &apfel::StructureFunctionObjects::C0)
   .def_readwrite("C1", &apfel::StructureFunctionObjects::C1)
-  .def_readwrite("C2", &apfel::StructureFunctionObjects::C2);
+  .def_readwrite("C2", &apfel::StructureFunctionObjects::C2)
+  .def_readwrite("C3", &apfel::StructureFunctionObjects::C3);
 
   _builders.def("BuildStructureFunctions", py::overload_cast<std::function<apfel::StructureFunctionObjects(double const&, std::vector<double> const&)> const&, std::function<std::map<int, double>(double const&, double const&)> const&, int const&, std::function<double(double const&)> const&, std::function<std::vector<double>(double const&)> const&, double const&, double const&>(&apfel::BuildStructureFunctions), "FObj"_a, "InDistFunc"_a, "PerturbativeOrder"_a, "Alphas"_a, "Couplings"_a, "xiR"_a = 1, "xiF"_a = 1);
-  _builders.def("BuildStructureFunctions", py::overload_cast<std::function<apfel::StructureFunctionObjects(double const&, std::vector<double> const&)> const&, std::function<std::map<int, double>(double const&, double const&)> const&, int const&, std::function<double(double const&)> const&, std::function<std::vector<double>(double const&)> const&, double const&, double const&>(&apfel::BuildStructureFunctions), "FObj"_a, "InDistFunc"_a, "PerturbativeOrder"_a, "Alphas"_a, "Couplings"_a, "xiR"_a = 1, "xiF"_a = 1);
+  _builders.def("BuildStructureFunctions", py::overload_cast<std::function<apfel::StructureFunctionObjects(double const&, std::vector<double> const&)> const&, std::function<double(int const&, double const&, double const&)> const&, int const&, std::function<double(double const&)> const&, std::function<std::vector<double>(double const&)> const&, double const&, double const&>(&apfel::BuildStructureFunctions), "FObj"_a, "InDistFunc"_a, "PerturbativeOrder"_a, "Alphas"_a, "Couplings"_a, "xiR"_a = 1, "xiF"_a = 1);
   _builders.def("BuildStructureFunctions", py::overload_cast<apfel::StructureFunctionObjects const&, std::map<int, apfel::Distribution> const&, int const&, double const&, int const&, double const&, double const&>(&apfel::BuildStructureFunctions), "FObjQ"_a, "InDistFuncQ"_a, "PerturbativeOrder"_a, "AlphasQ"_a, "k"_a, "xiR"_a = 1, "xiF"_a = 1);
   _builders.def("BuildStructureFunctions", py::overload_cast<apfel::StructureFunctionObjects const&, std::map<int, apfel::Distribution> const&, int const&, double const&, double const&, double const&>(&apfel::BuildStructureFunctions), "FObjQ"_a, "InDistFuncQ"_a, "PerturbativeOrder"_a, "AlphasQ"_a, "xiR"_a = 1, "xiF"_a = 1);
 
