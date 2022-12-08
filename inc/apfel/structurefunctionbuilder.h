@@ -10,6 +10,7 @@
 #include "apfel/dglap.h"
 #include "apfel/observable.h"
 #include "apfel/disbasis.h"
+#include "apfel/dglapbuilder.h"
 
 namespace apfel
 {
@@ -21,11 +22,14 @@ namespace apfel
    */
   struct StructureFunctionObjects
   {
+    int                           nf;
+    DglapObjects                  P;
     std::vector<int>              skip;
     std::map<int, ConvolutionMap> ConvBasis;
     std::map<int, Set<Operator>>  C0;
     std::map<int, Set<Operator>>  C1;
     std::map<int, Set<Operator>>  C2;
+    std::map<int, Set<Operator>>  C3;
   };
 
   /**
@@ -361,13 +365,17 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
    * @param Couplings: the vector-valued function of (non-QCD) couplings
+   * @param xiR: the renormalisation scale-variation factor (default: 1)
+   * @param xiF: the factorisation scale-variation factor (default: 1)
    * @return A map of "Observable" objects, one for number of active flavours
    */
   std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
                                                       std::function<std::map<int, double>(double const&, double const&)>                 const& InDistFunc,
                                                       int                                                                                const& PerturbativeOrder,
                                                       std::function<double(double const&)>                                               const& Alphas,
-                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings);
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings,
+                                                      double                                                                             const& xiR = 1,
+                                                      double                                                                             const& xiF = 1);
 
   /**
    * @brief The BuildStructureFunctions function constructs a map of
@@ -377,13 +385,17 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Alphas: the strong coupling function
    * @param Couplings: the vector-valued function of (non-QCD) couplings
+   * @param xiR: the renormalisation scale-variation factor (default: 1)
+   * @param xiF: the factorisation scale-variation factor (default: 1)
    * @return A map of "Observable" objects, one for number of active flavours
    */
   std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
                                                       std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
                                                       int                                                                                const& PerturbativeOrder,
                                                       std::function<double(double const&)>                                               const& Alphas,
-                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings);
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings,
+                                                      double                                                                             const& xiR = 1,
+                                                      double                                                                             const& xiF = 1);
 
   /**
    * @brief The BuildStructureFunctions function constructs an
@@ -393,13 +405,17 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param AlphasQ: the strong coupling at the scale Q
    * @param k: the observable index
+   * @param xiR: the renormalisation scale-variation factor (default: 1)
+   * @param xiF: the factorisation scale-variation factor (default: 1)
    * @return A "Distribution" object
    */
   Distribution BuildStructureFunctions(StructureFunctionObjects    const& FObjQ,
                                        std::map<int, Distribution> const& InDistFuncQ,
                                        int                         const& PerturbativeOrder,
                                        double                      const& AlphasQ,
-                                       int                         const& k);
+                                       int                         const& k,
+                                       double                      const& xiR = 1,
+                                       double                      const& xiF = 1);
 
   /**
    * @brief The BuildStructureFunctions function constructs a map of
@@ -408,11 +424,15 @@ namespace apfel
    * @param InDistFuncQ: the distribution to be convoluted with at the scale Q as a map<int, Distribution>
    * @param PerturbativeOrder: the perturbative order
    * @param AlphasQ: the strong coupling at the scale Q
+   * @param xiR: the renormalisation scale-variation factor (default: 1)
+   * @param xiF: the factorisation scale-variation factor (default: 1)
    * @return A map of "Distribution" objects, one for each number of active flavours
    */
   std::map<int, Distribution> BuildStructureFunctions(StructureFunctionObjects    const& FObjQ,
                                                       std::map<int, Distribution> const& InDistFuncQ,
                                                       int                         const& PerturbativeOrder,
-                                                      double                      const& AlphasQ);
+                                                      double                      const& AlphasQ,
+                                                      double                      const& xiR = 1,
+                                                      double                      const& xiF = 1);
   ///@}
 }

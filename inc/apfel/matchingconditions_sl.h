@@ -8,6 +8,8 @@
 
 #include "apfel/expression.h"
 
+#include <vector>
+
 namespace apfel
 {
   /**
@@ -288,6 +290,77 @@ namespace apfel
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNNLOMC NNNLO matching conditions
+   * @note Approximated expressions from
+   * https://github.com/MSHTPDF/N3LO_additions. Details to be found in
+   * https://arxiv.org/pdf/2207.04739.pdf. Logarithmic terms currently
+   * unavailable.
+   * @ingroup MatchCond
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class APS3Hq_0: public Expression
+  {
+  public:
+    APS3Hq_0();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class AS3Hg_0: public Expression
+  {
+  public:
+    AS3Hg_0(double const& rho = 12214.000);
+    double Regular(double const& x) const;
+  private:
+    double        const _rho;
+    std::vector<double> _C;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class ANS3qqH_0: public Expression
+  {
+  public:
+    ANS3qqH_0(double const& rho = -64.411);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double        const _rho;
+    std::vector<double> _C;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class AS3gqH_0: public Expression
+  {
+  public:
+    AS3gqH_0();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class AS3ggH_0: public Expression
+  {
+  public:
+    AS3ggH_0(double const& rho = -1951.600);
+    double Regular(double const& x)  const;
+  private:
+    double const        _rho;
+    std::vector<double> _C;
   };
   ///@}
   ///@}

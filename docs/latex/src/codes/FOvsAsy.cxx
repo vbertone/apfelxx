@@ -38,10 +38,11 @@ double BLFOgq(double const& x, double const& z)
   return 8 * apfel::CF * x * ( 1 - z );
 }
 
-int main() {
+int main()
+{
   // PDF and FF sets
   LHAPDF::PDF* PDFs = LHAPDF::mkPDF("NNPDF31_nlo_pch_as_0118");
-  LHAPDF::PDF* FFs  = LHAPDF::mkPDF("MAPFF10NLOPIsum");
+  LHAPDF::PDF* FFs  = LHAPDF::mkPDF("MAPFF10NLOPIp");
 
   // Heavy quark masses.
   const double mc = PDFs->quarkThreshold(4);
@@ -167,17 +168,20 @@ int main() {
   const double y  = Q2 / VS / VS / x;
 
   const int    nqT    = 1000;
-  const double qTmin  = 0.000000001;
-  const double qTmax  = 0.001;
+  const double qTmin  = 1e-9;
+  const double qTmax  = 1;
   const double qTstep = exp( log(qTmax / qTmin ) / ( nqT - 1 ) );
 
   std::cout << std::scientific;
-  for (double qT = qTmin; qT <= qTmax * (1.000001); qT *= qTstep)
-    std::cout << qT << "\t"
-	      << xsecFO(Q2, x, y, z, qT) << "\t" << xsecAsy(Q2, x, y, z, qT) << "\t"
-	      //<< xsecFO(Q2, x, y, z, qT) - xsecAsy(Q2, x, y, z, qT) << "\t"
-	      //<< xsecFO(Q2, x, y, z, qT) / xsecAsy(Q2, x, y, z, qT) << "\t"
-	      << std::endl;
-
+  for (double qT = qTmax; qT >= qTmin * (0.99999999); qT /= qTstep)
+    {
+      const double fo  = xsecFO(Q2, x, y, z, qT);
+      const double asy = xsecAsy(Q2, x, y, z, qT);
+      std::cout << qT << "\t"
+		<< fo << "\t" << asy << "\t"
+		<< fo - asy << "\t"
+		<< fo / asy << "\t"
+		<< std::endl;
+    }
   return 0;
 }

@@ -222,5 +222,153 @@ namespace apfel
     int const _nf;
   };
   ///@}
+
+  /**
+   * @defgroup NNNLOzm NNNLO zero-mass coefficient functions
+   * @ingroup NCMassless
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-plus
+   * coefficient function for F2.
+   */
+  class C23nsp: public Expression
+  {
+  public:
+    C23nsp(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-minus
+   * coefficient function for F2.
+   */
+  class C23nsm: public Expression
+  {
+  public:
+    C23nsm(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * coefficient function for F2.
+   */
+  class C23ps: public Expression
+  {
+  public:
+    C23ps(int const& nf);
+    double Regular(double const& x) const;
+    double Local(double const& x)   const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for F2.
+   */
+  class C23g: public Expression
+  {
+  public:
+    C23g(int const& nf);
+    double Regular(double const& x) const;
+    double Local(double const& x)   const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-plus
+   * coefficient function for FL.
+   */
+  class CL3nsp: public Expression
+  {
+  public:
+    CL3nsp(int const& nf);
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-minus
+   * coefficient function for FL.
+   */
+  class CL3nsm: public Expression
+  {
+  public:
+    CL3nsm(int const& nf);
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * coefficient function for FL.
+   */
+  class CL3ps: public Expression
+  {
+  public:
+    CL3ps(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for FL.
+   */
+  class CL3g: public Expression
+  {
+  public:
+    CL3g(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-plus
+   * coefficient function for F3.
+   */
+  class C33nsp: public Expression
+  {
+  public:
+    C33nsp(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-minus
+   * coefficient function for F3.
+   */
+  class C33nsm: public Expression
+  {
+  public:
+    C33nsm(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+  };
+  ///@}
   ///@}
 }

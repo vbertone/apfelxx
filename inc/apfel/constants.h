@@ -19,6 +19,18 @@ namespace apfel
    */
   ///@{
   ///@}
+
+  /**
+   * @defgroup PertOrds Perturbative orders
+   * Enumerator for the perturbative orders for both fixed order and
+   * resummation.
+   * @ingroup NumericalConstants
+   */
+  ///@{
+  enum FixedOrderAccuracy: int {LO = 0, NLO = 1, NNLO = 2, NNNLO = 3};
+  enum LogAccuracy: int {NNNLLp = -3, NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3};
+  ///@}
+
   /**
    * @defgroup MathConstants Mathematical constants
    * Collection of mathematical constants often used in the code.
@@ -147,6 +159,16 @@ namespace apfel
   const double eu2 =   4. / 9.;
   const std::vector<double> QCh  = {ed,  eu,  ed,  eu,  ed,  eu};
   const std::vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
+  ///@}
+
+  /**
+   * @name Flavour factors required by the N<SUP>3</SUP>LO DIS coefficient functions
+   * @brief Their definition can be found in Tab. 2 (page 8) of
+   * https://arxiv.org/pdf/hep-ph/0504242v1.pdf.
+   */
+  ///@{
+  const std::vector<double> fl11ns = {-1, 0.5, 0, 0.5, 0.2, 0.5};
+  const std::vector<double> fl11sg = {1, 0.1, 0, 0.1, 0.018181818, 0.1};
   ///@}
 
   /**

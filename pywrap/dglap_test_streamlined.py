@@ -21,7 +21,7 @@ a = ap.AlphaQCD(0.35, np.sqrt(2), Thresholds, PerturbativeOrder)
 Alphas = ap.TabulateObject(a, 100, 0.9, 1001, 3)
 
 # Initialize QCD evolution objects
-DglapObj   = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds)
+DglapObj = ap.initializers.InitializeDglapObjectsQCD(g, Thresholds)
 
 # Construct the DGLAP objects
 EvolvedPDFs = ap.builders.BuildDglap(DglapObj, ap.utilities.LHToyPDFs, mu0, PerturbativeOrder, Alphas.Evaluate)

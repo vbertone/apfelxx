@@ -49,6 +49,7 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol = false,
                                                         double              const& IntEps = 1e-5);
+
   /**
    * @brief The InitializeDglapObjectsQCD function precomputes the
    * perturbative coefficients of space-like unpolarised splitting
@@ -223,6 +224,7 @@ namespace apfel
    * @param MuRef: the reference scale
    * @param PerturbativeOrder: the perturbative order of the evolution
    * @param Alphas: the function returning the strong coupling
+   * @param xi: the scale-variation parameter (default: 1)
    * @param nsteps: the number of steps of the ODE solver (default: 10).
    * @return A unique pointer to a Dglap object
    */
@@ -231,6 +233,7 @@ namespace apfel
                                                   double                                                             const& MuRef,
                                                   int                                                                const& PerturbativeOrder,
                                                   std::function<double(double const&)>                               const& Alphas,
+                                                  double                                                             const& xi = 1,
                                                   int                                                                const& nsteps = 10);
 
   /**
@@ -240,6 +243,7 @@ namespace apfel
    * @param MuRef: the reference scale
    * @param PerturbativeOrder: the perturbative order of the evolution
    * @param Alphas: the function returning the strong coupling
+   * @param xi: the scale-variation parameter (default: 1)
    * @param nsteps: the number of steps of the ODE solver (default: 10).
    * @return A unique pointer to a Dglap object
    */
@@ -247,6 +251,7 @@ namespace apfel
                                               double                               const& MuRef,
                                               int                                  const& PerturbativeOrder,
                                               std::function<double(double const&)> const& Alphas,
+                                              double                               const& xi = 1,
                                               int                                  const& nsteps = 10);
 
   /**

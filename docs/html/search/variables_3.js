@@ -8,7 +8,8 @@ var searchData=
   ['ckm_5',['CKM',['../group__PhysConstants.html#ga7f3eb9a6af61bae80a7f6947599fd696',1,'apfel']]],
   ['ckm2_6',['CKM2',['../group__PhysConstants.html#ga5323493f8fa0c7f8bb81d386a7303b51',1,'apfel']]],
   ['coefficient_7',['coefficient',['../structapfel_1_1ConvolutionMap_1_1rule.html#a4bf45b4c287915ad713e8367aea136ea',1,'apfel::ConvolutionMap::rule::coefficient()'],['../structapfel_1_1term.html#ac2ed928338c39a18b9995db6c407efd3',1,'apfel::term::coefficient()']]],
-  ['convbasis_8',['ConvBasis',['../structapfel_1_1StructureFunctionObjects.html#a45c9550f90d3b07604961b513bee4162',1,'apfel::StructureFunctionObjects']]],
-  ['convfact_9',['ConvFact',['../group__PhysConstants.html#gae98d82c9534cde7c04ae48896e66360e',1,'apfel']]],
-  ['couplingevolution_10',['CouplingEvolution',['../structapfel_1_1EvolutionSetup.html#aa26ea1950ffa331a10e1f8f6dd84f4cf',1,'apfel::EvolutionSetup']]]
+  ['coefficientfunctions_8',['CoefficientFunctions',['../structapfel_1_1Observable_1_1ConvolutionPair.html#a3544246010eaef43cfc895b25ca3d767',1,'apfel::Observable::ConvolutionPair']]],
+  ['convbasis_9',['ConvBasis',['../structapfel_1_1StructureFunctionObjects.html#a45c9550f90d3b07604961b513bee4162',1,'apfel::StructureFunctionObjects']]],
+  ['convfact_10',['ConvFact',['../group__PhysConstants.html#gae98d82c9534cde7c04ae48896e66360e',1,'apfel']]],
+  ['couplingevolution_11',['CouplingEvolution',['../structapfel_1_1EvolutionSetup.html#aa26ea1950ffa331a10e1f8f6dd84f4cf',1,'apfel::EvolutionSetup']]]
 ];

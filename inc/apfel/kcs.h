@@ -19,7 +19,7 @@ namespace apfel
   /// &alpha;<SUB>s</SUB> term
   double KCS00();
 
-/// &alpha;<SUB>s</SUB>L term
+  /// &alpha;<SUB>s</SUB>L term
   double KCS01();
 
   /// &alpha;<SUB>s</SUB><SUP>2</SUP> term

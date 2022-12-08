@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <cmath>
-#include <map>
 #include <iomanip>
 
 int main()
@@ -46,26 +44,34 @@ int main()
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
 
   // Evolved PDFs
-  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int,double> { return TabulatedPDFs.EvaluateMapxQ(x,Q); };
+  const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int,double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
 
   // Initialize coefficient functions
-  const auto F2Obj = InitializeF2NCObjectsMassive(g, Masses);
-  const auto FLObj = InitializeFLNCObjectsMassive(g, Masses);
+  const auto F2ObjM  = InitializeF2NCObjectsMassive(g,     Masses);
+  const auto FLObjM  = InitializeFLNCObjectsMassive(g,     Masses);
+  const auto F2ObjM0 = InitializeF2NCObjectsMassiveZero(g, Masses);
+  const auto FLObjM0 = InitializeFLNCObjectsMassiveZero(g, Masses);
 
   // Initialize structure functions
-  const auto F2 = BuildStructureFunctions(F2Obj, PDFs, PerturbativeOrder, as, fBq);
-  const auto FL = BuildStructureFunctions(FLObj, PDFs, PerturbativeOrder, as, fBq);
+  const auto F2M  = BuildStructureFunctions(F2ObjM,  PDFs, PerturbativeOrder, as, fBq);
+  const auto FLM  = BuildStructureFunctions(FLObjM,  PDFs, PerturbativeOrder, as, fBq);
+  const auto F2M0 = BuildStructureFunctions(F2ObjM0, PDFs, PerturbativeOrder, as, fBq);
+  const auto FLM0 = BuildStructureFunctions(FLObjM0, PDFs, PerturbativeOrder, as, fBq);
 
   // Tabulate Structure functions
-  const apfel::TabulateObject<apfel::Distribution> F2charm {[&] (double const& Q) -> apfel::Distribution{ return F2.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> F2bottom{[&] (double const& Q) -> apfel::Distribution{ return F2.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> FLcharm {[&] (double const& Q) -> apfel::Distribution{ return FL.at(4).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> FLbottom{[&] (double const& Q) -> apfel::Distribution{ return FL.at(5).Evaluate(Q); }, 50, 1, 1000, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2charmM  {[&] (double const& Q) -> apfel::Distribution{ return F2M.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2bottomM {[&] (double const& Q) -> apfel::Distribution{ return F2M.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLcharmM  {[&] (double const& Q) -> apfel::Distribution{ return FLM.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLbottomM {[&] (double const& Q) -> apfel::Distribution{ return FLM.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2charmM0 {[&] (double const& Q) -> apfel::Distribution{ return F2M0.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2bottomM0{[&] (double const& Q) -> apfel::Distribution{ return F2M0.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLcharmM0 {[&] (double const& Q) -> apfel::Distribution{ return FLM0.at(4).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLbottomM0{[&] (double const& Q) -> apfel::Distribution{ return FLM0.at(5).Evaluate(Q); }, 50, 1, 200, 3, Thresholds};
 
   apfel::Timer t;
 
   // Final scale
-  const double Q = 5;
+  const double Q = 100;
 
   // Scaling variables for charm and bottom
   const double etac = Q * Q / ( Q * Q + 4 * Masses[3] * Masses[3] );
@@ -78,26 +84,49 @@ int main()
 
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
   std::cout << "    x   "
-            << "  F2charm   "
-            << "  F2bottom  "
+            << " F2charmM   "
+            << " F2bottomM  "
             << std::endl;
-  for (auto const& x : xlha)
+  for (double const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
-              << F2charm.EvaluatexQ(x / etac, Q)  << "  "
-              << F2bottom.EvaluatexQ(x / etab, Q)  << "  "
+              << F2charmM.EvaluatexQ(x / etac, Q)  << "  "
+              << F2bottomM.EvaluatexQ(x / etab, Q)  << "  "
               << std::endl;
   std::cout << std::endl;
 
   std::cout << "    x   "
-            << "  FLcharm   "
-            << "  FLbottom  "
+            << " FLcharmM   "
+            << " FLbottomM  "
             << std::endl;
-  for (auto const& x : xlha)
+  for (double const& x : xlha)
     std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
-              << FLcharm.EvaluatexQ(x / etac, Q)  << "  "
-              << FLbottom.EvaluatexQ(x / etab, Q)  << "  "
+              << FLcharmM.EvaluatexQ(x / etac, Q)  << "  "
+              << FLbottomM.EvaluatexQ(x / etab, Q)  << "  "
               << std::endl;
   std::cout << std::endl;
+
+  std::cout << "    x   "
+            << " F2charmM0  "
+            << " F2bottomM0 "
+            << std::endl;
+  for (double const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+              << F2charmM0.EvaluatexQ(x, Q)  << "  "
+              << F2bottomM0.EvaluatexQ(x, Q)  << "  "
+              << std::endl;
+  std::cout << std::endl;
+
+  std::cout << "    x   "
+            << " FLcharmM0  "
+            << " FLbottomM0 "
+            << std::endl;
+  for (double const& x : xlha)
+    std::cout << std::setprecision(1) << x << "  " << std::setprecision(4)
+              << FLcharmM0.EvaluatexQ(x, Q)  << "  "
+              << FLbottomM0.EvaluatexQ(x, Q)  << "  "
+              << std::endl;
+  std::cout << std::endl;
+
   t.stop();
 
   return 0;

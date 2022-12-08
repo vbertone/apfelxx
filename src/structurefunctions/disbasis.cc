@@ -126,7 +126,7 @@ namespace apfel
         else
           {
             _rules[2 * k - 1] = { {CNS, 2 * k - 1, coefp} };
-            _rules[2 * k]     = { {CNS, 2 * k,   coefm} };
+            _rules[2 * k]     = { {CNS, 2 * k,     coefm} };
           }
       }
   }

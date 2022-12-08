@@ -45,7 +45,7 @@ namespace apfel
   template<class T>
   Set<T> Dglap<T>::Derivative(int const& nf, double const& t, Set<T> const& f) const
   {
-    return _SplittingFunctions(nf, exp(t / 2)) * f;
+    return _SplittingFunctions(nf, t) * f;
   }
 
   // Fixed template types.
