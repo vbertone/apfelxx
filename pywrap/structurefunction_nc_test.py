@@ -5,7 +5,7 @@ import numpy as np
 ap.Banner()
 
 # x-space grid
-g = ap.Grid([ap.SubGrid(100,1e-5,3), ap.SubGrid(60,1e-1,3), ap.SubGrid(50,6e-1,3), ap.SubGrid(50,8e-1,3)])
+g = ap.Grid([ap.SubGrid(100, 1e-5, 3), ap.SubGrid(60, 1e-1, 3), ap.SubGrid(50, 6e-1, 3), ap.SubGrid(50, 8e-1, 3)])
 
 # Initial scale
 mu0 = np.sqrt(2)
