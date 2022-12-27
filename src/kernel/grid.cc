@@ -14,9 +14,11 @@ namespace apfel
 {
   //_________________________________________________________________________________
   Grid::Grid(std::vector<SubGrid> const& grs):
+  // *INDENT-OFF*
     _JointToSubMap({{}}),
-  _GlobalGrid(grs),
-              _JointGrid(new SubGrid{CreateJointGrid()})
+    _GlobalGrid(grs),
+    _JointGrid(new SubGrid{CreateJointGrid()})
+  // *INDENT-ON*
   {
   }
 
@@ -25,13 +27,14 @@ namespace apfel
   {
     if (sg1.xMin() == sg2.xMin())
       throw std::runtime_error(error("ComparexMin", "There are SubGrids with the same lower bound."));
+
     return sg1.xMin() < sg2.xMin();
   }
 
   //_________________________________________________________________________________
   SubGrid Grid::CreateJointGrid()
   {
-    // Number of grids.
+    // Number of grids
     double const ng = _GlobalGrid.size();
 
     // Order the SubGrids in such a way that they start with that
@@ -48,7 +51,7 @@ namespace apfel
         const int nxg     = _GlobalGrid[ig-1].nx();
         const double xmin = _GlobalGrid[ig].xMin();
 
-        // Parameters of the adjusted grid.
+        // Parameters of the adjusted grid
         int nx_new = -1;
         double xmin_new = -1;
         const int id_new = _GlobalGrid[ig].InterDegree();
@@ -75,8 +78,8 @@ namespace apfel
         _GlobalGrid[ig] = SubGrid{nx_new, xmin_new, id_new};
       }
 
-    // Compute the joint grid. Parameters of the joint grid. Use the
-    // interpolation degree of the first grid.
+    // Compute the joint grid. Use the interpolation degree of the
+    // first grid.
     const int id_joint = _GlobalGrid[0].InterDegree();
     std::vector<double> xg_joint_vect;
     for (int ig = 0; ig < ng; ig++)
@@ -98,7 +101,7 @@ namespace apfel
 
     // Since the subgrids are locked all the nodes of each single
     // subgrid are also on the joint grid. We now define a vector of
-    // integers that map each index on each single subgrid on a node
+    // integers that map each index on each single subgrid to a node
     // on the joint grid. For convenience, we also define a vector
     // containing the indices on the joint grid where the following
     // subgrid starts.
@@ -128,7 +131,7 @@ namespace apfel
       }
     _TransPoints[ng] = xg_joint_vect.size() - 1;
 
-    // Initialize another SubGrid for the joint grid.
+    // Initialize another SubGrid for the joint grid and return
     return SubGrid{xg_joint_vect, id_joint};
   }
 
@@ -159,7 +162,9 @@ namespace apfel
   {
     os << "Grid: " << &gr << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
-    for (const auto &v: gr._JointGrid->GetGrid()) os << v << " ";
+    for (const auto &v: gr._JointGrid->GetGrid())
+      os << v << " ";
+
     return os;
   }
 }

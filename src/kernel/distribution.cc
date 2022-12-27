@@ -174,11 +174,11 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator *= (double const& s)
   {
-    // sum objects in joint grid
+    // Sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= s;
 
-    // sum objects in subgrids
+    // Sum objects in subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] *= s;
@@ -192,11 +192,11 @@ namespace apfel
     // Get joint grid
     const auto& jg = _grid.GetJointGrid().GetGrid();
 
-    // sum objects in joint grid
+    // Sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= f(jg[i]);
 
-    // sum objects in subgrids
+    // Sum objects in subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       {
         // Get ig-th subgrid
@@ -212,11 +212,11 @@ namespace apfel
   Distribution& Distribution::operator /= (double const& s)
   {
     const double r = 1 / s;
-    // sum objects in joint grid
+    // Sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= r;
 
-    // sum objects in subgrids
+    // Sum objects in subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] *= r;
@@ -227,11 +227,11 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator *= (Distribution const& d)
   {
-    // multiply objects in joint grid
+    // Multiply objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= d._distributionJointGrid[i];
 
-    // sum objects in subgrids
+    // Sum objects in subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] *= d._distributionSubGrid[ig][i];
@@ -242,15 +242,15 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator += (Distribution const& d)
   {
-    // fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
       throw std::runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
 
-    // sum objects in joint grid
+    // Sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] += d._distributionJointGrid[i];
 
-    // sum objects in subgrids
+    // Sum objects in subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] += d._distributionSubGrid[ig][i];
@@ -261,15 +261,15 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator -= (Distribution const& d)
   {
-    // fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
       throw std::runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
 
-    // sum objects in joint grid
+    // Sum objects in joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] -= d._distributionJointGrid[i];
 
-    // sum objects in subgrids
+    // Sum objects in subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] -= d._distributionSubGrid[ig][i];
@@ -331,17 +331,17 @@ namespace apfel
                                               double                                                             const& Q,
                                               std::vector<int>                                                   const& skip)
   {
-    // Joint grid and subgrid vectors.
+    // Joint grid and subgrid vectors
     const std::vector<double>& jg = g.GetJointGrid().GetGrid();
 
-    // Initialise output.
+    // Initialise output
     std::map<int, Distribution> DistMap;
     const std::map<int, double> f = InDistFunc(jg[0], Q);
     for (auto it = f.begin(); it != f.end(); ++it)
       if (std::find(skip.begin(), skip.end(), it->first) == skip.end())
         DistMap.insert({it->first, Distribution{g}});
 
-    // Fill in joint grid.
+    // Fill in joint grid
     for (int ix = 0; ix < (int) jg.size(); ix++)
       {
         const std::map<int, double> f = InDistFunc(std::min(jg[ix], 1.), Q);
@@ -350,7 +350,7 @@ namespace apfel
             DistMap.at(it.first).SetJointGrid(ix, it.second);
       }
 
-    // Fill in subgrids.
+    // Fill in subgrids
     for (int ig = 0; ig < g.nGrids(); ig++)
       {
         const std::vector<double>& sg = g.GetSubGrid(ig).GetGrid();
@@ -370,17 +370,17 @@ namespace apfel
                                               std::function<std::map<int, double>(double const&)> const& InDistFunc,
                                               std::vector<int>                                    const& skip)
   {
-    // Joint grid and subgrid vectors.
+    // Joint grid and subgrid vectors
     const std::vector<double>& jg = g.GetJointGrid().GetGrid();
 
-    // Initialise output.
+    // Initialise output
     std::map<int, Distribution> DistMap;
     const std::map<int, double> f = InDistFunc(jg[0]);
     for (auto const& it : f)
       if (std::find(skip.begin(), skip.end(), it.first) == skip.end())
         DistMap.insert({it.first, Distribution{g}});
 
-    // Fill in joint grid.
+    // Fill in joint grid
     for (int ix = 0; ix < (int) jg.size(); ix++)
       {
         const std::map<int, double> f = InDistFunc(std::min(jg[ix], 1.));
@@ -389,7 +389,7 @@ namespace apfel
             DistMap.at(it.first).SetJointGrid(ix, it.second);
       }
 
-    // Fill in subgrids.
+    // Fill in subgrids
     for (int ig = 0; ig < g.nGrids(); ig++)
       {
         const std::vector<double>& sg = g.GetSubGrid(ig).GetGrid();
@@ -409,7 +409,7 @@ namespace apfel
                                               std::function<std::vector<double>(double const&)> const& InDistFunc,
                                               int                                               const& NOutputs)
   {
-    // Joint grid and subgrid vectors.
+    // Joint grid and subgrid vectors
     const std::vector<double>& jg = g.GetJointGrid().GetGrid();
 
     // Initialise output. If the number of outputs is provided use
@@ -419,7 +419,7 @@ namespace apfel
     for (int i = 0; i < n; i++)
       DistMap.insert({i, Distribution{g}});
 
-    // Fill in joint grid.
+    // Fill in joint grid
     for (int ix = 0; ix < (int) jg.size(); ix++)
       {
         const std::vector<double> f = InDistFunc(std::min(jg[ix], 1.));

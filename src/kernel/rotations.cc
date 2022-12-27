@@ -12,20 +12,20 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, double> PhysToQCDEv(std::map<int, double> const& InPhysMap)
   {
-    // Call function in the physical basis.
+    // Call function in the physical basis
     std::map<int, double> PhysMap = InPhysMap;
 
-    // Fill in keys that don't exist.
-    // Gluon (assumes that the ID is 21).
+    // Fill in keys that do not exist. Start with the gluon (assume
+    // that the ID is 21).
     if (PhysMap.find(0) == PhysMap.end())
       PhysMap[0] = PhysMap[21];
 
-    // Quarks (Fill in with zero if they don't exist).
+    // Quarks (fill in with zero if they do not exist)
     for (int i = -6; i <= 6; i++)
       if (PhysMap.find(i) == PhysMap.end())
         PhysMap[i] = 0;
 
-    // Fill in map in the QCD evolution basis. It attumes that the
+    // Fill in map in the QCD evolution basis. It assumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
     std::map<int, double> QCDEvMap;
     QCDEvMap[0] = PhysMap.at(0);
@@ -100,7 +100,7 @@ namespace apfel
   //_____________________________________________________________________________
   Set<Distribution> PhysToQCDEv(std::map<int, Distribution> const& InPhysMap, int const& nf)
   {
-    // Fill in map in the QCD evolution basis. It attumes that the
+    // Fill in map in the QCD evolution basis. It assumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
     std::map<int, Distribution> QCDEvMap;
     QCDEvMap.insert({0, InPhysMap.at(0)});
@@ -175,7 +175,7 @@ namespace apfel
   //_____________________________________________________________________________
   Set<Operator> PhysToQCDEv(std::map<int, Operator> const& InPhysMap, int const& nf)
   {
-    // Fill in map in the QCD evolution basis. It attumes that the
+    // Fill in map in the QCD evolution basis. It assumes that the
     // gluon has key zero and all keys from -6 to 6 exist.
     std::map<int, Operator> QCDEvMap;
     QCDEvMap.insert({0, InPhysMap.at(0)});
@@ -250,13 +250,13 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, double> QCDEvToPhys(std::map<int, double> const& QCDEvMap)
   {
-    // Fill in map in the physical basis. It attumes that the gluon
+    // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, double> PhysMap;
     PhysMap[0]  = QCDEvMap.at(0);
     PhysMap[21] = QCDEvMap.at(0);
 
-    // Perform the rotation.
+    // Perform the rotation
     for (int i = 1; i <= 6; i++)
       {
         PhysMap[i]  = 0;
@@ -273,12 +273,12 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, Distribution> QCDEvToPhys(std::map<int, Distribution> const& QCDEvMap)
   {
-    // Fill in map in the physical basis. It attumes that the gluon
+    // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, Distribution> PhysMap;
     PhysMap.insert({0, QCDEvMap.at(0)});
 
-    // Perform the rotation.
+    // Perform the rotation
     for (int i = 1; i <= 6; i++)
       {
         Distribution Td = ( RotQCDEvToPhys[i-1][0] / 2 ) * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
@@ -297,12 +297,12 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, Operator> QCDEvToPhys(std::map<int, Operator> const& QCDEvMap)
   {
-    // Fill in map in the physical basis. It attumes that the gluon
+    // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, Operator> PhysMap;
     PhysMap.insert({0, QCDEvMap.at(0)});
 
-    // Perform the rotation.
+    // Perform the rotation
     for (int i = 1; i <= 6; i++)
       {
         Operator Td = ( RotQCDEvToPhys[i-1][0] / 2 ) * ( QCDEvMap.at(1) + QCDEvMap.at(2) );
@@ -321,20 +321,20 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, double> PhysToPlusMinus(std::map<int, double> const& InPhysMap)
   {
-    // Call function in the physical basis.
+    // Call function in the physical basis
     std::map<int, double> PhysMap = InPhysMap;
 
-    // Fill in keys that don't exist.
-    // Gluon (assumes that the ID is 21).
+    // Fill in keys that do not exist Start with the gluon (assumes
+    // that the ID is 21).
     if (PhysMap.find(0) == PhysMap.end())
       PhysMap[0] = PhysMap[21];
 
-    // Quarks (Fill in with zero if they don't exist).
+    // Quarks (fill in with zero if they do not exist).
     for (int i = -6; i <= 6; i++)
       if (PhysMap.find(i) == PhysMap.end())
         PhysMap[i] = 0;
 
-    // Fill in map in the PlusMinus basis. It attumes that the gluon
+    // Fill in map in the PlusMinus basis. It assumes that the gluon
     // has key zero and all keys from -6 to 6 exist.
     std::map<int, double> QCDEvMap;
     QCDEvMap[0]  = PhysMap.at(0);
@@ -343,45 +343,41 @@ namespace apfel
         QCDEvMap[2*i-1] = PhysMap.at(i) + PhysMap.at(-i);
         QCDEvMap[2*i]   = PhysMap.at(i) - PhysMap.at(-i);
       }
-
     return QCDEvMap;
   }
 
   //_____________________________________________________________________________
   std::map<int, double> PlusMinusToPhys(std::map<int, double> const& PlusMinusMap)
   {
-    // Fill in map in the physical basis. It attumes that the gluon
+    // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, double> PhysMap;
     PhysMap[0]  = PlusMinusMap.at(0);
     PhysMap[21] = PlusMinusMap.at(0);
 
-    // Fill in map in the physical basis.
+    // Fill in map in the physical basis
     for (int i = 1; i <= 6; i++)
       {
         PhysMap[i]  = ( PlusMinusMap.at(2*i-1) + PlusMinusMap.at(2*i) ) / 2;
         PhysMap[-i] = ( PlusMinusMap.at(2*i-1) - PlusMinusMap.at(2*i) ) / 2;
       }
-
     return PhysMap;
   }
 
   //_____________________________________________________________________________
   std::map<int, Distribution> PlusMinusToPhys(std::map<int, Distribution> const& PlusMinusMap)
   {
-    // Fill in map in the physical basis. It attumes that the gluon
+    // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, Distribution> PhysMap;
     PhysMap.insert({0, PlusMinusMap.at(0)});
 
-
-    // Fill in map in the physical basis.
+    // Fill in map in the physical basis
     for (int i = 1; i <= 6; i++)
       {
         PhysMap.insert({i,  ( PlusMinusMap.at(2*i-1) + PlusMinusMap.at(2*i) ) / 2});
         PhysMap.insert({-i, ( PlusMinusMap.at(2*i-1) - PlusMinusMap.at(2*i) ) / 2});
       }
-
     return PhysMap;
   }
 }

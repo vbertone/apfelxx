@@ -64,7 +64,6 @@ namespace apfel
         t.object1 *= f;
         t.object2 *= f;
       }
-
     return *this;
   }
 
@@ -94,8 +93,6 @@ namespace apfel
   {
     for (auto const& t : o.GetTerms())
       _terms.push_back(t);
-    //const std::vector<term<T, U>>& terms = o.GetTerms();
-    //_terms.insert(_terms.end(), std::make_move_iterator(terms.begin()), std::make_move_iterator(terms.end()));
 
     return *this;
   }
@@ -109,7 +106,6 @@ namespace apfel
         t.coefficient *= -1;
         _terms.push_back(t);
       }
-
     return *this;
   }
 
@@ -149,7 +145,7 @@ namespace apfel
     if (_terms.empty())
       return *this;
 
-    // Take the grids from the first element of the vector of terms.
+    // Take the grids from the first element of the vector of terms
     const Distribution dfx{_terms[0].object1.GetGrid(), fx};
     const Distribution dfz{_terms[0].object2.GetGrid(), fz};
     for (auto& t : _terms)
@@ -157,7 +153,6 @@ namespace apfel
         t.object1 *= dfx;
         t.object2 *= dfz;
       }
-
     return *this;
   }
 
@@ -168,6 +163,7 @@ namespace apfel
     double result = 0;
     for (auto const& t : _terms)
       result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
+
     return result;
   }
 
@@ -178,6 +174,7 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object1.Evaluate(x) * _terms[0].object2;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object1.Evaluate(x) * _terms[i].object2;
+
     return result;
   }
 
@@ -188,6 +185,7 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object2.Evaluate(z) * _terms[0].object1;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object2.Evaluate(z) * _terms[i].object1;
+
     return result;
   }
 
@@ -198,6 +196,7 @@ namespace apfel
     double result = 0;
     for (auto const& t : _terms)
       result += t.coefficient * t.object1.Derive(x) * t.object2.Derive(z);
+
     return result;
   }
 
@@ -208,6 +207,7 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object1.Derive(x) * _terms[0].object2;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object1.Derive(x) * _terms[i].object2;
+
     return result;
   }
 
@@ -218,6 +218,7 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object2.Derive(z) * _terms[0].object1;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object2.Derive(z) * _terms[i].object1;
+
     return result;
   }
 
@@ -228,6 +229,7 @@ namespace apfel
     double result = 0;
     for (auto const& t : _terms)
       result += t.coefficient * t.object1.Integrate(xl, xu) * t.object2.Integrate(zl, zu);
+
     return result;
   }
 
@@ -238,6 +240,7 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object1.Integrate(xl, xu) * _terms[0].object2;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object1.Integrate(xl, xu) * _terms[i].object2;
+
     return result;
   }
 
@@ -248,6 +251,7 @@ namespace apfel
     Distribution result = _terms[0].coefficient * _terms[0].object2.Integrate(zl, zu) * _terms[0].object1;
     for (int i = 1; i < (int) _terms.size(); i++)
       result += _terms[i].coefficient * _terms[i].object2.Integrate(zl, zu) * _terms[i].object1;
+
     return result;
   }
 
@@ -261,6 +265,7 @@ namespace apfel
       // variable given by the integral of the second object over the
       // x-dependent range. Finally integrate over x.
       result += t.coefficient * ([=] (double const& x) -> double{ return t.object2.Integrate(zlx(x), zux(x)); } * t.object1).Integrate(xl, xu);
+
     return result;
   }
 
@@ -274,6 +279,7 @@ namespace apfel
       // variable given by the integral of the first object over the
       // z-dependent range. Finally integrate over z.
       result += t.coefficient * ([=] (double const& z) -> double{ return t.object1.Integrate(xlz(z), xuz(z)); } * t.object2).Integrate(zl, zu);
+
     return result;
   }
 
@@ -297,6 +303,7 @@ namespace apfel
     // Clear "_terms" and equal it to "vt".
     _terms.clear();
     _terms = vt;
+
     return *this;
   }
 }

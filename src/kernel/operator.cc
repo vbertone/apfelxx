@@ -33,7 +33,7 @@ namespace apfel
     // Scaling factor
     const double eta = expr.eta();
 
-    // Number of grids.
+    // Number of grids
     const int ng = _grid.nGrids();
 
     // Loop over the subgrids
@@ -78,10 +78,10 @@ namespace apfel
                 // Given that the interpolation functions have
                 // discontinuos derivative at the nodes, it turns out
                 // that it is convenient to split the integrals into
-                // id + 1 intervals on each of which the integrand is
-                // smooth. Despite more integrals have to be computed,
-                // the integration converges faster and is more
-                // accurate.
+                // id + 1 intervals over each of which the integrand
+                // is smooth. Despite more integrals have to be
+                // computed, the integration converges faster and is
+                // more accurate.
 
                 // Initialise integral
                 double I = 0;
@@ -90,7 +90,7 @@ namespace apfel
                 // interpolating function is different from zero.
                 for (int j = 0; j < std::min(id, alpha - beta) + 1; j++)
                   {
-                    // Define "Integrator" object.
+                    // Define "Integrator" object
                     const Integrator Ij{[&] (double const& y) -> double
                       {
                         const double z  = y / eta;
@@ -133,6 +133,7 @@ namespace apfel
 
     // Initialise operator
     _Operator[0].resize(nx, nx, 0);
+
     // Loop over the index beta. In fact beta = 0 because the size
     // of the first dimension of "_Operator" is one.
     for (int beta = 0; beta < (int) _Operator[0].size(0); beta++)
@@ -156,12 +157,11 @@ namespace apfel
             const double wspv = li.Interpolant(alpha, xi, jg);
 
             // Given that the interpolation functions have
-            // discontinuos derivative at the nodes, it turns out
-            // that it is convenient to split the integrals into
-            // k + 1 intervals on each of which the integrand is
-            // smooth. Despite more integrals have to be computed,
-            // the integration converges faster and is more
-            // accurate.
+            // discontinuos derivative at the nodes, it turns out that
+            // it is convenient to split the integrals into k + 1
+            // intervals over each of which the integrand is
+            // smooth. Despite more integrals have to be computed, the
+            // integration converges faster and is more accurate.
 
             // Run over the grid intervals over which the
             // interpolating function is different from zero.
@@ -230,7 +230,7 @@ namespace apfel
             // If the operator has one single line, this means that
             // one can (must) use the symmetry _Operator[ig](beta,
             // alpha) = _Operator[ig](0, alpha - beta). Otherwise, the
-            // operator matrix is assumed to be a full nx^2matrix.
+            // operator matrix is assumed to be a full nx^2 matrix.
             if (_Operator[ig].size(0) == 1)
               for (int beta = bounds[0]; beta < std::min(bounds[1], alpha + 1); beta++)
                 dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](0, alpha - beta);
@@ -271,8 +271,8 @@ namespace apfel
         // (jg-1)-th and the jg-th subgrid.
         w2 = std::max(id - ndb, 0) * pow(id + 1, -1);
 
-        // Get map of indices map from joint to the sub-grid preceding
-        // the selected one.
+        // Get map of indices from joint to the sub-grid preceding the
+        // selected one.
         const std::vector<int>& jsmapp = _grid.JointToSubMap()[jg-1];
 
         // Fill in joint grid
@@ -280,8 +280,8 @@ namespace apfel
           djg[jsmapp[alpha]] += w2 * dsg[jg-1][alpha];
       }
 
-    // Determine weight on the current grid accoroding to the weight
-    // on the previous grid.
+    // Determine weight on the current grid according to the weight on
+    // the previous grid.
     const double w1 = 1 - w2;
 
     // Get map of indices map from joint to the selected sub-grid
@@ -328,7 +328,7 @@ namespace apfel
 
     // Construct joint distribution first. The product between the
     // operator and the distribution is done exploiting the symmetry
-    // of the operator if the the first operator has one line
+    // of the operator if the first operator has one line
     // only. Otherwise the product is done in a standard way. This
     // should be enough to distinguish between DGLAP- and GPD-like
     // operators.
@@ -392,6 +392,7 @@ namespace apfel
   {
     if (this != &o)
       *this = o;
+
     return *this;
   }
 

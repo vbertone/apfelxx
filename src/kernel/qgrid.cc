@@ -29,7 +29,7 @@ namespace apfel
     _Thresholds(Thresholds),
     _TabFunc(TabFunc)
   {
-    // Check that QMin is actually smaller than QMax.
+    // Check that QMin is actually smaller than QMax
     if (QMax <= QMin)
       throw std::runtime_error(error("QGrid::QGrid", "QMax must be larger than QMin"));
 
@@ -44,7 +44,7 @@ namespace apfel
           throw std::runtime_error(error("QGrid::QGrid", "TabFunc and InvTabFunc are not the inverse of each other."));
       }
 
-    // Find initial and final number of flavours.
+    // Find initial and final number of flavours
     const int nfin = NF(_QMin, _Thresholds);
     const int nffi = NF(_QMax, _Thresholds);
 
@@ -80,7 +80,7 @@ namespace apfel
           _InterDegree = _nQg[isg+1] - _nQg[isg] - 1;
       }
 
-    // Adjust _nQ if needed.
+    // Adjust _nQ if needed
     if (_nQ != _nQg.back())
       _nQ = _nQg.back();
 
@@ -95,11 +95,11 @@ namespace apfel
         _fQg.push_back(_fQg.back());
       }
 
-    // Now compute grid in Q.
+    // Now compute grid in Q
     for (auto const& lq : _fQg)
       _Qg.push_back(InvTabFunc(lq));
 
-    // Displace slightly the values below and above the thresholds.
+    // Displace slightly the values below and above the thresholds
     for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
       {
         _Qg[_nQg[isg]-1] *= 1 - eps12;
@@ -143,14 +143,14 @@ namespace apfel
   template<class T>
   double QGrid<T>::Interpolant(int const& tQ, int const& tau, double const& fq) const
   {
-    // Return immediately 1 if "Q" coincides with "_Qg[tau]".
+    // Return immediately 1 if "Q" coincides with "_Qg[tau]"
     if (std::abs(fq / _fQg[tau] - 1) < eps11)
       return 1;
 
-    // Define the lower bound of the interpolation range.
+    // Define the lower bound of the interpolation range
     const int bound = std::max(tau + tQ - _InterDegree, 0);
 
-    // Return zero if fq is outside the allowed range.
+    // Return zero if fq is outside the allowed range
     if (fq < _fQg[bound] || fq >= _fQg[std::min(tau + tQ + 1, _nQ)])
       return 0;
 
@@ -173,20 +173,20 @@ namespace apfel
   template<class T>
   double QGrid<T>::DerInterpolant(int const& tQ, int const& tau, double const& Q) const
   {
-    // Define the lower bound of the interpolation range.
+    // Define the lower bound of the interpolation range
     const int bound = std::max(tau + tQ - _InterDegree, 0);
 
-    // Return zero if Q is outside the allowed range.
+    // Return zero if Q is outside the allowed range
     if (Q < _Qg[bound] || Q >= _Qg[std::min(tau + tQ + 1, _nQ)])
       return 0;
 
-    // Find the the neighbours of "Q" on the grid.
+    // Find the the neighbours of "Q" on the grid
     int j;
     for (j = tau + tQ - bound; j >= 0; j--)
       if (Q < _Qg[tau+tQ-j+1])
         break;
 
-    // Compute the interpolant.
+    // Compute the interpolant
     double dw_int = 0;
     for (int gamma = tau - j; gamma <= tau - j + _InterDegree; gamma++)
       {
@@ -251,7 +251,7 @@ namespace apfel
   template<class T>
   std::tuple<int, int, int> QGrid<T>::SumBounds(double const& Q) const
   {
-    // Initialise output tuple.
+    // Initialise output tuple
     std::tuple<int, int, int> bounds{0, 0, 0};
 
     // Return if "Q" is outside the grid range (no sum will be
@@ -269,7 +269,7 @@ namespace apfel
           return bounds;
         }
 
-    // Identify the subgrid in which Q falls.
+    // Identify the subgrid in which Q falls
     int iQ;
     for (iQ = 0; iQ < (int) _nQg.size() - 1; iQ++)
       if (Q > _Qg[_nQg[iQ]] && Q <= _Qg[_nQg[iQ + 1]])
@@ -289,7 +289,7 @@ namespace apfel
         std::get<0>(bounds) = _InterDegree - id + 1;
       }
 
-    // Determine the actual bounds.
+    // Determine the actual bounds
     const int low       = std::lower_bound(_Qg.begin() + 1, _Qg.end(), Q) - _Qg.begin();
     std::get<1>(bounds) = low;
     std::get<2>(bounds) = low;
@@ -301,7 +301,6 @@ namespace apfel
         std::get<1>(bounds) += - std::get<0>(bounds) - 1;
         std::get<2>(bounds) += - std::get<0>(bounds) + _InterDegree;
       }
-
     return bounds;
   }
 
@@ -318,7 +317,7 @@ namespace apfel
     int tau  = std::get<1>(bounds);
     T result = Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 
-    // ...then loop and add the extra terms.
+    // ...then loop and add the extra terms
     for (tau = tau + 1; tau < std::get<2>(bounds); tau++)
       result += Interpolant(std::get<0>(bounds), tau, fq) * _GridValues[tau];
 
@@ -337,7 +336,7 @@ namespace apfel
     int tau  = std::get<1>(bounds);
     T result = DerInterpolant(std::get<0>(bounds), tau, Q) * _GridValues[tau];
 
-    // ...then loop and add the extra terms.
+    // ...then loop and add the extra terms
     for (tau = tau + 1; tau < std::get<2>(bounds); tau++)
       result += DerInterpolant(std::get<0>(bounds), tau, Q) * _GridValues[tau];
 
@@ -353,7 +352,7 @@ namespace apfel
     double Qbo = std::max(Qa, Qb);
     int    sgn = (Qb > Qa ? 1 : -1);
 
-    // Sum boundaries and control parameters at the integral boundaries
+    // Sum bounds and control parameters at the integral boundaries
     const std::tuple<int, int, int> boundsa = SumBounds(Qao);
     const std::tuple<int, int, int> boundsb = SumBounds(Qbo);
 
@@ -367,7 +366,7 @@ namespace apfel
     // Second term
     for (int gamma = std::get<1>(boundsa) + std::get<0>(boundsa) + 1; gamma <= std::get<1>(boundsb) + std::get<0>(boundsb); gamma++)
       {
-        // skip the tiny interval at the thresholds
+        // Skip the tiny interval at the thresholds
         if (std::abs(_Qg[gamma+1] - _Qg[gamma]) < eps8)
           continue;
         const std::tuple<int, int, int> bounds = SumBounds(_Qg[gamma] * ( 1 + eps8 ));

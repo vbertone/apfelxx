@@ -14,7 +14,7 @@ namespace apfel
   Observable<T>::Observable(std::vector<ConvolutionPair> ConvPair):
     _ConvPair(ConvPair)
   {
-    // If the convolution-pair vector is empty throw exception.
+    // If the convolution-pair vector is empty throw exception
     if (_ConvPair.empty())
       throw std::runtime_error(error("Observable<T>::Observable", "Vector of convolution pairs cannot be empty."));
   }
@@ -42,6 +42,7 @@ namespace apfel
     Set<T> sSF = _ConvPair[0].CoefficientFunctions(Q) * _ConvPair[0].Objects(Q);
     for (int i = 1; i < (int) _ConvPair.size(); i++)
       sSF += _ConvPair[i].CoefficientFunctions(Q) * _ConvPair[i].Objects(Q);
+
     return sSF.Combine();
   }
 
