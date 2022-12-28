@@ -21,7 +21,7 @@ namespace apfel
   //_________________________________________________________________________
   int NF(double const& Q, std::vector<double> const& Thresholds)
   {
-    // Compute number of active flavours the the PDF initial scale
+    // Compute number of active flavours
     int nf = 0;
     for (auto const& v : Thresholds)
       if (Q > v)
@@ -200,6 +200,7 @@ namespace apfel
     const std::map<int, Distribution> objs = d.GetObjects();
     for (auto const& e : objs)
       lgt += dabs(e.second);
+
     return lgt / objs.size();
   }
 

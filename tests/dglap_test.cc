@@ -9,7 +9,7 @@
 int main()
 {
   // x-space grid
-  const apfel::Grid g{{apfel::SubGrid{100,1e-5,3}, apfel::SubGrid{60,1e-1,3}, apfel::SubGrid{50,6e-1,3}, apfel::SubGrid{50,8e-1,3}}};
+  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 6e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
 
   // Initial scale
   const double mu0 = sqrt(2);
@@ -126,7 +126,7 @@ int main()
   std::cout << "Interpolation on the PDF table as a map (x and Q independently):" << std::endl;
   for (auto const& x : xlha)
     {
-      const std::map<int, double> DistMap = apfel::QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x,mu));
+      const std::map<int, double> DistMap = apfel::QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x, mu));
       std::cout.precision(1);
       std::cout << x;
       std::cout.precision(4);
@@ -143,14 +143,14 @@ int main()
   std::cout << "Interpolating " << k << " times a single PDF on the (x,Q) grid... ";
   t.start();
   for (int i = 0; i < k; i++)
-    TabulatedPDFs.EvaluatexQ(0,0.05,mu);
+    TabulatedPDFs.EvaluatexQ(0, 0.05, mu);
   t.stop();
 
   k = 100000;
   std::cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
   t.start();
   for (int i = 0; i < k; i++)
-    TabulatedPDFs.EvaluateMapxQ(0.05,mu);
+    TabulatedPDFs.EvaluateMapxQ(0.05, mu);
   t.stop();
 
   return 0;

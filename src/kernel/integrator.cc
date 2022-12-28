@@ -36,8 +36,8 @@ namespace apfel
         throw std::runtime_error(error("Integrator::integrate", "Unknown integration method"));
       }
 
-    // Recursive call. If the integration accuracy has been met,
-    // return the best result...
+    // Recursive call. If the integration accuracy was met, return the
+    // best result...
     if (integ.second < eps)
       return integ.first;
     else
@@ -45,9 +45,9 @@ namespace apfel
         // ...otherwise split the integration range into two equal
         // parts and intregrate the two intervals
         // separately. Eventually, the integrand will become smooth
-        // over the the narrower intevals and the integration will
+        // over the the narrower intervals and the integration will
         // converge. If the integration range becomes too narrow, stop
-        // the code.
+        // the computation.
         if (std::abs(( xmax - xmin ) / ( xmax + xmin )) < eps15)
           throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
 
@@ -129,7 +129,7 @@ namespace apfel
       if(ib > ap && ib < bp)
         bounds.push_back(ib);
 
-    // Sort vector according on how the integration bounds are
+    // Sort vector according to how the integration bounds are
     // ordered.
     std::sort(bounds.begin(), bounds.end(), [a, b] (double const& x1, double const& x2) -> bool { return (b > a ? x1 < x2 : x1 > x2); });
 
@@ -148,6 +148,7 @@ namespace apfel
     double dgauss = 0;
     for (int i = 1; i < (int) FixPts.size(); i++)
       dgauss += integrate(FixPts[i-1], FixPts[i], eps);
+
     return dgauss;
   }
 
@@ -232,6 +233,7 @@ namespace apfel
     double dgauss = 0;
     for (int i = 1; i < (int) FixPts.size(); i++)
       dgauss += integrate(FixPts[i-1], FixPts[i], n);
+
     return dgauss;
   }
 }

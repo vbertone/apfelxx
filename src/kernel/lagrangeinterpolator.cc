@@ -46,28 +46,28 @@ namespace apfel
     // continuos index on the grid associated to "lnx".
     const double ix = lnx / s + nx;
 
-    // Return immediately 1 if "ix" coincides with "beta".
+    // Return immediately 1 if "ix" coincides with "beta"
     if (std::abs(ix - beta) < eps10)
       return 1;
 
-    // Get the interpolation degree.
+    // Get the interpolation degree
     const int id = sg.InterDegree();
 
     // Return 0 if "x" is outside the range in which the interpolant
-    // is different from zero. Ideally, this functions should never be
+    // is different from zero. Ideally, this function should never be
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
     if (ix < beta - id || ix >= beta + 1)
       return 0;
 
-    // Find the the neighbors of "x" on the grid.
+    // Find the the neighbors of "x" on the grid
     int j;
     for (j = 0; j <= id; j++)
       if (ix >= beta - j)
         break;
 
-    // Compute the interpolant.
+    // Compute the interpolant
     double w_int = 1;
     for (int delta = beta - j; delta <= beta - j + id; delta++)
       if (delta != beta)
@@ -79,17 +79,17 @@ namespace apfel
   //_________________________________________________________________________________
   double LagrangeInterpolator::Interpolant(int const& beta, double const& x, SubGrid const& sg) const
   {
-    // Get the grid.
+    // Get the grid
     const std::vector<double>& xg = sg.GetGrid();
 
-    // Return immediately 1 if "x" coincides with "xg[beta]".
+    // Return immediately 1 if "x" coincides with "xg[beta]"
     if (std::abs(x - xg[beta]) < eps12)
       return 1;
 
-    // Get the interpolation degree.
+    // Get the interpolation degree
     const int id = sg.InterDegree();
 
-    // Define the lower bound of the interpolation range.
+    // Define the lower bound of the interpolation range
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
@@ -100,13 +100,13 @@ namespace apfel
     if (x < xg[bound] || x >= xg[beta+1])
       return 0;
 
-    // Find the the neighbors of "x" on the grid.
+    // Find the the neighbors of "x" on the grid
     int j;
     for (j = 0; j <= beta - bound; j++)
       if (x >= xg[beta-j])
         break;
 
-    // Compute the interpolant.
+    // Compute the interpolant
     double w_int = 1;
     for (int delta = beta - j; delta <= beta - j + id; delta++)
       if (delta != beta)
@@ -118,13 +118,13 @@ namespace apfel
   //_________________________________________________________________________________
   double LagrangeInterpolator::DerInterpolant(int const& beta, double const& x, SubGrid const& sg) const
   {
-    // Get the grid.
+    // Get the grid
     const std::vector<double>& xg = sg.GetGrid();
 
-    // Get the interpolation degree.
+    // Get the interpolation degree
     const int id = sg.InterDegree();
 
-    // Define the lower bound of the interpolation range.
+    // Define the lower bound of the interpolation range
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
@@ -135,13 +135,13 @@ namespace apfel
     if (x < xg[bound] || x >= xg[beta+1])
       return 0;
 
-    // Find the the neighbors of "x" on the grid.
+    // Find the the neighbors of "x" on the grid
     int j;
     for (j = 0; j <= beta - bound; j++)
       if (x >= xg[beta-j])
         break;
 
-    // Compute the interpolant.
+    // Compute the interpolant
     double dw_int = 0;
     for (int gamma = beta - j; gamma <= beta - j + id; gamma++)
       {
@@ -161,10 +161,10 @@ namespace apfel
   //_________________________________________________________________________________
   double LagrangeInterpolator::IntInterpolant(int const& beta, double const& a, double const& b, SubGrid const& sg) const
   {
-    // Get the grid.
+    // Get the grid
     const std::vector<double>& xg = sg.GetGrid();
 
-    // Get the interpolation degree.
+    // Get the interpolation degree
     const int k = sg.InterDegree();
 
     // Return 0 if "a" and "b" are outside the range in which the
@@ -227,7 +227,6 @@ namespace apfel
         bounds[0] -= 1;
         bounds[1] += sg.InterDegree();
       }
-
     return bounds;
   }
 }

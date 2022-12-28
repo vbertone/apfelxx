@@ -575,7 +575,7 @@ namespace apfel
   //_________________________________________________________________________________
   double hpoly(std::vector<int> const& w, double const& x)
   {
-    // Make sure that the argument is inside the validity range.
+    // Make sure that the argument is inside the validity range
     if (x <= 0 || x > sqrt(2) - 1)
       throw std::runtime_error(error("hpoly", "Argument out of range."));
 

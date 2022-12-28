@@ -35,7 +35,6 @@ namespace apfel
   double Interpolator::Evaluate(double const& x) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
-
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
       result += Interpolant(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
@@ -47,7 +46,6 @@ namespace apfel
   double Interpolator::Evaluate(double const& x, int const& ig) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetSubGrid(ig));
-
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
       result += Interpolant(beta, x, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
@@ -59,7 +57,6 @@ namespace apfel
   double Interpolator::Derive(double const& x) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
-
     double result = 0;
     for (int beta = bounds[0]; beta < bounds[1]; beta++)
       result += DerInterpolant(beta, x, _grid.GetJointGrid()) * _distributionJointGrid[beta];
@@ -70,7 +67,7 @@ namespace apfel
   //_________________________________________________________________________________
   double Interpolator::Integrate(double const& a, double const& b) const
   {
-    // Order integration bounds and adjust sign if necessary
+    // Order integration bounds and adjust the sign if necessary
     double ao  = std::min(a, b);
     double bo  = std::max(a, b);
     int    sgn = (b > a ? 1 : -1);
