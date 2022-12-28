@@ -55,7 +55,7 @@ namespace apfel
     int const _n;
   };
 
-  // Expressions needed for the computation of the SIDIS cross sections.
+  // Expressions needed for the computation of the SIDIS cross sections
   // F2
   class lrqq: public Expression
   {
@@ -219,7 +219,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -234,7 +234,7 @@ namespace apfel
     // Compute SIDIS partonic cross sections.
     // Expressions taken from Appendix C of hep-ph/9711387.
     // ====================================================
-    // LO contribution.
+    // LO contribution
     const Operator odeltax{gx, delta{}};
     const Operator odeltaz{gz, delta{}};
 
@@ -332,7 +332,7 @@ namespace apfel
       {
         DoubleObject<Operator> cnf{};
 
-        // CF and leading-power terms (Eq. 62)
+        // CF and leading-power terms (Eq. (62))
         const double c1 = ovc * CF / 2.;
         if (std::find(exclude.begin(), exclude.end(), 18) == exclude.end()) cnf.AddTerm({c1, odeltax, oD3z});
         if (std::find(exclude.begin(), exclude.end(), 19) == exclude.end()) cnf.AddTerm({c1, oD3x, odeltaz});
@@ -354,7 +354,7 @@ namespace apfel
         const double c5 = ovc * CF * ( 511. / 64. - 15. * zeta3 / 4. + 29. * Pi2 / 48. - 7. * Pi2 * Pi2 / 360. );
         if (std::find(exclude.begin(), exclude.end(), 28) == exclude.end()) cnf.AddTerm({c5, odeltax, odeltaz});
 
-        // CF and next-to-leading-power terms (Eq. 63)
+        // CF and next-to-leading-power terms (Eq. (63))
         const double c6 = - ovc * CF * 3. / 2.;
         if (std::find(exclude.begin(), exclude.end(), 29) == exclude.end()) cnf.AddTerm({c6, oD2x, oonez});
         if (std::find(exclude.begin(), exclude.end(), 30) == exclude.end()) cnf.AddTerm({c6, oonex, oD2z});
@@ -367,7 +367,7 @@ namespace apfel
         if (std::find(exclude.begin(), exclude.end(), 35) == exclude.end()) cnf.AddTerm({c7, odeltax, ol3z});
         if (std::find(exclude.begin(), exclude.end(), 36) == exclude.end()) cnf.AddTerm({c7, ol3x, odeltaz});
 
-        // CA terms (Eq. 64)
+        // CA terms (Eq. (64))
         const double c8 = - ovc * CA * 11. / 24.;
         if (std::find(exclude.begin(), exclude.end(), 37) == exclude.end()) cnf.AddTerm({c8, odeltax, oD2z});
         if (std::find(exclude.begin(), exclude.end(), 38) == exclude.end()) cnf.AddTerm({c8, oD2x, odeltaz});
@@ -386,7 +386,7 @@ namespace apfel
         const double c11 = ovc * CA * ( 43. * zeta3 / 12. + 17. * Pi2 * Pi2 / 720. - 1535. / 192. - 269. * Pi2 / 432. );
         if (std::find(exclude.begin(), exclude.end(), 46) == exclude.end()) cnf.AddTerm({c11, odeltax, odeltaz});
 
-        // nf terms (Eq. 65)
+        // nf terms (Eq. (65))
         const double c12 = ovc * nf / 12.;
         if (std::find(exclude.begin(), exclude.end(), 47) == exclude.end()) cnf.AddTerm({c12, odeltax, oD2z});
         if (std::find(exclude.begin(), exclude.end(), 48) == exclude.end()) cnf.AddTerm({c12, oD2z, odeltaz});
