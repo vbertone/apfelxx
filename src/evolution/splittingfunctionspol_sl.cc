@@ -10,10 +10,6 @@
 
 namespace apfel
 {
-  /**
-   * @brief The LO space-like longitudinally polarised splitting
-   * function classes
-   */
   //_________________________________________________________________________________
   P0polns::P0polns():
     P0ns()
@@ -60,10 +56,6 @@ namespace apfel
     return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
-  /**
-   * @brief The NLO space-like longitudinally polarised splitting
-   * function classes
-   */
   //_________________________________________________________________________________
   P1polnsp::P1polnsp(int const& nf):
     P1nsm(nf)
@@ -164,10 +156,6 @@ namespace apfel
     return log(1-x) * _a2g + p1delta;
   }
 
-  /**
-   * @brief The NNLO space-like longitudinally polarised splitting
-   * function classes (parametrized)
-   */
   //_________________________________________________________________________________
   P2polnsp::P2polnsp(int const& nf):
     P2nsm(nf)

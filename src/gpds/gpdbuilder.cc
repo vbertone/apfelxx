@@ -28,7 +28,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -43,7 +43,7 @@ namespace apfel
     // splitting functions and matching conditions (lambda) functions
     // are defined.
     // ===============================================================
-    // LO Matching conditions.
+    // LO Matching conditions
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps, true};
     const Operator Zero{g, Null{},     IntEps, true};
@@ -57,7 +57,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
-    // LO splitting function operators.
+    // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, Pgpd0ns{xi}, IntEps, true};
     const Operator O0qq{g, Pgpd0qq{xi}, IntEps, true};
@@ -77,7 +77,7 @@ namespace apfel
         OpMapLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set

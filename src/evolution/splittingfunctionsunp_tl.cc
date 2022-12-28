@@ -10,9 +10,6 @@
 
 namespace apfel
 {
-  /**
-   * @brief The LO time-like splitting function classes
-   */
   //_________________________________________________________________________________
   P0Tns::P0Tns():
     Expression()
@@ -71,9 +68,6 @@ namespace apfel
     return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
-  /**
-   * @brief The NLO time-like splitting function classes
-   */
   //_________________________________________________________________________________
   P1Tnsp::P1Tnsp(int const& nf):
     Expression(),
@@ -242,9 +236,6 @@ namespace apfel
     return log(1-x) * _a2g + p1delta;
   }
 
-  /**
-   * @brief The NNLO time-like splitting function classes (parametrized)
-   */
   //_________________________________________________________________________________
   P2Tnsp::P2Tnsp(int const& nf):
     Expression(),
@@ -253,14 +244,14 @@ namespace apfel
   }
   double P2Tnsp::Regular(double const& x) const
   {
-    const double x_2    = x * x;
-    const double x_3    = x_2 * x;
-    const double dl     = log(x);
-    const double dl_2   = dl * dl;
-    const double dl_3   = dl_2 * dl;
-    const double dl_4   = dl_3 * dl;
-    const double dl1    = log(1-x);
-    const double d81    = 1. / 81.;
+    const double x_2  = x * x;
+    const double x_3  = x_2 * x;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double dl_3 = dl_2 * dl;
+    const double dl_4 = dl_3 * dl;
+    const double dl1  = log(1-x);
+    const double d81  = 1. / 81.;
     return
       1658.7 - 707.67 * dl1 + 1327.5 * dl - 56.907 * dl * dl1
       - 189.37 * dl_2 - 519.37 * dl1 * dl_2 - 352. / 9. * dl_3
@@ -512,7 +503,7 @@ namespace apfel
   }
   double P2Tgg::Local(double const& x) const
   {
-    const double dl1   = log(1-x);
+    const double dl1 = log(1-x);
     return
       2643.521 * dl1 + 4425.448 + 0.003
       - _nf * ( 412.172 * dl1 +  528.720 - 0.001 )

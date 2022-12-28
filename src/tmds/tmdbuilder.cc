@@ -37,7 +37,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -46,7 +46,7 @@ namespace apfel
         nfi++;
 
     // ===============================================================
-    // LO matching functions operators.
+    // LO matching functions operators
     std::map<int, std::map<int, Operator>> C00;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -64,7 +64,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO matching functions operators.
+    // NLO matching functions operators
     // PDFs
     std::map<int, std::map<int, Operator>> C10pdf;
     const Operator O1nspdf{g, C1nspdf{}, IntEps};
@@ -160,7 +160,7 @@ namespace apfel
     // PDFs.
 
     // ===============================================================
-    // NNLO matching functions operators.
+    // NNLO matching functions operators
     // PDFs
     std::map<int, std::map<int, Operator>> C20pdf;
     const Operator O2Vqqbpdf{g, C2Vqqbpdf{}, IntEps};
@@ -370,7 +370,7 @@ namespace apfel
     // of PDFs.
 
     // ===============================================================
-    // NNNLO matching functions operators.
+    // NNNLO matching functions operators
     // PDFs
     std::map<int, std::map<int, Operator>> C30pdf;
     if (nnnlo)
@@ -423,11 +423,11 @@ namespace apfel
     ZeroOp.insert({EvolutionBasisQCD::PGQ,  Zero});
     ZeroOp.insert({EvolutionBasisQCD::PGG,  Zero});
 
-    // Define map containing the TmdObjects for each nf.
+    // Define map containing the TmdObjects for each nf
     std::map<int, TmdObjects> TmdObj;
 
-    // Construct sets of operators for each perturbative order for the
-    // matching functions. Initialize also coefficients of: beta
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
     // function, gammaK, gammaF, and Collins-Soper anomalous
     // dimensions.
     for (int nf = nfi; nf <= nff; nf++)
@@ -464,7 +464,7 @@ namespace apfel
         obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
         obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
 
-        // Matching functions.
+        // Matching functions
         const EvolutionBasisQCD evb{nf};
 
         // PDFs
@@ -541,7 +541,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -555,7 +555,7 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
 
     // ===============================================================
-    // NLO matching functions operators.
+    // NLO matching functions operators
     // PDFs
     std::map<int, std::map<int, Operator>> C10pdf;
     const Operator O1gqpdf{g, C1gqpdfBM{}, IntEps};
@@ -601,7 +601,7 @@ namespace apfel
     // PDFs.
 
     // ===============================================================
-    // NNLO matching functions operators.
+    // NNLO matching functions operators
     // PDFs
     std::map<int, std::map<int, Operator>> C20pdf;
     for (int nf = nfi; nf <= nff; nf++)
@@ -689,11 +689,11 @@ namespace apfel
     for (int iOp = 0; iOp < 7; iOp++)
       ZeroOp.insert({iOp, Zero});
 
-    // Define map containing the TmdObjects for each nf.
+    // Define map containing the TmdObjects for each nf
     std::map<int, TmdObjects> TmdObj;
 
-    // Construct sets of operators for each perturbative order for the
-    // matching functions. Initialize also coefficients of: beta
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
     // function, gammaK, gammaF, and Collins-Soper anomalous
     // dimensions.
     for (int nf = nfi; nf <= nff; nf++)
@@ -730,7 +730,7 @@ namespace apfel
         obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
         obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
 
-        // Matching functions.
+        // Matching functions
         const EvolutionBasisQCD evb{nf};
 
         // PDFs
@@ -764,14 +764,14 @@ namespace apfel
                                                        double              const& IntEps)
   {
     // Do not compute the log terms to the matching function because
-    // the collinear evolution of the Qui-Sterman is not exactly
+    // the collinear evolution of the Qiu-Sterman is not exactly
     // known.
 
     report("Initializing TMD objects for matching and evolution of the Sivers quark TMD... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -780,7 +780,7 @@ namespace apfel
         nfi++;
 
     // ===============================================================
-    // LO matching functions operators.
+    // LO matching functions operators
     std::map<int, std::map<int, Operator>> C00;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -796,7 +796,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO matching functions operators.
+    // NLO matching functions operators
     // PDFs
     std::map<int, std::map<int, Operator>> C10pdf;
     const Operator O1nspdf{g, C1nspdfSivers{}, IntEps};
@@ -816,11 +816,11 @@ namespace apfel
     for (int iOp = 0; iOp < 7; iOp++)
       ZeroOp.insert({iOp, Zero});
 
-    // Define map containing the TmdObjects for each nf.
+    // Define map containing the TmdObjects for each nf
     std::map<int, TmdObjects> TmdObj;
 
-    // Construct sets of operators for each perturbative order for the
-    // matching functions. Initialize also coefficients of: beta
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
     // function, gammaK, gammaF, and Collins-Soper anomalous
     // dimensions.
     for (int nf = nfi; nf <= nff; nf++)
@@ -857,7 +857,7 @@ namespace apfel
         obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
         obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
 
-        // Matching functions.
+        // Matching functions
         const EvolutionBasisQCD evb{nf};
 
         // PDFs
@@ -898,10 +898,10 @@ namespace apfel
                                                                                              double                                          const& Ci,
                                                                                              double                                          const& IntEps)
   {
-    // Match TMDs onto collinear PDFs.
+    // Match TMDs onto collinear PDFs
     const std::function<Set<Distribution>(double const&)> MatchedTmdPDFs = MatchTmdPDFs(TmdObj, CollPDFs, Alphas, PerturbativeOrder, Ci);
 
-    // Compute TMD evolution factors.
+    // Compute TMD evolution factors
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
     // Computed TMDPDFs at the final scale by multiplying the initial
@@ -922,10 +922,10 @@ namespace apfel
                                                                                             double                                          const& Ci,
                                                                                             double                                          const& IntEps)
   {
-    // Match TMDs onto collinear FFs.
+    // Match TMDs onto collinear FFs
     const std::function<Set<Distribution>(double const&)> MatchedTmdFFs = MatchTmdFFs(TmdObj, CollFFs, Alphas, PerturbativeOrder, Ci);
 
-    // Compute TMD evolution factors.
+    // Compute TMD evolution factors
     const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
     // Computed TMDFFs at the final scale by multiplying the initial
@@ -953,10 +953,10 @@ namespace apfel
     if (Ci != 1)
       throw std::runtime_error(error("BuildTmdJet", "Ci variations not available yet."));
 
-    // Get initial-scale jet TMD.
+    // Get initial-scale jet TMD
     const std::function<double(double const&, double const&)> MatchedTmdJet = MatchTmdJet(TmdObj, JetAlgo, tan(JetR/2), Alphas, PerturbativeOrder, CJ, Ci, IntEps);
 
-    // Compute TMD evolution factors.
+    // Compute TMD evolution factors
     const std::function<double(double const&, double const&, double const&)> EvolFactors = QuarkEvolutionFactor(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
     // Computed jet TMD at the final scale by multiplying the initial
@@ -1030,7 +1030,7 @@ namespace apfel
                                                                   double                               const& Ci,
                                                                   double                               const& IntEps)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1042,7 +1042,7 @@ namespace apfel
       }
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = thrs.size();
@@ -1050,7 +1050,7 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute log and its powers.
+    // Compute log and its powers
     const double lQ  = log(CJ);
     const double lQ2 = lQ * lQ;
 
@@ -1140,7 +1140,7 @@ namespace apfel
                                                                     int                                  const& PerturbativeOrder,
                                                                     double                               const& Ci)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1151,7 +1151,7 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
     // Matching functions as functions of the absolute value of the
@@ -1211,7 +1211,7 @@ namespace apfel
                                                                    int                                   const& PerturbativeOrder,
                                                                    double                                const& Ci)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1222,7 +1222,7 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
     // Matching functions as functions of the absolute value of the
@@ -1283,7 +1283,7 @@ namespace apfel
                                                                                                    double                               const& Ci,
                                                                                                    double                               const& IntEps)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1294,10 +1294,10 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
-    // Create functions needed for the TMD evolution.
+    // Create functions needed for the TMD evolution
     std::function<double(double const&)> gammaFq;
     std::function<double(double const&)> gammaFg;
     std::function<double(double const&)> gammaK;
@@ -1409,7 +1409,7 @@ namespace apfel
         };
       }
 
-    // Define the integrands.
+    // Define the integrands
     const Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
     const Integrator I1g{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
     const Integrator I2 {[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
@@ -1423,18 +1423,18 @@ namespace apfel
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
 
-      // Compute argument of the exponent of the evolution factors.
+      // Compute argument of the exponent of the evolution factors
       const double IntI1q = I1q.integrate(mu0, muf, thrs, IntEps);
       const double IntI1g = I1g.integrate(mu0, muf, thrs, IntEps);
       const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
       const double IntI3  = I3.integrate(mu0, muf, thrs, IntEps);
 
-      // Compute the evolution factors.
+      // Compute the evolution factors
       const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
       const double Rq  = exp( CF * Klz + IntI1q );
       const double Rg  = exp( CA * Klz + IntI1g );
 
-      // Return vector of evolution factors.
+      // Return vector of evolution factors
       return std::vector<double>{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
     };
 
@@ -1448,7 +1448,7 @@ namespace apfel
                                                                                                     double                               const& Ci,
                                                                                                     double                               const& IntEps)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1459,10 +1459,10 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
-    // Create functions needed for the TMD evolution.
+    // Create functions needed for the TMD evolution
     std::function<double(double const&)> gammaFq;
     std::function<double(double const&)> gammaFg;
     std::function<double(double const&)> gammaK1;
@@ -1593,7 +1593,7 @@ namespace apfel
         };
       }
 
-    // Define the integrands.
+    // Define the integrands
     const Integrator I1q{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
     const Integrator I1g{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
     const Integrator I2 {[=] (double const& mu) -> double{ return gammaK2(mu) / mu; }};
@@ -1608,19 +1608,19 @@ namespace apfel
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
 
-      // Compute argument of the exponent of the evolution factors.
+      // Compute argument of the exponent of the evolution factors
       const double IntI1q = I1q.integrate(mu0, muf, thrs, IntEps);
       const double IntI1g = I1g.integrate(mu0, muf, thrs, IntEps);
       const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(muf);
       const double IntI4  = I4.integrate(mu0, muf, thrs, IntEps) * log(zetaf / pow(muf, 2));
       const double IntI3  = I3.integrate(mu0, muf, thrs, IntEps);
 
-      // Compute the evolution factors.
+      // Compute the evolution factors
       const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI4 ) / 2 - IntI2 + IntI3;
       const double Rq  = exp( CF * Klz + IntI1q );
       const double Rg  = exp( CA * Klz + IntI1g );
 
-      // Return vector of evolution factors.
+      // Return vector of evolution factors
       return std::vector<double>{Rg, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq, Rq};
     };
 
@@ -1634,7 +1634,7 @@ namespace apfel
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1645,10 +1645,10 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
-    // Create functions needed for the TMD evolution.
+    // Create functions needed for the TMD evolution
     std::function<double(double const&)> gammaFq;
     std::function<double(double const&)> gammaK;
     std::function<double(double const&)> K;
@@ -1741,7 +1741,7 @@ namespace apfel
         };
       }
 
-    // Define the integrands.
+    // Define the integrands
     const Integrator I1{[=] (double const& mu) -> double{ return gammaFq(mu) / mu; }};
     const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
     const Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
@@ -1754,16 +1754,16 @@ namespace apfel
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
 
-      // Compute argument of the exponent of the evolution factors.
+      // Compute argument of the exponent of the evolution factors
       const double IntI1 = I1.integrate(mu0, muf, thrs, IntEps);
       const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
       const double IntI3 = I3.integrate(mu0, muf, thrs, IntEps);
 
-      // Compute the evolution factors.
+      // Compute the evolution factors
       const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
       const double Rq  = exp( CF * Klz + IntI1 );
 
-      // Return the evolution factor.
+      // Return the evolution factor
       return Rq;
     };
 
@@ -1777,7 +1777,7 @@ namespace apfel
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1788,10 +1788,10 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
-    // Create functions needed for the TMD evolution.
+    // Create functions needed for the TMD evolution
     std::function<double(double const&)> gammaFg;
     std::function<double(double const&)> gammaK;
     std::function<double(double const&)> K;
@@ -1884,7 +1884,7 @@ namespace apfel
         };
       }
 
-    // Define the integrands.
+    // Define the integrands
     const Integrator I1{[=] (double const& mu) -> double{ return gammaFg(mu) / mu; }};
     const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
     const Integrator I3{[=] (double const& mu) -> double{ return gammaK(mu) * log(mu) / mu; }};
@@ -1897,16 +1897,16 @@ namespace apfel
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
 
-      // Compute argument of the exponent of the evolution factors.
+      // Compute argument of the exponent of the evolution factors
       const double IntI1 = I1.integrate(mu0, muf, thrs, IntEps);
       const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(zetaf);
       const double IntI3 = I3.integrate(mu0, muf, thrs, IntEps);
 
-      // Compute the evolution factors.
+      // Compute the evolution factors
       const double Klz = ( K(mu0) * log( zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
       const double Rg  = exp( CA * Klz + IntI1 );
 
-      // Return the factor.
+      // Return the evolution factor
       return Rg;
     };
 
@@ -1920,7 +1920,7 @@ namespace apfel
                                                                          double                               const& Ci,
                                                                          double                               const& IntEps)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -1931,10 +1931,10 @@ namespace apfel
         thrs[nf-1] = thr;
       }
 
-    // Define the log(Ci) to assess scale variations.
+    // Define the log(Ci) to assess scale variations
     const double Lmu = log(Ci);
 
-    // Create functions needed for the TMD evolution.
+    // Create functions needed for the TMD evolution
     std::function<double(double const&)> gammaK;
     std::function<double(double const&)> K;
     // LL
@@ -2008,7 +2008,7 @@ namespace apfel
         };
       }
 
-    // Define the integrands.
+    // Define the integrands
     const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
 
     // Construct function that returns the perturbative evolution
@@ -2018,13 +2018,13 @@ namespace apfel
       // Define lower scales
       const double mu0 = Ci * 2 * exp(- emc) / b;
 
-      // Compute argument of the exponent of the evolution factors.
+      // Compute argument of the exponent of the evolution factors
       const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps);
 
-      // Compute the evolution factors.
+      // Compute the evolution factors
       const double Klz = CF * ( K(mu0) - IntI2 );
 
-      // Return the factor.
+      // Return the evolution factor
       return Klz;
     };
 
@@ -2038,7 +2038,7 @@ namespace apfel
                                                   int                                  const& PerturbativeOrder,
                                                   double                               const& Cf)
   {
-    // Retrieve thresholds from "TmdObj".
+    // Retrieve thresholds from "TmdObj"
     std::vector<double> thrs;
     for(auto const& obj : TmdObj)
       {
@@ -2050,7 +2050,7 @@ namespace apfel
       }
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = thrs.size();
@@ -2058,7 +2058,7 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute log and its powers.
+    // Compute log and its powers
     const double lQ  = log(Cf);
     const double lQ2 = lQ * lQ;
     const double lQ3 = lQ * lQ2;
@@ -2133,13 +2133,13 @@ namespace apfel
   //_____________________________________________________________________________
   double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
   {
-    // Compute log and its powers.
+    // Compute log and its powers
     const double lQ  = log(kappa);
     const double lQ2 = lQ * lQ;
     const double lQ3 = lQ * lQ2;
     const double lQ4 = lQ * lQ3;
 
-    // Compute coupling and its powers.
+    // Compute coupling and its powers
     const double as  = Alphas / FourPi;
     const double as2 = as * as;
 
@@ -2154,7 +2154,7 @@ namespace apfel
                                   CA * ( - 51157. / 648. + 1061 * Pi2 / 108 + 313 * zeta3 / 9 - 4 * Pi2 * Pi2 / 45 ) +
                                   TR * nf * ( 4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
 
-    // Now compute hard factor according to the perturbative order.
+    // Now compute hard factor according to the perturbative order
     double hfct = 1;
     if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
       hfct += as * ( H1

@@ -150,7 +150,8 @@ namespace apfel
   ///@{
   /**
    * @name Quark charges
-   * @brief Quark electric charges and their square.
+   * @brief Quark electric charges and their square (it also includes
+   * sums of charges).
    */
   ///@{
   const double ed  = - 1. / 3.;
@@ -159,6 +160,8 @@ namespace apfel
   const double eu2 =   4. / 9.;
   const std::vector<double> QCh  = {ed,  eu,  ed,  eu,  ed,  eu};
   const std::vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
+  const std::vector<double> SumCh2 = {0., 1./9., 5./9., 2./3., 10./9., 11./9., 5./3.};
+  const std::vector<double> SumCh4 = {0., 1./81., 17./81., 18./81., 34./81., 35./81., 51./81.};
   ///@}
 
   /**

@@ -49,7 +49,7 @@ namespace apfel
   //_________________________________________________________________________________
   std::map<int, double> LHToyPDFs(double const& x, double const&)
   {
-    // Call all functions only once.
+    // Call all functions only once
     const double upv  = xupv(x);
     const double dnv  = xdnv(x);
     const double glu  = xglu(x);
@@ -57,7 +57,7 @@ namespace apfel
     const double ubar = xubar(x);
     const double sbar = xsbar(x);
 
-    // Construct QCD evolution basis conbinations.
+    // Construct QCD evolution basis conbinations
     double const Gluon   = glu;
     double const Singlet = dnv + 2 * dbar + upv + 2 * ubar + 2 * sbar;
     double const T3      = upv + 2 * ubar - dnv - 2 * dbar;
@@ -65,7 +65,7 @@ namespace apfel
     double const Valence = upv + dnv;
     double const V3      = upv - dnv;
 
-    // Fill in map in the QCD evolution basis.
+    // Fill in map in the QCD evolution basis
     std::map<int, double> QCDEvMap;
     QCDEvMap[0]  = Gluon;
     QCDEvMap[1]  = Singlet;
@@ -87,7 +87,7 @@ namespace apfel
   //_________________________________________________________________________________
   std::map<int, double> LHToyPDFsPhys(double const& x, double const&)
   {
-    // Call all functions only once.
+    // Call all functions only once
     const double upv  = xupv(x);
     const double dnv  = xdnv(x);
     const double glu  = xglu(x);
@@ -95,7 +95,7 @@ namespace apfel
     const double ubar = xubar(x);
     const double sbar = xsbar(x);
 
-    // Fill in map in the QCD evolution basis.
+    // Fill in map in the QCD evolution basis
     std::map<int, double> PhysMap;
     PhysMap[-6] = 0;
     PhysMap[-5] = 0;

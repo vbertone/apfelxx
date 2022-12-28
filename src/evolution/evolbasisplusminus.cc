@@ -12,7 +12,7 @@ namespace apfel
   EvolBasisPlusMinus::EvolBasisPlusMinus():
     ConvolutionMap{"EvolBasisPlusMinus"}
   {
-    _rules[GLUON] = { {PGG, GLUON, 1}, {PGD, DWP, 1}, {PGU, UPP, 1}, {PGS, STP, 1}, {PGC, CHP, 1}, {PGB, BTP, 1}, {PGT, TPP, 1}};
+    _rules[GLUON] = { {PGG, GLUON, 1}, {PGD, DWP, 1}, {PGU, UPP, 1}, {PGS, STP, 1}, {PGC, CHP, 1}, {PGB, BTP, 1}, {PGT, TPP,   1}};
     _rules[DWP]   = { {PDD, DWP,   1}, {PPS, UPP, 1}, {PPS, STP, 1}, {PPS, CHP, 1}, {PPS, BTP, 1}, {PPS, TPP, 1}, {PDG, GLUON, 1}};
     _rules[DWM]   = { {PDD, DWM,   1}, {PMP, DWM, 1}};
     _rules[UPP]   = { {PPS, DWP,   1}, {PUU, UPP, 1}, {PPS, STP, 1}, {PPS, CHP, 1}, {PPS, BTP, 1}, {PPS, TPP, 1}, {PUG, GLUON, 1}};

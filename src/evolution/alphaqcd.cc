@@ -21,7 +21,7 @@ namespace apfel
     MatchedEvolution{AlphaRef, MuRef, Thresholds, nstep},
     _pt(pt)
   {
-    // Beta function lambda function.
+    // Beta function lambda function
     _BetaFunction = [=] (int const& nf, double const& as)-> double
     {
       double bt = 0, powas = as * as;
@@ -33,7 +33,7 @@ namespace apfel
       return bt;
     };
 
-    // Matching condition lambda function.
+    // Matching condition lambda function
     _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
     {
       // Compute log of muth2 / m2
@@ -43,6 +43,7 @@ namespace apfel
 
       const double sgn = (Up ? 1 : -1);
       const double ep  = Coup / FourPi;
+
       // The O(as^3) matching condition does not include the
       // logarithmic terms yet. The expression is taken from Eqs. (22)
       // and (25) of https://arxiv.org/pdf/hep-ph/0004189.pdf that do

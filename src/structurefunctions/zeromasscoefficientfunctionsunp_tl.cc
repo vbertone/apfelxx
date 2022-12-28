@@ -111,6 +111,13 @@ namespace apfel
     const double Hr3011   = Hr3[25];
     const double Hr3111   = Hr3[26];
 
+    // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
+    delete[] Hr4;
+    delete[] Hr3;
+    delete[] Hr2;
+    delete[] Hr1;
+
     const double C2eq2 =
       // Transverse contribution
       + CF*CA * ( 1271./270. + 4829./270.*x - 24./5.*x2
@@ -197,13 +204,6 @@ namespace apfel
                     Hr30m10 - 16.*Hr3100 )
       + _nf * CF * ( - 50./9. + 4./3.*x + 4./3.
                      *Hr10 - 4./3.*Hr11 );
-
-    // Deallocate pointers for the harmonic polylogs
-    delete[] Hr5;
-    delete[] Hr4;
-    delete[] Hr3;
-    delete[] Hr2;
-    delete[] Hr1;
 
     // Singular term to be subtracted
     const double C2eq2L = dm * ( pow(dl1, 3) * _a3 + pow(dl1, 2) * _a2 + dl1 * _a1 + _a0 );
@@ -704,6 +704,13 @@ namespace apfel
     const double Hr3011   = Hr3[25];
     const double Hr3111   = Hr3[26];
 
+    // Deallocate pointers for the harmonic polylogs
+    delete[] Hr5;
+    delete[] Hr4;
+    delete[] Hr3;
+    delete[] Hr2;
+    delete[] Hr1;
+
     const double C3eq2 =
       + CF * CA * ( 325./54. + 895./54.*x - 3155./54.*dm -
                     36.*zeta3 + 28.*zeta3*dp + 28.*zeta3*dm + 12.*zeta2 + 8.*zeta2*x
@@ -764,13 +771,6 @@ namespace apfel
                      /3.*Hr200*dm + 4./3.*Hr201 + 4./3.*Hr201*x
                      - 8./3.*Hr201*dm - 4./3.*Hr211 - 4./3.*
                      Hr211*x + 8./3.*Hr211*dm );
-
-    // Deallocate pointers for the harmonic polylogs
-    delete[] Hr5;
-    delete[] Hr4;
-    delete[] Hr3;
-    delete[] Hr2;
-    delete[] Hr1;
 
     // Singular term term to be subtracted
     const double C3eq2L = dm * ( pow(dl1, 3) * _a3 + pow(dl1, 2) * _a2 + dl1 * _a1 + _a0 );

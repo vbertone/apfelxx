@@ -23,7 +23,7 @@ namespace apfel
     _pt(pt),
     _kappa(kappa)
   {
-    // Matching condition lambda function.
+    // Matching condition lambda function
     _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
     {
       // Compute log of muth2 / m2
@@ -33,6 +33,7 @@ namespace apfel
 
       const double sgn = (Up ? 1 : -1);
       const double ep  = Coup / FourPi;
+
       // The O(as^3) matching condition does not include the
       // logarithmic terms yet. The expression is taken from Eqs. (22)
       // and (25) of https://arxiv.org/pdf/hep-ph/0004189.pdf that do
@@ -70,7 +71,7 @@ namespace apfel
   //_________________________________________________________________________________
   double AlphaQCDg::EvolveObject(int const& nf, double const& lnmu02, double const& lnmu2, double const& as0) const
   {
-    // Return immediately "as0" if "lnmu02" and "lnmu2" are equal.
+    // Return immediately "as0" if "lnmu02" and "lnmu2" are equal
     if (lnmu02 == lnmu2)
       return as0;
 

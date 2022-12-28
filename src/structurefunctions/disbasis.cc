@@ -30,7 +30,7 @@ namespace apfel
         if (i == 2)
           coef *= - 1;
 
-        // Multiply the coefficient by the overall factor.
+        // Multiply the coefficient by the overall factor
         coef *= fact;
 
         _rules[2 * i - 1] = { {CNS, 2 * i - 1, coef} };
@@ -74,7 +74,7 @@ namespace apfel
   DISCCBasis::DISCCBasis(int const& l, bool const& Is3, double const& fact):
     ConvolutionMap{"DISCCBasis_" + std::to_string(l) + "_" + std::to_string(Is3)}
   {
-    // Retrieve CKM matrix element.
+    // Retrieve CKM matrix element
     const int i = Vij.at(l).first;
     const int j = Vij.at(l).second;
 
@@ -114,7 +114,7 @@ namespace apfel
             coefm *= - 1;
           }
 
-        // Multiply the coefficient by the overall factor.
+        // Multiply the coefficient by the overall factor
         coefp *= fact;
         coefm *= fact;
 
@@ -144,16 +144,16 @@ namespace apfel
     for (int k = 3; k <= 12; k++)
       _rules[k] = { {CNS, k, 0} };
 
-    // Fill in rules according to the input CKM matrix.
+    // Fill in rules according to the input CKM matrix
     for (auto i = 1; i <= (int) CKM.size(); i++)
       {
         if (CKM[i - 1] == 0)
           continue;
 
-        // Get basis of the i-th component.
+        // Get basis of the i-th component
         const DISCCBasis basis{i, Is3};
 
-        // Get the rules.
+        // Get the rules
         const auto rules = basis.GetRules();
 
         // Update rules

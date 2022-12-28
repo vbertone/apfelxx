@@ -10,11 +10,6 @@
 
 namespace apfel
 {
-  /**
-   * @brief The LO space-like splitting function for tranversely
-   * polarised PDFs. Reference
-   * https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
-   */
   //_________________________________________________________________________________
   P0transns::P0transns():
     Expression()
@@ -52,11 +47,6 @@ namespace apfel
     return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
-  /**
-   * @brief The NLO space-like splitting function for tranversely
-   * polarised PDFs. Reference
-   * https://arxiv.org/pdf/hep-ph/9706511v2.pdf.
-   */
   //_________________________________________________________________________________
   P1transnsp::P1transnsp(int const& nf):
     Expression(),
@@ -109,11 +99,6 @@ namespace apfel
       - 4 * CF * ( CF - CA / 2 ) * ( - 1 + x - 4 * S2x / ( 1 + x ) );
   }
 
-  /**
-   * @brief The NLO space-like splitting function for lineraly
-   * polarised PDFs. Reference
-   * https://arxiv.org/pdf/hep-ph/9805295v1.pdf.
-   */
   //_________________________________________________________________________________
   P1transgg::P1transgg(int const& nf):
     Expression(),

@@ -33,7 +33,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -41,9 +41,9 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute logs of muth2 / m2 needed for the the matching
+    // Compute logs of muth2 / m2 needed for the matching
     // conditions. Push a zero at last to extend the vector but that
-    // entry will never effectively be used in the evolution.
+    // entry will never be effectively used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
@@ -59,7 +59,7 @@ namespace apfel
     // splitting functions and matching conditions (lambda) functions
     // are defined.
     // ===============================================================
-    // LO Matching conditions.
+    // LO matching conditions
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -73,7 +73,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
-    // LO splitting function operators.
+    // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0ns{}, IntEps};
     const Operator O0gq{g, P0gq{}, IntEps};
@@ -93,7 +93,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO Matching conditions.
+    // NLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNLO;
     const Operator AS1HgL {g, AS1Hg_L{},  IntEps};
     const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
@@ -120,7 +120,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO splitting function operators.
+    // NLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -143,7 +143,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNLO Matching conditions.
+    // NNLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNNLO;
     const Operator APS2Hq0  {g, APS2Hq_0{},   IntEps};
     const Operator APS2HqL  {g, APS2Hq_L{},   IntEps};
@@ -186,7 +186,7 @@ namespace apfel
       }
 
     // Auxiliary NNLO contributions to be used for backward
-    // matching. The are essentially the square of the NLO matching
+    // matching. They are essentially the square of the NLO matching
     // matrix. They are labelled with perturbative order -2.
     std::map<int, std::map<int, Operator>> MatchNNLOb;
     for (int nf = nfi; nf <= nff; nf++)
@@ -212,7 +212,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNLO splitting function operators.
+    // NNLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -237,10 +237,10 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNNLO Matching conditions. Approximations from
+    // NNNLO matching conditions. Approximations from
     // https://arxiv.org/pdf/2207.04739.pdf. No logarithmic terms are
-    // currently available not the contributions required for backward
-    // evolutions are computed.
+    // currently available, nor the contributions required for
+    // backward evolutions are computed.
     std::map<int, std::map<int, Operator>> MatchNNNLO;
     const Operator APS3Hq {g, APS3Hq_0{},  IntEps};
     const Operator ANS3qqH{g, ANS3qqH_0{}, IntEps};
@@ -266,8 +266,8 @@ namespace apfel
     // NNNLO splitting function operators. For now the non-singlet
     // splitting functions have been computed to leading colour even
     // though the subleading colour part is estimated through an
-    // approximate parameterisation. In addition the approximations of
-    // https://arxiv.org/pdf/2207.04739.pdf are used
+    // approximate parameterisation. In addition, the approximations
+    // of https://arxiv.org/pdf/2207.04739.pdf are used.
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     const Operator O3gq{g, P3gq{}, IntEps};
     const Operator O3gg{g, P3gg{}, IntEps};
@@ -291,7 +291,7 @@ namespace apfel
         OpMapNNNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
@@ -351,7 +351,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -359,9 +359,9 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute logs of muth2 / m2 needed for the the matching
+    // Compute logs of muth2 / m2 needed for the matching
     // conditions. Push a zero at last to extend the vector but that
-    // entry will never effectively be used in the evolution.
+    // entry will never be effectively used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
@@ -377,7 +377,7 @@ namespace apfel
     // splitting functions and matching conditions (lambda) functions
     // are defined.
     // ===============================================================
-    // LO Matching conditions.
+    // LO matching conditions
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -391,7 +391,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
-    // LO splitting function operators.
+    // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0polns{}, IntEps};
     const Operator O0gq{g, P0polgq{}, IntEps};
@@ -411,7 +411,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO Matching conditions.
+    // NLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNLO;
     const Operator AS1HgL {g, AS1Hg_L{},  IntEps};
     const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
@@ -438,7 +438,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO splitting function operators.
+    // NLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -461,7 +461,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNLO Matching conditions.
+    // NNLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNNLO;
     const Operator APS2Hq0  {g, APS2Hq_0{},   IntEps};
     const Operator APS2HqL  {g, APS2Hq_L{},   IntEps};
@@ -504,7 +504,7 @@ namespace apfel
       }
 
     // Auxiliary NNLO contributions to be used for backward
-    // matching. The are essentially the square of the NLO matching
+    // matching. They are essentially the square of the NLO matching
     // matrix. They are labelled with perturbative order -2.
     std::map<int, std::map<int, Operator>> MatchNNLOb;
     for (int nf = nfi; nf <= nff; nf++)
@@ -530,7 +530,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNLO splitting function operators.
+    // NNLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -554,7 +554,7 @@ namespace apfel
         OpMapNNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
@@ -610,7 +610,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -618,9 +618,9 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute logs of muth2 / m2 needed for the the matching
+    // Compute logs of muth2 / m2 needed for the matching
     // conditions. Push a zero at last to extend the vector but that
-    // entry will never effectively be used in the evolution.
+    // entry will never be effectively used in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
@@ -636,7 +636,7 @@ namespace apfel
     // splitting functions and matching conditions (lambda) functions
     // are defined.
     // ===============================================================
-    // LO Matching conditions.
+    // LO matching conditions
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -650,7 +650,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
-    // LO splitting function operators.
+    // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0Tns{}, IntEps};
     const Operator O0gq{g, P0Tgq{}, IntEps};
@@ -670,7 +670,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO Matching conditions.
+    // NLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNLO;
     const Operator AS1Hg0 {g, ATS1Hg_0{},  IntEps};
     const Operator AS1HgL {g, ATS1Hg_L{},  IntEps};
@@ -697,7 +697,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO splitting function operators.
+    // NLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -720,14 +720,14 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNLO Matching conditions. Set to zero for now because they are
+    // NNLO matching conditions. Set to zero for now because they are
     // not know yet.
     std::map<int, Operator> MatchNNLO;
     for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
       MatchNNLO.insert({i, Zero});
 
     // ===============================================================
-    // NNLO splitting function operators.
+    // NNLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -751,7 +751,7 @@ namespace apfel
         OpMapNNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
@@ -807,7 +807,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -815,10 +815,10 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute logs of muth2 / m2 needed for the the matching
-    // conditions (not possible for transversities yet). Push a zero
-    // at last to extend the vector but that entry will never
-    // effectively be used in the evolution.
+    // Compute logs of muth2 / m2 needed for the matching conditions
+    // (not possible for transversities yet). Push a zero at last to
+    // extend the vector but that entry will never be effectively used
+    // in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
@@ -834,7 +834,7 @@ namespace apfel
     // splitting functions and matching conditions (lambda) functions
     // are defined.
     // ===============================================================
-    // LO Matching conditions.
+    // LO matching conditions
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -848,7 +848,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
-    // LO splitting function operators.
+    // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0transns{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
@@ -866,13 +866,13 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO Matching conditions (Null).
+    // NLO Matching conditions (Null)
     std::map<int, Operator> MatchNLO;
     for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
-    // NLO splitting function operators.
+    // NLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -890,7 +890,7 @@ namespace apfel
         OpMapNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
@@ -940,7 +940,7 @@ namespace apfel
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -948,10 +948,10 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute logs of muth2 / m2 needed for the the matching
-    // conditions (not possible for transversities yet). Push a zero
-    // at last to extend the vector but that entry will never
-    // effectively be used in the evolution.
+    // Compute logs of muth2 / m2 needed for the matching conditions
+    // (not possible for transversities yet). Push a zero at last to
+    // extend the vector but that entry will never be effectively used
+    // in the evolution.
     std::vector<double> LogKth;
     for (int im = 0; im < (int) Thresholds.size(); im++)
       if (Thresholds[im] < eps12 || Masses[im] < eps12)
@@ -967,7 +967,7 @@ namespace apfel
     // splitting functions and matching conditions (lambda) functions
     // are defined.
     // ===============================================================
-    // LO Matching conditions.
+    // LO matching conditions
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
@@ -981,7 +981,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
 
     // ===============================================================
-    // LO splitting function operators.
+    // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
     const Operator O0ns{g, P0Ttransns{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
@@ -998,13 +998,13 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO Matching conditions (Null).
+    // NLO Matching conditions (Null)
     std::map<int, Operator> MatchNLO;
     for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
-    // NLO splitting function operators.
+    // NLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -1021,7 +1021,7 @@ namespace apfel
         OpMapNLO.insert({nf, OM});
       }
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
     // Allocate convolution maps for evolution and matching, and set
@@ -1170,11 +1170,11 @@ namespace apfel
         AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
       }
 
-    // Create set of initial distributions.
+    // Create set of initial distributions
     const Set<Distribution> InPDFs{DglapObj.at(NF(MuRef, Thresholds)).SplittingFunctions.at(0).GetMap(),
                                    DistributionMap(DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
-    // Initialize DGLAP evolution.
+    // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
                                                                          MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), InPDFs, MuRef, Thresholds, nsteps
                                                                         });
@@ -1202,7 +1202,7 @@ namespace apfel
         AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
       }
 
-    // Allocate Identity and Zero operators.
+    // Allocate Identity and Zero operators
     const Grid&  g   = DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid();
     const double eps = DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetIntegrationAccuracy();
     const bool   gpd = DglapObj.begin()->second.SplittingFunctions.at(0).at(0).IsGPD();
@@ -1220,7 +1220,7 @@ namespace apfel
         MapUnity.insert({i, Zero});
     Set<Operator> Unity{EvolutionOperatorBasisQCD{NF(MuRef, Thresholds)}, MapUnity};
 
-    // Initialize DGLAP evolution.
+    // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
                                                                  MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), Unity, MuRef, Thresholds, nsteps
                                                                 });
@@ -1236,7 +1236,7 @@ namespace apfel
                                                   int                                                                const& nsteps)
   {
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -1244,7 +1244,7 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Compute coupling above and below the thresholds.
+    // Compute coupling above and below the thresholds
     std::map<int, double> asThUp;
     std::map<int, double> asThDown;
     for (int nf = nfi + 1; nf <= nff; nf++)
@@ -1315,11 +1315,11 @@ namespace apfel
         };
       }
 
-    // Create set of initial distributions.
+    // Create set of initial distributions
     const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
                                    DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
-    // Initialize DGLAP evolution.
+    // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
   }
 }

@@ -10,9 +10,6 @@
 
 namespace apfel
 {
-  /**
-   * @brief The LO space-like splitting function classes
-   */
   //_________________________________________________________________________________
   P0ns::P0ns():
     Expression()
@@ -71,9 +68,6 @@ namespace apfel
     return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
-  /**
-   * @brief The NLO space-like splitting function classes
-   */
   //_________________________________________________________________________________
   P1nsp::P1nsp(int const& nf):
     Expression(),
@@ -230,9 +224,6 @@ namespace apfel
     return log(1-x) * _a2g + p1delta;
   }
 
-  /**
-   * @brief The NNLO space-like splitting function classes (parametrized)
-   */
   //_________________________________________________________________________________
   P2nsp::P2nsp(int const& nf):
     Expression(),
@@ -482,12 +473,6 @@ namespace apfel
       + _nf * _nf * ( - 16. / 9. * dl1 + 6.4630 );
   }
 
-  /**
-   * @brief The NNNLO splitting function classes (parametrized and
-   * leading color). Only the +, -, and valence contributions have
-   * been computed so far.
-   *
-   */
   //_________________________________________________________________________________
   P3nsp::P3nsp(int const& nf, int const& imod, double const& rho):
     Expression(),
@@ -702,7 +687,7 @@ namespace apfel
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm2 * dlm;
 
-    // Leading large-n_c, nf^0 and nf^1, parametrized.
+    // Leading large-n_c, nf^0 and nf^1, parametrized
     const double p3nsa0  =
       2.5e+4 * ( omy * ( 3.5254 + 8.6935 * y - 1.5051 * y2 + 1.8300 * y3 )
                  + 11.883 * y * dl - 0.09066 * y * dl2 + 11.410 * omy * dlm + 13.376  * dl * dlm )

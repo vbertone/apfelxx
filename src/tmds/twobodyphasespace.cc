@@ -1,4 +1,6 @@
 //
+// APFEL++ 2017
+//
 // Authors: Valerio Bertone: valerio.bertone@cern.ch
 //          Fulvio Piacenza: fulvio.piacenza01@universitadipavia.it
 //
@@ -72,7 +74,7 @@ namespace apfel
       const double x2 = std::min(std::min(f4, std::min(f3max, f3min)), 1.);
 
       // Primitive function of the intregration in cos(phi) (up to a
-      // factor that can be compute externally) when contractin the
+      // factor that can be compute externally) when contracting the
       // leptonic tensor with g^{\mu\nu}_\perp.
       const auto Fbar = [&] (double const& x) -> double
       {
@@ -129,7 +131,7 @@ namespace apfel
     // Integrand function
     const auto IntegrandP = [&] (double const& eta) -> double
     {
-      // More useful definitions
+      // More definitions
       const double ch    = cosh(eta - y);
       const double sh    = sinh(y - eta);
       const double Eq    = M * ch;

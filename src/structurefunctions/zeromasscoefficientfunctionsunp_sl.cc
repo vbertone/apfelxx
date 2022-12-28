@@ -385,7 +385,7 @@ namespace apfel
   {
     // The first term of "c2ns3b" (1536. * d81 * dl15) is numerically
     // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0.  This should have no impact in that at x->1 the
+    // return 0. This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
     if (x > 1 - eps8)
@@ -467,7 +467,7 @@ namespace apfel
   {
     // The first term of "c2ns3b" (1536. * d81 * dl15) is numerically
     // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0.  This should have no impact in that at x->1 the
+    // return 0. This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
     if (x > 1 - eps8)
@@ -746,7 +746,7 @@ namespace apfel
   {
     // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
     // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0.  This should have no impact in that at x->1 the
+    // return 0. This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
     if (x > 1 - eps8)
@@ -822,7 +822,7 @@ namespace apfel
   {
     // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
     // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0.  This should have no impact in that at x->1 the
+    // return 0. This should have no impact in that at x->1 the
     // singular function multiplies something that tends to zero (plus
     // presciption).
     if (x > 1 - eps8)
