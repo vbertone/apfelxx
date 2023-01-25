@@ -493,7 +493,7 @@ namespace apfel
         // nf terms (Eq. (65))
         const double c12 = ovc * nf / 12.;
         if (std::find(exclude.begin(), exclude.end(), 52) == exclude.end()) cnf.AddTerm({c12, odeltax, oD2z});
-        if (std::find(exclude.begin(), exclude.end(), 53) == exclude.end()) cnf.AddTerm({c12, oD2z, odeltaz});
+        if (std::find(exclude.begin(), exclude.end(), 53) == exclude.end()) cnf.AddTerm({c12, oD2x, odeltaz});
         if (std::find(exclude.begin(), exclude.end(), 54) == exclude.end()) cnf.AddTerm({2 * c12, oD0x, oD1z});
         if (std::find(exclude.begin(), exclude.end(), 55) == exclude.end()) cnf.AddTerm({2 * c12, oD1x, oD0z});
 
