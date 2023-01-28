@@ -1053,14 +1053,14 @@ so that:
 \label{eq:SudExp0}
 \end{equation}
 where we have defined:
-%If we define:
 \begin{equation}
 L\equiv \ln\frac{Q^2}{\mu_b^2}\,,
 \label{eq:reslogs}
 \end{equation}
+Extending the computation to $\mathcal{O}(\alpha_s^3)$,
 Eq.~(\ref{eq:SudExp1}) can be conveniently written as:
 \begin{equation}
-  R^2=\exp\left\{\sum_{n=1}^2a_s^n(Q)\sum_{k=1}^{n+1}S^{(n,k)}L^k\right\}\,,
+  R^2=\exp\left\{\sum_{n=1}^3a_s^n(Q)\sum_{k=1}^{n+1}S^{(n,k)}L^k\right\}\,,
 \label{eq:SudCompact}
 \end{equation}
 with:
@@ -1069,31 +1069,55 @@ with:
 \displaystyle \displaystyle S^{(1,1)} =K^{(0,0)}+\gamma_F^{(0)}\,,\quad\displaystyle
                                                    S^{(1,2)} =- \frac14\gamma_K^{(0)}\,,\\
 \\
-\displaystyle S^{(2,1)} =K^{(1,0)}+\gamma_F^{(1)}\,,\quad\displaystyle S^{(2,2)} = \beta_0 K^{(0,0)}+\frac12\beta_0\gamma_F^{(0)} - \frac14\gamma_K^{(1)}\,,\quad\displaystyle S^{(2,3)} = - \frac16 \beta_0\gamma_K^{(0)}\,.
+\displaystyle S^{(2,1)} =K^{(1,0)}+\gamma_F^{(1)}\,,\quad\displaystyle
+  S^{(2,2)} = \beta_0 K^{(0,0)}+\frac12\beta_0\gamma_F^{(0)} -
+  \frac14\gamma_K^{(1)}\,,\quad\displaystyle S^{(2,3)} = - \frac16
+  \beta_0\gamma_K^{(0)}\,,\\
+\\
+\displaystyle S^{(3,1)} =K^{(2,0)}+\gamma_F^{(2)}\,,\quad\displaystyle
+  S^{(3,2)} = \frac{1}{2} \beta _1 \gamma _F^{(0)}+\beta _1
+  K^{{(0,0)}}+\beta _0 \gamma _F^{{(1)}}+2 \beta _0
+  K^{{(1,0)}}-\frac{1}{4}\gamma _K^{{(2)}}\,,\\
+\\
+\displaystyle \displaystyle S^{(3,3)} = \frac{1}{3} \beta _0^2 \gamma _F^{{(0)}}-\frac{1}{6} \beta _1 \gamma _K^{{(0)}}+\beta _0^2 K^{{(0,0)}}-\frac{1}{3} \beta _0 \gamma _K^{{(1)}}\,,\quad\displaystyle S^{(3,4)} =-\frac18 \beta_0^2\gamma_K^{(0)} \,.
 \end{array}
 \end{equation}
-Eq.~(\ref{eq:SudCompact}) can be easily expanded up to order $a_s^2$
+Finally, Eq.~(\ref{eq:SudCompact}) can be expanded up to order $a_s^3$
 as:
 \begin{equation}
-\begin{array}{rcl}
-  \displaystyle R^2&=&\displaystyle
-                       1+a_s(Q)\sum_{k=1}^{2}S^{(1,k)}L^k+a_s^2(Q)\left[\sum_{k=1}^{3}S^{(2,k)}L^k+\frac12\left(\sum_{k=1}^{2}S^{(1,k)}L^k\right)^2\right]+\mathcal{O}(a_s^3)\\
-  \\
-                   &=&\displaystyle
-                       1+a_s(Q)\sum_{k=1}^{2}S^{(1,k)}L^k+a_s^2(Q)
-                       \sum_{k=1}^{4}\widetilde{S}^{(2,k)}L^k
-                       +\mathcal{O}(a_s^3)\,,
-\end{array}
+R^2= 1+\sum_{n=1}^3a_s^n(Q)\sum_{k=1}^{2n}\widetilde{S}^{(n,k)}L^k\,,
 \label{eq:exp1}
 \end{equation}
 with:
 \begin{equation}
 \begin{array}{ll}
+\displaystyle    \widetilde{S}^{(1,1)}={S}^{(1,1)}\,,&\displaystyle
+                                                       \quad
+                                                       \widetilde{S}^{(1,2)}={S}^{(1,2)}\,,\\
+\\
 \displaystyle    \widetilde{S}^{(2,1)}={S}^{(2,1)}\,,&\displaystyle \quad \widetilde{S}^{(2,2)}={S}^{(2,2)}+\frac12\left[S^{(1,1)}\right]^2\,,\\
 \\
 \displaystyle
   \widetilde{S}^{(2,3)}={S}^{(2,3)}+{S}^{(1,1)}{S}^{(1,2)}\,,&\displaystyle
-                                                                \quad \widetilde{S}^{(2,4)}=\frac12\left[S^{(1,2)}\right]^2\,.
+                                                                \quad
+                                                               \widetilde{S}^{(2,4)}=\frac12\left[S^{(1,2)}\right]^2\\
+\\
+\displaystyle\widetilde{S}^{(3,1)}= S^{{(3,1)}}\,,
+                                                     &\displaystyle\widetilde{S}^{(3,2)}=
+                                                       S^{{(1,1)}}
+                                                       S^{{(2,1)}}+S^{{(3,2)}}\,,\\
+\\
+\displaystyle\widetilde{S}^{(3,3)}= S^{{(1,1)}}
+  S^{{(2,2)}}+\frac{1}{6}\left[S^{{(1,1)}}\right]^3+S^{{(1,2)}}
+  S^{{(2,1)}}+S^{{(3,3)}} \,,
+                                                     &\displaystyle\widetilde{S}^{(3,4)}= \frac{1}{2} \left[S^{{(1,1)}}\right]^2
+  S^{{(1,2)}}+S^{{(1,1)}} S^{{(2,3)}}+S^{{(1,2)}}
+  S^{{(2,2)}}+S^{{(3,4)}}\,,\\
+\\
+\displaystyle\widetilde{S}^{(3,5)}= \frac{1}{2} S^{{(1,1)}}
+  \left[S^{{(1,2)}}\right]^2+S^{{(1,2)}}
+  S^{{(2,3)}}\,,&
+\displaystyle\widetilde{S}^{(3,6)}=\frac{1}{6}  \left[S^{{(1,2)}}\right]^3\,.
 \end{array}
 \end{equation}
 
@@ -1150,36 +1174,59 @@ so that:
 \displaystyle \Gamma^{(2,2)} = \frac12\beta_0 P^{(0)} + \frac12 P^{(0)}\otimes P^{(0)}\,.
 \end{array}
 \end{equation}
-Putting all pieces together, we find:
+Putting all pieces together and extending the expansion to
+$\mathcal{O}(\alpha_s^3)$, we find:
 \begin{equation}
-\Gamma(Q,\mu_b) = \Delta + a_s(Q)L P^{(0)}
-+a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)}
-    +P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
+\begin{array}{rcl}
+\displaystyle \Gamma(Q,\mu_b) &=&\displaystyle  \Delta +a_s(Q) L
+                                  P^{{(0)}}+a_s ^2(Q) \left[L
+  P^{{(1)}} +L^2 \left(\frac{\beta _0
+      P^{{(0)}}}{2}+\frac{\left(P^{{(0)}}\right)^2}{2}\right)\right]\\
+\\
+ &+&\displaystyle a_s ^3 (Q) \left[L
+  P^{{(2)}} +L^2 \left(P^{{(0)}} P^{{(1)}}+\frac{\beta
+      _1 P^{{(0)}}}{2}+\beta _0 P^{{(1)}}\right)+L^3
+  \left(\frac{1}{2} \beta _0 \left(P^{{(0)}}\right)^2+\frac{1}{3}
+    \beta _0^2
+    P^{{(0)}}+\frac{\left(P^{{(0)}}\right)^3}{6}\right)\right]\\
+\\
+&+&\displaystyle \mathcal{O}(a_s^4)\,.
+\end{array}
 \label{eq:DGLAPeqOpExp}
 \end{equation}
+
 However, the quantity we are interested in is the inverse of the
 operator $\Gamma$, that evolves the PDFs from the scale $Q$ to
 $\mu_b$:
 \begin{equation}
 \begin{array}{l}
 \displaystyle \Gamma(\mu_b,Q)=\Gamma^{-1}(Q,\mu_b) \\
-\\\displaystyle
- = \Delta - a_s(Q)L P^{(0)}
-- a_s^2(Q)\left[LP^{(1)}+ \frac{L^2}2 \left(\beta_0 P^{(0)}-P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(a_s^3)\,.
+\\
+\displaystyle = \Delta -a_s(Q) L P^{{(0)}}-a_s^2(Q) \left[L P^{{(1)}} +L^2 \left(\frac{\beta _0 P^{{(0)}}}{2}-\frac{\left(P^{{(0)}}\right)^2}{2}\right)\right]\\
+\\
+\displaystyle-a_s ^3 (Q) \left[L P^{{(2)}} +L^2 \left(-P^{{(0)}} P^{{(1)}}+\frac{1}{2} \beta _1 P^{{(0)}}+\beta _0 P^{{(1)}}\right)+L^3 \left(-\frac{1}{2} \beta _0 \left(P^{{(0)}}\right)^2+\frac{1}{3} \beta _0^2 P^{{(0)}}+\frac{1}{6} \left(P^{{(0)}}\right)^3\right)\right]\\
+\\
++\mathcal{O}(a_s^4) \,.
 \end{array}
 \label{eq:DGLAPeqOp1}
 \end{equation}
+
 
 \subsection{Expansion of the matching coefficients at the hard scale}
 
 The final step is the expansion of the matching coefficients $C$
 defined in Eq.~(\ref{eq:matching}) for $\mu_0=\mu_b$ around the scale
-$Q$ up to order $a_s^2$. To do this, we use the expansion in
+$Q$ up to order $a_s^3$. To do this, we use the expansion in
 Eq.~(\ref{eq:MatchCoeffExp}), in which $a_s$ is computed at $\mu_b$,
 and combine it with Eq.~(\ref{eq:asexp}). This yields:
 \begin{equation}
-  C(\mu_b,\mu_b^2) = \Delta + a_s(Q) C^{(1,0)} + a_s^2(Q)
-  \left[C^{(2,0)}+L\beta_0C^{(1,0)}\right]+\mathcal{O}(a_s^3)\,.
+\begin{array}{rcl}
+  C(\mu_b,\mu_b^2) &=&\displaystyle  C^{(0)} +a_s(Q)
+                       C^{{(1)}}+a_s^2(Q) \left[C^{{(2)}}+ L \beta _0C^{{(1)}}\right]\\
+\\
+&+&\displaystyle a_s^3(Q) \left[C^{{(3)}}+L \left(\beta _1 C^{{(1)}} +2 \beta _0
+    C^{{(2)}}\right)+ L^2 \beta _0^2 C^{{(1)}}\right]+\mathcal{O}(a_s^4)
+\end{array}
 \label{eq:MatchCoeffExp1}
 \end{equation}
 
@@ -1196,11 +1243,23 @@ Eqs.~(\ref{eq:DGLAPeqOp1}) and~(\ref{eq:MatchCoeffExp1}):
 C(\mu_b,\mu_b^2)\otimes f(\mu_b) &=& C(\mu_b,\mu_b^2)\otimes
 \Gamma(\mu_b,Q) \otimes f(Q)\\
 \\
-&=& \bigg\{\Delta + a_s(Q)\left[C^{(1,0)}-L P^{(0)}\right]\\
+                                 &=&\displaystyle   \bigg\{C^{(0)}  +a_s(Q) \left[C^{{(1)}}-L
+                       P^{{(0)}}\right]\\
 \\
-&+&\displaystyle a_s^2(Q)\bigg[C^{(2,0)}+L\left(-P^{(1)}-C^{(1,0)}\otimes P^{(0)}+\beta_0C^{(1,0)}\right)\\
+&+&\displaystyle a_s^2 (Q) \left[C^{{(2)}} +L \left(-P^{{(0)}} C^{{(1)}}+\beta _0 C^{{(1)}}-P^{{(1)}}\right)+L^2 \left(\frac{\left(P^{{(0)}}\right)^2}{2}-\frac{\beta _0 P^{{(0)}}}{2}\right)\right]\\
 \\
-&+&\displaystyle \frac{L^2}2 \left(P^{(0)}\otimes P^{(0)}-\beta_0 P^{(0)}\right)\bigg]\bigg\}\otimes f(Q)+\mathcal{O}(a_s^3)\,.
+&+&\displaystyle a_s^3 (Q) \bigg[C^{{(3)}} +L \left(-P^{{(0)}}
+    C^{{(2)}}-C^{{(1)}} P^{{(1)}}+\beta _1 C^{{(1)}}+2 \beta _0
+    C^{{(2)}}-P^{{(2)}}\right)\\
+\\
+&+&\displaystyle L^2 \left(-\frac{3}{2} \beta _0 P^{{(0)}}
+    C^{{(1)}}+\frac{1}{2} \left(P^{{(0)}}\right)^2 C^{{(1)}}+P^{{(0)}}
+    P^{{(1)}}-\frac{\beta _1 P^{{(0)}}}{2}+\beta _0^2 C^{{(1)}}-\beta
+    _0 P^{{(1)}}\right)\\
+\\
+&+&\displaystyle L^3 \left(\frac{1}{2} \beta _0 \left(P^{{(0)}}\right)^2-\frac{1}{3} \beta _0^2 P^{{(0)}}-\frac{1}{6} \left(P^{{(0)}}\right)^3\right)\bigg]\bigg\}\otimes f(Q)\\
+\\
+&+&\displaystyle \mathcal{O}(a_s^4)\,.
 \end{array}
 \label{eq:LowScaleTMD}
 \end{equation}
@@ -1218,7 +1277,8 @@ factor reads:
 \begin{equation}
 H_{ij}(Q) = \sum_{n=0}^\infty a_s^n(Q)
 H_{ij}^{(n)}=H_{ij}^{(0)}+a_s(Q) H_{ij}^{(1)}+a_s^2(Q)
-H_{ij}^{(2)}+\mathcal{O}(a_s^3)\,,
+H_{ij}^{(2)}+a_s^3(Q)
+H_{ij}^{(3)}+\mathcal{O}(a_s^4)\,,
 \label{eq:HardFactExp}
 \end{equation}
 where $H_{ij}^{(n)}$ are numerical factors. In relevant processes,
@@ -1274,8 +1334,9 @@ I_p(q_T,Q)\equiv \int \frac{d^2\mathbf{b}_T}{4\pi} e^{i \mathbf{b}_T\cdot
 \label{eq:IkPert}
 \end{equation}
 Results for $I_p$ have been computed up to $p=4$ in Eq.~(136) of
-Appendix B of Ref.~\cite{Bozzi:2005wk}. Specifically, and including
-the trivial tranform with $p=0$, they read:
+Appendix B of Ref.~\cite{Bozzi:2005wk} and can be extended to $p=6$
+using Eqs.~(133) and~(135). Specifically, and including the trivial
+tranform with $p=0$, they read:
 \begin{equation}
 \begin{array}{l}
 \displaystyle I_0(q_T,Q) = \delta(q_T^2)\,,\\
@@ -1286,7 +1347,11 @@ the trivial tranform with $p=0$, they read:
 \\
 \displaystyle I_3(q_T,Q) = - \frac{3}{q_T^2}\ln^2\left(\frac{Q^2}{q_T^2}\right) \,,\\
 \\
-\displaystyle I_4(q_T,Q) = - \frac{4}{q_T^2}\left[\ln^3\left(\frac{Q^2}{q_T^2}\right)-4\zeta_3\right]\,.
+\displaystyle I_4(q_T,Q) = - \frac{4}{q_T^2}\left[\ln^3\left(\frac{Q^2}{q_T^2}\right)-4\zeta_3\right]\\
+\\
+\displaystyle I_5(q_T,Q) = - \frac{5}{q_T^2}\left[\ln^4\left(\frac{Q^2}{q_T^2}\right)-16\zeta_3 \ln\left(\frac{Q^2}{q_T^2}\right)\right] \,,\\
+\\
+\displaystyle I_6(q_T,Q) = - \frac{6}{q_T^2}\left[\ln^5\left(\frac{Q^2}{q_T^2}\right)-20\zeta_3 \ln^2\left(\frac{Q^2}{q_T^2}\right)-4\zeta_5\right]\,.
 \end{array}
 \label{eq:PureLogs}
 \end{equation}
@@ -1308,7 +1373,7 @@ retaining the $\mathcal{O}(a_s^0)$ terms in all the expansions. This
 gives:
 \begin{equation}
 B_{ij,kl}^{(0,0)}(x,z) =
-H_{ij}^{(0)}\delta_{ik}\delta_{jl}\delta(1-x)\delta(1-z)\,.
+H_{ij}^{(0)}\mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z)\,.
 \label{eq:BLO}
 \end{equation}
 
@@ -1317,83 +1382,547 @@ leading-order ones of all expansions but one. Finally organising the
 terms in powers of $L$, this yields:
 \begin{equation}
 \begin{array}{rcl}
-B_{ij,kl}^{(1,0)}(x,z) &=& \displaystyle H_{ij}^{(1)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)+H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)+H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)\,,\\
+B_{ij,kl}^{(1,0)}(x,z) &=& \displaystyle
+                           H_{ij}^{(1)}\mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z)
+                           +H_{ij}^{(0)}\mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1)}(z)
+                           +H_{ij}^{(0)}\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z) \,,\\
 \\
-B_{ij,kl}^{(1,1)}(x,z) &=& \displaystyle H_{ij}^{(0)} S^{(1,1)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)-H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)-H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)\,,\\
+B_{ij,kl}^{(1,1)}(x,z) &=& \displaystyle H_{ij}^{(0)} \tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)- H_{ij}^{(0)} \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)-H_{ij}^{(0)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x) \mathbb{C}_{jl}^{(0)}(z)\,,\\
 \\
-B_{ij,kl}^{(1,2)}(x,z) &=& \displaystyle H_{ij}^{(0)} S^{(1,2)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\,.
+B_{ij,kl}^{(1,2)}(x,z) &=& \displaystyle H_{ij}^{(0)}\tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)\,.
 \end{array}
 \label{eq:BNLO}
 \end{equation}
 
-Finally, the $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
+The $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
+% \begin{equation}
+% \begin{array}{rcl}
+%   {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle H_{ij}^{(2)}
+%                                \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
+%   \\
+%                            &+&\displaystyle
+%                                H_{ij}^{(1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
+%                                +
+%                                \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+%   \\
+%                            &+&\displaystyle H_{ij}^{(0)}\mathcal{C}_{ik}^{(2,0)}(x)\delta_{jl}\delta(1-z) + 
+%                                H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
+%                                +H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(2,0)}(z)\,,\\
+%   \\
+%   {B}_{ij,kl}^{(2,1)}(x,z) &=&\displaystyle \left(H_{ij}^{(0)}\widetilde{S}^{(2,1)}+H_{ij}^{(1)}S^{(1,1)}\right)
+%                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
+%   \\
+%                           &-& \displaystyle
+%                               H_{ij}^{(1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
+%                               +
+%                               \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
+%   \\
+%                           &+&
+%                               H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
+%                               +
+%                               \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+%   \\
+%                           &+&\displaystyle 
+%                               H_{ij}^{(0)}\left(-\mathcal{P}^{(1)}(x)-\sum_\alpha
+%                               \mathcal{C}_{i\alpha}^{(1,0)}(x)\otimes
+%                               \mathcal{P}_{\alpha k}^{(0)}(x)+\beta_0\mathcal{C}_{ik}^{(1,0)}(x)\right)\delta_{jl}\delta(1-z)\\
+% \\
+%  &-&\displaystyle H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
+%      -H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
+% \\
+%                               &+&\displaystyle H_{ij}^{(0)}\delta_{jl}\delta(1-z) \left(-\mathbb{P}^{(1)}(z)-\sum_\beta
+%                               \mathbb{C}_{j\beta}^{(1,0)}(z)\otimes
+%                               \mathbb{P}_{\beta l}^{(0)}(z)+\beta_0\mathbb{C}_{jl}^{(1,0)}(z)\right) \,,\\
+%   \\
+%   {B}_{ij,kl}^{(2,2)}(x,z) &=&\displaystyle \left( H_{ij}^{(0)}\widetilde{S}^{(2,2)}+H_{ij}^{(1)}S^{(1,2)}\right)
+%                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
+%   \\
+%                           &+&\displaystyle
+%                               H_{ij}^{(0)}{S}^{(1,2)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+%   \\
+%                           &-&\displaystyle
+%                               H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
+%   \\
+%  &+& \displaystyle
+%      H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
+% \\
+%                           &+& \displaystyle H_{ij}^{(0)}\frac12\left(\sum_{\alpha}\mathcal{P}^{(0)}_{i\alpha}(x)\otimes
+%     \mathcal{P}_{\alpha k}^{(0)}(x)-\beta_0 \mathcal{P}_{ik}^{(0)}(x)\right)\delta_{jl}\delta(1-z)\\
+% \\
+%                               &+&\displaystyle H_{ij}^{(0)}\delta_{ik}\delta(1-x) \frac12 \left(\sum_{\beta}\mathbb{P}^{(0)}_{j\beta}(z)\otimes
+%     \mathbb{P}_{\beta l}^{(0)}(z) -\beta_0 \mathbb{P}_{jl}^{(0)}(z)\right)\,,\\
+%   \\
+%   {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle
+%                               H_{ij}^{(0)}\widetilde{S}^{(2,3)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)
+%                               - H_{ij}^{(0)} S^{(1,2)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
+%                               +
+%                               \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\,,\\
+%   \\
+%   {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle H_{ij}^{(0)}\widetilde{S}^{(2,4)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,.
+% \end{array}
+% \label{eq:BNNLO}
+% \end{equation}
 \begin{equation}
+  \small
 \begin{array}{rcl}
-  {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle H_{ij}^{(2)}
-                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
+  {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle
+                               H_{ij}^{(2)}\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z) +
+H_{ij}^{(1)} \left[\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)+
+                               \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)\right]\\
   \\
-                           &+&\displaystyle
-                               H_{ij}^{(1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
-                               +
-                               \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+  &+&\displaystyle H_{ij}^{(0)} \left[ \mathcal{C}_{ik}^{(2)}(x) \mathbb{C}_{jl}^{(0)}(z)+\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(1)}(z)+\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(2)}(z)\right] \,,\\
   \\
-                           &+&\displaystyle H_{ij}^{(0)}\mathcal{C}_{ik}^{(2,0)}(x)\delta_{jl}\delta(1-z) + 
-                               H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
-                               +H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(2,0)}(z)\,,\\
+  {B}_{ij,kl}^{(2,1)}(x,z) &=&\displaystyle
+                               H_{ij}^{(1)}\left[\tilde{S}^{(1,1)}
+                               \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)
+                               - \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x) \mathbb{C}_{jl}^{(0)}(z)
+                               -\mathcal{C}_{ik}^{(0)}(x)
+                               \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) \right]\\
   \\
-  {B}_{ij,kl}^{(2,1)}(x,z) &=&\displaystyle \left(H_{ij}^{(0)}\widetilde{S}^{(2,1)}+H_{ij}^{(1)}S^{(1,1)}\right)
-                              \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
+                           &+&\displaystyle H_{ij}^{(0)}\bigg[
+                               \tilde{S}^{(2,1)}  \mathcal{C}_{ik}^{(0)}(x)
+      \mathbb{C}_{jl}^{(0)}(z)+\tilde{S}^{(1,1)} 
+      \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z) 
+      +\tilde{S}^{(1,1)}  \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(x)\\
   \\
-                          &-& \displaystyle
-                              H_{ij}^{(1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
-                              +
-                              \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
+      &+&\displaystyle \beta _0  \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)
+          +\beta _0
+          \mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1)}(z)\\
   \\
-                          &+&
-                              H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
-                              +
-                              \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+  &-&\displaystyle \left[\mathcal{C}^{(1)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)  \mathbb{C}_{jl}^{(0)}(z)
+          -\mathcal{C}_{ik}^{(1)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)\\
   \\
-                          &+&\displaystyle 
-                              H_{ij}^{(0)}\left(-\mathcal{P}^{(1)}(x)-\sum_\alpha
-                              \mathcal{C}_{i\alpha}^{(1,0)}(x)\otimes
-                              \mathcal{P}_{\alpha k}^{(0)}(x)+\beta_0\mathcal{C}_{ik}^{(1,0)}(x)\right)\delta_{jl}\delta(1-z)\\
-\\
- &-&\displaystyle H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
-     -H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
-\\
-                              &+&\displaystyle H_{ij}^{(0)}\delta_{jl}\delta(1-z) \left(-\mathbb{P}^{(1)}(z)-\sum_\beta
-                              \mathbb{C}_{j\beta}^{(1,0)}(z)\otimes
-                              \mathbb{P}_{\beta l}^{(0)}(z)+\beta_0\mathbb{C}_{jl}^{(1,0)}(z)\right) \,,\\
+        &-&\displaystyle  \mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(1)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)      -  \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x) \mathbb{C}_{jl}^{(1)}(z)\\
   \\
-  {B}_{ij,kl}^{(2,2)}(x,z) &=&\displaystyle \left( H_{ij}^{(0)}\widetilde{S}^{(2,2)}+H_{ij}^{(1)}S^{(1,2)}\right)
-                              \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
+      &-&\displaystyle
+       \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(1)}\right]_{ik}(x)\mathbb{C}_{jl}^{(0)}(z)
+       -   \mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(0)}\otimes \mathbb{P}^{(1)} \right]_{jl}(z)\bigg]\,,\\
   \\
-                          &+&\displaystyle
-                              H_{ij}^{(0)}{S}^{(1,2)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
+
+
+  
+  {B}_{ij,kl}^{(2,2)}(x,z) &=&\displaystyle
+                               H_{ij}^{(1)}\tilde{S}^{(1,2)}\mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z) \\
   \\
-                          &-&\displaystyle
-                              H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
+                           &+&\displaystyle H_{ij}^{(0)}\bigg[
+                               \tilde{S}^{(2,2)}  \mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z)
+                               +\tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)
+                               +\tilde{S}^{(1,2)}
+                               \mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1)}(z)\\
   \\
- &+& \displaystyle
-     H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
-\\
-                          &+& \displaystyle H_{ij}^{(0)}\frac12\left(\sum_{\alpha}\mathcal{P}^{(0)}_{i\alpha}(x)\otimes
-    \mathcal{P}_{\alpha k}^{(0)}(x)-\beta_0 \mathcal{P}_{ik}^{(0)}(x)\right)\delta_{jl}\delta(1-z)\\
-\\
-                              &+&\displaystyle H_{ij}^{(0)}\delta_{ik}\delta(1-x) \frac12 \left(\sum_{\beta}\mathbb{P}^{(0)}_{j\beta}(z)\otimes
-    \mathbb{P}_{\beta l}^{(0)}(z) -\beta_0 \mathbb{P}_{jl}^{(0)}(z)\right)\,,\\
+      &-&\displaystyle \tilde{S}^{(1,1)} 
+      \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
+      - \tilde{S}^{(1,1)} \left[\mathcal{C}^{(0)}\otimes
+          \mathcal{P}^{(0)}\right]_{ik} (x) \mathbb{C}_{jl}^{(0)}(z)\\
   \\
-  {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle
-                              H_{ij}^{(0)}\widetilde{S}^{(2,3)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)
-                              - H_{ij}^{(0)} S^{(1,2)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
-                              +
-                              \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\,,\\
+          &-&\displaystyle \frac{1}{2} \beta _0 
+      \mathcal{C}_{ik}^{(0)}(x)
+              \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+              -\frac{1}{2} \beta
+              _0\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+              \mathbb{C}_{jl}^{(0)}(z)\\
   \\
-  {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle H_{ij}^{(0)}\widetilde{S}^{(2,4)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,.
+      &+&\displaystyle\frac{1}{2} 
+      \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes \mathbb{P}^{(0)} \right]_{jl}(z)
+      +\frac{1}{2} \left[\mathcal{C}^{(0)}\otimes
+          \mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x)
+          \mathbb{C}_{jl}^{(0)}(z)\\
+  \\
+  &+&\displaystyle \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)  \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)\bigg]\,,\\
+  \\
+  {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle \tilde{S}^{(2,3)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(y)
+- \tilde{S}^{(1,2)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)\mathbb{C}_{jl}^{(0)}(z)
+                               - \tilde{S}^{(1,2)}  \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+                               \bigg]\,,\\
+  \\
+  {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle \tilde{S}^{(2,4)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)\,.
 \end{array}
 \label{eq:BNNLO}
 \end{equation}
+
+Finally, the $\mathcal{O}(a_s^3)$ terms are even more convoluted and
+read:
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,0)}(x,z) &=& H_{ij}^{(3)}\mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z)
+                               \\
+\\
+&+&\displaystyle H_{ij}^{(2)} \left[\mathcal{C}_{ik}^{(1)}(x)\mathbb{C}_{jl}^{(0)}(z)+\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(1)}(z) \right]
+    \\
+\\
+&+&\displaystyle H_{ij}^{(1)}
+    \left[\mathcal{C}_{ik}^{(2)}(x)\mathbb{C}_{jl}^{(0)}(z) +\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(1)}(z) +\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(2)}(z) \right]\\
+\\
+&+&\displaystyle H_{ij}^{(0)} \left[\mathcal{C}_{ik}^{(3)}(x) \mathbb{C}_{jl}^{(0)}(z)+ \mathcal{C}_{ik}^{(2)}(x) \mathbb{C}_{jl}^{(1)}(z)+ \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(2)}(z)+ \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(3)}(z)\right]\,,
+\end{array}
+\label{eq:BNNNLO0}
+\end{equation}
+
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,1)}(x,z) &=&
+H_{ij}^{(2)}\tilde{S}^{(1,1)}
+                               \left[\mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z)
+ -\mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)     -\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x) \mathbb{C}_{jl}^{(0)}(z)\right]\\
+\\
+&+&H_{ij}^{(1)}\bigg[\tilde{S}^{(2,1)} \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)
++\tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(1)}(x)\mathbb{C}_{jl}^{(0)}(z)
++\tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&+&\beta _0 \mathcal{C}_{ik}^{(1)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)
++\beta _0 \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&-&
+    \mathcal{C}_{ik}^{(1)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+- \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(1)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+- \mathcal{C}_{ik}^{(0)}(x)
+                               \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(1)}\right]_{jl}(z)\\
+\\
+&-& 
+    \left[\mathcal{C}^{(1)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)\mathbb{C}_{jl}^{(0)}(z)
+-\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(1)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)  - \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(1)}(z)\bigg]\\
+\\
+&+& H_{ij}^{(0)}\bigg[\tilde{S}^{(3,1)} \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)+\tilde{S}^{(2,1)} \mathcal{C}_{ik}^{(1)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)
++ \tilde{S}^{(2,1)} \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&+&\tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(2)}(x)
+                               \mathbb{C}_{jl}^{(0)} 
++\tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(1)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)
++\tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(2)}(z)\\
+\\
+&+& \beta _1 \mathcal{C}_{ik}^{(1)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)
++\beta _1 \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&+&2  \beta _0 \mathcal{C}_{ik}^{(2)}(x)
+    \mathbb{C}_{jl}^{(0)}(z)+2  \beta _0 \mathcal{C}_{ik}^{(1)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z)+2 \beta _0
+    \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(2)}(z)\\
+\\
+&-& \mathcal{C}_{ik}^{(1)}(x)
+    \left[\mathbb{C}^{(1)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
+-\mathcal{C}_{ik}^{(1)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(1)}\right]_{jl}(z)
+ -  \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(1)}\otimes\mathbb{P}^{(1)}\right]_{jl}(z)\\
+\\
+&-&
+    \left[\mathcal{C}^{(1)}\otimes\mathcal{P}^{(1)}\right]_{ik} (x)\mathbb{C}_{jl}^{(0)}(z)-  \left[\mathcal{C}^{(1)}\otimes\mathcal{P}^{(0)}\right]_{ik}
+    (x) \mathbb{C}_{jl}^{(1)}(z)
+- 
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(1)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&-&  \mathcal{C}_{ik}^{(2)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) -  \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(2)}\otimes \mathbb{P}^{(0)}\right]_{jl} (z)-\mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(2)}\right]_{jl}(z)\\
+\\
+&-&\left[\mathcal{C}^{(2)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x)
+    \mathbb{C}_{jl}^{(0)}(z)-
+   \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(2)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)
+-
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(2)}(z)\bigg]\,,
+\end{array}
+\label{eq:BNNNLO1}
+\end{equation}
+
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,2)}(x,z) &=&\displaystyle 
+H_{ij}^{(2)} \tilde{S}^{(1,2)}\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-&\displaystyle H_{ij}^{(1)} \bigg[
+  \tilde{S}^{(2,2)}\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)
++ \tilde{S}^{(1,2)}\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)
++ \tilde{S}^{(1,2)}\mathcal{C}_{ik}^{(0)}(x)
+    \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+
+&-&\displaystyle
+    \tilde{S}^{(1,1)}\left[\mathcal{C}^{(0)} \otimes\mathcal{P}^{(0)}\right]_{ik} (x)\mathbb{C}_{jl}^{(0)}(z)
+- \tilde{S}^{(1,1)}\mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)\\
+\\
+&-&\displaystyle  \frac{1}{2}\beta _0\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)\mathbb{C}_{jl}^{(0)}(z)
+-\frac{1}{2}  \beta
+    _0\mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}
+    (z)\\
+\\
+&+&\displaystyle \frac{1}{2}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)\mathbb{C}_{jl}^{(0)}(z)
++ \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
++\frac{1}{2}  \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
+\bigg]\\
+\\
+                           &+&\displaystyle H_{ij}^{(0)} \bigg[  \tilde{S}^{(3,2)}\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)+\tilde{S}^{(2,2)} \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)
+    + \tilde{S}^{(2,2)} \mathcal{C}_{ik}^{(0)}(x)
+      \mathbb{C}_{jl}^{(1)}(z)\\
+  \\
+&-&\displaystyle \tilde{S}^{(2,1)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x) \mathbb{C}_{jl}^{(0)}(z)
+- \tilde{S}^{(2,1)}\mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)\\
+  \\
+  &+&\displaystyle  \tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(2)}(x) \mathbb{C}_{jl}^{(0)}(z)
++ \tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(1)}(z)
++ \tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(0)}(x)
+    \mathbb{C}_{jl}^{(2)}(z)\\
+  \\
+&-& \tilde{S}^{(1,1)}\left[\mathcal{C}^{(1)} \otimes\mathcal{P}^{(0)}\right]_{ik} (x) \mathbb{C}_{jl}^{(0)}(z)
+-\tilde{S}^{(1,1)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(1)}\right]_{ik}
+    (x) \mathbb{C}_{jl}^{(0)}(z)
+  -\tilde{S}^{(1,1)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x) \mathbb{C}_{jl}^{(1)}(z)\\
+  \\
+&-&\displaystyle   \tilde{S}^{(1,1)}\mathcal{C}_{ik}^{(1)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
+- \tilde{S}^{(1,1)}\mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(1)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
+- \tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(1)}\right]_{jl} (z)\\
+\\
+&+&\displaystyle\beta_0^2\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z) 
++ \beta_0^2\mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&-&\displaystyle \frac{3}{2} \beta _0 \left[\mathcal{C}^{(1)} \otimes\mathcal{P}^{(0)}\right]_{ik} (x)
+                               \mathbb{C}_{jl}^{(0)} (z)
+-\frac{3}{2} \beta _0 \left[\mathcal{C}^{(0)}
+                                \otimes\mathcal{P}^{(0)}\right]_{ik} (x) 
+                               \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&-&\displaystyle  \beta _0\mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(1)}\right]_{jl} (z)
+- \beta _0\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(1)}\right]_{ik}
+    (x)\mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-&\displaystyle \frac{3}{2} \beta _0 \mathcal{C}_{ik}^{(1)}(x)
+                               \left[\mathbb{C}^{(0)}
+                               \otimes\mathbb{P}^{(0)}\right]_{jl} (z) 
+-\frac{3}{2} \beta _0 \mathcal{C}_{ik}^{(0)}(x)
+                               \left[\mathbb{C}^{(1)}
+                               \otimes\mathbb{P}^{(0)}\right]_{jl}
+    (z)\\
+\\
+&+&\displaystyle \tilde{S}^{(1,1)}\beta _0\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)
++ \tilde{S}^{(1,1)}  \beta _0\mathcal{C}_{ik}^{(0)}(x)
+    \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&+&\displaystyle \frac{1}{2}  \mathcal{C}_{ik}^{(1)}(x)
+                               \left[\mathbb{C}^{(0)}
+                               \otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
++\frac{1}{2}  \mathcal{C}_{ik}^{(0)}(x)
+                               \left[\mathbb{C}^{(1)}
+                               \otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}
+    (z)\\
+\\
+&+&\displaystyle \frac{1}{2}  \left[\mathcal{C}^{(1)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x)\mathbb{C}_{jl}^{(0)}(z)
++\frac{1}{2} \left[\mathcal{C}^{(0)}
+    \otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}
+    (x)\mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&-&\displaystyle \frac{1}{2} \beta _1 \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x)\mathbb{C}_{jl}^{(0)}(z)
++ \left[\mathcal{C}^{(0)} \otimes\mathcal{P}^{(0)}
+                               \otimes\mathcal{P}^{(1)}\right]_{ik}
+    (x) \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-&\displaystyle \frac{1}{2} \beta _1 \mathcal{C}_{ik}^{(0)}(x)
+                               \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)+\displaystyle \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}
+                               \otimes\mathbb{P}^{(0)}
+                               \otimes\mathbb{P}^{(1)}\right]_{jl} (z)\\
+\\
+&+&\displaystyle \left[\mathcal{C}^{(1)} \otimes\mathcal{P}^{(0)}\right]_{ik}(x) \left[\mathbb{C}^{(0)}
+                               \otimes\mathbb{P}^{(0)}\right]_{jl} (z)
++ \left[\mathcal{C}^{(0)} \otimes\mathcal{P}^{(0)}\right]_{ik} (x) \left[\mathbb{C}^{(1)}
+                               \otimes\mathbb{P}^{(0)}\right]_{jl}
+    (z)\\
+\\
+&+&\displaystyle \left[\mathcal{C}^{(0)} \otimes\mathcal{P}^{(1)}\right]_{ik} (x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl} (z)
++ \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik} (x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(1)}\right]_{jl} (z)\bigg]\,,
+\end{array}
+\label{eq:BNNNLO2}
+\end{equation}
+
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,3)}(x,z) &=&
+H_{ij}^{(1)}\left[\tilde{S}^{(2,3)} \mathcal{C}_{ik}^{(0)}(x)
+    \mathbb{C}_{jl}^{(0)}(z)-\tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) -\tilde{S}^{(1,2)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\right] \\
+\\
+&+& H_{ij}^{(0)} \bigg[\tilde{S}^{(3,3)} \mathcal{C}_{ik}^{(0)}(x)
+    \mathbb{C}_{jl}^{(0)}(z)+\tilde{S}^{(2,3)}
+    \mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)+
+    \tilde{S}^{(2,3)} \mathcal{C}_{ik}^{(0)}(x)
+    \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&-&  \tilde{S}^{(2,2)} \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) -\tilde{S}^{(2,2)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-& 
+    \tilde{S}^{(1,2)}
+    \mathcal{C}_{ik}^{(1)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)- \tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(1)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+- \tilde{S}^{(1,2)} \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(1)}\right]_{jl}(z)\\
+\\
+&-& \tilde{S}^{(1,2)}
+    \left[\mathcal{C}^{(1)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)
+- \tilde{S}^{(1,2)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(1)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z) -
+    \tilde{S}^{(1,2)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(1)}(z)\\
+\\
+&+&\displaystyle 
+\frac{1}{2} \tilde{S}^{(1,1)} \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)+\frac{1}{2}
+    \tilde{S}^{(1,1)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&+&\displaystyle \tilde{S}^{(1,2)} \beta _0
+                               \mathcal{C}_{ik}^{(1)}(x)\mathbb{C}_{jl}^{(0)}(z)
+                               + \tilde{S}^{(1,2)} \beta
+                               _0 \mathcal {C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(1)}(z) +\beta _0
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) \\
+\\
+&-&\displaystyle \frac{1}{2} \tilde{S}^{(1,1)} \beta _0
+    \mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)+\tilde{S}^{(1,1)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) -\frac{1}{2} \tilde{S}^{(1,1)}\beta _0
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-&\displaystyle \frac{1}{3} \beta _0^2 \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)+\frac{1}{2} \beta _0
+    \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+-\frac{1}{6}  \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)\\
+\\
+&-&\displaystyle \frac{1}{3} \beta _0^2
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)
++\frac{1}{2}  \beta
+    _0\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)-\frac{1}{6} 
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-&\displaystyle \frac{1}{2} 
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
+ -\frac{1}{2} 
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)\bigg]\,,
+\end{array}
+\label{eq:BNNNLO3}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,4)}(x,z) &=&
+H_{ij}^{(1)}\tilde{S}^{(2,4)} \mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z) \\
+\\
+&+&\displaystyle H_{ij}^{(0)}\bigg[\tilde{S}^{(3,4)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)+\tilde{S}^{(2,4)}
+    \mathcal{C}_{ik}^{(1)}(x)\mathbb{C}_{jl}^{(0)}(z)+\tilde{S}^{(2,4)}
+    \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(1)}(x)\\
+\\
+&-&\displaystyle \tilde{S}^{(2,3)}
+    \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)-
+    \tilde{S}^{(2,3)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&-&\displaystyle \frac{1}{2}
+    \tilde{S}^{(1,2)} \beta _0 \mathcal{C}_{ik}^{(0)}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z) -\frac{1}{2} \tilde{S}^{(1,2)}\beta _0
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \mathbb{C}_{jl}^{(0)}(z)\\
+\\
+&+&\displaystyle \frac{1}{2} \tilde{S}^{(1,2)}
+    \mathcal{C}_{ik}^{(0)}(x)\left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\otimes
+    \mathbb{P}^{(0)}\right]_{jl}(z)\\
+\\
+&+&\displaystyle \tilde{S}^{(1,2)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+    \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)\\
+\\
+&+&\displaystyle \frac{1}{2} \tilde{S}^{(1,2)}
+    \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\otimes
+    \mathcal{P}^{(0)}\right]_{ik}(x) \mathbb{C}_{jl}^{(0)}(z)\bigg]\,,
+\end{array}
+\label{eq:BNNNLO4}
+\end{equation}
+
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,5)}(x,z) &=& H_{ij}^{(0)}\left[\tilde{S}^{(3,5)}
+                               \mathcal{C}_{ik}^{(0)}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)-\tilde{S}^{(2,4)}
+                               \mathcal{C}_{ik}^{(0)}(x)
+                               \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)-
+                               \tilde{S}^{(2,4)}
+                               \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)
+                               \mathbb{C}_{jl}^{(0)}(z)\right]\,,
+\end{array}
+\label{eq:BNNNLO5}
+\end{equation}
+
+\begin{equation}
+\footnotesize
+\begin{array}{rcl}
+  {B}_{ij,kl}^{(3,6)}(x,z) &=& H_{ij}^{(0)}\tilde{S}^{(3,6)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)\,.
+\end{array}
+\label{eq:BNNNLO6}
+\end{equation}
+
 
 \subsection{Scale variations}
 
