@@ -100,16 +100,16 @@ namespace apfel
     std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as);
 
     // Tabulate distributions
-    const TabulateObject<Set<Distribution>> TabulatedDists{*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ};
+    _TabulatedDists = std::unique_ptr<const TabulateObject<Set<Distribution>>>(new TabulateObject<Set<Distribution>> {*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ});
 
     // Get Q-grid from the tabulated object
-    const std::vector<double> qg = TabulatedDists.GetQGrid();
+    const std::vector<double> qg = _TabulatedDists->GetQGrid();
 
     // Get threshold indices
-    const std::vector<int> tind = TabulatedDists.GetThesholdIndices();
+    const std::vector<int> tind = _TabulatedDists->GetThesholdIndices();
 
     // Get Set of distributions on the Q-grid
-    const std::vector<Set<Distribution>> xfg = TabulatedDists.GetQGridValues();
+    const std::vector<Set<Distribution>> xfg = _TabulatedDists->GetQGridValues();
 
     // Run over the threshold indices. Skip the last because it is the
     // last point of the grid in Q.
