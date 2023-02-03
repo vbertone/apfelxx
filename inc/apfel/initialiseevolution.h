@@ -120,7 +120,7 @@ namespace apfel
     TabulateObject<Set<Distribution>> TabulatedDistributions() const { return *_TabulatedDists; }
 
   private:
-    EvolutionSetup                                            _setup;         //!< Evolution setup object
+    EvolutionSetup                                           _setup;          //!< Evolution setup object
     bool                                                     _WriteGrid;      //!< Switch to write LHAPDF grids
     std::string                                              _GridHeader;     //!< Part of the LHAPDF grid header that can be set externally (the format is resposibility of the user)
     std::unique_ptr<const Grid>                              _g;              //!< x-space grid
