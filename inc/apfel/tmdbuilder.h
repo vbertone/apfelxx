@@ -52,13 +52,11 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param nnnlo: switch to compute the NNNLO matching functions (default: false)
    * @return A map of TmdObject objects, one for each possible nf
    */
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
-                                                 double              const& IntEps = 1e-5,
-                                                 bool                const& nnnlo = false);
+                                                 double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeTmdObjectsDYResScheme function precomputes
