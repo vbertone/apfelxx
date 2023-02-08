@@ -21,7 +21,7 @@ namespace apfel
     MatchedEvolution{AlphaRef, MuRef, Thresholds, nstep},
     _pt(pt)
   {
-    // Beta function lambda function.
+    // Beta function lambda function
     _BetaFunction = [=] (int const& nf, double const& as)-> double
     {
       double bt = 0, powas = as * as;
@@ -33,7 +33,7 @@ namespace apfel
       return bt;
     };
 
-    // Matching condition lambda function.
+    // Matching condition lambda function
     _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
     {
       // Compute log of muth2 / m2
@@ -43,6 +43,7 @@ namespace apfel
 
       const double sgn = (Up ? 1 : -1);
       const double ep  = Coup / FourPi;
+
       // The O(as^3) matching condition does not include the
       // logarithmic terms yet. The expression is taken from Eqs. (22)
       // and (25) of https://arxiv.org/pdf/hep-ph/0004189.pdf that do
@@ -51,7 +52,9 @@ namespace apfel
         1,
         sgn * 2. / 3. * LogKth,
         4. / 9. * pow(LogKth, 2) + sgn *  38. / 3. * LogKth + sgn * 14. / 3.,
-        sgn * pow(4, 3) *  ( - 58933. / 124416. - 2. / 3. * zeta2 * ( 1.  + log(2) / 3.) - 80507. / 27648. * zeta3 + nf * ( 2479. / 31104. + zeta2 / 9. ) )
+        sgn * pow(4, 3) *  ( 58933. / 124416. + 2. / 3. * zeta2 * ( 1.  + log(2) / 3.) + 80507. / 27648. * zeta3
+                             + (Up ? 8941. : 8521. ) / 1728. * LogKth + (Up ? 511. : 131. ) / 576. * pow(LogKth, 2) + pow(LogKth, 3) / 216.
+                             + (Up ? nf - 1 : nf) * ( - 2479. / 31104. - zeta2 / 9. - 409. / 1728. * LogKth ) )
       };
       double match = 0, powep = 1;
       for (int i = 0; i <= _pt; i++)
@@ -72,7 +75,7 @@ namespace apfel
   //_________________________________________________________________________________
   double AlphaQCD::MatchObject(bool const& Up, int const& nf, double const& Coup) const
   {
-    return _MatchingConditions(Up, nf, Coup);
+    return _MatchingConditions(Up, (Up ? nf : nf - 1), Coup);
   }
 
   //_________________________________________________________________________________
