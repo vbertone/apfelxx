@@ -80,7 +80,7 @@ namespace apfel
   //_________________________________________________________________________________
   double AlphaQCDxi::MatchObject(bool const& Up, int const& nf, double const& Coup) const
   {
-    return _MatchingConditions(Up, nf, Coup);
+    return _MatchingConditions(Up, (Up ? nf : nf - 1), Coup);
   }
 
   //_________________________________________________________________________________

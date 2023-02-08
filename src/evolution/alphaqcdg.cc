@@ -65,7 +65,7 @@ namespace apfel
   //_________________________________________________________________________________
   double AlphaQCDg::MatchObject(bool const& Up, int const& nf, double const& Coup) const
   {
-    return _MatchingConditions(Up, nf, Coup);
+    return _MatchingConditions(Up, (Up ? nf : nf - 1), Coup);
   }
 
   //_________________________________________________________________________________

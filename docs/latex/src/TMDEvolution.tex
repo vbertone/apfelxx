@@ -1921,7 +1921,8 @@ H_{ij}^{(1)}\tilde{S}^{(2,4)} \mathcal{C}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(0)}(z) 
 \end{array}
 \label{eq:BNNNLO6}
 \end{equation}
-
+Notice that terms of the form $P^{(0)}\otimes P^{(1)}$ have to be
+interpreted as $(P^{(0)}\otimes P^{(1)}+P^{(1)}\otimes P^{(0)})/2$.
 
 \subsection{Scale variations}
 
@@ -1933,146 +1934,223 @@ from $Q$ to $\mu_{\rm R}$ and the PDFs/FFs from $Q$ to $\mu_{\rm
 $\mu_{\rm R}\simeq \mu_{\rm R}\simeq Q$, this displacements can be
 obtained by expanding the solutions of the evolution equation between
 $Q$ and $\mu_{\rm R}$ or $\mu_{\rm F}$ up to
-$\mathcal{O}(\alpha_s^2)$.  For the coupling, this expansion can be
-read off from Eq.~(\ref{eq:alphasexp}):
+$\mathcal{O}(\alpha_s^3)$.  For the coupling, this expansion reads:
 \begin{equation}
 \begin{array}{rcl}
-a_s(Q) &=&\displaystyle a_s(\mu_{\rm R}) \bigg[ 1 + a_s(\mu_{\rm R})
-           \beta_0  \ln\frac {\mu_{\rm R}^2}{Q^2}\bigg]
-                                          +\mathcal{O}(\alpha_s^3)\,.
+a_s(Q) &=&\displaystyle a_s(\mu_{\rm R}) +a_s^2(\mu_{\rm R}) \beta _0L_{\rm R}
++a_s^3(\mu_{\rm R}) \left(\beta _0^2 L_{\rm R}^2+ \beta _1 L_{\rm R}\right) +\mathcal{O}(\alpha_s^4)\,.
 \end{array}
 \label{eq:alphasexp2}
 \end{equation}
-For the PDFs/FFs, the expansion of the evolution operator can be read
-off from Eq.~(\ref{eq:DGLAPeqOpExp}):
+with:
 \begin{equation}
-\Gamma(Q,\mu_{\rm F}) = \Delta - a_s(Q)\ln\frac {\mu_{\rm F}^2}{Q^2} P^{(0)}
--a_s^2(Q)\left[\ln\frac {\mu_{\rm F}^2}{Q^2} P^{(1)}- \frac{1}2 \ln^2\frac{\mu_{\rm F}^2}{Q^2} \left(\beta_0 P^{(0)} +P^{(0)}\otimes P^{(0)}\right)\right]+\mathcal{O}(\alpha_s^3)\,,
+L_{\rm R} = \ln\frac {\mu_{\rm R}^2}{Q^2}\,.
 \end{equation}
-with $\Delta_{ij}(x) = \delta_{ij}\delta(1-x)$. We now use
+
+For the PDFs/FFs, the expansion of the evolution operator can be read
+off from Eq.~(\ref{eq:DGLAPeqOp1}):
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \Gamma(Q,\mu_{\rm F})&=&\displaystyle \Delta -a_s(\mu_{\rm F}) L_{\rm F} P^{{(0)}}-a_s^2(\mu_{\rm F}) \left[L_{\rm F} P^{{(1)}} +L_{\rm F}^2 \left(\frac{\beta _0 P^{{(0)}}}{2}-\frac{\left(P^{{(0)}}\right)^2}{2}\right)\right]\\
+\\
+&-&\displaystyle a_s ^3 (\mu_{\rm F}) \bigg[L_{\rm F} P^{{(2)}} +L_{\rm F}^2 \left(-\frac{P^{{(0)}}
+  P^{{(1)}}+P^{{(1)}} P^{{(2)}}}{2}+\frac{1}{2} \beta _1
+  P^{{(0)}}+\beta _0 P^{{(1)}}\right)\\
+\\
+&+&\displaystyle L_{\rm F}^3 \left(-\frac{1}{2} \beta _0 \left(P^{{(0)}}\right)^2+\frac{1}{3} \beta _0^2 P^{{(0)}}+\frac{1}{6} \left(P^{{(0)}}\right)^3\right)\bigg]+\mathcal{O}(a_s^4) \,,
+\end{array}
+\end{equation}
+with:
+\begin{equation}
+L_{\rm F} = \ln\frac {\mu_{\rm F}^2}{Q^2}\,,
+\end{equation}
+and $\Delta_{ij}(x) = \delta_{ij}\delta(1-x)$. We now use
 Eq.~(\ref{eq:alphasexp2}) to replace $a_s(Q)$ with $a_s(\mu_{\rm R})$
 in the expression above and get:
 \begin{equation}
 \begin{array}{rcl}
-\Gamma(Q,\mu_{\rm F}) &=&\displaystyle  \Delta -a_s(\mu_{\rm R})
-                          \ln\frac {\mu_{\rm F}^2}{Q^2} P^{(0)}\\
+\Gamma(Q,\mu_{\rm F}) &=&\displaystyle
+\Delta-a_s(\mu_{\rm R}) L_{\rm F} P^{(0)}-a_s^2(\mu_{\rm R}) \left[L_{\rm F}P^{(1)}+
+                          L_{\rm F} L_{\rm R} \beta _0 P^{(0)}+L_{\rm F}^2
+                          \left(\frac{\beta_0 P^{(0)}}{2}-\frac{\left(P^{(0)}\right)^2}{2}\right)\right]\\
 \\
-&-&\displaystyle a_s^2(\mu_{\rm R})\left[\ln\frac {\mu_{\rm F}^2}{Q^2} P^{(1)}
-                          +\left(\ln\frac {\mu_{\rm R}^2}{Q^2} -\frac{1}2 \ln\frac{\mu_{\rm F}^2}{Q^2}\right) \ln\frac {\mu_{\rm F}^2}{Q^2}\beta_0 P^{(0)} -\frac{1}2 \ln^2\frac{\mu_{\rm F}^2}{Q^2} P^{(0)}\otimes
-                          P^{(0)} \right]+\mathcal{O}(\alpha_s^3)\,.
+&+&\displaystyle a_s^3(\mu_{\rm R})
+                          \bigg[-\beta _0 L_{\rm R} \left(\beta _0 L_{\rm F}^2
+                          P^{(0)}-L_{\rm F}^2
+                          \left(P^{(0)}\right)^2+2
+                          L_{\rm F} P^{(1)}\right)\\
+\\
+&+&\displaystyle L_{\rm F}^2
+                          \left(\frac{P^{(0)}\otimes P^{(1)}+P^{(1)}\otimes P^{(0)}}2-\frac{1}{2} \beta _1
+                          P^{(0)}-\beta _0
+                          P^{(1)}\right)-L_{\rm F}
+                          \left(\beta _0^2
+                          L_{\rm R}^2+\beta _1 L_{\rm R}\right) P^{(0)}\\
+\\
+&+&\displaystyle L_{\rm F}^3
+                          \left(\frac{1}{2} \beta _0
+                          \left(P^{(0)}\right)^2-\frac{1}{3}
+                          \beta _0^2
+                          P^{(0)}-\frac{1}{6}
+                          \left(P^{(0)}\right)^3\right)-L_{\rm F}
+                          P^{(2)}\bigg]+\mathcal{O}\left(\alpha_s^4\right)
 \end{array}
 \label{eq:PDFFFEvExp}
 \end{equation}
-Since we have two such operators, one for the PDFs and one for the
-FFs, it is convenient to take the product beforehand and truncate it
-to $\mathcal{O}(\alpha_s^2)$ so that:
+
+% Since we have two such operators, one for the PDFs and one for the
+% FFs, it is convenient to take the product beforehand and truncate it
+% to $\mathcal{O}(\alpha_s^3)$ so that:
+% \begin{equation}
+% \begin{array}{rcl}
+% f_k(x,Q) d_l(z,Q) &=&\displaystyle
+%                       \Bigg[\delta_{km}\delta(1-x)\delta_{ln}\delta(1-z)\\
+% \\
+%  &-&\displaystyle a_s(\mu_{\rm R})
+%                           L_{\rm F} \left(\delta_{km}\delta(1-x)\mathbb{P}_{ln}^{(0)}(z)+\mathcal{P}_{km}^{(0)}(x)\delta_{ln}\delta(1-z)\right)\\
+% \\
+% &-&\displaystyle a_s^2(\mu_{\rm R})\bigg[L_{\rm F} \left(\delta_{km}\delta(1-x)\mathbb{P}_{ln}^{(1)}(z)+\mathcal{P}_{km}^{(1)}(x)\delta_{ln}\delta(1-z)\right)
+%                           \\
+% \\
+% &+&\displaystyle \left(L_{\rm R}
+%     -\frac{1}2 L_{\rm F}\right) L_{\rm F}\beta_0 \left(\delta_{km}\delta(1-x)\mathbb{P}_{ln}^{(0)}(z)+\mathcal{P}_{km}^{(0)}(x)\delta_{ln}\delta(1-z)\right)
+%   \\
+% \\
+% &-&\displaystyle \frac{1}2 L_{\rm F}^2\left(\delta_{km}\delta(1-x)\mathbb{P}_{l\beta}^{(0)}(z)\otimes
+%                           \mathbb{P}_{\beta n}^{(0)}(z) +2 \mathcal{P}_{km}^{(0)}(x) \mathbb{P}_{ln}^{(0)}(z)+\mathcal{P}_{k\beta}^{(0)}(x)\otimes
+%                           \mathcal{P}_{\beta m}^{(0)}(x) \delta_{ln}\delta(1-z)\right)\bigg]\\
+% \\
+% &&\displaystyle \Bigg]\mathop{\otimes}_x
+%     f_m(x,\mu_{\rm F}) \mathop{\otimes}_z
+%     d_n(z,\mu_{\rm F})\,,
+% \end{array}
+% \label{eq:expPDFsFFs}
+% \end{equation}
+% where the greek indices are undestood to be summed over and where we
+% have defined:
+% \begin{equation}
+% L_{\rm R} = \ln\frac {\mu_{\rm R}^2}{Q^2}\quad\mbox{and}\quad L_{\rm F} = \ln\frac {\mu_{\rm F}^2}{Q^2}\,.
+% \end{equation}
+
+For the sake of simplicity, we limit to the case $q_T\neq 0$ so that
+we can drop the leading-order ($O(1)$) term in the cross section in
+Eq.~(\ref{eq:xsecexp}) that, including scale-variation terms,
+generalises to:
+\begin{equation}
+\displaystyle \frac{d\sigma}{dq_T^2} \propto
+                                               \sum_{s=1}^\infty
+                                               a_s^s(\mu_{\rm R})\sum_{p=1}^{2s} I_p(q_T,Q)
+    \sum_{ij,kl} \overline{B}_{ij,mn}^{(s,p)}(x,z,L_{\rm R},L_{\rm F}) \mathop{\otimes}_x f_m(x, \mu_{\rm F}) \mathop{\otimes}_z d_n(z, \mu_{\rm F})\,.
+\end{equation}
+In order to make the expressions more compact, with a little abuse of
+notation, it is convenient to define:
+\begin{equation}
+B_{ij,mn}^{(s)}(x,z, q_T,Q)\equiv \sum_{p=1}^{2s} I_p(q_T,Q) B_{ij,mn}^{(s,p)}(x,z)\,,
+\end{equation}
+and:
+\begin{equation}
+\overline{B}_{ij,mn}^{(s)}(x,z, q_T,Q,L_{\rm R},L_{\rm F})\equiv \sum_{p=1}^{2s} I_p(q_T,Q) \overline{B}_{ij,mn}^{(s,p)}(x,z,L_{\rm R},L_{\rm F})\,,
+\end{equation}
+that are related as follows:
 \begin{equation}
 \begin{array}{rcl}
-f_k(x,Q) d_l(z,Q) &=&\displaystyle
-                      \Bigg[\delta_{km}\delta(1-x)\delta_{ln}\delta(1-z)\\
+\displaystyle \overline{B}_{ij,mn}^{(1)} &=& \displaystyle  B_{ij,mn}^{(1)}\,,\\
 \\
- &-&\displaystyle a_s(\mu_{\rm R})
-                          L_{\rm F} \left(\delta_{km}\delta(1-x)\mathbb{P}_{ln}^{(0)}(z)+\mathcal{P}_{km}^{(0)}(x)\delta_{ln}\delta(1-z)\right)\\
+\displaystyle \overline{B}_{ij,mn}^{(2)} &=& \displaystyle  B_{ij,mn}^{(2)} + L_{\rm R}
+          \beta_0 B_{ij,mn}^{(1)} - L_{\rm F}\left[
+          B_{ij,\beta n}^{(1)}\mathop{\otimes}_x \mathcal{P}_{\alpha m}^{(0)} +
+          B_{ij,m\beta}^{(1)}\mathop{\otimes}_z \mathbb{P}_{\beta
+                                             n}^{(0)}\right]\,,\\
 \\
-&-&\displaystyle a_s^2(\mu_{\rm R})\bigg[L_{\rm F} \left(\delta_{km}\delta(1-x)\mathbb{P}_{ln}^{(1)}(z)+\mathcal{P}_{km}^{(1)}(x)\delta_{ln}\delta(1-z)\right)
-                          \\
+\displaystyle \overline{B}_{ij,mn}^{(3)} &=& \displaystyle
+                                             B_{ij,mn}^{(3)}
++ 2L_{\rm R}
+          \beta_0 B_{ij,mn}^{(2)} - L_{\rm F}\left[
+          B_{ij,\alpha n}^{(2)}\mathop{\otimes}_x \mathcal{P}_{\alpha m}^{(0)} +
+          B_{ij,m\beta}^{(2)}\mathop{\otimes}_z \mathbb{P}_{\beta
+                                             n}^{(0)}\right]\\
 \\
-&+&\displaystyle \left(L_{\rm R}
-    -\frac{1}2 L_{\rm F}\right) L_{\rm F}\beta_0 \left(\delta_{km}\delta(1-x)\mathbb{P}_{ln}^{(0)}(z)+\mathcal{P}_{km}^{(0)}(x)\delta_{ln}\delta(1-z)\right)
-  \\
+&-&\displaystyle \left(\frac{1}{2} L_{\rm F}+2 L_{\rm R} \right) L_{\rm F}\beta _0\left[B_{ij,\alpha n}^{(1)} \mathop{\otimes}_x
+    \mathcal{P}_{\alpha m}^{(0)}
++ B_{ij,m\beta}^{(1)}\mathop{\otimes}_z \mathbb{P}_{\beta n}^{(0)}\right]+L_{\rm R}^2\beta _0^2 B_{ij,mn}^{(1)}\\
 \\
-&-&\displaystyle \frac{1}2 L_{\rm F}^2\left(\delta_{km}\delta(1-x)\mathbb{P}_{l\beta}^{(0)}(z)\otimes
-                          \mathbb{P}_{\beta n}^{(0)}(z) +2 \mathcal{P}_{km}^{(0)}(x) \mathbb{P}_{ln}^{(0)}(z)+\mathcal{P}_{k\beta}^{(0)}(x)\otimes
-                          \mathcal{P}_{\beta m}^{(0)}(x) \delta_{ln}\delta(1-z)\right)\bigg]\\
+&-&\displaystyle L_{\rm F}\left[B_{ij,\alpha n}^{(1)} \mathop{\otimes}_x
+    \mathcal{P}_{\alpha m}^{(1)}
++ B_{ij,m\beta}^{(1)}\mathop{\otimes}_z \mathbb{P}_{\beta n}^{(1)}\right]+L_{\rm R}\beta _1 B_{ij,mn}^{(1)} \\
 \\
-&&\displaystyle \Bigg]\mathop{\otimes}_x
-    f_m(x,\mu_{\rm F}) \mathop{\otimes}_z
-    d_n(z,\mu_{\rm F})\,,
-\end{array}
-\label{eq:expPDFsFFs}
-\end{equation}
-where the greek indices are undestood to be summed over and where we
-have defined:
-\begin{equation}
-L_{\rm R} = \ln\frac {\mu_{\rm R}^2}{Q^2}\quad\mbox{and}\quad L_{\rm F} = \ln\frac {\mu_{\rm F}^2}{Q^2}\,.
-\end{equation}
-Finally, using Eqs.~(\ref{eq:alphasexp2}) and~(\ref{eq:expPDFsFFs})
-the expansion of the cross section in Eq.~(\ref{eq:xsecexp}) can be
-generalised to:
-\begin{equation}
-\begin{array}{rcl}
-\displaystyle \frac{d\sigma}{dq_T^2} &\propto&\displaystyle
-                                               \sum_{s=0}^\infty
-                                               a_s^s(\mu_{\rm R})\sum_{p=0}^{2s} I_p(q_T,Q)
-    \sum_{ij,kl} \overline{B}_{ij,mn}^{(s,p)}(x,z) \mathop{\otimes}_x f_m(x, \mu_{\rm F}) \mathop{\otimes}_z d_n(z, \mu_{\rm F})\,.
+&+&\displaystyle \frac{1}{2} L_{\rm F}^2 \left[B_{ij,\alpha n}^{(1)}\mathop{\otimes}_x 
+                                             \left(\mathcal{P}^{(0)}\otimes\mathcal{P}^{(0)}\right)_{\alpha
+    m}+2B_{ij,\alpha\beta}^{(1)}\mathop{\otimes}_x
+    \mathcal{P}_{\alpha m}^{(0)} \mathop{\otimes}_z\mathbb{P}_{\beta n}^{(0)}+ B_{ij,m\beta}^{(1)} \mathop{\otimes}_z
+                                             \left(\mathbb{P}^{(0)}\otimes
+    \mathbb{P}^{(0)}\right)_{\beta n}\right]\,,
 \end{array}
 \end{equation}
-where:
-\begin{equation}
-\begin{array}{rcl}
-\overline{B}_{ij,mn}^{(0,0)}(x,z) &=&\displaystyle B_{ij,mn}^{(0,0)}(x,z)\,,\\
-\\
-\overline{B}_{ij,mn}^{(1,0)}(x,z) &=& \displaystyle B_{ij,mn}^{(1,0)}(x,z) - L_{\rm F} H_{ij}^{(0)}\left(\delta_{im}\delta(1-x) \mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{im}^{(0)}(x) \delta_{jn}\delta(1-z)\right) \,,\\
-\\
-\overline{B}_{ij,mn}^{(1,1)}(x,z) &=& \displaystyle B_{ij,mn}^{(1,1)}(x,z) \,, \\
-\\
-\overline{B}_{ij,mn}^{(1,2)}(x,z) &=& \displaystyle B_{ij,mn}^{(1,2)}(x,z) \,, \\
-\\
-\overline{B}_{ij,mn}^{(2,0)}(x,z) &=&\displaystyle
-                                      B_{ij,mn}^{(2,0)}(x,z) +
-                                      \beta_0L_{\rm
-                                      R}H_{ij}^{(0)}\left(\delta_{im}\delta(1-x)\mathbb{C}_{jn}^{(1,0)}(z)+\mathcal{C}_{im}^{(1,0)}(x)\delta_{jn}\delta(1-z)\right) \\
-\\
-&-&\displaystyle L_{\rm F}H_{ij}^{(0)}
-    \bigg(\delta_{im}\delta(1-x)\mathbb{C}_{j\beta}^{(1,0)}(z) \mathop{\otimes}_z\mathbb{P}_{\beta n}^{(0)}(z)+\mathcal{C}_{im}^{(1,0)}(x)\mathbb{P}_{j n}^{(0)}(z)\\
-\\
-&+&\displaystyle \mathcal{P}_{i m}^{(0)}(x)\mathbb{C}_{jn}^{(1,0)}(z)+\mathcal{C}_{i\beta}^{(1,0)}(x) \mathop{\otimes}_x\mathcal{P}_{\beta m}^{(0)}(x)\delta_{jn}\delta(1-z)\bigg)\\
-\\
-&+&\displaystyle 
-    H_{ij}^{(1)}\left(\beta_0L_{\rm R}\delta_{im}\delta(1-x) \delta_{jn}\delta(1-z)-L_{\rm F}\delta_{im}\delta(1-x)
-    \mathbb{P}_{j n}^{(0)}(z) -L_{\rm F}
-    \mathcal{P}_{i m}^{(0)}(x) \delta_{jn}\delta(1-z)\right)\\
-\\
-&-&\displaystyle  H_{ij}^{(0)}\bigg[L_{\rm F} \left(\delta_{im}\delta(1-x)\mathbb{P}_{jn}^{(1)}(z)+\mathcal{P}_{im}^{(1)}(x)\delta_{jn}\delta(1-z)\right)
-                          \\
-\\
-&+&\displaystyle \left(L_{\rm R}
-    -\frac{1}2 L_{\rm F}\right) L_{\rm F}\beta_0 \left(\delta_{im}\delta(1-x)\mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{im}^{(0)}(x)\delta_{ln}\delta(1-z)\right)
-  \\
-\\
-&-&\displaystyle \frac{1}2 L_{\rm F}^2\left(\delta_{im}\delta(1-x)\mathbb{P}_{j\beta}^{(0)}(z)\otimes
-                          \mathbb{P}_{\beta n}^{(0)}(z) +2 \mathcal{P}_{im}^{(0)}(x) \mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{i\beta}^{(0)}(x)\otimes
-                          \mathcal{P}_{\beta m}^{(0)}(x) \delta_{jn}\delta(1-z)\right)\bigg]\,,\\
-  \\
-\overline{B}_{ij,mn}^{(2,1)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,1)}(x,z) - \beta_0L_{\rm R}H_{ij}^{(0)}\left(\delta_{im}\delta(1-x)\mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{im}^{(0)}(x)\delta_{jn}\delta(1-z)\right)\\
-  \\
-&+&\displaystyle L_{\rm F}
-    H_{ij}^{(0)}\bigg(\delta_{im}\delta(1-x)\mathbb{P}_{j\beta}^{(0)}(z)
-    \mathop{\otimes}_z\mathbb{P}_{\beta
-    n}^{(0)}(z)+2\mathcal{P}_{im}^{(0)}(x)\mathbb{P}_{j n}^{(0)}(z)+\mathcal{P}_{i\beta}^{(0)}(x) \mathop{\otimes}_x\mathcal{P}_{\beta m}^{(0)}(x)\delta_{jn}\delta(1-z) \bigg)\\
-\\
-&+&\displaystyle 
-    H_{ij}^{(0)} S^{(1,1)}\left(\beta_0L_{\rm R}\delta_{im}\delta(1-x) \delta_{jn}\delta(1-z)-L_{\rm F}\delta_{im}\delta(1-x)
-    \mathbb{P}_{j n}^{(0)}(z) -L_{\rm F}
-    \mathcal{P}_{i m}^{(0)}(x) \delta_{jn}\delta(1-z)\right) \,,\\
-\\
-\overline{B}_{ij,mn}^{(2,2)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,2)}(x,z) \\
-\\
-&+&\displaystyle 
-    H_{ij}^{(0)} S^{(1,2)}\left(\beta_0L_{\rm R}\delta_{im}\delta(1-x) \delta_{jn}\delta(1-z)-L_{\rm F}\delta_{im}\delta(1-x)
-    \mathbb{P}_{j n}^{(0)}(z) -L_{\rm F}
-    \mathcal{P}_{i m}^{(0)}(x) \delta_{jn}\delta(1-z)\right) \,,\\
-\\
-\overline{B}_{ij,mn}^{(2,3)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,3)}(x,z) \,, \\
-\\
-\overline{B}_{ij,mn}^{(2,4)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,4)}(x,z) \,,
-\end{array}
-\end{equation}
-with the coefficients $B_{ij,mn}^{(s,p)}$ given in
-Eqs.~(\ref{eq:BLO}), ~(\ref{eq:BNLO}), and~(\ref{eq:BNNLO}). Of
-course, if $\mu_{\rm R}=\mu_{\rm F}=Q$, all logs vanish and the
-$\overline{B}_{ij,mn}^{(s,p)}$ coefficients automatically reduce to
-$B_{ij,mn}^{(s,p)}$.
+where a sum over $\alpha$ and $\beta$ is understood.
+% where:
+% \begin{equation}
+% \begin{array}{rcl}
+% \overline{B}_{ij,mn}^{(0,0)}(x,z) &=&\displaystyle B_{ij,mn}^{(0,0)}(x,z)\,,\\
+% \\
+% \overline{B}_{ij,mn}^{(1,0)}(x,z) &=& \displaystyle B_{ij,mn}^{(1,0)}(x,z) - L_{\rm F} H_{ij}^{(0)}\left(\delta_{im}\delta(1-x) \mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{im}^{(0)}(x) \delta_{jn}\delta(1-z)\right) \,,\\
+% \\
+% \overline{B}_{ij,mn}^{(1,1)}(x,z) &=& \displaystyle B_{ij,mn}^{(1,1)}(x,z) \,, \\
+% \\
+% \overline{B}_{ij,mn}^{(1,2)}(x,z) &=& \displaystyle B_{ij,mn}^{(1,2)}(x,z) \,, \\
+% \\
+% \overline{B}_{ij,mn}^{(2,0)}(x,z) &=&\displaystyle
+%                                       B_{ij,mn}^{(2,0)}(x,z) +
+%                                       \beta_0L_{\rm
+%                                       R}H_{ij}^{(0)}\left(\delta_{im}\delta(1-x)\mathbb{C}_{jn}^{(1,0)}(z)+\mathcal{C}_{im}^{(1,0)}(x)\delta_{jn}\delta(1-z)\right) \\
+% \\
+% &-&\displaystyle L_{\rm F}H_{ij}^{(0)}
+%     \bigg(\delta_{im}\delta(1-x)\mathbb{C}_{j\beta}^{(1,0)}(z) \mathop{\otimes}_z\mathbb{P}_{\beta n}^{(0)}(z)+\mathcal{C}_{im}^{(1,0)}(x)\mathbb{P}_{j n}^{(0)}(z)\\
+% \\
+% &+&\displaystyle \mathcal{P}_{i m}^{(0)}(x)\mathbb{C}_{jn}^{(1,0)}(z)+\mathcal{C}_{i\beta}^{(1,0)}(x) \mathop{\otimes}_x\mathcal{P}_{\beta m}^{(0)}(x)\delta_{jn}\delta(1-z)\bigg)\\
+% \\
+% &+&\displaystyle 
+%     H_{ij}^{(1)}\left(\beta_0L_{\rm R}\delta_{im}\delta(1-x) \delta_{jn}\delta(1-z)-L_{\rm F}\delta_{im}\delta(1-x)
+%     \mathbb{P}_{j n}^{(0)}(z) -L_{\rm F}
+%     \mathcal{P}_{i m}^{(0)}(x) \delta_{jn}\delta(1-z)\right)\\
+% \\
+% &-&\displaystyle  H_{ij}^{(0)}\bigg[L_{\rm F} \left(\delta_{im}\delta(1-x)\mathbb{P}_{jn}^{(1)}(z)+\mathcal{P}_{im}^{(1)}(x)\delta_{jn}\delta(1-z)\right)
+%                           \\
+% \\
+% &+&\displaystyle \left(L_{\rm R}
+%     -\frac{1}2 L_{\rm F}\right) L_{\rm F}\beta_0 \left(\delta_{im}\delta(1-x)\mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{im}^{(0)}(x)\delta_{ln}\delta(1-z)\right)
+%   \\
+% \\
+% &-&\displaystyle \frac{1}2 L_{\rm F}^2\left(\delta_{im}\delta(1-x)\mathbb{P}_{j\beta}^{(0)}(z)\otimes
+%                           \mathbb{P}_{\beta n}^{(0)}(z) +2 \mathcal{P}_{im}^{(0)}(x) \mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{i\beta}^{(0)}(x)\otimes
+%                           \mathcal{P}_{\beta m}^{(0)}(x) \delta_{jn}\delta(1-z)\right)\bigg]\,,\\
+%   \\
+% \overline{B}_{ij,mn}^{(2,1)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,1)}(x,z) - \beta_0L_{\rm R}H_{ij}^{(0)}\left(\delta_{im}\delta(1-x)\mathbb{P}_{jn}^{(0)}(z)+\mathcal{P}_{im}^{(0)}(x)\delta_{jn}\delta(1-z)\right)\\
+%   \\
+% &+&\displaystyle L_{\rm F}
+%     H_{ij}^{(0)}\bigg(\delta_{im}\delta(1-x)\mathbb{P}_{j\beta}^{(0)}(z)
+%     \mathop{\otimes}_z\mathbb{P}_{\beta
+%     n}^{(0)}(z)+2\mathcal{P}_{im}^{(0)}(x)\mathbb{P}_{j n}^{(0)}(z)+\mathcal{P}_{i\beta}^{(0)}(x) \mathop{\otimes}_x\mathcal{P}_{\beta m}^{(0)}(x)\delta_{jn}\delta(1-z) \bigg)\\
+% \\
+% &+&\displaystyle 
+%     H_{ij}^{(0)} S^{(1,1)}\left(\beta_0L_{\rm R}\delta_{im}\delta(1-x) \delta_{jn}\delta(1-z)-L_{\rm F}\delta_{im}\delta(1-x)
+%     \mathbb{P}_{j n}^{(0)}(z) -L_{\rm F}
+%     \mathcal{P}_{i m}^{(0)}(x) \delta_{jn}\delta(1-z)\right) \,,\\
+% \\
+% \overline{B}_{ij,mn}^{(2,2)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,2)}(x,z) \\
+% \\
+% &+&\displaystyle 
+%     H_{ij}^{(0)} S^{(1,2)}\left(\beta_0L_{\rm R}\delta_{im}\delta(1-x) \delta_{jn}\delta(1-z)-L_{\rm F}\delta_{im}\delta(1-x)
+%     \mathbb{P}_{j n}^{(0)}(z) -L_{\rm F}
+%     \mathcal{P}_{i m}^{(0)}(x) \delta_{jn}\delta(1-z)\right) \,,\\
+% \\
+% \overline{B}_{ij,mn}^{(2,3)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,3)}(x,z) \,, \\
+% \\
+% \overline{B}_{ij,mn}^{(2,4)}(x,z) &=&\displaystyle B_{ij,mn}^{(2,4)}(x,z) \,,
+% \end{array}
+% \end{equation}
+Of course, if $\mu_{\rm R}=\mu_{\rm F}=Q$, all logs vanish and the
+$\overline{B}_{ij,mn}^{(s)}$ coefficients automatically reduce to
+$B_{ij,mn}^{(s)}$.
 
 \subsection{A note on the logarithmic ordering}
 
