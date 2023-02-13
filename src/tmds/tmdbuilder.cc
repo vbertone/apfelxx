@@ -783,6 +783,8 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSV, Id});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
         OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Zero});
         C00.insert({nf, OM});
       }
 
@@ -799,6 +801,8 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nspdf});
         OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Zero});
         C10pdf.insert({nf, OM});
       }
 
@@ -2054,13 +2058,18 @@ namespace apfel
     const double lQ2 = lQ * lQ;
     const double lQ3 = lQ * lQ2;
     const double lQ4 = lQ * lQ3;
+    const double lQ5 = lQ * lQ4;
+    const double lQ6 = lQ * lQ5;
 
     // Select coefficients according to the process
     std::map<int, double> b0;
+    std::map<int, double> b1;
     std::map<int, double> gK0;
     std::map<int, double> gK1;
+    std::map<int, double> gK2;
     std::map<int, double> gF0;
     std::map<int, double> gF1;
+    std::map<int, double> gF2;
     std::map<int, double> H1;
     std::map<int, double> H2;
     std::map<int, double> H3;
@@ -2068,10 +2077,13 @@ namespace apfel
       for (int nf = nfi; nf <= nff; nf++)
         {
           b0.insert({nf, TmdObj.at(nf).Beta.at(0)});
+          b1.insert({nf, TmdObj.at(nf).Beta.at(1)});
           gK0.insert({nf, CF * TmdObj.at(nf).GammaK.at(0)});
           gK1.insert({nf, CF * TmdObj.at(nf).GammaK.at(1)});
+          gK2.insert({nf, CF * TmdObj.at(nf).GammaK.at(2)});
           gF0.insert({nf, TmdObj.at(nf).GammaFq.at(0)});
           gF1.insert({nf, TmdObj.at(nf).GammaFq.at(1)});
+          gF2.insert({nf, TmdObj.at(nf).GammaFq.at(2)});
           H1.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(1)});
           H2.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(2)});
           H3.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(3)});
@@ -2080,10 +2092,13 @@ namespace apfel
       for (int nf = nfi; nf <= nff; nf++)
         {
           b0.insert({nf, TmdObj.at(nf).Beta.at(0)});
+          b1.insert({nf, TmdObj.at(nf).Beta.at(1)});
           gK0.insert({nf, CA * TmdObj.at(nf).GammaK.at(0)});
           gK1.insert({nf, CA * TmdObj.at(nf).GammaK.at(1)});
+          gK2.insert({nf, CA * TmdObj.at(nf).GammaK.at(2)});
           gF0.insert({nf, TmdObj.at(nf).GammaFg.at(0)});
           gF1.insert({nf, TmdObj.at(nf).GammaFg.at(1)});
+          gF2.insert({nf, TmdObj.at(nf).GammaFg.at(2)});
           H1.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(1)});
           H2.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(2)});
           H3.insert({nf, TmdObj.at(nf).HardFactors.at(Process).at(3)});
@@ -2092,13 +2107,13 @@ namespace apfel
       throw std::runtime_error(error("HardFactor", "Process not available."));
 
     // Construct function that returns the hard function
-    const auto HardFactor = [=] (double const& mu) -> double
+    const auto HardFactor = [=] (double const& Q) -> double
     {
       // The strong coupling
-      const double coup = Alphas(mu) / FourPi;
+      const double coup = Alphas(Q) / FourPi;
 
       // Number of active flavours
-      const int nf = NF(mu, thrs);
+      const int nf = NF(Q, thrs);
 
       // Compute hard function
       double H = 1;
@@ -2107,12 +2122,25 @@ namespace apfel
                       - 2 * gF0.at(nf) * lQ - gK0.at(nf) * lQ2 );
       if (PerturbativeOrder > 2 || PerturbativeOrder < -1)
         H += pow(coup, 2) * ( H2.at(nf)
-                              + ( - 2 * gF1.at(nf) - 2 * H1.at(nf) * ( - b0.at(nf) + gF0.at(nf) ) ) * lQ
-                              + ( - gK1.at(nf) - 2 * b0.at(nf) * gF0.at(nf) + 2 * pow(gF0.at(nf), 2) - gK0.at(nf) * H1.at(nf) ) * lQ2
-                              + gK0.at(nf) * ( - 2 * b0.at(nf) / 3 + 2 * gF0.at(nf) ) * lQ3
+                              + ( - 2 * H1.at(nf) * gF0.at(nf) - 2 * gF1.at(nf) ) * lQ
+                              + ( - gK0.at(nf) * H1.at(nf) + 2 * b0.at(nf) * gF0.at(nf) + 2 * pow(gF0.at(nf), 2) - gK1.at(nf) ) * lQ2
+                              + ( 4 * b0.at(nf) * gK0.at(nf) / 3 + 2 * gF0.at(nf) * gK0.at(nf) ) * lQ3
                               + pow(gK0.at(nf), 2) / 2 * lQ4 );
       if (PerturbativeOrder > 3 || PerturbativeOrder < -2)
-        H += pow(coup, 3) * H3.at(nf);
+        H += pow(coup, 3) * ( H3.at(nf)
+                              + ( - 2 * gF0.at(nf) * H2.at(nf) - 2 * gF1.at(nf) * H1.at(nf) - 2 * gF2.at(nf) ) * lQ
+                              + ( 2 * b0.at(nf) * gF0.at(nf) * H1.at(nf) + 2 * pow(gF0.at(nf), 2) * H1.at(nf)
+                                  + 4 * gF0.at(nf) * gF1.at(nf) - gK0.at(nf) * H2.at(nf) + 2 * b1.at(nf) * gF0.at(nf)
+                                  + 4 * b0.at(nf) * gF1.at(nf) - H1.at(nf) * gK1.at(nf) - gK2.at(nf) ) * lQ2
+                              + ( 2 * gF0.at(nf) * gK0.at(nf) * H1.at(nf) + 2 * gF0.at(nf) * gK1.at(nf)
+                                  + 2 * gK0.at(nf) * gF1.at(nf) + 4 * b0.at(nf) * gK0.at(nf) * H1.at(nf) / 3
+                                  - 4 * b0.at(nf) * pow(gF0.at(nf), 2) - 8 * pow(b0.at(nf), 2) * gF0.at(nf) / 3
+                                  - 4 * pow(gF0.at(nf), 3) / 3 + 4 * b1.at(nf) * gK0.at(nf) / 3 + 8 * b0.at(nf) * gK1.at(nf) ) * lQ3
+                              + ( pow(gK0.at(nf), 2) * H1.at(nf) / 2 + gK0.at(nf) * gK1.at(nf)
+                                  - 14 * b0.at(nf) * gF0.at(nf) * gK0.at(nf) / 3 - 2 * pow(gF0.at(nf), 2) * gK0.at(nf)
+                                  - 2 * pow(b0.at(nf), 2) * gK0.at(nf) ) * lQ4
+                              + ( 4 * b0.at(nf) * pow(gK0.at(nf), 2) / 3 - gF0.at(nf) * pow(gK0.at(nf), 2) ) * lQ5
+                              - pow(gK0.at(nf), 3) / 6 * lQ6 );
 
       // Return hard factor
       return H;
