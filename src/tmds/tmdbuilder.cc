@@ -2148,43 +2148,4 @@ namespace apfel
 
     return HardFactor;
   }
-
-  //_____________________________________________________________________________
-  double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa)
-  {
-    // Compute log and its powers
-    const double lQ  = log(kappa);
-    const double lQ2 = lQ * lQ;
-    const double lQ3 = lQ * lQ2;
-    const double lQ4 = lQ * lQ3;
-
-    // Compute coupling and its powers
-    const double as  = Alphas / FourPi;
-    const double as2 = as * as;
-
-    // Coefficients
-    const double b0  = beta0qcd(nf);
-    const double gK0 = CF * gammaK0();
-    const double gK1 = CF * gammaK1(nf);
-    const double gF0 = gammaFq0();
-    const double gF1 = gammaFq1(nf);
-    const double H1  = 2 * CF * ( - 8 + 7 * Pi2 / 6 );
-    const double H2  = 2 * CF * ( CF * ( 511. / 8. - 83 * Pi2 / 6 - 30 * zeta3 + 67 * Pi2 * Pi2 / 60 ) +
-                                  CA * ( - 51157. / 648. + 1061 * Pi2 / 108 + 313 * zeta3 / 9 - 4 * Pi2 * Pi2 / 45 ) +
-                                  TR * nf * ( 4085. / 162. - 91 * Pi2 / 27 + 4 * zeta3 / 9 ) );
-
-    // Now compute hard factor according to the perturbative order
-    double hfct = 1;
-    if (PerturbativeOrder > 1 || PerturbativeOrder < 0)
-      hfct += as * ( H1
-                     - 2 * gF0 * lQ - gK0 * lQ2 );
-    if (PerturbativeOrder > 2 || PerturbativeOrder < -1)
-      hfct += as2 * ( H2
-                      + ( - 2 * gF1 - 2 * H1 * ( - b0 + gF0 ) ) * lQ
-                      + ( - gK1 - 2 * b0 * gF0 + 2 * pow(gF0, 2) - gK0 * H1 ) * lQ2
-                      + gK0 * ( - 2 * b0 / 3 + 2 * gF0 ) * lQ3
-                      + pow(gK0, 2) / 2 * lQ4 );
-
-    return hfct;
-  }
 }
