@@ -792,6 +792,8 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSV, Id});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
         OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Zero});
         C00.insert({nf, OM});
       }
 
@@ -808,6 +810,8 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
         OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nspdf});
         OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Zero});
         C10pdf.insert({nf, OM});
       }
 
