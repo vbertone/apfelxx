@@ -863,7 +863,143 @@ namespace apfel
     return _nf * ( ( 1 - x ) * ( _C[0] / x + _C[1] * dl2 + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 2) - _rho * dl / x )
                    + pow(CA, 2) * CF * ( 82. / 81. + 2 * zeta3 ) * dl2 / x / 6 / pow(M_PI, 4) ) * pow(FourPi, 4);
   }
+  /*
+  //_________________________________________________________________________________
+  P3ps::P3ps(int const& nf, int const& imod):
+    Expression(),
+    _nf(nf),
+    _imod(imod)
+  {
+  }
+  double P3ps::Regular(double const& x) const
+  {
+    const int nf2     = _nf * _nf;
+    const int nf3     = _nf * nf2;
+    const double xm   = 1 / x;
+    const double x1   = 1 - x;
+    const double dl   = log(x);
+    const double dl2  = dl * dl;
+    const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double dl5  = dl * dl4;
+    const double dl6  = dl * dl5;
+    const double dlm  = log(1-x);
+    const double dlm2 = dlm * dlm;
+    const double dlm3 = dlm * dlm2;
+    const double dlm4 = dlm * dlm3;
 
+    // Known large-x coefficients
+    const double x1L4cff = - 5.6460905e1 * _nf + 3.6213992   * nf2;
+    const double x1L3cff = - 2.4755054e2 * _nf + 4.0559671e1 * nf2 - 1.5802469 * nf3;
+    const double y1L4cff = - 1.3168724e1 * _nf;
+    const double y1L3cff = - 1.9911111e2 * _nf + 1.3695473e1 * nf2;
+
+    // Known small-x coefficients
+    const double bfkl1   =   1.7492273e3 * _nf;
+    const double x0L6cff = - 7.5061728   * _nf + 7.9012346e-1 * nf2;
+    const double x0L5cff =   2.8549794e1 * _nf + 3.7925926    * nf2;
+    const double x0L4cff = - 8.5480010e2 * _nf + 7.7366255e1  * nf2 - 1.9753086e-1 * nf3;
+
+    // The resulting part of the function
+    const double P3ps01 =
+      + bfkl1 * dl2 * xm
+      + x0L6cff * dl6
+      + x0L5cff * dl5
+      + x0L4cff * dl4
+      + x1L3cff * x1 * dlm3
+      + x1L4cff * x1 * dlm4
+      + y1L3cff * x1 * x1 * dlm3
+      + y1L4cff * x1 * x1 * dlm4;
+
+    // The selected approximations for nf = 3, 4, 5
+    double P3psApp1 = P3ps01;
+    double P3psApp2 = P3ps01;
+    if (_nf <= 3)
+      {
+        P3psApp1 +=
+          + 67731.  * x1 * dl * xm
+          + 274100. * x1 * xm
+          - 104493. * x1 * ( 1 + 2 * x )
+          + 34403.  * x1 * x * x
+          + 353656. * x1 * dl
+          + 10620.  * dl2
+          + 40006.  * dl3
+          - 7412.1  * x1 * dlm
+          - 2365.1  * x1 * dlm2
+          + 1533.0  * x1 * x1 * dlm2;
+        P3psApp2 +=
+          + 54593.  * x1 * dl * xm
+          + 179748. * x1 * xm
+          - 195263. * x1
+          + 12789.  * x1 * x * ( 1 + x )
+          + 4700.0  * x1 * dl
+          - 103604. * dl2
+          - 2758.3  * dl3
+          - 2801.2  * x1 * dlm
+          - 1986.9  * x1 * dlm2
+          - 6005.9  * x1 * x1 * dlm2;
+      }
+    else if (_nf == 4)
+      {
+        P3psApp1 +=
+          + 90154.  * x1 * dl *xm
+          + 359084. * x1 * xm
+          - 136319. * x1 * ( 1 + 2 * x )
+          + 45379.  * x1 * x * x
+          + 461167. * x1 * dl
+          + 13869.  * dl2
+          + 52525.  * dl3
+          - 7498.2  * x1 * dlm
+          - 2491.5  * x1 * dlm2
+          + 1727.2  * x1 * x1 * dlm2;
+        P3psApp2 +=
+          + 72987.  * x1 * dl * xm
+          + 235802. * x1 * xm
+          - 254921. * x1
+          + 17138.  * x1 * x * ( 1 + x )
+          + 5212.9  * x1 * dl
+          - 135378. * dl2
+          - 3350.9  * dl3
+          - 1472.7  * x1 * dlm
+          - 1997.2  * x1 * dlm2
+          - 8123.3  * x1 * x1 * dlm2;
+      }
+    else if (_nf >= 5)
+      {
+        P3psApp1 +=
+          + 112481. * x1 * dl * xm
+          + 440555. * x1 * xm
+          - 166581. * x1 * ( 1 + 2 * x )
+          + 56087.  * x1 * x * x
+          + 562992. * x1 * dl
+          + 16882.  * dl2
+          + 64577.  * dl3
+          - 6570.1  * x1 * dlm
+          - 2365.7  * x1 * dlm2
+          + 1761.7  * x1 * x1 * dlm2;
+        P3psApp2 +=
+          + 91468.  * x1 * dl * xm
+          + 289658. * x1 * xm
+          - 311749. * x1
+          + 21521.  * x1 * x * ( 1 + x )
+          +  4908.9 * x1 * dl
+          - 165795. * dl2
+          -  3814.9 * dl3
+          +   804.5 * x1 * dlm
+          -  1760.8 * x1 * dlm2
+          - 10295.  * x1 * x1 * dlm2;
+      }
+
+    // We return (for now) one of the two error-band boundaries or the
+    // present best estimate, their average
+    if (_imod == 1)
+      return P3psApp1;
+    else if (_imod == 2)
+      return P3psApp2;
+    else
+      return 0.5 * ( P3psApp1 + P3psApp2 );
+  }
+  */
   //_________________________________________________________________________________
   P3qg::P3qg(int const& nf, double const& rho):
     Expression(),

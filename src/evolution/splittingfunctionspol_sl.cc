@@ -169,9 +169,21 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  P2polnss::P2polnss():
-    Expression()
+  P2polnss::P2polnss(int const& nf):
+    Expression(),
+    _nf(nf)
   {
+  }
+  double P2polnss::Regular(double const& x) const
+  {
+    const double x_2  = x * x;
+    const double x_3  = x * x_2;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
+    return _nf * x1 * ( - 42.97 * dl_2 - 29.29 * dl + 179.1 + 117.8 * x - 385.5 * x_2
+                        + 75.94 * x_3 + 460.8 * x * dl + 8.818 * x * dl_2 + 2.681 * dl1 );
   }
 
   //_________________________________________________________________________________

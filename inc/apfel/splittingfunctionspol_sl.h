@@ -193,12 +193,15 @@ namespace apfel
    * non-singlet-valence longitudinally polarised splitting function
    * minus non-singlet-minus longitudinally polarised splitting
    * function.
-   * @note This is currently unknown and thus set to zero.
+   * @note This has been computed in https://arxiv.org/pdf/1506.04517.pdf.
    */
   class P2polnss: public Expression
   {
   public:
-    P2polnss();
+    P2polnss(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
   };
 
   /**

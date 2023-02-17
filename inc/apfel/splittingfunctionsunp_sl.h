@@ -358,6 +358,21 @@ namespace apfel
     std::vector<double> _C;
   };
 
+  /* /\** */
+  /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet */
+  /*  * unpolarised splitting function. Parameterisation determined in */
+  /*  * https://arxiv.org/pdf/2302.07593.pdf */
+  /*  *\/ */
+  /* class P3ps: public Expression */
+  /* { */
+  /* public: */
+  /*   P3ps(int const& nf, int const& imod = 0); */
+  /*   double Regular(double const& x) const; */
+  /* private: */
+  /*   int const _nf; */
+  /*   int const _imod; */
+  /* }; */
+
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) quark-gluon unpolarised
    * splitting function.
