@@ -763,7 +763,6 @@ namespace apfel
     const double lnx2   = lnx * lnx;
     const double ln1mx  = log(1 - x);
     const double ln1mx2 = ln1mx * ln1mx;
-
     return CF * ( CF - CA ) * ( 8 * ( 1 - x ) * ( ln1mx + ln1mx2 ) / x - 20 * lnx + 4 * lnx2 + 8 * ( 1 -  x ) )
            + CF * CA * ( 16 * ( 1 - x ) * ( 11. / 18. + 5 * zeta2 / 4 - ln1mx / 3 - dilog(x) ) / x + 4 * lnx * ( 4 + 5 * x - x * lnx ) / x )
            + CF * _nf * 16 * ( 1 - x ) * ( 2 + 3 * ln1mx ) / 9 / x;

@@ -375,7 +375,7 @@ namespace apfel
         const Operator O3qgpdf {g, C3qgpdf{nf},  IntEps};
         const Operator O3gqpdf {g, C3gqpdf{nf},  IntEps};
         const Operator O3ggpdf {g, C3ggpdf{nf},  IntEps};
-        const Operator O3nsppdf{g, C2nsppdf{nf}, IntEps};
+        const Operator O3nsppdf{g, C3nsppdf{nf}, IntEps};
         const Operator O3nsmpdf{g, C3nsmpdf{nf}, IntEps};
         const Operator O3qqpdf  = O3nsppdf + nf * O3pspdf;
         const Operator O3nsvpdf = O3nsmpdf + nf * O3pvpdf;
@@ -399,7 +399,7 @@ namespace apfel
         const Operator O3qgff {g, C3qgff{nf},  IntEps};
         const Operator O3gqff {g, C3gqff{nf},  IntEps};
         const Operator O3ggff {g, C3ggff{nf},  IntEps};
-        const Operator O3nspff{g, C2nspff{nf}, IntEps};
+        const Operator O3nspff{g, C3nspff{nf}, IntEps};
         const Operator O3nsmff{g, C3nsmff{nf}, IntEps};
         const Operator O3qqff  = O3nspff + nf * O3psff;
         const Operator O3nsvff = O3nsmff + nf * O3pvff;
