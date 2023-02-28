@@ -717,7 +717,6 @@ namespace apfel
   }
   double C33nsp::Regular(double const& x) const
   {
-    const double fl02 = 1;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
@@ -732,15 +731,22 @@ namespace apfel
     const double dl15 = dl1 * dl14;
     const double d27  = 1. / 27;
     const double d243 = 1. / 243;
-    return
+
+    // Plus piece
+    const double CL3nsp =
       - 1853. - 5709. * x + x * x1 * ( 5600. - 1432. * x ) - 536. / 405. * dl5 - 4036. / 81. * dl4 - 496.95 * dl3 - 1488. * dl2 - 293.3 * dl
       - 512. * d27 * dl15 + 8896. * d27 * dl14 - 1396. * dl13 + 3990. * dl12 + 14363. * dl1 - 0.463 * x * dl6 - dl* dl1 * ( 4007. + 1312. * dl )
       + _nf * ( 516.1 - 465.2 * x + x * x1 * ( 635.3 + 310.4 * x ) + 304. / 81. * dl4 + 48512. / 729. * dl3 + 305.32 * dl2 + 366.9 * dl - 1.200 * x * dl4
                 - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
-                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
-      + fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
-                       + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
+                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 );
+
+    // Compute and include difference to get the minus piece
+    const double c3q30a = - ( 46.72 * dl12 + 267.26 * dl1 + 719.49 * x ) * x1 - 171.98 * dl + 9.470 * dl3;
+    const double c3q30b = ( 3.216 * dl12 + 44.50 * dl1 - 34.588 ) * x1 + 98.719 * dl2 + 2.6208 * dl5;
+    const double c3q31a = ( 0.8489 * dl1 + 67.928 * ( 1. + 0.5 * x ) ) * x1 + 97.922 * x * dl - 17.070 * dl2 - 3.132 * dl3;
+    const double c3q31b = - ( 0.186 * dl1 + 61.102 * ( 1. + x ) ) * x1 - 122.51 * x * dl + 10.914 * dl2 + 2.748 * dl3;
+    return CL3nsp + 0.5 * ( c3q30a + c3q30b + _nf * ( c3q31a + c3q31b ) );
   }
   double C33nsp::Singular(double const& x) const
   {
@@ -787,6 +793,7 @@ namespace apfel
   }
   double C33nsm::Regular(double const& x) const
   {
+    const double fl02 = 1;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
@@ -801,22 +808,15 @@ namespace apfel
     const double dl15 = dl1 * dl14;
     const double d27  = 1. / 27;
     const double d243 = 1. / 243;
-
-    // Plus piece
-    const double CL3nsp =
+    return
       - 1853. - 5709. * x + x * x1 * ( 5600. - 1432. * x ) - 536. / 405. * dl5 - 4036. / 81. * dl4 - 496.95 * dl3 - 1488. * dl2 - 293.3 * dl
       - 512. * d27 * dl15 + 8896. * d27 * dl14 - 1396. * dl13 + 3990. * dl12 + 14363. * dl1 - 0.463 * x * dl6 - dl* dl1 * ( 4007. + 1312. * dl )
       + _nf * ( 516.1 - 465.2 * x + x * x1 * ( 635.3 + 310.4 * x ) + 304. / 81. * dl4 + 48512. / 729. * dl3 + 305.32 * dl2 + 366.9 * dl - 1.200 * x * dl4
                 - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
-                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 );
-
-    // Compute and include difference to get the minus piece
-    const double c3q30a = - ( 46.72 * dl12 + 267.26 * dl1 + 719.49 * x ) * x1 - 171.98 * dl + 9.470 * dl3;
-    const double c3q30b = ( 3.216 * dl12 + 44.50 * dl1 - 34.588 ) * x1 + 98.719 * dl2 + 2.6208 * dl5;
-    const double c3q31a = ( 0.8489 * dl1 + 67.928 * ( 1. + 0.5 * x ) ) * x1 + 97.922 * x * dl - 17.070 * dl2 - 3.132 * dl3;
-    const double c3q31b = - ( 0.186 * dl1 + 61.102 * ( 1. + x ) ) * x1 - 122.51 * x * dl + 10.914 * dl2 + 2.748 * dl3;
-    return CL3nsp + 0.5 * ( c3q30a + c3q30b + _nf * ( c3q31a + c3q31b ) );
+                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
+      + fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
+                       + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
   }
   double C33nsm::Singular(double const& x) const
   {
