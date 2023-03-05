@@ -139,9 +139,10 @@ namespace apfel
     const std::vector<double> Vq = {VD, VU, VD, VU, VD, VU};
     const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
 
-    // Propagator and its square
+    // Propagator square
     double PZ2 = pow(ZMass, 4) * M_PI / ZMass / ZMass / GammaZ / pow(4 * S2ThW * ( 1 - S2ThW ), 2) / 2;
 
+    // Build electroweak charges
     std::vector<double> Charges(6, 0.);
     for (auto i = 0; i < 6; i++)
       Charges[i] = ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
@@ -261,7 +262,7 @@ namespace apfel
     // Sum the charges
     const double sumq = (NoCharges ? 1 : std::accumulate(Bq.begin(), Bq.begin() + nf, 0.));
 
-    // Total born coss setion
+    // Total Born coss setion
     double sigma0tot = FourPi * pow(AlphaQED, 2) * NC * sumq / 3 / Q / Q;
 
     // QCD coupling

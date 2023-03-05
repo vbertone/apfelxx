@@ -786,14 +786,15 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  C33nsm::C33nsm(int const& nf):
+  C33nsm::C33nsm(int const& nf, double const& fl02):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl02(fl02)
   {
   }
   double C33nsm::Regular(double const& x) const
   {
-    const double fl02 = 1;
+    //const double fl02 = 1;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
@@ -815,8 +816,8 @@ namespace apfel
                 - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
                       - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
-      + fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
-                       + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
+      + _fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
+                        + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
   }
   double C33nsm::Singular(double const& x) const
   {

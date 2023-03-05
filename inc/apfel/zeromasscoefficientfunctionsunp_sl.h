@@ -362,12 +362,13 @@ namespace apfel
   class C33nsm: public Expression
   {
   public:
-    C33nsm(int const& nf);
+    C33nsm(int const& nf, double const& fl02 = 1);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    int const _nf;
+    int    const _nf;
+    double const _fl02;
   };
   ///@}
   ///@}
