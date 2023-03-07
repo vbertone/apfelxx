@@ -232,8 +232,8 @@ namespace apfel
    * with a massive heavy quark in the intial state. These coefficient
    * functions can be used both in the neutral-current and in the
    * charged-current cases.
-   * @note All the expressions of the one-loo coefficient functions are
-   * extracted from https://arxiv.org/pdf/hep-ph/9805233.pdf. The
+   * @note All the expressions of the one-loop coefficient functions
+   * are extracted from https://arxiv.org/pdf/hep-ph/9805233.pdf. The
    * coefficient function C is witten in terms of the private _R
    * function such that:
    *

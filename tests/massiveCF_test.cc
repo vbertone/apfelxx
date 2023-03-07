@@ -43,13 +43,13 @@ int main()
   const double lxiF = log(xiF);
   const double eta  = Q2 / ( Q2 + 4 * M2 );
 
-  // Number of active flavours.
+  // Number of active flavours
   const int nf = 3;
 
-  // Integration accuracy.
+  // Integration accuracy
   const double IntEps = apfel::eps5;
 
-  // Massive coeffient functions.
+  // Massive coeffient functions
   const apfel::Operator Om21g  {g, apfel::Cm21gNC{eta},     IntEps};
   const apfel::Operator Om22ns {g, apfel::Cm22nsNC{eta},    IntEps};
   const apfel::Operator Om22gc {g, apfel::Cm22gNC{eta},     IntEps};
@@ -68,7 +68,7 @@ int main()
   const apfel::Operator OmL2ps = OmL2psc + lxi * OmL2psb;
   const apfel::Operator OmL2g  = OmL2gc  + lxi * OmL2gb;
 
-  // Massive zero coeffient functions.
+  // Massive zero coeffient functions
   const apfel::Operator Om021gc  {g, apfel::Cm021gNC_c{},   IntEps};
   const apfel::Operator Om021gl  {g, apfel::Cm021gNC_l{},   IntEps};
   const apfel::Operator Om022nsc {g, apfel::Cm022nsNC_c{},  IntEps};
@@ -102,13 +102,14 @@ int main()
   const apfel::Operator Om0L2ps = Om0L2psc + lxi * Om0L2psl + lxiF * Om0L2psf;
   const apfel::Operator Om0L2g  = Om0L2gc  + lxi * Om0L2gl  + lxiF * Om0L2gf;
 
-  /* Massive0 coeffient functions. This coefficient functions are
+  /*
+   * Massive0 coeffient functions. These coefficient functions are
    * explicitly reported in Appendix D of
    * https://arxiv.org/pdf/hep-ph/9601302.pdf. However, they can be
    * obtained by a proper combination of zero-mass coeffient
    * functions, splitting functions, matching conditions, and
    * beta-function coeffients. All these expressions are implemented
-   * and they need to me combined using the following equations of the
+   * and they need to be combined using the following equations of the
    * same paper:
    *
    * - (4.6)  and (4.7)  for the O(as)   gluon        coefficient functions,
@@ -123,11 +124,11 @@ int main()
    * coefficient functions cancel explicitly.
    */
 
-  // beta0 constants.
+  // beta0 constants
   const double beta0  = apfel::beta0qcd(nf);
   const double beta0Q = beta0 - apfel::beta0qcd(nf-1);
 
-  // Zero mass coefficient functions.
+  // Zero mass coefficient functions
   const apfel::Operator c21ns  {g, apfel::C21ns{},      IntEps};
   const apfel::Operator c21g   {g, apfel::C21g{},       IntEps};
   const apfel::Operator c22ps  {g, apfel::C22ps{},      IntEps};
@@ -158,14 +159,14 @@ int main()
   const apfel::Operator p1ps = 2 * apfel::TR * p1ps1;              // Eq. (3.30)
   const apfel::Operator p1qg = 2 * apfel::TR * p1qg1;              // Eq. (3.23)
 
-  // Matching conditions (only non-log terms needed).
+  // Matching conditions (only non-log terms needed)
   const apfel::Operator a1Qg   {g, apfel::Null{},      IntEps};
   //const apfel::Operator a1Qgb = - zeta2 * p0qg / 4;
   const apfel::Operator aPS2Qq {g, apfel::APS2Hq_0{},  IntEps};
   const apfel::Operator aNS2qqQ{g, apfel::ANS2qqH_0{}, IntEps};
   const apfel::Operator a2Qg   {g, apfel::AS2Hg_0{},   IntEps};
 
-  // Eqs. (4.6) and (4.7) for the O(as) gluon coefficient functions (!).
+  // Eqs. (4.6) and (4.7) for the O(as) gluon coefficient functions (!)
   const apfel::Operator HL1g = cL1g;
   const apfel::Operator H21g = p0qg * lxi + a1Qg + c21g;
 
@@ -195,10 +196,10 @@ int main()
                                  + c22nsp + aNS2qqQ;
   //+ beta0Q * zeta2 * p0ns / 2; // This term is already included in 'aNS2qqQ'
 
-  // Define test distribution.
+  // Define test distribution
   const apfel::Distribution TestDist{g, xglu};
 
-  // Multiply the operators by the test distributions
+  // Multiply the operators by the test distribution
   const apfel::Distribution Dm21g   = Om21g  * TestDist;
   const apfel::Distribution DmL1g   = OmL1g  * TestDist;
   const apfel::Distribution Dm22ns  = Om22ns * TestDist;
