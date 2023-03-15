@@ -9,8 +9,8 @@
 int main()
 {
   // x-space grid
-  //const apfel::Grid g{{{1000, 1e-5, 3}, {200, 1e-1, 3}, {50, 6e-1, 3}, {50, 8e-1, 3}}};
-  const apfel::Grid g{{{100, 1e-5, 3}, {60, 1e-1, 3}, {50, 6e-1, 3}, {50, 8e-1, 3}}};
+  const apfel::Grid g{{{1000, 1e-5, 3}, {200, 1e-1, 3}, {50, 6e-1, 3}, {50, 8e-1, 3}}};
+  //const apfel::Grid g{{{100, 1e-5, 3}, {60, 1e-1, 3}, {50, 6e-1, 3}, {50, 8e-1, 3}}};
 
   // This function comes from the Jacobian
   const std::function<double(double const&)> f = [] (double const& x) -> double { return sqrt(x); };

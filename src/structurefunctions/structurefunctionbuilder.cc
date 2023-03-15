@@ -242,10 +242,9 @@ namespace apfel
     for (int nf = 1; nf <= 6; nf++)
       {
         const Operator O32nsm{g, C32nsm{nf}, IntEps};
-        const Operator O32t = O32nsm;
         std::map<int, Operator> C3NNLOnf;
         C3NNLOnf.insert({DISNCBasis::CNS, O32nsm});
-        C3NNLOnf.insert({DISNCBasis::CS,  O32t});
+        C3NNLOnf.insert({DISNCBasis::CS,  O32nsm});
         C3NNLOnf.insert({DISNCBasis::CG,  Zero});
         C3NNLO.insert({nf, C3NNLOnf});
       }
@@ -327,6 +326,21 @@ namespace apfel
     G4NLO.insert({DISNCBasis::CS,  O41ns});
     G4NLO.insert({DISNCBasis::CG,  Zero});
 
+    // NNLO
+    // According to Eq. (19) of https://arxiv.org/pdf/2210.12014.pdf
+    // the NNLO corrections to g4 coincide with the NNLO non-singlet
+    // corrections to F2.
+    std::map<int, std::map<int, Operator>> G4NNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator O42nsp{g, C22nsp{nf}, IntEps};
+        std::map<int, Operator> G4NNLOnf;
+        G4NNLOnf.insert({DISNCBasis::CNS, O42nsp});
+        G4NNLOnf.insert({DISNCBasis::CS,  O42nsp});
+        G4NNLOnf.insert({DISNCBasis::CG,  Zero});
+        G4NNLO.insert({nf, G4NNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {1, 3, 5, 7, 9, 11};
 
@@ -353,6 +367,7 @@ namespace apfel
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4NLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4NNLO.at(nf)}});
         }
       return FObj;
     };
@@ -388,6 +403,21 @@ namespace apfel
     GLNLO.insert({DISNCBasis::CS,  OL1ns});
     GLNLO.insert({DISNCBasis::CG,  Zero});
 
+    // NNLO
+    // According to Eq. (19) of https://arxiv.org/pdf/2210.12014.pdf
+    // the NNLO corrections to gL coincide with the NNLO non-singlet
+    // corrections to FL.
+    std::map<int, std::map<int, Operator>> GLNNLO;
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        const Operator OL2nsp{g, CL2nsp{nf}, IntEps};
+        std::map<int, Operator> GLNNLOnf;
+        GLNNLOnf.insert({DISNCBasis::CNS, OL2nsp});
+        GLNNLOnf.insert({DISNCBasis::CS,  OL2nsp});
+        GLNNLOnf.insert({DISNCBasis::CG,  Zero});
+        GLNNLO.insert({nf, GLNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {1, 3, 5, 7, 9, 11};
 
@@ -414,6 +444,7 @@ namespace apfel
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLNLO}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLNNLO.at(nf)}});
         }
       return FObj;
     };
@@ -453,16 +484,16 @@ namespace apfel
 
     // NNLO
     std::map<int, std::map<int, Operator>> G1NNLO;
-    const Operator O22ps{g, G12ps{}, IntEps};
-    const Operator O22g {g, G12g{},  IntEps};
+    const Operator O12ps{g, G12ps{}, IntEps};
+    const Operator O12g {g, G12g{},  IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
-        const Operator O22nsp{g, G12nsp{nf}, IntEps};
-        const Operator O22t = O22nsp + 6 * O22ps;
+        const Operator O12nsp{g, G12nsp{nf}, IntEps};
+        const Operator O12t = O12nsp + 6 * O12ps;
         std::map<int, Operator> G1NNLOnf;
-        G1NNLOnf.insert({DISNCBasis::CNS, O22nsp});
-        G1NNLOnf.insert({DISNCBasis::CS,  O22t});
-        G1NNLOnf.insert({DISNCBasis::CG,  O22g});
+        G1NNLOnf.insert({DISNCBasis::CNS, O12nsp});
+        G1NNLOnf.insert({DISNCBasis::CS,  O12t});
+        G1NNLOnf.insert({DISNCBasis::CG,  O12g});
         G1NNLO.insert({nf, G1NNLOnf});
       }
 
@@ -1788,7 +1819,114 @@ namespace apfel
 
     return FLObj;
   }
+  /*
+    //_____________________________________________________________________________
+    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCObjectsMassive(Grid                const& g,
+                                                                                                                    std::vector<double> const& Masses,
+                                                                                                                    double              const& IntEps,
+                                                                                                                    int                 const& nxi,
+                                                                                                                    double              const& ximin,
+                                                                                                                    double              const& ximax,
+                                                                                                                    int                 const& intdeg,
+                                                                                                                    double              const& lambda)
+    {
+      Timer t;
 
+      // Make sure that the vector of masses contains all the 6 masses.
+      if (Masses.size() != 6)
+        throw std::runtime_error(error("InitializeF2CCObjectsMassiveZero", "The vector of masses has to contain exactly 6 ordered masses."));
+
+      // Determine number of active flavours
+      int actnf = 0;
+      for (auto const& m : Masses)
+        if (m < eps8)
+          actnf++;
+
+      // Initalise DGLAP objects need for scale variations
+      const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+
+      report("Initializing StructureFunctionObjects for F2 CC Massive with " + std::to_string(actnf) + " active flavours... \n");
+
+      // ===============================================================
+      const Operator Id  {g, Identity{}, IntEps};
+      const Operator Zero{g, Null{},     IntEps};
+
+      // Zero Mass coefficient functions
+      // LO
+      std::map<int, Operator> C2LO;
+      C2LO.insert({DISNCBasis::CNS, Id});
+      C2LO.insert({DISNCBasis::CS,  Id});
+      C2LO.insert({DISNCBasis::CG,  Zero});
+
+      // NLO
+      std::map<int, Operator> C2NLO;
+      const Operator O21ns{g, C21ns{}, IntEps};
+      const Operator O21g {g, C21g{},  IntEps};
+      C2NLO.insert({DISNCBasis::CNS, O21ns});
+      C2NLO.insert({DISNCBasis::CS,  O21ns});
+      C2NLO.insert({DISNCBasis::CG,  O21g});
+    }
+
+    //_____________________________________________________________________________
+    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCObjectsMassive(Grid                const& g,
+                                                                                                                    std::vector<double> const& Masses,
+                                                                                                                    double              const& IntEps,
+                                                                                                                    int                 const& nxi,
+                                                                                                                    double              const& ximin,
+                                                                                                                    double              const& ximax,
+                                                                                                                    int                 const& intdeg,
+                                                                                                                    double              const& lambda)
+    {
+    }
+
+    //_____________________________________________________________________________
+    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCObjectsMassive(Grid                const& g,
+                                                                                                                    std::vector<double> const& Masses,
+                                                                                                                    double              const& IntEps,
+                                                                                                                    int                 const& nxi,
+                                                                                                                    double              const& ximin,
+                                                                                                                    double              const& ximax,
+                                                                                                                    int                 const& intdeg,
+                                                                                                                    double              const& lambda)
+    {
+    }
+
+    //_____________________________________________________________________________
+    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCObjectsMassiveZero(Grid                const& g,
+                                                                                                                        std::vector<double> const& Masses,
+                                                                                                                        double              const& IntEps,
+                                                                                                                        int                 const& nxi,
+                                                                                                                        double              const& ximin,
+                                                                                                                        double              const& ximax,
+                                                                                                                        int                 const& intdeg,
+                                                                                                                        double              const& lambda)
+    {
+    }
+
+    //_____________________________________________________________________________
+    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCObjectsMassiveZero(Grid                const& g,
+                                                                                                                        std::vector<double> const& Masses,
+                                                                                                                        double              const& IntEps,
+                                                                                                                        int                 const& nxi,
+                                                                                                                        double              const& ximin,
+                                                                                                                        double              const& ximax,
+                                                                                                                        int                 const& intdeg,
+                                                                                                                        double              const& lambda)
+    {
+    }
+
+    //_____________________________________________________________________________
+    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCObjectsMassiveZero(Grid                const& g,
+                                                                                                                        std::vector<double> const& Masses,
+                                                                                                                        double              const& IntEps,
+                                                                                                                        int                 const& nxi,
+                                                                                                                        double              const& ximin,
+                                                                                                                        double              const& ximax,
+                                                                                                                        int                 const& intdeg,
+                                                                                                                        double              const& lambda)
+    {
+    }
+  */
   //_____________________________________________________________________________
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsZMT(Grid                const& g,
                                                                                                               std::vector<double> const& Thresholds,

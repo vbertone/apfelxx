@@ -24,7 +24,7 @@ int main()
   const std::vector<double> Masses{0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
-  const int PerturbativeOrder = 1;
+  const int PerturbativeOrder = 2;
 
   // Running coupling
   apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
