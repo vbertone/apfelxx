@@ -373,7 +373,7 @@ namespace apfel
                                                                                                                   double              const& lambda = 0.0005);
   */
   /**
-   * @Brief The InitializeF2CCObjectsMassiveZero precomputes the
+   * @brief The InitializeF2CCObjectsMassiveZero precomputes the
    * perturbative coefficients of coefficient functions for
    *  CC F2 in the massless limit of the massive scheme and
    * store them in the 'StructureFunctionObjects' structure.

@@ -37,8 +37,8 @@ namespace apfel
   /// \endcond
 
   /**
-   * @defgroup NCMassive Massive neutral current coefficient functions
-   * Collection of the neutral current massive coefficient functions
+   * @defgroup NCMassive Massive neutral-current coefficient functions
+   * Collection of the neutral-current massive coefficient functions
    * for F<SUB>2</SUB> and F<SUB>L</SUB> up to O(&alpha;<SUB>s</SUB>).
    * @note In the following 'xi' indicates the ratio Q<SUP>2</SUP> /
    * M<SUP>2</SUP>.
@@ -356,5 +356,99 @@ namespace apfel
     double const _factL;
   };
   ///@}
+  ///@}
+
+  /**
+   * @defgroup CCMassive Massive charged-current coefficient functions
+   * Collection of the charged-current massive coefficient functions
+   * for F<SUB>2</SUB>, F<SUB>2</SUB>, and xF<SUB>3</SUB> to
+   * O(&alpha;<SUB>s</SUB>). Expressions taken from
+   * https://arxiv.org/pdf/hep-ph/9603304.pdf.
+   * @note In the following 'xi' indicates the ratio Q<SUP>2</SUP> /
+   * M<SUP>2</SUP>.
+   */
+  ///@{
+  /**
+   * @defgroup NLO NLO massive coefficient functions
+   * @ingroup CCMassive
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) quark coefficient function for F2.
+   */
+  class Cm21qCC: public Expression
+  {
+  public:
+    Cm21qCC(double const& lambda);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double const _lambda;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for F2.
+   */
+  class Cm21gCC: public Expression
+  {
+  public:
+    Cm21gCC(double const& lambda);
+    double Regular(double const& x) const;
+  private:
+    double const _lambda;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) quark coefficient function for FL.
+   */
+  class CmL1qCC: public Expression
+  {
+  public:
+    CmL1qCC(double const& lambda);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double const _lambda;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for FL.
+   */
+  class CmL1gCC: public Expression
+  {
+  public:
+    CmL1gCC(double const& lambda);
+    double Regular(double const& x) const;
+  private:
+    double const _lambda;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) quark coefficient function for xF3.
+   */
+  class Cm31qCC: public Expression
+  {
+  public:
+    Cm31qCC(double const& lambda);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double const _lambda;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for xF3.
+   */
+  class Cm31gCC: public Expression
+  {
+  public:
+    Cm31gCC(double const& lambda);
+    double Regular(double const& x) const;
+  private:
+    double const _lambda;
+  };
   ///@}
 }

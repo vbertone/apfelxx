@@ -33,12 +33,13 @@ var searchData=
   ['nnnllp_30',['NNNLLp',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a81f679d71cd354cff5ab9304c9ddf9cb',1,'apfel']]],
   ['nnnlo_31',['NNNLO',['../group__PertOrds.html#gga5f7af6d2b3a540791b164f3964cd4251af6f8fb391cad61948ba9f44340161a97',1,'apfel']]],
   ['nnnlo_20matching_20conditions_32',['NNNLO matching conditions',['../group__NNNLOMC.html',1,'']]],
-  ['nnnlo_20matching_20functions_20for_20pdfs_33',['NNNLO matching functions for PDFs',['../group__NNNLOmatch.html',1,'']]],
-  ['nnnlo_20splitting_20functions_34',['NNNLO splitting functions',['../group__NNNLOunpsf.html',1,'']]],
-  ['nnnlo_20zero_2dmass_20coefficient_20functions_35',['NNNLO zero-mass coefficient functions',['../group__NNNLOzm.html',1,'']]],
-  ['nq_36',['nQ',['../classapfel_1_1QGrid.html#a545c18a37669f843ea7874c5e9e8d23c',1,'apfel::QGrid']]],
-  ['nqg_37',['nQg',['../structapfel_1_1EvolutionSetup.html#aab9528d803850444afe8f68ac552338c',1,'apfel::EvolutionSetup']]],
-  ['null_38',['Null',['../classapfel_1_1Null.html',1,'apfel::Null'],['../classapfel_1_1Null.html#a0f74dde5cc4f104049878d17bd639248',1,'apfel::Null::Null()']]],
-  ['numerical_20constants_39',['Numerical constants',['../group__NumericalConstants.html',1,'']]],
-  ['nx_40',['nx',['../classapfel_1_1SubGrid.html#ac9c8d18ab6868c90679a2b66f5616c81',1,'apfel::SubGrid::nx()'],['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters::nx()']]]
+  ['nnnlo_20matching_20functions_20for_20ffs_33',['NNNLO matching functions for FFs',['../group__NNNLOff.html',1,'']]],
+  ['nnnlo_20matching_20functions_20for_20pdfs_34',['NNNLO matching functions for PDFs',['../group__NNNLOmatch.html',1,'']]],
+  ['nnnlo_20splitting_20functions_35',['NNNLO splitting functions',['../group__NNNLOunpsf.html',1,'']]],
+  ['nnnlo_20zero_2dmass_20coefficient_20functions_36',['NNNLO zero-mass coefficient functions',['../group__NNNLOzm.html',1,'']]],
+  ['nq_37',['nQ',['../classapfel_1_1QGrid.html#a545c18a37669f843ea7874c5e9e8d23c',1,'apfel::QGrid']]],
+  ['nqg_38',['nQg',['../structapfel_1_1EvolutionSetup.html#aab9528d803850444afe8f68ac552338c',1,'apfel::EvolutionSetup']]],
+  ['null_39',['Null',['../classapfel_1_1Null.html',1,'apfel::Null'],['../classapfel_1_1Null.html#a0f74dde5cc4f104049878d17bd639248',1,'apfel::Null::Null()']]],
+  ['numerical_20constants_40',['Numerical constants',['../group__NumericalConstants.html',1,'']]],
+  ['nx_41',['nx',['../classapfel_1_1SubGrid.html#ac9c8d18ab6868c90679a2b66f5616c81',1,'apfel::SubGrid::nx()'],['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters::nx()']]]
 ];

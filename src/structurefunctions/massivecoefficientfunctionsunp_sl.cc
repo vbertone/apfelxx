@@ -566,4 +566,138 @@ namespace apfel
   {
     return _factL * ( _C2.Local(x) - _C1.Local(x) );
   }
+
+  //_________________________________________________________________________________
+  Cm21qCC::Cm21qCC(double const& lambda):
+    Expression(),
+    _lambda(lambda)
+  {
+  }
+  double Cm21qCC::Regular(double const& z) const
+  {
+    return 2 * CF * ( - ( 1 + pow(z, 2) ) * log(z) / ( 1 - z )
+                      + ( 2 + log(_lambda) - 2 * log(1 - z) + log(1 - _lambda * z) ) * ( 1 + z )
+                      + 1 / _lambda );
+  }
+  double Cm21qCC::Singular(double const& z) const
+  {
+    return 2 * CF * ( 2 * ( 2 * log(1 - z) - log(1 - _lambda * z) ) / ( 1 - z )
+                      + 2 * ( - 1 - log(_lambda) ) / ( 1 - z )
+                      + ( 2 * pow(_lambda, 2) - _lambda - 1 ) / _lambda / ( 1 - _lambda * z )
+                      + ( 1 - z ) / pow(1 - _lambda * z, 2) / 2 );
+  }
+  double Cm21qCC::Local(double const& z) const
+  {
+    const double KA = ( 1 - _lambda ) * log(1 - _lambda) / _lambda;
+    const double Rx = - dilog(1 / ( 1 - _lambda )) + dilog(( 1 - z * _lambda ) / ( 1 - _lambda ))
+                      + log(_lambda * ( 1 - z ) / ( 1 - _lambda )) * log(1 - _lambda * z);
+    return 2 * CF * ( - 4 - 1. / 2. / _lambda - 2 * zeta2 - ( 1 + 3 * _lambda ) * KA / 2 / _lambda - 3 * log(_lambda) / 2
+                      + 2 * pow(log(1 - z), 2) - 2 * Rx + 2 * ( - 1 - log(_lambda) ) * log(1 - z)
+                      + ( 2 * pow(_lambda, 2) - _lambda - 1 ) * log(1 - _lambda * z) / pow(_lambda, 2)
+                      + log(1 - _lambda * z) / 2 / pow(_lambda, 2)
+                      + ( 1 - _lambda ) * z / 2 / _lambda / ( 1 - _lambda * z ) );
+  }
+
+  //_________________________________________________________________________________
+  Cm21gCC::Cm21gCC(double const& lambda):
+    Expression(),
+    _lambda(lambda)
+  {
+  }
+  double Cm21gCC::Regular(double const& z) const
+  {
+    return 4 * TR * ( ( pow(z, 2) + pow(1 - z, 2) ) * ( log(( 1 - z ) / z) - log(1 - _lambda) / 2 - log(_lambda) / 2 )
+                      + 8 * z * ( 1 - z ) - 1
+                      + ( 1 - _lambda ) * ( - 6 * ( 1 + 2 * _lambda ) * z * ( 1 - z ) + 1 / ( 1 - _lambda * z )
+                                            + 6 * _lambda * z * ( 1 - 2 * _lambda * z ) * log(( 1 - _lambda * z ) / ( 1 - _lambda ) / z) ) );
+  }
+
+  //_________________________________________________________________________________
+  CmL1qCC::CmL1qCC(double const& lambda):
+    Expression(),
+    _lambda(lambda)
+  {
+  }
+  double CmL1qCC::Regular(double const& z) const
+  {
+    return 2 * CF * ( 1 - _lambda ) * ( - ( 1 + pow(z, 2) ) * log(z) / ( 1 - z )
+                                        + ( log(_lambda) - 2 * log(1 - z) + log(1 - _lambda * z) ) * ( 1 + z )
+                                        + 3 )
+           + 2 * CF * ( 1 + _lambda ) * z;
+  }
+  double CmL1qCC::Singular(double const& z) const
+  {
+    return 2 * CF * ( 1 - _lambda ) * ( 2 * ( 2 * log(1 - z) - log(1 - _lambda * z) ) / ( 1 - z )
+                                        + 2 * ( - 1 - log(_lambda) ) / ( 1 - z )
+                                        - 2 / ( 1 - _lambda * z )
+                                        + ( 1 - z ) / pow(1 - _lambda * z, 2) / 2 );
+  }
+  double CmL1qCC::Local(double const& z) const
+  {
+    const double KA = ( 1 - _lambda ) * log(1 - _lambda) / _lambda;
+    const double Rx = - dilog(1 / ( 1 - _lambda )) + dilog(( 1 - z * _lambda ) / ( 1 - _lambda ))
+                      + log(_lambda * ( 1 - z ) / ( 1 - _lambda )) * log(1 - _lambda * z);
+    return 2 * CF * _lambda * KA
+           + 2 * CF * ( 1 - _lambda ) * ( 2 * pow(log(1 - z), 2) - 2 * Rx + 2 * ( - 1 - log(_lambda) ) * log(1 - z)
+                                          - 2 * log(1 - _lambda * z) / _lambda
+                                          + log(1 - _lambda * z) / 2 / pow(_lambda, 2)
+                                          + ( 1 - _lambda ) * z / 2 / _lambda / ( 1 - _lambda * z ) );
+  }
+
+  //_________________________________________________________________________________
+  CmL1gCC::CmL1gCC(double const& lambda):
+    Expression(),
+    _lambda(lambda)
+  {
+  }
+  double CmL1gCC::Regular(double const& z) const
+  {
+    return 4 * TR * ( ( 1 - _lambda ) * ( pow(z, 2) + pow(1 - z, 2) ) * ( log(( 1 - z ) / z) - log(1 - _lambda) / 2 - log(_lambda) / 2 )
+                      + 4 * ( 2 - _lambda ) * z * ( 1 - z )
+                      + ( 1 - _lambda ) * ( - 2 * ( 3 + 4 * _lambda ) * z * ( 1 - z )
+                                            + 4 * _lambda * z * ( 1 - 2 * _lambda * z ) * log(( 1 - _lambda * z ) / ( 1 - _lambda ) / z) ) );
+  }
+
+  //_________________________________________________________________________________
+  Cm31qCC::Cm31qCC(double const& lambda):
+    Expression(),
+    _lambda(lambda)
+  {
+  }
+  double Cm31qCC::Regular(double const& z) const
+  {
+    return 2 * CF * ( - ( 1 + pow(z, 2) ) * log(z) / ( 1 - z )
+                      + ( 1 + log(_lambda) - 2 * log(1 - z) + log(1 - _lambda * z) ) * ( 1 + z )
+                      + 1 / _lambda );
+  }
+  double Cm31qCC::Singular(double const& z) const
+  {
+    return 2 * CF * ( 2 * ( 2 * log(1 - z) - log(1 - _lambda * z) ) / ( 1 - z )
+                      + 2 * ( - 1 - log(_lambda) ) / ( 1 - z )
+                      + ( _lambda - 1 ) / _lambda / ( 1 - _lambda * z )
+                      + ( 1 - z ) / pow(1 - _lambda * z, 2) / 2 );
+  }
+  double Cm31qCC::Local(double const& z) const
+  {
+    const double KA = ( 1 - _lambda ) * log(1 - _lambda) / _lambda;
+    const double Rx = - dilog(1 / ( 1 - _lambda )) + dilog(( 1 - z * _lambda ) / ( 1 - _lambda ))
+                      + log(_lambda * ( 1 - z ) / ( 1 - _lambda )) * log(1 - _lambda * z);
+    return 2 * CF * ( - 4 - 1. / 2. / _lambda - 2 * zeta2 - ( 1 + 3 * _lambda ) * KA / 2 / _lambda - 3 * log(_lambda) / 2
+                      + 2 * pow(log(1 - z), 2) - 2 * Rx + 2 * ( - 1 - log(_lambda) ) * log(1 - z)
+                      + ( _lambda - 1 ) * log(1 - _lambda * z) / pow(_lambda, 2)
+                      + log(1 - _lambda * z) / 2 / pow(_lambda, 2)
+                      + ( 1 - _lambda ) * z / 2 / _lambda / ( 1 - _lambda * z ) );
+  }
+
+  //_________________________________________________________________________________
+  Cm31gCC::Cm31gCC(double const& lambda):
+    Expression(),
+    _lambda(lambda)
+  {
+  }
+  double Cm31gCC::Regular(double const& z) const
+  {
+    return 4 * TR * ( ( pow(z, 2) + pow(1 - z, 2) ) * ( log(( 1 - z ) / ( 1 - _lambda * z )) + log(1 - _lambda) / 2 - log(_lambda) / 2 )
+                      + ( 1 - _lambda ) * ( 2 * z * ( 1 - z ) - 2 * z * ( 1 - ( 1 + _lambda ) * z ) * log(( 1 - _lambda * z ) / ( 1 - _lambda ) / z) ) );
+  }
 }

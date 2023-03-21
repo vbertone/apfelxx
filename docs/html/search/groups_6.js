@@ -18,8 +18,9 @@ var searchData=
   ['nnlo_20splitting_20functions_15',['NNLO splitting functions',['../group__NNLOpolsf.html',1,'(Global Namespace)'],['../group__NNLOunpsf.html',1,'(Global Namespace)'],['../group__NNLOunpsftl.html',1,'(Global Namespace)']]],
   ['nnlo_20zero_2dmass_20coefficient_20functions_16',['NNLO zero-mass coefficient functions',['../group__NNLOzm.html',1,'(Global Namespace)'],['../group__NNLOzmpol.html',1,'(Global Namespace)'],['../group__NNLOzmSIA.html',1,'(Global Namespace)']]],
   ['nnnlo_20matching_20conditions_17',['NNNLO matching conditions',['../group__NNNLOMC.html',1,'']]],
-  ['nnnlo_20matching_20functions_20for_20pdfs_18',['NNNLO matching functions for PDFs',['../group__NNNLOmatch.html',1,'']]],
-  ['nnnlo_20splitting_20functions_19',['NNNLO splitting functions',['../group__NNNLOunpsf.html',1,'']]],
-  ['nnnlo_20zero_2dmass_20coefficient_20functions_20',['NNNLO zero-mass coefficient functions',['../group__NNNLOzm.html',1,'']]],
-  ['numerical_20constants_21',['Numerical constants',['../group__NumericalConstants.html',1,'']]]
+  ['nnnlo_20matching_20functions_20for_20ffs_18',['NNNLO matching functions for FFs',['../group__NNNLOff.html',1,'']]],
+  ['nnnlo_20matching_20functions_20for_20pdfs_19',['NNNLO matching functions for PDFs',['../group__NNNLOmatch.html',1,'']]],
+  ['nnnlo_20splitting_20functions_20',['NNNLO splitting functions',['../group__NNNLOunpsf.html',1,'']]],
+  ['nnnlo_20zero_2dmass_20coefficient_20functions_21',['NNNLO zero-mass coefficient functions',['../group__NNNLOzm.html',1,'']]],
+  ['numerical_20constants_22',['Numerical constants',['../group__NumericalConstants.html',1,'']]]
 ];
