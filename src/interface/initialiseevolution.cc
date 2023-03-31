@@ -77,6 +77,8 @@ namespace apfel
       {
         if (_setup.EvolPolarisation == EvolutionSetup::UNP)
           _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+        else if (_setup.EvolPolarisation == EvolutionSetup::POL)
+          _DglapObj = InitializeDglapObjectsQCDpol(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
         else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
           _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
       }
