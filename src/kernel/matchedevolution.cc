@@ -118,5 +118,7 @@ namespace apfel
   template class MatchedEvolution<Set<Operator>>;                             //<! Set of Operators
   template class MatchedEvolution<DoubleObject<Operator>>;                    //<! Double object of operators
   template class MatchedEvolution<DoubleObject<Distribution, Operator>>;      //<! Double object of distributions and operators
+  template class MatchedEvolution<DoubleObject<Operator, Distribution>>;      //<! Double object of distributions and operators
   template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>>>; //<! Set of double object of distributions and operators
+  template class MatchedEvolution<Set<DoubleObject<Operator, Distribution>>>; //<! Set of double object of distributions and operators
 }

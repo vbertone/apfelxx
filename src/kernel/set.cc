@@ -251,9 +251,11 @@ namespace apfel
   template class Set<Distribution>;
   template class Set<Operator>;
   template class Set<DoubleObject<Distribution, Operator>>;
+  template class Set<DoubleObject<Operator, Distribution>>;
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
   template std::ostream& operator << (std::ostream& os, Set<Distribution> const& s);
   template std::ostream& operator << (std::ostream& os, Set<Operator> const& s);
   template std::ostream& operator << (std::ostream& os, Set<DoubleObject<Distribution, Operator>> const& s);
+  template std::ostream& operator << (std::ostream& os, Set<DoubleObject<Operator, Distribution>> const& s);
 }
