@@ -155,93 +155,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a8a2724cd7e9a32fa84a483e50ec8b9e7"><td class="memItemLeft" align="right" valign="top">std::function&lt; StructureFunctionObjects(double const &amp;, std::vector&lt; double &gt; const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a8a2724cd7e9a32fa84a483e50ec8b9e7">apfel::InitializeFLNCObjectsMassiveZero</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Masses, double const &amp;IntEps=1e-5, int const &amp;nxi=150, double const &amp;ximin=0.01, double const &amp;ximax=10000, int const &amp;intdeg=3, double const &amp;lambda=0.0005)</td></tr>
 <tr class="memdesc:a8a2724cd7e9a32fa84a483e50ec8b9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeFLNCObjectsMassiveZero precomputes the perturbative coefficients of coefficient functions for NC FL in the massless limit of the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.  <br /></td></tr>
 <tr class="separator:a8a2724cd7e9a32fa84a483e50ec8b9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a677fe279146c23932cf234e0c59fd10b"><td class="memItemLeft" align="right" valign="top">std::function&lt; StructureFunctionObjects(double const &amp;, std::vector&lt; double &gt; const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a677fe279146c23932cf234e0c59fd10b">apfel::InitializeF2CCPlusObjectsMassive</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Masses, double const &amp;IntEps=1e-5, int const &amp;nxi=150, double const &amp;ximin=0.01, double const &amp;ximax=10000, int const &amp;intdeg=3, double const &amp;lambda=0.0005)</td></tr>
+<tr class="memdesc:a677fe279146c23932cf234e0c59fd10b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeF2CCPlusObjectsMassive precomputes the perturbative coefficients of coefficient functions for combination ( F2(nu) + F2(nubar) ) / 2 in the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.  <br /></td></tr>
+<tr class="separator:a677fe279146c23932cf234e0c59fd10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">SIA structure function object initializers</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>The InitializeF2CCObjectsMassive precomputes the perturbative coefficients of coefficient functions for CC F2 in the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function</dd></dl>
-<p>The InitializeFLCCObjectsMassive precomputes the perturbative coefficients of coefficient functions for CC FL in the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function</dd></dl>
-<p>The InitializeF3CCObjectsMassive precomputes the perturbative coefficients of coefficient functions for CC F3 in the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function</dd></dl>
-<p>The InitializeF2CCObjectsMassiveZero precomputes the perturbative coefficients of coefficient functions for CC F2 in the massless limit of the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function</dd></dl>
-<p>The InitializeFLCCObjectsMassiveZero precomputes the perturbative coefficients of coefficient functions for CC FL in the massless limit of the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function</dd></dl>
-<p>The InitializeF3CCObjectsMassiveZero precomputes the perturbative coefficients of coefficient functions for CC F3 in the massless limit of the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function</dd></dl>
-<p>Collection of functions that initialise <a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a> structure for the different kinds of structure functions available. </p><dl class="section note"><dt>Note</dt><dd>For now only Zero-Mass structure functions up to O(&alpha;<sub>s</sub>) are implemented. </dd></dl>
+<tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a> structure for the different kinds of structure functions available. </p><dl class="section note"><dt>Note</dt><dd>For now only Zero-Mass structure functions up to O(&alpha;<sub>s</sub>) are implemented. </dd></dl>
 </div></td></tr>
 <tr class="memitem:a3eeae67d5ccc6aa58064df80294661d8"><td class="memItemLeft" align="right" valign="top">std::function&lt; StructureFunctionObjects(double const &amp;, std::vector&lt; double &gt; const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a3eeae67d5ccc6aa58064df80294661d8">apfel::InitializeF2NCObjectsZMT</a> (Grid const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;IntEps=1e-5)</td></tr>
 <tr class="memdesc:a3eeae67d5ccc6aa58064df80294661d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeF2NCObjectsZMT precomputes the perturbative coefficients of coefficient functions for NC F2 for SIA in the ZM scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.  <br /></td></tr>
@@ -271,7 +189,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 21 2023 14:56:19 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sat Apr 8 2023 15:26:01 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

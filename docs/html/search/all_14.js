@@ -24,7 +24,7 @@ var searchData=
   ['time_2dlike_20splitting_20functions_21',['Time-like splitting functions',['../group__TLSplittings.html',1,'']]],
   ['timer_22',['Timer',['../classapfel_1_1Timer.html',1,'apfel::Timer'],['../classapfel_1_1Timer.html#a4f3105d4294bfd96952d01e79c5bf63f',1,'apfel::Timer::Timer()']]],
   ['timer_2eh_23',['timer.h',['../timer_8h.html',1,'']]],
-  ['tmd_20matching_20functions_20the_24',['TMD matching functions The',['../group__TMDMatchingFunctions.html',1,'']]],
+  ['tmd_20matching_20functions_24',['TMD matching functions',['../group__TMDMatchingFunctions.html',1,'']]],
   ['tmdbuilder_2eh_25',['tmdbuilder.h',['../tmdbuilder_8h.html',1,'']]],
   ['tmdobjects_26',['TmdObjects',['../structapfel_1_1TmdObjects.html',1,'apfel']]],
   ['tools_2eh_27',['tools.h',['../tools_8h.html',1,'']]],

@@ -11,8 +11,8 @@
 namespace apfel
 {
   /**
-   * @defgroup TMDMatchingFunctions TMD matching functions The
-   * perturbative matching functions for PDFs and FFs (references:
+   * @defgroup TMDMatchingFunctions TMD matching functions
+   * The perturbative matching functions for PDFs and FFs (references:
    * https://arxiv.org/pdf/2012.03256.pdf,
    * https://arxiv.org/pdf/1604.07869.pdf, and
    * https://arxiv.org/pdf/1706.01473.pdf). Notice that the
