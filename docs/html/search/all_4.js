@@ -3,7 +3,7 @@ var searchData=
   ['dabs_0',['dabs',['../namespaceapfel.html#a36d6703cec0e54d3abeed1f96adb0c27',1,'apfel']]],
   ['data_1',['data',['../classapfel_1_1matrix.html#a14e4b4e8a2245f3900664837469da6a8',1,'apfel::matrix']]],
   ['deltafun_2',['DeltaFun',['../namespaceapfel.html#a60e7f076062aec09d1944e468f292571',1,'apfel']]],
-  ['derinterpolant_3',['DerInterpolant',['../classapfel_1_1QGrid.html#ad99c1934a66fb7481f8a79eac77e53d3',1,'apfel::QGrid::DerInterpolant()'],['../classapfel_1_1LagrangeInterpolator.html#ad829c2abc855b9dc2b72f7ceaf5cf564',1,'apfel::LagrangeInterpolator::DerInterpolant()'],['../classapfel_1_1Interpolator.html#af14311bdfd1757d16844ae4e39d54240',1,'apfel::Interpolator::DerInterpolant()']]],
+  ['derinterpolant_3',['DerInterpolant',['../classapfel_1_1QGrid.html#ad99c1934a66fb7481f8a79eac77e53d3',1,'apfel::QGrid::DerInterpolant()'],['../classapfel_1_1Interpolator.html#af14311bdfd1757d16844ae4e39d54240',1,'apfel::Interpolator::DerInterpolant()'],['../classapfel_1_1LagrangeInterpolator.html#ad829c2abc855b9dc2b72f7ceaf5cf564',1,'apfel::LagrangeInterpolator::DerInterpolant()']]],
   ['derivative_4',['Derivative',['../classapfel_1_1MatchedEvolution.html#ae71ea51bdbbad54dad165eec66d4c49a',1,'apfel::MatchedEvolution::Derivative()'],['../classapfel_1_1Distribution.html#a6157460d3b27acf31c28d289a9e0d55b',1,'apfel::Distribution::Derivative()'],['../classapfel_1_1Dglap.html#aa78530637d75d26b94e4b6a82b887f1f',1,'apfel::Dglap::Derivative()'],['../classapfel_1_1AlphaQED.html#a39e338c0f98a592016d166e04784ffe8',1,'apfel::AlphaQED::Derivative()'],['../classapfel_1_1AlphaQCDxi.html#a38d061c178ca5195c7d288ae3e9fcb1e',1,'apfel::AlphaQCDxi::Derivative()'],['../classapfel_1_1AlphaQCDg.html#a5793ddacddf78900f23fd63cc637e55e',1,'apfel::AlphaQCDg::Derivative()'],['../classapfel_1_1AlphaQCD.html#a5a56117bc1bab61551e3c827aeb97ae6',1,'apfel::AlphaQCD::Derivative()']]],
   ['derive_5',['Derive',['../classapfel_1_1QGrid.html#abf5b77dfd5305988e216b798312228a3',1,'apfel::QGrid::Derive()'],['../classapfel_1_1Interpolator.html#a4089ff67183effbcecf877e898dde0bd',1,'apfel::Interpolator::Derive()'],['../classapfel_1_1DoubleObject.html#a351a88c557fe07ea52c55f10a8144938',1,'apfel::DoubleObject::Derive(double const &amp;x, double const &amp;z) const']]],
   ['derive1_6',['Derive1',['../classapfel_1_1DoubleObject.html#ae151e6eb6e52197beadc9c9f07ef671c',1,'apfel::DoubleObject']]],
@@ -31,8 +31,7 @@ var searchData=
   ['doubleexponentialquadrature_2eh_28',['doubleexponentialquadrature.h',['../doubleexponentialquadrature_8h.html',1,'']]],
   ['doubleobject_29',['DoubleObject',['../classapfel_1_1DoubleObject.html',1,'apfel::DoubleObject&lt; T, U &gt;'],['../classapfel_1_1DoubleObject.html#a4c9d9da30a05a5b7f088718a23605529',1,'apfel::DoubleObject::DoubleObject()'],['../classapfel_1_1DoubleObject.html#a6dd4db1b333cce68441960a127869f0d',1,'apfel::DoubleObject::DoubleObject(std::vector&lt; term&lt; T, U &gt; &gt; const &amp;terms)']]],
   ['doubleobject_2eh_30',['doubleobject.h',['../doubleobject_8h.html',1,'']]],
-  ['doubleobject_3c_20apfel_3a_3aoperator_20_3e_31',['DoubleObject&lt; apfel::Operator &gt;',['../classapfel_1_1DoubleObject.html',1,'apfel']]],
-  ['down_32',['DOWN',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba4fc87957ec48d06ed3f39ac19360cdea',1,'apfel']]],
-  ['dwm_33',['DWM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa093e11295c2d7e75845f803dfe6346c8',1,'apfel::EvolBasisPlusMinus']]],
-  ['dwp_34',['DWP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafaa17864ef6bc5bbea03d78ee128e061d9',1,'apfel::EvolBasisPlusMinus']]]
+  ['down_31',['DOWN',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba4fc87957ec48d06ed3f39ac19360cdea',1,'apfel']]],
+  ['dwm_32',['DWM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa093e11295c2d7e75845f803dfe6346c8',1,'apfel::EvolBasisPlusMinus']]],
+  ['dwp_33',['DWP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafaa17864ef6bc5bbea03d78ee128e061d9',1,'apfel::EvolBasisPlusMinus']]]
 ];

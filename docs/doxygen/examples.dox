@@ -22,4 +22,5 @@
  \example structurefunction_massive_test.cc
  \example structurefunction_nc_test.cc
  \example subgrid_test.cc
+ \example tmd_test.cc
  */

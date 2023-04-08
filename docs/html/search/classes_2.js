@@ -7,6 +7,5 @@ var searchData=
   ['disncbasis_4',['DISNCBasis',['../classapfel_1_1DISNCBasis.html',1,'apfel']]],
   ['distribution_5',['Distribution',['../classapfel_1_1Distribution.html',1,'apfel']]],
   ['doubleexponentialquadrature_6',['DoubleExponentialQuadrature',['../classapfel_1_1DoubleExponentialQuadrature.html',1,'apfel']]],
-  ['doubleobject_7',['DoubleObject',['../classapfel_1_1DoubleObject.html',1,'apfel']]],
-  ['doubleobject_3c_20apfel_3a_3aoperator_20_3e_8',['DoubleObject&lt; apfel::Operator &gt;',['../classapfel_1_1DoubleObject.html',1,'apfel']]]
+  ['doubleobject_7',['DoubleObject',['../classapfel_1_1DoubleObject.html',1,'apfel']]]
 ];
