@@ -1525,9 +1525,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a8a2724cd7e9a32fa84a483e50ec8b9e7"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="structapfel_1_1StructureFunctionObjects.html">StructureFunctionObjects</a>(double const &amp;, std::vector&lt; double &gt; const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a8a2724cd7e9a32fa84a483e50ec8b9e7">InitializeFLNCObjectsMassiveZero</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Masses, double const &amp;IntEps=1e-5, int const &amp;nxi=150, double const &amp;ximin=0.01, double const &amp;ximax=10000, int const &amp;intdeg=3, double const &amp;lambda=0.0005)</td></tr>
 <tr class="memdesc:a8a2724cd7e9a32fa84a483e50ec8b9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeFLNCObjectsMassiveZero precomputes the perturbative coefficients of coefficient functions for NC FL in the massless limit of the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.  <br /></td></tr>
 <tr class="separator:a8a2724cd7e9a32fa84a483e50ec8b9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a677fe279146c23932cf234e0c59fd10b"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="structapfel_1_1StructureFunctionObjects.html">StructureFunctionObjects</a>(double const &amp;, std::vector&lt; double &gt; const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a677fe279146c23932cf234e0c59fd10b">InitializeF2CCPlusObjectsMassive</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Masses, double const &amp;IntEps=1e-5, int const &amp;nxi=150, double const &amp;ximin=0.01, double const &amp;ximax=10000, int const &amp;intdeg=3, double const &amp;lambda=0.0005)</td></tr>
-<tr class="memdesc:a677fe279146c23932cf234e0c59fd10b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeF2CCPlusObjectsMassive precomputes the perturbative coefficients of coefficient functions for combination ( F2(nu) + F2(nubar) ) / 2 in the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure.  <br /></td></tr>
-<tr class="separator:a677fe279146c23932cf234e0c59fd10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">SIA structure function object initializers</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a> structure for the different kinds of structure functions available. </p><dl class="section note"><dt>Note</dt><dd>For now only Zero-Mass structure functions up to O(&alpha;<sub>s</sub>) are implemented. </dd></dl>
 </div></td></tr>
@@ -1728,39 +1725,41 @@ Variables</h2></td></tr>
 <tr class="memitem:ga4c9125d484bd209de4f3f34df1a16f57"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#ga4c9125d484bd209de4f3f34df1a16f57">fl11sg</a> = {1, 0.1, 0, 0.1, 0.018181818, 0.1}</td></tr>
 <tr class="separator:ga4c9125d484bd209de4f3f34df1a16f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Conversion factor</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Conversion factor from GeV<sup>-2</sup> to pb. </p>
+<tr><td colspan="2"><div class="groupText"><p>Conversion factor from * GeV<sup>-2</sup> to pb taken from: <a href="https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf">https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf</a>. </p>
 </div></td></tr>
-<tr class="memitem:gae98d82c9534cde7c04ae48896e66360e"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gae98d82c9534cde7c04ae48896e66360e">ConvFact</a> = 0.3893793656e9</td></tr>
+<tr class="memitem:gae98d82c9534cde7c04ae48896e66360e"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gae98d82c9534cde7c04ae48896e66360e">ConvFact</a> = 0.3893793721e9</td></tr>
 <tr class="separator:gae98d82c9534cde7c04ae48896e66360e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Z-boson mass and width</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Value of the mass of the Z boson and its width in GeV taken from: <a href="http://pdg.lbl.gov/2018/listings/rpp2018-list-z-boson.pdf">http://pdg.lbl.gov/2018/listings/rpp2018-list-z-boson.pdf</a>. </p>
+<tr><td colspan="2"><div class="groupText"><p>Value of the mass of the Z boson and its width in GeV taken from: <a href="https://pdg.lbl.gov/2023/listings/rpp2023-list-z-boson.pdf">https://pdg.lbl.gov/2023/listings/rpp2023-list-z-boson.pdf</a>. </p>
 </div></td></tr>
 <tr class="memitem:ga82230f0bff74905ae3596d00a10ee956"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#ga82230f0bff74905ae3596d00a10ee956">ZMass</a> = 91.1876</td></tr>
 <tr class="separator:ga82230f0bff74905ae3596d00a10ee956"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabd11d74b7dcb591975dc2695b9f887ec"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gabd11d74b7dcb591975dc2695b9f887ec">GammaZ</a> = 2.4952</td></tr>
+<tr class="memitem:gabd11d74b7dcb591975dc2695b9f887ec"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gabd11d74b7dcb591975dc2695b9f887ec">GammaZ</a> = 2.4955</td></tr>
 <tr class="separator:gabd11d74b7dcb591975dc2695b9f887ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">W-boson mass and width</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Value of the mass of the W bosons and their width in GeV taken from: <a href="http://pdg.lbl.gov/2018/listings/rpp2018-list-w-boson.pdf">http://pdg.lbl.gov/2018/listings/rpp2018-list-w-boson.pdf</a>. </p>
+<tr><td colspan="2"><div class="groupText"><p>Value of the mass of the W bosons and their width in GeV taken from: <a href="https://pdg.lbl.gov/2023/listings/rpp2023-list-w-boson.pdf">https://pdg.lbl.gov/2023/listings/rpp2023-list-w-boson.pdf</a>. </p>
 </div></td></tr>
 <tr class="memitem:gac15192f07834361156df76cd57ad7b20"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gac15192f07834361156df76cd57ad7b20">WMass</a> = 80.398</td></tr>
 <tr class="separator:gac15192f07834361156df76cd57ad7b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga88a6077298cefab58b2272f65c05c75b"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#ga88a6077298cefab58b2272f65c05c75b">GammaW</a> = 2.085</td></tr>
 <tr class="separator:ga88a6077298cefab58b2272f65c05c75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Proton mass</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Value of the mass of the proton in GeV taken from: <a href="http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf">http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf</a>. </p>
+<tr><td colspan="2"><div class="groupText"><p>Value of the mass of the proton in GeV taken from: <a href="https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf">https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf</a>. </p>
 </div></td></tr>
-<tr class="memitem:ga77dbc0a129205ed2d8bbd57d8b317e55"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#ga77dbc0a129205ed2d8bbd57d8b317e55">ProtonMass</a> = 0.9382720813</td></tr>
+<tr class="memitem:ga77dbc0a129205ed2d8bbd57d8b317e55"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#ga77dbc0a129205ed2d8bbd57d8b317e55">ProtonMass</a> = 0.93827208816</td></tr>
 <tr class="separator:ga77dbc0a129205ed2d8bbd57d8b317e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Weinberg angle</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Value of sin<sup>2</sup>&theta;<sub>W</sub> in the MSbar scheme taken from: <a href="http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf">http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf</a>. </p>
+<tr><td colspan="2"><div class="groupText"><p>Value of sin<sup>2</sup>&theta;<sub>W</sub> in the MSbar scheme taken from: <a href="https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf">https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf</a>. </p>
 </div></td></tr>
 <tr class="memitem:ga9af859b43ff57c36612f5da5d4591bdc"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#ga9af859b43ff57c36612f5da5d4591bdc">Sin2ThetaW</a> = 1 - pow(<a class="el" href="group__PhysConstants.html#gac15192f07834361156df76cd57ad7b20">WMass</a> / <a class="el" href="group__PhysConstants.html#ga82230f0bff74905ae3596d00a10ee956">ZMass</a>, 2)</td></tr>
 <tr class="separator:ga9af859b43ff57c36612f5da5d4591bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Fermi constant</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Value of G<sub>F</sub> in GeV<sup>-2</sup> taken from: <a href="http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf">http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf</a>. </p>
+<tr><td colspan="2"><div class="groupText"><p>Value of G<sub>F</sub> in GeV<sup>-2</sup> taken from: <a href="https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf">https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf</a>. </p>
 </div></td></tr>
-<tr class="memitem:gaede2939625ff743f9dc736fe9eaf0779"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779">GFermi</a> = 1.1663787e-5</td></tr>
+<tr class="memitem:gaede2939625ff743f9dc736fe9eaf0779"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779">GFermi</a> = 1.1663788e-5</td></tr>
 <tr class="separator:gaede2939625ff743f9dc736fe9eaf0779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gace06aa81390640a1ea9065f6b1f43a36"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__PhysConstants.html#gace06aa81390640a1ea9065f6b1f43a36">alphaem</a> = 7.2973525693e-3</td></tr>
+<tr class="separator:gace06aa81390640a1ea9065f6b1f43a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">CKM matrix elements</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Absolute value of the CMK matrix elements and their square taken from: <a href="http://pdg.lbl.gov/2018/reviews/rpp2018-rev-ckm-matrix.pdf">http://pdg.lbl.gov/2018/reviews/rpp2018-rev-ckm-matrix.pdf</a>. </p>
 </div></td></tr>
@@ -5219,86 +5218,6 @@ template&lt;typename T &gt; </div>
     <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
     <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
     <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A StructureFunctionObjects-valued function </dd></dl>
-
-</div>
-</div>
-<a id="a677fe279146c23932cf234e0c59fd10b" name="a677fe279146c23932cf234e0c59fd10b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a677fe279146c23932cf234e0c59fd10b">&#9670;&#160;</a></span>InitializeF2CCPlusObjectsMassive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::function&lt; <a class="el" href="structapfel_1_1StructureFunctionObjects.html">StructureFunctionObjects</a>(double const  &amp;, std::vector&lt; double &gt; const  &amp;)&gt; apfel::InitializeF2CCPlusObjectsMassive </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td>
-          <td class="paramname"><em>g</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>Masses</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>IntEps</em> = <code>1e-5</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int const &amp;&#160;</td>
-          <td class="paramname"><em>nxi</em> = <code>150</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>ximin</em> = <code>0.01</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>ximax</em> = <code>10000</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int const &amp;&#160;</td>
-          <td class="paramname"><em>intdeg</em> = <code>3</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const &amp;&#160;</td>
-          <td class="paramname"><em>lambda</em> = <code>0.0005</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The InitializeF2CCPlusObjectsMassive precomputes the perturbative coefficients of coefficient functions for combination ( F2(nu) + F2(nubar) ) / 2 in the massive scheme and store them in the '<a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a>' structure. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
-    <tr><td class="paramname">Masses</td><td>the heavy quark masses </td></tr>
-    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>}) </td></tr>
-    <tr><td class="paramname">nxi</td><td>the number of nodes of the grid in &xi; = Q<sup>2</sup>/M<sup>2</sup> (default: 150) </td></tr>
-    <tr><td class="paramname">ximin</td><td>the lower bound of the grid in &xi; (default: 0.001) </td></tr>
-    <tr><td class="paramname">ximax</td><td>the upper bound of the grid in &xi; (default: 100000) </td></tr>
-    <tr><td class="paramname">intdeg</td><td>the interpolation degree on the grid in &xi; (default: 3) </td></tr>
-    <tr><td class="paramname">lambda</td><td>the value of the parameter in the function ln(ln(&xi;/&Lambda;<sup>2</sup>)) used for the tabulation (default: 0.0005) </td></tr>
   </table>
   </dd>
 </dl>
@@ -9596,7 +9515,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 8 2023 15:26:01 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sat Apr 8 2023 22:00:58 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>
