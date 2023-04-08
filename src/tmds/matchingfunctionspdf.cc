@@ -797,4 +797,52 @@ namespace apfel
   {
     return - CF * zeta2;
   }
+
+  //_________________________________________________________________________________
+  C1nspdfg1::C1nspdfg1():
+    Expression()
+  {
+  }
+  double C1nspdfg1::Regular(double const& x) const
+  {
+    return 2 * CF * ( 1 - x );
+  }
+  double C1nspdfg1::Local(double const&) const
+  {
+    return - CF * zeta2;
+  }
+
+  //_________________________________________________________________________________
+  C1qgpdfg1::C1qgpdfg1():
+    Expression()
+  {
+  }
+  double C1qgpdfg1::Regular(double const& x) const
+  {
+    return 8 * TR * ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  C1gqpdfg1::C1gqpdfg1():
+    Expression()
+  {
+  }
+  double C1gqpdfg1::Regular(double const& x) const
+  {
+    return - 4 * CF * ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  C1ggpdfg1::C1ggpdfg1():
+    Expression()
+  {
+  }
+  double C1ggpdfg1::Regular(double const& x) const
+  {
+    return - 8 * CA * ( 1 - x );
+  }
+  double C1ggpdfg1::Local(double const&) const
+  {
+    return - CA * zeta2;
+  }
 }

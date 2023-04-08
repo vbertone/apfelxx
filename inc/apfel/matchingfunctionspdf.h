@@ -383,4 +383,57 @@ namespace apfel
     double Local(double const&)     const;
   };
   ///@}
+
+  /**
+   * @defgroup NLOg1 NLO matching functions for helicity PDFs g1
+   * NLO matching functions for the helicity PDFs g1
+   * @ingroup SLMatchFunc
+   */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet matching function
+   * for g1 PDFs (reference: https://arxiv.org/pdf/1702.06558.pdf).
+   */
+  class C1nspdfg1: public Expression
+  {
+  public:
+    C1nspdfg1();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) quark-gluon matching function
+   * for g1 PDFs (reference: https://arxiv.org/pdf/1702.06558.pdf).
+   */
+  class C1qgpdfg1: public Expression
+  {
+  public:
+    C1qgpdfg1();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark matching function
+   * for g1 PDFs (reference: https://arxiv.org/pdf/1702.06558.pdf).
+   */
+  class C1gqpdfg1: public Expression
+  {
+  public:
+    C1gqpdfg1();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon matching function
+   * for g1 PDFs (reference: https://arxiv.org/pdf/1702.06558.pdf).
+   */
+  class C1ggpdfg1: public Expression
+  {
+  public:
+    C1ggpdfg1();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+  ///@}
 }

@@ -886,6 +886,181 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, TmdObjects> InitializeTmdObjectsg1(Grid                const& g,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& IntEps)
+  {
+    // Initialise space-like longitudinally polarised splitting
+    // functions on the grid required to compute the log terms of the
+    // matching functions.
+    const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCDpol(g, Thresholds, false, IntEps);
+
+    report("Initializing TMD objects for matching and evolution of g1... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // ===============================================================
+    // LO matching functions operators
+    std::map<int, std::map<int, Operator>> C00;
+    const Operator Id  {g, Identity{}, IntEps};
+    const Operator Zero{g, Null{},     IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Id});
+        OM.insert({EvolutionBasisQCD::PNSM, Id});
+        OM.insert({EvolutionBasisQCD::PNSV, Id});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Id});
+        C00.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO matching functions operators
+    // PDFs
+    std::map<int, std::map<int, Operator>> C10pdf;
+    const Operator O1nspdf{g, C1nspdfg1{}, IntEps};
+    const Operator O1qgpdf{g, C1qgpdfg1{}, IntEps};
+    const Operator O1gqpdf{g, C1gqpdfg1{}, IntEps};
+    const Operator O1ggpdf{g, C1ggpdfg1{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PNSM, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PNSV, O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nspdf});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O1qgpdf});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gqpdf});
+        OM.insert({EvolutionBasisQCD::PGG,                O1ggpdf});
+        C10pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to one power of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C11pdf;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O11gmVq = gammaFq0() * Id;
+        const Operator O11gmVg = gammaFg0(nf) * Id;
+        const auto P0 = DglapObjpdf.at(nf).SplittingFunctions.at(0);
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - 2 * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - 2 * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - 2 * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O11gmVq - 2 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,                - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O11gmVg - 2 * P0.at(6)});
+        C11pdf.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C12;
+    const Operator O12gmKq = - CF * gammaK0() / 2 * Id;
+    const Operator O12gmKg = - CA * gammaK0() / 2 * Id;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSM, O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSV, O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O12gmKg});
+        C12.insert({nf, OM});
+      }
+
+    // Construct zero set of operators for the unknown bits
+    std::map<int, Operator> ZeroOp;
+    for (int iOp = 0; iOp < 7; iOp++)
+      ZeroOp.insert({iOp, Zero});
+
+    // Define map containing the TmdObjects for each nf
+    std::map<int, TmdObjects> TmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        TmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+        obj.Beta.insert({2, beta2qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+        obj.GammaFq.insert({2, gammaFq2(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+        obj.GammaFg.insert({2, gammaFg2(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+        obj.GammaK.insert({3, gammaK3(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+        obj.KCS.insert({2, {KCS20(nf), KCS21(nf), KCS22(nf), KCS23(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+
+        // PDFs
+        obj.MatchingFunctionsPDFs.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({1, {{evb, C10pdf.at(nf)}, {evb, C11pdf.at(nf)}, {evb, C12.at(nf)}}});
+        obj.MatchingFunctionsPDFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsPDFs.insert({3, {{evb, ZeroOp}}});
+
+        // FFs
+        obj.MatchingFunctionsFFs.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctionsFFs.insert({1, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
+
+        // Hard factors (set to zero when unknown). In addition,
+        // H3Ch() should be multiplied by N_{nf,j} =
+        // (\sum_{i=1}^{nf}e_q) / e_j channel by channel. Here we set
+        // this factor to the constant 1 / 4 because it results from
+        // the average ( N_{5,u} + N_{5,d} ) / 2. The numerical
+        // difference for different choices is however very small.
+        obj.HardFactors.insert({"DY",    {{1, H1DY()},    {2, H2DY(nf)},    {3, H3DY(nf)    + H3Ch() / 4}}});
+        obj.HardFactors.insert({"SIDIS", {{1, H1SIDIS()}, {2, H2SIDIS(nf)}, {3, H3SIDIS(nf) + H3Ch() / 4}}});
+        obj.HardFactors.insert({"ggH",   {{1, H1ggH()},   {2, H2ggH(nf)},   {3, 0}}});
+
+        // Insert full object
+        TmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return TmdObj;
+  }
+
+  //_____________________________________________________________________________
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,

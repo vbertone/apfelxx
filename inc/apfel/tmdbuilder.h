@@ -104,6 +104,19 @@ namespace apfel
   std::map<int, TmdObjects> InitializeTmdObjectsSivers(Grid                const& g,
                                                        std::vector<double> const& Thresholds,
                                                        double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeTmdObjects function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of TMD g1 PDFs and store them into a 'TmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of TmdObject objects, one for each possible nf
+   */
+  std::map<int, TmdObjects> InitializeTmdObjectsg1(Grid                const& g,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& IntEps = 1e-5);
   ///@}
 
   /**
