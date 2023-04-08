@@ -62,6 +62,7 @@ PYBIND11_MODULE(apfelpy, m)
   _constants.attr("ProtonMass") = apfel::ProtonMass;
   _constants.attr("Sin2ThetaW") = apfel::Sin2ThetaW;
   _constants.attr("GFermi")     = apfel::GFermi;
+  _constants.attr("alphaem")    = apfel::alphaem;
   _constants.attr("Vud")        = apfel::Vud;
   _constants.attr("Vus")        = apfel::Vus;
   _constants.attr("Vub")        = apfel::Vub;

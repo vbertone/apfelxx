@@ -176,60 +176,71 @@ namespace apfel
 
   /**
    * @name Conversion factor
-   * @brief Conversion factor from GeV<SUP>-2</SUP> to pb.
+   * @brief Conversion factor from * GeV<SUP>-2</SUP> to pb taken
+   * from:
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double ConvFact = 0.3893793656e9;
+  const double ConvFact = 0.3893793721e9;
   ///@}
 
   /**
    * @name Z-boson mass and width
    * @brief Value of the mass of the Z boson and its width in GeV
    * taken from:
-   * http://pdg.lbl.gov/2018/listings/rpp2018-list-z-boson.pdf.
+   * https://pdg.lbl.gov/2023/listings/rpp2023-list-z-boson.pdf.
    */
   ///@{
   const double ZMass  = 91.1876;
-  const double GammaZ = 2.4952;
+  const double GammaZ = 2.4955;
   ///@}
 
   /**
    * @name W-boson mass and width
    * @brief Value of the mass of the W bosons and their width in GeV
    * taken from:
-   * http://pdg.lbl.gov/2018/listings/rpp2018-list-w-boson.pdf.
+   * https://pdg.lbl.gov/2023/listings/rpp2023-list-w-boson.pdf.
    */
   ///@{
-  const double WMass  = 80.379;
+  const double WMass  = 80.377;
   const double GammaW = 2.085;
   ///@}
 
   /**
    * @name Proton mass
    * @brief Value of the mass of the proton in GeV taken from:
-   * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf.
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double ProtonMass = 0.9382720813;
+  const double ProtonMass = 0.93827208816;
   ///@}
 
   /**
    * @name Weinberg angle
    * @brief Value of sin<SUP>2</SUP>&theta;<SUB>W</SUB> in the MSbar
    * scheme taken from:
-   * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf.
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double Sin2ThetaW = 0.23122;
+  const double Sin2ThetaW = 0.23121;
   ///@}
 
   /**
    * @name Fermi constant
    * @brief Value of G<SUB>F</SUB> in GeV<SUP>-2</SUP> taken from:
-   * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf.
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double GFermi = 1.1663787e-5;
+  const double GFermi = 1.1663788e-5;
+  ///@}
+
+  /**
+   * @name Fermi constant
+   * @brief Value of G<SUB>F</SUB> in GeV<SUP>-2</SUP> taken from:
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
+   */
+  ///@{
+  const double alphaem = 7.2973525693e-3;
   ///@}
 
   /**

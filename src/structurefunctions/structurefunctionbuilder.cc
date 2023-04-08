@@ -1112,8 +1112,6 @@ namespace apfel
                                                                                                                   int                 const& intdeg,
                                                                                                                   double              const& lambda)
   {
-    Timer t;
-
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
       throw std::runtime_error(error("InitializeF2NCObjectsMassive", "The vector of masses has to contain exactly 6 ordered masses."));
@@ -1127,7 +1125,8 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
-    report("Initializing StructureFunctionObjects for F2 NC Massive with " + std::to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for F2 NC Massive with " + std::to_string(actnf) + " active flavours... ");
+    Timer t;
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -1296,8 +1295,6 @@ namespace apfel
                                                                                                                   int                 const& intdeg,
                                                                                                                   double              const& lambda)
   {
-    Timer t;
-
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
       throw std::runtime_error(error("InitializeFLNCObjectsMassive", "The vector of masses has to contain exactly 6 ordered masses."));
@@ -1311,7 +1308,8 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
-    report("Initializing StructureFunctionObjects for FL NC Massive with " + std::to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for FL NC Massive with " + std::to_string(actnf) + " active flavours... ");
+    Timer t;
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -1479,8 +1477,6 @@ namespace apfel
                                                                                                                       int                 const& intdeg,
                                                                                                                       double              const& lambda)
   {
-    Timer t;
-
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
       throw std::runtime_error(error("InitializeF2NCObjectsMassiveZero", "The vector of masses has to contain exactly 6 ordered masses."));
@@ -1494,7 +1490,8 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
-    report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + std::to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + std::to_string(actnf) + " active flavours... ");
+    Timer t;
 
     // ===============================================================
     const Operator Id  {g, Identity{}, IntEps};
@@ -1663,8 +1660,6 @@ namespace apfel
                                                                                                                       int                 const& intdeg,
                                                                                                                       double              const& lambda)
   {
-    Timer t;
-
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
       throw std::runtime_error(error("InitializeFLNCObjectsMassiveZero", "The vector of masses has to contain exactly 6 ordered masses."));
@@ -1678,7 +1673,8 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
-    report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + std::to_string(actnf) + " active flavours... \n");
+    report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + std::to_string(actnf) + " active flavours... ");
+    Timer t;
 
     // ===============================================================
     const Operator Zero{g, Null{}, IntEps};
@@ -1819,114 +1815,7 @@ namespace apfel
 
     return FLObj;
   }
-  /*
-    //_____________________________________________________________________________
-    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCObjectsMassive(Grid                const& g,
-                                                                                                                    std::vector<double> const& Masses,
-                                                                                                                    double              const& IntEps,
-                                                                                                                    int                 const& nxi,
-                                                                                                                    double              const& ximin,
-                                                                                                                    double              const& ximax,
-                                                                                                                    int                 const& intdeg,
-                                                                                                                    double              const& lambda)
-    {
-      Timer t;
 
-      // Make sure that the vector of masses contains all the 6 masses.
-      if (Masses.size() != 6)
-        throw std::runtime_error(error("InitializeF2CCObjectsMassiveZero", "The vector of masses has to contain exactly 6 ordered masses."));
-
-      // Determine number of active flavours
-      int actnf = 0;
-      for (auto const& m : Masses)
-        if (m < eps8)
-          actnf++;
-
-      // Initalise DGLAP objects need for scale variations
-      const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
-
-      report("Initializing StructureFunctionObjects for F2 CC Massive with " + std::to_string(actnf) + " active flavours... \n");
-
-      // ===============================================================
-      const Operator Id  {g, Identity{}, IntEps};
-      const Operator Zero{g, Null{},     IntEps};
-
-      // Zero Mass coefficient functions
-      // LO
-      std::map<int, Operator> C2LO;
-      C2LO.insert({DISNCBasis::CNS, Id});
-      C2LO.insert({DISNCBasis::CS,  Id});
-      C2LO.insert({DISNCBasis::CG,  Zero});
-
-      // NLO
-      std::map<int, Operator> C2NLO;
-      const Operator O21ns{g, C21ns{}, IntEps};
-      const Operator O21g {g, C21g{},  IntEps};
-      C2NLO.insert({DISNCBasis::CNS, O21ns});
-      C2NLO.insert({DISNCBasis::CS,  O21ns});
-      C2NLO.insert({DISNCBasis::CG,  O21g});
-    }
-
-    //_____________________________________________________________________________
-    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCObjectsMassive(Grid                const& g,
-                                                                                                                    std::vector<double> const& Masses,
-                                                                                                                    double              const& IntEps,
-                                                                                                                    int                 const& nxi,
-                                                                                                                    double              const& ximin,
-                                                                                                                    double              const& ximax,
-                                                                                                                    int                 const& intdeg,
-                                                                                                                    double              const& lambda)
-    {
-    }
-
-    //_____________________________________________________________________________
-    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCObjectsMassive(Grid                const& g,
-                                                                                                                    std::vector<double> const& Masses,
-                                                                                                                    double              const& IntEps,
-                                                                                                                    int                 const& nxi,
-                                                                                                                    double              const& ximin,
-                                                                                                                    double              const& ximax,
-                                                                                                                    int                 const& intdeg,
-                                                                                                                    double              const& lambda)
-    {
-    }
-
-    //_____________________________________________________________________________
-    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCObjectsMassiveZero(Grid                const& g,
-                                                                                                                        std::vector<double> const& Masses,
-                                                                                                                        double              const& IntEps,
-                                                                                                                        int                 const& nxi,
-                                                                                                                        double              const& ximin,
-                                                                                                                        double              const& ximax,
-                                                                                                                        int                 const& intdeg,
-                                                                                                                        double              const& lambda)
-    {
-    }
-
-    //_____________________________________________________________________________
-    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCObjectsMassiveZero(Grid                const& g,
-                                                                                                                        std::vector<double> const& Masses,
-                                                                                                                        double              const& IntEps,
-                                                                                                                        int                 const& nxi,
-                                                                                                                        double              const& ximin,
-                                                                                                                        double              const& ximax,
-                                                                                                                        int                 const& intdeg,
-                                                                                                                        double              const& lambda)
-    {
-    }
-
-    //_____________________________________________________________________________
-    std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCObjectsMassiveZero(Grid                const& g,
-                                                                                                                        std::vector<double> const& Masses,
-                                                                                                                        double              const& IntEps,
-                                                                                                                        int                 const& nxi,
-                                                                                                                        double              const& ximin,
-                                                                                                                        double              const& ximax,
-                                                                                                                        int                 const& intdeg,
-                                                                                                                        double              const& lambda)
-    {
-    }
-  */
   //_____________________________________________________________________________
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsZMT(Grid                const& g,
                                                                                                               std::vector<double> const& Thresholds,
