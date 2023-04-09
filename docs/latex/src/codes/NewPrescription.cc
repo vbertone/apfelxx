@@ -155,8 +155,8 @@ int main()
 	  const double aem2 = pow((arun ? alphaem.Evaluate(Qb) : aref), 2);
 	  
 	  // Compute the hard factor
-	  const double hcs = apfel::HardFactorDY(pt, Alphas(muf), nf, 1);
-	  
+	  const double hcs = HardFactor("DY", TmdObj, Alphas, pt)(muf);
+
 	  // Construct the TMD luminosity in b space to be fed to be
 	  // trasformed in qT space.
 	  const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double

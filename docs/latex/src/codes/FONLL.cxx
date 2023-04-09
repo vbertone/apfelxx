@@ -249,7 +249,7 @@ int main() {
       const double alpha2 = pow(1./137,2);
 
       // Compute the hard factor
-      const double hcs = apfel::HardFactorDY(1, as, nf, 1);
+      const double hcs = HardFactor("DY", TmdObj, Alphas, apfel::LogAccuracy::NNLL)(Q);
 
       // Construct the TMD luminosity in b space to be fed to be
       // trasformed in qT space.
