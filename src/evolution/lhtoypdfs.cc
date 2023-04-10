@@ -113,4 +113,78 @@ namespace apfel
 
     return PhysMap;
   }
+
+  //_________________________________________________________________________________
+  double xupvpol(double const& x)
+  {
+    return 1.3 * pow(x, 0.7) * pow(1 - x, 3) * ( 1 + 3 * x );
+  }
+
+  //_________________________________________________________________________________
+  double xdnvpol(double const& x)
+  {
+    return - 0.5 * pow(x, 0.7) * pow(1 - x, 4) * ( 1 + 4 * x );
+  }
+
+  //_________________________________________________________________________________
+  double xglupol(double const& x)
+  {
+    return 1.5 * pow(x, 0.5) * pow(1 - x, 5);
+  }
+
+  //_________________________________________________________________________________
+  double xdbarpol(double const& x)
+  {
+    return - 0.05 * pow(x, 0.3) * pow(1 - x, 7);
+  }
+
+  //_________________________________________________________________________________
+  double xubarpol(double const& x)
+  {
+    return xdbarpol(x);
+  }
+
+  //_________________________________________________________________________________
+  double xsbarpol(double const& x)
+  {
+    return 0.5 * xdbarpol(x);
+  }
+
+  //_________________________________________________________________________________
+  std::map<int, double> LHToyPDFsPol(double const& x, double const&)
+  {
+    // Call all functions only once
+    const double upv  = xupvpol(x);
+    const double dnv  = xdnvpol(x);
+    const double glu  = xglupol(x);
+    const double dbar = xdbarpol(x);
+    const double ubar = xubarpol(x);
+    const double sbar = xsbarpol(x);
+
+    // Construct QCD evolution basis conbinations
+    double const Gluon   = glu;
+    double const Singlet = dnv + 2 * dbar + upv + 2 * ubar + 2 * sbar;
+    double const T3      = upv + 2 * ubar - dnv - 2 * dbar;
+    double const T8      = upv + 2 * ubar + dnv + 2 * dbar - 4 * sbar;
+    double const Valence = upv + dnv;
+    double const V3      = upv - dnv;
+
+    // Fill in map in the QCD evolution basis
+    std::map<int, double> QCDEvMap;
+    QCDEvMap[0]  = Gluon;
+    QCDEvMap[1]  = Singlet;
+    QCDEvMap[2]  = Valence;
+    QCDEvMap[3]  = T3;
+    QCDEvMap[4]  = V3;
+    QCDEvMap[5]  = T8;
+    QCDEvMap[6]  = Valence;
+    QCDEvMap[7]  = Singlet;
+    QCDEvMap[8]  = Valence;
+    QCDEvMap[9]  = Singlet;
+    QCDEvMap[10] = Valence;
+    QCDEvMap[11] = Singlet;
+    QCDEvMap[12] = Valence;
+
+    return QCDEvMap;
+  }
 }

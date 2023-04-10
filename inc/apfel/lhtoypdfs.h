@@ -13,8 +13,10 @@ namespace apfel
   /// @cond UNNECESSARY
   /**
    * @name Les Houches PDFs
+
    * Les Houches toy parameterisation at Q = &radic;2 GeV. Used for
-   * test purposes.
+   * test purposes. This also includes a set of longitudinally
+   * polarised PDFs.
    */
   ///@{
   double xupv(double const& x);
@@ -25,6 +27,7 @@ namespace apfel
   double xsbar(double const& x);
   std::map<int, double> LHToyPDFs(double const& x, double const&);
   std::map<int, double> LHToyPDFsPhys(double const& x, double const&);
+  std::map<int, double> LHToyPDFsPol(double const& x, double const&);
   ///@}
   /// @endcond
 }
