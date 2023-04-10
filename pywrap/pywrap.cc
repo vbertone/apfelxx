@@ -91,13 +91,10 @@ PYBIND11_MODULE(apfelpy, m)
   _betaQCD.def("beta3qcd", &apfel::beta3qcd, "nf"_a);
 
   // Wrappers of "lhtoypdfs.h"
-  _utilities.def("xupv",      &apfel::xupv,      "x"_a);
-  _utilities.def("xdnv",      &apfel::xdnv,      "x"_a);
-  _utilities.def("xglu",      &apfel::xglu,      "x"_a);
-  _utilities.def("xdbar",     &apfel::xdbar,     "x"_a);
-  _utilities.def("xubar",     &apfel::xubar,     "x"_a);
-  _utilities.def("xsbar",     &apfel::xsbar,     "x"_a);
   _utilities.def("LHToyPDFs", &apfel::LHToyPDFs, "x"_a, "Q"_a);
+  _utilities.def("LHToyPDFsPhys", &apfel::LHToyPDFsPhys, "x"_a, "Q"_a);
+  _utilities.def("LHToyPDFsPol", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
+  _utilities.def("LHToyFFs", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
 
   // Wrappers of "tools.h"
   py::enum_<apfel::QuarkFlavour>(_utilities, "QuarkFlavour")
