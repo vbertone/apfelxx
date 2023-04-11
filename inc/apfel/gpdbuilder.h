@@ -33,5 +33,23 @@ namespace apfel
                                                    double              const& xi,
                                                    bool                const& OpEvol = false,
                                                    double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGPDObjects function precomputes the
+   * perturbative coefficients of polarised GPD evolution kernels
+   * and store them into a 'DglapObjects' structure. GPDs are assumed
+   * to be continuous over heavy-quark thresholds.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
+   */
+  std::map<int, DglapObjects> InitializeGpdObjectsPol(Grid                const& g,
+                                                      std::vector<double> const& Thresholds,
+                                                      double              const& xi,
+                                                      bool                const& OpEvol = false,
+                                                      double              const& IntEps = 1e-5);
   ///@}
 }
