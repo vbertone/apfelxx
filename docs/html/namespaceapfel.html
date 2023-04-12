@@ -913,6 +913,21 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0ns.html">Pgpd0ns</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) non-singlet unpolarised evolution kernel.  <a href="classapfel_1_1Pgpd0ns.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0polgg.html">Pgpd0polgg</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) gluon-gluon polarised splitting function.  <a href="classapfel_1_1Pgpd0polgg.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0polgq.html">Pgpd0polgq</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) gluon-quark polarised splitting function.  <a href="classapfel_1_1Pgpd0polgq.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0polns.html">Pgpd0polns</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) non-singlet polarised evolution kernel.  <a href="classapfel_1_1Pgpd0polns.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0polqg.html">Pgpd0polqg</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) quark-gluon polarised splitting function.  <a href="classapfel_1_1Pgpd0polqg.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0polqq.html">Pgpd0polqq</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) quark-quark polarised splitting function.  <a href="classapfel_1_1Pgpd0polqq.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Pgpd0qg.html">Pgpd0qg</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub>) quark-gluon unpolarised splitting function.  <a href="classapfel_1_1Pgpd0qg.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1268,6 +1283,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a78d2fcba09ad56f85ba4574ff30bb281"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a78d2fcba09ad56f85ba4574ff30bb281">InitializeGpdObjects</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;xi, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
 <tr class="memdesc:a78d2fcba09ad56f85ba4574ff30bb281"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeGPDObjects function precomputes the perturbative coefficients of unpolarised GPD evolution kernels and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure. GPDs are assumed to be continuous over heavy-quark thresholds.  <br /></td></tr>
 <tr class="separator:a78d2fcba09ad56f85ba4574ff30bb281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17a86d3b83a08bedd608e899383c9499"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a17a86d3b83a08bedd608e899383c9499">InitializeGpdObjectsPol</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, double const &amp;xi, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
+<tr class="memdesc:a17a86d3b83a08bedd608e899383c9499"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeGPDObjects function precomputes the perturbative coefficients of polarised GPD evolution kernels and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure. GPDs are assumed to be continuous over heavy-quark thresholds.  <br /></td></tr>
+<tr class="separator:a17a86d3b83a08bedd608e899383c9499"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">GTMD object initializers</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1GtmdObjects.html">GtmdObjects</a> structure for the perturbartive evolution and matching currently available. </p>
 </div></td></tr>
@@ -6191,6 +6209,65 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a17a86d3b83a08bedd608e899383c9499" name="a17a86d3b83a08bedd608e899383c9499"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17a86d3b83a08bedd608e899383c9499">&#9670;&#160;</a></span>InitializeGpdObjectsPol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; apfel::InitializeGpdObjectsPol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Thresholds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;&#160;</td>
+          <td class="paramname"><em>OpEvol</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>IntEps</em> = <code>1e-5</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The InitializeGPDObjects function precomputes the perturbative coefficients of polarised GPD evolution kernels and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure. GPDs are assumed to be continuous over heavy-quark thresholds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>the x-space grid </td></tr>
+    <tr><td class="paramname">Thresholds</td><td>the heavy quark thresholds </td></tr>
+    <tr><td class="paramname">xi</td><td>value of the skewness </td></tr>
+    <tr><td class="paramname">OpEvol</td><td>the switch for the computation of the evolution operator (default: false) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-5</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of DglapObject objects, one for each possible nf </dd></dl>
+
+</div>
+</div>
 <a id="a3eadbb99a0812b6593060c971fc31712" name="a3eadbb99a0812b6593060c971fc31712"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3eadbb99a0812b6593060c971fc31712">&#9670;&#160;</a></span>InitializeGtmdObjects()</h2>
 
@@ -9402,7 +9479,7 @@ template&lt;class U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 8 2023 22:07:30 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Tue Apr 11 2023 18:57:01 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

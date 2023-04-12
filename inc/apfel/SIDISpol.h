@@ -147,7 +147,7 @@ namespace apfel
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
-      const double expr = ( x * x - omx * omx ) * log( omx / x ) + 2 * x * omx;
+      const double expr = ( x * x - omx * omx ) * log( omx / x ) + 2 * omx;
       return expr;
     }
   };
