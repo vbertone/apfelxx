@@ -11,7 +11,7 @@ namespace apfel
 {
   //_________________________________________________________________________________
   Pgpd0ns::Pgpd0ns(double const& xi):
-    Expression(1/xi)
+    Expression(1 / xi)
   {
   }
   double Pgpd0ns::Regular(double const& y) const
@@ -29,17 +29,17 @@ namespace apfel
   double Pgpd0ns::Local(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CF * ( 2 * log( 1 - y ) + 3. / 2. - log(std::abs(1 - pow(kappa, 2))) );
+    return 2 * CF * ( 2 * log(1 - y) + 3. / 2. - log(std::abs(1 - pow(kappa, 2))) );
   }
   double Pgpd0ns::LocalPP(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CF * ( - (kappa > 1 ? log( 1 - y ) : 0) );
+    return 2 * CF * ( - (kappa > 1 ? log(1 - y) : 0) );
   }
 
   //_________________________________________________________________________________
   Pgpd0qq::Pgpd0qq(double const& xi):
-    Expression(1/xi)
+    Expression(1 / xi)
   {
   }
   double Pgpd0qq::Regular(double const& y) const
@@ -57,17 +57,17 @@ namespace apfel
   double Pgpd0qq::Local(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CF * ( 2 * log( 1 - y ) + 3. / 2. - log(std::abs(1 - pow(kappa, 2))) );
+    return 2 * CF * ( 2 * log(1 - y) + 3. / 2. - log(std::abs(1 - pow(kappa, 2))) );
   }
   double Pgpd0qq::LocalPP(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CF * ( - (kappa > 1 ? log( 1 - y ) : 0) );
+    return 2 * CF * ( - (kappa > 1 ? log(1 - y) : 0) );
   }
 
   //_________________________________________________________________________________
   Pgpd0qg::Pgpd0qg(int const& nf, double const& xi):
-    Expression(1/xi),
+    Expression(1 / xi),
     _nf(nf)
   {
   }
@@ -81,7 +81,7 @@ namespace apfel
 
   //_________________________________________________________________________________
   Pgpd0gq::Pgpd0gq(double const& xi):
-    Expression(1/xi)
+    Expression(1 / xi)
   {
   }
   double Pgpd0gq::Regular(double const& y) const
@@ -94,7 +94,7 @@ namespace apfel
 
   //_________________________________________________________________________________
   Pgpd0gg::Pgpd0gg(int const& nf, double const& xi):
-    Expression(1/xi),
+    Expression(1 / xi),
     _nf(nf)
   {
   }
@@ -115,11 +115,11 @@ namespace apfel
   double Pgpd0gg::Local(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 4 * CA * log( 1 - y ) + ( 11 * CA - 4 * _nf * TR ) / 3 - 2 * CA * log(std::abs(1 - pow(kappa, 2)));
+    return 4 * CA * log(1 - y) + ( 11 * CA - 4 * _nf * TR ) / 3 - 2 * CA * log(std::abs(1 - pow(kappa, 2)));
   }
   double Pgpd0gg::LocalPP(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CA * ( - (kappa > 1 ? log( 1 - y ) : 0) );
+    return 2 * CA * ( - (kappa > 1 ? log(1 - y) : 0) );
   }
 }
