@@ -81,10 +81,12 @@ namespace apfel
   {
   public:
     Pgpd0polgg(int const& nf, double const& xi);
-    double Regular(double const& y)  const;
-    double Singular(double const& y) const;
-    double Local(double const& y)    const;
-    double LocalPP(double const& y)  const;
+    double Regular(double const& y)    const;
+    double Singular(double const& y)   const;
+    double Local(double const& y)      const;
+    double LocalPP(double const& y)    const;
+    double SingularPV(double const& y) const;
+    double LocalPV(double const& y)    const;
   private:
     int const _nf;
   };

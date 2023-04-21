@@ -103,9 +103,12 @@ namespace apfel
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
     const double k2    = kappa * kappa;
-    return 4 * CA * (y <= 1 ? ( k2 * y - 1 ) * ( ky2 + 2 * y - 1 ) / pow(1 - ky2, 2) : 0)
-           + 2 * CA * (kappa > 1 ? ( - 3 * kappa - kappa * pow(ky2, 2) - 2 * kappa * y * ky2 - k2 * ky2 * ( 1 + y )
-                                     + k2 * ( 1 + y ) * ( 1 + y * y ) - 2 * kappa * y + 3 * y + 3 ) / ( kappa * ( 1 + y ) * pow(1 - ky2, 2) ) : 0);
+    if (kappa < 1)
+      return 4 * CA * (y <= 1 ? ( k2 * y - 1 ) * ( ky2 + 2 * y - 1 ) / pow(1 - ky2, 2) : 0);
+    else
+      return (y <= 1 ? CA * ( pow(kappa, 3) * y * ( y + 3 ) - k2 * ( y - 3 ) + kappa * ( y - 1 ) * ( y + 2 ) + 5 * ( y + 1 ) ) / kappa / ( 1 + y ) / pow(1 + kappa * y, 2) :
+              2 * CA * ( - 3 * kappa - kappa * pow(ky2, 2) - 2 * kappa * y * ky2 - k2 * ky2 * ( 1 + y )
+                         + k2 * ( 1 + y ) * ( 1 + y * y ) - 2 * kappa * y + 3 * y + 3 ) / ( kappa * ( 1 + y ) * pow(1 - ky2, 2) ));
   }
   double Pgpd0polgg::Singular(double const& y) const
   {
@@ -121,5 +124,21 @@ namespace apfel
   {
     const double kappa = 1 / _eta / _extvar;
     return 2 * CA * ( - (kappa > 1 ? log(1 - y) : 0) );
+  }
+  double Pgpd0polgg::SingularPV(double const& y) const
+  {
+    const double kappa = 1 / _eta / _extvar;
+    if (kappa > 1 && y < 1)
+      return CA * ( 1 + kappa ) / ( 1 - kappa * y ) / kappa;
+    else
+      return 0;
+  }
+  double Pgpd0polgg::LocalPV(double const& y) const
+  {
+    const double kappa = 1 / _eta / _extvar;
+    if (kappa > 1 && y < 1 && kappa * y < 1)
+      return CA * ( 1 + kappa ) * log( 1 - kappa * y ) / pow(kappa, 2);
+    else
+      return 0;
   }
 }

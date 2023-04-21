@@ -70,7 +70,7 @@ namespace apfel
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
-      return 2 * TR * log( 1 - kappa * y ) / pow(kappa, 2);
+      return 2 * TR * log(1 - kappa * y) / pow(kappa, 2);
     else
       return 0;
   }
@@ -99,9 +99,9 @@ namespace apfel
     const double ky    = kappa * y;
     const double ky2   = pow(ky, 2);
     if (kappa < 1)
-      return (y <= 1 ? 8 * CA * pow(kappa, 2) * y * ( 1 - y ) / pow(1 - ky2, 2) : 0);
+      return (y <= 1 ? - 8 * CA * pow(kappa, 2) * y * ( 1 - y ) / pow(1 - ky2, 2) : 0);
     else
-      return (y <= 1 ? CA * ( 1 + kappa * ( y + kappa * ( - 5 + 3 * ky ) ) ) / 2 / kappa / pow(1 + ky, 2) : CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 7 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 2));
+      return (y <= 1 ? - CA * ( 1 + kappa * ( y + kappa * ( - 5 + 3 * ky ) ) ) / 2 / kappa / pow(1 + ky, 2) : - CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 7 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 2));
   }
   double Cgtmd1gg::Local(double const&) const
   {
@@ -111,7 +111,7 @@ namespace apfel
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
-      return CA * ( 1 + 3 * pow(kappa, 2) ) / ( 1 - kappa * y ) / 2 / kappa;
+      return - CA * ( 1 + 3 * pow(kappa, 2) ) / ( 1 - kappa * y ) / 2 / kappa;
     else
       return 0;
   }
@@ -119,7 +119,7 @@ namespace apfel
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
-      return CA * ( 1 + 3 * pow(kappa, 2) ) * log( 1 - kappa * y ) / 2 / pow(kappa, 2);
+      return - CA * ( 1 + 3 * pow(kappa, 2) ) * log(1 - kappa * y) / 2 / pow(kappa, 2);
     else
       return 0;
   }
