@@ -25,7 +25,7 @@ namespace apfel
                                                    bool                const& OpEvol,
                                                    double              const& IntEps)
   {
-    report("Initializing DglapObjects for GPD unpolarised evolution... ");
+    report("Initializing DglapObjects for GPD unpolarised evolution at xi = " + std::to_string(xi) + "... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -111,7 +111,7 @@ namespace apfel
                                                       bool                const& OpEvol,
                                                       double              const& IntEps)
   {
-    report("Initializing DglapObjects for GPD polarised evolution... ");
+    report("Initializing DglapObjects for GPD polarised evolution at xi = " + std::to_string(xi) + "... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
