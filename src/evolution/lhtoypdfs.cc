@@ -111,9 +111,8 @@ namespace apfel
   //_________________________________________________________________________________
   double xsff(double const& x)
   {
-
-    const double as  = 0.718;
-    const double bs  = 6.266;
+    const double as = 0.718;
+    const double bs = 6.266;
     const double Ns = 0.094 / ( std::tgamma(as + 2) * std::tgamma(bs + 1) / std::tgamma(as + bs + 3) );
     return Ns * pow(x, as + 1) * pow(1 - x, bs);
   }
