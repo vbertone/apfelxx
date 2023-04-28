@@ -43,6 +43,12 @@ int main()
   // Total valence sum rule
   std::cout << "Total valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * Dists.at(2)).Integrate(1e-9, 1) << std::endl;
 
+  // V3 valence sum rule
+  std::cout << "V3 valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * Dists.at(4)).Integrate(1e-9, 1) << std::endl;
+
+  // V8 valence sum rule
+  std::cout << "V8 valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * Dists.at(6)).Integrate(1e-9, 1) << std::endl;
+
   // Rotate PDFs into the physical basis
   const std::map<int, apfel::Distribution> DistsPhys = apfel::QCDEvToPhys(Dists.GetObjects());
 
