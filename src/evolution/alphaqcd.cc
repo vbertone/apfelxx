@@ -46,7 +46,8 @@ namespace apfel
 
       // The expression is taken from Eqs. (22) and (25) of
       // https://arxiv.org/pdf/hep-ph/0004189.pdf that do report the
-      // logarithmic terms instead.
+      // logarithmic terms instead. N4LO matching stil unknown thus
+      // set to zero.
       const std::vector<double> c{
         1,
         sgn * 2. / 3. * LogKth,
