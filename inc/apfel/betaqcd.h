@@ -11,6 +11,7 @@ namespace apfel
   /**
    * @name QCD beta function
    * Coefficients of the QCD \f$\beta\f$ function.
+   * Reference: https://arxiv.org/pdf/1701.01404.pdf
    */
   ///@{
   /**
@@ -40,5 +41,12 @@ namespace apfel
    * @return \f$\beta_3(n_f)\f$
    */
   double beta3qcd(int const& nf);
+
+  /**
+   * @brief N4LO coefficient of the QCD \f$\beta\f$ function.
+   * @param nf: the number of active flavours
+   * @return \f$\beta_4(n_f)\f$
+   */
+  double beta4qcd(int const& nf);
   ///@}
 }

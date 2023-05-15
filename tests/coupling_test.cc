@@ -26,13 +26,15 @@ int main()
   apfel::AlphaQCD asNLO{AlphaQCDRef, MuQCDRef, QuarkThresholds, 1};
   apfel::AlphaQCD asNNLO{AlphaQCDRef, MuQCDRef, QuarkThresholds, 2};
   apfel::AlphaQCD asNNNLO{AlphaQCDRef, MuQCDRef, QuarkThresholds, 3};
+  apfel::AlphaQCD asNNNNLO{AlphaQCDRef, MuQCDRef, QuarkThresholds, 4};
 
   // Compute and print values at Mu.
   std::cout << "\nNumerical evolution of the strong coupling:" << std::endl;
-  std::cout << "LO:    alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << std::endl;
-  std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu) << " (NLO/LO     = " << 100 * asNLO.Evaluate(Mu) / asLO.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLO.Evaluate(Mu) / asNLO.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLO.Evaluate(Mu) / asNNLO.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "LO:     alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << std::endl;
+  std::cout << "NLO:    alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu) << " (NLO/LO       = " << 100 * asNLO.Evaluate(Mu) / asLO.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NNLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << " (NNLO/NLO     = " << 100 * asNNLO.Evaluate(Mu) / asNLO.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NNNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << " (NNNLO/NNLO   = " << 100 * asNNNLO.Evaluate(Mu) / asNNLO.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NNNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNNLO.Evaluate(Mu) << " (NNNNLO/NNNLO = " << 100 * asNNNNLO.Evaluate(Mu) / asNNNLO.Evaluate(Mu)<< "%)" << std::endl;
 
   // Iniatialize the running of the coupling at all available
   // perturbative orders.
