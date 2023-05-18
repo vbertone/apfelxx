@@ -47,7 +47,7 @@ namespace apfel
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? - 4 * CF / ( 1 - ky2 ) : 0)
-           + (kappa > 1 ? 2 * CF * ( 1 + 2 * y + pow(kappa, 2) * pow(y, 2) ) / kappa / ( 1 + y ) / ( 1 - ky2 ) : 0);
+           + (kappa > 1 ? 2 * CF * ( 1 + 2 * y + pow(kappa, 2) * pow(y, 2) ) / ( 1 + y ) / ( 1 - ky2 ) : 0);
   }
   double Pgpd0transqq::Singular(double const& y) const
   {
