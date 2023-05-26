@@ -23,7 +23,7 @@ public:
   }
   double Local(double const& x)    const
   {
-    return 4 * apfel::CF * log( 1 - x ) + 3 * apfel::CF;
+    return 4 * apfel::CF * log(1 - x) + 3 * apfel::CF;
   }
 };
 
@@ -34,15 +34,15 @@ public:
   p0qq2(): Expression() {}
   double Regular(double const& x)  const
   {
-    return 4 * apfel::CF * apfel::CF * ( - 4 * log(x) / ( 1 - x ) - 4 * ( 1 + x ) * log( 1 - x ) + 3 * ( 1 + x ) * log(x) - ( x + 5 ) );
+    return 4 * apfel::CF * apfel::CF * ( - 4 * log(x) / ( 1 - x ) - 4 * ( 1 + x ) * log(1 - x) + 3 * ( 1 + x ) * log(x) - ( x + 5 ) );
   }
   double Singular(double const& x) const
   {
-    return 4 * apfel::CF * apfel::CF * ( 8 * log( 1 - x ) + 6 ) / ( 1 - x );
+    return 4 * apfel::CF * apfel::CF * ( 8 * log(1 - x) + 6 ) / ( 1 - x );
   }
   double Local(double const& x)    const
   {
-    return 4 * apfel::CF * apfel::CF * ( 4 * pow(log( 1 - x ),2) + 6 * log( 1 - x ) + 9. / 4. - 4 * pow(M_PI,2) / 6. ) ;
+    return 4 * apfel::CF * apfel::CF * ( 4 * pow(log(1 - x),2) + 6 * log(1 - x) + 9. / 4. - 4 * pow(M_PI,2) / 6. ) ;
   }
 };
 
@@ -92,7 +92,7 @@ int main()
   for (double x = xmin; x < xmax * 1.000001; x *= xstp)
     {
       // Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
-      const double Ix  = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
+      const double Ix  = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log(1 - x) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
       const double Odx = Od.Evaluate(x);
       const double Oxd = InnerProduct(O.Evaluate(x), d);
       std::cout << x << "\t\t" << Odx << "\t\t" << Oxd << "\t\t" << Ix << "\t\t" << Odx / Ix << "\t\t" << Oxd / Ix << std::endl;

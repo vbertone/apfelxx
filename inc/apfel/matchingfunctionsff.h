@@ -84,17 +84,16 @@ namespace apfel
    * https://arxiv.org/pdf/1604.07869.pdf and
    * https://arxiv.org/pdf/1706.01473.pdf).
    */
-  class C2Vqqff: public Expression
+  class C2nspff: public Expression
   {
   public:
-    C2Vqqff(int const& nf);
+    C2nspff(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   protected:
     int const _nf;
     double    _A2;
-    double    _A3;
   };
 
   /**
@@ -103,11 +102,16 @@ namespace apfel
    * https://arxiv.org/pdf/1604.07869.pdf and
    * https://arxiv.org/pdf/1706.01473.pdf).
    */
-  class C2Vqqbff: public Expression
+  class C2nsmff: public Expression
   {
   public:
-    C2Vqqbff();
+    C2nsmff(int const& nf);
     double Regular(double const& x) const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
   };
 
   /**
@@ -167,7 +171,117 @@ namespace apfel
   private:
     int const _nf;
     double    _A2;
-    double    _A3;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNNLOff NNNLO matching functions for FFs
+   * @ingroup TLMatchFunc
+   */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) valence plus
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3nspff: public Expression
+  {
+  public:
+    C3nspff(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) valence minus
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3nsmff: public Expression
+  {
+  public:
+    C3nsmff(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-valence
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3pvff: public Expression
+  {
+  public:
+    C3pvff();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3psff: public Expression
+  {
+  public:
+    C3psff(int const& nf);
+    double Regular(double const& x) const;
+  protected:
+    int const _nf;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quark-gluon
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3qgff: public Expression
+  {
+  public:
+    C3qgff(int const& nf);
+    double Regular(double const& x) const;
+  protected:
+    int const _nf;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-quark
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3gqff: public Expression
+  {
+  public:
+    C3gqff(int const& nf);
+    double Regular(double const& x) const;
+  protected:
+    int const _nf;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon-gluon
+   * matching function for FFs (reference:
+   * https://arxiv.org/pdf/2012.03256.pdf).
+   */
+  class C3ggff: public Expression
+  {
+  public:
+    C3ggff(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  protected:
+    int const _nf;
+    double    _A2;
   };
   ///@}
 }

@@ -576,7 +576,7 @@ namespace apfel
   template<typename T>
   T OgataQuadrature::transform(std::function<T(double const&)> const& func, double const& qT, int const& nmax) const
   {
-    // Compute integral as a weighted sum.
+    // Compute integral as a weighted sum
     T integral = _weights[0] * func(_xf[0]/qT);
     int i;
     for (i = 1; i < std::min(nmax, (int) j0Zeros.size()); i++)

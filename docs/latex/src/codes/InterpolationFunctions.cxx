@@ -6,7 +6,6 @@
 #include <apfel/apfelxx.h>
 
 int main() {
-
   // Initialize space- and time-like splitting functions.
   const apfel::Grid g{{{100, 1e-3, 0}}};
   const std::function<double(double const&)> f = [] (double const& x) -> double { return 2 - log(x) / 2 + cos(M_PI * log(x)); };

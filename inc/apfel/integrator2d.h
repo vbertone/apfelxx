@@ -78,6 +78,5 @@ namespace apfel
   private:
     std::function<double(double const&, double const&)> const _func;   //!< The integrand function
     Integrator::IntegrationMethod                       const _method; //!< The integration method
-
   };
 }

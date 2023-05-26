@@ -27,7 +27,7 @@ namespace apfel
   template<class T>
   Set<T> Dglap<T>::MatchObject(bool const& Up, int const& nf, Set<T> const& f) const
   {
-    // Get matching conditions.
+    // Get matching conditions
     Set<Operator> MC = _MatchingConditions(Up, (Up ? nf : nf - 1));
 
     // Convolute matching conditions with a set of objects having the
@@ -45,10 +45,10 @@ namespace apfel
   template<class T>
   Set<T> Dglap<T>::Derivative(int const& nf, double const& t, Set<T> const& f) const
   {
-    return _SplittingFunctions(nf, exp(t / 2)) * f;
+    return _SplittingFunctions(nf, t) * f;
   }
 
-  // Fixed template types.
+  // Fixed template types
   template class Dglap<Distribution>;
   template class Dglap<Operator>;
 
@@ -56,7 +56,7 @@ namespace apfel
   template<>
   void Dglap<Distribution>::SetInitialDistributions(std::function<double(int const&, double const&)> const& InDistFunc)
   {
-    // Allocate initial scale distributions.
+    // Allocate initial scale distributions
     std::map<int,Distribution> DistMap;
     for (int i = 0; i <= 12; i++)
       DistMap.insert({i, Distribution{_ObjRef.at(0).GetGrid(), InDistFunc, i}});
@@ -84,4 +84,3 @@ namespace apfel
     SetObjectRef(Set<Distribution> {_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc, mu)});
   }
 }
-

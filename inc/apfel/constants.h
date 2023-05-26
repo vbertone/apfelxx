@@ -127,7 +127,7 @@ namespace apfel
   const double zeta3  = 1.2020569031595943;
   const double zeta4  = 1.0823232337111382; // Pi2 * Pi2 / 90;
   const double zeta5  = 1.0369277551433699;
-  const double zeta6  = 1.0173430619844491;
+  const double zeta6  = 1.0173430619844491; // Pi2 * Pi2 * Pi2 / 945
   ///@}
 
   /**
@@ -150,7 +150,8 @@ namespace apfel
   ///@{
   /**
    * @name Quark charges
-   * @brief Quark electric charges and their square.
+   * @brief Quark electric charges and their square (it also includes
+   * sums of charges).
    */
   ///@{
   const double ed  = - 1. / 3.;
@@ -159,64 +160,87 @@ namespace apfel
   const double eu2 =   4. / 9.;
   const std::vector<double> QCh  = {ed,  eu,  ed,  eu,  ed,  eu};
   const std::vector<double> QCh2 = {ed2, eu2, ed2, eu2, ed2, eu2};
+  const std::vector<double> SumCh2 = {0., 1./9., 5./9., 2./3., 10./9., 11./9., 5./3.};
+  const std::vector<double> SumCh4 = {0., 1./81., 17./81., 18./81., 34./81., 35./81., 51./81.};
+  ///@}
+
+  /**
+   * @name Flavour factors required by the N<SUP>3</SUP>LO DIS coefficient functions
+   * @brief Their definition can be found in Tab. 2 (page 8) of
+   * https://arxiv.org/pdf/hep-ph/0504242v1.pdf.
+   */
+  ///@{
+  const std::vector<double> fl11ns = {-1, 0.5, 0, 0.5, 0.2, 0.5};
+  const std::vector<double> fl11sg = {1, 0.1, 0, 0.1, 0.018181818, 0.1};
   ///@}
 
   /**
    * @name Conversion factor
-   * @brief Conversion factor from GeV<SUP>-2</SUP> to pb.
+   * @brief Conversion factor from * GeV<SUP>-2</SUP> to pb taken
+   * from:
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double ConvFact = 0.3893793656e9;
+  const double ConvFact = 0.3893793721e9;
   ///@}
 
   /**
    * @name Z-boson mass and width
    * @brief Value of the mass of the Z boson and its width in GeV
    * taken from:
-   * http://pdg.lbl.gov/2018/listings/rpp2018-list-z-boson.pdf.
+   * https://pdg.lbl.gov/2023/listings/rpp2023-list-z-boson.pdf.
    */
   ///@{
   const double ZMass  = 91.1876;
-  const double GammaZ = 2.4952;
+  const double GammaZ = 2.4955;
   ///@}
 
   /**
    * @name W-boson mass and width
    * @brief Value of the mass of the W bosons and their width in GeV
    * taken from:
-   * http://pdg.lbl.gov/2018/listings/rpp2018-list-w-boson.pdf.
+   * https://pdg.lbl.gov/2023/listings/rpp2023-list-w-boson.pdf.
    */
   ///@{
-  const double WMass  = 80.379;
+  const double WMass  = 80.377;
   const double GammaW = 2.085;
   ///@}
 
   /**
    * @name Proton mass
    * @brief Value of the mass of the proton in GeV taken from:
-   * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf.
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double ProtonMass = 0.9382720813;
+  const double ProtonMass = 0.93827208816;
   ///@}
 
   /**
    * @name Weinberg angle
    * @brief Value of sin<SUP>2</SUP>&theta;<SUB>W</SUB> in the MSbar
    * scheme taken from:
-   * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf.
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double Sin2ThetaW = 0.23122;
+  const double Sin2ThetaW = 0.23121;
   ///@}
 
   /**
    * @name Fermi constant
    * @brief Value of G<SUB>F</SUB> in GeV<SUP>-2</SUP> taken from:
-   * http://pdg.lbl.gov/2018/reviews/rpp2018-rev-phys-constants.pdf.
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double GFermi = 1.1663787e-5;
+  const double GFermi = 1.1663788e-5;
+  ///@}
+
+  /**
+   * @name Fermi constant
+   * @brief Value of G<SUB>F</SUB> in GeV<SUP>-2</SUP> taken from:
+   * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
+   */
+  ///@{
+  const double alphaem = 7.2973525693e-3;
   ///@}
 
   /**

@@ -106,18 +106,27 @@ namespace apfel
     double Alphas(double const& mu) const { return _as(mu); }
 
     /**
-     * @brief Function that returns the full set of distributions tabulated of the (x,Q2) grid.
+     * @brief Function that returns the full set of distributions
+     * tabulated on the (x,Q2) grid.
      * @return the _KnotArray attribute
      */
     std::map<double, std::map<int, LHKnotArray>> KnotArray() const { return _KnotArray; }
 
+    /**
+     * @brief Function that returns the full set of distributions as a
+     * TabulateObject object.
+     * @return the _KnotArray attribute
+     */
+    TabulateObject<Set<Distribution>> TabulatedDistributions() const { return *_TabulatedDists; }
+
   private:
-    EvolutionSetup                               _setup;        //!< Evolution setup object
-    bool                                         _WriteGrid;    //!< Switch to write LHAPDF grids
-    std::string                                  _GridHeader;   //!< Part of the LHAPDF grid header that can be set externally (the format is resposibility of the user)
-    std::unique_ptr<const Grid>                  _g;            //!< x-space grid
-    std::function<double(double const&)>         _as;           //!< Strong coupling function
-    std::map<int, DglapObjects>                  _DglapObj;     //!< Dglap evolution objects
-    std::map<double, std::map<int, LHKnotArray>> _KnotArray;    //!< Object that emulates the KnotArray of LHAPDF to be fed to LHAPDF itself
+    EvolutionSetup                                           _setup;          //!< Evolution setup object
+    bool                                                     _WriteGrid;      //!< Switch to write LHAPDF grids
+    std::string                                              _GridHeader;     //!< Part of the LHAPDF grid header that can be set externally (the format is resposibility of the user)
+    std::unique_ptr<const Grid>                              _g;              //!< x-space grid
+    std::function<double(double const&)>                     _as;             //!< Strong coupling function
+    std::map<int, DglapObjects>                              _DglapObj;       //!< Dglap evolution objects
+    std::map<double, std::map<int, LHKnotArray>>             _KnotArray;      //!< Object that emulates the KnotArray of LHAPDF to be fed to LHAPDF itself
+    std::unique_ptr<const TabulateObject<Set<Distribution>>> _TabulatedDists; //!< Tabulated distributions
   };
 }

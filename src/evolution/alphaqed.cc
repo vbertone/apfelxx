@@ -22,7 +22,7 @@ namespace apfel
     MatchedEvolution{AlphaRef, MuRef, ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds), nstep},
     _pt(pt)
   {
-    // Beta function lambda function.
+    // Beta function lambda function
     _BetaFunction = [=] (int const& nfl, double const& a)-> double
     {
       const double Qr = ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds)[nfl-1] + eps8;

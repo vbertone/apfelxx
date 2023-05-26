@@ -19,7 +19,7 @@ namespace apfel
     _xMin(xMin),
     _xMax(1)
   {
-    // Compute grid.
+    // Compute grid
     _Step = log(_xMax / _xMin) / _nx;
 
     // Building log spaced grid in x. Number of points in x + 1 (bins)

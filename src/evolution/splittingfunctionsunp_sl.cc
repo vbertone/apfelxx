@@ -10,9 +10,6 @@
 
 namespace apfel
 {
-  /**
-   * @brief The LO space-like splitting function classes
-   */
   //_________________________________________________________________________________
   P0ns::P0ns():
     Expression()
@@ -71,9 +68,6 @@ namespace apfel
     return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
-  /**
-   * @brief The NLO space-like splitting function classes
-   */
   //_________________________________________________________________________________
   P1nsp::P1nsp(int const& nf):
     Expression(),
@@ -230,9 +224,6 @@ namespace apfel
     return log(1-x) * _a2g + p1delta;
   }
 
-  /**
-   * @brief The NNLO space-like splitting function classes (parametrized)
-   */
   //_________________________________________________________________________________
   P2nsp::P2nsp(int const& nf):
     Expression(),
@@ -241,14 +232,14 @@ namespace apfel
   }
   double P2nsp::Regular(double const& x) const
   {
-    const double x_2    = x * x;
-    const double x_3    = x_2 * x;
-    const double dl     = log(x);
-    const double dl_2   = dl * dl;
-    const double dl_3   = dl_2 * dl;
-    const double dl_4   = dl_3 * dl;
-    const double dl1    = log(1-x);
-    const double d81    = 1. / 81.;
+    const double x_2  = x * x;
+    const double x_3  = x_2 * x;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double dl_3 = dl_2 * dl;
+    const double dl_4 = dl_3 * dl;
+    const double dl1  = log(1-x);
+    const double d81  = 1. / 81.;
     return
       1641.1 - 3135. * x + 243.6 * x_2 - 522.1 * x_3
       + 128. * d81 * dl_4 + 2400. * d81 * dl_3
@@ -281,13 +272,13 @@ namespace apfel
   }
   double P2nsm::Regular(double const& x) const
   {
-    const double x_2    = x * x;
-    const double x_3    = x_2 * x;
-    const double dl     = log(x);
-    const double dl_2   = dl * dl;
-    const double dl_3   = dl_2 * dl;
-    const double dl1    = log(1-x);
-    const double d81    = 1. / 81.;
+    const double x_2  = x * x;
+    const double x_3  = x_2 * x;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double dl_3 = dl_2 * dl;
+    const double dl1  = log(1-x);
+    const double d81  = 1. / 81.;
     return
       1860.2 - 3505.* x + 297.0 * x_2 - 433.2 * x_3
       + 116. * d81 * dl_3 * dl + 2880. * d81 * dl_3
@@ -320,14 +311,14 @@ namespace apfel
   }
   double P2nss::Regular(double const& x) const
   {
-    const double x_2    = x * x;
-    const double d27    = 1. / 27.;
-    const double dl     = log(x);
-    const double dl_2   = dl * dl;
-    const double dl_3   = dl_2 * dl;
-    const double dl_4   = dl_3 * dl;
-    const double x1     = 1 - x;
-    const double dl1    = log(x1);
+    const double x_2  = x * x;
+    const double d27  = 1. / 27.;
+    const double dl   = log(x);
+    const double dl_2 = dl * dl;
+    const double dl_3 = dl_2 * dl;
+    const double dl_4 = dl_3 * dl;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
     return
       _nf * ( x1 * ( 151.49 + 44.51 * x - 43.12 * x_2 + 4.820 * x_2 * x )
               + 40. * d27 * dl_4 - 80. * d27 * dl_3 + 6.892 * dl_2
@@ -482,18 +473,77 @@ namespace apfel
       + _nf * _nf * ( - 16. / 9. * dl1 + 6.4630 );
   }
 
-  /**
-   * @brief The NNNLO splitting function classes (parametrized and
-   * leading color). Only the +, -, and valence contributions have
-   * been computed so far.
-   *
-   */
   //_________________________________________________________________________________
-  P3nsp::P3nsp(int const& nf, int const& imod):
+  P3nsp::P3nsp(int const& nf, int const& imod, double const& rho):
     Expression(),
     _nf(nf),
-    _imod(imod)
+    _imod(imod),
+    _rho(rho)
   {
+    const int nf2 = _nf * _nf;
+    const int nf3 = _nf * nf2;
+
+    // Moments for the known exact small-x and large-x contributions (Vogt)
+    std::vector<double> N(8, 0.);
+    N[0] = -0.00021211
+           - _nf * ( 0.1654801313006386 + 0.20740623526104135 - 0.1502823524 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( -0.004654314166031352 -0.007842937752425193 + 4.7723213922e-03 + 7.774039377e-03 )
+           - nf3 * ( -6.62104090137594e-05 - 0.0001312258806063389 + 7.653104787e-05 + 1.209052801e-04 )
+           + _rho * 0.375;
+    N[1] = -0.00021141
+           - _nf * ( 0.11120681844515805 + 0.3802447646452425 - 0.2688473229 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( 9.571697043e-3 + 7.774039377e-03 -0.0029670140315604917 - 0.014378719212779521 )
+           - nf3 * ( -3.609651149299798e-05 -0.00024058078111162135 + 1.55772043e-04 + 1.209052801e-04 )
+           + _rho * 0.0234375;
+    N[2] = -0.00021069
+           - _nf * ( 0.08533032993183774 + 0.4735775705127111 - 0.3363034306 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( 0.01237066021 + 7.774039377e-03 - 0.002236654071582081 -0.01790804120137086 )
+           - nf3 * ( -2.4727034394311423e-05 -0.0002996324273844739 + 2.034542201e-04 + 1.209052801e-04 )
+           + _rho * 0.004629629629528962;
+    N[3] = -0.00020986
+           - _nf * ( 0.06978655862237221 + 0.5377747385697003 - 0.3849568093 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( -0.001806806533621782 -0.020335617172359613 + 0.01436839622 + 7.774039377e-03 )
+           - nf3 * ( -1.875753442493042e-05 -0.00034024996185786445 + 2.381022604e-04 + 1.209052801e-04 )
+           + _rho * 0.0014648437499999065;
+    N[4] = -0.00020809
+           - _nf * ( 0.059311724466073266 + 0.5867456552285572 - 0.4234530704 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( -0.0015200868207649136 -0.02218742191946 + 0.01593349271 + 7.774039377e-03 )
+           - nf3 * ( -1.5092063174265756e-05 - 0.0003712338503343612 + 2.654206822e-04 + 1.209052801e-04 )
+           + _rho * 0.0005999999999999996;
+    N[5] = -0.0002073
+           - _nf * ( 0.0517320184770643 + 0.6263413910511195 - 0.4554694245 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( -0.001314205205204153 -0.023684710035832085 + 0.0172249122 + 7.774039377e-03 )
+           - nf3 * ( -1.2617371403920047e-05 -0.0003962860639046623 + 2.879982076e-04 + 1.209052801e-04 )
+           + _rho * 0.0002893518518518518;
+    N[6] = -0.00020562
+           - _nf * ( 0.045972268757607376 + 0.6595795697788507 - 0.4829482701 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( -0.0011588022146498728 -0.024941591085900227 + 0.0183264033 + 7.774039377e-03 )
+           - nf3 * ( -1.0836262424080888e-05 -0.0004173158524633704 + 3.072468902e-04 + 1.209052801e-04 )
+           + _rho * 0.00015618492294877136;
+    N[7] = -0.00020381
+           - _nf * ( 0.04143575048971359 + 0.6882213832196611 - 0.5070540331 + 0.01076711056 - 0.2333500675 )
+           - nf2 * ( -0.0010371493846056854 -0.026024663442187512 + 0.01928783511 + 7.774039377e-03 )
+           - nf3 * ( -9.493881167514427e-06 -0.00043543752168996016 + 3.240261808e-04 + 1.209052801e-04 )
+           + _rho * 9.155273437499997e-05;
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {9.67452285e-02, 7.12205880e03, 2.55568773e03, 4.41612871e02, -3.63251998e02, 8.54599881e03,  -8.03082218e03, 5.66780493e01},
+      {-1.10377154e01, -7.11199538e05, -2.58657431e05, -4.59602884e04, 2.63108547e04, -8.24798082e05, 7.81924565e05, -3.25280541e03},
+      {1.99489100e02, 1.15489637e07, 4.23773320e06, 7.69318756e05, -3.54975874e05, 1.31604354e07, -1.25178270e07, 4.09448382e04},
+      {-1.28368247e03, -6.79475656e07, -2.50856870e07, -4.63268153e06, 1.85137884e06, -7.66032630e07, 7.29666144e07, -2.06388099e05},
+      {3.82370653e03, 1.87306734e08, 6.94570801e07, 1.30090317e07, -4.68326682e06, 2.09632375e08, -1.99805999e08, 5.11458122e05},
+      {-5.75484319e03, -2.63212244e08, -9.79232841e07, -1.85597818e07, 6.16625773e06, -2.93018936e08, 2.79351504e08, -6.64139088e05},
+      {4.25513991e03, 1.82949771e08, 6.82322632e07, 1.30646558e07, -4.07104678e06, 2.02835925e08, -1.93381943e08, 4.34087442e05},
+      {-1.22905233e03, -4.99408525e07, -1.86617424e07, -3.60495568e06, 1.06569809e06, -5.51895151e07, 5.26130529e07, -1.12766384e05}
+    };
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[j][i] * N[j];
   }
   double P3nsp::Regular(double const& y) const
   {
@@ -556,7 +606,9 @@ namespace apfel
       - ( 2.633745e-1 * dm - 1.31687e-1 * ( 1 + y ) ) * dl3;
 
     // Assembly
-    const double p3nspai = p3nsa0 + _nf * ( p3nsa1 + _nf * ( p3nspa2 + _nf * p3nsa3 ) );
+    const double p3nspai = p3nsa0 + _nf * ( p3nsa1 + _nf * ( p3nspa2 + _nf * p3nsa3 ) )
+                           + ( _C[1] * omy * dlm + _C[2] * omy * dlm2 + _C[3] * omy * dlm3
+                               + _C[4] + _C[5] * y + _C[6] * y2 + _C[7] * dl2 + _rho * dl3 ) * pow(FourPi, 4);
     if (_imod == 1)
       return p3nspai + p3npa01 + _nf * p3npa11;
     else if (_imod == 2)
@@ -571,7 +623,8 @@ namespace apfel
       2.120902e+4
       - 5.179372e+3 * _nf
       + 1.955772e+2 * _nf * _nf
-      + 3.272344 * _nf * _nf * _nf;
+      + 3.272344    * _nf * _nf * _nf
+      + _C[0] * pow(FourPi, 4);
     const double a4ap1 = - 507.152 + 7.33927 * _nf;
     const double a4ap2 = - 505.209 + 7.53662 * _nf;
 
@@ -587,9 +640,10 @@ namespace apfel
     const double dl1 = log(1-y);
     const double a4qi  =
       2.120902e+4
-      - 5.179372e+3* _nf
-      + 1.955772e+2* _nf * _nf
-      + 3.272344* _nf * _nf * _nf;
+      - 5.179372e+3 * _nf
+      + 1.955772e+2 * _nf * _nf
+      + 3.272344    * _nf * _nf * _nf
+      + _C[0] * pow(FourPi, 4);
     const double a4ap1 = - 507.152 + 7.33927 * _nf;
     const double a4ap2 = - 505.209 + 7.53662 * _nf;
 
@@ -633,6 +687,7 @@ namespace apfel
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm2 * dlm;
 
+    // Leading large-n_c, nf^0 and nf^1, parametrized
     const double p3nsa0  =
       2.5e+4 * ( omy * ( 3.5254 + 8.6935 * y - 1.5051 * y2 + 1.8300 * y3 )
                  + 11.883 * y * dl - 0.09066 * y * dl2 + 11.410 * omy * dlm + 13.376  * dl * dlm )
@@ -716,8 +771,8 @@ namespace apfel
 
     const double b4qi =
       2.579609e+4 + 0.08
-      - ( 5.818637e+3 + 0.97 ) * _nf
-      + ( 1.938554e+2 + 0.0037)* _nf * _nf
+      - ( 5.818637e+3 + 0.97 )   * _nf
+      + ( 1.938554e+2 + 0.0037 ) * _nf * _nf
       +   3.014982e+0 * _nf * _nf * _nf;
     const double b4ap1 = - 2426.05  + 266.674 * _nf - 0.05 * _nf;
     const double b4ap2 = - 2380.255 + 270.518 * _nf - 0.05 * _nf;
@@ -764,7 +819,7 @@ namespace apfel
       2.5e+2 * ( omy * ( - 4.7656 + 1.6908 * y + 0.1703 * y2 )
                  - 0.41652 * y *dl + 0.90777 * y * dl2 + 0.12478 * y * dl3
                  + 0.17155 * omy * dlm + 0.17191  * dl * dlm )
-      - 6.473971e+2 * dl - 6.641219e+1 * dl2 - 5.353347 * dl3 - 5.925926 *dl4
+      - 6.473971e+2 * dl - 6.641219e+1 * dl2 - 5.353347 * dl3 - 5.925926 * dl4
       - 3.950617e-1 * dl5 + 1.970002e+1 * omy * dlm - 3.435474 * omy * dlm2;
 
     if (_imod == 1)
@@ -773,5 +828,281 @@ namespace apfel
       return _nf * p3nsa12 + _nf * _nf * p3nssa2;
     else
       return 0.5 *_nf * ( p3nsa11 + p3nsa12 ) + _nf * _nf * p3nssa2;
+  }
+
+  //_________________________________________________________________________________
+  P3ps::P3ps(int const& nf, double const& rho):
+    Expression(),
+    _nf(nf),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{-1.28827235e-01 - _rho * 0.75, -2.42108771e-03 - _rho * 0.04861111111078488,
+                                -6.81270332e-05 - _rho * 0.012222222222363594, 4.79640375e-05 - _rho * 0.004783163265306247};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {-4.33423515e+01, 1.04394869e+03, -3.26481918e+03, 2.49215628e+03},
+      {1.01800794e+02, -2.29059693e+03, 7.08126548e+03, -5.37933607e+03},
+      {1.28895321e+02, -3.28605015e+03, 1.09724714e+04, -8.75612151e+03},
+      {-9.56650450, 2.57515782e+02, -9.20800163e+02, 7.84949427e+02}
+    };
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[i][j] * N[j];
+  }
+  double P3ps::Regular(double const& x) const
+  {
+    const double dl  = log(x);
+    const double dl2 = dl * dl;
+    const double dlm = log(1 - x);
+    return _nf * ( ( 1 - x ) * ( _C[0] / x + _C[1] * dl2 + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 2) - _rho * dl / x )
+                   + pow(CA, 2) * CF * ( 82. / 81. + 2 * zeta3 ) * dl2 / x / 6 / pow(M_PI, 4) ) * pow(FourPi, 4);
+  }
+  /*
+  //_________________________________________________________________________________
+  P3ps::P3ps(int const& nf, int const& imod):
+    Expression(),
+    _nf(nf),
+    _imod(imod)
+  {
+  }
+  double P3ps::Regular(double const& x) const
+  {
+    const int nf2     = _nf * _nf;
+    const int nf3     = _nf * nf2;
+    const double xm   = 1 / x;
+    const double x1   = 1 - x;
+    const double dl   = log(x);
+    const double dl2  = dl * dl;
+    const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double dl5  = dl * dl4;
+    const double dl6  = dl * dl5;
+    const double dlm  = log(1-x);
+    const double dlm2 = dlm * dlm;
+    const double dlm3 = dlm * dlm2;
+    const double dlm4 = dlm * dlm3;
+
+    // Known large-x coefficients
+    const double x1L4cff = - 5.6460905e1 * _nf + 3.6213992   * nf2;
+    const double x1L3cff = - 2.4755054e2 * _nf + 4.0559671e1 * nf2 - 1.5802469 * nf3;
+    const double y1L4cff = - 1.3168724e1 * _nf;
+    const double y1L3cff = - 1.9911111e2 * _nf + 1.3695473e1 * nf2;
+
+    // Known small-x coefficients
+    const double bfkl1   =   1.7492273e3 * _nf;
+    const double x0L6cff = - 7.5061728   * _nf + 7.9012346e-1 * nf2;
+    const double x0L5cff =   2.8549794e1 * _nf + 3.7925926    * nf2;
+    const double x0L4cff = - 8.5480010e2 * _nf + 7.7366255e1  * nf2 - 1.9753086e-1 * nf3;
+
+    // The resulting part of the function
+    const double P3ps01 =
+      + bfkl1 * dl2 * xm
+      + x0L6cff * dl6
+      + x0L5cff * dl5
+      + x0L4cff * dl4
+      + x1L3cff * x1 * dlm3
+      + x1L4cff * x1 * dlm4
+      + y1L3cff * x1 * x1 * dlm3
+      + y1L4cff * x1 * x1 * dlm4;
+
+    // The selected approximations for nf = 3, 4, 5
+    double P3psApp1 = P3ps01;
+    double P3psApp2 = P3ps01;
+    if (_nf <= 3)
+      {
+        P3psApp1 +=
+          + 67731.  * x1 * dl * xm
+          + 274100. * x1 * xm
+          - 104493. * x1 * ( 1 + 2 * x )
+          + 34403.  * x1 * x * x
+          + 353656. * x1 * dl
+          + 10620.  * dl2
+          + 40006.  * dl3
+          - 7412.1  * x1 * dlm
+          - 2365.1  * x1 * dlm2
+          + 1533.0  * x1 * x1 * dlm2;
+        P3psApp2 +=
+          + 54593.  * x1 * dl * xm
+          + 179748. * x1 * xm
+          - 195263. * x1
+          + 12789.  * x1 * x * ( 1 + x )
+          + 4700.0  * x1 * dl
+          - 103604. * dl2
+          - 2758.3  * dl3
+          - 2801.2  * x1 * dlm
+          - 1986.9  * x1 * dlm2
+          - 6005.9  * x1 * x1 * dlm2;
+      }
+    else if (_nf == 4)
+      {
+        P3psApp1 +=
+          + 90154.  * x1 * dl *xm
+          + 359084. * x1 * xm
+          - 136319. * x1 * ( 1 + 2 * x )
+          + 45379.  * x1 * x * x
+          + 461167. * x1 * dl
+          + 13869.  * dl2
+          + 52525.  * dl3
+          - 7498.2  * x1 * dlm
+          - 2491.5  * x1 * dlm2
+          + 1727.2  * x1 * x1 * dlm2;
+        P3psApp2 +=
+          + 72987.  * x1 * dl * xm
+          + 235802. * x1 * xm
+          - 254921. * x1
+          + 17138.  * x1 * x * ( 1 + x )
+          + 5212.9  * x1 * dl
+          - 135378. * dl2
+          - 3350.9  * dl3
+          - 1472.7  * x1 * dlm
+          - 1997.2  * x1 * dlm2
+          - 8123.3  * x1 * x1 * dlm2;
+      }
+    else if (_nf >= 5)
+      {
+        P3psApp1 +=
+          + 112481. * x1 * dl * xm
+          + 440555. * x1 * xm
+          - 166581. * x1 * ( 1 + 2 * x )
+          + 56087.  * x1 * x * x
+          + 562992. * x1 * dl
+          + 16882.  * dl2
+          + 64577.  * dl3
+          - 6570.1  * x1 * dlm
+          - 2365.7  * x1 * dlm2
+          + 1761.7  * x1 * x1 * dlm2;
+        P3psApp2 +=
+          + 91468.  * x1 * dl * xm
+          + 289658. * x1 * xm
+          - 311749. * x1
+          + 21521.  * x1 * x * ( 1 + x )
+          +  4908.9 * x1 * dl
+          - 165795. * dl2
+          -  3814.9 * dl3
+          +   804.5 * x1 * dlm
+          -  1760.8 * x1 * dlm2
+          - 10295.  * x1 * x1 * dlm2;
+      }
+
+    // We return (for now) one of the two error-band boundaries or the
+    // present best estimate, their average
+    if (_imod == 1)
+      return P3psApp1;
+    else if (_imod == 2)
+      return P3psApp2;
+    else
+      return 0.5 * ( P3psApp1 + P3psApp2 );
+  }
+  */
+  //_________________________________________________________________________________
+  P3qg::P3qg(int const& nf, double const& rho):
+    Expression(),
+    _nf(nf),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{-0.32821791 - _rho * 0.9999999999999999, -0.0079068 - _rho * 0.11111111111076043,
+                                0.00668085 - _rho * 0.04000000000013782, 0.0112976 - _rho * 0.02040816};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {1.50859345e1, -1.73502577e2, 3.81181701e2, -2.25021001e2},
+      {1.39350535e1, -2.33166358e2, 5.53133581e2, -3.37644014e2},
+      {3.92339377, -8.52278788e1, 2.57493287e2, -1.79628628e2},
+      {-1.15513419e-2, 2.74882781e-1, -9.19800075e-1, 7.20490480e-1}
+    };
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[i][j] * N[j];
+  }
+  double P3qg::Regular(double const& x) const
+  {
+    const double dl  = log(x);
+    const double dl2 = dl * dl;
+    const double dlm = log(1 - x);
+    return _nf * ( _C[0] * dl2 + _C[1] * dl + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 4) - _rho * dl / x
+                   + pow(CA, 3) * ( 82. / 81. + 2 * zeta3 ) * dl2 / x / 6 / pow(M_PI, 4) ) * pow(FourPi, 4);
+  }
+
+  //_________________________________________________________________________________
+  P3gq::P3gq(double const& rho):
+    Expression(),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{-0.78602265 - _rho * 1.9999999999999991, 0.05776039 - _rho * 0.07407407407348075,
+                                0.04868481 - _rho * 0.016000000001040217, 0.04071129 - _rho * 0.0058309037900882415};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {-15.48054909, -39.22467343, 13.63767859, 3.69946174},
+      {442.68554891, 1038.70260338, -415.55730182,-113.79603728},
+      {-1263.91174116,  -2938.1594667, 1302.32965951,362.67726047},
+      {874.63704072, 2025.64293423,-958.33374045, -272.56485302}
+    };
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[j][i] * N[j];
+  }
+  double P3gq::Regular(double const& x) const
+  {
+    const double dl  = log(x);
+    const double dl2 = dl * dl;
+    const double dl3 = dl * dl2;
+    const double dlm = log(1 - x);
+    return ( - _C[0] * dl / x + _C[1] * dl3 + _C[2] * x + _C[3] * dlm + _rho * dl2 / x
+             - pow(CA, 3) * CF * zeta3 * dl3 / x / 3 / pow(M_PI, 4) ) * pow(FourPi, 4);
+  }
+
+  //_________________________________________________________________________________
+  P3gg::P3gg(double const& rho):
+    Expression(),
+    _rho(rho)
+  {
+    // Moments for the known exact small-x contribution (Vogt)
+    const std::vector<double> N{6.94542399 - _rho * 0.9999999999999999, 0.01255781 - _rho * 0.11111111111076043,
+                                -0.24160401 - _rho * 0.04000000000013782, -0.27416992 - _rho * 0.02040816};
+
+    // Matrix
+    const std::vector<std::vector<double>>  inv_A
+    {
+      {1.57592805e1, -1.89525930e2, 4.34798303e2, -2.67019531e2},
+      {1.51046749e1, -2.60999383e2, 6.46267166e2, -4.10596673e2},
+      {6.05043429, -1.35844233e2, 4.26863395e2, -3.12298274e2},
+      {-3.86434270e-1, 9.19582568, -3.07706474e1, 2.41030189e1}
+    };
+
+    // Matrix multiplication of inv_A and N
+    _C.resize(N.size(), 0.);
+    for (int i = 0; i < (int) N.size(); i++)
+      for (int j = 0; j < (int) N.size(); j++)
+        _C[i] += inv_A[i][j] * N[j];
+  }
+  double P3gg::Regular(double const& x) const
+  {
+    const double nf  = 4;
+    const double dl  = log(x);
+    const double dl2 = dl * dl;
+    const double dl3 = dl * dl2;
+    const double dlm = log(1 - x);
+    return ( _C[0] * dl2 + _C[1] * dl + _C[2] * pow(x, 2) + _C[3] * pow(dlm, 2) - _rho * dl / x
+             - pow(CA, 4) / (3 * pow(Pi2, 2)) * zeta3 * dl3 / x
+             + ( pow(CA, 4) * ( - 1205. / 162. + 67. / 36. * zeta2 + 1. / 4. * pow(zeta2, 2) - 11. / 2. * zeta3 )
+                 + nf * pow(CA, 3) * ( - 233. / 162. + 13. / 36. * zeta2 - 1. / 3. * zeta3 )
+                 + nf * pow(CA, 2) * CF * ( 617. / 243. - 13. / 18. * zeta2 + 2. / 3. * zeta3) ) * dl2 / x / pow(Pi2, 2) / 2 ) * pow(FourPi, 4);
   }
 }

@@ -1349,7 +1349,8 @@ associated with the Lorentz structure of the hadronic tensor. However,
 at small values of $|\mathbf{q}_T|$, the leading-power Lorentz
 structure that one needs to multiply the leptonic tensor for is:
 \begin{equation}
-g_\perp^{\mu\nu} = g^{\mu\nu}+z^\mu z^\nu-t^\mu t^\nu
+  g_\perp^{\mu\nu} = g^{\mu\nu}+z^\mu z^\nu-t^\mu t^\nu
+  \label{eq:gmunoperp}
 \end{equation}
 where the vectors $z^\mu$ and $t^\mu$ in the Collins-Soper (CS) frame
 are defined as:
@@ -1360,7 +1361,7 @@ are defined as:
 \displaystyle t^\mu = \frac{q^\mu}{Q}\,,
 \end{array}
 \end{equation}
-and they are such that $z^2=-1$, $t^2=1$ and $zq = 0$. if we use the
+and they are such that $z^2=-1$, $t^2=1$ and $zq = 0$. If we use the
 on-shell-ness of $p_1$ and $p_2$ ($p_1^2=p_2^2=0$) and the momentum
 conservation ($p\equiv p_1$, $p_2=q-p$), we find that
 $t^\mu t^\nu L_{\mu\nu}=0$ and the quantity above reduces to:
@@ -2091,16 +2092,17 @@ polar angle, the leptonic tensor can be generally decomposed into the
 following Lorentz structures~\cite{Ebert:2020dfc}:
 \begin{equation}
 \begin{array}{rcl}
-L^{\mu\nu}(q,p_1,p_2) &=&\displaystyle 
+L^{\mu\nu}(q, p_1,p_2) &=&\displaystyle 
 \left(-g^{\mu\nu}+\frac{q^\mu
-    q^\nu}{Q^2}\right)\mathcal{F}_1(z_1,z_2,Q^2)+\frac{1}{p\cdot
+    q^\nu}{Q^2}\right)\mathcal{F}_1(z_1,z_2, Q^2)+\frac{1}{p\cdot
   q}\left(p^{\mu}-\frac{p\cdot
   q}{Q^2}q^{\mu}\right)\left(p^{\nu}-\frac{p\cdot
-  q}{Q^2}q^{\nu}\right)\mathcal{F}_2(z_1,z_2,Q^2)\\
+  q}{Q^2}q^{\nu}\right)\mathcal{F}_2(z_1,z_2, Q^2)\\
 \\
 &-&\displaystyle
-    i\varepsilon^{\mu\nu\rho\sigma}\frac{q_{\rho}p_{\sigma}}{2p\cdot q}\mathcal{F}_3(z_1,z_2,Q^2)\,.
+    i\varepsilon^{\mu\nu\rho\sigma}\frac{q_{\rho}p_{\sigma}}{2p\cdot q}\mathcal{F}_3(z_1,z_2, Q^2)\,.
 \end{array}
+\label{eq:leptonictensor}
 \end{equation}
 where $p=p_1$, $Q^2=q^2$, $z_i=2p_i\cdot q/Q^2$ with $i=1,2$, and
 where the functions $\mathcal{F}$ are purposely reminiscent of the
@@ -2118,9 +2120,9 @@ hadronic collisions reads:
 \begin{equation}
 \frac{d\sigma}{d^4p_1d^4p_2} = \int d^4q\,W_{\mu\nu}(P_1,P_2,q) L^{\mu\nu}(q,p_1,p_2)\,,
 \end{equation}
-where $W_{\mu\nu}$ and $P_{1,2}$ are the moment of the incoming
-hadrons. Notice that here we are assuming that there is non
-interference between in the leptonic and the hadronic
+where $W_{\mu\nu}$ is the hadronic tensor and $P_{1,2}$ are the
+momenta of the incoming hadrons. Notice that here we are assuming that
+there is non interference between in the leptonic and the hadronic
 parts. Importantly, one generally has $q\neq p_1+ p_2$ due to possible
 radiation that is eventually integrated over into the structure
 functions. The differential cross section with respect to the
@@ -2158,8 +2160,19 @@ leptons defined by the function $\Theta(p_1,p_2)$ is computed as:
 where $W_{\mu\nu}$ is the hadronic tensor. Decomposing the hadronic
 tensor in terms of Lorentz structures and taking the contractions with
 the leptonic tensor produces the fiducial cross section discussed
-above.
-
+above. The Lorentz structure relevant to the unpolaised case is
+$g_\perp^{\mu\nu}$ given in Eq.~(\ref{eq:gmunoperp}). Observing the
+fact that $g_\perp^{\mu\nu}$ is symmetric, when contracting it with the leptonic tensor in
+Eq.~(\ref{eq:leptonictensor}), the term proportional to
+$\epsilon^{\mu\nu\rho\sigma}$ automatically drops. We are then left
+with:
+\begin{equation}
+\displaystyle L_\perp(q,p_1,p_2)= g_\perp^{\mu\nu}
+    L_{\mu\nu}(q,p_1,p_2) = -2\mathcal{F}_1(z_1,z_2,Q^2)-\frac12z_1\mathcal{F}_2(z_1,z_2,Q^2)+\frac{(zp)^2}{p\cdot
+    q}\mathcal{F}_2(z_1,z_2,Q^2)
+\end{equation}
+where we have used the equalities $z^2=-1$, $t^2=1$, $zq = 0$, and
+$p^2=0$.
 
 \newpage
 \bibliographystyle{ieeetr}

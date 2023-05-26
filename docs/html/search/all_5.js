@@ -45,7 +45,7 @@ var searchData=
   ['evolutionsetup_2eh_42',['evolutionsetup.h',['../evolutionsetup_8h.html',1,'']]],
   ['evolutiontheory_43',['EvolutionTheory',['../structapfel_1_1EvolutionSetup.html#a829586a1986a0a568bcd4d69eff7442e',1,'apfel::EvolutionSetup']]],
   ['evolvedistributionsbasisqcd_44',['EvolveDistributionsBasisQCD',['../classapfel_1_1EvolveDistributionsBasisQCD.html',1,'apfel::EvolveDistributionsBasisQCD'],['../classapfel_1_1EvolveDistributionsBasisQCD.html#a6de1aa97bb9782c5f514799808c44900',1,'apfel::EvolveDistributionsBasisQCD::EvolveDistributionsBasisQCD()']]],
-  ['evolveobject_45',['EvolveObject',['../classapfel_1_1MatchedEvolution.html#af1c4e4e48f86ea639b21258a8abb996a',1,'apfel::MatchedEvolution']]],
+  ['evolveobject_45',['EvolveObject',['../classapfel_1_1MatchedEvolution.html#a671a39603db2e8445c2a60677847276d',1,'apfel::MatchedEvolution::EvolveObject()'],['../classapfel_1_1AlphaQCDg.html#a56df5292128e4479299be9eb9cccc4e4',1,'apfel::AlphaQCDg::EvolveObject()']]],
   ['exact_46',['exact',['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5aa4b3908a4dfbac268681dbb1cc004ebf8',1,'apfel::EvolutionSetup']]],
   ['exactalpha_47',['exactalpha',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328ac80f7f281ebc9488cbad7482007e3226',1,'apfel::EvolutionSetup']]],
   ['exactmu_48',['exactmu',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a36243c0035a29c29d51b9cd617b5974e',1,'apfel::EvolutionSetup']]],

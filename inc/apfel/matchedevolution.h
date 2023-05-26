@@ -41,12 +41,12 @@ namespace apfel
     /**
      * @brief Virtual function for the computation of the evolution.
      * @param nf: the number of active flavours
+     * @param t0: the initial value of the scale
+     * @param t1: the final value of the scale
      * @param Obj0: the starting object
-     * @param mu02: the squared starting scale
-     * @param mu2: the squared final scale
      * @return the object evolved at the scale mu2
      */
-    virtual T EvolveObject(int const& nf, double const& mu02, double const& mu2, T const& Obj0) const;
+    virtual T EvolveObject(int const& nf, double const& t0, double const& t1, T const& Obj0) const;
 
     /**
      * @brief Pure virtual function for the computation of the matching.

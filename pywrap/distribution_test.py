@@ -9,17 +9,17 @@ class p0qq(ap.Expression):
   def Singular(self, x):
     return 4 * ap.constants.CF / ( 1 - x )
   def Local(self, x):
-    return 4 * ap.constants.CF * np.log( 1 - x ) + 3 * ap.constants.CF
+    return 4 * ap.constants.CF * np.log(1. - x) + 3 * ap.constants.CF
 
 # Class to define the analytical expression of the squared LO
 # splitting function P0qq
 class p0qq2(ap.Expression):
   def Regular(self, x):
-    return 4 * ap.constants.CF * ap.constants.CF * ( - 4. * np.log(x) / ( 1. - x ) - 4. * ( 1. + x ) * np.log( 1. - x ) + 3. * ( 1. + x ) * np.log(x) - ( x + 5. ) )
+    return 4 * ap.constants.CF * ap.constants.CF * ( - 4. * np.log(x) / ( 1. - x ) - 4. * ( 1. + x ) * np.log(1. - x) + 3. * ( 1. + x ) * np.log(x) - ( x + 5. ) )
   def Singular(self, x):
-    return 4 * ap.constants.CF * ap.constants.CF * ( 8. * np.log( 1. - x ) + 6. ) / ( 1. - x )
+    return 4 * ap.constants.CF * ap.constants.CF * ( 8. * np.log(1. - x) + 6. ) / ( 1. - x )
   def Local(self, x):
-    return 4 * ap.constants.CF * ap.constants.CF * ( 4. * np.log( 1. - x )**2 + 6 * np.log( 1. - x ) + 9. / 4. - 4. * np.pi**2 / 6. )
+    return 4 * ap.constants.CF * ap.constants.CF * ( 4. * np.log(1. - x)**2 + 6 * np.log(1. - x) + 9. / 4. - 4. * np.pi**2 / 6. )
 
 t = ap.Timer()
 
@@ -58,7 +58,7 @@ print("\nChecking the numerical accuracy of O * d ... ")
 for ix in range(g.GetJointGrid().nx()):
       x = g.GetJointGrid().GetGrid()[ix]
       # Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
-      Ix = ap.constants.CF * ( - 2 * ( 3. / 2. - x - x**2 / 2. ) + 4 * ( 1 - x ) * np.log( 1 -  x ) + 3 * ( 1 - x ) + 2 * x * ( np.log(x) + 1 - x ) )
+      Ix = ap.constants.CF * ( - 2 * ( 3. / 2. - x - x**2 / 2. ) + 4 * ( 1 - x ) * np.log(1. - x) + 3 * ( 1 - x ) + 2 * x * ( np.log(x) + 1 - x ) )
       print(format(x, ".6e"), "\t\t", format(Od.Evaluate(x), ".6e"), "\t\t", format(Ix, ".6e"), "\t\t", format(Od.Evaluate(x) / Ix, ".6e"))
 
 # Check the numerical accuracy of "Od" by comparing with the

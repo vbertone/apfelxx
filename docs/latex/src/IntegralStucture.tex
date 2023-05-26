@@ -822,8 +822,6 @@ Eq.~(\ref{eq:DoubleFuncStruct}) are:
 \end{array}
 \end{equation}
 
-
-
 \subsubsection{Drell Yan (DY)}
 
 In this section we apply to the Drell-Yan (DY) process the same
@@ -831,9 +829,192 @@ procedure followed above for SIDIS. As a matter of fact, SIDIS and DY
 are strictly connected in that DY can be regarded as the time-like
 counterpart of SIDIS. As a consequence, the structure of the relevant
 observables as well as the form of the expressions involved are very
-similar. Therefore, the application of the method described above is
-straightforward. 
+similar. Therefore, the application of the method described above
+should be straightforward. However, it appears that, even at one loop,
+there is not a set of expressions that write the rapidity ($Y$) and
+invariant-mass ($Q$) differential DY cross sections in terms of Mellin
+convolutions. Refs.~\cite{Gehrmann:1997pi, Gehrmann:1997ez} present a
+set of expressions that are in fact close to a form required for
+implementation in APFEL++. However, due to a non-standard definition
+of the $+$-prescription, these expressions are particularly cumbersome
+to manipulate. As a consequence, we will start considering the
+expressions given in Ref.~\cite{Bonvini:2010tp}, originally computed
+in Ref.~\cite{Altarelli:1979ub}, for the unpolarised case that use a
+different and convenient parameterisation of the convolution
+integrals. Specifically, the cross section up to one loop reads:
+\begin{equation}
+  \begin{array}{rcl}
+\displaystyle \frac{1}{\tau}\frac{d^2\sigma}{dQ^2 dY} &=&
+\displaystyle \int_{\tau}^1\frac{dz}{z}\int_0^1 du\Big\{
+                                                          L_{q\overline{q}}(x_1(z,u),x_2(z,u))\left[\delta(1-z)+a_s(Q)F(z,u)\right]\\
+    \\
+    &+&\displaystyle  L_{qg}(x_1(z,u),x_2(z,u)) a_s(Q)G(z,u)+
+        L_{gq}(x_1(z,u),x_2(z,u)) a_s(Q)G(z,1-u)\Big\}\,,
+  \end{array}
+  \label{eq:DYalaAltarelli}
+\end{equation}
+where $\tau = Q^2/s$, being $\sqrt{s}$ the hadronic center of mass
+energy and:
+\begin{equation}
+x_1(z,u) =
+\frac{\xi_1}{\sqrt{z}}\sqrt{\frac{z+(1-z)u}{1-(1-z)u}}\,,\quad
+x_2(z,u) =
+\frac{\xi_2}{\sqrt{z}}\sqrt{\frac{1-(1-z)u}{z+(1-z)u}}\,,\quad\xi_{1,2}
+= \sqrt{\tau}e^{\pm Y}\,.
+\label{eq:variables}
+\end{equation}
+The partonic luminosities are defined as:
+\begin{equation}
+L_{ij}(x_1,x_2) = \sum_{ij} c_{ij}(Q) f_i^{(1)}(x_1,Q)
+f_j^{(2)}(x_2,Q)\,,\quad i,j=g,q
+\end{equation}
+and where $c_{ij}$ are the appropriate couplings and $f$ the
+PDFs. Finally, the perturbative functions $F$ and $G$ read:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle \frac{F(z,u)}{2C_F} &=&\displaystyle
+                             \left(\delta(u)+\delta(1-u)\right)\left[\delta(1-z)\left(\frac{\pi^2}{3}-4\right)+2(1+z^2)\left(\frac{\ln(1-z)}{1-z}\right)_+-\frac{1+z^2}{1-z}\ln
+                                          z+1-z\right]\\
+    \\
+    &+&\displaystyle
+        \frac{1+z^2}{1-z}\left[\left(\frac{1}{u}\right)_++\left(\frac{1}{1-u}\right)_+\right]-2(1-z)\,,\\
+    \\
+    \displaystyle \frac{G(z,u)}{2T_R}&=&\displaystyle \delta(u)\left[(z^2+(1-z)^2)\ln\frac{(1-z)^2}z+2z(1-z)\right]+(z^2+(1-z)^2)\left(\frac{1}{u}\right)_++2z(1-z)+(1-z)^2u\,.
+  \end{array}
+  \label{eq:NLOcorrectionsDY}
+\end{equation}
 
+The goal is now to express Eq.~(\ref{eq:DYalaAltarelli}) as a double
+Mellin convolution over the variables $x_1$ and $x_2$, that is:
+\begin{equation}
+\displaystyle \frac{1}{\tau}\frac{d^2\sigma}{dQ^2 dY} = \int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_1}^1\frac{dx_2}{x_2}L_{ij}(x_1,x_2)C_{ij}\left(\frac{\xi_1}{x_1}, \frac{\xi_2}{x_2}\right)\,,
+\end{equation}
+identifying the functions $C_{ij}$.  To do so, we first invert the
+variables in Eq.~(\ref{eq:variables}), finding:
+\begin{equation}
+  \begin{array}{rcl}
+  z &=&\displaystyle  y_1 y_2\,,\\
+  \\
+    u &=&\displaystyle \frac{(1-y_1^2)y_2}{(1-y_1y_2)(y_1+y_2)}\,,
+  \end{array}
+\end{equation}
+where we have defined $y_i=\xi_i/x_i$. The resulting Jacobian is such
+that:
+\begin{equation}
+\int_{\tau}^1\frac{dz}{z}\int_0^1 du \dots =
+\int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\frac{2y_1
+y_2(1+y_1 y_2)}{(1-y_1 y_2)(y_1+y_2)^2}\dots\,.
+\end{equation}
+
+The leading-order term does not actually require the change of
+variable because it evaluates to:
+\begin{equation}
+  \begin{array}{rcl}
+\displaystyle \left.\frac{1}{\tau}\frac{d^2\sigma}{dQ^2 dY}\right|_{\rm LO} &=&
+\displaystyle \int_{\tau}^1\frac{dz}{z}\int_0^1 du
+                                                          L_{q\overline{q}}(x_1(z,u),x_2(z,u))\delta(1-z)
+                                                                                =
+                                                                                \int_0^1
+                                                                                du
+                                                          L_{q\overline{q}}(x_1(1,u),x_2(1,u))\,.
+  \end{array}
+\end{equation}
+Using the fact that $x_i(1,u)=\xi_i$, one immediately finds:
+\begin{equation}
+\displaystyle \left.\frac{1}{\tau}\frac{d^2\sigma}{dQ^2 dY}\right|_{\rm LO} =  L_{q\overline{q}}(\xi_1,\xi_2)=\int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\delta\left(1-\frac{\xi_1}{x_1}\right) \delta\left(1-\frac{\xi_2}{x_2}\right) L_{q\overline{q}}(x_1,x_2)\,,
+\end{equation}
+so that:
+\begin{equation}
+  C_{q\overline{q}}^{(0)}(y_1,y_2) = \delta(1-y_1)\delta(1-y_2)\,. 
+\end{equation}
+
+Let us now move on to the next-to-leading order (NLO) corrections. We
+start with the function $F$ in Eq.~(\ref{eq:NLOcorrectionsDY}) that is
+the NLO correction to the $q\overline{q}$ channel. The term
+proportional to $\delta(u)+\delta(1-u)$ is easy to address noticing
+that:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle x_1(z,0) = \xi_1\,,\quad x_2(z,0) = \frac{\xi_2}{z}\,,\\
+    \\
+    \displaystyle  x_1(z,1) = \frac{\xi_1}{z}\,,\quad x_2(z,0) = \xi_2\,,\\
+  \end{array}
+\end{equation}
+or equivalently:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle y_1(z,0) = 1\,,\quad y_2(z,0) = z\,,\\
+    \\
+    \displaystyle y_1(z,1) = z\,,\quad y_2(z,0) = 1\,.\\
+  \end{array}
+\end{equation}
+This is such that:
+\begin{equation}
+  \begin{array}{l}
+\displaystyle\int_{\tau}^1\frac{dz}{z}\int_0^1 du
+    (\delta(u)+\delta(1-u)) T(z) =\\
+    \\
+    \displaystyle
+\int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\frac{2y_1
+y_2(1+y_1 y_2)}{(1-y_1 y_2)(y_1+y_2)^2}\left[\frac
+    {1-y_2^2}{2y_2}\delta(1-y_1)+\frac{1-y_1^2}{2y_1}\delta(1-y_2)\right]T(y_1 y_2)=\\
+    \\
+    \displaystyle
+\int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\left[\delta(1-y_1) T(y_2)+\delta(1-y_2) T(y_1)\right]
+    \,.
+  \end{array}
+\end{equation}
+
+In the second line of $F$ in Eq.~(\ref{eq:NLOcorrectionsDY}) there
+is then the term:
+\begin{equation}
+-2\int_{\tau}^1\frac{dz}{z}\int_0^1 du (1-z) =
+\int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\frac{-4y_1
+y_2(1+y_1 y_2)}{(y_1+y_2)^2}\,.
+\end{equation}
+
+% Finally, there is the term:
+% \begin{equation}
+%   \begin{array}{l}
+% \displaystyle \int_{\tau}^1\frac{dz}{z}\int_0^1 du
+%     \frac{1+z^2}{1-z}\left[\left(\frac{1}{u}\right)_++\left(\frac{1}{1-u}\right)_+\right]L_{q\overline{q}}(x_1(z,u), x_2(z,u))
+%     =\\
+%     \\
+% \displaystyle \int_{\tau}^1\frac{dz}{z} \int_0^1 du \frac{1+z^2}{1-z}
+%     \left[\frac{1-\delta(u)}{u}+\frac{1-\delta(1-u)}{1-u}\right]L_{q\overline{q}}(x_1(z,u), x_2(z,u)) = \\
+%     \\
+%     \displaystyle \int_{\tau}^1\frac{dz}{z} \int_0^1 du \frac{1+z^2}{1-z}
+%     \left[\frac{1-\delta(u)-\delta(1-u)}{u(1-u)}\right]L_{q\overline{q}}(x_1(z,u), x_2(z,u)) = \\
+%     \\
+%     \displaystyle
+%     \int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\frac{2(1+y_1
+%     y_2)(1+y_1^2y_2^2)}{(1+y_1)(1+y_2)}\left[\frac{1-\delta(u)-\delta(1-u)}{(1-y_1)(1-y_2)}\right]L_{q\overline{q}}(x_1,
+%     x_2)=\\
+%     \\
+%     \displaystyle
+%     \int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\frac{2(1+y_1
+%     y_2)(1+y_1^2y_2^2)}{(1+y_1)(1+y_2)}\left[\frac{1-\frac{1-y_2^2}{2y_2}\delta(1-y_1)-\frac{1-y_1^2}{2y_1}\delta(1-y_2)}{(1-y_1)(1-y_2)}\right]L_{q\overline{q}}(x_1,
+%     x_2)=\\
+%     \\
+%     \displaystyle
+%     \int_{\xi_1}^1\frac{dx_1}{x_1}\int_{\xi_2}^1\frac{dx_2}{x_2}\frac{1}{(1-y_1)(1-y_2)}\Bigg[\frac{2(1+y_1
+%     y_2)(1+y_1^2y_2^2)}{(1+y_1)(1+y_2)}\\
+%     \\
+%     \displaystyle -\frac{1-y_2^4}{2y_2}\delta(1-y_1)-\frac{1-y_1^4}{2y_1}\delta(1-y_2)\Bigg]L_{q\overline{q}}(x_1,
+%     x_2)
+%     \end{array}
+% \end{equation}
+
+
+% Let us now consider the $G$ contribution in
+% Eq.~(\ref{eq:NLOcorrectionsDY}). As $u\leftrightarrow 1-u$ corresponds
+% to $y_1\leftrightarrow y_2$, it is sufficient to consider only, for
+% example, the case with $G(z,u)$ as the term with $G(z,1-u)$ is
+% obtained swapping $y_1$ and $y_2$. Considering the explicit expression
+% in Eq.~(\ref{eq:NLOcorrectionsDY}), 
+
+
+\newpage
 \subsection{Advantage of a logarithmic grid}
 
 Given the particular structure of the integral $I$ in

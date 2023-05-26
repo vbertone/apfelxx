@@ -10,10 +10,9 @@ var searchData=
   ['h3dy_7',['H3DY',['../namespaceapfel.html#acf86254c2695c9c2d47fefb21fcb266a',1,'apfel']]],
   ['h3sidis_8',['H3SIDIS',['../namespaceapfel.html#a36ed35bdf1b3a33dfc55585e7b86c21b',1,'apfel']]],
   ['hardfactor_9',['HardFactor',['../namespaceapfel.html#a94e0774ab3a271603a3463715b61c1c2',1,'apfel']]],
-  ['hardfactordy_10',['HardFactorDY',['../namespaceapfel.html#abb62dde36bf4a2ba35bf7dead959b504',1,'apfel']]],
-  ['hardfactors_11',['HardFactors',['../structapfel_1_1TmdObjects.html#ab72252afdabbc223c89ba674ffd0e2f9',1,'apfel::TmdObjects']]],
-  ['hardfactors_2eh_12',['hardfactors.h',['../hardfactors_8h.html',1,'']]],
-  ['hplogmap_13',['HPLogMap',['../namespaceapfel.html#a4952d6daa86b59a050d8cdc3b49eb59b',1,'apfel']]],
-  ['hpoly_14',['hpoly',['../namespaceapfel.html#abde00ad78affecc4bbe4e4e5996b820a',1,'apfel']]],
-  ['hpolyweights_2eh_15',['hpolyweights.h',['../hpolyweights_8h.html',1,'']]]
+  ['hardfactors_10',['HardFactors',['../structapfel_1_1TmdObjects.html#ab72252afdabbc223c89ba674ffd0e2f9',1,'apfel::TmdObjects']]],
+  ['hardfactors_2eh_11',['hardfactors.h',['../hardfactors_8h.html',1,'']]],
+  ['hplogmap_12',['HPLogMap',['../namespaceapfel.html#a4952d6daa86b59a050d8cdc3b49eb59b',1,'apfel']]],
+  ['hpoly_13',['hpoly',['../namespaceapfel.html#abde00ad78affecc4bbe4e4e5996b820a',1,'apfel']]],
+  ['hpolyweights_2eh_14',['hpolyweights.h',['../hpolyweights_8h.html',1,'']]]
 ];

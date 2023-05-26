@@ -5,6 +5,7 @@
 //
 
 #include "apfel/apfelxx.h"
+#include "apfel/SIDIS.h"
 
 namespace apfel
 {
@@ -21,46 +22,12 @@ namespace apfel
     std::map<int, DoubleObject<Operator>> G12qq;
   };
 
-  // Recurring expressions
-  class one: public Expression
-  {
-  public:
-    one(): Expression() {}
-    double Regular(double const&) const { return 1; }
-  };
-
-  class delta: public Expression
-  {
-  public:
-    delta(): Expression() {}
-    double Local(double const&) const { return 1; }
-  };
-
-  class Dn: public Expression
-  {
-  public:
-    Dn(int const& n): Expression(), _n(n) {}
-    double Singular(double const& x) const { return pow(log( 1 - x ), _n) / ( 1 - x ); }
-    double Local(double const& x) const { return pow(log( 1 - x ), _n + 1) / ( _n + 1 ); }
-  private:
-    int const _n;
-  };
-
-  class ln: public Expression
-  {
-  public:
-    ln(int const& n): Expression(), _n(n) {}
-    double Regular(double const& x) const { return pow(log( 1 - x ), _n); }
-  private:
-    int const _n;
-  };
-
-  // Expressions needed for the computation of the SIDIS cross sections.
+  // Expressions needed for the computation of the SIDIS cross sections
   // F2
-  class lrqq: public Expression
+  class lrqqpol: public Expression
   {
   public:
-    lrqq(): Expression() {}
+    lrqqpol(): Expression() {}
     double Regular(double const& x) const
     {
       const double expr = ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
@@ -68,17 +35,17 @@ namespace apfel
     }
   };
 
-  class srqq: public Expression
+  class srqqpol: public Expression
   {
   public:
-    srqq(): Expression() {}
+    srqqpol(): Expression() {}
     double Regular(double const& x) const { return - 2 * CF * ( 1 + x ); }
   };
 
-  class rlqq: public Expression
+  class rlqqpol: public Expression
   {
   public:
-    rlqq(): Expression() {}
+    rlqqpol(): Expression() {}
     double Regular(double const& x) const
     {
       const double expr = - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
@@ -86,45 +53,45 @@ namespace apfel
     }
   };
 
-  class rsqq: public Expression
+  class rsqqpol: public Expression
   {
   public:
-    rsqq(): Expression() {}
+    rsqqpol(): Expression() {}
     double Regular(double const& x) const { return - 2 * CF * ( 1 + x ); }
   };
 
-  class r11qq: public Expression
+  class r11qqpol: public Expression
   {
   public:
-    r11qq(): Expression() {}
+    r11qqpol(): Expression() {}
     double Regular(double const& x) const { return x; }
   };
 
-  class r12qq: public Expression
+  class r12qqpol: public Expression
   {
   public:
-    r12qq(): Expression() {}
+    r12qqpol(): Expression() {}
     double Regular(double const&) const { return 1; }
   };
 
-  class r21qq: public Expression
+  class r21qqpol: public Expression
   {
   public:
-    r21qq(): Expression() {}
+    r21qqpol(): Expression() {}
     double Regular(double const&) const { return 1; }
   };
 
-  class r22qq: public Expression
+  class r22qqpol: public Expression
   {
   public:
-    r22qq(): Expression() {}
+    r22qqpol(): Expression() {}
     double Regular(double const& x) const { return x; }
   };
 
-  class lrgq: public Expression
+  class lrgqpol: public Expression
   {
   public:
-    lrgq(): Expression() {}
+    lrgqpol(): Expression() {}
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
@@ -133,10 +100,10 @@ namespace apfel
     }
   };
 
-  class srgq: public Expression
+  class srgqpol: public Expression
   {
   public:
-    srgq(): Expression() {}
+    srgqpol(): Expression() {}
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
@@ -145,50 +112,50 @@ namespace apfel
     }
   };
 
-  class r11gq: public Expression
+  class r11gqpol: public Expression
   {
   public:
-    r11gq(): Expression() {}
+    r11gqpol(): Expression() {}
     double Regular(double const& x) const { return 1 + x; }
   };
 
-  class r12gq: public Expression
+  class r12gqpol: public Expression
   {
   public:
-    r12gq(): Expression() {}
+    r12gqpol(): Expression() {}
     double Regular(double const& x) const { return 2 - 1 / x; }
   };
 
-  class r21gq: public Expression
+  class r21gqpol: public Expression
   {
   public:
-    r21gq(): Expression() {}
+    r21gqpol(): Expression() {}
     double Regular(double const&) const { return 1; }
   };
 
-  class r22gq: public Expression
+  class r22gqpol: public Expression
   {
   public:
-    r22gq(): Expression() {}
+    r22gqpol(): Expression() {}
     double Regular(double const& x) const { return x; }
   };
 
-  class rlqg: public Expression
+  class rlqgpol: public Expression
   {
   public:
-    rlqg(): Expression() {}
+    rlqgpol(): Expression() {}
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
-      const double expr = ( x * x - omx * omx ) * log( omx / x ) + 2 * x * omx;
+      const double expr = ( x * x - omx * omx ) * log( omx / x ) + 2 * omx;
       return expr;
     }
   };
 
-  class rsqg: public Expression
+  class rsqgpol: public Expression
   {
   public:
-    rsqg(): Expression() {}
+    rsqgpol(): Expression() {}
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
@@ -197,29 +164,29 @@ namespace apfel
     }
   };
 
-  class r11qg: public Expression
+  class r11qgpol: public Expression
   {
   public:
-    r11qg(): Expression() {}
+    r11qgpol(): Expression() {}
     double Regular(double const& x) const { return x * x - ( 1 - x ) * ( 1 - x ); }
   };
 
-  class r12qg: public Expression
+  class r12qgpol: public Expression
   {
   public:
-    r12qg(): Expression() {}
-    double Regular(double const& x) const { return 1 / z - 2; }
+    r12qgpol(): Expression() {}
+    double Regular(double const& x) const { return 1 / x - 2; }
   };
 
   // Functions that fills in the SIDIS hard cross sections on two
   // different grids.
-  SidisObjects InitializeSIDISpol(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
+  SidisPolObjects InitializeSIDISpol(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
     report("Initializing SIDIS longitudinally polarised hard cross sections... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the thresholds
+    // to the vector of thresholds (it assumes that the threshold
     // vector entries are ordered).
     int nfi = 0;
     int nff = Thresholds.size();
@@ -234,7 +201,7 @@ namespace apfel
     // Compute SIDIS partonic cross sections.
     // Expressions taken from Appendix C of hep-ph/9711387.
     // ====================================================
-    // LO contribution.
+    // LO contribution
     const Operator odeltax{gx, delta{}};
     const Operator odeltaz{gz, delta{}};
 
@@ -254,14 +221,14 @@ namespace apfel
     const double K1qq = 4 * CF;
     const double K2qq = 4 * CF;
 
-    const Operator orlqqx{gx,  rlqq{}};
-    const Operator orsqqx{gx,  rsqq{}};
-    const Operator or11qqx{gx, r11qq{}};
-    const Operator or21qqx{gx, r21qq{}};
-    const Operator olrqqz{gz,  lrqq{}};
-    const Operator osrqqz{gz,  srqq{}};
-    const Operator or12qqz{gz, r12qq{}};
-    const Operator or22qqz{gz, r22qq{}};
+    const Operator orlqqx{gx,  rlqqpol{}};
+    const Operator orsqqx{gx,  rsqqpol{}};
+    const Operator or11qqx{gx, r11qqpol{}};
+    const Operator or21qqx{gx, r21qqpol{}};
+    const Operator olrqqz{gz,  lrqqpol{}};
+    const Operator osrqqz{gz,  srqqpol{}};
+    const Operator or12qqz{gz, r12qqpol{}};
+    const Operator or22qqz{gz, r22qqpol{}};
 
     if (std::find(exclude.begin(), exclude.end(), 1)  == exclude.end()) SidisObj.G11qq.AddTerm({LLqq, odeltax, odeltaz});
     if (std::find(exclude.begin(), exclude.end(), 2)  == exclude.end()) SidisObj.G11qq.AddTerm({LSqq, odeltax, oD1z   });
@@ -277,12 +244,12 @@ namespace apfel
     const double K1gq = 2 * CF;
     const double K2gq = - 4 * CF;
 
-    const Operator olrgqz{gz,  lrgq{}};
-    const Operator osrgqz{gz,  {}};
-    const Operator or11gqx{gx, r11gq{}};
-    const Operator or12gqz{gz, r12gq{}};
-    const Operator or21gqx{gx, r21gq{}};
-    const Operator or22gqz{gz, r22gq{}};
+    const Operator olrgqz{gz,  lrgqpol{}};
+    const Operator osrgqz{gz,  srgqpol{}};
+    const Operator or11gqx{gx, r11gqpol{}};
+    const Operator or12gqz{gz, r12gqpol{}};
+    const Operator or21gqx{gx, r21gqpol{}};
+    const Operator or22gqz{gz, r22gqpol{}};
 
     if (std::find(exclude.begin(), exclude.end(), 11) == exclude.end()) SidisObj.G11gq.AddTerm({1,    odeltax, olrgqz });
     if (std::find(exclude.begin(), exclude.end(), 12) == exclude.end()) SidisObj.G11gq.AddTerm({1,    oD0x,    osrgqz });
@@ -291,10 +258,10 @@ namespace apfel
 
     const double K1qg = 1;
 
-    const Operator orlqgx{gx,  rlqg{}};
-    const Operator orsqgx{gx,  rsqg{}};
-    const Operator or11qgx{gx, r11qg{}};
-    const Operator or12qgz{gz, r12qg{}};
+    const Operator orlqgx{gx,  rlqgpol{}};
+    const Operator orsqgx{gx,  rsqgpol{}};
+    const Operator or11qgx{gx, r11qgpol{}};
+    const Operator or12qgz{gz, r12qgpol{}};
 
     if (std::find(exclude.begin(), exclude.end(), 15) == exclude.end()) SidisObj.G11qg.AddTerm({1,    orlqgx,  odeltaz});
     if (std::find(exclude.begin(), exclude.end(), 16) == exclude.end()) SidisObj.G11qg.AddTerm({1,    orsqgx,  oD0z   });
@@ -302,7 +269,7 @@ namespace apfel
 
     // ====================================================
     // Approximated NNLO corrections derived from threshold
-    // resummation. They only contribute to the qq channel of F2.
+    // resummation. They only contribute to the qq channel of g1.
     // Expressions taken from Appendix B of arXiv:2109.00847.
     // ====================================================
     // Additional singular terms
@@ -332,7 +299,7 @@ namespace apfel
       {
         DoubleObject<Operator> cnf{};
 
-        // CF and leading-power terms (Eq. 62)
+        // CF and leading-power terms (Eq. (62))
         const double c1 = ovc * CF / 2.;
         if (std::find(exclude.begin(), exclude.end(), 18) == exclude.end()) cnf.AddTerm({c1, odeltax, oD3z});
         if (std::find(exclude.begin(), exclude.end(), 19) == exclude.end()) cnf.AddTerm({c1, oD3x, odeltaz});
@@ -354,7 +321,7 @@ namespace apfel
         const double c5 = ovc * CF * ( 511. / 64. - 15. * zeta3 / 4. + 29. * Pi2 / 48. - 7. * Pi2 * Pi2 / 360. );
         if (std::find(exclude.begin(), exclude.end(), 28) == exclude.end()) cnf.AddTerm({c5, odeltax, odeltaz});
 
-        // CF and next-to-leading-power terms (Eq. 63)
+        // CF and next-to-leading-power terms (Eq. (63))
         const double c6 = - ovc * CF * 3. / 2.;
         if (std::find(exclude.begin(), exclude.end(), 29) == exclude.end()) cnf.AddTerm({c6, oD2x, oonez});
         if (std::find(exclude.begin(), exclude.end(), 30) == exclude.end()) cnf.AddTerm({c6, oonex, oD2z});
@@ -367,7 +334,7 @@ namespace apfel
         if (std::find(exclude.begin(), exclude.end(), 35) == exclude.end()) cnf.AddTerm({c7, odeltax, ol3z});
         if (std::find(exclude.begin(), exclude.end(), 36) == exclude.end()) cnf.AddTerm({c7, ol3x, odeltaz});
 
-        // CA terms (Eq. 64)
+        // CA terms (Eq. (64))
         const double c8 = - ovc * CA * 11. / 24.;
         if (std::find(exclude.begin(), exclude.end(), 37) == exclude.end()) cnf.AddTerm({c8, odeltax, oD2z});
         if (std::find(exclude.begin(), exclude.end(), 38) == exclude.end()) cnf.AddTerm({c8, oD2x, odeltaz});
@@ -386,10 +353,10 @@ namespace apfel
         const double c11 = ovc * CA * ( 43. * zeta3 / 12. + 17. * Pi2 * Pi2 / 720. - 1535. / 192. - 269. * Pi2 / 432. );
         if (std::find(exclude.begin(), exclude.end(), 46) == exclude.end()) cnf.AddTerm({c11, odeltax, odeltaz});
 
-        // nf terms (Eq. 65)
+        // nf terms (Eq. (65))
         const double c12 = ovc * nf / 12.;
         if (std::find(exclude.begin(), exclude.end(), 47) == exclude.end()) cnf.AddTerm({c12, odeltax, oD2z});
-        if (std::find(exclude.begin(), exclude.end(), 48) == exclude.end()) cnf.AddTerm({c12, oD2z, odeltaz});
+        if (std::find(exclude.begin(), exclude.end(), 48) == exclude.end()) cnf.AddTerm({c12, oD2x, odeltaz});
         if (std::find(exclude.begin(), exclude.end(), 49) == exclude.end()) cnf.AddTerm({2 * c12, oD0x, oD1z});
         if (std::find(exclude.begin(), exclude.end(), 50) == exclude.end()) cnf.AddTerm({2 * c12, oD1x, oD0z});
 
@@ -409,12 +376,12 @@ namespace apfel
       }
     t.stop();
 
-    return SidisPolObj;
+    return SidisObj;
   }
 
   // Functions that fills in the SIDIS hard cross sections on one
   // single grid and exchanges the last defaulted arguments.
-  SidisObjects InitializeSIDISpol(Grid const& gx, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
+  SidisPolObjects InitializeSIDISpol(Grid const& gx, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
     return InitializeSIDISpol(gx, gx, Thresholds, exclude);
   }

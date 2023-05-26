@@ -9,6 +9,7 @@
  \example grid_test.cc
  \example integrator_test.cc
  \example interpolation_test.cc
+ \example massiveCF_test.cc
  \example ogata_test.cc
  \example operator_test.cc
  \example polylog_test.cc
@@ -17,7 +18,10 @@
  \example qgriddist_test.cc
  \example set_test.cc
  \example siaxsec_test.cc
+ \example structurefunction_cc_test.cc
  \example structurefunction_massive_test.cc
- \example structurefunction_test.cc
+ \example structurefunction_nc_pol_test.cc
+ \example structurefunction_nc_test.cc
  \example subgrid_test.cc
+ \example tmd_test.cc
  */

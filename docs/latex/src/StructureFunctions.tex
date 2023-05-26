@@ -388,13 +388,10 @@ computed analytically:
   \frac{1}{\lambda^2}\ln(1-\lambda
   x)+\frac{1-\lambda}{\lambda}\frac{x}{1-\lambda x}\,,
 \end{equation}
-while the following integral:\footnote{Actually, also this integral
-  can be computed analytically but it involves the di-log and I will
-  leave it like this for now.}
 \begin{equation}
-  R(x)=-\int_0^xdz\frac{\ln(1-\lambda z)}{1-z}
+ -\int_0^xdz\frac{\ln(1-\lambda z)}{1-z}= R(x)=-\text{Li}_2\left(\frac{1}{1-\lambda }\right)+\text{Li}_2\left(\frac{1-x \lambda}{1-\lambda }\right)+\ln \left(\frac{\lambda  (1-x)}{1-\lambda }\right) \ln (1-\lambda  x)\,.
 \end{equation}
-is computed numerically. The advantage of the $x$-prescription is
+The advantage of the $x$-prescription is
 that, when convoluting the coefficient functions above with PDFs at
 the point $x$, one can treat the $+$-prescribed functions using the
 standard definition at the price of adding to the local terms the

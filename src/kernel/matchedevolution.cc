@@ -26,13 +26,13 @@ namespace apfel
     _Thresholds(Thresholds),
     _nsteps(nsteps)
   {
-    // Compute squared reference scale.
-    _MuRef2 = pow(MuRef,2);
+    // Compute squared reference scale
+    _MuRef2 = pow(MuRef, 2);
 
-    // Compute log of the squared final scale.
+    // Compute log of the squared final scale
     _LogMuRef2 = log(_MuRef2);
 
-    // Compute squared thresholds.
+    // Compute squared thresholds
     for (auto const& th : Thresholds)
       {
         const double th2 = pow(th, 2);
@@ -40,7 +40,7 @@ namespace apfel
         _LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
       }
 
-    // Sort the quark thresholds and logs.
+    // Sort the quark thresholds and thair logarithm
     if (_Thresholds2.size() > 1)
       std::sort(_Thresholds2.begin(), _Thresholds2.end());
   }
@@ -49,7 +49,7 @@ namespace apfel
   template<class T>
   T MatchedEvolution<T>::EvolveObject(int const& nf, double const& t0, double const& t1, T const& Obj0) const
   {
-    // Return immediately "Obj0" if "t0" and "t1" are equal.
+    // Return immediately "Obj0" if "t0" and "t1" are equal
     if (t0 == t1)
       return Obj0;
 
@@ -57,7 +57,7 @@ namespace apfel
     // Runge-Kutta.
     const auto dObj = rk4<T>([&] (double const& t, T const& Obj) -> T{ return Derivative(nf, t, Obj); });
 
-    // Use "_nsteps" steps for the evolution.
+    // Use "_nsteps" steps for the evolution
     double t        = t0;
     T      Obj      = Obj0;
     const double dt = ( t1 - t0 ) / _nsteps;
@@ -73,14 +73,14 @@ namespace apfel
   template<class T>
   T MatchedEvolution<T>::Evaluate(double const& mu) const
   {
-    const double mu2  = pow(mu,2);
+    const double mu2  = pow(mu, 2);
     const double lmu2 = log(mu2);
 
-    // Find initial and final number of flavours.
+    // Find initial and final number of flavours
     const int nfi = NF(_MuRef2, _Thresholds2);
     const int nff = NF(mu2, _Thresholds2);
 
-    // Don't do the matching is initial and final number of flavours
+    // Do not do the matching if initial and final numbers of flavours
     // are equal.
     if (nfi == nff)
       return EvolveObject(nfi, _LogMuRef2, lmu2, _ObjRef);
@@ -103,20 +103,22 @@ namespace apfel
         vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
 
         // Update initial scale and displace it by "eps8" to make sure
-        // to be above (below) the threshold
+        // to be above (below) the threshold.
         ti = tf * ( 1 + (sgn ? 1 : -1) * eps8 );
       }
     return EvolveObject(nff, ti, lmu2, vobj);
   }
 
   // template fixed types
-  template class MatchedEvolution<double>;                                    //<! Single coupling
-  template class MatchedEvolution<Distribution>;                              //<! Single distribution
-  template class MatchedEvolution<Set<Distribution>>;                         //<! Set of distributions
-  template class MatchedEvolution<DoubleObject<Distribution>>;                //<! Double object of distributions
-  template class MatchedEvolution<Operator>;                                  //<! Single Operator
-  template class MatchedEvolution<Set<Operator>>;                             //<! Set of Operators
-  template class MatchedEvolution<DoubleObject<Operator>>;                    //<! Double object of operators
-  template class MatchedEvolution<DoubleObject<Distribution, Operator>>;      //<! Double object of distributions and operators
-  template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>>>; //<! Set of double object of distributions and operators
+  template class MatchedEvolution<double>;                                     //<! Single coupling
+  template class MatchedEvolution<Distribution>;                               //<! Single distribution
+  template class MatchedEvolution<Set<Distribution>>;                          //<! Set of distributions
+  template class MatchedEvolution<DoubleObject<Distribution>>;                 //<! Double object of distributions
+  template class MatchedEvolution<Operator>;                                   //<! Single Operator
+  template class MatchedEvolution<Set<Operator>>;                              //<! Set of Operators
+  template class MatchedEvolution<DoubleObject<Operator>>;                     //<! Double object of operators
+  template class MatchedEvolution<DoubleObject<Distribution, Operator>>;       //<! Double object of distributions and operators
+  template class MatchedEvolution<DoubleObject<Operator, Distribution>>;       //<! Double object of distributions and operators
+  template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>> >; //<! Set of double object of distributions and operators
+  template class MatchedEvolution<Set<DoubleObject<Operator, Distribution>> >; //<! Set of double object of distributions and operators
 }

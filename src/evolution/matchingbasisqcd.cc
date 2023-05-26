@@ -18,7 +18,7 @@ namespace apfel
     for (int k = 1; k <= 6; k++)
       _rules[2 * k] = { {M0, 2 * k, 1}, {M7, 2 * k, 1} };
 
-    // Now we consider singlet like distributions.
+    // Now we consider singlet like distributions
     const int nf1 = nf + 1;
     const int onf = 2 * nf1 - 1;
 
@@ -69,7 +69,7 @@ namespace apfel
     ConvolutionMap{"MatchingOperatorBasisQCD_" + std::to_string(nf)}
   {
     // Allocate MatchingBasisQCD object to retrieve the splitting
-    // matrix rules
+    // matrix rules.
     const MatchingBasisQCD mb{nf};
 
     // Get matrix of coefficients

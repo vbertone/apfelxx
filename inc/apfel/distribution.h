@@ -29,19 +29,19 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param g: the Grid object that defines the x-space interpolation grid
      */
     Distribution(Grid const& g);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param obj: a reference distribution from wich the grid and the actual distributions are extracted
      */
     Distribution(Distribution const& obj);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param obj: a reference distribution from wich the grid is extracted
      * @param distsubgrid: the vector of the distribution on the subgrids
      * @param distjointgrid: the vector of the distribution on the joint grid
@@ -51,7 +51,7 @@ namespace apfel
                  std::vector<double>              const& distjointgrid);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param g: the Grid object that defines the x-space interpolation grid
      * @param distsubgrid: the vector of the distribution on the subgrids
      * @param distjointgrid: the vector of the distribution on the joint grid
@@ -61,7 +61,7 @@ namespace apfel
                  std::vector<double>              const& distjointgrid);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param g: the Grid object that defines the x-space interpolation grid
      * @param InDistFunc: a function of x to be tabulated on the grid in x
      */
@@ -69,7 +69,7 @@ namespace apfel
                  std::function<double(double const&)> const& InDistFunc);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param g: the Grid object that defines the x-space interpolation grid
      * @param InDistFunc: a function of x and Q to be tabulated on the grid in x
      * @param Q: the value of Q in which InDistFunc has to be tabulated
@@ -79,7 +79,7 @@ namespace apfel
                  double                                              const& Q);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param g: the Grid object that defines the x-space interpolation grid
      * @param InDistFunc: a function of ipdf and x to be tabulated on the grid in x
      * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated
@@ -89,7 +89,7 @@ namespace apfel
                  int                                              const& ipdf);
 
     /**
-     * @brief The Distribution constructors.
+     * @brief The Distribution constructor
      * @param g: the Grid object that defines the x-space interpolation grid
      * @param InDistFunc: a function of ipdf, x, and Q to be tabulated on the grid in x
      * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated

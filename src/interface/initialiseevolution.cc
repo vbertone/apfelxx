@@ -24,17 +24,17 @@ namespace apfel
     _WriteGrid(WriteGrid),
     _GridHeader(GridHeader)
   {
-    // Check the sanity of the setup object.
+    // Check the sanity of the setup object
     if (!CheckSetup())
       throw std::runtime_error(error("InitialiseEvolution::InitialiseEvolution","Terminating program due to inconsistent setup."));
 
-    // Report the evolution set up (if allowed by the vebosity level).
+    // Report the evolution set up (if allowed by the vebosity level)
     ReportSetup();
 
-    // Initialise the couplings.
+    // Initialise the couplings
     InitialiseCouplings();
 
-    // Initialize Dglap objects.
+    // Initialize Dglap objects
     InitialiseDglapObject();
 
     // If the production of grids has been enabled, create a folder
@@ -42,7 +42,7 @@ namespace apfel
     if (WriteGrid)
       WriteGridInfo();
 
-    // Do the tabulation.
+    // Do the tabulation
     for (auto const& s: _setup.InSet)
       TabulateEvolution(s);
   }
@@ -62,21 +62,23 @@ namespace apfel
   //_________________________________________________________________________________
   void InitialiseEvolution::InitialiseDglapObject()
   {
-    // Construct vector of subgrids.
+    // Construct vector of subgrids
     std::vector<SubGrid> sg;
     for (auto const& gp : _setup.GridParameters)
       sg.push_back(SubGrid{gp.nx, gp.xmin, gp.id});
 
-    // Intialise the x-space grid.
+    // Intialise the x-space grid
     _g = std::unique_ptr<const Grid>(new Grid{sg});
 
-    // Integration accuracy.
+    // Integration accuracy
     const double IntEps = _setup.GaussAccuracy;
 
     if (_setup.Virtuality == EvolutionSetup::SPACE)
       {
         if (_setup.EvolPolarisation == EvolutionSetup::UNP)
           _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+        else if (_setup.EvolPolarisation == EvolutionSetup::POL)
+          _DglapObj = InitializeDglapObjectsQCDpol(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
         else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
           _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
       }
@@ -96,55 +98,55 @@ namespace apfel
     // function was already called before).
     _KnotArray.clear();
 
-    // Construct the Dglap object.
+    // Construct the Dglap object
     std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as);
 
-    // Tabulate distributions.
-    const TabulateObject<Set<Distribution>> TabulatedDists{*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ};
+    // Tabulate distributions
+    _TabulatedDists = std::unique_ptr<const TabulateObject<Set<Distribution>>>(new TabulateObject<Set<Distribution>> {*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ});
 
-    // Get Q-grid from the tabulated object.
-    const std::vector<double> qg = TabulatedDists.GetQGrid();
+    // Get Q-grid from the tabulated object
+    const std::vector<double> qg = _TabulatedDists->GetQGrid();
 
-    // Get threshold indices.
-    const std::vector<int> tind = TabulatedDists.GetThesholdIndices();
+    // Get threshold indices
+    const std::vector<int> tind = _TabulatedDists->GetThesholdIndices();
 
-    // Get Set of distributions on the Q-grid.
-    const std::vector<Set<Distribution>> xfg = TabulatedDists.GetQGridValues();
+    // Get Set of distributions on the Q-grid
+    const std::vector<Set<Distribution>> xfg = _TabulatedDists->GetQGridValues();
 
     // Run over the threshold indices. Skip the last because it is the
     // last point of the grid in Q.
     for (int i = 0; i < (int) tind.size() - 1; i++)
       {
-        // Threshold index.
+        // Threshold index
         const int ti = tind[i];
 
-        // Retrieve distributions at the threshold and rotate
-        // distribution into the physical basis.
+        // Retrieve distributions at the threshold and rotate them
+        // into the physical basis.
         const std::map<int, Distribution> tdist = QCDEvToPhys(xfg[ti].GetObjects());
 
-        // Run over distributions.
+        // Run over distributions
         std::map<int, LHKnotArray> LHKnotArrayNF;
         for (auto const& d : tdist)
           {
             LHKnotArray ka;
 
-            // x-space grid.
+            // x-space grid
             ka.xs = d.second.GetGrid().GetJointGrid().GetGrid();
 
-            // Remove nodes above one.
+            // Remove nodes above one
             ka.xs.resize(ka.xs.size() - d.second.GetGrid().GetJointGrid().InterDegree());
 
-            // Q2-space (sub)grid.
+            // Q2-space (sub)grid
             std::vector<double> q2;
             for (int iq = ti; iq < tind[i+1]; iq++)
               q2.push_back(qg[iq] * qg[iq]);
             ka.q2s = q2;
 
-            // Get sizes of both x and q2 grids.
+            // Get sizes of both x and q2 grids
             const int xsize  = ka.xs.size();
             const int q2size = ka.q2s.size();
 
-            // Now fill in vector of distributions.
+            // Now fill in vector of distributions
             std::vector<double> xf(xsize * q2size);
             for (int iq = ti; iq < tind[i+1]; iq++)
               {
@@ -159,7 +161,7 @@ namespace apfel
         _KnotArray.insert({qg[ti] * qg[ti], LHKnotArrayNF});
       }
 
-    // Write grid if required.
+    // Write grid if required
     if (_WriteGrid)
       WriteGrid();
   }
@@ -167,20 +169,19 @@ namespace apfel
   //_________________________________________________________________________________
   bool InitialiseEvolution::CheckSetup() const
   {
-    // Initialise switch to true.
+    // Initialise switch to true
     bool passed = true;
 
-    // Check initial scale.
+    // Check initial scale
     if (_setup.Q0 <= 0.5)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The initial evolution scale must be larger than 0.5 GeV.") << std::endl;
         passed = false;
       }
 
-    // Check the x-space grid.
+    // Check x-space grid
     for (auto const& gp : _setup.GridParameters)
       {
-        // Interpolation degree.
         if (gp.id <= 0)
           {
             std::cout << error("InitialiseEvolution::CheckSetup", "The interpolation degree of each subgrid must be positive.") << std::endl;
@@ -200,7 +201,7 @@ namespace apfel
           }
       }
 
-    // Check the Q-space grid.
+    // Check the Q-space grid
     if (_setup.InterDegreeQ <= 0)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The interpolation degree of the grid in Q must be positive.") << std::endl;
@@ -231,7 +232,7 @@ namespace apfel
         passed = false;
       }
 
-    // Check flavour scheme.
+    // Check flavour scheme
     if (_setup.FlavourScheme != EvolutionSetup::VFNS &&
         _setup.FlavourScheme != EvolutionSetup::FFNS)
       {
@@ -239,7 +240,7 @@ namespace apfel
         passed = false;
       }
 
-    // Check number of flavours in the FFNS (if relevant).
+    // Check number of flavours in the FFNS (if relevant)
     if (_setup.FlavourScheme == EvolutionSetup::FFNS)
       if (_setup.Nf_FF < 3 || _setup.Nf_FF > 6)
         {
@@ -247,14 +248,14 @@ namespace apfel
           passed = false;
         }
 
-    // Check theory.
+    // Check theory
     if (_setup.Theory != EvolutionSetup::QCD)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "Unknown theory.") << std::endl;
         passed = false;
       }
 
-    // Check virtuality.
+    // Check virtuality
     if (_setup.Virtuality != EvolutionSetup::SPACE &&
         _setup.Virtuality != EvolutionSetup::TIME)
       {
@@ -262,7 +263,7 @@ namespace apfel
         passed = false;
       }
 
-    // Check evolution polarisation.
+    // Check evolution polarisation
     if (_setup.EvolPolarisation != EvolutionSetup::UNP &&
         _setup.EvolPolarisation != EvolutionSetup::POL &&
         _setup.EvolPolarisation != EvolutionSetup::TRANS)
@@ -271,7 +272,7 @@ namespace apfel
         passed = false;
       }
 
-    // Check perturbative order.
+    // Check perturbative order
     if (_setup.PerturbativeOrder < 0 || _setup.PerturbativeOrder > 3)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "Perturbative order out of range.") << std::endl;
@@ -284,13 +285,11 @@ namespace apfel
       {
         if (_setup.EvolPolarisation == EvolutionSetup::POL)
           {
-            std::cout << error("InitialiseEvolution::CheckSetup", "Space-like polarised evolution not implemented yet.") << std::endl;
-            passed = false;
-            //if (_setup.PerturbativeOrder > 2)
-            //  {
-            //     std::cout << error("InitialiseEvolution::CheckSetup", "Space-like polarised evolution implemented up to NNLO.") << std::endl;
-            //     passed = false;
-            //  }
+            if (_setup.PerturbativeOrder > 2)
+              {
+                std::cout << error("InitialiseEvolution::CheckSetup", "Space-like polarised evolution implemented up to NNLO.") << std::endl;
+                passed = false;
+              }
           }
         else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
           {
@@ -325,7 +324,7 @@ namespace apfel
           }
       }
 
-    // Check coupling evolution.
+    // Check coupling evolution
     if (_setup.CouplingEvolution != EvolutionSetup::exact &&
         _setup.CouplingEvolution != EvolutionSetup::expanded)
       {
@@ -333,7 +332,7 @@ namespace apfel
         passed = false;
       }
 
-    // Check distribution evolution.
+    // Check distribution evolution
     if (_setup.PDFEvolution != EvolutionSetup::exactmu &&
         _setup.PDFEvolution != EvolutionSetup::exactalpha &&
         _setup.PDFEvolution != EvolutionSetup::expandalpha &&
@@ -343,7 +342,7 @@ namespace apfel
         passed = false;
       }
 
-    // Check mass renormalisation scheme.
+    // Check mass renormalisation scheme
     if (_setup.MassRenScheme != EvolutionSetup::POLE &&
         _setup.MassRenScheme != EvolutionSetup::MSBAR)
       {
@@ -351,14 +350,14 @@ namespace apfel
         passed = false;
       }
 
-    // Check Gauss integration accuracy.
+    // Check integration accuracy
     if (_setup.GaussAccuracy <= 0 || _setup.GaussAccuracy > 1)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The dGauss integration accuracy must me in the (0:1] range.") << std::endl;
         passed = false;
       }
 
-    // Check that heavy-quark thresholds and masses are sorted.
+    // Check that heavy-quark thresholds and masses are sorted
     if (!std::is_sorted(_setup.Thresholds.begin(), _setup.Thresholds.end()))
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The heavy-quark thresholds are not sorted.") << std::endl;
@@ -371,14 +370,14 @@ namespace apfel
         passed = false;
       }
 
-    // Check maximum number of active flavours.
+    // Check maximum number of active flavours
     if (_setup.Thresholds.size() < 3 || _setup.Thresholds.size() > 6)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "Maximum number of active flavours out of range.") << std::endl;
         passed = false;
       }
 
-    // Check renormalisarion / factorisation scale ratio.
+    // Check renormalisarion / factorisation scale ratio
     if (_setup.RenFacRatio <= 0)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The ratio between renormalisation and factorisation scales cannot be negative.") << std::endl;
@@ -391,40 +390,40 @@ namespace apfel
   //_________________________________________________________________________________
   void InitialiseEvolution::ReportSetup() const
   {
-    // Apfel banner.
+    // Display banner
     Banner();
 
-    // String with the report of parameters.
+    // String with the report of parameters
     std::string report = "\n\nCurrent evolution setup:\n";
 
-    // Starting scale.
+    // Starting scale
     report += "- Evolution starting scale: " + std::to_string(_setup.Q0) + " GeV\n";
 
-    // Perturbative order.
+    // Perturbative order
     report += "- Perturbative order of the evolution: N" + std::to_string(_setup.PerturbativeOrder) + "LO\n";
 
-    // Flavour scheme.
+    // Flavour scheme
     report += "- Flavous scheme: ";
     if (_setup.FlavourScheme == EvolutionSetup::VFNS)
       report += "VFNS\n";
     else if (_setup.FlavourScheme == EvolutionSetup::FFNS)
       report += "FFNS with " + std::to_string(_setup.Nf_FF) + " active flavours\n";
 
-    // Evolution theory.
+    // Evolution theory
     report += "- Evolution theory: ";
     if (_setup.Theory == EvolutionSetup::QCD)
       report += "QCD\n";
     else if (_setup.Theory == EvolutionSetup::QCD_QED)
       report += "QCD + QED\n";
 
-    // Virtuality.
+    // Virtuality
     report += "- Evolution virtuality: ";
     if (_setup.Virtuality == EvolutionSetup::SPACE)
       report += "Space-like (PDFs)\n";
     else if (_setup.Virtuality == EvolutionSetup::TIME)
       report += "Time-like (FFs)\n";
 
-    // Polarisation.
+    // Polarisation
     report += "- Evolution polarisation: ";
     if (_setup.EvolPolarisation == EvolutionSetup::UNP)
       report += "Unpolarised\n";
@@ -433,14 +432,14 @@ namespace apfel
     else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
       report += "transversely polarised\n";
 
-    // AlphaQCD reference value.
+    // AlphaQCD reference value
     report += "- QCD coupling reference value: AlphaQCD(" + std::to_string(_setup.QQCDRef) + " GeV) = " + std::to_string(_setup.AlphaQCDRef) + "\n";
 
-    // AlphaQED reference value.
+    // AlphaQED reference value
     if (_setup.Theory == EvolutionSetup::QCD_QED)
       report += "- QED coupling reference value: AlphaQED(" + std::to_string(_setup.QQEDRef) + " GeV) = " + std::to_string(_setup.AlphaQEDRef) + "\n";
 
-    // Coupling evolution.
+    // Coupling evolution
     report += "- Coupling evolution: ";
     if (_setup.CouplingEvolution == EvolutionSetup::exact)
       report += "Exact";
@@ -448,7 +447,7 @@ namespace apfel
       report += "Expanded";
     report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
 
-    // PDF evolution.
+    // PDF evolution
     report += "- PDF evolution: ";
     if (_setup.PDFEvolution == EvolutionSetup::exactmu)
       report += "Exact in mu";
@@ -460,10 +459,10 @@ namespace apfel
       report += "Truncated";
     report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
 
-    // Ren. / fact. scales ratio.
+    // Ren. / fact. scales ratio
     report += "- muR / mF: " + std::to_string(_setup.RenFacRatio) + "\n";
 
-    // Heavy-quark masses and thresholds.
+    // Heavy-quark masses and thresholds
     std::vector<std::string> Thq{"mud", "muu", "mus", "muc", "mub", "mut"};
     if (_setup.MassRenScheme == EvolutionSetup::POLE)
       {
@@ -486,40 +485,40 @@ namespace apfel
           report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
       }
 
-    // Tau mass.
+    // Tau mass
     report += "- Tau lepton mass: " + std::to_string(_setup.TauMass) + " GeV\n";
 
-    // Integration accuracy.
+    // Integration accuracy
     report += "- Relative Gauss integration accuracy: " + std::to_string(_setup.GaussAccuracy) + "\n\n";
 
-    // Report x-grid parameters.
+    // Report x-grid parameters
     report += "- Grid in x: " + std::to_string(_setup.GridParameters.size()) + " subgrids in x found with the following parameters:\n";
     for (auto const& gp : _setup.GridParameters)
       report += "  + internal grid with " + std::to_string(gp.nx)
                 + " nodes in the range [" + std::to_string(gp.xmin)
                 + ":1] with interpolation degree " + std::to_string(gp.id) + "\n";
 
-    // Report Q-grid parameters.
+    // Report Q-grid parameters
     report += "- Grid in Q: " + std::to_string(_setup.nQg)
               + " nodes in the range [" + std::to_string(_setup.Qmin)
               + ":" + std::to_string(_setup.Qmax) + "] GeV"
               + " with interpolation degree " + std::to_string(_setup.InterDegreeQ) + "\n";
 
-    // Print report.
+    // Print report
     info("InitialiseEvolution::ReportSetup", report);
   }
 
   //_________________________________________________________________________________
   void InitialiseEvolution::WriteGridInfo()
   {
-    // Create folder for the info file and the grid(s).
+    // Create folder for the info file and the grid(s)
     if (mkdir(_setup.name.c_str(), 0777) != 0)
       throw std::runtime_error(error("InitialiseEvolution::WriteGridInfo", "Cannot create folder for the LHAPDF set."));
 
     // Write information string. Start with the user-given header.
     std::string info = _GridHeader + "\n";
 
-    // If the user-given header is empty, use default header.
+    // If the user-given header is empty, use default header
     if (_GridHeader.empty())
       {
         info  = "SetDesc: 'Set generated with APFEL++. Name: " + _setup.name + "'\n";
@@ -579,7 +578,7 @@ namespace apfel
     info = info.substr(0, info.size() - 2);
     info += "]\n";
 
-    // Open info file and print the information in it.
+    // Open info file and print the information in it
     std::ofstream out(_setup.name + "/" + _setup.name + ".info");
     out << info;
     out.close();
@@ -588,13 +587,13 @@ namespace apfel
   //_________________________________________________________________________________
   void InitialiseEvolution::WriteGrid()
   {
-    // Check if the destination folder exists.
+    // Check if the destination folder exists
     struct stat info;
     if (stat(_setup.name.c_str(), &info) != 0)
       throw std::runtime_error(error("InitialiseEvolution::WriteGrid", "Folder for the LHAPDF set does not exist."));
 
     // Determine the first available member index and constuct the
-    // open file name.
+    // file name.
     std::ofstream out;
     std::string filename = _setup.name + "/" + _setup.name + "_0000";
     const int maxmem = 10000;
@@ -619,27 +618,27 @@ namespace apfel
       {
         out << "---\n";
 
-        // Write x grid.
+        // Write x-grid
         for (auto const& x : ka.second.begin()->second.xs)
           out << x << " ";
         out << "\n";
 
-        // Write Q grid.
+        // Write Q-grid
         for (auto const& q2 : ka.second.begin()->second.q2s)
           out << sqrt(q2) << " ";
         out << "\n";
 
-        // Write flavour indices.
+        // Write flavour indices
         for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
           out << (i == 0 ? 21 : i) << " ";
         out << "\n";
 
-        // Array of distributions.
+        // Array of distributions
         const int nd = 2 * _setup.Thresholds.size() + 1;
         const int np = ka.second.begin()->second.xs.size() * ka.second.begin()->second.q2s.size();
         double dist[np][nd];
 
-        // Gather tabulated distributions.
+        // Gather tabulated distributions
         int id = 0;
         for (auto const& d : ka.second)
           if (std::abs(d.first) <= (int) _setup.Thresholds.size())
@@ -650,7 +649,7 @@ namespace apfel
               id++;
             }
 
-        // Print distributions.
+        // Print distributions
         for (int jp = 0; jp < np; jp++)
           {
             for (int jd = 0; jd < nd; jd++)

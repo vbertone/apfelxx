@@ -56,7 +56,7 @@ namespace apfel
         if (cycle)
           continue;
 
-        // Get set of distributions.
+        // Get set of distributions
         const auto& dist = d.GetObjects();
 
         // Start with the first object of the vector of rules. If it
@@ -72,10 +72,10 @@ namespace apfel
           result *= o->coefficient;
         o++;
 
-        // Continue with the following objects of the vector of rules.
+        // Continue with the following objects of the vector of rules
         for (auto end = std::end(item->second); o != end; o++)
           {
-            // If the distribution does not exist skip it.
+            // If the distribution does not exist skip it
             if (dist.count(o->object) == 0)
               continue;
 
@@ -90,7 +90,6 @@ namespace apfel
           }
         mmap.insert({item->first, result});
       }
-
     return Set<V> {d.GetMap(), mmap};
   }
 
@@ -100,6 +99,7 @@ namespace apfel
   {
     for (auto& v: _objects)
       v.second *= s;
+
     return *this;
   }
 
@@ -109,6 +109,7 @@ namespace apfel
   {
     for (auto& v: _objects)
       v.second *= f;
+
     return *this;
   }
 
@@ -118,6 +119,7 @@ namespace apfel
   {
     for (auto& o: _objects)
       o.second *= v[o.first];
+
     return *this;
   }
 
@@ -127,6 +129,7 @@ namespace apfel
   {
     for (auto& o: _objects)
       o.second *= v.at(o.first);
+
     return *this;
   }
 
@@ -137,6 +140,7 @@ namespace apfel
     const double r = 1. / s;
     for (auto& v: _objects)
       v.second *= r;
+
     return *this;
   }
 
@@ -170,14 +174,14 @@ namespace apfel
   template<class T>
   T Set<T>::Combine() const
   {
-    // Initialize iterator on '_objects'.
+    // Initialize iterator on '_objects'
     auto it = _objects.begin();
 
-    // Initialize 'CombObj' with the first object in '_objects'.
+    // Initialize 'CombObj' with the first object in '_objects'
     T CombObj = it->second;
     it++;
 
-    // Continue with the following objects of the vector of rules.
+    // Continue with the following objects of the vector of rules
     for (auto end = _objects.end(); it != end; it++)
       CombObj += it->second;
 
@@ -197,7 +201,7 @@ namespace apfel
     auto it = _objects.begin();
     int i;
 
-    // In case the first weights are zero don't do the sum.
+    // In case the first weights are zero do not do the sum.
     for (i = 0; i < (int) weigths.size(); i++)
       if (weigths[i] != 0)
         break;
@@ -209,11 +213,11 @@ namespace apfel
     if (i == (int) weigths.size())
       return 0 * (--it)->second;
 
-    // Initialize 'CombObj' with the first object in '_objects'.
+    // Initialize 'CombObj' with the first object in '_objects'
     T CombObj = weigths[i++] * it->second;
     it++;
 
-    // Continue with the following objects of the vector of rules.
+    // Continue with the following objects of the vector of rules
     for (auto end = _objects.end(); it != end; it++)
       {
         if (weigths[i] != 0)
@@ -225,7 +229,6 @@ namespace apfel
           }
         i++;
       }
-
     return CombObj;
   }
 
@@ -244,13 +247,15 @@ namespace apfel
     return os;
   }
 
-  // Specialisations.
+  // Specialisations
   template class Set<Distribution>;
   template class Set<Operator>;
   template class Set<DoubleObject<Distribution, Operator>>;
+  template class Set<DoubleObject<Operator, Distribution>>;
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
   template std::ostream& operator << (std::ostream& os, Set<Distribution> const& s);
   template std::ostream& operator << (std::ostream& os, Set<Operator> const& s);
   template std::ostream& operator << (std::ostream& os, Set<DoubleObject<Distribution, Operator>> const& s);
+  template std::ostream& operator << (std::ostream& os, Set<DoubleObject<Operator, Distribution>> const& s);
 }

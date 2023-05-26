@@ -91,6 +91,8 @@ for x in xlha:
               format(DistMap[4] + DistMap[-4], ".4e"), " ",
               format(DistMap[0], ".4e"))
 
+t.stop()
+
 k = 1000000
 print("\nInterpolating ", k, " times a single PDF on the (x,Q) grid... ")
 t.start()

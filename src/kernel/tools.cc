@@ -21,7 +21,7 @@ namespace apfel
   //_________________________________________________________________________
   int NF(double const& Q, std::vector<double> const& Thresholds)
   {
-    // Compute number of active flavours the the PDF initial scale
+    // Compute number of active flavours
     int nf = 0;
     for (auto const& v : Thresholds)
       if (Q > v)
@@ -41,16 +41,15 @@ namespace apfel
   std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp)
   {
     // Relevant constants
-    const double Q2    = Q * Q;
-    const double MZ2   = apfel::ZMass * apfel::ZMass;
-    const double GmZ2  = apfel::GammaZ * apfel::GammaZ;
-    const double S2ThW = apfel::Sin2ThetaW;
-    const double VD    = - 0.5 + 2 * S2ThW / 3;
-    const double VU    = + 0.5 - 4 * S2ThW / 3;
-    const double AD    = - 0.5;
-    const double AU    = + 0.5;
-    const double Ve    = - 0.5 + 2 * S2ThW;
-    const double Ae    = - 0.5;
+    const double Q2   = Q * Q;
+    const double MZ2  = ZMass * ZMass;
+    const double GmZ2 = GammaZ * GammaZ;
+    const double VD   = - 0.5 + 2 * Sin2ThetaW / 3;
+    const double VU   = + 0.5 - 4 * Sin2ThetaW / 3;
+    const double AD   = - 0.5;
+    const double AU   = + 0.5;
+    const double Ve   = - 0.5 + 2 * Sin2ThetaW;
+    const double Ae   = - 0.5;
     const std::vector<double> Vq = {VD, VU, VD, VU, VD, VU};
     const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
 
@@ -59,12 +58,12 @@ namespace apfel
     double PZ2;
     if (virt)
       {
-        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
-        PZ2 = pow(Q2, 2) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / pow(4 * S2ThW * ( 1 - S2ThW ), 2);
+        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
+        PZ2 = pow(Q2, 2) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / pow(4 * Sin2ThetaW * ( 1 - Sin2ThetaW ), 2);
       }
     else
       {
-        PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
+        PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
         PZ2 = PZ * PZ;
       }
 
@@ -72,12 +71,12 @@ namespace apfel
     std::vector<double> Charges(6, 0.);
     if (Comp < 1 || Comp > 6)
       for (auto i = 0; i < 6; i++)
-        Charges[i] = apfel::QCh2[i]
-                     - 2 * apfel::QCh[i] * Vq[i] * Ve * PZ
+        Charges[i] = QCh2[i]
+                     - 2 * QCh[i] * Vq[i] * Ve * PZ
                      + ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
     else
-      Charges[Comp-1] = apfel::QCh2[Comp-1]
-                        - 2 * apfel::QCh[Comp-1] * Vq[Comp-1] * Ve * PZ
+      Charges[Comp-1] = QCh2[Comp-1]
+                        - 2 * QCh[Comp-1] * Vq[Comp-1] * Ve * PZ
                         + ( Ve * Ve + Ae * Ae ) * ( Vq[Comp-1] * Vq[Comp-1] + Aq[Comp-1] * Aq[Comp-1] ) * PZ2;
 
     return Charges;
@@ -87,16 +86,15 @@ namespace apfel
   std::vector<double> ParityViolatingElectroWeakCharges(double const& Q, bool const& virt, int const& Comp)
   {
     // Relevant constants
-    const double Q2    = Q * Q;
-    const double MZ2   = apfel::ZMass * apfel::ZMass;
-    const double GmZ2  = apfel::GammaZ * apfel::GammaZ;
-    const double S2ThW = apfel::Sin2ThetaW;
-    const double VD    = - 0.5 + 2 * S2ThW / 3;
-    const double VU    = + 0.5 - 4 * S2ThW / 3;
-    const double AD    = - 0.5;
-    const double AU    = + 0.5;
-    const double Ve    = - 0.5 + 2 * S2ThW;
-    const double Ae    = - 0.5;
+    const double Q2   = Q * Q;
+    const double MZ2  = ZMass * ZMass;
+    const double GmZ2 = GammaZ * GammaZ;
+    const double VD   = - 0.5 + 2 * Sin2ThetaW / 3;
+    const double VU   = + 0.5 - 4 * Sin2ThetaW / 3;
+    const double AD   = - 0.5;
+    const double AU   = + 0.5;
+    const double Ve   = - 0.5 + 2 * Sin2ThetaW;
+    const double Ae   = - 0.5;
     const std::vector<double> Vq = {VD, VU, VD, VU, VD, VU};
     const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
 
@@ -105,12 +103,12 @@ namespace apfel
     double PZ2;
     if (virt)
       {
-        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
-        PZ2 = pow(Q2,2) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / pow(4 * S2ThW * ( 1 - S2ThW ),2);
+        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
+        PZ2 = pow(Q2,2) / ( pow(Q2 - MZ2,2) + MZ2 * GmZ2 ) / pow(4 * Sin2ThetaW * ( 1 - Sin2ThetaW ),2);
       }
     else
       {
-        PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * S2ThW * ( 1 - S2ThW ) );
+        PZ  = Q2 / ( Q2 + MZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
         PZ2 = PZ * PZ;
       }
 
@@ -129,19 +127,19 @@ namespace apfel
   std::vector<double> ElectroWeakChargesNWA()
   {
     // Relevant constants
-    const double S2ThW = Sin2ThetaW;
-    const double VD    = - 0.5 + 2 * S2ThW / 3;
-    const double VU    = + 0.5 - 4 * S2ThW / 3;
-    const double AD    = - 0.5;
-    const double AU    = + 0.5;
-    const double Ve    = - 0.5 + 2 * S2ThW;
-    const double Ae    = - 0.5;
+    const double VD = - 0.5 + 2 * Sin2ThetaW / 3;
+    const double VU = + 0.5 - 4 * Sin2ThetaW / 3;
+    const double AD = - 0.5;
+    const double AU = + 0.5;
+    const double Ve = - 0.5 + 2 * Sin2ThetaW;
+    const double Ae = - 0.5;
     const std::vector<double> Vq = {VD, VU, VD, VU, VD, VU};
     const std::vector<double> Aq = {AD, AU, AD, AU, AD, AU};
 
-    // Propagator and its square
-    double PZ2 = pow(ZMass, 4) * M_PI / ZMass / ZMass / GammaZ / pow(4 * S2ThW * ( 1 - S2ThW ), 2) / 2;
+    // Propagator square
+    double PZ2 = pow(ZMass, 4) * M_PI / ZMass / ZMass / GammaZ / pow(4 * Sin2ThetaW * ( 1 - Sin2ThetaW ), 2) / 2;
 
+    // Build electroweak charges
     std::vector<double> Charges(6, 0.);
     for (auto i = 0; i < 6; i++)
       Charges[i] = ( Ve * Ve + Ae * Ae ) * ( Vq[i] * Vq[i] + Aq[i] * Aq[i] ) * PZ2;
@@ -200,6 +198,7 @@ namespace apfel
     const std::map<int, Distribution> objs = d.GetObjects();
     for (auto const& e : objs)
       lgt += dabs(e.second);
+
     return lgt / objs.size();
   }
 
@@ -260,7 +259,7 @@ namespace apfel
     // Sum the charges
     const double sumq = (NoCharges ? 1 : std::accumulate(Bq.begin(), Bq.begin() + nf, 0.));
 
-    // Total born coss setion
+    // Total Born coss setion
     double sigma0tot = FourPi * pow(AlphaQED, 2) * NC * sumq / 3 / Q / Q;
 
     // QCD coupling

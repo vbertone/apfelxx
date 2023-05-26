@@ -52,13 +52,11 @@ namespace apfel
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param nnnlo: switch to compute the NNNLO matching functions (default: false)
    * @return A map of TmdObject objects, one for each possible nf
    */
   std::map<int, TmdObjects> InitializeTmdObjects(Grid                const& g,
                                                  std::vector<double> const& Thresholds,
-                                                 double              const& IntEps = 1e-5,
-                                                 bool                const& nnnlo = false);
+                                                 double              const& IntEps = 1e-5);
 
   /**
    * @brief The InitializeTmdObjectsDYResScheme function precomputes
@@ -106,6 +104,19 @@ namespace apfel
   std::map<int, TmdObjects> InitializeTmdObjectsSivers(Grid                const& g,
                                                        std::vector<double> const& Thresholds,
                                                        double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeTmdObjects function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of TMD g1 PDFs and store them into a 'TmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of TmdObject objects, one for each possible nf
+   */
+  std::map<int, TmdObjects> InitializeTmdObjectsg1(Grid                const& g,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& IntEps = 1e-5);
   ///@}
 
   /**
@@ -375,23 +386,5 @@ namespace apfel
                                                   std::function<double(double const&)> const& Alphas,
                                                   int                                  const& PerturbativeOrder,
                                                   double                               const& Cf = 1);
-  ///@}
-
-  /**
-   * @name Hard factors
-   * Collection of hard functions used in the defintion of the
-   * qT-dependent cross sections in TMD factorisation.
-   */
-  ///@{
-  /**
-   * @brief Perturbative hard factor for Drell-Yan.
-   * @param PerturbativeOrder: the perturbative order
-   * @param Alphas: the value of the strong coupling
-   * @param nf: the number of active flavours
-   * @param kappa: the ration between hard scale and renormalusation scale
-   * @return The hard factor for Drell-Yan.
-   * @note TO BE REMOVED!
-   */
-  double HardFactorDY(int const& PerturbativeOrder, double const& Alphas, int const& nf, double const& kappa);
   ///@}
 }

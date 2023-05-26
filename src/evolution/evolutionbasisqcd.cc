@@ -42,7 +42,7 @@ namespace apfel
     ConvolutionMap{"EvolutionOperatorBasisQCD_" + std::to_string(nf)}
   {
     // Allocate EvolutionBasisQCD object to retrieve the splitting
-    // matrix rules
+    // matrix rules.
     const EvolutionBasisQCD eb{nf};
 
     // Get matrix of coefficients

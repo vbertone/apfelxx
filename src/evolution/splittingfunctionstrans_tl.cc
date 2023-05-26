@@ -10,11 +10,6 @@
 
 namespace apfel
 {
-  /**
-   * @brief The LO space-like splitting function for tranversely
-   * polarised FFs. Reference
-   * https://arxiv.org/pdf/hep-ph/0108241v1.pdf
-   */
   //_________________________________________________________________________________
   P0Ttransns::P0Ttransns():
     Expression()
@@ -33,11 +28,6 @@ namespace apfel
     return 4 * CF * log( 1 - x ) + 3 * CF;
   }
 
-  /**
-   * @brief The NLO space-like splitting function for tranversely
-   * polarised FFs. Reference
-   * https://arxiv.org/pdf/hep-ph/0108241v1.pdf
-   */
   //_________________________________________________________________________________
   P1Ttransnsp::P1Ttransnsp(int const& nf):
     Expression(),
