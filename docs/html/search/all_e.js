@@ -42,5 +42,5 @@ var searchData=
   ['nqg_39',['nQg',['../structapfel_1_1EvolutionSetup.html#aab9528d803850444afe8f68ac552338c',1,'apfel::EvolutionSetup']]],
   ['null_40',['Null',['../classapfel_1_1Null.html',1,'apfel::Null'],['../classapfel_1_1Null.html#a0f74dde5cc4f104049878d17bd639248',1,'apfel::Null::Null()']]],
   ['numerical_20constants_41',['Numerical constants',['../group__NumericalConstants.html',1,'']]],
-  ['nx_42',['nx',['../classapfel_1_1SubGrid.html#ac9c8d18ab6868c90679a2b66f5616c81',1,'apfel::SubGrid::nx()'],['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters::nx()']]]
+  ['nx_42',['nx',['../classapfel_1_1SubGrid.html#ac9c8d18ab6868c90679a2b66f5616c81',1,'apfel::SubGrid::nx()'],['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters::nx']]]
 ];

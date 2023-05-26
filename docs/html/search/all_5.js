@@ -33,7 +33,7 @@ var searchData=
   ['evaluatexzq_30',['EvaluatexzQ',['../classapfel_1_1TabulateObject.html#a9cab3e4da901b4632acb487dcda17b01',1,'apfel::TabulateObject']]],
   ['evolbasisplusminus_31',['EvolBasisPlusMinus',['../classapfel_1_1EvolBasisPlusMinus.html',1,'apfel::EvolBasisPlusMinus'],['../classapfel_1_1EvolBasisPlusMinus.html#adb04bc286073597771c3268feada289d',1,'apfel::EvolBasisPlusMinus::EvolBasisPlusMinus()']]],
   ['evolbasisplusminus_2eh_32',['evolbasisplusminus.h',['../evolbasisplusminus_8h.html',1,'']]],
-  ['evolpolarisation_33',['EvolPolarisation',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792',1,'apfel::EvolutionSetup::EvolPolarisation()'],['../structapfel_1_1EvolutionSetup.html#ac177f59f4426ece1c64c1ba002b040fe',1,'apfel::EvolutionSetup::EvolPolarisation()']]],
+  ['evolpolarisation_33',['EvolPolarisation',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792',1,'apfel::EvolutionSetup::EvolPolarisation'],['../structapfel_1_1EvolutionSetup.html#ac177f59f4426ece1c64c1ba002b040fe',1,'apfel::EvolutionSetup::EvolPolarisation']]],
   ['evolution_20convolution_20maps_34',['Evolution convolution maps',['../group__EvolBases.html',1,'']]],
   ['evolution_20convolution_20maps_20in_20the_20plus_2dminus_20basis_35',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
   ['evolutionbasisqcd_36',['EvolutionBasisQCD',['../classapfel_1_1EvolutionBasisQCD.html',1,'apfel::EvolutionBasisQCD'],['../classapfel_1_1EvolutionBasisQCD.html#a6610cdd3d123e1e9320adb77cc35ff06',1,'apfel::EvolutionBasisQCD::EvolutionBasisQCD()']]],

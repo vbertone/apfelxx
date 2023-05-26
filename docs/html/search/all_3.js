@@ -71,7 +71,7 @@ var searchData=
   ['c3qgpdf_68',['C3qgpdf',['../classapfel_1_1C3qgpdf.html',1,'apfel::C3qgpdf'],['../classapfel_1_1C3qgpdf.html#ad274c36f84f6bc63c7fc459e8bde47f8',1,'apfel::C3qgpdf::C3qgpdf()']]],
   ['ca_69',['CA',['../group__MathConstants.html#ga8eecdadecd5396bb2e5eaa7a99267895',1,'apfel']]],
   ['cf_70',['CF',['../group__MathConstants.html#ga687ec16c12edc12df465398573b42d47',1,'apfel']]],
-  ['cg_71',['CG',['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa62810fc51924226e888e0f815590e060',1,'apfel::DISCCBasis::CG()'],['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a52a1108889293dff2b652a23bc8a0725',1,'apfel::DISNCBasis::CG()']]],
+  ['cg_71',['CG',['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa62810fc51924226e888e0f815590e060',1,'apfel::DISCCBasis::CG'],['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a52a1108889293dff2b652a23bc8a0725',1,'apfel::DISNCBasis::CG']]],
   ['cgtmd1gg_72',['Cgtmd1gg',['../classapfel_1_1Cgtmd1gg.html',1,'apfel::Cgtmd1gg'],['../classapfel_1_1Cgtmd1gg.html#a560bb07e66846873cb528c7708b49ff1',1,'apfel::Cgtmd1gg::Cgtmd1gg()']]],
   ['cgtmd1gq_73',['Cgtmd1gq',['../classapfel_1_1Cgtmd1gq.html',1,'apfel::Cgtmd1gq'],['../classapfel_1_1Cgtmd1gq.html#aa8f1cfc5bdd1732964417738f69c354e',1,'apfel::Cgtmd1gq::Cgtmd1gq()']]],
   ['cgtmd1ns_74',['Cgtmd1ns',['../classapfel_1_1Cgtmd1ns.html',1,'apfel::Cgtmd1ns'],['../classapfel_1_1Cgtmd1ns.html#afa95ccdb5456ff82e082580351d3d255',1,'apfel::Cgtmd1ns::Cgtmd1ns()']]],
@@ -144,8 +144,8 @@ var searchData=
   ['cml2gnc_141',['CmL2gNC',['../classapfel_1_1CmL2gNC.html',1,'apfel::CmL2gNC'],['../group__CCMassive.html#ga6f15a9aee0ac52ff97e94687b9b289b8',1,'apfel::CmL2gNC::CmL2gNC()']]],
   ['cml2nsnc_142',['CmL2nsNC',['../classapfel_1_1CmL2nsNC.html',1,'apfel::CmL2nsNC'],['../group__CCMassive.html#gaacf89402670035155e057c6ad3a03e68',1,'apfel::CmL2nsNC::CmL2nsNC()']]],
   ['cml2psnc_143',['CmL2psNC',['../classapfel_1_1CmL2psNC.html',1,'apfel::CmL2psNC'],['../group__CCMassive.html#ga0f5fbe503c96570e8af5e5b96e26c283',1,'apfel::CmL2psNC::CmL2psNC()']]],
-  ['cns_144',['CNS',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a865e4ec076559d4ab36f0f9b8c110b83',1,'apfel::DISNCBasis::CNS()'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa403b083fd6ed38621d003339b13fd05b',1,'apfel::DISCCBasis::CNS()']]],
-  ['coefficient_145',['coefficient',['../structapfel_1_1ConvolutionMap_1_1rule.html#a4bf45b4c287915ad713e8367aea136ea',1,'apfel::ConvolutionMap::rule::coefficient()'],['../structapfel_1_1term.html#ac2ed928338c39a18b9995db6c407efd3',1,'apfel::term::coefficient()']]],
+  ['cns_144',['CNS',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a865e4ec076559d4ab36f0f9b8c110b83',1,'apfel::DISNCBasis::CNS'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa403b083fd6ed38621d003339b13fd05b',1,'apfel::DISCCBasis::CNS']]],
+  ['coefficient_145',['coefficient',['../structapfel_1_1ConvolutionMap_1_1rule.html#a4bf45b4c287915ad713e8367aea136ea',1,'apfel::ConvolutionMap::rule::coefficient'],['../structapfel_1_1term.html#ac2ed928338c39a18b9995db6c407efd3',1,'apfel::term::coefficient']]],
   ['coefficientfunctions_146',['CoefficientFunctions',['../structapfel_1_1Observable_1_1ConvolutionPair.html#a3544246010eaef43cfc895b25ca3d767',1,'apfel::Observable::ConvolutionPair']]],
   ['collinssoperkernel_147',['CollinsSoperKernel',['../namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2',1,'apfel']]],
   ['combine_148',['Combine',['../classapfel_1_1Set.html#a7065697bdd240416184fee23592c77fa',1,'apfel::Set::Combine() const'],['../classapfel_1_1Set.html#a339d0b1d03e094ec494f1c06b7dacde2',1,'apfel::Set::Combine(std::vector&lt; double &gt; const &amp;weigths) const']]],
@@ -158,7 +158,7 @@ var searchData=
   ['convolutionmap_155',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html',1,'apfel::ConvolutionMap'],['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap::ConvolutionMap()']]],
   ['convolutionmap_2eh_156',['convolutionmap.h',['../convolutionmap_8h.html',1,'']]],
   ['convolutionpair_157',['ConvolutionPair',['../structapfel_1_1Observable_1_1ConvolutionPair.html',1,'apfel::Observable&lt; T &gt;::ConvolutionPair'],['../structapfel_1_1Observable_1_1ConvolutionPair.html#ac2291b3989c15a3fe3723d6af10380bf',1,'apfel::Observable::ConvolutionPair::ConvolutionPair()']]],
-  ['couplingevolution_158',['CouplingEvolution',['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5a',1,'apfel::EvolutionSetup::CouplingEvolution()'],['../structapfel_1_1EvolutionSetup.html#aa26ea1950ffa331a10e1f8f6dd84f4cf',1,'apfel::EvolutionSetup::CouplingEvolution()']]],
+  ['couplingevolution_158',['CouplingEvolution',['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5a',1,'apfel::EvolutionSetup::CouplingEvolution'],['../structapfel_1_1EvolutionSetup.html#aa26ea1950ffa331a10e1f8f6dd84f4cf',1,'apfel::EvolutionSetup::CouplingEvolution']]],
   ['createjointgrid_159',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]],
-  ['cs_160',['CS',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a6edfc8afd7a0b1bfebc74332afb4031c',1,'apfel::DISNCBasis::CS()'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b',1,'apfel::DISCCBasis::CS()']]]
+  ['cs_160',['CS',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60a6edfc8afd7a0b1bfebc74332afb4031c',1,'apfel::DISNCBasis::CS'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2fa6501efd2adadece560864a42d0ef496b',1,'apfel::DISCCBasis::CS']]]
 ];
