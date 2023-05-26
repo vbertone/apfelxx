@@ -79,6 +79,11 @@ different path, remember to export the APFEL++ `/lib` and `/bin` folders into th
 ```Shell
 ccmake .
 ```
+The library can be uninstalled by running:
+```
+make clean
+xargs rm < install_manifest.txt
+```
 
 ## Code documentation
 

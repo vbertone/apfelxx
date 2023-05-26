@@ -19,7 +19,7 @@ endif()
 
 # VERSION ==============================================================================
 
-set(apfelxx_VERSION 4.7.0)
+set(apfelxx_VERSION 4.8.0)
 
 # export version to file
 configure_file(
