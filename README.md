@@ -6,7 +6,6 @@
 
 __A PDF evolution library in C++__
 
-
 # Introduction
  
 APFEL++ is a C++ rewriting of the Fortran 77 evolution code
@@ -97,4 +96,3 @@ Code documentation automatically generated with [Doxygen](https://www.doxygen.nl
 ## Contact information
 
 - Valerio Bertone: valerio.bertone@cern.ch
-
