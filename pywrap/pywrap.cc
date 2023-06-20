@@ -1254,4 +1254,9 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeFLNCObjectsMassive", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeFLNCObjectsMassive), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
   _initializers.def("InitializeF2NCObjectsMassiveZero", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeF2NCObjectsMassiveZero), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
   _initializers.def("InitializeFLNCObjectsMassiveZero", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeFLNCObjectsMassiveZero), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
+
+  // Wrappers of "dglapbuilder.h"
+  _initializers.def("InitializeGpdObjects", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjects), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeGpdObjectsPol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsPol), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeGpdObjectsTrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsTrans), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
 }
