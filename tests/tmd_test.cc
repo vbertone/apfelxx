@@ -10,8 +10,7 @@
 int main()
 {
   // Vectors of masses and thresholds
-  //const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
-  const std::vector<double> Thresholds = {0, 0, 0, 0, 0};
+  const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Running coupling
   apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, apfel::FixedOrderAccuracy::NNLO};
@@ -25,7 +24,7 @@ int main()
   const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, sqrt(2), apfel::FixedOrderAccuracy::NNLO, Alphas);
 
   // Tabulate PDFs
-  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabPDFs{*EvolvedPDFs, 100, 1, 1000, 3};
+  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabPDFs{*EvolvedPDFs, 200, 1, 20000, 3};
   const auto CollPDFs = [=] (double const& mu) -> apfel::Set<apfel::Distribution> { return TabPDFs.Evaluate(mu); };
 
   // Get timer
@@ -60,7 +59,7 @@ int main()
   const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double
   {
     // Compute b*
-    const double bstar = b / sqrt( 1 + pow(b / 2 / exp( - apfel::emc), 2) );
+    const double bstar = std::max(b / sqrt( 1 + pow(b / 2 / exp( - apfel::emc), 2) ), 1e-4);
 
     // Get Evolved TMD PDFs and rotate them into the physical
     // basis
