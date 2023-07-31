@@ -251,10 +251,11 @@ namespace apfel
 
     // NNNLO
     std::map<int, std::map<int, Operator>> C3NNNLO;
+    const Operator O33nsv{g, C33nsv{}, IntEps};
     for (int nf = 1; nf <= 6; nf++)
       {
-        const Operator O33nsm{g, C33nsm{nf, 0}, IntEps};
-        const Operator O33t  {g, C33nsm{nf, 1}, IntEps};
+        const Operator O33nsm{g, C33nsm{nf}, IntEps};
+        const Operator O33t = O33nsm + 6 * O33nsv;
         std::map<int, Operator> C3NNNLOnf;
         C3NNNLOnf.insert({DISNCBasis::CNS, O33nsm});
         C3NNNLOnf.insert({DISNCBasis::CS,  O33t});

@@ -786,10 +786,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  C33nsm::C33nsm(int const& nf, double const& fl02):
+  C33nsm::C33nsm(int const& nf):
     Expression(),
-    _nf(nf),
-    _fl02(fl02)
+    _nf(nf)
   {
   }
   double C33nsm::Regular(double const& x) const
@@ -815,9 +814,7 @@ namespace apfel
       + _nf * ( 516.1 - 465.2 * x + x * x1 * ( 635.3 + 310.4 * x ) + 304. / 81. * dl4 + 48512. / 729. * dl3 + 305.32 * dl2 + 366.9 * dl - 1.200 * x * dl4
                 - 640. / 81. * dl14 + 32576. / 243. * dl13  - 660.7 * dl12 + 959.1 * dl1 + 31.95 * x1 * dl14 + dl * dl1 * ( 1496. + 270.1 * dl - 1191. * dl1 ) )
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
-                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 )
-      + _fl02 * _nf * ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26* dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
-                        + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
+                      - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 );
   }
   double C33nsm::Singular(double const& x) const
   {
@@ -854,5 +851,24 @@ namespace apfel
       + 256. * d81 * dl16 - 3264. * d81 * dl15 + 1.252745e+2 * dl14 + 3.905133e+2 * dl13 - 3.664225e+3 * dl12 + 4.44276e+3  * dl1 - 9195.48 + 22.80
       + _nf * ( 128. * d81 * dl15 - 1648. * d81 * dl14 + 220.573 * d3 * dl13 + 147.453 * dl12 - 729.359 * dl1 + 2575.074 + 0.386 )
       + _nf * _nf * ( 16. * d81 * dl14 - 464. * d81* d3 * dl13 + 7.67505 * 0.5 * dl12 + 1.0083 * dl1 - 103.2521 - 0.0081 );
+  }
+
+  //_________________________________________________________________________________
+  C33nsv::C33nsv():
+    Expression()
+  {
+  }
+  double C33nsv::Regular(double const& x) const
+  {
+    const double dl   = log(x);
+    const double dl2  = dl * dl;
+    const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double dl5  = dl * dl4;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
+    const double dl12 = dl1 * dl1;
+    return ( 48.79 - ( 242.4 - 150.7 * x ) * x1 - 16. / 27. * dl5 + 17.26 * dl3 - 113.4 * dl2 - 477.0 * dl + 2.147 * dl12 - 24.57 * dl1
+             + x * dl * ( 218.1 + 82.27 * dl2 ) - dl * dl1 * ( 81.70 + 9.412 * dl1 ) ) * x1;
   }
 }
