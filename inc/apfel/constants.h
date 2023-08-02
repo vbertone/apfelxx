@@ -22,13 +22,22 @@ namespace apfel
 
   /**
    * @defgroup PertOrds Perturbative orders
-   * Enumerator for the perturbative orders for both fixed order and
+   * Enumerators for the perturbative orders for both fixed order and
    * resummation.
    * @ingroup NumericalConstants
    */
   ///@{
-  enum FixedOrderAccuracy: int {LO = 0, NLO = 1, NNLO = 2, NNNLO = 3};
-  enum LogAccuracy: int {NNNLLp = -3, NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3};
+  enum FixedOrderAccuracy: int {LO = 0, NLO = 1, NNLO = 2, NNNLO = 3, N4LO = 4};
+  enum LogAccuracy: int {NNNLLp = -3, NNLLp = -2, NLLp = -1, LL = 0, NLL = 1, NNLL = 2, NNNLL = 3, N4LL = 4};
+  ///@}
+
+  /**
+   * @defgroup PartonSpecies Partonic species
+   * Enumerator for distinguishing different partonic species.
+   * @ingroup NumericalConstants
+   */
+  ///@{
+  enum PartonSpecies: int {GLUON = 0, QUARK = 1, PHOTON = 2, CHARGEDLEPTON = 3, NEUTRINO = 4};
   ///@}
 
   /**

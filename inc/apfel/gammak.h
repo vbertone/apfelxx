@@ -9,12 +9,12 @@
 namespace apfel
 {
   /**
-   * @name Cusp anomalous dimension.  Coefficients of the
-   * &gamma;<SUB>K</SUB> anomalous dimension. The expressions up to
-   * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) are taken from eq. (59)
-   * https://arxiv.org/pdf/1705.07167.pdf. While the expressions at
-   * O(&alpha;<SUB>s</SUB><SUP>4</SUP>) are taken from eqs. (6.3) of
-   * https://arxiv.org/pdf/1911.10174.pdf or Eq. (6) of
+   * @name Cusp anomalous dimension.
+   * Coefficients of the &gamma;<SUB>K</SUB> anomalous dimension. The
+   * expressions up to O(&alpha;<SUB>s</SUB><SUP>3</SUP>) are taken
+   * from eq. (59) https://arxiv.org/pdf/1705.07167.pdf. While the
+   * expressions at O(&alpha;<SUB>s</SUB><SUP>4</SUP>) are taken from
+   * eqs. (6.3) of https://arxiv.org/pdf/1911.10174.pdf or Eq. (6) of
    * https://arxiv.org/pdf/2002.04617v2.pdf
    * @note All the expressions do not include an overall factor
    * C<SUB>F</SUB> or C<SUB>A</SUB>.

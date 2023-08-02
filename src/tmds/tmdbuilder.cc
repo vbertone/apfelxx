@@ -16,7 +16,6 @@
 #include "apfel/djet.h"
 #include "apfel/hardfactors.h"
 #include "apfel/tools.h"
-#include "apfel/constants.h"
 #include "apfel/integrator.h"
 
 namespace apfel
@@ -432,6 +431,7 @@ namespace apfel
         obj.Beta.insert({0, beta0qcd(nf)});
         obj.Beta.insert({1, beta1qcd(nf)});
         obj.Beta.insert({2, beta2qcd(nf)});
+        obj.Beta.insert({3, beta3qcd(nf)});
 
         // GammaF quark
         obj.GammaFq.insert({0, gammaFq0()});
@@ -698,6 +698,7 @@ namespace apfel
         obj.Beta.insert({0, beta0qcd(nf)});
         obj.Beta.insert({1, beta1qcd(nf)});
         obj.Beta.insert({2, beta2qcd(nf)});
+        obj.Beta.insert({3, beta3qcd(nf)});
 
         // GammaF quark
         obj.GammaFq.insert({0, 0});
@@ -829,6 +830,7 @@ namespace apfel
         obj.Beta.insert({0, beta0qcd(nf)});
         obj.Beta.insert({1, beta1qcd(nf)});
         obj.Beta.insert({2, beta2qcd(nf)});
+        obj.Beta.insert({3, beta3qcd(nf)});
 
         // GammaF quark
         obj.GammaFq.insert({0, gammaFq0()});
@@ -1004,6 +1006,7 @@ namespace apfel
         obj.Beta.insert({0, beta0qcd(nf)});
         obj.Beta.insert({1, beta1qcd(nf)});
         obj.Beta.insert({2, beta2qcd(nf)});
+        obj.Beta.insert({3, beta3qcd(nf)});
 
         // GammaF quark
         obj.GammaFq.insert({0, gammaFq0()});
@@ -1064,7 +1067,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
-                                                                                             int                                             const& PerturbativeOrder,
+                                                                                             LogAccuracy                                     const& PerturbativeOrder,
                                                                                              double                                          const& Ci,
                                                                                              double                                          const& IntEps)
   {
@@ -1088,7 +1091,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                             std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                                                             std::function<double(double const&)>            const& Alphas,
-                                                                                            int                                             const& PerturbativeOrder,
+                                                                                            LogAccuracy                                     const& PerturbativeOrder,
                                                                                             double                                          const& Ci,
                                                                                             double                                          const& IntEps)
   {
@@ -1113,7 +1116,7 @@ namespace apfel
                                                                                  JetAlgorithm                         const& JetAlgo,
                                                                                  double                               const& JetR,
                                                                                  std::function<double(double const&)> const& Alphas,
-                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 LogAccuracy                          const& PerturbativeOrder,
                                                                                  double                               const& CJ,
                                                                                  double                               const& Ci,
                                                                                  double                               const& IntEps)
@@ -1143,7 +1146,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                std::function<double(double const&)>            const& Alphas,
-                                                               int                                             const& PerturbativeOrder,
+                                                               LogAccuracy                                     const& PerturbativeOrder,
                                                                double                                          const& Ci)
   {
     // Get matching functions
@@ -1168,7 +1171,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                               std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                               std::function<double(double const&)>            const& Alphas,
-                                                              int                                             const& PerturbativeOrder,
+                                                              LogAccuracy                                     const& PerturbativeOrder,
                                                               double                                          const& Ci)
   {
     // Get matching functions
@@ -1195,7 +1198,7 @@ namespace apfel
                                                                   JetAlgorithm                         const& JetAlgo,
                                                                   double                               const& tR,
                                                                   std::function<double(double const&)> const& Alphas,
-                                                                  int                                  const& PerturbativeOrder,
+                                                                  LogAccuracy                          const& PerturbativeOrder,
                                                                   double                               const& CJ,
                                                                   double                               const& Ci,
                                                                   double                               const& IntEps)
@@ -1307,7 +1310,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<Set<Operator>(double const&)> MatchingFunctionsPDFs(std::map<int, TmdObjects>            const& TmdObj,
                                                                     std::function<double(double const&)> const& Alphas,
-                                                                    int                                  const& PerturbativeOrder,
+                                                                    LogAccuracy                          const& PerturbativeOrder,
                                                                     double                               const& Ci)
   {
     // Retrieve thresholds from "TmdObj"
@@ -1378,7 +1381,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<Set<Operator>(double const&)> MatchingFunctionsFFs(std::map<int, TmdObjects>             const& TmdObj,
                                                                    std::function<double(double const&)>  const& Alphas,
-                                                                   int                                   const& PerturbativeOrder,
+                                                                   LogAccuracy                           const& PerturbativeOrder,
                                                                    double                                const& Ci)
   {
     // Retrieve thresholds from "TmdObj"
@@ -1449,7 +1452,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                    std::function<double(double const&)> const& Alphas,
-                                                                                                   int                                  const& PerturbativeOrder,
+                                                                                                   LogAccuracy                          const& PerturbativeOrder,
                                                                                                    double                               const& Ci,
                                                                                                    double                               const& IntEps)
   {
@@ -1614,7 +1617,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactorsK(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                     std::function<double(double const&)> const& Alphas,
-                                                                                                    int                                  const& PerturbativeOrder,
+                                                                                                    LogAccuracy                          const& PerturbativeOrder,
                                                                                                     double                               const& Ci,
                                                                                                     double                               const& IntEps)
   {
@@ -1800,7 +1803,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
+                                                                                          LogAccuracy                          const& PerturbativeOrder,
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
@@ -1943,7 +1946,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
+                                                                                          LogAccuracy                          const& PerturbativeOrder,
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
@@ -2086,7 +2089,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
                                                                          std::function<double(double const&)> const& Alphas,
-                                                                         int                                  const& PerturbativeOrder,
+                                                                         LogAccuracy                          const& PerturbativeOrder,
                                                                          double                               const& Ci,
                                                                          double                               const& IntEps)
   {
@@ -2205,7 +2208,7 @@ namespace apfel
   std::function<double(double const&)> HardFactor(std::string                          const& Process,
                                                   std::map<int, TmdObjects>            const& TmdObj,
                                                   std::function<double(double const&)> const& Alphas,
-                                                  int                                  const& PerturbativeOrder,
+                                                  LogAccuracy                          const& PerturbativeOrder,
                                                   double                               const& Cf)
   {
     // Retrieve thresholds from "TmdObj"

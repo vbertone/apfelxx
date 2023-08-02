@@ -14,6 +14,8 @@ namespace apfel
    * expressions are taken from eq. (69)
    * https://arxiv.org/pdf/1705.07167.pdf and from eq (D.9) of
    * https://arxiv.org/pdf/1604.07869.pdf.
+   * @note All the expressions do not include an overall factor
+   * C<SUB>F</SUB> or C<SUB>A</SUB>.
    */
   ///@{
   /// &alpha;<SUB>s</SUB> term

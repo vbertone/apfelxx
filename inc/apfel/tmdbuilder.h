@@ -11,6 +11,7 @@
 #include "apfel/set.h"
 #include "apfel/dglapbuilder.h"
 #include "apfel/tabulateobject.h"
+#include "apfel/constants.h"
 
 namespace apfel
 {
@@ -134,7 +135,7 @@ namespace apfel
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
@@ -144,7 +145,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
-                                                                                             int                                             const& PerturbativeOrder,
+                                                                                             LogAccuracy                                     const& PerturbativeOrder,
                                                                                              double                                          const& Ci = 1,
                                                                                              double                                          const& IntEps = 1e-7);
 
@@ -154,7 +155,7 @@ namespace apfel
    * @param TmdObj: the TMD objects
    * @param CollFFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return Set<Distribution>-valued function of the impact parameter
@@ -164,7 +165,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                             std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                                                             std::function<double(double const&)>            const& Alphas,
-                                                                                            int                                             const& PerturbativeOrder,
+                                                                                            LogAccuracy                                     const& PerturbativeOrder,
                                                                                             double                                          const& Ci = 1,
                                                                                             double                                          const& IntEps = 1e-7);
 
@@ -175,7 +176,7 @@ namespace apfel
    * @param JetAlgo: the jet algorithm to be used
    * @param JetR: the jet radius
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param CJ: jet-scale variation factor (default: 1)
    * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
@@ -187,7 +188,7 @@ namespace apfel
                                                                                  JetAlgorithm                         const& JetAlgo,
                                                                                  double                               const& JetR,
                                                                                  std::function<double(double const&)> const& Alphas,
-                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 LogAccuracy                          const& PerturbativeOrder,
                                                                                  double                               const& CJ = 1,
                                                                                  double                               const& Ci = 1,
                                                                                  double                               const& IntEps = 1e-7);
@@ -197,7 +198,7 @@ namespace apfel
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial-scale variation factor
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD PDFs
@@ -205,7 +206,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                std::function<double(double const&)>            const& Alphas,
-                                                               int                                             const& PerturbativeOrder,
+                                                               LogAccuracy                                     const& PerturbativeOrder,
                                                                double                                          const& Ci = 1);
 
   /**
@@ -213,7 +214,7 @@ namespace apfel
    * @param TmdObj: the TMD objects
    * @param CollFFs: the set of collinear FFs to be matched
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial-scale variation factor
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD FFs
@@ -221,7 +222,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                               std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                               std::function<double(double const&)>            const& Alphas,
-                                                              int                                             const& PerturbativeOrder,
+                                                              LogAccuracy                                     const& PerturbativeOrder,
                                                               double                                          const& Ci = 1);
 
   /**
@@ -231,7 +232,7 @@ namespace apfel
    * @param JetAlgo: the jet algorithm
    * @param tR: tangent of half the jet radius (tan(R/2))
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param CJ: jet-scale variation factor (default: 1)
    * @param Ci: the initial-scale variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
@@ -242,7 +243,7 @@ namespace apfel
                                                                   JetAlgorithm                         const& JetAlgo,
                                                                   double                               const& tR,
                                                                   std::function<double(double const&)> const& Alphas,
-                                                                  int                                  const& PerturbativeOrder,
+                                                                  LogAccuracy                          const& PerturbativeOrder,
                                                                   double                               const& CJ = 1,
                                                                   double                               const& Ci = 1,
                                                                   double                               const& IntEps = 1e-7);
@@ -251,7 +252,7 @@ namespace apfel
    * @brief Function that returns the mathing functions for the TMD PDFs.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial-scale variation factor
    * @return Set<Operator>-valued function of the scale mu
    * corresponding to the set of matching functions for PDFs in the
@@ -259,14 +260,14 @@ namespace apfel
    */
   std::function<Set<Operator>(double const&)> MatchingFunctionsPDFs(std::map<int, TmdObjects>            const& TmdObj,
                                                                     std::function<double(double const&)> const& Alphas,
-                                                                    int                                  const& PerturbativeOrder,
+                                                                    LogAccuracy                          const& PerturbativeOrder,
                                                                     double                               const& Ci = 1);
 
   /**
    * @brief Function that returns the mathing functions for the TMD FFs.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial-scale variation factor
    * @return Set<Operator>-valued function of the scale mu
    * corresponding to the set of matching functions for FFs in the
@@ -274,14 +275,14 @@ namespace apfel
    */
   std::function<Set<Operator>(double const&)> MatchingFunctionsFFs(std::map<int, TmdObjects>            const& TmdObj,
                                                                    std::function<double(double const&)> const& Alphas,
-                                                                   int                                  const& PerturbativeOrder,
+                                                                   LogAccuracy                          const& PerturbativeOrder,
                                                                    double                               const& Ci = 1);
 
   /**
    * @brief Function that returns the evolution factors for gluon and quarks.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return std::vector<double>-valued function of the impact parameter
@@ -292,7 +293,7 @@ namespace apfel
    */
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                    std::function<double(double const&)> const& Alphas,
-                                                                                                   int                                  const& PerturbativeOrder,
+                                                                                                   LogAccuracy                          const& PerturbativeOrder,
                                                                                                    double                               const& Ci = 1,
                                                                                                    double                               const& IntEps = 1e-7);
 
@@ -303,7 +304,7 @@ namespace apfel
    * qT-resummation typical way of computing the Sudakov form factor.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return std::vector<double>-valued function of the impact parameter
@@ -314,7 +315,7 @@ namespace apfel
    */
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactorsK(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                     std::function<double(double const&)> const& Alphas,
-                                                                                                    int                                  const& PerturbativeOrder,
+                                                                                                    LogAccuracy                          const& PerturbativeOrder,
                                                                                                     double                               const& Ci = 1,
                                                                                                     double                               const& IntEps = 1e-7);
 
@@ -322,7 +323,7 @@ namespace apfel
    * @brief Function that returns the evolution factor for quarks.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return double-valued function of the impact parameter
@@ -332,7 +333,7 @@ namespace apfel
    */
   std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
+                                                                                          LogAccuracy                          const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
 
@@ -340,7 +341,7 @@ namespace apfel
    * @brief Function that returns the evolution factor for the gluon.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return double-valued function of the impact parameter
@@ -350,7 +351,7 @@ namespace apfel
    */
   std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
+                                                                                          LogAccuracy                          const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
 
@@ -359,7 +360,7 @@ namespace apfel
    * Collins-Soper kernel for quarks.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
    * @return double-valued function of the impact parameter
@@ -368,7 +369,7 @@ namespace apfel
    */
   std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
                                                                          std::function<double(double const&)> const& Alphas,
-                                                                         int                                  const& PerturbativeOrder,
+                                                                         LogAccuracy                          const& PerturbativeOrder,
                                                                          double                               const& Ci = 1,
                                                                          double                               const& IntEps = 1e-7);
 
@@ -377,14 +378,14 @@ namespace apfel
    * @param Process: the string corresponding to the process requested
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the perturbative order
+   * @param PerturbativeOrder: the logarithmic perturbative order
    * @param Cf: the final scale-variation factor (default: 1)
    * @return double-valued function of the final renormalisation scale &mu;
    */
   std::function<double(double const&)> HardFactor(std::string                          const& Process,
                                                   std::map<int, TmdObjects>            const& TmdObj,
                                                   std::function<double(double const&)> const& Alphas,
-                                                  int                                  const& PerturbativeOrder,
+                                                  LogAccuracy                          const& PerturbativeOrder,
                                                   double                               const& Cf = 1);
   ///@}
 }
