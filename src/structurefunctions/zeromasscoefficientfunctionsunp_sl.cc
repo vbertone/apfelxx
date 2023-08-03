@@ -347,9 +347,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  C23nsp::C23nsp(int const& nf):
+  C23nsp::C23nsp(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double C23nsp::Regular(double const& x) const
@@ -378,8 +379,8 @@ namespace apfel
                 + dl * dl1 * ( 4365. + 716.2 * dl - 5983. * dl1 ) )
       + _nf * _nf * ( 129.2 * x + 102.5 * x2 - 368. * d243 * dl3 - 1984. * d243 * dl2 - 8.042 * dl
                       - 192. * d243 * dl13 + 18.21 * dl12 - 19.09 * dl1 + dl * dl1 * ( - 96.07 - 12.46 * dl + 85.88 * dl1 ) )
-      + fl11ns[_nf-1] * _nf * ( ( 126.42 - 50.29 * x - 50.15 * x2 ) * x1 - 26.717 - 960. * d243 * dl2 * ( dl + 5 ) + 59.59 * dl
-                                - x * dl2 * ( 101.8 + 34.79 * dl + 3.070 * dl2 ) - 9.075 * x * x1 * dl1 ) * x;
+      + (_fl11 ? fl11ns[_nf-1] * _nf * ( ( 126.42 - 50.29 * x - 50.15 * x2 ) * x1 - 26.717 - 960. * d243 * dl2 * ( dl + 5 ) + 59.59 * dl
+                                         - x * dl2 * ( 101.8 + 34.79 * dl + 3.070 * dl2 ) - 9.075 * x * x1 * dl1 ) * x : 0);
   }
   double C23nsp::Singular(double const& x) const
   {
@@ -413,16 +414,17 @@ namespace apfel
     const double d3   = 1. / 3;
     const double d81  = 1. / 81;
     return
-      + 256. * d81 * dl16 - 3264. * d81 * dl15 + 1.252745e+2 * dl14 + 3.905133e+2 * dl13 - 3.664225e+3 * dl12 + 4.44276e+3  * dl1 - 9195.48 + 25.10
+      + 256. * d81 * dl16 - 3264. * d81 * dl15 + 1.2527475e+2 * dl14 + 3.90513333333e+2 * dl13 - 3.664225e+3 * dl12 + 4.44276e+3 * dl1 - 9195.48 + 25.10
       + _nf * ( 128. * d81 * dl15 - 1648. * d81 * dl14 + 220.573 * d3 * dl13 + 147.453 * dl12 - 729.359 * dl1 + 2575.074 - 0.387 )
       + _nf * _nf * ( 16. * d81 * dl14 - 464. * d81 * d3 * dl13 + 7.67505 * 0.5 * dl12 + 1.0083 * dl1 - 103.2521 + 0.0155 )
-      - fl11ns[_nf-1] * _nf * 11.8880;
+      - (_fl11 ? fl11ns[_nf-1] * _nf * 11.8880 : 0);
   }
 
   //_________________________________________________________________________________
-  C23nsm::C23nsm(int const& nf):
+  C23nsm::C23nsm(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double C23nsm::Regular(double const& x) const
@@ -453,15 +455,22 @@ namespace apfel
                 + dl * dl1 * ( 4365. + 716.2 * dl - 5983. * dl1 ) )
       + _nf * _nf * ( 129.2 * x + 102.5 * x2 - 368. * d243 * dl3 - 1984. * d243 * dl2 - 8.042 * dl
                       - 192. * d243 * dl13 + 18.21 * dl12 - 19.09 * dl1 + dl * dl1 * ( - 96.07 - 12.46 * dl + 85.88 * dl1 ) )
-      + fl11ns[_nf-1] * _nf * ( ( 126.42 - 50.29 * x - 50.15 * x2 ) * x1 - 26.717 - 960. * d243 * dl2 * ( dl + 5 ) + 59.59 * dl
-                                - x * dl2 * ( 101.8 + 34.79 * dl + 3.070 * dl2 ) - 9.075 * x * x1 * dl1 ) * x;
+      + (_fl11 ? fl11ns[_nf-1] * _nf * ( ( 126.42 - 50.29 * x - 50.15 * x2 ) * x1 - 26.717 - 960. * d243 * dl2 * ( dl + 5 ) + 59.59 * dl
+                                         - x * dl2 * ( 101.8 + 34.79 * dl + 3.070 * dl2 ) - 9.075 * x * x1 * dl1 ) * x : 0);
 
-    // Compute and include difference to get the minus piece
-    const double c2q30a = ( 54.478 * dl12 + 304.60 * dl1 + 691.68 * x ) * x1 + 179.14 * dl - 0.1826 * dl3;
-    const double c2q30b = - ( 13.378 * dl12 + 97.60 * dl1 + 118.12 * x ) * x1 - 91.196 * dl2 - 0.4644 * dl5;
-    const double c2q31a = ( 20.822 * x2 - 282.10 * ( 1. + x / 2. ) ) * x1 - 285.58 * x * dl - 112.30 * dl + 3.587 * dl3;
-    const double c2q31b = ( 4.522 * dl1 + 447.88 * ( 1. + x / 2. ) ) * x1 + 514.02 * x * dl + 147.05 * dl + 7.386 * dl2;
-    return C23nsp - 0.5 * ( c2q30a + c2q30b + _nf * ( c2q31a + c2q31b ) );
+    // Compute and include difference to get the minus piece (old parameterisation)
+    //const double c2q30a = ( 54.478 * dl12 + 304.60 * dl1 + 691.68 * x ) * x1 + 179.14 * dl - 0.1826 * dl3;
+    //const double c2q30b = - ( 13.378 * dl12 + 97.60 * dl1 + 118.12 * x ) * x1 - 91.196 * dl2 - 0.4644 * dl5;
+    //const double c2q31a = ( 20.822 * x2 - 282.10 * ( 1. + x / 2. ) ) * x1 - 285.58 * x * dl - 112.30 * dl + 3.587 * dl3;
+    //const double c2q31b = ( 4.522 * dl1 + 447.88 * ( 1. + x / 2. ) ) * x1 + 514.02 * x * dl + 147.05 * dl + 7.386 * dl2;
+    //return C23nsp - 0.5 * ( c2q30a + c2q30b + _nf * ( c2q31a + c2q31b ) );
+
+    // Compute and include difference to get the minus piece (new parameterisation)
+    const double c2q30 = 273.59 - 44.95 * x - 73.56 * x2 + 40.68 * x3 + 0.1356 * dl5 + 8.483 * dl4 + 55.90 * dl3
+                         + 120.67 * dl2 + 388.0 * dl - 329.8 * dl * dl1 - x * dl * ( 316.2 + 71.63 * dl ) + 46.30 * dl1 + 5.447 * dl12;
+    const double c2q31 = - 19.093 + 12.97 * x + 36.44 * x2 - 29.256 * x3 - 0.76 * dl4 - 5.317 * dl3 - 19.82 * dl2 - 38.958 * dl
+                         - 13.395 * dl * dl1 + x * dl * ( 14.44 + 17.74 *dl ) + 1.395 * dl1;
+    return C23nsp - ( c2q30 + _nf * c2q31 ) * x1;
   }
   double C23nsm::Singular(double const& x) const
   {
@@ -498,13 +507,16 @@ namespace apfel
       + 256. * d81 * dl16 - 3264. * d81 * dl15 + 1.252745e+2 * dl14 + 3.905133e+2 * dl13 - 3.664225e+3 * dl12 + 4.44276e+3  * dl1 - 9195.48 + 25.10
       + _nf * ( 128. * d81 * dl15 - 1648. * d81 * dl14 + 220.573 * d3 * dl13 + 147.453 * dl12 - 729.359 * dl1 + 2575.074 - 0.387 )
       + _nf * _nf * ( 16. * d81 * dl14 - 464. * d81 * d3 * dl13 + 7.67505 * 0.5 * dl12 + 1.0083 * dl1 - 103.2521 + 0.0155 )
-      - fl11ns[_nf-1] * _nf * 11.8880;
+      - (_fl11 ? fl11ns[_nf-1] * _nf * 11.8880 : 0)
+      // Include minus correction
+      - ( - 0.0008 + _nf * 0.0001 );
   }
 
   //_________________________________________________________________________________
-  C23ps::C23ps(int const& nf):
+  C23ps::C23ps(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double C23ps::Regular(double const& x) const
@@ -530,17 +542,18 @@ namespace apfel
                          - 3568. / 243. * dl3 - 184. * d81 * dl4 + 40.2426 * x1 / x;
     const double c2s3f = ( ( 126.42 - 50.29 * x - 50.15 * x2) * x1 - 26.717 - 320. * d81 * dl2 * ( dl + 5. ) + 59.59 * dl
                            - x * dl2 * ( 101.8 + 34.79 * dl + 3.070 * dl2 ) - 9.075 * x * x1 * dl1 ) * x;
-    return c2s31 + _nf * c2s32 + ( fl11sg[_nf-1] - fl11ns[_nf-1] ) * c2s3f;
+    return c2s31 + _nf * c2s32 + (_fl11 ? ( fl11sg[_nf-1] - fl11ns[_nf-1] ) * c2s3f : 0);
   }
   double C23ps::Local(double const&) const
   {
-    return - ( fl11sg[_nf-1] - fl11ns[_nf-1] ) * 11.8880;
+    return (_fl11 ? - ( fl11sg[_nf-1] - fl11ns[_nf-1] ) * 11.8880 : 0);
   }
 
   //_________________________________________________________________________________
-  C23g::C23g(int const& nf):
+  C23g::C23g(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double C23g::Regular(double const& x) const
@@ -570,7 +583,7 @@ namespace apfel
     const double c2g3f =
       3.211 * dl12 + 19.04 * x * dl1 + 0.623 * x1 * dl13 - 64.47 * x + 121.6 * x2 - 45.82 * x3 - x * dl * dl1 * ( 31.68 + 37.24 * dl )
       - x * dl * ( 82.40 + 16.08 * dl ) + x * dl3 * ( 520. * d81 + 11.27 * x ) + 60. * d81 * x * dl4;
-    return c2g31 + _nf * ( c2g32 + fl11sg[_nf-1] * c2g3f );
+    return c2g31 + _nf * ( c2g32 + (_fl11 ? fl11sg[_nf-1] * c2g3f : 0) );
   }
   double C23g::Local(double const&) const
   {
@@ -578,9 +591,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CL3nsp::CL3nsp(int const& nf):
+  CL3nsp::CL3nsp(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double CL3nsp::Regular(double const& x) const
@@ -601,8 +615,8 @@ namespace apfel
                 + ( 1. - x ) * dl12 * ( 239.7 + 20.63 * dl1 ) + dl* dl1 * ( 887.3 + 294.5 * dl - 59.14 * dl1 ) )
       + _nf * _nf * ( - 19. + ( 317. / 6. - 12. * zeta2 ) * x + 9. * x * dl2 + dl * ( - 6. + 50. * x ) + 3. * x * dl12 + dl1 * ( 6. - 25. * x )
                       - 6. * x * dl* dl1 + 6. * x * dilog(x) ) * 64. * d81
-      + fl11ns[_nf-1] * _nf * ( ( 107.0 + 321.05 * x - 54.62 * x2 ) * ( 1. - x ) - 26.717 - 320. * d81 * dl3 - 640. * d81 * dl2
-                                + 9.773 * dl + x * dl * ( 363.8 + 68.32 * dl ) ) * x;
+      + (_fl11 ? fl11ns[_nf-1] * _nf * ( ( 107.0 + 321.05 * x - 54.62 * x2 ) * ( 1. - x ) - 26.717 - 320. * d81 * dl3 - 640. * d81 * dl2
+                                         + 9.773 * dl + x * dl * ( 363.8 + 68.32 * dl ) ) * x : 0);
   }
   double CL3nsp::Local(double const&) const
   {
@@ -610,9 +624,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CL3nsm::CL3nsm(int const& nf):
+  CL3nsm::CL3nsm(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double CL3nsm::Regular(double const& x) const
@@ -638,15 +653,22 @@ namespace apfel
                 + ( 1. - x ) * dl12 * ( 239.7 + 20.63 * dl1 ) + dl* dl1 * ( 887.3 + 294.5 * dl - 59.14 * dl1 ) )
       + _nf * _nf * ( - 19. + ( 317. / 6. - 12. * zeta2 ) * x + 9. * x * dl2 + dl * ( - 6. + 50. * x ) + 3. * x * dl12 + dl1 * ( 6. - 25. * x )
                       - 6. * x * dl* dl1 + 6. * x * dilog(x) ) * 64. * d81
-      + fl11ns[_nf-1] * _nf * ( ( 107.0 + 321.05 * x - 54.62 * x2 ) * ( 1. - x ) - 26.717 - 320. * d81 * dl3 - 640. * d81 * dl2
-                                + 9.773 * dl + x * dl * ( 363.8 + 68.32 * dl ) ) * x;
+      + (_fl11 ? fl11ns[_nf-1] * _nf * ( ( 107.0 + 321.05 * x - 54.62 * x2 ) * ( 1. - x ) - 26.717 - 320. * d81 * dl3 - 640. * d81 * dl2
+                                         + 9.773 * dl + x * dl * ( 363.8 + 68.32 * dl ) ) * x : 0);
 
-    // Compute and include difference to get the minus piece
-    const double clq30a = - ( 495.49 * x2 + 906.86 ) * x12 - 983.23 * x * x1 * dl + 53.706 * dl2 + 5.3059 * dl3;
-    const double clq30b = ( 78.306 * dl1 + 6.3838 * x ) * x12 + 20.809 * x * x1 * dl - 114.47 * dl2 - 22.222 * dl3;
-    const double clq31a = ( 29.95 * x3 - 59.087 * x2 + 379.91 ) * x12 - 273.042 * x * dl2 + 71.482 * x1 * dl;
-    const double clq31b = ( 12.532 * dl1 + 141.99 * x2 - 250.62 * x ) * x12 - ( 153.586 * x - 0.6569 ) * x1 * dl;
-    return CL3nsp - 0.5 * ( clq30a + clq30b + _nf * ( clq31a + clq31b ) );
+    // Compute and include difference to get the minus piece (old parameterisation)
+    //const double clq30a = - ( 495.49 * x2 + 906.86 ) * x12 - 983.23 * x * x1 * dl + 53.706 * dl2 + 5.3059 * dl3;
+    //const double clq30b = ( 78.306 * dl1 + 6.3838 * x ) * x12 + 20.809 * x * x1 * dl - 114.47 * dl2 - 22.222 * dl3;
+    //const double clq31a = ( 29.95 * x3 - 59.087 * x2 + 379.91 ) * x12 - 273.042 * x * dl2 + 71.482 * x1 * dl;
+    //const double clq31b = ( 12.532 * dl1 + 141.99 * x2 - 250.62 * x ) * x12 - ( 153.586 * x - 0.6569 ) * x1 * dl;
+    //return CL3nsp - 0.5 * ( clq30a + clq30b + _nf * ( clq31a + clq31b ) );
+
+    // Compute and include difference to get the minus piece (new parameterisation)
+    const double clq30 = - 620.53 - 394.5 * x + 1609. * x2 - 596.2 * x3 + 0.217 * dl3 + 62.18 * dl2 + 208.47 * dl
+                         - 482.5 * dl * dl1 - x * dl * ( 1751. - 197.5 * dl ) + 105.5 * dl1 + 0.442 * dl12;
+    const double clq31 = - 6.500 - 12.435 * x + 23.66 * x2 + 0.914 * x3 + 0.015 * dl3 - 6.627 * dl2 - 31.91 * dl
+                         - x * dl * ( 5.711 + 28.635 * dl );
+    return CL3nsp - ( clq30 + _nf * clq31 ) * x12;
   }
   double CL3nsm::Local(double const&) const
   {
@@ -654,9 +676,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CL3ps::CL3ps(int const& nf):
+  CL3ps::CL3ps(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double CL3ps::Regular(double const& x) const
@@ -678,13 +701,14 @@ namespace apfel
                          - 35.24 * x * dl2 - 69.41 * dl * x1 - 384. * d27 * dl2 + 40.239 / x * x12;
     const double cls3f = ( ( 107.0 + 321.05 * x - 54.62 * x2 ) * ( 1 - x ) - 26.717 - 320. * d81 * dl3 - 640. * d81 * dl2
                            + 9.773 * dl + x * dl * ( 363.8 + 68.32 * dl ) ) * x;
-    return cls31 + _nf * cls32 + ( fl11sg[_nf-1] - fl11ns[_nf-1] ) * cls3f;
+    return cls31 + _nf * cls32 + (_fl11 ? ( fl11sg[_nf-1] - fl11ns[_nf-1] ) * cls3f : 0);
   }
 
   //_________________________________________________________________________________
-  CL3g::CL3g(int const& nf):
+  CL3g::CL3g(int const& nf, bool const& fl11):
     Expression(),
-    _nf(nf)
+    _nf(nf),
+    _fl11(fl11)
   {
   }
   double CL3g::Regular(double const& x) const
@@ -706,7 +730,7 @@ namespace apfel
                          + ( 577.3 - 729.0 * x ) * x1 + 30.78 * x * dl3 + 366.0 * dl + 3000. * d27 * dl2 + 480. * d27 * dl3 + 88.5037 / x * x1;
     const double clg3f = ( - 0.0105 * dl13 + 1.550 * dl12 + 19.72 * x * dl1 - 66.745 * x + 0.615 * x2 ) * x1 + 20. * d27 * x * dl4
                          + ( 280. / 81. + 2.260 * x) * x * dl3 - ( 15.40 - 2.201 * x ) * x * dl2 - ( 71.66 - 0.121 * x ) * x * dl;
-    return clg31 + _nf * ( clg32 + fl11sg[_nf-1] * clg3f );
+    return clg31 + _nf * ( clg32 + (_fl11 ? fl11sg[_nf-1] * clg3f : 0) );
   }
 
   //_________________________________________________________________________________
@@ -717,6 +741,8 @@ namespace apfel
   }
   double C33nsp::Regular(double const& x) const
   {
+    const double x2   = x * x;
+    const double x3   = x * x2;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
@@ -741,12 +767,19 @@ namespace apfel
       + _nf * _nf * ( 11.32 + 51.94 * x - x * x1 * ( 44.52 + 11.05 * x ) - 368. * d243* dl3 - 2848. / 243. * dl2 - 16.00 * dl
                       - 64. / 81. * dl13 + 992. / 81. * dl12 - 49.65 * dl1 - dl* dl1 * ( 39.99 + 5.103 * dl - 16.30 * dl1 ) + 0.0647 * x * dl4 );
 
-    // Compute and include difference to get the minus piece
-    const double c3q30a = - ( 46.72 * dl12 + 267.26 * dl1 + 719.49 * x ) * x1 - 171.98 * dl + 9.470 * dl3;
-    const double c3q30b = ( 3.216 * dl12 + 44.50 * dl1 - 34.588 ) * x1 + 98.719 * dl2 + 2.6208 * dl5;
-    const double c3q31a = ( 0.8489 * dl1 + 67.928 * ( 1. + 0.5 * x ) ) * x1 + 97.922 * x * dl - 17.070 * dl2 - 3.132 * dl3;
-    const double c3q31b = - ( 0.186 * dl1 + 61.102 * ( 1. + x ) ) * x1 - 122.51 * x * dl + 10.914 * dl2 + 2.748 * dl3;
-    return CL3nsp + 0.5 * ( c3q30a + c3q30b + _nf * ( c3q31a + c3q31b ) );
+    // Compute and include difference to get the plus piece (old parameterisation)
+    //const double c3q30a = - ( 46.72 * dl12 + 267.26 * dl1 + 719.49 * x ) * x1 - 171.98 * dl + 9.470 * dl3;
+    //const double c3q30b = ( 3.216 * dl12 + 44.50 * dl1 - 34.588 ) * x1 + 98.719 * dl2 + 2.6208 * dl5;
+    //const double c3q31a = ( 0.8489 * dl1 + 67.928 * ( 1. + 0.5 * x ) ) * x1 + 97.922 * x * dl - 17.070 * dl2 - 3.132 * dl3;
+    //const double c3q31b = - ( 0.186 * dl1 + 61.102 * ( 1. + x ) ) * x1 - 122.51 * x * dl + 10.914 * dl2 + 2.748 * dl3;
+    //return CL3nsp + 0.5 * ( c3q30a + c3q30b + _nf * ( c3q31a + c3q31b ) );
+
+    // Compute and include difference to get the plus piece (new parameterisation)
+    const double c3q30 = - 553.5 + 1412.5 * x - 990.3 * x2 + 361.1 * x3 + 0.1458 * dl5 + 9.688 * dl4 + 90.62 * dl3 + 83.684 * dl2
+                         - 602.32 * dl - 382.5 * dl *dl1 - x *dl * ( 2.805 + 325.92 * dl ) + 133.5 * dl1 + 10.135 * dl12;
+    const double c3q31 = - 16.777 + 77.78 * x - 24.81 * x2 - 28.89 * x3 - 0.7714 * dl4 - 7.701 * dl3 - 21.522 * dl2
+                         - 7.897 * dl - 16.17 * dl *dl1 + x *dl * ( 43.21 + 67.04 *dl ) + 1.519 * dl1;
+    return CL3nsp + ( c3q30 + _nf * c3q31 ) * x1;
   }
   double C33nsp::Singular(double const& x) const
   {
@@ -782,7 +815,9 @@ namespace apfel
     return
       + 256. * d81 * dl16 - 3264. * d81 * dl15 + 1.252745e+2 * dl14 + 3.905133e+2 * dl13 - 3.664225e+3 * dl12 + 4.44276e+3  * dl1 - 9195.48 + 22.80
       + _nf * ( 128. * d81 * dl15 - 1648. * d81 * dl14 + 220.573 * d3 * dl13 + 147.453 * dl12 - 729.359 * dl1 + 2575.074 + 0.386 )
-      + _nf * _nf * ( 16. * d81 * dl14 - 464. * d81* d3 * dl13 + 7.67505 * 0.5 * dl12 + 1.0083 * dl1 - 103.2521 - 0.0081 );
+      + _nf * _nf * ( 16. * d81 * dl14 - 464. * d81* d3 * dl13 + 7.67505 * 0.5 * dl12 + 1.0083 * dl1 - 103.2521 - 0.0081 )
+      // Include plus correction
+      - 0.0029 + _nf * 0.00006;
   }
 
   //_________________________________________________________________________________

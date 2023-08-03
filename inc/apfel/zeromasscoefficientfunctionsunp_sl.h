@@ -235,12 +235,13 @@ namespace apfel
   class C23nsp: public Expression
   {
   public:
-    C23nsp(int const& nf);
+    C23nsp(int const& nf, bool const& fl11 = true);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -250,12 +251,13 @@ namespace apfel
   class C23nsm: public Expression
   {
   public:
-    C23nsm(int const& nf);
+    C23nsm(int const& nf, bool const& fl11 = true);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -265,11 +267,12 @@ namespace apfel
   class C23ps: public Expression
   {
   public:
-    C23ps(int const& nf);
+    C23ps(int const& nf, bool const& fl11 = true);
     double Regular(double const& x) const;
     double Local(double const& x)   const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -279,11 +282,12 @@ namespace apfel
   class C23g: public Expression
   {
   public:
-    C23g(int const& nf);
+    C23g(int const& nf, bool const& fl11 = true);
     double Regular(double const& x) const;
     double Local(double const& x)   const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -293,11 +297,12 @@ namespace apfel
   class CL3nsp: public Expression
   {
   public:
-    CL3nsp(int const& nf);
+    CL3nsp(int const& nf, bool const& fl11 = true);
     double Regular(double const& x) const;
     double Local(double const&)     const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -307,11 +312,12 @@ namespace apfel
   class CL3nsm: public Expression
   {
   public:
-    CL3nsm(int const& nf);
+    CL3nsm(int const& nf, bool const& fl11 = true);
     double Regular(double const& x) const;
     double Local(double const&)     const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -321,10 +327,11 @@ namespace apfel
   class CL3ps: public Expression
   {
   public:
-    CL3ps(int const& nf);
+    CL3ps(int const& nf, bool const& fl11 = true);
     double Regular(double const& x) const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
@@ -334,10 +341,11 @@ namespace apfel
   class CL3g: public Expression
   {
   public:
-    CL3g(int const& nf);
+    CL3g(int const& nf, bool const& fl11 = true);
     double Regular(double const& x) const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _fl11;
   };
 
   /**
