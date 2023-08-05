@@ -171,7 +171,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildGtmds(std::map<int, GtmdObjects>                      const& GtmdObj,
                                                                                            std::function<Set<Distribution>(double const&)> const& CollGPDs,
                                                                                            std::function<double(double const&)>            const& Alphas,
-                                                                                           LogAccuracy                                     const& PerturbativeOrder,
+                                                                                           int                                             const& PerturbativeOrder,
                                                                                            double                                          const& Ci,
                                                                                            double                                          const& IntEps)
   {
@@ -195,7 +195,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchGtmds(std::map<int, GtmdObjects>                      const& GtmdObj,
                                                              std::function<Set<Distribution>(double const&)> const& CollGPDs,
                                                              std::function<double(double const&)>            const& Alphas,
-                                                             LogAccuracy                                     const& PerturbativeOrder,
+                                                             int                                             const& PerturbativeOrder,
                                                              double                                          const& Ci)
   {
     // Get matching functions
@@ -219,7 +219,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<Set<Operator>(double const&)> MatchingFunctions(std::map<int, GtmdObjects>           const& GtmdObj,
                                                                 std::function<double(double const&)> const& Alphas,
-                                                                LogAccuracy                          const& PerturbativeOrder,
+                                                                int                                  const& PerturbativeOrder,
                                                                 double                               const& Ci)
   {
     // Retrieve thresholds from "GtmdObj"
@@ -263,7 +263,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, GtmdObjects>           const& GtmdObj,
                                                                                                    std::function<double(double const&)> const& Alphas,
-                                                                                                   LogAccuracy                          const& PerturbativeOrder,
+                                                                                                   int                                  const& PerturbativeOrder,
                                                                                                    double                               const& Ci,
                                                                                                    double                               const& IntEps)
   {
@@ -398,7 +398,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          LogAccuracy                          const& PerturbativeOrder,
+                                                                                          int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
@@ -517,7 +517,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          LogAccuracy                          const& PerturbativeOrder,
+                                                                                          int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {

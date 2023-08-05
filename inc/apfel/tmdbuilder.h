@@ -145,7 +145,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
-                                                                                             LogAccuracy                                     const& PerturbativeOrder,
+                                                                                             int                                             const& PerturbativeOrder,
                                                                                              double                                          const& Ci = 1,
                                                                                              double                                          const& IntEps = 1e-7);
 
@@ -165,7 +165,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                             std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                                                             std::function<double(double const&)>            const& Alphas,
-                                                                                            LogAccuracy                                     const& PerturbativeOrder,
+                                                                                            int                                             const& PerturbativeOrder,
                                                                                             double                                          const& Ci = 1,
                                                                                             double                                          const& IntEps = 1e-7);
 
@@ -188,7 +188,7 @@ namespace apfel
                                                                                  JetAlgorithm                         const& JetAlgo,
                                                                                  double                               const& JetR,
                                                                                  std::function<double(double const&)> const& Alphas,
-                                                                                 LogAccuracy                          const& PerturbativeOrder,
+                                                                                 int                                  const& PerturbativeOrder,
                                                                                  double                               const& CJ = 1,
                                                                                  double                               const& Ci = 1,
                                                                                  double                               const& IntEps = 1e-7);
@@ -206,7 +206,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                std::function<double(double const&)>            const& Alphas,
-                                                               LogAccuracy                                     const& PerturbativeOrder,
+                                                               int                                             const& PerturbativeOrder,
                                                                double                                          const& Ci = 1);
 
   /**
@@ -222,7 +222,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                               std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                               std::function<double(double const&)>            const& Alphas,
-                                                              LogAccuracy                                     const& PerturbativeOrder,
+                                                              int                                             const& PerturbativeOrder,
                                                               double                                          const& Ci = 1);
 
   /**
@@ -243,7 +243,7 @@ namespace apfel
                                                                   JetAlgorithm                         const& JetAlgo,
                                                                   double                               const& tR,
                                                                   std::function<double(double const&)> const& Alphas,
-                                                                  LogAccuracy                          const& PerturbativeOrder,
+                                                                  int                                  const& PerturbativeOrder,
                                                                   double                               const& CJ = 1,
                                                                   double                               const& Ci = 1,
                                                                   double                               const& IntEps = 1e-7);
@@ -260,7 +260,7 @@ namespace apfel
    */
   std::function<Set<Operator>(double const&)> MatchingFunctionsPDFs(std::map<int, TmdObjects>            const& TmdObj,
                                                                     std::function<double(double const&)> const& Alphas,
-                                                                    LogAccuracy                          const& PerturbativeOrder,
+                                                                    int                                  const& PerturbativeOrder,
                                                                     double                               const& Ci = 1);
 
   /**
@@ -275,7 +275,7 @@ namespace apfel
    */
   std::function<Set<Operator>(double const&)> MatchingFunctionsFFs(std::map<int, TmdObjects>            const& TmdObj,
                                                                    std::function<double(double const&)> const& Alphas,
-                                                                   LogAccuracy                          const& PerturbativeOrder,
+                                                                   int                                  const& PerturbativeOrder,
                                                                    double                               const& Ci = 1);
 
   /**
@@ -293,7 +293,7 @@ namespace apfel
    */
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                    std::function<double(double const&)> const& Alphas,
-                                                                                                   LogAccuracy                          const& PerturbativeOrder,
+                                                                                                   int                                  const& PerturbativeOrder,
                                                                                                    double                               const& Ci = 1,
                                                                                                    double                               const& IntEps = 1e-7);
 
@@ -315,7 +315,7 @@ namespace apfel
    */
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactorsK(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                     std::function<double(double const&)> const& Alphas,
-                                                                                                    LogAccuracy                          const& PerturbativeOrder,
+                                                                                                    int                                  const& PerturbativeOrder,
                                                                                                     double                               const& Ci = 1,
                                                                                                     double                               const& IntEps = 1e-7);
 
@@ -333,7 +333,7 @@ namespace apfel
    */
   std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          LogAccuracy                          const& PerturbativeOrder,
+                                                                                          int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
 
@@ -351,9 +351,43 @@ namespace apfel
    */
   std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          LogAccuracy                          const& PerturbativeOrder,
+                                                                                          int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Analytic evolution factor for the quark TMD
+   * @param TmdObj: container of the anomalous dimensions with a fixed number of active flavours
+   * @param mu0: the strong coupling reference scale
+   * @param Alphas0: the value of the strong coupling and mu0
+   * @param kappa: the resummation-scale parameter
+   * @param kappa0: the ratio mu0 / M (i.e. the alphas reference scale over the hard scale)
+   * @param PerturbativeOrder: the logarithmic perturbative accuracy
+   * @return the quark Sudakov form factor as function of the impact parameter b
+   */
+  std::function<double(double const&)> QuarkAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
+                                                                    double      const& mu0,
+                                                                    double      const& Alphas0,
+                                                                    double      const& kappa,
+                                                                    double      const& kappa0,
+                                                                    int         const& PerturbativeOrder);
+
+  /**
+   * @brief Analytic evolution factor for the gluon TMD
+   * @param TmdObj: container of the anomalous dimensions with a fixed number of active flavours
+   * @param mu0: the strong coupling reference scale
+   * @param Alphas0: the value of the strong coupling and mu0
+   * @param kappa: the resummation-scale parameter
+   * @param kappa0: the ratio mu0 / M (i.e. the alphas reference scale over the hard scale)
+   * @param PerturbativeOrder: the logarithmic perturbative accuracy
+   * @return the gluon Sudakov form factor as function of the impact parameter b
+   */
+  std::function<double(double const&)> GluonAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
+                                                                    double      const& mu0,
+                                                                    double      const& Alphas0,
+                                                                    double      const& kappa,
+                                                                    double      const& kappa0,
+                                                                    int         const& PerturbativeOrder);
 
   /**
    * @brief Function that returns the perturbative part of the
@@ -369,7 +403,7 @@ namespace apfel
    */
   std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
                                                                          std::function<double(double const&)> const& Alphas,
-                                                                         LogAccuracy                          const& PerturbativeOrder,
+                                                                         int                                  const& PerturbativeOrder,
                                                                          double                               const& Ci = 1,
                                                                          double                               const& IntEps = 1e-7);
 
@@ -385,7 +419,7 @@ namespace apfel
   std::function<double(double const&)> HardFactor(std::string                          const& Process,
                                                   std::map<int, TmdObjects>            const& TmdObj,
                                                   std::function<double(double const&)> const& Alphas,
-                                                  LogAccuracy                          const& PerturbativeOrder,
+                                                  int                                  const& PerturbativeOrder,
                                                   double                               const& Cf = 1);
   ///@}
 }

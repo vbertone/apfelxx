@@ -1067,7 +1067,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                              std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                                              std::function<double(double const&)>            const& Alphas,
-                                                                                             LogAccuracy                                     const& PerturbativeOrder,
+                                                                                             int                                             const& PerturbativeOrder,
                                                                                              double                                          const& Ci,
                                                                                              double                                          const& IntEps)
   {
@@ -1091,7 +1091,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                                             std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                                                             std::function<double(double const&)>            const& Alphas,
-                                                                                            LogAccuracy                                     const& PerturbativeOrder,
+                                                                                            int                                             const& PerturbativeOrder,
                                                                                             double                                          const& Ci,
                                                                                             double                                          const& IntEps)
   {
@@ -1116,7 +1116,7 @@ namespace apfel
                                                                                  JetAlgorithm                         const& JetAlgo,
                                                                                  double                               const& JetR,
                                                                                  std::function<double(double const&)> const& Alphas,
-                                                                                 LogAccuracy                          const& PerturbativeOrder,
+                                                                                 int                                  const& PerturbativeOrder,
                                                                                  double                               const& CJ,
                                                                                  double                               const& Ci,
                                                                                  double                               const& IntEps)
@@ -1146,7 +1146,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                std::function<double(double const&)>            const& Alphas,
-                                                               LogAccuracy                                     const& PerturbativeOrder,
+                                                               int                                             const& PerturbativeOrder,
                                                                double                                          const& Ci)
   {
     // Get matching functions
@@ -1171,7 +1171,7 @@ namespace apfel
   std::function<Set<Distribution>(double const&)> MatchTmdFFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                               std::function<Set<Distribution>(double const&)> const& CollFFs,
                                                               std::function<double(double const&)>            const& Alphas,
-                                                              LogAccuracy                                     const& PerturbativeOrder,
+                                                              int                                             const& PerturbativeOrder,
                                                               double                                          const& Ci)
   {
     // Get matching functions
@@ -1198,7 +1198,7 @@ namespace apfel
                                                                   JetAlgorithm                         const& JetAlgo,
                                                                   double                               const& tR,
                                                                   std::function<double(double const&)> const& Alphas,
-                                                                  LogAccuracy                          const& PerturbativeOrder,
+                                                                  int                                  const& PerturbativeOrder,
                                                                   double                               const& CJ,
                                                                   double                               const& Ci,
                                                                   double                               const& IntEps)
@@ -1310,7 +1310,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<Set<Operator>(double const&)> MatchingFunctionsPDFs(std::map<int, TmdObjects>            const& TmdObj,
                                                                     std::function<double(double const&)> const& Alphas,
-                                                                    LogAccuracy                          const& PerturbativeOrder,
+                                                                    int                                  const& PerturbativeOrder,
                                                                     double                               const& Ci)
   {
     // Retrieve thresholds from "TmdObj"
@@ -1381,7 +1381,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<Set<Operator>(double const&)> MatchingFunctionsFFs(std::map<int, TmdObjects>             const& TmdObj,
                                                                    std::function<double(double const&)>  const& Alphas,
-                                                                   LogAccuracy                           const& PerturbativeOrder,
+                                                                   int                                   const& PerturbativeOrder,
                                                                    double                                const& Ci)
   {
     // Retrieve thresholds from "TmdObj"
@@ -1452,7 +1452,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                    std::function<double(double const&)> const& Alphas,
-                                                                                                   LogAccuracy                          const& PerturbativeOrder,
+                                                                                                   int                                  const& PerturbativeOrder,
                                                                                                    double                               const& Ci,
                                                                                                    double                               const& IntEps)
   {
@@ -1617,7 +1617,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactorsK(std::map<int, TmdObjects>            const& TmdObj,
                                                                                                     std::function<double(double const&)> const& Alphas,
-                                                                                                    LogAccuracy                          const& PerturbativeOrder,
+                                                                                                    int                                  const& PerturbativeOrder,
                                                                                                     double                               const& Ci,
                                                                                                     double                               const& IntEps)
   {
@@ -1803,7 +1803,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          LogAccuracy                          const& PerturbativeOrder,
+                                                                                          int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
@@ -1946,7 +1946,7 @@ namespace apfel
   //_____________________________________________________________________________
   std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, TmdObjects>            const& TmdObj,
                                                                                           std::function<double(double const&)> const& Alphas,
-                                                                                          LogAccuracy                          const& PerturbativeOrder,
+                                                                                          int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci,
                                                                                           double                               const& IntEps)
   {
@@ -2087,9 +2087,281 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::function<double(double const&)> QuarkAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
+                                                                    double      const& mu0,
+                                                                    double      const& Alphas0,
+                                                                    double      const& kappa,
+                                                                    double      const& kappa0,
+                                                                    int         const& PerturbativeOrder)
+  {
+    // Useful definitions
+    const double LQ   = log(kappa / kappa0);
+    const double LQ2  = LQ * LQ;
+    const double LQ3  = LQ * LQ2;
+    const double LQ4  = LQ * LQ3;
+
+    const double lnk  = log(kappa);
+    const double lnk2 = lnk * lnk;
+    const double lnk3 = lnk * lnk2;
+
+    const double a0  = Alphas0 / FourPi;
+    const double a02 = a0 * a0;
+    const double a03 = a0 * a02;
+
+    const double bt0 = - 2 * TmdObj.Beta.at(0);
+    const double bt1 = - 2 * TmdObj.Beta.at(1);
+    const double bt2 = - 2 * TmdObj.Beta.at(2);
+    const double bt3 = - 2 * TmdObj.Beta.at(3);
+    const double b1  = bt1 / bt0;
+    const double b2  = bt2 / bt0;
+    const double b3  = bt3 / bt0;
+
+    const double bt02 = bt0 * bt0;
+    const double bt03 = bt0 * bt02;
+    const double bt04 = bt0 * bt03;
+    const double bt12 = bt1 * bt1;
+    const double b12  = b1 * b1;
+    const double b13  = b1 * b12;
+
+    const double A1q = CF * TmdObj.GammaK.at(0) / 2;
+    const double A2q = CF * ( TmdObj.GammaK.at(1) / 2 + TmdObj.Beta.at(0) * TmdObj.KCS.at(0)[0] / 2 );
+    const double A3q = CF * ( TmdObj.GammaK.at(2) / 2 + TmdObj.Beta.at(1) * TmdObj.KCS.at(0)[0] / 2 + TmdObj.Beta.at(0) * TmdObj.KCS.at(1)[0] );
+    const double A4q = CF * ( TmdObj.GammaK.at(3) / 2 + TmdObj.Beta.at(2) * TmdObj.KCS.at(0)[0] / 2 + TmdObj.Beta.at(1) * TmdObj.KCS.at(1)[0] + 3 * TmdObj.Beta.at(0) * TmdObj.KCS.at(2)[0] / 2 );
+
+    const double B1q = - TmdObj.GammaFq.at(0) - CF * TmdObj.KCS.at(0)[0];
+    const double B2q = - TmdObj.GammaFq.at(1) - CF * TmdObj.KCS.at(1)[0];
+    const double B3q = - TmdObj.GammaFq.at(2) - CF * TmdObj.KCS.at(2)[0];
+
+    const double Bb1q = B1q + 2 * A1q * LQ;
+    const double Bb2q = B2q + 2 * A2q * LQ;
+    const double Bb3q = B3q + 2 * A3q * LQ;
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    return [=] (double const& b) -> double
+    {
+      // Define lambda
+      const double mub = 2 * exp(- emc) / b;
+      const double L   = log(kappa * mub / mu0);
+      const double lm  = a0 * bt0 * L;
+
+      // Useful definitions
+      const double lm2    = lm * lm;
+      const double lm3    = lm * lm2;
+      const double oml    = 1 - lm;
+      const double oml2   = oml * oml;
+      const double lmo    = - oml;
+      const double lmo2   = lmo * lmo;
+      const double lmo3   = lmo * lmo2;
+      const double lnoml  = log(oml);
+      const double lnoml2 = lnoml * lnoml;
+      const double lnoml3 = lnoml * lnoml2;
+
+      // g0 function for quarks computed at fixed perturbative order
+      const double g0q = 1
+      + (PerturbativeOrder > NLL || PerturbativeOrder <= NLLp ?
+         - 2 * a0 * ( LQ2 * A1q + LQ * B1q ) : 0)
+      + (PerturbativeOrder > NNLL || PerturbativeOrder <= NNLLp ?
+         ( a02 * ( 4 * pow(LQ2 * A1q + LQ * B1q, 2)
+                   + ( 2 * ( - 6 * LQ2 * A2q - 6 * LQ * B2q - 2 * LQ3 * A1q * bt0 + 6 * LQ2 * lnk * A1q * bt0 - 3 * LQ2 * B1q * bt0 + 6 * LQ * lnk * B1q * bt0 ) ) / 3. ) ) / 2. : 0)
+      + (PerturbativeOrder > NNNLL || PerturbativeOrder <= NNNLLp ?
+         ( a03 * ( - 6 * LQ2 * A3q - 6 * LQ * B3q - 4 * LQ3 * A2q * bt0 + 12 * LQ2 * lnk * A2q * bt0 - 2 * LQ3 * A1q * b1 * bt0 + 6 * LQ2 * lnk * A1q * b1 * bt0 - 3 * LQ2 * b1 * B1q * bt0
+                   + 6 * LQ * lnk * b1 * B1q * bt0 - 6 * LQ2 * B2q * bt0 + 12 * LQ * lnk * B2q * bt0 - LQ4 * A1q * bt02 + 4 * LQ3 * lnk * A1q * bt02 - 6 * LQ2 * lnk2 * A1q * bt02 - 2 * LQ3 * B1q * bt02
+                   + 6 * LQ2 * lnk * B1q * bt02 - 6 * LQ * lnk2 * B1q * bt02
+                   - ( 4 * ( LQ2 * A1q + LQ * B1q ) * ( - 6 * LQ2 * A2q - 6 * LQ * B2q - 2 * LQ3 * A1q * bt0 + 6 * LQ2 * lnk * A1q * bt0 - 3 * LQ2 * B1q * bt0 + 6 * LQ * lnk * B1q * bt0 ) ) / 3.
+                   - ( LQ2 * A1q + LQ * B1q ) * ( 4 * pow(LQ2 * A1q + LQ * B1q, 2) + ( 2 * ( - 6 * LQ2 * A2q - 6 * LQ * B2q - 2 * LQ3 * A1q * bt0 + 6 * LQ2 * lnk * A1q * bt0
+                                                                                             - 3 * LQ2 * B1q * bt0 + 6 * LQ * lnk * B1q * bt0 ) ) / 3. ) ) ) / 3. : 0);
+
+      // Initialise argument of the exponent with the g1-functions, i.e. LL
+      const double g1q = 4 * A1q / bt0 * ( lm + log(1 - lm) ) / lm;
+      double Sq = L * g1q;
+
+      // Include NLL correction if necessary
+      if(PerturbativeOrder >= NLL || PerturbativeOrder <= NLLp)
+        {
+          const double g2q = 4 * bt1 * A1q / pow(bt0, 3) * ( pow(lnoml, 2) / 2 + lnoml / oml + lm / oml )
+          - ( 4 * A2q / pow(bt0, 2) - 4 * A1q * lnk / bt0 ) * ( lm / oml + lnoml ) - 2 * Bb1q / bt0 * lnoml;
+          Sq += g2q;
+        }
+
+      // Include NNLL correction if necessary
+      if(PerturbativeOrder >= NNLL || PerturbativeOrder <= NNLLp)
+        {
+          const double g3q = - 4 * ( bt0 * bt2 - bt12 ) * A1q / bt04 * ( lm * ( 3 * lm - 2 ) / 2 / oml2 - lnoml )
+          + 2 * bt12 * A1q / bt04 * ( 2 * lm / oml + 2 * lnoml / oml + ( 1 - 2 * lm ) * lnoml2 / oml2 )
+          + ( 4 * bt1 * A2q / bt03 - 4 * bt1 * A1q * lnk / bt02 ) * ( lm * ( 3 * lm - 2 ) / 2 / oml2 - ( 1 - 2 * lm ) * lnoml / oml2 )
+          - ( 2 * A3q / bt02 - 4 * A2q * lnk / bt0 + 2 * A1q * pow(lnk, 2) - 2 * bt1 * A1q * lnk / bt02 ) * pow(lm, 2) / oml2
+          - 2 * bt1 * Bb1q / bt02 * ( lm / oml + lnoml / oml ) + ( 2 * Bb2q / bt0 - 2 * Bb1q * lnk ) * lm / oml;
+          Sq += a0 * g3q;
+        }
+
+      // Include NNNLL correction if necessary
+      if(PerturbativeOrder >= NNNLL || PerturbativeOrder <= NNNLLp)
+        {
+          const double g4q = A3q * ( ( ( lm * ( 6 - 15 * lm + 5 * lm2 ) + ( 6 - 18 * lm ) * lnoml ) * b1 ) / ( 3. * lmo3 * bt02 ) + ( 2 * ( -3 + lm ) * lm2 * lnk ) / ( lmo3 * bt0 ) )
+          - ( 2 * ( -3 + lm ) * lm2 * A4q ) / ( 3. * lmo3 * bt02 ) + ( Bb3q * ( - 6 * lm * bt0 + 9 * lm2 * bt0 - 3 * lm3 * bt0 ) ) / ( 3. * lmo3 * bt02 )
+          + A2q * ( ( - 6 * lm * b12 + 9 * lm2 * b12 - 11 * lm3 * b12 - 6 * lnoml * b12 +  6 * lm * lnoml * b12 - 6 * lnoml2 * b12 + 18 * lm * lnoml2 * b12 + 8 * lm3 * b2 ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk * ( -12 * lm * b1 * bt0 + 18 * lm2 * b1 * bt0 - 6 * lm3 * b1 * bt0 - 12 * lnoml * b1 * bt0 + 36 * lm * lnoml * b1 * bt0 ) ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk2 * ( 18 * lm2 * bt02 - 6 * lm3 * bt02 ) ) / ( 3. * lmo3 * bt02 ) )
+          + Bb2q * ( ( 6 * lm * b1 * bt0 - 9 * lm2 * b1 * bt0 + 3 * lm3 * b1 * bt0 + 6 * lnoml * b1 * bt0 - 6 * lm * lnoml * b1 * bt0 ) / ( 3. * lmo3 * bt02 )
+                     + ( lnk * ( 12 * lm * bt02 - 18 * lm2 * bt02 + 6 * lm3 * bt02 ) ) / ( 3. * lmo3 * bt02 ) )
+          + Bb1q * ( ( 3 * lm2 * b12 * bt0 - 3 * lm3 * b12 * bt0 - 3 * lnoml2 * b12 * bt0 + 3 * lm * lnoml2 * b12 * bt0 - 3 * lm2 * b2 * bt0 + 3 * lm3 * b2 * bt0 ) / ( 3. * lmo3 * bt02 )
+                     + ( lnk * ( - 6 * lnoml * b1 * bt02 + 6 * lm * lnoml * b1 * bt02 ) ) / ( 3. * lmo3 * bt02 ) + ( lnk2 * ( - 6 * lm * bt03 + 9 * lm2 * bt03 - 3 * lm3 * bt03 ) ) / ( 3. * lmo3 * bt02 ) )
+          + A1q * ( ( 2 * lm3 * b13 + 6 * lm2 * lnoml * b13 + 6 * lm3 * lnoml * b13 + 6 * lm * lnoml2 * b13 + 2 * lnoml3 * b13 - 6 * lm * lnoml3 * b13
+                      + 6 * lm * b1 * b2 - 15 * lm2 * b1 * b2 + 5 * lm3 * b1 * b2 + 6 * lnoml * b1 * b2 - 18 * lm * lnoml * b1 * b2 + 12 * lm2 * lnoml * b1 * b2
+                      - 12 * lm3 * lnoml * b1 * b2 - 6 * lm * b3 + 15 * lm2 * b3 - 7 * lm3 * b3 - 6 * lnoml * b3 + 18 * lm * lnoml * b3 - 18 * lm2 * lnoml * b3 + 6 * lm3 * lnoml * b3 ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk * ( 6 * lm2 * b12 * bt0 + 6 * lm3 * b12 * bt0 + 12 * lm * lnoml * b12 * bt0 + 6 * lnoml2 * b12 * bt0
+                                - 18 * lm * lnoml2 * b12 * bt0 - 6 * lm2 * b2 * bt0 - 6 * lm3 * b2 * bt0 ) ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk2 * ( 6 * lm * b1 * bt02 + 6 * lnoml * b1 * bt02 - 18 * lm * lnoml * b1 * bt02 ) ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk3 * ( - 6 * lm2 * bt03 + 2 * lm3 * bt03 ) ) / ( 3. * lmo3 * bt02 ) );
+          Sq += a02 * g4q;
+        }
+
+      // Construct form factor and return
+      return sqrt(g0q * exp(Sq));
+    };
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&)> GluonAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
+                                                                    double      const& mu0,
+                                                                    double      const& Alphas0,
+                                                                    double      const& kappa,
+                                                                    double      const& kappa0,
+                                                                    int         const& PerturbativeOrder)
+  {
+    // Useful definitions
+    const double LQ   = log(kappa / kappa0);
+    const double LQ2  = LQ * LQ;
+    const double LQ3  = LQ * LQ2;
+    const double LQ4  = LQ * LQ3;
+
+    const double lnk  = log(kappa);
+    const double lnk2 = lnk * lnk;
+    const double lnk3 = lnk * lnk2;
+
+    const double a0  = Alphas0 / FourPi;
+    const double a02 = a0 * a0;
+    const double a03 = a0 * a02;
+
+    const double bt0 = - 2 * TmdObj.Beta.at(0);
+    const double bt1 = - 2 * TmdObj.Beta.at(1);
+    const double bt2 = - 2 * TmdObj.Beta.at(2);
+    const double bt3 = - 2 * TmdObj.Beta.at(3);
+    const double b1  = bt1 / bt0;
+    const double b2  = bt2 / bt0;
+    const double b3  = bt3 / bt0;
+
+    const double bt02 = bt0 * bt0;
+    const double bt03 = bt0 * bt02;
+    const double bt04 = bt0 * bt03;
+    const double bt12 = bt1 * bt1;
+    const double b12  = b1 * b1;
+    const double b13  = b1 * b12;
+
+    const double A1g = CA * TmdObj.GammaK.at(0) / 2;
+    const double A2g = CA * ( TmdObj.GammaK.at(1) / 2 + TmdObj.Beta.at(0) * TmdObj.KCS.at(0)[0] / 2 );
+    const double A3g = CA * ( TmdObj.GammaK.at(2) / 2 + TmdObj.Beta.at(1) * TmdObj.KCS.at(0)[0] / 2 + TmdObj.Beta.at(0) * TmdObj.KCS.at(1)[0] );
+    const double A4g = CA * ( TmdObj.GammaK.at(3) / 2 + TmdObj.Beta.at(2) * TmdObj.KCS.at(0)[0] / 2 + TmdObj.Beta.at(1) * TmdObj.KCS.at(1)[0] + 3 * TmdObj.Beta.at(0) * TmdObj.KCS.at(2)[0] / 2 );
+
+    const double B1g = - TmdObj.GammaFg.at(0) - CA * TmdObj.KCS.at(0)[0];
+    const double B2g = - TmdObj.GammaFg.at(1) - CA * TmdObj.KCS.at(1)[0];
+    const double B3g = - TmdObj.GammaFg.at(2) - CA * TmdObj.KCS.at(2)[0];
+
+    const double Bb1g = B1g + 2 * A1g * LQ;
+    const double Bb2g = B2g + 2 * A2g * LQ;
+    const double Bb3g = B3g + 2 * A3g * LQ;
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    return [=] (double const& b) -> double
+    {
+      // Define lambda
+      const double mub = 2 * exp(- emc) / b;
+      const double L   = log(kappa * mub / mu0);
+      const double lm  = a0 * bt0 * L;
+
+      // Useful definitions
+      const double lm2    = lm * lm;
+      const double lm3    = lm * lm2;
+      const double oml    = 1 - lm;
+      const double oml2   = oml * oml;
+      const double lmo    = - oml;
+      const double lmo2   = lmo * lmo;
+      const double lmo3   = lmo * lmo2;
+      const double lnoml  = log(oml);
+      const double lnoml2 = lnoml * lnoml;
+      const double lnoml3 = lnoml * lnoml2;
+
+      // g0 function for gluons computed at fixed perturbative order
+      const double g0g = 1
+      + (PerturbativeOrder > NLL || PerturbativeOrder <= NLLp ?
+         - 2 * a0 * ( LQ2 * A1g + LQ * B1g ) : 0)
+      + (PerturbativeOrder > NNLL || PerturbativeOrder <= NNLLp ?
+         ( a02 * ( 4 * pow(LQ2 * A1g + LQ * B1g, 2)
+                   + ( 2 * ( - 6 * LQ2 * A2g - 6 * LQ * B2g - 2 * LQ3 * A1g * bt0 + 6 * LQ2 * lnk * A1g * bt0 - 3 * LQ2 * B1g * bt0 + 6 * LQ * lnk * B1g * bt0 ) ) / 3. ) ) / 2. : 0)
+      + (PerturbativeOrder > NNNLL || PerturbativeOrder <= NNNLLp ?
+         ( a03 * ( - 6 * LQ2 * A3g - 6 * LQ * B3g - 4 * LQ3 * A2g * bt0 + 12 * LQ2 * lnk * A2g * bt0 - 2 * LQ3 * A1g * b1 * bt0 + 6 * LQ2 * lnk * A1g * b1 * bt0 - 3 * LQ2 * b1 * B1g * bt0
+                   + 6 * LQ * lnk * b1 * B1g * bt0 - 6 * LQ2 * B2g * bt0 + 12 * LQ * lnk * B2g * bt0 - LQ4 * A1g * bt02 + 4 * LQ3 * lnk * A1g * bt02 - 6 * LQ2 * lnk2 * A1g * bt02 - 2 * LQ3 * B1g * bt02
+                   + 6 * LQ2 * lnk * B1g * bt02 - 6 * LQ * lnk2 * B1g * bt02
+                   - ( 4 * ( LQ2 * A1g + LQ * B1g ) * ( - 6 * LQ2 * A2g - 6 * LQ * B2g - 2 * LQ3 * A1g * bt0 + 6 * LQ2 * lnk * A1g * bt0 - 3 * LQ2 * B1g * bt0 + 6 * LQ * lnk * B1g * bt0 ) ) / 3.
+                   - ( LQ2 * A1g + LQ * B1g ) * ( 4 * pow(LQ2 * A1g + LQ * B1g, 2) + ( 2 * ( - 6 * LQ2 * A2g - 6 * LQ * B2g - 2 * LQ3 * A1g * bt0 + 6 * LQ2 * lnk * A1g * bt0
+                                                                                             - 3 * LQ2 * B1g * bt0 + 6 * LQ * lnk * B1g * bt0 ) ) / 3. ) ) ) / 3. : 0);
+
+      // Initialise argument of the exponent with the g1-functions, i.e. LL
+      const double g1g = 4 * A1g / bt0 * ( lm + log(1 - lm) ) / lm;
+      double Sg = L * g1g;
+
+      // Include NLL correction if necessary
+      if(PerturbativeOrder >= NLL || PerturbativeOrder <= NLLp)
+        {
+          const double g2g = 4 * bt1 * A1g / pow(bt0, 3) * ( pow(lnoml, 2) / 2 + lnoml / oml + lm / oml )
+          - ( 4 * A2g / pow(bt0, 2) - 4 * A1g * lnk / bt0 ) * ( lm / oml + lnoml ) - 2 * Bb1g / bt0 * lnoml;
+          Sg += g2g;
+        }
+
+      // Include NNLL correction if necessary
+      if(PerturbativeOrder >= NNLL || PerturbativeOrder <= NNLLp)
+        {
+          const double g3g = - 4 * ( bt0 * bt2 - bt12 ) * A1g / bt04 * ( lm * ( 3 * lm - 2 ) / 2 / oml2 - lnoml )
+          + 2 * bt12 * A1g / bt04 * ( 2 * lm / oml + 2 * lnoml / oml + ( 1 - 2 * lm ) * lnoml2 / oml2 )
+          + ( 4 * bt1 * A2g / bt03 - 4 * bt1 * A1g * lnk / bt02 ) * ( lm * ( 3 * lm - 2 ) / 2 / oml2 - ( 1 - 2 * lm ) * lnoml / oml2 )
+          - ( 2 * A3g / bt02 - 4 * A2g * lnk / bt0 + 2 * A1g * pow(lnk, 2) - 2 * bt1 * A1g * lnk / bt02 ) * pow(lm, 2) / oml2
+          - 2 * bt1 * Bb1g / bt02 * ( lm / oml + lnoml / oml ) + ( 2 * Bb2g / bt0 - 2 * Bb1g * lnk ) * lm / oml;
+          Sg += a0 * g3g;
+        }
+
+      // Include NNNLL correction if necessary
+      if(PerturbativeOrder >= NNNLL || PerturbativeOrder <= NNNLLp)
+        {
+          const double g4g = A3g * ( ( ( lm * ( 6 - 15 * lm + 5 * lm2 ) + ( 6 - 18 * lm ) * lnoml ) * b1 ) / ( 3. * lmo3 * bt02 ) + ( 2 * ( -3 + lm ) * lm2 * lnk ) / ( lmo3 * bt0 ) )
+          - ( 2 * ( -3 + lm ) * lm2 * A4g ) / ( 3. * lmo3 * bt02 ) + ( Bb3g * ( - 6 * lm * bt0 + 9 * lm2 * bt0 - 3 * lm3 * bt0 ) ) / ( 3. * lmo3 * bt02 )
+          + A2g * ( ( - 6 * lm * b12 + 9 * lm2 * b12 - 11 * lm3 * b12 - 6 * lnoml * b12 +  6 * lm * lnoml * b12 - 6 * lnoml2 * b12 + 18 * lm * lnoml2 * b12 + 8 * lm3 * b2 ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk * ( -12 * lm * b1 * bt0 + 18 * lm2 * b1 * bt0 - 6 * lm3 * b1 * bt0 - 12 * lnoml * b1 * bt0 + 36 * lm * lnoml * b1 * bt0 ) ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk2 * ( 18 * lm2 * bt02 - 6 * lm3 * bt02 ) ) / ( 3. * lmo3 * bt02 ) )
+          + Bb2g * ( ( 6 * lm * b1 * bt0 - 9 * lm2 * b1 * bt0 + 3 * lm3 * b1 * bt0 + 6 * lnoml * b1 * bt0 - 6 * lm * lnoml * b1 * bt0 ) / ( 3. * lmo3 * bt02 )
+                     + ( lnk * ( 12 * lm * bt02 - 18 * lm2 * bt02 + 6 * lm3 * bt02 ) ) / ( 3. * lmo3 * bt02 ) )
+          + Bb1g * ( ( 3 * lm2 * b12 * bt0 - 3 * lm3 * b12 * bt0 - 3 * lnoml2 * b12 * bt0 + 3 * lm * lnoml2 * b12 * bt0 - 3 * lm2 * b2 * bt0 + 3 * lm3 * b2 * bt0 ) / ( 3. * lmo3 * bt02 )
+                     + ( lnk * ( - 6 * lnoml * b1 * bt02 + 6 * lm * lnoml * b1 * bt02 ) ) / ( 3. * lmo3 * bt02 ) + ( lnk2 * ( - 6 * lm * bt03 + 9 * lm2 * bt03 - 3 * lm3 * bt03 ) ) / ( 3. * lmo3 * bt02 ) )
+          + A1g * ( ( 2 * lm3 * b13 + 6 * lm2 * lnoml * b13 + 6 * lm3 * lnoml * b13 + 6 * lm * lnoml2 * b13 + 2 * lnoml3 * b13 - 6 * lm * lnoml3 * b13
+                      + 6 * lm * b1 * b2 - 15 * lm2 * b1 * b2 + 5 * lm3 * b1 * b2 + 6 * lnoml * b1 * b2 - 18 * lm * lnoml * b1 * b2 + 12 * lm2 * lnoml * b1 * b2
+                      - 12 * lm3 * lnoml * b1 * b2 - 6 * lm * b3 + 15 * lm2 * b3 - 7 * lm3 * b3 - 6 * lnoml * b3 + 18 * lm * lnoml * b3 - 18 * lm2 * lnoml * b3 + 6 * lm3 * lnoml * b3 ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk * ( 6 * lm2 * b12 * bt0 + 6 * lm3 * b12 * bt0 + 12 * lm * lnoml * b12 * bt0 + 6 * lnoml2 * b12 * bt0
+                                - 18 * lm * lnoml2 * b12 * bt0 - 6 * lm2 * b2 * bt0 - 6 * lm3 * b2 * bt0 ) ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk2 * ( 6 * lm * b1 * bt02 + 6 * lnoml * b1 * bt02 - 18 * lm * lnoml * b1 * bt02 ) ) / ( 3. * lmo3 * bt02 )
+                    + ( lnk3 * ( - 6 * lm2 * bt03 + 2 * lm3 * bt03 ) ) / ( 3. * lmo3 * bt02 ) );
+          Sg += a02 * g4g;
+        }
+
+      // Construct form factors and return
+      return sqrt(g0g * exp(Sg));
+    };
+  }
+
+  //_____________________________________________________________________________
   std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, TmdObjects>            const& TmdObj,
                                                                          std::function<double(double const&)> const& Alphas,
-                                                                         LogAccuracy                          const& PerturbativeOrder,
+                                                                         int                                  const& PerturbativeOrder,
                                                                          double                               const& Ci,
                                                                          double                               const& IntEps)
   {
@@ -2208,7 +2480,7 @@ namespace apfel
   std::function<double(double const&)> HardFactor(std::string                          const& Process,
                                                   std::map<int, TmdObjects>            const& TmdObj,
                                                   std::function<double(double const&)> const& Alphas,
-                                                  LogAccuracy                          const& PerturbativeOrder,
+                                                  int                                  const& PerturbativeOrder,
                                                   double                               const& Cf)
   {
     // Retrieve thresholds from "TmdObj"
