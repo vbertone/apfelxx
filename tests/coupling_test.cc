@@ -95,7 +95,7 @@ int main()
 
   // Compute and print values at Mu.
   Mu = 1;
-  std::cout << "\nCoupled numeric evolution of  strong and electromagnetic couplings:" << std::endl;
+  std::cout << "\nCoupled numerical evolution of strong and electromagnetic couplings:" << std::endl;
   std::cout << "LO:    alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aLOmix.Evaluate(Mu)(0, 0)
             << ", alpha_s(Mu = " << Mu << " GeV)[dec]  = " << asLO.Evaluate(Mu)
             << ", (ratio = " << aLOmix.Evaluate(Mu)(0, 0) / asLO.Evaluate(Mu) << ")" <<std::endl;
