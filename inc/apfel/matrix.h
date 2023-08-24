@@ -26,8 +26,9 @@ namespace apfel
      * @brief The matrix constructor.
      * @param row: number of rows
      * @param col: number of columns
+     * @param d: vector of data (if empty the matrix is filled in with null values)
      */
-    matrix(size_t const& row = 0, size_t const& col = 0);
+    matrix(size_t const& row = 0, size_t const& col = 0, std::vector<T> const& d = {});
 
     /**
      * @brief The matrix copy constructor.

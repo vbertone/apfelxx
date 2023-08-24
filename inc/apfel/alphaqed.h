@@ -47,7 +47,7 @@ namespace apfel
     /**
      * @brief Function for the computation of the matching.
      * @param Up: tells whether the matching is upward or not (downward)
-     * @param nf: number of active flavours
+     * @param nfl: total number of active flavours including both quarks and leptons
      * @param Coup: value of the coupling to be matched
      * @return The matched value of the strong coupling \f$\alpha_s\f$ at the threshold
      * @note This is a dummy function required only to instantiate the
@@ -60,14 +60,15 @@ namespace apfel
 
     /**
      * @brief Function that returns QED \f$\beta\f$ function.
-     * @param a: value of the coupling
      * @param nfl: total number of active flavours including both quarks and leptons
+     * @param a: value of the coupling
      * @return The the value of the QED \f$\beta\f$ function
      */
     double Derivative(int const& nfl, double const&, double const& a) const;
 
     /**
-     * @brief Function for the computation of the single coefficients of the expansion of the QED \f$\beta\f$ function.
+     * @brief Function for the computation of the single coefficients
+     * of the expansion of the QED \f$\beta\f$ function.
      * @param pt: perturbative order
      * @param nf: number of active quark flavours
      * @param nl: number of active charged leptons

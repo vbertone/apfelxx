@@ -13,9 +13,9 @@ namespace apfel
 {
   //_________________________________________________________________________
   template<class T>
-  matrix<T>::matrix(size_t const& row, size_t const& col):
+  matrix<T>::matrix(size_t const& row, size_t const& col, std::vector<T> const& d):
     _size{{row, col}},
-  _data(std::vector<T>(row * col))
+  _data(d.empty() ? std::vector<T>(row * col) : d)
   {
   }
 
@@ -111,8 +111,8 @@ namespace apfel
 
     // Compute product
     for (size_t i = 0; i < _size[0]; i++)
-      for (size_t j = 0; i < m.size(1); j++)
-        for (size_t k = 0; i < _size[1]; k++)
+      for (size_t j = 0; j < m.size(1); j++)
+        for (size_t k = 0; k < _size[1]; k++)
           p[i * m.size(1) + j] += _data[i * _size[1] + k] * m(k, j);
 
     // Adjust second dimension

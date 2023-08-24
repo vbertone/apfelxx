@@ -68,5 +68,6 @@
 #include "apfel/alphaqcdg.h"
 #include "apfel/alphaqcdxi.h"
 #include "apfel/alphaqed.h"
+#include "apfel/alphaqcdqed.h"
 #include "apfel/twobodyphasespace.h"
 ///@}

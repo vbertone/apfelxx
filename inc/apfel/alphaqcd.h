@@ -70,14 +70,15 @@ namespace apfel
 
     /**
      * @brief Function that returns QCD \f$\beta\f$ function.
-     * @param as: value of the coupling
      * @param nf: number of active flavours
+     * @param as: value of the coupling
      * @return The the value of the QCD \f$\beta\f$ function
      */
     double Derivative(int const& nf, double const&, double const& as) const;
 
     /**
-     * @brief Function for the computation of the single coefficients of the expansion of the QCD \f$\beta\f$ function.
+     * @brief Function for the computation of the single coefficients
+     * of the expansion of the QCD \f$\beta\f$ function.
      * @param pt: perturbative order
      * @param nf: number of active flavours
      * @return The pt-th coefficient of the QCD \f$\beta\f$ function.
