@@ -280,53 +280,12 @@ PYBIND11_MODULE(apfelpy, m)
 
   // Wrappers of "matrix.h" (this is a template class and needs a
   // wrapper for any specialisation)
-  py::class_<apfel::matrix<size_t>>(m, "matrixSize_t")
-                                 .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
-                                 .def("resize", &apfel::matrix<size_t>::resize, "row"_a, "col"_a, "v"_a = 0)
-                                 .def("set", &apfel::matrix<size_t>::set, "v"_a)
-                                 .def("size", &apfel::matrix<size_t>::size, "dim"_a)
-                                 .def("__call__", [] (apfel::matrix<size_t>& c, size_t const& i, size_t const& j)
-  {
-    return c(i, j);
-  })
-  .def("__call__", [] (apfel::matrix<size_t> const& c, size_t const& i, size_t const& j)
-  {
-    return c(i, j);
-  });
-
-  py::class_<apfel::matrix<int>>(m, "matrixInt")
-                              .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
-                              .def("resize", &apfel::matrix<int>::resize, "row"_a, "col"_a, "v"_a = 0)
-                              .def("set", &apfel::matrix<int>::set, "v"_a)
-                              .def("size", &apfel::matrix<int>::size, "dim"_a)
-                              .def("__call__", [] (apfel::matrix<int>& c, size_t const& i, size_t const& j)
-  {
-    return c(i, j);
-  })
-  .def("__call__", [] (apfel::matrix<int> const& c, size_t const& i, size_t const& j)
-  {
-    return c(i, j);
-  });
-
-  py::class_<apfel::matrix<float>>(m, "matrixFloat")
-                                .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
-                                .def("resize", &apfel::matrix<float>::resize, "row"_a, "col"_a, "v"_a = 0)
-                                .def("set", &apfel::matrix<float>::set, "v"_a)
-                                .def("size", &apfel::matrix<float>::size, "dim"_a)
-                                .def("__call__", [] (apfel::matrix<float>& c, size_t const& i, size_t const& j)
-  {
-    return c(i, j);
-  })
-  .def("__call__", [] (apfel::matrix<float> const& c, size_t const& i, size_t const& j)
-  {
-    return c(i, j);
-  });
-
   py::class_<apfel::matrix<double>>(m, "matrixDouble")
                                  .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
                                  .def("resize", &apfel::matrix<double>::resize, "row"_a, "col"_a, "v"_a = 0)
                                  .def("set", &apfel::matrix<double>::set, "v"_a)
-                                 .def("size", &apfel::matrix<double>::size, "dim"_a)
+                                 .def("size", py::overload_cast<>(&apfel::matrix<double>::size, py::const_))
+                                 .def("size", py::overload_cast<size_t const&>(&apfel::matrix<double>::size, py::const_), "dim"_a)
                                  .def("__call__", [] (apfel::matrix<double>& c, size_t const& i, size_t const& j)
   {
     return c(i, j);
@@ -340,7 +299,8 @@ PYBIND11_MODULE(apfelpy, m)
   .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
   .def("resize", &apfel::matrix<std::vector<int>>::resize, "row"_a, "col"_a, "v"_a = 0)
   .def("set", &apfel::matrix<std::vector<int>>::set, "v"_a)
-  .def("size", &apfel::matrix<std::vector<int>>::size, "dim"_a)
+  .def("size", py::overload_cast<>(&apfel::matrix<std::vector<int>>::size, py::const_))
+  .def("size", py::overload_cast<size_t const&>(&apfel::matrix<std::vector<int>>::size, py::const_), "dim"_a)
   .def("__call__", [] (apfel::matrix<std::vector<int>>& c, size_t const& i, size_t const& j)
   {
     return c(i, j);
@@ -354,7 +314,8 @@ PYBIND11_MODULE(apfelpy, m)
   .def(py::init<size_t const&, size_t const&>(), "row"_a = 0, "col"_a = 0)
   .def("resize", &apfel::matrix<std::vector<double>>::resize, "row"_a, "col"_a, "v"_a = 0)
   .def("set", &apfel::matrix<std::vector<double>>::set, "v"_a)
-  .def("size", &apfel::matrix<std::vector<double>>::size, "dim"_a)
+  .def("size", py::overload_cast<>(&apfel::matrix<std::vector<double>>::size, py::const_))
+  .def("size", py::overload_cast<size_t const&>(&apfel::matrix<std::vector<double>>::size, py::const_), "dim"_a)
   .def("__call__", [] (apfel::matrix<std::vector<double>>& c, size_t const& i, size_t const& j)
   {
     return c(i, j);
