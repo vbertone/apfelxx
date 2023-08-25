@@ -164,6 +164,7 @@ namespace apfel
   // Specializations
   //_________________________________________________________________________________
   template class TabulateObject<double>;
+  template class TabulateObject<matrix<double>>;
   template class TabulateObject<Distribution>;
   template class TabulateObject<Set<Distribution>>;
   template class TabulateObject<DoubleObject<Distribution>>;

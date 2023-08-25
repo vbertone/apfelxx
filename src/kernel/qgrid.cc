@@ -411,6 +411,7 @@ namespace apfel
 
   // Fixed template types.
   template class QGrid<double>;
+  template class QGrid<matrix<double>>;
   template class QGrid<Distribution>;
   template class QGrid<Set<Distribution>>;
   template class QGrid<DoubleObject<Distribution>>;

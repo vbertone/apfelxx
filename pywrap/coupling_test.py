@@ -39,7 +39,7 @@ print("NNNLO: alpha_s(Mu = ", Mu, " GeV) = ", asNNNLOg.Evaluate(Mu), " (NNNLO/NN
 # Reference value of the QED coupling and heavy-quark
 # thresholds.
 AlphaQEDRef = 1. / 128.
-MuQEDRef    = 91.2
+MuQEDRef    = MuQCDRef
 LeptThresholds = [0, 0, 1.777]
 
 # Iniatialize the running of the QED coupling at all available
@@ -51,4 +51,24 @@ aNLO = ap.AlphaQED(AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 1)
 Mu = 1e10
 print("\nNumeric evolution of the electromagnetic coupling:")
 print("LO:    alpha_em(Mu = ", Mu, " GeV) = ", aLO.Evaluate(Mu))
-print("NLO:   alpha_em(Mu = ", Mu, " GeV) = ", aNLO.Evaluate(Mu) , " (NLO/LO = ", 100 * aNLO.Evaluate(Mu) / aLO.Evaluate(Mu), "%)\n")
+print("NLO:   alpha_em(Mu = ", Mu, " GeV) = ", aNLO.Evaluate(Mu) , " (NLO/LO = ", 100 * aNLO.Evaluate(Mu) / aLO.Evaluate(Mu), "%)")
+
+# Compute mixed evolution
+aLOmix  = ap.AlphaQCDQED(AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 0)
+aNLOmix = ap.AlphaQCDQED(AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 1)
+
+# Compute and print values at Mu.
+Mu = 1
+print("\nCoupled numerical evolution of strong and electromagnetic couplings:")
+print("LO:    alpha_s(Mu = ", Mu, " GeV)[coup]  = ", aLOmix.Evaluate(Mu)(0, 0),
+          ", alpha_s(Mu = ", Mu, " GeV)[dec]  = ", asLO.Evaluate(Mu),
+          ", (ratio = ", aLOmix.Evaluate(Mu)(0, 0) / asLO.Evaluate(Mu), ")")
+print("LO:    alpha_em(Mu = ", Mu, " GeV)[coup] = ", aLOmix.Evaluate(Mu)(1, 0),
+          ", alpha_em(Mu = ", Mu, " GeV)[dec] = ", aLO.Evaluate(Mu),
+          ", (ratio = ", aLOmix.Evaluate(Mu)(1, 0) / aLO.Evaluate(Mu), ")")
+print("NLO:   alpha_s(Mu = ", Mu, " GeV)[coup]  = ", aNLOmix.Evaluate(Mu)(0, 0),
+          ", alpha_s(Mu = ", Mu, " GeV)[dec]  = ", asNLO.Evaluate(Mu),
+          ", (ratio = ", aNLOmix.Evaluate(Mu)(0, 0) / asNLO.Evaluate(Mu), ")")
+print("NLO:   alpha_em(Mu = ", Mu, " GeV)[coup] = ", aNLOmix.Evaluate(Mu)(1, 0),
+          ", alpha_em(Mu = ", Mu, " GeV)[dec] = ", aNLO.Evaluate(Mu),
+          ", (ratio = ", aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu), ")\n")

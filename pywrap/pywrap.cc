@@ -655,6 +655,30 @@ PYBIND11_MODULE(apfelpy, m)
                                 .def(py::self == py::self)
                                 .def(py::self != py::self);
 
+  py::class_<apfel::QGrid<apfel::matrix<double>>>(m, "QGridMatrix")
+                                             .def(py::init<int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)>>(), "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                             .def(py::init<int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                             .def(py::init<std::vector<double> const&, int const&>(), "Qg"_a, "InterDegree"_a)
+                                             .def("Evaluate", &apfel::QGrid<apfel::matrix<double>>::Evaluate, "Q"_a)
+                                             .def("Derive", &apfel::QGrid<apfel::matrix<double>>::Derive, "Q"_a)
+                                             .def("Integrate", &apfel::QGrid<apfel::matrix<double>>::Integrate, "Qa"_a, "Qb"_a)
+                                             .def("nQ", &apfel::QGrid<apfel::matrix<double>>::nQ)
+                                             .def("InterDegree", &apfel::QGrid<apfel::matrix<double>>::InterDegree)
+                                             .def("QMin", &apfel::QGrid<apfel::matrix<double>>::QMin)
+                                             .def("QMax", &apfel::QGrid<apfel::matrix<double>>::QMax)
+                                             .def("TabFunc", &apfel::QGrid<apfel::matrix<double>>::TabFunc)
+                                             .def("GetThresholds", &apfel::QGrid<apfel::matrix<double>>::GetThresholds)
+                                             .def("GetQGrid", &apfel::QGrid<apfel::matrix<double>>::GetQGrid)
+                                             .def("GetFQGrid", &apfel::QGrid<apfel::matrix<double>>::GetFQGrid)
+                                             .def("GetThesholdIndices", &apfel::QGrid<apfel::matrix<double>>::GetThesholdIndices)
+                                             .def("GetQGridValues", &apfel::QGrid<apfel::matrix<double>>::GetQGridValues)
+                                             .def("Interpolant", &apfel::QGrid<apfel::matrix<double>>::Interpolant, "tQ"_a, "tau"_a, "fq"_a)
+                                             .def("DerInterpolant", &apfel::QGrid<apfel::matrix<double>>::DerInterpolant, "tQ"_a, "tau"_a, "Q"_a)
+                                             .def("IntInterpolant", &apfel::QGrid<apfel::matrix<double>>::IntInterpolant, "tQ"_a, "tau"_a, "Qa"_a, "Qb"_a)
+                                             .def("Print", &apfel::QGrid<apfel::matrix<double>>::Print)
+                                             .def(py::self == py::self)
+                                             .def(py::self != py::self);
+
   py::class_<apfel::QGrid<apfel::Distribution>>(m, "QGridD")
                                              .def(py::init<int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)>>(), "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
                                              .def(py::init<int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
@@ -879,6 +903,38 @@ PYBIND11_MODULE(apfelpy, m)
   .def("SetObjectRef", &apfel::MatchedEvolution<double>::SetObjectRef, "ObjRef"_a)
   .def("SetMuRef", &apfel::MatchedEvolution<double>::SetMuRef, "MuRef"_a)
   .def("SetNumberOfSteps", &apfel::MatchedEvolution<double>::SetNumberOfSteps, "nsteps"_a);
+
+  // Trampoline class for virtual class
+  class PyMatchedEvolutionMatrix: public apfel::MatchedEvolution<apfel::matrix<double>>
+  {
+  public:
+    using MatchedEvolution::MatchedEvolution;
+    apfel::matrix<double> EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::matrix<double> const& Obj0) const override
+    {
+      PYBIND11_OVERRIDE(apfel::matrix<double>, MatchedEvolution<apfel::matrix<double>>, EvolveObject, nf, mu02, mu2, Obj0);
+    };
+    apfel::matrix<double> MatchObject(bool const& Up, int const& nf, apfel::matrix<double> const& Obj) const override
+    {
+      PYBIND11_OVERRIDE_PURE(apfel::matrix<double>, MatchedEvolution<apfel::matrix<double>>, MatchObject, Up, nf, Obj);
+    };
+    apfel::matrix<double> Derivative(int const& nf, double const& Mu, apfel::matrix<double> const& Obj) const override
+    {
+      PYBIND11_OVERRIDE_PURE(apfel::matrix<double>, MatchedEvolution<apfel::matrix<double>>, Derivative, nf, Mu, Obj);
+    };
+  };
+  py::class_<apfel::MatchedEvolution<apfel::matrix<double>>, PyMatchedEvolutionMatrix>(m, "MatchedEvolutionMatrix")
+                                                         .def(py::init<apfel::matrix<double> const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
+                                                         .def("EvolveObject", &apfel::MatchedEvolution<apfel::matrix<double>>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
+                                                         .def("MatchObject", &apfel::MatchedEvolution<apfel::matrix<double>>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
+                                                         .def("Derivative", &apfel::MatchedEvolution<apfel::matrix<double>>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
+                                                         .def("Evaluate", &apfel::MatchedEvolution<apfel::matrix<double>>::Evaluate, "mu"_a)
+                                                         .def("GetObjectRef", &apfel::MatchedEvolution<apfel::matrix<double>>::GetObjectRef)
+                                                         .def("GetMuRef", &apfel::MatchedEvolution<apfel::matrix<double>>::GetMuRef)
+                                                         .def("GetThresholds", &apfel::MatchedEvolution<apfel::matrix<double>>::GetThresholds)
+                                                         .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::matrix<double>>::GetNumberOfSteps)
+                                                         .def("SetObjectRef", &apfel::MatchedEvolution<apfel::matrix<double>>::SetObjectRef, "ObjRef"_a)
+                                                         .def("SetMuRef", &apfel::MatchedEvolution<apfel::matrix<double>>::SetMuRef, "MuRef"_a)
+                                                         .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::matrix<double>>::SetNumberOfSteps, "nsteps"_a);
 
   // Trampoline class for virtual class
   class PyMatchedEvolutionD: public apfel::MatchedEvolution<apfel::Distribution>
@@ -1113,6 +1169,12 @@ PYBIND11_MODULE(apfelpy, m)
                                                             .def("MatchObject", &apfel::AlphaQED::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
                                                             .def("Derivative", &apfel::AlphaQED::Derivative, "nfl"_a, "void"_a, "a"_a);
 
+  // Wrappers of "alphaqcdqed.h"
+  py::class_<apfel::AlphaQCDQED, apfel::MatchedEvolution<apfel::matrix<double>>>(m, "AlphaQCDQED")
+  .def(py::init<double const&, double const&, double const&, std::vector<double> const&, std::vector<double> const&, int const&, int const&>(), "AlphaQCDRef"_a, "AlphaQEDRef"_a, "MuRef"_a, "LeptThresholds"_a, "QuarkThresholds"_a, "pt"_a, "nsteps"_a = 10)
+  .def("MatchObject", &apfel::AlphaQCDQED::MatchObject, "Up"_a, "nf"_a, "Coup"_a)
+  .def("Derivative", &apfel::AlphaQCDQED::Derivative, "nfl"_a, "void"_a, "a"_a);
+
   // Wrappers of "dglapbuilder.h"
   py::class_<apfel::DglapObjects>(m, "DglapObjects")
   .def_readwrite("Threshold", &apfel::DglapObjects::Threshold)
@@ -1140,6 +1202,12 @@ PYBIND11_MODULE(apfelpy, m)
                                                                .def(py::init<std::function<double(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
                                                                .def(py::init<std::function<double(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
                                                                .def(py::init<std::function<double(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
+
+  py::class_<apfel::TabulateObject<apfel::matrix<double>>, apfel::QGrid<apfel::matrix<double>>>(m, "TabulateObjectMatrix")
+                                                                                         .def(py::init<apfel::MatchedEvolution<apfel::matrix<double>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+                                                                                         .def(py::init<std::function<apfel::matrix<double>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+                                                                                         .def(py::init<std::function<apfel::matrix<double>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+                                                                                         .def(py::init<std::function<apfel::matrix<double>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
 
   py::class_<apfel::TabulateObject<apfel::Distribution>, apfel::QGrid<apfel::Distribution>>(m, "TabulateObjectD")
                                                                                          .def(py::init<apfel::MatchedEvolution<apfel::Distribution>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)

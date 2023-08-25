@@ -98,16 +98,16 @@ int main()
   std::cout << "\nCoupled numerical evolution of strong and electromagnetic couplings:" << std::endl;
   std::cout << "LO:    alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aLOmix.Evaluate(Mu)(0, 0)
             << ", alpha_s(Mu = " << Mu << " GeV)[dec]  = " << asLO.Evaluate(Mu)
-            << ", (ratio = " << aLOmix.Evaluate(Mu)(0, 0) / asLO.Evaluate(Mu) << ")" <<std::endl;
+            << ", (ratio = " << aLOmix.Evaluate(Mu)(0, 0) / asLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "LO:    alpha_em(Mu = " << Mu << " GeV)[coup] = " << aLOmix.Evaluate(Mu)(1, 0)
             << ", alpha_em(Mu = " << Mu << " GeV)[dec] = " << aLO.Evaluate(Mu)
-            << ", (ratio = " << aLOmix.Evaluate(Mu)(1, 0) / aLO.Evaluate(Mu) << ")" <<std::endl;
+            << ", (ratio = " << aLOmix.Evaluate(Mu)(1, 0) / aLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aNLOmix.Evaluate(Mu)(0, 0)
             << ", alpha_s(Mu = " << Mu << " GeV)[dec]  = " << asNLO.Evaluate(Mu)
-            << ", (ratio = " << aNLOmix.Evaluate(Mu)(0, 0) / asNLO.Evaluate(Mu) << ")" <<std::endl;
+            << ", (ratio = " << aNLOmix.Evaluate(Mu)(0, 0) / asNLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "NLO:   alpha_em(Mu = " << Mu << " GeV)[coup] = " << aNLOmix.Evaluate(Mu)(1, 0)
             << ", alpha_em(Mu = " << Mu << " GeV)[dec] = " << aNLO.Evaluate(Mu)
-            << ", (ratio = " << aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu) << ")\n" <<std::endl;
+            << ", (ratio = " << aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu) << ")\n" << std::endl;
 
   return 0;
 }
