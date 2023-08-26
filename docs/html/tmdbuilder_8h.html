@@ -88,6 +88,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="set_8h_source.html">apfel/set.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dglapbuilder_8h_source.html">apfel/dglapbuilder.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="tabulateobject_8h_source.html">apfel/tabulateobject.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="constants_8h_source.html">apfel/constants.h</a>&quot;</code><br />
 </div>
 <p><a href="tmdbuilder_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -170,6 +171,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ac1f6a3f9282d39de9c090bd184182c9f"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f">apfel::GluonEvolutionFactor</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
 <tr class="memdesc:ac1f6a3f9282d39de9c090bd184182c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the evolution factor for the gluon.  <br /></td></tr>
 <tr class="separator:ac1f6a3f9282d39de9c090bd184182c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab94641441d9b0677944defca3fc91f"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#aeab94641441d9b0677944defca3fc91f">apfel::QuarkAnalyticEvolutionFactor</a> (<a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> const &amp;TmdObj, double const &amp;mu0, double const &amp;Alphas0, double const &amp;kappa, double const &amp;kappa0, int const &amp;PerturbativeOrder)</td></tr>
+<tr class="memdesc:aeab94641441d9b0677944defca3fc91f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analytic evolution factor for the quark TMD.  <br /></td></tr>
+<tr class="separator:aeab94641441d9b0677944defca3fc91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0314854b12a956e78b3cd97298b55f7e"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a0314854b12a956e78b3cd97298b55f7e">apfel::GluonAnalyticEvolutionFactor</a> (<a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> const &amp;TmdObj, double const &amp;mu0, double const &amp;Alphas0, double const &amp;kappa, double const &amp;kappa0, int const &amp;PerturbativeOrder)</td></tr>
+<tr class="memdesc:a0314854b12a956e78b3cd97298b55f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analytic evolution factor for the gluon TMD.  <br /></td></tr>
+<tr class="separator:a0314854b12a956e78b3cd97298b55f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac05a7734973ff2e62fdee1441a22bba2"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2">apfel::CollinsSoperKernel</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
 <tr class="memdesc:ac05a7734973ff2e62fdee1441a22bba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the perturbative part of the Collins-Soper kernel for quarks.  <br /></td></tr>
 <tr class="separator:ac05a7734973ff2e62fdee1441a22bba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,7 +187,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 31 2023 19:02:57 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+Generated on Sat Aug 26 2023 14:15:14 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
 </small></address>
 </body>
 </html>

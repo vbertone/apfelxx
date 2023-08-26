@@ -16,7 +16,7 @@ namespace apfel
     for (int j = nf + 1; j <= 6; j++)
       _rules[GLUON].push_back({PGQ, 2 * j - 1, 6. / j / ( j - 1 )});
 
-    _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
+    _rules[SIGMA] = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
     for (int j = nf + 1; j <= 6; j++)
       _rules[SIGMA].push_back({PQQ, 2 * j - 1, 6. / j / ( j - 1 )});
 

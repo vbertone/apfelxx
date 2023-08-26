@@ -56,7 +56,7 @@ namespace apfel
      * means that the evolution is assumed to be continuos at the
      * thresholds.
      */
-    double MatchObject(bool const& Up, int const& nf, double const& Coup) const;
+    double MatchObject(bool const& Up, int const& nfl, double const& Coup) const;
 
     /**
      * @brief Function that returns QED \f$\beta\f$ function.

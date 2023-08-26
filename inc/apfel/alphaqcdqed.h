@@ -35,7 +35,7 @@ namespace apfel
      * @param AlphaQEDRef: the reference value of the QED coupling
      * @param MuRef: the reference value of the scale
      * @param QuarkThresholds: vector of quark thresholds
-     * @param LepThresholds: vector of lepton thresholds
+     * @param LeptThresholds: vector of lepton thresholds
      * @param pt: perturbative order
      * @param nsteps: number of steps of the ODE solver
      * @note No displaced thresholds allowed.

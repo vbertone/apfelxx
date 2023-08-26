@@ -93,16 +93,16 @@ namespace apfel
    */
   ///@{
   template<class T>
-  matrix<T> operator + (matrix<T> lhs, matrix<T> const& rhs); //!< matrix<T>+matrix<T>
+  matrix<T> operator + (matrix<T> lhs, matrix<T> const& rhs); //!< matrix+matrix
   template<class T>
-  matrix<T> operator - (matrix<T> lhs, matrix<T> const& rhs); //!< matrix<T>-matrix<T>
+  matrix<T> operator - (matrix<T> lhs, matrix<T> const& rhs); //!< matrix-matrix
   template<class T>
-  matrix<T> operator * (double const& s, matrix<T> rhs);      //!< Scalar*matrix<T>
+  matrix<T> operator * (double const& s, matrix<T> rhs);      //!< Scalar*matrix
   template<class T>
-  matrix<T> operator * (matrix<T> lhs, double const& s);      //!< matrix<T>*Scalar
+  matrix<T> operator * (matrix<T> lhs, double const& s);      //!< matrix*Scalar
   template<class T>
-  matrix<T> operator / (matrix<T> lhs, double const& s);      //!< matrix<T>/Scalar
+  matrix<T> operator / (matrix<T> lhs, double const& s);      //!< matrix/Scalar
   template<class T>
-  matrix<T> operator * (matrix<T> lhs, matrix<T> const& rhs); //!< matrix<T>*matrix<T>
+  matrix<T> operator * (matrix<T> lhs, matrix<T> const& rhs); //!< matrix*matrix
   ///@}
 }
