@@ -152,7 +152,7 @@ $(function() {
 <div class="line">  <span class="comment">// Reference value of the QED coupling and heavy-quark</span></div>
 <div class="line">  <span class="comment">// thresholds.</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> AlphaQEDRef = 1. / 128.;</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> MuQEDRef    = 91.2;</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> MuQEDRef    = MuQCDRef;</div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;double&gt; LeptThresholds = {0, 0, 1.777};</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Iniatialize the running of the QED coupling at all available</span></div>
@@ -164,11 +164,32 @@ $(function() {
 <div class="line">  Mu = 1e10;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\nNumeric evolution of the electromagnetic coupling:&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;LO:    alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV) = &quot;</span> &lt;&lt; aLO.<a class="code hl_function" href="classapfel_1_1MatchedEvolution.html#ab20faeee4e277e3835bd9b7c35f8bb23">Evaluate</a>(Mu) &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;NLO:   alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV) = &quot;</span> &lt;&lt; aNLO.Evaluate(Mu)  &lt;&lt; <span class="stringliteral">&quot; (NLO/LO = &quot;</span> &lt;&lt; 100 * aNLO.Evaluate(Mu) / aLO.Evaluate(Mu)&lt;&lt; <span class="stringliteral">&quot;%)\n&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;NLO:   alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV) = &quot;</span> &lt;&lt; aNLO.Evaluate(Mu)  &lt;&lt; <span class="stringliteral">&quot; (NLO/LO = &quot;</span> &lt;&lt; 100 * aNLO.Evaluate(Mu) / aLO.Evaluate(Mu)&lt;&lt; <span class="stringliteral">&quot;%)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Compute mixed evolution</span></div>
+<div class="line">  <a id="_a5" name="_a5"></a><a class="code hl_class" href="classapfel_1_1AlphaQCDQED.html">apfel::AlphaQCDQED</a> aLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 0};</div>
+<div class="line">  <a class="code hl_class" href="classapfel_1_1AlphaQCDQED.html">apfel::AlphaQCDQED</a> aNLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 1};</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Compute and print values at Mu.</span></div>
+<div class="line">  Mu = 1;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\nCoupled numerical evolution of strong and electromagnetic couplings:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;LO:    alpha_s(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[coup]  = &quot;</span> &lt;&lt; aLOmix.<a id="a6" name="a6"></a><a class="code hl_function" href="classapfel_1_1MatchedEvolution.html#ab20faeee4e277e3835bd9b7c35f8bb23">Evaluate</a>(Mu)(0, 0)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, alpha_s(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[dec]  = &quot;</span> &lt;&lt; asLO.Evaluate(Mu)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, (ratio = &quot;</span> &lt;&lt; aLOmix.Evaluate(Mu)(0, 0) / asLO.Evaluate(Mu) &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;LO:    alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[coup] = &quot;</span> &lt;&lt; aLOmix.Evaluate(Mu)(1, 0)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[dec] = &quot;</span> &lt;&lt; aLO.Evaluate(Mu)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, (ratio = &quot;</span> &lt;&lt; aLOmix.Evaluate(Mu)(1, 0) / aLO.Evaluate(Mu) &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;NLO:   alpha_s(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[coup]  = &quot;</span> &lt;&lt; aNLOmix.Evaluate(Mu)(0, 0)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, alpha_s(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[dec]  = &quot;</span> &lt;&lt; asNLO.Evaluate(Mu)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, (ratio = &quot;</span> &lt;&lt; aNLOmix.Evaluate(Mu)(0, 0) / asNLO.Evaluate(Mu) &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;NLO:   alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[coup] = &quot;</span> &lt;&lt; aNLOmix.Evaluate(Mu)(1, 0)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, alpha_em(Mu = &quot;</span> &lt;&lt; Mu &lt;&lt; <span class="stringliteral">&quot; GeV)[dec] = &quot;</span> &lt;&lt; aNLO.Evaluate(Mu)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;, (ratio = &quot;</span> &lt;&lt; aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu) &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aapfelxx_8h_html"><div class="ttname"><a href="apfelxx_8h.html">apfelxx.h</a></div></div>
+<div class="ttc" id="aclassapfel_1_1AlphaQCDQED_html"><div class="ttname"><a href="classapfel_1_1AlphaQCDQED.html">apfel::AlphaQCDQED</a></div><div class="ttdoc">The AlphaQCDQED is a specialization class of the MatchedEvolution class for the computation of the mi...</div><div class="ttdef"><b>Definition</b> alphaqcdqed.h:23</div></div>
 <div class="ttc" id="aclassapfel_1_1AlphaQCD_html"><div class="ttname"><a href="classapfel_1_1AlphaQCD.html">apfel::AlphaQCD</a></div><div class="ttdoc">The AlphaQCD is a specialization class of the MatchedEvolution class for the computation of the QCD c...</div><div class="ttdef"><b>Definition</b> alphaqcd.h:21</div></div>
 <div class="ttc" id="aclassapfel_1_1AlphaQCDg_html"><div class="ttname"><a href="classapfel_1_1AlphaQCDg.html">apfel::AlphaQCDg</a></div><div class="ttdoc">The AlphaQCDg is a specialization class of the MatchedEvolution class for the computation of the QCD ...</div><div class="ttdef"><b>Definition</b> alphaqcdg.h:21</div></div>
 <div class="ttc" id="aclassapfel_1_1AlphaQCDxi_html"><div class="ttname"><a href="classapfel_1_1AlphaQCDxi.html">apfel::AlphaQCDxi</a></div><div class="ttdoc">The AlphaQCDxi is a specialization class of the MatchedEvolution class for the computation of the QCD...</div><div class="ttdef"><b>Definition</b> alphaqcdxi.h:22</div></div>
@@ -177,7 +198,7 @@ $(function() {
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 31 2023 19:02:56 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+Generated on Sat Aug 26 2023 14:15:13 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
 </small></address>
 </body>
 </html>

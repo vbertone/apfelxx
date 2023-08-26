@@ -25,7 +25,7 @@ namespace apfel
   }
   double P0ns::Local(double const& x) const
   {
-    return 4 * CF * log( 1 - x ) + 3 * CF;
+    return 4 * CF * log(1 - x) + 3 * CF;
   }
 
   //_________________________________________________________________________________
@@ -65,7 +65,7 @@ namespace apfel
   }
   double P0gg::Local(double const& x) const
   {
-    return 4 * CA * log( 1 - x ) - 2 / 3. * _nf + 11 / 3. * CA;
+    return 4 * CA * log(1 - x) - 2 / 3. * _nf + 11 / 3. * CA;
   }
 
   //_________________________________________________________________________________
@@ -79,7 +79,7 @@ namespace apfel
   {
     const double lnx   = log(x);
     const double lnx2  = lnx * lnx;
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double pqq   = 2 / ( 1 - x ) - 1 - x;
     const double pqqmx = 2 / ( 1 + x ) - 1 + x;
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
@@ -102,7 +102,7 @@ namespace apfel
     const double p1delta =
       - 1 / 3. * CF * _nf + 3 / 2. * CF * CF + 17 / 6. * CA * CF + 24 * zeta3 * CF * CF - 12 * zeta3 * CA * CF
       - 8 / 3. * zeta2 * CF * _nf - 12 * zeta2 * CF * CF + 44 / 3. * zeta2 * CA * CF;
-    return log(1-x) * _a2 + p1delta;
+    return log(1 - x) * _a2 + p1delta;
   }
 
   //_________________________________________________________________________________
@@ -114,7 +114,7 @@ namespace apfel
   {
     const double lnx   = log(x);
     const double lnx2  = lnx * lnx;
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double pqq   = 2 / ( 1 - x ) - 1 - x;
     const double pqqmx = 2 / ( 1 + x ) - 1 + x;
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
@@ -155,7 +155,7 @@ namespace apfel
   {
     const double lnx   = log(x);
     const double lnx2  = lnx * lnx;
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double pqg   = x * x + ( 1 - x ) * ( 1 - x );
     const double pqgmx = x * x + ( 1 + x ) * ( 1 + x );
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
@@ -178,7 +178,7 @@ namespace apfel
   {
     const double lnx   = log(x);
     const double lnx2  = lnx * lnx;
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double pgq   = ( 1 + ( 1 - x ) * ( 1 - x ) ) / x;
     const double pgqmx = - ( 1 + ( 1 + x ) * ( 1 + x ) ) / x;
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
@@ -201,7 +201,7 @@ namespace apfel
   {
     const double lnx   = log(x);
     const double lnx2  = lnx * lnx;
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double pgg   = ( 1 / ( 1 - x ) +  1 / x - 2 + x * ( 1 - x ) );
     const double pggmx = ( 1 / ( 1 + x ) -  1 / x - 2 - x * ( 1 + x ) );
     const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1+x) - Pi2 / 6;
@@ -221,7 +221,7 @@ namespace apfel
   double P1gg::Local(double const& x) const
   {
     const double p1delta = ( - 2 * CF - 8 / 3. * CA ) * _nf + ( 32 / 3. + 12 * zeta3 ) * CA * CA;
-    return log(1-x) * _a2g + p1delta;
+    return log(1 - x) * _a2g + p1delta;
   }
 
   //_________________________________________________________________________________
@@ -238,7 +238,7 @@ namespace apfel
     const double dl_2 = dl * dl;
     const double dl_3 = dl_2 * dl;
     const double dl_4 = dl_3 * dl;
-    const double dl1  = log(1-x);
+    const double dl1  = log(1 - x);
     const double d81  = 1. / 81.;
     return
       1641.1 - 3135. * x + 243.6 * x_2 - 522.1 * x_3
@@ -257,7 +257,7 @@ namespace apfel
   }
   double P2nsp::Local(double const& x) const
   {
-    const double dl1 = log(1-x);
+    const double dl1 = log(1 - x);
     return
       1174.898 * dl1 + 1295.624 - 0.24
       - _nf * ( 183.187 * dl1 + 173.938 - 0.011 )
@@ -277,7 +277,7 @@ namespace apfel
     const double dl   = log(x);
     const double dl_2 = dl * dl;
     const double dl_3 = dl_2 * dl;
-    const double dl1  = log(1-x);
+    const double dl1  = log(1 - x);
     const double d81  = 1. / 81.;
     return
       1860.2 - 3505.* x + 297.0 * x_2 - 433.2 * x_3
@@ -296,7 +296,7 @@ namespace apfel
   }
   double P2nsm::Local(double const& x) const
   {
-    const double dl1 = log(1-x);
+    const double dl1 = log(1 - x);
     return
       1174.898 * dl1 + 1295.624 - 0.154
       - _nf * ( 183.187 * dl1 + 173.938  - 0.005 )
@@ -340,7 +340,7 @@ namespace apfel
     const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-    const double dl1   = log(1-x);
+    const double dl1   = log(1 - x);
     const double dl1_2 = dl1 * dl1;
     const double dl1_3 = dl1_2 * dl1;
     const double  p2ps1 =
@@ -370,7 +370,7 @@ namespace apfel
     const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-    const double dl1   = log(1-x);
+    const double dl1   = log(1 - x);
     const double dl1_2 = dl1 * dl1;
     const double dl1_3 = dl1_2 * dl1;
     const double dl1_4 = dl1_3 * dl1;
@@ -405,7 +405,7 @@ namespace apfel
     const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-    const double dl1   = log(1-x);
+    const double dl1   = log(1 - x);
     const double dl1_2 = dl1 * dl1;
     const double dl1_3 = dl1_2 * dl1;
     const double dl1_4 = dl1_3 * dl1;
@@ -443,7 +443,7 @@ namespace apfel
     const double dl_2  = dl * dl;
     const double dl_3  = dl_2 * dl;
     const double dl_4  = dl_3 * dl;
-    const double dl1   = log(1-x);
+    const double dl1   = log(1 - x);
     const double p2gga0 =
       2675.8 * dl / x + 14214. / x - 144. * dl_4 + 72. * dl_3
       - 7471. * dl_2 + 274.4 * dl + 3589. * dl1 - 20852.
@@ -466,7 +466,7 @@ namespace apfel
   }
   double P2gg::Local(double const& x) const
   {
-    const double dl1 = log(1-x);
+    const double dl1 = log(1 - x);
     return
       2643.521 * dl1 + 4425.448 + 0.446
       - _nf * ( 412.172 * dl1 +  528.720 + 0.003 )
@@ -883,7 +883,7 @@ namespace apfel
     const double dl4  = dl * dl3;
     const double dl5  = dl * dl4;
     const double dl6  = dl * dl5;
-    const double dlm  = log(1-x);
+    const double dlm  = log(1 - x);
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm * dlm2;
     const double dlm4 = dlm * dlm3;

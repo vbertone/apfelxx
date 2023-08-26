@@ -91,9 +91,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad233ffd5afb1d9ec9ba46a39202338b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#ad233ffd5afb1d9ec9ba46a39202338b1">matrix</a> (size_t const &amp;row=0, size_t const &amp;col=0)</td></tr>
-<tr class="memdesc:ad233ffd5afb1d9ec9ba46a39202338b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The matrix constructor.  <br /></td></tr>
-<tr class="separator:ad233ffd5afb1d9ec9ba46a39202338b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2863c1d3841857b42133f8beb544dfb3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#a2863c1d3841857b42133f8beb544dfb3">matrix</a> (size_t const &amp;row=0, size_t const &amp;col=0, std::vector&lt; T &gt; const &amp;d={})</td></tr>
+<tr class="memdesc:a2863c1d3841857b42133f8beb544dfb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The matrix constructor.  <br /></td></tr>
+<tr class="separator:a2863c1d3841857b42133f8beb544dfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38917d17f4e2af036afd02fa98886d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#ac38917d17f4e2af036afd02fa98886d2">matrix</a> (<a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;m)</td></tr>
+<tr class="memdesc:ac38917d17f4e2af036afd02fa98886d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The matrix copy constructor.  <br /></td></tr>
+<tr class="separator:ac38917d17f4e2af036afd02fa98886d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdf1bf466b42a73833b71dbabdabeedc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#acdf1bf466b42a73833b71dbabdabeedc">resize</a> (size_t const &amp;row, size_t const &amp;col, T const &amp;v=0)</td></tr>
 <tr class="memdesc:acdf1bf466b42a73833b71dbabdabeedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that resizes object and set default value.  <br /></td></tr>
 <tr class="separator:acdf1bf466b42a73833b71dbabdabeedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,6 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7d765198ce772590b9d7ef887a6eee0"><td class="memItemLeft" align="right" valign="top">size_t const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#ae7d765198ce772590b9d7ef887a6eee0">size</a> (size_t const &amp;dim) const</td></tr>
 <tr class="memdesc:ae7d765198ce772590b9d7ef887a6eee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the (row,col) size pair.  <br /></td></tr>
 <tr class="separator:ae7d765198ce772590b9d7ef887a6eee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0edd0f266d8aac4dc1777fa190d0a1"><td class="memItemLeft" align="right" valign="top">std::array&lt; size_t, 2 &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#aba0edd0f266d8aac4dc1777fa190d0a1">size</a> () const</td></tr>
+<tr class="memdesc:aba0edd0f266d8aac4dc1777fa190d0a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the pair of sizes.  <br /></td></tr>
+<tr class="separator:aba0edd0f266d8aac4dc1777fa190d0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14e4b4e8a2245f3900664837469da6a8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#a14e4b4e8a2245f3900664837469da6a8">data</a> () const</td></tr>
 <tr class="memdesc:a14e4b4e8a2245f3900664837469da6a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of data.  <br /></td></tr>
 <tr class="separator:a14e4b4e8a2245f3900664837469da6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,6 +117,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9286eb64dac9cb0c33eb8c1a75ec717c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb82105506e559f9529cba428d933e54"><td class="memItemLeft" align="right" valign="top">T const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#adb82105506e559f9529cba428d933e54">operator()</a> (size_t const &amp;i, size_t const &amp;j) const</td></tr>
 <tr class="separator:adb82105506e559f9529cba428d933e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16bf2e73b158555be81a918a096b5a97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#a16bf2e73b158555be81a918a096b5a97">operator=</a> (<a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;m)</td></tr>
+<tr class="separator:a16bf2e73b158555be81a918a096b5a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b5d00a506815a903b6e20c8cef4f5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#a53b5d00a506815a903b6e20c8cef4f5b">operator+=</a> (<a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;m)</td></tr>
+<tr class="separator:a53b5d00a506815a903b6e20c8cef4f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38277c5da4dcdbd900448de5800178ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#a38277c5da4dcdbd900448de5800178ce">operator-=</a> (<a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;m)</td></tr>
+<tr class="separator:a38277c5da4dcdbd900448de5800178ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc6e8652d1a8fb8cb834f6ec0ee04a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#afbc6e8652d1a8fb8cb834f6ec0ee04a5">operator*=</a> (double const &amp;f)</td></tr>
+<tr class="separator:afbc6e8652d1a8fb8cb834f6ec0ee04a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeea83b64c0ed2394cd188efdf17db97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#aaeea83b64c0ed2394cd188efdf17db97">operator/=</a> (double const &amp;f)</td></tr>
+<tr class="separator:aaeea83b64c0ed2394cd188efdf17db97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28a60c454a89c3d1c200c715dd6c7867"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1matrix.html#a28a60c454a89c3d1c200c715dd6c7867">operator*=</a> (<a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;m)</td></tr>
+<tr class="separator:a28a60c454a89c3d1c200c715dd6c7867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -125,8 +143,8 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class apfel::matrix&lt; T &gt;</div><p>The matrix class is a simple implementation of 2d arrays based on a continous memory allocation. Elements are accessible throught the (i,j) operator. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad233ffd5afb1d9ec9ba46a39202338b1" name="ad233ffd5afb1d9ec9ba46a39202338b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad233ffd5afb1d9ec9ba46a39202338b1">&#9670;&#160;</a></span>matrix()</h2>
+<a id="a2863c1d3841857b42133f8beb544dfb3" name="a2863c1d3841857b42133f8beb544dfb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2863c1d3841857b42133f8beb544dfb3">&#9670;&#160;</a></span>matrix() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +161,13 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t const &amp;&#160;</td>
-          <td class="paramname"><em>col</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>col</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>d</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -158,6 +182,35 @@ template&lt;typename T &gt; </div>
   <table class="params">
     <tr><td class="paramname">row</td><td>number of rows </td></tr>
     <tr><td class="paramname">col</td><td>number of columns </td></tr>
+    <tr><td class="paramname">d</td><td>vector of data (if empty the matrix is filled in with null values) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac38917d17f4e2af036afd02fa98886d2" name="ac38917d17f4e2af036afd02fa98886d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38917d17f4e2af036afd02fa98886d2">&#9670;&#160;</a></span>matrix() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::matrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The matrix copy constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,6 +324,126 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="afbc6e8652d1a8fb8cb834f6ec0ee04a5" name="afbc6e8652d1a8fb8cb834f6ec0ee04a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc6e8652d1a8fb8cb834f6ec0ee04a5">&#9670;&#160;</a></span>operator*=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28a60c454a89c3d1c200c715dd6c7867" name="a28a60c454a89c3d1c200c715dd6c7867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28a60c454a89c3d1c200c715dd6c7867">&#9670;&#160;</a></span>operator*=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::operator*= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53b5d00a506815a903b6e20c8cef4f5b" name="a53b5d00a506815a903b6e20c8cef4f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b5d00a506815a903b6e20c8cef4f5b">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a38277c5da4dcdbd900448de5800178ce" name="a38277c5da4dcdbd900448de5800178ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38277c5da4dcdbd900448de5800178ce">&#9670;&#160;</a></span>operator-=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::operator-= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaeea83b64c0ed2394cd188efdf17db97" name="aaeea83b64c0ed2394cd188efdf17db97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeea83b64c0ed2394cd188efdf17db97">&#9670;&#160;</a></span>operator/=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::operator/= </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16bf2e73b158555be81a918a096b5a97" name="a16bf2e73b158555be81a918a096b5a97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16bf2e73b158555be81a918a096b5a97">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acdf1bf466b42a73833b71dbabdabeedc" name="acdf1bf466b42a73833b71dbabdabeedc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acdf1bf466b42a73833b71dbabdabeedc">&#9670;&#160;</a></span>resize()</h2>
 
@@ -345,8 +518,38 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="aba0edd0f266d8aac4dc1777fa190d0a1" name="aba0edd0f266d8aac4dc1777fa190d0a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba0edd0f266d8aac4dc1777fa190d0a1">&#9670;&#160;</a></span>size() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt; size_t, 2 &gt; const  &amp; <a class="el" href="classapfel_1_1matrix.html">apfel::matrix</a>&lt; T &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the pair of sizes. </p>
+<dl class="section return"><dt>Returns</dt><dd>the number of rows and columns </dd></dl>
+
+</div>
+</div>
 <a id="ae7d765198ce772590b9d7ef887a6eee0" name="ae7d765198ce772590b9d7ef887a6eee0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7d765198ce772590b9d7ef887a6eee0">&#9670;&#160;</a></span>size()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d765198ce772590b9d7ef887a6eee0">&#9670;&#160;</a></span>size() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -441,7 +644,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 31 2023 19:02:58 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+Generated on Sat Aug 26 2023 14:15:15 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
 </small></address>
 </body>
 </html>
