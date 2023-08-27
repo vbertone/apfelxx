@@ -7,6 +7,7 @@
 #include "apfel/convolutionmap.h"
 
 #include <sstream>
+#include <algorithm>
 
 namespace apfel
 {
