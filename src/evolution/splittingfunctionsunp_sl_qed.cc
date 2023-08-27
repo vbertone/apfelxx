@@ -6,6 +6,8 @@
 
 #include "apfel/splittingfunctionsunp_sl_qed.h"
 
+#include <cmath>
+
 namespace apfel
 {
   //_________________________________________________________________________________
