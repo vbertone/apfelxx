@@ -22,6 +22,10 @@ namespace apfel
     const double etap    = ( eu2 + ed2 ) / 2;
     const double etam    = ( eu2 - ed2 ) / 2;
 
+    // Numbering
+    // 0      1      2      3       4       5        6         7         8    9    10   11   12   13   14   15   16   17   18   19
+    // GLUON, GAMMA, SIGMA, DSIGMA, SIGMAL, VALENCE, DVALENCE, VALENCEL, T1U, V1U, T2U, V2U, T1D, V1D, T2D, V2D, T1L, V1L, T2L, V2L
+
     // Singlet
     _rules[GLUON]  = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1},
       {PGGQED, GLUON, eSigma2}, {PGGMQED, GAMMA, eSigma2}, {PGQQED, SIGMA, etap}, {PGQQED, DSIGMA, etap}
@@ -31,11 +35,11 @@ namespace apfel
     };
     _rules[SIGMA]  = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1},
       {PQGQED, GLUON, 2. * eSigma2}, {PQGMQED, GAMMA, 2. * eSigma2},
-      {PQQQED, SIGMA,  etap * eSigma2 / nf}, {PNSPQED, SIGMA,  etap * ( 1 - eSigma2 / nf )},
-      {PQQQED, DSIGMA, etam * eSigma2 / nf}, {PNSPQED, DSIGMA, etam * ( 1 - eSigma2 / nf )},
+      {PQQQED, SIGMA,  etap * eSigma2 / nf}, {PNSPQED, SIGMA,  etap - etap * eSigma2 / nf},
+      {PQQQED, DSIGMA, etam * eSigma2 / nf}, {PNSPQED, DSIGMA, etam - etam * eSigma2 / nf},
       {PQLQED, SIGMAL, 2. * eSigma2}
     };
-    _rules[DSIGMA] = { {PQG, GLUON, dnfrel}, {PQQ, SIGMA, dnfrel}, {PNSP, SIGMA, - dnfrel}, {PQQ, DSIGMA, 1},
+    _rules[DSIGMA] = { {PQG, GLUON, dnfrel}, {PQQ, SIGMA, dnfrel}, {PNSP, SIGMA, - dnfrel}, {PNSP, DSIGMA, 1},
       {PQGQED, GLUON, 2. * dSigma2}, {PQGMQED, GAMMA, 2. * dSigma2},
       {PQQQED, SIGMA,  etap * dSigma2 / nf}, {PNSPQED, SIGMA,  etam - etap * dSigma2 / nf},
       {PQQQED, DSIGMA, etam * dSigma2 / nf}, {PNSPQED, DSIGMA, etap - etam * dSigma2 / nf},
@@ -43,7 +47,7 @@ namespace apfel
     };
     _rules[SIGMAL] = { {PLGMQED, GAMMA, 2. * nl}, {PQLQED, SIGMA,  2. * nl * etap}, {PQLQED, DSIGMA, 2. * nl * etam}, {PLLQED, SIGMAL, 1} };
 
-    // Coupled non-singlet
+    // Coupled total valences
     _rules[VALENCE]  = { {PNSV, VALENCE, 1},
       {PNSMQED, VALENCE, etap}, {PNSMQED, DVALENCE, etam}
     };
@@ -51,32 +55,45 @@ namespace apfel
       {PNSMQED, VALENCE, etam}, {PNSMQED, DVALENCE, etap}
     };
 
-    // Lepton non-singlet
-    _rules[VALENCEL] =  { {PNSMQED, VALENCEL, 1} };
+    // Lepton total valence
+    _rules[VALENCEL] = { {PNSMQED, VALENCEL, 1} };
 
-    /*
-        for (int j = nf + 1; j <= 6; j++)
-          _rules[GLUON].push_back({PGQ, 2 * j - 1, 6. / j / ( j - 1 )});
-
-        _rules[SIGMA]   = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
-        for (int j = nf + 1; j <= 6; j++)
-          _rules[SIGMA].push_back({PQQ, 2 * j - 1, 6. / j / ( j - 1 )});
-
-        _rules[VALENCE] = { {PNSV, VALENCE, 1} };
-
-        for (int i = 2; i <= nf; i++)
+    // Non-singlet distributions
+    for (int i = 0; i < 2; i++)
+      {
+        // Up-type
+        if (nu > i + 1)
           {
-            _rules[2 * i - 1] = { {PNSP, 2 * i - 1, 1} };
-            _rules[2 * i]     = { {PNSM, 2 * i,     1} };
+            _rules[8 + 2 * i]     = { {PNSP, 8 + 2 * i,     1}, {PNSPQED, 8 + 2 * i,     eu2} };
+            _rules[8 + 2 * i + 1] = { {PNSM, 8 + 2 * i + 1, 1}, {PNSMQED, 8 + 2 * i + 1, eu2} };
           }
-
-        for (int i = nf + 1; i <= 6; i++)
+        else
           {
-            _rules[2 * i - 1] = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1} };
-            for (int j = nf + 1; j <= 6; j++)
-              _rules[2 * i - 1].push_back({PQQ, 2 * j - 1, 6. / j / ( j - 1 )});
-            _rules[2 * i] = { {PNSV, 2 * i, 1} };
+            _rules[8 + 2 * i]     = ( _rules[SIGMA]   + _rules[DSIGMA]   ) / 2.;
+            _rules[8 + 2 * i + 1] = ( _rules[VALENCE] + _rules[DVALENCE] ) / 2.;
           }
-    */
+        // Down-type
+        if (nd > i + 1)
+          {
+            _rules[12 + 2 * i]     = { {PNSP, 12 + 2 * i,     1}, {PNSPQED, 12 + 2 * i,     eu2} };
+            _rules[12 + 2 * i + 1] = { {PNSM, 12 + 2 * i + 1, 1}, {PNSMQED, 12 + 2 * i + 1, eu2} };
+          }
+        else
+          {
+            _rules[12 + 2 * i]     = ( _rules[SIGMA]   - _rules[DSIGMA]   ) / 2.;
+            _rules[12 + 2 * i + 1] = ( _rules[VALENCE] - _rules[DVALENCE] ) / 2.;
+          }
+        // Leptons
+        if (nl > i + 1)
+          {
+            _rules[16 + 2 * i]     = { {PNSPQED, 16 + 2 * i,     1} };
+            _rules[16 + 2 * i + 1] = { {PNSMQED, 16 + 2 * i + 1, 1} };
+          }
+        else
+          {
+            _rules[16 + 2 * i]     = _rules[SIGMAL];
+            _rules[16 + 2 * i + 1] = _rules[VALENCEL];
+          }
+      }
   }
 }

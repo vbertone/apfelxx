@@ -36,6 +36,16 @@ namespace apfel
         if (r.coefficient != coefficient) return false;
         return true;
       }
+      rule& operator *= (double const& s)
+      {
+        coefficient *= s;
+        return *this;
+      }
+      rule& operator /= (double const& s)
+      {
+        coefficient /= s;
+        return *this;
+      }
     };
 
     /**
@@ -100,4 +110,18 @@ namespace apfel
    * @brief Method which prints ConvolutionMap with cout <<.
    */
   std::ostream& operator << (std::ostream& os, ConvolutionMap const& cm);
+
+  /**
+   * @name Ternary operators on ConvolutionMap::rule objects
+   */
+  ///@{
+  ConvolutionMap::rule operator * (double const& s, ConvolutionMap::rule rhs);
+  ConvolutionMap::rule operator * (ConvolutionMap::rule lhs, double const& s);
+  ConvolutionMap::rule operator / (ConvolutionMap::rule lhs, double const& s);
+  std::vector<ConvolutionMap::rule> operator + (std::vector<ConvolutionMap::rule> lhs, std::vector<ConvolutionMap::rule> rhs);
+  std::vector<ConvolutionMap::rule> operator - (std::vector<ConvolutionMap::rule> lhs, std::vector<ConvolutionMap::rule> rhs);
+  std::vector<ConvolutionMap::rule> operator * (double const& s, std::vector<ConvolutionMap::rule> lhs);
+  std::vector<ConvolutionMap::rule> operator * (std::vector<ConvolutionMap::rule> lhs, double const& s);
+  std::vector<ConvolutionMap::rule> operator / (std::vector<ConvolutionMap::rule> lhs, double const& s);
+  ///@}
 }

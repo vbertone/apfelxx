@@ -77,6 +77,24 @@ namespace apfel
   std::vector<double> ConcatenateAndSortVectors(std::vector<double> const& v1, std::vector<double> const& v2);
 
   /**
+   * @brief Template utility function that returns the even entries of
+   * the input vector.
+   * @param v: input vector
+   * @return a std::vector containing the even entries of the input vector.
+   */
+  template<typename T>
+  std::vector<T> EvenVector(std::vector<T> const& v);
+
+  /**
+   * @brief Template utility function that returns the odd entries of
+   * the input vector.
+   * @param v: input vector
+   * @return a std::vector containing the odd entries of the input vector.
+   */
+  template<typename T>
+  std::vector<T> OddVector(std::vector<T> const& v);
+
+  /**
    * @brief Absolute value of the object T. In the case of a
    * Distribution, this is computed like the squared mean average of
    * the entries of the joint grid. In the case of a set of
