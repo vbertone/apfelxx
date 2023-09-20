@@ -87,7 +87,7 @@ namespace apfel
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl_3  = dl_2 * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
@@ -96,7 +96,7 @@ namespace apfel
   }
   double C22nsp::Singular(double const& x) const
   {
-    double const dl1    = log(1-x);
+    double const dl1    = log(1 - x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
     double const c2ns2b =
@@ -106,7 +106,7 @@ namespace apfel
   }
   double C22nsp::Local(double const& x) const
   {
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     double const dl1_4 = dl1_3 * dl1;
@@ -126,7 +126,7 @@ namespace apfel
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl_3  = dl_2 * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
@@ -135,7 +135,7 @@ namespace apfel
   }
   double C22nsm::Singular(double const& x) const
   {
-    double const dl1    = log(1-x);
+    double const dl1    = log(1 - x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
     double const c2ns2b =
@@ -145,7 +145,7 @@ namespace apfel
   }
   double C22nsm::Local(double const& x) const
   {
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     double const dl1_4 = dl1_3 * dl1;
@@ -164,7 +164,7 @@ namespace apfel
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl_3  = dl_2 * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
@@ -181,7 +181,7 @@ namespace apfel
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl_3  = dl_2 * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
@@ -203,7 +203,7 @@ namespace apfel
   {
     double const dl    = log(x);
     double const dl_2  = dl * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     return
       - 40.41 + 97.48 * x + ( 26.56 * x - 0.031 ) * dl_2 - 14.85 * dl + 13.62 * dl1_2 - 55.79 * dl1 - 150.5 * dl * dl1
@@ -224,7 +224,7 @@ namespace apfel
   {
     double const dl    = log(x);
     double const dl_2  = dl * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     return
       - 52.27 + 100.8 * x + ( 23.29 * x - 0.043 ) * dl_2 - 22.21 * dl + 13.30 * dl1_2 - 59.12 * dl1 - 141.7 * dl * dl1
@@ -244,7 +244,7 @@ namespace apfel
   {
     double const dl   = log(x);
     double const dl_2 = dl * dl;
-    double const dl1  = log(1-x);
+    double const dl1  = log(1 - x);
     double const omx  = 1 - x;
     double const omx2 = omx * omx;
     double const omx3 = omx2 * omx;
@@ -261,7 +261,7 @@ namespace apfel
   {
     double const dl    = log(x);
     double const dl_2  = dl * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const omx   = 1 - x;
     return
@@ -279,7 +279,7 @@ namespace apfel
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl_3  = dl_2 * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
@@ -288,7 +288,7 @@ namespace apfel
   }
   double C32nsp::Singular(double const& x) const
   {
-    double const dl1    = log(1-x);
+    double const dl1    = log(1 - x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
     double const c3ns2b =
@@ -298,7 +298,7 @@ namespace apfel
   }
   double C32nsp::Local(double const& x) const
   {
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     double const dl1_4 = dl1_3 * dl1;
@@ -318,7 +318,7 @@ namespace apfel
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl_3  = dl_2 * dl;
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
@@ -327,7 +327,7 @@ namespace apfel
   }
   double C32nsm::Singular(double const& x) const
   {
-    double const dl1    = log(1-x);
+    double const dl1    = log(1 - x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
     double const c3ns2b =
@@ -337,7 +337,7 @@ namespace apfel
   }
   double C32nsm::Local(double const& x) const
   {
-    double const dl1   = log(1-x);
+    double const dl1   = log(1 - x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     double const dl1_4 = dl1_3 * dl1;
@@ -384,14 +384,11 @@ namespace apfel
   }
   double C23nsp::Singular(double const& x) const
   {
-    // The first term of "c2ns3b" (1536. * d81 * dl15) is numerically
-    // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0. This should have no impact in that at x->1 the
-    // singular function multiplies something that tends to zero (plus
-    // presciption).
-    if (x > 1 - eps8)
-      return 0;
-    const double dl1  = log(1-x);
+    // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
+    // too divergent as x -> 1. Therefore, if x is close enough to 1,
+    // freeze its value.
+    const double xe   = std::min(x, 1 - eps10);
+    const double dl1  = log(1 - xe);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
     const double dl14 = dl1 * dl13;
@@ -401,11 +398,11 @@ namespace apfel
       + 1536. * d81 * dl15 - 16320. * d81 * dl14 + 5.01099e+2 * dl13 + 1.17154e+3 * dl12 - 7.32845e+3 * dl1 + 4.44276e+3
       + _nf * ( 640. * d81 * dl14 - 6592. * d81 * dl13 + 220.573 * dl12 + 294.906 * dl1 - 729.359 )
       + _nf * _nf * ( 64. * d81 * dl13 - 464. * d81 * dl12 + 7.67505 * dl1 + 1.00830 );
-    return c2ns3b / ( 1 - x );
+    return c2ns3b / ( 1 - xe );
   }
   double C23nsp::Local(double const& x) const
   {
-    const double dl1  = log(1-x);
+    const double dl1  = log(1 - x);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
     const double dl14 = dl1 * dl13;
@@ -474,14 +471,11 @@ namespace apfel
   }
   double C23nsm::Singular(double const& x) const
   {
-    // The first term of "c2ns3b" (1536. * d81 * dl15) is numerically
-    // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0. This should have no impact in that at x->1 the
-    // singular function multiplies something that tends to zero (plus
-    // presciption).
-    if (x > 1 - eps8)
-      return 0;
-    const double dl1  = log(1-x);
+    // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
+    // too divergent as x -> 1. Therefore, if x is close enough to 1,
+    // freeze its value.
+    const double xe   = std::min(x, 1 - eps10);
+    const double dl1  = log(1 - xe);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
     const double dl14 = dl1 * dl13;
@@ -491,11 +485,11 @@ namespace apfel
       + 1536. * d81 * dl15 - 16320. * d81 * dl14 + 5.01099e+2 * dl13 + 1.17154e+3 * dl12 - 7.32845e+3 * dl1 + 4.44276e+3
       + _nf * ( 640. * d81 * dl14 - 6592. * d81 * dl13 + 220.573 * dl12 + 294.906 * dl1 - 729.359 )
       + _nf * _nf * ( 64. * d81 * dl13 - 464. * d81 * dl12 + 7.67505 * dl1 + 1.00830 );
-    return c2ns3b / ( 1 - x );
+    return c2ns3b / ( 1 - xe );
   }
   double C23nsm::Local(double const& x) const
   {
-    const double dl1  = log(1-x);
+    const double dl1  = log(1 - x);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
     const double dl14 = dl1 * dl13;
@@ -603,7 +597,7 @@ namespace apfel
     const double dl    = log(x);
     const double dl2   = dl * dl;
     const double dl3   = dl * dl2;
-    const double dl1   = log(1-x);
+    const double dl1   = log(1 - x);
     const double dl12  = dl1 * dl1;
     const double dl13  = dl1 * dl12;
     const double dl14  = dl1 * dl13;
@@ -784,13 +778,10 @@ namespace apfel
   double C33nsp::Singular(double const& x) const
   {
     // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
-    // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0. This should have no impact in that at x->1 the
-    // singular function multiplies something that tends to zero (plus
-    // presciption).
-    if (x > 1 - eps8)
-      return 0;
-    const double dl1  = log(1 - x);
+    // too divergent as x -> 1. Therefore, if x is close enough to 1,
+    // freeze its value.
+    const double xe   = std::min(x, 1 - eps10);
+    const double dl1  = log(1 - xe);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
     const double dl14 = dl1 * dl13;
@@ -800,7 +791,7 @@ namespace apfel
       + 1536. * d81 * dl15 - 16320. * d81 * dl14 + 5.01099e+2 * dl13 + 1.17154e+3 * dl12 - 7.32845e+3 * dl1 + 4.44276e+3
       + _nf * ( 640. * d81 * dl14 - 6592. * d81 * dl13  + 220.573 * dl12 + 294.906 * dl1 - 729.359 )
       + _nf * _nf * ( 64. * d81 * dl13 - 464. * d81 * dl12 + 7.67505 * dl1 + 1.00830 );
-    return c3ns3b / ( 1 - x );
+    return c3ns3b / ( 1 - xe );
   }
   double C33nsp::Local(double const& x) const
   {
@@ -854,13 +845,10 @@ namespace apfel
   double C33nsm::Singular(double const& x) const
   {
     // The first term of "c3ns3b" (1536. * d81 * dl15) is numerically
-    // too divergent as x->1. Therefore if x is close enough to 1
-    // return 0. This should have no impact in that at x->1 the
-    // singular function multiplies something that tends to zero (plus
-    // presciption).
-    if (x > 1 - eps8)
-      return 0;
-    const double dl1  = log(1 - x);
+    // too divergent as x -> 1. Therefore, if x is close enough to 1,
+    // freeze its value.
+    const double xe   = std::min(x, 1 - eps10);
+    const double dl1  = log(1 - xe);
     const double dl12 = dl1 * dl1;
     const double dl13 = dl1 * dl12;
     const double dl14 = dl1 * dl13;
@@ -870,7 +858,7 @@ namespace apfel
       + 1536. * d81 * dl15 - 16320. * d81 * dl14 + 5.01099e+2 * dl13 + 1.17154e+3 * dl12 - 7.32845e+3 * dl1 + 4.44276e+3
       + _nf * ( 640. * d81 * dl14 - 6592. * d81 * dl13  + 220.573 * dl12 + 294.906 * dl1 - 729.359 )
       + _nf * _nf * ( 64. * d81 * dl13 - 464. * d81 * dl12 + 7.67505 * dl1 + 1.00830 );
-    return c3ns3b / ( 1 - x );
+    return c3ns3b / ( 1 - xe );
   }
   double C33nsm::Local(double const& x) const
   {
