@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['zero_2dmass_20coefficient_20functions_20for_20longitudinally_20polarised_20dis_0',['Zero-mass coefficient functions for longitudinally polarised DIS',['../group__NCMasslesspol.html',1,'']]],
-  ['zero_2dmass_20coefficient_20functions_20for_20unpolarised_20dis_1',['Zero-mass coefficient functions for unpolarised DIS',['../group__NCMassless.html',1,'']]],
-  ['zero_2dmass_20coefficient_20functions_20for_20unpolarised_20sia_2',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]]
+  ['of_20the_20massive_20neutral_20current_20coefficient_20functions_0',['Massless limit of the massive neutral current coefficient functions',['../group__NCMassiveZero.html',1,'']]],
+  ['orders_1',['Perturbative orders',['../group__PertOrds.html',1,'']]]
 ];

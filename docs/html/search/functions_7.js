@@ -26,7 +26,7 @@ var searchData=
   ['getdistributionjointgrid_23',['GetDistributionJointGrid',['../classapfel_1_1Interpolator.html#a078f10bda759e56e8bbcd58109a1b212',1,'apfel::Interpolator']]],
   ['getdistributionsubgrid_24',['GetDistributionSubGrid',['../classapfel_1_1Interpolator.html#afc4830a08ec67c046b3d98237a271e76',1,'apfel::Interpolator']]],
   ['getfqgrid_25',['GetFQGrid',['../classapfel_1_1QGrid.html#a22ac60af91b748ae4a05bbf6e81699e5',1,'apfel::QGrid']]],
-  ['getgrid_26',['GetGrid',['../classapfel_1_1SubGrid.html#ad014d9522695202016f8fc56a858ba57',1,'apfel::SubGrid::GetGrid()'],['../classapfel_1_1Operator.html#a80f6e9dc8055f27d5a394f53c4702d30',1,'apfel::Operator::GetGrid()'],['../classapfel_1_1Interpolator.html#ae8b3566a6d33d4df59d6acc91a3b7e58',1,'apfel::Interpolator::GetGrid()']]],
+  ['getgrid_26',['getgrid',['../classapfel_1_1SubGrid.html#ad014d9522695202016f8fc56a858ba57',1,'apfel::SubGrid::GetGrid()'],['../classapfel_1_1Operator.html#a80f6e9dc8055f27d5a394f53c4702d30',1,'apfel::Operator::GetGrid()'],['../classapfel_1_1Interpolator.html#ae8b3566a6d33d4df59d6acc91a3b7e58',1,'apfel::Interpolator::GetGrid()']]],
   ['getintegrationaccuracy_27',['GetIntegrationAccuracy',['../classapfel_1_1Operator.html#a0d185d01ae0703325751a2d68193f127',1,'apfel::Operator']]],
   ['getjointgrid_28',['GetJointGrid',['../classapfel_1_1Grid.html#aed0d5250009e0780dd2bcd4364adb143',1,'apfel::Grid']]],
   ['getloggrid_29',['GetLogGrid',['../classapfel_1_1SubGrid.html#a64b7f890117b84056d08bbfa02f98809',1,'apfel::SubGrid']]],
@@ -47,11 +47,11 @@ var searchData=
   ['getsubgrids_44',['GetSubGrids',['../classapfel_1_1Grid.html#a4eb3c2f2d6dd988b99dbbc6642a68910',1,'apfel::Grid']]],
   ['getterms_45',['GetTerms',['../classapfel_1_1DoubleObject.html#a06d84ec044ce1cb4124e525924db9837',1,'apfel::DoubleObject']]],
   ['getthesholdindices_46',['GetThesholdIndices',['../classapfel_1_1QGrid.html#a816f50918b1deea4abeb17edfcbb3551',1,'apfel::QGrid']]],
-  ['getthresholds_47',['GetThresholds',['../classapfel_1_1QGrid.html#a28267a0d581baf893a98ea9db4dc05a6',1,'apfel::QGrid::GetThresholds()'],['../classapfel_1_1MatchedEvolution.html#a43bf45bd6994f7e713365df1b3f96111',1,'apfel::MatchedEvolution::GetThresholds()']]],
+  ['getthresholds_47',['getthresholds',['../classapfel_1_1MatchedEvolution.html#a43bf45bd6994f7e713365df1b3f96111',1,'apfel::MatchedEvolution::GetThresholds()'],['../classapfel_1_1QGrid.html#a28267a0d581baf893a98ea9db4dc05a6',1,'apfel::QGrid::GetThresholds()']]],
   ['getverbositylevel_48',['GetVerbosityLevel',['../namespaceapfel.html#a72b6a7944341cd1a463f55c3330eeb82',1,'apfel']]],
   ['getweights_49',['GetWeights',['../classapfel_1_1OgataQuadrature.html#ada3be635e1013ef0986af1bfdf554035',1,'apfel::OgataQuadrature']]],
   ['gl1ns_50',['GL1ns',['../classapfel_1_1GL1ns.html#ab7e667c605f79b7483d5798811392e5a',1,'apfel::GL1ns']]],
   ['gluonanalyticevolutionfactor_51',['GluonAnalyticEvolutionFactor',['../namespaceapfel.html#a0314854b12a956e78b3cd97298b55f7e',1,'apfel']]],
-  ['gluonevolutionfactor_52',['GluonEvolutionFactor',['../namespaceapfel.html#a883569daa50baa1736d1b740452880be',1,'apfel::GluonEvolutionFactor(std::map&lt; int, GtmdObjects &gt; const &amp;GtmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)'],['../namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f',1,'apfel::GluonEvolutionFactor(std::map&lt; int, TmdObjects &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)']]],
+  ['gluonevolutionfactor_52',['gluonevolutionfactor',['../namespaceapfel.html#a883569daa50baa1736d1b740452880be',1,'apfel::GluonEvolutionFactor(std::map&lt; int, GtmdObjects &gt; const &amp;GtmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)'],['../namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f',1,'apfel::GluonEvolutionFactor(std::map&lt; int, TmdObjects &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)']]],
   ['grid_53',['Grid',['../classapfel_1_1Grid.html#a8d0a7149e5dda7870cc7a7a9f312ef61',1,'apfel::Grid']]]
 ];

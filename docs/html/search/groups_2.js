@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['evolution_20convolution_20maps_0',['Evolution convolution maps',['../group__EvolBases.html',1,'']]],
-  ['evolution_20convolution_20maps_20in_20the_20plus_2dminus_20basis_1',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]]
+  ['diagonal_20convolution_20maps_0',['Diagonal convolution maps',['../group__DiagonalBasis.html',1,'']]],
+  ['dis_1',['dis',['../group__NCMasslesspol.html',1,'Zero-mass coefficient functions for longitudinally polarised DIS'],['../group__NCMassless.html',1,'Zero-mass coefficient functions for unpolarised DIS']]],
+  ['dis_20convolution_20maps_2',['DIS convolution maps',['../group__DISBases.html',1,'']]]
 ];

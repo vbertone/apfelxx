@@ -75,7 +75,7 @@ namespace apfel
     for (int isg = 0; isg < (int) _nQg.size() - 1; isg++)
       {
         if (_nQg[isg+1] - _nQg[isg] < 2)
-          _nQg[isg+1]  = _nQg[isg] + 2;
+          _nQg[isg+1] = _nQg[isg] + 2;
         if (_nQg[isg+1] - _nQg[isg] < _InterDegree + 2)
           _InterDegree = _nQg[isg+1] - _nQg[isg] - 1;
       }
@@ -102,10 +102,10 @@ namespace apfel
     // Displace slightly the values below and above the thresholds
     for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
       {
-        _Qg[_nQg[isg]-1] *= 1 - eps12;
-        _Qg[_nQg[isg]]   *= 1 + eps12;
-        _fQg[_nQg[isg]-1] = TabFunc(_Qg[_nQg[isg]-1]);
-        _fQg[_nQg[isg]]   = TabFunc(_Qg[_nQg[isg]]);
+        _Qg[_nQg[isg] - 1]  *= 1 - eps12;
+        _Qg[_nQg[isg]]      *= 1 + eps12;
+        _fQg[_nQg[isg] - 1]  = TabFunc(_Qg[_nQg[isg] - 1]);
+        _fQg[_nQg[isg]]      = TabFunc(_Qg[_nQg[isg]]);
       }
   }
 

@@ -1062,7 +1062,7 @@ namespace apfel
         const double b2   = beta2qcd(nf) / beta0qcd(nf);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
         return cp4 * sf.at(3) + ( cp3 - 3 * cp4 * blx ) * sf.at(2) + ( cp2 - 2 * cp3 * blx + cp4 * ( - 2 * b1 * blx + 3 * blx2 ) ) * sf.at(1)
-        + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) + cp4 * ( - b2 * blx + 5 * b1 * blx2 / 2 - blx3 ) ) * sf.at(0);
+                       + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) + cp4 * ( - b2 * blx + 5 * b1 * blx2 / 2 - blx3 ) ) * sf.at(0);
       };
     else
       throw std::runtime_error(error("SplittingFunctions","Perturbative order not allowed."));
