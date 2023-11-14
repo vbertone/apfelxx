@@ -2162,7 +2162,7 @@ namespace apfel
 	    Cfv[0] = [=] (double const& Q) -> Set<Operator> { return FObj(Q, Couplings(Q)).C0.at(k); };
 	    DistFv[0] = [=, &g] (double const& Q) -> Set<Distribution>
 	      {
-		return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, xiF * Q, skip)};
+	        return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, xiF * Q, skip)};
 	      };
 
 	    // NLO
@@ -2172,8 +2172,12 @@ namespace apfel
 		DistFv[1] = [=, &g] (double const& Q) -> Set<Distribution>
 		  {
 		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
-		    const Set<Operator> D1 = ( - tF * Alphas(xiR * Q) / FourPi )  * FObjQ.P.SplittingFunctions.at(0);
-		    return Set<Distribution>{FObjQ.ConvBasis.at(k), (D1 * Set<Distribution>{D1.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
+		    const double cp = Alphas(xiR * Q) / FourPi;
+		    const ConvolutionMap CMap = FObjQ.P.SplittingFunctions.at(0).GetMap();
+		    const Set<Distribution> F{CMap, DistributionMap(g, InDistFunc, xiF * Q)};
+                    const Set<Distribution> P0F = FObjQ.P.SplittingFunctions.at(0) * F;
+		    const Set<Distribution> D1  = ( - cp * tF ) * P0F;
+		    return Set<Distribution>{FObjQ.ConvBasis.at(k), D1.GetObjects()};
 		  };
 	      }
 
@@ -2190,11 +2194,13 @@ namespace apfel
 		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
 		    const double cp2 = pow(Alphas(xiR * Q) / FourPi, 2);
 		    const double b0  = beta0qcd(FObjQ.nf);
-		    const Set<Operator> P0   = FObjQ.P.SplittingFunctions.at(0);
-		    const Set<Operator> P1   = FObjQ.P.SplittingFunctions.at(1);
-		    const Set<Operator> P0P0 = P0 * P0;
-		    const Set<Operator> D2 = cp2 * ( ( - tF ) * P1 + pow(tF, 2) * ( P0P0 + b0 * P0 ) + ( - tF * tR * b0 ) * P0 );
-		    return Set<Distribution>{FObjQ.ConvBasis.at(k), (D2 * Set<Distribution>{D2.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
+		    const ConvolutionMap CMap = FObjQ.P.SplittingFunctions.at(0).GetMap();
+		    const Set<Distribution> F{CMap, DistributionMap(g, InDistFunc, xiF * Q)};
+		    const Set<Distribution> P0F   = FObjQ.P.SplittingFunctions.at(0) * F;
+		    const Set<Distribution> P1F   = FObjQ.P.SplittingFunctions.at(1) * F;
+		    const Set<Distribution> P0P0F = FObjQ.P.SplittingFunctions.at(0) * P0F;
+		    const Set<Distribution> D2    = cp2 * ( ( - tF ) * P1F + ( pow(tF, 2) / 2 ) * P0P0F + ( - tF * tR * b0 + pow(tF, 2) * b0 / 2 ) * P0F );
+		    return Set<Distribution>{FObjQ.ConvBasis.at(k), D2.GetObjects()};
 		  };
 	      }
 
@@ -2213,19 +2219,21 @@ namespace apfel
 		    const double cp3 = pow(Alphas(xiR * Q) / FourPi, 3);
 		    const double b0  = beta0qcd(FObjQ.nf);
 		    const double b1  = beta1qcd(FObjQ.nf);
-		    const Set<Operator> P0     = FObjQ.P.SplittingFunctions.at(0);
-		    const Set<Operator> P1     = FObjQ.P.SplittingFunctions.at(1);
-		    const Set<Operator> P2     = FObjQ.P.SplittingFunctions.at(1);
-		    const Set<Operator> P0P0   = P0 * P0;
-		    const Set<Operator> P0P0P0 = P0 * P0P0;
-		    const Set<Operator> P0P1   = 0.5 * ( P0 * P1 + P1 * P0 );
-		    const Set<Operator> D3 = cp3 * ( ( pow(tF, 2) * b1 / 2  - tF * tR * b1 - pow(tF, 3) * pow(b0, 2) / 3 + pow(tF, 2) * tR * pow(b0, 2) - tF * pow(tR, 2) * pow(b0, 2) ) * P0
-						     + ( pow(tF, 2) * b0 - 2 * tF * tR * b0 ) * P1
-						     + ( - tF ) * P2
-						     + ( - pow(tF, 3) / 2 * b0 + pow(tF, 2) * tR * b0 ) * P0P0
-						     + ( - pow(tF, 3) / 6 ) * P0P0P0
-						     + pow(tF, 2) * P0P1 );
-		    return Set<Distribution>{FObjQ.ConvBasis.at(k), (D3 * Set<Distribution>{D3.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
+		    const ConvolutionMap CMap = FObjQ.P.SplittingFunctions.at(0).GetMap();
+                    const Set<Distribution> F{CMap, DistributionMap(g, InDistFunc, xiF * Q)};
+		    const Set<Distribution> P0F     = FObjQ.P.SplittingFunctions.at(0) * F;
+		    const Set<Distribution> P1F     = FObjQ.P.SplittingFunctions.at(1) * F;
+		    const Set<Distribution> P2F     = FObjQ.P.SplittingFunctions.at(2) * F;
+		    const Set<Distribution> P0P0F   = FObjQ.P.SplittingFunctions.at(0) * P0F;
+		    const Set<Distribution> P0P0P0F = FObjQ.P.SplittingFunctions.at(0) * P0P0F;
+		    const Set<Distribution> P0P1F   = 0.5 * ( FObjQ.P.SplittingFunctions.at(0) * P1F + FObjQ.P.SplittingFunctions.at(1) * P0F );
+		    const Set<Distribution> D3      = cp3 * ( ( pow(tF, 2) * b1 / 2 - tF * tR * b1 - pow(tF, 3) * pow(b0, 2) / 3 + pow(tF, 2) * tR * pow(b0, 2) - tF * pow(tR, 2) * pow(b0, 2) ) * P0F
+							      + ( pow(tF, 2) * b0 - 2 * tF * tR * b0 ) * P1F
+							      + ( - tF ) * P2F
+							      + ( - pow(tF, 3) * b0 / 2 + pow(tF, 2) * tR * b0 ) * P0P0F
+							      + ( - pow(tF, 3) / 6 ) * P0P0P0F
+							      + pow(tF, 2) * P0P1F );
+		    return Set<Distribution>{FObjQ.ConvBasis.at(k), D3.GetObjects()};
 		  };
 	      }
 
