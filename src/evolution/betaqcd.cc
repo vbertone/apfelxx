@@ -24,7 +24,7 @@ namespace apfel
   //_________________________________________________________________________
   double beta2qcd(int const& nf)
   {
-    return 2857 * pow(CA,3) / 54
+    return 2857 * pow(CA, 3) / 54
            + ( 2 * CF * CF - 205 * CF * CA / 9 - 1415 * CA * CA / 27 ) * TR * nf
            + ( 44 * CF / 9 + 158 * CA / 27 ) * TR * TR * nf * nf;
   }

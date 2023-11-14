@@ -2094,6 +2094,148 @@ namespace apfel
         // Structure function index.
         const int k = it->first;
 
+        // Create Observable
+        Observable<> Obs{};
+
+	// Split the computation into different cases to avoid
+	// computing more convolutions than necessary.
+	if (xiF == 1)
+	  {
+	    // Declare and then allocate coefficient function
+	    // according to whether renormalisation-scale-variation
+	    // terms have to be included or not.
+	    std::function<Set<Operator>(double const&)> Cf;
+
+	    if (xiR == 1)
+	      Cf = [=] (double const& Q) -> Set<Operator>
+		{
+		  const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		  const double cp  = Alphas(Q) / FourPi;
+		  const double cp2 = cp * cp;
+		  const double cp3 = cp * cp2;
+		  Set<Operator> CoefFuncs = FObjQ.C0.at(k);
+		  if (PerturbativeOrder > 0)
+		    CoefFuncs += cp * FObjQ.C1.at(k);
+		  if (PerturbativeOrder > 1)
+		    CoefFuncs += cp2 * FObjQ.C2.at(k);
+		  if (PerturbativeOrder > 2)
+		    CoefFuncs += cp3 * FObjQ.C3.at(k);
+		  return CoefFuncs;
+		};
+	    else
+	      Cf = [=] (double const& Q) -> Set<Operator>
+		{
+		  const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		  const double cp  = Alphas(xiR * Q) / FourPi;
+		  const double cp2 = cp * cp;
+		  const double cp3 = cp * cp2;
+		  const double b0  = beta0qcd(FObjQ.nf);
+		  const double b1  = beta1qcd(FObjQ.nf);
+		  Set<Operator> CoefFuncs = FObjQ.C0.at(k);
+		  if (PerturbativeOrder > 0)
+		    CoefFuncs += cp * FObjQ.C1.at(k);
+		  if (PerturbativeOrder > 1)
+		    CoefFuncs += cp2 * ( FObjQ.C2.at(k) + ( tR * b0 ) * FObjQ.C1.at(k) );
+		  if (PerturbativeOrder > 2)
+		    CoefFuncs += cp3 * ( FObjQ.C3.at(k) + ( 2 * tR * b0 ) * FObjQ.C2.at(k) + ( tR * ( b1 + pow(b0, 2) * tR ) ) * FObjQ.C1.at(k) );
+		  return CoefFuncs;
+		};
+
+	    // Define distribution-function functions
+	    const auto DistF = [=, &g] (double const& Q) -> Set<Distribution>
+	      {
+		return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, xiF * Q, skip)};
+	      };
+
+	    // Add pair to the observable
+	    Obs.AddConvolutionPair(Cf, DistF);
+	  }
+	else
+	  {
+	    // Declare vectors of coefficient functions and PDFs, each
+	    // one having as many entried a perturbative orders
+	    // needed.
+	    std::vector<std::function<Set<Operator>(double const&)>> Cfv(PerturbativeOrder + 1);
+	    std::vector<std::function<Set<Distribution>(double const&)>> DistFv(PerturbativeOrder + 1);
+
+	    // LO
+	    Cfv[0] = [=] (double const& Q) -> Set<Operator> { return FObj(Q, Couplings(Q)).C0.at(k); };
+	    DistFv[0] = [=, &g] (double const& Q) -> Set<Distribution>
+	      {
+		return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, xiF * Q, skip)};
+	      };
+
+	    // NLO
+	    if (PerturbativeOrder > 0)
+	      {
+		Cfv[1] = [=] (double const& Q) -> Set<Operator> { return Alphas(xiR * Q) / FourPi * FObj(Q, Couplings(Q)).C1.at(k); };
+		DistFv[1] = [=, &g] (double const& Q) -> Set<Distribution>
+		  {
+		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		    const Set<Operator> D1 = ( - tF * Alphas(xiR * Q) / FourPi )  * FObjQ.P.SplittingFunctions.at(0);
+		    return Set<Distribution>{FObjQ.ConvBasis.at(k), (D1 * Set<Distribution>{D1.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
+		  };
+	      }
+
+	    // NNLO
+	    if (PerturbativeOrder > 1)
+	      {
+		Cfv[2] = [=] (double const& Q) -> Set<Operator>
+		  {
+		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		    return pow(Alphas(xiR * Q) / FourPi, 2) * ( FObjQ.C2.at(k) + ( tR * beta0qcd(FObjQ.nf) ) * FObjQ.C1.at(k) );
+		  };
+		DistFv[2] = [=, &g] (double const& Q) -> Set<Distribution>
+		  {
+		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		    const double cp2 = pow(Alphas(xiR * Q) / FourPi, 2);
+		    const double b0  = beta0qcd(FObjQ.nf);
+		    const Set<Operator> P0   = FObjQ.P.SplittingFunctions.at(0);
+		    const Set<Operator> P1   = FObjQ.P.SplittingFunctions.at(1);
+		    const Set<Operator> P0P0 = P0 * P0;
+		    const Set<Operator> D2 = cp2 * ( ( - tF ) * P1 + pow(tF, 2) * ( P0P0 + b0 * P0 ) + ( - tF * tR * b0 ) * P0 );
+		    return Set<Distribution>{FObjQ.ConvBasis.at(k), (D2 * Set<Distribution>{D2.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
+		  };
+	      }
+
+	    // NNNLO
+	    if (PerturbativeOrder > 2)
+	      {
+		Cfv[3] = [=] (double const& Q) -> Set<Operator>
+		  {
+		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		    return pow(Alphas(xiR * Q) / FourPi, 3) * ( FObjQ.C3.at(k) + ( 2 * tR * beta0qcd(FObjQ.nf) ) * FObjQ.C2.at(k)
+								+ ( tR * ( beta1qcd(FObjQ.nf) + pow(beta0qcd(FObjQ.nf), 2) * tR ) ) * FObjQ.C1.at(k) );
+		  };
+		DistFv[3] = [=, &g] (double const& Q) -> Set<Distribution>
+		  {
+		    const StructureFunctionObjects FObjQ = FObj(Q, Couplings(Q));
+		    const double cp3 = pow(Alphas(xiR * Q) / FourPi, 3);
+		    const double b0  = beta0qcd(FObjQ.nf);
+		    const double b1  = beta1qcd(FObjQ.nf);
+		    const Set<Operator> P0     = FObjQ.P.SplittingFunctions.at(0);
+		    const Set<Operator> P1     = FObjQ.P.SplittingFunctions.at(1);
+		    const Set<Operator> P2     = FObjQ.P.SplittingFunctions.at(1);
+		    const Set<Operator> P0P0   = P0 * P0;
+		    const Set<Operator> P0P0P0 = P0 * P0P0;
+		    const Set<Operator> P0P1   = 0.5 * ( P0 * P1 + P1 * P0 );
+		    const Set<Operator> D3 = cp3 * ( ( pow(tF, 2) * b1 / 2  - tF * tR * b1 - pow(tF, 3) * pow(b0, 2) / 3 + pow(tF, 2) * tR * pow(b0, 2) - tF * pow(tR, 2) * pow(b0, 2) ) * P0
+						     + ( pow(tF, 2) * b0 - 2 * tF * tR * b0 ) * P1
+						     + ( - tF ) * P2
+						     + ( - pow(tF, 3) / 2 * b0 + pow(tF, 2) * tR * b0 ) * P0P0
+						     + ( - pow(tF, 3) / 6 ) * P0P0P0
+						     + pow(tF, 2) * P0P1 );
+		    return Set<Distribution>{FObjQ.ConvBasis.at(k), (D3 * Set<Distribution>{D3.GetMap(), DistributionMap(g, InDistFunc, xiF * Q)}).GetObjects()};
+		  };
+	      }
+
+	    // Combine coefficient functions and PDFs
+	    for (int i = 0; i <= PerturbativeOrder; i++)
+	      for (int j = 0; j <= PerturbativeOrder - i; j++)
+		Obs.AddConvolutionPair(Cfv[i], DistFv[j]);
+	  }
+
+	/*
         // Define coefficient function functions that multiply F
         const auto Cf = [=] (double const& Q) -> Set<Operator>
         {
@@ -2118,7 +2260,7 @@ namespace apfel
         };
 
         // Create Observable
-        Observable<> Obs{Cf, DistF};
+        Obs.AddConvolutionPair(Cf, DistF);
 
         // Include scale variation terms if necessary, that is when
         // the perturbative order is higher than zero. In addition,
@@ -2186,7 +2328,7 @@ namespace apfel
                 Obs.AddConvolutionPair(CfP0P0, DistP0P0F);
               }
           }
-
+	*/
         // Finally insert Observable
         F.insert({k, Obs});
       }

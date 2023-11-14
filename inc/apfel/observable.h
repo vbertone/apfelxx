@@ -34,7 +34,10 @@ namespace apfel
       std::function<Set<T>(double const&)>        Objects;
     };
 
-    Observable() = delete;
+    /**
+     * @brief The Observable empty constructor.
+     */
+    Observable();
 
     /**
      * @brief The Observable constructor.

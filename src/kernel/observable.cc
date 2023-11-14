@@ -11,6 +11,12 @@ namespace apfel
 {
   //_____________________________________________________________________________
   template<class T>
+  Observable<T>::Observable()
+  {
+  }
+
+  //_____________________________________________________________________________
+  template<class T>
   Observable<T>::Observable(std::vector<ConvolutionPair> ConvPair):
     _ConvPair(ConvPair)
   {
