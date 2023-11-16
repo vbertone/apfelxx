@@ -411,18 +411,28 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO matching conditions (unknown so far thus set to zero)
+    // NLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNLO;
+    const Operator AS1HgL {g, AS1polHg_L{},  IntEps};
+    const Operator AS1ggHL{g, AS1polggH_L{}, IntEps};
+    const Operator AS1gH0 {g, AS1polgH_0{},  IntEps};
+    const Operator AS1gHL {g, AS1polgH_L{},  IntEps};
+    const Operator AS1HH0 {g, AS1polHH_0{},  IntEps};
+    const Operator AS1HHL {g, AS1polHH_L{},  IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nf] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf] * AS1HHL;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::M0, Zero});
-        OM.insert({MatchingBasisQCD::M1, Zero});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, Zero});
-        OM.insert({MatchingBasisQCD::M6, Zero});
+        OM.insert({MatchingBasisQCD::M1, AS1ggH});
+        OM.insert({MatchingBasisQCD::M2, AS1gH});
+        OM.insert({MatchingBasisQCD::M3, AS1gH});
+        OM.insert({MatchingBasisQCD::M4, AS1Hg});
+        OM.insert({MatchingBasisQCD::M5, AS1HH});
+        OM.insert({MatchingBasisQCD::M6, AS1HH});
         OM.insert({MatchingBasisQCD::M7, Zero});
         MatchNLO.insert({nf, OM});
       }

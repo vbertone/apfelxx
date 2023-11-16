@@ -71,6 +71,66 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  AS1polHg_L::AS1polHg_L():
+    Expression()
+  {
+  }
+  double AS1polHg_L::Regular(double const& x) const
+  {
+    return 4 * TR * ( 2 * x - 1 );
+  }
+
+  //_________________________________________________________________________________
+  AS1polggH_L::AS1polggH_L():
+    Expression()
+  {
+  }
+  double AS1polggH_L::Local(double const&) const
+  {
+    return - 4 * TR / 3.;
+  }
+
+  //_________________________________________________________________________________
+  AS1polHH_L::AS1polHH_L():
+    Expression()
+  {
+  }
+  double AS1polHH_L::Singular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(x, 2) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1polHH_0::AS1polHH_0():
+    Expression()
+  {
+  }
+  double AS1polHH_0::Singular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1polgH_L::AS1polgH_L():
+    Expression()
+  {
+  }
+  double AS1polgH_L::Regular(double const& x) const
+  {
+    return 2 * CF * ( 2 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1polgH_0::AS1polgH_0():
+    Expression()
+  {
+  }
+  double AS1polgH_0::Regular(double const& x) const
+  {
+    return 2 * CF * ( 2 - 2 * x - 2 * ( 2 - x ) * log(x) );
+  }
+
+  //_________________________________________________________________________________
   APS2Hq_0::APS2Hq_0():
     Expression()
   {
