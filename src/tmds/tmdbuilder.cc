@@ -2087,12 +2087,12 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&)> QuarkAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
-                                                                    double      const& mu0,
-                                                                    double      const& Alphas0,
-                                                                    double      const& kappa,
-                                                                    double      const& kappa0,
-                                                                    int         const& PerturbativeOrder)
+  std::function<double(double const&)> QuarkAnalyticEvolutionFactor(TmdObjects const& TmdObj,
+                                                                    double     const& mu0,
+                                                                    double     const& Alphas0,
+                                                                    double     const& kappa,
+                                                                    double     const& kappa0,
+                                                                    int        const& PerturbativeOrder)
   {
     // Useful definitions
     const double LQ   = log(kappa / kappa0);
@@ -2223,12 +2223,12 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&)> GluonAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
-                                                                    double      const& mu0,
-                                                                    double      const& Alphas0,
-                                                                    double      const& kappa,
-                                                                    double      const& kappa0,
-                                                                    int         const& PerturbativeOrder)
+  std::function<double(double const&)> GluonAnalyticEvolutionFactor(TmdObjects const& TmdObj,
+                                                                    double     const& mu0,
+                                                                    double     const& Alphas0,
+                                                                    double     const& kappa,
+                                                                    double     const& kappa0,
+                                                                    int        const& PerturbativeOrder)
   {
     // Useful definitions
     const double LQ   = log(kappa / kappa0);

@@ -16,16 +16,16 @@
 namespace apfel
 {
   /**
-   * @brief Enumerator for the jet algoritms fot the jet TMDs
+   * @brief Enumerator for the jet algoritms for the jet TMDs
    */
   enum JetAlgorithm: int {CONE = 0, KT = 1};
 
   /**
-   * @brief Structure that contains all the precomputed quantities
-   * needed to perform the TMD evolution, matching to the collinear
-   * PDFs, and computation of cross sections, i.e. perturbative
-   * coefficients of matching functions, all anomalous dimensions, and
-   * hard functions.
+   * @brief Structure that contains all precomputed quantities needed
+   * to perform the TMD evolution, matching to the collinear PDFs, and
+   * computation of cross sections, i.e. the perturbative coefficients
+   * of matching functions, all anomalous dimensions, and hard
+   * functions.
    */
   struct TmdObjects
   {
@@ -42,8 +42,8 @@ namespace apfel
 
   /**
    * @name TMD object initializers
-   * Collection of functions that initialise TmdObjects structure for
-   * the perturbartive evolution and matching currently available.
+   * Collection of functions that initialise a TmdObjects structure
+   * for the perturbartive evolution and the matching.
    */
   ///@{
   /**
@@ -123,7 +123,7 @@ namespace apfel
   /**
    * @name TMD builders
    * Collection of functions that build a TMD distributions (both PDFs
-   * and FF) as Set<Distribution>-valued functions. These functions
+   * and FFs) as Set<Distribution>-valued functions. These functions
    * perform evolution and matching either separately or alltogether.
    * Also a function for the computation of the hard factors is
    * provided.
@@ -365,12 +365,12 @@ namespace apfel
    * @param PerturbativeOrder: the logarithmic perturbative accuracy
    * @return the quark Sudakov form factor as function of the impact parameter b
    */
-  std::function<double(double const&)> QuarkAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
-                                                                    double      const& mu0,
-                                                                    double      const& Alphas0,
-                                                                    double      const& kappa,
-                                                                    double      const& kappa0,
-                                                                    int         const& PerturbativeOrder);
+  std::function<double(double const&)> QuarkAnalyticEvolutionFactor(TmdObjects const& TmdObj,
+                                                                    double     const& mu0,
+                                                                    double     const& Alphas0,
+                                                                    double     const& kappa,
+                                                                    double     const& kappa0,
+                                                                    int        const& PerturbativeOrder);
 
   /**
    * @brief Analytic evolution factor for the gluon TMD
@@ -382,12 +382,12 @@ namespace apfel
    * @param PerturbativeOrder: the logarithmic perturbative accuracy
    * @return the gluon Sudakov form factor as function of the impact parameter b
    */
-  std::function<double(double const&)> GluonAnalyticEvolutionFactor(TmdObjects  const& TmdObj,
-                                                                    double      const& mu0,
-                                                                    double      const& Alphas0,
-                                                                    double      const& kappa,
-                                                                    double      const& kappa0,
-                                                                    int         const& PerturbativeOrder);
+  std::function<double(double const&)> GluonAnalyticEvolutionFactor(TmdObjects const& TmdObj,
+                                                                    double     const& mu0,
+                                                                    double     const& Alphas0,
+                                                                    double     const& kappa,
+                                                                    double     const& kappa0,
+                                                                    int        const& PerturbativeOrder);
 
   /**
    * @brief Function that returns the perturbative part of the

@@ -4,6 +4,9 @@
 #include <pybind11/functional.h>
 #include <apfel/apfelxx.h>
 #include <apfel/betaqcd.h>
+#include <apfel/gammak.h>
+#include <apfel/gammaf.h>
+#include <apfel/kcs.h>
 
 namespace py = pybind11;
 using namespace pybind11::literals;
@@ -27,6 +30,15 @@ PYBIND11_MODULE(apfelpy, m)
 
   // betaQCD
   py::module_ _betaQCD = m.def_submodule("betaQCD", "Coefficients of the QCD beta function");
+
+  // Gamma cusp
+  py::module_ _gammaK = m.def_submodule("gammaK", "Coefficients of the QCD gamma cusp");
+
+  // Gamma non-cusp
+  py::module_ _gammaF = m.def_submodule("gammaF", "Coefficients of the QCD gamma non-cusp");
+
+  // Collins-Soper kernel
+  py::module_ _KCS = m.def_submodule("KCS", "Coefficients of the QCD Collins-Soper kernel");
 
   // Wrappers of "messages.h"
   m.def("SetVerbosityLevel", &apfel::SetVerbosityLevel, "vl"_a);
@@ -89,6 +101,32 @@ PYBIND11_MODULE(apfelpy, m)
   _betaQCD.def("beta1qcd", &apfel::beta1qcd, "nf"_a);
   _betaQCD.def("beta2qcd", &apfel::beta2qcd, "nf"_a);
   _betaQCD.def("beta3qcd", &apfel::beta3qcd, "nf"_a);
+
+  // Wrappers of "gammak.h"
+  _gammaK.def("gammaK0",    &apfel::gammaK0);
+  _gammaK.def("gammaK1",    &apfel::gammaK1,    "nf"_a);
+  _gammaK.def("gammaK2",    &apfel::gammaK2,    "nf"_a);
+  _gammaK.def("gammaK3",    &apfel::gammaK3,    "nf"_a);
+  _gammaK.def("gammaK3gmq", &apfel::gammaK3gmq, "nf"_a);
+
+  // Wrappers of "gammaf.h"
+  _gammaF.def("gammaFq0", &apfel::gammaFq0);
+  _gammaF.def("gammaFq1", &apfel::gammaFq1, "nf"_a);
+  _gammaF.def("gammaFq2", &apfel::gammaFq2, "nf"_a);
+  _gammaF.def("gammaFg0", &apfel::gammaFg0, "nf"_a);
+  _gammaF.def("gammaFg1", &apfel::gammaFg1, "nf"_a);
+  _gammaF.def("gammaFg2", &apfel::gammaFg2, "nf"_a);
+
+  // Wrappers of "kcs.h"
+  _KCS.def("KCS00", &apfel::KCS00);
+  _KCS.def("KCS01", &apfel::KCS01);
+  _KCS.def("KCS10", &apfel::KCS10, "nf"_a);
+  _KCS.def("KCS11", &apfel::KCS11, "nf"_a);
+  _KCS.def("KCS12", &apfel::KCS12, "nf"_a);
+  _KCS.def("KCS20", &apfel::KCS20, "nf"_a);
+  _KCS.def("KCS21", &apfel::KCS21, "nf"_a);
+  _KCS.def("KCS22", &apfel::KCS22, "nf"_a);
+  _KCS.def("KCS23", &apfel::KCS23, "nf"_a);
 
   // Wrappers of "lhtoypdfs.h"
   _utilities.def("LHToyPDFs", &apfel::LHToyPDFs, "x"_a, "Q"_a);
