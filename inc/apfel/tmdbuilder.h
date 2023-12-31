@@ -338,6 +338,27 @@ namespace apfel
                                                                                           double                               const& IntEps = 1e-7);
 
   /**
+   * @brief Function that returns the evolution factor for quarks with
+   * explicit dependence on the resummation-scale parameter.
+   * @param TmdObj: the TMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the logarithmic perturbative order
+   * @param xi: the resummation-scale parameter (default: 1)
+   * @param Ci: the initial scale-variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
+   * final rapidity scale &zeta;. It returns the quark evolution
+   * factor.
+   */
+  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactorxi(std::map<int, TmdObjects>            const& TmdObj,
+                                                                                            std::function<double(double const&)> const& Alphas,
+                                                                                            int                                  const& PerturbativeOrder,
+                                                                                            double                               const& xi = 1,
+                                                                                            double                               const& Ci = 1,
+                                                                                            double                               const& IntEps = 1e-7);
+
+  /**
    * @brief Function that returns the evolution factor for the gluon.
    * @param TmdObj: the TMD objects
    * @param Alphas: the strong coupling function
