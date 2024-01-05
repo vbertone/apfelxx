@@ -69,7 +69,7 @@ endif(LHAPDF_CONFIG)
 configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_DIR}/inc/apfel/config.h")
 
 # pybind11
-cmake_policy(SET CMP0148 OLD)
+#cmake_policy(SET CMP0148 OLD)
 find_package(pybind11 QUIET)
 if (pybind11_FOUND)
    pybind11_add_module(apfelpy pywrap/pywrap.cc)
