@@ -1,0 +1,3 @@
+#pragma once
+
+#define WITH_LHAPDF @WITH_LHAPDF@

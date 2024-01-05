@@ -21,6 +21,7 @@
 #include "apfel/timer.h"
 #include "apfel/tools.h"
 #include "apfel/version.h"
+#include "apfel/config.h"
 
 /**
  * @brief Basic objects

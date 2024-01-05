@@ -7,7 +7,7 @@
 #include "apfel/initialiseevolution.h"
 #include "apfel/grid.h"
 #include "apfel/messages.h"
-#include "apfel/alphaqcd.h"
+#include "apfel/alphaqcdxi.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/constants.h"
 #include "apfel/rotations.h"
@@ -53,7 +53,7 @@ namespace apfel
     if (_setup.Theory == EvolutionSetup::QCD)
       if (_setup.MassRenScheme == EvolutionSetup::POLE)
         {
-          AlphaQCD a{_setup.AlphaQCDRef, _setup.QQCDRef, _setup.Masses, _setup.Thresholds, _setup.PerturbativeOrder};
+          AlphaQCDxi a{_setup.AlphaQCDRef, _setup.QQCDRef, _setup.Masses, _setup.Thresholds, _setup.PerturbativeOrder, _setup.xi};
           const TabulateObject<double> Alphas{a, 2 * _setup.nQg, _setup.Qmin - 0.1, _setup.Qmax + 1, _setup.InterDegreeQ};
           _as = [=] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
         }
@@ -99,10 +99,10 @@ namespace apfel
     _KnotArray.clear();
 
     // Construct the Dglap object
-    std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as);
+    const std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as, _setup.xi);
 
     // Tabulate distributions
-    _TabulatedDists = std::unique_ptr<const TabulateObject<Set<Distribution>>>(new TabulateObject<Set<Distribution>> {*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ});
+    _TabulatedDists = std::unique_ptr<const TabulateObject<Set<Distribution>>>(new const TabulateObject<Set<Distribution>> {*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ});
 
     // Get Q-grid from the tabulated object
     const std::vector<double> qg = _TabulatedDists->GetQGrid();
@@ -377,8 +377,8 @@ namespace apfel
         passed = false;
       }
 
-    // Check renormalisarion / factorisation scale ratio
-    if (_setup.RenFacRatio <= 0)
+    // Check renormalisation / factorisation scale ratio (resummation-scale parameter)
+    if (_setup.xi <= 0)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The ratio between renormalisation and factorisation scales cannot be negative.") << std::endl;
         passed = false;
@@ -459,8 +459,8 @@ namespace apfel
       report += "Truncated";
     report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
 
-    // Ren. / fact. scales ratio
-    report += "- muR / mF: " + std::to_string(_setup.RenFacRatio) + "\n";
+    // Resummation-scale parameter
+    report += "- xi (resummation scale): " + std::to_string(_setup.xi) + "\n";
 
     // Heavy-quark masses and thresholds
     std::vector<std::string> Thq{"mud", "muu", "mus", "muc", "mub", "mut"};
