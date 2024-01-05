@@ -5,6 +5,7 @@ jobs:
   build:
     machine:
       image: ubuntu-2204:2023.10.1
+      resource_class: arm.medium
     steps:
       - checkout
       - run: sudo apt-get update
