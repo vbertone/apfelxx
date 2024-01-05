@@ -172,8 +172,7 @@ LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const& ev)
       // Fill in the flavour ID vector (use 21 for the gluon)
       if (data.setPids().empty())
         for (auto const& id : sg.second)
-          if (std::abs(id.first) <= (int) ev.GetEvolutionSetup().Thresholds.size())
-            data.setPids().push_back((id.first == 0 ? 21 : id.first));
+          data.setPids().push_back((id.first == 0 ? 21 : id.first));
     }
 
   // Set up the knots of the Knotarray
@@ -251,10 +250,11 @@ LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const& ev)
 
   // Set quark masses and thresholds
   const std::vector<std::string> Qnames{"Down", "Up", "Strange", "Charm", "Bottom", "Top"};
-  for (int iq = 0; iq < (int) ev.GetEvolutionSetup().Thresholds.size(); iq++)
+  const std::vector<double> trhs = ev.GetEvolutionSetup().Thresholds;
+  for (int iq = 0; iq < (int) Qnames.size(); iq++)
     {
-      dist->info().set_entry("M" + Qnames[iq], ev.GetEvolutionSetup().Thresholds[iq]);
-      dist->info().set_entry("Threshold" + Qnames[iq], ev.GetEvolutionSetup().Thresholds[iq]);
+      dist->info().set_entry("M" + Qnames[iq], (iq < (int) trhs.size() ? trhs[iq] : 1e8 + iq));
+      dist->info().set_entry("Threshold" + Qnames[iq], (iq < (int) trhs.size() ? trhs[iq] : 1e8 + iq));
     }
 
   // Return object
