@@ -9,6 +9,7 @@
 #include "apfel/evolutionsetup.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/dglapbuilder.h"
+#include "apfel/config.h"
 
 namespace apfel
 {
@@ -119,6 +120,12 @@ namespace apfel
      */
     TabulateObject<Set<Distribution>> TabulatedDistributions() const { return *_TabulatedDists; }
 
+    /**
+     * @brief Function that returns the EvolutionSetup object.
+     * @return the the _setup object
+     */
+    EvolutionSetup GetEvolutionSetup() const { return _setup; }
+
   private:
     EvolutionSetup                                           _setup;          //!< Evolution setup object
     bool                                                     _WriteGrid;      //!< Switch to write LHAPDF grids
@@ -165,7 +172,8 @@ LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const& ev)
       // Fill in the flavour ID vector (use 21 for the gluon)
       if (data.setPids().empty())
         for (auto const& id : sg.second)
-          data.setPids().push_back((id.first == 0 ? 21 : id.first));
+          if (std::abs(id.first) <= (int) ev.GetEvolutionSetup().Thresholds.size())
+            data.setPids().push_back((id.first == 0 ? 21 : id.first));
     }
 
   // Set up the knots of the Knotarray
@@ -232,6 +240,22 @@ LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const& ev)
 
   // Set alpha_s
   dist->setAlphaS(as);
+
+  // Set scale bounds
+  dist->info().set_entry("QMin", sqrt(data.q2s().front()));
+  dist->info().set_entry("QMax", sqrt(data.q2s().back()));
+
+  // Set x bounds
+  dist->info().set_entry("XMin", data.xs().front());
+  dist->info().set_entry("XMax", data.xs().back());
+
+  // Set quark masses and thresholds
+  const std::vector<std::string> Qnames{"Down", "Up", "Strange", "Charm", "Bottom", "Top"};
+  for (int iq = 0; iq < (int) ev.GetEvolutionSetup().Thresholds.size(); iq++)
+    {
+      dist->info().set_entry("M" + Qnames[iq], ev.GetEvolutionSetup().Thresholds[iq]);
+      dist->info().set_entry("Threshold" + Qnames[iq], ev.GetEvolutionSetup().Thresholds[iq]);
+    }
 
   // Return object
   return dist;
