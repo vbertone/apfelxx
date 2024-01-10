@@ -68,6 +68,12 @@ else(LHAPDF_CONFIG)
 endif(LHAPDF_CONFIG)
 configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_DIR}/inc/apfel/config.h")
 
+# Enable mkPDF include accordingly
+configure_file(
+  "${PROJECT_SOURCE_DIR}/inc/apfel/mkpdf.h.in"
+  "${PROJECT_SOURCE_DIR}/inc/apfel/mkpdf.h"
+)
+
 # pybind11
 #cmake_policy(SET CMP0148 OLD)
 find_package(pybind11 QUIET)

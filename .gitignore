@@ -79,6 +79,7 @@ docs/latex/src/codes/Yterm
 # Generated files
 inc/apfel/version.h
 inc/apfel/config.h
+inc/apfel/mkpdf.h
 bin/apfelxx-config
 
 # Jupyter checkpoints
