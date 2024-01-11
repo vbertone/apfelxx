@@ -6,7 +6,9 @@
 
 #pragma once
 
-#if @WITH_LHAPDF@
+#include "apfel/config.h"
+
+#if WITH_LHAPDF == 1
 
 #include "apfel/initialiseevolution.h"
 

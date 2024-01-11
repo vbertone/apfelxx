@@ -1,12 +1,17 @@
-# BASIC DEFINITIONS ========================================================================
+# ============================
+# BASIC DEFINITIONS
+# ============================
 
-# define minimum version of cmake
-cmake_minimum_required (VERSION 3.5)
+# Define code version
+set(apfelxx_VERSION 4.8.0)
 
-# define project name and its language
+# Define minimum version of cmake
+cmake_minimum_required(VERSION 3.5)
+
+# Define project name and its language
 project(apfel CXX Fortran)
 
-# define c++ standard and issue all the warning demanded by this standard
+# Define c++ standard and issue all the warning demanded by this standard
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,42 +22,26 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
    set(CMAKE_MACOSX_RPATH 0)
 endif()
 
-# VERSION ==============================================================================
+# ============================
+# MAIN
+# ============================
 
-set(apfelxx_VERSION 4.8.0)
-
-# export version to file
-configure_file(
-  "${PROJECT_SOURCE_DIR}/inc/apfel/version.h.in"
-  "${PROJECT_SOURCE_DIR}/inc/apfel/version.h"
-)
-
-# CONFIG SCRIPT =========================================================================
-
-# Configuration script
-set(prefix ${CMAKE_INSTALL_PREFIX})
-set(includedir "${prefix}/include")
-set(libdir "${prefix}/lib")
-configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_BINARY_DIR}/bin/apfelxx-config")
-
-# FINALIZE ==================================================================================
-
-# include directory
+# Define include directory
 include_directories(${PROJECT_SOURCE_DIR}/inc)
 
-# generate list of source files
+# Generate list of source files
 file(GLOB_RECURSE  source_files src/*)
 
-# define target library
+# Define target library
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-
 add_library(apfelxx SHARED ${source_files})
 
-# define libraries to be linked
+# Define libraries to be linked
 target_link_libraries(apfelxx)
 
 # LHAPDF
 find_program(LHAPDF_CONFIG lhapdf-config)
+
 if (LHAPDF_CONFIG)
    message ("-- LHAPDF found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will be built.")
    set(WITH_LHAPDF 1)
@@ -66,17 +55,13 @@ else(LHAPDF_CONFIG)
    set(WITH_LHAPDF 0)
    message ("-- LHAPDF not found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will not be built.")
 endif(LHAPDF_CONFIG)
-configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_DIR}/inc/apfel/config.h")
-
-# Enable mkPDF include accordingly
-configure_file(
-  "${PROJECT_SOURCE_DIR}/inc/apfel/mkpdf.h.in"
-  "${PROJECT_SOURCE_DIR}/inc/apfel/mkpdf.h"
-)
 
 # pybind11
-#cmake_policy(SET CMP0148 OLD)
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.27.0")
+  cmake_policy(SET CMP0148 OLD)
+endif()
 find_package(pybind11 QUIET)
+
 if (pybind11_FOUND)
    pybind11_add_module(apfelpy pywrap/pywrap.cc)
    target_link_libraries(apfelpy PRIVATE apfelxx)
@@ -86,14 +71,31 @@ else (pybind11_FOUND)
    message ("-- pybind11 not found. The python wrapper will not be built.")
 endif (pybind11_FOUND)
 
-# build test codes
+# Enable testing and build test codes
 enable_testing()
 add_subdirectory(tests)
 
-# install
-install(TARGETS apfelxx
-           RUNTIME DESTINATION bin
-           LIBRARY DESTINATION lib)
+# ============================
+# CONFIGURATION
+# ============================
+
+# Configure version to file
+configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/version.h.in" "${PROJECT_SOURCE_DIR}/inc/apfel/version.h")
+
+# Configure configuration script
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(includedir "${prefix}/include")
+set(libdir "${prefix}/lib")
+configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_BINARY_DIR}/bin/apfelxx-config")
+
+# Configure config.h header file
+configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_DIR}/inc/apfel/config.h")
+
+# ============================
+# INSTALLATION
+# ============================
+
+# Installation of code
+install(TARGETS apfelxx RUNTIME DESTINATION bin LIBRARY DESTINATION lib)
 install(DIRECTORY inc/apfel DESTINATION include)
-install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx-config DESTINATION bin
-PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx-config DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)

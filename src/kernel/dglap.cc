@@ -18,8 +18,8 @@ namespace apfel
                   std::vector<double>                                     const& Thresholds,
                   int                                                     const& nsteps):
     MatchedEvolution<Set<T>>(ObjRef, MuDistRef, Thresholds, nsteps),
-                          _SplittingFunctions(SplittingFunctions),
-                          _MatchingConditions(MatchingConditions)
+    _SplittingFunctions(SplittingFunctions),
+    _MatchingConditions(MatchingConditions)
   {
   }
 

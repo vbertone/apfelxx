@@ -1,3 +1,5 @@
 #pragma once
 
+#define CMAKE_VERSION @CMAKE_VERSION@
 #define WITH_LHAPDF @WITH_LHAPDF@
+#define pybind11_FOUND @pybind11_FOUND@
