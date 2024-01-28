@@ -58,7 +58,7 @@ endif(LHAPDF_CONFIG)
 
 # pybind11
 if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.27.0")
-  cmake_policy(SET CMP0148 OLD)
+   cmake_policy(SET CMP0148 OLD)
 endif()
 find_package(pybind11 QUIET)
 
