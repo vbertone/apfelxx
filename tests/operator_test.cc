@@ -11,9 +11,18 @@ class p0qq: public apfel::Expression
 {
 public:
   p0qq(): Expression() {}
-  double Regular(double const& x)  const { return - 2 * apfel::CF * ( 1 + x ); }
-  double Singular(double const& x) const { return 4 * apfel::CF / ( 1 - x ); }
-  double Local(double const& x)    const { return 4 * apfel::CF * log( 1 - x ) + 3 * apfel::CF; }
+  double Regular(double const& x)  const
+  {
+    return - 2 * apfel::CF * ( 1 + x );
+  }
+  double Singular(double const& x) const
+  {
+    return 4 * apfel::CF / ( 1 - x );
+  }
+  double Local(double const& x)    const
+  {
+    return 4 * apfel::CF * log( 1 - x ) + 3 * apfel::CF;
+  }
 };
 
 int main()

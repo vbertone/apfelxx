@@ -54,17 +54,13 @@ namespace apfel
 
     /**
      * @brief Function that builds a DGLAP-like operator.
-     * @param expr: the expression to be transformed
-     * @param eps: relative accuracy of the numerical integrations
      */
-    void BuildOperatorDGLAP(Expression const& expr, double const& eps);
+    void BuildOperatorDGLAP();
 
     /**
      * @brief Function that builds a GPD-like operator.
-     * @param expr: the expression to be transformed
-     * @param eps: relative accuracy of the numerical integrations
      */
-    void BuildOperatorGPD(Expression const& expr, double const& eps);
+    void BuildOperatorGPD();
 
     /**
      * @brief Function that interpolates the operator over the first
@@ -77,6 +73,11 @@ namespace apfel
      * @brief Function that returns the Grid object associated to the operator.
      */
     Grid const& GetGrid() const { return _grid; }
+
+    /**
+     * @brief Function that returns the Expression object associated to the operator.
+     */
+    Expression const& GetExpression() const { return _expr; }
 
     /**
      * @brief Function that returns the integration accuracy
@@ -100,6 +101,7 @@ namespace apfel
 
   protected:
     Grid                 const& _grid;      //!< Grid on which to compute the operator
+    Expression           const& _expr;      //!< Expression to be used
     double               const  _eps;       //!< Integration accuracy
     bool                 const  _gpd;       //!< GPD switch
     std::vector<matrix<double>> _Operator;  //!< Operator values
