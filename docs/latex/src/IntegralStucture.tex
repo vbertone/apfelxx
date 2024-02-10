@@ -822,6 +822,152 @@ Eq.~(\ref{eq:DoubleFuncStruct}) are:
 \end{array}
 \end{equation}
 
+Unfortunately, moving to $\mathcal{O}(\alpha_s^2)$, \textit{i.e.}
+NNLO, the factorised structure of the regular-regular term in
+Eq.~(\ref{eq:DoubleFuncStruct}) valid for the NLO expressions does no
+longer hold~\cite{Bonino:2024qbh}. As a consequence, we cannot write
+the structure functions as a bi-linear combination of single
+convolutions. It is therefore convenient to develop a code structure
+able to deal with general double convolutions. In other words, the
+goal is to create a class able to compute and store the object
+$\Theta^{\beta\delta,\alpha\gamma}$ defined in
+Eq.~(\ref{eq:DoubleZMconv}). To do so, we first need to identify the
+general structure of the operator $O$ valid at any perturbative
+order. This structure can always be brought into the following form:
+\begin{equation}
+  \begin{array}{lcccccc}
+    \displaystyle O(y_1,y_2)&=&\displaystyle C_{\rm LL}\delta(1-y_1)
+                                \delta(1-y_2)
+    &+&\displaystyle \delta(1-y_1)\left[\sum_{m}C_{\rm
+        LS}^{(m)}D_m(y_2)\right]&+&\displaystyle \delta(1-y_1)C_{\rm LR}(y_2)\\
+\\
+&+& \displaystyle \left[\sum_{n}C_{\rm
+        LS}^{(n)}D_n(y_1)\right]\delta(1-y_2)&+&\displaystyle
+                                                 \sum_{n,m}C_{\rm
+                                                 SS}^{(n,m)}D_n(y_1)
+                                                 D_m(y_2)
+                                &+&\displaystyle \sum_{n}D_n(y_1)C_{\rm SR}^{(n)}(y_2)\\
+\\
+&+&\displaystyle C_{\rm RL}(y_1)\delta(1-y_2) &+&\displaystyle
+                                                  \sum_{m}C_{\rm
+                                                  RS}(y_1)D_m(y_2)&+&\displaystyle
+                                                                      C_{\rm
+                                                                      RR}(y_1,y_2)\,.
+  \end{array}
+  \label{eq:DoubleFuncStructGen}
+\end{equation}
+where at N$^p$LO the indices $n$ and $m$ run between zero and $2p-1$,
+and:
+\begin{equation}
+D_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_+\,.
+\end{equation}
+In view of a numerical implementation, it is convenient to rewrite the
+$+$-distribution in the following way:
+\begin{equation}
+D_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_+=\left[\frac{\ln^i(1-y)}{1-y}\right]_{x}+\frac{\ln^{i+1}(1-x)}{i+1}\delta(1-y)=\mathcal{D}_i(y)+\mathcal{K}_i(x)\delta(1-y)\,,
+\end{equation}
+where I have introduced the new distribution:
+\begin{equation}
+\mathcal{D}_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_{x}\,,
+\end{equation}
+that upon integration between zero and $x$ (rather than between zero
+and one0 acts as standard $+$-distribution:
+\begin{equation}
+  \int_x^1 dy\, \mathcal{D}_i(y) f(y) = \int_x^1 dy
+  \left[\frac{\ln^i(1-y)}{1-y}\right]_{x}f(y) = \int_x^1 dy\frac{\ln^i(1-y)}{1-y}\left[f(y)-f(1)\right]\,,
+\end{equation}
+and the residual term:
+\begin{equation}
+\mathcal{K}_i(x)=-\int_0^xdy\frac{\ln^i(1-y)}{1-y}=\frac{\ln^{i+1}(1-x)}{i+1}\,.
+\end{equation}
+With this definition at hand, the decomposition in
+Eq.~(\ref{eq:DoubleFuncStructGen}) becomes:
+\begin{equation}
+\small
+  \begin{array}{rcl}
+    \displaystyle O(y_1,y_2)&=&\displaystyle \left[C_{\rm LL}+\sum_{n}C_{\rm LS}^{(n)}\mathcal{K}_n(x_1) +\sum_{m}C_{\rm LS}^{(m)}\mathcal{K}_m(x_2)+\sum_{n,m}C_{\rm SS}^{(m)}\mathcal{K}_n(x_1)\mathcal{K}_m(x_2)\right]\delta(1-y_1)
+                                \delta(1-y_2)\\
+\\
+    &+&\displaystyle \delta(1-y_1)\left[\sum_{m}C_{\rm
+        LS}^{(m)}\mathcal{D}_m(y_2)+\sum_{n,m}C_{\rm SS}^{(n,m)}\mathcal{K}_n(x_1)\mathcal{D}_m(y_2)\right]\\
+\\
+&+&\displaystyle \delta(1-y_1)\left[C_{\rm LR}(y_2)+\sum_{n}\mathcal{K}_{n}(x_1)C_{\rm SR}(y_2)\right]\\
+\\
+    &+&\displaystyle \left[\sum_{n}C_{\rm
+        SL}^{(n)}\mathcal{D}_n(y_1)+\sum_{n,m}C_{\rm
+        SS}^{(n,m)}\mathcal{D}_n(y_1)
+        \mathcal{K}_m(x_2)\right]\delta(1-y_2)\\
+\\
+&+&\displaystyle \sum_{n,m} C_{\rm SS}^{(n,
+    m)}\mathcal{D}_{n}(y_1)
+    \mathcal{D}_{m}(y_2)\\
+\\
+&+&\displaystyle \sum_{n}\mathcal{D}_{n}(y_1)C_{\rm SR}^{(n)}(y_2)\\
+   \\
+&+&\displaystyle \left[C_{\rm RL}(y_1)+\sum_{m}C_{\rm RS}(y_1)\mathcal{K}_{m}(x_2)\right]\delta(1-y_2)\\
+\\
+&+&\displaystyle \sum_{m}C_{\rm RS}^{(n)}(y_1)\mathcal{D}_{m}(y_2)\\
+   \\
+                            &+&\displaystyle C_{\rm RR}(y_1,y_2)\,.
+  \end{array}
+\end{equation}
+that can be generally written as:
+\begin{equation}
+\small
+  \begin{array}{rcccccc}
+    \displaystyle O(y_1,y_2)&=&\displaystyle \mathcal{C}_{\rm
+                                LL}(x_1,x_2)\delta(1-y_1)\delta(1-y_2)&+&\displaystyle
+                                                                          \delta(1-y_1)\mathcal{C}_{\rm
+                                                                          LS}(x_1,y_2)&+&\displaystyle
+                                                                                        \delta(1-y_1)\mathcal{C}_{\rm LR}(x_1,y_2)\\
+\\
+    &+&\displaystyle \mathcal{C}_{\rm
+        SL}(y_1,x_2)\delta(1-y_2)&+&\displaystyle \mathcal{C}_{\rm
+                                     SS}(y_1,y_2)&+&\displaystyle
+                                                     \mathcal{C}_{\rm SR}(y_1,y_2)\\
+   \\
+&+&\displaystyle \mathcal{C}_{\rm
+    RL}(y_1)\delta(1-y_2)&+&\displaystyle \mathcal{C}_{\rm RS}(y_1,y_2) &+&\displaystyle \mathcal{C}_{\rm RR}(y_1,y_2)\,.
+  \end{array}
+\end{equation}
+The behaviour under the convolution with interpolating functions
+defines a ``double'' operator:
+\begin{equation}
+\Theta^{\beta\delta,\alpha\gamma}=\int_{x_\delta}^1dy_1 \int_{x_\gamma}^1dy_2\,O(y_1,y_2)w_\beta^{(k)}\left(\frac{x_\delta}{y_1}\right) w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)\,,
+\end{equation}
+where the various $\mathcal{C}$ functions are involved as follows:
+\begin{equation}
+\tiny
+  \begin{array}{rcr}
+    \displaystyle \Theta^{\beta\delta,\alpha\gamma}&=&\displaystyle \delta_{\beta\delta}\left[\mathcal{C}_{\rm LL}(x_\delta,x_\gamma) \delta_{\alpha\gamma}+\displaystyle
+                                                                          \int_{x_\gamma}^1dy_2\,\mathcal{C}_{\rm
+                                                                          LS}(x_\delta,y_2)\left[w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)-\delta_{\alpha\gamma}\right]+\displaystyle
+                                                                                        \int_{x_\gamma}^1dy_2\,\mathcal{C}_{\rm LR}(x_\delta,y_2) w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)\right]\\
+\\
+    &+&\displaystyle \int_{x_\delta}^1dy_1\left[w_\beta^{(k)}\left(\frac{x_\delta}{y_1}\right)-\delta_{\beta\delta}\right]\left[\mathcal{C}_{\rm SL}(y_1,x_\gamma) \delta_{\alpha\gamma}+
+                                                                                                                                                        \int_{x_\gamma}^1dy_2\mathcal{C}_{\rm SS}(y_1,y_2) \left[w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)-\delta_{\alpha\gamma}\right]+\int_{x_\gamma}^1dy_2\,\mathcal{C}_{\rm SR}(y_1,y_2) w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)\right]\\
+   \\
+&+&\displaystyle \int_{x_\delta}^1dy_1w_\beta^{(k)}\left(\frac{x_\delta}{y_1}\right)\left[\mathcal{C}_{\rm RL}(y_1,x_\gamma) \delta_{\alpha\gamma}+
+                                                                                                                                                        \int_{x_\gamma}^1dy_2\mathcal{C}_{\rm
+    RS}(y_1,y_2)
+    \left[w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)-\delta_{\alpha\gamma}\right]+\int_{x_\gamma}^1dy_2\,\mathcal{C}_{\rm
+    RR}(y_1,y_2)
+    w_\alpha^{(k)}\left(\frac{x_\gamma}{y_2}\right)\right]\\
+\\
+&=&\displaystyle \delta_{\beta\delta}\Gamma^{\rm L}_{\alpha\gamma}(x_\delta)+
+    \int_{x_\delta}^1dy_1\left[w_\beta^{(k)}\left(\frac{x_\delta}{y_1}\right)-\delta_{\beta\delta}\right]\Gamma^{\rm S}_{\alpha\gamma}(y_1)+  \int_{x_\delta}^1dy_1w_\beta^{(k)}\left(\frac{x_\delta}{y_1}\right) \Gamma^{\rm R}_{\alpha\gamma}(y_1)\,.
+  \end{array}
+\end{equation}
+From the structure of the computation above, it is clear that
+$\Theta^{\beta\delta,\alpha\gamma}$ is constructed by first
+constructing three ``single'' operators,
+$\Gamma^{\rm L}_{\alpha\gamma}(y_1)$,
+$\Gamma^{\rm S}_{\alpha\gamma}(y_1)$,
+$\Gamma^{\rm R}_{\alpha\gamma}(y_1)$, functions of an ``external''
+variable $y_1$ that are in turn treated as singular, local, and
+regular components of the double operator.
+
+
 \subsubsection{Drell Yan (DY)}
 
 In this section we apply to the Drell-Yan (DY) process the same
