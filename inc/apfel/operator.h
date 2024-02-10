@@ -67,7 +67,7 @@ namespace apfel
     void BuildOperatorGPD(Expression const& expr, double const& eps);
 
     /**
-     * @brief Function that interpolate the operator over the first
+     * @brief Function that interpolates the operator over the first
      * index return a Distribution object.
      * @param x: the value in x to be interpolated
      */
