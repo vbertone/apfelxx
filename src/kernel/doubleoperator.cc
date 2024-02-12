@@ -8,6 +8,8 @@
 #include "apfel/operator.h"
 #include "apfel/integrator.h"
 
+#include <cmath>
+
 namespace apfel
 {
   //_________________________________________________________________________
