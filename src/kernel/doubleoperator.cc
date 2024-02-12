@@ -57,7 +57,7 @@ namespace apfel
             const double cLL = _dexpr.LocalLocal(1 / exp(dx1), 1 / exp(dx2));
 
             // Evaluate Local-Singular and Local-Regular on the second grid
-            matrix<double> cLS_LR{1, nx2};
+            matrix<double> cLS_LR{1, (size_t) nx2};
             for (int delta = 0; delta < (int) cLS_LR.size(0); delta++)
               for (int gamma = delta; gamma < (int) cLS_LR.size(1); gamma++)
                 for (int k = 0; k < std::min(id2, gamma - delta) + 1; k++)
@@ -72,7 +72,7 @@ namespace apfel
                   }
 
             // Evaluate Singular-Local and Regular-Local on the first grid
-            matrix<double> cSL_RL{1, nx1};
+            matrix<double> cSL_RL{1, (size_t) nx1};
             for (int beta = 0; beta < (int) cSL_RL.size(0); beta++)
               for (int alpha = beta; alpha < (int) cSL_RL.size(1); alpha++)
                 for (int j = 0; j < std::min(id1, alpha - beta) + 1; j++)

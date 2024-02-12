@@ -8,6 +8,7 @@
 #include "apfel/messages.h"
 
 #include <functional>
+#include <algorithm>
 
 namespace apfel
 {
