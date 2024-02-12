@@ -56,6 +56,7 @@ namespace apfel
   template class matrix<double>;
   template class matrix<std::vector<int>>;
   template class matrix<std::vector<double>>;
+  template class matrix<matrix<double>>;
 
   //_________________________________________________________________________
   template<>
