@@ -69,6 +69,15 @@ namespace apfel
   double hpoly(std::vector<int> const& w, double const& x);
 
   /**
+   * @brief Digamma function.
+   * @param x: real argument
+   * @return The digamma funciton computed at x.
+   * @note C++ (real) adaptation of the FORTRAN (complex)
+   * implementation present in the PEGASUS code (hep-ph/0408244).
+   */
+  double digamma(double const& x);
+
+  /**
    * @brief Function that returns the index to be used with
    * unidimensional arrays returned by hplog_.
    * @param w: the packed vector of weights
