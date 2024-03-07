@@ -362,7 +362,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator *=", "Operators grid does not match"));
+      throw std::runtime_error(error("Operator::operator *=", "Grids do not match"));
 
     const std::vector<matrix<double>> v = _Operator;
     for (int ig = 0; ig < (int) v.size(); ig++)
@@ -438,7 +438,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator +=", "Operators grid does not match"));
+      throw std::runtime_error(error("Operator::operator +=", "Grids do not match"));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
@@ -453,7 +453,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator +=", "Operators grid does not match"));
+      throw std::runtime_error(error("Operator::operator +=", "Grids do not match"));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)

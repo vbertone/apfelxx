@@ -38,6 +38,16 @@ namespace apfel
     virtual ~DoubleOperator() {}
 
     /**
+     * @name Binary operators
+     */
+    ///@{
+    DoubleOperator& operator *= (double const& s);         //!< this *= Scalar
+    DoubleOperator& operator /= (double const& s);         //!< this /= Scalar
+    DoubleOperator& operator += (DoubleOperator const& o); //!< this += Operator
+    DoubleOperator& operator -= (DoubleOperator const& o); //!< this -= Operator
+    ///@}
+
+    /**
      * @brief Function that returns the first Grid object associated
      * to the double operator.
      */
@@ -60,12 +70,29 @@ namespace apfel
      */
     double const& GetIntegrationAccuracy() const { return _eps; }
 
+    /**
+     * @brief Function that returns the double operator.
+     */
+    std::vector<std::vector<matrix<matrix<double>>>> GetDoubleOperator() const { return _dOperator; }
+
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
   protected:
     Grid                                      const& _grid1;      //!< First grid on which to compute the operator
     Grid                                      const& _grid2;      //!< Second grid on which to compute the operator
     DoubleExpression                          const& _dexpr;      //!< Expression to be used
     double                                    const  _eps;        //!< Integration accuracy
     std::vector<std::vector<matrix<matrix<double>>>> _dOperator;  //!< DoubleOperator values
+
+    friend std::ostream& operator << (std::ostream& os, DoubleOperator const& dop);
   };
+
+  /**
+   * @brief Method which prints DoubleOperator with std::cout <<.
+   */
+  std::ostream& operator << (std::ostream& os, DoubleOperator const& dop);
 }
 

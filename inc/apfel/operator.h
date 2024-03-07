@@ -106,7 +106,7 @@ namespace apfel
     bool                 const  _gpd;       //!< GPD switch
     std::vector<matrix<double>> _Operator;  //!< Operator values
 
-    friend std::ostream& operator << (std::ostream& os, Operator const& sg);
+    friend std::ostream& operator << (std::ostream& os, Operator const& op);
   };
 
   /**
@@ -125,9 +125,7 @@ namespace apfel
   ///@}
 
   /**
-   * @brief Method which prints Operator with cout <<. This only
-   * prints the Operator on the first subgrid and is supposed to be
-   * used for debugging purposes.
+   * @brief Method which prints Operator with std::cout <<.
    */
   std::ostream& operator << (std::ostream& os, Operator const& op);
 }

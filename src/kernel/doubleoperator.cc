@@ -7,6 +7,7 @@
 #include "apfel/doubleoperator.h"
 #include "apfel/operator.h"
 #include "apfel/integrator.h"
+#include "apfel/messages.h"
 
 #include <cmath>
 
@@ -110,10 +111,10 @@ namespace apfel
 
                     // Loop over the index delta. In fact delta = 0 because the size
                     // of the first dimension of "_Operator" is one.
-                    for (int delta = 0; delta < (int) _dOperator[ig1][ig2].size(0); delta++)
+                    for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(0); delta++)
                       {
                         // Loop over the index gamma
-                        for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2].size(1); gamma++)
+                        for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(1); gamma++)
                           {
                             // Weight of the subtraction term w.r.t the first grid
                             const double ws2 = (delta == gamma ? 1 : 0);
@@ -150,5 +151,93 @@ namespace apfel
               }
           }
       }
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator *= (double const& s)
+  {
+    for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
+      for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
+        for (int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(0); alpha++)
+          for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+            for (int gamma = 0; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(0); gamma++)
+              for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
+                _dOperator[ig1][ig2](alpha, beta)(gamma, delta) *= s;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator /= (double const& s)
+  {
+    for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
+      for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
+        for (int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(0); alpha++)
+          for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+            for (int gamma = 0; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(0); gamma++)
+              for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
+                _dOperator[ig1][ig2](alpha, beta)(gamma, delta) /= s;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator += (DoubleOperator const& o)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
+      throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match"));
+
+    for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
+      for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
+        for (int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(0); alpha++)
+          for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+            for (int gamma = 0; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(0); gamma++)
+              for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
+                _dOperator[ig1][ig2](alpha, beta)(gamma, delta) += o._dOperator[ig1][ig2](alpha, beta)(gamma, delta);
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator -= (DoubleOperator const& o)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
+      throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match"));
+
+    for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
+      for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
+        for (int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(0); alpha++)
+          for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+            for (int gamma = 0; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(0); gamma++)
+              for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
+                _dOperator[ig1][ig2](alpha, beta)(gamma, delta) -= o._dOperator[ig1][ig2](alpha, beta)(gamma, delta);
+
+    return *this;
+  }
+
+  //_________________________________________________________________________________
+  std::ostream& operator << (std::ostream& os, DoubleOperator const& dop)
+  {
+    const std::vector<std::vector<matrix<matrix<double>>>> om = dop.GetDoubleOperator();
+    os << "Operator: " << &dop << "\n";
+    os << "Operator on the SubGrids:" << "\n";
+    const std::ostringstream default_format;
+    os << std::scientific;
+    os.precision(2);
+    for (int i = 0; i < (int) om.size(); i++)
+      for (int j = 0; j < (int) om[i].size(); j++)
+        {
+          os << "O[" << i << "][" << j << "]: [";
+          for (int alpha = 0; alpha < (int) om[i][j].size(0); alpha++)
+            for (int beta = 0; beta < (int) om[i][j].size(1); beta++)
+              for (int gamma = 0; gamma < (int) om[i][j](alpha, beta).size(0); gamma++)
+                for (int delta = 0; delta < (int) om[i][j](alpha, beta).size(1); delta++)
+                  os << "{(" << alpha << ", " << beta << ")(" << gamma << ", " << delta << ") : " << om[i][j](alpha, beta)(gamma, delta) << "} ";
+          os << "]\n";
+        }
+    os.copyfmt(default_format);
+    return os;
   }
 }
