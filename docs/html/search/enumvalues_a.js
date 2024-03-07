@@ -9,7 +9,7 @@ var searchData=
   ['pgb_6',['PGB',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4aaafcc78b7b89ff19ad512057c95c73e1',1,'apfel::EvolBasisPlusMinus']]],
   ['pgc_7',['PGC',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4ab17136fcb9cdbea365db8c14af6142a6',1,'apfel::EvolBasisPlusMinus']]],
   ['pgd_8',['PGD',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4acbedce548d04cd1610e6e83e98c462c6',1,'apfel::EvolBasisPlusMinus']]],
-  ['pgg_9',['pgg',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4a95abc7a2c597b0f378fc5f4d5bd8c006',1,'apfel::EvolBasisPlusMinus::PGG'],['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a92a85eba6acccd6cf23b5059be4a7946',1,'apfel::EvolutionBasisQCD::PGG']]],
+  ['pgg_9',['PGG',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4a95abc7a2c597b0f378fc5f4d5bd8c006',1,'apfel::EvolBasisPlusMinus::PGG'],['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a92a85eba6acccd6cf23b5059be4a7946',1,'apfel::EvolutionBasisQCD::PGG']]],
   ['pgq_10',['PGQ',['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8a50e295396071e5f694cb5f4c77c330b6',1,'apfel::EvolutionBasisQCD']]],
   ['pgs_11',['PGS',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4adb54e8641bd7e5a89c1ee41ce601646a',1,'apfel::EvolBasisPlusMinus']]],
   ['pgt_12',['PGT',['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4ac86d44ad385dcee1deb2ddb77f7a0a7c',1,'apfel::EvolBasisPlusMinus']]],

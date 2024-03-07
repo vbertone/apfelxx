@@ -133,10 +133,9 @@ var searchData=
   ['cml2gnc_130',['CmL2gNC',['../group__CCMassive.html#ga6f15a9aee0ac52ff97e94687b9b289b8',1,'apfel::CmL2gNC']]],
   ['cml2nsnc_131',['CmL2nsNC',['../group__CCMassive.html#gaacf89402670035155e057c6ad3a03e68',1,'apfel::CmL2nsNC']]],
   ['cml2psnc_132',['CmL2psNC',['../group__CCMassive.html#ga0f5fbe503c96570e8af5e5b96e26c283',1,'apfel::CmL2psNC']]],
-  ['collinssoperkernel_133',['CollinsSoperKernel',['../namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2',1,'apfel']]],
-  ['combine_134',['combine',['../classapfel_1_1Set.html#a7065697bdd240416184fee23592c77fa',1,'apfel::Set::Combine() const'],['../classapfel_1_1Set.html#a339d0b1d03e094ec494f1c06b7dacde2',1,'apfel::Set::Combine(std::vector&lt; double &gt; const &amp;weigths) const']]],
-  ['concatenateandsortvectors_135',['ConcatenateAndSortVectors',['../namespaceapfel.html#a6f7f89d3dacb5cd1bfd2c27a590604ac',1,'apfel']]],
-  ['convolutionmap_136',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap']]],
-  ['convolutionpair_137',['ConvolutionPair',['../structapfel_1_1Observable_1_1ConvolutionPair.html#ac2291b3989c15a3fe3723d6af10380bf',1,'apfel::Observable::ConvolutionPair']]],
-  ['createjointgrid_138',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]]
+  ['combine_133',['Combine',['../classapfel_1_1Set.html#a7065697bdd240416184fee23592c77fa',1,'apfel::Set::Combine() const'],['../classapfel_1_1Set.html#a339d0b1d03e094ec494f1c06b7dacde2',1,'apfel::Set::Combine(std::vector&lt; double &gt; const &amp;weigths) const']]],
+  ['concatenateandsortvectors_134',['ConcatenateAndSortVectors',['../namespaceapfel.html#a6f7f89d3dacb5cd1bfd2c27a590604ac',1,'apfel']]],
+  ['convolutionmap_135',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap']]],
+  ['convolutionpair_136',['ConvolutionPair',['../structapfel_1_1Observable_1_1ConvolutionPair.html#ac2291b3989c15a3fe3723d6af10380bf',1,'apfel::Observable::ConvolutionPair']]],
+  ['createjointgrid_137',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]]
 ];

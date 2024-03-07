@@ -1,6 +1,25 @@
 var searchData=
 [
   ['id_0',['id',['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ae2247161da652be847b31c6d2f444a2f',1,'apfel::EvolutionSetup::GridParameters']]],
-  ['inset_1',['InSet',['../structapfel_1_1EvolutionSetup.html#a46719847dfc56e3169657af38a8f4344',1,'apfel::EvolutionSetup']]],
-  ['interdegreeq_2',['InterDegreeQ',['../structapfel_1_1EvolutionSetup.html#a48e64395b5ab877fa9f4052bd9d2fa8e',1,'apfel::EvolutionSetup']]]
+  ['initializef2ccminusobjectszm_1',['InitializeF2CCMinusObjectsZM',['../namespaceapfel.html#a1d42bed8c3d45b6a3ad93723dcd7fe68',1,'apfel']]],
+  ['initializef2ccplusobjectszm_2',['InitializeF2CCPlusObjectsZM',['../namespaceapfel.html#aaf9e6651be0afa111a477ed19743f570',1,'apfel']]],
+  ['initializef2ncobjectsmassive_3',['InitializeF2NCObjectsMassive',['../namespaceapfel.html#a51ac604f4de761dc6a49b4ff9e142c30',1,'apfel']]],
+  ['initializef2ncobjectsmassivezero_4',['InitializeF2NCObjectsMassiveZero',['../namespaceapfel.html#a8ff297e7e26685f0df7c6e4eb1911939',1,'apfel']]],
+  ['initializef2ncobjectszm_5',['InitializeF2NCObjectsZM',['../namespaceapfel.html#a491d05e03c6203f21435939aab3bfcf7',1,'apfel']]],
+  ['initializef2ncobjectszmt_6',['InitializeF2NCObjectsZMT',['../namespaceapfel.html#a0b525fe67a6f70e2d263ecf00633b010',1,'apfel']]],
+  ['initializef3ccminusobjectszm_7',['InitializeF3CCMinusObjectsZM',['../namespaceapfel.html#ae72fefca62141586bfbb8d4ea28b9e96',1,'apfel']]],
+  ['initializef3ccplusobjectszm_8',['InitializeF3CCPlusObjectsZM',['../namespaceapfel.html#a8c966555ab67098cd725478ed2fee12e',1,'apfel']]],
+  ['initializef3ncobjectszm_9',['InitializeF3NCObjectsZM',['../namespaceapfel.html#a668809ec6f49abac25458208321654f8',1,'apfel']]],
+  ['initializef3ncobjectszmt_10',['InitializeF3NCObjectsZMT',['../namespaceapfel.html#a9a1238468521ddcb43dd805925e2d6a6',1,'apfel']]],
+  ['initializeflccminusobjectszm_11',['InitializeFLCCMinusObjectsZM',['../namespaceapfel.html#a783d1636af097458a1dbddfef013b713',1,'apfel']]],
+  ['initializeflccplusobjectszm_12',['InitializeFLCCPlusObjectsZM',['../namespaceapfel.html#a84b6a080373e8d90d6f7b87f94cd3f08',1,'apfel']]],
+  ['initializeflncobjectsmassive_13',['InitializeFLNCObjectsMassive',['../namespaceapfel.html#af03758b9fab85f8ed3e5c45df2746b5e',1,'apfel']]],
+  ['initializeflncobjectsmassivezero_14',['InitializeFLNCObjectsMassiveZero',['../namespaceapfel.html#a4b455acc09c8eaac20d17f755b4a3216',1,'apfel']]],
+  ['initializeflncobjectszm_15',['InitializeFLNCObjectsZM',['../namespaceapfel.html#a4200f5c22a0b3d1d87a9ace56e4f5041',1,'apfel']]],
+  ['initializeflncobjectszmt_16',['InitializeFLNCObjectsZMT',['../namespaceapfel.html#a1d6bee701a157a9b6021aea7759b932e',1,'apfel']]],
+  ['initializeg1ncobjectszm_17',['Initializeg1NCObjectsZM',['../namespaceapfel.html#a8aa18c76c2ce2fae2bcef81ee57edc8a',1,'apfel']]],
+  ['initializeg4ncobjectszm_18',['Initializeg4NCObjectsZM',['../namespaceapfel.html#a0b052a6be8fc9726269380c852022b0d',1,'apfel']]],
+  ['initializeglncobjectszm_19',['InitializegLNCObjectsZM',['../namespaceapfel.html#acbcade4dfd74d7d000bb740c7d86cbd7',1,'apfel']]],
+  ['inset_20',['InSet',['../structapfel_1_1EvolutionSetup.html#a8107cd2b8b4da2af321f502b80d0988d',1,'apfel::EvolutionSetup']]],
+  ['interdegreeq_21',['InterDegreeQ',['../structapfel_1_1EvolutionSetup.html#a48e64395b5ab877fa9f4052bd9d2fa8e',1,'apfel::EvolutionSetup']]]
 ];

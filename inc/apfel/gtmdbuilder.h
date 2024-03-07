@@ -106,7 +106,7 @@ namespace apfel
                                                                 std::function<double(double const&)> const& Alphas,
                                                                 int                                  const& PerturbativeOrder,
                                                                 double                               const& Ci = 1);
-
+  /// @cond UNNECESSARY
   /**
    * @brief Function that returns the evolution factors for gluon and quarks.
    * @param GtmdObj: the GTMD objects
@@ -161,5 +161,6 @@ namespace apfel
                                                                                           int                                  const& PerturbativeOrder,
                                                                                           double                               const& Ci = 1,
                                                                                           double                               const& IntEps = 1e-7);
+  /// @endcond
   ///@}
 }

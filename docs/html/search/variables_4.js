@@ -20,5 +20,7 @@ var searchData=
   ['eps9_17',['eps9',['../group__MathConstants.html#ga8fab04c175bb261c96c6b89d2584b243',1,'apfel']]],
   ['eu_18',['eu',['../group__PhysConstants.html#gaf6ca2b5f4cf5db0e29748bb88f98e1b1',1,'apfel']]],
   ['eu2_19',['eu2',['../group__PhysConstants.html#ga62c16d3895fbe1c4f518f794968f7ade',1,'apfel']]],
-  ['evolpolarisation_20',['EvolPolarisation',['../structapfel_1_1EvolutionSetup.html#ac177f59f4426ece1c64c1ba002b040fe',1,'apfel::EvolutionSetup']]]
+  ['evolpolarisation_20',['EvolPolarisation',['../structapfel_1_1EvolutionSetup.html#ac177f59f4426ece1c64c1ba002b040fe',1,'apfel::EvolutionSetup']]],
+  ['evolutionfactors_21',['EvolutionFactors',['../namespaceapfel.html#ae9a3d8b9de8f679bff52d2995e1cada1',1,'apfel']]],
+  ['evolutionfactorsk_22',['EvolutionFactorsK',['../namespaceapfel.html#a6a52fa9ef20d17eb5d28a80fb88e4be9',1,'apfel']]]
 ];
