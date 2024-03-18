@@ -29,7 +29,10 @@ namespace apfel
   template<class T>
   Observable<T>::Observable(std::function<Set<Operator>(double const&)> const& CoefficientFunctions,
                             std::function<Set<T>(double const&)>        const& Objects):
-    Observable(std::vector<ConvolutionPair>{ConvolutionPair{CoefficientFunctions, Objects}})
+    Observable(std::vector<ConvolutionPair>
+  {
+    ConvolutionPair{CoefficientFunctions, Objects}
+  })
   {
   }
 

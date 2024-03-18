@@ -1,0 +1,85 @@
+\begin{thebibliography}{10}
+
+\bibitem{Collins:2017oxh}
+J.~Collins and T.~C. Rogers, ``{Connecting Different TMD Factorization
+  Formalisms in QCD},'' {\em Phys. Rev. D}, vol.~96, no.~5, p.~054011, 2017.
+
+\bibitem{Echevarria:2016scs}
+M.~G. Echevarria, I.~Scimemi, and A.~Vladimirov, ``{Unpolarized Transverse
+  Momentum Dependent Parton Distribution and Fragmentation Functions at
+  next-to-next-to-leading order},'' {\em JHEP}, vol.~09, p.~004, 2016.
+
+\bibitem{Catani:2012qa}
+S.~Catani, L.~Cieri, D.~de~Florian, G.~Ferrera, and M.~Grazzini, ``{Vector
+  boson production at hadron colliders: hard-collinear coefficients at the
+  NNLO},'' {\em Eur. Phys. J. C}, vol.~72, p.~2195, 2012.
+
+\bibitem{Bozzi:2005wk}
+G.~Bozzi, S.~Catani, D.~de~Florian, and M.~Grazzini, ``{Transverse-momentum
+  resummation and the spectrum of the Higgs boson at the LHC},'' {\em Nucl.
+  Phys. B}, vol.~737, pp.~73--120, 2006.
+
+\bibitem{Meng:1995yn}
+R.~Meng, F.~I. Olness, and D.~E. Soper, ``{Semiinclusive deeply inelastic
+  scattering at small q(T)},'' {\em Phys. Rev. D}, vol.~54, pp.~1919--1935,
+  1996.
+
+\bibitem{Collins:2016hqq}
+J.~Collins, L.~Gamberg, A.~Prokudin, T.~Rogers, N.~Sato, and B.~Wang,
+  ``{Relating Transverse Momentum Dependent and Collinear Factorization
+  Theorems in a Generalized Formalism},'' {\em Phys. Rev. D}, vol.~94, no.~3,
+  p.~034014, 2016.
+
+\bibitem{Nadolsky:1999kb}
+P.~M. Nadolsky, D.~Stump, and C.~Yuan, ``{Semiinclusive hadron production at
+  HERA: The Effect of QCD gluon resummation},'' {\em Phys. Rev. D}, vol.~61,
+  p.~014003, 2000.
+\newblock [Erratum: Phys.Rev.D 64, 059903 (2001)].
+
+\bibitem{Bacchetta:2008xw}
+A.~Bacchetta, D.~Boer, M.~Diehl, and P.~J. Mulders, ``{Matches and mismatches
+  in the descriptions of semi-inclusive processes at low and high transverse
+  momentum},'' {\em JHEP}, vol.~08, p.~023, 2008.
+
+\bibitem{Daleo:2004pn}
+A.~Daleo, D.~de~Florian, and R.~Sassot, ``{O(alpha**2(s)) QCD corrections to
+  the electroproduction of hadrons with high transverse momentum},'' {\em Phys.
+  Rev. D}, vol.~71, p.~034013, 2005.
+
+\bibitem{Bertone:2017gds}
+V.~Bertone, ``{APFEL++: A new PDF evolution library in C++},'' {\em PoS},
+  vol.~DIS2017, p.~201, 2018.
+
+\bibitem{deFlorian:1997zj}
+D.~de~Florian, M.~Stratmann, and W.~Vogelsang, ``{QCD analysis of unpolarized
+  and polarized Lambda baryon production in leading and next-to-leading
+  order},'' {\em Phys. Rev. D}, vol.~57, pp.~5811--5824, 1998.
+
+\bibitem{Furmanski:1981cw}
+W.~Furmanski and R.~Petronzio, ``{Lepton - Hadron Processes Beyond Leading
+  Order in Quantum Chromodynamics},'' {\em Z. Phys. C}, vol.~11, p.~293, 1982.
+
+\bibitem{Ellis:1991qj}
+R.~Ellis, W.~Stirling, and B.~Webber, {\em {QCD and collider physics}}, vol.~8.
+\newblock Cambridge University Press, 2 2011.
+
+\bibitem{DelDebbio:2007ee}
+L.~Del~Debbio, S.~Forte, J.~I. Latorre, A.~Piccione, and J.~Rojo, ``{Neural
+  network determination of parton distributions: The Nonsinglet case},'' {\em
+  JHEP}, vol.~03, p.~039, 2007.
+
+\bibitem{Bertone:2022sso}
+V.~Bertone, G.~Bozzi, and F.~Hautmann, ``{Perturbative hysteresis and emergent
+  resummation scales},'' 2 2022.
+
+\bibitem{Bogolyubov:1960cha}
+N.~Bogolyubov, A.~Logunov, and D.~Shirkov, ``{The method of dispersion
+  relations and perturbation theory},'' {\em Sov. Phys. JETP}, vol.~10, no.~3,
+  pp.~574--581, 1960.
+
+\bibitem{Bakulev:2005gw}
+A.~Bakulev, S.~Mikhailov, and N.~Stefanis, ``{QCD analytic perturbation theory:
+  From integer powers to any power of the running coupling},'' {\em Phys. Rev.
+  D}, vol.~72, p.~074014, 2005.
+
+\end{thebibliography}

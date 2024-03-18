@@ -23,7 +23,8 @@ double fNP(double const& b, double const& zetaf)
   return exp( ( - g1 - g2 * log( sqrt(zetaf) / Q0 / 2 ) ) * b * b / 2 );
 }
 
-int main() {
+int main()
+`{
   // Ogata-quadrature object of degree zero.
   apfel::OgataQuadrature OgataObj{0, 1e-11};
 

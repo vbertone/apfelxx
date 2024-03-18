@@ -553,8 +553,8 @@ namespace apfel
         {
           const double jz = j0Zeros[i];
           const double z  = jz / M_PI;
-          const double x  = M_PI * psi( _h * z ) / _h;
-          const double w  = y0(jz) * j0(x) * psip( _h * z ) / j1(jz);
+          const double x  = M_PI * psi(_h * z) / _h;
+          const double w  = y0(jz) * j0(x) * psip(_h * z) / j1(jz);
           _xf[i] = x;
           _weights[i] = M_PI * w;
         }
@@ -563,8 +563,8 @@ namespace apfel
         {
           const double jz = j1Zeros[i];
           const double z  = jz / M_PI;
-          const double x  = M_PI * psi( _h * z ) / _h;
-          const double w  = y1(jz) * j1(x) * psip( _h * z ) / jn(2,jz);
+          const double x  = M_PI * psi(_h * z) / _h;
+          const double w  = y1(jz) * j1(x) * psip(_h * z) / jn(2, jz);
           _xf[i] = x;
           _weights[i] = M_PI * w;
         }
@@ -581,7 +581,7 @@ namespace apfel
     int i;
     for (i = 1; i < std::min(nmax, (int) j0Zeros.size()); i++)
       {
-        const T term = _weights[i] * func(_xf[i]/qT);
+        const T term = _weights[i] * func(_xf[i] / qT);
 
         // Break when the absolute value of the last term is less than
         // "_CutOff". This assumes that terms are increasingly
