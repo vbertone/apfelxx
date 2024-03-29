@@ -1013,6 +1013,7 @@ f_{\rm NP}^{(2)}(h_{T2}) \int db_T\,b_TF^{(1)}(b_*(b_{T}))
 f_{\rm NP}^{(2)}(h_{T2}) \int db_T\,b_T J_0(q_Tb_T)J_0(h_{T1}b_T)J_0(h_{T2}b_T)F^{(1)}(b_*(b_{T}))
         F^{(2)}(b_*(b_{T})) \,.
   \end{array}
+  \label{eq:kTMasterFormula}
 \end{equation}
 
 Finally, $f_{\rm NP}$ in transverse-momentum space needs to be
@@ -1027,6 +1028,14 @@ f_{\rm NP}(h_T)\mathop{\longrightarrow}_{h_T\rightarrow \infty}<h_T^{-2-\epsilon
 \end{equation}
 Often, $f_{\rm NP}$ is taken to be exponentially suppressed.
 
+One of the complications of parameterising $f_{\rm NP}$ in $k_T$ space
+is the computation of the integral in $b_T$ in
+Eq.~(\ref{eq:kTMasterFormula}) which involves three Bessel
+functions. Indeed, the integrand oscillates wildly making an accurate
+numerical evaluation of the integral hard to achieve.
+% To this purpose, I have developed a generalisation of the Ogata
+% double-exponential quadrature able to hand this integral
+% efficiently.
 
 \subsection{Alternative to the CSS prescription}
 
@@ -1047,7 +1056,7 @@ Eq.~(\ref{eq:separatation}).
 However, one can decide take a less invasive perspective to leave the
 explicit logarithms in the Sudakov unchanged while only regularising
 only $\alpha_s$ and the collinear distributions. This can be done by
-computing them at some modified scale $\mu_*(mu)$ su that:
+computing them at some modified scale $\mu_*(\mu)$ su that:
 \begin{equation}
 \begin{array}{lll}
 \mu_*(\mu)\simeq \mu &\mbox{ for } & \mu\rightarrow \infty\,,\\
