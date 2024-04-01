@@ -888,12 +888,12 @@ In this section, we start by writing the formulas for the computation
 of the unscaled coordinates $z_n^{(\nu)}$ and weights $w_n^{(\nu)}$
 required to compute the following integral:
 \begin{equation}
-I_\nu(q_T)=\int_0^\infty db J_\nu(bq_T) f\left(b\right) =
-\frac1{q_T}\int_0^\infty d\bar{b} J_\nu(\bar{b})
-f\left(\frac{\bar{b}}{q_T}\right) \simeq
-\frac{1}{q_T}\sum_{n=1}^\infty
-w_n^{(\nu)}f\left(\frac{z_n^{(\nu)}}{q_T}\right)\quad \nu
-=0,1,\dots\,,
+  \mathcal{I}_\nu(q_T)=\int_0^\infty db J_\nu(bq_T) f\left(b\right) =
+  \frac1{q_T}\int_0^\infty d\bar{b} J_\nu(\bar{b})
+  f\left(\frac{\bar{b}}{q_T}\right) \simeq
+  \frac{1}{q_T}\sum_{n=1}^\infty
+  w_n^{(\nu)}f\left(\frac{z_n^{(\nu)}}{q_T}\right)\quad \nu
+  =0,1,\dots\,,
 \label{eq:OgataQuadMast}
 \end{equation}
 using the Ogata-quadrature algorithm~\cite{Ogata:quadrature}. The
@@ -1022,7 +1022,7 @@ $\nu=0$.
 Now let us consider the specific integral in
 Eq.~(\ref{eq:OgataQuadMast}) with $\nu=0$:
 \begin{equation}
-I_0(q_T)=
+\mathcal{I}_0(q_T)=
 \frac1{q_T}\int_0^\infty d\bar{b} J_0(\bar{b})
 f\left(\frac{\bar{b}}{q_T}\right)\,.
 \end{equation}
@@ -1035,7 +1035,7 @@ with $\psi$ given
 in Eq.~(\ref{eq:PsiChangeOfVariable}), we obtain:
 \begin{equation}
 \begin{array}{rcl}
-  I_0(q_T)&=&\displaystyle 
+  \mathcal{I}_0(q_T)&=&\displaystyle 
               \frac1{q_T}\frac{1}{h}\int_0^\infty dt\, \psi'\left(\frac{t}{\pi}\right)  J_0\left(\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)
               f\left(\frac{1}{q_T}\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)\\
   \\
@@ -1080,13 +1080,13 @@ true value as $N$ increases.
 We now want to compute a generalisation of the integrals considered
 so far. Specifically:
 \begin{equation}
-  K_0(q_T)=\int_0^\infty db\,b J_0(q_Tb) J_0(h_{1T}b) J_0(h_{2T}b)f(b) =
-  \frac{1}{q_T} \int_0^\infty d\overline{b}\, J_0(\overline{b})
+  \mathcal{K}_0(h_{0T},h_{1T},h_{2T})=\int_0^\infty db\,b J_0(h_{T0}b) J_0(h_{1T}b) J_0(h_{2T}b)f(b) =
+  \frac{1}{h_{T0}} \int_0^\infty d\overline{b}\, J_0(\overline{b})
   J_0(a_1\overline{b})
-  J_0(a_2\overline{b})f\left(\frac{\overline{b}}{q_T}\right)\,,
+  J_0(a_2\overline{b})f\left(\frac{\overline{b}}{h_{T0}}\right)\,,
 \label{eq:ThreeBesselIntegral}
 \end{equation}
-where $a_i=h_{Ti}/q_T$. The difference
+where $a_i=h_{Ti}/h_{T0}$. The difference
 w.r.t. Eq.~(\ref{eq:OgataQuadMast}) is the fact that now the integrand
 contains three, rather than one, Bessel functions generally out of
 phase (\textit{i.e.} $a_i\neq 1$). Integrals of this kind, that emerge
@@ -1107,15 +1107,18 @@ Fig.~(\ref{fig:BesselProduct}) shows one such product.
 Therefore, we need to develop an \textit{ad hoc} quadrature method
 aimed at making the computation of the integral in
 Eq.~(\ref{eq:ThreeBesselIntegral}) efficient. To do so, we follow the
-step taken by Ogata in Ref.~\cite{Ogata:quadrature} by generalise his
-arguments when necessary. As in that case, the starting formula to
-develop a quadrature integration is the Lagrange interpolation formula
-in Eq.~(\ref{eq:LagrangeInterpolation}), but this time the function
-$W$ is the product of three Bessel functions rather than a single
-Bessel function. If for the moment we assume that
-$a_i\neq a_1/a_2\neq a_2/a_1\neq\xi_{j}/\xi_{k}$, $i=1,2$ and
-$\forall j,k$,\footnote{Is it possible at all?} that ensures that
-there are no overlapping zero's of the three $J_0$, we have that:
+step taken by Ogata in Ref.~\cite{Ogata:quadrature} by generalising
+his arguments. As in that case, the starting formula to develop a
+quadrature integration is the Lagrange interpolation formula in
+Eq.~(\ref{eq:LagrangeInterpolation}), but this time the function $W$
+is the product of three Bessel functions rather than a single Bessel
+function. If for the moment we assume that $a_1,a_2,a_1/a_2 \neq 1$,
+we are guaranteed that there are no overlapping zero's of the three
+$J_0$, \footnote{Actually, one should require that no zero's overlap,
+  that amounts to requiring $a_1,a_2,a_1/a_2 \neq \xi_k/\xi_j$,
+  $\forall\,i,j$. But configurations that violate this constraint are
+  highly unlikely, except when $k=j$, that is when
+  $a_1,a_2,a_1/a_2 = 1$.} we have that:
 \begin{equation}
   W(x) = J_0(x)J_0(a_1x) J_0(a_2x)=\prod_{l=1}^{\infty}\left(1-\frac{x^2}{\overline{\xi}_l}\right)\,,
 \end{equation}
@@ -1170,6 +1173,7 @@ f(x)&=&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
         J_0(a_2x)}{a_2J_0(\xi_k/a_2)J_0(a_1 \xi_k/a_2)
         J_1(\xi_k) (x-\xi_k/a_2)}\,.
 \end{array}
+\label{eq:TripleBesselInterpolation}
 \end{equation}
 The resulting quadrature integral is:
 \begin{equation}
@@ -1256,6 +1260,7 @@ The general result is thus:
 \begin{equation}
   \int_{-\infty}^{\infty} \frac{dy\,|y|J_0(a y) J_0(y)}{y-\xi_k}=-\theta(1-a)\pi
   |\xi_k|J_0(a \xi_k) Y_0^{(1)}(\xi_k)\,.
+  \label{eq:DoubleBesselWeight}
 \end{equation}
 
 We can now move to the three-Bessel case which implies considering the
@@ -1463,26 +1468,105 @@ $c_2$ is shown in Fig.~\ref{fig:Weight3D} for $k=1$.
 \end{figure}
 
 We can now plug Eq.~(\ref{eq:ThreeBesselWeightFinal}) into
-Eq.~(\ref{eq:QuadratureIntegral}) also accounting for the rescaling
-factor $h$:
+Eq.~(\ref{eq:QuadratureIntegral}). Accounting for the rescaling factor
+$h$ and defining for convenience $a_0=1$, after some manipulation it
+reads:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle \int_{-\infty}^{\infty}dx\,|x|f(x)&=&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty |h\xi_k|f(h\xi_k)
-        \frac{\theta(1-|a_1-a_2|)\mathcal{L}_k(a_1,a_2)}{J_1(\xi_k)J_0(a_1 \xi_k)
-        J_0(a_2 \xi_k) }\\
+\displaystyle \int_{-\infty}^{\infty}dx\,|x|f(x)&=&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty |h\xi_k/a_0|f(h\xi_k/a_0)
+        \frac{\theta(a_0-|a_1-a_2|)\mathcal{L}_k(a_1/a_0,a_2 /a_0)}{a_0J_1(a_0\xi_k /a_0)J_0(a_1 \xi_k/a_0)
+        J_0(a_2 \xi_k /a_0) }\\
 \\
 &+&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty
-        |h\xi_k/a_1|f(h\xi_k/a_1)\frac{\theta(a_1-|1-a_2|)\mathcal{L}_k(1/a_1,a_2/a_1)}{a_1J_0(\xi_k/a_1)J_1(\xi_k)
-        J_0(a_2 \xi_k/a_1) }\\
+        |h\xi_k/a_1|f(h\xi_k/a_1)\frac{\theta(a_1-|a_2-a_0|)\mathcal{L}_k(a_2/a_1,a_0/a_1)}{a_1 J_1(a_1\xi_k/a_1) 
+        J_0(a_2 \xi_k/a_1) J_0(a_0\xi_k/a_1) }\\
 \\
 &+&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty
-        |h\xi_k/a_2|f(h\xi_k/a_2)\frac{\theta(a_2-|1-a_1|)\mathcal{L}_k(1/a_2,a_1/a_2)}{a_2J_0(\xi_k/a_2)J_0(a_1 \xi_k/a_2)
-        J_1(\xi_k) }\,.
+        |h\xi_k/a_2|f(h\xi_k/a_2)\frac{\theta(a_2-|a_0-a_1|)\mathcal{L}_k(a_0/a_2,a_1/a_2)}{a_2  J_1(a_2\xi_k/a_2) J_0(a_0\xi_k/a_2)J_0(a_1 \xi_k/a_2)}\,.
 \end{array}
+\label{eq:TripleSum}
 \end{equation}
 We have also included $\theta$-functions to limit the weights to the
-region where they are different from zero.
+region where they are different from zero. Now we define the following
+list of pairs:
+\begin{equation}
+  \left\{\left(\overline{\xi}_i=\frac{\xi_{k(i)}}{a_{n(i)}},n(i),k(i)\right)\right\}\,,\quad
+  i=-\infty,\dots,\infty\,,\quad i\neq 0
+\end{equation}
+in ascending order of $\overline{\xi}_i$, where $k(i)$ is the index of
+the zero of $J_0$ and $n(i)\in\{0,1,2\}$. With this definition at
+hand, Eq.~(\ref{eq:TripleSum}) can be written in the following compact
+form:
+\begin{equation}
+\displaystyle \int_{-\infty}^{\infty}dx\,|x|f(x) = h\sum_{i=-\infty \atop i\neq 0}^\infty w_i|h\overline{\xi}_i|f(h\overline{\xi}_i)\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+w_i=
+\frac{\theta(a_{n(i)}-|a_{n(i)+1}-a_{n(i)+2}|)\mathcal{L}_{k(i)}(a_{n(i)+1}/a_{n(i)},a_{n(i)+2}
+  /a_{n(i)})}{a_{n(i)}J_1(a_{n(i)}\overline{\xi}_i)J_0(a_{n(i)+1}
+  \overline{\xi}_i)  J_0(a_{n(i)+2} \overline{\xi}_i) }\,,
+\end{equation}
+where $n(i)+1$ and $n(i)+2$ have to be interpreted as modulus 3,
+\textit{i.e.} $1+2\rightarrow 0$, $2+1\rightarrow 0$, and
+$2+2\rightarrow 1$.
 
+The results above have been obtained assuming $a_1,a_2,a_1/a_2\neq
+1$. We now relax these assumptions in order to include all possible
+cases. In fact, one can show that this is easily accommodated by
+computing the weights $w_i$ by setting $a_1=0$ if $a_1=1$, and $a_2=0$
+if $a_2=1$ or if $a_2=a_1$.\footnote{In practice, in order to avoid
+  divisions by zero, setting $a_1=0$ and/or $a_2=0$ really means
+  setting these parameters to a small positive number.}
+
+We can now compute the integral in
+Eq.~(\ref{eq:ThreeBesselIntegral}). As above, we make the change of
+variable in Eq.~(\ref{eq:OgataChangeOfVariable}) so that:
+\begin{equation}
+  \begin{array}{rcl}
+  \mathcal{K}_0(h_{T0}, h_{T1}, h_{T2})&=&\displaystyle \frac1{h_{T0}}\frac{1}{h}\int_0^\infty dt\, \psi'\left(\frac{t}{\pi}\right)  J_0\left(\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)  J_0\left(a_1\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)  J_0\left(a_2\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)
+              f\left(\frac{1}{h_{T0}}\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)\\
+    \\
+    &=&\displaystyle
+        \frac{1}{h_{T0}}\sum_{i=1}^{\infty}w_i\psi'\left(\frac{h\overline{\xi}_i}{\pi}\right)
+        J_0\left(\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)
+        J_0\left(a_1\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)
+        J_0\left(a_2\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)
+        f\left(\frac{1}{h_{T0}}\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)\,.
+  \end{array}
+  \label{eq:TripleHankel}
+\end{equation}
+The sum in the second line is expected to converge fast to the true
+value of the integral as $i$ increases. Therefore, truncating the
+series at a relative small value of $i$ should provide a good
+approximation of the integral. Given the symmetry of $\mathcal{K}_0$
+upon reshuffling $h_{T0}$, $h_{T1}$, and $h_{T2}$, without loss of
+generality one can always denote with $h_{T0}$ the largest of all such
+that $a_1=h_{T1}/h_{T0}$ and $a_2=h_{T2}/h_{T0}$ are always such that
+$0\leq a_i \leq 1$. This helps the convergence of the series.
+
+To test this formula, we consider the integral:
+\begin{equation}
+\int_0^{\infty} db\,bJ_0(h_{T0} b)J_0(h_{T1} b)J_0(h_{T2} b)e^{-\frac{b^2}{2}}\,.
+\label{eq:OgataTransformTriple}
+\end{equation}
+Since we do not know how to solve it exactly, in
+Fig.~\ref{fig:OgataTransformTriple} we compare the convergence rate of
+this integral as a function of the truncation order $N$ for different
+values of $h_{T0}$, $h_{T1}$ and $h_{T2}$ computed by means of
+Eq.~(\ref{eq:TripleHankel}) with
+$h=10^{-2}\times\mbox{max}[h_{T0},h_{T1},h_{T2}]$ to a brute-force
+numerical integration with high enough accuracy. Also in this case,
+the integral converges quickly to the true value within a few terms.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/OgataTransformTriple.pdf}
+    \caption{Relative accuracy of the integral in the l.h.s. of
+      Eq.~(\ref{eq:OgataTransformTriple}) computed by means of
+      Eq.~(\ref{eq:TripleHankel}) truncated to the $N$-th
+      term.\label{fig:OgataTransformTriple}}
+  \end{centering}
+\end{figure}
 
 
 \newpage
