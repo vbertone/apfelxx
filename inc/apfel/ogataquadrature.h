@@ -25,6 +25,7 @@ namespace apfel
      * @param nu: the order of the Bessel function (default: 0)
      * @param CutOff: the accuracy computed as a cutoff on the size of the last computed term relative to the total (default: 10<SUP>-5</SUP>)
      * @param h: internal variable of the algorithm (default: 0.001)
+     * @param nZeroMax: maximum number of terms in the Ogata quadrature (default: 1000)
      * @note Note that the default value of the parameter 'h' (0.001)
      * is based of studies of Drell-Yan transverse-momentum
      * distributions. However, this values could possibly be badly
@@ -33,18 +34,45 @@ namespace apfel
      * the faster the decay the smaller the value of 'h' has to be.
      */
     OgataQuadrature(int    const& nu = 0,
-                    double const& CutOff = 1e-5,
-                    double const& h = 0.001);
+                    double const& CutOff = 1e-7,
+                    double const& h = 0.001,
+                    int    const& nZeroMax = 200);
+
+    /**
+     * @brief Function that initialises the coordinates and the
+     * weights for the Ogata quadrature.
+     * @param nZeroMax: maximum number of terms in the Ogata quadrature
+     */
+    void InitialiseWeights(int const& nZeroMax);
 
     /**
      * @brief Function that transform the input function.
      * @param func: function to be transformed
      * @param qT: value of qT in which to compute the transform
+     * @param Dynh: switch to compute the step parameter _h dynamically (default: false)
      * @param nmax: maximum number of terms in the Ogata quadrature (default: 1000)
      * @return the value of the transform
      */
     template<typename T>
-    T transform(std::function<T(double const&)> const& func, double const& qT, int const& nmax = 1000) const;
+    T transform(std::function<T(double const&)> const& func, double const& qT, bool const& Dynh = false, int const& nmax = 200) const;
+
+    /**
+     * @brief Function that returns the Bessel order.
+     * @return the Bessel order
+     */
+    double GetBesselOrder() const { return _nu; }
+
+    /**
+     * @brief Function that returns the Ogata cut-off parameter.
+     * @return the cut-off parameter
+     */
+    double GetCutOff() const { return _CutOff; }
+
+    /**
+     * @brief Function that returns the Ogata step parameter.
+     * @return the step parameter
+     */
+    double GetStepParameter() const { return _h; }
 
     /**
      * @brief Function that returns the unscaled coordinates used in
@@ -61,6 +89,12 @@ namespace apfel
     std::vector<double> GetWeights() const { return _weights; }
 
     /**
+     * @brief Function that sets the Ogata step parameter.
+     * @param h: step parameter
+     */
+    void SetStepParameter(double const& h) { _h = h; }
+
+    /**
      * @brief Function that writes on screan the first 1000 zeros of the
      * Bessel function J0. This function essentially generates the
      * std::vector<double> j0Zeros above. This function requires BOOST
@@ -70,9 +104,11 @@ namespace apfel
     void JnuZerosGenerator(int const& nu) const;
 
   private:
-    double              const _CutOff;  //!< The target accuracy parameter
-    double              const _h;       //!< The step parameter
-    std::vector<double>       _xf;      //!< Unscaled coordinates
-    std::vector<double>       _weights; //!< Weights of the quadrature
+    int                 const _nu;       //!< The Bessel order
+    double              const _CutOff;   //!< The target accuracy parameter
+    double                    _h;        //!< The step parameter
+    int                 const _nZeroMax; //!< The maximum number of zero's initialised
+    std::vector<double>       _xf;       //!< Unscaled coordinates
+    std::vector<double>       _weights;  //!< Weights of the quadrature
   };
 }

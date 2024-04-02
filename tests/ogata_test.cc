@@ -35,9 +35,9 @@ int main()
   for (auto const& k : kv)
     std::cout << std::scientific << k << "\t"
               << kfunc(k) << "\t"
-              << OgataObj.transform(rfunc, k) << "\t"
+              << OgataObj.transform(rfunc, k, true, 50) << "\t"
               << DEObj.transform(rfunc, k) << "\t"
-              << OgataObj.transform(rfunc, k) / kfunc(k) << "\t"
+              << OgataObj.transform(rfunc, k, true, 50) / kfunc(k) << "\t"
               << DEObj.transform(rfunc, k) / kfunc(k) << "\t"
               << std::endl;
 
@@ -47,6 +47,7 @@ int main()
 
   t.start();
   std::cout << "Ogata quadrature: calculation of " << nqT << " trasforms... ";
+  OgataObj.transform(rfunc, 1, true);
   for (int iqT = 0; iqT < nqT; iqT++)
     OgataObj.transform(rfunc, 1);
   t.stop();
@@ -65,7 +66,7 @@ int main()
   const apfel::Integrator NumInt{kfuncI};
 
   // Ogata quadrature object for the integral
-  const apfel::OgataQuadrature OgataObjI{1, apfel::eps7};
+  const apfel::OgataQuadrature OgataObjI{1};
 
   // Double exponential quadrature object for the integral
   const apfel::DoubleExponentialQuadrature DEObjI{1};
@@ -81,10 +82,9 @@ int main()
             << std::endl;
   for (int ik = 1; ik < (int) kv.size() - 1; ik++)
     {
-      const double INum = NumInt.integrate(kv[ik], kv[ik+1], apfel::eps5);
-      const double IOga = kv[ik+1] * OgataObjI.transform(rfuncI, kv[ik+1]) - kv[ik] * OgataObjI.transform(rfuncI, kv[ik]);
+      const double INum = NumInt.integrate(kv[ik], kv[ik+1], apfel::eps7);
+      const double IOga = kv[ik+1] * OgataObjI.transform(rfuncI, kv[ik+1], true, 50) - kv[ik] * OgataObjI.transform(rfuncI, kv[ik], true, 50);
       const double IDEQ = kv[ik+1] * DEObjI.transform(rfuncI, kv[ik+1]) - kv[ik] * DEObjI.transform(rfuncI, kv[ik]);
-
       std::cout << std::scientific << "[" << kv[ik] << ":\t" << kv[ik+1] << "]\t"
                 << INum << "\t"
                 << IOga << "\t"
