@@ -49,7 +49,7 @@ int main()
   std::cout << "Ogata quadrature: calculation of " << nqT << " trasforms... ";
   OgataObj.transform(rfunc, 1, true);
   for (int iqT = 0; iqT < nqT; iqT++)
-    OgataObj.transform(rfunc, 1);
+    OgataObj.transform(rfunc, 1, false);
   t.stop();
 
   t.start();
