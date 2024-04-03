@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['object_0',['object',['../structapfel_1_1ConvolutionMap_1_1rule.html#a2c0746f83d8cd9aba6adef881214d4e6',1,'apfel::ConvolutionMap::rule']]],
-  ['object_1',['Object',['../classapfel_1_1DISNCBasis.html#adb9d33d6b7cd7bafd381c214e83bd64d',1,'apfel::DISNCBasis::Object'],['../classapfel_1_1DISCCBasis.html#a71d34c94c9d06fe8418da8d5ee37f501',1,'apfel::DISCCBasis::Object'],['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aaf',1,'apfel::EvolBasisPlusMinus::Object'],['../classapfel_1_1EvolutionBasisQCD.html#a0e3bb51b09bf1cfae51916729c1c8169',1,'apfel::EvolutionBasisQCD::Object'],['../classapfel_1_1MatchingBasisQCD.html#a662d45066a92fc8f8c6deda77b429831',1,'apfel::MatchingBasisQCD::Object']]],
+  ['object_0',['Object',['../classapfel_1_1DISNCBasis.html#adb9d33d6b7cd7bafd381c214e83bd64d',1,'apfel::DISNCBasis::Object'],['../classapfel_1_1DISCCBasis.html#a71d34c94c9d06fe8418da8d5ee37f501',1,'apfel::DISCCBasis::Object'],['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aaf',1,'apfel::EvolBasisPlusMinus::Object'],['../classapfel_1_1EvolutionBasisQCD.html#a0e3bb51b09bf1cfae51916729c1c8169',1,'apfel::EvolutionBasisQCD::Object'],['../classapfel_1_1MatchingBasisQCD.html#a662d45066a92fc8f8c6deda77b429831',1,'apfel::MatchingBasisQCD::Object']]],
+  ['object_1',['object',['../structapfel_1_1ConvolutionMap_1_1rule.html#a2c0746f83d8cd9aba6adef881214d4e6',1,'apfel::ConvolutionMap::rule']]],
   ['object1_2',['object1',['../structapfel_1_1term.html#ae83713d52c64fe1e8058b3e92e05441c',1,'apfel::term']]],
   ['object2_3',['object2',['../structapfel_1_1term.html#aa1968face846d1995d05dc178734b352',1,'apfel::term']]],
   ['objects_4',['Objects',['../structapfel_1_1Observable_1_1ConvolutionPair.html#a3f82e2d201c8c68c318ffee8e85db394',1,'apfel::Observable::ConvolutionPair']]],
@@ -9,7 +9,7 @@ var searchData=
   ['observable_2eh_6',['observable.h',['../observable_8h.html',1,'']]],
   ['ode_2eh_7',['ode.h',['../ode_8h.html',1,'']]],
   ['of_20the_20massive_20neutral_20current_20coefficient_20functions_8',['Massless limit of the massive neutral current coefficient functions',['../group__NCMassiveZero.html',1,'']]],
-  ['ogataquadrature_9',['OgataQuadrature',['../classapfel_1_1OgataQuadrature.html',1,'apfel::OgataQuadrature'],['../classapfel_1_1OgataQuadrature.html#a7c7d0b8434eb62771399493890ccdeec',1,'apfel::OgataQuadrature::OgataQuadrature()']]],
+  ['ogataquadrature_9',['OgataQuadrature',['../classapfel_1_1OgataQuadrature.html',1,'apfel::OgataQuadrature'],['../classapfel_1_1OgataQuadrature.html#a06030f81d3a3da60b9749fee1037fe29',1,'apfel::OgataQuadrature::OgataQuadrature()']]],
   ['ogataquadrature_2eh_10',['ogataquadrature.h',['../ogataquadrature_8h.html',1,'']]],
   ['operand_11',['Operand',['../classapfel_1_1DISNCBasis.html#a4ab558bc993eb6f6b5c6a9f15eb53d60',1,'apfel::DISNCBasis::Operand'],['../classapfel_1_1DISCCBasis.html#a56bdaa6315470fe02451ec5c940fcc2f',1,'apfel::DISCCBasis::Operand'],['../classapfel_1_1EvolBasisPlusMinus.html#abefb2724e9649bff2b604ee4a41ebaf4',1,'apfel::EvolBasisPlusMinus::Operand'],['../classapfel_1_1EvolutionBasisQCD.html#afb35598009d55d438109390cd26796b8',1,'apfel::EvolutionBasisQCD::Operand'],['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72',1,'apfel::MatchingBasisQCD::Operand']]],
   ['operand_12',['operand',['../structapfel_1_1ConvolutionMap_1_1rule.html#a6c3092134ba2ed5a1eae04aae274211d',1,'apfel::ConvolutionMap::rule']]],

@@ -34,7 +34,7 @@ var searchData=
   ['tpp_31',['TPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa2bc4893ebfa069c87698c77b141671a7',1,'apfel::EvolBasisPlusMinus']]],
   ['tr_32',['TR',['../group__MathConstants.html#gaa5cdb3b0774934c96e344d691863282a',1,'apfel']]],
   ['trans_33',['TRANS',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792aaa4d3e47e41ae4dfaea730e92a239b31',1,'apfel::EvolutionSetup']]],
-  ['transform_34',['transform',['../classapfel_1_1DoubleExponentialQuadrature.html#af9c3896a4859bc74803ad537113585a8',1,'apfel::DoubleExponentialQuadrature::transform()'],['../classapfel_1_1OgataQuadrature.html#a08492fa34b921c4eb8354d905601ac26',1,'apfel::OgataQuadrature::transform()']]],
+  ['transform_34',['transform',['../classapfel_1_1DoubleExponentialQuadrature.html#af9c3896a4859bc74803ad537113585a8',1,'apfel::DoubleExponentialQuadrature::transform()'],['../classapfel_1_1OgataQuadrature.html#aba999491c6de66e18d029979db8fa3ed',1,'apfel::OgataQuadrature::transform()']]],
   ['transitionpoints_35',['TransitionPoints',['../classapfel_1_1Grid.html#af2190ab06c49804f6bc9bf6bc3b1adbe',1,'apfel::Grid']]],
   ['transversely_20polarised_20evolution_20kernels_36',['Transversely polarised evolution kernels',['../group__GPDTransSF.html',1,'']]],
   ['transversely_20polarised_20splitting_20functions_37',['Transversely polarised splitting functions',['../group__TransSF.html',1,'Transversely polarised splitting functions'],['../group__TransSFtl.html',1,'Transversely polarised splitting functions']]],

@@ -73,10 +73,10 @@ def psip(tv):
     return np.array([1 if t > 10 else ( np.pi * t * np.cosh(t) + np.sinh(np.pi * np.sinh(t)) ) / ( 1 + np.cosh(np.pi * np.sinh(t)) ) for t in tv])
 
 # Finally compute integral
-hT0 = [1, 1,   1, 1,   1,   1,   1,  1,   1,   1]
-hT1 = [0, 0.5, 1, 1.5, 0.3, 0.7, 1,  1.2, 0.3, 1.2]
-hT2 = [0, 0,   0, 0,   0.3, 0.7, 1,  1.2, 0.8, 1.5]
-clr = ["red", "blue", "orange", "green", "purple", "brown", "pink", "gray", "olive", "cyan"]
+hT0 = [1, 1,   1, 1,   1,   1,   1,  1,   1,   1]#,   1]
+hT1 = [0, 0.5, 1, 1.5, 0.3, 0.7, 1,  1.2, 0.3, 1.2]#, 11]
+hT2 = [0, 0,   0, 0,   0.3, 0.7, 1,  1.2, 0.8, 1.5]#, 12]
+clr = ["red", "blue", "orange", "green", "purple", "brown", "pink", "gray", "olive", "cyan"]#, "black"]
 
 for i in range(len(hT0)):
     # Integrand
@@ -84,10 +84,11 @@ for i in range(len(hT0)):
         return b * sp.j0(hT0[i] * b) * sp.j0(hT1[i] * b) * sp.j0(hT2[i] * b) * np.exp(- b**2 / 2)
     
     hTv = - np.sort(-np.array([hT0[i], hT1[i], hT2[i]]))
-    h = 0.01 * hTv[0]
-    nterm = 10
+    h = 0.005 * hTv[0]**0.6
+    nterm = 20
 
-    xib, wi = Weights(nterm, hTv[1] / hTv[0], hTv[2] / hTv[0])
+    #xib, wi = Weights(nterm, hTv[1] / hTv[0], hTv[2] / hTv[0])
+    xib, wi = Weights(nterm, 0, 0)
     z  = np.pi * psi(h * xib / np.pi) / h / hTv[0]
     tm = wi * psip(h * xib / np.pi) * fb(z) / hTv[0]
     integ = np.array([sum(tm[:k]) for k in range(len(tm))])
