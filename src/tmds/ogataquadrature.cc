@@ -584,34 +584,35 @@ namespace apfel
 
   //_____________________________________________________________________________
   template<typename T>
-  T OgataQuadrature::transform(std::function<T(double const&)> const& func, double const& qT, bool const& Dynh, int const& nmax) const
+  T OgataQuadrature::transform(std::function<T(double const&)> const& func, double const& qT, bool const& Dynh, int const& nmax, int const& period) const
   {
     // Compute _h dynamically if requested
     if (Dynh)
       {
         OgataQuadrature *ptr =  const_cast<OgataQuadrature*> (this);
-        // This seems to be a good and yet simple scaling (but may not
-        // be too general).
-        ptr -> _h = 0.001 * qT;
+        // This seems to be a good and yet simple scaling for _h (but
+        // may not be too general).
+        ptr -> _h = 0.001 * M_PI * qT;
         ptr -> InitialiseWeights(nmax);
       }
 
-    // Compute integral as a weighted sum
-    T integral = _weights[0] * func(_xf[0] / qT);
+    T integral     = _weights[0] * func(_xf[0] / qT);
+    T integralSave = integral;
     int i;
     for (i = 1; i < std::min(nmax, (int) _nZeroMax); i++)
       {
-        const T term = _weights[i] * func(_xf[i] / qT);
+        integral += _weights[i] * func(_xf[i] / qT);
 
-        // Break when the absolute value of the last term is less than
-        // "_CutOff". This assumes that terms are increasingly
-        // small. Provided that the integrand is not badly behaved,
-        // this should be guaranteed by the Bessel functions
-        // themselves.
-        if (dabs(term) < _CutOff * dabs(integral))
-          break;
-
-        integral += term;
+        // Compare the value of the integral across "period"
+        // iterations and, if the relative difference is smaller than
+        // "_CutOff", break the cycle. A period larger than one is
+        // necessary to average out possible oscillations.
+        if (i % period == 0)
+          {
+            if (dabs(1 - dabs(integralSave) / dabs(integral)) < _CutOff)
+              break;
+            integralSave = integral;
+          }
       }
     integral /= qT;
 
@@ -650,11 +651,11 @@ namespace apfel
 
   // Specialisations
   template double OgataQuadrature::transform<double>(std::function<double(double const&)> const& f,
-                                                     double const& qT, bool const& Dynh, int const& nmax) const;
+                                                     double const& qT, bool const& Dynh, int const& nmax, int const& period) const;
   template Distribution OgataQuadrature::transform<Distribution>(std::function<Distribution(double const&)> const& f,
-                                                                 double const& qT, bool const& Dynh, int const& nmax) const;
+                                                                 double const& qT, bool const& Dynh, int const& nmax, int const& period) const;
   template Set<Distribution> OgataQuadrature::transform<Set<Distribution>>(std::function<Set<Distribution>(double const&)> const& f,
-                                                                           double const& qT, bool const& Dynh, int const& nmax) const;
+                                                                           double const& qT, bool const& Dynh, int const& nmax, int const& period) const;
   template DoubleObject<Distribution> OgataQuadrature::transform<DoubleObject<Distribution>>(std::function<DoubleObject<Distribution>(double const&)> const& f,
-                                                                                             double const& qT, bool const& Dynh, int const& nmax) const;
+                                                                                             double const& qT, bool const& Dynh, int const& nmax, int const& period) const;
 }

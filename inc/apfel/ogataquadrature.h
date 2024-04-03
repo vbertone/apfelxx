@@ -34,9 +34,9 @@ namespace apfel
      * the faster the decay the smaller the value of 'h' has to be.
      */
     OgataQuadrature(int    const& nu = 0,
-                    double const& CutOff = 1e-7,
+                    double const& CutOff = 1e-5,
                     double const& h = 0.001,
-                    int    const& nZeroMax = 200);
+                    int    const& nZeroMax = 1000);
 
     /**
      * @brief Function that initialises the coordinates and the
@@ -49,12 +49,13 @@ namespace apfel
      * @brief Function that transform the input function.
      * @param func: function to be transformed
      * @param qT: value of qT in which to compute the transform
-     * @param Dynh: switch to compute the step parameter _h dynamically (default: false)
+     * @param Dynh: switch to compute the step parameter _h dynamically (default: true)
      * @param nmax: maximum number of terms in the Ogata quadrature (default: 1000)
+     * @param period: interval across which the integral is checked to determine where the sum is truncated (default: 10)
      * @return the value of the transform
      */
     template<typename T>
-    T transform(std::function<T(double const&)> const& func, double const& qT, bool const& Dynh = false, int const& nmax = 200) const;
+    T transform(std::function<T(double const&)> const& func, double const& qT, bool const& Dynh = true, int const& nmax = 1000, int const& period = 10) const;
 
     /**
      * @brief Function that returns the Bessel order.

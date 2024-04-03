@@ -18,14 +18,13 @@ namespace apfel
   DoubleExponentialQuadrature::DoubleExponentialQuadrature(int const& nu, double const& eps):
     _nu(nu)
   {
-    /* ---- adjustable parameter ---- */
+    /* ---- adjustable parameters ---- */
     int lmax = 5;
     double efs = 0.1, enoff = 0.40, pqoff = 2.9, ppoff = -0.72;
 
-    /* ------------------------------ */
+    /* ------------------------------- */
     int noff0, nk0, noff, k, nk, j, lenaw;
-    double pi4, tinyln, epsln, frq4, per2, pp, pq, ehp, ehm, h, t,
-           ep, em, tk, xw, wg, xa, tiny;
+    double pi4, tinyln, epsln, frq4, per2, pp, pq, ehp, ehm, h, t, ep, em, tk, xw, wg, xa, tiny;
 
     lenaw = 8000;
     tiny = 1e-30;
