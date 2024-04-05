@@ -39,7 +39,7 @@ APFEL++ is available through the
 tapped Homebrew-hep, the latest stable release of APFEL++ can be
 downloaded and installed with:
 ```Shell
-brew install apfelxx
+brew install apfel++
 ```
 
 ## Download
