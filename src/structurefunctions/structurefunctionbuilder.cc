@@ -102,7 +102,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
@@ -190,13 +192,15 @@ namespace apfel
 
       // Fill in structure function object
       StructureFunctionObjects FObj;
-      FObj.skip = skip;
       FObj.nf   = nf;
       FObj.P    = PDFObj.at(nf);
+      FObj.skip = skip;
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
@@ -286,7 +290,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
@@ -365,7 +371,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G4NNLO.at(nf)}});
@@ -442,7 +450,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), GLNNLO.at(nf)}});
@@ -521,7 +531,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), G1NNLO.at(nf)}});
@@ -1886,7 +1898,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
@@ -1964,7 +1978,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
@@ -2052,7 +2068,9 @@ namespace apfel
       // Single structure function components.
       for (int k = 0; k <= 6; k++)
         {
+// *INDENT-OFF*
           FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+// *INDENT-ON*
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C3NNLO.at(nf)}});
