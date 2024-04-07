@@ -634,4 +634,24 @@ namespace apfel
         return hpl;
       }
   }
+
+  //_________________________________________________________________________________
+  double digamma(double const& z)
+  {
+    double sub = 0.0;
+    double zz = z;
+
+    // Shift of the argument using the functional equation
+    if (std::abs(zz) < 10.0)
+      while (zz < 10.0)
+        {
+          sub -= 1.0 / zz;
+          zz += 1.0;
+        }
+
+    // Use of the asymptotic expansion (at the shifted argument)
+    double rz = 1.0 / zz;
+    double dz = rz * rz;
+    return sub + std::log(zz) - 0.5 * rz - dz / 5040.0 * ( 420.0 + dz * ( - 42.0 + dz * ( 20.0 - 21.0 * dz ) ) );
+  }
 }

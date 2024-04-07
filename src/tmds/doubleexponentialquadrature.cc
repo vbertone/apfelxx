@@ -18,13 +18,13 @@ namespace apfel
   DoubleExponentialQuadrature::DoubleExponentialQuadrature(int const& nu, double const& eps):
     _nu(nu)
   {
-    /* ---- adjustable parameter ---- */
+    /* ---- adjustable parameters ---- */
     int lmax = 5;
     double efs = 0.1, enoff = 0.40, pqoff = 2.9, ppoff = -0.72;
-    /* ------------------------------ */
+
+    /* ------------------------------- */
     int noff0, nk0, noff, k, nk, j, lenaw;
-    double pi4, tinyln, epsln, frq4, per2, pp, pq, ehp, ehm, h, t,
-           ep, em, tk, xw, wg, xa, tiny;
+    double pi4, tinyln, epsln, frq4, per2, pp, pq, ehp, ehm, h, t, ep, em, tk, xw, wg, xa, tiny;
 
     lenaw = 8000;
     tiny = 1e-30;
@@ -123,7 +123,7 @@ namespace apfel
     const double w02 = 2 * _aw[noff + 2];
     const double perw = per * w02;
 
-    T i = f(_aw[noff] * per) * jn(_nu, qT * (_aw[noff] * per));
+    T i = f(_aw[noff] * per) * jn(_nu, qT * ( _aw[noff] * per ));
     T ir = i * _aw[noff + 1];
     T zero{0*i};
     double err = dabs(i);
@@ -166,7 +166,7 @@ namespace apfel
                     j += 3;
                     xa = per * _aw[j];
                     fm = f(xa) * jn(_nu, qT * xa);
-                    fp = f(xa + perw * tk) * jn(_nu, qT * (xa + perw * tk));
+                    fp = f(xa + perw * tk) * jn(_nu, qT * ( xa + perw * tk ));
                     ir += (fm + fp) * _aw[j + 1];
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];
@@ -186,7 +186,7 @@ namespace apfel
                   {
                     xa = per * _aw[j];
                     fm = f(xa) * jn(_nu, qT * xa);
-                    fp = f(xa + perw * tk) * jn(_nu, qT * (xa + perw * tk));
+                    fp = f(xa + perw * tk) * jn(_nu, qT * ( xa + perw * tk ));
                     ir += (fm + fp) * _aw[j + 1];
                     fm *= _aw[j + 2];
                     fp *= w02 - _aw[j + 2];

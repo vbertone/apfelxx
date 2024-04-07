@@ -269,8 +269,6 @@ namespace apfel
     // approximate parameterisation. In addition, the approximations
     // of https://arxiv.org/pdf/2207.04739.pdf are used.
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
-    const Operator O3gq{g, P3gq{}, IntEps};
-    const Operator O3gg{g, P3gg{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O3nsp{g, P3nsp{nf}, IntEps};
@@ -278,6 +276,8 @@ namespace apfel
         const Operator O3nss{g, P3nss{nf}, IntEps};
         const Operator O3ps {g, P3ps{nf},  IntEps};
         const Operator O3qg {g, P3qg{nf},  IntEps};
+        const Operator O3gq {g, P3gq{nf},  IntEps};
+        const Operator O3gg {g, P3gg{nf},  IntEps};
         const Operator O3qq  = O3nsp + O3ps;
         const Operator O3nsv = O3nsm + O3nss;
         std::map<int, Operator> OM;

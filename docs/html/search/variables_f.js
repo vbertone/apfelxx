@@ -7,5 +7,8 @@ var searchData=
   ['qmax_4',['Qmax',['../structapfel_1_1EvolutionSetup.html#ab80c721e240135b40821d4cda11b78e2',1,'apfel::EvolutionSetup']]],
   ['qmin_5',['Qmin',['../structapfel_1_1EvolutionSetup.html#aa74278493b4ea60f09c74510a84be9ec',1,'apfel::EvolutionSetup']]],
   ['qqcdref_6',['QQCDRef',['../structapfel_1_1EvolutionSetup.html#a78386fbdc6c17e740cbd14ab8d015914',1,'apfel::EvolutionSetup']]],
-  ['qqedref_7',['QQEDRef',['../structapfel_1_1EvolutionSetup.html#a198ae368f643bda07977fd4a21815a1e',1,'apfel::EvolutionSetup']]]
+  ['qqedref_7',['QQEDRef',['../structapfel_1_1EvolutionSetup.html#a198ae368f643bda07977fd4a21815a1e',1,'apfel::EvolutionSetup']]],
+  ['quarkanalyticevolutionfactor_8',['QuarkAnalyticEvolutionFactor',['../namespaceapfel.html#a0143b58cf6f69ad1980195e177c86b03',1,'apfel']]],
+  ['quarkevolutionfactor_9',['QuarkEvolutionFactor',['../namespaceapfel.html#a3cfb92cc6252227ce268c43cd7f3af46',1,'apfel']]],
+  ['quarkevolutionfactorxi_10',['QuarkEvolutionFactorxi',['../namespaceapfel.html#ae2fb84cc0191695d8142fa29e5cc54d7',1,'apfel']]]
 ];
