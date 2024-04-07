@@ -290,31 +290,52 @@ namespace apfel
   /**
    * @defgroup NNNLOunpsf NNNLO splitting functions
    * @ingroup UnpSF
-   * @note For now only the plus, minus, and valence contributions
-   * have been computed (parameterised and leading color).
+   * @note For now only leading-color plus, minus, and valence
+   * contributions have been computed and parameterised. The singlet
+   * ones are also parameterised and using the first Mellin moments
+   * and the small- and large-x asymptotic behaviours.
    */
   ///@{
+  /* /\** */
+  /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-plus */
+  /*  * unpolarised splitting function. */
+  /*  *\/ */
+  /* class P3nsp: public Expression */
+  /* { */
+  /* public: */
+  /*   P3nsp(int const& nf, int const& imod = 0, double const& rho = 0.007); */
+  /*   double Regular(double const& x)  const; */
+  /*   double Singular(double const& x) const; */
+  /*   double Local(double const& x)    const; */
+  /* private: */
+  /*   int           const _nf; */
+  /*   int           const _imod; */
+  /*   double        const _rho; */
+  /*   std::vector<double> _C; */
+  /* }; */
+
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-plus
-   * unpolarised splitting function.
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * non-singlet-plus unpolarised splitting function. Parameterisation
+   * determined in https://arxiv.org/pdf/1707.08315.pdf
    */
   class P3nsp: public Expression
   {
   public:
-    P3nsp(int const& nf, int const& imod = 0, double const& rho = 0.007);
+    P3nsp(int const& nf, int const& imod = 0);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    int           const _nf;
-    int           const _imod;
-    double        const _rho;
-    std::vector<double> _C;
+    int const _nf;
+    int const _imod;
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-minus
-   * unpolarised splitting function.
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * non-singlet-minus unpolarised splitting
+   * function. Parameterisation determined in
+   * https://arxiv.org/pdf/1707.08315.pdf
    */
   class P3nsm: public Expression
   {
@@ -329,9 +350,10 @@ namespace apfel
   };
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) non-singlet-valence
-   * unpolarised splitting function minus non-singlet-minus
-   * unpolarised splitting function.
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * non-singlet-valence unpolarised splitting
+   * function. Parameterisation determined in
+   * https://arxiv.org/pdf/1707.08315.pdf
    */
   class P3nss: public Expression
   {
@@ -343,25 +365,9 @@ namespace apfel
     int const _imod;
   };
 
-  /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet
-   * unpolarised splitting function.
-   */
-  class P3ps: public Expression
-  {
-  public:
-    P3ps(int const& nf, double const& rho = -0.501);
-    double Regular(double const& x) const;
-  private:
-    int           const _nf;
-    double        const _rho;
-    std::vector<double> _C;
-  };
-
   /* /\** */
   /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet */
-  /*  * unpolarised splitting function. Parameterisation determined in */
-  /*  * https://arxiv.org/pdf/2302.07593.pdf */
+  /*  * unpolarised splitting function. */
   /*  *\/ */
   /* class P3ps: public Expression */
   /* { */
@@ -374,46 +380,109 @@ namespace apfel
   /* }; */
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) quark-gluon unpolarised
-   * splitting function.
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet
+   * unpolarised splitting function. Parameterisation determined in
+   * https://arxiv.org/pdf/2302.07593.pdf
+   */
+  class P3ps: public Expression
+  {
+  public:
+    P3ps(int const& nf, int const& imod = 0);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+    int const _imod;
+  };
+
+  /* /\** */
+  /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) quark-gluon unpolarised */
+  /*  * splitting function. */
+  /*  *\/ */
+  /* class P3qg: public Expression */
+  /* { */
+  /* public: */
+  /*   P3qg(int const& nf, double const& rho = -1.754); */
+  /*   double Regular(double const& x) const; */
+  /* private: */
+  /*   int           const _nf; */
+  /*   double        const _rho; */
+  /*   std::vector<double> _C; */
+  /* }; */
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) quark-gluon
+   * unpolarised splitting function. Parameterisation determined in
+   * https://arxiv.org/pdf/2307.04158.pdf
    */
   class P3qg: public Expression
   {
   public:
-    P3qg(int const& nf, double const& rho = -1.754);
+    P3qg(int const& nf, int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    int           const _nf;
-    double        const _rho;
-    std::vector<double> _C;
+    int const _nf;
+    int const _imod;
   };
 
+  /* /\** */
+  /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-quark unpolarised */
+  /*  * splitting function. */
+  /*  *\/ */
+  /* class P3gq: public Expression */
+  /* { */
+  /* public: */
+  /*   P3gq(double const& rho = -1.784); */
+  /*   double Regular(double const& x) const; */
+  /* private: */
+  /*   double        const _rho; */
+  /*   std::vector<double> _C; */
+  /* }; */
+
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-quark unpolarised
-   * splitting function.
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-quark
+   * unpolarised splitting function. Parameterisation determined in
+   * https://arxiv.org/pdf/2310.05744.pdf
    */
   class P3gq: public Expression
   {
   public:
-    P3gq(double const& rho = -1.784);
+    P3gq(int const& nf, int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    double        const _rho;
-    std::vector<double> _C;
+    int const _nf;
+    int const _imod;
   };
 
+  /* /\** */
+  /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-gluon unpolarised */
+  /*  * splitting function. */
+  /*  *\/ */
+  /* class P3gg: public Expression */
+  /* { */
+  /* public: */
+  /*   P3gg(double const& rho = 19.245); */
+  /*   double Regular(double const& x)  const; */
+  /* private: */
+  /*   double        const _rho; */
+  /*   std::vector<double> _C; */
+  /* }; */
+
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-gluon unpolarised
-   * splitting function.
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-gluon
+   * unpolarised splitting function. Parameterisation determined in
+   * https://arxiv.org/pdf/2310.05744.pdf
    */
   class P3gg: public Expression
   {
   public:
-    P3gg(double const& rho = 19.245);
+    P3gg(int const& nf, int const& imod = 0);
     double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
   private:
-    double        const _rho;
-    std::vector<double> _C;
+    int const _nf;
+    int const _imod;
+    double _A4gluon;
   };
   ///@}
 }
