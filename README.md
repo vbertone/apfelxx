@@ -76,8 +76,8 @@ mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/your/installation/path/ ..
 make && make install
 ```
-By the default, if no prefix is given, the program will
-be installed in the /usr/local folder. If you want (or need) to use a
+By default, if no prefix is given, the program will
+be installed in the `/usr/local` folder. If you want (or need) to use a
 different path, remember to export the APFEL++ `/lib` and `/bin` folders into the
 `$LD_LIBRARY_PATH` and `$PATH`, respectively. More configuration options can be accessed by typing:
 
