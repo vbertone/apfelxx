@@ -1349,6 +1349,9 @@ namespace apfel
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double dl5  = dl * dl4;
+    const double dl6  = dl * dl5;
     const double dlm  = log(1 - x);
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm * dlm2;
@@ -1358,17 +1361,29 @@ namespace apfel
     // Known large-x coefficients
     const double x1L5cff = 1.3443073e1 - 5.4869684e-1 * _nf;
     const double x1L4cff = 3.7539831e2 - 3.4494742e1  * _nf + 8.7791495e-1 * nf2;
+    const double y1L5cff = 2.2222222e1 - 5.4869684e-1 * _nf;
+    const double y1L4cff = 6.6242163e2 - 4.7992684e1  * _nf + 8.7791495e-1 * nf2;
 
-    // Small-x, Casimir scaled from P_gg (approx. for bfkl1)
+    // x^-1 small-x coeff's, Casimir scaled from P_gg (approx. for bfkl1)
     const double bfkl0 =   - 8.3086173e3 / 2.25;
     const double bfkl1 = ( - 1.0691199e5 - _nf * 9.9638304e2 ) / 2.25;
 
+    // Small-x double-logs with x^0
+    const double x0L6cff =   5.2235940e1 - 7.3744856e0 * _nf;
+    const double x0L5cff = - 2.9221399e2 + 1.8436214e0 * _nf;
+    const double x0L4cff =   7.3106077e3 - 3.7887135e2 * _nf - 3.2438957e1 * nf2;
+
     // The resulting part of the function
     const double P3gq01 =
-      + bfkl0   * dl3 * xm
-      + bfkl1   * dl2 * xm
+      + bfkl0   * xm * dl3
+      + bfkl1   * xm * dl2
+      + x0L6cff * dl6
+      + x0L5cff * dl5
+      + x0L4cff * dl4
       + x1L4cff * dlm4
-      + x1L5cff * dlm5;
+      + x1L5cff * dlm5
+      + y1L4cff * x1 * dlm4
+      + y1L5cff * x1 * dlm5;
 
     // The selected approximations for nf = 3, 4, 5
     double P3gqApp1 = P3gq01;
@@ -1376,53 +1391,83 @@ namespace apfel
     if (_nf <= 3)
       {
         P3gqApp1 +=
-          + 3.4     * bfkl1 * dl * xm
-          - 161562. * x1 * xm
-          + 36469.
-          + 72317.  * dl
-          - 3977.3  * dlm2
-          + 484.4   * dlm3;
+          + 6.       * bfkl1 * xm * dl
+          - 744384.  * xm * x1
+          + 2453640.
+          - 1540404. * x * ( 2 + x )
+          + 1933026. * dl
+          + 1142069. * dl2
+          + 162196.  * dl3
+          - 2172.1   * dlm3
+          - 93264.1  * dlm2
+          - 786973.  * dlm
+          + 875383.  * x1 * dlm2;
         P3gqApp2 +=
-          + 5.4     * bfkl1 * dl * xm
-          - 546482. * x1 * xm
-          - 39464.
-          - 401000. * dl
-          + 13270.  * dlm2
-          + 3289.   * dlm3;
+          + 3.       * bfkl1 *  xm * dl
+          + 142414.  * xm * x1
+          - 326525.
+          + 2159787. * x * ( 2 - x )
+          - 289064.  * dl
+          - 176358.  * dl2
+          + 156541.  * dl3
+          + 9016.5   * dlm3
+          + 136063.  * dlm2
+          + 829482.  * dlm
+          - 2359050. * dl * dlm;
       }
     else if (_nf == 4)
       {
         P3gqApp1 +=
-          + 3.4     * bfkl1 * dl * xm
-          - 158805. * x1 * xm
-          + 35098.
-          + 87258.  * dl
-          - 4834.1  * dlm2
-          + 176.6   * dlm3;
+          + 6.       * bfkl1 * xm * dl
+          - 743535.  * xm * x1
+          + 2125286.
+          - 1332472. * x * ( 2 + x )
+          + 1631173. * dl
+          + 1015255. * dl2
+          + 142612.  * dl3
+          - 1910.4   * dlm3
+          - 80851.   * dlm2
+          - 680219.  * dlm
+          + 752733.  * x1 * dlm2;
         P3gqApp2 +=
-          + 5.4     * bfkl1 * dl * xm
-          - 547215. * x1 * xm
-          - 41523.
-          - 390350. * dl
-          + 12571.  * dlm2
-          + 3007.   * dlm3;
+          + 3.       * bfkl1 * xm * dl
+          + 160568.  * xm * x1
+          - 361207.
+          + 2048948. * x * ( 2 - x )
+          - 245963.  * dl
+          - 171312.  * dl2
+          + 163099.  * dl3
+          + 8132.2   * dlm3
+          + 124425.  * dlm2
+          + 762435.  * dlm
+          - 2193335. * dl * dlm;
       }
     else if (_nf >= 5)
       {
         P3gqApp1 +=
-          + 3.4     * bfkl1 * dl * xm
-          - 154336. * x1 * xm
-          + 33889.
-          + 103440. * dl
-          - 5745.8  * dlm2
-          - 128.6   * dlm3;
+          + 6.      * bfkl1 * xm * dl
+          - 785864. * xm * x1
+          + 285034.
+          - 131648. * x * ( 2 + x )
+          - 162840. * dl
+          + 321220. * dl2
+          + 12688.  * dl3
+          + 1423.4  * dlm3
+          + 1278.9  * dlm2
+          - 30919.9 * dlm
+          + 47588.  * x1 * dlm2;
         P3gqApp2 +=
-          + 5.4     * bfkl1 * dl * xm
-          - 546236. * x1 * xm
-          - 43421.
-          - 378460. * dl
-          + 11816.  * dlm2
-          + 2727.3  * dlm3;
+          + 3.       * bfkl1 * xm * dl
+          + 177094.  * xm * x1
+          - 470694.
+          + 1348823. * x * ( 2 - x )
+          - 52985.   * dl
+          - 87354.   * dl2
+          + 176885.  * dl3
+          + 4748.8   * dlm3
+          + 65811.9  * dlm2
+          + 396390.  * dlm
+          - 1190212. * dl * dlm;
       }
 
     // We return (for now) one of the two error-band boundaries or the
