@@ -6,14 +6,11 @@ var searchData=
   ['gammaw_3',['GammaW',['../group__PhysConstants.html#ga88a6077298cefab58b2272f65c05c75b',1,'apfel']]],
   ['gammaz_4',['GammaZ',['../group__PhysConstants.html#gabd11d74b7dcb591975dc2695b9f887ec',1,'apfel']]],
   ['gaussaccuracy_5',['GaussAccuracy',['../structapfel_1_1EvolutionSetup.html#a54c93d3a7ba5755aeef82ef251831c2d',1,'apfel::EvolutionSetup']]],
-  ['getcoefficientfunctions_6',['GetCoefficientFunctions',['../classapfel_1_1Observable.html#a39b4b59e8b4044751341f8b77275f2ec',1,'apfel::Observable']]],
-  ['gfermi_7',['GFermi',['../group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779',1,'apfel']]],
-  ['gk_5fw_8',['gk_w',['../group__MathConstants.html#ga0b316bc0bef1903a2c9c1de8668efc1e',1,'apfel']]],
-  ['gk_5fx_9',['gk_x',['../group__MathConstants.html#ga300e96aa973287a4d619e9ba11a5c748',1,'apfel']]],
-  ['gkj_10',['Gkj',['../namespaceapfel.html#ad6198ef2377e81a2fd6a5cbe081bffbf',1,'apfel']]],
-  ['gl_5fw_11',['gl_w',['../group__MathConstants.html#ga3414b3a6e04cc6d62fd95cc0a9827a12',1,'apfel']]],
-  ['gl_5fx_12',['gl_x',['../group__MathConstants.html#gaf52e7668f1b685bc605e97dea8d1d337',1,'apfel']]],
-  ['gluonanalyticevolutionfactor_13',['GluonAnalyticEvolutionFactor',['../namespaceapfel.html#a6e0cf069a9d95106ebb9b7e5e495a0f8',1,'apfel']]],
-  ['gluonevolutionfactor_14',['GluonEvolutionFactor',['../namespaceapfel.html#ad08fef7d61b2a6e9a12d25e299a074a9',1,'apfel']]],
-  ['gridparameters_15',['GridParameters',['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup']]]
+  ['gfermi_6',['GFermi',['../group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779',1,'apfel']]],
+  ['gk_5fw_7',['gk_w',['../group__MathConstants.html#ga0b316bc0bef1903a2c9c1de8668efc1e',1,'apfel']]],
+  ['gk_5fx_8',['gk_x',['../group__MathConstants.html#ga300e96aa973287a4d619e9ba11a5c748',1,'apfel']]],
+  ['gkj_9',['Gkj',['../namespaceapfel.html#ad6198ef2377e81a2fd6a5cbe081bffbf',1,'apfel']]],
+  ['gl_5fw_10',['gl_w',['../group__MathConstants.html#ga3414b3a6e04cc6d62fd95cc0a9827a12',1,'apfel']]],
+  ['gl_5fx_11',['gl_x',['../group__MathConstants.html#gaf52e7668f1b685bc605e97dea8d1d337',1,'apfel']]],
+  ['gridparameters_12',['GridParameters',['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup']]]
 ];

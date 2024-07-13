@@ -6,9 +6,10 @@ var searchData=
   ['unpolarised_20evolution_20kernels_3',['Unpolarised evolution kernels',['../group__GPDUnpSF.html',1,'']]],
   ['unpolarised_20matching_20conditions_4',['unpolarised matching conditions',['../group__NLOMC.html',1,'NLO unpolarised matching conditions'],['../group__NNLOMC.html',1,'NNLO unpolarised matching conditions'],['../group__NNNLOMC.html',1,'NNNLO unpolarised matching conditions']]],
   ['unpolarised_20matching_20functions_20for_20gtmds_5',['NLO unpolarised matching functions for GTMDs',['../group__NLOmatchUnp.html',1,'']]],
-  ['unpolarised_20sia_6',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
-  ['unpolarised_20splitting_20functions_7',['Unpolarised splitting functions',['../group__UnpSF.html',1,'Unpolarised splitting functions'],['../group__UnpSFtl.html',1,'Unpolarised splitting functions']]],
-  ['up_8',['UP',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575baba2bafcb4972bbfb147a55b003bbb319',1,'apfel']]],
-  ['upm_9',['UPM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa6ba569ad8ffbf1b7e041262576f38920',1,'apfel::EvolBasisPlusMinus']]],
-  ['upp_10',['UPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa186966248f9f60dc24f599db7217ad81',1,'apfel::EvolBasisPlusMinus']]]
+  ['unpolarised_20partons_6',['NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons',['../group__NLOmatchLinUnp.html',1,'']]],
+  ['unpolarised_20sia_7',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
+  ['unpolarised_20splitting_20functions_8',['Unpolarised splitting functions',['../group__UnpSF.html',1,'Unpolarised splitting functions'],['../group__UnpSFtl.html',1,'Unpolarised splitting functions']]],
+  ['up_9',['UP',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575baba2bafcb4972bbfb147a55b003bbb319',1,'apfel']]],
+  ['upm_10',['UPM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa6ba569ad8ffbf1b7e041262576f38920',1,'apfel::EvolBasisPlusMinus']]],
+  ['upp_11',['UPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa186966248f9f60dc24f599db7217ad81',1,'apfel::EvolBasisPlusMinus']]]
 ];

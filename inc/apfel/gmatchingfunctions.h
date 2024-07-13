@@ -174,8 +174,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NLOmatchLinUnp NLO matching functions for GTMDs for
-   * linealy-polarised gluons to unpolarised partons
+   * @defgroup NLOmatchLinUnp NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons
    * @ingroup GTMDMatchingFunctions
    */
   ///@{
@@ -206,8 +205,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NLOmatchLinUnp NLO matching functions for GTMDs for
-   * linealy-polarised gluons to longitudinally polarised partons
+   * @defgroup NLOmatchLinPol NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons
    * @ingroup GTMDMatchingFunctions
    */
   ///@{
