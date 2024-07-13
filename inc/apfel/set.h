@@ -47,13 +47,14 @@ namespace apfel
      */
     template<class V> Set<V> operator *= (Set<V> const& d) const;
 
-    Set<T>& operator *= (double const& s);                             //!< this *= scalar
-    Set<T>& operator *= (std::function<double(double const&)> f);      //!< this *= function of the integration variable (for distributions only)
-    Set<T>& operator *= (std::vector<double> const& v);                //!< this *= vector of scalars
-    Set<T>& operator *= (std::map<int, double> const& v);              //!< this *= map of scalars
-    Set<T>& operator /= (double const& s);                             //!< this /= scalar
-    Set<T>& operator += (Set<T> const& d);                             //!< this += Set
-    Set<T>& operator -= (Set<T> const& d);                             //!< this -= Set
+    Set<T>& operator *= (double const& s);                                      //!< this *= scalar
+    Set<T>& operator *= (std::function<double(double const&)> f);               //!< this *= function of the integration variable (for distributions only)
+    Set<T>& operator *= (std::function<std::vector<double>(double const&)> f);  //!< this *= function of the integration variable that returns a vector (for distributions only)
+    Set<T>& operator *= (std::vector<double> const& v);                         //!< this *= vector of scalars
+    Set<T>& operator *= (std::map<int, double> const& v);                       //!< this *= map of scalars
+    Set<T>& operator /= (double const& s);                                      //!< this /= scalar
+    Set<T>& operator += (Set<T> const& d);                                      //!< this += Set
+    Set<T>& operator -= (Set<T> const& d);                                      //!< this -= Set
     ///@}
 
     /**
@@ -128,6 +129,9 @@ namespace apfel
 
   template<class T>
   Set<T> operator * (std::function<double(double const&)> f, Set<T> rhs) { return rhs *= f; }
+
+  template<class T>
+  Set<T> operator * (std::function<std::vector<double>(double const&)> f, Set<T> rhs) { return rhs *= f; }
 
   template<class T>
   Set<T> operator * (Set<T> lhs, std::function<double(double const&)> f) { return lhs *= f; }

@@ -179,13 +179,13 @@ namespace apfel
     const std::function<Set<Distribution>(double const&)> MatchedGtmds = MatchGtmds(GtmdObj, CollGPDs, Alphas, PerturbativeOrder, Ci);
 
     // Compute GTMD evolution factors
-    const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(GtmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
+    const std::function<std::vector<double>(double const&, double const&, double const&, double const&)> EvolFactors = EvolutionFactors(GtmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
 
     // Compute GTMDs at the final scale by multiplying the initial
     // scale GTMDs by the evolution factor.
     const auto EvolvedGTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
     {
-      return EvolFactors(b, muf, zetaf) * MatchedGtmds(b);
+      return [=] (double const& x) -> std::vector<double> { return EvolFactors(x, b, muf, zetaf); } * MatchedGtmds(b);
     };
 
     return EvolvedGTMDs;
@@ -261,11 +261,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, GtmdObjects>           const& GtmdObj,
-                                                                                                   std::function<double(double const&)> const& Alphas,
-                                                                                                   int                                  const& PerturbativeOrder,
-                                                                                                   double                               const& Ci,
-                                                                                                   double                               const& IntEps)
+  std::function<std::vector<double>(double const&, double const&, double const&, double const&)> EvolutionFactors(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                                                                  std::function<double(double const&)> const& Alphas,
+                                                                                                                  int                                  const& PerturbativeOrder,
+                                                                                                                  double                               const& Ci,
+                                                                                                                  double                               const& IntEps)
   {
     // Retrieve thresholds from "GtmdObj"
     std::vector<double> thrs;
@@ -370,21 +370,21 @@ namespace apfel
 
     // Construct function that returns the perturbative evolution
     // kernel.
-    const auto EvolFactors = [=] (double const& b, double const& muf, double const& zetaf) -> std::vector<double>
+    const auto EvolFactors = [=] (double const& x, double const& b, double const& muf, double const& zetaf) -> std::vector<double>
     {
       // Define lower scales
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
-      const double omxi2 = 1 - xi * xi;
+      const double omk2 = std::abs(1 - pow(xi / x, 2));
 
       // Compute argument of the exponent of the evolution factors
       const double IntI1q = I1q.integrate(mu0, muf, thrs, IntEps);
       const double IntI1g = I1g.integrate(mu0, muf, thrs, IntEps);
-      const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(omxi2 * zetaf);
+      const double IntI2  = I2.integrate(mu0, muf, thrs, IntEps) * log(omk2 * zetaf);
       const double IntI3  = I3.integrate(mu0, muf, thrs, IntEps);
 
       // Compute the evolution factors
-      const double Klz = ( K(mu0) * log( omxi2 * zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
+      const double Klz = ( K(mu0) * log( omk2 * zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
       const double Rq  = exp( CF * Klz + IntI1q );
       const double Rg  = exp( CA * Klz + IntI1g );
 
@@ -396,11 +396,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
-                                                                                          std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
-                                                                                          double                               const& Ci,
-                                                                                          double                               const& IntEps)
+  std::function<double(double const&, double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                                                         std::function<double(double const&)> const& Alphas,
+                                                                                                         int                                  const& PerturbativeOrder,
+                                                                                                         double                               const& Ci,
+                                                                                                         double                               const& IntEps)
   {
     // Retrieve thresholds from "GtmdObj"
     std::vector<double> thrs;
@@ -491,20 +491,20 @@ namespace apfel
 
     // Construct function that returns the perturbative evolution
     // kernel.
-    const auto EvolFactor = [=] (double const& b, double const& muf, double const& zetaf) -> double
+    const auto EvolFactor = [=] (double const& x, double const& b, double const& muf, double const& zetaf) -> double
     {
       // Define lower scales
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
-      const double omxi2 = 1 - xi * xi;
+      const double omk2 = std::abs(1 - pow(xi / x, 2));
 
       // Compute argument of the exponent of the evolution factors
       const double IntI1 = I1.integrate(mu0, muf, thrs, IntEps);
-      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(omxi2 * zetaf);
+      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(omk2 * zetaf);
       const double IntI3 = I3.integrate(mu0, muf, thrs, IntEps);
 
       // Compute the evolution factors
-      const double Klz = ( K(mu0) * log( omxi2 * zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
+      const double Klz = ( K(mu0) * log( omk2 * zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
       const double Rq  = exp( CF * Klz + IntI1 );
 
       // Return the evolution factor
@@ -515,11 +515,11 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
-                                                                                          std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
-                                                                                          double                               const& Ci,
-                                                                                          double                               const& IntEps)
+  std::function<double(double const&, double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                                                         std::function<double(double const&)> const& Alphas,
+                                                                                                         int                                  const& PerturbativeOrder,
+                                                                                                         double                               const& Ci,
+                                                                                                         double                               const& IntEps)
   {
     // Retrieve thresholds from "GtmdObj"
     std::vector<double> thrs;
@@ -610,20 +610,20 @@ namespace apfel
 
     // Construct function that returns the perturbative evolution
     // kernel.
-    const auto EvolFactor = [=] (double const& b, double const& muf, double const& zetaf) -> double
+    const auto EvolFactor = [=] (double const& x, double const& b, double const& muf, double const& zetaf) -> double
     {
       // Define lower scales
       const double mu0   = Ci * 2 * exp(- emc) / b;
       const double zeta0 = mu0 * mu0;
-      const double omxi2 = 1 - xi * xi;
+      const double omk2 = std::abs(1 - pow(xi / x, 2));
 
       // Compute argument of the exponent of the evolution factors
       const double IntI1 = I1.integrate(mu0, muf, thrs, IntEps);
-      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(omxi2 * zetaf);
+      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps) * log(omk2 * zetaf);
       const double IntI3 = I3.integrate(mu0, muf, thrs, IntEps);
 
       // Compute the evolution factors
-      const double Klz = ( K(mu0) * log( omxi2 * zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
+      const double Klz = ( K(mu0) * log( omk2 * zetaf / zeta0 ) - IntI2 ) / 2 + IntI3;
       const double Rg  = exp( CA * Klz + IntI1 );
 
       // Return the factor
