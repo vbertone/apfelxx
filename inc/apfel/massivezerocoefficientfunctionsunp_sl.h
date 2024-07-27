@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/expression.h"
+#include "apfel/zeromasscoefficientfunctionsunp_sl.h"
 
 namespace apfel
 {
@@ -304,6 +305,208 @@ namespace apfel
   {
   public:
     Cm0L2gNC_f();
+    double Regular(double const& x) const;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOZero NNLO massive-zero coefficient functions
+   * @ingroup NCMassiveZero
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term of gluon
+   * coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023gNC_c: public Expression
+  {
+  public:
+    Cm023gNC_c(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int  const _nf;
+    C23g const _c23g;
+    C21g const _c21g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) linear log of gluon
+   * coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023gNC_l: public Expression
+  {
+  public:
+    Cm023gNC_l(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int  const _nf;
+    C22g const _c22g;
+    C21g const _c21g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quadratic log of gluon
+   * coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023gNC_l2: public Expression
+  {
+  public:
+    Cm023gNC_l2(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int  const _nf;
+    C21g const _c21g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) cubic log of gluon
+   * coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023gNC_l3: public Expression
+  {
+  public:
+    Cm023gNC_l3(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int  const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term of
+   * pure-single coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023psNC_c: public Expression
+  {
+  public:
+    Cm023psNC_c(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int   const _nf;
+    C23ps const _c23ps;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) linear log of
+   * pure-single coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023psNC_l: public Expression
+  {
+  public:
+    Cm023psNC_l(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quadratic log of
+   * pure-single coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023psNC_l2: public Expression
+  {
+  public:
+    Cm023psNC_l2(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) cubic log of
+   * pure-single coefficient function for F2. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm023psNC_l3: public Expression
+  {
+  public:
+    Cm023psNC_l3(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term of
+   * pure-single coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3psNC_c: public Expression
+  {
+  public:
+    Cm0L3psNC_c(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    CL3ps const _cL3ps;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) linear log of
+   * pure-single coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3psNC_l: public Expression
+  {
+  public:
+    Cm0L3psNC_l();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quadratic log of
+   * pure-single coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3psNC_l2: public Expression
+  {
+  public:
+    Cm0L3psNC_l2();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term of gluon
+   * coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3gNC_c: public Expression
+  {
+  public:
+    Cm0L3gNC_c(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    CL3g const _cL3g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) linear log term of
+   * gluon coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3gNC_l: public Expression
+  {
+  public:
+    Cm0L3gNC_l(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quadratic log term of
+   * gluon coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3gNC_l2: public Expression
+  {
+  public:
+    Cm0L3gNC_l2();
     double Regular(double const& x) const;
   };
   ///@}
