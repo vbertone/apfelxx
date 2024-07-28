@@ -227,6 +227,44 @@ namespace apfel
   ///@}
 
   /**
+   * @defgroup NNLOthr Approximated NNLO massive coefficient functions near threshold
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for F2 near
+   * threshold. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class CmTh23gNC: public Expression
+  {
+  public:
+    CmTh23gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    int     const _nf;
+    double  const _eta;
+    Cm21gNC const _c21g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for FL near
+   * threshold. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class CmThL3gNC: public Expression
+  {
+  public:
+    CmThL3gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    int     const _nf;
+    double  const _eta;
+    CmL1gNC const _cL1g;
+  };
+  ///@}
+
+  /**
    * @defgroup NLOhq NLO massive heavy-quark-initiated coefficient functions
    * Collection of the massive coefficient functions for processes
    * with a massive heavy quark in the intial state. These coefficient

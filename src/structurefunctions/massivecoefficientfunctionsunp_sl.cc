@@ -301,7 +301,115 @@ namespace apfel
     const double z   = eta * x;
     double xi = 4 * eta / ( 1 - eta );
     double wr = xi * ( 1 / z - 1 ) / 4 - 1;
-    return _eta * 16 * M_PI * xi * clnlobarq_(&wr, & xi) / z;
+    return _eta * 16 * M_PI * xi * clnlobarq_(&wr, &xi) / z;
+  }
+
+  //_________________________________________________________________________________
+  // Helper functions for the approximated O(as^3) coefficient
+  // functions. The correspond to Eqs. (3.10) and (3.11) of
+  // https://arxiv.org/pdf/1205.5727.
+  //_________________________________________________________________________________
+  double c0Th(double const& xi)
+  {
+    const double y  = sqrt(1 + 4 / xi);
+    const double L1 = log(1 + xi / 2);
+    const double L2 = log(2 + xi / 2);
+    const double L3 = log(sqrt(xi) * ( y - 1 ) / 2);
+    const double xip2 = 2 + xi;
+    const double xip4 = 4 + xi;
+    const double Li2 = dilog(-2 / xip2);
+    return CA * ( 50 - Pi2 + 12 * L3 / y + 4 * L3 * L3 + L1 * L1 + 6 * L2
+                  - 4 * L2 * L2 + 2 * Li2 + 48 / xip2 - 4 * L2 / xip2
+                  + 64 * L2 / xip2 / xip2 - 128 * L2 / ( xip2 * xip2 * xip4 )
+                  - 160 / xip2 / xip4 - 64 * L2 / xip2 / xip4
+                  + 128 / ( xip2 * xip4 * xip4 ) - 12 * ( 4 + zeta2 ) / xip4
+                  - 8 * L3 * L3 / xip4 + 64 / xip4 / xip4 )
+           + CF * ( -18. - 2. / 3. * Pi2 - 24. * L3 / y - 8. * L3 * L3
+                    + 2. * L1 * L1 - 6. * L2 + 4. * Li2 - 48. / xip2
+                    + 8. * L2 / xip2 + 360. / xip2 / xip4
+                    + 128. * L2 / xip2 / xip4 - 544. / (xip2 * xip4 * xip4)
+                    + 48. * L3 * L3 / xip4 - 8. * L1 * L1 / xip4
+                    + (44. + 40. * zeta2) / xip4 - 120. * L2 / xip2 / xip2
+                    + 256. * L2 / (xip2 * xip2 * xip4) - 16. * Li2 / xip4
+                    - 272. / xip4 / xip4 );
+  }
+  double c0Thbar(double const& xi)
+  {
+    return 4 * CA * ( 2 + log(1 + xi / 4) ) - 4 * TR / 3;
+  }
+  double ThExpansiong3(int const& nf, double const& xi, double const& z)
+  {
+    const double beta = sqrt(1 - 4 * z / xi / ( 1 - z ));
+    const double l  = log(beta);
+    const double l2 = l * l;
+    const double l3 = l * l2;
+    const double l4 = l * l3;
+    const double Lm  = - log(xi);
+    const double Lm2 = Lm * Lm;
+    const double ln2  = log(2);
+    const double ln22 = ln2 * ln2;
+    const double ln23 = ln2 * ln22;
+    const double c_log4 = 128 * CA * CA;
+    const double c_log3 = ( 768 * ln2 - 6464 / 9. ) * CA * CA + 128. / 9. * CA * nf + 128 * CA * CA * Lm;
+    const double c_log2 = ( 1728 * ln22 - 3232 * ln2 - 208 / 3. * Pi2 + 15520 / 9. ) * CA * CA
+                          + ( 64. * ln2 - 640 / 9. ) * CA * nf + 16 * CA * c0Th(xi) + 32 * CA * ( CF - CA / 2 ) * Pi2 / beta
+                          - ( ( - 512 * ln2 + 1136 / 3. ) * CA * CA - 32 / 3. * CA * nf + 16 * CA * c0Thbar(xi) ) * Lm
+                          + 32 * CA * CA * Lm2;
+    const double c_log_const = ( 1728 * ln23 - 4848 * ln22 + 15520 / 3. * ln2 - 208 * Pi2 * ln2
+                                 + 936 * zeta3 + 608. / 3. * Pi2 - 88856. / 27.) * CA * CA
+                               + ( 96 * ln22 - 640 / 3. * ln2 - 16 / 3. * Pi2 + 4592 / 27. ) * CA * nf
+                               - 32 * CF * ( CF - CA / 2 ) * Pi2 + ( 48 * ln2 - 40 ) * CA * c0Th(xi);
+    const double c_log_fracbeta = ( ( - 92 / 3. + 32 * ln2 ) * CA + 8 / 3. * nf) * ( CF - CA / 2 ) * Pi2;
+    const double c_log_Lm = - ( ( - 672 * ln22 + 976 * ln2 + 104 / 3. * Pi2 - 4160 / 9. ) * CA * CA
+                                + ( - 32 * ln2 + 320 / 9. ) * CA * nf + ( 48  * ln2 - 40 ) * CA * c0Thbar(xi)
+                                - 8 * CA * c0Th(xi) - 16 * CA * ( CF - CA / 2 ) * Pi2 / beta );
+    const double c_log_Lm2 = ( 64 * ln2 - 44 / 3. ) * CA * CA + 8 / 3. * CA * nf - 8 * CA * c0Thbar(xi);
+    const double c_log = c_log_const + c_log_fracbeta / beta + c_log_Lm * Lm + c_log_Lm2 * Lm2;
+    const double c_fracbeta = ( ( 8 * ln22 - 68 / 3. * ln2 + 8 / 3. * Pi2 - 658 / 9. ) * CA
+                                + ( 8 / 3. * ln2 - 20 / 9.) * nf + 2 * c0Th(xi)
+                                + ( 26 / 3. * CA + 4 / 3. * nf - 2 * c0Thbar(xi) ) * Lm ) * ( CF - CA / 2 ) * Pi2;
+    const double c_fracbeta2 = 4 / 3. * ( CF - CA / 2 ) * ( CF - CA / 2 ) * Pi2 * Pi2;
+    return c_log4 * l4 + c_log3 * l3 + c_log2 * l2 + c_log * l + c_fracbeta / beta + c_fracbeta2 / beta / beta;
+  }
+  double ThExpansiong3const(double const& xi)
+  {
+    return pow(c0Th(xi) + 36 * CA * pow(log(2), 2) - 60 * CA * log(2) - log(xi) * ( 8 * CA * log(2) - c0Thbar(xi) ), 2);
+  }
+
+  //_________________________________________________________________________________
+  CmTh23gNC::CmTh23gNC(int const& nf, double const& eta):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _c21g(Cm21gNC{eta})
+  {
+  }
+  double CmTh23gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta = this->_eta;
+    const double z   = eta * x;
+    const double xi  = 4 * eta / ( 1 - eta );
+    return _c21g.Regular(x) * ( ThExpansiong3(_nf, xi, z) + ThExpansiong3const(xi) );
+  }
+
+  //_________________________________________________________________________________
+  CmThL3gNC::CmThL3gNC(int const& nf, double const& eta):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _cL1g(CmL1gNC{eta})
+  {
+  }
+  double CmThL3gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta = this->_eta;
+    const double z   = eta * x;
+    const double xi  = 4 * eta / ( 1 - eta );
+    return _cL1g.Regular(x) * ( ThExpansiong3(_nf, xi, z) + ThExpansiong3const(xi) );
   }
 
   //_________________________________________________________________________________
