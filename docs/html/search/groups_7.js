@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['in_20the_20plus_20minus_20basis_0',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
-  ['initiated_20coefficient_20functions_1',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]]
+  ['heavy_20quark_20initiated_20coefficient_20functions_0',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]],
+  ['helicity_20pdfs_20g1_1',['NLO matching functions for helicity PDFs g1',['../group__NLOg1.html',1,'']]]
 ];

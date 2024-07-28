@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['kernels_0',['kernels',['../group__GPDEvKernels.html',1,'GPD evolution kernels'],['../group__LOpolevk.html',1,'LO evolution kernels'],['../group__LOtransevk.html',1,'LO evolution kernels'],['../group__LOunpevk.html',1,'LO evolution kernels'],['../group__GPDPolSF.html',1,'Polarised evolution kernels'],['../group__GPDTransSF.html',1,'Transversely polarised evolution kernels'],['../group__GPDUnpSF.html',1,'Unpolarised evolution kernels']]]
+  ['in_20the_20plus_20minus_20basis_0',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
+  ['initiated_20coefficient_20functions_1',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]]
 ];

@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['unpolarised_20dis_0',['Zero-mass coefficient functions for unpolarised DIS',['../group__NCMassless.html',1,'']]],
-  ['unpolarised_20evolution_20kernels_1',['Unpolarised evolution kernels',['../group__GPDUnpSF.html',1,'']]],
-  ['unpolarised_20matching_20conditions_2',['unpolarised matching conditions',['../group__NLOMC.html',1,'NLO unpolarised matching conditions'],['../group__NNLOMC.html',1,'NNLO unpolarised matching conditions'],['../group__NNNLOMC.html',1,'NNNLO unpolarised matching conditions']]],
-  ['unpolarised_20matching_20functions_20for_20gtmds_3',['NLO unpolarised matching functions for GTMDs',['../group__NLOmatchUnp.html',1,'']]],
-  ['unpolarised_20partons_4',['NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons',['../group__NLOmatchLinUnp.html',1,'']]],
-  ['unpolarised_20sia_5',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
-  ['unpolarised_20splitting_20functions_6',['Unpolarised splitting functions',['../group__UnpSF.html',1,'Unpolarised splitting functions'],['../group__UnpSFtl.html',1,'Unpolarised splitting functions']]]
+  ['the_20massive_20neutral_20current_20coefficient_20functions_0',['Massless limit of the massive neutral current coefficient functions',['../group__NCMassiveZero.html',1,'']]],
+  ['the_20plus_20minus_20basis_1',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
+  ['threshold_2',['Approximated NNLO massive coefficient functions near threshold',['../group__NNLOthr.html',1,'']]],
+  ['time_20like_20matching_20conditions_3',['Time-like matching conditions',['../group__MatchCondTL.html',1,'']]],
+  ['time_20like_20matching_20functions_4',['Time-like matching functions',['../group__TLMatchFunc.html',1,'']]],
+  ['time_20like_20splitting_20functions_5',['Time-like splitting functions',['../group__TLSplittings.html',1,'']]],
+  ['tmd_20matching_20functions_6',['TMD matching functions',['../group__TMDMatchingFunctions.html',1,'']]],
+  ['transversely_20linearly_20polarised_7',['NLO transversely/linearly polarised',['../group__NLOmatchTrans.html',1,'']]],
+  ['transversely_20polarised_20evolution_20kernels_8',['Transversely polarised evolution kernels',['../group__GPDTransSF.html',1,'']]],
+  ['transversely_20polarised_20splitting_20functions_9',['Transversely polarised splitting functions',['../group__TransSF.html',1,'Transversely polarised splitting functions'],['../group__TransSFtl.html',1,'Transversely polarised splitting functions']]]
 ];
