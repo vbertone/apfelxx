@@ -265,6 +265,134 @@ namespace apfel
   ///@}
 
   /**
+   * @defgroup NNLOsx Approximated NNLO massive coefficient functions at small x
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for F2 at small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class Cmsx23gNC: public Expression
+  {
+  public:
+    Cmsx23gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    int    const _nf;
+    double const _eta;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * coefficient function for F2 at small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class Cmsx23psNC: public Expression
+  {
+  public:
+    Cmsx23psNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    Cmsx23gNC const _c23g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for FL at small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class CmsxL3gNC: public Expression
+  {
+  public:
+    CmsxL3gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    int    const _nf;
+    double const _eta;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * coefficient function for FL at small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class CmsxL3psNC: public Expression
+  {
+  public:
+    CmsxL3psNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    CmsxL3gNC const _cL3g;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOm0sx Approximated NNLO massive coefficient functions at small x and Q >> m
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for F2 at Q >> m and small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0sx23gNC: public Expression
+  {
+  public:
+    Cm0sx23gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    int    const _nf;
+    double const _eta;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * coefficient function for F2 at Q >> m and small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0sx23psNC: public Expression
+  {
+  public:
+    Cm0sx23psNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    Cm0sx23gNC const _c23g;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
+   * function for FL at Q >> m and small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0sxL3gNC: public Expression
+  {
+  public:
+    Cm0sxL3gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    int    const _nf;
+    double const _eta;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
+   * coefficient function for FL at Q >> m and small
+   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0sxL3psNC: public Expression
+  {
+  public:
+    Cm0sxL3psNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    Cm0sxL3gNC const _cL3g;
+  };
+  ///@}
+
+  /**
    * @defgroup NLOhq NLO massive heavy-quark-initiated coefficient functions
    * Collection of the massive coefficient functions for processes
    * with a massive heavy quark in the intial state. These coefficient
