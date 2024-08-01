@@ -504,9 +504,10 @@ namespace apfel
   class Cm0L3psNC_l: public Expression
   {
   public:
-    Cm0L3psNC_l(bool const& muterms = true);
+    Cm0L3psNC_l(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
+    int  const _nf;
     bool const _muterms;
   };
 
@@ -518,9 +519,10 @@ namespace apfel
   class Cm0L3psNC_l2: public Expression
   {
   public:
-    Cm0L3psNC_l2(bool const& muterms = true);
+    Cm0L3psNC_l2(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
+    int  const _nf;
     bool const _muterms;
   };
   ///@}

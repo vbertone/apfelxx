@@ -1774,21 +1774,21 @@ namespace apfel
     Not.insert({DISNCBasis::CG,  Zero});
 
     // Initialize massive zero coefficient functions
-    const Operator Om0L1g   {g, Cm0L1gNC_c{},       IntEps};
-    const Operator Om0L2nsc {g, Cm0L2nsNC_c{},      IntEps};
-    const Operator Om0L2nsl {g, Cm0L2nsNC_l{},      IntEps};
-    const Operator Om0L2psc {g, Cm0L2psNC_c{},      IntEps};
-    const Operator Om0L2psl {g, Cm0L2psNC_l{},      IntEps};
-    const Operator Om0L2psf {g, Cm0L2psNC_f{},      IntEps};
-    const Operator Om0L2gc  {g, Cm0L2gNC_c{},       IntEps};
-    const Operator Om0L2gl  {g, Cm0L2gNC_l{},       IntEps};
-    const Operator Om0L2gf  {g, Cm0L2gNC_f{},       IntEps};
-    const Operator Om0L3psc {g, Cm0L3psNC_c{actnf}, IntEps};
-    const Operator Om0L3psl {g, Cm0L3psNC_l{},      IntEps};
-    const Operator Om0L3psl2{g, Cm0L3psNC_l2{},     IntEps};
-    const Operator Om0L3gc  {g, Cm0L3gNC_c{actnf},  IntEps};
-    const Operator Om0L3gl  {g, Cm0L3gNC_l{actnf},  IntEps};
-    const Operator Om0L3gl2 {g, Cm0L3gNC_l2{actnf}, IntEps};
+    const Operator Om0L1g   {g, Cm0L1gNC_c{},        IntEps};
+    const Operator Om0L2nsc {g, Cm0L2nsNC_c{},       IntEps};
+    const Operator Om0L2nsl {g, Cm0L2nsNC_l{},       IntEps};
+    const Operator Om0L2psc {g, Cm0L2psNC_c{},       IntEps};
+    const Operator Om0L2psl {g, Cm0L2psNC_l{},       IntEps};
+    const Operator Om0L2psf {g, Cm0L2psNC_f{},       IntEps};
+    const Operator Om0L2gc  {g, Cm0L2gNC_c{},        IntEps};
+    const Operator Om0L2gl  {g, Cm0L2gNC_l{},        IntEps};
+    const Operator Om0L2gf  {g, Cm0L2gNC_f{},        IntEps};
+    const Operator Om0L3psc {g, Cm0L3psNC_c{actnf},  IntEps};
+    const Operator Om0L3psl {g, Cm0L3psNC_l{actnf},  IntEps};
+    const Operator Om0L3psl2{g, Cm0L3psNC_l2{actnf}, IntEps};
+    const Operator Om0L3gc  {g, Cm0L3gNC_c{actnf},   IntEps};
+    const Operator Om0L3gl  {g, Cm0L3gNC_l{actnf},   IntEps};
+    const Operator Om0L3gl2 {g, Cm0L3gNC_l2{actnf},  IntEps};
 
     // NNLO massive
     const TabulateObject<Operator> TabOL2ns{[=] (double const& xi) -> Operator

@@ -867,8 +867,8 @@ namespace apfel
     Expression(),
     _eta(eta),
     _cm0L3ps_c(Cm0L3psNC_c{nf}),
-    _cm0L3ps_l(Cm0L3psNC_l{false}),
-    _cm0L3ps_l2(Cm0L3psNC_l2{false}),
+    _cm0L3ps_l(Cm0L3psNC_l{nf, false}),
+    _cm0L3ps_l2(Cm0L3psNC_l2{nf, false}),
     _cmsxL3ps(CmsxL3psNC{nf, eta, false}),
     _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false})
   {
