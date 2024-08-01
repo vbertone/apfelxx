@@ -1788,7 +1788,7 @@ namespace apfel
     const Operator Om0L3psl2{g, Cm0L3psNC_l2{},     IntEps};
     const Operator Om0L3gc  {g, Cm0L3gNC_c{actnf},  IntEps};
     const Operator Om0L3gl  {g, Cm0L3gNC_l{actnf},  IntEps};
-    const Operator Om0L3gl2 {g, Cm0L3gNC_l2{},      IntEps};
+    const Operator Om0L3gl2 {g, Cm0L3gNC_l2{actnf}, IntEps};
 
     // NNLO massive
     const TabulateObject<Operator> TabOL2ns{[=] (double const& xi) -> Operator

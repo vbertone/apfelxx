@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/expression.h"
+#include "apfel/massivezerocoefficientfunctionsunp_sl.h"
 
 namespace apfel
 {
@@ -227,72 +228,75 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNLOthr Approximated NNLO massive coefficient functions near threshold
+   * @defgroup NNLOthr Threshold limit of NNLO massive coefficient functions
    * @ingroup NCMassive
    */
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
-   * function for F2 near
-   * threshold. Reference:https://arxiv.org/pdf/1205.5727.
+   * function for F2 near threshold. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
-  class CmTh23gNC: public Expression
+  class Cmth23gNC: public Expression
   {
   public:
-    CmTh23gNC(int const& nf, double const& eta);
+    Cmth23gNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int     const _nf;
     double  const _eta;
+    bool    const _muterms;
     Cm21gNC const _c21g;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
-   * function for FL near
-   * threshold. Reference:https://arxiv.org/pdf/1205.5727.
+   * function for FL near threshold. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
-  class CmThL3gNC: public Expression
+  class CmthL3gNC: public Expression
   {
   public:
-    CmThL3gNC(int const& nf, double const& eta);
+    CmthL3gNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int     const _nf;
     double  const _eta;
+    bool    const _muterms;
     CmL1gNC const _cL1g;
   };
   ///@}
 
   /**
-   * @defgroup NNLOsx Approximated NNLO massive coefficient functions at small x
+   * @defgroup NNLOsx Small-x limit of NNLO massive coefficient functions
    * @ingroup NCMassive
    */
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
-   * function for F2 at small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * function for F2 at small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class Cmsx23gNC: public Expression
   {
   public:
-    Cmsx23gNC(int const& nf, double const& eta);
+    Cmsx23gNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
+    bool   const _muterms;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
-   * coefficient function for F2 at small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * coefficient function for F2 at small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class Cmsx23psNC: public Expression
   {
   public:
-    Cmsx23psNC(int const& nf, double const& eta);
+    Cmsx23psNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     Cmsx23gNC const _c23g;
@@ -300,28 +304,29 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
-   * function for FL at small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * function for FL at small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class CmsxL3gNC: public Expression
   {
   public:
-    CmsxL3gNC(int const& nf, double const& eta);
+    CmsxL3gNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
+    bool   const _muterms;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
-   * coefficient function for FL at small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * coefficient function for FL at small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class CmsxL3psNC: public Expression
   {
   public:
-    CmsxL3psNC(int const& nf, double const& eta);
+    CmsxL3psNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     CmsxL3gNC const _cL3g;
@@ -329,34 +334,35 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNLOm0sx Approximated NNLO massive coefficient functions at small x and Q >> m
+   * @defgroup NNLOm0sx Small-x and Q >> m limit of NNLO massive coefficient functions
    * @ingroup NCMassive
    */
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
-   * function for F2 at Q >> m and small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * function for F2 at Q >> m and small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class Cm0sx23gNC: public Expression
   {
   public:
-    Cm0sx23gNC(int const& nf, double const& eta);
+    Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
+    bool   const _muterms;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
-   * coefficient function for F2 at Q >> m and small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * coefficient function for F2 at Q >> m and small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class Cm0sx23psNC: public Expression
   {
   public:
-    Cm0sx23psNC(int const& nf, double const& eta);
+    Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     Cm0sx23gNC const _c23g;
@@ -364,31 +370,119 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon coefficient
-   * function for FL at Q >> m and small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * function for FL at Q >> m and small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class Cm0sxL3gNC: public Expression
   {
   public:
-    Cm0sxL3gNC(int const& nf, double const& eta);
+    Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
+    bool   const _muterms;
   };
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) pure-singlet
-   * coefficient function for FL at Q >> m and small
-   * x. Reference:https://arxiv.org/pdf/1205.5727.
+   * coefficient function for FL at Q >> m and small x. Reference:
+   * https://arxiv.org/pdf/1205.5727.
    */
   class Cm0sxL3psNC: public Expression
   {
   public:
-    Cm0sxL3psNC(int const& nf, double const& eta);
+    Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     Cm0sxL3gNC const _cL3g;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLO Approximated NNLO massive coefficient functions
+   * @note They are obtained as a combination of small-x, large-x, and
+   * Q >> m limits. The original idea is that of
+   * https://arxiv.org/pdf/1205.5727. Here we use the implementation
+   * presented in the code ADANI
+   * (https://github.com/niclaurenti/adani).
+   * @ingroup NCMassive
+   */
+  ///@{
+  /**
+   * @brief Approximated O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon
+   * coefficient function for F2.
+   */
+  class Cm2a3gNC: public Expression
+  {
+  public:
+    Cm2a3gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    double      const _eta;
+    Cmth23gNC   const _cmth23g;
+    Cm023gNC_c  const _cm023g_c;
+    Cm023gNC_l  const _cm023g_l;
+    Cm023gNC_l2 const _cm023g_l2;
+    Cm023gNC_l3 const _cm023g_l3;
+    Cmsx23gNC   const _cmsx23g;
+    Cm0sx23gNC  const _cm0sx23g;
+  };
+
+  /**
+   * @brief Approximated O(&alpha;<SUB>s</SUB><SUP>3</SUP>)
+   * pure-singlet coefficient function for F2.
+   */
+  class Cm2a3psNC: public Expression
+  {
+  public:
+    Cm2a3psNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    double       const _eta;
+    Cm023psNC_c  const _cm023ps_c;
+    Cm023psNC_l  const _cm023ps_l;
+    Cm023psNC_l2 const _cm023ps_l2;
+    Cm023psNC_l3 const _cm023ps_l3;
+    Cmsx23psNC   const _cmsx23ps;
+    Cm0sx23psNC  const _cm0sx23ps;
+  };
+
+  /**
+   * @brief Approximated O(&alpha;<SUB>s</SUB><SUP>3</SUP>) gluon
+   * coefficient function for FL.
+   */
+  class CmLa3gNC: public Expression
+  {
+  public:
+    CmLa3gNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    double      const _eta;
+    CmthL3gNC   const _cmthL3g;
+    Cm0L3gNC_c  const _cm0L3g_c;
+    Cm0L3gNC_l  const _cm0L3g_l;
+    Cm0L3gNC_l2 const _cm0L3g_l2;
+    CmsxL3gNC   const _cmsxL3g;
+    Cm0sxL3gNC  const _cm0sxL3g;
+  };
+
+  /**
+   * @brief Approximated O(&alpha;<SUB>s</SUB><SUP>3</SUP>)
+   * pure-singlet coefficient function for FL.
+   */
+  class CmLa3psNC: public Expression
+  {
+  public:
+    CmLa3psNC(int const& nf, double const& eta);
+    double Regular(double const& x) const;
+  private:
+    double       const _eta;
+    Cm0L3psNC_c  const _cm0L3ps_c;
+    Cm0L3psNC_l  const _cm0L3ps_l;
+    Cm0L3psNC_l2 const _cm0L3ps_l2;
+    CmsxL3psNC   const _cmsxL3ps;
+    Cm0sxL3psNC  const _cm0sxL3ps;
   };
   ///@}
 

@@ -338,14 +338,14 @@ namespace apfel
   {
     return 4 * CA * ( 2 + log(1 + xi / 4) ) - 4 * TR / 3;
   }
-  double ThExpansiong3(int const& nf, double const& xi, double const& z)
+  double ThExpansiong3(int const& nf, double const& xi, double const& z, bool const& muterms)
   {
     const double beta = sqrt(1 - 4 * z / xi / ( 1 - z ));
     const double l  = log(beta);
     const double l2 = l * l;
     const double l3 = l * l2;
     const double l4 = l * l3;
-    const double Lm  = - log(xi);
+    const double Lm  = (muterms ? - log(xi) : 0);
     const double Lm2 = Lm * Lm;
     const double ln2  = log(2);
     const double ln22 = ln2 * ln2;
@@ -372,52 +372,56 @@ namespace apfel
     const double c_fracbeta2 = 4 / 3. * ( CF - CA / 2 ) * ( CF - CA / 2 ) * Pi2 * Pi2;
     return c_log4 * l4 + c_log3 * l3 + c_log2 * l2 + c_log * l + c_fracbeta / beta + c_fracbeta2 / beta / beta;
   }
-  double ThExpansiong3const(double const& xi)
+  double ThExpansiong3const(double const& xi, bool const& muterms)
   {
-    return pow(c0Th(xi) + 36 * CA * pow(log(2), 2) - 60 * CA * log(2) - log(xi) * ( 8 * CA * log(2) - c0Thbar(xi) ), 2);
+    const double Lm  = (muterms ? - log(xi) : 0);
+    return pow(c0Th(xi) + 36 * CA * pow(log(2), 2) - 60 * CA * log(2) + Lm * ( 8 * CA * log(2) - c0Thbar(xi) ), 2);
   }
 
   //_________________________________________________________________________________
-  CmTh23gNC::CmTh23gNC(int const& nf, double const& eta):
+  Cmth23gNC::Cmth23gNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
     _nf(nf),
     _eta(eta),
+    _muterms(muterms),
     _c21g(Cm21gNC{eta})
   {
   }
-  double CmTh23gNC::Regular(double const& x) const
+  double Cmth23gNC::Regular(double const& x) const
   {
     if (x >= 1)
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     const double xi  = 4 * eta / ( 1 - eta );
-    return _c21g.Regular(x) * ( ThExpansiong3(_nf, xi, z) + ThExpansiong3const(xi) );
+    return _c21g.Regular(x) * ( ThExpansiong3(_nf, xi, z, _muterms) + ThExpansiong3const(xi, _muterms) );
   }
 
   //_________________________________________________________________________________
-  CmThL3gNC::CmThL3gNC(int const& nf, double const& eta):
+  CmthL3gNC::CmthL3gNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
     _nf(nf),
     _eta(eta),
+    _muterms(muterms),
     _cL1g(CmL1gNC{eta})
   {
   }
-  double CmThL3gNC::Regular(double const& x) const
+  double CmthL3gNC::Regular(double const& x) const
   {
     if (x >= 1)
       return 0;
     const double eta = this->_eta;
     const double z   = eta * x;
     const double xi  = 4 * eta / ( 1 - eta );
-    return _cL1g.Regular(x) * ( ThExpansiong3(_nf, xi, z) + ThExpansiong3const(xi) );
+    return _cL1g.Regular(x) * ( ThExpansiong3(_nf, xi, z, _muterms) + ThExpansiong3const(xi, _muterms) );
   }
 
   //_________________________________________________________________________________
-  Cmsx23gNC::Cmsx23gNC(int const& nf, double const& eta):
+  Cmsx23gNC::Cmsx23gNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
     _nf(nf),
-    _eta(eta)
+    _eta(eta),
+    _muterms(muterms)
   {
   }
   double Cmsx23gNC::Regular(double const& x) const
@@ -426,7 +430,7 @@ namespace apfel
       return 0;
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
-    const double Lmu  = - log(xi);
+    const double Lmu  = (_muterms ? - log(xi) : 0);
     const double Lmu2 = Lmu * Lmu;
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
@@ -512,9 +516,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cmsx23psNC::Cmsx23psNC(int const& nf, double const& eta):
+  Cmsx23psNC::Cmsx23psNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
-    _c23g(Cmsx23gNC{nf, eta})
+    _c23g(Cmsx23gNC{nf, eta, muterms})
   {
   }
   double Cmsx23psNC::Regular(double const& x) const
@@ -523,10 +527,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CmsxL3gNC::CmsxL3gNC(int const& nf, double const& eta):
+  CmsxL3gNC::CmsxL3gNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
     _nf(nf),
-    _eta(eta)
+    _eta(eta),
+    _muterms(muterms)
   {
   }
   double CmsxL3gNC::Regular(double const& x) const
@@ -535,7 +540,7 @@ namespace apfel
       return 0;
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
-    const double Lmu  = - log(xi);
+    const double Lmu  = (_muterms ? - log(xi) : 0);
     const double Lmu2 = Lmu * Lmu;
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
@@ -632,9 +637,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CmsxL3psNC::CmsxL3psNC(int const& nf, double const& eta):
+  CmsxL3psNC::CmsxL3psNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
-    _cL3g(CmsxL3gNC{nf, eta})
+    _cL3g(CmsxL3gNC{nf, eta, muterms})
   {
   }
   double CmsxL3psNC::Regular(double const& x) const
@@ -643,10 +648,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm0sx23gNC::Cm0sx23gNC(int const& nf, double const& eta):
+  Cm0sx23gNC::Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
     _nf(nf),
-    _eta(eta)
+    _eta(eta),
+    _muterms(muterms)
   {
   }
   double Cm0sx23gNC::Regular(double const& x) const
@@ -655,9 +661,9 @@ namespace apfel
       return 0;
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
-    const double Lmu  = - log(xi);
+    const double Lmu  = (_muterms ? - log(xi) : 0);
     const double Lmu2 = Lmu * Lmu;
-    const double LQ   = Lmu;
+    const double LQ   = - log(xi);
     const double LQ2  = LQ * LQ;
     const double LQ3  = LQ * LQ2;
     const double a11  = CA;
@@ -695,9 +701,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm0sx23psNC::Cm0sx23psNC(int const& nf, double const& eta):
+  Cm0sx23psNC::Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
-    _c23g(Cm0sx23gNC{nf, eta})
+    _c23g(Cm0sx23gNC{nf, eta, muterms})
   {
   }
   double Cm0sx23psNC::Regular(double const& x) const
@@ -706,10 +712,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm0sxL3gNC::Cm0sxL3gNC(int const& nf, double const& eta):
+  Cm0sxL3gNC::Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
     _nf(nf),
-    _eta(eta)
+    _eta(eta),
+    _muterms(muterms)
   {
   }
   double Cm0sxL3gNC::Regular(double const& x) const
@@ -718,9 +725,9 @@ namespace apfel
       return 0;
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
-    const double Lmu  = - log(xi);
+    const double Lmu  = (_muterms ? - log(xi) : 0);
     const double Lmu2 = Lmu * Lmu;
-    const double LQ   = Lmu;
+    const double LQ   = - log(xi);
     const double LQ2  = LQ * LQ;
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
@@ -749,14 +756,135 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm0sxL3psNC::Cm0sxL3psNC(int const& nf, double const& eta):
+  Cm0sxL3psNC::Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms):
     Expression(),
-    _cL3g(Cm0sxL3gNC{nf, eta})
+    _cL3g(Cm0sxL3gNC{nf, eta, muterms})
   {
   }
   double Cm0sxL3psNC::Regular(double const& x) const
   {
     return CF / CA * _cL3g.Regular(x);
+  }
+
+  //_________________________________________________________________________________
+  // Damping function used by the approximated NNLO massive
+  // coefficient functions.
+  // _________________________________________________________________________________
+  double fDamp(double const& x, double const& xi,
+               double const& A, double const& B, double const& C, double const& D, double const& a = 2.5, double const& b = 5)
+  {
+    const double eta = xi * ( 1 - x ) / x / 4 - 1;
+    const double h   = A + ( B - A ) / ( 1 + exp(a * ( log(xi) - b )) );
+    const double k   = C + ( D - C ) / ( 1 + exp(a * ( log(xi) - b )) );
+    return 1 / ( 1 + pow(eta / h, k) );
+  }
+
+  //_________________________________________________________________________________
+  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cmth23g(Cmth23gNC{nf, eta, false}),
+    _cm023g_c(Cm023gNC_c{nf}),
+    _cm023g_l(Cm023gNC_l{nf, false}),
+    _cm023g_l2(Cm023gNC_l2{nf, false}),
+    _cm023g_l3(Cm023gNC_l3{nf, false}),
+    _cmsx23g(Cmsx23gNC{nf, eta, false}),
+    _cm0sx23g(Cm0sx23gNC{nf, eta, false})
+  {
+  }
+  double Cm2a3gNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double lxi3 = lxi * lxi2;
+    const double fthr = fDamp(z, xi, 0.3, 2.5, 2.5, 1.2, 2.5, 5);
+    const double fasy = 1 - fthr;
+    return fthr * _cmth23g.Regular(x)                                                                                                       // Threshold approximation
+           + fasy * eta * ( _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z) // Q >> m approximation
+                            + _cmsx23g.Regular(z)                                                                                           // Small-x approximation
+                            - _cm0sx23g.Regular(z) );                                                                                       // Q >> m and Small-x approximation
+  }
+
+  //_________________________________________________________________________________
+  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cm023ps_c(Cm023psNC_c{nf}),
+    _cm023ps_l(Cm023psNC_l{nf, false}),
+    _cm023ps_l2(Cm023psNC_l2{nf, false}),
+    _cm023ps_l3(Cm023psNC_l3{nf, false}),
+    _cmsx23ps(Cmsx23psNC{nf, eta, false}),
+    _cm0sx23ps(Cm0sx23psNC{nf, eta, false})
+  {
+  }
+  double Cm2a3psNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double lxi3 = lxi * lxi2;
+    const double fthr = fDamp(z, xi, 0.3, 2.5, 2.5, 1.2, 2.5, 5);
+    const double fasy = 1 - fthr;
+    return fasy * eta * ( _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z) // Q >> m approximation
+                          + _cmsx23ps.Regular(z)                                                                                              // Small-x approximation
+                          - _cm0sx23ps.Regular(z) );                                                                                          // Q >> m and Small-x approximation
+  }
+
+  //_________________________________________________________________________________
+  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cmthL3g(CmthL3gNC{nf, eta, false}),
+    _cm0L3g_c(Cm0L3gNC_c{nf}),
+    _cm0L3g_l(Cm0L3gNC_l{nf, false}),
+    _cm0L3g_l2(Cm0L3gNC_l2{nf, false}),
+    _cmsxL3g(CmsxL3gNC{nf, eta, false}),
+    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false})
+  {
+  }
+  double CmLa3gNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double fthr = fDamp(z, xi, 10., 11., 3., 2.);
+    const double fasy = 1 - fthr;
+    return fthr * _cmthL3g.Regular(x)                                                                        // Threshold approximation
+           + fasy * eta * ( _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z) // Q >> m approximation
+                            + _cmsxL3g.Regular(z)                                                            // Small-x approximation
+                            - _cm0sxL3g.Regular(z) );                                                        // Q >> m and Small-x approximation
+  }
+
+  //_________________________________________________________________________________
+  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cm0L3ps_c(Cm0L3psNC_c{nf}),
+    _cm0L3ps_l(Cm0L3psNC_l{false}),
+    _cm0L3ps_l2(Cm0L3psNC_l2{false}),
+    _cmsxL3ps(CmsxL3psNC{nf, eta, false}),
+    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false})
+  {
+  }
+  double CmLa3psNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double fthr = fDamp(z, xi, 20., 11., 3., 2.);
+    const double fasy = 1 - fthr;
+    return fasy * eta * ( _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z) // Q >> m approximation
+                          + _cmsxL3ps.Regular(z)                                                              // Small-x approximation
+                          - _cm0sxL3ps.Regular(z) );                                                          // Q >> m and Small-x approximation
   }
 
   //_________________________________________________________________________________

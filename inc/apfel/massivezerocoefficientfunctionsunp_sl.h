@@ -338,10 +338,11 @@ namespace apfel
   class Cm023gNC_l: public Expression
   {
   public:
-    Cm023gNC_l(int const& nf);
+    Cm023gNC_l(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int  const _nf;
+    bool const _muterms;
     C22g const _c22g;
     C21g const _c21g;
   };
@@ -354,10 +355,11 @@ namespace apfel
   class Cm023gNC_l2: public Expression
   {
   public:
-    Cm023gNC_l2(int const& nf);
+    Cm023gNC_l2(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int  const _nf;
+    bool const _muterms;
     C21g const _c21g;
   };
 
@@ -369,10 +371,11 @@ namespace apfel
   class Cm023gNC_l3: public Expression
   {
   public:
-    Cm023gNC_l3(int const& nf);
+    Cm023gNC_l3(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     int  const _nf;
+    bool const _muterms;
   };
 
   /**
@@ -398,10 +401,11 @@ namespace apfel
   class Cm023psNC_l: public Expression
   {
   public:
-    Cm023psNC_l(int const& nf);
+    Cm023psNC_l(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _muterms;
   };
 
   /**
@@ -412,10 +416,11 @@ namespace apfel
   class Cm023psNC_l2: public Expression
   {
   public:
-    Cm023psNC_l2(int const& nf);
+    Cm023psNC_l2(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _muterms;
   };
 
   /**
@@ -426,48 +431,11 @@ namespace apfel
   class Cm023psNC_l3: public Expression
   {
   public:
-    Cm023psNC_l3(int const& nf);
+    Cm023psNC_l3(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
-    int const _nf;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term of
-   * pure-single coefficient function for FL. Reference:
-   * https://arxiv.org/pdf/1205.5727.
-   */
-  class Cm0L3psNC_c: public Expression
-  {
-  public:
-    Cm0L3psNC_c(int const& nf);
-    double Regular(double const& x) const;
-  private:
-    CL3ps const _cL3ps;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) linear log of
-   * pure-single coefficient function for FL. Reference:
-   * https://arxiv.org/pdf/1205.5727.
-   */
-  class Cm0L3psNC_l: public Expression
-  {
-  public:
-    Cm0L3psNC_l();
-    double Regular(double const& x) const;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quadratic log of
-   * pure-single coefficient function for FL. Reference:
-   * https://arxiv.org/pdf/1205.5727.
-   */
-  class Cm0L3psNC_l2: public Expression
-  {
-  public:
-    Cm0L3psNC_l2();
-    double Regular(double const& x) const;
+    int  const _nf;
+    bool const _muterms;
   };
 
   /**
@@ -492,10 +460,11 @@ namespace apfel
   class Cm0L3gNC_l: public Expression
   {
   public:
-    Cm0L3gNC_l(int const& nf);
+    Cm0L3gNC_l(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
-    int const _nf;
+    int  const _nf;
+    bool const _muterms;
   };
 
   /**
@@ -506,8 +475,53 @@ namespace apfel
   class Cm0L3gNC_l2: public Expression
   {
   public:
-    Cm0L3gNC_l2();
+    Cm0L3gNC_l2(int const& nf, bool const& muterms = true);
     double Regular(double const& x) const;
+  private:
+    int  const _nf;
+    bool const _muterms;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term of
+   * pure-single coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3psNC_c: public Expression
+  {
+  public:
+    Cm0L3psNC_c(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    CL3ps const _cL3ps;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) linear log of
+   * pure-single coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3psNC_l: public Expression
+  {
+  public:
+    Cm0L3psNC_l(bool const& muterms = true);
+    double Regular(double const& x) const;
+  private:
+    bool const _muterms;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) quadratic log of
+   * pure-single coefficient function for FL. Reference:
+   * https://arxiv.org/pdf/1205.5727.
+   */
+  class Cm0L3psNC_l2: public Expression
+  {
+  public:
+    Cm0L3psNC_l2(bool const& muterms = true);
+    double Regular(double const& x) const;
+  private:
+    bool const _muterms;
   };
   ///@}
   ///@}
