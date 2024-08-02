@@ -13,6 +13,7 @@
 #include "apfel/massivecoefficientfunctionsunp_sl.h"
 #include "apfel/massivezerocoefficientfunctionsunp_sl.h"
 #include "apfel/zeromasscoefficientfunctionsunp_tl.h"
+#include "apfel/splittingfunctionspol_sl.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/betaqcd.h"
 
@@ -26,7 +27,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for F2 NC Zero Mass... ");
     Timer t;
@@ -123,7 +124,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for FL NC Zero Mass... ");
     Timer t;
@@ -219,7 +220,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for F3 NC Zero Mass... ");
     Timer t;
@@ -311,7 +312,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCDpol(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDpol(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for g4 NC Zero Mass... ");
     Timer t;
@@ -391,7 +392,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCDpol(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDpol(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for gL NC Zero Mass... ");
     Timer t;
@@ -470,7 +471,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCDpol(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDpol(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for g1 NC Zero Mass... ");
     Timer t;
@@ -551,7 +552,7 @@ namespace apfel
                                                                                                                  double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F2(nu) + F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -651,7 +652,7 @@ namespace apfel
                                                                                                                   double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F2(nu) - F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -744,7 +745,7 @@ namespace apfel
                                                                                                                  double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( FL(nu) + FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -843,7 +844,7 @@ namespace apfel
                                                                                                                   double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( FL(nu) - FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -935,7 +936,7 @@ namespace apfel
                                                                                                                  double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F3(nu) + F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -1028,7 +1029,7 @@ namespace apfel
                                                                                                                   double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F3(nu) - F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -1138,7 +1139,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for F2 NC Massive with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1167,6 +1168,12 @@ namespace apfel
     const Operator O22g  {g, C22g{},        IntEps};
     const Operator O22nsp{g, C22nsp{actnf}, IntEps};
     const Operator O22t = O22nsp + 6 * O22ps;
+
+    // NNNLO massless
+    const Operator O23ps {g, C23ps{actnf},  IntEps};
+    const Operator O23g  {g, C23g{actnf},   IntEps};
+    const Operator O23nsp{g, C23nsp{actnf}, IntEps};
+    const Operator O23t = O23nsp + 6 * O23ps;
 
     // Massive coefficient functions
     // Null set of operator needed for the massive LO coefficient
@@ -1202,6 +1209,42 @@ namespace apfel
         const Operator O22gc{g, Cm22gNC{teta}, IntEps};
         const Operator O22gl{g, Cm22bargNC{teta}, IntEps};
         return O22gc + log(xi) * O22gl;
+      }, nxi, ximin, ximax, intdeg, {}, lambda};
+
+    // NNNLO massive (no non-singlet currently available)
+    // Beta-function and splitting-function coefficients (easier to
+    // recompute them rather than extracting them from PDFObj).
+    const double beta0 = beta0qcd(actnf);
+    const double beta1 = beta1qcd(actnf);
+    const Operator p0qq{g, P0ns{},      IntEps};
+    const Operator p0qg{g, P0qg{actnf}, IntEps};
+    const Operator p0gq{g, P0gq{},      IntEps};
+    const Operator p0gg{g, P0gg{actnf}, IntEps};
+    const Operator p1gq{g, P1gq{actnf}, IntEps};
+    const Operator p1gg{g, P1gg{actnf}, IntEps};
+    const TabulateObject<Operator> TabO23s{[=,&g] (double const& xi) -> Operator
+      {
+        const double teta = 1 / ( 1 + 4 / xi );
+        const double lxi  = log(xi);
+        const double lxi2 = lxi * lxi;
+        const Operator O21g {g, Cm21gNC{teta},          IntEps};
+        const Operator O22g {g, Cm22gNC{teta},          IntEps};
+        const Operator O22ps{g, Cm22psNC{teta},         IntEps};
+        const Operator O23ps{g, Cm2a3psNC{actnf, teta}, IntEps};
+        return 6 * ( O23ps - lxi * ( O21g * p1gq + O22g * p0gq + O22ps * p0qq - 2 * beta0 * O22ps )
+                     + lxi2 / 2 * ( O21g * p0gg * p0gq + O21g * p0qq * p0gq - 3 * beta0 * O21g * p0gq ) );
+      }, nxi, ximin, ximax, intdeg, {}, lambda};
+    const TabulateObject<Operator> TabO23g{[=,&g] (double const& xi) -> Operator
+      {
+        const double teta = 1 / ( 1 + 4 / xi );
+        const double lxi  = log(xi);
+        const double lxi2 = lxi * lxi;
+        const Operator O21g {g, Cm21gNC{teta},         IntEps};
+        const Operator O22g {g, Cm22gNC{teta},         IntEps};
+        const Operator O22ps{g, Cm22psNC{teta},        IntEps};
+        const Operator O23g {g, Cm2a3gNC{actnf, teta}, IntEps};
+        return O23g - lxi * ( O21g * p1gg - beta1 * O21g + O22ps * p0qg + O22g * p0gg - 2 * beta0 * O22g )
+               + lxi2 / 2 * ( O21g * p0gg * p0gg + O21g * p0gq * p0qg - 3 * beta0 * O21g * p0gg+ 2 * pow(beta0, 2) * O21g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
@@ -1254,14 +1297,29 @@ namespace apfel
           // function needed for the light structure functions.
           if (xiin)
             lNNLOns += TabO22ns.Evaluate(xi);
+
+          // Now insert NNNLO
+          std::map<int, Operator> NNNLO;
+          NNNLO.insert({DISNCBasis::CNS, Zero});
+          NNNLO.insert({DISNCBasis::CS,  (xiin ? TabO23s.Evaluate(xi) : Zero)});
+          NNNLO.insert({DISNCBasis::CG,  (xiin ? TabO23g.Evaluate(xi) : Zero)});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NNNLO}});
         }
 
-      // Now fill in the light components. To be updated in the
-      // loop over the heavy component.
+      // Now fill in the light components. To be updated in the loop
+      // over the heavy component (not true for the NNNLO bit because
+      // of the absence of the non-singlet contribution, but keep it
+      // here for coherence).
       std::map<int, Operator> C2NNLO;
       C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
       C2NNLO.insert({DISNCBasis::CS,  O22t});
       C2NNLO.insert({DISNCBasis::CG,  O22g});
+
+      std::map<int, Operator> C2NNNLO;
+      C2NNNLO.insert({DISNCBasis::CNS, O23nsp});
+      C2NNNLO.insert({DISNCBasis::CS,  O23t});
+      C2NNNLO.insert({DISNCBasis::CG,  O23g});
+
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
@@ -1269,29 +1327,35 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO}});
         }
 
       // Total structure function. This simple construction is based
       // on the fact that up to O(as^2) there are no non-singlet
-      // contributions to the massive components.
+      // contributions to the massive components. No non-singlet
+      // included also at O(as^3).
       std::vector<double> ChL(6, 0.);
-      std::map<int, Operator> C2NLOtot  = C2NLO;
-      std::map<int, Operator> C2NNLOtot = C2NNLO;
+      std::map<int, Operator> C2NLOtot   = C2NLO;
+      std::map<int, Operator> C2NNLOtot  = C2NNLO;
+      std::map<int, Operator> C2NNNLOtot = C2NNNLO;
       for (int k = 0; k < actnf; k++)
         ChL[k] += Ch[k];
       const double SumChL = accumulate(ChL.begin(), ChL.end(), 0.);
       for (int k = actnf + 1; k <= 6; k++)
         {
           const double wch = Ch[k-1] / SumChL;
-          C2NLOtot.at(DISNCBasis::CG)  += wch * FObj.C1.at(k).GetObjects().at(DISNCBasis::CG);
-          C2NNLOtot.at(DISNCBasis::CS) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CS);
-          C2NNLOtot.at(DISNCBasis::CG) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CG);
+          C2NLOtot.at(DISNCBasis::CG)   += wch * FObj.C1.at(k).GetObjects().at(DISNCBasis::CG);
+          C2NNLOtot.at(DISNCBasis::CS)  += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CS);
+          C2NNLOtot.at(DISNCBasis::CG)  += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CG);
+          C2NNNLOtot.at(DISNCBasis::CS) += wch * FObj.C3.at(k).GetObjects().at(DISNCBasis::CS);
+          C2NNNLOtot.at(DISNCBasis::CG) += wch * FObj.C3.at(k).GetObjects().at(DISNCBasis::CG);
         }
 
       FObj.ConvBasis.insert({0, DISNCBasis{ChL}});
       FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2LO}});
       FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NLOtot}});
       FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NNLOtot}});
+      FObj.C3.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NNNLOtot}});
       return FObj;
     };
     t.stop();
@@ -1320,7 +1384,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for FL NC Massive with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1348,6 +1412,12 @@ namespace apfel
     const Operator OL2g  {g, CL2g{},        IntEps};
     const Operator OL2nsp{g, CL2nsp{actnf}, IntEps};
     const Operator OL2t = OL2nsp + 6 * OL2ps;
+
+    // NNNLO massless
+    const Operator OL3ps {g, CL3ps{actnf},  IntEps};
+    const Operator OL3g  {g, CL3g{actnf},   IntEps};
+    const Operator OL3nsp{g, CL3nsp{actnf}, IntEps};
+    const Operator OL3t = OL3nsp + 6 * OL3ps;
 
     // Massive coefficient functions
     // Null set of operator needed for the massive LO coefficient
@@ -1383,6 +1453,42 @@ namespace apfel
         const Operator OL2gc{g, CmL2gNC{teta}, IntEps};
         const Operator OL2gl{g, CmL2bargNC{teta}, IntEps};
         return OL2gc + log(xi) * OL2gl;
+      }, nxi, ximin, ximax, intdeg, {}, lambda};
+
+    // NNNLO massive (no non-singlet currently available)
+    // Beta-function and splitting-function coefficients (easier to
+    // recompute them rather than extracting them from PDFObj).
+    const double beta0 = beta0qcd(actnf);
+    const double beta1 = beta1qcd(actnf);
+    const Operator p0qq{g, P0ns{},      IntEps};
+    const Operator p0qg{g, P0qg{actnf}, IntEps};
+    const Operator p0gq{g, P0gq{},      IntEps};
+    const Operator p0gg{g, P0gg{actnf}, IntEps};
+    const Operator p1gq{g, P1gq{actnf}, IntEps};
+    const Operator p1gg{g, P1gg{actnf}, IntEps};
+    const TabulateObject<Operator> TabOL3s{[=,&g] (double const& xi) -> Operator
+      {
+        const double teta = 1 / ( 1 + 4 / xi );
+        const double lxi  = log(xi);
+        const double lxi2 = lxi * lxi;
+        const Operator OL1g {g, CmL1gNC{teta},          IntEps};
+        const Operator OL2g {g, CmL2gNC{teta},          IntEps};
+        const Operator OL2ps{g, CmL2psNC{teta},         IntEps};
+        const Operator OL3ps{g, CmLa3psNC{actnf, teta}, IntEps};
+        return 6 * ( OL3ps - lxi * ( OL1g * p1gq + OL2g * p0gq + OL2ps * p0qq - 2 * beta0 * OL2ps )
+                     + lxi2 / 2 * ( OL1g * p0gg * p0gq + OL1g * p0qq * p0gq - 3 * beta0 * OL1g * p0gq ) );
+      }, nxi, ximin, ximax, intdeg, {}, lambda};
+    const TabulateObject<Operator> TabOL3g{[=,&g] (double const& xi) -> Operator
+      {
+        const double teta = 1 / ( 1 + 4 / xi );
+        const double lxi  = log(xi);
+        const double lxi2 = lxi * lxi;
+        const Operator OL1g {g, CmL1gNC{teta},         IntEps};
+        const Operator OL2g {g, CmL2gNC{teta},         IntEps};
+        const Operator OL2ps{g, CmL2psNC{teta},        IntEps};
+        const Operator OL3g {g, CmLa3gNC{actnf, teta}, IntEps};
+        return OL3g - lxi * ( OL1g * p1gg - beta1 * OL1g + OL2ps * p0qg + OL2g * p0gg - 2 * beta0 * OL2g )
+               + lxi2 / 2 * ( OL1g * p0gg * p0gg + OL1g * p0gq * p0qg - 3 * beta0 * OL1g * p0gg+ 2 * pow(beta0, 2) * OL1g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
@@ -1435,14 +1541,29 @@ namespace apfel
           // function needed for the light structure functions.
           if (xiin)
             lNNLOns += TabOL2ns.Evaluate(xi);
+
+          // Now insert NNNLO
+          std::map<int, Operator> NNNLO;
+          NNNLO.insert({DISNCBasis::CNS, Zero});
+          NNNLO.insert({DISNCBasis::CS,  (xiin ? TabOL3s.Evaluate(xi) : Zero)});
+          NNNLO.insert({DISNCBasis::CG,  (xiin ? TabOL3g.Evaluate(xi) : Zero)});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), NNNLO}});
         }
 
-      // Now fill in the light components. To be updated in the
-      // loop over the heavy component.
+      // Now fill in the light components. To be updated in the loop
+      // over the heavy component (not true for the NNNLO bit because
+      // of the absence of the non-singlet contribution, but keep it
+      // here for coherence).
       std::map<int, Operator> CLNNLO;
       CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
       CLNNLO.insert({DISNCBasis::CS,  OL2t});
       CLNNLO.insert({DISNCBasis::CG,  OL2g});
+
+      std::map<int, Operator> CLNNNLO;
+      CLNNNLO.insert({DISNCBasis::CNS, OL3nsp});
+      CLNNNLO.insert({DISNCBasis::CS,  OL3t});
+      CLNNNLO.insert({DISNCBasis::CG,  OL3g});
+
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
@@ -1450,29 +1571,35 @@ namespace apfel
           FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
           FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO}});
         }
 
       // Total structure function. This simple construction is based
       // on the fact that up to O(as^2) there are no non-singlet
-      // contributions to the massive components.
+      // contributions to the massive components. No non-singlet
+      // included also at O(as^3).
       std::vector<double> ChL(6, 0.);
-      std::map<int, Operator> CLNLOtot  = CLNLO;
-      std::map<int, Operator> CLNNLOtot = CLNNLO;
+      std::map<int, Operator> CLNLOtot   = CLNLO;
+      std::map<int, Operator> CLNNLOtot  = CLNNLO;
+      std::map<int, Operator> CLNNNLOtot = CLNNNLO;
       for (int k = 0; k < actnf; k++)
         ChL[k] += Ch[k];
       const double SumChL = accumulate(ChL.begin(), ChL.end(), 0.);
       for (int k = actnf + 1; k <= 6; k++)
         {
           const double wch = Ch[k-1] / SumChL;
-          CLNLOtot.at(DISNCBasis::CG)  += wch * FObj.C1.at(k).GetObjects().at(DISNCBasis::CG);
-          CLNNLOtot.at(DISNCBasis::CS) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CS);
-          CLNNLOtot.at(DISNCBasis::CG) += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CG);
+          CLNLOtot.at(DISNCBasis::CG)   += wch * FObj.C1.at(k).GetObjects().at(DISNCBasis::CG);
+          CLNNLOtot.at(DISNCBasis::CS)  += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CS);
+          CLNNLOtot.at(DISNCBasis::CG)  += wch * FObj.C2.at(k).GetObjects().at(DISNCBasis::CG);
+          CLNNNLOtot.at(DISNCBasis::CS) += wch * FObj.C3.at(k).GetObjects().at(DISNCBasis::CS);
+          CLNNNLOtot.at(DISNCBasis::CG) += wch * FObj.C3.at(k).GetObjects().at(DISNCBasis::CG);
         }
 
       FObj.ConvBasis.insert({0, DISNCBasis{ChL}});
       FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLLO}});
       FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNLOtot}});
       FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNNLOtot}});
+      FObj.C3.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNNNLOtot}});
       return FObj;
     };
     t.stop();
@@ -1501,7 +1628,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1672,7 +1799,7 @@ namespace apfel
 
       // Now fill in the light components. To be updated in the loop
       // over the heavy component (not true for the NNNLO bit because
-      // of the absence of the non-single contribution, but keep it
+      // of the absence of the non-singlet contribution, but keep it
       // here for coherence).
       std::map<int, Operator> C2NNLO;
       C2NNLO.insert({DISNCBasis::CNS, lNNLOns});
@@ -1730,7 +1857,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1880,7 +2007,7 @@ namespace apfel
 
       // Now fill in the light components. To be updated in the loop
       // over the heavy component (not true for the NNNLO bit because
-      // of the absence of the non-single contribution, but keep it
+      // of the absence of the non-singlet contribution, but keep it
       // here for coherence).
       std::map<int, Operator> CLNNLO;
       CLNNLO.insert({DISNCBasis::CNS, lNNLOns});
@@ -1923,7 +2050,7 @@ namespace apfel
                                                                                                               double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCDT(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDT(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for F2 Zero Mass for SIA... ");
     Timer t;
@@ -2004,7 +2131,7 @@ namespace apfel
                                                                                                               double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCDT(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDT(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for FL Zero Mass for SIA... ");
     Timer t;
@@ -2084,7 +2211,7 @@ namespace apfel
                                                                                                               double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = apfel::InitializeDglapObjectsQCDT(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDT(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for F3 Zero Mass for SIA...\n");
     warning("InitializeF3NCObjectsZMT", "NNLO corrections currently unavailable");
