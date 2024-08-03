@@ -93,6 +93,7 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classapfel_1_1Cm0L3psNC__l-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">apfel::Cm0L3psNC_l Class Reference<div class="ingroups"><a class="el" href="group__NCMassiveZero.html">Massless limit of the massive neutral current coefficient functions</a> &raquo; <a class="el" href="group__NNLOZero.html">NNLO massive-zero coefficient functions</a></div></div></div>
 </div><!--header-->
@@ -114,8 +115,8 @@ Inheritance diagram for apfel::Cm0L3psNC_l:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1f38a88ce79c9834e9adef64df3a137c" id="r_a1f38a88ce79c9834e9adef64df3a137c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f38a88ce79c9834e9adef64df3a137c">Cm0L3psNC_l</a> ()</td></tr>
-<tr class="separator:a1f38a88ce79c9834e9adef64df3a137c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42ac2da200911022fd26eff0ccb7b607" id="r_a42ac2da200911022fd26eff0ccb7b607"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42ac2da200911022fd26eff0ccb7b607">Cm0L3psNC_l</a> (int const &amp;nf, bool const &amp;muterms=true)</td></tr>
+<tr class="separator:a42ac2da200911022fd26eff0ccb7b607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3300cb2be32d8b40477b1a8c0cffc3a1" id="r_a3300cb2be32d8b40477b1a8c0cffc3a1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3300cb2be32d8b40477b1a8c0cffc3a1">Regular</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:a3300cb2be32d8b40477b1a8c0cffc3a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual regular term.  <br /></td></tr>
 <tr class="separator:a3300cb2be32d8b40477b1a8c0cffc3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +148,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a024a43e696e61cd5901479de82d2f173 inherit pub_methods_classapfel_1_1Expression"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual local term for principal-valued integrals a la DGLAP with singularity in the interval (0,1).  <br /></td></tr>
 <tr class="separator:a024a43e696e61cd5901479de82d2f173 inherit pub_methods_classapfel_1_1Expression"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af7b0cd02e4b3065409a34190357c1c5c" id="r_af7b0cd02e4b3065409a34190357c1c5c"><td class="memItemLeft" align="right" valign="top">int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7b0cd02e4b3065409a34190357c1c5c">_nf</a></td></tr>
+<tr class="separator:af7b0cd02e4b3065409a34190357c1c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d03951856713da45c2fbc8edc30dfeb" id="r_a4d03951856713da45c2fbc8edc30dfeb"><td class="memItemLeft" align="right" valign="top">bool const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d03951856713da45c2fbc8edc30dfeb">_muterms</a></td></tr>
+<tr class="separator:a4d03951856713da45c2fbc8edc30dfeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classapfel_1_1Expression"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classapfel_1_1Expression')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classapfel_1_1Expression.html">apfel::Expression</a></td></tr>
@@ -160,8 +168,8 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>O(&alpha;<sub>s</sub><sup>3</sup>) linear log of pure-single coefficient function for FL. Reference: <a href="https://arxiv.org/pdf/1205.5727">https://arxiv.org/pdf/1205.5727</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1f38a88ce79c9834e9adef64df3a137c" name="a1f38a88ce79c9834e9adef64df3a137c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f38a88ce79c9834e9adef64df3a137c">&#9670;&#160;</a></span>Cm0L3psNC_l()</h2>
+<a id="a42ac2da200911022fd26eff0ccb7b607" name="a42ac2da200911022fd26eff0ccb7b607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42ac2da200911022fd26eff0ccb7b607">&#9670;&#160;</a></span>Cm0L3psNC_l()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,8 +177,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">apfel::Cm0L3psNC_l::Cm0L3psNC_l </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>muterms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -208,13 +220,58 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4d03951856713da45c2fbc8edc30dfeb" name="a4d03951856713da45c2fbc8edc30dfeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d03951856713da45c2fbc8edc30dfeb">&#9670;&#160;</a></span>_muterms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const apfel::Cm0L3psNC_l::_muterms</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7b0cd02e4b3065409a34190357c1c5c" name="af7b0cd02e4b3065409a34190357c1c5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7b0cd02e4b3065409a34190357c1c5c">&#9670;&#160;</a></span>_nf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int const apfel::Cm0L3psNC_l::_nf</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/vb262523/Codes/apfelxx/inc/apfel/<a class="el" href="massivezerocoefficientfunctionsunp__sl_8h_source.html">massivezerocoefficientfunctionsunp_sl.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 28 2024 18:25:47 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+Generated on Sat Aug 3 2024 08:43:10 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -115,8 +115,8 @@ Inheritance diagram for apfel::Cm023gNC_l:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1e5551ed12f8dffab078f52e956e8c37" id="r_a1e5551ed12f8dffab078f52e956e8c37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e5551ed12f8dffab078f52e956e8c37">Cm023gNC_l</a> (int const &amp;nf)</td></tr>
-<tr class="separator:a1e5551ed12f8dffab078f52e956e8c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae21758dc9ccaa1bd017628e45b0fc42d" id="r_ae21758dc9ccaa1bd017628e45b0fc42d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae21758dc9ccaa1bd017628e45b0fc42d">Cm023gNC_l</a> (int const &amp;nf, bool const &amp;muterms=true)</td></tr>
+<tr class="separator:ae21758dc9ccaa1bd017628e45b0fc42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab50609a2cd00d19811e48e7b37700ffc" id="r_ab50609a2cd00d19811e48e7b37700ffc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab50609a2cd00d19811e48e7b37700ffc">Regular</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:ab50609a2cd00d19811e48e7b37700ffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual regular term.  <br /></td></tr>
 <tr class="separator:ab50609a2cd00d19811e48e7b37700ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,6 +152,8 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a3ab804b42bfdb014dd1e0d0c768419ed" id="r_a3ab804b42bfdb014dd1e0d0c768419ed"><td class="memItemLeft" align="right" valign="top">int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ab804b42bfdb014dd1e0d0c768419ed">_nf</a></td></tr>
 <tr class="separator:a3ab804b42bfdb014dd1e0d0c768419ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9e1be6c87c3e4b42fa5365d2a43388" id="r_aeb9e1be6c87c3e4b42fa5365d2a43388"><td class="memItemLeft" align="right" valign="top">bool const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb9e1be6c87c3e4b42fa5365d2a43388">_muterms</a></td></tr>
+<tr class="separator:aeb9e1be6c87c3e4b42fa5365d2a43388"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acac8fc3aa8fa85b0668b99882ec1e81f" id="r_acac8fc3aa8fa85b0668b99882ec1e81f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1C22g.html">C22g</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acac8fc3aa8fa85b0668b99882ec1e81f">_c22g</a></td></tr>
 <tr class="separator:acac8fc3aa8fa85b0668b99882ec1e81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a838c32bd6da541567baa54e359f3e930" id="r_a838c32bd6da541567baa54e359f3e930"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1C21g.html">C21g</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a838c32bd6da541567baa54e359f3e930">_c21g</a></td></tr>
@@ -170,8 +172,8 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>O(&alpha;<sub>s</sub><sup>3</sup>) linear log of gluon coefficient function for F2. Reference: <a href="https://arxiv.org/pdf/1205.5727">https://arxiv.org/pdf/1205.5727</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1e5551ed12f8dffab078f52e956e8c37" name="a1e5551ed12f8dffab078f52e956e8c37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e5551ed12f8dffab078f52e956e8c37">&#9670;&#160;</a></span>Cm023gNC_l()</h2>
+<a id="ae21758dc9ccaa1bd017628e45b0fc42d" name="ae21758dc9ccaa1bd017628e45b0fc42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae21758dc9ccaa1bd017628e45b0fc42d">&#9670;&#160;</a></span>Cm023gNC_l()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,8 +181,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">apfel::Cm023gNC_l::Cm023gNC_l </td>
           <td>(</td>
-          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nf</em></span></td><td>)</td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>muterms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -263,6 +269,28 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="aeb9e1be6c87c3e4b42fa5365d2a43388" name="aeb9e1be6c87c3e4b42fa5365d2a43388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb9e1be6c87c3e4b42fa5365d2a43388">&#9670;&#160;</a></span>_muterms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const apfel::Cm023gNC_l::_muterms</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3ab804b42bfdb014dd1e0d0c768419ed" name="a3ab804b42bfdb014dd1e0d0c768419ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3ab804b42bfdb014dd1e0d0c768419ed">&#9670;&#160;</a></span>_nf</h2>
 
@@ -291,7 +319,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 28 2024 18:25:47 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+Generated on Sat Aug 3 2024 08:43:10 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
 </small></address>
 </div><!-- doc-content -->
 </body>

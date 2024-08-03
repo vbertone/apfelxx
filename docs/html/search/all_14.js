@@ -17,7 +17,7 @@ var searchData=
   ['the_20plus_20minus_20basis_14',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
   ['theory_15',['Theory',['../structapfel_1_1EvolutionSetup.html#a1f5b96a8bab80e64227371a4669d95c5',1,'apfel::EvolutionSetup']]],
   ['threshold_16',['Threshold',['../structapfel_1_1DglapObjects.html#a86d077a0480f42088cf0b73a5163fddd',1,'apfel::DglapObjects::Threshold'],['../structapfel_1_1GtmdObjects.html#a8c6a513c8814ea210c6675138a9b3199',1,'apfel::GtmdObjects::Threshold'],['../structapfel_1_1TmdObjects.html#ae56448881a89de75ba38927a0226291a',1,'apfel::TmdObjects::Threshold']]],
-  ['threshold_17',['Approximated NNLO massive coefficient functions near threshold',['../group__NNLOthr.html',1,'']]],
+  ['threshold_20limit_20of_20nnlo_20massive_20coefficient_20functions_17',['Threshold limit of NNLO massive coefficient functions',['../group__NNLOthr.html',1,'']]],
   ['thresholds_18',['Thresholds',['../structapfel_1_1EvolutionSetup.html#a42a4fa2e5320a7878a7fad669fc640be',1,'apfel::EvolutionSetup']]],
   ['time_19',['TIME',['../structapfel_1_1EvolutionSetup.html#a4188fd899c89d904b14feea52c039af7a501057cfd361062d58952825c11d3c4e',1,'apfel::EvolutionSetup']]],
   ['time_20like_20matching_20conditions_20',['Time-like matching conditions',['../group__MatchCondTL.html',1,'']]],

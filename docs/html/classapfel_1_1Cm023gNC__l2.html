@@ -115,8 +115,8 @@ Inheritance diagram for apfel::Cm023gNC_l2:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad52460527c982e1c33349514209114e6" id="r_ad52460527c982e1c33349514209114e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad52460527c982e1c33349514209114e6">Cm023gNC_l2</a> (int const &amp;nf)</td></tr>
-<tr class="separator:ad52460527c982e1c33349514209114e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2161bf1de886f63e19548e4a30c487b4" id="r_a2161bf1de886f63e19548e4a30c487b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2161bf1de886f63e19548e4a30c487b4">Cm023gNC_l2</a> (int const &amp;nf, bool const &amp;muterms=true)</td></tr>
+<tr class="separator:a2161bf1de886f63e19548e4a30c487b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a062a3392bab6d72f905cd9c615f0e973" id="r_a062a3392bab6d72f905cd9c615f0e973"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a062a3392bab6d72f905cd9c615f0e973">Regular</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:a062a3392bab6d72f905cd9c615f0e973"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual regular term.  <br /></td></tr>
 <tr class="separator:a062a3392bab6d72f905cd9c615f0e973"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,6 +152,8 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a6929aa8b2391fa9948f769b986462530" id="r_a6929aa8b2391fa9948f769b986462530"><td class="memItemLeft" align="right" valign="top">int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6929aa8b2391fa9948f769b986462530">_nf</a></td></tr>
 <tr class="separator:a6929aa8b2391fa9948f769b986462530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d7ca5a7b68e546320fab957f3200e0" id="r_a18d7ca5a7b68e546320fab957f3200e0"><td class="memItemLeft" align="right" valign="top">bool const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18d7ca5a7b68e546320fab957f3200e0">_muterms</a></td></tr>
+<tr class="separator:a18d7ca5a7b68e546320fab957f3200e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97d40d8315d1530ef777a838285e6b27" id="r_a97d40d8315d1530ef777a838285e6b27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1C21g.html">C21g</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97d40d8315d1530ef777a838285e6b27">_c21g</a></td></tr>
 <tr class="separator:a97d40d8315d1530ef777a838285e6b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -168,8 +170,8 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>O(&alpha;<sub>s</sub><sup>3</sup>) quadratic log of gluon coefficient function for F2. Reference: <a href="https://arxiv.org/pdf/1205.5727">https://arxiv.org/pdf/1205.5727</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad52460527c982e1c33349514209114e6" name="ad52460527c982e1c33349514209114e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad52460527c982e1c33349514209114e6">&#9670;&#160;</a></span>Cm023gNC_l2()</h2>
+<a id="a2161bf1de886f63e19548e4a30c487b4" name="a2161bf1de886f63e19548e4a30c487b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2161bf1de886f63e19548e4a30c487b4">&#9670;&#160;</a></span>Cm023gNC_l2()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,8 +179,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">apfel::Cm023gNC_l2::Cm023gNC_l2 </td>
           <td>(</td>
-          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nf</em></span></td><td>)</td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>muterms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -239,6 +245,28 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a18d7ca5a7b68e546320fab957f3200e0" name="a18d7ca5a7b68e546320fab957f3200e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18d7ca5a7b68e546320fab957f3200e0">&#9670;&#160;</a></span>_muterms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const apfel::Cm023gNC_l2::_muterms</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6929aa8b2391fa9948f769b986462530" name="a6929aa8b2391fa9948f769b986462530"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6929aa8b2391fa9948f769b986462530">&#9670;&#160;</a></span>_nf</h2>
 
@@ -267,7 +295,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 28 2024 18:25:47 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+Generated on Sat Aug 3 2024 08:43:10 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
 </small></address>
 </div><!-- doc-content -->
 </body>
