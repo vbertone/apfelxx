@@ -9,7 +9,7 @@ var searchData=
   ['h3ch_6',['H3Ch',['../namespaceapfel.html#acda6cf198bb399584e341771f1882837',1,'apfel']]],
   ['h3dy_7',['H3DY',['../namespaceapfel.html#acf86254c2695c9c2d47fefb21fcb266a',1,'apfel']]],
   ['h3sidis_8',['H3SIDIS',['../namespaceapfel.html#a36ed35bdf1b3a33dfc55585e7b86c21b',1,'apfel']]],
-  ['hardfactor_9',['HardFactor',['../namespaceapfel.html#a7205410b8dae804ab53c600859c41067',1,'apfel']]],
+  ['hardfactor_9',['HardFactor',['../namespaceapfel.html#a94e0774ab3a271603a3463715b61c1c2',1,'apfel']]],
   ['hardfactors_10',['HardFactors',['../structapfel_1_1TmdObjects.html#ab72252afdabbc223c89ba674ffd0e2f9',1,'apfel::TmdObjects']]],
   ['hardfactors_2eh_11',['hardfactors.h',['../hardfactors_8h.html',1,'']]],
   ['heavy_20quark_20initiated_20coefficient_20functions_12',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]],

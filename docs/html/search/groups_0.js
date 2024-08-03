@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['basis_0',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
-  ['boer_20mulders_20pdfs_1',['Boer Mulders PDFs',['../group__NLOBM.html',1,'NLO matching functions for Boer-Mulders PDFs'],['../group__NNLOBM.html',1,'NNLO matching functions for Boer-Mulders PDFs']]]
+  ['and_20q_20m_20limit_20of_20nnlo_20massive_20coefficient_20functions_0',['Small-x and Q &gt;&gt; m limit of NNLO massive coefficient functions',['../group__NNLOm0sx.html',1,'']]],
+  ['approximated_20nnlo_20massive_20coefficient_20functions_1',['Approximated NNLO massive coefficient functions',['../group__NNLO.html',1,'']]]
 ];

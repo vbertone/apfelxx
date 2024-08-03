@@ -210,8 +210,8 @@ namespace apfel
    * @param Masses: the heavy quark masses
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
    * @param nxi: the number of nodes of the grid in &xi; = Q<SUP>2</SUP>/M<SUP>2</SUP> (default: 150)
-   * @param ximin: the lower bound of the grid in &xi; (default: 0.001)
-   * @param ximax: the upper bound of the grid in &xi; (default: 100000)
+   * @param ximin: the lower bound of the grid in &xi; (default: 0.05)
+   * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
    * @return A StructureFunctionObjects-valued function
@@ -220,7 +220,7 @@ namespace apfel
                                                                                                                   std::vector<double> const& Masses,
                                                                                                                   double              const& IntEps = 1e-5,
                                                                                                                   int                 const& nxi    = 150,
-                                                                                                                  double              const& ximin  = 0.01,
+                                                                                                                  double              const& ximin  = 0.05,
                                                                                                                   double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
                                                                                                                   double              const& lambda = 0.0005);
@@ -234,8 +234,8 @@ namespace apfel
    * @param Masses: the heavy quark masses
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
    * @param nxi: the number of nodes of the grid in &xi; = Q<SUP>2</SUP>/M<SUP>2</SUP> (default: 150)
-   * @param ximin: the lower bound of the grid in &xi; (default: 0.001)
-   * @param ximax: the upper bound of the grid in &xi; (default: 100000)
+   * @param ximin: the lower bound of the grid in &xi; (default: 0.05)
+   * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
    * @return A StructureFunctionObjects-valued function
@@ -244,7 +244,7 @@ namespace apfel
                                                                                                                   std::vector<double> const& Masses,
                                                                                                                   double              const& IntEps = 1e-5,
                                                                                                                   int                 const& nxi    = 150,
-                                                                                                                  double              const& ximin  = 0.01,
+                                                                                                                  double              const& ximin  = 0.05,
                                                                                                                   double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
                                                                                                                   double              const& lambda = 0.0005);
@@ -258,8 +258,8 @@ namespace apfel
    * @param Masses: the heavy quark masses
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
    * @param nxi: the number of nodes of the grid in &xi; = Q<SUP>2</SUP>/M<SUP>2</SUP> (default: 150)
-   * @param ximin: the lower bound of the grid in &xi; (default: 0.001)
-   * @param ximax: the upper bound of the grid in &xi; (default: 100000)
+   * @param ximin: the lower bound of the grid in &xi; (default: 0.05)
+   * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
    * @return A StructureFunctionObjects-valued function
@@ -268,7 +268,7 @@ namespace apfel
                                                                                                                       std::vector<double> const& Masses,
                                                                                                                       double              const& IntEps = 1e-5,
                                                                                                                       int                 const& nxi    = 150,
-                                                                                                                      double              const& ximin  = 0.01,
+                                                                                                                      double              const& ximin  = 0.05,
                                                                                                                       double              const& ximax  = 10000,
                                                                                                                       int                 const& intdeg = 3,
                                                                                                                       double              const& lambda = 0.0005);
@@ -282,8 +282,8 @@ namespace apfel
    * @param Masses: the heavy quark masses
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
    * @param nxi: the number of nodes of the grid in &xi; = Q<SUP>2</SUP>/M<SUP>2</SUP> (default: 150)
-   * @param ximin: the lower bound of the grid in &xi; (default: 0.001)
-   * @param ximax: the upper bound of the grid in &xi; (default: 100000)
+   * @param ximin: the lower bound of the grid in &xi; (default: 0.05)
+   * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
    * @return A StructureFunctionObjects-valued function
@@ -292,7 +292,7 @@ namespace apfel
                                                                                                                       std::vector<double> const& Masses,
                                                                                                                       double              const& IntEps = 1e-5,
                                                                                                                       int                 const& nxi    = 150,
-                                                                                                                      double              const& ximin  = 0.01,
+                                                                                                                      double              const& ximin  = 0.05,
                                                                                                                       double              const& ximax  = 10000,
                                                                                                                       int                 const& intdeg = 3,
                                                                                                                       double              const& lambda = 0.0005);

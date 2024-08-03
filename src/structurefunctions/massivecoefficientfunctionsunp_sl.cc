@@ -5,6 +5,7 @@
 //
 
 #include "apfel/massivecoefficientfunctionsunp_sl.h"
+#include "apfel/betaqcd.h"
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 #include "apfel/integrator.h"
@@ -301,7 +302,589 @@ namespace apfel
     const double z   = eta * x;
     double xi = 4 * eta / ( 1 - eta );
     double wr = xi * ( 1 / z - 1 ) / 4 - 1;
-    return _eta * 16 * M_PI * xi * clnlobarq_(&wr, & xi) / z;
+    return _eta * 16 * M_PI * xi * clnlobarq_(&wr, &xi) / z;
+  }
+
+  //_________________________________________________________________________________
+  // Helper functions for the approximated O(as^3) coefficient
+  // functions. The correspond to Eqs. (3.10) and (3.11) of
+  // https://arxiv.org/pdf/1205.5727.
+  //_________________________________________________________________________________
+  double c0Th(double const& xi)
+  {
+    const double y  = sqrt(1 + 4 / xi);
+    const double L1 = log(1 + xi / 2);
+    const double L2 = log(2 + xi / 2);
+    const double L3 = log(sqrt(xi) * ( y - 1 ) / 2);
+    const double xip2 = 2 + xi;
+    const double xip4 = 4 + xi;
+    const double Li2 = dilog(-2 / xip2);
+    return CA * ( 50 - Pi2 + 12 * L3 / y + 4 * L3 * L3 + L1 * L1 + 6 * L2
+                  - 4 * L2 * L2 + 2 * Li2 + 48 / xip2 - 4 * L2 / xip2
+                  + 64 * L2 / xip2 / xip2 - 128 * L2 / ( xip2 * xip2 * xip4 )
+                  - 160 / xip2 / xip4 - 64 * L2 / xip2 / xip4
+                  + 128 / ( xip2 * xip4 * xip4 ) - 12 * ( 4 + zeta2 ) / xip4
+                  - 8 * L3 * L3 / xip4 + 64 / xip4 / xip4 )
+           + CF * ( -18. - 2. / 3. * Pi2 - 24. * L3 / y - 8. * L3 * L3
+                    + 2. * L1 * L1 - 6. * L2 + 4. * Li2 - 48. / xip2
+                    + 8. * L2 / xip2 + 360. / xip2 / xip4
+                    + 128. * L2 / xip2 / xip4 - 544. / (xip2 * xip4 * xip4)
+                    + 48. * L3 * L3 / xip4 - 8. * L1 * L1 / xip4
+                    + (44. + 40. * zeta2) / xip4 - 120. * L2 / xip2 / xip2
+                    + 256. * L2 / (xip2 * xip2 * xip4) - 16. * Li2 / xip4
+                    - 272. / xip4 / xip4 );
+  }
+  double c0Thbar(double const& xi)
+  {
+    return 4 * CA * ( 2 + log(1 + xi / 4) ) - 4 * TR / 3;
+  }
+  double ThExpansiong3(int const& nf, double const& xi, double const& z, bool const& muterms)
+  {
+    const double beta = sqrt(1 - 4 * z / xi / ( 1 - z ));
+    const double l  = log(beta);
+    const double l2 = l * l;
+    const double l3 = l * l2;
+    const double l4 = l * l3;
+    const double Lm  = (muterms ? - log(xi) : 0);
+    const double Lm2 = Lm * Lm;
+    const double ln2  = log(2);
+    const double ln22 = ln2 * ln2;
+    const double ln23 = ln2 * ln22;
+    const double c_log4 = 128 * CA * CA;
+    const double c_log3 = ( 768 * ln2 - 6464 / 9. ) * CA * CA + 128. / 9. * CA * nf + 128 * CA * CA * Lm;
+    const double c_log2 = ( 1728 * ln22 - 3232 * ln2 - 208 / 3. * Pi2 + 15520 / 9. ) * CA * CA
+                          + ( 64. * ln2 - 640 / 9. ) * CA * nf + 16 * CA * c0Th(xi) + 32 * CA * ( CF - CA / 2 ) * Pi2 / beta
+                          - ( ( - 512 * ln2 + 1136 / 3. ) * CA * CA - 32 / 3. * CA * nf + 16 * CA * c0Thbar(xi) ) * Lm
+                          + 32 * CA * CA * Lm2;
+    const double c_log_const = ( 1728 * ln23 - 4848 * ln22 + 15520 / 3. * ln2 - 208 * Pi2 * ln2
+                                 + 936 * zeta3 + 608. / 3. * Pi2 - 88856. / 27.) * CA * CA
+                               + ( 96 * ln22 - 640 / 3. * ln2 - 16 / 3. * Pi2 + 4592 / 27. ) * CA * nf
+                               - 32 * CF * ( CF - CA / 2 ) * Pi2 + ( 48 * ln2 - 40 ) * CA * c0Th(xi);
+    const double c_log_fracbeta = ( ( - 92 / 3. + 32 * ln2 ) * CA + 8 / 3. * nf) * ( CF - CA / 2 ) * Pi2;
+    const double c_log_Lm = - ( ( - 672 * ln22 + 976 * ln2 + 104 / 3. * Pi2 - 4160 / 9. ) * CA * CA
+                                + ( - 32 * ln2 + 320 / 9. ) * CA * nf + ( 48  * ln2 - 40 ) * CA * c0Thbar(xi)
+                                - 8 * CA * c0Th(xi) - 16 * CA * ( CF - CA / 2 ) * Pi2 / beta );
+    const double c_log_Lm2 = ( 64 * ln2 - 44 / 3. ) * CA * CA + 8 / 3. * CA * nf - 8 * CA * c0Thbar(xi);
+    const double c_log = c_log_const + c_log_fracbeta / beta + c_log_Lm * Lm + c_log_Lm2 * Lm2;
+    const double c_fracbeta = ( ( 8 * ln22 - 68 / 3. * ln2 + 8 / 3. * Pi2 - 658 / 9. ) * CA
+                                + ( 8 / 3. * ln2 - 20 / 9.) * nf + 2 * c0Th(xi)
+                                + ( 26 / 3. * CA + 4 / 3. * nf - 2 * c0Thbar(xi) ) * Lm ) * ( CF - CA / 2 ) * Pi2;
+    const double c_fracbeta2 = 4 / 3. * ( CF - CA / 2 ) * ( CF - CA / 2 ) * Pi2 * Pi2;
+    return c_log4 * l4 + c_log3 * l3 + c_log2 * l2 + c_log * l + c_fracbeta / beta + c_fracbeta2 / beta / beta;
+  }
+  double ThExpansiong3const(double const& xi, bool const& muterms)
+  {
+    const double Lm  = (muterms ? - log(xi) : 0);
+    return pow(c0Th(xi) + 36 * CA * pow(log(2), 2) - 60 * CA * log(2) + Lm * ( 8 * CA * log(2) - c0Thbar(xi) ), 2);
+  }
+
+  //_________________________________________________________________________________
+  Cmth23gNC::Cmth23gNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _muterms(muterms),
+    _c21g(Cm21gNC{eta})
+  {
+  }
+  double Cmth23gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta = this->_eta;
+    const double z   = eta * x;
+    const double xi  = 4 * eta / ( 1 - eta );
+    return _c21g.Regular(x) * ( ThExpansiong3(_nf, xi, z, _muterms) + ThExpansiong3const(xi, _muterms) );
+  }
+
+  //_________________________________________________________________________________
+  CmthL3gNC::CmthL3gNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _muterms(muterms),
+    _cL1g(CmL1gNC{eta})
+  {
+  }
+  double CmthL3gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta = this->_eta;
+    const double z   = eta * x;
+    const double xi  = 4 * eta / ( 1 - eta );
+    return _cL1g.Regular(x) * ( ThExpansiong3(_nf, xi, z, _muterms) + ThExpansiong3const(xi, _muterms) );
+  }
+
+  //_________________________________________________________________________________
+  Cmsx23gNC::Cmsx23gNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _muterms(muterms)
+  {
+  }
+  double Cmsx23gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double Lmu  = (_muterms ? - log(xi) : 0);
+    const double Lmu2 = Lmu * Lmu;
+    const double a11  = CA;
+    const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
+    const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
+    const double bt0  = beta0qcd(_nf);
+    const double z    = sqrt(1 / ( 1 + 4 / xi ));
+    const double L    = log(( 1 + z ) / ( 1 - z ));
+
+    // Call polylogs
+    double wx = z;
+    int nw = 3;
+    int n1 = -1;
+    int n2 = 1;
+    int sz = n2 - n1 + 1;
+    double *Hr1 = new double[sz];
+    double *Hr2 = new double[sz * sz];
+    double *Hr3 = new double[sz * sz * sz];
+    double *Hr4 = new double[sz * sz * sz * sz];
+    double *Hr5 = new double[sz * sz * sz * sz * sz];
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+
+    // weight 2
+    const double Hm1m1 = Hr2[0];
+    const double H1m1  = Hr2[2];
+    const double Hm11  = Hr2[6];
+    const double H11   = Hr2[8];
+
+    // weight 3
+    const double Hm1m1m1 = Hr3[0];
+    const double H1m1m1  = Hr3[2];
+    const double Hm11m1  = Hr3[6];
+    const double H11m1   = Hr3[8];
+    const double Hm1m11  = Hr3[18];
+    const double H1m11   = Hr3[20];
+    const double Hm111   = Hr3[24];
+    const double H111    = Hr3[26];
+
+    // Deallocate pointers
+    delete[] Hr1;
+    delete[] Hr2;
+    delete[] Hr3;
+    delete[] Hr4;
+    delete[] Hr5;
+
+    const double Hmp  = H11 + H1m1 - Hm11 - Hm1m1;
+    const double Hmpm = H111 - H11m1 + H1m11 - H1m1m1 - Hm111 + Hm11m1 - Hm1m11 + Hm1m1m1;
+    const double I    = 4 * z * Hmp;
+    const double J    = 4 * z * L;
+    const double K    = 4 * z * Hmpm;
+    const double Lnxi = log(1 + xi / 4);
+    //const double ln2  = log(2);
+    const double ll   = CA * CA * ( - 1472 / 27. - 8 / 3. * K * ( - 1 + 1 / xi ) + 8 / 27. * J * ( - 71 + 92 / xi )
+                                    + I * ( 8 / 3. * Lnxi * ( - 1 + 1 / xi ) + 8 / 9. * ( - 13 + 10 / xi ) )
+                                    + ( - 160 / 9. + 16 / 3. * I * ( - 1 + 1 / xi ) + 8 / 9. * J * ( - 13 + 10 / xi ) ) * Lmu
+                                    + ( - 16 / 3. + 8 / 3. * J * ( - 1 + 1 / xi ) ) * Lmu2 ) * log(x) / x;
+    const double nllc =  ( a21 * ( 160 / 9. - 16 / 3. * I * ( - 1 + 1 / xi ) - 8 / 9. * J * ( - 13 + 10 * 1 / xi ) )
+                           + a10 * a11 * ( 2944 / 27. + 16 / 3. * K * ( - 1 + 1 / xi ) - 16 / 27. * J * ( - 71 + 92 * 1 / xi )
+                                           + I * ( - 16 / 3. * Lnxi * ( - 1 + 1 / xi ) - 16 / 9. * ( - 13 + 10 * 1 / xi ) ) )
+                           + a11 * bt0 * ( - 1472 / 27. - 8 / 3. * K * ( - 1 + 1 / xi ) + 8 / 27. * J * ( - 71 + 92 * 1 / xi )
+                                           + I * ( 8 / 3. * Lnxi * ( - 1 + 1 / xi ) + 8 / 9. * ( - 13 + 10 * 1 / xi ) ) )
+                           + ( a21 * ( 32 / 3. - 16 / 3. * J * ( - 1 + 1 / xi ) )
+                               + a10 * a11 * ( 320 / 9. - 32 / 3. * I * ( - 1 + 1 / xi ) - 16 / 9. * J * ( - 13 + 10 * 1 / xi ) )
+                               + a11 * bt0 * ( - 160 / 9. + 16 / 3. * I * ( - 1 + 1 / xi ) + 8 / 9. * J * ( - 13 + 10 * 1 / xi ) ) ) * Lmu
+                           + ( a10 * a11 * ( 32 / 3. - 16 / 3. * J * ( - 1 + 1 / xi ) )
+                               + a11 * bt0 * ( - 16 / 3. + 8 / 3. * J * ( - 1 + 1 / xi ) ) ) * Lmu2 ) / x;
+    /*
+    // Variation of nllc
+    const double nllv = ( a10 * a11 * ( 2944 / 27. + 16 / 3. * K * ( - 1 + 1 / xi ) - 16 / 27. * J * ( - 71 + 92 * 1 / xi )
+                                        + I * ( - 16 / 3. * Lnxi * ( - 1 + 1 / xi ) - 16 / 9. * ( - 13 + 10 * 1 / xi ) ) )
+                          + ( a10 * a11 * ( 32 / 3. - 16 / 3. * J * ( - 1 + 1 / xi ) )
+                              + a11 * bt0 * ( - 16 / 3. + 8 / 3. * J * ( - 1 + 1 / xi ) ) ) * Lmu2
+                          + a11 * bt0 * ( - 1472 / 27. - 8 / 3. * K * ( - 1 + 1 / xi ) - 640 * ln2 / 9. + 140 * zeta3 / 3
+                                          + I * ( 8 / 3. * Lnxi * ( - 1 + 1 / xi ) + 8 / 9. * ( - 13 + 10 * 1 / xi )
+                                                  + 64 / 3. * ( - 1 + 1 / xi ) * ln2 - 14 * ( - 1 + 1 / xi ) * zeta3 )
+                                          + J * ( 8 / 27. * ( - 71 + 92 * 1 / xi ) + 32 / 9. * ( - 13 + 10 * 1 / xi ) * ln2
+                                                  - 7 / 3. * ( - 13 + 10 * 1 / xi ) * zeta3) )
+                          + Lmu * ( a10 * a11 * ( 320 / 9. - 32 / 3. * I * ( - 1 + 1 / xi ) - 16 / 9. * J * ( - 13 + 10 * 1 / xi ) )
+                                    + a11 * bt0 * ( - 160 / 9. + 16 / 3. * I * ( - 1 + 1 / xi ) - 128 * ln2 / 3 + 28 * zeta3
+                                                    + J * ( 8 / 9. * ( - 13 + 10 * 1 / xi ) + 64 / 3. * ( - 1 + 1 / xi ) * ln2
+                                                            - 14 * ( - 1 + 1 / xi ) * zeta3) ) ) ) / x;
+    */
+    return ll + nllc;
+  }
+
+  //_________________________________________________________________________________
+  Cmsx23psNC::Cmsx23psNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _c23g(Cmsx23gNC{nf, eta, muterms})
+  {
+  }
+  double Cmsx23psNC::Regular(double const& x) const
+  {
+    return CF / CA * _c23g.Regular(x);
+  }
+
+  //_________________________________________________________________________________
+  CmsxL3gNC::CmsxL3gNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _muterms(muterms)
+  {
+  }
+  double CmsxL3gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double Lmu  = (_muterms ? - log(xi) : 0);
+    const double Lmu2 = Lmu * Lmu;
+    const double a11  = CA;
+    const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
+    const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
+    const double bt0  = beta0qcd(_nf);
+    const double z    = sqrt(1 / ( 1 + 4 / xi ));
+    const double L    = log(( 1 + z ) / ( 1 - z ));
+
+    // Call polylogs
+    double wx = z;
+    int nw = 3;
+    int n1 = -1;
+    int n2 = 1;
+    int sz = n2 - n1 + 1;
+    double *Hr1 = new double[sz];
+    double *Hr2 = new double[sz * sz];
+    double *Hr3 = new double[sz * sz * sz];
+    double *Hr4 = new double[sz * sz * sz * sz];
+    double *Hr5 = new double[sz * sz * sz * sz * sz];
+    apf_hplog_(&wx, &nw, Hr1, Hr2, Hr3, Hr4, Hr5, &n1, &n2);
+
+    // weight 2
+    const double Hm1m1 = Hr2[0];
+    const double H1m1  = Hr2[2];
+    const double Hm11  = Hr2[6];
+    const double H11   = Hr2[8];
+
+    // weight 3
+    const double Hm1m1m1 = Hr3[0];
+    const double H1m1m1  = Hr3[2];
+    const double Hm11m1  = Hr3[6];
+    const double H11m1   = Hr3[8];
+    const double Hm1m11  = Hr3[18];
+    const double H1m11   = Hr3[20];
+    const double Hm111   = Hr3[24];
+    const double H111    = Hr3[26];
+
+    // Deallocate pointers
+    delete[] Hr1;
+    delete[] Hr2;
+    delete[] Hr3;
+    delete[] Hr4;
+    delete[] Hr5;
+
+    const double Hmp  = H11 + H1m1 - Hm11 - Hm1m1;
+    const double Hmpm = H111 - H11m1 + H1m11 - H1m1m1 - Hm111 + Hm11m1 - Hm1m11 + Hm1m1m1;
+    const double I    = 4 * z * Hmp;
+    const double J    = 4 * z * L;
+    const double K    = 4 * z * Hmpm;
+    const double Lnxi = log(1 + xi / 4);
+    //const double ln2  = log(2);
+    const double ll   = a11 * a11 * ( - 32 / 3. * K / xi * ( 1 + 3 / xi ) - 128 / 27. * ( 17 + 120 / xi )
+                                      + 16 / 27. * J * (3 + 136 / xi + 480 / xi / xi )
+                                      + I * ( 32 / 3. * Lnxi / xi * ( 1 + 3 / xi ) + 16 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) )
+                                      + ( 64 / 3. * I / xi * ( 1 + 3 / xi ) - 64 / 9. * ( - 1 + 12 / xi )
+                                          + 16 / 9. * J * ( - 3 - 4 / xi + 24 / xi / xi ) ) * Lmu
+                                      + ( 32 / 3. * J / xi * ( 1 + 3 / xi ) - 32 / 3. * ( 1 + 6 / xi ) ) * Lmu2) * log(x) / x / ( 1 + 4 / xi );
+    const double nllc = ( a21 * ( - 64 / 3. * I / xi * ( 1 + 3 / xi ) + 64 / 9. * ( - 1 + 12 / xi )
+                                  - 16 / 9. * J * ( - 3 - 4 / xi + 24 / xi / xi ) )
+                          + a10 * a11 * ( 64 / 3. * K / xi * ( 1 + 3 / xi ) + 256 / 27. * ( 17 + 120 / xi )
+                                          - 32 / 27. * J * (3 + 136 / xi + 480 / xi / xi )
+                                          + I * ( - 64 / 3. * Lnxi / xi * ( 1 + 3 / xi ) - 32 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) ) )
+                          + a11 * bt0 * ( - 32 / 3. * K / xi * ( 1 + 3 / xi ) - 128 / 27. * ( 17 + 120 / xi )
+                                          + 16 / 27. * J * (3 + 136 / xi + 480 / xi / xi )
+                                          + I * ( 32 / 3. * Lnxi / xi * ( 1 + 3 / xi ) + 16 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) ) )
+                          + ( a21 * ( - 64 / 3. * J / xi * ( 1 + 3 / xi ) + 64 / 3. * ( 1 + 6 / xi ) )
+                              + a10 * a11 * ( - 128 / 3. * I / xi * ( 1 + 3 / xi ) + 128 / 9. * ( - 1 + 12 / xi )
+                                              - 32 / 9. * J * ( - 3 - 4 / xi + 24 / xi / xi ) )
+                              + a11 * bt0 * ( 64 / 3. * I / xi * ( 1 + 3 / xi ) - 64 / 9. * ( - 1 + 12 / xi )
+                                              + 16 / 9. * J * ( - 3 - 4 / xi + 24 / xi / xi ) ) ) * Lmu
+                          + ( a11 * bt0 * ( 32 / 3. * J / xi * ( 1 + 3 / xi ) - 32 / 3. * ( 1 + 6 / xi ) )
+                              + a10 * a11 * ( - 64 / 3. * J / xi * ( 1 + 3 / xi ) + 64 / 3. * ( 1 + 6 / xi ) ) ) * Lmu2 ) / x / ( 1 + 4 / xi );
+    /*
+    // Variation of nllc
+    const double nllv = ( a10 * a11 * ( 64 / 3. * K / xi * ( 1 + 3 / xi ) + 256 / 27. * ( 17 + 120 / xi )
+                                        - 32 / 27. * J * (3 + 136 / xi + 480 / xi / xi )
+                                        + I * ( - 64 / 3. * Lnxi / xi * ( 1 + 3 / xi ) - 32 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) ) )
+                          + ( a11 * bt0 * ( 32 / 3. * J / xi * ( 1 + 3 / xi ) - 32 / 3. * ( 1 + 6 / xi ) )
+                              + a10 * a11 * ( - 64 / 3. * J / xi * ( 1 + 3 / xi ) + 64 / 3. * ( 1 + 6 / xi ) ) ) * Lmu2
+                          + a11 * bt0 * ( - 32 / 3. * K / xi * ( 1 + 3 / xi ) - 128 / 27. * ( 17 + 120 / xi )
+                                          - 256 / 9. * ( - 1 + 12 / xi ) * ln2 + 56 / 3. * ( - 1 + 12 / xi ) * zeta3
+                                          + I * ( 32 / 3. * Lnxi / xi * ( 1 + 3 / xi ) + 16 / 9. * ( - 3 - 4 / xi + 24 / xi / xi )
+                                                  + 256 / 3. / xi * ( 1 + 3 / xi ) * ln2 - 56 / xi * ( 1 + 3 / xi ) * zeta3 )
+                                          + J * ( 16 / 27. * (3 + 136 / xi + 480 / xi / xi ) + 64 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) * ln2
+                                                  - 14 / 3. * ( - 3 - 4 / xi + 24 / xi / xi ) * zeta3) )
+                          + Lmu * ( a10 * a11 * ( - 128 / 3. * I / xi * ( 1 + 3 / xi ) + 128 / 9. * ( - 1 + 12 / xi )
+                                                  - 32 / 9. * J * ( - 3 - 4 / xi + 24 / xi / xi ) )
+                                    + a11 * bt0 * ( 64 / 3. * I / xi * ( 1 + 3 / xi ) - 64 / 9. * ( - 1 + 12 / xi )
+                                                    - 256 / 3. * ( 1 + 6 / xi ) * ln2 + 56 * ( 1 + 6 / xi ) * zeta3
+                                                    + J * ( 16 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) + 256 / 3. / xi * ( 1 + 3 / xi ) * ln2
+                                                            - 56 / xi * ( 1 + 3 / xi ) * zeta3) ) ) ) / x / ( 1 + 4 / xi );
+    */
+    return ll + nllc;
+  }
+
+  //_________________________________________________________________________________
+  CmsxL3psNC::CmsxL3psNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _cL3g(CmsxL3gNC{nf, eta, muterms})
+  {
+  }
+  double CmsxL3psNC::Regular(double const& x) const
+  {
+    return CF / CA * _cL3g.Regular(x);
+  }
+
+  //_________________________________________________________________________________
+  Cm0sx23gNC::Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _muterms(muterms)
+  {
+  }
+  double Cm0sx23gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double Lmu  = (_muterms ? - log(xi) : 0);
+    const double Lmu2 = Lmu * Lmu;
+    const double LQ   = - log(xi);
+    const double LQ2  = LQ * LQ;
+    const double LQ3  = LQ * LQ2;
+    const double a11  = CA;
+    const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
+    const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
+    const double bt0  = beta0qcd(_nf);
+    const double ll   = CA * CA * log(x) * ( - 32 / 27. * ( - 71 + 18 * zeta2 ) * LQ - 208 / 9. * LQ2 + 32 / 9. * LQ3
+                                             + Lmu2 * ( - 16 / 3. + 32 / 3. * LQ )
+                                             + Lmu * ( 32 / 9. * ( - 5 + 6 * zeta2 ) + 416 / 9. * LQ - 32 / 3. * LQ2 )
+                                             + 16 / 27. * ( - 92 + 78 * zeta2 - 72 * zeta3 ) ) / x;
+    const double nllc = ( - 32 / 9. * a21 * ( - 5 + Pi2 )
+                          + ( - 416 * a21 / 9 + 64 / 27. * a10 * a11 * ( - 71 + 3 * Pi2 ) - 32 / 27. * a11 * bt0 * ( - 71 + 3 * Pi2 ) ) * LQ
+                          + ( 416 * a10 * a11 / 9 + 32 * a21 / 3 - 208 * a11 * bt0 / 9 ) * LQ2
+                          + ( - 64 * a10 * a11 / 9 + 32 * a11 * bt0 / 9 ) * LQ3
+                          + Lmu2 * ( 32 * a10 * a11 / 3 - 16 * a11 * bt0 / 3 + ( - 64 * a10 * a11 / 3 + 32 * a11 * bt0 / 3 ) * LQ )
+                          + Lmu * ( 32 * a21 / 3 - 64 / 9. * a10 * a11 * ( - 5 + Pi2 ) + 32 / 9. * a11 * bt0 * ( - 5 + Pi2 )
+                                    + ( - 832 * a10 * a11 / 9 - 64 * a21 / 3 + 416 * a11 * bt0 / 9 ) * LQ
+                                    + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2 )
+                          - 32 / 27. * a10 * a11 * ( - 92 + 13 * Pi2 - 72 * zeta3 )
+                          + 16 / 27. * a11 * bt0 * ( - 92 + 13 * Pi2 - 72 * zeta3 ) ) / x;
+    /*
+    // Variation of nllc
+    const double nllv = ( ( - 64 * a10 * a11 / 9 + 32 * a11 * bt0 / 9 ) * LQ3
+                          + Lmu2 * ( 32 * a10 * a11 / 3 - 16 * a11 * bt0 / 3 + ( - 64 * a10 * a11 / 3 + 32 * a11 * bt0 / 3 ) * LQ )
+                          + LQ2 * ( 416 * a10 * a11 / 9 - 4 / 9. * a11 * bt0 * ( 52 + 96 * log(2) - 63 * zeta3 ) )
+                          - 32 / 27. * a10 * a11 * ( - 92 + 13 * Pi2 - 72 * zeta3 )
+                          + 4 / 27. * a11 * bt0 * ( - 368 + 52 * Pi2 - 480 * log(2) + 96 * Pi2 * log(2) + 27 * zeta3 - 63 * Pi2 * zeta3 )
+                          + Lmu * ( - 64 / 9. * a10 * a11 * ( - 5 + Pi2 ) + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2
+                                    + LQ * ( - 832 * a10 * a11 / 9 + 8 / 9. * a11 * bt0 * ( 52 + 96 * log(2) - 63 * zeta3 ) )
+                                    + 4 / 9. * a11 * bt0 * ( - 40 + 8 * Pi2 - 96 * log(2) + 63 * zeta3 ) )
+                          + LQ * ( 64 / 27. * a10 * a11 * ( - 71 + 3 * Pi2 )
+                                   - 4. / 27 * a11 * bt0 * ( - 568 + 24 * Pi2 - 1248 * log(2) + 819 * zeta3 ) ) ) / x;
+    */
+    return ll + nllc;
+  }
+
+  //_________________________________________________________________________________
+  Cm0sx23psNC::Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _c23g(Cm0sx23gNC{nf, eta, muterms})
+  {
+  }
+  double Cm0sx23psNC::Regular(double const& x) const
+  {
+    return CF / CA * _c23g.Regular(x);
+  }
+
+  //_________________________________________________________________________________
+  Cm0sxL3gNC::Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _nf(nf),
+    _eta(eta),
+    _muterms(muterms)
+  {
+  }
+  double Cm0sxL3gNC::Regular(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double Lmu  = (_muterms ? - log(xi) : 0);
+    const double Lmu2 = Lmu * Lmu;
+    const double LQ   = - log(xi);
+    const double LQ2  = LQ * LQ;
+    const double a11  = CA;
+    const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
+    const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
+    const double bt0  = beta0qcd(_nf);
+    const double ll   = CA * CA * ( 32 / 27. * ( - 68 + 18 * zeta2 ) - 32 / 3. * Lmu2 - 64 / 9. * LQ
+                                    - 32 / 3. * LQ2 + Lmu * ( 64 / 9. + 64 / 3. * LQ ) ) * log(x) / x;
+    const double nllc = ( - 64 * a21 / 9 - 64 / 27. * a10 * a11 * ( - 68 + 3 * Pi2 )
+                          + 32 / 27. * a11 * bt0 * ( - 68 + 3 * Pi2 )
+                          + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * Lmu2
+                          + ( 128 * a10 * a11 / 9 - 64 * a21 / 3 - 64 * a11 * bt0 / 9 ) * LQ
+                          + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2
+                          + ( - 128 * a10 * a11 / 9 + 64 * a21 / 3 + 64 * a11 * bt0 / 9
+                              + ( - 128 * a10 * a11 / 3 + 64 * a11 * bt0 / 3 ) * LQ ) * Lmu ) / x;
+    /*
+    // Variation of nllc
+    const double nllv = ( - 64 / 27 * a10 * a11 * ( - 68 + 3 * Pi2 )
+                          + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * Lmu2
+                          + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2
+                          + ( - 128 * a10 * a11 / 9 + ( - 128 * a10 * a11 / 3 + 64 * a11 * bt0 / 3 ) * LQ
+                              - 8 / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * Lmu
+                          + ( 128 * a10 * a11 / 9 + 8. / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * LQ
+                          + 8 / 27. * a11 * bt0 * ( - 272 + 12 * Pi2 + 96 * log(2) - 63 * zeta3 ) ) / x;
+    */
+    return ll + nllc;
+  }
+
+  //_________________________________________________________________________________
+  Cm0sxL3psNC::Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms):
+    Expression(),
+    _cL3g(Cm0sxL3gNC{nf, eta, muterms})
+  {
+  }
+  double Cm0sxL3psNC::Regular(double const& x) const
+  {
+    return CF / CA * _cL3g.Regular(x);
+  }
+
+  //_________________________________________________________________________________
+  // Damping function used by the approximated NNLO massive
+  // coefficient functions.
+  // _________________________________________________________________________________
+  double fDamp(double const& x, double const& xi,
+               double const& A, double const& B, double const& C, double const& D, double const& a = 2.5, double const& b = 5)
+  {
+    const double eta = xi * ( 1 - x ) / x / 4 - 1;
+    const double h   = A + ( B - A ) / ( 1 + exp(a * ( log(xi) - b )) );
+    const double k   = C + ( D - C ) / ( 1 + exp(a * ( log(xi) - b )) );
+    return 1 / ( 1 + pow(eta / h, k) );
+  }
+
+  //_________________________________________________________________________________
+  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cmth23g(Cmth23gNC{nf, eta, false}),
+    _cm023g_c(Cm023gNC_c{nf}),
+    _cm023g_l(Cm023gNC_l{nf, false}),
+    _cm023g_l2(Cm023gNC_l2{nf, false}),
+    _cm023g_l3(Cm023gNC_l3{nf, false}),
+    _cmsx23g(Cmsx23gNC{nf, eta, false}),
+    _cm0sx23g(Cm0sx23gNC{nf, eta, false})
+  {
+  }
+  double Cm2a3gNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double lxi3 = lxi * lxi2;
+    const double fthr = fDamp(z, xi, 0.3, 2.5, 2.5, 1.2, 2.5, 5);
+    const double fasy = 1 - fthr;
+    return fthr * _cmth23g.Regular(x)                                                                                                       // Threshold approximation
+           + fasy * eta * ( _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z) // Q >> m approximation
+                            + _cmsx23g.Regular(z)                                                                                           // Small-x approximation
+                            - _cm0sx23g.Regular(z) );                                                                                       // Q >> m and Small-x approximation
+  }
+
+  //_________________________________________________________________________________
+  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cm023ps_c(Cm023psNC_c{nf}),
+    _cm023ps_l(Cm023psNC_l{nf, false}),
+    _cm023ps_l2(Cm023psNC_l2{nf, false}),
+    _cm023ps_l3(Cm023psNC_l3{nf, false}),
+    _cmsx23ps(Cmsx23psNC{nf, eta, false}),
+    _cm0sx23ps(Cm0sx23psNC{nf, eta, false})
+  {
+  }
+  double Cm2a3psNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double lxi3 = lxi * lxi2;
+    const double fthr = fDamp(z, xi, 0.3, 2.5, 2.5, 1.2, 2.5, 5);
+    const double fasy = 1 - fthr;
+    return fasy * eta * ( _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z) // Q >> m approximation
+                          + _cmsx23ps.Regular(z)                                                                                              // Small-x approximation
+                          - _cm0sx23ps.Regular(z) );                                                                                          // Q >> m and Small-x approximation
+  }
+
+  //_________________________________________________________________________________
+  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cmthL3g(CmthL3gNC{nf, eta, false}),
+    _cm0L3g_c(Cm0L3gNC_c{nf}),
+    _cm0L3g_l(Cm0L3gNC_l{nf, false}),
+    _cm0L3g_l2(Cm0L3gNC_l2{nf, false}),
+    _cmsxL3g(CmsxL3gNC{nf, eta, false}),
+    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false})
+  {
+  }
+  double CmLa3gNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double fthr = fDamp(z, xi, 10., 11., 3., 2.);
+    const double fasy = 1 - fthr;
+    return fthr * _cmthL3g.Regular(x)                                                                        // Threshold approximation
+           + fasy * eta * ( _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z) // Q >> m approximation
+                            + _cmsxL3g.Regular(z)                                                            // Small-x approximation
+                            - _cm0sxL3g.Regular(z) );                                                        // Q >> m and Small-x approximation
+  }
+
+  //_________________________________________________________________________________
+  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta):
+    Expression(),
+    _eta(eta),
+    _cm0L3ps_c(Cm0L3psNC_c{nf}),
+    _cm0L3ps_l(Cm0L3psNC_l{nf, false}),
+    _cm0L3ps_l2(Cm0L3psNC_l2{nf, false}),
+    _cmsxL3ps(CmsxL3psNC{nf, eta, false}),
+    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false})
+  {
+  }
+  double CmLa3psNC::Regular(double const& x) const
+  {
+    const double eta  = this->_eta;
+    const double xi   = 4 * eta / ( 1 - eta );
+    const double z    = eta * x;
+    const double lxi  = log(xi);
+    const double lxi2 = lxi * lxi;
+    const double fthr = fDamp(z, xi, 20., 11., 3., 2.);
+    const double fasy = 1 - fthr;
+    return fasy * eta * ( _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z) // Q >> m approximation
+                          + _cmsxL3ps.Regular(z)                                                              // Small-x approximation
+                          - _cm0sxL3ps.Regular(z) );                                                          // Q >> m and Small-x approximation
   }
 
   //_________________________________________________________________________________
