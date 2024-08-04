@@ -403,7 +403,7 @@ with:
                                    =  \delta_{\alpha\beta}\\
 \\
   \Gamma_{\alpha\beta}^{{\rm S}n} &=& \displaystyle  \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
-                                       dz\frac{\ln^n(1-z)}{1-z}\left[w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)-\delta_{\alpha\beta}\right]+\frac1{(n+1)!}\ln^{n+1}\left(1-c_{\alpha\beta}\right)\delta_{\alpha\beta}\\
+                                       dz\frac{\ln^n(1-z)}{1-z}\left[w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)-\delta_{\alpha\beta}\right]+\frac1{n+1}\ln^{n+1}\left(1-c_{\alpha\beta}\right)\delta_{\alpha\beta}\\
   \\
   \Gamma_{\alpha\beta}^{f} &=&\displaystyle \int_{c_{\alpha\beta}}^{d_{\alpha\beta}}
                                      dz\,f(z)\,w_{\beta}^{(k)}\left(\frac{x_\alpha}{z}\right)
@@ -417,7 +417,14 @@ as:
   \mbox{max}(x_\alpha,x_\alpha/x_{\beta+1}) \quad\mbox{and}\quad d_{\alpha\beta} =
   \mbox{min}(1,x_\alpha/x_{\beta-k}) \,.
 \end{equation}
-In general terms, we assume that it is always possible to write an
+Notice that $c_{\alpha\beta}$ appears in the term proportional to
+$\delta_{\alpha\beta}$, so that one has:
+\begin{equation}
+  c_{\alpha\alpha} = x_\alpha/x_{\alpha+1}\,,
+\end{equation}
+so that, if the grid is logarithmically spaced, $c_{\alpha\alpha}$ is
+a constant, \textit{i.e.} it does not depend on the grid index
+$\alpha$. In general, we assume that it is always possible to write an
 object of the kind of $\Theta^{\beta\delta,\alpha\gamma}$ as series of
 bilinear terms:
 \begin{equation}
@@ -822,6 +829,166 @@ Eq.~(\ref{eq:DoubleFuncStruct}) are:
 \end{array}
 \end{equation}
 
+Unfortunately, moving to $\mathcal{O}(\alpha_s^2)$, \textit{i.e.}
+NNLO, the factorised structure of the regular-regular term in
+Eq.~(\ref{eq:DoubleFuncStruct}) valid for the NLO expressions does no
+longer hold~\cite{Bonino:2024qbh}. As a consequence, we cannot write
+the structure functions as a bi-linear combination of single
+convolutions. It is therefore convenient to develop a code structure
+able to deal with general double convolutions. In other words, the
+goal is to create a class able to compute and store the object
+$\Theta^{\beta\delta,\alpha\gamma}$ defined in
+Eq.~(\ref{eq:DoubleZMconv}). To do so, we first need to identify the
+general structure of the operator $O$ valid at any perturbative
+order. This structure can always be brought into the following form:
+\begin{equation}
+  \begin{array}{lcccccc}
+    \displaystyle O(y_1,y_2)&=&\displaystyle C_{\rm LL}\delta(1-y_1)
+                                \delta(1-y_2)
+    &+&\displaystyle \delta(1-y_1)\left[\sum_{m}C_{\rm
+        LS}^{(m)}D_m(y_2)\right]&+&\displaystyle \delta(1-y_1)C_{\rm LR}(y_2)\\
+\\
+&+& \displaystyle \left[\sum_{n}C_{\rm
+        LS}^{(n)}D_n(y_1)\right]\delta(1-y_2)&+&\displaystyle
+                                                 \sum_{n,m}C_{\rm
+                                                 SS}^{(n,m)}D_n(y_1)
+                                                 D_m(y_2)
+                                &+&\displaystyle \sum_{n}D_n(y_1)C_{\rm SR}^{(n)}(y_2)\\
+\\
+&+&\displaystyle C_{\rm RL}(y_1)\delta(1-y_2) &+&\displaystyle
+                                                  \sum_{m}C_{\rm
+                                                  RS}(y_1)D_m(y_2)&+&\displaystyle
+                                                                      C_{\rm
+                                                                      RR}(y_1,y_2)\,.
+  \end{array}
+  \label{eq:DoubleFuncStructGen}
+\end{equation}
+where at N$^p$LO the indices $n$ and $m$ run between zero and $2p-1$,
+and:
+\begin{equation}
+D_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_+\,.
+\end{equation}
+In view of a numerical implementation, it is convenient to rewrite the
+$+$-distribution in the following way:
+\begin{equation}
+D_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_+=\left[\frac{\ln^i(1-y)}{1-y}\right]_{x}+\frac{\ln^{i+1}(1-x)}{i+1}\delta(1-y)=\mathcal{D}_i(y)+\mathcal{K}_i(x)\delta(1-y)\,,
+\end{equation}
+where I have introduced the new distribution:
+\begin{equation}
+\mathcal{D}_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_{x}\,,
+\end{equation}
+that upon integration between zero and $x$ (rather than between zero
+and one0 acts as standard $+$-distribution:
+\begin{equation}
+  \int_x^1 dy\, \mathcal{D}_i(y) f(y) = \int_x^1 dy
+  \left[\frac{\ln^i(1-y)}{1-y}\right]_{x}f(y) = \int_x^1 dy\frac{\ln^i(1-y)}{1-y}\left[f(y)-f(1)\right]\,,
+\end{equation}
+and the residual term:
+\begin{equation}
+\mathcal{K}_i(x)=-\int_0^xdy\frac{\ln^i(1-y)}{1-y}=\frac{\ln^{i+1}(1-x)}{i+1}\,.
+\end{equation}
+With this definition at hand, the decomposition in
+Eq.~(\ref{eq:DoubleFuncStructGen}) becomes:
+\begin{equation}
+\small
+  \begin{array}{rcl}
+    \displaystyle O(y_1,y_2)&=&\displaystyle \left[C_{\rm LL}+\sum_{n}C_{\rm LS}^{(n)}\mathcal{K}_n(x_1) +\sum_{m}C_{\rm LS}^{(m)}\mathcal{K}_m(x_2)+\sum_{n,m}C_{\rm SS}^{(m)}\mathcal{K}_n(x_1)\mathcal{K}_m(x_2)\right]\delta(1-y_1)
+                                \delta(1-y_2)\\
+\\
+    &+&\displaystyle \delta(1-y_1)\left[\sum_{m}C_{\rm
+        LS}^{(m)}\mathcal{D}_m(y_2)+\sum_{n,m}C_{\rm SS}^{(n,m)}\mathcal{K}_n(x_1)\mathcal{D}_m(y_2)\right]\\
+\\
+&+&\displaystyle \delta(1-y_1)\left[C_{\rm LR}(y_2)+\sum_{n}\mathcal{K}_{n}(x_1)C_{\rm SR}(y_2)\right]\\
+\\
+    &+&\displaystyle \left[\sum_{n}C_{\rm
+        SL}^{(n)}\mathcal{D}_n(y_1)+\sum_{n,m}C_{\rm
+        SS}^{(n,m)}\mathcal{D}_n(y_1)
+        \mathcal{K}_m(x_2)\right]\delta(1-y_2)\\
+\\
+&+&\displaystyle \sum_{n,m} C_{\rm SS}^{(n,
+    m)}\mathcal{D}_{n}(y_1)
+    \mathcal{D}_{m}(y_2)\\
+\\
+&+&\displaystyle \sum_{n}\mathcal{D}_{n}(y_1)C_{\rm SR}^{(n)}(y_2)\\
+   \\
+&+&\displaystyle \left[C_{\rm RL}(y_1)+\sum_{m}C_{\rm RS}(y_1)\mathcal{K}_{m}(x_2)\right]\delta(1-y_2)\\
+\\
+&+&\displaystyle \sum_{m}C_{\rm RS}^{(n)}(y_1)\mathcal{D}_{m}(y_2)\\
+   \\
+                            &+&\displaystyle C_{\rm RR}(y_1,y_2)\,.
+  \end{array}
+\end{equation}
+that can be generally written as:
+\begin{equation}
+\small
+  \begin{array}{rcccccc}
+    \displaystyle O(y_1,y_2)&=&\displaystyle \mathcal{C}_{\rm
+                                LL}(x_1,x_2)\delta(1-y_1)\delta(1-y_2)&+&\displaystyle
+                                                                          \delta(1-y_1)\mathcal{C}_{\rm
+                                                                          LS}(x_1,y_2)&+&\displaystyle
+                                                                                        \delta(1-y_1)\mathcal{C}_{\rm LR}(x_1,y_2)\\
+\\
+    &+&\displaystyle \mathcal{C}_{\rm
+        SL}(y_1,x_2)\delta(1-y_2)&+&\displaystyle \mathcal{C}_{\rm
+                                     SS}(y_1,y_2)&+&\displaystyle
+                                                     \mathcal{C}_{\rm SR}(y_1,y_2)\\
+   \\
+&+&\displaystyle \mathcal{C}_{\rm
+    RL}(y_1)\delta(1-y_2)&+&\displaystyle \mathcal{C}_{\rm RS}(y_1,y_2) &+&\displaystyle \mathcal{C}_{\rm RR}(y_1,y_2)\,.
+  \end{array}
+\end{equation}
+
+The computation of a structure function is obtained by computing
+integrals of the following form:
+\begin{equation}
+F(x_1,x_2) =
+x_1 x_2\int_{x_1}^1\frac{dy_1}{y_1}\int_{x_2}^1\frac{dy_2}{y_2}
+O(y_1,y_2) d^{(1)}\left(\frac{x_1}{y_1}\right)
+  d^{(2)}\left(\frac{x_2}{y_2}\right)\,.
+\end{equation}
+Applying the usual interpolation procedure gives:
+\begin{equation}
+\begin{array}{rcl}
+F(x_\beta,x_\delta) &=&\displaystyle
+\int_{x_\beta}^1dy_1\int_{x_\delta}^1dy_2\,
+O(y_1,y_2) \left[\frac{x_\beta}{y_1}d^{(1)}\left(\frac{x_\beta}{y_1}\right)\right]
+  \left[\frac{x_\delta}{y_2}d^{(2)}\left(\frac{x_\delta}{y_2}\right)\right]\\
+\\
+&=&\displaystyle
+    \sum_{\alpha=0}^{N_x}\sum_{\gamma=0}^{N_x} \overline{d}^{(1)}_\alpha
+    \overline{d}^{(2)}_\gamma \left[\int_{x_\beta}^1 dy_1 \, w_{\alpha}^{(k)}\left(\frac{x_\beta}{y_1}\right) \int_{x_\delta}^1 dy_2\, w_{\gamma}^{(k)}\left(\frac{x_\delta}{y_2}\right)\,
+    O(y_1,y_2)\right]\,.
+\end{array}
+\end{equation}
+This allows us to defines a ``double'' operator:
+\begin{equation}
+\Theta^{\beta\alpha,\delta\gamma}=\int_{x_\beta}^1 dy_1 \, w_{\alpha}^{(k)}\left(\frac{x_\beta}{y_1}\right) \int_{x_\delta}^1 dy_2\, w_{\gamma}^{(k)}\left(\frac{x_\delta}{y_2}\right)\,
+    O(y_1,y_2)\,,
+\end{equation}
+where the various $\mathcal{C}$ functions are involved as follows:
+\begin{equation}
+\small
+  \begin{array}{rcl}
+    \displaystyle \Theta^{\beta\alpha,\delta\gamma}&=&\displaystyle \delta_{\beta\alpha}\delta_{\delta\gamma}C_{\rm LL} \\
+\\
+&+&\displaystyle \delta_{\beta\alpha}\int_{x_\gamma}^1dy_2 \left\{w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right)C_{\rm LS}(y_2)+w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right) C_{\rm LR}(y_2)\right\}\\
+\\
+    &+&\displaystyle
+        \int_{x_\alpha}^1dy_1\left\{w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)C_{\rm SL}(y_1) + w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)C_{\rm RL}(y_1) \right\}\delta_{\delta\gamma}\\
+\\
+&+&\displaystyle \int_{x_\alpha}^1dy_1 \int_{x_\gamma}^1dy_2
+    \bigg\{w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right)C_{\rm
+    SS}(y_1,y_2)+ w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right) C_{\rm SR}(y_1,y_2)\\
+   \\
+&+&\displaystyle 
+    w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)w_\rho^{(k)}\left(\frac{x_\gamma}{y_2}\right)C_{\rm RS}(y_1,y_2)+
+    w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right) w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right) C_{\rm RR}(y_1,y_2)\bigg\}\,.
+  \end{array}
+\end{equation}
+
+Now 
+
+
 \subsubsection{Drell Yan (DY)}
 
 In this section we apply to the Drell-Yan (DY) process the same
@@ -1156,7 +1323,170 @@ I_{\beta\alpha} = \sum_{j={\rm max}[0, \alpha + 1 - N_x]}^{{\rm
     min}[\kappa, \alpha - \beta]}  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}} dy\,O(y)w_{\alpha}\left(\frac{x_\beta}{y}\right)\,.
 \end{equation}
 These are the basic objects computed by {\tt APFEL++} to define a
-DGLAP-like operator.
+DGLAP-like operator. The distribution $O$ has the general structure:
+\begin{equation}
+O(y)=L\delta(1-y)+\sum_{n}S^{(n)}\left[\frac{\ln^n(1-y)}{1-y}\right]_++R(y)\,.
+\end{equation}
+Each of the three terms on the r.h.s. upon integration produce:
+\begin{equation}
+\small
+\begin{array}{rcl}
+\displaystyle \sum_j  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}}
+  dy\,\delta(1-y)w_{\alpha}\left(\frac{x_\beta}{y}\right)&=&\displaystyle\delta_{\alpha\beta}\\
+\\
+\displaystyle \sum_j  \int_{s^{\beta -\alpha +
+  j-1}}^{s^{\beta -\alpha + j}} dy
+  \left[\frac{\ln^n(1-y)}{1-y}\right]_+
+  w_{\alpha}\left(\frac{x_\beta}{y}\right) &=&\displaystyle\sum_j  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}} dy
+  \frac{\ln^n(1-y)}{1-y}
+  \left[w_{\alpha}\left(\frac{x_\beta}{y}\right)-\delta_{\alpha\beta}\right]\\
+\\
+&+&\displaystyle\frac{1}{n+1}\ln^{n+1}\left(1-\frac{1}{s}\right)\delta_{\alpha\beta}\\
+\\
+\displaystyle \sum_j  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}} dy\,R(y) w_{\alpha}\left(\frac{x_\beta}{y}\right)\,,
+\end{array}
+\end{equation}
+where the index $j$ is understood to run between
+${\rm max}[0, \alpha + 1 - N_x]$ and
+${\rm min}[\kappa, \alpha - \beta]$, and so that:
+\begin{equation}
+I_{\beta\alpha} =
+\left[L+\overline{S}\left(\frac{1}{s}\right)\right]\delta_{\alpha\beta}+
+\sum_j  \int_{s^{\beta -\alpha + j-1}}^{s^{\beta -\alpha + j}}
+dy\left[S(y) \left(w_{\alpha}\left(\frac{x_\beta}{y}\right)-\delta_{\alpha\beta}\right)+R(y) w_{\alpha}\left(\frac{x_\beta}{y}\right)\right]\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+S(y) = \sum_{n}S^{(n)} \frac{\ln^n(1-y)}{1-y}\,,\quad\mbox{and}\quad
+\overline{S}\left(\frac{1}{s}\right)=\sum_{n}\frac{S^{(n)}}{n+1}\ln^{n+1}\left(1-\frac{1}{s}\right)\,.
+\end{equation}
+Notice that $S(y)$ is minus the derivative of $\overline{S}(y)$.
+
+Similarly, we can work out the expression on a logarithmically
+distributed grid of the double operator:
+\begin{equation}
+\Theta^{\beta\alpha,\delta\gamma}=\int_{x_\beta}^1 dy_1 \, w_{\alpha}^{(k)}\left(\frac{x_\beta}{y_1}\right) \int_{x_\delta}^1 dy_2\, w_{\gamma}^{(k)}\left(\frac{x_\delta}{y_2}\right)\,
+    O(y_1,y_2)\,,
+\end{equation}
+where:
+\begin{equation}
+  \begin{array}{lcccccc}
+     O(y_1,y_2)&=& C_{\rm LL}\delta(1-y_1)\delta(1-y_2) &+& \delta(1-y_1) C_{\rm LS}(y_2)&+& \delta(1-y_1)C_{\rm LR}(y_2)\\
+\\
+               &+&   C_{\rm SL}(y_1)\delta(1-y_2)&+& C_{\rm SS}(y_1,y_2) &+& C_{\rm SR}(y_1,y_2)\\
+\\
+               &+& C_{\rm RL}(y_1)\delta(1-y_2) &+& C_{\rm RS}(y_1,y_2)&+& C_{\rm RR}(y_1,y_2)\,,
+  \end{array}
+\end{equation}
+with:
+\begin{equation}
+\begin{array}{l}
+\displaystyle C_{\rm LS}(y_2)=\sum_{m}C_{\rm LS}^{(m)}\left[\frac{\ln^{m}(1-y_2)}{1-y_2}\right]_+\,,\\
+\\
+\displaystyle C_{\rm SL}(y_1)=\sum_{n}C_{\rm SL}^{(n)}\left[\frac{\ln^{n}(1-y_1)}{1-y_1}\right]_+\,,\\
+\\
+\displaystyle C_{\rm SS}(y_1,y_2)=\sum_{n,m}C_{\rm SS}^{(n,m)}\left[\frac{\ln^{n}(1-y_1)}{1-y_1}\right]_+\left[\frac{\ln^{m}(1-y_2)}{1-y_2}\right]_+\,,\\
+\\
+\displaystyle C_{\rm SR}(y_1,y_2)=\sum_{n}\left[\frac{\ln^{n}(1-y_1)}{1-y_1}\right]_+ C_{\rm SR}^{(n)}(y_2) \,,\\
+\\
+\displaystyle C_{\rm RS}(y_1,y_2)=\sum_{m}C_{\rm RS}^{(m)}(y_1)\left[\frac{\ln^{m}(1-y_2)}{1-y_2}\right]_+\,.
+\end{array}
+\end{equation}
+The final result is:
+\begin{equation}
+\small
+  \begin{array}{rcl}
+    \Theta^{\beta\alpha,\delta\gamma}&=& \displaystyle\delta_{\alpha\beta}\left[C_{\rm LL}+C_{\rm L\overline{S}}\left(\frac{1}{s_2}\right)+C_{\rm\overline{S}L}\left(\frac{1}{s_1}\right)+C_{\rm\overline{S}\overline{S}}\left(\frac{1}{s_1},\frac{1}{s_2}\right)\right]\delta_{\gamma\delta}\\
+\\
+&+&\displaystyle 
+\delta_{\alpha\beta}\sum_k  \int_{s_2^{\delta -\gamma + k-1}}^{s_2^{\delta -\gamma + k}}
+dy_2\left[\left(C_{\rm LS}(y_2)+C_{\rm \overline{S}S}\left(\frac{1}{s_1},y_2\right)\right)\left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+\left(C_{\rm LR}(y_2) +C_{\rm \overline{S}R}\left(\frac{1}{s_1},y_2\right)\right) w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\right]\\
+\\
+&+& \displaystyle 
+\sum_j  \int_{s_1^{\beta -\alpha + j-1}}^{s_1^{\beta -\alpha + j}} dy_1\left[\left(w_{\alpha}\left(\frac{x_\beta}{y_1}\right)-\delta_{\alpha\beta}\right)
+\left(C_{\rm SL}(y_1)+C_{\rm S\overline{S}}\left(y_1,\frac{1}{s_2}\right)\right)+\,w_{\alpha}\left(\frac{x_\beta}{y_1}\right) \left(C_{\rm RL}(y_1)+C_{\rm R\overline{S}}\left(y_1,\frac{1}{s_2}\right)\right)\right]\delta_{\gamma\delta}\\
+\\
+&+&\displaystyle 
+\sum_{j,k}  \int_{s_1^{\beta -\alpha + j-1}}^{s_1^{\beta -\alpha + j}} dy_1 \int_{s_2^{\delta -\gamma + k-1}}^{s_2^{\delta -\gamma + k}}
+dy_2\\
+\\
+&\times&\displaystyle \bigg[\left(w_{\alpha}\left(\frac{x_\beta}{y_1}\right)-\delta_{\alpha\beta}\right)C_{\rm SS}(y_1,y_2)\left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+\left(w_{\alpha}\left(\frac{x_\beta}{y_1}\right)-\delta_{\alpha\beta}\right)C_{\rm SR}(y_1,y_2)
+    w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\\
+\\
+&+&\displaystyle w_{\alpha}\left(\frac{x_\beta}{y_1}\right) C_{\rm RS} (y_1,y_2) \left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+w_{\alpha}\left(\frac{x_\beta}{y_1}\right) C_{\rm RR}(y_1,y_2) w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\bigg]\,,
+  \end{array}
+\end{equation}
+where
+$j\in[{\rm max}[0, \alpha + 1 - N_{x_1}],{\rm min}[\kappa_1, \alpha -
+\beta]]$
+($k\in[{\rm max}[0, \gamma + 1 - N_{x_2}],{\rm min}[\kappa_2, \gamma -
+\delta]]$), with $N_{x_1}$ ($N_{x_2}$) and $\kappa_1$ ($\kappa_2$) the
+number of nodes and interpolation degree of the first (second) grid,
+and $s_1$ ($s_2$) the logarithmic grid spacing of the first (second)
+grid. Moreover, the following functions have been introduced:
+\begin{equation}
+\begin{array}{l}
+\displaystyle C_{\rm L\overline{S}}\left(\frac{1}{s_2}\right)=\sum_{m}C_{\rm LS}^{(m)}\frac{1}{m+1}\ln^{m+1}\left(1-\frac{1}{s_2}\right)\,,\\
+\\
+\displaystyle C_{\rm \overline{S}L}\left(\frac{1}{s_1}\right)=\sum_{n}C_{\rm SL}^{(n)}\frac{1}{n+1}\ln^{n+1}\left(1-\frac{1}{s_1}\right)\,,\\
+\\
+\displaystyle C_{\rm \overline{S}S}\left(\frac{1}{s_1},y_2\right)=\sum_{n,m}C_{\rm SS}^{(n,m)}\left[\frac{1}{n+1}\ln^{n+1}\left(1-\frac{1}{s_1}\right)\right]\left[\frac{\ln^{m}(1-y_2)}{1-y_2}\right]_+\,,\\
+\\
+\displaystyle C_{\rm S\overline{S}}\left(y_1,\frac{1}{s_2}\right)=\sum_{n,m}C_{\rm SS}^{(n,m)}\left[\frac{\ln^{n}(1-y_1)}{1-y_1}\right]_+\left[\frac{1}{m+1}\ln^{m+1}\left(1-\frac{1}{s_2}\right)\right]\,,\\
+\\
+\displaystyle C_{\rm \overline{S}\overline{S}}\left(\frac{1}{s_1}, \frac{1}{s_2}\right)=\sum_{n,m}C_{\rm SS}^{(n,m)}\left[\frac{1}{n+1}\ln^{n+1}\left(1-\frac{1}{s_1}\right)\right]\left[\frac{1}{m+1}\ln^{m+1}\left(1-\frac{1}{s_2}\right)\right]\,,\\
+\\
+\displaystyle C_{\rm \overline{S}R}\left(\frac{1}{s_1},y_2\right) =\sum_{n}\frac{1}{n+1}\ln^{n+1}\left(1-\frac{1}{s_1}\right) C_{\rm SR}^{(n)}(y_2) \,,\\
+\\
+\displaystyle C_{\rm R\overline{S}}\left(y_1,\frac{1}{s_2}\right) =\sum_{m}C_{\rm RS}^{(m)}(y_1) \frac{1}{m+1}\ln^{m+1}\left(1-\frac{1}{s_2}\right)\,.
+\end{array}
+\end{equation}
+From an implementation point of view, it is convenient to define:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \mathcal{C}_{\rm LL} (z_1,z_2) = C_{\rm LL}+C_{\rm L\overline{S}}\left(z_2\right)+C_{\rm\overline{S}L}\left(z_1\right)+C_{\rm\overline{S}\overline{S}}\left(z_1,z_2\right)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm LS} (z_1,z_2) = C_{\rm LS}(z_2)+C_{\rm \overline{S}S}\left(z_1,z_2\right)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm LR} (z_1,z_2) = C_{\rm LR}(z_2) +C_{\rm \overline{S}R}\left(z_1,z_2\right)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm SL} (z_1,z_2) = C_{\rm SL}(z_1)+C_{\rm S\overline{S}}\left(z_1,z_2\right)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm RL} (z_1,z_2) = C_{\rm RL}(z_1)+C_{\rm R\overline{S}}\left(z_1,z_2\right)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm SS} (z_1,z_2) = C_{\rm SS}(z_1,z_2)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm SR} (z_1,z_2) = C_{\rm SR}(z_1,z_2)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm RS} (z_1,z_2) = C_{\rm RS}(z_1,z_2)\,,\\
+\\
+\displaystyle \mathcal{C}_{\rm RR} (z_1,z_2) = C_{\rm RR}(z_1,z_2)\,,
+\end{array}
+\end{equation}
+so that, one finally finds:
+\begin{equation}
+\small
+  \begin{array}{rcl}
+    \Theta^{\beta\alpha,\delta\gamma}&=& \displaystyle\delta_{\alpha\beta}\mathcal{C}_{\rm LL}\left(\frac{1}{s_1},\frac{1}{s_2}\right)\delta_{\gamma\delta}\\
+    \\
+                                     &+&\displaystyle 
+                                         \delta_{\alpha\beta}\sum_k  \int_{s_2^{\delta -\gamma + k-1}}^{s_2^{\delta -\gamma + k}}
+                                         dy_2\left[\mathcal{C}_{\rm LS}\left(\frac{1}{s_1},y_2\right)\left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+\mathcal{C}_{\rm LR}\left(\frac{1}{s_1},y_2\right) w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\right]\\
+    \\
+                                     &+& \displaystyle 
+                                         \sum_j  \int_{s_1^{\beta -\alpha + j-1}}^{s_1^{\beta -\alpha + j}} dy_1\left[\left(w_{\alpha}\left(\frac{x_\beta}{y_1}\right)-\delta_{\alpha\beta}\right)
+                                         \mathcal{C}_{\rm SL}\left(y_1,\frac{1}{s_2}\right)+\,w_{\alpha}\left(\frac{x_\beta}{y_1}\right) \mathcal{C}_{\rm RL}\left(y_1,\frac{1}{s_2}\right)\right]\delta_{\gamma\delta}\\
+    \\
+                                     &+&\displaystyle 
+                                         \sum_{j,k}  \int_{s_1^{\beta -\alpha + j-1}}^{s_1^{\beta -\alpha + j}} dy_1 \int_{s_2^{\delta -\gamma + k-1}}^{s_2^{\delta -\gamma + k}}
+                                         dy_2\\
+    \\
+                                     &\times&\displaystyle \bigg[\left(w_{\alpha}\left(\frac{x_\beta}{y_1}\right)-\delta_{\alpha\beta}\right) \mathcal{C}_{\rm SS}(y_1,y_2)\left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+\left(w_{\alpha}\left(\frac{x_\beta}{y_1}\right)-\delta_{\alpha\beta}\right) \mathcal{C}_{\rm SR}(y_1,y_2)
+                                              w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\\
+    \\
+                                     &+&\displaystyle w_{\alpha}\left(\frac{x_\beta}{y_1}\right) \mathcal{C}_{\rm RS} (y_1,y_2) \left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+w_{\alpha}\left(\frac{x_\beta}{y_1}\right) \mathcal{C}_{\rm RR}(y_1,y_2) w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\bigg]\,.
+  \end{array}
+\end{equation}
 
 \section{GPD-related integrals}
 

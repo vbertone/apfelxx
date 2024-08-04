@@ -26,14 +26,16 @@ namespace apfel
     /**
      * @brief Dglap constructor.
      * @param SplittingFunctions: set of splitting functions
-     * @param MatchingConditions: set od matching conditions
+     * @param MatchingConditions: set of matching conditions
+     * @param InhomogeneousTerms: inhomogeneous term to be added to the derivative
      * @param ObjRef: reference object to be evolved
      * @param MuRef: reference scale from which the evolution starts
-     * @param Thresholds: vector of the heavy quark thresholds
+     * @param Thresholds: vector of the heavy-quark thresholds
      * @param nsteps: number of steps of the ODE solver (default: 10)
      */
     Dglap(std::function<Set<Operator>(int const&, double const&)> const& SplittingFunctions,
           std::function<Set<Operator>(bool const&, int const&)>   const& MatchingConditions,
+          std::function<Set<T>(int const&, double const&)>        const& InhomogeneousTerms,
           Set<T>                                                  const& ObjRef,
           double                                                  const& MuRef,
           std::vector<double>                                     const& Thresholds,
@@ -88,7 +90,8 @@ namespace apfel
     void SetInitialDistributions(std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc, double const& mu);
     ///@}
   private:
-    std::function<Set<Operator>(int const&,double const&)> _SplittingFunctions;
-    std::function<Set<Operator>(bool const&,int const&)>   _MatchingConditions;
+    std::function<Set<Operator>(int const&, double const&)> const _SplittingFunctions;
+    std::function<Set<Operator>(bool const&, int const&)>   const _MatchingConditions;
+    std::function<Set<T>(int const&, double const&)>        const _InhomogeneousTerms;
   };
 }

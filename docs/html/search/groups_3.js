@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['gpd_20evolution_20kernels_0',['GPD evolution kernels',['../group__GPDEvKernels.html',1,'']]],
-  ['gtmd_20matching_20functions_1',['GTMD matching functions',['../group__GTMDMatchingFunctionsUnp.html',1,'']]]
+  ['diagonal_20convolution_20maps_0',['Diagonal convolution maps',['../group__DiagonalBasis.html',1,'']]],
+  ['dis_1',['DIS',['../group__NCMasslesspol.html',1,'Zero-mass coefficient functions for longitudinally polarised DIS'],['../group__NCMassless.html',1,'Zero-mass coefficient functions for unpolarised DIS']]],
+  ['dis_20convolution_20maps_2',['DIS convolution maps',['../group__DISBases.html',1,'']]]
 ];

@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <cmath>
-
 // Test expression (the LO Pqq splitting function)
 class p0qq: public apfel::Expression
 {

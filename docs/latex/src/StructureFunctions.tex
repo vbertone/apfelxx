@@ -723,58 +723,90 @@ Using Eqs.~(\ref{DGLAPsimp}) and~(\ref{BETAsimp}), we have that:
 Choosing $t=0$ in Eq.~(\ref{expDGLAP}), that is equivalent to setting
 $\mu_F=Q$, gives:
 \begin{equation}
-  f_i(0) = \left\{1-a_s(t_F) t_F
+\begin{array}{rcl}
+  f_i(0) &=&\displaystyle  \Bigg\{1-a_s(t_F) t_F
     P_{ij}^{(0)} + a_s^2(t_F)\left[-t_F P_{ij}^{(1)}+ t_F^2 \frac12\left(
         P_{il}^{(0)}\otimes P_{lj}^{(0)} - \beta_0 P_{ij}^{(0)}
-      \right)\right]\right\}\otimes f_j(t_F) + \mathcal{O}(a_s^3)\,.
+      \right)\right]\\
+\\
+&+&\displaystyle a_s^3(t_F)\Bigg[ \frac12 t_F^2 \left(P_{il}
+    ^{(0)}\otimes P_{lj} ^{(1)}+P_{il} ^{(1)} \otimes P_{lj}
+    ^{(0)}\right)-\frac{1}{2} t_F^2 \beta _1 P_{ij}
+    ^{(0)}+\frac{1}{2} t_F^3\beta _0 P_{il} ^{(0)}\otimes P_{lj}
+    ^{(0)}\\
+\\
+&-&\displaystyle \frac{1}{3} t_F^3\beta _0^2 P_{ij}^{(0)}-\frac{1}{6}t_F^3 P_{il} ^{(0)}\otimes P_{lk} ^{(0)} \otimes
+    P_{kj} ^{(0)}-t_F^2\beta _0 P_{ij} ^{(1)}- t_F P_{ij} ^{(2)}\Bigg]\Bigg\}\otimes f_j(t_F) + \mathcal{O}(a_s^4)\,.
+\end{array}
 \label{expDGLAP1}
 \end{equation}
 In addition, using Eq.~(\ref{BETAsimp}), one easily finds:
 \begin{equation}
   a_s(t_F)=
-  a_s(t_R)\left[1+a_s(t_R)\beta_{0}(t_R-t_F)+\mathcal{O}(a_s^2)\right]\,,
+  a_s(t_R)\left[1+a_s(t_R)\beta_{0}(t_R-t_F)+a_s^2(t_R)\left(\beta_{1} (t_R-t_F)+\beta_{0}^2 (t_R-t_F)^2\right)+\mathcal{O}(a_s^3)\right]\,,
 \label{BETAexp} 
 \end{equation}
 which can be plugged into Eq.~(\ref{expDGLAP1}) to give:
 \begin{equation}
-  f_i(0) = \left\{1-a_s(t_R) t_F
+\begin{array}{rcl}
+  f_i(0) &=&\displaystyle \Bigg\{1-a_s(t_R) t_F
     P_{ij}^{(0)} + a_s^2(t_R)\left[-t_F P_{ij}^{(1)}+ t_F^2 \frac12\left(
         P_{il}^{(0)}\otimes P_{lj}^{(0)} + \beta_0 P_{ij}^{(0)} \right)-
-      t_Ft_R\beta_{0}P_{ij}^{(0)}\right]\right\}\otimes f_j(t_F) +
-  \mathcal{O}(a_s^3)\,.
+      t_Ft_R\beta_{0}P_{ij}^{(0)}\right]\\
+\\
+&+&\displaystyle a_s^3(t_R)\Bigg[\frac{1}{2}  t_F^2 \left(P_{il}
+    ^{(0)} P_{lj} ^{(1)}+P_{il} ^{(1)} P_{lj}
+    ^{(0)}\right)+\frac{1}{2} t_F^2 \beta _1 P_{ij} ^{(0)}-t_F t_R
+    \beta _1 P_{ij} ^{(0)}-\frac{1}{2} t_F^3\beta _0 P_{il}
+    ^{(0)}\otimes P_{lj} ^{(0)}\\
+\\
+&-&\displaystyle \frac{1}{3} t_F^3\beta _0^2 P_{ij} ^{(0)}-\frac{1}{6}
+    t_F^3 P_{il} ^{(0)}\otimes P_{lk} ^{(0)}\otimes P_{kj} ^{(0)}+
+    t_F^2 t_R\beta _0 P_{ik} ^{(0)}\otimes P_{kj} ^{(0)}+ t_F^2 t_R
+    \beta _0^2 P_{ij} ^{(0)}- t_F t_R^2 \beta _0^2 P_{ij} ^{(0)}\\
+\\
+&+&\displaystyle  t_F^2\beta _0 P_{ij} ^{(1)}-2 t_F t_R \beta _0 P_{ij} ^{(1)}- t_F P_{ij} ^{(2)}\Bigg]\Bigg\}\otimes f_j(t_F) +
+  \mathcal{O}(a_s^4)\,.
+\end{array}
 \label{expDGLAP2}
 \end{equation}
+This equality can be conveniently written as:
+\begin{equation}
+f_i(0) =\sum_{k=0}^3a_s^k(t_R)f_i^{[k]}(t_R,t_F)+
+\mathcal{O}(a_s^4)\,,
+\label{expDGLAP3}
+\end{equation}
+where the coefficients $f_i^{[k]}(t_R,t_F)$ can be read off from
+Eq.~(\ref{expDGLAP2}).
+
 It is also useful to consider $t_R=0$ in Eq.~(\ref{BETAexp}), that is
 equivalent to set $\mu_R=Q$, which gives:
 \begin{equation}
   a_s(0)=
-  a_s(t_R)\left[1+a_s(t_R)\beta_{0}t_R+\mathcal{O}(a_s^2)\right]\,.
+  a_s(t_R)\left[1+a_s(t_R)\beta_{0}t_R+a_s^2(t_R)\left(\beta_{1} t_R+\beta_{0}^2t_R^2\right) \right]+\mathcal{O}(a_s^4)\,.
 \label{BETAexp1} 
 \end{equation}
-
 We are now ready to use these equations to derive the scale variation
 terms to be included in ZM structure functions. Truncating the
 perturbative series to $\mathcal{O}(\alpha_s^2)$, they are written in
 terms of PDFs and coefficient functions as:
 \begin{equation}
-  F(t_R,t_F) / x = \left[\sum_{k=0}^{2} a_s^k(t_R)
-    \widetilde{\mathcal{C}}_i^{(k)}(t_R,t_F)\right]\otimes f_i(t_F)\,,
+  F(t_R,t_F) / x = \left[\sum_{k=0}^{3} a_s^k(t_R)
+    \widetilde{\mathcal{C}}_i^{(k)}(t_R,t_F)\right]\otimes f_i(t_F) + \mathcal{O}(a_s^4)\,,
 \label{NonZeroScales}
 \end{equation}
-where the symbol $\otimes$ represents the convolution that is not
-necessary to write explicitly here. Since structure functions are
-physically observable, they must be renormalisation and factorisation
-scale invariant, that is:
+where the symbol $\otimes$ represents the convolution. Since structure
+functions are physically observable, they must be renormalisation and
+factorisation scale invariant, that is:
 \begin{equation}
   F(t_R,t_F) = F(0,0)\,,
 \label{invariance}
 \end{equation} 
-up to subleading, \textit{i.e.} $\mathcal{O}(\alpha_s^3)$,
-corrections. Since:
+order by order in perturbation theory. Since:
 \begin{equation}
-  F(0,0) / x = \left[\sum_{k=0}^{2}
+  F(0,0) / x = \left[\sum_{k=0}^{3}
     a_s^k(0) \widetilde{C}_i^{(k)}\right]\otimes
-  f_i(0)\,,
+  f_i(0) + \mathcal{O}(a_s^4)\,,
 \label{ZeroScales}
 \end{equation} 
 where $\widetilde{C}_i^{(k)}$ are the usual perturbative contributions
@@ -783,44 +815,88 @@ and~(\ref{BETAexp1}) into Eq.~(\ref{ZeroScales}) and impose the
 identity in Eq.~(\ref{invariance}). By doing so, one finds the
 explicit expression of the ``generalised'' coefficient functions
 $\widetilde{\mathcal{C}}_i^{(k)}(t_R,t_F)$ that include also the scale
-variation terms. The result is:
-\begin{equation}
-  \begin{array}{rcl}
-    F(0,0)/x &=&\bigg\{ \widetilde{C}_j^{(0)} \\ \\
-             &+&\displaystyle a_s(t_R)\left[\widetilde{C}_j^{(1)}- t_F
-                 \widetilde{C}_i^{(0)} \otimes P_{ij}^{(0)}\right]\\ \\
-             &+&\displaystyle a_s^2(t_R)\bigg[\widetilde{C}_j^{(2)} + t_R\beta_0
-                 \widetilde{C}_j^{(1)} -t_F \left(\widetilde{C}_i^{(0)} \otimes
-                 P_{ij}^{(1)}+\widetilde{C}_i^{(1)} \otimes P_{ij}^{(0)}\right)\\ \\
-             &+&\displaystyle \frac{t_F^2}2 \widetilde{C}_i^{(0)} \otimes \left(
-                 P_{il}^{(0)}\otimes P_{lj}^{(0)} + \beta_0 P_{ij}^{(0)} \right)-
-                 t_Ft_R\beta_{0}\widetilde{C}_i^{(0)} \otimes
-                 P_{ij}^{(0)}\bigg]\bigg\}\otimes f_j(t_F)+\mathcal{O}(a_s^3)\,.
-\end{array}
-\end{equation}
-Finally, using the identity in Eq.~(\ref{invariance}), it is easy to
-find that:
+variation terms. It is convenient to first compute renormalisation
+scale variations while leaving $t_F=0$:
 \begin{equation}
 \begin{array}{rcl}
   \displaystyle
-  \widetilde{\mathcal{C}}_j^{(0)}(t_R,t_F) &=& \displaystyle
+  \widetilde{\mathcal{C}}_j^{(0)}(t_R,0) &=& \displaystyle
                                                \widetilde{C}_j^{(0)} \\ \\ \displaystyle
-  \widetilde{\mathcal{C}}_j^{(1)}(t_R,t_F) &=& \displaystyle
-                                               \widetilde{C}_j^{(1)}-t_F \widetilde{C}_i^{(0)} \otimes P_{ij}^{(0)}
-  \\ \\ \displaystyle \widetilde{\mathcal{C}}_j^{(2)}(t_R,t_F) &=&
-                                                                   \displaystyle \widetilde{C}_j^{(2)} + t_R\beta_0 \widetilde{C}_j^{(1)}
-                                                                   -t_F \left(\widetilde{C}_i^{(0)} \otimes
-                                                                   P_{ij}^{(1)}+\widetilde{C}_i^{(1)} \otimes P_{ij}^{(0)}\right)\\ \\
-                                           &+&\displaystyle\frac{t_F^2}2 \widetilde{C}_i^{(0)} \otimes \left(
-                                               P_{il}^{(0)}\otimes P_{lj}^{(0)} + \beta_0 P_{ij}^{(0)} \right)-
-                                               t_Ft_R\beta_{0}\widetilde{C}_i^{(0)} \otimes P_{ij}^{(0)}\,.
+  \widetilde{\mathcal{C}}_j^{(1)}(t_R,0) &=& \displaystyle
+                                               \widetilde{C}_j^{(1)}\\
+  \\
+\displaystyle \widetilde{\mathcal{C}}_j^{(2)}(t_R,0) &=&
+                                                                   \displaystyle
+                                                              \widetilde{C}_j^{(2)}
+                                                              +
+                                                              t_R\beta_0
+                                                              \widetilde{C}_j^{(1)}\,,\\
+\\
+\displaystyle \widetilde{\mathcal{C}}_j^{(3)}(t_R,0) &=&
+                                                                   \displaystyle
+                                                              \widetilde{C}_j^{(3)}+2 t_R\beta _0 \widetilde{C}_j^{(2)} 
+                                                              +t_R \left(\beta_1 +\beta _0^2 t_R\right) \widetilde{C}_j^{(1)}\,,
 \end{array}
-\label{generalizedCF}
+\label{CFtR}
 \end{equation}
-Unsurprisingly, setting $\mu_F=\mu_R=Q$, that results in $t_F=t_R=0$,
-one finds
-$\widetilde{\mathcal{C}}_j^{(k)}(0,0) =\widetilde{C}_j^{(k)}$ as
-required by construction.
+so that:
+\begin{equation}
+  F(t_R,0) / x = \left[\sum_{k=0}^{3} a_s^k(t_R)
+    \widetilde{\mathcal{C}}_i^{(k)}(t_R,0)\right]\otimes f_i(0) + \mathcal{O}(a_s^4)\,.
+\label{NonZeroScalestR}
+\end{equation}
+We can now use Eq.~(\ref{expDGLAP3}) to express the PDF $f(0)$ in
+terms of $f(t_F)$ finally obtaining:
+\begin{equation}
+  F(t_R,0) / x = \sum_{k=0}^{3} a_s^k(t_R)
+    \sum_{j=0}^{k}\widetilde{\mathcal{C}}_i^{(k-j)}(t_R,0)\otimes f_i^{[j]}(t_R,t_F) + \mathcal{O}(a_s^4)\,.
+\label{NonZeroScalestRtF}
+\end{equation}
+In the absence of factorisation scale variations, only the term with $j=0$
+contributes to the inner sum.
+
+
+% \newpage
+% The result is:
+% \begin{equation}
+%   \begin{array}{rcl}
+%     F(0,0)/x &=&\bigg\{ \widetilde{C}_j^{(0)} \\ \\
+%              &+&\displaystyle a_s(t_R)\left[\widetilde{C}_j^{(1)}- t_F
+%                  \widetilde{C}_i^{(0)} \otimes P_{ij}^{(0)}\right]\\ \\
+%              &+&\displaystyle a_s^2(t_R)\bigg[\widetilde{C}_j^{(2)} + t_R\beta_0
+%                  \widetilde{C}_j^{(1)} -t_F \left(\widetilde{C}_i^{(0)} \otimes
+%                  P_{ij}^{(1)}+\widetilde{C}_i^{(1)} \otimes P_{ij}^{(0)}\right)\\ \\
+%              &+&\displaystyle \frac{t_F^2}2 \widetilde{C}_i^{(0)} \otimes \left(
+%                  P_{il}^{(0)}\otimes P_{lj}^{(0)} + \beta_0 P_{ij}^{(0)} \right)-
+%                  t_Ft_R\beta_{0}\widetilde{C}_i^{(0)} \otimes
+%                  P_{ij}^{(0)}\bigg]\\
+% \\
+% &+&\displaystyle a_s^3(t_R)\bigg[\widetilde{C}_j^{(3)} \bigg]\bigg\}\otimes f_j(t_F)+\mathcal{O}(a_s^4)\,.
+% \end{array}
+% \end{equation}
+% Finally, using the identity in Eq.~(\ref{invariance}), it is easy to
+% find that:
+% \begin{equation}
+% \begin{array}{rcl}
+%   \displaystyle
+%   \widetilde{\mathcal{C}}_j^{(0)}(t_R,t_F) &=& \displaystyle
+%                                                \widetilde{C}_j^{(0)} \\ \\ \displaystyle
+%   \widetilde{\mathcal{C}}_j^{(1)}(t_R,t_F) &=& \displaystyle
+%                                                \widetilde{C}_j^{(1)}-t_F \widetilde{C}_i^{(0)} \otimes P_{ij}^{(0)}
+%   \\ \\ \displaystyle \widetilde{\mathcal{C}}_j^{(2)}(t_R,t_F) &=&
+%                                                                    \displaystyle \widetilde{C}_j^{(2)} + t_R\beta_0 \widetilde{C}_j^{(1)}
+%                                                                    -t_F \left(\widetilde{C}_i^{(0)} \otimes
+%                                                                    P_{ij}^{(1)}+\widetilde{C}_i^{(1)} \otimes P_{ij}^{(0)}\right)\\ \\
+%                                            &+&\displaystyle\frac{t_F^2}2 \widetilde{C}_i^{(0)} \otimes \left(
+%                                                P_{il}^{(0)}\otimes P_{lj}^{(0)} + \beta_0 P_{ij}^{(0)} \right)-
+%                                                t_Ft_R\beta_{0}\widetilde{C}_i^{(0)} \otimes P_{ij}^{(0)}\,.
+% \end{array}
+% \label{generalizedCF}
+% \end{equation}
+% Unsurprisingly, setting $\mu_F=\mu_R=Q$, that results in $t_F=t_R=0$,
+% one finds
+% $\widetilde{\mathcal{C}}_j^{(k)}(0,0) =\widetilde{C}_j^{(k)}$ as
+% required by construction.
 
 In order to provide an operative formulation of scale variations, it
 is necessary to specify the basis in which PDFs are expressed. The

@@ -58,8 +58,8 @@ namespace apfel
     const auto dObj = rk4<T>([&] (double const& t, T const& Obj) -> T{ return Derivative(nf, t, Obj); });
 
     // Use "_nsteps" steps for the evolution
-    double t        = t0;
-    T      Obj      = Obj0;
+    double t   = t0;
+    T      Obj = Obj0;
     const double dt = ( t1 - t0 ) / _nsteps;
     for (int k = 0; k < _nsteps; k++)
       {

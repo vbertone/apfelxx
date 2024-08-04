@@ -115,6 +115,16 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
+  Set<T>& Set<T>::operator *= (std::function<std::vector<double>(double const&)> f)
+  {
+    for (auto& v: _objects)
+      v.second *= [=] (double const& x) -> double { return f(x)[v.first]; };
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
   Set<T>& Set<T>::operator *= (std::vector<double> const& v)
   {
     for (auto& o: _objects)

@@ -17,7 +17,7 @@
 // LH Toy PDFs
 double xglu(double const& x)
 {
-  return 1.7 * pow(x,-0.1) * pow((1-x),5);
+  return 1.7 * pow(x, -0.1) * pow(1 - x, 5);
 }
 
 int main()

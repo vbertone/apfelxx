@@ -51,7 +51,7 @@ namespace apfel
     const double ctghmin = 1 / tanh(y - _etamin);
 
     // Integrand function
-    const auto IntegrandP = [&] (double const& eta) -> double
+    const std::function<double(double const&)> IntegrandP = [&] (double const& eta) -> double
     {
       // More useful definitions
       const double ch    = cosh(eta - y);
@@ -76,7 +76,7 @@ namespace apfel
       // Primitive function of the intregration in cos(phi) (up to a
       // factor that can be compute externally) when contracting the
       // leptonic tensor with g^{\mu\nu}_\perp.
-      const auto Fbar = [&] (double const& x) -> double
+      const std::function<double(double const&)> Fbar = [&] (double const& x) -> double
       {
         const double xs = x * x;
         const double xp = sqrt( 1 - xs );
@@ -129,7 +129,7 @@ namespace apfel
     const double ctghmin = 1 / tanh(y - _etamin);
 
     // Integrand function
-    const auto IntegrandP = [&] (double const& eta) -> double
+    const std::function<double(double const&)> IntegrandP = [&] (double const& eta) -> double
     {
       // More definitions
       const double ch    = cosh(eta - y);
@@ -152,7 +152,7 @@ namespace apfel
       // Primitive function of the intregration in cos(phi) (up to a
       // factor that can be compute externally) when contractin the
       // leptonic tensor with g^{\mu\nu}_\perp.
-      const auto Hbar = [&] (double const& x) -> double
+      const std::function<double(double const&)> Hbar = [&] (double const& x) -> double
       {
         const double xs = x * x;
         const double xp = sqrt( 1 - xs );

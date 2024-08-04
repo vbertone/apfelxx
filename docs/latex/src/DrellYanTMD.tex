@@ -1,25 +1,45 @@
-\documentclass[10pt,a4paper]{article}
-\usepackage{amsmath,amssymb,bm,makeidx,subfigure}
-\usepackage[italian,english]{babel}
-\usepackage[center,small]{caption}[2007/01/07]
-\usepackage{fancyhdr}
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{paper}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
 \usepackage{color}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+\usepackage{mathrsfs}
 
-\definecolor{blu}{rgb}{0,0,1}
-\definecolor{verde}{rgb}{0,1,0}
-\definecolor{rosso}{rgb}{1,0,0}
-\definecolor{viola}{rgb}{1,0,1}
-\definecolor{arancio}{rgb}{1,0.5,0}
-\definecolor{celeste}{rgb}{0,1,1}
-\definecolor{rosa}{rgb}{1,0.3,0.5}
+\makeatletter
 
-\oddsidemargin = 12pt
-\topmargin = 0pt
-\textwidth = 440pt
-\textheight = 650pt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
 
-\makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
 
 \begin{document}
 
@@ -859,24 +879,25 @@ muons, and tauons, this can be done by multiplying the cross section
 above by three times the branching ratio for the $Z$ decaying into any
 pair of leptons, $3\mbox{Br}(Z\rightarrow \ell^+\ell^-)$.
 
-
 \newpage
 \appendix
 
 \section{Ogata quadrature}\label{app:OgataQuadrature}
 
-In this section we limit ourselves to write the formulas for the
-computation of the unscaled coordinates $z_n^{(\nu)}$ and weights
-$w_n^{(\nu)}$ required to compute the following integral:
-\begin{equation}\label{eq:OgataQuadMast}
-I_\nu(q_T)=\int_0^\infty db J_\nu(bq_T) f\left(b\right) =
-\frac1{q_T}\int_0^\infty d\bar{b} J_\nu(\bar{b})
-f\left(\frac{\bar{b}}{q_T}\right) \simeq
-\frac{1}{q_T}\sum_{n=1}^\infty
-w_n^{(\nu)}f\left(\frac{z_n^{(\nu)}}{q_T}\right)\quad \nu =0,1,\dots\,,
+In this section, we start by writing the formulas for the computation
+of the unscaled coordinates $z_n^{(\nu)}$ and weights $w_n^{(\nu)}$
+required to compute the following integral:
+\begin{equation}
+  \mathcal{I}_\nu(q_T)=\int_0^\infty db J_\nu(bq_T) f\left(b\right) =
+  \frac1{q_T}\int_0^\infty d\bar{b} J_\nu(\bar{b})
+  f\left(\frac{\bar{b}}{q_T}\right) \simeq
+  \frac{1}{q_T}\sum_{n=1}^\infty
+  w_n^{(\nu)}f\left(\frac{z_n^{(\nu)}}{q_T}\right)\quad \nu
+  =0,1,\dots\,,
+\label{eq:OgataQuadMast}
 \end{equation}
-using the Ogata-quadrature algorithm. More details can be found in
-Ref.~\cite{Ogata:quadrature}. There relevant formulas are:
+using the Ogata-quadrature algorithm~\cite{Ogata:quadrature}. The
+relevant formulas are:
 \begin{equation}
 \begin{array}{l}
 \displaystyle z_n^{(\nu)} = \frac{\pi}{h}  \psi\left(\frac{h\xi_{\nu
@@ -898,6 +919,7 @@ where:
 \item $\psi$ is the following function:
 \begin{equation}
 \psi(t) = t\tanh\left(\frac{\pi}{2}\sinh t\right)
+\label{eq:PsiChangeOfVariable}
 \end{equation}
 and its derivative:
 \begin{equation}
@@ -906,6 +928,648 @@ and its derivative:
 \end{equation}
 \end{itemize}
 
+We now move to rederive the formulas written above following (and to
+some extent simplifying) the main steps of
+Ref.~\cite{Ogata:quadrature} for the case $\nu=0$ relevant to the
+computation of convolutions of unpolarised TMDs. The purpose is to
+eventually generalise the Ogata quadrature formula to a case in which
+more than a single Bessel function $J_0$ is present in the integrand.
+
+As any other quadrature formula, also Ogata quadrature starts from
+interpolation. The starting point is the Lagrange interpolation
+formula over the grid ${\xi_{-N},\dots,\xi_{-1},\xi_1,\dots,\xi_N}$ for the function $f(x)$
+that can be written as:
+\begin{equation}
+f(x) = \sum_{k=-N\atop
+  k\neq0}^{N}f(\xi_k)\frac{W(x)}{W'(\xi_k)\left(x-\xi_k\right)}\,,\quad
+W(x)=\prod_{l=-N\atop l\neq 0}^{N}\left(1-\frac{x}{\xi_l}\right)\,.
+\label{eq:LagrangeInterpolation}
+\end{equation}
+If we assume that $\xi_{-l}=-\xi_l$, we obtain:
+\begin{equation}
+W(x)=\prod_{l=1}^{N}\left(1-\frac{x^2}{\xi_l^2}\right)\,,
+\end{equation}
+and if we also assume that $\{x_l\}$ are the (positive) zero's of
+$J_0$, \textit{i.e.} $J_0(\xi_l)=0$, we immediately obtain that
+$W(x)=J_0(x)$. Moreover, since $J_0'(x) = -J_1(x)$, we have that
+$W'(\xi_k)=-J_1(\xi_k)$ so that:
+\begin{equation}
+f(x) =
+-\sum_{k=-\infty \atop k\neq 0}^{\infty}f(\xi_k)\frac{J_0(x)}{J_1(\xi_k)\left(x - \xi_k\right)}\,.
+\end{equation}
+
+Now suppose we want to compute the integral:
+\begin{equation}
+  \mathcal{I} = \int_{-\infty}^{\infty} dx\,|x|f(x) =
+  -\sum_{k=-\infty \atop k\neq 0}^{\infty}\frac{f(\xi_k)}{J_1(\xi_k)}
+  \int_{-\infty}^{\infty} \frac{dx\,|x| J_0(x)}{x-\xi_k}\,.
+\label{eq:TestIntegral}
+\end{equation}
+Therefore, the task now boils down to computing:
+\begin{equation}
+\mathcal{J}_k=\int_{-\infty}^{\infty} \frac{dx\,|x| J_0(x)}{x-\xi_k}\,.
+\end{equation}
+To do so, we consider the contour integral:
+\begin{equation}
+\int_{\mathcal{C}} \frac{dx\,|x| (J_0(x)+iY_0(x))}{x-\xi_k} = 0\,,
+\label{eq:OgataDomain}
+\end{equation}
+where $\mathcal{C}$ is the contour shown in Fig.~\ref{fig:OgataDomain}
+and $Y_0$ is the Bessel function of the second kind. This integral
+vanishes because by construction the contour $\mathcal{C}$ contains no
+poles. One can show that, because of the specific combination
+$J_0(x)+iY_0(x)$, the integrals along the paths $C_1$, $C_2$, and
+$C_3$ vanish as $R$ and $c$ tend to infinity. Moreover, the
+semi-circle around the pole at $\xi_k$ tends to (minus) half the
+residue at $\xi_k$ as the radius of the semi-circle tends to zero.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.7\textwidth]{plots/OgataDomain.pdf}
+    \caption{Integration contour $\mathcal{C}$ of
+      Eq.~(\ref{eq:OgataDomain}).\label{fig:OgataDomain}}
+  \end{centering}
+\end{figure}
+One thus finds:
+\begin{equation}
+  \int_{\mathcal{C}}
+  \frac{dx\,|x| (J_0(x)+iY_0(x))}{x-\xi_k} = \pi |\xi_k|
+  Y_0(\xi_k)+{\rm PV} \int_{-\infty}^{\infty} \frac{dx\,|x| (J_0(x)+iY_0(x))}{x-\xi_k}=0\,,
+\end{equation}
+Since we are only interested in the real part of the last
+integral\footnote{One should in principle prove that the imaginary
+  part vanishes but, as in Ref.~\cite{Ogata:quadrature}, we will not
+  do it.} and since the integrand of the real part is regular at
+$x=\xi_k$, we can get rid of the principal value prescription, thus
+obtaining:
+\begin{equation}
+\mathcal{J}_k= - \pi |\xi_k| Y_0(\xi_k)\,,
+\end{equation}
+that finally produces:
+\begin{equation}
+  \mathcal{I} = \sum_{k=-\infty \atop k\neq 0}^{\infty}\frac{\pi Y_0(\xi_k)}{J_1(\xi_k)} |\xi_k| f(\xi_k)\,.
+\end{equation}
+The integral in Eq.~(\ref{eq:TestIntegral}) can be rescaled by making
+a change of variable $x\rightarrow h x$ where $h$ is a positive real
+number, so that:
+\begin{equation}
+  \mathcal{I} = h\int_{-\infty}^{\infty} dx\,|hx|f(hx) =
+  \pi h\sum_{k=-\infty \atop k\neq 0}^{\infty}\frac{ Y_0(\xi_k)}{J_1(\xi_k)}|h\xi_k| f(h\xi_k)\,,
+\label{eq:TestIntegral}
+\end{equation}
+which reproduces the result of Ref.~\cite{Ogata:quadrature} when
+$\nu=0$.
+
+Now let us consider the specific integral in
+Eq.~(\ref{eq:OgataQuadMast}) with $\nu=0$:
+\begin{equation}
+\mathcal{I}_0(q_T)=
+\frac1{q_T}\int_0^\infty d\bar{b} J_0(\bar{b})
+f\left(\frac{\bar{b}}{q_T}\right)\,.
+\end{equation}
+If we make the change of variable:
+\begin{equation}
+  \bar{b}=\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\,,
+  \label{eq:OgataChangeOfVariable}
+\end{equation}
+with $\psi$ given
+in Eq.~(\ref{eq:PsiChangeOfVariable}), we obtain:
+\begin{equation}
+\begin{array}{rcl}
+  \mathcal{I}_0(q_T)&=&\displaystyle 
+              \frac1{q_T}\frac{1}{h}\int_0^\infty dt\, \psi'\left(\frac{t}{\pi}\right)  J_0\left(\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)
+              f\left(\frac{1}{q_T}\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)\\
+  \\
+          &=&\displaystyle\frac{\pi}{q_T} \sum_{k=1}^{\infty}\frac{ Y_0(\xi_k)}{J_1(\xi_k)}\psi'\left(\frac{h\xi_k}{\pi}\right)  J_0\left(\frac{\pi}{h}\psi\left(\frac{h\xi_k}{\pi}\right)\right)
+              f\left(\frac{1}{q_T}\frac{\pi}{h}\psi\left(\frac{h\xi_k}{\pi}\right)\right)\,,
+\end{array}
+\label{eq:OgataSumSingle}
+\end{equation}
+that finally agrees with Eq.~(\ref{eq:OgataQuadMast}). Note that,
+since the integral in between zero and infinity, we limited the series
+in $k$ only to positive values. It is important to notice that the
+function $\psi$ has been chosen such that:
+\begin{equation}
+\frac{\pi}{h}\psi\left(\frac{h\xi_k}{\pi}\right)\mathop{\longrightarrow}_{k\rightarrow
+\infty}\xi_k\,,
+\end{equation}
+so that the presence of $J_0$ suppresses contributions with large
+values of $k$ thus allowing to truncate the series.
+
+As an application of Eq.~(\ref{eq:OgataSumSingle}), we consider the
+integral:
+\begin{equation}
+\int_0^{\infty} db\,bJ_0(b)e^{-\frac{b^2}{2}} = e^{-\frac12}\,.
+\label{eq:OgataTransformSingle}
+\end{equation}
+In Fig.~\ref{fig:OgataTransformSingle}, the relative accuracy between
+the l.h.s. of Eq.~(\ref{eq:OgataTransformSingle}) computed using
+Eq.~(\ref{eq:OgataSumSingle}) truncated to the $N$-th term and with
+$h=10^{-3} $ and its true value given on the r.h.s. is plotted as a
+function of $N$. It is clear that the series quickly converges to its
+true value as $N$ increases.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/OgataTransformSingle.pdf}
+    \caption{Relative accuracy of the integral in the l.h.s. of
+      Eq.~(\ref{eq:OgataTransformSingle}) computed by means of
+      Eq.~(\ref{eq:OgataSumSingle}) truncated to the $N$-th
+      term.\label{fig:OgataTransformSingle}}
+  \end{centering}
+\end{figure}
+
+We now want to compute a generalisation of the integrals considered
+so far. Specifically:
+\begin{equation}
+  \mathcal{K}_0(h_{0T},h_{1T},h_{2T})=\int_0^\infty db\,b J_0(h_{T0}b) J_0(h_{1T}b) J_0(h_{2T}b)f(b) =
+  \frac{1}{h_{T0}} \int_0^\infty d\overline{b}\, J_0(\overline{b})
+  J_0(a_1\overline{b})
+  J_0(a_2\overline{b})f\left(\frac{\overline{b}}{h_{T0}}\right)\,,
+\label{eq:ThreeBesselIntegral}
+\end{equation}
+where $a_i=h_{Ti}/h_{T0}$. The difference
+w.r.t. Eq.~(\ref{eq:OgataQuadMast}) is the fact that now the integrand
+contains three, rather than one, Bessel functions generally out of
+phase (\textit{i.e.} $a_i\neq 1$). Integrals of this kind, that emerge
+when attempting to parameterise TMDs in transverse-momentum space
+rather than in impact-parameter space, are particularly nasty to
+evaluate numerically. Indeed, the combination of three Bessel
+functions out of phase gives rise to a highly ``chaotic'' oscillating
+behaviour that makes a brute-force computation very inefficient:
+Fig.~(\ref{fig:BesselProduct}) shows one such product.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/BesselProduct.pdf}
+    \caption{Behaviour of the product of three Bessel functions out of
+      phase.\label{fig:BesselProduct}}
+  \end{centering}
+\end{figure}
+
+Therefore, we need to develop an \textit{ad hoc} quadrature method
+aimed at making the computation of the integral in
+Eq.~(\ref{eq:ThreeBesselIntegral}) efficient. To do so, we follow the
+step taken by Ogata in Ref.~\cite{Ogata:quadrature} by generalising
+his arguments. As in that case, the starting formula to develop a
+quadrature integration is the Lagrange interpolation formula in
+Eq.~(\ref{eq:LagrangeInterpolation}), but this time the function $W$
+is the product of three Bessel functions rather than a single Bessel
+function. If for the moment we assume that $a_1,a_2,a_1/a_2 \neq 1$,
+we are guaranteed that there are no overlapping zero's of the three
+$J_0$, \footnote{Actually, one should require that no zero's overlap,
+  that amounts to requiring $a_1,a_2,a_1/a_2 \neq \xi_k/\xi_j$,
+  $\forall\,i,j$. But configurations that violate this constraint are
+  highly unlikely, except when $k=j$, that is when
+  $a_1,a_2,a_1/a_2 = 1$.} we have that:
+\begin{equation}
+  W(x) = J_0(x)J_0(a_1x) J_0(a_2x)=\prod_{l=1}^{\infty}\left(1-\frac{x^2}{\overline{\xi}_l}\right)\,,
+\end{equation}
+where $\{\overline{\xi}_l\}$ is the union of the zero's of $J_0(x)$,
+$J_0(a_1x)$, and $J_0(a_2x)$ that, given the assumption above, never
+overlap. The computation of the derivative of $W$ computed in the node
+$\overline{\xi}_k$ is easily computed:
+\begin{equation}
+W'(\overline{\xi}_k)=\left\{
+\begin{array}{ll}
+- J_1(\overline{\xi}_k)J_0(a_1\overline{\xi}_k) J_0(a_2\overline{\xi}_k)& \quad \overline{\xi}_k\mbox{ iz a zero of } J_0(x)\,,\\
+- a_1J_0(\overline{\xi}_k)J_1(a_1\overline{\xi}_k) J_0(a_2\overline{\xi}_k)& \quad \overline{\xi}_k\mbox{ iz a zero of } J_0(a_1x)\,,\\
+- a_2J_0(\overline{\xi}_k)J_0(a_1\overline{\xi}_k) J_1(a_2\overline{\xi}_k)& \quad \overline{\xi}_k\mbox{ iz a zero of } J_0(a_2x)\,.
+\end{array}
+\right.
+\end{equation}
+This allows us to write:
+\begin{equation}
+\begin{array}{rcl}
+f(x)&=&\displaystyle -\sum_{\overline{\xi}_k\in\{\xi_l\}}
+        f(\overline{\xi}_k)\frac{J_0(x)J_0(a_1x)
+        J_0(a_2x)}{J_1(\overline{\xi}_k)J_0(a_1 \overline{\xi}_k)
+        J_0(a_2 \overline{\xi}_k) (x-\overline{\xi}_k)}\\
+\\
+&&\displaystyle -\sum_{\overline{\xi}_k\in\{\xi_l/a_1\}}
+        f(\overline{\xi}_k)\frac{J_0(x)J_0(a_1x)
+        J_0(a_2x)}{a_1J_0(\overline{\xi}_k)J_1(a_1 \overline{\xi}_k)
+        J_0(a_2 \overline{\xi}_k) (x-\overline{\xi}_k)}\\
+\\
+&&\displaystyle -\sum_{\overline{\xi}_k\in\{\xi_l/a_2\}}
+        f(\overline{\xi}_k)\frac{J_0(x)J_0(a_1x)
+        J_0(a_2x)}{a_2J_0(\overline{\xi}_k)J_0(a_1 \overline{\xi}_k)
+        J_1(a_2 \overline{\xi}_k) (x-\overline{\xi}_k)}\,,
+\end{array}
+\end{equation}
+where $\{\xi_l\}$ is the set of zero's of $J_0(x)$, that can be
+rewritten as:
+\begin{equation}
+\begin{array}{rcl}
+f(x)&=&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
+        f(\xi_k)\frac{J_0(x)J_0(a_1x)
+        J_0(a_2x)}{J_1(\xi_k)J_0(a_1 \xi_k)
+        J_0(a_2 \xi_k) (x-\xi_k)}\\
+\\
+&&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
+        f(\xi_k/a_1)\frac{J_0(x)J_0(a_1x)
+        J_0(a_2x)}{a_1J_0(\xi_k/a_1)J_1(\xi_k)
+        J_0(a_2 \xi_k/a_1) (x-\xi_k/a_1)}\\
+\\
+&&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
+        f(\xi_k/a_2)\frac{J_0(x)J_0(a_1x)
+        J_0(a_2x)}{a_2J_0(\xi_k/a_2)J_0(a_1 \xi_k/a_2)
+        J_1(\xi_k) (x-\xi_k/a_2)}\,.
+\end{array}
+\label{eq:TripleBesselInterpolation}
+\end{equation}
+The resulting quadrature integral is:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{-\infty}^{\infty}dx\,|x|f(x)&=&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
+        \frac{|\xi_k|f(\xi_k)}{J_1(\xi_k)J_0(a_1 \xi_k)
+        J_0(a_2 \xi_k) }\frac{1}{\xi_k}\int_{-\infty}^{\infty}\frac{dy\,|y| J_0(a_1y)
+        J_0(a_2y)J_0(y)}{y-\xi_k}\\
+\\
+&&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
+        \frac{|\xi_k/a_1|f(\xi_k/a_1)}{a_1J_0(\xi_k/a_1)J_1(\xi_k)
+        J_0(a_2 \xi_k/a_1) }\frac{1}{\xi_k}\int_{-\infty}^{\infty}\frac{dy\,|y| J_0(y/a_1)
+        J_0(a_2y/a_1) J_0(y)}{y-\xi_k}\\
+\\
+&&\displaystyle -\sum_{k=-\infty \atop k\neq 0}^\infty
+        \frac{|\xi_k/a_2| f(\xi_k/a_2)}{a_2J_0(\xi_k/a_2)J_0(a_1 \xi_k/a_2)
+        J_1(\xi_k) }\frac{1}{\xi_k}\int_{-\infty}^{\infty}\frac{dy\,|y| J_0(y/a_2)J_0(a_1y/a_2)
+        J_0(y)}{y-\xi_k}\,.
+\end{array}
+\label{eq:QuadratureIntegral}
+\end{equation}
+Therefore, we need to compute integrals of the following kind:
+\begin{equation}
+\mathcal{L}_k(c_1,c_2)=-\frac{1}{\xi_k}\int_{-\infty}^{\infty}\frac{dy\,|y| J_0(c_1y)
+  J_0(c_2y)J_0(y)}{y-\xi_k}\,,
+\label{eq:InterpolationWeights}
+\end{equation}
+where $c_1$ and $c_2$ are such that $J_0(c_i\xi_k)\neq 0$ $\forall
+k$. The solution proceeds similarly as above but we need to consider
+slightly more complicated contour integrals. In order to understand
+better the subtleties behind the computation of these integrals, we
+start from a case with two bessel functions:
+\begin{equation}
+  \int_{-\infty}^{\infty}\frac{dy\,|y| J_0(ay) J_0(by)}{y-t}\,,
+\end{equation}
+where $a$ and $b$ are two positive numbers and $t$ is a real number
+that does not need to be equal to a zero of $J_0(x)$. As above, we
+consider the contour integral:
+\begin{equation}
+  \int_{\mathcal{C}}
+  \frac{dy\,|y|J_0(a y) H_0^{(1)}(by)}{y-t}\,,
+\end{equation}
+where $H_0^{(1)}(y) = J_0(y)+iY_0(y)$ is the Hankel function and
+$\mathcal{C}$ is the same contour as in
+Fig.~\ref{fig:OgataDomain}. The subtlety here is to guarantee that the
+contribution from $C_2$ vanishes. To do so, we consider the asymptotic
+behavior of $H_0^{(1)}$ and $J_0$ for complex numbers with large
+absolute value. The relevant formulas here are:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle |H_0^{(1)}(z)|=\sqrt{\frac{2}{\pi
+    |z|}}\exp(-\mbox{Im}\,z)\left(1+\mathcal{O}(|z|^{-1})\right)\,,\quad 0 \leq \mbox{arg}\, z \leq
+    \pi\,,\\
+    \\
+    \displaystyle |J_0^{(1)}(z)|=\sqrt{\frac{2}{\pi
+    |z|}}\left(\cos\,z+\exp(-\mbox{Im}\,z)\mathcal{O}(|z|^{-1})\right)=\sqrt{\frac{1}{2\pi
+    |z|}}\left(\exp(\mbox{Im}\,z)+\exp(-\mbox{Im}\,z)(1+\mathcal{O}(|z|^{-1}))\right)\,,\quad 0 \leq \mbox{arg}\, z \leq
+    \pi\,.
+  \end{array}
+\end{equation}
+In order for $|J_0(ay)||H_0^{(1)}(by)|$ to vanish as $\mbox{Im}\,z$
+gets large we need that $\exp((a-b) \mbox{Im}\,z)$ is suppressed,
+which implies $a<b$. Under this condition, we can use the same method
+that we have used fot the single-Bessel case and obtain:
+\begin{equation}
+  0=\int_{\mathcal{C}} \frac{dy\,|y|J_0(a y) H_0^{(1)}(by)}{y-t}=-i\pi
+  |t|J_0(a t) H_0^{(1)}(bt)+\mbox{PV}\int_{-\infty}^{\infty}
+  \frac{dy\,|y|J_0(a y) H_0^{(1)}(by)}{y-t}\,.
+  \label{eq:TwoBesselGeneral}
+\end{equation}
+Now setting $b=1$, so that $a<1$, and $t=\xi_k$, and considering only
+the real part of the equality above, we obtain:
+\begin{equation}
+  \int_{-\infty}^{\infty} \frac{dy\,|y|J_0(a y) J_0(y)}{y-\xi_k}=-\pi
+  |\xi_k|J_0(a \xi_k) Y_0^{(1)}(\xi_k)\,,\quad a<1\,.
+\end{equation}
+If instead $a>b$, it is sufficient to exchange $a$ and $b$ in
+Eq.~(\ref{eq:TwoBesselGeneral}) which, setting $b=1$ and $t=\xi_k$,
+produces:
+\begin{equation}
+  \int_{-\infty}^{\infty} \frac{dy\,|y|J_0(a y) J_0(y)}{y-\xi_k}=0\,,\quad a>1\,.
+\end{equation}
+The general result is thus:
+\begin{equation}
+  \int_{-\infty}^{\infty} \frac{dy\,|y|J_0(a y) J_0(y)}{y-\xi_k}=-\theta(1-a)\pi
+  |\xi_k|J_0(a \xi_k) Y_0^{(1)}(\xi_k)\,.
+  \label{eq:DoubleBesselWeight}
+\end{equation}
+
+We can now move to the three-Bessel case which implies considering the
+contour integral:
+\begin{equation}
+  \int_{\mathcal{C}}
+  \frac{dy\,|y|J_0(a y) J_0(b y) H_0^{(1)}(cy)}{y-t}\,,
+\end{equation}
+whose convergence requires that $a+b<c$. Under this assumption, one
+finds:
+\begin{equation}
+  \mbox{PV}\int_{-\infty}^{\infty}
+  \frac{dy\,|y|J_0(a y) J_0(b y) J_0(cy)}{y-t}=\mbox{Re}\left[i\pi|t|J_0(a t)
+  J_0(b t) H_0^{(1)}(ct)\right]\,, \quad a+b<c\,.
+\end{equation}
+However, other possible hierarchies can be accommodated by just
+reshuffling the arguments appropriately. There are two additional
+possibilities: $a+c<b$ and $b+c <a$, that produce the general result
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle \mbox{PV}\int_{-\infty}^{\infty}
+  \frac{dy\,|y|J_0(a y) J_0(b y) J_0(cy)}{y-t}&=&\displaystyle \theta(c-a-b)\mbox{Re}\left[i\pi|t|J_0(a t)
+                                                  J_0(b t) H_0^{(1)}(ct)\right]\\
+    \\
+    &+&\displaystyle \theta(b-a-c) \mbox{Re}\left[i\pi|t|J_0(a t)
+        J_0(c t) H_0^{(1)}(bt)\right]\\
+    \\
+    &+&\displaystyle \theta(a-b-c) \mbox{Re}\left[i\pi|t|J_0(b t)
+        J_0(c t) H_0^{(1)}(at)\right]\,.
+        \end{array}
+  \label{eq:ThreeBesselGeneral}
+\end{equation}
+Setting $a=c_1$, $b=c_2$, $c=1$, and $t=\xi_k$, we obtain:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle \mathcal{L}_k(c_1,c_2)&=&\displaystyle
+                                            -\theta(1-c_1-c_2)\pi J_0(c_1 \xi_k)
+                                                  J_0(c_2 \xi_k)
+                                            Y_0(\xi_k)+\theta(|c_1-c_2|-1)\times
+                                            0\,.
+        \end{array}
+  \label{eq:ThreeBesselGeneral}
+\end{equation}
+However, this is not the whole story because we still need to cover
+the region $c_1+c_2>1$.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.7\textwidth]{plots/TripleOgataDomain.pdf}
+    \caption{Domain of the interpolation weight
+      $\mathcal{L}_{k}(c_1,c_2)$ in
+      Eq.~(\ref{eq:InterpolationWeights}).\label{fig:TripleOgataDomain}}
+  \end{centering}
+\end{figure}
+Referring to Fig.~\ref{fig:TripleOgataDomain}, the first term in the
+r.h.s. of Eq.~(\ref{eq:ThreeBesselGeneral}) covers the red region
+while the second covers the blue regions. Therefore, we still need to
+cover the green region. Unfortunately, the computation in this region
+is particularly cumbersome. In order to make some steps forward, we
+first rewrite our target integral as follows:
+\begin{equation}
+  \mbox{PV}\int_{-\infty}^{\infty}\frac{dy\,|y|J_0(a y) J_0(b y)
+    J_0(cy)}{y-t}= 2t \mbox{PV}\int_{0}^{\infty}\frac{dy\,yJ_0(a y)
+    J_0(b y) J_0(cy)}{y^2-t^2}\,.
+  \label{eq:Lc1c2Rewriting}
+\end{equation}
+We now consider the contour integral:
+\begin{equation}
+  \int_{\mathcal{P}}\frac{dy\,y H_0^{(1)}(a y) H_0^{(1)}(b y)
+    J_0(cy)}{y^2-t^2} = 0\,,
+  \label{eq:OgataDomainPizza}
+\end{equation}
+where, assuming $t>0$, $\mathcal{P}$ is the contour of the upper-right
+pizza slice with infinite radius and an infinitely small semi-circle
+around $t$ removed (see Fig.~\ref{fig:OgataDomainPizza}).
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.8\textwidth]{plots/OgataDomainPizza.pdf}
+    \caption{Integration contour $\mathcal{P}$ of
+      Eq.~(\ref{eq:OgataDomainPizza}).\label{fig:OgataDomainPizza}}
+  \end{centering}
+\end{figure}
+Since this contour contains no poles the integral must evaluate to
+zero. However, In order for the integral along the quarter of circle
+at infinitt to give a vanishing contribution, we need to require
+$c-b-a<$. Under this requirement, we have:
+\begin{equation}
+  \mbox{PV}\int_{0}^{\infty}\frac{dy\,y H_0^{(1)}(a y) H_0^{(1)}(b y) J_0(cy)}{y^2-t^2}=\frac{i\pi}{2}  H_0^{(1)}(a t) H_0^{(1)}(b t) J_0(ct)-\frac{4}{\pi^2}\int_{0}^{\infty}\frac{dz\,z K_0 (az) K_0(b z) I_0(c z)}{z^2+t^2}\,,
+\end{equation}
+where we have used the identities $J_0(ix)=I_0(x)$ and
+$H_0^{(1)}(ix)=2K_0 (x)/(i\pi)$. If we focus on the real part of this
+equality and set $t=\xi_k$, we find:
+\begin{equation}
+  \mbox{PV}\int_{0}^{\infty}\frac{dy\,y [J_0(a y) J_0(b y)-Y_0(a y) Y_0(b y)] J_0(cy)}{y^2-\xi_k^2}=-\frac{4}{\pi^2}\int_{0}^{\infty}\frac{dz\,z K_0 (az) K_0(b z) I_0(c z)}{z^2+\xi_k^2}\,.
+\end{equation}
+As above, we have three independent ways of matching $a$, $b$, and $c$
+with $c_1$, $c_2$, and 1. They are: 1) $a=c_1$, $b=c_2$, $c=1$ valid
+for $c_2>1-c_1$, 2) $a=1$, $b=c_1$, $c=c_2$ valid for $c_2<c_1+1$, 3)
+$a=c_2$, $b=1$, $c=c_1$ valid for $c_2>c_1-1$. Therefore, the overlap
+region of all three combinations is precisely the green region in
+Fig.~\ref{fig:TripleOgataDomain} that we are interested in. Assuming
+to concentrate on this region, we have:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle \mbox{PV}\int_{0}^{\infty}\frac{dy\,y [J_0(c_1 y)
+    J_0( c_2y)-Y_0(c_1 y) Y_0(c_2 y)]
+    J_0(y)}{y^2-\xi_k^2}&=&\displaystyle-\frac{4}{\pi^2}\int_{0}^{\infty}\frac{dz\,z
+                             K_0 (c_1 z) K_0(c_2 z) I_0(
+                             z)}{z^2+\xi_k^2}\,,\\
+    \\
+    \displaystyle   \mbox{PV}\int_{0}^{\infty}\frac{dy\,y [J_0(y)
+    J_0(c_1 y)-Y_0(y) Y_0(c_1 y)]
+    J_0(c_2y)}{y^2-\xi_k^2}&=&\displaystyle-\frac{\pi}{2}Y_0(\xi_k) J_0(c_1\xi_k) J_0(c_2\xi_k)
+                               -\frac{4}{\pi^2}\int_{0}^{\infty}\frac{dz\,z
+                               K_0 (z) K_0(c_1 z) I_0(c_2
+                               z)}{z^2+\xi_k^2}\,,\\
+    \\
+    \displaystyle \mbox{PV}\int_{0}^{\infty}\frac{dy\,y [J_0(c_2 y)
+    J_0(y)-Y_0(c_2 y) Y_0(y)] J_0(c_1y)}{y^2-\xi_k^2}&=&\displaystyle -\frac{\pi}{2}J_0(c_1\xi_k) Y_0(\xi_k) J_0(c_2\xi_k)-\frac{4}{\pi^2}\int_{0}^{\infty}\frac{dz\,z K_0 (c_2 z) K_0(z) I_0(c_1 z)}{z^2+\xi_k^2}\,.
+  \end{array}
+  \label{eq:ThreePossibilities}
+\end{equation}
+All integrals above involve our target integral, \textit{i.e.} the one
+with three $J_0$. However, this integral appears entangled with other
+integrals. In order to disentangle it, we consider the yet another
+vanishing integral:
+\begin{equation}
+  \int_{\mathcal{P}}\frac{dy\,y H_0^{(1)}(a y) H_0^{(1)}(b y) H_0^{(1)}(cy)}{y^2-t^2} = 0\,,
+\end{equation}
+where $\mathcal{P}$ is the contour in
+Fig.~\ref{fig:OgataDomainPizza}. In this case, the quarter of circle
+at infinity gives a vanishing contribution for any value of $a$, $b$,
+and $c$, so that:
+\begin{equation}
+  \mbox{PV}\int_0^{\infty}\frac{dy\,y H_0^{(1)}(a y) H_0^{(1)}(b y) H_0^{(1)}(cy)}{y^2-t^2}=\frac{i\pi}{2}H_0^{(1)}(a t) H_0^{(1)}(bt) H_0^{(1)}(ct) +\frac{8i}{\pi^3}\int_{0}^{\infty}\frac{dz\,z K_0(a z) K_0(b z) K_0(cz)}{z^2+t^2}\,.
+\end{equation}
+Setting as usual $t=\xi_k$, in this case there is only one independent
+way to matching $a$, $b$, and $c$ with $c_1$, $c_1$ and 1, and we
+choose it to be: $a=c_1$, $b=c_2$, and $c=1$. Then we focus on the
+real part obtaining:
+\begin{equation}
+  \begin{array}{c}
+  \displaystyle \mbox{PV}\int_0^{\infty}\frac{dy\,y [J_0(c_1 y)J_0(c_2 y) J_0(y) - Y_0(c_1
+    y)Y_0(c_2 y) J_0(y)-Y_0(y)Y_0(c_1 y) J_0(c_2y) -Y_0(c_2y)Y_0( y) J_0(c_1y)]}{y^2-\xi_k^2}=\\
+    \\
+    \displaystyle -\frac{\pi}{2 }[J_0(c_1\xi_k)
+    J_0(c_2 \xi_k)-Y_0(c_1\xi_k) Y_0(c_2 \xi_k)] Y_0(\xi_k)\,.
+      \label{eq:OnlyPossibility}
+  \end{array}
+\end{equation}
+Now we can sum all integrals in Eq.~(\ref{eq:ThreePossibilities}) and
+subtract off the integral in Eq.~(\ref{eq:OnlyPossibility}). This
+finally allows us to disentangle our target integral that yields:
+\begin{equation}
+  \small
+  \begin{array}{rcl}
+    \displaystyle \int_{-\infty}^{\infty}\frac{dy\,|y| J_0(c_1 y)
+    J_0( c_2y) J_0(y)}{y^2-\xi_k^2}&=&\displaystyle-\frac{\pi}{2}|\xi_k|[J_0(c_1\xi_k)
+    J_0(c_2 \xi_k)+Y_0(c_1\xi_k) Y_0(c_2 \xi_k)] Y_0(\xi_k)\\
+    \\
+    &-&\displaystyle \frac4{\pi^2}|\xi_k|\int_{0}^{\infty}\frac{dz\,z
+                                       [K_0 (c_1 z) K_0(c_2 z)
+                                       I_0(z)+K_0 (z) K_0(c_1 z)
+                                       I_0(c_2z)+K_0 (c_2 z) K_0(z)
+                                       I_0(c_1 z)]}{z^2+\xi_k^2}\,,
+  \end{array}
+\end{equation}
+valid for $c_1+c_2>1\cap |c_1-c_2|<1$. The advantage of this equality
+is that, while the integrand on the left-hand side is wildly
+oscillating (see Fig.~\ref{fig:BesselProduct}), the integrand in the
+right-hand side is exponentially suppressed in the definition region
+such that a numerical evaluation is expected to be quickly convergent.
+This complete the picture in that it allows us to compute the weights
+$\mathcal{L}_k(c_1,c_2)$ in Eq.~(\ref{eq:InterpolationWeights}) for
+any positive value of $c_1$ and $c_2$, that is:
+\begin{equation}
+  \small
+  \mathcal{L}_k(c_1,c_2)=\left\{
+  \begin{array}{ll}
+    \displaystyle \pi J_0(c_1 \xi_k) J_0(c_2 \xi_k)
+    Y_0(\xi_k) \,,&\quad c_1+c_2<1\,,\\
+    \\
+    0 \,, &\quad |c_1-c_2|>1\,,\\
+    \\
+    \displaystyle \frac{\pi}{2}[J_0(c_1\xi_k)
+    J_0(c_2 \xi_k)+Y_0(c_1\xi_k) Y_0(c_2 \xi_k)] Y_0(\xi_k)&\\
+    \\
+    \displaystyle +\frac4{\pi^2}\int_{0}^{\infty}\frac{dz\,z
+                                       [K_0 (c_1 z) K_0(c_2 z)
+                                       I_0(z)+K_0 (z) K_0(c_1 z)
+                                       I_0(c_2z)+K_0 (c_2 z) K_0(z)
+                                       I_0(c_1 z)]}{z^2+\xi_k^2}\,,&\quad\mbox{otherwise.}
+  \end{array}
+\right.
+\label{eq:ThreeBesselWeightFinal}
+\end{equation}
+A graphical representation of this weight as a function of $c_1$ and
+$c_2$ is shown in Fig.~\ref{fig:Weight3D} for $k=1$.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.7\textwidth]{plots/Weight3D.pdf}
+    \caption{Graphical representation of
+      Eq.~(\ref{eq:ThreeBesselWeightFinal}) with
+      $k=1$.\label{fig:Weight3D}}
+  \end{centering}
+\end{figure}
+
+We can now plug Eq.~(\ref{eq:ThreeBesselWeightFinal}) into
+Eq.~(\ref{eq:QuadratureIntegral}). Accounting for the rescaling factor
+$h$ and defining for convenience $a_0=1$, after some manipulation it
+reads:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \int_{-\infty}^{\infty}dx\,|x|f(x)&=&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty |h\xi_k/a_0|f(h\xi_k/a_0)
+        \frac{\theta(a_0-|a_1-a_2|)\mathcal{L}_k(a_1/a_0,a_2 /a_0)}{a_0J_1(a_0\xi_k /a_0)J_0(a_1 \xi_k/a_0)
+        J_0(a_2 \xi_k /a_0) }\\
+\\
+&+&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty
+        |h\xi_k/a_1|f(h\xi_k/a_1)\frac{\theta(a_1-|a_2-a_0|)\mathcal{L}_k(a_2/a_1,a_0/a_1)}{a_1 J_1(a_1\xi_k/a_1) 
+        J_0(a_2 \xi_k/a_1) J_0(a_0\xi_k/a_1) }\\
+\\
+&+&\displaystyle h\sum_{k=-\infty \atop k\neq 0}^\infty
+        |h\xi_k/a_2|f(h\xi_k/a_2)\frac{\theta(a_2-|a_0-a_1|)\mathcal{L}_k(a_0/a_2,a_1/a_2)}{a_2  J_1(a_2\xi_k/a_2) J_0(a_0\xi_k/a_2)J_0(a_1 \xi_k/a_2)}\,.
+\end{array}
+\label{eq:TripleSum}
+\end{equation}
+We have also included $\theta$-functions to limit the weights to the
+region where they are different from zero. Now we define the following
+list of pairs:
+\begin{equation}
+  \left\{\left(\overline{\xi}_i=\frac{\xi_{k(i)}}{a_{n(i)}},n(i),k(i)\right)\right\}\,,\quad
+  i=-\infty,\dots,\infty\,,\quad i\neq 0
+\end{equation}
+in ascending order of $\overline{\xi}_i$, where $k(i)$ is the index of
+the zero of $J_0$ and $n(i)\in\{0,1,2\}$. With this definition at
+hand, Eq.~(\ref{eq:TripleSum}) can be written in the following compact
+form:
+\begin{equation}
+\displaystyle \int_{-\infty}^{\infty}dx\,|x|f(x) = h\sum_{i=-\infty \atop i\neq 0}^\infty w_i|h\overline{\xi}_i|f(h\overline{\xi}_i)\,,
+\end{equation}
+where we have defined:
+\begin{equation}
+w_i=
+\frac{\theta(a_{n(i)}-|a_{n(i)+1}-a_{n(i)+2}|)\mathcal{L}_{k(i)}(a_{n(i)+1}/a_{n(i)},a_{n(i)+2}
+  /a_{n(i)})}{a_{n(i)}J_1(a_{n(i)}\overline{\xi}_i)J_0(a_{n(i)+1}
+  \overline{\xi}_i)  J_0(a_{n(i)+2} \overline{\xi}_i) }\,,
+\end{equation}
+where $n(i)+1$ and $n(i)+2$ have to be interpreted as modulus 3,
+\textit{i.e.} $1+2\rightarrow 0$, $2+1\rightarrow 0$, and
+$2+2\rightarrow 1$.
+
+The results above have been obtained assuming $a_1,a_2,a_1/a_2\neq
+1$. We now relax these assumptions in order to include all possible
+cases. In fact, one can show that this is easily accommodated by
+computing the weights $w_i$ by setting $a_1=0$ if $a_1=1$, and $a_2=0$
+if $a_2=1$ or if $a_2=a_1$.\footnote{In practice, in order to avoid
+  divisions by zero, setting $a_1=0$ and/or $a_2=0$ really means
+  setting these parameters to a small positive number.}
+
+We can now compute the integral in
+Eq.~(\ref{eq:ThreeBesselIntegral}). As above, we make the change of
+variable in Eq.~(\ref{eq:OgataChangeOfVariable}) so that:
+\begin{equation}
+  \begin{array}{rcl}
+  \mathcal{K}_0(h_{T0}, h_{T1}, h_{T2})&=&\displaystyle \frac1{h_{T0}}\frac{1}{h}\int_0^\infty dt\, \psi'\left(\frac{t}{\pi}\right)  J_0\left(\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)  J_0\left(a_1\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)  J_0\left(a_2\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)
+              f\left(\frac{1}{h_{T0}}\frac{\pi}{h}\psi\left(\frac{t}{\pi}\right)\right)\\
+    \\
+    &=&\displaystyle
+        \frac{1}{h_{T0}}\sum_{i=1}^{\infty}w_i\psi'\left(\frac{h\overline{\xi}_i}{\pi}\right)
+        J_0\left(\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)
+        J_0\left(a_1\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)
+        J_0\left(a_2\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)
+        f\left(\frac{1}{h_{T0}}\frac{\pi}{h}\psi\left(\frac{h\overline{\xi}_i}{\pi}\right)\right)\,.
+  \end{array}
+  \label{eq:TripleHankel}
+\end{equation}
+The sum in the second line is expected to converge fast to the true
+value of the integral as $i$ increases. Therefore, truncating the
+series at a relative small value of $i$ should provide a good
+approximation of the integral. Given the symmetry of $\mathcal{K}_0$
+upon reshuffling $h_{T0}$, $h_{T1}$, and $h_{T2}$, without loss of
+generality one can always denote with $h_{T0}$ the largest of all such
+that $a_1=h_{T1}/h_{T0}$ and $a_2=h_{T2}/h_{T0}$ are always such that
+$0\leq a_i \leq 1$. This helps the convergence of the series.
+
+To test this formula, we consider the integral:
+\begin{equation}
+\int_0^{\infty} db\,bJ_0(h_{T0} b)J_0(h_{T1} b)J_0(h_{T2} b)e^{-\frac{b^2}{2}}\,.
+\label{eq:OgataTransformTriple}
+\end{equation}
+Since we do not know how to solve it exactly, in
+Fig.~\ref{fig:OgataTransformTriple} we compare the convergence rate of
+this integral as a function of the truncation order $N$ for different
+values of $h_{T0}$, $h_{T1}$ and $h_{T2}$ computed by means of
+Eq.~(\ref{eq:TripleHankel}) with
+$h=10^{-2}\times\mbox{max}[h_{T0},h_{T1},h_{T2}]$ to a brute-force
+numerical integration with high enough accuracy. Also in this case,
+the integral converges quickly to the true value within a few terms.
+\begin{figure}[t]
+  \begin{centering}
+    \includegraphics[width=0.6\textwidth]{plots/OgataTransformTriple.pdf}
+    \caption{Relative accuracy of the integral in
+      Eq.~(\ref{eq:OgataTransformTriple}) computed by means of
+      Eq.~(\ref{eq:TripleHankel}) truncated to the $N$-th
+      term.\label{fig:OgataTransformTriple}}
+  \end{centering}
+\end{figure}
+
+
+\newpage
 \section{Cuts on the final-state leptons}
 
 In this section we derive explicitly the phase-space reduction factor

@@ -106,7 +106,7 @@ namespace apfel
                                                                 std::function<double(double const&)> const& Alphas,
                                                                 int                                  const& PerturbativeOrder,
                                                                 double                               const& Ci = 1);
-
+  /// @cond UNNECESSARY
   /**
    * @brief Function that returns the evolution factors for gluon and quarks.
    * @param GtmdObj: the GTMD objects
@@ -114,17 +114,18 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-   * @return std::vector<double>-valued function of the impact parameter
-   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
-   * final rapidity scale &zeta;. The 0-th component contains the
-   * gluon evolution factor, the remaining 12, from 1 to 12, are all
-   * equal and represent the quark evolution factors.
+   * @return std::vector<double>-valued function of the longitudinal
+   * momentum fraction x, the impact parameter b<SUB>T</SUB>, the
+   * final renormalisation scale &mu;, and the final rapidity scale
+   * &zeta;. The 0-th component contains the gluon evolution factor,
+   * the remaining 12, from 1 to 12, are all equal and represent the
+   * quark evolution factors.
    */
-  std::function<std::vector<double>(double const&, double const&, double const&)> EvolutionFactors(std::map<int, GtmdObjects>           const& GtmdObj,
-                                                                                                   std::function<double(double const&)> const& Alphas,
-                                                                                                   int                                  const& PerturbativeOrder,
-                                                                                                   double                               const& Ci = 1,
-                                                                                                   double                               const& IntEps = 1e-7);
+  std::function<std::vector<double>(double const&, double const&, double const&, double const&)> EvolutionFactors(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                                                                  std::function<double(double const&)> const& Alphas,
+                                                                                                                  int                                  const& PerturbativeOrder,
+                                                                                                                  double                               const& Ci = 1,
+                                                                                                                  double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the evolution factor for quarks.
@@ -133,16 +134,16 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-   * @return double-valued function of the impact parameter
-   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
-   * final rapidity scale &zeta;. It returns the quark evolution
-   * factor.
+   * @return double-valued function of the longitudinal momentum
+   * fraction x, the impact parameter b<SUB>T</SUB>, the final
+   * renormalisation scale &mu;, and the final rapidity scale
+   * &zeta;. It returns the quark evolution factor.
    */
-  std::function<double(double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
-                                                                                          std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
-                                                                                          double                               const& Ci = 1,
-                                                                                          double                               const& IntEps = 1e-7);
+  std::function<double(double const&, double const&, double const&, double const&)> QuarkEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                                                         std::function<double(double const&)> const& Alphas,
+                                                                                                         int                                  const& PerturbativeOrder,
+                                                                                                         double                               const& Ci = 1,
+                                                                                                         double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the evolution factor for the gluon.
@@ -151,15 +152,16 @@ namespace apfel
    * @param PerturbativeOrder: the perturbative order
    * @param Ci: the initial scale-variation factor (default: 1)
    * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-   * @return double-valued function of the impact parameter
-   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
-   * final rapidity scale &zeta;. It returns the gluon evolution
-   * factor.
+   * @return double-valued function of the longitudinal momentum
+   * fraction x, the impact parameter b<SUB>T</SUB>, the final
+   * renormalisation scale &mu;, and the final rapidity scale
+   * &zeta;. It returns the gluon evolution factor.
    */
-  std::function<double(double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
-                                                                                          std::function<double(double const&)> const& Alphas,
-                                                                                          int                                  const& PerturbativeOrder,
-                                                                                          double                               const& Ci = 1,
-                                                                                          double                               const& IntEps = 1e-7);
+  std::function<double(double const&, double const&, double const&, double const&)> GluonEvolutionFactor(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                                                         std::function<double(double const&)> const& Alphas,
+                                                                                                         int                                  const& PerturbativeOrder,
+                                                                                                         double                               const& Ci = 1,
+                                                                                                         double                               const& IntEps = 1e-7);
+  /// @endcond
   ///@}
 }

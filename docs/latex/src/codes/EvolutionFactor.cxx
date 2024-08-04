@@ -108,8 +108,8 @@ int main()
   // Compute hard coefficient, including the other kinematic
   // factors.
   const double alpha = 1. / 127.;
-  const double hcs = apfel::ConvFact * 8 * M_PI * pow(alpha, 2) * apfel::HardFactorDY(PerturbativeOrder, Alphas(muf), apfel::NF(muf, Thresholds), Cf) / 9 / pow(Q, 3);
-
+  const double hcs = apfel::ConvFact * 8 * M_PI * pow(alpha, 2) * HardFactor("DY", TmdObj, Alphas, apfel::LogAccuracy::NNNLL, Cf)(Q) / 9 / pow(Q, 3);
+  
   // Ogata quadrature object
   apfel::OgataQuadrature bintegrand{};
 

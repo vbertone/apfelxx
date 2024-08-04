@@ -22,8 +22,9 @@ namespace apfel
   struct DglapObjects
   {
     double Threshold;
-    std::map<int, Set<Operator>> SplittingFunctions;
-    std::map<int, Set<Operator>> MatchingConditions;
+    std::map<int, Set<Operator>>     SplittingFunctions;
+    std::map<int, Set<Operator>>     MatchingConditions;
+    std::map<int, Set<Distribution>> InhomogeneousTerms;
   };
 
   /**

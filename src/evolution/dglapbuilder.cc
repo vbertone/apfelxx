@@ -269,8 +269,6 @@ namespace apfel
     // approximate parameterisation. In addition, the approximations
     // of https://arxiv.org/pdf/2207.04739.pdf are used.
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
-    const Operator O3gq{g, P3gq{}, IntEps};
-    const Operator O3gg{g, P3gg{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator O3nsp{g, P3nsp{nf}, IntEps};
@@ -278,6 +276,8 @@ namespace apfel
         const Operator O3nss{g, P3nss{nf}, IntEps};
         const Operator O3ps {g, P3ps{nf},  IntEps};
         const Operator O3qg {g, P3qg{nf},  IntEps};
+        const Operator O3gq {g, P3gq{nf},  IntEps};
+        const Operator O3gg {g, P3gg{nf},  IntEps};
         const Operator O3qq  = O3nsp + O3ps;
         const Operator O3nsv = O3nsm + O3nss;
         std::map<int, Operator> OM;
@@ -411,18 +411,28 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO matching conditions (unknown so far thus set to zero)
+    // NLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNLO;
+    const Operator AS1HgL {g, AS1polHg_L{},  IntEps};
+    const Operator AS1ggHL{g, AS1polggH_L{}, IntEps};
+    const Operator AS1gH0 {g, AS1polgH_0{},  IntEps};
+    const Operator AS1gHL {g, AS1polgH_L{},  IntEps};
+    const Operator AS1HH0 {g, AS1polHH_0{},  IntEps};
+    const Operator AS1HHL {g, AS1polHH_L{},  IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nf] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf] * AS1HHL;
         std::map<int, Operator> OM;
         OM.insert({MatchingBasisQCD::M0, Zero});
-        OM.insert({MatchingBasisQCD::M1, Zero});
-        OM.insert({MatchingBasisQCD::M2, Zero});
-        OM.insert({MatchingBasisQCD::M3, Zero});
-        OM.insert({MatchingBasisQCD::M4, Zero});
-        OM.insert({MatchingBasisQCD::M5, Zero});
-        OM.insert({MatchingBasisQCD::M6, Zero});
+        OM.insert({MatchingBasisQCD::M1, AS1ggH});
+        OM.insert({MatchingBasisQCD::M2, AS1gH});
+        OM.insert({MatchingBasisQCD::M3, AS1gH});
+        OM.insert({MatchingBasisQCD::M4, AS1Hg});
+        OM.insert({MatchingBasisQCD::M5, AS1HH});
+        OM.insert({MatchingBasisQCD::M6, AS1HH});
         OM.insert({MatchingBasisQCD::M7, Zero});
         MatchNLO.insert({nf, OM});
       }
@@ -1062,7 +1072,7 @@ namespace apfel
         const double b2   = beta2qcd(nf) / beta0qcd(nf);
         const auto sf = DglapObj.at(nf).SplittingFunctions;
         return cp4 * sf.at(3) + ( cp3 - 3 * cp4 * blx ) * sf.at(2) + ( cp2 - 2 * cp3 * blx + cp4 * ( - 2 * b1 * blx + 3 * blx2 ) ) * sf.at(1)
-        + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) + cp4 * ( - b2 * blx + 5 * b1 * blx2 / 2 - blx3 ) ) * sf.at(0);
+                       + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) + cp4 * ( - b2 * blx + 5 * b1 * blx2 / 2 - blx3 ) ) * sf.at(0);
       };
     else
       throw std::runtime_error(error("SplittingFunctions","Perturbative order not allowed."));
@@ -1104,6 +1114,47 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::function<Set<Distribution>(int const&, double const&)> InhomogeneousTerms(std::map<int, DglapObjects>          const& DglapObj,
+                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 std::function<double(double const&)> const& Alphas,
+                                                                                 double                               const& xi)
+  {
+    // Return null pointer if the first in nf inhomogeneous-terms map
+    // is empty
+    if (DglapObj.begin()->second.InhomogeneousTerms.empty())
+      return nullptr;
+
+    if (PerturbativeOrder == 0)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        return ( Alphas(xi * exp(t / 2)) / FourPi ) * DglapObj.at(nf).InhomogeneousTerms.at(0);
+      };
+    else if (PerturbativeOrder == 1)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        const double cp  = Alphas(xi * exp(t / 2)) / FourPi;
+        const double cp2 = cp * cp;
+        const double blx = - 2 * beta0qcd(nf) * log(xi);
+        const auto iht = DglapObj.at(nf).InhomogeneousTerms;
+        return cp2 * iht.at(1) + ( cp - cp2 * blx ) * iht.at(0);
+      };
+    else if (PerturbativeOrder == 2)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        const double cp   = Alphas(xi * exp(t / 2)) / FourPi;
+        const double cp2  = cp * cp;
+        const double cp3  = cp * cp2;
+        const double blx  = - 2 * beta0qcd(nf) * log(xi);
+        const double blx2 = blx * blx;
+        const double b1   = beta1qcd(nf) / beta0qcd(nf);
+        const auto iht = DglapObj.at(nf).InhomogeneousTerms;
+        return cp3 * iht.at(2) + ( cp2 - 2 * cp3 * blx ) * iht.at(1) + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) ) * iht.at(0);
+      };
+    else
+      throw std::runtime_error(error("InhomogeneousTerms","Perturbative order not allowed."));
+  }
+
+  //_____________________________________________________________________________
   std::unique_ptr<Dglap<Distribution>> BuildDglap(std::map<int, DglapObjects>                                        const& DglapObj,
                                                   std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
                                                   double                                                             const& MuRef,
@@ -1132,7 +1183,9 @@ namespace apfel
 
     // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
-                                                                         MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), InPDFs, MuRef, Thresholds, nsteps
+                                                                         MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh),
+                                                                         InhomogeneousTerms(DglapObj, PerturbativeOrder, Alphas, xi),
+                                                                         InPDFs, MuRef, Thresholds, nsteps
                                                                         });
   }
 
@@ -1176,9 +1229,15 @@ namespace apfel
         MapUnity.insert({i, Zero});
     Set<Operator> Unity{EvolutionOperatorBasisQCD{NF(MuRef, Thresholds)}, MapUnity};
 
-    // Initialize DGLAP evolution
+    // Initialize DGLAP evolution. When computing evolution operators,
+    // no inhomogeneous terms are allowed because their presence would
+    // prevent wrinting the DGLAP evolution equations in terms of the
+    // evolution operators. In other words, evolution operators can be
+    // computed in the homogeneous case only. Set InhomogeneousTerms
+    // to nullptr.
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
-                                                                 MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), Unity, MuRef, Thresholds, nsteps
+                                                                 MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh),
+                                                                 nullptr, Unity, MuRef, Thresholds, nsteps
                                                                 });
   }
 
@@ -1275,7 +1334,8 @@ namespace apfel
     const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
                                    DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
-    // Initialize DGLAP evolution
-    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
+    // Initialize DGLAP evolution (no inhomogeneous terms allowed for
+    // now: set InhomogeneousTerms to nullptr).
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, nullptr, InPDFs, MuRef, Thresholds, nsteps});
   }
 }

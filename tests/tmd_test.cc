@@ -11,6 +11,7 @@ int main()
 {
   // Vectors of masses and thresholds
   const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
+  //const std::vector<double> Thresholds = {0, 0, 0, 0, 0};
 
   // Running coupling
   apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, apfel::FixedOrderAccuracy::NNLO};
@@ -54,8 +55,16 @@ int main()
   // EW charges
   const std::vector<double> Bq = apfel::ElectroWeakCharges(Q, true);
 
-  // Construct the TMD luminosity in b space to be fed to be
-  // trasformed in qT space.
+  // Get Evolved TMD PDFs at bmax. This is is subtracted off from the
+  // b-dependent luminosity to improve the convergence of the Hankel
+  // transform, especially at small qT.
+  const std::map<int,apfel::Distribution> xF = QCDEvToPhys(EvTMDPDFs(2 * exp( - apfel::emc), Q, Q * Q).GetObjects());
+  double lumimax = 0;
+  for (int i = 1; i <= nf; i++)
+    lumimax += Bq[i-1] * ( xF.at(i).Evaluate(x1) * xF.at(-i).Evaluate(x2) + xF.at(-i).Evaluate(x1) * xF.at(i).Evaluate(x2) );
+
+  // Construct the TMD luminosity in b space to be trasformed in qT
+  // space.
   const std::function<double(double const&)> TMDLumib = [=] (double const& b) -> double
   {
     // Compute b*
@@ -71,11 +80,12 @@ int main()
       lumi += Bq[i-1] * ( xF.at(i).Evaluate(x1) * xF.at(-i).Evaluate(x2) + xF.at(-i).Evaluate(x1) * xF.at(i).Evaluate(x2) );
 
     // Combine all pieces and return
-    return b * lumi;
+    return b * ( lumi - lumimax );
   };
 
   // Double exponential quadrature
-  apfel::DoubleExponentialQuadrature DEObj{};
+  //apfel::DoubleExponentialQuadrature DEObj{};
+  apfel::OgataQuadrature DEObj{};
 
   // Compute predictions
   const int nqT = 100;

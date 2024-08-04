@@ -932,6 +932,111 @@ of $b_T$ where variations are small perturbation theory is still
 reliable. Therefore this region can be used to put some constraint on
 $f_{\rm NP}$.
 
+\subsubsection{Parameterising $f_{\rm NP}$ in transverse-momentum
+  space}\label{sec:nonpert}
+
+As explained above, accounting for non-perturbative effects implies
+the introduction of the function $f_{\rm NP}$ that is naturally
+introduced in $b_T$ space, that is the Fourier-conjugate variable of
+the partonic transverse momentum $k_T$. In this section, I will
+attempt to reformulate the problem in a way that $f_{\rm NP}$
+parameterises non-perturbative effects in $k_T$ space. The starting
+point is the observation that a $q_T$-differential cross section
+(where $q_T$ is the transverse momentum of the final state) is written
+in terms of convolution integrals of TMDs in $k_T$ space as follows:
+\begin{equation}
+\frac{d^2\sigma}{d^2\mathbf{q}_T}\propto \int
+d^2\mathbf{k}_{T1}d^2\mathbf{k}_{T2}F^{(1)}(\mathbf{k}_{T1})
+F^{(2)}(\mathbf{k}_{T2})\delta^{(2)}(\mathbf{q}_{T}-\mathbf{k}_{T1}-\mathbf{k}_{T2})\,,
+\label{eq:CrossSectionInkTSpace}
+\end{equation}
+where, to simplify the notation, I have omitted all variables that are
+not relevant for the current discussion. In turn, the single TMD can
+be written as a Fourier transform:
+\begin{equation}
+F(\mathbf{k}_{T})=\int \frac{d^2\mathbf{b}_T}{(2\pi)^2} e^{i
+  \mathbf{k}_{T}\cdot \mathbf{b}_{T}}F(\mathbf{b}_{T}) =\int \frac{d^2\mathbf{b}_T}{(2\pi)^2} e^{i
+  \mathbf{k}_{T}\cdot \mathbf{b}_{T}}f_{\rm NP}(\mathbf{b}_{T})F(\mathbf{b}_*(\mathbf{b}_{T}))=\int \frac{d^2\mathbf{b}_T}{(2\pi)^2} e^{i
+  \mathbf{k}_{T}\cdot \mathbf{b}_{T}}f_{\rm
+  NP}(\mathbf{b}_{T})\widetilde{F}(\mathbf{b}_{T})\,,
+\label{eq:FourierTransformF}
+\end{equation}
+where I have defined
+$F(\mathbf{b}_*(\mathbf{b}_{T}))\equiv
+\widetilde{F}(\mathbf{b}_{T})$. I can now write both $f_{\rm NP}$
+and $\widetilde{F}$ as Fourier tranforms. With a small abuse of
+notation:
+\begin{equation}
+f_{\rm NP}(\mathbf{b}_{T}) = \int d^2\mathbf{h}_T
+e^{-i\mathbf{h}_T\cdot \mathbf{b}_T}f_{\rm NP}(\mathbf{h}_{T})\,,\qquad \widetilde{F}(\mathbf{b}_{T}) = \int d^2\mathbf{l}_T
+e^{-i\mathbf{l}_T\cdot \mathbf{b}_T}\widetilde{F} (\mathbf{l}_{T})\,.
+\end{equation}
+Plugging these equalities into Eq.~(\ref{eq:FourierTransformF}), one
+immediately obtains:
+\begin{equation}
+F(\mathbf{k}_{T})=\int d^2\mathbf{h}_T d^2\mathbf{l}_T f_{\rm NP}(\mathbf{h}_{T})\widetilde{F}(\mathbf{l}_{T})\delta^{(2)}(\mathbf{k}_{T}-\mathbf{h}_{T}-\mathbf{l}_{T})=\int d^2\mathbf{h}_T f_{\rm NP}(\mathbf{h}_{T})\widetilde{F}(\mathbf{k}_{T}-\mathbf{h}_{T})\,,
+\end{equation}
+that in turn can be plugged into Eq.~(\ref{eq:CrossSectionInkTSpace}):
+\begin{equation}
+\frac{d^2\sigma}{d^2\mathbf{q}_T}\propto \int d^2\mathbf{h}_{T1} d^2\mathbf{h}_{T2} f_{\rm NP}^{(1)}(\mathbf{h}_{T1})
+f_{\rm NP}^{(2)}(\mathbf{h}_{T2}) \left[\int d^2\mathbf{k}_{T1}d^2\mathbf{k}_{T2}\widetilde{F}^{(1)}(\mathbf{k}_{T1}-\mathbf{h}_{T1})\widetilde{F}^{(2)}(\mathbf{k}_{T2}-\mathbf{h}_{T2})\delta^{(2)}(\mathbf{q}_{T}-\mathbf{k}_{T1}-\mathbf{k}_{T2})\right]\,.
+\end{equation}
+Now, if one wants to fit $f_{\rm NP}$ to data, the term between square
+brackets can be precomputed and tabulated. This term can be further
+manipulated as follows:
+\begin{equation}
+[\dots]=\int \frac{d^2\mathbf{b}_T}{(2\pi)^2} e^{i
+  (\mathbf{q}_{T}-\mathbf{h}_{T1}-\mathbf{h}_{T2})\cdot \mathbf{b}_{T}}F^{(1)}(\mathbf{b}_*(\mathbf{b}_{T})) F^{(2)}(\mathbf{b}_*(\mathbf{b}_{T}))\,.
+\end{equation}
+
+We now assume that $f_{\rm NP}$ and $F$ only depend on the absolute
+value of the vector of which they are functions. Considering that in
+polar coordinates:
+\begin{equation}
+\int d^2\mathbf{r}\dots = \int_0^\infty
+dr\,r\int_0^{2\pi}d\theta\dots \,,
+\end{equation}
+and defining $\theta$, $\theta_1$, and $\theta_2$ and the angles that
+$\mathbf{b}_T$ forms with $\mathbf{q}_{T}$, $-\mathbf{h}_{T1}$, and
+$-\mathbf{h}_{T2}$, respectively, one finds:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle \frac{d\sigma}{dq_T^2}&\propto& \displaystyle \int dh_{T1} dh_{T2}\,h_{T1}h_{T2}f_{\rm NP}^{(1)}(h_{T1})
+f_{\rm NP}^{(2)}(h_{T2}) \int db_T\,b_TF^{(1)}(b_*(b_{T}))
+  F^{(2)}(b_*(b_{T})) \int_{0}^{2\pi}\frac{d\theta d\theta_1
+                                                  d\theta_2}{(2\pi)^2}
+                                                  e^{i
+                                                  (\mathbf{q}_{T}-\mathbf{h}_{T1}-\mathbf{h}_{T2})\cdot
+                                                  \mathbf{b}_{T}}\\
+    \\
+    &=&\displaystyle  2\pi \int dh_{T1} dh_{T2}\,h_{T1}h_{T2}f_{\rm NP}^{(1)}(h_{T1})
+f_{\rm NP}^{(2)}(h_{T2}) \int db_T\,b_T J_0(q_Tb_T)J_0(h_{T1}b_T)J_0(h_{T2}b_T)F^{(1)}(b_*(b_{T}))
+        F^{(2)}(b_*(b_{T})) \,.
+  \end{array}
+  \label{eq:kTMasterFormula}
+\end{equation}
+
+Finally, $f_{\rm NP}$ in transverse-momentum space needs to be
+normalised as follows:
+\begin{equation}
+2\pi\int_0^\infty dh_T\,h_Tf_{\rm NP}(h_T) = 1\,,
+\end{equation}
+which also implies that $f_{\rm NP}$ for large values of $h_T$ needs
+to be suppressed strongly enough. Specifically:
+\begin{equation}
+f_{\rm NP}(h_T)\mathop{\longrightarrow}_{h_T\rightarrow \infty}<h_T^{-2-\epsilon}\,.
+\end{equation}
+Often, $f_{\rm NP}$ is taken to be exponentially suppressed.
+
+One of the complications of parameterising $f_{\rm NP}$ in $k_T$ space
+is the computation of the integral in $b_T$ in
+Eq.~(\ref{eq:kTMasterFormula}) which involves three Bessel
+functions. Indeed, the integrand oscillates wildly making an accurate
+numerical evaluation of the integral hard to achieve.
+% To this purpose, I have developed a generalisation of the Ogata
+% double-exponential quadrature able to hand this integral
+% efficiently.
+
 \subsection{Alternative to the CSS prescription}
 
 As discussed above, the CSS prescription has the purpose to avoid
@@ -951,7 +1056,7 @@ Eq.~(\ref{eq:separatation}).
 However, one can decide take a less invasive perspective to leave the
 explicit logarithms in the Sudakov unchanged while only regularising
 only $\alpha_s$ and the collinear distributions. This can be done by
-computing them at some modified scale $\mu_*(mu)$ su that:
+computing them at some modified scale $\mu_*(\mu)$ su that:
 \begin{equation}
 \begin{array}{lll}
 \mu_*(\mu)\simeq \mu &\mbox{ for } & \mu\rightarrow \infty\,,\\

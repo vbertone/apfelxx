@@ -5,5 +5,6 @@ var searchData=
   ['qmax_2',['QMax',['../classapfel_1_1QGrid.html#acd4156e722cbdc155f32d54ecc7432c0',1,'apfel::QGrid']]],
   ['qmin_3',['QMin',['../classapfel_1_1QGrid.html#a0a1450c5d3c7988817a9302953437aea',1,'apfel::QGrid']]],
   ['quarkanalyticevolutionfactor_4',['QuarkAnalyticEvolutionFactor',['../namespaceapfel.html#aeab94641441d9b0677944defca3fc91f',1,'apfel']]],
-  ['quarkevolutionfactor_5',['QuarkEvolutionFactor',['../namespaceapfel.html#a4796e9ff36296a20b1b11bcc26977420',1,'apfel::QuarkEvolutionFactor(std::map&lt; int, GtmdObjects &gt; const &amp;GtmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)'],['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel::QuarkEvolutionFactor(std::map&lt; int, TmdObjects &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)']]]
+  ['quarkevolutionfactor_5',['QuarkEvolutionFactor',['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel']]],
+  ['quarkevolutionfactorxi_6',['QuarkEvolutionFactorxi',['../namespaceapfel.html#ac0a10f8afe02267c0410b5daffeca908',1,'apfel']]]
 ];

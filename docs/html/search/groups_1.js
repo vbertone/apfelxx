@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['diagonal_20convolution_20maps_0',['Diagonal convolution maps',['../group__DiagonalBasis.html',1,'']]],
-  ['dis_20convolution_20maps_1',['DIS convolution maps',['../group__DISBases.html',1,'']]]
+  ['basis_0',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
+  ['boer_20mulders_20pdfs_1',['Boer Mulders PDFs',['../group__NLOBM.html',1,'NLO matching functions for Boer-Mulders PDFs'],['../group__NNLOBM.html',1,'NNLO matching functions for Boer-Mulders PDFs']]]
 ];

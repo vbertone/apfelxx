@@ -80,7 +80,7 @@ namespace apfel
     double                      QQEDRef;             //!< Reference scale of the QCD coupling
     CouplingEvolution           CouplingEvolution;   //!< Solution of the RGE of the couplings
     PDFEvolution                PDFEvolution;        //!< Solution of the DGLAP equations
-    double                      RenFacRatio;         //!< ratio muF / muR
+    double                      xi;                  //!< Resummation-scale parameter
     std::vector<double>         Thresholds;          //!< Heavy-quark thresholds
     std::vector<double>         Masses;              //!< Heavy-quark Masses
     MassRenScheme               MassRenScheme;       //!< Renormalization scheme for the heavy-quark masses (POLE, MSBAR)
@@ -107,7 +107,7 @@ namespace apfel
       AlphaQCDRef(0.35), QQCDRef(sqrt(2)),
       AlphaQEDRef(7.496252e-3), QQEDRef(1.777),
       CouplingEvolution(exact), PDFEvolution(exactmu),
-      RenFacRatio(1),
+      xi(1),
       Thresholds{0, 0, 0, sqrt(2), 4.5, 175},
       Masses{Thresholds},
       MassRenScheme(POLE),

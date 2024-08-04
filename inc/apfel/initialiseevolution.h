@@ -9,6 +9,7 @@
 #include "apfel/evolutionsetup.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/dglapbuilder.h"
+#include "apfel/config.h"
 
 namespace apfel
 {
@@ -118,6 +119,12 @@ namespace apfel
      * @return the _KnotArray attribute
      */
     TabulateObject<Set<Distribution>> TabulatedDistributions() const { return *_TabulatedDists; }
+
+    /**
+     * @brief Function that returns the EvolutionSetup object.
+     * @return the the _setup object
+     */
+    EvolutionSetup GetEvolutionSetup() const { return _setup; }
 
   private:
     EvolutionSetup                                           _setup;          //!< Evolution setup object

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['partonic_20species_0',['Partonic species',['../group__PartonSpecies.html',1,'']]],
-  ['perturbative_20orders_1',['Perturbative orders',['../group__PertOrds.html',1,'']]],
-  ['physical_20constants_2',['Physical constants',['../group__PhysConstants.html',1,'']]],
-  ['polarised_20evolution_20kernels_3',['Polarised evolution kernels',['../group__GPDPolSF.html',1,'']]]
+  ['heavy_20quark_20initiated_20coefficient_20functions_0',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]],
+  ['helicity_20pdfs_20g1_1',['NLO matching functions for helicity PDFs g1',['../group__NLOg1.html',1,'']]]
 ];

@@ -22,7 +22,7 @@ namespace apfel
    */
   ///@{
   /**
-   * @defgroup NLOMC NLO matching conditions
+   * @defgroup NLOMC NLO unpolarised matching conditions
    * @ingroup MatchCond
    */
   ///@{
@@ -101,7 +101,79 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNLOMC NNLO matching conditions
+   * @defgroup NLOMCpol NLO longitudinally polarised matching conditions
+   * @ingroup MatchCond
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS1polHg_L: public Expression
+  {
+  public:
+    AS1polHg_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS1polggH_L: public Expression
+  {
+  public:
+    AS1polggH_L();
+    double Local(double const&) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the HH matching.
+   */
+  class AS1polHH_L: public Expression
+  {
+  public:
+    AS1polHH_L();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) constant term for the HH
+   * matching.
+   */
+  class AS1polHH_0: public Expression
+  {
+  public:
+    AS1polHH_0();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the gH matching.
+   */
+  class AS1polgH_L: public Expression
+  {
+  public:
+    AS1polgH_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) constant term for the gH
+   * matching.
+   */
+  class AS1polgH_0: public Expression
+  {
+  public:
+    AS1polgH_0();
+    double Regular(double const& x) const;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOMC NNLO unpolarised matching conditions
    * @ingroup MatchCond
    */
   ///@{
@@ -294,7 +366,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNNLOMC NNNLO matching conditions
+   * @defgroup NNNLOMC NNNLO unpolarised matching conditions
    * @note Approximated expressions from
    * https://github.com/MSHTPDF/N3LO_additions. Details to be found in
    * https://arxiv.org/pdf/2207.04739.pdf. Logarithmic terms currently

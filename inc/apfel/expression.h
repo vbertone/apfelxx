@@ -10,8 +10,8 @@ namespace apfel
 {
   /**
    * @brief The Expression class encapsulates in a proper form a given
-   * analystic expression in such a way that it can be transformed
-   * into an operator.
+   * analytic expression in such a way that it can be transformed into
+   * an operator.
    */
   class Expression
   {

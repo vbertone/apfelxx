@@ -15,23 +15,24 @@ namespace apfel
   //_________________________________________________________________________
   Operator::Operator(Grid const& gr, Expression const& expr, double const& eps, bool const& gpd):
     _grid(gr),
+    _expr(expr),
     _eps(eps),
     _gpd(gpd)
   {
     if (gpd)
-      BuildOperatorGPD(expr, eps);
+      BuildOperatorGPD();
     else
-      BuildOperatorDGLAP(expr, eps);
+      BuildOperatorDGLAP();
   }
 
   //_________________________________________________________________________
-  void Operator::BuildOperatorDGLAP(Expression const& expr, double const& eps)
+  void Operator::BuildOperatorDGLAP()
   {
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
 
     // Scaling factor
-    const double eta = expr.eta();
+    const double eta = _expr.eta();
 
     // Number of grids
     const int ng = _grid.nGrids();
@@ -56,7 +57,7 @@ namespace apfel
         const double s = sg.Step();
 
         // Local function
-        const double L = eta * expr.Local(1 / exp(s) / eta);
+        const double L = eta * _expr.Local(1 / exp(s) / eta);
 
         // Initialise operator
         _Operator[ig].resize(1, nx);
@@ -95,10 +96,10 @@ namespace apfel
                       {
                         const double z  = y / eta;
                         const double wr = li.InterpolantLog(alpha, log(xg[beta] / y), sg);
-                        return expr.Regular(z) * wr + expr.Singular(z) * ( wr - ws );
+                        return _expr.Regular(z) * wr + _expr.Singular(z) * ( wr - ws );
                       }};
                     // Compute the integral
-                    I += Ij.integrate(exp((beta - alpha + j - 1) * s), exp((beta - alpha + j) * s), eps);
+                    I += Ij.integrate(exp((beta - alpha + j - 1) * s), exp((beta - alpha + j) * s), _eps);
                   }
                 // Add the local part
                 _Operator[ig](beta, alpha) = I + L * ws;
@@ -108,13 +109,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  void Operator::BuildOperatorGPD(Expression const& expr, double const& eps)
+  void Operator::BuildOperatorGPD()
   {
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
 
     // Get skewness from the expression
-    const double xi = 1 / expr.eta();
+    const double xi = 1 / _expr.eta();
 
     // Loop over the subgrids
     _Operator.resize(1);
@@ -141,7 +142,7 @@ namespace apfel
         // Set xg[beta] as external variable for the computation
         // of the operator (this is in general not needed but in
         // the case of GPD evolution).
-        expr.SetExternalVariable(xg[beta]);
+        _expr.SetExternalVariable(xg[beta]);
 
         // Define "kappa" variable
         const double kappa = xi / xg[beta];
@@ -180,22 +181,22 @@ namespace apfel
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
                     const double ky = kappa * y;
-                    return expr.Regular(y) * wr
-                    + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
-                    + expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
+                    return _expr.Regular(y) * wr
+                                + _expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
+                                + _expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
                   }};
                 // Compute the integral
-                _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], eps);
+                _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], _eps);
               }
             // Add PV local part from the y = 1 / kappa singularity
-            _Operator[0](beta, alpha) += wspv * ( expr.LocalPV(xg[beta] / xg[alpha + 1]) - expr.LocalPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
+            _Operator[0](beta, alpha) += wspv * ( _expr.LocalPV(xg[beta] / xg[alpha + 1]) - _expr.LocalPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
           }
         // Add the local parts: that from standard +-prescripted terms
         // ("Local") and that deriving from principal-valued integrals
         // at x = 1, i.e. from the ++-prescription ("LocalPP").
-        _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1])
-                                    + expr.LocalPP(xg[beta] / xg[beta + 1])
-                                    - (beta == 0 ? 0 : expr.LocalPP(xg[std::max(0, beta - k)] / xg[beta]));
+        _Operator[0](beta, beta) += _expr.Local(xg[beta] / xg[beta + 1])
+                                    + _expr.LocalPP(xg[beta] / xg[beta + 1])
+                                    - (beta == 0 ? 0 : _expr.LocalPP(xg[std::max(0, beta - k)] / xg[beta]));
       }
   }
 
