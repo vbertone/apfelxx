@@ -1114,6 +1114,47 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::function<Set<Distribution>(int const&, double const&)> InhomogeneousTerms(std::map<int, DglapObjects>          const& DglapObj,
+                                                                                 int                                  const& PerturbativeOrder,
+                                                                                 std::function<double(double const&)> const& Alphas,
+                                                                                 double                               const& xi)
+  {
+    // Return null pointer if the first in nf inhomogeneous-terms map
+    // is empty
+    if (DglapObj.begin()->second.InhomogeneousTerms.empty())
+      return nullptr;
+
+    if (PerturbativeOrder == 0)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        return ( Alphas(xi * exp(t / 2)) / FourPi ) * DglapObj.at(nf).InhomogeneousTerms.at(0);
+      };
+    else if (PerturbativeOrder == 1)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        const double cp  = Alphas(xi * exp(t / 2)) / FourPi;
+        const double cp2 = cp * cp;
+        const double blx = - 2 * beta0qcd(nf) * log(xi);
+        const auto iht = DglapObj.at(nf).InhomogeneousTerms;
+        return cp2 * iht.at(1) + ( cp - cp2 * blx ) * iht.at(0);
+      };
+    else if (PerturbativeOrder == 2)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        const double cp   = Alphas(xi * exp(t / 2)) / FourPi;
+        const double cp2  = cp * cp;
+        const double cp3  = cp * cp2;
+        const double blx  = - 2 * beta0qcd(nf) * log(xi);
+        const double blx2 = blx * blx;
+        const double b1   = beta1qcd(nf) / beta0qcd(nf);
+        const auto iht = DglapObj.at(nf).InhomogeneousTerms;
+        return cp3 * iht.at(2) + ( cp2 - 2 * cp3 * blx ) * iht.at(1) + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) ) * iht.at(0);
+      };
+    else
+      throw std::runtime_error(error("InhomogeneousTerms","Perturbative order not allowed."));
+  }
+
+  //_____________________________________________________________________________
   std::unique_ptr<Dglap<Distribution>> BuildDglap(std::map<int, DglapObjects>                                        const& DglapObj,
                                                   std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
                                                   double                                                             const& MuRef,
@@ -1142,7 +1183,9 @@ namespace apfel
 
     // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
-                                                                         MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), InPDFs, MuRef, Thresholds, nsteps
+                                                                         MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh),
+                                                                         InhomogeneousTerms(DglapObj, PerturbativeOrder, Alphas, xi),
+                                                                         InPDFs, MuRef, Thresholds, nsteps
                                                                         });
   }
 
@@ -1186,9 +1229,15 @@ namespace apfel
         MapUnity.insert({i, Zero});
     Set<Operator> Unity{EvolutionOperatorBasisQCD{NF(MuRef, Thresholds)}, MapUnity};
 
-    // Initialize DGLAP evolution
+    // Initialize DGLAP evolution. When computing evolution operators,
+    // no inhomogeneous terms are allowed because their presence would
+    // prevent wrinting the DGLAP evolution equations in terms of the
+    // evolution operators. In other words, evolution operators can be
+    // computed in the homogeneous case only. Set InhomogeneousTerms
+    // to nullptr.
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
-                                                                 MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh), Unity, MuRef, Thresholds, nsteps
+                                                                 MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh),
+                                                                 nullptr, Unity, MuRef, Thresholds, nsteps
                                                                 });
   }
 
@@ -1285,7 +1334,8 @@ namespace apfel
     const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
                                    DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
 
-    // Initialize DGLAP evolution
-    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, InPDFs, MuRef, Thresholds, nsteps});
+    // Initialize DGLAP evolution (no inhomogeneous terms allowed for
+    // now: set InhomogeneousTerms to nullptr).
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, nullptr, InPDFs, MuRef, Thresholds, nsteps});
   }
 }

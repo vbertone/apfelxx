@@ -9,7 +9,8 @@ var searchData=
   ['unpolarised_20partons_6',['NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons',['../group__NLOmatchLinUnp.html',1,'']]],
   ['unpolarised_20sia_7',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
   ['unpolarised_20splitting_20functions_8',['Unpolarised splitting functions',['../group__UnpSF.html',1,'Unpolarised splitting functions'],['../group__UnpSFtl.html',1,'Unpolarised splitting functions']]],
-  ['up_9',['UP',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575baba2bafcb4972bbfb147a55b003bbb319',1,'apfel']]],
-  ['upm_10',['UPM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa6ba569ad8ffbf1b7e041262576f38920',1,'apfel::EvolBasisPlusMinus']]],
-  ['upp_11',['UPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa186966248f9f60dc24f599db7217ad81',1,'apfel::EvolBasisPlusMinus']]]
+  ['unpolarised_20splitting_20functions_20for_20qed_20evolution_9',['Unpolarised splitting functions for QED evolution',['../group__UnpSFQED.html',1,'']]],
+  ['up_10',['UP',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575baba2bafcb4972bbfb147a55b003bbb319',1,'apfel']]],
+  ['upm_11',['UPM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa6ba569ad8ffbf1b7e041262576f38920',1,'apfel::EvolBasisPlusMinus']]],
+  ['upp_12',['UPP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa186966248f9f60dc24f599db7217ad81',1,'apfel::EvolBasisPlusMinus']]]
 ];

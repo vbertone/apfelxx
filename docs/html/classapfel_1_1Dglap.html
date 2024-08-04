@@ -117,9 +117,9 @@ Inheritance diagram for apfel::Dglap&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4abb8353b7d12194adbb327f7b11a560" id="r_a4abb8353b7d12194adbb327f7b11a560"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4abb8353b7d12194adbb327f7b11a560">Dglap</a> ()=delete</td></tr>
 <tr class="separator:a4abb8353b7d12194adbb327f7b11a560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab35d51b5e877e37714377404b9dca5b7" id="r_ab35d51b5e877e37714377404b9dca5b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab35d51b5e877e37714377404b9dca5b7">Dglap</a> (std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(int const &amp;, double const &amp;)&gt; const &amp;SplittingFunctions, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(bool const &amp;, int const &amp;)&gt; const &amp;MatchingConditions, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;ObjRef, double const &amp;MuRef, std::vector&lt; double &gt; const &amp;Thresholds, int const &amp;nsteps=10)</td></tr>
-<tr class="memdesc:ab35d51b5e877e37714377404b9dca5b7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Dglap.html" title="The Dglap class is specialization class of the MatchedEvolution class for the computation of the DGLA...">Dglap</a> constructor.  <br /></td></tr>
-<tr class="separator:ab35d51b5e877e37714377404b9dca5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0beff094256b49e581cf3bf78cf913c0" id="r_a0beff094256b49e581cf3bf78cf913c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0beff094256b49e581cf3bf78cf913c0">Dglap</a> (std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(int const &amp;, double const &amp;)&gt; const &amp;SplittingFunctions, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(bool const &amp;, int const &amp;)&gt; const &amp;MatchingConditions, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(int const &amp;, double const &amp;)&gt; const &amp;InhomogeneousTerms, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;ObjRef, double const &amp;MuRef, std::vector&lt; double &gt; const &amp;Thresholds, int const &amp;nsteps=10)</td></tr>
+<tr class="memdesc:a0beff094256b49e581cf3bf78cf913c0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Dglap.html" title="The Dglap class is specialization class of the MatchedEvolution class for the computation of the DGLA...">Dglap</a> constructor.  <br /></td></tr>
+<tr class="separator:a0beff094256b49e581cf3bf78cf913c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba5c1a9fca42d1cae5e369193e28c47" id="r_a2ba5c1a9fca42d1cae5e369193e28c47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ba5c1a9fca42d1cae5e369193e28c47">MatchObject</a> (bool const &amp;Up, int const &amp;nf, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;sd) const</td></tr>
 <tr class="memdesc:a2ba5c1a9fca42d1cae5e369193e28c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that matches the evolved object at the thresholds.  <br /></td></tr>
 <tr class="separator:a2ba5c1a9fca42d1cae5e369193e28c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,10 +180,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ab8723925ef85a4db6689b8c359fee2e0" id="r_ab8723925ef85a4db6689b8c359fee2e0"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(int const  &amp;, double const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8723925ef85a4db6689b8c359fee2e0">_SplittingFunctions</a></td></tr>
-<tr class="separator:ab8723925ef85a4db6689b8c359fee2e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac2106b47f9a58f40c8e659b8fd2c6f5" id="r_aac2106b47f9a58f40c8e659b8fd2c6f5"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(bool const  &amp;, int const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac2106b47f9a58f40c8e659b8fd2c6f5">_MatchingConditions</a></td></tr>
-<tr class="separator:aac2106b47f9a58f40c8e659b8fd2c6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12db0c14e38397f6b9d2f04fa70f61ab" id="r_a12db0c14e38397f6b9d2f04fa70f61ab"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(int const  &amp;, double const  &amp;)&gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12db0c14e38397f6b9d2f04fa70f61ab">_SplittingFunctions</a></td></tr>
+<tr class="separator:a12db0c14e38397f6b9d2f04fa70f61ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ebce196763aae491ed924f59feba96a" id="r_a6ebce196763aae491ed924f59feba96a"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(bool const  &amp;, int const  &amp;)&gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ebce196763aae491ed924f59feba96a">_MatchingConditions</a></td></tr>
+<tr class="separator:a6ebce196763aae491ed924f59feba96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99f0e7f5e89a0e6080f86abbdb67aed" id="r_ae99f0e7f5e89a0e6080f86abbdb67aed"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(int const  &amp;, double const  &amp;)&gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae99f0e7f5e89a0e6080f86abbdb67aed">_InhomogeneousTerms</a></td></tr>
+<tr class="separator:ae99f0e7f5e89a0e6080f86abbdb67aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -236,8 +238,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ab35d51b5e877e37714377404b9dca5b7" name="ab35d51b5e877e37714377404b9dca5b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab35d51b5e877e37714377404b9dca5b7">&#9670;&#160;</a></span>Dglap() <span class="overload">[2/2]</span></h2>
+<a id="a0beff094256b49e581cf3bf78cf913c0" name="a0beff094256b49e581cf3bf78cf913c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0beff094256b49e581cf3bf78cf913c0">&#9670;&#160;</a></span>Dglap() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,6 +255,11 @@ template&lt;class T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(bool const &amp;, int const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>MatchingConditions</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;(int const &amp;, double const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>InhomogeneousTerms</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -281,10 +288,11 @@ template&lt;class T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">SplittingFunctions</td><td>set of splitting functions </td></tr>
-    <tr><td class="paramname">MatchingConditions</td><td>set od matching conditions </td></tr>
+    <tr><td class="paramname">MatchingConditions</td><td>set of matching conditions </td></tr>
+    <tr><td class="paramname">InhomogeneousTerms</td><td>inhomogeneous term to be added to the derivative </td></tr>
     <tr><td class="paramname">ObjRef</td><td>reference object to be evolved </td></tr>
     <tr><td class="paramname">MuRef</td><td>reference scale from which the evolution starts </td></tr>
-    <tr><td class="paramname">Thresholds</td><td>vector of the heavy quark thresholds </td></tr>
+    <tr><td class="paramname">Thresholds</td><td>vector of the heavy-quark thresholds </td></tr>
     <tr><td class="paramname">nsteps</td><td>number of steps of the ODE solver (default: 10) </td></tr>
   </table>
   </dd>
@@ -458,8 +466,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aac2106b47f9a58f40c8e659b8fd2c6f5" name="aac2106b47f9a58f40c8e659b8fd2c6f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac2106b47f9a58f40c8e659b8fd2c6f5">&#9670;&#160;</a></span>_MatchingConditions</h2>
+<a id="ae99f0e7f5e89a0e6080f86abbdb67aed" name="ae99f0e7f5e89a0e6080f86abbdb67aed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99f0e7f5e89a0e6080f86abbdb67aed">&#9670;&#160;</a></span>_InhomogeneousTerms</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -470,7 +478,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;<a class="el" href="classapfel_1_1Operator.html">Operator</a>&gt;(bool const&amp;,int const&amp;)&gt; <a class="el" href="classapfel_1_1Dglap.html">apfel::Dglap</a>&lt; T &gt;::_MatchingConditions</td>
+          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;T&gt;(int const&amp;, double const&amp;)&gt; const <a class="el" href="classapfel_1_1Dglap.html">apfel::Dglap</a>&lt; T &gt;::_InhomogeneousTerms</td>
         </tr>
       </table>
   </td>
@@ -482,8 +490,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ab8723925ef85a4db6689b8c359fee2e0" name="ab8723925ef85a4db6689b8c359fee2e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8723925ef85a4db6689b8c359fee2e0">&#9670;&#160;</a></span>_SplittingFunctions</h2>
+<a id="a6ebce196763aae491ed924f59feba96a" name="a6ebce196763aae491ed924f59feba96a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ebce196763aae491ed924f59feba96a">&#9670;&#160;</a></span>_MatchingConditions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -494,7 +502,31 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;<a class="el" href="classapfel_1_1Operator.html">Operator</a>&gt;(int const&amp;,double const&amp;)&gt; <a class="el" href="classapfel_1_1Dglap.html">apfel::Dglap</a>&lt; T &gt;::_SplittingFunctions</td>
+          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;<a class="el" href="classapfel_1_1Operator.html">Operator</a>&gt;(bool const&amp;, int const&amp;)&gt; const <a class="el" href="classapfel_1_1Dglap.html">apfel::Dglap</a>&lt; T &gt;::_MatchingConditions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12db0c14e38397f6b9d2f04fa70f61ab" name="a12db0c14e38397f6b9d2f04fa70f61ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12db0c14e38397f6b9d2f04fa70f61ab">&#9670;&#160;</a></span>_SplittingFunctions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;<a class="el" href="classapfel_1_1Set.html">Set</a>&lt;<a class="el" href="classapfel_1_1Operator.html">Operator</a>&gt;(int const&amp;, double const&amp;)&gt; const <a class="el" href="classapfel_1_1Dglap.html">apfel::Dglap</a>&lt; T &gt;::_SplittingFunctions</td>
         </tr>
       </table>
   </td>
@@ -512,7 +544,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 3 2024 08:43:11 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+Generated on Sun Aug 4 2024 09:44:56 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
 </small></address>
 </div><!-- doc-content -->
 </body>
