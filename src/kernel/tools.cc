@@ -157,6 +157,26 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  template<typename T>
+  std::vector<T> EvenVector(std::vector<T> const& v)
+  {
+    std::vector<T> out;
+    for (size_t i = 0; i < v.size(); i += 2)
+      out.push_back(v[i]);
+    return out;
+  }
+
+  //_________________________________________________________________________________
+  template<typename T>
+  std::vector<T> OddVector(std::vector<T> const& v)
+  {
+    std::vector<T> out;
+    for (size_t i = 1; i < v.size(); i += 2)
+      out.push_back(v[i]);
+    return out;
+  }
+
+  //_________________________________________________________________________________
   template<>
   double dabs(double const& d)
   {
