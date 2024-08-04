@@ -13,13 +13,15 @@ namespace apfel
   template<class T>
   Dglap<T>::Dglap(std::function<Set<Operator>(int const&, double const&)> const& SplittingFunctions,
                   std::function<Set<Operator>(bool const&, int const&)>   const& MatchingConditions,
+                  std::function<Set<T>(int const&, double const&)>        const& InhomogeneousTerms,
                   Set<T>                                                  const& ObjRef,
                   double                                                  const& MuDistRef,
                   std::vector<double>                                     const& Thresholds,
                   int                                                     const& nsteps):
     MatchedEvolution<Set<T>>(ObjRef, MuDistRef, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
-    _MatchingConditions(MatchingConditions)
+    _MatchingConditions(MatchingConditions),
+    _InhomogeneousTerms(InhomogeneousTerms)
   {
   }
 
@@ -45,7 +47,10 @@ namespace apfel
   template<class T>
   Set<T> Dglap<T>::Derivative(int const& nf, double const& t, Set<T> const& f) const
   {
-    return _SplittingFunctions(nf, t) * f;
+    if (_InhomogeneousTerms == nullptr)
+      return _SplittingFunctions(nf, t) * f;
+    else
+      return _SplittingFunctions(nf, t) * f + _InhomogeneousTerms(nf, t);
   }
 
   // Fixed template types
