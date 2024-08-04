@@ -9,7 +9,7 @@ var searchData=
   ['derive1_6',['Derive1',['../classapfel_1_1DoubleObject.html#ae151e6eb6e52197beadc9c9f07ef671c',1,'apfel::DoubleObject']]],
   ['derive2_7',['Derive2',['../classapfel_1_1DoubleObject.html#a5e061ccb6c56a9da00ed02ac81baa638',1,'apfel::DoubleObject']]],
   ['derivephasespacereduction_8',['DerivePhaseSpaceReduction',['../classapfel_1_1TwoBodyPhaseSpace.html#a9757c946c2c9889e078dc0372edc4c2b',1,'apfel::TwoBodyPhaseSpace']]],
-  ['dglap_9',['Dglap',['../classapfel_1_1Dglap.html',1,'apfel::Dglap&lt; T &gt;'],['../classapfel_1_1Dglap.html#a4abb8353b7d12194adbb327f7b11a560',1,'apfel::Dglap::Dglap()=delete'],['../classapfel_1_1Dglap.html#ab35d51b5e877e37714377404b9dca5b7',1,'apfel::Dglap::Dglap(std::function&lt; Set&lt; Operator &gt;(int const &amp;, double const &amp;)&gt; const &amp;SplittingFunctions, std::function&lt; Set&lt; Operator &gt;(bool const &amp;, int const &amp;)&gt; const &amp;MatchingConditions, Set&lt; T &gt; const &amp;ObjRef, double const &amp;MuRef, std::vector&lt; double &gt; const &amp;Thresholds, int const &amp;nsteps=10)']]],
+  ['dglap_9',['Dglap',['../classapfel_1_1Dglap.html',1,'apfel::Dglap&lt; T &gt;'],['../classapfel_1_1Dglap.html#a4abb8353b7d12194adbb327f7b11a560',1,'apfel::Dglap::Dglap()=delete'],['../classapfel_1_1Dglap.html#a0beff094256b49e581cf3bf78cf913c0',1,'apfel::Dglap::Dglap(std::function&lt; Set&lt; Operator &gt;(int const &amp;, double const &amp;)&gt; const &amp;SplittingFunctions, std::function&lt; Set&lt; Operator &gt;(bool const &amp;, int const &amp;)&gt; const &amp;MatchingConditions, std::function&lt; Set&lt; T &gt;(int const &amp;, double const &amp;)&gt; const &amp;InhomogeneousTerms, Set&lt; T &gt; const &amp;ObjRef, double const &amp;MuRef, std::vector&lt; double &gt; const &amp;Thresholds, int const &amp;nsteps=10)']]],
   ['dglap_2eh_10',['dglap.h',['../dglap_8h.html',1,'']]],
   ['dglapbuilder_2eh_11',['dglapbuilder.h',['../dglapbuilder_8h.html',1,'']]],
   ['dglapobjects_12',['DglapObjects',['../structapfel_1_1DglapObjects.html',1,'apfel']]],
@@ -36,6 +36,8 @@ var searchData=
   ['doubleobject_2eh_33',['doubleobject.h',['../doubleobject_8h.html',1,'']]],
   ['down_34',['DOWN',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575ba4fc87957ec48d06ed3f39ac19360cdea',1,'apfel']]],
   ['download_35',['Download',['../index.html#autotoc_md2',1,'']]],
-  ['dwm_36',['DWM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa093e11295c2d7e75845f803dfe6346c8',1,'apfel::EvolBasisPlusMinus']]],
-  ['dwp_37',['DWP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafaa17864ef6bc5bbea03d78ee128e061d9',1,'apfel::EvolBasisPlusMinus']]]
+  ['dsigma_36',['DSIGMA',['../classapfel_1_1EvolutionBasisQCDQED.html#a68cba1f6efca2d87f18d1ee0b11f9768a5c53cfe5d095ea10c1664e4779e6949a',1,'apfel::EvolutionBasisQCDQED']]],
+  ['dvalence_37',['DVALENCE',['../classapfel_1_1EvolutionBasisQCDQED.html#a68cba1f6efca2d87f18d1ee0b11f9768af469dd6aafd0e5d64c893c838bfb0527',1,'apfel::EvolutionBasisQCDQED']]],
+  ['dwm_38',['DWM',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafa093e11295c2d7e75845f803dfe6346c8',1,'apfel::EvolBasisPlusMinus']]],
+  ['dwp_39',['DWP',['../classapfel_1_1EvolBasisPlusMinus.html#ac5d3a3f701e3f7b59f234b4740ba9aafaa17864ef6bc5bbea03d78ee128e061d9',1,'apfel::EvolBasisPlusMinus']]]
 ];
