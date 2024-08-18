@@ -515,6 +515,7 @@ to NLO in QCD to two specific cases: SIDIS first and DY second
 (incomplete).
 
 \subsubsection{Semi-inclusive deep inelastic scattering (SIDIS)}
+\label{subsec:sidisnlo}
 
 the structure of the ($p_T$-integrated) SIDIS cross section and the
 expressions of the respective hard coefficient functions can be found
@@ -878,7 +879,7 @@ where I have introduced the new distribution:
 \mathcal{D}_i(y)=\left[\frac{\ln^i(1-y)}{1-y}\right]_{x}\,,
 \end{equation}
 that upon integration between zero and $x$ (rather than between zero
-and one0 acts as standard $+$-distribution:
+and one) acts as standard $+$-distribution:
 \begin{equation}
   \int_x^1 dy\, \mathcal{D}_i(y) f(y) = \int_x^1 dy
   \left[\frac{\ln^i(1-y)}{1-y}\right]_{x}f(y) = \int_x^1 dy\frac{\ln^i(1-y)}{1-y}\left[f(y)-f(1)\right]\,,
@@ -895,8 +896,8 @@ Eq.~(\ref{eq:DoubleFuncStructGen}) becomes:
     \displaystyle O(y_1,y_2)&=&\displaystyle \left[C_{\rm LL}+\sum_{n}C_{\rm LS}^{(n)}\mathcal{K}_n(x_1) +\sum_{m}C_{\rm LS}^{(m)}\mathcal{K}_m(x_2)+\sum_{n,m}C_{\rm SS}^{(m)}\mathcal{K}_n(x_1)\mathcal{K}_m(x_2)\right]\delta(1-y_1)
                                 \delta(1-y_2)\\
 \\
-    &+&\displaystyle \delta(1-y_1)\left[\sum_{m}C_{\rm
-        LS}^{(m)}\mathcal{D}_m(y_2)+\sum_{n,m}C_{\rm SS}^{(n,m)}\mathcal{K}_n(x_1)\mathcal{D}_m(y_2)\right]\\
+    &+&\displaystyle \delta(1-y_1)\left[\sum_{m} C_{\rm
+        LS}^{(m)}\mathcal{D}_m(y_2)+\sum_{n,m}C_{\rm SS}^{(n,m)}\mathcal{K}_n(x_1) \mathcal{D}_m(y_2)\right]\\
 \\
 &+&\displaystyle \delta(1-y_1)\left[C_{\rm LR}(y_2)+\sum_{n}\mathcal{K}_{n}(x_1)C_{\rm SR}(y_2)\right]\\
 \\
@@ -946,47 +947,89 @@ x_1 x_2\int_{x_1}^1\frac{dy_1}{y_1}\int_{x_2}^1\frac{dy_2}{y_2}
 O(y_1,y_2) d^{(1)}\left(\frac{x_1}{y_1}\right)
   d^{(2)}\left(\frac{x_2}{y_2}\right)\,.
 \end{equation}
-Applying the usual interpolation procedure gives:
+The usual interpolation procedure over two independent grids
+$\{x^{(1)}_{\beta}\}$ and $\{x^{(2)}_{\delta}\}$, with
+$\beta=0,\dots, N_x^{(1)}$ and $\delta=0,\dots, N_x^{(2)}$, with
+interpolation degrees $k_1$ and $k_2$, respectively, gives:
 \begin{equation}
 \begin{array}{rcl}
-F(x_\beta,x_\delta) &=&\displaystyle
-\int_{x_\beta}^1dy_1\int_{x_\delta}^1dy_2\,
-O(y_1,y_2) \left[\frac{x_\beta}{y_1}d^{(1)}\left(\frac{x_\beta}{y_1}\right)\right]
-  \left[\frac{x_\delta}{y_2}d^{(2)}\left(\frac{x_\delta}{y_2}\right)\right]\\
+F(x^{(1)}_{\beta},x^{(2)}_{\delta}) &=&\displaystyle
+\int_{x^{(1)}_{\beta}}^1dy_1\int_{x^{(2)}_{\delta}}^1dy_2\,
+O(y_1,y_2) \left[\frac{x^{(1)}_{\beta}}{y_1}d^{(1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)\right]
+  \left[\frac{x^{(2)}_{\delta}}{y_2}d^{(2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right)\right]\\
 \\
 &=&\displaystyle
     \sum_{\alpha=0}^{N_x}\sum_{\gamma=0}^{N_x} \overline{d}^{(1)}_\alpha
-    \overline{d}^{(2)}_\gamma \left[\int_{x_\beta}^1 dy_1 \, w_{\alpha}^{(k)}\left(\frac{x_\beta}{y_1}\right) \int_{x_\delta}^1 dy_2\, w_{\gamma}^{(k)}\left(\frac{x_\delta}{y_2}\right)\,
+    \overline{d}^{(2)}_\gamma \left[\int_{x^{(1)}_{\beta}}^1 dy_1 \, w_{\alpha}^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right) \int_{x^{(2)}_{\delta}}^1 dy_2\, w_{\gamma}^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right)\,
     O(y_1,y_2)\right]\,.
 \end{array}
+\label{eq:doubleconvolution}
 \end{equation}
 This allows us to defines a ``double'' operator:
 \begin{equation}
-\Theta^{\beta\alpha,\delta\gamma}=\int_{x_\beta}^1 dy_1 \, w_{\alpha}^{(k)}\left(\frac{x_\beta}{y_1}\right) \int_{x_\delta}^1 dy_2\, w_{\gamma}^{(k)}\left(\frac{x_\delta}{y_2}\right)\,
-    O(y_1,y_2)\,,
+  \Theta^{\beta\alpha,\delta\gamma}=\int_{x^{(1)}_{\beta}}^1 dy_1 \int_{x^{(2)}_{\delta}}^1 dy_2\, w_{\alpha}^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right) w_{\gamma}^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right) O(y_1,y_2)\,,
 \end{equation}
-where the various $\mathcal{C}$ functions are involved as follows:
+so that:
 \begin{equation}
-\small
-  \begin{array}{rcl}
-    \displaystyle \Theta^{\beta\alpha,\delta\gamma}&=&\displaystyle \delta_{\beta\alpha}\delta_{\delta\gamma}C_{\rm LL} \\
-\\
-&+&\displaystyle \delta_{\beta\alpha}\int_{x_\gamma}^1dy_2 \left\{w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right)C_{\rm LS}(y_2)+w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right) C_{\rm LR}(y_2)\right\}\\
-\\
-    &+&\displaystyle
-        \int_{x_\alpha}^1dy_1\left\{w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)C_{\rm SL}(y_1) + w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)C_{\rm RL}(y_1) \right\}\delta_{\delta\gamma}\\
-\\
-&+&\displaystyle \int_{x_\alpha}^1dy_1 \int_{x_\gamma}^1dy_2
-    \bigg\{w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right)C_{\rm
-    SS}(y_1,y_2)+ w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right) C_{\rm SR}(y_1,y_2)\\
-   \\
-&+&\displaystyle 
-    w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right)w_\rho^{(k)}\left(\frac{x_\gamma}{y_2}\right)C_{\rm RS}(y_1,y_2)+
-    w_\alpha^{(k)}\left(\frac{x_\beta}{y_1}\right) w_\gamma^{(k)}\left(\frac{x_\delta}{y_2}\right) C_{\rm RR}(y_1,y_2)\bigg\}\,.
-  \end{array}
+F(x^{(1)}_{\beta},x^{(2)}_{\delta}) =\sum_{\alpha=0}^{N_x^{(1)}}\sum_{\gamma=0}^{N_x^{(2)}}\Theta^{\beta\alpha,\delta\gamma}\overline{d}^{(1)}_{\alpha}\overline{d}^{(2)}_{\gamma}\,,
 \end{equation}
+where:
+\begin{equation}
+\overline{d}^{(1)}_{\alpha} = x_\alpha d^{(1)}(x_\alpha)\,,\quad\mbox{and}\quad \overline{d}^{(2)}_{\gamma} = x_\gamma d^{(2)}(x_\gamma)\,.
+\end{equation}
+In Sect.~\ref{subsec:loggrid}, we will provide a thorough discussion
+on how to implement a double operator in {\tt APFEL++}.
 
-Now 
+% As we will see below in Sect.~\ref{subsec:loggrid}, due to the support
+% of the interpolating functions $w$, the integration ranges in $y_1$
+% and $y_2$ can be reduced and split as follows:
+% \begin{equation}
+%   \int_{x^{(1)}_\beta}^1dy_1 \int_{x^{(2)}_\delta}^1dy_2\dots \rightarrow
+% \sum_{j={\rm max}[0, \alpha + 1 - N^{(1)}_x]}^{{\rm min}[k_1, \alpha - \beta]}\sum_{l={\rm max}[0, \gamma + 1 - N^{(2)}_x]}^{{\rm min}[k_2, \gamma - \delta]}
+% \int_{x^{(1)}_{\beta}/x^{(1)}_{\alpha-j+1}}^{x^{(1)}_{\beta}/x^{(1)}_{\alpha-j}}dy_1 \int_{x^{(2)}_{\delta}/x^{(2)}_{\gamma-l+1}}^{x^{(2)}_{\delta}/x^{(2)}_{\gamma-l}}dy_2\dots\,.
+% \end{equation}
+% Despite increasing the number of integrals, this procedure allows one
+% to compute integrals of smooth functions only, thus making the whole
+% numerical computation faster and more accurate.
+
+% Considering that:
+% \begin{equation}
+%   \int_{x^{(1)}_{\beta}}^1 dy_1 \, w_{\alpha}^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)\delta(1-y_1)=\delta_{\beta\alpha}\,,\quad\mbox{and}\quad \int_{x^{(2)}_{\delta}}^1 dy_2 \,w_{\gamma}^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right) \delta(1-y_2)=\delta_{\delta\gamma}\,,
+% \end{equation}
+% and that:\footnote{Note that it should be possible to compute the
+%   integrals below analytically making the code potentially
+%   faster. However, this only concernes the initialisation
+%   phase. Therefore, for now, we compute them numerically.}
+% \begin{equation}
+%   \begin{array}{rcl}
+%   \displaystyle\int_{x^{(1)}_{\beta}}^1 dy_1 \,
+%     w_{\alpha}^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)\mathcal{D}_n(y_1)&=&\displaystyle\int_{x^{(1)}_{\beta}}^1 dy_1\,\frac{\ln^n(1-y_1)}{1-y_1}\left[w_{\alpha}^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)-\delta_{\beta\alpha}\right]\,,\\
+%     \\
+%     \displaystyle   \int_{x^{(2)}_{\delta}}^1 dy_2 \,w_{\gamma}^{(k_1)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right)\mathcal{D}_n(y_2)&=&\displaystyle\int_{x^{(2)}_{\delta}}^1 dy_2 \, \frac{\ln^n(1-y_2)}{1-y_2}\left[w_{\gamma}^{(k_1)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right)-\delta_{\delta\gamma}\right]\,,
+%   \end{array}
+% \end{equation}
+% the various $C$ functions/coefficients, that define the function $O$
+% in Eq.~(\ref{eq:DoubleFuncStructGen}), are involved in the computation
+% of $\Theta^{\beta\alpha,\delta\gamma}$ as follows:
+% \begin{equation}
+% \small
+%   \begin{array}{rcl}
+%     \displaystyle \Theta^{\beta\alpha,\delta\gamma}&=&\displaystyle \delta_{\beta\alpha}\delta_{\delta\gamma}C_{\rm LL} \\
+% \\
+% &+&\displaystyle \delta_{\beta\alpha}\int_{x_\gamma}^1dy_2 \left\{w_\gamma^{(k_1)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right)C_{\rm LS}(y_2)+w_\gamma^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right) C_{\rm LR}(y_2)\right\}\\
+% \\
+%     &+&\displaystyle
+%         \int_{x_\alpha}^1dy_1\left\{w_\alpha^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)C_{\rm SL}(y_1) + w_\alpha^{(k_2)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)C_{\rm RL}(y_1) \right\}\delta_{\delta\gamma}\\
+% \\
+% &+&\displaystyle \int_{x_\alpha}^1dy_1 \int_{x_\gamma}^1dy_2
+%     \bigg\{w_\alpha^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)w_\gamma^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right)C_{\rm
+%     SS}(y_1,y_2)+ w_\alpha^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)w_\gamma^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right) C_{\rm SR}(y_1,y_2)\\
+%    \\
+% &+&\displaystyle 
+%     w_\alpha^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right)w_\rho^{(k_2)}\left(\frac{x_\gamma}{y_2}\right)C_{\rm RS}(y_1,y_2)+
+%     w_\alpha^{(k_1)}\left(\frac{x^{(1)}_{\beta}}{y_1}\right) w_\gamma^{(k_2)}\left(\frac{x^{(2)}_{\delta}}{y_2}\right) C_{\rm RR}(y_1,y_2)\bigg\}\,.
+%   \end{array}
+% \end{equation}
 
 
 \subsubsection{Drell Yan (DY)}
@@ -1182,7 +1225,7 @@ y_2(1+y_1 y_2)}{(y_1+y_2)^2}\,.
 
 
 \newpage
-\subsection{Advantage of a logarithmic grid}
+\subsection{Advantage of a logarithmic grid}\label{subsec:loggrid}
 
 Given the particular structure of the integral $I$ in
 Eq.~(\ref{eq:ZMconv}), it turns out to be very convenient to use a
@@ -1328,6 +1371,10 @@ DGLAP-like operator. The distribution $O$ has the general structure:
 O(y)=L\delta(1-y)+\sum_{n}S^{(n)}\left[\frac{\ln^n(1-y)}{1-y}\right]_++R(y)\,.
 \end{equation}
 Each of the three terms on the r.h.s. upon integration produce:
+\footnote{Note that it should be possible to compute the second of the
+  integrals below analytically making the code potentially
+  faster. However, this only concernes the initialisation
+  phase. Therefore, for now, we compute them numerically.}
 \begin{equation}
 \small
 \begin{array}{rcl}
@@ -1487,6 +1534,53 @@ so that, one finally finds:
                                      &+&\displaystyle w_{\alpha}\left(\frac{x_\beta}{y_1}\right) \mathcal{C}_{\rm RS} (y_1,y_2) \left(w_{\gamma}\left(\frac{x_\delta}{y_2}\right)-\delta_{\gamma\delta}\right)+w_{\alpha}\left(\frac{x_\beta}{y_1}\right) \mathcal{C}_{\rm RR}(y_1,y_2) w_{\gamma}\left(\frac{x_\delta}{y_2}\right)\bigg]\,.
   \end{array}
 \end{equation}
+
+Having introduced the double operator as a new object, we are forced
+to introduce yet another object: the double distribution. Effectively,
+we have already implicitly done so in Eq.~(\ref{eq:doubleconvolution})
+where the convolution of a double operator with two single
+distributions:
+\begin{equation}
+  F_{\beta,\delta}=\Theta^{\beta\alpha,\delta\gamma}\overline{d}^{(1)}_{\alpha}\overline{d}^{(2)}_{\gamma}\,,
+\end{equation}
+(where summation signs are understood) gives rise to the double
+distribution $F_{\beta,\delta}$.\footnote{Despite having two indices,
+  double distributions should not be confused with single
+  operators. Indeed, in a double distribution the two indices run on
+  different interpolation grids, while in a single operator they run
+  on the same grid. Notationally, we will distinguish them by
+  separating indices that run on different grids by a comma (as we
+  already do for double operators).} . As a matter of fact, a bilinear
+combination of single distributions is a particular case of double
+distribution:
+\begin{equation}
+D_{\alpha,\gamma}=\sum_j\alpha_j \overline{d}^{(1)}_{j,\alpha}\overline{d}^{(2)}_{j,\gamma}\,.
+\end{equation}
+where $\alpha_i$ are scalar coefficients. Similarly, a bilinear
+combination of single operators is a particular case of double
+operator. This is exactly the kind of objects that we have used in
+Sect.~\ref{subsec:sidisnlo} to implement SIDIS at NLO accuracy, but
+the complications of NNLO corrections force us to generalise that
+strategy. This implies that the convolution of a double distribution
+with a double operator produces a double distribution:
+\begin{equation}
+  F_{\beta,\delta}=\Theta^{\beta\alpha,\delta\gamma}D_{\alpha,\gamma}\,.
+\end{equation}
+
+In conclusion, we end up with four fundamental objects: single
+distributions $d$, single operators $O$, double distributions $D$, and
+double operators $\Theta$. We now need to define their algebra,
+\textit{i.e.} the way the combine pairwise upon convolution. In doin
+so, we will omit the grid indices and indicate the convolution by
+means fo the symbol $\otimes$. Many possible combinations are possible
+but some of them are not practically useful.\footnote{For example, it
+  is possible to convolute a single distribution with a double
+  operator. However, this convolutions would give rise to a ``hybrid''
+  object that is partially a single distribution and partially a
+  single operator. Being any such object of scarce utility (so far),
+  we avoid to introduce it and also avoid considering all convolutions
+  that generate it.}
+
 
 \section{GPD-related integrals}
 

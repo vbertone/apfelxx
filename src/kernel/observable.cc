@@ -72,7 +72,7 @@ namespace apfel
     return _ConvPair[ip].CoefficientFunctions;
   }
 
-  // Specializations
+  // Specialisations
   //_________________________________________________________________________________
   template class Observable<Distribution>;
   template class Observable<Operator>;

@@ -1521,73 +1521,6 @@ B_{ij,kl}^{(1,2)}(x,z) &=& \displaystyle H_{ij}^{(0)}\tilde{S}^{(1,2)} \mathcal{
 \end{equation}
 
 The $\mathcal{O}(a_s^2)$ terms are more convoluted and read:
-% \begin{equation}
-% \begin{array}{rcl}
-%   {B}_{ij,kl}^{(2,0)}(x,z) &=&\displaystyle H_{ij}^{(2)}
-%                                \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,,\\
-%   \\
-%                            &+&\displaystyle
-%                                H_{ij}^{(1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
-%                                +
-%                                \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
-%   \\
-%                            &+&\displaystyle H_{ij}^{(0)}\mathcal{C}_{ik}^{(2,0)}(x)\delta_{jl}\delta(1-z) + 
-%                                H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
-%                                +H_{ij}^{(0)}\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(2,0)}(z)\,,\\
-%   \\
-%   {B}_{ij,kl}^{(2,1)}(x,z) &=&\displaystyle \left(H_{ij}^{(0)}\widetilde{S}^{(2,1)}+H_{ij}^{(1)}S^{(1,1)}\right)
-%                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
-%   \\
-%                           &-& \displaystyle
-%                               H_{ij}^{(1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
-%                               +
-%                               \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
-%   \\
-%                           &+&
-%                               H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)
-%                               +
-%                               \delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
-%   \\
-%                           &+&\displaystyle 
-%                               H_{ij}^{(0)}\left(-\mathcal{P}^{(1)}(x)-\sum_\alpha
-%                               \mathcal{C}_{i\alpha}^{(1,0)}(x)\otimes
-%                               \mathcal{P}_{\alpha k}^{(0)}(x)+\beta_0\mathcal{C}_{ik}^{(1,0)}(x)\right)\delta_{jl}\delta(1-z)\\
-% \\
-%  &-&\displaystyle H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{C}_{jl}^{(1,0)}(z)
-%      -H_{ij}^{(0)}\mathcal{C}_{ik}^{(1,0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
-% \\
-%                               &+&\displaystyle H_{ij}^{(0)}\delta_{jl}\delta(1-z) \left(-\mathbb{P}^{(1)}(z)-\sum_\beta
-%                               \mathbb{C}_{j\beta}^{(1,0)}(z)\otimes
-%                               \mathbb{P}_{\beta l}^{(0)}(z)+\beta_0\mathbb{C}_{jl}^{(1,0)}(z)\right) \,,\\
-%   \\
-%   {B}_{ij,kl}^{(2,2)}(x,z) &=&\displaystyle \left( H_{ij}^{(0)}\widetilde{S}^{(2,2)}+H_{ij}^{(1)}S^{(1,2)}\right)
-%                               \delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)\\
-%   \\
-%                           &+&\displaystyle
-%                               H_{ij}^{(0)}{S}^{(1,2)}\left[\mathcal{C}_{ik}^{(1,0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{C}_{jl}^{(1,0)}(z)\right]\\
-%   \\
-%                           &-&\displaystyle
-%                               H_{ij}^{(0)} S^{(1,1)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)+\delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\\
-%   \\
-%  &+& \displaystyle
-%      H_{ij}^{(0)}\mathcal{P}_{ik}^{(0)}(x)\mathbb{P}_{jl}^{(0)}(z)\\
-% \\
-%                           &+& \displaystyle H_{ij}^{(0)}\frac12\left(\sum_{\alpha}\mathcal{P}^{(0)}_{i\alpha}(x)\otimes
-%     \mathcal{P}_{\alpha k}^{(0)}(x)-\beta_0 \mathcal{P}_{ik}^{(0)}(x)\right)\delta_{jl}\delta(1-z)\\
-% \\
-%                               &+&\displaystyle H_{ij}^{(0)}\delta_{ik}\delta(1-x) \frac12 \left(\sum_{\beta}\mathbb{P}^{(0)}_{j\beta}(z)\otimes
-%     \mathbb{P}_{\beta l}^{(0)}(z) -\beta_0 \mathbb{P}_{jl}^{(0)}(z)\right)\,,\\
-%   \\
-%   {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle
-%                               H_{ij}^{(0)}\widetilde{S}^{(2,3)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z)
-%                               - H_{ij}^{(0)} S^{(1,2)}\left[\mathcal{P}_{ik}^{(0)}(x)\delta_{jl}\delta(1-z)
-%                               +
-%                               \delta_{ik}\delta(1-x)\mathbb{P}_{jl}^{(0)}(z)\right]\,,\\
-%   \\
-%   {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle H_{ij}^{(0)}\widetilde{S}^{(2,4)}\delta_{ik}\delta(1-x) \delta_{jl}\delta(1-z) \,.
-% \end{array}
-% \label{eq:BNNLO}
-% \end{equation}
 \begin{equation}
   \small
 \begin{array}{rcl}
@@ -1660,12 +1593,12 @@ H_{ij}^{(1)} \left[\mathcal{C}_{ik}^{(1)}(x) \mathbb{C}_{jl}^{(0)}(z)+
   \\
   &+&\displaystyle \left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)  \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)\bigg]\,,\\
   \\
-  {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle \tilde{S}^{(2,3)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(y)
+  {B}_{ij,kl}^{(2,3)}(x,z) &=&\displaystyle H_{ij}^{(0)}\bigg[\tilde{S}^{(2,3)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(y)
 - \tilde{S}^{(1,2)}\left[\mathcal{C}^{(0)}\otimes\mathcal{P}^{(0)}\right]_{ik}(x)\mathbb{C}_{jl}^{(0)}(z)
                                - \tilde{S}^{(1,2)}  \mathcal{C}_{ik}^{(0)}(x) \left[\mathbb{C}^{(0)}\otimes\mathbb{P}^{(0)}\right]_{jl}(z)
                                \bigg]\,,\\
   \\
-  {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle \tilde{S}^{(2,4)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)\,.
+  {B}_{ij,kl}^{(2,4)}(x,z) &=&\displaystyle H_{ij}^{(0)}\tilde{S}^{(2,4)} \mathcal{C}_{ik}^{(0)}(x) \mathbb{C}_{jl}^{(0)}(z)\,.
 \end{array}
 \label{eq:BNNLO}
 \end{equation}
