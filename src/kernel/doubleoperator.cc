@@ -154,6 +154,43 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  DoubleOperator::DoubleOperator(Operator const& O1, Operator const& O2):
+    _grid1(O1.GetGrid()),
+    _grid2(O2.GetGrid()),
+    _dexpr(DoubleExpression{O1.GetExpression(), O2.GetExpression()}),
+    _eps(std::max(O1.GetIntegrationAccuracy(), O2.GetIntegrationAccuracy()))
+  {
+    // Get single operators
+    const std::vector<matrix<double>> o1 = O1.GetOperator();
+    const std::vector<matrix<double>> o2 = O2.GetOperator();
+
+    // Get number of grids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Fill in double operator
+    _dOperator.resize(ng1);
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      {
+        const int nx1 = _grid1.GetSubGrid(ig1).nx();
+        _dOperator[ig1].resize(ng2);
+        for (int ig2 = 0; ig2 < ng2; ig2++)
+          {
+            const int nx2 = _grid2.GetSubGrid(ig2).nx();
+            _dOperator[ig1][ig2].resize(1, nx1);
+            for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(0); beta++)
+              for (int alpha = beta; alpha < (int) _dOperator[ig1][ig2].size(1); alpha++)
+                {
+                  _dOperator[ig1][ig2](beta, alpha).resize(1, nx2);
+                  for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(0); delta++)
+                    for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(1); gamma++)
+                      _dOperator[ig1][ig2](beta, alpha)(delta, gamma) = o1[ig1](beta, alpha) * o2[ig2](delta, gamma);
+                }
+          }
+      }
+  }
+
+  //_________________________________________________________________________
   DoubleOperator& DoubleOperator::operator *= (double const& s)
   {
     for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)

@@ -219,7 +219,7 @@ namespace apfel
   double Sum(Distribution const& InDist);
 
   /**
-   * @brief Function that computes the scala product bewteen two
+   * @brief Function that computes the scalar product bewteen two
    * distributions. The product is computed using the joint grids.
    * @param d1: first input distribution
    * @param d2: second input distribution

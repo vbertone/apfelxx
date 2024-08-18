@@ -9,6 +9,7 @@
 #include "apfel/doubleexpression.h"
 #include "apfel/grid.h"
 #include "apfel/matrix.h"
+#include "apfel/operator.h"
 
 namespace apfel
 {
@@ -31,6 +32,13 @@ namespace apfel
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      */
     DoubleOperator(Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr, double const& eps = 1e-5);
+
+    /**
+     * @brief The DoubleOperator constructor.
+     * @param O1: the first single operator
+     * @param O2: the second single operator
+     */
+    DoubleOperator(Operator const& O1, Operator const& O2);
 
     /**
      * @brief The Operator virtual destructor.
@@ -83,7 +91,7 @@ namespace apfel
   protected:
     Grid                                      const& _grid1;      //!< First grid on which to compute the operator
     Grid                                      const& _grid2;      //!< Second grid on which to compute the operator
-    DoubleExpression                          const& _dexpr;      //!< Expression to be used
+    DoubleExpression                          const  _dexpr;      //!< Expression to be used
     double                                    const  _eps;        //!< Integration accuracy
     std::vector<std::vector<matrix<matrix<double>>>> _dOperator;  //!< DoubleOperator values
 
