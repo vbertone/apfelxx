@@ -67,14 +67,25 @@ namespace apfel
     double Evaluate(double const& x1, double const& x2) const;
 
     /**
-     * @brief Function that evaluates the interpolated function on a given subgrid.
-     * @param x1: the value in x1 to be interpolated
-     * @param x2: the value in x2 to be interpolated
-     * @param ig1: the first subgrid index
-     * @param ig2: the second subgrid index
-     * @return the interpolated result
+     * @brief Function that evaluates the derivative of the
+     * interpolated function on the joint grid.
+     * @param x1: the value in x1 where the derivative has to be computed
+     * @param x2: the value in x2 where the derivative has to be computed
+     * @return the derivative of the interpolated function
      */
-    double Evaluate(double const& x1, double const& x2, int const& ig1, int const& ig2) const;
+    double Derive(double const& x1, double const& x2) const;
+
+    /**
+     * @brief Function that evaluates the integral of the interpolated
+     * function in the interval x1 in [a1,b1] and x2 in [a2,b2] on the
+     * joint grid.
+     * @param a1: the lower integration bound for the first variable
+     * @param b1: the upper integration bound for the first variable
+     * @param a2: the lower integration bound for the second variable
+     * @param b2: the upper integration bound for the second variable
+     * @return the integral of the interpolated function
+     */
+    double Integrate(double const& a1, double const& b1, double const& a2, double const& b2) const;
     ///@}
 
     /**
@@ -94,5 +105,12 @@ namespace apfel
     LagrangeInterpolator              const  _li2;          //!< The second Lagrange interpolator
     std::vector<std::vector<matrix<double>>> _dDSubGrid;    //!< The array with the double distribution values on the subgrids
     matrix<double>                           _dDJointGrid;  //!< The array with the double distribution values on the joint grids
+
+    friend std::ostream& operator << (std::ostream& os, DoubleDistribution const& sg);
   };
+
+  /**
+   * @brief Method which prints Interpolator with cout <<.
+   */
+  std::ostream& operator << (std::ostream& os, DoubleDistribution const& in);
 }

@@ -6,6 +6,8 @@
 
 #include "apfel/doubledistribution.h"
 
+#include <sstream>
+
 namespace apfel
 {
   //_________________________________________________________________________
@@ -85,36 +87,104 @@ namespace apfel
   //_________________________________________________________________________________
   double DoubleDistribution::Evaluate(double const& x1, double const& x2) const
   {
+    // Get summation bounds
     const std::array<int, 2> bounds1 = _li1.SumBounds(x1, _g1.GetJointGrid());
     const std::array<int, 2> bounds2 = _li2.SumBounds(x2, _g2.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> intp1(bounds1[1] - bounds1[0]);
+    std::vector<double> intp2(bounds2[1] - bounds2[0]);
+    for (int beta = 0; beta < bounds1[1] - bounds1[0]; beta++)
+      intp1[beta] = _li1.Interpolant(bounds1[0] + beta, x1, _g1.GetJointGrid());
+    for (int delta = 0; delta < bounds2[1] - bounds2[0]; delta++)
+      intp2[delta] = _li2.Interpolant(bounds2[0] + delta, x2, _g2.GetJointGrid());
+
+    // Interpolate
     double result = 0;
-    for (int beta = bounds1[0]; beta < bounds1[1]; beta++)
-      {
-        const double intp1 = _li1.Interpolant(beta, x1, _g1.GetJointGrid());
-        for (int delta = bounds2[0]; delta < bounds2[1]; delta++)
-          {
-            const double intp2 = _li2.Interpolant(delta, x2, _g2.GetJointGrid());
-            result += intp1 * intp2 * _dDJointGrid(beta, delta);
-          }
-      }
+    for (int beta = 0; beta < bounds1[1] - bounds1[0]; beta++)
+      for (int delta = 0; delta < bounds2[1] - bounds2[0]; delta++)
+        result += intp1[beta] * intp2[delta] * _dDJointGrid(beta + bounds1[0], delta + bounds2[0]);
+
     return result;
   }
 
   //_________________________________________________________________________________
-  double DoubleDistribution::Evaluate(double const& x1, double const& x2, int const& ig1, int const& ig2) const
+  double DoubleDistribution::Derive(double const& x1, double const& x2) const
   {
+    // Get summation bounds
     const std::array<int, 2> bounds1 = _li1.SumBounds(x1, _g1.GetJointGrid());
     const std::array<int, 2> bounds2 = _li2.SumBounds(x2, _g2.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> dintp1(bounds1[1] - bounds1[0]);
+    std::vector<double> dintp2(bounds2[1] - bounds2[0]);
+    for (int beta = 0; beta < bounds1[1] - bounds1[0]; beta++)
+      dintp1[beta] = _li1.DerInterpolant(bounds1[0] + beta, x1, _g1.GetJointGrid());
+    for (int delta = 0; delta < bounds2[1] - bounds2[0]; delta++)
+      dintp2[delta] = _li2.DerInterpolant(bounds2[0] + delta, x2, _g2.GetJointGrid());
+
+    // Interpolate
     double result = 0;
-    for (int beta = bounds1[0]; beta < bounds1[1]; beta++)
-      {
-        const double intp1 = _li1.Interpolant(beta, x1, _g1.GetJointGrid());
-        for (int delta = bounds2[0]; delta < bounds2[1]; delta++)
-          {
-            const double intp2 = _li2.Interpolant(delta, x2, _g2.GetJointGrid());
-            result += intp1 * intp2 * _dDSubGrid[ig1][ig2](beta, delta);
-          }
-      }
+    for (int beta = 0; beta < bounds1[1] - bounds1[0]; beta++)
+      for (int delta = 0; delta < bounds2[1] - bounds2[0]; delta++)
+        result += dintp1[beta] * dintp2[delta] * _dDJointGrid(beta + bounds1[0], delta + bounds2[0]);
+
     return result;
+  }
+
+  //_________________________________________________________________________________
+  double DoubleDistribution::Integrate(double const& a1, double const& b1, double const& a2, double const& b2) const
+  {
+    // Order integration bounds and adjust the sign if necessary
+    const double ao1  = std::min(a1, b1);
+    const double bo1  = std::max(a1, b1);
+    const double ao2  = std::min(a2, b2);
+    const double bo2  = std::max(a2, b2);
+    const int    sgn1 = (b1 > a1 ? 1 : -1);
+    const int    sgn2 = (b2 > a2 ? 1 : -1);
+
+    // Get summation bounds
+    const std::array<int, 2> boundsa1 = _li1.SumBounds(ao1, _g1.GetJointGrid());
+    const std::array<int, 2> boundsb1 = _li1.SumBounds(bo1, _g1.GetJointGrid());
+    const std::array<int, 2> boundsa2 = _li2.SumBounds(ao2, _g2.GetJointGrid());
+    const std::array<int, 2> boundsb2 = _li2.SumBounds(bo2, _g2.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> iintp1(boundsb1[1] - boundsa1[0]);
+    std::vector<double> iintp2(boundsb2[1] - boundsa2[0]);
+    for (int beta = 0; beta < boundsb1[1] - boundsa1[0]; beta++)
+      iintp1[beta] = _li1.IntInterpolant(boundsa1[0] + beta, ao1, bo1, _g1.GetJointGrid());
+    for (int delta = 0; delta < boundsb2[1] - boundsa2[0]; delta++)
+      iintp2[delta] = _li2.IntInterpolant(boundsa2[0] + delta, ao2, bo2, _g2.GetJointGrid());
+
+    // Interpolate
+    double result = 0;
+    for (int beta = 0; beta < boundsb1[1] - boundsa1[0]; beta++)
+      for (int delta = 0; delta < boundsb2[1] - boundsa2[0]; delta++)
+        result += iintp1[beta] * iintp2[delta] * _dDJointGrid(boundsa1[0] + beta, delta + boundsa2[0]);
+
+    return sgn1 * sgn2 * result;
+  }
+
+  //_________________________________________________________________________________
+  std::ostream& operator << (std::ostream& os, DoubleDistribution const& in)
+  {
+    const std::vector<std::vector<matrix<double>>> dd = in.GetDistributionSubGrid();
+    os << "DoubleDistribution: " << &in << "\n";
+    os << "DoubleDistribution on the SubGrids:" << "\n";
+    const std::ostringstream default_format;
+    os << std::scientific;
+    os.precision(2);
+    for (int i = 0; i < (int) dd.size(); i++)
+      for (int j = 0; j < (int) dd[i].size(); j++)
+        {
+          os << "D[" << i << ", " << j << "]: [";
+          for (int alpha = 0; alpha < (int) dd[i][j].size(0); alpha++)
+            for (int beta = 0; beta < (int) dd[i][j].size(1); beta++)
+              os << "{(" << alpha << ", " << beta << ") : " << dd[i][j](alpha, beta) << "} ";
+          os << "]\n";
+        }
+    os.copyfmt(default_format);
+    return os;
   }
 }

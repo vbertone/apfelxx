@@ -68,9 +68,9 @@ namespace apfel
   double Interpolator::Integrate(double const& a, double const& b) const
   {
     // Order integration bounds and adjust the sign if necessary
-    double ao  = std::min(a, b);
-    double bo  = std::max(a, b);
-    int    sgn = (b > a ? 1 : -1);
+    const double ao  = std::min(a, b);
+    const double bo  = std::max(a, b);
+    const int    sgn = (b > a ? 1 : -1);
 
     // Get summation bounds
     const std::array<int, 2> boundsa = SumBounds(ao, _grid.GetJointGrid());

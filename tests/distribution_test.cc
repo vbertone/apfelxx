@@ -6,8 +6,6 @@
 
 #include <apfel/apfelxx.h>
 
-#include <cmath>
-
 // Class to define the analytical expression of LO splitting function P0qq
 class p0qq: public apfel::Expression
 {
