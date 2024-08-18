@@ -125,7 +125,7 @@ namespace apfel
     return os;
   }
 
-  // Specializations
+  // Specialisations
   //_________________________________________________________________________________
   template class DoubleObject<Distribution>;
   template class DoubleObject<Operator>;

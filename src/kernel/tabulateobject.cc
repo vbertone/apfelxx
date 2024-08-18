@@ -161,7 +161,7 @@ namespace apfel
     t.stop();
   }
 
-  // Specializations
+  // Specialisations
   //_________________________________________________________________________________
   template class TabulateObject<double>;
   template class TabulateObject<matrix<double>>;
