@@ -57,7 +57,8 @@ namespace apfel
             // Evaluate Local-Local contribution
             const double cLL = _dexpr.LocalLocal(1 / exp(dx1), 1 / exp(dx2));
 
-            // Evaluate Local-Singular and Local-Regular on the second grid
+            // Evaluate Local-Singular and Local-Regular on the second
+            // grid.
             matrix<double> cLS_LR{1, (size_t) nx2};
             for (int delta = 0; delta < (int) cLS_LR.size(0); delta++)
               for (int gamma = delta; gamma < (int) cLS_LR.size(1); gamma++)
@@ -72,7 +73,8 @@ namespace apfel
                     cLS_LR(delta, gamma) += Ik.integrate(exp((delta - gamma + k - 1) * dx2), exp((delta - gamma + k) * dx2), _eps);
                   }
 
-            // Evaluate Singular-Local and Regular-Local on the first grid
+            // Evaluate Singular-Local and Regular-Local on the first
+            // grid.
             matrix<double> cSL_RL{1, (size_t) nx1};
             for (int beta = 0; beta < (int) cSL_RL.size(0); beta++)
               for (int alpha = beta; alpha < (int) cSL_RL.size(1); alpha++)
@@ -96,8 +98,8 @@ namespace apfel
             // Resize operator w.r.t. the first variable
             _dOperator[ig1][ig2].resize(1, nx1);
 
-            // Loop over the index beta. In fact beta = 0 because the size
-            // of the first dimension of "_Operator" is one.
+            // Loop over the index beta. In fact beta = 0 because the
+            // size of the first dimension of "_Operator" is one.
             for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(0); beta++)
               {
                 // Loop over the index alpha
@@ -106,17 +108,20 @@ namespace apfel
                     // Resize operator w.r.t. the second variable
                     _dOperator[ig1][ig2](beta, alpha).resize(1, nx2);
 
-                    // Weight of the subtraction term w.r.t the first grid
+                    // Weight of the subtraction term w.r.t. the first
+                    // grid
                     const double ws1 = (beta == alpha ? 1 : 0);
 
-                    // Loop over the index delta. In fact delta = 0 because the size
-                    // of the first dimension of "_Operator" is one.
+                    // Loop over the index delta. In fact, delta = 0
+                    // because the size of the first dimension of
+                    // "_Operator" is one.
                     for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(0); delta++)
                       {
                         // Loop over the index gamma
                         for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(1); gamma++)
                           {
-                            // Weight of the subtraction term w.r.t the first grid
+                            // Weight of the subtraction term
+                            // w.r.t. the first grid.
                             const double ws2 = (delta == gamma ? 1 : 0);
 
                             // Initialise integral
@@ -160,6 +165,11 @@ namespace apfel
     _dexpr(DoubleExpression{O1.GetExpression(), O2.GetExpression()}),
     _eps(std::max(O1.GetIntegrationAccuracy(), O2.GetIntegrationAccuracy()))
   {
+    // Stop the computation if any of the two operators is of GPD
+    // type. Still impossible to handle here.
+    if (O1.IsGPD() || O2.IsGPD())
+      throw std::runtime_error(error("DoubleOperator::DoubleOperator", "GPD double operators cannot be handled yet."));
+
     // Get single operators
     const std::vector<matrix<double>> o1 = O1.GetOperator();
     const std::vector<matrix<double>> o2 = O2.GetOperator();
@@ -188,6 +198,68 @@ namespace apfel
                 }
           }
       }
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution DoubleOperator::operator *= (DoubleDistribution const& d) const
+  {
+    // Fast method to check that we are using the same Grid
+    if (&_grid1 != &d.GetFirstGrid() || &_grid2 != &d.GetSecondGrid())
+      throw std::runtime_error(error("DoubleOperator::operator *=", "DoubleOperator and DoubleDistribution grids do not match."));
+
+    // Get numbers of subgrids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Get maps of indices map from joint to subgrids
+    const std::vector<std::vector<int>>& jsmap1 = _grid1.JointToSubMap();
+    const std::vector<std::vector<int>>& jsmap2 = _grid2.JointToSubMap();
+
+    // Get joint distribution
+    const matrix<double>& dj = d.GetDistributionJointGrid();
+
+    // Initialise output vectors
+    matrix<double> j(dj.size(0), dj.size(1));
+    std::vector<std::vector<matrix<double>>> s(ng1, std::vector<matrix<double>>(ng2));
+
+    // Get number of grid intervals in the definition range of the
+    // joint grids.
+    const int nx1 = _grid1.GetJointGrid().nx();
+    const int nx2 = _grid2.GetJointGrid().nx();
+
+    // Get map of indices map from sub to joint to grids
+    const std::vector<std::pair<int, int>>& sjmap1 = _grid1.SubToJointMap();
+    const std::vector<std::pair<int, int>>& sjmap2 = _grid2.SubToJointMap();
+
+    // Construct joint distributions first. The product between the
+    // operator and the distribution is done exploiting the symmetry
+    // of the operator, which implies that it has one line
+    // only for each pair of indices.
+    for (int beta = 0; beta < nx1; beta++)
+      {
+        const std::pair<int, int> m1 = sjmap1[beta];
+        for (int delta = 0; delta < nx2; delta++)
+          {
+            const std::pair<int, int> m2 = sjmap2[beta];
+            for (int alpha = m1.second; alpha < _grid1.GetSubGrid(m1.first).nx(); alpha++)
+              for (int gamma = m2.second; gamma < _grid2.GetSubGrid(m2.first).nx(); gamma++)
+                j(beta, delta) += _dOperator[m1.first][m2.first](0, alpha - m1.second)(0, gamma - m2.second) * dj(jsmap1[m1.first][alpha], jsmap2[m2.first][gamma]);
+          }
+      }
+
+    // Compute the the distribution on the subgrids
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      for (int ig2 = 0; ig2 < ng2; ig2++)
+        {
+          // Resize output on the "ig1-ig2"-th subgrid
+          s[ig1][ig2].resize(d.GetDistributionSubGrid()[ig1][ig2].size(0), d.GetDistributionSubGrid()[ig1][ig2].size(1));
+          for (int alpha = 0; alpha < _grid1.GetSubGrid(ig1).nx(); alpha++)
+            for (int gamma = 0; gamma < _grid2.GetSubGrid(ig2).nx(); gamma++)
+              s[ig1][ig2](alpha, gamma) += j(jsmap1[ig1][alpha], jsmap2[ig2][gamma]);
+        }
+
+    // Return double distribution object
+    return DoubleDistribution{_grid1, _grid2, s, j};
   }
 
   //_________________________________________________________________________
@@ -223,7 +295,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
-      throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match"));
+      throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match."));
 
     for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
       for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
@@ -241,7 +313,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
-      throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match"));
+      throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match."));
 
     for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
       for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
@@ -251,6 +323,61 @@ namespace apfel
               for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
                 _dOperator[ig1][ig2](alpha, beta)(gamma, delta) -= o._dOperator[ig1][ig2](alpha, beta)(gamma, delta);
 
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator *= (DoubleOperator const& o)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
+      throw std::runtime_error(error("DoubleOperator::operator *=", "Grids do not match."));
+
+    const std::vector<std::vector<matrix<matrix<double>>>> v = _dOperator;
+    for (int ig1 = 0; ig1 < (int) v.size(); ig1++)
+      for (int ig2 = 0; ig2 < (int) v[ig1].size(); ig2++)
+        {
+          // Set operator entries to zero
+          _dOperator[ig1][ig2].set(0);
+
+          // The product between the operators is done ussuming that the
+          // first dimension of both pair of indices is one, which
+          // allows us to exploit the symmetry of the operators deriving
+          // from the logarithmic distribution of the nodes.
+          for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+            for (int delta = 0; delta < (int) _dOperator[ig1][ig2](0, beta).size(1); delta++)
+              for (int alpha = 0; alpha <= beta; alpha++)
+                for (int gamma = 0; gamma <= delta; gamma++)
+                  _dOperator[ig1][ig2](0, beta)(0, delta) += v[ig1][ig2](0, alpha)(0, gamma) * o._dOperator[ig1][ig2](0, beta - alpha)(0, delta - gamma);
+        }
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator = (DoubleOperator const& o)
+  {
+    if (this != &o)
+      *this = o;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator *= (std::function<double(double const&, double const&)> f)
+  {
+    for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
+      {
+        const std::vector<double>& sg1 = _grid1.GetSubGrid(ig1).GetGrid();
+        for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
+          {
+            const std::vector<double>& sg2 = _grid2.GetSubGrid(ig2).GetGrid();
+            for (int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(0); alpha++)
+              for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+                for (int gamma = 0; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(0); gamma++)
+                  for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
+                    _dOperator[ig1][ig2](alpha, beta)(gamma, delta) *= f(sg1[beta], sg2[delta]);
+          }
+      }
     return *this;
   }
 

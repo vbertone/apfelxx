@@ -50,6 +50,18 @@ namespace apfel
      * @param d2: second single-distribution
      */
     DoubleDistribution(Distribution const& d1, Distribution const& d2);
+
+    /**
+     * @brief The DoubleDistribution constructor
+     * @param g1: the Grid object that defines the first x-space interpolation grid
+     * @param g2: the Grid object that defines the second x-space interpolation grid
+     * @param distsubgrid: the distribution on the subgrids
+     * @param distjointgrid: the distribution on the joint grid
+     */
+    DoubleDistribution(Grid                                     const& g1,
+                       Grid                                     const& g2,
+                       std::vector<std::vector<matrix<double>>> const& distsubgrid,
+                       matrix<double>                           const& distjointgrid);
     ///@}
 
     /**

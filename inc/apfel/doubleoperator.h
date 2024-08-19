@@ -10,6 +10,7 @@
 #include "apfel/grid.h"
 #include "apfel/matrix.h"
 #include "apfel/operator.h"
+#include "apfel/doubledistribution.h"
 
 namespace apfel
 {
@@ -49,11 +50,18 @@ namespace apfel
      * @name Binary operators
      */
     ///@{
-    DoubleOperator& operator *= (double const& s);         //!< this *= Scalar
-    DoubleOperator& operator /= (double const& s);         //!< this /= Scalar
-    DoubleOperator& operator += (DoubleOperator const& o); //!< this += Operator
-    DoubleOperator& operator -= (DoubleOperator const& o); //!< this -= Operator
+    DoubleDistribution operator *= (DoubleDistribution const& d) const;                  //!< this *= Distribution
+    DoubleOperator& operator *= (double const& s);                                       //!< this *= Scalar
+    DoubleOperator& operator /= (double const& s);                                       //!< this /= Scalar
+    DoubleOperator& operator += (DoubleOperator const& o);                               //!< this += Operator
+    DoubleOperator& operator -= (DoubleOperator const& o);                               //!< this -= Operator
+    DoubleOperator& operator *= (DoubleOperator const& o);                               //!< this *= Operator
+    DoubleOperator& operator  = (DoubleOperator const& o);                               //!< this  = Operator
+    DoubleOperator& operator *= (std::function<double(double const&, double const&)> f); //!< This *= Function
+
     ///@}
+
+
 
     /**
      * @brief Function that returns the first Grid object associated

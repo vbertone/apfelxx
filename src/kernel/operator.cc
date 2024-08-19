@@ -305,7 +305,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &d.GetGrid())
-      throw std::runtime_error(error("Operator::operator *=", "Operator and Distribution grids do not match"));
+      throw std::runtime_error(error("Operator::operator *=", "Operator and Distribution grids do not match."));
 
     // Get number of subgrids
     const int ng = _grid.nGrids();
@@ -317,7 +317,7 @@ namespace apfel
     const std::vector<double>& dj = d.GetDistributionJointGrid();
 
     // Initialise output vectors
-    std::vector<double> j(d.GetDistributionJointGrid().size(), 0);
+    std::vector<double> j(dj.size(), 0);
     std::vector<std::vector<double>> s(ng);
 
     // Get number of grid intervals in the definition range of the
@@ -362,7 +362,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator *=", "Grids do not match"));
+      throw std::runtime_error(error("Operator::operator *=", "Grids do not match."));
 
     const std::vector<matrix<double>> v = _Operator;
     for (int ig = 0; ig < (int) v.size(); ig++)
@@ -438,7 +438,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator +=", "Grids do not match"));
+      throw std::runtime_error(error("Operator::operator +=", "Grids do not match."));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
@@ -453,7 +453,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator +=", "Grids do not match"));
+      throw std::runtime_error(error("Operator::operator +=", "Grids do not match."));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)

@@ -85,6 +85,20 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  DoubleDistribution::DoubleDistribution(Grid                                     const& g1,
+                                         Grid                                     const& g2,
+                                         std::vector<std::vector<matrix<double>>> const& distsubgrid,
+                                         matrix<double>                           const& distjointgrid):
+    _g1(g1),
+    _g2(g2),
+    _li1(LagrangeInterpolator{_g1}),
+    _li2(LagrangeInterpolator{_g1}),
+    _dDSubGrid(distsubgrid),
+    _dDJointGrid(distjointgrid)
+  {
+  }
+
+  //_________________________________________________________________________________
   double DoubleDistribution::Evaluate(double const& x1, double const& x2) const
   {
     // Get summation bounds

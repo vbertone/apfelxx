@@ -15,8 +15,10 @@ namespace apfel
   //_________________________________________________________________________
   template<class T>
   matrix<T>::matrix(size_t const& row, size_t const& col, std::vector<T> const& d):
-    _size{{row, col}},
-  _data(d.empty() ? std::vector<T>(row * col) : d)
+    // *INDENT-OFF*
+    _size(std::array<size_t, 2>{row, col}),
+    _data(d.empty() ? std::vector<T>(row * col) : d)
+    // *INDENT-ON*
   {
   }
 
