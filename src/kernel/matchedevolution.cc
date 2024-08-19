@@ -10,6 +10,8 @@
 #include "apfel/set.h"
 #include "apfel/ode.h"
 #include "apfel/doubleobject.h"
+#include "apfel/doubledistribution.h"
+#include "apfel/doubleoperator.h"
 
 #include <algorithm>
 
@@ -122,4 +124,6 @@ namespace apfel
   template class MatchedEvolution<DoubleObject<Operator, Distribution>>;       //<! Double object of operators and distributions
   template class MatchedEvolution<Set<DoubleObject<Distribution, Operator>> >; //<! Set of double object of distributions and operators
   template class MatchedEvolution<Set<DoubleObject<Operator, Distribution>> >; //<! Set of double object of operators and distributions
+  template class MatchedEvolution<DoubleDistribution>;                         //<! Double distribution
+  template class MatchedEvolution<DoubleOperator>;                             //<! Double operator
 }

@@ -150,8 +150,8 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // x-space and z-space grids
-  const apfel::Grid gx{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 3}}};
-  const apfel::Grid gz{{apfel::SubGrid{100, 1e-3, 3}, apfel::SubGrid{100, 2e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 9e-1, 3}}};
+  const apfel::Grid gx{{apfel::SubGrid{100, 1e-3, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
+  const apfel::Grid gz{{apfel::SubGrid{100, 1e-2, 3}, apfel::SubGrid{60, 2e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(gx, Thresholds), apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
@@ -253,23 +253,28 @@ int main()
     return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( yp * ( ( O20qq + coup * O21qq ) * distqq + coup * ( O21gq * distgq + O21qg * distqg ) )
                                                  - coup * ( y2 * ( OL1qq * distqq + OL1gq * distgq + OL1qg * distqg ) ) );
   };
+  const apfel::TabulateObject<apfel::DoubleDistribution> TabCrossSectionDD{CrossSectionDD, 50, 1, 10, 3, Thresholds};
 
   // Define kinematics
-  const double x = 0.01;
-  const double z = 0.4;
-  const double Q = 2;
+  const double x  = 0.01;
+  const double z  = 0.4;
+  const double Q  = 2;
+  const double op = 1 + apfel::eps3;
+  const double om = 1 - apfel::eps3;
 
   // Print value
   std::cout << std::scientific << std::endl;
   t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDO(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Evaluate(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / ( ( op - om ) * Q ) / ( ( op - om ) * x ) / ( ( op - om ) * z ) << std::endl;
   t.stop();
   t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Evaluate(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / ( ( op - om ) * Q ) / ( ( op - om ) * x ) / ( ( op - om ) * z ) << std::endl;
   t.stop();
-
-  //std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Evaluate(Q).Evaluate(x, z) << std::endl;
-  //std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Integrate(Q*(1-apfel::eps3), Q*(1+apfel::eps3)).Integrate(x*(1-apfel::eps3), x*(1+apfel::eps3), z*(1-apfel::eps3), z*(1+apfel::eps3)) / ( 2 * apfel::eps3 * Q ) / ( 2 * apfel::eps3 * x ) / ( 2 * apfel::eps3 * z ) << "\n" << std::endl;
+  std::cout << std::endl;
 
   return 0;
 }

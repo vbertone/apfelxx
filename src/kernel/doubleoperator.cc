@@ -40,6 +40,7 @@ namespace apfel
         const int nx1 = sg1.nx();
         const int id1 = sg1.InterDegree();
         const double dx1 = sg1.Step();
+        const double edx1 = exp(-dx1);
 
         // Resize operator w.r.t. the second grid
         _dOperator[ig1].resize(ng2);
@@ -53,41 +54,50 @@ namespace apfel
             const int nx2 = sg2.nx();
             const int id2 = sg2.InterDegree();
             const double dx2 = sg2.Step();
+            const double edx2 = exp(-dx2);
 
             // Evaluate Local-Local contribution
-            const double cLL = _dexpr.LocalLocal(1 / exp(dx1), 1 / exp(dx2));
+            const double cLL = _dexpr.LocalLocal(edx1, edx2);
 
             // Evaluate Local-Singular and Local-Regular on the second
             // grid.
             matrix<double> cLS_LR{1, (size_t) nx2};
             for (int delta = 0; delta < (int) cLS_LR.size(0); delta++)
               for (int gamma = delta; gamma < (int) cLS_LR.size(1); gamma++)
-                for (int k = 0; k < std::min(id2, gamma - delta) + 1; k++)
-                  {
-                    const double ws2 = (delta == gamma ? 1 : 0);
-                    const Integrator Ik{[&] (double const& y2) -> double
-                      {
-                        const double wr2 = li2.InterpolantLog(gamma, log(xg2[delta] / y2), sg2);
-                        return _dexpr.LocalSingular(1 / exp(dx1), y2) * ( wr2 - ws2 ) + _dexpr.LocalRegular(1 / exp(dx1), y2) * wr2;
-                      }};
-                    cLS_LR(delta, gamma) += Ik.integrate(exp((delta - gamma + k - 1) * dx2), exp((delta - gamma + k) * dx2), _eps);
-                  }
+                {
+                  const double ws2 = (delta == gamma ? 1 : 0);
+                  for (int k = 0; k < std::min(id2, gamma - delta) + 1; k++)
+                    {
+                      const double b2 = exp((delta - gamma + k) * dx2);
+                      const double a2 = b2 * edx2;
+                      const Integrator Ik{[&] (double const& y2) -> double
+                        {
+                          const double wr2 = li2.InterpolantLog(gamma, log(xg2[delta] / y2), sg2);
+                          return _dexpr.LocalSingular(edx1, y2) * ( wr2 - ws2 ) + _dexpr.LocalRegular(edx1, y2) * wr2;
+                        }};
+                      cLS_LR(delta, gamma) += Ik.integrate(a2, b2, _eps);
+                    }
+                }
 
             // Evaluate Singular-Local and Regular-Local on the first
             // grid.
             matrix<double> cSL_RL{1, (size_t) nx1};
             for (int beta = 0; beta < (int) cSL_RL.size(0); beta++)
               for (int alpha = beta; alpha < (int) cSL_RL.size(1); alpha++)
-                for (int j = 0; j < std::min(id1, alpha - beta) + 1; j++)
-                  {
-                    const double ws1 = (beta == alpha ? 1 : 0);
-                    const Integrator Ij{[&] (double const& y1) -> double
-                      {
-                        const double wr1 = li1.InterpolantLog(alpha, log(xg1[beta] / y1), sg1);
-                        return ( wr1 - ws1 ) * _dexpr.SingularLocal(y1, 1 / exp(dx2)) + wr1 * _dexpr.RegularLocal(y1, 1 / exp(dx2));
-                      }};
-                    cSL_RL(beta, alpha) += Ij.integrate(exp((beta - alpha + j - 1) * dx1), exp((beta - alpha + j) * dx1), _eps);
-                  }
+                {
+                  const double ws1 = (beta == alpha ? 1 : 0);
+                  for (int j = 0; j < std::min(id1, alpha - beta) + 1; j++)
+                    {
+                      const double b1 = exp((beta - alpha + j) * dx1);
+                      const double a1 = b1 * edx1;
+                      const Integrator Ij{[&] (double const& y1) -> double
+                        {
+                          const double wr1 = li1.InterpolantLog(alpha, log(xg1[beta] / y1), sg1);
+                          return ( wr1 - ws1 ) * _dexpr.SingularLocal(y1, edx2) + wr1 * _dexpr.RegularLocal(y1, edx2);
+                        }};
+                      cSL_RL(beta, alpha) += Ij.integrate(a1, b1, _eps);
+                    }
+                }
 
             // Finally move to compute Singular-Singular,
             // Singular-Regular, Regular-Singular, and Regular-Regular
@@ -102,6 +112,9 @@ namespace apfel
             // size of the first dimension of "_Operator" is one.
             for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(0); beta++)
               {
+                // Useful precomputation
+                const double lxg1beta = log(xg1[beta]);
+
                 // Loop over the index alpha
                 for (int alpha = beta; alpha < (int) _dOperator[ig1][ig2].size(1); alpha++)
                   {
@@ -112,11 +125,17 @@ namespace apfel
                     // grid
                     const double ws1 = (beta == alpha ? 1 : 0);
 
+                    // Starting value for the integration in y1
+                    const double b10 = exp(( beta - alpha ) * dx1);
+
                     // Loop over the index delta. In fact, delta = 0
                     // because the size of the first dimension of
                     // "_Operator" is one.
                     for (int delta = 0; delta < (int) _dOperator[ig1][ig2](beta, alpha).size(0); delta++)
                       {
+                        // Useful precomputation
+                        const double lxg2delta = log(xg2[delta]);
+
                         // Loop over the index gamma
                         for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](beta, alpha).size(1); gamma++)
                           {
@@ -124,30 +143,37 @@ namespace apfel
                             // w.r.t. the first grid.
                             const double ws2 = (delta == gamma ? 1 : 0);
 
+                            // Starting value for the integration in y2
+                            const double b20 = exp(( delta - gamma ) * dx2);
+
                             // Initialise integral
                             double cSS_SR_RS_RR = 0;
 
                             // Run over the grid intervals
+                            double b1 = b10;
                             for (int j = 0; j < std::min(id1, alpha - beta) + 1; j++)
                               {
+                                double b2 = b20;
                                 for (int k = 0; k < std::min(id2, gamma - delta) + 1; k++)
                                   {
                                     const Integrator Iy1{[&] (double const& y1) -> double
                                       {
-                                        const double wr1 = li1.InterpolantLog(alpha, log(xg1[beta] / y1), sg1);
+                                        const double wr1 = li1.InterpolantLog(alpha, lxg1beta - log(y1), sg1);
                                         const Integrator Iy1y2{
                                           [&] (double const& y2) -> double
                                           {
-                                            const double wr2 = li2.InterpolantLog(gamma, log(xg2[delta] / y2), sg2);
+                                            const double wr2 = li2.InterpolantLog(gamma, lxg2delta - log(y2), sg2);
                                             return ( wr1 - ws1 ) * _dexpr.SingularSingular(y1, y2) * ( wr2 - ws2 )
                                                                          + ( wr1 - ws1 ) * _dexpr.SingularRegular(y1, y2) * wr2
                                                                          + wr1 * _dexpr.RegularSingular(y1, y2) * ( wr2 - ws2 )
                                                                          + wr1 * _dexpr.RegularRegular(y1, y2) * wr2;
                                           }};
-                                        return Iy1y2.integrate(exp((delta - gamma + k - 1) * dx2), exp((delta - gamma + k) * dx2), _eps);
+                                        return Iy1y2.integrate(b2 * edx2, b2, _eps);
                                       }};
-                                    cSS_SR_RS_RR += Iy1.integrate(exp((beta - alpha + j - 1) * dx1), exp((beta - alpha + j) * dx1), _eps);
+                                    cSS_SR_RS_RR += Iy1.integrate(b1 * edx1, b1, _eps);
+                                    b2 /= edx2;
                                   }
+                                b1 /= edx1;
                               }
                             _dOperator[ig1][ig2](beta, alpha)(delta, gamma) = ws1 * cLL * ws2 + ws1 * cLS_LR(delta, gamma) + cSL_RL(beta, alpha) * ws2 + cSS_SR_RS_RR;
                           }

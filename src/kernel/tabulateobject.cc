@@ -9,6 +9,8 @@
 #include "apfel/operator.h"
 #include "apfel/doubleobject.h"
 #include "apfel/set.h"
+#include "apfel/doubledistribution.h"
+#include "apfel/doubleoperator.h"
 #include "apfel/timer.h"
 
 #include<algorithm>
@@ -175,6 +177,8 @@ namespace apfel
   template class TabulateObject<DoubleObject<Operator, Distribution>>;
   template class TabulateObject<Set<DoubleObject<Distribution, Operator>> >;
   template class TabulateObject<Set<DoubleObject<Operator, Distribution>> >;
+  template class TabulateObject<DoubleDistribution>;
+  template class TabulateObject<DoubleOperator>;
 
   //_________________________________________________________________________________
   template<>
