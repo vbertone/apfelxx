@@ -49,7 +49,7 @@ int main()
             << std::endl;
   for (auto const& x : xlha)
     {
-      const std::map<int, double> DistMap = apfel::QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x,mu));
+      const std::map<int, double> DistMap = apfel::QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x, mu));
       std::cout.precision(1);
       std::cout << x;
       std::cout.precision(4);

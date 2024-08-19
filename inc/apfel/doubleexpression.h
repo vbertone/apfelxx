@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include "apfel/expression.h"
-
 namespace apfel
 {
   /**
@@ -31,7 +29,7 @@ namespace apfel
      * @param expr1: first expression
      * @param expr2: second expression
      */
-    DoubleExpression(Expression const& expr1 = Expression{}, Expression const& expr2 = Expression{});
+    DoubleExpression();
     ///@}
 
     /**
@@ -45,60 +43,56 @@ namespace apfel
      * @brief Virtual local-local term.
      * @return The local-local term at x
      */
-    virtual double LocalLocal(double const& x1, double const& x2) const { return _expr1.Local(x1) * _expr2.Local(x2); }
+    virtual double LocalLocal(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual local-singular term.
      * @return The local-singular term at x
      */
-    virtual double LocalSingular(double const& x1, double const& x2) const { return _expr1.Local(x1) * _expr2.Singular(x2); }
+    virtual double LocalSingular(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual local-regular term.
      * @return The local-regular term at x
      */
-    virtual double LocalRegular(double const& x1, double const& x2) const { return _expr1.Local(x1) * _expr2.Regular(x2); }
+    virtual double LocalRegular(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual singular-local term.
      * @return The singular-local term at x
      */
-    virtual double SingularLocal(double const& x1, double const& x2) const { return _expr1.Singular(x1) * _expr2.Local(x2); }
+    virtual double SingularLocal(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual singular-singular term.
      * @return The singular-singular term at x
      */
-    virtual double SingularSingular(double const& x1, double const& x2) const { return _expr1.Singular(x1) * _expr2.Singular(x2); }
+    virtual double SingularSingular(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual singular-regular term.
      * @return The singular-regular term at x
      */
-    virtual double SingularRegular(double const& x1, double const& x2) const { return _expr1.Singular(x1) * _expr2.Regular(x2); }
+    virtual double SingularRegular(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual regular-local term.
      * @return The regular-local term at x
      */
-    virtual double RegularLocal(double const& x1, double const& x2) const { return _expr1.Regular(x1) * _expr2.Local(x2); }
+    virtual double RegularLocal(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual regular-singular term.
      * @return The regular-singular term at x
      */
-    virtual double RegularSingular(double const& x1, double const& x2) const { return _expr1.Regular(x1) * _expr2.Singular(x2); }
+    virtual double RegularSingular(double const&, double const&) const { return 0; }
 
     /**
      * @brief Virtual regular-regular term.
      * @return The regular-regular term at x
      */
-    virtual double RegularRegular(double const& x1, double const& x2) const { return _expr1.Regular(x1) * _expr2.Regular(x2); }
+    virtual double RegularRegular(double const&, double const&) const { return 0; }
     ///@}
-
-  private:
-    Expression const& _expr1; //!< First expression
-    Expression const& _expr2; //!< Second expression
   };
   ///@}
 }

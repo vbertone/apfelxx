@@ -115,10 +115,10 @@ namespace apfel
                     // Loop over the index delta. In fact, delta = 0
                     // because the size of the first dimension of
                     // "_Operator" is one.
-                    for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(0); delta++)
+                    for (int delta = 0; delta < (int) _dOperator[ig1][ig2](beta, alpha).size(0); delta++)
                       {
                         // Loop over the index gamma
-                        for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(1); gamma++)
+                        for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](beta, alpha).size(1); gamma++)
                           {
                             // Weight of the subtraction term
                             // w.r.t. the first grid.
@@ -159,10 +159,10 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  DoubleOperator::DoubleOperator(Operator const& O1, Operator const& O2):
+  DoubleOperator::DoubleOperator(Operator const& O1, Operator const& O2, DoubleExpression const& dexpr):
     _grid1(O1.GetGrid()),
     _grid2(O2.GetGrid()),
-    _dexpr(DoubleExpression{O1.GetExpression(), O2.GetExpression()}),
+    _dexpr(dexpr),
     _eps(std::max(O1.GetIntegrationAccuracy(), O2.GetIntegrationAccuracy()))
   {
     // Stop the computation if any of the two operators is of GPD
@@ -240,7 +240,7 @@ namespace apfel
         const std::pair<int, int> m1 = sjmap1[beta];
         for (int delta = 0; delta < nx2; delta++)
           {
-            const std::pair<int, int> m2 = sjmap2[beta];
+            const std::pair<int, int> m2 = sjmap2[delta];
             for (int alpha = m1.second; alpha < _grid1.GetSubGrid(m1.first).nx(); alpha++)
               for (int gamma = m2.second; gamma < _grid2.GetSubGrid(m2.first).nx(); gamma++)
                 j(beta, delta) += _dOperator[m1.first][m2.first](0, alpha - m1.second)(0, gamma - m2.second) * dj(jsmap1[m1.first][alpha], jsmap2[m2.first][gamma]);
@@ -379,6 +379,60 @@ namespace apfel
           }
       }
     return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (DoubleOperator lhs, DoubleDistribution const& rhs)
+  {
+    return lhs *= rhs;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (DoubleOperator lhs, DoubleOperator const& rhs)
+  {
+    return lhs *= rhs;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (double const& s, DoubleOperator rhs)
+  {
+    return rhs *= s;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (DoubleOperator lhs, double const& s)
+  {
+    return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (std::function<double(double const&, double const&)> f, DoubleOperator rhs)
+  {
+    return rhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (DoubleOperator lhs, std::function<double(double const&, double const&)> f)
+  {
+    return lhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator / (DoubleOperator lhs, double const& s)
+  {
+    return lhs /= s;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator + (DoubleOperator lhs, DoubleOperator const& rhs)
+  {
+    return lhs += rhs;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator - (DoubleOperator lhs, DoubleOperator const& rhs)
+  {
+    return lhs -= rhs;
   }
 
   //_________________________________________________________________________________

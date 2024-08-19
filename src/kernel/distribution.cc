@@ -174,11 +174,11 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator *= (double const& s)
   {
-    // Sum objects in joint grid
+    // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= s;
 
-    // Sum objects in subgrids
+    // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] *= s;
@@ -192,11 +192,11 @@ namespace apfel
     // Get joint grid
     const auto& jg = _grid.GetJointGrid().GetGrid();
 
-    // Sum objects in joint grid
+    // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= f(jg[i]);
 
-    // Sum objects in subgrids
+    // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       {
         // Get ig-th subgrid
@@ -212,11 +212,11 @@ namespace apfel
   Distribution& Distribution::operator /= (double const& s)
   {
     const double r = 1 / s;
-    // Sum objects in joint grid
+    // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= r;
 
-    // Sum objects in subgrids
+    // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] *= r;
@@ -227,11 +227,11 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator *= (Distribution const& d)
   {
-    // Multiply objects in joint grid
+    // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= d._distributionJointGrid[i];
 
-    // Sum objects in subgrids
+    // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] *= d._distributionSubGrid[ig][i];
@@ -244,13 +244,13 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw std::runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
+      throw std::runtime_error(error("Distribution::operator +=", "Distribution grids do not match"));
 
-    // Sum objects in joint grid
+    // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] += d._distributionJointGrid[i];
 
-    // Sum objects in subgrids
+    // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] += d._distributionSubGrid[ig][i];
@@ -263,13 +263,13 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw std::runtime_error(error("Distribution::operator+=", "Distribution grids does not match"));
+      throw std::runtime_error(error("Distribution::operator -=", "Distribution grids do not match"));
 
-    // Sum objects in joint grid
+    // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] -= d._distributionJointGrid[i];
 
-    // Sum objects in subgrids
+    // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
         _distributionSubGrid[ig][i] -= d._distributionSubGrid[ig][i];

@@ -36,7 +36,7 @@ namespace apfel
      */
     DoubleDistribution(Grid                                                const& g1,
                        Grid                                                const& g2,
-                       std::function<double(double const&, double const&)> const& InDistFunc);
+                       std::function<double(double const&, double const&)> const& InDistFunc = [] (double const&, double const&) -> double{ return 0;});
 
     /**
      * @brief The DoubleDistribution copy constructor
@@ -101,13 +101,34 @@ namespace apfel
     ///@}
 
     /**
+     * @brief Function that returns the derivative of the
+     * DoubleDistribution in the form of a DoubleDistribution object.
+     */
+    DoubleDistribution Derivative() const;
+
+    /**
      * @name Getters
      */
     ///@{
-    Grid                                     const& GetFirstGrid()  const { return _g1; }
-    Grid                                     const& GetSecondGrid() const { return _g2; }
+    Grid                                     const& GetFirstGrid()             const { return _g1; }
+    Grid                                     const& GetSecondGrid()            const { return _g2; }
+    LagrangeInterpolator                     const  GetFirstInterpolator()     const { return _li1; }
+    LagrangeInterpolator                     const  GetSecondInterpolator()    const { return _li2; }
     std::vector<std::vector<matrix<double>>> const  GetDistributionSubGrid()   const { return _dDSubGrid; }
     matrix<double>                           const  GetDistributionJointGrid() const { return _dDJointGrid; }
+    ///@}
+
+    /**
+     * @name Binary operators
+     */
+    ///@{
+    DoubleDistribution& operator  = (DoubleDistribution const& d);                                  //!< this  = Distribution
+    DoubleDistribution& operator *= (double const& s);                                              //!< this *= Scalar
+    DoubleDistribution& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of the integration variable
+    DoubleDistribution& operator /= (double const& s);                                              //!< this /= Scalar
+    DoubleDistribution& operator *= (DoubleDistribution const& d);                                  //!< this *= Distribution
+    DoubleDistribution& operator += (DoubleDistribution const& d);                                  //!< this += Distribution
+    DoubleDistribution& operator -= (DoubleDistribution const& d);                                  //!< this -= Distribution
     ///@}
 
   private:
@@ -120,6 +141,20 @@ namespace apfel
 
     friend std::ostream& operator << (std::ostream& os, DoubleDistribution const& sg);
   };
+
+  /**
+   * @name Ternary operators
+   */
+  ///@{
+  DoubleDistribution operator * (double const& s, DoubleDistribution rhs);                                              //!< Scalar*Distribution
+  DoubleDistribution operator * (DoubleDistribution lhs, double const& s);                                              //!< Distribution*Scalar
+  DoubleDistribution operator * (std::function<double(double const&, double const&)> const& f, DoubleDistribution rhs); //!< Function*Distribution
+  DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&, double const&)> const& f); //!< Distribution*Function
+  DoubleDistribution operator / (DoubleDistribution lhs, double const& s);                                              //!< Distribution/Scalar
+  DoubleDistribution operator + (DoubleDistribution lhs, DoubleDistribution const& rhs);                                //!< Distribution+Distribution
+  DoubleDistribution operator - (DoubleDistribution lhs, DoubleDistribution const& rhs);                                //!< Distribution-Distribution
+  DoubleDistribution operator * (DoubleDistribution lhs, DoubleDistribution const& rhs);                                //!< Distribution*Distribution
+  ///@}
 
   /**
    * @brief Method which prints Interpolator with cout <<.

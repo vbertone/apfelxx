@@ -5,6 +5,8 @@
 //
 
 #include "apfel/doubledistribution.h"
+#include "apfel/messages.h"
+#include "apfel/constants.h"
 
 #include <sstream>
 
@@ -178,6 +180,196 @@ namespace apfel
         result += iintp1[beta] * iintp2[delta] * _dDJointGrid(boundsa1[0] + beta, delta + boundsa2[0]);
 
     return sgn1 * sgn2 * result;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution DoubleDistribution::Derivative() const
+  {
+    return DoubleDistribution{this->_g1, this->_g2, [=] (double const& x1, double const& x2) -> double { return this->Derive(x1 - eps10, x2 - eps10); } };
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator = (DoubleDistribution const& d)
+  {
+    _dDSubGrid   = d._dDSubGrid;
+    _dDJointGrid = d._dDJointGrid;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator *= (double const& s)
+  {
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) *= s;
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+        for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+          for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+            _dDSubGrid[ig1][ig2](i, j) *= s;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator *= (std::function<double(double const&, double const&)> const& f)
+  {
+    // Get joint grids
+    const auto& jg1 = _g1.GetJointGrid().GetGrid();
+    const auto& jg2 = _g2.GetJointGrid().GetGrid();
+
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) *= f(jg1[i], jg2[j]);
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      {
+        const auto& sg1 = _g1.GetSubGrid(ig1).GetGrid();
+        for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+          {
+            const auto& sg2 = _g2.GetSubGrid(ig2).GetGrid();
+            for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+              for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+                _dDSubGrid[ig1][ig2](i, j) *= f(sg1[i], sg2[j]);
+          }
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator /= (double const& s)
+  {
+    const double r = 1 / s;
+
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) *= r;
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+        for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+          for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+            _dDSubGrid[ig1][ig2](i, j) *= r;
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator *= (DoubleDistribution const& d)
+  {
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) *= d._dDJointGrid(i, j);
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+        for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+          for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+            _dDSubGrid[ig1][ig2](i, j) *= _dDSubGrid[ig1][ig2](i, j);
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator += (DoubleDistribution const& d)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&this->_g1 != &d._g1 || &this->_g2 != &d._g2)
+      throw std::runtime_error(error("DoubleDistribution::operator +=", "DoubleDistribution grids do not match"));
+
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) += d._dDJointGrid(i, j);
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+        for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+          for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+            _dDSubGrid[ig1][ig2](i, j) += _dDSubGrid[ig1][ig2](i, j);
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator -= (DoubleDistribution const& d)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&this->_g1 != &d._g1 || &this->_g2 != &d._g2)
+      throw std::runtime_error(error("DoubleDistribution::operator -=", "DoubleDistribution grids do not match"));
+
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) -= d._dDJointGrid(i, j);
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+        for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+          for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+            _dDSubGrid[ig1][ig2](i, j) -= _dDSubGrid[ig1][ig2](i, j);
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (double const& s, DoubleDistribution rhs)
+  {
+    return rhs *= s;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (DoubleDistribution lhs, double const& s)
+  {
+    return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (std::function<double(double const&, double const&)> const& f, DoubleDistribution rhs)
+  {
+    return rhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&, double const&)> const& f)
+  {
+    return lhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator / (DoubleDistribution lhs, double const& s)
+  {
+    return lhs /= s;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator + (DoubleDistribution lhs, DoubleDistribution const& rhs)
+  {
+    return lhs += rhs;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator - (DoubleDistribution lhs, DoubleDistribution const& rhs)
+  {
+    return lhs -= rhs;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (DoubleDistribution lhs, DoubleDistribution const& rhs)
+  {
+    return lhs *= rhs;
   }
 
   //_________________________________________________________________________________

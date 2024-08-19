@@ -38,8 +38,9 @@ namespace apfel
      * @brief The DoubleOperator constructor.
      * @param O1: the first single operator
      * @param O2: the second single operator
+     * @param dexpr: the double expression to be transformed (Null by default)
      */
-    DoubleOperator(Operator const& O1, Operator const& O2);
+    DoubleOperator(Operator const& O1, Operator const& O2, DoubleExpression const& dexpr = DoubleExpression{});
 
     /**
      * @brief The Operator virtual destructor.
@@ -58,10 +59,7 @@ namespace apfel
     DoubleOperator& operator *= (DoubleOperator const& o);                               //!< this *= Operator
     DoubleOperator& operator  = (DoubleOperator const& o);                               //!< this  = Operator
     DoubleOperator& operator *= (std::function<double(double const&, double const&)> f); //!< This *= Function
-
     ///@}
-
-
 
     /**
      * @brief Function that returns the first Grid object associated
@@ -99,12 +97,27 @@ namespace apfel
   protected:
     Grid                                      const& _grid1;      //!< First grid on which to compute the operator
     Grid                                      const& _grid2;      //!< Second grid on which to compute the operator
-    DoubleExpression                          const  _dexpr;      //!< Expression to be used
+    DoubleExpression                          const& _dexpr;      //!< Expression to be used
     double                                    const  _eps;        //!< Integration accuracy
     std::vector<std::vector<matrix<matrix<double>>>> _dOperator;  //!< DoubleOperator values
 
     friend std::ostream& operator << (std::ostream& os, DoubleOperator const& dop);
   };
+
+  /**
+   * @name Ternary operators
+   */
+  ///@{
+  DoubleDistribution operator * (DoubleOperator lhs, DoubleDistribution const& rhs);                        //!< Operator*Distribution
+  DoubleOperator     operator * (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< Operator*Operator
+  DoubleOperator     operator * (double const& s, DoubleOperator rhs);                                      //!< Scalar*Operator
+  DoubleOperator     operator * (DoubleOperator lhs, double const& s);                                      //!< Operator*Scalar
+  DoubleOperator     operator * (std::function<double(double const&, double const)> f, DoubleOperator rhs); //!< function*Operator
+  DoubleOperator     operator * (DoubleOperator lhs, std::function<double(double const&, double const)> f); //!< Operator*function
+  DoubleOperator     operator / (DoubleOperator lhs, double const& s);                                      //!< Operator/Scalar
+  DoubleOperator     operator + (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< Operator+Operator
+  DoubleOperator     operator - (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< Operator-Operator
+  ///@}
 
   /**
    * @brief Method which prints DoubleOperator with std::cout <<.
