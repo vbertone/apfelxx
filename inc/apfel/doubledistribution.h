@@ -98,6 +98,38 @@ namespace apfel
      * @return the integral of the interpolated function
      */
     double Integrate(double const& a1, double const& b1, double const& a2, double const& b2) const;
+
+    /**
+     * @brief Function that evaluates the DoubleDistribution in the
+     * first variable leaving the second undetermined. This produces a
+     * single distribution.
+     * @param x1: value of the first variable
+     */
+    Distribution Evaluate1(double const& x1) const;
+
+    /**
+     * @brief Function that evaluates the DoubleDistribution in the
+     * second variable leaving the second undetermined. This produces a
+     * single distribution.
+     * @param x2: value of the second variable
+     */
+    Distribution Evaluate2(double const& x2) const;
+
+    /**
+     * @brief Function that evaluates the derivative of a
+     * DoubleDistribution in the first variable leaving the second
+     * undetermined. This produces a single distribution.
+     * @param x1: value of the first variable
+     */
+    Distribution Derive1(double const& x1) const;
+
+    /**
+     * @brief Function that evaluates the derivative of a
+     * DoubleDistribution in the second variable leaving the second
+     * undetermined. This produces a single distribution.
+     * @param x2: value of the second variable
+     */
+    Distribution Derive2(double const& x2) const;
     ///@}
 
     /**

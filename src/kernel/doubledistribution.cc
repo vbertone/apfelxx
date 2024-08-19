@@ -183,6 +183,238 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution DoubleDistribution::Evaluate1(double const& x1) const
+  {
+    // Get summation bounds on the joint grid along the first
+    // direction.
+    const std::array<int, 2> bounds1j = _li1.SumBounds(x1, _g1.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> intp1j(bounds1j[1] - bounds1j[0]);
+    for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
+      intp1j[beta] = _li1.Interpolant(bounds1j[0] + beta, x1, _g1.GetJointGrid());
+
+    // Get number of nodes of the joint grid along the second
+    // direction.
+    const int nxj2 = _g2.GetJointGrid().nx();
+
+    // Interpolate along the first direction of the joint grid
+    std::vector<double> jg(nxj2, 0.);
+    for (int delta = 0; delta < nxj2; delta++)
+      for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
+        jg[delta] += intp1j[beta] * _dDJointGrid(beta + bounds1j[0], delta);
+
+    // Now take care of the subgrids. ig1 has to correspond to the
+    // subgrid index along the first direction such that "x1" is on
+    // the denser grid possible.
+    int ig1;
+    for (ig1 = 0; ig1 < _g1.nGrids(); ig1++)
+      if(_g1.GetSubGrid(ig1).xMin() > x1)
+        break;
+    ig1--;
+
+    // Get summation bounds on the ig1-th subgrid along the first
+    // direction.
+    const std::array<int, 2> bounds1s = _li1.SumBounds(x1, _g1.GetSubGrid(ig1));
+
+    // Accumulate interpolating functions
+    std::vector<double> intp1s(bounds1s[1] - bounds1s[0]);
+    for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+      intp1s[beta] = _li1.Interpolant(bounds1s[0] + beta, x1, _g1.GetSubGrid(ig1));
+
+    // Run over the subgrids along the second direction
+    const int ng2 = _g2.nGrids();
+    std::vector<std::vector<double>> sg(ng2);
+    for (int ig2 = 0; ig2 < ng2; ig2++)
+      {
+        // Get number of nodes of the ig2-th subgrid along the second
+        // direction.
+        const int nx2s = _g2.GetSubGrid(ig2).nx();
+
+        // Interpolate along the first direction of the ig2-th subgrid
+        sg[ig2].resize(nx2s, 0.);
+        for (int delta = 0; delta < nx2s; delta++)
+          for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+            sg[ig2][delta] += intp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1j[0], delta);
+      }
+    return Distribution{_g2, sg, jg};
+  }
+
+  //_________________________________________________________________________
+  Distribution DoubleDistribution::Evaluate2(double const& x2) const
+  {
+    // Get summation bounds on the joint grid along the second
+    // direction.
+    const std::array<int, 2> bounds2j = _li2.SumBounds(x2, _g2.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> intp2j(bounds2j[1] - bounds2j[0]);
+    for (int delta = 0; delta < bounds2j[1] - bounds2j[0]; delta++)
+      intp2j[delta] = _li2.Interpolant(bounds2j[0] + delta, x2, _g2.GetJointGrid());
+
+    // Get number of nodes of the joint grid along the first
+    // direction.
+    const int nxj1 = _g1.GetJointGrid().nx();
+
+    // Interpolate along the first direction of the joint grid
+    std::vector<double> jg(nxj1, 0.);
+    for (int beta = 0; beta < nxj1; beta++)
+      for (int delta = 0; delta < bounds2j[1] - bounds2j[0]; delta++)
+        jg[beta] += intp2j[delta] * _dDJointGrid(beta, delta + bounds2j[0]);
+
+    // Now take care of the subgrids. ig2 has to correspond to the
+    // subgrid index along the second direction such that "x2" is on
+    // the denser grid possible.
+    int ig2;
+    for (ig2 = 0; ig2 < _g2.nGrids(); ig2++)
+      if(_g2.GetSubGrid(ig2).xMin() > x2)
+        break;
+    ig2--;
+
+    // Get summation bounds on the igw-th subgrid along the second
+    // direction.
+    const std::array<int, 2> bounds2s = _li2.SumBounds(x2, _g2.GetSubGrid(ig2));
+
+    // Accumulate interpolating functions
+    std::vector<double> intp2s(bounds2s[1] - bounds2s[0]);
+    for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
+      intp2s[delta] = _li2.Interpolant(bounds2s[0] + delta, x2, _g2.GetSubGrid(ig2));
+
+    // Run over the subgrids along the first direction
+    const int ng1 = _g1.nGrids();
+    std::vector<std::vector<double>> sg(ng1);
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      {
+        // Get number of nodes of the ig1-th subgrid along the first
+        // direction.
+        const int nx1s = _g1.GetSubGrid(ig1).nx();
+
+        // Interpolate along the second direction of the ig1-th subgrid
+        sg[ig1].resize(nx1s, 0.);
+        for (int beta = 0; beta < nx1s; beta++)
+          for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
+            sg[ig1][beta] += intp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2j[0]);
+      }
+    return Distribution{_g1, sg, jg};
+  }
+
+  //_________________________________________________________________________
+  Distribution DoubleDistribution::Derive1(double const& x1) const
+  {
+    // Get summation bounds on the joint grid along the first
+    // direction.
+    const std::array<int, 2> bounds1j = _li1.SumBounds(x1, _g1.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> dintp1j(bounds1j[1] - bounds1j[0]);
+    for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
+      dintp1j[beta] = _li1.DerInterpolant(bounds1j[0] + beta, x1, _g1.GetJointGrid());
+
+    // Get number of nodes of the joint grid along the second
+    // direction.
+    const int nxj2 = _g2.GetJointGrid().nx();
+
+    // Interpolate along the first direction of the joint grid
+    std::vector<double> jg(nxj2, 0.);
+    for (int delta = 0; delta < nxj2; delta++)
+      for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
+        jg[delta] += dintp1j[beta] * _dDJointGrid(beta + bounds1j[0], delta);
+
+    // Now take care of the subgrids. ig1 has to correspond to the
+    // subgrid index along the first direction such that "x1" is on
+    // the denser grid possible.
+    int ig1;
+    for (ig1 = 0; ig1 < _g1.nGrids(); ig1++)
+      if(_g1.GetSubGrid(ig1).xMin() > x1)
+        break;
+    ig1--;
+
+    // Get summation bounds on the ig1-th subgrid along the first
+    // direction.
+    const std::array<int, 2> bounds1s = _li1.SumBounds(x1, _g1.GetSubGrid(ig1));
+
+    // Accumulate interpolating functions
+    std::vector<double> dintp1s(bounds1s[1] - bounds1s[0]);
+    for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+      dintp1s[beta] = _li1.DerInterpolant(bounds1s[0] + beta, x1, _g1.GetSubGrid(ig1));
+
+    // Run over the subgrids along the second direction
+    const int ng2 = _g2.nGrids();
+    std::vector<std::vector<double>> sg(ng2);
+    for (int ig2 = 0; ig2 < ng2; ig2++)
+      {
+        // Get number of nodes of the ig2-th subgrid along the second
+        // direction.
+        const int nx2s = _g2.GetSubGrid(ig2).nx();
+
+        // Interpolate along the first direction of the ig2-th subgrid
+        sg[ig2].resize(nx2s, 0.);
+        for (int delta = 0; delta < nx2s; delta++)
+          for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+            sg[ig2][delta] += dintp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1j[0], delta);
+      }
+    return Distribution{_g2, sg, jg};
+  }
+
+  //_________________________________________________________________________
+  Distribution DoubleDistribution::Derive2(double const& x2) const
+  {
+    // Get summation bounds on the joint grid along the second
+    // direction.
+    const std::array<int, 2> bounds2j = _li2.SumBounds(x2, _g2.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> dintp2j(bounds2j[1] - bounds2j[0]);
+    for (int delta = 0; delta < bounds2j[1] - bounds2j[0]; delta++)
+      dintp2j[delta] = _li2.DerInterpolant(bounds2j[0] + delta, x2, _g2.GetJointGrid());
+
+    // Get number of nodes of the joint grid along the first
+    // direction.
+    const int nxj1 = _g1.GetJointGrid().nx();
+
+    // Interpolate along the first direction of the joint grid
+    std::vector<double> jg(nxj1, 0.);
+    for (int beta = 0; beta < nxj1; beta++)
+      for (int delta = 0; delta < bounds2j[1] - bounds2j[0]; delta++)
+        jg[beta] += dintp2j[delta] * _dDJointGrid(beta, delta + bounds2j[0]);
+
+    // Now take care of the subgrids. ig2 has to correspond to the
+    // subgrid index along the second direction such that "x2" is on
+    // the denser grid possible.
+    int ig2;
+    for (ig2 = 0; ig2 < _g2.nGrids(); ig2++)
+      if(_g2.GetSubGrid(ig2).xMin() > x2)
+        break;
+    ig2--;
+
+    // Get summation bounds on the igw-th subgrid along the second
+    // direction.
+    const std::array<int, 2> bounds2s = _li2.SumBounds(x2, _g2.GetSubGrid(ig2));
+
+    // Accumulate interpolating functions
+    std::vector<double> dintp2s(bounds2s[1] - bounds2s[0]);
+    for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
+      dintp2s[delta] = _li2.DerInterpolant(bounds2s[0] + delta, x2, _g2.GetSubGrid(ig2));
+
+    // Run over the subgrids along the first direction
+    const int ng1 = _g1.nGrids();
+    std::vector<std::vector<double>> sg(ng1);
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      {
+        // Get number of nodes of the ig1-th subgrid along the first
+        // direction.
+        const int nx1s = _g1.GetSubGrid(ig1).nx();
+
+        // Interpolate along the second direction of the ig1-th subgrid
+        sg[ig1].resize(nx1s, 0.);
+        for (int beta = 0; beta < nx1s; beta++)
+          for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
+            sg[ig1][beta] += dintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2j[0]);
+      }
+    return Distribution{_g1, sg, jg};
+  }
+
+  //_________________________________________________________________________
   DoubleDistribution DoubleDistribution::Derivative() const
   {
     return DoubleDistribution{this->_g1, this->_g2, [=] (double const& x1, double const& x2) -> double { return this->Derive(x1 - eps10, x2 - eps10); } };

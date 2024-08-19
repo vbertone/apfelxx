@@ -271,6 +271,8 @@ int main()
   t.stop();
   t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate1(x).Evaluate(z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate2(z).Evaluate(x) << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Evaluate(Q).Evaluate(x, z) << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / ( ( op - om ) * Q ) / ( ( op - om ) * x ) / ( ( op - om ) * z ) << std::endl;
   t.stop();
