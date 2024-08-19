@@ -51,6 +51,88 @@ public:
   }
 };
 
+// Double expression for the next-to-leading-order SIDIS F2 qq
+class C21nsSidis: public apfel::DoubleExpression
+{
+public:
+  C21nsSidis(): DoubleExpression() {}
+
+  double LocalLocal(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( - 8 + pow(log(1 - z), 2) + pow(log(1 - x), 2) + 2 * log(1 - x) * log(1 - z) );
+  }
+  double LocalSingular(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( 2 * log(1 - z) / ( 1 - z ) + 2 * log( 1 - x ) / ( 1 - z ) );
+  }
+  double LocalRegular(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( ( 1 + z * z ) * log(z) / ( 1 - z ) + 1 - z - ( 1 + z ) * log(1 - z) - log(1 - x) * ( 1 + z )  );
+  }
+  double SingularLocal(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( 2 * log(1 - x) / ( 1 - x ) + 2 * log(1 - z) / ( 1 - x ) );
+  }
+  double SingularSingular(double const& x, double const& z) const override
+  {
+    return 4 * apfel::CF / ( 1 - x ) / ( 1 - z );
+  }
+  double SingularRegular(double const& x, double const& z) const override
+  {
+    return - 2 * apfel::CF * ( 1 + z ) / ( 1 - x );
+  }
+  double RegularLocal(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log(1 - x) - log(1 - z) * ( 1 + x ) );
+  }
+  double RegularSingular(double const& x, double const& z) const override
+  {
+    return - 2 * apfel::CF * ( 1 + x ) / ( 1 - z );
+  }
+  double RegularRegular(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( 2 + 6 * x * z );
+  }
+};
+
+// Double expression for the next-to-leading-order SIDIS F2 gq
+class C21gqSidis: public apfel::DoubleExpression
+{
+public:
+  C21gqSidis(): DoubleExpression() {}
+  double LocalRegular(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( ( 1 + ( 1 - z ) * ( 1 - z ) ) * log(z * ( 1 - z )) / z + z + log(1 - x) * ( 1 + ( 1 - z ) * ( 1 - z ) ) / z );
+  }
+  double SingularRegular(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( 1 + ( 1 - z ) * ( 1 - z ) ) / z / ( 1 - x );
+  }
+  double RegularRegular(double const& x, double const& z) const override
+  {
+    return 2 * apfel::CF * ( 2 * ( 1 + 3 * x ) - 6 * x * z - ( 1 + x ) / z );
+  }
+};
+
+// Double expression for the next-to-leading-order SIDIS F2 qg
+class C21qgSidis: public apfel::DoubleExpression
+{
+public:
+  C21qgSidis(): DoubleExpression() {}
+  double RegularLocal(double const& x, double const& z) const override
+  {
+    return ( x * x + ( 1 - x ) * ( 1 - x ) ) * log(( 1 - x ) / x) + 2 * x * ( 1 - x ) + ( x * x + ( 1 - x ) * ( 1 - x ) ) * log(1 - z);
+  }
+  double RegularSingular(double const& x, double const& z) const override
+  {
+    return ( x * x + ( 1 - x ) * ( 1 - x ) ) / ( 1 - z );
+  }
+  double RegularRegular(double const& x, double const& z) const override
+  {
+    return 2 * ( - 1 + 6 * x - 6 * x * x ) + ( x * x + ( 1 - x ) * ( 1 - x ) ) / z;
+  }
+};
+
 int main()
 {
   // Initial scale
@@ -119,29 +201,21 @@ int main()
         distqg.AddTerm({apfel::QCh2[abs(j)-1], dPDF.at(0), dFF.at(j)});
       }
 
-    // Assemple double distribution for the reduced cross section as Y^+ F2 - y^2 FL
-    //return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( ( ( so.C20qq + coup * so.C21qq ) * distqq + coup * ( so.C21gq * distgq + so.C21qg * distqg ) ).MultiplyBy(yp, iz)
-    //                                             - ( coup * ( so.CL1qq * distqq + so.CL1gq * distgq + so.CL1qg * distqg ) ).MultiplyBy(y2, iz) );
-    return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( //( ( so.C20qq + coup * so.C21qq ) * distqq + coup * ( so.C21gq * distgq + so.C21qg * distqg ) ).MultiplyBy(yp, iz)
-             - 1 * ( coup * ( so.CL1qq * distqq + so.CL1gq * distgq + so.CL1qg * distqg ) ).MultiplyBy(y2, iz) );
+    // Assemble double distribution for the reduced cross section as Y^+ F2 - y^2 FL
+    return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( ( ( so.C20qq + coup * so.C21qq ) * distqq + coup * ( so.C21gq * distgq + so.C21qg * distqg ) ).MultiplyBy(yp, iz)
+                                                 - ( coup * ( so.CL1qq * distqq + so.CL1gq * distgq + so.CL1qg * distqg ) ).MultiplyBy(y2, iz) );
   };
   const apfel::TabulateObject<apfel::DoubleObject<apfel::Distribution>> TabCrossSectionDO{CrossSectionDO, 50, 1, 10, 3, Thresholds};
 
   // Compute relevant double operators
   apfel::Timer t;
-  //const apfel::DoubleOperator O20qq{gx, gz, C20nsSidis{}};
-  //t.stop();
-
-  t.start();
+  const apfel::DoubleOperator O20qq{gx, gz, C20nsSidis{}};
   const apfel::DoubleOperator OL1qq{gx, gz, CL1nsSidis{}};
-  t.stop();
-
-  t.start();
   const apfel::DoubleOperator OL1gq{gx, gz, CL1gqSidis{}};
-  t.stop();
-
-  t.start();
   const apfel::DoubleOperator OL1qg{gx, gz, CL1qgSidis{}};
+  const apfel::DoubleOperator O21qq{gx, gz, C21nsSidis{}};
+  const apfel::DoubleOperator O21gq{gx, gz, C21gqSidis{}};
+  const apfel::DoubleOperator O21qg{gx, gz, C21qgSidis{}};
   t.stop();
 
   // Define function to compute SIDIS cross section at O(as) using the DoubleDistribution (and DoubleOperator) class
@@ -175,14 +249,9 @@ int main()
         distqg += apfel::QCh2[abs(j)-1] * apfel::DoubleDistribution{dPDF.at(0), dFF.at(j)};
       }
 
-    // Assemple double distribution for the reduced cross section as Y^+ F2 - y^2 FL
-    //return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( yp * ( O20qq * distqq ) );
-    return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( - coup * ( y2 * ( OL1qq * distqq + OL1gq * distgq + OL1qg * distqg ) ) );
-    /*
-        // Assemple double distribution for the reduced cross section as Y^+ F2 - y^2 FL
-        return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( ( ( so.C20qq + coup * so.C21qq ) * distqq + coup * ( so.C21gq * distgq + so.C21qg * distqg ) ).MultiplyBy(yp, iz)
-                                                     - ( coup * ( so.CL1qq * distqq + so.CL1gq * distgq + so.CL1qg * distqg ) ).MultiplyBy(y2, iz) ) ;
-    */
+    // Assemble double distribution for the reduced cross section as Y^+ F2 - y^2 FL
+    return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( yp * ( ( O20qq + coup * O21qq ) * distqq + coup * ( O21gq * distgq + O21qg * distqg ) )
+                                                 - coup * ( y2 * ( OL1qq * distqq + OL1gq * distgq + OL1qg * distqg ) ) );
   };
 
   // Define kinematics
@@ -192,8 +261,12 @@ int main()
 
   // Print value
   std::cout << std::scientific << std::endl;
+  t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDO(Q).Evaluate(x, z) << std::endl;
+  t.stop();
+  t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate(x, z) << std::endl;
+  t.stop();
 
   //std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Evaluate(Q).Evaluate(x, z) << std::endl;
   //std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Integrate(Q*(1-apfel::eps3), Q*(1+apfel::eps3)).Integrate(x*(1-apfel::eps3), x*(1+apfel::eps3), z*(1-apfel::eps3), z*(1+apfel::eps3)) / ( 2 * apfel::eps3 * Q ) / ( 2 * apfel::eps3 * x ) / ( 2 * apfel::eps3 * z ) << "\n" << std::endl;
