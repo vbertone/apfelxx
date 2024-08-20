@@ -130,6 +130,26 @@ namespace apfel
      * @param x2: value of the second variable
      */
     Distribution Derive2(double const& x2) const;
+
+    /**
+     * @brief Function that evaluates the integral of the interpolated
+     * function in the interval [a1,b1] for the first variable leaving
+     * the second undetermined.
+     * @param a1: the lower integration bound for the first variable
+     * @param b1: the upper integration bound for the first variable
+     * @return the integral of the interpolated function
+     */
+    Distribution Integrate1(double const& a1, double const& b1) const;
+
+    /**
+     * @brief Function that evaluates the integral of the interpolated
+     * function in the interval [a2,b2] for the second variable leaving
+     * the first undetermined.
+     * @param a2: the lower integration bound for the first variable
+     * @param b2: the upper integration bound for the first variable
+     * @return the integral of the interpolated function
+     */
+    Distribution Integrate2(double const& a2, double const& b2) const;
     ///@}
 
     /**

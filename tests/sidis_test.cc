@@ -261,20 +261,23 @@ int main()
   const double Q  = 2;
   const double op = 1 + apfel::eps3;
   const double om = 1 - apfel::eps3;
+  const double dn =  pow(op - om, 3) * Q * x * z;
 
   // Print value
   std::cout << std::scientific << std::endl;
   t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDO(Q).Evaluate(x, z) << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Evaluate(Q).Evaluate(x, z) << std::endl;
-  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / ( ( op - om ) * Q ) / ( ( op - om ) * x ) / ( ( op - om ) * z ) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDO.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / dn << std::endl;
   t.stop();
   t.start();
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate(x, z) << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate1(x).Evaluate(z) << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD(Q).Evaluate2(z).Evaluate(x) << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Evaluate(Q).Evaluate(x, z) << std::endl;
-  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / ( ( op - om ) * Q ) / ( ( op - om ) * x ) / ( ( op - om ) * z ) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / dn << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate1(x*om, x*op).Integrate(z*om, z*op) / dn << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate2(z*om, z*op).Integrate(x*om, x*op) / dn << std::endl;
   t.stop();
   std::cout << std::endl;
 

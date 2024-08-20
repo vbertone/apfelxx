@@ -415,6 +415,136 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution DoubleDistribution::Integrate1(double const& a1, double const& b1) const
+  {
+    // Order integration bounds and adjust the sign if necessary
+    const double ao1  = std::min(a1, b1);
+    const double bo1  = std::max(a1, b1);
+    const int    sgn1 = (b1 > a1 ? 1 : -1);
+
+    // Get summation bounds on the joint grid along the first
+    // direction.
+    const std::array<int, 2> boundsa1j = _li1.SumBounds(ao1, _g1.GetJointGrid());
+    const std::array<int, 2> boundsb1j = _li1.SumBounds(bo1, _g1.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> iintp1j(boundsb1j[1] - boundsa1j[0]);
+    for (int beta = 0; beta < boundsb1j[1] - boundsa1j[0]; beta++)
+      iintp1j[beta] = _li1.IntInterpolant(boundsa1j[0] + beta, ao1, bo1, _g1.GetJointGrid());
+
+    // Get number of nodes of the joint grid along the second
+    // direction.
+    const int nxj2 = _g2.GetJointGrid().nx();
+
+    // Interpolate along the first direction of the joint grid
+    std::vector<double> jg(nxj2, 0.);
+    for (int delta = 0; delta < nxj2; delta++)
+      for (int beta = 0; beta < boundsb1j[1] - boundsa1j[0]; beta++)
+        jg[delta] += sgn1 * iintp1j[beta] * _dDJointGrid(beta + boundsa1j[0], delta);
+
+    // Now take care of the subgrids. ig1 has to correspond to the
+    // subgrid index along the first direction such that the lower
+    // bound "ao1" is on the denser grid possible.
+    int ig1;
+    for (ig1 = 0; ig1 < _g1.nGrids(); ig1++)
+      if(_g1.GetSubGrid(ig1).xMin() > ao1)
+        break;
+    ig1--;
+
+    // Get summation bounds on the ig1-th subgrid along the first
+    // direction.
+    const std::array<int, 2> boundsa1s = _li1.SumBounds(ao1, _g1.GetSubGrid(ig1));
+    const std::array<int, 2> boundsb1s = _li1.SumBounds(bo1, _g1.GetSubGrid(ig1));
+
+    // Accumulate interpolating functions
+    std::vector<double> iintp1s(boundsb1s[1] - boundsa1s[0]);
+    for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
+      iintp1s[beta] = _li1.IntInterpolant(boundsa1s[0] + beta, ao1, bo1, _g1.GetSubGrid(ig1));
+
+    // Run over the subgrids along the second direction
+    const int ng2 = _g2.nGrids();
+    std::vector<std::vector<double>> sg(ng2);
+    for (int ig2 = 0; ig2 < ng2; ig2++)
+      {
+        // Get number of nodes of the ig2-th subgrid along the second
+        // direction.
+        const int nx2s = _g2.GetSubGrid(ig2).nx();
+
+        // Interpolate along the first direction of the ig2-th subgrid
+        sg[ig2].resize(nx2s, 0.);
+        for (int delta = 0; delta < nx2s; delta++)
+          for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
+            sg[ig2][delta] += sgn1 * iintp1s[beta] * _dDSubGrid[ig1][ig2](beta + boundsa1j[0], delta);
+      }
+    return Distribution{_g2, sg, jg};
+  }
+
+  //_________________________________________________________________________
+  Distribution DoubleDistribution::Integrate2(double const& a2, double const& b2) const
+  {
+    // Order integration bounds and adjust the sign if necessary
+    const double ao2  = std::min(a2, b2);
+    const double bo2  = std::max(a2, b2);
+    const int    sgn2 = (b2 > a2 ? 1 : -1);
+
+    // Get summation bounds on the joint grid along the second
+    // direction.
+    const std::array<int, 2> boundsa2j = _li2.SumBounds(ao2, _g2.GetJointGrid());
+    const std::array<int, 2> boundsb2j = _li2.SumBounds(bo2, _g2.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> iintp2j(boundsb2j[1] - boundsa2j[0]);
+    for (int delta = 0; delta < boundsb2j[1] - boundsa2j[0]; delta++)
+      iintp2j[delta] = _li2.IntInterpolant(boundsa2j[0] + delta, ao2, bo2, _g2.GetJointGrid());
+
+    // Get number of nodes of the joint grid along the first
+    // direction.
+    const int nxj1 = _g1.GetJointGrid().nx();
+
+    // Interpolate along the first direction of the joint grid
+    std::vector<double> jg(nxj1, 0.);
+    for (int beta = 0; beta < nxj1; beta++)
+      for (int delta = 0; delta < boundsb2j[1] - boundsa2j[0]; delta++)
+        jg[beta] += sgn2 * iintp2j[delta] * _dDJointGrid(beta, delta + boundsa2j[0]);
+
+    // Now take care of the subgrids. ig2 has to correspond to the
+    // subgrid index along the second direction such that the lower
+    // bound "ao2" is on the denser grid possible.
+    int ig2;
+    for (ig2 = 0; ig2 < _g2.nGrids(); ig2++)
+      if(_g2.GetSubGrid(ig2).xMin() > ao2)
+        break;
+    ig2--;
+
+    // Get summation bounds on the igw-th subgrid along the second
+    // direction.
+    const std::array<int, 2> boundsa2s = _li2.SumBounds(ao2, _g2.GetSubGrid(ig2));
+    const std::array<int, 2> boundsb2s = _li2.SumBounds(bo2, _g2.GetSubGrid(ig2));
+
+    // Accumulate interpolating functions
+    std::vector<double> iintp2s(boundsb2s[1] - boundsa2s[0]);
+    for (int delta = 0; delta < boundsb2s[1] - boundsa2s[0]; delta++)
+      iintp2s[delta] = _li2.IntInterpolant(boundsa2s[0] + delta, ao2, bo2, _g2.GetSubGrid(ig2));
+
+    // Run over the subgrids along the first direction
+    const int ng1 = _g1.nGrids();
+    std::vector<std::vector<double>> sg(ng1);
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      {
+        // Get number of nodes of the ig1-th subgrid along the first
+        // direction.
+        const int nx1s = _g1.GetSubGrid(ig1).nx();
+
+        // Interpolate along the second direction of the ig1-th subgrid
+        sg[ig1].resize(nx1s, 0.);
+        for (int beta = 0; beta < nx1s; beta++)
+          for (int delta = 0; delta < boundsb2s[1] - boundsa2s[0]; delta++)
+            sg[ig1][beta] += sgn2 * iintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + boundsa2j[0]);
+      }
+    return Distribution{_g1, sg, jg};
+  }
+
+  //_________________________________________________________________________
   DoubleDistribution DoubleDistribution::Derivative() const
   {
     return DoubleDistribution{this->_g1, this->_g2, [=] (double const& x1, double const& x2) -> double { return this->Derive(x1 - eps10, x2 - eps10); } };
