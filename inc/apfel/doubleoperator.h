@@ -43,6 +43,12 @@ namespace apfel
     DoubleOperator(Operator const& O1, Operator const& O2, DoubleExpression const& dexpr = DoubleExpression{});
 
     /**
+     * @brief The DoubleOperator constructor.
+     * @param DObj: double object of operators
+     */
+    DoubleOperator(DoubleObject<Operator> const& DObj, DoubleExpression const& dexpr = DoubleExpression{});
+
+    /**
      * @brief The Operator virtual destructor.
      */
     virtual ~DoubleOperator() {}

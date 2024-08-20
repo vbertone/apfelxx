@@ -227,6 +227,54 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  DoubleOperator::DoubleOperator(DoubleObject<Operator> const& DObj, DoubleExpression const& dexpr):
+    _grid1(DObj.GetTerms()[0].object1.GetGrid()),
+    _grid2(DObj.GetTerms()[0].object2.GetGrid()),
+    _dexpr(dexpr),
+    _eps(std::max(DObj.GetTerms()[0].object1.GetIntegrationAccuracy(), DObj.GetTerms()[0].object2.GetIntegrationAccuracy()))
+  {
+    // Stop the computation if any of the two operators in the first
+    // term of the double objects is of GPD type. Still impossible to
+    // handle here.
+    if (DObj.GetTerms()[0].object1.IsGPD() || DObj.GetTerms()[0].object1.IsGPD())
+      throw std::runtime_error(error("DoubleOperator::DoubleOperator", "GPD double operators cannot be handled yet."));
+
+    // Number of subgrids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Resize matrix
+    _dOperator.resize(ng1, std::vector<matrix<matrix<double>>>(ng2));
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      for (int ig2 = 0; ig2 < ng2; ig2++)
+        {
+          const int nx1 = _grid1.GetSubGrid(ig1).GetGrid().size();
+          const int nx2 = _grid2.GetSubGrid(ig2).GetGrid().size();
+          _dOperator[ig1][ig2].resize(1, nx1);
+          for (int alpha = 0; alpha < nx1; alpha++)
+            _dOperator[ig1][ig2](0, alpha).resize(1, nx2);
+        }
+
+    // Fill in matrices
+    for (auto const& term : DObj.GetTerms())
+      {
+        // Get coefficient and objects
+        const double coef = term.coefficient;
+        const std::vector<matrix<double>> O1 = term.object1.GetOperator();
+        const std::vector<matrix<double>> O2 = term.object2.GetOperator();
+
+        // Fill in matrix
+        for (int ig1 = 0; ig1 < ng1; ig1++)
+          for (int ig2 = 0; ig2 < ng2; ig2++)
+            for(int beta = 0; beta < (int) _dOperator[ig1][ig2].size(0); beta++)
+              for(int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(1); alpha++)
+                for(int delta = 0; delta < (int) _dOperator[ig1][ig2](beta, alpha).size(0); delta++)
+                  for(int gamma = 0; gamma < (int) _dOperator[ig1][ig2](beta, alpha).size(1); gamma++)
+                    _dOperator[ig1][ig2](beta, alpha)(delta, gamma) += coef * O1[ig1](beta, alpha) * O2[ig2](delta, gamma);
+      }
+  }
+
+  //_________________________________________________________________________
   DoubleDistribution DoubleOperator::operator *= (DoubleDistribution const& d) const
   {
     // Fast method to check that we are using the same Grid

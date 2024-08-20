@@ -19,7 +19,7 @@ namespace apfel
     _g1(g1),
     _g2(g2),
     _li1(LagrangeInterpolator{_g1}),
-    _li2(LagrangeInterpolator{_g1})
+    _li2(LagrangeInterpolator{_g2})
   {
     const std::vector<double>& jg1 = _g1.GetJointGrid().GetGrid();
     const std::vector<double>& jg2 = _g2.GetJointGrid().GetGrid();
@@ -50,7 +50,7 @@ namespace apfel
     _g1(obj.GetFirstGrid()),
     _g2(obj.GetSecondGrid()),
     _li1(LagrangeInterpolator{_g1}),
-    _li2(LagrangeInterpolator{_g1}),
+    _li2(LagrangeInterpolator{_g2}),
     _dDSubGrid(obj.GetDistributionSubGrid()),
     _dDJointGrid(obj.GetDistributionJointGrid())
   {
@@ -94,10 +94,56 @@ namespace apfel
     _g1(g1),
     _g2(g2),
     _li1(LagrangeInterpolator{_g1}),
-    _li2(LagrangeInterpolator{_g1}),
+    _li2(LagrangeInterpolator{_g2}),
     _dDSubGrid(distsubgrid),
     _dDJointGrid(distjointgrid)
   {
+  }
+
+  //_________________________________________________________________________________
+  DoubleDistribution::DoubleDistribution(DoubleObject<Distribution> const& DObj):
+    _g1(DObj.GetTerms()[0].object1.GetGrid()),
+    _g2(DObj.GetTerms()[0].object2.GetGrid()),
+    _li1(LagrangeInterpolator{_g1}),
+    _li2(LagrangeInterpolator{_g2})
+  {
+    // Number on nodes on the joint grids
+    const int nxj1 = _g1.GetJointGrid().GetGrid().size();
+    const int nxj2 = _g2.GetJointGrid().GetGrid().size();
+
+    // Number of subgrids
+    const int ng1 = _g1.nGrids();
+    const int ng2 = _g2.nGrids();
+
+    // Resize matrices
+    _dDJointGrid.resize(nxj1, nxj2);
+    _dDSubGrid.resize(ng1, std::vector<matrix<double>>(ng2));
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      for (int ig2 = 0; ig2 < ng2; ig2++)
+        _dDSubGrid[ig1][ig2].resize(_g1.GetSubGrid(ig1).GetGrid().size(), _g2.GetSubGrid(ig2).GetGrid().size());
+
+    // Fill in matrices
+    for (auto const& term : DObj.GetTerms())
+      {
+        // Get coefficient and objects
+        const double coef = term.coefficient;
+        const std::vector<double> Djg1 = term.object1.GetDistributionJointGrid();
+        const std::vector<double> Djg2 = term.object2.GetDistributionJointGrid();
+        const std::vector<std::vector<double>> Dsg1 = term.object1.GetDistributionSubGrid();
+        const std::vector<std::vector<double>> Dsg2 = term.object2.GetDistributionSubGrid();
+
+        // Fill in joint matrix
+        for (int i1 = 0; i1 < nxj1; i1++)
+          for (int i2 = 0; i2 < nxj2; i2++)
+            _dDJointGrid(i1, i2) += coef * Djg1[i1] * Djg2[i2];
+
+        // Fill in subgrids
+        for (int ig1 = 0; ig1 < ng1; ig1++)
+          for (int ig2 = 0; ig2 < ng2; ig2++)
+            for (int i1 = 0; i1 < (int) _dDSubGrid[ig1][ig2].size(0); i1++)
+              for (int i2 = 0; i2 < (int) _dDSubGrid[ig1][ig2].size(1); i2++)
+                _dDSubGrid[ig1][ig2](i1, i2) += coef * Dsg1[ig1][i1] * Dsg2[ig2][i2];
+      }
   }
 
   //_________________________________________________________________________________
@@ -196,7 +242,7 @@ namespace apfel
 
     // Get number of nodes of the joint grid along the second
     // direction.
-    const int nxj2 = _g2.GetJointGrid().nx();
+    const int nxj2 = _g2.GetJointGrid().GetGrid().size();
 
     // Interpolate along the first direction of the joint grid
     std::vector<double> jg(nxj2, 0.);
@@ -229,7 +275,7 @@ namespace apfel
       {
         // Get number of nodes of the ig2-th subgrid along the second
         // direction.
-        const int nx2s = _g2.GetSubGrid(ig2).nx();
+        const int nx2s = _g2.GetSubGrid(ig2).GetGrid().size();
 
         // Interpolate along the first direction of the ig2-th subgrid
         sg[ig2].resize(nx2s, 0.);
@@ -254,7 +300,7 @@ namespace apfel
 
     // Get number of nodes of the joint grid along the first
     // direction.
-    const int nxj1 = _g1.GetJointGrid().nx();
+    const int nxj1 = _g1.GetJointGrid().GetGrid().size();
 
     // Interpolate along the first direction of the joint grid
     std::vector<double> jg(nxj1, 0.);
@@ -287,7 +333,7 @@ namespace apfel
       {
         // Get number of nodes of the ig1-th subgrid along the first
         // direction.
-        const int nx1s = _g1.GetSubGrid(ig1).nx();
+        const int nx1s = _g1.GetSubGrid(ig1).GetGrid().size();
 
         // Interpolate along the second direction of the ig1-th subgrid
         sg[ig1].resize(nx1s, 0.);
@@ -312,7 +358,7 @@ namespace apfel
 
     // Get number of nodes of the joint grid along the second
     // direction.
-    const int nxj2 = _g2.GetJointGrid().nx();
+    const int nxj2 = _g2.GetJointGrid().GetGrid().size();
 
     // Interpolate along the first direction of the joint grid
     std::vector<double> jg(nxj2, 0.);
@@ -345,7 +391,7 @@ namespace apfel
       {
         // Get number of nodes of the ig2-th subgrid along the second
         // direction.
-        const int nx2s = _g2.GetSubGrid(ig2).nx();
+        const int nx2s = _g2.GetSubGrid(ig2).GetGrid().size();
 
         // Interpolate along the first direction of the ig2-th subgrid
         sg[ig2].resize(nx2s, 0.);
@@ -370,7 +416,7 @@ namespace apfel
 
     // Get number of nodes of the joint grid along the first
     // direction.
-    const int nxj1 = _g1.GetJointGrid().nx();
+    const int nxj1 = _g1.GetJointGrid().GetGrid().size();
 
     // Interpolate along the first direction of the joint grid
     std::vector<double> jg(nxj1, 0.);
@@ -403,7 +449,7 @@ namespace apfel
       {
         // Get number of nodes of the ig1-th subgrid along the first
         // direction.
-        const int nx1s = _g1.GetSubGrid(ig1).nx();
+        const int nx1s = _g1.GetSubGrid(ig1).GetGrid().size();
 
         // Interpolate along the second direction of the ig1-th subgrid
         sg[ig1].resize(nx1s, 0.);
@@ -434,7 +480,7 @@ namespace apfel
 
     // Get number of nodes of the joint grid along the second
     // direction.
-    const int nxj2 = _g2.GetJointGrid().nx();
+    const int nxj2 = _g2.GetJointGrid().GetGrid().size();
 
     // Interpolate along the first direction of the joint grid
     std::vector<double> jg(nxj2, 0.);
@@ -468,7 +514,7 @@ namespace apfel
       {
         // Get number of nodes of the ig2-th subgrid along the second
         // direction.
-        const int nx2s = _g2.GetSubGrid(ig2).nx();
+        const int nx2s = _g2.GetSubGrid(ig2).GetGrid().size();
 
         // Interpolate along the first direction of the ig2-th subgrid
         sg[ig2].resize(nx2s, 0.);
@@ -499,7 +545,7 @@ namespace apfel
 
     // Get number of nodes of the joint grid along the first
     // direction.
-    const int nxj1 = _g1.GetJointGrid().nx();
+    const int nxj1 = _g1.GetJointGrid().GetGrid().size();
 
     // Interpolate along the first direction of the joint grid
     std::vector<double> jg(nxj1, 0.);
@@ -533,7 +579,7 @@ namespace apfel
       {
         // Get number of nodes of the ig1-th subgrid along the first
         // direction.
-        const int nx1s = _g1.GetSubGrid(ig1).nx();
+        const int nx1s = _g1.GetSubGrid(ig1).GetGrid().size();
 
         // Interpolate along the second direction of the ig1-th subgrid
         sg[ig1].resize(nx1s, 0.);

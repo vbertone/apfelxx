@@ -9,6 +9,7 @@
 #include "apfel/distribution.h"
 #include "apfel/matrix.h"
 #include "apfel/lagrangeinterpolator.h"
+#include "apfel/doubleobject.h"
 
 namespace apfel
 {
@@ -62,6 +63,12 @@ namespace apfel
                        Grid                                     const& g2,
                        std::vector<std::vector<matrix<double>>> const& distsubgrid,
                        matrix<double>                           const& distjointgrid);
+
+    /**
+     * @brief The DoubleDistribution constructor
+     * @param DObj: double object of distributions
+     */
+    DoubleDistribution(DoubleObject<Distribution> const& DObj);
     ///@}
 
     /**
