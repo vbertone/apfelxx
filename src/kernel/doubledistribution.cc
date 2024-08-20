@@ -281,7 +281,7 @@ namespace apfel
         sg[ig2].resize(nx2s, 0.);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
-            sg[ig2][delta] += intp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1j[0], delta);
+            sg[ig2][delta] += intp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1s[0], delta);
       }
     return Distribution{_g2, sg, jg};
   }
@@ -339,7 +339,7 @@ namespace apfel
         sg[ig1].resize(nx1s, 0.);
         for (int beta = 0; beta < nx1s; beta++)
           for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
-            sg[ig1][beta] += intp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2j[0]);
+            sg[ig1][beta] += intp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2s[0]);
       }
     return Distribution{_g1, sg, jg};
   }
@@ -397,7 +397,7 @@ namespace apfel
         sg[ig2].resize(nx2s, 0.);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
-            sg[ig2][delta] += dintp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1j[0], delta);
+            sg[ig2][delta] += dintp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1s[0], delta);
       }
     return Distribution{_g2, sg, jg};
   }
@@ -455,7 +455,7 @@ namespace apfel
         sg[ig1].resize(nx1s, 0.);
         for (int beta = 0; beta < nx1s; beta++)
           for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
-            sg[ig1][beta] += dintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2j[0]);
+            sg[ig1][beta] += dintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2s[0]);
       }
     return Distribution{_g1, sg, jg};
   }
@@ -520,7 +520,7 @@ namespace apfel
         sg[ig2].resize(nx2s, 0.);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
-            sg[ig2][delta] += sgn1 * iintp1s[beta] * _dDSubGrid[ig1][ig2](beta + boundsa1j[0], delta);
+            sg[ig2][delta] += sgn1 * iintp1s[beta] * _dDSubGrid[ig1][ig2](beta + boundsa1s[0], delta);
       }
     return Distribution{_g2, sg, jg};
   }
@@ -585,7 +585,7 @@ namespace apfel
         sg[ig1].resize(nx1s, 0.);
         for (int beta = 0; beta < nx1s; beta++)
           for (int delta = 0; delta < boundsb2s[1] - boundsa2s[0]; delta++)
-            sg[ig1][beta] += sgn2 * iintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + boundsa2j[0]);
+            sg[ig1][beta] += sgn2 * iintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + boundsa2s[0]);
       }
     return Distribution{_g1, sg, jg};
   }

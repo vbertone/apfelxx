@@ -248,8 +248,8 @@ namespace apfel
     for (int ig1 = 0; ig1 < ng1; ig1++)
       for (int ig2 = 0; ig2 < ng2; ig2++)
         {
-          const int nx1 = _grid1.GetSubGrid(ig1).GetGrid().size();
-          const int nx2 = _grid2.GetSubGrid(ig2).GetGrid().size();
+          const int nx1 = _grid1.GetSubGrid(ig1).nx();
+          const int nx2 = _grid2.GetSubGrid(ig2).nx();
           _dOperator[ig1][ig2].resize(1, nx1);
           for (int alpha = 0; alpha < nx1; alpha++)
             _dOperator[ig1][ig2](0, alpha).resize(1, nx2);
