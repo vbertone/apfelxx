@@ -58,7 +58,8 @@ namespace apfel
     DoubleOperator& operator -= (DoubleOperator const& o);                               //!< this -= Operator
     DoubleOperator& operator *= (DoubleOperator const& o);                               //!< this *= Operator
     DoubleOperator& operator  = (DoubleOperator const& o);                               //!< this  = Operator
-    DoubleOperator& operator *= (std::function<double(double const&, double const&)> f); //!< This *= Function
+    DoubleOperator& operator *= (std::function<double(double const&, double const&)> f); //!< This *= 2D-function
+    DoubleOperator& operator *= (std::function<double(double const&)> f);                //!< This *= 1D-Function
     ///@}
 
     /**
@@ -114,6 +115,8 @@ namespace apfel
   DoubleOperator     operator * (DoubleOperator lhs, double const& s);                                      //!< Operator*Scalar
   DoubleOperator     operator * (std::function<double(double const&, double const)> f, DoubleOperator rhs); //!< function*Operator
   DoubleOperator     operator * (DoubleOperator lhs, std::function<double(double const&, double const)> f); //!< Operator*function
+  DoubleOperator     operator * (std::function<double(double const&)> f, DoubleOperator rhs);               //!< function*Operator
+  DoubleOperator     operator * (DoubleOperator lhs, std::function<double(double const&)> f);               //!< Operator*function
   DoubleOperator     operator / (DoubleOperator lhs, double const& s);                                      //!< Operator/Scalar
   DoubleOperator     operator + (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< Operator+Operator
   DoubleOperator     operator - (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< Operator-Operator

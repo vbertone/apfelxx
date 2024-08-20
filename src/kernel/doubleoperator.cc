@@ -408,6 +408,25 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  DoubleOperator& DoubleOperator::operator *= (std::function<double(double const&)> f)
+  {
+    for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
+      {
+        const std::vector<double>& sg1 = _grid1.GetSubGrid(ig1).GetGrid();
+        for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
+          {
+            const std::vector<double>& sg2 = _grid2.GetSubGrid(ig2).GetGrid();
+            for (int alpha = 0; alpha < (int) _dOperator[ig1][ig2].size(0); alpha++)
+              for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
+                for (int gamma = 0; gamma < (int) _dOperator[ig1][ig2](alpha, beta).size(0); gamma++)
+                  for (int delta = 0; delta < (int) _dOperator[ig1][ig2](alpha, beta).size(1); delta++)
+                    _dOperator[ig1][ig2](alpha, beta)(gamma, delta) *= f(sg1[beta]) * f(sg2[delta]);
+          }
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
   DoubleDistribution operator * (DoubleOperator lhs, DoubleDistribution const& rhs)
   {
     return lhs *= rhs;
@@ -439,6 +458,18 @@ namespace apfel
 
   //_________________________________________________________________________
   DoubleOperator operator * (DoubleOperator lhs, std::function<double(double const&, double const&)> f)
+  {
+    return lhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (std::function<double(double const&)> f, DoubleOperator rhs)
+  {
+    return rhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator operator * (DoubleOperator lhs, std::function<double(double const&)> f)
   {
     return lhs *= f;
   }

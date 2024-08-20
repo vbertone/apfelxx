@@ -176,7 +176,8 @@ namespace apfel
     ///@{
     DoubleDistribution& operator  = (DoubleDistribution const& d);                                  //!< this  = Distribution
     DoubleDistribution& operator *= (double const& s);                                              //!< this *= Scalar
-    DoubleDistribution& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of the integration variable
+    DoubleDistribution& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of both the integration variables
+    DoubleDistribution& operator *= (std::function<double(double const&)> const& f);                //!< this *= Function of one variable used for both the integration variables
     DoubleDistribution& operator /= (double const& s);                                              //!< this /= Scalar
     DoubleDistribution& operator *= (DoubleDistribution const& d);                                  //!< this *= Distribution
     DoubleDistribution& operator += (DoubleDistribution const& d);                                  //!< this += Distribution
@@ -202,6 +203,8 @@ namespace apfel
   DoubleDistribution operator * (DoubleDistribution lhs, double const& s);                                              //!< Distribution*Scalar
   DoubleDistribution operator * (std::function<double(double const&, double const&)> const& f, DoubleDistribution rhs); //!< Function*Distribution
   DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&, double const&)> const& f); //!< Distribution*Function
+  DoubleDistribution operator * (std::function<double(double const&)> const& f, DoubleDistribution rhs);                //!< Function*Distribution
+  DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&)> const& f);                //!< Distribution*Function
   DoubleDistribution operator / (DoubleDistribution lhs, double const& s);                                              //!< Distribution/Scalar
   DoubleDistribution operator + (DoubleDistribution lhs, DoubleDistribution const& rhs);                                //!< Distribution+Distribution
   DoubleDistribution operator - (DoubleDistribution lhs, DoubleDistribution const& rhs);                                //!< Distribution-Distribution

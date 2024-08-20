@@ -605,6 +605,33 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  DoubleDistribution& DoubleDistribution::operator *= (std::function<double(double const&)> const& f)
+  {
+    // Get joint grids
+    const auto& jg1 = _g1.GetJointGrid().GetGrid();
+    const auto& jg2 = _g2.GetJointGrid().GetGrid();
+
+    // Joint grid
+    for (size_t i = 0; i < _dDJointGrid.size(0); i++)
+      for (size_t j = 0; j < _dDJointGrid.size(1); j++)
+        _dDJointGrid(i, j) *= f(jg1[i]) * f(jg2[j]);
+
+    // Subgrids
+    for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
+      {
+        const auto& sg1 = _g1.GetSubGrid(ig1).GetGrid();
+        for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
+          {
+            const auto& sg2 = _g2.GetSubGrid(ig2).GetGrid();
+            for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
+              for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
+                _dDSubGrid[ig1][ig2](i, j) *= f(sg1[i]) * f(sg2[j]);
+          }
+      }
+    return *this;
+  }
+
+  //_________________________________________________________________________
   DoubleDistribution& DoubleDistribution::operator /= (double const& s)
   {
     const double r = 1 / s;
@@ -706,6 +733,18 @@ namespace apfel
 
   //_________________________________________________________________________
   DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&, double const&)> const& f)
+  {
+    return lhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (std::function<double(double const&)> const& f, DoubleDistribution rhs)
+  {
+    return rhs *= f;
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&)> const& f)
   {
     return lhs *= f;
   }
