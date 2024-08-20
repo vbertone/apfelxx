@@ -26,8 +26,6 @@ namespace apfel
     ///@{
     /**
      * @brief The "DoubleExpression" constructor
-     * @param expr1: first expression
-     * @param expr2: second expression
      */
     DoubleExpression();
     ///@}
@@ -94,5 +92,4 @@ namespace apfel
     virtual double RegularRegular(double const&, double const&) const { return 0; }
     ///@}
   };
-  ///@}
 }
