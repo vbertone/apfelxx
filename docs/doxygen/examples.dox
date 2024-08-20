@@ -3,6 +3,7 @@
  \example dglap_test.cc
  \example dglap_test_streamlined.cc
  \example distribution_test.cc
+ \example doubledistribution_test.cc
  \example doubleobjint_test.cc
  \example expansion_test.cc
  \example gpd_test.cc
@@ -18,10 +19,12 @@
  \example qgriddist_test.cc
  \example set_test.cc
  \example siaxsec_test.cc
+ \example sidis_test.cc
  \example structurefunction_cc_test.cc
  \example structurefunction_massive_test.cc
  \example structurefunction_nc_pol_test.cc
  \example structurefunction_nc_test.cc
  \example subgrid_test.cc
+ \example sum_rules_test.cc
  \example tmd_test.cc
  */
