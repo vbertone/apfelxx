@@ -13,7 +13,7 @@
 namespace apfel
 {
   /**
-   * @brief This class defines the basic object "Operator" which
+   * @brief This class defines the basic object Operator which
    * essentially contains the convolution bewteen an "Expression"
    * object (e.g. a splitting function) and a set of interpolanting
    * functions defined on a grid.

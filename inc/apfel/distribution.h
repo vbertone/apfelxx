@@ -14,7 +14,7 @@
 namespace apfel
 {
   /**
-   * @brief The "Distribution" class defines one of the basic objects
+   * @brief The Distribution class defines one of the basic objects
    * of APFEL++ that provides a discretisation of a function and that
    * can be conveniently used for convolutions.
    */
@@ -137,7 +137,7 @@ namespace apfel
 
     /**
      * @brief Function that returns the derivative of the Distribution
-     * in the form of a "Distribution" object.
+     * in the form of a Distribution object.
      */
     Distribution Derivative() const;
 
@@ -171,7 +171,7 @@ namespace apfel
 
   /**
    * @name Maps of Distributions
-   * Functions that return maps of "Distribution" objects.
+   * Functions that return maps of Distribution objects.
    */
   ///@{
   /**
@@ -212,7 +212,7 @@ namespace apfel
   /**
    * @brief Function that sums the element of a
    * distribution. Specifically, it sums the elements of the joint
-   * grid. Combined with the "Distribution" * "Distribution" operator,
+   * grid. Combined with the Distribution * Distribution operator,
    * this function is useful to compute scalar products.
    * @param InDist: the distribution to be summed
    */
@@ -220,7 +220,7 @@ namespace apfel
 
   /**
    * @brief Function that computes the scalar product bewteen two
-   * "Distribution" objects. The product is computed using the joint
+   * Distribution objects. The product is computed using the joint
    * grids.
    * @param d1: the first input distribution
    * @param d2: the second input distribution

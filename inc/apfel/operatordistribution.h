@@ -16,7 +16,7 @@
 namespace apfel
 {
   /**
-   * @brief The "OperatorDistribution" class defines an object that
+   * @brief The OperatorDistribution class defines an object that
    * behaves as an operator along the first variable and as a
    * distribution along the second.
    */
@@ -77,12 +77,12 @@ namespace apfel
     Grid const& GetSecondGrid() const { return _grid2; }
 
     /**
-     * @brief Function that returns the "OperatorDistribution" container.
+     * @brief Function that returns the OperatorDistribution container.
      */
     std::vector<std::vector<matrix<std::vector<double>>>> GetOperatorDistribution() const { return _dOperator; }
 
     /**
-     * @brief Function that prints the "OperatorDistribution" object
+     * @brief Function that prints the OperatorDistribution object
      */
     void Print() const { std::cout << *this << std::endl; }
 

@@ -15,7 +15,7 @@
 namespace apfel
 {
   /**
-   * @brief This class defines the basic object "DoubleOperator" which
+   * @brief This class defines the basic object DoubleOperator which
    * essentially contains the convolution bewteen a "DoubleExpression"
    * object and two sets of interpolanting functions defined on two
    * independent grids. This is the two-dimensional generalisation of

@@ -14,7 +14,7 @@
 namespace apfel
 {
   /**
-   * @brief The "DoubleDistribution" class defines one of the basic
+   * @brief The DoubleDistribution class defines one of the basic
    * objects that provides a discretisation of a two-dimensional
    * function and that can be used for convolutions.
    */

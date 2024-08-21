@@ -16,7 +16,7 @@
 namespace apfel
 {
   /**
-   * @brief The "DistributionOperator" class defines an object that
+   * @brief The DistributionOperator class defines an object that
    * behaves as a distribution along the first variable and as an
    * operator along the second.
    */
@@ -77,12 +77,12 @@ namespace apfel
     Grid const& GetSecondGrid() const { return _grid2; }
 
     /**
-     * @brief Function that returns the "DistributionOperator" container.
+     * @brief Function that returns the DistributionOperator container.
      */
     std::vector<std::vector<std::vector<matrix<double>>>> GetDistributionOperator() const { return _dOperator; }
 
     /**
-     * @brief Function that prints the "DistributionOperator" object
+     * @brief Function that prints the DistributionOperator object
      */
     void Print() const { std::cout << *this << std::endl; }
 
