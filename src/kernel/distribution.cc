@@ -165,6 +165,10 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator = (Distribution const& d)
   {
+    // Fast method to check that we are using the same Grid
+    if (&this->_grid != &d._grid)
+      throw std::runtime_error(error("Distribution::operator +=", "Distribution grids do not match"));
+
     _distributionSubGrid   = d.GetDistributionSubGrid();
     _distributionJointGrid = d.GetDistributionJointGrid();
 
@@ -211,15 +215,14 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator /= (double const& s)
   {
-    const double r = 1 / s;
     // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
-      _distributionJointGrid[i] *= r;
+      _distributionJointGrid[i] /= s;
 
     // Subgrids
     for (size_t ig = 0; ig < _distributionSubGrid.size(); ig++)
       for (size_t i = 0; i < _distributionSubGrid[ig].size(); i++)
-        _distributionSubGrid[ig][i] *= r;
+        _distributionSubGrid[ig][i] /= s;
 
     return *this;
   }
@@ -227,6 +230,10 @@ namespace apfel
   //_________________________________________________________________________
   Distribution& Distribution::operator *= (Distribution const& d)
   {
+    // Fast method to check that we are using the same Grid
+    if (&this->_grid != &d._grid)
+      throw std::runtime_error(error("Distribution::operator *=", "Distribution grids do not match"));
+
     // Joint grid
     for (size_t i = 0; i < _distributionJointGrid.size(); i++)
       _distributionJointGrid[i] *= d._distributionJointGrid[i];

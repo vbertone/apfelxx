@@ -24,7 +24,7 @@ namespace apfel
     const LagrangeInterpolator li1{_grid1};
     const LagrangeInterpolator li2{_grid2};
 
-    // Number of grids
+    // Number of sub grids
     const int ng1 = _grid1.nGrids();
     const int ng2 = _grid2.nGrids();
 
@@ -59,8 +59,9 @@ namespace apfel
             // Evaluate Local-Local contribution
             const double cLL = _dexpr.LocalLocal(edx1, edx2);
 
-            // Evaluate Local-Singular and Local-Regular on the second
-            // grid.
+            // Evaluate Local-Singular and Local-Regular making the
+            // delta-function of the first variable act and
+            // integrating over the second variable.
             matrix<double> cLS_LR{1, (size_t) nx2};
             for (int delta = 0; delta < (int) cLS_LR.size(0); delta++)
               for (int gamma = delta; gamma < (int) cLS_LR.size(1); gamma++)
@@ -79,8 +80,9 @@ namespace apfel
                     }
                 }
 
-            // Evaluate Singular-Local and Regular-Local on the first
-            // grid.
+            // Evaluate Singular-Local and Regular-Local making the
+            // delta-function of the second variable act and
+            // integrating over the first variable.
             matrix<double> cSL_RL{1, (size_t) nx1};
             for (int beta = 0; beta < (int) cSL_RL.size(0); beta++)
               for (int alpha = beta; alpha < (int) cSL_RL.size(1); alpha++)
@@ -105,11 +107,11 @@ namespace apfel
             // Local-Local, Local-Singular, Local-Regular,
             // Singular-Local, and Regular-Local along the way.
 
-            // Resize operator w.r.t. the first variable
+            // Resize operator container w.r.t. the first variable
             _dOperator[ig1][ig2].resize(1, nx1);
 
-            // Loop over the index beta. In fact beta = 0 because the
-            // size of the first dimension of "_Operator" is one.
+            // Loop over the index beta. In fact, beta = 0 because the
+            // size of the first dimension of "_dOperator" is one.
             for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(0); beta++)
               {
                 // Useful precomputation
@@ -130,7 +132,7 @@ namespace apfel
 
                     // Loop over the index delta. In fact, delta = 0
                     // because the size of the first dimension of
-                    // "_Operator" is one.
+                    // "_dOperator" is one.
                     for (int delta = 0; delta < (int) _dOperator[ig1][ig2](beta, alpha).size(0); delta++)
                       {
                         // Useful precomputation
@@ -140,7 +142,7 @@ namespace apfel
                         for (int gamma = delta; gamma < (int) _dOperator[ig1][ig2](beta, alpha).size(1); gamma++)
                           {
                             // Weight of the subtraction term
-                            // w.r.t. the first grid.
+                            // w.r.t. the second grid.
                             const double ws2 = (delta == gamma ? 1 : 0);
 
                             // Starting value for the integration in y2
@@ -149,7 +151,8 @@ namespace apfel
                             // Initialise integral
                             double cSS_SR_RS_RR = 0;
 
-                            // Run over the grid intervals
+                            // Run over the grid intervals that
+                            // concern the integral.
                             double b1 = b10;
                             for (int j = 0; j < std::min(id1, alpha - beta) + 1; j++)
                               {
@@ -192,7 +195,7 @@ namespace apfel
     _eps(std::max(O1.GetIntegrationAccuracy(), O2.GetIntegrationAccuracy()))
   {
     // Stop the computation if any of the two operators is of GPD
-    // type. Still impossible to handle here.
+    // type.
     if (O1.IsGPD() || O2.IsGPD())
       throw std::runtime_error(error("DoubleOperator::DoubleOperator", "GPD double operators cannot be handled yet."));
 
@@ -234,8 +237,7 @@ namespace apfel
     _eps(std::max(DObj.GetTerms()[0].object1.GetIntegrationAccuracy(), DObj.GetTerms()[0].object2.GetIntegrationAccuracy()))
   {
     // Stop the computation if any of the two operators in the first
-    // term of the double objects is of GPD type. Still impossible to
-    // handle here.
+    // term of the double objects is of GPD type.
     if (DObj.GetTerms()[0].object1.IsGPD() || DObj.GetTerms()[0].object2.IsGPD())
       throw std::runtime_error(error("DoubleOperator::DoubleOperator", "GPD double operators cannot be handled yet."));
 
@@ -243,7 +245,7 @@ namespace apfel
     const int ng1 = _grid1.nGrids();
     const int ng2 = _grid2.nGrids();
 
-    // Resize matrix
+    // Resize matrix and set it to zero
     _dOperator.resize(ng1, std::vector<matrix<matrix<double>>>(ng2));
     for (int ig1 = 0; ig1 < ng1; ig1++)
       for (int ig2 = 0; ig2 < ng2; ig2++)
@@ -255,10 +257,10 @@ namespace apfel
             _dOperator[ig1][ig2](0, alpha).resize(1, nx2);
         }
 
-    // Fill in matrices
+    // Fill in container
     for (auto const& term : DObj.GetTerms())
       {
-        // Get coefficient and objects
+        // Get coefficient and objects of the current term
         const double coef = term.coefficient;
         const std::vector<matrix<double>> O1 = term.object1.GetOperator();
         const std::vector<matrix<double>> O2 = term.object2.GetOperator();
@@ -277,7 +279,7 @@ namespace apfel
   //_________________________________________________________________________
   DoubleDistribution DoubleOperator::operator *= (DoubleDistribution const& d) const
   {
-    // Fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same grids
     if (&_grid1 != &d.GetFirstGrid() || &_grid2 != &d.GetSecondGrid())
       throw std::runtime_error(error("DoubleOperator::operator *=", "DoubleOperator and DoubleDistribution grids do not match."));
 
@@ -285,30 +287,30 @@ namespace apfel
     const int ng1 = _grid1.nGrids();
     const int ng2 = _grid2.nGrids();
 
+    // Get number of grid intervals in the definition range of the
+    // joint grids.
+    const int nx1 = _grid1.GetJointGrid().nx();
+    const int nx2 = _grid2.GetJointGrid().nx();
+
     // Get maps of indices map from joint to subgrids
     const std::vector<std::vector<int>>& jsmap1 = _grid1.JointToSubMap();
     const std::vector<std::vector<int>>& jsmap2 = _grid2.JointToSubMap();
 
-    // Get joint distribution
+    // Get map of indices map from sub to joint grids
+    const std::vector<std::pair<int, int>>& sjmap1 = _grid1.SubToJointMap();
+    const std::vector<std::pair<int, int>>& sjmap2 = _grid2.SubToJointMap();
+
+    // Get joint distribution of the input distribution
     const matrix<double>& dj = d.GetDistributionJointGrid();
 
     // Initialise output vectors
     matrix<double> j(dj.size(0), dj.size(1));
     std::vector<std::vector<matrix<double>>> s(ng1, std::vector<matrix<double>>(ng2));
 
-    // Get number of grid intervals in the definition range of the
-    // joint grids.
-    const int nx1 = _grid1.GetJointGrid().nx();
-    const int nx2 = _grid2.GetJointGrid().nx();
-
-    // Get map of indices map from sub to joint to grids
-    const std::vector<std::pair<int, int>>& sjmap1 = _grid1.SubToJointMap();
-    const std::vector<std::pair<int, int>>& sjmap2 = _grid2.SubToJointMap();
-
     // Construct joint distributions first. The product between the
     // operator and the distribution is done exploiting the symmetry
-    // of the operator, which implies that it has one line
-    // only for each pair of indices.
+    // of the operator, which implies that it has a single line for
+    // each pair of indices.
     for (int beta = 0; beta < nx1; beta++)
       {
         const std::pair<int, int> m1 = sjmap1[beta];
@@ -321,7 +323,8 @@ namespace apfel
           }
       }
 
-    // Compute the the distribution on the subgrids
+    // Compute the the distribution on the subgrids using the joint
+    // grids.
     for (int ig1 = 0; ig1 < ng1; ig1++)
       for (int ig2 = 0; ig2 < ng2; ig2++)
         {
@@ -367,7 +370,7 @@ namespace apfel
   //_________________________________________________________________________
   DoubleOperator& DoubleOperator::operator += (DoubleOperator const& o)
   {
-    // Fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same grids
     if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
       throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match."));
 
@@ -385,7 +388,7 @@ namespace apfel
   //_________________________________________________________________________
   DoubleOperator& DoubleOperator::operator -= (DoubleOperator const& o)
   {
-    // Fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same grids
     if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
       throw std::runtime_error(error("DoubleOperator::operator +=", "Grids do not match."));
 
@@ -403,7 +406,7 @@ namespace apfel
   //_________________________________________________________________________
   DoubleOperator& DoubleOperator::operator *= (DoubleOperator const& o)
   {
-    // Fast method to check that we are using the same Grid
+    // Fast method to check that we are using the same grids
     if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
       throw std::runtime_error(error("DoubleOperator::operator *=", "Grids do not match."));
 

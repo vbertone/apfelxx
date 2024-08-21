@@ -21,20 +21,23 @@ namespace apfel
     _li1(LagrangeInterpolator{_g1}),
     _li2(LagrangeInterpolator{_g2})
   {
+    // Get joint grids for both variables
     const std::vector<double>& jg1 = _g1.GetJointGrid().GetGrid();
     const std::vector<double>& jg2 = _g2.GetJointGrid().GetGrid();
 
+    // Construct distribution on the joint grids
     _dDJointGrid.resize(jg1.size(), jg2.size());
     for (int ix1 = 0; ix1 < (int) jg1.size(); ix1++)
       for (int ix2 = 0; ix2 < (int) jg2.size(); ix2++)
         _dDJointGrid(ix1, ix2) = InDistFunc(std::min(jg1[ix1], 1.), std::min(jg2[ix2], 1.));
 
+    // Construct distribution on the subgrids
     _dDSubGrid.resize(_g1.nGrids());
     for (int ig1 = 0; ig1 < (int) _dDSubGrid.size(); ig1++)
       {
         const std::vector<double>& sg1 = _g1.GetSubGrid(ig1).GetGrid();
         _dDSubGrid[ig1].resize(_g2.nGrids());
-        for (int ig2 = 0; ig2 < (int) _dDSubGrid.size(); ig2++)
+        for (int ig2 = 0; ig2 < (int) _dDSubGrid[ig1].size(); ig2++)
           {
             const std::vector<double>& sg2 = _g2.GetSubGrid(ig2).GetGrid();
             _dDSubGrid[ig1][ig2].resize(sg1.size(), sg2.size());
@@ -63,20 +66,26 @@ namespace apfel
     _li1(LagrangeInterpolator{_g1}),
     _li2(LagrangeInterpolator{_g1})
   {
+    // Get distributions of the joint grids
     const std::vector<double> jg1 = d1.GetDistributionJointGrid();
     const std::vector<double> jg2 = d2.GetDistributionJointGrid();
+
+    // Construct distribution on the joint grids
     _dDJointGrid.resize(jg1.size(), jg2.size());
     for (int ix1 = 0; ix1 < (int) jg1.size(); ix1++)
       for (int ix2 = 0; ix2 < (int) jg2.size(); ix2++)
         _dDJointGrid(ix1, ix2) = jg1[ix1] * jg2[ix2];
 
+    // Get distributions of the subgrids
     const std::vector<std::vector<double>> sg1 = d1.GetDistributionSubGrid();
     const std::vector<std::vector<double>> sg2 = d2.GetDistributionSubGrid();
+
+    // Construct distribution on the subgrids
     _dDSubGrid.resize(_g1.nGrids());
     for (int ig1 = 0; ig1 < (int) _dDSubGrid.size(); ig1++)
       {
         _dDSubGrid[ig1].resize(_g2.nGrids());
-        for (int ig2 = 0; ig2 < (int) _dDSubGrid.size(); ig2++)
+        for (int ig2 = 0; ig2 < (int) _dDSubGrid[ig1].size(); ig2++)
           {
             _dDSubGrid[ig1][ig2].resize(sg1.size(), sg2.size());
             for (int ix1 = 0; ix1 < (int) sg1.size(); ix1++)
@@ -165,7 +174,7 @@ namespace apfel
     double result = 0;
     for (int beta = 0; beta < bounds1[1] - bounds1[0]; beta++)
       for (int delta = 0; delta < bounds2[1] - bounds2[0]; delta++)
-        result += intp1[beta] * intp2[delta] * _dDJointGrid(beta + bounds1[0], delta + bounds2[0]);
+        result += intp1[beta] * intp2[delta] * _dDJointGrid(bounds1[0] + beta, bounds2[0] + delta);
 
     return result;
   }
@@ -189,7 +198,7 @@ namespace apfel
     double result = 0;
     for (int beta = 0; beta < bounds1[1] - bounds1[0]; beta++)
       for (int delta = 0; delta < bounds2[1] - bounds2[0]; delta++)
-        result += dintp1[beta] * dintp2[delta] * _dDJointGrid(beta + bounds1[0], delta + bounds2[0]);
+        result += dintp1[beta] * dintp2[delta] * _dDJointGrid(bounds1[0] + beta, bounds2[0] + delta);
 
     return result;
   }
@@ -223,7 +232,7 @@ namespace apfel
     double result = 0;
     for (int beta = 0; beta < boundsb1[1] - boundsa1[0]; beta++)
       for (int delta = 0; delta < boundsb2[1] - boundsa2[0]; delta++)
-        result += iintp1[beta] * iintp2[delta] * _dDJointGrid(boundsa1[0] + beta, delta + boundsa2[0]);
+        result += iintp1[beta] * iintp2[delta] * _dDJointGrid(boundsa1[0] + beta, boundsa2[0] + delta);
 
     return sgn1 * sgn2 * result;
   }
@@ -248,7 +257,7 @@ namespace apfel
     std::vector<double> jg(nxj2, 0.);
     for (int delta = 0; delta < nxj2; delta++)
       for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
-        jg[delta] += intp1j[beta] * _dDJointGrid(beta + bounds1j[0], delta);
+        jg[delta] += intp1j[beta] * _dDJointGrid(bounds1j[0] + beta, delta);
 
     // Now take care of the subgrids. ig1 has to correspond to the
     // subgrid index along the first direction such that "x1" is on
@@ -281,7 +290,7 @@ namespace apfel
         sg[ig2].resize(nx2s, 0.);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
-            sg[ig2][delta] += intp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1s[0], delta);
+            sg[ig2][delta] += intp1s[beta] * _dDSubGrid[ig1][ig2](bounds1s[0] + beta, delta);
       }
     return Distribution{_g2, sg, jg};
   }
@@ -306,7 +315,7 @@ namespace apfel
     std::vector<double> jg(nxj1, 0.);
     for (int beta = 0; beta < nxj1; beta++)
       for (int delta = 0; delta < bounds2j[1] - bounds2j[0]; delta++)
-        jg[beta] += intp2j[delta] * _dDJointGrid(beta, delta + bounds2j[0]);
+        jg[beta] += intp2j[delta] * _dDJointGrid(beta, bounds2j[0] + delta);
 
     // Now take care of the subgrids. ig2 has to correspond to the
     // subgrid index along the second direction such that "x2" is on
@@ -317,7 +326,7 @@ namespace apfel
         break;
     ig2--;
 
-    // Get summation bounds on the igw-th subgrid along the second
+    // Get summation bounds on the ig2-th subgrid along the second
     // direction.
     const std::array<int, 2> bounds2s = _li2.SumBounds(x2, _g2.GetSubGrid(ig2));
 
@@ -339,7 +348,7 @@ namespace apfel
         sg[ig1].resize(nx1s, 0.);
         for (int beta = 0; beta < nx1s; beta++)
           for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
-            sg[ig1][beta] += intp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2s[0]);
+            sg[ig1][beta] += intp2s[delta] * _dDSubGrid[ig1][ig2](beta, bounds2s[0] + delta);
       }
     return Distribution{_g1, sg, jg};
   }
@@ -364,7 +373,7 @@ namespace apfel
     std::vector<double> jg(nxj2, 0.);
     for (int delta = 0; delta < nxj2; delta++)
       for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
-        jg[delta] += dintp1j[beta] * _dDJointGrid(beta + bounds1j[0], delta);
+        jg[delta] += dintp1j[beta] * _dDJointGrid(bounds1j[0] + beta, delta);
 
     // Now take care of the subgrids. ig1 has to correspond to the
     // subgrid index along the first direction such that "x1" is on
@@ -397,7 +406,7 @@ namespace apfel
         sg[ig2].resize(nx2s, 0.);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
-            sg[ig2][delta] += dintp1s[beta] * _dDSubGrid[ig1][ig2](beta + bounds1s[0], delta);
+            sg[ig2][delta] += dintp1s[beta] * _dDSubGrid[ig1][ig2](bounds1s[0] + beta, delta);
       }
     return Distribution{_g2, sg, jg};
   }
@@ -422,7 +431,7 @@ namespace apfel
     std::vector<double> jg(nxj1, 0.);
     for (int beta = 0; beta < nxj1; beta++)
       for (int delta = 0; delta < bounds2j[1] - bounds2j[0]; delta++)
-        jg[beta] += dintp2j[delta] * _dDJointGrid(beta, delta + bounds2j[0]);
+        jg[beta] += dintp2j[delta] * _dDJointGrid(beta, bounds2j[0] + delta);
 
     // Now take care of the subgrids. ig2 has to correspond to the
     // subgrid index along the second direction such that "x2" is on
@@ -455,7 +464,7 @@ namespace apfel
         sg[ig1].resize(nx1s, 0.);
         for (int beta = 0; beta < nx1s; beta++)
           for (int delta = 0; delta < bounds2s[1] - bounds2s[0]; delta++)
-            sg[ig1][beta] += dintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + bounds2s[0]);
+            sg[ig1][beta] += dintp2s[delta] * _dDSubGrid[ig1][ig2](beta, bounds2s[0] + delta);
       }
     return Distribution{_g1, sg, jg};
   }
@@ -486,7 +495,7 @@ namespace apfel
     std::vector<double> jg(nxj2, 0.);
     for (int delta = 0; delta < nxj2; delta++)
       for (int beta = 0; beta < boundsb1j[1] - boundsa1j[0]; beta++)
-        jg[delta] += sgn1 * iintp1j[beta] * _dDJointGrid(beta + boundsa1j[0], delta);
+        jg[delta] += sgn1 * iintp1j[beta] * _dDJointGrid(boundsa1j[0] + beta, delta);
 
     // Now take care of the subgrids. ig1 has to correspond to the
     // subgrid index along the first direction such that the lower
@@ -520,7 +529,7 @@ namespace apfel
         sg[ig2].resize(nx2s, 0.);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
-            sg[ig2][delta] += sgn1 * iintp1s[beta] * _dDSubGrid[ig1][ig2](beta + boundsa1s[0], delta);
+            sg[ig2][delta] += sgn1 * iintp1s[beta] * _dDSubGrid[ig1][ig2](boundsa1s[0] + beta, delta);
       }
     return Distribution{_g2, sg, jg};
   }
@@ -551,7 +560,7 @@ namespace apfel
     std::vector<double> jg(nxj1, 0.);
     for (int beta = 0; beta < nxj1; beta++)
       for (int delta = 0; delta < boundsb2j[1] - boundsa2j[0]; delta++)
-        jg[beta] += sgn2 * iintp2j[delta] * _dDJointGrid(beta, delta + boundsa2j[0]);
+        jg[beta] += sgn2 * iintp2j[delta] * _dDJointGrid(beta, boundsa2j[0] + delta);
 
     // Now take care of the subgrids. ig2 has to correspond to the
     // subgrid index along the second direction such that the lower
@@ -585,7 +594,7 @@ namespace apfel
         sg[ig1].resize(nx1s, 0.);
         for (int beta = 0; beta < nx1s; beta++)
           for (int delta = 0; delta < boundsb2s[1] - boundsa2s[0]; delta++)
-            sg[ig1][beta] += sgn2 * iintp2s[delta] * _dDSubGrid[ig1][ig2](beta, delta + boundsa2s[0]);
+            sg[ig1][beta] += sgn2 * iintp2s[delta] * _dDSubGrid[ig1][ig2](beta, boundsa2s[0] + delta);
       }
     return Distribution{_g1, sg, jg};
   }
@@ -599,6 +608,10 @@ namespace apfel
   //_________________________________________________________________________
   DoubleDistribution& DoubleDistribution::operator = (DoubleDistribution const& d)
   {
+    // Fast method to check that we are using the same Grid
+    if (&this->_g1 != &d._g1 || &this->_g2 != &d._g2)
+      throw std::runtime_error(error("DoubleDistribution::operator =", "DoubleDistribution grids do not match"));
+
     _dDSubGrid   = d._dDSubGrid;
     _dDJointGrid = d._dDJointGrid;
 
@@ -680,19 +693,17 @@ namespace apfel
   //_________________________________________________________________________
   DoubleDistribution& DoubleDistribution::operator /= (double const& s)
   {
-    const double r = 1 / s;
-
     // Joint grid
     for (size_t i = 0; i < _dDJointGrid.size(0); i++)
       for (size_t j = 0; j < _dDJointGrid.size(1); j++)
-        _dDJointGrid(i, j) *= r;
+        _dDJointGrid(i, j) /= s;
 
     // Subgrids
     for (size_t ig1 = 0; ig1 < _dDSubGrid.size(); ig1++)
       for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
         for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
           for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
-            _dDSubGrid[ig1][ig2](i, j) *= r;
+            _dDSubGrid[ig1][ig2](i, j) /= s;
 
     return *this;
   }
@@ -700,6 +711,10 @@ namespace apfel
   //_________________________________________________________________________
   DoubleDistribution& DoubleDistribution::operator *= (DoubleDistribution const& d)
   {
+    // Fast method to check that we are using the same Grid
+    if (&this->_g1 != &d._g1 || &this->_g2 != &d._g2)
+      throw std::runtime_error(error("DoubleDistribution::operator *=", "DoubleDistribution grids do not match"));
+
     // Joint grid
     for (size_t i = 0; i < _dDJointGrid.size(0); i++)
       for (size_t j = 0; j < _dDJointGrid.size(1); j++)
@@ -710,7 +725,7 @@ namespace apfel
       for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
         for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
           for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
-            _dDSubGrid[ig1][ig2](i, j) *= _dDSubGrid[ig1][ig2](i, j);
+            _dDSubGrid[ig1][ig2](i, j) *= d._dDSubGrid[ig1][ig2](i, j);
 
     return *this;
   }
@@ -732,7 +747,7 @@ namespace apfel
       for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
         for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
           for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
-            _dDSubGrid[ig1][ig2](i, j) += _dDSubGrid[ig1][ig2](i, j);
+            _dDSubGrid[ig1][ig2](i, j) += d._dDSubGrid[ig1][ig2](i, j);
 
     return *this;
   }
@@ -754,7 +769,7 @@ namespace apfel
       for (size_t ig2 = 0; ig2 < _dDSubGrid[ig1].size(); ig2++)
         for (size_t i = 0; i < _dDSubGrid[ig1][ig2].size(0); i++)
           for (size_t j = 0; j < _dDSubGrid[ig1][ig2].size(1); j++)
-            _dDSubGrid[ig1][ig2](i, j) -= _dDSubGrid[ig1][ig2](i, j);
+            _dDSubGrid[ig1][ig2](i, j) -= d._dDSubGrid[ig1][ig2](i, j);
 
     return *this;
   }
