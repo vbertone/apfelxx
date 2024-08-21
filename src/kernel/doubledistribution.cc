@@ -87,7 +87,7 @@ namespace apfel
         _dDSubGrid[ig1].resize(_g2.nGrids());
         for (int ig2 = 0; ig2 < (int) _dDSubGrid[ig1].size(); ig2++)
           {
-            _dDSubGrid[ig1][ig2].resize(sg1.size(), sg2.size());
+            _dDSubGrid[ig1][ig2].resize(sg1[ig1].size(), sg2[ig2].size());
             for (int ix1 = 0; ix1 < (int) sg1.size(); ix1++)
               for (int ix2 = 0; ix2 < (int) sg2.size(); ix2++)
                 _dDSubGrid[ig1][ig2](ix1, ix2) = sg1[ig1][ix1] * sg2[ig2][ix2];
