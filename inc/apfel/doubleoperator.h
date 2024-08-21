@@ -15,9 +15,9 @@
 namespace apfel
 {
   /**
-   * @brief The DoubleOperator class defines is essentially the
-   * convolution on a pair of grids bewteen an DoubleExpression object
-   * and the interpolant functions.
+   * @brief The DoubleOperator class is essentially the convolution on
+   * a pair of grids bewteen an DoubleExpression object and the
+   * interpolant functions.
    */
   class DoubleOperator
   {
@@ -45,6 +45,7 @@ namespace apfel
     /**
      * @brief The DoubleOperator constructor.
      * @param DObj: double object of operators
+     * @param dexpr: the double expression to be transformed (Null by default)
      */
     DoubleOperator(DoubleObject<Operator> const& DObj, DoubleExpression const& dexpr = DoubleExpression{});
 

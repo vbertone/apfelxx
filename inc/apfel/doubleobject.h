@@ -169,11 +169,6 @@ namespace apfel
     DoubleObject<T, U>& MultiplyBy(std::function<double(double const&)> const& fx, std::function<double(double const&)> const& fz);
 
     /**
-     * @brief Print the Operator object
-     */
-    void Print() const { std::cout << *this << std::endl; }
-
-    /**
      * @name Binary operators
      */
     ///@{
@@ -185,6 +180,11 @@ namespace apfel
     DoubleObject<T, U>& operator += (DoubleObject<T, U> const& o);                   //!< this += DoubleObject
     DoubleObject<T, U>& operator -= (DoubleObject<T, U> const& o);                   //!< this -= DoubleObject
     ///@}
+
+    /**
+     * @brief Print the Operator object
+     */
+    void Print() const { std::cout << *this << std::endl; }
 
   private:
     std::vector<term<T, U>> _terms;
@@ -220,7 +220,7 @@ namespace apfel
   ///@}
 
   /**
-   * @brief Method which prints the double object with cout <<.
+   * @brief Method which prints DoubleObject with cout <<.
    */
   template<class T, class U>
   std::ostream& operator << (std::ostream& os, DoubleObject<T, U> const& dob);

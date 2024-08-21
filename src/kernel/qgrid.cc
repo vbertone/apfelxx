@@ -12,6 +12,7 @@
 #include "apfel/doubleobject.h"
 #include "apfel/doubledistribution.h"
 #include "apfel/doubleoperator.h"
+#include "apfel/distributionoperator.h"
 
 namespace apfel
 {
@@ -426,4 +427,5 @@ namespace apfel
   template class QGrid<Set<DoubleObject<Operator, Distribution>> >;
   template class QGrid<DoubleDistribution>;
   template class QGrid<DoubleOperator>;
+  template class QGrid<DistributionOperator>;
 }

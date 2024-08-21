@@ -236,7 +236,7 @@ namespace apfel
     // Stop the computation if any of the two operators in the first
     // term of the double objects is of GPD type. Still impossible to
     // handle here.
-    if (DObj.GetTerms()[0].object1.IsGPD() || DObj.GetTerms()[0].object1.IsGPD())
+    if (DObj.GetTerms()[0].object1.IsGPD() || DObj.GetTerms()[0].object2.IsGPD())
       throw std::runtime_error(error("DoubleOperator::DoubleOperator", "GPD double operators cannot be handled yet."));
 
     // Number of subgrids

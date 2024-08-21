@@ -191,6 +191,11 @@ namespace apfel
     DoubleDistribution& operator -= (DoubleDistribution const& d);                                  //!< this -= Distribution
     ///@}
 
+    /**
+     * @brief Print the DoubleDistribution object
+     */
+    void Print() const { std::cout << *this << std::endl; }
+
   private:
     Grid                              const& _g1;           //!< The first interpolation grid
     Grid                              const& _g2;           //!< The second interpolation grid
@@ -219,7 +224,7 @@ namespace apfel
   ///@}
 
   /**
-   * @brief Method which prints Interpolator with cout <<.
+   * @brief Method which prints DoubleDistribution with cout <<.
    */
   std::ostream& operator << (std::ostream& os, DoubleDistribution const& in);
 }
