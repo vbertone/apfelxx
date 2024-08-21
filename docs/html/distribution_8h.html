@@ -106,7 +106,7 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> class defines one of the basic objects of APFEL++. This is essentially the discretisation of a function that can be conveniently used for convolutions.  <a href="classapfel_1_1Distribution.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> class defines one of the basic objects of APFEL++ that provides a discretisation of a function and that can be conveniently used for convolutions.  <a href="classapfel_1_1Distribution.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -142,8 +142,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a9b893308c29f61b885c87f924e0d4005" id="r_a9b893308c29f61b885c87f924e0d4005"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a9b893308c29f61b885c87f924e0d4005">apfel::operator*</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> lhs, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;rhs)</td></tr>
 <tr class="memdesc:a9b893308c29f61b885c87f924e0d4005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribution*Distribution.  <br /></td></tr>
 <tr class="separator:a9b893308c29f61b885c87f924e0d4005"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Map of Distribution functions</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Function that return maps pf distributions. </p>
+<tr><td colspan="2"><div class="groupHeader">Maps of Distributions</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Functions that return maps of <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> objects. </p>
 </div></td></tr>
 <tr class="memitem:a0e18284d370925bf0d42dd817eea16ef" id="r_a0e18284d370925bf0d42dd817eea16ef"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a0e18284d370925bf0d42dd817eea16ef">apfel::DistributionMap</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;Q, std::vector&lt; int &gt; const &amp;skip={})</td></tr>
 <tr class="memdesc:a0e18284d370925bf0d42dd817eea16ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that fills in a map of distributions from a map-valued function.  <br /></td></tr>
@@ -155,16 +155,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a90ee4f901b34777425220834d5f76083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that fills in a map of distributions from a vector-valued function.  <br /></td></tr>
 <tr class="separator:a90ee4f901b34777425220834d5f76083"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a413b96a157b485f67c2f9a84e8285e9b" id="r_a413b96a157b485f67c2f9a84e8285e9b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a413b96a157b485f67c2f9a84e8285e9b">apfel::Sum</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;InDist)</td></tr>
-<tr class="memdesc:a413b96a157b485f67c2f9a84e8285e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that sums the element of a distribution. Specifically, it sums the elements of the joint grid. Combined with the Distribution*Distribution operator, this function is useful to compute scalar products.  <br /></td></tr>
+<tr class="memdesc:a413b96a157b485f67c2f9a84e8285e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that sums the element of a distribution. Specifically, it sums the elements of the joint grid. Combined with the <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> * <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> operator, this function is useful to compute scalar products.  <br /></td></tr>
 <tr class="separator:a413b96a157b485f67c2f9a84e8285e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a562236897ffcf109fc7fe01436ad023d" id="r_a562236897ffcf109fc7fe01436ad023d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a562236897ffcf109fc7fe01436ad023d">apfel::InnerProduct</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d1, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d2, double const &amp;offset=0)</td></tr>
-<tr class="memdesc:a562236897ffcf109fc7fe01436ad023d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that computes the scalar product bewteen two distributions. The product is computed using the joint grids.  <br /></td></tr>
+<tr class="memdesc:a562236897ffcf109fc7fe01436ad023d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that computes the scalar product bewteen two <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> objects. The product is computed using the joint grids.  <br /></td></tr>
 <tr class="separator:a562236897ffcf109fc7fe01436ad023d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 20 2024 07:18:23 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Wed Aug 21 2024 15:23:31 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>

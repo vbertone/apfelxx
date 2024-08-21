@@ -100,7 +100,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> class defines the basic object "Operator" which is essentially the convolution on the grid bewteen an <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object (e.g. a splitting function) and the interpolant functions.  
+<p>This class defines the basic object <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> which essentially contains the convolution bewteen an "Expression" object (e.g. a splitting function) and a set of interpolanting functions defined on a grid.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="operator_8h_source.html">operator.h</a>&gt;</code></p>
@@ -112,10 +112,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa1690288a30f134b8f3a90e1a1aefc71" id="r_aa1690288a30f134b8f3a90e1a1aefc71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1690288a30f134b8f3a90e1a1aefc71">Operator</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;)=default</td></tr>
 <tr class="separator:aa1690288a30f134b8f3a90e1a1aefc71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8883b2d608d147309abbda622349e53e" id="r_a8883b2d608d147309abbda622349e53e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8883b2d608d147309abbda622349e53e">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr, <a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr, double const &amp;eps=1e-5, bool const &amp;gpd=false)</td></tr>
-<tr class="memdesc:a8883b2d608d147309abbda622349e53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> constructor.  <br /></td></tr>
+<tr class="memdesc:a8883b2d608d147309abbda622349e53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor.  <br /></td></tr>
 <tr class="separator:a8883b2d608d147309abbda622349e53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33282323f21457b098ee90b2356af978" id="r_a33282323f21457b098ee90b2356af978"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33282323f21457b098ee90b2356af978">~Operator</a> ()</td></tr>
-<tr class="memdesc:a33282323f21457b098ee90b2356af978"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> virtual destructor.  <br /></td></tr>
+<tr class="memdesc:a33282323f21457b098ee90b2356af978"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> virtual destructor.  <br /></td></tr>
 <tr class="separator:a33282323f21457b098ee90b2356af978"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed0e053cdac13eac1b114a5355a2ff0a" id="r_aed0e053cdac13eac1b114a5355a2ff0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed0e053cdac13eac1b114a5355a2ff0a">BuildOperatorDGLAP</a> ()</td></tr>
 <tr class="memdesc:aed0e053cdac13eac1b114a5355a2ff0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a DGLAP-like operator.  <br /></td></tr>
@@ -124,35 +124,35 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af5340ab3b9624dc2262a561fb16baa50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a GPD-like operator.  <br /></td></tr>
 <tr class="separator:af5340ab3b9624dc2262a561fb16baa50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea92b7498b3b329688f3ac898083b9be" id="r_aea92b7498b3b329688f3ac898083b9be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea92b7498b3b329688f3ac898083b9be">Evaluate</a> (double const &amp;x) const</td></tr>
-<tr class="memdesc:aea92b7498b3b329688f3ac898083b9be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that interpolates the operator over the first index return a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> object.  <br /></td></tr>
+<tr class="memdesc:aea92b7498b3b329688f3ac898083b9be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that interpolates the operator over the first index return a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> object.  <br /></td></tr>
 <tr class="separator:aea92b7498b3b329688f3ac898083b9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80f6e9dc8055f27d5a394f53c4702d30" id="r_a80f6e9dc8055f27d5a394f53c4702d30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80f6e9dc8055f27d5a394f53c4702d30">GetGrid</a> () const</td></tr>
-<tr class="memdesc:a80f6e9dc8055f27d5a394f53c4702d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated to the operator.  <br /></td></tr>
+<tr class="memdesc:a80f6e9dc8055f27d5a394f53c4702d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated with the operator.  <br /></td></tr>
 <tr class="separator:a80f6e9dc8055f27d5a394f53c4702d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae97d6c436be87901e7234f551cfe088f" id="r_ae97d6c436be87901e7234f551cfe088f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae97d6c436be87901e7234f551cfe088f">GetExpression</a> () const</td></tr>
-<tr class="memdesc:ae97d6c436be87901e7234f551cfe088f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object associated to the operator.  <br /></td></tr>
+<tr class="memdesc:ae97d6c436be87901e7234f551cfe088f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object associated with the operator.  <br /></td></tr>
 <tr class="separator:ae97d6c436be87901e7234f551cfe088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d185d01ae0703325751a2d68193f127" id="r_a0d185d01ae0703325751a2d68193f127"><td class="memItemLeft" align="right" valign="top">double const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d185d01ae0703325751a2d68193f127">GetIntegrationAccuracy</a> () const</td></tr>
-<tr class="memdesc:a0d185d01ae0703325751a2d68193f127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration accuracy.  <br /></td></tr>
+<tr class="memdesc:a0d185d01ae0703325751a2d68193f127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration accuracy,.  <br /></td></tr>
 <tr class="separator:a0d185d01ae0703325751a2d68193f127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55048afd5d8c9310649edeafdcf10d7e" id="r_a55048afd5d8c9310649edeafdcf10d7e"><td class="memItemLeft" align="right" valign="top">bool const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55048afd5d8c9310649edeafdcf10d7e">IsGPD</a> () const</td></tr>
-<tr class="memdesc:a55048afd5d8c9310649edeafdcf10d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the GPD switch.  <br /></td></tr>
+<tr class="memdesc:a55048afd5d8c9310649edeafdcf10d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the GPD switch,.  <br /></td></tr>
 <tr class="separator:a55048afd5d8c9310649edeafdcf10d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f51d7a58bc907d7de889f941ee4c052" id="r_a6f51d7a58bc907d7de889f941ee4c052"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f51d7a58bc907d7de889f941ee4c052">GetOperator</a> () const</td></tr>
-<tr class="memdesc:a6f51d7a58bc907d7de889f941ee4c052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the operator.  <br /></td></tr>
+<tr class="memdesc:a6f51d7a58bc907d7de889f941ee4c052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> container.  <br /></td></tr>
 <tr class="separator:a6f51d7a58bc907d7de889f941ee4c052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085a308c830454e5a451b3b157e374b0" id="r_a085a308c830454e5a451b3b157e374b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a085a308c830454e5a451b3b157e374b0">Print</a> () const</td></tr>
-<tr class="memdesc:a085a308c830454e5a451b3b157e374b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> object.  <br /></td></tr>
+<tr class="memdesc:a085a308c830454e5a451b3b157e374b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that prints the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> object.  <br /></td></tr>
 <tr class="separator:a085a308c830454e5a451b3b157e374b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Binary operators</div></td></tr>
 <tr class="memitem:ac1cb0fe68195da6906fda8962c7b6b30" id="r_ac1cb0fe68195da6906fda8962c7b6b30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1cb0fe68195da6906fda8962c7b6b30">operator*=</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d) const</td></tr>
-<tr class="memdesc:ac1cb0fe68195da6906fda8962c7b6b30"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a>  <br /></td></tr>
+<tr class="memdesc:ac1cb0fe68195da6906fda8962c7b6b30"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a>  <br /></td></tr>
 <tr class="separator:ac1cb0fe68195da6906fda8962c7b6b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fc5543a4cf6c8fede1bba2841f74d7a" id="r_a8fc5543a4cf6c8fede1bba2841f74d7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Operator.html">Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fc5543a4cf6c8fede1bba2841f74d7a">operator*=</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;o)</td></tr>
-<tr class="memdesc:a8fc5543a4cf6c8fede1bba2841f74d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a>  <br /></td></tr>
+<tr class="memdesc:a8fc5543a4cf6c8fede1bba2841f74d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a>  <br /></td></tr>
 <tr class="separator:a8fc5543a4cf6c8fede1bba2841f74d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a249a7b6ca0c526de9b8d5f070485d391" id="r_a249a7b6ca0c526de9b8d5f070485d391"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Operator.html">Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a249a7b6ca0c526de9b8d5f070485d391">operator=</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;o)</td></tr>
-<tr class="memdesc:a249a7b6ca0c526de9b8d5f070485d391"><td class="mdescLeft">&#160;</td><td class="mdescRight">this = <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a>  <br /></td></tr>
+<tr class="memdesc:a249a7b6ca0c526de9b8d5f070485d391"><td class="mdescLeft">&#160;</td><td class="mdescRight">this = <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a>  <br /></td></tr>
 <tr class="separator:a249a7b6ca0c526de9b8d5f070485d391"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3159c9828f3d70ed188e63280b9e0e57" id="r_a3159c9828f3d70ed188e63280b9e0e57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Operator.html">Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3159c9828f3d70ed188e63280b9e0e57">operator*=</a> (double const &amp;s)</td></tr>
 <tr class="memdesc:a3159c9828f3d70ed188e63280b9e0e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= Scalar  <br /></td></tr>
@@ -164,10 +164,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8af6c2c8c0a043c7df36b4aad3cd655a"><td class="mdescLeft">&#160;</td><td class="mdescRight">this /= Scalar  <br /></td></tr>
 <tr class="separator:a8af6c2c8c0a043c7df36b4aad3cd655a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fa7df6d22db3e0df845763ece3a0791" id="r_a1fa7df6d22db3e0df845763ece3a0791"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Operator.html">Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fa7df6d22db3e0df845763ece3a0791">operator+=</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;o)</td></tr>
-<tr class="memdesc:a1fa7df6d22db3e0df845763ece3a0791"><td class="mdescLeft">&#160;</td><td class="mdescRight">this += <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a>  <br /></td></tr>
+<tr class="memdesc:a1fa7df6d22db3e0df845763ece3a0791"><td class="mdescLeft">&#160;</td><td class="mdescRight">this += <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a>  <br /></td></tr>
 <tr class="separator:a1fa7df6d22db3e0df845763ece3a0791"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fcf28e958de9cdbd81ac72526c95646" id="r_a4fcf28e958de9cdbd81ac72526c95646"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Operator.html">Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fcf28e958de9cdbd81ac72526c95646">operator-=</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;o)</td></tr>
-<tr class="memdesc:a4fcf28e958de9cdbd81ac72526c95646"><td class="mdescLeft">&#160;</td><td class="mdescRight">this -= <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a>  <br /></td></tr>
+<tr class="memdesc:a4fcf28e958de9cdbd81ac72526c95646"><td class="mdescLeft">&#160;</td><td class="mdescRight">this -= <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a>  <br /></td></tr>
 <tr class="separator:a4fcf28e958de9cdbd81ac72526c95646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -185,17 +185,18 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:a6d93f7c9ec6b8a8ccd29189531282278"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPD switch.  <br /></td></tr>
 <tr class="separator:a6d93f7c9ec6b8a8ccd29189531282278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a319ffccbd5f34a791d82e9dd70dfe8d8" id="r_a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a319ffccbd5f34a791d82e9dd70dfe8d8">_Operator</a></td></tr>
-<tr class="memdesc:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> values.  <br /></td></tr>
+<tr class="memdesc:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> values.  <br /></td></tr>
 <tr class="separator:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a3a91d4372bda8aba8371743c05c385fd" id="r_a3a91d4372bda8aba8371743c05c385fd"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a91d4372bda8aba8371743c05c385fd">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;op)</td></tr>
-<tr class="memdesc:a3a91d4372bda8aba8371743c05c385fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which prints <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> with std::cout &lt;&lt;.  <br /></td></tr>
+<tr class="memdesc:a3a91d4372bda8aba8371743c05c385fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which prints <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> with std::cout &lt;&lt;.  <br /></td></tr>
 <tr class="separator:a3a91d4372bda8aba8371743c05c385fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> class defines the basic object "Operator" which is essentially the convolution on the grid bewteen an <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object (e.g. a splitting function) and the interpolant functions. </p>
+<div class="textblock"><p>This class defines the basic object <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> which essentially contains the convolution bewteen an "Expression" object (e.g. a splitting function) and a set of interpolanting functions defined on a grid. </p>
+<dl class="section note"><dt>Note</dt><dd>Both the forward and the non-forward cases can be handled by this class. The correspond respectively to inclusive (DGLAP-like) and exclusive (GPD-like) processes. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#_a10">distribution_test.cc</a>, <a class="el" href="massiveCF_test_8cc-example.html#_a5">massiveCF_test.cc</a>, <a class="el" href="operator_test_8cc-example.html#_a9">operator_test.cc</a>, <a class="el" href="principal_value_test_8cc-example.html#_a9">principal_value_test.cc</a>, and <a class="el" href="set_test_8cc-example.html#_a4">set_test.cc</a>.</dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -278,11 +279,11 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> constructor. </p>
+<p>The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gr</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object </td></tr>
-    <tr><td class="paramname">expr</td><td>the expression to be transformed </td></tr>
+    <tr><td class="paramname">expr</td><td>the expression to be convoluted </td></tr>
     <tr><td class="paramname">eps</td><td>relative accuracy of the numerical integrations (default: 10<sup>-5</sup>) </td></tr>
     <tr><td class="paramname">gpd</td><td>whether the operator had to computed for a GPD-like expression (default: false) </td></tr>
   </table>
@@ -314,7 +315,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> virtual destructor. </p>
+<p>The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> virtual destructor. </p>
 
 </div>
 </div>
@@ -372,7 +373,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that interpolates the operator over the first index return a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> object. </p>
+<p>Function that interpolates the operator over the first index return a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>the value in x to be interpolated </td></tr>
@@ -405,7 +406,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function that returns the <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object associated to the operator. </p>
+<p>Function that returns the <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object associated with the operator. </p>
 
 </div>
 </div>
@@ -432,7 +433,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated to the operator. </p>
+<p>Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated with the operator. </p>
 
 </div>
 </div>
@@ -459,7 +460,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function that returns the integration accuracy. </p>
+<p>Function that returns the integration accuracy,. </p>
 
 </div>
 </div>
@@ -486,7 +487,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function that returns the operator. </p>
+<p>Function that returns the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> container. </p>
 
 </div>
 </div>
@@ -513,7 +514,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function that returns the GPD switch. </p>
+<p>Function that returns the GPD switch,. </p>
 
 </div>
 </div>
@@ -532,7 +533,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> </p>
+<p>this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> </p>
 
 </div>
 </div>
@@ -570,7 +571,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this *= <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> </p>
+<p>this *= <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> </p>
 
 </div>
 </div>
@@ -608,7 +609,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this += <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> </p>
+<p>this += <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> </p>
 
 </div>
 </div>
@@ -627,7 +628,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this -= <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> </p>
+<p>this -= <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> </p>
 
 </div>
 </div>
@@ -665,7 +666,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this = <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> </p>
+<p>this = <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> </p>
 
 </div>
 </div>
@@ -692,7 +693,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Print the <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> object. </p>
+<p>Function that prints the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> object. </p>
 
 </div>
 </div>
@@ -724,7 +725,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Method which prints <a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> with std::cout &lt;&lt;. </p>
+<p>Method which prints <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> with std::cout &lt;&lt;. </p>
 
 </div>
 </div>
@@ -845,7 +846,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classapfel_1_1Operator.html" title="The Operator class defines the basic object &quot;Operator&quot; which is essentially the convolution on the gr...">Operator</a> values. </p>
+<p><a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> values. </p>
 
 </div>
 </div>
@@ -855,7 +856,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 20 2024 07:18:25 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Wed Aug 21 2024 15:23:33 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>

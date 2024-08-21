@@ -100,7 +100,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> class defines one of the basic objects of APFEL++. This is essentially the discretisation of a two-dimensional function that can be conveniently used for convolutions.  
+<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> class defines one of the basic objects that provides a discretisation of a two-dimensional function and that can be used for convolutions.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="doubledistribution_8h_source.html">doubledistribution.h</a>&gt;</code></p>
@@ -110,46 +110,52 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aecbc210a165f8b36b02fdc55529d7ef5" id="r_aecbc210a165f8b36b02fdc55529d7ef5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecbc210a165f8b36b02fdc55529d7ef5">DoubleDistribution</a> ()=delete</td></tr>
 <tr class="separator:aecbc210a165f8b36b02fdc55529d7ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c34c1270f33492e5056cdab94d12513" id="r_a6c34c1270f33492e5056cdab94d12513"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c34c1270f33492e5056cdab94d12513">Derivative</a> () const</td></tr>
-<tr class="memdesc:a6c34c1270f33492e5056cdab94d12513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the derivative of the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the form of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> object.  <br /></td></tr>
+<tr class="memdesc:a6c34c1270f33492e5056cdab94d12513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the derivative of the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the form of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> object.  <br /></td></tr>
 <tr class="separator:a6c34c1270f33492e5056cdab94d12513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae366da515e940cf3e080f6ed9715a4fe" id="r_ae366da515e940cf3e080f6ed9715a4fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae366da515e940cf3e080f6ed9715a4fe">Print</a> () const</td></tr>
+<tr class="memdesc:ae366da515e940cf3e080f6ed9715a4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> object.  <br /></td></tr>
+<tr class="separator:ae366da515e940cf3e080f6ed9715a4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Constructors</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>List of constructors. </p>
 </div></td></tr>
 <tr class="memitem:a2fece877772739085e8b89ba376f645e" id="r_a2fece877772739085e8b89ba376f645e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fece877772739085e8b89ba376f645e">DoubleDistribution</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g1, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g2, std::function&lt; double(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc=[](double const &amp;, double const &amp;) -&gt; double{ return 0;})</td></tr>
-<tr class="memdesc:a2fece877772739085e8b89ba376f645e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> constructor.  <br /></td></tr>
+<tr class="memdesc:a2fece877772739085e8b89ba376f645e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor.  <br /></td></tr>
 <tr class="separator:a2fece877772739085e8b89ba376f645e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99736707d485053627063f5764242798" id="r_a99736707d485053627063f5764242798"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99736707d485053627063f5764242798">DoubleDistribution</a> (<a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;obj)</td></tr>
-<tr class="memdesc:a99736707d485053627063f5764242798"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> copy constructor.  <br /></td></tr>
+<tr class="memdesc:a99736707d485053627063f5764242798"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> copy constructor.  <br /></td></tr>
 <tr class="separator:a99736707d485053627063f5764242798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1ed22d545d167780ff7af84a912a6f9" id="r_ac1ed22d545d167780ff7af84a912a6f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1ed22d545d167780ff7af84a912a6f9">DoubleDistribution</a> (<a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d1, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;d2)</td></tr>
-<tr class="memdesc:ac1ed22d545d167780ff7af84a912a6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> constructor.  <br /></td></tr>
+<tr class="memdesc:ac1ed22d545d167780ff7af84a912a6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor.  <br /></td></tr>
 <tr class="separator:ac1ed22d545d167780ff7af84a912a6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2911daedabd19851919165ecd567dfbd" id="r_a2911daedabd19851919165ecd567dfbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2911daedabd19851919165ecd567dfbd">DoubleDistribution</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g1, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g2, std::vector&lt; std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; &gt; const &amp;distsubgrid, <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; const &amp;distjointgrid)</td></tr>
-<tr class="memdesc:a2911daedabd19851919165ecd567dfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> constructor.  <br /></td></tr>
+<tr class="memdesc:a2911daedabd19851919165ecd567dfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor.  <br /></td></tr>
 <tr class="separator:a2911daedabd19851919165ecd567dfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0724172085074a8dc1589a7ab989e025" id="r_a0724172085074a8dc1589a7ab989e025"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0724172085074a8dc1589a7ab989e025">DoubleDistribution</a> (<a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; const &amp;DObj)</td></tr>
+<tr class="memdesc:a0724172085074a8dc1589a7ab989e025"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor.  <br /></td></tr>
+<tr class="separator:a0724172085074a8dc1589a7ab989e025"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Evaluate functions</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>List of functions that perform the interpolation on the x-space grids. </p>
 </div></td></tr>
 <tr class="memitem:a012fac075c595a757334af1825c21bfb" id="r_a012fac075c595a757334af1825c21bfb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a012fac075c595a757334af1825c21bfb">Evaluate</a> (double const &amp;x1, double const &amp;x2) const</td></tr>
-<tr class="memdesc:a012fac075c595a757334af1825c21bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the interpolated function on the joint grid.  <br /></td></tr>
+<tr class="memdesc:a012fac075c595a757334af1825c21bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the interpolated function on the joint grids.  <br /></td></tr>
 <tr class="separator:a012fac075c595a757334af1825c21bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7020a657af544d5dd78cc728d8238263" id="r_a7020a657af544d5dd78cc728d8238263"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7020a657af544d5dd78cc728d8238263">Derive</a> (double const &amp;x1, double const &amp;x2) const</td></tr>
-<tr class="memdesc:a7020a657af544d5dd78cc728d8238263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of the interpolated function on the joint grid.  <br /></td></tr>
+<tr class="memdesc:a7020a657af544d5dd78cc728d8238263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of the interpolated function on the joint grids.  <br /></td></tr>
 <tr class="separator:a7020a657af544d5dd78cc728d8238263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ab3171233ca1d4c53cab3d573e8959f" id="r_a3ab3171233ca1d4c53cab3d573e8959f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ab3171233ca1d4c53cab3d573e8959f">Integrate</a> (double const &amp;a1, double const &amp;b1, double const &amp;a2, double const &amp;b2) const</td></tr>
-<tr class="memdesc:a3ab3171233ca1d4c53cab3d573e8959f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the integral of the interpolated function in the interval x1 in [a1,b1] and x2 in [a2,b2] on the joint grid.  <br /></td></tr>
+<tr class="memdesc:a3ab3171233ca1d4c53cab3d573e8959f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the integral of the interpolated function in the interval x1 in [a1,b1] and x2 in [a2,b2] on the joint grids.  <br /></td></tr>
 <tr class="separator:a3ab3171233ca1d4c53cab3d573e8959f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab76ed734a87c28ba4d8a3ce271833a90" id="r_ab76ed734a87c28ba4d8a3ce271833a90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab76ed734a87c28ba4d8a3ce271833a90">Evaluate1</a> (double const &amp;x1) const</td></tr>
-<tr class="memdesc:ab76ed734a87c28ba4d8a3ce271833a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution.  <br /></td></tr>
+<tr class="memdesc:ab76ed734a87c28ba4d8a3ce271833a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution.  <br /></td></tr>
 <tr class="separator:ab76ed734a87c28ba4d8a3ce271833a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03ea92125e724423cf4738de5ed31087" id="r_a03ea92125e724423cf4738de5ed31087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03ea92125e724423cf4738de5ed31087">Evaluate2</a> (double const &amp;x2) const</td></tr>
-<tr class="memdesc:a03ea92125e724423cf4738de5ed31087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the second variable leaving the second undetermined. This produces a single distribution.  <br /></td></tr>
+<tr class="memdesc:a03ea92125e724423cf4738de5ed31087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the second variable leaving the first undetermined. This produces a single distribution.  <br /></td></tr>
 <tr class="separator:a03ea92125e724423cf4738de5ed31087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2983913f4617b909da903b3b5b13264" id="r_ab2983913f4617b909da903b3b5b13264"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2983913f4617b909da903b3b5b13264">Derive1</a> (double const &amp;x1) const</td></tr>
-<tr class="memdesc:ab2983913f4617b909da903b3b5b13264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution.  <br /></td></tr>
+<tr class="memdesc:ab2983913f4617b909da903b3b5b13264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution.  <br /></td></tr>
 <tr class="separator:ab2983913f4617b909da903b3b5b13264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab316e694d7bb644551e7a25a5e2d3441" id="r_ab316e694d7bb644551e7a25a5e2d3441"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab316e694d7bb644551e7a25a5e2d3441">Derive2</a> (double const &amp;x2) const</td></tr>
-<tr class="memdesc:ab316e694d7bb644551e7a25a5e2d3441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the second variable leaving the second undetermined. This produces a single distribution.  <br /></td></tr>
+<tr class="memdesc:ab316e694d7bb644551e7a25a5e2d3441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the second variable leaving the first undetermined. This produces a single distribution.  <br /></td></tr>
 <tr class="separator:ab316e694d7bb644551e7a25a5e2d3441"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c92bee35fb0a16075b6a3bd2d780713" id="r_a7c92bee35fb0a16075b6a3bd2d780713"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c92bee35fb0a16075b6a3bd2d780713">Integrate1</a> (double const &amp;a1, double const &amp;b1) const</td></tr>
 <tr class="memdesc:a7c92bee35fb0a16075b6a3bd2d780713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that evaluates the integral of the interpolated function in the interval [a1,b1] for the first variable leaving the second undetermined.  <br /></td></tr>
@@ -172,25 +178,28 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab9a58b7d0d767877be5ee4011240b02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Binary operators</div></td></tr>
 <tr class="memitem:ac830053552fdf81d94749cf508ceb88c" id="r_ac830053552fdf81d94749cf508ceb88c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac830053552fdf81d94749cf508ceb88c">operator=</a> (<a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;d)</td></tr>
-<tr class="memdesc:ac830053552fdf81d94749cf508ceb88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">this = <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a>  <br /></td></tr>
+<tr class="memdesc:ac830053552fdf81d94749cf508ceb88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">this = <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a>  <br /></td></tr>
 <tr class="separator:ac830053552fdf81d94749cf508ceb88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb35fa2ae2991b1a2c5a64a03d08310b" id="r_acb35fa2ae2991b1a2c5a64a03d08310b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb35fa2ae2991b1a2c5a64a03d08310b">operator*=</a> (double const &amp;s)</td></tr>
 <tr class="memdesc:acb35fa2ae2991b1a2c5a64a03d08310b"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= Scalar  <br /></td></tr>
 <tr class="separator:acb35fa2ae2991b1a2c5a64a03d08310b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af917f0821581cb81481b1bf91b7a86aa" id="r_af917f0821581cb81481b1bf91b7a86aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af917f0821581cb81481b1bf91b7a86aa">operator*=</a> (std::function&lt; double(double const &amp;, double const &amp;)&gt; const &amp;f)</td></tr>
-<tr class="memdesc:af917f0821581cb81481b1bf91b7a86aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= Function of the integration variable  <br /></td></tr>
+<tr class="memdesc:af917f0821581cb81481b1bf91b7a86aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= Function of both the integration variables  <br /></td></tr>
 <tr class="separator:af917f0821581cb81481b1bf91b7a86aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0404a01755099b95df5d22b70fe97029" id="r_a0404a01755099b95df5d22b70fe97029"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0404a01755099b95df5d22b70fe97029">operator*=</a> (std::function&lt; double(double const &amp;)&gt; const &amp;f)</td></tr>
+<tr class="memdesc:a0404a01755099b95df5d22b70fe97029"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= Function of one variable used for both the integration variables  <br /></td></tr>
+<tr class="separator:a0404a01755099b95df5d22b70fe97029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0efc91432d51c4fc4029fcdb7350ee92" id="r_a0efc91432d51c4fc4029fcdb7350ee92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0efc91432d51c4fc4029fcdb7350ee92">operator/=</a> (double const &amp;s)</td></tr>
 <tr class="memdesc:a0efc91432d51c4fc4029fcdb7350ee92"><td class="mdescLeft">&#160;</td><td class="mdescRight">this /= Scalar  <br /></td></tr>
 <tr class="separator:a0efc91432d51c4fc4029fcdb7350ee92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad3ba3d48d916b39fdb8812f767e6525" id="r_aad3ba3d48d916b39fdb8812f767e6525"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad3ba3d48d916b39fdb8812f767e6525">operator*=</a> (<a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;d)</td></tr>
-<tr class="memdesc:aad3ba3d48d916b39fdb8812f767e6525"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a>  <br /></td></tr>
+<tr class="memdesc:aad3ba3d48d916b39fdb8812f767e6525"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a>  <br /></td></tr>
 <tr class="separator:aad3ba3d48d916b39fdb8812f767e6525"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb6c9638912c07eb919fd41d92b0b14e" id="r_aeb6c9638912c07eb919fd41d92b0b14e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb6c9638912c07eb919fd41d92b0b14e">operator+=</a> (<a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;d)</td></tr>
-<tr class="memdesc:aeb6c9638912c07eb919fd41d92b0b14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">this += <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a>  <br /></td></tr>
+<tr class="memdesc:aeb6c9638912c07eb919fd41d92b0b14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">this += <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a>  <br /></td></tr>
 <tr class="separator:aeb6c9638912c07eb919fd41d92b0b14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c90935a5d68b3067b0fbde7c4e0836" id="r_a79c90935a5d68b3067b0fbde7c4e0836"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79c90935a5d68b3067b0fbde7c4e0836">operator-=</a> (<a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;d)</td></tr>
-<tr class="memdesc:a79c90935a5d68b3067b0fbde7c4e0836"><td class="mdescLeft">&#160;</td><td class="mdescRight">this -= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a>  <br /></td></tr>
+<tr class="memdesc:a79c90935a5d68b3067b0fbde7c4e0836"><td class="mdescLeft">&#160;</td><td class="mdescRight">this -= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a>  <br /></td></tr>
 <tr class="separator:a79c90935a5d68b3067b0fbde7c4e0836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -217,16 +226,16 @@ Private Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a088568019287603407d813d859fee416" id="r_a088568019287603407d813d859fee416"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a088568019287603407d813d859fee416">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;sg)</td></tr>
-<tr class="memdesc:a088568019287603407d813d859fee416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which prints <a class="el" href="classapfel_1_1Interpolator.html" title="The Interpolator class is a mother class for the x-space interpolationand requires the implementation...">Interpolator</a> with cout &lt;&lt;.  <br /></td></tr>
+<tr class="memdesc:a088568019287603407d813d859fee416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which prints <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> with cout &lt;&lt;.  <br /></td></tr>
 <tr class="separator:a088568019287603407d813d859fee416"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> class defines one of the basic objects of APFEL++. This is essentially the discretisation of a two-dimensional function that can be conveniently used for convolutions. </p>
+<div class="textblock"><p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> class defines one of the basic objects that provides a discretisation of a two-dimensional function and that can be used for convolutions. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="doubledistribution_test_8cc-example.html#_a1">doubledistribution_test.cc</a>, and <a class="el" href="sidis_test_8cc-example.html#_a26">sidis_test.cc</a>.</dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aecbc210a165f8b36b02fdc55529d7ef5" name="aecbc210a165f8b36b02fdc55529d7ef5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecbc210a165f8b36b02fdc55529d7ef5">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[1/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aecbc210a165f8b36b02fdc55529d7ef5">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,7 +260,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a2fece877772739085e8b89ba376f645e" name="a2fece877772739085e8b89ba376f645e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fece877772739085e8b89ba376f645e">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[2/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fece877772739085e8b89ba376f645e">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,12 +283,12 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> constructor. </p>
+<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">g1</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the first x-space interpolation grid </td></tr>
-    <tr><td class="paramname">g2</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the second x-space interpolation grid </td></tr>
-    <tr><td class="paramname">InDistFunc</td><td>a function of x1 and x2 to be tabulated </td></tr>
+    <tr><td class="paramname">g1</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the first interpolation grid </td></tr>
+    <tr><td class="paramname">g2</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the second interpolation grid </td></tr>
+    <tr><td class="paramname">InDistFunc</td><td>the function of "x1" and "x2" to be tabulated </td></tr>
   </table>
   </dd>
 </dl>
@@ -287,7 +296,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a99736707d485053627063f5764242798" name="a99736707d485053627063f5764242798"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99736707d485053627063f5764242798">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[3/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a99736707d485053627063f5764242798">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,10 +310,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> copy constructor. </p>
+<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> copy constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">obj</td><td>object to be copied </td></tr>
+    <tr><td class="paramname">obj</td><td>the object to be copied </td></tr>
   </table>
   </dd>
 </dl>
@@ -312,7 +321,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="ac1ed22d545d167780ff7af84a912a6f9" name="ac1ed22d545d167780ff7af84a912a6f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1ed22d545d167780ff7af84a912a6f9">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[4/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1ed22d545d167780ff7af84a912a6f9">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -330,11 +339,11 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> constructor. </p>
+<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">d1</td><td>first single-distribution </td></tr>
-    <tr><td class="paramname">d2</td><td>second single-distribution </td></tr>
+    <tr><td class="paramname">d1</td><td>the first single distribution </td></tr>
+    <tr><td class="paramname">d2</td><td>the second single distribution </td></tr>
   </table>
   </dd>
 </dl>
@@ -342,7 +351,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a2911daedabd19851919165ecd567dfbd" name="a2911daedabd19851919165ecd567dfbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2911daedabd19851919165ecd567dfbd">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[5/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2911daedabd19851919165ecd567dfbd">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[5/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -370,13 +379,38 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> constructor. </p>
+<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">g1</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the first x-space interpolation grid </td></tr>
-    <tr><td class="paramname">g2</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the second x-space interpolation grid </td></tr>
+    <tr><td class="paramname">g1</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the first interpolation grid </td></tr>
+    <tr><td class="paramname">g2</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object that defines the second interpolation grid </td></tr>
     <tr><td class="paramname">distsubgrid</td><td>the distribution on the subgrids </td></tr>
     <tr><td class="paramname">distjointgrid</td><td>the distribution on the joint grid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0724172085074a8dc1589a7ab989e025" name="a0724172085074a8dc1589a7ab989e025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0724172085074a8dc1589a7ab989e025">&#9670;&#160;</a></span>DoubleDistribution() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::DoubleDistribution::DoubleDistribution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>DObj</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">DObj</td><td>the <a class="el" href="classapfel_1_1DoubleObject.html" title="The DoubleObject class is a collection of pairs of single objects (Distributions or Operators) accomp...">DoubleObject</a> of distributions </td></tr>
   </table>
   </dd>
 </dl>
@@ -399,7 +433,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that returns the derivative of the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the form of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> object. </p>
+<p>Function that returns the derivative of the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the form of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> object. </p>
 
 </div>
 </div>
@@ -422,7 +456,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the derivative of the interpolated function on the joint grid. </p>
+<p>Function that evaluates the derivative of the interpolated function on the joint grids. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x1</td><td>the value in x1 where the derivative has to be computed </td></tr>
@@ -449,10 +483,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution. </p>
+<p>Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x1</td><td>value of the first variable </td></tr>
+    <tr><td class="paramname">x1</td><td>the value of the first variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -474,10 +508,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the second variable leaving the second undetermined. This produces a single distribution. </p>
+<p>Function that evaluates the derivative of a <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the second variable leaving the first undetermined. This produces a single distribution. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x2</td><td>value of the second variable </td></tr>
+    <tr><td class="paramname">x2</td><td>the value of the second variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -503,7 +537,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the interpolated function on the joint grid. </p>
+<p>Function that evaluates the interpolated function on the joint grids. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x1</td><td>the value in x1 to be interpolated </td></tr>
@@ -532,10 +566,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution. </p>
+<p>Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the first variable leaving the second undetermined. This produces a single distribution. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x1</td><td>value of the first variable </td></tr>
+    <tr><td class="paramname">x1</td><td>the value of the first variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -557,10 +591,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects of APFEL++. This is essentially the dis...">DoubleDistribution</a> in the second variable leaving the second undetermined. This produces a single distribution. </p>
+<p>Function that evaluates the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> in the second variable leaving the first undetermined. This produces a single distribution. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x2</td><td>value of the second variable </td></tr>
+    <tr><td class="paramname">x2</td><td>the value of the second variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -746,7 +780,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that evaluates the integral of the interpolated function in the interval x1 in [a1,b1] and x2 in [a2,b2] on the joint grid. </p>
+<p>Function that evaluates the integral of the interpolated function in the interval x1 in [a1,b1] and x2 in [a2,b2] on the joint grids. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a1</td><td>the lower integration bound for the first variable </td></tr>
@@ -813,8 +847,8 @@ Friends</h2></td></tr>
 <p>Function that evaluates the integral of the interpolated function in the interval [a2,b2] for the second variable leaving the first undetermined. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a2</td><td>the lower integration bound for the first variable </td></tr>
-    <tr><td class="paramname">b2</td><td>the upper integration bound for the first variable </td></tr>
+    <tr><td class="paramname">a2</td><td>the lower integration bound for the second variable </td></tr>
+    <tr><td class="paramname">b2</td><td>the upper integration bound for the second variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -823,7 +857,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="acb35fa2ae2991b1a2c5a64a03d08310b" name="acb35fa2ae2991b1a2c5a64a03d08310b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb35fa2ae2991b1a2c5a64a03d08310b">&#9670;&#160;</a></span>operator*=() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acb35fa2ae2991b1a2c5a64a03d08310b">&#9670;&#160;</a></span>operator*=() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -842,7 +876,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="aad3ba3d48d916b39fdb8812f767e6525" name="aad3ba3d48d916b39fdb8812f767e6525"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad3ba3d48d916b39fdb8812f767e6525">&#9670;&#160;</a></span>operator*=() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad3ba3d48d916b39fdb8812f767e6525">&#9670;&#160;</a></span>operator*=() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -856,12 +890,31 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> </p>
+<p>this *= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> </p>
+
+</div>
+</div>
+<a id="a0404a01755099b95df5d22b70fe97029" name="a0404a01755099b95df5d22b70fe97029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0404a01755099b95df5d22b70fe97029">&#9670;&#160;</a></span>operator*=() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> &amp; apfel::DoubleDistribution::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>this *= Function of one variable used for both the integration variables </p>
 
 </div>
 </div>
 <a id="af917f0821581cb81481b1bf91b7a86aa" name="af917f0821581cb81481b1bf91b7a86aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af917f0821581cb81481b1bf91b7a86aa">&#9670;&#160;</a></span>operator*=() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af917f0821581cb81481b1bf91b7a86aa">&#9670;&#160;</a></span>operator*=() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -875,7 +928,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this *= Function of the integration variable </p>
+<p>this *= Function of both the integration variables </p>
 
 </div>
 </div>
@@ -894,7 +947,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this += <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> </p>
+<p>this += <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> </p>
 
 </div>
 </div>
@@ -913,7 +966,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this -= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> </p>
+<p>this -= <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> </p>
 
 </div>
 </div>
@@ -951,7 +1004,34 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>this = <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++. This is essentially the discretis...">Distribution</a> </p>
+<p>this = <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> </p>
+
+</div>
+</div>
+<a id="ae366da515e940cf3e080f6ed9715a4fe" name="ae366da515e940cf3e080f6ed9715a4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae366da515e940cf3e080f6ed9715a4fe">&#9670;&#160;</a></span>Print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::DoubleDistribution::Print </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print the <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> object. </p>
 
 </div>
 </div>
@@ -983,7 +1063,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Method which prints <a class="el" href="classapfel_1_1Interpolator.html" title="The Interpolator class is a mother class for the x-space interpolationand requires the implementation...">Interpolator</a> with cout &lt;&lt;. </p>
+<p>Method which prints <a class="el" href="classapfel_1_1DoubleDistribution.html" title="The DoubleDistribution class defines one of the basic objects that provides a discretisation of a two...">DoubleDistribution</a> with cout &lt;&lt;. </p>
 
 </div>
 </div>
@@ -1138,7 +1218,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 20 2024 07:18:24 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Wed Aug 21 2024 15:23:33 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>
