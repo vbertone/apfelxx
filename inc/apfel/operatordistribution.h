@@ -16,9 +16,9 @@
 namespace apfel
 {
   /**
-   * @brief The OperatorDistribution class defines an object that
-   * behaves as an operator for the first variable and as a
-   * distribution for the second.
+   * @brief The "OperatorDistribution" class defines an object that
+   * behaves as an operator along the first variable and as a
+   * distribution along the second.
    */
   class OperatorDistribution
   {
@@ -35,21 +35,21 @@ namespace apfel
 
     /**
      * @brief The OperatorDistribution constructor.
-     * @param O1: the operator on the firstvariable
+     * @param O1: the operator on the first variable
      * @param d2: the distribution on the second variable
      */
     OperatorDistribution(Operator const& O1, Distribution const& d2);
 
     /**
      * @brief The OperatorDistribution constructor.
-     * @param DObj: double object of operators
+     * @param DObj: DoubleObject of operators and distributions
      */
     OperatorDistribution(DoubleObject<Operator, Distribution> const& DObj);
 
     /**
      * @brief The Operator virtual destructor.
      */
-    //virtual ~OperatorDistribution() {}
+    virtual ~OperatorDistribution() {}
 
     /**
      * @name Binary operators
@@ -62,36 +62,34 @@ namespace apfel
     OperatorDistribution& operator += (OperatorDistribution const& o);                                //!< this += OperatorDistribution
     OperatorDistribution& operator -= (OperatorDistribution const& o);                                //!< this -= OperatorDistribution
     OperatorDistribution& operator  = (OperatorDistribution const& o);                                //!< this  = OperatorDistribution
-    OperatorDistribution& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of both the integration variables
-    OperatorDistribution& operator *= (std::function<double(double const&)> const& f);                //!< this *= Function of one variable used for both the integration variables
+    OperatorDistribution& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of both variables
+    OperatorDistribution& operator *= (std::function<double(double const&)> const& f);                //!< this *= Function of one variable used for both variables
     ///@}
 
     /**
-     * @brief Function that returns the first Grid object associated
-     * to the double operator.
+     * @brief Function that returns the first Grid object.
      */
     Grid const& GetFirstGrid() const { return _grid1; }
 
     /**
-     * @brief Function that returns the second Grid object associated
-     * to the double operator.
+     * @brief Function that returns the second Grid object.
      */
     Grid const& GetSecondGrid() const { return _grid2; }
 
     /**
-     * @brief Function that returns the double operator.
+     * @brief Function that returns the "OperatorDistribution" container.
      */
     std::vector<std::vector<matrix<std::vector<double>>>> GetOperatorDistribution() const { return _dOperator; }
 
     /**
-     * @brief Print the OperatorDistribution object
+     * @brief Function that prints the "OperatorDistribution" object
      */
     void Print() const { std::cout << *this << std::endl; }
 
   private:
-    Grid                                           const& _grid1;      //!< First grid on which to compute the operator
-    Grid                                           const& _grid2;      //!< Second grid on which to compute the operator
-    std::vector<std::vector<matrix<std::vector<double>>>> _dOperator;  //!< OperatorDistribution values
+    Grid                                           const& _grid1;      //!< First grid
+    Grid                                           const& _grid2;      //!< Second grid
+    std::vector<std::vector<matrix<std::vector<double>>>> _dOperator;  //!< OperatorDistribution container
 
     friend std::ostream& operator << (std::ostream& os, OperatorDistribution const& opd);
   };

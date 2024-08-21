@@ -13,10 +13,13 @@
 namespace apfel
 {
   /**
-   * @brief The Operator class defines the basic object "Operator"
-   * which is essentially the convolution on the grid bewteen an
-   * Expression object (e.g. a splitting function) and the interpolant
-   * functions.
+   * @brief This class defines the basic object "Operator" which
+   * essentially contains the convolution bewteen an "Expression"
+   * object (e.g. a splitting function) and a set of interpolanting
+   * functions defined on a grid.
+   * @note Both the forward and the non-forward cases can be handled
+   * by this class. The correspond respectively to inclusive
+   * (DGLAP-like) and exclusive (GPD-like) processes.
    */
   class Operator
   {
@@ -27,7 +30,7 @@ namespace apfel
     /**
      * @brief The Operator constructor.
      * @param gr: the Grid object
-     * @param expr: the expression to be transformed
+     * @param expr: the expression to be convoluted
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
      * @param gpd: whether the operator had to computed for a GPD-like expression (default: false)
      */
@@ -70,32 +73,34 @@ namespace apfel
     Distribution Evaluate(double const& x) const;
 
     /**
-     * @brief Function that returns the Grid object associated to the operator.
+     * @brief Function that returns the Grid object associated with
+     * the operator.
      */
     Grid const& GetGrid() const { return _grid; }
 
     /**
-     * @brief Function that returns the Expression object associated to the operator.
+     * @brief Function that returns the Expression object associated
+     * with the operator.
      */
     Expression const& GetExpression() const { return _expr; }
 
     /**
-     * @brief Function that returns the integration accuracy
+     * @brief Function that returns the integration accuracy,
      */
     double const& GetIntegrationAccuracy() const { return _eps; }
 
     /**
-     * @brief Function that returns the GPD switch
+     * @brief Function that returns the GPD switch,
      */
     bool const& IsGPD() const { return _gpd; }
 
     /**
-     * @brief Function that returns the operator.
+     * @brief Function that returns the Operator container.
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
 
     /**
-     * @brief Print the Operator object
+     * @brief Function that prints the Operator object.
      */
     void Print() const { std::cout << *this << std::endl; }
 

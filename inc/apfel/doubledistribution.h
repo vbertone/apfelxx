@@ -14,10 +14,9 @@
 namespace apfel
 {
   /**
-   * @brief The DoubleDistribution class defines one of the basic
-   * objects of APFEL++. This is essentially the discretisation of a
-   * two-dimensional function that can be conveniently used for
-   * convolutions.
+   * @brief The "DoubleDistribution" class defines one of the basic
+   * objects that provides a discretisation of a two-dimensional
+   * function and that can be used for convolutions.
    */
   class DoubleDistribution
   {
@@ -31,31 +30,31 @@ namespace apfel
     ///@{
     /**
      * @brief The DoubleDistribution constructor
-     * @param g1: the Grid object that defines the first x-space interpolation grid
-     * @param g2: the Grid object that defines the second x-space interpolation grid
-     * @param InDistFunc: a function of x1 and x2 to be tabulated
+     * @param g1: the Grid object that defines the first interpolation grid
+     * @param g2: the Grid object that defines the second interpolation grid
+     * @param InDistFunc: the function of "x1" and "x2" to be tabulated
      */
     DoubleDistribution(Grid                                                const& g1,
                        Grid                                                const& g2,
-                       std::function<double(double const&, double const&)> const& InDistFunc = [] (double const&, double const&) -> double{ return 0;});
+                       std::function<double(double const&, double const&)> const& InDistFunc = [] (double const&, double const&) -> double{ return 0; });
 
     /**
      * @brief The DoubleDistribution copy constructor
-     * @param obj: object to be copied
+     * @param obj: the object to be copied
      */
     DoubleDistribution(DoubleDistribution const& obj);
 
     /**
      * @brief The DoubleDistribution constructor
-     * @param d1: first single-distribution
-     * @param d2: second single-distribution
+     * @param d1: the first single distribution
+     * @param d2: the second single distribution
      */
     DoubleDistribution(Distribution const& d1, Distribution const& d2);
 
     /**
      * @brief The DoubleDistribution constructor
-     * @param g1: the Grid object that defines the first x-space interpolation grid
-     * @param g2: the Grid object that defines the second x-space interpolation grid
+     * @param g1: the Grid object that defines the first interpolation grid
+     * @param g2: the Grid object that defines the second interpolation grid
      * @param distsubgrid: the distribution on the subgrids
      * @param distjointgrid: the distribution on the joint grid
      */
@@ -66,7 +65,7 @@ namespace apfel
 
     /**
      * @brief The DoubleDistribution constructor
-     * @param DObj: double object of distributions
+     * @param DObj: the DoubleObject of distributions
      */
     DoubleDistribution(DoubleObject<Distribution> const& DObj);
     ///@}
@@ -78,7 +77,7 @@ namespace apfel
      */
     ///@{
     /**
-     * @brief Function that evaluates the interpolated function on the joint grid.
+     * @brief Function that evaluates the interpolated function on the joint grids.
      * @param x1: the value in x1 to be interpolated
      * @param x2: the value in x2 to be interpolated
      * @return the interpolated result
@@ -87,7 +86,7 @@ namespace apfel
 
     /**
      * @brief Function that evaluates the derivative of the
-     * interpolated function on the joint grid.
+     * interpolated function on the joint grids.
      * @param x1: the value in x1 where the derivative has to be computed
      * @param x2: the value in x2 where the derivative has to be computed
      * @return the derivative of the interpolated function
@@ -97,7 +96,7 @@ namespace apfel
     /**
      * @brief Function that evaluates the integral of the interpolated
      * function in the interval x1 in [a1,b1] and x2 in [a2,b2] on the
-     * joint grid.
+     * joint grids.
      * @param a1: the lower integration bound for the first variable
      * @param b1: the upper integration bound for the first variable
      * @param a2: the lower integration bound for the second variable
@@ -110,15 +109,15 @@ namespace apfel
      * @brief Function that evaluates the DoubleDistribution in the
      * first variable leaving the second undetermined. This produces a
      * single distribution.
-     * @param x1: value of the first variable
+     * @param x1: the value of the first variable
      */
     Distribution Evaluate1(double const& x1) const;
 
     /**
      * @brief Function that evaluates the DoubleDistribution in the
-     * second variable leaving the second undetermined. This produces a
+     * second variable leaving the first undetermined. This produces a
      * single distribution.
-     * @param x2: value of the second variable
+     * @param x2: the value of the second variable
      */
     Distribution Evaluate2(double const& x2) const;
 
@@ -126,15 +125,15 @@ namespace apfel
      * @brief Function that evaluates the derivative of a
      * DoubleDistribution in the first variable leaving the second
      * undetermined. This produces a single distribution.
-     * @param x1: value of the first variable
+     * @param x1: the value of the first variable
      */
     Distribution Derive1(double const& x1) const;
 
     /**
      * @brief Function that evaluates the derivative of a
-     * DoubleDistribution in the second variable leaving the second
+     * DoubleDistribution in the second variable leaving the first
      * undetermined. This produces a single distribution.
-     * @param x2: value of the second variable
+     * @param x2: the value of the second variable
      */
     Distribution Derive2(double const& x2) const;
 
@@ -152,8 +151,8 @@ namespace apfel
      * @brief Function that evaluates the integral of the interpolated
      * function in the interval [a2,b2] for the second variable leaving
      * the first undetermined.
-     * @param a2: the lower integration bound for the first variable
-     * @param b2: the upper integration bound for the first variable
+     * @param a2: the lower integration bound for the second variable
+     * @param b2: the upper integration bound for the second variable
      * @return the integral of the interpolated function
      */
     Distribution Integrate2(double const& a2, double const& b2) const;

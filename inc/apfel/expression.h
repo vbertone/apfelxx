@@ -32,30 +32,29 @@ namespace apfel
 
     /**
      * @name Expression components
-     * The different possible components of an expression: regular,
-     * singular, and local.
+     * The different possible components of an expression.
      */
     ///@{
     /**
-     * @brief Virtual regular term.
+     * @brief Virtual function for the regular term.
      * @return The regular term at x
      */
     virtual double Regular(double const&) const { return 0; }
 
     /**
-     * @brief Virtual singular term.
+     * @brief Virtual function for the singular term.
      * @return The singular term at x
      */
     virtual double Singular(double const&) const { return 0; }
 
     /**
-     * @brief Virtual local term.
+     * @brief Virtual function for the local term.
      * @return The local term at x
      */
     virtual double Local(double const&) const { return 0; }
 
     /**
-     * @brief Virtual local term for principal-valued integrals a la
+     * @brief Virtual function for the local term for principal-valued integrals a la
      * ERBL with singularity at x = 1, i.e. corresponding to the
      * ++-prescription.
      * @return The local term for ++-prespribed distributions at x
@@ -63,14 +62,14 @@ namespace apfel
     virtual double LocalPP(double const&) const { return 0; }
 
     /**
-     * @brief Virtual singular term for principal-valued integrals in
+     * @brief Virtual function for the singular term for principal-valued integrals in
      * the DGLAP region (i.e. with pole in x in the interval (0,1)).
      * @return The singular term for principal-valued distributions at x
      */
     virtual double SingularPV(double const&) const { return 0; }
 
     /**
-     * @brief Virtual local term for principal-valued integrals a la
+     * @brief Virtual function for the local term for principal-valued integrals a la
      * DGLAP with singularity in the interval (0,1).
      * @return The local term for principal-valued distributions at x
      */

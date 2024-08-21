@@ -16,9 +16,9 @@
 namespace apfel
 {
   /**
-   * @brief The DistributionOperator class defines an object that
-   * behaves as a distribution for the first variable and as an
-   * operator for the second.
+   * @brief The "DistributionOperator" class defines an object that
+   * behaves as a distribution along the first variable and as an
+   * operator along the second.
    */
   class DistributionOperator
   {
@@ -42,7 +42,7 @@ namespace apfel
 
     /**
      * @brief The DistributionOperator constructor.
-     * @param DObj: double object of operators
+     * @param DObj: DoubleObject of distributions and operators
      */
     DistributionOperator(DoubleObject<Distribution, Operator> const& DObj);
 
@@ -62,36 +62,34 @@ namespace apfel
     DistributionOperator& operator += (DistributionOperator const& o);                                //!< this += DistributionOperator
     DistributionOperator& operator -= (DistributionOperator const& o);                                //!< this -= DistributionOperator
     DistributionOperator& operator  = (DistributionOperator const& o);                                //!< this  = DistributionOperator
-    DistributionOperator& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of both the integration variables
-    DistributionOperator& operator *= (std::function<double(double const&)> const& f);                //!< this *= Function of one variable used for both the integration variables
+    DistributionOperator& operator *= (std::function<double(double const&, double const&)> const& f); //!< this *= Function of both variables
+    DistributionOperator& operator *= (std::function<double(double const&)> const& f);                //!< this *= Function of one variable used for both variables
     ///@}
 
     /**
-     * @brief Function that returns the first Grid object associated
-     * to the double operator.
+     * @brief Function that returns the first Grid object.
      */
     Grid const& GetFirstGrid() const { return _grid1; }
 
     /**
-     * @brief Function that returns the second Grid object associated
-     * to the double operator.
+     * @brief Function that returns the second Grid object.
      */
     Grid const& GetSecondGrid() const { return _grid2; }
 
     /**
-     * @brief Function that returns the double operator.
+     * @brief Function that returns the "DistributionOperator" container.
      */
     std::vector<std::vector<std::vector<matrix<double>>>> GetDistributionOperator() const { return _dOperator; }
 
     /**
-     * @brief Print the DistributionOperator object
+     * @brief Function that prints the "DistributionOperator" object
      */
     void Print() const { std::cout << *this << std::endl; }
 
   private:
-    Grid                                           const& _grid1;      //!< First grid on which to compute the operator
-    Grid                                           const& _grid2;      //!< Second grid on which to compute the operator
-    std::vector<std::vector<std::vector<matrix<double>>>> _dOperator;  //!< DistributionOperator values
+    Grid                                           const& _grid1;      //!< First grid
+    Grid                                           const& _grid2;      //!< Second grid
+    std::vector<std::vector<std::vector<matrix<double>>>> _dOperator;  //!< DistributionOperator container
 
     friend std::ostream& operator << (std::ostream& os, DistributionOperator const& dop);
   };

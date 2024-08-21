@@ -14,9 +14,9 @@
 namespace apfel
 {
   /**
-   * @brief The Distribution class defines one of the basic objects of
-   * APFEL++. This is essentially the discretisation of a function
-   * that can be conveniently used for convolutions.
+   * @brief The "Distribution" class defines one of the basic objects
+   * of APFEL++ that provides a discretisation of a function and that
+   * can be conveniently used for convolutions.
    */
   class Distribution: public LagrangeInterpolator
   {
@@ -30,13 +30,13 @@ namespace apfel
     ///@{
     /**
      * @brief The Distribution constructor
-     * @param g: the Grid object that defines the x-space interpolation grid
+     * @param g: the Grid object that defines the interpolation grid
      */
     Distribution(Grid const& g);
 
     /**
      * @brief The Distribution constructor
-     * @param obj: a reference distribution from wich the grid and the actual distributions are extracted
+     * @param obj: the reference distribution from wich the grid and the actual distributions are extracted
      */
     Distribution(Distribution const& obj);
 
@@ -52,7 +52,7 @@ namespace apfel
 
     /**
      * @brief The Distribution constructor
-     * @param g: the Grid object that defines the x-space interpolation grid
+     * @param g: the Grid object that defines the interpolation grid
      * @param distsubgrid: the vector of the distribution on the subgrids
      * @param distjointgrid: the vector of the distribution on the joint grid
      */
@@ -62,17 +62,17 @@ namespace apfel
 
     /**
      * @brief The Distribution constructor
-     * @param g: the Grid object that defines the x-space interpolation grid
-     * @param InDistFunc: a function of x to be tabulated on the grid in x
+     * @param g: the Grid object that defines the interpolation grid
+     * @param InDistFunc: the function of "x" to be tabulated on the grid in x
      */
     Distribution(Grid                                 const& g,
                  std::function<double(double const&)> const& InDistFunc);
 
     /**
      * @brief The Distribution constructor
-     * @param g: the Grid object that defines the x-space interpolation grid
-     * @param InDistFunc: a function of x and Q to be tabulated on the grid in x
-     * @param Q: the value of Q in which InDistFunc has to be tabulated
+     * @param g: the Grid object that defines the interpolation grid
+     * @param InDistFunc: the function of "x" and "Q" to be tabulated in "x"
+     * @param Q: the value of "Q" at which InDistFunc is to be tabulated
      */
     Distribution(Grid                                                const& g,
                  std::function<double(double const&, double const&)> const& InDistFunc,
@@ -80,9 +80,9 @@ namespace apfel
 
     /**
      * @brief The Distribution constructor
-     * @param g: the Grid object that defines the x-space interpolation grid
-     * @param InDistFunc: a function of ipdf and x to be tabulated on the grid in x
-     * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated
+     * @param g: the Grid object that defines the interpolation grid
+     * @param InDistFunc: the function of "ipdf" and "x" to be tabulated in x
+     * @param ipdf: the value of "ipdf" at which InDistFunc is to be computed
      */
     Distribution(Grid                                             const& g,
                  std::function<double(int const&, double const&)> const& InDistFunc,
@@ -90,10 +90,10 @@ namespace apfel
 
     /**
      * @brief The Distribution constructor
-     * @param g: the Grid object that defines the x-space interpolation grid
-     * @param InDistFunc: a function of ipdf, x, and Q to be tabulated on the grid in x
-     * @param ipdf: the value of ipdf in which InDistFunc has to be tabulated
-     * @param Q: the value of Q in which InDistFunc has to be tabulated
+     * @param g: the Grid object that defines the interpolation grid
+     * @param InDistFunc: the function of "ipdf", "x", and "Q" to be tabulated in x
+     * @param ipdf: the value of "ipdf" at which InDistFunc is to be computed
+     * @param Q: the value of "Q" at which InDistFunc is to be computed
      */
     Distribution(Grid                                                            const& g,
                  std::function<double(int const&, double const&, double const&)> const& InDistFunc,
@@ -102,42 +102,42 @@ namespace apfel
     ///@}
 
     /**
-     * @brief Function to set the values of the joint grid.
+     * @brief Function that sets the values of the joint grid.
      * @param ix: the vector index
-     * @param x: value of of the distribution to set in the distribution vector on the joint grid
+     * @param x: the value of of the distribution to set in the distribution vector on the joint grid
      */
     void SetJointGrid(int const& ix, double const& x);
 
     /**
-     * @brief Function to push back the values of the subgrid.
+     * @brief Function that sets the values of the subgrid.
      * @param ig: the subgrid index
      * @param ix: the vector index
-     * @param x: value of of the distribution to set in the distribution vector on the joint grid
+     * @param x: value of of the distribution to set in the distribution vector on the ig-th subgrid
      */
     void SetSubGrid(int const& ig, int const& ix, double const& x);
 
     /**
-     * @brief Function to set the joint grid.
+     * @brief Function that sets the joint grid.
      * @param jg: the vector of the joint grid
      */
     void SetJointGrid(std::vector<double> const& jg);
 
     /**
-     * @brief Function to set the single sub-grid.
+     * @brief Function that sets the single subgrid.
      * @param ig: the subgrid index
-     * @param sg: the vector of the sub-grid
+     * @param sg: the vector of the subgrid
      */
     void SetSubGrid(int const& ig, std::vector<double> const& sg);
 
     /**
-     * @brief Function to set all the sub-grids.
-     * @param sgs: the vector of vectoris of the sub-grids
+     * @brief Function that sets all of the subgrids at once.
+     * @param sgs: the vector of vectors of the subgrids
      */
     void SetSubGrids(std::vector<std::vector<double>> const& sgs);
 
     /**
      * @brief Function that returns the derivative of the Distribution
-     * in the form of a Distribution object.
+     * in the form of a "Distribution" object.
      */
     Distribution Derivative() const;
 
@@ -170,17 +170,17 @@ namespace apfel
   ///@}
 
   /**
-   * @name Map of Distribution functions
-   * Function that return maps pf distributions.
+   * @name Maps of Distributions
+   * Functions that return maps of "Distribution" objects.
    */
   ///@{
   /**
    * @brief Function that fills in a map of distributions from a
    * map-valued function.
-   * @param g: Grid object
-   * @param InDistFunc: map-valued function dependent on x and a scale Q.
-   * @param Q: the value of Q in which InDistFunc has to be tabulated
-   * @param skip: vector of indices to be skipped in the tabulation.
+   * @param g: the Grid object
+   * @param InDistFunc: the map-valued function dependent on "x" and "Q"
+   * @param Q: the value of "Q" at which InDistFunc is to be computed
+   * @param skip: the vector of indices to be skipped in the tabulation (defalt: empty vector)
    */
   std::map<int, Distribution> DistributionMap(Grid                                                               const& g,
                                               std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
@@ -190,9 +190,9 @@ namespace apfel
   /**
    * @brief Function that fills in a map of distributions from a
    * map-valued function.
-   * @param g: Grid object
-   * @param InDistFunc: map-valued function dependent on x
-   * @param skip: vector of indices to be skipped in the tabulation.
+   * @param g: the Grid object
+   * @param InDistFunc: the map-valued function dependent on "x"
+   * @param skip: the vector of indices to be skipped in the tabulation (defalt: empty vector)
    */
   std::map<int, Distribution> DistributionMap(Grid                                                const& g,
                                               std::function<std::map<int, double>(double const&)> const& InDistFunc,
@@ -201,8 +201,8 @@ namespace apfel
   /**
    * @brief Function that fills in a map of distributions from a
    * vector-valued function.
-   * @param g: Grid object
-   * @param InDistFunc: vector-valued function dependent on x
+   * @param g: the Grid object
+   * @param InDistFunc: the vector-valued function dependent on "x"
    * @param NOutputs: number of outputs of the input function (default: 0, that is unknown)
    */
   std::map<int, Distribution> DistributionMap(Grid                                              const& g,
@@ -212,17 +212,18 @@ namespace apfel
   /**
    * @brief Function that sums the element of a
    * distribution. Specifically, it sums the elements of the joint
-   * grid. Combined with the Distribution*Distribution operator, this
-   * function is useful to compute scalar products.
-   * @param InDist: distribution to be summed over
+   * grid. Combined with the "Distribution" * "Distribution" operator,
+   * this function is useful to compute scalar products.
+   * @param InDist: the distribution to be summed
    */
   double Sum(Distribution const& InDist);
 
   /**
    * @brief Function that computes the scalar product bewteen two
-   * distributions. The product is computed using the joint grids.
-   * @param d1: first input distribution
-   * @param d2: second input distribution
+   * "Distribution" objects. The product is computed using the joint
+   * grids.
+   * @param d1: the first input distribution
+   * @param d2: the second input distribution
    * @param offset: offset applied to the inner product (default: 0)
    */
   double InnerProduct(Distribution const& d1, Distribution const& d2, double const& offset = 0);
