@@ -12,6 +12,7 @@
 #include "apfel/doubledistribution.h"
 #include "apfel/doubleoperator.h"
 #include "apfel/distributionoperator.h"
+#include "apfel/operatordistribution.h"
 #include "apfel/timer.h"
 
 #include<algorithm>
@@ -181,6 +182,7 @@ namespace apfel
   template class TabulateObject<DoubleDistribution>;
   template class TabulateObject<DoubleOperator>;
   template class TabulateObject<DistributionOperator>;
+  template class TabulateObject<OperatorDistribution>;
 
   //_________________________________________________________________________________
   template<>

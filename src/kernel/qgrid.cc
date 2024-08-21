@@ -13,6 +13,7 @@
 #include "apfel/doubledistribution.h"
 #include "apfel/doubleoperator.h"
 #include "apfel/distributionoperator.h"
+#include "apfel/operatordistribution.h"
 
 namespace apfel
 {
@@ -412,7 +413,8 @@ namespace apfel
       return true;
   }
 
-  // Fixed template types.
+  // Specialisations
+  //_________________________________________________________________________________
   template class QGrid<double>;
   template class QGrid<matrix<double>>;
   template class QGrid<Distribution>;
@@ -428,4 +430,5 @@ namespace apfel
   template class QGrid<DoubleDistribution>;
   template class QGrid<DoubleOperator>;
   template class QGrid<DistributionOperator>;
+  template class QGrid<OperatorDistribution>;
 }

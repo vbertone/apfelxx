@@ -35,7 +35,7 @@ namespace apfel
 
     /**
      * @brief The DistributionOperator constructor.
-     * @param d1: the distribution on first
+     * @param d1: the distribution on the first variable
      * @param O2: the operator on the second variable
      */
     DistributionOperator(Distribution const& d1, Operator const& O2);
