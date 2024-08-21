@@ -104,7 +104,7 @@ namespace apfel
         const std::vector<matrix<double>> O1g = term.object1.GetOperator();
         const std::vector<std::vector<double>> d2g = term.object2.GetDistributionSubGrid();
 
-        // Fill in matrix my multiplying distribution and operator of
+        // Fill in matrix by multiplying distribution and operator of
         // the current term weighted by its coefficient.
         for (int ig1 = 0; ig1 < ng1; ig1++)
           for (int ig2 = 0; ig2 < ng2; ig2++)
@@ -260,7 +260,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid1 != &o.GetFirstGrid() || &_grid2 != &o.GetSecondGrid())
-      throw std::runtime_error(error("OperatorDistribution::operator +=", "Grids do not match."));
+      throw std::runtime_error(error("OperatorDistribution::operator -=", "Grids do not match."));
 
     for (int ig1 = 0; ig1 < (int) _dOperator.size(); ig1++)
       for (int ig2 = 0; ig2 < (int) _dOperator[ig1].size(); ig2++)
