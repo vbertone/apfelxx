@@ -39,12 +39,20 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief Real dilogarithm \f$\mathrm{Li}_2(z)\f$
+   * @brief Real dilogarithm \f$\mathrm{Li}_2(x)\f$
    * @param x: the real argument
-   * @return \f$\mathrm{Li}_2(z)\f$
+   * @return \f$\mathrm{Li}_2(x)\f$
    * @note Implementation translated by R.Brun from CERNLIB DILOG function C332.
    */
   double dilog(double const& x);
+
+  /**
+   * @brief Real trilogarithm \f$\mathrm{Li}_3(x)\f$
+   * @param x: the real argument
+   * @return \f$\mathrm{Li}_3(x)\f$
+   * @note Speacial case of wgplg.
+   */
+  double trilog(double const& x);
 
   /**
    * @brief Function for the computation of the Nielsen's generalized dilogs.

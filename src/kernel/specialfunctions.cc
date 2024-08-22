@@ -116,6 +116,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  double trilog(double const& x)
+  {
+    return wgplg(2, 1, x);
+  }
+
+  //_________________________________________________________________________________
   double wgplg(int const& n, int const& p, double const& x)
   {
     int p1;
