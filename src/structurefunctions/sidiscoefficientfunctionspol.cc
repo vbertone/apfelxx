@@ -9,6 +9,8 @@
 #include "apfel/constants.h"
 #include "apfel/tools.h"
 
+#include <iostream>
+
 namespace apfel
 {
   //_________________________________________________________________________________
@@ -198,11 +200,11 @@ namespace apfel
     const double Li2z = dilog(z);
     const double Li2mz = dilog(-z);
     const double omxmzi = 1. / ( 1 - x - z );
-    const double omxmzi2 = omxmzi * omxmzi;
-    const double lomxmz = log(1 - x - z);
-    const double lmopxpz = log(-1 + x + z);
-    const double lxmz = log(x - z);
-    const double lmxpz = log(-x + z);
+    const double omxmzi2 =omxmzi * omxmzi;
+    const double lomxmz = log(std::abs(1 - x - z));
+    const double lmopxpz = log(std::abs(-1 + x + z));
+    const double lxmz = log(std::abs(x - z));
+    const double lmxpz = log(std::abs(-x + z));
     const double li2omxzi = dilog(1 - x*zi);
     const double sqrtxz1 = sqrt(1 - 2*z + z2 + 4*x*z);
     const double lspec1 = log(1 + sqrtxz1 - z);
@@ -370,10 +372,10 @@ namespace apfel
     const double omxmzi = 1. / ( 1 - x - z );
     const double omxmzi2 = omxmzi * omxmzi;
     const double xmzi = 1. / ( x - z );
-    const double lomxmz = log(1 - x - z);
-    const double lmopxpz = log(-1 + x + z);
-    const double lxmz = log(x - z);
-    const double lmxpz = log(-x + z);
+    const double lomxmz = log(std::abs(1 - x - z));
+    const double lmopxpz = log(std::abs(-1 + x + z));
+    const double lxmz = log(std::abs(x - z));
+    const double lmxpz = log(std::abs(-x + z));
     const double li2omxzi = dilog(1 - x*zi);
     const double poly2 = 1 + 2*x + x2 - 4*x*z;
     const double poly2i = 1. / poly2;
@@ -550,10 +552,10 @@ namespace apfel
     const double omxmzi2 = omxmzi * omxmzi;
     const double xmzi = 1. / ( x - z );
     const double xmzi2 = xmzi * xmzi;
-    const double lomxmz = log(1 - x - z);
-    const double lmopxpz = log(-1 + x + z);
-    const double lxmz = log(x - z);
-    const double lmxpz = log(-x + z);
+    const double lomxmz = log(std::abs(1 - x - z));
+    const double lmopxpz = log(std::abs(-1 + x + z));
+    const double lxmz = log(std::abs(x - z));
+    const double lmxpz = log(std::abs(-x + z));
     const double lxpz = log(x + z);
     const double lopxz = log(1 + x*z);
     const double lopxzi = log(1 + x*zi);
