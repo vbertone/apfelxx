@@ -56,7 +56,6 @@ class C21nsSidis: public apfel::DoubleExpression
 {
 public:
   C21nsSidis(): DoubleExpression() {}
-
   double LocalLocal(double const& x, double const& z) const override
   {
     return 2 * apfel::CF * ( - 8 + pow(log(1 - z), 2) + pow(log(1 - x), 2) + 2 * log(1 - x) * log(1 - z) );
@@ -201,7 +200,7 @@ int main()
         distqg.AddTerm({apfel::QCh2[abs(j)-1], dPDF.at(0), dFF.at(j)});
       }
 
-    // Assemble double distribution for the reduced cross section as Y^+ F2 - y^2 FL
+    // Assemble double distribution for the cross section
     return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( ( ( so.C20qq + coup * so.C21qq ) * distqq + coup * ( so.C21gq * distgq + so.C21qg * distqg ) ).MultiplyBy(yp, iz)
                                                  - ( coup * ( so.CL1qq * distqq + so.CL1gq * distgq + so.CL1qg * distqg ) ).MultiplyBy(y2, iz) );
   };
@@ -249,7 +248,7 @@ int main()
         distqg += apfel::QCh2[abs(j)-1] * apfel::DoubleDistribution{dPDF.at(0), dFF.at(j)};
       }
 
-    // Assemble double distribution for the reduced cross section as Y^+ F2 - y^2 FL
+    // Assemble double distribution for the  cross section
     return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( yp * ( ( O20qq + coup * O21qq ) * distqq + coup * ( O21gq * distgq + O21qg * distqg ) )
                                                  - coup * ( y2 * ( OL1qq * distqq + OL1gq * distgq + OL1qg * distqg ) ) );
   };
