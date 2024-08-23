@@ -6,6 +6,7 @@
 
 #include "apfel/apfelxx.h"
 #include "apfel/SIDIS.h"
+#include "apfel/sidiscoefficientfunctionsunp.h"
 
 // Double expression for the leading-order SIDIS F2
 class C20nsSidis: public apfel::DoubleExpression
@@ -254,6 +255,54 @@ int main()
   };
   const apfel::TabulateObject<apfel::DoubleDistribution> TabCrossSectionDD{CrossSectionDD, 50, 1, 10, 3, Thresholds};
 
+  // Compute relevant double operators
+  t.start();
+  const apfel::DoubleOperator PT0qq{gx, gz, apfel::DoubleIdentity{}};
+  const apfel::DoubleOperator PL1qq{gx, gz, apfel::C1LQ2Q{}};
+  const apfel::DoubleOperator PL1gq{gx, gz, apfel::C1LQ2G{}};
+  const apfel::DoubleOperator PL1qg{gx, gz, apfel::C1LG2Q{}};
+  const apfel::DoubleOperator PT1qq{gx, gz, apfel::C1TQ2Q{}};
+  const apfel::DoubleOperator PT1gq{gx, gz, apfel::C1TQ2G{}};
+  const apfel::DoubleOperator PT1qg{gx, gz, apfel::C1TG2Q{}};
+  t.stop();
+
+  // Define function to compute SIDIS cross section at O(as) using the DoubleDistribution (and DoubleOperator) class
+  const std::function<apfel::DoubleDistribution(double const&)> CrossSectionDD2 = [=, &gx, &gz] (double const& Q) -> apfel::DoubleDistribution
+  {
+    const std::function<double(double const&, double const&)> yL = [=] (double const& x, double const& z) -> double{ return 2 * ( 1 - pow(Q / Vs, 2) / x ) / x / z; };
+    const std::function<double(double const&, double const&)> yp = [=] (double const& x, double const& z) -> double{ return ( 1 + pow(1 - pow(Q / Vs, 2) / x, 2) ) / x / z; };
+
+    // Compute number of active flavours
+    const int nf = apfel::NF(Q, Thresholds);
+
+    // Coupling from PDF set
+    const double coup = as(Q) / apfel::FourPi;
+
+    // Compute distributions for PDFs and FFs
+    const std::map<int, apfel::Distribution> dPDF = apfel::QCDEvToPhys(TabulatedPDFs.Evaluate(Q).GetObjects());
+    const std::map<int, apfel::Distribution> dFF  = apfel::QCDEvToPhys(TabulatedFFs.Evaluate(Q).GetObjects());
+
+    // Initialize double distributions
+    apfel::DoubleDistribution distqq{gx, gz};
+    apfel::DoubleDistribution distgq{gx, gz};
+    apfel::DoubleDistribution distqg{gx, gz};
+    for (auto j = - nf; j <= nf; j++)
+      {
+        // Skip the gluon
+        if (j == 0)
+          continue;
+
+        distqq += apfel::QCh2[abs(j)-1] * apfel::DoubleDistribution{dPDF.at(j), dFF.at(j)};
+        distgq += apfel::QCh2[abs(j)-1] * apfel::DoubleDistribution{dPDF.at(j), dFF.at(0)};
+        distqg += apfel::QCh2[abs(j)-1] * apfel::DoubleDistribution{dPDF.at(0), dFF.at(j)};
+      }
+
+    // Assemble double distribution for the  cross section
+    return ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( yp * ( ( PT0qq + coup * PT1qq ) * distqq + coup * ( PT1gq * distgq + PT1qg * distqg ) )
+                                                 + coup * ( yL * ( PL1qq * distqq + PL1gq * distgq + PL1qg * distqg ) ) );
+  };
+  const apfel::TabulateObject<apfel::DoubleDistribution> TabCrossSectionDD2{CrossSectionDD2, 50, 1, 10, 3, Thresholds};
+
   // Define kinematics
   const double x  = 0.01;
   const double z  = 0.4;
@@ -277,6 +326,15 @@ int main()
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / dn << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate1(x*om, x*op).Integrate(z*om, z*op) / dn << std::endl;
   std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD.Integrate(Q*om, Q*op).Integrate2(z*om, z*op).Integrate(x*om, x*op) / dn << std::endl;
+  t.stop();
+  t.start();
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD2(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD2(Q).Evaluate1(x).Evaluate(z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << CrossSectionDD2(Q).Evaluate2(z).Evaluate(x) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD2.Evaluate(Q).Evaluate(x, z) << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD2.Integrate(Q*om, Q*op).Integrate(x*om, x*op, z*om, z*op) / dn << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD2.Integrate(Q*om, Q*op).Integrate1(x*om, x*op).Integrate(z*om, z*op) / dn << std::endl;
+  std::cout << "Reduced SIDIS cross section (Q = " << Q << " GeV, x = " << x << ", z = " << z << "): " << TabCrossSectionDD2.Integrate(Q*om, Q*op).Integrate2(z*om, z*op).Integrate(x*om, x*op) / dn << std::endl;
   t.stop();
   std::cout << std::endl;
 

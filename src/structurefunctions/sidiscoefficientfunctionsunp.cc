@@ -65,7 +65,7 @@ namespace apfel
     const double omzi = 1. / ( 1 - z );
     const double lz = log(z);
     const double lomz = log(1 - z);
-    return -((NC - NCi)*(-1 + z + (1 + z)*Dn(0,x,true) + (1 + z)*lomz + lz + z*lz - 2*lz*omzi));
+    return -(NC - NCi)*(-1 + z + (1 + z)*Dn(0,x,true) + (1 + z)*lomz + lz + z*lz - 2*lz*omzi);
   };
   double C1TQ2Q::SingularLocal(double const& x, double const& z) const
   {
@@ -88,7 +88,7 @@ namespace apfel
     const double omxi = 1. / ( 1 - x );
     const double lx = log(x);
     const double lomx = log(1 - x);
-    return ((NC - NCi)*(-1 + x + (1 + x)*Dn(0,z,true) + (1 + x)*lomx - lx - x*lx + 2*lx*omxi));
+    return -((NC - NCi)*(-1 + x + (1 + x)*Dn(0,z,true) + (1 + x)*lomx - lx - x*lx + 2*lx*omxi));
   };
   double C1TQ2Q::RegularSingular(double const& x, double const& z) const
   {
