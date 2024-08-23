@@ -148,7 +148,6 @@ $(function(){ initResizable(false); });
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  C21nsSidis(): DoubleExpression() {}</div>
-<div class="line"> </div>
 <div class="line">  <span class="keywordtype">double</span> <a class="code hl_function" href="classapfel_1_1DoubleExpression.html#ae6a9c84f2f07bfc44f4d29b9153faa18">LocalLocal</a>(<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; x, <span class="keywordtype">double</span> <span class="keyword">const</span>&amp; z)<span class="keyword"> const override</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <span class="keywordflow">return</span> 2 * <a class="code hl_variable" href="group__MathConstants.html#ga687ec16c12edc12df465398573b42d47">apfel::CF</a> * ( - 8 + pow(log(1 - z), 2) + pow(log(1 - x), 2) + 2 * log(1 - x) * log(1 - z) );</div>
@@ -293,7 +292,7 @@ $(function(){ initResizable(false); });
 <div class="line">        distqg.<a class="code hl_function" href="classapfel_1_1DoubleObject.html#a2ac7b068262482662cde7df4f622be1c">AddTerm</a>({<a class="code hl_variable" href="group__PhysConstants.html#ga4e9304b2e9dfeb40a2ad1a3cfa6b2e6a">apfel::QCh2</a>[abs(j)-1], dPDF.at(0), dFF.at(j)});</div>
 <div class="line">      }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Assemble double distribution for the reduced cross section as Y^+ F2 - y^2 FL</span></div>
+<div class="line">    <span class="comment">// Assemble double distribution for the cross section</span></div>
 <div class="line">    <span class="keywordflow">return</span> ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( ( ( so.C20qq + coup * so.C21qq ) * distqq + coup * ( so.C21gq * distgq + so.C21qg * distqg ) ).MultiplyBy(yp, iz)</div>
 <div class="line">                                                 - ( coup * ( so.CL1qq * distqq + so.CL1gq * distgq + so.CL1qg * distqg ) ).MultiplyBy(y2, iz) );</div>
 <div class="line">  };</div>
@@ -341,7 +340,7 @@ $(function(){ initResizable(false); });
 <div class="line">        distqg += <a class="code hl_variable" href="group__PhysConstants.html#ga4e9304b2e9dfeb40a2ad1a3cfa6b2e6a">apfel::QCh2</a>[abs(j)-1] * <a class="code hl_class" href="classapfel_1_1DoubleDistribution.html">apfel::DoubleDistribution</a>{dPDF.at(0), dFF.at(j)};</div>
 <div class="line">      }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Assemble double distribution for the reduced cross section as Y^+ F2 - y^2 FL</span></div>
+<div class="line">    <span class="comment">// Assemble double distribution for the  cross section</span></div>
 <div class="line">    <span class="keywordflow">return</span> ( 4 * M_PI * alpha2 / pow(Q, 3) ) * ( yp * ( ( O20qq + coup * O21qq ) * distqq + coup * ( O21gq * distgq + O21qg * distqg ) )</div>
 <div class="line">                                                 - coup * ( y2 * ( OL1qq * distqq + OL1gq * distgq + OL1qg * distqg ) ) );</div>
 <div class="line">  };</div>
@@ -411,7 +410,7 @@ $(function(){ initResizable(false); });
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 21 2024 15:23:31 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Fri Aug 23 2024 12:53:21 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>

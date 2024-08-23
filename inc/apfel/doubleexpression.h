@@ -93,4 +93,27 @@ namespace apfel
     virtual double RegularRegular(double const&, double const&) const { return 0; }
     ///@}
   };
+
+  /**
+   * @brief Derived class from DoubleExpression to implement the
+   * double Identity operator (double delta function).
+   * @ingroup RecExprs
+   */
+  class DoubleIdentity: public DoubleExpression
+  {
+  public:
+    DoubleIdentity(): DoubleExpression() { }
+    double LocalLocal(double const&, double const&) const { return 1; }
+  };
+
+  /**
+   * @brief Derived class from DoubleExpression to implement the
+   * double Null operator (double zero).
+   * @ingroup RecExprs
+   */
+  class DoubleNull: public DoubleExpression
+  {
+  public:
+    DoubleNull(): DoubleExpression() { }
+  };
 }

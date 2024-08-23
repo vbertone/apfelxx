@@ -68,5 +68,6 @@ var searchData=
   ['interpolator_2eh_65',['interpolator.h',['../interpolator_8h.html',1,'']]],
   ['intinterpolant_66',['IntInterpolant',['../classapfel_1_1Interpolator.html#a3d294de2c1bd8df09e3420a529a0beb9',1,'apfel::Interpolator::IntInterpolant()'],['../classapfel_1_1LagrangeInterpolator.html#ac685eca21fc99696b8fb8dee1f5248c5',1,'apfel::LagrangeInterpolator::IntInterpolant()'],['../classapfel_1_1QGrid.html#a9ba5658b710808b1eeaef1dbb784b848',1,'apfel::QGrid::IntInterpolant()']]],
   ['introduction_67',['Introduction',['../index.html#autotoc_md0',1,'']]],
-  ['isgpd_68',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
+  ['invtanint_68',['InvTanInt',['../namespaceapfel.html#af6a736842d7f9a6e8225d08b7f6211b8',1,'apfel']]],
+  ['isgpd_69',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
 ];

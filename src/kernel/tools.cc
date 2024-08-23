@@ -305,7 +305,7 @@ namespace apfel
     if (integral)
       return pow(log(1 - y), n + 1) / ( n + 1 );
     else
-      return pow(log(1 - y), n) / ( 1 - y );
+      return (n == 0 ? 1 / ( 1 - y ) : pow(log(1 - y), n) / ( 1 - y ));
   }
 
   //_________________________________________________________________________________

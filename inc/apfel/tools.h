@@ -153,7 +153,8 @@ namespace apfel
   double Dn(int const& n, double const& y, bool const& integral = false);
 
   /**
-   * @brief Function that computes numericall the integral \int_0^y atan(t) / t.
+   * @brief Function that computes numericall the integral between 0
+   * and y of atan(t) / t.
    * @param y: the upper integration bound
    * @note Used in the computation of the SIDIS partonic cross
    * sections at NNLO accuracy.

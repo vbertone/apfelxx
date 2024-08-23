@@ -54,5 +54,6 @@ var searchData=
   ['interpolantlog_51',['InterpolantLog',['../classapfel_1_1Interpolator.html#a9c58121f234604b9845942f38961f45c',1,'apfel::Interpolator::InterpolantLog()'],['../classapfel_1_1LagrangeInterpolator.html#aa27376e2b20c645a57df5e808270bd13',1,'apfel::LagrangeInterpolator::InterpolantLog()']]],
   ['interpolator_52',['Interpolator',['../classapfel_1_1Interpolator.html#a829c8b174a5e9a12b20b927bb46a7279',1,'apfel::Interpolator::Interpolator(Grid const &amp;gr)'],['../classapfel_1_1Interpolator.html#a1e048b687d8dbd1e69cc46cb83c102a7',1,'apfel::Interpolator::Interpolator(Grid const &amp;gr, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)']]],
   ['intinterpolant_53',['IntInterpolant',['../classapfel_1_1Interpolator.html#a3d294de2c1bd8df09e3420a529a0beb9',1,'apfel::Interpolator::IntInterpolant()'],['../classapfel_1_1LagrangeInterpolator.html#ac685eca21fc99696b8fb8dee1f5248c5',1,'apfel::LagrangeInterpolator::IntInterpolant()'],['../classapfel_1_1QGrid.html#a9ba5658b710808b1eeaef1dbb784b848',1,'apfel::QGrid::IntInterpolant()']]],
-  ['isgpd_54',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
+  ['invtanint_54',['InvTanInt',['../namespaceapfel.html#af6a736842d7f9a6e8225d08b7f6211b8',1,'apfel']]],
+  ['isgpd_55',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
 ];
