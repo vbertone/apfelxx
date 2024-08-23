@@ -1,0 +1,451 @@
+\documentclass[10pt,aps,prl,twocolumn,preprintnumbers,nofootinbib]{revtex4-2}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{enumitem}
+\bibliographystyle{apsrev4-1}
+
+
+%% custom section header
+\newcommand{\sect}[1]{%
+\bigskip\noindent%
+{\bfseries\upshape\rmfamily\boldmath{#1}.}---%
+\ignorespaces%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Qavg}{Q_{\rm avg}}
+\newcommand{\der}{\mathrm{d}}
+\newcommand{\e}{\epsilon}
+\newcommand{\Fcal}{\mathcal{F}}
+ \newcommand{\Ccal}{\mathcal{C}}
+\newcommand{\hx}{\hat{x}}
+\newcommand{\hz}{\hat{z}}
+\newcommand{\qb}{\bar{q}}
+\newcommand{\qp}{q^{\prime}}
+\newcommand{\qbp}{\bar{q}^{\prime}}
+\newcommand{\GeV}{\mathrm{GeV}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+
+\preprint{ZU-TH 07/24}
+
+\title{Semi-inclusive deep-inelastic scattering at NNLO in QCD}%
+
+\author{Leonardo Bonino}
+\affiliation{%
+  Physik-Institut, Universit\"at Z\"urich, Winterthurerstrasse 190, 8057 Z\"urich, Switzerland}%
+\author{Thomas Gehrmann}
+ \affiliation{%
+  Physik-Institut, Universit\"at Z\"urich, Winterthurerstrasse 190, 8057 Z\"urich, Switzerland}%
+\author{Giovanni Stagnitto}
+\affiliation{%
+Universit\`{a} degli Studi di Milano-Bicocca \& INFN, Piazza della Scienza 3, 20216 Milano, Italy}%
+
+%\date{\today}
+
+\begin{abstract}
+  Semi-inclusive hadron production processes in deep-inelastic lepton-nucleon
+  scattering are important probes of the quark flavour structure of the nucleon
+  and of the fragmentation dynamics of quarks into hadrons.  We compute the full
+  next-to-next-to-leading order (NNLO) QCD corrections to the coefficient
+  functions for semi-inclusive deep-inelastic scattering (SIDIS) in analytical
+  form.  The numerical impact of these corrections for precision physics is
+  illustrated by a detailed comparison with data on single inclusive hadron
+  spectra from the CERN COMPASS experiment.
+\end{abstract}
+
+\maketitle
+
+
+\section{Introduction}
+
+Identified hadron production in hard scattering processes is described in
+quantum chromodynamics (QCD) through the production of partons (quarks or
+gluons) which subsequently fragment into hadrons. This parton-to-hadron
+transition is a non-perturbative process that can be parametrized in terms of
+fragmentation functions (FFs) which describe the probability of a parton
+fragmenting into a hadron carrying some fraction of its
+momentum~\cite{Field:1976ve,Field:1977fa}. These FFs fulfil Altarelli-Parisi
+evolution equations in their resolution scale~\cite{Altarelli:1977zs}, which are
+in complete analogy to the evolution of parton distributions functions (PDFs) in
+the nucleon.
+
+Production cross sections for a variety of hadron species have been measured in
+electron-positron, lepton-hadron and hadron-hadron collisions. To include these
+data sets into a global fit of FFs requires the knowledge of the respective
+parton-level coefficient functions (differential in the momentum of the
+fragmenting parton) to the desired perturbative order. At present, these
+coefficient functions are known to next-to-leading order (NLO) for
+lepton-hadron~\cite{Altarelli:1979kv,Baier:1979sp,deFlorian:1997zj} and
+hadron-hadron collisions~\cite{Aversa:1988vb} and to next-to-next-to-leading
+order (NNLO) for $e^+e^-$ annihilation~\cite{Rijken:1996ns,Mitov:2006ic}.
+Consequently, global fits of FFs at
+NNLO~\cite{Bertone:2017tyb,Anderle:2015lqa,Abdolmaleki:2021yjf} focus only on
+data from $e^+e^-$ experiments, while having to discard any other collider data.
+
+Semi-inclusive hadron production in deep-inelastic lepton-nucleon scattering
+(SIDIS) has been measured
+extensively~\cite{EuropeanMuon:1991sne,ZEUS:1995acw,H1:1996muf,HERMES:2012uyd,COMPASS:2016xvm}
+for various hadrons.  By considering different hadron species, it is possible to
+single out different flavour combinations of incoming partons, thereby probing
+the detailed quark and antiquark flavour decomposition of the PDFs. This SIDIS
+information is largely complementary to inclusive DIS structure function
+measurements, which allow to determine only a single flavour combination to high
+accuracy. Moreover, SIDIS measurements play an important role in the
+determination of spin-dependent PDFs~\cite{deFlorian:2009vb} that have to rely
+on far fewer hadron-collider observables than ordinary (spin-averaged) PDFs.
+Again, these studies can be performed in a self-consistent manner only up to NLO
+due to the unavailability of corrections to the SIDIS coefficient functions at
+higher orders.
+
+It is the purpose of this work to enable precision physics studies with SIDIS
+observables by deriving the full NNLO QCD corrections to the SIDIS coefficient
+functions. We provide their analytical expressions for all partonic channels
+(combinations of initial state and identified final-state partons) and study the
+impact of the newly derived corrections on a representative data set on SIDIS
+charged pion production from COMPASS~\cite{COMPASS:2016xvm}.
+
+\section{Kinematics of SIDIS}
+
+We consider the observation of a hadron $h$ following the scattering of a lepton
+on a nucleon. We closely follow the notation of~\cite{Anderle:2012rq},
+describing semi-inclusive deep-inelastic scattering as
+$\ell(k)\,p(P)\to\ell(k^{\prime})\,h(P_h)\,X$, with $X$ inclusive final-state
+radiation. The leptons $\ell$ momenta define the four-momentum $q=k-k^{\prime}$
+of the exchanged virtual vector boson and the energy transfer $y=(P\cdot
+q)/(P\cdot k)$.  The usual exclusive variables for $Q^2=-q^2$,
+\begin{align}
+x=\frac{Q^2}{2P\cdot q}\, ,\quad \quad z=\frac{P\cdot P_h}{P\cdot q}  \,  ,
+\end{align}
+describe the momentum fraction of the nucleon carried by the incoming parton
+($x$) and the momentum fraction of the outgoing parton carried by the identified
+hadron ($z$).  For $\sqrt{s}$ center-of-mass energy of the lepton-nucleon system
+we have $Q^2=xys$.
+
+As we consider values of $Q\ll M_Z$ only (highly) virtual photons are exchanged,
+and the triple-differential cross section reads
+\begin{eqnarray}\label{d3sigdxdydz}
+  \frac{\der^3\sigma^h}{\der x \der y \der z} &=& \frac{4\pi\alpha^2}{Q^2} \bigg[
+    \frac{1+(1-y)^2}{2y} \Fcal^h_T(x,z,Q^2)
+    \nonumber \\ && \phantom{\frac{4\pi\alpha^2}{Q^2} \bigg[}
+    + \frac{1-y}{y} \Fcal^h_L(x,z,Q^2) \bigg] \, ,
+\end{eqnarray}
+with $\alpha$ denoting the fine structure constant. 
+
+The transverse $\Fcal^h_T$ and longitudinal $\Fcal^h_L$ SIDIS structure
+functions are given by the sum over all partonic channels of the convolution
+between the PDF for a parton $p$ ($f_p$), the FF of a parton $p^{\prime}$ into
+the hadron $h$ ($D^h_{p^{\prime}}$), and the coefficient function for the
+transition $p\to p^{\prime}$ ($\Ccal^i_{p' p}$):
+\begin{align}
+  \Fcal_i^h(x,z,Q^2) &= \sum_{p,p'} \int_x^1 \frac{\der\hx}{\hx}
+  \int_z^1 \frac{\der\hz}{\hz} f_p\left(\frac{x}{\hx},\mu_F^2\right)
+  D_{p'}^h\left(\frac{z}{\hz},\mu_A^2\right)  
+  \nonumber \\ 
+  &\times\,\Ccal^i_{p' p}\left(\hx,\hz,Q^2,\mu_R^2,\mu_F^2,\mu_A^2\right)\,,
+  \quad i = T,L \, .
+\end{align}
+The factorisation theorem that allows the above expression introduces two
+factorisation scales: $\mu_F$ for the initial state and $\mu_A$ for the final
+state.  With $\mu_R$ we indicate the renormalisation scale.  The coefficient
+functions encode the hard-scattering part of the process and can be computed in
+perturbative QCD. Their perturbative expansion in the strong coupling constant
+$\alpha_s$ reads
+\begin{equation}
+  \Ccal^i_{p' p} = C^{i,(0)}_{p' p}
+  + \frac{\alpha_s(\mu_R^2)}{2\pi} C^{i,(1)}_{p' p}
+  + \left(\frac{\alpha_s(\mu_R^2)}{2\pi}\right)^2  C^{i,(2)}_{p' p}
+  + \mathcal{O}(\alpha_s^3)\, .
+\end{equation}
+
+At LO, only the $qq$ channel ($\gamma^* q\to q$) contributes, with the LO
+coefficient functions trivially given by
+\begin{equation}
+  C^{T,(0)}_{qq} = e_q^2 \delta(1-\hx) \delta(1-\hz)\,,\quad
+  C^{L,(0)}_{qq} = 0\,,
+\end{equation}
+where $e_q$ is the quark's charge.  At NLO instead also the channels $qg$ and
+$gq$ start to contribute, and results for $C^{i,(1)}_{qq}$, $C^{i,(1)}_{gq}$ and
+$C^{i,(1)}_{qg}$ can be found in the literature~\cite{Anderle:2012rq}.
+
+In this Letter we present results for the NNLO corrections
+$C^{i,(2)}_{p^{\prime}p}$ to all partonic channels appearing at this order.
+Following the notation of~\cite{Anderle:2016kwa}, the $7$ partonic channels
+appearing at $\mathcal{O}(\alpha_s^2)$ are:
+\begin{align}\label{CFNNLOlist}
+C^{i,(2)}_{qq}&=C^{i,(2)}_{\qb\qb}=e_q^2 C^{i,\mathrm{NS}}_{qq}+\biggl( \sum_j e^2_{q_j}\biggr)C^{i,\mathrm{PS}}_{qq} \, , \nonumber \\
+C^{i,(2)}_{\qb q}&=C^{i,(2)}_{q \qb}=e_q^2C^{i}_{\qb q} \, , \nonumber \\
+C^{i,(2)}_{\qp q}&=C^{i,(2)}_{\qbp \qb}=e_q^2 C^{i,1}_{\qp q}+e_{\qp}^2 C^{i,2}_{\qp q}+e_q e_{\qp} C^{i,3}_{\qp q} \, , \nonumber \\
+C^{i,(2)}_{\qbp q}&=C^{i,(2)}_{\qp \qb}=e_q^2 C^{i,1}_{\qp q}+e_{\qp}^2 C^{i,2}_{\qp q}-e_q e_{\qp} C^{i,3}_{\qp q} \, , \nonumber \\
+C^{i,(2)}_{gq}&=C^{i,(2)}_{g \qb}=e_q^2 C^{i}_{gq} \, , \nonumber \\
+C^{i,(2)}_{qg}&=C^{i,(2)}_{\qb g}=e_q^2 C^{i}_{qg} \, , \nonumber \\
+C^{i,(2)}_{gg}&=\biggl( \sum_j e_{q_j}^2 \biggr) C^{i}_{gg} \,  ,
+\end{align}
+again for $i=T,L$. With $\qp$ ($\qbp$) we indicate a quark (antiquark) of
+flavour different from $q$, whereas the NS and PS superscripts in the quark-to-quark channel denote the non-singlet and the pure-singlet components respectively.
+
+The coefficient functions are computed by applying projectors to extract the
+longitudinal and transverse components from the respective parton-level
+subprocess matrix elements with incoming kinematics fixed by $Q^2$ and
+$\hat{x}$, which are then integrated over the final state phase space. This
+integration is fully inclusive in the extra radiation $X$ and keeps the final
+state momentum fraction of the parton $p'$ fixed to $\hat{z}$.
+
+\section{Method}
+
+At NNLO in QCD, three types of parton-level contributions must be taken into
+account, relative to the underlying Born-level process: two-loop virtual
+corrections (double-virtual, VV), one-loop corrections to single real radiation
+processes (real-virtual, RV) and tree-level double real radiation processes
+(RR), with example diagrams shown in Figure~\ref{fig:fdiag}. These are
+accompanied by contributions from QCD renormalization and mass factorization of
+the PDFs and FFs.
+
+\begin{figure}[t]
+  \includegraphics[width=0.2\textwidth]{qtog1l-crop.pdf}\\
+  \includegraphics[width=0.2\textwidth]{qtoqNS-crop.pdf}\,
+  \includegraphics[width=0.2\textwidth]{qtoqPS-crop.pdf}
+  \caption{Example Feynman diagrams contributing to $C^i_{gq}$ at the RV level
+    (top), and to $C^{i,\mathrm{NS}}_{qq}$ and $C^{i,\mathrm{PS}}_{qq}$ at the RR
+    level (bottom left and right).}
+  \label{fig:fdiag}
+\end{figure}
+
+NNLO QCD corrections to processes with identified particles at hadron colliders
+have recently been derived for identified
+photons~\cite{Gehrmann:2022cih,Chen:2022gpk} and for the production of bottom
+hadrons in top quark decays~\cite{Czakon:2022pyz}. These calculations are
+performed in a fully exclusive manner in the form of parton-level event
+generators which provide the full kinematical information on all final state
+partons (and on a single identified hadron or photon), which can then be
+subjected to the precise final state definition that is used in the
+experiment. To enable these computations, a method to identify and extract
+infrared singular real radiation up to NNLO had to be employed. The calculation
+for identified photons used the antenna subtraction
+method~\cite{Gehrmann-DeRidder:2005btv,Daleo:2006xa,Currie:2013vh}, while the
+bottom hadron production relies on a sector-improved residue
+subtraction~\cite{Czakon:2010td}.
+   
+The analytic ingredients to the antenna subtraction method are so-called antenna
+functions, which encapsulate all infrared singular radiation that emerges
+between two hard radiator partons. These antenna functions are used to construct
+the real radiation subtraction terms, and they are integrated analytically over
+the respective antenna phase spaces to make the infrared pole structure
+explicit.  In the case of fragmentation processes~\cite{Gehrmann:2022pzd}, one
+of the hard radiators is the fragmenting parton, while the other can be in the
+initial or in the final state. The kinematical situation of fragmentation
+antenna functions with one radiator in the initial state corresponds exactly to
+the kinematics of SIDIS~\cite{Gehrmann:2021lwb}. 
+Consequently, the RV and RR contributions to SIDIS can
+be obtained employing exactly the same methods as were used to derive the
+integrated fragmentation antenna functions with one initial state
+radiator. These methods were described in detail in~\cite{Gehrmann:2022cih} and
+we only provide a brief summary here.
+
+The one-loop squared matrix elements for the RV contributions can be expressed
+in terms of one-loop bubble and box integrals, which are known in exact form in
+$\epsilon$,
+with $\epsilon$ the dimensional regularisation parameter
+for $N = 4-2\epsilon$ space-time dimensions.
+For fixed $\hat{x}$ and $\hat{z}$, the associated phase space
+integral is fully constrained, such that only expansions in the end-point
+distributions in $\hat{x}=1$ and $\hat{z}=1$ are required to obtain the final
+result for this contribution. To avoid ambiguities associated with the analytic
+continuation of the one-loop master integrals, the parameter space of the RV
+contribution is segmented into four sectors: $(\hat{x}\leq 0.5, \hat{x}\leq
+\hat{z}\leq 1-\hat{x})$, $(\hat{z}\leq 0.5, \hat{z}<\hat{x}\leq 1-\hat{z})$,
+$(\hat{x}>0.5,1-\hat{x}< \hat{z}<\hat{x})$ and
+$(\hat{z}>0.5,1-\hat{z}<\hat{x}\leq \hat{z})$, where manifestly real-valued
+expressions for the contributions are obtained~\cite{Gehrmann:2022cih}. The
+expressions are continuous across the boundaries of the regions.
+
+The RR contributions correspond to integrations over a three-particle phase
+space, with the momentum fraction of one of the particles fixed by
+$\hat{z}$. They can be expressed as cuts of two-loop integrals in forward
+kinematics, with $\hat{z}$ expressed as a linear cut propagator. These integrals
+are reduced to master integrals using integration-by-parts (IBP)
+identities~\cite{Chetyrkin:1981qh,Laporta:2000dsw}, as implemented in
+\code{Reduze2}~\cite{vonManteuffel:2012np}.  The RR contributions to the SIDIS
+coefficient functions are expressed in terms of 13 integral families, which
+contain a total of 21 master integrals. These master integrals are determined by
+solving their differential equations~\cite{Gehrmann:1999as} in $\hat{x}$ and
+$\hat{z}$, using \code{PolyLogTools}~\cite{Duhr:2019tlz} and
+\code{HPL}~\cite{Maitre:2005uu}. The boundary terms for these differential
+equations are obtained by integrating the generic solutions over $\hat{z}$ and
+comparing to the master integrals relevant to inclusive integrated antenna
+functions~\cite{Daleo:2009yj} with one initial-state and one final-state
+radiator.  Of the 21 master integrals, 9 were already computed in the context of
+photon fragmentation at NNLO~\cite{Gehrmann:2022cih}, and derivation of the
+remaining 12 integrals will be described in detail elsewhere~\cite{IFfrag}.
+
+The VV contributions correspond to the well-known two-loop quark form
+factor~\cite{Gehrmann:2005pd} in space-like kinematics.
+
+All contributions are computed using \code{FORM}~\cite{Vermaseren:2000nd} and
+are assembled to yield the bare SIDIS coefficient functions, which still contain
+ultraviolet and collinear pole terms. By adding the renormalization and mass
+factorization counterterms (including convolutions of lower-order terms using
+\code{MT}~\cite{Hoschele:2013pvt}), the finite physical SIDIS coefficient
+functions are obtained.
+
+
+\section{Results}
+
+\begin{figure*}[t]
+  \includegraphics[width=0.9\textwidth]{compass_theo-crop.pdf}
+  \caption{QCD $K$-factors up to NNLO and fractional contribution of individual
+    channels for selected kinematical bins studied by the COMPASS
+    experiment~\protect\cite{COMPASS:2016xvm}. The $g \to g$, $q \to \bar{q}$,
+    $q \to \qp$ and $q \to \qbp$ channels are not shown in the channel
+    decomposition as they are found to give negligible contributions in the
+    kinematical bins considered.}
+  \label{fig:kfact}
+\end{figure*}
+
+
+The results for the full set of coefficient functions up to NNLO order are too
+lengthy to be presented here and thus are given as an ancillary file attached to
+the \code{arXiv} submission of this Letter.  Our results include the full scale
+dependence ($\mu_R$, $\mu_F$, and $\mu_A$) that was cross-checked with the
+solution of the renormalisation group equation for all channels.  In this
+section we discuss the comparison of our results with the literature and
+numerical results.
+
+By means of the threshold resummation formalism for SIDIS~\cite{Anderle:2012rq},
+approximate corrections for the $qq$ channel have been derived at
+NNLO~\cite{Abele:2021nyo}, and even at N$^3$LO~\cite{Abele:2022wuy}.
+%
+Such approximate NNLO corrections have been adopted in the context of a global
+QCD analysis of light fragmentation
+functions~\cite{Borsa:2022vvp,AbdulKhalek:2022laj}.
+%
+Moreover, partial results for the $qq$ NNLO longitudinal coefficient function
+are also available~\cite{Anderle:2016kwa}.
+%
+Most recently the leading colour contribution to the $qq$ non-singlet channel
+was computed in \cite{Goyal:2023xfi}.
+
+Concerning the $qq$ channel, we compare our results against the ones
+of~\cite{Goyal:2023xfi}.  The longitudinal components are in perfect numerical
+agreement.  Regarding the leading color transverse ones, we find analytical
+agreement for all terms involving endpoint distributions as well as perfect
+numerical agreement for the regular part in the region $(\hat{z}\leq 0.5,
+\hat{z}<\hat{x}\leq 1-\hat{z})$.  We are also in agreement with the threshold
+expansion terms of~\cite{Abele:2021nyo}, which predict all double distributions
+in the partonic variables, and have been confirmed by~\cite{Goyal:2023xfi} as
+well.
+
+
+Figure~\ref{fig:kfact} illustrates the numerical impact of the newly computed
+NNLO corrections and assesses the relevance of different partonic channels.
+Using selected kinematical bins from the COMPASS
+measurement~\cite{COMPASS:2016xvm} of SIDIS pion production in muon-nucleon
+scattering, which is described in more detail in the following section, we
+compute the $K$-factors at NLO and NNLO and decompose the cross sections
+according to different channels. We use the NNPDF3.1 PDF
+set~\cite{NNPDF:2017mvq} and the FF set from~\cite{Borsa:2022vvp} at NNLO
+throughout, with $\alpha_s(M_Z)=0.118$ and with $N_F = 5$ light quarks. The
+central scales are fixed at $\mu_R=\mu_F=\mu_A=Q$, with scale variations
+determined through variations by a factor 2 around the central scale.  We
+further fix $\mu_F=\mu_A$.
+
+We observe moderate NNLO corrections to the $K$-factors, which reinforce the
+tendency of the NLO corrections of an increase of the $K$-factor with increasing
+$z$. The non-uniformity of the NNLO corrections in $x$ and $z$ clearly
+highlights the phenomenological relevance of the NNLO contributions.  In the
+smallest $x$-bin (corresponding to the lowest $\Qavg$), NNLO corrections are
+somewhat larger, and the overlap of NLO and NNLO uncertainty bands is only
+marginal. At larger $x$, the NNLO corrections are within the NLO uncertainty
+bands and their inclusion leads to considerably smaller uncertainties from 20\%
+at NLO to well below 10\% at NNLO.  The predictions are largely dominated by the
+quark-to-quark channel, the gluon-to-quark and quark-to-gluon channels both
+yield small negative corrections to the SIDIS cross section, especially at small
+$x$, with the gluon-to-quark channel being typically larger due to the larger
+magnitude of the respective fragmentation function.  All new channels appearing
+at NNLO are found to give negligible contributions.
+
+\section{Comparison with data}\label{sec:CWD}
+
+The COMPASS experiment performs deep-inelastic scattering measurements on
+various fixed targets with a high-energy muon beam at CERN.  In their SIDIS
+study~\cite{COMPASS:2016xvm}, momentum spectra for charged pions and for
+unidentified charged hadrons are measured with a 160~GeV muon beam scattering off
+an isoscalar target, corresponding to a center of mass energy $\sqrt{s} \approx
+17.35\, \GeV$.  Events are accepted if $Q^2>1\,\GeV^2$ and $W>5\,\GeV$ with
+$W=\sqrt{(P+q)^2}$ the invariant mass of the hadronic system.
+
+\begin{figure*}[t]
+\includegraphics[width=\textwidth]{compass_data-crop.pdf}
+\caption{Comparison of NLO and NNLO theory predictions for $\pi^+$ multiplicities with COMPASS data.}
+\label{fig:compass}
+\end{figure*}
+
+ 
+The measured hadron multiplicities $\der M^h/\der z$ are given by the ratio of
+the differential cross section for hadron production and the differential
+inclusive DIS cross section. Therefore we compute the ratio
+\begin{align}\label{eq:RhSIDIS}
+\frac{\der M^h}{\der z} = \frac{\der^3 \sigma^h/\der x\der y \der z}{\der^2 \sigma/\der x\der y} \, .
+\end{align} 
+For brevity, we focus on the $h=\pi^+$ spectra.  In our numerical implementation
+we compute the denominator of~\eqref{eq:RhSIDIS} using the \code{APFEL++}
+code~\cite{Bertone:2013vaa,Bertone:2017gds}.  We apply the same experimental
+cuts in our numerical implementation and we integrate~\eqref{eq:RhSIDIS} over
+$x$ and $y$, according to the given bin ranges. In Figure~\ref{fig:compass} we
+present the ratio of data and theory predictions over the NLO result.  The
+uncertainty on theory predictions is estimated by varying the scales in an
+uncorrelated way between the numerator and denominator of~\eqref{eq:RhSIDIS}.
+
+We observe that inclusion of the NNLO corrections modifies the shape of the
+predictions, in general improving the description of the experimental data.  For
+the lowest values of $\Qavg \leq 2$~GeV, no reduction of the scale uncertainty
+is observed. Moving to higher $\Qavg$, this reduction becomes clearly
+significant, with NNLO uncertainties usually being half the size of their NLO
+counterparts.
+ 
+
+\section{Conclusions}
+Semi-inclusive deep inelastic scattering processes will be among the key
+observables of the physics program at the BNL Electron-Ion Collider (EIC).
+To enable precision studies
+with SIDIS data, higher order perturbative corrections are crucial. To prepare
+the precision SIDIS program at EIC, we derived the analytical expressions for
+the NNLO QCD corrections to the SIDIS coefficient functions. The NNLO
+corrections are non-uniform in the kinematical variables. They lead to a
+substantial reduction of the uncertainty on the theory predictions at
+sufficiently large values of $Q$, where the perturbative expansion is
+applicable. In comparison with COMPASS results on $\pi^+$ SIDIS production, we
+observe an improved description of the experimental data.
+
+Our newly derived results allow precision determinations of the quark flavour
+decomposition of nucleon PDFs and of hadron FFs in SIDIS at the EIC. A natural
+extension of our work could be towards the polarized SIDIS coefficient
+functions, thereby enabling precision SIDIS studies in the EIC spin physics
+program.
+
+
+%----------------------------------------
+\sect{Acknowledgements}
+%----------------------------------------
+We are grateful to Kay Sch\"onwald, Markus L\"ochner and Valerio Bertone for
+discussions and for checks on the results, to Robin Sch\"urmann for early
+contributions to the calculations described here and to Daniel de Florian for
+discussions and for providing us with the FF set of~\cite{Borsa:2022vvp}.
+%%
+This work has received funding from the Swiss National Science Foundation (SNF)
+under contract 200020-204200 and from the European Research Council (ERC) under
+the European Union's Horizon 2020 research and innovation programme grant
+agreement 101019620 (ERC Advanced Grant TOPUP).
+
+
+%----------------------------------------
+\bibliography{sidis}
+%----------------------------------------
+
+
+\end{document}
+

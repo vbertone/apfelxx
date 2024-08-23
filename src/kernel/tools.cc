@@ -11,6 +11,7 @@
 #include "apfel/doubleobject.h"
 #include "apfel/alphaqcd.h"
 #include "apfel/alphaqed.h"
+#include "apfel/integrator.h"
 
 #include <algorithm>
 #include <math.h>
@@ -296,5 +297,21 @@ namespace apfel
                      + nf * CF * TR * ( 16 * zeta3 - 22. ) );
 
     return 1e-3 * ConvFact * sigma0tot * Ree;
+  }
+
+  //_________________________________________________________________________________
+  double Dn(int const& n, double const& y, bool const& integral)
+  {
+    if (integral)
+      return pow(log(1 - y), n + 1) / ( n + 1 );
+    else
+      return pow(log(1 - y), n) / ( 1 - y );
+  }
+
+  //_________________________________________________________________________________
+  double InvTanInt(double const& y)
+  {
+    apfel::Integrator I{[] (double const& t) -> double{ return atan(t) / t; }};
+    return I.integrate(0, y, apfel::eps5);
   }
 }

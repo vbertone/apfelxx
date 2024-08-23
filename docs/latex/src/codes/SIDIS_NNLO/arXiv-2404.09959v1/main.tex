@@ -1,0 +1,591 @@
+\documentclass[%
+ twocolumn,
+ superscriptaddress,
+%groupedaddress,
+%unsortedaddress,
+%runinaddress,
+%frontmatterverbose,
+%showpacs,
+ preprintnumbers,
+ nofootinbib,
+%nobibnotes,
+%bibnotes,
+ amsmath,amssymb,
+ aps,
+ prl,
+%pra,
+%prb,
+%rmp,
+%prstab,
+%prstper,
+%floatfix,
+]{revtex4}
+\usepackage{psfrag,slashed,cancel,array,graphicx,hyperref}
+\usepackage{subfigure}
+%\usepackage[justification=justified]{subcaption}
+% \usepackage[labelfont=bf,labelsep=quad,justification=justified]{caption}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{braket}
+\usepackage{booktabs} %nice tables
+\usepackage[normalem]{ulem}
+\hypersetup{pdftitle={},pdfcreator={},linkcolor=[rgb]{0.15,0.35,0.75},colorlinks=true,citecolor=[rgb]{0.675,0,0.2},urlcolor=[rgb]{0.15,0.35,0.65}}
+
+
+
+
+\newcommand{\Eq}[1]{Eq.~\eqref{eq:#1}}
+\newcommand{\Eqs}[2]{Eqs.~\eqref{eq:#1} and \eqref{eq:#2}}
+\newcommand{\eq}[1]{eq.~\eqref{eq:#1}}
+\newcommand{\eqs}[2]{eqs.~\eqref{eq:#1} and \eqref{eq:#2}}
+
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+
+\newcommand{\nn}{\nonumber}
+\newcommand{\MSbar}{\overline{\mathrm{MS}}}
+
+\newcommand{\df}{\mathrm{d}}
+\newcommand{\asr}{\left(\frac{\alpha_s}{4\pi}\right)}
+
+\newcommand{\bt}{{\vec b}_T}
+\newcommand{\qt}{{\vec q}_T}
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
+
+
+\newcommand{\nr}[1]{{\color{magenta} #1}}
+
+
+% \AtBeginDocument{
+% \heavyrulewidth=.08em
+% \lightrulewidth=.05em
+% \cmidrulewidth=.03em
+% \belowrulesep=.65ex
+% \belowbottomsep=0pt
+% \aboverulesep=.4ex
+% \abovetopsep=0pt
+% \cmidrulesep=\doublerulesep
+% \cmidrulekern=.5em
+% \defaultaddspace=.5em
+% }
+
+\setcounter{topnumber}{1}
+\setcounter{tocdepth}{2}
+
+\def\cA{\mathcal{A}}
+\def\cM{\mathcal{M}}
+\def\cO{\mathcal{O}}
+\def\cN{\mathcal{N}}
+\def\cV{\mathcal{V}}
+\def\cT{\mathcal{T}}
+\def\cR{\mathcal{R}}
+
+
+\def\ep{\epsilon}
+
+\def\xt{\tilde{x}}
+\def\xb{\bar{x}}
+\def\logx{l_x}
+\def\logxbar{l_{\bar{x}}}
+\def\lithxbar{\,\text{Li}_3(\bar{x})}
+\def\litwxbar{\,\text{Li}_2(\bar{x})}
+\def\sotxbar{\,\text{S}_{12} (\bar{x})}
+
+\def\iomx{\frac{1}{\bar{x}}}
+
+\def\zt{\tilde{z}}
+\def\zb{\bar{z}}
+\def\logz{l_z}
+\def\logzbar{l_{\bar{z}}}
+\def\lithzbar{\,\text{Li}_3(\bar{z})}
+\def\litwzbar{\,\text{Li}_2(\bar{z})}
+\def\sotzbar{\,\text{S}_{12} (\bar{z})}
+
+\def\iomz{\frac{1}{\bar{z}}}
+
+
+
+\allowdisplaybreaks
+
+\begin{document}
+
+%\preprint{DESY}
+
+\title{NNLO QCD corrections to polarized semi-inclusive DIS}
+ 
+
+\author{Saurav Goyal}
+\email{sauravg@imsc.res.in}
+\affiliation{The Institute of Mathematical Sciences,  A CI of Homi Bhabha National Institute, Taramani, 600113 Chennai, India}
+\author{Roman N. Lee}
+\email{r.n.lee@inp.nsk.su}
+\affiliation{Budker Institute of Nuclear Physics, 630090, Novosibirsk, Russia}
+\author{Sven-Olaf Moch}
+\email{sven-olaf.moch@desy.de}
+\affiliation{II. Institute for Theoretical Physics, Hamburg University, D-22761 Hamburg, Germany} %Luruper Chaussee 149,
+\author{Vaibhav Pathak}
+\email{vaibhavp@imsc.res.in}
+\affiliation{The Institute of Mathematical Sciences,  A CI of Homi Bhabha National Institute, Taramani, 600113 Chennai, India}
+\author{Narayan Rana}
+\email{narayan.rana@niser.ac.in}
+\affiliation{School of Physical Sciences, National Institute of Science Education and Research, An OCC of Homi Bhabha National Institute, 752050 Jatni, India}
+\author{V. Ravindran}
+\email{ravindra@imsc.res.in}
+\affiliation{The Institute of Mathematical Sciences,  A CI of Homi Bhabha National Institute, Taramani, 600113 Chennai, India}
+
+
+
+\date{\today}
+
+%----------------------------------------------------------------------------------------------------%             
+\begin{abstract}
+Polarized semi-inclusive deep-inelastic scattering (SIDIS) is a key process in the quest for a resolution of the proton spin puzzle.
+We present the complete results for the polarized SIDIS process at next-to-next-to-leading order (NNLO) in perturbative quantum chromodynamics.
+Our analytical results include all partonic channels for the scattering of polarized leptons off hadrons and a spin-averaged hadron identified in the final state.
+A numerical analysis of the NNLO corrections illustrates their significance and the reduced residual scale dependence in the kinematic range probed by the future Electron-Ion-Collider EIC.
+\end{abstract}
+ 
+%----------------------------------------------------------------------------------------------------%
+
+\pacs{}% PACS, the Physics and Astronomy Classification Scheme.
+% \keywords{SIDIS}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------------------%
+% 
+Deep-inelastic scattering (DIS) of leptons off hadrons provides
+valuable information on the structure 
+of hadrons at high energies in terms of their partonic constituents namely quarks, 
+anti-quarks and gluons, and also of the underlying strong interaction dynamics through quantum chromodynamics (QCD) \cite{Blumlein:2012bf}. 
+The DIS structure functions (SFs), encoding this information, are subject to QCD factorisation that separates short-distance dynamics accessible in perturbation theory
+from the long-distance (non-perturbative) one. 
+The perturbative part, so-called coefficient functions (CFs), is 
+computed in powers of the strong coupling $\alpha_s$, 
+while the non-perturbative parton dynamics inside the hadron 
+are parameterised in terms of parton distribution functions (PDFs), 
+generally extracted from cross section data~\cite{Workman:2022ynf}.
+Semi-inclusive DIS (SIDIS) with an identified hadron in the final state adds to the factorisation formalism parton fragmentation functions (FFs)~\cite{Metz:2016swz},
+which encode the parton dynamics in their recombination to
+form hadrons.
+
+Polarized DIS is a key process for the resolution of the long-standing proton spin puzzle. It gives access to the longitudinal spin structure of hadrons~\cite{Aidala:2012mv}, parameterised by helicity (spin-dependent) PDFs~\cite{deFlorian:2009vb,deFlorian:2014yva,Nocera:2014gqa}. 
+The proton spin can be determined from a sum-rule for those helicity PDFs. 
+Polarized SIDIS is particularly important for the separate extraction of (anti-)quark helicity PDFs from data. 
+This makes it a prominent observable to be measured at the upcoming Electron-Ion collider (EIC) at the Brookhaven National Laboratory~\cite{AbdulKhalek:2021gbh}.
+The unique opportunities to study it at the EIC challenge the accuracy of available QCD theory predictions and provide motivation for their improvements, which will be addressed in this letter.
+
+The reaction $l(k_l) + H(P) \rightarrow  l({k}'_l) + H'(P_H) + X$ defines the SIDIS process, 
+where $k_l$, ${k}'_l$ ($P$, $P_H$) are momenta of incoming and outgoing leptons (hadrons), respectively, and 
+the virtual photon momentum $q= k_l - {k}'_l$ squared, $Q^2=-q^2$, is large. 
+The QCD improved parton model allows to express infrared safe observables in SIDIS through CFs, PDFs and FFs.
+The hadron level cross section for unpolarized (spin averaged) SIDIS is given in terms of 
+SFs $F_{1,2,3}$.
+Exact results for the CFs of $F_{1,2}$ up to next-to-leading order (NLO) in perturbative QCD were obtained long ago~\cite{Altarelli:1979kv,Furmanski:1981cw} and the resummation of large threshold logarithms for SIDIS 
+has been accomplished up to third order in QCD~\cite{Cacciari:2001cw,Anderle:2012rq,Anderle:2013lka,Abele:2021nyo,Abele:2022wuy}.
+Recently, thanks to state-of-the-art theoretical developments in the computation of Feynman loop and phase-space integrals, the CFs have been computed to next-to-next-to-leading order (NNLO) accuracy. 
+We have presented the first NNLO results (non-singlet parton channels and leading color approximation) in \cite{Goyal:2023xfi}. Subsequently, the complete results for the CFs of $F_{1,2}$ (all parton channels and full color dependence) 
+have become available~\cite{Bonino:2024qbh,Goyal:2024xxx} and both results agree with each other for all the channels.
+
+Thus far, the description of polarized SIDIS in QCD has only been available at NLO  accuracy~\cite{deFlorian:1997zj}. 
+In this letter we present, for the first time, the full NNLO QCD corrections. 
+Polarized SIDIS is defined by the asymmetry
+%
+\begin{align*}
+\frac{d^3 \Delta \sigma}{dx dy dz}  
+ =
+\frac{1}{2}\Bigg(
+\frac{d^3 \sigma^{e^{-}_{\uparrow }H_{\uparrow}\rightarrow e^{-} H'X}}{dx dy dz}
+-\frac{d^3 \sigma^{e^{-}_{\uparrow} H_{\downarrow}\rightarrow e^{-} H'X}}{dx dy dz}\Bigg)
+\, ,
+\end{align*}
+%
+where $e^{-}_{\uparrow }H_{\uparrow(\downarrow)}$ denote the (anti-)parallel spin-orientations of the colliding electron and hadron.
+Here $x=\frac{Q^2}{2 P \cdot q}$ is the Bjorken variable, 
+$y=\frac{P\cdot q}{P\cdot k_l}$ the inelasticity, 
+%is the fraction of the incoming lepton energy transferred to the hadron $H$
+and $z= \frac{P \cdot P_H}{P \cdot q}$ the scaling variable of the identified hadron.
+%
+The hadronic cross section above factorises into spin-dependent leptonic and hadronic tensors  $\Delta L_{\mu \nu}$
+and $\Delta W_{\mu \nu}$,
+%
+\begin{equation}
+\frac{d^3\Delta \sigma}{dxdydz} =\frac{2\pi y \alpha_e^{2}}{Q^4}\Delta L^{\mu\nu}(k_l,k'_l,q)\Delta W_{\mu\nu}(P,P_H,q)\, .
+\end{equation}
+%
+Here $\Delta L^{\mu\nu}= -2 i \epsilon^{\mu \nu \sigma \lambda} q_\sigma s_{l,\lambda}$, 
+with the spin vector $s_l$ of the incoming lepton, and $\Delta W_{\mu\nu}$ can be expressed in terms of spin-dependent SFs $g_1$ and $g_2$ as 
+%
+\begin{equation}
+\Delta W_{\mu\nu} = g_1 (x,z,Q^2)T_{g_1,\mu \nu} + g_2 (x,z,Q^2) T_{g_2,\mu \nu}
+\, ,
+\end{equation}
+%
+with Lorentz tensors $T_{g_1,\mu\nu}$ = $\frac{i}{P.q} \epsilon_{\mu \nu \sigma \lambda} q^\sigma S^\lambda$ and 
+$T_{g_2,\mu\nu}$= $\frac{i}{P.q} \epsilon_{\mu \nu \sigma \lambda} q^\sigma  (S^\lambda - \frac{S\cdot q}{P\cdot q }P^\lambda)$, and 
+$S$ being the spin vector of the incoming hadron.
+For longitudinal polarization of the incoming hadron, $g_1$ is the dominant SF in the hadronic cross section,
+%
+\begin{equation}    
+\frac{d^3\Delta \sigma}{dxdydz} = \frac{4\pi\alpha_e^2}{Q^2} \big(2-y\big)g_1 (x,z,Q^2)\, ,
+\end{equation}
+%
+where $\alpha_e$ is the fine structure constant.  
+With QCD factorisation at scale $\mu_F$ the SF $g_1$ takes the form
+%
+\begin{align}
+\label{eq:SFdef}
+g_1 &= \sum_{a,b}\int_x^1 \frac{dx_1}{x_1} \Delta f_a(x_1,\mu_F^2) \int_z^1 \frac{dz_1}{z_1} D_b(z_1,\mu_F^2) 
+\nonumber \\
+    & \times \mathcal{G}_{1,ab}\left( \frac{x}{x_1}, \frac{z}{z_1}, \mu_F^2, Q^2\right )
+\, ,
+\end{align}
+%
+where $\Delta f_a$ = {$f_{a(\uparrow)/H(\uparrow)}
+-f_{a(\downarrow)/H(\uparrow)} $ are the spin-dependent PDFs
+and $D_b$ denote the spin-averaged FFs. 
+Here the momentum fraction $x_1=\frac{p_a}{P}$ is carried by the initial parton `$a$' of incident hadron $H$ and $z_1=\frac{P_H}{p_b}$ by the hadron $H'$ with respect to the final state parton `$b$'.
+The CFs $\mathcal{G}_{1,ab}$ are computable in perturbative QCD  
+in powers of the strong coupling, $a_s(\mu_R^2) = {\alpha_s(\mu_R^2)}/(4\pi)$,
+at the renormalization scale $\mu_R$,
+%
+\begin{equation}    
+\label{eq:as-exp}
+{\cal G}_{1,ab}(\mu_F^2) = \sum_{i=0}^\infty\, a_s^i(\mu_R^2)\, {\cal G}_{1,ab}^{(i)}(\mu_F^2,\mu_R^2)
+\, ,
+\end{equation}
+%
+where we have suppressed the scaling variables. 
+$\mathcal{G}_{1,ab}$ is related to the parton level scattering cross sections  $d{\Delta \hat \sigma}_{1,ab}$ through projection with $\mathcal{P}^{\mu\nu}_{g_1}$, 
+%
+\begin{equation}
+\label{eq:parton-crs}
+d{\Delta \hat \sigma}_{1,ab} = \frac{\mathcal{P}_{g_1}^{\mu\nu}}{4\pi}\int \text{dPS}_{X+b}\, {\Sigma}|{\Delta M}_{ab}|^{2}_{\mu\nu}\, \delta\Big(\frac{z}{z_1}-\frac{p_a \cdot p_b}{p_a\cdot q}\Big) 
+\end{equation}
+% 
+where the projector in $D$ space-time dimensions reads, 
+%
+\begin{equation}
+\mathcal{P}^{\mu\nu}_{g_1}= \frac{-i}{(D-2)(D-3)}
+\epsilon^{\mu \nu \sigma \lambda} \,  \frac{q_\sigma p_{a,\lambda}}{p_a\cdot q} 
+\, .
+\end{equation}
+%
+$\Delta M_{ab} = M_{a(\uparrow)b}-M_{a(\downarrow)b}$  is the spin-dependent amplitude for the process $a(p_a,s_a)+\gamma^{*}(q)\rightarrow b(p_b) + X $, 
+where the parton `$b$' fragments into hadron $H'$.  Here $s_a$ denotes the spin of the incoming parton $a$.  $\text{dPS}_{X+b}$ is the phase space for the final state particles consisting of $X$ and $b$.  
+${\Sigma}$ denotes the summation over final state spin/polarization and their color quantum numbers 
+in addition to the average over colors of incoming parton $a$.
+
+
+At leading order (LO) in perturbation theory, the partonic cross sections in eq.~(\ref{eq:parton-crs}) receive a contribution from $\gamma^*+q (\bar{q}) \rightarrow q (\bar{q})$.  
+At NLO, we consider one-loop corrections to the Born process $\gamma^*+q (\bar{q}) \rightarrow q (\bar{q})$, the real emission  $\gamma^* + q (\bar{q}) \rightarrow q (\bar{q}) + g$ 
+and the gluon-initiated  $\gamma^* + g \rightarrow q + \bar{q}$ sub-processes.  
+At NNLO, we include 
+two-loop corrections to the Born process $\gamma^* + q(\bar{q}) \rightarrow q(\bar{q})$,
+one-loop contributions to the single-gluon real emission $\gamma^* + q (\bar{q}) \rightarrow q (\bar{q}) + g$, 
+and double real emissions $\gamma^* + q(\bar{q}) \rightarrow q(\bar{q}) + g + g$,
+$\gamma^*+ g \rightarrow q + \overline q +g$ and
+$\gamma^* + q(\bar{q}) \rightarrow q(\bar{q}) + q' + \bar{q}'$, 
+where $q'$ can be of same or of different flavour as $q$.  
+Note that in every sub-process, we need to include fragmentation contributions from each final state parton.
+
+
+Beyond LO in perturbative QCD, we encounter both ultraviolet (UV) and 
+infrared (IR) singularities.  The latter are due to the presence of soft and collinear partons.  
+We regulate these singularities using dimensional regularisation with $D=4+\varepsilon$ 
+space-time dimensions.
+The projection of spin-dependent partonic amplitudes squared $|\Delta M_{ab}|^2$ in eq.~(\ref{eq:parton-crs}) requires Dirac matrices $\gamma_5$ or the Levi-Civita tensor for 
+polarized quarks or gluons, respectively, see, e.g. \cite{Zijlstra:1993sh}. 
+Since $\gamma_5$ and the Levi-Civita tensor are intrinsically four-dimensional objects, their treatment in $D$ dimensions requires some prescription. 
+Although, several schemes to define them in $D$ dimensions have been proposed, 
+none of them is known to preserve chiral Ward identity.  
+A given prescription then requires an additional renormalisation constant or an evanescent counter-term to preserve this identity.  
+In this letter, we use Larin's prescription \cite{Larin:1993tq}  and replace $\slash\!\!\!p_a\gamma_5$ by ${i\over 6} ~\epsilon_{\mu \nu \sigma \lambda} p_a^\mu \gamma^\nu \gamma^\sigma \gamma^\lambda$.  The product of two 
+Levi-Civita tensors is computed through  the determinant of Kronecker deltas defined in $D$ dimensions.     
+The UV singularities are regulated through the renormalisation of the strong coupling at the scale $\mu_R$.  
+The IR singularities cancel among virtual and real emission processes, except those
+from either incoming parton or tagged final state partons that are collinear to rest of partons.   
+Mass factorisation guarantees that 
+the partonic cross sections in eq.~(\ref{eq:parton-crs}) factorise into the spin-dependent Altarelli-Parisi (AP) kernels 
+$\Delta \Gamma_{c\leftarrow a}$ of PDFs and $\tilde \Gamma_{b\leftarrow d}$ of FFs, 
+appropriately convoluted with the finite CF (${\cal G}_{I,cd}$) 
+at an arbitrary scale $\mu_F$ (suppressed here for brevity),  
+%
+\begin{eqnarray}
+\label{eq:massfact}
+{d\Delta \hat \sigma_{1,ab}(\varepsilon)}  = 
+\Delta \Gamma_{c\leftarrow a}(\varepsilon) \otimes 
+{\cal G}_{1,cd}(\varepsilon) \tilde \otimes 
+\tilde \Gamma_{b\leftarrow d}(\varepsilon)
+\, ,
+\, 
+\end{eqnarray}  
+%
+where $x'=x/x_1$, summation over $c,d$ is implied and $\otimes$ 
+($\tilde \otimes$) denotes a convolution over the scaling variable corresponding to PDFs (FFs), cf. eq.~(\ref{eq:SFdef}).
+
+The polarized space-like AP kernels ($\Delta \Gamma_{c\leftarrow a}$) are known at the order required~\cite{Mertig:1995ny,Vogelsang:1995vh,Vogelsang:1996im,Moch:2014sna,Blumlein:2021enk,Blumlein:2021ryt,Blumlein:2022gpp}.
+Since the partonic cross sections in eq.(\ref{eq:massfact}) are derived in Larin's scheme, 
+these spin-dependent AP kernels need to be taken in the same scheme, see \cite{Moch:2014sna}.
+On the other hand, the spin-averaged time-like AP kernels ($\tilde \Gamma_{b\leftarrow d}$) are taken in the standard $\overline{\rm{MS}}$ scheme~\cite{Almasy:2011eq,Chen:2020uvt}.
+
+
+The hadronic cross section (and the SF $g_1$) is independent of the prescription for $\gamma_5$.
+Thus, QCD factorisation allows to write $g_1$ in eq.~(\ref{eq:SFdef}) as 
+%
+\begin{align}
+\label{eq:larinG}
+g_1 = \sum_{a,b} \Delta f_{a,L}(\mu_F^2)\otimes  {\cal G}_{1,ab,L}(\mu_F^2) \tilde \otimes D_b(\mu_F^2)
+\end{align}
+%
+where the subscript $L$ in $\Delta f_{a,L}$ and ${\cal G}_{1,ab,L}(\mu_F^2)$ 
+denotes PDFs and CFs 
+defined using Larin's scheme. 
+It is straightforward to convert these quantities into $\overline{\rm{MS}}$ ones~\cite{Moch:2014sna}.  
+The CFs in the ${\overline{\rm{MS}}}$ scheme are obtained by transforming 
+$\Delta f_{a,L}$ to $\overline{\rm{MS}}$ PDFs through $\Delta f_{a}= Z_{ca}(\mu_F^2) \otimes f_{c,L}(\mu_F^2)$ and CFs to $\overline{\rm{MS}}$ CFs, ${\cal G}_{1,ab}= (Z^{-1}(\mu_F^2))_{ad}\otimes  {\cal G}_{1,db,L} (\mu_F^2)$.  
+The finite renormalization constants $Z_{ab}$ are dependent on $x'$ and well known~\cite{Matiounine:1998re,Ravindran:2003gi,Moch:2014sna}.
+We present the CFs in the $\overline{\rm{MS}}$ scheme in an ancillary file. 
+The flavor-nonsinglet CFs of polarized SIDIS agree with those of the SF $F_3$, cf.~\cite{Goyal:2024xxx}.
+The latter require a renormalization of the axial current and a kinematics independent finite renormalization from the Larin to the $\overline{\rm{MS}}$ scheme~\cite{Larin:1993tp,Ahmed:2015qpa}.
+We find full agreement, which checks the scheme transformations applied.
+Before we proceed to report the numerical impact of NNLO contributions to $g_1$, we briefly describe, how the cross sections $d \Delta \hat{\sigma}_{1,ab}$ in eq.~(\ref{eq:parton-crs}) are computed in Larin's scheme (denoted by $d \Delta \hat{\sigma}_{1,ab,L}$).  
+
+
+Beyond LO, the contributions to $d \Delta \hat{\sigma}_{1,ab,L}$ can be classified into three categories: pure virtual (VV),
+pure real emissions (RR) and interference of real emission and virtual (RV). 
+The VV part gets contributions from one-loop and two-loop virtual corrections to the Born process.  The latter can
+be obtained using the quark form factor, see~\cite{Lee:2022nhh}.  
+For the rest, we follow
+the standard Feynman diagrammatic approach. We use \texttt{QGRAF}~\cite{Nogueira:1991ex} 
+to generate Feynman diagrams and use a set of in-house routines written in 
+\texttt{FORM} \cite{Kuipers:2012rf,Ruijl:2017dtg}, to convert the output of
+\texttt{QGRAF} into a suitable format to apply Feynman rules and to perform Dirac algebra, Lorentz contractions and simplifications of color factors.  
+The computations of phase-space integrals are
+challenging compared to those required for inclusive cross sections because of the presence of an additional constraint 
+$\frac{z}{z_{1}} = \frac{p_a \cdot p_b}{p_a\cdot q}$. 
+The two-body phase-space over one-loop Feynman integrals that appear in RV and
+three-body phase space integrals in RR are simplified with reverse unitarity~\cite{Anastasiou:2003gr,Anastasiou:2012kq}. 
+This method allows us to apply loop-integration techniques, namely 
+integration-by-parts identities (IBP) \cite{Chetyrkin:1981qh,Laporta:2001dd}, 
+to reduce the phase-space integrals to a smaller number of the master integrals (MIs). 
+The constraint $\frac{z}{z_{1}}= \frac{p_a \cdot p_b}{p_a \cdot q}$ is introduced through the delta function $\delta \left(z' - \frac{p_a \cdot p_b}{p_a \cdot q} \right)$, 
+where $z'$=$\frac{z}{z_1}$, which is replaced by a propagator-like term 
+$-\frac{1}{\pi}\text{Im}(1/(z' - \frac{p_a \cdot p_b}{p_a \cdot q} + i \epsilon))$ 
+with $p_b = p_a + q - k_1$ or $p_b = p_a + q - k_1 - k_2$ 
+for two- and three-body final states respectively.
+To perform the IBP reduction, we use the \texttt{Mathematica} package \texttt{LiteRed}~\cite{Lee:2013mka}.   
+
+
+After IBP reduction, we end up with 7 MIs for RV and 21 MIs for RR sub-processes.  
+Due to the delta function constraint,
+the results of the MIs depend on two scaling variables ($x', z'$). 
+We have used two different approaches to compute these integrals.  
+In the first approach, we choose a convenient Lorentz frame to parameterize the momenta so that the 
+the constraint on $z'$ takes the simple form and three-body phase-space integrals become three-dimensional parametric integrals, see~\cite{Matsuura:1988sm,Zijlstra:1992qd,Rijken:1996ns,Ravindran:2003um} 
+for more details.  
+We encounter two angular integrals and one parametric integral. 
+Angular integrals reduce to
+Hypergeometric functions and the parametric integrals over these functions lead to multiple polylogarithms (MPLs) and Nielsen polylogarithms of weight up to three. 
+%
+In the second approach, we use the method of differential equations (DEs)~\cite{Kotikov:1990kg,Argeri:2007up,Remiddi:1997ny,Henn:2013pwa,Ablinger:2015tua} to solve the integrals.
+We set up the system of differential equations of the MIs with respect to the variables 
+$x',z'$ using \texttt{LiteRed}. 
+Each set of DEs is controlled by  21$\times$21 matrix. 
+By an appropriate set of transformations on the set of MIs, we can
+express these matrices in an upper or lower-triangular form
+leading to the bottom-up approach of solving the DEs one by one. 
+Alternatively, we use the elegant approach of an $\varepsilon$-factorized form~\cite{Henn:2013pwa} to reduce the DEs to canonical form with the help of the \texttt{Mathematica} package \texttt{Libra}~\cite{Lee:2020zfb}.
+We use suitable boundary conditions to express the solution in terms of either classical polylogarithms or generalized harmonic polylogarithms (GPLs).
+The boundary conditions for the MIs are computed in the threshold limit from parametric integrals.
+We encounter four types of square-roots in the DE systems: $\big(\sqrt{x'}$, $\sqrt{z'}$, $\sqrt{(1+x')^2-4x'z'}$, $\sqrt{(1-z')^2+4x'z'}\big)$.
+By a set of suitable transformations on $x',z'$,
+we can express all the polylogarithms or GPLs
+with simple indices suitable for numerical evaluations.
+
+
+The task to perform the mass factorisation 
+for the partonic cross sections in eq.~(\ref{eq:massfact}) 
+to obtain finite CFs proceeds as follows. 
+The AP kernels $\Delta \Gamma_{c\leftarrow a}$ and 
+$\tilde \Gamma_{b\leftarrow d}$ in eq.~(\ref{eq:massfact}) are pure counter-terms, containing only poles in $\varepsilon$ in order to cancel the collinear singularities present in $d \Delta \hat{\sigma}_{1,ab,L}$. 
+They contain standard `plus'-distributions ${\cal D}_j(w)=(\log^j(1-w)/(1-w))_+$ (see, e.g.~\cite{Goyal:2023xfi}) and delta functions $\delta(1-w)$,   
+where $w=x',z'$, in addition to regular terms. 
+The cancellation of the collinear singularities in $d \Delta \hat{\sigma}_{1,ab,L}$ against those from AP kernels requires to express the former ones in terms of the same distributions and regular functions. 
+This is the most challenging task. 
+In the partonic cross sections we encounter terms proportional to $(1-x')^{-1}$ and/or $(1-z')^{-1}$, 
+which diverge in the respective threshold regions $x'\rightarrow 1$ and/or $z' \rightarrow 1$ respectively. 
+These terms can originate either from MIs or their coefficients at the level of squared matrix elements.  
+These singularities are regulated by $(1-x')^{a \varepsilon}$ and $(1-z')^{b\varepsilon}$ respectively
+resulting from phase space and loop integrals.  
+In addition we encounter spurious singularities when $x'=z'$ or $x'+z'=1$, which cancel among themselves at the end.  
+In general, the resulting expressions contain multi-valued functions and we need to define them in different regions appropriately.  
+We encounter different regions depending on whether $x'>z'$ with $x'+z'>1$ and/or $x'+z'<1$ or $x'<z'$ with $x'+z'>1$ and/or $x'+z'<1$.  
+Using Feynman's $i \epsilon$ prescription, we can analytically continue these functions smoothly from one region to other.
+
+E.g., in the RV sub-processes, we encounter a hypergeometric function which after Pfaff transformation gives 
+%
+\begin{align}\label{eq:hyper}
+&{}_{2}F_{1}\left(1,\frac{\varepsilon}{2},1+\frac{\varepsilon}{2},\frac{x'(1-x')}{z'(1-z')}\right) 
+   = \bigg[\frac{(z'-x')(1-z'-x')}{z'(1-z')}\bigg]^{-\frac{\varepsilon}{2}} \nonumber \\
+   & \hspace{1.2cm}\times {}_{2}F_{1}\left(\frac{\varepsilon}{2},\frac{\varepsilon}{2},1+\frac{\varepsilon}{2},\frac{x'(1-x')}{(x'-z')(1-z'-x')}\right)
+\end{align}
+%
+Using   Feynman's $i\epsilon$ prescription for scaling variables, i.e. $x'\equiv x'-i\epsilon$ and $z'\equiv z'-i\epsilon$ and the identities involving theta functions, eq.~(\ref{eq:hyper}) reduces to
+%
+\begin{align}
+&A~\bigg(\theta_{1a}\Big(\theta_{2a}\ F(\varepsilon,B+i\epsilon)+\theta_{2b}\ (-1+i\epsilon)^{-\frac{\varepsilon}{2}}F(\varepsilon,B+i\epsilon)  \Big)\nonumber\\
+&+\hspace{0.2cm}\theta_{1b}\Big(\theta_{2b}\ F(\varepsilon,B -i\epsilon)+\theta_{2a}\ (-1-i\epsilon)^{-\frac{\varepsilon}{2}}
+F(\varepsilon,B-i\epsilon)  \Big)\bigg)\nonumber
+\end{align}
+%
+where, $\theta_{1a} = \theta(z'-x')$, $\theta_{1b} = \theta(x'-z')$, $\theta_{2a} = \theta(1-z'-x')$, $\theta_{2b} = \theta(z'+x'-1)$, $A$=$\Big|\frac{(z'-x')(1-z'-x')}{z'(1-z')}\Big|^{-\frac{\varepsilon}{2}}$, $ F(\varepsilon,y)= {}_{2}F_{1}(\frac{\varepsilon}{2}, \frac{\varepsilon}{2},1+\frac{\varepsilon}{2},y)$ and $B = \frac{x'(1-x')}{(x'-z')(1-z'-x')}$.
+%
+$F(\varepsilon,B\pm i\epsilon)$ can be analytically continued to the appropriate region and expanded in power series in $\varepsilon$, see \cite{Duplancic:2000sk},\cite{Gehrmann:2002zr}. Finally, collinear singularities in $w=x',z'$ are exposed through 
+%
+\begin{align}
+(1-w)^{-1 + n \varepsilon} = \frac{1}{n \varepsilon} \delta(1-w) + \sum_{k=0}^\infty \frac{(n \varepsilon)^k}{k!}  \mathcal{D}_{k}(w) \,,
+% \left[ (1-w)^{-1 + n \varepsilon} \right]_+ \,.
+\end{align}
+%
+
+The resulting partonic cross sections $d \Delta \hat{\sigma}_{1,ab,L}$ contain
+double and single poles in $\varepsilon$ at NLO. 
+The former ones cancels between VV and RR terms and the latter against AP kernels in the mass factorisation eq.~(\ref{eq:massfact}). 
+At NNLO the leading $1/\varepsilon^4$ and $1/\varepsilon^3$ poles cancel among  the VV, RV and RR contributions. 
+The remaining double and single poles in $\varepsilon$ cancel against the AP kernels using eq.~(\ref{eq:massfact}). 
+The final $\overline{\rm{MS}}$ scheme CFs thus obtained 
+(after transformation from the Larin scheme) can be written as, 
+%
+\begin{eqnarray}
+\label{eq:CFsvnsv}
+{\cal G}_{1,ab} &=&  \sum_{r}
+\Delta C_{ab}^r  h_r (x',z')  
++ \sum_{\beta} \Big({\Delta C }_{ab,x'}^\beta(x') Z_\beta(z')\nonumber \\
+&&+ {\Delta C}_{ab,z'}^\beta(z') X_\beta(x')\Big)
++ \Delta R_{ab}(x',z')
+\, .
+\end{eqnarray}
+%
+The soft plus virtual (SV) terms $h_r$ contain the double distributions 
+$h_{\delta_{x'} \delta_{z'}}=\delta(1-x') \delta(1-z')$, 
+$h_{\delta_{x'} j}= \delta(1-x') {\cal D}_j(z')$, 
+$h_{j, \delta_{z'}} = {\cal D}_j(x') \delta(1-z')$,   
+$h_{j k}=  {\cal D}_j(x') {\cal D}_k(z')$. 
+Terms with single distributions, namely 
+$Z_{\delta_{z'}}(z') =\delta(1-z')$,  
+$Z_{j}(z') ={\cal D}_j(z')$, 
+$X_{\delta_{x'}}(x')=\delta(1-x')$, 
+$X_j(x')={\cal D}_j(x') $ 
+are called partial-SV (pSV) terms and regular terms are denoted by $\Delta R_{ab}$. 
+$\Delta C_{ab}^r $ are in complete agreement with those of un-polarized SFs $F_{1,2}$ \cite{Abele:2021nyo,Goyal:2023xfi,Bonino:2024qbh,Goyal:2024xxx} see also \cite{Ravindran:2006bu,Ahmed:2014uya} and if we expand ${\Delta C }_{ab,x'}^\beta(x')$ and  ${\Delta C}_{ab,z'}^\beta(z')$ around $x', z' \rightarrow 1$, then they are in complete agreement with the corresponding terms in the un-polarized case up to order $(1-x')^{0}$ and $(1-z')^{0}$ respectively, \cite{Bonino:2024qbh,Goyal:2024xxx,AH:2020qoa}. 
+
+
+Our NLO results are in complete agreement with \cite{deFlorian:1997zj}.
+At NNLO the SV terms for polarized SIDIS are identical to the unpolarized case~\cite{Abele:2021nyo}. 
+The remaining contributions in eq.~(\ref{eq:CFsvnsv}), i.e., single distributions $X_\beta$, $Z_\beta$
+and regular terms $\Delta R_{ab}$ are new. 
+These results are too lengthy to be presented here and, instead included in an ancillary file. 
+
+ 
+In the following, we illustrate the numerical impact of  our results for ${\cal G}_{1,ab}$ for the EIC assuming a centre of mass energy $\sqrt{s}$ = 140~GeV.
+The convolution of the CFs with PDFs and FFs provides $g_1 = \sum_{i=0} a_s^i g_1^{(i)}$, such that 
+at LO $g_1^{(0)}=\sum_{q} e_{q}^{2} H_{qq}$ ($e_q$ being the electric charge of quark $q$).
+% 
+\begin{align}
+g_1^{(1)} & = \sum_{q} e_{q}^{2}\bigg(  H_{qq}\hat \otimes G_{1,qq}^{(1)} + H_{qg} \hat \otimes G_{1,qg}^{(1)} + H_{gq} \hat \otimes G_{1,gq}^{(1)} \bigg) 
+\, ,
+\end{align}
+\begin{widetext}
+\begin{align}
+g_1^{(2)} &= \sum_{q} e_{q}^{2}\bigg(  H_{qq}\hat \otimes G_{1,qq,\text{NS}}^{(2)} + H_{q\bar{q}}\hat \otimes  G_{1,q\bar{q}}^{(2)} + H_{qg} \hat \otimes G_{1,qg}^{(2)} + H_{gq} \hat \otimes G_{1,gq}^{(2)} \bigg) +
+\Big(\sum_{q_i} e_{q_i}^{2}\Big)\bigg( H_{qq}\hat \otimes G_{1,qq,\text{PS}}^{(2)}  + H_{gg} \hat \otimes G_{1,gg}^{(2)} \bigg) \nonumber\\
+&+ \sum_{q} \sum_{q'\neq q}\bigg( e_{q}^{2}~H^{+}_{qq'} \hat \otimes  G_{1,qq',[1]}^{(2)} + e_{q'}^{2}~H^{+}_{qq'}\hat \otimes  G_{1,qq',[2]}^{(2)} + e_{q}e_{q'} H^{-}_{qq'} \hat \otimes G_{1,qq',[3]}^{(2)}\bigg)
+\, ,
+\end{align}
+\end{widetext} 
+%
+with ${G}^{(i)}_{1,ab}(x,z)$ are related to ${\cal G}^{(i)}_{1,ab}(x,z)$ defined in eq.~(\ref{eq:as-exp}) see comments in ancillary files and  $\hat\otimes$ denotes their convolution with $H_{ab}$ in both variables $x$ and $z$.
+% 
+\begin{align}
+H_{qq} &= \Delta f_q(x) D_q(z) + \Delta f_{\bar{q}} (x)D_{\bar{q}}(z)\, , \nonumber\\ 
+H_{q\bar{q}} &= \Delta f_q (x) D_{\bar{q}} (z)+ \Delta f_{\bar{q}}(x) D_q(z)\, , \nonumber\\
+H_{qg} &= \Delta f_q (x) D_g (z)+\Delta f_{\bar{q}}(x) D_g (z)\, , \nonumber\\
+H_{gg} &= \Delta f_g (x)D_g(z)\, , \nonumber\\
+H^{\pm}_{qq'} &= \Delta f_q (x)D_{q'}(z) \pm \Delta f_q (x)D_{\bar{q}'}(z) \nonumber\\ 
+& \qquad \pm  \Delta f_{\bar{q}} (x)D_{q'}(z)+  \Delta f_{\bar{q}} (x) D_{\bar{q}'}(z)\, , \nonumber\\
+H_{gq} &= \Delta f_g (x) D_q (z) +  \Delta f_g D_{\bar{q}}(z)\, .  
+\end{align}
+%
+
+In the following, we study the numerical impact of our results.
+We apply \texttt{NNPDFpol} PDFs~\cite{NNPDF:2014otw}, 
+which are known at NLO level, for all three perturbative orders.
+For the FFs, we use \texttt{NNFFPip}~\cite{Bertone:2017tyb}, which are available up to NNLO level and we apply them at the respective perturbative order.
+%
+In Fig.~\ref{fig:1}, we show the individual partonic channels contributing to the complete NNLO result at $\sqrt{s}=140$ GeV and 
+$\mu_R^2 = \mu_F^2 = Q^2$, using labels $ab$ where $a$ indicates the initial parton and $b$ the fragmenting one in each partonic channel.
+The cross section is presented as a function of $z$, integrating $x$ between $0.40$ to $0.62$ and $y$ between $0.30$ to $0.50$.
+%
+\begin{figure}[ht]
+\includegraphics[width=0.48\textwidth]{nnlo_channels.png}
+\caption{The individual contributions from different partonic channels to the 
+complete NNLO result for the polarized SIDIS cross section at $\sqrt{s}=140$ GeV and $\mu_R^2 = \mu_F^2 = Q^2$.}
+\label{fig:1}
+\end{figure}
+
+In Fig.~\ref{fig:2}, we display the total hadronic cross-section at the different perturbative orders for the same numerical inputs as above. 
+We use $n_F=3$ active flavours and $\alpha_e$=1/128 
+for the electromagnetic coupling, while $\alpha_s$ is taken from the PDF set \texttt{NNFFPip} at the respective perturbative order.
+The reduction of the scale dependence through the inclusion of the higher-order QCD corrections is shown by variations in the range $\mu_R^2  \in [Q^2/2, 2 Q^2]$, keeping $\mu_R =\mu_F$.
+The central scale is the average $Q$ which corresponds roughly to $20$ GeV.
+For illustration purposes, we restrict the $x$-axis in Fig.~\ref{fig:2} to the range $z \in [0.6, 0.85]$.
+%
+We observe a clear reduction of the renormalization scale uncertainties from $\{ 0.75\%, -1.04\% \}$ at NLO to $\{ -0.39\%, 0.25\% \}$ at NNLO when $\mu_R^2$ is varied by a factor of 2 around average value of $Q^2$.
+Overall, we also find good perturbative convergence with the new NNLO contributions, which are numerically significant, though.
+For example at $z=0.61$, the $K$-factor decreases from $0.87$ at NLO
+to $0.80$ at NNLO level.
+%
+
+
+%
+%
+\begin{figure}[ht]
+\includegraphics[width=0.48\textwidth]{scalevar.png}
+\caption{The total cross-section for polarized SIDIS at different perturbative orders 
+for the central scale at the average $Q \sim 20$ GeV (solid lines).
+The $\mu_R$ scale variation in the range $\mu_R^2 = \mu_F^2 \in [Q^2/2,2Q^2]$ is indicated by the shadow bands.}
+\label{fig:2}
+\end{figure}
+%
+
+In this letter, we report the CFs for the polarized SIDIS process at NNLO in QCD. 
+These results close a gap in the available literature and will facilitate high precision theory predictions and will contribute to the studies of polarized PDFs and of the proton spin structure at the future EIC.
+%
+A \texttt{Mathematica} notebook with all results for the CFs ${\cal G}_{1,ab}^{(i)}$ is available from the preprint server {\tt https://arXiv.org}.
+ %----------------------------------------------------------------------------------------------------%
+
+\begin{acknowledgments}
+\emph{Acknowledgements:}  
+We thank W.~Vogelsang and S.~Weinzierl for discussions. 
+This work has been supported through a joint Indo-German research grant by
+the Department of Science and Technology (DST/INT/DFG/P-03/2021/dtd.12.11.21). 
+S.M. acknowledges the ERC Advanced Grant 101095857 {\it Conformal-EIC}.
+\end{acknowledgments}
+
+\paragraph{Note added:}
+While finalizing this work, ref.~\cite{Bonino:2024wgg} has appeared on polarized SIDIS at NNLO.
+
+
+\bibliographystyle{apsrev}
+\bibliography{main}
+
+\end{document} 

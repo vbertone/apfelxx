@@ -141,5 +141,23 @@ namespace apfel
                                  std::vector<double> const& Thresholds,
                                  QuarkFlavour        const& Comp = TOTAL,
                                  bool                const& NoCharges = false);
+
+  /**
+   * @brief Function that computes ln^n(1-y)/(1-y) often needed in the
+   * computation of partonic cross section. This function also returns
+   * the indefinite integral of this function that is also needed.
+   * @param n: the power of the logarithm upstairs
+   * @param y: the integration variable
+   * @param integral: whether the function should return ln^n(1-y)/(1-y) (flase) or its integral (true) (default: false)
+   */
+  double Dn(int const& n, double const& y, bool const& integral = false);
+
+  /**
+   * @brief Function that computes numericall the integral \int_0^y atan(t) / t.
+   * @param y: the upper integration bound
+   * @note Used in the computation of the SIDIS partonic cross
+   * sections at NNLO accuracy.
+   */
+  double InvTanInt(double const& y);
   ///@}
 }

@@ -1,0 +1,26 @@
+Modifications to the original ancillary file
+
+- Moved ancillary.inc -> ancillary.frm
+- replace "id" in front of each expression with "Local"
+- Defined variables adding at the beginning the lines:
+
+F Dd, Dn, ln, Li2, Li3, T, ArcTan, InvTanInt;
+S x, z, NC, NF, pi, zeta3;
+S LMUF, LMUA, LMUR;
+S [1-x], [1-z], [1-x-z], [x-z], [1+x], [1+z], [z-1];
+S sqrtxz1, sqrtxz2, sqrtxz3, poly2;
+S u1, u2, u3, u4, t1, t2, r1, r2;
+
+*S C1LQ2Q, C1LQ2G, C1LG2Q, C1TQ2Q, C1TQ2G, C1TG2Q;
+*S C2LQ2G, C2LG2G, C2LG2Q, C2LQ2QNS, C2LQ2QPS, C2LQ2QB, C2LQ2QP1, C2LQ2QP2, C2LQ2QP3, C2TQ2G, C2TG2G, C2TG2Q, C2TQ2QNS, C2TQ2QPS, C2TQ2QB, C2TQ2QP1, C2TQ2QP2, C2TQ2QP3;
+
+- Terminated the file with:
+
+* Available coefficient functions
+* NLO: C1LQ2Q, C1LQ2G, C1LG2Q, C1TQ2Q, C1TQ2G, C1TG2Q;
+* NNLO: C2LQ2G, C2LG2G, C2LG2Q, C2LQ2QNS, C2LQ2QPS, C2LQ2QB, C2LQ2QP1, C2LQ2QP2, C2LQ2QP3, C2TQ2G, C2TG2G, C2TG2Q, C2TQ2QNS, C2TQ2QPS, C2TQ2QB, C2TQ2QP1, C2TQ2QP2, C2TQ2QP3;
+
+Print C1LQ2Q, C1LQ2G, C1LG2Q, C1TQ2Q, C1TQ2G, C1TG2Q;
+Print C2LQ2G, C2LG2G, C2LG2Q, C2LQ2QNS, C2LQ2QPS, C2LQ2QB, C2LQ2QP1, C2LQ2QP2, C2LQ2QP3, C2TQ2G, C2TG2G, C2TG2Q, C2TQ2QNS, C2TQ2QPS, C2TQ2QB, C2TQ2QP1, C2TQ2QP2, C2TQ2QP3;
+
+.end

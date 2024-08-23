@@ -209,10 +209,10 @@ namespace apfel
 
     // NLO contributions
     // G1
-    const Operator oD0x{gx, Dn{0}};
-    const Operator oD1x{gx, Dn{1}};
-    const Operator oD0z{gz, Dn{0}};
-    const Operator oD1z{gz, Dn{1}};
+    const Operator oD0x{gx, DDn{0}};
+    const Operator oD1x{gx, DDn{1}};
+    const Operator oD0z{gz, DDn{0}};
+    const Operator oD1z{gz, DDn{1}};
 
     const double LLqq = - 16 * CF;
     const double LSqq = 4 * CF;
@@ -273,10 +273,10 @@ namespace apfel
     // Expressions taken from Appendix B of arXiv:2109.00847.
     // ====================================================
     // Additional singular terms
-    const Operator oD2x{gx, Dn{2}};
-    const Operator oD3x{gx, Dn{3}};
-    const Operator oD2z{gz, Dn{2}};
-    const Operator oD3z{gz, Dn{3}};
+    const Operator oD2x{gx, DDn{2}};
+    const Operator oD3x{gx, DDn{3}};
+    const Operator oD2z{gz, DDn{2}};
+    const Operator oD3z{gz, DDn{3}};
 
     // Non-singular (next-to-leading power) terms
     const Operator ol1x{gx, ln{1}};

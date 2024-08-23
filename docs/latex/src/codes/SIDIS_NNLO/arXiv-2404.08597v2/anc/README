@@ -1,0 +1,28 @@
+Modifications to the original ancillary file
+
+- Moved ancillary_pol.inc -> ancillary_pol.frm
+- replace "id" in front of each expression with "Local"
+- Defined variables adding at the beginning the lines:
+
+F Dd, Dn, ln, Li2, Li3, T, ArcTan, InvTanInt;
+S x, z, NC, NF, pi, zeta3;
+S LMUF, LMUA, LMUR;
+S [1-x], [1-z], [1-x-z], [x-z], [1+x], [1+z], [z-1];
+S sqrtxz1, sqrtxz2, sqrtxz3, poly2;
+S u1, u2, u3, u4, t1, t2, r1, r2;
+
+*S DC1Q2Q, DC1Q2G, DC1G2Q;
+*S DC2Q2G, DC2G2G, DC2G2Q, DC2Q2QNS, DC2Q2QPS, DC2Q2QB, DC2Q2QP1, DC2Q2QP2, DC2Q2QP3;
+
+- Replaced all instances of "rln2" with "ln(2)"
+
+- Terminated the file with:
+
+* Available coefficient functions
+* NLO: DC1Q2Q, DC1Q2G, DC1G2Q
+* NNLO: DC2Q2G, DC2G2G, DC2G2Q, DC2Q2QNS, DC2Q2QPS, DC2Q2QB, DC2Q2QP1, DC2Q2QP2, DC2Q2QP3
+
+Print DC1Q2Q, DC1Q2G, DC1G2Q;
+Print DC2Q2G, DC2G2G, DC2G2Q, DC2Q2QNS, DC2Q2QPS, DC2Q2QB, DC2Q2QP1, DC2Q2QP2, DC2Q2QP3;
+
+.end
