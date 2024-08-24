@@ -13,6 +13,10 @@ class G10nsSidis: public apfel::DoubleExpression
 {
 public:
   G10nsSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "G10nsSidis";
+  }
   double LocalLocal(double const&, double const&) const override
   {
     return 1;
@@ -24,6 +28,10 @@ class G11nsSidis: public apfel::DoubleExpression
 {
 public:
   G11nsSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "G11nsSidis";
+  }
   double LocalLocal(double const& x, double const& z) const override
   {
     return 2 * apfel::CF * ( - 8 + pow(log(1 - z), 2) + pow(log(1 - x), 2) + 2 * log(1 - x) * log(1 - z) );
@@ -67,6 +75,10 @@ class G11gqSidis: public apfel::DoubleExpression
 {
 public:
   G11gqSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "G11gqSidis";
+  }
   double LocalRegular(double const& x, double const& z) const override
   {
     return 2 * apfel::CF * ( ( 1 + ( 1 - z ) * ( 1 - z ) ) * log(z * ( 1 - z )) / z + z + log(1 - x) * ( 1 + ( 1 - z ) * ( 1 - z ) ) / z );
@@ -86,6 +98,10 @@ class G11qgSidis: public apfel::DoubleExpression
 {
 public:
   G11qgSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "G11qgSidis";
+  }
   double RegularLocal(double const& x, double const& z) const override
   {
     return ( x * x - ( 1 - x ) * ( 1 - x ) ) * log(( 1 - x ) / x) + 2 * ( 1 - x ) + ( x * x - ( 1 - x ) * ( 1 - x ) ) * log(1 - z);

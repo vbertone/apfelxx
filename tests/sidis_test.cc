@@ -13,6 +13,10 @@ class C20nsSidis: public apfel::DoubleExpression
 {
 public:
   C20nsSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "C20nsSidis";
+  }
   double LocalLocal(double const&, double const&) const override
   {
     return 1;
@@ -24,6 +28,10 @@ class CL1nsSidis: public apfel::DoubleExpression
 {
 public:
   CL1nsSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "CL1nsSidis";
+  }
   double RegularRegular(double const& x, double const& z) const override
   {
     return 8 * apfel::CF * x * z;
@@ -35,6 +43,10 @@ class CL1gqSidis: public apfel::DoubleExpression
 {
 public:
   CL1gqSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "CL1gqSidis";
+  }
   double RegularRegular(double const& x, double const& z) const override
   {
     return 8 * apfel::CF * x * ( 1 - z );
@@ -46,6 +58,10 @@ class CL1qgSidis: public apfel::DoubleExpression
 {
 public:
   CL1qgSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "CL1qgSidis";
+  }
   double RegularRegular(double const& x, double const&) const override
   {
     return 8 * x * ( 1 - x );
@@ -57,6 +73,10 @@ class C21nsSidis: public apfel::DoubleExpression
 {
 public:
   C21nsSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "C21nsSidis";
+  }
   double LocalLocal(double const& x, double const& z) const override
   {
     return 2 * apfel::CF * ( - 8 + pow(log(1 - z), 2) + pow(log(1 - x), 2) + 2 * log(1 - x) * log(1 - z) );
@@ -100,6 +120,10 @@ class C21gqSidis: public apfel::DoubleExpression
 {
 public:
   C21gqSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "C21gqSidis";
+  }
   double LocalRegular(double const& x, double const& z) const override
   {
     return 2 * apfel::CF * ( ( 1 + ( 1 - z ) * ( 1 - z ) ) * log(z * ( 1 - z )) / z + z + log(1 - x) * ( 1 + ( 1 - z ) * ( 1 - z ) ) / z );
@@ -119,6 +143,10 @@ class C21qgSidis: public apfel::DoubleExpression
 {
 public:
   C21qgSidis(): DoubleExpression() {}
+  std::string GetName() const override
+  {
+    return "C21qgSidis";
+  }
   double RegularLocal(double const& x, double const& z) const override
   {
     return ( x * x + ( 1 - x ) * ( 1 - x ) ) * log(( 1 - x ) / x) + 2 * x * ( 1 - x ) + ( x * x + ( 1 - x ) * ( 1 - x ) ) * log(1 - z);

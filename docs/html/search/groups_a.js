@@ -16,5 +16,6 @@ var searchData=
   ['longitudinally_20polarised_20matching_20conditions_13',['NLO longitudinally polarised matching conditions',['../group__NLOMCpol.html',1,'']]],
   ['longitudinally_20polarised_20matching_20functions_20for_20gtmds_14',['NLO longitudinally polarised matching functions for GTMDs',['../group__NLOmatchPol.html',1,'']]],
   ['longitudinally_20polarised_20partons_15',['NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons',['../group__NLOmatchLinPol.html',1,'']]],
-  ['longitudinally_20polarised_20splitting_20functions_16',['Longitudinally polarised splitting functions',['../group__PolSF.html',1,'']]]
+  ['longitudinally_20polarised_20sidis_16',['longitudinally polarised SIDIS',['../group__NLOzmSIDISpol.html',1,'NLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NNLOzmSIDISpol.html',1,'NNLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NCMasslessSIDISpol.html',1,'Zero-mass coefficient functions for longitudinally polarised SIDIS']]],
+  ['longitudinally_20polarised_20splitting_20functions_17',['Longitudinally polarised splitting functions',['../group__PolSF.html',1,'']]]
 ];

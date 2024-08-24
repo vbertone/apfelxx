@@ -20,7 +20,7 @@ set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}  -fPIC -O3")
 
 if (NOT DEFINED CMAKE_MACOSX_RPATH)
    set(CMAKE_MACOSX_RPATH 0)
-endif()
+endif ()
 
 # ============================
 # MAIN
@@ -51,15 +51,37 @@ if (LHAPDF_CONFIG)
    set(LHAPDF_LIBRARIES ${LHAPDF_LIBRARIES} CACHE STRING INTERNAL)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LHAPDF_CXX_FLAGS}")
    target_link_libraries(apfelxx ${LHAPDF_LIBRARIES})
-else(LHAPDF_CONFIG)
+else (LHAPDF_CONFIG)
    set(WITH_LHAPDF 0)
    message ("-- LHAPDF not found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will not be built.")
-endif(LHAPDF_CONFIG)
+endif (LHAPDF_CONFIG)
+
+# pkg-config needed for possible dependecies
+find_package(PkgConfig QUIET)
+
+if (PkgConfig_FOUND)
+   message ("-- pkg-config found. Dependencies can be installed.")
+
+   # Find yaml-cpp
+   pkg_search_module(YAML_CPP QUIET yaml-cpp)
+
+   if (YAML_CPP_FOUND)
+      message ("   + yaml-cpp found. DoubleExpression objects can be exported to file.")
+      set(WITH_YAML_CPP 1)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${YAML_CPP_CFLAGS}")
+      target_link_libraries(apfelxx ${YAML_CPP_LIBRARIES})
+   else (YAML_CPP_FOUND)
+      message ("   + yaml-cpp not found. DoubleExpression objects cannot be exported to file.")
+      set(WITH_YAML_CPP 0)
+   endif (YAML_CPP_FOUND)
+else (PkgConfig_FOUND)
+   message ("-- pkg-config not found. Dependencies cannot be installed..")
+endif (PkgConfig_FOUND)
 
 # pybind11
 if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.27.0")
    cmake_policy(SET CMP0148 OLD)
-endif()
+endif ()
 find_package(pybind11 QUIET)
 
 if (pybind11_FOUND)

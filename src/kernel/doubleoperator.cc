@@ -276,6 +276,102 @@ namespace apfel
       }
   }
 
+#if WITH_YAML_CPP == 1
+  //_________________________________________________________________________
+  DoubleOperator::DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr):
+    _grid1(gr1),
+    _grid2(gr2),
+    _dexpr(dexpr),
+    _eps(Node["Integration accuracy"].as<double>())
+  {
+    // Check that the DoubleExpression stored in the node matches with
+    // the input one by checking the names.
+    if (_dexpr.GetName() != Node["DoubleExpression"].as<std::string>())
+      throw std::runtime_error(error("DoubleOperator::DoubleOperator", "Input DoubleExpression and DoubleExpression name stored in YAML::Node do not match."));
+
+    // First construct interpolation grids using the parameters give
+    // in the node ...
+    std::vector<apfel::SubGrid> vsg1;
+    for (auto const &sg1 : Node["FirstGrid"])
+      vsg1.push_back({sg1[0].as<int>(), sg1[1].as<double>(), sg1[2].as<int>()});
+    std::vector<apfel::SubGrid> vsg2;
+    for (auto const &sg2 : Node["SecondGrid"])
+      vsg2.push_back({sg2[0].as<int>(), sg2[1].as<double>(), sg2[2].as<int>()});
+    const apfel::Grid g1{vsg1};
+    const apfel::Grid g2{vsg2};
+
+    // ... then check that they match with those given as input.
+    if (gr1 != _grid1 || gr2 != _grid2)
+      throw std::runtime_error(error("DoubleOperator::DoubleOperator", "Input grids and grids stored in YAML::Node do not match."));
+
+    // Get double operator values from the node
+    const std::vector<std::vector<std::vector<std::vector<double>>>> NodeOperator = Node["DoubleOperator"].as<std::vector<std::vector<std::vector<std::vector<double>>>>>();
+
+    // Get number of subgrids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Resize matrix and set it to zero
+    _dOperator.resize(ng1, std::vector<matrix<matrix<double>>>(ng2));
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      for (int ig2 = 0; ig2 < ng2; ig2++)
+        {
+          const int nx1 = _grid1.GetSubGrid(ig1).nx();
+          const int nx2 = _grid2.GetSubGrid(ig2).nx();
+          _dOperator[ig1][ig2].resize(1, nx1);
+          for (int alpha = 0; alpha < nx1; alpha++)
+            _dOperator[ig1][ig2](0, alpha) = matrix<double> {1, nx2, NodeOperator[ig1][ig2][alpha]};
+        }
+  }
+
+  //_________________________________________________________________________
+  std::string DoubleOperator::EmitDoubleOperator() const
+  {
+    YAML::Emitter DOTab;
+
+    // Dump DoubleOperator object on a YAML::Emitter object
+    DOTab.SetFloatPrecision(8);
+    DOTab.SetDoublePrecision(8);
+    DOTab << YAML::BeginMap;
+    DOTab << YAML::Key << "DoubleOperator" << YAML::Value << _dexpr.GetName();
+    DOTab << YAML::Key << "Integration accuracy" << YAML::Value << _eps;
+    DOTab << YAML::Key << "FirstGrid";
+    DOTab << YAML::Value << YAML::BeginSeq;
+    for (auto const& sg1 : _grid1.GetSubGrids())
+      DOTab << YAML::Flow << YAML::BeginSeq << sg1.nx() << sg1.xMin() << sg1.InterDegree() << YAML::EndSeq;
+    DOTab << YAML::EndSeq;
+    DOTab << YAML::Key << "SecondGrid";
+    DOTab << YAML::Value << YAML::BeginSeq;
+    for (auto const& sg2 : _grid2.GetSubGrids())
+      DOTab << YAML::Flow << YAML::BeginSeq << sg2.nx() << sg2.xMin() << sg2.InterDegree() << YAML::EndSeq;
+    DOTab << YAML::EndSeq;
+    DOTab << YAML::Key << "DoubleOperator";
+    DOTab << YAML::Value << YAML::Flow << YAML::BeginSeq;
+    for (auto const& og1 : _dOperator)
+      {
+        DOTab << YAML::Flow << YAML::BeginSeq;
+        for (auto const& og2 : og1)
+          {
+            DOTab << YAML::Flow << YAML::BeginSeq;
+            for (auto const& m1 : og2.data())
+              {
+                DOTab << YAML::Flow << YAML::BeginSeq;
+                for (auto const& m2 : m1.data())
+                  DOTab << YAML::Flow << m2;
+                DOTab << YAML::EndSeq;
+              }
+            DOTab << YAML::EndSeq;
+          }
+        DOTab << YAML::EndSeq;
+      }
+    DOTab << YAML::EndSeq;
+    DOTab << YAML::EndMap;
+
+    // Return DoubleOperator as a string
+    return DOTab.c_str();
+  }
+#endif
+
   //_________________________________________________________________________
   DoubleDistribution DoubleOperator::operator *= (DoubleDistribution const& d) const
   {

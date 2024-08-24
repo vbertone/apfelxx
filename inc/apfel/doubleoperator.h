@@ -11,6 +11,13 @@
 #include "apfel/matrix.h"
 #include "apfel/operator.h"
 #include "apfel/doubledistribution.h"
+#include "apfel/config.h"
+
+// Include yaml-cpp header only if it has been found at configuration
+// time.
+#if WITH_YAML_CPP == 1
+#include <yaml-cpp/yaml.h>
+#endif
 
 namespace apfel
 {
@@ -34,9 +41,9 @@ namespace apfel
      * @param gr1: the Grid object for the first variable
      * @param gr2: the Grid object for the second variable
      * @param dexpr: the double expression to be convoluted
-     * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
+     * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-3</SUP>)
      */
-    DoubleOperator(Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr, double const& eps = 1e-5);
+    DoubleOperator(Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr, double const& eps = 1e-3);
 
     /**
      * @brief The DoubleOperator constructor.
@@ -62,6 +69,23 @@ namespace apfel
      * of the constructor. Therefore, it is defaulted at input.
      */
     DoubleOperator(DoubleObject<Operator> const& DObj, DoubleExpression const& dexpr = DoubleExpression{});
+
+#if WITH_YAML_CPP == 1
+    /**
+     * @brief The DoubleOperator constructor.
+     * @param Node: YAML Node where the DoubleOperator object is strored
+     * @param gr1: the Grid object for the first variable
+     * @param gr2: the Grid object for the second variable
+     * @param dexpr: the double expression (default: Null expression)
+     */
+    DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr = DoubleExpression{});
+
+    /**
+     * @brief Function the encapsulate a DoubleOperator object in a
+     * YAML::Emitter objects such that it can be written on file.
+     */
+    std::string EmitDoubleOperator() const;
+#endif
 
     /**
      * @brief The Operator virtual destructor.

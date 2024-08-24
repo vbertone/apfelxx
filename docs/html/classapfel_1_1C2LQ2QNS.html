@@ -95,11 +95,11 @@ $(function(){ initResizable(false); });
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classapfel_1_1C2LQ2QNS-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">apfel::C2LQ2QNS Class Reference</div></div>
+  <div class="headertitle"><div class="title">apfel::C2LQ2QNS Class Reference<div class="ingroups"><a class="el" href="group__NCMasslessSIDIS.html">Zero-mass coefficient functions for unpolarised SIDIS</a> &raquo; <a class="el" href="group__NNLOzmSIDIS.html">NNLO zero-mass coefficient functions for unpolarised SIDIS</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Description of the class.  
+<p>O(&alpha;<sub>s</sub><sup>2</sup>) non-singlet quark-in-quark coefficient function for FL.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="sidiscoefficientfunctionsunp_8h_source.html">sidiscoefficientfunctionsunp.h</a>&gt;</code></p>
@@ -117,6 +117,9 @@ Inheritance diagram for apfel::C2LQ2QNS:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7651b9fa13997776b6d323546b45bab" id="r_ae7651b9fa13997776b6d323546b45bab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7651b9fa13997776b6d323546b45bab">C2LQ2QNS</a> (int const &amp;nf)</td></tr>
 <tr class="separator:ae7651b9fa13997776b6d323546b45bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab79448deaff4622b65e2f5c104e4555f" id="r_ab79448deaff4622b65e2f5c104e4555f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab79448deaff4622b65e2f5c104e4555f">GetName</a> () const override</td></tr>
+<tr class="memdesc:ab79448deaff4622b65e2f5c104e4555f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a string with the name of the class.  <br /></td></tr>
+<tr class="separator:ab79448deaff4622b65e2f5c104e4555f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfc8ec020e57d5364df67d4918f71f84" id="r_abfc8ec020e57d5364df67d4918f71f84"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfc8ec020e57d5364df67d4918f71f84">RegularRegular</a> (double const &amp;x, double const &amp;z) const override</td></tr>
 <tr class="memdesc:abfc8ec020e57d5364df67d4918f71f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function for the regular-regular term.  <br /></td></tr>
 <tr class="separator:abfc8ec020e57d5364df67d4918f71f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,7 +160,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ad3cb2adf817e1522c27e2cf055c41613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Description of the class. </p>
+<div class="textblock"><p>O(&alpha;<sub>s</sub><sup>2</sup>) non-singlet quark-in-quark coefficient function for FL. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae7651b9fa13997776b6d323546b45bab" name="ae7651b9fa13997776b6d323546b45bab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7651b9fa13997776b6d323546b45bab">&#9670;&#160;</a></span>C2LQ2QNS()</h2>
@@ -177,6 +180,35 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab79448deaff4622b65e2f5c104e4555f" name="ab79448deaff4622b65e2f5c104e4555f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab79448deaff4622b65e2f5c104e4555f">&#9670;&#160;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string apfel::C2LQ2QNS::GetName </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that returns a string with the name of the class. </p>
+
+<p>Reimplemented from <a class="el" href="classapfel_1_1DoubleExpression.html#a1bf2f60f04bb75b7f9f309d3c8021723">apfel::DoubleExpression</a>.</p>
+
+</div>
+</div>
 <a id="abfc8ec020e57d5364df67d4918f71f84" name="abfc8ec020e57d5364df67d4918f71f84"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abfc8ec020e57d5364df67d4918f71f84">&#9670;&#160;</a></span>RegularRegular()</h2>
 
@@ -240,7 +272,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 23 2024 12:53:22 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Sat Aug 24 2024 19:37:15 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>

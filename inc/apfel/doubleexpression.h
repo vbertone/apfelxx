@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace apfel
 {
   /**
@@ -32,6 +34,12 @@ namespace apfel
      */
     DoubleExpression();
     ///@}
+
+    /**
+     * @brief Function that returns a string with the name of the
+     * class.
+     */
+    virtual std::string GetName() const { return "Unspecialised"; }
 
     /**
      * @name DoubleExpression components
