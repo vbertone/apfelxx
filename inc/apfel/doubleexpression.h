@@ -111,7 +111,8 @@ namespace apfel
   {
   public:
     DoubleIdentity(): DoubleExpression() { }
-    double LocalLocal(double const&, double const&) const { return 1; }
+    std::string GetName() const override { return "DoubleIdentity"; }
+    double LocalLocal(double const&, double const&) const override { return 1; }
   };
 
   /**
@@ -123,5 +124,6 @@ namespace apfel
   {
   public:
     DoubleNull(): DoubleExpression() { }
+    std::string GetName() const override { return "DoubleNull"; }
   };
 }

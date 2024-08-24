@@ -333,7 +333,7 @@ namespace apfel
     DOTab.SetFloatPrecision(8);
     DOTab.SetDoublePrecision(8);
     DOTab << YAML::BeginMap;
-    DOTab << YAML::Key << "DoubleOperator" << YAML::Value << _dexpr.GetName();
+    DOTab << YAML::Key << "DoubleExpression" << YAML::Value << _dexpr.GetName();
     DOTab << YAML::Key << "Integration accuracy" << YAML::Value << _eps;
     DOTab << YAML::Key << "FirstGrid";
     DOTab << YAML::Value << YAML::BeginSeq;
