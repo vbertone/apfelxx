@@ -17,8 +17,8 @@ namespace apfel
   DoubleOperator::DoubleOperator(Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr, double const& eps):
     _grid1(gr1),
     _grid2(gr2),
-    _dexpr(dexpr),
-    _eps(eps)
+    _eps(eps),
+    _dexprName(dexpr.GetName())
   {
     // Interpolator objects for the interpolating functions
     const LagrangeInterpolator li1{_grid1};
@@ -57,7 +57,7 @@ namespace apfel
             const double edx2 = exp(-dx2);
 
             // Evaluate Local-Local contribution
-            const double cLL = _dexpr.LocalLocal(edx1, edx2);
+            const double cLL = dexpr.LocalLocal(edx1, edx2);
 
             // Evaluate Local-Singular and Local-Regular making the
             // delta-function of the first variable act and
@@ -74,7 +74,7 @@ namespace apfel
                       const Integrator Ik{[&] (double const& y2) -> double
                         {
                           const double wr2 = li2.InterpolantLog(gamma, log(xg2[delta] / y2), sg2);
-                          return _dexpr.LocalSingular(edx1, y2) * ( wr2 - ws2 ) + _dexpr.LocalRegular(edx1, y2) * wr2;
+                          return dexpr.LocalSingular(edx1, y2) * ( wr2 - ws2 ) + dexpr.LocalRegular(edx1, y2) * wr2;
                         }};
                       cLS_LR(delta, gamma) += Ik.integrate(a2, b2, _eps);
                     }
@@ -95,7 +95,7 @@ namespace apfel
                       const Integrator Ij{[&] (double const& y1) -> double
                         {
                           const double wr1 = li1.InterpolantLog(alpha, log(xg1[beta] / y1), sg1);
-                          return ( wr1 - ws1 ) * _dexpr.SingularLocal(y1, edx2) + wr1 * _dexpr.RegularLocal(y1, edx2);
+                          return ( wr1 - ws1 ) * dexpr.SingularLocal(y1, edx2) + wr1 * dexpr.RegularLocal(y1, edx2);
                         }};
                       cSL_RL(beta, alpha) += Ij.integrate(a1, b1, _eps);
                     }
@@ -166,10 +166,10 @@ namespace apfel
                                           [&] (double const& y2) -> double
                                           {
                                             const double wr2 = li2.InterpolantLog(gamma, lxg2delta - log(y2), sg2);
-                                            return ( wr1 - ws1 ) * _dexpr.SingularSingular(y1, y2) * ( wr2 - ws2 )
-                                                                         + ( wr1 - ws1 ) * _dexpr.SingularRegular(y1, y2) * wr2
-                                                                         + wr1 * _dexpr.RegularSingular(y1, y2) * ( wr2 - ws2 )
-                                                                         + wr1 * _dexpr.RegularRegular(y1, y2) * wr2;
+                                            return ( wr1 - ws1 ) * dexpr.SingularSingular(y1, y2) * ( wr2 - ws2 )
+                                                                        + ( wr1 - ws1 ) * dexpr.SingularRegular(y1, y2) * wr2
+                                                                        + wr1 * dexpr.RegularSingular(y1, y2) * ( wr2 - ws2 )
+                                                                        + wr1 * dexpr.RegularRegular(y1, y2) * wr2;
                                           }};
                                         return Iy1y2.integrate(b2 * edx2, b2, _eps);
                                       }};
@@ -188,11 +188,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  DoubleOperator::DoubleOperator(Operator const& O1, Operator const& O2, DoubleExpression const& dexpr):
+  DoubleOperator::DoubleOperator(Operator const& O1, Operator const& O2):
     _grid1(O1.GetGrid()),
     _grid2(O2.GetGrid()),
-    _dexpr(dexpr),
-    _eps(std::max(O1.GetIntegrationAccuracy(), O2.GetIntegrationAccuracy()))
+    _eps(std::max(O1.GetIntegrationAccuracy(), O2.GetIntegrationAccuracy())),
+    _dexprName("None")
   {
     // Stop the computation if any of the two operators is of GPD
     // type.
@@ -230,11 +230,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  DoubleOperator::DoubleOperator(DoubleObject<Operator> const& DObj, DoubleExpression const& dexpr):
+  DoubleOperator::DoubleOperator(DoubleObject<Operator> const& DObj):
     _grid1(DObj.GetTerms()[0].object1.GetGrid()),
     _grid2(DObj.GetTerms()[0].object2.GetGrid()),
-    _dexpr(dexpr),
-    _eps(std::max(DObj.GetTerms()[0].object1.GetIntegrationAccuracy(), DObj.GetTerms()[0].object2.GetIntegrationAccuracy()))
+    _eps(std::max(DObj.GetTerms()[0].object1.GetIntegrationAccuracy(), DObj.GetTerms()[0].object2.GetIntegrationAccuracy())),
+    _dexprName("None")
   {
     // Stop the computation if any of the two operators in the first
     // term of the double objects is of GPD type.
@@ -281,12 +281,12 @@ namespace apfel
   DoubleOperator::DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr):
     _grid1(gr1),
     _grid2(gr2),
-    _dexpr(dexpr),
-    _eps(Node["Integration accuracy"].as<double>())
+    _eps(Node["Integration accuracy"].as<double>()),
+    _dexprName(dexpr.GetName())
   {
     // Check that the DoubleExpression stored in the node matches with
     // the input one by checking the names.
-    if (_dexpr.GetName() != Node["DoubleExpression"].as<std::string>())
+    if (_dexprName != Node["DoubleExpression"].as<std::string>())
       throw std::runtime_error(error("DoubleOperator::DoubleOperator", "Input DoubleExpression and DoubleExpression name stored in YAML::Node do not match."));
 
     // First construct interpolation grids using the parameters give
@@ -330,10 +330,9 @@ namespace apfel
     YAML::Emitter DOTab;
 
     // Dump DoubleOperator object on a YAML::Emitter object
-    DOTab.SetFloatPrecision(8);
     DOTab.SetDoublePrecision(8);
     DOTab << YAML::BeginMap;
-    DOTab << YAML::Key << "DoubleExpression" << YAML::Value << _dexpr.GetName();
+    DOTab << YAML::Key << "DoubleExpression" << YAML::Value << _dexprName;
     DOTab << YAML::Key << "Integration accuracy" << YAML::Value << _eps;
     DOTab << YAML::Key << "FirstGrid";
     DOTab << YAML::Value << YAML::BeginSeq;

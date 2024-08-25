@@ -49,26 +49,14 @@ namespace apfel
      * @brief The DoubleOperator constructor.
      * @param O1: the first single operator
      * @param O2: the second single operator
-     * @param dexpr: the double expression (default: Null expression)
-     * @note The value of the "dexpr" variable is
-     * ineffective. However, being a constant attribute of this class,
-     * it still needs to be defined. Moreover, since it is allocated
-     * by reference, in cannot be defined in the initialisation list
-     * of the constructor. Therefore, it is defaulted at input.
      */
-    DoubleOperator(Operator const& O1, Operator const& O2, DoubleExpression const& dexpr = DoubleExpression{});
+    DoubleOperator(Operator const& O1, Operator const& O2);
 
     /**
      * @brief The DoubleOperator constructor.
      * @param DObj: double object of operators
-     * @param dexpr: the double expression (default: Null expression)
-     * @note The value of the "dexpr" variable is
-     * ineffective. However, being a constant attribute of this class,
-     * it still needs to be defined. Moreover, since it is allocated
-     * by reference, in cannot be defined in the initialisation list
-     * of the constructor. Therefore, it is defaulted at input.
      */
-    DoubleOperator(DoubleObject<Operator> const& DObj, DoubleExpression const& dexpr = DoubleExpression{});
+    DoubleOperator(DoubleObject<Operator> const& DObj);
 
 #if WITH_YAML_CPP == 1
     /**
@@ -76,9 +64,9 @@ namespace apfel
      * @param Node: YAML Node where the DoubleOperator object is strored
      * @param gr1: the Grid object for the first variable
      * @param gr2: the Grid object for the second variable
-     * @param dexpr: the double expression (default: Null expression)
+     * @param dexpr: the double expression to be convoluted needed to compare names
      */
-    DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr = DoubleExpression{});
+    DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr);
 
     /**
      * @brief Function the encapsulate a DoubleOperator object in a
@@ -120,15 +108,15 @@ namespace apfel
     Grid const& GetSecondGrid() const { return _grid2; }
 
     /**
-     * @brief Function that returns the DoubleExpression object
-     * associated with the operator.
-     */
-    DoubleExpression const& GetDoubleExpression() const { return _dexpr; }
-
-    /**
      * @brief Function that returns the integration accuracy.
      */
     double const& GetIntegrationAccuracy() const { return _eps; }
+
+    /**
+     * @brief Function that returns the name of the DoubleExpression
+     * object associated with the operator.
+     */
+    std::string const& GetDoubleExpressionName() const { return _dexprName; }
 
     /**
      * @brief Function that returns the DoubleOperator container.
@@ -143,8 +131,8 @@ namespace apfel
   protected:
     Grid                                      const& _grid1;      //!< First grid on which to compute the operator
     Grid                                      const& _grid2;      //!< Second grid on which to compute the operator
-    DoubleExpression                          const& _dexpr;      //!< Expression to be used
     double                                    const  _eps;        //!< Integration accuracy
+    std::string                               const  _dexprName;  //!< Name of the double expression
     std::vector<std::vector<matrix<matrix<double>>>> _dOperator;  //!< DoubleOperator container
 
     friend std::ostream& operator << (std::ostream& os, DoubleOperator const& dop);
