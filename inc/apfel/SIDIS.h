@@ -6,6 +6,8 @@
 
 #include "apfel/apfelxx.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   /**
