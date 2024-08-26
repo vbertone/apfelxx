@@ -320,7 +320,7 @@ namespace apfel
           const int nx2 = _grid2.GetSubGrid(ig2).nx();
           _dOperator[ig1][ig2].resize(1, nx1);
           for (int alpha = 0; alpha < nx1; alpha++)
-            _dOperator[ig1][ig2](0, alpha) = matrix<double> {1, nx2, NodeOperator[ig1][ig2][alpha]};
+            _dOperator[ig1][ig2](0, alpha) = matrix<double> {1, (size_t) nx2, NodeOperator[ig1][ig2][alpha]};
         }
   }
 
