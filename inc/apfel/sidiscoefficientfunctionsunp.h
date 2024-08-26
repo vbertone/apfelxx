@@ -159,7 +159,7 @@ namespace apfel
   {
   public:
     C2LQ2QNS(int const& nf);
-    std::string GetName() const override { return "C2LQ2QNS"; }
+    std::string GetName() const override { return "C2LQ2QNS_nf" + std::to_string(_nf); }
     double RegularRegular(double const& x, double const& z) const override;
   private:
     int const _nf;
@@ -273,7 +273,7 @@ namespace apfel
   {
   public:
     C2TQ2QNS(int const& nf);
-    std::string GetName() const override { return "C2TQ2QNS"; }
+    std::string GetName() const override { return "C2TQ2QNS_nf" + std::to_string(_nf); }
     double LocalLocal(double const& x, double const& z) const override;
     double LocalSingular(double const& x, double const& z) const override;
     double LocalRegular(double const& x, double const& z) const override;

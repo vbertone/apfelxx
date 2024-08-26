@@ -87,7 +87,7 @@ namespace apfel
   {
   public:
     DC2Q2G(int const& nf);
-    std::string GetName() const override { return "DC2Q2G"; }
+    std::string GetName() const override { return "DC2Q2G_nf" + std::to_string(_nf); }
     double LocalRegular(double const& x, double const& z) const override;
     double SingularRegular(double const& x, double const& z) const override;
     double RegularRegular(double const& x, double const& z) const override;
@@ -115,7 +115,7 @@ namespace apfel
   {
   public:
     DC2G2Q(int const& nf);
-    std::string GetName() const override { return "DC2G2Q"; }
+    std::string GetName() const override { return "DC2G2Q_nf" + std::to_string(_nf); }
     double RegularLocal(double const& x, double const& z) const override;
     double RegularSingular(double const& x, double const& z) const override;
     double RegularRegular(double const& x, double const& z) const override;
@@ -131,7 +131,7 @@ namespace apfel
   {
   public:
     DC2Q2QNS(int const& nf);
-    std::string GetName() const override { return "DC2Q2QNS"; }
+    std::string GetName() const override { return "DC2Q2QNS_nf" + std::to_string(_nf); }
     double LocalLocal(double const& x, double const& z) const override;
     double LocalSingular(double const& x, double const& z) const override;
     double LocalRegular(double const& x, double const& z) const override;

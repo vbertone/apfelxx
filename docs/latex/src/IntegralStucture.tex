@@ -980,6 +980,58 @@ where:
 In Sect.~\ref{subsec:loggrid}, we will provide a thorough discussion
 on how to implement a double operator in {\tt APFEL++}.
 
+In the following, we will work out the general flavour structure of a
+SIDIS structure function up to $\mathcal{O}(\alpha_s^2)$. We will
+follow Refs.~\cite{Anderle:2016kwa, Bonino:2024qbh,
+  Bonino:2024wgg}. The most general structure of the generic structure
+functions $F$ is:
+\begin{equation}
+  F=\overline{C}_{gg}d_gf_g+\sum_{j}C_{gj}d_gf_j+\sum_{i}C_{ig}d_if_g+\sum_{i,j}C_{ij}d_if_j\,,
+\end{equation}
+where $C$ are the coefficient functions, $d$ the FFs, and $f$ the
+PDFs. Importantly, the indices $i$ and $j$ run over \textit{both}
+quark flavours and anti-flavours active at the relevant hard
+scale. First we observe that:
+\begin{equation}
+\overline{C}_{gg}=\left(\sum_{k}e_k^2\right) C_{gg}\,,\quad C_{gj} = e_j^2C_{gq}\,,\quad\mbox{and}\quad C_{ig} = e_i^2C_{qg}\,,
+\end{equation}
+so that:
+\begin{equation}
+F=C_{gg}\left(\sum_{k}e_k^2\right) d_gf_g+C_{gq} d_g\left(\sum_{j}e_j^2
+  f_j\right)+C_{qg}\left(\sum_{i}e_i^2
+  d_i\right)f_g+\sum_{i,j}C_{ij}d_if_j\,,
+\label{eq:SIDISFPartial}
+\end{equation}
+where $e_i$ is the electric charge of the $i$-th flavour (or
+anti-flavour), and $C_{gq}$ and $C_{qg}$ are flavour-independent
+coefficient functions. The structure of $C_{ij}$ up to
+$\mathcal{O}(\alpha_s^2)$ is found to be the following:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle C_{ij} &=& \displaystyle
+                         \delta_{ij}\left[e_i^2C_{qq}^{\rm
+                         NS}+\left(\sum_{k}e_k^2\right)C_{qq}^{\rm
+                         PS}\right]+\delta_{(-i)j}e_i^2C_{\overline{q}q}+ (1-\delta_{ij}-\delta_{(-i)j})\left[e_j^2C_{q'q}^{(1)}+e_i^2C_{q'q}^{(2)}+e_ie_jC_{q'q}^{(3)}\right]\,,
+\end{array}
+\end{equation}
+where we used the fact that that $e_{-i}=-e_i$. All coefficient
+functions appearing in this equation are flavour independent. Plugging
+this equality into Eq.~(\ref{eq:SIDISFPartial}), finally gives:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle F&=&\displaystyle C_{gg}\left(\sum_{k}e_k^2\right) d_gf_g+C_{gq} d_g\left(\sum_{j}e_j^2
+  f_j\right)+C_{qg}\left(\sum_{i}e_i^2
+  d_i\right)f_g\\
+\\
+&+&\displaystyle C_{qq}^{\rm PS}\left(\sum_{k}e_k^2\right)\left(\sum_{i}d_if_i\right)+C_{qq}^{\rm NS}\left(\sum_{i} e_i^2
+    d_if_i\right)+C_{\overline{q}q}\left(\sum_{i}e_i^2d_if_{-i}\right)\\
+\\
+&+&\displaystyle C_{q'q}^{(1)} \left(\sum_{{i,j\atop i\neq j,-j}} e_j^2 d_if_j\right) +C_{q'q}^{(2)} \left(\sum_{{i,j\atop i\neq j,-j}} e_i^2 d_if_j\right) +C_{q'q}^{(3)} \left(\sum_{{i,j\atop i\neq j,-j}} e_ie_j d_if_j\right) \,.
+\end{array}
+\end{equation}
+
+
+
 % As we will see below in Sect.~\ref{subsec:loggrid}, due to the support
 % of the interpolating functions $w$, the integration ranges in $y_1$
 % and $y_2$ can be reduced and split as follows:

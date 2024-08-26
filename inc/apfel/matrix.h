@@ -65,10 +65,17 @@ namespace apfel
     std::array<size_t, 2> const& size() const { return _size; }
 
     /**
-     * @brief Returns the vector of data.
+     * @brief Returns the vector of data as a const reference.
      * @returns the vector of data
      */
     std::vector<T> const& data() const { return _data; }
+
+    /**
+     * @brief Returns the vector of data as a non-constant reference
+     * (can be used to set the data).
+     * @returns the vector of data
+     */
+    std::vector<T>& data() { return _data; }
 
     /**
      * @name Binary operators involving matrices
