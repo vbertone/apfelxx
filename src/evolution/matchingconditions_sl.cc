@@ -7,6 +7,7 @@
 #include "apfel/matchingconditions_sl.h"
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
+#include "apfel/integrator.h"
 
 namespace apfel
 {
@@ -68,66 +69,6 @@ namespace apfel
   double AS1gH_0::Regular(double const& x) const
   {
     return 2 * CF * ( 1 + pow(1 - x, 2) ) * ( - 1 - 2 * log(x) ) / x;
-  }
-
-  //_________________________________________________________________________________
-  AS1polHg_L::AS1polHg_L():
-    Expression()
-  {
-  }
-  double AS1polHg_L::Regular(double const& x) const
-  {
-    return 4 * TR * ( 2 * x - 1 );
-  }
-
-  //_________________________________________________________________________________
-  AS1polggH_L::AS1polggH_L():
-    Expression()
-  {
-  }
-  double AS1polggH_L::Local(double const&) const
-  {
-    return - 4 * TR / 3.;
-  }
-
-  //_________________________________________________________________________________
-  AS1polHH_L::AS1polHH_L():
-    Expression()
-  {
-  }
-  double AS1polHH_L::Singular(double const& x) const
-  {
-    return 2 * CF * ( 1 + pow(x, 2) ) / ( 1 - x );
-  }
-
-  //_________________________________________________________________________________
-  AS1polHH_0::AS1polHH_0():
-    Expression()
-  {
-  }
-  double AS1polHH_0::Singular(double const& x) const
-  {
-    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
-  }
-
-  //_________________________________________________________________________________
-  AS1polgH_L::AS1polgH_L():
-    Expression()
-  {
-  }
-  double AS1polgH_L::Regular(double const& x) const
-  {
-    return 2 * CF * ( 2 - x );
-  }
-
-  //_________________________________________________________________________________
-  AS1polgH_0::AS1polgH_0():
-    Expression()
-  {
-  }
-  double AS1polgH_0::Regular(double const& x) const
-  {
-    return 2 * CF * ( 2 - 2 * x - 2 * ( 2 - x ) * log(x) );
   }
 
   //_________________________________________________________________________________
@@ -642,5 +583,309 @@ namespace apfel
   double AS3ggH_0::Regular(double const& x) const
   {
     return _C[0] * pow(log(1-x), 2) + _C[1] * log(1-x) + _C[2] * pow(x, 2) + _C[3] * log(x) + _C[4] * x + _rho * log(x) / x;
+  }
+
+  //_________________________________________________________________________________
+  AS1polHg_L::AS1polHg_L():
+    Expression()
+  {
+  }
+  double AS1polHg_L::Regular(double const& x) const
+  {
+    return 4 * TR * ( 2 * x - 1 );
+  }
+
+  //_________________________________________________________________________________
+  AS1polggH_L::AS1polggH_L():
+    Expression()
+  {
+  }
+  double AS1polggH_L::Local(double const&) const
+  {
+    return - 4 * TR / 3.;
+  }
+
+  //_________________________________________________________________________________
+  AS1polHH_L::AS1polHH_L():
+    Expression()
+  {
+  }
+  double AS1polHH_L::Singular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(x, 2) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1polHH_0::AS1polHH_0():
+    Expression()
+  {
+  }
+  double AS1polHH_0::Singular(double const& x) const
+  {
+    return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1polgH_L::AS1polgH_L():
+    Expression()
+  {
+  }
+  double AS1polgH_L::Regular(double const& x) const
+  {
+    return 2 * CF * ( 2 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1polgH_0::AS1polgH_0():
+    Expression()
+  {
+  }
+  double AS1polgH_0::Regular(double const& x) const
+  {
+    return 2 * CF * ( 2 - 2 * x - 2 * ( 2 - x ) * log(x) );
+  }
+
+  //_________________________________________________________________________________
+  APS2polHq_0::APS2polHq_0():
+    Expression()
+  {
+  }
+  double APS2polHq_0::Regular(double const& x) const
+  {
+    const double lnx = log(x);
+    return 2. / 3 * CF * TR * ( 84 * ( - 1 + x ) + 48 * ( 1 + x ) * zeta3
+                                + lnx * ( 18 - 102 * x + 60 * ( - 1 + x ) * log(1 - x) + lnx * ( 9 + 15 * x - 2 * ( 1 + x ) * lnx ) )
+                                + 12 * ( 5 *( - 1 + x ) + 2 * ( 1 + x ) * lnx ) * dilog(x) - 48 * ( 1 + x ) * trilog(x) );
+  }
+
+  //_________________________________________________________________________________
+  APS2polHq_L::APS2polHq_L():
+    Expression()
+  {
+  }
+  double APS2polHq_L::Regular(double const& x) const
+  {
+    const double lnx = log(x);
+    return - 8 * CF * TR * ( - 1 + x + lnx * ( 1 - 3 * x + ( 1 + x ) * lnx ) );
+  }
+
+  //_________________________________________________________________________________
+  APS2polHq_L2::APS2polHq_L2():
+    Expression()
+  {
+  }
+  double APS2polHq_L2::Regular(double const& x) const
+  {
+    return - 4 * CF * TR * ( 5 - 5 * x + 2 * ( 1 + x ) * log(x) );
+  }
+
+  //_________________________________________________________________________________
+  AS2polHg_0::AS2polHg_0():
+    Expression()
+  {
+  }
+  double AS2polHg_0::Regular(double const& x) const
+  {
+    const double x2     = x * x;
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double ln1mx  = log(1 - x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    const double ln1mx3 = ln1mx * ln1mx2;
+    const double ln1px  = log(1 + x);
+    const double ln1px2 = ln1px * ln1px;
+    const double atan   = ( log(1 - x) - lnx ) / 2;
+    const double S12mx  = wgplg(1,2,-x);
+    return TR / 3 * ( 6 * ( CF * ( - 11 - 36 * zeta2 + x * ( 23 + 4 * ( 2 + x ) * zeta2 - 16 * zeta3 ) + 8 * zeta3 )
+                            + 2 * CA * ( - 51 + 4 * zeta2 + 12 * zeta3 + x * ( 53 - ( 4 + x ) * zeta2 + 20 * zeta3 ) ) ) - 4 * ( CA - CF ) * ( - 1 + 2 * x ) * ln1mx3
+                      + 6 * ln1mx2 * ( ( - 1 + x ) * ( - 2 * CF * ( 3 + x ) + CA * ( 5 + x ) ) - 2 * ( 2 * CA - CF ) * ( - 1 + 2 * x ) * lnx )
+                      + lnx * ( - 6 * ( CF * ( 8 + 25 * x ) + CA * ( 28 + 74 * x ) ) - 3 * ( CA * ( 6 + 4 * x ) + CF * ( 5 - 4 * x * ( 2 + x ) ) ) * lnx
+                                - 2 * ( CF - 2 * CF * x + CA * ( 2 + 4 * x ) ) * lnx2 )
+                      + 4 * ln1mx * ( CF * ( - 48 + Pi2 * ( 1 - 2 * x ) + 45 * x ) + CA * ( 3 + Pi2 * ( - 1 + 2 * x ) )
+                                      + 3 * lnx * ( CA * ( - 1 + x ) * ( 25 + x ) + CF * ( 11 - 2 * x * ( 4 + x ) ) + ( CF - 2 * CF * x ) * lnx ) )
+                      + 12 * CA * ( - 2 * ( zeta2 + 2 * x * zeta2 ) + lnx * ( 4 + 4 * x + lnx + 2 * x * lnx ) ) * ln1px - 24 * CA * ( 1 + 2 * x ) * lnx * ln1px2
+                      + 6 * ( 2 * ( CF * ( 29 - 4 * x * ( 3 + x ) ) + CA * ( - 29 + 2 * x * ( 12 + x ) ) - 8 * CA * x * atan + 2 * ( CA + CF * ( - 1 + 2 * x ) ) * ln1mx
+                                    + 2 * ( 3 * CA + 2 * CF - 4 * CF * x ) * lnx + 4 * CA * ( 1 + 2 * x ) * ln1px ) * dilog(x)
+                              + 2 * CA * ( 2 + 2 * x + lnx + 2 * x * lnx - 2 * ( 1 + 2 * x ) * ln1px ) * dilog(x2)
+                              - 4 * ( CA - CF ) * ( - 1 + 2 * x ) * trilog(1 - x) - 4 * ( CF * ( 3 - 6 * x ) + CA * ( 7 + 6 * x ) ) * trilog(x)
+                              - ( CA + 2 * CA * x ) * trilog(x2) ) - 48 * ( CA + 2 * CA * x ) * S12mx );
+  }
+
+  //_________________________________________________________________________________
+  AS2polHg_L::AS2polHg_L():
+    Expression()
+  {
+  }
+  double AS2polHg_L::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double ln1mx = log(1 - x);
+    const double ln1px = log(1 + x);
+    return - 4. / 3 * TR * ( 8 * TR * ( 1 - 2 * x ) + 66 * CA * x + 12 * CA * ( - 6 + zeta2 )
+                             + 3 * CF * ( - 2 - 4 * zeta2 + x * ( - 3 + 8 * zeta2 ) )
+                             + 6 * ( CA - CF ) * ( - 1 + 2 * x ) * pow(ln1mx, 2)
+                             + 3 * ln1mx * ( - 8 * ( CA - CF ) * ( - 1 + x ) + 4 * CF * ( - 1 + 2 * x ) * lnx )
+                             + 3 * lnx * ( CF - 2 * ( CA + 8 * ( CA + CF ) * x ) + ( CF - 2 * CF * x + CA * ( 2 + 4 * x ) ) * lnx
+                                           + 4 * ( CA + 2 * CA * x ) *ln1px ) + 12 * CA * ( 1 + 2 * x ) * dilog(-x) );
+  }
+
+  //_________________________________________________________________________________
+  AS2polHg_L2::AS2polHg_L2():
+    Expression()
+  {
+  }
+  double AS2polHg_L2::Regular(double const& x) const
+  {
+    return - 2 * TR * ( - 3 * ( CF + 8 * CA * ( - 1 + x ) ) + 4 * ( CA - CF ) * ( - 1 + 2 * x ) * log(1 - x)
+                        + ( - 2 * CF + 4 * CF * x + 8 * CA * ( 1 + x ) ) * log(x) );
+  }
+
+  //_________________________________________________________________________________
+  ANS2polqqH_0::ANS2polqqH_0():
+    Expression()
+  {
+  }
+  double ANS2polqqH_0::Regular(double const& x) const
+  {
+    return 2. / 27 * CF * TR * ( 22 - 134 * x - 3 * log(x) * ( 22 - 24 * x + 22 * pow(x, 2) + 3 * ( 1 + pow(x, 2) ) * log(x) ) / ( - 1 + x ) );
+  }
+  double ANS2polqqH_0::Singular(double const& x) const
+  {
+    return CF * TR * 224. / 27 / ( 1 - x );
+  }
+  double ANS2polqqH_0::Local(double const& x) const
+  {
+    return CF * TR / 18 * ( 73 + 80 * zeta2 - 48 * zeta3 ) + CF * TR * 224. / 27 * log(1 - x);
+  }
+
+  //_________________________________________________________________________________
+  ANS2polqqH_L::ANS2polqqH_L():
+    Expression()
+  {
+  }
+  double ANS2polqqH_L::Regular(double const& x) const
+  {
+    return 8. / 9 * CF * TR * ( - 1 + 11 * x + 3 * ( 1 + pow(x, 2) ) * log(x) / ( - 1 + x ) );
+  }
+  double ANS2polqqH_L::Singular(double const& x) const
+  {
+    return - CF * TR * 80. / 9 / ( 1 - x );
+  }
+  double ANS2polqqH_L::Local(double const& x) const
+  {
+    return - CF * TR / 18 *( 12 + 96 * zeta2 ) - CF * TR * 80. / 9 * log(1 - x);
+  }
+
+  //_________________________________________________________________________________
+  ANS2polqqH_L2::ANS2polqqH_L2():
+    Expression()
+  {
+  }
+  double ANS2polqqH_L2::Regular(double const& x) const
+  {
+    return -4. / 3 * CF * TR * ( 1 + x );
+  }
+  double ANS2polqqH_L2::Singular(double const& x) const
+  {
+    return CF * TR * 8. / 3 / ( 1 - x );
+  }
+  double ANS2polqqH_L2::Local(double const& x) const
+  {
+    return 2 * CF * TR + CF * TR * 8. / 3 * log(1 - x);
+  }
+
+  //_________________________________________________________________________________
+  AS2polgqH_0::AS2polgqH_0():
+    Expression()
+  {
+  }
+  double AS2polgqH_0::Regular(double const& x) const
+  {
+    const double ln1mx  = log(1 - x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    return CF * TR * ( - ( 32 * ( - 11 + 4 * x ) ) / 27 + ( 8 * ( 4 + x ) * ln1mx ) / 9 - ( 4 * ( - 2 + x ) * ln1mx2 ) / 3 );
+  }
+
+  //_________________________________________________________________________________
+  AS2polgqH_L::AS2polgqH_L():
+    Expression()
+  {
+  }
+  double AS2polgqH_L::Regular(double const& x) const
+  {
+    return - CF * TR * ( 16 * ( 4 + x ) / 9 - 16 * ( - 2 + x ) * log(1 - x) / 3 );
+  }
+
+  //_________________________________________________________________________________
+  AS2polgqH_L2::AS2polgqH_L2():
+    Expression()
+  {
+  }
+  double AS2polgqH_L2::Regular(double const& x) const
+  {
+    return - CF * TR * 8 * ( - 2 + x ) / 3;
+  }
+
+  //_________________________________________________________________________________
+  AS2polggH_0::AS2polggH_0():
+    Expression()
+  {
+  }
+  double AS2polggH_0::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double lnx3  = lnx * lnx2;
+    const double ln1mx = log(1 - x);
+    return CA * TR * ( - 2 * ( - 337 + 449 * x ) / 27 - 4 * x * ln1mx / 3 + 4 * ( 22 + x ) * lnx / 9  + 4 * ( 1 + x ) * lnx2 / 3 )
+           + CF * TR * ( - 56 * ( - 1 + x ) + 12 * ( 3 + x ) * lnx -  2 * ( - 5 + x ) * lnx2 + 4 * ( 1 + x ) * lnx3 / 3 );
+  }
+  double AS2polggH_0::Singular(double const& x ) const
+  {
+    return CA * 224. / 27 * TR / ( 1 - x );
+  }
+  double AS2polggH_0::Local(double const& x) const
+  {
+    return - CF * 15 * TR + 2. / 9 * CA * 5 * TR + CA * 224. / 27 * TR * log(1 - x);
+  }
+
+  //_________________________________________________________________________________
+  AS2polggH_L::AS2polggH_L():
+    Expression()
+  {
+  }
+  double AS2polggH_L::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    return - CA * TR * ( - 16 * ( - 14 + 19 * x ) / 9 + 16 * ( 1 + x ) * lnx / 3 )
+           - CF * TR * ( - 40 * ( - 1 + x ) - 8 * ( - 5 + x ) * lnx + 8 * ( 1 + x ) * lnx2 );
+  }
+  double AS2polggH_L::Singular(double const& x) const
+  {
+    return - CA * 80. / 9 * TR / ( 1 - x );
+  }
+  double AS2polggH_L::Local(double const& x) const
+  {
+    return - CF * 4 * TR - 2. / 9 * CA * 24 * TR - CA * 80. / 9 * TR * log(1 - x);
+  }
+
+  //_________________________________________________________________________________
+  AS2polggH_L2::AS2polggH_L2():
+    Expression()
+  {
+  }
+  double AS2polggH_L2::Regular(double const& x) const
+  {
+    const double lnx = log(x);
+    return - CA * TR * 8 * ( - 1 + 2 * x ) / 3 + CF * TR * ( - 20 * ( - 1 + x ) + 8 * ( 1 + x ) * lnx );
+  }
+  double AS2polggH_L2::Singular(double const& x) const
+  {
+    return CA * 8. / 3 * TR / ( 1 - x );
+  }
+  double AS2polggH_L2::Local(double const& x) const
+  {
+    return 16 * pow(TR, 2) / 9 + CA * 8. / 3 * TR * log(1 - x);
   }
 }

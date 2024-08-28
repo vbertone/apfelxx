@@ -101,78 +101,6 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NLOMCpol NLO longitudinally polarised matching conditions
-   * @ingroup MatchCond
-   */
-  ///@{
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
-   */
-  class AS1polHg_L: public Expression
-  {
-  public:
-    AS1polHg_L();
-    double Regular(double const& x) const;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
-   */
-  class AS1polggH_L: public Expression
-  {
-  public:
-    AS1polggH_L();
-    double Local(double const&) const;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the HH matching.
-   */
-  class AS1polHH_L: public Expression
-  {
-  public:
-    AS1polHH_L();
-    double Singular(double const& x) const;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) constant term for the HH
-   * matching.
-   */
-  class AS1polHH_0: public Expression
-  {
-  public:
-    AS1polHH_0();
-    double Singular(double const& x) const;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the gH matching.
-   */
-  class AS1polgH_L: public Expression
-  {
-  public:
-    AS1polgH_L();
-    double Regular(double const& x) const;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) constant term for the gH
-   * matching.
-   */
-  class AS1polgH_0: public Expression
-  {
-  public:
-    AS1polgH_0();
-    double Regular(double const& x) const;
-  };
-  ///@}
-
-  /**
    * @defgroup NNLOMC NNLO unpolarised matching conditions
    * @ingroup MatchCond
    */
@@ -433,6 +361,256 @@ namespace apfel
   private:
     double const        _rho;
     std::vector<double> _C;
+  };
+  ///@}
+
+  /**
+   * @defgroup NLOMCpol NLO longitudinally polarised matching conditions
+   * @ingroup MatchCond
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS1polHg_L: public Expression
+  {
+  public:
+    AS1polHg_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS1polggH_L: public Expression
+  {
+  public:
+    AS1polggH_L();
+    double Local(double const&) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the HH matching.
+   */
+  class AS1polHH_L: public Expression
+  {
+  public:
+    AS1polHH_L();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) constant term for the HH
+   * matching.
+   */
+  class AS1polHH_0: public Expression
+  {
+  public:
+    AS1polHH_0();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the gH matching.
+   */
+  class AS1polgH_L: public Expression
+  {
+  public:
+    AS1polgH_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) constant term for the gH
+   * matching.
+   */
+  class AS1polgH_0: public Expression
+  {
+  public:
+    AS1polgH_0();
+    double Regular(double const& x) const;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOMCpol NNLO longitudinally polarised matching conditions
+   * @ingroup MatchCond
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term.
+   */
+  class APS2polHq_0: public Expression
+  {
+  public:
+    APS2polHq_0();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class APS2polHq_L: public Expression
+  {
+  public:
+    APS2polHq_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class APS2polHq_L2: public Expression
+  {
+  public:
+    APS2polHq_L2();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term.
+   */
+  class AS2polHg_0: public Expression
+  {
+  public:
+    AS2polHg_0();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS2polHg_L: public Expression
+  {
+  public:
+    AS2polHg_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS2polHg_L2: public Expression
+  {
+  public:
+    AS2polHg_L2();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term.
+   */
+  class ANS2polqqH_0: public Expression
+  {
+  public:
+    ANS2polqqH_0();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class ANS2polqqH_L: public Expression
+  {
+  public:
+    ANS2polqqH_L();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class ANS2polqqH_L2: public Expression
+  {
+  public:
+    ANS2polqqH_L2();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term.
+   */
+  class AS2polgqH_0: public Expression
+  {
+  public:
+    AS2polgqH_0();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS2polgqH_L: public Expression
+  {
+  public:
+    AS2polgqH_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS2polgqH_L2: public Expression
+  {
+  public:
+    AS2polgqH_L2();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term.
+   */
+  class AS2polggH_0: public Expression
+  {
+  public:
+    AS2polggH_0();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS2polggH_L: public Expression
+  {
+  public:
+    AS2polggH_L();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS2polggH_L2: public Expression
+  {
+  public:
+    AS2polggH_L2();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
   ///@}
   ///@}
