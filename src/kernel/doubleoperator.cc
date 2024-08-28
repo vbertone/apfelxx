@@ -8,6 +8,7 @@
 #include "apfel/operator.h"
 #include "apfel/integrator.h"
 #include "apfel/messages.h"
+#include "apfel/constants.h"
 
 #include <cmath>
 
@@ -161,10 +162,14 @@ namespace apfel
                                   {
                                     const Integrator Iy1{[&] (double const& y1) -> double
                                       {
+					if (y1 > 1 - eps8)
+					  return 0;
                                         const double wr1 = li1.InterpolantLog(alpha, lxg1beta - log(y1), sg1);
                                         const Integrator Iy1y2{
                                           [&] (double const& y2) -> double
                                           {
+					    if (y2 > 1 - eps8)
+					      return 0;
                                             const double wr2 = li2.InterpolantLog(gamma, lxg2delta - log(y2), sg2);
                                             return ( wr1 - ws1 ) * dexpr.SingularSingular(y1, y2) * ( wr2 - ws2 )
                                                                         + ( wr1 - ws1 ) * dexpr.SingularRegular(y1, y2) * wr2
