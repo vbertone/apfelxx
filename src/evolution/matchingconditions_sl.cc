@@ -80,8 +80,8 @@ namespace apfel
   {
     const double lnx    = log(x);
     const double x2     = x * x;
-    const double Li21mx = dilog(1-x);
-    const double S121mx = wgplg(1,2,1-x);
+    const double Li21mx = dilog(1 - x);
+    const double S121mx = wgplg(1,2,1 - x);
     const double a0 =
       ( 1 + x ) * ( 32 * S121mx + 16 * lnx * Li21mx - 16 * zeta2 * lnx - 4 * pow(lnx,3) / 3 )
       + ( 32 / 3. / x + 8 - 8 * x - 32 * x2 / 3 ) * ( Li21mx - zeta2 )
@@ -126,21 +126,21 @@ namespace apfel
   }
   double AS2Hg_0::Regular(double const& x) const
   {
-    const double S121mx = wgplg(1,2,1-x);
+    const double S121mx = wgplg(1,2,1 - x);
     const double S12mx  = wgplg(1,2,-x);
-    const double S211mx = wgplg(2,1,1-x);
+    const double S211mx = wgplg(2,1,1 - x);
     const double S21mx  = wgplg(2,1,-x);
-    const double S111mx = dilog(1-x);
+    const double S111mx = dilog(1 - x);
     const double S11mx  = dilog(-x);
 
     const double x2     = x * x;
     const double lnx    = log(x);
     const double lnx2   = lnx * lnx;
     const double lnx3   = lnx2 * lnx;
-    const double ln1mx  = log(1-x);
+    const double ln1mx  = log(1 - x);
     const double ln1mx2 = ln1mx * ln1mx;
     const double ln1mx3 = ln1mx2 * ln1mx;
-    const double ln1px  = log(1+x);
+    const double ln1px  = log(1 + x);
     const double ln1px2 = ln1px * ln1px;
 
     // CF * TR  part
@@ -190,9 +190,9 @@ namespace apfel
     const double x2      = x * x;
     const double lnx     = log(x);
     const double lnx2    = lnx * lnx;
-    const double ln1mx   = log(1-x);
+    const double ln1mx   = log(1 - x);
     const double ln1mx2  = ln1mx * ln1mx;
-    const double ln1px   = log(1+x);
+    const double ln1px   = log(1 + x);
     const double S11mx   = dilog(-x);
     const double omeL1p1 =
       CF * TR * ( ( 8 - 16 * x + 16 * x2 ) * ( 2 * lnx * ln1mx - ln1mx2 + 2 * zeta2 )
@@ -214,14 +214,14 @@ namespace apfel
   {
     const double x2      = x * x;
     const double lnx     = log(x);
-    const double ln1mx   = log(1-x);
+    const double ln1mx   = log(1 - x);
     const double omeL2p1 =
       CF * TR * ( ( 8 - 16 * x + 16 * x2 ) * ln1mx
                   - ( 4 - 8 * x + 16 * x2 ) * lnx - ( 2 - 8 * x ) );
     const double omeL2p2 =
       CA * TR * ( - ( 8 - 16 * x + 16 * x2 ) * ln1mx - ( 8 + 32 * x ) * lnx
                   - 16. / 3 / x - 4 - 32 * x + 124 * x2 / 3 );
-    const double omeL2p3 = TR * TR * ( - 16 * ( x2 + pow(1-x,2) ) / 3 );
+    const double omeL2p3 = TR * TR * ( - 16 * ( x2 + pow(1 - x,2) ) / 3 );
     return omeL2p1 + omeL2p2 + omeL2p3;
   }
 
@@ -247,7 +247,7 @@ namespace apfel
   }
   double ANS2qqH_0::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double a0    = - 8 * zeta3 / 3 + 40 * zeta2 / 9 + 73 / 18. + 224 * ln1mx / 27;
     return CF * TR * a0;
   }
@@ -271,7 +271,7 @@ namespace apfel
   }
   double ANS2qqH_L::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double omeL1 = 80 * ln1mx / 9 + 16 * zeta2 / 3 + 2. / 3;
     return - CF * TR * omeL1;
   }
@@ -293,7 +293,7 @@ namespace apfel
   }
   double ANS2qqH_L2::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double omeL2 = 8 * ln1mx / 3 + 2;
     return CF * TR * omeL2;
   }
@@ -320,7 +320,7 @@ namespace apfel
   }
   double AS2gqH_L::Regular(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double omeL1 =
       160. / 9 / x - 160. / 9 + 128 * x / 9
       + ( 32. / 3 / x - 32. / 3 + 16 * x / 3 ) * ln1mx;
@@ -349,7 +349,7 @@ namespace apfel
     const double lnx   = log(x);
     const double lnx2  = lnx * lnx;
     const double lnx3  = lnx2 * lnx;
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     // CF * TR part
     const double a01   =
       4 * ( 1 + x ) * lnx3 / 3 + ( 6 + 10 * x) * lnx2
@@ -367,7 +367,7 @@ namespace apfel
   }
   double AS2ggH_0::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double a01   = - 15.;
     const double a02   = 10 / 9. + 224 * ln1mx / 27;
     return TR * ( CF * a01 + CA * a02 );
@@ -397,7 +397,7 @@ namespace apfel
   }
   double AS2ggH_L::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double omeL1 = CF * TR * 4 + CA * TR * ( 16. / 3 + 80 * ln1mx / 9 );
     return - omeL1;
   }
@@ -425,7 +425,7 @@ namespace apfel
   }
   double AS2ggH_L2::Local(double const& x) const
   {
-    const double ln1mx = log(1-x);
+    const double ln1mx = log(1 - x);
     const double omeL2 = TR * TR * 16. / 9 + CA * TR * 8 * ln1mx / 3;
     return omeL2;
   }
@@ -442,7 +442,7 @@ namespace apfel
     const double lnx3   = lnx * lnx2;
     const double lnx4   = lnx * lnx3;
     const double lnx5   = lnx * lnx4;
-    const double ln1mx  = log(1-x);
+    const double ln1mx  = log(1 - x);
     const double ln1mx2 = ln1mx * ln1mx;
     const double ln1mx3 = ln1mx * ln1mx2;
     const double ln1mx4 = ln1mx * ln1mx3;
@@ -482,7 +482,7 @@ namespace apfel
     if (x > 0.924)
       return Regular(0.924 - eps5) * ( 1 - x );
     else
-      return _C[0] * pow(log(1-x), 5) + _C[1] * pow(log(1-x), 4) + _C[2] * x + _C[3] * pow(x, 2) + _C[4] * log(x) + _rho / x
+      return _C[0] * pow(log(1 - x), 5) + _C[1] * pow(log(1 - x), 4) + _C[2] * x + _C[3] * pow(x, 2) + _C[4] * log(x) + _rho / x
              + ( 41984. / 27. + 160 * zeta2 - 224 * zeta3 ) * log(x) / x;
   }
 
@@ -519,7 +519,7 @@ namespace apfel
     if (x > 0.4)
       return 0;
     else
-      return _C[0] * pow(log(1-x), 3) + _C[1] * pow(log(1-x), 2) +_C[3] * x + _C[4] * pow(log(x), 2) + _C[5] * log(1-x) + _C[6] + _rho * pow(log(x), 3);
+      return _C[0] * pow(log(1 - x), 3) + _C[1] * pow(log(1 - x), 2) +_C[3] * x + _C[4] * pow(log(x), 2) + _C[5] * log(1 - x) + _C[6] + _rho * pow(log(x), 3);
   }
   double ANS3qqH_0::Singular(double const& x) const
   {
@@ -543,7 +543,7 @@ namespace apfel
     const double x2     = x * x;
     const double lnx    = log(x);
     const double lnx2   = lnx * lnx;
-    const double ln1mx  = log(1-x);
+    const double ln1mx  = log(1 - x);
     const double ln1mx2 = ln1mx * ln1mx;
     const double ln1mx3 = ln1mx * ln1mx2;
     const double ln1mx4 = ln1mx * ln1mx3;
@@ -582,7 +582,7 @@ namespace apfel
   }
   double AS3ggH_0::Regular(double const& x) const
   {
-    return _C[0] * pow(log(1-x), 2) + _C[1] * log(1-x) + _C[2] * pow(x, 2) + _C[3] * log(x) + _C[4] * x + _rho * log(x) / x;
+    return _C[0] * pow(log(1 - x), 2) + _C[1] * log(1 - x) + _C[2] * pow(x, 2) + _C[3] * log(x) + _C[4] * x + _rho * log(x) / x;
   }
 
   //_________________________________________________________________________________
@@ -856,8 +856,8 @@ namespace apfel
   }
   double AS2polggH_L::Regular(double const& x) const
   {
-    const double lnx   = log(x);
-    const double lnx2  = lnx * lnx;
+    const double lnx  = log(x);
+    const double lnx2 = lnx * lnx;
     return - CA * TR * ( - 16 * ( - 14 + 19 * x ) / 9 + 16 * ( 1 + x ) * lnx / 3 )
            - CF * TR * ( - 40 * ( - 1 + x ) - 8 * ( - 5 + x ) * lnx + 8 * ( 1 + x ) * lnx2 );
   }
