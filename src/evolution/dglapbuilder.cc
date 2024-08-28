@@ -167,7 +167,6 @@ namespace apfel
       {
         const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
-        const Operator APS2Hq  = APS2Hq0  + lnk * APS2HqL  + lnk2 * APS2HqL2;
         const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
         const Operator AS2Hg   = AS2Hg0   + lnk * AS2HgL   + lnk2 * AS2HgL2;
         const Operator AS2gqH  = AS2gqH0  + lnk * AS2gqHL  + lnk2 * AS2gqHL2;
@@ -485,7 +484,6 @@ namespace apfel
       {
         const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
-        const Operator APS2Hq  = APS2Hq0  + lnk * APS2HqL  + lnk2 * APS2HqL2;
         const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
         const Operator AS2Hg   = AS2Hg0   + lnk * AS2HgL   + lnk2 * AS2HgL2;
         const Operator AS2gqH  = AS2gqH0  + lnk * AS2gqHL  + lnk2 * AS2gqHL2;
