@@ -138,7 +138,7 @@ var searchData=
   ['polarised_20evolution_20kernels_135',['Transversely polarised evolution kernels',['../group__GPDTransSF.html',1,'']]],
   ['polarised_20gluons_20onto_20longitudinally_20polarised_20partons_136',['NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons',['../group__NLOmatchLinPol.html',1,'']]],
   ['polarised_20gluons_20onto_20unpolarised_20partons_137',['NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons',['../group__NLOmatchLinUnp.html',1,'']]],
-  ['polarised_20matching_20conditions_138',['NLO longitudinally polarised matching conditions',['../group__NLOMCpol.html',1,'']]],
+  ['polarised_20matching_20conditions_138',['polarised matching conditions',['../group__NLOMCpol.html',1,'NLO longitudinally polarised matching conditions'],['../group__NNLOMCpol.html',1,'NNLO longitudinally polarised matching conditions']]],
   ['polarised_20matching_20functions_20for_20gtmds_139',['NLO longitudinally polarised matching functions for GTMDs',['../group__NLOmatchPol.html',1,'']]],
   ['polarised_20partons_140',['NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons',['../group__NLOmatchLinPol.html',1,'']]],
   ['polarised_20sidis_141',['polarised SIDIS',['../group__NLOzmSIDISpol.html',1,'NLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NNLOzmSIDISpol.html',1,'NNLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NCMasslessSIDISpol.html',1,'Zero-mass coefficient functions for longitudinally polarised SIDIS']]],

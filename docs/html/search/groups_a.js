@@ -13,7 +13,7 @@ var searchData=
   ['lo_20massive_20zero_20coefficient_20functions_10',['LO massive-zero coefficient functions',['../group__LOZero.html',1,'']]],
   ['lo_20splitting_20functions_11',['LO splitting functions',['../group__LOpolsf.html',1,'LO splitting functions'],['../group__LOtranssf.html',1,'LO splitting functions'],['../group__LOunpsf.html',1,'LO splitting functions'],['../group__LOunpsftl.html',1,'LO splitting functions']]],
   ['longitudinally_20polarised_20dis_12',['Zero-mass coefficient functions for longitudinally polarised DIS',['../group__NCMasslesspol.html',1,'']]],
-  ['longitudinally_20polarised_20matching_20conditions_13',['NLO longitudinally polarised matching conditions',['../group__NLOMCpol.html',1,'']]],
+  ['longitudinally_20polarised_20matching_20conditions_13',['longitudinally polarised matching conditions',['../group__NLOMCpol.html',1,'NLO longitudinally polarised matching conditions'],['../group__NNLOMCpol.html',1,'NNLO longitudinally polarised matching conditions']]],
   ['longitudinally_20polarised_20matching_20functions_20for_20gtmds_14',['NLO longitudinally polarised matching functions for GTMDs',['../group__NLOmatchPol.html',1,'']]],
   ['longitudinally_20polarised_20partons_15',['NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons',['../group__NLOmatchLinPol.html',1,'']]],
   ['longitudinally_20polarised_20sidis_16',['longitudinally polarised SIDIS',['../group__NLOzmSIDISpol.html',1,'NLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NNLOzmSIDISpol.html',1,'NNLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NCMasslessSIDISpol.html',1,'Zero-mass coefficient functions for longitudinally polarised SIDIS']]],

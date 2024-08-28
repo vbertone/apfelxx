@@ -52,7 +52,7 @@ var searchData=
   ['_5fddsubgrid_49',['_dDSubGrid',['../classapfel_1_1DoubleDistribution.html#a980a97743f776beeba31f92a85edc0f6',1,'apfel::DoubleDistribution']]],
   ['_5fdel_50',['_Del',['../group__CCMassive.html#gacfc54c3d529d7801dc55dd552243008a',1,'apfel::Cm11ns::_Del'],['../group__CCMassive.html#gaa32af84d7569d25b9fa3c650f162ac03',1,'apfel::Cm21ns::_Del'],['../group__CCMassive.html#gac254122134b404aaf5d0bf1a6138fa17',1,'apfel::Cm31ns::_Del']]],
   ['_5fdel2_51',['_Del2',['../group__CCMassive.html#ga249b6a8e86ce2b75ed48c96120dea94d',1,'apfel::Cm11ns::_Del2'],['../group__CCMassive.html#ga2002b3d0307fafb5e22c477be6ed3612',1,'apfel::Cm21ns::_Del2'],['../group__CCMassive.html#gafc5e9b8c1cc137805feef68c58601e1f',1,'apfel::Cm31ns::_Del2']]],
-  ['_5fdexpr_52',['_dexpr',['../classapfel_1_1DoubleOperator.html#a87c850ebb4778154c65e5b46bfed37f5',1,'apfel::DoubleOperator']]],
+  ['_5fdexprname_52',['_dexprName',['../classapfel_1_1DoubleOperator.html#aa90664c8227b9826eba46a775a380b5c',1,'apfel::DoubleOperator']]],
   ['_5fdglapobj_53',['_DglapObj',['../classapfel_1_1InitialiseEvolution.html#ab62e99d9183dfb26361bd197cf2f6d2c',1,'apfel::InitialiseEvolution']]],
   ['_5fdistributionjointgrid_54',['_distributionJointGrid',['../classapfel_1_1Interpolator.html#a9054c97a66105a3af624834ea49ab3d5',1,'apfel::Interpolator']]],
   ['_5fdistributionsubgrid_55',['_distributionSubGrid',['../classapfel_1_1Interpolator.html#a08d213653646c8598d07aae2ae6afcff',1,'apfel::Interpolator']]],
