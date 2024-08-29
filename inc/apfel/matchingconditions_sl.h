@@ -447,8 +447,10 @@ namespace apfel
   class APS2polHq_0: public Expression
   {
   public:
-    APS2polHq_0();
+    APS2polHq_0(int const& nf);
     double Regular(double const& x) const;
+  private:
+    int const _nf;
   };
 
   /**

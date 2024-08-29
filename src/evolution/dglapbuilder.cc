@@ -462,7 +462,6 @@ namespace apfel
     // ===============================================================
     // NNLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNNLO;
-    const Operator APS2Hq0  {g, APS2polHq_0{},   IntEps};
     const Operator APS2HqL  {g, APS2polHq_L{},   IntEps};
     const Operator APS2HqL2 {g, APS2polHq_L2{},  IntEps};
     const Operator ANS2qqH0 {g, ANS2polqqH_0{},  IntEps};
@@ -477,11 +476,12 @@ namespace apfel
     const Operator AS2ggH0  {g, AS2polggH_0{},   IntEps};
     const Operator AS2ggHL  {g, AS2polggH_L{},   IntEps};
     const Operator AS2ggHL2 {g, AS2polggH_L2{},  IntEps};
-    const Operator AS2qqH0  = ANS2qqH0  + APS2Hq0;
     const Operator AS2qqHL  = ANS2qqHL  + APS2HqL;
     const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator APS2Hq0{g, APS2polHq_0{nf},   IntEps};
+        const Operator AS2qqH0 = ANS2qqH0  + APS2Hq0;
         const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
         const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;

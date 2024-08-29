@@ -646,16 +646,26 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  APS2polHq_0::APS2polHq_0():
-    Expression()
+  APS2polHq_0::APS2polHq_0(int const& nf):
+    Expression(),
+    _nf(nf)
   {
   }
   double APS2polHq_0::Regular(double const& x) const
   {
-    const double lnx = log(x);
-    return 2. / 3 * CF * TR * ( 84 * ( - 1 + x ) + 48 * ( 1 + x ) * zeta3
-                                + lnx * ( 18 - 102 * x + 60 * ( - 1 + x ) * log(1 - x) + lnx * ( 9 + 15 * x - 2 * ( 1 + x ) * lnx ) )
-                                + 12 * ( 5 *( - 1 + x ) + 2 * ( 1 + x ) * lnx ) * dilog(x) - 48 * ( 1 + x ) * trilog(x) );
+    // Eq. (A.4) of https://arxiv.org/pdf/hep-ph/9608342
+    const double S121mx = wgplg(1, 2, 1 - x);
+    const double Li21mx = dilog(1 - x);
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double lnx3   = lnx * lnx2;
+    return CF * TR * ( ( 1 + x ) * ( 32 * S121mx + 16 * lnx * Li21mx - 24 * zeta2 * lnx - 4 * lnx3 / 3 )
+                       + 20 * ( 1 - x ) * ( 2 * Li21mx - 3 * zeta2 ) - ( 2 - 6 * x ) * lnx2
+                       - ( 12 + 60 * x ) * lnx - 72 * ( 1 - x ) )
+           // Last term in Eq. (138) of https://arxiv.org/pdf/2211.15337
+           + 4 * CF * TR * zeta2 * ( 5 * ( 1 - x ) + 2 * ( 1 + x ) * lnx )
+           // Second term in the r.h.s. of Eq. (141) of https://arxiv.org/pdf/2211.15337
+           + 4 * CF * TR * _nf * ( ( 2 + x ) * lnx2 + 2 * ( 3 - x ) * lnx + 4 * ( 1 - x ) );
   }
 
   //_________________________________________________________________________________
@@ -686,29 +696,35 @@ namespace apfel
   }
   double AS2polHg_0::Regular(double const& x) const
   {
+    // Eq. (A.2) of https://arxiv.org/pdf/hep-ph/9608342
     const double x2     = x * x;
-    const double lnx    = log(x);
-    const double lnx2   = lnx * lnx;
     const double ln1mx  = log(1 - x);
     const double ln1mx2 = ln1mx * ln1mx;
     const double ln1mx3 = ln1mx * ln1mx2;
     const double ln1px  = log(1 + x);
     const double ln1px2 = ln1px * ln1px;
-    const double atan   = ( log(1 - x) - lnx ) / 2;
-    const double S12mx  = wgplg(1,2,-x);
-    return TR / 3 * ( 6 * ( CF * ( - 11 - 36 * zeta2 + x * ( 23 + 4 * ( 2 + x ) * zeta2 - 16 * zeta3 ) + 8 * zeta3 )
-                            + 2 * CA * ( - 51 + 4 * zeta2 + 12 * zeta3 + x * ( 53 - ( 4 + x ) * zeta2 + 20 * zeta3 ) ) ) - 4 * ( CA - CF ) * ( - 1 + 2 * x ) * ln1mx3
-                      + 6 * ln1mx2 * ( ( - 1 + x ) * ( - 2 * CF * ( 3 + x ) + CA * ( 5 + x ) ) - 2 * ( 2 * CA - CF ) * ( - 1 + 2 * x ) * lnx )
-                      + lnx * ( - 6 * ( CF * ( 8 + 25 * x ) + CA * ( 28 + 74 * x ) ) - 3 * ( CA * ( 6 + 4 * x ) + CF * ( 5 - 4 * x * ( 2 + x ) ) ) * lnx
-                                - 2 * ( CF - 2 * CF * x + CA * ( 2 + 4 * x ) ) * lnx2 )
-                      + 4 * ln1mx * ( CF * ( - 48 + Pi2 * ( 1 - 2 * x ) + 45 * x ) + CA * ( 3 + Pi2 * ( - 1 + 2 * x ) )
-                                      + 3 * lnx * ( CA * ( - 1 + x ) * ( 25 + x ) + CF * ( 11 - 2 * x * ( 4 + x ) ) + ( CF - 2 * CF * x ) * lnx ) )
-                      + 12 * CA * ( - 2 * ( zeta2 + 2 * x * zeta2 ) + lnx * ( 4 + 4 * x + lnx + 2 * x * lnx ) ) * ln1px - 24 * CA * ( 1 + 2 * x ) * lnx * ln1px2
-                      + 6 * ( 2 * ( CF * ( 29 - 4 * x * ( 3 + x ) ) + CA * ( - 29 + 2 * x * ( 12 + x ) ) - 8 * CA * x * atan + 2 * ( CA + CF * ( - 1 + 2 * x ) ) * ln1mx
-                                    + 2 * ( 3 * CA + 2 * CF - 4 * CF * x ) * lnx + 4 * CA * ( 1 + 2 * x ) * ln1px ) * dilog(x)
-                              + 2 * CA * ( 2 + 2 * x + lnx + 2 * x * lnx - 2 * ( 1 + 2 * x ) * ln1px ) * dilog(x2)
-                              - 4 * ( CA - CF ) * ( - 1 + 2 * x ) * trilog(1 - x) - 4 * ( CF * ( 3 - 6 * x ) + CA * ( 7 + 6 * x ) ) * trilog(x)
-                              - ( CA + 2 * CA * x ) * trilog(x2) ) - 48 * ( CA + 2 * CA * x ) * S12mx );
+    const double Li21mx = dilog(1 - x);
+    const double Li2mx  = dilog(- x);
+    const double Li31mx = trilog(1 - x);
+    const double Li3mx  = trilog(- x);
+    const double S121mx = wgplg(1, 2, 1 - x);
+    const double S12mx  = wgplg(1, 2, - x);
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double lnx3   = lnx * lnx2;
+    return - ( CF * TR * ( ( - 1 + 2 * x ) * ( 8 * zeta3 + 8 * zeta2 * ln1mx + 4 * ln1mx3 / 3 - 8 * ln1mx * Li21mx + 4 * zeta2 * lnx - 4 * lnx * ln1mx2
+                                               + 2 * lnx3 / 3 - 8 * lnx * Li21mx + 8 * Li31mx - 24 * S121mx )
+                           - ( 116 - 48 * x - 16 * x2 ) * Li21mx + ( 50 - 32 * x - 8 * x2 ) * zeta2 - ( 72 - 16 * x - 8 * x2 ) * lnx * ln1mx
+                           + ( 12 - 8 * x - 4 * x2 ) * ln1mx2 - ( 5 - 8 * x - 4 * x2 ) * lnx2 - ( 64 - 60 * x ) * ln1mx - ( 16 + 50 * x ) * lnx - 22 + 46 * x )
+               + CA * TR * ( ( - 1 + 2 * x ) * ( - 8 * zeta2 * ln1mx - 4 * ln1mx3 / 3 + 8 * ln1mx * Li21mx - 8 * Li31mx )
+                             + ( 1 + 2 * x) * ( - 4 * lnx3 / 3 - 8 * zeta2 * ln1px - 16 * ln1px * Li2mx - 8 * lnx * ln1px2 + 4 * lnx2 * ln1px + 8 * lnx * Li2mx
+                                                - 8 * Li3mx - 16 * S12mx )
+                             + 16 * ( 1 + x ) * ( 4 * S121mx + 2 * lnx * Li21mx - 3 * zeta2 * lnx + Li2mx + lnx * ln1px ) - 16 * ( 1 - x ) * zeta3
+                             + ( 100 - 112 * x - 8 * x2 ) * Li21mx - ( 132 - 144 * x - 4 * x2 ) * zeta2 - 4 * x * ( 4 +  x ) * lnx * ln1mx
+                             - ( 10 - 8 * x - 2 * x2 ) * ln1mx2 - ( 6 + 2 * x2 ) * lnx2 + 4 * ln1mx - ( 56 + 148 * x ) * lnx - 204 + 212 * x ) )
+           // Last term in the second line of Eq. (111) of https://arxiv.org/pdf/2211.15337
+           + 2 * CF * TR * ( - 3 - 2 * ( 1 - 2 * x ) * lnx + 4 * ( 1 - 2 * x ) * ln1mx )
+           + 8 * CA * TR * ( 6 * ( 1 - x ) + 2 * ( 1 + x ) * lnx - ( 1 - 2 * x ) * ln1mx );
   }
 
   //_________________________________________________________________________________
