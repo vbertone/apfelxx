@@ -18,7 +18,7 @@ namespace apfel
     const double dnf     = nu - nd;
     const double dnfrel  = dnf / nf;
     const double eSigma2 = NC * ( nu * eu2 + nd * ed2 );
-    const double dSigma2 = NC * ( nu * eu2 - nd * ed2 );;
+    const double dSigma2 = NC * ( nu * eu2 - nd * ed2 );
     const double etap    = ( eu2 + ed2 ) / 2;
     const double etam    = ( eu2 - ed2 ) / 2;
 
@@ -28,9 +28,10 @@ namespace apfel
 
     // Singlet
     _rules[GLUON]  = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1},
-      {PGGQED, GLUON, eSigma2}, {PGGMQED, GAMMA, eSigma2}, {PGQQED, SIGMA, etap}, {PGQQED, DSIGMA, etap}
+      {PGGQED, GLUON, eSigma2}, {PGGMQED, GAMMA, eSigma2}, {PGQQED, SIGMA, etap}, {PGQQED, DSIGMA, etam}
     };
-    _rules[GAMMA]  = { {PGMGQED, GLUON, eSigma2}, {PGMGMQED, GAMMA, eSigma2}, {PGMQQED, SIGMA, etap}, {PGMQQED, DSIGMA, etap},
+    _rules[GAMMA]  = {
+      {PGMGQED, GLUON, eSigma2}, {PGMGMQED, GAMMA, eSigma2}, {PGMQQED, SIGMA, etap}, {PGMQQED, DSIGMA, etam},
       {PGMLQED, SIGMAL, 1}
     };
     _rules[SIGMA]  = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1},
@@ -45,7 +46,9 @@ namespace apfel
       {PQQQED, DSIGMA, etam * dSigma2 / nf}, {PNSPQED, DSIGMA, etap - etam * dSigma2 / nf},
       {PQLQED, SIGMAL, 2. * dSigma2}
     };
-    _rules[SIGMAL] = { {PLGMQED, GAMMA, 2. * nl}, {PQLQED, SIGMA,  2. * nl * etap}, {PQLQED, DSIGMA, 2. * nl * etam}, {PLLQED, SIGMAL, 1} };
+    _rules[SIGMAL] = {
+      {PLGMQED, GAMMA, 2. * nl}, {PQLQED, SIGMA,  2. * nl * etap}, {PQLQED, DSIGMA, 2. * nl * etam}, {PLLQED, SIGMAL, 1}
+    };
 
     // Coupled total valences
     _rules[VALENCE]  = { {PNSV, VALENCE, 1},
@@ -75,8 +78,8 @@ namespace apfel
         // Down-type
         if (nd > i + 1)
           {
-            _rules[12 + 2 * i]     = { {PNSP, 12 + 2 * i,     1}, {PNSPQED, 12 + 2 * i,     eu2} };
-            _rules[12 + 2 * i + 1] = { {PNSM, 12 + 2 * i + 1, 1}, {PNSMQED, 12 + 2 * i + 1, eu2} };
+            _rules[12 + 2 * i]     = { {PNSP, 12 + 2 * i,     1}, {PNSPQED, 12 + 2 * i,     ed2} };
+            _rules[12 + 2 * i + 1] = { {PNSM, 12 + 2 * i + 1, 1}, {PNSMQED, 12 + 2 * i + 1, ed2} };
           }
         else
           {
