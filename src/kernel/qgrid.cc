@@ -260,7 +260,7 @@ namespace apfel
 
     // Return if "Q" is outside the grid range (no sum will be
     // performed).
-    if (Q < _Qg.front() - eps12 || Q > _Qg.back() + eps12)
+    if (Q < _Qg.front() || Q > _Qg.back())
       return bounds;
 
     // If Q falls in the tiny gap at the thresholds assume the node
