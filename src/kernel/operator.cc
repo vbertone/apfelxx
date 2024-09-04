@@ -19,7 +19,7 @@ namespace apfel
     _eps(eps),
     _gpd(gpd)
   {
-    if (gpd)
+    if (_gpd)
       BuildOperatorGPD();
     else
       BuildOperatorDGLAP();

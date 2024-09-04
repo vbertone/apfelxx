@@ -108,6 +108,16 @@ configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/version.h.in" "${PROJECT_SOURCE_
 set(prefix ${CMAKE_INSTALL_PREFIX})
 set(includedir "${prefix}/include")
 set(libdir "${prefix}/lib")
+set(cflags "-I${prefix}/include")
+set(ldflags "-L${prefix}/lib -lapfelxx")
+if (LHAPDF_CONFIG)
+  set(cflags "${cflags} ${LHAPDF_CXX_FLAGS}")
+  set(ldflags "${ldflags} ${LHAPDF_LIBRARIES}")
+endif (LHAPDF_CONFIG)
+if (YAML_CPP_FOUND)
+  set(cflags "${cflags} ${YAML_CPP_CFLAGS}")
+  set(ldflags "${ldflags} -L${YAML_CPP_LIBRARY_DIRS} -l${YAML_CPP_LIBRARIES}")
+endif (YAML_CPP_FOUND)
 configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_BINARY_DIR}/bin/apfelxx-config")
 
 # Configure config.h header file

@@ -5,23 +5,27 @@ prefix=@prefix@
 
 if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
     echo
-    echo "apfelxx-config: configuration tool for APFEL++: A PDF Evolution Library"
-    echo "                webpages: http://apfel.hepforge.org"
-    echo "                          https://github.com/vbertone/apfelxx"
+    echo "Configuration tool for APFEL++: A PDF Evolution Library"
+    echo "Webpage: https://github.com/vbertone/apfelxx"
     echo
-    echo "Usage: apfel-config [[--help|-h] | [--prefix] | [--ldflags]]"
+    echo "Usage: apfel-config [Options]"
     echo "Options:"
-    echo "  --help | -h    : show this help message"
-    echo "  --version      : show the code version"
-    echo "  --prefix       : show the installation prefix"
-    echo "  --incdir       : show the path to the APFEL header directory (for C++ interface)"
-    echo "  --libdir       : show the path to the APFEL library directory"
-    echo "  --cppflags     : get compiler flags for use with the C preprocessor stage of C++ compilation"
-    echo "  --cxxflags     : get compiler flags for use with the C preprocessor stage of C++ compilation"
-    echo "  --ldflags      : get compiler flags for use with the linker stage of any compilation"
+    echo "  --help | -h : show this help message"
+    echo "  --version   : code version"
+    echo "  --prefix    : installation prefix"
+    echo "  --incdir    : path to the APFEL++ header directory"
+    echo "  --libdir    : path to the APFEL++ library directory"
+    echo "  --cppflags  : compiler flags for use with C++ compilation"
+    echo "  --cxxflags  : same as --cppflags"
+    echo "  --cflags    : same as --cppflags"
+    echo "  --ldflags   : compiler flags for use with the linker stage of compilation"
+    echo "  --libs      : same as --ldflags"
 fi
 
 OUT=""
+
+tmp=$( echo "$*" | egrep -- '--\<version\>')
+test -n "$tmp" && OUT="$OUT @apfelxx_VERSION@"
 
 tmp=$( echo "$*" | egrep -- '--\<prefix\>')
 test -n "$tmp" && OUT="$OUT @prefix@"
@@ -29,20 +33,22 @@ test -n "$tmp" && OUT="$OUT @prefix@"
 tmp=$( echo "$*" | egrep -- '--\<incdir\>')
 test -n "$tmp" && OUT="$OUT @includedir@"
 
-tmp=$( echo "$*" | egrep -- '--\<cppflags\>')
-test -n "$tmp" && OUT="$OUT -I@includedir@"
-
-tmp=$( echo "$*" | egrep -- '--\<cxxflags\>')
-test -n "$tmp" && OUT="$OUT -I@includedir@"
-
 tmp=$( echo "$*" | egrep -- '--\<libdir\>')
 test -n "$tmp" && OUT="$OUT @libdir@"
 
-tmp=$( echo "$*" | egrep -- '--\<ldflags\>')
-test -n "$tmp" && OUT="$OUT -L@libdir@ -lapfelxx"
+tmp=$( echo "$*" | egrep -- '--\<cppflags\>')
+test -n "$tmp" && OUT="$OUT @cflags@"
 
-## Version
-tmp=$( echo "$*" | egrep -- '--\<version\>')
-test -n "$tmp" && OUT="$OUT @apfelxx_VERSION@"
+tmp=$( echo "$*" | egrep -- '--\<cxxflags\>')
+test -n "$tmp" && OUT="$OUT @cflags@"
+
+tmp=$( echo "$*" | egrep -- '--\<cflags\>')
+test -n "$tmp" && OUT="$OUT @cflags@"
+
+tmp=$( echo "$*" | egrep -- '--\<ldflags\>')
+test -n "$tmp" && OUT="$OUT @ldflags@"
+
+tmp=$( echo "$*" | egrep -- '--\<libs\>')
+test -n "$tmp" && OUT="$OUT @ldflags@"
 
 echo $OUT
