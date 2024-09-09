@@ -30,7 +30,8 @@ namespace apfel
     _rules[GLUON]  = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1},
       {PGGQED, GLUON, eSigma2}, {PGGMQED, GAMMA, eSigma2}, {PGQQED, SIGMA, etap}, {PGQQED, DSIGMA, etam}
     };
-    _rules[GAMMA]  = {
+    _rules[GAMMA]  =
+    {
       {PGMGQED, GLUON, eSigma2}, {PGMGMQED, GAMMA, eSigma2}, {PGMQQED, SIGMA, etap}, {PGMQQED, DSIGMA, etam},
       {PGMLQED, SIGMAL, 1}
     };
@@ -46,7 +47,8 @@ namespace apfel
       {PQQQED, DSIGMA, etam * dSigma2 / nf}, {PNSPQED, DSIGMA, etap - etam * dSigma2 / nf},
       {PQLQED, SIGMAL, 2. * dSigma2}
     };
-    _rules[SIGMAL] = {
+    _rules[SIGMAL] =
+    {
       {PLGMQED, GAMMA, 2. * nl}, {PQLQED, SIGMA,  2. * nl * etap}, {PQLQED, DSIGMA, 2. * nl * etam}, {PLLQED, SIGMAL, 1}
     };
 
