@@ -295,9 +295,21 @@ PYBIND11_MODULE(apfelpy, m)
     {
       PYBIND11_OVERRIDE(double, Expression, Local, x);
     };
-    double LocalPV(double const& x) const override
+    double LocalPP(double const& x) const override
     {
-      PYBIND11_OVERRIDE(double, Expression, LocalPV, x);
+      PYBIND11_OVERRIDE(double, Expression, LocalPP, x);
+    };
+    double SingularPV(double const& x) const override
+    {
+      PYBIND11_OVERRIDE(double, Expression, SingularPV, x);
+    };
+    double LocalPV() const override
+    {
+      PYBIND11_OVERRIDE(double, Expression, LocalPV);
+    };
+    double LocalLogPV(double const& x) const override
+    {
+      PYBIND11_OVERRIDE(double, Expression, LocalLogPV, x);
     };
   };
   py::class_<apfel::Expression, PyExpression>(m, "Expression")
@@ -305,7 +317,10 @@ PYBIND11_MODULE(apfelpy, m)
   .def("Regular", &apfel::Expression::Regular)
   .def("Singular", &apfel::Expression::Singular)
   .def("Local", &apfel::Expression::Local)
+  .def("LocalPP", &apfel::Expression::LocalPP)
+  .def("SingularPV", &apfel::Expression::SingularPV)
   .def("LocalPV", &apfel::Expression::LocalPV)
+  .def("LocalLogPV", &apfel::Expression::LocalLogPV)
   .def("SetExternalVariable", &apfel::Expression::SetExternalVariable, "extvar"_a)
   .def("eta", &apfel::Expression::eta);
 

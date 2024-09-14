@@ -20,16 +20,16 @@
 namespace apfel
 {
   //_____________________________________________________________________________
-  std::map<int, GtmdObjects> InitializeGtmdObjects(Grid                const& g,
-                                                   std::vector<double> const& Thresholds,
-                                                   double              const& xi,
-                                                   double              const& IntEps)
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEven(Grid                const& g,
+                                                       std::vector<double> const& Thresholds,
+                                                       double              const& xi,
+                                                       double              const& IntEps)
   {
     // Initialise GPD splitting functions on the grid required to
     // compute the log terms of the matching functions.
     const std::map<int, DglapObjects> DglapObj = InitializeGpdObjects(g, Thresholds, xi, false, IntEps);
 
-    report("Initializing GTMD objects for matching and evolution... ");
+    report("Initializing parity-even unpolarised GTMD objects for matching and evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -62,11 +62,11 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators
     std::map<int, std::map<int, Operator>> C10;
-    const Operator O1ns{g, Cgtmd1ns{xi}, IntEps, true};
-    const Operator O1qq{g, Cgtmd1qq{xi}, IntEps, true};
-    const Operator O1qg{g, Cgtmd1qg{xi}, IntEps, true};
-    const Operator O1gq{g, Cgtmd1gq{xi}, IntEps, true};
-    const Operator O1gg{g, Cgtmd1gg{xi}, IntEps, true};
+    const Operator O1ns{g, Cgtmd1nse{xi}, IntEps, true};
+    const Operator O1qq{g, Cgtmd1qqe{xi}, IntEps, true};
+    const Operator O1qg{g, Cgtmd1qge{xi}, IntEps, true};
+    const Operator O1gq{g, Cgtmd1gqe{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1gge{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -158,6 +158,106 @@ namespace apfel
         const EvolutionBasisQCD evb{nf};
         obj.MatchingFunctions.insert({0, {{evb, C00.at(nf)}}});
         obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, C11.at(nf)}, {evb, C12.at(nf)}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOdd(Grid                const& g,
+                                                      std::vector<double> const& Thresholds,
+                                                      double              const& xi,
+                                                      double              const& IntEps)
+  {
+    report("Initializing parity-odd unpolarised GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1qg{g, Cgtmd1qgo{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggo{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Zero});
+        OM.insert({EvolutionBasisQCD::PNSM, Zero});
+        OM.insert({EvolutionBasisQCD::PNSV, Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  nf * O1qg});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
 
         // Insert full object
         GtmdObj.insert({nf, obj});
@@ -631,5 +731,103 @@ namespace apfel
     };
 
     return EvolFactor;
+  }
+
+  //_____________________________________________________________________________
+  std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                         std::function<double(double const&)> const& Alphas,
+                                                                         int                                  const& PerturbativeOrder,
+                                                                         double                               const& Ci,
+                                                                         double                               const& IntEps)
+  {
+    // Retrieve thresholds from "GtmdObj"
+    std::vector<double> thrs;
+    for(auto const& obj : GtmdObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) thrs.size() < nf)
+          thrs.resize(nf);
+        thrs[nf-1] = thr;
+      }
+
+    // Define the log(Ci) to assess scale variations
+    const double Lmu = log(Ci);
+
+    // Create functions needed for the TMD evolution
+    std::function<double(double const&)> gammaK;
+    std::function<double(double const&)> K;
+    // LL
+    if (PerturbativeOrder == LL)
+      {
+        gammaK  = [=] (double const& mu) -> double
+        {
+          const double coup = Alphas(mu) / FourPi;
+          return coup * GtmdObj.at(NF(mu, thrs)).GammaK.at(0);
+        };
+        K = [=] (double const&) -> double{ return 0; };
+      }
+    // NLL
+    else if (PerturbativeOrder == NLL || PerturbativeOrder == NLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = GtmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * gc.at(1) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = GtmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          return coup * lo;
+        };
+      }
+    // NNLL
+    else if (PerturbativeOrder == NNLL || PerturbativeOrder == NNLLp)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = GtmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * gc.at(2) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = GtmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const double coup = Alphas(mu) / FourPi;
+          const double lo   = d0[0] + Lmu * d0[1];
+          const double nlo  = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          return coup * ( lo + coup * nlo );
+        };
+      }
+    else
+      throw std::runtime_error(error("CollinsSoperKernel", "Perturbative order not available."));
+
+    // Define the integrands
+    const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};
+
+    // Construct function that returns the perturbative evolution
+    // kernel.
+    const auto CSKernel = [=] (double const& b, double const& muf) -> double
+    {
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Compute argument of the exponent of the evolution factors
+      const double IntI2 = I2.integrate(mu0, muf, thrs, IntEps);
+
+      // Compute the evolution factors
+      const double Klz = CF * ( K(mu0) - IntI2 );
+
+      // Return the evolution factor
+      return Klz;
+    };
+
+    return CSKernel;
   }
 }

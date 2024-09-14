@@ -189,7 +189,8 @@ namespace apfel
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], _eps);
               }
             // Add PV local part from the y = 1 / kappa singularity
-            _Operator[0](beta, alpha) += wspv * ( _expr.LocalPV(xg[beta] / xg[alpha + 1]) - _expr.LocalPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
+            _Operator[0](beta, alpha) += wspv * ( _expr.LocalPV()
+                                                  + _expr.LocalLogPV(xg[beta] / xg[alpha + 1]) - _expr.LocalLogPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
           }
         // Add the local parts: that from standard +-prescripted terms
         // ("Local") and that deriving from principal-valued integrals

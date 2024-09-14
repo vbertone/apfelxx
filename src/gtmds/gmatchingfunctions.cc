@@ -10,45 +10,45 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  Cgtmd1ns::Cgtmd1ns(double const& xi):
+  Cgtmd1nse::Cgtmd1nse(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1ns::Regular(double const& y) const
+  double Cgtmd1nse::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? 2 * CF * ( 1 - y ) / ( 1 - ky2 ) : 0)
            + (kappa > 1 ? 2 * CF * ( 1 - kappa ) * y / ( 1 - ky2 ) : 0);
   }
-  double Cgtmd1ns::Local(double const&) const
+  double Cgtmd1nse::Local(double const&) const
   {
     return - CF * zeta2;
   }
 
   //_________________________________________________________________________________
-  Cgtmd1qq::Cgtmd1qq(double const& xi):
+  Cgtmd1qqe::Cgtmd1qqe(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1qq::Regular(double const& y) const
+  double Cgtmd1qqe::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? 2 * CF * ( 1 - y ) / ( 1 - ky2 ) : 0)
            + (kappa > 1 ? 2 * CF * ( 1 - kappa ) / kappa / ( 1 - ky2 ) : 0);
   }
-  double Cgtmd1qq::Local(double const&) const
+  double Cgtmd1qqe::Local(double const&) const
   {
     return - CF * zeta2;
   }
 
   //_________________________________________________________________________________
-  Cgtmd1qg::Cgtmd1qg(double const& xi):
+  Cgtmd1qge::Cgtmd1qge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1qg::Regular(double const& y) const
+  double Cgtmd1qge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -58,7 +58,7 @@ namespace apfel
     else
       return (y <= 1 ? - 2 * TR * ( 1 - ky ) / kappa / pow(1 + ky, 2) : 8 * TR * ( 1 - kappa ) * pow(y, 2) / pow(1 - ky2, 2));
   }
-  double Cgtmd1qg::SingularPV(double const& y) const
+  double Cgtmd1qge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -66,7 +66,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1qg::LocalPV(double const& y) const
+  double Cgtmd1qge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
@@ -76,11 +76,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1gq::Cgtmd1gq(double const& xi):
+  Cgtmd1gqe::Cgtmd1gqe(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1gq::Regular(double const& y) const
+  double Cgtmd1gqe::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
@@ -89,11 +89,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1gg::Cgtmd1gg(double const& xi):
+  Cgtmd1gge::Cgtmd1gge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1gg::Regular(double const& y) const
+  double Cgtmd1gge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -101,13 +101,13 @@ namespace apfel
     if (kappa < 1)
       return (y <= 1 ? - 8 * CA * pow(kappa, 2) * y * ( 1 - y ) / pow(1 - ky2, 2) : 0);
     else
-      return (y <= 1 ? - CA * ( 1 + kappa * ( y + kappa * ( - 3 + ky ) ) ) / kappa / pow(1 + ky, 2) : - 2 * CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 3 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 2));
+      return (y <= 1 ? - CA * ( 1 - 3 * pow(kappa, 2) + ( 1 + pow(kappa, 2) ) * ky ) / kappa / pow(1 + ky, 2) : - 2 * CA * ( 1 - kappa ) * ( 1 + kappa - ( 1 - 3 * kappa ) * ky2 ) / kappa / pow(1 - ky2, 2));
   }
-  double Cgtmd1gg::Local(double const&) const
+  double Cgtmd1gge::Local(double const&) const
   {
     return - CA * zeta2;
   }
-  double Cgtmd1gg::SingularPV(double const& y) const
+  double Cgtmd1gge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -115,7 +115,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1gg::LocalPV(double const& y) const
+  double Cgtmd1gge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
@@ -125,45 +125,73 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1polns::Cgtmd1polns(double const& xi):
+  Cgtmd1qgo::Cgtmd1qgo(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1polns::Regular(double const& y) const
+  double Cgtmd1qgo::LocalPV() const
+  {
+    const double kappa = 1 / _eta / _extvar;
+    if (kappa > 1)
+      return 2 * TR / pow(kappa, 2) * M_PI;
+    else
+      return 0;
+  }
+
+  //_________________________________________________________________________________
+  Cgtmd1ggo::Cgtmd1ggo(double const& xi):
+    Expression(1/xi)
+  {
+  }
+  double Cgtmd1ggo::LocalPV() const
+  {
+    const double kappa = 1 / _eta / _extvar;
+    if (kappa > 1)
+      return - CA * ( 1 + pow(kappa, 2) ) / pow(kappa, 2) * M_PI;
+    else
+      return 0;
+  }
+
+  //_________________________________________________________________________________
+  Cgtmd1polnse::Cgtmd1polnse(double const& xi):
+    Expression(1/xi)
+  {
+  }
+  double Cgtmd1polnse::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? 2 * CF * ( 1 - y ) / ( 1 - ky2 ) : 0)
            + (kappa > 1 ? 2 * CF * ( 1 - kappa ) / kappa / ( 1 - ky2 ) : 0);
   }
-  double Cgtmd1polns::Local(double const&) const
+  double Cgtmd1polnse::Local(double const&) const
   {
     return - CF * zeta2;
   }
 
   //_________________________________________________________________________________
-  Cgtmd1polqq::Cgtmd1polqq(double const& xi):
+  Cgtmd1polqqe::Cgtmd1polqqe(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1polqq::Regular(double const& y) const
+  double Cgtmd1polqqe::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
     return (y <= 1 ? 2 * CF * ( 1 - y ) / ( 1 - ky2 ) : 0)
            + (kappa > 1 ? 2 * CF * ( 1 - kappa ) * y / ( 1 - ky2 ) : 0);
   }
-  double Cgtmd1polqq::Local(double const&) const
+  double Cgtmd1polqqe::Local(double const&) const
   {
     return - CF * zeta2;
   }
 
   //_________________________________________________________________________________
-  Cgtmd1polqg::Cgtmd1polqg(double const& xi):
+  Cgtmd1polqge::Cgtmd1polqge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1polqg::Regular(double const& y) const
+  double Cgtmd1polqge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -173,7 +201,7 @@ namespace apfel
     else
       return (y <= 1 ? 2 * TR * ( 3 + ky ) / pow(1 + ky, 2) : 8 * TR * ( 1 - kappa ) * y / pow(1 - ky2, 2));
   }
-  double Cgtmd1polqg::SingularPV(double const& y) const
+  double Cgtmd1polqge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -181,7 +209,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1polqg::LocalPV(double const& y) const
+  double Cgtmd1polqge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
@@ -191,11 +219,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1polgq::Cgtmd1polgq(double const& xi):
+  Cgtmd1polgqe::Cgtmd1polgqe(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1polgq::Regular(double const& y) const
+  double Cgtmd1polgqe::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
@@ -204,11 +232,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1polgg::Cgtmd1polgg(double const& xi):
+  Cgtmd1polgge::Cgtmd1polgge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1polgg::Regular(double const& y) const
+  double Cgtmd1polgge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -218,11 +246,11 @@ namespace apfel
     else
       return (y <= 1 ? - 2 * CA * ( 3 + ky ) / pow(1 + ky, 2) : - 8 * CA * ( 1 - kappa ) * y / pow(1 - ky2, 2));
   }
-  double Cgtmd1polgg::Local(double const&) const
+  double Cgtmd1polgge::Local(double const&) const
   {
     return - CA * zeta2;
   }
-  double Cgtmd1polgg::SingularPV(double const& y) const
+  double Cgtmd1polgge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -230,7 +258,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1polgg::LocalPV(double const& y) const
+  double Cgtmd1polgge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
@@ -240,11 +268,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1lingg::Cgtmd1lingg(double const& xi):
+  Cgtmd1lingge::Cgtmd1lingge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1lingg::Regular(double const& y) const
+  double Cgtmd1lingge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -254,11 +282,11 @@ namespace apfel
     else
       return (y <= 1 ? 2 * CA * kappa * ( 1 - ky ) / pow(1 + ky, 2) : - 8 * CA * ky2 * ( 1 - kappa ) / pow(1 - ky2, 2));
   }
-  double Cgtmd1lingg::Local(double const&) const
+  double Cgtmd1lingge::Local(double const&) const
   {
     return - CA * zeta2;
   }
-  double Cgtmd1lingg::SingularPV(double const& y) const
+  double Cgtmd1lingge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -266,7 +294,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1lingg::LocalPV(double const& y) const
+  double Cgtmd1lingge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
@@ -276,11 +304,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1linunpgq::Cgtmd1linunpgq(double const& xi):
+  Cgtmd1linunpgqe::Cgtmd1linunpgqe(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1linunpgq::Regular(double const& y) const
+  double Cgtmd1linunpgqe::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
@@ -289,11 +317,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1linunpgg::Cgtmd1linunpgg(double const& xi):
+  Cgtmd1linunpgge::Cgtmd1linunpgge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1linunpgg::Regular(double const& y) const
+  double Cgtmd1linunpgge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -303,11 +331,11 @@ namespace apfel
     else
       return (y <= 1 ? - 2 * CA * ( 2 + ky * ( 1 + ky ) ) / y / pow(1 + ky, 2) : - 4 * CA * ( 1 - kappa ) * ( 1 + ky2 ) / pow(1 - ky2, 2));
   }
-  double Cgtmd1linunpgg::Local(double const&) const
+  double Cgtmd1linunpgge::Local(double const&) const
   {
     return - CA * zeta2;
   }
-  double Cgtmd1linunpgg::SingularPV(double const& y) const
+  double Cgtmd1linunpgge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -315,7 +343,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1linunpgg::LocalPV(double const& y) const
+  double Cgtmd1linunpgge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)
@@ -325,11 +353,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1linpolgq::Cgtmd1linpolgq(double const& xi):
+  Cgtmd1linpolgqe::Cgtmd1linpolgqe(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1linpolgq::Regular(double const& y) const
+  double Cgtmd1linpolgqe::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
@@ -338,11 +366,11 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cgtmd1linpolgg::Cgtmd1linpolgg(double const& xi):
+  Cgtmd1linpolgge::Cgtmd1linpolgge(double const& xi):
     Expression(1/xi)
   {
   }
-  double Cgtmd1linpolgg::Regular(double const& y) const
+  double Cgtmd1linpolgge::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -352,11 +380,11 @@ namespace apfel
     else
       return (y <= 1 ? - CA * ( 3 + ky ) / pow(1 + ky, 2) : - 4 * CA * ( 1 - kappa ) / pow(1 - ky2, 2));
   }
-  double Cgtmd1linpolgg::Local(double const&) const
+  double Cgtmd1linpolgge::Local(double const&) const
   {
     return - CA * zeta2;
   }
-  double Cgtmd1linpolgg::SingularPV(double const& y) const
+  double Cgtmd1linpolgge::SingularPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1)
@@ -364,7 +392,7 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1linpolgg::LocalPV(double const& y) const
+  double Cgtmd1linpolgge::LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)

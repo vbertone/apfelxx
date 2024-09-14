@@ -22,65 +22,87 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet unpolarised
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even non-singlet
+   * unpolarised matching function for GTMDs.
    */
-  class Cgtmd1ns: public Expression
+  class Cgtmd1nse: public Expression
   {
   public:
-    Cgtmd1ns(double const& xi);
+    Cgtmd1nse(double const& xi);
     double Regular(double const& x) const;
     double Local(double const&)     const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) quark-quark unpolarised
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even quark-quark
+   * unpolarised matching function for GTMDs.
    */
-  class Cgtmd1qq: public Expression
+  class Cgtmd1qqe: public Expression
   {
   public:
-    Cgtmd1qq(double const& xi);
+    Cgtmd1qqe(double const& xi);
     double Regular(double const& x) const;
     double Local(double const&)     const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) quark-gluon unpolarised
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even quark-gluon
+   * unpolarised matching function for GTMDs.
    */
-  class Cgtmd1qg: public Expression
+  class Cgtmd1qge: public Expression
   {
   public:
-    Cgtmd1qg(double const& xi);
+    Cgtmd1qge(double const& xi);
     double Regular(double const& x)    const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark unpolarised
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-quark
+   * unpolarised matching function for GTMDs.
    */
-  class Cgtmd1gq: public Expression
+  class Cgtmd1gqe: public Expression
   {
   public:
-    Cgtmd1gq(double const& xi);
+    Cgtmd1gqe(double const& xi);
     double Regular(double const& x) const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon unpolarised
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-gluon
+   * unpolarised matching function for GTMDs.
    */
-  class Cgtmd1gg: public Expression
+  class Cgtmd1gge: public Expression
   {
   public:
-    Cgtmd1gg(double const& xi);
+    Cgtmd1gge(double const& xi);
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) parity odd quark-gluon
+   * unpolarised matching function for GTMDs.
+   */
+  class Cgtmd1qgo: public Expression
+  {
+  public:
+    Cgtmd1qgo(double const& xi);
+    double LocalPV() const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) parity odd gluon-gluon
+   * unpolarised matching function for GTMDs.
+   */
+  class Cgtmd1ggo: public Expression
+  {
+  public:
+    Cgtmd1ggo(double const& xi);
+    double LocalPV() const;
   };
   ///@}
 
@@ -90,65 +112,65 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet longitudinally
-   * polarised matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even non-singlet
+   * longitudinally polarised matching function for GTMDs.
    */
-  class Cgtmd1polns: public Expression
+  class Cgtmd1polnse: public Expression
   {
   public:
-    Cgtmd1polns(double const& xi);
+    Cgtmd1polnse(double const& xi);
     double Regular(double const& x) const;
     double Local(double const&)     const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) quark-quark longitudinally
-   * polarised matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even quark-quark
+   * longitudinally polarised matching function for GTMDs.
    */
-  class Cgtmd1polqq: public Expression
+  class Cgtmd1polqqe: public Expression
   {
   public:
-    Cgtmd1polqq(double const& xi);
+    Cgtmd1polqqe(double const& xi);
     double Regular(double const& x) const;
     double Local(double const&)     const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) quark-gluon longitudinally
-   * polarised matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even quark-gluon
+   * longitudinally polarised matching function for GTMDs.
    */
-  class Cgtmd1polqg: public Expression
+  class Cgtmd1polqge: public Expression
   {
   public:
-    Cgtmd1polqg(double const& xi);
+    Cgtmd1polqge(double const& xi);
     double Regular(double const& x)    const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark longitudinally
-   * polarised matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-quark
+   * longitudinally polarised matching function for GTMDs.
    */
-  class Cgtmd1polgq: public Expression
+  class Cgtmd1polgqe: public Expression
   {
   public:
-    Cgtmd1polgq(double const& xi);
+    Cgtmd1polgqe(double const& xi);
     double Regular(double const& x) const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon longitudinally
-   * polarised matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-gluon
+   * longitudinally polarised matching function for GTMDs.
    */
-  class Cgtmd1polgg: public Expression
+  class Cgtmd1polgge: public Expression
   {
   public:
-    Cgtmd1polgg(double const& xi);
+    Cgtmd1polgge(double const& xi);
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
   };
   ///@}
 
@@ -159,17 +181,17 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon linearly polarised
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-gluon
+   * linearly polarised matching function for GTMDs.
    */
-  class Cgtmd1lingg: public Expression
+  class Cgtmd1lingge: public Expression
   {
   public:
-    Cgtmd1lingg(double const& xi);
+    Cgtmd1lingge(double const& xi);
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
   };
   ///@}
 
@@ -179,28 +201,28 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon(lin)-quark(unpol)
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even
+   * gluon(lin)-quark(unpol) matching function for GTMDs.
    */
-  class Cgtmd1linunpgq: public Expression
+  class Cgtmd1linunpgqe: public Expression
   {
   public:
-    Cgtmd1linunpgq(double const& xi);
+    Cgtmd1linunpgqe(double const& xi);
     double Regular(double const& x) const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon(lin)-gluon(unpol)
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even
+   * gluon(lin)-gluon(unpol) matching function for GTMDs.
    */
-  class Cgtmd1linunpgg: public Expression
+  class Cgtmd1linunpgge: public Expression
   {
   public:
-    Cgtmd1linunpgg(double const& xi);
+    Cgtmd1linunpgge(double const& xi);
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
   };
   ///@}
 
@@ -210,28 +232,28 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon(lin)-quark(long pol)
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even
+   * gluon(lin)-quark(long pol) matching function for GTMDs.
    */
-  class Cgtmd1linpolgq: public Expression
+  class Cgtmd1linpolgqe: public Expression
   {
   public:
-    Cgtmd1linpolgq(double const& xi);
+    Cgtmd1linpolgqe(double const& xi);
     double Regular(double const& x) const;
   };
 
   /**
-   * @brief The O(&alpha;<SUB>s</SUB>) gluon(lin)-gluon(long pol)
-   * matching function for GTMDs.
+   * @brief The O(&alpha;<SUB>s</SUB>) parity even
+   * gluon(lin)-gluon(long pol) matching function for GTMDs.
    */
-  class Cgtmd1linpolgg: public Expression
+  class Cgtmd1linpolgge: public Expression
   {
   public:
-    Cgtmd1linpolgg(double const& xi);
+    Cgtmd1linpolgge(double const& xi);
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalPV(double const& x)    const;
+    double LocalLogPV(double const& x) const;
   };
   ///@}
 }

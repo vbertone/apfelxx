@@ -54,26 +54,37 @@ namespace apfel
     virtual double Local(double const&) const { return 0; }
 
     /**
-     * @brief Virtual function for the local term for principal-valued integrals a la
-     * ERBL with singularity at x = 1, i.e. corresponding to the
-     * ++-prescription.
+     * @brief Virtual function for the local term for principal-valued
+     * integrals a la ERBL with singularity at x = 1,
+     * i.e. corresponding to the ++-prescription.
      * @return The local term for ++-prespribed distributions at x
      */
     virtual double LocalPP(double const&) const { return 0; }
 
     /**
-     * @brief Virtual function for the singular term for principal-valued integrals in
-     * the DGLAP region (i.e. with pole in x in the interval (0,1)).
+     * @brief Virtual function for the singular term for
+     * principal-valued integrals in the DGLAP region (i.e. with pole
+     * in x in the interval (0,1)).
      * @return The singular term for principal-valued distributions at x
      */
     virtual double SingularPV(double const&) const { return 0; }
 
     /**
-     * @brief Virtual function for the local term for principal-valued integrals a la
-     * DGLAP with singularity in the interval (0,1).
-     * @return The local term for principal-valued distributions at x
+     * @brief Virtual function for the local term for principal-valued
+     * integrals a la DGLAP with singularity in the interval (0,1).
+     * @return The log-dependent local term for principal-valued
+     * distributions (this is assumed to be constant).
      */
-    virtual double LocalPV(double const&) const { return 0; }
+    virtual double LocalPV() const { return 0; }
+
+    /**
+     * @brief Virtual function for the local term for principal-valued
+     * integrals a la DGLAP with singularity in the interval (0,1)
+     * with a logarithmic dependence.
+     * @return The log-dependent local term for principal-valued
+     * distributions at x.
+     */
+    virtual double LocalLogPV(double const&) const { return 0; }
     ///@}
 
     /**

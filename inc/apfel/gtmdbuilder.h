@@ -34,19 +34,36 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The InitializeGtmdObjects function precomputes the
+   * @brief The InitializeGtmdObjectsEven function precomputes the
    * perturbative coefficients required for the evolution and matching
-   * of GTMD and store them into a 'GtmdObjects' structure.
+   * of the parity even part of unpolarised (twist-2) GTMDs and store
+   * them into a 'GtmdObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of GtmdObjects, one for each possible nf
    */
-  std::map<int, GtmdObjects> InitializeGtmdObjects(Grid                const& g,
-                                                   std::vector<double> const& Thresholds,
-                                                   double              const& xi,
-                                                   double              const& IntEps = 1e-5);
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEven(Grid                const& g,
+                                                       std::vector<double> const& Thresholds,
+                                                       double              const& xi,
+                                                       double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOdd function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of unpolarised (twist-2) GTMDs and store
+   * them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOdd(Grid                const& g,
+                                                      std::vector<double> const& Thresholds,
+                                                      double              const& xi,
+                                                      double              const& IntEps = 1e-5);
   ///@}
 
   /**
@@ -162,6 +179,24 @@ namespace apfel
                                                                                                          int                                  const& PerturbativeOrder,
                                                                                                          double                               const& Ci = 1,
                                                                                                          double                               const& IntEps = 1e-7);
+
+  /**
+   * @brief Function that returns the perturbative part of the
+   * Collins-Soper kernel for quarks.
+   * @param GtmdObj: the GTMD objects
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the logarithmic perturbative order
+   * @param Ci: the initial scale-variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return double-valued function of the impact parameter
+   * b<SUB>T</SUB> and of the the final renormalisation scale &mu;. It
+   * returns perturbative part of the Collis-Soper kernel for quarks.
+   */
+  std::function<double(double const&, double const&)> CollinsSoperKernel(std::map<int, GtmdObjects>           const& GtmdObj,
+                                                                         std::function<double(double const&)> const& Alphas,
+                                                                         int                                  const& PerturbativeOrder,
+                                                                         double                               const& Ci = 1,
+                                                                         double                               const& IntEps = 1e-7);
   /// @endcond
   ///@}
 }
