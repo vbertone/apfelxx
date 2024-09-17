@@ -16,11 +16,6 @@
 namespace apfel
 {
   /**
-   * @brief Enumerator for the jet algoritms for the jet TMDs
-   */
-  enum JetAlgorithm: int {CONE = 0, KT = 1};
-
-  /**
    * @brief Structure that contains all precomputed quantities needed
    * to perform the TMD evolution, matching to the collinear PDFs, and
    * computation of cross sections, i.e. the perturbative coefficients
@@ -170,30 +165,6 @@ namespace apfel
                                                                                             double                                          const& IntEps = 1e-7);
 
   /**
-   * @brief Function that returns the TMD of a jet in b-space as
-   * functions of the final scale and rapidity.
-   * @param TmdObj: the TMD objects
-   * @param JetAlgo: the jet algorithm to be used
-   * @param JetR: the jet radius
-   * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the logarithmic perturbative order
-   * @param CJ: jet-scale variation factor (default: 1)
-   * @param Ci: the initial-scale variation factor (default: 1)
-   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-   * @return double-valued function of the impact parameter
-   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
-   * final rapidity scale &zeta; representing the evolved jet TMD
-   */
-  std::function<double(double const&, double const&, double const&)> BuildTmdJet(std::map<int, TmdObjects>            const& TmdObj,
-                                                                                 JetAlgorithm                         const& JetAlgo,
-                                                                                 double                               const& JetR,
-                                                                                 std::function<double(double const&)> const& Alphas,
-                                                                                 int                                  const& PerturbativeOrder,
-                                                                                 double                               const& CJ = 1,
-                                                                                 double                               const& Ci = 1,
-                                                                                 double                               const& IntEps = 1e-7);
-
-  /**
    * @brief Function that returns the matched TMD PDFs in b-space.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
@@ -224,29 +195,6 @@ namespace apfel
                                                               std::function<double(double const&)>            const& Alphas,
                                                               int                                             const& PerturbativeOrder,
                                                               double                                          const& Ci = 1);
-
-  /**
-   * @brief Function that returns the jet TMD in b-space at the
-   * initial scale.
-   * @param TmdObj: the TMD objects
-   * @param JetAlgo: the jet algorithm
-   * @param tR: tangent of half the jet radius (tan(R/2))
-   * @param Alphas: the strong coupling function
-   * @param PerturbativeOrder: the logarithmic perturbative order
-   * @param CJ: jet-scale variation factor (default: 1)
-   * @param Ci: the initial-scale variation factor (default: 1)
-   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
-   * @return double-valued function of the impact parameter
-   * b<SUB>T</SUB> representing the low-scale jet TMD
-   */
-  std::function<double(double const&, double const&)> MatchTmdJet(std::map<int, TmdObjects>            const& TmdObj,
-                                                                  JetAlgorithm                         const& JetAlgo,
-                                                                  double                               const& tR,
-                                                                  std::function<double(double const&)> const& Alphas,
-                                                                  int                                  const& PerturbativeOrder,
-                                                                  double                               const& CJ = 1,
-                                                                  double                               const& Ci = 1,
-                                                                  double                               const& IntEps = 1e-7);
 
   /**
    * @brief Function that returns the mathing functions for the TMD PDFs.
