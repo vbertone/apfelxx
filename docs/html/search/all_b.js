@@ -12,6 +12,5 @@ var searchData=
   ['kcs22_9',['KCS22',['../namespaceapfel.html#a61458485ca8daf8dffe8c29b5eb09445',1,'apfel']]],
   ['kcs23_10',['KCS23',['../namespaceapfel.html#ae49419a976e5af333b7a77d98e7ecb67',1,'apfel']]],
   ['kernels_11',['kernels',['../group__GPDEvKernels.html',1,'GPD evolution kernels'],['../group__LOpolevk.html',1,'LO evolution kernels'],['../group__LOtransevk.html',1,'LO evolution kernels'],['../group__LOunpevk.html',1,'LO evolution kernels'],['../group__GPDPolSF.html',1,'Polarised evolution kernels'],['../group__GPDTransSF.html',1,'Transversely polarised evolution kernels'],['../group__GPDUnpSF.html',1,'Unpolarised evolution kernels']]],
-  ['knotarray_12',['KnotArray',['../classapfel_1_1InitialiseEvolution.html#a38a2764259bc1f9b0eed1685f2d8b77b',1,'apfel::InitialiseEvolution']]],
-  ['kt_13',['KT',['../namespaceapfel.html#ad665a96afaf1447481a8a2752508535da5162037141e8b3a8b28da4e1b2483cd7',1,'apfel']]]
+  ['knotarray_12',['KnotArray',['../classapfel_1_1InitialiseEvolution.html#a38a2764259bc1f9b0eed1685f2d8b77b',1,'apfel::InitialiseEvolution']]]
 ];

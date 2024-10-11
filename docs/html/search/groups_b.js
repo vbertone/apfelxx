@@ -27,7 +27,8 @@ var searchData=
   ['matching_20functions_20for_20helicity_20pdfs_20g1_24',['NLO matching functions for helicity PDFs g1',['../group__NLOg1.html',1,'']]],
   ['matching_20functions_20for_20pdfs_25',['matching functions for PDFs',['../group__NLOmatch.html',1,'NLO matching functions for PDFs'],['../group__NNLOmatch.html',1,'NNLO matching functions for PDFs'],['../group__NNNLOmatch.html',1,'NNNLO matching functions for PDFs']]],
   ['matching_20functions_20for_20sivers_20quark_20pdfs_26',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
-  ['mathematical_20constants_27',['Mathematical constants',['../group__MathConstants.html',1,'']]],
-  ['minus_20basis_28',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
-  ['mulders_20pdfs_29',['Mulders PDFs',['../group__NLOBM.html',1,'NLO matching functions for Boer-Mulders PDFs'],['../group__NNLOBM.html',1,'NNLO matching functions for Boer-Mulders PDFs']]]
+  ['matching_20functions_20for_20the_20helicity_20ffs_20g1_27',['NLO matching functions for the helicity FFs g1',['../group__NLOffg1.html',1,'']]],
+  ['mathematical_20constants_28',['Mathematical constants',['../group__MathConstants.html',1,'']]],
+  ['minus_20basis_29',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
+  ['mulders_20pdfs_30',['Mulders PDFs',['../group__NLOBM.html',1,'NLO matching functions for Boer-Mulders PDFs'],['../group__NNLOBM.html',1,'NNLO matching functions for Boer-Mulders PDFs']]]
 ];

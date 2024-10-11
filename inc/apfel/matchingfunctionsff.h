@@ -286,7 +286,8 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NLOffg1 NLO matching functions for longitudinally polarised FFs
+   * @defgroup NLOffg1 NLO matching functions for the helicity FFs g1
+   * NLO matching functions for the helicity FFs g1
    * @ingroup TLMatchFunc
    */
   ///@{

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['g1_0',['NLO matching functions for helicity PDFs g1',['../group__NLOg1.html',1,'']]],
+  ['g1_0',['g1',['../group__NLOg1.html',1,'NLO matching functions for helicity PDFs g1'],['../group__NLOffg1.html',1,'NLO matching functions for the helicity FFs g1']]],
   ['g11g_1',['G11g',['../classapfel_1_1G11g.html',1,'apfel::G11g'],['../classapfel_1_1G11g.html#ab26e54acc451f7f621c579468f6898ea',1,'apfel::G11g::G11g()']]],
   ['g11ns_2',['G11ns',['../classapfel_1_1G11ns.html',1,'apfel::G11ns'],['../classapfel_1_1G11ns.html#abaf457d7dafe629bd70509d036de7fef',1,'apfel::G11ns::G11ns()']]],
   ['g12g_3',['G12g',['../classapfel_1_1G12g.html',1,'apfel::G12g'],['../classapfel_1_1G12g.html#a217c056d6415a1f53a0c52c827d91644',1,'apfel::G12g::G12g()']]],

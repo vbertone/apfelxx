@@ -19,7 +19,7 @@ namespace apfel
   ///@}
   /**
    * @defgroup LOpolsf LO splitting functions
-   * @ingroup PolSF
+   * @ingroup PolSFtl
    */
   ///@{
   /**
