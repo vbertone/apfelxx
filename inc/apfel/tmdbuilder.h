@@ -104,7 +104,9 @@ namespace apfel
   /**
    * @brief The InitializeTmdObjects function precomputes the
    * perturbative coefficients required for the evolution and matching
-   * of TMD g1 PDFs and store them into a 'TmdObjects' structure.
+   * of TMD g1 PDFs and FFs and store them into a 'TmdObjects'
+   * structure. Matching functions are implemented only to one-loop
+   * order.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)

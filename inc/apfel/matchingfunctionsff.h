@@ -284,4 +284,56 @@ namespace apfel
     double    _A2;
   };
   ///@}
+
+  /**
+   * @defgroup NLOffg1 NLO matching functions for longitudinally polarised FFs
+   * @ingroup TLMatchFunc
+   */
+  ///@{
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) non-singlet longitudinally
+   * polarised matching function for FFs.
+   */
+  class C1nsffg1: public Expression
+  {
+  public:
+    C1nsffg1();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) quark-gluon longitudinally
+   * polarised matching function for FFs.
+   */
+  class C1qgffg1: public Expression
+  {
+  public:
+    C1qgffg1();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-quark longitudinally
+   * polarised matching function for FFs.
+   */
+  class C1gqffg1: public Expression
+  {
+  public:
+    C1gqffg1();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief The O(&alpha;<SUB>s</SUB>) gluon-gluon longitudinally
+   * polarised matching function for FFs.
+   */
+  class C1ggffg1: public Expression
+  {
+  public:
+    C1ggffg1();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+  ///@}
 }

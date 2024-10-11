@@ -759,4 +759,52 @@ namespace apfel
     const double A1 = -4961.132012905556 + 669.0197491928262*_nf - 19.287855837177126*pow(_nf,2);
     return A1 + _A2 * log(1 - x);
   }
+
+  //_________________________________________________________________________________
+  C1nsffg1::C1nsffg1():
+    Expression()
+  {
+  }
+  double C1nsffg1::Regular(double const& x) const
+  {
+    return 2 * CF * ( 1 - x );
+  }
+  double C1nsffg1::Local(double const&) const
+  {
+    return - CF * zeta2;
+  }
+
+  //_________________________________________________________________________________
+  C1qgffg1::C1qgffg1():
+    Expression()
+  {
+  }
+  double C1qgffg1::Regular(double const& x) const
+  {
+    return - 4 * CF * ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  C1gqffg1::C1gqffg1():
+    Expression()
+  {
+  }
+  double C1gqffg1::Regular(double const& x) const
+  {
+    return 4 * TR * ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  C1ggffg1::C1ggffg1():
+    Expression()
+  {
+  }
+  double C1ggffg1::Regular(double const& x) const
+  {
+    return - 8 * CA * ( 1 - x );
+  }
+  double C1ggffg1::Local(double const&) const
+  {
+    return - CA * zeta2;
+  }
 }

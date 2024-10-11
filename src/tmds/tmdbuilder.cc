@@ -891,10 +891,11 @@ namespace apfel
                                                    std::vector<double> const& Thresholds,
                                                    double              const& IntEps)
   {
-    // Initialise space-like longitudinally polarised splitting
-    // functions on the grid required to compute the log terms of the
-    // matching functions.
+    // Initialise space-like and time-like longitudinally polarised
+    // splitting functions on the grid required to compute the log
+    // terms of the matching functions.
     const std::map<int, DglapObjects> DglapObjpdf = InitializeDglapObjectsQCDpol(g, Thresholds, false, IntEps);
+    const std::map<int, DglapObjects> DglapObjff  = InitializeDglapObjectsQCDTpol(g, Thresholds, false, IntEps);
 
     report("Initializing TMD objects for matching and evolution of g1... ");
     Timer t;
@@ -982,6 +983,46 @@ namespace apfel
         C12.insert({nf, OM});
       }
 
+    // FFs
+    std::map<int, std::map<int, Operator>> C10ff;
+    const Operator O1nsff{g, C1nsffg1{}, IntEps};
+    const Operator O1qgff{g, C1qgffg1{}, IntEps};
+    const Operator O1gqff{g, C1gqffg1{}, IntEps};
+    const Operator O1ggff{g, C1ggffg1{}, IntEps};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O1nsff});
+        OM.insert({EvolutionBasisQCD::PNSM, O1nsff});
+        OM.insert({EvolutionBasisQCD::PNSV, O1nsff});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1nsff});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O1qgff});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gqff});
+        OM.insert({EvolutionBasisQCD::PGG,                O1ggff});
+        C10ff.insert({nf, OM});
+      }
+
+    // Terms proportion to one power of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C11ff;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O11gmVq = gammaFq0() * Id;
+        const Operator O11gmVg = gammaFg0(nf) * Id;
+        const auto P0 = DglapObjff.at(nf).SplittingFunctions.at(0);
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - 2 * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - 2 * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - 2 * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O11gmVq - 2 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,                - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O11gmVg - 2 * P0.at(6)});
+        C11ff.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub) equal to that of
+    // PDFs.
+
     // Construct zero set of operators for the unknown bits
     std::map<int, Operator> ZeroOp;
     for (int iOp = 0; iOp < 7; iOp++)
@@ -1040,7 +1081,7 @@ namespace apfel
 
         // FFs
         obj.MatchingFunctionsFFs.insert({0, {{evb, C00.at(nf)}}});
-        obj.MatchingFunctionsFFs.insert({1, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
+        obj.MatchingFunctionsFFs.insert({1, {{evb, C10ff.at(nf)}, {evb, C11ff.at(nf)}, {evb, C12.at(nf)}}});
         obj.MatchingFunctionsFFs.insert({2, {{evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}, {evb, ZeroOp}}});
         obj.MatchingFunctionsFFs.insert({3, {{evb, ZeroOp}}});
 
