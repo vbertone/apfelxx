@@ -467,10 +467,28 @@ namespace apfel
   /*   std::vector<double> _C; */
   /* }; */
 
+  /* /\** */
+  /*  * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-gluon */
+  /*  * unpolarised splitting function. Parameterisation determined in */
+  /*  * https://arxiv.org/pdf/2310.05744.pdf. */
+  /*  *\/ */
+  /* class P3gg: public Expression */
+  /* { */
+  /* public: */
+  /*   P3gg(int const& nf, int const& imod = 0); */
+  /*   double Regular(double const& x)  const; */
+  /*   double Singular(double const& x) const; */
+  /*   double Local(double const& x)    const; */
+  /* private: */
+  /*   int const _nf; */
+  /*   int const _imod; */
+  /*   double _A4gluon; */
+  /* }; */
+
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-gluon
    * unpolarised splitting function. Parameterisation determined in
-   * https://arxiv.org/pdf/2310.05744.pdf
+   * https://arxiv.org/pdf/2410.08089.
    */
   class P3gg: public Expression
   {

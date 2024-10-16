@@ -1518,6 +1518,115 @@ namespace apfel
   //                + nf * pow(CA, 2) * CF * ( 617. / 243. - 13. / 18. * zeta2 + 2. / 3. * zeta3) ) * dl2 / x / pow(Pi2, 2) / 2 ) * pow(FourPi, 4);
   // }
 
+  // //_________________________________________________________________________________
+  // P3gg::P3gg(int const& nf, int const& imod):
+  //   Expression(),
+  //   _nf(std::min(nf, 5)),
+  //   _imod(imod)
+  // {
+  //   _A4gluon = 40880.330e0 - 11714.246e0 * _nf + 440.04876e0 * pow(_nf, 2) + 7.3627750e0 * pow(_nf, 3);
+  // }
+  // double P3gg::Regular(double const& x) const
+  // {
+  //   const int nf2     = _nf * _nf;
+  //   const double xm   = 1 / x;
+  //   const double x1   = 1 - x;
+  //   const double dl   = log(x);
+  //   const double dl2  = dl * dl;
+  //   const double dl3  = dl * dl2;
+  //   const double dlm  = log(1 - x);
+  //   const double dlm2 = dlm * dlm;
+  //   const double dlm3 = dlm * dlm2;
+
+  //   // The known large-x coefficients [except delta(1-x)]
+  //   const double Ccoeff  = 8.5814120e4 - 1.3880515e4 * _nf + 1.3511111e2 * nf2;
+  //   const double Dcoeff  = 5.4482808e4 - 4.3411337e3 * _nf - 2.1333333e1 * nf2;
+
+  //   // The known coefficients of 1/x*ln^a x terms, a = 3,2
+  //   const double bfkl0 = - 8.308617314e3;
+  //   const double bfkl1 = - 1.069119905e5 - 9.963830436e2 * _nf;
+
+  //   // The resulting part of the function
+  //   const double P3gg01 =
+  //     + bfkl0  * dl3 * xm
+  //     + bfkl1  * dl2 * xm
+  //     + Ccoeff * dlm
+  //     + Dcoeff - _A4gluon;
+
+  //   // The selected approximations for nf = 3, 4, 5
+  //   double P3ggApp1 = P3gg01;
+  //   double P3ggApp2 = P3gg01;
+  //   if (_nf <= 3)
+  //     {
+  //       P3ggApp1 +=
+  //         + 3.4     * bfkl1 * dl * xm
+  //         - 345063. * x1 * xm
+  //         + 86650.  * ( 1 + x * x ) * x1
+  //         + 158160. * dl
+  //         - 15741.  * x1 * dlm2
+  //         - 9417.   * x1 * dlm3;
+  //       P3ggApp2 +=
+  //         + 5.4      * bfkl1 * dl * xm
+  //         - 1265632. * x1 * xm
+  //         - 656644.  * ( 1 + x * x ) * x1
+  //         - 1352233. * dl
+  //         + 203298.  * x1 * dlm2
+  //         + 39112.   * x1 * dlm3;
+  //     }
+  //   else if (_nf == 4)
+  //     {
+  //       P3ggApp1 +=
+  //         + 3.4     * bfkl1 * dl * xm
+  //         - 342625. * x1 * xm
+  //         + 100372. * ( 1 + x * x ) * x1
+  //         + 189167. * dl
+  //         - 29762.  * x1 * dlm2
+  //         - 12102.  * x1 * dlm3;
+  //       P3ggApp2 +=
+  //         + 5.4      * bfkl1 * dl * xm
+  //         - 1271540. * x1 * xm
+  //         - 649661.  * ( 1 + x * x ) * x1
+  //         - 1334919. * dl
+  //         + 191263.  * x1 * dlm2
+  //         + 36867.   * x1 * dlm3;
+  //     }
+  //   else if (_nf >= 5)
+  //     {
+  //       P3ggApp1 +=
+  //         + 3.4     * bfkl1 * dl * xm
+  //         - 337540. * x1 * xm
+  //         + 119366. * ( 1 + x * x ) * x1
+  //         + 223769. * dl
+  //         - 45129.  * x1 * dlm2
+  //         - 15046.  * x1 * dlm3;
+  //       P3ggApp2 +=
+  //         + 5.4      * bfkl1 * dl * xm
+  //         - 1274800. * x1 * xm
+  //         - 637406.  * ( 1 + x * x ) * x1
+  //         - 1314010. * dl
+  //         + 177882.  * x1 * dlm2
+  //         + 34362.   * x1 * dlm3;
+  //     }
+
+  //   // We return (for now) one of the two error-band boundaries or the
+  //   // present best estimate, their average
+  //   if (_imod == 1)
+  //     return P3ggApp1;
+  //   else if (_imod == 2)
+  //     return P3ggApp2;
+  //   else
+  //     return 0.5 * ( P3ggApp1 + P3ggApp2 );
+  // }
+  // double P3gg::Singular(double const& x) const
+  // {
+  //   return _A4gluon / ( 1 - x );
+  // }
+  // double P3gg::Local(double const& x) const
+  // {
+  //   const double B4gluon = 68587.64 - 18143.983e0 * _nf + 423.81135e0 * pow(_nf, 2) + 9.0672154e-1 * pow(_nf, 3);
+  //   return log(1 - x) * _A4gluon + B4gluon;
+  // }
+
   //_________________________________________________________________________________
   P3gg::P3gg(int const& nf, int const& imod):
     Expression(),
@@ -1529,29 +1638,46 @@ namespace apfel
   double P3gg::Regular(double const& x) const
   {
     const int nf2     = _nf * _nf;
+    const int nf3     = _nf * nf2;
     const double xm   = 1 / x;
     const double x1   = 1 - x;
     const double dl   = log(x);
     const double dl2  = dl * dl;
     const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double dl5  = dl * dl4;
+    const double dl6  = dl * dl5;
     const double dlm  = log(1 - x);
     const double dlm2 = dlm * dlm;
     const double dlm3 = dlm * dlm2;
+    const double dlm4 = dlm * dlm3;
 
     // The known large-x coefficients [except delta(1-x)]
     const double Ccoeff  = 8.5814120e4 - 1.3880515e4 * _nf + 1.3511111e2 * nf2;
     const double Dcoeff  = 5.4482808e4 - 4.3411337e3 * _nf - 2.1333333e1 * nf2;
 
-    // The known coefficients of 1/x*ln^a x terms, a = 3,2
-    const double bfkl0 = - 8.308617314e3;
-    const double bfkl1 = - 1.069119905e5 - 9.963830436e2 * _nf;
+    const double x1L4cff = 5.6460905e1 * _nf - 3.6213992e0 * nf2;
+    const double x1L3cff = 2.4755054e2 * _nf - 4.0559671e1 * nf2 + 1.5802469e0 * nf3;
+
+    // Known small-x coefficients
+    const double bfkl0  = - 8.3086173e3;
+    const double bfkl1  = - 1.0691199e5 - 9.9638304e2 * _nf;
+
+    const double x0L6cff =  1.44e2 - 2.7786008e1 * _nf + 7.9012346e-1 * nf2;
+    const double x0L5cff = -1.44e2 - 1.6208066e2 * _nf + 1.4380247e1 * nf2;
+    const double x0L4cff =  2.6165784e4 - 3.3447551e3 * _nf + 9.1522635e1 * nf2 - 1.9753086e-1 * nf3;
 
     // The resulting part of the function
     const double P3gg01 =
-      + bfkl0  * dl3 * xm
-      + bfkl1  * dl2 * xm
+      + bfkl0 * dl3 * xm
+      + bfkl1 * dl2 * xm
+      + x0L6cff * dl6
+      + x0L5cff * dl5
+      + x0L4cff * dl4
       + Ccoeff * dlm
-      + Dcoeff - _A4gluon;
+      + Dcoeff - _A4gluon
+      + x1L4cff * x1 * dlm4
+      + x1L3cff * x1 * dlm3;
 
     // The selected approximations for nf = 3, 4, 5
     double P3ggApp1 = P3gg01;
@@ -1559,57 +1685,81 @@ namespace apfel
     if (_nf <= 3)
       {
         P3ggApp1 +=
-          + 3.4     * bfkl1 * dl * xm
-          - 345063. * x1 * xm
-          + 86650.  * ( 1 + x * x ) * x1
-          + 158160. * dl
-          - 15741.  * x1 * dlm2
-          - 9417.   * x1 * dlm3;
+          - 421311.  * x1 * dl * xm
+          - 325557.  * x1 * xm
+          + 1679790. * x1
+          - 1456863. * x1 * x
+          + 3246307. * x1 * dl
+          + 2026324. * dl * dl
+          + 549188.  * dl3
+          +   8337.  * x1 * dlm
+          +  26718.  * x1 * dlm * dlm
+          -  27049.  * x1 * x1 * dlm3;
         P3ggApp2 +=
-          + 5.4      * bfkl1 * dl * xm
-          - 1265632. * x1 * xm
-          - 656644.  * ( 1 + x * x ) * x1
-          - 1352233. * dl
-          + 203298.  * x1 * dlm2
-          + 39112.   * x1 * dlm3;
+          - 700113.  * x1 * dl * xm
+          - 2300581. * x1 * xm
+          + 896407.  * x1 * ( 1 + 2 * x )
+          - 162733.  * x1 * x * x
+          - 2661862. * x1 * dl
+          + 196759.  * dl * dl
+          - 260607.  * dl3
+          +  84068.  * x1 * dlm
+          + 346318.  * x1 * dlm * dlm
+          + 315725.  * dl * dlm * dlm;
       }
     else if (_nf == 4)
       {
         P3ggApp1 +=
-          + 3.4     * bfkl1 * dl * xm
-          - 342625. * x1 * xm
-          + 100372. * ( 1 + x * x ) * x1
-          + 189167. * dl
-          - 29762.  * x1 * dlm2
-          - 12102.  * x1 * dlm3;
+          - 437084.  * x1 * dl * xm
+          - 361570.  * x1 * xm
+          + 1696070. * x1
+          - 1457385. * x1 * x
+          + 3195104. * x1 * dl
+          + 2009021. * dl * dl
+          + 544380.  * dl3
+          +  9938.   * x1 * dlm
+          +  24376.  * x1 * dlm * dlm
+          -  22143.  * x1 * x1 * dlm3;
         P3ggApp2 +=
-          + 5.4      * bfkl1 * dl * xm
-          - 1271540. * x1 * xm
-          - 649661.  * ( 1 + x * x ) * x1
-          - 1334919. * dl
-          + 191263.  * x1 * dlm2
-          + 36867.   * x1 * dlm3;
+          - 706649.  * x1 * dl * xm
+          - 2274637. * x1 * xm
+          + 836544.  * x1 * ( 1 + 2 * x )
+          - 199929.  * x1 * x * x
+          - 2683760. * x1 * dl
+          + 168802.  * dl * dl
+          - 250799.  * dl3
+          +  36967.  * x1 * dlm
+          +  24530.  * x1 * dlm * dlm
+          -  71470.  * x1 * x1 * dlm * dlm;
       }
     else if (_nf >= 5)
       {
         P3ggApp1 +=
-          + 3.4     * bfkl1 * dl * xm
-          - 337540. * x1 * xm
-          + 119366. * ( 1 + x * x ) * x1
-          + 223769. * dl
-          - 45129.  * x1 * dlm2
-          - 15046.  * x1 * dlm3;
+          - 439426.  * x1 * dl * xm
+          - 293679.  * x1 * xm
+          + 1916281. * x1
+          - 1615883. * x1 * x
+          + 3648786. * x1 * dl
+          + 2166231. * dl * dl
+          + 594588.  * dl3
+          +  50406.  * x1 * dlm
+          +  24692.  * x1 * dlm * dlm
+          + 174067.  * x1 * x1 * dlm;
         P3ggApp2 +=
-          + 5.4      * bfkl1 * dl * xm
-          - 1274800. * x1 * xm
-          - 637406.  * ( 1 + x * x ) * x1
-          - 1314010. * dl
-          + 177882.  * x1 * dlm2
-          + 34362.   * x1 * dlm3;
+          - 705978.  * x1 * dl * xm
+          - 2192234. * x1 * xm
+          + 1730508. * x1 * x
+          + 353143.  * x1 * ( 2 - x * x )
+          - 2602682. * x1 * dl
+          + 178960.  * dl * dl
+          - 218133.  * dl3
+          +   2285.  * x1 * dlm
+          +  19295.  * x1 * dlm * dlm
+          -  13719.  * x1 * x1 * dlm * dlm;
       }
 
-    // We return (for now) one of the two error-band boundaries or the
-    // present best estimate, their average
+    // We return one of the two error-band boundaries or the present
+    // best estimate, their average
     if (_imod == 1)
       return P3ggApp1;
     else if (_imod == 2)
@@ -1623,7 +1773,11 @@ namespace apfel
   }
   double P3gg::Local(double const& x) const
   {
-    const double B4gluon = 68587.64 - 18143.983e0 * _nf + 423.81135e0 * pow(_nf, 2) + 9.0672154e-1 * pow(_nf, 3);
+    double B4gluon = 68587.64 - 18143.983e0 * _nf + 423.81135e0 * pow(_nf, 2) + 9.0672154e-1 * pow(_nf, 3);
+    if (_imod == 1)
+      B4gluon += - 0.2;
+    if (_imod == 2)
+      B4gluon += 0.2;
     return log(1 - x) * _A4gluon + B4gluon;
   }
 }
