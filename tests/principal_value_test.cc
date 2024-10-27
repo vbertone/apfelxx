@@ -36,7 +36,7 @@ public:
     else
       return 0;
   }
-  double LocalPV(double const& y) const
+  double LocalLogPV(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1 && y < 1 && kappa * y < 1)

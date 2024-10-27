@@ -28,7 +28,8 @@ namespace apfel
                                                         std::vector<double> const& Masses,
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol,
-                                                        double              const& IntEps)
+                                                        double              const& IntEps,
+                                                        std::vector<int>    const& IMod)
   {
     report("Initializing DglapObjects for space-like QCD unpolarised evolution... ");
     Timer t;
@@ -237,10 +238,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNNLO matching conditions. Approximations from
-    // https://arxiv.org/pdf/2207.04739.pdf. No logarithmic terms are
-    // currently available, nor the contributions required for
-    // backward evolutions are computed.
+    // NNNLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNNNLO;
     const Operator APS3Hq {g, APS3Hq_0{},  IntEps};
     const Operator ANS3qqH{g, ANS3qqH_0{}, IntEps};
@@ -263,21 +261,27 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNNLO splitting function operators. For now the non-singlet
-    // splitting functions have been computed to leading colour even
-    // though the subleading colour part is estimated through an
-    // approximate parameterisation. In addition, the approximations
-    // of https://arxiv.org/pdf/2207.04739.pdf are used.
+    // NNNLO splitting function operators
+    // Copy the vector of switches to vary the parameterisation of the
+    // approximated N3LO splitting functions and adjust it to match
+    // the correct number of switches (7). Issue a warning in case the
+    // original vector is modified.
+    std::vector<int> im = IMod;
+    if (im.size() != 7)
+      {
+        warning("InitializeDglapObjectsQCD", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
+        im.resize(7);
+      }
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O3nsp{g, P3nsp{nf}, IntEps};
-        const Operator O3nsm{g, P3nsm{nf}, IntEps};
-        const Operator O3nss{g, P3nss{nf}, IntEps};
-        const Operator O3ps {g, P3ps{nf},  IntEps};
-        const Operator O3qg {g, P3qg{nf},  IntEps};
-        const Operator O3gq {g, P3gq{nf},  IntEps};
-        const Operator O3gg {g, P3gg{nf},  IntEps};
+        const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
+        const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
+        const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
+        const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
+        const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
+        const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
+        const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
         const Operator O3qq  = O3nsp + O3ps;
         const Operator O3nsv = O3nsm + O3nss;
         std::map<int, Operator> OM;
@@ -335,9 +339,10 @@ namespace apfel
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol,
-                                                        double              const& IntEps)
+                                                        double              const& IntEps,
+                                                        std::vector<int>    const& IMod)
   {
-    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, OpEvol, IntEps);
+    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, OpEvol, IntEps, IMod);
   }
 
   //_____________________________________________________________________________

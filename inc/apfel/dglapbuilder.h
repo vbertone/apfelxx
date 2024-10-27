@@ -43,13 +43,15 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (default: all zero)
    * @return A map of DglapObject objects, one for each possible nf
    */
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
                                                         std::vector<double> const& Masses,
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol = false,
-                                                        double              const& IntEps = 1e-5);
+                                                        double              const& IntEps = 1e-5,
+                                                        std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsQCD function precomputes the
@@ -60,13 +62,15 @@ namespace apfel
    * @param Thresholds: the heavy-quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (default: all zero)
    * @return A map of DglapObject objects, one for each possible nf
    * @note This function assumes that masses and thresholds coincide.
    */
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol = false,
-                                                        double              const& IntEps = 1e-5);
+                                                        double              const& IntEps = 1e-5,
+                                                        std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsQCDpol function precomputes the
