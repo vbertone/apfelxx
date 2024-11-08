@@ -6,7 +6,7 @@
 set(apfelxx_VERSION 4.8.0)
 
 # Define minimum version of cmake
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 # Define project name and its language
 project(apfel CXX Fortran)

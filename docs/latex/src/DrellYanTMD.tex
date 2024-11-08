@@ -1,3 +1,4 @@
+
 %% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[twoside,english]{paper}
@@ -1712,7 +1713,7 @@ and:
 \begin{equation}\label{eq:complicatedintegral}
 \int \frac{dx}{(a\pm
   x)^2\sqrt{1-x^2}}=\frac{\sqrt{1-x^2}}{(a^2-1)(x\pm
-  a)}\pm\frac{a}{(a^2-1)^{3/2}}\tan^{-1}\left(\frac{1\pm ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\,.
+  a)}\pm\frac{2a}{(a^2-1)^{3/2}}\tan^{-1}\left(\frac{x\pm a(1-\sqrt{1-x^2})}{\sqrt{a^2-1}x}\right)\,.
 \end{equation}
 The last integral is such that:
 \begin{equation}\label{eq:defintoverphi}
@@ -1722,26 +1723,16 @@ We now use Eqs.~(\ref{eq:intoverphi})-(\ref{eq:defintoverphi}) to
 compute:
 \begin{equation}
 \begin{array}{rcl}
-&&\displaystyle
-  \frac{1}{2Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 =
-                                                                    \displaystyle
-                                                                    \frac{Q^2}{4
-                                                                    |\mathbf{q}_T|^2}\int_0^{2\pi}\frac{d\phi}{\left[\frac{M\cosh\left(\eta
-                                                                    -
-                                                                    y\right)}{|\mathbf{q}_T|}-\cos\phi\right]^2}\\
+&&\displaystyle \frac{1}{2Q^2}\int_0^{2\pi}d\phi\,[\overline{p}_T(\cos\phi)]^2 =\displaystyle \frac{Q^2}{8|\mathbf{q}_T|^2}\int_0^{2\pi}\frac{d\phi}{\left[\frac{M\cosh\left(\eta-y\right)}{|\mathbf{q}_T|}-\cos\phi\right]^2}\\
 \\
 &=&\displaystyle \frac{Q^2}{8|\mathbf{q}_T|^2}\int_{-1}^{1}\frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}-x\right)^2}+\frac{1}{\left(\frac{M\cosh\left(\eta- y\right)}{|\mathbf{q}_T|}+x\right)^2}\right]\\
 \\
-&=&\displaystyle \frac{Q^2}{8}\Bigg\{\frac{|\mathbf{q}_T|^2 x\sqrt{1-x^2}}{(M ^2\cosh ^2\left(\eta- y\right)-|\mathbf{q}_T|^2)(x^2 |\mathbf{q}_T|^2-
+&=&\displaystyle \frac{Q^2}{8}\Bigg\{\frac{2|\mathbf{q}_T|^2 x\sqrt{1-x^2}}{(M ^2\cosh ^2\left(\eta- y\right)-|\mathbf{q}_T|^2)(x^2 |\mathbf{q}_T|^2-
   M ^2\cosh ^2\left(\eta- y\right))}\\
 \\
-&-&\displaystyle \frac{M\cosh\left(\eta-
+&+&\displaystyle \frac{2M\cosh\left(\eta-
     y\right)}{(M^2\cosh^2\left(\eta-
-    y\right)-|\mathbf{q}_T|^2)^{3/2}}\Bigg[\tan^{-1}\left(\frac{|\mathbf{q}_T|-
-    xM\cosh\left(\eta-y\right)}{\sqrt{(M^2\cosh^2\left(\eta-y\right)-|\mathbf{q}_T|^2)}\sqrt{1-x^2}}\right)\\
-\\
-&-&\displaystyle\tan^{-1}\left(\frac{|\mathbf{q}_T|+
-    xM\cosh\left(\eta-y\right)}{\sqrt{(M^2\cosh^2\left(\eta-y\right)-|\mathbf{q}_T|^2)}\sqrt{1-x^2}}\right)\Bigg]\Bigg\}_{-1}^{1}\\
+    y\right)-|\mathbf{q}_T|^2)^{3/2}}\Bigg[\tan^{-1}\left(\frac{x\sqrt{(M^2\cosh^2\left(\eta-y\right)-|\mathbf{q}_T|^2)}}{M\cosh\left(\eta-y\right)\sqrt{1-x^2}}\right)\Bigg]\Bigg\}_{-1}^{1}\\
 \\
 &=&\displaystyle \frac{\pi
   Q^2M\cosh\left(\eta -
@@ -1838,7 +1829,7 @@ the function $\Phi(p,q-p)$ in Eq.~(\ref{eq:intdomain}) as follows:
 with:
 \begin{equation}\label{eq:relevantfuncs}
 \begin{array}{rcl}
-f^{(2)}(\eta, p_{T,\rm cut}) & = &\displaystyle \frac{2M p_{T,\rm min}\cosh(\eta-y) 
+f^{(2)}(\eta, p_{T,\rm cut}) & = &\displaystyle \frac{2M p_{T,\rm cut}\cosh(\eta-y) 
                     - Q^{2}}{2p_{T,\rm cut}
                     |\mathbf{q}_T|}\,, \\
 \\
@@ -1914,14 +1905,8 @@ reduction factor reads:
 \end{equation}
 with:
 \begin{equation}\label{eq:integrandF}
-\begin{array}{rcl}
-\displaystyle F(x ,\eta)&=&\displaystyle \frac{1}{4\pi}\frac{Q^2}{E_q^2-q_T^2}\Bigg\{\frac{q_T^2 x\sqrt{1-x^2}}{x^2 q_T^2-
-  E_q^2}\\
-\\
-&-&\displaystyle \frac{E_q}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{q_T-
-    xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)-\displaystyle\tan^{-1}\left(\frac{q_T+
-    xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)\right]\Bigg\}\
-\end{array}
+\displaystyle F(x ,\eta)=\displaystyle \frac{1}{4\pi}\frac{Q^2}{E_q^2-q_T^2}\Bigg\{\frac{2q_T^2 x\sqrt{1-x^2}}{x^2 q_T^2-
+  E_q^2}+ \displaystyle \frac{2E_q}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{x\sqrt{E_q^2-q_T^2}}{\sqrt{1-x^2}E_q}\right)\right]\Bigg\}\
 \end{equation}
 where we have defined $E_q = M\cosh(\eta-y)$ and
 $q_T=|\mathbf{q}_T|$.
@@ -1930,8 +1915,7 @@ Let us consider the case $y=q_T=0$. For simplicity, we also take
 $\eta_{\rm min} = -\eta_{\rm max}$. In these conditions,
 Eq.~(\ref{eq:integrandF}) reduces to:
 \begin{equation}\label{eq:F00}
-F(x,\eta)=\displaystyle \frac{1}{4\pi}\frac{1}{\cosh^2(\eta)}\left[\tan^{-1}\left(\frac{
-    x}{\sqrt{1-x^2}}\right)-\displaystyle\tan^{-1}\left(-\frac{
+F(x,\eta)=\displaystyle \frac{1}{2\pi}\frac{1}{\cosh^2(\eta)}\left[\tan^{-1}\left(\frac{
     x}{\sqrt{1-x^2}}\right)\right]\,.
 \end{equation}
 As evident from Eq.~(\ref{eq:relevantfuncs}), for $q_T=0$ all
@@ -2041,7 +2025,7 @@ replace the integral in Eq.~(\ref{eq:firstintegral}) with(\footnote{We
 \begin{equation}\label{eq:firstintegralNew}
   \frac12 \int_0^\infty|\mathbf{p}_T|\left[1+4\sinh^2(y-\eta)
   \frac{|\mathbf{p}_T|^2}{Q^2}\right]d|\mathbf{p}_T|\,\delta(Q^2-2p\cdot
-  q) =\frac{2\overline{p}_T^2}{Q^2}+
+  q) =\frac{\overline{p}_T^2}{2Q^2}+
   2\sinh^2(y-\eta)\frac{\overline{p}_T^4} {Q^4}\,.
 \end{equation}
 We can still use Eq.~(\ref{eq:complicatedintegral}) for the first term
@@ -2054,8 +2038,7 @@ to use:
                        3 a(9a^2+1)x + (18a^4-5a^2+2)\right]}{6(a^2-1)^3(x\pm
   a)^3}\\
 \\
-&\pm&\displaystyle\frac{a(2a^2+3)}{2(a^2-1)^{7/2}}\tan^{-1}\left(\frac{1\pm
-      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\,,
+&\pm&\displaystyle\frac{a(2a^2+3)}{2(a^2-1)^{7/2}}\tan^{-1}\left(\frac{x\pm a(1-\sqrt{1-x^2})}{\sqrt{a^2-1}x}\right)\,,
 \end{array}
 \end{equation}
 that is such that:
@@ -2068,7 +2051,7 @@ term in the r.h.s. term of Eq.~(\ref{eq:firstintegralNew}):
 \begin{equation}\label{eq:integralmmm}
 \begin{array}{l}
 \displaystyle
-  \frac{2\sinh^2(y-\eta)}{Q^4}\int_{-1}^{1}d(\cos\phi)\overline{p}_T^4(\cos\phi)=\\
+  \frac{2\sinh^2(y-\eta)}{Q^4}\int_{0}^{2\pi}d(\phi)\overline{p}_T^4(\cos\phi)=\\
 \\
 \displaystyle\frac{Q^4}{8q_T^4} \sinh^2(y-\eta) \int_{-1}^{1} \frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{(a+
       x)^4}+\frac1{(a-
@@ -2121,21 +2104,11 @@ F(x,\eta)\rightarrow \overline{F}(x,\eta) = \frac34 F(x,\eta)+ \frac14 G(x,\eta)
 where:
 \begin{equation}\label{eq:integrandG}
 \begin{array}{rcl}
-\displaystyle G(x ,\eta)&=&\displaystyle 
-                            \frac{1}{16\pi }\sinh^2(y-\eta)\frac{Q^4}{(E_q^2-q_T^2)^3}
-                            \Bigg\{\sqrt{1-x^2}q_T\\
+\displaystyle G(x ,\eta)&=&\displaystyle \frac{1}{16\pi }\sinh^2(y-\eta)\frac{Q^4}{(E_q^2-q_T^2)^3}\Bigg\{\frac{2x\sqrt{1-x^2}q_T^2}{(x^2q_T^2-E_q^2)^3}\\
 \\
-&\times&\displaystyle\Bigg[\frac{(11E_q^2q_T^2+4q_T^4)x^2+
-                       3 E_qq_T(9E_q^2+q_T^2)x + (18E_q^4-5E_q^2q_T^2+2q_T^4)}{(xq_T+
-  E_q)^3}\\
+&\times&\displaystyle\Bigg[q_T^4(11E_q^2q_T^2+4q_T^4)x^4-2 q_T^2(15E_q^4+E_q^2q_T^2-q_T^4)x^2 +3E_q^2(9E_q^4-6E_q^2q_T^2+2q_T^4)\Bigg]\\
 \\
-&+&\displaystyle\frac{(11E_q^2q_T^2+4q_T^4)x^2-
-                       3 E_qq_T(9E_q^2+q_T^2)x + (18E_q^4-5E_q^2q_T^2+2q_T^4)}{(xq_T-
-  E_q)^3}\Bigg]\\
-\\
-&-&\displaystyle\frac{6E_q (2E_q^2+3q_T^2)}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{q_T-
-      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)-\tan^{-1}\left(\frac{q_T+
-      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)\right]
+&+&\displaystyle\frac{6E_q (2E_q^2+3q_T^2)}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{x\sqrt{E_q^2-q_T^2}}{\sqrt{1-x^2}E_q}\right)\right]
 \Bigg\}\,.
 \end{array}
 \end{equation}
@@ -2153,12 +2126,9 @@ limit $F$ reduces to the expression in Eq.~(\ref{eq:F00}), while $G$
 becomes:
 \begin{equation}
 \begin{array}{rcl}
-\displaystyle G(x ,\eta)&=&\displaystyle 
-                            \frac{3}{4\pi }\frac{\sinh^2(\eta)}{\cosh^4(\eta)}
-                            \Bigg\{\left[\tan^{-1}\left(\frac{
-      x}{\sqrt{1-x^2}}\right)-\tan^{-1}\left(-\frac{
+\displaystyle G(x ,\eta)&=&\displaystyle\frac{3}{2\pi }\frac{\sinh^2(\eta)}{\cosh^4(\eta)}\left[\tan^{-1}\left(\frac{
       x}{\sqrt{1-x^2}}\right)\right]
-\Bigg\}\,,
+\,,
 \end{array}
 \end{equation}
 such that:
@@ -2230,7 +2200,7 @@ After some manipulation, one finds:
 p_1^{\mu}
 p_2^{\nu}\epsilon_{\mu\nu\rho\sigma}\epsilon^{\rho\sigma\alpha\beta}t_\alpha
 z_\beta= -2 p_1^{\mu}
-p_2^{\nu}\delta_\mu^\alpha \delta_\nu^\beta t_\alpha \\
+p_2^{\nu}\delta_\mu^\alpha \delta_\nu^\beta t_\alpha z_\beta \\
 \\
 &=&\displaystyle -2 (p_1 t)(p_2 z) = -2 (pt)\left[(qz)-(pz)\right] = 2(pt)(pz)\\
 \\
@@ -2270,8 +2240,7 @@ Eq.~(\ref{eq:intoverphi}) along with the equality:
 \begin{equation}\label{eq:complicatedintegral3}
 \int \frac{dx}{(a\pm
   x)^3\sqrt{1-x^2}}=\frac{\sqrt{1-x^2}\left[3ax\pm(4a^2-1) \right]}{2(a^2-1)^2(x\pm
-  a)^2}\pm\displaystyle\frac{(2a^2+1)}{2(a^2-1)^{5/2}}\tan^{-1}\left(\frac{1\pm
-      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\,.
+  a)^2}\pm\displaystyle\frac{(2a^2+1)}{(a^2-1)^{5/2}}\tan^{-1}\left(\frac{x\pm a(1-\sqrt{1-x^2})}{\sqrt{a^2-1}x}\right)\,.
 \end{equation}
 This allows us to compute the integral(\footnote{The factor
   $\left(\frac {4\pi Q^2}{3}\right)^{-1}$ in
@@ -2281,23 +2250,20 @@ This allows us to compute the integral(\footnote{The factor
 \begin{equation}\label{eq:Hdefinition}
 \begin{array}{rcl}
 \displaystyle H(x,\eta)&=&\displaystyle\left(\frac {4\pi Q^2}{3}\right)^{-1}\frac{\sinh(y-\eta)}{Q^3}\left[M\cosh(y-\eta) \int
-  d(\cos\phi)\overline{p}_T^4(\cos\phi)- |\mathbf{q}_T|
-  \int d(\cos\phi) \cos\phi\,\overline{p}_T^4(\cos\phi)\right]\\
+  d(\phi)\overline{p}_T^4(\cos\phi)- |\mathbf{q}_T|
+  \int d(\phi) \cos\phi\,\overline{p}_T^4(\cos\phi)\right]\\
 \\
 &=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{64\pi |\mathbf{q}_T|^4}\left[M\cosh(y-\eta) \int
-  \frac{d(\cos\phi)}{\left(a-\cos\phi\right)^4}-|\mathbf{q}_T|\int
-  \frac{\cos\phi \,d(\cos\phi)}{\left(a-\cos\phi\right)^4}\right]\\
+  \frac{d(\phi)}{\left(a-\cos\phi\right)^4}-|\mathbf{q}_T|\int
+  \frac{\cos\phi \,d(\phi)}{\left(a-\cos\phi\right)^4}\right]\\
 \\
 &=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{64\pi q_T^3} \int
   \frac{dx}{\sqrt{1-x^2}}\left[\frac{1}{(a-x)^3}+\frac{1}{(a+x)^3}\right]\\
 \\
-&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{128\pi q_T^3}\Bigg\{\frac{\sqrt{1-x^2}}{(a^2-1)^2}\left[\frac{3ax-(4a^2-1) }{(x-
-  a)^2}+\frac{3ax+(4a^2-1) }{(x+
-  a)^2}\right]\\
+&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{128\pi q_T^3}\Bigg\{\frac{\sqrt{1-x^2}}{(a^2-1)^2}\left[\frac{2ax(3x^2-5a^2+2)}{(x^2-
+  a^2)^2}\right]\\
 \\
-&-&\displaystyle\frac{(2a^2+1)}{(a^2-1)^{5/2}}\left[\tan^{-1}\left(\frac{1-
-      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right) -\tan^{-1}\left(\frac{1+
-      ax}{\sqrt{a^2-1}\sqrt{1-x^2}}\right)\right]\Bigg\}
+&+&\displaystyle\frac{2(2a^2+1)}{(a^2-1)^{5/2}}\left[\tan^{-1}\left(\frac{x\sqrt{E_q^2-q_T^2}}{\sqrt{1-x^2}E_q}\right)\right]\Bigg\}
 \end{array}
 \end{equation}
 with $E_q=M\cosh\left(\eta - y\right)$, $q_T=|\mathbf{q}_T|$, and:
@@ -2307,13 +2273,9 @@ with $E_q=M\cosh\left(\eta - y\right)$, $q_T=|\mathbf{q}_T|$, and:
 so that:
 \begin{equation}\label{eq:Hfinal}
 \begin{array}{rcl}
-\displaystyle H(x,\eta)&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{128\pi (E_q^2-q_T^2)^{2}}\Bigg\{\sqrt{1-x^2}q_T\left[\frac{3E_qq_Tx-(4E_q^2-q_T^2) }{(xq_T-
-  E_q)^2}+\frac{3E_qq_Tx+(4E_q^2-q_T^2) }{(q_Tx+
-  E_q)^2}\right]\\
+\displaystyle H(x,\eta)&=&\displaystyle\frac{3Q^3 \sinh(y-\eta)}{128\pi (E_q^2-q_T^2)^{2}}\Bigg\{\frac{2x\sqrt{1-x^2}E_qq_T^2}{(x^2q_T^2-E_q^2)^2}\left[3x^2q_T^2+2q_T^2-5E_q^2\right]\\
 \\
-&-&\displaystyle\frac{(2E_q^2+q_T^2)}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{q_T-
-      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right) -\tan^{-1}\left(\frac{q_T+
-      xE_q}{\sqrt{E_q^2-q_T^2}\sqrt{1-x^2}}\right)\right]\Bigg\}\,.
+&+&\displaystyle\frac{2(2E_q^2+q_T^2)}{\sqrt{E_q^2-q_T^2}}\left[\tan^{-1}\left(\frac{x\sqrt{E_q^2-q_T^2}}{\sqrt{1-x^2}E_q}\right)\right]\Bigg\}\,.
 \end{array}
 \end{equation}
 Finally, using the definition of $H$ in Eq.~(\ref{eq:Hfinal}), one can
