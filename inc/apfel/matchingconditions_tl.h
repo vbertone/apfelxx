@@ -12,8 +12,11 @@ namespace apfel
 {
   /**
    * @defgroup MatchCondTL Time-like matching conditions
-   * @note The expressions are taken from:
-   * https://arxiv.org/pdf/hep-ph/0504192.pdf.
+
+   * @note The expressions at O(&alpha;<SUB>s</SUB>) are taken from:
+   * https://arxiv.org/pdf/hep-ph/0504192.pdf. The only
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) currently known contribution
+   * is taken from: https://arxiv.org/pdf/2407.07623.
    */
   ///@{
   ///@}
@@ -23,7 +26,7 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) constant term of eq. (15) of
+   * @brief O(&alpha;<SUB>s</SUB>) constant term of Eq. (15) of
    * https://arxiv.org/pdf/hep-ph/0504192.pdf.
    */
   class ATS1Hg_0: public Expression
@@ -35,7 +38,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq. (15) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (15) of
    * https://arxiv.org/pdf/hep-ph/0504192.pdf.
    */
   class ATS1Hg_L: public Expression
@@ -47,7 +50,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq. (22) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (22) of
    * https://arxiv.org/pdf/hep-ph/0504192.pdf.
    */
   class ATS1ggH_L: public Expression
@@ -83,7 +86,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq. (B.2) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.2) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class ATS1gH_L: public Expression
@@ -91,6 +94,53 @@ namespace apfel
   public:
     ATS1gH_L();
     double Regular(double const& x) const;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOMC NNLO unpolarised matching conditions
+   * @ingroup MatchCondTL
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq.
+   * (46) of https://arxiv.org/pdf/2407.07623.
+   */
+  class ATNS2qqH_0: public Expression
+  {
+  public:
+    ATNS2qqH_0();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (46) of
+   * https://arxiv.org/pdf/2407.07623.
+   */
+  class ATNS2qqH_L: public Expression
+  {
+  public:
+    ATNS2qqH_L();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (46) of
+   * https://arxiv.org/pdf/2407.07623.
+   */
+  class ATNS2qqH_L2: public Expression
+  {
+  public:
+    ATNS2qqH_L2();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
   ///@}
 }

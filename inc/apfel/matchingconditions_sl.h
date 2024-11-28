@@ -28,7 +28,7 @@ namespace apfel
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq. (B.2) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.2) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS1Hg_L: public Expression
@@ -40,7 +40,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.6) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.6) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS1ggH_L: public Expression
@@ -106,7 +106,7 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq
    * (B.1) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class APS2Hq_0: public Expression
@@ -118,7 +118,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.1) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.1) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class APS2Hq_L: public Expression
@@ -130,7 +130,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.1) of
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.1) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class APS2Hq_L2: public Expression
@@ -141,7 +141,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq
    * (B.3) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2Hg_0: public Expression
@@ -153,7 +153,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.3) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.3) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2Hg_L: public Expression
@@ -165,7 +165,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.3) of
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.3) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2Hg_L2: public Expression
@@ -176,7 +176,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq
    * (B.4) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class ANS2qqH_0: public Expression
@@ -190,7 +190,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.4) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.4) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class ANS2qqH_L: public Expression
@@ -204,7 +204,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.4) of
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.4) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class ANS2qqH_L2: public Expression
@@ -217,7 +217,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq
    * (B.5) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2gqH_0: public Expression
@@ -229,7 +229,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.5) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.5) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2gqH_L: public Expression
@@ -241,7 +241,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.5) of
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.5) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2gqH_L2: public Expression
@@ -252,7 +252,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of eq
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq
    * (B.7) of https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2ggH_0: public Expression
@@ -266,7 +266,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.7) of
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.7) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2ggH_L: public Expression
@@ -280,7 +280,7 @@ namespace apfel
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
-   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of eq (B.7) of
+   * ln<SUP>2</SUP>(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.7) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
    */
   class AS2ggH_L2: public Expression

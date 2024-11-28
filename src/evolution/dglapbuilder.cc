@@ -724,11 +724,39 @@ namespace apfel
       }
 
     // ===============================================================
-    // NNLO matching conditions. Set to zero for now because they are
-    // not know yet.
-    std::map<int, Operator> MatchNNLO;
+    // NNLO matching conditions. Only light-to-light quark matching
+    // currently known at NNLO.
+    std::map<int, std::map<int, Operator>> MatchNNLO;
+    const Operator ANS2qqH0 {g, ATNS2qqH_0{},  IntEps};
+    const Operator ANS2qqHL {g, ATNS2qqH_L{},  IntEps};
+    const Operator ANS2qqHL2{g, ATNS2qqH_L2{}, IntEps};
+    const Operator AS2qqH0  = ANS2qqH0;
+    const Operator AS2qqHL  = ANS2qqHL;
+    const Operator AS2qqHL2 = ANS2qqHL2;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const double lnk  = LogKth[nf];
+        const double lnk2 = lnk * lnk;
+        const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
+        const Operator AS2qqH  = AS2qqH0  + lnk * AS2qqHL  + lnk2 * AS2qqHL2;
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0, Zero});
+        OM.insert({MatchingBasisQCD::M1, Zero});
+        OM.insert({MatchingBasisQCD::M2, Zero});
+        OM.insert({MatchingBasisQCD::M3, Zero});
+        OM.insert({MatchingBasisQCD::M4, Zero});
+        OM.insert({MatchingBasisQCD::M5, nf * AS2qqH});
+        OM.insert({MatchingBasisQCD::M6, (-1) * AS2qqH});
+        OM.insert({MatchingBasisQCD::M7, ANS2qqH});
+        MatchNNLO.insert({nf, OM});
+      }
+
+    // Auxiliary NNLO contributions to be used for backward
+    // matching. They are essentially the square of the NLO matching
+    // matrix. They are labelled with perturbative order -2.
+    std::map<int, Operator> MatchNNLOb;
     for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
-      MatchNNLO.insert({i, Zero});
+      MatchNNLOb.insert({i, Zero});
 
     // ===============================================================
     // NNLO splitting function operators
@@ -771,8 +799,8 @@ namespace apfel
             obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNNLO.at(nf)}});
             obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
-            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO}});
-            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO}});
+            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLOb}});
           }
         else
           {
@@ -781,8 +809,8 @@ namespace apfel
             obj.SplittingFunctions.insert({ 2, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNNLO.at(nf)}});
             obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({ 1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
-            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO}});
-            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO}});
+            obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb}});
           }
         DglapObj.insert({nf,obj});
       }
