@@ -21,7 +21,7 @@ namespace apfel
   ///@{
   ///@}
   /**
-   * @defgroup NLOMC NLO unpolarised matching conditions
+   * @defgroup NLOMCTL NLO unpolarised matching conditions
    * @ingroup MatchCondTL
    */
   ///@{
@@ -98,7 +98,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NNLOMC NNLO unpolarised matching conditions
+   * @defgroup NNLOMCTL NNLO unpolarised matching conditions
    * @ingroup MatchCondTL
    */
   ///@{

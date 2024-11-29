@@ -22,6 +22,10 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
    set(CMAKE_MACOSX_RPATH 0)
 endif ()
 
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.27.0")
+   cmake_policy(SET CMP0148 OLD)
+endif ()
+
 # ============================
 # MAIN
 # ============================
@@ -79,9 +83,6 @@ else (PkgConfig_FOUND)
 endif (PkgConfig_FOUND)
 
 # pybind11
-if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.27.0")
-   cmake_policy(SET CMP0148 OLD)
-endif ()
 find_package(pybind11 QUIET)
 
 if (pybind11_FOUND)
