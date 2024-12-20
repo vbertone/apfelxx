@@ -26,8 +26,9 @@ namespace apfel
     /**
      * @brief The "Expression" constructor
      * @param eta: upper limit of the convolution integral (default: 1)
+     * @param is_xdependent: flag to switch between the integration modes
      */
-    Expression(double const& eta = 1);
+    Expression(double const& eta = 1, bool const& is_xdependent=false);
     ///@}
 
     /**
@@ -99,9 +100,16 @@ namespace apfel
      */
     double eta() const { return _eta; }
 
+    /**
+     * @brief Function that returns the value of the flag for the 
+     * integration mode.
+     */
+    bool is_xdependent() const {return _is_xdependent;}
+
   protected:
     double mutable _extvar;  //!< External kinematic variable
     double const   _eta;     //!< Scaling parameter
+    bool const _is_xdependent; //!< Integration mode flag
   };
 
   /**

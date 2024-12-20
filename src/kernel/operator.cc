@@ -7,6 +7,7 @@
 #include "apfel/operator.h"
 #include "apfel/integrator.h"
 #include "apfel/messages.h"
+#include "apfel/constants.h"
 
 #include <cmath>
 
@@ -21,8 +22,13 @@ namespace apfel
   {
     if (_gpd)
       BuildOperatorGPD();
-    else
-      BuildOperatorDGLAP();
+    else{
+      if (_expr.is_xdependent()){
+        BuildOperatorDGLAPxdep();
+      } else {
+        BuildOperatorDGLAP();
+      }
+    }
   }
 
   //_________________________________________________________________________
@@ -199,6 +205,84 @@ namespace apfel
                                     + _expr.LocalPP(xg[beta] / xg[beta + 1])
                                     - (beta == 0 ? 0 : _expr.LocalPP(xg[std::max(0, beta - k)] / xg[beta]));
       }
+  }
+
+  //_________________________________________________________________________
+  void Operator::BuildOperatorDGLAPxdep()
+  {
+    const LagrangeInterpolator li{_grid};
+
+    const double eta = _expr.eta();
+    double lneta = std::log(eta);
+
+    const int ng = _grid.nGrids();
+
+    _Operator.resize(ng);
+    for (int ig = 0; ig < ng; ig++)
+    {
+      const SubGrid &sg = _grid.GetSubGrid(ig);
+
+      const std::vector<double> &xg = sg.GetGrid();
+      const int nx = sg.nx();
+      const int id = sg.InterDegree();
+      const double deltax = sg.Step();
+      const double x0 = xg[0];
+      const double lnx0 = std::log(x0);
+
+      _Operator[ig].resize(nx + 1, nx + 1);
+      for (int beta = 0; beta <= nx; beta++)
+      {
+        // _Operator[ig][beta].resize(nx + 1-beta, 0);
+        double chi_beta = xg[beta] / eta;
+        if(chi_beta>=1){
+          continue;
+        }
+        for (int alpha = beta; alpha <= nx; alpha++)
+        {
+          double I = 0;
+          double ln_ratio = nx * lneta / lnx0;
+          double ws = li.InterpolantLog(alpha, std::log(chi_beta), sg);
+          double up = std::min((double)nx,beta+ln_ratio-alpha+id+nx);
+          int up_ind = std::floor(up);
+          double low = 0.;
+          if(up_ind == nx){
+            low = beta+ln_ratio;
+          } else {
+            low = std::max(beta+ln_ratio,beta+ln_ratio -alpha-1+nx);
+          }
+          int low_ind = std::ceil(low);
+          if(up-up_ind>eps10){
+            const Integrator Ij{[&](double const &z) -> double
+                                {
+                                  const double wr = li.InterpolantLog(alpha, std::log(chi_beta / z), sg);
+                                  return _expr.Regular(z) * wr + _expr.Singular(z) * (wr - ws);
+                                }};
+            I += eta * Ij.integrate(xg[up_ind],x0*std::exp(deltax*up), _eps);
+          }
+          for(int j=up_ind-low_ind; j>0;j--){
+            double upper_bound = xg[low_ind+j];
+            double lower_bound = xg[low_ind+j-1];
+            const Integrator Ij{[&](double const &z) -> double
+                                {
+                                  const double wr = li.InterpolantLog(alpha, std::log(chi_beta / z), sg);
+                                  return _expr.Regular(z) * wr +(wr - ws)*_expr.Singular(z);
+                                }};
+            I += eta * Ij.integrate(lower_bound,upper_bound, _eps);
+          }
+          if(low_ind-low>eps10){
+            const Integrator Ij{[&](double const &z) -> double
+                                {
+                                  const double wr = li.InterpolantLog(alpha, std::log(chi_beta / z), sg);
+                                  return _expr.Regular(z) * wr + _expr.Singular(z) * (wr - ws);
+                                }};
+            I += eta * Ij.integrate(x0*std::exp(deltax*low), xg[low_ind], _eps);
+          }
+          I += eta * _expr.Local(chi_beta) * ws;
+          _Operator[ig](beta,alpha-beta) = I;
+        }
+      }
+    }
+    return;
   }
 
   //_________________________________________________________________________

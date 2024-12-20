@@ -66,6 +66,11 @@ namespace apfel
     void BuildOperatorGPD();
 
     /**
+     * @brief Function that builds a DGLAP-like operator, that is xdependent.
+     */
+    void BuildOperatorDGLAPxdep();
+
+    /**
      * @brief Function that interpolates the operator over the first
      * index return a Distribution object.
      * @param x: the value in x to be interpolated
