@@ -97,6 +97,7 @@ endif (pybind11_FOUND)
 # Enable testing and build test codes
 enable_testing()
 add_subdirectory(tests)
+add_subdirectory(tests/ACOT_tests)
 
 # ============================
 # CONFIGURATION
