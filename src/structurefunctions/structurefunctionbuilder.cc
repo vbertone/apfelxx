@@ -2308,9 +2308,9 @@ namespace apfel
     const double tR = 2 * log(xiR);
     const double tF = 2 * log(xiF);
 
-    // Call FObj at energy 1 to use it for those quantities that do
+    // Call FObj at energy 2 to use it for those quantities that do
     // not depend on Q.
-    const StructureFunctionObjects FObj1 = FObj(1, Couplings(1));
+    const StructureFunctionObjects FObj1 = FObj(2, Couplings(2));
 
     // Get grid.
     Grid const& g = FObj1.C0.at(1).at(0).GetGrid();
