@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/convolutionmap.h"
+#include "apfel/operator.h"
 
 namespace apfel
 {
@@ -110,6 +111,89 @@ namespace apfel
      */
     DISCCBasis(std::vector<double> const& CKM, bool const& Is3);
     ///@}
+  };
+
+  /**
+   * @brief The DISNCBasis_ACOT class is a derived of ConvolutionMap
+   * specialised for the computation of the NC DIS structure
+   * functions in the ACOT scheme.
+   */
+  class DISNCBasis_ACOT: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The map enumerators for the operands and the
+     * distributions.
+     */
+    enum Operand: int {OGLUON, OSIGMA, OVALENCE, OT3, OV3, OT8, OV8, OT15, OV15, OT24, OV24, OT35, OV35};
+    enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
+
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
+    /**
+     * @brief The DISNCBasis_ACOT constructor for the total structure functions.
+     * @param Ch: vector of the effective quark charges
+     */
+    DISNCBasis_ACOT(std::vector<double> const& Ch);
+    ///@}
+
+    /**
+     * @brief Computes the change of basis from the physics basis to the QCD-evolution basis for light structure function.  
+     * 
+     * @param isPV switches between convolution basis for parity violating charges (F3) or not (F1,F2,FL)
+     * @param gluon Gluon operators for each order
+     * @param ns NS operators for each order AND each number of flavours -> you need only nf=3
+     * @param ps PS operators for each order 
+     * @return Returns the QCD evolution map in the order of C0,C1,C2
+     */
+    std::vector<std::map<int,Operator>> get_light_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps);
+    /**
+     * @brief Computes the change of basis from the physics basis to the QCD-evolution basis for charm structure function.  
+     * 
+     * @param isPV switches between convolution basis for parity violating charges (F3) or not (F1,F2,FL)
+     * @param gluon Gluon operators for each order
+     * @param ns NS operators for each order AND each number of flavours -> you need only nf=3,4
+     * @param ps PS operators for each order 
+     * @return Returns the QCD evolution map in the order of C0,C1,C2
+     */
+    std::vector<std::map<int,Operator>> get_charm_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps);
+    /**
+     * @brief Computes the change of basis from the physics basis to the QCD-evolution basis for bottom structure function.  
+     * 
+     * @param isPV switches between convolution basis for parity violating charges (F3) or not (F1,F2,FL)
+     * @param gluon Gluon operators for each order
+     * @param ns NS operators for each order AND each number of flavours -> you need only nf=4,5
+     * @param ps PS operators for each order 
+     * @return Returns the QCD evolution map in the order of C0,C1,C2
+     */
+    std::vector<std::map<int,Operator>> get_bottom_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps);
+    /**
+     * @brief Computes the change of basis from the physics basis to the QCD-evolution basis for top structure function.  
+     * 
+     * @param isPV switches between convolution basis for parity violating charges (F3) or not (F1,F2,FL)
+     * @param gluon Gluon operators for each order
+     * @param ns NS operators for each order AND each number of flavours -> you need only nf=5,6
+     * @param ps PS operators for each order 
+     * @return Returns the QCD evolution map in the order of C0,C1,C2
+     */
+    std::vector<std::map<int,Operator>> get_top_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps);
+    /**
+     * @brief Uses the results from the light,charm,bottom and top get_operators-functions to calculate the total structure function. (It simply adds all coefficients for all orders and distributions)
+     * 
+     * @param isPV switches between convolution basis for parity violating charges (F3) or not (F1,F2,FL)
+     * @param coeff The results from the light,charm,bottom and top get_operators-funcitons. Order: {light,charm,bottom,top}
+     * @return Returns the QCD evolution map in the order of C0,C1,C2
+     */
+    std::vector<std::map<int,Operator>> get_tot_operators(bool isPV, std::vector<std::vector<std::map<int,Operator>>> coeff);
+  private:
+    /**
+     * @brief Vector of effective charges and vector of averages as a function of nf
+     */
+    std::vector<double> _Ch;
+    std::vector<double> _avCh;
   };
   ///@}
 }
