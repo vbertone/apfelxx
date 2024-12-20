@@ -64,6 +64,7 @@
  */
 #include "apfel/dglapbuilder.h"
 #include "apfel/structurefunctionbuilder.h"
+#include "apfel/structurefunctionbuilder_ACOT.h"
 #include "apfel/tmdbuilder.h"
 #include "apfel/gpdbuilder.h"
 #include "apfel/gtmdbuilder.h"
