@@ -200,8 +200,11 @@ namespace apfel
    * https://pdg.lbl.gov/2023/listings/rpp2023-list-z-boson.pdf.
    */
   ///@{
-  const double ZMass  = 91.1876;
-  const double GammaZ = 2.4955;
+  // const double ZMass  = 91.1876;
+  // const double ZMass = 91.1870;
+  const double ZMass = 91.188;
+  // const double GammaZ = 2.4955;
+  const double GammaZ = 2.4952;
   ///@}
 
   /**
@@ -231,7 +234,8 @@ namespace apfel
    * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{
-  const double Sin2ThetaW = 0.23121;
+  // const double Sin2ThetaW = 0.23121;
+  const double Sin2ThetaW = 0.2303;
   ///@}
 
   /**
