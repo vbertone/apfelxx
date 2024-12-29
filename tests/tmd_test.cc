@@ -87,6 +87,9 @@ int main()
   //apfel::DoubleExponentialQuadrature DEObj{};
   apfel::OgataQuadrature DEObj{};
 
+  // Phase-space reduction factor
+  apfel::TwoBodyPhaseSpace ps{20, -1, 2.4};
+
   // Compute predictions
   const int nqT = 100;
   const double qTmin = 0.01;
@@ -94,7 +97,9 @@ int main()
   const double qTstp = ( qTmax - qTmin ) / ( nqT - 1 );
   for (double qT = qTmin; qT <= qTmax; qT += qTstp)
     std::cout << std::scientific << Q << "  " << y << "  " << qT << "  "
-              << apfel::ConvFact * qT * 8 * M_PI * pow(apfel::alphaem, 2) * hcs / pow(Q, 3) / 9 * DEObj.transform(TMDLumib, qT)
+              << apfel::ConvFact * qT * 8 * M_PI * pow(apfel::alphaem, 2) * hcs / pow(Q, 3) / 9 * DEObj.transform(TMDLumib, qT) << "  "
+              << ps.PhaseSpaceReduction(Q, y, qT) << "  "
+              << ps.ParityViolatingPhaseSpaceReduction(Q, y, qT) << "  "
               << std::endl;
   t.stop();
 

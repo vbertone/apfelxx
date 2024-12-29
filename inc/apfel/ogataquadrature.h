@@ -78,16 +78,18 @@ namespace apfel
     /**
      * @brief Function that returns the unscaled coordinates used in
      * the Ogata quadrature.
+     * @param n: maximum number of coordinates returned (default: all of them (-1))
      * @return the unscales coordinates
      */
-    std::vector<double> GetCoordinates() const { return _xf; }
+    std::vector<double> GetCoordinates(int const& n = -1) const { return (n < 0 ? _xf : std::vector<double>(_xf.begin(), _xf.begin() + n)); }
 
     /**
      * @brief Function that returns the weights used in the Ogata
      * quadrature.
+     * @param n: maximum number of weights returned (default: all of them (-1))
      * @return the weights
      */
-    std::vector<double> GetWeights() const { return _weights; }
+    std::vector<double> GetWeights(int const& n = -1) const { return (n < 0 ? _weights : std::vector<double>(_weights.begin(), _weights.begin() + n)); }
 
     /**
      * @brief Function that sets the Ogata step parameter.
