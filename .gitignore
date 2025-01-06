@@ -93,3 +93,6 @@ build
 
 # Codecov
 *.gcno, *.gcda, *.gcov
+
+# VScode settings
+/.vscode/

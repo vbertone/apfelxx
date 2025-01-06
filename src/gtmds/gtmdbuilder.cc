@@ -62,11 +62,11 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators
     std::map<int, std::map<int, Operator>> C10;
-    const Operator O1ns{g, Cgtmd1nse{xi}, IntEps, true};
-    const Operator O1qq{g, Cgtmd1qqe{xi}, IntEps, true};
-    const Operator O1qg{g, Cgtmd1qge{xi}, IntEps, true};
-    const Operator O1gq{g, Cgtmd1gqe{xi}, IntEps, true};
-    const Operator O1gg{g, Cgtmd1gge{xi}, IntEps, true};
+    const Operator O1ns{g, Cgtmd1nseUU{xi}, IntEps, true};
+    const Operator O1qq{g, Cgtmd1qqeUU{xi}, IntEps, true};
+    const Operator O1qg{g, Cgtmd1qgeUU{xi}, IntEps, true};
+    const Operator O1gq{g, Cgtmd1gqeUU{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeUU{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -200,8 +200,8 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators
     std::map<int, std::map<int, Operator>> C10;
-    const Operator O1qg{g, Cgtmd1qgo{xi}, IntEps, true};
-    const Operator O1gg{g, Cgtmd1ggo{xi}, IntEps, true};
+    const Operator O1qg{g, Cgtmd1qgoUU{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggoUU{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
