@@ -113,11 +113,11 @@ namespace apfel
    */
   class Cgtmd1qgeUT : public Expression
   {
-   public:
-     Cgtmd1qgeUT(double const &xi);
-     double Regular(double const &x) const;
-     double SingularPV(double const &x) const;
-     double LocalLogPV(double const &x) const;
+  public:
+    Cgtmd1qgeUT(double const &xi);
+    double Regular(double const &x) const;
+    double SingularPV(double const &x) const;
+    double LocalLogPV(double const &x) const;
   };
 
   /**
@@ -127,9 +127,9 @@ namespace apfel
    */
   class Cgtmd1qgoUT : public Expression
   {
-   public:
-     Cgtmd1qgoUT(double const &xi);
-     double LocalPV() const;
+  public:
+    Cgtmd1qgoUT(double const &xi);
+    double LocalPV() const;
   };
 
   /**
@@ -139,11 +139,11 @@ namespace apfel
    */
   class Cgtmd1ggeUT : public Expression
   {
-   public:
-     Cgtmd1ggeUT(double const &xi);
-     double Regular(double const &x) const;
-     double SingularPV(double const &x) const;
-     double LocalLogPV(double const &x) const;
+  public:
+    Cgtmd1ggeUT(double const &xi);
+    double Regular(double const &x) const;
+    double SingularPV(double const &x) const;
+    double LocalLogPV(double const &x) const;
   };
 
   /**
@@ -153,9 +153,9 @@ namespace apfel
    */
   class Cgtmd1ggoUT : public Expression
   {
-   public:
-     Cgtmd1ggoUT(double const &xi);
-     double LocalPV() const;
+  public:
+    Cgtmd1ggoUT(double const &xi);
+    double LocalPV() const;
   };
   ///@}
 
@@ -207,9 +207,9 @@ namespace apfel
    */
   class Cgtmd1qgoLL : public Expression
   {
-   public:
-     Cgtmd1qgoLL(double const &xi);
-     double LocalPV() const;
+  public:
+    Cgtmd1qgoLL(double const &xi);
+    double LocalPV() const;
   };
 
   /**
@@ -243,9 +243,9 @@ namespace apfel
    */
   class Cgtmd1ggoLL : public Expression
   {
-   public:
-     Cgtmd1ggoLL(double const &xi);
-     double LocalPV() const;
+  public:
+    Cgtmd1ggoLL(double const &xi);
+    double LocalPV() const;
   };
 
   /**
@@ -255,11 +255,11 @@ namespace apfel
    */
   class Cgtmd1qgeLT : public Expression
   {
-   public:
-     Cgtmd1qgeLT(double const &xi);
-     double Regular(double const &x) const;
-     double SingularPV(double const &x) const;
-     double LocalLogPV(double const &x) const;
+  public:
+    Cgtmd1qgeLT(double const &xi);
+    double Regular(double const &x) const;
+    double SingularPV(double const &x) const;
+    double LocalLogPV(double const &x) const;
   };
 
   /**
@@ -269,9 +269,9 @@ namespace apfel
    */
   class Cgtmd1qgoLT : public Expression
   {
-   public:
-     Cgtmd1qgoLT(double const &xi);
-     double LocalPV() const;
+  public:
+    Cgtmd1qgoLT(double const &xi);
+    double LocalPV() const;
   };
 
   /**
@@ -281,11 +281,11 @@ namespace apfel
    */
   class Cgtmd1ggeLT : public Expression
   {
-   public:
-     Cgtmd1ggeLT(double const &xi);
-     double Regular(double const &x) const;
-     double SingularPV(double const &x) const;
-     double LocalLogPV(double const &x) const;
+  public:
+    Cgtmd1ggeLT(double const &xi);
+    double Regular(double const &x) const;
+    double SingularPV(double const &x) const;
+    double LocalLogPV(double const &x) const;
   };
 
   /**
@@ -295,9 +295,9 @@ namespace apfel
    */
   class Cgtmd1ggoLT : public Expression
   {
-   public:
-     Cgtmd1ggoLT(double const &xi);
-     double LocalPV() const;
+  public:
+    Cgtmd1ggoLT(double const &xi);
+    double LocalPV() const;
   };
   ///@}
 
