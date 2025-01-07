@@ -2,6 +2,7 @@
 // APFEL++ 2017
 //
 // Author: Valerio Bertone: valerio.bertone@cern.ch
+//         Simone Rodini: rodini.simone.luigi@gmail.com
 //
 
 #pragma once
@@ -107,7 +108,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity even quark-gluon
-   * unpolarised to transversely polarized matching function for GTMDs.
+   * unpolarised to transversely polarized matching function for
+   * GTMDs.
    */
   class Cgtmd1qgeUT : public Expression
   {
@@ -120,7 +122,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity odd quark-gluon
-   * unpolarised to transversely polarized matching function for GTMDs.
+   * unpolarised to transversely polarized matching function for
+   * GTMDs.
    */
   class Cgtmd1qgoUT : public Expression
   {
@@ -131,7 +134,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-gluon
-   * unpolarised to transversely polarized matching function for GTMDs.
+   * unpolarised to transversely polarized matching function for
+   * GTMDs.
    */
   class Cgtmd1ggeUT : public Expression
   {
@@ -144,7 +148,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity odd gluon-gluon
-   * unpolarised to transversely polarized matching function for GTMDs.
+   * unpolarised to transversely polarized matching function for
+   * GTMDs.
    */
   class Cgtmd1ggoUT : public Expression
   {
@@ -245,7 +250,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity even quark-gluon
-   * longitudinally polarised to transversely polarized matching function for GTMDs.
+   * longitudinally polarised to transversely polarized matching
+   * function for GTMDs.
    */
   class Cgtmd1qgeLT : public Expression
   {
@@ -258,8 +264,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity odd quark-gluon
-   * longitudinally polarised to transversely polarized matching function for
-   * GTMDs.
+   * longitudinally polarised to transversely polarized matching
+   * function for GTMDs.
    */
   class Cgtmd1qgoLT : public Expression
   {
@@ -270,8 +276,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity even gluon-gluon
-   * longitudinally polarised to transversely polarized matching function for
-   * GTMDs.
+   * longitudinally polarised to transversely polarized matching
+   * function for GTMDs.
    */
   class Cgtmd1ggeLT : public Expression
   {
@@ -284,8 +290,8 @@ namespace apfel
 
   /**
    * @brief The O(&alpha;<SUB>s</SUB>) parity odd gluon-gluon
-   * longitudinally polarised to transversely polarized matching function for
-   * GTMDs.
+   * longitudinally polarised to transversely polarized matching
+   * function for GTMDs.
    */
   class Cgtmd1ggoLT : public Expression
   {
@@ -352,9 +358,6 @@ namespace apfel
   public:
     Cgtmd1ggeTU(double const& xi);
     double Regular(double const& x)    const;
-    // SR: I think this local term `propto zeta2 is present only
-    // for diagonal polarizations 
-    // double Local(double const&)        const;
     double SingularPV(double const& x) const;
     double LocalLogPV(double const& x) const;
   };
@@ -396,8 +399,6 @@ namespace apfel
   public:
     Cgtmd1ggeTL(double const& xi);
     double Regular(double const& x)    const;
-    // SR: see TU case
-    // double Local(double const&)        const;
     double SingularPV(double const& x) const;
     double LocalLogPV(double const& x) const;
   };

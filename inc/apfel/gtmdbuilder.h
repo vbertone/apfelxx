@@ -2,6 +2,7 @@
 // APFEL++ 2017
 //
 // Author: Valerio Bertone: valerio.bertone@cern.ch
+//         Simone Rodini: rodini.simone.luigi@gmail.com
 //
 
 #pragma once
@@ -26,8 +27,6 @@ namespace apfel
     std::map<int, std::vector<double>>        KCS;
     std::map<int, std::vector<Set<Operator>>> MatchingFunctions;
   };
-
-  enum Polarization {U, L, T};
 
   /**
    * @name GTMD object initializers
@@ -66,7 +65,6 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         double              const& xi,
                                                         double              const& IntEps = 1e-5);
-
 
   /**
    * @brief The InitializeGtmdObjectsEvenLL function precomputes the
@@ -132,7 +130,6 @@ namespace apfel
                                                         double              const& xi,
                                                         double              const& IntEps = 1e-5);
 
-
   /**
    * @brief The InitializeGtmdObjectsEvenUT function precomputes the
    * perturbative coefficients required for the evolution and matching
@@ -142,8 +139,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsEvenUT(Grid                const& g,
@@ -160,8 +155,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddUT(Grid                const& g,
@@ -178,8 +171,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsEvenLT(Grid                const& g,
@@ -196,8 +187,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddLT(Grid                const& g,
@@ -205,7 +194,6 @@ namespace apfel
                                                         double              const& xi,
                                                         double              const& IntEps = 1e-5);
 
-  
   /**
    * @brief The InitializeGtmdObjectsEvenTU function precomputes the
    * perturbative coefficients required for the evolution and matching
@@ -215,8 +203,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTU(Grid                const& g,
@@ -233,8 +219,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddTU(Grid                const& g,
@@ -251,8 +235,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTL(Grid                const& g,
@@ -269,8 +251,6 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
-   * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddTL(Grid                const& g,

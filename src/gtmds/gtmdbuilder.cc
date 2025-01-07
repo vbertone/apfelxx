@@ -2,6 +2,7 @@
 // APFEL++ 2017
 //
 // Author: Valerio Bertone: valerio.bertone@cern.ch
+//         Simone Rodini: rodini.simone.luigi@gmail.com
 //
 
 #include "apfel/gtmdbuilder.h"
@@ -166,7 +167,6 @@ namespace apfel
 
     return GtmdObj;
   }
-
 
   //_____________________________________________________________________________
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddUU(Grid                const& g,
@@ -415,7 +415,6 @@ namespace apfel
     return GtmdObj;
   }
 
-
   //_____________________________________________________________________________
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddLL(Grid                const& g,
                                                         std::vector<double> const& Thresholds,
@@ -658,7 +657,6 @@ namespace apfel
 
     return GtmdObj;
   }
-
 
   //_____________________________________________________________________________
   std::map<int, GtmdObjects> InitializeGtmdObjectsOddTT(Grid                const& g,
