@@ -15,7 +15,7 @@ var searchData=
   ['nlo_20matching_20functions_20for_20sivers_20quark_20pdfs_12',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
   ['nlo_20matching_20functions_20for_20the_20helicity_20ffs_20g1_13',['NLO matching functions for the helicity FFs g1',['../group__NLOffg1.html',1,'']]],
   ['nlo_20splitting_20functions_14',['NLO splitting functions',['../group__NLOpolsf.html',1,'NLO splitting functions'],['../group__NLOtranssf.html',1,'NLO splitting functions'],['../group__NLOunpsf.html',1,'NLO splitting functions'],['../group__NLOunpsftl.html',1,'NLO splitting functions']]],
-  ['nlo_20transversely_20linearly_20polarised_15',['NLO transversely/linearly polarised',['../group__NLOmatchTrans.html',1,'']]],
+  ['nlo_20transversely_20linearly_20polarised_20matching_20functions_20for_20gtmds_15',['NLO transversely/linearly polarised matching functions for GTMDs',['../group__NLOmatchTrans.html',1,'']]],
   ['nlo_20unpolarised_20matching_20conditions_16',['NLO unpolarised matching conditions',['../group__NLOMC.html',1,'NLO unpolarised matching conditions'],['../group__NLOMCTL.html',1,'NLO unpolarised matching conditions']]],
   ['nlo_20unpolarised_20matching_20functions_20for_20gtmds_17',['NLO unpolarised matching functions for GTMDs',['../group__NLOmatchUnp.html',1,'']]],
   ['nlo_20zero_20mass_20coefficient_20functions_18',['NLO zero mass coefficient functions',['../group__NLOzmpol.html',1,'NLO zero-mass coefficient functions'],['../group__NLOzm.html',1,'NLO zero-mass coefficient functions'],['../group__NLOzmSIA.html',1,'NLO zero-mass coefficient functions']]],

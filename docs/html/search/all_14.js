@@ -44,7 +44,7 @@ var searchData=
   ['trans_41',['TRANS',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792aaa4d3e47e41ae4dfaea730e92a239b31',1,'apfel::EvolutionSetup']]],
   ['transform_42',['transform',['../classapfel_1_1DoubleExponentialQuadrature.html#af9c3896a4859bc74803ad537113585a8',1,'apfel::DoubleExponentialQuadrature::transform()'],['../classapfel_1_1OgataQuadrature.html#aba999491c6de66e18d029979db8fa3ed',1,'apfel::OgataQuadrature::transform()']]],
   ['transitionpoints_43',['TransitionPoints',['../classapfel_1_1Grid.html#af2190ab06c49804f6bc9bf6bc3b1adbe',1,'apfel::Grid']]],
-  ['transversely_20linearly_20polarised_44',['NLO transversely/linearly polarised',['../group__NLOmatchTrans.html',1,'']]],
+  ['transversely_20linearly_20polarised_20matching_20functions_20for_20gtmds_44',['NLO transversely/linearly polarised matching functions for GTMDs',['../group__NLOmatchTrans.html',1,'']]],
   ['transversely_20polarised_20evolution_20kernels_45',['Transversely polarised evolution kernels',['../group__GPDTransSF.html',1,'']]],
   ['transversely_20polarised_20splitting_20functions_46',['Transversely polarised splitting functions',['../group__TransSF.html',1,'Transversely polarised splitting functions'],['../group__TransSFtl.html',1,'Transversely polarised splitting functions']]],
   ['trilog_47',['trilog',['../namespaceapfel.html#acf522e8ab3245092ac4472d9d6de7090',1,'apfel']]],

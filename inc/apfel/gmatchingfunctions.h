@@ -302,8 +302,7 @@ namespace apfel
   ///@}
 
   /**
-   * @defgroup NLOmatchTrans NLO transversely/linearly polarised
-   * matching functions for GTMDs
+   * @defgroup NLOmatchTrans NLO transversely/linearly polarised matching functions for GTMDs
    * @ingroup GTMDMatchingFunctions
    */
   ///@{

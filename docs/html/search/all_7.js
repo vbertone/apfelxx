@@ -36,7 +36,7 @@ var searchData=
   ['gbeta_2eh_33',['gbeta.h',['../gbeta_8h.html',1,'']]],
   ['getbesselorder_34',['GetBesselOrder',['../classapfel_1_1OgataQuadrature.html#a33afa2459457ccc251e33915d855572f',1,'apfel::OgataQuadrature']]],
   ['getcoefficientfunctions_35',['GetCoefficientFunctions',['../classapfel_1_1Observable.html#a3c86cb741774a33b44302dbb2be65c4b',1,'apfel::Observable']]],
-  ['getcoordinates_36',['GetCoordinates',['../classapfel_1_1OgataQuadrature.html#ae2ab46b4bd9f1f55e988060fb88fbffd',1,'apfel::OgataQuadrature']]],
+  ['getcoordinates_36',['GetCoordinates',['../classapfel_1_1OgataQuadrature.html#ae1d7f451c652b6250f3e04fc280e88da',1,'apfel::OgataQuadrature']]],
   ['getcutoff_37',['GetCutOff',['../classapfel_1_1OgataQuadrature.html#a84fbd0a2a7136e4098820e64ef7dfd17',1,'apfel::OgataQuadrature']]],
   ['getdistributionjointgrid_38',['GetDistributionJointGrid',['../classapfel_1_1DoubleDistribution.html#ab9a58b7d0d767877be5ee4011240b02d',1,'apfel::DoubleDistribution::GetDistributionJointGrid()'],['../classapfel_1_1Interpolator.html#a078f10bda759e56e8bbcd58109a1b212',1,'apfel::Interpolator::GetDistributionJointGrid()']]],
   ['getdistributionoperator_39',['GetDistributionOperator',['../classapfel_1_1DistributionOperator.html#a3b773a9290be5dcb6ff98d654782ecc7',1,'apfel::DistributionOperator']]],
@@ -75,7 +75,7 @@ var searchData=
   ['getthesholdindices_72',['GetThesholdIndices',['../classapfel_1_1QGrid.html#a816f50918b1deea4abeb17edfcbb3551',1,'apfel::QGrid']]],
   ['getthresholds_73',['GetThresholds',['../classapfel_1_1MatchedEvolution.html#a43bf45bd6994f7e713365df1b3f96111',1,'apfel::MatchedEvolution::GetThresholds()'],['../classapfel_1_1QGrid.html#a28267a0d581baf893a98ea9db4dc05a6',1,'apfel::QGrid::GetThresholds()']]],
   ['getverbositylevel_74',['GetVerbosityLevel',['../namespaceapfel.html#a72b6a7944341cd1a463f55c3330eeb82',1,'apfel']]],
-  ['getweights_75',['GetWeights',['../classapfel_1_1OgataQuadrature.html#ada3be635e1013ef0986af1bfdf554035',1,'apfel::OgataQuadrature']]],
+  ['getweights_75',['GetWeights',['../classapfel_1_1OgataQuadrature.html#a537937a6c564c3e00f3f8c6e2f9f3b2b',1,'apfel::OgataQuadrature']]],
   ['gfermi_76',['GFermi',['../group__PhysConstants.html#gaede2939625ff743f9dc736fe9eaf0779',1,'apfel']]],
   ['gk_5fw_77',['gk_w',['../group__MathConstants.html#ga0b316bc0bef1903a2c9c1de8668efc1e',1,'apfel']]],
   ['gk_5fx_78',['gk_x',['../group__MathConstants.html#ga300e96aa973287a4d619e9ba11a5c748',1,'apfel']]],
@@ -100,7 +100,7 @@ var searchData=
   ['gtmd_20matching_20functions_97',['GTMD matching functions',['../group__GTMDMatchingFunctions.html',1,'']]],
   ['gtmdbuilder_2eh_98',['gtmdbuilder.h',['../gtmdbuilder_8h.html',1,'']]],
   ['gtmdobjects_99',['GtmdObjects',['../structapfel_1_1GtmdObjects.html',1,'apfel']]],
-  ['gtmds_100',['GTMDs',['../group__NLOmatchPol.html',1,'NLO longitudinally polarised matching functions for GTMDs'],['../group__NLOmatchUnp.html',1,'NLO unpolarised matching functions for GTMDs']]],
+  ['gtmds_100',['GTMDs',['../group__NLOmatchPol.html',1,'NLO longitudinally polarised matching functions for GTMDs'],['../group__NLOmatchTrans.html',1,'NLO transversely/linearly polarised matching functions for GTMDs'],['../group__NLOmatchUnp.html',1,'NLO unpolarised matching functions for GTMDs']]],
   ['gtmds_20for_20linealy_20polarised_20gluons_20onto_20longitudinally_20polarised_20partons_101',['NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons',['../group__NLOmatchLinPol.html',1,'']]],
   ['gtmds_20for_20linealy_20polarised_20gluons_20onto_20unpolarised_20partons_102',['NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons',['../group__NLOmatchLinUnp.html',1,'']]]
 ];

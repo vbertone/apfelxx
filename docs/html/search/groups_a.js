@@ -7,7 +7,7 @@ var searchData=
   ['limit_20of_20the_20massive_20neutral_20current_20coefficient_20functions_4',['Massless limit of the massive neutral current coefficient functions',['../group__NCMassiveZero.html',1,'']]],
   ['linealy_20polarised_20gluons_20onto_20longitudinally_20polarised_20partons_5',['NLO matching functions for GTMDs for linealy-polarised gluons onto longitudinally polarised partons',['../group__NLOmatchLinPol.html',1,'']]],
   ['linealy_20polarised_20gluons_20onto_20unpolarised_20partons_6',['NLO matching functions for GTMDs for linealy-polarised gluons onto unpolarised partons',['../group__NLOmatchLinUnp.html',1,'']]],
-  ['linearly_20polarised_7',['NLO transversely/linearly polarised',['../group__NLOmatchTrans.html',1,'']]],
+  ['linearly_20polarised_20matching_20functions_20for_20gtmds_7',['NLO transversely/linearly polarised matching functions for GTMDs',['../group__NLOmatchTrans.html',1,'']]],
   ['lo_20evolution_20kernels_8',['LO evolution kernels',['../group__LOpolevk.html',1,'LO evolution kernels'],['../group__LOtransevk.html',1,'LO evolution kernels'],['../group__LOunpevk.html',1,'LO evolution kernels']]],
   ['lo_20massive_20coefficient_20functions_9',['LO massive coefficient functions',['../group__LO.html',1,'']]],
   ['lo_20massive_20zero_20coefficient_20functions_10',['LO massive-zero coefficient functions',['../group__LOZero.html',1,'']]],
