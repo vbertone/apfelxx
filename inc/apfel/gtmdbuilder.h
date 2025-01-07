@@ -36,47 +36,107 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The InitializeGtmdObjectsEven function precomputes the
+   * @brief The InitializeGtmdObjectsEvenUU function precomputes the
    * perturbative coefficients required for the evolution and matching
-   * of the parity even part of twist-2 GTMDs for the diagonal polarization channels
+   * of the parity even part of twist-2 GTMDs for the UU polarisation channel
    * and store them into a 'GtmdObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
    * @return A map of GtmdObjects, one for each possible nf
    */
-  std::map<int, GtmdObjects> InitializeGtmdObjectsEven(Grid                const& g,
-                                                       std::vector<double> const& Thresholds,
-                                                       double              const& xi,
-                                                       double              const& IntEps = 1e-5,
-                                                       Polarization        const& pol = Polarization::U);
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenUU(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeGtmdObjectsOdd function precomputes the
+   * @brief The InitializeGtmdObjectsOddUU function precomputes the
    * perturbative coefficients required for the evolution and matching
-   * of the parity odd part of twist-2 GTMDs for the diagonal polarization channels
+   * of the parity odd part of twist-2 GTMDs for the UU polarisation channel
    * and store them into a 'GtmdObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param pol: partonic polarization (default: Unpolarized)
    * @return A map of GtmdObjects, one for each possible nf
    */
-  std::map<int, GtmdObjects> InitializeGtmdObjectsOdd(Grid                const& g,
-                                                      std::vector<double> const& Thresholds,
-                                                      double              const& xi,
-                                                      double              const& IntEps = 1e-5,
-                                                      Polarization        const& pol = Polarization::U);
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddUU(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
 
 
   /**
-   * @brief The InitializeGtmdObjectsEven function precomputes the
+   * @brief The InitializeGtmdObjectsEvenLL function precomputes the
    * perturbative coefficients required for the evolution and matching
-   * of the parity even part of twist-2 GTMDs 
-   * for the off-diagonal polarization channels Y=U,L->T
+   * of the parity even part of twist-2 GTMDs for the LL polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenLL(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOddLL function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of twist-2 GTMDs for the LL polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddLL(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsEvenTT function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity even part of twist-2 GTMDs for the TT polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTT(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOddTT function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of twist-2 GTMDs for the TT polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddTT(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
+
+
+  /**
+   * @brief The InitializeGtmdObjectsEvenUT function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity even part of twist-2 GTMDs for the UT polarisation channel
    * and store them into a 'GtmdObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
@@ -86,19 +146,70 @@ namespace apfel
    * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
-  std::map<int, GtmdObjects> InitializeGtmdObjectsYT(Grid                const& g,
-                                                     std::vector<double> const& Thresholds,
-                                                     double              const& xi,
-                                                     double              const& IntEps = 1e-5,
-                                                     Polarization        const& pol = Polarization::U,
-                                                     bool                const& even = true);
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenUT(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOddUT function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of twist-2 GTMDs for the UT polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param pol: partonic polarization (default: Unpolarized)
+   * @param pol: generate T-even part? (default: True)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddUT(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsEvenLT function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity even part of twist-2 GTMDs for the LT polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param pol: partonic polarization (default: Unpolarized)
+   * @param pol: generate T-even part? (default: True)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenLT(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOddLT function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of twist-2 GTMDs for the LT polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param pol: partonic polarization (default: Unpolarized)
+   * @param pol: generate T-even part? (default: True)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddLT(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
 
   
   /**
-   * @brief The InitializeGtmdObjectsEven function precomputes the
+   * @brief The InitializeGtmdObjectsEvenTU function precomputes the
    * perturbative coefficients required for the evolution and matching
-   * of the parity even part of twist-2 GTMDs 
-   * for the off-diagonal polarization channels T->Y=U,L
+   * of the parity even part of twist-2 GTMDs for the TU polarisation channel
    * and store them into a 'GtmdObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
@@ -108,12 +219,64 @@ namespace apfel
    * @param pol: generate T-even part? (default: True)
    * @return A map of GtmdObjects, one for each possible nf
    */
-  std::map<int, GtmdObjects> InitializeGtmdObjectsTY(Grid                const& g,
-                                                     std::vector<double> const& Thresholds,
-                                                     double              const& xi,
-                                                     double              const& IntEps = 1e-5,
-                                                     Polarization        const& pol = Polarization::U,
-                                                     bool                const& even = true);
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTU(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOddTU function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of twist-2 GTMDs for the TU polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param pol: partonic polarization (default: Unpolarized)
+   * @param pol: generate T-even part? (default: True)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddTU(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsEvenTL function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity even part of twist-2 GTMDs for the TL polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param pol: partonic polarization (default: Unpolarized)
+   * @param pol: generate T-even part? (default: True)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTL(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeGtmdObjectsOddTL function precomputes the
+   * perturbative coefficients required for the evolution and matching
+   * of the parity odd part of twist-2 GTMDs for the TL polarisation channel
+   * and store them into a 'GtmdObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param xi: value of the skewness
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param pol: partonic polarization (default: Unpolarized)
+   * @param pol: generate T-even part? (default: True)
+   * @return A map of GtmdObjects, one for each possible nf
+   */
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddTL(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps = 1e-5);
   ///@}
 
   /**

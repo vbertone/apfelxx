@@ -20,19 +20,16 @@
 namespace apfel
 {
   //_____________________________________________________________________________
-  std::map<int, GtmdObjects> InitializeGtmdObjectsEven(Grid                const& g,
-                                                       std::vector<double> const& Thresholds,
-                                                       double              const& xi,
-                                                       double              const& IntEps,
-                                                       Polarization        const& pol)
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenUU(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
   {
     // Initialise GPD splitting functions on the grid required to
     // compute the log terms of the matching functions.
-    const std::map<int, DglapObjects> DglapObj = pol == Polarization::U ? InitializeGpdObjects(g, Thresholds, xi, false, IntEps) :
-                                                 pol == Polarization::L ? InitializeGpdObjectsPol(g, Thresholds, xi, false, IntEps) :
-                                                                          InitializeGpdObjectsTrans(g, Thresholds, xi, false, IntEps);
+    const std::map<int, DglapObjects> DglapObj = InitializeGpdObjects(g, Thresholds, xi, false, IntEps);
 
-    report("Initializing parity-even unpolarised GTMD objects for matching and evolution... ");
+    report("Initializing parity-even UU GTMD objects for matching and evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -65,31 +62,11 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators
     std::map<int, std::map<int, Operator>> C10;
-    const Expression tmpns = pol == Polarization::U ? static_cast<Expression>(Cgtmd1nseUU{xi}): 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1nseLL{xi}): 
-                                                      static_cast<Expression>(Null{});
-    const Operator O1ns{g, tmpns, IntEps, true};
-
-    const Expression tmpqq = pol == Polarization::U ? static_cast<Expression>(Cgtmd1qqeUU{xi}) : 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1qqeLL{xi}) : 
-                                                      static_cast<Expression>(Null{});
-    const Operator O1qq{g, tmpqq, IntEps, true};
-    
-    const Expression tmpqg = pol == Polarization::U ? static_cast<Expression>(Cgtmd1qgeUU{xi}) : 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1qgeLL{xi}) : 
-                                                      static_cast<Expression>(Null{});
-    const Operator O1qg{g, tmpqg, IntEps, true};
-
-    const Expression tmpgq = pol == Polarization::U ? static_cast<Expression>(Cgtmd1gqeUU{xi}) : 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1gqeLL{xi}) : 
-                                                      static_cast<Expression>(Null{});
-    const Operator O1gq{g, tmpgq, IntEps, true};
-
-    const Expression tmpgg = pol == Polarization::U ? static_cast<Expression>(Cgtmd1ggeUU{xi}) : 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1ggeLL{xi}) : 
-                                                      static_cast<Expression>(Cgtmd1ggeTT{xi});
-    const Operator O1gg{g, tmpgg, IntEps, true};
-
+    const Operator O1ns{g, Cgtmd1nseUU{xi}, IntEps, true};
+    const Operator O1qq{g, Cgtmd1qqeUU{xi}, IntEps, true};
+    const Operator O1qg{g, Cgtmd1qgeUU{xi}, IntEps, true};
+    const Operator O1gq{g, Cgtmd1gqeUU{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeUU{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -192,13 +169,12 @@ namespace apfel
 
 
   //_____________________________________________________________________________
-  std::map<int, GtmdObjects> InitializeGtmdObjectsOdd(Grid                const& g,
-                                                      std::vector<double> const& Thresholds,
-                                                      double              const& xi,
-                                                      double              const& IntEps,
-                                                      Polarization        const& pol)
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddUU(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
   {
-    report("Initializing parity-odd unpolarised GTMD objects for matching and evolution... ");
+    report("Initializing parity-odd UU GTMD objects for matching and evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -224,17 +200,8 @@ namespace apfel
     // ===============================================================
     // NLO matching functions operators
     std::map<int, std::map<int, Operator>> C10;
-    
-    const Expression tmpqg = pol == Polarization::U ? static_cast<Expression>(Cgtmd1qgoUU{xi}) : 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1qgoLL{xi}) : 
-                                                      static_cast<Expression>(Null{});
-    const Operator O1qg{g, tmpqg, IntEps, true};
-
-    const Expression tmpgg = pol == Polarization::U ? static_cast<Expression>(Cgtmd1ggoUU{xi}) : 
-                             pol == Polarization::L ? static_cast<Expression>(Cgtmd1ggoLL{xi}) : 
-                                                      static_cast<Expression>(Cgtmd1ggoTT{xi});
-    const Operator O1gg{g, tmpgg, IntEps, true};
-
+    const Operator O1qg{g, Cgtmd1qgoUU{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggoUU{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -301,15 +268,503 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int, GtmdObjects> InitializeGtmdObjectsYT(Grid                const& g,
-                                                     std::vector<double> const& Thresholds,
-                                                     double              const& xi,
-                                                     double              const& IntEps,
-                                                     Polarization        const& pol,
-                                                     bool                const& even)
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenLL(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
   {
-    report("Initializing parity-odd unpolarised GTMD objects for matching and evolution... ");
-    if(pol == Polarization::T) throw std::runtime_error(error("InitializeGtmdObjectsEvenYT", "Cannot be invoked for diagonal TT channel."));
+    // Initialise GPD splitting functions on the grid required to
+    // compute the log terms of the matching functions.
+    const std::map<int, DglapObjects> DglapObj = InitializeGpdObjectsPol(g, Thresholds, xi, false, IntEps);
+
+    report("Initializing parity-even LL GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // ===============================================================
+    // LO matching functions operators
+    std::map<int, std::map<int, Operator>> C00;
+    const Operator Id  {g, Identity{}, IntEps, true};
+    const Operator Zero{g, Null{},     IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Id});
+        OM.insert({EvolutionBasisQCD::PNSM, Id});
+        OM.insert({EvolutionBasisQCD::PNSV, Id});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Id});
+        C00.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO matching functions operators
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1ns{g, Cgtmd1nseLL{xi}, IntEps, true};
+    const Operator O1qq{g, Cgtmd1qqeLL{xi}, IntEps, true};
+    const Operator O1qg{g, Cgtmd1qgeLL{xi}, IntEps, true};
+    const Operator O1gq{g, Cgtmd1gqeLL{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeLL{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O1ns});
+        OM.insert({EvolutionBasisQCD::PNSM, O1ns});
+        OM.insert({EvolutionBasisQCD::PNSV, O1ns});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O1qq});
+        OM.insert({EvolutionBasisQCD::PQG,           nf * O1qg});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gq});
+        OM.insert({EvolutionBasisQCD::PGG,                O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Terms proportion to one power of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C11;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O11gmVq = gammaFq0() * Id;
+        const Operator O11gmVg = gammaFg0(nf) * Id;
+        const auto P0 = DglapObj.at(nf).SplittingFunctions.at(0);
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - 2 * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - 2 * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - 2 * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O11gmVq - 2 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,                - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O11gmVg - 2 * P0.at(6)});
+        C11.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C12;
+    const Operator O12gmKq = - CF * gammaK0() / 2 * Id;
+    const Operator O12gmKg = - CA * gammaK0() / 2 * Id;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,               O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSM,               O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSV,               O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQG,                   Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                   Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O12gmKg});
+        C12.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, C11.at(nf)}, {evb, C12.at(nf)}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddLL(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
+  {
+    report("Initializing parity-odd LL GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1qg{g, Cgtmd1qgoLL{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggoLL{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSM,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSV,      Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  nf * O1qg});
+        OM.insert({EvolutionBasisQCD::PGQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PGG,       O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTT(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
+  {
+    // Initialise GPD splitting functions on the grid required to
+    // compute the log terms of the matching functions.
+    const std::map<int, DglapObjects> DglapObj = InitializeGpdObjectsTrans(g, Thresholds, xi, false, IntEps);
+
+    report("Initializing parity-even TT GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // ===============================================================
+    // LO matching functions operators
+    std::map<int, std::map<int, Operator>> C00;
+    const Operator Id  {g, Identity{}, IntEps, true};
+    const Operator Zero{g, Null{},     IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Id});
+        OM.insert({EvolutionBasisQCD::PNSM, Id});
+        OM.insert({EvolutionBasisQCD::PNSV, Id});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * Id});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Id});
+        C00.insert({nf, OM});
+      }
+
+    // ===============================================================
+    // NLO matching functions operators
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1gg{g, Cgtmd1ggeTT{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Zero});
+        OM.insert({EvolutionBasisQCD::PNSM, Zero});
+        OM.insert({EvolutionBasisQCD::PNSV, Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Terms proportion to one power of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C11;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O11gmVq = gammaFq0() * Id;
+        const Operator O11gmVg = gammaFg0(nf) * Id;
+        const auto P0 = DglapObj.at(nf).SplittingFunctions.at(0);
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O11gmVq - 2 * P0.at(0)});
+        OM.insert({EvolutionBasisQCD::PNSM, O11gmVq - 2 * P0.at(1)});
+        OM.insert({EvolutionBasisQCD::PNSV, O11gmVq - 2 * P0.at(2)});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * ( O11gmVq - 2 * P0.at(3) )});
+        OM.insert({EvolutionBasisQCD::PQG,                          - 2 * P0.at(4)});
+        OM.insert({EvolutionBasisQCD::PGQ,                - ( nf / 3. ) * P0.at(5)});
+        OM.insert({EvolutionBasisQCD::PGG,                  O11gmVg - 2 * P0.at(6)});
+        C11.insert({nf, OM});
+      }
+
+    // Terms proportion to two powers of log(mu0/mub)
+    std::map<int, std::map<int, Operator>> C12;
+    const Operator O12gmKq = - CF * gammaK0() / 2 * Id;
+    const Operator O12gmKg = - CA * gammaK0() / 2 * Id;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,               O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSM,               O12gmKq});
+        OM.insert({EvolutionBasisQCD::PNSV,               O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O12gmKq});
+        OM.insert({EvolutionBasisQCD::PQG,                   Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,                   Zero});
+        OM.insert({EvolutionBasisQCD::PGG,                O12gmKg});
+        C12.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, C00.at(nf)}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, C11.at(nf)}, {evb, C12.at(nf)}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddTT(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
+  {
+    report("Initializing parity-odd TT GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1gg{g, Cgtmd1ggoTT{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSM,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSV,      Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PQG,       Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PGG,       O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenUT(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
+  {
+    report("Initializing parity-even UT GTMD objects for matching and evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -336,15 +791,8 @@ namespace apfel
     // NLO matching functions operators
     // Only q->g and g->g are non-vanishing
     std::map<int, std::map<int, Operator>> C10;
-    
-    const Expression tmpqg = pol == Polarization::U ? (even ? static_cast<Expression>(Cgtmd1qgeUT{xi}) : static_cast<Expression>(Cgtmd1qgoUT{xi})) : 
-                                                      (even ? static_cast<Expression>(Cgtmd1qgeLT{xi}) : static_cast<Expression>(Cgtmd1qgoLT{xi}));
-    const Operator O1qg{g, tmpqg, IntEps, true};
-
-    const Expression tmpgg = pol == Polarization::U ? (even ? static_cast<Expression>(Cgtmd1ggeUT{xi}) : static_cast<Expression>(Cgtmd1ggoUT{xi})) : 
-                                                      (even ? static_cast<Expression>(Cgtmd1ggeLT{xi}) : static_cast<Expression>(Cgtmd1ggoLT{xi}));
-    const Operator O1gg{g, tmpgg, IntEps, true};
-
+    const Operator O1qg{g, Cgtmd1qgeUT{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeUT{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -411,15 +859,312 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::map<int, GtmdObjects> InitializeGtmdObjectsTY(Grid                const& g,
-                                                     std::vector<double> const& Thresholds,
-                                                     double              const& xi,
-                                                     double              const& IntEps,
-                                                     Polarization        const& pol,
-                                                     bool                const& even)
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddUT(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
   {
-    report("Initializing parity-odd unpolarised GTMD objects for matching and evolution... ");
-    if(pol == Polarization::T) throw std::runtime_error(error("InitializeGtmdObjectsEvenYT", "Cannot be invoked for diagonal TT channel."));
+    report("Initializing parity-odd UT GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    // Only q->g and g->g are non-vanishing
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1qg{g, Cgtmd1qgoUT{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggoUT{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSM,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSV,      Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  nf * O1qg});
+        OM.insert({EvolutionBasisQCD::PGQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PGG,       O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenLT(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
+  {
+    report("Initializing parity-even LT GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    // Only q->g and g->g are non-vanishing
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1qg{g, Cgtmd1qgeLT{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeLT{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSM,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSV,      Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  nf * O1qg});
+        OM.insert({EvolutionBasisQCD::PGQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PGG,       O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddLT(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
+  {
+    report("Initializing parity-odd LT GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    // Only q->g and g->g are non-vanishing
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1qg{g, Cgtmd1qgoLT{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggoLT{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSM,      Zero});
+        OM.insert({EvolutionBasisQCD::PNSV,      Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  nf * O1qg});
+        OM.insert({EvolutionBasisQCD::PGQ,       Zero});
+        OM.insert({EvolutionBasisQCD::PGG,       O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTU(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
+  {
+    report("Initializing parity-even TU GTMD objects for matching and evolution... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -446,15 +1191,8 @@ namespace apfel
     // NLO matching functions operators
     // Only g->q and g->g are non-vanishing
     std::map<int, std::map<int, Operator>> C10;
-    
-    const Expression tmpgq = pol == Polarization::U ? (even ? static_cast<Expression>(Cgtmd1gqeTU{xi}) : static_cast<Expression>(Null{})) : 
-                                                      (even ? static_cast<Expression>(Cgtmd1gqeTL{xi}) : static_cast<Expression>(Null{}));
-    const Operator O1gq{g, tmpgq, IntEps, true};
-
-    const Expression tmpgg = pol == Polarization::U ? (even ? static_cast<Expression>(Cgtmd1ggeTU{xi}) : static_cast<Expression>(Cgtmd1ggoTU{xi})) : 
-                                                      (even ? static_cast<Expression>(Cgtmd1ggeTL{xi}) : static_cast<Expression>(Cgtmd1ggoTL{xi}));
-    const Operator O1gg{g, tmpgg, IntEps, true};
-
+    const Operator O1gq{g, Cgtmd1gqeTU{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeTU{xi}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
         std::map<int, Operator> OM;
@@ -465,6 +1203,304 @@ namespace apfel
         OM.insert({EvolutionBasisQCD::PQG,                Zero});
         OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gq});
         OM.insert({EvolutionBasisQCD::PGG,                O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddTU(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
+  {
+    report("Initializing parity-odd TU GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    // Only g->q and g->g are non-vanishing
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1gg{g, Cgtmd1ggoTU{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Zero});
+        OM.insert({EvolutionBasisQCD::PNSM, Zero});
+        OM.insert({EvolutionBasisQCD::PNSV, Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsEvenTL(Grid                const& g,
+                                                         std::vector<double> const& Thresholds,
+                                                         double              const& xi,
+                                                         double              const& IntEps)
+  {
+    report("Initializing parity-even TL GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    // Only g->q and g->g are non-vanishing
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1gq{g, Cgtmd1gqeTL{xi}, IntEps, true};
+    const Operator O1gg{g, Cgtmd1ggeTL{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP,               Zero});
+        OM.insert({EvolutionBasisQCD::PNSM,               Zero});
+        OM.insert({EvolutionBasisQCD::PNSV,               Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,                Zero});
+        OM.insert({EvolutionBasisQCD::PQG,                Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O1gq});
+        OM.insert({EvolutionBasisQCD::PGG,                O1gg});
+        C10.insert({nf, OM});
+      }
+
+    // Define map containing the GtmdObjects for each nf
+    std::map<int, GtmdObjects> GtmdObj;
+
+    // Construct a set of operators for each perturbative order for
+    // the matching functions. Initialize also coefficients of: beta
+    // function, gammaK, gammaF, and Collins-Soper anomalous
+    // dimensions.
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        GtmdObjects obj;
+
+        // Threshold
+        obj.Threshold = Thresholds[nf-1];
+
+        // Skewness
+        obj.xi = xi;
+
+        // Beta function
+        obj.Beta.insert({0, beta0qcd(nf)});
+        obj.Beta.insert({1, beta1qcd(nf)});
+
+        // GammaF quark
+        obj.GammaFq.insert({0, gammaFq0()});
+        obj.GammaFq.insert({1, gammaFq1(nf)});
+
+        // GammaF gluon
+        obj.GammaFg.insert({0, gammaFg0(nf)});
+        obj.GammaFg.insert({1, gammaFg1(nf)});
+
+        // gammaK (multiply by CF for quarks and by CA for gluons)
+        obj.GammaK.insert({0, gammaK0()});
+        obj.GammaK.insert({1, gammaK1(nf)});
+        obj.GammaK.insert({2, gammaK2(nf)});
+
+        // Collins-Soper anomalous dimensions (multiply by CF for
+        // quarks and by CA for gluons).
+        obj.KCS.insert({0, {KCS00(),   KCS01()}});
+        obj.KCS.insert({1, {KCS10(nf), KCS11(nf), KCS12(nf)}});
+
+        // Matching functions
+        const EvolutionBasisQCD evb{nf};
+        obj.MatchingFunctions.insert({0, {{evb, ZeroSet}}});
+        obj.MatchingFunctions.insert({1, {{evb, C10.at(nf)}, {evb, ZeroSet}, {evb, ZeroSet}}});
+
+        // Insert full object
+        GtmdObj.insert({nf, obj});
+      }
+    t.stop();
+
+    return GtmdObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, GtmdObjects> InitializeGtmdObjectsOddTL(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        double              const& IntEps)
+  {
+    report("Initializing parity-odd TL GTMD objects for matching and evolution... ");
+    Timer t;
+
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Construct map of null operators to be used below
+    const Operator Zero{g, Null{}, IntEps, true};
+    std::map<int, Operator> ZeroSet;
+    ZeroSet.insert({EvolutionBasisQCD::PNSP, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSM, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PNSV, Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PQG,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGQ,  Zero});
+    ZeroSet.insert({EvolutionBasisQCD::PGG,  Zero});
+
+    // ===============================================================
+    // NLO matching functions operators
+    // Only g->q and g->g are non-vanishing
+    std::map<int, std::map<int, Operator>> C10;
+    const Operator O1gg{g, Cgtmd1ggoTL{xi}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, Zero});
+        OM.insert({EvolutionBasisQCD::PNSM, Zero});
+        OM.insert({EvolutionBasisQCD::PNSV, Zero});
+        OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  O1gg});
         C10.insert({nf, OM});
       }
 
