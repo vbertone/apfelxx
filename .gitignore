@@ -76,6 +76,22 @@ docs/latex/src/codes/PolMatchingConditions/moments/moments
 *.exe
 *.out
 *.app
+# ignore tests as well
+tests/ACOT_tests/compare_with_nCTEQ
+tests/ACOT_tests/tutorial
+tests/dglap_test_streamlined
+tests/doubledistribution_test
+tests/doubleobjint_test
+tests/massiveCF_test
+tests/principal_value_test
+tests/sidis_test
+tests/sidispol_test
+tests/structurefunction_cc_test
+tests/structurefunction_massive_test
+tests/structurefunction_nc_pol_test
+tests/structurefunction_nc_test
+tests/sum_rules_test
+tests/tmd_test
 
 # Generated files
 inc/apfel/version.h
