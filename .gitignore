@@ -92,3 +92,10 @@ build
 
 # Codecov
 *.gcno, *.gcda, *.gcov
+
+# MacOS
+.DS_Store
+
+# VsCode
+.vscode/
+*.code-workspace
