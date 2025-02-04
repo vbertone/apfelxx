@@ -312,6 +312,7 @@ respectively. Since we are interested in isolating the FFs at some
 initial scale $Q_0$, we also write:
 \begin{equation}
 d_{q(g)}(z|Q) = T_{q(g)i}d_{i}(z|Q) = T_{q(g)i}\Gamma_{ij}(z|Q,Q_0)\otimes d_{j}(z|Q_0)\,,
+\label{eq:rotationandevolution}
 \end{equation}
 where $\Gamma_{ij}$ is the appropriate evolution operator and
 $T_{q(g)i}$ is the rotation matrix from the evolution to the physical
@@ -369,6 +370,66 @@ one has:
   d_{j}(z|Q_0)\,.
 \label{eq:sidisInt}
 \end{equation}
+
+\subsection{NNLO expressions}
+
+Extending the calculation of the SIDIS cross section to NNLO accuracy implies,
+on top of the mere inclusion of the $\mathcal{O}(\alpha_s^2)$ contribution to
+the hard cross sections, a number of complications. First, the flavour structure
+in Eq.~(\ref{eq:f1sidis}) becomes significantly more involved. Second, the
+factorisation of the hard cross sections in terms of bi-linear operators in
+Eq.~(\ref{eq:decomposition}) no longer holds. In this section, we will show how
+to overcome these complications. Focusing on the flavour structure and
+neglecting all dependences and Mellin convolutions, the structure of a SIDIS
+structure functions to NNLO accuracy reads:
+\begin{equation}
+  \begin{array}{rcl}
+  \displaystyle F&=&\displaystyle C_{qq}^{\rm NS}\left(\sum_{\alpha} e_\alpha^2f_\alpha d_\alpha\right)+C_{qg}f_g\left(\sum_{\alpha}e_\alpha^2d_\alpha\right)+C_{gq} d_g\left(\sum_{\beta}e_\beta^2f_\beta\right)\\
+  \\
+  &+&\displaystyle C_{gg}\left(\sum_{\gamma}e_\gamma^2\right)f_gd_g+C_{qq}^{\rm PS}\left(\sum_{\gamma}e_\gamma^2\right)\left(\sum_{\alpha}f_\alpha d_\alpha\right)+C_{\overline{q}q}\left(\sum_{\alpha}e_\alpha^2f_{-\alpha}d_\alpha\right)\\
+  \\
+  &+&\displaystyle C_{q'q}^{(1)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\beta^2 f_\beta d_\alpha\right) +C_{q'q}^{(2)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha^2 f_\beta d_\alpha\right) +C_{q'q}^{(3)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha e_\beta f_\beta d_\alpha\right) \,,
+  \end{array}
+\end{equation}
+where the second and third lines only appear at NNLO. Moreover, the coefficient
+functions $C$ can no longer be written as in Eq.~(\ref{eq:decomposition}). The
+indices $\alpha$, $\beta$, and $\gamma$ run over all active quark flavours
+\textit{and} anti-flavours, \textit{i.e.} they are indices in the physical
+basis. We now use Eq.~(\ref{eq:rotationandevolution}) to rotate FFs from the
+physical to the evolution basis and to introduce their evolution. We rewrite
+Eq.~(\ref{eq:rotationandevolution}) as follows
+\begin{equation}
+  d_{\alpha} = T_{\alpha i}d_{i} = T_{\alpha i}\Gamma_{ij} d_{j}^{(0)}\,,
+  \label{eq:rotationandevolution2}
+\end{equation}
+where we removed all dependences and convolution symbols and, with abuse of
+notation, we indicated with $d_i$, or with any latin index, the $i$-th FF in the
+evolution basis, while $d_{j}^{(0)}$ is the $j$-th FF in the evolution basis at
+the initial scale $Q_0$. We now use this relation to replace all FFs in the
+physical basis with their evolution basis counterparts. We then have:
+\begin{equation}
+F = \mathbb{K}_{i}\Gamma_{ij}d_{j}^{(0)}\,,
+\end{equation}
+where now:
+\begin{equation}
+  \begin{array}{rcl}
+  \displaystyle \mathbb{K}_{i}&=&\displaystyle C_{qq}^{\rm NS}\left(\sum_{\alpha} e_\alpha^2f_\alpha T_{\alpha i}\right)+C_{qg}f_g\left(\sum_{\alpha}e_\alpha^2 T_{\alpha i}\right)+C_{gq} T_{g i}\left(\sum_{\beta}e_\beta^2f_\beta\right)\\
+  \\
+  &+&\displaystyle C_{gg}\left(\sum_{\gamma}e_\gamma^2\right)f_gT_{g i}+C_{qq}^{\rm PS}\left(\sum_{\gamma}e_\gamma^2\right)\left(\sum_{\alpha}f_\alpha T_{\alpha i}\right)+C_{\overline{q}q}\left(\sum_{\alpha}e_\alpha^2f_{-\alpha}T_{\alpha i}\right)\\
+  \\
+  &+&\displaystyle C_{q'q}^{(1)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\beta^2 f_\beta T_{\alpha i}\right) +C_{q'q}^{(2)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha^2 f_\beta T_{\alpha i}\right) +C_{q'q}^{(3)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha e_\beta f_\beta T_{\alpha i} \right) \,.
+  \end{array}
+\end{equation}
+Since this time it is convinient to parameterise the cross section in terms of
+the structure functions $F_1$ and $F_L$, with $F_L=F_2-2F_1$, we have that:
+\begin{equation}
+  \mathbb{K}_{i}^{\rm SIDIS} =   \frac{8\pi\alpha^2}{Q^3} 
+    \left[ \frac{Y_+}{x} \mathbb{K}_{1,i}
+      +\frac{1-y}{x} \mathbb{K}_{L,i}\right]\,.
+\end{equation}
+
+
+
 
 \subsection{Integrating over the phase space}
 

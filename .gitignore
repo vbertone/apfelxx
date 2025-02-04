@@ -96,3 +96,6 @@ build
 
 # VScode settings
 /.vscode/
+*.fdb_latexmk
+*.fls
+
