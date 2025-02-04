@@ -32,6 +32,31 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  DistributionOperator::DistributionOperator(Grid const& gr1, Grid const& gr2, std::vector<std::vector<std::vector<matrix<double>>>> const& DO):
+    _grid1(gr1),
+    _grid2(gr2),
+    _dOperator(DO)
+  {
+    // Get number of grids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Make sure that grid sizes match
+    if ((int) DO.size() != ng1 || (int) DO[0].size() != ng2)
+      throw std::runtime_error(error("DistributionOperator::DistributionOperator", "Numbers of subgrids of input grids and DistributionOperator object do not match"));
+
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      for (int ig2 = 0; ig2 < ng2; ig2++)
+        {
+          if ((int) DO[ig1][ig2].size() != _grid1.GetSubGrid(ig1).nx())
+            throw std::runtime_error(error("DistributionOperator::DistributionOperator", "Numbers of subgrid nodes of first grid do not match"));
+
+          if ((int) DO[ig1][ig2][0].size(1) != _grid2.GetSubGrid(ig2).nx())
+            throw std::runtime_error(error("DistributionOperator::DistributionOperator", "Numbers of subgrid nodes of second grid do not match"));
+        }
+  }
+
+  //_________________________________________________________________________
   DistributionOperator::DistributionOperator(Distribution const& d1, Operator const& O2):
     _grid1(d1.GetGrid()),
     _grid2(O2.GetGrid())
@@ -316,7 +341,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  DoubleDistribution operator * (DistributionOperator lhs, Distribution const& rhs)
+  DoubleDistribution operator * (DistributionOperator const& lhs, Distribution const& rhs)
   {
     return lhs *= rhs;
   }

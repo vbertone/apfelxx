@@ -517,10 +517,10 @@ namespace apfel
           // Set operator entries to zero
           _dOperator[ig1][ig2].set(0);
 
-          // The product between the operators is done ussuming that the
-          // first dimension of both pair of indices is one, which
-          // allows us to exploit the symmetry of the operators deriving
-          // from the logarithmic distribution of the nodes.
+          // The product between the operators is done ussuming that
+          // the first dimension of both pairs of indices is one,
+          // which allows us to exploit the symmetry of the operators
+          // deriving from the logarithmic distribution of the nodes.
           for (int beta = 0; beta < (int) _dOperator[ig1][ig2].size(1); beta++)
             for (int delta = 0; delta < (int) _dOperator[ig1][ig2](0, beta).size(1); delta++)
               for (int alpha = 0; alpha <= beta; alpha++)
@@ -578,9 +578,114 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  DoubleDistribution operator * (DoubleOperator lhs, DoubleDistribution const& rhs)
+  DistributionOperator DoubleOperator::MultiplyFirstBy(Distribution const& d) const
+  {
+    // Fast method to check that we are using the same grid for the
+    // first variable
+    if (&_grid1 != &d.GetGrid())
+      throw std::runtime_error(error("DoubleOperator::MultiplyFirstBy", "first grid of the DoubleOperator and and grid of the Distribution do not match."));
+
+    // Get numbers of subgrids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Get distributions on the subgrids
+    const std::vector<std::vector<double>>& sg = d.GetDistributionSubGrid();
+
+    // Initialise output vector
+    std::vector<std::vector<std::vector<matrix<double>>>> s(ng1, std::vector<std::vector<matrix<double>>>(ng2));
+
+    // Compute the the distribution on the subgrids using the joint
+    // grids.
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      {
+        // Number of nodes of the ig1-th subgrid
+        const int nx1 = _grid1.GetSubGrid(ig1).nx();
+        for (int ig2 = 0; ig2 < ng2; ig2++)
+          {
+            // Number of nodes of the ig1-th subgrid
+            const int nx2 = _grid2.GetSubGrid(ig2).nx();
+
+            // Resize container w.r.t the first grid
+            s[ig1][ig2].resize(nx1);
+
+            for (int alpha = 0; alpha < nx1; alpha++)
+              {
+                // Resize container w.r.t the second grid
+                s[ig1][ig2][alpha].resize(0, nx2);
+                for (int delta = 0; delta < nx2; delta++)
+                  // Compute product between first dimension of the
+                  // double operator and distribution.
+                  for (int beta = 0; beta < nx1 - alpha; beta++)
+                    s[ig1][ig2][alpha](0, delta) += _dOperator[ig1][ig2](0, beta)(0, delta) * sg[ig1][beta + alpha];
+              }
+          }
+      }
+
+    // Return DistributionOperator object
+    return DistributionOperator{_grid1, _grid2, s};
+  }
+
+  //_________________________________________________________________________
+  OperatorDistribution DoubleOperator::MultiplySecondBy(Distribution const& d) const
+  {
+    // Fast method to check that we are using the same grid for the
+    // first variable
+    if (&_grid2 != &d.GetGrid())
+      throw std::runtime_error(error("DoubleOperator::MultiplySecondBy", "second grid of the DoubleOperator and and grid of the Distribution do not match."));
+
+    // Get numbers of subgrids
+    const int ng1 = _grid1.nGrids();
+    const int ng2 = _grid2.nGrids();
+
+    // Get distributions on the subgrids
+    const std::vector<std::vector<double>>& sg = d.GetDistributionSubGrid();
+
+    // Initialise output vector
+    std::vector<std::vector<matrix<std::vector<double>>>> s(ng1, std::vector<matrix<std::vector<double>>>(ng2));
+
+    // Compute the the distribution on the subgrids using the joint
+    // grids.
+    for (int ig1 = 0; ig1 < ng1; ig1++)
+      {
+        // Number of nodes of the ig1-th subgrid
+        const int nx1 = _grid1.GetSubGrid(ig1).nx();
+        for (int ig2 = 0; ig2 < ng2; ig2++)
+          {
+            // Number of nodes of the ig1-th subgrid
+            const int nx2 = _grid2.GetSubGrid(ig2).nx();
+
+            // Resize container w.r.t the firt and second grids
+            s[ig1][ig2].resize(0, nx1, std::vector<double>(nx2));
+
+            for (int beta = 0; beta < nx1; beta++)
+              for (int gamma = 0; gamma < nx2; gamma++)
+                // Compute product between second dimension of the
+                // double operator and distribution
+                for (int delta = 0; delta < nx2 - gamma; delta++)
+                  s[ig1][ig2](0, beta)[gamma] += _dOperator[ig1][ig2](0, beta)(0, delta) * sg[ig2][delta + gamma];
+          }
+      }
+
+    // Return OperatorDistribution object
+    return OperatorDistribution{_grid1, _grid2, s};
+  }
+
+  //_________________________________________________________________________
+  DoubleDistribution operator * (DoubleOperator const& lhs, DoubleDistribution const& rhs)
   {
     return lhs *= rhs;
+  }
+
+  //_________________________________________________________________________
+  DistributionOperator operator * (Distribution const& lhs, DoubleOperator const& rhs)
+  {
+    return rhs.MultiplyFirstBy(lhs);
+  }
+  //_________________________________________________________________________
+  OperatorDistribution operator * (DoubleOperator const& lhs, Distribution const& rhs)
+  {
+    return lhs.MultiplySecondBy(rhs);
   }
 
   //_________________________________________________________________________

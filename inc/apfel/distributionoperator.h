@@ -35,6 +35,14 @@ namespace apfel
 
     /**
      * @brief The DistributionOperator constructor.
+     * @param gr1: the Grid object for the first variable
+     * @param gr2: the Grid object for the second variable
+     * @param DO: the DistributionOperator container
+     */
+    DistributionOperator(Grid const& gr1, Grid const& gr2, std::vector<std::vector<std::vector<matrix<double>>>> const& DO);
+
+    /**
+     * @brief The DistributionOperator constructor.
      * @param d1: the distribution on the first variable
      * @param O2: the operator on the second variable
      */
@@ -98,7 +106,7 @@ namespace apfel
    * @name Ternary operators
    */
   ///@{
-  DoubleDistribution   operator * (DistributionOperator lhs, Distribution const& rhs);                                      //!< DistributionOperator*Distribution
+  DoubleDistribution   operator * (DistributionOperator const& lhs, Distribution const& rhs);                               //!< DistributionOperator*Distribution
   DistributionOperator operator * (DistributionOperator lhs, Operator const& rhs);                                          //!< DistributionOperator*Operator
   DistributionOperator operator * (double const& s, DistributionOperator rhs);                                              //!< Scalar*DistributionOperator
   DistributionOperator operator * (DistributionOperator lhs, double const& s);                                              //!< DistributionOperator*Scalar

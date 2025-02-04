@@ -11,6 +11,8 @@
 #include "apfel/matrix.h"
 #include "apfel/operator.h"
 #include "apfel/doubledistribution.h"
+#include "apfel/distributionoperator.h"
+#include "apfel/operatordistribution.h"
 #include "apfel/config.h"
 
 // Include yaml-cpp header only if it has been found at configuration
@@ -85,6 +87,8 @@ namespace apfel
      */
     ///@{
     DoubleDistribution operator *= (DoubleDistribution const& d) const;                     //!< this *= DoubleDistribution
+    DistributionOperator MultiplyFirstBy(Distribution const& d) const;                      //!< this times a distribution convoluted with the first variable
+    OperatorDistribution MultiplySecondBy(Distribution const& d) const;                     //!< this times a distribution convoluted with the second variable
     DoubleOperator&    operator *= (double const& s);                                       //!< this *= Scalar
     DoubleOperator&    operator /= (double const& s);                                       //!< this /= Scalar
     DoubleOperator&    operator += (DoubleOperator const& o);                               //!< this += DoubleOperator
@@ -142,7 +146,9 @@ namespace apfel
    * @name Ternary operators
    */
   ///@{
-  DoubleDistribution operator * (DoubleOperator lhs, DoubleDistribution const& rhs);                        //!< DoubleOperator*Distribution
+  DoubleDistribution operator * (DoubleOperator const& lhs, DoubleDistribution const& rhs);                 //!< DoubleOperator*DoubleDistribution
+  DistributionOperator operator * (Distribution const& lhs, DoubleOperator const& rhs);                     //!< Distribution*DoubleOperator = DistributionOperator
+  OperatorDistribution operator * (DoubleOperator const& lhs, Distribution const& rhs);                     //!< DoubleOperator*Distribution = OperatorDistribution
   DoubleOperator     operator * (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator*DoubleOperator
   DoubleOperator     operator * (double const& s, DoubleOperator rhs);                                      //!< Scalar*DoubleOperator
   DoubleOperator     operator * (DoubleOperator lhs, double const& s);                                      //!< DoubleOperator*Scalar
