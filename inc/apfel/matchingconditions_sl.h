@@ -152,6 +152,22 @@ namespace apfel
   };
 
   /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq.
+   * (B.3) of https://arxiv.org/pdf/hep-ph/9612398.pdf which includes
+   * the correction to account for MSbar masses (see Eq. (2.31) of
+   * https://arxiv.org/pdf/1605.01946).
+   */
+  class AS2Hg_MSbarMass_0: public Expression
+  {
+  public:
+    AS2Hg_MSbarMass_0();
+    double Regular(double const& x) const;
+  private:
+    double  const _h1;
+    AS2Hg_0 const _AS2Hg_0;
+  };
+
+  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
    * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.3) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
@@ -161,6 +177,23 @@ namespace apfel
   public:
     AS2Hg_L();
     double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.3) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf which includes the
+   * correction to account for MSbar masses (see Eq. (2.31) of
+   * https://arxiv.org/pdf/1605.01946).
+   */
+  class AS2Hg_MSbarMass_L: public Expression
+  {
+  public:
+    AS2Hg_MSbarMass_L();
+    double Regular(double const& x) const;
+  private:
+    double  const _h1;
+    AS2Hg_L const _AS2Hg_L;
   };
 
   /**
@@ -265,6 +298,24 @@ namespace apfel
   };
 
   /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) constant term of Eq
+   * (B.7) of https://arxiv.org/pdf/hep-ph/9612398.pdf which includes
+   * the correction to account for MSbar masses (see Eq. (2.31) of
+   * https://arxiv.org/pdf/1605.01946).
+   */
+  class AS2ggH_MSbarMass_0: public Expression
+  {
+  public:
+    AS2ggH_MSbarMass_0();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double   const _h1;
+    AS2ggH_0 const _AS2ggH_0;
+  };
+
+  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
    * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.7) of
    * https://arxiv.org/pdf/hep-ph/9612398.pdf.
@@ -276,6 +327,25 @@ namespace apfel
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) of Eq. (B.7) of
+   * https://arxiv.org/pdf/hep-ph/9612398.pdf which includes the
+   * correction to account for MSbar masses (see Eq. (2.31) of
+   * https://arxiv.org/pdf/1605.01946).
+   */
+  class AS2ggH_MSbarMass_L: public Expression
+  {
+  public:
+    AS2ggH_MSbarMass_L();
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    double   const _h1;
+    AS2ggH_L const _AS2ggH_L;
   };
 
   /**

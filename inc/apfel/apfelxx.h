@@ -72,5 +72,7 @@
 #include "apfel/alphaqcdxi.h"
 #include "apfel/alphaqed.h"
 #include "apfel/alphaqcdqed.h"
+#include "apfel/alphaqcdmsbarmass.h"
+#include "apfel/msbarmass.h"
 #include "apfel/twobodyphasespace.h"
 ///@}

@@ -181,6 +181,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  AS2Hg_MSbarMass_0::AS2Hg_MSbarMass_0():
+    Expression(),
+    _h1(4 * CF),
+    _AS2Hg_0(AS2Hg_0{})
+  {
+  }
+  double AS2Hg_MSbarMass_0::Regular(double const& x) const
+  {
+    return _AS2Hg_0.Regular(x) - 2 * _h1 * 4 * TR * ( pow(x, 2) + pow(1 - x, 2) );
+  }
+
+  //_________________________________________________________________________________
   AS2Hg_L::AS2Hg_L():
     Expression()
   {
@@ -203,6 +215,18 @@ namespace apfel
                   * ln1mx2 + ( 8 + 16 * x ) * lnx2 + 32 * x * zeta2 + 32 * x * ( 1 - x ) * ln1mx
                   - ( 8 + 64 * x + 352 * x2 / 3 ) * lnx - 160. / 9 / x + 16 - 200 * x + 1744 * x2 / 9 );
     return - omeL1p1 - omeL1p2;
+  }
+
+  //_________________________________________________________________________________
+  AS2Hg_MSbarMass_L::AS2Hg_MSbarMass_L():
+    Expression(),
+    _h1(3 * CF),
+    _AS2Hg_L(AS2Hg_L{})
+  {
+  }
+  double AS2Hg_MSbarMass_L::Regular(double const& x) const
+  {
+    return _AS2Hg_L.Regular(x) - 2 * _h1 * 4 * TR * ( pow(x, 2) + pow(1 - x, 2) );
   }
 
   //_________________________________________________________________________________
@@ -374,6 +398,26 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  AS2ggH_MSbarMass_0::AS2ggH_MSbarMass_0():
+    Expression(),
+    _h1(4 * CF),
+    _AS2ggH_0(AS2ggH_0{})
+  {
+  }
+  double AS2ggH_MSbarMass_0::Regular(double const& x) const
+  {
+    return _AS2ggH_0.Regular(x);
+  }
+  double AS2ggH_MSbarMass_0::Singular(double const& x) const
+  {
+    return _AS2ggH_0.Singular(x);
+  }
+  double AS2ggH_MSbarMass_0::Local(double const& x) const
+  {
+    return _AS2ggH_0.Local(x) - 2 * _h1 * ( - 4. * TR / 3. );
+  }
+
+  //_________________________________________________________________________________
   AS2ggH_L::AS2ggH_L():
     Expression()
   {
@@ -400,6 +444,26 @@ namespace apfel
     const double ln1mx = log(1 - x);
     const double omeL1 = CF * TR * 4 + CA * TR * ( 16. / 3 + 80 * ln1mx / 9 );
     return - omeL1;
+  }
+
+  //_________________________________________________________________________________
+  AS2ggH_MSbarMass_L::AS2ggH_MSbarMass_L():
+    Expression(),
+    _h1(3 * CF),
+    _AS2ggH_L(AS2ggH_L{})
+  {
+  }
+  double AS2ggH_MSbarMass_L::Regular(double const& x) const
+  {
+    return _AS2ggH_L.Regular(x);
+  }
+  double AS2ggH_MSbarMass_L::Singular(double const& x) const
+  {
+    return _AS2ggH_L.Singular(x);
+  }
+  double AS2ggH_MSbarMass_L::Local(double const& x) const
+  {
+    return _AS2ggH_L.Local(x) - 2 * _h1 * ( - 4. * TR / 3. );
   }
 
   //_________________________________________________________________________________

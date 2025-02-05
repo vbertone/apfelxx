@@ -107,7 +107,19 @@ int main()
             << ", (ratio = " << aNLOmix.Evaluate(Mu)(0, 0) / asNLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "NLO:   alpha_em(Mu = " << Mu << " GeV)[coup] = " << aNLOmix.Evaluate(Mu)(1, 0)
             << ", alpha_em(Mu = " << Mu << " GeV)[dec] = " << aNLO.Evaluate(Mu)
-            << ", (ratio = " << aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu) << ")\n" << std::endl;
+            << ", (ratio = " << aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu) << ")" << std::endl;
+
+  // Iniatialize the running of the coupling at all available
+  // perturbative orders.
+  apfel::AlphaQCDMSbarMass asLOmsb{AlphaQCDRef, MuQCDRef, QuarkThresholds, 0};
+  apfel::AlphaQCDMSbarMass asNLOmsb{AlphaQCDRef, MuQCDRef, QuarkThresholds, 1};
+  apfel::AlphaQCDMSbarMass asNNLOmsb{AlphaQCDRef, MuQCDRef, QuarkThresholds, 2};
+
+  // Compute and print values at Mu.
+  std::cout << "\nNumerical evolution of the strong coupling with MSbar thresholds:" << std::endl;
+  std::cout << "LO:   alpha_s(Mu = " << Mu << " GeV) = " << asLOmsb.Evaluate(Mu) << std::endl;
+  std::cout << "NLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNLOmsb.Evaluate(Mu) << " (NLO/LO   = " << 100 * asNLOmsb.Evaluate(Mu) / asLOmsb.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNLOmsb.Evaluate(Mu) << " (NNLO/NLO = " << 100 * asNNLOmsb.Evaluate(Mu) / asNLOmsb.Evaluate(Mu)<< "%)\n" << std::endl;
 
   return 0;
 }
