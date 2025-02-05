@@ -612,7 +612,7 @@ namespace apfel
             for (int alpha = 0; alpha < nx1; alpha++)
               {
                 // Resize container w.r.t the second grid
-                s[ig1][ig2][alpha].resize(0, nx2);
+                s[ig1][ig2][alpha].resize(1, nx2);
                 for (int delta = 0; delta < nx2; delta++)
                   // Compute product between first dimension of the
                   // double operator and distribution.
@@ -656,7 +656,7 @@ namespace apfel
             const int nx2 = _grid2.GetSubGrid(ig2).nx();
 
             // Resize container w.r.t the firt and second grids
-            s[ig1][ig2].resize(0, nx1, std::vector<double>(nx2));
+            s[ig1][ig2].resize(1, nx1, std::vector<double>(nx2));
 
             for (int beta = 0; beta < nx1; beta++)
               for (int gamma = 0; gamma < nx2; gamma++)
