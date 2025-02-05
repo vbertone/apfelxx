@@ -306,7 +306,7 @@ namespace apfel
     const apfel::Grid g2{vsg2};
 
     // ... then check that they match with those given as input.
-    if (gr1 != _grid1 || gr2 != _grid2)
+    if (g1 != _grid1 || g2 != _grid2)
       throw std::runtime_error(error("DoubleOperator::DoubleOperator", "Input grids and grids stored in YAML::Node do not match."));
 
     // Get double operator values from the node
