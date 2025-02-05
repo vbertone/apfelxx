@@ -139,6 +139,21 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Operator DistributionOperator::Evaluate(double const& x) const
+  {
+  }
+
+  //_________________________________________________________________________
+  Operator DistributionOperator::Derive(double const& x) const
+  {
+  }
+
+  //_________________________________________________________________________
+  Operator DistributionOperator::Integrate(double const& a, double const& b) const
+  {
+  }
+
+  //_________________________________________________________________________
   DoubleDistribution DistributionOperator::operator *= (Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid

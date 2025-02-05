@@ -9,6 +9,7 @@
 #include "apfel/doubleobject.h"
 #include "apfel/doubleoperator.h"
 #include "apfel/distributionoperator.h"
+#include "apfel/operatordistribution.h"
 #include "apfel/messages.h"
 
 #include <stdexcept>
@@ -267,6 +268,7 @@ namespace apfel
   template class Set<DoubleDistribution>;
   template class Set<DoubleOperator>;
   template class Set<DistributionOperator>;
+  template class Set<OperatorDistribution>;
 
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
@@ -278,4 +280,5 @@ namespace apfel
   template std::ostream& operator << (std::ostream& os, Set<DoubleDistribution> const& s);
   template std::ostream& operator << (std::ostream& os, Set<DoubleOperator> const& s);
   template std::ostream& operator << (std::ostream& os, Set<DistributionOperator> const& s);
+  template std::ostream& operator << (std::ostream& os, Set<OperatorDistribution> const& s);
 }
