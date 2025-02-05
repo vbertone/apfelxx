@@ -131,4 +131,6 @@ namespace apfel
   template class MatchedEvolution<DoubleOperator>;
   template class MatchedEvolution<DistributionOperator>;
   template class MatchedEvolution<OperatorDistribution>;
+  template class MatchedEvolution<Set<DistributionOperator>>;
+  template class MatchedEvolution<Set<OperatorDistribution>>;
 }
