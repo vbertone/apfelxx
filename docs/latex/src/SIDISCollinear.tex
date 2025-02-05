@@ -395,8 +395,9 @@ where the second and third lines only appear at NNLO. Moreover, the coefficient
 functions $C$ can no longer be written as in Eq.~(\ref{eq:decomposition}). The
 indices $\alpha$, $\beta$, and $\gamma$ run over all active quark flavours
 \textit{and} anti-flavours, \textit{i.e.} they are indices in the physical
-basis. We now use Eq.~(\ref{eq:rotationandevolution}) to rotate FFs from the
-physical to the evolution basis and to introduce their evolution. We rewrite
+basis, and in principle also over the gluon. We now use
+Eq.~(\ref{eq:rotationandevolution}) to rotate FFs from the physical to the
+evolution basis and to introduce their evolution. We rewrite
 Eq.~(\ref{eq:rotationandevolution}) as follows
 \begin{equation}
   d_{\alpha} = T_{\alpha i}d_{i} = T_{\alpha i}\Gamma_{ij} d_{j}^{(0)}\,,
@@ -405,8 +406,9 @@ Eq.~(\ref{eq:rotationandevolution}) as follows
 where we removed all dependences and convolution symbols and, with abuse of
 notation, we indicated with $d_i$, or with any latin index, the $i$-th FF in the
 evolution basis, while $d_{j}^{(0)}$ is the $j$-th FF in the evolution basis at
-the initial scale $Q_0$. We now use this relation to replace all FFs in the
-physical basis with their evolution basis counterparts. We then have:
+the initial scale $Q_0$. Also note that $T_{gi}=\delta_{gi}$ and
+$T_{g\alpha}=\delta_{g\alpha}$. We now use this relation to replace all FFs in
+the physical basis with their evolution basis counterparts. We then have:
 \begin{equation}
 F = \mathbb{K}_{i}\Gamma_{ij}d_{j}^{(0)}\,,
 \end{equation}
@@ -417,19 +419,36 @@ where now:
   \\
   &+&\displaystyle C_{gg}\left(\sum_{\gamma}e_\gamma^2\right)f_gT_{g i}+C_{qq}^{\rm PS}\left(\sum_{\gamma}e_\gamma^2\right)\left(\sum_{\alpha}f_\alpha T_{\alpha i}\right)+C_{\overline{q}q}\left(\sum_{\alpha}e_\alpha^2f_{-\alpha}T_{\alpha i}\right)\\
   \\
+  &+&\displaystyle C_{q'q}^{(1)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\beta^2 f_\beta T_{\alpha i}\right) +C_{q'q}^{(2)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha^2 f_\beta T_{\alpha i}\right) +C_{q'q}^{(3)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha e_\beta f_\beta T_{\alpha i} \right) \,,
+  \end{array}
+\end{equation}
+where, importantly, greek indices ($\alpha$, $\beta$, and $\gamma$) only run
+over active quarks and antiquarks and not over the gluon. Given the structure of
+$T_{\alpha i}$, this has the consequence that if $i$ corresponds to the gluon
+only the terms proportional to $C_{gq}$ and $C_{gg}$ survive. Conversely, if $i$
+corresponds to any of the quark quark combinations, the terms proportional to
+$C_{gq}$ and $C_{gg}$ drop while all others remain. Therefore, we could write:
+\begin{equation}
+  \mathbb{K}_{g} = C_{gq} \left(\sum_{\beta}e_\beta^2f_\beta\right)+ C_{gg}\left(\sum_{\gamma}e_\gamma^2\right)f_g\,,
+\end{equation}
+while:
+\begin{equation}
+  \begin{array}{rcl}
+  \displaystyle \mathbb{K}_{i\neq g}&=&\displaystyle C_{qq}^{\rm NS}\left(\sum_{\alpha} e_\alpha^2f_\alpha T_{\alpha i}\right)+C_{qg}f_g\left(\sum_{\alpha}e_\alpha^2 T_{\alpha i}\right)\\
+  \\
+  &+&\displaystyle C_{qq}^{\rm PS}\left(\sum_{\gamma}e_\gamma^2\right)\left(\sum_{\alpha}f_\alpha T_{\alpha i}\right)+C_{\overline{q}q}\left(\sum_{\alpha}e_\alpha^2f_{-\alpha}T_{\alpha i}\right)\\
+  \\
   &+&\displaystyle C_{q'q}^{(1)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\beta^2 f_\beta T_{\alpha i}\right) +C_{q'q}^{(2)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha^2 f_\beta T_{\alpha i}\right) +C_{q'q}^{(3)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha e_\beta f_\beta T_{\alpha i} \right) \,.
   \end{array}
 \end{equation}
-Since this time it is convinient to parameterise the cross section in terms of
-the structure functions $F_1$ and $F_L$, with $F_L=F_2-2F_1$, we have that:
+
+Since this time it is convenient to parameterise the cross section in terms of
+the structure functions $F_T$ and $F_L$, with $F_L=F_2-F_T$, we have that:
 \begin{equation}
   \mathbb{K}_{i}^{\rm SIDIS} =   \frac{8\pi\alpha^2}{Q^3} 
-    \left[ \frac{Y_+}{x} \mathbb{K}_{1,i}
+    \left[ \frac{Y_+}{2x} \mathbb{K}_{T,i}
       +\frac{1-y}{x} \mathbb{K}_{L,i}\right]\,.
 \end{equation}
-
-
-
 
 \subsection{Integrating over the phase space}
 

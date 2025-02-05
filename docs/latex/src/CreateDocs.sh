@@ -13,4 +13,4 @@ done
 
 # Move pdfs and clean up
 mv ./*.pdf ../pdf/.
-rm ./*.aux ./*.log ./*.out ./*.toc ./*.idx ./*.blg ./*.bbl
+rm ./*.aux ./*.log ./*.out ./*.toc ./*.idx ./*.blg ./*.bbl ./*.fdb_latexmk ./*.fls
