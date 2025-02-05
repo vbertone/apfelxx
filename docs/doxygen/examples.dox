@@ -11,6 +11,7 @@
  \example integrator_test.cc
  \example interpolation_test.cc
  \example massiveCF_test.cc
+ \example msbarmass_test.cc
  \example ogata_test.cc
  \example operator_test.cc
  \example polylog_test.cc

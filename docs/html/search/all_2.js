@@ -13,7 +13,7 @@ var searchData=
   ['beta2qcd_10',['beta2qcd',['../namespaceapfel.html#a246c7375cddb32ed53ee4f1a79836569',1,'apfel']]],
   ['beta3qcd_11',['beta3qcd',['../namespaceapfel.html#a780121c6acabc585bf2f16d992ec6dab',1,'apfel']]],
   ['beta4qcd_12',['beta4qcd',['../namespaceapfel.html#ac20154649fd09846e9c9889bb9d94466',1,'apfel']]],
-  ['betaqcd_13',['betaQCD',['../classapfel_1_1AlphaQCD.html#a8399fbe2c22eedd5c27d5c11304ce543',1,'apfel::AlphaQCD::betaQCD()'],['../classapfel_1_1AlphaQCDxi.html#a7a52d8982e0d7372d2600781576945eb',1,'apfel::AlphaQCDxi::betaQCD()']]],
+  ['betaqcd_13',['betaQCD',['../classapfel_1_1AlphaQCD.html#a8399fbe2c22eedd5c27d5c11304ce543',1,'apfel::AlphaQCD::betaQCD()'],['../classapfel_1_1AlphaQCDMSbarMass.html#a58f05f9493ac20862131117125101f64',1,'apfel::AlphaQCDMSbarMass::betaQCD()'],['../classapfel_1_1AlphaQCDxi.html#a7a52d8982e0d7372d2600781576945eb',1,'apfel::AlphaQCDxi::betaQCD()']]],
   ['betaqcd_2eh_14',['betaqcd.h',['../betaqcd_8h.html',1,'']]],
   ['betaqcdqed_15',['betaQCDQED',['../classapfel_1_1AlphaQCDQED.html#a11fb0b04878072a99c1685a6f1a5181d',1,'apfel::AlphaQCDQED']]],
   ['betaqcdqed_2eh_16',['betaqcdqed.h',['../betaqcdqed_8h.html',1,'']]],

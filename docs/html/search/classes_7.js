@@ -7,5 +7,6 @@ var searchData=
   ['matchingbasisqcd_4',['MatchingBasisQCD',['../classapfel_1_1MatchingBasisQCD.html',1,'apfel']]],
   ['matchingoperatorbasisqcd_5',['MatchingOperatorBasisQCD',['../classapfel_1_1MatchingOperatorBasisQCD.html',1,'apfel']]],
   ['matrix_6',['matrix',['../classapfel_1_1matrix.html',1,'apfel']]],
-  ['matrix_3c_20double_20_3e_7',['matrix&lt; double &gt;',['../classapfel_1_1matrix.html',1,'apfel']]]
+  ['matrix_3c_20double_20_3e_7',['matrix&lt; double &gt;',['../classapfel_1_1matrix.html',1,'apfel']]],
+  ['msbarmass_8',['MSbarMass',['../classapfel_1_1MSbarMass.html',1,'apfel']]]
 ];

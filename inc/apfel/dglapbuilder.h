@@ -96,7 +96,7 @@ namespace apfel
    * functions and matching conditions with MSbar masses and store
    * them into a 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark masses
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
