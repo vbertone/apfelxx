@@ -7,6 +7,7 @@
 #include "apfel/disbasis.h"
 #include "apfel/messages.h"
 #include "apfel/operator.h"
+#include "apfel/rotations.h"
 
 #include <numeric>
 
@@ -364,5 +365,59 @@ namespace apfel
     CNNLO.insert({   T35 + pv , coeff[0][2].at(T35 + pv)+coeff[1][2].at(T35 + pv)+coeff[2][2].at(T35 + pv)+coeff[3][2].at(T35 + pv)});
 
     return {CLO,CNLO,CNNLO};
+  }
+
+  //_________________________________________________________________________________
+  DISCCBasis_ACOT::DISCCBasis_ACOT(std::vector<double> const& CKM, Operator Zero):
+    ConvolutionMap{"DISCCBasis_ACOT_tot"},
+    _CKM(CKM),
+    _Zero(Zero)
+  {
+    if (_CKM.size() != 9)
+      throw std::runtime_error(error("DISCCBasis_ACOT", "The CKM matrix has to have 9 entries."));
+
+    _rules[0] = {{0,0,1}};
+    for(int i=1;i<=6;i++){
+      // apply convention factor of 1/2
+      _rules[2*i-1] = {{2*i-1,2*i-1,0.5}};
+      _rules[2*i] = {{2*i,2*i,0.5}};
+    }
+  }
+
+
+  std::vector<std::map<int,Operator>> DISCCBasis_ACOT::get_operators_plus(std::vector<std::map<int,Operator>> op_map){
+    std::vector<std::map<int,Operator>> Coef(3);
+    for(int k=0; k<3; k++){
+      for(int j=SIGMA;j<=T35;j+=2){
+        Coef.at(k).insert({j,_Zero});
+      }
+    }
+    for(int k=0; k<3; k++){
+      Coef.at(k).insert({GLUON, op_map.at(k).at(GLUON)});
+      for(int i=DOWN; i<=TOP; i++){
+        for(int j=SIGMA; j<=T35; j+=2){
+          Coef.at(k).at(j) += RotQCDEvToPhys[i][(j-1)/2]*op_map.at(k).at(i+1);
+        }
+      }
+    }
+    return Coef;
+  }
+
+  std::vector<std::map<int,Operator>> DISCCBasis_ACOT::get_operators_minus(std::vector<std::map<int,Operator>> op_map){
+    std::vector<std::map<int,Operator>> Coef(3);
+    for(int k=0; k<3; k++){
+      Coef.at(k).insert({GLUON,_Zero});
+      for(int j=VALENCE;j<=V35;j+=2){
+        Coef.at(k).insert({j,_Zero});
+      }
+    }
+    for(int k=0; k<3; k++){
+      for(int i=DOWN; i<=TOP; i++){
+        for(int j=VALENCE; j<=V35; j+=2){
+          Coef.at(k).at(j) += RotQCDEvToPhys[i][(j-2)/2]*op_map.at(k).at(i+1);
+        }
+      }
+    }
+    return Coef;
   }
 }

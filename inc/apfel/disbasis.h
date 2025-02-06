@@ -195,5 +195,55 @@ namespace apfel
     std::vector<double> _Ch;
     std::vector<double> _avCh;
   };
+
+  /**
+   * @brief The DISCCBasis_ACOT class is a derived of ConvolutionMap
+   * specialised for the computation of the CC DIS structure
+   * functions in the ACOT scheme.
+   */
+  class DISCCBasis_ACOT: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The map enumerators for the operands and the
+     * distributions.
+     */
+    enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
+    enum PhysDist: int {DOWN,UP,STRANGE,CHARM,BOTTOM,TOP};
+
+    /**
+     * @name Constructors
+     * List of constructors.
+     */
+    ///@{
+    /**
+     * @brief The DISCCBasis_ACOT constructor
+     * @param CKM: vector with the squared CKM matrix entries.
+     * @param Zero: zero operator for initialization purposes
+     */
+    DISCCBasis_ACOT(std::vector<double> const& CKM, Operator Zero);
+    ///@}
+
+    /**
+     * @brief Computes the change of basis from the QCD evolution to physical basis for the plus-operators
+     * 
+     * @param op_map: The operator map in the physical basis
+     */
+    std::vector<std::map<int,Operator>> get_operators_plus(std::vector<std::map<int,Operator>> op_map);
+    /**
+     * @brief Computes the change of basis from the QCD evolution to physical basis for the minus-operators
+     * 
+     * @param op_map: The operator map in the physical basis
+     */
+    std::vector<std::map<int,Operator>> get_operators_minus(std::vector<std::map<int,Operator>> op_map);
+
+  private:
+    /**
+     * @brief The CKM matrix and the Zero-Operator
+     * 
+     */
+    std::vector<double> const& _CKM;
+    Operator _Zero;
+  };
   ///@}
 }
