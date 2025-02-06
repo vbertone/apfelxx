@@ -36,7 +36,7 @@ const std::vector<double> Q{1.4,5,10,100};
 
 int main(){
 
-  LHAPDF::PDF* pdf = LHAPDF::mkPDF("CT18NNLO",0);
+  LHAPDF::PDF* pdf = LHAPDF::mkPDF("nCTEQ15_1_1",0);
   const auto PDFrotated = [&] (double const& x, double const& Q) -> std::map<int,double>{return apfel::PhysToQCDEv(pdf->xfxQ(x,Q));};
   const std::vector<double> Thresholds = {0,0,0,pdf->quarkMass(4),pdf->quarkMass(5),pdf->quarkMass(6)};
   const auto alphas = [&] (double const& Q) -> double{return pdf->alphasQ(Q);};
@@ -50,6 +50,8 @@ int main(){
   apfel::Grid g{{{25,1e-6,4},{20,1e-2,4},{10,1e-1,4},{5,5e-1,4}}};
 
   const auto fEW = [=] (double const& Q) -> std::vector<double> {return apfel::ElectroWeakCharges(Q,false);};
+  const auto fPVEW = [=] (double const& Q) -> std::vector<double> {return apfel::ParityViolatingElectroWeakCharges(Q,false);};
+  const auto fCKM2 = [=] (double const& ) -> std::vector<double> {return apfel::CKM2;};
 
   // const auto F2objects = apfel::InitializeF2NCObjectsMassive(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
 //   const auto F2objects = apfel::InitializeF2NCObjectsACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
@@ -57,17 +59,54 @@ int main(){
   const std::map<int,apfel::Observable<>> F2 = apfel::BuildStructureFunctions(F2objects,PDFrotated,pto,alphas,fEW);
   const apfel::TabulateObject<apfel::Distribution> F2total {[&] (double const& Q) -> apfel::Distribution{return F2.at(0).Evaluate(Q);},nQ,Qmin,Qmax,intdeg,Thresholds};
 
+  const auto FLobjects = apfel::InitializeFLNCObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> FL = apfel::BuildStructureFunctions(FLobjects,PDFrotated,pto,alphas,fEW);
+  const apfel::TabulateObject<apfel::Distribution> FLtotal {[&] (double const& Q) -> apfel::Distribution{return FL.at(0).Evaluate(Q);},nQ,Qmin,Qmax,intdeg,Thresholds};
+
+  const auto F3objects = apfel::InitializeF3NCObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> F3 = apfel::BuildStructureFunctions(F3objects,PDFrotated,pto,alphas,fPVEW);
+  const apfel::TabulateObject<apfel::Distribution> F3total {[&] (double const& Q) -> apfel::Distribution{return F3.at(0).Evaluate(Q);},nQ,Qmin,Qmax,intdeg,Thresholds};
+
+  const auto F2plusObjects = apfel::InitializeF2CCPlusObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> F2plus = apfel::BuildStructureFunctions(F2plusObjects,PDFrotated,pto,alphas,fCKM2);
+  const auto F2minusObjects = apfel::InitializeF2CCMinusObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> F2minus = apfel::BuildStructureFunctions(F2minusObjects,PDFrotated,pto,alphas,fCKM2);
+  const apfel::TabulateObject<apfel::Distribution> F2WP {[&] (double const& Q) -> apfel::Distribution{return 2*(F2plus.at(0).Evaluate(Q)+F2minus.at(0).Evaluate(Q));},nQ,Qmin,Qmax,intdeg,Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F2WM {[&] (double const& Q) -> apfel::Distribution{return 2*(F2plus.at(0).Evaluate(Q)-F2minus.at(0).Evaluate(Q));},nQ,Qmin,Qmax,intdeg,Thresholds};
+
+  const auto FLplusObjects = apfel::InitializeFLCCPlusObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> FLplus = apfel::BuildStructureFunctions(FLplusObjects,PDFrotated,pto,alphas,fCKM2);
+  const auto FLminusObjects = apfel::InitializeFLCCMinusObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> FLminus = apfel::BuildStructureFunctions(FLminusObjects,PDFrotated,pto,alphas,fCKM2);
+  const apfel::TabulateObject<apfel::Distribution> FLWP {[&] (double const& Q) -> apfel::Distribution{return 2*(FLplus.at(0).Evaluate(Q)+FLminus.at(0).Evaluate(Q));},nQ,Qmin,Qmax,intdeg,Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> FLWM {[&] (double const& Q) -> apfel::Distribution{return 2*(FLplus.at(0).Evaluate(Q)-FLminus.at(0).Evaluate(Q));},nQ,Qmin,Qmax,intdeg,Thresholds};
+
+  const auto F3plusObjects = apfel::InitializeF3CCPlusObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> F3plus = apfel::BuildStructureFunctions(F3plusObjects,PDFrotated,pto,alphas,fCKM2);
+  const auto F3minusObjects = apfel::InitializeF3CCMinusObjectsSACOT(g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const std::map<int,apfel::Observable<>> F3minus = apfel::BuildStructureFunctions(F3minusObjects,PDFrotated,pto,alphas,fCKM2);
+  const apfel::TabulateObject<apfel::Distribution> F3WP {[&] (double const& Q) -> apfel::Distribution{return 2*(F3plus.at(0).Evaluate(Q)+F3minus.at(0).Evaluate(Q));},nQ,Qmin,Qmax,intdeg,Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> F3WM {[&] (double const& Q) -> apfel::Distribution{return -2*(F3plus.at(0).Evaluate(Q)-F3minus.at(0).Evaluate(Q));},nQ,Qmin,Qmax,intdeg,Thresholds};
+
   std::string path = "/home/peter/work/codes/apfelxx_ACOT/tests/ACOT_tests/APFELxx_results";
   std::string filename = path + "/NC_F2_SACOT-chi.csv";
 
   std::ofstream file;
   file.open(filename);
   file<<std::fixed<<std::setprecision(10);
-  file<<"x,Q2,NCF2\n";
+  file<<"x,Q2,NCF2,NCFL,NCF3,WMF2,WMFL,WMF3,WPF2,WPFL,WPF3\n";
   for(double xi: x){
     for(double Qi: Q){
-      file<<xi<<","<<Qi*Qi<<",";
-      file<<F2total.EvaluatexQ(xi,Qi);
+      file<<xi<<","<<Qi*Qi;
+      file<<","<<F2total.EvaluatexQ(xi,Qi);
+      file<<","<<FLtotal.EvaluatexQ(xi,Qi);
+      file<<","<<F3total.EvaluatexQ(xi,Qi)/xi;
+      file<<","<<F2WM.EvaluatexQ(xi,Qi);
+      file<<","<<FLWM.EvaluatexQ(xi,Qi);
+      file<<","<<F3WM.EvaluatexQ(xi,Qi)/xi;
+      file<<","<<F2WP.EvaluatexQ(xi,Qi);
+      file<<","<<FLWP.EvaluatexQ(xi,Qi);
+      file<<","<<F3WP.EvaluatexQ(xi,Qi)/xi;
       file<<"\n"; 
     }
   }
