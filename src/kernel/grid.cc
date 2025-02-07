@@ -35,7 +35,7 @@ namespace apfel
   SubGrid Grid::CreateJointGrid()
   {
     // Number of grids
-    double const ng = _GlobalGrid.size();
+    int const ng = (int)_GlobalGrid.size();
 
     // Order the SubGrids in such a way that they start with that
     // having the lowest value of xMin (only if there is more than one
