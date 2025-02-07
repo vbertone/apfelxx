@@ -25,6 +25,23 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Operator::Operator(Grid const& gr, std::vector<matrix<double>> const& op, bool const& gpd):
+    _grid(gr),
+    _eps(0.),
+    _gpd(gpd),
+    _Operator(op)
+  {
+    // Check that the number of subgrids matches
+    if (_grid.nGrids() != (int)_Operator.size())
+      throw std::runtime_error(error("Operator::operator", "The number of SubGrids does not match."));
+
+    // Check if the points in each SubGrids match
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
+      if ((int)_grid.GetSubGrid(ig).nx() != (int)_Operator[ig].size(1))
+        throw std::runtime_error(error("Operator::operator", "The size of the SubGrids does not match."));
+  }
+
+  //_________________________________________________________________________
   void Operator::BuildOperatorDGLAP(Expression const& expr)
   {
     // Interpolator object for the interpolating functions
