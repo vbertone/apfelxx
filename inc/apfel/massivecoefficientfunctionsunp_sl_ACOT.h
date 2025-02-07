@@ -295,20 +295,6 @@ namespace apfel
     double Regular(double const& x)  const;
   };
 
-  class CL2g_aSACOT_chi : public Expression
-  {
-  public:
-    CL2g_aSACOT_chi(double const& eta,bool const& xdependent);
-    double Regular(double const& x)  const;
-  };
-
-  class CL2ps_aSACOT_chi : public Expression
-  {
-  public:
-    CL2ps_aSACOT_chi(double const& eta,bool const& xdependent);
-    double Regular(double const& x)  const;
-  };
-
   class CL2nsp_aSACOT_chi_0 : public Expression
   {
   public:
@@ -321,6 +307,20 @@ namespace apfel
   {
   public:
     CL2nsp_aSACOT_chi_nf(double const& eta,bool const& xdependent);
+    double Regular(double const& x)  const;
+  };
+
+  class CL2g_aSACOT_chi : public Expression
+  {
+  public:
+    CL2g_aSACOT_chi(double const& eta,bool const& xdependent);
+    double Regular(double const& x)  const;
+  };
+
+  class CL2ps_aSACOT_chi : public Expression
+  {
+  public:
+    CL2ps_aSACOT_chi(double const& eta,bool const& xdependent);
     double Regular(double const& x)  const;
   };
 
