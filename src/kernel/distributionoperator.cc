@@ -12,7 +12,8 @@ namespace apfel
   //_________________________________________________________________________
   DistributionOperator::DistributionOperator(Grid const& gr1, Grid const& gr2):
     _grid1(gr1),
-    _grid2(gr2)
+    _grid2(gr2),
+    _li1(LagrangeInterpolator(_grid1))
   {
     // Get number of grids
     const int ng1 = _grid1.nGrids();
@@ -35,6 +36,7 @@ namespace apfel
   DistributionOperator::DistributionOperator(Grid const& gr1, Grid const& gr2, std::vector<std::vector<std::vector<matrix<double>>>> const& DO):
     _grid1(gr1),
     _grid2(gr2),
+    _li1(LagrangeInterpolator(_grid1)),
     _dOperator(DO)
   {
     // Get number of grids
@@ -59,7 +61,8 @@ namespace apfel
   //_________________________________________________________________________
   DistributionOperator::DistributionOperator(Distribution const& d1, Operator const& O2):
     _grid1(d1.GetGrid()),
-    _grid2(O2.GetGrid())
+    _grid2(O2.GetGrid()),
+    _li1(LagrangeInterpolator(_grid1))
   {
     // Stop the computation if the operators is of GPD type. Still
     // impossible to handle here.
@@ -95,7 +98,8 @@ namespace apfel
   //_________________________________________________________________________
   DistributionOperator::DistributionOperator(DoubleObject<Distribution, Operator> const& DObj):
     _grid1(DObj.GetTerms()[0].object1.GetGrid()),
-    _grid2(DObj.GetTerms()[0].object2.GetGrid())
+    _grid2(DObj.GetTerms()[0].object2.GetGrid()),
+    _li1(LagrangeInterpolator(_grid1))
   {
     // Stop the computation if the operator in the first term of the
     // double objects is of GPD type. Still impossible to handle.
@@ -141,6 +145,52 @@ namespace apfel
   //_________________________________________________________________________
   Operator DistributionOperator::Evaluate(double const& x) const
   {
+    // Get summation bounds on the joint grid along the first
+    // direction.
+    const std::array<int, 2> bounds1j = _li1.SumBounds(x, _grid1.GetJointGrid());
+
+    // Accumulate interpolating functions
+    std::vector<double> intp1j(bounds1j[1] - bounds1j[0]);
+    for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
+      intp1j[beta] = _li1.Interpolant(bounds1j[0] + beta, x, _grid1.GetJointGrid());
+
+    // Now take care of the subgrids. ig1 has to correspond to the
+    // subgrid index along the first direction such that "x" is on
+    // the denser grid possible.
+    int ig1;
+    for (ig1 = 0; ig1 < _grid1.nGrids(); ig1++)
+      if(_grid1.GetSubGrid(ig1).xMin() > x)
+        break;
+    ig1--;
+
+    // Get summation bounds on the ig1-th subgrid along the first
+    // direction.
+    const std::array<int, 2> bounds1s = _li1.SumBounds(x, _grid1.GetSubGrid(ig1));
+
+    // Accumulate interpolating functions
+    std::vector<double> intp1s(bounds1s[1] - bounds1s[0]);
+    for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+      intp1s[beta] = _li1.Interpolant(bounds1s[0] + beta, x, _grid1.GetSubGrid(ig1));
+
+    // Run over the subgrids along the second direction
+    const int ng2 = _grid2.nGrids();
+
+    std::vector<matrix<double>> op(ng2);
+    for (int ig2 = 0; ig2 < ng2; ig2++)
+      {
+        // Get number of nodes of the ig2-th subgrid along the second
+        // direction.
+        //const int nx2s = _grid2.GetSubGrid(ig2).GetGrid().size();
+        const int nx2s = _grid2.GetSubGrid(ig2).nx();
+
+        // Interpolate along the first direction of the ig2-th subgrid
+        op[ig2].resize(1, nx2s);
+        for (int delta = 0; delta < nx2s; delta++)
+          for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+            op[ig2](0, delta) += intp1s[beta] * _dOperator[ig1][ig2][beta + bounds1s[0]](0, delta);
+      }
+
+    return Operator{_grid2, op};
   }
 
   //_________________________________________________________________________
