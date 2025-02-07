@@ -15,8 +15,16 @@ plt.rc('ytick', **{'direction': 'in'})
 ####### pyplot setup #######
 
 path = "/home/peter/work/codes/apfelxx_ACOT/tests/ACOT_tests"
-file_nCTEQ = path + "/nCTEQ_results/SACOT-chi_all.csv"
-file_apfel = path + "/APFELxx_results/SACOT-chi_all.csv"
+doNLO = False
+
+if doNLO:
+  file_nCTEQ = path + "/nCTEQ_results/SACOT-chi_CT18NLO.csv"
+  file_apfel = path + "/APFELxx_results/SACOT-chi_NLO.csv"
+  savefile = path+"/SACOT-chi_NLO_all.pdf"
+else:
+  file_nCTEQ = path + "/nCTEQ_results/aSACOT-chi_CT18NNLO.csv"
+  file_apfel = path + "/APFELxx_results/aSACOT-chi_NNLO_test.csv"
+  savefile = path+"/aSACOT-chi_NNLO_all.pdf"
 
 def ij_to_csv_label(i,j):
   cur = ["NC","WM","WP"]
@@ -75,9 +83,13 @@ for i,current in enumerate(currents):
     tot.set_title(current+' '+sf)
     ratio.set_title(r"$\texttt{apfelxx}/\texttt{nCTEQ}-1$")
 
+if doNLO:
+  plt.suptitle(r"SACOT-$\chi$ scheme at NLO, CT18NLO PDFs",fontsize="x-large")
+else:
+  plt.suptitle(r"approx. SACOT-$\chi$ scheme at NNLO, CT18NNLO PDFs",fontsize="x-large")
 
-plt.suptitle(r"SACOT-$\chi$ scheme at NLO",fontsize="x-large")
+
 plt.subplots_adjust(**subplots_adjust)
 
-plt.savefig(path+"/SACOT-chi_all.pdf")
+plt.savefig(savefile)
 # plt.show()
