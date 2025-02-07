@@ -26,6 +26,30 @@
 namespace apfel
 { 
 
+  ////////////////////////
+  /// helper functions ///
+  ////////////////////////
+
+  // returns heaviest quark between down-type, up-type and general type
+  int get_heaviest_quark(int down, int up, int k){
+    //
+    int i = 2*down-1;
+    int j = 2*up;
+    return std::max<int>({i,j,k});
+  };
+  // returns whether both quark masses are below threshold
+  bool both_in(int down, int up, int nf){
+    return 2*down-1<=nf && 2*up <=nf;
+  };
+  // returns whether a down-type quarks mass is below threshold
+  bool down_type_in(int i, int nf){
+    return 2*i-1<=nf;
+  };
+  // returns whether a up-type quarks mass is below threshold
+  bool up_type_in(int i, int nf){
+    return 2*i<=nf;
+  };
+
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsACOT(Grid                const& g,
                                                                                                                  std::vector<double> const& Masses,
                                                                                                                  double              const& IntEps,
@@ -2614,5 +2638,1369 @@ std::function<StructureFunctionObjects(double const&, std::vector<double> const&
     t.stop();
     return F3Obj;
   }
-                                                                                                              
+ 
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCPlusObjectsASACOT(Grid                const& g,
+                                                                                                                     std::vector<double> const& Masses,
+                                                                                                                     double              const& IntEps,
+                                                                                                                     int                 const& nQ,
+                                                                                                                     double              const& Qmin,
+                                                                                                                     double              const& Qmax,
+                                                                                                                     int                 const& intdeg,
+                                                                                                                     double              const& n)
+  {
+    Timer t;
+
+    const int num_flavours = Masses.size();
+    if (num_flavours != 6)
+      throw std::runtime_error(error("InitializeF2CCPlusObjectsASACOT", "The vector of masses has to contain exactly 6 ordered masses."));
+    
+    report("Initializing StructureFunctionObjects for F2 CC plus aSACOT at NNLO\n");
+
+    const Operator Zero {g, Null{}, IntEps};
+
+    const double ml = Masses[0] == 0 ? 0.01 : Masses[0];
+    const double mc = Masses[3] == 0 ? 0.01 : Masses[3];
+    const double mb = Masses[4] == 0 ? 0.01 : Masses[4];
+    const double mt = Masses[5] == 0 ? 0.01 : Masses[5];
+    const double mll = ml+ml;
+    const double ml2 = ml*ml;
+    const double mc2 = mc*mc;
+    const double mlc = ml+mc;
+    const double mcb = mc+mb;
+    const double mb2 = mb*mb;
+    const double mlb = ml+mb;
+    const double mt2 = mt*mt;
+    const double mlt = mt+ml;
+    const double mtb = mt+mb;
+    const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+
+    // calc gridding range
+    const double Qgridmin = 0.95*Qmin;
+    const double Qgridmax = 1.05*Qmax;
+    const double sximin = Qgridmin/(mt+mb);
+    const double sximax = Qgridmax/ml;
+    const double lambda = 0.99*sximin;
+
+    const auto fO20ns = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O20{g,Cm20qNC_ACOT_chi{eta},IntEps}; 
+      return O20;
+    };
+    const TabulateObject<Operator> TabO20ns_H{fO20ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO21ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O21nsNC{g,Cm21qNC_ACOT_chi{eta},IntEps};
+      return O21nsNC;
+    };
+    const TabulateObject<Operator> TabO21ns_H{fO21ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO21g_light_light =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O21CCg_gen_mass{g,Cm21gCC_general_mass{eta,xi,ml,ml},IntEps};
+      return O21CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO21g_ll{fO21g_light_light, nQ, Qgridmin/mll, Qgridmax/mll, intdeg, {}, lambda};
+
+    const auto fO21g_light_charm =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O21CCg_gen_mass{g,Cm21gCC_general_mass{eta,xi,ml,mc},IntEps};
+      return O21CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO21g_lc{fO21g_light_charm, nQ, Qgridmin/mlc, Qgridmax/mlc, intdeg, {}, lambda};
+
+    const auto fO21g_charm_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O21CCg_gen_mass{g,Cm21gCC_general_mass{eta,xi,mb,mc},IntEps};
+      return O21CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO21g_cb{fO21g_charm_bottom, nQ, Qgridmin/mcb, Qgridmax/mcb, intdeg, {}, lambda};
+
+    const auto fO21g_light_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O21CCg_gen_mass{g,Cm21gCC_general_mass{eta,xi,ml,mb},IntEps};
+      return O21CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO21g_lb{fO21g_light_bottom, nQ, Qgridmin/mlb, Qgridmax/mlb, intdeg, {}, lambda};
+
+    const auto fO21g_top_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O21CCg_gen_mass{g,Cm21gCC_general_mass{eta,xi,mb,mt},IntEps};
+      return O21CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO21g_tb{fO21g_top_bottom, nQ, Qgridmin/mtb, Qgridmax/mtb, intdeg, {}, lambda};
+
+    const auto fO21g_light_top =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O21CCg_gen_mass{g,Cm21gCC_general_mass{eta,xi,ml,mt},IntEps};
+      return O21CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO21g_lt{fO21g_light_top, nQ, Qgridmin/mlt, Qgridmax/mlt, intdeg, {}, lambda};
+
+    const auto fO21g_sub =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator Om21CCg_sub{g,Cm21gNC_sub_ACOT_chi{eta},IntEps};
+      return 0.5*Om21CCg_sub;
+    };
+    const TabulateObject<Operator> TabO21g_sub{fO21g_sub, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // NNLO
+    const auto fO22nsp_0 = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O22ncp_0{g,C22nsp_aSACOT_chi_0{eta,true},IntEps};
+      return O22ncp_0;
+    };
+    const TabulateObject<Operator> TabO22ns_0_H{fO22nsp_0, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO22nsp_nf =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O22ncp_nf{g,C22nsp_aSACOT_chi_nf{eta,true},IntEps};
+      return O22ncp_nf;
+    };
+    const TabulateObject<Operator> TabO22ns_nf_H{fO22nsp_nf, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO22ps = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O22ps{g,C22ps_aSACOT_chi{eta,true},IntEps};
+      return O22ps;
+    };
+    const TabulateObject<Operator> TabO22ps_H{fO22ps, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO22g = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O22g{g,C22g_aSACOT_chi{eta,true},IntEps};
+      return 0.5*O22g;
+    };
+    const TabulateObject<Operator> TabO22g_H{fO22g, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
+
+    const auto F2Obj = [=,&g] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects{
+      if(Q<Qgridmin || Q>Qgridmax){
+        throw std::runtime_error(error("F2CCsimACOT NNLO plus", "Q out of range ["+std::to_string(Qmin)+","+std::to_string(Qmax)+"]. Q=" + std::to_string(Q)));
+      }
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      const double Q2 = Q*Q;
+      const double log_ml = Q>=ml ? log(Q2/ml2) : 0;
+      const double log_mc = Q>=mc ? log(Q2/mc2) : 0;
+      const double log_mb = Q>=mb ? log(Q2/mb2) : 0;
+      const double log_mt = Q>=mt ? log(Q2/mt2) : 0;  
+
+      const double nf = NF(Q,Masses);
+
+      std::vector<std::map<int,Operator>> coef_tot(3);
+
+      std::vector<Operator> OqLO({ TabO20ns_H.Evaluate(Q/mll),
+                                  TabO20ns_H.Evaluate(Q/mlc),
+                                  TabO20ns_H.Evaluate(Q/mcb),
+                                  TabO20ns_H.Evaluate(Q/mlb),
+                                  TabO20ns_H.Evaluate(Q/mtb),
+                                  TabO20ns_H.Evaluate(Q/mlt)});
+      std::vector<Operator> OqNLO({TabO21ns_H.Evaluate(Q/mll),   //0
+                                  TabO21ns_H.Evaluate(Q/mlc),   //1
+                                  TabO21ns_H.Evaluate(Q/mcb),   //2
+                                  TabO21ns_H.Evaluate(Q/mlb),   //3
+                                  TabO21ns_H.Evaluate(Q/mtb),   //4
+                                  TabO21ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<std::vector<Operator>> Oq({OqLO,OqNLO});
+
+      std::vector<Operator> OgLO({Zero,Zero,Zero,Zero,Zero,Zero});
+      std::vector<Operator> OgNLO({TabO21g_ll.Evaluate(Q/mll) - 2*log_ml       *TabO21g_sub.Evaluate(Q/mll),
+                                  TabO21g_lc.Evaluate(Q/mlc) - (log_ml+log_mc)*TabO21g_sub.Evaluate(Q/mlc),
+                                  TabO21g_cb.Evaluate(Q/mcb) - (log_mc+log_mb)*TabO21g_sub.Evaluate(Q/mcb),
+                                  TabO21g_lb.Evaluate(Q/mlb) - (log_ml+log_mb)*TabO21g_sub.Evaluate(Q/mlb),
+                                  TabO21g_tb.Evaluate(Q/mtb) - (log_mt+log_mb)*TabO21g_sub.Evaluate(Q/mtb),
+                                  TabO21g_lt.Evaluate(Q/mlt) - (log_ml+log_mt)*TabO21g_sub.Evaluate(Q/mlt)});
+      std::vector<std::vector<Operator>> Og({OgLO,OgNLO});
+
+      //total
+      for(int l=0; l<2; l++){ // gluon pieces
+        coef_tot.at(l).insert({0,(Ch.at(0)+Ch.at(1))*Og.at(l).at(0)}); 
+        coef_tot.at(l).at(0) += (Ch.at(3)+Ch.at(4))*Og.at(l).at(1);
+        coef_tot.at(l).at(0) += Ch.at(5)*Og.at(l).at(2);
+        coef_tot.at(l).at(0) += Ch.at(2)*Og.at(l).at(3); 
+        coef_tot.at(l).at(0) += Ch.at(8)*Og.at(l).at(4);
+        coef_tot.at(l).at(0) += (Ch.at(6)+Ch.at(7))*Og.at(l).at(5);
+      }
+      for(int l=0; l<2;l++){ // quark pieces
+        coef_tot.at(l).insert({1,Ch.at(0)*Oq.at(l).at(0)+Ch.at(3)*Oq.at(l).at(1)+Ch.at(6)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({2,(Ch.at(0)+Ch.at(1))*Oq.at(l).at(0)+Ch.at(2)*Oq.at(l).at(3)});
+        coef_tot.at(l).insert({3,Ch.at(1)*Oq.at(l).at(0)+Ch.at(4)*Oq.at(l).at(1)+Ch.at(7)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({4,(Ch.at(3)+Ch.at(4))*Oq.at(l).at(1)+Ch.at(5)*Oq.at(l).at(2)});
+        coef_tot.at(l).insert({5,Ch.at(2)*Oq.at(l).at(3)+Ch.at(5)*Oq.at(l).at(2)+Ch.at(8)*Oq.at(l).at(4)});
+        coef_tot.at(l).insert({6,(Ch.at(6)+Ch.at(7))*Oq.at(l).at(5)+Ch.at(8)*Oq.at(l).at(4)});
+      }
+
+      //tot
+      coef_tot.at(2).insert({0,Zero});
+      for(int i=1; i<=6; i++){
+        coef_tot.at(2).insert({i,Zero});
+      }
+      double sxi;
+      // ns pieces
+      for(int i=1; i<=3; i++){ //incomming
+        for(int j=1; j<=3; j++){ //outgoing
+          if(n==0){ // Zero mass contributions
+            if(both_in(i,j,nf)){
+              sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_0_H.Evaluate(sxi);
+            }
+            if(both_in(j,i,nf)){
+              sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+              coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO22ns_0_H.Evaluate(sxi);
+            }
+            for(int k=1; k<=nf; k++){
+              if(both_in(i,j,nf)){
+                sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+                coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_nf_H.Evaluate(sxi);
+              }
+              if(both_in(j,i,nf)){
+                sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+                coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO22ns_nf_H.Evaluate(sxi);
+              }
+            }
+          } else { // sACOT-chi with n scaling contributions
+            sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+            coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_0_H.Evaluate(sxi);
+            sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+            coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO22ns_0_H.Evaluate(sxi);
+            for(int k=1; k<=6; k++){
+              sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_nf_H.Evaluate(sxi);
+              sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+              coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO22ns_nf_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+      int k_help;
+      for(int i=1; i<=3; i++){
+        for(int k=1; k<=6; k++){
+          for(int j=1; j<=3; j++){
+            if(n==0){
+              if(k<=nf){
+                if(k%2==1){ //this is down type
+                  k_help = (k+1)/2;
+                  if(down_type_in(i,nf) && up_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i-1,2*j,k})-1);
+                    coef_tot.at(2).at(2*i-1) +=Ch.at((j-1)*3+k_help-1)*TabO22ps_H.Evaluate(sxi);
+                  }
+                  if(up_type_in(i,nf) && up_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i,2*j,k})-1);
+                    coef_tot.at(2).at(2*i)   +=Ch.at((j-1)*3+k_help-1)*TabO22ps_H.Evaluate(sxi);              
+                  }
+                } else {
+                  k_help = k/2;
+                  if(down_type_in(i,nf) && down_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i-1,2*j-1,k})-1);
+                    coef_tot.at(2).at(2*i-1) +=Ch.at((k_help-1)*3+j-1)*TabO22ps_H.Evaluate(sxi);
+                  }
+                  if(up_type_in(i,nf) && down_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i,2*j-1,k})-1);
+                    coef_tot.at(2).at(2*i)   +=Ch.at((k_help-1)*3+j-1)*TabO22ps_H.Evaluate(sxi);
+                  }
+                }
+              }
+            } else {
+              if(k%2==1){ //this is down type
+                k_help = (k+1)/2;
+                sxi = Q/m.at(std::max({2*i-1,2*j,k})-1);
+                coef_tot.at(2).at(2*i-1) +=Ch.at((j-1)*3+k_help-1)*TabO22ps_H.Evaluate(sxi);
+                sxi = Q/m.at(std::max({2*i,2*j,k})-1);
+                coef_tot.at(2).at(2*i)   +=Ch.at((j-1)*3+k_help-1)*TabO22ps_H.Evaluate(sxi);              
+              } else {
+                k_help = k/2;
+                sxi = Q/m.at(std::max({2*i-1,2*j-1,k})-1);
+                coef_tot.at(2).at(2*i-1) +=Ch.at((k_help-1)*3+j-1)*TabO22ps_H.Evaluate(sxi);
+                sxi = Q/m.at(std::max({2*i,2*j-1,k})-1);
+                coef_tot.at(2).at(2*i)   +=Ch.at((k_help-1)*3+j-1)*TabO22ps_H.Evaluate(sxi);
+              }
+            }
+          }
+        }
+      }
+      for(int k=1; k<=6; k++){
+        for(int j=1; j<=3; j++){
+          if(n==0){
+            if(k<=nf){
+              if(k%2==1){ //this is down type
+                k_help = (k+1)/2;
+                if(up_type_in(j,nf)){
+                  sxi = Q/m.at(std::max({2*j,k})-1);
+                  coef_tot.at(2).at(0) +=Ch.at((j-1)*3+k_help-1)*TabO22g_H.Evaluate(sxi);
+                }
+              } else {
+                k_help = k/2;
+                if(down_type_in(j,nf)){
+                  sxi = Q/m.at(std::max({2*j-1,k})-1);
+                  coef_tot.at(2).at(0) +=Ch.at((k_help-1)*3+j-1)*TabO22g_H.Evaluate(sxi);
+                }
+              }
+            }
+          } else {
+            if(k%2==1){ //this is down type
+              k_help = (k+1)/2;
+              sxi = Q/m.at(std::max({2*j,k})-1);
+              coef_tot.at(2).at(0) +=Ch.at((j-1)*3+k_help-1)*TabO22g_H.Evaluate(sxi);
+            } else {
+              k_help = k/2;
+              sxi = Q/m.at(std::max({2*j-1,k})-1);
+              coef_tot.at(2).at(0) +=Ch.at((k_help-1)*3+j-1)*TabO22g_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+
+      DISCCBasis_ACOT DISbasis_all(Ch,Zero);
+      auto C_tot = DISbasis_all.get_operators_plus(coef_tot);
+      FObj.ConvBasis.insert({0, DISbasis_all});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(0)}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(1)}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(2)}});
+
+      return FObj;
+    };
+
+    t.stop();
+    return F2Obj;
+  }
+
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2CCMinusObjectsASACOT(Grid                const& g,
+                                                                                                                      std::vector<double> const& Masses,
+                                                                                                                      double              const& IntEps,
+                                                                                                                      int                 const& nQ,
+                                                                                                                      double              const& Qmin,
+                                                                                                                      double              const& Qmax,
+                                                                                                                      int                 const& intdeg,
+                                                                                                                      double              const& n)
+  {
+    Timer t;
+
+    const int num_flavours = Masses.size();
+    if (num_flavours != 6)
+      throw std::runtime_error(error("InitializeF2CCMinusObjectsASACOT", "The vector of masses has to contain exactly 6 ordered masses."));
+    
+    report("Initializing StructureFunctionObjects for F2 CC minus aSACOT at NNLO\n");
+
+    const Operator Zero {g, Null{}, IntEps};
+
+    const double ml = Masses[0] == 0 ? 0.01 : Masses[0];
+    const double mc = Masses[3] == 0 ? 0.01 : Masses[3];
+    const double mb = Masses[4] == 0 ? 0.01 : Masses[4];
+    const double mt = Masses[5] == 0 ? 0.01 : Masses[5];
+    const double mll = ml+ml;
+    const double mlc = ml+mc;
+    const double mcb = mc+mb;
+    const double mlb = ml+mb;
+    const double mlt = mt+ml;
+    const double mtb = mt+mb;
+    const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+
+    // calc gridding range
+    const double Qgridmin = 0.95*Qmin;
+    const double Qgridmax = 1.05*Qmax;
+    const double sximin = Qgridmin/(mt+mb);
+    const double sximax = Qgridmax/ml;
+    const double lambda = 0.99*sximin;
+
+
+    // Massive coefficient functions
+    const auto fO20ns = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O20{g,Cm20qNC_ACOT_chi{eta},IntEps}; 
+      return O20;
+    };
+    const TabulateObject<Operator> TabO20ns_H{fO20ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO21ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O21nsNC{g,Cm21qNC_ACOT_chi{eta},IntEps};
+      return O21nsNC;
+    };
+    const TabulateObject<Operator> TabO21ns_H{fO21ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO22ns_0 = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O22ncp_0{g,C22nsm_aSACOT_chi_0{eta,true},IntEps};
+      return O22ncp_0;
+    };
+    const TabulateObject<Operator> TabO22ns_0_H{fO22ns_0, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO22nsm_nf =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O22ncm_nf{g,C22nsm_aSACOT_chi_nf{eta,true},IntEps};
+      return O22ncm_nf;
+    };
+    const TabulateObject<Operator> TabO22ns_nf_H{fO22nsm_nf, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
+
+    const auto F2Obj = [=,&g] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects{
+      if(Q<Qgridmin || Q>Qgridmax){
+        throw std::runtime_error(error("F2CCaSACOT NNLO minus", "Q out of range ["+std::to_string(Qmin)+","+std::to_string(Qmax)+"]. Q=" + std::to_string(Q)));
+      }
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      std::vector<Operator> OqLO({ TabO20ns_H.Evaluate(Q/mll),
+                                  TabO20ns_H.Evaluate(Q/mlc),
+                                  TabO20ns_H.Evaluate(Q/mcb),
+                                  TabO20ns_H.Evaluate(Q/mlb),
+                                  TabO20ns_H.Evaluate(Q/mtb),
+                                  TabO20ns_H.Evaluate(Q/mlt)});
+      std::vector<Operator> OqNLO({TabO21ns_H.Evaluate(Q/mll),   //0
+                                  TabO21ns_H.Evaluate(Q/mlc),   //1
+                                  TabO21ns_H.Evaluate(Q/mcb),   //2
+                                  TabO21ns_H.Evaluate(Q/mlb),   //3
+                                  TabO21ns_H.Evaluate(Q/mtb),   //4
+                                  TabO21ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<std::vector<Operator>> Oq({OqLO,OqNLO});
+      const double nf = NF(Q,Masses);
+
+      std::vector<std::map<int,Operator>> coef_tot(3);
+
+      //tot
+      for(int l=0; l<3; l++){ //gluon pieces
+        coef_tot.at(l).insert({0,Zero});
+      }
+      for(int l=0; l<2;l++){ // quark pieces
+        coef_tot.at(l).insert({1,Ch.at(0)*Oq.at(l).at(0)+Ch.at(3)*Oq.at(l).at(1)+Ch.at(6)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({2,-(Ch.at(0)+Ch.at(1))*Oq.at(l).at(0)-Ch.at(2)*Oq.at(l).at(3)});
+        coef_tot.at(l).insert({3,Ch.at(1)*Oq.at(l).at(0)+Ch.at(4)*Oq.at(l).at(1)+Ch.at(7)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({4,-(Ch.at(4)+Ch.at(3))*Oq.at(l).at(1)-Ch.at(5)*Oq.at(l).at(2)});
+        coef_tot.at(l).insert({5,Ch.at(2)*Oq.at(l).at(3)+Ch.at(5)*Oq.at(l).at(2)+Ch.at(8)*Oq.at(l).at(4)});
+        coef_tot.at(l).insert({6,-(Ch.at(6)+Ch.at(7))*Oq.at(l).at(5)-Ch.at(8)*Oq.at(l).at(4)});
+      }
+      for(int i=1; i<=6; i++){
+        coef_tot.at(2).insert({i,Zero});
+      }
+      double sxi;
+      for(int i=1; i<=3; i++){   // incomming
+        for(int j=1; j<=3; j++){ // outgoing
+          if(n==0){ // Zero mass contributions
+            if(both_in(i,j,nf)){
+              sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_0_H.Evaluate(sxi);
+            }
+            if(both_in(j,i,nf)){
+              sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+              coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO22ns_0_H.Evaluate(sxi);
+            }
+            for(int k=1; k<=nf; k++){
+              if(both_in(i,j,nf)){
+                sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+                coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_nf_H.Evaluate(sxi);
+              }
+              if(both_in(j,i,nf)){
+                sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+                coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO22ns_nf_H.Evaluate(sxi);
+              }
+            }
+          } else { // sACOT-chi with n scaling contributions
+            sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+            coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_0_H.Evaluate(sxi);
+            sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+            coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO22ns_0_H.Evaluate(sxi);
+
+            for(int k=1; k<=6; k++){
+              sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO22ns_nf_H.Evaluate(sxi);
+              sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+              coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO22ns_nf_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+
+      DISCCBasis_ACOT DISbasis_all(Ch,Zero);
+      auto C_tot = DISbasis_all.get_operators_minus(coef_tot);
+      FObj.ConvBasis.insert({0, DISbasis_all});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(0)}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(1)}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(2)}});
+
+      return FObj;
+    };
+
+    t.stop();
+    return F2Obj;
+  }
+
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCPlusObjectsASACOT(Grid                const& g,
+                                                                                                                     std::vector<double> const& Masses,
+                                                                                                                     double              const& IntEps,
+                                                                                                                     int                 const& nQ,
+                                                                                                                     double              const& Qmin,
+                                                                                                                     double              const& Qmax,
+                                                                                                                     int                 const& intdeg,
+                                                                                                                     double              const& n)
+  {  
+    Timer t;
+
+    const int num_flavours = Masses.size();
+    if (num_flavours != 6)
+      throw std::runtime_error(error("InitializeFLCCPlusObjectsASACOT", "The vector of masses has to contain exactly 6 ordered masses."));
+
+    report("Initializing StructureFunctionObjects for FL CC plus aSACOT at NNLO\n");
+
+    const Operator Zero {g, Null{}, IntEps};
+
+    const double ml = Masses[0] == 0 ? 0.01 : Masses[0];
+    const double mc = Masses[3] == 0 ? 0.01 : Masses[3];
+    const double mb = Masses[4] == 0 ? 0.01 : Masses[4];
+    const double mt = Masses[5] == 0 ? 0.01 : Masses[5];
+    const double mll = ml+ml;
+    const double mlc = ml+mc;
+    const double mcb = mc+mb;
+    const double mlb = ml+mb;
+    const double mlt = mt+ml;
+    const double mtb = mt+mb;
+    const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+
+    // calc gridding range
+    const double Qgridmin = 0.95*Qmin;
+    const double Qgridmax = 1.05*Qmax;
+    const double sximin = Qgridmin/(mt+mb);
+    const double sximax = Qgridmax/ml;
+    const double lambda = 0.99*sximin;
+
+    const auto fOL1ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator OL1nsNC{g,CmL1qNC_ACOT_chi{eta},IntEps};
+      return OL1nsNC;
+    };
+    const TabulateObject<Operator> TabOL1ns_H{fOL1ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fOL1g_light_light =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator OL1CCg_gen_mass{g,CmL1gCC_general_mass{eta,xi,ml,ml},IntEps};
+      return OL1CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabOL1g_ll{fOL1g_light_light, nQ, Qgridmin/mll, Qgridmax/mll, intdeg, {}, lambda};
+
+    const auto fOL1g_light_charm =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator OL1CCg_gen_mass{g,CmL1gCC_general_mass{eta,xi,ml,mc},IntEps};
+      return OL1CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabOL1g_lc{fOL1g_light_charm, nQ, Qgridmin/mlc, Qgridmax/mlc, intdeg, {}, lambda};
+
+    const auto fOL1g_charm_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator OL1CCg_gen_mass{g,CmL1gCC_general_mass{eta,xi,mb,mc},IntEps};
+      return OL1CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabOL1g_cb{fOL1g_charm_bottom, nQ, Qgridmin/mcb, Qgridmax/mcb, intdeg, {}, lambda};
+
+    const auto fOL1g_light_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator OL1CCg_gen_mass{g,CmL1gCC_general_mass{eta,xi,ml,mb},IntEps};
+      return OL1CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabOL1g_lb{fOL1g_light_bottom, nQ, Qgridmin/mlb, Qgridmax/mlb, intdeg, {}, lambda};
+
+    const auto fOL1g_top_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator OL1CCg_gen_mass{g,CmL1gCC_general_mass{eta,xi,mb,mt},IntEps};
+      return OL1CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabOL1g_tb{fOL1g_top_bottom, nQ, Qgridmin/mtb, Qgridmax/mtb, intdeg, {}, lambda};
+
+    const auto fOL1g_light_top =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator OL1CCg_gen_mass{g,CmL1gCC_general_mass{eta,xi,ml,mt},IntEps};
+      return OL1CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabOL1g_lt{fOL1g_light_top, nQ, Qgridmin/mlt, Qgridmax/mlt, intdeg, {}, lambda};
+
+    // NNLO
+    const auto fOL2nsp_0 = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator OL2ncp_0{g,CL2nsp_aSACOT_chi_0{eta,true},IntEps};
+      return OL2ncp_0;
+    };
+    const TabulateObject<Operator> TabOL2ns_0_H{fOL2nsp_0, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fOL2nsp_nf =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator OL2ncp_nf{g,CL2nsp_aSACOT_chi_nf{eta,true},IntEps};
+      return OL2ncp_nf;
+    };
+    const TabulateObject<Operator> TabOL2ns_nf_H{fOL2nsp_nf, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fOL2ps = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator OL2ps{g,CL2ps_aSACOT_chi{eta,true},IntEps};
+      return OL2ps;
+    };
+    const TabulateObject<Operator> TabOL2ps_H{fOL2ps, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fOL2g = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator OL2g{g,CL2g_aSACOT_chi{eta,true},IntEps};
+      return 0.5*OL2g;
+    };
+    const TabulateObject<Operator> TabOL2g_H{fOL2g, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
+
+    const auto FLObj = [=,&g] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects{
+      if(Q<Qgridmin || Q>Qgridmax){
+      throw std::runtime_error(error("FLCC aSACOT NNLO plus", "Q out of range ["+std::to_string(Qmin)+","+std::to_string(Qmax)+"]. Q=" + std::to_string(Q)));
+      }
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+
+      std::vector<Operator> OqLO( {Zero,Zero,Zero,Zero,Zero,Zero});
+      std::vector<Operator> OqNLO({TabOL1ns_H.Evaluate(Q/mll),   //0
+                                   TabOL1ns_H.Evaluate(Q/mlc),   //1
+                                   TabOL1ns_H.Evaluate(Q/mcb),   //2
+                                   TabOL1ns_H.Evaluate(Q/mlb),   //3
+                                   TabOL1ns_H.Evaluate(Q/mtb),   //4
+                                   TabOL1ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<std::vector<Operator>> Oq({OqLO,OqNLO});
+
+      std::vector<Operator> OgLO( {Zero,Zero,Zero,Zero,Zero,Zero});
+      std::vector<Operator> OgNLO({TabOL1g_ll.Evaluate(Q/mll),
+                                   TabOL1g_lc.Evaluate(Q/mlc),
+                                   TabOL1g_cb.Evaluate(Q/mcb),
+                                   TabOL1g_lb.Evaluate(Q/mlb),
+                                   TabOL1g_tb.Evaluate(Q/mtb),
+                                   TabOL1g_lt.Evaluate(Q/mlt)});
+      std::vector<std::vector<Operator>> Og({OgLO,OgNLO});
+
+      const double nf = NF(Q,Masses);
+
+      std::vector<std::map<int,Operator>> coef_tot(3);
+
+      for(int l=0; l<2; l++){ // gluon pieces
+        coef_tot.at(l).insert({0,(Ch.at(0)+Ch.at(1))*Og.at(l).at(0)}); 
+        coef_tot.at(l).at(0) += (Ch.at(3)+Ch.at(4))*Og.at(l).at(1);
+        coef_tot.at(l).at(0) += Ch.at(5)*Og.at(l).at(2);
+        coef_tot.at(l).at(0) += Ch.at(2)*Og.at(l).at(3); 
+        coef_tot.at(l).at(0) += Ch.at(8)*Og.at(l).at(4);
+        coef_tot.at(l).at(0) += (Ch.at(6)+Ch.at(7))*Og.at(l).at(5);
+      }
+      for(int l=0; l<2;l++){ // quark pieces
+        coef_tot.at(l).insert({1,Ch.at(0)*Oq.at(l).at(0)+Ch.at(3)*Oq.at(l).at(1)+Ch.at(6)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({2,(Ch.at(0)+Ch.at(1))*Oq.at(l).at(0)+Ch.at(2)*Oq.at(l).at(3)});
+        coef_tot.at(l).insert({3,Ch.at(1)*Oq.at(l).at(0)+Ch.at(4)*Oq.at(l).at(1)+Ch.at(7)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({4,(Ch.at(3)+Ch.at(4))*Oq.at(l).at(1)+Ch.at(5)*Oq.at(l).at(2)});
+        coef_tot.at(l).insert({5,Ch.at(2)*Oq.at(l).at(3)+Ch.at(5)*Oq.at(l).at(2)+Ch.at(8)*Oq.at(l).at(4)});
+        coef_tot.at(l).insert({6,(Ch.at(6)+Ch.at(7))*Oq.at(l).at(5)+Ch.at(8)*Oq.at(l).at(4)});
+      }
+      for(int i=0;i<=6;i++){
+        coef_tot.at(2).insert({i,Zero}); 
+      }
+
+      double sxi;
+      for(int i=1; i<=3; i++){ //incomming
+        for(int j=1; j<=3; j++){ //outgoing
+          if(n==0){ // Zero mass contributions
+            if(both_in(i,j,nf)){
+              sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_0_H.Evaluate(sxi);
+            }
+            if(both_in(j,i,nf)){
+              sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+              coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabOL2ns_0_H.Evaluate(sxi);
+            }
+            for(int k=1; k<=nf; k++){
+              if(both_in(i,j,nf)){
+                sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+                coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_nf_H.Evaluate(sxi);
+              }
+              if(both_in(j,i,nf)){
+                sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+                coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabOL2ns_nf_H.Evaluate(sxi);
+              }
+            }
+          } else {
+            sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+            coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_0_H.Evaluate(sxi);
+            sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+            coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabOL2ns_0_H.Evaluate(sxi);
+            for(int k=1; k<=6; k++){
+              sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_nf_H.Evaluate(sxi);
+              sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+              coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabOL2ns_nf_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+      int k_help;
+      for(int i=1; i<=3; i++){
+        for(int k=1; k<=6; k++){
+          for(int j=1; j<=3; j++){
+            if(n==0){
+              if(k<=nf){
+                if(k%2==1){ //this is down type
+                  k_help = (k+1)/2;
+                  if(down_type_in(i,nf) && up_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i-1,2*j,k})-1);
+                    coef_tot.at(2).at(2*i-1) +=Ch.at((j-1)*3+k_help-1)*TabOL2ps_H.Evaluate(sxi);
+                  }
+                  if(up_type_in(i,nf) && up_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i,2*j,k})-1);
+                    coef_tot.at(2).at(2*i)   +=Ch.at((j-1)*3+k_help-1)*TabOL2ps_H.Evaluate(sxi);              
+                  }
+                } else {
+                  k_help = k/2;
+                  if(down_type_in(i,nf) && down_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i-1,2*j-1,k})-1);
+                    coef_tot.at(2).at(2*i-1) +=Ch.at((k_help-1)*3+j-1)*TabOL2ps_H.Evaluate(sxi);
+                  }
+                  if(up_type_in(i,nf) && down_type_in(j,nf)){
+                    sxi = Q/m.at(std::max({2*i,2*j-1,k})-1);
+                    coef_tot.at(2).at(2*i)   +=Ch.at((k_help-1)*3+j-1)*TabOL2ps_H.Evaluate(sxi);
+                  }
+                }
+              }
+            } else {
+              if(k%2==1){ //this is down type
+                k_help = (k+1)/2;
+                sxi = Q/m.at(std::max({2*i-1,2*j,k})-1);
+                coef_tot.at(2).at(2*i-1) +=Ch.at((j-1)*3+k_help-1)*TabOL2ps_H.Evaluate(sxi);
+                sxi = Q/m.at(std::max({2*i,2*j,k})-1);
+                coef_tot.at(2).at(2*i)   +=Ch.at((j-1)*3+k_help-1)*TabOL2ps_H.Evaluate(sxi);              
+              } else {
+                k_help = k/2;
+                sxi = Q/m.at(std::max({2*i-1,2*j-1,k})-1);
+                coef_tot.at(2).at(2*i-1) +=Ch.at((k_help-1)*3+j-1)*TabOL2ps_H.Evaluate(sxi);
+                sxi = Q/m.at(std::max({2*i,2*j-1,k})-1);
+                coef_tot.at(2).at(2*i)   +=Ch.at((k_help-1)*3+j-1)*TabOL2ps_H.Evaluate(sxi);
+              }
+            }
+          }
+        }
+      }
+      for(int k=1; k<=6; k++){
+        for(int j=1; j<=3; j++){
+          if(n==0){
+            if(k<=nf){
+              if(k%2==1){ //this is down type
+                k_help = (k+1)/2;
+                if(up_type_in(j,nf)){
+                  sxi = Q/m.at(std::max({2*j,k})-1);
+                  coef_tot.at(2).at(0) +=Ch.at((j-1)*3+k_help-1)*TabOL2g_H.Evaluate(sxi);
+                }
+              } else {
+                k_help = k/2;
+                if(down_type_in(j,nf)){
+                  sxi = Q/m.at(std::max({2*j-1,k})-1);
+                  coef_tot.at(2).at(0) +=Ch.at((k_help-1)*3+j-1)*TabOL2g_H.Evaluate(sxi);
+                }
+              }
+            }
+          } else {
+            if(k%2==1){ //this is down type
+              k_help = (k+1)/2;
+              sxi = Q/m.at(std::max({2*j,k})-1);
+              coef_tot.at(2).at(0) +=Ch.at((j-1)*3+k_help-1)*TabOL2g_H.Evaluate(sxi);
+            } else {
+              k_help = k/2;
+              sxi = Q/m.at(std::max({2*j-1,k})-1);
+              coef_tot.at(2).at(0) +=Ch.at((k_help-1)*3+j-1)*TabOL2g_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+
+      DISCCBasis_ACOT DISbasis_all(Ch,Zero);
+      auto C_tot = DISbasis_all.get_operators_plus(coef_tot);
+      FObj.ConvBasis.insert({0, DISbasis_all});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(0)}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(1)}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(2)}});
+
+      return FObj;
+    };
+
+    t.stop();
+    return FLObj;
+  }
+
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLCCMinusObjectsASACOT(Grid                const& g,
+                                                                                                                      std::vector<double> const& Masses,
+                                                                                                                      double              const& IntEps,
+                                                                                                                      int                 const& nQ,
+                                                                                                                      double              const& Qmin,
+                                                                                                                      double              const& Qmax,
+                                                                                                                      int                 const& intdeg,
+                                                                                                                      double              const& n)
+  {
+    Timer t;
+
+    const int num_flavours = Masses.size();
+    if (num_flavours != 6)
+      throw std::runtime_error(error("InitializeFLCCMinusObjectsASACOT", "The vector of masses has to contain exactly 6 ordered masses."));
+    
+    report("Initializing StructureFunctionObjects for FL CC minus aSACOT at NNLO\n");
+
+    const Operator Zero {g, Null{}, IntEps};
+
+    const double ml = Masses[0] == 0 ? 0.01 : Masses[0];
+    const double mc = Masses[3] == 0 ? 0.01 : Masses[3];
+    const double mb = Masses[4] == 0 ? 0.01 : Masses[4];
+    const double mt = Masses[5] == 0 ? 0.01 : Masses[5];
+    const double mll = ml+ml;
+    const double mlc = ml+mc;
+    const double mcb = mc+mb;
+    const double mlb = ml+mb;
+    const double mlt = mt+ml;
+    const double mtb = mt+mb;
+    const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+
+    // calc gridding range
+    const double Qgridmin = 0.95*Qmin;
+    const double Qgridmax = 1.05*Qmax;
+    const double sximin = Qgridmin/(mt+mb);
+    const double sximax = Qgridmax/ml;
+    const double lambda = 0.99*sximin;
+
+
+    const auto fOL1ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator OL1nsNC{g,CmL1qNC_ACOT_chi{eta},IntEps};
+      return OL1nsNC;
+    };
+    const TabulateObject<Operator> TabOL1ns_H{fOL1ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    //  NNLO
+    const auto fOL2ns_0 = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator OL2ncm_0{g,CL2nsm_aSACOT_chi_0{eta,true},IntEps};
+      return OL2ncm_0;
+    };
+    const TabulateObject<Operator> TabOL2ns_0_H{fOL2ns_0, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fOL2nsm_nf =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator OL2ncm_nf{g,CL2nsm_aSACOT_chi_nf{eta,true},IntEps};
+      return OL2ncm_nf;
+    };
+    const TabulateObject<Operator> TabOL2ns_nf_H{fOL2nsm_nf, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
+
+    const auto FLObj = [=,&g] (double const& Q, std::vector<double> const& Ch) ->StructureFunctionObjects{
+      if(Q<Qgridmin || Q>Qgridmax){
+        throw std::runtime_error(error("FLCCsimACOT NNLO minus", "Q out of range ["+std::to_string(Qmin)+","+std::to_string(Qmax)+"]. Q=" + std::to_string(Q)));
+      }
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+
+      std::vector<Operator> OqLO( {Zero,Zero,Zero,Zero,Zero,Zero});
+      std::vector<Operator> OqNLO({TabOL1ns_H.Evaluate(Q/mll),   //0
+                                  TabOL1ns_H.Evaluate(Q/mlc),   //1
+                                  TabOL1ns_H.Evaluate(Q/mcb),   //2
+                                  TabOL1ns_H.Evaluate(Q/mlb),   //3
+                                  TabOL1ns_H.Evaluate(Q/mtb),   //4
+                                  TabOL1ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<std::vector<Operator>> Oq({OqLO,OqNLO});
+
+      const double nf = NF(Q,Masses);
+
+      std::vector<std::map<int,Operator>> coef_tot(3);
+
+      for(int l=0; l<3; l++){ // gluon is zero
+        coef_tot.at(l).insert({0,Zero});
+      }
+      for(int l=0; l<2;l++){ // quark pieces
+          coef_tot.at(l).insert({1,Ch.at(0)*Oq.at(l).at(0)+Ch.at(3)*Oq.at(l).at(1)+Ch.at(6)*Oq.at(l).at(5)});
+          coef_tot.at(l).insert({2,-(Ch.at(0)+Ch.at(1))*Oq.at(l).at(0)-Ch.at(2)*Oq.at(l).at(3)});
+          coef_tot.at(l).insert({3,Ch.at(1)*Oq.at(l).at(0)+Ch.at(4)*Oq.at(l).at(1)+Ch.at(7)*Oq.at(l).at(5)});
+          coef_tot.at(l).insert({4,-(Ch.at(4)+Ch.at(3))*Oq.at(l).at(1)-Ch.at(5)*Oq.at(l).at(2)});
+          coef_tot.at(l).insert({5,Ch.at(2)*Oq.at(l).at(3)+Ch.at(5)*Oq.at(l).at(2)+Ch.at(8)*Oq.at(l).at(4)});
+          coef_tot.at(l).insert({6,-(Ch.at(6)+Ch.at(7))*Oq.at(l).at(5)-Ch.at(8)*Oq.at(l).at(4)});
+      }
+      for(int i=1; i<=6; i++){
+          coef_tot.at(2).insert({i,Zero});
+      }
+      double sxi;
+      for(int i=1; i<=3; i++){ //incomming
+        for(int j=1; j<=3; j++){ //outgoing
+          if(n==0){ // Zero Mass Contributions
+            if(both_in(i,j,nf)){
+              sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_0_H.Evaluate(sxi);
+            }
+            if(both_in(j,i,nf)){
+              sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+              coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabOL2ns_0_H.Evaluate(sxi);
+            }
+            for(int k=1; k<=nf; k++){
+              if(both_in(i,j,nf)){
+                sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+                coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_nf_H.Evaluate(sxi);
+              }
+              if(both_in(j,i,nf)){
+                sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+                coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabOL2ns_nf_H.Evaluate(sxi);
+              }
+            }
+          } else {
+            sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+            coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_0_H.Evaluate(sxi);
+            sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+            coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabOL2ns_0_H.Evaluate(sxi);
+          for(int k=1; k<=nf; k++){
+              sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabOL2ns_nf_H.Evaluate(sxi);
+              sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+              coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabOL2ns_nf_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+
+      DISCCBasis_ACOT DISbasis_all(Ch,Zero);
+      auto C_tot = DISbasis_all.get_operators_minus(coef_tot);
+      FObj.ConvBasis.insert({0, DISbasis_all});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(0)}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(1)}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(2)}});
+
+      return FObj;
+    };
+
+    t.stop();
+    return FLObj;
+  }
+
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCPlusObjectsASACOT(Grid                const& g,
+                                                                                                                     std::vector<double> const& Masses,
+                                                                                                                     double              const& IntEps,
+                                                                                                                     int                 const& nQ,
+                                                                                                                     double              const& Qmin,
+                                                                                                                     double              const& Qmax,
+                                                                                                                     int                 const& intdeg,
+                                                                                                                     double              const& n)
+  {
+    Timer t;
+
+    const int num_flavours = Masses.size();
+    if (num_flavours != 6)
+      throw std::runtime_error(error("InitializeF3CCPlusObjectsASACOT", "The vector of masses has to contain exactly 6 ordered masses."));
+    
+    report("Initializing StructureFunctionObjects for F3 CC plus aSACOT at NNLO\n");
+
+    const Operator Zero {g, Null{}, IntEps};
+
+    const double ml = Masses[0] == 0 ? 0.01 : Masses[0];
+    const double mc = Masses[3] == 0 ? 0.01 : Masses[3];
+    const double mb = Masses[4] == 0 ? 0.01 : Masses[4];
+    const double mt = Masses[5] == 0 ? 0.01 : Masses[5];
+    const double mll = ml+ml;
+    const double ml2 = ml*ml;
+    const double mc2 = mc*mc;
+    const double mlc = ml+mc;
+    const double mcb = mc+mb;
+    const double mb2 = mb*mb;
+    const double mlb = ml+mb;
+    const double mt2 = mt*mt;
+    const double mlt = mt+ml;
+    const double mtb = mt+mb;
+    const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+
+    // calc gridding range
+    const double Qgridmin = 0.95*Qmin;
+    const double Qgridmax = 1.05*Qmax;
+    const double sximin = Qgridmin/(mt+mb);
+    const double sximax = Qgridmax/ml;
+    const double lambda = 0.99*sximin;
+
+    const auto fO30ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O30nsNC{g,Cm20qNC_ACOT_chi{eta},IntEps};
+      return O30nsNC;
+    };
+    const TabulateObject<Operator> TabO30ns_H{fO30ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO31ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O31nsNC{g,Cm31qNC_ACOT_chi{eta},IntEps};
+      return O31nsNC;
+    };
+    const TabulateObject<Operator> TabO31ns_H{fO31ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO31g_light_charm =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O31CCg_gen_mass{g,Cm31gCC_general_mass{eta,xi,mc,ml},IntEps};
+      return O31CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO31g_lc{fO31g_light_charm, nQ, Qgridmin/mlc, Qgridmax/mlc, intdeg, {}, 9e-6};
+
+    const auto fO31g_charm_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O31CCg_gen_mass{g,Cm31gCC_general_mass{eta,xi,mc,mb},IntEps};
+      return O31CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO31g_cb{fO31g_charm_bottom, nQ, Qgridmin/mcb, Qgridmax/mcb, intdeg, {}, lambda};
+
+    const auto fO31g_light_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O31CCg_gen_mass{g,Cm31gCC_general_mass{eta,xi,ml,mb},IntEps};
+      return O31CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO31g_lb{fO31g_light_bottom, nQ, Qgridmin/mlb, Qgridmax/mlb, intdeg, {}, lambda};
+
+    const auto fO31g_top_bottom =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O31CCg_gen_mass{g,Cm31gCC_general_mass{eta,xi,mt,mb},IntEps};
+      return O31CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO31g_tb{fO31g_top_bottom, nQ, Qgridmin/mtb, Qgridmax/mtb, intdeg, {}, lambda};
+
+    const auto fO31g_light_top =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator O31CCg_gen_mass{g,Cm31gCC_general_mass{eta,xi,mt,ml},IntEps};
+      return O31CCg_gen_mass;
+    };
+    const TabulateObject<Operator> TabO31g_lt{fO31g_light_top, nQ, Qgridmin/mlt, Qgridmax/mlt, intdeg, {}, lambda};
+
+    const auto fO31g_sub =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1./ xi );
+      const Operator Om31CCg_sub{g,Cm21gNC_sub_ACOT_chi{eta},IntEps};
+      return 0.5*Om31CCg_sub;
+    };
+    const TabulateObject<Operator> TabO31g_sub{fO31g_sub, nQ, sximin, sximax, intdeg, {1}, lambda};
+
+    // NNLO
+    const auto fO32nsp_0 = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O32ncp_0{g,C32nsp_aSACOT_chi_0{eta,true},IntEps};
+      return O32ncp_0;
+    };
+    const TabulateObject<Operator> TabO32ns_0_H{fO32nsp_0, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO32nsp_nf =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O32ncp_nf{g,C32nsp_aSACOT_chi_nf{eta,true},IntEps};
+      return O32ncp_nf;
+    };
+    const TabulateObject<Operator> TabO32ns_nf_H{fO32nsp_nf, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
+
+
+    const auto F3Obj = [=,&g] (double const& Q, std::vector<double> const& Ch) ->StructureFunctionObjects{
+      if(Q<Qgridmin || Q>Qgridmax){
+        throw std::runtime_error(error("F3CC aSACOT NNLO plus", "Q out of range ["+std::to_string(Qmin)+","+std::to_string(Qmax)+"]. Q=" + std::to_string(Q)));
+      }
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      const double Q2 = Q*Q;
+      const double log_ml = Q>=ml ? log(Q2/ml2) : 0;
+      const double log_mc = Q>=mc ? log(Q2/mc2) : 0;
+      const double log_mb = Q>=mb ? log(Q2/mb2) : 0;
+      const double log_mt = Q>=mt ? log(Q2/mt2) : 0;  
+
+      const double nf = NF(Q,Masses);
+
+      std::vector<std::map<int,Operator>> coef_tot(3);
+
+      std::vector<Operator> OqLO({  TabO30ns_H.Evaluate(Q/mll),   //0
+                                    TabO30ns_H.Evaluate(Q/mlc),   //1
+                                    TabO30ns_H.Evaluate(Q/mcb),   //2
+                                    TabO30ns_H.Evaluate(Q/mlb),   //3
+                                    TabO30ns_H.Evaluate(Q/mtb),   //4
+                                    TabO30ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<Operator> OqNLO({ TabO31ns_H.Evaluate(Q/mll),   //0
+                                    TabO31ns_H.Evaluate(Q/mlc),   //1
+                                    TabO31ns_H.Evaluate(Q/mcb),   //2
+                                    TabO31ns_H.Evaluate(Q/mlb),   //3
+                                    TabO31ns_H.Evaluate(Q/mtb),   //4
+                                    TabO31ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<std::vector<Operator>> Oq({OqLO,OqNLO});
+
+      std::vector<Operator> OgLO( { Zero,Zero,Zero,Zero,Zero,Zero});
+      std::vector<Operator> OgNLO({ Zero, //light light is zero due to equal masses
+                                    TabO31g_lc.Evaluate(Q/mlc) - (log_ml-log_mc)*TabO31g_sub.Evaluate(Q/mlc),
+                                    TabO31g_cb.Evaluate(Q/mcb) - (log_mb-log_mc)*TabO31g_sub.Evaluate(Q/mcb),
+                                    TabO31g_lb.Evaluate(Q/mlb) - (log_mb-log_ml)*TabO31g_sub.Evaluate(Q/mlb),
+                                    TabO31g_tb.Evaluate(Q/mtb) - (log_mb-log_mt)*TabO31g_sub.Evaluate(Q/mtb),
+                                    TabO31g_lt.Evaluate(Q/mlt) - (log_ml-log_mt)*TabO31g_sub.Evaluate(Q/mlt)});
+      std::vector<std::vector<Operator>> Og({OgLO,OgNLO});
+
+      for(int l=0; l<2; l++){ // gluon pieces
+        coef_tot.at(l).insert({0,(Ch.at(0)+Ch.at(1))*Og.at(l).at(0)}); 
+        coef_tot.at(l).at(0) +=  (Ch.at(3)+Ch.at(4))*Og.at(l).at(1);
+        coef_tot.at(l).at(0) +=   Ch.at(5)          *Og.at(l).at(2);
+        coef_tot.at(l).at(0) +=   Ch.at(2)          *Og.at(l).at(3); 
+        coef_tot.at(l).at(0) +=   Ch.at(8)          *Og.at(l).at(4);
+        coef_tot.at(l).at(0) +=  (Ch.at(6)+Ch.at(7))*Og.at(l).at(5);
+      }
+      for(int l=0; l<2;l++){ // quark pieces
+        coef_tot.at(l).insert({1,Ch.at(0)*Oq.at(l).at(0)+Ch.at(3)*Oq.at(l).at(1)+Ch.at(6)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({2,-(Ch.at(0)+Ch.at(1))*Oq.at(l).at(0)-Ch.at(2)*Oq.at(l).at(3)});
+        coef_tot.at(l).insert({3,Ch.at(1)*Oq.at(l).at(0)+Ch.at(4)*Oq.at(l).at(1)+Ch.at(7)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({4,-(Ch.at(3)+Ch.at(4))*Oq.at(l).at(1)-Ch.at(5)*Oq.at(l).at(2)});
+        coef_tot.at(l).insert({5,Ch.at(2)*Oq.at(l).at(3)+Ch.at(5)*Oq.at(l).at(2)+Ch.at(8)*Oq.at(l).at(4)});
+        coef_tot.at(l).insert({6,-(Ch.at(6)+Ch.at(7))*Oq.at(l).at(5)-Ch.at(8)*Oq.at(l).at(4)});
+      }
+      coef_tot.at(2).insert({0,Zero});
+      for(int i=1; i<=6; i++){
+        coef_tot.at(2).insert({i,Zero});
+      }
+      double sxi;
+      for(int i=1; i<=3; i++){ //incomming
+        for(int j=1; j<=3; j++){ //outgoing
+          if(n==0){ // Zero mass contributions
+            if(both_in(i,j,nf)){
+              sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_0_H.Evaluate(sxi);
+            }
+            if(both_in(j,i,nf)){
+              sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+              coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO32ns_0_H.Evaluate(sxi);
+            }
+            for(int k=1; k<=nf; k++){
+              if(both_in(i,j,nf)){
+                sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+                coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_nf_H.Evaluate(sxi);
+              }
+              if(both_in(j,i,nf)){
+                sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+                coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO32ns_nf_H.Evaluate(sxi);
+              }
+            }
+          } else {
+            sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+            coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_0_H.Evaluate(sxi);
+            sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+            coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO32ns_0_H.Evaluate(sxi);
+            for(int k=1; k<=6; k++){
+              sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_nf_H.Evaluate(sxi);
+              sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+              coef_tot.at(2).at(2*i)   -= Ch.at((i-1)*3+j-1)*TabO32ns_nf_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+      DISCCBasis_ACOT DISbasis_all(Ch,Zero);
+      auto C_tot = DISbasis_all.get_operators_plus(coef_tot);
+      FObj.ConvBasis.insert({0, DISbasis_all});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(0)}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(1)}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(2)}});
+
+      return FObj;
+    };
+
+    t.stop();
+    return F3Obj;
+  }
+
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF3CCMinusObjectsASACOT(Grid                const& g,
+                                                                                                                    std::vector<double> const& Masses,
+                                                                                                                    double              const& IntEps,
+                                                                                                                    int                 const& nQ,
+                                                                                                                    double              const& Qmin,
+                                                                                                                    double              const& Qmax,
+                                                                                                                    int                 const& intdeg,
+                                                                                                                    double              const& n)
+  {
+    Timer t;
+
+    const int num_flavours = Masses.size();
+    if (num_flavours != 6)
+      throw std::runtime_error(error("InitializeF3CCMinusObjectsASACOT", "The vector of masses has to contain exactly 6 ordered masses."));
+    
+    report("Initializing StructureFunctionObjects for F3 CC minus aSACOT at NNLO\n");
+
+    const Operator Zero {g, Null{}, IntEps};
+
+    const double ml = Masses[0] == 0 ? 0.01 : Masses[0];
+    const double mc = Masses[3] == 0 ? 0.01 : Masses[3];
+    const double mb = Masses[4] == 0 ? 0.01 : Masses[4];
+    const double mt = Masses[5] == 0 ? 0.01 : Masses[5];
+    const double mll = ml+ml;
+    const double mlc = ml+mc;
+    const double mcb = mc+mb;
+    const double mlb = ml+mb;
+    const double mlt = mt+ml;
+    const double mtb = mt+mb;
+    const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+
+    // calc gridding range
+    const double Qgridmin = 0.95*Qmin;
+    const double Qgridmax = 1.05*Qmax;
+    const double sximin = Qgridmin/(mt+mb);
+    const double sximax = Qgridmax/ml;
+    const double lambda = 0.99*sximin;
+
+    const auto fO30ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O30nsNC{g,Cm20qNC_ACOT_chi{eta},IntEps};
+      return O30nsNC;
+    };
+    const TabulateObject<Operator> TabO30ns_H{fO30ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO31ns =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + 1 / xi );
+      const Operator O31nsNC{g,Cm31qNC_ACOT_chi{eta},IntEps};
+      return O31nsNC;
+    };
+    const TabulateObject<Operator> TabO31ns_H{fO31ns, nQ, sximin, sximax, intdeg, {}, lambda};
+
+
+    //  Massive coefficient functions
+    const auto fO32nsm_0 = [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O32ncm_0{g,C32nsm_aSACOT_chi_0{eta,true},IntEps};
+      return O32ncm_0;
+    };
+    const TabulateObject<Operator> TabO32ns_0_H{fO32nsm_0, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    const auto fO32nsm_nf =  [=,&g] (double const& sxi) -> Operator{
+      const double xi = sxi*sxi;
+      const double eta = 1/( 1 + n*n / xi );
+      const Operator O32ncm_nf{g,C32nsm_aSACOT_chi_nf{eta,true},IntEps};
+      return O32ncm_nf;
+    };
+    const TabulateObject<Operator> TabO32ns_nf_H{fO32nsm_nf, nQ, sximin, sximax, intdeg, {}, lambda};
+
+    // Vector of distributions to skip
+    const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
+
+    const auto F3Obj = [=,&g] (double const& Q, std::vector<double> const& Ch) ->StructureFunctionObjects{
+      if(Q<Qgridmin || Q>Qgridmax){
+        throw std::runtime_error(error("F3CCsimACOT NNLO minus", "Q out of range ["+std::to_string(Qmin)+","+std::to_string(Qmax)+"]. Q=" + std::to_string(Q)));
+      }
+      StructureFunctionObjects FObj;
+      FObj.skip = skip;
+      const std::vector<double> m({ml,ml,ml,mc,mb,mt});
+      const double nf = NF(Q,Masses);
+
+      std::vector<Operator> OqLO({  TabO30ns_H.Evaluate(Q/mll),   //0
+                                    TabO30ns_H.Evaluate(Q/mlc),   //1
+                                    TabO30ns_H.Evaluate(Q/mcb),   //2
+                                    TabO30ns_H.Evaluate(Q/mlb),   //3
+                                    TabO30ns_H.Evaluate(Q/mtb),   //4
+                                    TabO30ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<Operator> OqNLO({ TabO31ns_H.Evaluate(Q/mll),   //0
+                                    TabO31ns_H.Evaluate(Q/mlc),   //1
+                                    TabO31ns_H.Evaluate(Q/mcb),   //2
+                                    TabO31ns_H.Evaluate(Q/mlb),   //3
+                                    TabO31ns_H.Evaluate(Q/mtb),   //4
+                                    TabO31ns_H.Evaluate(Q/mlt)}); //5
+      std::vector<std::vector<Operator>> Oq({OqLO,OqNLO});
+
+      std::vector<std::map<int,Operator>> coef_tot(3);
+
+      for(int l=0; l<3; l++){ // set gluon to zero
+        coef_tot.at(l).insert({0,Zero});
+      }
+      for(int l=0; l<2;l++){ // quark pieces
+        coef_tot.at(l).insert({1,Ch.at(0)*Oq.at(l).at(0)+Ch.at(3)*Oq.at(l).at(1)+Ch.at(6)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({2,(Ch.at(0)+Ch.at(1))*Oq.at(l).at(0)+Ch.at(2)*Oq.at(l).at(3)});
+        coef_tot.at(l).insert({3,Ch.at(1)*Oq.at(l).at(0)+Ch.at(4)*Oq.at(l).at(1)+Ch.at(7)*Oq.at(l).at(5)});
+        coef_tot.at(l).insert({4,(Ch.at(4)+Ch.at(3))*Oq.at(l).at(1)+Ch.at(5)*Oq.at(l).at(2)});
+        coef_tot.at(l).insert({5,Ch.at(2)*Oq.at(l).at(3)+Ch.at(5)*Oq.at(l).at(2)+Ch.at(8)*Oq.at(l).at(4)});
+        coef_tot.at(l).insert({6,(Ch.at(6)+Ch.at(7))*Oq.at(l).at(5)+Ch.at(8)*Oq.at(l).at(4)});
+      }
+      for(int i=1; i<=6; i++){
+        coef_tot.at(2).insert({i,Zero});
+      }
+      double sxi;
+      for(int i=1; i<=3; i++){ //incomming
+        for(int j=1; j<=3; j++){ //outgoing
+          if(n==0){ // Zero mass contributions
+            if(both_in(i,j,nf)){
+              sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_0_H.Evaluate(sxi);
+            }
+            if(both_in(j,i,nf)){
+              sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+              coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO32ns_0_H.Evaluate(sxi);
+            }
+            for(int k=1; k<=nf; k++){
+              if(both_in(i,j,nf)){
+                sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+                coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_nf_H.Evaluate(sxi);
+              }
+              if(both_in(j,i,nf)){
+                sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+                coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO32ns_nf_H.Evaluate(sxi);
+              }
+            }
+          } else { // sACOT-chi with n scaling contributions
+            sxi = Q/m.at(get_heaviest_quark(i,j,0)-1);
+            coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_0_H.Evaluate(sxi);
+            sxi = Q/m.at(get_heaviest_quark(j,i,0)-1);
+            coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO32ns_0_H.Evaluate(sxi);
+            for(int k=1; k<=6; k++){
+              sxi = Q/m.at(get_heaviest_quark(i,j,k)-1);
+              coef_tot.at(2).at(2*i-1) += Ch.at((j-1)*3+i-1)*TabO32ns_nf_H.Evaluate(sxi);
+              sxi = Q/m.at(get_heaviest_quark(j,i,k)-1);
+              coef_tot.at(2).at(2*i)   += Ch.at((i-1)*3+j-1)*TabO32ns_nf_H.Evaluate(sxi);
+            }
+          }
+        }
+      }
+      DISCCBasis_ACOT DISbasis_all(Ch,Zero);
+      auto C_tot = DISbasis_all.get_operators_minus(coef_tot);
+      FObj.ConvBasis.insert({0, DISbasis_all});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(0)}});
+      FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(1)}});
+      FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C_tot.at(2)}});
+
+      return FObj;
+    };
+
+    t.stop();
+    return F3Obj;
+  }
 }

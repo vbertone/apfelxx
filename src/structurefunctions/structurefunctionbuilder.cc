@@ -2313,7 +2313,7 @@ namespace apfel
     const StructureFunctionObjects FObj1 = FObj(2, Couplings(2));
 
     // Get grid.
-    Grid const& g = FObj1.C0.at(1).at(0).GetGrid();
+    Grid const& g = FObj1.C0.at(0).at(0).GetGrid();
 
     // Get skip vector.
     const std::vector<int> skip = FObj1.skip;

@@ -290,4 +290,148 @@ namespace apfel
                                                                                                                    double const &Qmax = 300,
                                                                                                                    int const &intdeg = 3,
                                                                                                                    double const &n=1); 
-}
+
+  /**
+   * @brief The InitializeF2CCPlusObjectsASACOT precomputs the perturbative
+   * coefficients of coefficient functions for for combination ( F2(nu) +
+   * F2(nubar) ) / 2 in the aSACOT-chi(n) scheme up to
+   * NNLO and stores them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy quark masses
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @param nQ: the number of nodes of the grid in Q (default: 150)
+   * @param Qmin: the lower bound of the grid in Q (default: 1)
+   * @param Qmax: the upper bound of the grid in Q (default: 300)
+   * @param intdeg: the interpolation degree on the grid in Q (default: 3)
+   * @param n: The scaling variable for the slow-rescaling with chi (default: 1)
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeF2CCPlusObjectsASACOT(Grid const &g,
+                                                                                                                       std::vector<double> const &Masses,
+                                                                                                                       double const &IntEps = 1e-5,
+                                                                                                                       int const &nQ = 100,
+                                                                                                                       double const &Qmin = 1,
+                                                                                                                       double const &Qmax = 300,
+                                                                                                                       int const &intdeg = 3,
+                                                                                                                       double const &n=1); 
+  
+  /**
+   * @brief The InitializeF2CCMinusObjectsASACOT precomputs the perturbative
+   * coefficients of coefficient functions for for combination ( F2(nu) -
+   * F2(nubar) ) / 2 in the aSACOT-chi(n) scheme up to
+   * NNLO and stores them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy quark masses
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @param nQ: the number of nodes of the grid in Q (default: 150)
+   * @param Qmin: the lower bound of the grid in Q (default: 1)
+   * @param Qmax: the upper bound of the grid in Q (default: 300)
+   * @param intdeg: the interpolation degree on the grid in Q (default: 3)
+   * @param n: The scaling variable for the slow-rescaling with chi (default: 1)
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeF2CCMinusObjectsASACOT(Grid const &g,
+                                                                                                                        std::vector<double> const &Masses,
+                                                                                                                        double const &IntEps = 1e-5,
+                                                                                                                        int const &nQ = 100,
+                                                                                                                        double const &Qmin = 1,
+                                                                                                                        double const &Qmax = 300,
+                                                                                                                        int const &intdeg = 3,
+                                                                                                                        double const &n=1); 
+
+  /**
+   * @brief The InitializeFLCCPlusObjectsASACOT precomputs the perturbative
+   * coefficients of coefficient functions for for combination ( FL(nu) +
+   * FL(nubar) ) / 2 in the aSACOT-chi(n) scheme up to
+   * NNLO and stores them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy quark masses
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @param nQ: the number of nodes of the grid in Q (default: 150)
+   * @param Qmin: the lower bound of the grid in Q (default: 1)
+   * @param Qmax: the upper bound of the grid in Q (default: 300)
+   * @param intdeg: the interpolation degree on the grid in Q (default: 3)
+   * @param n: The scaling variable for the slow-rescaling with chi (default: 1)
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeFLCCPlusObjectsASACOT(Grid const &g,
+                                                                                                                       std::vector<double> const &Masses,
+                                                                                                                       double const &IntEps = 1e-5,
+                                                                                                                       int const &nQ = 100,
+                                                                                                                       double const &Qmin = 1,
+                                                                                                                       double const &Qmax = 300,
+                                                                                                                       int const &intdeg = 3,
+                                                                                                                       double const &n=1); 
+
+  /**
+   * @brief The InitializeFLCCMinusObjectsASACOT precomputs the perturbative
+   * coefficients of coefficient functions for for combination ( FL(nu) -
+   * FL(nubar) ) / 2 in the aSACOT-chi(n) scheme up to
+   * NNLO and stores them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy quark masses
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @param nQ: the number of nodes of the grid in Q (default: 150)
+   * @param Qmin: the lower bound of the grid in Q (default: 1)
+   * @param Qmax: the upper bound of the grid in Q (default: 300)
+   * @param intdeg: the interpolation degree on the grid in Q (default: 3)
+   * @param n: The scaling variable for the slow-rescaling with chi (default: 1)
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeFLCCMinusObjectsASACOT(Grid const &g,
+                                                                                                                        std::vector<double> const &Masses,
+                                                                                                                        double const &IntEps = 1e-5,
+                                                                                                                        int const &nQ = 100,
+                                                                                                                        double const &Qmin = 1,
+                                                                                                                        double const &Qmax = 300,
+                                                                                                                        int const &intdeg = 3,
+                                                                                                                        double const &n=1); 
+                                                                                                                      
+  /**
+   * @brief The InitializeF3CCPlusObjectsASACOT precomputs the perturbative
+   * coefficients of coefficient functions for for combination ( F3(nu) +
+   * F3(nubar) ) / 2 in the aSACOT-chi(n) scheme up to
+   * NNLO and stores them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy quark masses
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @param nQ: the number of nodes of the grid in Q (default: 150)
+   * @param Qmin: the lower bound of the grid in Q (default: 1)
+   * @param Qmax: the upper bound of the grid in Q (default: 300)
+   * @param intdeg: the interpolation degree on the grid in Q (default: 3)
+   * @param n: The scaling variable for the slow-rescaling with chi (default: 1)
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeF3CCPlusObjectsASACOT(Grid const &g,
+                                                                                                                       std::vector<double> const &Masses,
+                                                                                                                       double const &IntEps = 1e-5,
+                                                                                                                       int const &nQ = 100,
+                                                                                                                       double const &Qmin = 1,
+                                                                                                                       double const &Qmax = 300,
+                                                                                                                       int const &intdeg = 3,
+                                                                                                                       double const &n=1); 
+
+  /**
+   * @brief The InitializeFLCCMinusObjectsASACOT precomputs the perturbative
+   * coefficients of coefficient functions for for combination ( F3(nu) -
+   * F3(nubar) ) / 2 in the aSACOT-chi(n) scheme up to
+   * NNLO and stores them in the 'StructureFunctionObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy quark masses
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>})
+   * @param nQ: the number of nodes of the grid in Q (default: 150)
+   * @param Qmin: the lower bound of the grid in Q (default: 1)
+   * @param Qmax: the upper bound of the grid in Q (default: 300)
+   * @param intdeg: the interpolation degree on the grid in Q (default: 3)
+   * @param n: The scaling variable for the slow-rescaling with chi (default: 1)
+   * @return A StructureFunctionObjects-valued function
+   */
+  std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeF3CCMinusObjectsASACOT(Grid const &g,
+                                                                                                                        std::vector<double> const &Masses,
+                                                                                                                        double const &IntEps = 1e-5,
+                                                                                                                        int const &nQ = 100,
+                                                                                                                        double const &Qmin = 1,
+                                                                                                                        double const &Qmax = 300,
+                                                                                                                        int const &intdeg = 3,
+                                                                                                                        double const &n=1);                                                                                                                         
+                                                                                                                      }
