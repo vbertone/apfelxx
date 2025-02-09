@@ -13,7 +13,7 @@ namespace apfel
   DistributionOperator::DistributionOperator(Grid const& gr1, Grid const& gr2):
     _grid1(gr1),
     _grid2(gr2),
-    _li1(LagrangeInterpolator(_grid1))
+    _li1(LagrangeInterpolator{_grid1})
   {
     // Get number of grids
     const int ng1 = _grid1.nGrids();
@@ -36,7 +36,7 @@ namespace apfel
   DistributionOperator::DistributionOperator(Grid const& gr1, Grid const& gr2, std::vector<std::vector<std::vector<matrix<double>>>> const& DO):
     _grid1(gr1),
     _grid2(gr2),
-    _li1(LagrangeInterpolator(_grid1)),
+    _li1(LagrangeInterpolator{_grid1}),
     _dOperator(DO)
   {
     // Get number of grids
@@ -62,7 +62,7 @@ namespace apfel
   DistributionOperator::DistributionOperator(Distribution const& d1, Operator const& O2):
     _grid1(d1.GetGrid()),
     _grid2(O2.GetGrid()),
-    _li1(LagrangeInterpolator(_grid1))
+    _li1(LagrangeInterpolator{_grid1})
   {
     // Stop the computation if the operators is of GPD type. Still
     // impossible to handle here.
@@ -99,7 +99,7 @@ namespace apfel
   DistributionOperator::DistributionOperator(DoubleObject<Distribution, Operator> const& DObj):
     _grid1(DObj.GetTerms()[0].object1.GetGrid()),
     _grid2(DObj.GetTerms()[0].object2.GetGrid()),
-    _li1(LagrangeInterpolator(_grid1))
+    _li1(LagrangeInterpolator{_grid1})
   {
     // Stop the computation if the operator in the first term of the
     // double objects is of GPD type. Still impossible to handle.

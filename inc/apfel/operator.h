@@ -40,6 +40,7 @@ namespace apfel
      * @brief The Operator constructor from a raw operator.
      * @param gr: the Grid object
      * @param op: raw operator previously computed
+     * @param gpd: whether the operator had to computed for a GPD-like expression (default: false)
      */
     Operator(Grid const& gr, std::vector<matrix<double>> const& op, bool const& gpd = false);
 

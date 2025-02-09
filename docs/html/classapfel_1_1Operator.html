@@ -114,24 +114,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8883b2d608d147309abbda622349e53e" id="r_a8883b2d608d147309abbda622349e53e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8883b2d608d147309abbda622349e53e">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr, <a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr, double const &amp;eps=1e-5, bool const &amp;gpd=false)</td></tr>
 <tr class="memdesc:a8883b2d608d147309abbda622349e53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor.  <br /></td></tr>
 <tr class="separator:a8883b2d608d147309abbda622349e53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d3a5572ecdbabcfd56d29fdaa7115b" id="r_a11d3a5572ecdbabcfd56d29fdaa7115b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11d3a5572ecdbabcfd56d29fdaa7115b">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr, std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; const &amp;op, bool const &amp;gpd=false)</td></tr>
+<tr class="memdesc:a11d3a5572ecdbabcfd56d29fdaa7115b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor from a raw operator.  <br /></td></tr>
+<tr class="separator:a11d3a5572ecdbabcfd56d29fdaa7115b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33282323f21457b098ee90b2356af978" id="r_a33282323f21457b098ee90b2356af978"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33282323f21457b098ee90b2356af978">~Operator</a> ()</td></tr>
 <tr class="memdesc:a33282323f21457b098ee90b2356af978"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> virtual destructor.  <br /></td></tr>
 <tr class="separator:a33282323f21457b098ee90b2356af978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed0e053cdac13eac1b114a5355a2ff0a" id="r_aed0e053cdac13eac1b114a5355a2ff0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed0e053cdac13eac1b114a5355a2ff0a">BuildOperatorDGLAP</a> ()</td></tr>
-<tr class="memdesc:aed0e053cdac13eac1b114a5355a2ff0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a DGLAP-like operator.  <br /></td></tr>
-<tr class="separator:aed0e053cdac13eac1b114a5355a2ff0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5340ab3b9624dc2262a561fb16baa50" id="r_af5340ab3b9624dc2262a561fb16baa50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5340ab3b9624dc2262a561fb16baa50">BuildOperatorGPD</a> ()</td></tr>
-<tr class="memdesc:af5340ab3b9624dc2262a561fb16baa50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a GPD-like operator.  <br /></td></tr>
-<tr class="separator:af5340ab3b9624dc2262a561fb16baa50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dd0495be7c91e0fd1b92b46e9d4669" id="r_aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4dd0495be7c91e0fd1b92b46e9d4669">BuildOperatorDGLAP</a> (<a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr)</td></tr>
+<tr class="memdesc:aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a DGLAP-like operator.  <br /></td></tr>
+<tr class="separator:aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdba0481e6564816af9edda16422e210" id="r_abdba0481e6564816af9edda16422e210"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdba0481e6564816af9edda16422e210">BuildOperatorGPD</a> (<a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr)</td></tr>
+<tr class="memdesc:abdba0481e6564816af9edda16422e210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a GPD-like operator.  <br /></td></tr>
+<tr class="separator:abdba0481e6564816af9edda16422e210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea92b7498b3b329688f3ac898083b9be" id="r_aea92b7498b3b329688f3ac898083b9be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea92b7498b3b329688f3ac898083b9be">Evaluate</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:aea92b7498b3b329688f3ac898083b9be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that interpolates the operator over the first index return a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> object.  <br /></td></tr>
 <tr class="separator:aea92b7498b3b329688f3ac898083b9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80f6e9dc8055f27d5a394f53c4702d30" id="r_a80f6e9dc8055f27d5a394f53c4702d30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80f6e9dc8055f27d5a394f53c4702d30">GetGrid</a> () const</td></tr>
 <tr class="memdesc:a80f6e9dc8055f27d5a394f53c4702d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated with the operator.  <br /></td></tr>
 <tr class="separator:a80f6e9dc8055f27d5a394f53c4702d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae97d6c436be87901e7234f551cfe088f" id="r_ae97d6c436be87901e7234f551cfe088f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae97d6c436be87901e7234f551cfe088f">GetExpression</a> () const</td></tr>
-<tr class="memdesc:ae97d6c436be87901e7234f551cfe088f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object associated with the operator.  <br /></td></tr>
-<tr class="separator:ae97d6c436be87901e7234f551cfe088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d185d01ae0703325751a2d68193f127" id="r_a0d185d01ae0703325751a2d68193f127"><td class="memItemLeft" align="right" valign="top">double const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d185d01ae0703325751a2d68193f127">GetIntegrationAccuracy</a> () const</td></tr>
 <tr class="memdesc:a0d185d01ae0703325751a2d68193f127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration accuracy,.  <br /></td></tr>
 <tr class="separator:a0d185d01ae0703325751a2d68193f127"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,9 +175,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a07ea5d7c9382f4566be27fd651bfb600" id="r_a07ea5d7c9382f4566be27fd651bfb600"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07ea5d7c9382f4566be27fd651bfb600">_grid</a></td></tr>
 <tr class="memdesc:a07ea5d7c9382f4566be27fd651bfb600"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> on which to compute the operator.  <br /></td></tr>
 <tr class="separator:a07ea5d7c9382f4566be27fd651bfb600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85943b57a3aaed3afce2fc5b9d07d133" id="r_a85943b57a3aaed3afce2fc5b9d07d133"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85943b57a3aaed3afce2fc5b9d07d133">_expr</a></td></tr>
-<tr class="memdesc:a85943b57a3aaed3afce2fc5b9d07d133"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> to be used.  <br /></td></tr>
-<tr class="separator:a85943b57a3aaed3afce2fc5b9d07d133"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af659fccf626c174f729a35d930f84fd8" id="r_af659fccf626c174f729a35d930f84fd8"><td class="memItemLeft" align="right" valign="top">double const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af659fccf626c174f729a35d930f84fd8">_eps</a></td></tr>
 <tr class="memdesc:af659fccf626c174f729a35d930f84fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integration accuracy.  <br /></td></tr>
 <tr class="separator:af659fccf626c174f729a35d930f84fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,7 +198,7 @@ Friends</h2></td></tr>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abed3b7be91a5e75cea637a87fb4fa5d0" name="abed3b7be91a5e75cea637a87fb4fa5d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abed3b7be91a5e75cea637a87fb4fa5d0">&#9670;&#160;</a></span>Operator() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abed3b7be91a5e75cea637a87fb4fa5d0">&#9670;&#160;</a></span>Operator() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,7 +223,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="aa1690288a30f134b8f3a90e1a1aefc71" name="aa1690288a30f134b8f3a90e1a1aefc71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1690288a30f134b8f3a90e1a1aefc71">&#9670;&#160;</a></span>Operator() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1690288a30f134b8f3a90e1a1aefc71">&#9670;&#160;</a></span>Operator() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,7 +248,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a8883b2d608d147309abbda622349e53e" name="a8883b2d608d147309abbda622349e53e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8883b2d608d147309abbda622349e53e">&#9670;&#160;</a></span>Operator() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8883b2d608d147309abbda622349e53e">&#9670;&#160;</a></span>Operator() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,6 +289,42 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a11d3a5572ecdbabcfd56d29fdaa7115b" name="a11d3a5572ecdbabcfd56d29fdaa7115b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d3a5572ecdbabcfd56d29fdaa7115b">&#9670;&#160;</a></span>Operator() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::Operator::Operator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>op</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>gpd</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor from a raw operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gr</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object </td></tr>
+    <tr><td class="paramname">op</td><td>raw operator previously computed </td></tr>
+    <tr><td class="paramname">gpd</td><td>whether the operator had to computed for a GPD-like expression (default: false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a33282323f21457b098ee90b2356af978" name="a33282323f21457b098ee90b2356af978"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33282323f21457b098ee90b2356af978">&#9670;&#160;</a></span>~Operator()</h2>
 
@@ -320,8 +353,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aed0e053cdac13eac1b114a5355a2ff0a" name="aed0e053cdac13eac1b114a5355a2ff0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed0e053cdac13eac1b114a5355a2ff0a">&#9670;&#160;</a></span>BuildOperatorDGLAP()</h2>
+<a id="aa4dd0495be7c91e0fd1b92b46e9d4669" name="aa4dd0495be7c91e0fd1b92b46e9d4669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4dd0495be7c91e0fd1b92b46e9d4669">&#9670;&#160;</a></span>BuildOperatorDGLAP()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,7 +362,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">void apfel::Operator::BuildOperatorDGLAP </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>expr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -339,8 +372,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="af5340ab3b9624dc2262a561fb16baa50" name="af5340ab3b9624dc2262a561fb16baa50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5340ab3b9624dc2262a561fb16baa50">&#9670;&#160;</a></span>BuildOperatorGPD()</h2>
+<a id="abdba0481e6564816af9edda16422e210" name="abdba0481e6564816af9edda16422e210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdba0481e6564816af9edda16422e210">&#9670;&#160;</a></span>BuildOperatorGPD()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -348,7 +381,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">void apfel::Operator::BuildOperatorGPD </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>expr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -380,33 +413,6 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="ae97d6c436be87901e7234f551cfe088f" name="ae97d6c436be87901e7234f551cfe088f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae97d6c436be87901e7234f551cfe088f">&#9670;&#160;</a></span>GetExpression()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const  &amp; apfel::Operator::GetExpression </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Function that returns the <a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> object associated with the operator. </p>
 
 </div>
 </div>
@@ -754,30 +760,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a85943b57a3aaed3afce2fc5b9d07d133" name="a85943b57a3aaed3afce2fc5b9d07d133"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85943b57a3aaed3afce2fc5b9d07d133">&#9670;&#160;</a></span>_expr</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classapfel_1_1Expression.html">Expression</a> const&amp; apfel::Operator::_expr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p><a class="el" href="classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ...">Expression</a> to be used. </p>
-
-</div>
-</div>
 <a id="a6d93f7c9ec6b8a8ccd29189531282278" name="a6d93f7c9ec6b8a8ccd29189531282278"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d93f7c9ec6b8a8ccd29189531282278">&#9670;&#160;</a></span>_gpd</h2>
 
@@ -856,7 +838,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 5 2025 17:41:46 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sun Feb 9 2025 17:51:26 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
