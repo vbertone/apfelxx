@@ -145,18 +145,7 @@ namespace apfel
   //_________________________________________________________________________
   Operator DistributionOperator::Evaluate(double const& x) const
   {
-    // Get summation bounds on the joint grid along the first
-    // direction.
-    const std::array<int, 2> bounds1j = _li1.SumBounds(x, _grid1.GetJointGrid());
-
-    // Accumulate interpolating functions
-    std::vector<double> intp1j(bounds1j[1] - bounds1j[0]);
-    for (int beta = 0; beta < bounds1j[1] - bounds1j[0]; beta++)
-      intp1j[beta] = _li1.Interpolant(bounds1j[0] + beta, x, _grid1.GetJointGrid());
-
-    // Now take care of the subgrids. ig1 has to correspond to the
-    // subgrid index along the first direction such that "x" is on
-    // the denser grid possible.
+    // Find "ig1" such that "x" is on the densest possible grid
     int ig1;
     for (ig1 = 0; ig1 < _grid1.nGrids(); ig1++)
       if(_grid1.GetSubGrid(ig1).xMin() > x)
@@ -181,7 +170,7 @@ namespace apfel
         // direction.
         const int nx2s = _grid2.GetSubGrid(ig2).nx();
 
-        // Interpolate along the first direction of the ig2-th subgrid
+        // Interpolate along the first direction
         op[ig2].resize(1, nx2s);
         for (int delta = 0; delta < nx2s; delta++)
           for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
@@ -194,62 +183,83 @@ namespace apfel
   //_________________________________________________________________________
   Operator DistributionOperator::Derive(double const& x) const
   {
+    // Find "ig1" such that "x" is on the densest possible grid
+    int ig1;
+    for (ig1 = 0; ig1 < _grid1.nGrids(); ig1++)
+      if(_grid1.GetSubGrid(ig1).xMin() > x)
+        break;
+    ig1--;
+
+    // Get summation bounds on the ig1-th subgrid along the first
+    // direction.
+    const std::array<int, 2> bounds1s = _li1.SumBounds(x, _grid1.GetSubGrid(ig1));
+
+    // Accumulate interpolating functions
+    std::vector<double> dintp1s(bounds1s[1] - bounds1s[0]);
+    for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+      dintp1s[beta] = _li1.DerInterpolant(bounds1s[0] + beta, x, _grid1.GetSubGrid(ig1));
+
+    // Run over the subgrids along the second direction
+    const int ng2 = _grid2.nGrids();
+    std::vector<matrix<double>> op(ng2);
+    for (int ig2 = 0; ig2 < ng2; ig2++)
+      {
+        // Get number of nodes of the ig2-th subgrid along the second
+        // direction.
+        const int nx2s = _grid2.GetSubGrid(ig2).nx();
+
+        // Interpolate along the first direction
+        op[ig2].resize(1, nx2s);
+        for (int delta = 0; delta < nx2s; delta++)
+          for (int beta = 0; beta < bounds1s[1] - bounds1s[0]; beta++)
+            op[ig2](0, delta) += dintp1s[beta] * _dOperator[ig1][ig2][beta + bounds1s[0]](0, delta);
+      }
+
+    return Operator{_grid2, op};
   }
 
   //_________________________________________________________________________
   Operator DistributionOperator::Integrate(double const& a, double const& b) const
   {
-      // Order integration bounds and adjust the sign if necessary
-      const double ao1  = std::min(a, b);
-      const double bo1  = std::max(a, b);
-      const int    sgn1 = (b > a ? 1 : -1);
+    // Order integration bounds and adjust the sign if necessary
+    const double ao1  = std::min(a, b);
+    const double bo1  = std::max(a, b);
+    const int    sgn1 = (b > a ? 1 : -1);
 
-      // Get summation bounds on the joint grid along the first
-      // direction.
-      const std::array<int, 2> boundsa1j = _li1.SumBounds(ao1, _grid1.GetJointGrid());
-      const std::array<int, 2> boundsb1j = _li1.SumBounds(bo1, _grid1.GetJointGrid());
+    // Find "ig1" such that "x" is on the densest possible grid
+    int ig1;
+    for (ig1 = 0; ig1 < _grid1.nGrids(); ig1++)
+      if(_grid1.GetSubGrid(ig1).xMin() > ao1)
+        break;
+    ig1--;
 
-      // Accumulate interpolating functions
-      std::vector<double> iintp1j(boundsb1j[1] - boundsa1j[0]);
-      for (int beta = 0; beta < boundsb1j[1] - boundsa1j[0]; beta++)
-        iintp1j[beta] = _li1.IntInterpolant(boundsa1j[0] + beta, ao1, bo1, _grid1.GetJointGrid());
+    // Get summation bounds on the ig1-th subgrid along the first
+    // direction.
+    const std::array<int, 2> boundsa1s = _li1.SumBounds(ao1, _grid1.GetSubGrid(ig1));
+    const std::array<int, 2> boundsb1s = _li1.SumBounds(bo1, _grid1.GetSubGrid(ig1));
 
-      // Now take care of the subgrids. ig1 has to correspond to the
-      // subgrid index along the first direction such that the lower
-      // bound "ao1" is on the denser grid possible.
-      int ig1;
-      for (ig1 = 0; ig1 < _grid1.nGrids(); ig1++)
-        if(_grid1.GetSubGrid(ig1).xMin() > ao1)
-          break;
-      ig1--;
-
-      // Get summation bounds on the ig1-th subgrid along the first
-      // direction.
-      const std::array<int, 2> boundsa1s = _li1.SumBounds(ao1, _grid1.GetSubGrid(ig1));
-      const std::array<int, 2> boundsb1s = _li1.SumBounds(bo1, _grid1.GetSubGrid(ig1));
-
-      // Accumulate interpolating functions
-      std::vector<double> iintp1s(boundsb1s[1] - boundsa1s[0]);
-      for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
+    // Accumulate interpolating functions
+    std::vector<double> iintp1s(boundsb1s[1] - boundsa1s[0]);
+    for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
       iintp1s[beta] = _li1.IntInterpolant(boundsa1s[0] + beta, ao1, bo1, _grid1.GetSubGrid(ig1));
 
-      // Run over the subgrids along the second direction
-      const int ng2 = _grid2.nGrids();
-      std::vector<matrix<double>> op(ng2);
-      for (int ig2 = 0; ig2 < ng2; ig2++)
-        {
-          // Get number of nodes of the ig2-th subgrid along the second
-          // direction.
-          const int nx2s = _grid2.GetSubGrid(ig2).nx();
+    // Run over the subgrids along the second direction
+    const int ng2 = _grid2.nGrids();
+    std::vector<matrix<double>> iop(ng2);
+    for (int ig2 = 0; ig2 < ng2; ig2++)
+      {
+        // Get number of nodes of the ig2-th subgrid along the second
+        // direction.
+        const int nx2s = _grid2.GetSubGrid(ig2).nx();
 
-          // Interpolate along the first direction of the ig2-th subgrid
-          op[ig2].resize(1, nx2s);
-          for (int delta = 0; delta < nx2s; delta++)
-            for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
-              op[ig2](0, delta) += sgn1 * iintp1s[beta] * _dOperator[ig1][ig2][beta + boundsa1s[0]](0, delta);
-        }
+        // Interpolate along the first direction
+        iop[ig2].resize(1, nx2s);
+        for (int delta = 0; delta < nx2s; delta++)
+          for (int beta = 0; beta < boundsb1s[1] - boundsa1s[0]; beta++)
+            iop[ig2](0, delta) += sgn1 * iintp1s[beta] * _dOperator[ig1][ig2][beta + boundsa1s[0]](0, delta);
+      }
 
-      return Operator{_grid2, op};
+    return Operator{_grid2, iop};
   }
 
   //_________________________________________________________________________

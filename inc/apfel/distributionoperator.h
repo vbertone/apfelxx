@@ -130,7 +130,7 @@ namespace apfel
   private:
     Grid                                           const& _grid1;      //!< First grid
     Grid                                           const& _grid2;      //!< Second grid
-    LagrangeInterpolator                           const  _li1;          //!< The first Lagrange interpolator
+    LagrangeInterpolator                           const  _li1;        //!< The Lagrange interpolator on the first grid
     std::vector<std::vector<std::vector<matrix<double>>>> _dOperator;  //!< DistributionOperator container
 
     friend std::ostream& operator << (std::ostream& os, DistributionOperator const& dop);

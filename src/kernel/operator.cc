@@ -198,8 +198,8 @@ namespace apfel
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
                     const double ky = kappa * y;
                     return expr.Regular(y) * wr
-                                + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
-                                + expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
+                               + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
+                               + expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
                   }};
                 // Compute the integral
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], _eps);

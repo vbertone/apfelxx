@@ -12,6 +12,7 @@
 #include "apfel/distribution.h"
 #include "apfel/doubleobject.h"
 #include "apfel/doubledistribution.h"
+#include "apfel/lagrangeinterpolator.h"
 
 namespace apfel
 {
@@ -60,6 +61,38 @@ namespace apfel
     virtual ~OperatorDistribution() {}
 
     /**
+     * @name Evaluate functions
+     * List of functions that perform the interpolation on the x-space
+     * grids.
+     */
+    ///@{
+    /**
+     * @brief Function that evaluates the Distribution part in a given
+     * point through interpolation.
+     * @param x: the value in x where the distribution part is to be interpolated
+     * @return the interpolated result
+     */
+    Operator Evaluate(double const& x) const;
+
+    /**
+     * @brief Function that evaluates the derivative of the Distribution
+     * part in a given point through interpolation.
+     * @param x: the value in x where the distribution part is to be interpolated
+     * @return the derivative of the interpolated function
+     */
+    Operator Derive(double const& x) const;
+
+    /**
+     * @brief Function that evaluates the integral of the Distribution
+     * part in the interval[a, b].
+     * @param a: the lower integration bound for the first variable
+     * @param b: the upper integration bound for the first variable
+     * @return the integral of the interpolated function
+     */
+    Operator Integrate(double const& a, double const& b) const;
+    ///@}
+
+    /**
      * @name Binary operators
      */
     ///@{
@@ -97,6 +130,7 @@ namespace apfel
   private:
     Grid                                           const& _grid1;      //!< First grid
     Grid                                           const& _grid2;      //!< Second grid
+    LagrangeInterpolator                           const  _li2;        //!< The Lagrange interpolator on the second grid
     std::vector<std::vector<matrix<std::vector<double>>>> _dOperator;  //!< OperatorDistribution container
 
     friend std::ostream& operator << (std::ostream& os, OperatorDistribution const& opd);
