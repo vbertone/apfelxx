@@ -8,6 +8,7 @@
 
 #include "apfel/grid.h"
 #include "apfel/dglap.h"
+#include "apfel/dglapnonlinear.h"
 
 #include <memory>
 
@@ -348,5 +349,27 @@ namespace apfel
                                                   int                                                                const& PerturbativeOrder,
                                                   std::function<double(double const&)>                               const& Alphas,
                                                   int                                                                const& nsteps = 10);
+
+  /**
+   * @brief The BuildDglap function builds the actual dglap object
+   * that performs a non-liner DGLAP evolution.
+   * @param DglapObj: structure with the coefficients of the perturbative objects
+   * @param TranformationFuncs: set of functions that trasform distributions in the l.h.s. of DGLAP
+   * @param InDistFunc: the distributions at the reference scale
+   * @param MuRef: the reference scale
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param Alphas: the function returning the strong coupling
+   * @param xi: the scale-variation parameter (default: 1)
+   * @param nsteps: the number of steps of the ODE solver (default: 10).
+   * @return A unique pointer to a Dglap object
+   */
+  std::unique_ptr<DglapNonLinear> BuildDglapNonLinear(std::map<int, DglapObjects>                                                       const& DglapObj,
+                                                      std::function<std::map<int, std::function<double(double const&)>>(double const&)> const& TranformationFuncs,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                const& InDistFunc,
+                                                      double                                                                            const& MuRef,
+                                                      int                                                                               const& PerturbativeOrder,
+                                                      std::function<double(double const&)>                                              const& Alphas,
+                                                      double                                                                            const& xi = 1,
+                                                      int                                                                               const& nsteps = 10);
   ///@}
 }

@@ -163,6 +163,25 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Distribution Distribution::Transform(std::function<double(double const&)> const& TranformationFunc) const
+  {
+    // Transform joint grid
+    std::vector<double> TdistributionJointGrid(_grid.GetJointGrid().GetGrid().size());
+    std::transform(_distributionJointGrid.begin(), _distributionJointGrid.end(), TdistributionJointGrid.begin(), [=] (double const& f) -> double { return TranformationFunc(f); });
+
+    // Transform subgrids
+    std::vector<std::vector<double>> TdistributionSubGrid(_grid.nGrids());
+    for (int ig = 0; ig < (int) TdistributionSubGrid.size(); ig++)
+      {
+        TdistributionSubGrid[ig].resize(_grid.GetSubGrid(ig).GetGrid().size());
+        std::transform(_distributionSubGrid[ig].begin(), _distributionSubGrid[ig].end(), TdistributionSubGrid[ig].begin(), [=] (double const& f) -> double { return TranformationFunc(f); });
+      }
+
+    // Construct Distribution object and return
+    return Distribution{_grid, TdistributionSubGrid, TdistributionJointGrid};
+  }
+
+  //_________________________________________________________________________
   Distribution& Distribution::operator = (Distribution const& d)
   {
     // Fast method to check that we are using the same Grid

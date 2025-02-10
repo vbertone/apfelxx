@@ -270,6 +270,17 @@ namespace apfel
   template class Set<DistributionOperator>;
   template class Set<OperatorDistribution>;
 
+  //_________________________________________________________________________
+  template<>
+  Set<Distribution> Set<Distribution>::Transform(std::map<int, std::function<double(double const&)>> const& TranformationFuncs) const
+  {
+    std::map<int, Distribution> TransformedObjects;
+    for (auto& v: _objects)
+      TransformedObjects.insert({v.first, (v.second).Transform(TranformationFuncs.at(v.first))});
+
+    return Set<Distribution> {_map, TransformedObjects};
+  }
+
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
 

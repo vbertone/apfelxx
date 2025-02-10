@@ -1767,4 +1767,40 @@ namespace apfel
     // now: set InhomogeneousTerms to nullptr).
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, nullptr, InPDFs, MuRef, Thresholds, nsteps});
   }
+
+  //_____________________________________________________________________________
+  std::unique_ptr<DglapNonLinear> BuildDglapNonLinear(std::map<int, DglapObjects>                                                       const& DglapObj,
+                                                      std::function<std::map<int, std::function<double(double const&)>>(double const&)> const& TranformationFuncs,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                const& InDistFunc,
+                                                      double                                                                            const& MuRef,
+                                                      int                                                                               const& PerturbativeOrder,
+                                                      std::function<double(double const&)>                                              const& Alphas,
+                                                      double                                                                            const& xi,
+                                                      int                                                                               const& nsteps)
+  {
+    // Collect thresholds and coupling above and below them
+    std::vector<double> Thresholds;
+    std::map<int, std::pair<double, double>> AlphasTh;
+    for (auto const& obj : DglapObj)
+      {
+        const int    nf  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) Thresholds.size() < nf)
+          Thresholds.resize(nf);
+        if (nf > 0)
+          Thresholds[nf-1] = thr;
+        AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
+      }
+
+    // Create set of initial distributions
+    const Set<Distribution> InPDFs{DglapObj.at(NF(MuRef, Thresholds)).SplittingFunctions.at(0).GetMap(),
+                                   DistributionMap(DglapObj.begin()->second.SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
+
+    // Initialize DGLAP evolution
+    return std::unique_ptr<DglapNonLinear>(new DglapNonLinear {SplittingFunctions(DglapObj, PerturbativeOrder, Alphas, xi),
+                                                               MatchingConditions(DglapObj, PerturbativeOrder, AlphasTh),
+                                                               TranformationFuncs,
+                                                               InPDFs, MuRef, Thresholds, nsteps
+                                                              });
+  }
 }

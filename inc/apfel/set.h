@@ -101,6 +101,14 @@ namespace apfel
     T Combine(std::vector<double> const& weigths) const;
 
     /**
+     * @brief This function trasforms the set of objects (only
+     * Distributions) given a set of functions, one for each
+     * distribution in the set.
+     * @param TranformationFuncs: set of transformation functions
+     */
+    Set<T> Transform(std::map<int, std::function<double(double const&)>> const& TranformationFuncs) const;
+
+    /**
      * @brief Print the Operator object
      */
     void Print() const { std::cout << *this << std::endl; }
