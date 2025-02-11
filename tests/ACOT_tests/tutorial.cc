@@ -40,19 +40,19 @@ int main()
     return apfel::PhysToQCDEv(my_PDF(x,Q));
   };
 
+  // the scaling variable chi(n)
+  double n = 1;
+
   // Construct the operator grids for the F2 structure function
-  // const apfel::StructureFunctionObjects F2objects = apfel::InitF2NCsimACOT_NNLO(
-  //   g,Thresholds,IntEps=1e-5,nQ=100,Qmin=2,Qmax=225,intdeg=3,n=1);
-  // const std::function<apfel::StructureFunctionObjects(const double &, const std::vector<double> &)> F2objects = apfel::InitializeF2NCObjectsMassive(
-  //   g,Thresholds,IntEps=1e-5,nQ=100,Qmin=2,Qmax=225,intdeg=3);
-  const auto F2objects = apfel::InitializeF2NCObjectsMassive(
-                           g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg);
+  const auto F2objects = apfel::InitializeF2NCObjectsASACOT(
+                           g,Thresholds,IntEps,nQ,Qmin,Qmax,intdeg,n);
 
   // Build the structure function
   const std::map<int,apfel::Observable<>> F2 = apfel::BuildStructureFunctions(
                                                  F2objects,PDFrotated,pto,strongCoupling,fEW);
 
   // Evaluate the total F2 at x=0.1 and Q=10
+  std::cout<<std::fixed<<std::setprecision(10);
   std::cout<<"\n\n";
   std::cout<<"Direct evaluation"<<std::endl;
   std::cout<<"F2(x=0.1,Q=10) = "<<F2.at(0).Evaluate(x,Q)<<std::endl;
