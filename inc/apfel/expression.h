@@ -101,7 +101,7 @@ namespace apfel
     double eta() const { return _eta; }
 
     /**
-     * @brief Function that returns the value of the flag for the 
+     * @brief Function that returns the value of the flag for the
      * integration mode.
      */
     bool is_xdependent() const {return _is_xdependent;}

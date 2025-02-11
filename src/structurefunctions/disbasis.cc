@@ -164,7 +164,7 @@ namespace apfel
             _rules[k][0].coefficient += CKM[i - 1] * rules.at(k)[0].coefficient;
       }
   }
-  
+
   //_________________________________________________________________________________
   DISNCBasis_ACOT::DISNCBasis_ACOT(std::vector<double> const& Ch):
     ConvolutionMap{"DISNCBasis_ACOT_tot"},
@@ -174,20 +174,24 @@ namespace apfel
       throw std::runtime_error(error("DISNCBasis_ACOT", "The charge vector must have 6 entries."));
 
     _rules[0] = {{0,0,1}};
-    for(int i=1;i<=6;i++){
-      _rules[2*i-1] = {{2*i-1,2*i-1,1}};
-      _rules[2*i] = {{2*i,2*i,1}};
-    }
-    _avCh.resize(6);
-    for(int i=1; i<=6; i++){
-      for(int j=1; j<=i; j++){
-        _avCh[i-1] += Ch[j-1];
+    for(int i=1; i<=6; i++)
+      {
+        _rules[2*i-1] = {{2*i-1,2*i-1,1}};
+        _rules[2*i] = {{2*i,2*i,1}};
       }
-      _avCh[i-1] /= (double)i;
-    }
+    _avCh.resize(6);
+    for(int i=1; i<=6; i++)
+      {
+        for(int j=1; j<=i; j++)
+          {
+            _avCh[i-1] += Ch[j-1];
+          }
+        _avCh[i-1] /= (double)i;
+      }
   }
   //_________________________________________________________________________________
-  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_light_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps){
+  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_light_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps)
+  {
     std::map<int,Operator> ClLO;
     std::map<int,Operator> ClNLO;
     std::map<int,Operator> ClNNLO;
@@ -198,32 +202,33 @@ namespace apfel
     //calc the change of basis explicitly
     //PS only enters from O(alpha_S^2) on
 
-    ClLO.insert({      OGLUON , 3.*_avCh[2]*gluon.at(0)});
-    ClNLO.insert({     OGLUON , 3.*_avCh[2]*gluon.at(1)});
-    ClNNLO.insert({    OGLUON , 3.*_avCh[2]*gluon.at(2)});
-    ClLO.insert({  SIGMA + pv , 0.5*_avCh[2]*ns.at(0).at(3)});
-    ClNLO.insert({ SIGMA + pv , 0.5*_avCh[2]*ns.at(1).at(3)});
-    ClNNLO.insert({SIGMA + pv , 0.5*_avCh[2]*(ns.at(2).at(3)+3.*ps.at(2))});
-    ClLO.insert({     T3 + pv , 0.5*(_Ch[0]-_Ch[1])*ns.at(0).at(3)});
-    ClNLO.insert({    T3 + pv , 0.5*(_Ch[0]-_Ch[1])*ns.at(1).at(3)});
-    ClNNLO.insert({   T3 + pv , 0.5*(_Ch[0]-_Ch[1])*ns.at(2).at(3)});
-    ClLO.insert({     T8 + pv , (_Ch[0]+_Ch[1]-2*_Ch[2])/6.*ns.at(0).at(3)});
-    ClNLO.insert({    T8 + pv , (_Ch[0]+_Ch[1]-2*_Ch[2])/6.*ns.at(1).at(3)});
-    ClNNLO.insert({   T8 + pv , (_Ch[0]+_Ch[1]-2*_Ch[2])/6.*ns.at(2).at(3)});
-    ClLO.insert({    T15 + pv , _avCh[2]/4.*ns.at(0).at(3)});
-    ClNLO.insert({   T15 + pv , _avCh[2]/4.*ns.at(1).at(3)});
-    ClNNLO.insert({  T15 + pv , _avCh[2]/4.*(ns.at(2).at(3)+3.*ps.at(2))});
-    ClLO.insert({    T24 + pv , 3.*_avCh[2]/20.*ns.at(0).at(3)});
-    ClNLO.insert({   T24 + pv , 3.*_avCh[2]/20.*ns.at(1).at(3)});
-    ClNNLO.insert({  T24 + pv , 3.*_avCh[2]/20.*(ns.at(2).at(3)+3.*ps.at(2))});
-    ClLO.insert({    T35 + pv , _avCh[2]/10.*ns.at(0).at(3)});
-    ClNLO.insert({   T35 + pv , _avCh[2]/10.*ns.at(1).at(3)});
-    ClNNLO.insert({  T35 + pv , _avCh[2]/10.*(ns.at(2).at(3)+3.*ps.at(2))});
+    ClLO.insert({      OGLUON, 3.*_avCh[2]*gluon.at(0)});
+    ClNLO.insert({     OGLUON, 3.*_avCh[2]*gluon.at(1)});
+    ClNNLO.insert({    OGLUON, 3.*_avCh[2]*gluon.at(2)});
+    ClLO.insert({  SIGMA + pv, 0.5*_avCh[2]*ns.at(0).at(3)});
+    ClNLO.insert({ SIGMA + pv, 0.5*_avCh[2]*ns.at(1).at(3)});
+    ClNNLO.insert({SIGMA + pv, 0.5*_avCh[2]*(ns.at(2).at(3)+3.*ps.at(2))});
+    ClLO.insert({     T3 + pv, 0.5*(_Ch[0]-_Ch[1])*ns.at(0).at(3)});
+    ClNLO.insert({    T3 + pv, 0.5*(_Ch[0]-_Ch[1])*ns.at(1).at(3)});
+    ClNNLO.insert({   T3 + pv, 0.5*(_Ch[0]-_Ch[1])*ns.at(2).at(3)});
+    ClLO.insert({     T8 + pv, (_Ch[0]+_Ch[1]-2*_Ch[2])/6.*ns.at(0).at(3)});
+    ClNLO.insert({    T8 + pv, (_Ch[0]+_Ch[1]-2*_Ch[2])/6.*ns.at(1).at(3)});
+    ClNNLO.insert({   T8 + pv, (_Ch[0]+_Ch[1]-2*_Ch[2])/6.*ns.at(2).at(3)});
+    ClLO.insert({    T15 + pv, _avCh[2]/4.*ns.at(0).at(3)});
+    ClNLO.insert({   T15 + pv, _avCh[2]/4.*ns.at(1).at(3)});
+    ClNNLO.insert({  T15 + pv, _avCh[2]/4.*(ns.at(2).at(3)+3.*ps.at(2))});
+    ClLO.insert({    T24 + pv, 3.*_avCh[2]/20.*ns.at(0).at(3)});
+    ClNLO.insert({   T24 + pv, 3.*_avCh[2]/20.*ns.at(1).at(3)});
+    ClNNLO.insert({  T24 + pv, 3.*_avCh[2]/20.*(ns.at(2).at(3)+3.*ps.at(2))});
+    ClLO.insert({    T35 + pv, _avCh[2]/10.*ns.at(0).at(3)});
+    ClNLO.insert({   T35 + pv, _avCh[2]/10.*ns.at(1).at(3)});
+    ClNNLO.insert({  T35 + pv, _avCh[2]/10.*(ns.at(2).at(3)+3.*ps.at(2))});
     return {ClLO,ClNLO,ClNNLO};
   }
 
   //_________________________________________________________________________________
-  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_charm_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps){
+  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_charm_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps)
+  {
     std::map<int,Operator> CcLO;
     std::map<int,Operator> CcNLO;
     std::map<int,Operator> CcNNLO;
@@ -235,32 +240,33 @@ namespace apfel
     //calc the change of basis explicitly
     //PS only enters from O(alpha_S^2) on
 
-    CcLO.insert({       OGLUON , _Ch[3]*gluon.at(0)});
-    CcNLO.insert({      OGLUON , _Ch[3]*gluon.at(1)});
-    CcNNLO.insert({     OGLUON , _Ch[3]*gluon.at(2)});
-    CcLO.insert({   SIGMA + pv , 2.*_avCh[3]/3.*ns.at(0).at(4)-0.5*_avCh[2]*ns.at(0).at(3)});
-    CcNLO.insert({  SIGMA + pv , 2.*_avCh[3]/3.*ns.at(1).at(4)-0.5*_avCh[2]*ns.at(1).at(3)});
-    CcNNLO.insert({ SIGMA + pv , 2.*_avCh[3]/3.*ns.at(2).at(4)-0.5*_avCh[2]*ns.at(2).at(3)+0.5*(_Ch[3]+4./3.*_avCh[3])*ps.at(2)});
-    CcLO.insert({      T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(0).at(4)-ns.at(0).at(3))});
-    CcNLO.insert({     T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(1).at(4)-ns.at(1).at(3))});
-    CcNNLO.insert({    T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(2).at(4)-ns.at(2).at(3))});
-    CcLO.insert({      T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(0).at(4)-ns.at(0).at(3))});
-    CcNLO.insert({     T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(1).at(4)-ns.at(1).at(3))});
-    CcNNLO.insert({    T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(2).at(4)-ns.at(2).at(3))});
-    CcLO.insert({     T15 + pv , (_avCh[2]-_Ch[3])/4.*ns.at(0).at(4)-_avCh[2]/4.*ns.at(0).at(3)});
-    CcNLO.insert({    T15 + pv , (_avCh[2]-_Ch[3])/4.*ns.at(1).at(4)-_avCh[2]/4.*ns.at(1).at(3)});
-    CcNNLO.insert({   T15 + pv , (_avCh[2]-_Ch[3])/4.*ns.at(2).at(4)-_avCh[2]/4.*ns.at(2).at(3)+(_Ch[3]/4.-_avCh[3])*ps.at(2)});
-    CcLO.insert({     T24 + pv , _avCh[3]/5.*ns.at(0).at(4)-3.*_avCh[2]/20.*ns.at(0).at(3)});
-    CcNLO.insert({    T24 + pv , _avCh[3]/5.*ns.at(1).at(4)-3.*_avCh[2]/20.*ns.at(1).at(3)});
-    CcNNLO.insert({   T24 + pv , _avCh[3]/5.*ns.at(2).at(4)-3.*_avCh[2]/20.*ns.at(2).at(3)+3.*(_Ch[3]+4./3.*_avCh[3])/20.*ps.at(2)});
-    CcLO.insert({     T35 + pv , 2.*_avCh[3]/15.*ns.at(0).at(4)-_avCh[2]/10.*ns.at(0).at(3)});
-    CcNLO.insert({    T35 + pv , 2.*_avCh[3]/15.*ns.at(1).at(4)-_avCh[2]/10.*ns.at(1).at(3)});
-    CcNNLO.insert({   T35 + pv , 2.*_avCh[3]/15.*ns.at(2).at(4)-_avCh[2]/10.*ns.at(2).at(3)+(_Ch[3]+4./3.*_avCh[3])/10.*ps.at(2)});
+    CcLO.insert({       OGLUON, _Ch[3]*gluon.at(0)});
+    CcNLO.insert({      OGLUON, _Ch[3]*gluon.at(1)});
+    CcNNLO.insert({     OGLUON, _Ch[3]*gluon.at(2)});
+    CcLO.insert({   SIGMA + pv, 2.*_avCh[3]/3.*ns.at(0).at(4)-0.5*_avCh[2]*ns.at(0).at(3)});
+    CcNLO.insert({  SIGMA + pv, 2.*_avCh[3]/3.*ns.at(1).at(4)-0.5*_avCh[2]*ns.at(1).at(3)});
+    CcNNLO.insert({ SIGMA + pv, 2.*_avCh[3]/3.*ns.at(2).at(4)-0.5*_avCh[2]*ns.at(2).at(3)+0.5*(_Ch[3]+4./3.*_avCh[3])*ps.at(2)});
+    CcLO.insert({      T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(0).at(4)-ns.at(0).at(3))});
+    CcNLO.insert({     T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(1).at(4)-ns.at(1).at(3))});
+    CcNNLO.insert({    T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(2).at(4)-ns.at(2).at(3))});
+    CcLO.insert({      T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(0).at(4)-ns.at(0).at(3))});
+    CcNLO.insert({     T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(1).at(4)-ns.at(1).at(3))});
+    CcNNLO.insert({    T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(2).at(4)-ns.at(2).at(3))});
+    CcLO.insert({     T15 + pv, (_avCh[2]-_Ch[3])/4.*ns.at(0).at(4)-_avCh[2]/4.*ns.at(0).at(3)});
+    CcNLO.insert({    T15 + pv, (_avCh[2]-_Ch[3])/4.*ns.at(1).at(4)-_avCh[2]/4.*ns.at(1).at(3)});
+    CcNNLO.insert({   T15 + pv, (_avCh[2]-_Ch[3])/4.*ns.at(2).at(4)-_avCh[2]/4.*ns.at(2).at(3)+(_Ch[3]/4.-_avCh[3])*ps.at(2)});
+    CcLO.insert({     T24 + pv, _avCh[3]/5.*ns.at(0).at(4)-3.*_avCh[2]/20.*ns.at(0).at(3)});
+    CcNLO.insert({    T24 + pv, _avCh[3]/5.*ns.at(1).at(4)-3.*_avCh[2]/20.*ns.at(1).at(3)});
+    CcNNLO.insert({   T24 + pv, _avCh[3]/5.*ns.at(2).at(4)-3.*_avCh[2]/20.*ns.at(2).at(3)+3.*(_Ch[3]+4./3.*_avCh[3])/20.*ps.at(2)});
+    CcLO.insert({     T35 + pv, 2.*_avCh[3]/15.*ns.at(0).at(4)-_avCh[2]/10.*ns.at(0).at(3)});
+    CcNLO.insert({    T35 + pv, 2.*_avCh[3]/15.*ns.at(1).at(4)-_avCh[2]/10.*ns.at(1).at(3)});
+    CcNNLO.insert({   T35 + pv, 2.*_avCh[3]/15.*ns.at(2).at(4)-_avCh[2]/10.*ns.at(2).at(3)+(_Ch[3]+4./3.*_avCh[3])/10.*ps.at(2)});
     return {CcLO,CcNLO,CcNNLO};
   }
 
   //_________________________________________________________________________________
-  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_bottom_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps){
+  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_bottom_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps)
+  {
     std::map<int,Operator> CbLO;
     std::map<int,Operator> CbNLO;
     std::map<int,Operator> CbNNLO;
@@ -271,32 +277,33 @@ namespace apfel
     //calc the change of basis explicitly
     //PS only enters from O(alpha_S^2) on
 
-    CbLO.insert({       OGLUON , _Ch[4]*gluon.at(0)});
-    CbNLO.insert({      OGLUON , _Ch[4]*gluon.at(1)});
-    CbNNLO.insert({     OGLUON , _Ch[4]*gluon.at(2)});
-    CbLO.insert({   SIGMA + pv , 5.*_avCh[4]/6.*ns.at(0).at(5)-2.*_avCh[3]/3.*ns.at(0).at(4)});
-    CbNLO.insert({  SIGMA + pv , 5.*_avCh[4]/6.*ns.at(1).at(5)-2.*_avCh[3]/3.*ns.at(1).at(4)});
-    CbNNLO.insert({ SIGMA + pv , 5.*_avCh[4]/6.*ns.at(2).at(5)-2.*_avCh[3]/3.*ns.at(2).at(4)+2.*(_Ch[4]+5./4.*_avCh[4])/3.*ps.at(2)});
-    CbLO.insert({      T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(0).at(5)-ns.at(0).at(4))});
-    CbNLO.insert({     T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(1).at(5)-ns.at(1).at(4))});
-    CbNNLO.insert({    T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(2).at(5)-ns.at(2).at(4))});
-    CbLO.insert({      T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(0).at(5)-ns.at(0).at(4))});
-    CbNLO.insert({     T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(1).at(5)-ns.at(1).at(4))});
-    CbNNLO.insert({    T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(2).at(5)-ns.at(2).at(4))});
-    CbLO.insert({     T15 + pv , (_avCh[2]-_Ch[3])/4.*(ns.at(0).at(5)-ns.at(0).at(4))});
-    CbNLO.insert({    T15 + pv , (_avCh[2]-_Ch[3])/4.*(ns.at(1).at(5)-ns.at(1).at(4))});
-    CbNNLO.insert({   T15 + pv , (_avCh[2]-_Ch[3])/4.*(ns.at(2).at(5)-ns.at(2).at(4))});
-    CbLO.insert({     T24 + pv , (_avCh[3]-_Ch[4])/5.*ns.at(0).at(5)-_avCh[3]/5.*ns.at(0).at(4)});
-    CbNLO.insert({    T24 + pv , (_avCh[3]-_Ch[4])/5.*ns.at(1).at(5)-_avCh[3]/5.*ns.at(1).at(4)});
-    CbNNLO.insert({   T24 + pv , (_avCh[3]-_Ch[4])/5.*ns.at(2).at(5)-_avCh[3]/5.*ns.at(2).at(4)+(_Ch[4]-5.*_avCh[4])/5.*ps.at(2)});
-    CbLO.insert({     T35 + pv , _avCh[4]/6.*ns.at(0).at(5)-2.*_avCh[3]/15.*ns.at(0).at(4)});
-    CbNLO.insert({    T35 + pv , _avCh[4]/6.*ns.at(1).at(5)-2.*_avCh[3]/15.*ns.at(1).at(4)});
-    CbNNLO.insert({   T35 + pv , _avCh[4]/6.*ns.at(2).at(5)-2.*_avCh[3]/15.*ns.at(2).at(4)+2.*(_Ch[4]+5./4.*_avCh[4])/15.*ps.at(2)});
+    CbLO.insert({       OGLUON, _Ch[4]*gluon.at(0)});
+    CbNLO.insert({      OGLUON, _Ch[4]*gluon.at(1)});
+    CbNNLO.insert({     OGLUON, _Ch[4]*gluon.at(2)});
+    CbLO.insert({   SIGMA + pv, 5.*_avCh[4]/6.*ns.at(0).at(5)-2.*_avCh[3]/3.*ns.at(0).at(4)});
+    CbNLO.insert({  SIGMA + pv, 5.*_avCh[4]/6.*ns.at(1).at(5)-2.*_avCh[3]/3.*ns.at(1).at(4)});
+    CbNNLO.insert({ SIGMA + pv, 5.*_avCh[4]/6.*ns.at(2).at(5)-2.*_avCh[3]/3.*ns.at(2).at(4)+2.*(_Ch[4]+5./4.*_avCh[4])/3.*ps.at(2)});
+    CbLO.insert({      T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(0).at(5)-ns.at(0).at(4))});
+    CbNLO.insert({     T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(1).at(5)-ns.at(1).at(4))});
+    CbNNLO.insert({    T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(2).at(5)-ns.at(2).at(4))});
+    CbLO.insert({      T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(0).at(5)-ns.at(0).at(4))});
+    CbNLO.insert({     T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(1).at(5)-ns.at(1).at(4))});
+    CbNNLO.insert({    T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(2).at(5)-ns.at(2).at(4))});
+    CbLO.insert({     T15 + pv, (_avCh[2]-_Ch[3])/4.*(ns.at(0).at(5)-ns.at(0).at(4))});
+    CbNLO.insert({    T15 + pv, (_avCh[2]-_Ch[3])/4.*(ns.at(1).at(5)-ns.at(1).at(4))});
+    CbNNLO.insert({   T15 + pv, (_avCh[2]-_Ch[3])/4.*(ns.at(2).at(5)-ns.at(2).at(4))});
+    CbLO.insert({     T24 + pv, (_avCh[3]-_Ch[4])/5.*ns.at(0).at(5)-_avCh[3]/5.*ns.at(0).at(4)});
+    CbNLO.insert({    T24 + pv, (_avCh[3]-_Ch[4])/5.*ns.at(1).at(5)-_avCh[3]/5.*ns.at(1).at(4)});
+    CbNNLO.insert({   T24 + pv, (_avCh[3]-_Ch[4])/5.*ns.at(2).at(5)-_avCh[3]/5.*ns.at(2).at(4)+(_Ch[4]-5.*_avCh[4])/5.*ps.at(2)});
+    CbLO.insert({     T35 + pv, _avCh[4]/6.*ns.at(0).at(5)-2.*_avCh[3]/15.*ns.at(0).at(4)});
+    CbNLO.insert({    T35 + pv, _avCh[4]/6.*ns.at(1).at(5)-2.*_avCh[3]/15.*ns.at(1).at(4)});
+    CbNNLO.insert({   T35 + pv, _avCh[4]/6.*ns.at(2).at(5)-2.*_avCh[3]/15.*ns.at(2).at(4)+2.*(_Ch[4]+5./4.*_avCh[4])/15.*ps.at(2)});
     return {CbLO,CbNLO,CbNNLO};
   }
 
   //_________________________________________________________________________________
-  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_top_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps){
+  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_top_operators(bool isPV, std::vector<Operator> gluon, std::vector<std::map<int,Operator>> ns, std::vector<Operator> ps)
+  {
     std::map<int,Operator> CtLO;
     std::map<int,Operator> CtNLO;
     std::map<int,Operator> CtNNLO;
@@ -307,32 +314,33 @@ namespace apfel
     //calc the change of basis explicitly
     //PS only enters from O(alpha_S^2) on
 
-    CtLO.insert({       OGLUON , _Ch[5]*gluon.at(0)});
-    CtNLO.insert({      OGLUON , _Ch[5]*gluon.at(1)});
-    CtNNLO.insert({     OGLUON , _Ch[5]*gluon.at(2)});
-    CtLO.insert({   SIGMA + pv , _avCh[5]*ns.at(0).at(6)-5.*_avCh[4]/6.*ns.at(0).at(5)});
-    CtNLO.insert({  SIGMA + pv , _avCh[5]*ns.at(1).at(6)-5.*_avCh[4]/6.*ns.at(1).at(5)});
-    CtNNLO.insert({ SIGMA + pv , _avCh[5]*ns.at(2).at(6)-5.*_avCh[4]/6.*ns.at(2).at(5)+5.*(_Ch[5]+6./5.*_avCh[5])/6.*ps.at(2)});
-    CtLO.insert({      T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(0).at(6)-ns.at(0).at(5))});
-    CtNLO.insert({     T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(1).at(6)-ns.at(1).at(5))});
-    CtNNLO.insert({    T3 + pv , (_avCh[0]-_Ch[1])/2.*(ns.at(2).at(6)-ns.at(2).at(5))});
-    CtLO.insert({      T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(0).at(6)-ns.at(0).at(5))});
-    CtNLO.insert({     T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(1).at(6)-ns.at(1).at(5))});
-    CtNNLO.insert({    T8 + pv , (_avCh[1]-_Ch[2])/3.*(ns.at(2).at(6)-ns.at(2).at(5))});
-    CtLO.insert({     T15 + pv , (_avCh[2]-_Ch[3])/4.*(ns.at(0).at(6)-ns.at(0).at(5))});
-    CtNLO.insert({    T15 + pv , (_avCh[2]-_Ch[3])/4.*(ns.at(1).at(6)-ns.at(1).at(5))});
-    CtNNLO.insert({   T15 + pv , (_avCh[2]-_Ch[3])/4.*(ns.at(2).at(6)-ns.at(2).at(5))});
-    CtLO.insert({     T24 + pv , (_avCh[3]-_Ch[4])/5.*(ns.at(0).at(6)-ns.at(0).at(5))});
-    CtNLO.insert({    T24 + pv , (_avCh[3]-_Ch[4])/5.*(ns.at(1).at(6)-ns.at(1).at(5))});
-    CtNNLO.insert({   T24 + pv , (_avCh[3]-_Ch[4])/5.*(ns.at(2).at(6)-ns.at(2).at(5))});
-    CtLO.insert({     T35 + pv , (_avCh[4]-_Ch[5])/6.*ns.at(0).at(6)-_avCh[4]/6.*ns.at(0).at(5)});
-    CtNLO.insert({    T35 + pv , (_avCh[4]-_Ch[5])/6.*ns.at(1).at(6)-_avCh[4]/6.*ns.at(1).at(5)});
-    CtNNLO.insert({   T35 + pv , (_avCh[4]-_Ch[5])/6.*ns.at(2).at(6)-_avCh[4]/6.*ns.at(2).at(5)+(_Ch[5]-6.*_avCh[5])/6.*ps.at(2)});
+    CtLO.insert({       OGLUON, _Ch[5]*gluon.at(0)});
+    CtNLO.insert({      OGLUON, _Ch[5]*gluon.at(1)});
+    CtNNLO.insert({     OGLUON, _Ch[5]*gluon.at(2)});
+    CtLO.insert({   SIGMA + pv, _avCh[5]*ns.at(0).at(6)-5.*_avCh[4]/6.*ns.at(0).at(5)});
+    CtNLO.insert({  SIGMA + pv, _avCh[5]*ns.at(1).at(6)-5.*_avCh[4]/6.*ns.at(1).at(5)});
+    CtNNLO.insert({ SIGMA + pv, _avCh[5]*ns.at(2).at(6)-5.*_avCh[4]/6.*ns.at(2).at(5)+5.*(_Ch[5]+6./5.*_avCh[5])/6.*ps.at(2)});
+    CtLO.insert({      T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(0).at(6)-ns.at(0).at(5))});
+    CtNLO.insert({     T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(1).at(6)-ns.at(1).at(5))});
+    CtNNLO.insert({    T3 + pv, (_avCh[0]-_Ch[1])/2.*(ns.at(2).at(6)-ns.at(2).at(5))});
+    CtLO.insert({      T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(0).at(6)-ns.at(0).at(5))});
+    CtNLO.insert({     T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(1).at(6)-ns.at(1).at(5))});
+    CtNNLO.insert({    T8 + pv, (_avCh[1]-_Ch[2])/3.*(ns.at(2).at(6)-ns.at(2).at(5))});
+    CtLO.insert({     T15 + pv, (_avCh[2]-_Ch[3])/4.*(ns.at(0).at(6)-ns.at(0).at(5))});
+    CtNLO.insert({    T15 + pv, (_avCh[2]-_Ch[3])/4.*(ns.at(1).at(6)-ns.at(1).at(5))});
+    CtNNLO.insert({   T15 + pv, (_avCh[2]-_Ch[3])/4.*(ns.at(2).at(6)-ns.at(2).at(5))});
+    CtLO.insert({     T24 + pv, (_avCh[3]-_Ch[4])/5.*(ns.at(0).at(6)-ns.at(0).at(5))});
+    CtNLO.insert({    T24 + pv, (_avCh[3]-_Ch[4])/5.*(ns.at(1).at(6)-ns.at(1).at(5))});
+    CtNNLO.insert({   T24 + pv, (_avCh[3]-_Ch[4])/5.*(ns.at(2).at(6)-ns.at(2).at(5))});
+    CtLO.insert({     T35 + pv, (_avCh[4]-_Ch[5])/6.*ns.at(0).at(6)-_avCh[4]/6.*ns.at(0).at(5)});
+    CtNLO.insert({    T35 + pv, (_avCh[4]-_Ch[5])/6.*ns.at(1).at(6)-_avCh[4]/6.*ns.at(1).at(5)});
+    CtNNLO.insert({   T35 + pv, (_avCh[4]-_Ch[5])/6.*ns.at(2).at(6)-_avCh[4]/6.*ns.at(2).at(5)+(_Ch[5]-6.*_avCh[5])/6.*ps.at(2)});
     return {CtLO,CtNLO,CtNNLO};
   }
 
   //_________________________________________________________________________________
-  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_tot_operators(bool isPV, std::vector<std::vector<std::map<int,Operator>>> coeff){
+  std::vector<std::map<int,Operator>> DISNCBasis_ACOT::get_tot_operators(bool isPV, std::vector<std::vector<std::map<int,Operator>>> coeff)
+  {
     std::map<int,Operator> CLO;
     std::map<int,Operator> CNLO;
     std::map<int,Operator> CNNLO;
@@ -342,27 +350,27 @@ namespace apfel
 
     //simply add all coefficients from all contributions for each distribution
 
-    CLO.insert({       OGLUON , coeff[0][0].at(OGLUON)+coeff[1][0].at(OGLUON)+coeff[2][0].at(OGLUON)+coeff[3][0].at(OGLUON)});
-    CNLO.insert({      OGLUON , coeff[0][1].at(OGLUON)+coeff[1][1].at(OGLUON)+coeff[2][1].at(OGLUON)+coeff[3][1].at(OGLUON)});
-    CNNLO.insert({     OGLUON , coeff[0][2].at(OGLUON)+coeff[1][2].at(OGLUON)+coeff[2][2].at(OGLUON)+coeff[3][2].at(OGLUON)});
-    CLO.insert({   SIGMA + pv , coeff[0][0].at(SIGMA + pv)+coeff[1][0].at(SIGMA + pv)+coeff[2][0].at(SIGMA + pv)+coeff[3][0].at(SIGMA + pv)});
-    CNLO.insert({  SIGMA + pv , coeff[0][1].at(SIGMA + pv)+coeff[1][1].at(SIGMA + pv)+coeff[2][1].at(SIGMA + pv)+coeff[3][1].at(SIGMA + pv)});
-    CNNLO.insert({ SIGMA + pv , coeff[0][2].at(SIGMA + pv)+coeff[1][2].at(SIGMA + pv)+coeff[2][2].at(SIGMA + pv)+coeff[3][2].at(SIGMA + pv)});
-    CLO.insert({      T3 + pv , coeff[0][0].at(T3 + pv)+coeff[1][0].at(T3 + pv)+coeff[2][0].at(T3 + pv)+coeff[3][0].at(T3 + pv)});
-    CNLO.insert({     T3 + pv , coeff[0][1].at(T3 + pv)+coeff[1][1].at(T3 + pv)+coeff[2][1].at(T3 + pv)+coeff[3][1].at(T3 + pv)});
-    CNNLO.insert({    T3 + pv , coeff[0][2].at(T3 + pv)+coeff[1][2].at(T3 + pv)+coeff[2][2].at(T3 + pv)+coeff[3][2].at(T3 + pv)});
-    CLO.insert({      T8 + pv , coeff[0][0].at(T8 + pv)+coeff[1][0].at(T8 + pv)+coeff[2][0].at(T8 + pv)+coeff[3][0].at(T8 + pv)});
-    CNLO.insert({     T8 + pv , coeff[0][1].at(T8 + pv)+coeff[1][1].at(T8 + pv)+coeff[2][1].at(T8 + pv)+coeff[3][1].at(T8 + pv)});
-    CNNLO.insert({    T8 + pv , coeff[0][2].at(T8 + pv)+coeff[1][2].at(T8 + pv)+coeff[2][2].at(T8 + pv)+coeff[3][2].at(T8 + pv)});
-    CLO.insert({     T15 + pv , coeff[0][0].at(T15 + pv)+coeff[1][0].at(T15 + pv)+coeff[2][0].at(T15 + pv)+coeff[3][0].at(T15 + pv)});
-    CNLO.insert({    T15 + pv , coeff[0][1].at(T15 + pv)+coeff[1][1].at(T15 + pv)+coeff[2][1].at(T15 + pv)+coeff[3][1].at(T15 + pv)});
-    CNNLO.insert({   T15 + pv , coeff[0][2].at(T15 + pv)+coeff[1][2].at(T15 + pv)+coeff[2][2].at(T15 + pv)+coeff[3][2].at(T15 + pv)});
-    CLO.insert({     T24 + pv , coeff[0][0].at(T24 + pv)+coeff[1][0].at(T24 + pv)+coeff[2][0].at(T24 + pv)+coeff[3][0].at(T24 + pv)});
-    CNLO.insert({    T24 + pv , coeff[0][1].at(T24 + pv)+coeff[1][1].at(T24 + pv)+coeff[2][1].at(T24 + pv)+coeff[3][1].at(T24 + pv)});
-    CNNLO.insert({   T24 + pv , coeff[0][2].at(T24 + pv)+coeff[1][2].at(T24 + pv)+coeff[2][2].at(T24 + pv)+coeff[3][2].at(T24 + pv)});
-    CLO.insert({     T35 + pv , coeff[0][0].at(T35 + pv)+coeff[1][0].at(T35 + pv)+coeff[2][0].at(T35 + pv)+coeff[3][0].at(T35 + pv)});
-    CNLO.insert({    T35 + pv , coeff[0][1].at(T35 + pv)+coeff[1][1].at(T35 + pv)+coeff[2][1].at(T35 + pv)+coeff[3][1].at(T35 + pv)});
-    CNNLO.insert({   T35 + pv , coeff[0][2].at(T35 + pv)+coeff[1][2].at(T35 + pv)+coeff[2][2].at(T35 + pv)+coeff[3][2].at(T35 + pv)});
+    CLO.insert({       OGLUON, coeff[0][0].at(OGLUON)+coeff[1][0].at(OGLUON)+coeff[2][0].at(OGLUON)+coeff[3][0].at(OGLUON)});
+    CNLO.insert({      OGLUON, coeff[0][1].at(OGLUON)+coeff[1][1].at(OGLUON)+coeff[2][1].at(OGLUON)+coeff[3][1].at(OGLUON)});
+    CNNLO.insert({     OGLUON, coeff[0][2].at(OGLUON)+coeff[1][2].at(OGLUON)+coeff[2][2].at(OGLUON)+coeff[3][2].at(OGLUON)});
+    CLO.insert({   SIGMA + pv, coeff[0][0].at(SIGMA + pv)+coeff[1][0].at(SIGMA + pv)+coeff[2][0].at(SIGMA + pv)+coeff[3][0].at(SIGMA + pv)});
+    CNLO.insert({  SIGMA + pv, coeff[0][1].at(SIGMA + pv)+coeff[1][1].at(SIGMA + pv)+coeff[2][1].at(SIGMA + pv)+coeff[3][1].at(SIGMA + pv)});
+    CNNLO.insert({ SIGMA + pv, coeff[0][2].at(SIGMA + pv)+coeff[1][2].at(SIGMA + pv)+coeff[2][2].at(SIGMA + pv)+coeff[3][2].at(SIGMA + pv)});
+    CLO.insert({      T3 + pv, coeff[0][0].at(T3 + pv)+coeff[1][0].at(T3 + pv)+coeff[2][0].at(T3 + pv)+coeff[3][0].at(T3 + pv)});
+    CNLO.insert({     T3 + pv, coeff[0][1].at(T3 + pv)+coeff[1][1].at(T3 + pv)+coeff[2][1].at(T3 + pv)+coeff[3][1].at(T3 + pv)});
+    CNNLO.insert({    T3 + pv, coeff[0][2].at(T3 + pv)+coeff[1][2].at(T3 + pv)+coeff[2][2].at(T3 + pv)+coeff[3][2].at(T3 + pv)});
+    CLO.insert({      T8 + pv, coeff[0][0].at(T8 + pv)+coeff[1][0].at(T8 + pv)+coeff[2][0].at(T8 + pv)+coeff[3][0].at(T8 + pv)});
+    CNLO.insert({     T8 + pv, coeff[0][1].at(T8 + pv)+coeff[1][1].at(T8 + pv)+coeff[2][1].at(T8 + pv)+coeff[3][1].at(T8 + pv)});
+    CNNLO.insert({    T8 + pv, coeff[0][2].at(T8 + pv)+coeff[1][2].at(T8 + pv)+coeff[2][2].at(T8 + pv)+coeff[3][2].at(T8 + pv)});
+    CLO.insert({     T15 + pv, coeff[0][0].at(T15 + pv)+coeff[1][0].at(T15 + pv)+coeff[2][0].at(T15 + pv)+coeff[3][0].at(T15 + pv)});
+    CNLO.insert({    T15 + pv, coeff[0][1].at(T15 + pv)+coeff[1][1].at(T15 + pv)+coeff[2][1].at(T15 + pv)+coeff[3][1].at(T15 + pv)});
+    CNNLO.insert({   T15 + pv, coeff[0][2].at(T15 + pv)+coeff[1][2].at(T15 + pv)+coeff[2][2].at(T15 + pv)+coeff[3][2].at(T15 + pv)});
+    CLO.insert({     T24 + pv, coeff[0][0].at(T24 + pv)+coeff[1][0].at(T24 + pv)+coeff[2][0].at(T24 + pv)+coeff[3][0].at(T24 + pv)});
+    CNLO.insert({    T24 + pv, coeff[0][1].at(T24 + pv)+coeff[1][1].at(T24 + pv)+coeff[2][1].at(T24 + pv)+coeff[3][1].at(T24 + pv)});
+    CNNLO.insert({   T24 + pv, coeff[0][2].at(T24 + pv)+coeff[1][2].at(T24 + pv)+coeff[2][2].at(T24 + pv)+coeff[3][2].at(T24 + pv)});
+    CLO.insert({     T35 + pv, coeff[0][0].at(T35 + pv)+coeff[1][0].at(T35 + pv)+coeff[2][0].at(T35 + pv)+coeff[3][0].at(T35 + pv)});
+    CNLO.insert({    T35 + pv, coeff[0][1].at(T35 + pv)+coeff[1][1].at(T35 + pv)+coeff[2][1].at(T35 + pv)+coeff[3][1].at(T35 + pv)});
+    CNNLO.insert({   T35 + pv, coeff[0][2].at(T35 + pv)+coeff[1][2].at(T35 + pv)+coeff[2][2].at(T35 + pv)+coeff[3][2].at(T35 + pv)});
 
     return {CLO,CNLO,CNNLO};
   }
@@ -377,47 +385,60 @@ namespace apfel
       throw std::runtime_error(error("DISCCBasis_ACOT", "The CKM matrix has to have 9 entries."));
 
     _rules[0] = {{0,0,1}};
-    for(int i=1;i<=6;i++){
-      // apply convention factor of 1/2
-      _rules[2*i-1] = {{2*i-1,2*i-1,0.5}};
-      _rules[2*i] = {{2*i,2*i,0.5}};
-    }
+    for(int i=1; i<=6; i++)
+      {
+        // apply convention factor of 1/2
+        _rules[2*i-1] = {{2*i-1,2*i-1,0.5}};
+        _rules[2*i] = {{2*i,2*i,0.5}};
+      }
   }
 
 
-  std::vector<std::map<int,Operator>> DISCCBasis_ACOT::get_operators_plus(std::vector<std::map<int,Operator>> op_map){
+  std::vector<std::map<int,Operator>> DISCCBasis_ACOT::get_operators_plus(std::vector<std::map<int,Operator>> op_map)
+  {
     std::vector<std::map<int,Operator>> Coef(3);
-    for(int k=0; k<3; k++){
-      for(int j=SIGMA;j<=T35;j+=2){
-        Coef.at(k).insert({j,_Zero});
+    for(int k=0; k<3; k++)
+      {
+        for(int j=SIGMA; j<=T35; j+=2)
+          {
+            Coef.at(k).insert({j,_Zero});
+          }
       }
-    }
-    for(int k=0; k<3; k++){
-      Coef.at(k).insert({GLUON, op_map.at(k).at(GLUON)});
-      for(int i=DOWN; i<=TOP; i++){
-        for(int j=SIGMA; j<=T35; j+=2){
-          Coef.at(k).at(j) += RotQCDEvToPhys[i][(j-1)/2]*op_map.at(k).at(i+1);
-        }
+    for(int k=0; k<3; k++)
+      {
+        Coef.at(k).insert({GLUON, op_map.at(k).at(GLUON)});
+        for(int i=DOWN; i<=TOP; i++)
+          {
+            for(int j=SIGMA; j<=T35; j+=2)
+              {
+                Coef.at(k).at(j) += RotQCDEvToPhys[i][(j-1)/2]*op_map.at(k).at(i+1);
+              }
+          }
       }
-    }
     return Coef;
   }
 
-  std::vector<std::map<int,Operator>> DISCCBasis_ACOT::get_operators_minus(std::vector<std::map<int,Operator>> op_map){
+  std::vector<std::map<int,Operator>> DISCCBasis_ACOT::get_operators_minus(std::vector<std::map<int,Operator>> op_map)
+  {
     std::vector<std::map<int,Operator>> Coef(3);
-    for(int k=0; k<3; k++){
-      Coef.at(k).insert({GLUON,_Zero});
-      for(int j=VALENCE;j<=V35;j+=2){
-        Coef.at(k).insert({j,_Zero});
+    for(int k=0; k<3; k++)
+      {
+        Coef.at(k).insert({GLUON,_Zero});
+        for(int j=VALENCE; j<=V35; j+=2)
+          {
+            Coef.at(k).insert({j,_Zero});
+          }
       }
-    }
-    for(int k=0; k<3; k++){
-      for(int i=DOWN; i<=TOP; i++){
-        for(int j=VALENCE; j<=V35; j+=2){
-          Coef.at(k).at(j) += RotQCDEvToPhys[i][(j-2)/2]*op_map.at(k).at(i+1);
-        }
+    for(int k=0; k<3; k++)
+      {
+        for(int i=DOWN; i<=TOP; i++)
+          {
+            for(int j=VALENCE; j<=V35; j+=2)
+              {
+                Coef.at(k).at(j) += RotQCDEvToPhys[i][(j-2)/2]*op_map.at(k).at(i+1);
+              }
+          }
       }
-    }
     return Coef;
   }
 }

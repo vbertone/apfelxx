@@ -8,14 +8,17 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  Cm20qNC_ACOT::Cm20qNC_ACOT(double const& eta): Expression(eta,true){
+  Cm20qNC_ACOT::Cm20qNC_ACOT(double const& eta): Expression(eta,true)
+  {
     _xi = 4./(std::pow((2./eta-1),2)-1);
   }
 
-  double Cm20qNC_ACOT::Local(double const& x) const{
-    if(x>=1){
-      return 0;
-    }
+  double Cm20qNC_ACOT::Local(double const& x) const
+  {
+    if(x>=1)
+      {
+        return 0;
+      }
     return std::sqrt(1+4/_xi);
   }
 
@@ -38,17 +41,20 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm21gNC_sub_ACOT::Cm21gNC_sub_ACOT(double const& eta): Expression(eta,true){
+  Cm21gNC_sub_ACOT::Cm21gNC_sub_ACOT(double const& eta): Expression(eta,true)
+  {
     _xi = 4/(std::pow((2./eta-1),2)-1);
   }
 
-  double Cm21gNC_sub_ACOT::Regular(double const& z) const{
+  double Cm21gNC_sub_ACOT::Regular(double const& z) const
+  {
     return 4 * TR *std::sqrt(1+4/_xi)* ( 1 - 2 * z + 2 * z * z );
   }
 
 
   //_________________________________________________________________________________
-  Cm21qNC_ACOT::Cm21qNC_ACOT(double const& eta): Expression(eta,true){
+  Cm21qNC_ACOT::Cm21qNC_ACOT(double const& eta): Expression(eta,true)
+  {
     _xi = 4/(std::pow((2./eta-1),2)-1);
     double D = std::sqrt(1+4/_xi);
     double D2 = D*D;
@@ -62,26 +68,29 @@ namespace apfel
     double log2_sum =  std::pow(std::log(0.5*(D+Spm)),2);
     double Li2_diff = dilog(0.5*(D-Spm)/D);
     double Li2_sum = dilog(0.5*(D+Spm)/D);
-    
+
     _S2 = 2 + Spp*(I1*D+Li2deltaOdiff-Li2deltaOsum)/D
-                  + log_1*(Spp*I1-2);
-    _V2 = (0.5*D2 + Spp*(1+std::log(1/D)))*I1 + 2*std::log(1/_xi) 
-                - 4 + Spp*(log2_diff-log2_sum-2*Li2_diff + 2*Li2_sum)/D;
+          + log_1*(Spp*I1-2);
+    _V2 = (0.5*D2 + Spp*(1+std::log(1/D)))*I1 + 2*std::log(1/_xi)
+          - 4 + Spp*(log2_diff-log2_sum-2*Li2_diff + 2*Li2_sum)/D;
     _sud = 2*(Spp*std::log((Spp+D)/(Spp-D))-2*D)/D;
   }
 
-  double Cm21qNC_ACOT::Local(double const& z) const{
-    if(z>=1-eps4){
-      return 0;
-    }
+  double Cm21qNC_ACOT::Local(double const& z) const
+  {
+    if(z>=1-eps4)
+      {
+        return 0;
+      }
     const Integrator Integrand{[&] (double const& z)->double{
-      return (g(z)-_sud)/(1-z);
-    }};
+        return (g(z)-_sud)/(1-z);
+      }};
     double extra_int = Integrand.integrate(z,1,eps5);
     return 2*apfel::CF*std::sqrt(1+4/_xi)*(_S2+_V2+_sud*std::log(1-z)+extra_int)/(1.+1./_xi);
   }
 
-  double Cm21qNC_ACOT::g(double const& x) const{
+  double Cm21qNC_ACOT::g(double const& x) const
+  {
     double epsi = 1/_xi;
     double z = x;
     double Spp = 1+2*epsi;
@@ -107,22 +116,27 @@ namespace apfel
     return (1-x)*pref*fQ2;
   }
 
-  double Cm21qNC_ACOT::Singular(double const& z) const{
-    if(z>=1){
-      return 0;
-    }
+  double Cm21qNC_ACOT::Singular(double const& z) const
+  {
+    if(z>=1)
+      {
+        return 0;
+      }
     return 2*apfel::CF*std::sqrt(1+4/_xi)*g(z)/(1-z)/(1.+1./_xi);
   }
 
   //_________________________________________________________________________________
-  Cm21qNC_sub_ACOT::Cm21qNC_sub_ACOT(double const& eta): Expression(eta,true){
+  Cm21qNC_sub_ACOT::Cm21qNC_sub_ACOT(double const& eta): Expression(eta,true)
+  {
     _xi = 4/(std::pow((2./eta-1),2)-1);
   }
 
-  double Cm21qNC_sub_ACOT::Local(double const& z) const{
-    if(z>=1){
-      return 0;
-    }
+  double Cm21qNC_sub_ACOT::Local(double const& z) const
+  {
+    if(z>=1)
+      {
+        return 0;
+      }
     double lnxi = std::log(_xi);
     double ln1mz = std::log(1-z);
     double term1 = -ln1mz*(z*(z+2)+2*ln1mz-1) + 2*z;
@@ -130,10 +144,12 @@ namespace apfel
     return 2 * apfel::CF * std::sqrt(1+4/_xi)* (term1+term2)/(1.+1./_xi);
   }
 
-  double Cm21qNC_sub_ACOT::Singular(double const& z) const {
-    if(z>=1){
-      return 0;
-    }
+  double Cm21qNC_sub_ACOT::Singular(double const& z) const
+  {
+    if(z>=1)
+      {
+        return 0;
+      }
     double lnxi = std::log(_xi);
     double ln1mz = std::log(1-z);
     double term1 = (1+z*z)*(lnxi-1-2*ln1mz)/(1-z);
@@ -147,9 +163,10 @@ namespace apfel
   }
   double CmL1gNC_ACOT::Regular(double const& x) const
   {
-    if (x >= 1){
-      return 0;
-    }
+    if (x >= 1)
+      {
+        return 0;
+      }
     const double eta   = this->_eta;
     const double z     = eta * x;
     const double z2    = z * z;
@@ -160,21 +177,25 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm20qNC_ACOT_chi::Cm20qNC_ACOT_chi(double const& eta): Expression(eta,true){}
+  Cm20qNC_ACOT_chi::Cm20qNC_ACOT_chi(double const& eta): Expression(eta,true) {}
 
-  double Cm20qNC_ACOT_chi::Local(double const& x) const{
-    if(x>=1){
-      return 0;
-    }
+  double Cm20qNC_ACOT_chi::Local(double const& x) const
+  {
+    if(x>=1)
+      {
+        return 0;
+      }
     return 1;
   }
 
   //_________________________________________________________________________________
-  Cm21gNC_sub_ACOT_chi::Cm21gNC_sub_ACOT_chi(double const& eta): Expression(eta,true){
+  Cm21gNC_sub_ACOT_chi::Cm21gNC_sub_ACOT_chi(double const& eta): Expression(eta,true)
+  {
 
   }
 
-  double Cm21gNC_sub_ACOT_chi::Regular(double const& z) const{
+  double Cm21gNC_sub_ACOT_chi::Regular(double const& z) const
+  {
     return 4 * TR * ( 1 - 2 * z + 2 * z * z );
   }
 
@@ -185,9 +206,10 @@ namespace apfel
   }
   double Cm21qNC_ACOT_chi::Singular(double const& z) const
   {
-    if(z>1){
-      return 0;
-    }
+    if(z>1)
+      {
+        return 0;
+      }
     return 2 * apfel::CF *( (1+z*z)*(log((1-z)/z)-3./4.)/(1-z) + (9.+5*z)/4.);
   }
   double Cm21qNC_ACOT_chi::Local(double const& z) const
@@ -230,13 +252,14 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm21gCC_sub_ACOT::Cm21gCC_sub_ACOT(double const& eta, double const& xi): 
+  Cm21gCC_sub_ACOT::Cm21gCC_sub_ACOT(double const& eta, double const& xi):
     Expression(eta,true),
     _xi(xi)
   {
   }
 
-  double Cm21gCC_sub_ACOT::Regular(double const& z) const{
+  double Cm21gCC_sub_ACOT::Regular(double const& z) const
+  {
     return 4 * TR *  ( 1 - 2 * z + 2 * z * z );
   }
 
@@ -249,7 +272,8 @@ namespace apfel
   {
   }
 
-  double Cm21gCC_general_mass::Regular(double const& x) const{    
+  double Cm21gCC_general_mass::Regular(double const& x) const
+  {
     const double Q = sqrt(_xi)*(_m1+_m2);
 
     const double m1 = _m1/Q;
@@ -295,8 +319,9 @@ namespace apfel
   {
   }
 
-  double CmL1gCC_general_mass::Regular(double const& x) const{    
-    //TODO 
+  double CmL1gCC_general_mass::Regular(double const& x) const
+  {
+    //TODO
     //can be calculated analytically!
     const double Q = sqrt(_xi)*(_m1+_m2);
 
@@ -337,7 +362,7 @@ namespace apfel
     const double termF1_3 = pow(m12-m22,2)*2*z2;
 
     const double termF1_4 = (1-2*z1mz+(m22-m12)*2*z*(1-2*z));
-    const double termF1_5 = termF1_3; //termF1_3 is symmetric 
+    const double termF1_5 = termF1_3; //termF1_3 is symmetric
 
     const double result1 = nu*nub*(termF2_1-termF1_1);
     const double result2 = termF2_2+termF2_3+termF2_4 - termF1_2 - termF1_3;
@@ -357,7 +382,8 @@ namespace apfel
   {
   }
 
-  double Cm31gCC_general_mass::Regular(double const& x) const{    
+  double Cm31gCC_general_mass::Regular(double const& x) const
+  {
     const double Q = sqrt(_xi)*(_m1+_m2);
 
     const double m1 = _m1/Q;
@@ -392,10 +418,11 @@ namespace apfel
   /// F2-minus
   //_________________________________________________________________________________
   C22nsm_aSACOT_chi_0::C22nsm_aSACOT_chi_0(double const& eta, bool const& xdependent):
-      Expression((xdependent ? eta : 1.),xdependent)
-    {}
+    Expression((xdependent ? eta : 1.),xdependent)
+  {}
 
-  double C22nsm_aSACOT_chi_0::Regular(double const& x) const{
+  double C22nsm_aSACOT_chi_0::Regular(double const& x) const
+  {
     double const dl      = log(x);
     double const dl_2    = dl * dl;
     double const dl_3    = dl_2 * dl;
@@ -407,7 +434,8 @@ namespace apfel
       - 17.19 * dl1_3 + 71.08 * dl1_2 - 663.0 * dl1 - 192.4 * dl * dl1_2 + 80.41 * dl_2 * dl1;
   }
 
-  double C22nsm_aSACOT_chi_0::Singular(double const& x) const{
+  double C22nsm_aSACOT_chi_0::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
@@ -416,7 +444,8 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C22nsm_aSACOT_chi_0::Local(double const& x) const{
+  double C22nsm_aSACOT_chi_0::Local(double const& x) const
+  {
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
@@ -429,7 +458,8 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C22nsm_aSACOT_chi_nf::Regular(double const& x) const{
+  double C22nsm_aSACOT_chi_nf::Regular(double const& x) const
+  {
     double const dl      = log(x);
     double const dl_2    = dl * dl;
     double const dl1     = log(1-x);
@@ -439,7 +469,8 @@ namespace apfel
       + 3.036 * dl_2 * dl1 + 17.97 * dl * dl1;
   }
 
-  double C22nsm_aSACOT_chi_nf::Singular(double const& x) const{
+  double C22nsm_aSACOT_chi_nf::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const c2ns2b =
@@ -447,12 +478,13 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C22nsm_aSACOT_chi_nf::Local(double const& x) const{
+  double C22nsm_aSACOT_chi_nf::Local(double const& x) const
+  {
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
     return
-        0.592593 * dl1_3 - 4.2963 * dl1_2 + 6.3489 * dl1 + 46.844 - 0.0035;
+      0.592593 * dl1_3 - 4.2963 * dl1_2 + 6.3489 * dl1 + 46.844 - 0.0035;
   }
 
   ////////////////////////////////////////////
@@ -462,7 +494,8 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C22nsp_aSACOT_chi_0::Regular(double const& x) const{
+  double C22nsp_aSACOT_chi_0::Regular(double const& x) const
+  {
     double const dl      = log(x);
     double const dl_2    = dl * dl;
     double const dl_3    = dl_2 * dl;
@@ -470,11 +503,12 @@ namespace apfel
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
     return
-      - 69.59 - 1008 * x - 2.835 * dl_3 - 17.08 * dl_2 + 5.986 * dl 
+      - 69.59 - 1008 * x - 2.835 * dl_3 - 17.08 * dl_2 + 5.986 * dl
       - 17.19 * dl1_3 + 71.08 * dl1_2 - 660.7 * dl1 - 174.8 * dl * dl1_2 + 95.09 * dl_2 * dl1;
   }
 
-  double C22nsp_aSACOT_chi_0::Singular(double const& x) const{
+  double C22nsp_aSACOT_chi_0::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
@@ -483,7 +517,8 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C22nsp_aSACOT_chi_0::Local(double const& x) const{
+  double C22nsp_aSACOT_chi_0::Local(double const& x) const
+  {
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
@@ -496,17 +531,19 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C22nsp_aSACOT_chi_nf::Regular(double const& x) const{
+  double C22nsp_aSACOT_chi_nf::Regular(double const& x) const
+  {
     double const dl      = log(x);
     double const dl_2    = dl * dl;
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     return
-      - 5.691 - 37.91 * x + 2.244 * dl_2 + 5.770 * dl - 1.707 * dl1_2  
+      - 5.691 - 37.91 * x + 2.244 * dl_2 + 5.770 * dl - 1.707 * dl1_2
       + 22.95 * dl1 + 3.036 * dl_2 * dl1 + 17.97 * dl * dl1;
   }
 
-  double C22nsp_aSACOT_chi_nf::Singular(double const& x) const{
+  double C22nsp_aSACOT_chi_nf::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const c2ns2b =
@@ -514,7 +551,8 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C22nsp_aSACOT_chi_nf::Local(double const& x) const{
+  double C22nsp_aSACOT_chi_nf::Local(double const& x) const
+  {
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
     double const dl1_3   = dl1_2 * dl1;
@@ -567,17 +605,19 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double CL2nsm_aSACOT_chi_0::Regular(double const& x) const{
+  double CL2nsm_aSACOT_chi_0::Regular(double const& x) const
+  {
     double const dl      = log(x);
     double const dl_2    = dl * dl;
     double const dl1     = log(1-x);
     double const dl1_2   = dl1 * dl1;
-    return 
+    return
       - 52.27 + 100.8 * x + ( 23.29 * x - 0.043 ) * dl_2 - 22.21 * dl + 13.30 * dl1_2
       - 59.12 * dl1 - 141.7 * dl * dl1;
   }
 
-  double CL2nsm_aSACOT_chi_0::Local(double const&) const{
+  double CL2nsm_aSACOT_chi_0::Local(double const&) const
+  {
     return - 0.150;
   }
 
@@ -586,7 +626,8 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double CL2nsm_aSACOT_chi_nf::Regular(double const& x) const{
+  double CL2nsm_aSACOT_chi_nf::Regular(double const& x) const
+  {
     double const dl      = log(x);
     double const dl1     = log(1-x);
     return
@@ -600,17 +641,19 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double CL2nsp_aSACOT_chi_0::Regular(double const& x) const{
-  double const dl      = log(x);
-  double const dl_2    = dl * dl;
-  double const dl1     = log(1-x);
-  double const dl1_2   = dl1 * dl1;
-  return
-    - 40.41 + 97.48 * x + ( 26.56 * x - 0.031 ) * dl_2 - 14.85 * dl + 13.62 * dl1_2
-    - 55.79 * dl1 - 150.5 * dl * dl1;
+  double CL2nsp_aSACOT_chi_0::Regular(double const& x) const
+  {
+    double const dl      = log(x);
+    double const dl_2    = dl * dl;
+    double const dl1     = log(1-x);
+    double const dl1_2   = dl1 * dl1;
+    return
+      - 40.41 + 97.48 * x + ( 26.56 * x - 0.031 ) * dl_2 - 14.85 * dl + 13.62 * dl1_2
+      - 55.79 * dl1 - 150.5 * dl * dl1;
   }
 
-  double CL2nsp_aSACOT_chi_0::Local(double const&) const{
+  double CL2nsp_aSACOT_chi_0::Local(double const&) const
+  {
     return - 0.164;
   }
 
@@ -619,11 +662,12 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double CL2nsp_aSACOT_chi_nf::Regular(double const& x) const{
-  double const dl      = log(x);
-  double const dl1     = log(1-x);
-  return
-    16 / 27. * ( 6 * x * dl1 - 12 * x * dl - 25 * x + 6 );
+  double CL2nsp_aSACOT_chi_nf::Regular(double const& x) const
+  {
+    double const dl      = log(x);
+    double const dl1     = log(1-x);
+    return
+      16 / 27. * ( 6 * x * dl1 - 12 * x * dl - 25 * x + 6 );
   }
 
   //_________________________________________________________________________________
@@ -631,14 +675,15 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double CL2g_aSACOT_chi::Regular(double const& x) const{
+  double CL2g_aSACOT_chi::Regular(double const& x) const
+  {
     double const dl    = log(x);
     double const dl_2  = dl * dl;
     double const dl1   = log(1-x);
     double const dl1_2 = dl1 * dl1;
     double const omx   = 1 - x;
     return
-      ( 94.74 - 49.20 * x ) * omx * dl1_2 + 864.8 * omx * dl1 + 1161 * x * dl * dl1 
+      ( 94.74 - 49.20 * x ) * omx * dl1_2 + 864.8 * omx * dl1 + 1161 * x * dl * dl1
       + 60.06 * x * dl_2 + 39.66 * omx * dl - 5.333 * ( 1 / x - 1 );
   }
 
@@ -647,7 +692,8 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double CL2ps_aSACOT_chi::Regular(double const& x) const{
+  double CL2ps_aSACOT_chi::Regular(double const& x) const
+  {
     double const dl     = log(x);
     double const dl_2   = dl * dl;
     double const dl1    = log(1-x);
@@ -665,26 +711,28 @@ namespace apfel
   // note here the change in notation from the files from A. Vogt!
   // minus will be F(nu)-F(anti-nu)
   // plus  will be F(nu)+F(nu)
-  // there are the other way around in A. Vogts files 
+  // there are the other way around in A. Vogts files
   //_________________________________________________________________________________
   C32nsm_aSACOT_chi_0::C32nsm_aSACOT_chi_0(double const& eta, bool const& xdependent):
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C32nsm_aSACOT_chi_0::Regular(double const& x) const{
+  double C32nsm_aSACOT_chi_0::Regular(double const& x) const
+  {
     double const dl    = log(x);
     double const dl_2  = dl*dl;
     double const dl_3  = dl_2*dl;
     double const dl1   = log(1.-x);
     double const dl1_2 = dl1*dl1;
     double const dl1_3 = dl1_2*dl1;
-    return 
-      - 206.1 - 576.8 * x - 3.922 * dl_3 - 33.31 * dl_2 - 67.60 * dl 
+    return
+      - 206.1 - 576.8 * x - 3.922 * dl_3 - 33.31 * dl_2 - 67.60 * dl
       - 15.20 * dl1_3 + 94.61 * dl1_2 - 409.6 * dl1
       - 147.9 * dl * dl1_2;
   }
 
-  double C32nsm_aSACOT_chi_0::Singular(double const& x) const{
+  double C32nsm_aSACOT_chi_0::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
@@ -693,7 +741,8 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C32nsm_aSACOT_chi_0::Local(double const& x) const{
+  double C32nsm_aSACOT_chi_0::Local(double const& x) const
+  {
     double const dl1   = log(1-x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
@@ -708,18 +757,20 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C32nsm_aSACOT_chi_nf::Regular(double const& x) const{
+  double C32nsm_aSACOT_chi_nf::Regular(double const& x) const
+  {
     double const dl    = log(x);
     double const dl_2  = dl*dl;
     double const dl1   = log(1.-x);
     double const dl1_2 = dl1*dl1;
     double const dl1_3 = dl1_2*dl1;
-    return 
+    return
       - 6.337 - 14.97 * x + 2.207 * dl_2 + 8.683 * dl + 0.042 * dl1_3 - 0.808 * dl1_2 + 25.00 * dl1
       + 9.684 * dl * dl1 ;
   }
 
-  double C32nsm_aSACOT_chi_nf::Singular(double const& x) const{
+  double C32nsm_aSACOT_chi_nf::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const c2ns2b =
@@ -727,12 +778,13 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C32nsm_aSACOT_chi_nf::Local(double const& x) const{
+  double C32nsm_aSACOT_chi_nf::Local(double const& x) const
+  {
     double const dl1   = log(1-x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
     return
-        0.592593 * dl1_3 - 4.2963 * dl1_2 + 6.3489 * dl1 + 46.844 + 0.013;
+      0.592593 * dl1_3 - 4.2963 * dl1_2 + 6.3489 * dl1 + 46.844 + 0.013;
   }
 
   //again note the change in notation!
@@ -741,20 +793,22 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C32nsp_aSACOT_chi_0::Regular(double const& x) const{
-  double const dl      = log(x);
-  double const dl_2    = dl * dl;
-  double const dl_3    = dl_2 * dl;
-  double const dl1     = log(1-x);
-  double const dl1_2   = dl1 * dl1;
-  double const dl1_3   = dl1_2 * dl1;
-  return
-    - 242.9 - 467.2 * x - 3.049 * dl_3 - 30.14 * dl_2 - 79.14 * dl - 15.20 * dl1_3
-    + 94.61 * dl1_2 - 396.1 * dl1 - 92.43 * dl * dl1_2;
+  double C32nsp_aSACOT_chi_0::Regular(double const& x) const
+  {
+    double const dl      = log(x);
+    double const dl_2    = dl * dl;
+    double const dl_3    = dl_2 * dl;
+    double const dl1     = log(1-x);
+    double const dl1_2   = dl1 * dl1;
+    double const dl1_3   = dl1_2 * dl1;
+    return
+      - 242.9 - 467.2 * x - 3.049 * dl_3 - 30.14 * dl_2 - 79.14 * dl - 15.20 * dl1_3
+      + 94.61 * dl1_2 - 396.1 * dl1 - 92.43 * dl * dl1_2;
 
   }
 
-  double C32nsp_aSACOT_chi_0::Singular(double const& x) const{
+  double C32nsp_aSACOT_chi_0::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const dl1_3  = dl1_2 * dl1;
@@ -763,7 +817,8 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C32nsp_aSACOT_chi_0::Local(double const& x) const{
+  double C32nsp_aSACOT_chi_0::Local(double const& x) const
+  {
     double const dl1   = log(1-x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;
@@ -777,18 +832,20 @@ namespace apfel
     Expression((xdependent ? eta : 1.),xdependent)
   {}
 
-  double C32nsp_aSACOT_chi_nf::Regular(double const& x) const{
-  double const dl      = log(x);
-  double const dl_2    = dl * dl;
-  double const dl1     = log(1-x);
-  double const dl1_2   = dl1 * dl1;
-  double const dl1_3   = dl1_2 * dl1;
-  return
-    - 6.337 - 14.97 * x + 2.207 * dl_2 + 8.683 * dl + 0.042 * dl1_3 - 0.808 * dl1_2
-    + 25.00 * dl1 + 9.684 * dl * dl1;
+  double C32nsp_aSACOT_chi_nf::Regular(double const& x) const
+  {
+    double const dl      = log(x);
+    double const dl_2    = dl * dl;
+    double const dl1     = log(1-x);
+    double const dl1_2   = dl1 * dl1;
+    double const dl1_3   = dl1_2 * dl1;
+    return
+      - 6.337 - 14.97 * x + 2.207 * dl_2 + 8.683 * dl + 0.042 * dl1_3 - 0.808 * dl1_2
+      + 25.00 * dl1 + 9.684 * dl * dl1;
   }
 
-  double C32nsp_aSACOT_chi_nf::Singular(double const& x) const{
+  double C32nsp_aSACOT_chi_nf::Singular(double const& x) const
+  {
     double const dl1    = log(1-x);
     double const dl1_2  = dl1 * dl1;
     double const c2ns2b =
@@ -796,7 +853,8 @@ namespace apfel
     return c2ns2b / ( 1 - x );
   }
 
-  double C32nsp_aSACOT_chi_nf::Local(double const& x) const{
+  double C32nsp_aSACOT_chi_nf::Local(double const& x) const
+  {
     double const dl1   = log(1-x);
     double const dl1_2 = dl1 * dl1;
     double const dl1_3 = dl1_2 * dl1;

@@ -17,13 +17,14 @@ namespace apfel
    * @brief O(1) quark coefficient function for F2.
    * Eq. (2) of https://arxiv.org/pdf/hep-ph/9805233.
    */
-  class Cm20qNC_ACOT: public Expression{
-    public:
-      Cm20qNC_ACOT(double const& eta);
-      double Local(double const& x) const;
+  class Cm20qNC_ACOT: public Expression
+  {
+  public:
+    Cm20qNC_ACOT(double const& eta);
+    double Local(double const& x) const;
 
-    private:
-      double _xi;
+  private:
+    double _xi;
   };
 
   /**
@@ -105,10 +106,11 @@ namespace apfel
    * @brief O(1) quark coefficient function for F2.
    * Eq. (27) of https://arxiv.org/abs/hep-ph/0003035.
    */
-  class Cm20qNC_ACOT_chi: public Expression{
-    public:
-      Cm20qNC_ACOT_chi(double const& eta);
-      double Local(double const& x) const;
+  class Cm20qNC_ACOT_chi: public Expression
+  {
+  public:
+    Cm20qNC_ACOT_chi(double const& eta);
+    double Local(double const& x) const;
   };
 
   /**
@@ -190,7 +192,7 @@ namespace apfel
    * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for FL.
    * Eq. (2.1) of https://doi.org/10.1007/BF01584394.
    */
-  class CmL1gCC_general_mass: public Expression 
+  class CmL1gCC_general_mass: public Expression
   {
   public:
     CmL1gCC_general_mass(double const& eta, double const& xi, double const& m1, double const& m2);
@@ -205,7 +207,7 @@ namespace apfel
    * @brief O(&alpha;<SUB>s</SUB>) gluon coefficient function for F3.
    * Eq. (2.1) of https://doi.org/10.1007/BF01584394.
    */
-  class Cm31gCC_general_mass: public Expression 
+  class Cm31gCC_general_mass: public Expression
   {
   public:
     Cm31gCC_general_mass(double const& eta, double const& xi, double const& m1, double const& m2);
@@ -220,10 +222,10 @@ namespace apfel
   /**
    * @defgroup aSACOT-chi Massiv coefficient functions
    * Collection of massive coefficient functions for the
-   * approximative SACOT-chi scheme only for 
+   * approximative SACOT-chi scheme only for
    * O((&alpha;<SUB>s</SUB><SUP>2</SUP>).
-   * @note All of these are taken from 
-   * https://www.liverpool.ac.uk/~avogt/coeff.html, where the 
+   * @note All of these are taken from
+   * https://www.liverpool.ac.uk/~avogt/coeff.html, where the
    * classes ending in _0 are the parts of the coefficient, where
    * n<SUB>f</SUB>=0 and the classes ending in _nf are the parts
    * proportional to nf.

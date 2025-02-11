@@ -154,12 +154,12 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeFLCCPlusObjectsSACOT(Grid const &g,
-                                                                                                                       std::vector<double> const &Masses,
-                                                                                                                       double const &IntEps = 1e-5,
-                                                                                                                       int const &nQ = 150,
-                                                                                                                       double const &Qmin = 1,
-                                                                                                                       double const &Qmax = 300,
-                                                                                                                       int const &intdeg = 3);
+                                                                                                                      std::vector<double> const &Masses,
+                                                                                                                      double const &IntEps = 1e-5,
+                                                                                                                      int const &nQ = 150,
+                                                                                                                      double const &Qmin = 1,
+                                                                                                                      double const &Qmax = 300,
+                                                                                                                      int const &intdeg = 3);
   /**
    * @brief The InitializeFLCCMinusObjectsSACOT precomputs the perturbative
    * coefficients of coefficient functions for combination ( FL(nu) -
@@ -196,12 +196,12 @@ namespace apfel
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const &, std::vector<double> const &)> InitializeF3CCPlusObjectsSACOT(Grid const &g,
-                                                                                                                       std::vector<double> const &Masses,
-                                                                                                                       double const &IntEps = 1e-5,
-                                                                                                                       int const &nQ = 150,
-                                                                                                                       double const &Qmin = 1,
-                                                                                                                       double const &Qmax = 300,
-                                                                                                                       int const &intdeg = 3);
+                                                                                                                      std::vector<double> const &Masses,
+                                                                                                                      double const &IntEps = 1e-5,
+                                                                                                                      int const &nQ = 150,
+                                                                                                                      double const &Qmin = 1,
+                                                                                                                      double const &Qmax = 300,
+                                                                                                                      int const &intdeg = 3);
   /**
    * @brief The InitializeF3CCMinusObjectsSACOT precomputs the perturbative
    * coefficients of coefficient functions for combination ( F3(nu) -
@@ -244,7 +244,7 @@ namespace apfel
                                                                                                                    double const &Qmin = 1,
                                                                                                                    double const &Qmax = 300,
                                                                                                                    int const &intdeg = 3,
-                                                                                                                   double const &n=1); 
+                                                                                                                   double const &n=1);
   /**
    * @brief The InitializeFLNCObjectsASACOT precomputs the perturbative
    * coefficients of coefficient functions for FL in the aSACOT-chi(n) scheme up to
@@ -266,7 +266,7 @@ namespace apfel
                                                                                                                    double const &Qmin = 1,
                                                                                                                    double const &Qmax = 300,
                                                                                                                    int const &intdeg = 3,
-                                                                                                                   double const &n=1); 
+                                                                                                                   double const &n=1);
 
   /**
    * @brief The InitializeF3NCObjectsASACOT precomputs the perturbative
@@ -289,7 +289,7 @@ namespace apfel
                                                                                                                    double const &Qmin = 1,
                                                                                                                    double const &Qmax = 300,
                                                                                                                    int const &intdeg = 3,
-                                                                                                                   double const &n=1); 
+                                                                                                                   double const &n=1);
 
   /**
    * @brief The InitializeF2CCPlusObjectsASACOT precomputs the perturbative
@@ -313,8 +313,8 @@ namespace apfel
                                                                                                                        double const &Qmin = 1,
                                                                                                                        double const &Qmax = 300,
                                                                                                                        int const &intdeg = 3,
-                                                                                                                       double const &n=1); 
-  
+                                                                                                                       double const &n=1);
+
   /**
    * @brief The InitializeF2CCMinusObjectsASACOT precomputs the perturbative
    * coefficients of coefficient functions for for combination ( F2(nu) -
@@ -337,7 +337,7 @@ namespace apfel
                                                                                                                         double const &Qmin = 1,
                                                                                                                         double const &Qmax = 300,
                                                                                                                         int const &intdeg = 3,
-                                                                                                                        double const &n=1); 
+                                                                                                                        double const &n=1);
 
   /**
    * @brief The InitializeFLCCPlusObjectsASACOT precomputs the perturbative
@@ -361,7 +361,7 @@ namespace apfel
                                                                                                                        double const &Qmin = 1,
                                                                                                                        double const &Qmax = 300,
                                                                                                                        int const &intdeg = 3,
-                                                                                                                       double const &n=1); 
+                                                                                                                       double const &n=1);
 
   /**
    * @brief The InitializeFLCCMinusObjectsASACOT precomputs the perturbative
@@ -385,8 +385,8 @@ namespace apfel
                                                                                                                         double const &Qmin = 1,
                                                                                                                         double const &Qmax = 300,
                                                                                                                         int const &intdeg = 3,
-                                                                                                                        double const &n=1); 
-                                                                                                                      
+                                                                                                                        double const &n=1);
+
   /**
    * @brief The InitializeF3CCPlusObjectsASACOT precomputs the perturbative
    * coefficients of coefficient functions for for combination ( F3(nu) +
@@ -409,7 +409,7 @@ namespace apfel
                                                                                                                        double const &Qmin = 1,
                                                                                                                        double const &Qmax = 300,
                                                                                                                        int const &intdeg = 3,
-                                                                                                                       double const &n=1); 
+                                                                                                                       double const &n=1);
 
   /**
    * @brief The InitializeFLCCMinusObjectsASACOT precomputs the perturbative
@@ -433,5 +433,5 @@ namespace apfel
                                                                                                                         double const &Qmin = 1,
                                                                                                                         double const &Qmax = 300,
                                                                                                                         int const &intdeg = 3,
-                                                                                                                        double const &n=1);                                                                                                                         
-                                                                                                                      }
+                                                                                                                        double const &n=1);
+}

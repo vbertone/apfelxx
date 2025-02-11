@@ -5,7 +5,8 @@
 #include "apfel/structurefunctionbuilder_ACOT.h"
 #include "LHAPDF/LHAPDF.h"
 
-const std::vector<double> x{
+const std::vector<double> x
+{
   1.00000000e-06, 1.14975700e-06, 1.32194115e-06, 1.51991108e-06,
   1.74752840e-06, 2.00923300e-06, 2.31012970e-06, 2.65608778e-06,
   3.05385551e-06, 3.51119173e-06, 4.03701726e-06, 4.64158883e-06,
@@ -34,20 +35,21 @@ const std::vector<double> x{
 };
 const std::vector<double> Q{1.4,5,10,100};
 
-int main(){
+int main()
+{
 
   // path for output
   std::string path = "/home/peter/work/codes/apfelxx_ACOT/tests/ACOT_tests/APFELxx_results";
 
   // prepare PDFs and alphas
   LHAPDF::PDF* pdf = LHAPDF::mkPDF("CT18NLO_1_1",0);
-  const auto PDFrotated = [&] (double const& x, double const& Q) -> std::map<int,double>{return apfel::PhysToQCDEv(pdf->xfxQ(x,Q));};
+  const auto PDFrotated = [&] (double const& x, double const& Q) -> std::map<int,double> {return apfel::PhysToQCDEv(pdf->xfxQ(x,Q));};
   const auto alphas = [&] (double const& Q) -> double{return pdf->alphasQ(Q);};
   LHAPDF::PDF* pdf_NNLO = LHAPDF::mkPDF("CT18NLO_1_1",0);
-  const auto PDFrotated_NNLO = [&] (double const& x, double const& Q) -> std::map<int,double>{return apfel::PhysToQCDEv(pdf_NNLO->xfxQ(x,Q));};
+  const auto PDFrotated_NNLO = [&] (double const& x, double const& Q) -> std::map<int,double> {return apfel::PhysToQCDEv(pdf_NNLO->xfxQ(x,Q));};
   const auto alphas_NNLO = [&] (double const& Q) -> double{return pdf_NNLO->alphasQ(Q);};
   const std::vector<double> Thresholds = {0,0,0,pdf_NNLO->quarkMass(4),pdf_NNLO->quarkMass(5),pdf_NNLO->quarkMass(6)};
-  
+
   // grid specifications
   double IntEps = 1e-5;
   int nQ = 60;
@@ -107,21 +109,23 @@ int main(){
   file.open(filename);
   file<<std::fixed<<std::setprecision(10);
   file<<"x,Q2,NCF2,NCFL,NCF3,WMF2,WMFL,WMF3,WPF2,WPFL,WPF3\n";
-  for(double xi: x){
-    for(double Qi: Q){
-      file<<xi<<","<<Qi*Qi;
-      file<<","<<F2total.EvaluatexQ(xi,Qi);
-      file<<","<<FLtotal.EvaluatexQ(xi,Qi);
-      file<<","<<F3total.EvaluatexQ(xi,Qi)/xi;
-      file<<","<<F2WM.EvaluatexQ(xi,Qi);
-      file<<","<<FLWM.EvaluatexQ(xi,Qi);
-      file<<","<<F3WM.EvaluatexQ(xi,Qi)/xi;
-      file<<","<<F2WP.EvaluatexQ(xi,Qi);
-      file<<","<<FLWP.EvaluatexQ(xi,Qi);
-      file<<","<<F3WP.EvaluatexQ(xi,Qi)/xi;
-      file<<"\n"; 
+  for(double xi: x)
+    {
+      for(double Qi: Q)
+        {
+          file<<xi<<","<<Qi*Qi;
+          file<<","<<F2total.EvaluatexQ(xi,Qi);
+          file<<","<<FLtotal.EvaluatexQ(xi,Qi);
+          file<<","<<F3total.EvaluatexQ(xi,Qi)/xi;
+          file<<","<<F2WM.EvaluatexQ(xi,Qi);
+          file<<","<<FLWM.EvaluatexQ(xi,Qi);
+          file<<","<<F3WM.EvaluatexQ(xi,Qi)/xi;
+          file<<","<<F2WP.EvaluatexQ(xi,Qi);
+          file<<","<<FLWP.EvaluatexQ(xi,Qi);
+          file<<","<<F3WP.EvaluatexQ(xi,Qi)/xi;
+          file<<"\n";
+        }
     }
-  }
   file.close();
 
   //////////////////////////////
@@ -172,21 +176,23 @@ int main(){
   file.open(filename);
   file<<std::fixed<<std::setprecision(10);
   file<<"x,Q2,NCF2,NCFL,NCF3,WMF2,WMFL,WMF3,WPF2,WPFL,WPF3\n";
-  for(double xi: x){
-    for(double Qi: Q){
-      file<<xi<<","<<Qi*Qi;
-      file<<","<<F2total_NNLO.EvaluatexQ(xi,Qi);
-      file<<","<<FLtotal_NNLO.EvaluatexQ(xi,Qi);
-      file<<","<<F3total_NNLO.EvaluatexQ(xi,Qi)/xi;
-      file<<","<<F2WM_NNLO.EvaluatexQ(xi,Qi);
-      file<<","<<FLWM_NNLO.EvaluatexQ(xi,Qi);
-      file<<","<<F3WM_NNLO.EvaluatexQ(xi,Qi)/xi;
-      file<<","<<F2WP_NNLO.EvaluatexQ(xi,Qi);
-      file<<","<<FLWP_NNLO.EvaluatexQ(xi,Qi);
-      file<<","<<F3WP_NNLO.EvaluatexQ(xi,Qi)/xi;
-      file<<"\n"; 
+  for(double xi: x)
+    {
+      for(double Qi: Q)
+        {
+          file<<xi<<","<<Qi*Qi;
+          file<<","<<F2total_NNLO.EvaluatexQ(xi,Qi);
+          file<<","<<FLtotal_NNLO.EvaluatexQ(xi,Qi);
+          file<<","<<F3total_NNLO.EvaluatexQ(xi,Qi)/xi;
+          file<<","<<F2WM_NNLO.EvaluatexQ(xi,Qi);
+          file<<","<<FLWM_NNLO.EvaluatexQ(xi,Qi);
+          file<<","<<F3WM_NNLO.EvaluatexQ(xi,Qi)/xi;
+          file<<","<<F2WP_NNLO.EvaluatexQ(xi,Qi);
+          file<<","<<FLWP_NNLO.EvaluatexQ(xi,Qi);
+          file<<","<<F3WP_NNLO.EvaluatexQ(xi,Qi)/xi;
+          file<<"\n";
+        }
     }
-  }
   file.close();
 
   return 0;
