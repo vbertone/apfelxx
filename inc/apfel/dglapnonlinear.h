@@ -33,13 +33,13 @@ namespace apfel
      * @param Thresholds: vector of the heavy-quark thresholds
      * @param nsteps: number of steps of the ODE solver (default: 10)
      */
-    DglapNonLinear(std::function<Set<Operator>(int const&, double const&)>                           const& SplittingFunctions,
-                   std::function<Set<Operator>(bool const&, int const&)>                             const& MatchingConditions,
-                   std::function<std::map<int, std::function<double(double const&)>>(double const&)> const& TranformationFuncs,
-                   Set<Distribution>                                                                 const& ObjRef,
-                   double                                                                            const& MuRef,
-                   std::vector<double>                                                               const& Thresholds,
-                   int                                                                               const& nsteps = 10);
+    DglapNonLinear(std::function<Set<Operator>(int const&, double const&)>                                          const& SplittingFunctions,
+                   std::function<Set<Operator>(bool const&, int const&)>                                            const& MatchingConditions,
+                   std::function<std::map<int, std::function<double(std::map<int, double> const&)>>(double const&)> const& TranformationFuncs,
+                   Set<Distribution>                                                                                const& ObjRef,
+                   double                                                                                           const& MuRef,
+                   std::vector<double>                                                                              const& Thresholds,
+                   int                                                                                              const& nsteps = 10);
 
     /**
      * @brief Function that matches the evolved object at the thresholds.
@@ -90,8 +90,8 @@ namespace apfel
     void SetInitialDistributions(std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc, double const& mu);
     ///@}
   private:
-    std::function<Set<Operator>(int const&, double const&)>                           const _SplittingFunctions;
-    std::function<Set<Operator>(bool const&, int const&)>                             const _MatchingConditions;
-    std::function<std::map<int, std::function<double(double const&)>>(double const&)> const _TranformationFuncs;
+    std::function<Set<Operator>(int const&, double const&)>                                          const _SplittingFunctions;
+    std::function<Set<Operator>(bool const&, int const&)>                                            const _MatchingConditions;
+    std::function<std::map<int, std::function<double(std::map<int, double> const&)>>(double const&)> const _TranformationFuncs;
   };
 }

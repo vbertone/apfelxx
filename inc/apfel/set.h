@@ -103,10 +103,30 @@ namespace apfel
     /**
      * @brief This function trasforms the set of objects (only
      * Distributions) given a set of functions, one for each
-     * distribution in the set.
+     * distribution in the set. This function is diagonal in the sense
+     * that each transforming function can only transform one single
+     * distribution.
      * @param TranformationFuncs: set of transformation functions
      */
     Set<T> Transform(std::map<int, std::function<double(double const&)>> const& TranformationFuncs) const;
+
+    /**
+     * @brief This function trasforms the set of objects (only
+     * Distributions) given a set of functions, one for each
+     * distribution in the set. This function is not diagonal in the
+     * sense that different distributions can mix upon transformation.
+     * @param TranformationFuncs: set of transformation functions
+     */
+    Set<T> Transform(std::map<int, std::map<int, std::function<double(double const&)>>> const& TranformationFuncs) const;
+
+    /**
+     * @brief This function trasforms the set of objects (only
+     * Distributions) given a set of functions, one for each
+     * distribution in the set. This function is not diagonal in the
+     * sense that different distributions can mix upon transformation.
+     * @param TranformationFuncs: set of transformation functions
+     */
+    Set<T> Transform(std::map<int, std::function<double(std::map<int, double> const&)>> const& TranformationFuncs) const;
 
     /**
      * @brief Print the Operator object

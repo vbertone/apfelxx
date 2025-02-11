@@ -363,13 +363,13 @@ namespace apfel
    * @param nsteps: the number of steps of the ODE solver (default: 10).
    * @return A unique pointer to a Dglap object
    */
-  std::unique_ptr<DglapNonLinear> BuildDglapNonLinear(std::map<int, DglapObjects>                                                       const& DglapObj,
-                                                      std::function<std::map<int, std::function<double(double const&)>>(double const&)> const& TranformationFuncs,
-                                                      std::function<std::map<int, double>(double const&, double const&)>                const& InDistFunc,
-                                                      double                                                                            const& MuRef,
-                                                      int                                                                               const& PerturbativeOrder,
-                                                      std::function<double(double const&)>                                              const& Alphas,
-                                                      double                                                                            const& xi = 1,
-                                                      int                                                                               const& nsteps = 10);
+  std::unique_ptr<DglapNonLinear> BuildDglapNonLinear(std::map<int, DglapObjects>                                                                      const& DglapObj,
+                                                      std::function<std::map<int, std::function<double(std::map<int, double> const&)>>(double const&)> const& TranformationFuncs,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                               const& InDistFunc,
+                                                      double                                                                                           const& MuRef,
+                                                      int                                                                                              const& PerturbativeOrder,
+                                                      std::function<double(double const&)>                                                             const& Alphas,
+                                                      double                                                                                           const& xi = 1,
+                                                      int                                                                                              const& nsteps = 10);
   ///@}
 }

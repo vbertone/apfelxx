@@ -281,6 +281,64 @@ namespace apfel
     return Set<Distribution> {_map, TransformedObjects};
   }
 
+  //_________________________________________________________________________
+  template<>
+  Set<Distribution> Set<Distribution>::Transform(std::map<int, std::map<int, std::function<double(double const&)>>> const& TranformationFuncs) const
+  {
+    std::map<int, Distribution> TransformedObjects;
+    for (auto const& v: _objects)
+      {
+        // Funny way to initialise a distribution to zero
+        Distribution Di = 0 * v.second;
+        for (auto const& w : TranformationFuncs.at(v.first))
+          Di += (v.second).Transform(w.second);
+        TransformedObjects.insert({v.first, Di});
+      }
+
+    return Set<Distribution> {_map, TransformedObjects};
+  }
+
+  //_________________________________________________________________________
+  template<>
+  Set<Distribution> Set<Distribution>::Transform(std::map<int, std::function<double(std::map<int, double> const&)>> const& TranformationFuncs) const
+  {
+    std::map<int, Distribution> TransformedObjects;
+    for (auto& v: _objects)
+      {
+        // Collect joint grid
+        const int nxj = v.second.GetGrid().GetJointGrid().GetGrid().size();
+        std::vector<double> jdist(nxj);
+        for (int alpha = 0; alpha < nxj; alpha++)
+          {
+            std::map<int, double> jdistalpha;
+            for (auto& v: _objects)
+              jdistalpha.insert({v.first, v.second.GetDistributionJointGrid()[alpha]});
+            jdist[alpha] = TranformationFuncs.at(v.first)(jdistalpha);
+          }
+
+        // Collect subgrids
+        const int ng = v.second.GetGrid().nGrids();
+        std::vector<std::vector<double>> sdist(ng);
+        for (int ig = 0; ig < ng; ig++)
+          {
+            const int nxs = v.second.GetGrid().GetSubGrid(ig).GetGrid().size();
+            sdist[ig].resize(nxs);
+            for (int alpha = 0; alpha < nxs; alpha++)
+              {
+                std::map<int, double> sdistalpha;
+                for (auto& v: _objects)
+                  sdistalpha.insert({v.first, v.second.GetDistributionSubGrid()[ig][alpha]});
+                sdist[ig][alpha] = TranformationFuncs.at(v.first)(sdistalpha);
+              }
+          }
+
+        // Push back distribution
+        TransformedObjects.insert({v.first, Distribution{v.second.GetGrid(), sdist, jdist}});
+      }
+
+    return Set<Distribution> {_map, TransformedObjects};
+  }
+
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
 

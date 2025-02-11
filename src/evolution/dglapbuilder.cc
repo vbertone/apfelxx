@@ -1769,14 +1769,14 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
-  std::unique_ptr<DglapNonLinear> BuildDglapNonLinear(std::map<int, DglapObjects>                                                       const& DglapObj,
-                                                      std::function<std::map<int, std::function<double(double const&)>>(double const&)> const& TranformationFuncs,
-                                                      std::function<std::map<int, double>(double const&, double const&)>                const& InDistFunc,
-                                                      double                                                                            const& MuRef,
-                                                      int                                                                               const& PerturbativeOrder,
-                                                      std::function<double(double const&)>                                              const& Alphas,
-                                                      double                                                                            const& xi,
-                                                      int                                                                               const& nsteps)
+  std::unique_ptr<DglapNonLinear> BuildDglapNonLinear(std::map<int, DglapObjects>                                                                      const& DglapObj,
+                                                      std::function<std::map<int, std::function<double(std::map<int, double> const&)>>(double const&)> const& TranformationFuncs,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                               const& InDistFunc,
+                                                      double                                                                                           const& MuRef,
+                                                      int                                                                                              const& PerturbativeOrder,
+                                                      std::function<double(double const&)>                                                             const& Alphas,
+                                                      double                                                                                           const& xi,
+                                                      int                                                                                              const& nsteps)
   {
     // Collect thresholds and coupling above and below them
     std::vector<double> Thresholds;

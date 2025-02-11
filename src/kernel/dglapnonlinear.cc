@@ -10,13 +10,13 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  DglapNonLinear::DglapNonLinear(std::function<Set<Operator>(int const&, double const&)>                           const& SplittingFunctions,
-                                 std::function<Set<Operator>(bool const&, int const&)>                             const& MatchingConditions,
-                                 std::function<std::map<int, std::function<double(double const&)>>(double const&)> const& TranformationFuncs,
-                                 Set<Distribution>                                                                 const& ObjRef,
-                                 double                                                                            const& MuDistRef,
-                                 std::vector<double>                                                               const& Thresholds,
-                                 int                                                                               const& nsteps):
+  DglapNonLinear::DglapNonLinear(std::function<Set<Operator>(int const&, double const&)>                                          const& SplittingFunctions,
+                                 std::function<Set<Operator>(bool const&, int const&)>                                            const& MatchingConditions,
+                                 std::function<std::map<int, std::function<double(std::map<int, double> const&)>>(double const&)> const& TranformationFuncs,
+                                 Set<Distribution>                                                                                const& ObjRef,
+                                 double                                                                                           const& MuDistRef,
+                                 std::vector<double>                                                                              const& Thresholds,
+                                 int                                                                                              const& nsteps):
     MatchedEvolution<Set<Distribution>>(ObjRef, MuDistRef, Thresholds, nsteps),
     _SplittingFunctions(SplittingFunctions),
     _MatchingConditions(MatchingConditions),
