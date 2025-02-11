@@ -507,25 +507,25 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  DistributionOperator operator * (std::function<double(double const&, double const&)> f, DistributionOperator rhs)
+  DistributionOperator operator * (std::function<double(double const&, double const&)> const& f, DistributionOperator rhs)
   {
     return rhs *= f;
   }
 
   //_________________________________________________________________________
-  DistributionOperator operator * (DistributionOperator lhs, std::function<double(double const&, double const&)> f)
+  DistributionOperator operator * (DistributionOperator lhs, std::function<double(double const&, double const&)> const& f)
   {
     return lhs *= f;
   }
 
   //_________________________________________________________________________
-  DistributionOperator operator * (std::function<double(double const&)> f, DistributionOperator rhs)
+  DistributionOperator operator * (std::function<double(double const&)> const& f, DistributionOperator rhs)
   {
     return rhs *= f;
   }
 
   //_________________________________________________________________________
-  DistributionOperator operator * (DistributionOperator lhs, std::function<double(double const&)> f)
+  DistributionOperator operator * (DistributionOperator lhs, std::function<double(double const&)> const& f)
   {
     return lhs *= f;
   }
