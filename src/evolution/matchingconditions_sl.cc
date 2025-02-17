@@ -517,10 +517,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  AS3Hg_0::AS3Hg_0(double const& rho):
+  AS3Hg_0::AS3Hg_0(int const& imod):
     Expression(),
-    _rho(rho)
+    _imod(imod)
   {
+    // Determine value of _rho according to imod
+    if (_imod == 1)
+      _rho = 6000;
+    else if (_imod == 2)
+      _rho = 13000;
+    else
+      _rho = 12214;
+
     // Moments for the known exact small-x contribution (Vogt)
     const std::vector<double> N{1996.50147366 - _rho, 232.27499707 - _rho / 3, 7.44963895 - _rho / 5,
                                 -77.93698013 - _rho * 0.14285714285714285, -121.36688921 - _rho / 9};
@@ -551,10 +559,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  ANS3qqH_0::ANS3qqH_0(double const& rho):
+  ANS3qqH_0::ANS3qqH_0(int const& imod):
     Expression(),
-    _rho(rho)
+    _imod(imod)
   {
+    // Determine value of _rho according to imod
+    if (_imod == 1)
+      _rho = -90;
+    else if (_imod == 2)
+      _rho = -37;
+    else
+      _rho = -64.411;
+
     // Moments for the known exact small-x contribution (Vogt)
     const std::vector<double> N{-31.101 + _rho * 0.375, -27.989 + _rho * 0.023437499998337614, -20.146 + _rho * 0.004629629629528962,
                                 -13.313 + _rho * 0.0014648437499999065, -7.629 + _rho * 0.0005999999999999996, -2.854 + _rho * 0.0002893518518518518,
@@ -620,10 +636,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  AS3ggH_0::AS3ggH_0(double const& rho):
+  AS3ggH_0::AS3ggH_0(int const& imod):
     Expression(),
-    _rho(rho)
+    _imod(imod)
   {
+    // Determine value of _rho according to imod
+    if (_imod == 1)
+      _rho = -2000;
+    else if (_imod == 2)
+      _rho = -700;
+    else
+      _rho = -1951.6;
+
     // Moments for the known exact small-x contribution (Vogt)
     const std::vector<double> N{-441.3444 + _rho * 0.9999999999999999, -96.32 + _rho * 0.11111111111076043,
                                 -13.33 + _rho * 0.040000000000137814, 31.1 + _rho * 0.020408163265306242, 60.84 + _rho * 0.01234567901234568};

@@ -54,6 +54,18 @@ namespace apfel
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
     LogKth.push_back(0);
 
+    // Copy the vector of switches to vary the parameterisation of the
+    // approximated N3LO splitting functions and matching conditions
+    // and adjust it to match the correct number of switches
+    // (10). Issue a warning in case the original vector is modified.
+    const int nvar = 10;
+    std::vector<int> im = IMod;
+    if (im.size() != nvar)
+      {
+        warning("InitializeDglapObjectsQCD", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
+        im.resize(nvar);
+      }
+
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -240,11 +252,11 @@ namespace apfel
     // ===============================================================
     // NNNLO matching conditions
     std::map<int, std::map<int, Operator>> MatchNNNLO;
-    const Operator APS3Hq {g, APS3Hq_0{},  IntEps};
-    const Operator ANS3qqH{g, ANS3qqH_0{}, IntEps};
-    const Operator AS3Hg  {g, AS3Hg_0{},   IntEps};
-    const Operator AS3gqH {g, AS3gqH_0{},  IntEps};
-    const Operator AS3ggH {g, AS3ggH_0{},  IntEps};
+    const Operator APS3Hq {g, APS3Hq_0{},       IntEps};
+    const Operator ANS3qqH{g, ANS3qqH_0{im[7]}, IntEps};
+    const Operator AS3Hg  {g, AS3Hg_0{im[8]},   IntEps};
+    const Operator AS3gqH {g, AS3gqH_0{},       IntEps};
+    const Operator AS3ggH {g, AS3ggH_0{im[9]},  IntEps};
     const Operator AS3qqH = ANS3qqH + APS3Hq;
     for (int nf = nfi; nf <= nff; nf++)
       {
@@ -262,16 +274,6 @@ namespace apfel
 
     // ===============================================================
     // NNNLO splitting function operators
-    // Copy the vector of switches to vary the parameterisation of the
-    // approximated N3LO splitting functions and adjust it to match
-    // the correct number of switches (7). Issue a warning in case the
-    // original vector is modified.
-    std::vector<int> im = IMod;
-    if (im.size() != 7)
-      {
-        warning("InitializeDglapObjectsQCD", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
-        im.resize(7);
-      }
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {

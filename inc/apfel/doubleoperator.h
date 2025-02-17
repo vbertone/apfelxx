@@ -86,9 +86,9 @@ namespace apfel
      * @name Binary operators
      */
     ///@{
-    DoubleDistribution operator *= (DoubleDistribution const& d) const;                     //!< this *= DoubleDistribution
     DistributionOperator MultiplyFirstBy(Distribution const& d) const;                      //!< this times a distribution convoluted with the first variable
     OperatorDistribution MultiplySecondBy(Distribution const& d) const;                     //!< this times a distribution convoluted with the second variable
+    DoubleDistribution operator *= (DoubleDistribution const& d) const;                     //!< this *= DoubleDistribution
     DoubleOperator&    operator *= (double const& s);                                       //!< this *= Scalar
     DoubleOperator&    operator /= (double const& s);                                       //!< this /= Scalar
     DoubleOperator&    operator += (DoubleOperator const& o);                               //!< this += DoubleOperator
@@ -146,19 +146,19 @@ namespace apfel
    * @name Ternary operators
    */
   ///@{
-  DoubleDistribution operator * (DoubleOperator const& lhs, DoubleDistribution const& rhs);                 //!< DoubleOperator*DoubleDistribution
-  DistributionOperator operator * (Distribution const& lhs, DoubleOperator const& rhs);                     //!< Distribution*DoubleOperator = DistributionOperator
-  OperatorDistribution operator * (DoubleOperator const& lhs, Distribution const& rhs);                     //!< DoubleOperator*Distribution = OperatorDistribution
-  DoubleOperator     operator * (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator*DoubleOperator
-  DoubleOperator     operator * (double const& s, DoubleOperator rhs);                                      //!< Scalar*DoubleOperator
-  DoubleOperator     operator * (DoubleOperator lhs, double const& s);                                      //!< DoubleOperator*Scalar
-  DoubleOperator     operator * (std::function<double(double const&, double const)> f, DoubleOperator rhs); //!< 2D-function*DoubleOperator
-  DoubleOperator     operator * (DoubleOperator lhs, std::function<double(double const&, double const)> f); //!< DoubleOperator*2D-function
-  DoubleOperator     operator * (std::function<double(double const&)> f, DoubleOperator rhs);               //!< 1D-function*DoubleOperator
-  DoubleOperator     operator * (DoubleOperator lhs, std::function<double(double const&)> f);               //!< DoubleOperator*1D-function
-  DoubleOperator     operator / (DoubleOperator lhs, double const& s);                                      //!< DoubleOperator/Scalar
-  DoubleOperator     operator + (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator+DoubleOperator
-  DoubleOperator     operator - (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator-DoubleOperator
+  DoubleDistribution   operator * (DoubleOperator const& lhs, DoubleDistribution const& rhs);                 //!< DoubleOperator*DoubleDistribution
+  DistributionOperator operator * (Distribution const& lhs, DoubleOperator const& rhs);                       //!< Distribution*DoubleOperator = DistributionOperator
+  OperatorDistribution operator * (DoubleOperator const& lhs, Distribution const& rhs);                       //!< DoubleOperator*Distribution = OperatorDistribution
+  DoubleOperator       operator * (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator*DoubleOperator
+  DoubleOperator       operator * (double const& s, DoubleOperator rhs);                                      //!< Scalar*DoubleOperator
+  DoubleOperator       operator * (DoubleOperator lhs, double const& s);                                      //!< DoubleOperator*Scalar
+  DoubleOperator       operator * (std::function<double(double const&, double const)> f, DoubleOperator rhs); //!< 2D-function*DoubleOperator
+  DoubleOperator       operator * (DoubleOperator lhs, std::function<double(double const&, double const)> f); //!< DoubleOperator*2D-function
+  DoubleOperator       operator * (std::function<double(double const&)> f, DoubleOperator rhs);               //!< 1D-function*DoubleOperator
+  DoubleOperator       operator * (DoubleOperator lhs, std::function<double(double const&)> f);               //!< DoubleOperator*1D-function
+  DoubleOperator       operator / (DoubleOperator lhs, double const& s);                                      //!< DoubleOperator/Scalar
+  DoubleOperator       operator + (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator+DoubleOperator
+  DoubleOperator       operator - (DoubleOperator lhs, DoubleOperator const& rhs);                            //!< DoubleOperator-DoubleOperator
   ///@}
 
   /**

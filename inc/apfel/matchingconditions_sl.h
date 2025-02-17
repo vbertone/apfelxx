@@ -388,10 +388,11 @@ namespace apfel
   class AS3Hg_0: public Expression
   {
   public:
-    AS3Hg_0(double const& rho = 12214.000);
+    AS3Hg_0(int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    double        const _rho;
+    int           const _imod;
+    double              _rho;
     std::vector<double> _C;
   };
 
@@ -401,12 +402,13 @@ namespace apfel
   class ANS3qqH_0: public Expression
   {
   public:
-    ANS3qqH_0(double const& rho = -64.411);
+    ANS3qqH_0(int const& imod = 0);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    double        const _rho;
+    int           const _imod;
+    double              _rho;
     std::vector<double> _C;
   };
 
@@ -426,10 +428,11 @@ namespace apfel
   class AS3ggH_0: public Expression
   {
   public:
-    AS3ggH_0(double const& rho = -1951.600);
+    AS3ggH_0(int const& imod = 0);
     double Regular(double const& x)  const;
   private:
-    double const        _rho;
+    int           const _imod;
+    double              _rho;
     std::vector<double> _C;
   };
   ///@}
