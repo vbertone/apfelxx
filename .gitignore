@@ -98,4 +98,5 @@ build
 /.vscode/
 *.fdb_latexmk
 *.fls
-
+*.ilg
+*.ind

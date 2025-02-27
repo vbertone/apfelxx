@@ -3,6 +3,13 @@
 \usepackage[italian,english]{babel}
 \usepackage[center,small]{caption}[2007/01/07]
 \usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
 
 \oddsidemargin = 12pt
 \topmargin = 0pt
@@ -930,7 +937,7 @@ T^{(6)}_{35}(Q^2)&=&\displaystyle \Big\{\Gamma^{+}(Q^2,m_t^2)\begin{pmatrix} 1+a
 \end{equation}
 \end{itemize}
 
-\section{Matching conditions with intrinsic distributions}
+\section{Evolution and matching with intrinsic distributions}
 
 The (quite outdated) discussion presented above concerning the PDF
 matching conditions is restricted to forward evolution (\textit{i.e.}
@@ -1134,7 +1141,6 @@ Eq.~(\ref{eq:MathcingMatrices}). However, we can still compute them
 algorithmically depending on the number of light flavours $n_f$. To do
 so, we define the following linearly independent combinations:
 \begin{equation}
-\footnotesize
 \begin{array}{lcl}
 M_1 &=& K_{gg}\,,\\
 M_2 &=& K_{gh} + n_f K_{gl}\,,\\
@@ -1552,6 +1558,194 @@ of the $\mathcal{O}(\alpha_s^2)$ corrections to the FF matching
 conditions has been computed. Therefore, we must limit to
 $\mathbb{K}^{(1)(n_f)}$ that is simply given by the transpose of that
 for PDFs.
+
+\section{Evolution and matching with QED corrections}
+
+In this section, we address the question of deriving PDF matching condition and
+evolution operator in the presence of QED corrections. We will first address the
+case in which only the photon PDFs is introduces on top of the usual QCD PDFs.
+We will leave the discussion of the case in which the photon PDF is accompanied
+by lepton PDFs for later.
+
+The fact that the photon coupling to quarks is proportional to the electric
+charge, while the QCD coupling is proportional to the strong coupling,
+complicates the description in that one first needs to define a new \textit{ad
+hoc} evolution basis, for which we need to work out the matching at threshold.
+Moreover, we would in principle need to include in the perturbative matching
+functions perturbative corrections proportional to the electromagnetic coupling
+$\alpha$. Here, we will not include any such corrections and stick pure-QCD
+matching conditions.
+
+The QED evolution basis has already been introduced in the document {\tt
+QCD\_QED\_common\_basis.pdf}. We report it here in a different order and with
+$\Delta_\Sigma\rightarrow-\Delta_\Sigma$ and $\Delta_V\rightarrow -\Delta_V$,
+which is more convenient for our purposes:
+\begin{equation}
+  \begin{array}{ll}
+  \mbox{1) }\gamma & \\
+  \mbox{2) }g & \\
+  \mbox{3) }\displaystyle \Sigma = \Sigma_u + \Sigma_d & \quad \mbox{9) }\displaystyle V =V_u +  V_d\\
+  \mbox{4) }\displaystyle \Delta_\Sigma = \Sigma_d - \Sigma_u & \quad \mbox{10) }\displaystyle \Delta_V = V_d - V_u\\
+  \mbox{5) }T_1^d = d^+ - s^+ &\quad \mbox{11) }V_1^d = d^- - s^-  \\
+  \mbox{6) }T_1^u = u^+ - c^+ &\quad \mbox{12) }V_1^u = u^- - c^-\\
+  \mbox{7) }T_2^d = d^+ + s^+ - 2b^+ &\quad \mbox{13) }V_2^d = d^- + s^- - 2b^-\\
+  \mbox{8) }T_2^u = u^+ + c^+ - 2t^+ &\quad \mbox{14) }V_2^u = u^- + c^- - 2t^-
+  \end{array}
+  \label{eq:QEDEvolutionBasis}
+\end{equation}
+where:
+\begin{equation}
+  \begin{array}{ll}
+  \displaystyle \Sigma_u = \sum_{k=i}^{n_u} u_k^+ & \qquad \displaystyle \Sigma_d
+  = \sum_{k=i}^{n_d} d_k^+ \\
+  \\
+  \displaystyle V_u = \sum_{k=i}^{n_u} u_k^- & \qquad \displaystyle V_d
+  = \sum_{k=i}^{n_d} d_k^-\,,
+  \end{array}
+\end{equation}
+where $q_i^\pm = q_i\pm\overline{q}_i$ and with $n_d$ and $n_u$ the number of
+down-type and up-type flavours, respectively, which are such that:
+\begin{equation}
+  \Sigma = \Sigma_u + \Sigma_d \quad\mbox{and}\quad V = V_u +  V_d\,.
+\end{equation}
+
+As above, valence distributions from 9) to 14), which are made of combinations
+of $q_i^-$, match multiplicatively as in Eq.~(\ref{eq:nsingletmc}). The matching
+for the other distributions is obtained using those in
+Eq.~(\ref{eq:IntMatchingConds}) with the additional condition:
+\begin{equation}
+  \gamma^{(n_f+1)} = \gamma^{(n_f)}\,,\\
+\end{equation}
+which are given in the physical basis. The complication here boils down to
+rotating these relations from the physical basis into the evolution basis given
+in Eq.~(\ref{eq:QEDEvolutionBasis}). This can be done by means of the rotation
+matrix:
+\begin{equation}
+  T = 
+  \left(
+\begin{array}{ccccccc}
+ 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+ 0 & 1 & -1 & 1 & -1 & 1 & -1 \\
+ 0 & 1 & 0 & -1 & 0 & 0 & 0 \\
+ 0 & 0 & 1 & 0 & -1 & 0 & 0 \\
+ 0 & 1 & 0 & 1 & 0 & -2 & 0 \\
+ 0 & 0 & 1 & 0 & 1 & 0 & -2 \\
+\end{array}
+\right)\,,
+  \label{eq:RotationMatrixQED}
+\end{equation}
+acting on distributions from 2) to 8) in Eq.~(\ref{eq:QEDEvolutionBasis}) and
+whose inverse is:
+\begin{equation}
+  T^{-1} = \frac{1}{6}
+  \left(
+\begin{array}{ccccccc}
+ 6 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 1 & 1 & 3 & 0 & 1 & 0 \\
+ 0 & 1 & -1 & 0 & 3 & 0 & 1 \\
+ 0 & 1 & 1 & -3 & 0 & 1 & 0 \\
+ 0 & 1 & -1 & 0 & -3 & 0 & 1 \\
+ 0 & 1 & 1 & 0 & 0 & -2 & 0 \\
+ 0 & 1 & -1 & 0 & 0 & 0 & -2 \\
+\end{array}
+\right)
+\label{eq:RotationMatrixQEDInverse}
+\end{equation}
+This time, the algorithm to determine the matrix
+$\left[T\mathbb{K}^{(n_f)}T^{-1}\right]$ is more complicated. Therefore, we will
+just report the single cases from $n_f=0$ to $n_f=5$:
+\begin{equation}
+  \tiny
+  \begin{array}{l}
+  \left[T\mathbb{K}^{(0)}T^{-1}\right] = 
+  \left(
+\begin{array}{ccccccc}
+ K_{gg} & \frac{K_{gh}}{6} & \frac{K_{gh}}{6} & \frac{K_{gh}}{2} & 0 & \frac{K_{gh}}{6} & 0 \\
+ K_{hg} & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
+ K_{hg}  & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
+ K_{hg}  & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ K_{hg}  & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{array}
+\right)
+\\
+\\
+\left[T\mathbb{K}^{(1)}T^{-1}\right] = 
+\left(
+\begin{array}{ccccccc}
+ K_{gg} & \frac{K_{gh}+K_{gl} }{6} & \frac{K_{gl} -K_{gh}}{6} & \frac{K_{gl} }{2} & \frac{K_{gh}}{2} & \frac{K_{gl} }{6} & \frac{K_{gh}}{6} \\
+ K_{hg}  & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{1}{6} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{2} & \frac{K_{hh} }{2} & \frac{K_{hl}+K_{ll}}{6} & \frac{K_{hh} }{6} \\
+ -K_{hg}  & \frac{1}{6} (-K_{hh} -K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}+K_{ll}) & \frac{K_{ll}-K_{hl}}{2} & -\frac{K_{hh} }{2} & \frac{K_{ll}-K_{hl}}{6} & -\frac{K_{hh} }{6} \\
+ 0 & \frac{K_{ll}}{6} & \frac{K_{ll}}{6} & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} & 0 \\
+ K_{hg}  & \frac{K_{hh} +K_{hl}}{6} & \frac{K_{hl}-K_{hh} }{6} & \frac{K_{hl}}{2} & \frac{K_{hh} }{2} & \frac{K_{hl}}{6} & \frac{K_{hh} }{6} \\
+ 0 & \frac{K_{ll}}{6} & \frac{K_{ll}}{6} & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} & 0 \\
+ K_{hg}  & \frac{K_{hh} +K_{hl}}{6} & \frac{K_{hl}-K_{hh} }{6} & \frac{K_{hl}}{2} & \frac{K_{hh} }{2} & \frac{K_{hl}}{6} & \frac{K_{hh} }{6} \\
+\end{array}
+\right)
+\\
+\\
+\left[T\mathbb{K}^{(2)}T^{-1}\right] = 
+\left(
+  \begin{array}{ccccccc}
+   K_{gg} & \frac{1}{6} (K_{gh}+2 K_{gl} ) & \frac{K_{gh}}{6} & \frac{K_{gl} -K_{gh}}{2} & \frac{K_{gl} }{2} & \frac{K_{gh}+K_{gl} }{6} & \frac{K_{gl} }{6} \\
+   K_{hg}  & \frac{1}{6} (K_{hh} +2 (K_{hl}+K_{ll})) & \frac{K_{hh} }{6} & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{2} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{6} \\
+   K_{hg}  & \frac{1}{6} (K_{hh} +2 K_{hl}) & \frac{1}{6} (K_{hh} +2 K_{ll}) & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}-K_{ll}}{2} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}-K_{ll}}{6} \\
+   -K_{hg}  & \frac{1}{6} (-K_{hh} -2 K_{hl}+K_{ll}) & \frac{K_{ll}-K_{hh} }{6} & \frac{1}{2} (K_{hh} -K_{hl}+K_{ll}) & -\frac{K_{hl}}{2} & \frac{1}{6} (-K_{hh} -K_{hl}+K_{ll}) & -\frac{K_{hl}}{6} \\
+   0 & \frac{K_{ll}}{6} & -\frac{K_{ll}}{6} & 0 & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} \\
+   K_{hg}  & \frac{1}{6} (K_{hh} +2 K_{hl}+K_{ll}) & \frac{K_{hh} +K_{ll}}{6} & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}}{2} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}}{6} \\
+   0 & \frac{K_{ll}}{6} & -\frac{K_{ll}}{6} & 0 & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} \\
+  \end{array}
+  \right)
+\\
+\\
+\left[T\mathbb{K}^{(3)}T^{-1}\right] = 
+\left(
+\begin{array}{ccccccc}
+ K_{gg} & \frac{1}{6} (K_{gh}+3 K_{gl} ) & \frac{K_{gl} -K_{gh}}{6} & 0 & \frac{K_{gl} -K_{gh}}{2} & \frac{K_{gl} }{3} & \frac{K_{gh}+K_{gl} }{6} \\
+ K_{hg}  & \frac{1}{6} (K_{hh} +3 (K_{hl}+K_{ll})) & \frac{1}{6} (-K_{hh} +K_{hl}+K_{ll}) & 0 & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{3} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) \\
+ -K_{hg}  & \frac{1}{6} (-K_{hh} -3 K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}+3 K_{ll}) & 0 & \frac{1}{2} (K_{hh} -K_{hl}-K_{ll}) & \frac{K_{ll}-K_{hl}}{3} & \frac{1}{6} (-K_{hh} -K_{hl}-K_{ll}) \\
+ 0 & 0 & 0 & K_{ll} & 0 & 0 & 0 \\
+ -K_{hg}  & \frac{1}{6} (-K_{hh} -3 K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}-K_{ll}) & 0 & \frac{1}{2} (K_{hh} -K_{hl}+K_{ll}) & -\frac{K_{hl}}{3} & \frac{1}{6} (-K_{hh} -K_{hl}+K_{ll}) \\
+ 0 & \frac{K_{ll}}{3} & \frac{K_{ll}}{3} & 0 & 0 & \frac{K_{ll}}{3} & 0 \\
+ K_{hg}  & \frac{1}{6} (K_{hh} +3 K_{hl}+K_{ll}) & \frac{1}{6} (-K_{hh} +K_{hl}-K_{ll}) & 0 & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}}{3} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) \\
+\end{array}
+\right)
+\\
+\\
+\left[T\mathbb{K}^{(4)}T^{-1}\right] = 
+\left(
+  \begin{array}{ccccccc}
+   K_{gg} & \frac{1}{6} (K_{gh}+4 K_{gl} ) & \frac{K_{gh}}{6} & 0 & 0 & \frac{K_{gl} -K_{gh}}{3} & \frac{K_{gl} }{3} \\
+   K_{hg}  & \frac{1}{6} (K_{hh} +4 (K_{hl}+K_{ll})) & \frac{K_{hh} }{6} & 0 & 0 & \frac{1}{3} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{3} \\
+   K_{hg}  & \frac{1}{6} (K_{hh} +4 K_{hl}) & \frac{1}{6} (K_{hh} +4 K_{ll}) & 0 & 0 & \frac{1}{3} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}-K_{ll}}{3} \\
+   0 & 0 & 0 & K_{ll} & 0 & 0 & 0 \\
+   0 & 0 & 0 & 0 & K_{ll} & 0 & 0 \\
+   -2 K_{hg}  & \frac{1}{3} (-K_{hh} -4 K_{hl}+K_{ll}) & \frac{K_{ll}-K_{hh} }{3} & 0 & 0 & \frac{1}{3} (2 K_{hh} -2 K_{hl}+K_{ll}) & -\frac{1}{3} (2 K_{hl}) \\
+   0 & \frac{K_{ll}}{3} & -\frac{K_{ll}}{3} & 0 & 0 & 0 & \frac{K_{ll}}{3} \\
+  \end{array}
+  \right)
+\\
+\\
+\left[T\mathbb{K}^{(5)}T^{-1}\right] = 
+\left(
+\begin{array}{ccccccc}
+ K_{gg} & \frac{1}{6} (K_{gh}+5 K_{gl} ) & \frac{K_{gl} -K_{gh}}{6} & 0 & 0 & 0 & \frac{K_{gl} -K_{gh}}{3} \\
+ K_{hg}  & \frac{1}{6} (K_{hh} +5 (K_{hl}+K_{ll})) & \frac{1}{6} (-K_{hh} +K_{hl}+K_{ll}) & 0 & 0 & 0 & \frac{1}{3} (-K_{hh} +K_{hl}+K_{ll}) \\
+ -K_{hg}  & \frac{1}{6} (-K_{hh} -5 K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}+5 K_{ll}) & 0 & 0 & 0 & \frac{1}{3} (K_{hh} -K_{hl}-K_{ll}) \\
+ 0 & 0 & 0 & K_{ll} & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & K_{ll} & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & K_{ll} & 0 \\
+ -2 K_{hg}  & \frac{1}{3} (-K_{hh} -5 K_{hl}+K_{ll}) & \frac{1}{3} (K_{hh} -K_{hl}-K_{ll}) & 0 & 0 & 0 & \frac{1}{3} (2 K_{hh} -2 K_{hl}+K_{ll}) \\
+\end{array}
+\right)
+\end{array}
+\label{eq:RotationMatrixQEDInverse}
+\end{equation}
+
+
+
 
 \newpage
 \bibliographystyle{ieeetr}
