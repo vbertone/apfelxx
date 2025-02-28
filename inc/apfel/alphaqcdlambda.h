@@ -9,6 +9,7 @@
 #include "apfel/matchedevolution.h"
 
 #include <functional>
+#include <complex>
 
 namespace apfel
 {
@@ -40,6 +41,13 @@ namespace apfel
                    std::vector<double> const& Thresholds,
                    int                 const& pt);
     ///@}
+
+    /**
+     * @brief Function that returns the evolved object over the full complex plane
+     * @param mu: the complex final scale
+     * @return the evolved object.
+     */
+    std::complex<double> Evaluate(std::complex<double> const& mu) const;
 
     /**
      * @brief Function that returns the evolved object.

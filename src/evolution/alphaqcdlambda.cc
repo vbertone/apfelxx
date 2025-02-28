@@ -131,27 +131,27 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double AlphaQCDLambda::Evaluate(double const& mu) const
+  std::complex<double> AlphaQCDLambda::Evaluate(std::complex<double> const& mu) const
   {
     // Implementation of Eq. (3) of
     // https://arxiv.org/pdf/hep-ph/9706430
 
     // Get number of active flavours
-    const int nf = NF(mu, _Thresholds);
+    const int nf = NF(sqrt(norm(mu)), _Thresholds);
 
     // Get log of LambdaQCD with the correct number of active flavours
-    const double L = 2 * log(mu / _LambdaQCD[nf - 1]);
+    const std::complex<double> L = 2. * log(mu / _LambdaQCD[nf - 1]);
 
     // Get value of beta0 at nf
     const double beta0 = beta0qcd(nf);
 
     // Leading order
-    double a = 1 / ( L * beta0 );
+    std::complex<double> a = 1. / ( L * beta0 );
 
     // Next-to-leading order
     if (_pt > 0)
       {
-        const double lnL = log(L);
+        const std::complex<double> lnL = log(L);
         const double b1 = beta1qcd(nf) / beta0;
         a += - b1 * lnL / pow(L * beta0, 2);
 
@@ -159,17 +159,23 @@ namespace apfel
         if (_pt > 1)
           {
             const double b2 = beta2qcd(nf) / beta0;
-            a += ( pow(b1, 2) * ( pow(lnL, 2) - lnL - 1 ) + b2 ) / pow(L * beta0, 3);
+            a += ( pow(b1, 2) * ( pow(lnL, 2) - lnL - 1. ) + b2 ) / pow(L * beta0, 3);
 
             // Next-to-next-to-next-to-leading order
             if (_pt > 2)
               {
                 const double b3 = beta3qcd(nf) / beta0;
-                a += ( pow(b1, 3) * ( - pow(lnL, 3) + 5 * pow(lnL, 2) / 2 + 2 * lnL - 1. / 2. ) - 3 * b1 * b2 * lnL + b3 / 2 ) / pow(L * beta0, 4);
+                a += ( pow(b1, 3) * ( - pow(lnL, 3) + 5. * pow(lnL, 2) / 2. + 2. * lnL - 1. / 2. ) - 3 * b1 * b2 * lnL + b3 / 2 ) / pow(L * beta0, 4);
               }
           }
       }
 
     return FourPi * a;
+  }
+
+  //_________________________________________________________________________________
+  double AlphaQCDLambda::Evaluate(double const& mu) const
+  {
+    return Evaluate(std::complex<double> {mu, 0}).real();
   }
 }
