@@ -8,7 +8,6 @@
 #include "apfel/constants.h"
 #include "apfel/betaqcd.h"
 #include "apfel/gbeta.h"
-#include "apfel/messages.h"
 
 namespace apfel
 {

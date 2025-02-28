@@ -70,7 +70,7 @@ namespace apfel
 
     /**
      * @brief Dummy function used to overload a purely virtual
-     * function. It should be never called.
+     * function. It should never be called.
      */
     double Derivative(int const&, double const&, double const&) const { return 0; };
 

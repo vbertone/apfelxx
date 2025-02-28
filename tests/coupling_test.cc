@@ -31,10 +31,10 @@ int main()
   // Compute and print values at Mu.
   std::cout << "\nNumerical evolution of the strong coupling:" << std::endl;
   std::cout << "LO:     alpha_s(Mu = " << Mu << " GeV) = " << asLO.Evaluate(Mu) << std::endl;
-  std::cout << "NLO:    alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu) << " (NLO/LO       = " << 100 * asNLO.Evaluate(Mu) / asLO.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << " (NNLO/NLO     = " << 100 * asNNLO.Evaluate(Mu) / asNLO.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << " (NNNLO/NNLO   = " << 100 * asNNNLO.Evaluate(Mu) / asNNLO.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNNLO.Evaluate(Mu) << " (NNNNLO/NNNLO = " << 100 * asNNNNLO.Evaluate(Mu) / asNNNLO.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NLO:    alpha_s(Mu = " << Mu << " GeV) = " << asNLO.Evaluate(Mu) << " (NLO/LO       = " << 100 * asNLO.Evaluate(Mu) / asLO.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNNLO.Evaluate(Mu) << " (NNLO/NLO     = " << 100 * asNNLO.Evaluate(Mu) / asNLO.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNNLO.Evaluate(Mu) << " (NNNLO/NNLO   = " << 100 * asNNNLO.Evaluate(Mu) / asNNLO.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNNLO.Evaluate(Mu) << " (NNNNLO/NNNLO = " << 100 * asNNNNLO.Evaluate(Mu) / asNNNLO.Evaluate(Mu) << "%)" << std::endl;
 
   // Iniatialize the running of the coupling at all available
   // perturbative orders.
@@ -46,9 +46,9 @@ int main()
   // Compute and print values at Mu.
   std::cout << "\nAnalytic evolution of the strong coupling:" << std::endl;
   std::cout << "LO:    alpha_s(Mu = " << Mu << " GeV) = " << asLOg.Evaluate(Mu) << std::endl;
-  std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLOg.Evaluate(Mu) << " (NLO/LO     = " << 100 * asNLOg.Evaluate(Mu) / asLOg.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLOg.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLOg.Evaluate(Mu) / asNLOg.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLOg.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLOg.Evaluate(Mu) / asNNLOg.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLOg.Evaluate(Mu) << " (NLO/LO     = " << 100 * asNLOg.Evaluate(Mu) / asLOg.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLOg.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLOg.Evaluate(Mu) / asNLOg.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLOg.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLOg.Evaluate(Mu) / asNNLOg.Evaluate(Mu) << "%)" << std::endl;
 
   // Iniatialize the running of the coupling at all available
   // perturbative orders.
@@ -61,16 +61,27 @@ int main()
   // Compute and print values at Mu.
   std::cout << "\nNumerical evolution of the strong coupling with resummation scale (xi = " << xi << "):" << std::endl;
   std::cout << "LO:    alpha_s(Mu = " << Mu << " GeV) = " << asLOxi.Evaluate(Mu) << std::endl;
-  std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLOxi.Evaluate(Mu) << " (NLO/LO     = " << 100 * asNLOxi.Evaluate(Mu) / asLOxi.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLOxi.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLOxi.Evaluate(Mu) / asNLOxi.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLOxi.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLOxi.Evaluate(Mu) / asNNLOxi.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNLOxi.Evaluate(Mu) << " (NLO/LO     = " << 100 * asNLOxi.Evaluate(Mu) / asLOxi.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNLOxi.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLOxi.Evaluate(Mu) / asNLOxi.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNNLOxi.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLOxi.Evaluate(Mu) / asNNLOxi.Evaluate(Mu) << "%)" << std::endl;
 
   // Ratio between numerical and analytic solutions order by order
   std::cout << "\nRatio between numerical and analytic solutions:" << std::endl;
   std::cout << "LO:    " << 100 * asLO.Evaluate(Mu) / asLOg.Evaluate(Mu) << "%"<< std::endl;
-  std::cout << "NLO:   " << 100 * asNLO.Evaluate(Mu) / asNLOg.Evaluate(Mu)<< "%" << std::endl;
-  std::cout << "NNLO:  " << 100 * asNNLO.Evaluate(Mu) / asNNLOg.Evaluate(Mu)<< "%" << std::endl;
-  std::cout << "NNNLO: " << 100 * asNNNLO.Evaluate(Mu) / asNNNLOg.Evaluate(Mu)<< "%" << std::endl;
+  std::cout << "NLO:   " << 100 * asNLO.Evaluate(Mu) / asNLOg.Evaluate(Mu) << "%" << std::endl;
+  std::cout << "NNLO:  " << 100 * asNNLO.Evaluate(Mu) / asNNLOg.Evaluate(Mu) << "%" << std::endl;
+  std::cout << "NNNLO: " << 100 * asNNNLO.Evaluate(Mu) / asNNNLOg.Evaluate(Mu) << "%" << std::endl;
+
+  // Alpha_s evolution in terms of LambdaQCD
+  apfel::AlphaQCDLambda asLOLambda{0.22, 5, QuarkThresholds, 0};
+  apfel::AlphaQCDLambda asNLOLambda{0.22, 5, QuarkThresholds, 1};
+  apfel::AlphaQCDLambda asNNLOLambda{0.22, 5, QuarkThresholds, 2};
+  apfel::AlphaQCDLambda asNNNLOLambda{0.22, 5, QuarkThresholds, 3};
+  std::cout << "\nAnalytic evolution of the strong coupling in terms of LambdaQCD:" << std::endl;
+  std::cout << "LO:     alpha_s(Mu = " << Mu << " GeV) = " << asLOLambda.Evaluate(Mu) << std::endl;
+  std::cout << "NLO:    alpha_s(Mu = " << Mu << " GeV) = " << asNLOLambda.Evaluate(Mu) << " (NLO/LO     = " << 100 * asNLOLambda.Evaluate(Mu) / asLOLambda.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNLO:   alpha_s(Mu = " << Mu << " GeV) = " << asNNLOLambda.Evaluate(Mu) << " (NNLO/NLO   = " << 100 * asNNLOLambda.Evaluate(Mu) / asNLOLambda.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNNLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNNNLOLambda.Evaluate(Mu) << " (NNNLO/NNLO = " << 100 * asNNNLOLambda.Evaluate(Mu) / asNNLOLambda.Evaluate(Mu) << "%)" << std::endl;
 
   // Reference value of the QED coupling and heavy-quark
   // thresholds.
@@ -87,7 +98,7 @@ int main()
   Mu = 1e10;
   std::cout << "\nNumeric evolution of the electromagnetic coupling:" << std::endl;
   std::cout << "LO:    alpha_em(Mu = " << Mu << " GeV) = " << aLO.Evaluate(Mu) << std::endl;
-  std::cout << "NLO:   alpha_em(Mu = " << Mu << " GeV) = " << aNLO.Evaluate(Mu)  << " (NLO/LO = " << 100 * aNLO.Evaluate(Mu) / aLO.Evaluate(Mu)<< "%)" << std::endl;
+  std::cout << "NLO:   alpha_em(Mu = " << Mu << " GeV) = " << aNLO.Evaluate(Mu)  << " (NLO/LO = " << 100 * aNLO.Evaluate(Mu) / aLO.Evaluate(Mu) << "%)" << std::endl;
 
   // Compute mixed evolution
   apfel::AlphaQCDQED aLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 0};
@@ -118,8 +129,8 @@ int main()
   // Compute and print values at Mu.
   std::cout << "\nNumerical evolution of the strong coupling with MSbar thresholds:" << std::endl;
   std::cout << "LO:   alpha_s(Mu = " << Mu << " GeV) = " << asLOmsb.Evaluate(Mu) << std::endl;
-  std::cout << "NLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNLOmsb.Evaluate(Mu) << " (NLO/LO   = " << 100 * asNLOmsb.Evaluate(Mu) / asLOmsb.Evaluate(Mu)<< "%)" << std::endl;
-  std::cout << "NNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNLOmsb.Evaluate(Mu) << " (NNLO/NLO = " << 100 * asNNLOmsb.Evaluate(Mu) / asNLOmsb.Evaluate(Mu)<< "%)\n" << std::endl;
+  std::cout << "NLO:  alpha_s(Mu = " << Mu << " GeV) = " << asNLOmsb.Evaluate(Mu) << " (NLO/LO   = " << 100 * asNLOmsb.Evaluate(Mu) / asLOmsb.Evaluate(Mu) << "%)" << std::endl;
+  std::cout << "NNLO: alpha_s(Mu = " << Mu << " GeV) = " << asNNLOmsb.Evaluate(Mu) << " (NNLO/NLO = " << 100 * asNNLOmsb.Evaluate(Mu) / asNLOmsb.Evaluate(Mu) << "%)\n" << std::endl;
 
   return 0;
 }
