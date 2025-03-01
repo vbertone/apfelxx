@@ -131,16 +131,16 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  std::complex<double> AlphaQCDLambda::Evaluate(std::complex<double> const& mu2) const
+  std::complex<double> AlphaQCDLambda::Evaluate(std::complex<double> const& t) const
   {
     // Implementation of Eq. (3) of
     // https://arxiv.org/pdf/hep-ph/9706430
 
     // Get number of active flavours
-    const int nf = NF(sqrt(sqrt(norm(mu2))), _Thresholds);
+    const int nf = NF(sqrt(sqrt(norm(exp(t)))), _Thresholds);
 
     // Get log of LambdaQCD with the correct number of active flavours
-    const std::complex<double> L = log(mu2 / pow(_LambdaQCD[nf - 1], 2));
+    const std::complex<double> L = t - 2 * log(_LambdaQCD[nf - 1]);
 
     // Get value of beta0 at nf
     const double beta0 = beta0qcd(nf);
@@ -176,6 +176,6 @@ namespace apfel
   //_________________________________________________________________________________
   double AlphaQCDLambda::Evaluate(double const& mu) const
   {
-    return Evaluate(std::complex<double> {pow(mu, 2), 0}).real();
+    return Evaluate(std::complex<double> {2 * log(mu), 0}).real();
   }
 }

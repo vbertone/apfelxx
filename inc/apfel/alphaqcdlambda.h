@@ -44,10 +44,10 @@ namespace apfel
 
     /**
      * @brief Function that returns the evolved object over the full complex plane
-     * @param mu2: the complex final scale (squared)
+     * @param t: the complex final scale expressed as log(m2)
      * @return the evolved object.
      */
-    std::complex<double> Evaluate(std::complex<double> const& mu2) const;
+    std::complex<double> Evaluate(std::complex<double> const& t) const;
 
     /**
      * @brief Function that returns the evolved object.
