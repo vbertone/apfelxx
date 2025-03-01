@@ -8,6 +8,7 @@
 #include "apfel/constants.h"
 #include "apfel/betaqcd.h"
 #include "apfel/tools.h"
+#include "apfel/integrator.h"
 
 #include <iostream>
 
@@ -177,5 +178,11 @@ namespace apfel
   double AlphaQCDLambda::Evaluate(double const& mu) const
   {
     return Evaluate(std::complex<double> {2 * log(mu), 0}).real();
+  }
+
+  //_________________________________________________________________________________
+  double AlphaQCDLambda::EvaluateAPT(double const& mu, double const& tmin, double const& tmax, double const& eps) const
+  {
+    return apfel::Integrator{[=] (double const& t) -> double{ return 1. / ( 1 + exp(2 * log(mu) - t) ) * Evaluate(std::complex<double>{t, - M_PI}).imag() / M_PI; }}.integrate(tmin, tmax, eps);
   }
 }
