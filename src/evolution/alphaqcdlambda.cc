@@ -129,6 +129,11 @@ namespace apfel
         _LambdaQCD[i] = 0;
       else
         _LambdaQCD[i] = LambdaQCDnf(_LambdaQCD[i - 1], i - 1);
+
+    // compute and store thresholds in the varaible t = ln(mu2) to be
+    // used for the APT coupling.
+    for (double const& mh : _Thresholds)
+      _tThresholds.push_back(mh <= 0 ? -1e8 : 2 * log(mh));
   }
 
   //_________________________________________________________________________________
@@ -181,8 +186,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double AlphaQCDLambda::EvaluateAPT(double const& mu, double const& tmin, double const& tmax, double const& eps) const
+  double AlphaQCDLambda::EvaluateAPT(double const& mu, double const& p, double const& tmin, double const& tmax, double const& eps) const
   {
-    return apfel::Integrator{[=] (double const& t) -> double{ return 1. / ( 1 + exp(2 * log(mu) - t) ) * Evaluate(std::complex<double>{t, - M_PI}).imag() / M_PI; }}.integrate(tmin, tmax, eps);
+    return apfel::Integrator{[=] (double const& t) -> double{ return 1. / ( 1 + exp(2 * log(mu) - t) ) * pow(Evaluate(std::complex<double>{t, - M_PI}), p).imag() / M_PI; }}.integrate(tmin, tmax, _tThresholds, eps);
   }
 }

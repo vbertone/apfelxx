@@ -61,12 +61,13 @@ namespace apfel
      * @brief Function that returns the evolved object using the
      * analytic-perturbation-theory prescription.
      * @param mu: the final scale
+     * @param p: the power of the coupling (default: 1)
      * @param tmin: lower integration limit in t (default: -100)
      * @param tmax: upper integration limit in t (default: 30000)
      * @param eps: integration accuracy (default: 10<SUP>-5</SUP>)
      * @return the evolved object.
      */
-    double EvaluateAPT(double const& mu, double const& tmin = -100, double const& tmax = 30000, double const& eps = eps5) const;
+    double EvaluateAPT(double const& mu, double const& p = 1, double const& tmin = -100, double const& tmax = 30000, double const& eps = eps5) const;
 
     /**
      * @brief Function that returns the values of LambdaQCD.
@@ -77,5 +78,6 @@ namespace apfel
     std::vector<double> const _Thresholds; //!< Vector of heavy-quark thresholds
     int                 const _pt;         //!< Perturbative order
     std::vector<double>       _LambdaQCD;  //!< Values of LambdaQCD according to the number of active flavours
+    std::vector<double>       _tThresholds; //!< Vector of heavy-quark thresholds in the variable t = ln(mu2)
   };
 }
