@@ -178,9 +178,9 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double AlphaQCDLambda::EvaluateAPT(double const& mu, double const& p, double const& tmin, double const& tmax, double const& eps) const
+  double AlphaQCDLambda::EvaluateAPT(double const& mu, std::function<std::complex<double>(std::complex<double> const&)> const& f, double const& tmin, double const& tmax, double const& eps) const
   {
     const int nf = NF(mu, _Thresholds);
-    return apfel::Integrator{[=] (double const& t) -> double{ return 1. / ( 1 + exp(2 * log(mu) - t) ) * pow(Evaluate(std::complex<double>{t, - M_PI}, nf), p).imag() / M_PI; }}.integrate(tmin, tmax, eps);
+    return apfel::Integrator{[=] (double const& t) -> double{ return 1. / ( 1 + exp(2 * log(mu) - t) ) * f(Evaluate(std::complex<double>{t, - M_PI}, nf)).imag() / M_PI; }}.integrate(tmin, tmax, eps);
   }
 }

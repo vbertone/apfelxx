@@ -62,13 +62,17 @@ namespace apfel
      * @brief Function that returns the evolved object using the
      * analytic-perturbation-theory prescription.
      * @param mu: the final scale
-     * @param p: the power of the coupling (default: 1)
+     * @param f: function of the coupling (default: linear)
      * @param tmin: lower integration limit in t (default: -100)
      * @param tmax: upper integration limit in t (default: 30000)
      * @param eps: integration accuracy (default: 10<SUP>-5</SUP>)
      * @return the evolved object.
      */
-    double EvaluateAPT(double const& mu, double const& p = 1, double const& tmin = -100, double const& tmax = 30000, double const& eps = eps5) const;
+    double EvaluateAPT(double                                                           const& mu,
+                       std::function<std::complex<double>(std::complex<double> const&)> const& f = [] (std::complex<double> const& a) -> std::complex<double>{ return a; },
+                       double                                                           const& tmin = -100,
+                       double                                                           const& tmax = 30000,
+                       double                                                           const& eps = eps5) const;
 
     /**
      * @brief Function that returns the values of LambdaQCD.
