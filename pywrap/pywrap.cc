@@ -2,6 +2,8 @@
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
+#include <apfel/hardfactors.h>
+#include <apfel/tmdbuilder.h>
 #include <apfel/apfelxx.h>
 #include <apfel/betaqcd.h>
 #include <apfel/gammak.h>
@@ -39,6 +41,12 @@ PYBIND11_MODULE(apfelpy, m)
 
   // Collins-Soper kernel
   py::module_ _KCS = m.def_submodule("KCS", "Coefficients of the QCD Collins-Soper kernel");
+
+  // Hard factors
+  py::module_ _hardFactors = m.def_submodule("hardFactors", "Hard factors for TMD calculations");
+
+  // TMD evolution and matching functions
+  py::module_ _tmd = m.def_submodule("tmd", "TMD evolution and matching functions");
 
   // Wrappers of "messages.h"
   m.def("SetVerbosityLevel", &apfel::SetVerbosityLevel, "vl"_a);
@@ -133,6 +141,19 @@ PYBIND11_MODULE(apfelpy, m)
   _utilities.def("LHToyPDFsPhys", &apfel::LHToyPDFsPhys, "x"_a, "Q"_a);
   _utilities.def("LHToyPDFsPol", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
   _utilities.def("LHToyFFs", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
+
+  // Wrapper of "hardfactors.h"
+  _hardFactors.def("H1DY", &apfel::H1DY, "One-loop hard factor for Drell-Yan");
+  _hardFactors.def("H2DY", &apfel::H2DY, "nf"_a, "Two-loop hard factor for Drell-Yan");
+  _hardFactors.def("H3DY", &apfel::H3DY, "nf"_a, "Three-loop hard factor for Drell-Yan");
+
+  _hardFactors.def("H1SIDIS", &apfel::H1SIDIS, "One-loop hard factor for SIDIS");
+  _hardFactors.def("H2SIDIS", &apfel::H2SIDIS, "nf"_a, "Two-loop hard factor for SIDIS");
+  _hardFactors.def("H3SIDIS", &apfel::H3SIDIS, "nf"_a, "Three-loop hard factor for SIDIS");
+
+  _hardFactors.def("H3Ch", &apfel::H3Ch, "Three-loop hard factor for Higgs production");
+  _hardFactors.def("H1ggH", &apfel::H1ggH, "One-loop hard factor for gluon-gluon fusion Higgs production");
+  _hardFactors.def("H2ggH", &apfel::H2ggH, "nf"_a, "Two-loop hard factor for gluon-gluon fusion Higgs production");
 
   // Wrappers of "tools.h"
   py::enum_<apfel::QuarkFlavour>(_utilities, "QuarkFlavour")
@@ -577,7 +598,11 @@ PYBIND11_MODULE(apfelpy, m)
   .def(std::map<int, double>() * py::self)
   .def(py::self / double())
   .def(py::self + py::self)
-  .def(py::self - py::self);
+  .def(py::self - py::self)
+  // For convenience, add __len__:
+  .def("__len__", [](const apfel::Set<apfel::Distribution>& self) {
+    return self.GetObjects().size(); // or use self.size() if available
+  });
 
   py::class_<apfel::Set<apfel::Operator>>(m, "SetO")
   .def(py::init<apfel::ConvolutionMap const&, std::map<int, apfel::Operator> const&>(), "Map"_a = apfel::ConvolutionMap{"UNDEFINED"}, "in"_a = std::map<int, apfel::Operator> {})
@@ -1327,4 +1352,48 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeGpdObjects", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjects), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsPol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsPol), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsTrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsTrans), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+
+  // Wrappers of "tmdbuilder.h"
+  // Define the TmdObjects structure
+  py::class_<apfel::TmdObjects>(_tmd, "TmdObjects")
+  .def_readwrite("Threshold", &apfel::TmdObjects::Threshold)
+  .def_readwrite("Beta",      &apfel::TmdObjects::Beta)
+  .def_readwrite("GammaFq",   &apfel::TmdObjects::GammaFq)
+  .def_readwrite("GammaFg",   &apfel::TmdObjects::GammaFg)
+  .def_readwrite("GammaK",    &apfel::TmdObjects::GammaK)
+  .def_readwrite("KCS",       &apfel::TmdObjects::KCS)
+  .def_readwrite("MatchingFunctionsPDFs", &apfel::TmdObjects::MatchingFunctionsPDFs)
+  .def_readwrite("MatchingFunctionsFFs",  &apfel::TmdObjects::MatchingFunctionsFFs)
+  .def_readwrite("HardFactors", &apfel::TmdObjects::HardFactors);
+
+  // Add TMD object initializers
+  _tmd.def("InitializeTmdObjects",            &apfel::InitializeTmdObjects,            "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for evolution and matching of TMD PDFs and FFs");
+  _tmd.def("InitializeTmdObjectsDYResScheme", &apfel::InitializeTmdObjectsDYResScheme, "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects with resummation-scheme transformation");
+  _tmd.def("InitializeTmdObjectsBM",          &apfel::InitializeTmdObjectsBM,          "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for Boer-Mulders TMD PDF");
+  _tmd.def("InitializeTmdObjectsSivers",      &apfel::InitializeTmdObjectsSivers,      "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for Sivers TMD PDF");
+  _tmd.def("InitializeTmdObjectsg1",          &apfel::InitializeTmdObjectsg1,          "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for g1 TMD PDFs");
+
+  // Add TMD builders
+  _tmd.def("BuildTmdPDFs", &apfel::BuildTmdPDFs, "TmdObj"_a, "CollPDFs"_a,          "Alphas"_a, "PerturbativeOrder"_a,             "Ci"_a = 1, "IntEps"_a = 1e-7, "Build matched and evolved TMD PDFs");
+  _tmd.def("BuildTmdFFs",  &apfel::BuildTmdFFs,  "TmdObj"_a, "CollFFs"_a,           "Alphas"_a, "PerturbativeOrder"_a,             "Ci"_a = 1, "IntEps"_a = 1e-7, "Build matched and evolved TMD FFs");
+  _tmd.def("BuildTmdJet",  &apfel::BuildTmdJet,  "TmdObj"_a, "JetAlgo"_a, "JetR"_a, "Alphas"_a, "PerturbativeOrder"_a, "CJ"_a = 1, "Ci"_a = 1, "IntEps"_a = 1e-7, "Build TMD of a jet in b-space");
+  _tmd.def("MatchTmdPDFs", &apfel::MatchTmdPDFs, "TmdObj"_a, "CollPDFs"_a,          "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1,                                "Match TMD PDFs in b-space");
+  _tmd.def("MatchTmdFFs",  &apfel::MatchTmdFFs,  "TmdObj"_a, "CollFFs"_a,           "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1,                                "Match TMD FFs in b-space");
+  _tmd.def("MatchTmdJet",  &apfel::MatchTmdJet,  "TmdObj"_a, "JetAlgo"_a,  "tR"_a,  "Alphas"_a, "PerturbativeOrder"_a, "CJ"_a = 1, "Ci"_a = 1, "IntEps"_a = 1e-7, "Match jet TMD in b-space at initial scale");
+  _tmd.def("MatchingFunctionsPDFs", &apfel::MatchingFunctionsPDFs, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "Get matching functions for TMD PDFs");
+  _tmd.def("MatchingFunctionsFFs",  &apfel::MatchingFunctionsFFs,  "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "Get matching functions for TMD FFs");
+
+  // Add evolution factor functions
+  _tmd.def("EvolutionFactors",       static_cast<std::function<std::vector<double>(double const&, double const&, double const&)>(*)(std::map<int, apfel::TmdObjects> const&, std::function<double(double const&)> const&, int const&, double const&, double const&)>(&apfel::EvolutionFactors), "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1.0, "IntEps"_a = 1e-7, "Return evolution factors for gluon and quarks as a function of (bT, mu, zeta).\n" "The returned callable accepts three doubles and returns a vector of doubles.\n" "Index 0: gluon factor, indices 1-12: quark factors."); 
+  _tmd.def("EvolutionFactorsK",      &apfel::EvolutionFactorsK, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factors for gluon and quarks with double logs isolated");
+  _tmd.def("QuarkEvolutionFactor",   static_cast<std::function<double(double const&, double const&, double const&)> (*)(std::map<int, apfel::TmdObjects> const&, std::function<double(double const&)> const&, int const&, double const&, double const&)>(&apfel::QuarkEvolutionFactor), "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factor for quarks");
+  _tmd.def("QuarkEvolutionFactorxi", &apfel::QuarkEvolutionFactorxi, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "xi"_a = 1, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factor for quarks with resummation-scale parameter");
+  _tmd.def("GluonEvolutionFactor",   static_cast<std::function<double(double const&, double const&, double const&)>(*)(std::map<int, apfel::TmdObjects> const&, std::function<double(double const&)> const&, int const&, double const&, double const&)>(&apfel::GluonEvolutionFactor), "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factor for gluon");  
+
+  // Add analytic evolution and kernel functions
+  _tmd.def("QuarkAnalyticEvolutionFactor", &apfel::QuarkAnalyticEvolutionFactor, "TmdObj"_a, "mu0"_a, "Alphas0"_a, "kappa"_a, "kappa0"_a, "PerturbativeOrder"_a, "Get analytic evolution factor for quark TMD");
+  _tmd.def("GluonAnalyticEvolutionFactor", &apfel::GluonAnalyticEvolutionFactor, "TmdObj"_a, "mu0"_a, "Alphas0"_a, "kappa"_a, "kappa0"_a, "PerturbativeOrder"_a, "Get analytic evolution factor for gluon TMD");
+  _tmd.def("CollinsSoperKernel",           &apfel::CollinsSoperKernel,           "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7,   "Get perturbative part of Collins-Soper kernel for quarks");
+  _tmd.def("HardFactor",                   &apfel::HardFactor,      "Process"_a, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Cf"_a = 1,                      "Get hard factor for specified process");
+
 }
