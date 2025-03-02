@@ -69,7 +69,7 @@ namespace apfel
      * @return the evolved object.
      */
     double EvaluateAPT(double                                                           const& mu,
-                       std::function<std::complex<double>(std::complex<double> const&)> const& f = [] (std::complex<double> const& a) -> std::complex<double>{ return a; },
+                       std::function<std::complex<double>(std::complex<double> const&)> const& f = [] (std::complex<double> const& a) -> std::complex<double> { return a; },
                        double                                                           const& tmin = -100,
                        double                                                           const& tmax = 30000,
                        double                                                           const& eps = eps5) const;
