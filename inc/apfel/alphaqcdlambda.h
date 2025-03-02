@@ -46,9 +46,10 @@ namespace apfel
     /**
      * @brief Function that returns the evolved object over the full complex plane
      * @param t: the complex final scale expressed as log(m2)
+     * @param nf: the number of active flavours
      * @return the evolved object.
      */
-    std::complex<double> Evaluate(std::complex<double> const& t) const;
+    std::complex<double> Evaluate(std::complex<double> const& t, int const& nf) const;
 
     /**
      * @brief Function that returns the evolved object.
@@ -78,6 +79,5 @@ namespace apfel
     std::vector<double> const _Thresholds; //!< Vector of heavy-quark thresholds
     int                 const _pt;         //!< Perturbative order
     std::vector<double>       _LambdaQCD;  //!< Values of LambdaQCD according to the number of active flavours
-    std::vector<double>       _tThresholds; //!< Vector of heavy-quark thresholds in the variable t = ln(mu2)
   };
 }
