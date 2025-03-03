@@ -73,6 +73,18 @@ namespace apfel
                        double                                                           const& tmin = -100,
                        double                                                           const& tmax = 30000,
                        double                                                           const& eps = eps5) const;
+    
+    /**
+     * @brief Function that returns the evolved object using the
+     * analytic-perturbation-theory prescription and subtracted dispersion relation.
+     * @param mu: the final scale
+     * @param eps: integration accuracy (default: 10<SUP>-5</SUP>)
+     * @param f: function of the coupling (default: linear)
+     * @return the evolved object.
+     */
+    double EvaluateAPT_subtr(double                                                           const& mu,
+                             double                                                           const& eps = eps5,
+                             std::function<std::complex<double>(std::complex<double> const&)> const& f = [] (std::complex<double> const& a) -> std::complex<double> { return a; }) const;
 
     /**
      * @brief Function that returns the values of LambdaQCD.
