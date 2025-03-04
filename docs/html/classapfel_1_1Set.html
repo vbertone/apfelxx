@@ -125,6 +125,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a339d0b1d03e094ec494f1c06b7dacde2" id="r_a339d0b1d03e094ec494f1c06b7dacde2"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a339d0b1d03e094ec494f1c06b7dacde2">Combine</a> (std::vector&lt; double &gt; const &amp;weigths) const</td></tr>
 <tr class="memdesc:a339d0b1d03e094ec494f1c06b7dacde2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sums up all the objects of the set into one using the components of input vector as weights.  <br /></td></tr>
 <tr class="separator:a339d0b1d03e094ec494f1c06b7dacde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a060d0c28ac63a4d7f0426e1558d1ad0d" id="r_a060d0c28ac63a4d7f0426e1558d1ad0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a060d0c28ac63a4d7f0426e1558d1ad0d">Transform</a> (std::map&lt; int, std::function&lt; double(double const &amp;)&gt; &gt; const &amp;TranformationFuncs) const</td></tr>
+<tr class="memdesc:a060d0c28ac63a4d7f0426e1558d1ad0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is diagonal in the sense that each transforming function can only transform one single distribution.  <br /></td></tr>
+<tr class="separator:a060d0c28ac63a4d7f0426e1558d1ad0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb1f171e7f86c73a6c63efd9edd05ce" id="r_a5bb1f171e7f86c73a6c63efd9edd05ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bb1f171e7f86c73a6c63efd9edd05ce">Transform</a> (std::map&lt; int, std::map&lt; int, std::function&lt; double(double const &amp;)&gt; &gt; &gt; const &amp;TranformationFuncs) const</td></tr>
+<tr class="memdesc:a5bb1f171e7f86c73a6c63efd9edd05ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is not diagonal in the sense that different distributions can mix upon transformation.  <br /></td></tr>
+<tr class="separator:a5bb1f171e7f86c73a6c63efd9edd05ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a1ee8a43b83e7096cf7b26d8fa0017a" id="r_a8a1ee8a43b83e7096cf7b26d8fa0017a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a1ee8a43b83e7096cf7b26d8fa0017a">Transform</a> (std::map&lt; int, std::function&lt; double(std::map&lt; int, double &gt; const &amp;)&gt; &gt; const &amp;TranformationFuncs) const</td></tr>
+<tr class="memdesc:a8a1ee8a43b83e7096cf7b26d8fa0017a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is not diagonal in the sense that different distributions can mix upon transformation.  <br /></td></tr>
+<tr class="separator:a8a1ee8a43b83e7096cf7b26d8fa0017a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae91c71d2476d5b2a65a5511b1497c1" id="r_a3ae91c71d2476d5b2a65a5511b1497c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ae91c71d2476d5b2a65a5511b1497c1">Print</a> () const</td></tr>
 <tr class="memdesc:a3ae91c71d2476d5b2a65a5511b1497c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> object.  <br /></td></tr>
 <tr class="separator:a3ae91c71d2476d5b2a65a5511b1497c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -688,6 +697,91 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
+<a id="a060d0c28ac63a4d7f0426e1558d1ad0d" name="a060d0c28ac63a4d7f0426e1558d1ad0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a060d0c28ac63a4d7f0426e1558d1ad0d">&#9670;&#160;</a></span>Transform() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; <a class="el" href="classapfel_1_1Set.html">apfel::Set</a>&lt; T &gt;::Transform </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, std::function&lt; double(double const &amp;)&gt; &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>TranformationFuncs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is diagonal in the sense that each transforming function can only transform one single distribution. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TranformationFuncs</td><td>set of transformation functions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8a1ee8a43b83e7096cf7b26d8fa0017a" name="a8a1ee8a43b83e7096cf7b26d8fa0017a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a1ee8a43b83e7096cf7b26d8fa0017a">&#9670;&#160;</a></span>Transform() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; <a class="el" href="classapfel_1_1Set.html">apfel::Set</a>&lt; T &gt;::Transform </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, std::function&lt; double(std::map&lt; int, double &gt; const &amp;)&gt;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const &amp;</td>          <td class="paramname"><span class="paramname"><em>TranformationFuncs</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is not diagonal in the sense that different distributions can mix upon transformation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TranformationFuncs</td><td>set of transformation functions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5bb1f171e7f86c73a6c63efd9edd05ce" name="a5bb1f171e7f86c73a6c63efd9edd05ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb1f171e7f86c73a6c63efd9edd05ce">&#9670;&#160;</a></span>Transform() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; <a class="el" href="classapfel_1_1Set.html">apfel::Set</a>&lt; T &gt;::Transform </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, std::map&lt; int, std::function&lt; double(double const &amp;)&gt; &gt; &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>TranformationFuncs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is not diagonal in the sense that different distributions can mix upon transformation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TranformationFuncs</td><td>set of transformation functions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
 <a id="a81129a84d14b4186c5e4c7ab8376a3aa" name="a81129a84d14b4186c5e4c7ab8376a3aa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81129a84d14b4186c5e4c7ab8376a3aa">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
@@ -781,7 +875,7 @@ template&lt;class T&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 9 2025 17:51:27 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Tue Mar 4 2025 16:05:45 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -996,12 +996,12 @@ as:
 \begin{array}{rcl}
   \displaystyle g^{(n_f+1)}&=&\displaystyle
                                [1+K_{gg}]g^{(n_f)}+K_{gl}\sum_l
-                               l^{+(n_f+1)} + K_{gh}h^{+(n_f)}\,,\\
+                               l^{+(n_f)} + K_{gh}h^{+(n_f)}\,,\\
   \\
   \displaystyle l^{+(n_f+1)}&=&\displaystyle [1+K_{ll}]l^{+(n_f)}\,,\\
   \\
   \displaystyle h^{+(n_f+1)}&=&\displaystyle K_{hg}g^{(n_f)} + K_{hl}\sum_l
-                                l^{+(n_f+1)}+[1+K_{hh}]h^{+(n_f)}\,,\\
+                                l^{+(n_f)}+[1+K_{hh}]h^{+(n_f)}\,,\\
   \\
   H^{+(n_f+1)} &=& H^{+(n_f)}\,,
 \end{array}
@@ -1020,7 +1020,7 @@ $K$ start at least at $\mathcal{O}(\alpha_s)$. In fact, we have
 already seen that $K_{ll}=\mathcal{O}(\alpha_s^2)$; the same applies
 to $K_{hl}$ and $K_{gl}$. Defining the column vector $P$ with
 components $(g,d^+,u^+,s^+,c^+,b^+,t^+)$, we can represent the
-matching in a matricial form as:
+matching in a matrix form as:
 \begin{equation}
 P^{(n_f+1)} = \left[\mathbb{I}+\mathbb{K}^{(n_f)}\right]P^{(n_f)}\,,
 \end{equation}
@@ -1150,6 +1150,7 @@ M_5 &=& K_{hh}+n_f(K_{hl}+K_{ll}) \,,\\
 M_6 &=& K_{hh}-(K_{hl}+K_{ll})\,,\\
 M_7 &=& K_{ll}\,,
 \end{array}
+\label{eq:Mcombs}
 \end{equation}
 such that:
 \begin{equation}
@@ -1558,6 +1559,88 @@ of the $\mathcal{O}(\alpha_s^2)$ corrections to the FF matching
 conditions has been computed. Therefore, we must limit to
 $\mathbb{K}^{(1)(n_f)}$ that is simply given by the transpose of that
 for PDFs.
+
+\subsection{In the presence of N$^3$LO corrections}
+
+If $\mathcal{O}(\alpha_s^3)$ corrections are included in the matching, matching
+conditions in Eq.~(\ref{eq:IntMatchingConds}) need to be generalised as follows:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle g^{(n_f+1)}&=&\displaystyle
+                               [1+K_{gg}]g^{(n_f)}+K_{gl}\sum_l
+                               l^{+(n_f+1)} + K_{gh}h^{+(n_f)}\,,\\
+  \\
+  \displaystyle l^{+(n_f)}&=&\displaystyle [1+K_{ll}]l^{+(n_f)}+K_{ll'}\sum_l l^{+(n_f)}+K_{lg}g^{(n_f)}\,,\\
+  \\
+  \displaystyle h^{+(n_f)}&=&\displaystyle K_{hg}g^{(n_f)} + K_{hl}\sum_l
+                                l^{+(n_f+1)}+[1+K_{hh}]h^{+(n_f)}\,,\\
+  \\
+  H^{+(n_f+1)} &=& H^{+(n_f)}\,,
+\end{array}
+\label{eq:IntMatchingCondsN3LO}
+\end{equation}
+where the new matching functions $K_{ll'}$ and $K_{lg}$, which start at
+$\mathcal{O}(\alpha_s^3)$, are introduced and where we neglected a possible
+$K_{lh}$ that in principle exists but will not probably be computed in the next
+future. With this modification, the matching algorithm in the evolution basis in
+Eq.~(\ref{eq:algorithmEv}) is more complicated. First we need to define two more
+combinations w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$ and $M_9$:
+\begin{equation}
+  \begin{array}{lcl}
+  M_1 &=& K_{gg}\,,\\
+  M_2 &=& K_{gh} + n_f K_{gl}\,,\\
+  M_3 &=& K_{gh}-K_{gl}\,,\\
+  M_4 &=& K_{hg}+n_f K_{lg}\,,\\
+  M_5 &=& K_{hh}+n_f(K_{hl}+K_{ll}+n_f K_{ll'}) \,,\\
+  M_6 &=& K_{hh}-(K_{hl}+K_{ll}+n_f K_{ll'})\,,\\
+  M_7 &=& K_{ll}\,,\\
+  M_8 &=& K_{hg} -  K_{lg}\,,\\
+  M_9 &=& K_{hh}+n_f(K_{hl}+K_{ll}-K_{ll'})\,,
+  \end{array}
+  \label{eq:McombsN3LO}
+\end{equation}
+which are such that up to NNLO $M_8=M_4$ and $M_9=M_5$. With these at hand, we
+find:
+\begin{equation}
+\footnotesize
+\left[T\mathbb{K}^{(n_f)}T^{-1}\right]_{ij} =
+\left\{
+\begin{array}{lll}
+M_1 & \quad i = 0 &\quad j = 0\\
+\frac{1}{6}M_2 & \quad i = 0 &\quad  j = 1\\
+0 & \quad i = 0 &\quad  2\leq j \leq n_f\\
+-\frac{1}{n_f+1}M_3 & \quad i = 0 &\quad  j = n_f+1\\
+\frac{1}{j(j-1)}M_2 & \quad i = 0 &\quad  n_f+ 2\leq j \leq 6\\
+\\
+M_4 & \quad i = 1&\quad  j=0\\
+\frac16 M_5 & \quad i = 1 &\quad  j=1\\
+0 & \quad i = 1 &\quad  2\leq j \leq n_f\\
+-\frac{1}{n_f+1}M_6 & \quad i = 1 &\quad  j = n_f+1\\
+\frac{1}{j(j-1)}M_5 & \quad i = 1 &\quad  n_f+
+                                                            2\leq j
+                                                            \leq 6\\
+\\
+\delta_{ij}M_7&\quad 2\leq i \leq n_f &\quad 0\leq j
+                                                         \leq 6\\
+\\
+-n_fM_8 &\quad i = n_f+1 &\quad j =0\\
+\frac{n_f}6\left(-M_9+(n_f+1)M_7\right) &\quad i = n_f+1 &\quad j =1\\
+0 & \quad i = n_f+1 &\quad  2\leq j \leq n_f\\
+\frac1{n_f+1}\left(n_f M_6+(n_f+1)M_7+M_5-M_9\right) &\quad i = n_f+1 &\quad j =n_f+1\\
+\frac{n_f}{j(j-1)}\left( -M_9+(n_f+1)M_7\right) &\quad i = n_f+1
+                  &\quad n_f+2 \leq j \leq 6\\
+\\
+M_4 & \quad n_f+2\leq i \leq 6 &\quad  j=0\\
+\frac16 M_5 & \quad n_f+2\leq i \leq 6 &\quad  j=1\\
+0 & \quad n_f+2\leq i \leq 6 &\quad  2\leq j \leq n_f\\
+-\frac{1}{n_f+1}M_6 & \quad n_f+2\leq i \leq 6 &\quad  j = n_f+1\\
+\frac{1}{j(j-1)}M_5 & \quad n_f+2\leq i \leq 6 &\quad  n_f+
+                                                            2\leq j
+                                                            \leq 6\\
+\end{array}
+\right.
+\label{eq:algorithmEvN3LO}
+\end{equation}
 
 \section{Evolution and matching with QED corrections}
 
