@@ -44,7 +44,8 @@ namespace apfel
    * @param Thresholds: the heavy quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (default: all zero)
+   * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (only relevant for n3lo = true) (default: all zero's)
    * @return A map of DglapObject objects, one for each possible nf
    */
   std::map<int, DglapObjects> InitializeDglapObjectsQCD(Grid                const& g,
@@ -52,7 +53,8 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol = false,
                                                         double              const& IntEps = 1e-5,
-                                                        std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+                                                        bool                const& n3lo = false,
+                                                        std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsQCD function precomputes the
@@ -63,7 +65,8 @@ namespace apfel
    * @param Thresholds: the heavy-quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
-   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (default: all zero)
+   * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (only relevant for n3lo = true) (default: all zero's)
    * @return A map of DglapObject objects, one for each possible nf
    * @note This function assumes that masses and thresholds coincide.
    */
@@ -71,7 +74,8 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol = false,
                                                         double              const& IntEps = 1e-5,
-                                                        std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+                                                        bool                const& n3lo = false,
+                                                        std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsQCD function precomputes the

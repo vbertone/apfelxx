@@ -29,8 +29,11 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol,
                                                         double              const& IntEps,
+                                                        bool                const& n3lo,
                                                         std::vector<int>    const& IMod)
   {
+    if (!n3lo)
+      warning("InitializeDglapObjectsQCD", "N3LO corrections are not being initialised.");
     report("Initializing DglapObjects for space-like QCD unpolarised evolution... ");
     Timer t;
 
@@ -54,18 +57,6 @@ namespace apfel
         LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
     LogKth.push_back(0);
 
-    // Copy the vector of switches to vary the parameterisation of the
-    // approximated N3LO splitting functions and matching conditions
-    // and adjust it to match the correct number of switches
-    // (10). Issue a warning in case the original vector is modified.
-    const int nvar = 10;
-    std::vector<int> im = IMod;
-    if (im.size() != nvar)
-      {
-        warning("InitializeDglapObjectsQCD", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
-        im.resize(nvar);
-      }
-
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -85,6 +76,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -130,6 +123,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH});
         OM.insert({MatchingBasisQCD::M6, AS1HH});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg});
+        OM.insert({MatchingBasisQCD::M9, AS1HH});
         MatchNLO.insert({nf, OM});
       }
 
@@ -195,6 +190,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, nf * AS2qqH});
         OM.insert({MatchingBasisQCD::M6, (-1) * AS2qqH});
         OM.insert({MatchingBasisQCD::M7, ANS2qqH});
+        OM.insert({MatchingBasisQCD::M8, AS2Hg});
+        OM.insert({MatchingBasisQCD::M9, nf * AS2qqH});
         MatchNNLO.insert({nf, OM});
       }
 
@@ -221,6 +218,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH2});
         OM.insert({MatchingBasisQCD::M6, AS1HH2});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg2});
+        OM.insert({MatchingBasisQCD::M9, AS1HH2});
         MatchNNLOb.insert({nf, OM});
       }
 
@@ -249,52 +248,89 @@ namespace apfel
         OpMapNNLO.insert({nf, OM});
       }
 
-    // ===============================================================
-    // NNNLO matching conditions
-    std::map<int, std::map<int, Operator>> MatchNNNLO;
-    const Operator APS3Hq {g, APS3Hq_0{},       IntEps};
-    const Operator ANS3qqH{g, ANS3qqH_0{im[7]}, IntEps};
-    const Operator AS3Hg  {g, AS3Hg_0{im[8]},   IntEps};
-    const Operator AS3gqH {g, AS3gqH_0{},       IntEps};
-    const Operator AS3ggH {g, AS3ggH_0{im[9]},  IntEps};
-    const Operator AS3qqH = ANS3qqH + APS3Hq;
-    for (int nf = nfi; nf <= nff; nf++)
-      {
-        std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCD::M0, Zero});
-        OM.insert({MatchingBasisQCD::M1, AS3ggH});
-        OM.insert({MatchingBasisQCD::M2, nf * AS3gqH});
-        OM.insert({MatchingBasisQCD::M3, (-1) * AS3gqH});
-        OM.insert({MatchingBasisQCD::M4, AS3Hg});
-        OM.insert({MatchingBasisQCD::M5, nf * AS3qqH});
-        OM.insert({MatchingBasisQCD::M6, (-1) * AS3qqH});
-        OM.insert({MatchingBasisQCD::M7, ANS3qqH});
-        MatchNNNLO.insert({nf, OM});
-      }
 
     // ===============================================================
-    // NNNLO splitting function operators
+    // NNNLO corrections (upon request)
+    std::map<int, std::map<int, Operator>> MatchNNNLO;
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
-    for (int nf = nfi; nf <= nff; nf++)
+    if (n3lo)
       {
-        const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
-        const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
-        const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
-        const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
-        const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
-        const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
-        const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
-        const Operator O3qq  = O3nsp + O3ps;
-        const Operator O3nsv = O3nsm + O3nss;
-        std::map<int, Operator> OM;
-        OM.insert({EvolutionBasisQCD::PNSP, O3nsp});
-        OM.insert({EvolutionBasisQCD::PNSM, O3nsm});
-        OM.insert({EvolutionBasisQCD::PNSV, O3nsv});
-        OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qq});
-        OM.insert({EvolutionBasisQCD::PQG,                O3qg});
-        OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gq});
-        OM.insert({EvolutionBasisQCD::PGG,                O3gg});
-        OpMapNNNLO.insert({nf, OM});
+        // Copy the vector of switches to vary the parameterisation of the
+        // approximated N3LO splitting functions and adjust it to match
+        // the correct number of switches (7). Issue a warning in case
+        // the original vector is modified.
+        const int nvar = 7;
+        std::vector<int> im = IMod;
+        if (im.size() != nvar)
+          {
+            warning("InitializeDglapObjectsQCD", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
+            im.resize(nvar);
+          }
+
+        // ===============================================================
+        // NNNLO matching conditions
+        for (int nf = nfi; nf <= nff; nf++)
+          {
+            const Operator APS3Hq {g, APS3Hq_0{nf},  IntEps};
+            const Operator ANS3qqH{g, ANS3qqH_0{nf}, IntEps};
+            const Operator AS3Hg  {g, AS3Hg_0{nf},   IntEps};
+            const Operator AS3gqH {g, AS3gqH_0{nf},  IntEps};
+            const Operator AS3ggH {g, AS3ggH_0{nf},  IntEps};
+            const Operator AS3qgQ {g, AS3qgQ_0{nf},  IntEps};
+            const Operator APS3qqQ{g, APS3qqQ_0{nf}, IntEps};
+            const Operator AS3qqH = ANS3qqH + APS3Hq;
+            std::map<int, Operator> OM;
+            OM.insert({MatchingBasisQCD::M0, Zero});
+            OM.insert({MatchingBasisQCD::M1, AS3ggH});
+            OM.insert({MatchingBasisQCD::M2, nf * AS3gqH});
+            OM.insert({MatchingBasisQCD::M3, (-1) * AS3gqH});
+            OM.insert({MatchingBasisQCD::M4, AS3Hg + nf * AS3qgQ});
+            OM.insert({MatchingBasisQCD::M5, nf * ( AS3qqH + nf * APS3qqQ )});
+            OM.insert({MatchingBasisQCD::M6, (-1) * ( AS3qqH + nf * APS3qqQ )});
+            OM.insert({MatchingBasisQCD::M7, ANS3qqH});
+            OM.insert({MatchingBasisQCD::M8, AS3Hg - AS3qgQ});
+            OM.insert({MatchingBasisQCD::M9, nf * ( AS3qqH - APS3qqQ )});
+            MatchNNNLO.insert({nf, OM});
+          }
+
+        // ===============================================================
+        // NNNLO splitting function operators
+        for (int nf = nfi; nf <= nff; nf++)
+          {
+            const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
+            const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
+            const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
+            const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
+            const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
+            const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
+            const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
+            const Operator O3qq  = O3nsp + O3ps;
+            const Operator O3nsv = O3nsm + O3nss;
+            std::map<int, Operator> OM;
+            OM.insert({EvolutionBasisQCD::PNSP, O3nsp});
+            OM.insert({EvolutionBasisQCD::PNSM, O3nsm});
+            OM.insert({EvolutionBasisQCD::PNSV, O3nsv});
+            OM.insert({EvolutionBasisQCD::PQQ,  ( nf / 6. ) * O3qq});
+            OM.insert({EvolutionBasisQCD::PQG,                O3qg});
+            OM.insert({EvolutionBasisQCD::PGQ,  ( nf / 6. ) * O3gq});
+            OM.insert({EvolutionBasisQCD::PGG,                O3gg});
+            OpMapNNNLO.insert({nf, OM});
+          }
+      }
+    else
+      {
+        for (int nf = nfi; nf <= nff; nf++)
+          {
+            MatchNNNLO.insert({nf, std::map<int, Operator> {{MatchingBasisQCD::M0, Zero}, {MatchingBasisQCD::M1, Zero}, {MatchingBasisQCD::M2, Zero},
+                {MatchingBasisQCD::M3, Zero}, {MatchingBasisQCD::M4, Zero}, {MatchingBasisQCD::M5, Zero},
+                {MatchingBasisQCD::M6, Zero}, {MatchingBasisQCD::M7, Zero}, {MatchingBasisQCD::M8, Zero},
+                {MatchingBasisQCD::M9, Zero}
+              }});
+            OpMapNNNLO.insert({nf, std::map<int, Operator> {{EvolutionBasisQCD::PNSP, Zero}, {EvolutionBasisQCD::PNSM, Zero}, {EvolutionBasisQCD::PNSV, Zero},
+                {EvolutionBasisQCD::PQQ,  Zero}, {EvolutionBasisQCD::PQG,  Zero}, {EvolutionBasisQCD::PGQ,  Zero},
+                {EvolutionBasisQCD::PGG,  Zero}
+              }});
+          }
       }
 
     // Define object of the structure containing the DglapObjects
@@ -342,9 +378,10 @@ namespace apfel
                                                         std::vector<double> const& Thresholds,
                                                         bool                const& OpEvol,
                                                         double              const& IntEps,
+                                                        bool                const& n3lo,
                                                         std::vector<int>    const& IMod)
   {
-    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, OpEvol, IntEps, IMod);
+    return InitializeDglapObjectsQCD(g, Thresholds, Thresholds, OpEvol, IntEps, n3lo, IMod);
   }
 
   //_____________________________________________________________________________
@@ -396,6 +433,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -441,6 +480,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH});
         OM.insert({MatchingBasisQCD::M6, AS1HH});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg});
+        OM.insert({MatchingBasisQCD::M9, AS1HH});
         MatchNLO.insert({nf, OM});
       }
 
@@ -506,6 +547,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, nf * AS2qqH});
         OM.insert({MatchingBasisQCD::M6, (-1) * AS2qqH});
         OM.insert({MatchingBasisQCD::M7, ANS2qqH});
+        OM.insert({MatchingBasisQCD::M8, AS2Hg});
+        OM.insert({MatchingBasisQCD::M9, nf * AS2qqH});
         MatchNNLO.insert({nf, OM});
       }
 
@@ -532,6 +575,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH2});
         OM.insert({MatchingBasisQCD::M6, AS1HH2});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg2});
+        OM.insert({MatchingBasisQCD::M9, AS1HH2});
         MatchNNLOb.insert({nf, OM});
       }
 
@@ -654,6 +699,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -699,6 +746,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH});
         OM.insert({MatchingBasisQCD::M6, AS1HH});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg});
+        OM.insert({MatchingBasisQCD::M9, AS1HH});
         MatchNLO.insert({nf, OM});
       }
 
@@ -764,6 +813,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, nf * AS2qqH});
         OM.insert({MatchingBasisQCD::M6, (-1) * AS2qqH});
         OM.insert({MatchingBasisQCD::M7, ANS2qqH});
+        OM.insert({MatchingBasisQCD::M8, AS2Hg});
+        OM.insert({MatchingBasisQCD::M9, nf * AS2qqH});
         MatchNNLO.insert({nf, OM});
       }
 
@@ -790,6 +841,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH2});
         OM.insert({MatchingBasisQCD::M6, AS1HH2});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg2});
+        OM.insert({MatchingBasisQCD::M9, AS1HH2});
         MatchNNLOb.insert({nf, OM});
       }
 
@@ -912,6 +965,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -957,6 +1012,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, AS1HH});
         OM.insert({MatchingBasisQCD::M6, AS1HH});
         OM.insert({MatchingBasisQCD::M7, Zero});
+        OM.insert({MatchingBasisQCD::M8, AS1Hg});
+        OM.insert({MatchingBasisQCD::M9, AS1HH});
         MatchNLO.insert({nf, OM});
       }
 
@@ -1008,6 +1065,8 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M5, nf * AS2qqH});
         OM.insert({MatchingBasisQCD::M6, (-1) * AS2qqH});
         OM.insert({MatchingBasisQCD::M7, ANS2qqH});
+        OM.insert({MatchingBasisQCD::M8, Zero});
+        OM.insert({MatchingBasisQCD::M9, nf * AS2qqH});
         MatchNNLO.insert({nf, OM});
       }
 
@@ -1137,6 +1196,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -1243,6 +1304,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -1376,6 +1439,8 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M5, Zero});
     MatchLO.insert({MatchingBasisQCD::M6, Zero});
     MatchLO.insert({MatchingBasisQCD::M7, Zero});
+    MatchLO.insert({MatchingBasisQCD::M8, Zero});
+    MatchLO.insert({MatchingBasisQCD::M9, Zero});
 
     // ===============================================================
     // LO splitting function operators

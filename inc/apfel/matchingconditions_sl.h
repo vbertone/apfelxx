@@ -12,6 +12,49 @@
 
 namespace apfel
 {
+  /// @cond UNNECESSARY
+  /**
+   * @name Fortran N<SUP>3</SUP>LO unpolarised space-like matching conditions
+   * Wrapper to the fortran implementation of the O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+   * matching conditions contained in 'src/evolution/evolution/matchingconditions_sl_n3lo.f'.
+   * The relavent papers are:
+   * - J. Ablinger, A. Behring, J. Blümlein, A. De Freitas, A. von Manteuffel, C. Schneider, and K. Schönwald,
+   *   "The Variable Flavor Number Scheme at  Next-to-Next-to-Leading Order, DESY 24-037,
+   * including results from arXiv:2207.00027, arXiv:2403.00513.
+   */
+  ///@{
+  extern"C"
+  {
+    double ps_(double *z, double *nf, double *as, double *LL);
+    double aps1_(double *z, double *nf, double *as, double *LL);
+    double aps2_(double *z, double *nf, double *as, double *LL);
+    double qg_(double *z, double *nf, double *as, double *LL);
+    double aqg3_(double *z);
+    double aqg3nf_(double *z);
+    double nsreg_(double *z, double *nf, double *as, double *LL);
+    double nsplu_(double *z, double *nf, double *as, double *LL);
+    double nsdel_(double *z, double *nf, double *as, double *LL);
+    double ansreg_(double *z, double *nf, double *as, double *LL);
+    double ansplu1_(double *z, double *nf, double *as, double *LL);
+    double ansplu2_(double *z, double *nf, double *as, double *LL);
+    double ansdel_(double *z, double *nf, double *as, double *LL);
+    double red0_(double *z);
+    double red1_(double *z);
+    double gq_(double *z, double *nf, double *as, double *LL);
+    double agq_(double *z, double *nf, double *as, double *LL);
+    double ggreg_(double *z, double *nf, double *as, double *LL);
+    double ggplu_(double *z, double *nf, double *as, double *LL);
+    double ggdel_(double *z, double *nf, double *as, double *LL);
+    double aggreg0_(double *z, double *nf, double *as, double *LL);
+    double aggreg1_(double *z, double *nf, double *as, double *LL);
+    double aggplu_(double *z, double *nf, double *as, double *LL);
+    double aggdel_(double *z, double *nf, double *as, double *LL);
+    double qgl_(double *z, double *nf, double *as, double *LL);
+    double psl_(double *z, double *nf, double *as, double *LL);
+  }
+  ///@}
+  /// \endcond
+
   /**
    * @defgroup MatchCond Space-like matching conditions
    * @note The expressions are taken from:
@@ -365,21 +408,22 @@ namespace apfel
 
   /**
    * @defgroup NNNLOMC NNNLO unpolarised matching conditions
-   * @note Approximated expressions from
-   * https://github.com/MSHTPDF/N3LO_additions. Details to be found in
-   * https://arxiv.org/pdf/2207.04739.pdf. Logarithmic terms currently
-   * unavailable.
+   * @note Reference:
+   *   J. Ablinger, A. Behring, J. Blümlein, A. De Freitas, A. von Manteuffel, C. Schneider, and K. Schönwald,
+   *   "The Variable Flavor Number Scheme at  Next-to-Next-to-Leading Order, DESY 24-037,.
    * @ingroup MatchCond
    */
   ///@{
-  /**
+  /*
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
    */
   class APS3Hq_0: public Expression
   {
   public:
-    APS3Hq_0();
+    APS3Hq_0(int const& nf);
     double Regular(double const& x) const;
+  private:
+    int const _nf;
   };
 
   /**
@@ -388,12 +432,10 @@ namespace apfel
   class AS3Hg_0: public Expression
   {
   public:
-    AS3Hg_0(int const& imod = 0);
+    AS3Hg_0(int const& nf);
     double Regular(double const& x) const;
   private:
-    int           const _imod;
-    double              _rho;
-    std::vector<double> _C;
+    int const _nf;
   };
 
   /**
@@ -402,14 +444,12 @@ namespace apfel
   class ANS3qqH_0: public Expression
   {
   public:
-    ANS3qqH_0(int const& imod = 0);
+    ANS3qqH_0(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    int           const _imod;
-    double              _rho;
-    std::vector<double> _C;
+    int const _nf;
   };
 
   /**
@@ -418,8 +458,10 @@ namespace apfel
   class AS3gqH_0: public Expression
   {
   public:
-    AS3gqH_0();
+    AS3gqH_0(int const& nf);
     double Regular(double const& x) const;
+  private:
+    int const _nf;
   };
 
   /**
@@ -428,12 +470,36 @@ namespace apfel
   class AS3ggH_0: public Expression
   {
   public:
-    AS3ggH_0(int const& imod = 0);
+    AS3ggH_0(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class AS3qgQ_0: public Expression
+  {
+  public:
+    AS3qgQ_0(int const& nf);
     double Regular(double const& x)  const;
   private:
-    int           const _imod;
-    double              _rho;
-    std::vector<double> _C;
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class APS3qqQ_0: public Expression
+  {
+  public:
+    APS3qqQ_0(int const& nf);
+    double Regular(double const& x)  const;
+  private:
+    int const _nf;
   };
   ///@}
 

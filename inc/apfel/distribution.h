@@ -144,7 +144,7 @@ namespace apfel
     /**
      * @brief This function trasforms the the Distribution given a
      * functions.
-     * @param * TranformationFunc: set of transformation functions
+     * @param TranformationFunc: set of transformation functions
      */
     Distribution Transform(std::function<double(double const&)> const& TranformationFunc) const;
 

@@ -15,8 +15,8 @@ namespace apfel
   /**
    * @name Fortran massive coefficient functions
    * Fortran functions for the O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
-   * coefficient functions from 'src/dis/hqcoef.f'. Use the analytic
-   * expressions whenever available.
+   * coefficient functions from 'src/structurefunctions/hqcoef.f'. Use
+   * the analytic expressions whenever available.
    */
   ///@{
   extern"C"

@@ -35,7 +35,6 @@ namespace apfel
      * @param nfRef: the number of flavours of LambdaQCD
      * @param Thresholds: vector of thresholds
      * @param pt: perturbative order
-     * @param kappa: resummation scale parameter (default: 1)
      */
     AlphaQCDLambda(double              const& LambdaQCD,
                    int                 const& nfRef,

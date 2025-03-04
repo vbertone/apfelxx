@@ -31,7 +31,7 @@ namespace apfel
      * @brief The map enumerators for the operands and the
      * distributions.
      */
-    enum Operand: int {M0, M1, M2, M3, M4, M5, M6, M7};
+    enum Operand: int {M0, M1, M2, M3, M4, M5, M6, M7, M8, M9};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
