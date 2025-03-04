@@ -178,23 +178,14 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  double AlphaQCDLambda::EvaluateAPT(double const& mu, std::function<std::complex<double>(std::complex<double> const&)> const& f, double const& tmin, double const& tmax, double const& eps) const
+  double AlphaQCDLambda::EvaluateAPT(double const& mu, std::function<std::complex<double>(std::complex<double> const&)> const& f, double const& eps) const
   {
     const int nf = NF(mu, _Thresholds);
-    return apfel::Integrator{[=] (double const& t) -> double{ return 1. / ( 1 + exp(2 * log(mu) - t) ) * f(Evaluate(std::complex<double>{t, - M_PI}, nf)).imag() / M_PI; }}.integrate(tmin, tmax, eps);
-  }
-
-  //_________________________________________________________________________________
-  double AlphaQCDLambda::EvaluateAPT_subtr(double const& mu, double const& eps, std::function<std::complex<double>(std::complex<double> const&)> const& f) const
-  {
-    const int nf = NF(mu, _Thresholds);
-    const double tmp = apfel::Integrator{[=] (double const& z) -> double
+    return apfel::Integrator{[=] (double const& z) -> double
       {
-        const double t = 1.0 / ( 1.0 - z ) - 1.0 / z;
-        const double Jac = 1.0 / pow(1.0 - z, 2) + 1.0 / pow(z, 2);
-        return Jac / ( 1 + exp(t) / ( mu * mu ) ) * f(Evaluate(std::complex<double>{t, - M_PI}, nf)).imag() / M_PI;
-      }}.integrate(0.0, 1.0, eps);
-
-    return 4 * M_PI / beta0qcd(nf) - tmp;
+        const double t = 1 / ( 1 - z ) - 1 / z;
+        const double Jac = 1 / pow(1 - z, 2) + 1 / pow(z, 2);
+        return Jac / ( 1 + exp(2 * log(mu) - t) ) * f(Evaluate(std::complex<double>{t, - M_PI}, nf)).imag() / M_PI;
+      }}.integrate(0, 1, eps);
   }
 }
