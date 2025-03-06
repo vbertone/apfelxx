@@ -33,7 +33,7 @@ namespace apfel
                                                         std::vector<int>    const& IMod)
   {
     if (!n3lo)
-      warning("InitializeDglapObjectsQCD", "N3LO corrections are not being initialised.");
+      warning("InitializeDglapObjectsQCD", "N3LO corrections will not be initialised.");
     report("Initializing DglapObjects for space-like QCD unpolarised evolution... ");
     Timer t;
 
@@ -1074,7 +1074,7 @@ namespace apfel
     // matching. They are essentially the square of the NLO matching
     // matrix. They are labelled with perturbative order -2.
     std::map<int, Operator> MatchNNLOb;
-    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
+    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M9; i++)
       MatchNNLOb.insert({i, Zero});
 
     // ===============================================================
@@ -1328,7 +1328,7 @@ namespace apfel
     // ===============================================================
     // NLO Matching conditions (Null)
     std::map<int, Operator> MatchNLO;
-    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
+    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M9; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
@@ -1462,7 +1462,7 @@ namespace apfel
     // ===============================================================
     // NLO Matching conditions (Null)
     std::map<int, Operator> MatchNLO;
-    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M7; i++)
+    for (int i = MatchingBasisQCD::M0; i <= MatchingBasisQCD::M9; i++)
       MatchNLO.insert({i, Zero});
 
     // ===============================================================
