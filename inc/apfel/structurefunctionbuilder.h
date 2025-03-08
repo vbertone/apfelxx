@@ -214,6 +214,7 @@ namespace apfel
    * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated NLO coefficient functions (default: all zero's)
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsMassive(Grid                const& g,
@@ -223,7 +224,8 @@ namespace apfel
                                                                                                                   double              const& ximin  = 0.05,
                                                                                                                   double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
-                                                                                                                  double              const& lambda = 0.0005);
+                                                                                                                  double              const& lambda = 0.0005,
+                                                                                                                  std::vector<int>    const& IMod   = {0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeFLNCObjectsMassive precomputes the
@@ -238,6 +240,7 @@ namespace apfel
    * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated NNNLO coefficient functions (default: all zero's)
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsMassive(Grid                const& g,
@@ -247,7 +250,8 @@ namespace apfel
                                                                                                                   double              const& ximin  = 0.05,
                                                                                                                   double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
-                                                                                                                  double              const& lambda = 0.0005);
+                                                                                                                  double              const& lambda = 0.0005,
+                                                                                                                  std::vector<int>    const& IMod   = {0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeF2NCObjectsMassiveZero precomputes the

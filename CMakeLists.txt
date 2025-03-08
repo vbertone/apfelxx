@@ -3,7 +3,7 @@
 # ============================
 
 # Define code version
-set(apfelxx_VERSION 4.8.0)
+set(apfelxx_VERSION 4.9.0)
 
 # Define minimum version of cmake
 cmake_minimum_required(VERSION 3.10)

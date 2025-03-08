@@ -9,6 +9,8 @@
 #include "apfel/expression.h"
 #include "apfel/massivezerocoefficientfunctionsunp_sl.h"
 
+#include <vector>
+
 namespace apfel
 {
   /// @cond UNNECESSARY
@@ -280,12 +282,13 @@ namespace apfel
   class Cmsx23gNC: public Expression
   {
   public:
-    Cmsx23gNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cmsx23gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
     bool   const _muterms;
+    int    const _imod;
   };
 
   /**
@@ -296,7 +299,7 @@ namespace apfel
   class Cmsx23psNC: public Expression
   {
   public:
-    Cmsx23psNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cmsx23psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     Cmsx23gNC const _c23g;
@@ -310,12 +313,13 @@ namespace apfel
   class CmsxL3gNC: public Expression
   {
   public:
-    CmsxL3gNC(int const& nf, double const& eta, bool const& muterms = true);
+    CmsxL3gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
     bool   const _muterms;
+    int    const _imod;
   };
 
   /**
@@ -326,7 +330,7 @@ namespace apfel
   class CmsxL3psNC: public Expression
   {
   public:
-    CmsxL3psNC(int const& nf, double const& eta, bool const& muterms = true);
+    CmsxL3psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     CmsxL3gNC const _cL3g;
@@ -346,12 +350,13 @@ namespace apfel
   class Cm0sx23gNC: public Expression
   {
   public:
-    Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
     bool   const _muterms;
+    int    const _imod;
   };
 
   /**
@@ -362,7 +367,7 @@ namespace apfel
   class Cm0sx23psNC: public Expression
   {
   public:
-    Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     Cm0sx23gNC const _c23g;
@@ -376,12 +381,13 @@ namespace apfel
   class Cm0sxL3gNC: public Expression
   {
   public:
-    Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int    const _nf;
     double const _eta;
     bool   const _muterms;
+    int    const _imod;
   };
 
   /**
@@ -392,7 +398,7 @@ namespace apfel
   class Cm0sxL3psNC: public Expression
   {
   public:
-    Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     Cm0sxL3gNC const _cL3g;
@@ -416,17 +422,24 @@ namespace apfel
   class Cm2a3gNC: public Expression
   {
   public:
-    Cm2a3gNC(int const& nf, double const& eta);
+    Cm2a3gNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
     double Regular(double const& x) const;
   private:
-    double      const _eta;
-    Cmth23gNC   const _cmth23g;
-    Cm023gNC_c  const _cm023g_c;
-    Cm023gNC_l  const _cm023g_l;
-    Cm023gNC_l2 const _cm023g_l2;
-    Cm023gNC_l3 const _cm023g_l3;
-    Cmsx23gNC   const _cmsx23g;
-    Cm0sx23gNC  const _cm0sx23g;
+    double           const _eta;
+    std::vector<int> const _imod;
+    Cmth23gNC        const _cmth23g;
+    Cm023gNC_c       const _cm023g_c;
+    Cm023gNC_l       const _cm023g_l;
+    Cm023gNC_l2      const _cm023g_l2;
+    Cm023gNC_l3      const _cm023g_l3;
+    Cmsx23gNC        const _cmsx23g;
+    Cm0sx23gNC       const _cm0sx23g;
+    double           const _var = 0.3;
+    double           const _fact = 3;
+    double                 _A;
+    double                 _B;
+    double                 _C;
+    double                 _D;
   };
 
   /**
@@ -436,16 +449,23 @@ namespace apfel
   class Cm2a3psNC: public Expression
   {
   public:
-    Cm2a3psNC(int const& nf, double const& eta);
+    Cm2a3psNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
     double Regular(double const& x) const;
   private:
-    double       const _eta;
-    Cm023psNC_c  const _cm023ps_c;
-    Cm023psNC_l  const _cm023ps_l;
-    Cm023psNC_l2 const _cm023ps_l2;
-    Cm023psNC_l3 const _cm023ps_l3;
-    Cmsx23psNC   const _cmsx23ps;
-    Cm0sx23psNC  const _cm0sx23ps;
+    double           const _eta;
+    std::vector<int> const _imod;
+    Cm023psNC_c      const _cm023ps_c;
+    Cm023psNC_l      const _cm023ps_l;
+    Cm023psNC_l2     const _cm023ps_l2;
+    Cm023psNC_l3     const _cm023ps_l3;
+    Cmsx23psNC       const _cmsx23ps;
+    Cm0sx23psNC      const _cm0sx23ps;
+    double           const _var = 0.3;
+    double           const _fact = 3;
+    double                 _A;
+    double                 _B;
+    double                 _C;
+    double                 _D;
   };
 
   /**
@@ -455,16 +475,23 @@ namespace apfel
   class CmLa3gNC: public Expression
   {
   public:
-    CmLa3gNC(int const& nf, double const& eta);
+    CmLa3gNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
     double Regular(double const& x) const;
   private:
-    double      const _eta;
-    CmthL3gNC   const _cmthL3g;
-    Cm0L3gNC_c  const _cm0L3g_c;
-    Cm0L3gNC_l  const _cm0L3g_l;
-    Cm0L3gNC_l2 const _cm0L3g_l2;
-    CmsxL3gNC   const _cmsxL3g;
-    Cm0sxL3gNC  const _cm0sxL3g;
+    double           const _eta;
+    std::vector<int> const _imod;
+    CmthL3gNC        const _cmthL3g;
+    Cm0L3gNC_c       const _cm0L3g_c;
+    Cm0L3gNC_l       const _cm0L3g_l;
+    Cm0L3gNC_l2      const _cm0L3g_l2;
+    CmsxL3gNC        const _cmsxL3g;
+    Cm0sxL3gNC       const _cm0sxL3g;
+    double           const _var = 0.2;
+    double           const _fact = 2;
+    double                 _A;
+    double                 _B;
+    double                 _C;
+    double                 _D;
   };
 
   /**
@@ -474,15 +501,22 @@ namespace apfel
   class CmLa3psNC: public Expression
   {
   public:
-    CmLa3psNC(int const& nf, double const& eta);
+    CmLa3psNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
     double Regular(double const& x) const;
   private:
-    double       const _eta;
-    Cm0L3psNC_c  const _cm0L3ps_c;
-    Cm0L3psNC_l  const _cm0L3ps_l;
-    Cm0L3psNC_l2 const _cm0L3ps_l2;
-    CmsxL3psNC   const _cmsxL3ps;
-    Cm0sxL3psNC  const _cm0sxL3ps;
+    double           const _eta;
+    std::vector<int> const _imod;
+    Cm0L3psNC_c      const _cm0L3ps_c;
+    Cm0L3psNC_l      const _cm0L3ps_l;
+    Cm0L3psNC_l2     const _cm0L3ps_l2;
+    CmsxL3psNC       const _cmsxL3ps;
+    Cm0sxL3psNC      const _cm0sxL3ps;
+    double           const _var = 0.2;
+    double           const _fact = 2;
+    double                 _A;
+    double                 _B;
+    double                 _C;
+    double                 _D;
   };
   ///@}
 

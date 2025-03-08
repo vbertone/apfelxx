@@ -417,11 +417,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cmsx23gNC::Cmsx23gNC(int const& nf, double const& eta, bool const& muterms):
+  Cmsx23gNC::Cmsx23gNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
     _nf(nf),
     _eta(eta),
-    _muterms(muterms)
+    _muterms(muterms),
+    _imod(imod)
   {
   }
   double Cmsx23gNC::Regular(double const& x) const
@@ -481,7 +482,7 @@ namespace apfel
     const double J    = 4 * z * L;
     const double K    = 4 * z * Hmpm;
     const double Lnxi = log(1 + xi / 4);
-    //const double ln2  = log(2);
+    const double ln2  = log(2);
     const double ll   = CA * CA * ( - 1472 / 27. - 8 / 3. * K * ( - 1 + 1 / xi ) + 8 / 27. * J * ( - 71 + 92 / xi )
                                     + I * ( 8 / 3. * Lnxi * ( - 1 + 1 / xi ) + 8 / 9. * ( - 13 + 10 / xi ) )
                                     + ( - 160 / 9. + 16 / 3. * I * ( - 1 + 1 / xi ) + 8 / 9. * J * ( - 13 + 10 / xi ) ) * Lmu
@@ -496,7 +497,7 @@ namespace apfel
                                + a11 * bt0 * ( - 160 / 9. + 16 / 3. * I * ( - 1 + 1 / xi ) + 8 / 9. * J * ( - 13 + 10 * 1 / xi ) ) ) * Lmu
                            + ( a10 * a11 * ( 32 / 3. - 16 / 3. * J * ( - 1 + 1 / xi ) )
                                + a11 * bt0 * ( - 16 / 3. + 8 / 3. * J * ( - 1 + 1 / xi ) ) ) * Lmu2 ) / x;
-    /*
+
     // Variation of nllc
     const double nllv = ( a10 * a11 * ( 2944 / 27. + 16 / 3. * K * ( - 1 + 1 / xi ) - 16 / 27. * J * ( - 71 + 92 * 1 / xi )
                                         + I * ( - 16 / 3. * Lnxi * ( - 1 + 1 / xi ) - 16 / 9. * ( - 13 + 10 * 1 / xi ) ) )
@@ -511,14 +512,23 @@ namespace apfel
                                     + a11 * bt0 * ( - 160 / 9. + 16 / 3. * I * ( - 1 + 1 / xi ) - 128 * ln2 / 3 + 28 * zeta3
                                                     + J * ( 8 / 9. * ( - 13 + 10 * 1 / xi ) + 64 / 3. * ( - 1 + 1 / xi ) * ln2
                                                             - 14 * ( - 1 + 1 / xi ) * zeta3) ) ) ) / x;
-    */
-    return ll + nllc;
+
+    // Compute variation
+    const double delta = std::abs(nllc - nllv);
+
+    // Return according to _imod
+    if (_imod == 1)
+      return ll + nllc - delta;
+    if (_imod == 2)
+      return ll + nllc + delta;
+    else
+      return ll + nllc;
   }
 
   //_________________________________________________________________________________
-  Cmsx23psNC::Cmsx23psNC(int const& nf, double const& eta, bool const& muterms):
+  Cmsx23psNC::Cmsx23psNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
-    _c23g(Cmsx23gNC{nf, eta, muterms})
+    _c23g(Cmsx23gNC{nf, eta, muterms, imod})
   {
   }
   double Cmsx23psNC::Regular(double const& x) const
@@ -527,11 +537,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CmsxL3gNC::CmsxL3gNC(int const& nf, double const& eta, bool const& muterms):
+  CmsxL3gNC::CmsxL3gNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
     _nf(nf),
     _eta(eta),
-    _muterms(muterms)
+    _muterms(muterms),
+    _imod(imod)
   {
   }
   double CmsxL3gNC::Regular(double const& x) const
@@ -591,7 +602,7 @@ namespace apfel
     const double J    = 4 * z * L;
     const double K    = 4 * z * Hmpm;
     const double Lnxi = log(1 + xi / 4);
-    //const double ln2  = log(2);
+    const double ln2  = log(2);
     const double ll   = a11 * a11 * ( - 32 / 3. * K / xi * ( 1 + 3 / xi ) - 128 / 27. * ( 17 + 120 / xi )
                                       + 16 / 27. * J * (3 + 136 / xi + 480 / xi / xi )
                                       + I * ( 32 / 3. * Lnxi / xi * ( 1 + 3 / xi ) + 16 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) )
@@ -613,7 +624,7 @@ namespace apfel
                                               + 16 / 9. * J * ( - 3 - 4 / xi + 24 / xi / xi ) ) ) * Lmu
                           + ( a11 * bt0 * ( 32 / 3. * J / xi * ( 1 + 3 / xi ) - 32 / 3. * ( 1 + 6 / xi ) )
                               + a10 * a11 * ( - 64 / 3. * J / xi * ( 1 + 3 / xi ) + 64 / 3. * ( 1 + 6 / xi ) ) ) * Lmu2 ) / x / ( 1 + 4 / xi );
-    /*
+
     // Variation of nllc
     const double nllv = ( a10 * a11 * ( 64 / 3. * K / xi * ( 1 + 3 / xi ) + 256 / 27. * ( 17 + 120 / xi )
                                         - 32 / 27. * J * (3 + 136 / xi + 480 / xi / xi )
@@ -632,14 +643,23 @@ namespace apfel
                                                     - 256 / 3. * ( 1 + 6 / xi ) * ln2 + 56 * ( 1 + 6 / xi ) * zeta3
                                                     + J * ( 16 / 9. * ( - 3 - 4 / xi + 24 / xi / xi ) + 256 / 3. / xi * ( 1 + 3 / xi ) * ln2
                                                             - 56 / xi * ( 1 + 3 / xi ) * zeta3) ) ) ) / x / ( 1 + 4 / xi );
-    */
-    return ll + nllc;
+
+    // Compute variation
+    const double delta = std::abs(nllc - nllv);
+
+    // Return according to _imod
+    if (_imod == 1)
+      return ll + nllc - delta;
+    if (_imod == 2)
+      return ll + nllc + delta;
+    else
+      return ll + nllc;
   }
 
   //_________________________________________________________________________________
-  CmsxL3psNC::CmsxL3psNC(int const& nf, double const& eta, bool const& muterms):
+  CmsxL3psNC::CmsxL3psNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
-    _cL3g(CmsxL3gNC{nf, eta, muterms})
+    _cL3g(CmsxL3gNC{nf, eta, muterms, imod})
   {
   }
   double CmsxL3psNC::Regular(double const& x) const
@@ -648,11 +668,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm0sx23gNC::Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms):
+  Cm0sx23gNC::Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
     _nf(nf),
     _eta(eta),
-    _muterms(muterms)
+    _muterms(muterms),
+    _imod(imod)
   {
   }
   double Cm0sx23gNC::Regular(double const& x) const
@@ -684,7 +705,7 @@ namespace apfel
                                     + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2 )
                           - 32 / 27. * a10 * a11 * ( - 92 + 13 * Pi2 - 72 * zeta3 )
                           + 16 / 27. * a11 * bt0 * ( - 92 + 13 * Pi2 - 72 * zeta3 ) ) / x;
-    /*
+
     // Variation of nllc
     const double nllv = ( ( - 64 * a10 * a11 / 9 + 32 * a11 * bt0 / 9 ) * LQ3
                           + Lmu2 * ( 32 * a10 * a11 / 3 - 16 * a11 * bt0 / 3 + ( - 64 * a10 * a11 / 3 + 32 * a11 * bt0 / 3 ) * LQ )
@@ -696,14 +717,23 @@ namespace apfel
                                     + 4 / 9. * a11 * bt0 * ( - 40 + 8 * Pi2 - 96 * log(2) + 63 * zeta3 ) )
                           + LQ * ( 64 / 27. * a10 * a11 * ( - 71 + 3 * Pi2 )
                                    - 4. / 27 * a11 * bt0 * ( - 568 + 24 * Pi2 - 1248 * log(2) + 819 * zeta3 ) ) ) / x;
-    */
-    return ll + nllc;
+
+    // Compute variation
+    const double delta = std::abs(nllc - nllv);
+
+    // Return according to _imod
+    if (_imod == 1)
+      return ll + nllc - delta;
+    if (_imod == 2)
+      return ll + nllc + delta;
+    else
+      return ll + nllc;
   }
 
   //_________________________________________________________________________________
-  Cm0sx23psNC::Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms):
+  Cm0sx23psNC::Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
-    _c23g(Cm0sx23gNC{nf, eta, muterms})
+    _c23g(Cm0sx23gNC{nf, eta, muterms, imod})
   {
   }
   double Cm0sx23psNC::Regular(double const& x) const
@@ -712,11 +742,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm0sxL3gNC::Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms):
+  Cm0sxL3gNC::Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
     _nf(nf),
     _eta(eta),
-    _muterms(muterms)
+    _muterms(muterms),
+    _imod(imod)
   {
   }
   double Cm0sxL3gNC::Regular(double const& x) const
@@ -742,7 +773,7 @@ namespace apfel
                           + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2
                           + ( - 128 * a10 * a11 / 9 + 64 * a21 / 3 + 64 * a11 * bt0 / 9
                               + ( - 128 * a10 * a11 / 3 + 64 * a11 * bt0 / 3 ) * LQ ) * Lmu ) / x;
-    /*
+
     // Variation of nllc
     const double nllv = ( - 64 / 27 * a10 * a11 * ( - 68 + 3 * Pi2 )
                           + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * Lmu2
@@ -751,14 +782,23 @@ namespace apfel
                               - 8 / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * Lmu
                           + ( 128 * a10 * a11 / 9 + 8. / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * LQ
                           + 8 / 27. * a11 * bt0 * ( - 272 + 12 * Pi2 + 96 * log(2) - 63 * zeta3 ) ) / x;
-    */
-    return ll + nllc;
+
+    // Compute variation
+    const double delta = std::abs(nllc - nllv);
+
+    // Return according to _imod
+    if (_imod == 1)
+      return ll + nllc - delta;
+    if (_imod == 2)
+      return ll + nllc + delta;
+    else
+      return ll + nllc;
   }
 
   //_________________________________________________________________________________
-  Cm0sxL3psNC::Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms):
+  Cm0sxL3psNC::Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
     Expression(),
-    _cL3g(Cm0sxL3gNC{nf, eta, muterms})
+    _cL3g(Cm0sxL3gNC{nf, eta, muterms, imod})
   {
   }
   double Cm0sxL3psNC::Regular(double const& x) const
@@ -780,17 +820,34 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta):
+  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, std::vector<int> const& imod):
     Expression(),
     _eta(eta),
+    _imod(imod),
     _cmth23g(Cmth23gNC{nf, eta, false}),
     _cm023g_c(Cm023gNC_c{nf}),
     _cm023g_l(Cm023gNC_l{nf, false}),
     _cm023g_l2(Cm023gNC_l2{nf, false}),
     _cm023g_l3(Cm023gNC_l3{nf, false}),
-    _cmsx23g(Cmsx23gNC{nf, eta, false}),
-    _cm0sx23g(Cm0sx23gNC{nf, eta, false})
+    _cmsx23g(Cmsx23gNC{nf, eta, false, _imod[0]}),
+    _cm0sx23g(Cm0sx23gNC{nf, eta, false, _imod[0]}),
+    _A(0.3),
+    _B(2.5),
+    _C(2.5),
+    _D(1.2)
   {
+    // Adjust parameters of fDamp according to _imod
+    if      (_imod[1] == 1) _A = _A / _fact;
+    else if (_imod[1] == 2) _A = _A * _fact;
+
+    if      (_imod[2] == 1) _B = _B / _fact;
+    else if (_imod[2] == 2) _B = _B * _fact;
+
+    if      (_imod[3] == 1) _C = ( 1 - _var ) * _C;
+    else if (_imod[3] == 2) _C = ( 1 + _var ) * _C;
+
+    if      (_imod[4] == 1) _D = ( 1 - _var ) * _D;
+    else if (_imod[4] == 2) _D = ( 1 + _var ) * _D;
   }
   double Cm2a3gNC::Regular(double const& x) const
   {
@@ -800,7 +857,7 @@ namespace apfel
     const double lxi  = log(xi);
     const double lxi2 = lxi * lxi;
     const double lxi3 = lxi * lxi2;
-    const double fthr = fDamp(z, xi, 0.3, 2.5, 2.5, 1.2, 2.5, 5);
+    const double fthr = fDamp(z, xi, _A, _B, _C, _D);
     const double fasy = 1 - fthr;
     return fthr * _cmth23g.Regular(x)                                                                                                       // Threshold approximation
            + fasy * eta * ( _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z) // Q >> m approximation
@@ -809,16 +866,33 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta):
+  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, std::vector<int> const& imod):
     Expression(),
     _eta(eta),
+    _imod(imod),
     _cm023ps_c(Cm023psNC_c{nf}),
     _cm023ps_l(Cm023psNC_l{nf, false}),
     _cm023ps_l2(Cm023psNC_l2{nf, false}),
     _cm023ps_l3(Cm023psNC_l3{nf, false}),
-    _cmsx23ps(Cmsx23psNC{nf, eta, false}),
-    _cm0sx23ps(Cm0sx23psNC{nf, eta, false})
+    _cmsx23ps(Cmsx23psNC{nf, eta, false, _imod[0]}),
+    _cm0sx23ps(Cm0sx23psNC{nf, eta, false, _imod[0]}),
+    _A(0.3),
+    _B(2.5),
+    _C(2.5),
+    _D(1.2)
   {
+    // Adjust parameters of fDamp according to _imod
+    if      (_imod[1] == 1) _A = _A / _fact;
+    else if (_imod[1] == 2) _A = _A * _fact;
+
+    if      (_imod[2] == 1) _B = _B / _fact;
+    else if (_imod[2] == 2) _B = _B * _fact;
+
+    if      (_imod[3] == 1) _C = ( 1 - _var ) * _C;
+    else if (_imod[3] == 2) _C = ( 1 + _var ) * _C;
+
+    if      (_imod[4] == 1) _D = ( 1 - _var ) * _D;
+    else if (_imod[4] == 2) _D = ( 1 + _var ) * _D;
   }
   double Cm2a3psNC::Regular(double const& x) const
   {
@@ -828,7 +902,7 @@ namespace apfel
     const double lxi  = log(xi);
     const double lxi2 = lxi * lxi;
     const double lxi3 = lxi * lxi2;
-    const double fthr = fDamp(z, xi, 0.3, 2.5, 2.5, 1.2, 2.5, 5);
+    const double fthr = fDamp(z, xi, _A, _B, _C, _D);
     const double fasy = 1 - fthr;
     return fasy * eta * ( _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z) // Q >> m approximation
                           + _cmsx23ps.Regular(z)                                                                                              // Small-x approximation
@@ -836,16 +910,33 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta):
+  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, std::vector<int> const& imod):
     Expression(),
     _eta(eta),
+    _imod(imod),
     _cmthL3g(CmthL3gNC{nf, eta, false}),
     _cm0L3g_c(Cm0L3gNC_c{nf}),
     _cm0L3g_l(Cm0L3gNC_l{nf, false}),
     _cm0L3g_l2(Cm0L3gNC_l2{nf, false}),
-    _cmsxL3g(CmsxL3gNC{nf, eta, false}),
-    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false})
+    _cmsxL3g(CmsxL3gNC{nf, eta, false, _imod[0]}),
+    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false, _imod[0]}),
+    _A(10),
+    _B(11),
+    _C(3),
+    _D(2)
   {
+    // Adjust parameters of fDamp according to _imod
+    if      (_imod[1] == 1) _A = _A / _fact;
+    else if (_imod[1] == 2) _A = _A * _fact;
+
+    if      (_imod[2] == 1) _B = _B / _fact;
+    else if (_imod[2] == 2) _B = _B * _fact;
+
+    if      (_imod[3] == 1) _C = ( 1 - _var ) * _C;
+    else if (_imod[3] == 2) _C = ( 1 + _var ) * _C;
+
+    if      (_imod[4] == 1) _D = ( 1 - _var ) * _D;
+    else if (_imod[4] == 2) _D = ( 1 + _var ) * _D;
   }
   double CmLa3gNC::Regular(double const& x) const
   {
@@ -854,7 +945,7 @@ namespace apfel
     const double z    = eta * x;
     const double lxi  = log(xi);
     const double lxi2 = lxi * lxi;
-    const double fthr = fDamp(z, xi, 10., 11., 3., 2.);
+    const double fthr = fDamp(z, xi, _A, _B, _C, _D);
     const double fasy = 1 - fthr;
     return fthr * _cmthL3g.Regular(x)                                                                        // Threshold approximation
            + fasy * eta * ( _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z) // Q >> m approximation
@@ -863,15 +954,32 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta):
+  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, std::vector<int> const& imod):
     Expression(),
     _eta(eta),
+    _imod(imod),
     _cm0L3ps_c(Cm0L3psNC_c{nf}),
     _cm0L3ps_l(Cm0L3psNC_l{nf, false}),
     _cm0L3ps_l2(Cm0L3psNC_l2{nf, false}),
-    _cmsxL3ps(CmsxL3psNC{nf, eta, false}),
-    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false})
+    _cmsxL3ps(CmsxL3psNC{nf, eta, false, _imod[0]}),
+    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false, _imod[0]}),
+    _A(20),
+    _B(11),
+    _C(3),
+    _D(2)
   {
+    // Adjust parameters of fDamp according to _imod
+    if      (_imod[1] == 1) _A = _A / _fact;
+    else if (_imod[1] == 2) _A = _A * _fact;
+
+    if      (_imod[2] == 1) _B = _B / _fact;
+    else if (_imod[2] == 2) _B = _B * _fact;
+
+    if      (_imod[3] == 1) _C = ( 1 - _var ) * _C;
+    else if (_imod[3] == 2) _C = ( 1 + _var ) * _C;
+
+    if      (_imod[4] == 1) _D = ( 1 - _var ) * _D;
+    else if (_imod[4] == 2) _D = ( 1 + _var ) * _D;
   }
   double CmLa3psNC::Regular(double const& x) const
   {
@@ -880,7 +988,7 @@ namespace apfel
     const double z    = eta * x;
     const double lxi  = log(xi);
     const double lxi2 = lxi * lxi;
-    const double fthr = fDamp(z, xi, 20., 11., 3., 2.);
+    const double fthr = fDamp(z, xi, _A, _B, _C, _D);
     const double fasy = 1 - fthr;
     return fasy * eta * ( _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z) // Q >> m approximation
                           + _cmsxL3ps.Regular(z)                                                              // Small-x approximation

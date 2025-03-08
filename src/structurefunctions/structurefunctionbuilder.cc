@@ -1126,7 +1126,8 @@ namespace apfel
                                                                                                                   double              const& ximin,
                                                                                                                   double              const& ximax,
                                                                                                                   int                 const& intdeg,
-                                                                                                                  double              const& lambda)
+                                                                                                                  double              const& lambda,
+                                                                                                                  std::vector<int>    const& IMod)
   {
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
@@ -1211,6 +1212,18 @@ namespace apfel
         return O22gc + log(xi) * O22gl;
       }, nxi, ximin, ximax, intdeg, {}, lambda};
 
+    // Copy the vector of switches to vary the parameterisation of the
+    // approximated N3LO coefficient functions and adjust it to match
+    // the correct number of switches (5). Issue a warning in case the
+    // original vector is modified.
+    const int nvar = 5;
+    std::vector<int> im = IMod;
+    if (im.size() != nvar)
+      {
+        warning("InitializeF2NCObjectsMassive", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
+        im.resize(nvar);
+      }
+
     // NNNLO massive (no non-singlet currently available)
     // Beta-function and splitting-function coefficients (easier to
     // recompute them rather than extracting them from PDFObj).
@@ -1227,10 +1240,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator O21g {g, Cm21gNC{teta},          IntEps};
-        const Operator O22g {g, Cm22gNC{teta},          IntEps};
-        const Operator O22ps{g, Cm22psNC{teta},         IntEps};
-        const Operator O23ps{g, Cm2a3psNC{actnf, teta}, IntEps};
+        const Operator O21g {g, Cm21gNC{teta},              IntEps};
+        const Operator O22g {g, Cm22gNC{teta},              IntEps};
+        const Operator O22ps{g, Cm22psNC{teta},             IntEps};
+        const Operator O23ps{g, Cm2a3psNC{actnf, teta, im}, IntEps};
         return 6 * ( O23ps - lxi * ( O21g * p1gq + O22g * p0gq + O22ps * p0qq - 2 * beta0 * O22ps )
                      + lxi2 / 2 * ( O21g * p0gg * p0gq + O21g * p0qq * p0gq - 3 * beta0 * O21g * p0gq ) );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1239,10 +1252,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator O21g {g, Cm21gNC{teta},         IntEps};
-        const Operator O22g {g, Cm22gNC{teta},         IntEps};
-        const Operator O22ps{g, Cm22psNC{teta},        IntEps};
-        const Operator O23g {g, Cm2a3gNC{actnf, teta}, IntEps};
+        const Operator O21g {g, Cm21gNC{teta},             IntEps};
+        const Operator O22g {g, Cm22gNC{teta},             IntEps};
+        const Operator O22ps{g, Cm22psNC{teta},            IntEps};
+        const Operator O23g {g, Cm2a3gNC{actnf, teta, im}, IntEps};
         return O23g - lxi * ( O21g * p1gg - beta1 * O21g + O22ps * p0qg + O22g * p0gg - 2 * beta0 * O22g )
                + lxi2 / 2 * ( O21g * p0gg * p0gg + O21g * p0gq * p0qg - 3 * beta0 * O21g * p0gg+ 2 * pow(beta0, 2) * O21g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1371,7 +1384,8 @@ namespace apfel
                                                                                                                   double              const& ximin,
                                                                                                                   double              const& ximax,
                                                                                                                   int                 const& intdeg,
-                                                                                                                  double              const& lambda)
+                                                                                                                  double              const& lambda,
+                                                                                                                  std::vector<int>    const& IMod)
   {
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
@@ -1455,6 +1469,18 @@ namespace apfel
         return OL2gc + log(xi) * OL2gl;
       }, nxi, ximin, ximax, intdeg, {}, lambda};
 
+    // Copy the vector of switches to vary the parameterisation of the
+    // approximated N3LO coefficient functions and adjust it to match
+    // the correct number of switches (5). Issue a warning in case the
+    // original vector is modified.
+    const int nvar = 5;
+    std::vector<int> im = IMod;
+    if (im.size() != nvar)
+      {
+        warning("InitializeFLNCObjectsMassive", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
+        im.resize(nvar);
+      }
+
     // NNNLO massive (no non-singlet currently available)
     // Beta-function and splitting-function coefficients (easier to
     // recompute them rather than extracting them from PDFObj).
@@ -1471,10 +1497,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator OL1g {g, CmL1gNC{teta},          IntEps};
-        const Operator OL2g {g, CmL2gNC{teta},          IntEps};
-        const Operator OL2ps{g, CmL2psNC{teta},         IntEps};
-        const Operator OL3ps{g, CmLa3psNC{actnf, teta}, IntEps};
+        const Operator OL1g {g, CmL1gNC{teta},              IntEps};
+        const Operator OL2g {g, CmL2gNC{teta},              IntEps};
+        const Operator OL2ps{g, CmL2psNC{teta},             IntEps};
+        const Operator OL3ps{g, CmLa3psNC{actnf, teta, im}, IntEps};
         return 6 * ( OL3ps - lxi * ( OL1g * p1gq + OL2g * p0gq + OL2ps * p0qq - 2 * beta0 * OL2ps )
                      + lxi2 / 2 * ( OL1g * p0gg * p0gq + OL1g * p0qq * p0gq - 3 * beta0 * OL1g * p0gq ) );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1483,10 +1509,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator OL1g {g, CmL1gNC{teta},         IntEps};
-        const Operator OL2g {g, CmL2gNC{teta},         IntEps};
-        const Operator OL2ps{g, CmL2psNC{teta},        IntEps};
-        const Operator OL3g {g, CmLa3gNC{actnf, teta}, IntEps};
+        const Operator OL1g {g, CmL1gNC{teta},             IntEps};
+        const Operator OL2g {g, CmL2gNC{teta},             IntEps};
+        const Operator OL2ps{g, CmL2psNC{teta},            IntEps};
+        const Operator OL3g {g, CmLa3gNC{actnf, teta, im}, IntEps};
         return OL3g - lxi * ( OL1g * p1gg - beta1 * OL1g + OL2ps * p0qg + OL2g * p0gg - 2 * beta0 * OL2g )
                + lxi2 / 2 * ( OL1g * p0gg * p0gg + OL1g * p0gq * p0qg - 3 * beta0 * OL1g * p0gg+ 2 * pow(beta0, 2) * OL1g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
