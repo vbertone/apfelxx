@@ -8,7 +8,7 @@ if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
     echo "Configuration tool for APFEL++: A PDF Evolution Library"
     echo "Webpage: https://github.com/vbertone/apfelxx"
     echo
-    echo "Usage: apfel-config [Options]"
+    echo "Usage: apfelxx-config [Options]"
     echo "Options:"
     echo "  --help | -h : show this help message"
     echo "  --version   : code version"
