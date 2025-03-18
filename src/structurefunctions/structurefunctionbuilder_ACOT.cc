@@ -1086,7 +1086,7 @@ namespace apfel
     const TabulateObject<Operator> TabO21ns_H{fO21ns, nQ, sximin, sximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
+    const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
 
     const auto F2Obj = [=,&g] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
@@ -1585,7 +1585,7 @@ namespace apfel
     const TabulateObject<Operator> TabOL1ns_H{fOL1ns, nQ, sximin, sximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
+    const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
 
     const auto FLObj = [=,&g] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
@@ -3331,7 +3331,7 @@ namespace apfel
     const TabulateObject<Operator> TabO22ns_nf_H{fO22nsm_nf, nQ, sximin, sximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
+    const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
 
     const auto F2Obj = [=,&g] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
@@ -3876,7 +3876,7 @@ namespace apfel
     const TabulateObject<Operator> TabOL2ns_nf_H{fOL2nsm_nf, nQ, sximin, sximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
-    const std::vector<int> skip = {0, 1, 2, 3, 5, 7, 9, 11};
+    const std::vector<int> skip = {0, 1, 3, 5, 7, 9, 11};
 
     const auto FLObj = [=,&g] (double const& Q, std::vector<double> const& Ch) ->StructureFunctionObjects
     {
