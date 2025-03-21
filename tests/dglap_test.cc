@@ -63,7 +63,8 @@ int main()
   // Set appropriate convolution basis for the evolution operators and
   // convolute them with initial-scale distributions.
   tops.SetMap(apfel::EvolveDistributionsBasisQCD{});
-  const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((tops * apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCD{}, DistributionMap(g, apfel::LHToyPDFs, mu0)}).GetObjects());
+  const apfel::Set<apfel::Distribution> pdfs0{apfel::EvolveDistributionsBasisQCD{}, DistributionMap(g, apfel::LHToyPDFs, mu0)};
+  const std::map<int, apfel::Distribution> oppdfs = apfel::QCDEvToPhys((tops * pdfs0).GetObjects());
 
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
@@ -104,6 +105,22 @@ int main()
                 << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
                 << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
                 << "  " << oppdfs.at(0).Evaluate(x)
+                << std::endl;
+    }
+  std::cout << "\n";
+
+  std::cout << "Evolution through the interpolated evolution operator:" << std::endl;
+  for (auto const& x : xlha)
+    {
+      const std::map<int, double> opxpdfs = apfel::QCDEvToPhys((apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCD{}, tops.Evaluate(x).GetObjects()} * pdfs0).Squash());
+      std::cout.precision(1);
+      std::cout << x;
+      std::cout.precision(4);
+      std::cout << "  " << opxpdfs.at(2) - opxpdfs.at(-2)
+                << "  " << opxpdfs.at(1) - opxpdfs.at(-1)
+                << "  " << 2 * ( opxpdfs.at(-2) + opxpdfs.at(-1) )
+                << "  " << opxpdfs.at(4) + opxpdfs.at(-4)
+                << "  " << opxpdfs.at(0)
                 << std::endl;
     }
   std::cout << "\n";

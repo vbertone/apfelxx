@@ -339,7 +339,30 @@ namespace apfel
     return Set<Distribution> {_map, TransformedObjects};
   }
 
+  //_________________________________________________________________________
+  template<>
+  Set<Distribution> Set<Operator>::Evaluate(double const& x) const
+  {
+    std::map<int, Distribution> output;
+    for (auto const& e : _objects)
+      output.insert({e.first, e.second.Evaluate(x)});
+
+    return Set<Distribution> {_map, output};
+  }
+
+  //_________________________________________________________________________
+  template<>
+  std::map<int, double> Set<Distribution>::Squash() const
+  {
+    std::map<int, double> output;
+    for (auto const& e : _objects)
+      output.insert({e.first, e.second.Squash()});
+
+    return output;
+  }
+
   template Set<Distribution> Set<Operator>::operator *= (Set<Distribution> const&) const;
+  template Set<Distribution> Set<Distribution>::operator *= (Set<Distribution> const&) const;
   template Set<Operator> Set<Operator>::operator *= (Set<Operator> const&) const;
 
   template std::ostream& operator << (std::ostream& os, Set<Distribution> const& s);

@@ -8,6 +8,7 @@
 #include "apfel/messages.h"
 
 #include <cmath>
+#include <numeric>
 
 namespace apfel
 {
@@ -82,6 +83,12 @@ namespace apfel
       result += IntInterpolant(beta, ao, bo, _grid.GetJointGrid()) * _distributionJointGrid[beta];
 
     return sgn * result;
+  }
+
+  //_________________________________________________________________________________
+  double Interpolator::Squash() const
+  {
+    return accumulate(_distributionJointGrid.begin(), _distributionJointGrid.end(), 0.);
   }
 
   //_________________________________________________________________________________

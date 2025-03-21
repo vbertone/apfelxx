@@ -79,6 +79,14 @@ namespace apfel
      * @return the integral of the interpolated function
      */
     double Integrate(double const& a, double const& b) const;
+
+    /**
+     * @brief Function that sums all entries of the distribution on
+     * the joint grid. This function is meant to be used to compute
+     * scalar products.
+     * @return the squashed distribution
+     */
+    double Squash() const;
     ///@}
 
     /**

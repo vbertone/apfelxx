@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/convolutionmap.h"
+#include "apfel/distribution.h"
 
 #include <functional>
 
@@ -127,6 +128,21 @@ namespace apfel
      * @param TranformationFuncs: set of transformation functions
      */
     Set<T> Transform(std::map<int, std::function<double(std::map<int, double> const&)>> const& TranformationFuncs) const;
+
+
+    /**
+     * @brief This function interpolates the single objects of the set
+     * (only Operators) over the first index and returns a set of
+     * Distributions.
+     * @param x: value of the variable to be interpolated
+     */
+    Set<Distribution> Evaluate(double const& x) const;
+
+    /**
+     * @brief This function squashes the single objects of the set
+     * (only Distributions) and returns a map of integers to doubles.
+     */
+    std::map<int, double> Squash() const;
 
     /**
      * @brief Print the Operator object

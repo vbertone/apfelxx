@@ -75,7 +75,7 @@ namespace apfel
 
     /**
      * @brief Function that interpolates the operator over the first
-     * index return a Distribution object.
+     * index and returns a Distribution object.
      * @param x: the value in x to be interpolated
      */
     Distribution Evaluate(double const& x) const;
