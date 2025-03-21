@@ -182,10 +182,11 @@ $(function(){ initResizable(false); });
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">double</span> x = xmin; x &lt; xmax * 1.000001; x *= xstp)</div>
 <div class="line">    {</div>
 <div class="line">      <span class="comment">// Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )</span></div>
-<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Ix  = <a class="code hl_variable" href="group__MathConstants.html#ga687ec16c12edc12df465398573b42d47">apfel::CF</a> * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log(1 - x) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );</div>
-<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Odx = Od.<a id="a12" name="a12"></a><a class="code hl_function" href="classapfel_1_1Interpolator.html#aaa04fd13b61de9eca4bce12c4afd8e97">Evaluate</a>(x);</div>
-<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Oxd = <a class="code hl_function" href="namespaceapfel.html#a562236897ffcf109fc7fe01436ad023d">InnerProduct</a>(O.Evaluate(x), d);</div>
-<div class="line">      std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Odx &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Oxd &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Ix &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Odx / Ix &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Oxd / Ix &lt;&lt; std::endl;</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Ix   = <a class="code hl_variable" href="group__MathConstants.html#ga687ec16c12edc12df465398573b42d47">apfel::CF</a> * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log(1 - x) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Odx  = Od.<a id="a12" name="a12"></a><a class="code hl_function" href="classapfel_1_1Interpolator.html#aaa04fd13b61de9eca4bce12c4afd8e97">Evaluate</a>(x);</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Oxd  = <a class="code hl_function" href="namespaceapfel.html#a562236897ffcf109fc7fe01436ad023d">InnerProduct</a>(O.Evaluate(x), d);</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> Oxd2 = (O.Evaluate(x) * d).Squash();</div>
+<div class="line">      std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Odx &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Oxd &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Oxd2 &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Ix &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Odx / Ix &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Oxd / Ix &lt;&lt; <span class="stringliteral">&quot;\t\t&quot;</span> &lt;&lt; Oxd2 / Ix &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Check the numerical accuracy of &quot;Od&quot; by comparing with the analytical result</span></div>
@@ -226,7 +227,7 @@ $(function(){ initResizable(false); });
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 4 2025 16:10:56 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Mar 21 2025 17:49:12 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

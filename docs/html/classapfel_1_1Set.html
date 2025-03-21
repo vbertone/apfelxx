@@ -134,6 +134,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8a1ee8a43b83e7096cf7b26d8fa0017a" id="r_a8a1ee8a43b83e7096cf7b26d8fa0017a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a1ee8a43b83e7096cf7b26d8fa0017a">Transform</a> (std::map&lt; int, std::function&lt; double(std::map&lt; int, double &gt; const &amp;)&gt; &gt; const &amp;TranformationFuncs) const</td></tr>
 <tr class="memdesc:a8a1ee8a43b83e7096cf7b26d8fa0017a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function trasforms the set of objects (only Distributions) given a set of functions, one for each distribution in the set. This function is not diagonal in the sense that different distributions can mix upon transformation.  <br /></td></tr>
 <tr class="separator:a8a1ee8a43b83e7096cf7b26d8fa0017a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f48cac1df954d00a7e7edfd85a4b996" id="r_a0f48cac1df954d00a7e7edfd85a4b996"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f48cac1df954d00a7e7edfd85a4b996">Evaluate</a> (double const &amp;x) const</td></tr>
+<tr class="memdesc:a0f48cac1df954d00a7e7edfd85a4b996"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function interpolates the single objects of the set (only Operators) over the first index and returns a set of Distributions.  <br /></td></tr>
+<tr class="separator:a0f48cac1df954d00a7e7edfd85a4b996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6fc4dfec9c4ae35bba5e555e09af3c9" id="r_ad6fc4dfec9c4ae35bba5e555e09af3c9"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6fc4dfec9c4ae35bba5e555e09af3c9">Squash</a> () const</td></tr>
+<tr class="memdesc:ad6fc4dfec9c4ae35bba5e555e09af3c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function squashes the single objects of the set (only Distributions) and returns a map of integers to doubles.  <br /></td></tr>
+<tr class="separator:ad6fc4dfec9c4ae35bba5e555e09af3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae91c71d2476d5b2a65a5511b1497c1" id="r_a3ae91c71d2476d5b2a65a5511b1497c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ae91c71d2476d5b2a65a5511b1497c1">Print</a> () const</td></tr>
 <tr class="memdesc:a3ae91c71d2476d5b2a65a5511b1497c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> object.  <br /></td></tr>
 <tr class="separator:a3ae91c71d2476d5b2a65a5511b1497c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,7 +297,7 @@ template&lt;class T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="set_test_8cc-example.html#a11">set_test.cc</a>, and <a class="el" href="sum_rules_test_8cc-example.html#a5">sum_rules_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="set_test_8cc-example.html#a11">set_test.cc</a>, and <a class="el" href="sum_rules_test_8cc-example.html#a6">sum_rules_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -340,6 +346,35 @@ template&lt;class T&gt; </div>
     <tr><td class="paramname">weigths</td><td>set of weights </td></tr>
   </table>
   </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0f48cac1df954d00a7e7edfd85a4b996" name="a0f48cac1df954d00a7e7edfd85a4b996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f48cac1df954d00a7e7edfd85a4b996">&#9670;&#160;</a></span>Evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; <a class="el" href="classapfel_1_1Set.html">apfel::Set</a>&lt; T &gt;::Evaluate </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function interpolates the single objects of the set (only Operators) over the first index and returns a set of Distributions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>value of the variable to be interpolated </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="dglap_test_8cc-example.html#a9">dglap_test.cc</a>, and <a class="el" href="sum_rules_test_8cc-example.html#a5">sum_rules_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -399,7 +434,7 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>This returns the full map of objects. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="sum_rules_test_8cc-example.html#a7">sum_rules_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="sum_rules_test_8cc-example.html#a8">sum_rules_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -657,7 +692,7 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>This function (re)sets the convolution map. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="dglap_test_8cc-example.html#a9">dglap_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="dglap_test_8cc-example.html#a10">dglap_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -694,6 +729,27 @@ template&lt;class T&gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ad6fc4dfec9c4ae35bba5e555e09af3c9" name="ad6fc4dfec9c4ae35bba5e555e09af3c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fc4dfec9c4ae35bba5e555e09af3c9">&#9670;&#160;</a></span>Squash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; int, double &gt; <a class="el" href="classapfel_1_1Set.html">apfel::Set</a>&lt; T &gt;::Squash </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function squashes the single objects of the set (only Distributions) and returns a map of integers to doubles. </p>
 
 </div>
 </div>
@@ -875,7 +931,7 @@ template&lt;class T&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 4 2025 16:11:00 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Mar 21 2025 17:49:13 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
