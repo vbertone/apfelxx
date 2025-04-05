@@ -103,22 +103,32 @@ int main()
   // Compute mixed evolution
   apfel::AlphaQCDQED aLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 0};
   apfel::AlphaQCDQED aNLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 1};
+  apfel::AlphaQCDQED aNNLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 2};
+  apfel::AlphaQCDQED aNNNLOmix{AlphaQCDRef, AlphaQEDRef, MuQEDRef, QuarkThresholds, LeptThresholds, 3};
 
   // Compute and print values at Mu.
   Mu = 1;
   std::cout << "\nCoupled numerical evolution of strong and electromagnetic couplings:" << std::endl;
   std::cout << "LO:    alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aLOmix.Evaluate(Mu)(0, 0)
-            << ", alpha_s(Mu = " << Mu << " GeV)[dec]  = " << asLO.Evaluate(Mu)
+            << ", alpha_s(Mu = " << Mu << " GeV)[dec]    = " << asLO.Evaluate(Mu)
             << ", (ratio = " << aLOmix.Evaluate(Mu)(0, 0) / asLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "LO:    alpha_em(Mu = " << Mu << " GeV)[coup] = " << aLOmix.Evaluate(Mu)(1, 0)
             << ", alpha_em(Mu = " << Mu << " GeV)[dec] = " << aLO.Evaluate(Mu)
             << ", (ratio = " << aLOmix.Evaluate(Mu)(1, 0) / aLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "NLO:   alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aNLOmix.Evaluate(Mu)(0, 0)
-            << ", alpha_s(Mu = " << Mu << " GeV)[dec]  = " << asNLO.Evaluate(Mu)
+            << ", alpha_s(Mu = " << Mu << " GeV)[dec]    = " << asNLO.Evaluate(Mu)
             << ", (ratio = " << aNLOmix.Evaluate(Mu)(0, 0) / asNLO.Evaluate(Mu) << ")" << std::endl;
   std::cout << "NLO:   alpha_em(Mu = " << Mu << " GeV)[coup] = " << aNLOmix.Evaluate(Mu)(1, 0)
             << ", alpha_em(Mu = " << Mu << " GeV)[dec] = " << aNLO.Evaluate(Mu)
             << ", (ratio = " << aNLOmix.Evaluate(Mu)(1, 0) / aNLO.Evaluate(Mu) << ")" << std::endl;
+  std::cout << "NNLO:  alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aNNLOmix.Evaluate(Mu)(0, 0)
+            << ", alpha_s(Mu = " << Mu << " GeV)[dec]    = " << asNNLO.Evaluate(Mu)
+            << ", (ratio = " << aNNLOmix.Evaluate(Mu)(0, 0) / asNNLO.Evaluate(Mu) << ")" << std::endl;
+  std::cout << "NNLO:  alpha_em(Mu = " << Mu << " GeV)[coup] = " << aNNLOmix.Evaluate(Mu)(1, 0) << std::endl;
+  std::cout << "NNNLO: alpha_s(Mu = " << Mu << " GeV)[coup]  = " << aNNNLOmix.Evaluate(Mu)(0, 0)
+            << ", alpha_s(Mu = " << Mu << " GeV)[dec]    = " << asNNNLO.Evaluate(Mu)
+            << ", (ratio = " << aNNNLOmix.Evaluate(Mu)(0, 0) / asNNNLO.Evaluate(Mu) << ")" << std::endl;
+  std::cout << "NNNLO: alpha_em(Mu = " << Mu << " GeV)[coup] = " << aNNNLOmix.Evaluate(Mu)(1, 0) << std::endl;
 
   // Iniatialize the running of the coupling at all available
   // perturbative orders.

@@ -81,8 +81,19 @@ namespace apfel
      */
     matrix<double> betaQCDQED(int const& pt, int const& nf, int const& nl) const;
 
+    /**
+     * @brief Function that returns the number of active quarks and
+     * leptons separately given the total number of active partons.
+     * @param nfl: total number of active partons
+     * @return The number of active quarks and leptons.
+     */
+    std::pair<int, int> NFL(int const& nfl) const;
+
   private:
+    std::vector<double>                                              const _QuarkThresholds;       //!< Quark thresholds
+    std::vector<double>                                              const _LeptThresholds;        //!< Lepton thresholds
     int                                                              const _pt;                    //!< Perturbative order
     std::function<matrix<double>(int const&, matrix<double> const&)>       _BetaFunction;          //!< Beta function
+    std::function<double(bool const&, int const&, double const&)>          _MatchingConditions;    //!< Matching condition functions
   };
 }
