@@ -775,13 +775,13 @@ namespace apfel
                               + ( - 128 * a10 * a11 / 3 + 64 * a11 * bt0 / 3 ) * LQ ) * Lmu ) / x;
 
     // Variation of nllc
-    const double nllv = ( - 64 / 27 * a10 * a11 * ( - 68 + 3 * Pi2 )
+    const double nllv = ( - 64. / 27 * a10 * a11 * ( - 68 + 3 * Pi2 )
                           + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * Lmu2
                           + ( 64 * a10 * a11 / 3 - 32 * a11 * bt0 / 3 ) * LQ2
                           + ( - 128 * a10 * a11 / 9 + ( - 128 * a10 * a11 / 3 + 64 * a11 * bt0 / 3 ) * LQ
-                              - 8 / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * Lmu
+                              - 8. / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * Lmu
                           + ( 128 * a10 * a11 / 9 + 8. / 9 * a11 * bt0 * ( - 8 + 96 * log(2) - 63 * zeta3 ) ) * LQ
-                          + 8 / 27. * a11 * bt0 * ( - 272 + 12 * Pi2 + 96 * log(2) - 63 * zeta3 ) ) / x;
+                          + 8. / 27 * a11 * bt0 * ( - 272 + 12 * Pi2 + 96 * log(2) - 63 * zeta3 ) ) / x;
 
     // Compute variation
     const double delta = std::abs(nllc - nllv);

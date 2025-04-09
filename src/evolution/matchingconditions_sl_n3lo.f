@@ -265,7 +265,7 @@
      $     1.98643407300325D-9, 
      $     -1.42290234845722D-9]
       
-          aQg3 = chebev(x,0.05D0,0.92D0,65,coeff)
+          aQg3 = chebev(x,0.05D0,0.92D0,64,coeff)
       ELSE !expansion around x=0, good for 0<x<0.05
           Lx = dlog(x)
       
