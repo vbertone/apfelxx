@@ -506,7 +506,7 @@ namespace apfel
     double nfr = _nf;
     double asr = 1;
     double LLr = 0;
-    return ps_(&xr, &nfr, &asr, &LLr) + (x < 0.5 ? aps1_(&xr, &nfr, &asr, &LLr) : aps2_(&xr, &nfr, &asr, &LLr));
+    return ps_(&xr, &nfr, &asr, &LLr) + aps1_(&xr, &nfr, &asr, &LLr) + aps2_(&xr, &nfr, &asr, &LLr);
   }
 
   //_________________________________________________________________________________
