@@ -5,6 +5,7 @@
 //
 
 #include "apfel/massivezerocoefficientfunctionsunp_sl.h"
+#include "apfel/matchingconditions_sl.h"
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 
@@ -673,16 +674,18 @@ namespace apfel
     delete[] Hr5;
 
     const double ln2 = 0.6931471805599453;
-    const double L   = log(x);
-    const double L2  = L * L;
-    const double L3  = L * L2;
-    const double L4  = L * L3;
-    const double L5  = L * L4;
-    const double L1  = log(1 - x);
-    const double L12 = L1 * L1;
-    const double L13 = L1 * L12;
-    const double L14 = L1 * L13;
-    const double L15 = L1 * L14;
+    // For matching conditions
+    //const double L   = log(x);
+    //const double L2  = L * L;
+    //const double L3  = L * L2;
+    //const double L4  = L * L3;
+    //const double L5  = L * L4;
+    //const double L1  = log(1 - x);
+    //const double L12 = L1 * L1;
+    //const double L13 = L1 * L12;
+    //const double L14 = L1 * L13;
+    //const double L15 = L1 * L14;
+    double xr  = x;
 
     return  CF * (313. / 6 - 104. / 9. / x - 1435. / 3 * x + 3497. / 9 * x2
                   - 8 * zeta5 + 16 * zeta5 * x + 32. / 27 * zeta3 / x
@@ -1364,13 +1367,17 @@ namespace apfel
             // from erratum
             + 8. / 9 * zeta3 - 16. / 9 * zeta3 * x + 16. / 9 * zeta3 * x2
             // Matching conditions
-            -7685.812499211437 + 8956.649545 / x - 18891.90044109861 * x
-            + 19687.320434140434 * x * x + 737.165347 * L1
-            - 12429.982192922555 * (1. - x) * L1 - 332.5368214 * L12
-            + 4.380199906 * L13 - 8.20987654 * L14 + 3.7037037039999996 * L15
-            + 10739.21741 * L + 1548.8916669999999 * L / x
-            - 7861.809052567688 * x * L - 720.0483828 * L2 + 514.0912722 * L3
-            - 21.75925926 * L4 + 4.844444444 * L5
+            // Approximation
+            //-7685.812499211437 + 8956.649545 / x - 18891.90044109861 * x
+            //+ 19687.320434140434 * x * x + 737.165347 * L1
+            //- 12429.982192922555 * (1. - x) * L1 - 332.5368214 * L12
+            //+ 4.380199906 * L13 - 8.20987654 * L14 + 3.7037037039999996 * L15
+            //+ 10739.21741 * L + 1548.8916669999999 * L / x
+            //- 7861.809052567688 * x * L - 720.0483828 * L2 + 514.0912722 * L3
+            //- 21.75925926 * L4 + 4.844444444 * L5
+            // Exact
+            + aqg3_(&xr) / 2 + (x < 0.5 ? red0_(&xr) : red1_(&xr))
+            // Zero-mass coefficient functions
             + _c23g.Regular(x)
             - (16. / 9 * CA - 15. / 2 * CF) * _c21g.Regular(x);
   }
