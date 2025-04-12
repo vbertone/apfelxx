@@ -92,6 +92,10 @@ namespace apfel
         obj.Threshold = Thresholds[nf-1];
         if (OpEvol)
           {
+            std::map<int, Operator> MapUnity;
+            for (auto const& coord : Gkj)
+              MapUnity.insert({coord.second, (coord.first.first == coord.first.second ? Id : Zero)});
+            obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCD{nf}, MapUnity};
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
           }
@@ -180,6 +184,10 @@ namespace apfel
         obj.Threshold = Thresholds[nf-1];
         if (OpEvol)
           {
+            std::map<int, Operator> MapUnity;
+            for (auto const& coord : Gkj)
+              MapUnity.insert({coord.second, (coord.first.first == coord.first.second ? Id : Zero)});
+            obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCD{nf}, MapUnity};
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
           }
@@ -266,6 +274,10 @@ namespace apfel
         obj.Threshold = Thresholds[nf-1];
         if (OpEvol)
           {
+            std::map<int, Operator> MapUnity;
+            for (auto const& coord : Gkj)
+              MapUnity.insert({coord.second, (coord.first.first == coord.first.second ? Id : Zero)});
+            obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCD{nf}, MapUnity};
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
           }

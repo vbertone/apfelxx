@@ -13,7 +13,7 @@ namespace apfel
   /**
    * @brief The map between pair of indices corresponding to the
    * position of the operator in the evolution matrix and its linear
-   * index.
+   * index in the QCD evolution basis.
    */
   // *INDENT-OFF*
   const std::map<std::pair<int, int>, int> Gkj =

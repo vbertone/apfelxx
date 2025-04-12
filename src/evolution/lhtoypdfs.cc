@@ -25,6 +25,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  std::map<int, double> LHToyPDFsPlusMinus(double const& x, double const&)
+  {
+    return PhysToPlusMinus(QCDEvToPhys(Provider(x, 0)));
+  }
+
+  //_________________________________________________________________________________
   std::map<int, double> LHToyPDFsPol(double const& x, double const&)
   {
     return Provider(x, 1);

@@ -324,7 +324,7 @@ namespace apfel
     // Call function in the physical basis
     std::map<int, double> PhysMap = InPhysMap;
 
-    // Fill in keys that do not exist Start with the gluon (assumes
+    // Fill in keys that do not exist. Start with the gluon (assumes
     // that the ID is 21).
     if (PhysMap.find(0) == PhysMap.end())
       PhysMap[0] = PhysMap[21];
@@ -336,14 +336,14 @@ namespace apfel
 
     // Fill in map in the PlusMinus basis. It assumes that the gluon
     // has key zero and all keys from -6 to 6 exist.
-    std::map<int, double> QCDEvMap;
-    QCDEvMap[0]  = PhysMap.at(0);
+    std::map<int, double> PlusMinusMap;
+    PlusMinusMap[0 + 6] = PhysMap.at(0);
     for (int i = 1; i <= 6; i++)
       {
-        QCDEvMap[2*i-1] = PhysMap.at(i) + PhysMap.at(-i);
-        QCDEvMap[2*i]   = PhysMap.at(i) - PhysMap.at(-i);
+        PlusMinusMap[  i + 6] = PhysMap.at(i) + PhysMap.at(-i);
+        PlusMinusMap[- i + 6] = PhysMap.at(i) - PhysMap.at(-i);
       }
-    return QCDEvMap;
+    return PlusMinusMap;
   }
 
   //_____________________________________________________________________________
@@ -352,14 +352,14 @@ namespace apfel
     // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, double> PhysMap;
-    PhysMap[0]  = PlusMinusMap.at(0);
-    PhysMap[21] = PlusMinusMap.at(0);
+    PhysMap[0]  = PlusMinusMap.at(0 + 6);
+    PhysMap[21] = PlusMinusMap.at(0 + 6);
 
     // Fill in map in the physical basis
     for (int i = 1; i <= 6; i++)
       {
-        PhysMap[i]  = ( PlusMinusMap.at(2*i-1) + PlusMinusMap.at(2*i) ) / 2;
-        PhysMap[-i] = ( PlusMinusMap.at(2*i-1) - PlusMinusMap.at(2*i) ) / 2;
+        PhysMap[i]  = ( PlusMinusMap.at(i + 6) + PlusMinusMap.at(- i + 6) ) / 2;
+        PhysMap[-i] = ( PlusMinusMap.at(i + 6) - PlusMinusMap.at(- i + 6) ) / 2;
       }
     return PhysMap;
   }
@@ -370,13 +370,13 @@ namespace apfel
     // Fill in map in the physical basis. It assumes that the gluon
     // has key zero and all keys from 0 to 12 exist.
     std::map<int, Distribution> PhysMap;
-    PhysMap.insert({0, PlusMinusMap.at(0)});
+    PhysMap.insert({0, PlusMinusMap.at(0 + 6)});
 
     // Fill in map in the physical basis
     for (int i = 1; i <= 6; i++)
       {
-        PhysMap.insert({i,  ( PlusMinusMap.at(2*i-1) + PlusMinusMap.at(2*i) ) / 2});
-        PhysMap.insert({-i, ( PlusMinusMap.at(2*i-1) - PlusMinusMap.at(2*i) ) / 2});
+        PhysMap.insert({i,  ( PlusMinusMap.at(i + 6) + PlusMinusMap.at(- i + 6) ) / 2});
+        PhysMap.insert({-i, ( PlusMinusMap.at(i + 6) - PlusMinusMap.at(- i + 6) ) / 2});
       }
     return PhysMap;
   }

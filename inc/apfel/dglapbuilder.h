@@ -22,7 +22,8 @@ namespace apfel
    */
   struct DglapObjects
   {
-    double Threshold;
+    double                           Threshold;
+    Set<Operator>                    UnitySet;
     std::map<int, Set<Operator>>     SplittingFunctions;
     std::map<int, Set<Operator>>     MatchingConditions;
     std::map<int, Set<Distribution>> InhomogeneousTerms;
@@ -76,6 +77,51 @@ namespace apfel
                                                         double              const& IntEps = 1e-5,
                                                         bool                const& n3lo = false,
                                                         std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
+
+  /**
+   * @brief The InitializeDglapObjectsQCD function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure. This function prepares the evolution in
+   * the physical basis.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy quark thresholds
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (only relevant for n3lo = true) (default: all zero's)
+   * @return A map of DglapObject objects, one for each possible nf
+   */
+  std::map<int, DglapObjects> InitializeDglapObjectsQCDPhys(Grid                const& g,
+                                                            std::vector<double> const& Masses,
+                                                            std::vector<double> const& Thresholds,
+                                                            bool                const& OpEvol = false,
+                                                            double              const& IntEps = 1e-5,
+                                                            bool                const& n3lo = false,
+                                                            std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
+
+  /**
+   * @brief The InitializeDglapObjectsQCD function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions and store them into a
+   * 'DglapObjects' structure. This function prepares the evolution in
+   * the physical basis.
+   * @param g: the x-space grid
+   * @param Thresholds: the heavy quark thresholds
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (only relevant for n3lo = true) (default: all zero's)
+   * @return A map of DglapObject objects, one for each possible nf
+   * @note This function assumes that masses and thresholds coincide.
+   */
+  std::map<int, DglapObjects> InitializeDglapObjectsQCDPhys(Grid                const& g,
+                                                            std::vector<double> const& Thresholds,
+                                                            bool                const& OpEvol = false,
+                                                            double              const& IntEps = 1e-5,
+                                                            bool                const& n3lo = false,
+                                                            std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsQCD function precomputes the

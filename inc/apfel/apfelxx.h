@@ -41,6 +41,7 @@
 #include "apfel/set.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/evolutionbasisqcd.h"
+#include "apfel/physicalbasisqcd.h"
 #include "apfel/doubleoperator.h"
 #include "apfel/doubledistribution.h"
 
