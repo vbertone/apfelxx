@@ -1642,193 +1642,226 @@ M_4 & \quad n_f+2\leq i \leq 6 &\quad  j=0\\
 \label{eq:algorithmEvN3LO}
 \end{equation}
 
+\section{Evolution and matching in the physical basis}
+
+In view of the implementation of QED corrections and the ensuing
+complications due to the isospin symmetry breaking, we work out here
+how to implement PDF evolution and matching in pure QCD but in the
+physical basis. The purpose is to test the performance of this basis
+in {\tt APFEL++} with the purpose of using this basis also in the
+presence of QED corrections. Rather than the actual physical basis
+$\{\overline{t}, \overline{b},\dots, \overline{d},g,d,\dots,b,t\}$, it
+is convenient to use the basis
+$\{f_i\}=\{t^-,b^-,\dots,d^-,g,d^+,\dots,b^+,t^+\}$, with
+$q^{\pm} = q\pm\overline{q}$, in that it guarantees a partial
+diagonalisation of the splitting-function matrix. In this basis, we
+find that the evolution equations read:
+
+\begin{equation}
+\begin{array}{rcl}\displaystyle\frac{dq_k^-}{d\ln\mu^2} &=&
+                                                            \displaystyle
+                                                            P^{\rm
+                                                            NV}q_k^-+P^{\rm
+                                                            PV}\sum_{i=1,i\neq
+                                                            k}^{n_f} q_i^-\,,\\
+\\
+\displaystyle\frac{dg}{d\ln\mu^2} &=&\displaystyle P_{gg} g+ P_{gq}
+                                      \sum_{i=1}^{n_f} q_i^+\,,\\
+\\
+\displaystyle\frac{dq_k^+}{d\ln\mu^2} &=& \displaystyle 2P_{qg}
+                                          g+P^{\rm
+                                          NS}q_k^++P^{\rm
+                                          PS}\sum_{i=1,i\neq k}^{n_f} q_i^+\,,
+\end{array}
+\end{equation}
+where we have defined:
+\begin{equation}
+\begin{array}{l}
+\displaystyle P^{\rm PV} = \frac{1}{n_f}(P^V-P^-)\,,\qquad P^{\rm PS} =
+\frac{1}{n_f}(P_{qq}-P^+)\,,\\
+\\
+\displaystyle  P^{\rm NV} = P^-+P^{\rm PV}\,,\qquad P^{\rm NS} = P^++P^{\rm PS}\,.
+\end{array}
+\end{equation}
+and with $k=1,\dots,n_f$ while:
+\begin{equation}
+\frac{dq_k^-}{d\ln\mu^2}=\frac{dq_k^+}{d\ln\mu^2} =
+0\,,\quad\mbox{for}\quad k=n_f+1,\dots,6\,.
+\end{equation}
+Writing the full set of evolution equations as:
+\begin{equation}
+\frac{df_i}{d\ln\mu^2} = \mathbb{P}_{ij}^{(n_f)}f_j\,,
+\end{equation}
+with $i,j=-6,\dots,6$, one has that:
+\begin{equation}
+\mathbb{P}_{ij}^{(n_f)}=
+\left\{
+\begin{array}{lll}
+P^{\rm PV} &\quad -n_f \leq i \leq -1 & \quad -n_f \leq j \leq -1\; ||\; j\neq i\\
+P^{\rm NV}&\quad -n_f \leq i \leq -1 & \quad j=i\\
+P_{gg} & \quad i = 0 &\quad j = 0\\
+P_{gq} &\quad i = 0 & \quad 1 \leq j \leq n_f\\
+2P_{qg} &\quad 1 \leq i \leq n_f & \quad j=0\\
+P^{\rm NS}&\quad 1 \leq i \leq n_f & \quad j=i\\
+P^{\rm PS} &\quad 1 \leq i \leq n_f & \quad 1 \leq j \leq n_f\; || \; j\neq i\\
+0             & \quad\mbox{otherwise}
+\end{array}
+\right.\,.
+\label{eq:splittingalgPhys}
+\end{equation}
+
+As far as matching conditions are concerned, using
+Eq.~(\ref{eq:IntMatchingCondsN3LO}), one immediately finds:
+\begin{equation}
+\mathbb{K}^{(n_f)}_{ij} =
+\left\{
+\begin{array}{lll}
+K_{gg} & \quad i = 0 &\quad j = 0\\
+K_{gl} &\quad i = 0 & \quad 1 \leq j \leq n_f\\
+K_{gh} &\quad i = 0 & \quad j = n_f + 1\\
+K_{lg} &\quad 1 \leq i \leq n_f & \quad j=0\\
+K_{ll}&\quad 1 \leq i \leq n_f & \quad j=i\\
+K_{ll'} &\quad 1 \leq i \leq n_f & \quad 1 \leq j \leq n_f\\
+K_{hg} &\quad i = n_f+1 & \quad j=0\\
+K_{hl} &\quad i = n_f+1 & \quad 1\leq j\leq n_f\\
+K_{hh} &\quad i = n_f+1 & \quad j=n_f+1\\
+0             & \quad\mbox{elsewhere}
+\end{array}
+\right.\,.
+\label{eq:algorithmPhys}
+\end{equation}
+
+We now need to work out the structure of the evolution operator.
+
+\newpage
 \section{Evolution and matching with QED corrections}
 
-In this section, we address the question of deriving PDF matching condition and
-evolution operator in the presence of QED corrections. We will first address the
-case in which only the photon PDFs is introduces on top of the usual QCD PDFs.
-We will leave the discussion of the case in which the photon PDF is accompanied
-by lepton PDFs for later.
-
-The fact that the photon coupling to quarks is proportional to the electric
-charge, while the QCD coupling is proportional to the strong coupling,
+In this section, we address the question of deriving the PDF evolution operator
+in the presence of QED corrections including both photon and charged-lepton
+PDFs. The fact that the photon coupling to quarks is proportional to the
+electric charge, while the QCD coupling is proportional to the strong coupling,
 complicates the description in that one first needs to define a new \textit{ad
 hoc} evolution basis, for which we need to work out the matching at threshold.
-Moreover, we would in principle need to include in the perturbative matching
-functions perturbative corrections proportional to the electromagnetic coupling
-$\alpha$. Here, we will not include any such corrections and stick pure-QCD
-matching conditions.
+We would in principle need to include in the perturbative matching functions
+corrections proportional to the electromagnetic coupling $\alpha$. We will not
+do it sticking with pure-QCD matching conditions. This is justified by the fact
+that, up to NLO in the QED coupling, the matching conditions would produce a
+discontinuity only when thresholds and masses are different, which is not a
+common situation.
 
-The QED evolution basis has already been introduced in the document {\tt
-QCD\_QED\_common\_basis.pdf}. We report it here in a different order and with
-$\Delta_\Sigma\rightarrow-\Delta_\Sigma$ and $\Delta_V\rightarrow -\Delta_V$,
-which is more convenient for our purposes:
+The QED evolution basis more convenient for our purposes is:
 \begin{equation}
   \begin{array}{ll}
-  \mbox{1) }\gamma & \\
-  \mbox{2) }g & \\
-  \mbox{3) }\displaystyle \Sigma = \Sigma_u + \Sigma_d & \quad \mbox{9) }\displaystyle V =V_u +  V_d\\
-  \mbox{4) }\displaystyle \Delta_\Sigma = \Sigma_d - \Sigma_u & \quad \mbox{10) }\displaystyle \Delta_V = V_d - V_u\\
-  \mbox{5) }T_1^d = d^+ - s^+ &\quad \mbox{11) }V_1^d = d^- - s^-  \\
-  \mbox{6) }T_1^u = u^+ - c^+ &\quad \mbox{12) }V_1^u = u^- - c^-\\
-  \mbox{7) }T_2^d = d^+ + s^+ - 2b^+ &\quad \mbox{13) }V_2^d = d^- + s^- - 2b^-\\
-  \mbox{8) }T_2^u = u^+ + c^+ - 2t^+ &\quad \mbox{14) }V_2^u = u^- + c^- - 2t^-
+  \mbox{1)  }g & \\
+  \mbox{2)  }\gamma & \\
+  \mbox{3)  }\displaystyle \Sigma_d                          & \quad \mbox{12) } \displaystyle V_d\\
+  \mbox{4)  }\displaystyle \Sigma_u                          & \quad \mbox{13) } \displaystyle V_u\\
+  \mbox{5)  }\displaystyle \Sigma_\ell                       & \quad \mbox{14) } \displaystyle \Delta_\ell\\
+  \mbox{6)  }T_1^d = d^+ - s^+                               & \quad \mbox{15) } V_1^d = d^- - s^-  \\
+  \mbox{7)  }T_2^d = d^+ + s^+ - 2b^+                        & \quad \mbox{16) } V_2^d = d^- + s^- - 2b^-\\
+  \mbox{8)  }T_1^u = u^+ - c^+                               & \quad \mbox{17) } V_1^u = u^- - c^-\\
+  \mbox{9)  }T_2^u = u^+ + c^+ - 2t^+                        & \quad \mbox{18) } V_2^u = u^- + c^- - 2t^-\\
+  \mbox{10) }T_1^\ell = \ell_e^+ - \ell_\mu^+                & \quad \mbox{19) } V_1^\ell = \ell_e^- - \ell_\mu^-\\
+  \mbox{11) }T_2^\ell = \ell_e^+ + \ell_\mu^+ -2\ell_\tau^+  & \quad \mbox{20) } V_2^\ell = \ell_e^- + \ell_\mu^--2\ell_\tau^-
   \end{array}
   \label{eq:QEDEvolutionBasis}
 \end{equation}
 where:
 \begin{equation}
-  \begin{array}{ll}
-  \displaystyle \Sigma_u = \sum_{k=i}^{n_u} u_k^+ & \qquad \displaystyle \Sigma_d
-  = \sum_{k=i}^{n_d} d_k^+ \\
+  \begin{array}{lll}
+  \displaystyle \Sigma_d = \sum_{k=1}^{3} d_k^+ &\,, \qquad \displaystyle \Sigma_u
+  = \sum_{k=1}^{3} u_k^+&\,, \qquad \displaystyle \Sigma_\ell
+  = \sum_{k=1}^{3} \ell_k^+ \\
   \\
-  \displaystyle V_u = \sum_{k=i}^{n_u} u_k^- & \qquad \displaystyle V_d
-  = \sum_{k=i}^{n_d} d_k^-\,,
+  \displaystyle V_d = \sum_{k=1}^{3} d_k^- & \qquad \displaystyle V_u
+  = \sum_{k=1}^{3} u_k^-&\,,\qquad\displaystyle V_\ell
+  = \sum_{k=1}^{3} \ell_k^-
   \end{array}
 \end{equation}
-where $q_i^\pm = q_i\pm\overline{q}_i$ and with $n_d$ and $n_u$ the number of
-down-type and up-type flavours, respectively, which are such that:
+with $q_i^\pm = q_i\pm\overline{q}_i$, $\ell_i^\pm =
+\ell_i\pm\overline{\ell}_i$. Note that, in view of possible intrinsic
+components, all sums above run over all possible available flavours. As above,
+we will pay particular attention to account for possible intrinsic
+contributions, \textit{i.e.} those contributions which are static below
+thresholds. The starting point is:
 \begin{equation}
-  \Sigma = \Sigma_u + \Sigma_d \quad\mbox{and}\quad V = V_u +  V_d\,.
-\end{equation}
-
-As above, valence distributions from 9) to 14), which are made of combinations
-of $q_i^-$, match multiplicatively as in Eq.~(\ref{eq:nsingletmc}). The matching
-for the other distributions is obtained using those in
-Eq.~(\ref{eq:IntMatchingConds}) with the additional condition:
-\begin{equation}
-  \gamma^{(n_f+1)} = \gamma^{(n_f)}\,,\\
-\end{equation}
-which are given in the physical basis. The complication here boils down to
-rotating these relations from the physical basis into the evolution basis given
-in Eq.~(\ref{eq:QEDEvolutionBasis}). This can be done by means of the rotation
-matrix:
-\begin{equation}
-  T = 
-  \left(
-\begin{array}{ccccccc}
- 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
- 0 & 1 & -1 & 1 & -1 & 1 & -1 \\
- 0 & 1 & 0 & -1 & 0 & 0 & 0 \\
- 0 & 0 & 1 & 0 & -1 & 0 & 0 \\
- 0 & 1 & 0 & 1 & 0 & -2 & 0 \\
- 0 & 0 & 1 & 0 & 1 & 0 & -2 \\
-\end{array}
-\right)\,,
-  \label{eq:RotationMatrixQED}
-\end{equation}
-acting on distributions from 2) to 8) in Eq.~(\ref{eq:QEDEvolutionBasis}) and
-whose inverse is:
-\begin{equation}
-  T^{-1} = \frac{1}{6}
-  \left(
-\begin{array}{ccccccc}
- 6 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 1 & 1 & 3 & 0 & 1 & 0 \\
- 0 & 1 & -1 & 0 & 3 & 0 & 1 \\
- 0 & 1 & 1 & -3 & 0 & 1 & 0 \\
- 0 & 1 & -1 & 0 & -3 & 0 & 1 \\
- 0 & 1 & 1 & 0 & 0 & -2 & 0 \\
- 0 & 1 & -1 & 0 & 0 & 0 & -2 \\
-\end{array}
-\right)
-\label{eq:RotationMatrixQEDInverse}
-\end{equation}
-This time, the algorithm to determine the matrix
-$\left[T\mathbb{K}^{(n_f)}T^{-1}\right]$ is more complicated. Therefore, we will
-just report the single cases from $n_f=0$ to $n_f=5$:
-\begin{equation}
-  \tiny
-  \begin{array}{l}
-  \left[T\mathbb{K}^{(0)}T^{-1}\right] = 
-  \left(
-\begin{array}{ccccccc}
- K_{gg} & \frac{K_{gh}}{6} & \frac{K_{gh}}{6} & \frac{K_{gh}}{2} & 0 & \frac{K_{gh}}{6} & 0 \\
- K_{hg} & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
- K_{hg}  & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
- K_{hg}  & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
- 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- K_{hg}  & \frac{K_{hh} }{6} & \frac{K_{hh} }{6} & \frac{K_{hh} }{2} & 0 & \frac{K_{hh} }{6} & 0 \\
- 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-\end{array}
-\right)
-\\
-\\
-\left[T\mathbb{K}^{(1)}T^{-1}\right] = 
-\left(
-\begin{array}{ccccccc}
- K_{gg} & \frac{K_{gh}+K_{gl} }{6} & \frac{K_{gl} -K_{gh}}{6} & \frac{K_{gl} }{2} & \frac{K_{gh}}{2} & \frac{K_{gl} }{6} & \frac{K_{gh}}{6} \\
- K_{hg}  & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{1}{6} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{2} & \frac{K_{hh} }{2} & \frac{K_{hl}+K_{ll}}{6} & \frac{K_{hh} }{6} \\
- -K_{hg}  & \frac{1}{6} (-K_{hh} -K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}+K_{ll}) & \frac{K_{ll}-K_{hl}}{2} & -\frac{K_{hh} }{2} & \frac{K_{ll}-K_{hl}}{6} & -\frac{K_{hh} }{6} \\
- 0 & \frac{K_{ll}}{6} & \frac{K_{ll}}{6} & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} & 0 \\
- K_{hg}  & \frac{K_{hh} +K_{hl}}{6} & \frac{K_{hl}-K_{hh} }{6} & \frac{K_{hl}}{2} & \frac{K_{hh} }{2} & \frac{K_{hl}}{6} & \frac{K_{hh} }{6} \\
- 0 & \frac{K_{ll}}{6} & \frac{K_{ll}}{6} & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} & 0 \\
- K_{hg}  & \frac{K_{hh} +K_{hl}}{6} & \frac{K_{hl}-K_{hh} }{6} & \frac{K_{hl}}{2} & \frac{K_{hh} }{2} & \frac{K_{hl}}{6} & \frac{K_{hh} }{6} \\
-\end{array}
-\right)
-\\
-\\
-\left[T\mathbb{K}^{(2)}T^{-1}\right] = 
-\left(
-  \begin{array}{ccccccc}
-   K_{gg} & \frac{1}{6} (K_{gh}+2 K_{gl} ) & \frac{K_{gh}}{6} & \frac{K_{gl} -K_{gh}}{2} & \frac{K_{gl} }{2} & \frac{K_{gh}+K_{gl} }{6} & \frac{K_{gl} }{6} \\
-   K_{hg}  & \frac{1}{6} (K_{hh} +2 (K_{hl}+K_{ll})) & \frac{K_{hh} }{6} & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{2} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{6} \\
-   K_{hg}  & \frac{1}{6} (K_{hh} +2 K_{hl}) & \frac{1}{6} (K_{hh} +2 K_{ll}) & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}-K_{ll}}{2} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}-K_{ll}}{6} \\
-   -K_{hg}  & \frac{1}{6} (-K_{hh} -2 K_{hl}+K_{ll}) & \frac{K_{ll}-K_{hh} }{6} & \frac{1}{2} (K_{hh} -K_{hl}+K_{ll}) & -\frac{K_{hl}}{2} & \frac{1}{6} (-K_{hh} -K_{hl}+K_{ll}) & -\frac{K_{hl}}{6} \\
-   0 & \frac{K_{ll}}{6} & -\frac{K_{ll}}{6} & 0 & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} \\
-   K_{hg}  & \frac{1}{6} (K_{hh} +2 K_{hl}+K_{ll}) & \frac{K_{hh} +K_{ll}}{6} & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}}{2} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}}{6} \\
-   0 & \frac{K_{ll}}{6} & -\frac{K_{ll}}{6} & 0 & \frac{K_{ll}}{2} & 0 & \frac{K_{ll}}{6} \\
+  \left\{
+  \begin{array}{rcl}
+  \displaystyle \mu^2\frac{\partial g}{\partial \mu^2} &=& \displaystyle (P_{gq} + e_d^2\widetilde{P}_{gq})\sum_{k=1}^{n_d} d_k^++(P_{gq} + e_u^2\widetilde{P}_{gq})\sum_{k=1}^{n_u} u_k^+ + (P_{gg} + e_\Sigma^2 \widetilde{P}_{gg})g
+  + e_\Sigma^2 \widetilde{P}_{g\gamma} \gamma\\
+  \\
+  \displaystyle \mu^2\frac{\partial \gamma}{\partial \mu^2} &=& \displaystyle e_d^2
+  \widetilde{P}_{\gamma q}\sum_{k=1}^{n_d} d_k^+ + e_u^2
+  \widetilde{P}_{\gamma q}\sum_{k=1}^{n_u} u_k^+ + e_\Sigma^2 \widetilde{P}_{\gamma g}g
+  + e_\Sigma^2 \widetilde{P}_{\gamma\gamma} \gamma+ \widetilde{P}_{\gamma\ell}\sum_{k=1}^{n_\ell} \ell_k^+\\
+  \\
+  \displaystyle \mu^2\frac{\partial d_i^+}{\partial \mu^2} &=& \displaystyle (P^+ + e_d^2\widetilde{P}^+)d_i^++ 2(P_{qg} + e_d^2 \widetilde{P}_{qg})g
+  + 2e_d^2 \widetilde{P}_{q\gamma} \gamma\\
+  \\
+   &+&\displaystyle \frac1{n_f}[(P_{qq}-P^+)+e_d^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_d} d_k^+ + \frac1{n_f}[(P_{qq}-P^+)+e_u^2e_d^2(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_u} u_k^+  + 2e_d^2\widetilde{P}_{q\ell}^S\sum_{k=1}^{n_\ell} \ell_k^+\\
+  \\
+  \displaystyle \mu^2\frac{\partial u_j^+}{\partial \mu^2} &=& (P^+ + e_u^2\widetilde{P}^+)u_j^++ 2(P_{qg} + e_u^2 \widetilde{P}_{qg})g
+  + 2e_u^2 \widetilde{P}_{q\gamma} \gamma \\
+  \\
+   &+&\displaystyle \frac1{n_f}[(P_{qq}-P^+)+e_u^2e_d^2(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_d} d_k^+ + \frac1{n_f}[(P_{qq}-P^+)+e_u^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_u} u_k^+ + 2e_u^2\widetilde{P}_{q\ell}^S\sum_{k=1}^{n_\ell} \ell_k^+\\
+  \\
+  \displaystyle \mu^2\frac{\partial \ell_\alpha^+}{\partial \mu^2} &=&\displaystyle \widetilde{P}^+\ell_\alpha^+
+  +\frac1{n_\ell}(\widetilde{P}_{\ell\ell}-\widetilde{P}^+)\sum_{k=1}^{n_\ell} \ell_k^++
+  2e_d^2\widetilde{P}_{q\ell}^S \sum_{k=1}^{n_d} d_k^++2e_u^2\widetilde{P}_{q\ell}^S \sum_{k=1}^{n_u} u_k^+
+  +2\widetilde{P}_{\ell\gamma}\gamma\\
+  \\
+  \displaystyle \mu^2\frac{\partial d_i^-}{\partial \mu^2} &=& \displaystyle (P^- + e_d^2\widetilde{P}^-)d_i^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_d} d_k^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_u} u_k^-\\
+  \\
+  \displaystyle \mu^2\frac{\partial u_j^-}{\partial \mu^2} &=& \displaystyle (P^- + e_u^2\widetilde{P}^-)u_j^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_d} d_k^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_u} u_k^-\\
+  \\
+  \displaystyle \mu^2\frac{\partial \ell_\alpha^-}{\partial \mu^2} &=&\displaystyle
+  \widetilde{P}^-\ell_\alpha^-
   \end{array}
-  \right)
-\\
-\\
-\left[T\mathbb{K}^{(3)}T^{-1}\right] = 
-\left(
-\begin{array}{ccccccc}
- K_{gg} & \frac{1}{6} (K_{gh}+3 K_{gl} ) & \frac{K_{gl} -K_{gh}}{6} & 0 & \frac{K_{gl} -K_{gh}}{2} & \frac{K_{gl} }{3} & \frac{K_{gh}+K_{gl} }{6} \\
- K_{hg}  & \frac{1}{6} (K_{hh} +3 (K_{hl}+K_{ll})) & \frac{1}{6} (-K_{hh} +K_{hl}+K_{ll}) & 0 & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{3} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) \\
- -K_{hg}  & \frac{1}{6} (-K_{hh} -3 K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}+3 K_{ll}) & 0 & \frac{1}{2} (K_{hh} -K_{hl}-K_{ll}) & \frac{K_{ll}-K_{hl}}{3} & \frac{1}{6} (-K_{hh} -K_{hl}-K_{ll}) \\
- 0 & 0 & 0 & K_{ll} & 0 & 0 & 0 \\
- -K_{hg}  & \frac{1}{6} (-K_{hh} -3 K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}-K_{ll}) & 0 & \frac{1}{2} (K_{hh} -K_{hl}+K_{ll}) & -\frac{K_{hl}}{3} & \frac{1}{6} (-K_{hh} -K_{hl}+K_{ll}) \\
- 0 & \frac{K_{ll}}{3} & \frac{K_{ll}}{3} & 0 & 0 & \frac{K_{ll}}{3} & 0 \\
- K_{hg}  & \frac{1}{6} (K_{hh} +3 K_{hl}+K_{ll}) & \frac{1}{6} (-K_{hh} +K_{hl}-K_{ll}) & 0 & \frac{1}{2} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}}{3} & \frac{1}{6} (K_{hh} +K_{hl}+K_{ll}) \\
-\end{array}
-\right)
-\\
-\\
-\left[T\mathbb{K}^{(4)}T^{-1}\right] = 
-\left(
-  \begin{array}{ccccccc}
-   K_{gg} & \frac{1}{6} (K_{gh}+4 K_{gl} ) & \frac{K_{gh}}{6} & 0 & 0 & \frac{K_{gl} -K_{gh}}{3} & \frac{K_{gl} }{3} \\
-   K_{hg}  & \frac{1}{6} (K_{hh} +4 (K_{hl}+K_{ll})) & \frac{K_{hh} }{6} & 0 & 0 & \frac{1}{3} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}+K_{ll}}{3} \\
-   K_{hg}  & \frac{1}{6} (K_{hh} +4 K_{hl}) & \frac{1}{6} (K_{hh} +4 K_{ll}) & 0 & 0 & \frac{1}{3} (-K_{hh} +K_{hl}+K_{ll}) & \frac{K_{hl}-K_{ll}}{3} \\
-   0 & 0 & 0 & K_{ll} & 0 & 0 & 0 \\
-   0 & 0 & 0 & 0 & K_{ll} & 0 & 0 \\
-   -2 K_{hg}  & \frac{1}{3} (-K_{hh} -4 K_{hl}+K_{ll}) & \frac{K_{ll}-K_{hh} }{3} & 0 & 0 & \frac{1}{3} (2 K_{hh} -2 K_{hl}+K_{ll}) & -\frac{1}{3} (2 K_{hl}) \\
-   0 & \frac{K_{ll}}{3} & -\frac{K_{ll}}{3} & 0 & 0 & 0 & \frac{K_{ll}}{3} \\
-  \end{array}
-  \right)
-\\
-\\
-\left[T\mathbb{K}^{(5)}T^{-1}\right] = 
-\left(
-\begin{array}{ccccccc}
- K_{gg} & \frac{1}{6} (K_{gh}+5 K_{gl} ) & \frac{K_{gl} -K_{gh}}{6} & 0 & 0 & 0 & \frac{K_{gl} -K_{gh}}{3} \\
- K_{hg}  & \frac{1}{6} (K_{hh} +5 (K_{hl}+K_{ll})) & \frac{1}{6} (-K_{hh} +K_{hl}+K_{ll}) & 0 & 0 & 0 & \frac{1}{3} (-K_{hh} +K_{hl}+K_{ll}) \\
- -K_{hg}  & \frac{1}{6} (-K_{hh} -5 K_{hl}+K_{ll}) & \frac{1}{6} (K_{hh} -K_{hl}+5 K_{ll}) & 0 & 0 & 0 & \frac{1}{3} (K_{hh} -K_{hl}-K_{ll}) \\
- 0 & 0 & 0 & K_{ll} & 0 & 0 & 0 \\
- 0 & 0 & 0 & 0 & K_{ll} & 0 & 0 \\
- 0 & 0 & 0 & 0 & 0 & K_{ll} & 0 \\
- -2 K_{hg}  & \frac{1}{3} (-K_{hh} -5 K_{hl}+K_{ll}) & \frac{1}{3} (K_{hh} -K_{hl}-K_{ll}) & 0 & 0 & 0 & \frac{1}{3} (2 K_{hh} -2 K_{hl}+K_{ll}) \\
-\end{array}
-\right)
-\end{array}
-\label{eq:RotationMatrixQEDInverse}
+  \right.\,.
 \end{equation}
-
-
-
+Importantly, the sums over $k$ above do not run over all possible flavours, but
+only up to $n_d$, $n_u$, and $n_\ell$, which are the numbers of active
+down-type, up-type, and charged-lepton flavours, respectively, at the relevant
+scale. It is easy to prove that:
+\begin{equation}
+  \small
+  \begin{array}{lll}
+    \displaystyle \sum_{k=1}^{n_d}d_k^+=n_d\left(\frac{\Sigma_d}{3}+\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)}\right)\,,&\quad
+    \displaystyle \sum_{k=1}^{n_u}u_k^+=n_u\left(\frac{\Sigma_u}{3}+\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)}\right)\,,&\quad
+    \displaystyle \sum_{k=1}^{n_\ell}\ell_k^+=n_\ell\left(\frac{\Sigma_\ell}{3}+\sum_{j=n_\ell+1}^3\frac{T_{j-1}^\ell}{j(j-1)}\right)\,,\\
+    \\
+    \displaystyle \sum_{k=1}^{n_d}d_k^-=n_d\left(\frac{V_d}{3}+\sum_{j=n_d+1}^3\frac{V_{j-1}^d}{j(j-1)}\right)\,,&\quad
+    \displaystyle \sum_{k=1}^{n_u}u_k^-=n_u\left(\frac{V_u}{3}+\sum_{j=n_u+1}^3\frac{V_{j-1}^u}{j(j-1)}\right)\,,&\quad
+    \displaystyle \sum_{k=1}^{n_\ell}\ell_k^-=n_\ell\left(\frac{V_\ell}{3}+\sum_{j=n_\ell+1}^3\frac{V_{j-1}^\ell}{j(j-1)}\right)\,.
+  \end{array}
+\end{equation}
+This allows us to write:
+\begin{equation}
+  \left\{
+  \begin{array}{rcl}
+  \displaystyle \mu^2\frac{\partial g}{\partial \mu^2} &=& \displaystyle (P_{gg} + e_\Sigma^2 \widetilde{P}_{gg})g + e_\Sigma^2 \widetilde{P}_{g\gamma}\gamma 
+  + \frac{n_d}{3}(P_{gq} + e_d^2\widetilde{P}_{gq})\Sigma_d+\frac{n_u}{3}(P_{gq} + e_u^2\widetilde{P}_{gq})\Sigma_u\\
+  \\
+  &+&\displaystyle n_d(P_{gq} + e_d^2\widetilde{P}_{gq})\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)}
+  +n_u(P_{gq} + e_u^2\widetilde{P}_{gq})\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)}\\
+  \\
+  \displaystyle \mu^2\frac{\partial \gamma}{\partial \mu^2} &=& \displaystyle e_\Sigma^2 \widetilde{P}_{\gamma g}g
+  + e_\Sigma^2 \widetilde{P}_{\gamma\gamma} \gamma+\frac{n_de_d^2}{3}\widetilde{P}_{\gamma q}\Sigma_d
+  + \frac{n_ue_u^2}{3}\widetilde{P}_{\gamma q}\Sigma_u+\frac{n_\ell}{3}\widetilde{P}_{\gamma\ell}\Sigma_\ell\\
+  \\
+  &+&\displaystyle n_de_d^2\widetilde{P}_{\gamma q}\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)} + n_ue_u^2\widetilde{P}_{\gamma q}\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)} + n_\ell\widetilde{P}_{\gamma\ell}\sum_{j=n_\ell+1}^3\frac{T_{j-1}^\ell}{j(j-1)}\\
+  \\
+  \displaystyle \mu^2\frac{\partial \Sigma_d}{\partial \mu^2} &=& \displaystyle 6(P_{qg} + e_d^2 \widetilde{P}_{qg})g+ 6e_d^2 \widetilde{P}_{q\gamma} \gamma
+  +(P^+ + e_d^2\widetilde{P}^+)\Sigma_d+\frac{n_d}{n_f}[(P_{qq}-P^+)+e_d^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\Sigma_d\\
+  \\
+   &+&\displaystyle \frac{3n_d}{n_f}[(P_{qq}-P^+)+e_d^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)} \\
+   \\
+   &+&\displaystyle \frac3{n_f}[(P_{qq}-P^+)+e_u^2e_d^2(\widetilde{P}_{qq}-\widetilde{P}^+)]n_u\left(\frac{\Sigma_u}{3}+\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)}\right)\\
+   \\
+   &+&\displaystyle 6e_d^2\widetilde{P}_{q\ell}^Sn_\ell\left(\frac{\Sigma_\ell}{3}+\sum_{j=n_\ell+1}^3\frac{T_{j-1}^\ell}{j(j-1)}\right)
+  \end{array}
+  \right.\,.
+\end{equation}
 
 \newpage
 \bibliographystyle{ieeetr}
