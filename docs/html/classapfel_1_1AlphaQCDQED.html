@@ -124,6 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11fb0b04878072a99c1685a6f1a5181d" id="r_a11fb0b04878072a99c1685a6f1a5181d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11fb0b04878072a99c1685a6f1a5181d">betaQCDQED</a> (int const &amp;pt, int const &amp;nf, int const &amp;nl) const</td></tr>
 <tr class="memdesc:a11fb0b04878072a99c1685a6f1a5181d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the computation of the single coefficients of the expansion of the QCDxQED <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
 <tr class="separator:a11fb0b04878072a99c1685a6f1a5181d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ac5ddc47d83996baff0cd1174e8cbaf" id="r_a2ac5ddc47d83996baff0cd1174e8cbaf"><td class="memItemLeft" align="right" valign="top">std::pair&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ac5ddc47d83996baff0cd1174e8cbaf">NFL</a> (int const &amp;nfl) const</td></tr>
+<tr class="memdesc:a2ac5ddc47d83996baff0cd1174e8cbaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the number of active quarks and leptons separately given the total number of active partons.  <br /></td></tr>
+<tr class="separator:a2ac5ddc47d83996baff0cd1174e8cbaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Constructors</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>List of constructors. </p>
 </div></td></tr>
@@ -170,12 +173,21 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a6bd59fd7184c2af7084e31e7577f5f2f" id="r_a6bd59fd7184c2af7084e31e7577f5f2f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6bd59fd7184c2af7084e31e7577f5f2f">_QuarkThresholds</a></td></tr>
+<tr class="memdesc:a6bd59fd7184c2af7084e31e7577f5f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quark thresholds.  <br /></td></tr>
+<tr class="separator:a6bd59fd7184c2af7084e31e7577f5f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27374a04c558e303d874e5fd095884fb" id="r_a27374a04c558e303d874e5fd095884fb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27374a04c558e303d874e5fd095884fb">_LeptThresholds</a></td></tr>
+<tr class="memdesc:a27374a04c558e303d874e5fd095884fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lepton thresholds.  <br /></td></tr>
+<tr class="separator:a27374a04c558e303d874e5fd095884fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a723545ccdaeb00c7419a029a0b969918" id="r_a723545ccdaeb00c7419a029a0b969918"><td class="memItemLeft" align="right" valign="top">int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a723545ccdaeb00c7419a029a0b969918">_pt</a></td></tr>
 <tr class="memdesc:a723545ccdaeb00c7419a029a0b969918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perturbative order.  <br /></td></tr>
 <tr class="separator:a723545ccdaeb00c7419a029a0b969918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdb515dcd00d24b1294d66b9c712e995" id="r_acdb515dcd00d24b1294d66b9c712e995"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt;(int const  &amp;, <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdb515dcd00d24b1294d66b9c712e995">_BetaFunction</a></td></tr>
 <tr class="memdesc:acdb515dcd00d24b1294d66b9c712e995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Beta function.  <br /></td></tr>
 <tr class="separator:acdb515dcd00d24b1294d66b9c712e995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d45dfcf9293b7ee95c73033b9b91d2a" id="r_a1d45dfcf9293b7ee95c73033b9b91d2a"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(bool const  &amp;, int const  &amp;, double const  &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d45dfcf9293b7ee95c73033b9b91d2a">_MatchingConditions</a></td></tr>
+<tr class="memdesc:a1d45dfcf9293b7ee95c73033b9b91d2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matching condition functions.  <br /></td></tr>
+<tr class="separator:a1d45dfcf9293b7ee95c73033b9b91d2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -420,6 +432,32 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a2ac5ddc47d83996baff0cd1174e8cbaf" name="a2ac5ddc47d83996baff0cd1174e8cbaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ac5ddc47d83996baff0cd1174e8cbaf">&#9670;&#160;</a></span>NFL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; int, int &gt; apfel::AlphaQCDQED::NFL </td>
+          <td>(</td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nfl</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the number of active quarks and leptons separately given the total number of active partons. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nfl</td><td>total number of active partons </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of active quarks and leptons. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="acdb515dcd00d24b1294d66b9c712e995" name="acdb515dcd00d24b1294d66b9c712e995"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acdb515dcd00d24b1294d66b9c712e995">&#9670;&#160;</a></span>_BetaFunction</h2>
@@ -442,6 +480,54 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Beta function. </p>
+
+</div>
+</div>
+<a id="a27374a04c558e303d874e5fd095884fb" name="a27374a04c558e303d874e5fd095884fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27374a04c558e303d874e5fd095884fb">&#9670;&#160;</a></span>_LeptThresholds</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; const apfel::AlphaQCDQED::_LeptThresholds</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lepton thresholds. </p>
+
+</div>
+</div>
+<a id="a1d45dfcf9293b7ee95c73033b9b91d2a" name="a1d45dfcf9293b7ee95c73033b9b91d2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d45dfcf9293b7ee95c73033b9b91d2a">&#9670;&#160;</a></span>_MatchingConditions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;double(bool const&amp;, int const&amp;, double const&amp;)&gt; apfel::AlphaQCDQED::_MatchingConditions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Matching condition functions. </p>
 
 </div>
 </div>
@@ -469,13 +555,37 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a6bd59fd7184c2af7084e31e7577f5f2f" name="a6bd59fd7184c2af7084e31e7577f5f2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bd59fd7184c2af7084e31e7577f5f2f">&#9670;&#160;</a></span>_QuarkThresholds</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; const apfel::AlphaQCDQED::_QuarkThresholds</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Quark thresholds. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/vb262523/Codes/apfelxx/inc/apfel/<a class="el" href="alphaqcdqed_8h_source.html">alphaqcdqed.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 21 2025 17:49:12 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sat Apr 12 2025 20:56:40 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

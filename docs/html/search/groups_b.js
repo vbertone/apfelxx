@@ -1,7 +1,7 @@
 var searchData=
 [
   ['m_20limit_20of_20nnlo_20massive_20coefficient_20functions_0',['Small-x and Q &gt;&gt; m limit of NNLO massive coefficient functions',['../group__NNLOm0sx.html',1,'']]],
-  ['maps_1',['maps',['../group__ConvMap.html',1,'Convolution maps'],['../group__DiagonalBasis.html',1,'Diagonal convolution maps'],['../group__DISBases.html',1,'DIS convolution maps'],['../group__EvolBases.html',1,'Evolution convolution maps'],['../group__MatchBases.html',1,'Matching convolution maps']]],
+  ['maps_1',['maps',['../group__ConvMap.html',1,'Convolution maps'],['../group__DiagonalBasis.html',1,'Diagonal convolution maps'],['../group__DISBases.html',1,'DIS convolution maps'],['../group__EvolBases.html',1,'Evolution convolution maps'],['../group__MatchBases.html',1,'Matching convolution maps'],['../group__PhysBases.html',1,'Physical convolution maps']]],
   ['maps_20in_20the_20plus_20minus_20basis_2',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
   ['mass_20coefficient_20functions_3',['mass coefficient functions',['../group__NLOzmpol.html',1,'NLO zero-mass coefficient functions'],['../group__NLOzm.html',1,'NLO zero-mass coefficient functions'],['../group__NLOzmSIA.html',1,'NLO zero-mass coefficient functions'],['../group__NNLOzmpol.html',1,'NNLO zero-mass coefficient functions'],['../group__NNLOzm.html',1,'NNLO zero-mass coefficient functions'],['../group__NNLOzmSIA.html',1,'NNLO zero-mass coefficient functions'],['../group__NNNLOzm.html',1,'NNNLO zero-mass coefficient functions']]],
   ['mass_20coefficient_20functions_20for_20longitudinally_20polarised_20dis_4',['Zero-mass coefficient functions for longitudinally polarised DIS',['../group__NCMasslesspol.html',1,'']]],

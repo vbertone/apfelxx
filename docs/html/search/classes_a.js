@@ -86,5 +86,10 @@ var searchData=
   ['pgpd0qq_83',['Pgpd0qq',['../classapfel_1_1Pgpd0qq.html',1,'apfel']]],
   ['pgpd0transgg_84',['Pgpd0transgg',['../classapfel_1_1Pgpd0transgg.html',1,'apfel']]],
   ['pgpd0transns_85',['Pgpd0transns',['../classapfel_1_1Pgpd0transns.html',1,'apfel']]],
-  ['pgpd0transqq_86',['Pgpd0transqq',['../classapfel_1_1Pgpd0transqq.html',1,'apfel']]]
+  ['pgpd0transqq_86',['Pgpd0transqq',['../classapfel_1_1Pgpd0transqq.html',1,'apfel']]],
+  ['physicalbasisqcd_87',['PhysicalBasisQCD',['../classapfel_1_1PhysicalBasisQCD.html',1,'apfel']]],
+  ['physicalevolvedistributionsbasisqcd_88',['PhysicalEvolveDistributionsBasisQCD',['../classapfel_1_1PhysicalEvolveDistributionsBasisQCD.html',1,'apfel']]],
+  ['physicalmatchingbasisqcd_89',['PhysicalMatchingBasisQCD',['../classapfel_1_1PhysicalMatchingBasisQCD.html',1,'apfel']]],
+  ['physicalmatchingoperatorbasisqcd_90',['PhysicalMatchingOperatorBasisQCD',['../classapfel_1_1PhysicalMatchingOperatorBasisQCD.html',1,'apfel']]],
+  ['physicaloperatorbasisqcd_91',['PhysicalOperatorBasisQCD',['../classapfel_1_1PhysicalOperatorBasisQCD.html',1,'apfel']]]
 ];

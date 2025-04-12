@@ -12,5 +12,14 @@ var searchData=
   ['kcs22_9',['KCS22',['../namespaceapfel.html#a61458485ca8daf8dffe8c29b5eb09445',1,'apfel']]],
   ['kcs23_10',['KCS23',['../namespaceapfel.html#ae49419a976e5af333b7a77d98e7ecb67',1,'apfel']]],
   ['kernels_11',['kernels',['../group__GPDEvKernels.html',1,'GPD evolution kernels'],['../group__LOpolevk.html',1,'LO evolution kernels'],['../group__LOtransevk.html',1,'LO evolution kernels'],['../group__LOunpevk.html',1,'LO evolution kernels'],['../group__GPDPolSF.html',1,'Polarised evolution kernels'],['../group__GPDTransSF.html',1,'Transversely polarised evolution kernels'],['../group__GPDUnpSF.html',1,'Unpolarised evolution kernels']]],
-  ['knotarray_12',['KnotArray',['../classapfel_1_1InitialiseEvolution.html#a38a2764259bc1f9b0eed1685f2d8b77b',1,'apfel::InitialiseEvolution']]]
+  ['kgg_12',['KGG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a1767852a5a2c33d2292e3be3dd229daa',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kgh_13',['KGH',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21af60a956d837b091896d6e82ce89e298f',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kgl_14',['KGL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a348b87c487eb6b2d52050e3a8aaeeba2',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['khg_15',['KHG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a278ce73922b71569c4a78bea1fab32c1',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['khh_16',['KHH',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a4841d90a2ce92922ae447ece147444c9',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['khl_17',['KHL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a45b5baf32d492907c80483ed73a1ebba',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['klg_18',['KLG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a95d6368f16a0f74b68d85a74b0235c84',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kll_19',['KLL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a7a71e1975e242ca79870f54f4cc9a93d',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kllp_20',['KLLP',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21ab2a89e89df8cd85cbda91a86f55ef530',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['knotarray_21',['KnotArray',['../classapfel_1_1InitialiseEvolution.html#a38a2764259bc1f9b0eed1685f2d8b77b',1,'apfel::InitialiseEvolution']]]
 ];
