@@ -18,7 +18,7 @@ int main()
   const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
-  const int PerturbativeOrder = 3;
+  const int PerturbativeOrder = 2;
 
   // Running strong coupling
   apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
@@ -26,8 +26,8 @@ int main()
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // Initialize QCD evolution objects in the physical basis
-  const auto DglapObj   = InitializeDglapObjectsQCDPhys(g, Thresholds, false, 1e-5, true);
-  const auto DglapObjOp = InitializeDglapObjectsQCDPhys(g, Thresholds, true,  1e-5, true);
+  const auto DglapObj   = InitializeDglapObjectsQCDPhys(g, Thresholds);
+  const auto DglapObjOp = InitializeDglapObjectsQCDPhys(g, Thresholds, true);
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj,   apfel::LHToyPDFsPlusMinus, mu0, PerturbativeOrder, as);
