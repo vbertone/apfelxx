@@ -1568,12 +1568,12 @@ conditions in Eq.~(\ref{eq:IntMatchingConds}) need to be generalised as follows:
 \begin{array}{rcl}
   \displaystyle g^{(n_f+1)}&=&\displaystyle
                                [1+K_{gg}]g^{(n_f)}+K_{gl}\sum_l
-                               l^{+(n_f+1)} + K_{gh}h^{+(n_f)}\,,\\
+                               l^{+(n_f)} + K_{gh}h^{+(n_f)}\,,\\
   \\
-  \displaystyle l^{+(n_f)}&=&\displaystyle [1+K_{ll}]l^{+(n_f)}+K_{ll'}\sum_l l^{+(n_f)}+K_{lg}g^{(n_f)}\,,\\
+  \displaystyle l^{+(n_f+1)}&=&\displaystyle [1+K_{ll}]l^{+(n_f)}+K_{ll'}\sum_l l^{+(n_f)}+K_{lg}g^{(n_f)}\,,\\
   \\
   \displaystyle h^{+(n_f)}&=&\displaystyle K_{hg}g^{(n_f)} + K_{hl}\sum_l
-                                l^{+(n_f+1)}+[1+K_{hh}]h^{+(n_f)}\,,\\
+                                l^{+(n_f)}+[1+K_{hh}]h^{+(n_f)}\,,\\
   \\
   H^{+(n_f+1)} &=& H^{+(n_f)}\,,
 \end{array}
@@ -1656,7 +1656,6 @@ $\{f_i\}=\{t^-,b^-,\dots,d^-,g,d^+,\dots,b^+,t^+\}$, with
 $q^{\pm} = q\pm\overline{q}$, in that it guarantees a partial
 diagonalisation of the splitting-function matrix. In this basis, we
 find that the evolution equations read:
-
 \begin{equation}
 \begin{array}{rcl}\displaystyle\frac{dq_k^-}{d\ln\mu^2} &=&
                                                             \displaystyle
@@ -1731,137 +1730,540 @@ K_{hh} &\quad i = n_f+1 & \quad j=n_f+1\\
 \label{eq:algorithmPhys}
 \end{equation}
 
-We now need to work out the structure of the evolution operator.
+It is useful to establish a connection with the $M$'s in
+Eq.~(\ref{eq:McombsN3LO}). Specifically we find:
+\begin{equation}
+\begin{array}{l}
+\displaystyle K_{gg} = M_1\,,\\
+\\
+\displaystyle K_{gl} =\frac{M_2-M_3}{n_f+1}\,,\\
+\\
+\displaystyle K_{gh} =\frac{M_2+n_fM_3}{n_f+1}\,,\\
+\\
+\displaystyle K_{lg} =\frac{M_4-M_8}{n_f+1}\,,\\
+\\
+\displaystyle K_{ll}=M_7\,,\\
+\\
+\displaystyle K_{ll'}=\frac{M_5-M_9}{n_f(n_f+1)}\,,\\
+\\
+\displaystyle K_{hg}=\frac{M_4+n_fM_8}{n_f+1}\,,\\
+\\
+\displaystyle K_{hl} =\frac{M_9-M_6}{n_f+1}-M_7\,,\\
+\\
+\displaystyle K_{hh}=\frac{M_5+n_fM_6}{n_f+1}\,.
+\end{array}
+\end{equation}
 
-\newpage
 \section{Evolution and matching with QED corrections}
 
-In this section, we address the question of deriving the PDF evolution operator
-in the presence of QED corrections including both photon and charged-lepton
-PDFs. The fact that the photon coupling to quarks is proportional to the
-electric charge, while the QCD coupling is proportional to the strong coupling,
-complicates the description in that one first needs to define a new \textit{ad
-hoc} evolution basis, for which we need to work out the matching at threshold.
-We would in principle need to include in the perturbative matching functions
-corrections proportional to the electromagnetic coupling $\alpha$. We will not
-do it sticking with pure-QCD matching conditions. This is justified by the fact
-that, up to NLO in the QED coupling, the matching conditions would produce a
-discontinuity only when thresholds and masses are different, which is not a
-common situation.
+In this section, we address the question of deriving the PDF evolution
+operator in the presence of QED corrections including both photon and
+charged-lepton PDFs. The fact that the photon coupling to quarks is
+proportional to the electric charge, while the QCD coupling is
+proportional to the strong coupling, complicates the description. The
+general form of the QCD+QED evolution equations is:
+\begin{equation}
+\frac{\partial}{\partial t}
+\begin{pmatrix}
+L_\alpha\\
+U_j \\
+D_i\\
+\Gamma_x\\
+\overline{D}_k\\
+\overline{U}_h\\
+\overline{L}_\beta
+\end{pmatrix} =
+\begin{pmatrix}
+\mathcal{P}_{L_\alpha L_\gamma} & \mathcal{P}_{L_\alpha U_e} & \mathcal{P}_{L_\alpha D_l}& \mathcal{P}_{L_\alpha \Gamma_y} & \mathcal{P}_{L_\alpha \overline{D}_m} & \mathcal{P}_{L_\alpha \overline{U}_n} & \mathcal{P}_{L_\alpha \overline{L}_\delta} \\ 
+\mathcal{P}_{U_jL_\gamma} & \mathcal{P}_{U_jU_e} & \mathcal{P}_{U_jD_l} & \mathcal{P}_{U_j\Gamma_y} & \mathcal{P}_{U_j\overline{D}_m} & \mathcal{P}_{U_j\overline{U}_n} & \mathcal{P}_{U_j\overline{L}_\delta} \\ 
+\mathcal{P}_{D_iL_\gamma} & \mathcal{P}_{D_iU_e} & \mathcal{P}_{D_iD_l} & \mathcal{P}_{D_i\Gamma_y} & \mathcal{P}_{D_i\overline{D}_m} & \mathcal{P}_{D_i\overline{U}_n} & \mathcal{P}_{D_i\overline{L}_\delta} \\ 
+\mathcal{P}_{\Gamma_x L_\gamma} & \mathcal{P}_{\Gamma_x U_e} & \mathcal{P}_{\Gamma_x D_l} & \mathcal{P}_{\Gamma_x\Gamma_y} & \mathcal{P}_{\Gamma_x\overline{D}_m} & \mathcal{P}_{\Gamma_x\overline{U}_n} & \mathcal{P}_{\Gamma_x\overline{L}_\delta}\\
+\mathcal{P}_{\overline{D}_kL_\gamma} & \mathcal{P}_{\overline{D}_kU_e} & \mathcal{P}_{\overline{D}_kD_l} & \mathcal{P}_{\overline{D}_k\Gamma_y} & \mathcal{P}_{\overline{D}_k\overline{D}_m} & \mathcal{P}_{\overline{D}_k\overline{U}_n} & \mathcal{P}_{\overline{D}_k\overline{L}_\delta}\\
+\mathcal{P}_{\overline{U}_hL_\gamma} & \mathcal{P}_{\overline{U}_hU_e} & \mathcal{P}_{\overline{U}_hD_l} & \mathcal{P}_{\overline{U}_h\Gamma_y} & \mathcal{P}_{\overline{U}_h\overline{D}_m} & \mathcal{P}_{\overline{U}_h\overline{U}_n} & \mathcal{P}_{\overline{U}_h\overline{L}_\delta}\\
+\mathcal{P}_{\overline{L}_\beta L_\gamma} & \mathcal{P}_{\overline{L}_\beta U_e} & \mathcal{P}_{\overline{L}_\beta D_l} & \mathcal{P}_{\overline{L}_\beta \Gamma_y} & \mathcal{P}_{\overline{L}_\beta \overline{D}_m} & \mathcal{P}_{\overline{L}_\beta \overline{U}_n} & \mathcal{P}_{\overline{L}_\beta \overline{L}_\delta}
+\end{pmatrix}
+\begin{pmatrix}
+L_\gamma\\
+U_e \\
+D_l\\
+\Gamma_y\\
+\overline{D}_m\\
+\overline{U}_n\\
+\overline{L}_\delta
+\end{pmatrix}\,,
+\end{equation}
+with $t=\ln\mu^2$ and where $D_i\in\{D_d,D_s,D_b\}$,
+$U_j\in\{U_u,U_c,U_t\}$,
+$L_\alpha\in \{L_{e^-},L_{\mu^-},L_{\tau^-}\}$ (and respective
+anti-flavours such that $\overline{X}_i=X_{\overline{i}}$), and
+$\Gamma_x\in\{g,\gamma\}$.  A sum over repeated indices is also
+understood. Importantly, each distribution $X_i$ is in a given colour
+state, such that $N_X$ copies of it exist, where $N_X$ is the number
+of possible colour states. Clearly, we have that $N_D=N_U=N_c=3$ and
+$N_L=1$. A decomposition of the splitting functions in terms of
+valence and singlet contributions is as follows:
+\begin{equation}
+\begin{array}{l}
+\mathcal{P}_{X_iY_j} = \mathcal{P}_{\overline{X}_i\overline{Y}_j} = \delta_{ij} \mathcal{P}_{XX}^{V}+\mathcal{P}_{XY}^{S}\,,\\
+\mathcal{P}_{\overline{X}_iY_j} = \mathcal{P}_{X_i\overline{Y}_j}  = \delta_{ij} \mathcal{P}_{\overline{X}X}^{V}+\mathcal{P}_{\overline{X}Y}^{S}\,,\\
+\mathcal{P}_{X_i\Gamma_x}  =\mathcal{P}_{\overline{X}_i\Gamma_x} =\mathcal{P}_{X\Gamma_x} \,,\\
+\mathcal{P}_{\Gamma_x X_i}  =\mathcal{P}_{\Gamma_x\overline{X}_i} =\mathcal{P}_{\Gamma_x X} \,.
+\end{array}
+\end{equation}
+where $X,Y\in\{D,U,L\}$. This decomposition implies that:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle 
+\frac{\partial}{\partial t}
+\begin{pmatrix}
+L_\alpha\\
+U_j \\
+D_i\\
+\Gamma_x\\
+\overline{D}_k\\
+\overline{U}_h\\
+\overline{L}_\beta
+\end{pmatrix} &=&
+\displaystyle 
+\begin{pmatrix}
+\mathcal{P}_{LL}^V & 0 & 0 & \mathcal{P}_{L\Gamma_y} & 0 & 0 & \mathcal{P}_{\overline{L}L}^V \\ 
+0 & \mathcal{P}_{UU}^V & 0 & \mathcal{P}_{U\Gamma_y} & 0 & \mathcal{P}_{\overline{U}U}^V & 0 \\ 
+0 & 0 & \mathcal{P}_{DD}^V & \mathcal{P}_{D\Gamma_y} & \mathcal{P}_{\overline{D}D}^V & 0 & 0 \\ 
+\mathcal{P}_{\Gamma_x L} & \mathcal{P}_{\Gamma_x U} & \mathcal{P}_{\Gamma_x D} & \mathcal{P}_{\Gamma_x\Gamma_y} & \mathcal{P}_{\Gamma_xD} & \mathcal{P}_{\Gamma_xU} & \mathcal{P}_{\Gamma_xL}\\
+0 & 0 & \mathcal{P}_{\overline{D}D}^V & \mathcal{P}_{D\Gamma_y} & \mathcal{P}_{DD}^V & 0 & 0\\
+0 & \mathcal{P}_{\overline{U}U}^V & 0 & \mathcal{P}_{U\Gamma_y} & 0 & \mathcal{P}_{UU}^V & 0\\
+\mathcal{P}_{\overline{L}L}^V & 0 & 0 & \mathcal{P}_{L\Gamma_y} & 0 & 0 & \mathcal{P}_{LL}^V
+\end{pmatrix}
+\begin{pmatrix}
+L_\alpha\\
+U_j \\
+D_i\\
+\Gamma_y\\
+\overline{D}_k\\
+\overline{U}_h\\
+\overline{L}_\beta
+\end{pmatrix}\\
+\\
+&+&
+\displaystyle 
+\begin{pmatrix}
+\mathcal{P}^S_{LL} & \mathcal{P}^S_{UL} & \mathcal{P}^S_{DL}& 0 &\mathcal{P}^S_{\overline{D}L} & \mathcal{P}^S_{\overline{U}L} & \mathcal{P}^S_{\overline{L}L} \\ 
+\mathcal{P}^S_{UL} & \mathcal{P}^S_{UU} & \mathcal{P}^S_{DU} & 0 & \mathcal{P}^S_{\overline{D}U} & \mathcal{P}^S_{\overline{U}U} & \mathcal{P}^S_{\overline{U}L} \\ 
+\mathcal{P}^S_{DL} & \mathcal{P}^S_{DU} & \mathcal{P}^S_{DD} & 0 & \mathcal{P}^S_{\overline{D}D} & \mathcal{P}^S_{\overline{D}U} & \mathcal{P}^S_{\overline{D}L} \\ 
+0 & 0 & 0 & 0 & 0 & 0 & 0\\
+\mathcal{P}^S_{\overline{D}L} & \mathcal{P}^S_{\overline{D}U} & \mathcal{P}^S_{\overline{D}D} & 0 & \mathcal{P}^S_{DD} & \mathcal{P}^S_{DU} & \mathcal{P}^S_{DL}\\
+\mathcal{P}^S_{\overline{U}L} & \mathcal{P}^S_{\overline{U}U} & \mathcal{P}^S_{\overline{D}U} & 0 & \mathcal{P}^S_{DU} & \mathcal{P}^S_{UU} & \mathcal{P}^S_{UL}\\
+\mathcal{P}^S_{\overline{L}L} & \mathcal{P}^S_{\overline{U}L} &\mathcal{P}^S_{\overline{D}L} & 0 & \mathcal{P}^S_{DL} & \mathcal{P}^S_{UL} & \mathcal{P}^S_{LL}
+\end{pmatrix}
+\begin{pmatrix}
+\sum_\gamma L_\gamma\\
+\sum_e U_e \\
+\sum_l D_l\\
+\Gamma_y\\
+\sum_m \overline{D}_m\\
+\sum_n \overline{U}_n\\
+\sum_\delta \overline{L}_\delta
+\end{pmatrix}\,.
+\end{array}
+\end{equation}
+Now, we define $X_i^\pm=X_i\pm\overline{X}_i$, which implies:
+\begin{equation}
+\small
+\begin{array}{rcl}
+\displaystyle 
+\frac{\partial}{\partial t}
+\begin{pmatrix}
+L_\alpha^+\\
+U_j^+ \\
+D_i^+\\
+\Gamma_x\\
+D_i^-\\
+U_j^-\\
+L_\alpha^-
+\end{pmatrix} &=&
+\displaystyle 
+\begin{pmatrix}
+\mathcal{P}_{LL}^+ & 0 & 0 & 2\mathcal{P}_{L\Gamma_y} & 0 & 0 & 0 \\ 
+0 & \mathcal{P}_{UU}^+ & 0 & 2\mathcal{P}_{U\Gamma_y} & 0 & 0 & 0 \\ 
+0 & 0 & \mathcal{P}_{DD}^+ & 2\mathcal{P}_{D\Gamma_y} & 0 & 0 & 0 \\ 
+\mathcal{P}_{\Gamma_x L} & \mathcal{P}_{\Gamma_x U} & \mathcal{P}_{\Gamma_x D} & \mathcal{P}_{\Gamma_x\Gamma_y} & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & \mathcal{P}_{DD}^- & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & \mathcal{P}_{UU}^- & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & \mathcal{P}_{LL}^-
+\end{pmatrix}
+\begin{pmatrix}
+L_\alpha^+\\
+U_j^+\\
+D_i^+\\
+\Gamma_y\\
+D_i^-\\
+U_j^-\\
+L_\alpha^-
+\end{pmatrix}\\
+\\
+&+&
+\displaystyle 
+\begin{pmatrix}
+\mathcal{P}^{\rm PS}_{LL} & \mathcal{P}^{\rm PS}_{LU} & \mathcal{P}^{\rm PS}_{LD}& 0 &0 &0 & 0\\ 
+\mathcal{P}^{\rm PS}_{UL} & \mathcal{P}^{\rm PS}_{UU} & \mathcal{P}^{\rm PS}_{UD} & 0 &0 &0 &0 \\ 
+\mathcal{P}^{\rm PS}_{DL} & \mathcal{P}^{\rm PS}_{DU} & \mathcal{P}^{\rm PS}_{DD} & 0 & &0 &0 \\ 
+0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0& 0&0 & 0 & \mathcal{P}^{\rm PV}_{DD} & \mathcal{P}^{\rm PV}_{DU} & \mathcal{P}^{\rm PV}_{DL}\\
+0& 0& 0& 0 & \mathcal{P}^{\rm PV}_{UD} & \mathcal{P}^{\rm PV}_{UU} & \mathcal{P}^{\rm PV}_{UL}\\
+0& 0&0 & 0 & \mathcal{P}^{\rm PV}_{LD} & \mathcal{P}^{\rm PV}_{LU} & \mathcal{P}^{\rm PV}_{LL}
+\end{pmatrix}
+\begin{pmatrix}
+\sum_\gamma^{n_L} L_\gamma^+\\
+\sum_e^{n_U} U_e^+ \\
+\sum_l^{n_D} D_l^+\\
+\Gamma_y\\
+\sum_l^{n_D} D_l^-\\
+\sum_e^{n_U} U_e^-\\
+\sum_\gamma^{n_L} L_\gamma^-
+\end{pmatrix}\,,
+\end{array}
+\end{equation}
+where we have defined:
+\begin{equation}
+\mathcal{P}_{XX}^\pm=\mathcal{P}_{XX}^V\pm\mathcal{P}_{\overline{X}X}^V\,,\quad
+\mathcal{P}_{XY}^{\rm PS} = \mathcal{P}^S_{XY}+\mathcal{P}^S_{\overline{X}Y}\,,\quad \mathcal{P}_{XY}^{\rm PV} = \mathcal{P}^S_{XY}-\mathcal{P}^S_{\overline{X}Y}\,.
+\end{equation}
+Also notice that the sums over flavours run up to $n_D$, $n_U$, and
+$n_L$, which are the number of active down-type flavours, up-type
+flavours, and leptons, respectively, and over all possible colour
+states (despite not explicitly indicated).  We can now start
+scrutinising the splitting functions. First, their perturbative
+expansion reads:
+\begin{equation}
+\mathcal{P}= \underbrace{a_s
+  \mathcal{P}^{[1,0]}+a\mathcal{P}^{[0,1]}}_{\mbox{LO}}+\underbrace{a_s^2\mathcal{P}^{[2,0]}+a_sa\mathcal{P}^{[1,1]}+a_s^2\mathcal{P}^{[0,2]}}_{\mbox{NLO}}+\underbrace{a_s^3\mathcal{P}^{[3,0]}+a_s^4\mathcal{P}^{[4,0]}}_{\mbox{NNLO
++ N$^3$LO (QCD only)}}\,,
+\end{equation}
+with $a_s=\alpha_s/(4\pi)$ and $a=\alpha/(4\pi)$ and where we have
+grouped the perturbative terms according to the cumulative powers of
+$a_s$ and $a$. Also, we are interested in QED corrections up to two
+loops, \textit{i.e.} NLO. Higher orders are only accounted for in QCD
+and are treated as discussed in the previous section. In this
+approximation, the pure-valence block ($\mathcal{P}^{\rm PV}$), which
+starts at NNLO, is purely given by QCD so that:
+\begin{equation}
+\mathcal{P}^{\rm PV}_{DL} = \mathcal{P}^{\rm PV}_{LD}=\mathcal{P}^{\rm PV}_{UL}=\mathcal{P}^{\rm PV}_{LU} =
+\mathcal{P}^{\rm PV}_{LL} = 0\,,
+\end{equation}
+and:
+\begin{equation}
+ \mathcal{P}^{\rm PV}_{DD} = \mathcal{P}^{\rm PV}_{DU} =
+ \mathcal{P}^{\rm PV}_{DD} = P^{\rm PV}\,.
+\end{equation}
+Moreover, at this order there is no coupling between leptons and
+gluon, such that:
+\begin{equation}
+  \mathcal{P}_{Lg} = \mathcal{P}_{gL} = 0\,,
+\end{equation}
+so that, we finally have:
+\begin{equation}
+\small
+\begin{array}{rcl}
+\displaystyle 
+\frac{\partial}{\partial t}
+\begin{pmatrix}
+L_\alpha^+\\
+U_j^+ \\
+D_i^+\\
+g\\
+\gamma\\
+D_i^-\\
+U_j^-\\
+L_\alpha^-
+\end{pmatrix} &=&
+\displaystyle 
+\begin{pmatrix}
+\mathcal{P}_{LL}^+ & 0 & 0 & 0 & 2\mathcal{P}_{L\gamma} & 0 & 0 & 0 \\ 
+0 & \mathcal{P}_{UU}^+ & 0 & 2\mathcal{P}_{Ug} & 2\mathcal{P}_{U\gamma} & 0 & 0 & 0 \\ 
+0 & 0 & \mathcal{P}_{DD}^+ & 2\mathcal{P}_{Dg} & 2\mathcal{P}_{D\gamma} & 0 & 0 & 0 \\ 
+0 & \mathcal{P}_{gU} & \mathcal{P}_{gD} & \mathcal{P}_{gg} & \mathcal{P}_{g\gamma}& 0 & 0 & 0\\
+\mathcal{P}_{\gamma L} & \mathcal{P}_{\gamma U} & \mathcal{P}_{\gamma D} & \mathcal{P}_{\gamma g} & \mathcal{P}_{\gamma\gamma} & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & \mathcal{P}_{DD}^- & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & \mathcal{P}_{UU}^- & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathcal{P}_{LL}^-
+\end{pmatrix}
+\begin{pmatrix}
+L_\alpha^+\\
+U_j^+\\
+D_i^+\\
+g\\
+\gamma\\
+D_i^-\\
+U_j^-\\
+L_\alpha^-
+\end{pmatrix}\\
+\\
+&+&
+\displaystyle 
+\begin{pmatrix}
+\mathcal{P}^{\rm PS}_{LL} & \mathcal{P}^{\rm PS}_{LU} & \mathcal{P}^{\rm PS}_{LD}& 0  & 0&0 &0 & 0\\ 
+\mathcal{P}^{\rm PS}_{UL} & \mathcal{P}^{\rm PS}_{UU} & \mathcal{P}^{\rm PS}_{UD} & 0  & 0&0 &0 &0 \\ 
+\mathcal{P}^{\rm PS}_{DL} & \mathcal{P}^{\rm PS}_{DU} & \mathcal{P}^{\rm PS}_{DD} & 0  & 0& &0 &0 \\ 
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0& 0&0 & 0  & 0& P^{\rm PV} & P^{\rm PV} & 0\\
+0& 0& 0& 0  & 0& P^{\rm PV} & P^{\rm PV} & 0\\
+0& 0&0 & 0  & 0& 0 & 0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+\sum_\gamma^{n_L} L_\gamma^+\\
+\sum_e^{n_U} U_e^+ \\
+\sum_l^{n_D} D_l^+\\
+g\\
+\gamma\\
+\sum_l^{n_D} D_l^-\\
+\sum_e^{n_U} U_e^-\\
+\sum_\gamma^{n_L} L_\gamma^-
+\end{pmatrix}\,,
+\end{array}
+\end{equation}
 
-The QED evolution basis more convenient for our purposes is:
+
+
+It remains to assign to each non-zero entry of the splitting-function
+matrices the correct value, which we will do below. In view of this
+analysis, the basis that provides a partial diagonalisation of the
+evolution equation along with a relative simple implementation is:
 \begin{equation}
-  \begin{array}{ll}
-  \mbox{1)  }g & \\
-  \mbox{2)  }\gamma & \\
-  \mbox{3)  }\displaystyle \Sigma_d                          & \quad \mbox{12) } \displaystyle V_d\\
-  \mbox{4)  }\displaystyle \Sigma_u                          & \quad \mbox{13) } \displaystyle V_u\\
-  \mbox{5)  }\displaystyle \Sigma_\ell                       & \quad \mbox{14) } \displaystyle \Delta_\ell\\
-  \mbox{6)  }T_1^d = d^+ - s^+                               & \quad \mbox{15) } V_1^d = d^- - s^-  \\
-  \mbox{7)  }T_2^d = d^+ + s^+ - 2b^+                        & \quad \mbox{16) } V_2^d = d^- + s^- - 2b^-\\
-  \mbox{8)  }T_1^u = u^+ - c^+                               & \quad \mbox{17) } V_1^u = u^- - c^-\\
-  \mbox{9)  }T_2^u = u^+ + c^+ - 2t^+                        & \quad \mbox{18) } V_2^u = u^- + c^- - 2t^-\\
-  \mbox{10) }T_1^\ell = \ell_e^+ - \ell_\mu^+                & \quad \mbox{19) } V_1^\ell = \ell_e^- - \ell_\mu^-\\
-  \mbox{11) }T_2^\ell = \ell_e^+ + \ell_\mu^+ -2\ell_\tau^+  & \quad \mbox{20) } V_2^\ell = \ell_e^- + \ell_\mu^--2\ell_\tau^-
-  \end{array}
-  \label{eq:QEDEvolutionBasis}
+\{f_i\}=\{L_\tau^-, L_\mu^-,
+L_e^-,U_t^-,U_c^-,U_u^-,D_b^-,D_s^-,D_d^-,g,\gamma,D_d^+,D_s^+,D_b^+,U_u^+,U_c^+,U_t^+,L_e^+,L_\mu^+,L_\tau^+\}\,.
+\label{eq:QCDQEDbasis}
 \end{equation}
-where:
+In principle, one could establish a basis that maximally diagonalises
+the system (as for instance done in {\tt
+  QCD\_QED\_common\_basis.pdf}). However, this basis is particularly
+cumbersome to handle.
+
+Let us now turn to threshold matching. In order to implement it, one
+needs to be able establish what are the light flavours, what is the
+heavy flavour, and what are the super-heavy flavours. To this purpose,
+it is necessary to order distributions according to the mass of the
+corresponding partons. Unfortunately, at variance with the pure QCD
+case, this ordering is not reflected in the basis in
+Eq.~(\ref{eq:QCDQEDbasis}). Given the ordered vector of thresholds
+$\{\mu_i\}$, one can order the distributions accordingly:
 \begin{equation}
-  \begin{array}{lll}
-  \displaystyle \Sigma_d = \sum_{k=1}^{3} d_k^+ &\,, \qquad \displaystyle \Sigma_u
-  = \sum_{k=1}^{3} u_k^+&\,, \qquad \displaystyle \Sigma_\ell
-  = \sum_{k=1}^{3} \ell_k^+ \\
-  \\
-  \displaystyle V_d = \sum_{k=1}^{3} d_k^- & \qquad \displaystyle V_u
-  = \sum_{k=1}^{3} u_k^-&\,,\qquad\displaystyle V_\ell
-  = \sum_{k=1}^{3} \ell_k^-
-  \end{array}
+  \{\widetilde{f}_i\}=\{X_i^-,\Gamma_x,X_i^+\}\,,
+\label{eq:physbasismassordered}
 \end{equation}
-with $q_i^\pm = q_i\pm\overline{q}_i$, $\ell_i^\pm =
-\ell_i\pm\overline{\ell}_i$. Note that, in view of possible intrinsic
-components, all sums above run over all possible available flavours. As above,
-we will pay particular attention to account for possible intrinsic
-contributions, \textit{i.e.} those contributions which are static below
-thresholds. The starting point is:
+where a possible realistic ordering could be:
 \begin{equation}
-  \left\{
-  \begin{array}{rcl}
-  \displaystyle \mu^2\frac{\partial g}{\partial \mu^2} &=& \displaystyle (P_{gq} + e_d^2\widetilde{P}_{gq})\sum_{k=1}^{n_d} d_k^++(P_{gq} + e_u^2\widetilde{P}_{gq})\sum_{k=1}^{n_u} u_k^+ + (P_{gg} + e_\Sigma^2 \widetilde{P}_{gg})g
-  + e_\Sigma^2 \widetilde{P}_{g\gamma} \gamma\\
-  \\
-  \displaystyle \mu^2\frac{\partial \gamma}{\partial \mu^2} &=& \displaystyle e_d^2
-  \widetilde{P}_{\gamma q}\sum_{k=1}^{n_d} d_k^+ + e_u^2
-  \widetilde{P}_{\gamma q}\sum_{k=1}^{n_u} u_k^+ + e_\Sigma^2 \widetilde{P}_{\gamma g}g
-  + e_\Sigma^2 \widetilde{P}_{\gamma\gamma} \gamma+ \widetilde{P}_{\gamma\ell}\sum_{k=1}^{n_\ell} \ell_k^+\\
-  \\
-  \displaystyle \mu^2\frac{\partial d_i^+}{\partial \mu^2} &=& \displaystyle (P^+ + e_d^2\widetilde{P}^+)d_i^++ 2(P_{qg} + e_d^2 \widetilde{P}_{qg})g
-  + 2e_d^2 \widetilde{P}_{q\gamma} \gamma\\
-  \\
-   &+&\displaystyle \frac1{n_f}[(P_{qq}-P^+)+e_d^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_d} d_k^+ + \frac1{n_f}[(P_{qq}-P^+)+e_u^2e_d^2(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_u} u_k^+  + 2e_d^2\widetilde{P}_{q\ell}^S\sum_{k=1}^{n_\ell} \ell_k^+\\
-  \\
-  \displaystyle \mu^2\frac{\partial u_j^+}{\partial \mu^2} &=& (P^+ + e_u^2\widetilde{P}^+)u_j^++ 2(P_{qg} + e_u^2 \widetilde{P}_{qg})g
-  + 2e_u^2 \widetilde{P}_{q\gamma} \gamma \\
-  \\
-   &+&\displaystyle \frac1{n_f}[(P_{qq}-P^+)+e_u^2e_d^2(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_d} d_k^+ + \frac1{n_f}[(P_{qq}-P^+)+e_u^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{k=1}^{n_u} u_k^+ + 2e_u^2\widetilde{P}_{q\ell}^S\sum_{k=1}^{n_\ell} \ell_k^+\\
-  \\
-  \displaystyle \mu^2\frac{\partial \ell_\alpha^+}{\partial \mu^2} &=&\displaystyle \widetilde{P}^+\ell_\alpha^+
-  +\frac1{n_\ell}(\widetilde{P}_{\ell\ell}-\widetilde{P}^+)\sum_{k=1}^{n_\ell} \ell_k^++
-  2e_d^2\widetilde{P}_{q\ell}^S \sum_{k=1}^{n_d} d_k^++2e_u^2\widetilde{P}_{q\ell}^S \sum_{k=1}^{n_u} u_k^+
-  +2\widetilde{P}_{\ell\gamma}\gamma\\
-  \\
-  \displaystyle \mu^2\frac{\partial d_i^-}{\partial \mu^2} &=& \displaystyle (P^- + e_d^2\widetilde{P}^-)d_i^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_d} d_k^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_u} u_k^-\\
-  \\
-  \displaystyle \mu^2\frac{\partial u_j^-}{\partial \mu^2} &=& \displaystyle (P^- + e_u^2\widetilde{P}^-)u_j^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_d} d_k^- + \frac1{n_f} (P^V-P^-)\sum_{k=1}^{n_u} u_k^-\\
-  \\
-  \displaystyle \mu^2\frac{\partial \ell_\alpha^-}{\partial \mu^2} &=&\displaystyle
-  \widetilde{P}^-\ell_\alpha^-
-  \end{array}
-  \right.\,.
+\{\widetilde{f}_i\}=\{U_t^-, D_b^-, L_\tau^-, U_c^-, L_\mu^-, D_s^-, D_d^-, U_u^-,L_e^-,g,\gamma, L_e^+,U_u^+, D_d^+,  D_s^+, L_\mu^+, U_c^+, L_\tau^+,D_b^+, U_t^+\}\,,
 \end{equation}
-Importantly, the sums over $k$ above do not run over all possible flavours, but
-only up to $n_d$, $n_u$, and $n_\ell$, which are the numbers of active
-down-type, up-type, and charged-lepton flavours, respectively, at the relevant
-scale. It is easy to prove that:
+which can however be determined dynamically according to the values of
+thresholds. With this new basis, the matching at the $n_X$-th mass
+threshold can be implemented sequentially, as in the case of pure QCD,
+through the system:\footnote{It should be noted that, once the
+  ordering in Eq.~(\ref{eq:physbasismassordered}) has been established
+  on the basis of thresholds, the value of $n_X$ uniquely defines the
+  values of $n_D$, $n_U$ and $n_L$ (which are indeed such that
+  $n_D+n_U+n_L=n_X$).}
 \begin{equation}
-  \small
-  \begin{array}{lll}
-    \displaystyle \sum_{k=1}^{n_d}d_k^+=n_d\left(\frac{\Sigma_d}{3}+\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)}\right)\,,&\quad
-    \displaystyle \sum_{k=1}^{n_u}u_k^+=n_u\left(\frac{\Sigma_u}{3}+\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)}\right)\,,&\quad
-    \displaystyle \sum_{k=1}^{n_\ell}\ell_k^+=n_\ell\left(\frac{\Sigma_\ell}{3}+\sum_{j=n_\ell+1}^3\frac{T_{j-1}^\ell}{j(j-1)}\right)\,,\\
-    \\
-    \displaystyle \sum_{k=1}^{n_d}d_k^-=n_d\left(\frac{V_d}{3}+\sum_{j=n_d+1}^3\frac{V_{j-1}^d}{j(j-1)}\right)\,,&\quad
-    \displaystyle \sum_{k=1}^{n_u}u_k^-=n_u\left(\frac{V_u}{3}+\sum_{j=n_u+1}^3\frac{V_{j-1}^u}{j(j-1)}\right)\,,&\quad
-    \displaystyle \sum_{k=1}^{n_\ell}\ell_k^-=n_\ell\left(\frac{V_\ell}{3}+\sum_{j=n_\ell+1}^3\frac{V_{j-1}^\ell}{j(j-1)}\right)\,.
-  \end{array}
+\widetilde{f}_i^{(n_X+1)} = \mathcal{K}_{ij}^{(n_X)} \widetilde{f}_j^{(n_X)}\,.
 \end{equation}
-This allows us to write:
+Using the indices $l$, $h$, and $H$ to indicate the light, heavy, and
+super-heavy flavours, respectively, one explicitly has:
 \begin{equation}
-  \left\{
-  \begin{array}{rcl}
-  \displaystyle \mu^2\frac{\partial g}{\partial \mu^2} &=& \displaystyle (P_{gg} + e_\Sigma^2 \widetilde{P}_{gg})g + e_\Sigma^2 \widetilde{P}_{g\gamma}\gamma 
-  + \frac{n_d}{3}(P_{gq} + e_d^2\widetilde{P}_{gq})\Sigma_d+\frac{n_u}{3}(P_{gq} + e_u^2\widetilde{P}_{gq})\Sigma_u\\
+\begin{array}{rcl}
+  X_H^{-(n_X+1)} &=& X_H^{-(n_X)}\,,\\
+\\
+  X_h^{-(n_X+1)} &=& X_h^{-(n_X)}\,,\\
+\\
+  X_l^{-(n_X+1)} &=& [1+\mathcal{K}^{(n_X)}_{l}]X_l^-\,,\\
+\\
+  \displaystyle \Gamma_x^{(n_X+1)}&=&\displaystyle\sum_y[\delta_{xy}+\mathcal{K}^{(n_X)}_{xy}]\Gamma_y^{(n_X)}+\sum_{l'}\mathcal{K}^{(n_X)}_{gl'} X_{l'}^{+(n_X)} + \mathcal{K}^{(n_X)}_{gh}X_h^{+(n_X)}\,,\\
   \\
-  &+&\displaystyle n_d(P_{gq} + e_d^2\widetilde{P}_{gq})\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)}
-  +n_u(P_{gq} + e_u^2\widetilde{P}_{gq})\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)}\\
+  \displaystyle X_l^{+(n_X+1)}&=&\displaystyle\sum_y\mathcal{K}^{(n_X)}_{ly}\Gamma_y^{(n_X)}+[1+\mathcal{K}^{(n_X)}_{l}]X_l^{+(n_X)}+\sum_{l'}\mathcal{K}^{(n_X)}_{ll'} X_{l'}^{+(n_X)}\,,\\
   \\
-  \displaystyle \mu^2\frac{\partial \gamma}{\partial \mu^2} &=& \displaystyle e_\Sigma^2 \widetilde{P}_{\gamma g}g
-  + e_\Sigma^2 \widetilde{P}_{\gamma\gamma} \gamma+\frac{n_de_d^2}{3}\widetilde{P}_{\gamma q}\Sigma_d
-  + \frac{n_ue_u^2}{3}\widetilde{P}_{\gamma q}\Sigma_u+\frac{n_\ell}{3}\widetilde{P}_{\gamma\ell}\Sigma_\ell\\
+  \displaystyle X_h^{+(n_X+1)}&=&\displaystyle \sum_y\mathcal{K}^{(n_X)}_{hy}\Gamma_y^{(n_X)} + \sum_{l'}\mathcal{K}^{(n_X)}_{hl'}X_{l'}^{+(n_X)}+[1+\mathcal{K}^{(n_X)}_{hh}]X_h^{+(n_X)}\,,\\
   \\
-  &+&\displaystyle n_de_d^2\widetilde{P}_{\gamma q}\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)} + n_ue_u^2\widetilde{P}_{\gamma q}\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)} + n_\ell\widetilde{P}_{\gamma\ell}\sum_{j=n_\ell+1}^3\frac{T_{j-1}^\ell}{j(j-1)}\\
-  \\
-  \displaystyle \mu^2\frac{\partial \Sigma_d}{\partial \mu^2} &=& \displaystyle 6(P_{qg} + e_d^2 \widetilde{P}_{qg})g+ 6e_d^2 \widetilde{P}_{q\gamma} \gamma
-  +(P^+ + e_d^2\widetilde{P}^+)\Sigma_d+\frac{n_d}{n_f}[(P_{qq}-P^+)+e_d^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\Sigma_d\\
-  \\
-   &+&\displaystyle \frac{3n_d}{n_f}[(P_{qq}-P^+)+e_d^4(\widetilde{P}_{qq}-\widetilde{P}^+)]\sum_{j=n_d+1}^3\frac{T_{j-1}^d}{j(j-1)} \\
-   \\
-   &+&\displaystyle \frac3{n_f}[(P_{qq}-P^+)+e_u^2e_d^2(\widetilde{P}_{qq}-\widetilde{P}^+)]n_u\left(\frac{\Sigma_u}{3}+\sum_{j=n_u+1}^3\frac{T_{j-1}^u}{j(j-1)}\right)\\
-   \\
-   &+&\displaystyle 6e_d^2\widetilde{P}_{q\ell}^Sn_\ell\left(\frac{\Sigma_\ell}{3}+\sum_{j=n_\ell+1}^3\frac{T_{j-1}^\ell}{j(j-1)}\right)
-  \end{array}
-  \right.\,.
+  X_H^{+(n_X+1)} &=& X_H^{+(n_X)}\,.
+\end{array}
 \end{equation}
+
+As in the case of splitting functions, we will include QED corrections
+up to NLO accuracy, leaving QCD only at higher orders. The
+perturbative expansion of the matching matrix will thus be:
+\begin{equation}
+\mathcal{K}_{ij}^{(n_X)}=\underbrace{a_s \mathcal{K}_{ij}^{(n_X),
+    [1,0]}+a\mathcal{K}_{ij}^{(n_X),
+    [0,1]}}_{\mbox{NLO}}+\underbrace{a_s^2 \mathcal{K}_{ij}^{(n_X),
+    [2,0]}+a_s^3\mathcal{K}_{ij}^{(n_X), [3,0]}}_{\mbox{NNLO + N$^3$LO
+    (QCD only)}}\,.
+\end{equation}
+
+We are now in a position to give the specific form of splitting and
+matching functions. Let us start with splitting functions. We have 30
+splitting functions to define, they are:
+\begin{equation}
+\begin{array}{l}
+\mathcal{P}_{DD}^+,\mathcal{P}_{UU}^+,\mathcal{P}_{LL}^+,\\
+\mathcal{P}_{DD}^-,\mathcal{P}_{UU}^-,\mathcal{P}_{LL}^-,\\
+\mathcal{P}^{\rm PS}_{LL}, \mathcal{P}^{\rm PS}_{LU}, \mathcal{P}^{\rm PS}_{LD}\mathcal{P}^{\rm PS}_{UL},\mathcal{P}^{\rm PS}_{UU},\mathcal{P}^{\rm PS}_{UL},\mathcal{P}^{\rm PS}_{DL},\mathcal{P}^{\rm PS}_{DU},\mathcal{P}^{\rm PS}_{DD},\\
+P^{\rm PV},\\
+\mathcal{P}_{Dg},\mathcal{P}_{Ug},\mathcal{P}_{D\gamma},\mathcal{P}_{U\gamma},\mathcal{P}_{L\gamma},\\
+\mathcal{P}_{gD},\mathcal{P}_{gU},\mathcal{P}_{\gamma D},\mathcal{P}_{\gamma U},\mathcal{P}_{\gamma L},\\
+\mathcal{P}_{gg},\mathcal{P}_{g\gamma},\mathcal{P}_{\gamma g},\mathcal{P}_{\gamma\gamma}\,.
+\end{array}
+\end{equation}
+At $\mathcal{O}(\alpha_s)$, we have that:
+\begin{equation}
+\begin{array}{l}
+\mathcal{P}_{LL}^{+,[1,0]}=\mathcal{P}_{LL}^{-,[1,0]}=\mathcal{P}^{\rm PS,[1,0]}_{LL}=\mathcal{P}^{\rm PS,[1,0]}_{LU}=\mathcal{P}^{\rm PS,[1,0]}_{LD}=\mathcal{P}^{\rm
+  PS,[1,0]}_{UL}=\mathcal{P}^{\rm PS,[1,0]}_{UU}=\mathcal{P}^{\rm
+  PS,[1,0]}_{UD}=\mathcal{P}^{\rm PS,[1,0]}_{DL}=\mathcal{P}^{\rm PS,[1,0]}_{DD}=\\
+\\
+  \mathcal{P}^{\rm PS,[1,0]}_{DU}= P^{\rm PV [1,0]}=\mathcal{P}_{D\gamma}^{[1,0]}=\mathcal{P}_{U\gamma}^{[1,0]}=\mathcal{P}_{L\gamma}^{[1,0]}=\mathcal{P}_{\gamma
+  D}^{[1,0]}=\mathcal{P}_{\gamma U}^{[1,0]}=\mathcal{P}_{\gamma
+  L}^{[1,0]}=\mathcal{P}_{g\gamma}^{[1,0]}=\mathcal{P}_{\gamma
+  g}^{[1,0]}=\mathcal{P}_{\gamma\gamma}^{[1,0]}=0\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{l}
+\displaystyle
+  \mathcal{P}_{DD}^{+,[1,0]}=\mathcal{P}_{UU}^{+,[1,0]}=\mathcal{P}_{DD}^{-,[1,0]}=\mathcal{P}_{UU}^{-,[1,0]}
+  = 2C_F\left(\frac{1+x^2}{1-x}\right)_+\,,\\
+\\
+\displaystyle \mathcal{P}_{Dg}^{[1,0]}=\mathcal{P}_{Ug}^{[1,0]}=2T_R\left[x^2+(1-x)^2\right]\,,\\
+\\
+\displaystyle \mathcal{P}_{gD}^{[1,0]}=\mathcal{P}_{gU}^{[1,0]}=2C_F\frac{1+(1-x)^2}{x}\,,\\
+\\
+\displaystyle \mathcal{P}_{gg}^{[1,0]}=4C_A\left[\frac{x}{(1-x)_+}+\frac{1-x}{x}+x(1-x)\right]+\beta_0\delta(1-x)\,.
+\end{array}
+\end{equation}
+At $\mathcal{O}(\alpha)$, we have an analogous picture:
+\begin{equation}
+\begin{array}{l}
+\mathcal{P}^{\rm PS,[0,1]}_{LL}=\mathcal{P}^{\rm
+  PS,[0,1]}_{LU}=\mathcal{P}^{\rm PS,[0,1]}_{LD}=\mathcal{P}^{\rm
+  PS,[0,1]}_{UL}=\mathcal{P}^{\rm PS,[0,1]}_{UU}=\mathcal{P}^{\rm
+  PS,[0,1]}_{UD}=\mathcal{P}^{\rm
+  PS,[0,1]}_{DL}=\mathcal{P}^{\rm PS,[0,1]}_{DU}=\mathcal{P}^{\rm
+  PS,[0,1]}_{DD}=\\
+\\
+  P^{\rm PV [0,1]}=\mathcal{P}_{Dg}^{[0,1]}=\mathcal{P}_{Ug}^{[0,1]}=\mathcal{P}_{gD}^{[0,1]}=\mathcal{P}_{gU}^{[0,1]}=\mathcal{P}_{gg}^{[0,1]}=\mathcal{P}_{g\gamma}^{[0,1]}=\mathcal{P}_{\gamma g}^{[0,1]}=0\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{l}
+\displaystyle
+  \mathcal{P}_{XX}^{+,[0,1]}=\mathcal{P}_{XX}^{-,[0,1]} = 2e_X^2\left(\frac{1+x^2}{1-x}\right)_+\,,\\
+\\
+\displaystyle \mathcal{P}_{X\gamma}^{[0,1]}=2e_X^2\left[x^2+(1-x)^2\right]\,,\\
+\\
+\displaystyle \mathcal{P}_{\gamma X}^{[0,1]}=2e_X^2\frac{1+(1-x)^2}{x}\,,\\
+\\
+\displaystyle \mathcal{P}_{\gamma\gamma}^{[0,1]}=-\frac{4}{3}e_\Sigma^2\delta(1-x)\,,
+\end{array}
+\label{eq:OneLoopQEDSplittings}
+\end{equation}
+for $X=D,U,L$, with the charges being $e_D^2=1/9$, $e_U^2=4/9$,
+$e_L^2=1$, and where we have defined:\footnote{Note that in
+  Eq.~(\ref{eq:OneLoopQEDSplittings}) we have that $\alpha=2$, but
+  below we will also need $\alpha=4$.}
+\begin{equation}
+  e_\Sigma^\alpha=\sum_{X=D,U,L}n_XN_Xe_X^\alpha\,.
+\end{equation}
+
+Now let us move to two loops considering first
+$\mathcal{O}(\alpha_s^2)$. We will refrain from writing the explicit
+expressions for the splitting functions and refer to the usual QCD
+ones. At this order we have:
+\begin{equation}
+\begin{array}{l}
+\mathcal{P}_{LL}^{+,[2,0]}=\mathcal{P}_{LL}^{-,[2,0]}=\mathcal{P}^{\rm PS,[2,0]}_{LL}=\mathcal{P}^{\rm PS,[2,0]}_{LU}=\mathcal{P}^{\rm PS,[2,0]}_{LD}=\mathcal{P}^{\rm PS,[2,0]}_{UL}=\mathcal{P}^{\rm PS,[2,0]}_{DL}=  P^{\rm PV [2,0]}=\\
+\\
+\mathcal{P}_{D\gamma}^{[2,0]}=\mathcal{P}_{U\gamma}^{[2,0]}=\mathcal{P}_{L\gamma}^{[2,0]}=\mathcal{P}_{\gamma
+  D}^{[2,0]}=\mathcal{P}_{\gamma U}^{[2,0]}=\mathcal{P}_{\gamma
+  L}^{[2,0]}=\mathcal{P}_{g\gamma}^{[2,0]}=\mathcal{P}_{\gamma
+  g}^{[2,0]}=\mathcal{P}_{\gamma\gamma}^{[2,0]}=0\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{l}
+\displaystyle
+  \mathcal{P}_{DD}^{+,[2,0]}=\mathcal{P}_{UU}^{+,[2,0]}= P^{+,[1]}\,,\\
+\\
+\mathcal{P}_{DD}^{-,[2,0]}=\mathcal{P}_{UU}^{-,[2,0]} = P^{-,[1]}\,,\\
+\\
+\mathcal{P}^{\rm PS,[2,0]}_{DD}=\mathcal{P}^{\rm PS,[2,0]}_{DU}=\mathcal{P}^{\rm  PS,[2,0]}_{DU}=\mathcal{P}^{\rm  PS,[2,0]}_{UU}= P^{\rm PS,[1]}\,,\\
+\\
+\displaystyle \mathcal{P}_{Dg}^{[2,0]}=\mathcal{P}_{Ug}^{[2,0]}=P_{qg}^{[1]}\,,\\
+\\
+\displaystyle \mathcal{P}_{gD}^{[2,0]}=\mathcal{P}_{gU}^{[2,0]}=P_{gq}^{[1]}\,,\\
+\\
+\displaystyle \mathcal{P}_{gg}^{[2,0]}=P_{gg}^{[1]}\,.
+\end{array}
+\end{equation}
+
+For the splitting functions at $\mathcal{O}(\alpha^2)$, we have:
+\begin{equation}
+\begin{array}{l}
+  P^{\rm PV [0,2]}=\mathcal{P}_{Dg}^{[0,2]}=\mathcal{P}_{Ug}^{[0,2]}=\mathcal{P}_{gD}^{[0,2]}=\mathcal{P}_{gU}^{[0,2]}=\mathcal{P}_{gg}^{[0,2]}=\mathcal{P}_{g\gamma}^{[0,2]}=\mathcal{P}_{\gamma g}^{[0,2]}=0\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle
+  \mathcal{P}_{XX}^{\pm,[0,2]}&=&\displaystyle-e_X^44\bigg[\left(2\ln(x)\ln(1-x)+\frac{3}{2}\ln(x)\right)\frac{1+x^2}{1-x}+\frac{3+7x}{2}\ln(x)\\
+\\
+&+&\displaystyle\frac{1+x}{2}\ln^2(x)+5(1-x)+\left(\frac{\pi^2}{2}-\frac{3}{8}-6\zeta_3\right)\delta(1-x)\bigg]\\
+\\
+&-&\displaystyle e_X^2e_\Sigma^24\left[\frac{4}{3}(1-x)+\frac{1+x^2}{(1-x)_+}\left(\frac{2}{3}\ln(x)+\frac{10}{9}\right)+\left(\frac{2\pi^2}{9}+\frac{1}{6}\right)\delta(1-x)\right]\\
+\\
+&\pm&\displaystyle e_X^44\left[4(1-x)+2(1+x)\ln(x)+2\frac{1+x^2}{1+x}S_2(x)\right]\,,\\
+\\
+  \displaystyle \mathcal{P}^{\rm PS,[0,2]}_{XY}&=&\displaystyle N_Xe_X^2e_Y^24\left[\frac{20}{9x}-2+6x-\frac{56}{9}x^2+\left(1+5x+\frac{8}{3}x^2\right)\ln(x)-(1+x)\ln^2(x)\right]\,,\\
+  \\
+  \displaystyle \mathcal{P}_{X\gamma}^{[0,2]}&=&\displaystyle N_X e_X^4
+  2\bigg[4-9c-(1-4x)\ln(x)-(1-2x)\ln^2(x)+4\ln(1-x)\\
+\\
+&+&\displaystyle (x^2+(1-x)^2)\left(2\ln^2\left(\frac{1-x}{x}\right)-4\ln\left(\frac{1-x}{x}\right)-\frac{2\pi^2}{3}+10 \right)\bigg]\,,\\
+  \\
+  \displaystyle \mathcal{P}_{\gamma X}^{[0,2]}&=&\displaystyle
+                                                  e_X^44\bigg[-(3\ln(1-x)+\ln^2(1-x))\frac{1+(1-x)^2}{x}+\left(2+\frac{7}{2}x\right)\ln(x)-\left(1-\frac{x}{2}\right)\ln^2(x)\\
+\\
+&-&\displaystyle 2x\ln(1-x)-\frac{7}{2}x-\frac{5}{2}\bigg]- e_X^2e_\Sigma^24\left[\frac{4}{3}x+\frac{1+(1-x)^2}{x}\left(\frac{20}{9}+\frac{4}{3}\ln(1-x)\right)\right]\,,\\
+  \\
+  \displaystyle \mathcal{P}_{\gamma\gamma}^{[0,2]}&=&\displaystyle e_\Sigma^44\left[-16+8x+\frac{20}{3}x^2+\frac{4}{3x}-(6+10x)\ln(x)-2(1+x)\ln^2(x)-\delta(1-x)\right]\,,
+\end{array}
+\end{equation}
+The expressions are taken from Ref.~\cite{deFlorian:2016gvk}.
+
+Let us now move to the $\mathcal{O}(\alpha_s\alpha)$ splitting
+functions, whose relevant expressions can be read off from
+Ref.~\cite{deFlorian:2015ujt}. At this order, we find:
+
+and:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle \mathcal{P}_{gg}^{[1,1]}&=& \displaystyle-4T_R\left(n_De_D^2+n_Ue_U^2\right)\delta(1-x)\,,\\
+\\
+  \displaystyle \mathcal{P}_{g\gamma}^{[1,1]}&=& \displaystyle 4N_cC_F\left(n_De_D^2+n_Ue_U^2\right)\left[-16+8x+\frac{20}{3}x^2+\frac{4}{3x}-(6+10x)\ln(x)-2(1+x)\ln^2(x)\right]\,,\\
+\\
+  \displaystyle \mathcal{P}_{\gamma g}^{[1,1]}&=&\displaystyle 4T_R\left(n_De_D^2+n_Ue_U^2\right) \left[-16+8x+\frac{20}{3}x^2+\frac{4}{3x}-(6+10x)\ln(x)-2(1+x)\ln^2(x)\right]\,,\\
+\\
+  \displaystyle \mathcal{P}_{\gamma\gamma}^{[1,1]}&=&\displaystyle-4N_cC_F\left(n_De_D^2+n_Ue_U^2\right)\delta(1-x) \,.
+\end{array}
+\end{equation}
+
+
+
+
+
+
+
+
 
 \newpage
 \bibliographystyle{ieeetr}
