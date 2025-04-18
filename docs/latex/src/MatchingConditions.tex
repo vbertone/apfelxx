@@ -2023,15 +2023,12 @@ g\\
 \end{array}
 \end{equation}
 
-
-
 It remains to assign to each non-zero entry of the splitting-function
 matrices the correct value, which we will do below. In view of this
 analysis, the basis that provides a partial diagonalisation of the
 evolution equation along with a relative simple implementation is:
 \begin{equation}
-\{f_i\}=\{L_\tau^-, L_\mu^-,
-L_e^-,U_t^-,U_c^-,U_u^-,D_b^-,D_s^-,D_d^-,g,\gamma,D_d^+,D_s^+,D_b^+,U_u^+,U_c^+,U_t^+,L_e^+,L_\mu^+,L_\tau^+\}\,.
+\{f_i\}=\{L_\tau^+, L_\mu^+,L_e^+,U_t^+,U_c^+,U_u^+,D_b^+,D_s^+,D_d^+,g,\gamma,D_d^-,D_s^-,D_b^-,U_u^-,U_c^-,U_t^-,L_e^-,L_\mu^-,L_\tau^-\}\,.
 \label{eq:QCDQEDbasis}
 \end{equation}
 In principle, one could establish a basis that maximally diagonalises
@@ -2042,60 +2039,146 @@ cumbersome to handle.
 Let us now turn to threshold matching. In order to implement it, one
 needs to be able establish what are the light flavours, what is the
 heavy flavour, and what are the super-heavy flavours. To this purpose,
-it is necessary to order distributions according to the mass of the
-corresponding partons. Unfortunately, at variance with the pure QCD
-case, this ordering is not reflected in the basis in
+it is necessary to order distributions according to the thresholds of
+the corresponding partons. Unfortunately, at variance with the pure
+QCD case, this ordering is not reflected in the basis in
 Eq.~(\ref{eq:QCDQEDbasis}). Given the ordered vector of thresholds
 $\{\mu_i\}$, one can order the distributions accordingly:
 \begin{equation}
-  \{\widetilde{f}_i\}=\{X_i^-,\Gamma_x,X_i^+\}\,,
+  \{\widetilde{f}_i\}=\{X_i^+,\Gamma_x,X_i^-\}\,,
 \label{eq:physbasismassordered}
 \end{equation}
 where a possible realistic ordering could be:
 \begin{equation}
-\{\widetilde{f}_i\}=\{U_t^-, D_b^-, L_\tau^-, U_c^-, L_\mu^-, D_s^-, D_d^-, U_u^-,L_e^-,g,\gamma, L_e^+,U_u^+, D_d^+,  D_s^+, L_\mu^+, U_c^+, L_\tau^+,D_b^+, U_t^+\}\,,
+\{\widetilde{f}_i\}=\{U_t^+, D_b^+, L_\tau^+, U_c^+, L_\mu^+, D_s^+, D_d^+, U_u^+,L_e^+,g,\gamma, L_e^-,U_u^-, D_d^-,  D_s^-, L_\mu^-, U_c^-, L_\tau^-,D_b^-, U_t^-\}\,,
 \end{equation}
 which can however be determined dynamically according to the values of
-thresholds. With this new basis, the matching at the $n_X$-th mass
-threshold can be implemented sequentially, as in the case of pure QCD,
-through the system:\footnote{It should be noted that, once the
-  ordering in Eq.~(\ref{eq:physbasismassordered}) has been established
-  on the basis of thresholds, the value of $n_X$ uniquely defines the
-  values of $n_D$, $n_U$ and $n_L$ (which are indeed such that
-  $n_D+n_U+n_L=n_X$).}
+thresholds. With this new basis, the matching at the $n_T$-th mass
+threshold can be implemented sequentially, as in the case of pure
+QCD. Using $l$ $(1\leq l \leq n_T)$, $h$ ($=n_T+1$), and $H$
+($n_T+2\leq H \leq 9$) to indicate the light, heavy, and super-heavy
+flavours, respectively, the matching is implemented through the
+system:\footnote{It should be noted that, once the ordering in
+  Eq.~(\ref{eq:physbasismassordered}) has been established on the
+  basis of thresholds, the value of $n_T$ uniquely defines the values
+  of $n_D$, $n_U$ and $n_L$ (which are in turn such that
+  $n_D+n_U+n_L=n_T$).}
 \begin{equation}
-\widetilde{f}_i^{(n_X+1)} = \mathcal{K}_{ij}^{(n_X)} \widetilde{f}_j^{(n_X)}\,.
+  \widetilde{f}_i^{(n_T+1)} = \left[\delta_{ij}+\mathcal{K}_{ij}(\kappa_h)\right] \widetilde{f}_j^{(n_T)}\,.
 \end{equation}
-Using the indices $l$, $h$, and $H$ to indicate the light, heavy, and
-super-heavy flavours, respectively, one explicitly has:
+with $\kappa_h=\mu_h/m_h$, being $m_h$ the mass (not the threshold) of
+the heavy flavour $h$, and where:
+\begin{equation}
+\widetilde{f}_i^{(n_T)}=\{H^{+(n_T)},  h^{+(n_T)}, l^{+(n_T)}, \Gamma_x^{(n_T)}, l^{-(n_T)}, h^{-(n_T)}, H^{-(n_T)}\}\,,
+\end{equation}
+and similarly for $\widetilde{f}_i^{(n_T+1)}$. Given the
+transformation matrix $T$, such that
+$f_i=T_{ij}\widetilde{f}_j$,\footnote{Note that $T$ will be a sparse
+  matrix with only one entry equal to one for each row and for each
+  column but not along the diagonal.} one also has:
+\begin{equation}
+f_i^{(n_T+1)} = \left[\delta_{ij}+T_{ia}\mathcal{K}_{ab}(\kappa_h)T_{bj}^{-1}\right]f_j^{(n_T)}\,.
+\end{equation}
+
+One explicitly has:
 \begin{equation}
 \begin{array}{rcl}
-  X_H^{-(n_X+1)} &=& X_H^{-(n_X)}\,,\\
+  H^{+(n_T+1)} &=& H^{+(n_T)}\,,\\
 \\
-  X_h^{-(n_X+1)} &=& X_h^{-(n_X)}\,,\\
+   h^{+(n_T+1)}&=&\displaystyle \sum_y\mathcal{K}_{hy}\Gamma_y^{(n_T)} + \sum_{l'}\mathcal{K}_{hl'}{l'}^{+(n_T)}+[1+\mathcal{K}_{hh}]h^{+(n_T)}\,,\\
+  \\
+   l^{+(n_T+1)}&=&\displaystyle\sum_y\mathcal{K}_{ly}\Gamma_y^{(n_T)}+[1+\mathcal{K}_{{\rm NS},l}]l^{+(n_T)}+\sum_{l'}\mathcal{K}_{ll'} {l'}^{+(n_T)}\,,\\
+  \\
+   \Gamma_x^{(n_T+1)}&=&\displaystyle\sum_y[\delta_{xy}+\mathcal{K}_{xy}]\Gamma_y^{(n_T)}+\sum_{l'}\mathcal{K}_{xl'} {l'}^{+(n_T)} + \mathcal{K}_{xh}h^{+(n_T)}\,,\\
+  \\
+  l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}]l^{-,(n_T)}\,,\\
 \\
-  X_l^{-(n_X+1)} &=& [1+\mathcal{K}^{(n_X)}_{l}]X_l^-\,,\\
+  h^{-(n_T+1)} &=& h^{-(n_T)}\,,\\
 \\
-  \displaystyle \Gamma_x^{(n_X+1)}&=&\displaystyle\sum_y[\delta_{xy}+\mathcal{K}^{(n_X)}_{xy}]\Gamma_y^{(n_X)}+\sum_{l'}\mathcal{K}^{(n_X)}_{gl'} X_{l'}^{+(n_X)} + \mathcal{K}^{(n_X)}_{gh}X_h^{+(n_X)}\,,\\
-  \\
-  \displaystyle X_l^{+(n_X+1)}&=&\displaystyle\sum_y\mathcal{K}^{(n_X)}_{ly}\Gamma_y^{(n_X)}+[1+\mathcal{K}^{(n_X)}_{l}]X_l^{+(n_X)}+\sum_{l'}\mathcal{K}^{(n_X)}_{ll'} X_{l'}^{+(n_X)}\,,\\
-  \\
-  \displaystyle X_h^{+(n_X+1)}&=&\displaystyle \sum_y\mathcal{K}^{(n_X)}_{hy}\Gamma_y^{(n_X)} + \sum_{l'}\mathcal{K}^{(n_X)}_{hl'}X_{l'}^{+(n_X)}+[1+\mathcal{K}^{(n_X)}_{hh}]X_h^{+(n_X)}\,,\\
-  \\
-  X_H^{+(n_X+1)} &=& X_H^{+(n_X)}\,.
+  H^{-(n_T+1)} &=& H^{-(n_T)}\,,
 \end{array}
 \end{equation}
+where, for brevity, we omitted the dependence of $\kappa_h$ of the
+matching $\mathcal{K}$.
 
 As in the case of splitting functions, we will include QED corrections
 up to NLO accuracy, leaving QCD only at higher orders. The
 perturbative expansion of the matching matrix will thus be:
 \begin{equation}
-\mathcal{K}_{ij}^{(n_X)}=\underbrace{a_s \mathcal{K}_{ij}^{(n_X),
-    [1,0]}+a\mathcal{K}_{ij}^{(n_X),
-    [0,1]}}_{\mbox{NLO}}+\underbrace{a_s^2 \mathcal{K}_{ij}^{(n_X),
-    [2,0]}+a_s^3\mathcal{K}_{ij}^{(n_X), [3,0]}}_{\mbox{NNLO + N$^3$LO
-    (QCD only)}}\,.
+\mathcal{K}_{ij}=\underbrace{a_s \mathcal{K}_{ij}^{[1,0]}+a\mathcal{K}_{ij}^{[0,1]}}_{\mbox{NLO}}+\underbrace{a_s^2 \mathcal{K}_{ij}^{[2,0]}+a_s^3\mathcal{K}_{ij}^{[3,0]}}_{\mbox{NNLO + N$^3$LO (QCD only)}}\,.
 \end{equation}
+Under this assumption, the structure of matching greatly
+simplifies. Indeed, up to NLO, which is the order up which QED
+corrections are included, the only matching functions to be different
+from zero are $\mathcal{K}_{xy}(\propto \delta_{xy})$,
+$\mathcal{K}_{xh}$, $\mathcal{K}_{hy}$, and
+$\mathcal{K}_{hh}$, all others start at NNLO or beyond. Since
+corrections beyond NLO are QCD only, they do not carry any flavour
+dependence and any function that involves leptons and/or photon is
+identically zero. This leads to:
+\begin{equation}
+\begin{array}{rcl}
+  H^{+(n_T+1)} &=& H^{+(n_T)}\,,\\
+\\
+   h^{+(n_T+1)}&=&\displaystyle \mathcal{K}_{hg}g^{(n_T)} + \mathcal{K}_{h \gamma}\gamma^{(n_T)} +\mathcal{K}_{hl'}\sum_{l'} {l'}^{+(n_T)}+[1+\mathcal{K}_{hh}]h^{+(n_T)}\,,\\
+  \\
+   l^{+(n_T+1)}&=&\displaystyle \mathcal{K}_{lg}g^{(n_T)}+[1+\mathcal{K}_{{\rm NS},l}]l^{+(n_T)}+\mathcal{K}_{ll'} \sum_{l'} {l'}^{+(n_T)}\,,\\
+  \\
+   g^{(n_T+1)}&=&\displaystyle [1+\mathcal{K}_{gg}]g^{(n_T)}+\mathcal{K}_{gl'} \sum_{l'}{l'}^{+(n_T)} + \mathcal{K}_{gh}h^{+(n_T)}\,,\\
+\\
+   \gamma^{(n_T+1)}&=&\displaystyle[1+\mathcal{K}_{\gamma\gamma}]\gamma^{(n_T)}+\mathcal{K}_{\gamma h}h^{+(n_T)}\,,\\
+  \\
+  l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}]l^{-,(n_T)}\,,\\
+\\
+  h^{-(n_T+1)} &=& h^{-(n_T)}\,,\\
+\\
+  H^{-(n_T+1)} &=& H^{-(n_T)}\,.
+\end{array}
+\end{equation}
+
+If $h$ is a lepton, such that $h=L_\alpha$, we have that all
+distributions of the basis $f_i$ match on themselves
+($f_i^{(n_T+1)}=f_i^{(n_T)}$), except:
+\begin{equation}
+\begin{array}{rcl}
+ \displaystyle
+  L_\alpha^{+(n_T+1)}&=&\displaystyle[1+\mathcal{K}_{LL}]L_\alpha^{+(n_T)}+\mathcal{K}_{L\gamma}\gamma^{(n_T)}\,,\\
+\\
+  \gamma^{(n_T+1)}&=&\displaystyle \mathcal{K}_{\gamma L} L_\alpha^{+(n_T)} +[1+\mathcal{K}_{\gamma\gamma}^L]\gamma^{(n_T)}\,,
+\end{array}
+\label{eq:MatchingLeptons}
+\end{equation}
+where all functions $\mathcal{K}$ implicitly depend on the variable
+$\kappa_{L_\alpha}$. If instead $h=X_i=D_i,U_i$, we would still have
+$f_i^{(n_T+1)}=f_i^{(n_T)}$ for all but:
+\begin{equation}
+\begin{array}{rcl}
+   X_i^{+(n_T+1)}&=&\displaystyle \mathcal{K}_{Qg}g^{(n_T)} + \mathcal{K}_{X\gamma}\gamma^{(n_T)} +\mathcal{K}_{Qq'}\left(\sum_{j=1}^{n_D} D_j^{+(n_T)}+\sum_{j=1}^{n_U} U_j^{+(n_T)}\right)+[1+\mathcal{K}_{XX}]X_i^{+(n_T)}\,,\\
+  \\
+   q^{+(n_T+1)}&=&\displaystyle \mathcal{K}_{qg}g^{(n_T)}+[1+\mathcal{K}_{{\rm NS},q}]q^{+(n_T)}+\mathcal{K}_{qq'}\left(\sum_{j=1}^{n_D} D_j^{+(n_T)}+\sum_{j=1}^{n_U} U_j^{+(n_T)}\right)\,,\\
+  \\
+   g^{(n_T+1)}&=&\displaystyle [1+\mathcal{K}_{gg}]g^{(n_T)}+\mathcal{K}_{gq}\left(\sum_{j=1}^{n_D} D_j^{+(n_T)}+\sum_{j=1}^{n_U} U_j^{+(n_T)}\right) + \mathcal{K}_{gQ}X_i^{+(n_T)}\,,\\
+\\
+   \gamma^{(n_T+1)}&=&\displaystyle[1+\mathcal{K}_{\gamma\gamma}^X]\gamma^{(n_T)}+\mathcal{K}_{\gamma X}X_i^{+(n_T)}\,,\\
+  \\
+  q^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},q}]q^{-,(n_T)}\,,
+\end{array}
+\label{eq:MatchingQuarks}
+\end{equation}
+where all functions $\mathcal{K}$ implicitly depend on the variable
+$\kappa_{X_i}$ and where we used the character $Q$ ($q$) to mean a
+generic heavy (light) quark, no matter whether of up or down type.
+
+In fact, Eqs.~(\ref{eq:MatchingLeptons}) and~(\ref{eq:MatchingQuarks})
+ca be put together by allowing the index $X$ in
+Eq.~(\ref{eq:MatchingQuarks}) to run over all possibile values
+($X=D,U,L$) and by setting: 
+\begin{equation}
+  \mathcal{K}_{Qg}=\mathcal{K}_{Qq'}=\mathcal{K}_{qg}=\mathcal{K}_{{\rm
+      NS},q}=\mathcal{K}_{qq'}=\mathcal{K}_{gg}=\mathcal{K}_{gq}=\mathcal{K}_{gQ}=0\,,
+\label{eq:IfLeptonMatching}
+\end{equation}
+when $h=L_\alpha$.
 
 We are now in a position to give the specific form of splitting and
 matching functions. Let us start with splitting functions. We have 30
@@ -2104,7 +2187,7 @@ splitting functions to define, they are:
 \begin{array}{l}
 \mathcal{P}_{DD}^+,\mathcal{P}_{UU}^+,\mathcal{P}_{LL}^+,\\
 \mathcal{P}_{DD}^-,\mathcal{P}_{UU}^-,\mathcal{P}_{LL}^-,\\
-\mathcal{P}^{\rm PS}_{LL}, \mathcal{P}^{\rm PS}_{LU}, \mathcal{P}^{\rm PS}_{LD}\mathcal{P}^{\rm PS}_{UL},\mathcal{P}^{\rm PS}_{UU},\mathcal{P}^{\rm PS}_{UL},\mathcal{P}^{\rm PS}_{DL},\mathcal{P}^{\rm PS}_{DU},\mathcal{P}^{\rm PS}_{DD},\\
+\mathcal{P}^{\rm PS}_{LL}, \mathcal{P}^{\rm PS}_{LU}, \mathcal{P}^{\rm PS}_{LD}\mathcal{P}^{\rm PS}_{UL},\mathcal{P}^{\rm PS}_{UU},\mathcal{P}^{\rm PS}_{UD},\mathcal{P}^{\rm PS}_{DL},\mathcal{P}^{\rm PS}_{DU},\mathcal{P}^{\rm PS}_{DD},\\
 P^{\rm PV},\\
 \mathcal{P}_{Dg},\mathcal{P}_{Ug},\mathcal{P}_{D\gamma},\mathcal{P}_{U\gamma},\mathcal{P}_{L\gamma},\\
 \mathcal{P}_{gD},\mathcal{P}_{gU},\mathcal{P}_{\gamma D},\mathcal{P}_{\gamma U},\mathcal{P}_{\gamma L},\\
@@ -2157,7 +2240,7 @@ and:
 \displaystyle
   \mathcal{P}_{XX}^{+,[0,1]}=\mathcal{P}_{XX}^{-,[0,1]} = 2e_X^2\left(\frac{1+x^2}{1-x}\right)_+\,,\\
 \\
-\displaystyle \mathcal{P}_{X\gamma}^{[0,1]}=2e_X^2\left[x^2+(1-x)^2\right]\,,\\
+\displaystyle \mathcal{P}_{X\gamma}^{[0,1]}=2e_X^2N_X\left[x^2+(1-x)^2\right]\,,\\
 \\
 \displaystyle \mathcal{P}_{\gamma X}^{[0,1]}=2e_X^2\frac{1+(1-x)^2}{x}\,,\\
 \\
@@ -2243,10 +2326,47 @@ The expressions are taken from Ref.~\cite{deFlorian:2016gvk}.
 Let us now move to the $\mathcal{O}(\alpha_s\alpha)$ splitting
 functions, whose relevant expressions can be read off from
 Ref.~\cite{deFlorian:2015ujt}. At this order, we find:
-
+\begin{equation}
+\begin{array}{l}
+\mathcal{P}_{LL}^{+,[1,1]}=\mathcal{P}_{LL}^{-,[1,1]}=\mathcal{P}^{\rm PS,[1,1]}_{LL}=\mathcal{P}^{\rm
+  PS,[1,1]}_{LU}=\mathcal{P}^{\rm PS,[1,1]}_{LD}=\mathcal{P}^{\rm
+  PS,[1,1]}_{UL}=\mathcal{P}^{\rm PS,[1,1]}_{UU}=\\
+  \\
+  \mathcal{P}^{\rm
+  PS,[1,1]}_{UD}=\mathcal{P}^{\rm
+  PS,[1,1]}_{DL}=\mathcal{P}^{\rm PS,[1,1]}_{DU}=\mathcal{P}^{\rm
+  PS,[1,1]}_{DD}= P^{\rm PV [1,1]}=\mathcal{P}_{L\gamma}^{[1,1]}=\mathcal{P}_{\gamma L}^{[1,1]}=0\,,
+\end{array}
+\end{equation}
 and:
 \begin{equation}
-\begin{array}{rcl}
+  \begin{array}{rcl}
+    \displaystyle \mathcal{P}_{XX}^{\pm,[1,1]}&=&\displaystyle
+                                                  -e_X^28C_F\bigg[\left(2\ln(1-x)+\frac{3}{2}\right)\ln(x)\frac{1+x^2}{1-x}+\frac{3+7x}{2}\ln(x)+\frac{1+x}{2}\ln^2(x)\\
+    \\
+    &+&\displaystyle 5(1-x)+\left(\frac{\pi^2}{2}-\frac{3}{8}-6\zeta_3\right)\delta(1-x)\bigg]\\
+    \\
+    &\pm&\displaystyle
+          e_X^28C_F\left[4(1-x)+2(1+x)\ln(x)+\frac{1+x^2}{1+x}S_2(x)\right]\,,
+          \quad X=U,D\\
+    \\
+    \displaystyle \mathcal{P}_{gX}^{[1,1]}&=&\displaystyle
+                                              e_X^24C_F\bigg[-(3\ln(1-x)+\ln^2(1-x))\frac{1+(1-x)^2}{x}+\left(2+\frac{7}{2}x\right)\ln(x)\\
+    \\
+    &-&\displaystyle \left(1-\frac{x}{2}\right)\ln^2(x)-2x\ln(1-x)-\frac{7}{2}x-\frac{5}{2}\bigg]\,,\quad X=U,D\\
+    \\
+        \displaystyle \mathcal{P}_{\gamma X}^{[1,1]}&=&\displaystyle\mathcal{P}_{gX}^{[1,1]}\,,\quad X=U,D\\
+    \\
+
+    \displaystyle \mathcal{P}_{Xg}^{[1,1]}&=&\displaystyle
+                                              e_X^22T_R\bigg[4-9x-(1-4x)\ln(x)-(1-2x)\ln^2(x)+4\ln(1-x)\\
+    \\
+    &+&\displaystyle (x^2+(1-x)^2)\left(2\ln^2\left(\frac{1-x}{x}\right)-4\ln\left(\frac{1-x}{x}\right)-\frac{2\pi^2}{3}+10\right)\bigg]\,,\quad X=U,D\\
+    \\
+        \displaystyle \mathcal{P}_{X\gamma}^{[1,1]}&=&\displaystyle e_X^22N_XC_F\bigg[4-9x-(1-4x)\ln(x)-(1-2x)\ln^2(x)+4\ln(1-x)\\
+    \\
+    &+&\displaystyle (x^2+(1-x)^2)\left(2\ln^2\left(\frac{1-x}{x}\right)-4\ln\left(\frac{1-x}{x}\right)-\frac{2\pi^2}{3}+10\right)\bigg]\,,\quad X=U,D\\
+    \\
   \displaystyle \mathcal{P}_{gg}^{[1,1]}&=& \displaystyle-4T_R\left(n_De_D^2+n_Ue_U^2\right)\delta(1-x)\,,\\
 \\
   \displaystyle \mathcal{P}_{g\gamma}^{[1,1]}&=& \displaystyle 4N_cC_F\left(n_De_D^2+n_Ue_U^2\right)\left[-16+8x+\frac{20}{3}x^2+\frac{4}{3x}-(6+10x)\ln(x)-2(1+x)\ln^2(x)\right]\,,\\
@@ -2257,12 +2377,128 @@ and:
 \end{array}
 \end{equation}
 
+At higher orders, where only QCD corrections are included, one has
+that all splitting functions involving leptons and/or photon are zero:
+\begin{equation}
+\begin{array}{l}
+  \mathcal{P}_{LL}^{+,[n,0]}=\mathcal{P}_{LL}^{-,[n,0]}=\mathcal{P}^{{\rm
+  PS} ,[n,0]}_{LL}= \mathcal{P}^{{\rm PS}
+  ,[n,0]}_{LU}=\mathcal{P}^{{\rm PS} ,[n,0]}_{LD}=\mathcal{P}^{{\rm
+  PS} ,[n,0]}_{UL}=\mathcal{P}^{{\rm PS}
+  ,[n,0]}_{UL}=\mathcal{P}^{{\rm PS} ,[n,0]}_{DL}=\\
+  \\
+  \mathcal{P}_{D\gamma}^{[n,0]}=\mathcal{P}_{U\gamma}^{[n,0]}=\mathcal{P}_{L\gamma}^{[n,0]}=\mathcal{P}_{\gamma D}^{[n,0]}=\mathcal{P}_{\gamma U}^{[n,0]}=\mathcal{P}_{\gamma L}^{[n,0]}=\mathcal{P}_{g\gamma}^{[n,0]}=\mathcal{P}_{\gamma g}^{[n,0]}=\mathcal{P}_{\gamma\gamma}^{[n,0]}=0\,,
+\end{array}
+\end{equation}
+for $n\geq3$. The others are given by the QCD ones as follows:
+\begin{equation}
+  \begin{array}{l}
+    \mathcal{P}_{DD}^{\pm,[n,0]}=\mathcal{P}_{UU}^{\pm,[n,0]}=P^{\pm,[n-1]}\,,\\
+\mathcal{P}^{{\rm PS},[n,0]}_{UU}=\mathcal{P}^{{\rm
+    PS},[n,0]}_{UD}=\mathcal{P}^{{\rm
+    PS},[n,0]}_{DU}=\mathcal{P}^{{\rm PS},[n,0]}_{DD}=P^{{\rm PS},[n-1]}\,,\\
+P^{{\rm PV},[n,0]}=P^{{\rm PV},[n-1]}\,,\\
+\mathcal{P}_{Dg}^{[n,0]}=\mathcal{P}_{Ug}^{[n,0]}=P_{qg}^{[n-1]}\,,\\
+\mathcal{P}_{gD}^{[n,0]}=\mathcal{P}_{gU}^{[n,0]}=P_{gq}^{[n-1]}\,,\\
+\mathcal{P}_{gg}^{[n,0]}=P_{gg}^{[n-1]}\,,
+  \end{array}
+\end{equation}
+where $P^{[n-1]}$ denote the QCD splitting functions at N$^{n-1}$LO.
 
+We can finally move to the matching conditions. Looking at
+Eq.~(\ref{eq:MatchingQuarks}), staring fron NLO accuracy, we need
+specify the various functions $\mathcal{K}$. At each heavy-quark
+threshold, the functions $\mathcal{K}$ also depend on the ration
+$\kappa_X=\mu_X/m_X$, where $\mu_X$ and $m_X$ are the threshold and
+the mass of the quarks that is becoming active. We have a total of 12
+functions to determine:
+\begin{equation}
+\mathcal{K}_{Qg},\mathcal{K}_{X\gamma},\mathcal{K}_{Qq'},\mathcal{K}_{XX},\mathcal{K}_{qg},\mathcal{K}_{{\rm NS},q},\mathcal{K}_{qq'},\mathcal{K}_{gg},\mathcal{K}_{gq},\mathcal{K}_{gQ},\mathcal{K}_{\gamma\gamma}^X,\mathcal{K}_{\gamma X}\,,
+\end{equation}
+As already discussed above, if $X$ is a lepton ($X=L$), many of these
+vanish (see Eq.~(\ref{eq:IfLeptonMatching})). If instead $X$ is either
+a down- or a up-type quark ($X=D,U$), the functions coincide with the
+pure-QCD ones. Specifically, referring to
+Eq.~(\ref{eq:IntMatchingCondsN3LO}), one has:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle\mathcal{K}_{Qg}&=&\displaystyle \left\{
+\begin{array}{ll}
+K_{hg}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{Qq'}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{hl}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{qg}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{lg}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{{\rm NS},q}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{ll}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{qq'}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{ll'}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{gg}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{gg}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{gq}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{gl}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{gQ}&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{gh}&\quad X=D,U\,,\\
+0 & \quad X=L\,,
+\end{array}
+\right.
+\end{array}
+\end{equation}
 
-
-
-
-
+The remaining are:
+\begin{equation}
+\begin{array}{rcl}
+\displaystyle \mathcal{K}_{XX} &=&\displaystyle
+\left\{
+\begin{array}{ll}
+ K_{hh}&\quad X=D,U\,,\\
+\\
+\displaystyle 2e_X^2\left[\frac{1+x^2}{1-x}\left(\ln\left(\kappa_X^2\right)-1-2\ln(1-x)\right)\right]_+& \quad X=L\,,
+\end{array}
+\right.\\
+\\
+\displaystyle\mathcal{K}_{X\gamma}&=&\displaystyle 2N_Xe_X^2[x^2+(1-x)^2]\ln\left(\kappa_X^2\right)\,,\\
+\\
+\displaystyle\mathcal{K}_{\gamma X}&=&\displaystyle 2e_X^2\left[\frac{1+(1-x)^2}{x}\right]\left[\ln\left(\kappa_X^2\right)-1-2\ln(x)\right]\,,\\
+\\
+\displaystyle\mathcal{K}_{\gamma\gamma}^X &=&\displaystyle -\frac{4}{3}e_X^2 \ln\left(\kappa_X^2\right)\delta(1-x)\,.
+\end{array}
+\end{equation}
 
 
 \newpage
