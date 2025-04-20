@@ -341,7 +341,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -700,7 +700,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -976,7 +976,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -1246,7 +1246,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -1481,7 +1481,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -1602,7 +1602,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -1737,7 +1737,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -1874,7 +1874,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -2106,7 +2106,7 @@ namespace apfel
                                                                 });
   }
 
-//_____________________________________________________________________________
+  //_____________________________________________________________________________
   std::unique_ptr<Dglap<Distribution>> BuildDglap(std::function<DglapObjects(double const&)>                         const& DglapObj,
                                                   std::vector<double>                                                const& Thresholds,
                                                   std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,

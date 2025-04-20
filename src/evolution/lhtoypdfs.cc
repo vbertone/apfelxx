@@ -19,6 +19,34 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  std::map<int, double> LHToyPDFsQCDQED(double const& x, double const&)
+  {
+    const std::map<int, double> fQCD = QCDEvToPhys(Provider(x, 0));
+    std::map<int, double> f;
+    f[0]  = 0;
+    f[1]  = 0;
+    f[2]  = 0;
+    f[3]  = fQCD.at(6) + fQCD.at(-6);
+    f[4]  = fQCD.at(4) + fQCD.at(-4);
+    f[5]  = fQCD.at(2) + fQCD.at(-2);
+    f[6]  = fQCD.at(5) + fQCD.at(-5);
+    f[7]  = fQCD.at(3) + fQCD.at(-3);
+    f[8]  = fQCD.at(1) + fQCD.at(-1);
+    f[9]  = fQCD.at(0);
+    f[10] = 0;
+    f[11] = fQCD.at(1) - fQCD.at(-1);
+    f[12] = fQCD.at(3) - fQCD.at(-3);
+    f[13] = fQCD.at(5) - fQCD.at(-5);
+    f[14] = fQCD.at(2) - fQCD.at(-2);
+    f[15] = fQCD.at(4) - fQCD.at(-4);
+    f[16] = fQCD.at(6) - fQCD.at(-6);
+    f[17] = 0;
+    f[18] = 0;
+    f[19] = 0;
+    return f;
+  }
+
+  //_________________________________________________________________________________
   std::map<int, double> LHToyPDFsPhys(double const& x, double const&)
   {
     return QCDEvToPhys(Provider(x, 0));

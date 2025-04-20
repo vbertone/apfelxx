@@ -64,6 +64,7 @@
  * @brief Builders and relevant physical quantities
  */
 #include "apfel/dglapbuilder.h"
+#include "apfel/dglapbuilderqcdqed.h"
 #include "apfel/structurefunctionbuilder.h"
 #include "apfel/tmdbuilder.h"
 #include "apfel/gpdbuilder.h"

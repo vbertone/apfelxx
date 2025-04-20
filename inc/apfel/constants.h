@@ -37,7 +37,7 @@ namespace apfel
    * @ingroup NumericalConstants
    */
   ///@{
-  enum PartonSpecies: int {GLUON = 0, QUARK = 1, PHOTON = 2, CHARGEDLEPTON = 3, NEUTRINO = 4};
+  enum PartonSpecies: int {GLUON = 0, DOWNTYPEQUARK = 1, UPTYPEQUARK = 2, PHOTON = 4, CHARGEDLEPTON = 4, NEUTRINO = 5};
   ///@}
 
   /**

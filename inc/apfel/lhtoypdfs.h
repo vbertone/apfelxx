@@ -20,6 +20,7 @@ namespace apfel
   ///@{
   std::map<int, double> Provider(double const& x, int const& isel);
   std::map<int, double> LHToyPDFs(double const& x, double const&);
+  std::map<int, double> LHToyPDFsQCDQED(double const& x, double const&);
   std::map<int, double> LHToyPDFsPhys(double const& x, double const&);
   std::map<int, double> LHToyPDFsPlusMinus(double const& x, double const&);
   std::map<int, double> LHToyPDFsPol(double const& x, double const&);

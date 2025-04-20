@@ -29,14 +29,13 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  P0qedqgm::P0qedqgm(int const& nl):
-    Expression(),
-    _nl(nl)
+  P0qedqgm::P0qedqgm():
+    Expression()
   {
   }
   double P0qedqgm::Regular(double const& x) const
   {
-    return 4 * _nl * ( 1 - 2 * x + 2 * x * x );
+    return 4 * ( 1 - 2 * x + 2 * x * x );
   }
 
   //_________________________________________________________________________________
@@ -50,13 +49,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  P0qedgmgm::P0qedgmgm(int const& nl):
-    Expression(),
-    _nl(nl)
+  P0qedgmgm::P0qedgmgm():
+    Expression()
   {
   }
   double P0qedgmgm::Local(double const&) const
   {
-    return - 4. / 3. * _nl;
+    return - 4. / 3;
   }
 }

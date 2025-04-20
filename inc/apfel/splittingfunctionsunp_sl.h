@@ -17,7 +17,6 @@ namespace apfel
    * Collection of the MSbar space-like splitting functions up to the
    * highest order currently known for unpolarised, polarised, and
    * transversity evolution.
-
    * @note While for the O(&alpha;<SUB>s</SUB>) and
    * O(&alpha;<SUB>s</SUB><SUP>2</SUP>) splitting functions exact
    * expressions are used, a fast parameterisation for the

@@ -43,10 +43,8 @@ namespace apfel
   class P0qedqgm: public Expression
   {
   public:
-    P0qedqgm(int const& nl);
+    P0qedqgm();
     double Regular(double const& x) const;
-  private:
-    int const _nl;
   };
 
   /**
@@ -67,10 +65,8 @@ namespace apfel
   class P0qedgmgm: public Expression
   {
   public:
-    P0qedgmgm(int const& nl);
+    P0qedgmgm();
     double Local(double const& x) const;
-  private:
-    int const _nl;
   };
   ///@}
 }

@@ -10,15 +10,13 @@
 #include "apfel/dglap.h"
 #include "apfel/dglapnonlinear.h"
 
-#include <memory>
-
 namespace apfel
 {
   /**
    * @brief Structure that contains all the precomputed quantities
    * needed to perform the DGLAP evolution, i.e. perturbative
    * coefficients of splitting functions and matching conditions, and
-   * the heavy quark thresholds.
+   * the quark thresholds.
    */
   struct DglapObjects
   {
@@ -30,9 +28,9 @@ namespace apfel
   };
 
   /**
-   * @name DGLAP object initializers
+   * @name DGLAP object initializers in QCD
    * Collection of functions that initialise DglapObjects structure
-   * for the different kinds of evolution currently available.
+   * for the different kinds of QCD evolution currently available.
    */
   ///@{
   /**
@@ -41,8 +39,8 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
@@ -63,7 +61,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
@@ -85,8 +83,8 @@ namespace apfel
    * 'DglapObjects' structure. This function prepares the evolution in
    * the physical basis.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
@@ -108,7 +106,7 @@ namespace apfel
    * 'DglapObjects' structure. This function prepares the evolution in
    * the physical basis.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @param n3lo: whether N3LO corrections to splitting and matching functions are computer (default: false)
@@ -129,8 +127,8 @@ namespace apfel
    * functions and matching conditions with MSbar masses and store
    * them into a 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -147,7 +145,7 @@ namespace apfel
    * functions and matching conditions with MSbar masses and store
    * them into a 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark masses
+   * @param Thresholds: the quark masses
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -165,8 +163,8 @@ namespace apfel
    * to the unpolarised ones) and store them into a 'DglapObjects'
    * structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -184,7 +182,7 @@ namespace apfel
    * to the unpolarised ones) and store them into a 'DglapObjects'
    * structure.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -201,8 +199,8 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -219,7 +217,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -236,8 +234,8 @@ namespace apfel
    * splitting functions and matching conditions and store them into a
    * 'DglapObjects' structure. Limited to LO for now.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -254,7 +252,7 @@ namespace apfel
    * splitting functions and matching conditions and store them into a
    * 'DglapObjects' structure. Limited to LO for now.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -271,8 +269,8 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -289,7 +287,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -306,8 +304,8 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Masses: the heavy-quark masses
-   * @param Thresholds: the heavy quark thresholds
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -324,7 +322,7 @@ namespace apfel
    * functions and matching conditions and store them into a
    * 'DglapObjects' structure.
    * @param g: the x-space grid
-   * @param Thresholds: the heavy-quark thresholds
+   * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A map of DglapObject objects, one for each possible nf
@@ -337,9 +335,9 @@ namespace apfel
   ///@}
 
   /**
-   * @name DGLAP builders
+   * @name DGLAP builders in QCD
    * Collection of functions that build a Dglap object used to perform
-   * the DGLAP evolution of distributions or operators.
+   * the DGLAP evolution of distributions or operators in QCD.
    */
   ///@{
   /**
@@ -384,7 +382,7 @@ namespace apfel
     * @brief The BuildDglap function builds the actual dglap object
     * that performs the DGLAP evolution for distributions.
     * @param DglapObj: DglapObjects-valued function that returns the structure with the coefficients of the perturbative objects as functions of the scale
-    * @param Thresholds: the heavy-quark thresholds
+    * @param Thresholds: the quark thresholds
     * @param InDistFunc: the distributions at the reference scale
     * @param MuRef: the reference scale
     * @param PerturbativeOrder: the perturbative order of the evolution

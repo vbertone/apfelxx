@@ -25,7 +25,7 @@ namespace apfel
     // Beta function lambda function
     _BetaFunction = [=] (int const& nfl, double const& a)-> double
     {
-      const double Qr = ConcatenateAndSortVectors(QuarkThresholds, LeptThresholds)[nfl-1] + eps8;
+      const double Qr = this->_Thresholds[nfl-1] + eps8;
       const int nf = NF(Qr, QuarkThresholds);
       const int nl = NF(Qr, LeptThresholds);
       double bt = 0, powa = a * a;

@@ -349,13 +349,10 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, double> PlusMinusToPhys(std::map<int, double> const& PlusMinusMap)
   {
-    // Fill in map in the physical basis. It assumes that the gluon
-    // has key zero and all keys from 0 to 12 exist.
+    // Fill in map in the physical basis
     std::map<int, double> PhysMap;
     PhysMap[0]  = PlusMinusMap.at(0 + 6);
     PhysMap[21] = PlusMinusMap.at(0 + 6);
-
-    // Fill in map in the physical basis
     for (int i = 1; i <= 6; i++)
       {
         PhysMap[i]  = ( PlusMinusMap.at(i + 6) + PlusMinusMap.at(- i + 6) ) / 2;
@@ -367,17 +364,81 @@ namespace apfel
   //_____________________________________________________________________________
   std::map<int, Distribution> PlusMinusToPhys(std::map<int, Distribution> const& PlusMinusMap)
   {
-    // Fill in map in the physical basis. It assumes that the gluon
-    // has key zero and all keys from 0 to 12 exist.
-    std::map<int, Distribution> PhysMap;
-    PhysMap.insert({0, PlusMinusMap.at(0 + 6)});
-
     // Fill in map in the physical basis
+    std::map<int, Distribution> PhysMap;
+    PhysMap.insert({0,  PlusMinusMap.at(0 + 6)});
     for (int i = 1; i <= 6; i++)
       {
         PhysMap.insert({i,  ( PlusMinusMap.at(i + 6) + PlusMinusMap.at(- i + 6) ) / 2});
         PhysMap.insert({-i, ( PlusMinusMap.at(i + 6) - PlusMinusMap.at(- i + 6) ) / 2});
       }
+    return PhysMap;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, double> PlusMinusQCDQEDToPhys(std::map<int, double> const& PlusMinusMap)
+  {
+    // Fill in map in the physical basis
+    std::map<int, double> PhysMap;
+    // Gluon
+    PhysMap[0]   = PlusMinusMap.at(9);
+    PhysMap[21]  = PlusMinusMap.at(9);
+    // Photon
+    PhysMap[22]  = PlusMinusMap.at(10);
+    // Leptons
+    PhysMap[15]  = ( PlusMinusMap.at(0) + PlusMinusMap.at(19) ) / 2;
+    PhysMap[-15] = ( PlusMinusMap.at(0) - PlusMinusMap.at(19) ) / 2;
+    PhysMap[13]  = ( PlusMinusMap.at(1) + PlusMinusMap.at(18) ) / 2;
+    PhysMap[-13] = ( PlusMinusMap.at(1) - PlusMinusMap.at(18) ) / 2;
+    PhysMap[11]  = ( PlusMinusMap.at(2) + PlusMinusMap.at(17) ) / 2;
+    PhysMap[-11] = ( PlusMinusMap.at(2) - PlusMinusMap.at(17) ) / 2;
+    // Up-type quarks
+    PhysMap[6]   = ( PlusMinusMap.at(3) + PlusMinusMap.at(16) ) / 2;
+    PhysMap[-6]  = ( PlusMinusMap.at(3) - PlusMinusMap.at(16) ) / 2;
+    PhysMap[4]   = ( PlusMinusMap.at(4) + PlusMinusMap.at(15) ) / 2;
+    PhysMap[-4]  = ( PlusMinusMap.at(4) - PlusMinusMap.at(15) ) / 2;
+    PhysMap[2]   = ( PlusMinusMap.at(5) + PlusMinusMap.at(14) ) / 2;
+    PhysMap[-2]  = ( PlusMinusMap.at(5) - PlusMinusMap.at(14) ) / 2;
+    // Down-type quarks
+    PhysMap[5]   = ( PlusMinusMap.at(6) + PlusMinusMap.at(13) ) / 2;
+    PhysMap[-5]  = ( PlusMinusMap.at(6) - PlusMinusMap.at(13) ) / 2;
+    PhysMap[3]   = ( PlusMinusMap.at(7) + PlusMinusMap.at(12) ) / 2;
+    PhysMap[-3]  = ( PlusMinusMap.at(7) - PlusMinusMap.at(12) ) / 2;
+    PhysMap[1]   = ( PlusMinusMap.at(8) + PlusMinusMap.at(11) ) / 2;
+    PhysMap[-1]  = ( PlusMinusMap.at(8) - PlusMinusMap.at(11) ) / 2;
+    return PhysMap;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, Distribution> PlusMinusQCDQEDToPhys(std::map<int, Distribution> const& PlusMinusMap)
+  {
+    // Fill in map in the physical basis
+    std::map<int, Distribution> PhysMap;
+    // Gluon
+    PhysMap.insert({0,   PlusMinusMap.at(9)});
+    // Photon
+    PhysMap.insert({22,  PlusMinusMap.at(10)});
+    // Leptons
+    PhysMap.insert({15,  ( PlusMinusMap.at(0) + PlusMinusMap.at(19) ) / 2});
+    PhysMap.insert({-15, ( PlusMinusMap.at(0) - PlusMinusMap.at(19) ) / 2});
+    PhysMap.insert({13,  ( PlusMinusMap.at(1) + PlusMinusMap.at(18) ) / 2});
+    PhysMap.insert({-13, ( PlusMinusMap.at(1) - PlusMinusMap.at(18) ) / 2});
+    PhysMap.insert({11,  ( PlusMinusMap.at(2) + PlusMinusMap.at(17) ) / 2});
+    PhysMap.insert({-11, ( PlusMinusMap.at(2) - PlusMinusMap.at(17) ) / 2});
+    // Up-type quarks
+    PhysMap.insert({6,   ( PlusMinusMap.at(3) + PlusMinusMap.at(16) ) / 2});
+    PhysMap.insert({-6,  ( PlusMinusMap.at(3) - PlusMinusMap.at(16) ) / 2});
+    PhysMap.insert({4,   ( PlusMinusMap.at(4) + PlusMinusMap.at(15) ) / 2});
+    PhysMap.insert({-4,  ( PlusMinusMap.at(4) - PlusMinusMap.at(15) ) / 2});
+    PhysMap.insert({2,   ( PlusMinusMap.at(5) + PlusMinusMap.at(14) ) / 2});
+    PhysMap.insert({-2,  ( PlusMinusMap.at(5) - PlusMinusMap.at(14) ) / 2});
+    // Down-type quarks
+    PhysMap.insert({5,   ( PlusMinusMap.at(6) + PlusMinusMap.at(13) ) / 2});
+    PhysMap.insert({-5,  ( PlusMinusMap.at(6) - PlusMinusMap.at(13) ) / 2});
+    PhysMap.insert({3,   ( PlusMinusMap.at(7) + PlusMinusMap.at(12) ) / 2});
+    PhysMap.insert({-3,  ( PlusMinusMap.at(7) - PlusMinusMap.at(12) ) / 2});
+    PhysMap.insert({1,   ( PlusMinusMap.at(8) + PlusMinusMap.at(11) ) / 2});
+    PhysMap.insert({-1,  ( PlusMinusMap.at(8) - PlusMinusMap.at(11) ) / 2});
     return PhysMap;
   }
 }

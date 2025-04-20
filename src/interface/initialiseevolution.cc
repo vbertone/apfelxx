@@ -636,7 +636,7 @@ namespace apfel
         // Array of distributions
         const int nd = 2 * _setup.Thresholds.size() + 1;
         const int np = ka.second.begin()->second.xs.size() * ka.second.begin()->second.q2s.size();
-        double dist[np][nd];
+        std::vector<std::vector<double>> dist(np, std::vector<double>(nd, 0));
 
         // Gather tabulated distributions
         int id = 0;

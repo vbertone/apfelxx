@@ -5,100 +5,141 @@
 //
 
 #include "apfel/evolutionbasisqcdqed.h"
-#include "apfel/constants.h"
 
 namespace apfel
 {
   //_________________________________________________________________________
-  EvolutionBasisQCDQED::EvolutionBasisQCDQED(int const& nu, int const& nd, int const& nl):
-    ConvolutionMap{"EvolutionBasisQCDQED_nu" + std::to_string(nu) + "_nd" + std::to_string(nd) + "_nl" + std::to_string(nl)}
+  EvolutionBasisQCDQED::EvolutionBasisQCDQED(int const& nd, int const& nu, int const& nl):
+    ConvolutionMap{"EvolutionBasisQCDQED_nd" + std::to_string(nd) + "_nu" + std::to_string(nu) + "_nl" + std::to_string(nl)}
   {
-    // Define relevant constants
-    const double nf      = nu + nd;
-    const double dnf     = nu - nd;
-    const double dnfrel  = dnf / nf;
-    const double eSigma2 = NC * ( nu * eu2 + nd * ed2 );
-    const double dSigma2 = NC * ( nu * eu2 - nd * ed2 );
-    const double etap    = ( eu2 + ed2 ) / 2;
-    const double etam    = ( eu2 - ed2 ) / 2;
-
-    // Numbering
-    // 0      1      2      3       4       5        6         7         8    9    10   11   12   13   14   15   16   17   18   19
-    // GLUON, GAMMA, SIGMA, DSIGMA, SIGMAL, VALENCE, DVALENCE, VALENCEL, T1U, V1U, T2U, V2U, T1D, V1D, T2D, V2D, T1L, V1L, T2L, V2L
-
-    // Singlet
-    _rules[GLUON]  = { {PGG, GLUON, 1}, {PGQ, SIGMA, 1},
-      {PGGQED, GLUON, eSigma2}, {PGGMQED, GAMMA, eSigma2}, {PGQQED, SIGMA, etap}, {PGQQED, DSIGMA, etam}
-    };
-    _rules[GAMMA]  =
-    {
-      {PGMGQED, GLUON, eSigma2}, {PGMGMQED, GAMMA, eSigma2}, {PGMQQED, SIGMA, etap}, {PGMQQED, DSIGMA, etam},
-      {PGMLQED, SIGMAL, 1}
-    };
-    _rules[SIGMA]  = { {PQG, GLUON, 1}, {PQQ, SIGMA, 1},
-      {PQGQED, GLUON, 2. * eSigma2}, {PQGMQED, GAMMA, 2. * eSigma2},
-      {PQQQED, SIGMA,  etap * eSigma2 / nf}, {PNSPQED, SIGMA,  etap - etap * eSigma2 / nf},
-      {PQQQED, DSIGMA, etam * eSigma2 / nf}, {PNSPQED, DSIGMA, etam - etam * eSigma2 / nf},
-      {PQLQED, SIGMAL, 2. * eSigma2}
-    };
-    _rules[DSIGMA] = { {PQG, GLUON, dnfrel}, {PQQ, SIGMA, dnfrel}, {PNSP, SIGMA, - dnfrel}, {PNSP, DSIGMA, 1},
-      {PQGQED, GLUON, 2. * dSigma2}, {PQGMQED, GAMMA, 2. * dSigma2},
-      {PQQQED, SIGMA,  etap * dSigma2 / nf}, {PNSPQED, SIGMA,  etam - etap * dSigma2 / nf},
-      {PQQQED, DSIGMA, etam * dSigma2 / nf}, {PNSPQED, DSIGMA, etap - etam * dSigma2 / nf},
-      {PQLQED, SIGMAL, 2. * dSigma2}
-    };
-    _rules[SIGMAL] =
-    {
-      {PLGMQED, GAMMA, 2. * nl}, {PQLQED, SIGMA,  2. * nl * etap}, {PQLQED, DSIGMA, 2. * nl * etam}, {PLLQED, SIGMAL, 1}
-    };
-
-    // Coupled total valences
-    _rules[VALENCE]  = { {PNSV, VALENCE, 1},
-      {PNSMQED, VALENCE, etap}, {PNSMQED, DVALENCE, etam}
-    };
-    _rules[DVALENCE] = { {PNSV, VALENCE, dnfrel}, {PNSM, VALENCE, - dnfrel}, {PNSM, DVALENCE, 1},
-      {PNSMQED, VALENCE, etam}, {PNSMQED, DVALENCE, etap}
-    };
-
-    // Lepton total valence
-    _rules[VALENCEL] = { {PNSMQED, VALENCEL, 1} };
-
-    // Non-singlet distributions
-    for (int i = 0; i < 2; i++)
+    // Helper vectors
+    std::vector<int> ActiveDownPlus(nd);
+    std::vector<int> ActiveDownMinus(nd);
+    std::vector<int> ActiveUpPlus(nu);
+    std::vector<int> ActiveUpMinus(nu);
+    std::vector<int> ActiveLeptPlus(nl);
+    std::vector<int> ActiveLeptMinus(nl);
+    for (int id = 0; id < nd; id++)
       {
-        // Up-type
-        if (nu > i + 1)
-          {
-            _rules[8 + 2 * i]     = { {PNSP, 8 + 2 * i,     1}, {PNSPQED, 8 + 2 * i,     eu2} };
-            _rules[8 + 2 * i + 1] = { {PNSM, 8 + 2 * i + 1, 1}, {PNSMQED, 8 + 2 * i + 1, eu2} };
-          }
-        else
-          {
-            _rules[8 + 2 * i]     = ( _rules[SIGMA]   + _rules[DSIGMA]   ) / 2.;
-            _rules[8 + 2 * i + 1] = ( _rules[VALENCE] + _rules[DVALENCE] ) / 2.;
-          }
-        // Down-type
-        if (nd > i + 1)
-          {
-            _rules[12 + 2 * i]     = { {PNSP, 12 + 2 * i,     1}, {PNSPQED, 12 + 2 * i,     ed2} };
-            _rules[12 + 2 * i + 1] = { {PNSM, 12 + 2 * i + 1, 1}, {PNSMQED, 12 + 2 * i + 1, ed2} };
-          }
-        else
-          {
-            _rules[12 + 2 * i]     = ( _rules[SIGMA]   - _rules[DSIGMA]   ) / 2.;
-            _rules[12 + 2 * i + 1] = ( _rules[VALENCE] - _rules[DVALENCE] ) / 2.;
-          }
-        // Leptons
-        if (nl > i + 1)
-          {
-            _rules[16 + 2 * i]     = { {PNSPQED, 16 + 2 * i,     1} };
-            _rules[16 + 2 * i + 1] = { {PNSMQED, 16 + 2 * i + 1, 1} };
-          }
-        else
-          {
-            _rules[16 + 2 * i]     = _rules[SIGMAL];
-            _rules[16 + 2 * i + 1] = _rules[VALENCEL];
-          }
+        ActiveDownPlus[id]  = 8  - id;
+        ActiveDownMinus[id] = 11 + id;
       }
+    for (int iu = 0; iu < nu; iu++)
+      {
+        ActiveUpPlus[iu]  = 5  - iu;
+        ActiveUpMinus[iu] = 14 + iu;
+      }
+    for (int il = 0; il < nl; il++)
+      {
+        ActiveLeptPlus[il]  = 2  - il;
+        ActiveLeptMinus[il] = 17 + il;
+      }
+
+    // Inactive lepton plus distributions
+    for (int i = 2 - nl; i >= 0; i--)
+      _rules[i] = {{PPV, i, 0}};
+
+    // Inactive up-type plus distributions
+    for (int i = 5 - nu; i > 2; i--)
+      _rules[i] = {{PPV, i, 0}};
+
+    // Inactive down-type plus distributions
+    for (int i = 8 - nd; i > 5; i--)
+      _rules[i] = {{PPV, i, 0}};
+
+    // Inactive down-type minus distributions
+    for (int i = 11 + nd; i < 14; i++)
+      _rules[i] = {{PPV, i, 0}};
+
+    // Inactive up-type minus distributions
+    for (int i = 14 + nu; i < 17; i++)
+      _rules[i] = {{PPV, i, 0}};
+
+    // Inactive lepton minus distributions
+    for (int i = 17 + nl; i < 20; i++)
+      _rules[i] = {{PPV, i, 0}};
+
+    // Active lepton plus distributions
+    for (int i : ActiveLeptPlus)
+      {
+        _rules[i] = {{PPLL, i, 1}};
+        for (int j : ActiveDownPlus)
+          _rules[i].push_back({PPSLD, j, 1});
+        for (int j : ActiveUpPlus)
+          _rules[i].push_back({PPSLU, j, 1});
+        for (int j : ActiveLeptPlus)
+          _rules[i].push_back({PPSLL, j, 1});
+        _rules[i].push_back({PLgm, PHOTON, 1});
+      }
+
+    // Active up-type plus distributions
+    for (int i : ActiveUpPlus)
+      {
+        _rules[i] = {{PPUU, i, 1}};
+        for (int j : ActiveDownPlus)
+          _rules[i].push_back({PPSUD, j, 1});
+        for (int j : ActiveUpPlus)
+          _rules[i].push_back({PPSUU, j, 1});
+        for (int j : ActiveLeptPlus)
+          _rules[i].push_back({PPSUL, j, 1});
+        _rules[i].push_back({PUg, GLUON, 1});
+        _rules[i].push_back({PUgm, PHOTON, 1});
+      }
+
+    // Active down-type plus distributions
+    for (int i : ActiveDownPlus)
+      {
+        _rules[i] = {{PPDD, i, 1}};
+        for (int j : ActiveDownPlus)
+          _rules[i].push_back({PPSDD, j, 1});
+        for (int j : ActiveUpPlus)
+          _rules[i].push_back({PPSDU, j, 1});
+        for (int j : ActiveLeptPlus)
+          _rules[i].push_back({PPSDL, j, 1});
+        _rules[i].push_back({PDg, GLUON, 1});
+        _rules[i].push_back({PDgm, PHOTON, 1});
+      }
+
+    // Gluon
+    _rules[GLUON] = {{Pgg, GLUON, 1}};
+    _rules[GLUON].push_back({Pggm, PHOTON, 1});
+    for (int i : ActiveDownPlus)
+      _rules[GLUON].push_back({PgD, i, 1});
+    for (int i : ActiveUpPlus)
+      _rules[GLUON].push_back({PgU, i, 1});
+
+    // Photon
+    _rules[PHOTON] = {{Pgmgm, PHOTON, 1}};
+    _rules[PHOTON].push_back({Pgmg, GLUON, 1});
+    for (int i : ActiveDownPlus)
+      _rules[PHOTON].push_back({PgmD, i, 1});
+    for (int i : ActiveUpPlus)
+      _rules[PHOTON].push_back({PgmU, i, 1});
+    for (int i : ActiveLeptPlus)
+      _rules[PHOTON].push_back({PgmL, i, 1});
+
+    // Active down-type minus distributions
+    for (int i : ActiveDownMinus)
+      {
+        _rules[i] = {{PMDD, i, 1}};
+        for (int j : ActiveDownMinus)
+          _rules[i].push_back({PPV, j, 1});
+        for (int j : ActiveUpMinus)
+          _rules[i].push_back({PPV, j, 1});
+      }
+
+    // Active up-type minus distributions
+    for (int i : ActiveUpMinus)
+      {
+        _rules[i] = {{PMUU, i, 1}};
+        for (int j : ActiveDownMinus)
+          _rules[i].push_back({PPV, j, 1});
+        for (int j : ActiveUpMinus)
+          _rules[i].push_back({PPV, j, 1});
+      }
+
+    // Active leptom minus distributions
+    for (int i : ActiveLeptMinus)
+      _rules[i] = {{PMLL, i, 1}};
   }
 }

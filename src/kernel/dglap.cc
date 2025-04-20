@@ -66,8 +66,8 @@ namespace apfel
     for (int i = 0; i <= 12; i++)
       DistMap.insert({i, Distribution{_ObjRef.at(0).GetGrid(), InDistFunc, i}});
 
-    // Create set of initial distributions (assumed to be in the QCD
-    // evolution basis).
+    // Create set of initial distributions (assumed to match the
+    // convolution map of splitting functions).
     SetObjectRef(Set<Distribution> {_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistMap});
   }
 
@@ -75,8 +75,8 @@ namespace apfel
   template<>
   void Dglap<Distribution>::SetInitialDistributions(std::function<std::map<int, double>(double const&)> const& InDistFunc)
   {
-    // Create set of initial distributions (assumed to be in the QCD
-    // evolution basis).
+    // Create set of initial distributions (assumed to match the
+    // convolution map of splitting functions).
     SetObjectRef(Set<Distribution> {_SplittingFunctions(NF(_MuRef, _Thresholds), 0).GetMap(), DistributionMap(_ObjRef.at(0).GetGrid(), InDistFunc)});
   }
 

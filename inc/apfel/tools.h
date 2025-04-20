@@ -72,7 +72,8 @@ namespace apfel
    * vectors.
    * @param v1: first vector
    * @param v2: second vector
-   * @return a std::vector containing the sorted entries of 'v1' and 'v2'
+   * @return a a std::vector<double> corresponding to the sorted
+   * entries of 'v1' and 'v2'.
    */
   std::vector<double> ConcatenateAndSortVectors(std::vector<double> const& v1, std::vector<double> const& v2);
 
