@@ -42,8 +42,8 @@ namespace apfel
     std::vector<std::vector<int>> NDUL;
     for (int nt = 0; nt <= (int) Thresholds.size(); nt++)
       {
-        const int nl = NF(Thresholds[nt - 1] + eps8, LeptonThresholds);
-        const int nf = NF(Thresholds[nt - 1] + eps8, QuarkThresholds);
+        const int nl = NF((nt > 0 ? Thresholds[nt - 1] : 0) + eps8, LeptonThresholds);
+        const int nf = NF((nt > 0 ? Thresholds[nt - 1] : 0) + eps8, QuarkThresholds);
         const int nd = NDW[nf];
         const int nu = NUP[nf];
         NDUL.push_back({nd, nu, nl});
@@ -131,10 +131,8 @@ namespace apfel
         OM.insert({EvolutionBasisQCDQED::PDgm, ed2 * O01qg});
         OM.insert({EvolutionBasisQCDQED::PUgm, eu2 * O01qg});
         OM.insert({EvolutionBasisQCDQED::PLgm,       O01qg});
-        OM.insert({EvolutionBasisQCDQED::PgmD, ( ed2 ) * O01gq});  // To match APFEL fortran
-        OM.insert({EvolutionBasisQCDQED::PgmU, ( eu2 ) * O01gq});
-        //OM.insert({EvolutionBasisQCDQED::PgmD, ( 3 * ed2 ) * O01gq});
-        //OM.insert({EvolutionBasisQCDQED::PgmU, ( 3 * eu2 ) * O01gq});
+        OM.insert({EvolutionBasisQCDQED::PgmD, ( 3 * ed2 ) * O01gq});
+        OM.insert({EvolutionBasisQCDQED::PgmU, ( 3 * eu2 ) * O01gq});
         OM.insert({EvolutionBasisQCDQED::PgmL,               O01gq});
         OM.insert({EvolutionBasisQCDQED::Pgmgm, ( 3 * SumCh2[nf] + nl ) * O01gg});
         // Insert Zero in the remaining slots
