@@ -128,13 +128,13 @@ namespace apfel
         OM.insert({EvolutionBasisQCDQED::PMDD, ed2 * O01ns});
         OM.insert({EvolutionBasisQCDQED::PMUU, eu2 * O01ns});
         OM.insert({EvolutionBasisQCDQED::PMLL,       O01ns});
-        OM.insert({EvolutionBasisQCDQED::PDgm, ed2 * O01qg});
-        OM.insert({EvolutionBasisQCDQED::PUgm, eu2 * O01qg});
-        OM.insert({EvolutionBasisQCDQED::PLgm,       O01qg});
-        OM.insert({EvolutionBasisQCDQED::PgmD, ( 3 * ed2 ) * O01gq});
-        OM.insert({EvolutionBasisQCDQED::PgmU, ( 3 * eu2 ) * O01gq});
-        OM.insert({EvolutionBasisQCDQED::PgmL,               O01gq});
-        OM.insert({EvolutionBasisQCDQED::Pgmgm, ( 3 * SumCh2[nf] + nl ) * O01gg});
+        OM.insert({EvolutionBasisQCDQED::PDgm, ( NC * ed2 ) * O01qg});
+        OM.insert({EvolutionBasisQCDQED::PUgm, ( NC * eu2 ) * O01qg});
+        OM.insert({EvolutionBasisQCDQED::PLgm,                O01qg});
+        OM.insert({EvolutionBasisQCDQED::PgmD, ed2 * O01gq});
+        OM.insert({EvolutionBasisQCDQED::PgmU, eu2 * O01gq});
+        OM.insert({EvolutionBasisQCDQED::PgmL,       O01gq});
+        OM.insert({EvolutionBasisQCDQED::Pgmgm, ( NC * SumCh2[nf] + nl ) * O01gg});
         // Insert Zero in the remaining slots
         for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
           OM.insert({i, Zero});

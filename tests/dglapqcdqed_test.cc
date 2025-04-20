@@ -9,7 +9,8 @@
 int main()
 {
   // x-space grid
-  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 6e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
+  //const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 6e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
+  const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Initial scale
   const double mu0 = sqrt(2);
@@ -51,6 +52,15 @@ int main()
   t.start();
   const std::map<int, apfel::Distribution> tpdfs = apfel::PlusMinusQCDQEDToPhys(TabulatedPDFs.Evaluate(mu).GetObjects());
   t.stop();
+
+  // Get PDFs at the final scale as distributions
+  const apfel::Set<apfel::Distribution> Dists = TabulatedPDFs.Evaluate(mu);
+
+  // Momentum sum rule
+  double msr = 0;
+  for (int i = 0; i < 11; i++)
+    msr += Dists.at(i).Integrate(1e-9, 1);
+  std::cout << "\nMomentum sum rule: " << msr << std::endl;
 
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
