@@ -142,4 +142,45 @@ namespace apfel
     for (int i : ActiveLeptMinus)
       _rules[i] = {{PMLL, i, 1}};
   }
+
+  //_________________________________________________________________________
+  EvolutionOperatorBasisQCDQED::EvolutionOperatorBasisQCDQED(int const& nd, int const& nu, int const& nl):
+    ConvolutionMap{"EvolutionOperatorBasisQCDQED_nd" + std::to_string(nd) + "_nu" + std::to_string(nu) + "_nl" + std::to_string(nl)}
+  {
+    // Allocate EvolutionBasisQCD object to retrieve the splitting
+    // matrix rules.
+    const EvolutionBasisQCDQED eb{nd, nu, nl};
+
+    // Get matrix of coefficients
+    const matrix<std::vector<double>> rc = eb.GetRuleMatrix();
+
+    // Get matrix of operator indices
+    const matrix<std::vector<int>> ri = eb.GetRuleIndices();
+
+    // Now construct set of rules
+    for (int i = 0; i < 20; i++)
+      for (int j = 0; j < 20; j++)
+        for (int k = 0; k < 20; k++)
+          {
+            if (rc(i, k).empty() || GkjQCDQED.count({k, j}) == 0)
+              continue;
+
+            for (int l = 0; l < (int) rc(i, k).size(); l++)
+              _rules[GkjQCDQED.at({i, j})].push_back({ri(i, k)[l], GkjQCDQED.at({k, j}), rc(i, k)[l]});
+          }
+  }
+
+  //_________________________________________________________________________
+  EvolveDistributionsBasisQCDQED::EvolveDistributionsBasisQCDQED():
+    ConvolutionMap{"EvolveDistributionsBasisQCDQED"}
+  {
+    // Construct set of rules
+    for (int k = 0; k < 20; k++)
+      for (int j = 0; j < 20; j++)
+        {
+          if (GkjQCDQED.count({k, j}) == 0)
+            continue;
+          _rules[k].push_back({GkjQCDQED.at({k, j}), j, 1});
+        }
+  }
 }

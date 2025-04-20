@@ -44,5 +44,23 @@ namespace apfel
      */
     MatchingBasisQCDQED(int const& nd, int const& nu, int const& nl, PartonSpecies const& species);
   };
+
+  /**
+   * @brief The MatchingOperatorBasisQCDQED class is a derived of
+   * ConvolutionMap specialised for the matching of the evolution of
+   * operators at the heavy-quark thresholds in QCDxQED evolution.
+   */
+  class MatchingOperatorBasisQCDQED: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The MatchingOperatorBasisQCDQED constructor
+     * @param nd: number of active down-type quarks below threshold
+     * @param nu: number of active up-type quarks below threshold
+     * @param nl: number of active leptons below threshold
+     * @param species: parton species of the heavy parton
+     */
+    MatchingOperatorBasisQCDQED(int const& nd, int const& nu, int const& nl, PartonSpecies const& species);
+  };
   ///@}
 }

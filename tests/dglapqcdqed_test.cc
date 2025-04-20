@@ -9,8 +9,8 @@
 int main()
 {
   // x-space grid
-  //const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 6e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
-  const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
+  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 6e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
+  //const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Initial scale
   const double mu0 = sqrt(2);
@@ -29,13 +29,18 @@ int main()
   const auto aem = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds);
+  const auto DglapObj   = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds);
+  const auto DglapObjOp = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds, true);
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFsQCDQED, mu0, PerturbativeOrder, as, aem);
+  const auto EvolvedOps  = BuildDglap(DglapObjOp,                       mu0, PerturbativeOrder, as, aem);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};
+
+  // Tabulate Operators
+  const apfel::TabulateObject<apfel::Set<apfel::Operator>> TabulatedOps{*EvolvedOps, 50, 1, 1000, 3};
 
   // Final scale
   const double mu = 100;
@@ -52,6 +57,17 @@ int main()
   t.start();
   const std::map<int, apfel::Distribution> tpdfs = apfel::PlusMinusQCDQEDToPhys(TabulatedPDFs.Evaluate(mu).GetObjects());
   t.stop();
+
+  std::cout << "Interpolation of the tabulated evolution operators... ";
+  t.start();
+  apfel::Set<apfel::Operator> tops = TabulatedOps.Evaluate(mu);
+  t.stop();
+
+  // Set appropriate convolution basis for the evolution operators and
+  // convolute them with initial-scale distributions.
+  tops.SetMap(apfel::EvolveDistributionsBasisQCDQED{});
+  const apfel::Set<apfel::Distribution> pdfs0{apfel::EvolveDistributionsBasisQCDQED{}, DistributionMap(g, apfel::LHToyPDFsQCDQED, mu0)};
+  const std::map<int, apfel::Distribution> oppdfs = apfel::PlusMinusQCDQEDToPhys((tops * pdfs0).GetObjects());
 
   // Get PDFs at the final scale as distributions
   const apfel::Set<apfel::Distribution> Dists = TabulatedPDFs.Evaluate(mu);
@@ -98,82 +114,98 @@ int main()
                 << std::endl;
     }
   std::cout << "\n";
-  /*
-    std::cout << "Evolution through the evolution operator:" << std::endl;
-    for (auto const& x : xlha)
-      {
-        std::cout.precision(1);
-        std::cout << x;
-        std::cout.precision(4);
-        std::cout << "  " << (oppdfs.at(2) - oppdfs.at(-2)).Evaluate(x)
-                  << "  " << (oppdfs.at(1) - oppdfs.at(-1)).Evaluate(x)
-                  << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
-                  << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
-                  << "  " << oppdfs.at(0).Evaluate(x)
-                  << std::endl;
-      }
-    std::cout << "\n";
 
-    std::cout << "Evolution through the interpolated evolution operator:" << std::endl;
-    for (auto const& x : xlha)
-      {
-        const std::map<int, double> opxpdfs = apfel::QCDEvToPhys((apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCD{}, tops.Evaluate(x).GetObjects()} * pdfs0).Squash());
-        std::cout.precision(1);
-        std::cout << x;
-        std::cout.precision(4);
-        std::cout << "  " << opxpdfs.at(2) - opxpdfs.at(-2)
-                  << "  " << opxpdfs.at(1) - opxpdfs.at(-1)
-                  << "  " << 2 * ( opxpdfs.at(-2) + opxpdfs.at(-1) )
-                  << "  " << opxpdfs.at(4) + opxpdfs.at(-4)
-                  << "  " << opxpdfs.at(0)
-                  << std::endl;
-      }
-    std::cout << "\n";
+  std::cout << "Evolution through the evolution operator:" << std::endl;
+  for (auto const& x : xlha)
+    {
+      std::cout.precision(1);
+      std::cout << x;
+      std::cout.precision(4);
+      std::cout << "  " << (oppdfs.at(2) - oppdfs.at(-2)).Evaluate(x)
+                << "  " << (oppdfs.at(1) - oppdfs.at(-1)).Evaluate(x)
+                << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
+                << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
+                << "  " << oppdfs.at(0).Evaluate(x)
+                << "  " << oppdfs.at(22).Evaluate(x)
+                << "  " << 2 * (oppdfs.at(11) + oppdfs.at(-11)).Evaluate(x)
+                << "  " << 2 * (oppdfs.at(13) + oppdfs.at(-13)).Evaluate(x)
+                << "  " << 2 * (oppdfs.at(15) + oppdfs.at(-15)).Evaluate(x)
+                << std::endl;
+    }
+  std::cout << "\n";
 
-    std::cout << "Interpolation on the PDF table (all x for each Q):" << std::endl;
-    for (auto const& x : xlha)
-      {
-        std::cout.precision(1);
-        std::cout << x;
-        std::cout.precision(4);
-        std::cout << "  " << (tpdfs.at(2) - tpdfs.at(-2)).Evaluate(x)
-                  << "  " << (tpdfs.at(1) - tpdfs.at(-1)).Evaluate(x)
-                  << "  " << 2 * (tpdfs.at(-2) + tpdfs.at(-1)).Evaluate(x)
-                  << "  " << (tpdfs.at(4) + tpdfs.at(-4)).Evaluate(x)
-                  << "  " << tpdfs.at(0).Evaluate(x)
-                  << std::endl;
-      }
-    std::cout << "\n";
+  std::cout << "Evolution through the interpolated evolution operator:" << std::endl;
+  for (auto const& x : xlha)
+    {
+      const std::map<int, double> opxpdfs = apfel::PlusMinusQCDQEDToPhys((apfel::Set<apfel::Distribution> {apfel::EvolveDistributionsBasisQCDQED{}, tops.Evaluate(x).GetObjects()} * pdfs0).Squash());
+      std::cout.precision(1);
+      std::cout << x;
+      std::cout.precision(4);
+      std::cout << "  " << opxpdfs.at(2) - opxpdfs.at(-2)
+                << "  " << opxpdfs.at(1) - opxpdfs.at(-1)
+                << "  " << 2 * ( opxpdfs.at(-2) + opxpdfs.at(-1) )
+                << "  " << opxpdfs.at(4) + opxpdfs.at(-4)
+                << "  " << opxpdfs.at(0)
+                << "  " << opxpdfs.at(22)
+                << "  " << 2 * ( opxpdfs.at(11) + opxpdfs.at(-11) )
+                << "  " << 2 * ( opxpdfs.at(13) + opxpdfs.at(-13) )
+                << "  " << 2 * ( opxpdfs.at(15) + opxpdfs.at(-15) )
+                << std::endl;
+    }
+  std::cout << "\n";
 
-    std::cout << "Interpolation on the PDF table as a map (x and Q independently):" << std::endl;
-    for (auto const& x : xlha)
-      {
-        const std::map<int, double> DistMap = apfel::QCDEvToPhys(TabulatedPDFs.EvaluateMapxQ(x, mu));
-        std::cout.precision(1);
-        std::cout << x;
-        std::cout.precision(4);
-        std::cout << "  " << DistMap.at(2) - DistMap.at(-2)
-                  << "  " << DistMap.at(1) - DistMap.at(-1)
-                  << "  " << 2 * ( DistMap.at(-2) + DistMap.at(-1) )
-                  << "  " << DistMap.at(4) + DistMap.at(-4)
-                  << "  " << DistMap.at(0)
-                  << std::endl;
-      }
-    std::cout << "\n";
+  std::cout << "Interpolation on the PDF table (all x for each Q):" << std::endl;
+  for (auto const& x : xlha)
+    {
+      std::cout.precision(1);
+      std::cout << x;
+      std::cout.precision(4);
+      std::cout << "  " << (tpdfs.at(2) - tpdfs.at(-2)).Evaluate(x)
+                << "  " << (tpdfs.at(1) - tpdfs.at(-1)).Evaluate(x)
+                << "  " << 2 * (tpdfs.at(-2) + tpdfs.at(-1)).Evaluate(x)
+                << "  " << (tpdfs.at(4) + tpdfs.at(-4)).Evaluate(x)
+                << "  " << tpdfs.at(0).Evaluate(x)
+                << "  " << tpdfs.at(22).Evaluate(x)
+                << "  " << 2 * (tpdfs.at(11) + tpdfs.at(-11)).Evaluate(x)
+                << "  " << 2 * (tpdfs.at(13) + tpdfs.at(-13)).Evaluate(x)
+                << "  " << 2 * (tpdfs.at(15) + tpdfs.at(-15)).Evaluate(x)
+                << std::endl;
+    }
+  std::cout << "\n";
 
-    int k = 1000000;
-    std::cout << "Interpolating " << k << " times a single PDF on the (x,Q) grid... ";
-    t.start();
-    for (int i = 0; i < k; i++)
-      TabulatedPDFs.EvaluatexQ(0, 0.05, mu);
-    t.stop();
+  std::cout << "Interpolation on the PDF table as a map (x and Q independently):" << std::endl;
+  for (auto const& x : xlha)
+    {
+      const std::map<int, double> DistMap = apfel::PlusMinusQCDQEDToPhys(TabulatedPDFs.EvaluateMapxQ(x, mu));
+      std::cout.precision(1);
+      std::cout << x;
+      std::cout.precision(4);
+      std::cout << "  " << DistMap.at(2) - DistMap.at(-2)
+                << "  " << DistMap.at(1) - DistMap.at(-1)
+                << "  " << 2 * ( DistMap.at(-2) + DistMap.at(-1) )
+                << "  " << DistMap.at(4) + DistMap.at(-4)
+                << "  " << DistMap.at(0)
+                << "  " << DistMap.at(22)
+                << "  " << 2 * ( DistMap.at(11) + DistMap.at(-11) )
+                << "  " << 2 * ( DistMap.at(13) + DistMap.at(-13) )
+                << "  " << 2 * ( DistMap.at(15) + DistMap.at(-15) )
+                << std::endl;
+    }
+  std::cout << "\n";
 
-    k = 100000;
-    std::cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
-    t.start();
-    for (int i = 0; i < k; i++)
-      TabulatedPDFs.EvaluateMapxQ(0.05, mu);
-    t.stop();
-    */
+  int k = 1000000;
+  std::cout << "Interpolating " << k << " times a single PDF on the (x,Q) grid... ";
+  t.start();
+  for (int i = 0; i < k; i++)
+    TabulatedPDFs.EvaluatexQ(0, 0.05, mu);
+  t.stop();
+
+  k = 100000;
+  std::cout << "Interpolating " << k << " times a map of PDFs on the (x,Q) grid... ";
+  t.start();
+  for (int i = 0; i < k; i++)
+    TabulatedPDFs.EvaluateMapxQ(0.05, mu);
+  t.stop();
+
   return 0;
 }

@@ -94,11 +94,11 @@ namespace apfel
    * @param nsteps: the number of steps of the ODE solver (default: 10).
    * @return A unique pointer to a Dglap object
    */
-  /*std::unique_ptr<Dglap<Operator>> BuildDglap(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
+  std::unique_ptr<Dglap<Operator>> BuildDglap(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
                                               double                               const& MuRef,
                                               int                                  const& PerturbativeOrder,
                                               std::function<double(double const&)> const& Alphas,
                                               std::function<double(double const&)> const& Alphaem,
-                                              int                                  const& nsteps = 10);*/
+                                              int                                  const& nsteps = 10);
   ///@}
 }

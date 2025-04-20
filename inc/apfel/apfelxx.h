@@ -40,8 +40,6 @@
 #include "apfel/qgrid.h"
 #include "apfel/set.h"
 #include "apfel/tabulateobject.h"
-#include "apfel/evolutionbasisqcd.h"
-#include "apfel/physicalbasisqcd.h"
 #include "apfel/doubleoperator.h"
 #include "apfel/doubledistribution.h"
 
@@ -50,7 +48,10 @@
  */
 #include "apfel/disbasis.h"
 #include "apfel/evolutionbasisqcd.h"
+#include "apfel/evolutionbasisqcdqed.h"
+#include "apfel/physicalbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
+#include "apfel/matchingbasisqcdqed.h"
 #include "apfel/diagonalbasis.h"
 #include "apfel/evolbasisplusminus.h"
 

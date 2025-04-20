@@ -81,5 +81,36 @@ namespace apfel
      */
     EvolutionBasisQCDQED(int const& nd, int const& nu, int const& nl);
   };
+
+  /**
+   * @brief The EvolutionOperatorBasisQCDQED class is a derived of
+   * ConvolutionMap specialised for the DGLAP QCDxQED evolution of
+   * operators.
+   */
+  class EvolutionOperatorBasisQCDQED: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The EvolutionOperatorBasisQCDQED constructor
+     * @param nd: number of active down-type quarks below threshold
+     * @param nu: number of active up-type quarks below threshold
+     * @param nl: number of active leptons below threshold
+     */
+    EvolutionOperatorBasisQCDQED(int const& nd, int const& nu, int const& nl);
+  };
+
+  /**
+   * @brief The EvolveDistributionsBasisQCDQED class is a derived of
+   * ConvolutionMap specialised to match a set of evolution operators
+   * to a set a initial-scale distributions for QCDxQED evolution.
+   */
+  class EvolveDistributionsBasisQCDQED: public ConvolutionMap
+  {
+  public:
+    /**
+     * @brief The EvolveDistributionsBasisQCDQED constructor
+     */
+    EvolveDistributionsBasisQCDQED();
+  };
   ///@}
 }

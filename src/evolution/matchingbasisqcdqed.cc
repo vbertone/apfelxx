@@ -5,6 +5,7 @@
 //
 
 #include "apfel/matchingbasisqcdqed.h"
+#include "apfel/evolutionbasisqcdqed.h"
 
 namespace apfel
 {
@@ -67,5 +68,32 @@ namespace apfel
     // Light-quarks minus-type distributions
     for (int i : LightQuarksMinus)
       _rules[i].push_back({KNSq, i, 1});
+  }
+
+  //_________________________________________________________________________________
+  MatchingOperatorBasisQCDQED::MatchingOperatorBasisQCDQED(int const& nd, int const& nu, int const& nl, PartonSpecies const& species):
+    ConvolutionMap{"MatchingOperatorBasisQCDQED_nd" + std::to_string(nd) + "_nu" + std::to_string(nu) + "_nl" + std::to_string(nl) + "_species"  + std::to_string(species)}
+  {
+    // Allocate MatchingBasisQCD object to retrieve the splitting
+    // matrix rules.
+    const MatchingBasisQCDQED mb{nd, nu, nl, species};
+
+    // Get matrix of coefficients
+    const matrix<std::vector<double>> rc = mb.GetRuleMatrix();
+
+    // Get matrix of operator indices
+    const matrix<std::vector<int>> ri = mb.GetRuleIndices();
+
+    // Now construct set of rules
+    for (int i = 0; i < 20; i++)
+      for (int j = 0; j < 20; j++)
+        for (int k = 0; k < 20; k++)
+          {
+            if (rc(i, k).empty() || GkjQCDQED.count({k, j}) == 0)
+              continue;
+
+            for (int l = 0; l < (int) rc(i, k).size(); l++)
+              _rules[GkjQCDQED.at({i, j})].push_back({ri(i, k)[l], GkjQCDQED.at({k, j}), rc(i, k)[l]});
+          }
   }
 }

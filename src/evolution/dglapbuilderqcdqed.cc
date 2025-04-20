@@ -161,6 +161,14 @@ namespace apfel
           obj.Species = PartonSpecies::CHARGEDLEPTON;
         if (OpEvol)
           {
+            std::map<int, Operator> MapUnity;
+            for (auto const& coord : GkjQCDQED)
+              MapUnity.insert({coord.second, (coord.first.first == coord.first.second ? Id : Zero)});
+            obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCDQED{nd, nu, nl}, MapUnity};
+            obj.SplittingFunctions.insert({{ 1, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap10.at(nt)}});
+            obj.SplittingFunctions.insert({{ 0, 1}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap01.at(nt)}});
+
+            obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
           }
         else
           {
@@ -318,15 +326,41 @@ namespace apfel
                                                                          nullptr, InPDFs, MuRef, Thresholds, nsteps
                                                                         });
   }
-  /*
-      //_____________________________________________________________________________
-      std::unique_ptr<Dglap<Operator>> BuildDglap(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
-                                                  double                               const& MuRef,
-                                                  int                                  const& PerturbativeOrder,
-                                                  std::function<double(double const&)> const& Alphas,
-                                                  std::function<double(double const&)> const& Alphaem,
-                                                  int                                  const& nsteps)
+
+  //_____________________________________________________________________________
+  std::unique_ptr<Dglap<Operator>> BuildDglap(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
+                                              double                               const& MuRef,
+                                              int                                  const& PerturbativeOrder,
+                                              std::function<double(double const&)> const& Alphas,
+                                              std::function<double(double const&)> const& Alphaem,
+                                              int                                  const& nsteps)
+  {
+    // Collect thresholds and coupling above and below them
+    std::vector<double> Thresholds;
+    std::map<int, std::pair<double, double>> AlphasTh;
+    std::map<int, std::pair<double, double>> AlphaemTh;
+    for (auto const& obj : DglapObj)
       {
+        const int    nt  = obj.first;
+        const double thr = obj.second.Threshold;
+        if ((int) Thresholds.size() < nt)
+          Thresholds.resize(nt);
+        if (nt > 0)
+          Thresholds[nt-1] = thr;
+        AlphasTh.insert({nt, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
+        AlphaemTh.insert({nt, std::make_pair(Alphaem(thr * ( 1 - eps8 )), Alphaem(thr * ( 1 + eps8 )))});
       }
-    */
+
+    // Initialize DGLAP evolution. When computing evolution operators,
+    // no inhomogeneous terms are allowed because their presence would
+    // prevent wrinting the DGLAP evolution equations in terms of the
+    // evolution operators. In other words, evolution operators can be
+    // computed in the homogeneous case only. Set InhomogeneousTerms
+    // to nullptr.
+    // Initialize DGLAP evolution
+    return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctionsQCDQED(DglapObj, PerturbativeOrder, Alphas, Alphaem),
+                                                                 MatchingConditionsQCDQED(DglapObj, PerturbativeOrder, AlphasTh, AlphaemTh),
+                                                                 nullptr, DglapObj.at(NF(MuRef, Thresholds)).UnitySet, MuRef, Thresholds, nsteps
+                                                                });
+  }
 }
