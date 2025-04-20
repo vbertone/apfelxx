@@ -968,4 +968,64 @@ namespace apfel
   {
     return 16 * pow(TR, 2) / 9 + CA * 8. / 3 * TR * log(1 - x);
   }
+
+  //_________________________________________________________________________________
+  AS1qedHgm_L::AS1qedHgm_L():
+    Expression()
+  {
+  }
+  double AS1qedHgm_L::Regular(double const& x) const
+  {
+    return 4 * ( x * x + ( 1 - x ) * ( 1 - x ) );
+  }
+
+  //_________________________________________________________________________________
+  AS1qedgmgmH_L::AS1qedgmgmH_L():
+    Expression()
+  {
+  }
+  double AS1qedgmgmH_L::Local(double const&) const
+  {
+    return - 4. / 3.;
+  }
+
+  //_________________________________________________________________________________
+  AS1qedHH_L::AS1qedHH_L():
+    Expression()
+  {
+  }
+  double AS1qedHH_L::Singular(double const& x) const
+  {
+    return 2 * ( 1 + pow(x, 2) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1qedHH_0::AS1qedHH_0():
+    Expression()
+  {
+  }
+  double AS1qedHH_0::Singular(double const& x) const
+  {
+    return 2 * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
+  }
+
+  //_________________________________________________________________________________
+  AS1qedgmH_L::AS1qedgmH_L():
+    Expression()
+  {
+  }
+  double AS1qedgmH_L::Regular(double const& x) const
+  {
+    return 2 * ( 1 + pow(1 - x, 2) ) / x;
+  }
+
+  //_________________________________________________________________________________
+  AS1qedgmH_0::AS1qedgmH_0():
+    Expression()
+  {
+  }
+  double AS1qedgmH_0::Regular(double const& x) const
+  {
+    return 2 * ( 1 + pow(1 - x, 2) ) * ( - 1 - 2 * log(x) ) / x;
+  }
 }

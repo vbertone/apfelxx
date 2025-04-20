@@ -12,6 +12,7 @@
 #include "apfel/evolutionbasisqcdqed.h"
 #include "apfel/splittingfunctionsunp_sl.h"
 #include "apfel/splittingfunctionsunp_sl_qed.h"
+#include "apfel/matchingconditions_sl.h"
 
 namespace apfel
 {
@@ -57,6 +58,27 @@ namespace apfel
       if (v <= 0)
         nti++;
 
+    // Determine parton species give the number of active partons
+    std::map<int, PartonSpecies> Species;
+    for (int nt = nti; nt <= ntf; nt++)
+      if (NDUL[nt][0] - NDUL[std::min(nt + 1, ntf)][0] != 0)
+        Species.insert({nt, PartonSpecies::DOWNTYPEQUARK});
+      else if (NDUL[nt][1] - NDUL[std::min(nt + 1, ntf)][1] != 0)
+        Species.insert({nt, PartonSpecies::UPTYPEQUARK});
+      else if (NDUL[nt][2] - NDUL[std::min(nt + 1, ntf)][2] != 0)
+        Species.insert({nt, PartonSpecies::CHARGEDLEPTON});
+      else
+        Species.insert({nt, PartonSpecies::UNKNOWN});
+
+    // Compute logs of muth2 / m2 needed for the matching
+    // conditions. Push a zero at last to extend the vector but that
+    // entry will never be effectively used in the evolution. Set to
+    // zero for now.
+    std::vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      LogKth.push_back(0);
+    LogKth.push_back(0);
+
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -90,7 +112,7 @@ namespace apfel
     const Operator O10qg{g, P0qg{1}, IntEps};
     for (int nt = nti; nt <= ntf; nt++)
       {
-        // Determine numer of active quarks
+        // Determine number of active quarks
         const int nf = NDUL[nt][0] + NDUL[nt][1];
         const Operator O10gg{g, P0gg{nf}, IntEps};
         std::map<int, Operator> OM;
@@ -112,13 +134,13 @@ namespace apfel
     // ===============================================================
     // O(a) splitting function operators
     std::map<int, std::map<int, Operator>> OpMap01;
-    const Operator O01ns{g, P0qedns{},   IntEps};
-    const Operator O01gq{g, P0qedgmq{},  IntEps};
-    const Operator O01qg{g, P0qedqgm{},  IntEps};
-    const Operator O01gg{g, P0qedgmgm{}, IntEps};
+    const Operator O01ns  {g, P01qedns{},   IntEps};
+    const Operator O01gmq {g, P01qedgmq{},  IntEps};
+    const Operator O01qgm {g, P01qedqgm{},  IntEps};
+    const Operator O01gmgm{g, P01qedgmgm{}, IntEps};
     for (int nt = nti; nt <= ntf; nt++)
       {
-        // Determine numer of active quarks and leptons
+        // Determine number of active quarks and leptons
         const int nf = NDUL[nt][0] + NDUL[nt][1];
         const int nl = NDUL[nt][2];
         std::map<int, Operator> OM;
@@ -128,17 +150,198 @@ namespace apfel
         OM.insert({EvolutionBasisQCDQED::PMDD, ed2 * O01ns});
         OM.insert({EvolutionBasisQCDQED::PMUU, eu2 * O01ns});
         OM.insert({EvolutionBasisQCDQED::PMLL,       O01ns});
-        OM.insert({EvolutionBasisQCDQED::PDgm, ( NC * ed2 ) * O01qg});
-        OM.insert({EvolutionBasisQCDQED::PUgm, ( NC * eu2 ) * O01qg});
-        OM.insert({EvolutionBasisQCDQED::PLgm,                O01qg});
-        OM.insert({EvolutionBasisQCDQED::PgmD, ed2 * O01gq});
-        OM.insert({EvolutionBasisQCDQED::PgmU, eu2 * O01gq});
-        OM.insert({EvolutionBasisQCDQED::PgmL,       O01gq});
-        OM.insert({EvolutionBasisQCDQED::Pgmgm, ( NC * SumCh2[nf] + nl ) * O01gg});
+        OM.insert({EvolutionBasisQCDQED::PDgm, ( NC * ed2 ) * O01qgm});
+        OM.insert({EvolutionBasisQCDQED::PUgm, ( NC * eu2 ) * O01qgm});
+        OM.insert({EvolutionBasisQCDQED::PLgm,                O01qgm});
+        OM.insert({EvolutionBasisQCDQED::PgmD, ed2 * O01gmq});
+        OM.insert({EvolutionBasisQCDQED::PgmU, eu2 * O01gmq});
+        OM.insert({EvolutionBasisQCDQED::PgmL,       O01gmq});
+        OM.insert({EvolutionBasisQCDQED::Pgmgm, ( NC * SumCh2[nf] + nl ) * O01gmgm});
         // Insert Zero in the remaining slots
         for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
           OM.insert({i, Zero});
         OpMap01.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as) matching conditions
+    std::map<int, std::map<int, Operator>> Match10;
+    const Operator AS1HgL {g, AS1Hg_L{},  IntEps};
+    const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
+    const Operator AS1gH0 {g, AS1gH_0{},  IntEps};
+    const Operator AS1gHL {g, AS1gH_L{},  IntEps};
+    const Operator AS1HH0 {g, AS1HH_0{},  IntEps};
+    const Operator AS1HHL {g, AS1HH_L{},  IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const Operator AS1Hg  =          LogKth[nt] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nt] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nt] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nt] * AS1HHL;
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCDQED::ONE,    Zero});
+        OM.insert({MatchingBasisQCDQED::KXgm,   Zero});
+        OM.insert({MatchingBasisQCDQED::KQqp,   Zero});
+        OM.insert({MatchingBasisQCDQED::Kqg,    Zero});
+        OM.insert({MatchingBasisQCDQED::KNSq,   Zero});
+        OM.insert({MatchingBasisQCDQED::Kqqp,   Zero});
+        OM.insert({MatchingBasisQCDQED::Kgq,    Zero});
+        OM.insert({MatchingBasisQCDQED::KXgmgm, Zero});
+        OM.insert({MatchingBasisQCDQED::KgmX,   Zero});
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::KQg, AS1Hg});
+            OM.insert({MatchingBasisQCDQED::KXX, AS1HH});
+            OM.insert({MatchingBasisQCDQED::Kgg, AS1ggH});
+            OM.insert({MatchingBasisQCDQED::KgQ, AS1gH});
+          }
+        else
+          {
+            OM.insert({MatchingBasisQCDQED::KQg, Zero});
+            OM.insert({MatchingBasisQCDQED::KXX, Zero});
+            OM.insert({MatchingBasisQCDQED::Kgg, Zero});
+            OM.insert({MatchingBasisQCDQED::KgQ, Zero});
+          }
+        Match10.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(a) matching conditions
+    std::map<int, std::map<int, Operator>> Match01;
+    const Operator AS1qedHgmL  {g, AS1qedHgm_L{},   IntEps};
+    const Operator AS1qedgmgmHL{g, AS1qedgmgmH_L{}, IntEps};
+    const Operator AS1qedgmH0  {g, AS1qedgmH_0{},   IntEps};
+    const Operator AS1qedgmHL  {g, AS1qedgmH_L{},   IntEps};
+    const Operator AS1qedHH0   {g, AS1qedHH_0{},    IntEps};
+    const Operator AS1qedHHL   {g, AS1qedHH_L{},    IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const Operator AS1qedHgm   =              LogKth[nt] * AS1qedHgmL;
+        const Operator AS1qedgmgmH =              LogKth[nt] * AS1qedgmgmHL;
+        const Operator AS1qedgmH   = AS1qedgmH0 + LogKth[nt] * AS1qedgmHL;
+        const Operator AS1qedHH    = AS1qedHH0  + LogKth[nt] * AS1qedHHL;
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCDQED::ONE,  Zero});
+        OM.insert({MatchingBasisQCDQED::KQg,  Zero});
+        OM.insert({MatchingBasisQCDQED::KQqp, Zero});
+        OM.insert({MatchingBasisQCDQED::Kqg,  Zero});
+        OM.insert({MatchingBasisQCDQED::KNSq, Zero});
+        OM.insert({MatchingBasisQCDQED::Kqqp, Zero});
+        OM.insert({MatchingBasisQCDQED::Kgq,  Zero});
+        OM.insert({MatchingBasisQCDQED::Kgg,  Zero});
+        OM.insert({MatchingBasisQCDQED::KgQ,  Zero});
+        if (Species.at(nt) == PartonSpecies::CHARGEDLEPTON)
+          {
+            OM.insert({MatchingBasisQCDQED::KXgm,   AS1qedHgm});
+            OM.insert({MatchingBasisQCDQED::KXX,    AS1qedHH});
+            OM.insert({MatchingBasisQCDQED::KXgmgm, AS1qedgmgmH});
+            OM.insert({MatchingBasisQCDQED::KgmX,   AS1qedgmH});
+          }
+        else
+          {
+            OM.insert({MatchingBasisQCDQED::KXgm,   Zero});
+            OM.insert({MatchingBasisQCDQED::KXX,    Zero});
+            OM.insert({MatchingBasisQCDQED::KXgmgm, Zero});
+            OM.insert({MatchingBasisQCDQED::KgmX,   Zero});
+          }
+        Match01.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^2) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap20;
+    const Operator O20qg{g, P1qg{1}, IntEps};
+    const Operator O20ps{g, P1ps{1}, IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nf = NDUL[nt][0] + NDUL[nt][1];
+        const Operator O20nsp{g, P1nsp{nf}, IntEps};
+        const Operator O20nsm{g, P1nsm{nf}, IntEps};
+        const Operator O20gq {g, P1gq{nf},  IntEps};
+        const Operator O20gg {g, P1gg{nf},  IntEps};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD,  O20nsp});
+        OM.insert({EvolutionBasisQCDQED::PPUU,  O20nsp});
+        OM.insert({EvolutionBasisQCDQED::PMDD,  O20nsm});
+        OM.insert({EvolutionBasisQCDQED::PMUU,  O20nsm});
+        OM.insert({EvolutionBasisQCDQED::PPSDD, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PPSDU, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUD, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUU, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PDg,   O20qg});
+        OM.insert({EvolutionBasisQCDQED::PUg,   O20qg});
+        OM.insert({EvolutionBasisQCDQED::PgD,   O20gq});
+        OM.insert({EvolutionBasisQCDQED::PgU,   O20gq});
+        OM.insert({EvolutionBasisQCDQED::Pgg,   O20gg});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as*a) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap11;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        std::map<int, Operator> OM;
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap11.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(a^2) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap02;
+    const Operator O02qgm {g, P02qedqgm{},  IntEps};
+    const Operator O02ps  {g, P02qedps{},   IntEps};
+    const Operator O02gmgm{g, P02qedgmgm{}, IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks and leptons
+        const int nf = NDUL[nt][0] + NDUL[nt][1];
+        const int nl = NDUL[nt][2];
+        const double eSigma2 = ( NC * SumCh2[nf] + nl );
+        const double ed4     = ed2 * ed2;
+        const double eu4     = eu2 * eu2;
+        const Operator O02nspD{g, P02qednsm{eSigma2 / ed2}, IntEps};
+        const Operator O02nsmD{g, P02qednsm{eSigma2 / ed2}, IntEps};
+        const Operator O02gmqD{g, P02qedgmq{eSigma2 / ed2}, IntEps};
+        const Operator O02nspU{g, P02qednsm{eSigma2 / eu2}, IntEps};
+        const Operator O02nsmU{g, P02qednsm{eSigma2 / eu2}, IntEps};
+        const Operator O02gmqU{g, P02qedgmq{eSigma2 / eu2}, IntEps};
+        const Operator O02nspL{g, P02qednsm{eSigma2},       IntEps};
+        const Operator O02nsmL{g, P02qednsm{eSigma2},       IntEps};
+        const Operator O02gmqL{g, P02qedgmq{eSigma2},       IntEps};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD, ed4 * O02nspD});
+        OM.insert({EvolutionBasisQCDQED::PPUU, eu4 * O02nspU});
+        OM.insert({EvolutionBasisQCDQED::PPLL,       O02nspL});
+        OM.insert({EvolutionBasisQCDQED::PMDD, ed4 * O02nsmD});
+        OM.insert({EvolutionBasisQCDQED::PMUU, eu4 * O02nsmU});
+        OM.insert({EvolutionBasisQCDQED::PMLL,       O02nsmL});
+        OM.insert({EvolutionBasisQCDQED::PPSDD, ( NC * ed2 * ed2 ) * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSDU, ( NC * ed2 * eu2 ) * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSDL,   NC * ed2         * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUD, ( NC * eu2 * ed2 ) * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUU, ( NC * eu2 * eu2 ) * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUL,   NC * eu2         * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSLD,              ed2   * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSLU,              eu2   * O02ps});
+        OM.insert({EvolutionBasisQCDQED::PPSLL,                      O02ps});
+        OM.insert({EvolutionBasisQCDQED::PDgm, ( NC * ed4 ) * O02qgm});
+        OM.insert({EvolutionBasisQCDQED::PUgm, ( NC * eu4 ) * O02qgm});
+        OM.insert({EvolutionBasisQCDQED::PLgm,                O02qgm});
+        OM.insert({EvolutionBasisQCDQED::PgmD, ed4 * O02gmqU});
+        OM.insert({EvolutionBasisQCDQED::PgmU, eu4 * O02gmqD});
+        OM.insert({EvolutionBasisQCDQED::PgmL,       O02gmqL});
+        OM.insert({EvolutionBasisQCDQED::Pgmgm, ( NC * SumCh4[nf] + nl ) * O02gmgm});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap02.insert({nt, OM});
       }
 
     // Define object of the structure containing the DglapObjects
@@ -153,12 +356,7 @@ namespace apfel
         const int nu = NDUL[nt][1];
         const int nl = NDUL[nt][2];
         obj.Threshold = (nt > 0 ? Thresholds[nt - 1] : 0);
-        if (nd - NDUL[std::min(nt + 1, ntf)][0] != 0)
-          obj.Species = PartonSpecies::DOWNTYPEQUARK;
-        else if (nu - NDUL[std::min(nt + 1, ntf)][1] != 0)
-          obj.Species = PartonSpecies::UPTYPEQUARK;
-        else if (nl - NDUL[std::min(nt + 1, ntf)][2] != 0)
-          obj.Species = PartonSpecies::CHARGEDLEPTON;
+        obj.Species = Species.at(nt);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -167,15 +365,23 @@ namespace apfel
             obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCDQED{nd, nu, nl}, MapUnity};
             obj.SplittingFunctions.insert({{ 1, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap10.at(nt)}});
             obj.SplittingFunctions.insert({{ 0, 1}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap01.at(nt)}});
-
+            obj.SplittingFunctions.insert({{ 2, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap20.at(nt)}});
+            obj.SplittingFunctions.insert({{ 1, 1}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap11.at(nt)}});
+            obj.SplittingFunctions.insert({{ 0, 2}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap02.at(nt)}});
             obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
+            obj.MatchingConditions.insert({{ 1, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match10.at(nt)}});
+            obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match01.at(nt)}});
           }
         else
           {
             obj.SplittingFunctions.insert({{ 1, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap10.at(nt)}});
             obj.SplittingFunctions.insert({{ 0, 1}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap01.at(nt)}});
-
+            obj.SplittingFunctions.insert({{ 2, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap20.at(nt)}});
+            obj.SplittingFunctions.insert({{ 1, 1}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap11.at(nt)}});
+            obj.SplittingFunctions.insert({{ 0, 2}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap02.at(nt)}});
             obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
+            obj.MatchingConditions.insert({{ 1, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match10.at(nt)}});
+            obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match01.at(nt)}});
           }
         DglapObj.insert({nt, obj});
       }

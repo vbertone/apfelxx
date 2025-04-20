@@ -20,13 +20,19 @@ int main()
   const std::vector<double> LeptonThresholds = {0, 0, 1.777};
 
   // Perturbative order
-  const int PerturbativeOrder = 0;
+  const int PerturbativeOrder = 1;
 
-  // Running strong coupling
-  apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
-  const apfel::TabulateObject<apfel::matrix<double>> Couplings{a, 100, 0.9, 1001, 3};
-  const auto as  = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(0, 0); };
-  const auto aem = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
+  // Running strong and electromagnetic couplings
+  //apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
+  //const apfel::TabulateObject<apfel::matrix<double>> Couplings{a, 100, 0.9, 1001, 3};
+  //const auto as  = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(0, 0); };
+  //const auto aem = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
+  apfel::AlphaQCD a0{0.35, sqrt(2), QuarkThresholds, PerturbativeOrder};
+  apfel::AlphaQED a1{7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
+  const apfel::TabulateObject<double> Alphas{a0, 100, 0.9, 1001, 3};
+  const apfel::TabulateObject<double> Alpha{a1, 100, 0.9, 1001, 3};
+  const auto as  = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
+  const auto aem = [&] (double const& mu) -> double{ return Alpha.Evaluate(mu); };
 
   // Initialize QCD evolution objects
   const auto DglapObj   = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds);
@@ -82,8 +88,8 @@ int main()
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
   std::cout << std::scientific;
 
-  std::cout << "\nAlphaQCD(Q) = " << Couplings.Evaluate(mu)(0, 0) << std::endl;
-  std::cout << "AlphaQED(Q) = " << Couplings.Evaluate(mu)(1, 0) << std::endl;
+  std::cout << "\nAlphaQCD(Q) = " << as(mu) << std::endl;
+  std::cout << "AlphaQED(Q) = " << aem(mu) << std::endl;
   std::cout << "\n   x    "
             << "   u-ubar   "
             << "   d-dbar   "

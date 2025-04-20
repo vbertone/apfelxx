@@ -754,5 +754,75 @@ namespace apfel
     double Local(double const& x)    const;
   };
   ///@}
+
+  /**
+   * @defgroup NLOMCQED NLO unpolarised matching conditions for QCDxQED
+   * @ingroup MatchCond
+   */
+  ///@{
+  /**
+   * @brief O(&alpha;) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS1qedHgm_L: public Expression
+  {
+  public:
+    AS1qedHgm_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>).
+   */
+  class AS1qedgmgmH_L: public Expression
+  {
+  public:
+    AS1qedgmgmH_L();
+    double Local(double const&) const;
+  };
+
+  /**
+   * @brief O(&alpha;) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the HH matching.
+   */
+  class AS1qedHH_L: public Expression
+  {
+  public:
+    AS1qedHH_L();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;) constant term for the HH matching.
+   */
+  class AS1qedHH_0: public Expression
+  {
+  public:
+    AS1qedHH_0();
+    double Singular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;) term propotional to
+   * ln(&mu;<SUP>2</SUP>/m<SUP>2</SUP>) for the gmH matching.
+   */
+  class AS1qedgmH_L: public Expression
+  {
+  public:
+    AS1qedgmH_L();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;) constant term for the gmH matching.
+   */
+  class AS1qedgmH_0: public Expression
+  {
+  public:
+    AS1qedgmH_0();
+    double Regular(double const& x) const;
+  };
+  ///@}
   ///@}
 }

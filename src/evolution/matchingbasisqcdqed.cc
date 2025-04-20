@@ -13,6 +13,10 @@ namespace apfel
   MatchingBasisQCDQED::MatchingBasisQCDQED(int const& nd, int const& nu, int const& nl, PartonSpecies const& species):
     ConvolutionMap{"MatchingBasisQCDQED_nd" + std::to_string(nd) + "_nu" + std::to_string(nu) + "_nl" + std::to_string(nl) + "_species"  + std::to_string(species)}
   {
+    // Leading-order matching
+    for (int i = Object::TAUP; i <= Object::TAUM; i++)
+      _rules[i] = {{ONE, i, 1}};
+
     // Helper vectors
     std::vector<int> LightQuarksPlus(nd + nu);
     std::vector<int> LightQuarksMinus(nd + nu);
@@ -28,17 +32,15 @@ namespace apfel
       }
 
     // Heavy-parton plus-type index
-    int ih;
+    int ih = -1;
     if (species == PartonSpecies::DOWNTYPEQUARK)
       ih = 8 - nd;
     else if (species == PartonSpecies::UPTYPEQUARK)
       ih = 5 - nu;
-    else // Assume it to be a lepton
+    else if (species == PartonSpecies::CHARGEDLEPTON)
       ih = 2 - nl;
-
-    // Leading-order matching
-    for (int i = Object::TAUP; i <= Object::TAUM; i++)
-      _rules[i] = {{ONE, i, 1}};
+    else
+      return;
 
     // Heavy parton up-type
     _rules[ih].push_back({KQg, GLUON, 1});
