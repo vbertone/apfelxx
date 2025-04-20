@@ -11,7 +11,8 @@ var searchData=
   ['gk_5fx_8',['gk_x',['../group__MathConstants.html#ga300e96aa973287a4d619e9ba11a5c748',1,'apfel']]],
   ['gkj_9',['Gkj',['../namespaceapfel.html#ad6198ef2377e81a2fd6a5cbe081bffbf',1,'apfel']]],
   ['gkjphys_10',['GkjPhys',['../namespaceapfel.html#aa75e035108a5da8b6da293ac8b4abc22',1,'apfel']]],
-  ['gl_5fw_11',['gl_w',['../group__MathConstants.html#ga3414b3a6e04cc6d62fd95cc0a9827a12',1,'apfel']]],
-  ['gl_5fx_12',['gl_x',['../group__MathConstants.html#gaf52e7668f1b685bc605e97dea8d1d337',1,'apfel']]],
-  ['gridparameters_13',['GridParameters',['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup']]]
+  ['gkjqcdqed_11',['GkjQCDQED',['../namespaceapfel.html#a2e65a2e25144cb1f4eaff89d8ef6fbb9',1,'apfel']]],
+  ['gl_5fw_12',['gl_w',['../group__MathConstants.html#ga3414b3a6e04cc6d62fd95cc0a9827a12',1,'apfel']]],
+  ['gl_5fx_13',['gl_x',['../group__MathConstants.html#gaf52e7668f1b685bc605e97dea8d1d337',1,'apfel']]],
+  ['gridparameters_14',['GridParameters',['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup']]]
 ];

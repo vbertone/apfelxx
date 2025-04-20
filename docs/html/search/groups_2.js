@@ -11,6 +11,7 @@ var searchData=
   ['constants_8',['constants',['../group__MathConstants.html',1,'Mathematical constants'],['../group__NumericalConstants.html',1,'Numerical constants'],['../group__PhysConstants.html',1,'Physical constants']]],
   ['convolution_20maps_9',['Convolution maps',['../group__ConvMap.html',1,'']]],
   ['convolution_20maps_10',['convolution maps',['../group__DiagonalBasis.html',1,'Diagonal convolution maps'],['../group__DISBases.html',1,'DIS convolution maps'],['../group__EvolBases.html',1,'Evolution convolution maps'],['../group__MatchBases.html',1,'Matching convolution maps'],['../group__PhysBases.html',1,'Physical convolution maps']]],
-  ['convolution_20maps_20in_20the_20plus_20minus_20basis_11',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
-  ['current_20coefficient_20functions_12',['current coefficient functions',['../group__CCMassive.html',1,'Massive charged-current coefficient functions'],['../group__NCMassive.html',1,'Massive neutral-current coefficient functions'],['../group__NCMassiveZero.html',1,'Massless limit of the massive neutral current coefficient functions']]]
+  ['convolution_20maps_20for_20qcdxqed_11',['convolution maps for QCDxQED',['../group__EvolBasesQCDQED.html',1,'Evolution convolution maps for QCDxQED'],['../group__MatchBasesQCDQED.html',1,'Matching convolution maps for QCDxQED']]],
+  ['convolution_20maps_20in_20the_20plus_20minus_20basis_12',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],
+  ['current_20coefficient_20functions_13',['current coefficient functions',['../group__CCMassive.html',1,'Massive charged-current coefficient functions'],['../group__NCMassive.html',1,'Massive neutral-current coefficient functions'],['../group__NCMassiveZero.html',1,'Massless limit of the massive neutral current coefficient functions']]]
 ];

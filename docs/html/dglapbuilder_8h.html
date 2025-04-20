@@ -100,14 +100,13 @@ $(function(){ initResizable(false); });
 <div class="textblock"><code>#include &quot;<a class="el" href="grid_8h_source.html">apfel/grid.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dglap_8h_source.html">apfel/dglap.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dglapnonlinear_8h_source.html">apfel/dglapnonlinear.h</a>&quot;</code><br />
-<code>#include &lt;memory&gt;</code><br />
 </div>
 <p><a href="dglapbuilder_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structapfel_1_1DglapObjects.html">apfel::DglapObjects</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure that contains all the precomputed quantities needed to perform the DGLAP evolution, i.e. perturbative coefficients of splitting functions and matching conditions, and the heavy quark thresholds.  <a href="structapfel_1_1DglapObjects.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure that contains all the precomputed quantities needed to perform the DGLAP evolution, i.e. perturbative coefficients of splitting functions and matching conditions, and the quark thresholds.  <a href="structapfel_1_1DglapObjects.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -118,8 +117,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">DGLAP object initializers</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a> structure for the different kinds of evolution currently available. </p>
+<tr><td colspan="2"><div class="groupHeader">DGLAP object initializers in QCD</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a> structure for the different kinds of QCD evolution currently available. </p>
 </div></td></tr>
 <tr class="memitem:a20e851534193f68736dfb5364fcb317b" id="r_a20e851534193f68736dfb5364fcb317b"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a20e851534193f68736dfb5364fcb317b">apfel::InitializeDglapObjectsQCD</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Masses, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5, bool const &amp;n3lo=false, std::vector&lt; int &gt; const &amp;IMod={0, 0, 0, 0, 0, 0, 0})</td></tr>
 <tr class="memdesc:a20e851534193f68736dfb5364fcb317b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeDglapObjectsQCD function precomputes the perturbative coefficients of space-like unpolarised splitting functions and matching conditions and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure.  <br /></td></tr>
@@ -169,8 +168,8 @@ Functions</h2></td></tr>
 <tr class="memitem:ab320e71a75e56b13eeaf493c3caed0d4" id="r_ab320e71a75e56b13eeaf493c3caed0d4"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#ab320e71a75e56b13eeaf493c3caed0d4">apfel::InitializeDglapObjectsQCDTtrans</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;g, std::vector&lt; double &gt; const &amp;Thresholds, bool const &amp;OpEvol=false, double const &amp;IntEps=1e-5)</td></tr>
 <tr class="memdesc:ab320e71a75e56b13eeaf493c3caed0d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The InitializeDglapObjectsQCDtrans function precomputes the perturbative coefficients of time-like transverity splitting functions and matching conditions and store them into a '<a class="el" href="structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,...">DglapObjects</a>' structure.  <br /></td></tr>
 <tr class="separator:ab320e71a75e56b13eeaf493c3caed0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">DGLAP builders</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Collection of functions that build a <a class="el" href="classapfel_1_1Dglap.html" title="The Dglap class is specialization class of the MatchedEvolution class for the computation of the DGLA...">Dglap</a> object used to perform the DGLAP evolution of distributions or operators. </p>
+<tr><td colspan="2"><div class="groupHeader">DGLAP builders in QCD</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Collection of functions that build a <a class="el" href="classapfel_1_1Dglap.html" title="The Dglap class is specialization class of the MatchedEvolution class for the computation of the DGLA...">Dglap</a> object used to perform the DGLAP evolution of distributions or operators in QCD. </p>
 </div></td></tr>
 <tr class="memitem:a8e9a1131dff03b049575a3d355559441" id="r_a8e9a1131dff03b049575a3d355559441"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classapfel_1_1Dglap.html">Dglap</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapfel.html#a8e9a1131dff03b049575a3d355559441">apfel::BuildDglap</a> (std::map&lt; int, <a class="el" href="structapfel_1_1DglapObjects.html">DglapObjects</a> &gt; const &amp;DglapObj, std::function&lt; std::map&lt; int, double &gt;(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;MuRef, int const &amp;PerturbativeOrder, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, double const &amp;xi=1, int const &amp;nsteps=10)</td></tr>
 <tr class="memdesc:a8e9a1131dff03b049575a3d355559441"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BuildDglap function builds the actual dglap object that performs the DGLAP evolution for distributions.  <br /></td></tr>
@@ -188,7 +187,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 12 2025 20:56:40 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sun Apr 20 2025 13:05:15 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

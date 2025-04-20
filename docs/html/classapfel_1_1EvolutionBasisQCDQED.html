@@ -95,11 +95,11 @@ $(function(){ initResizable(false); });
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classapfel_1_1EvolutionBasisQCDQED-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">apfel::EvolutionBasisQCDQED Class Reference<div class="ingroups"><a class="el" href="group__ConvMap.html">Convolution maps</a> &raquo; <a class="el" href="group__EvolBases.html">Evolution convolution maps</a></div></div></div>
+  <div class="headertitle"><div class="title">apfel::EvolutionBasisQCDQED Class Reference<div class="ingroups"><a class="el" href="group__ConvMap.html">Convolution maps</a> &raquo; <a class="el" href="group__EvolBasesQCDQED.html">Evolution convolution maps for QCDxQED</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> class is a derived of <a class="el" href="classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ...">ConvolutionMap</a> specialised for the DGLAP evolution of distributions using the mixed QCDxQED evolution basis.  
+<p>The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> class is a derived of <a class="el" href="classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ...">ConvolutionMap</a> specialised for the DGLAP evolution of distributions using the physical basis.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="evolutionbasisqcdqed_8h_source.html">evolutionbasisqcdqed.h</a>&gt;</code></p>
@@ -116,71 +116,81 @@ Inheritance diagram for apfel::EvolutionBasisQCDQED:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ab0bdf24b8e628a1c7f5100cc528b8d9a" id="r_ab0bdf24b8e628a1c7f5100cc528b8d9a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9a">Operand</a> : int { <br />
-&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa3aaf0675084d1521c4b9e71f63266b28">PNSP</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa3b46f6791135ec90653536afb0579965">PNSM</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa9e1a264c49e00867aa3740f8b1ebbfb6">PNSV</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aaaabc7eb62edd0ff9aa728fb031569d98">PGG</a>
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa641ecc9bc9493b1d53064aa3a11e37fc">PPDD</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa57fdc1ac9fb882c1d2c46891f740fcd4">PPUU</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa3e062efe9e5831876f991a42d4ca6191">PPLL</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aaac7f8fcb7cf8f73fe180730e396b0454">PMDD</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aacf6b2751370011fec037bafe08ec02dc">PGQ</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aacefbfc99bde5fa350fd94af08644717e">PQG</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aad8943c856b53b4247b1f05647ef14cc2">PQQ</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa7875606de571626cf5523c3e2c0cb685">PNSPQED</a>
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa7d292946e5aee959623cb5f2cfe029d0">PMUU</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa980a1604720dca963cdbca3a7ea0402b">PMLL</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa6c2143814a4a9782167d630886069c71">PPSDD</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa49ddce7242bde7da254923bcb410c39c">PPSDU</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aafa6aa95c3cc2bb150421f100359b7506">PNSMQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa41d88ec867c820fbd211a763c05d56ab">PGGQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aac46e42e2cff52669b0734c353da8cedc">PGGMQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa3a878b099a3deb220f9081f00b73f7d4">PGQQED</a>
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aab98d0f54df57a6766b4bc0642843d677">PPSDL</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aaddad3f76c55c2c432b91594b635345bd">PPSUD</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa8d6a5c1b06de37f7b27461d4620b764f">PPSUU</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa527ffe31f29bdf430f3e93d93284ad96">PPSUL</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aaa7780fda468ad6531b168c79676a8d23">PGMGQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa2e9cfc6ca014c684503036d0c6bd6908">PGMGMQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aae823c84fb10af20a7c48290eed72dd07">PGMQQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa70f2ce048162ea1f0b9882876329e651">PQGQED</a>
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa1bf2f662aaf2b45d39fe24cc148660ac">PPSLD</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa37615f3376b83adee2287f1cb502b3f6">PPSLU</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa41df1effc4e9a959d52607c3dcf5dcb1">PPSLL</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa88d20926cfedf38902b7797d6777e2a3">PPV</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa028cab53633035cdd7a4d3ed31365efb">PQGMQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aabfb5762328f92cefb007ff360bdaa22d">PQQQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa1f2a748b61f7a9ebe66b1f7c00894a33">PGMLQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aab354ab07c1d50d9394d6bda608f382aa">PQLQED</a>
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa14ad783690b21c583f4d7775defc4f6f">PDg</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa5f269947633227a5f4ab5bc2e156a4b0">PUg</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aad1ece8a8d09e5d1f7e8321c0f242b7af">PDgm</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aad974675fbe5e1ad9c35eac2775ca4f01">PUgm</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aaef2bf00c61d25d78ad29e2ddf61c4dc2">PLGMQED</a>
-, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa5d6c790b5948792de995049a1e26befd">PLLQED</a>
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa10c72a59a7df3f06efd21116b516a143">PLgm</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aaf2ef9759db24655abec384308c4da703">PgD</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa27e1ed388a49a948eb9b0b6d1fbf3497">PgU</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa27e5d68b6954dd34ef0242bfbe147cab">PgmD</a>
+, <br />
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa129fd6cfa67409cc5f64f88a7ae0c4f8">PgmU</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa9b6a8b9e446b4f5e6d7d2ad2be99f8f4">PgmL</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa28b13131fb8b006f6e3b692cded9859b">Pgg</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aa3b9a742592780eb08bd629a88cf09f42">Pggm</a>
+, <br />
+&#160;&#160;<a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aae227c70dd89a0797c5bb0fb59cf9affb">Pgmg</a>
+, <a class="el" href="#ab0bdf24b8e628a1c7f5100cc528b8d9aadf15ffeb2413315e95f213c872fb14cf">Pgmgm</a>
 <br />
  }</td></tr>
 <tr class="memdesc:ab0bdf24b8e628a1c7f5100cc528b8d9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map enumerators for the operands and the distributions.  <a href="#ab0bdf24b8e628a1c7f5100cc528b8d9a">More...</a><br /></td></tr>
 <tr class="separator:ab0bdf24b8e628a1c7f5100cc528b8d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68cba1f6efca2d87f18d1ee0b11f9768" id="r_a68cba1f6efca2d87f18d1ee0b11f9768"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768">Object</a> : int { <br />
-&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a311b65730dd2a14202deba8f7b61dd75">GLUON</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768af4ff0071f1c5e3efa80ad4c4287944c9">GAMMA</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a637a1a9da76563175becb70e2eb3c116">SIGMA</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a5c53cfe5d095ea10c1664e4779e6949a">DSIGMA</a>
+&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a8375a35d8fcbad6bf3d3f9aae8f5714d">TAUP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a8174bb5aa746e6fa0c0e608f9a0810e8">MUP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a93c4dfa059ccc7d72cbd8b4d5d51b2cb">EP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768ac385ec4b975859779c55d0f47afda746">TP</a>
 , <br />
-&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a4c61e649e7dbf9756c5d6c919579ec7a">SIGMAL</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768ab7fea22132c59effe5e5aaefbbee5b8e">VALENCE</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768af469dd6aafd0e5d64c893c838bfb0527">DVALENCE</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aff479b2269b29727c62b521fbbb58d34">VALENCEL</a>
+&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768ab84559cf697217a5e704dc380a2682b7">CP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a1ce93814e01f1408aed92ec7a815acf6">UP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768ab2c059d65b1f96f6167925b64aee2c49">BP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768ab90b1be703d9b7bfe214b0db4ee2736e">SP</a>
 , <br />
-&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a5718d84f047108a5a63a8f551d5b0c01">T1U</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aafe56f5fb9f4237dd3dd824d1d4ff290">V1U</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a2e1a9dd4c73519fc690a227b780227db">T2U</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768afbfc3ad72e3e48416c6d725c9044cf99">V2U</a>
+&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a13cab8b2c3c7ab1da342cb151c2aa659">DP</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a311b65730dd2a14202deba8f7b61dd75">GLUON</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a9f2cc24ad56d7f089fa1b40ac7a65675">PHOTON</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aaaf4e5aa3fb7eb794d726f9e6e45be81">DM</a>
 , <br />
-&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aa9983e563cf5a87ba4aab7e6e8578971">T1D</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aa5660e20d9386481f106935e9cca74f3">V1D</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a80cda3a3e3ebb14f439d70a6fe761931">T2D</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a98e56a68e42923940064f7d870756165">V2D</a>
+&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a411d0c1964fd827e2e1df0ae4ddf3c2e">SM</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a3214fd4bd3f29d39c081abba955fee06">BM</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aebfaa72330192c2ea68765a9f7fdc823">UM</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a05c0d8283badcb78801bcfa7bb5e6545">CM</a>
 , <br />
-&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a285633261e273e676062db5f4c512b8b">T1L</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768ad202f0a0885b58721070df4342077eb4">V1L</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a5b44e883196c0f90f721fe9fc3d11b6d">T2L</a>
-, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aac46a8f6ca561effd6e2b570885f15a2">V2L</a>
+&#160;&#160;<a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a63386b11d4953a3dbd4286c0152f77db">TM</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a9bc9ed49c677d7e206635975e55d08bc">EM</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768aff4927bf7a0a83515a2ec9fc560779d2">MUM</a>
+, <a class="el" href="#a68cba1f6efca2d87f18d1ee0b11f9768a6411b7753e59d583f1450d1810432be5">TAUM</a>
 <br />
  }</td></tr>
 <tr class="separator:a68cba1f6efca2d87f18d1ee0b11f9768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a88bebc11f1e7892a52bc3d5cb32a3ef9" id="r_a88bebc11f1e7892a52bc3d5cb32a3ef9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88bebc11f1e7892a52bc3d5cb32a3ef9">EvolutionBasisQCDQED</a> (int const &amp;nu, int const &amp;nd, int const &amp;nl)</td></tr>
-<tr class="memdesc:a88bebc11f1e7892a52bc3d5cb32a3ef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> constructor for the DGLAP evolution in the QCD evolution basis with nf active flavours.  <br /></td></tr>
-<tr class="separator:a88bebc11f1e7892a52bc3d5cb32a3ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e7525a08bf064503a4622d113030bd" id="r_a21e7525a08bf064503a4622d113030bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21e7525a08bf064503a4622d113030bd">EvolutionBasisQCDQED</a> (int const &amp;nd, int const &amp;nu, int const &amp;nl)</td></tr>
+<tr class="memdesc:a21e7525a08bf064503a4622d113030bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> constructor for the DGLAP evolution in the evolution basis for QCDxQED evolution.  <br /></td></tr>
+<tr class="separator:a21e7525a08bf064503a4622d113030bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classapfel_1_1ConvolutionMap"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classapfel_1_1ConvolutionMap')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classapfel_1_1ConvolutionMap.html">apfel::ConvolutionMap</a></td></tr>
 <tr class="memitem:a0f602872988c9ec3286bd30c66a92cf7 inherit pub_methods_classapfel_1_1ConvolutionMap" id="r_a0f602872988c9ec3286bd30c66a92cf7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7">ConvolutionMap</a> (std::string const &amp;name)</td></tr>
 <tr class="memdesc:a0f602872988c9ec3286bd30c66a92cf7 inherit pub_methods_classapfel_1_1ConvolutionMap"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ...">ConvolutionMap</a> constructor.  <br /></td></tr>
@@ -215,7 +225,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a291fc7fd16bb766e49cb0f6064040100 inherit pro_attribs_classapfel_1_1ConvolutionMap"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> class is a derived of <a class="el" href="classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ...">ConvolutionMap</a> specialised for the DGLAP evolution of distributions using the mixed QCDxQED evolution basis. </p>
+<div class="textblock"><p>The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> class is a derived of <a class="el" href="classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ...">ConvolutionMap</a> specialised for the DGLAP evolution of distributions using the physical basis. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a68cba1f6efca2d87f18d1ee0b11f9768" name="a68cba1f6efca2d87f18d1ee0b11f9768"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a68cba1f6efca2d87f18d1ee0b11f9768">&#9670;&#160;</a></span>Object</h2>
@@ -229,26 +239,26 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a311b65730dd2a14202deba8f7b61dd75" name="a68cba1f6efca2d87f18d1ee0b11f9768a311b65730dd2a14202deba8f7b61dd75"></a>GLUON&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768af4ff0071f1c5e3efa80ad4c4287944c9" name="a68cba1f6efca2d87f18d1ee0b11f9768af4ff0071f1c5e3efa80ad4c4287944c9"></a>GAMMA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a637a1a9da76563175becb70e2eb3c116" name="a68cba1f6efca2d87f18d1ee0b11f9768a637a1a9da76563175becb70e2eb3c116"></a>SIGMA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a5c53cfe5d095ea10c1664e4779e6949a" name="a68cba1f6efca2d87f18d1ee0b11f9768a5c53cfe5d095ea10c1664e4779e6949a"></a>DSIGMA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a4c61e649e7dbf9756c5d6c919579ec7a" name="a68cba1f6efca2d87f18d1ee0b11f9768a4c61e649e7dbf9756c5d6c919579ec7a"></a>SIGMAL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768ab7fea22132c59effe5e5aaefbbee5b8e" name="a68cba1f6efca2d87f18d1ee0b11f9768ab7fea22132c59effe5e5aaefbbee5b8e"></a>VALENCE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768af469dd6aafd0e5d64c893c838bfb0527" name="a68cba1f6efca2d87f18d1ee0b11f9768af469dd6aafd0e5d64c893c838bfb0527"></a>DVALENCE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aff479b2269b29727c62b521fbbb58d34" name="a68cba1f6efca2d87f18d1ee0b11f9768aff479b2269b29727c62b521fbbb58d34"></a>VALENCEL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a5718d84f047108a5a63a8f551d5b0c01" name="a68cba1f6efca2d87f18d1ee0b11f9768a5718d84f047108a5a63a8f551d5b0c01"></a>T1U&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aafe56f5fb9f4237dd3dd824d1d4ff290" name="a68cba1f6efca2d87f18d1ee0b11f9768aafe56f5fb9f4237dd3dd824d1d4ff290"></a>V1U&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a2e1a9dd4c73519fc690a227b780227db" name="a68cba1f6efca2d87f18d1ee0b11f9768a2e1a9dd4c73519fc690a227b780227db"></a>T2U&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768afbfc3ad72e3e48416c6d725c9044cf99" name="a68cba1f6efca2d87f18d1ee0b11f9768afbfc3ad72e3e48416c6d725c9044cf99"></a>V2U&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aa9983e563cf5a87ba4aab7e6e8578971" name="a68cba1f6efca2d87f18d1ee0b11f9768aa9983e563cf5a87ba4aab7e6e8578971"></a>T1D&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aa5660e20d9386481f106935e9cca74f3" name="a68cba1f6efca2d87f18d1ee0b11f9768aa5660e20d9386481f106935e9cca74f3"></a>V1D&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a80cda3a3e3ebb14f439d70a6fe761931" name="a68cba1f6efca2d87f18d1ee0b11f9768a80cda3a3e3ebb14f439d70a6fe761931"></a>T2D&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a98e56a68e42923940064f7d870756165" name="a68cba1f6efca2d87f18d1ee0b11f9768a98e56a68e42923940064f7d870756165"></a>V2D&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a285633261e273e676062db5f4c512b8b" name="a68cba1f6efca2d87f18d1ee0b11f9768a285633261e273e676062db5f4c512b8b"></a>T1L&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768ad202f0a0885b58721070df4342077eb4" name="a68cba1f6efca2d87f18d1ee0b11f9768ad202f0a0885b58721070df4342077eb4"></a>V1L&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a5b44e883196c0f90f721fe9fc3d11b6d" name="a68cba1f6efca2d87f18d1ee0b11f9768a5b44e883196c0f90f721fe9fc3d11b6d"></a>T2L&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aac46a8f6ca561effd6e2b570885f15a2" name="a68cba1f6efca2d87f18d1ee0b11f9768aac46a8f6ca561effd6e2b570885f15a2"></a>V2L&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a8375a35d8fcbad6bf3d3f9aae8f5714d" name="a68cba1f6efca2d87f18d1ee0b11f9768a8375a35d8fcbad6bf3d3f9aae8f5714d"></a>TAUP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a8174bb5aa746e6fa0c0e608f9a0810e8" name="a68cba1f6efca2d87f18d1ee0b11f9768a8174bb5aa746e6fa0c0e608f9a0810e8"></a>MUP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a93c4dfa059ccc7d72cbd8b4d5d51b2cb" name="a68cba1f6efca2d87f18d1ee0b11f9768a93c4dfa059ccc7d72cbd8b4d5d51b2cb"></a>EP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768ac385ec4b975859779c55d0f47afda746" name="a68cba1f6efca2d87f18d1ee0b11f9768ac385ec4b975859779c55d0f47afda746"></a>TP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768ab84559cf697217a5e704dc380a2682b7" name="a68cba1f6efca2d87f18d1ee0b11f9768ab84559cf697217a5e704dc380a2682b7"></a>CP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a1ce93814e01f1408aed92ec7a815acf6" name="a68cba1f6efca2d87f18d1ee0b11f9768a1ce93814e01f1408aed92ec7a815acf6"></a>UP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768ab2c059d65b1f96f6167925b64aee2c49" name="a68cba1f6efca2d87f18d1ee0b11f9768ab2c059d65b1f96f6167925b64aee2c49"></a>BP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768ab90b1be703d9b7bfe214b0db4ee2736e" name="a68cba1f6efca2d87f18d1ee0b11f9768ab90b1be703d9b7bfe214b0db4ee2736e"></a>SP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a13cab8b2c3c7ab1da342cb151c2aa659" name="a68cba1f6efca2d87f18d1ee0b11f9768a13cab8b2c3c7ab1da342cb151c2aa659"></a>DP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a311b65730dd2a14202deba8f7b61dd75" name="a68cba1f6efca2d87f18d1ee0b11f9768a311b65730dd2a14202deba8f7b61dd75"></a>GLUON&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a9f2cc24ad56d7f089fa1b40ac7a65675" name="a68cba1f6efca2d87f18d1ee0b11f9768a9f2cc24ad56d7f089fa1b40ac7a65675"></a>PHOTON&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aaaf4e5aa3fb7eb794d726f9e6e45be81" name="a68cba1f6efca2d87f18d1ee0b11f9768aaaf4e5aa3fb7eb794d726f9e6e45be81"></a>DM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a411d0c1964fd827e2e1df0ae4ddf3c2e" name="a68cba1f6efca2d87f18d1ee0b11f9768a411d0c1964fd827e2e1df0ae4ddf3c2e"></a>SM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a3214fd4bd3f29d39c081abba955fee06" name="a68cba1f6efca2d87f18d1ee0b11f9768a3214fd4bd3f29d39c081abba955fee06"></a>BM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aebfaa72330192c2ea68765a9f7fdc823" name="a68cba1f6efca2d87f18d1ee0b11f9768aebfaa72330192c2ea68765a9f7fdc823"></a>UM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a05c0d8283badcb78801bcfa7bb5e6545" name="a68cba1f6efca2d87f18d1ee0b11f9768a05c0d8283badcb78801bcfa7bb5e6545"></a>CM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a63386b11d4953a3dbd4286c0152f77db" name="a68cba1f6efca2d87f18d1ee0b11f9768a63386b11d4953a3dbd4286c0152f77db"></a>TM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a9bc9ed49c677d7e206635975e55d08bc" name="a68cba1f6efca2d87f18d1ee0b11f9768a9bc9ed49c677d7e206635975e55d08bc"></a>EM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768aff4927bf7a0a83515a2ec9fc560779d2" name="a68cba1f6efca2d87f18d1ee0b11f9768aff4927bf7a0a83515a2ec9fc560779d2"></a>MUM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a68cba1f6efca2d87f18d1ee0b11f9768a6411b7753e59d583f1450d1810432be5" name="a68cba1f6efca2d87f18d1ee0b11f9768a6411b7753e59d583f1450d1810432be5"></a>TAUM&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -267,40 +277,43 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The map enumerators for the operands and the distributions. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa3aaf0675084d1521c4b9e71f63266b28" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa3aaf0675084d1521c4b9e71f63266b28"></a>PNSP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa3b46f6791135ec90653536afb0579965" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa3b46f6791135ec90653536afb0579965"></a>PNSM&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa9e1a264c49e00867aa3740f8b1ebbfb6" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa9e1a264c49e00867aa3740f8b1ebbfb6"></a>PNSV&#160;</td><td class="fielddoc"><p>Non-singlet pure QCD. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aaaabc7eb62edd0ff9aa728fb031569d98" name="ab0bdf24b8e628a1c7f5100cc528b8d9aaaabc7eb62edd0ff9aa728fb031569d98"></a>PGG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aacf6b2751370011fec037bafe08ec02dc" name="ab0bdf24b8e628a1c7f5100cc528b8d9aacf6b2751370011fec037bafe08ec02dc"></a>PGQ&#160;</td><td class="fielddoc"><p>Singlet pure QCD. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aacefbfc99bde5fa350fd94af08644717e" name="ab0bdf24b8e628a1c7f5100cc528b8d9aacefbfc99bde5fa350fd94af08644717e"></a>PQG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aad8943c856b53b4247b1f05647ef14cc2" name="ab0bdf24b8e628a1c7f5100cc528b8d9aad8943c856b53b4247b1f05647ef14cc2"></a>PQQ&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa7875606de571626cf5523c3e2c0cb685" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa7875606de571626cf5523c3e2c0cb685"></a>PNSPQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aafa6aa95c3cc2bb150421f100359b7506" name="ab0bdf24b8e628a1c7f5100cc528b8d9aafa6aa95c3cc2bb150421f100359b7506"></a>PNSMQED&#160;</td><td class="fielddoc"><p>Non-singlet QED (including O(alpha_s * alpha) corrections) </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa41d88ec867c820fbd211a763c05d56ab" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa41d88ec867c820fbd211a763c05d56ab"></a>PGGQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aac46e42e2cff52669b0734c353da8cedc" name="ab0bdf24b8e628a1c7f5100cc528b8d9aac46e42e2cff52669b0734c353da8cedc"></a>PGGMQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa3a878b099a3deb220f9081f00b73f7d4" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa3a878b099a3deb220f9081f00b73f7d4"></a>PGQQED&#160;</td><td class="fielddoc"><p>Singlet QED (including O(alpha_s * alpha) corrections) </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aaa7780fda468ad6531b168c79676a8d23" name="ab0bdf24b8e628a1c7f5100cc528b8d9aaa7780fda468ad6531b168c79676a8d23"></a>PGMGQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa2e9cfc6ca014c684503036d0c6bd6908" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa2e9cfc6ca014c684503036d0c6bd6908"></a>PGMGMQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aae823c84fb10af20a7c48290eed72dd07" name="ab0bdf24b8e628a1c7f5100cc528b8d9aae823c84fb10af20a7c48290eed72dd07"></a>PGMQQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa70f2ce048162ea1f0b9882876329e651" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa70f2ce048162ea1f0b9882876329e651"></a>PQGQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa028cab53633035cdd7a4d3ed31365efb" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa028cab53633035cdd7a4d3ed31365efb"></a>PQGMQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aabfb5762328f92cefb007ff360bdaa22d" name="ab0bdf24b8e628a1c7f5100cc528b8d9aabfb5762328f92cefb007ff360bdaa22d"></a>PQQQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa1f2a748b61f7a9ebe66b1f7c00894a33" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa1f2a748b61f7a9ebe66b1f7c00894a33"></a>PGMLQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aab354ab07c1d50d9394d6bda608f382aa" name="ab0bdf24b8e628a1c7f5100cc528b8d9aab354ab07c1d50d9394d6bda608f382aa"></a>PQLQED&#160;</td><td class="fielddoc"><p>Lepton component of the singlet QED. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aaef2bf00c61d25d78ad29e2ddf61c4dc2" name="ab0bdf24b8e628a1c7f5100cc528b8d9aaef2bf00c61d25d78ad29e2ddf61c4dc2"></a>PLGMQED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa5d6c790b5948792de995049a1e26befd" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa5d6c790b5948792de995049a1e26befd"></a>PLLQED&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa641ecc9bc9493b1d53064aa3a11e37fc" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa641ecc9bc9493b1d53064aa3a11e37fc"></a>PPDD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa57fdc1ac9fb882c1d2c46891f740fcd4" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa57fdc1ac9fb882c1d2c46891f740fcd4"></a>PPUU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa3e062efe9e5831876f991a42d4ca6191" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa3e062efe9e5831876f991a42d4ca6191"></a>PPLL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aaac7f8fcb7cf8f73fe180730e396b0454" name="ab0bdf24b8e628a1c7f5100cc528b8d9aaac7f8fcb7cf8f73fe180730e396b0454"></a>PMDD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa7d292946e5aee959623cb5f2cfe029d0" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa7d292946e5aee959623cb5f2cfe029d0"></a>PMUU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa980a1604720dca963cdbca3a7ea0402b" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa980a1604720dca963cdbca3a7ea0402b"></a>PMLL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa6c2143814a4a9782167d630886069c71" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa6c2143814a4a9782167d630886069c71"></a>PPSDD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa49ddce7242bde7da254923bcb410c39c" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa49ddce7242bde7da254923bcb410c39c"></a>PPSDU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aab98d0f54df57a6766b4bc0642843d677" name="ab0bdf24b8e628a1c7f5100cc528b8d9aab98d0f54df57a6766b4bc0642843d677"></a>PPSDL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aaddad3f76c55c2c432b91594b635345bd" name="ab0bdf24b8e628a1c7f5100cc528b8d9aaddad3f76c55c2c432b91594b635345bd"></a>PPSUD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa8d6a5c1b06de37f7b27461d4620b764f" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa8d6a5c1b06de37f7b27461d4620b764f"></a>PPSUU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa527ffe31f29bdf430f3e93d93284ad96" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa527ffe31f29bdf430f3e93d93284ad96"></a>PPSUL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa1bf2f662aaf2b45d39fe24cc148660ac" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa1bf2f662aaf2b45d39fe24cc148660ac"></a>PPSLD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa37615f3376b83adee2287f1cb502b3f6" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa37615f3376b83adee2287f1cb502b3f6"></a>PPSLU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa41df1effc4e9a959d52607c3dcf5dcb1" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa41df1effc4e9a959d52607c3dcf5dcb1"></a>PPSLL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa88d20926cfedf38902b7797d6777e2a3" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa88d20926cfedf38902b7797d6777e2a3"></a>PPV&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa14ad783690b21c583f4d7775defc4f6f" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa14ad783690b21c583f4d7775defc4f6f"></a>PDg&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa5f269947633227a5f4ab5bc2e156a4b0" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa5f269947633227a5f4ab5bc2e156a4b0"></a>PUg&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aad1ece8a8d09e5d1f7e8321c0f242b7af" name="ab0bdf24b8e628a1c7f5100cc528b8d9aad1ece8a8d09e5d1f7e8321c0f242b7af"></a>PDgm&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aad974675fbe5e1ad9c35eac2775ca4f01" name="ab0bdf24b8e628a1c7f5100cc528b8d9aad974675fbe5e1ad9c35eac2775ca4f01"></a>PUgm&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa10c72a59a7df3f06efd21116b516a143" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa10c72a59a7df3f06efd21116b516a143"></a>PLgm&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aaf2ef9759db24655abec384308c4da703" name="ab0bdf24b8e628a1c7f5100cc528b8d9aaf2ef9759db24655abec384308c4da703"></a>PgD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa27e1ed388a49a948eb9b0b6d1fbf3497" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa27e1ed388a49a948eb9b0b6d1fbf3497"></a>PgU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa27e5d68b6954dd34ef0242bfbe147cab" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa27e5d68b6954dd34ef0242bfbe147cab"></a>PgmD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa129fd6cfa67409cc5f64f88a7ae0c4f8" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa129fd6cfa67409cc5f64f88a7ae0c4f8"></a>PgmU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa9b6a8b9e446b4f5e6d7d2ad2be99f8f4" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa9b6a8b9e446b4f5e6d7d2ad2be99f8f4"></a>PgmL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa28b13131fb8b006f6e3b692cded9859b" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa28b13131fb8b006f6e3b692cded9859b"></a>Pgg&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aa3b9a742592780eb08bd629a88cf09f42" name="ab0bdf24b8e628a1c7f5100cc528b8d9aa3b9a742592780eb08bd629a88cf09f42"></a>Pggm&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aae227c70dd89a0797c5bb0fb59cf9affb" name="ab0bdf24b8e628a1c7f5100cc528b8d9aae227c70dd89a0797c5bb0fb59cf9affb"></a>Pgmg&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0bdf24b8e628a1c7f5100cc528b8d9aadf15ffeb2413315e95f213c872fb14cf" name="ab0bdf24b8e628a1c7f5100cc528b8d9aadf15ffeb2413315e95f213c872fb14cf"></a>Pgmgm&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a88bebc11f1e7892a52bc3d5cb32a3ef9" name="a88bebc11f1e7892a52bc3d5cb32a3ef9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88bebc11f1e7892a52bc3d5cb32a3ef9">&#9670;&#160;</a></span>EvolutionBasisQCDQED()</h2>
+<a id="a21e7525a08bf064503a4622d113030bd" name="a21e7525a08bf064503a4622d113030bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e7525a08bf064503a4622d113030bd">&#9670;&#160;</a></span>EvolutionBasisQCDQED()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -308,12 +321,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">apfel::EvolutionBasisQCDQED::EvolutionBasisQCDQED </td>
           <td>(</td>
-          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nu</em></span>, </td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nd</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nd</em></span>, </td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>nu</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -323,12 +336,12 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> constructor for the DGLAP evolution in the QCD evolution basis with nf active flavours. </p>
+<p>The <a class="el" href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ...">EvolutionBasisQCDQED</a> constructor for the DGLAP evolution in the evolution basis for QCDxQED evolution. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nu</td><td>number of active up-type quark flavours </td></tr>
-    <tr><td class="paramname">nd</td><td>number of active down-type quark flavours </td></tr>
-    <tr><td class="paramname">nl</td><td>number of active charged-lepton flavours </td></tr>
+    <tr><td class="paramname">nd</td><td>number of active down-type quarks below threshold </td></tr>
+    <tr><td class="paramname">nu</td><td>number of active up-type quarks below threshold </td></tr>
+    <tr><td class="paramname">nl</td><td>number of active leptons below threshold </td></tr>
   </table>
   </dd>
 </dl>
@@ -341,7 +354,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 12 2025 20:56:40 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sun Apr 20 2025 13:05:15 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

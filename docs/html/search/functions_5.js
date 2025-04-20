@@ -15,13 +15,15 @@ var searchData=
   ['evenvector_12',['EvenVector',['../namespaceapfel.html#ad2f92397b3c57d8357807b3e8d933d13',1,'apfel']]],
   ['evolbasisplusminus_13',['EvolBasisPlusMinus',['../classapfel_1_1EvolBasisPlusMinus.html#adb04bc286073597771c3268feada289d',1,'apfel::EvolBasisPlusMinus']]],
   ['evolutionbasisqcd_14',['EvolutionBasisQCD',['../classapfel_1_1EvolutionBasisQCD.html#a6610cdd3d123e1e9320adb77cc35ff06',1,'apfel::EvolutionBasisQCD']]],
-  ['evolutionbasisqcdqed_15',['EvolutionBasisQCDQED',['../classapfel_1_1EvolutionBasisQCDQED.html#a88bebc11f1e7892a52bc3d5cb32a3ef9',1,'apfel::EvolutionBasisQCDQED']]],
+  ['evolutionbasisqcdqed_15',['EvolutionBasisQCDQED',['../classapfel_1_1EvolutionBasisQCDQED.html#a21e7525a08bf064503a4622d113030bd',1,'apfel::EvolutionBasisQCDQED']]],
   ['evolutionfactors_16',['EvolutionFactors',['../namespaceapfel.html#a3403b0fd4e423dc723bec51135f1186c',1,'apfel']]],
   ['evolutionfactorsk_17',['EvolutionFactorsK',['../namespaceapfel.html#a544c835527c9307281cf7bb828e4d36a',1,'apfel']]],
   ['evolutionoperatorbasisqcd_18',['EvolutionOperatorBasisQCD',['../classapfel_1_1EvolutionOperatorBasisQCD.html#a17e140926c702ba46ee21c7d160d646b',1,'apfel::EvolutionOperatorBasisQCD']]],
-  ['evolutionsetup_19',['EvolutionSetup',['../structapfel_1_1EvolutionSetup.html#a049f456def46728364a5cf98944b81d1',1,'apfel::EvolutionSetup']]],
-  ['evolvedistributionsbasisqcd_20',['EvolveDistributionsBasisQCD',['../classapfel_1_1EvolveDistributionsBasisQCD.html#a6de1aa97bb9782c5f514799808c44900',1,'apfel::EvolveDistributionsBasisQCD']]],
-  ['evolveobject_21',['EvolveObject',['../classapfel_1_1AlphaQCDg.html#a56df5292128e4479299be9eb9cccc4e4',1,'apfel::AlphaQCDg::EvolveObject()'],['../classapfel_1_1MatchedEvolution.html#a671a39603db2e8445c2a60677847276d',1,'apfel::MatchedEvolution::EvolveObject()']]],
-  ['expression_22',['Expression',['../classapfel_1_1Expression.html#a49727bdb8ac6d6d68854e61a9a262e3d',1,'apfel::Expression']]],
-  ['extendedvector_23',['ExtendedVector',['../classapfel_1_1ExtendedVector.html#a955b49148c3429162501c86df6e9a7eb',1,'apfel::ExtendedVector']]]
+  ['evolutionoperatorbasisqcdqed_19',['EvolutionOperatorBasisQCDQED',['../classapfel_1_1EvolutionOperatorBasisQCDQED.html#a2030ee9d01708281831946e65f097cca',1,'apfel::EvolutionOperatorBasisQCDQED']]],
+  ['evolutionsetup_20',['EvolutionSetup',['../structapfel_1_1EvolutionSetup.html#a049f456def46728364a5cf98944b81d1',1,'apfel::EvolutionSetup']]],
+  ['evolvedistributionsbasisqcd_21',['EvolveDistributionsBasisQCD',['../classapfel_1_1EvolveDistributionsBasisQCD.html#a6de1aa97bb9782c5f514799808c44900',1,'apfel::EvolveDistributionsBasisQCD']]],
+  ['evolvedistributionsbasisqcdqed_22',['EvolveDistributionsBasisQCDQED',['../classapfel_1_1EvolveDistributionsBasisQCDQED.html#a8f8ab9f2f1254f23d9491876de65f42d',1,'apfel::EvolveDistributionsBasisQCDQED']]],
+  ['evolveobject_23',['EvolveObject',['../classapfel_1_1AlphaQCDg.html#a56df5292128e4479299be9eb9cccc4e4',1,'apfel::AlphaQCDg::EvolveObject()'],['../classapfel_1_1MatchedEvolution.html#a671a39603db2e8445c2a60677847276d',1,'apfel::MatchedEvolution::EvolveObject()']]],
+  ['expression_24',['Expression',['../classapfel_1_1Expression.html#a49727bdb8ac6d6d68854e61a9a262e3d',1,'apfel::Expression']]],
+  ['extendedvector_25',['ExtendedVector',['../classapfel_1_1ExtendedVector.html#a955b49148c3429162501c86df6e9a7eb',1,'apfel::ExtendedVector']]]
 ];

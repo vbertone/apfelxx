@@ -1,12 +1,24 @@
 var searchData=
 [
   ['kgg_0',['KGG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a1767852a5a2c33d2292e3be3dd229daa',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['kgh_1',['KGH',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21af60a956d837b091896d6e82ce89e298f',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['kgl_2',['KGL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a348b87c487eb6b2d52050e3a8aaeeba2',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['khg_3',['KHG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a278ce73922b71569c4a78bea1fab32c1',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['khh_4',['KHH',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a4841d90a2ce92922ae447ece147444c9',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['khl_5',['KHL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a45b5baf32d492907c80483ed73a1ebba',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['klg_6',['KLG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a95d6368f16a0f74b68d85a74b0235c84',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['kll_7',['KLL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a7a71e1975e242ca79870f54f4cc9a93d',1,'apfel::PhysicalMatchingBasisQCD']]],
-  ['kllp_8',['KLLP',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21ab2a89e89df8cd85cbda91a86f55ef530',1,'apfel::PhysicalMatchingBasisQCD']]]
+  ['kgg_1',['Kgg',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a85c2018e5206dce51bbf30004de765e4',1,'apfel::MatchingBasisQCDQED']]],
+  ['kgh_2',['KGH',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21af60a956d837b091896d6e82ce89e298f',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kgl_3',['KGL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a348b87c487eb6b2d52050e3a8aaeeba2',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kgmx_4',['KgmX',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6ab858075848ac3ed579393b63b091f424',1,'apfel::MatchingBasisQCDQED']]],
+  ['kgq_5',['KgQ',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6afb4144495e19e4b36c6679f21a8b8035',1,'apfel::MatchingBasisQCDQED']]],
+  ['kgq_6',['Kgq',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6ad1e5862c05bdcb23d5d8ea2e4b25f2cf',1,'apfel::MatchingBasisQCDQED']]],
+  ['khg_7',['KHG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a278ce73922b71569c4a78bea1fab32c1',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['khh_8',['KHH',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a4841d90a2ce92922ae447ece147444c9',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['khl_9',['KHL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a45b5baf32d492907c80483ed73a1ebba',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['klg_10',['KLG',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a95d6368f16a0f74b68d85a74b0235c84',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kll_11',['KLL',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21a7a71e1975e242ca79870f54f4cc9a93d',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['kllp_12',['KLLP',['../classapfel_1_1PhysicalMatchingBasisQCD.html#aef6eac60187ff9b3755a635d0d110e21ab2a89e89df8cd85cbda91a86f55ef530',1,'apfel::PhysicalMatchingBasisQCD']]],
+  ['knsq_13',['KNSq',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a2e467110e86644d59df6fab176a18fbe',1,'apfel::MatchingBasisQCDQED']]],
+  ['kqg_14',['KQg',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a111875425cb9f3f016dd455d1a270b84',1,'apfel::MatchingBasisQCDQED']]],
+  ['kqg_15',['Kqg',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a0bea87acec52bd46e4e8328a05b5eed7',1,'apfel::MatchingBasisQCDQED']]],
+  ['kqqp_16',['KQqp',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a4049f279021ecf849a181c44c7a42416',1,'apfel::MatchingBasisQCDQED']]],
+  ['kqqp_17',['Kqqp',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a410309c1353574346a22237e8188f54f',1,'apfel::MatchingBasisQCDQED']]],
+  ['kxgm_18',['KXgm',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a9b1233a7930817da64241db0905895f0',1,'apfel::MatchingBasisQCDQED']]],
+  ['kxgmgm_19',['KXgmgm',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a14e9da1a1c7345885869076825634448',1,'apfel::MatchingBasisQCDQED']]],
+  ['kxx_20',['KXX',['../classapfel_1_1MatchingBasisQCDQED.html#a49cb7264d32e6a7c2aead0794c514ee6a54bd552cc78772fecb1aed4e201225fb',1,'apfel::MatchingBasisQCDQED']]]
 ];

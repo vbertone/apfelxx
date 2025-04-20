@@ -45,10 +45,9 @@ namespace apfel
   // *INDENT-ON*
 
   /**
-   * @defgroup PhysBases Physical convolution maps
+   * @defgroup EvolBasesQCDQED Evolution convolution maps for QCDxQED
    * Collection of derived classes from ConvolutionMap that implement
-   * the convolution map for the DGLAP evolution in the VFNS in the
-   * physical basis.
+   * the convolution map for the DGLAP QCDxQED evolution in the VFNS.
    * @ingroup ConvMap
    */
   ///@{

@@ -21,7 +21,7 @@ namespace apfel
   class DglapNonLinear: public MatchedEvolution<Set<Distribution>>
   {
   public:
-    DglapNonLinear() =  delete;
+    DglapNonLinear() = delete;
 
     /**
      * @brief DglapNonLinear constructor.
