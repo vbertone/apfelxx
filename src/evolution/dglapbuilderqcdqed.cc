@@ -466,10 +466,31 @@ namespace apfel
           }
 
         // ===============================================================
-        // O(as^2) matching conditions
+        // O(as^3) matching conditions
         for (int nt = nti; nt <= ntf; nt++)
           {
+
             std::map<int, Operator> OM;
+            if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+              {
+                // Determine number of active quarks
+                const int nf = NDUL[nt][0] + NDUL[nt][1];
+                const Operator APS3Hq {g, APS3Hq_0{nf},  IntEps};
+                const Operator ANS3qqH{g, ANS3qqH_0{nf}, IntEps};
+                const Operator AS3Hg  {g, AS3Hg_0{nf},   IntEps};
+                const Operator AS3gqH {g, AS3gqH_0{nf},  IntEps};
+                const Operator AS3ggH {g, AS3ggH_0{nf},  IntEps};
+                const Operator AS3qgQ {g, AS3qgQ_0{nf},  IntEps};
+                const Operator APS3qqQ{g, APS3qqQ_0{nf}, IntEps};
+                const Operator AS3qqH = ANS3qqH + APS3Hq;
+                OM.insert({MatchingBasisQCDQED::KQg,  AS3Hg});
+                OM.insert({MatchingBasisQCDQED::KQqp, AS3qqH - ANS3qqH});
+                OM.insert({MatchingBasisQCDQED::KNSq, ANS3qqH});
+                OM.insert({MatchingBasisQCDQED::Kgg,  AS3ggH});
+                OM.insert({MatchingBasisQCDQED::Kgq,  AS3gqH});
+                OM.insert({MatchingBasisQCDQED::Kqqp, APS3qqQ});
+                OM.insert({MatchingBasisQCDQED::Kqg,  AS3qgQ});
+              }
             // Insert Zero in the remaining slots
             for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
               OM.insert({i, Zero});
@@ -480,7 +501,29 @@ namespace apfel
         // O(as^4) splitting function operators
         for (int nt = nti; nt <= ntf; nt++)
           {
+            const int nf = NDUL[nt][0] + NDUL[nt][1];
+            const Operator O40nsp{g, P3nsp{nf, im[0]}, IntEps};
+            const Operator O40nsm{g, P3nsm{nf, im[1]}, IntEps};
+            const Operator O40nss{g, P3nss{nf, im[2]}, IntEps};
+            const Operator O40ps {g, P3ps{nf,  im[3]}, IntEps};
+            const Operator O40qg {g, P3qg{nf,  im[4]}, IntEps};
+            const Operator O40gq {g, P3gq{nf,  im[5]}, IntEps};
+            const Operator O40gg {g, P3gg{nf,  im[6]}, IntEps};
             std::map<int, Operator> OM;
+            OM.insert({EvolutionBasisQCDQED::PPDD,  O40nsp});
+            OM.insert({EvolutionBasisQCDQED::PPUU,  O40nsp});
+            OM.insert({EvolutionBasisQCDQED::PMDD,  O40nsm});
+            OM.insert({EvolutionBasisQCDQED::PMUU,  O40nsm});
+            OM.insert({EvolutionBasisQCDQED::PPSDD, O40ps / nf});
+            OM.insert({EvolutionBasisQCDQED::PPSDU, O40ps / nf});
+            OM.insert({EvolutionBasisQCDQED::PPSUD, O40ps / nf});
+            OM.insert({EvolutionBasisQCDQED::PPSUU, O40ps / nf});
+            OM.insert({EvolutionBasisQCDQED::PPV,   O40nss / nf});
+            OM.insert({EvolutionBasisQCDQED::PDg,   O40qg / nf});
+            OM.insert({EvolutionBasisQCDQED::PUg,   O40qg / nf});
+            OM.insert({EvolutionBasisQCDQED::PgD,   O40gq});
+            OM.insert({EvolutionBasisQCDQED::PgU,   O40gq});
+            OM.insert({EvolutionBasisQCDQED::Pgg,   O40gg});
             // Insert Zero in the remaining slots
             for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
               OM.insert({i, Zero});
