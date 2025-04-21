@@ -9,7 +9,7 @@
 int main()
 {
   // x-space grid
-  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{60, 1e-1, 3}, apfel::SubGrid{50, 6e-1, 3}, apfel::SubGrid{50, 8e-1, 3}}};
+  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
   //const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Initial scale
@@ -20,7 +20,7 @@ int main()
   const std::vector<double> LeptonThresholds = {0, 0, 1.777};
 
   // Perturbative order
-  const int PerturbativeOrder = 1;
+  const int PerturbativeOrder = 2;
 
   // Running strong and electromagnetic couplings
   apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};

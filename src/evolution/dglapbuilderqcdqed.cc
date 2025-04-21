@@ -90,19 +90,10 @@ namespace apfel
     std::map<int, Operator> Match00;
     const Operator Id  {g, Identity{}, IntEps};
     const Operator Zero{g, Null{},     IntEps};
-    Match00.insert({MatchingBasisQCDQED::ONE,    Id});
-    Match00.insert({MatchingBasisQCDQED::KQg,    Zero});
-    Match00.insert({MatchingBasisQCDQED::KXgm,   Zero});
-    Match00.insert({MatchingBasisQCDQED::KQqp,   Zero});
-    Match00.insert({MatchingBasisQCDQED::KXX,    Zero});
-    Match00.insert({MatchingBasisQCDQED::Kqg,    Zero});
-    Match00.insert({MatchingBasisQCDQED::KNSq,   Zero});
-    Match00.insert({MatchingBasisQCDQED::Kqqp,   Zero});
-    Match00.insert({MatchingBasisQCDQED::Kgg,    Zero});
-    Match00.insert({MatchingBasisQCDQED::Kgq,    Zero});
-    Match00.insert({MatchingBasisQCDQED::KgQ,    Zero});
-    Match00.insert({MatchingBasisQCDQED::KXgmgm, Zero});
-    Match00.insert({MatchingBasisQCDQED::KgmX,   Zero});
+    Match00.insert({MatchingBasisQCDQED::ONE, Id});
+    // Insert Zero in the remaining slots
+    for (int i = MatchingBasisQCDQED::KQg; i <= MatchingBasisQCDQED::KgmX; i++)
+      Match00.insert({i, Zero});
 
     // ===============================================================
     // O(as) splitting function operators
@@ -179,15 +170,6 @@ namespace apfel
         const Operator AS1gH  = AS1gH0 + LogKth[nt] * AS1gHL;
         const Operator AS1HH  = AS1HH0 + LogKth[nt] * AS1HHL;
         std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCDQED::ONE,    Zero});
-        OM.insert({MatchingBasisQCDQED::KXgm,   Zero});
-        OM.insert({MatchingBasisQCDQED::KQqp,   Zero});
-        OM.insert({MatchingBasisQCDQED::Kqg,    Zero});
-        OM.insert({MatchingBasisQCDQED::KNSq,   Zero});
-        OM.insert({MatchingBasisQCDQED::Kqqp,   Zero});
-        OM.insert({MatchingBasisQCDQED::Kgq,    Zero});
-        OM.insert({MatchingBasisQCDQED::KXgmgm, Zero});
-        OM.insert({MatchingBasisQCDQED::KgmX,   Zero});
         if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
           {
             OM.insert({MatchingBasisQCDQED::KQg, AS1Hg});
@@ -195,13 +177,9 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::Kgg, AS1ggH});
             OM.insert({MatchingBasisQCDQED::KgQ, AS1gH});
           }
-        else
-          {
-            OM.insert({MatchingBasisQCDQED::KQg, Zero});
-            OM.insert({MatchingBasisQCDQED::KXX, Zero});
-            OM.insert({MatchingBasisQCDQED::Kgg, Zero});
-            OM.insert({MatchingBasisQCDQED::KgQ, Zero});
-          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
         Match10.insert({nt, OM});
       }
 
@@ -221,15 +199,6 @@ namespace apfel
         const Operator AS1qedgmH   = AS1qedgmH0 + LogKth[nt] * AS1qedgmHL;
         const Operator AS1qedHH    = AS1qedHH0  + LogKth[nt] * AS1qedHHL;
         std::map<int, Operator> OM;
-        OM.insert({MatchingBasisQCDQED::ONE,  Zero});
-        OM.insert({MatchingBasisQCDQED::KQg,  Zero});
-        OM.insert({MatchingBasisQCDQED::KQqp, Zero});
-        OM.insert({MatchingBasisQCDQED::Kqg,  Zero});
-        OM.insert({MatchingBasisQCDQED::KNSq, Zero});
-        OM.insert({MatchingBasisQCDQED::Kqqp, Zero});
-        OM.insert({MatchingBasisQCDQED::Kgq,  Zero});
-        OM.insert({MatchingBasisQCDQED::Kgg,  Zero});
-        OM.insert({MatchingBasisQCDQED::KgQ,  Zero});
         if (Species.at(nt) == PartonSpecies::CHARGEDLEPTON)
           {
             OM.insert({MatchingBasisQCDQED::KXgm,   AS1qedHgm});
@@ -237,13 +206,9 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::KXgmgm, AS1qedgmgmH});
             OM.insert({MatchingBasisQCDQED::KgmX,   AS1qedgmH});
           }
-        else
-          {
-            OM.insert({MatchingBasisQCDQED::KXgm,   Zero});
-            OM.insert({MatchingBasisQCDQED::KXX,    Zero});
-            OM.insert({MatchingBasisQCDQED::KXgmgm, Zero});
-            OM.insert({MatchingBasisQCDQED::KgmX,   Zero});
-          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
         Match01.insert({nt, OM});
       }
 
@@ -375,6 +340,168 @@ namespace apfel
         OpMap02.insert({nt, OM});
       }
 
+    // ===============================================================
+    // O(as^2) matching conditions
+    std::map<int, std::map<int, Operator>> Match20;
+    const Operator APS2Hq0  {g, APS2Hq_0{},   IntEps};
+    const Operator APS2HqL  {g, APS2Hq_L{},   IntEps};
+    const Operator APS2HqL2 {g, APS2Hq_L2{},  IntEps};
+    const Operator ANS2qqH0 {g, ANS2qqH_0{},  IntEps};
+    const Operator ANS2qqHL {g, ANS2qqH_L{},  IntEps};
+    const Operator ANS2qqHL2{g, ANS2qqH_L2{}, IntEps};
+    const Operator AS2Hg0   {g, AS2Hg_0{},    IntEps};
+    const Operator AS2HgL   {g, AS2Hg_L{},    IntEps};
+    const Operator AS2HgL2  {g, AS2Hg_L2{},   IntEps};
+    const Operator AS2gqH0  {g, AS2gqH_0{},   IntEps};
+    const Operator AS2gqHL  {g, AS2gqH_L{},   IntEps};
+    const Operator AS2gqHL2 {g, AS2gqH_L2{},  IntEps};
+    const Operator AS2ggH0  {g, AS2ggH_0{},   IntEps};
+    const Operator AS2ggHL  {g, AS2ggH_L{},   IntEps};
+    const Operator AS2ggHL2 {g, AS2ggH_L2{},  IntEps};
+    const Operator AS2qqH0  = ANS2qqH0  + APS2Hq0;
+    const Operator AS2qqHL  = ANS2qqHL  + APS2HqL;
+    const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const double lnk  = LogKth[nt];
+        const double lnk2 = lnk * lnk;
+        const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
+        const Operator AS2Hg   = AS2Hg0   + lnk * AS2HgL   + lnk2 * AS2HgL2;
+        const Operator AS2gqH  = AS2gqH0  + lnk * AS2gqHL  + lnk2 * AS2gqHL2;
+        const Operator AS2ggH  = AS2ggH0  + lnk * AS2ggHL  + lnk2 * AS2ggHL2;
+        const Operator AS2qqH  = AS2qqH0  + lnk * AS2qqHL  + lnk2 * AS2qqHL2;
+        std::map<int, Operator> OM;
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::KQg,  AS2Hg});
+            OM.insert({MatchingBasisQCDQED::KQqp, AS2qqH - ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::KNSq, ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::Kgg,  AS2ggH});
+            OM.insert({MatchingBasisQCDQED::Kgq,  AS2gqH});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
+        Match20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^2) matching conditions for backwards evolution
+    std::map<int, std::map<int, Operator>> Matchm20;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const Operator AS1Hg   =          LogKth[nt] * AS1HgL;
+        const Operator AS1ggH  =          LogKth[nt] * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + LogKth[nt] * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + LogKth[nt] * AS1HHL;
+        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
+        const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+        const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+        const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+        std::map<int, Operator> OM;
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::Kgg, AS1ggH2});
+            OM.insert({MatchingBasisQCDQED::KgQ, AS1gH2});
+            OM.insert({MatchingBasisQCDQED::KQg, AS1Hg2});
+            OM.insert({MatchingBasisQCDQED::KXX, AS1HH2});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
+        Matchm20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^3) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap30;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nf = NDUL[nt][0] + NDUL[nt][1];
+        const Operator O30nsp{g, P2nsp{nf}, IntEps};
+        const Operator O30nsm{g, P2nsm{nf}, IntEps};
+        const Operator O30nss{g, P2nss{nf}, IntEps};
+        const Operator O30ps {g, P2ps{nf},  IntEps};
+        const Operator O30qg {g, P2qg{nf},  IntEps};
+        const Operator O30gq {g, P2gq{nf},  IntEps};
+        const Operator O30gg {g, P2gg{nf},  IntEps};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD,  O30nsp});
+        OM.insert({EvolutionBasisQCDQED::PPUU,  O30nsp});
+        OM.insert({EvolutionBasisQCDQED::PMDD,  O30nsm});
+        OM.insert({EvolutionBasisQCDQED::PMUU,  O30nsm});
+        OM.insert({EvolutionBasisQCDQED::PPSDD, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPSDU, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPSUD, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPSUU, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPV,   O30nss / nf});
+        OM.insert({EvolutionBasisQCDQED::PDg,   O30qg / nf});
+        OM.insert({EvolutionBasisQCDQED::PUg,   O30qg / nf});
+        OM.insert({EvolutionBasisQCDQED::PgD,   O30gq});
+        OM.insert({EvolutionBasisQCDQED::PgU,   O30gq});
+        OM.insert({EvolutionBasisQCDQED::Pgg,   O30gg});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap30.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // NNNLO corrections (upon request)
+    std::map<int, std::map<int, Operator>> Match30;
+    std::map<int, std::map<int, Operator>> OpMap40;
+    if (n3lo)
+      {
+        // Copy the vector of switches to vary the parameterisation of the
+        // approximated N3LO splitting functions and adjust it to match
+        // the correct number of switches (7). Issue a warning in case
+        // the original vector is modified.
+        const int nvar = 7;
+        std::vector<int> im = IMod;
+        if (im.size() != nvar)
+          {
+            warning("InitializeDglapObjectsQCDQED", "The size of N3LO paremeterisation switches does not have the correct size. Adjusting it.");
+            im.resize(nvar);
+          }
+
+        // ===============================================================
+        // O(as^2) matching conditions
+        for (int nt = nti; nt <= ntf; nt++)
+          {
+            std::map<int, Operator> OM;
+            // Insert Zero in the remaining slots
+            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+              OM.insert({i, Zero});
+            Match30.insert({nt, OM});
+          }
+
+        // ===============================================================
+        // O(as^4) splitting function operators
+        for (int nt = nti; nt <= ntf; nt++)
+          {
+            std::map<int, Operator> OM;
+            // Insert Zero in the remaining slots
+            for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+              OM.insert({i, Zero});
+            OpMap40.insert({nt, OM});
+          }
+      }
+    else
+      {
+        for (int nt = nti; nt <= ntf; nt++)
+          {
+            std::map<int, Operator> OM;
+            std::map<int, Operator> OP;
+            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+              OM.insert({i, Zero});
+            for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+              OP.insert({i, Zero});
+            Match30.insert({nt, OM});
+            OpMap40.insert({nt, OP});
+          }
+      }
+
     // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjectsQCDQED> DglapObj;
 
@@ -399,9 +526,14 @@ namespace apfel
             obj.SplittingFunctions.insert({{ 2, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap20.at(nt)}});
             obj.SplittingFunctions.insert({{ 1, 1}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap11.at(nt)}});
             obj.SplittingFunctions.insert({{ 0, 2}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap02.at(nt)}});
+            obj.SplittingFunctions.insert({{ 3, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap30.at(nt)}});
+            obj.SplittingFunctions.insert({{ 4, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap40.at(nt)}});
             obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
             obj.MatchingConditions.insert({{ 1, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match10.at(nt)}});
             obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match01.at(nt)}});
+            obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
+            obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
+            obj.MatchingConditions.insert({{ 3, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match30.at(nt)}});
           }
         else
           {
@@ -410,9 +542,14 @@ namespace apfel
             obj.SplittingFunctions.insert({{ 2, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap20.at(nt)}});
             obj.SplittingFunctions.insert({{ 1, 1}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap11.at(nt)}});
             obj.SplittingFunctions.insert({{ 0, 2}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap02.at(nt)}});
+            obj.SplittingFunctions.insert({{ 3, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap30.at(nt)}});
+            obj.SplittingFunctions.insert({{ 4, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap40.at(nt)}});
             obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
             obj.MatchingConditions.insert({{ 1, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match10.at(nt)}});
             obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match01.at(nt)}});
+            obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
+            obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
+            obj.MatchingConditions.insert({{ 3, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match30.at(nt)}});
           }
         DglapObj.insert({nt, obj});
       }
@@ -507,7 +644,7 @@ namespace apfel
         const double cp20 = cp10 * cp10;
         const auto mc = DglapObj.at(nt).MatchingConditions;
         return mc.at({0, 0})
-        + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1});
+        + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1})
         + (Up ? 1 : -1) * cp20 * ( mc.at({2, 0}) - (Up ? 0 : 1) * mc.at({-2, 0}) );
       };
     else if (PerturbativeOrder == 3)
@@ -519,8 +656,8 @@ namespace apfel
         const double cp30 = cp10 * cp20;
         const auto mc = DglapObj.at(nt).MatchingConditions;
         return mc.at({0, 0})
-        + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1});
-        + (Up ? 1 : -1) * cp20 * ( mc.at({2, 0}) - (Up ? 0 : 1) * mc.at({-2, 0}) );
+        + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1})
+        + (Up ? 1 : -1) * cp20 * ( mc.at({2, 0}) - (Up ? 0 : 1) * mc.at({-2, 0}) )
         + (Up ? 1 : -1) * cp30 * mc.at({3, 0});
       };
     else
