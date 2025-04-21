@@ -1642,6 +1642,24 @@ M_4 & \quad n_f+2\leq i \leq 6 &\quad  j=0\\
 \label{eq:algorithmEvN3LO}
 \end{equation}
 
+In the light of Eq.~(\ref{eq:IntMatchingCondsN3LO}), valence and
+momentum sum rules imply the following identities for the matching
+functions:
+\begin{equation}
+\begin{array}{l}
+\displaystyle\int_0^1dy\,K_{ll}^{[n]}(y)=0\,,\\
+\\
+\displaystyle\int_0^1dy\,y\left[K_{gg}^{[n]}(y)+n_fK_{lg}^{[n]}(y)+K_{hg}^{[n]}(y)\right]=0\,,\\
+\\
+\displaystyle\int_0^1dy\,y\left[K_{gl}^{[n]}(y)+K_{ll}^{[n]}(y)+n_fK_{ll'}^{[n]}(y)+K_{hl}^{[n]}(y)\right]=0\,,\\
+\\
+\displaystyle\int_0^1dy\,y\left[K_{gh}^{[n]}(y)+K_{hh}^{[n]}(y)\right]=0\,,
+\end{array}
+\end{equation}
+valid at any give order $n$ in the strong coupling $\alpha_s$.
+
+
+
 \section{Evolution and matching in the physical basis}
 
 In view of the implementation of QED corrections and the ensuing
@@ -2497,6 +2515,61 @@ The remaining are:
 \displaystyle\mathcal{K}_{\gamma X}&=&\displaystyle 2e_X^2\left[\frac{1+(1-x)^2}{x}\right]\left[\ln\left(\kappa_X^2\right)-1-2\ln(x)\right]\,,\\
 \\
 \displaystyle\mathcal{K}_{\gamma\gamma}^X &=&\displaystyle -\frac{4}{3}e_X^2 \ln\left(\kappa_X^2\right)\delta(1-x)\,.
+\end{array}
+\end{equation}
+
+\subsection{Sum rules}
+
+One of the possible check the implementation of the correctness of
+splitting functions is that sum rules have to be fulfilled at all
+scales order by order in perturbation theory. This check is
+particularly useful when including QED corrections given the
+proliferation of splitting functions. Sum rules can be checked
+numerically either at the level of evolved PDFs (as long as they
+fulfil them at the initial scale) or at the level of splitting
+functions.
+
+Let us start with the momentum sum rule, which at the level of PDFs,
+prescribes that:
+\begin{equation}
+  \int_0^1dy\,y\left[\sum_{i}D_i^+(y,\mu)+\sum_{j}U_j^+(y,\mu)+\sum_{\alpha}L_\alpha^+(y,\mu)+g(y,\mu)+\gamma(y,\mu)\right]=1\,,
+\end{equation}
+for all values of $\mu$. Taking the derivative w.r.t. $\mu$ of this
+equality and using the evolution equations allows us to derive
+integral equations which must obeyed by splitting functions order by
+order in perturbation theory. Specifically, we finds:
+\begin{equation}
+\begin{array}{l}
+\displaystyle
+  \int_0^1dy\,y\left[\mathcal{P}_{LL}^{+,[a,b]}(y)+n_L\mathcal{P}_{LL}^{{\rm PS},[a,b]}(y) +n_U\mathcal{P}_{UL}^{{\rm PS},[a,b]}(y) +n_D\mathcal{P}_{DL}^{{\rm PS},[a,b]}(y)+\mathcal{P}_{\gamma L}^{[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[\mathcal{P}_{UU}^{+,[a,b]}(y) +n_L\mathcal{P}_{LU}^{{\rm PS},[a,b]}(y) +n_U\mathcal{P}_{UU}^{{\rm PS},[a,b]}(y) +n_D\mathcal{P}_{DU}^{{\rm PS},[a,b]}(y)+\mathcal{P}_{gU}^{[a,b]}(y)+\mathcal{P}_{\gamma U}^{[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[\mathcal{P}_{DD}^{+,[a,b]}(y) +n_L\mathcal{P}_{LD}^{{\rm PS},[a,b]}(y) +n_U\mathcal{P}_{UD}^{{\rm PS},[a,b]}(y) +n_D\mathcal{P}_{DD}^{{\rm PS},[a,b]}(y)+\mathcal{P}_{gD}^{[a,b]}(y)+\mathcal{P}_{\gamma D}^{[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[2n_U\mathcal{P}_{Ug}^{[a,b]}(y)+2n_D\mathcal{P}_{Dg}^{[a,b]}(y)+\mathcal{P}_{gg}^{[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[2n_L\mathcal{P}_{L\gamma}^{[a,b]}(y)+2n_U\mathcal{P}_{U\gamma}^{[a,b]}(y)+2n_D\mathcal{P}_{D\gamma}^{[a,b]}(y)+\mathcal{P}_{\gamma\gamma}^{[a,b]}(y)\right]=0\,,
+\end{array}
+\end{equation}
+for the any of the perturbative orders $[a,b]$ of our interest. For
+the leading-order sets of splitting functions, it is straightforward
+to check analytically that this equalities are true. Beyond these
+orders analytic checks are still possible but more cumbersome.
+
+We next consider the valence (or counting) sum rule, which at the
+level pf PDFs reads:
+\begin{equation}
+\int_0^1dy\,X_i^-(y,\mu)=\mbox{constant}\,,\quad X=D,U,L\,,
+\end{equation}
+where the constant depends on $X$. At the level of splitting
+functions, the valence sum rule implies:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \int_0^1dy\,\left[\mathcal{P}_{XX}^{-,[a,b]}(y)+n_X P^{{\rm
+  PV},[a,b]}(y)\right]=0\,,\quad X=D,U\,,\\
+\\
+\displaystyle \int_0^1dy\,\mathcal{P}_{LL}^{-,[a,b]}(y)=0\,.
 \end{array}
 \end{equation}
 
