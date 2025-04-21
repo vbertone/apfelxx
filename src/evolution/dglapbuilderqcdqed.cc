@@ -283,9 +283,40 @@ namespace apfel
     // ===============================================================
     // O(as*a) splitting function operators
     std::map<int, std::map<int, Operator>> OpMap11;
+
+    const Operator O11nsp {g, P11qednsp{},  IntEps};
+    const Operator O11nsm {g, P11qednsm{},  IntEps};
+    const Operator O11qg  {g, P11qedqg{},   IntEps};
+    const Operator O11qgm {g, P11qedqgm{},  IntEps};
+    const Operator O11gq  {g, P11qedgq{},   IntEps};
+    const Operator O11gmq {g, P11qedgmq{},  IntEps};
+    const Operator O11gg  {g, P11qedgg{},   IntEps};
+    const Operator O11ggm {g, P11qedggm{},  IntEps};
+    const Operator O11gmg {g, P11qedgmg{},  IntEps};
+    const Operator O11gmgm{g, P11qedgmgm{}, IntEps};
     for (int nt = nti; nt <= ntf; nt++)
       {
+        // Determine number of active quarks
+        const int nd = NDUL[nt][0];
+        const int nu = NDUL[nt][1];
+        const double bbf = nd * ed2 + nu * eu2;
         std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD,  ed2 * O11nsp});
+        OM.insert({EvolutionBasisQCDQED::PPUU,  eu2 * O11nsp});
+        OM.insert({EvolutionBasisQCDQED::PMDD,  ed2 * O11nsm});
+        OM.insert({EvolutionBasisQCDQED::PMUU,  eu2 * O11nsm});
+        OM.insert({EvolutionBasisQCDQED::PDg,   ed2 * O11qg});
+        OM.insert({EvolutionBasisQCDQED::PUg,   eu2 * O11qg});
+        OM.insert({EvolutionBasisQCDQED::PDgm,  ( NC * ed2 ) * O11qgm});
+        OM.insert({EvolutionBasisQCDQED::PUgm,  ( NC * eu2 ) * O11qgm});
+        OM.insert({EvolutionBasisQCDQED::PgD,   ed2 * O11gq});
+        OM.insert({EvolutionBasisQCDQED::PgU,   eu2 * O11gq});
+        OM.insert({EvolutionBasisQCDQED::PgmD,  ed2 * O11gmq});
+        OM.insert({EvolutionBasisQCDQED::PgmU,  eu2 * O11gmq});
+        OM.insert({EvolutionBasisQCDQED::Pgg,          bbf   * O11gg});
+        OM.insert({EvolutionBasisQCDQED::Pggm,  ( NC * bbf ) * O11ggm});
+        OM.insert({EvolutionBasisQCDQED::Pgmg,         bbf   * O11gmg});
+        OM.insert({EvolutionBasisQCDQED::Pgmgm, ( NC * bbf ) * O11gmgm});
         // Insert Zero in the remaining slots
         for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
           OM.insert({i, Zero});

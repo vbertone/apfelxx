@@ -23,16 +23,16 @@ int main()
   const int PerturbativeOrder = 1;
 
   // Running strong and electromagnetic couplings
-  //apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
-  //const apfel::TabulateObject<apfel::matrix<double>> Couplings{a, 100, 0.9, 1001, 3};
-  //const auto as  = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(0, 0); };
-  //const auto aem = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
-  apfel::AlphaQCD a0{0.35, sqrt(2), QuarkThresholds, PerturbativeOrder};
-  apfel::AlphaQED a1{7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
-  const apfel::TabulateObject<double> Alphas{a0, 100, 0.9, 1001, 3};
-  const apfel::TabulateObject<double> Alpha{a1, 100, 0.9, 1001, 3};
-  const auto as  = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
-  const auto aem = [&] (double const& mu) -> double{ return Alpha.Evaluate(mu); };
+  apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
+  const apfel::TabulateObject<apfel::matrix<double>> Couplings{a, 100, 0.9, 1001, 3};
+  const auto as  = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(0, 0); };
+  const auto aem = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
+  //apfel::AlphaQCD a0{0.35, sqrt(2), QuarkThresholds, PerturbativeOrder};
+  //apfel::AlphaQED a1{7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
+  //const apfel::TabulateObject<double> Alphas{a0, 100, 0.9, 1001, 3};
+  //const apfel::TabulateObject<double> Alpha{a1, 100, 0.9, 1001, 3};
+  //const auto as  = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
+  //const auto aem = [&] (double const& mu) -> double{ return Alpha.Evaluate(mu); };
 
   // Initialize QCD evolution objects
   const auto DglapObj   = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds);

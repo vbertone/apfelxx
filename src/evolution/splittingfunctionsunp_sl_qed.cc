@@ -185,4 +185,140 @@ namespace apfel
   {
     return - 4.;
   }
+
+  //_________________________________________________________________________________
+  P11qednsp::P11qednsp():
+    Expression()
+  {
+  }
+  double P11qednsp::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double ln1mx = log(1 - x);
+    const double pqq   = 2 / ( 1 - x ) - 1 - x;
+    const double pqqmx = 2 / ( 1 + x ) - 1 + x;
+    const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1 + x) - Pi2 / 6;
+    return 8 * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - lnx * ( 1.5 + 7 * x / 2 ) - lnx2 * ( 1 + x ) / 2 - 5 * ( 1 - x ) )
+           + 8 * CF *( 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) + 2 * pqqmx * S2x );
+  }
+  double P11qednsp::Local(double const&) const
+  {
+    return 8 * CF * ( 3 / 8. + 6 * zeta3 - Pi2 / 2 );
+  }
+
+  //_________________________________________________________________________________
+  P11qednsm::P11qednsm():
+    Expression()
+  {
+  }
+  double P11qednsm::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double ln1mx = log(1 - x);
+    const double pqq   = 2 / ( 1 - x ) - 1 - x;
+    const double pqqmx = 2 / ( 1 + x ) - 1 + x;
+    const double S2x   = - 2 * dilog(-x) + lnx2 / 2 - 2 * lnx * log(1 + x) - Pi2 / 6;
+    return 8 * CF * ( ( - 3 * lnx / 2 - 2 * ln1mx * lnx ) * pqq - lnx * ( 1.5 + 7 * x / 2 ) - lnx2 * ( 1 + x ) / 2 - 5 * ( 1 - x ) )
+           - 8 * CF *( 4 * ( 1 - x ) + 2 * lnx * ( 1 + x ) + 2 * pqqmx * S2x );
+  }
+  double P11qednsm::Local(double const&) const
+  {
+    return 8 * CF * ( 3 / 8. + 6 * zeta3 - Pi2 / 2 );
+  }
+
+  //_________________________________________________________________________________
+  P11qedqg::P11qedqg():
+    Expression()
+  {
+  }
+  double P11qedqg::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double ln1mx = log(1 - x);
+    const double pqg   = x * x + ( 1 - x ) * ( 1 - x );
+    return 2 * TR * ( 4 - 9 * x - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) + 4 * ln1mx + ( 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 4 * ( ln1mx - lnx ) - 2 * Pi2 / 3 + 10 ) * pqg );
+  }
+
+  //_________________________________________________________________________________
+  P11qedqgm::P11qedqgm():
+    Expression()
+  {
+  }
+  double P11qedqgm::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double ln1mx = log(1 - x);
+    const double pqg   = x * x + ( 1 - x ) * ( 1 - x );
+    return 2 * CF * ( 4 - 9 * x - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) + 4 * ln1mx + ( 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 4 * ( ln1mx - lnx ) - 2 * Pi2 / 3 + 10 ) * pqg );
+  }
+
+  //_________________________________________________________________________________
+  P11qedgq::P11qedgq():
+    Expression()
+  {
+  }
+  double P11qedgq::Regular(double const& x) const
+  {
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double ln1mx = log(1 - x);
+    const double pgq   = ( 1 + ( 1 - x ) * ( 1 - x ) ) / x;
+    return 4 * CF * ( - ( 3 * ln1mx + ln1mx * ln1mx ) * pgq  + lnx * ( 2 + 7 * x / 2 ) - lnx2 * ( 1 - x / 2 ) - 2 * ln1mx * x  - 7 * x / 2 - 2.5 );
+  }
+
+  //_________________________________________________________________________________
+  P11qedgmq::P11qedgmq():
+    P11qedgq()
+  {
+  }
+
+  //_________________________________________________________________________________
+  P11qedgg::P11qedgg():
+    Expression()
+  {
+  }
+  double P11qedgg::Local(double const&) const
+  {
+    return - 4 * TR;
+  }
+
+  //_________________________________________________________________________________
+  P11qedggm::P11qedggm():
+    Expression()
+  {
+  }
+  double P11qedggm::Regular(double const& x) const
+  {
+    const double x2   = x * x;
+    const double lnx  = log(x);
+    const double lnx2 = lnx * lnx;
+    return 4 * CF * ( - 16 + 8 * x + 20. * x2 / 3 + 4 / 3. / x - ( 6 + 10 * x ) * lnx - 2 * ( 1 +  x ) * lnx2 );
+  }
+
+  //_________________________________________________________________________________
+  P11qedgmg::P11qedgmg():
+    Expression()
+  {
+  }
+  double P11qedgmg::Regular(double const& x) const
+  {
+    const double x2   = x * x;
+    const double lnx  = log(x);
+    const double lnx2 = lnx * lnx;
+    return 4 * TR * ( - 16 + 8 * x + 20. * x2 / 3 + 4 / 3. / x - ( 6 + 10 * x ) * lnx - 2 * ( 1 +  x ) * lnx2 );
+  }
+
+  //_________________________________________________________________________________
+  P11qedgmgm::P11qedgmgm():
+    Expression()
+  {
+  }
+  double P11qedgmgm::Local(double const&) const
+  {
+    return - 4 * CF;
+  }
 }
