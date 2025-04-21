@@ -103,6 +103,7 @@ namespace apfel
   public:
     AS1HH_L();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
@@ -115,6 +116,7 @@ namespace apfel
   public:
     AS1HH_0();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
@@ -539,6 +541,7 @@ namespace apfel
   public:
     AS1polHH_L();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
@@ -550,6 +553,7 @@ namespace apfel
   public:
     AS1polHH_0();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
@@ -791,6 +795,7 @@ namespace apfel
   public:
     AS1qedHH_L();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
@@ -801,6 +806,7 @@ namespace apfel
   public:
     AS1qedHH_0();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**

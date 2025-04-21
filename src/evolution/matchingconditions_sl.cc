@@ -40,6 +40,10 @@ namespace apfel
   {
     return 2 * CF * ( 1 + pow(x, 2) ) / ( 1 - x );
   }
+  double AS1HH_L::Local(double const& x) const
+  {
+    return CF * ( x * ( 2 + x ) + 4 * log(1 - x) );
+  }
 
   //_________________________________________________________________________________
   AS1HH_0::AS1HH_0():
@@ -49,6 +53,10 @@ namespace apfel
   double AS1HH_0::Singular(double const& x) const
   {
     return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
+  }
+  double AS1HH_0::Local(double const& x) const
+  {
+    return 4 * CF * x - 2 * CF * log(1 - x) * ( - 1 + x * ( 2 + x ) + 2 * log(1 - x) );
   }
 
   //_________________________________________________________________________________
@@ -678,6 +686,10 @@ namespace apfel
   {
     return 2 * CF * ( 1 + pow(x, 2) ) / ( 1 - x );
   }
+  double AS1polHH_L::Local(double const& x) const
+  {
+    return CF * ( x * ( 2 + x ) + 4 * log(1 - x) );
+  }
 
   //_________________________________________________________________________________
   AS1polHH_0::AS1polHH_0():
@@ -687,6 +699,10 @@ namespace apfel
   double AS1polHH_0::Singular(double const& x) const
   {
     return 2 * CF * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
+  }
+  double AS1polHH_0::Local(double const& x) const
+  {
+    return 4 * CF * x - 2 * CF * log(1 - x) * ( - 1 + x * ( 2 + x ) + 2 * log(1 - x) );
   }
 
   //_________________________________________________________________________________
@@ -998,6 +1014,10 @@ namespace apfel
   {
     return 2 * ( 1 + pow(x, 2) ) / ( 1 - x );
   }
+  double AS1qedHH_L::Local(double const& x) const
+  {
+    return ( x * ( 2 + x ) + 4 * log(1 - x) );
+  }
 
   //_________________________________________________________________________________
   AS1qedHH_0::AS1qedHH_0():
@@ -1007,6 +1027,10 @@ namespace apfel
   double AS1qedHH_0::Singular(double const& x) const
   {
     return 2 * ( 1 + pow(x, 2) ) * ( - 1 - 2 * log(1 - x) ) / ( 1 - x );
+  }
+  double AS1qedHH_0::Local(double const& x) const
+  {
+    return 4 * x - 2 * log(1 - x) * ( - 1 + x * ( 2 + x ) + 2 * log(1 - x) );
   }
 
   //_________________________________________________________________________________
