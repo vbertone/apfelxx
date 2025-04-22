@@ -38,7 +38,7 @@ var searchData=
   ['evolbasisplusminus_35',['EvolBasisPlusMinus',['../classapfel_1_1EvolBasisPlusMinus.html',1,'apfel::EvolBasisPlusMinus'],['../classapfel_1_1EvolBasisPlusMinus.html#adb04bc286073597771c3268feada289d',1,'apfel::EvolBasisPlusMinus::EvolBasisPlusMinus()']]],
   ['evolbasisplusminus_2eh_36',['evolbasisplusminus.h',['../evolbasisplusminus_8h.html',1,'']]],
   ['evolpolarisation_37',['EvolPolarisation',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792',1,'apfel::EvolutionSetup::EvolPolarisation'],['../structapfel_1_1EvolutionSetup.html#ac177f59f4426ece1c64c1ba002b040fe',1,'apfel::EvolutionSetup::EvolPolarisation']]],
-  ['evolution_38',['Unpolarised splitting functions for QED evolution',['../group__UnpSFQED.html',1,'']]],
+  ['evolution_38',['Unpolarised splitting functions for QCDxQED evolution',['../group__UnpSFQED.html',1,'']]],
   ['evolution_20convolution_20maps_39',['Evolution convolution maps',['../group__EvolBases.html',1,'']]],
   ['evolution_20convolution_20maps_20for_20qcdxqed_40',['Evolution convolution maps for QCDxQED',['../group__EvolBasesQCDQED.html',1,'']]],
   ['evolution_20convolution_20maps_20in_20the_20plus_20minus_20basis_41',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],

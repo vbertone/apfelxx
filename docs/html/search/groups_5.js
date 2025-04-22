@@ -13,8 +13,8 @@ var searchData=
   ['for_20longitudinally_20polarised_20dis_10',['Zero-mass coefficient functions for longitudinally polarised DIS',['../group__NCMasslesspol.html',1,'']]],
   ['for_20longitudinally_20polarised_20sidis_11',['for longitudinally polarised SIDIS',['../group__NLOzmSIDISpol.html',1,'NLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NNLOzmSIDISpol.html',1,'NNLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NCMasslessSIDISpol.html',1,'Zero-mass coefficient functions for longitudinally polarised SIDIS']]],
   ['for_20pdfs_12',['for PDFs',['../group__NLOmatch.html',1,'NLO matching functions for PDFs'],['../group__NNLOmatch.html',1,'NNLO matching functions for PDFs'],['../group__NNNLOmatch.html',1,'NNNLO matching functions for PDFs']]],
-  ['for_20qcdxqed_13',['for QCDxQED',['../group__EvolBasesQCDQED.html',1,'Evolution convolution maps for QCDxQED'],['../group__MatchBasesQCDQED.html',1,'Matching convolution maps for QCDxQED']]],
-  ['for_20qed_20evolution_14',['Unpolarised splitting functions for QED evolution',['../group__UnpSFQED.html',1,'']]],
+  ['for_20qcdxqed_13',['for QCDxQED',['../group__EvolBasesQCDQED.html',1,'Evolution convolution maps for QCDxQED'],['../group__LOunpsfQED.html',1,'LO splitting functions for QCDxQED'],['../group__MatchBasesQCDQED.html',1,'Matching convolution maps for QCDxQED'],['../group__NLOunpsfQED.html',1,'NLO splitting functions for QCDxQED'],['../group__NLOMCQED.html',1,'NLO unpolarised matching conditions for QCDxQED']]],
+  ['for_20qcdxqed_20evolution_14',['Unpolarised splitting functions for QCDxQED evolution',['../group__UnpSFQED.html',1,'']]],
   ['for_20sivers_20quark_20pdfs_15',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
   ['for_20the_20helicity_20ffs_20g1_16',['NLO matching functions for the helicity FFs g1',['../group__NLOffg1.html',1,'']]],
   ['for_20unpolarised_20dis_17',['Zero-mass coefficient functions for unpolarised DIS',['../group__NCMassless.html',1,'']]],
@@ -30,10 +30,11 @@ var searchData=
   ['functions_20for_20longitudinally_20polarised_20dis_27',['Zero-mass coefficient functions for longitudinally polarised DIS',['../group__NCMasslesspol.html',1,'']]],
   ['functions_20for_20longitudinally_20polarised_20sidis_28',['functions for longitudinally polarised SIDIS',['../group__NLOzmSIDISpol.html',1,'NLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NNLOzmSIDISpol.html',1,'NNLO zero-mass coefficient functions for longitudinally polarised SIDIS'],['../group__NCMasslessSIDISpol.html',1,'Zero-mass coefficient functions for longitudinally polarised SIDIS']]],
   ['functions_20for_20pdfs_29',['functions for PDFs',['../group__NLOmatch.html',1,'NLO matching functions for PDFs'],['../group__NNLOmatch.html',1,'NNLO matching functions for PDFs'],['../group__NNNLOmatch.html',1,'NNNLO matching functions for PDFs']]],
-  ['functions_20for_20qed_20evolution_30',['Unpolarised splitting functions for QED evolution',['../group__UnpSFQED.html',1,'']]],
-  ['functions_20for_20sivers_20quark_20pdfs_31',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
-  ['functions_20for_20the_20helicity_20ffs_20g1_32',['NLO matching functions for the helicity FFs g1',['../group__NLOffg1.html',1,'']]],
-  ['functions_20for_20unpolarised_20dis_33',['Zero-mass coefficient functions for unpolarised DIS',['../group__NCMassless.html',1,'']]],
-  ['functions_20for_20unpolarised_20sia_34',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
-  ['functions_20for_20unpolarised_20sidis_35',['functions for unpolarised SIDIS',['../group__NLOzmSIDIS.html',1,'NLO zero-mass coefficient functions for unpolarised SIDIS'],['../group__NNLOzmSIDIS.html',1,'NNLO zero-mass coefficient functions for unpolarised SIDIS'],['../group__NCMasslessSIDIS.html',1,'Zero-mass coefficient functions for unpolarised SIDIS']]]
+  ['functions_20for_20qcdxqed_30',['functions for QCDxQED',['../group__LOunpsfQED.html',1,'LO splitting functions for QCDxQED'],['../group__NLOunpsfQED.html',1,'NLO splitting functions for QCDxQED']]],
+  ['functions_20for_20qcdxqed_20evolution_31',['Unpolarised splitting functions for QCDxQED evolution',['../group__UnpSFQED.html',1,'']]],
+  ['functions_20for_20sivers_20quark_20pdfs_32',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
+  ['functions_20for_20the_20helicity_20ffs_20g1_33',['NLO matching functions for the helicity FFs g1',['../group__NLOffg1.html',1,'']]],
+  ['functions_20for_20unpolarised_20dis_34',['Zero-mass coefficient functions for unpolarised DIS',['../group__NCMassless.html',1,'']]],
+  ['functions_20for_20unpolarised_20sia_35',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
+  ['functions_20for_20unpolarised_20sidis_36',['functions for unpolarised SIDIS',['../group__NLOzmSIDIS.html',1,'NLO zero-mass coefficient functions for unpolarised SIDIS'],['../group__NNLOzmSIDIS.html',1,'NNLO zero-mass coefficient functions for unpolarised SIDIS'],['../group__NCMasslessSIDIS.html',1,'Zero-mass coefficient functions for unpolarised SIDIS']]]
 ];

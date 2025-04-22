@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['evolution_0',['Unpolarised splitting functions for QED evolution',['../group__UnpSFQED.html',1,'']]],
+  ['evolution_0',['Unpolarised splitting functions for QCDxQED evolution',['../group__UnpSFQED.html',1,'']]],
   ['evolution_20convolution_20maps_1',['Evolution convolution maps',['../group__EvolBases.html',1,'']]],
   ['evolution_20convolution_20maps_20for_20qcdxqed_2',['Evolution convolution maps for QCDxQED',['../group__EvolBasesQCDQED.html',1,'']]],
   ['evolution_20convolution_20maps_20in_20the_20plus_20minus_20basis_3',['Evolution convolution maps in the plus-minus basis',['../group__EvolBasisPlusMinus.html',1,'']]],

@@ -1,7 +1,9 @@
 /**
  \example coupling_test.cc
  \example dglap_test.cc
+ \example dglap_test_phys.cc
  \example dglap_test_streamlined.cc
+ \example dglapqcdqed_test.cc
  \example distribution_test.cc
  \example doubledistribution_test.cc
  \example doubleobjint_test.cc
@@ -21,11 +23,14 @@
  \example set_test.cc
  \example siaxsec_test.cc
  \example sidis_test.cc
+ \example sidispol_test.cc
  \example structurefunction_cc_test.cc
  \example structurefunction_massive_test.cc
  \example structurefunction_nc_pol_test.cc
  \example structurefunction_nc_test.cc
  \example subgrid_test.cc
  \example sum_rules_test.cc
+ \example sum_rules_test_phys.cc
+ \example sum_rules_test_qcdqed.cc
  \example tmd_test.cc
  */
