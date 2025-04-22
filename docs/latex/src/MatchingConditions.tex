@@ -1655,6 +1655,7 @@ functions:
 \\
 \displaystyle\int_0^1dy\,y\left[K_{gh}^{[n]}(y)+K_{hh}^{[n]}(y)\right]=0\,,
 \end{array}
+\label{eq:QCDmatchingSumeRules}
 \end{equation}
 valid at any give order $n$ in the strong coupling $\alpha_s$.
 
@@ -2188,9 +2189,9 @@ $\kappa_{X_i}$ and where we used the character $Q$ ($q$) to mean a
 generic heavy (light) quark, no matter whether of up or down type.
 
 In fact, Eqs.~(\ref{eq:MatchingLeptons}) and~(\ref{eq:MatchingQuarks})
-ca be put together by allowing the index $X$ in
-Eq.~(\ref{eq:MatchingQuarks}) to run over all possibile values
-($X=D,U,L$) and by setting: 
+can be put together by allowing the index $X$ in
+Eq.~(\ref{eq:MatchingQuarks}) to run over all possible values
+($X=D,U,L$) and by setting:
 \begin{equation}
   \mathcal{K}_{Qg}=\mathcal{K}_{Qq'}=\mathcal{K}_{qg}=\mathcal{K}_{{\rm
       NS},q}=\mathcal{K}_{qq'}=\mathcal{K}_{gg}=\mathcal{K}_{gq}=\mathcal{K}_{gQ}=0\,,
@@ -2324,7 +2325,7 @@ and:
 \\
 &\pm&\displaystyle 4\left[4(1-x)+2(1+x)\ln(x)+2\frac{1+x^2}{1+x}S_2(x)\right]\bigg\}\,,\\
 \\
-  \displaystyle \mathcal{P}^{\rm PS,[0,2]}_{XY}&=&\displaystyle N_Xe_X^2e_Y^24\left[\frac{20}{9x}-2+6x-\frac{56}{9}x^2+\left(1+5x+\frac{8}{3}x^2\right)\ln(x)-(1+x)\ln^2(x)\right]\,,\\
+  \displaystyle \mathcal{P}^{\rm PS,[0,2]}_{XY}&=&\displaystyle N_Xe_X^2e_Y^28\left[\frac{20}{9x}-2+6x-\frac{56}{9}x^2+\left(1+5x+\frac{8}{3}x^2\right)\ln(x)-(1+x)\ln^2(x)\right]\,,\\
   \\
   \displaystyle \mathcal{P}_{X\gamma}^{[0,2]}&=&\displaystyle N_X e_X^4
   2\bigg[4-9x-(1-4x)\ln(x)-(1-2x)\ln^2(x)+4\ln(1-x)\\
@@ -2537,7 +2538,7 @@ prescribes that:
 for all values of $\mu$. Taking the derivative w.r.t. $\mu$ of this
 equality and using the evolution equations allows us to derive
 integral equations which must obeyed by splitting functions order by
-order in perturbation theory. Specifically, we finds:
+order in perturbation theory. Specifically, we find:
 \begin{equation}
 \begin{array}{l}
 \displaystyle
@@ -2547,9 +2548,9 @@ order in perturbation theory. Specifically, we finds:
 \\
 \displaystyle \int_0^1dy\,y\left[\mathcal{P}_{DD}^{+,[a,b]}(y) +n_L\mathcal{P}_{LD}^{{\rm PS},[a,b]}(y) +n_U\mathcal{P}_{UD}^{{\rm PS},[a,b]}(y) +n_D\mathcal{P}_{DD}^{{\rm PS},[a,b]}(y)+\mathcal{P}_{gD}^{[a,b]}(y)+\mathcal{P}_{\gamma D}^{[a,b]}(y)\right]=0\,,\\
 \\
-\displaystyle \int_0^1dy\,y\left[2n_U\mathcal{P}_{Ug}^{[a,b]}(y)+2n_D\mathcal{P}_{Dg}^{[a,b]}(y)+\mathcal{P}_{gg}^{[a,b]}(y)\right]=0\,,\\
+\displaystyle\int_0^1dy\,y\left[2n_U\mathcal{P}_{Ug}^{[a,b]}(y)+2n_D\mathcal{P}_{Dg}^{[a,b]}(y)+\mathcal{P}_{\gamma g}^{[a,b]}(y) +\mathcal{P}_{gg}^{[a,b]}(y)\right]=0\,,\\
 \\
-\displaystyle \int_0^1dy\,y\left[2n_L\mathcal{P}_{L\gamma}^{[a,b]}(y)+2n_U\mathcal{P}_{U\gamma}^{[a,b]}(y)+2n_D\mathcal{P}_{D\gamma}^{[a,b]}(y)+\mathcal{P}_{\gamma\gamma}^{[a,b]}(y)\right]=0\,,
+\displaystyle \int_0^1dy\,y\left[2n_L\mathcal{P}_{L\gamma}^{[a,b]}(y)+2n_U\mathcal{P}_{U\gamma}^{[a,b]}(y)+2n_D\mathcal{P}_{D\gamma}^{[a,b]}(y) +\mathcal{P}_{g\gamma}^{[a,b]}(y)+\mathcal{P}_{\gamma\gamma}^{[a,b]}(y)\right]=0\,,
 \end{array}
 \end{equation}
 for the any of the perturbative orders $[a,b]$ of our interest. For
@@ -2572,6 +2573,30 @@ functions, the valence sum rule implies:
 \displaystyle \int_0^1dy\,\mathcal{P}_{LL}^{-,[a,b]}(y)=0\,.
 \end{array}
 \end{equation}
+
+Also matching functions are subject to integral identities deriving
+from the sum rules. Indeed, matching functions must be such that
+valence and momentum sum rules are preserved when a threshold is
+crossed. In pure QCD, we found the identities in
+Eq.~(\ref{eq:QCDmatchingSumeRules}). In the presence of QED
+corrections, we refer to the system in Eq.~(\ref{eq:MatchingQuarks})
+and from the valence sum rule we derive:
+\begin{equation}
+\int_0^1dy\, \mathcal{K}_{{\rm NS},q}^{[a,b]}(y)=0\,,
+\end{equation}
+while from the momentum sum rule we find:
+\begin{equation}
+\begin{array}{l}
+\displaystyle \int_0^1dy\,y\left[\mathcal{K}_{Qg}^{[a,b]}(y)+n_f\mathcal{K}_{qg}^{[a,b]}(y)+\mathcal{K}_{gg}^{[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[\mathcal{K}_{X\gamma}^{[a,b]}(y)+\mathcal{K}_{\gamma\gamma}^{X,[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[\mathcal{K}_{Qq'}^{[a,b]}(y)+\mathcal{K}_{{\rm NS},q}^{[a,b]}(y)+n_f\mathcal{K}_{qq'}^{[a,b]}(y)+\mathcal{K}_{gq}^{[a,b]}(y)\right]=0\,,\\
+\\
+\displaystyle \int_0^1dy\,y\left[\mathcal{K}_{XX}^{[a,b]}(y)+\mathcal{K}_{gQ}^{[a,b]}(y)+\mathcal{K}_{\gamma X}^{[a,b]}(y)\right]=0\,,
+\end{array}
+\end{equation}
+where we defined $n_f=n_D+n_U$.
 
 
 \newpage
