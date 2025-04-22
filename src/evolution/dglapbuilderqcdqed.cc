@@ -558,7 +558,7 @@ namespace apfel
         const int nl = NDUL[nt][2];
         obj.Threshold = (nt > 0 ? Thresholds[nt - 1] : 0);
         obj.Species = Species.at(nt);
-	obj.ActiveFlavours = {nd, nu, nl};
+        obj.ActiveFlavours = {nd, nu, nl};
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;

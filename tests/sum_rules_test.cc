@@ -101,7 +101,7 @@ int main()
   for (auto const& mf : MatchFuncs)
     {
       if (mf.first < 0)
-	continue;
+        continue;
       const std::map<int, apfel::Operator> K = mf.second.GetObjects();
       std::cout << "\norder: " << mf.first << std::endl;
       std::cout << "- Momentum sum rule:" << std::endl;

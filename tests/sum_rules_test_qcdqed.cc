@@ -19,7 +19,7 @@ int main()
   const std::vector<double> LeptonThresholds = {0, 0, 1.777};
 
   // Perturbative order
-  const int PerturbativeOrder = 2;
+  const int PerturbativeOrder = 3;
 
   // Running couplings
   apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
@@ -31,7 +31,7 @@ int main()
   const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Initialise DGLAP objects
-  const auto DglapObj = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds/*, false, apfel::eps5, true, {0, 0, 0, 0, 0, 0, 0}*/);
+  const auto DglapObj = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds, false, apfel::eps5, true, {0, 0, 0, 0, 0, 0, 0});
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFsQCDQED, mu0, PerturbativeOrder, as, aem);
@@ -86,11 +86,11 @@ int main()
   // Run over orders
   for (auto const& sf : SplitFuncs)
     {
+      std::cout << "\norder: [" << sf.first.first << ", " << sf.first.second << "]" << std::endl;
       const int nD = actfl[0];
       const int nU = actfl[1];
       const int nL = actfl[2];
       const std::map<int, apfel::Operator> P = sf.second.GetObjects();
-      std::cout << "\norder: [" << sf.first.first << ", " << sf.first.second << "]" << std::endl;
       std::cout << "- Momentum sum rules:" << std::endl;
       std::cout << "  * MSR1 = " << xmin * (( P.at(apfel::EvolutionBasisQCDQED::PPLL) + nL * P.at(apfel::EvolutionBasisQCDQED::PPSLL) + nU * P.at(apfel::EvolutionBasisQCDQED::PPSUL) + nD * P.at(apfel::EvolutionBasisQCDQED::PPSDL) + P.at(apfel::EvolutionBasisQCDQED::PgmL) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * MSR2 = " << xmin * (( P.at(apfel::EvolutionBasisQCDQED::PPUU) + nL * P.at(apfel::EvolutionBasisQCDQED::PPSLU) + nU * P.at(apfel::EvolutionBasisQCDQED::PPSUU) + nD * P.at(apfel::EvolutionBasisQCDQED::PPSDU) + P.at(apfel::EvolutionBasisQCDQED::PgU) + P.at(apfel::EvolutionBasisQCDQED::PgmU) ) * MSRDist).Evaluate(xmin) << std::endl;
@@ -102,24 +102,25 @@ int main()
       std::cout << "  * VSR2 = " << (( P.at(apfel::EvolutionBasisQCDQED::PMUU) + nU * P.at(apfel::EvolutionBasisQCDQED::PPV) ) * VSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * VSR3 = " << (P.at(apfel::EvolutionBasisQCDQED::PMLL) * VSRDist).Evaluate(xmin) << std::endl;
     }
-/*
+
   std::cout << "\nChecking sum rules at the level of matching functions..." << std::endl;
 
   // Run over orders
   for (auto const& mf : MatchFuncs)
     {
-      if (mf.first < 0)
-	continue;
+      if (mf.first.first < 0)
+        continue;
+      std::cout << "\norder: [" << mf.first.first << ", " << mf.first.second << "]" << std::endl;
+      const int nf = actfl[0] + actfl[1];
       const std::map<int, apfel::Operator> K = mf.second.GetObjects();
-      std::cout << "\norder: " << mf.first << std::endl;
       std::cout << "- Momentum sum rule:" << std::endl;
-      std::cout << "  * MSR1 = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGG) + nf * K.at(apfel::PhysicalMatchingBasisQCD::KLG) + K.at(apfel::PhysicalMatchingBasisQCD::KHG) ) * MSRDist).Evaluate(xmin) << std::endl;
-      std::cout << "  * MSR2 = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGL) + K.at(apfel::PhysicalMatchingBasisQCD::KLL)
-					      + nf * K.at(apfel::PhysicalMatchingBasisQCD::KLLP) + K.at(apfel::PhysicalMatchingBasisQCD::KHL) ) * MSRDist).Evaluate(xmin) << std::endl;
-      std::cout << "  * MSR3 (intrinsic heavy flavour) = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGH) + K.at(apfel::PhysicalMatchingBasisQCD::KHH) ) * MSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * MSR1 = " << xmin * (( K.at(apfel::MatchingBasisQCDQED::KQg) + nf * K.at(apfel::MatchingBasisQCDQED::Kqg) + K.at(apfel::MatchingBasisQCDQED::Kgg) ) * MSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * MSR2 = " << xmin * (( K.at(apfel::MatchingBasisQCDQED::KXgm) + K.at(apfel::MatchingBasisQCDQED::KXgmgm) ) * MSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * MSR3 = " << xmin * (( K.at(apfel::MatchingBasisQCDQED::KQqp) + K.at(apfel::MatchingBasisQCDQED::KNSq) + nf * K.at(apfel::MatchingBasisQCDQED::Kqqp) + K.at(apfel::MatchingBasisQCDQED::Kgq) ) * MSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * MSR4 (intrinsic heavy flavour) = " << xmin * (( K.at(apfel::MatchingBasisQCDQED::KXX) + K.at(apfel::MatchingBasisQCDQED::KgQ) + K.at(apfel::MatchingBasisQCDQED::KgmX) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "- Valence sum rule: " << std::endl;
-      std::cout << "  * VSR1 = " << (K.at(apfel::PhysicalMatchingBasisQCD::KLL) * VSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * VSR1 = " << (K.at(apfel::MatchingBasisQCDQED::KNSq) * VSRDist).Evaluate(xmin) << std::endl;
     }
-*/
+
   return 0;
 }

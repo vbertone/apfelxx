@@ -95,13 +95,13 @@ int main()
   for (auto const& mf : MatchFuncs)
     {
       if (mf.first < 0)
-	continue;
+        continue;
       const std::map<int, apfel::Operator> K = mf.second.GetObjects();
       std::cout << "\norder: " << mf.first << std::endl;
       std::cout << "- Momentum sum rule:" << std::endl;
       std::cout << "  * MSR1 = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGG) + nf * K.at(apfel::PhysicalMatchingBasisQCD::KLG) + K.at(apfel::PhysicalMatchingBasisQCD::KHG) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * MSR2 = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGL) + K.at(apfel::PhysicalMatchingBasisQCD::KLL)
-					      + nf * K.at(apfel::PhysicalMatchingBasisQCD::KLLP) + K.at(apfel::PhysicalMatchingBasisQCD::KHL) ) * MSRDist).Evaluate(xmin) << std::endl;
+                                              + nf * K.at(apfel::PhysicalMatchingBasisQCD::KLLP) + K.at(apfel::PhysicalMatchingBasisQCD::KHL) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * MSR3 (intrinsic heavy flavour) = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGH) + K.at(apfel::PhysicalMatchingBasisQCD::KHH) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "- Valence sum rule: " << std::endl;
       std::cout << "  * VSR1 = " << (K.at(apfel::PhysicalMatchingBasisQCD::KLL) * VSRDist).Evaluate(xmin) << std::endl;

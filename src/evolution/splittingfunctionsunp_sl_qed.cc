@@ -134,8 +134,8 @@ namespace apfel
     const double lnx  = log(x);
     const double lnx2 = lnx * lnx;
     return 2 * ( - 8 + 24 * x - 224 / 9. * x * x + 80 / 9. / x
-           + ( 4 + 20 * x ) * lnx + 32 / 3. * x * x * lnx
-           - ( 4 + 4 * x ) * lnx2 );
+                 + ( 4 + 20 * x ) * lnx + 32 / 3. * x * x * lnx
+                 - ( 4 + 4 * x ) * lnx2 );
   }
 
   //_________________________________________________________________________________
