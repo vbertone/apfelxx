@@ -22,6 +22,7 @@ namespace apfel
   {
     double                                       Threshold;
     PartonSpecies                                Species;
+    std::vector<int>                             ActiveFlavours;
     Set<Operator>                                UnitySet;
     std::map<std::pair<int, int>, Set<Operator>> SplittingFunctions;
     std::map<std::pair<int, int>, Set<Operator>> MatchingConditions;

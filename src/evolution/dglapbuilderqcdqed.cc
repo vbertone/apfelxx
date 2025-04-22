@@ -302,13 +302,13 @@ namespace apfel
         const double eSigma2 = ( NC * SumCh2[nf] + nl );
         const double ed4     = ed2 * ed2;
         const double eu4     = eu2 * eu2;
-        const Operator O02nspD{g, P02qednsm{eSigma2 / ed2}, IntEps};
+        const Operator O02nspD{g, P02qednsp{eSigma2 / ed2}, IntEps};
         const Operator O02nsmD{g, P02qednsm{eSigma2 / ed2}, IntEps};
         const Operator O02gmqD{g, P02qedgmq{eSigma2 / ed2}, IntEps};
-        const Operator O02nspU{g, P02qednsm{eSigma2 / eu2}, IntEps};
+        const Operator O02nspU{g, P02qednsp{eSigma2 / eu2}, IntEps};
         const Operator O02nsmU{g, P02qednsm{eSigma2 / eu2}, IntEps};
         const Operator O02gmqU{g, P02qedgmq{eSigma2 / eu2}, IntEps};
-        const Operator O02nspL{g, P02qednsm{eSigma2},       IntEps};
+        const Operator O02nspL{g, P02qednsp{eSigma2},       IntEps};
         const Operator O02nsmL{g, P02qednsm{eSigma2},       IntEps};
         const Operator O02gmqL{g, P02qedgmq{eSigma2},       IntEps};
         std::map<int, Operator> OM;
@@ -330,8 +330,8 @@ namespace apfel
         OM.insert({EvolutionBasisQCDQED::PDgm, ( NC * ed4 ) * O02qgm});
         OM.insert({EvolutionBasisQCDQED::PUgm, ( NC * eu4 ) * O02qgm});
         OM.insert({EvolutionBasisQCDQED::PLgm,                O02qgm});
-        OM.insert({EvolutionBasisQCDQED::PgmD, ed4 * O02gmqU});
-        OM.insert({EvolutionBasisQCDQED::PgmU, eu4 * O02gmqD});
+        OM.insert({EvolutionBasisQCDQED::PgmD, ed4 * O02gmqD});
+        OM.insert({EvolutionBasisQCDQED::PgmU, eu4 * O02gmqU});
         OM.insert({EvolutionBasisQCDQED::PgmL,       O02gmqL});
         OM.insert({EvolutionBasisQCDQED::Pgmgm, ( NC * SumCh4[nf] + nl ) * O02gmgm});
         // Insert Zero in the remaining slots
@@ -386,7 +386,7 @@ namespace apfel
       }
 
     // ===============================================================
-    // O(as^2) matching conditions for backwards evolution
+    // O(as^2) matching conditions for backward evolution
     std::map<int, std::map<int, Operator>> Matchm20;
     for (int nt = nti; nt <= ntf; nt++)
       {
@@ -558,6 +558,7 @@ namespace apfel
         const int nl = NDUL[nt][2];
         obj.Threshold = (nt > 0 ? Thresholds[nt - 1] : 0);
         obj.Species = Species.at(nt);
+	obj.ActiveFlavours = {nd, nu, nl};
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
