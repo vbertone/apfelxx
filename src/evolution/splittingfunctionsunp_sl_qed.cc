@@ -239,7 +239,7 @@ namespace apfel
     const double lnx2  = lnx * lnx;
     const double ln1mx = log(1 - x);
     const double pqg   = x * x + ( 1 - x ) * ( 1 - x );
-    return 2 * TR * ( 4 - 9 * x - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) + 4 * ln1mx + ( 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 4 * ( ln1mx - lnx ) - 2 * Pi2 / 3 + 10 ) * pqg );
+    return 4 * TR * ( 4 - 9 * x - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) + 4 * ln1mx + ( 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 4 * ( ln1mx - lnx ) - 2 * Pi2 / 3 + 10 ) * pqg );
   }
 
   //_________________________________________________________________________________
@@ -253,7 +253,7 @@ namespace apfel
     const double lnx2  = lnx * lnx;
     const double ln1mx = log(1 - x);
     const double pqg   = x * x + ( 1 - x ) * ( 1 - x );
-    return 2 * CF * ( 4 - 9 * x - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) + 4 * ln1mx + ( 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 4 * ( ln1mx - lnx ) - 2 * Pi2 / 3 + 10 ) * pqg );
+    return 4 * CF * ( 4 - 9 * x - lnx * ( 1 - 4 * x ) - lnx2 * ( 1  - 2 * x ) + 4 * ln1mx + ( 2 * ( - ln1mx + lnx ) * ( - ln1mx + lnx ) - 4 * ( ln1mx - lnx ) - 2 * Pi2 / 3 + 10 ) * pqg );
   }
 
   //_________________________________________________________________________________

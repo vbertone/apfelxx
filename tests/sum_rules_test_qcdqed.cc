@@ -97,8 +97,6 @@ int main()
       std::cout << "  * MSR3 = " << xmin * (( P.at(apfel::EvolutionBasisQCDQED::PPDD) + nL * P.at(apfel::EvolutionBasisQCDQED::PPSLD) + nU * P.at(apfel::EvolutionBasisQCDQED::PPSUD) + nD * P.at(apfel::EvolutionBasisQCDQED::PPSDD) + P.at(apfel::EvolutionBasisQCDQED::PgD) + P.at(apfel::EvolutionBasisQCDQED::PgmD) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * MSR4 = " << xmin * (( nU * P.at(apfel::EvolutionBasisQCDQED::PUg) + nD * P.at(apfel::EvolutionBasisQCDQED::PDg) + P.at(apfel::EvolutionBasisQCDQED::Pgmg) + P.at(apfel::EvolutionBasisQCDQED::Pgg) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * MSR5 = " << xmin * (( nL * P.at(apfel::EvolutionBasisQCDQED::PLgm) + nU * P.at(apfel::EvolutionBasisQCDQED::PUgm) + nD * P.at(apfel::EvolutionBasisQCDQED::PDgm) + P.at(apfel::EvolutionBasisQCDQED::Pggm) + P.at(apfel::EvolutionBasisQCDQED::Pgmgm) ) * MSRDist).Evaluate(xmin) << std::endl;
-
-      //std::cout << "  * MSR2 = " << xmin * (( P.at(apfel::PhysicalBasisQCD::PGG) + nf * P.at(apfel::PhysicalBasisQCD::PQG) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "- Valence sum rules:" << std::endl;
       std::cout << "  * VSR1 = " << (( P.at(apfel::EvolutionBasisQCDQED::PMDD) + nD * P.at(apfel::EvolutionBasisQCDQED::PPV) ) * VSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * VSR2 = " << (( P.at(apfel::EvolutionBasisQCDQED::PMUU) + nU * P.at(apfel::EvolutionBasisQCDQED::PPV) ) * VSRDist).Evaluate(xmin) << std::endl;
