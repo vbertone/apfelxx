@@ -288,7 +288,7 @@ namespace apfel
             OM.insert({MatchingBasisQCD::M5, nf * ( AS3qqH + APS3qqQ)});
             OM.insert({MatchingBasisQCD::M6, (-1) * ( AS3qqH + APS3qqQ )});
             OM.insert({MatchingBasisQCD::M7, ANS3qqH});
-            OM.insert({MatchingBasisQCD::M8, AS3Hg - AS3qgQ});
+            OM.insert({MatchingBasisQCD::M8, AS3Hg - AS3qgQ / nf});
             OM.insert({MatchingBasisQCD::M9, ( nf * AS3qqH - APS3qqQ )});
             MatchNNNLO.insert({nf, OM});
           }
