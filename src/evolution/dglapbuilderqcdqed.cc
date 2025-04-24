@@ -488,8 +488,8 @@ namespace apfel
                 OM.insert({MatchingBasisQCDQED::KNSq, ANS3qqH});
                 OM.insert({MatchingBasisQCDQED::Kgg,  AS3ggH});
                 OM.insert({MatchingBasisQCDQED::Kgq,  AS3gqH});
-                OM.insert({MatchingBasisQCDQED::Kqqp, APS3qqQ});
-                OM.insert({MatchingBasisQCDQED::Kqg,  AS3qgQ});
+                OM.insert({MatchingBasisQCDQED::Kqqp, APS3qqQ / nf});
+                OM.insert({MatchingBasisQCDQED::Kqg,  AS3qgQ / nf});
               }
             // Insert Zero in the remaining slots
             for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)

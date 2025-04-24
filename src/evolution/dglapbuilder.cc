@@ -284,12 +284,12 @@ namespace apfel
             OM.insert({MatchingBasisQCD::M1, AS3ggH});
             OM.insert({MatchingBasisQCD::M2, nf * AS3gqH});
             OM.insert({MatchingBasisQCD::M3, (-1) * AS3gqH});
-            OM.insert({MatchingBasisQCD::M4, AS3Hg + nf * AS3qgQ});
-            OM.insert({MatchingBasisQCD::M5, nf * ( AS3qqH + nf * APS3qqQ )});
-            OM.insert({MatchingBasisQCD::M6, (-1) * ( AS3qqH + nf * APS3qqQ )});
+            OM.insert({MatchingBasisQCD::M4, AS3Hg + AS3qgQ});
+            OM.insert({MatchingBasisQCD::M5, nf * ( AS3qqH + APS3qqQ)});
+            OM.insert({MatchingBasisQCD::M6, (-1) * ( AS3qqH + APS3qqQ )});
             OM.insert({MatchingBasisQCD::M7, ANS3qqH});
             OM.insert({MatchingBasisQCD::M8, AS3Hg - AS3qgQ});
-            OM.insert({MatchingBasisQCD::M9, nf * ( AS3qqH - APS3qqQ )});
+            OM.insert({MatchingBasisQCD::M9, ( nf * AS3qqH - APS3qqQ )});
             MatchNNNLO.insert({nf, OM});
           }
 
@@ -645,9 +645,9 @@ namespace apfel
             OM.insert({PhysicalMatchingBasisQCD::KGG,  AS3ggH});
             OM.insert({PhysicalMatchingBasisQCD::KGL,  AS3gqH});
             OM.insert({PhysicalMatchingBasisQCD::KGH,  Zero});
-            OM.insert({PhysicalMatchingBasisQCD::KLG,  AS3qgQ});
+            OM.insert({PhysicalMatchingBasisQCD::KLG,  AS3qgQ / nf});
             OM.insert({PhysicalMatchingBasisQCD::KLL,  ANS3qqH});
-            OM.insert({PhysicalMatchingBasisQCD::KLLP, APS3qqQ});
+            OM.insert({PhysicalMatchingBasisQCD::KLLP, APS3qqQ / nf});
             OM.insert({PhysicalMatchingBasisQCD::KHG,  AS3Hg});
             OM.insert({PhysicalMatchingBasisQCD::KHL,  AS3qqH - ANS3qqH});
             OM.insert({PhysicalMatchingBasisQCD::KHH,  Zero});
