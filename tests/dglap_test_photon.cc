@@ -10,33 +10,27 @@ int main()
 {
   // x-space grid
   const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
-  //const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Initial scale
   const double mu0 = sqrt(2);
 
   // Vector of thresholds
-  const std::vector<double> QuarkThresholds = {0, 0, 0, sqrt(2), 4.5, 175};
-  const std::vector<double> LeptonThresholds = {0, 0, 1.777};
+  const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
   const int PerturbativeOrder = 2;
 
   // Running strong and electromagnetic couplings
-  apfel::AlphaQCDQED a{0.35, 7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
-  const apfel::TabulateObject<apfel::matrix<double>> Couplings{a, 100, 0.9, 1001, 3};
-  const auto as  = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(0, 0); };
-  const auto aem = [&] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
-  //apfel::AlphaQCD a0{0.35, sqrt(2), QuarkThresholds, PerturbativeOrder};
-  //apfel::AlphaQED a1{7.496252e-3, sqrt(2), QuarkThresholds, LeptonThresholds, PerturbativeOrder};
-  //const apfel::TabulateObject<double> Alphas{a0, 100, 0.9, 1001, 3};
-  //const apfel::TabulateObject<double> Alpha{a1, 100, 0.9, 1001, 3};
-  //const auto as  = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
-  //const auto aem = [&] (double const& mu) -> double{ return Alpha.Evaluate(mu); };
+  apfel::AlphaQCD a0{0.35, sqrt(2), Thresholds, PerturbativeOrder};
+  apfel::AlphaQED a1{7.496252e-3, sqrt(2), Thresholds, {}, 1};
+  const apfel::TabulateObject<double> Alphas{a0, 100, 0.9, 1001, 3};
+  const apfel::TabulateObject<double> Alpha{a1, 100, 0.9, 1001, 3};
+  const auto as  = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
+  const auto aem = [&] (double const& mu) -> double{ return Alpha.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj   = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds);
-  const auto DglapObjOp = InitializeDglapObjectsQCDQED(g, QuarkThresholds, LeptonThresholds, true);
+  const auto DglapObj   = InitializeDglapObjectsPhoton(g, Thresholds);
+  const auto DglapObjOp = InitializeDglapObjectsPhoton(g, Thresholds, true);
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFsQCDQED, mu0, PerturbativeOrder, as, aem);
@@ -90,10 +84,6 @@ int main()
             << " 2(ubr+dbr) "
             << "   c+cbar   "
             << "    gluon   "
-            << "   photon   "
-            << "   e^-+e^+  "
-            << "  mu^-+mu^+ "
-            << " tau^-+tau^+"
             << std::endl;
 
   std::cout << "Direct Evolution:" << std::endl;
@@ -107,10 +97,6 @@ int main()
                 << "  " << 2 * (pdfs.at(-2) + pdfs.at(-1)).Evaluate(x)
                 << "  " << (pdfs.at(4) + pdfs.at(-4)).Evaluate(x)
                 << "  " << pdfs.at(0).Evaluate(x)
-                << "  " << pdfs.at(22).Evaluate(x)
-                << "  " << 2 * (pdfs.at(11) + pdfs.at(-11)).Evaluate(x)
-                << "  " << 2 * (pdfs.at(13) + pdfs.at(-13)).Evaluate(x)
-                << "  " << 2 * (pdfs.at(15) + pdfs.at(-15)).Evaluate(x)
                 << std::endl;
     }
   std::cout << "\n";
@@ -126,10 +112,6 @@ int main()
                 << "  " << 2 * (oppdfs.at(-2) + oppdfs.at(-1)).Evaluate(x)
                 << "  " << (oppdfs.at(4) + oppdfs.at(-4)).Evaluate(x)
                 << "  " << oppdfs.at(0).Evaluate(x)
-                << "  " << oppdfs.at(22).Evaluate(x)
-                << "  " << 2 * (oppdfs.at(11) + oppdfs.at(-11)).Evaluate(x)
-                << "  " << 2 * (oppdfs.at(13) + oppdfs.at(-13)).Evaluate(x)
-                << "  " << 2 * (oppdfs.at(15) + oppdfs.at(-15)).Evaluate(x)
                 << std::endl;
     }
   std::cout << "\n";
@@ -146,10 +128,6 @@ int main()
                 << "  " << 2 * ( opxpdfs.at(-2) + opxpdfs.at(-1) )
                 << "  " << opxpdfs.at(4) + opxpdfs.at(-4)
                 << "  " << opxpdfs.at(0)
-                << "  " << opxpdfs.at(22)
-                << "  " << 2 * ( opxpdfs.at(11) + opxpdfs.at(-11) )
-                << "  " << 2 * ( opxpdfs.at(13) + opxpdfs.at(-13) )
-                << "  " << 2 * ( opxpdfs.at(15) + opxpdfs.at(-15) )
                 << std::endl;
     }
   std::cout << "\n";
@@ -165,10 +143,6 @@ int main()
                 << "  " << 2 * (tpdfs.at(-2) + tpdfs.at(-1)).Evaluate(x)
                 << "  " << (tpdfs.at(4) + tpdfs.at(-4)).Evaluate(x)
                 << "  " << tpdfs.at(0).Evaluate(x)
-                << "  " << tpdfs.at(22).Evaluate(x)
-                << "  " << 2 * (tpdfs.at(11) + tpdfs.at(-11)).Evaluate(x)
-                << "  " << 2 * (tpdfs.at(13) + tpdfs.at(-13)).Evaluate(x)
-                << "  " << 2 * (tpdfs.at(15) + tpdfs.at(-15)).Evaluate(x)
                 << std::endl;
     }
   std::cout << "\n";
@@ -185,10 +159,6 @@ int main()
                 << "  " << 2 * ( DistMap.at(-2) + DistMap.at(-1) )
                 << "  " << DistMap.at(4) + DistMap.at(-4)
                 << "  " << DistMap.at(0)
-                << "  " << DistMap.at(22)
-                << "  " << 2 * ( DistMap.at(11) + DistMap.at(-11) )
-                << "  " << 2 * ( DistMap.at(13) + DistMap.at(-13) )
-                << "  " << 2 * ( DistMap.at(15) + DistMap.at(-15) )
                 << std::endl;
     }
   std::cout << "\n";

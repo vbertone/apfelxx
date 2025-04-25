@@ -20,12 +20,13 @@ namespace apfel
    */
   struct DglapObjectsQCDQED
   {
-    double                                       Threshold;
-    PartonSpecies                                Species;
-    std::vector<int>                             ActiveFlavours;
-    Set<Operator>                                UnitySet;
-    std::map<std::pair<int, int>, Set<Operator>> SplittingFunctions;
-    std::map<std::pair<int, int>, Set<Operator>> MatchingConditions;
+    double                                           Threshold;
+    PartonSpecies                                    Species;
+    std::vector<int>                                 ActiveFlavours;
+    Set<Operator>                                    UnitySet;
+    std::map<std::pair<int, int>, Set<Operator>>     SplittingFunctions;
+    std::map<std::pair<int, int>, Set<Operator>>     MatchingConditions;
+    std::map<std::pair<int, int>, Set<Distribution>> InhomogeneousTerms;
   };
 
   /**
@@ -56,6 +57,25 @@ namespace apfel
                                                                  double              const& IntEps = 1e-5,
                                                                  bool                const& n3lo = false,
                                                                  std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
+
+  /**
+   * @brief The InitializeDglapObjectsPhoton function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions, matching conditions, and inhomogeneous terms for QCD
+   * evolution of the photon and store them into a
+   * 'DglapObjectsQCDQED' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObjectsQCDQED objects, one for each possible nf
+   * @note This function assumes that masses and thresholds
+   * coincide. Also, N3LO corrections are not included.
+   */
+  std::map<int, DglapObjectsQCDQED> InitializeDglapObjectsPhoton(Grid                const& g,
+                                                                 std::vector<double> const& Thresholds,
+                                                                 bool                const& OpEvol = false,
+                                                                 double              const& IntEps = 1e-5);
   ///@}
 
   /**

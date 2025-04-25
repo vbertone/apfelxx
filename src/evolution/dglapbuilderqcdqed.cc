@@ -603,6 +603,330 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, DglapObjectsQCDQED> InitializeDglapObjectsPhoton(Grid                const& g,
+                                                                 std::vector<double> const& Thresholds,
+                                                                 bool                const& OpEvol,
+                                                                 double              const& IntEps)
+  {
+    report("Initializing InitializeDglapObjectsPhoton for space-like unpolarised evolution of the photon... ");
+    Timer t;
+
+    // Number of down and up quarks depending on nf
+    const std::vector<int> NDW = {0, 0, 1, 2, 2, 3, 3};
+    const std::vector<int> NUP = {0, 1, 1, 1, 2, 2, 3};
+
+    // Determine nd, nd, and nl given the total number of active
+    // partons.
+    std::vector<std::vector<int>> NDU;
+    for (int nt = 0; nt <= (int) Thresholds.size(); nt++)
+      {
+        const int nf = NF((nt > 0 ? Thresholds[nt - 1] : 0) + eps8, Thresholds);
+        const int nd = NDW[nf];
+        const int nu = NUP[nf];
+        NDU.push_back({nd, nu});
+      }
+
+    // Determine initial and final number of active flavours according
+    // to the vector of thresholds.
+    int nti = 0;
+    int ntf = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nti++;
+
+    // Determine parton species give the number of active partons
+    std::map<int, PartonSpecies> Species;
+    for (int nt = nti; nt <= ntf; nt++)
+      if (NDU[nt][0] - NDU[std::min(nt + 1, ntf)][0] != 0)
+        Species.insert({nt, PartonSpecies::DOWNTYPEQUARK});
+      else if (NDU[nt][1] - NDU[std::min(nt + 1, ntf)][1] != 0)
+        Species.insert({nt, PartonSpecies::UPTYPEQUARK});
+      else
+        Species.insert({nt, PartonSpecies::UNKNOWN});
+
+    // Compute logs of muth2 / m2 needed for the matching
+    // conditions. Push a zero at last to extend the vector but that
+    // entry will never be effectively used in the evolution. Set to
+    // zero for now.
+    std::vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      LogKth.push_back(0);
+    LogKth.push_back(0);
+
+    // Define null operator maps for matching and splitting functions
+    std::map<int, Operator> ZeroMatch;
+    std::map<int, Operator> ZeroSplit;
+    const Operator Zero{g, Null{}, IntEps};
+    for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+      ZeroMatch.insert({i, Zero});
+    for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+      ZeroSplit.insert({i, Zero});
+
+    // Allocate needed operators (matching conditions and splitting
+    // functions). By now the code is fast enough to precompute
+    // everything at all available perturbative orders and the current
+    // perturbative order is accounted for only when the actual
+    // splitting functions and matching conditions (lambda) functions
+    // are defined.
+    // ===============================================================
+    // LO matching conditions
+    std::map<int, Operator> Match00;
+    const Operator Id{g, Identity{}, IntEps};
+    Match00.insert({MatchingBasisQCDQED::ONE, Id});
+    // Insert Zero in the remaining slots
+    for (int i = MatchingBasisQCDQED::KQg; i <= MatchingBasisQCDQED::KgmX; i++)
+      Match00.insert({i, Zero});
+
+    // ===============================================================
+    // O(as) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap10;
+    const Operator O10ns{g, P0ns{},  IntEps};
+    const Operator O10gq{g, P0gq{},  IntEps};
+    const Operator O10qg{g, P0qg{1}, IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nf = NDU[nt][0] + NDU[nt][1];
+        const Operator O10gg{g, P0gg{nf}, IntEps};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD, O10ns});
+        OM.insert({EvolutionBasisQCDQED::PPUU, O10ns});
+        OM.insert({EvolutionBasisQCDQED::PMDD, O10ns});
+        OM.insert({EvolutionBasisQCDQED::PMUU, O10ns});
+        OM.insert({EvolutionBasisQCDQED::PDg,  O10qg});
+        OM.insert({EvolutionBasisQCDQED::PUg,  O10qg});
+        OM.insert({EvolutionBasisQCDQED::PgD,  O10gq});
+        OM.insert({EvolutionBasisQCDQED::PgU,  O10gq});
+        OM.insert({EvolutionBasisQCDQED::Pgg,  O10gg});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap10.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as) matching conditions
+    std::map<int, std::map<int, Operator>> Match10;
+    const Operator AS1HgL {g, AS1Hg_L{},  IntEps};
+    const Operator AS1ggHL{g, AS1ggH_L{}, IntEps};
+    const Operator AS1gH0 {g, AS1gH_0{},  IntEps};
+    const Operator AS1gHL {g, AS1gH_L{},  IntEps};
+    const Operator AS1HH0 {g, AS1HH_0{},  IntEps};
+    const Operator AS1HHL {g, AS1HH_L{},  IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const Operator AS1Hg  =          LogKth[nt] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nt] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nt] * AS1gHL;
+        const Operator AS1HH  = AS1HH0 + LogKth[nt] * AS1HHL;
+        std::map<int, Operator> OM;
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::KQg, AS1Hg});
+            OM.insert({MatchingBasisQCDQED::KXX, AS1HH});
+            OM.insert({MatchingBasisQCDQED::Kgg, AS1ggH});
+            OM.insert({MatchingBasisQCDQED::KgQ, AS1gH});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
+        Match10.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^2) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap20;
+    const Operator O20qg{g, P1qg{1}, IntEps};
+    const Operator O20ps{g, P1ps{1}, IntEps};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nf = NDU[nt][0] + NDU[nt][1];
+        const Operator O20nsp{g, P1nsp{nf}, IntEps};
+        const Operator O20nsm{g, P1nsm{nf}, IntEps};
+        const Operator O20gq {g, P1gq{nf},  IntEps};
+        const Operator O20gg {g, P1gg{nf},  IntEps};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD,  O20nsp});
+        OM.insert({EvolutionBasisQCDQED::PPUU,  O20nsp});
+        OM.insert({EvolutionBasisQCDQED::PMDD,  O20nsm});
+        OM.insert({EvolutionBasisQCDQED::PMUU,  O20nsm});
+        OM.insert({EvolutionBasisQCDQED::PPSDD, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PPSDU, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUD, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PPSUU, O20ps});
+        OM.insert({EvolutionBasisQCDQED::PDg,   O20qg});
+        OM.insert({EvolutionBasisQCDQED::PUg,   O20qg});
+        OM.insert({EvolutionBasisQCDQED::PgD,   O20gq});
+        OM.insert({EvolutionBasisQCDQED::PgU,   O20gq});
+        OM.insert({EvolutionBasisQCDQED::Pgg,   O20gg});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^2) matching conditions
+    std::map<int, std::map<int, Operator>> Match20;
+    const Operator APS2Hq0  {g, APS2Hq_0{},   IntEps};
+    const Operator APS2HqL  {g, APS2Hq_L{},   IntEps};
+    const Operator APS2HqL2 {g, APS2Hq_L2{},  IntEps};
+    const Operator ANS2qqH0 {g, ANS2qqH_0{},  IntEps};
+    const Operator ANS2qqHL {g, ANS2qqH_L{},  IntEps};
+    const Operator ANS2qqHL2{g, ANS2qqH_L2{}, IntEps};
+    const Operator AS2Hg0   {g, AS2Hg_0{},    IntEps};
+    const Operator AS2HgL   {g, AS2Hg_L{},    IntEps};
+    const Operator AS2HgL2  {g, AS2Hg_L2{},   IntEps};
+    const Operator AS2gqH0  {g, AS2gqH_0{},   IntEps};
+    const Operator AS2gqHL  {g, AS2gqH_L{},   IntEps};
+    const Operator AS2gqHL2 {g, AS2gqH_L2{},  IntEps};
+    const Operator AS2ggH0  {g, AS2ggH_0{},   IntEps};
+    const Operator AS2ggHL  {g, AS2ggH_L{},   IntEps};
+    const Operator AS2ggHL2 {g, AS2ggH_L2{},  IntEps};
+    const Operator AS2qqH0  = ANS2qqH0  + APS2Hq0;
+    const Operator AS2qqHL  = ANS2qqHL  + APS2HqL;
+    const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const double lnk  = LogKth[nt];
+        const double lnk2 = lnk * lnk;
+        const Operator ANS2qqH = ANS2qqH0 + lnk * ANS2qqHL + lnk2 * ANS2qqHL2;
+        const Operator AS2Hg   = AS2Hg0   + lnk * AS2HgL   + lnk2 * AS2HgL2;
+        const Operator AS2gqH  = AS2gqH0  + lnk * AS2gqHL  + lnk2 * AS2gqHL2;
+        const Operator AS2ggH  = AS2ggH0  + lnk * AS2ggHL  + lnk2 * AS2ggHL2;
+        const Operator AS2qqH  = AS2qqH0  + lnk * AS2qqHL  + lnk2 * AS2qqHL2;
+        std::map<int, Operator> OM;
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::KQg,  AS2Hg});
+            OM.insert({MatchingBasisQCDQED::KQqp, AS2qqH - ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::KNSq, ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::Kgg,  AS2ggH});
+            OM.insert({MatchingBasisQCDQED::Kgq,  AS2gqH});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
+        Match20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^2) matching conditions for backward evolution
+    std::map<int, std::map<int, Operator>> Matchm20;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const Operator AS1Hg   =          LogKth[nt] * AS1HgL;
+        const Operator AS1ggH  =          LogKth[nt] * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + LogKth[nt] * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + LogKth[nt] * AS1HHL;
+        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
+        const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+        const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+        const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+        std::map<int, Operator> OM;
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::Kgg, AS1ggH2});
+            OM.insert({MatchingBasisQCDQED::KgQ, AS1gH2});
+            OM.insert({MatchingBasisQCDQED::KQg, AS1Hg2});
+            OM.insert({MatchingBasisQCDQED::KXX, AS1HH2});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+          OM.insert({i, Zero});
+        Matchm20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(as^3) splitting function operators
+    std::map<int, std::map<int, Operator>> OpMap30;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nf = NDU[nt][0] + NDU[nt][1];
+        const Operator O30nsp{g, P2nsp{nf}, IntEps};
+        const Operator O30nsm{g, P2nsm{nf}, IntEps};
+        const Operator O30nss{g, P2nss{nf}, IntEps};
+        const Operator O30ps {g, P2ps{nf},  IntEps};
+        const Operator O30qg {g, P2qg{nf},  IntEps};
+        const Operator O30gq {g, P2gq{nf},  IntEps};
+        const Operator O30gg {g, P2gg{nf},  IntEps};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCDQED::PPDD,  O30nsp});
+        OM.insert({EvolutionBasisQCDQED::PPUU,  O30nsp});
+        OM.insert({EvolutionBasisQCDQED::PMDD,  O30nsm});
+        OM.insert({EvolutionBasisQCDQED::PMUU,  O30nsm});
+        OM.insert({EvolutionBasisQCDQED::PPSDD, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPSDU, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPSUD, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPSUU, O30ps / nf});
+        OM.insert({EvolutionBasisQCDQED::PPV,   O30nss / nf});
+        OM.insert({EvolutionBasisQCDQED::PDg,   O30qg / nf});
+        OM.insert({EvolutionBasisQCDQED::PUg,   O30qg / nf});
+        OM.insert({EvolutionBasisQCDQED::PgD,   O30gq});
+        OM.insert({EvolutionBasisQCDQED::PgU,   O30gq});
+        OM.insert({EvolutionBasisQCDQED::Pgg,   O30gg});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
+          OM.insert({i, Zero});
+        OpMap30.insert({nt, OM});
+      }
+
+    // Define object of the structure containing the DglapObjects
+    std::map<int, DglapObjectsQCDQED> DglapObj;
+
+    // Allocate convolution maps for evolution and matching, and set
+    // of operators.
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        DglapObjectsQCDQED obj;
+        const int nd = NDU[nt][0];
+        const int nu = NDU[nt][1];
+        const int nl = 0; // No leptons
+        obj.Threshold = (nt > 0 ? Thresholds[nt - 1] : 0);
+        obj.Species = Species.at(nt);
+        obj.ActiveFlavours = {nd, nu, nl};
+        if (OpEvol)
+          {
+            std::map<int, Operator> MapUnity;
+            for (auto const& coord : GkjQCDQED)
+              MapUnity.insert({coord.second, (coord.first.first == coord.first.second ? Id : Zero)});
+            obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCDQED{nd, nu, nl}, MapUnity};
+            obj.SplittingFunctions.insert({{ 1, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap10.at(nt)}});
+            obj.SplittingFunctions.insert({{ 0, 1}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, ZeroSplit}});
+            obj.SplittingFunctions.insert({{ 2, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap20.at(nt)}});
+            obj.SplittingFunctions.insert({{ 1, 1}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, ZeroSplit}});
+            obj.SplittingFunctions.insert({{ 0, 2}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, ZeroSplit}});
+            obj.SplittingFunctions.insert({{ 3, 0}, Set<Operator>{EvolutionOperatorBasisQCDQED{nd, nu, nl}, OpMap30.at(nt)}});
+            obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
+            obj.MatchingConditions.insert({{ 1, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match10.at(nt)}});
+            obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, ZeroMatch}});
+            obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
+            obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
+          }
+        else
+          {
+            obj.SplittingFunctions.insert({{ 1, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap10.at(nt)}});
+            obj.SplittingFunctions.insert({{ 0, 1}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSplit}});
+            obj.SplittingFunctions.insert({{ 2, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap20.at(nt)}});
+            obj.SplittingFunctions.insert({{ 1, 1}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSplit}});
+            obj.SplittingFunctions.insert({{ 0, 2}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSplit}});
+            obj.SplittingFunctions.insert({{ 3, 0}, Set<Operator>{EvolutionBasisQCDQED{nd, nu, nl}, OpMap30.at(nt)}});
+            obj.MatchingConditions.insert({{ 0, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match00}});
+            obj.MatchingConditions.insert({{ 1, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match10.at(nt)}});
+            obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, ZeroMatch}});
+            obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
+            obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
+          }
+        DglapObj.insert({nt, obj});
+      }
+    t.stop();
+
+    return DglapObj;
+  }
+
+  //_____________________________________________________________________________
   std::function<Set<Operator>(int const&, double const&)> SplittingFunctionsQCDQED(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
                                                                                    int                                  const& PerturbativeOrder,
                                                                                    std::function<double(double const&)> const& Alphas,
@@ -708,6 +1032,45 @@ namespace apfel
       throw std::runtime_error(error("MatchingConditionsQCDQED","Perturbative order not allowed."));
   }
 
+  //_____________________________________________________________________________
+  std::function<Set<Distribution>(int const&, double const&)> InhomogeneousTermsQCDQED(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
+                                                                                       int                                  const& PerturbativeOrder,
+                                                                                       std::function<double(double const&)> const& Alphas,
+                                                                                       std::function<double(double const&)> const& Alphaem)
+  {
+    // Return null pointer if the first in nf inhomogeneous-terms map
+    // is empty
+    if (DglapObj.begin()->second.InhomogeneousTerms.empty())
+      return nullptr;
+
+    if (PerturbativeOrder == 0)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        return ( Alphaem(exp(t / 2)) / FourPi ) * DglapObj.at(nf).InhomogeneousTerms.at({0, 1});
+      };
+
+    else if (PerturbativeOrder == 1)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        const double cp10 = Alphas(exp(t / 2)) / FourPi;
+        const double cp01 = Alphaem(exp(t / 2)) / FourPi;
+        const double cp11 = cp10 * cp01;
+        const auto iht = DglapObj.at(nf).InhomogeneousTerms;
+        return cp01 * iht.at({0, 1}) + cp11 * iht.at({1, 1});
+      };
+    else if (PerturbativeOrder == 2)
+      return [=] (int const& nf, double const& t) -> Set<Distribution>
+      {
+        const double cp10 = Alphas(exp(t / 2)) / FourPi;
+        const double cp01 = Alphaem(exp(t / 2)) / FourPi;
+        const double cp11 = cp10 * cp01;
+        const double cp21 = cp10 * cp10 * cp01;
+        const auto iht = DglapObj.at(nf).InhomogeneousTerms;
+        return cp01 * iht.at({0, 1}) + cp11 * iht.at({1, 1}) + cp21 * iht.at({2, 1});
+      };
+    else
+      throw std::runtime_error(error("InhomogeneousTermsQCDQED","Perturbative order not allowed."));
+  }
 
   //_____________________________________________________________________________
   std::unique_ptr<Dglap<Distribution>> BuildDglap(std::map<int, DglapObjectsQCDQED>                                  const& DglapObj,
@@ -741,7 +1104,8 @@ namespace apfel
     // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctionsQCDQED(DglapObj, PerturbativeOrder, Alphas, Alphaem),
                                                                          MatchingConditionsQCDQED(DglapObj, PerturbativeOrder, AlphasTh, AlphaemTh),
-                                                                         nullptr, InPDFs, MuRef, Thresholds, nsteps
+                                                                         InhomogeneousTermsQCDQED(DglapObj, PerturbativeOrder, Alphas, Alphaem),
+                                                                         InPDFs, MuRef, Thresholds, nsteps
                                                                         });
   }
 
@@ -775,7 +1139,6 @@ namespace apfel
     // evolution operators. In other words, evolution operators can be
     // computed in the homogeneous case only. Set InhomogeneousTerms
     // to nullptr.
-    // Initialize DGLAP evolution
     return std::unique_ptr<Dglap<Operator>>(new Dglap<Operator> {SplittingFunctionsQCDQED(DglapObj, PerturbativeOrder, Alphas, Alphaem),
                                                                  MatchingConditionsQCDQED(DglapObj, PerturbativeOrder, AlphasTh, AlphaemTh),
                                                                  nullptr, DglapObj.at(NF(MuRef, Thresholds)).UnitySet, MuRef, Thresholds, nsteps
