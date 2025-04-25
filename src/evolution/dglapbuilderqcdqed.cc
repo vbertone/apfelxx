@@ -662,6 +662,12 @@ namespace apfel
     for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
       ZeroSplit.insert({i, Zero});
 
+    // Empty set of distrubutions
+    std::map<int, Distribution> ZeroSet;
+    const Distribution ZeroDist{g, [] (double const&) -> double { return 0; }};
+    for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
+      ZeroSet.insert({i, ZeroDist});
+
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -918,6 +924,9 @@ namespace apfel
             obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, ZeroMatch}});
             obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
             obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
+            obj.InhomogeneousTerms.insert({{ 0, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSet}});
+            obj.InhomogeneousTerms.insert({{ 1, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSet}});
+            obj.InhomogeneousTerms.insert({{ 2, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSet}});
           }
         DglapObj.insert({nt, obj});
       }
