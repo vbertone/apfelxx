@@ -711,6 +711,32 @@ namespace apfel
       }
 
     // ===============================================================
+    // O(a) inhomogeneous terms
+    std::map<int, std::map<int, Distribution>> InHom01;
+    const Distribution Ppgm01{g, [] (double const& x) -> double { return P01qedqgm{}.Regular(x); }};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nd = NDU[nt][0];
+        const int nu = NDU[nt][1];
+        std::map<int, Distribution> OM;
+        for (int i = 0; i < nd; i++)
+          {
+            OM.insert({6  + i, ( NC * ed2 ) * Ppgm01});
+            OM.insert({11 + i, ( NC * ed2 ) * Ppgm01});
+          }
+        for (int i = 0; i < nu; i++)
+          {
+            OM.insert({3  + i, ( NC * eu2 ) * Ppgm01});
+            OM.insert({14 + i, ( NC * eu2 ) * Ppgm01});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
+          OM.insert({i, ZeroDist});
+        InHom01.insert({nt, OM});
+      }
+
+    // ===============================================================
     // O(as) matching conditions
     std::map<int, std::map<int, Operator>> Match10;
     const Operator AS1HgL {g, AS1Hg_L{},  IntEps};
@@ -770,6 +796,34 @@ namespace apfel
         for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
           OM.insert({i, Zero});
         OpMap20.insert({nt, OM});
+      }
+
+    // ===============================================================
+    // O(a*as) inhomogeneous terms
+    std::map<int, std::map<int, Distribution>> InHom11;
+    const Distribution Ppgm11{g, [] (double const& x) -> double { return P11qedqgm{}.Regular(x); }};
+    const Distribution Pggm11{g, [] (double const& x) -> double { return P11qedggm{}.Regular(x); }};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nd = NDU[nt][0];
+        const int nu = NDU[nt][1];
+        std::map<int, Distribution> OM;
+        for (int i = 0; i < nd; i++)
+          {
+            OM.insert({6  + i, ( NC * ed2 ) * Ppgm11});
+            OM.insert({11 + i, ( NC * ed2 ) * Ppgm11});
+          }
+        for (int i = 0; i < nu; i++)
+          {
+            OM.insert({3  + i, ( NC * eu2 ) * Ppgm11});
+            OM.insert({14 + i, ( NC * eu2 ) * Ppgm11});
+          }
+        OM.insert({9, ( NC * SumCh2[nt] ) * Pggm11});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
+          OM.insert({i, ZeroDist});
+        InHom11.insert({nt, OM});
       }
 
     // ===============================================================
@@ -879,6 +933,35 @@ namespace apfel
         OpMap30.insert({nt, OM});
       }
 
+    // ===============================================================
+    // O(a*as^2) inhomogeneous terms
+    std::map<int, std::map<int, Distribution>> InHom21;
+    const Distribution Pps21{g, [] (double const& x) -> double { return P21qedps{}.Regular(x); }};
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        // Determine number of active quarks
+        const int nd = NDU[nt][0];
+        const int nu = NDU[nt][1];
+        const Distribution Pnsp21{g, [nt] (double const& x) -> double { return P21qednsp{nt}.Regular(x); }};
+        const Distribution Pggm21{g, [nt] (double const& x) -> double { return P21qedggm{nt}.Regular(x); }};
+        std::map<int, Distribution> OM;
+        for (int i = 0; i < nd; i++)
+          {
+            OM.insert({6  + i, ( NC * ed2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
+            OM.insert({11 + i, ( NC * ed2 ) * Pnsp21});
+          }
+        for (int i = 0; i < nu; i++)
+          {
+            OM.insert({3  + i, ( NC * eu2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
+            OM.insert({14 + i, ( NC * eu2 ) * Pnsp21});
+          }
+        OM.insert({9, ( NC * SumCh2[nt] ) * Pggm21});
+        // Insert Zero in the remaining slots
+        for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
+          OM.insert({i, ZeroDist});
+        InHom21.insert({nt, OM});
+      }
+
     // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjectsQCDQED> DglapObj;
 
@@ -924,9 +1007,9 @@ namespace apfel
             obj.MatchingConditions.insert({{ 0, 1}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, ZeroMatch}});
             obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
             obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
-            obj.InhomogeneousTerms.insert({{ 0, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSet}});
-            obj.InhomogeneousTerms.insert({{ 1, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSet}});
-            obj.InhomogeneousTerms.insert({{ 2, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, ZeroSet}});
+            obj.InhomogeneousTerms.insert({{ 0, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, InHom01.at(nt)}});
+            obj.InhomogeneousTerms.insert({{ 1, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, InHom11.at(nt)}});
+            obj.InhomogeneousTerms.insert({{ 2, 1}, Set<Distribution>{EvolutionBasisQCDQED{nd, nu, nl}, InHom21.at(nt)}});
           }
         DglapObj.insert({nt, obj});
       }

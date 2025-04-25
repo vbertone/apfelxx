@@ -321,4 +321,71 @@ namespace apfel
   {
     return - 4 * CF;
   }
+
+  //_________________________________________________________________________________
+  P21qednsp::P21qednsp(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double P21qednsp::Regular(double const& x) const
+  {
+    const double x2   = x * x;
+    const double x3   = x * x2;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx * lx2;
+    const double lx4  = lx * lx3;
+    const double l1x  = log(1 - x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x * l1x2;
+    const double l1x4 = l1x * l1x3;
+    const double kns20 = 128. / 27.* l1x4 + 112. / 9.* l1x3 + 175.3 * l1x2 + 142.3 * l1x + 1353. - 1262.* x + 449.2 * x2
+                         - 1445.* x3 - lx * l1x * ( 162.7 * lx + 195.4 * l1x ) + 1169. * x * lx + 50.08 * ( 1 - x ) * l1x3 + 744.6 * lx
+                         + 201.6 * lx2 + 80. / 3. * lx3 + 64. / 27.* lx4;
+    const double kns21 = - 32. / 27.* l1x3 - 11.858 * l1x2 - 18.77 * l1x - 40.035 + 114.4 * x - 24.86 * x2 - 53.39 * x3
+                         + lx * l1x * ( 8.523 * lx + 269.4 * l1x ) - 26.63 * x * lx + 270. * ( 1 - x ) * l1x2 - 21.55 * lx - 10.992 * lx2 - 32. / 27.* lx3;
+    return kns20 + _nf * kns21;
+  }
+
+  //_________________________________________________________________________________
+  P21qedps::P21qedps():
+    Expression()
+  {
+  }
+  double P21qedps::Regular(double const& x) const
+  {
+    const double x2  = x * x;
+    const double lx  = log(x);
+    const double lx2 = lx * lx;
+    const double lx3 = lx * lx2;
+    const double lx4 = lx * lx3;
+    return ( 2464./81./ x -  432. - 72.* x + 38360./81.* x2 - lx * ( 344. + 368.* x + 3584./27.* x2 )
+             - lx2 * ( 144. + 104.* x + 224./9.* x2 ) - lx3 * ( 16. - 16.* x - 128./9.* x2 ) - lx4 * 8./3.* (1. - 2.* x) ) * 4./3.;
+  }
+
+  //_________________________________________________________________________________
+  P21qedggm::P21qedggm(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double P21qedggm::Regular(double const& x) const
+  {
+    const double x2   = x * x;
+    const double x3   = x * x2;
+    const double lx   = log(x);
+    const double lx2  = lx * lx;
+    const double lx3  = lx * lx2;
+    const double l1x  = log(1 - x);
+    const double l1x2 = l1x * l1x;
+    const double l1x3 = l1x * l1x2;
+    const double kg20 = 32. / 27. * l1x3 - 79.13 * l1x2 + 87.22 * l1x + 1738. - 1580.* x - 160.* x2 - 566.7 * x3
+                        - lx * l1x * ( 549.5 + 1230. * lx + 433.2 * l1x ) + 2176.* lx + 1123.7 * lx2 + ( 2400. + 448.* lx ) / 27. * lx3
+                        - (73.1409 - 128./3. * lx) / x;
+    const double kg21 = - 32. / 9.* l1x2 + 16.38 * l1x + 68.10 - 36.42 * x + 56.95 * x2 - 44.10 * x3
+                        - lx* l1x * ( 16.18 + 38.33 * lx + 9.133 * l1x) - 10.76 * lx + 26.41 * lx2 - 64./27.* lx3 - 40.5597 / x;
+    return ( 1 - x ) * ( kg20 + _nf * kg21 );
+  }
+
 }

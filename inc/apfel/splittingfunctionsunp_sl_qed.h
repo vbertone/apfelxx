@@ -267,5 +267,42 @@ namespace apfel
     P11qedgmgm();
     double Local(double const& x) const;
   };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>&alpha;)
+   * non-singlet-plus unpolarised splitting function.
+   */
+  class P21qednsp: public Expression
+  {
+  public:
+    P21qednsp(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>&alpha;)
+   * pure-singlet unpolarised splitting function.
+   */
+  class P21qedps: public Expression
+  {
+  public:
+    P21qedps();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>2</SUP>&alpha;)
+   * gluon-photon unpolarised splitting function.
+   */
+  class P21qedggm: public Expression
+  {
+  public:
+    P21qedggm(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
   ///@}
 }
