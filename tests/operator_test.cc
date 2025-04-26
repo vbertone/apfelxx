@@ -39,7 +39,20 @@ int main()
   t.stop();
 
   // Print operator
-  std::cout << op << std::endl;;
+  std::cout << op << std::endl;
+
+  // Construct operator again and invert it
+  apfel::Operator opi{g, p};
+  opi.Invert();
+
+  // Print inverse operator
+  std::cout << opi << std::endl;
+
+  // Multiply operator and its inverse
+  const apfel::Operator id = op * opi;
+
+  // Print product (must be the identity)
+  std::cout << id << std::endl;
 
   return 0;
 }

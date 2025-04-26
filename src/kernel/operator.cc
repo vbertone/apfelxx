@@ -318,6 +318,37 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  void Operator::Invert()
+  {
+    if (_gpd)
+      throw std::runtime_error(error("Operator::Invert", "GPD-like Operator cannot be inverted."));
+
+    // Aloocate inverse operator
+    std::vector<matrix<double>> InverseOperator(_Operator.size());
+
+    // Loop over subgrids
+    for (int i = 0; i < (int) InverseOperator.size(); i++)
+      {
+        // Resize operator
+        InverseOperator[i].resize(_Operator[i].size(0), _Operator[i].size(1), 0);
+
+        // Set first element
+        InverseOperator[i](0, 0) = 1 / _Operator[i](0, 0);
+
+        // Loop over remaining nodes
+        for (int k = 1; k < (int) InverseOperator[i].size(1); k++)
+          {
+            for (int j = 1; j <= k; j++)
+              InverseOperator[i](0, k) -= _Operator[i](0, j) * InverseOperator[i](0, k - j);
+            InverseOperator[i](0, k) /= _Operator[i](0, 0);
+          }
+      }
+
+    // Replace operator with its inverse
+    _Operator = InverseOperator;
+  }
+
+  //_________________________________________________________________________
   Distribution Operator::operator *= (Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid

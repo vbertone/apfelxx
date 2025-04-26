@@ -81,6 +81,12 @@ namespace apfel
     Distribution Evaluate(double const& x) const;
 
     /**
+     * @brief Function that inverts the current operator such that,
+     * when multiplied by the original operator, it returns the unity.
+     */
+    void Invert();
+
+    /**
      * @brief Function that returns the Grid object associated with
      * the operator.
      */
