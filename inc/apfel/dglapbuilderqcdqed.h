@@ -85,6 +85,52 @@ namespace apfel
    */
   ///@{
   /**
+   * @brief The SplittingFunctionsQCDQED function constructs a
+   * function of the number of active flavours and the scale variable
+   * t = 2log(mu) that returns the full set of splitting functions.
+   * @param DglapObj: structure with the coefficients of the perturbative objects
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param Alphas: the function returning the strong coupling
+   * @param Alphaem: the function returning the eletromagnetic coupling
+   * @return A standard function returning a set of operators.
+   */
+  std::function<Set<Operator>(int const&, double const&)> SplittingFunctionsQCDQED(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
+                                                                                   int                                  const& PerturbativeOrder,
+                                                                                   std::function<double(double const&)> const& Alphas,
+                                                                                   std::function<double(double const&)> const& Alphaem);
+
+  /**
+   * @brief The MatchingConditionsQCDQED function constructs a
+   * function of whether the matching is to be done upwards or
+   * downwards and the number of active flavours that returns the full
+   * set of matching functions.
+   * @param DglapObj: structure with the coefficients of the perturbative objects
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param AlphasTh: the values of the strong coupling below and above threshold
+   * @param AlphaemTh: the values of the eletromagnetic coupling below and above threshold
+   * @return A standard function returning a set of operators.
+   */
+  std::function<Set<Operator>(bool const&, int const&)> MatchingConditionsQCDQED(std::map<int, DglapObjectsQCDQED>        const& DglapObj,
+                                                                                 int                                      const& PerturbativeOrder,
+                                                                                 std::map<int, std::pair<double, double>> const& AlphasTh,
+                                                                                 std::map<int, std::pair<double, double>> const& AlphaemTh);
+
+  /**
+   * @brief The InhomogeneousTermsQCDQED function constructs a
+   * function of the number of active flavours and the scale variable
+   * t = 2log(mu) that returns the full set of inhomogeneous terms.
+   * @param DglapObj: structure with the coefficients of the perturbative objects
+   * @param PerturbativeOrder: the perturbative order of the evolution
+   * @param Alphas: the function returning the strong coupling
+   * @param Alphaem: the function returning the eletromagnetic coupling
+   * @return A standard function returning a set of distributions.
+   */
+  std::function<Set<Distribution>(int const&, double const&)> InhomogeneousTermsQCDQED(std::map<int, DglapObjectsQCDQED>    const& DglapObj,
+                                                                                       int                                  const& PerturbativeOrder,
+                                                                                       std::function<double(double const&)> const& Alphas,
+                                                                                       std::function<double(double const&)> const& Alphaem);
+
+  /**
    * @brief The BuildDglap function builds the actual dglap object
    * that performs the DGLAP QCDxQED evolution for distributions.
    * @param DglapObj: structure with the coefficients of the perturbative objects

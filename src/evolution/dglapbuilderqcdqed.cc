@@ -722,12 +722,12 @@ namespace apfel
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
           {
-            OM.insert({6  + i, ( NC * ed2 ) * Ppgm01});
+            OM.insert({8  - i, ( NC * ed2 ) * Ppgm01});
             OM.insert({11 + i, ( NC * ed2 ) * Ppgm01});
           }
         for (int i = 0; i < nu; i++)
           {
-            OM.insert({3  + i, ( NC * eu2 ) * Ppgm01});
+            OM.insert({5  - i, ( NC * eu2 ) * Ppgm01});
             OM.insert({14 + i, ( NC * eu2 ) * Ppgm01});
           }
         // Insert Zero in the remaining slots
@@ -811,12 +811,12 @@ namespace apfel
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
           {
-            OM.insert({6  + i, ( NC * ed2 ) * Ppgm11});
+            OM.insert({8  - i, ( NC * ed2 ) * Ppgm11});
             OM.insert({11 + i, ( NC * ed2 ) * Ppgm11});
           }
         for (int i = 0; i < nu; i++)
           {
-            OM.insert({3  + i, ( NC * eu2 ) * Ppgm11});
+            OM.insert({5  - i, ( NC * eu2 ) * Ppgm11});
             OM.insert({14 + i, ( NC * eu2 ) * Ppgm11});
           }
         OM.insert({9, ( NC * SumCh2[nt] ) * Pggm11});
@@ -947,12 +947,12 @@ namespace apfel
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
           {
-            OM.insert({6  + i, ( NC * ed2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
+            OM.insert({8  - i, ( NC * ed2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
             OM.insert({11 + i, ( NC * ed2 ) * Pnsp21});
           }
         for (int i = 0; i < nu; i++)
           {
-            OM.insert({3  + i, ( NC * eu2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
+            OM.insert({5  - i, ( NC * eu2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
             OM.insert({14 + i, ( NC * eu2 ) * Pnsp21});
           }
         OM.insert({9, ( NC * SumCh2[nt] ) * Pggm21});
