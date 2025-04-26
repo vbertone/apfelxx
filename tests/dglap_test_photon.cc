@@ -80,7 +80,7 @@ int main()
     inhom.SetMap(apfel::EvolveDistributionsBasisQCDQED{});
     return ( 2 / mup ) * gamma * inhom;
   };
-  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabGammaInHom{GammaInHom, 200, 1, 2 * mu, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabGammaInHom{GammaInHom, 100, 1, 2 * mu, 3, Thresholds};
   apfel::Set<apfel::Distribution> IntGammaInHom = TabGammaInHom.Integrate(mu0, mu);
 
   IntGammaInHom.SetMap(apfel::EvolveDistributionsBasisQCDQED{});
