@@ -170,12 +170,6 @@ $(function(){ initResizable(false); });
 <div class="line">  <span class="comment">// Get PDFs at the final scale as distributions</span></div>
 <div class="line">  <span class="keyword">const</span> <a class="code hl_class" href="classapfel_1_1Set.html">apfel::Set&lt;apfel::Distribution&gt;</a> Dists = TabulatedPDFs.<a class="code hl_function" href="classapfel_1_1Set.html#a0f48cac1df954d00a7e7edfd85a4b996">Evaluate</a>(mu);</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Momentum sum rule</span></div>
-<div class="line">  <span class="keywordtype">double</span> msr = 0;</div>
-<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 11; i++)</div>
-<div class="line">    msr += Dists.<a id="a12" name="a12"></a><a class="code hl_function" href="classapfel_1_1Set.html#a3bab62033192c3cb1824524c51c47169">at</a>(i).Integrate(1e-9, 1);</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\nMomentum sum rule: &quot;</span> &lt;&lt; msr &lt;&lt; std::endl;</div>
-<div class="line"> </div>
 <div class="line">  <span class="comment">// Print results</span></div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;double&gt; xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};</div>
 <div class="line">  std::cout &lt;&lt; std::scientific;</div>
@@ -235,7 +229,7 @@ $(function(){ initResizable(false); });
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Evolution through the interpolated evolution operator:&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; x : xlha)</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">const</span> std::map&lt;int, double&gt; opxpdfs = <a class="code hl_function" href="namespaceapfel.html#a89a71d768bc0cc2f4da0444857efc9e8">apfel::PlusMinusQCDQEDToPhys</a>((<a class="code hl_class" href="classapfel_1_1Set.html">apfel::Set&lt;apfel::Distribution&gt;</a> {<a class="code hl_class" href="classapfel_1_1EvolveDistributionsBasisQCDQED.html">apfel::EvolveDistributionsBasisQCDQED</a>{}, tops.<a class="code hl_function" href="classapfel_1_1Set.html#a0f48cac1df954d00a7e7edfd85a4b996">Evaluate</a>(x).<a id="a13" name="a13"></a><a class="code hl_function" href="classapfel_1_1Set.html#acbd7260c0273ba3f63a1b89ab43ef067">GetObjects</a>()} * pdfs0).Squash());</div>
+<div class="line">      <span class="keyword">const</span> std::map&lt;int, double&gt; opxpdfs = <a class="code hl_function" href="namespaceapfel.html#a89a71d768bc0cc2f4da0444857efc9e8">apfel::PlusMinusQCDQEDToPhys</a>((<a class="code hl_class" href="classapfel_1_1Set.html">apfel::Set&lt;apfel::Distribution&gt;</a> {<a class="code hl_class" href="classapfel_1_1EvolveDistributionsBasisQCDQED.html">apfel::EvolveDistributionsBasisQCDQED</a>{}, tops.<a class="code hl_function" href="classapfel_1_1Set.html#a0f48cac1df954d00a7e7edfd85a4b996">Evaluate</a>(x).<a id="a12" name="a12"></a><a class="code hl_function" href="classapfel_1_1Set.html#acbd7260c0273ba3f63a1b89ab43ef067">GetObjects</a>()} * pdfs0).Squash());</div>
 <div class="line">      std::cout.precision(1);</div>
 <div class="line">      std::cout &lt;&lt; x;</div>
 <div class="line">      std::cout.precision(4);</div>
@@ -313,7 +307,6 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclassapfel_1_1Grid_html"><div class="ttname"><a href="classapfel_1_1Grid.html">apfel::Grid</a></div><div class="ttdoc">The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...</div><div class="ttdef"><b>Definition</b> grid.h:22</div></div>
 <div class="ttc" id="aclassapfel_1_1Set_html"><div class="ttname"><a href="classapfel_1_1Set.html">apfel::Set</a></div><div class="ttdoc">The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...</div><div class="ttdef"><b>Definition</b> set.h:23</div></div>
 <div class="ttc" id="aclassapfel_1_1Set_html_a0f48cac1df954d00a7e7edfd85a4b996"><div class="ttname"><a href="classapfel_1_1Set.html#a0f48cac1df954d00a7e7edfd85a4b996">apfel::Set::Evaluate</a></div><div class="ttdeci">Set&lt; Distribution &gt; Evaluate(double const &amp;x) const</div><div class="ttdoc">This function interpolates the single objects of the set (only Operators) over the first index and re...</div></div>
-<div class="ttc" id="aclassapfel_1_1Set_html_a3bab62033192c3cb1824524c51c47169"><div class="ttname"><a href="classapfel_1_1Set.html#a3bab62033192c3cb1824524c51c47169">apfel::Set::at</a></div><div class="ttdeci">T const &amp; at(int const &amp;id) const</div><div class="ttdoc">This returns object with ID &quot;id&quot; in the map.</div><div class="ttdef"><b>Definition</b> set.h:69</div></div>
 <div class="ttc" id="aclassapfel_1_1Set_html_ac2b7cfa13e427b34727d36c9ba28feb1"><div class="ttname"><a href="classapfel_1_1Set.html#ac2b7cfa13e427b34727d36c9ba28feb1">apfel::Set::SetMap</a></div><div class="ttdeci">void SetMap(ConvolutionMap const &amp;map)</div><div class="ttdoc">This function (re)sets the convolution map.</div><div class="ttdef"><b>Definition</b> set.h:83</div></div>
 <div class="ttc" id="aclassapfel_1_1Set_html_acbd7260c0273ba3f63a1b89ab43ef067"><div class="ttname"><a href="classapfel_1_1Set.html#acbd7260c0273ba3f63a1b89ab43ef067">apfel::Set::GetObjects</a></div><div class="ttdeci">std::map&lt; int, T &gt; const &amp; GetObjects() const</div><div class="ttdoc">This returns the full map of objects.</div><div class="ttdef"><b>Definition</b> set.h:77</div></div>
 <div class="ttc" id="aclassapfel_1_1SubGrid_html"><div class="ttname"><a href="classapfel_1_1SubGrid.html">apfel::SubGrid</a></div><div class="ttdoc">Class for the x-space interpolation SubGrids.</div><div class="ttdef"><b>Definition</b> subgrid.h:23</div></div>
@@ -325,7 +318,7 @@ $(function(){ initResizable(false); });
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 22 2025 10:26:09 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sun Apr 27 2025 07:13:54 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

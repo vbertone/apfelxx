@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.10)
 project(apfel CXX Fortran)
 
 # Define code version
-set(apfelxx_VERSION 4.9.0)
+set(apfelxx_VERSION 4.10.0)
 
 # Define c++ standard and issue all the warning demanded by this standard
 set(CMAKE_BUILD_TYPE Release)

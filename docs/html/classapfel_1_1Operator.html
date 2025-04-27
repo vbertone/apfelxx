@@ -129,6 +129,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aea92b7498b3b329688f3ac898083b9be" id="r_aea92b7498b3b329688f3ac898083b9be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea92b7498b3b329688f3ac898083b9be">Evaluate</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:aea92b7498b3b329688f3ac898083b9be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that interpolates the operator over the first index and returns a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> object.  <br /></td></tr>
 <tr class="separator:aea92b7498b3b329688f3ac898083b9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea192e87bfcc79809713cdef501bd5da" id="r_aea192e87bfcc79809713cdef501bd5da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea192e87bfcc79809713cdef501bd5da">Invert</a> ()</td></tr>
+<tr class="memdesc:aea192e87bfcc79809713cdef501bd5da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that inverts the current operator such that, when multiplied by the original operator, it returns the unity.  <br /></td></tr>
+<tr class="separator:aea192e87bfcc79809713cdef501bd5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80f6e9dc8055f27d5a394f53c4702d30" id="r_a80f6e9dc8055f27d5a394f53c4702d30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80f6e9dc8055f27d5a394f53c4702d30">GetGrid</a> () const</td></tr>
 <tr class="memdesc:a80f6e9dc8055f27d5a394f53c4702d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated with the operator.  <br /></td></tr>
 <tr class="separator:a80f6e9dc8055f27d5a394f53c4702d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -497,6 +500,27 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="aea192e87bfcc79809713cdef501bd5da" name="aea192e87bfcc79809713cdef501bd5da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea192e87bfcc79809713cdef501bd5da">&#9670;&#160;</a></span>Invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::Operator::Invert </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that inverts the current operator such that, when multiplied by the original operator, it returns the unity. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="operator_test_8cc-example.html#a10">operator_test.cc</a>.</dd>
+</dl>
+
+</div>
+</div>
 <a id="a55048afd5d8c9310649edeafdcf10d7e" name="a55048afd5d8c9310649edeafdcf10d7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55048afd5d8c9310649edeafdcf10d7e">&#9670;&#160;</a></span>IsGPD()</h2>
 
@@ -838,7 +862,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 22 2025 10:26:10 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sun Apr 27 2025 07:13:55 for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

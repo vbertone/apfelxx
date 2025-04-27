@@ -104,7 +104,7 @@ namespace apfel
       _Qg.push_back(InvTabFunc(lq));
 
     // Displace slightly the values below and above the thresholds
-    for (int isg = 1; isg < (int) _nQg.size() - 1; isg++)
+    for (int isg = 1; isg < (int) _nQg.size(); isg++)
       {
         _Qg[_nQg[isg] - 1]  *= 1 - eps12;
         _Qg[_nQg[isg]]      *= 1 + eps12;

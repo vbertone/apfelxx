@@ -18,7 +18,7 @@ namespace apfel
    * object (e.g. a splitting function) and a set of interpolanting
    * functions defined on a grid.
    * @note Both the forward and the non-forward cases can be handled
-   * by this class. The correspond respectively to inclusive
+   * by this class. They correspond respectively to inclusive
    * (DGLAP-like) and exclusive (GPD-like) processes.
    */
   class Operator
