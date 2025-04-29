@@ -158,6 +158,14 @@ namespace apfel
    * @brief Rotation from the physical to the QCD evolution basis of a
    * map of distributions.
    * @param InPhysMap: the map in the physical basis
+   * @return The map of integers and distributions in the QCD evolution basis
+   */
+  std::map<int, Distribution> PhysToQCDEv(std::map<int, Distribution> const& InPhysMap);
+
+  /**
+   * @brief Rotation from the physical to the QCD evolution basis of a
+   * map of distributions.
+   * @param InPhysMap: the map in the physical basis
    * @param nf: the the number of active flavours
    * @return The set of distributions in the QCD evolution basis
    */
@@ -201,6 +209,14 @@ namespace apfel
    * @return The map in the PlusMinus basis
    */
   std::map<int, double> PhysToPlusMinus(std::map<int, double> const& InPhysMap);
+
+  /**
+   * @brief Rotation from the physical to the PlusMinus basis of a map
+   * of distributions.
+   * @param InPhysMap: the map of distributions in the physical basis
+   * @return The map of distributions in the PlusMinus basis
+   */
+  std::map<int, Distribution> PhysToPlusMinus(std::map<int, Distribution> const& InPhysMap);
 
   /**
    * @brief Rotation from to the PlusMinus basis to the physical basis.
