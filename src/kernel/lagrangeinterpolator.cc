@@ -93,7 +93,7 @@ namespace apfel
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
-    // is different from zero.  Ideally this functions should never be
+    // is different from zero. Ideally this functions should never be
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
@@ -128,7 +128,7 @@ namespace apfel
     const int bound = std::max(beta - id, 0);
 
     // Return 0 if "x" is outside the range in which the interpolant
-    // is different from zero.  Ideally this functions should never be
+    // is different from zero. Ideally this functions should never be
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
