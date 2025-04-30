@@ -234,7 +234,7 @@ namespace apfel
   std::map<int, Distribution> PlusMinusToPhys(std::map<int, Distribution> const& PlusMinusMap);
 
   /**
-   * @brief Rotation from to the PlusMinus basis including also photon
+   * @brief Rotation from the PlusMinus basis including also photon
    * and lepton distributions to the physical basis.
    * @param PlusMinusMap: the map in the PlusMinus basis
    * @return The map in the physical basis
@@ -242,12 +242,20 @@ namespace apfel
   std::map<int, double> PlusMinusQCDQEDToPhys(std::map<int, double> const& PlusMinusMap);
 
   /**
-   * @brief Rotation from to the PlusMinus basis including also photon
+   * @brief Rotation from the PlusMinus basis including also photon
    * and lepton distributions to the physical basis of a map of
    * distributions.
    * @param PlusMinusMap: the map in the PlusMinus basis
    * @return The map of distributions in the physical basis
    */
   std::map<int, Distribution> PlusMinusQCDQEDToPhys(std::map<int, Distribution> const& PlusMinusMap);
+
+  /**
+   * @brief Rotation from the phsyical basis to the PlusMinus basis
+   * including also photon and lepton distributions.
+   * @param InPhysMap: the map in the physical basis
+   * @return The map in the PlusMinus basis wil photon and lepton PDFs
+   */
+  std::map<int, double> PhysToPlusMinusQCDQED(std::map<int, double> const& InPhysMap);
   ///@}
 }

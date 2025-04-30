@@ -494,4 +494,54 @@ namespace apfel
     PhysMap.insert({-1,  ( PlusMinusMap.at(8) - PlusMinusMap.at(11) ) / 2});
     return PhysMap;
   }
+
+  //_____________________________________________________________________________
+  std::map<int, double> PhysToPlusMinusQCDQED(std::map<int, double> const& InPhysMap)
+  {
+    // Call function in the physical basis
+    std::map<int, double> PhysMap = InPhysMap;
+
+    // Fill in keys that do not exist. Start with the gluon (assumes
+    // that the ID is 21).
+    if (PhysMap.find(0) == PhysMap.end())
+      PhysMap[0] = PhysMap[21];
+
+    // Photon (fill in with zero if they do not exist).
+    if (PhysMap.find(22) == PhysMap.end())
+      PhysMap[22] = 0;
+
+    // Quarks (fill in with zero if they do not exist).
+    for (int i = -6; i <= 6; i++)
+      if (PhysMap.find(i) == PhysMap.end())
+        PhysMap[i] = 0;
+
+    // Leptons (fill in with zero if they do not exist).
+    for (int i : std::vector<int> {-15, -13, -11, 11, 13, 15})
+      if (PhysMap.find(i) == PhysMap.end())
+        PhysMap[i] = 0;
+
+    // Fill in map in the PlusMinusQCDQED basis
+    std::map<int, double> PlusMinusMapQCDQED;
+    PlusMinusMapQCDQED[0]  = PhysMap.at(15) + PhysMap.at(-15);
+    PlusMinusMapQCDQED[1]  = PhysMap.at(13) + PhysMap.at(-13);
+    PlusMinusMapQCDQED[2]  = PhysMap.at(11) + PhysMap.at(-11);
+    PlusMinusMapQCDQED[3]  = PhysMap.at(6) + PhysMap.at(-6);
+    PlusMinusMapQCDQED[4]  = PhysMap.at(4) + PhysMap.at(-4);
+    PlusMinusMapQCDQED[5]  = PhysMap.at(2) + PhysMap.at(-2);
+    PlusMinusMapQCDQED[6]  = PhysMap.at(5) + PhysMap.at(-5);
+    PlusMinusMapQCDQED[7]  = PhysMap.at(3) + PhysMap.at(-3);
+    PlusMinusMapQCDQED[8]  = PhysMap.at(1) + PhysMap.at(-1);
+    PlusMinusMapQCDQED[9]  = PhysMap.at(0);
+    PlusMinusMapQCDQED[10] = PhysMap.at(22);
+    PlusMinusMapQCDQED[11] = PhysMap.at(1) - PhysMap.at(-1);
+    PlusMinusMapQCDQED[12] = PhysMap.at(3) - PhysMap.at(-3);
+    PlusMinusMapQCDQED[13] = PhysMap.at(5) - PhysMap.at(-5);
+    PlusMinusMapQCDQED[14] = PhysMap.at(2) - PhysMap.at(-2);
+    PlusMinusMapQCDQED[15] = PhysMap.at(4) - PhysMap.at(-4);
+    PlusMinusMapQCDQED[16] = PhysMap.at(6) - PhysMap.at(-6);
+    PlusMinusMapQCDQED[17] = PhysMap.at(11) - PhysMap.at(-11);
+    PlusMinusMapQCDQED[18] = PhysMap.at(13) - PhysMap.at(-13);
+    PlusMinusMapQCDQED[19] = PhysMap.at(15) - PhysMap.at(-15);
+    return PlusMinusMapQCDQED;
+  }
 }
