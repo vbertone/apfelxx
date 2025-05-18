@@ -713,7 +713,7 @@ namespace apfel
     // ===============================================================
     // O(a) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom01;
-    const Distribution Ppgm01{g, [] (double const& x) -> double { return P01qedqgm{}.Regular(x); }};
+    const Distribution Ppgm01{g, [] (double const& x) -> double { return x * P01qedqgm{}.Regular(x); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
@@ -801,8 +801,8 @@ namespace apfel
     // ===============================================================
     // O(a*as) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom11;
-    const Distribution Ppgm11{g, [] (double const& x) -> double { return P11qedqgm{}.Regular(x); }};
-    const Distribution Pggm11{g, [] (double const& x) -> double { return P11qedggm{}.Regular(x); }};
+    const Distribution Ppgm11{g, [] (double const& x) -> double { return x * P11qedqgm{}.Regular(x); }};
+    const Distribution Pggm11{g, [] (double const& x) -> double { return x * P11qedggm{}.Regular(x); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
@@ -936,14 +936,14 @@ namespace apfel
     // ===============================================================
     // O(a*as^2) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom21;
-    const Distribution Pps21{g, [] (double const& x) -> double { return P21qedps{}.Regular(x); }};
+    const Distribution Pps21{g, [] (double const& x) -> double { return x * P21qedps{}.Regular(x); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
         const int nd = NDU[nt][0];
         const int nu = NDU[nt][1];
-        const Distribution Pnsp21{g, [nt] (double const& x) -> double { return P21qednsp{nt}.Regular(x); }};
-        const Distribution Pggm21{g, [nt] (double const& x) -> double { return P21qedggm{nt}.Regular(x); }};
+        const Distribution Pnsp21{g, [nt] (double const& x) -> double { return x * P21qednsp{nt}.Regular(x); }};
+        const Distribution Pggm21{g, [nt] (double const& x) -> double { return x * P21qedggm{nt}.Regular(x); }};
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
           {

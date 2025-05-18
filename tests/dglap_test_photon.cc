@@ -87,9 +87,6 @@ int main()
   IntGammaInHom.SetMap(apfel::EvolveDistributionsBasisQCDQED{});
   const std::map<int, apfel::Distribution> oppdfs = apfel::PlusMinusQCDQEDToPhys((tops * pdfs0 + IntGammaInHom).GetObjects());
 
-  // Get PDFs at the final scale as distributions
-  const apfel::Set<apfel::Distribution> Dists = TabulatedPDFs.Evaluate(mu);
-
   // Print results
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
   std::cout << std::scientific;
