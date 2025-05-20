@@ -455,7 +455,12 @@ namespace apfel
       4. / 9. * ( 4. + 6. * ( dl + dl1 )
                   + ( 1. - 2. * x + 2. * x_2 ) * ( 3.8696 + 4. * ( dl + dl1 )
                                                    + 3. * pow(dl + dl1, 2) ) );
-    return ( p2gq1 + _nf * p2gq2 + _nf * _nf * p2gq3 ) / 2;
+
+    // Correction given in Eq. (21) of (https://arxiv.org/pdf/2006.10534)
+    const double Dp2gq = Pi2 / 3. * ( CF - CA ) * ( 11. * CA / 3. - 2. * _nf / 3. )
+                         * ( - 4. + 8. * x + x_2 + 6. * ( 1. - 2. * x + 2. * x_2 ) * dl );
+
+    return ( p2gq1 + _nf * p2gq2 + _nf * _nf * p2gq3 ) / 2 + Dp2gq;
   }
 
   //_________________________________________________________________________________
