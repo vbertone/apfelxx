@@ -18,6 +18,9 @@ namespace apfel
    * @note The expressions implemented are extracted mostly from
    * https://arxiv.org/pdf/1512.00612 and
    * https://arxiv.org/pdf/1606.02887.
+   * The scheme-change terms are instead exctracted from:
+   * https://arxiv.org/pdf/hep-ph/0110331 and
+   * https://journals.aps.org/prd/pdf/10.1103/PhysRevD.45.3986.
    */
   ///@{
   ///@}
@@ -300,6 +303,69 @@ namespace apfel
   {
   public:
     P21qedggm(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief Scheme-change term from MSbar to DISgamma
+   * O(&alpha;<SUB>s</SUB>&alpha;) for the quark-photon non-singlet
+   * channel.
+   */
+  class DeltaP11qednsp: public Expression
+  {
+  public:
+    DeltaP11qednsp();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief Scheme-change term from MSbar to DISgamma
+   * O(&alpha;<SUB>s</SUB>&alpha;) for the gluon-photon channel.
+   */
+  class DeltaP11qedggm: public Expression
+  {
+  public:
+    DeltaP11qedggm();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief Scheme-change term from MSbar to DISgamma
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>&alpha;) for the quark-photon
+   * non-singlet channel.
+   */
+  class DeltaP21qednsp: public Expression
+  {
+  public:
+    DeltaP21qednsp(int const& nf);
+    double Regular(double const& x) const;
+    double Local(double const& x)   const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief Scheme-change term from MSbar to DISgamma
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>&alpha;) for the quark-photon
+   * pure-singlet channel.
+   */
+  class DeltaP21qedps: public Expression
+  {
+  public:
+    DeltaP21qedps();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief Scheme-change term from MSbar to DISgamma
+   * O(&alpha;<SUB>s</SUB><SUP>2</SUP>&alpha;) for the gluon-photon channel.
+   */
+  class DeltaP21qedggm: public Expression
+  {
+  public:
+    DeltaP21qedggm(int const& nf);
     double Regular(double const& x) const;
   private:
     int const _nf;

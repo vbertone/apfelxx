@@ -68,6 +68,7 @@ namespace apfel
    * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param DISgamma: the flag to enable the DISgamma scheme (default: false)
    * @return A map of DglapObjectsQCDQED objects, one for each possible nf
    * @note This function assumes that masses and thresholds
    * coincide. Also, N3LO corrections are not included.
@@ -75,7 +76,8 @@ namespace apfel
   std::map<int, DglapObjectsQCDQED> InitializeDglapObjectsPhoton(Grid                const& g,
                                                                  std::vector<double> const& Thresholds,
                                                                  bool                const& OpEvol = false,
-                                                                 double              const& IntEps = 1e-5);
+                                                                 double              const& IntEps = 1e-5,
+                                                                 bool                const& DISgamma = false);
   ///@}
 
   /**

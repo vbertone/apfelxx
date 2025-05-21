@@ -388,4 +388,100 @@ namespace apfel
     return ( 1 - x ) * ( kg20 + _nf * kg21 );
   }
 
+  //_________________________________________________________________________________
+  DeltaP11qednsp::DeltaP11qednsp():
+    Expression()
+  {
+  }
+  double DeltaP11qednsp::Regular(double const& x) const
+  {
+    const double x2     = x * x;
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double lnomx  = log(1 - x);
+    const double lnomx2 = lnomx * lnomx;
+    return 4. * CF * ( 7. - 10. * x - Pi2 / 6. * ( 6. - 12. * x + 16. * x2 ) + ( 1. - 16. * x + 32. * x2 ) * lnx
+                       + ( 1. - 2. * x + 4. * x2 ) * lnx2 - ( 5. - 36. * x + 32. * x2 ) * lnomx
+                       + ( 4. - 8 * x + 8. * x2 ) * ( lnomx2 - lnx * lnomx ) + ( 2. - 4. * x + 8 * x2 ) * dilog(x) );
+  }
+
+  //_________________________________________________________________________________
+  DeltaP11qedggm::DeltaP11qedggm():
+    Expression()
+  {
+  }
+  double DeltaP11qedggm::Regular(double const& x) const
+  {
+    const double x2    = x * x;
+    const double lnx   = log(x);
+    const double lnx2  = lnx * lnx;
+    const double lnomx = log(1 - x);
+    return 8. * CF * ( 2. / 3. / x - 20. / 3. + 2. * x / 3. + 16. * x2 / 3. - ( 1. + 5. * x - 4. * x2 / 3. ) * lnx
+                       - ( 1. + x ) * lnx2 + ( 4. / 3. / x + 1. - x - 4. * x2 / 3. ) * lnomx - 2. * ( 1. + x ) * ( dilog(x) - Pi2 / 6. ) );
+  }
+
+  //_________________________________________________________________________________
+  DeltaP21qednsp::DeltaP21qednsp(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double DeltaP21qednsp::Regular(double const& x) const
+  {
+    const double x2  = x * x;
+    const double L1  = log(1 - x);
+    const double L12 = L1 * L1;
+    const double L13 = L1 * L12;
+    const double L14 = L1 * L13;
+    const double L0  = log(x);
+    const double L02 = L0 * L0;
+    const double L03 = L0 * L02;
+    const double L04 = L0 * L03;
+    return 9.482 * L14 + ( 33.37 + 2585 * ( 1. - x ) ) * L13 + 122.6 * L12 + ( 5598. + 7949. * ( 1. - x ) ) * L1
+           - 9825. * L0 * L1 - 2.963 * L04 + 7.407 * L03 - ( 176.0 - 2616 * x ) * L02 - 828.6 * L0 - 1851. + 30120. * x - 7595. * x2
+           + _nf * ( - ( 1.044 + 32.57 * ( 1. - x ) ) * L13 + 26.75 * L12 - ( 0.266 - 615.1 * ( 1. - x ) ) * L1 + 4.557 * L0 * L1
+                     - 0.529 * L03 + ( 12.23 - 38.59 * x ) * L02 + 41.91 * L0 + 75.74 + 733.7 * x- 1003. * x2 );
+  }
+  double DeltaP21qednsp::Local(double const&) const
+  {
+    return - 0.65 + _nf * 0.05;
+  }
+
+  //_________________________________________________________________________________
+  DeltaP21qedps::DeltaP21qedps():
+    Expression()
+  {
+  }
+  double DeltaP21qedps::Regular(double const& x) const
+  {
+    const double L1  = log(1 - x);
+    const double L12 = L1 * L1;
+    const double L0  = log(x);
+    const double L02 = L0 * L0;
+    const double L03 = L0 * L02;
+    const double L04 = L0 * L03;
+    return ( 2.083 * L12 - 68.96 * L1 ) * pow(1. - x, 3) - 86.40 * pow(1. - x, 2) * L0 * L1 + 1.778 * L04 + 3.278 * L03
+           + ( 41.86 + 105.6 * x ) * ( 1. - x ) * L02 + 1.241 * pow(1. - x, 2) * L0- ( 15.80 / x + 94.39 - 8.281 * x ) * pow(1. - x, 3);
+  }
+
+  //_________________________________________________________________________________
+  DeltaP21qedggm::DeltaP21qedggm(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double DeltaP21qedggm::Regular(double const& x) const
+  {
+    const double L1  = log(1 - x);
+    const double L12 = L1 * L1;
+    const double L13 = L1 * L12;
+    const double L0  = log(x);
+    const double L02 = L0 * L0;
+    const double L03 = L0 * L02;
+    const double L04 = L0 * L03;
+    return -( 25.77 * L13 + 766.7 * L1 ) * ( 1. - x ) - 1337. * L0 * L1 - 4.741 * L04 + 4.741 * L03
+           + ( 83.11 - 464.9 * x ) * L02 + 443.1 * L0 - ( 60.36 / x - 1772. - 650.3 * x ) * ( 1. - x )
+           + _nf * ( - ( 0.737 * L13 - 216. * L1 ) * ( 1. - x ) + 310.6 * L0 * L1 - ( 40.99 - 36.66 * x ) * L02
+                     - 113.7 * L0 + ( 15.80 / x - 331.3 - 48.88 * x ) * ( 1. - x ) );
+  }
 }

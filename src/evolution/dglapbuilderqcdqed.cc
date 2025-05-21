@@ -606,7 +606,8 @@ namespace apfel
   std::map<int, DglapObjectsQCDQED> InitializeDglapObjectsPhoton(Grid                const& g,
                                                                  std::vector<double> const& Thresholds,
                                                                  bool                const& OpEvol,
-                                                                 double              const& IntEps)
+                                                                 double              const& IntEps,
+                                                                 bool                const& DISgamma)
   {
     report("Initializing InitializeDglapObjectsPhoton for space-like unpolarised evolution of the photon... ");
     Timer t;
@@ -801,8 +802,8 @@ namespace apfel
     // ===============================================================
     // O(a*as) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom11;
-    const Distribution Ppgm11{g, [] (double const& x) -> double { return x * P11qedqgm{}.Regular(x); }};
-    const Distribution Pggm11{g, [] (double const& x) -> double { return x * P11qedggm{}.Regular(x); }};
+    const Distribution Ppgm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedqgm{}.Regular(x) + (DISgamma ? DeltaP11qednsp{}.Regular(x) : 0) ); }};
+    const Distribution Pggm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedggm{}.Regular(x) + (DISgamma ? DeltaP11qedggm{}.Regular(x) : 0) ); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
@@ -936,14 +937,14 @@ namespace apfel
     // ===============================================================
     // O(a*as^2) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom21;
-    const Distribution Pps21{g, [] (double const& x) -> double { return x * P21qedps{}.Regular(x); }};
+    const Distribution Pps21{g, [DISgamma] (double const& x) -> double { return x * ( P21qedps{}.Regular(x) + (DISgamma ? DeltaP21qedps{}.Regular(x) : 0) ); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
         const int nd = NDU[nt][0];
         const int nu = NDU[nt][1];
-        const Distribution Pnsp21{g, [nt] (double const& x) -> double { return x * P21qednsp{nt}.Regular(x); }};
-        const Distribution Pggm21{g, [nt] (double const& x) -> double { return x * P21qedggm{nt}.Regular(x); }};
+        const Distribution Pnsp21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qednsp{nt}.Regular(x) + (DISgamma ? DeltaP21qednsp{nt}.Regular(x) : 0) ); }};
+        const Distribution Pggm21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qedggm{nt}.Regular(x) + (DISgamma ? DeltaP21qedggm{nt}.Regular(x) : 0) ); }};
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
           {
