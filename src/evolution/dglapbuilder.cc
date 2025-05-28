@@ -2515,7 +2515,7 @@ namespace apfel
           Thresholds.resize(nf);
         if (nf > 0)
           Thresholds[nf-1] = thr;
-        AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
+        AlphasTh.insert({nf, std::pair<double, double>{Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 ))}});
       }
 
     // Create set of initial distributions
@@ -2548,7 +2548,7 @@ namespace apfel
           Thresholds.resize(nf);
         if (nf > 0)
           Thresholds[nf-1] = thr;
-        AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
+        AlphasTh.insert({nf, std::pair<double, double>{Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 ))}});
       }
 
     // Initialize DGLAP evolution. When computing evolution operators,
@@ -2681,7 +2681,7 @@ namespace apfel
           Thresholds.resize(nf);
         if (nf > 0)
           Thresholds[nf-1] = thr;
-        AlphasTh.insert({nf, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
+        AlphasTh.insert({nf, std::pair<double, double>{Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 ))}});
       }
 
     // Create set of initial distributions

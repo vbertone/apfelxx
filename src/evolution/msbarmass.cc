@@ -29,7 +29,7 @@ namespace apfel
     std::map<int, std::pair<double, double>> AlphasTh;
     for (int nf = 1; nf <= (int) Masses.size(); nf++)
       if (Masses[nf-1] > 1)
-        AlphasTh.insert({nf, std::make_pair(Alphas(Masses[nf-1] * ( 1 - eps8 )), Alphas(Masses[nf-1] * ( 1 + eps8 )))});
+        AlphasTh.insert({nf, std::pair<double, double>{Alphas(Masses[nf-1] * ( 1 - eps8 )), Alphas(Masses[nf-1] * ( 1 + eps8 ))}});
 
     // Anomalous-dimension lambda function
     _AnomalousDimension = [=] (int const& nf, double const& as)-> double

@@ -802,8 +802,8 @@ namespace apfel
     // ===============================================================
     // O(a*as) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom11;
-    const Distribution Ppgm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedqgm{}.Regular(x) + (DISgamma ? DeltaP11qednsp{}.Regular(x) : 0) ); }};
-    const Distribution Pggm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedggm{}.Regular(x) + (DISgamma ? DeltaP11qedggm{}.Regular(x) : 0) ); }};
+    const Distribution Ppgm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedqgm{}.Regular(x) - (DISgamma ? DeltaP11qednsp{}.Regular(x) : 0) ); }};
+    const Distribution Pggm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedggm{}.Regular(x) - (DISgamma ? DeltaP11qedggm{}.Regular(x) : 0) ); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
@@ -937,14 +937,14 @@ namespace apfel
     // ===============================================================
     // O(a*as^2) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom21;
-    const Distribution Pps21{g, [DISgamma] (double const& x) -> double { return x * ( P21qedps{}.Regular(x) + (DISgamma ? DeltaP21qedps{}.Regular(x) : 0) ); }};
+    const Distribution Pps21{g, [DISgamma] (double const& x) -> double { return x * ( P21qedps{}.Regular(x) - (DISgamma ? DeltaP21qedps{}.Regular(x) : 0) ); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
         const int nd = NDU[nt][0];
         const int nu = NDU[nt][1];
-        const Distribution Pnsp21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qednsp{nt}.Regular(x) + (DISgamma ? DeltaP21qednsp{nt}.Regular(x) : 0) ); }};
-        const Distribution Pggm21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qedggm{nt}.Regular(x) + (DISgamma ? DeltaP21qedggm{nt}.Regular(x) : 0) ); }};
+        const Distribution Pnsp21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qednsp{nt}.Regular(x) - (DISgamma ? DeltaP21qednsp{nt}.Regular(x) : 0) ); }};
+        const Distribution Pggm21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qedggm{nt}.Regular(x) - (DISgamma ? DeltaP21qedggm{nt}.Regular(x) : 0) ); }};
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
           {
@@ -1186,8 +1186,8 @@ namespace apfel
           Thresholds.resize(nt);
         if (nt > 0)
           Thresholds[nt-1] = thr;
-        AlphasTh.insert({nt, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
-        AlphaemTh.insert({nt, std::make_pair(Alphaem(thr * ( 1 - eps8 )), Alphaem(thr * ( 1 + eps8 )))});
+        AlphasTh.insert({nt, std::pair<double, double>{Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 ))}});
+        AlphaemTh.insert({nt, std::pair<double, double>{Alphaem(thr * ( 1 - eps8 )), Alphaem(thr * ( 1 + eps8 ))}});
       }
 
     // Create set of initial distributions
@@ -1222,8 +1222,8 @@ namespace apfel
           Thresholds.resize(nt);
         if (nt > 0)
           Thresholds[nt-1] = thr;
-        AlphasTh.insert({nt, std::make_pair(Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 )))});
-        AlphaemTh.insert({nt, std::make_pair(Alphaem(thr * ( 1 - eps8 )), Alphaem(thr * ( 1 + eps8 )))});
+        AlphasTh.insert({nt, std::pair<double, double>{Alphas(thr * ( 1 - eps8 )), Alphas(thr * ( 1 + eps8 ))}});
+        AlphaemTh.insert({nt, std::pair<double, double>{Alphaem(thr * ( 1 - eps8 )), Alphaem(thr * ( 1 + eps8 ))}});
       }
 
     // Initialize DGLAP evolution. When computing evolution operators,

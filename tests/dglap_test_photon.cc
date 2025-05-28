@@ -29,8 +29,8 @@ int main()
   const auto aem = [=] (double const& mu) -> double{ return Alpha.Evaluate(mu); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj   = InitializeDglapObjectsPhoton(g, Thresholds);
-  const auto DglapObjOp = InitializeDglapObjectsPhoton(g, Thresholds, true);
+  const auto DglapObj   = InitializeDglapObjectsPhoton(g, Thresholds, false, apfel::eps5, true);
+  const auto DglapObjOp = InitializeDglapObjectsPhoton(g, Thresholds, true,  apfel::eps5, true);
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFsQCDQED, mu0, PerturbativeOrder, as, aem);
