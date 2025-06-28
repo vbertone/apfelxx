@@ -42,7 +42,7 @@ int main()
   std::string path = "/home/peter/work/codes/apfelxx_ACOT/tests/ACOT_tests/APFELxx_results";
 
   // prepare PDFs and alphas
-  LHAPDF::PDF* pdf = LHAPDF::mkPDF("CT18NLO_1_1",0);
+  LHAPDF::PDF* pdf = LHAPDF::mkPDF("CT18NLO",0);
   const auto PDFrotated = [&] (double const& x, double const& Q) -> std::map<int,double> {return apfel::PhysToQCDEv(pdf->xfxQ(x,Q));};
   const auto alphas = [&] (double const& Q) -> double{return pdf->alphasQ(Q);};
   LHAPDF::PDF* pdf_NNLO = LHAPDF::mkPDF("CT18NLO_1_1",0);
