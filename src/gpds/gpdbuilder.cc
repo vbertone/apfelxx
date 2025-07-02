@@ -49,16 +49,17 @@ namespace apfel
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps, true};
     const Operator Zero{g, Null{},     IntEps, true};
-    MatchLO.insert({MatchingBasisQCD::M0, Id});
-    MatchLO.insert({MatchingBasisQCD::M1, Zero});
-    MatchLO.insert({MatchingBasisQCD::M2, Zero});
-    MatchLO.insert({MatchingBasisQCD::M3, Zero});
-    MatchLO.insert({MatchingBasisQCD::M4, Zero});
-    MatchLO.insert({MatchingBasisQCD::M5, Zero});
-    MatchLO.insert({MatchingBasisQCD::M6, Zero});
-    MatchLO.insert({MatchingBasisQCD::M7, Zero});
-    MatchLO.insert({MatchingBasisQCD::M8, Zero});
-    MatchLO.insert({MatchingBasisQCD::M9, Zero});
+    MatchLO.insert({MatchingBasisQCD::M0,  Id});
+    MatchLO.insert({MatchingBasisQCD::M1,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M2,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M3,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M4,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M5,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M6,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M7,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M8,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M9,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M10, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -141,16 +142,17 @@ namespace apfel
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps, true};
     const Operator Zero{g, Null{},     IntEps, true};
-    MatchLO.insert({MatchingBasisQCD::M0, Id});
-    MatchLO.insert({MatchingBasisQCD::M1, Zero});
-    MatchLO.insert({MatchingBasisQCD::M2, Zero});
-    MatchLO.insert({MatchingBasisQCD::M3, Zero});
-    MatchLO.insert({MatchingBasisQCD::M4, Zero});
-    MatchLO.insert({MatchingBasisQCD::M5, Zero});
-    MatchLO.insert({MatchingBasisQCD::M6, Zero});
-    MatchLO.insert({MatchingBasisQCD::M7, Zero});
-    MatchLO.insert({MatchingBasisQCD::M8, Zero});
-    MatchLO.insert({MatchingBasisQCD::M9, Zero});
+    MatchLO.insert({MatchingBasisQCD::M0,  Id});
+    MatchLO.insert({MatchingBasisQCD::M1,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M2,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M3,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M4,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M5,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M6,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M7,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M8,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M9,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M10, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -233,16 +235,17 @@ namespace apfel
     std::map<int, Operator> MatchLO;
     const Operator Id  {g, Identity{}, IntEps, true};
     const Operator Zero{g, Null{},     IntEps, true};
-    MatchLO.insert({MatchingBasisQCD::M0, Id});
-    MatchLO.insert({MatchingBasisQCD::M1, Zero});
-    MatchLO.insert({MatchingBasisQCD::M2, Zero});
-    MatchLO.insert({MatchingBasisQCD::M3, Zero});
-    MatchLO.insert({MatchingBasisQCD::M4, Zero});
-    MatchLO.insert({MatchingBasisQCD::M5, Zero});
-    MatchLO.insert({MatchingBasisQCD::M6, Zero});
-    MatchLO.insert({MatchingBasisQCD::M7, Zero});
-    MatchLO.insert({MatchingBasisQCD::M8, Zero});
-    MatchLO.insert({MatchingBasisQCD::M9, Zero});
+    MatchLO.insert({MatchingBasisQCD::M0,  Id});
+    MatchLO.insert({MatchingBasisQCD::M1,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M2,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M3,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M4,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M5,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M6,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M7,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M8,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M9,  Zero});
+    MatchLO.insert({MatchingBasisQCD::M10, Zero});
 
     // ===============================================================
     // LO splitting function operators
