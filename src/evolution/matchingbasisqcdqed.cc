@@ -69,7 +69,7 @@ namespace apfel
 
     // Light-quarks minus-type distributions
     for (int i : LightQuarksMinus)
-      _rules[i].push_back({KNSq, i, 1});
+      _rules[i].push_back({KNSqm, i, 1});
   }
 
   //_________________________________________________________________________________

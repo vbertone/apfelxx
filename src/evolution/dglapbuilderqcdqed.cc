@@ -92,7 +92,7 @@ namespace apfel
     const Operator Zero{g, Null{},     IntEps};
     Match00.insert({MatchingBasisQCDQED::ONE, Id});
     // Insert Zero in the remaining slots
-    for (int i = MatchingBasisQCDQED::KQg; i <= MatchingBasisQCDQED::KgmX; i++)
+    for (int i = MatchingBasisQCDQED::KQg; i <= MatchingBasisQCDQED::KNSqm; i++)
       Match00.insert({i, Zero});
 
     // ===============================================================
@@ -178,7 +178,7 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::KgQ, AS1gH});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Match10.insert({nt, OM});
       }
@@ -207,7 +207,7 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::KgmX,   AS1qedgmH});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Match01.insert({nt, OM});
       }
@@ -373,14 +373,15 @@ namespace apfel
         std::map<int, Operator> OM;
         if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
           {
-            OM.insert({MatchingBasisQCDQED::KQg,  AS2Hg});
-            OM.insert({MatchingBasisQCDQED::KQqp, AS2qqH - ANS2qqH});
-            OM.insert({MatchingBasisQCDQED::KNSq, ANS2qqH});
-            OM.insert({MatchingBasisQCDQED::Kgg,  AS2ggH});
-            OM.insert({MatchingBasisQCDQED::Kgq,  AS2gqH});
+            OM.insert({MatchingBasisQCDQED::KQg,   AS2Hg});
+            OM.insert({MatchingBasisQCDQED::KQqp,  AS2qqH - ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::KNSq,  ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::Kgg,   AS2ggH});
+            OM.insert({MatchingBasisQCDQED::Kgq,   AS2gqH});
+            OM.insert({MatchingBasisQCDQED::KNSqm, ANS2qqH});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Match20.insert({nt, OM});
       }
@@ -407,7 +408,7 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::KXX, AS1HH2});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Matchm20.insert({nt, OM});
       }
@@ -469,30 +470,31 @@ namespace apfel
         // O(as^3) matching conditions
         for (int nt = nti; nt <= ntf; nt++)
           {
-
             std::map<int, Operator> OM;
             if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
               {
                 // Determine number of active quarks
                 const int nf = NDUL[nt][0] + NDUL[nt][1];
-                const Operator APS3Hq {g, APS3Hq_0{nf},  IntEps};
-                const Operator ANS3qqH{g, ANS3qqH_0{nf}, IntEps};
-                const Operator AS3Hg  {g, AS3Hg_0{nf},   IntEps};
-                const Operator AS3gqH {g, AS3gqH_0{nf},  IntEps};
-                const Operator AS3ggH {g, AS3ggH_0{nf},  IntEps};
-                const Operator AS3qgQ {g, AS3qgQ_0{nf},  IntEps};
-                const Operator APS3qqQ{g, APS3qqQ_0{nf}, IntEps};
+                const Operator APS3Hq  {g, APS3Hq_0{nf},   IntEps};
+                const Operator ANS3qqH {g, ANS3qqH_0{nf},  IntEps};
+                const Operator ANS3qqHm{g, ANS3qqHm_0{nf}, IntEps};
+                const Operator AS3Hg   {g, AS3Hg_0{nf},    IntEps};
+                const Operator AS3gqH  {g, AS3gqH_0{nf},   IntEps};
+                const Operator AS3ggH  {g, AS3ggH_0{nf},   IntEps};
+                const Operator AS3qgQ  {g, AS3qgQ_0{nf},   IntEps};
+                const Operator APS3qqQ {g, APS3qqQ_0{nf},  IntEps};
                 const Operator AS3qqH = ANS3qqH + APS3Hq;
-                OM.insert({MatchingBasisQCDQED::KQg,  AS3Hg});
-                OM.insert({MatchingBasisQCDQED::KQqp, AS3qqH - ANS3qqH});
-                OM.insert({MatchingBasisQCDQED::KNSq, ANS3qqH});
-                OM.insert({MatchingBasisQCDQED::Kgg,  AS3ggH});
-                OM.insert({MatchingBasisQCDQED::Kgq,  AS3gqH});
-                OM.insert({MatchingBasisQCDQED::Kqqp, APS3qqQ / nf});
-                OM.insert({MatchingBasisQCDQED::Kqg,  AS3qgQ / nf});
+                OM.insert({MatchingBasisQCDQED::KQg,   AS3Hg});
+                OM.insert({MatchingBasisQCDQED::KQqp,  AS3qqH - ANS3qqH});
+                OM.insert({MatchingBasisQCDQED::KNSq,  ANS3qqH});
+                OM.insert({MatchingBasisQCDQED::Kgg,   AS3ggH});
+                OM.insert({MatchingBasisQCDQED::Kgq,   AS3gqH});
+                OM.insert({MatchingBasisQCDQED::Kqqp,  APS3qqQ / nf});
+                OM.insert({MatchingBasisQCDQED::Kqg,   AS3qgQ / nf});
+                OM.insert({MatchingBasisQCDQED::KNSqm, ANS3qqHm});
               }
             // Insert Zero in the remaining slots
-            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
               OM.insert({i, Zero});
             Match30.insert({nt, OM});
           }
@@ -536,7 +538,7 @@ namespace apfel
           {
             std::map<int, Operator> OM;
             std::map<int, Operator> OP;
-            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
               OM.insert({i, Zero});
             for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
               OP.insert({i, Zero});
@@ -658,7 +660,7 @@ namespace apfel
     std::map<int, Operator> ZeroMatch;
     std::map<int, Operator> ZeroSplit;
     const Operator Zero{g, Null{}, IntEps};
-    for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+    for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
       ZeroMatch.insert({i, Zero});
     for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
       ZeroSplit.insert({i, Zero});
@@ -681,7 +683,7 @@ namespace apfel
     const Operator Id{g, Identity{}, IntEps};
     Match00.insert({MatchingBasisQCDQED::ONE, Id});
     // Insert Zero in the remaining slots
-    for (int i = MatchingBasisQCDQED::KQg; i <= MatchingBasisQCDQED::KgmX; i++)
+    for (int i = MatchingBasisQCDQED::KQg; i <= MatchingBasisQCDQED::KNSqm; i++)
       Match00.insert({i, Zero});
 
     // ===============================================================
@@ -761,7 +763,7 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::KgQ, AS1gH});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Match10.insert({nt, OM});
       }
@@ -860,14 +862,15 @@ namespace apfel
         std::map<int, Operator> OM;
         if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
           {
-            OM.insert({MatchingBasisQCDQED::KQg,  AS2Hg});
-            OM.insert({MatchingBasisQCDQED::KQqp, AS2qqH - ANS2qqH});
-            OM.insert({MatchingBasisQCDQED::KNSq, ANS2qqH});
-            OM.insert({MatchingBasisQCDQED::Kgg,  AS2ggH});
-            OM.insert({MatchingBasisQCDQED::Kgq,  AS2gqH});
+            OM.insert({MatchingBasisQCDQED::KQg,   AS2Hg});
+            OM.insert({MatchingBasisQCDQED::KQqp,  AS2qqH - ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::KNSq,  ANS2qqH});
+            OM.insert({MatchingBasisQCDQED::Kgg,   AS2ggH});
+            OM.insert({MatchingBasisQCDQED::Kgq,   AS2gqH});
+            OM.insert({MatchingBasisQCDQED::KNSqm, ANS2qqH});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Match20.insert({nt, OM});
       }
@@ -894,7 +897,7 @@ namespace apfel
             OM.insert({MatchingBasisQCDQED::KXX, AS1HH2});
           }
         // Insert Zero in the remaining slots
-        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KgmX; i++)
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSqm; i++)
           OM.insert({i, Zero});
         Matchm20.insert({nt, OM});
       }

@@ -1575,16 +1575,21 @@ conditions in Eq.~(\ref{eq:IntMatchingConds}) need to be generalised as follows:
   \displaystyle h^{+(n_f)}&=&\displaystyle K_{hg}g^{(n_f)} + K_{hl}\sum_l
                                 l^{+(n_f)}+[1+K_{hh}]h^{+(n_f)}\,,\\
   \\
-  H^{+(n_f+1)} &=& H^{+(n_f)}\,,
+  H^{+(n_f+1)} &=& H^{+(n_f)}\,,\\
+\\
+  \displaystyle l^{-(n_f+1)}&=&\displaystyle [1+K_{ll}^-]l^{-(n_f)}\,,\\
 \end{array}
 \label{eq:IntMatchingCondsN3LO}
 \end{equation}
-where the new matching functions $K_{ll'}$ and $K_{lg}$, which start at
-$\mathcal{O}(\alpha_s^3)$, are introduced and where we neglected a possible
-$K_{lh}$ that in principle exists but will not probably be computed in the next
-future. With this modification, the matching algorithm in the evolution basis in
-Eq.~(\ref{eq:algorithmEv}) is more complicated. First we need to define two more
-combinations w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$ and $M_9$:
+where the new matching functions $K_{ll'}$ and $K_{lg}$, which start
+at $\mathcal{O}(\alpha_s^3)$, are introduced and where we neglected a
+possible $K_{lh}$ that in principle exists but will not probably be
+computed in the next future. Also, we introduced the matching function
+$K_{ll}^-$ which differs from $K_{ll}$ starting from
+$\mathcal{O}(\alpha_s^3)$. With this modification, the matching
+algorithm in the evolution basis in Eq.~(\ref{eq:algorithmEv}) is more
+complicated. First we need to define two more combinations
+w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$ and $M_9$:
 \begin{equation}
   \begin{array}{lcl}
   M_1 &=& K_{gg}\,,\\
@@ -1595,12 +1600,13 @@ combinations w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$ and $M_9$:
   M_6 &=& K_{hh}-(K_{hl}+K_{ll}+n_f K_{ll'})\,,\\
   M_7 &=& K_{ll}\,,\\
   M_8 &=& K_{hg} -  K_{lg}\,,\\
-  M_9 &=& K_{hh}+n_f(K_{hl}+K_{ll}-K_{ll'})\,,
+  M_9 &=& K_{hh}+n_f(K_{hl}+K_{ll}-K_{ll'})\,,\\
+  M_{10} &=& K_{ll}^-\,,
   \end{array}
   \label{eq:McombsN3LO}
 \end{equation}
-which are such that up to NNLO $M_8=M_4$ and $M_9=M_5$. With these at hand, we
-find:
+which are such that up to NNLO $M_8=M_4$, $M_9=M_5$, and
+$M_{10}=M_7$. With these at hand, we find:
 \begin{equation}
 \footnotesize
 \left[T\mathbb{K}^{(n_f)}T^{-1}\right]_{ij} =
@@ -1647,7 +1653,7 @@ momentum sum rules imply the following identities for the matching
 functions:
 \begin{equation}
 \begin{array}{l}
-\displaystyle\int_0^1dy\,K_{ll}^{[n]}(y)=0\,,\\
+\displaystyle\int_0^1dy\,K_{ll}^{-,[n]}(y)=0\,,\\
 \\
 \displaystyle\int_0^1dy\,y\left[K_{gg}^{[n]}(y)+n_fK_{lg}^{[n]}(y)+K_{hg}^{[n]}(y)\right]=0\,,\\
 \\
@@ -1769,7 +1775,9 @@ Eq.~(\ref{eq:McombsN3LO}). Specifically we find:
 \\
 \displaystyle K_{hl} =\frac{M_9-M_6}{n_f+1}-M_7\,,\\
 \\
-\displaystyle K_{hh}=\frac{M_5+n_fM_6}{n_f+1}\,.
+\displaystyle K_{hh}=\frac{M_5+n_fM_6}{n_f+1}\,,\\
+\\
+\displaystyle K_{ll}^-=M_{10}\,.
 \end{array}
 \end{equation}
 
@@ -2110,7 +2118,7 @@ One explicitly has:
   \\
    \Gamma_x^{(n_T+1)}&=&\displaystyle\sum_y[\delta_{xy}+\mathcal{K}_{xy}]\Gamma_y^{(n_T)}+\sum_{l'}\mathcal{K}_{xl'} {l'}^{+(n_T)} + \mathcal{K}_{xh}h^{+(n_T)}\,,\\
   \\
-  l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}]l^{-,(n_T)}\,,\\
+  l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}^-]l^{-,(n_T)}\,,\\
 \\
   h^{-(n_T+1)} &=& h^{-(n_T)}\,,\\
 \\
@@ -2118,7 +2126,9 @@ One explicitly has:
 \end{array}
 \end{equation}
 where, for brevity, we omitted the dependence of $\kappa_h$ of the
-matching $\mathcal{K}$.
+matching $\mathcal{K}$. Also, we notice that
+$\mathcal{K}_{{\rm NS},l}^-$ differs from $\mathcal{K}_{{\rm NS},l}$
+starting from $\mathcal{O}(\alpha_s^3)$.
 
 As in the case of splitting functions, we will include QED corrections
 up to NLO accuracy, leaving QCD only at higher orders. The
@@ -2147,7 +2157,7 @@ identically zero. This leads to:
 \\
    \gamma^{(n_T+1)}&=&\displaystyle[1+\mathcal{K}_{\gamma\gamma}]\gamma^{(n_T)}+\mathcal{K}_{\gamma h}h^{+(n_T)}\,,\\
   \\
-  l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}]l^{-,(n_T)}\,,\\
+  l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}^-]l^{-,(n_T)}\,,\\
 \\
   h^{-(n_T+1)} &=& h^{-(n_T)}\,,\\
 \\
@@ -2180,7 +2190,7 @@ $f_i^{(n_T+1)}=f_i^{(n_T)}$ for all but:
 \\
    \gamma^{(n_T+1)}&=&\displaystyle[1+\mathcal{K}_{\gamma\gamma}^X]\gamma^{(n_T)}+\mathcal{K}_{\gamma X}X_i^{+(n_T)}\,,\\
   \\
-  q^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},q}]q^{-,(n_T)}\,,
+  q^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},q}^-]q^{-,(n_T)}\,,
 \end{array}
 \label{eq:MatchingQuarks}
 \end{equation}
@@ -2495,7 +2505,15 @@ K_{gl}&\quad X=D,U\,,\\
 K_{gh}&\quad X=D,U\,,\\
 0 & \quad X=L\,,
 \end{array}
-\right.
+\right.\\
+\\
+\displaystyle\mathcal{K}_{{\rm NS},q}^-&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{ll}^-&\quad X=D,U\,,\\
+0 & \quad X=L\,.
+\end{array}
+\right.\\
+\\
 \end{array}
 \end{equation}
 
@@ -2582,7 +2600,7 @@ Eq.~(\ref{eq:QCDmatchingSumeRules}). In the presence of QED
 corrections, we refer to the system in Eq.~(\ref{eq:MatchingQuarks})
 and from the valence sum rule we derive:
 \begin{equation}
-\int_0^1dy\, \mathcal{K}_{{\rm NS},q}^{[a,b]}(y)=0\,,
+\int_0^1dy\, \mathcal{K}_{{\rm NS},q}^{-,[a,b]}(y)=0\,,
 \end{equation}
 while from the momentum sum rule we find:
 \begin{equation}

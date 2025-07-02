@@ -111,7 +111,7 @@ int main()
       std::cout << "  * MSR3 (intrinsic heavy flavour) = " << xmin / ( nf + 1 ) * (( K.at(apfel::MatchingBasisQCD::M2) + K.at(apfel::MatchingBasisQCD::M5)
                                                                                      + nf * ( K.at(apfel::MatchingBasisQCD::M3) + K.at(apfel::MatchingBasisQCD::M6) ) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "- Valence sum rule: " << std::endl;
-      std::cout << "  * VSR1 = " << (K.at(apfel::MatchingBasisQCD::M7) * VSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * VSR1 = " << (K.at(apfel::MatchingBasisQCD::M10) * VSRDist).Evaluate(xmin) << std::endl;
     }
 
   return 0;

@@ -582,6 +582,54 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  ANS3qqHm_0::ANS3qqHm_0(int const& nf):
+    Expression(),
+    _nf(nf)
+  {
+  }
+  double ANS3qqHm_0::Regular(double const& x) const
+  {
+    double xr  = x;
+    double nfr = _nf;
+    double asr = 1;
+    double LLr = 0;
+    return oreg_(&asr, &LLr, &nfr, &xr);
+  }
+  double ANS3qqHm_0::Singular(double const& x) const
+  {
+    double xr  = x;
+    double nfr = _nf;
+    double asr = 1;
+    double LLr = 0;
+    return oplus1_(&asr, &LLr, &nfr, &xr) + oplus2_(&asr, &LLr, &nfr, &xr);
+  }
+  double ANS3qqHm_0::Local(double const& x) const
+  {
+    double nfr = _nf;
+    double asr = 1;
+    double LLr = 0;
+    const double Ioplus1 = Integrator{[=] (double const& y) -> double
+      {
+        double yr  = y;
+        double nfr = _nf;
+        double asr = 1;
+        double LLr = 0;
+        return oplus1_(&asr, &LLr, &nfr, &yr);
+      }
+    }.integrate(0, x, eps5);
+    const double Ioplus2 = Integrator{[=] (double const& y) -> double
+      {
+        double yr  = y;
+        double nfr = _nf;
+        double asr = 1;
+        double LLr = 0;
+        return oplus2_(&asr, &LLr, &nfr, &yr);
+      }
+    }.integrate(0, x, eps5);
+    return odel_(&asr, &LLr, &nfr) - Ioplus1 - Ioplus2;
+  }
+
+  //_________________________________________________________________________________
   AS3gqH_0::AS3gqH_0(int const& nf):
     Expression(),
     _nf(nf)

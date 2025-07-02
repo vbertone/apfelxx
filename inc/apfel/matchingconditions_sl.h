@@ -51,6 +51,10 @@ namespace apfel
     double aggdel_(double *z, double *nf, double *as, double *LL);
     double qgl_(double *z, double *nf, double *as, double *LL);
     double psl_(double *z, double *nf, double *as, double *LL);
+    double oreg_(double *as, double *LL, double *nf, double *z);
+    double oplus1_(double *as, double *LL, double *nf, double *z);
+    double oplus2_(double *as, double *LL, double *nf, double *z);
+    double odel_(double *as, double *LL, double *nf);
   }
   ///@}
   /// \endcond
@@ -447,6 +451,20 @@ namespace apfel
   {
   public:
     ANS3qqH_0(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
+  class ANS3qqHm_0: public Expression
+  {
+  public:
+    ANS3qqHm_0(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;

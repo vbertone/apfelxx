@@ -17,7 +17,7 @@ namespace apfel
     // All valence-like distributions match multiplicatively through
     // M7.
     for (int k = 1; k <= 6; k++)
-      _rules[2 * k] = {{M0, 2 * k, 1}, {M7, 2 * k, 1}};
+      _rules[2 * k] = {{M0, 2 * k, 1}, {M10, 2 * k, 1}};
 
     // Now we consider singlet like distributions
     const int nf1 = nf + 1;
@@ -102,7 +102,7 @@ namespace apfel
 
     // Light minus-type distributions
     for (int i = - nf + 6; i <= - 1 + 6; i++)
-      _rules[i].push_back({KLL, i, 1});
+      _rules[i].push_back({KLLm, i, 1});
 
     // Gluon
     _rules[GLUON].push_back({KGG, GLUON, 1});

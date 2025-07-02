@@ -104,7 +104,7 @@ int main()
                                               + nf * K.at(apfel::PhysicalMatchingBasisQCD::KLLP) + K.at(apfel::PhysicalMatchingBasisQCD::KHL) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "  * MSR3 (intrinsic heavy flavour) = " << xmin * (( K.at(apfel::PhysicalMatchingBasisQCD::KGH) + K.at(apfel::PhysicalMatchingBasisQCD::KHH) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "- Valence sum rule: " << std::endl;
-      std::cout << "  * VSR1 = " << (K.at(apfel::PhysicalMatchingBasisQCD::KLL) * VSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * VSR1 = " << (K.at(apfel::PhysicalMatchingBasisQCD::KLLm) * VSRDist).Evaluate(xmin) << std::endl;
     }
 
   return 0;
