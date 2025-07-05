@@ -525,23 +525,76 @@ namespace apfel
     PlusMinusMapQCDQED[0]  = PhysMap.at(15) + PhysMap.at(-15);
     PlusMinusMapQCDQED[1]  = PhysMap.at(13) + PhysMap.at(-13);
     PlusMinusMapQCDQED[2]  = PhysMap.at(11) + PhysMap.at(-11);
-    PlusMinusMapQCDQED[3]  = PhysMap.at(6) + PhysMap.at(-6);
-    PlusMinusMapQCDQED[4]  = PhysMap.at(4) + PhysMap.at(-4);
-    PlusMinusMapQCDQED[5]  = PhysMap.at(2) + PhysMap.at(-2);
-    PlusMinusMapQCDQED[6]  = PhysMap.at(5) + PhysMap.at(-5);
-    PlusMinusMapQCDQED[7]  = PhysMap.at(3) + PhysMap.at(-3);
-    PlusMinusMapQCDQED[8]  = PhysMap.at(1) + PhysMap.at(-1);
+    PlusMinusMapQCDQED[3]  = PhysMap.at(6)  + PhysMap.at(-6);
+    PlusMinusMapQCDQED[4]  = PhysMap.at(4)  + PhysMap.at(-4);
+    PlusMinusMapQCDQED[5]  = PhysMap.at(2)  + PhysMap.at(-2);
+    PlusMinusMapQCDQED[6]  = PhysMap.at(5)  + PhysMap.at(-5);
+    PlusMinusMapQCDQED[7]  = PhysMap.at(3)  + PhysMap.at(-3);
+    PlusMinusMapQCDQED[8]  = PhysMap.at(1)  + PhysMap.at(-1);
     PlusMinusMapQCDQED[9]  = PhysMap.at(0);
     PlusMinusMapQCDQED[10] = PhysMap.at(22);
-    PlusMinusMapQCDQED[11] = PhysMap.at(1) - PhysMap.at(-1);
-    PlusMinusMapQCDQED[12] = PhysMap.at(3) - PhysMap.at(-3);
-    PlusMinusMapQCDQED[13] = PhysMap.at(5) - PhysMap.at(-5);
-    PlusMinusMapQCDQED[14] = PhysMap.at(2) - PhysMap.at(-2);
-    PlusMinusMapQCDQED[15] = PhysMap.at(4) - PhysMap.at(-4);
-    PlusMinusMapQCDQED[16] = PhysMap.at(6) - PhysMap.at(-6);
+    PlusMinusMapQCDQED[11] = PhysMap.at(1)  - PhysMap.at(-1);
+    PlusMinusMapQCDQED[12] = PhysMap.at(3)  - PhysMap.at(-3);
+    PlusMinusMapQCDQED[13] = PhysMap.at(5)  - PhysMap.at(-5);
+    PlusMinusMapQCDQED[14] = PhysMap.at(2)  - PhysMap.at(-2);
+    PlusMinusMapQCDQED[15] = PhysMap.at(4)  - PhysMap.at(-4);
+    PlusMinusMapQCDQED[16] = PhysMap.at(6)  - PhysMap.at(-6);
     PlusMinusMapQCDQED[17] = PhysMap.at(11) - PhysMap.at(-11);
     PlusMinusMapQCDQED[18] = PhysMap.at(13) - PhysMap.at(-13);
     PlusMinusMapQCDQED[19] = PhysMap.at(15) - PhysMap.at(-15);
+    return PlusMinusMapQCDQED;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, Distribution> PhysToPlusMinusQCDQED(std::map<int, Distribution> const& InPhysMap)
+  {
+    // Zero distribution
+    const Distribution ZeroDist{InPhysMap.begin()->second.GetGrid(), [] (double const&) -> double { return 0; }};
+
+    // Call function in the physical basis
+    std::map<int, Distribution> PhysMap = InPhysMap;
+
+    // Fill in keys that do not exist. Start with the gluon (assumes
+    // that the ID is 21).
+    if (PhysMap.find(0) == PhysMap.end())
+      PhysMap.insert({0, PhysMap.at(21)});
+
+    // Photon (fill in with zero if they do not exist).
+    if (PhysMap.find(22) == PhysMap.end())
+      PhysMap.insert({22, ZeroDist});
+
+    // Quarks (fill in with zero if they do not exist).
+    for (int i = -6; i <= 6; i++)
+      if (PhysMap.find(i) == PhysMap.end())
+        PhysMap.insert({i, ZeroDist});
+
+    // Leptons (fill in with zero if they do not exist).
+    for (int i : std::vector<int> {-15, -13, -11, 11, 13, 15})
+      if (PhysMap.find(i) == PhysMap.end())
+        PhysMap.insert({i, ZeroDist});
+
+    // Fill in map in the PlusMinusQCDQED basis
+    std::map<int, Distribution> PlusMinusMapQCDQED;
+    PlusMinusMapQCDQED.insert({0,  PhysMap.at(15) + PhysMap.at(-15)});
+    PlusMinusMapQCDQED.insert({1,  PhysMap.at(13) + PhysMap.at(-13)});
+    PlusMinusMapQCDQED.insert({2,  PhysMap.at(11) + PhysMap.at(-11)});
+    PlusMinusMapQCDQED.insert({3,  PhysMap.at(6)  + PhysMap.at(-6)});
+    PlusMinusMapQCDQED.insert({4,  PhysMap.at(4)  + PhysMap.at(-4)});
+    PlusMinusMapQCDQED.insert({5,  PhysMap.at(2)  + PhysMap.at(-2)});
+    PlusMinusMapQCDQED.insert({6,  PhysMap.at(5)  + PhysMap.at(-5)});
+    PlusMinusMapQCDQED.insert({7,  PhysMap.at(3)  + PhysMap.at(-3)});
+    PlusMinusMapQCDQED.insert({8,  PhysMap.at(1)  + PhysMap.at(-1)});
+    PlusMinusMapQCDQED.insert({9,  PhysMap.at(0)});
+    PlusMinusMapQCDQED.insert({10, PhysMap.at(22)});
+    PlusMinusMapQCDQED.insert({11, PhysMap.at(1)  - PhysMap.at(-1)});
+    PlusMinusMapQCDQED.insert({12, PhysMap.at(3)  - PhysMap.at(-3)});
+    PlusMinusMapQCDQED.insert({13, PhysMap.at(5)  - PhysMap.at(-5)});
+    PlusMinusMapQCDQED.insert({14, PhysMap.at(2)  - PhysMap.at(-2)});
+    PlusMinusMapQCDQED.insert({15, PhysMap.at(4)  - PhysMap.at(-4)});
+    PlusMinusMapQCDQED.insert({16, PhysMap.at(6)  - PhysMap.at(-6)});
+    PlusMinusMapQCDQED.insert({17, PhysMap.at(11) - PhysMap.at(-11)});
+    PlusMinusMapQCDQED.insert({18, PhysMap.at(13) - PhysMap.at(-13)});
+    PlusMinusMapQCDQED.insert({19, PhysMap.at(15) - PhysMap.at(-15)});
     return PlusMinusMapQCDQED;
   }
 }
