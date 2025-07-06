@@ -22,10 +22,30 @@ namespace apfel
   {
   public:
     /**
+     * @brief Structure for the subgrid parameters which encapsulates
+     * lower value of the grid (xMin), density factor w.r.t. the
+     * previous grid (density), and interpolation degree
+     * (InterDegree).
+     */
+    struct SubGridPars
+    {
+      double xMin;
+      int    density;
+      int    InterDegree;
+    };
+
+    /**
      * @brief The Grid constructor.
      * @param grs: vector of subgrids
      */
     Grid(std::vector<SubGrid> const& grs);
+
+    /**
+     * @brief The Grid constructor.
+     * @param mgr: main subgrid with the lowest xmin
+     * @param sgpars: vector of subgrid parameters
+     */
+    Grid(SubGrid const& mgr, std::vector<SubGridPars> const& sgpars);
 
     /**
      * @name Getters
@@ -88,6 +108,16 @@ namespace apfel
      * @return the joint grid
      */
     SubGrid CreateJointGrid();
+
+    /**
+     * @brief Fill in the joint grid object with the appropriate grid
+     * nodes.
+     * @param mgr: main subgrid with the lowest xmin
+     * @param sgpars: vector of subgrid parameters
+     * @return a vector of sub grids (including the main one) already
+     * locked and with the requested density factors.
+     */
+    std::vector<SubGrid> CreateSubGrids(SubGrid const& mgr, std::vector<SubGridPars> const& sgpars);
 
   private:
     std::vector<std::pair<int, int>> _SubToJointMap; //!< Vector of pairs corresponding to grid- and node-indices on the subgrids.

@@ -23,6 +23,16 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  Grid::Grid(SubGrid const& mgr, std::vector<SubGridPars> const& sgpars):
+  // *INDENT-OFF*
+    _JointToSubMap({{}}),
+    _GlobalGrid(CreateSubGrids(mgr, sgpars)),
+    _JointGrid(new SubGrid{CreateJointGrid()})
+  // *INDENT-ON*
+  {
+  }
+
+  //_________________________________________________________________________________
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {
     if (sg1.xMin() == sg2.xMin())
@@ -35,7 +45,7 @@ namespace apfel
   SubGrid Grid::CreateJointGrid()
   {
     // Number of grids
-    int const ng = (int)_GlobalGrid.size();
+    const int ng = (int) _GlobalGrid.size();
 
     // Order the SubGrids in such a way that they start with that
     // having the lowest value of xMin (only if there is more than one
@@ -133,6 +143,69 @@ namespace apfel
 
     // Initialize another SubGrid for the joint grid and return
     return SubGrid{xg_joint_vect, id_joint};
+  }
+
+  //_________________________________________________________________________________
+  bool CheckAndSortSubGridPars(Grid::SubGridPars const& sgp1, Grid::SubGridPars const& sgp2)
+  {
+    if (sgp1.xMin == sgp2.xMin)
+      throw std::runtime_error(error("CheckAndSortSubGridPars", "There are SubGrids with the same lower bound."));
+
+    if (sgp1.density < 1 ||  sgp2.density < 1)
+      throw std::runtime_error(error("CheckAndSortSubGridPars", "There are SubGrids with density factor less than one."));
+
+    if (sgp1.InterDegree < 0 ||  sgp2.InterDegree < 0)
+      throw std::runtime_error(error("CheckAndSortSubGridPars", "There are SubGrids with negative interpolation degree."));
+
+    return sgp1.xMin < sgp2.xMin;
+  }
+
+  //_________________________________________________________________________________
+  std::vector<SubGrid> Grid::CreateSubGrids(SubGrid const& mgr, std::vector<SubGridPars> const& sgpars)
+  {
+    // Number of grids
+    const int ng = (int) sgpars.size() + 1;
+
+    // Internal sunbgrid parameters
+    std::vector<SubGridPars> isgp = sgpars;
+
+    // Check and sort subgrid parameters
+    if (ng > 1)
+      std::sort(isgp.begin(), isgp.end(), CheckAndSortSubGridPars);
+
+    // Define vector of subgrids and intialise it with the main grid
+    std::vector<SubGrid> sg{mgr};
+
+    // Run over all non-main sub grids constructing and pushing the
+    // respective SubGrid objects with the requested density.
+    for (int ig = 1; ig < ng; ig++)
+      {
+        // Find closest node on the previous grid to xMin of the
+        // current grid.
+        const std::vector<double> xg = sg[ig-1].GetGrid();
+        const int nxg = sg[ig-1].nx();
+        int nx = -1;
+        double xmin = -1;
+        for (int ix = 0; ix < nxg; ix++)
+          if (xg[ix] > isgp[ig-1].xMin)
+            {
+              xmin = xg[ix];
+              nx = nxg - ix;
+              break;
+            }
+
+        if (nx < 0 || xmin < 0)
+          throw std::runtime_error(error("Grid::CreateSubGrids", "SubGrids do not overlap."));
+
+        // Multiply nx by the current density factor
+        nx *= isgp[ig-1].density;
+
+        // Compute the new SubGrid and push it back
+        sg.push_back(SubGrid{nx, xmin, isgp[ig-1].InterDegree});
+      }
+
+    // Return vector of subgrids
+    return sg;
   }
 
   //_________________________________________________________________________________
