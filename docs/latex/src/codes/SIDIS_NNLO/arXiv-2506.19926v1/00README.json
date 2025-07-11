@@ -1,0 +1,20 @@
+{
+   "stamp" : true,
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "EW_SIDIS.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "JHEP.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "anc/ancillary_EW.inc"
+      }
+   ],
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

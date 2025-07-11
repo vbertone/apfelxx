@@ -1,3 +1,25 @@
+In order to install "FormGet" used in the "Processing.nb" notebook, you need to download FormRun-1.0.tar.gz from here:
+
+https://feynarts.de/formcalc/
+
+and unzip it.
+Then, from a Mathematica notebook, you need to run:
+
+Needs["CCompilerDriver`"]
+CreateExecutable[{"/Users/vb262523/Codes/FeynStuff/FormRun-1.0/FormGet.tm"}, "FormGet", "ShellOutputFunction" :> Print, "ShellCommandFunction" :> Print]
+
+This command may give an error related to the fact that it does not find MLCONST.
+If this is the case, just replace:
+
+typedef MLCONST char *cstring; --> typedef char *cstring;
+
+in FormGet.tm inside the FormRun-1.0 folder.
+This should finally produce the "FormGet" executable and CreateExecutable[...] should tell you its location.
+Copy this exacutable in "/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-x86-64/PrebuiltExamples".
+Before running the "Processing.nb" notebook, you many need to adjust the location of the "form" exactutable necessary to run "FormGet[...]".
+
+=======================================================
+
 Modifications to the original ancillary file
 
 - Moved ancillary_pol.inc -> ancillary_pol.frm

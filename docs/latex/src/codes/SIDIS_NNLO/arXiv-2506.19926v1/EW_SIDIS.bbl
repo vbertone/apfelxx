@@ -1,0 +1,341 @@
+
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{10}
+
+\bibitem{Accardi:2012qut}
+A.~Accardi et~al., \emph{{Electron Ion Collider: The Next QCD Frontier}:
+  {Understanding the glue that binds us all}},
+  \href{https://doi.org/10.1140/epja/i2016-16268-9}{\emph{Eur. Phys. J. A}
+  {\bfseries 52} (2016) 268} [\href{https://arxiv.org/abs/1212.1701}{{\ttfamily
+  1212.1701}}].
+
+\bibitem{AbdulKhalek:2021gbh}
+R.~Abdul~Khalek et~al., \emph{{Science Requirements and Detector Concepts for
+  the Electron-Ion Collider}: {EIC Yellow Report}},
+  \href{https://doi.org/10.1016/j.nuclphysa.2022.122447}{\emph{Nucl. Phys. A}
+  {\bfseries 1026} (2022) 122447}
+  [\href{https://arxiv.org/abs/2103.05419}{{\ttfamily 2103.05419}}].
+
+\bibitem{Bjorken:1968dy}
+J.D.~Bjorken, \emph{{Asymptotic Sum Rules at Infinite Momentum}},
+  \href{https://doi.org/10.1103/PhysRev.179.1547}{\emph{Phys. Rev.} {\bfseries
+  179} (1969) 1547}.
+
+\bibitem{Feynman:1969ej}
+R.P.~Feynman, \emph{{Very high-energy collisions of hadrons}},
+  \href{https://doi.org/10.1103/PhysRevLett.23.1415}{\emph{Phys. Rev. Lett.}
+  {\bfseries 23} (1969) 1415}.
+
+\bibitem{Moch:2004xu}
+S.~Moch, J.A.M.~Vermaseren and A.~Vogt, \emph{{The Longitudinal structure
+  function at the third order}},
+  \href{https://doi.org/10.1016/j.physletb.2004.11.063}{\emph{Phys. Lett. B}
+  {\bfseries 606} (2005) 123}
+  [\href{https://arxiv.org/abs/hep-ph/0411112}{{\ttfamily hep-ph/0411112}}].
+
+\bibitem{Vermaseren:2005qc}
+J.A.M.~Vermaseren, A.~Vogt and S.~Moch, \emph{{The Third-order QCD corrections
+  to deep-inelastic scattering by photon exchange}},
+  \href{https://doi.org/10.1016/j.nuclphysb.2005.06.020}{\emph{Nucl. Phys. B}
+  {\bfseries 724} (2005) 3}
+  [\href{https://arxiv.org/abs/hep-ph/0504242}{{\ttfamily hep-ph/0504242}}].
+
+\bibitem{Moch:2008fj}
+S.~Moch, J.A.M.~Vermaseren and A.~Vogt, \emph{{Third-order QCD corrections to
+  the charged-current structure function F(3)}},
+  \href{https://doi.org/10.1016/j.nuclphysb.2009.01.001}{\emph{Nucl. Phys. B}
+  {\bfseries 813} (2009) 220}
+  [\href{https://arxiv.org/abs/0812.4168}{{\ttfamily 0812.4168}}].
+
+\bibitem{Blumlein:2022gpp}
+J.~{Bl\"umlein}, P.~Marquard, C.~Schneider and K.~{Sch\"onwald}, \emph{{The
+  massless three-loop Wilson coefficients for the deep-inelastic structure
+  functions F$_{2}$, F$_{L}$, xF$_{3}$ and g$_{1}$}},
+  \href{https://doi.org/10.1007/JHEP11(2022)156}{\emph{JHEP} {\bfseries 11}
+  (2022) 156} [\href{https://arxiv.org/abs/2208.14325}{{\ttfamily
+  2208.14325}}].
+
+\bibitem{Gehrmann:2018odt}
+T.~Gehrmann, A.~Huss, J.~Niehues, A.~Vogt and D.M.~Walker, \emph{{Jet
+  production in charged-current deep-inelastic scattering to third order in
+  QCD}}, \href{https://doi.org/10.1016/j.physletb.2019.03.003}{\emph{Phys.
+  Lett. B} {\bfseries 792} (2019) 182}
+  [\href{https://arxiv.org/abs/1812.06104}{{\ttfamily 1812.06104}}].
+
+\bibitem{Carli:2010cg}
+T.~Carli, T.~Gehrmann and S.~Hoeche, \emph{{Hadronic final states in
+  deep-inelastic scattering with Sherpa}},
+  \href{https://doi.org/10.1140/epjc/s10052-010-1261-2}{\emph{Eur. Phys. J. C}
+  {\bfseries 67} (2010) 73} [\href{https://arxiv.org/abs/0912.3715}{{\ttfamily
+  0912.3715}}].
+
+\bibitem{Hoche:2018gti}
+S.~H\"oche, S.~Kuttimalai and Y.~Li, \emph{{Hadronic Final States in DIS at
+  NNLO QCD with Parton Showers}},
+  \href{https://doi.org/10.1103/PhysRevD.98.114013}{\emph{Phys. Rev. D}
+  {\bfseries 98} (2018) 114013}
+  [\href{https://arxiv.org/abs/1809.04192}{{\ttfamily 1809.04192}}].
+
+\bibitem{Banfi:2023mhz}
+A.~Banfi, S.~Ferrario~Ravasio, B.~J\"ager, A.~Karlberg, F.~Reichenbach and
+  G.~Zanderighi, \emph{{A POWHEG generator for deep inelastic scattering}},
+  \href{https://doi.org/10.1007/JHEP02(2024)023}{\emph{JHEP} {\bfseries 02}
+  (2024) 023} [\href{https://arxiv.org/abs/2309.02127}{{\ttfamily
+  2309.02127}}].
+
+\bibitem{Borsa:2024rmh}
+I.~Borsa and B.~J\"ager, \emph{{Parton-shower effects in polarized deep
+  inelastic scattering}},
+  \href{https://doi.org/10.1007/JHEP07(2024)177}{\emph{JHEP} {\bfseries 07}
+  (2024) 177} [\href{https://arxiv.org/abs/2404.07702}{{\ttfamily
+  2404.07702}}].
+
+\bibitem{Buonocore:2024pdv}
+L.~Buonocore, G.~Limatola, P.~Nason and F.~Tramontano, \emph{{An event
+  generator for Lepton-Hadron deep inelastic scattering at NLO+PS with POWHEG
+  including mass effects}},
+  \href{https://doi.org/10.1007/JHEP08(2024)083}{\emph{JHEP} {\bfseries 08}
+  (2024) 083} [\href{https://arxiv.org/abs/2406.05115}{{\ttfamily
+  2406.05115}}].
+
+\bibitem{FerrarioRavasio:2024kem}
+S.~Ferrario~Ravasio, R.~Gauld, B.~J\"ager, A.~Karlberg and G.~Zanderighi,
+  \emph{{An event generator for neutrino-induced Deep Inelastic Scattering and
+  applications to neutrino astronomy}},
+  \href{https://arxiv.org/abs/2407.03894}{{\ttfamily 2407.03894}}.
+
+\bibitem{Goyal:2023zdi}
+S.~Goyal, S.-O.~Moch, V.~Pathak, N.~Rana and V.~Ravindran,
+  \emph{{Next-to-Next-to-Leading Order QCD Corrections to Semi-Inclusive
+  Deep-Inelastic Scattering}},
+  \href{https://doi.org/10.1103/PhysRevLett.132.251902}{\emph{Phys. Rev. Lett.}
+  {\bfseries 132} (2024) 251902}
+  [\href{https://arxiv.org/abs/2312.17711}{{\ttfamily 2312.17711}}].
+
+\bibitem{Bonino:2024qbh}
+L.~Bonino, T.~Gehrmann and G.~Stagnitto, \emph{{Semi-Inclusive Deep-Inelastic
+  Scattering at Next-to-Next-to-Leading Order in QCD}},
+  \href{https://doi.org/10.1103/PhysRevLett.132.251901}{\emph{Phys. Rev. Lett.}
+  {\bfseries 132} (2024) 251901}
+  [\href{https://arxiv.org/abs/2401.16281}{{\ttfamily 2401.16281}}].
+
+\bibitem{Goyal:2024emo}
+S.~Goyal, R.N.~Lee, S.-O.~Moch, V.~Pathak, N.~Rana and V.~Ravindran,
+  \emph{{NNLO QCD corrections to unpolarized and polarized SIDIS}},
+  \href{https://doi.org/10.1103/PhysRevD.111.094007}{\emph{Phys. Rev. D}
+  {\bfseries 111} (2025) 094007}
+  [\href{https://arxiv.org/abs/2412.19309}{{\ttfamily 2412.19309}}].
+
+\bibitem{Bonino:2024wgg}
+L.~Bonino, T.~Gehrmann, M.~L\"ochner, K.~Sch\"onwald and G.~Stagnitto,
+  \emph{{Polarized Semi-Inclusive Deep-Inelastic Scattering at
+  Next-to-Next-to-Leading Order in QCD}},
+  \href{https://doi.org/10.1103/PhysRevLett.133.211904}{\emph{Phys. Rev. Lett.}
+  {\bfseries 133} (2024) 211904}
+  [\href{https://arxiv.org/abs/2404.08597}{{\ttfamily 2404.08597}}].
+
+\bibitem{Goyal:2024tmo}
+S.~Goyal, R.N.~Lee, S.-O.~Moch, V.~Pathak, N.~Rana and V.~Ravindran,
+  \emph{{Next-to-Next-to-Leading Order QCD Corrections to Polarized
+  Semi-Inclusive Deep-Inelastic Scattering}},
+  \href{https://doi.org/10.1103/PhysRevLett.133.211905}{\emph{Phys. Rev. Lett.}
+  {\bfseries 133} (2024) 211905}
+  [\href{https://arxiv.org/abs/2404.09959}{{\ttfamily 2404.09959}}].
+
+\bibitem{Amaldi:1979yh}
+U.~Amaldi et~al., \emph{{REPORT FROM THE STUDY GROUP ON DETECTORS FOR CHARGED
+  CURRENT EVENTS}},  in \emph{{ECFA Study of an ep Facility for Europe}},
+  pp.~377--414, 1979.
+
+\bibitem{Aachen-Bonn-CERN-Munich-Oxford:1982jrr}
+{\scshape Aachen-Bonn-CERN-Munich-Oxford} collaboration, \emph{{An
+  Investigation of Quark and Diquark Fragmentation in Neutrino $p$ and
+  Anti-neutrino $p$ Charged Current Interactions in {BEBC}}},
+  \href{https://doi.org/10.1016/0550-3213(83)90239-0}{\emph{Nucl. Phys. B}
+  {\bfseries 214} (1983) 369}.
+
+\bibitem{Helenius:2024fow}
+I.~Helenius, H.~Paukkunen and S.~Yrj\"anheikki, \emph{{Dimuons from
+  neutrino-nucleus collisions in the semi-inclusive DIS approach}},
+  \href{https://doi.org/10.1007/JHEP09(2024)043}{\emph{JHEP} {\bfseries 09}
+  (2024) 043} [\href{https://arxiv.org/abs/2405.12677}{{\ttfamily
+  2405.12677}}].
+
+\bibitem{Paukkunen:2025kjb}
+H.~Paukkunen, I.~Helenius and S.~Yrj\"anheikki, \emph{{Improving the
+  description of dimuon production in neutrino-nucleus collisions using the
+  SACOT-$\chi$ scheme}},  \href{https://arxiv.org/abs/2506.09492}{{\ttfamily
+  2506.09492}}.
+
+\bibitem{Bonino:2025tnf}
+L.~Bonino, T.~Gehrmann, M.~L\"ochner, K.~Sch\"onwald and G.~Stagnitto,
+  \emph{{Identified Hadron Production in Deeply Inelastic Neutrino-Nucleon
+  Scattering}},  \href{https://arxiv.org/abs/2504.05376}{{\ttfamily
+  2504.05376}}.
+
+\bibitem{ParticleDataGroup:2024cfk}
+{\scshape Particle Data Group} collaboration, \emph{{Review of particle
+  physics}}, \href{https://doi.org/10.1103/PhysRevD.110.030001}{\emph{Phys.
+  Rev. D} {\bfseries 110} (2024) 030001}.
+
+\bibitem{deFlorian:2012wk}
+D.~de~Florian and Y.~Rotstein~Habarnau, \emph{{Polarized semi-inclusive
+  electroweak structure functions at next-to-leading-order}},
+  \href{https://doi.org/10.1140/epjc/s10052-013-2356-3}{\emph{Eur. Phys. J. C}
+  {\bfseries 73} (2013) 2356}
+  [\href{https://arxiv.org/abs/1210.7203}{{\ttfamily 1210.7203}}].
+
+\bibitem{Anderle:2016kwa}
+D.~Anderle, D.~de~Florian and Y.~Rotstein~Habarnau, \emph{{Towards
+  semi-inclusive deep inelastic scattering at next-to-next-to-leading order}},
+  \href{https://doi.org/10.1103/PhysRevD.95.034027}{\emph{Phys. Rev. D}
+  {\bfseries 95} (2017) 034027}
+  [\href{https://arxiv.org/abs/1612.01293}{{\ttfamily 1612.01293}}].
+
+\bibitem{Altarelli:1979kv}
+G.~Altarelli, R.K.~Ellis, G.~Martinelli and S.-Y.~Pi, \emph{{Processes
+  Involving Fragmentation Functions Beyond the Leading Order in QCD}},
+  \href{https://doi.org/10.1016/0550-3213(79)90062-2}{\emph{Nucl. Phys. B}
+  {\bfseries 160} (1979) 301}.
+
+\bibitem{Baier:1979sp}
+R.~Baier and K.~Fey, \emph{{Finite corrections to quark fragmentation functions
+  in perturbative QCD}}, \href{https://doi.org/10.1007/BF01545897}{\emph{Z.
+  Phys. C} {\bfseries 2} (1979) 339}.
+
+\bibitem{Nogueira:1991ex}
+P.~Nogueira, \emph{{Automatic Feynman Graph Generation}},
+  \href{https://doi.org/10.1006/jcph.1993.1074}{\emph{J. Comput. Phys.}
+  {\bfseries 105} (1993) 279}.
+
+\bibitem{Vermaseren:2000nd}
+J.A.M.~Vermaseren, \emph{{New features of FORM}},
+  \href{https://arxiv.org/abs/math-ph/0010025}{{\ttfamily math-ph/0010025}}.
+
+\bibitem{Larin:1993tq}
+S.A.~Larin, \emph{{The Renormalization of the axial anomaly in dimensional
+  regularization}},
+  \href{https://doi.org/10.1016/0370-2693(93)90053-K}{\emph{Phys. Lett. B}
+  {\bfseries 303} (1993) 113}
+  [\href{https://arxiv.org/abs/hep-ph/9302240}{{\ttfamily hep-ph/9302240}}].
+
+\bibitem{vonManteuffel:2012np}
+A.~von Manteuffel and C.~Studerus, \emph{{Reduze 2 - Distributed Feynman
+  Integral Reduction}},  \href{https://arxiv.org/abs/1201.4330}{{\ttfamily
+  1201.4330}}.
+
+\bibitem{Chetyrkin:1981qh}
+K.G.~Chetyrkin and F.V.~Tkachov, \emph{{Integration by parts: The algorithm to
+  calculate $\beta$-functions in 4 loops}},
+  \href{https://doi.org/10.1016/0550-3213(81)90199-1}{\emph{Nucl. Phys. B}
+  {\bfseries 192} (1981) 159}.
+
+\bibitem{Laporta:2000dsw}
+S.~Laporta, \emph{{High-precision calculation of multiloop Feynman integrals by
+  difference equations}},
+  \href{https://doi.org/10.1142/S0217751X00002159}{\emph{Int. J. Mod. Phys. A}
+  {\bfseries 15} (2000) 5087}
+  [\href{https://arxiv.org/abs/hep-ph/0102033}{{\ttfamily hep-ph/0102033}}].
+
+\bibitem{Gehrmann:1999as}
+T.~Gehrmann and E.~Remiddi, \emph{{Differential equations for two loop four
+  point functions}},
+  \href{https://doi.org/10.1016/S0550-3213(00)00223-6}{\emph{Nucl. Phys. B}
+  {\bfseries 580} (2000) 485}
+  [\href{https://arxiv.org/abs/hep-ph/9912329}{{\ttfamily hep-ph/9912329}}].
+
+\bibitem{Gehrmann:2005pd}
+T.~Gehrmann, T.~Huber and D.~Maitre, \emph{{Two-loop quark and gluon
+  form-factors in dimensional regularisation}},
+  \href{https://doi.org/10.1016/j.physletb.2005.07.019}{\emph{Phys. Lett. B}
+  {\bfseries 622} (2005) 295}
+  [\href{https://arxiv.org/abs/hep-ph/0507061}{{\ttfamily hep-ph/0507061}}].
+
+\bibitem{Anastasiou:2002yz}
+C.~Anastasiou and K.~Melnikov, \emph{{Higgs boson production at hadron
+  colliders in NNLO QCD}},
+  \href{https://doi.org/10.1016/S0550-3213(02)00837-4}{\emph{Nucl. Phys. B}
+  {\bfseries 646} (2002) 220}
+  [\href{https://arxiv.org/abs/hep-ph/0207004}{{\ttfamily hep-ph/0207004}}].
+
+\bibitem{Bonino:2024adk}
+L.~Bonino, T.~Gehrmann, M.~Marcoli, R.~Sch\"urmann and G.~Stagnitto,
+  \emph{{Antenna subtraction for processes with identified particles at hadron
+  colliders}}, \href{https://doi.org/10.1007/JHEP08(2024)073}{\emph{JHEP}
+  {\bfseries 08} (2024) 073}
+  [\href{https://arxiv.org/abs/2406.09925}{{\ttfamily 2406.09925}}].
+
+\bibitem{Ahmed:2024owh}
+T.~Ahmed, S.~Goyal, S.M.~Hasan, R.N.~Lee, S.-O.~Moch, V.~Pathak et~al.,
+  \emph{{NNLO phase-space integrals for semi-inclusive deep-inelastic
+  scattering}},  \href{https://arxiv.org/abs/2412.16509}{{\ttfamily
+  2412.16509}}.
+
+\bibitem{Gehrmann:2022cih}
+T.~Gehrmann and R.~Sch\"urmann, \emph{{Photon fragmentation in the antenna
+  subtraction formalism}},
+  \href{https://doi.org/10.1007/JHEP04(2022)031}{\emph{JHEP} {\bfseries 04}
+  (2022) 031} [\href{https://arxiv.org/abs/2201.06982}{{\ttfamily
+  2201.06982}}].
+
+\bibitem{Haug:2022hkr}
+J.~Haug and F.~Wunder, \emph{{The massless single off-shell scalar box integral
+  \textemdash{} branch cut structure and all-order epsilon expansion}},
+  \href{https://doi.org/10.1007/JHEP02(2023)177}{\emph{JHEP} {\bfseries 02}
+  (2023) 177} [\href{https://arxiv.org/abs/2211.14110}{{\ttfamily
+  2211.14110}}].
+
+\bibitem{Remiddi:1999ew}
+E.~Remiddi and J.A.M.~Vermaseren, \emph{{Harmonic polylogarithms}},
+  \href{https://doi.org/10.1142/S0217751X00000367}{\emph{Int. J. Mod. Phys. A}
+  {\bfseries 15} (2000) 725}
+  [\href{https://arxiv.org/abs/hep-ph/9905237}{{\ttfamily hep-ph/9905237}}].
+
+\bibitem{Gehrmann:2000zt}
+T.~Gehrmann and E.~Remiddi, \emph{{Two loop master integrals for gamma*
+  ---\ensuremath{>} 3 jets: The Planar topologies}},
+  \href{https://doi.org/10.1016/S0550-3213(01)00057-8}{\emph{Nucl. Phys. B}
+  {\bfseries 601} (2001) 248}
+  [\href{https://arxiv.org/abs/hep-ph/0008287}{{\ttfamily hep-ph/0008287}}].
+
+\bibitem{Maitre:2005uu}
+D.~Maitre, \emph{{HPL, a mathematica implementation of the harmonic
+  polylogarithms}},
+  \href{https://doi.org/10.1016/j.cpc.2005.10.008}{\emph{Comput. Phys. Commun.}
+  {\bfseries 174} (2006) 222}
+  [\href{https://arxiv.org/abs/hep-ph/0507152}{{\ttfamily hep-ph/0507152}}].
+
+\bibitem{Duhr:2019tlz}
+C.~Duhr and F.~Dulat, \emph{{PolyLogTools \textemdash{} polylogs for the
+  masses}}, \href{https://doi.org/10.1007/JHEP08(2019)135}{\emph{JHEP}
+  {\bfseries 08} (2019) 135}
+  [\href{https://arxiv.org/abs/1904.07279}{{\ttfamily 1904.07279}}].
+
+\bibitem{Borsa:2022vvp}
+I.~Borsa, R.~Sassot, D.~de~Florian, M.~Stratmann and W.~Vogelsang,
+  \emph{{Towards a Global QCD Analysis of Fragmentation Functions at
+  Next-to-Next-to-Leading Order Accuracy}},
+  \href{https://doi.org/10.1103/PhysRevLett.129.012002}{\emph{Phys. Rev. Lett.}
+  {\bfseries 129} (2022) 012002}
+  [\href{https://arxiv.org/abs/2202.05060}{{\ttfamily 2202.05060}}].
+
+\bibitem{NNPDF:2021njg}
+{\scshape NNPDF} collaboration, \emph{{The path to proton structure at 1\%
+  accuracy}}, \href{https://doi.org/10.1140/epjc/s10052-022-10328-7}{\emph{Eur.
+  Phys. J. C} {\bfseries 82} (2022) 428}
+  [\href{https://arxiv.org/abs/2109.02653}{{\ttfamily 2109.02653}}].
+
+\bibitem{Buckley:2014ana}
+A.~Buckley, J.~Ferrando, S.~Lloyd, K.~Nordstr\"om, B.~Page, M.~R\"ufenacht
+  et~al., \emph{{LHAPDF6: parton density access in the LHC precision era}},
+  \href{https://doi.org/10.1140/epjc/s10052-015-3318-8}{\emph{Eur. Phys. J. C}
+  {\bfseries 75} (2015) 132} [\href{https://arxiv.org/abs/1412.7420}{{\ttfamily
+  1412.7420}}].
+
+\bibitem{Borsa:2022cap}
+I.~Borsa, D.~de~Florian and I.~Pedron, \emph{{NNLO jet production in neutral
+  and charged current polarized deep inelastic scattering}},
+  \href{https://doi.org/10.1103/PhysRevD.107.054027}{\emph{Phys. Rev. D}
+  {\bfseries 107} (2023) 054027}
+  [\href{https://arxiv.org/abs/2212.06625}{{\ttfamily 2212.06625}}].
+
+\end{thebibliography}\endgroup

@@ -1,0 +1,62 @@
+In order to install "FormGet" used in the "Processing.nb" notebook, you need to download FormRun-1.0.tar.gz from here:
+
+https://feynarts.de/formcalc/
+
+and unzip it.
+Then, from a Mathematica notebook, you need to run:
+
+Needs["CCompilerDriver`"]
+CreateExecutable[{"/Users/vb262523/Codes/FeynStuff/FormRun-1.0/FormGet.tm"}, "FormGet", "ShellOutputFunction" :> Print, "ShellCommandFunction" :> Print]
+
+This command may give an error related to the fact that it does not find MLCONST.
+If this is the case, just replace:
+
+typedef MLCONST char *cstring; --> typedef char *cstring;
+
+in FormGet.tm inside the FormRun-1.0 folder.
+This should finally produce the "FormGet" executable and CreateExecutable[...] should tell you its location.
+Copy this exacutable in "/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-x86-64/PrebuiltExamples".
+Before running the "Processing.nb" notebook, you many need to adjust the location of the "form" exactutable necessary to run "FormGet[...]".
+
+=======================================================
+
+Modifications to the original ancillary file
+
+- Moved ancillary_pol.inc -> ancillary_pol.frm
+- replace "id" in front of each expression with "Local"
+- Defined variables adding at the beginning the lines:
+
+F Dd, Dn, ln, Li2, Li3, T, ArcTan, InvTanInt;
+S x, z, NC, NF, pi, zeta3;
+S LMUF, LMUA, LMUR;
+S [1-x], [1-z], [1-x-z], [x-z], [1+x], [1+z], [z-1];
+S sqrtxz1, sqrtxz2, sqrtxz3, poly2;
+S u1, u2, u3, u4, t1, t2, r1, r2;
+
+*S FTC0q2qM, FTC1q2qM, FTC1q2gM, FTC1g2qM;
+*S FLC1q2qM, FLC1q2gM, FLC1g2qM;
+*S F3C0q2qM, F3C1q2qM, F3C1q2gM, F3C1g2qM, F3C2q2qM;
+*S FTC2q2qM, FTC2q2qMFcon1, FTC2q2qMFcon2, FTC2q2qMANoW, FTC2q2gM, FTC2q2gMANoW, FTC2g2qM, FTC2g2qMANoW, FTC2g2gM, FTC2g2gMAANoW, FTC2q2qpM1, FTC2q2qpM2, FTC2q2qpMNoW3, FTC2q2qpMNoW4, FTC2q2qbM, FTC2q2qbMFcon;
+*S FLC2q2qM, FLC2q2qMFcon1, FLC2q2qMFcon2, FLC2q2qMANoW, FLC2q2gM, FLC2q2gMANoW, FLC2g2qM, FLC2g2qMANoW, FLC2g2gM, FLC2g2gMAANoW, FLC2q2qpM1, FLC2q2qpM2, FLC2q2qpMNoW3, FLC2q2qpMNoW4, FLC2q2qbM, FLC2q2qbMFcon;
+*S F3C2q2qMFcon1, F3C2q2qMANoW, F3C2q2gM, F3C2q2gMANoW, F3C2g2qM, F3C2g2qMANoW, F3C2q2qpM1, F3C2q2qpM2, F3C2q2qpMNoW3, F3C2q2qpMNoW4, F3C2q2qbM, F3C2q2qbMFcon;
+
+- Replaced all instances of "rln2" with "ln(2)"
+
+- Terminate the file with:
+
+* Available coefficient functions
+* FTC0q2qM, FTC1q2qM, FTC1q2gM, FTC1g2qM;
+* FLC1q2qM, FLC1q2gM, FLC1g2qM;
+* F3C0q2qM, F3C1q2qM, F3C1q2gM, F3C1g2qM, F3C2q2qM;
+* FTC2q2qM, FTC2q2qMFcon1, FTC2q2qMFcon2, FTC2q2qMANoW, FTC2q2gM, FTC2q2gMANoW, FTC2g2qM, FTC2g2qMANoW, FTC2g2gM, FTC2g2gMAANoW, FTC2q2qpM1, FTC2q2qpM2, FTC2q2qpMNoW3, FTC2q2qpMNoW4, FTC2q2qbM, FTC2q2qbMFcon;
+* FLC2q2qM, FLC2q2qMFcon1, FLC2q2qMFcon2, FLC2q2qMANoW, FLC2q2gM, FLC2q2gMANoW, FLC2g2qM, FLC2g2qMANoW, FLC2g2gM, FLC2g2gMAANoW, FLC2q2qpM1, FLC2q2qpM2, FLC2q2qpMNoW3, FLC2q2qpMNoW4, FLC2q2qbM, FLC2q2qbMFcon;
+* F3C2q2qMFcon1, F3C2q2qMANoW, F3C2q2gM, F3C2q2gMANoW, F3C2g2qM, F3C2g2qMANoW, F3C2q2qpM1, F3C2q2qpM2, F3C2q2qpMNoW3, F3C2q2qpMNoW4, F3C2q2qbM, F3C2q2qbMFcon;
+
+Print FTC0q2qM, FTC1q2qM, FTC1q2gM, FTC1g2qM;
+Print FLC1q2qM, FLC1q2gM, FLC1g2qM;
+Print F3C0q2qM, F3C1q2qM, F3C1q2gM, F3C1g2qM, F3C2q2qM;
+Print FTC2q2qM, FTC2q2qMFcon1, FTC2q2qMFcon2, FTC2q2qMANoW, FTC2q2gM, FTC2q2gMANoW, FTC2g2qM, FTC2g2qMANoW, FTC2g2gM, FTC2g2gMAANoW, FTC2q2qpM1, FTC2q2qpM2, FTC2q2qpMNoW3, FTC2q2qpMNoW4, FTC2q2qbM, FTC2q2qbMFcon;
+Print FLC2q2qM, FLC2q2qMFcon1, FLC2q2qMFcon2, FLC2q2qMANoW, FLC2q2gM, FLC2q2gMANoW, FLC2g2qM, FLC2g2qMANoW, FLC2g2gM, FLC2g2gMAANoW, FLC2q2qpM1, FLC2q2qpM2, FLC2q2qpMNoW3, FLC2q2qpMNoW4, FLC2q2qbM, FLC2q2qbMFcon;
+Print F3C2q2qMFcon1, F3C2q2qMANoW, F3C2q2gM, F3C2q2gMANoW, F3C2g2qM, F3C2g2qMANoW, F3C2q2qpM1, F3C2q2qpM2, F3C2q2qpMNoW3, F3C2q2qpMNoW4, F3C2q2qbM, F3C2q2qbMFcon;
+
+.end
