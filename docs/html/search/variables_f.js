@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['q0_0',['Q0',['../structapfel_1_1EvolutionSetup.html#a204de6ac2d42773ef73525b99feff1a0',1,'apfel::EvolutionSetup']]],
-  ['q2s_1',['q2s',['../structapfel_1_1LHKnotArray.html#a046277f51b173abadb78d49ec1f3bca6',1,'apfel::LHKnotArray']]],
-  ['qch_2',['QCh',['../group__PhysConstants.html#ga5eae545badb8945cd767271b573a8fc2',1,'apfel']]],
-  ['qch2_3',['QCh2',['../group__PhysConstants.html#ga4e9304b2e9dfeb40a2ad1a3cfa6b2e6a',1,'apfel']]],
-  ['qmax_4',['Qmax',['../structapfel_1_1EvolutionSetup.html#ab80c721e240135b40821d4cda11b78e2',1,'apfel::EvolutionSetup']]],
-  ['qmin_5',['Qmin',['../structapfel_1_1EvolutionSetup.html#aa74278493b4ea60f09c74510a84be9ec',1,'apfel::EvolutionSetup']]],
-  ['qqcdref_6',['QQCDRef',['../structapfel_1_1EvolutionSetup.html#a78386fbdc6c17e740cbd14ab8d015914',1,'apfel::EvolutionSetup']]],
-  ['qqedref_7',['QQEDRef',['../structapfel_1_1EvolutionSetup.html#a198ae368f643bda07977fd4a21815a1e',1,'apfel::EvolutionSetup']]]
+  ['p_0',['P',['../structapfel_1_1StructureFunctionObjects.html#a89a3afc786c9c323541f9c71941d4e2c',1,'apfel::StructureFunctionObjects']]],
+  ['pdfevolution_1',['PDFEvolution',['../structapfel_1_1EvolutionSetup.html#a4a281df54c20f4dae59dedde33ee2753',1,'apfel::EvolutionSetup']]],
+  ['perturbativeorder_2',['PerturbativeOrder',['../structapfel_1_1EvolutionSetup.html#a904f87e2c7b0ce4f8448eebda1f1e418',1,'apfel::EvolutionSetup']]],
+  ['pi2_3',['Pi2',['../group__MathConstants.html#ga9c7ef97459ddf2159d123ca9ceffe09b',1,'apfel']]],
+  ['protonmass_4',['ProtonMass',['../group__PhysConstants.html#ga77dbc0a129205ed2d8bbd57d8b317e55',1,'apfel']]]
 ];

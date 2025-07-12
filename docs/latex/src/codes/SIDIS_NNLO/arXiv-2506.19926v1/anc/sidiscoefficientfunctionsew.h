@@ -10,6 +10,16 @@
 
 namespace apfel
 {
+  /**
+  * @defgroup EWMasslessSIDIS Zero-mass coefficient functions for electroweak unpolarised SIDIS
+  * Collection of the zero-mass coefficient functions for the
+  * structure functions F<SUB>L</SUB>, F<SUB>T</SUB>, and F<SUB>3</SUB>
+  * in unpolarised SIDIS up to O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+  * for both neutral- and charged-current structure functions.
+  * @note Expressions are extracted from the following reference:
+  * https://arxiv.org/pdf/2506.19926.
+  */
+  ///@{
 
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>0</SUP>) q2qM coefficient
@@ -752,4 +762,5 @@ namespace apfel
     std::string GetName() const override { return "F3C2q2qbMFcon"; }
     double RegularRegular(double const& x, double const& z) const override;
   };
+  ///@}
 }

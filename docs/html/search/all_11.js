@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['q_20m_20limit_20of_20nnlo_20massive_20coefficient_20functions_0',['Small-x and Q &gt;&gt; m limit of NNLO massive coefficient functions',['../group__NNLOm0sx.html',1,'']]],
+  ['q_20m_20limit_20of_20nnlo_20massive_20coefficient_20functions_0',['Small-x and Q &amp;gt;&amp;gt; m limit of NNLO massive coefficient functions',['../group__NNLOm0sx.html',1,'']]],
   ['q0_1',['Q0',['../structapfel_1_1EvolutionSetup.html#a204de6ac2d42773ef73525b99feff1a0',1,'apfel::EvolutionSetup']]],
   ['q2s_2',['q2s',['../structapfel_1_1LHKnotArray.html#a046277f51b173abadb78d49ec1f3bca6',1,'apfel::LHKnotArray']]],
   ['qcd_3',['QCD',['../structapfel_1_1EvolutionSetup.html#a829586a1986a0a568bcd4d69eff7442ea5f02e91d0609ad534cd78c7902ca2268',1,'apfel::EvolutionSetup']]],
@@ -17,12 +17,11 @@ var searchData=
   ['qmax_14',['Qmax',['../structapfel_1_1EvolutionSetup.html#ab80c721e240135b40821d4cda11b78e2',1,'apfel::EvolutionSetup']]],
   ['qmin_15',['QMin',['../classapfel_1_1QGrid.html#a0a1450c5d3c7988817a9302953437aea',1,'apfel::QGrid']]],
   ['qmin_16',['Qmin',['../structapfel_1_1EvolutionSetup.html#aa74278493b4ea60f09c74510a84be9ec',1,'apfel::EvolutionSetup']]],
-  ['qqcdref_17',['QQCDRef',['../structapfel_1_1EvolutionSetup.html#a78386fbdc6c17e740cbd14ab8d015914',1,'apfel::EvolutionSetup']]],
-  ['qqedref_18',['QQEDRef',['../structapfel_1_1EvolutionSetup.html#a198ae368f643bda07977fd4a21815a1e',1,'apfel::EvolutionSetup']]],
-  ['quark_20initiated_20coefficient_20functions_19',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]],
-  ['quark_20pdfs_20',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
-  ['quarkanalyticevolutionfactor_21',['QuarkAnalyticEvolutionFactor',['../namespaceapfel.html#aeab94641441d9b0677944defca3fc91f',1,'apfel']]],
-  ['quarkevolutionfactor_22',['QuarkEvolutionFactor',['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel']]],
-  ['quarkevolutionfactorxi_23',['QuarkEvolutionFactorxi',['../namespaceapfel.html#ac0a10f8afe02267c0410b5daffeca908',1,'apfel']]],
-  ['quarkflavour_24',['QuarkFlavour',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575b',1,'apfel']]]
+  ['qref_17',['QRef',['../structapfel_1_1EvolutionSetup.html#a19e7bf8ce1319937350d59449f9ab885',1,'apfel::EvolutionSetup']]],
+  ['quark_20initiated_20coefficient_20functions_18',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]],
+  ['quark_20pdfs_19',['NLO matching functions for Sivers quark PDFs',['../group__NLOSivers.html',1,'']]],
+  ['quarkanalyticevolutionfactor_20',['QuarkAnalyticEvolutionFactor',['../namespaceapfel.html#aeab94641441d9b0677944defca3fc91f',1,'apfel']]],
+  ['quarkevolutionfactor_21',['QuarkEvolutionFactor',['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel']]],
+  ['quarkevolutionfactorxi_22',['QuarkEvolutionFactorxi',['../namespaceapfel.html#ac0a10f8afe02267c0410b5daffeca908',1,'apfel']]],
+  ['quarkflavour_23',['QuarkFlavour',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575b',1,'apfel']]]
 ];

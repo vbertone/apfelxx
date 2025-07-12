@@ -11,6 +11,21 @@
 namespace apfel
 {
   /**
+  * @defgroup EWMasslessSIDIS Zero-mass coefficient functions for electroweak unpolarised SIDIS
+  * Collection of the zero-mass coefficient functions for the
+  * structure functions F<SUB>L</SUB>, F<SUB>T</SUB>, and F<SUB>3</SUB>
+  * in unpolarised SIDIS up to O(&alpha;<SUB>s</SUB><SUP>2</SUP>)
+  * for both neutral- and charged-current structure functions.
+  * @note Expressions are extracted from the following reference:
+  * https://arxiv.org/pdf/2506.19926.
+  */
+  ///@{
+  /**
+   * @defgroup NLOzmSIDISEW NLO zero-mass coefficient functions for electroweak unpolarised SIDIS
+   * @ingroup EWMasslessSIDIS
+   */
+  ///@{
+  /**
    * @brief O(&alpha;<SUB>s</SUB>) q2qM coefficient
    * function for FT
    */
@@ -58,6 +73,96 @@ namespace apfel
     double RegularRegular(double const& x, double const& z) const override;
   };
 
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) q2qM coefficient
+   * function for FL
+   */
+  class FLC1q2qM: public DoubleExpression
+  {
+  public:
+    FLC1q2qM();
+    std::string GetName() const override { return "FLC1q2qM"; }
+    double RegularRegular(double const& x, double const& z) const override;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) q2gM coefficient
+   * function for FL
+   */
+  class FLC1q2gM: public DoubleExpression
+  {
+  public:
+    FLC1q2gM();
+    std::string GetName() const override { return "FLC1q2gM"; }
+    double RegularRegular(double const& x, double const& z) const override;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) g2qM coefficient
+   * function for FL
+   */
+  class FLC1g2qM: public DoubleExpression
+  {
+  public:
+    FLC1g2qM();
+    std::string GetName() const override { return "FLC1g2qM"; }
+    double RegularRegular(double const& x, double const& z) const override;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) q2qM coefficient
+   * function for F3
+   */
+  class F3C1q2qM: public DoubleExpression
+  {
+  public:
+    F3C1q2qM();
+    std::string GetName() const override { return "F3C1q2qM"; }
+    double LocalLocal(double const& x, double const& z) const override;
+    double LocalSingular(double const& x, double const& z) const override;
+    double LocalRegular(double const& x, double const& z) const override;
+    double SingularLocal(double const& x, double const& z) const override;
+    double SingularSingular(double const& x, double const& z) const override;
+    double SingularRegular(double const& x, double const& z) const override;
+    double RegularLocal(double const& x, double const& z) const override;
+    double RegularSingular(double const& x, double const& z) const override;
+    double RegularRegular(double const& x, double const& z) const override;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) q2gM coefficient
+   * function for F3
+   */
+  class F3C1q2gM: public DoubleExpression
+  {
+  public:
+    F3C1q2gM();
+    std::string GetName() const override { return "F3C1q2gM"; }
+    double LocalRegular(double const& x, double const& z) const override;
+    double SingularRegular(double const& x, double const& z) const override;
+    double RegularRegular(double const& x, double const& z) const override;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) g2qM coefficient
+   * function for F3
+   */
+  class F3C1g2qM: public DoubleExpression
+  {
+  public:
+    F3C1g2qM();
+    std::string GetName() const override { return "F3C1g2qM"; }
+    double RegularLocal(double const& x, double const& z) const override;
+    double RegularSingular(double const& x, double const& z) const override;
+    double RegularRegular(double const& x, double const& z) const override;
+  };
+  ///@}
+
+  /**
+   * @defgroup NNLOzmSIDISEW NNLO zero-mass coefficient functions for electroweak unpolarised SIDIS
+   * @ingroup EWMasslessSIDIS
+   */
+  ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) q2qM coefficient
    * function for FT
@@ -274,42 +379,6 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) q2qM coefficient
-   * function for FL
-   */
-  class FLC1q2qM: public DoubleExpression
-  {
-  public:
-    FLC1q2qM();
-    std::string GetName() const override { return "FLC1q2qM"; }
-    double RegularRegular(double const& x, double const& z) const override;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) q2gM coefficient
-   * function for FL
-   */
-  class FLC1q2gM: public DoubleExpression
-  {
-  public:
-    FLC1q2gM();
-    std::string GetName() const override { return "FLC1q2gM"; }
-    double RegularRegular(double const& x, double const& z) const override;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) g2qM coefficient
-   * function for FL
-   */
-  class FLC1g2qM: public DoubleExpression
-  {
-  public:
-    FLC1g2qM();
-    std::string GetName() const override { return "FLC1g2qM"; }
-    double RegularRegular(double const& x, double const& z) const override;
-  };
-
-  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) q2qM coefficient
    * function for FL
    */
@@ -504,54 +573,6 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) q2qM coefficient
-   * function for F3
-   */
-  class F3C1q2qM: public DoubleExpression
-  {
-  public:
-    F3C1q2qM();
-    std::string GetName() const override { return "F3C1q2qM"; }
-    double LocalLocal(double const& x, double const& z) const override;
-    double LocalSingular(double const& x, double const& z) const override;
-    double LocalRegular(double const& x, double const& z) const override;
-    double SingularLocal(double const& x, double const& z) const override;
-    double SingularSingular(double const& x, double const& z) const override;
-    double SingularRegular(double const& x, double const& z) const override;
-    double RegularLocal(double const& x, double const& z) const override;
-    double RegularSingular(double const& x, double const& z) const override;
-    double RegularRegular(double const& x, double const& z) const override;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) q2gM coefficient
-   * function for F3
-   */
-  class F3C1q2gM: public DoubleExpression
-  {
-  public:
-    F3C1q2gM();
-    std::string GetName() const override { return "F3C1q2gM"; }
-    double LocalRegular(double const& x, double const& z) const override;
-    double SingularRegular(double const& x, double const& z) const override;
-    double RegularRegular(double const& x, double const& z) const override;
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) g2qM coefficient
-   * function for F3
-   */
-  class F3C1g2qM: public DoubleExpression
-  {
-  public:
-    F3C1g2qM();
-    std::string GetName() const override { return "F3C1g2qM"; }
-    double RegularLocal(double const& x, double const& z) const override;
-    double RegularSingular(double const& x, double const& z) const override;
-    double RegularRegular(double const& x, double const& z) const override;
-  };
-
-  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>2</SUP>) q2qM coefficient
    * function for F3
    */
@@ -729,4 +750,6 @@ namespace apfel
     std::string GetName() const override { return "F3C2q2qbMFcon"; }
     double RegularRegular(double const& x, double const& z) const override;
   };
+  ///@}
+  ///@}
 }

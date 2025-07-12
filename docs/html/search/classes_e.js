@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['tabulateobject_0',['TabulateObject',['../classapfel_1_1TabulateObject.html',1,'apfel']]],
-  ['tabulateobject_3c_20apfel_3a_3aset_3c_20apfel_3a_3adistribution_20_3e_20_3e_1',['TabulateObject&lt; apfel::Set&lt; apfel::Distribution &gt; &gt;',['../classapfel_1_1TabulateObject.html',1,'apfel']]],
-  ['term_2',['term',['../structapfel_1_1term.html',1,'apfel']]],
-  ['timer_3',['Timer',['../classapfel_1_1Timer.html',1,'apfel']]],
-  ['tmdobjects_4',['TmdObjects',['../structapfel_1_1TmdObjects.html',1,'apfel']]],
-  ['twobodyphasespace_5',['TwoBodyPhaseSpace',['../classapfel_1_1TwoBodyPhaseSpace.html',1,'apfel']]]
+  ['set_0',['Set',['../classapfel_1_1Set.html',1,'apfel']]],
+  ['set_3c_20apfel_3a_3adistribution_20_3e_1',['Set&lt; apfel::Distribution &gt;',['../classapfel_1_1Set.html',1,'apfel']]],
+  ['set_3c_20apfel_3a_3aoperator_20_3e_2',['Set&lt; apfel::Operator &gt;',['../classapfel_1_1Set.html',1,'apfel']]],
+  ['set_3c_20distribution_20_3e_3',['Set&lt; Distribution &gt;',['../classapfel_1_1Set.html',1,'apfel']]],
+  ['structurefunctionobjects_4',['StructureFunctionObjects',['../structapfel_1_1StructureFunctionObjects.html',1,'apfel']]],
+  ['subgrid_5',['SubGrid',['../classapfel_1_1SubGrid.html',1,'apfel']]],
+  ['subgridpars_6',['SubGridPars',['../structapfel_1_1Grid_1_1SubGridPars.html',1,'apfel::Grid']]]
 ];

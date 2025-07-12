@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['object_0',['object',['../structapfel_1_1ConvolutionMap_1_1rule.html#a2c0746f83d8cd9aba6adef881214d4e6',1,'apfel::ConvolutionMap::rule']]],
-  ['object1_1',['object1',['../structapfel_1_1term.html#ae83713d52c64fe1e8058b3e92e05441c',1,'apfel::term']]],
-  ['object2_2',['object2',['../structapfel_1_1term.html#aa1968face846d1995d05dc178734b352',1,'apfel::term']]],
-  ['objects_3',['Objects',['../structapfel_1_1Observable_1_1ConvolutionPair.html#ad5f3a8e9c0563a35985fa1587ae06679',1,'apfel::Observable::ConvolutionPair']]],
-  ['operand_4',['operand',['../structapfel_1_1ConvolutionMap_1_1rule.html#a6c3092134ba2ed5a1eae04aae274211d',1,'apfel::ConvolutionMap::rule']]]
+  ['name_0',['name',['../structapfel_1_1EvolutionSetup.html#ad4d76387104f1d24f4c3f2dfb4054575',1,'apfel::EvolutionSetup']]],
+  ['nc_1',['NC',['../group__MathConstants.html#gadff9aadfe2fba84ec0abee6cd9b1f880',1,'apfel']]],
+  ['nf_2',['nf',['../structapfel_1_1StructureFunctionObjects.html#a170c97d00ed52d26baa66d3c0e44d6f5',1,'apfel::StructureFunctionObjects']]],
+  ['nf_5fff_3',['Nf_FF',['../structapfel_1_1EvolutionSetup.html#a9b30d8429e9a3d033202927abf5c8667',1,'apfel::EvolutionSetup']]],
+  ['nqg_4',['nQg',['../structapfel_1_1EvolutionSetup.html#aab9528d803850444afe8f68ac552338c',1,'apfel::EvolutionSetup']]],
+  ['nx_5',['nx',['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters']]]
 ];

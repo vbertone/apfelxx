@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['sin2thetaw_0',['Sin2ThetaW',['../group__PhysConstants.html#ga9af859b43ff57c36612f5da5d4591bdc',1,'apfel']]],
-  ['skip_1',['skip',['../structapfel_1_1StructureFunctionObjects.html#a9f1b3557881f7d54fdc30d4aaed976ff',1,'apfel::StructureFunctionObjects']]],
-  ['species_2',['Species',['../structapfel_1_1DglapObjectsQCDQED.html#aab8406f3f5a9d38939984813f2c7fefd',1,'apfel::DglapObjectsQCDQED']]],
-  ['splittingfunctions_3',['SplittingFunctions',['../structapfel_1_1DglapObjects.html#a9fd9557aeab57928994f9f53065c266e',1,'apfel::DglapObjects::SplittingFunctions'],['../structapfel_1_1DglapObjectsQCDQED.html#a28bd0f692eb319714c02962bd590a316',1,'apfel::DglapObjectsQCDQED::SplittingFunctions']]],
-  ['sumch2_4',['SumCh2',['../group__PhysConstants.html#ga3847399d431a57400a29dde8b7ed3131',1,'apfel']]],
-  ['sumch4_5',['SumCh4',['../group__PhysConstants.html#ga3592db3d7a56f477d625bc40dd173ac0',1,'apfel']]]
+  ['rotphystoplusminus_0',['RotPhysToPlusMinus',['../namespaceapfel.html#a8d827b627c935acb62d0247307ee0dc1',1,'apfel']]],
+  ['rotphystoplusminusqcdqed_1',['RotPhysToPlusMinusQCDQED',['../namespaceapfel.html#a3903a3db418dd75ab4b408625a80a960',1,'apfel']]],
+  ['rotphystoqcdev_2',['RotPhysToQCDEv',['../namespaceapfel.html#a6418419e3f1b9d048265a8dd89bc323b',1,'apfel']]],
+  ['rotphystoqcdevfull_3',['RotPhysToQCDEvFull',['../namespaceapfel.html#a8a795b13251f5b660156b521f5ad6cf5',1,'apfel']]],
+  ['rotplusminusqcdqedtophys_4',['RotPlusMinusQCDQEDToPhys',['../namespaceapfel.html#a90b1e57c98c2a6313a5e55294c2c41be',1,'apfel']]],
+  ['rotplusminustophys_5',['RotPlusMinusToPhys',['../namespaceapfel.html#a7ffd239625ebeec42ec0dafef6fd7beb',1,'apfel']]],
+  ['rotqcdevtophys_6',['RotQCDEvToPhys',['../namespaceapfel.html#ac8d9079ba80f60896850b527fee1c74b',1,'apfel']]],
+  ['rotqcdevtophysfull_7',['RotQCDEvToPhysFull',['../namespaceapfel.html#a762f84c466d2a6e299d13d0ac7847eeb',1,'apfel']]]
 ];

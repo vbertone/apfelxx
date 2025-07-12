@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['rotphystoplusminus_0',['RotPhysToPlusMinus',['../namespaceapfel.html#a8d827b627c935acb62d0247307ee0dc1',1,'apfel']]],
-  ['rotphystoqcdev_1',['RotPhysToQCDEv',['../namespaceapfel.html#a6418419e3f1b9d048265a8dd89bc323b',1,'apfel']]],
-  ['rotphystoqcdevfull_2',['RotPhysToQCDEvFull',['../namespaceapfel.html#a8a795b13251f5b660156b521f5ad6cf5',1,'apfel']]],
-  ['rotplusminustophys_3',['RotPlusMinusToPhys',['../namespaceapfel.html#a7ffd239625ebeec42ec0dafef6fd7beb',1,'apfel']]],
-  ['rotqcdevtophys_4',['RotQCDEvToPhys',['../namespaceapfel.html#ac8d9079ba80f60896850b527fee1c74b',1,'apfel']]],
-  ['rotqcdevtophysfull_5',['RotQCDEvToPhysFull',['../namespaceapfel.html#a762f84c466d2a6e299d13d0ac7847eeb',1,'apfel']]]
+  ['q0_0',['Q0',['../structapfel_1_1EvolutionSetup.html#a204de6ac2d42773ef73525b99feff1a0',1,'apfel::EvolutionSetup']]],
+  ['q2s_1',['q2s',['../structapfel_1_1LHKnotArray.html#a046277f51b173abadb78d49ec1f3bca6',1,'apfel::LHKnotArray']]],
+  ['qch_2',['QCh',['../group__PhysConstants.html#ga5eae545badb8945cd767271b573a8fc2',1,'apfel']]],
+  ['qch2_3',['QCh2',['../group__PhysConstants.html#ga4e9304b2e9dfeb40a2ad1a3cfa6b2e6a',1,'apfel']]],
+  ['qmax_4',['Qmax',['../structapfel_1_1EvolutionSetup.html#ab80c721e240135b40821d4cda11b78e2',1,'apfel::EvolutionSetup']]],
+  ['qmin_5',['Qmin',['../structapfel_1_1EvolutionSetup.html#aa74278493b4ea60f09c74510a84be9ec',1,'apfel::EvolutionSetup']]],
+  ['qref_6',['QRef',['../structapfel_1_1EvolutionSetup.html#a19e7bf8ce1319937350d59449f9ab885',1,'apfel::EvolutionSetup']]]
 ];
