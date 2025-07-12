@@ -12,12 +12,6 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  FTC0q2qM::FTC0q2qM():
-    DoubleExpression()
-  {
-  }
-
-  //_________________________________________________________________________________
   FTC1q2qM::FTC1q2qM():
     DoubleExpression()
   {
@@ -1738,12 +1732,6 @@ namespace apfel
     const double Li2x = dilog(x);
     return -6 + 6*x + 6*z - 6*x*z - 2*x*Li2x + 2*x*z*Li2x - 2*lx - 2*x*lx + 2*z*lx + 2*x*z*lx - 2*x*lomx*lx + 2*x*z*lomx*lx + 6*NCi2 - 6*x*NCi2 - 6*z*NCi2 + 6*x*z*NCi2 + 2*x*Li2x*NCi2 - 2*x*z*Li2x*NCi2 + 2*lx*NCi2 + 2*x*lx*NCi2 - 2*z*lx*NCi2 - 2*x*z*lx*NCi2 + 2*x*lomx*lx*NCi2 - 2*x*z*lomx*lx*NCi2 + (x*pi2)/3. - (x*z*pi2)/3. - (x*NCi2*pi2)/3. + (x*z*NCi2*pi2)/3. + x*lx2 - x*z*lx2 - x*NCi2*lx2 + x*z*NCi2*lx2;
   };
-
-  //_________________________________________________________________________________
-  F3C0q2qM::F3C0q2qM():
-    DoubleExpression()
-  {
-  }
 
   //_________________________________________________________________________________
   F3C1q2qM::F3C1q2qM():

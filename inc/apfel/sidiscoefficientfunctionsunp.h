@@ -26,7 +26,7 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) non-singlet quark-in-quak
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet quark-in-quark
    * coefficient function for FL
    */
   class C1LQ2Q: public DoubleExpression
@@ -38,7 +38,7 @@ namespace apfel
   };
 
   /**
-   * @brief O(&alpha;<SUB>s</SUB>) gluon-in-quak coefficient function
+   * @brief O(&alpha;<SUB>s</SUB>) gluon-in-quark coefficient function
    * for FL
    */
   class C1LQ2G: public DoubleExpression

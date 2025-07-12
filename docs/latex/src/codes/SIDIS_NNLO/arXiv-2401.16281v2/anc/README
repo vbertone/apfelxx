@@ -1,22 +1,31 @@
-In order to install "FormGet" used in the "Processing.nb" notebook, you need to download FormRun-1.0.tar.gz from here:
+In order to install "FormGet" used in the "Processing.nb" notebook,
+you need to download FormRun-1.0.tar.gz from here:
 
 https://feynarts.de/formcalc/
 
-and unzip it.
-Then, from a Mathematica notebook, you need to run:
+and unzip it. Then, from a Mathematica notebook, you need to run:
 
 Needs["CCompilerDriver`"]
 CreateExecutable[{"/Users/vb262523/Codes/FeynStuff/FormRun-1.0/FormGet.tm"}, "FormGet", "ShellOutputFunction" :> Print, "ShellCommandFunction" :> Print]
 
-This command may give an error related to the fact that it does not find MLCONST.
-If this is the case, just replace:
+This command may give an error related to the fact that it does not
+find MLCONST.  If this is the case, just replace:
 
 typedef MLCONST char *cstring; --> typedef char *cstring;
 
-in FormGet.tm inside the FormRun-1.0 folder.
-This should finally produce the "FormGet" executable and CreateExecutable[...] should tell you its location.
-Copy this exacutable in "/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-x86-64/PrebuiltExamples".
-Before running the "Processing.nb" notebook, you many need to adjust the location of the "form" exactutable necessary to run "FormGet[...]".
+in FormGet.tm inside the FormRun-1.0 folder. This should finally
+produce the "FormGet" executable and CreateExecutable[...] should tell
+you its location. Copy this exacutable in:
+
+"/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-x86-64/PrebuiltExamples".
+
+Before running the "Processing.nb" notebook, you many need to adjust
+the location of the "form" exactutable necessary to run
+"FormGet[...]".
+
+Finally, the resulting *.cc file will not immediately compile. Indeed,
+it still require some manual editing to include some missing
+declarations, and remove unused variables to suppress warnings.
 
 =======================================================
 
@@ -45,4 +54,4 @@ S u1, u2, u3, u4, t1, t2, r1, r2;
 Print C1LQ2Q, C1LQ2G, C1LG2Q, C1TQ2Q, C1TQ2G, C1TG2Q;
 Print C2LQ2G, C2LG2G, C2LG2Q, C2LQ2QNS, C2LQ2QPS, C2LQ2QB, C2LQ2QP1, C2LQ2QP2, C2LQ2QP3, C2TQ2G, C2TG2G, C2TG2Q, C2TQ2QNS, C2TQ2QPS, C2TQ2QB, C2TQ2QP1, C2TQ2QP2, C2TQ2QP3;
 
-.end
+.end 
