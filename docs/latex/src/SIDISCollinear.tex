@@ -43,7 +43,8 @@
 
 \begin{document}
 
-\title{Notes on posterior flavour separation of fragmentation functions using SIDIS data}
+\title{Notes the computation of cross sections related to
+  fragmentation functions in collinear factorisation}
 
 %\author{Valerio Bertone, Emanuele Roberto Nocera}
 
@@ -57,216 +58,216 @@
 
 %\newpage
 
-In this set of notes we discuss a possible strategy to achieve flavour
-separation of a preexisting set of fragmentation functions (FFs) using
-data for semi-inclusive deep-inelastic scattering (SIDIS) with
-performing a fit. The application domain of this method is the
-inclusion of the COMPASS data for the production of unidentified
-charged hadrons ($h^\pm$) in the set {\tt NNFF1.1h} presented in
-Ref.~\cite{Bertone:2018ecm}.
+% In this set of notes we discuss a possible strategy to achieve flavour
+% separation of a preexisting set of fragmentation functions (FFs) using
+% data for semi-inclusive deep-inelastic scattering (SIDIS) with
+% performing a fit. The application domain of this method is the
+% inclusion of the COMPASS data for the production of unidentified
+% charged hadrons ($h^\pm$) in the set {\tt NNFF1.1h} presented in
+% Ref.~\cite{Bertone:2018ecm}.
 
-\section{The methodology}
+% \section{The methodology}
 
-The COMPASS experiment released SIDIS data for unidentified
-charged-hadrons production~\cite{COMPASS:2016xvm} in the form of
-multiplicities separately for $h^+$ and $h^-$. Thanks to the partonic
-structure of the corresponding observable, this data, if included in a
-determination of FFs, allows one to separate, not only flavour
-species, but also flavour from antiflavour. This contrasts with
-single-inclusive $e^+e^-$ annihilation (SIA) data and hadro-production
-in $pp$ collision that are only able to constrain a limited number of
-flavour combinations. This is the reason why the NNFF1.1h set, that is
-based on SIA and $pp$ data only, does not deliver a reliable flavour
-separation. In these notes we device a method that allows for the
-inclusion of the COMPASS data in the NNFF1.1h without the need of a
-new fit. The method is based on the Bayesian reweighting procedure.
+% The COMPASS experiment released SIDIS data for unidentified
+% charged-hadrons production~\cite{COMPASS:2016xvm} in the form of
+% multiplicities separately for $h^+$ and $h^-$. Thanks to the partonic
+% structure of the corresponding observable, this data, if included in a
+% determination of FFs, allows one to separate, not only flavour
+% species, but also flavour from antiflavour. This contrasts with
+% single-inclusive $e^+e^-$ annihilation (SIA) data and hadro-production
+% in $pp$ collision that are only able to constrain a limited number of
+% flavour combinations. This is the reason why the NNFF1.1h set, that is
+% based on SIA and $pp$ data only, does not deliver a reliable flavour
+% separation. In these notes we device a method that allows for the
+% inclusion of the COMPASS data in the NNFF1.1h without the need of a
+% new fit. The method is based on the Bayesian reweighting procedure.
 
-The NNFF sets adopt the following parameterisation basis:
-\begin{equation}
-\{D^{h^{\pm}}_{u^+},D^{h^{\pm}}_{d^++s^+},D^{h^{\pm}}_{c^+},D^{h^{\pm}}_{b^+},D^{h^{\pm}}_{g},\}
-\label{eq:startingbasis}
-\end{equation}
-at the initial scale $Q_0=5$~GeV, with $q^+=q+\overline{q}$. This
-choice, particularly the reduced number of combinations, is dictated
-by the fact that the data set included in the fits is only sensitive
-to this number of combinations. It is thus apparent that no separation
-of $q$ and $\overline{q}$ and also of $d^+$ and $s^+$ is
-achievable. This led us to parameterise the 5 combinations in
-Eq.~(\ref{eq:startingbasis}) in place of the 11 independent
-combinations at $Q_0$ for each hadronic charge. To obtain a separation
-from SIDIS data we first assume charge conjugation symmetry to connect
-the FFs of hadrons of opposite charge:
-\begin{equation}
-D^{h^+}_{q(\overline{q})}=D^{h^-}_{\overline{q}(q)}\,.
-\label{eq:chargeconjugation}
-\end{equation}
-This symmetry is exact in QCD and holds at all scales. This allows us
-to consider the FFs of a single charge, we choose $h^+$. Second, we
-assume that ``sea-type'' quark flavours are symmetric with respect to
-charge conjugation(\footnote{In fact, sice we are considering all
-  possible charged hadrons in the final state, it is not strictly true
-  that strange, charm, and bottom are sea-distributions. However, the
-  hadronic yield is dominated by pions for which this assumption is
-  more justified.}). In particular, for strange, charm, and bottom we
-assume that:
-\begin{equation}
-D^{h^+}_q = D^{h^+}_{\overline{q}}\,,\qquad q=s,c,b\,.
-\label{eq:flavoursymmetry}
-\end{equation}
-The 5 FF combinations in Eq.~(\ref{eq:startingbasis}) for each
-hadronic charge along with the constraints in
-Eqs.~(\ref{eq:chargeconjugation}) and~(\ref{eq:flavoursymmetry}),
-brings us to 8 degrees of freedom constrained. To get to 11 we need
-three more degrees of freedom that we constrain using the COMPASS
-data. We parameterise these three additional degrees of freedom in
-terms of three auxiliary functions $C(x)$, $H(x)$ and $G(x)$
-introduced through the following (trivial) identities:
-\begin{equation}
-D^{h^+}_{u^+}(x,Q_0) = C(x) D^{h^+}_{u^+}(x,Q_0) +\left[1-C(x)\right] D^{h^+}_{u^+}(x,Q_0)\,,
-\end{equation}
-and identify:
-\begin{equation}
-D^{h^+}_{u}(x,Q_0) = C(x) D^{h^+}_{u^+}(x,Q_0)\,,\quad\mbox{and}\quad
-D^{h^+}_{u}(x,Q_0)=\left[1-C(x)\right] D^{h^+}_{u^+}(x,Q_0)\,.
-\label{eq:firstseparation}
-\end{equation}
-Then:
-\begin{equation}
-D^{h^+}_{d^++s^+}(x,Q_0) = H(x) D^{h^+}_{d^++s^+} (x,Q_0) +\left[1-H(x)\right] D^{h^+}_{d^++s^+} (x,Q_0)\,,
-\end{equation}
-and we identify:
-\begin{equation}
-D^{h^+}_{d^+}(x,Q_0) = H(x) D^{h^+}_{d^++s^+}(x,Q_0)
-\,,\quad\mbox{and}\quad D^{h^+}_{s^+}(x,Q_0) = \left[1-H(x)\right] D^{h^+}_{d^++s^+} (x,Q_0)\,.
-\end{equation}
-But since we assume $D^{h^+}_{s}=D^{h^+}_{\overline{s}}$, we have that:
-\begin{equation}
-D^{h^+}_{s}(x,Q_0)=D^{h^+}_{\overline{s}}(x,Q_0) =
-\frac12\left[1-H(x)\right] D^{h^+}_{d^++s^+} (x,Q_0)\,.
-\label{eq:secondseparation}
-\end{equation}
-Finally, we introduce the third function as follows:
-\begin{equation}
-D^{h^+}_{d^+}(x,Q_0) = G(x) D^{h^+}_{d^+}(x,Q_0)+\left[1-G(x)\right]D^{h^+}_{d^+}(x,Q_0)\,,
-\end{equation}
-and identify:
-\begin{equation}
-D^{h^+}_{d}(x,Q_0) = G(x) D^{h^+}_{d^+}= G(x) H(x)
-D^{h^+}_{d^++s^+}(x,Q_0)\,,
-\label{eq:thirdseparation1}
-\end{equation}
-and:
-\begin{equation}
-D^{h^+}_{\overline{d}}(x,Q_0) = \left[1-G(x)\right] D^{h^+}_{d^+}=
-\left[1-G(x)\right] H(x) D^{h^+}_{d^++s^+}(x,Q_0)\,.
-\label{eq:thirdseparation2}
-\end{equation}
-At the end of the day, we can parameterise the flavour separation in
-terms of $C(x)$, $H(x)$, and $G(x)$ using
-Eqs.~(\ref{eq:firstseparation}),~(\ref{eq:secondseparation}),~(\ref{eq:thirdseparation1}),
-and~(\ref{eq:thirdseparation2}). The final goal is the determination
-of these functions. Despite, in principle, they are totally unknown, we can
-in practice impose some phenomenologically-motivated constraints on them. 
-First we require
-that the auxiliary functions in the range $x\in [0,1]$ are between 0
-and 1:
-\begin{equation}
-0 \leq C(x), H(x), G(x) \leq 1\,,\quad x\in [0,1]\,.
-\end{equation}
-The reason is that we want that the flavour-separated distributions
-contribute constructively to their original combinations. We then
-assume that for $x$ very close to one all flavour-separated
-distributions contribute with the same amount to their original
-combinations. This translates into:
-\begin{equation}
-C(1) = H(1) = G(1) = \frac12\,.
-\end{equation}
-To fulfill the requirements above it is convenient to define:
-\begin{equation}
-\begin{array}{l}
-\displaystyle C(x) = \frac12c(x)+\frac12\,,\\
-\\
-\displaystyle H(x) = \frac12h(x)+\frac12\,,\\
-\\
-\displaystyle G(x) = \frac12g(x)+\frac12\,,
-\end{array}
-\end{equation}
-with:
-\begin{equation}
--1 \leq c(x), h(x), g(x) \leq 1\,,\quad x\in [0,1]\,,
-\label{eq:bounds}
-\end{equation}
-and:
-\begin{equation}
-c(1) = h(1) = g(1) = 0\,.
-\label{eq:endpoint}
-\end{equation}
+% The NNFF sets adopt the following parameterisation basis:
+% \begin{equation}
+% \{D^{h^{\pm}}_{u^+},D^{h^{\pm}}_{d^++s^+},D^{h^{\pm}}_{c^+},D^{h^{\pm}}_{b^+},D^{h^{\pm}}_{g},\}
+% \label{eq:startingbasis}
+% \end{equation}
+% at the initial scale $Q_0=5$~GeV, with $q^+=q+\overline{q}$. This
+% choice, particularly the reduced number of combinations, is dictated
+% by the fact that the data set included in the fits is only sensitive
+% to this number of combinations. It is thus apparent that no separation
+% of $q$ and $\overline{q}$ and also of $d^+$ and $s^+$ is
+% achievable. This led us to parameterise the 5 combinations in
+% Eq.~(\ref{eq:startingbasis}) in place of the 11 independent
+% combinations at $Q_0$ for each hadronic charge. To obtain a separation
+% from SIDIS data we first assume charge conjugation symmetry to connect
+% the FFs of hadrons of opposite charge:
+% \begin{equation}
+% D^{h^+}_{q(\overline{q})}=D^{h^-}_{\overline{q}(q)}\,.
+% \label{eq:chargeconjugation}
+% \end{equation}
+% This symmetry is exact in QCD and holds at all scales. This allows us
+% to consider the FFs of a single charge, we choose $h^+$. Second, we
+% assume that ``sea-type'' quark flavours are symmetric with respect to
+% charge conjugation(\footnote{In fact, sice we are considering all
+%   possible charged hadrons in the final state, it is not strictly true
+%   that strange, charm, and bottom are sea-distributions. However, the
+%   hadronic yield is dominated by pions for which this assumption is
+%   more justified.}). In particular, for strange, charm, and bottom we
+% assume that:
+% \begin{equation}
+% D^{h^+}_q = D^{h^+}_{\overline{q}}\,,\qquad q=s,c,b\,.
+% \label{eq:flavoursymmetry}
+% \end{equation}
+% The 5 FF combinations in Eq.~(\ref{eq:startingbasis}) for each
+% hadronic charge along with the constraints in
+% Eqs.~(\ref{eq:chargeconjugation}) and~(\ref{eq:flavoursymmetry}),
+% brings us to 8 degrees of freedom constrained. To get to 11 we need
+% three more degrees of freedom that we constrain using the COMPASS
+% data. We parameterise these three additional degrees of freedom in
+% terms of three auxiliary functions $C(x)$, $H(x)$ and $G(x)$
+% introduced through the following (trivial) identities:
+% \begin{equation}
+% D^{h^+}_{u^+}(x,Q_0) = C(x) D^{h^+}_{u^+}(x,Q_0) +\left[1-C(x)\right] D^{h^+}_{u^+}(x,Q_0)\,,
+% \end{equation}
+% and identify:
+% \begin{equation}
+% D^{h^+}_{u}(x,Q_0) = C(x) D^{h^+}_{u^+}(x,Q_0)\,,\quad\mbox{and}\quad
+% D^{h^+}_{u}(x,Q_0)=\left[1-C(x)\right] D^{h^+}_{u^+}(x,Q_0)\,.
+% \label{eq:firstseparation}
+% \end{equation}
+% Then:
+% \begin{equation}
+% D^{h^+}_{d^++s^+}(x,Q_0) = H(x) D^{h^+}_{d^++s^+} (x,Q_0) +\left[1-H(x)\right] D^{h^+}_{d^++s^+} (x,Q_0)\,,
+% \end{equation}
+% and we identify:
+% \begin{equation}
+% D^{h^+}_{d^+}(x,Q_0) = H(x) D^{h^+}_{d^++s^+}(x,Q_0)
+% \,,\quad\mbox{and}\quad D^{h^+}_{s^+}(x,Q_0) = \left[1-H(x)\right] D^{h^+}_{d^++s^+} (x,Q_0)\,.
+% \end{equation}
+% But since we assume $D^{h^+}_{s}=D^{h^+}_{\overline{s}}$, we have that:
+% \begin{equation}
+% D^{h^+}_{s}(x,Q_0)=D^{h^+}_{\overline{s}}(x,Q_0) =
+% \frac12\left[1-H(x)\right] D^{h^+}_{d^++s^+} (x,Q_0)\,.
+% \label{eq:secondseparation}
+% \end{equation}
+% Finally, we introduce the third function as follows:
+% \begin{equation}
+% D^{h^+}_{d^+}(x,Q_0) = G(x) D^{h^+}_{d^+}(x,Q_0)+\left[1-G(x)\right]D^{h^+}_{d^+}(x,Q_0)\,,
+% \end{equation}
+% and identify:
+% \begin{equation}
+% D^{h^+}_{d}(x,Q_0) = G(x) D^{h^+}_{d^+}= G(x) H(x)
+% D^{h^+}_{d^++s^+}(x,Q_0)\,,
+% \label{eq:thirdseparation1}
+% \end{equation}
+% and:
+% \begin{equation}
+% D^{h^+}_{\overline{d}}(x,Q_0) = \left[1-G(x)\right] D^{h^+}_{d^+}=
+% \left[1-G(x)\right] H(x) D^{h^+}_{d^++s^+}(x,Q_0)\,.
+% \label{eq:thirdseparation2}
+% \end{equation}
+% At the end of the day, we can parameterise the flavour separation in
+% terms of $C(x)$, $H(x)$, and $G(x)$ using
+% Eqs.~(\ref{eq:firstseparation}),~(\ref{eq:secondseparation}),~(\ref{eq:thirdseparation1}),
+% and~(\ref{eq:thirdseparation2}). The final goal is the determination
+% of these functions. Despite, in principle, they are totally unknown, we can
+% in practice impose some phenomenologically-motivated constraints on them. 
+% First we require
+% that the auxiliary functions in the range $x\in [0,1]$ are between 0
+% and 1:
+% \begin{equation}
+% 0 \leq C(x), H(x), G(x) \leq 1\,,\quad x\in [0,1]\,.
+% \end{equation}
+% The reason is that we want that the flavour-separated distributions
+% contribute constructively to their original combinations. We then
+% assume that for $x$ very close to one all flavour-separated
+% distributions contribute with the same amount to their original
+% combinations. This translates into:
+% \begin{equation}
+% C(1) = H(1) = G(1) = \frac12\,.
+% \end{equation}
+% To fulfill the requirements above it is convenient to define:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle C(x) = \frac12c(x)+\frac12\,,\\
+% \\
+% \displaystyle H(x) = \frac12h(x)+\frac12\,,\\
+% \\
+% \displaystyle G(x) = \frac12g(x)+\frac12\,,
+% \end{array}
+% \end{equation}
+% with:
+% \begin{equation}
+% -1 \leq c(x), h(x), g(x) \leq 1\,,\quad x\in [0,1]\,,
+% \label{eq:bounds}
+% \end{equation}
+% and:
+% \begin{equation}
+% c(1) = h(1) = g(1) = 0\,.
+% \label{eq:endpoint}
+% \end{equation}
 
-The simplest possible parameterisation for the functions $f=\{c,h,g\}$
-is:
-\begin{equation}
-f(x) = Ax^\alpha(1-x)^\beta\,.
-\label{eq:parameterisation}
-\end{equation}
-The constraint in Eq.~(\ref{eq:endpoint}) is implemented by requiring:
-\begin{equation}
-\beta > 0\,.
-\label{eq:const1}
-\end{equation}
-In addition, for $f$ not to diverge at small values of $x$, we also
-require:
-\begin{equation}
-\alpha\geq 0\,.
-\label{eq:const2}
-\end{equation}
-The constraint in Eq.~(\ref{eq:bounds}) is implemented by requiring
-that the function $f$ computed in its (unique) stationary point $x_0$
-in the interval $[0,1]$ is bound to be in the interval $[-1,1]$. This
-will finally result in a constraint on the normalisation factor
-$A$. To do so, we first find the stationary point of $f$ by requiring
-its derivative to be zero:
-\begin{equation}
-\left.\frac{df}{dx}\right|_{x=x_0} = A
-x_0^{\alpha-1}(1-x_0)^{\beta-1}\left[\alpha-(\alpha+\beta) x_0\right]=
-0 \quad\Rightarrow\quad x_0 = \frac{\alpha}{\alpha+\beta}\,,
-\end{equation}
-so that:
-\begin{equation}
-f(x_0) = A\left(\frac{\alpha}{\alpha+\beta}\right)^\alpha\left(\frac{\beta}{\alpha+\beta}\right)^\beta=A\frac{\alpha^\alpha\beta^\beta}{(\alpha+\beta)^{\alpha+\beta}}\,.
-\end{equation}
-Therefore, for $-1\leq f(x_0)<1$, one needs that:
-\begin{equation}
--\frac{(\alpha+\beta)^{\alpha+\beta}}{\alpha^\alpha\beta^\beta}\leq
-A\leq
-\frac{(\alpha+\beta)^{\alpha+\beta}}{\alpha^\alpha\beta^\beta}\,.
-\label{eq:const3}
-\end{equation}
-Finally, by extracting randomly the parameters $A$, $\alpha$, and
-$\beta$ of the function $f$ defined in Eq.~(\ref{eq:parameterisation})
-in the ranges allowed by the inequalities in
-Eqs.~(\ref{eq:const1}),~(\ref{eq:const2}), and~(\ref{eq:const3}) for
-each of the functions $c(x)$, $h(x)$, and $g(x)$, we can generate a
-random flavour separation(\footnote{For obvious reason, we need to
-  limit the values of $\alpha$ and $\beta$ also from above. We choose
-  $\alpha,\beta < 2$ because this value seems to give a uniform
-  distribution.}). We can then test the obtained flavour separation
-against the experimental data by computing the corresponding
-$\chi^2$. Having a broad set of random flavour separations would
-subsequently allow to apply Bayesian reweighting (possibly followed
-by unweighting) to select the flavour separations that best describe
-the data. Fig.~\ref{fig:RandomFunctions} shows the behaviour of 100
-random flavour-separation functions:
-\begin{equation}
-  F(x) = \frac12f(x)+\frac12\,,
-\end{equation}
-generated according to the recipe discussed above.
-\begin{figure}[h]
-  \begin{centering}
-    \includegraphics[width=0.8\textwidth]{plots/RandomFunctions}
-    \caption{Set of 100 random flavour-separation
-      functions.\label{fig:RandomFunctions}}
-  \end{centering}
-\end{figure}
+% The simplest possible parameterisation for the functions $f=\{c,h,g\}$
+% is:
+% \begin{equation}
+% f(x) = Ax^\alpha(1-x)^\beta\,.
+% \label{eq:parameterisation}
+% \end{equation}
+% The constraint in Eq.~(\ref{eq:endpoint}) is implemented by requiring:
+% \begin{equation}
+% \beta > 0\,.
+% \label{eq:const1}
+% \end{equation}
+% In addition, for $f$ not to diverge at small values of $x$, we also
+% require:
+% \begin{equation}
+% \alpha\geq 0\,.
+% \label{eq:const2}
+% \end{equation}
+% The constraint in Eq.~(\ref{eq:bounds}) is implemented by requiring
+% that the function $f$ computed in its (unique) stationary point $x_0$
+% in the interval $[0,1]$ is bound to be in the interval $[-1,1]$. This
+% will finally result in a constraint on the normalisation factor
+% $A$. To do so, we first find the stationary point of $f$ by requiring
+% its derivative to be zero:
+% \begin{equation}
+% \left.\frac{df}{dx}\right|_{x=x_0} = A
+% x_0^{\alpha-1}(1-x_0)^{\beta-1}\left[\alpha-(\alpha+\beta) x_0\right]=
+% 0 \quad\Rightarrow\quad x_0 = \frac{\alpha}{\alpha+\beta}\,,
+% \end{equation}
+% so that:
+% \begin{equation}
+% f(x_0) = A\left(\frac{\alpha}{\alpha+\beta}\right)^\alpha\left(\frac{\beta}{\alpha+\beta}\right)^\beta=A\frac{\alpha^\alpha\beta^\beta}{(\alpha+\beta)^{\alpha+\beta}}\,.
+% \end{equation}
+% Therefore, for $-1\leq f(x_0)<1$, one needs that:
+% \begin{equation}
+% -\frac{(\alpha+\beta)^{\alpha+\beta}}{\alpha^\alpha\beta^\beta}\leq
+% A\leq
+% \frac{(\alpha+\beta)^{\alpha+\beta}}{\alpha^\alpha\beta^\beta}\,.
+% \label{eq:const3}
+% \end{equation}
+% Finally, by extracting randomly the parameters $A$, $\alpha$, and
+% $\beta$ of the function $f$ defined in Eq.~(\ref{eq:parameterisation})
+% in the ranges allowed by the inequalities in
+% Eqs.~(\ref{eq:const1}),~(\ref{eq:const2}), and~(\ref{eq:const3}) for
+% each of the functions $c(x)$, $h(x)$, and $g(x)$, we can generate a
+% random flavour separation(\footnote{For obvious reason, we need to
+%   limit the values of $\alpha$ and $\beta$ also from above. We choose
+%   $\alpha,\beta < 2$ because this value seems to give a uniform
+%   distribution.}). We can then test the obtained flavour separation
+% against the experimental data by computing the corresponding
+% $\chi^2$. Having a broad set of random flavour separations would
+% subsequently allow to apply Bayesian reweighting (possibly followed
+% by unweighting) to select the flavour separations that best describe
+% the data. Fig.~\ref{fig:RandomFunctions} shows the behaviour of 100
+% random flavour-separation functions:
+% \begin{equation}
+%   F(x) = \frac12f(x)+\frac12\,,
+% \end{equation}
+% generated according to the recipe discussed above.
+% \begin{figure}[h]
+%   \begin{centering}
+%     \includegraphics[width=0.8\textwidth]{plots/RandomFunctions}
+%     \caption{Set of 100 random flavour-separation
+%       functions.\label{fig:RandomFunctions}}
+%   \end{centering}
+% \end{figure}
 
 \section{Efficient computation of the SIDIS cross section}
 
@@ -379,9 +380,21 @@ the hard cross sections, a number of complications. First, the flavour structure
 in Eq.~(\ref{eq:f1sidis}) becomes significantly more involved. Second, the
 factorisation of the hard cross sections in terms of bi-linear operators in
 Eq.~(\ref{eq:decomposition}) no longer holds. In this section, we will show how
-to overcome these complications. Focusing on the flavour structure and
-neglecting all dependences and Mellin convolutions, the structure of a SIDIS
-structure functions to NNLO accuracy reads:
+to overcome these complications.
+
+\subsubsection{Electromagnetic structure functions}
+
+We use the notation of Refs.~\cite{Bonino:2024qbh, Bonino:2024wgg}
+focusing on the flavour structure. Therefore, we neglect all
+dependences and Mellin convolutions. Moreover, here we concentrate on
+electromagnetic structure functions, \textit{i.e.} those structure
+function characterised by the exchange of virtual photon. This has the
+consequence that only electric charges will appear. The following
+discussion is applicable to both unpolarised and polarised structure
+functions, which, under the assumption of photon-exchange only, are
+$F_2$ and $F_L$ in the unpolarised case, and $g_1$ in the polarised
+case. With these premises, the structure of a SIDIS structure
+functions to NNLO accuracy reads:
 \begin{equation}
   \begin{array}{rcl}
   \displaystyle F&=&\displaystyle C_{qq}^{\rm NS}\left(\sum_{\alpha} e_\alpha^2f_\alpha d_\alpha\right)+C_{qg}f_g\left(\sum_{\alpha}e_\alpha^2d_\alpha\right)+C_{gq} d_g\left(\sum_{\beta}e_\beta^2f_\beta\right)\\
@@ -390,6 +403,7 @@ structure functions to NNLO accuracy reads:
   \\
   &+&\displaystyle C_{q'q}^{(1)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\beta^2 f_\beta d_\alpha\right) +C_{q'q}^{(2)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha^2 f_\beta d_\alpha\right) +C_{q'q}^{(3)} \left(\sum_{{\alpha,\beta\atop \alpha\neq \beta,-\beta}} e_\alpha e_\beta f_\beta d_\alpha\right) \,,
   \end{array}
+  \label{eq:emstructurefunctions}
 \end{equation}
 where the second and third lines only appear at NNLO. Moreover, the coefficient
 functions $C$ can no longer be written as in Eq.~(\ref{eq:decomposition}). The
@@ -445,9 +459,329 @@ while:
 Since this time it is convenient to parameterise the cross section in terms of
 the structure functions $F_T$ and $F_L$, with $F_L=F_2-F_T$, we have that:
 \begin{equation}
-  \mathbb{K}_{i}^{\rm SIDIS} =   \frac{8\pi\alpha^2}{Q^3} 
-    \left[ \frac{Y_+}{2x} \mathbb{K}_{T,i}
-      +\frac{1-y}{x} \mathbb{K}_{L,i}\right]\,.
+  \mathbb{K}_{i}^{\rm SIDIS}=\frac{8\pi\alpha^2}{Q^3}\left[ \frac{Y_+}{2x} \mathbb{K}_{T,i}+\frac{1-y}{x} \mathbb{K}_{L,i}\right]\,.
+\end{equation}
+
+\subsubsection{Electroweak structure functions}
+
+In this section, we generalise the discussion of the previous section
+by considering, on top of photon exchange, also $Z$ and $W$
+exchange. This leads to several complications:
+\begin{itemize}
+\item The need to define neutral-current (NC) and charged-current (CC)
+  structure functions characterised by the exchange of neutral
+  $\gamma/Z$ boson and a $W$, respectively.
+\item The introduction of $Q$-dependent vector and axial electroweak
+  couplings,
+\item The need to introduce, in the unpolarised case, the
+  parity-violating structure function $F_3$.
+\end{itemize}
+In what follows, we will adhere to the notation of
+Ref.~\cite{Bonino:2025qta}. We aim at computing the structure function
+$\mathcal{F}_{i}^{jk}$, with $i=T,L,3$ and
+$jk=\gamma\gamma,\gamma Z,ZZ,W^+,W^-$, such that we can define NC and
+CC structure functions respectively as the following combinations:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle \mathcal{F}_{i}^{\rm NC}=\mathcal{F}_{i}^{\gamma\gamma}-g_V^\ell P_Z
+    \mathcal{F}_{i}^{\gamma Z}+(g_V^{\ell2}+g_A^{\ell2})P_Z^2
+    \mathcal{F}_{i}^{\gamma Z}\,,\quad i=T,L\\
+    \\
+    \displaystyle \mathcal{F}_{3}^{\rm
+    NC}=-g_A^\ell P_Z
+    \mathcal{F}_{3}^{\gamma Z}+2g_V^{\ell}g_A^{\ell}P_Z^2
+    \mathcal{F}_{3}^{\gamma Z}\,,\\
+    \\
+    \displaystyle \mathcal{F}_{i}^{\rm CC}=\mathcal{F}_{i}^{W^\pm}\,,\\
+  \end{array}
+\end{equation}
+where we assumed an unpolarised lepton beam, and used the definitions:
+\begin{equation}
+g_V^\ell=-\frac{1}{2}+2\sin^2\theta_{\rm W}\,,\quad
+g_A^\ell=-\frac{1}{2}\,,\quad P_Z=\frac{G_FM_Z^2}{2\sqrt{2}\alpha}\frac{Q^2}{Q^2+M_Z^2}=\frac{1}{4\sin^2\theta_{\rm W}(1-\sin^2\theta_{\rm W})}\frac{Q^2}{Q^2+M_Z^2}\,.
+\end{equation}
+
+The general structure of the structure functions reads as follows:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\mathcal{F}_{i}^{jk}&=&\displaystyle\sum_{\alpha}\mathcal{C}_{qq}^{i,jk}(\alpha)d_\alpha f_\alpha+\sum_\beta\mathcal{C}_{gq}^{i,jk}(\beta)d_g f_\beta+\sum_\alpha\mathcal{C}_{qg}^{i,jk}(\alpha)d_\alpha f_g+\mathcal{C}_{gg}^{i,jk}d_g f_g+\sum_{\alpha}\mathcal{C}_{\overline{q}q}^{i,jk}(\alpha)d_{\overline{\alpha}}f_\alpha\\
+\\
+&+&\displaystyle\sum_{{\alpha,\beta,\alpha\beta>0\atop \alpha\neq \beta}}\mathcal{C}_{q'q}^{i,jk}(\alpha,\beta)d_\alpha f_\beta+\sum_{{\alpha,\beta,\alpha\beta<0\atop \alpha\neq-\beta}}\mathcal{C}_{\overline{q}'q}^{i,jk}(\alpha,\beta)d_\alpha f_\beta\\
+\\
+&=&\displaystyle\sum_{\alpha}\left[C_{qq}^{i,jk}(\alpha)+C_{qq,\rm Fcon}^{i,jk}(\alpha)+C_{qq,\rm NoW}^{i,jk}(\alpha)+C_{q'q}^{i,jk}(\alpha,\alpha)+C_{q'q, \rm NoW}^{i,jk}(\alpha,\alpha)\right]d_\alpha f_\alpha\\ 
+\\
+&+&\displaystyle\sum_\beta\left[C_{gq}^{i,jk}(\beta)+C_{gq,\rm NoW}^{i,jk}(\beta)\right]d_g f_\beta+\sum_\alpha\left[C_{qg}^{i,jk}(\alpha)+C_{qg,\rm NoW}^{i,jk}(\alpha)\right]d_\alpha f_g \\
+\\
+&+&\displaystyle\left[C_{gg}^{i,jk}+C_{gg,\rm NoW}^{i,jk}\right]d_g f_g+\sum_{\alpha}\left[C_{\overline{q}q}^{i,jk}(\alpha)+C_{\overline{q}q,\rm Fcon}^{i,jk}(\alpha)+C_{\overline{q}'q}^{i,jk}(\overline{\alpha},\alpha)+C_{\overline{q}'q, \rm NoW}^{i,jk}(\overline{\alpha},\alpha)\right]d_{\overline{\alpha}}f_\alpha\\
+\\
+&+&\displaystyle\sum_{{\alpha,\beta,\alpha\beta>0\atop \alpha\neq \beta}}\left[C_{q'q}^{i,jk}(\alpha,\beta)+C_{q'q, \rm NoW}^{i,jk}(\alpha,\beta)\right]d_\alpha f_\beta+\sum_{{\alpha,\beta,\alpha\beta<0\atop \alpha\neq-\beta}}\left[C_{\overline{q}'q}^{i,jk}(\overline{\alpha},\beta)+C_{\overline{q}'q, \rm NoW}^{i,jk}(\overline{\alpha},\beta)\right]d_\alpha f_\beta\,,
+\end{array}
+\label{eq:generalstructurefunction}
+\end{equation}
+where $jk=\gamma\gamma,\gamma Z,ZZ$ and the indices $\alpha$ and
+$\beta$ run over quark \textit{and} antiquark. Moreover, we used the
+notation $\overline{\alpha}=-\alpha$ and
+$\overline{\beta}=-\beta$. The dependence on the flavour indices of
+the coefficient functions $C$ for each component $jk$ factors out in
+terms of appropriate charges. Sketchily,
+$C_{\dots}^{i,jk}(\alpha)=A_\alpha^{i,jk}C_{\dots,\dots}^{i}$ and
+$C_{\dots}^{i,jk}(\alpha,\beta)=A_{\alpha\beta}^{i,jk}C_{\dots,\dots}^{i}$.
+
+Let us first consider the neutral-current case for $i=T,L$ which is
+given by:
+\begin{equation}
+ \mathcal{F}_{i}^{\rm NC}=\sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}\mathcal{F}_{i}^{jk}\,,
+\label{eq:FTLNC}
+\end{equation}
+where we have:
+\begin{equation}
+  \eta_{\gamma\gamma}=1\,,\quad\eta_{\gamma Z}=-g_V^\ell P_Z\,,\quad\eta_{ZZ}=(g_V^{\ell2}+g_A^{\ell2})P_Z^2\,.
+\end{equation}
+Given the up- and down-type quark (but not antiquark) couplings:
+\begin{equation}
+g_V^{d,s,b}=-\frac{1}{2}+\frac{2}{3}\sin^2\theta_{\rm W}\,,\quad g_V^{u,c,t}=\frac{1}{2}-\frac{4}{3}\sin^2\theta_{\rm W}\,,\quad g_A^{d,s,b}=-\frac{1}{2}\,,\quad g_A^{u,c,t}=\frac{1}{2}\,,
+\end{equation}
+which for antiquarks are $g_V^{-\alpha}=-g_V^{\alpha}$ (like the
+electric change $e_{-\alpha}=-e_\alpha$) and
+$g_A^{-\alpha}=g_A^{\alpha}$, the purpose is to compute:
+\begin{equation}
+\sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{\dots}^{i,jk}(\alpha,\dots)\,.
+\end{equation}
+To this end, we introduce the charges:
+\begin{equation}
+\begin{array}{l}
+  \displaystyle A_{\alpha\beta}=(g_V^{\ell2}+g_A^{\ell2})g_A^\alpha g_A^\beta P_Z^2\,,\\
+\\
+  \displaystyle B_{\alpha\beta}=e_\alpha e_\beta-g_V^\ell(e_\alpha g_V^\beta+e_\beta g_V^\alpha)P_Z+(g_V^{\ell2}+g_A^{\ell2})g_V^\alpha g_V^\beta P_Z^2+A_{\alpha\beta}\,,
+\end{array}
+\end{equation}
+which produce:
+\begin{equation}
+  \begin{array}{l}
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{qq}^{i,jk}(\alpha)=B_{\alpha\alpha}C_{qq}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{qq,\rm Fcon}^{i,jk}(\alpha)=B_{\alpha\alpha}C_{qq,\rm Fcon,1}^{i}+\left(\sum_{\gamma}B_{\gamma\gamma}\right)C_{qq,\rm Fcon,2}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{qq,\rm NoW}^{i,jk}(\alpha)=\left(\sum_\gamma A_{\alpha\gamma}\right)C_{qq,\rm A,NoW}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{\overline{q}q}^{i,jk}(\alpha)=B_{\alpha\alpha}C_{\overline{q}q}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{\overline{q}q,\rm Fcon}^{i,jk}(\alpha)=B_{\alpha\alpha}C_{\overline{q}q,\rm Fcon}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{q'q}^{i,jk}(\alpha,\beta)=B_{\beta\beta}C_{q'q,1}^{i}+B_{\alpha\alpha}C_{q'q,2}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{q'q,\rm NoW}^{i,jk}(\alpha,\beta)=(B_{\alpha\beta}-A_{\alpha\beta})C_{q'q,\rm NoW,3}^{i}+A_{\alpha\beta}C_{q'q, \rm NoW,4}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{\overline{q}'q}^{i,jk}(\alpha,\beta)=B_{\beta\beta}C_{q'q,1}^{i}+B_{\alpha\alpha}C_{q'q,2}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{\overline{q}'q,\rm NoW}^{i,jk}(\alpha,\beta)=(-B_{\alpha\beta}+A_{\alpha\beta})C_{q'q,\rm NoW,3}^{i}+A_{\alpha\beta}C_{q'q, \rm NoW,4}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{gq}^{i,jk}(\alpha)=B_{\alpha\alpha}C_{gq}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{gq,\rm NoW}^{i,jk}(\alpha)=\left(\sum_\gamma A_{\alpha\gamma}\right)C_{gq,\rm A,NoW}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{qg}^{i,jk}(\alpha)=B_{\alpha\alpha}C_{qg}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{qg,\rm NoW}^{i,jk}(\alpha)=\left(\sum_\gamma A_{\alpha\gamma}\right)C_{qg,\rm A,NoW}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{gg}^{i,jk}=\sum_\gamma B_{\gamma\gamma}C_{gg}^{i}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\eta_{jk}C_{gg,\rm NoW}^{i,jk}=\left(\sum_{\gamma,\delta} A_{\gamma\delta}\right)C_{gg,\rm AA,NoW}^{i}\,.
+  \end{array}
+\end{equation}
+Now, we can plug these expressions into Eq.~(\ref{eq:FTLNC}), which
+finally gives:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\mathcal{F}_{i}^{\rm NC}&=&\displaystyle C_{qq}^{{\rm NS},i}\sum_{\alpha}B_{\alpha\alpha}d_\alpha f_\alpha+C_{gq}^{i}\sum_\beta B_{\alpha\alpha}d_g f_\beta+C_{qg}^{i}\sum_\alpha B_{\alpha\alpha}d_\alpha f_g \\ 
+\\
+&+&\displaystyle C_{gg}^{i}\left(\sum_\gamma B_{\gamma\gamma}\right)d_g f_g+C_{qq}^{{\rm PS},i}\left(\sum_{\gamma}B_{\gamma\gamma}\right)\sum_{\alpha}d_\alpha f_\alpha+C_{\overline{q}q}^{i}\sum_{\alpha}B_{\alpha\alpha}d_{\overline{\alpha}}f_\alpha\\
+\\  
+&+&\displaystyle C_{q'q}^{(1),i}\sum_{{\alpha,\beta\atop \alpha\neq\beta,-\beta}}B_{\beta\beta}d_\alpha f_\beta+C_{q'q}^{(2),i}\sum_{{\alpha,\beta\atop \alpha\neq\beta,-\beta}}B_{\alpha\alpha}d_\alpha f_\beta+C_{q'q}^{(3),i}\sum_{{\alpha,\beta\atop \alpha\neq\beta,-\beta}}B_{\alpha\beta}d_\alpha f_\beta\\ 
+\\
+&+&\displaystyle \overline{C}_{qq}^{i}\sum_{\alpha}\left(\sum_\gamma A_{\alpha\gamma}\right)d_\alpha f_\alpha+\overline{C}_{gq}^{i}\sum_\beta\left(\sum_\gamma A_{\beta\gamma}\right)d_g f_\beta+\overline{C}_{qg}^{i}\sum_\alpha\left(\sum_\gamma A_{\alpha\gamma}\right)d_\alpha f_g\\ 
+\\
+&+&\displaystyle \overline{C}_{gg}^{i}\left(\sum_{\gamma,\delta} A_{\gamma\delta}\right)d_g f_g-C_{q'q}^{(3),i}\sum_{{\alpha,\beta\atop\alpha\beta>0}}A_{\alpha\beta}d_\alpha (f_\beta-f_{\overline{\beta}})+C_{q'q}^{(4),i}\sum_{{\alpha,\beta\atop\alpha\beta>0}}A_{\alpha\beta}d_\alpha (f_\beta+f_{\overline{\beta}})\,,
+\end{array}
+\end{equation}
+where, to align the notation with the electromagnetic case discussed
+in the previous section, we defined:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle C_{qq}^{{\rm NS},i}= C_{qq}^{i}+C_{qq,\rm Fcon,1}^{i}+C_{q'q,1}^{i}+C_{q'q,2}^{i}+C_{q'q,\rm NoW,3}^{i}\,,\\
+    \\
+    \displaystyle C_{qq}^{{\rm PS},i}= C_{qq,\rm Fcon,2}^{i}\,,\\
+    \\
+    \displaystyle C_{\overline{q}q}^{i}=C_{\overline{q}q}^{i}+C_{\overline{q}q,\rm Fcon}^{i}+C_{q'q,1}^{i}+C_{q'q,2}^{i}+C_{q'q,\rm NoW,3}^{i}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(1),i}=C_{q'q,1}^{i}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(2),i}=C_{q'q,2}^{i}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(3),i}=C_{q'q,\rm NoW,3}^{i}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(4),i}=C_{q'q,\rm NoW,4}^{i}\,,\\
+    \\
+    \displaystyle \overline{C}_{qq}^{i}=C_{qq,\rm A,NoW}^{i}\,,\\
+    \\
+    \displaystyle \overline{C}_{gq}^{i}=C_{gq,\rm A,NoW}^{i}\,,\\
+    \\
+    \displaystyle \overline{C}_{qg}^{i}=C_{qg,\rm A,NoW}^{i}\,,\\
+    \\
+    \displaystyle \overline{C}_{gg}^{i}=C_{gg,\rm AA,NoW}^{i}\,.
+  \end{array}
+\end{equation}
+
+We can now consider the parity violating structure function
+$\mathcal{F}_{3}^{\rm NC}$, which is given by:
+\begin{equation}
+ \mathcal{F}_{3}^{\rm NC}=\sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}\mathcal{F}_{3}^{jk}\,.
+\label{eq:F3NC}
+\end{equation}
+with:
+\begin{equation}
+  \xi_{\gamma\gamma}=0\,,\quad\xi_{\gamma Z}=-g_A^\ell P_Z\,,\quad\xi_{ZZ}=2g_V^{\ell}g_A^{\ell}P_Z^2\,,
+\end{equation}
+We then introduce the charges:
+\begin{equation}
+\begin{array}{l}
+\displaystyle D_{\alpha\beta}=-2g_A^\ell P_Ze_\alpha g_A^\beta+2g_V^{\ell}g_A^{\ell}P_Z^2 (g_A^\alpha g_V^\beta+g_V^\alpha g_A^\beta)\,,\\
+\\
+\displaystyle E_{\alpha\beta} = -2g_A^\ell P_Zg_A^\alpha e_\beta+4g_V^{\ell}g_A^{\ell}P_Z^2g_A^\alpha g_V^\beta\,,\\
+  \\
+  \displaystyle E_\beta=\sum_\alpha E_{\alpha\beta}\,.
+\end{array}
+\end{equation}
+With these definitions at hand, we have:
+\begin{equation}
+  \begin{array}{l}
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{qq}^{3,jk}(\alpha)=D_{\alpha\alpha}C_{qq}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{qq,\rm Fcon}^{3,jk}(\alpha)=D_{\alpha\alpha}C_{qq,\rm Fcon,1}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{qq,\rm NoW}^{3,jk}(\alpha)= E_{\alpha}C_{qq,\rm A,NoW}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{\overline{q}q}^{3,jk}(\alpha)=D_{\alpha\alpha}C_{\overline{q}q}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{\overline{q}q,\rm Fcon}^{3,jk}(\alpha)=D_{\alpha\alpha}C_{\overline{q}q,\rm Fcon}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{q'q}^{3,jk}(\alpha,\beta)=D_{\beta\beta}C_{q'q,1}^{3}+D_{\alpha\alpha}C_{q'q,2}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{q'q,\rm NoW}^{3,jk}(\alpha,\beta)=D_{\beta\alpha}C_{q'q,\rm NoW,3}^{3}+D_{\alpha\beta}C_{q'q, \rm NoW,4}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{\overline{q}'q}^{3,jk}(\alpha,\beta)=D_{\beta\beta}C_{q'q,1}^{3}-D_{\alpha\alpha}C_{q'q,2}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{\overline{q}'q,\rm NoW}^{3,jk}(\alpha,\beta)=D_{\beta\alpha}C_{q'q,\rm NoW,3}^{3}-D_{\alpha\beta}C_{q'q, \rm NoW,4}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{gq}^{3,jk}(\alpha)=D_{\alpha\alpha}C_{gq}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{gq,\rm NoW}^{3,jk}(\alpha)= E_{\alpha}C_{gq,\rm A,NoW}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{qg}^{3,jk}(\alpha)=D_{\alpha\alpha}C_{qg}^{3}\,,\\
+\\
+\displaystyle \sum_{jk=\gamma\gamma,\gamma Z,ZZ}\xi_{jk}C_{qg,\rm NoW}^{3,jk}(\alpha)= E_{\alpha}C_{qg,\rm A,NoW}^{3}\,,
+  \end{array}
+\end{equation}
+which produces:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\mathcal{F}_{3}^{\rm NC}&=&\displaystyle C_{qq}^{{\rm NS},3}\sum_{\alpha}D_{\alpha\alpha}d_\alpha f_\alpha+C_{gq}^{3}\sum_\beta D_{\beta\beta}d_gf_\beta+C_{qg}^{3}\sum_\alpha D_{\alpha\alpha}d_\alpha f_g \\
+  \\
+&+&\displaystyle C_{\overline{q}q}^{3}\sum_{\alpha}D_{\alpha\alpha}d_{\overline{\alpha}}f_\alpha+C_{q'q}^{(1),3}\sum_{{\alpha,\beta\atop \alpha\neq\beta,-\beta}}D_{\beta\beta}d_\alpha f_\beta+C_{q'q}^{(2),3}\sum_{{\alpha,\beta\atop \alpha\neq\beta,-\beta}}D_{\alpha\alpha}d_\alpha f_\beta\\
+  \\
+  &+&\displaystyle C_{q'q}^{(3),3}\left[\sum_{\alpha,\beta,\alpha\beta>0}(D_{\beta\alpha}d_\alpha+D_{\beta\alpha}d_{\overline{\alpha}})f_\beta\right]+C_{q'q}^{(4),3}\left[\sum_{\alpha,\beta,\alpha\beta>0}(D_{\alpha\beta}d_\alpha-D_{\alpha\beta}d_{\overline{\alpha}})f_\beta\right]\\ 
+\\
+    &+&\displaystyle \overline{C}_{qq}^{3}\sum_{\alpha}E_{\alpha}d_\alpha f_\alpha+\overline{C}_{gq}^{3}\sum_\beta E_\beta d_g f_\beta+\overline{C}_{qg}^{3}\sum_\alpha E_{\alpha}d_\alpha f_g\,,
+\end{array}
+\end{equation}
+where we have defined:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle C_{qq}^{{\rm NS},3}= C_{qq}^{3}+C_{qq,\rm Fcon,1}^{3}+C_{q'q,1}^{3}+C_{q'q,2}^{3}\,,\\
+    \\
+    \displaystyle C_{\overline{q}q}^{3}=C_{\overline{q}q}^{3}+C_{\overline{q}q,\rm Fcon}^{3}+C_{q'q,1}^{3}+C_{q'q,2}^{3}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(1),3}=C_{q'q,1}^{3}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(2),3}=C_{q'q,2}^{3}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(3),3}=C_{q'q,\rm NoW,3}^{3}\,,\\
+    \\
+    \displaystyle C_{q'q}^{(4),3}=C_{q'q,\rm NoW,4}^{3}\,,\\
+    \\
+    \displaystyle \overline{C}_{qq}^{3}=C_{qq,\rm A,NoW}^{3}\,,\\
+    \\
+    \displaystyle \overline{C}_{gq}^{3}=C_{gq,\rm A,NoW}^{3}\,,\\
+    \\
+    \displaystyle \overline{C}_{qg}^{3}=C_{qg,\rm A,NoW}^{3}\,.
+  \end{array}
+\end{equation}
+
+We can now move to the CC structure functions characterised by the
+exchange of a virtual $W$ boson, \textit{i.e} $jk=W^+W^-$. As compared
+to the NC case, the ``NoW'' terms appearing in
+Eq.~(\ref{eq:generalstructurefunction}) can be dropped straight away,
+which significantly simplifies the general structure. However,
+contrary to the NC case, CC interactions are not flavour diagonal, but
+they are instead flavour changing. More specifically, for any quark
+up(down)-type quark interacting with the $W$ boson, any down(up)-type
+quark can be produced. The strength of the coupling is determined by
+the elements of the $3\times3$ CKM matrix $V_{\alpha\beta}$, with
+$\alpha\in U=\{u,c,t\}$ and $\beta\in D=\{d,s,b\}$, with $Q=D\cup
+U$. Considering the case $i=T,L$ for the exchange of $W^-$, one finds:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\frac12\mathcal{F}_{i}^{W^-}
+  &=&\displaystyle C_{qq}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\beta f_\alpha+d_{\overline{\alpha}}f_{\overline{\beta}})+C_{gq}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2d_g(f_\alpha+f_{\overline{\beta}})+C_{qg}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\beta+d_{\overline{\alpha}})f_g\\
+  \\
+  &+&\displaystyle C_{gg}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2d_gf_g +C_{qq,\rm Fcon,2}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2\sum_{f\in Q}(d_ff_f+d_{\overline{f}}f_{\overline{f}})+C_{\overline{q}q}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_{\overline{\beta}}f_\alpha+d_{\alpha}f_{\overline{\beta}})\\
+  \\
+  &+&\displaystyle C_{qq,\rm Fcon,1}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\alpha f_\alpha+d_{\overline{\beta}}f_{\overline{\beta}})+C_{\overline{q}q,\rm Fcon}^{i}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_{\overline{\alpha}}f_\alpha+d_{\beta}f_{\overline{\beta}})\\
+  \\
+  &+&\displaystyle C_{q'q,1}^{i}\sum_{f\in Q}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_{f}+d_{\overline{f}})(f_\alpha+f_{\overline{\beta}})+C_{q'q,2}^{i}\sum_{f\in Q}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\beta+d_{\overline{\alpha}})(f_{f}+f_{\overline{f}})\,.
+\end{array}
+\end{equation}
+The exchange of a $W^+$ is easily obtained from the expression above
+by exchanging $U\leftrightarrow D$, that is:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\frac12\mathcal{F}_{i}^{W^+}
+  &=&\displaystyle C_{qq}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\beta f_\alpha+d_{\overline{\alpha}}f_{\overline{\beta}})+C_{gq}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2d_g(f_\alpha+f_{\overline{\beta}})+C_{qg}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\beta+d_{\overline{\alpha}})f_g\\
+  \\
+  &+&\displaystyle C_{gg}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2d_gf_g +C_{qq,\rm Fcon,2}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2\sum_{f\in Q}(d_ff_f+d_{\overline{f}}f_{\overline{f}})+C_{\overline{q}q}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_{\overline{\beta}}f_\alpha+d_{\alpha}f_{\overline{\beta}})\\
+  \\
+  &+&\displaystyle C_{qq,\rm Fcon,1}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\alpha f_\alpha+d_{\overline{\beta}}f_{\overline{\beta}})+C_{\overline{q}q,\rm Fcon}^{i}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_{\overline{\alpha}}f_\alpha+d_{\beta}f_{\overline{\beta}})\\
+  \\
+  &+&\displaystyle C_{q'q,1}^{i}\sum_{f\in Q}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_{f}+d_{\overline{f}})(f_\alpha+f_{\overline{\beta}})+C_{q'q,2}^{i}\sum_{f\in Q}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\beta+d_{\overline{\alpha}})(f_{f}+f_{\overline{f}})\,.
+\end{array}
+\end{equation}
+
+We now move to considering $\mathcal{F}_{3}^{W^-}$, which reads:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\frac12\mathcal{F}_{3}^{W^-}
+  &=&\displaystyle C_{qq}^{3}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\beta f_\alpha-d_{\overline{\alpha}}f_{\overline{\beta}})+C_{gq}^{3}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2d_g(f_\alpha-f_{\overline{\beta}})+C_{qg}^{3}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\beta-d_{\overline{\alpha}})f_g\\
+  \\
+  &+&\displaystyle C_{\overline{q}q}^{3}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_{\overline{\beta}}f_\alpha-d_{\overline{\alpha}}f_{\beta})\\
+  \\
+  &+&\displaystyle C_{qq,\rm Fcon,1}^{3}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\alpha f_\alpha-d_{\overline{\beta}}f_{\overline{\beta}})+C_{\overline{q}q,\rm Fcon}^{3}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_{\overline{\alpha}}f_\alpha-d_{\beta}f_{\overline{\beta}})\\
+  \\
+  &+&\displaystyle C_{q'q,1}^{3}\sum_{f\in Q}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_{f}+d_{\overline{f}})(f_\alpha-f_{\overline{\beta}})+C_{q'q,2}^{3}\sum_{f\in Q}\sum_{{\alpha\in U\atop\beta\in D}}|V_{\alpha\beta}|^2(d_\beta-d_{\overline{\alpha}})(f_{f}+f_{\overline{f}})\,.
+\end{array}
+\end{equation}
+Once again, the exchange of a $W^+$ is obtained by exchanging
+$U\leftrightarrow D$:
+\begin{equation}
+\begin{array}{rcl}
+  \displaystyle\frac12\mathcal{F}_{3}^{W^+}
+  &=&\displaystyle C_{qq}^{3}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\beta f_\alpha-d_{\overline{\alpha}}f_{\overline{\beta}})+C_{gq}^{3}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2d_g(f_\alpha-f_{\overline{\beta}})+C_{qg}^{3}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\beta-d_{\overline{\alpha}})f_g\\
+  \\
+  &+&\displaystyle C_{\overline{q}q}^{3}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_{\overline{\beta}}f_\alpha-d_{\overline{\alpha}}f_{\beta})\\
+  \\
+  &+&\displaystyle C_{qq,\rm Fcon,1}^{3}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\alpha f_\alpha-d_{\overline{\beta}}f_{\overline{\beta}})+C_{\overline{q}q,\rm Fcon}^{3}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_{\overline{\alpha}}f_\alpha-d_{\beta}f_{\overline{\beta}})\\
+  \\
+  &+&\displaystyle C_{q'q,1}^{3}\sum_{f\in Q}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_{f}+d_{\overline{f}})(f_\alpha-f_{\overline{\beta}})+C_{q'q,2}^{3}\sum_{f\in Q}\sum_{{\alpha\in D\atop\beta\in U}}|V_{\alpha\beta}|^2(d_\beta-d_{\overline{\alpha}})(f_{f}+f_{\overline{f}})\,.
+\end{array}
 \end{equation}
 
 \subsection{Integrating over the phase space}
