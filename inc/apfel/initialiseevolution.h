@@ -9,6 +9,7 @@
 #include "apfel/evolutionsetup.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/dglapbuilder.h"
+#include "apfel/dglapbuilderqcdqed.h"
 #include "apfel/config.h"
 
 namespace apfel
@@ -132,7 +133,9 @@ namespace apfel
     std::string                                              _GridHeader;     //!< Part of the LHAPDF grid header that can be set externally (the format is resposibility of the user)
     std::unique_ptr<const Grid>                              _g;              //!< x-space grid
     std::function<double(double const&)>                     _as;             //!< Strong coupling function
-    std::map<int, DglapObjects>                              _DglapObj;       //!< Dglap evolution objects
+    std::function<double(double const&)>                     _aem;            //!< Electromagnetic coupling function
+    std::map<int, DglapObjects>                              _DglapObj;       //!< Dglap evolution objects for QCD
+    std::map<int, DglapObjectsQCDQED>                        _DglapObjQED;    //!< Dglap evolution objects for QCDxQED
     std::map<double, std::map<int, LHKnotArray>>             _KnotArray;      //!< Object that emulates the KnotArray of LHAPDF to be fed to LHAPDF itself
     std::unique_ptr<const TabulateObject<Set<Distribution>>> _TabulatedDists; //!< Tabulated distributions
   };

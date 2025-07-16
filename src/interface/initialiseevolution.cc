@@ -7,7 +7,8 @@
 #include "apfel/initialiseevolution.h"
 #include "apfel/grid.h"
 #include "apfel/messages.h"
-#include "apfel/alphaqcdxi.h"
+#include "apfel/alphaqcd.h"
+#include "apfel/alphaqcdqed.h"
 #include "apfel/tabulateobject.h"
 #include "apfel/constants.h"
 #include "apfel/rotations.h"
@@ -51,12 +52,19 @@ namespace apfel
   void InitialiseEvolution::InitialiseCouplings()
   {
     if (_setup.Theory == EvolutionSetup::QCD)
-      if (_setup.MassRenScheme == EvolutionSetup::POLE)
-        {
-          AlphaQCDxi a{_setup.AlphaQCDRef, _setup.QQCDRef, _setup.Masses, _setup.Thresholds, _setup.PerturbativeOrder, _setup.xi};
-          const TabulateObject<double> Alphas{a, 2 * _setup.nQg, _setup.Qmin - 0.1, _setup.Qmax + 1, _setup.InterDegreeQ};
-          _as = [=] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
-        }
+      {
+        AlphaQCD a{_setup.AlphaQCDRef, _setup.QRef, _setup.QuarkMasses, _setup.QuarkThresholds, _setup.PerturbativeOrder};
+        const TabulateObject<double> Alphas{a, 2 * _setup.nQg, _setup.Qmin - 0.1, _setup.Qmax + 1, _setup.InterDegreeQ};
+        _as  = [=] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
+        _aem = [=] (double const&) -> double{ return 0; };
+      }
+    else if (_setup.Theory == EvolutionSetup::QCD_QED)
+      {
+        apfel::AlphaQCDQED a{_setup.AlphaQCDRef, _setup.AlphaQEDRef, _setup.QRef, _setup.QuarkThresholds, _setup.LeptonThresholds, _setup.PerturbativeOrder};
+        const apfel::TabulateObject<apfel::matrix<double>> Couplings{a, 2 * _setup.nQg, _setup.Qmin - 0.1, _setup.Qmax + 1, _setup.InterDegreeQ};
+        _as  = [=] (double const& mu) -> double{ return Couplings.Evaluate(mu)(0, 0); };
+        _aem = [=] (double const& mu) -> double{ return Couplings.Evaluate(mu)(1, 0); };
+      }
   }
 
   //_________________________________________________________________________________
@@ -73,22 +81,29 @@ namespace apfel
     // Integration accuracy
     const double IntEps = _setup.GaussAccuracy;
 
-    if (_setup.Virtuality == EvolutionSetup::SPACE)
+    if (_setup.Theory == EvolutionSetup::QCD)
       {
-        if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-          _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
-        else if (_setup.EvolPolarisation == EvolutionSetup::POL)
-          _DglapObj = InitializeDglapObjectsQCDpol(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
-        else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
-          _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
+        if (_setup.Virtuality == EvolutionSetup::SPACE)
+          {
+            if (_setup.EvolPolarisation == EvolutionSetup::UNP)
+              _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
+            else if (_setup.EvolPolarisation == EvolutionSetup::POL)
+              _DglapObj = InitializeDglapObjectsQCDpol(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
+            else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
+              _DglapObj = InitializeDglapObjectsQCDtrans(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
+          }
+        else if (_setup.Virtuality == EvolutionSetup::TIME)
+          {
+            if (_setup.EvolPolarisation == EvolutionSetup::UNP)
+              _DglapObj = InitializeDglapObjectsQCDT(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
+            else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
+              _DglapObj = InitializeDglapObjectsQCDTtrans(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
+          }
       }
-    else if (_setup.Virtuality == EvolutionSetup::TIME)
-      {
+    else if (_setup.Theory == EvolutionSetup::QCD_QED)
+      if (_setup.Virtuality == EvolutionSetup::SPACE)
         if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-          _DglapObj = InitializeDglapObjectsQCDT(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
-        else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
-          _DglapObj = InitializeDglapObjectsQCDTtrans(*_g, _setup.Masses, _setup.Thresholds, false, IntEps);
-      }
+          _DglapObjQED = InitializeDglapObjectsQCDQED(*_g, _setup.QuarkThresholds, _setup.LeptonThresholds, false, IntEps);
   }
 
   //_________________________________________________________________________________
@@ -99,7 +114,11 @@ namespace apfel
     _KnotArray.clear();
 
     // Construct the Dglap object
-    const std::unique_ptr<Dglap<Distribution>> EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as, _setup.xi);
+    std::unique_ptr<Dglap<Distribution>> EvolvedDists;
+    if (_setup.Theory == EvolutionSetup::QCD)
+      EvolvedDists = BuildDglap(_DglapObj, InSet, _setup.Q0, _setup.PerturbativeOrder, _as);
+    else if (_setup.Theory == EvolutionSetup::QCD_QED)
+      EvolvedDists = BuildDglap(_DglapObjQED, InSet, _setup.Q0, _setup.PerturbativeOrder, _as, _aem);
 
     // Tabulate distributions
     _TabulatedDists = std::unique_ptr<const TabulateObject<Set<Distribution>>>(new const TabulateObject<Set<Distribution>> {*EvolvedDists, _setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ});
@@ -122,7 +141,11 @@ namespace apfel
 
         // Retrieve distributions at the threshold and rotate them
         // into the physical basis.
-        const std::map<int, Distribution> tdist = QCDEvToPhys(xfg[ti].GetObjects());
+        std::map<int, Distribution> tdist;
+        if (_setup.Theory == EvolutionSetup::QCD)
+          tdist = QCDEvToPhys(xfg[ti].GetObjects());
+        else if (_setup.Theory == EvolutionSetup::QCD_QED)
+          tdist = PlusMinusQCDQEDToPhys(xfg[ti].GetObjects());
 
         // Run over distributions
         std::map<int, LHKnotArray> LHKnotArrayNF;
@@ -150,7 +173,11 @@ namespace apfel
             std::vector<double> xf(xsize * q2size);
             for (int iq = ti; iq < tind[i+1]; iq++)
               {
-                const std::vector<double> xfx = QCDEvToPhys(xfg[iq].GetObjects()).at(d.first).GetDistributionJointGrid();
+                std::vector<double> xfx;
+                if (_setup.Theory == EvolutionSetup::QCD)
+                  xfx = QCDEvToPhys(xfg[iq].GetObjects()).at(d.first).GetDistributionJointGrid();
+                else if (_setup.Theory == EvolutionSetup::QCD_QED)
+                  xfx = PlusMinusQCDQEDToPhys(xfg[iq].GetObjects()).at(d.first).GetDistributionJointGrid();
                 for (int ix = 0; ix < (int) ka.xs.size(); ix++)
                   xf[ix * q2size + iq - ti] = xfx[ix];
               }
@@ -214,42 +241,15 @@ namespace apfel
         passed = false;
       }
 
-    if (_setup.Lambda <= 0)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "The Lambda parameter of the grid in Q must be positive.") << std::endl;
-        passed = false;
-      }
-
-    if (_setup.Qmin <= _setup.Lambda)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "The lower bound of the grid in Q must be larger than Lambda.") << std::endl;
-        passed = false;
-      }
-
     if (_setup.Qmax <= _setup.Qmin)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The upper bound of the grid in Q must larger than the lower bound.") << std::endl;
         passed = false;
       }
 
-    // Check flavour scheme
-    if (_setup.FlavourScheme != EvolutionSetup::VFNS &&
-        _setup.FlavourScheme != EvolutionSetup::FFNS)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "Unknown flavour scheme.") << std::endl;
-        passed = false;
-      }
-
-    // Check number of flavours in the FFNS (if relevant)
-    if (_setup.FlavourScheme == EvolutionSetup::FFNS)
-      if (_setup.Nf_FF < 3 || _setup.Nf_FF > 6)
-        {
-          std::cout << error("InitialiseEvolution::CheckSetup", "Number of active flavours in the FFNS out of range.") << std::endl;
-          passed = false;
-        }
-
     // Check theory
-    if (_setup.Theory != EvolutionSetup::QCD)
+    if (_setup.Theory != EvolutionSetup::QCD &&
+        _setup.Theory != EvolutionSetup::QCD_QED)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "Unknown theory.") << std::endl;
         passed = false;
@@ -278,6 +278,16 @@ namespace apfel
         std::cout << error("InitialiseEvolution::CheckSetup", "Perturbative order out of range.") << std::endl;
         passed = false;
       }
+
+    // Make sure that QCDxQED evolution is only used for unpolarised
+    // space-like evolution.
+    // Check theory
+    if (_setup.Theory == EvolutionSetup::QCD_QED)
+      if (_setup.Virtuality != EvolutionSetup::SPACE || _setup.EvolPolarisation != EvolutionSetup::UNP)
+        {
+          std::cout << error("InitialiseEvolution::CheckSetup", "QCDxQED evolution only available for unpolarised space-like evolution.") << std::endl;
+          passed = false;
+        }
 
     // Make sure that for each vituality and polarisation, the maximum
     // perturbative order in not exceeded.
@@ -324,32 +334,6 @@ namespace apfel
           }
       }
 
-    // Check coupling evolution
-    if (_setup.CouplingEvolution != EvolutionSetup::exact &&
-        _setup.CouplingEvolution != EvolutionSetup::expanded)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "Unknown coupling evolution.") << std::endl;
-        passed = false;
-      }
-
-    // Check distribution evolution
-    if (_setup.PDFEvolution != EvolutionSetup::exactmu &&
-        _setup.PDFEvolution != EvolutionSetup::exactalpha &&
-        _setup.PDFEvolution != EvolutionSetup::expandalpha &&
-        _setup.PDFEvolution != EvolutionSetup::truncated)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "Unknown PDF evolution.") << std::endl;
-        passed = false;
-      }
-
-    // Check mass renormalisation scheme
-    if (_setup.MassRenScheme != EvolutionSetup::POLE &&
-        _setup.MassRenScheme != EvolutionSetup::MSBAR)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "Unknown mass renormalisation scheme.") << std::endl;
-        passed = false;
-      }
-
     // Check integration accuracy
     if (_setup.GaussAccuracy <= 0 || _setup.GaussAccuracy > 1)
       {
@@ -358,29 +342,22 @@ namespace apfel
       }
 
     // Check that heavy-quark thresholds and masses are sorted
-    if (!std::is_sorted(_setup.Thresholds.begin(), _setup.Thresholds.end()))
+    if (!std::is_sorted(_setup.QuarkThresholds.begin(), _setup.QuarkThresholds.end()))
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The heavy-quark thresholds are not sorted.") << std::endl;
         passed = false;
       }
 
-    if (!std::is_sorted(_setup.Masses.begin(), _setup.Masses.end()))
+    if (!std::is_sorted(_setup.QuarkMasses.begin(), _setup.QuarkMasses.end()))
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "The heavy-quark masses are not sorted.") << std::endl;
         passed = false;
       }
 
     // Check maximum number of active flavours
-    if (_setup.Thresholds.size() < 3 || _setup.Thresholds.size() > 6)
+    if (_setup.QuarkThresholds.size() < 3 || _setup.QuarkThresholds.size() > 6)
       {
         std::cout << error("InitialiseEvolution::CheckSetup", "Maximum number of active flavours out of range.") << std::endl;
-        passed = false;
-      }
-
-    // Check renormalisation / factorisation scale ratio (resummation-scale parameter)
-    if (_setup.xi <= 0)
-      {
-        std::cout << error("InitialiseEvolution::CheckSetup", "The ratio between renormalisation and factorisation scales cannot be negative.") << std::endl;
         passed = false;
       }
 
@@ -401,13 +378,6 @@ namespace apfel
 
     // Perturbative order
     report += "- Perturbative order of the evolution: N" + std::to_string(_setup.PerturbativeOrder) + "LO\n";
-
-    // Flavour scheme
-    report += "- Flavous scheme: ";
-    if (_setup.FlavourScheme == EvolutionSetup::VFNS)
-      report += "VFNS\n";
-    else if (_setup.FlavourScheme == EvolutionSetup::FFNS)
-      report += "FFNS with " + std::to_string(_setup.Nf_FF) + " active flavours\n";
 
     // Evolution theory
     report += "- Evolution theory: ";
@@ -433,60 +403,30 @@ namespace apfel
       report += "transversely polarised\n";
 
     // AlphaQCD reference value
-    report += "- QCD coupling reference value: AlphaQCD(" + std::to_string(_setup.QQCDRef) + " GeV) = " + std::to_string(_setup.AlphaQCDRef) + "\n";
+    report += "- QCD coupling reference value: AlphaQCD(" + std::to_string(_setup.QRef) + " GeV) = " + std::to_string(_setup.AlphaQCDRef) + "\n";
 
     // AlphaQED reference value
     if (_setup.Theory == EvolutionSetup::QCD_QED)
-      report += "- QED coupling reference value: AlphaQED(" + std::to_string(_setup.QQEDRef) + " GeV) = " + std::to_string(_setup.AlphaQEDRef) + "\n";
-
-    // Coupling evolution
-    report += "- Coupling evolution: ";
-    if (_setup.CouplingEvolution == EvolutionSetup::exact)
-      report += "Exact";
-    else if (_setup.CouplingEvolution == EvolutionSetup::expanded)
-      report += "Expanded";
-    report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
-
-    // PDF evolution
-    report += "- PDF evolution: ";
-    if (_setup.PDFEvolution == EvolutionSetup::exactmu)
-      report += "Exact in mu";
-    else if (_setup.PDFEvolution == EvolutionSetup::exactalpha)
-      report += "Exact in alpha";
-    else if (_setup.PDFEvolution == EvolutionSetup::expandalpha)
-      report += "Expanded in alpha";
-    else if (_setup.PDFEvolution == EvolutionSetup::truncated)
-      report += "Truncated";
-    report += " with maximum " + std::to_string(_setup.Thresholds.size()) + " active flavours\n";
-
-    // Resummation-scale parameter
-    report += "- xi (resummation scale): " + std::to_string(_setup.xi) + "\n";
+      report += "- QED coupling reference value: AlphaQED(" + std::to_string(_setup.QRef) + " GeV) = " + std::to_string(_setup.AlphaQEDRef) + "\n";
 
     // Heavy-quark masses and thresholds
     std::vector<std::string> Thq{"mud", "muu", "mus", "muc", "mub", "mut"};
-    if (_setup.MassRenScheme == EvolutionSetup::POLE)
-      {
-        std::vector<std::string> Mq{"Md", "Mu", "Ms", "Mc", "Mb", "Mt"};
-        report += "- Pole quark masses:\n";
-        for (int i = 0; i < (int) _setup.Masses.size(); i++)
-          report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
-        report += "- Pole quark threholds:\n";
-        for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
-          report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
-      }
-    if (_setup.MassRenScheme == EvolutionSetup::MSBAR)
-      {
-        std::vector<std::string> Mq{"md(md)", "mu(mu)", "ms(ms)", "mc(mc)", "mb(mb)", "mt(mt)"};
-        report += "- MSbar quark masses:\n";
-        for (int i = 0; i < (int) _setup.Masses.size(); i++)
-          report += "  + " + Mq[i] + " = " + std::to_string(_setup.Masses[i]) + " GeV\n";
-        report += "- MSbar quark threholds:\n";
-        for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
-          report += "  + " + Thq[i] + " = " + std::to_string(_setup.Thresholds[i]) + " GeV\n";
-      }
+    std::vector<std::string> Mq{"Md", "Mu", "Ms", "Mc", "Mb", "Mt"};
+    report += "- Quark masses:\n";
+    for (int i = 0; i < (int) _setup.QuarkMasses.size(); i++)
+      report += "  + " + Mq[i] + " = " + std::to_string(_setup.QuarkMasses[i]) + " GeV\n";
+    report += "- Quark threholds:\n";
+    for (int i = 0; i < (int) _setup.QuarkThresholds.size(); i++)
+      report += "  + " + Thq[i] + " = " + std::to_string(_setup.QuarkThresholds[i]) + " GeV\n";
 
-    // Tau mass
-    report += "- Tau lepton mass: " + std::to_string(_setup.TauMass) + " GeV\n";
+    // Lepton thresholds
+    if (_setup.Theory == EvolutionSetup::QCD_QED)
+      {
+        std::vector<std::string> Tlp{"me", "mmu", "mtau"};
+        report += "- Lepton threholds:\n";
+        for (int i = 0; i < (int) _setup.LeptonThresholds.size(); i++)
+          report += "  + " + Tlp[i] + " = " + std::to_string(_setup.LeptonThresholds[i]) + " GeV\n";
+      }
 
     // Integration accuracy
     report += "- Relative Gauss integration accuracy: " + std::to_string(_setup.GaussAccuracy) + "\n\n";
@@ -534,13 +474,26 @@ namespace apfel
     info += "NumMembers: " + std::to_string(_setup.InSet.size()) + "\n";
 
     info += "Flavors: [";
-    for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
+    for (int i = - (int) _setup.QuarkThresholds.size(); i <= (int) _setup.QuarkThresholds.size(); i++)
       info += std::to_string((i == 0 ? 21 : i)) + ", ";
+    if (_setup.Theory == EvolutionSetup::QCD_QED)
+      {
+        info += "22, ";
+        for (int i = - (int) _setup.LeptonThresholds.size(); i <= (int) _setup.LeptonThresholds.size(); i++)
+          {
+            if (i == 0)
+              continue;
+            info += std::to_string(2 * i + (i > 0 ? 9 : -9)) + ", ";
+          }
+      }
     info = info.substr(0, info.size() - 2);
+
+
+
     info += "]\n";
 
     info += "OrderQCD: " + std::to_string(_setup.PerturbativeOrder) + "\n";
-    info += "NumFlavors: " + std::to_string(_setup.Thresholds.size()) + "\n";
+    info += "NumFlavors: " + std::to_string(_setup.QuarkThresholds.size()) + "\n";
 
     double xmin = 1;
     for (auto const& gp : _setup.GridParameters)
@@ -551,21 +504,21 @@ namespace apfel
     info += "QMin: " + std::to_string(_setup.Qmin) + "\n";
     info += "QMax: " + std::to_string(_setup.Qmax) + "\n";
 
-    info += "MZ: " + std::to_string(_setup.QQCDRef) + "\n";
+    info += "MZ: " + std::to_string(_setup.QRef) + "\n";
 
     const std::vector<std::string> ms{"MUp: ", "MDown: ", "MStrange: ", "MCharm: ", "MBottom: ", "MTop: "};
-    for (int i = 0; i < (int) _setup.Masses.size(); i++)
-      info += ms[i] + std::to_string(_setup.Masses[i]) + "\n";
+    for (int i = 0; i < (int) _setup.QuarkMasses.size(); i++)
+      info += ms[i] + std::to_string(_setup.QuarkMasses[i]) + "\n";
 
     const std::vector<std::string> th{"ThresholdUp: ", "ThresholdDown: ", "ThresholdStrange: ", "ThresholdCharm: ", "ThresholdBottom: ", "ThresholdTop: "};
-    for (int i = 0; i < (int) _setup.Thresholds.size(); i++)
-      info += th[i] + std::to_string(_setup.Thresholds[i]) + "\n";
+    for (int i = 0; i < (int) _setup.QuarkThresholds.size(); i++)
+      info += th[i] + std::to_string(_setup.QuarkThresholds[i]) + "\n";
 
     info += "AlphaS_MZ: " + std::to_string(_setup.AlphaQCDRef) + "\n";
     info += "AlphaS_OrderQCD: " + std::to_string(_setup.PerturbativeOrder) + "\n";
     info += "AlphaS_Type: ipol\n";
 
-    const QGrid<double> qg{_setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ, _setup.Thresholds};
+    const QGrid<double> qg{_setup.nQg, _setup.Qmin, _setup.Qmax, _setup.InterDegreeQ, _setup.QuarkThresholds};
     info += "AlphaS_Qs: [";
     for (auto const& q : qg.GetQGrid())
       info += std::to_string(q) + ", ";
@@ -629,25 +582,56 @@ namespace apfel
         out << "\n";
 
         // Write flavour indices
-        for (int i = - (int) _setup.Thresholds.size(); i <= (int) _setup.Thresholds.size(); i++)
+        for (int i = - (int) _setup.QuarkThresholds.size(); i <= (int) _setup.QuarkThresholds.size(); i++)
           out << (i == 0 ? 21 : i) << " ";
+        if (_setup.Theory == EvolutionSetup::QCD_QED)
+          {
+            out << "22 ";
+            for (int i = - (int) _setup.LeptonThresholds.size(); i <= (int) _setup.LeptonThresholds.size(); i++)
+              {
+                if (i == 0)
+                  continue;
+                out << 2 * i + (i > 0 ? 9 : -9) << " ";
+              }
+          }
         out << "\n";
 
         // Array of distributions
-        const int nd = 2 * _setup.Thresholds.size() + 1;
+        const int nd = 2 * _setup.QuarkThresholds.size() + 1 + (_setup.Theory == EvolutionSetup::QCD_QED ? 2 * _setup.LeptonThresholds.size() + 1 : 0);
         const int np = ka.second.begin()->second.xs.size() * ka.second.begin()->second.q2s.size();
         std::vector<std::vector<double>> dist(np, std::vector<double>(nd, 0));
 
         // Gather tabulated distributions
         int id = 0;
+        // Quarks and gluon first
         for (auto const& d : ka.second)
-          if (std::abs(d.first) <= (int) _setup.Thresholds.size())
+          if (std::abs(d.first) <= (int) _setup.QuarkThresholds.size())
             {
               const std::vector<double> xf = d.second.xfs;
               for (int jp = 0; jp < (int) xf.size(); jp++)
                 dist[jp][id] = (std::abs(xf[jp]) > eps15 ? xf[jp] : 0);
               id++;
             }
+        // Then photon and leptons
+        if (_setup.Theory == EvolutionSetup::QCD_QED)
+          {
+            for (auto const& d : ka.second)
+              if (d.first == 22)
+                {
+                  const std::vector<double> xf = d.second.xfs;
+                  for (int jp = 0; jp < (int) xf.size(); jp++)
+                    dist[jp][id] = (std::abs(xf[jp]) > eps15 ? xf[jp] : 0);
+                  id++;
+                }
+            for (auto const& d : ka.second)
+              if (std::abs(d.first) > 10 && ( std::abs(d.first) - 9 ) / 2 <= (int) _setup.LeptonThresholds.size())
+                {
+                  const std::vector<double> xf = d.second.xfs;
+                  for (int jp = 0; jp < (int) xf.size(); jp++)
+                    dist[jp][id] = (std::abs(xf[jp]) > eps15 ? xf[jp] : 0);
+                  id++;
+                }
+          }
 
         // Print distributions
         for (int jp = 0; jp < np; jp++)
