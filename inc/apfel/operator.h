@@ -87,6 +87,13 @@ namespace apfel
     void Invert();
 
     /**
+     * @brief Function that extends the current operator by filling
+     * the full square matrix using the known shift symmetry (only
+     * effective for DGLAP-like operators).
+     */
+    void Extend();
+
+    /**
      * @brief Function that returns the Grid object associated with
      * the operator.
      */

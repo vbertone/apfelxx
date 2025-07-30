@@ -349,6 +349,30 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  void Operator::Extend()
+  {
+    // If the operator is GPD-like, the operator matrix is already
+    // extended and thus there is nothing to be done.
+    if (_gpd)
+      return;
+
+    // Loop over subgrids
+    for (int i = 0; i < (int) _Operator.size(); i++)
+      {
+        // Grid size
+        const int nx = (int) _Operator[i].size(1);
+
+        // Resize operator
+        _Operator[i].resize(nx, nx, 0);
+
+        // Loop over remaining nodes
+        for (int k = 1; k < nx; k++)
+          for (int j = k; j < nx; j++)
+            _Operator[i](k, j) = _Operator[i](0, j - k);
+      }
+  }
+
+  //_________________________________________________________________________
   Distribution Operator::operator *= (Distribution const& d) const
   {
     // Fast method to check that we are using the same Grid
@@ -378,17 +402,24 @@ namespace apfel
     // Construct joint distribution first. The product between the
     // operator and the distribution is done exploiting the symmetry
     // of the operator if the first operator has one line
-    // only. Otherwise the product is done in a standard way. This
-    // should be enough to distinguish between DGLAP- and GPD-like
-    // operators.
-    for (int beta = 0; beta < nx; beta++)
+    // only. Otherwise the product is done in a standard way.
+    if (!_gpd)
       if (_Operator[0].size(0) == 1)
-        {
-          const std::pair<int, int> m = sjmap[beta];
-          for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
-            j[beta] += _Operator[m.first](0, alpha - m.second) * dj[jsmap[m.first][alpha]];
-        }
+        for (int beta = 0; beta < nx; beta++)
+          {
+            const std::pair<int, int> m = sjmap[beta];
+            for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
+              j[beta] += _Operator[m.first](0, alpha - m.second) * dj[jsmap[m.first][alpha]];
+          }
       else
+        for (int beta = 0; beta < nx; beta++)
+          {
+            const std::pair<int, int> m = sjmap[beta];
+            for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
+              j[beta] += _Operator[m.first](m.second, alpha) * dj[jsmap[m.first][alpha]];
+          }
+    else
+      for (int beta = 0; beta < nx; beta++)
         for (int alpha = 0; alpha < nx; alpha++)
           j[beta] += _Operator[0](beta, alpha) * dj[alpha];
 

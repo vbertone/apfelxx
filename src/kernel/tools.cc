@@ -59,7 +59,7 @@ namespace apfel
     double PZ2;
     if (virt)
       {
-        PZ  = Q2 * ( Q2 -  MZ2 ) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
+        PZ  = Q2 * ( Q2 - MZ2 ) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / ( 4 * Sin2ThetaW * ( 1 - Sin2ThetaW ) );
         PZ2 = pow(Q2, 2) / ( pow(Q2 - MZ2, 2) + MZ2 * GmZ2 ) / pow(4 * Sin2ThetaW * ( 1 - Sin2ThetaW ), 2);
       }
     else

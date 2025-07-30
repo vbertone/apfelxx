@@ -54,5 +54,11 @@ int main()
   // Print product (must be the identity)
   std::cout << id << std::endl;
 
+  // Extend inverse operator
+  opi.Extend();
+
+  // Print extended operator
+  std::cout << opi << std::endl;
+
   return 0;
 }

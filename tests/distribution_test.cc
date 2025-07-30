@@ -46,8 +46,6 @@ public:
 
 int main()
 {
-  apfel::Timer t;
-
   // Grid
   const apfel::Grid g{{{100, 1e-5, 3}, {100, 1e-1, 3}, {40, 8e-1, 3}}};
 
@@ -61,22 +59,17 @@ int main()
   const p0qq p;
 
   // Operator
-  std::cout << "\nInitialization ..." << std::endl;
-  t.start();
   const apfel::Operator O{g, p};
-  t.stop();
+
+  // Define extend operator
+  apfel::Operator Oext{g, p};
+  Oext.Extend();
 
   // Multiply operator by the distribution to create a new distribution
-  std::cout << "\nConvolution between operator and distribution (O * d) ..." << std::endl;
-  t.start();
   const apfel::Distribution Od = O * d;
-  t.stop();
 
-  // Multiply operator by itself to create a new operator
-  std::cout << "\nConvolution between two operators (O * O) ..." << std::endl;
-  t.start();
-  const apfel::Operator OO = O * O;
-  t.stop();
+  // Convolute distribution with extended operator
+  const apfel::Distribution Oextd = Oext * d;
 
   // Tabulation parameters
   const int nx = 100;
@@ -90,12 +83,19 @@ int main()
   for (double x = xmin; x < xmax * 1.000001; x *= xstp)
     {
       // Analytic result for x \int_x^1 dy Pqq(y) ( 1 - x / y )
-      const double Ix   = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log(1 - x) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
-      const double Odx  = Od.Evaluate(x);
-      const double Oxd  = InnerProduct(O.Evaluate(x), d);
-      const double Oxd2 = (O.Evaluate(x) * d).Squash();
-      std::cout << x << "\t\t" << Odx << "\t\t" << Oxd << "\t\t" << Oxd2 << "\t\t" << Ix << "\t\t" << Odx / Ix << "\t\t" << Oxd / Ix << "\t\t" << Oxd2 / Ix << std::endl;
+      const double Ix     = apfel::CF * ( - 2 * ( 3. / 2. - x - pow(x,2) / 2. ) + 4 * ( 1 - x ) * log(1 - x) + 3 * ( 1 - x ) + 2 * x * ( log(x) + 1 - x ) );
+      const double Odx    = Od.Evaluate(x);
+      const double Oxd    = InnerProduct(O.Evaluate(x), d);
+      const double Oxd2   = (O.Evaluate(x) * d).Squash();
+      const double Oxdext = Oextd.Evaluate(x);
+      std::cout << x << "\t\t" << Odx << "\t\t" << Oxd << "\t\t" << Oxd2 << "\t\t" << Oxdext << "\t\t" << Ix << "\t\t" << Odx / Ix << "\t\t" << Oxd / Ix << "\t\t" << Oxd2 / Ix << "\t\t" << Oxdext / Ix << std::endl;
     }
+
+  // Multiply operator by itself to create a new operator
+  const apfel::Operator OO = O * O;
+
+  // Convolute two extended operators
+  const apfel::Operator OOext = Oext * Oext;
 
   // Check the numerical accuracy of "Od" by comparing with the analytical result
   // Analytical expression of P0qq \otimes P0qq
@@ -103,13 +103,15 @@ int main()
   const apfel::Operator O2{g, p2};
 
   // Now convolute both "OO" and "O2" with the test distribution "d" and check the result
-  const apfel::Distribution OOd = OO * d;
-  const apfel::Distribution O2d = O2 * d;
+  const apfel::Distribution OOd    = OO * d;
+  const apfel::Distribution O2d    = O2 * d;
+  const apfel::Distribution OOextd = OOext * d;
 
   std::cout << "\nChecking the numerical accuracy of O * O ... " << std::endl;
   for (double x = xmin; x < xmax * 1.000001; x *= xstp)
-    std::cout << x << "\t\t" << OOd.Evaluate(x) << "\t\t" << O2d.Evaluate(x) << "\t\t" << OOd.Evaluate(x) / O2d.Evaluate(x) << std::endl;
+    std::cout << x << "\t\t" << OOd.Evaluate(x) << "\t\t" << O2d.Evaluate(x) << "\t\t" << OOextd.Evaluate(x) << "\t\t" << OOd.Evaluate(x) / O2d.Evaluate(x) << "\t\t" << OOextd.Evaluate(x) / O2d.Evaluate(x) << std::endl;
 
+  std::cout << "\nAllocating DoubleObject ... " << std::endl;
   // Now define a double object with O and d and print it.
   const apfel::DoubleObject<apfel::Operator, apfel::Distribution> DObj{{{1, O, d}}};
   std::cout << DObj << std::endl;
