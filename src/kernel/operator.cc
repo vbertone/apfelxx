@@ -13,10 +13,11 @@
 namespace apfel
 {
   //_________________________________________________________________________
-  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps, bool const& gpd):
+  Operator::Operator(Grid const& gr, Expression const& expr, double const& eps, bool const& gpd, bool const& extended):
     _grid(gr),
     _eps(eps),
-    _gpd(gpd)
+    _gpd(gpd),
+    _extended(extended)
   {
     if (_gpd)
       BuildOperatorGPD(expr);
@@ -32,13 +33,28 @@ namespace apfel
     _Operator(op)
   {
     // Check that the number of subgrids matches
-    if (_grid.nGrids() != (int)_Operator.size())
+    if (_grid.nGrids() != (int) _Operator.size())
       throw std::runtime_error(error("Operator::operator", "The number of SubGrids does not match."));
 
-    // Check if the points in each SubGrids match
+    // Infer whether the operator is extended or not using the first
+    // subgrid.
+    if ((int) _Operator[0].size(0) == 1)
+      _extended = false;
+    else if ((int) _Operator[0].size(0) == (int) _grid.GetSubGrid(0).nx())
+      _extended = true;
+    else
+      throw std::runtime_error(error("Operator::operator", "The number of lines of the operator is incorrect."));
+
+    // Check if the points in each SubGrids match and whether all
+    // subgrids contain operator with the same extension.
     for (int ig = 0; ig < _grid.nGrids(); ig++)
-      if ((int)_grid.GetSubGrid(ig).nx() != (int)_Operator[ig].size(1))
-        throw std::runtime_error(error("Operator::operator", "The size of the SubGrids does not match."));
+      {
+        if ((int) _Operator[ig].size(1) != (int) _grid.GetSubGrid(ig).nx())
+          throw std::runtime_error(error("Operator::operator", "The size of the SubGrids does not match."));
+
+        if ((int) _Operator[ig].size(0) != (_extended ? (int) _grid.GetSubGrid(ig).nx() : 1))
+          throw std::runtime_error(error("Operator::operator", "SubGrid extension does not match the global one."));
+      }
   }
 
   //_________________________________________________________________________
@@ -122,11 +138,18 @@ namespace apfel
               }
           }
       }
+
+    // Finally extend operator if requested
+    if(_extended)
+      Extend();
   }
 
   //_________________________________________________________________________
   void Operator::BuildOperatorGPD(Expression const& expr)
   {
+    // GDP operators are always extended
+    _extended = true;
+
     // Interpolator object for the interpolating functions
     const LagrangeInterpolator li{_grid};
 
@@ -245,16 +268,16 @@ namespace apfel
         // Run over the second index of the operator
         for (int alpha = 0; alpha < nx; alpha++)
           {
-            // If the operator has one single line, this means that
-            // one can (must) use the symmetry _Operator[ig](beta,
-            // alpha) = _Operator[ig](0, alpha - beta). Otherwise, the
-            // operator matrix is assumed to be a full nx^2 matrix.
-            if (_Operator[ig].size(0) == 1)
-              for (int beta = bounds[0]; beta < std::min(bounds[1], alpha + 1); beta++)
-                dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](0, alpha - beta);
-            else
+            // If the operator is not extended, one can (must) use the
+            // symmetry _Operator[ig](beta, alpha) = _Operator[ig](0,
+            // alpha - beta). Otherwise, the operator matrix is
+            // assumed to be a full nx^2 matrix.
+            if (_extended)
               for (int beta = bounds[0]; beta < std::min(bounds[1], nx + 1); beta++)
                 dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](beta, alpha);
+            else
+              for (int beta = bounds[0]; beta < std::min(bounds[1], alpha + 1); beta++)
+                dsg[ig][alpha] += d.Interpolant(beta, x, _grid.GetSubGrid(ig)) * _Operator[ig](0, alpha - beta);
           }
       }
 
@@ -351,10 +374,12 @@ namespace apfel
   //_________________________________________________________________________
   void Operator::Extend()
   {
-    // If the operator is GPD-like, the operator matrix is already
-    // extended and thus there is nothing to be done.
-    if (_gpd)
+    // If the operator is already extended return
+    if (_extended)
       return;
+
+    // Set extended flag to true
+    _extended = true;
 
     // Loop over subgrids
     for (int i = 0; i < (int) _Operator.size(); i++)
@@ -401,27 +426,27 @@ namespace apfel
 
     // Construct joint distribution first. The product between the
     // operator and the distribution is done exploiting the symmetry
-    // of the operator if the first operator has one line
-    // only. Otherwise the product is done in a standard way.
-    if (!_gpd)
-      if (_Operator[0].size(0) == 1)
-        for (int beta = 0; beta < nx; beta++)
-          {
-            const std::pair<int, int> m = sjmap[beta];
-            for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
-              j[beta] += _Operator[m.first](0, alpha - m.second) * dj[jsmap[m.first][alpha]];
-          }
-      else
-        for (int beta = 0; beta < nx; beta++)
-          {
-            const std::pair<int, int> m = sjmap[beta];
-            for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
-              j[beta] += _Operator[m.first](m.second, alpha) * dj[jsmap[m.first][alpha]];
-          }
-    else
+    // of the operator if the first operator is not extended and is
+    // not GPD-like. Otherwise the product is done in a standard way.
+    if (_gpd)
       for (int beta = 0; beta < nx; beta++)
         for (int alpha = 0; alpha < nx; alpha++)
           j[beta] += _Operator[0](beta, alpha) * dj[alpha];
+    else if (_extended)
+      for (int beta = 0; beta < nx; beta++)
+        {
+          const std::pair<int, int> m = sjmap[beta];
+          for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
+            j[beta] += _Operator[m.first](m.second, alpha) * dj[jsmap[m.first][alpha]];
+        }
+    else
+      for (int beta = 0; beta < nx; beta++)
+        {
+          const std::pair<int, int> m = sjmap[beta];
+          for (int alpha = m.second; alpha < _grid.GetSubGrid(m.first).nx(); alpha++)
+            j[beta] += _Operator[m.first](0, alpha - m.second) * dj[jsmap[m.first][alpha]];
+        }
+
 
     // Compute the the distribution on the subgrids
     for (int ig = 0; ig < ng; ig++)
@@ -450,19 +475,17 @@ namespace apfel
         _Operator[ig].set(0);
 
         // The product between the operators is done exploiting the
-        // symmetry of the operators if the operator matrix only
-        // contains one line. Otherwise the product is done in a
-        // standard way. This should be enough to distinguish between
-        // DGLAP- and GPD-like operators.
-        if (_Operator[ig].size(0) == 1)
-          for (int beta = 0; beta < (int) _Operator[ig].size(1); beta++)
-            for (int gamma = 0; gamma <= beta; gamma++)
-              _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
-        else
+        // symmetry of the operators if the operator matrix is not
+        // extended. Otherwise the product is done in a standard way.
+        if (_extended)
           for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
             for (int beta = 0; beta < (int) _Operator[ig].size(1); beta++)
               for (int gamma = 0; gamma < (int) _Operator[ig].size(1); gamma++)
                 _Operator[ig](alpha, beta) += v[ig](alpha, gamma) * o._Operator[ig](gamma, beta);
+        else
+          for (int beta = 0; beta < (int) _Operator[ig].size(1); beta++)
+            for (int gamma = 0; gamma <= beta; gamma++)
+              _Operator[ig](0, beta) += v[ig](0, gamma) * o._Operator[ig](0, beta - gamma);
       }
     return *this;
   }

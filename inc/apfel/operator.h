@@ -32,9 +32,10 @@ namespace apfel
      * @param gr: the Grid object
      * @param expr: the expression to be convoluted
      * @param eps: relative accuracy of the numerical integrations (default: 10<SUP>-5</SUP>)
-     * @param gpd: whether the operator had to computed for a GPD-like expression (default: false)
+     * @param gpd: whether the operator has to computed for a GPD-like expression (default: false)
+     * @param extended: whether the operator is to be extended (default: false)
      */
-    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5, bool const& gpd = false);
+    Operator(Grid const& gr, Expression const& expr, double const& eps = 1e-5, bool const& gpd = false, bool const& extended = false);
 
     /**
      * @brief The Operator constructor from a raw operator.
@@ -62,16 +63,6 @@ namespace apfel
     Operator& operator += (Operator const& o);                      //!< this += Operator
     Operator& operator -= (Operator const& o);                      //!< this -= Operator
     ///@}
-
-    /**
-     * @brief Function that builds a DGLAP-like operator.
-     */
-    void BuildOperatorDGLAP(Expression const& expr);
-
-    /**
-     * @brief Function that builds a GPD-like operator.
-     */
-    void BuildOperatorGPD(Expression const& expr);
 
     /**
      * @brief Function that interpolates the operator over the first
@@ -110,6 +101,11 @@ namespace apfel
     bool const& IsGPD() const { return _gpd; }
 
     /**
+     * @brief Function that returns whether the operato is extended,
+     */
+    bool const& IsExtended() const { return _extended; }
+
+    /**
      * @brief Function that returns the Operator container.
      */
     std::vector<matrix<double>> GetOperator() const { return _Operator; }
@@ -123,9 +119,21 @@ namespace apfel
     Grid                 const& _grid;      //!< Grid on which to compute the operator
     double               const  _eps;       //!< Integration accuracy
     bool                 const  _gpd;       //!< GPD switch
+    bool                        _extended;  //!< Whether the operator is extended
     std::vector<matrix<double>> _Operator;  //!< Operator values
 
     friend std::ostream& operator << (std::ostream& os, Operator const& op);
+
+  private:
+    /**
+     * @brief Function that builds a DGLAP-like operator.
+     */
+    void BuildOperatorDGLAP(Expression const& expr);
+
+    /**
+     * @brief Function that builds a GPD-like operator.
+     */
+    void BuildOperatorGPD(Expression const& expr);
   };
 
   /**
