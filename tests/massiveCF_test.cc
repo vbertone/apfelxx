@@ -27,7 +27,6 @@ int main()
    * massive coefficient functions, both exact and asymptotic.
    */
   apfel::Timer t;
-  t.start();
 
   // x-space grid
   const apfel::Grid g{{apfel::SubGrid{100,1e-5,5}, apfel::SubGrid{60,1e-1,5}, apfel::SubGrid{50,6e-1,3}, apfel::SubGrid{50,8e-1,3}}};

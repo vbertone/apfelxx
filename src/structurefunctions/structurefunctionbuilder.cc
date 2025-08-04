@@ -1272,7 +1272,7 @@ namespace apfel
       FObj.P    = PDFObj.at(actnf);
       FObj.skip = skip;
 
-      // Start with the heavy quark structure function components.
+      // Start with the heavy-quark structure function components.
       const double Q2  = Q * Q;
       Operator lNNLOns = O22nsp;
       for (int k = actnf + 1; k <= 6; k++)

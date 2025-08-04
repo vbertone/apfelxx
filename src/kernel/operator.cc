@@ -58,6 +58,37 @@ namespace apfel
   }
 
   //_________________________________________________________________________
+  Operator::Operator(Operator const& op, double const& eta):
+    _grid(op.GetGrid()),
+    _eps(0.),
+    _gpd(false),
+    _extended(true)
+  {
+    // Contruct extended operator
+    for (int ig = 0; ig < _grid.nGrids(); ig++)
+      {
+        // Get number of grid nodes of current subgrid
+        const int nx = _grid.GetSubGrid(ig).nx();
+
+        // Define and operator matrices on the currect subgrid
+        matrix<double> sgMop{(size_t) nx, (size_t) nx};
+
+        // Get vector of nodes on the current subgrid
+        const std::vector<double> xv = _grid.GetSubGrid(ig).GetGrid();
+
+        for (int beta = 0; beta < nx; beta++)
+          {
+            const std::vector<double> Dop  = op.Evaluate(xv[beta] / eta).GetDistributionSubGrid()[ig];
+            for (int alpha = 0; alpha < nx; alpha++)
+              sgMop(beta, alpha) = Dop[alpha];
+          }
+
+        // Push back subgrid matrices
+        _Operator.push_back(sgMop);
+      }
+  }
+
+  //_________________________________________________________________________
   void Operator::BuildOperatorDGLAP(Expression const& expr)
   {
     // Interpolator object for the interpolating functions
@@ -244,7 +275,7 @@ namespace apfel
   Distribution Operator::Evaluate(double const& x) const
   {
     // Initialise distribution
-    apfel::Distribution d{_grid};
+    Distribution d{_grid};
 
     // Number of sub-grids
     const int ng = _grid.nGrids();
@@ -468,6 +499,10 @@ namespace apfel
     if (&_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator *=", "Grids do not match."));
 
+    // Make sure that operators have the same extension
+    if (_extended != o.IsExtended())
+      throw std::runtime_error(error("Operator::operator *=", "Operators do not have the same extension."));
+
     const std::vector<matrix<double>> v = _Operator;
     for (int ig = 0; ig < (int) v.size(); ig++)
       {
@@ -542,6 +577,10 @@ namespace apfel
     if (&_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator +=", "Grids do not match."));
 
+    // Make sure that operators have the same extension
+    if (_extended != o.IsExtended())
+      throw std::runtime_error(error("Operator::operator *=", "Operators do not have the same extension."));
+
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
         for (int beta = 0; beta < (int) _Operator[ig].size(1); beta++)
@@ -556,6 +595,10 @@ namespace apfel
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
       throw std::runtime_error(error("Operator::operator +=", "Grids do not match."));
+
+    // Make sure that operators have the same extension
+    if (_extended != o.IsExtended())
+      throw std::runtime_error(error("Operator::operator *=", "Operators do not have the same extension."));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)

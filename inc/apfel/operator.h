@@ -46,6 +46,15 @@ namespace apfel
     Operator(Grid const& gr, std::vector<matrix<double>> const& op, bool const& gpd = false);
 
     /**
+     * @brief The Operator constructor from another operator with rescaling.
+     * @param op: raw operator previously computed
+     * @param eta: rescaling factor
+     * @note This constructor constructs a DGLAP-like extended
+     * operator useful for massive coefficient functions.
+     */
+    Operator(Operator const& op, double const& eta);
+
+    /**
      * @brief The Operator virtual destructor.
      */
     virtual ~Operator() {}
