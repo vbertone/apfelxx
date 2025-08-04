@@ -1,17 +1,15 @@
 var searchData=
 [
-  ['m0_0',['M0',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72ae961a2e71d06630a034d6e0808da18c7',1,'apfel::MatchingBasisQCD']]],
-  ['m1_1',['M1',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72a836f4224dbb5b51ba7f4063ce0257529',1,'apfel::MatchingBasisQCD']]],
-  ['m10_2',['M10',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72aafb71f7d14420d3fd10fe32367722421',1,'apfel::MatchingBasisQCD']]],
-  ['m2_3',['M2',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72ab6ae18cce2c6aa7c1d2e9bd516458c79',1,'apfel::MatchingBasisQCD']]],
-  ['m3_4',['M3',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72a06dca57d31fa978197331563cc99292d',1,'apfel::MatchingBasisQCD']]],
-  ['m4_5',['M4',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72a489d61e502cc41fbfd724dd37619f2fb',1,'apfel::MatchingBasisQCD']]],
-  ['m5_6',['M5',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72af7a2b41c8c76692f58e3684054e36231',1,'apfel::MatchingBasisQCD']]],
-  ['m6_7',['M6',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72ad23b353aaa3122eb8ae88db3a58ae021',1,'apfel::MatchingBasisQCD']]],
-  ['m7_8',['M7',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72a6af05be6dc4081963c09c836c943f296',1,'apfel::MatchingBasisQCD']]],
-  ['m8_9',['M8',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72aea4ba50d973ccd2bb732efc45389461c',1,'apfel::MatchingBasisQCD']]],
-  ['m9_10',['M9',['../classapfel_1_1MatchingBasisQCD.html#a44c41cfe8e3f1e7be27f879b4161ab72a3acd6c174fe375a3c6ef33523988e954',1,'apfel::MatchingBasisQCD']]],
-  ['msbar_11',['MSBAR',['../structapfel_1_1EvolutionSetup.html#adbf330a722f8daccfa1c3343204e8b0bac7f91c377878634b622c5ee270fd5458',1,'apfel::EvolutionSetup']]],
-  ['mum_12',['MUM',['../classapfel_1_1EvolutionBasisQCDQED.html#a68cba1f6efca2d87f18d1ee0b11f9768aff4927bf7a0a83515a2ec9fc560779d2',1,'apfel::EvolutionBasisQCDQED::MUM'],['../classapfel_1_1MatchingBasisQCDQED.html#a31610e893818f35b0cff2263d0abdef8a9f7c95a7af2079fcfd136c7eb19c1c31',1,'apfel::MatchingBasisQCDQED::MUM']]],
-  ['mup_13',['MUP',['../classapfel_1_1EvolutionBasisQCDQED.html#a68cba1f6efca2d87f18d1ee0b11f9768a8174bb5aa746e6fa0c0e608f9a0810e8',1,'apfel::EvolutionBasisQCDQED::MUP'],['../classapfel_1_1MatchingBasisQCDQED.html#a31610e893818f35b0cff2263d0abdef8a6e13ba8b098736c1fecb61ee7e52aa28',1,'apfel::MatchingBasisQCDQED::MUP']]]
+  ['n4ll_0',['N4LL',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446acc40098506069856f2acd77b8ee4f93a',1,'apfel']]],
+  ['n4lo_1',['N4LO',['../group__PertOrds.html#gga5f7af6d2b3a540791b164f3964cd4251aaf4ae4dc590f206a622d94c0db500aa3',1,'apfel']]],
+  ['neutrino_2',['NEUTRINO',['../group__PartonSpecies.html#ggad4fc02426d8c8750bfd0d6bc7b15a6a6aba6c98afd2a5090d700f4750367f5286',1,'apfel']]],
+  ['nll_3',['NLL',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a34582b355410694f2355d80af25b1288',1,'apfel']]],
+  ['nllp_4',['NLLp',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a0e7d1540bc320138a315f0782f9b855e',1,'apfel']]],
+  ['nlo_5',['NLO',['../group__PertOrds.html#gga5f7af6d2b3a540791b164f3964cd4251a433c990366df5cbc74b1e07e968c55be',1,'apfel']]],
+  ['nnll_6',['NNLL',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a8cb9e49b56b78490614921ffb7bd2672',1,'apfel']]],
+  ['nnllp_7',['NNLLp',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446adfc29ff39675e3cece6122543a35a06f',1,'apfel']]],
+  ['nnlo_8',['NNLO',['../group__PertOrds.html#gga5f7af6d2b3a540791b164f3964cd4251a6f61ba750855162297e510cb74d14e87',1,'apfel']]],
+  ['nnnll_9',['NNNLL',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a949a7f277ba11f30498415ab0951e8cc',1,'apfel']]],
+  ['nnnllp_10',['NNNLLp',['../group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a81f679d71cd354cff5ab9304c9ddf9cb',1,'apfel']]],
+  ['nnnlo_11',['NNNLO',['../group__PertOrds.html#gga5f7af6d2b3a540791b164f3964cd4251af6f8fb391cad61948ba9f44340161a97',1,'apfel']]]
 ];

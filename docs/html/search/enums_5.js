@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['massrenscheme_0',['MassRenScheme',['../structapfel_1_1EvolutionSetup.html#adbf330a722f8daccfa1c3343204e8b0b',1,'apfel::EvolutionSetup']]]
+  ['partonspecies_0',['PartonSpecies',['../group__PartonSpecies.html#gad4fc02426d8c8750bfd0d6bc7b15a6a6',1,'apfel']]]
 ];

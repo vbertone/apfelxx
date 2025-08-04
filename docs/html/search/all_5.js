@@ -58,15 +58,11 @@ var searchData=
   ['evolvedistributionsbasisqcd_55',['EvolveDistributionsBasisQCD',['../classapfel_1_1EvolveDistributionsBasisQCD.html',1,'apfel::EvolveDistributionsBasisQCD'],['../classapfel_1_1EvolveDistributionsBasisQCD.html#a6de1aa97bb9782c5f514799808c44900',1,'apfel::EvolveDistributionsBasisQCD::EvolveDistributionsBasisQCD()']]],
   ['evolvedistributionsbasisqcdqed_56',['EvolveDistributionsBasisQCDQED',['../classapfel_1_1EvolveDistributionsBasisQCDQED.html',1,'apfel::EvolveDistributionsBasisQCDQED'],['../classapfel_1_1EvolveDistributionsBasisQCDQED.html#a8f8ab9f2f1254f23d9491876de65f42d',1,'apfel::EvolveDistributionsBasisQCDQED::EvolveDistributionsBasisQCDQED()']]],
   ['evolveobject_57',['EvolveObject',['../classapfel_1_1AlphaQCDg.html#a56df5292128e4479299be9eb9cccc4e4',1,'apfel::AlphaQCDg::EvolveObject()'],['../classapfel_1_1MatchedEvolution.html#a671a39603db2e8445c2a60677847276d',1,'apfel::MatchedEvolution::EvolveObject()']]],
-  ['exact_58',['exact',['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5aa4b3908a4dfbac268681dbb1cc004ebf8',1,'apfel::EvolutionSetup']]],
-  ['exactalpha_59',['exactalpha',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328ac80f7f281ebc9488cbad7482007e3226',1,'apfel::EvolutionSetup']]],
-  ['exactmu_60',['exactmu',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a36243c0035a29c29d51b9cd617b5974e',1,'apfel::EvolutionSetup']]],
-  ['examples_2edox_61',['examples.dox',['../examples_8dox.html',1,'']]],
-  ['expandalpha_62',['expandalpha',['../structapfel_1_1EvolutionSetup.html#a57a10440e153bba3cb67c3b66e0d0328a302954d0c0560e970512ea68a169f053',1,'apfel::EvolutionSetup']]],
-  ['expanded_63',['expanded',['../structapfel_1_1EvolutionSetup.html#a99cf4a06a70b42212bf192c19945bf5aa0d58376fb18679dfc28b84bc924f37e4',1,'apfel::EvolutionSetup']]],
-  ['expression_64',['Expression',['../classapfel_1_1Expression.html',1,'apfel::Expression'],['../classapfel_1_1Expression.html#a49727bdb8ac6d6d68854e61a9a262e3d',1,'apfel::Expression::Expression()']]],
-  ['expression_2eh_65',['expression.h',['../expression_8h.html',1,'']]],
-  ['expressions_66',['Recurrent expressions',['../group__RecExprs.html',1,'']]],
-  ['extendedvector_67',['ExtendedVector',['../classapfel_1_1ExtendedVector.html',1,'apfel::ExtendedVector&lt; T &gt;'],['../classapfel_1_1ExtendedVector.html#a955b49148c3429162501c86df6e9a7eb',1,'apfel::ExtendedVector::ExtendedVector()']]],
-  ['extendedvector_2eh_68',['extendedvector.h',['../extendedvector_8h.html',1,'']]]
+  ['examples_2edox_58',['examples.dox',['../examples_8dox.html',1,'']]],
+  ['expression_59',['Expression',['../classapfel_1_1Expression.html',1,'apfel::Expression'],['../classapfel_1_1Expression.html#a49727bdb8ac6d6d68854e61a9a262e3d',1,'apfel::Expression::Expression()']]],
+  ['expression_2eh_60',['expression.h',['../expression_8h.html',1,'']]],
+  ['expressions_61',['Recurrent expressions',['../group__RecExprs.html',1,'']]],
+  ['extend_62',['Extend',['../classapfel_1_1Operator.html#a71dbdec3946a99a4e3b789db7455d715',1,'apfel::Operator']]],
+  ['extendedvector_63',['ExtendedVector',['../classapfel_1_1ExtendedVector.html',1,'apfel::ExtendedVector&lt; T &gt;'],['../classapfel_1_1ExtendedVector.html#a955b49148c3429162501c86df6e9a7eb',1,'apfel::ExtendedVector::ExtendedVector()']]],
+  ['extendedvector_2eh_64',['extendedvector.h',['../extendedvector_8h.html',1,'']]]
 ];

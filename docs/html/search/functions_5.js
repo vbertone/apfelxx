@@ -25,5 +25,6 @@ var searchData=
   ['evolvedistributionsbasisqcdqed_22',['EvolveDistributionsBasisQCDQED',['../classapfel_1_1EvolveDistributionsBasisQCDQED.html#a8f8ab9f2f1254f23d9491876de65f42d',1,'apfel::EvolveDistributionsBasisQCDQED']]],
   ['evolveobject_23',['EvolveObject',['../classapfel_1_1AlphaQCDg.html#a56df5292128e4479299be9eb9cccc4e4',1,'apfel::AlphaQCDg::EvolveObject()'],['../classapfel_1_1MatchedEvolution.html#a671a39603db2e8445c2a60677847276d',1,'apfel::MatchedEvolution::EvolveObject()']]],
   ['expression_24',['Expression',['../classapfel_1_1Expression.html#a49727bdb8ac6d6d68854e61a9a262e3d',1,'apfel::Expression']]],
-  ['extendedvector_25',['ExtendedVector',['../classapfel_1_1ExtendedVector.html#a955b49148c3429162501c86df6e9a7eb',1,'apfel::ExtendedVector']]]
+  ['extend_25',['Extend',['../classapfel_1_1Operator.html#a71dbdec3946a99a4e3b789db7455d715',1,'apfel::Operator']]],
+  ['extendedvector_26',['ExtendedVector',['../classapfel_1_1ExtendedVector.html#a955b49148c3429162501c86df6e9a7eb',1,'apfel::ExtendedVector']]]
 ];

@@ -23,5 +23,7 @@ var searchData=
   ['quarkanalyticevolutionfactor_20',['QuarkAnalyticEvolutionFactor',['../namespaceapfel.html#aeab94641441d9b0677944defca3fc91f',1,'apfel']]],
   ['quarkevolutionfactor_21',['QuarkEvolutionFactor',['../namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f',1,'apfel']]],
   ['quarkevolutionfactorxi_22',['QuarkEvolutionFactorxi',['../namespaceapfel.html#ac0a10f8afe02267c0410b5daffeca908',1,'apfel']]],
-  ['quarkflavour_23',['QuarkFlavour',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575b',1,'apfel']]]
+  ['quarkflavour_23',['QuarkFlavour',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575b',1,'apfel']]],
+  ['quarkmasses_24',['QuarkMasses',['../structapfel_1_1EvolutionSetup.html#a22eb8496c9564b2df80f5f3a10c83bee',1,'apfel::EvolutionSetup']]],
+  ['quarkthresholds_25',['QuarkThresholds',['../structapfel_1_1EvolutionSetup.html#a2f3ce91b6238621266ac535d16f684e2',1,'apfel::EvolutionSetup']]]
 ];

@@ -88,8 +88,8 @@ $(function() {
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">// x-space grid</span></div>
-<div class="line">  <span class="comment">//const apfel::Grid g{{apfel::SubGrid{30, 1e-5, 3}, apfel::SubGrid{20, 1e-1, 3}, apfel::SubGrid{10, 9e-1, 3}}};</span></div>
-<div class="line">  <span class="keyword">const</span> <a id="_a0" name="_a0"></a><a class="code hl_class" href="classapfel_1_1Grid.html">apfel::Grid</a> g{{<a id="_a1" name="_a1"></a><a class="code hl_class" href="classapfel_1_1SubGrid.html">apfel::SubGrid</a>{100, 1e-5, 3}, <a class="code hl_class" href="classapfel_1_1SubGrid.html">apfel::SubGrid</a>{200, 1e-1, 3}, <a class="code hl_class" href="classapfel_1_1SubGrid.html">apfel::SubGrid</a>{100, 9e-1, 3}}};</div>
+<div class="line">  <span class="keyword">const</span> <a id="_a0" name="_a0"></a><a class="code hl_class" href="classapfel_1_1Grid.html">apfel::Grid</a> g{{<a id="_a1" name="_a1"></a><a class="code hl_class" href="classapfel_1_1SubGrid.html">apfel::SubGrid</a>{30, 1e-5, 3}, <a class="code hl_class" href="classapfel_1_1SubGrid.html">apfel::SubGrid</a>{20, 1e-1, 3}, <a class="code hl_class" href="classapfel_1_1SubGrid.html">apfel::SubGrid</a>{10, 9e-1, 3}}};</div>
+<div class="line">  <span class="comment">//const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{200, 1e-1, 3}, apfel::SubGrid{100, 9e-1, 3}}};</span></div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Initial scale</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> mu0 = sqrt(2);</div>
@@ -112,17 +112,17 @@ $(function() {
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Initialize GPD evolution objects</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> GpdObj   = InitializeGpdObjects(g, Thresholds, xi);</div>
-<div class="line">  <span class="comment">//const auto GpdObjOp = InitializeGpdObjects(g, Thresholds, xi, true);</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> GpdObjOp = InitializeGpdObjects(g, Thresholds, xi, <span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Construct the DGLAP objects</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> EvolvedGPDs = BuildDglap(GpdObj,   apfel::LHToyPDFs, mu0, PerturbativeOrder, as);</div>
-<div class="line">  <span class="comment">//const auto EvolvedOps  = BuildDglap(GpdObjOp,                   mu0, PerturbativeOrder, as);</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> EvolvedOps  = BuildDglap(GpdObjOp,                   mu0, PerturbativeOrder, as);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Tabulate GPDs</span></div>
 <div class="line">  <span class="keyword">const</span> <a class="code hl_class" href="classapfel_1_1TabulateObject.html">apfel::TabulateObject&lt;apfel::Set&lt;apfel::Distribution&gt;</a>&gt; TabulatedGPDs{*EvolvedGPDs, 30, 1, 100, 3};</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Tabulate Operators</span></div>
-<div class="line">  <span class="comment">//const apfel::TabulateObject&lt;apfel::Set&lt;apfel::Operator&gt;&gt; TabulatedOps{*EvolvedOps, 30, 1, 100, 3};</span></div>
+<div class="line">  <span class="keyword">const</span> <a class="code hl_class" href="classapfel_1_1TabulateObject.html">apfel::TabulateObject&lt;apfel::Set&lt;apfel::Operator&gt;</a>&gt; TabulatedOps{*EvolvedOps, 30, 1, 100, 3};</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Final scale</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> mu = 10;</div>
@@ -139,17 +139,17 @@ $(function() {
 <div class="line">  t.<a id="a8" name="a8"></a><a class="code hl_function" href="classapfel_1_1Timer.html#a8b8ffd3f8ceb45b50ecd2d7b00f84ccb">start</a>();</div>
 <div class="line">  <span class="keyword">const</span> std::map&lt;int, apfel::Distribution&gt; tgpds = <a class="code hl_function" href="namespaceapfel.html#a6fbb69d0eeaff6ae57ba41cc0bbc4248">apfel::QCDEvToPhys</a>(TabulatedGPDs.<a class="code hl_function" href="classapfel_1_1QGrid.html#ac2e13c956b563254deb9d6c677feff9d">Evaluate</a>(mu).GetObjects());</div>
 <div class="line">  t.<a class="code hl_function" href="classapfel_1_1Timer.html#a015b2c516bb668f392faa6d0a5eae3c1">stop</a>();</div>
-<div class="line">  <span class="comment">/*</span></div>
-<div class="line"><span class="comment">    std::cout &lt;&lt; &quot;Interpolation of the tabulated evolution operators... &quot;;</span></div>
-<div class="line"><span class="comment">    t.start();</span></div>
-<div class="line"><span class="comment">    apfel::Set&lt;apfel::Operator&gt; tops = TabulatedOps.Evaluate(mu);</span></div>
-<div class="line"><span class="comment">    t.stop();</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">    // Set appropriate convolution basis for the evolution operators and</span></div>
-<div class="line"><span class="comment">    // convolute them with initial-scale distributions.</span></div>
-<div class="line"><span class="comment">    tops.SetMap(apfel::EvolveDistributionsBasisQCD{});</span></div>
-<div class="line"><span class="comment">    const std::map&lt;int, apfel::Distribution&gt; opgpds = apfel::QCDEvToPhys((tops * apfel::Set&lt;apfel::Distribution&gt; {apfel::EvolveDistributionsBasisQCD{}, DistributionMap(g, apfel::LHToyPDFs, mu0)}).GetObjects());</span></div>
-<div class="line"><span class="comment">  */</span></div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Interpolation of the tabulated evolution operators... &quot;</span>;</div>
+<div class="line">  t.<a class="code hl_function" href="classapfel_1_1Timer.html#a8b8ffd3f8ceb45b50ecd2d7b00f84ccb">start</a>();</div>
+<div class="line">  <a id="_a9" name="_a9"></a><a class="code hl_class" href="classapfel_1_1Set.html">apfel::Set&lt;apfel::Operator&gt;</a> tops = TabulatedOps.<a class="code hl_function" href="classapfel_1_1QGrid.html#ac2e13c956b563254deb9d6c677feff9d">Evaluate</a>(mu);</div>
+<div class="line">  t.<a class="code hl_function" href="classapfel_1_1Timer.html#a015b2c516bb668f392faa6d0a5eae3c1">stop</a>();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set appropriate convolution basis for the evolution operators and</span></div>
+<div class="line">  <span class="comment">// convolute them with initial-scale distributions.</span></div>
+<div class="line">  tops.<a id="a10" name="a10"></a><a class="code hl_function" href="classapfel_1_1Set.html#ac2b7cfa13e427b34727d36c9ba28feb1">SetMap</a>(<a id="_a11" name="_a11"></a><a class="code hl_class" href="classapfel_1_1EvolveDistributionsBasisQCD.html">apfel::EvolveDistributionsBasisQCD</a>{});</div>
+<div class="line">  <span class="keyword">const</span> std::map&lt;int, apfel::Distribution&gt; opgpds = <a class="code hl_function" href="namespaceapfel.html#a6fbb69d0eeaff6ae57ba41cc0bbc4248">apfel::QCDEvToPhys</a>((tops * <a class="code hl_class" href="classapfel_1_1Set.html">apfel::Set&lt;apfel::Distribution&gt;</a> {<a class="code hl_class" href="classapfel_1_1EvolveDistributionsBasisQCD.html">apfel::EvolveDistributionsBasisQCD</a>{}, DistributionMap(g, apfel::LHToyPDFs, mu0)}).GetObjects());</div>
+<div class="line"> </div>
 <div class="line">  <span class="comment">// Print results</span></div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;double&gt; xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};</div>
 <div class="line"> </div>
@@ -176,22 +176,22 @@ $(function() {
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  <span class="comment">/*</span></div>
-<div class="line"><span class="comment">    std::cout &lt;&lt; &quot;Evolution through the evolution operator:&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><span class="comment">    for (auto const&amp; x : xlha)</span></div>
-<div class="line"><span class="comment">      {</span></div>
-<div class="line"><span class="comment">        std::cout.precision(1);</span></div>
-<div class="line"><span class="comment">        std::cout &lt;&lt; x;</span></div>
-<div class="line"><span class="comment">        std::cout.precision(4);</span></div>
-<div class="line"><span class="comment">        std::cout &lt;&lt; &quot;  &quot; &lt;&lt; (opgpds.at(2) - opgpds.at(-2)).Evaluate(x)</span></div>
-<div class="line"><span class="comment">                  &lt;&lt; &quot;  &quot; &lt;&lt; (opgpds.at(1) - opgpds.at(-1)).Evaluate(x)</span></div>
-<div class="line"><span class="comment">                  &lt;&lt; &quot;  &quot; &lt;&lt; 2 * (opgpds.at(-2) + opgpds.at(-1)).Evaluate(x)</span></div>
-<div class="line"><span class="comment">                  &lt;&lt; &quot;  &quot; &lt;&lt; (opgpds.at(4) + opgpds.at(-4)).Evaluate(x)</span></div>
-<div class="line"><span class="comment">                  &lt;&lt; &quot;  &quot; &lt;&lt; opgpds.at(0).Evaluate(x)</span></div>
-<div class="line"><span class="comment">                  &lt;&lt; std::endl;</span></div>
-<div class="line"><span class="comment">      }</span></div>
-<div class="line"><span class="comment">    std::cout &lt;&lt; &quot;\n&quot;;</span></div>
-<div class="line"><span class="comment">  */</span></div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Evolution through the evolution operator:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; x : xlha)</div>
+<div class="line">    {</div>
+<div class="line">      std::cout.precision(1);</div>
+<div class="line">      std::cout &lt;&lt; x;</div>
+<div class="line">      std::cout.precision(4);</div>
+<div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; (opgpds.at(2) - opgpds.at(-2)).Evaluate(x)</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; (opgpds.at(1) - opgpds.at(-1)).Evaluate(x)</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; 2 * (opgpds.at(-2) + opgpds.at(-1)).Evaluate(x)</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; (opgpds.at(4) + opgpds.at(-4)).Evaluate(x)</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; opgpds.at(0).Evaluate(x)</div>
+<div class="line">                &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Interpolation on the GPD table (all x for each Q):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; x : xlha)</div>
 <div class="line">    {</div>
@@ -211,8 +211,11 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="aapfelxx_8h_html"><div class="ttname"><a href="apfelxx_8h.html">apfelxx.h</a></div></div>
 <div class="ttc" id="aclassapfel_1_1AlphaQCD_html"><div class="ttname"><a href="classapfel_1_1AlphaQCD.html">apfel::AlphaQCD</a></div><div class="ttdoc">The AlphaQCD is a specialization class of the MatchedEvolution class for the computation of the QCD c...</div><div class="ttdef"><b>Definition</b> alphaqcd.h:21</div></div>
+<div class="ttc" id="aclassapfel_1_1EvolveDistributionsBasisQCD_html"><div class="ttname"><a href="classapfel_1_1EvolveDistributionsBasisQCD.html">apfel::EvolveDistributionsBasisQCD</a></div><div class="ttdoc">The EvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a set of ev...</div><div class="ttdef"><b>Definition</b> evolutionbasisqcd.h:97</div></div>
 <div class="ttc" id="aclassapfel_1_1Grid_html"><div class="ttname"><a href="classapfel_1_1Grid.html">apfel::Grid</a></div><div class="ttdoc">The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...</div><div class="ttdef"><b>Definition</b> grid.h:22</div></div>
 <div class="ttc" id="aclassapfel_1_1QGrid_html_ac2e13c956b563254deb9d6c677feff9d"><div class="ttname"><a href="classapfel_1_1QGrid.html#ac2e13c956b563254deb9d6c677feff9d">apfel::QGrid::Evaluate</a></div><div class="ttdeci">T Evaluate(double const &amp;Q) const</div><div class="ttdoc">Function that interpolates on the grid in Q.</div></div>
+<div class="ttc" id="aclassapfel_1_1Set_html"><div class="ttname"><a href="classapfel_1_1Set.html">apfel::Set</a></div><div class="ttdoc">The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...</div><div class="ttdef"><b>Definition</b> set.h:23</div></div>
+<div class="ttc" id="aclassapfel_1_1Set_html_ac2b7cfa13e427b34727d36c9ba28feb1"><div class="ttname"><a href="classapfel_1_1Set.html#ac2b7cfa13e427b34727d36c9ba28feb1">apfel::Set::SetMap</a></div><div class="ttdeci">void SetMap(ConvolutionMap const &amp;map)</div><div class="ttdoc">This function (re)sets the convolution map.</div><div class="ttdef"><b>Definition</b> set.h:83</div></div>
 <div class="ttc" id="aclassapfel_1_1SubGrid_html"><div class="ttname"><a href="classapfel_1_1SubGrid.html">apfel::SubGrid</a></div><div class="ttdoc">Class for the x-space interpolation SubGrids.</div><div class="ttdef"><b>Definition</b> subgrid.h:23</div></div>
 <div class="ttc" id="aclassapfel_1_1TabulateObject_html"><div class="ttname"><a href="classapfel_1_1TabulateObject.html">apfel::TabulateObject</a></div><div class="ttdoc">The template TabulateObject class is a derived of the QGrid class that tabulates on object of type T ...</div><div class="ttdef"><b>Definition</b> tabulateobject.h:26</div></div>
 <div class="ttc" id="aclassapfel_1_1Timer_html"><div class="ttname"><a href="classapfel_1_1Timer.html">apfel::Timer</a></div><div class="ttdoc">The Timer class computes the time elapsed between start and stop.</div><div class="ttdef"><b>Definition</b> timer.h:20</div></div>

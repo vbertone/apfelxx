@@ -91,5 +91,6 @@ var searchData=
   ['introduction_88',['Introduction',['../index.html#autotoc_md0',1,'']]],
   ['invert_89',['Invert',['../classapfel_1_1Operator.html#aea192e87bfcc79809713cdef501bd5da',1,'apfel::Operator']]],
   ['invtanint_90',['InvTanInt',['../namespaceapfel.html#af6a736842d7f9a6e8225d08b7f6211b8',1,'apfel']]],
-  ['isgpd_91',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
+  ['isextended_91',['IsExtended',['../classapfel_1_1Operator.html#ad10428a1a7cfc1b49928aed714a093e8',1,'apfel::Operator']]],
+  ['isgpd_92',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
 ];

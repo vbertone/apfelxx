@@ -77,5 +77,6 @@ var searchData=
   ['intinterpolant_74',['IntInterpolant',['../classapfel_1_1Interpolator.html#a3d294de2c1bd8df09e3420a529a0beb9',1,'apfel::Interpolator::IntInterpolant()'],['../classapfel_1_1LagrangeInterpolator.html#ac685eca21fc99696b8fb8dee1f5248c5',1,'apfel::LagrangeInterpolator::IntInterpolant()'],['../classapfel_1_1QGrid.html#a9ba5658b710808b1eeaef1dbb784b848',1,'apfel::QGrid::IntInterpolant()']]],
   ['invert_75',['Invert',['../classapfel_1_1Operator.html#aea192e87bfcc79809713cdef501bd5da',1,'apfel::Operator']]],
   ['invtanint_76',['InvTanInt',['../namespaceapfel.html#af6a736842d7f9a6e8225d08b7f6211b8',1,'apfel']]],
-  ['isgpd_77',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
+  ['isextended_77',['IsExtended',['../classapfel_1_1Operator.html#ad10428a1a7cfc1b49928aed714a093e8',1,'apfel::Operator']]],
+  ['isgpd_78',['IsGPD',['../classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e',1,'apfel::Operator']]]
 ];

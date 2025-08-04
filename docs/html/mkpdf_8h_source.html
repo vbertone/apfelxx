@@ -198,7 +198,7 @@ $(function() {
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="comment">// Set quark masses and thresholds</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="keyword">const</span> std::vector&lt;std::string&gt; Qnames{<span class="stringliteral">&quot;Down&quot;</span>, <span class="stringliteral">&quot;Up&quot;</span>, <span class="stringliteral">&quot;Strange&quot;</span>, <span class="stringliteral">&quot;Charm&quot;</span>, <span class="stringliteral">&quot;Bottom&quot;</span>, <span class="stringliteral">&quot;Top&quot;</span>};</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keyword">const</span> std::vector&lt;double&gt; trhs = ev.<a class="code hl_function" href="classapfel_1_1InitialiseEvolution.html#a74ccfed4551a0b322b855f44e50cd0ef">GetEvolutionSetup</a>().<a class="code hl_variable" href="structapfel_1_1EvolutionSetup.html#a42a4fa2e5320a7878a7fad669fc640be">Thresholds</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keyword">const</span> std::vector&lt;double&gt; trhs = ev.<a class="code hl_function" href="classapfel_1_1InitialiseEvolution.html#a74ccfed4551a0b322b855f44e50cd0ef">GetEvolutionSetup</a>().Thresholds;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> iq = 0; iq &lt; (int) Qnames.size(); iq++)</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    {</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      dist-&gt;info().set_entry(<span class="stringliteral">&quot;M&quot;</span> + Qnames[iq], (iq &lt; (<span class="keywordtype">int</span>) trhs.size() ? trhs[iq] : 1e8 + iq));</div>
@@ -216,7 +216,6 @@ $(function() {
 <div class="ttc" id="aclassapfel_1_1InitialiseEvolution_html_a74ccfed4551a0b322b855f44e50cd0ef"><div class="ttname"><a href="classapfel_1_1InitialiseEvolution.html#a74ccfed4551a0b322b855f44e50cd0ef">apfel::InitialiseEvolution::GetEvolutionSetup</a></div><div class="ttdeci">EvolutionSetup GetEvolutionSetup() const</div><div class="ttdoc">Function that returns the EvolutionSetup object.</div><div class="ttdef"><b>Definition</b> initialiseevolution.h:128</div></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
 <div class="ttc" id="ainitialiseevolution_8h_html"><div class="ttname"><a href="initialiseevolution_8h.html">initialiseevolution.h</a></div></div>
-<div class="ttc" id="astructapfel_1_1EvolutionSetup_html_a42a4fa2e5320a7878a7fad669fc640be"><div class="ttname"><a href="structapfel_1_1EvolutionSetup.html#a42a4fa2e5320a7878a7fad669fc640be">apfel::EvolutionSetup::Thresholds</a></div><div class="ttdeci">std::vector&lt; double &gt; Thresholds</div><div class="ttdoc">Heavy-quark thresholds.</div><div class="ttdef"><b>Definition</b> evolutionsetup.h:82</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

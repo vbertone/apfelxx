@@ -81,6 +81,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classapfel_1_1Operator-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">apfel::Operator Class Reference</div></div>
@@ -96,26 +97,28 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abed3b7be91a5e75cea637a87fb4fa5d0" id="r_abed3b7be91a5e75cea637a87fb4fa5d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abed3b7be91a5e75cea637a87fb4fa5d0">Operator</a> ()=delete</td></tr>
 <tr class="memitem:aa1690288a30f134b8f3a90e1a1aefc71" id="r_aa1690288a30f134b8f3a90e1a1aefc71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1690288a30f134b8f3a90e1a1aefc71">Operator</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;)=default</td></tr>
-<tr class="memitem:a8883b2d608d147309abbda622349e53e" id="r_a8883b2d608d147309abbda622349e53e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8883b2d608d147309abbda622349e53e">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr, <a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr, double const &amp;eps=1e-5, bool const &amp;gpd=false)</td></tr>
-<tr class="memdesc:a8883b2d608d147309abbda622349e53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor.  <br /></td></tr>
+<tr class="memitem:a526dd287cb07771f21c2608788297a67" id="r_a526dd287cb07771f21c2608788297a67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a526dd287cb07771f21c2608788297a67">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr, <a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr, double const &amp;eps=1e-5, bool const &amp;gpd=false, bool const &amp;extended=false)</td></tr>
+<tr class="memdesc:a526dd287cb07771f21c2608788297a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor.  <br /></td></tr>
 <tr class="memitem:a11d3a5572ecdbabcfd56d29fdaa7115b" id="r_a11d3a5572ecdbabcfd56d29fdaa7115b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11d3a5572ecdbabcfd56d29fdaa7115b">Operator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr, std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; const &amp;op, bool const &amp;gpd=false)</td></tr>
 <tr class="memdesc:a11d3a5572ecdbabcfd56d29fdaa7115b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor from a raw operator.  <br /></td></tr>
+<tr class="memitem:a2c8461c0ae74457189cd1ac334bdf748" id="r_a2c8461c0ae74457189cd1ac334bdf748"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8461c0ae74457189cd1ac334bdf748">Operator</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;op, double const &amp;eta)</td></tr>
+<tr class="memdesc:a2c8461c0ae74457189cd1ac334bdf748"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor from another operator with rescaling.  <br /></td></tr>
 <tr class="memitem:a33282323f21457b098ee90b2356af978" id="r_a33282323f21457b098ee90b2356af978"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33282323f21457b098ee90b2356af978">~Operator</a> ()</td></tr>
 <tr class="memdesc:a33282323f21457b098ee90b2356af978"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> virtual destructor.  <br /></td></tr>
-<tr class="memitem:aa4dd0495be7c91e0fd1b92b46e9d4669" id="r_aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4dd0495be7c91e0fd1b92b46e9d4669">BuildOperatorDGLAP</a> (<a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr)</td></tr>
-<tr class="memdesc:aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a DGLAP-like operator.  <br /></td></tr>
-<tr class="memitem:abdba0481e6564816af9edda16422e210" id="r_abdba0481e6564816af9edda16422e210"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdba0481e6564816af9edda16422e210">BuildOperatorGPD</a> (<a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr)</td></tr>
-<tr class="memdesc:abdba0481e6564816af9edda16422e210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a GPD-like operator.  <br /></td></tr>
 <tr class="memitem:aea92b7498b3b329688f3ac898083b9be" id="r_aea92b7498b3b329688f3ac898083b9be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea92b7498b3b329688f3ac898083b9be">Evaluate</a> (double const &amp;x) const</td></tr>
 <tr class="memdesc:aea92b7498b3b329688f3ac898083b9be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that interpolates the operator over the first index and returns a <a class="el" href="classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ...">Distribution</a> object.  <br /></td></tr>
 <tr class="memitem:aea192e87bfcc79809713cdef501bd5da" id="r_aea192e87bfcc79809713cdef501bd5da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea192e87bfcc79809713cdef501bd5da">Invert</a> ()</td></tr>
 <tr class="memdesc:aea192e87bfcc79809713cdef501bd5da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that inverts the current operator such that, when multiplied by the original operator, it returns the unity.  <br /></td></tr>
+<tr class="memitem:a71dbdec3946a99a4e3b789db7455d715" id="r_a71dbdec3946a99a4e3b789db7455d715"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71dbdec3946a99a4e3b789db7455d715">Extend</a> ()</td></tr>
+<tr class="memdesc:a71dbdec3946a99a4e3b789db7455d715"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that extends the current operator by filling the full square matrix using the known shift symmetry (only effective for DGLAP-like operators).  <br /></td></tr>
 <tr class="memitem:a80f6e9dc8055f27d5a394f53c4702d30" id="r_a80f6e9dc8055f27d5a394f53c4702d30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80f6e9dc8055f27d5a394f53c4702d30">GetGrid</a> () const</td></tr>
 <tr class="memdesc:a80f6e9dc8055f27d5a394f53c4702d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object associated with the operator.  <br /></td></tr>
 <tr class="memitem:a0d185d01ae0703325751a2d68193f127" id="r_a0d185d01ae0703325751a2d68193f127"><td class="memItemLeft" align="right" valign="top">double const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d185d01ae0703325751a2d68193f127">GetIntegrationAccuracy</a> () const</td></tr>
 <tr class="memdesc:a0d185d01ae0703325751a2d68193f127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the integration accuracy,.  <br /></td></tr>
 <tr class="memitem:a55048afd5d8c9310649edeafdcf10d7e" id="r_a55048afd5d8c9310649edeafdcf10d7e"><td class="memItemLeft" align="right" valign="top">bool const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55048afd5d8c9310649edeafdcf10d7e">IsGPD</a> () const</td></tr>
 <tr class="memdesc:a55048afd5d8c9310649edeafdcf10d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the GPD switch,.  <br /></td></tr>
+<tr class="memitem:ad10428a1a7cfc1b49928aed714a093e8" id="r_ad10428a1a7cfc1b49928aed714a093e8"><td class="memItemLeft" align="right" valign="top">bool const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad10428a1a7cfc1b49928aed714a093e8">IsExtended</a> () const</td></tr>
+<tr class="memdesc:ad10428a1a7cfc1b49928aed714a093e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns whether the operato is extended,.  <br /></td></tr>
 <tr class="memitem:a6f51d7a58bc907d7de889f941ee4c052" id="r_a6f51d7a58bc907d7de889f941ee4c052"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f51d7a58bc907d7de889f941ee4c052">GetOperator</a> () const</td></tr>
 <tr class="memdesc:a6f51d7a58bc907d7de889f941ee4c052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> container.  <br /></td></tr>
 <tr class="memitem:a085a308c830454e5a451b3b157e374b0" id="r_a085a308c830454e5a451b3b157e374b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a085a308c830454e5a451b3b157e374b0">Print</a> () const</td></tr>
@@ -146,8 +149,17 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:af659fccf626c174f729a35d930f84fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integration accuracy.  <br /></td></tr>
 <tr class="memitem:a6d93f7c9ec6b8a8ccd29189531282278" id="r_a6d93f7c9ec6b8a8ccd29189531282278"><td class="memItemLeft" align="right" valign="top">bool const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d93f7c9ec6b8a8ccd29189531282278">_gpd</a></td></tr>
 <tr class="memdesc:a6d93f7c9ec6b8a8ccd29189531282278"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPD switch.  <br /></td></tr>
+<tr class="memitem:a3c994c2d10ebd89bb1fcddca065b6d4b" id="r_a3c994c2d10ebd89bb1fcddca065b6d4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c994c2d10ebd89bb1fcddca065b6d4b">_extended</a></td></tr>
+<tr class="memdesc:a3c994c2d10ebd89bb1fcddca065b6d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the operator is extended.  <br /></td></tr>
 <tr class="memitem:a319ffccbd5f34a791d82e9dd70dfe8d8" id="r_a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a319ffccbd5f34a791d82e9dd70dfe8d8">_Operator</a></td></tr>
 <tr class="memdesc:a319ffccbd5f34a791d82e9dd70dfe8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> values.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aa4dd0495be7c91e0fd1b92b46e9d4669" id="r_aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4dd0495be7c91e0fd1b92b46e9d4669">BuildOperatorDGLAP</a> (<a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr)</td></tr>
+<tr class="memdesc:aa4dd0495be7c91e0fd1b92b46e9d4669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a DGLAP-like operator.  <br /></td></tr>
+<tr class="memitem:abdba0481e6564816af9edda16422e210" id="r_abdba0481e6564816af9edda16422e210"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdba0481e6564816af9edda16422e210">BuildOperatorGPD</a> (<a class="el" href="classapfel_1_1Expression.html">Expression</a> const &amp;expr)</td></tr>
+<tr class="memdesc:abdba0481e6564816af9edda16422e210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that builds a GPD-like operator.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -157,11 +169,11 @@ Friends</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class defines the basic object <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> which essentially contains the convolution bewteen an "Expression" object (e.g. a splitting function) and a set of interpolanting functions defined on a grid. </p>
 <dl class="section note"><dt>Note</dt><dd>Both the forward and the non-forward cases can be handled by this class. They correspond respectively to inclusive (DGLAP-like) and exclusive (GPD-like) processes. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#_a10">distribution_test.cc</a>, <a class="el" href="massiveCF_test_8cc-example.html#_a5">massiveCF_test.cc</a>, <a class="el" href="operator_test_8cc-example.html#_a9">operator_test.cc</a>, <a class="el" href="principal_value_test_8cc-example.html#_a8">principal_value_test.cc</a>, and <a class="el" href="set_test_8cc-example.html#_a4">set_test.cc</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#_a8">distribution_test.cc</a>, <a class="el" href="massiveCF_test_8cc-example.html#_a4">massiveCF_test.cc</a>, <a class="el" href="operator_test_8cc-example.html#_a9">operator_test.cc</a>, <a class="el" href="principal_value_test_8cc-example.html#_a8">principal_value_test.cc</a>, and <a class="el" href="set_test_8cc-example.html#_a4">set_test.cc</a>.</dd>
 </dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abed3b7be91a5e75cea637a87fb4fa5d0" name="abed3b7be91a5e75cea637a87fb4fa5d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abed3b7be91a5e75cea637a87fb4fa5d0">&#9670;&#160;</a></span>Operator() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abed3b7be91a5e75cea637a87fb4fa5d0">&#9670;&#160;</a></span>Operator() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +198,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="aa1690288a30f134b8f3a90e1a1aefc71" name="aa1690288a30f134b8f3a90e1a1aefc71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1690288a30f134b8f3a90e1a1aefc71">&#9670;&#160;</a></span>Operator() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1690288a30f134b8f3a90e1a1aefc71">&#9670;&#160;</a></span>Operator() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,8 +222,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a8883b2d608d147309abbda622349e53e" name="a8883b2d608d147309abbda622349e53e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8883b2d608d147309abbda622349e53e">&#9670;&#160;</a></span>Operator() <span class="overload">[3/4]</span></h2>
+<a id="a526dd287cb07771f21c2608788297a67" name="a526dd287cb07771f21c2608788297a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a526dd287cb07771f21c2608788297a67">&#9670;&#160;</a></span>Operator() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,7 +246,12 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>gpd</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>gpd</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>extended</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -245,7 +262,8 @@ Friends</h2></td></tr>
     <tr><td class="paramname">gr</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object </td></tr>
     <tr><td class="paramname">expr</td><td>the expression to be convoluted </td></tr>
     <tr><td class="paramname">eps</td><td>relative accuracy of the numerical integrations (default: 10<sup>-5</sup>) </td></tr>
-    <tr><td class="paramname">gpd</td><td>whether the operator had to computed for a GPD-like expression (default: false) </td></tr>
+    <tr><td class="paramname">gpd</td><td>whether the operator has to computed for a GPD-like expression (default: false) </td></tr>
+    <tr><td class="paramname">extended</td><td>whether the operator is to be extended (default: false) </td></tr>
   </table>
   </dd>
 </dl>
@@ -253,7 +271,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a11d3a5572ecdbabcfd56d29fdaa7115b" name="a11d3a5572ecdbabcfd56d29fdaa7115b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11d3a5572ecdbabcfd56d29fdaa7115b">&#9670;&#160;</a></span>Operator() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d3a5572ecdbabcfd56d29fdaa7115b">&#9670;&#160;</a></span>Operator() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -285,6 +303,37 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a2c8461c0ae74457189cd1ac334bdf748" name="a2c8461c0ae74457189cd1ac334bdf748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8461c0ae74457189cd1ac334bdf748">&#9670;&#160;</a></span>Operator() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::Operator::Operator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>op</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>eta</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...">Operator</a> constructor from another operator with rescaling. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td>raw operator previously computed </td></tr>
+    <tr><td class="paramname">eta</td><td>rescaling factor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This constructor constructs a DGLAP-like extended operator useful for massive coefficient functions. </dd></dl>
 
 </div>
 </div>
@@ -321,6 +370,9 @@ Friends</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void apfel::Operator::BuildOperatorDGLAP </td>
@@ -329,6 +381,11 @@ Friends</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function that builds a DGLAP-like operator. </p>
@@ -340,6 +397,9 @@ Friends</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void apfel::Operator::BuildOperatorGPD </td>
@@ -348,6 +408,11 @@ Friends</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function that builds a GPD-like operator. </p>
@@ -375,6 +440,29 @@ Friends</h2></td></tr>
     <tr><td class="paramname">x</td><td>the value in x to be interpolated </td></tr>
   </table>
   </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#a11">distribution_test.cc</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a71dbdec3946a99a4e3b789db7455d715" name="a71dbdec3946a99a4e3b789db7455d715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71dbdec3946a99a4e3b789db7455d715">&#9670;&#160;</a></span>Extend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::Operator::Extend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that extends the current operator by filling the full square matrix using the known shift symmetry (only effective for DGLAP-like operators). </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="distribution_test_8cc-example.html#a9">distribution_test.cc</a>, and <a class="el" href="operator_test_8cc-example.html#a12">operator_test.cc</a>.</dd>
 </dl>
 
 </div>
@@ -478,6 +566,33 @@ Friends</h2></td></tr>
 <p>Function that inverts the current operator such that, when multiplied by the original operator, it returns the unity. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="operator_test_8cc-example.html#a11">operator_test.cc</a>.</dd>
 </dl>
+
+</div>
+</div>
+<a id="ad10428a1a7cfc1b49928aed714a093e8" name="ad10428a1a7cfc1b49928aed714a093e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad10428a1a7cfc1b49928aed714a093e8">&#9670;&#160;</a></span>IsExtended()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const  &amp; apfel::Operator::IsExtended </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that returns whether the operato is extended,. </p>
 
 </div>
 </div>
@@ -741,6 +856,30 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Integration accuracy. </p>
+
+</div>
+</div>
+<a id="a3c994c2d10ebd89bb1fcddca065b6d4b" name="a3c994c2d10ebd89bb1fcddca065b6d4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c994c2d10ebd89bb1fcddca065b6d4b">&#9670;&#160;</a></span>_extended</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool apfel::Operator::_extended</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Whether the operator is extended. </p>
 
 </div>
 </div>

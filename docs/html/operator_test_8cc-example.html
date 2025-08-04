@@ -133,6 +133,12 @@ $(function() {
 <div class="line">  <span class="comment">// Print product (must be the identity)</span></div>
 <div class="line">  std::cout &lt;&lt; <span class="keywordtype">id</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line">  <span class="comment">// Extend inverse operator</span></div>
+<div class="line">  opi.<a id="a12" name="a12"></a><a class="code hl_function" href="classapfel_1_1Operator.html#a71dbdec3946a99a4e3b789db7455d715">Extend</a>();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Print extended operator</span></div>
+<div class="line">  std::cout &lt;&lt; opi &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aapfelxx_8h_html"><div class="ttname"><a href="apfelxx_8h.html">apfelxx.h</a></div></div>
@@ -143,6 +149,7 @@ $(function() {
 <div class="ttc" id="aclassapfel_1_1Expression_html_aef54ac003702b1cc7d2d573c484d76a1"><div class="ttname"><a href="classapfel_1_1Expression.html#aef54ac003702b1cc7d2d573c484d76a1">apfel::Expression::Regular</a></div><div class="ttdeci">virtual double Regular(double const &amp;) const</div><div class="ttdoc">Virtual function for the regular term.</div><div class="ttdef"><b>Definition</b> expression.h:42</div></div>
 <div class="ttc" id="aclassapfel_1_1Grid_html"><div class="ttname"><a href="classapfel_1_1Grid.html">apfel::Grid</a></div><div class="ttdoc">The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...</div><div class="ttdef"><b>Definition</b> grid.h:22</div></div>
 <div class="ttc" id="aclassapfel_1_1Operator_html"><div class="ttname"><a href="classapfel_1_1Operator.html">apfel::Operator</a></div><div class="ttdoc">This class defines the basic object Operator which essentially contains the convolution bewteen an &quot;E...</div><div class="ttdef"><b>Definition</b> operator.h:25</div></div>
+<div class="ttc" id="aclassapfel_1_1Operator_html_a71dbdec3946a99a4e3b789db7455d715"><div class="ttname"><a href="classapfel_1_1Operator.html#a71dbdec3946a99a4e3b789db7455d715">apfel::Operator::Extend</a></div><div class="ttdeci">void Extend()</div><div class="ttdoc">Function that extends the current operator by filling the full square matrix using the known shift sy...</div></div>
 <div class="ttc" id="aclassapfel_1_1Operator_html_aea192e87bfcc79809713cdef501bd5da"><div class="ttname"><a href="classapfel_1_1Operator.html#aea192e87bfcc79809713cdef501bd5da">apfel::Operator::Invert</a></div><div class="ttdeci">void Invert()</div><div class="ttdoc">Function that inverts the current operator such that, when multiplied by the original operator,...</div></div>
 <div class="ttc" id="aclassapfel_1_1SubGrid_html"><div class="ttname"><a href="classapfel_1_1SubGrid.html">apfel::SubGrid</a></div><div class="ttdoc">Class for the x-space interpolation SubGrids.</div><div class="ttdef"><b>Definition</b> subgrid.h:23</div></div>
 <div class="ttc" id="aclassapfel_1_1Timer_html"><div class="ttname"><a href="classapfel_1_1Timer.html">apfel::Timer</a></div><div class="ttdoc">The Timer class computes the time elapsed between start and stop.</div><div class="ttdef"><b>Definition</b> timer.h:20</div></div>
