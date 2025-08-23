@@ -4381,12 +4381,144 @@ $a_{\rm NNLL}$ that, using Eq.~(\ref{eq:masterf}), reads:
 
 We can also go further and compute the N$^3$LL running:
 \begin{equation}
-a_{{\rm N}^3{\rm LL}}=a_{\rm LL}\left\{1+a_{\rm LL}\left[\overline{b}_1\ln\left(\frac{a_{{\rm
-          N}^{2}{\rm LL}}}{a_0}\right)+\overline{b}_{2}\left(a_{{\rm
-          NLL}}-a_0\right)+\frac{\overline{b}_{3}}{2}\left(a_{\rm
-          LL}^2-a_0^2\right)\right]\right\}^{-1}+\mathcal{O}(a^5)\,,
+a_{{\rm N}^3{\rm LL}}=a_{\rm LL}\left\{1+a_{\rm LL}\left[\overline{b}_1\ln\left(\frac{a_{{\rm N}^{2}{\rm LL}}}{a_0}\right)+\overline{b}_{2}\left(a_{{\rm NLL}}-a_0\right)+\frac{\overline{b}_{3}}{2}\left(a_{\rm LL}^2-a_0^2\right)\right]\right\}^{-1}+\mathcal{O}(a^5)\,,
 \end{equation}
 
+\subsection{On the resummation of the Landau pole}
+
+As discussed in Ref.~\cite{Bertone:2024snr}, the evolution of the
+strong coupling $a_s=\alpha_s/(4\pi)$ can be computed analytically in
+under the assumption that the coupling at the reference scale is
+small. Specifically, it has been proven that the evolution can be
+written as:
+\begin{equation}
+  a_s(\mu)=\sum_{l=0}^\infty\left[a_s(\mu_0)\right]^{l+1}g_{l+1}^{(\beta)}(\lambda)\,,
+\end{equation}
+where the functions $g^{(\beta)}$ depend on the $\beta$-function
+coefficients through the ratios $b_i=\beta_i/\beta_0$ and on the
+paramater $\lambda=a_s(\mu_0)\beta_0\ln(\mu/\mu_0)$.\footnote{Note
+  that, for the sake of simplicity, we set to zero the
+  resummation-scale parameter $\kappa$.} Knowing that
+$g_1^{(\beta)}(\lambda)=(1-\lambda)^{-1}$, we can rewrite the equation
+above as:
+\begin{equation}
+  a_s(\mu)=\frac{a_s(\mu_0)}{1-\lambda}\sum_{l=0}^\infty\left[a_s(\mu_0)\right]^{l}h_{l}(\lambda)\,,\quad\mbox{with}\quad
+  h_{l}(\lambda)=\frac{g_{l+1}^{(\beta)}(\lambda)}{g_{1}^{(\beta)}(\lambda)}=(1-\lambda)g_{l+1}^{(\beta)}(\lambda)\,.
+  \label{eq:asevolh}
+\end{equation}
+By inspection, one finds that:
+\begin{equation}
+h_l(\lambda)=\sum_{k=0}^lc_k^{(l)}(\lambda)\frac{\ln^{l-k}(1-\lambda)}{(1-\lambda)^l}\,,
+\end{equation}
+where the coefficients $c_k^{(l)}$ may depend polynomially on
+$\lambda$ with the conditions $c_0^{(0)}=1$ and
+$c_0^{(0)}(\lambda=0)=0$. Plugging this equation into
+Eq.~(\ref{eq:asevolh}) and rearranging the series, one finds:
+\begin{equation}
+a_s(\mu)=\frac{a_s(\mu_0)}{1-\lambda}\sum_{k=0}^\infty\underbrace{\sum_{l=k}^{\infty}\left[a_s(\mu_0)\right]^lc_k^{(l)}(\lambda)\frac{\ln^{l-k}(1-\lambda)}{(1-\lambda)^l}}_{L_k(\lambda)}\,.
+\end{equation}
+In the vicinity of $\lambda=1$, the terms $L_k$ are expected to give a
+less significant contribution as $k$ increases. The reson is that, in
+this limit, each $L_k$ is suppressed w.r.t. the previous by a factor
+$1/\ln(1-\lambda)$. Therefore, truncating the series at some finite
+value of $k$ should provide a good approximation to the full result as
+long as $\lambda$ is close to one. The difficulty now is summing the
+series in $l$ for each $k$. Let us start with $k=0$. In this case,
+from an explicit computation of the $h_l$ functions up to some high
+order one can infer that $c_0^{(l)}(\lambda)=(-b_1)^l$, so that:
+\begin{equation}
+a_s^{\rm LP}(\mu)=\frac{a_s(\mu_0)}{1-\lambda}\sum_{l=0}^{\infty}\left[-a_s(\mu_0)b_1\frac{\ln(1-\lambda)}{1-\lambda}\right]^l=\frac{a_s(\mu_0)}{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}\,,
+\end{equation}
+where the subscript LP stands for ``leading pole''. This is already an
+intersting result because the Landau pole at $\lambda=1$ is no longer
+there and, in fact, the coupling goes to zero at this point. The
+presence of the logarithm also generates a branch cut. Let us now move
+to $k=1$. In this case we have to resum:
+\begin{equation}
+L_1(\lambda)=\sum_{l=1}^{\infty}\left[a_s(\mu_0)\right]^lc_1^{(l)}(\lambda)\frac{\ln^{l-1}(1-\lambda)}{(1-\lambda)^l}=\frac{a_s(\mu_0)}{1-\lambda}\sum_{l=0}^{\infty}c_1^{(l+1)}(\lambda)\left[a_s(\mu_0)\frac{\ln(1-\lambda)}{1-\lambda}\right]^{l}\,.
+\end{equation}
+Again by computing a large enough number of $h$ functions, one finds
+that:
+\begin{equation}
+  c_1^{(l+1)}(\lambda)=b_1^2(-b_1)^lS_{l-1}\,,\quad\mbox{with}\quad S_l=\sum_{i=0}^l\frac{i+1}{l+1-i}\,.
+\end{equation}
+Using the result:
+\begin{equation}
+  \sum_{l=0}^\infty S_{l-1}x^l = -\frac{\ln(1-x)}{(1-x)^2}\,,
+\end{equation}
+one has that:
+\begin{equation}
+  L_1(\lambda)=\frac{a_s(\mu_0)b_1^2}{1-\lambda}\sum_{l=0}^{\infty}S_{l-1}\left[-a_s(\mu_0)b_1\frac{\ln(1-\lambda)}{1-\lambda}\right]^{l}=-a_s(\mu_0)(1-\lambda)\frac{b_1^2\ln\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)}{(1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda))^2}\,,
+\end{equation}
+which produces:
+\begin{equation}
+a_s^{\rm NLP}(\mu)=\frac{a_s(\mu_0)}{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}\left[1-a_s(\mu_0)\frac{b_1^2\ln\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)}{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}\right]\,,
+\end{equation}
+where the subscript NLP stands for ``next-to-leading pole''. Now let
+us attempt to also resum the NNLP tower:
+\begin{equation}
+L_2(\lambda)=\sum_{l=2}^{\infty}\left[a_s(\mu_0)\right]^lc_2^{(l)}(\lambda)\frac{\ln^{l-2}(1-\lambda)}{(1-\lambda)^l}=\frac{\left[a_s(\mu_0)\right]^2}{(1-\lambda)^2}\sum_{l=0}^{\infty}c_2^{(l+2)}(\lambda)\left[a_s(\mu_0)\frac{\ln(1-\lambda)}{1-\lambda}\right]^{l}\,.
+\end{equation}
+In this case one finds:
+\begin{equation}
+  c_2^{(l+2)}(\lambda)=(-b_1)^l\left[\frac{a_l}{l!}b_1^2+\frac{l(l+1)}{2}b_2+(l+1)\lambda(b_2-b_1^2)\right]\,,
+\end{equation}
+where the coefficients $a_l$ can be computed recursively through:
+\begin{equation}
+a_l = (l+2) a_{l-1}+(l+1)(l-1)! S_{l-2}\,,\quad l\geq 2\,,
+\end{equation}
+with $a_0=a_1=0$. This recursive expression can be written in closed
+form as:
+\begin{equation}
+a_l = (l+2)!\sum_{i=0}^{l-2}\frac{S_{i}}{(i+2)(i+4)}\,,\quad l\geq 2\,.
+\end{equation}
+With this, we find:
+\begin{equation}
+L_2(\lambda)=\frac{\left[a_s(\mu_0)\right]^2}{(1-\lambda)^2}\sum_{l=0}^{\infty}\left[\frac{a_l-(l+1)!}{l!}b_1^2+\frac{(l+1)(l+2)}{2}b_2-(l+1)(1-\lambda)(b_2-b_1^2)\right]\left[-a_s(\mu_0)b_1\frac{\ln(1-\lambda)}{1-\lambda}\right]^{l}\,,
+\end{equation}
+producing:
+\begin{equation}
+  \begin{array}{rcl}
+\displaystyle
+    L_2(\lambda)&=&\displaystyle\frac{\left[a_s(\mu_0)\right]^2b_1^2}{(1-\lambda)^2}\sum_{l=0}^{\infty}\frac{a_l-(l+1)!}{l!}\left[-a_s(\mu_0)b_1\frac{\ln(1-\lambda)}{1-\lambda}\right]^{l}\\
+    \\
+    &+&\displaystyle\frac{\left[a_s(\mu_0)\right]^2 b_2(1-\lambda)}{\left(1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)\right)^3}-\frac{\left[a_s(\mu_0)\right]^2(b_2-b_1^2)(1-\lambda)}{\left(1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)\right)^2}\,.
+  \end{array}
+  \label{eq:NNLPterm}
+\end{equation}
+We now need to compute the sum in $l$ in the first line. To do so, we
+use the following expansion:\footnote{Obtained from here:
+  \url{https://oeis.org/search?q=1320\%2c-15504\%2c172200\%20id\%3aA377396&sort=references}.}
+\begin{equation}
+A(x)=(1+\ln(1+x))^3-1-3x-\frac{3}{2}x^2=6\sum_{l=0}^{\infty}\frac{a_l-(l+1)!}{(l+3)!}(-1)^lx^{l+3}\,.
+\end{equation}
+Therefore, taking the third derivative, one obtains:
+\begin{equation}
+\frac{1}{6}\frac{d^3A(x)}{dx^3}=\frac{\ln^2(1+x)-\ln(1+x)-1}{(1+x)^3}=\sum_{l=0}^{\infty}\frac{a_l-(l+1)!}{l!}(-x)^l\,,
+\end{equation}
+whose r.h.s. coincides with the sum in $l$ in the first line of
+Eq.~(\ref{eq:NNLPterm}). This finally allows us to write $L_2$ in
+closed form as follows:
+\begin{equation}
+  \footnotesize
+  \begin{array}{rcl}
+\displaystyle
+    L_2(\lambda)&=&\displaystyle\frac{\left[a_s(\mu_0)\right]^2(1-\lambda)}{(1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda))^3}\\
+    \\
+    &\times&\displaystyle \left[b_1^2\ln^2\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)-b_1^2\ln\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)+(b_2-b_1^2)\left(\lambda-a_s(\mu_0)b_1\ln(1-\lambda)\right)\right]\,,
+  \end{array}
+  \label{eq:NNLPtermClosed}
+\end{equation}
+which in turn produces the NNLP approximation of the strong coupling:
+\begin{equation}
+  \begin{array}{rcl}
+a_s^{\rm NNLP}(\mu)&=&\displaystyle\frac{a_s(\mu_0)}{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}\Bigg\{1-\frac{a_s(\mu_0)}{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}b_1^2\ln\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)\\
+    \\
+              &+&\displaystyle\frac{\left[a_s(\mu_0)\right]^2}{(1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda))^2}\Bigg[b_1^2\ln^2\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)\\
+    \\
+    &-&\displaystyle b_1^2\ln\left(\frac{1-\lambda+a_s(\mu_0)b_1\ln(1-\lambda)}{1-\lambda}\right)+(b_2-b_1^2)\left(\lambda-a_s(\mu_0)b_1\ln(1-\lambda)\right)\Bigg]\Bigg\}\,.
+  \end{array}
+\end{equation}
 
 \section{Analytic calculation of the Collins-Soper kernel}
 
