@@ -48,6 +48,27 @@ namespace apfel
                    double              const& Lambda = 0.25);
 
     /**
+     * @brief The TabulateObject constructor for an "evolving"
+     * object (MatchedEvolution) on a custom-spaced grid.
+     * @param Object: the MatchedEvolution type object to be tabulated in Q
+     * @param nQ: the number of on nodes of the grid in Q
+     * @param QMin: the lower bound of the grid in Q
+     * @param QMax: the upper bound of the grid in Q
+     * @param InterDegree: the interpolation degree on the grid in Q
+     * @param Thresholds: vector of quark thresholds
+     * @param TabFunc: the function to be used for the tabulation in Q
+     * @param InvTabFunc: the inverse function of TabFunc (it has to be provided analytically)
+     */
+    TabulateObject(MatchedEvolution<T>                       & Object,
+                   int                                  const& nQ,
+                   double                               const& QMin,
+                   double                               const& QMax,
+                   int                                  const& InterDegree,
+                   std::vector<double>                  const& Thresholds,
+                   std::function<double(double const&)> const& TabFunc,
+                   std::function<double(double const&)> const& InvTabFunc);
+
+    /**
      * @brief The TabulateObject constructor for a Q dependent
      * object.
      * @param Object: the T-valued function to be tabulated in Q

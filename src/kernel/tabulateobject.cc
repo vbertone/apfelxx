@@ -78,6 +78,65 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<class T>
+  TabulateObject<T>::TabulateObject(MatchedEvolution<T>                       & Object,
+                                    int                                  const& nQ,
+                                    double                               const& QMin,
+                                    double                               const& QMax,
+                                    int                                  const& InterDegree,
+                                    std::vector<double>                  const& Thresholds,
+                                    std::function<double(double const&)> const& TabFunc,
+                                    std::function<double(double const&)> const& InvTabFunc):
+  // *INDENT-OFF*
+    QGrid<T> {nQ, QMin, QMax, InterDegree, Thresholds, TabFunc, InvTabFunc}
+  // *INDENT-ON*
+  {
+    report("Tabulating object... ");
+    Timer t;
+
+    // Save initial conditions
+    const int    nsteps = Object.GetNumberOfSteps();
+    const T      ObjRef = Object.GetObjectRef();
+    const double MuRef  = Object.GetMuRef();
+
+    // Set number of steps of the RK algorith to 1
+    Object.SetNumberOfSteps(1);
+
+    // Find the point on the QGrid right below MuRef
+    const int tQ = std::lower_bound(this->_Qg.begin(), this->_Qg.end(), MuRef) - this->_Qg.begin() - 1;
+
+    // Loop on "_Qg" below "MuRef"
+    for (int iQ = tQ; iQ >= 0; iQ--)
+      {
+        const T o = Object.Evaluate(this->_Qg[iQ]);
+        this->_GridValues.push_back(o);
+        Object.SetObjectRef(o);
+        Object.SetMuRef(this->_Qg[iQ]);
+      }
+
+    // Reverse order of the elements
+    std::reverse(this->_GridValues.begin(), this->_GridValues.end());
+
+    // Loop on "_Qg" above "MuRef"
+    Object.SetObjectRef(ObjRef);
+    Object.SetMuRef(MuRef);
+    for (int iQ = tQ + 1; iQ < (int) this->_Qg.size(); iQ++)
+      {
+        const T o = Object.Evaluate(this->_Qg[iQ]);
+        this->_GridValues.push_back(o);
+        Object.SetObjectRef(o);
+        Object.SetMuRef(this->_Qg[iQ]);
+      }
+
+    // Reset initial conditions
+    Object.SetNumberOfSteps(nsteps);
+    Object.SetObjectRef(ObjRef);
+    Object.SetMuRef(MuRef);
+
+    t.stop();
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
   TabulateObject<T>::TabulateObject(std::function<T(double const&)> const& Object,
                                     int                             const& nQ,
                                     double                          const& QMin,
