@@ -171,7 +171,7 @@ namespace apfel
   {
   public:
     FTC2q2qM(int const& nf);
-    std::string GetName() const override { return "FTC2q2qM"; }
+    std::string GetName() const override { return "FTC2q2qM_nf" + std::to_string(_nf); }
     double LocalLocal(double const& x, double const& z) const override;
     double LocalSingular(double const& x, double const& z) const override;
     double LocalRegular(double const& x, double const& z) const override;
@@ -386,7 +386,7 @@ namespace apfel
   {
   public:
     FLC2q2qM(int const& nf);
-    std::string GetName() const override { return "FLC2q2qM"; }
+    std::string GetName() const override { return "FLC2q2qM_nf" + std::to_string(_nf); }
     double RegularRegular(double const& x, double const& z) const override;
   private:
     int const _nf;
@@ -580,7 +580,7 @@ namespace apfel
   {
   public:
     F3C2q2qM(int const& nf);
-    std::string GetName() const override { return "F3C2q2qM"; }
+    std::string GetName() const override { return "F3C2q2qM_nf" + std::to_string(_nf); }
     double LocalLocal(double const& x, double const& z) const override;
     double LocalSingular(double const& x, double const& z) const override;
     double LocalRegular(double const& x, double const& z) const override;
