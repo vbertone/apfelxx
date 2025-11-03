@@ -86,6 +86,7 @@ endif (PkgConfig_FOUND)
 find_package(pybind11 QUIET)
 
 if (pybind11_FOUND)
+   message ("-- pybind11 found. The python wrapper will be built.")
    pybind11_add_module(apfelpy pywrap/pywrap.cc)
    target_link_libraries(apfelpy PRIVATE apfelxx)
    execute_process(COMMAND "${PYTHON_EXECUTABLE}" -c "import sysconfig; print('${CMAKE_INSTALL_PREFIX}' + sysconfig.get_path('purelib').replace(sysconfig.get_path('data'), ''), end = '')" OUTPUT_VARIABLE PYTHON_INSTALLATION_PATH)
@@ -109,6 +110,7 @@ configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/version.h.in" "${PROJECT_SOURCE_
 set(prefix ${CMAKE_INSTALL_PREFIX})
 set(includedir "${prefix}/include")
 set(libdir "${prefix}/lib")
+set(exec_prefix "${prefix}")
 set(cflags "-I${prefix}/include")
 set(ldflags "-L${prefix}/lib -lapfelxx")
 if (LHAPDF_CONFIG)
@@ -119,10 +121,15 @@ if (YAML_CPP_FOUND)
   set(cflags "${cflags} ${YAML_CPP_CFLAGS}")
   set(ldflags "${ldflags} -L${YAML_CPP_LIBRARY_DIRS} -l${YAML_CPP_LIBRARIES}")
 endif (YAML_CPP_FOUND)
+
+# Configuration script
 configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in" "${PROJECT_BINARY_DIR}/bin/apfelxx-config")
 
 # Configure config.h header file
 configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_DIR}/inc/apfel/config.h")
+
+# pkg-config
+configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx.pc.in" "${PROJECT_BINARY_DIR}/bin/apfelxx.pc")
 
 # ============================
 # INSTALLATION
@@ -132,3 +139,4 @@ configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_D
 install(TARGETS apfelxx RUNTIME DESTINATION bin LIBRARY DESTINATION lib)
 install(DIRECTORY inc/apfel DESTINATION include)
 install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx-config DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx.pc DESTINATION lib/pkgconfig)

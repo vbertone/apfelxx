@@ -666,386 +666,631 @@ is schem reads as follows:
 where $F^{\rm M}$, $F^{\rm ZM}$, and $F^{\rm M0}$ are the massless
 structure functions, massive structure function, and the massive-zero
 limit of the massive structure function, respectively. The function
-$f$ is the so-called damping function. Let us now consider the effect
-on the structure functions associated with the $(n_f+1)$-th heavy
-quark having mass $m_h$. The factorisation of these structure
+$f$ is the so-called damping function. Let us now consider a situation
+in which there are $n_l$ light quark flavours, \textit{i.e.} with
+$m_l=0$, and the remaining flavours being heavy, in the sense with a
+mass $m_h\gg\Lambda_{\rm QCD}$. The factorisation of these structure
 functions thus reads as follows:
 \begin{equation}
 \begin{array}{l}
-  \displaystyle F^{\rm ZM}(x,Q)=x\int_x^1\frac{dy}{y}C_j^{\rm ZM}\left(y,a_s^{(n_f+1)}(\mu_{\rm R}),\frac{\mu_{\rm F}}{Q},\frac{\mu_{\rm R}}{Q}\right)f_j^{(n_f+1)}\left(\frac{x}{y},\mu_{\rm F}\right)\,,\\
+  \displaystyle F^{\rm ZM}(x,Q)=x\int_x^1\frac{dy}{y}C_j^{\rm ZM}\left(y,a_s^{(n_f)}(\mu_{\rm R}),\frac{\mu_{\rm F}}{Q},\frac{\mu_{\rm R}}{Q}\right)f_j^{(n_f)}\left(\frac{x}{y},\mu_{\rm F}\right)\,,\\
   \\
-  \displaystyle F^{\rm M}(x,Q)=x\int_{\chi}^1\frac{dy}{y}C_i^{\rm M}\left(y,a_s^{(n_f)}(\mu_{\rm R}),\frac{m_h}{Q},\frac{\mu_{\rm F}}{Q},\frac{\mu_{\rm R}}{Q}\right)f_i^{(n_f)}\left(\frac{\chi}{y},\mu_{\rm F}\right)\,,\\
+  \displaystyle F^{\rm M}(x,Q)=x\int_{\chi}^1\frac{dy}{y}C_j^{\rm M}\left(y,a_s^{(n_l)}(\mu_{\rm R}),\frac{\{m_h\}}{Q},\frac{\mu_{\rm F}}{Q},\frac{\mu_{\rm R}}{Q}\right)f_j^{(n_l)}\left(\frac{\chi}{y},\mu_{\rm F}\right)\,,\\
   \\
-  \displaystyle F^{\rm M0}(x,Q)=x\int_x^1\frac{dy}{y}C_i^{\rm M0}\left(y,a_s^{(n_f)}(\mu_{\rm R}),\frac{m_h}{Q},\frac{\mu_{\rm F}}{Q},\frac{\mu_{\rm R}}{Q}\right)f_i^{(n_f)}\left(\frac{x}{y},\mu_{\rm F}\right)\,,
+  \displaystyle F^{\rm M0}(x,Q)=x\int_x^1\frac{dy}{y}C_j^{\rm M0}\left(y,a_s^{(n_l)}(\mu_{\rm R}),\frac{\{m_h\}}{Q},\frac{\mu_{\rm F}}{Q},\frac{\mu_{\rm R}}{Q}\right)f_j^{(n_l)}\left(\frac{x}{y},\mu_{\rm F}\right)\,,
 \end{array}
 \label{eq:SFAllSchemes}
 \end{equation}
-where $\chi=x/\eta$ is the appropriate slow-rescaling variable
-accounting for the heavy-quark mass. The superscript in the PDFs and
+where $n_f\equiv n_f(Q)\geq n_l$ is the number of flavours active at
+the scale $Q$.\footnote{Strictly speaking, $n_f$ depends on the scales
+  $\mu_{\rm R}$ or $\mu_{\rm F}$ according to whether it has to be
+  used in the strong coupling or in the PDFs. These scales are assumed
+  to be of the order of $Q$, therefore in the following we will assume
+  $n_f(Q)=n_f(\mu_{\rm R}) =n_f(\mu_{\rm F})$.} The superscript $n_f$
+or $n_l$ which labels the PDFs $f_j$ and the strong coupling
 $a_s=\alpha_s/(4\pi)$ indicates that they are evolved using a scheme
-with $n_f$ or $n_f+1$ active flavours.\footnote{The case in which
-  there is more than one unit of difference between schemes can be
-  addresses recursively including one heavy quark at the time.} Also,
-a sum over the indices $i$ and $j$ is understood. However, we restrict
-to the case in which the massive structure functions (M and M0)
-receive no intrinsic heavy-flavour contributions, such that only
-dynamical partons are present in the initial states. Therefore, while
-$j$ is potentially allowed to run over \textit{all} possible partons,
-$i$ is only allowed to run over the $n_f$ light partons. However,
-below we will be expressing $f_i^{(n_f)}$ in terms of $f_j^{(n_f+1)}$
-at some arbitrary scale. Since a general set $f_i^{(n_f+1)}$ would
-generally give rise to heavy-quark contributions to $f_i^{(n_f)}$, the
-only way to enforce that $i$ only runs ove light favours is to set
-$C_i^{\rm M/M0}=0$ whenever $i$ corresponds to a heavy parton
-(\textit{i.e.}  $C_h^{\rm M/M0}=0$, see below).\footnote{This
-  assumption is not consistent but it simplifies the picture and is
-  often employed, perhaps unknowingly, in actual implementations.} The
+with $n_f$ or $n_l$ active flavours. The variable $\chi=x/\eta$
+accounts for the heavy-quark mass effects at the level of the phase
+space. It is importat to note that in general the factor $\eta$
+depends on the diagram under consideration, more specifically on the
+number and configuration of heavy quark masses which
+participate. Therefore, $F^{\rm M}$ may receive contributions fron
+integrals computed with different values of $\eta$. This is not the
+case for $F^{\rm M0}$ in which kinematical power effects are neglected
+so that $\eta\rightarrow 1$. We also point out that massive
+coefficient function may simultaneously depend of multiple heavy-quark
+masses, hence the notation $\{m_h\}$. Importantly, a sum over the
+index $j$ is understood, with $j$ running over \textit{all} possible
+partons in all structure functions. This amounts to considering
+intrinsic heavy-flavour contributions, not only in the ZM structure
+functions as is often the case, but also in the massive structure
+functions. Despite this will complicate the picture, it turns out to
+be the only consistent way to construct the FONLL scheme. The
 coefficient functions $C$ are perturbatively calculable and read:
 \begin{equation}
-C_i^{s}(y,a_s,\dots)=\sum_{l=0}a_s^lC_i^{s,(l)}(y,\dots)\,,\quad s={\rm
+C_j^{s}(y,a_s,\dots)=\sum_{k=0}a_s^kC_j^{s,(k)}(y,\dots)\,,\quad s={\rm
 ZM, M, M0}\,.
 \end{equation}
 In order to avoid complications related to the presence of many
 different scales, we set $\mu_{\rm F}=\mu_{\rm R}=Q$. We can always
 reinstate all scales by appropriate expansions of the running of PDFs
-and $a_s$. As anticipated above, we want to express PDFs and $a_s$ in
-the $n_f$-scheme which appear in $F^{\rm M}$ and $F^{\rm M0}$ in terms
-of PDFs and $a_s$ in the $(n_f+1)$-scheme. To do so, we take $Q$ as
-the transition scale between the two schemes and use the appropriate
+and $a_s$. We now want to express PDFs and $a_s$ with $n_l$ active
+flavours which appear in $F^{\rm M}$ and $F^{\rm M0}$ in terms of PDFs
+and $a_s$ with $n_f\geq n_l$ active flavours, taking $Q$ as a
+transition scale between the two schemes. To do so, we use the
 matching conditions, which are implemented in {\tt APFEL++} as
 follows:
 \begin{equation}
   \begin{array}{l}
-    \displaystyle a_s^{(n_f+1)}(Q)=a_s^{(n_f)}(Q)\left[1+\sum_{k=1}\left[a_s^{(n_f)}(Q)\right]^k M^{(k)}\left(\frac{m_h}{Q}\right)\right]\,,\\
+    \displaystyle a_s^{(n_l+1)}(Q)=a_s^{(n_l)}(Q)\left[1+\sum_{k=1}\left[a_s^{(n_l)}(Q)\right]^k M^{(k)}\left(\frac{m_{n_l+1}}{Q}\right)\right]\,,\\
 \\
-    \displaystyle f_j^{(n_f+1)}\left(z,Q\right)=\int_z^1\frac{dw}{w}\left[\delta_{ji}\delta(1-w)+\sum_{k=1}\left[a_s^{(n_f+1)}(Q)\right]^k A_{ji}^{(k)}\left(w,\frac{m_h}{Q}\right)\right]f_i^{(n_f)}\left(\frac{z}{w},Q\right)\,.\\
+    \displaystyle f_j^{(n_l+1)}\left(z,Q\right)=\int_z^1\frac{dw}{w}\left[\delta_{ji}\delta(1-w)+\sum_{k=1}\left[a_s^{(n_l+1)}(Q)\right]^k A_{ji}^{(k)}\left(w,\frac{m_{n_l+1}}{Q}\right)\right]f_i^{(n_l)}\left(\frac{z}{w},Q\right)\,.\\
 \end{array}
 \label{eq:matchingconditions}
 \end{equation}
-Importantly, here we are allowing the index $i$ to also run over heavy
-flavours. This is necessary to invert these equalities, and express
-$a_s^{(n_f)}$ in terms of $a_s^{(n_f+1)}$ and $f_i^{(n_f)}$ in terms
-of $f_i^{(n_f+1)}$. This can be done perturbatively, which, up to NNLO
-accuracy, produces:
+which allow us to move up by one unit in the number of active
+flavours. Note that the coefficients of the expansions depend on the
+mass of the first heavy flavour $m_{n_l+1}$. We now need to invert
+these equalities and express $a_s^{(n_l)}$ and $f_i^{(n_l)}$ in terms
+of $a_s^{(n_l+1)}$ and $f_i^{(n_l+1)}$, \textit{i.e.} to move down by
+one unit. This can be done perturbatively, which, up to an order
+necessary to achieve N$^3$LO accuracy at the level of structure
+functions, produces:
 \begin{equation}
-  \begin{array}{l}
-    \displaystyle a_s^{(n_f)}=a_s^{(n_f+1)}\left[1-M^{(1)}a_s^{(n_f+1)} -\left(M^{(2)}-2(M^{(1)})^2\right) \left[a_s^{(n_f+1)}\right]^2+\mathcal{O}(\alpha_s^3)\right]\,,\\
+  \begin{array}{rcl}
+    \displaystyle a_s^{(n_l)}&=&\displaystyle a_s^{(n_l+1)}\left[1-M^{(1)}a_s^{(n_l+1)} -\left(M^{(2)}-2(M^{(1)})^2\right)\left[a_s^{(n_l+1)}\right]^2+\mathcal{O}(\alpha_s^3)\right]\,,\\
 \\
-    \displaystyle f_i^{(n_f)}=\left[\delta_{ij}\delta(1-w)-a_s^{(n_f+1)}A_{ij}^{(1)}-\left[a_s^{(n_f+1)}\right]^2 \left(A_{ij}^{(2)}-A_{ik}^{(1)}\otimes A_{kj}^{(1)}\right)+\mathcal{O}(\alpha_s^3)\right]\otimes f_j^{(n_f+1)}\,,\\
+    \displaystyle f_i^{(n_l)}&=&\displaystyle\bigg[\delta_{ij}\delta(1-w)-a_s^{(n_l+1)}A_{ij}^{(1)}-\left[a_s^{(n_l+1)}\right]^2\left(A_{ij}^{(2)}-A_{ia}^{(1)}\otimes A_{aj}^{(1)}\right)\\
+\\
+&-&\displaystyle\left[a_s^{(n_l+1)}\right]^3\left(A_{ij}^{(3)}-A_{ia}^{(2)}\otimes A_{aj}^{(1)}-A_{ia}^{(1)}\otimes A_{aj}^{(2)}+A_{ia}^{(1)}\otimes A_{ab}^{(1)}\otimes A_{bj}^{(1)}\right)+\mathcal{O}(\alpha_s^4)\bigg]\otimes f_j^{(n_l+1)}\,,\\
 \end{array}
+\label{eq:matchingconditionsinverted}
 \end{equation}
 where we omitted all dependences and used the symbol $\otimes$ to
-indicate Mellin convolutions. Note that the second equation generally
-produces heavy-quark PDFs in the $n_f$-scheme. However, they will not
-contribute under the assumption $C_h^{\rm M/M0}=0$. These equalities
-finally allow us to write:
+indicate Mellin convolutions. However, we need to relate $a_s^{(n_l)}$
+and $f_i^{(n_l)}$ to $a_s^{(n_f)}$ and $f_i^{(n_f)}$ which requires
+moving down by $n_f-n_l=n_h$ units in active flavours. To achieve this
+transition, we apply Eq.~(\ref{eq:matchingconditionsinverted})
+recursively $n_h$ times. To simplify the notation, let us define:
 \begin{equation}
 \begin{array}{l}
-  \displaystyle F^{\rm M}(x,Q)=x\int_{\chi}^1\frac{dy}{y}B_j^{\rm M}\left(y,a_s^{(n_f+1)}(Q),\frac{m_h}{Q}\right)f_j^{(n_f+1)}\left(\frac{\chi}{y},Q\right)\,,\\
-  \\
-  \displaystyle F^{\rm M0}(x,Q)=x\int_x^1\frac{dy}{y}B_j^{\rm M0}\left(y,a_s^{(n_f+1)}(Q),\frac{m_h}{Q}\right)f_j^{(n_f+1)}\left(\frac{x}{y},Q\right)\,.
+  \overline{M}^{(1)}=-M^{(1)}\,,\\
+\\
+  \overline{M}^{(2)}=-M^{(2)}+2(M^{(1)})^2\,,
 \end{array}
-\label{eq:massiveSFafterSchemeChange}
 \end{equation}
-Note that, as opposed to Eq.~(\ref{eq:SFAllSchemes}) where the massive
-structure functions only receive contributions from light flavours, in
-Eq.~(\ref{eq:massiveSFafterSchemeChange}) $j$ runs also over heavy
-flavours. The perturbative coefficients of the functions $B$ are given
-by:
-\begin{equation}
-  \begin{array}{l}
-    B_j^{(0)} = C_j^{(0)}\,,\\
-\\
-    B_j^{(1)} = C_j^{(1)}-C_i^{(0)}\otimes A_{ij}^{(1)}\,,\\
-\\
-    B_j^{(2)} = C_j^{(2)}-C_i^{(1)}\otimes \left(A_{ij}^{(1)}+M^{(1)}\delta_{ij}\delta(1-y)\right)-C_i^{(0)}\otimes\left(A_{ij}^{(2)}-A_{ik}^{(1)}\otimes A_{kj}^{(1)}\right)\,,\\
-\\
-\dots
-  \end{array}
-\end{equation}
-which hold for both M and M0 schemes. Let us then write explicitly the
-coefficient functions $B_j^{(n)}$ for the gluon ($j=g$), for light
-flavours ($j=l\leq n_f$), and for heavy flavours ($j=h>n_f$). To do
-so, we use the fact that $C_j^{(0)}=a_j\delta_{jl}\delta(1-y)$, with
-$a_j$ some appropriate charge, which results in:
-\begin{equation}
-  \begin{array}{l}
-    B_j^{(0)} = a_j\delta_{jl}\delta(1-y)\,,\\
-\\
-    B_j^{(1)} = C_j^{(1)}-a_jA_{lj}^{(1)}\,,\\
-\\
-    B_j^{(2)} = C_j^{(2)}-C_i^{(1)}\otimes \left(A_{ij}^{(1)}+M^{(1)}\delta_{ij}\delta(1-y)\right)-a_j\left(A_{lj}^{(2)}-A_{lk}^{(1)}\otimes A_{kj}^{(1)}\right)\,,\\
-\\
-\dots
-  \end{array}
-\end{equation}
-We also know that $A_{lk}^{(1)}=A_{kl}^{(1)}= A_{lg}^{(2)}= A_{lh}^{(2)} = C_h^{(n)} =0$ and
-that $A_{gg}^{(1)}=-M^{(1)}\delta(1-y)$, which finally gives:
-\begin{equation}
-\small
-  \begin{array}{lll}
-    \displaystyle
-    \begin{array}{l}
-    B_l^{(0)} =a_l\delta(1-y)\,,\\
-    \\
-    B_l^{(1)} = C_l^{(1)}\,,\\
-    \\
-    B_l^{(2)} = C_l^{(2)}-M^{(1)}C_l^{(1)}-a_lA_{ll}^{(2)}\,,\\
-    \\
-    \dots
-    \end{array} &
-     \displaystyle\qquad   \begin{array}{l}
-    B_g^{(0)} = 0\,,\\
-\\
-    B_g^{(1)} = C_g^{(1)}\,,\\
-\\
-    B_g^{(2)} = C_g^{(2)}\,,\\
-\\
-\dots
-                     \end{array}&\displaystyle\qquad
-  \begin{array}{l}
-    B_h^{(0)} = 0\,,\\
-\\
-    B_h^{(1)} = 0\,,\\
-\\
-    B_h^{(2)} = -C_g^{(1)}\otimes A_{gh}^{(1)}\,,\\
-\\
-\dots
-  \end{array}
-  \end{array}
-  \label{eq:explicitBCFs}
-\end{equation}
-With a totally arbitrary move, we set $B_h^{(n)}=0$, which finally
-produces that:
+and:
 \begin{equation}
 \begin{array}{l}
-  \displaystyle F^{\rm M}(x,Q)=x\int_{\chi}^1\frac{dy}{y}B_i^{\rm M}\left(y,a_s^{(n_f+1)}(Q),\frac{m_h}{Q}\right)f_i^{(n_f+1)}\left(\frac{\chi}{y},Q\right)\,,\\
-  \\
-  \displaystyle F^{\rm M0}(x,Q)=x\int_x^1\frac{dy}{y}B_i^{\rm M0}\left(y,a_s^{(n_f+1)}(Q),\frac{m_h}{Q}\right)f_i^{(n_f+1)}\left(\frac{x}{y},Q\right)\,.
+  \overline{A}_{ij}^{(1)}=-A_{ij}^{(1)}\,,\\
+\\
+  \overline{A}_{ij}^{(2)}=-A_{ij}^{(2)}+A_{ia}^{(1)}\otimes
+  A_{aj}^{(1)}\,,\\
+\\
+  \overline{A}_{ij}^{(2)}=-A_{ij}^{(3)}+A_{ia}^{(2)}\otimes A_{aj}^{(1)}+A_{ia}^{(1)}\otimes A_{aj}^{(2)}-A_{ia}^{(1)}\otimes A_{ab}^{(1)}\otimes A_{bj}^{(1)}\,,
 \end{array}
-\label{eq:massiveSFafterSchemeChangeNoHF}
 \end{equation}
-so that the massive structure functions do not receive any
-contributions from heavy-quark PDFs also after scheme change. Again,
-this matches usual implementations of the FONLL scheme.
+so that:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle a_s^{(n_l)}(Q)=a_s^{(n_l+1)}(Q)\left[1+\sum_{k=1}^2\left[a_s^{(n_l+1)}(Q)\right]^k \overline{M}^{(k)}\left(\frac{m_{n_l+1}}{Q}\right)\right]\,,\\
+\\
+    \displaystyle f_j^{(n_l)}\left(z,Q\right)=\int_z^1\frac{dw}{w}\left[\delta_{ji}\delta(1-w)+\sum_{k=1}^3\left[a_s^{(n_l+1)}(Q)\right]^k \overline{A}_{ji}^{(k)}\left(w,\frac{m_{n_l+1}}{Q}\right)\right]f_i^{(n_l+1)}\left(\frac{z}{w},Q\right)\,.\\
+\end{array}
+\end{equation}
+Applying these rules recursively, one obtains:
+\begin{equation}
+a_s^{(n_l)}=a_s^{(n_f)}\left[1+a_s^{(n_f)}\mathcal{M}_{n_l}^{(1)}+\left[a_s^{(n_f)}\right]^2\mathcal{M}_{n_l}^{(2)}\right]\,,
+\label{eq:MatchingAsnlnf}
+\end{equation}
+with:
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle\mathcal{M}_c^{(1)}=\sum_{a=c+1}^{n_f}\overline{M}^{(1)}\left(\frac{m_a}{Q}\right)\,,\\
+    \\
+    \displaystyle\mathcal{M}_c^{(2)}=\sum_{a=c+1}^{n_f}\left[\overline{M}^{(2)}\left(\frac{m_a}{Q}\right)+2\overline{M}^{(1)}\left(\frac{m_a}{Q}\right)\sum_{b=a+1}^{n_f}\overline{M}^{(1)}\left(\frac{m_b}{Q}\right)\right]\,,
+  \end{array}
+\end{equation}
+and:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle f_j^{(n_l)}&=&\displaystyle\prod_{c=n_l+1}^{n_f}\Bigg[\delta_{ji}\delta(1-w)+a_s^{(n_f)}\widetilde{A}_{c,ji}^{(1)}+\left[a_s^{(n_f)}\right]^2\widetilde{A}_{c,ji}^{(2)}+\left[a_s^{(n_f)}\right]^3\widetilde{A}_{c,ji}^{(3)}\Bigg]\otimes f_i^{(n_f)}\,.\\
+\\
+&=&\displaystyle\left[\delta_{ji}\delta(1-w)+a_s^{(n_f)}\mathcal{A}_{n_l,ji}^{(1)}+\left[a_s^{(n_f)}\right]^2\mathcal{A}_{n_l,ji}^{(2)}+\left[a_s^{(n_f)}\right]^3\mathcal{A}_{n_l,ji}^{(3)}\right]\,,
+  \end{array}
+\label{eq:MatchingPDFsnlnf}
+\end{equation}
+where we also defined:
+\begin{equation}
+\begin{array}{l}
+\displaystyle\widetilde{A}_{c,ji}^{(1)}=\overline{A}_{ji}^{(k)}\left(w,\frac{m_c}{Q}\right)\,,\\
+\\
+\displaystyle\widetilde{A}_{c,ji}^{(2)}=\overline{A}_{ji}^{(2)}\left(w,\frac{m_c}{Q}\right)+\mathcal{M}_c^{(1)}\overline{A}_{ji}^{(1)}\left(w,\frac{m_c}{Q}\right)\,,\\
+\\
+\displaystyle\widetilde{A}_{c,ji}^{(3)}=\overline{A}_{ji}^{(3)}\left(w,\frac{m_c}{Q}\right)+2\mathcal{M}_c^{(1)}\overline{A}_{ji}^{(2)}\left(w,\frac{m_c}{Q}\right)+\mathcal{M}_c^{(2)}\overline{A}_{ji}^{(1)}\left(w,\frac{m_c}{Q}\right)\,,
+\end{array}
+\end{equation}
+and:
+\begin{equation}
+\begin{array}{l}
+\displaystyle\mathcal{A}_{f,ji}^{(1)}=\sum_{c=f+1}^{n_f}\widetilde{A}_{c,ji}^{(1)}\,,\\
+\\
+\displaystyle\mathcal{A}_{f,ji}^{(2)}=\sum_{c=f+1}^{n_f}\left(\widetilde{A}_{c,ji}^{(2)}+\widetilde{A}_{c,j\alpha}^{(1)}\otimes\sum_{d=c+1}^{n_f}\widetilde{A}_{d,\alpha i}^{(1)}\right)\,,\\
+\\
+\displaystyle\mathcal{A}_{f,ji}^{(3)}=\sum_{c=f+1}^{n_f}\left(\widetilde{A}_{c,ji}^{(3)}+\widetilde{A}_{c,j\alpha}^{(2)}\otimes\sum_{d=c+1}^{n_f}\widetilde{A}_{d,\alpha i}^{(1)}+\widetilde{A}_{c,j\alpha}^{(1)}\otimes\sum_{d=c+1}^{n_f}\left(\widetilde{A}_{d,\alpha i}^{(2)}+\widetilde{A}_{d,\alpha\beta}^{(1)}\otimes\sum_{e=d+1}^{n_f}\widetilde{A}_{e,\beta i}^{(1)}\right)\right)\,.
+\end{array}
+\end{equation}
+We can finally use Eqs.~(\ref{eq:MatchingPDFsnlnf})
+and~(\ref{eq:MatchingAsnlnf}) in the expansion of the massive
+structure functions obtaining:
+\begin{equation}
+F^{\rm M/M0}=x\sum_{k=0}^3\left[a_s^{(n_l)}\right]^kC_j^{{\rm M/M0},(k)}\otimes f_j^{(n_l)}=x\sum_{k=0}^3\left[a_s^{(n_f)}\right]^kB_j^{{\rm M/M0},(k)}\otimes f_j^{(n_f)}\,,
+\end{equation}
+with:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle B_j^{(0)}&=&\displaystyle C_j^{(0)}\,,\\
+\\
+    \displaystyle B_j^{(1)}&=&\displaystyle C_j^{(1)}+C_\alpha^{(0)}\otimes\mathcal{A}_{n_l,\alpha j}^{(1)}\,,\\
+\\
+    \displaystyle B_j^{(2)}&=&\displaystyle C_j^{(2)}+\mathcal{M}_{n_l}^{(1)}C_j^{(1)}+C_\alpha^{(1)}\otimes\mathcal{A}_{n_l,\alpha j}^{(1)}+C_\alpha^{(0)}\otimes\mathcal{A}_{n_l,\alpha j}^{(2)}\,,\\
+\\
+    \displaystyle B_j^{(3)}&=&\displaystyle C_j^{(3)}+2\mathcal{M}_{n_l}^{(1)}C_j^{(2)}+C_\alpha^{(2)}\otimes\mathcal{A}_{n_l,\alpha j}^{(1)}+\mathcal{M}_{n_l}^{(2)}C_j^{(1)}+\mathcal{M}_{n_l}^{(1)}C_\alpha^{(1)}\otimes\mathcal{A}_{n_l,\alpha j}^{(1)}+C_\alpha^{(1)}\otimes\mathcal{A}_{n_l,\alpha j}^{(2)}+C_\alpha^{(0)}\otimes\mathcal{A}_{n_l,\alpha j}^{(3)}\,,
+  \end{array}
+\label{eq:BCFsGeneral}
+\end{equation}
+where, in order to simplify the notation, we omitted the superscripts
+M and M0 in the coefficient functions $C$ and $B$. As usual, a sum
+over repeated indices is implied and runs over all flavours (including
+the gluon).
 
 \subsection{Neutral-current case}
 
 In this section, we address the specific implementation of the FONLL
 scheme for neutral-current (NC) structure functions. We limit
-ourselves to considering to electromagnetic structure functions $F_2$
-and $F_L$, assuming that $F_3$, in the NC case, is only relevant at
-large scales where heavy-quark mass effects are negligible. We now
-split the structure functions into components associated to single
-quark flavours. This is done by setting to zero all electric charges
-except that of the flavour under consideration (see
+ourselves to considering the electromagnetic structure functions $F_2$
+and $F_L$ because $F_3$ in the NC case is only relevant at large
+scales where heavy-quark mass effects are negligible. We now split the
+structure functions into components associated to single quark
+flavours. This is properly done by setting all electric charges to
+zero except that of the flavour under consideration (see
 Eq.~(\ref{eq:StructureFunctionSingle})). This enables the following
 general decomposition:
 \begin{equation}
-F(x,Q)=\sum_{k=1}^{6}e_k^2F_k(x,Q)\,,
+F(x,Q)=\sum_{i=1}^{6}e_i^2F_i(x,Q)\,.
 \end{equation}
-Then we assume to have $n_f$ light flavours and while rest being
-massive (typically, $d$, $u$, and $s$ are considered to be light,
-while $c$, $b$, and $t$ heavy). This allows us to write:
-\begin{equation}
-F(x,Q)=\sum_{l=1}^{n_f}e_l^2F_l(x,Q)+\sum_{h=n_f+1}^{6}e_h^2F_h(x,Q)\,.
-\label{eq:HEavyLightSeparation}
-\end{equation}
-We also limit to including only single heavy-quark mass
-corrections. This amounts to computing $F_h$ in a scheme with only the
-$h$-th quark treated as massive while all others either as massless or
-as infinitely massive. For example, $F_b$ is computed treating the
-charm as massless and the top as as infinitely massive. This ensures
-that $F_h$ only depends on the mass of the $h$-th heavy flavour,
-$m_h$, and not on lighter or heavier heavy-quark masses. Conversely,
-$F_l$ can depend on more than one heavy-quark mass, but only through
-terms that depend on a single mass (this will become clearer
-later). We point out that we will adopt the so-called ``absolute''
-perturbative ordering, according to which massive and massless sectors
-contribute with the same power of $\alpha_s$ at each perturbative
-order. This is in contrast with the FONLL spirit, which typically
-adopts the ``relative'' ordering, and more in line with the ACOT
-spirit. However, the absolute ordering allows for a cleaner
-implementation and effectively aligns with the usual implementation of
-the FONLL scheme beyond NLO accuracy.\footnote{Using the FONLL
-  nomenclature, the implementation presented here, \textit{i.e.} the
-  absolute-ordering one, corresponds to FONLL-A at NLO and to FONLL-C
-  at NNLO. We will also address the N$^3$LO case that one can dub
-  FONLL-E. The missing FONLL-B and FONLL-D schemes, which we will not
-  discuss here, correspond to relative-ordering implementations of NLO
-  and NNLO accuracies, respectively.}
-
-Each component $F_k$ generally factorises as follows:
-\begin{equation}
-  F_k=C_{k,j}\otimes f_j = C_{k,g}\otimes f_g +C_{k,\rm PS}\otimes\sum_{j\neq g,k} f_j^++(C_{k,\rm PS}+C_{k,+})\otimes f_k^+\,,
-\end{equation}
-where we omitted the superscript $(n_f+1)$ in the PDFs and defined
-$f_j^+=f_j+f_{\overline{j}}$. This expression holds for each of the
-structure functions making up the FONLL scheme with
-$C=C^{\rm ZM}, B^{\rm M}, B^{\rm M0}$ and $j$ running over all
-flavours in the ZM scheme and only over the $n_f$ light flavours in
-the massive schemes.
-
-With these premises, let us address $F_l$ and $F_h$ separately
-starting with the former. The ZM structure function is:
-\begin{equation}
-F_l^{\rm ZM}=\theta(Q-m_l)\left[C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1\atop j\neq l}^6f_j^++(C_{\rm PS}^{\rm ZM}+C_+^{\rm ZM})\otimes f_l^+\right]\,,
-\label{eq:ZMlightSF}
-\end{equation}
-where the coefficient functions admit the following expansions up to
-N$^3$LO:
-\begin{equation}
-C_+^{\rm ZM}=\delta(1-y)+\sum_{k=1}^3 a_s^k C_+^{{\rm ZM},(k)}\,,\quad
-C_g^{\rm ZM}=\sum_{k=1}^3 a_s^k C_g^{{\rm ZM},(k)}\,,\quad C_{\rm
-  PS}^{\rm ZM}=\sum_{k=2}^3 a_s^k C_{\rm PS}^{{\rm ZM},(k)}\,,
-\end{equation}
-where $a_s\equiv a_s^{(n_f+1)}$. The M and M0 structure function admit
-a similar decomposition:
-\begin{equation}
-F_l^{\rm M/M0}=B_{l,g}^{\rm M/M0}\otimes f_g +B_{l,\rm PS}^{\rm M/M0}\otimes\sum_{j=1\atop j\neq l}^{n_f}f_j^++(B_{l,\rm PS}^{\rm M/M0}+B_{l,+}^{\rm M/M0})\otimes f_l^+\,,
-\label{eq:MassivelightSF}
-\end{equation}
-Considering Eq.~(\ref{eq:explicitBCFs}) (but forgetting about $B_h$),
-up to NNLO we have the following perturbative expansions for the
-coefficient functions:
-\begin{equation}
-  \begin{array}{l}
-    \displaystyle B_{l,g}^{\rm M/M0}=a_sC_g^{{\rm ZM},(1)}+a_s^2C_g^{{\rm ZM},(2)}\,,\\
-    \\
-    \displaystyle B_{l,\rm PS}^{\rm M/M0}=a_s^2 C_{\rm PS}^{{\rm ZM},(2)}\,,\\
-    \\
-    \displaystyle B_{l,+}^{\rm M/M0}=\delta(1-y)+a_s C_+^{{\rm ZM},(1)}+a_s^2(C_{l,+}^{{\rm M/M0},(2)}-M^{(1)}C_+^{{\rm ZM},(1)}-A_{ll}^{(2)})\,.
-  \end{array}
-\end{equation}
-Since the coefficients $C_{l,g}^{{\rm M/M0},(3)}$ and
-$C_{l,+}^{{\rm M/M0},(3)}$ are currently unknown, we include N$^3$LO
-corrections in the light components of the structure functions only
-through the ZM scheme.
-
-Let us now consider $F_h$. The ZM mass component is identical to
-Eq.~(\ref{eq:ZMlightSF}), except that the index corresponds to a heavy
-quark, that is:
-\begin{equation}
-F_h^{\rm ZM}=\theta(Q-m_h)\left[C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1\atop j\neq h}^6f_j^++(C_{\rm PS}^{\rm ZM}+C_+^{\rm ZM})\otimes f_h^+\right]\,.
-\label{eq:ZMheavySF}
-\end{equation}
-The massive components can be written analogously to
-Eq.~(\ref{eq:MassivelightSF}), but since in this scheme $f_h^+=0$, we
-have:
-\begin{equation}
-F_h^{\rm M/M0}=B_{h,g}^{\rm M/M0}\otimes f_g +B_{h,\rm PS}^{\rm M/M0}\otimes\sum_{j=1}^{n_f}f_j^+\,.
-\label{eq:MassiveheavySF}
-\end{equation}
-Extending Eq.~(\ref{eq:explicitBCFs}) to $\mathcal{O}(\alpha_s^3)$ but
-accounting for the fact that
-$B_{h,g}^{\rm M/M0,(0)}=B_{h,\rm PS}^{\rm M/M0,(0)}=0$, we have:
-\begin{equation}
-  \begin{array}{rcl}
-    \displaystyle B_{h,g}^{\rm M/M0}&=&\displaystyle a_sC_{h,g}^{{\rm
-    M/M0},(1)}+a_s^2C_{h,g}^{{\rm M/M0},(2)}\\
-\\
-&+&\displaystyle a_s^3\left[C_{h,g}^{{\rm M/M0},(3)}-M^{(1)}C_{h,g}^{{\rm M/M0},(2)}-C_{h,g}^{{\rm M/M0},(1)}\otimes A_{gg}^{(2)} -(M^{(2)}-2(M^{(1)})^2)C_{h,g}^{{\rm M/M0},(1)}\right]\,,\\
-    \\
-    \displaystyle B_{h,\rm PS}^{\rm M/M0}&=&\displaystyle a_s^2 C_{h,\rm PS}^{{\rm M/M0},(2)}+a_s^3\left[C_{h,\rm PS}^{{\rm M/M0},(3)}-2M^{(1)}C_{h,\rm PS}^{{\rm M/M0},(2)}\right] \,.
-  \end{array}
-\end{equation}
-
-We can finally assembly all pieces using the recipe:
-\begin{equation}
-  F_k^{\rm FONLL}(x,Q) =F_k^{\rm M}(x,Q)+f(Q)\left[F_k^{\rm ZM}(x,Q)-F_k^{\rm M0}(x,Q)\right]
-\end{equation}
-Assuming that $Q>m_l$, the
-light-structure functions are given by:
+More simply, $F_i$ is the structure function associated to the
+scattering of a highly virtual photon off a quark of flavour $i$. The
+ZM, M, and M0 structure functions $F_i$ factorise as follows:
 \begin{equation}
 \begin{array}{l}
-\displaystyle F_l^{\rm ZM}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1}^{6}f_j^++C_+^{\rm ZM}\otimes f_l^+\,,\\
+\displaystyle F_i^{\rm ZM}=x\sum_{k=0}^3\left[a_s^{(n_f)}\right]^kC_{i,j}^{{\rm ZM},(k)}\otimes f_j^{(n_f)}\,,\\
 \\
-\displaystyle F_l^{\rm M/M0}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes\sum_{j=1}^{6}f_j^++B_{l,+}^{\rm M/M0}\otimes f_l^+-C_{\rm PS}^{\rm ZM}\otimes\sum_{j=n_f+1}^{6}f_j^+\,.
+\displaystyle F_i^{\rm M/M0}=x\sum_{k=0}^3\left[a_s^{(n_l)}\right]^kC_{i,j}^{{\rm M/M0},(k)}\otimes f_j^{(n_l)}=x\sum_{k=0}^3\left[a_s^{(n_f)}\right]^kB_{i,j}^{{\rm M/M0},(k)}\otimes f_j^{(n_f)}\,.
 \end{array}
 \end{equation}
-Setting $f(Q)=1$ the rightmost term in $F_l^{\rm M/M0}$ cancels out,
-leaving:
+A better flavour decomposition reads:
 \begin{equation}
-F_l^{\rm FONLL}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes\sum_{j=1}^{6}f_j^++\left[B_{l,+}^{\rm M}+C_+^{\rm ZM}-B_{l,+}^{\rm M}\right]\otimes f_l^+\,.
+\begin{array}{l}
+\displaystyle F_i^{\rm ZM}=x\sum_{k=0}^3\left[a_s^{(n_f)}\right]^k\left[C_{i,g}^{{\rm ZM},(k)}\otimes f_g^{(n_f)}+C_{i,\rm PS}^{{\rm ZM},(k)}\otimes \sum_{j=1\atop j\neq i}^6f_j^{+(n_f)}+\left(C_{i,\rm PS}^{{\rm ZM},(k)}+C_{i,+}^{{\rm ZM},(k)}\right)\otimes f_i^{+(n_f)}\right]\,,\\
+\\
+\displaystyle F_i^{\rm M/M0}=x\sum_{k=0}^3\left[a_s^{(n_f)}\right]^k\left[B_{i,g}^{{\rm M/M0},(k)}\otimes f_g^{(n_f)}+\sum_{j=1\atop j\neq i}^6 B_{ij,\rm PS}^{{\rm M/M0},(k)}\otimes  f_j^{+(n_f)}+\left(B_{ii,\rm PS}^{{\rm M/M0},(k)}+B_{i,+}^{{\rm M/M0},(k)}\right)\otimes f_i^{+(n_f)}\right]\,.
+\end{array}
 \end{equation}
-We can now reinstate $f(Q)$ only in the term proportional to $f_l^+$,
-finally finding:
+where $f_j^{+(n_f)}\equiv f_j^{(n_f)}+f_{\overline{j}}^{(n_f)}$. The
+question now boils down to determining these coefficient functions up
+to N$^3$LO (when possible) for each one of the structure
+functions. Let us start with the simplest case, \textit{i.e.}
+$F_i^{\rm ZM}$. In this case, the coefficient functions only depend on
+the flavour $i$ through a $\theta$-function, that is:
 \begin{equation}
-F_l^{\rm FONLL}=C_{l,g}^{\rm FONLL} \otimes f_g +C_{l,\rm PS}^{\rm FONLL}\otimes\sum_{j=1}^{6}f_j^++C_{l,+}^{\rm FONLL}\otimes f_l^+\,,
+C_{i,g}^{{\rm ZM},(k)} = \theta(Q-m_i) C_{g}^{{\rm ZM},(k)}\,,\quad
+C_{i,\rm PS}^{{\rm ZM},(k)} = \theta(Q-m_i)C_{\rm PS}^{{\rm ZM},(k)}\,,\quad C_{i,+}^{{\rm ZM},(k)}=\theta(Q-m_i)C_{+}^{{\rm ZM},(k)}\,,
+\end{equation}
+where $m_i$ is the mass of the $i$-th quark flavour, with $m_i=0$ for
+$i\leq n_l$ and $m_i\neq 0$ for $i>n_l$. Moreover, one has that
+$C_{+}^{{\rm ZM},(0)}=\delta(1-y)$, while
+$C_{g}^{{\rm ZM},(0)}=C_{\rm PS}^{{\rm ZM},(0)}=C_{\rm PS}^{{\rm
+    ZM},(1)}=0$. All other coefficient functions are different from
+zero. Importantly, starting from NNLO, the coefficient functions
+feature a dependence on the number of active flavours that here has to
+be set to $n_f$, \textit{i.e.} the number of active flavours at the
+scale $Q$.
+
+Let us now move to the massive structure functions. In this case, it
+is convenient to split them as follows:
+\begin{equation}
+  F^{\rm M/M0}(x,Q)=\sum_{l=1}^{n_l}e_l^2F_l^{\rm M/M0}(x,Q)+\sum_{h=n_l+1}^{6}e_h^2F_h^{\rm M/M0}(x,Q)\,,
+\label{eq:HeavyLightSeparation}
+\end{equation}
+\textit{i.e.} whether the virtual photon couples to a light quark or a
+heavy quark. We start analysing $F_l^{\rm M/M0}$, which we will do up
+to NNLO accuracy, \textit{i.e.} $\mathcal{O}(\alpha_s^2)$, because, as
+of today, N$^3$LO corrections are unknown. In order to reconstruct the
+$B$ coefficient functions through Eq.~(\ref{eq:BCFsGeneral}), we need
+to know the $C$ coefficient functions. It is easy to find that:
+\begin{equation}
+  \begin{array}{ll}
+    \begin{array}{l}
+      C_{l,g}^{{\rm M/M0},(0)} = 0\,,\\
+\\
+      C_{l,g}^{{\rm M/M0},(1)} = C_{g}^{{\rm ZM},(1)}\,,\\
+\\
+      C_{l,g}^{{\rm M/M0},(2)} = C_{g}^{{\rm ZM},(2)}\,,
+    \end{array}
+&\qquad
+    \begin{array}{l}
+      C_{lj,\rm PS}^{{\rm M/M0},(0)} = 0\,,\\
+\\
+      C_{lj,\rm PS}^{{\rm M/M0},(1)} = 0\,,\\
+\\
+      C_{lj,\rm PS}^{{\rm M/M0},(2)} = \left\{
+      \begin{array}{ll}
+        C_{\rm PS}^{{\rm ZM},(2)}&\quad j\leq n_l\,,\\
+        0 \mbox{ (unknown)}& \quad j> n_l\,,
+        \end{array}
+      \right.
+    \end{array}
+  \end{array}
+\end{equation}
+where $C_{lj,\rm PS}^{{\rm M/M0},(2)}$ for $j>n_l$ is set to zero
+because currently unknown, and:
+\begin{equation}
+  \begin{array}{l}
+    C_{l,+}^{{\rm M/M0},(0)} = \delta(1-y)\,,\\
+    \\
+    C_{l,+}^{{\rm M/M0},(1)} = C_{+}^{{\rm ZM},(1)}\,,\\
+    \\
+    \displaystyle C_{l,+}^{{\rm M/M0},(2)} = C_{+}^{{\rm ZM},(2)}(n_l)+\sum_{h}C_{\rm gl.rad.}^{{\rm M/M0},(2)}(m_h)\,,
+  \end{array}
+\end{equation}
+where, in defining $C_{l,+}^{{\rm M/M0},(2)}$, we made clear that
+$C_{+}^{{\rm ZM},(2)}$ is to be computed with $n_l$ active flavours,
+and not $n_f$ as when computing the ZM structure functions. Therefore,
+the only new ingredient w.r.t. the ZM scheme is the function
+$C_{\rm gl.rad.}^{{\rm M/M0},(2)}$ which is known. We can now use
+Eq.~(\ref{eq:BCFsGeneral}) to construct the $B$ coefficient
+functions. For the gluon we find:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle B_{l,g}^{{\rm M/M0},(0)}&=&\displaystyle 0\,,\\
+    \\
+    \displaystyle B_{l,g}^{{\rm M/M0},(1)}&=&\displaystyle C_g^{{\rm ZM}, (1)}\,,\\
+    \\
+    \displaystyle B_{l,g}^{{\rm M/M0},(2)}&=&\displaystyle C_g^{{\rm ZM},(2)}\,,
+  \end{array}
+\end{equation}
+where we have used the facts that $A_{lk}^{(1)}=A_{kl}^{(1)}=0$,
+$A_{Hk}^{(n)}=A_{kH}^{(n)}=0$ for $H>n_f$,
+$C_{l,h}^{{\rm M/M0},(0)}=0$, and
+$A_{gg}^{(1)}=-M^{(1)}\delta(1-y)$. For the pure singlet, we find:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle B_{lj,\rm PS}^{{\rm M/M0},(0)}&=&\displaystyle 0\,,\\
+\\
+    \displaystyle B_{lj,\rm PS}^{{\rm M/M0},(1)}&=&\displaystyle 0\,,\\
+\\
+    \displaystyle B_{lj,\rm PS}^{{\rm M/M0},(2)}&=&\displaystyle\theta(j\leq n_l)C_{\rm PS}^{{\rm ZM},(2)}+\theta(j\leq n_f)C_{g}^{{\rm ZM},(1)}\otimes\mathcal{A}_{n_l,gj}^{(1)}+\delta_{jl}\mathcal{A}_{n_l,ll}^{(2)}\,,
+  \end{array}
+\end{equation}
+where we have used the facts that $C_{l,h}^{{\rm M/M0},(1)}=0$, and
+$\mathcal{A}_{n_l,lj}^{(2)}=0$ for $j\neq l$. We note that
+$B_{lj,\rm PS}^{{\rm M/M0},(2)}$ is the same for M and M0
+schemes. Therefore, in view of the combination $F^{\rm M}-F^{\rm M0}$
+necessary to implement the FONLL scheme (and neglecting the presence
+of the damping function $f$), one can set
+$B_{lj,\rm PS}^{{\rm M/M0},(2)}=0$ straightaway. Finally, the
+non-singlet coefficient functions is:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle B_{l,+}^{{\rm M/M0},(0)}&=&\displaystyle \delta(1-y)\,,\\
+\\
+    \displaystyle B_{l,+}^{{\rm M/M0},(1)}&=&\displaystyle C_{+}^{{\rm ZM},(1)}\,,\\
+\\
+    \displaystyle B_{l,+}^{{\rm M/M0},(2)}&=&\displaystyle C_{+}^{{\rm ZM},(2)}(n_l)+\sum_{h}C_{\rm gl.rad.}^{{\rm M/M0},(2)}(m_h)+\mathcal{M}_{n_l}^{(1)}C_{+}^{{\rm ZM}(1)}+\mathcal{A}_{n_l,ll}^{(2)}\,.
+  \end{array}
+\end{equation}
+We can finally put all pieces together and construct the FONLL light
+structure function as up to N$^3$LO, where the N$^3$LO corrections
+come only from the ZM scheme, as:
+\begin{equation}
+F_l^{\rm FONLL}=x\sum_{k=0}^3\left[a_s^{(n_f)}\right]^k\left[B_{l,g}^{{\rm FONLL},(k)}\otimes f_g^{(n_f)}+\sum_{j=1\atop j\neq i}^6 B_{lj,\rm PS}^{{\rm FONLL},(k)}\otimes  f_j^{+(n_f)}+\left(B_{ll,\rm PS}^{{\rm FONLL},(k)}+B_{l,+}^{{\rm FONLL},(k)}\right)\otimes f_l^{+(n_f)}\right]\,,
 \end{equation}
 where:
 \begin{equation}
-\begin{array}{l}
-\displaystyle C_{l,g}^{\rm FONLL} = C_g^{\rm ZM}\,,\\
+  \begin{array}{l}
+    B_{l,g}^{{\rm FONLL},(k)}=C_{g}^{{\rm ZM},(k)}\,,\\
+    \\
+    B_{l,\rm PS}^{{\rm FONLL},(k)}=C_{\rm PS}^{{\rm ZM},(k)}\,,\\
+    \\
+    B_{l,+}^{{\rm FONLL},(k)}=C_{+}^{{\rm ZM},(k)}\,,\quad k\neq 2\\
+    \\
+    \displaystyle B_{l,+}^{{\rm FONLL},(2)}=\sum_{h}C_{\rm gl.rad.}^{{\rm M},(2)}(m_h)+f(Q)\left[C_{+}^{{\rm ZM},(2)}-\sum_{h}C_{\rm gl.rad.}^{{\rm M0},(2)}(m_h)\right]\,.
+  \end{array}
+\end{equation}
+In convoluting $B_{l,+}^{{\rm FONLL},(2)}$ with the PDFs, care must be
+taken because the M component is to be convoluted between $\chi$ and
+1, while the rest between $x$ and 1.  This concludes the treatment of
+the massive light structure functions $F_l$. Let us now move to the
+heavy structure functions $F_h$. Also in this case, in order to
+reconstruct the $B$ coefficient functions, we need to know the $C$
+ones. They are:
+\begin{equation}
+  \begin{array}{ll}
+    \begin{array}{l}
+      C_{h,g}^{{\rm M/M0},(0)} = 0\,,\\
 \\
-\displaystyle C_{l,\rm PS}^{\rm FONLL}= C_{\rm PS}^{\rm ZM}\,,\\
+      C_{h,g}^{{\rm M/M0},(1)} \neq 0\,,\\
 \\
-\displaystyle C_{l,+}^{\rm FONLL}= B_{l,+}^{\rm M}+f(Q)\left(C_+^{\rm ZM}-B_{l,+}^{\rm M}\right)\,.
-\end{array}
-\label{eq:FONLLCFsLight}
+      C_{h,g}^{{\rm M/M0},(2)} \neq 0\,,\\
+\\
+      C_{h,g}^{{\rm M/M0},(3)} \neq 0\,,\\
+    \end{array}
+&\qquad
+    \begin{array}{l}
+      C_{hj,\rm PS}^{{\rm M/M0},(0)} = 0\,,\\
+\\
+      C_{hj,\rm PS}^{{\rm M/M0},(1)} = 0\,,\\
+\\
+      C_{hj,\rm PS}^{{\rm M/M0},(2)} = \left\{
+      \begin{array}{ll}
+        C_{hh,\rm PS}^{{\rm M/M0},(2)}&\quad j=h\,,\\
+        0 \mbox{ (unknown)}& \quad \mbox{otherwise}\,,
+        \end{array}
+      \right. \\
+\\
+      C_{hj,\rm PS}^{{\rm M/M0},(3)} = \left\{
+      \begin{array}{ll}
+        C_{hh,\rm PS}^{{\rm M/M0},(3)}&\quad j=h\,,\\
+        0 \mbox{ (unknown)}& \quad \mbox{otherwise}\,,
+        \end{array}
+      \right.
+    \end{array}
+  \end{array}
+\end{equation}
+where we used $\neq 0$ to indicate that that function is known, and:
+\begin{equation}
+  \begin{array}{l}
+    C_{h,+}^{{\rm M/M0},(0)} = \delta(1-y)\,,\\
+    \\
+    C_{h,+}^{{\rm M/M0},(1)} \neq 0\,,\\
+    \\
+    C_{h,+}^{{\rm M/M0},(2)} = 0\mbox{ (unknown)}\,,\\
+\\
+    C_{h,+}^{{\rm M/M0},(3)} = 0\mbox{ (unknown)}\,.
+  \end{array}
+\end{equation}
+The resulting $B$ coefficient functions are:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle B_{h,g}^{{\rm M/M0}, (0)}&=&\displaystyle 0\,,\\
+\\
+    \displaystyle B_{h,g}^{{\rm M/M0},(1)}&=&\displaystyle C_{h,g}^{{\rm M/M0},(1)}+\mathcal{A}_{n_l,hg}^{(1)}\,,\\
+\\
+    \displaystyle B_{h,g}^{{\rm M/M0},(2)}&=&\displaystyle C_{h,g}^{{\rm M/M0},(2)}+C_{h,+}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,hg}^{(1)}+\mathcal{A}_{n_l,hg}^{(2)}\,,\\
+\\
+    \displaystyle B_{h,g}^{{\rm M/M0},(3)}&=&\displaystyle C_{h,g}^{{\rm M/M0},(3)}+\mathcal{M}_{n_l}^{(1)}C_{h,g}^{{\rm M/M0},(2)}+(\mathcal{M}_{n_l}^{(2)}-(\mathcal{M}_{n_l}^{(1)})^2)C_{h,g}^{{\rm M/M0},(1)}+\mathcal{M}_{n_l}^{(1)}C_{h,+}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,hg}^{(1)}\\
+\\
+&+&\displaystyle C_{h,+}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,hg}^{(2)}+C_{h,g}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,gg}^{(2)}+\mathcal{A}_{n_l,hg}^{(3)}\,,
+  \end{array}
+\end{equation}
+where we have used the facts that $C_{h,l}^{{\rm M/M0},(0)}=C_{h,l}^{{\rm M/M0},(1)}=0$
+
+
+
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle B_{hj,\rm PS}^{{\rm M/M0}, (0)}&=&\displaystyle 0\,,\\
+\\
+    \displaystyle B_{hj, \rm PS}^{{\rm M/M0},(1)}&=&\displaystyle \delta_{hj}\mathcal{A}_{n_l,hh}^{(1)}\,,\\
+\\
+    \displaystyle B_{hj, \rm PS}^{{\rm M/M0},(2)}&=&\displaystyle \delta_{hj}C_{hh,\rm PS}^{{\rm M/M0},(2)}+\delta_{hj}C_{h,g}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,gh}^{(1)}+\mathcal{A}_{n_l,hj}^{(2)}\,,\\
+\\
+    \displaystyle B_{hj, \rm PS}^{{\rm M/M0},(3)}&=&\displaystyle\delta_{hj}C_{hh,\rm PS}^{{\rm M/M0},(3)}+2\delta_{hj}\mathcal{M}_{n_l}^{(1)}C_{hh,\rm PS}^{{\rm M/M0},(2)}+\delta_{hj}C_{h,g}^{{\rm M/M0},(2)}\otimes\mathcal{A}_{n_l,gh}^{(1)}+\delta_{hj}C_{hh,\rm PS}^{{\rm M/M0},(2)}\otimes\mathcal{A}_{n_l,hh}^{(1)}\\
+\\
+&+&\displaystyle\delta_{hj}\mathcal{M}_{n_l}^{(1)}C_{h,g}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,gh}^{(1)}+C_{h,g}^{{\rm M/M0},(1)}\otimes\mathcal{A}_{n_l,gj}^{(2)}+\mathcal{A}_{n_l,hj}^{(3)}\,,
+  \end{array}
 \end{equation}
 
-Let us now move to the heavy structure functions, for which we have:
-\begin{equation}
-\begin{array}{l}
-\displaystyle F_h^{\rm ZM}=\theta(Q-m_h)\left[C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1}^6f_j^++C_+^{\rm ZM}\otimes f_h^+\right]\,,\\
-\\
-\displaystyle F_h^{\rm M/M0}=B_{h,g}^{\rm M/M0}\otimes f_g +B_{h,\rm PS}^{\rm M/M0}\otimes\sum_{j=1}^{6}f_j^+-B_{h,\rm PS}^{\rm M/M0}\otimes\sum_{j=n_f+1}^{6}f_j^+\,.
-\end{array}
-\end{equation}
-As above, we first set $f(Q)=1$ to enable the cancellation of the
-rightmost term in $F_h^{\rm M/M0}$, and the reinstate it at the level
-of the remaining coefficient functions using the fact that
-$f(Q)\propto \theta(Q-m_h)$. The final result is:
-\begin{equation}
-F_h^{\rm FONLL}=C_{h,g}^{\rm FONLL} \otimes f_g +C_{h,\rm PS}^{\rm FONLL}\otimes\sum_{j=1}^{6}f_j^++C_{h,+}^{\rm FONLL}\otimes f_l^+\,,
-\end{equation}
-with:
-\begin{equation}
-\begin{array}{l}
-\displaystyle C_{h,g}^{\rm FONLL} = B_{h,g}^{\rm M} +f(Q)\left[C_g^{\rm ZM}-B_{h,g}^{\rm M0}\right]\,,\\
-\\
-\displaystyle C_{h,\rm PS}^{\rm FONLL}= B_{h,\rm PS}^{\rm M} +f(Q)\left[C_{\rm PS}^{\rm ZM}-B_{h,\rm PS}^{\rm M0}\right]\,,\\
-\\
-\displaystyle C_{h,+}^{\rm FONLL}= f(Q)C_+^{\rm ZM}\,.
-\end{array}
-\label{eq:FONLLCFsHeavy}
-\end{equation}
 
-\subsection{Charged-current case}
+% \newpage
+% This can also be split as follows:
+% \begin{equation}
+% F(x,Q)=\sum_{l=1}^{n_l}e_l^2F_l(x,Q)+\sum_{h=n_l+1}^{6}e_h^2F_h(x,Q)\,.
+% \label{eq:HEavyLightSeparation}
+% \end{equation}
+% We also limit to including only single heavy-quark mass
+% corrections. This amounts to computing $F_h$ in a scheme with only the
+% $h$-th quark treated as massive while all others either as massless or
+% as infinitely massive. For example, $F_b$ is computed treating the
+% charm as massless and the top as as infinitely massive. This ensures
+% that $F_h$ only depends on the mass of the $h$-th heavy flavour,
+% $m_h$, and not on lighter or heavier heavy-quark masses. Conversely,
+% $F_l$ can depend on more than one heavy-quark mass, but only through
+% terms that depend on a single mass.
+% % We point out that we will adopt the so-called ``absolute''
+% % perturbative ordering, according to which massive and massless
+% % sectors contribute with the same power of $\alpha_s$ at each
+% % perturbative order. This is in contrast with the FONLL spirit, which
+% % typically adopts the ``relative'' ordering, and more in line with
+% % the ACOT spirit. However, the absolute ordering allows for a cleaner
+% % implementation and effectively aligns with the usual implementation
+% % of the FONLL scheme beyond NLO accuracy.\footnote{Using the FONLL
+% % nomenclature, the implementation presented here, \textit{i.e.} the
+% % absolute-ordering one, corresponds to FONLL-A at NLO and to FONLL-C
+% % at NNLO. We will also address the N$^3$LO case that one can dub
+% % FONLL-E. The missing FONLL-B and FONLL-D schemes, which we will not
+% % discuss here, correspond to relative-ordering implementations of NLO
+% % and NNLO accuracies, respectively.}
 
-The charged current case is addressed in a similar manner. The main
-difference is that the role of the charges is played by the CMK-matrix
-elements such that the full structure functions is written as:
-\begin{equation}
-F(x,Q)=\sum_{\alpha=d,s,b}\sum_{\beta=u,c,t} |V_{\beta\alpha}|^2F_{\alpha\beta}(x,Q)\,.
-\end{equation}
-Once defined the number of active flavours $n_f$, one can stil achieve
-a decomposition like in Eq.~(\ref{eq:HEavyLightSeparation}) with:
-\begin{equation}
-\begin{array}{l}
-\displaystyle F_l(x,Q)=\sum_{\alpha=\ell}\sum_{\beta=\ell'} |V_{\beta\alpha}|^2F_{\alpha\beta}(x,Q)\,,\\
-\\
-\displaystyle F_h(x,Q)=\sum_{\beta<h} |V_{\beta h}|^2F_{h\beta}(x,Q)\,,\quad\mbox{if $h$ is down-type}\,,\\
-\\
-\displaystyle F_h(x,Q)=\sum_{\alpha<h} |V_{h\alpha}|^2F_{\alpha h}(x,Q)\,,\quad\mbox{if $h$ is up-type}\,,\\
-\end{array}
-\end{equation}
-where $\ell$ and $\ell'$ run over the $n_f$ flavours and $\beta<h$
-($\alpha<h$) stands for $\beta$ ($\alpha$) running over all flavours
-with mass smaller than $m_h$. For example, if $n_f=3$ this recipe
-produces:
-\begin{equation}
-\begin{array}{l}
-\displaystyle F_l(x,Q)=|V_{ud}|^2F_{du}(x,Q)+|V_{us}|^2F_{su}(x,Q)\,,\\
-\\
-\displaystyle F_c(x,Q)=|V_{cd}|^2F_{dc}(x,Q)+|V_{cs}|^2F_{sc}(x,Q)\,,\\
-\\
-\displaystyle F_b(x,Q)=|V_{ub}|^2F_{bu}(x,Q)+|V_{cb}|^2F_{bc}(x,Q)\,,\\
-\\
-\displaystyle F_t(x,Q)=|V_{td}|^2F_{dt}(x,Q)+|V_{ts}|^2F_{st}(x,Q) +|V_{tb}|^2F_{bt}(x,Q)\,.
-\end{array}
-\end{equation}
+% Each component $F_k$ generally factorises as follows:
+% \begin{equation}
+%   F_k=C_{k,j}\otimes f_j = C_{k,g}\otimes f_g +C_{k,\rm PS}\otimes\sum_{j\neq g,k} f_j^++(C_{k,\rm PS}+C_{k,+})\otimes f_k^+\,,
+% \end{equation}
+% where we omitted the superscript $(n_f+1)$ in the PDFs and defined
+% $f_j^+=f_j+f_{\overline{j}}$. This expression holds for all schemes,
+% with $C_{k,j}\in\{C_{k,j}^{\rm ZM}, B_{k,j}^{\rm M}, B_{k,j}^{\rm M0}\}$.
+
+% With these premises, let us address $F_l$ and $F_h$ separately
+% starting with the former. The ZM structure function is:
+% \begin{equation}
+% F_l^{\rm ZM}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1\atop j\neq l}^6f_j^++(C_{\rm PS}^{\rm ZM}+C_+^{\rm ZM})\otimes f_l^+\,,
+% \label{eq:ZMlightSF}
+% \end{equation}
+% where the coefficient functions admit the following expansions up to
+% N$^3$LO:
+% \begin{equation}
+% C_+^{\rm ZM}=\delta(1-y)+\sum_{k=1}^3 a_s^k C_+^{{\rm ZM},(k)}\,,\quad
+% C_g^{\rm ZM}=\sum_{k=1}^3 a_s^k C_g^{{\rm ZM},(k)}\,,\quad C_{\rm
+%   PS}^{\rm ZM}=\sum_{k=2}^3 a_s^k C_{\rm PS}^{{\rm ZM},(k)}\,,
+% \end{equation}
+% where $a_s\equiv a_s^{(n_f+1)}$. The M and M0 structure function admit
+% a similar decomposition:
+% \begin{equation}
+% F_l^{\rm M/M0}=B_{l,g}^{\rm M/M0}\otimes f_g +B_{l,\rm PS}^{\rm M/M0}\otimes\sum_{j=1\atop j\neq l}^{n_f}f_j^++(B_{l,\rm PS}^{\rm M/M0}+B_{l,+}^{\rm M/M0})\otimes f_l^+\,,
+% \label{eq:MassivelightSF}
+% \end{equation}
+% Considering Eq.~(\ref{eq:explicitBCFs}) (but forgetting about $B_h$),
+% up to NNLO we have the following perturbative expansions for the
+% coefficient functions:
+% \begin{equation}
+%   \begin{array}{l}
+%     \displaystyle B_{l,g}^{\rm M/M0}=a_sC_g^{{\rm ZM},(1)}+a_s^2C_g^{{\rm ZM},(2)}\,,\\
+%     \\
+%     \displaystyle B_{l,\rm PS}^{\rm M/M0}=a_s^2 C_{\rm PS}^{{\rm ZM},(2)}\,,\\
+%     \\
+%     \displaystyle B_{l,+}^{\rm M/M0}=\delta(1-y)+a_s C_+^{{\rm ZM},(1)}+a_s^2(C_{l,+}^{{\rm M/M0},(2)}-M^{(1)}C_+^{{\rm ZM},(1)}-A_{ll}^{(2)})\,.
+%   \end{array}
+% \end{equation}
+% Since the coefficients $C_{l,g}^{{\rm M/M0},(3)}$ and
+% $C_{l,+}^{{\rm M/M0},(3)}$ are currently unknown, we include N$^3$LO
+% corrections in the light components of the structure functions only
+% through the ZM scheme.
+
+% Let us now consider $F_h$. The ZM mass component is identical to
+% Eq.~(\ref{eq:ZMlightSF}), except that the index corresponds to a heavy
+% quark, that is:
+% \begin{equation}
+% F_h^{\rm ZM}=\theta(Q-m_h)\left[C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1\atop j\neq h}^6f_j^++(C_{\rm PS}^{\rm ZM}+C_+^{\rm ZM})\otimes f_h^+\right]\,.
+% \label{eq:ZMheavySF}
+% \end{equation}
+% The massive components can be written analogously to
+% Eq.~(\ref{eq:MassivelightSF}), but since in this scheme $f_h^+=0$, we
+% have:
+% \begin{equation}
+% F_h^{\rm M/M0}=B_{h,g}^{\rm M/M0}\otimes f_g +B_{h,\rm PS}^{\rm M/M0}\otimes\sum_{j=1}^{n_f}f_j^+\,.
+% \label{eq:MassiveheavySF}
+% \end{equation}
+% Extending Eq.~(\ref{eq:explicitBCFs}) to $\mathcal{O}(\alpha_s^3)$ but
+% accounting for the fact that
+% $B_{h,g}^{\rm M/M0,(0)}=B_{h,\rm PS}^{\rm M/M0,(0)}=0$, we have:
+% \begin{equation}
+%   \begin{array}{rcl}
+%     \displaystyle B_{h,g}^{\rm M/M0}&=&\displaystyle a_sC_{h,g}^{{\rm
+%     M/M0},(1)}+a_s^2C_{h,g}^{{\rm M/M0},(2)}\\
+% \\
+% &+&\displaystyle a_s^3\left[C_{h,g}^{{\rm M/M0},(3)}-M^{(1)}C_{h,g}^{{\rm M/M0},(2)}-C_{h,g}^{{\rm M/M0},(1)}\otimes A_{gg}^{(2)} -(M^{(2)}-2(M^{(1)})^2)C_{h,g}^{{\rm M/M0},(1)}\right]\,,\\
+%     \\
+%     \displaystyle B_{h,\rm PS}^{\rm M/M0}&=&\displaystyle a_s^2 C_{h,\rm PS}^{{\rm M/M0},(2)}+a_s^3\left[C_{h,\rm PS}^{{\rm M/M0},(3)}-2M^{(1)}C_{h,\rm PS}^{{\rm M/M0},(2)}\right] \,.
+%   \end{array}
+% \end{equation}
+
+% We can finally assembly all pieces using the recipe:
+% \begin{equation}
+%   F_k^{\rm FONLL}(x,Q) =F_k^{\rm M}(x,Q)+f(Q)\left[F_k^{\rm ZM}(x,Q)-F_k^{\rm M0}(x,Q)\right]
+% \end{equation}
+% Assuming that $Q>m_l$, the
+% light-structure functions are given by:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle F_l^{\rm ZM}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1}^{6}f_j^++C_+^{\rm ZM}\otimes f_l^+\,,\\
+% \\
+% \displaystyle F_l^{\rm M/M0}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes\sum_{j=1}^{6}f_j^++B_{l,+}^{\rm M/M0}\otimes f_l^+-C_{\rm PS}^{\rm ZM}\otimes\sum_{j=n_f+1}^{6}f_j^+\,.
+% \end{array}
+% \end{equation}
+% Setting $f(Q)=1$ the rightmost term in $F_l^{\rm M/M0}$ cancels out,
+% leaving:
+% \begin{equation}
+% F_l^{\rm FONLL}=C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes\sum_{j=1}^{6}f_j^++\left[B_{l,+}^{\rm M}+C_+^{\rm ZM}-B_{l,+}^{\rm M}\right]\otimes f_l^+\,.
+% \end{equation}
+% We can now reinstate $f(Q)$ only in the term proportional to $f_l^+$,
+% finally finding:
+% \begin{equation}
+% F_l^{\rm FONLL}=C_{l,g}^{\rm FONLL} \otimes f_g +C_{l,\rm PS}^{\rm FONLL}\otimes\sum_{j=1}^{6}f_j^++C_{l,+}^{\rm FONLL}\otimes f_l^+\,,
+% \end{equation}
+% where:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle C_{l,g}^{\rm FONLL} = C_g^{\rm ZM}\,,\\
+% \\
+% \displaystyle C_{l,\rm PS}^{\rm FONLL}= C_{\rm PS}^{\rm ZM}\,,\\
+% \\
+% \displaystyle C_{l,+}^{\rm FONLL}= B_{l,+}^{\rm M}+f(Q)\left(C_+^{\rm ZM}-B_{l,+}^{\rm M}\right)\,.
+% \end{array}
+% \label{eq:FONLLCFsLight}
+% \end{equation}
+
+% Let us now move to the heavy structure functions, for which we have:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle F_h^{\rm ZM}=\theta(Q-m_h)\left[C_g^{\rm ZM}\otimes f_g +C_{\rm PS}^{\rm ZM}\otimes \sum_{j=1}^6f_j^++C_+^{\rm ZM}\otimes f_h^+\right]\,,\\
+% \\
+% \displaystyle F_h^{\rm M/M0}=B_{h,g}^{\rm M/M0}\otimes f_g +B_{h,\rm PS}^{\rm M/M0}\otimes\sum_{j=1}^{6}f_j^+-B_{h,\rm PS}^{\rm M/M0}\otimes\sum_{j=n_f+1}^{6}f_j^+\,.
+% \end{array}
+% \end{equation}
+% As above, we first set $f(Q)=1$ to enable the cancellation of the
+% rightmost term in $F_h^{\rm M/M0}$, and the reinstate it at the level
+% of the remaining coefficient functions using the fact that
+% $f(Q)\propto \theta(Q-m_h)$. The final result is:
+% \begin{equation}
+% F_h^{\rm FONLL}=C_{h,g}^{\rm FONLL} \otimes f_g +C_{h,\rm PS}^{\rm FONLL}\otimes\sum_{j=1}^{6}f_j^++C_{h,+}^{\rm FONLL}\otimes f_l^+\,,
+% \end{equation}
+% with:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle C_{h,g}^{\rm FONLL} = B_{h,g}^{\rm M} +f(Q)\left[C_g^{\rm ZM}-B_{h,g}^{\rm M0}\right]\,,\\
+% \\
+% \displaystyle C_{h,\rm PS}^{\rm FONLL}= B_{h,\rm PS}^{\rm M} +f(Q)\left[C_{\rm PS}^{\rm ZM}-B_{h,\rm PS}^{\rm M0}\right]\,,\\
+% \\
+% \displaystyle C_{h,+}^{\rm FONLL}= f(Q)C_+^{\rm ZM}\,.
+% \end{array}
+% \label{eq:FONLLCFsHeavy}
+% \end{equation}
+
+% \subsection{Charged-current case}
+
+% The charged current case is addressed in a similar manner. The main
+% difference is that the role of the charges is played by the CMK-matrix
+% elements such that the full structure functions is written as:
+% \begin{equation}
+% F(x,Q)=\sum_{\alpha=d,s,b}\sum_{\beta=u,c,t} |V_{\beta\alpha}|^2F_{\alpha\beta}(x,Q)\,.
+% \end{equation}
+% Once defined the number of active flavours $n_f$, one can stil achieve
+% a decomposition like in Eq.~(\ref{eq:HEavyLightSeparation}) with:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle F_l(x,Q)=\sum_{\alpha=\ell}\sum_{\beta=\ell'} |V_{\beta\alpha}|^2F_{\alpha\beta}(x,Q)\,,\\
+% \\
+% \displaystyle F_h(x,Q)=\sum_{\beta<h} |V_{\beta h}|^2F_{h\beta}(x,Q)\,,\quad\mbox{if $h$ is down-type}\,,\\
+% \\
+% \displaystyle F_h(x,Q)=\sum_{\alpha<h} |V_{h\alpha}|^2F_{\alpha h}(x,Q)\,,\quad\mbox{if $h$ is up-type}\,,\\
+% \end{array}
+% \end{equation}
+% where $\ell$ and $\ell'$ run over the $n_f$ flavours and $\beta<h$
+% ($\alpha<h$) stands for $\beta$ ($\alpha$) running over all flavours
+% with mass smaller than $m_h$. For example, if $n_f=3$ this recipe
+% produces:
+% \begin{equation}
+% \begin{array}{l}
+% \displaystyle F_l(x,Q)=|V_{ud}|^2F_{du}(x,Q)+|V_{us}|^2F_{su}(x,Q)\,,\\
+% \\
+% \displaystyle F_c(x,Q)=|V_{cd}|^2F_{dc}(x,Q)+|V_{cs}|^2F_{sc}(x,Q)\,,\\
+% \\
+% \displaystyle F_b(x,Q)=|V_{ub}|^2F_{bu}(x,Q)+|V_{cb}|^2F_{bc}(x,Q)\,,\\
+% \\
+% \displaystyle F_t(x,Q)=|V_{td}|^2F_{dt}(x,Q)+|V_{ts}|^2F_{st}(x,Q) +|V_{tb}|^2F_{bt}(x,Q)\,.
+% \end{array}
+% \end{equation}
 
 \newpage
 There is a final aspect that we need to address. While the ZM and M0
