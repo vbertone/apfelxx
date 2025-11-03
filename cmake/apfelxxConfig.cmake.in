@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+# Include exported targets
+include("${CMAKE_CURRENT_LIST_DIR}/apfelxxTargets.cmake")
+
+# Check that targets exist and provide helpful error messages
+if(NOT TARGET apfelxx::apfelxx)
+    message(FATAL_ERROR "The imported target 'apfelxx::apfelxx' was not found. Please make sure the apfelxx installation is correct.")
+endif()
+
+# Provide legacy variables for backward compatibility
+set(apfelxx_LIBRARIES apfelxx::apfelxx)
+set(apfelxx_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR@")

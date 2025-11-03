@@ -131,12 +131,19 @@ configure_file("${PROJECT_SOURCE_DIR}/inc/apfel/config.h.in" "${PROJECT_SOURCE_D
 # pkg-config
 configure_file("${PROJECT_SOURCE_DIR}/bin/apfelxx.pc.in" "${PROJECT_BINARY_DIR}/bin/apfelxx.pc")
 
+# Config.cmake file
+include(CMakePackageConfigHelpers)
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/apfelxxConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfig.cmake INSTALL_DESTINATION lib/cmake/apfelxx)
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfigVersion.cmake VERSION ${apfelxx_VERSION} COMPATIBILITY SameMajorVersion)
+
 # ============================
 # INSTALLATION
 # ============================
 
 # Installation of code
-install(TARGETS apfelxx RUNTIME DESTINATION bin LIBRARY DESTINATION lib)
+install(TARGETS apfelxx EXPORT apfelxxTargets RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 install(DIRECTORY inc/apfel DESTINATION include)
 install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx-config DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx.pc DESTINATION lib/pkgconfig)
+install(EXPORT apfelxxTargets FILE apfelxxTargets.cmake NAMESPACE apfelxx:: DESTINATION lib/cmake/apfelxx)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfigVersion.cmake DESTINATION lib/cmake/apfelxx)
