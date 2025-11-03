@@ -70,6 +70,7 @@ namespace apfel
   public:
     ATS1HH_L();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
@@ -82,6 +83,7 @@ namespace apfel
   public:
     ATS1HH_0();
     double Singular(double const& x) const;
+    double Local(double const& x)    const;
   };
 
   /**
