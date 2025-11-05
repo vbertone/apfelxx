@@ -513,6 +513,22 @@ namespace apfel
     else
       return central;
   }
+  double Cmth23gNC::Delta(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta = this->_eta;
+    const double z   = eta * x;
+    const double xi  = 4 * eta / ( 1 - eta );
+    const double expansion_beta_ = ThExpansiong3F2(_nf, xi, z, _muterms);
+    const double expansion_no_beta_ = ThExpansiong3constF2(xi, _muterms);
+    const double exp = expansion_beta_ + expansion_no_beta_;
+    const double nlo = _c21g.Regular(x);
+    const double central = nlo * exp;
+    const double delta_prefactor = std::abs(central - eta * C2_g1_threshold(z, 1 / xi) * exp);
+    const double delta_const = std::abs(nlo * expansion_no_beta_);
+    return sqrt(delta_prefactor * delta_prefactor + delta_const * delta_const);
+  }
 
   //_________________________________________________________________________________
   CmthL3gNC::CmthL3gNC(int const& nf, double const& eta, bool const& muterms, int const& imod):
@@ -545,6 +561,22 @@ namespace apfel
       return central + delta;
     else
       return central;
+  }
+  double CmthL3gNC::Delta(double const& x) const
+  {
+    if (x >= 1)
+      return 0;
+    const double eta = this->_eta;
+    const double z   = eta * x;
+    const double xi  = 4 * eta / ( 1 - eta );
+    const double expansion_beta_ = ThExpansiong3FL(_nf, xi, z, _muterms);
+    const double expansion_no_beta_ = ThExpansiong3constFL(xi, _muterms);
+    const double exp = expansion_beta_ + expansion_no_beta_;
+    const double nlo = _cL1g.Regular(x);
+    const double central = nlo * exp;
+    const double delta_prefactor = std::abs(central - eta * CL_g1_threshold(z, 1 / xi) * exp);
+    const double delta_const = std::abs(nlo * expansion_no_beta_);
+    return sqrt(delta_prefactor * delta_prefactor + delta_const * delta_const);
   }
 
   //_________________________________________________________________________________
@@ -885,7 +917,7 @@ namespace apfel
     // Return according to _imod
     if (_imod == 1)
       return ll + nllc - delta;
-    if (_imod == 2)
+    else if (_imod == 2)
       return ll + nllc + delta;
     else
       return ll + nllc;
@@ -964,7 +996,7 @@ namespace apfel
     // Return according to _imod
     if (_imod == 1)
       return ll + nllc - delta;
-    if (_imod == 2)
+    else if (_imod == 2)
       return ll + nllc + delta;
     else
       return ll + nllc;
@@ -994,7 +1026,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, std::vector<int> const& imod):
+  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, int const& imod):
     Expression(),
     _eta(eta),
     _imod(imod),
@@ -1003,9 +1035,15 @@ namespace apfel
     _cm023g_l(Cm023gNC_l{nf, false}),
     _cm023g_l2(Cm023gNC_l2{nf, false}),
     _cm023g_l3(Cm023gNC_l3{nf, false}),
-    _cmsx23g(Cmsx23gNC{nf, eta, false, _imod[0]}),
-    _cm0sx23g(Cm0sx23gNC{nf, eta, false, _imod[0]})
+    _cmsx23g(Cmsx23gNC{nf, eta, false}),
+    _cm0sx23g(Cm0sx23gNC{nf, eta, false})
   {
+    _cllsx    = _cmsx23g.CoefficientLL();
+    _cllsx0   = _cm0sx23g.CoefficientLL();
+    _cnllcsx  = _cmsx23g.CoefficientNLLCentral();
+    _cnllcsx0 = _cm0sx23g.CoefficientNLLCentral();
+    _cnllvsx  = _cmsx23g.CoefficientNLLVariation();
+    _cnllvsx0 = _cm0sx23g.CoefficientNLLVariation();
   }
   double Cm2a3gNC::Regular(double const& x) const
   {
@@ -1019,15 +1057,37 @@ namespace apfel
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
-    // Additive matching
-    return fthr * _cmth23g.Regular(x)                                                                                                       // Threshold approximation
-           + fasy * eta * ( _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z) // Q >> m approximation
-                            + _cmsx23g.Regular(z)                                                                                           // Small-x approximation
-                            - _cm0sx23g.Regular(z) );                                                                                       // Q >> m and Small-x approximation
+    const double thr  = _cmth23g.Regular(x);
+    const double dthr = _cmth23g.Delta(x);
+    const double m0   = _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z);
+    const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
+    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
+    const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
+
+    // Additive matching (central as in ADANI)
+    const double am  = fthr * thr + fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+
+    // Modified multiplicative matching 1 (as in ADANI)
+    const double mm1 = fthr * ( thr - dthr ) + fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+
+    // Modified multiplicative matching 2 (as in ADANI)
+    const double mm2 = fthr * ( thr + dthr ) + fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+
+    // Compute varations
+    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+
+    // Return approriate variation according to _imod
+    if (_imod == 1)
+      return am - delta;
+    else if (_imod == 2)
+      return am + delta;
+    else
+      return am;
   }
 
   //_________________________________________________________________________________
-  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, std::vector<int> const& imod):
+  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, int const& imod):
     Expression(),
     _eta(eta),
     _imod(imod),
@@ -1035,9 +1095,15 @@ namespace apfel
     _cm023ps_l(Cm023psNC_l{nf, false}),
     _cm023ps_l2(Cm023psNC_l2{nf, false}),
     _cm023ps_l3(Cm023psNC_l3{nf, false}),
-    _cmsx23ps(Cmsx23psNC{nf, eta, false, _imod[0]}),
-    _cm0sx23ps(Cm0sx23psNC{nf, eta, false, _imod[0]})
+    _cmsx23ps(Cmsx23psNC{nf, eta, false}),
+    _cm0sx23ps(Cm0sx23psNC{nf, eta, false})
   {
+    _cllsx    = _cmsx23ps.CoefficientLL();
+    _cllsx0   = _cm0sx23ps.CoefficientLL();
+    _cnllcsx  = _cmsx23ps.CoefficientNLLCentral();
+    _cnllcsx0 = _cm0sx23ps.CoefficientNLLCentral();
+    _cnllvsx  = _cmsx23ps.CoefficientNLLVariation();
+    _cnllvsx0 = _cm0sx23ps.CoefficientNLLVariation();
   }
   double Cm2a3psNC::Regular(double const& x) const
   {
@@ -1051,14 +1117,35 @@ namespace apfel
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
-    // Additive matching
-    return fasy * eta * ( _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z) // Q >> m approximation
-                          + _cmsx23ps.Regular(z)                                                                                              // Small-x approximation
-                          - _cm0sx23ps.Regular(z) );                                                                                          // Q >> m and Small-x approximation
+    const double m0   = _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z);
+    const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
+    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
+    const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
+
+    // Additive matching (central as in ADANI)
+    const double am  = fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+
+    // Modified multiplicative matching 1 (as in ADANI)
+    const double mm1 = fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+
+    // Modified multiplicative matching 2 (as in ADANI)
+    const double mm2 = fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+
+    // Compute varations
+    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+
+    // Return approriate variation according to _imod
+    if (_imod == 1)
+      return am - delta;
+    else if (_imod == 2)
+      return am + delta;
+    else
+      return am;
   }
 
   //_________________________________________________________________________________
-  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, std::vector<int> const& imod):
+  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, int const& imod):
     Expression(),
     _eta(eta),
     _imod(imod),
@@ -1066,9 +1153,15 @@ namespace apfel
     _cm0L3g_c(Cm0L3gNC_c{nf}),
     _cm0L3g_l(Cm0L3gNC_l{nf, false}),
     _cm0L3g_l2(Cm0L3gNC_l2{nf, false}),
-    _cmsxL3g(CmsxL3gNC{nf, eta, false, _imod[0]}),
-    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false, _imod[0]})
+    _cmsxL3g(CmsxL3gNC{nf, eta, false}),
+    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false})
   {
+    _cllsx    = _cmsxL3g.CoefficientLL();
+    _cllsx0   = _cm0sxL3g.CoefficientLL();
+    _cnllcsx  = _cmsxL3g.CoefficientNLLCentral();
+    _cnllcsx0 = _cm0sxL3g.CoefficientNLLCentral();
+    _cnllvsx  = _cmsxL3g.CoefficientNLLVariation();
+    _cnllvsx0 = _cm0sxL3g.CoefficientNLLVariation();
   }
   double CmLa3gNC::Regular(double const& x) const
   {
@@ -1081,29 +1174,52 @@ namespace apfel
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1. - fthr;
+    const double thr  = _cmthL3g.Regular(x);
+    const double dthr = _cmthL3g.Delta(x);
+    const double m0   = _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z);
+    const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
+    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
+    const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
+
     // Additive matching
-    //return fthr * _cmthL3g.Regular(x)                                                                        // Threshold approximation
-    //       + fasy * eta * ( _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z) // Q >> m approximation
-    //                        + _cmsxL3g.Regular(z)                                                            // Small-x approximation
-    //                        - _cm0sxL3g.Regular(z) );                                                        // Q >> m and Small-x approximation
-    // Modified multiplicative matching
-    return fthr * _cmthL3g.Regular(x)
-           + fasy * eta * ( _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z)
-                            + ( _cmsxL3g.CoefficientNLLCentral() - _cm0sxL3g.CoefficientNLLCentral() ) / z )
-           * _cmsxL3g.CoefficientLL() / _cm0sxL3g.CoefficientLL();
+    const double am  = fthr * ( thr - dthr ) + fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+
+    // Modified multiplicative matching 1 (central as in ADANI)
+    const double mm1 = fthr * thr + fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+
+    // Modified multiplicative matching 2 (as in ADANI)
+    const double mm2 = fthr * ( thr + dthr ) + fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+
+    // Compute varations
+    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+
+    // Return approriate variation according to _imod
+    if (_imod == 1)
+      return mm1 - delta;
+    else if (_imod == 2)
+      return mm1 + delta;
+    else
+      return mm1;
   }
 
   //_________________________________________________________________________________
-  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, std::vector<int> const& imod):
+  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, int const& imod):
     Expression(),
     _eta(eta),
     _imod(imod),
     _cm0L3ps_c(Cm0L3psNC_c{nf}),
     _cm0L3ps_l(Cm0L3psNC_l{nf, false}),
     _cm0L3ps_l2(Cm0L3psNC_l2{nf, false}),
-    _cmsxL3ps(CmsxL3psNC{nf, eta, false, _imod[0]}),
-    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false, _imod[0]})
+    _cmsxL3ps(CmsxL3psNC{nf, eta, false}),
+    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false})
   {
+    _cllsx    = _cmsxL3ps.CoefficientLL();
+    _cllsx0   = _cm0sxL3ps.CoefficientLL();
+    _cnllcsx  = _cmsxL3ps.CoefficientNLLCentral();
+    _cnllcsx0 = _cm0sxL3ps.CoefficientNLLCentral();
+    _cnllvsx  = _cmsxL3ps.CoefficientNLLVariation();
+    _cnllvsx0 = _cm0sxL3ps.CoefficientNLLVariation();
   }
   double CmLa3psNC::Regular(double const& x) const
   {
@@ -1116,14 +1232,31 @@ namespace apfel
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
+    const double m0   = _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z);
+    const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
+    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
+    const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
+
     // Additive matching
-    //return fasy * eta * ( _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z) // Q >> m approximation
-    //                      + _cmsxL3ps.Regular(z)                                                              // Small-x approximation
-    //                      - _cm0sxL3ps.Regular(z) );                                                          // Q >> m and Small-x approximation
-    // Modified multiplicative matching
-    return fasy * eta * ( _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z)
-                          + ( _cmsxL3ps.CoefficientNLLCentral() - _cm0sxL3ps.CoefficientNLLCentral() ) / z )
-           * _cmsxL3ps.CoefficientLL() / _cm0sxL3ps.CoefficientLL();
+    const double am  = fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+
+    // Modified multiplicative matching 1 (as in ADANI)
+    const double mm1 = fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+
+    // Modified multiplicative matching 2 (as in ADANI)
+    const double mm2 = fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+
+    // Compute varations
+    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+
+    // Return approriate variation according to _imod
+    if (_imod == 1)
+      return mm1 - delta;
+    else if (_imod == 2)
+      return mm1 + delta;
+    else
+      return mm1;
   }
 
   //_________________________________________________________________________________

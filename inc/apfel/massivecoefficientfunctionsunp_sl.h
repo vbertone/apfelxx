@@ -244,6 +244,7 @@ namespace apfel
   public:
     Cmth23gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double Delta(double const& x) const;
   private:
     int     const _nf;
     double  const _eta;
@@ -262,6 +263,7 @@ namespace apfel
   public:
     CmthL3gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double Delta(double const& x) const;
   private:
     int     const _nf;
     double  const _eta;
@@ -456,18 +458,24 @@ namespace apfel
   class Cm2a3gNC: public Expression
   {
   public:
-    Cm2a3gNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
+    Cm2a3gNC(int const& nf, double const& eta, int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    double           const _eta;
-    std::vector<int> const _imod;
-    Cmth23gNC        const _cmth23g;
-    Cm023gNC_c       const _cm023g_c;
-    Cm023gNC_l       const _cm023g_l;
-    Cm023gNC_l2      const _cm023g_l2;
-    Cm023gNC_l3      const _cm023g_l3;
-    Cmsx23gNC        const _cmsx23g;
-    Cm0sx23gNC       const _cm0sx23g;
+    double      const _eta;
+    int         const _imod;
+    Cmth23gNC   const _cmth23g;
+    Cm023gNC_c  const _cm023g_c;
+    Cm023gNC_l  const _cm023g_l;
+    Cm023gNC_l2 const _cm023g_l2;
+    Cm023gNC_l3 const _cm023g_l3;
+    Cmsx23gNC   const _cmsx23g;
+    Cm0sx23gNC  const _cm0sx23g;
+    double            _cllsx;
+    double            _cllsx0;
+    double            _cnllcsx;
+    double            _cnllcsx0;
+    double            _cnllvsx;
+    double            _cnllvsx0;
   };
 
   /**
@@ -477,17 +485,23 @@ namespace apfel
   class Cm2a3psNC: public Expression
   {
   public:
-    Cm2a3psNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
+    Cm2a3psNC(int const& nf, double const& eta, int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    double           const _eta;
-    std::vector<int> const _imod;
-    Cm023psNC_c      const _cm023ps_c;
-    Cm023psNC_l      const _cm023ps_l;
-    Cm023psNC_l2     const _cm023ps_l2;
-    Cm023psNC_l3     const _cm023ps_l3;
-    Cmsx23psNC       const _cmsx23ps;
-    Cm0sx23psNC      const _cm0sx23ps;
+    double       const _eta;
+    int          const _imod;
+    Cm023psNC_c  const _cm023ps_c;
+    Cm023psNC_l  const _cm023ps_l;
+    Cm023psNC_l2 const _cm023ps_l2;
+    Cm023psNC_l3 const _cm023ps_l3;
+    Cmsx23psNC   const _cmsx23ps;
+    Cm0sx23psNC  const _cm0sx23ps;
+    double             _cllsx;
+    double             _cllsx0;
+    double             _cnllcsx;
+    double             _cnllcsx0;
+    double             _cnllvsx;
+    double             _cnllvsx0;
   };
 
   /**
@@ -497,17 +511,23 @@ namespace apfel
   class CmLa3gNC: public Expression
   {
   public:
-    CmLa3gNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
+    CmLa3gNC(int const& nf, double const& eta, int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    double           const _eta;
-    std::vector<int> const _imod;
-    CmthL3gNC        const _cmthL3g;
-    Cm0L3gNC_c       const _cm0L3g_c;
-    Cm0L3gNC_l       const _cm0L3g_l;
-    Cm0L3gNC_l2      const _cm0L3g_l2;
-    CmsxL3gNC        const _cmsxL3g;
-    Cm0sxL3gNC       const _cm0sxL3g;
+    double      const _eta;
+    int         const _imod;
+    CmthL3gNC   const _cmthL3g;
+    Cm0L3gNC_c  const _cm0L3g_c;
+    Cm0L3gNC_l  const _cm0L3g_l;
+    Cm0L3gNC_l2 const _cm0L3g_l2;
+    CmsxL3gNC   const _cmsxL3g;
+    Cm0sxL3gNC  const _cm0sxL3g;
+    double            _cllsx;
+    double            _cllsx0;
+    double            _cnllcsx;
+    double            _cnllcsx0;
+    double            _cnllvsx;
+    double            _cnllvsx0;
   };
 
   /**
@@ -517,16 +537,22 @@ namespace apfel
   class CmLa3psNC: public Expression
   {
   public:
-    CmLa3psNC(int const& nf, double const& eta, std::vector<int> const& imod = {0, 0, 0, 0, 0});
+    CmLa3psNC(int const& nf, double const& eta, int const& imod = 0);
     double Regular(double const& x) const;
   private:
-    double           const _eta;
-    std::vector<int> const _imod;
-    Cm0L3psNC_c      const _cm0L3ps_c;
-    Cm0L3psNC_l      const _cm0L3ps_l;
-    Cm0L3psNC_l2     const _cm0L3ps_l2;
-    CmsxL3psNC       const _cmsxL3ps;
-    Cm0sxL3psNC      const _cm0sxL3ps;
+    double       const _eta;
+    int          const _imod;
+    Cm0L3psNC_c  const _cm0L3ps_c;
+    Cm0L3psNC_l  const _cm0L3ps_l;
+    Cm0L3psNC_l2 const _cm0L3ps_l2;
+    CmsxL3psNC   const _cmsxL3ps;
+    Cm0sxL3psNC  const _cm0sxL3ps;
+    double             _cllsx;
+    double             _cllsx0;
+    double             _cnllcsx;
+    double             _cnllcsx0;
+    double             _cnllvsx;
+    double             _cnllvsx0;
   };
   ///@}
 
