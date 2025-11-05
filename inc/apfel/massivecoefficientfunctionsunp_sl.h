@@ -242,12 +242,13 @@ namespace apfel
   class Cmth23gNC: public Expression
   {
   public:
-    Cmth23gNC(int const& nf, double const& eta, bool const& muterms = true);
+    Cmth23gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int     const _nf;
     double  const _eta;
     bool    const _muterms;
+    int     const _imod;
     Cm21gNC const _c21g;
   };
 
@@ -259,12 +260,13 @@ namespace apfel
   class CmthL3gNC: public Expression
   {
   public:
-    CmthL3gNC(int const& nf, double const& eta, bool const& muterms = true);
+    CmthL3gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int     const _nf;
     double  const _eta;
     bool    const _muterms;
+    int     const _imod;
     CmL1gNC const _cL1g;
   };
   ///@}
@@ -284,11 +286,16 @@ namespace apfel
   public:
     Cmsx23gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const { return _cll; }
+    double CoefficientNLLCentral() const { return _cnllc; }
+    double CoefficientNLLVariation() const { return _cnllv; }
   private:
     int    const _nf;
-    double const _eta;
     bool   const _muterms;
     int    const _imod;
+    double       _cll;
+    double       _cnllc;
+    double       _cnllv;
   };
 
   /**
@@ -301,6 +308,9 @@ namespace apfel
   public:
     Cmsx23psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const;
+    double CoefficientNLLCentral() const;
+    double CoefficientNLLVariation() const;
   private:
     Cmsx23gNC const _c23g;
   };
@@ -315,11 +325,16 @@ namespace apfel
   public:
     CmsxL3gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const { return _cll; }
+    double CoefficientNLLCentral() const { return _cnllc; }
+    double CoefficientNLLVariation() const { return _cnllv; }
   private:
     int    const _nf;
-    double const _eta;
     bool   const _muterms;
     int    const _imod;
+    double       _cll;
+    double       _cnllc;
+    double       _cnllv;
   };
 
   /**
@@ -332,6 +347,9 @@ namespace apfel
   public:
     CmsxL3psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const;
+    double CoefficientNLLCentral() const;
+    double CoefficientNLLVariation() const;
   private:
     CmsxL3gNC const _cL3g;
   };
@@ -352,11 +370,16 @@ namespace apfel
   public:
     Cm0sx23gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const { return _cll; }
+    double CoefficientNLLCentral() const { return _cnllc; }
+    double CoefficientNLLVariation() const { return _cnllv; }
   private:
     int    const _nf;
-    double const _eta;
     bool   const _muterms;
     int    const _imod;
+    double       _cll;
+    double       _cnllc;
+    double       _cnllv;
   };
 
   /**
@@ -369,6 +392,9 @@ namespace apfel
   public:
     Cm0sx23psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const;
+    double CoefficientNLLCentral() const;
+    double CoefficientNLLVariation() const;
   private:
     Cm0sx23gNC const _c23g;
   };
@@ -383,11 +409,16 @@ namespace apfel
   public:
     Cm0sxL3gNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const { return _cll; }
+    double CoefficientNLLCentral() const { return _cnllc; }
+    double CoefficientNLLVariation() const { return _cnllv; }
   private:
     int    const _nf;
-    double const _eta;
     bool   const _muterms;
     int    const _imod;
+    double       _cll;
+    double       _cnllc;
+    double       _cnllv;
   };
 
   /**
@@ -400,6 +431,9 @@ namespace apfel
   public:
     Cm0sxL3psNC(int const& nf, double const& eta, bool const& muterms = true, int const& imod = 0);
     double Regular(double const& x) const;
+    double CoefficientLL() const;
+    double CoefficientNLLCentral() const;
+    double CoefficientNLLVariation() const;
   private:
     Cm0sxL3gNC const _cL3g;
   };
@@ -434,12 +468,6 @@ namespace apfel
     Cm023gNC_l3      const _cm023g_l3;
     Cmsx23gNC        const _cmsx23g;
     Cm0sx23gNC       const _cm0sx23g;
-    double           const _var = 0.3;
-    double           const _fact = 3;
-    double                 _A;
-    double                 _B;
-    double                 _C;
-    double                 _D;
   };
 
   /**
@@ -460,12 +488,6 @@ namespace apfel
     Cm023psNC_l3     const _cm023ps_l3;
     Cmsx23psNC       const _cmsx23ps;
     Cm0sx23psNC      const _cm0sx23ps;
-    double           const _var = 0.3;
-    double           const _fact = 3;
-    double                 _A;
-    double                 _B;
-    double                 _C;
-    double                 _D;
   };
 
   /**
@@ -486,12 +508,6 @@ namespace apfel
     Cm0L3gNC_l2      const _cm0L3g_l2;
     CmsxL3gNC        const _cmsxL3g;
     Cm0sxL3gNC       const _cm0sxL3g;
-    double           const _var = 0.2;
-    double           const _fact = 2;
-    double                 _A;
-    double                 _B;
-    double                 _C;
-    double                 _D;
   };
 
   /**
@@ -511,12 +527,6 @@ namespace apfel
     Cm0L3psNC_l2     const _cm0L3ps_l2;
     CmsxL3psNC       const _cmsxL3ps;
     Cm0sxL3psNC      const _cm0sxL3ps;
-    double           const _var = 0.2;
-    double           const _fact = 2;
-    double                 _A;
-    double                 _B;
-    double                 _C;
-    double                 _D;
   };
   ///@}
 
