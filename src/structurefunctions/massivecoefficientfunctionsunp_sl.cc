@@ -1075,7 +1075,9 @@ namespace apfel
     const double mm2 = fthr * ( thr + dthr ) + fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
 
     // Compute varations
-    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+    const double ratio = _cllsx / _cllsx0;
+    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
+    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * lnll );
 
     // Return approriate variation according to _imod
     if (_imod == 1)
@@ -1133,7 +1135,9 @@ namespace apfel
     const double mm2 = fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
 
     // Compute varations
-    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+    const double ratio = _cllsx / _cllsx0;
+    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
+    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * lnll );
 
     // Return approriate variation according to _imod
     if (_imod == 1)
@@ -1192,7 +1196,9 @@ namespace apfel
     const double mm2 = fthr * ( thr + dthr ) + fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
 
     // Compute varations
-    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+    const double ratio = _cllsx / _cllsx0;
+    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
+    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * lnll );
 
     // Return approriate variation according to _imod
     if (_imod == 1)
@@ -1248,7 +1254,9 @@ namespace apfel
     const double mm2 = fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
 
     // Compute varations
-    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * std::abs(log(_cllsx / _cllsx0)) );
+    const double ratio = _cllsx / _cllsx0;
+    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
+    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * lnll );
 
     // Return approriate variation according to _imod
     if (_imod == 1)
