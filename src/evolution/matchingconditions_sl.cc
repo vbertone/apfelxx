@@ -774,9 +774,8 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  APS2polHq_0::APS2polHq_0(int const& nf):
-    Expression(),
-    _nf(nf)
+  APS2polHq_0::APS2polHq_0():
+    Expression()
   {
   }
   double APS2polHq_0::Regular(double const& x) const
@@ -791,9 +790,9 @@ namespace apfel
                        + 20 * ( 1 - x ) * ( 2 * Li21mx - 3 * zeta2 ) - ( 2 - 6 * x ) * lnx2
                        - ( 12 + 60 * x ) * lnx - 72 * ( 1 - x ) )
            // Last term in Eq. (138) of https://arxiv.org/pdf/2211.15337
-           + 4 * CF * TR * zeta2 * ( 5 * ( 1 - x ) + 2 * ( 1 + x ) * lnx )
-           // Second term in the r.h.s. of Eq. (141) of https://arxiv.org/pdf/2211.15337
-           + 4 * CF * TR * _nf * ( ( 2 + x ) * lnx2 + 2 * ( 3 - x ) * lnx + 4 * ( 1 - x ) );
+           + 4 * CF * TR * zeta2 * ( 5 * ( 1 - x ) + 2 * ( 1 + x ) * lnx );
+    // Second term in the r.h.s. of Eq. (141) of https://arxiv.org/pdf/2211.15337
+    //+ 4 * CF * TR * _nf * ( ( 2 + x ) * lnx2 + 2 * ( 3 - x ) * lnx + 4 * ( 1 - x ) );
   }
 
   //_________________________________________________________________________________
@@ -824,6 +823,26 @@ namespace apfel
   }
   double AS2polHg_0::Regular(double const& x) const
   {
+    const double x2     = x * x;
+    const double lnx    = log(x);
+    const double ln1mx  = log(1 - x);
+    const double ln1px  = log(1 + x);
+    const double Li2x   = dilog(x);
+    const double Li21mx = dilog(1 - x);
+    const double Li2mx  = dilog(- x);
+    const double Li3x   = trilog(x);
+    const double Li31mx = trilog(1 - x);
+    const double Li3mx  = trilog(- x);
+    const double S12mx  = wgplg(1, 2, - x);
+    return TR*(CF*(Li21mx*(8.*ln1mx - 16.*ln1mx*x) + lnx*(lnx*(-5. + 4.*x*(2. + x) + (- 4.*ln1mx + 0.6666666666666666*lnx)*(-1. + 2.*x)) +
+                                                          2.*(-8. + 8.*Li2x*(1. - 2.*x) - 25.*x + 2.*ln1mx*(11. + 2.*(-4. - x)*x - ln1mx*(-1. + 2.*x)))) + 8.*(-9. + x*(2. + x))*zeta2 +
+                   2.*(-11. + 23.*x + 2.*(Li2x*(29. + 4.*(-3. - x)*x) + ln1mx*(-16. + 15.*x + ln1mx*(3. - x*(2. + x) + (0.3333333333333333*ln1mx)*(-1. + 2.*x)))) + (-1. + 2.*x)*(4.*Li31mx + 12.*Li3x - 8.*zeta3)))\
+               + CA*(8.*(-(Li3mx*(1. + 2.*x)) + Li2mx*(2.*(1. + x) + (-2.*ln1px + lnx)*(1. + 2.*x))) +
+                     2.*(8.*Li21mx*ln1mx*x + ln1mx*(2. - 4.*Li21mx + ln1mx*(-5. + x*(4. + x) + (- 0.6666666666666666*ln1mx)*(-1. + 2.*x))) +
+                         lnx*(2.*ln1px*(4.*(1. + x) - 2.*ln1px*(1. + 2.*x) + lnx*(1. + 2.*x)) + 2.*(-14. - 37.*x + 8.*Li2x*(1. + x) + ln1mx*(-25. + x*(24. + x))) +
+                              lnx*(-3. + (0.6666666666666666*lnx)*(-1. - 2.*x) - x2)) + 2.*(-51. + 53.*x - 16.*Li3x*(1. + x) - 2.*Li31mx*(-1. + 2.*x) + Li2x*(-25. + 2.*x*(14. + x)) +
+                                                                                            (4. - x*(4. + x) - 2.*ln1px*(1. + 2.*x))*zeta2 - 4.*(S12mx*(1. + 2.*x) - (3. + 5.*x)*zeta3)))));
+    /*
     // Eq. (A.2) of https://arxiv.org/pdf/hep-ph/9608342
     const double x2     = x * x;
     const double ln1mx  = log(1 - x);
@@ -840,7 +859,7 @@ namespace apfel
     const double lnx    = log(x);
     const double lnx2   = lnx * lnx;
     const double lnx3   = lnx * lnx2;
-    return - ( CF * TR * ( ( - 1 + 2 * x ) * ( 8 * zeta3 + 8 * zeta2 * ln1mx + 4 * ln1mx3 / 3 - 8 * ln1mx * Li21mx + 4 * zeta2 * lnx - 4 * lnx * ln1mx2
+    return ( CF * TR * ( ( - 1 + 2 * x ) * ( 8 * zeta3 + 8 * zeta2 * ln1mx + 4 * ln1mx3 / 3 - 8 * ln1mx * Li21mx + 4 * zeta2 * lnx - 4 * lnx * ln1mx2
                                                + 2 * lnx3 / 3 - 8 * lnx * Li21mx + 8 * Li31mx - 24 * S121mx )
                            - ( 116 - 48 * x - 16 * x2 ) * Li21mx + ( 50 - 32 * x - 8 * x2 ) * zeta2 - ( 72 - 16 * x - 8 * x2 ) * lnx * ln1mx
                            + ( 12 - 8 * x - 4 * x2 ) * ln1mx2 - ( 5 - 8 * x - 4 * x2 ) * lnx2 - ( 64 - 60 * x ) * ln1mx - ( 16 + 50 * x ) * lnx - 22 + 46 * x )
@@ -849,10 +868,11 @@ namespace apfel
                                                 - 8 * Li3mx - 16 * S12mx )
                              + 16 * ( 1 + x ) * ( 4 * S121mx + 2 * lnx * Li21mx - 3 * zeta2 * lnx + Li2mx + lnx * ln1px ) - 16 * ( 1 - x ) * zeta3
                              + ( 100 - 112 * x - 8 * x2 ) * Li21mx - ( 132 - 144 * x - 4 * x2 ) * zeta2 - 4 * x * ( 4 +  x ) * lnx * ln1mx
-                             - ( 10 - 8 * x - 2 * x2 ) * ln1mx2 - ( 6 + 2 * x2 ) * lnx2 + 4 * ln1mx - ( 56 + 148 * x ) * lnx - 204 + 212 * x ) )
+                             - ( 10 - 8 * x - 2 * x2 ) * ln1mx2 - ( 6 + 2 * x2 ) * lnx2 + 4 * ln1mx - ( 56 + 148 * x ) * lnx - 204 + 212 * x ) );
            // Last term in the second line of Eq. (111) of https://arxiv.org/pdf/2211.15337
            + 2 * CF * TR * ( - 3 - 2 * ( 1 - 2 * x ) * lnx + 4 * ( 1 - 2 * x ) * ln1mx )
            + 8 * CA * TR * ( 6 * ( 1 - x ) + 2 * ( 1 + x ) * lnx - ( 1 - 2 * x ) * ln1mx );
+    */
   }
 
   //_________________________________________________________________________________
@@ -862,6 +882,16 @@ namespace apfel
   }
   double AS2polHg_L::Regular(double const& x) const
   {
+    const double lnx    = log(x);
+    const double lnx2   = lnx * lnx;
+    const double ln1mx  = log(1 - x);
+    const double ln1mx2 = ln1mx * ln1mx;
+    const double ln1px  = log(1 + x);
+    const double Li2mx  = dilog(- x);
+    return -TR*(-96.*CA - 8.*CF + 16.*CA*Li2mx + 32.*CA*ln1mx - 32.*CF*ln1mx - 8.*CA*ln1mx2 + 8.*CF*ln1mx2 - 8.*CA*lnx + 4.*CF*lnx - 16.*CF*ln1mx*lnx + 16.*CA*ln1px*lnx + 8.*CA*lnx2 +
+                4.*CF*lnx2 + 88.*CA*x - 12.*CF*x + 32.*CA*Li2mx*x - 32.*CA*ln1mx*x + 32.*CF*ln1mx*x + 16.*CA*ln1mx2*x - 16.*CF*ln1mx2*x - 64.*CA*lnx*x - 64.*CF*lnx*x + 32.*CF*ln1mx*lnx*x +
+                32.*CA*ln1px*lnx*x + 16.*CA*lnx2*x - 8.*CF*lnx2*x + 16.*CA*zeta2 - 16.*CF*zeta2 + 32.*CF*x*zeta2);
+    /*
     const double lnx   = log(x);
     const double ln1mx = log(1 - x);
     const double ln1px = log(1 + x);
@@ -871,6 +901,7 @@ namespace apfel
                              + 3 * ln1mx * ( - 8 * ( CA - CF ) * ( - 1 + x ) + 4 * CF * ( - 1 + 2 * x ) * lnx )
                              + 3 * lnx * ( CF - 2 * ( CA + 8 * ( CA + CF ) * x ) + ( CF - 2 * CF * x + CA * ( 2 + 4 * x ) ) * lnx
                                            + 4 * ( CA + 2 * CA * x ) *ln1px ) + 12 * CA * ( 1 + 2 * x ) * dilog(-x) );
+    */
   }
 
   //_________________________________________________________________________________
@@ -880,8 +911,13 @@ namespace apfel
   }
   double AS2polHg_L2::Regular(double const& x) const
   {
+    const double lnx   = log(x);
+    const double ln1mx = log(1 - x);
+    return -5.333333333333333 * pow(TR,2)*(-1. + 2.*x) + TR*(-48.*CA + 6.*CF + 8.*CA*ln1mx - 8.*CF*ln1mx - 16.*CA*lnx + 4.*CF*lnx + 48.*CA*x - 16.*CA*ln1mx*x + 16.*CF*ln1mx*x - 16.*CA*lnx*x - 8.*CF*lnx*x);
+    /*
     return - 2 * TR * ( - 3 * ( CF + 8 * CA * ( - 1 + x ) ) + 4 * ( CA - CF ) * ( - 1 + 2 * x ) * log(1 - x)
                         + ( - 2 * CF + 4 * CF * x + 8 * CA * ( 1 + x ) ) * log(x) );
+    */
   }
 
   //_________________________________________________________________________________
@@ -891,7 +927,9 @@ namespace apfel
   }
   double ANS2polqqH_0::Regular(double const& x) const
   {
-    return 2. / 27 * CF * TR * ( 22 - 134 * x - 3 * log(x) * ( 22 - 24 * x + 22 * pow(x, 2) + 3 * ( 1 + pow(x, 2) ) * log(x) ) / ( - 1 + x ) );
+    const double x2 = x * x;
+    const double lnx = log(x);
+    return CF * TR * ( - 28 * ( 7 + x ) / 27 + 4 * ( 1 - 12 * x + x2 ) * lnx / ( - 1 + x ) / 9 - 2 * ( 1 + x2 ) * pow(lnx, 2) / ( - 1 + x ) / 3 );
   }
   double ANS2polqqH_0::Singular(double const& x) const
   {
@@ -909,7 +947,7 @@ namespace apfel
   }
   double ANS2polqqH_L::Regular(double const& x) const
   {
-    return 8. / 9 * CF * TR * ( - 1 + 11 * x + 3 * ( 1 + pow(x, 2) ) * log(x) / ( - 1 + x ) );
+    return 8. / 9 * CF * TR * ( - 1 + 11 * x - 3. * ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) );
   }
   double ANS2polqqH_L::Singular(double const& x) const
   {

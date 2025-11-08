@@ -1176,11 +1176,11 @@ namespace apfel
     const Operator AS2ggH0  {g, AS2polggH_0{},   IntEps};
     const Operator AS2ggHL  {g, AS2polggH_L{},   IntEps};
     const Operator AS2ggHL2 {g, AS2polggH_L2{},  IntEps};
+    const Operator APS2Hq0  {g, APS2polHq_0{},   IntEps};
     const Operator AS2qqHL  = ANS2qqHL  + APS2HqL;
     const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator APS2Hq0{g, APS2polHq_0{nf},   IntEps};
         const Operator AS2qqH0 = ANS2qqH0  + APS2Hq0;
         const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
@@ -1449,11 +1449,11 @@ namespace apfel
     const Operator AS2ggH0  {g, AS2polggH_0{},   IntEps};
     const Operator AS2ggHL  {g, AS2polggH_L{},   IntEps};
     const Operator AS2ggHL2 {g, AS2polggH_L2{},  IntEps};
+    const Operator APS2Hq0  {g, APS2polHq_0{},   IntEps};
     const Operator AS2qqHL  = ANS2qqHL  + APS2HqL;
     const Operator AS2qqHL2 = ANS2qqHL2 + APS2HqL2;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator APS2Hq0{g, APS2polHq_0{nf},   IntEps};
         const Operator AS2qqH0 = ANS2qqH0  + APS2Hq0;
         const double lnk  = LogKth[nf];
         const double lnk2 = lnk * lnk;
