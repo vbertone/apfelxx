@@ -25,7 +25,8 @@ int main()
   const int PerturbativeOrder = 3;
 
   // Running coupling
-  const apfel::TabulateObject<double> Alphas{*(new apfel::AlphaQCD{0.35, sqrt(2), Thresholds, PerturbativeOrder}), 100, 0.9, 1001, 3};
+  apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
+  const apfel::TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // x-space grid
