@@ -8,8 +8,6 @@
 
 #include "apfel/expression.h"
 
-#include <vector>
-
 namespace apfel
 {
   /// @cond UNNECESSARY
@@ -420,7 +418,7 @@ namespace apfel
    * @ingroup MatchCond
    */
   ///@{
-  /*
+  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
    */
   class APS3Hq_0: public Expression

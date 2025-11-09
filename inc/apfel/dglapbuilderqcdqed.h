@@ -59,6 +59,28 @@ namespace apfel
                                                                  std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
 
   /**
+   * @brief The InitializeDglapObjectsQCDQED function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions for QCDxQED evolution and store
+   * them into a 'DglapObjectsQCDQED' structure. This variant uses
+   * libome for the matching condictions at threshold.
+   * @param g: the x-space grid
+   * @param QuarkThresholds: the quark thresholds
+   * @param LeptonThresholds: the lepton thresholds
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @param IMod: the vector of switches to vary the parameterisation of the approximated N3LO splitting functions (only relevant at N3LO) (default: all zero's)
+   * @return A map of DglapObjectsQCDQED objects, one for each possible nf
+   * @note This function assumes that masses and thresholds coincide.
+   */
+  std::map<int, DglapObjectsQCDQED> InitializeDglapObjectsQCDQEDOme(Grid                const& g,
+                                                                    std::vector<double> const& QuarkThresholds,
+                                                                    std::vector<double> const& LeptonThresholds,
+                                                                    bool                const& OpEvol = false,
+                                                                    double              const& IntEps = 1e-5,
+                                                                    std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
+
+  /**
    * @brief The InitializeDglapObjectsPhoton function precomputes the
    * perturbative coefficients of space-like unpolarised splitting
    * functions, matching conditions, and inhomogeneous terms for QCD
