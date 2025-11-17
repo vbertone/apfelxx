@@ -27,7 +27,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for F2 NC Zero Mass... ");
     Timer t;
@@ -124,7 +124,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for FL NC Zero Mass... ");
     Timer t;
@@ -220,7 +220,7 @@ namespace apfel
                                                                                                              double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for F3 NC Zero Mass... ");
     Timer t;
@@ -552,7 +552,7 @@ namespace apfel
                                                                                                                  double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F2(nu) + F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -652,7 +652,7 @@ namespace apfel
                                                                                                                   double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F2(nu) - F2(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -745,7 +745,7 @@ namespace apfel
                                                                                                                  double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( FL(nu) + FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -844,7 +844,7 @@ namespace apfel
                                                                                                                   double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( FL(nu) - FL(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -936,7 +936,7 @@ namespace apfel
                                                                                                                  double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F3(nu) + F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -1029,7 +1029,7 @@ namespace apfel
                                                                                                                   double              const& IntEps)
   {
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, Thresholds);
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
     report("Initializing StructureFunctionObjects for ( F3(nu) - F3(nubar) ) / 2 Zero Mass... ");
     Timer t;
@@ -1140,7 +1140,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for F2 NC Massive with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1228,10 +1228,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator O21g {g, Cm21gNC{teta},                IntEps};
-        const Operator O22g {g, Cm22gNC{teta},                IntEps};
-        const Operator O22ps{g, Cm22psNC{teta},               IntEps};
-        const Operator O23ps{g, Cm2a3psNC{actnf, teta, IMod}, IntEps};
+        const Operator O21g {g, Cm21gNC{teta},                       IntEps};
+        const Operator O22g {g, Cm22gNC{teta},                       IntEps};
+        const Operator O22ps{g, Cm22psNC{teta},                      IntEps};
+        const Operator O23ps{g, Cm2a3psNC{actnf, teta, IMod, false}, IntEps};
         return 6 * ( O23ps - lxi * ( O21g * p1gq + O22g * p0gq + O22ps * p0qq - 2 * beta0 * O22ps )
                      + lxi2 / 2 * ( O21g * p0gg * p0gq + O21g * p0qq * p0gq - 3 * beta0 * O21g * p0gq ) );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1240,12 +1240,12 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator O21g {g, Cm21gNC{teta},               IntEps};
-        const Operator O22g {g, Cm22gNC{teta},               IntEps};
-        const Operator O22ps{g, Cm22psNC{teta},              IntEps};
-        const Operator O23g {g, Cm2a3gNC{actnf, teta, IMod}, IntEps};
+        const Operator O21g {g, Cm21gNC{teta},                      IntEps};
+        const Operator O22g {g, Cm22gNC{teta},                      IntEps};
+        const Operator O22ps{g, Cm22psNC{teta},                     IntEps};
+        const Operator O23g {g, Cm2a3gNC{actnf, teta, IMod, false}, IntEps};
         return O23g - lxi * ( O21g * p1gg - beta1 * O21g + O22ps * p0qg + O22g * p0gg - 2 * beta0 * O22g )
-               + lxi2 / 2 * ( O21g * p0gg * p0gg + O21g * p0gq * p0qg - 3 * beta0 * O21g * p0gg+ 2 * pow(beta0, 2) * O21g );
+               + lxi2 / 2 * ( O21g * p0gg * p0gg + O21g * p0gq * p0qg - 3 * beta0 * O21g * p0gg + 2 * pow(beta0, 2) * O21g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
 
     // Vector of distributions to skip
@@ -1386,7 +1386,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for FL NC Massive with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1473,10 +1473,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator OL1g {g, CmL1gNC{teta},                IntEps};
-        const Operator OL2g {g, CmL2gNC{teta},                IntEps};
-        const Operator OL2ps{g, CmL2psNC{teta},               IntEps};
-        const Operator OL3ps{g, CmLa3psNC{actnf, teta, IMod}, IntEps};
+        const Operator OL1g {g, CmL1gNC{teta},                       IntEps};
+        const Operator OL2g {g, CmL2gNC{teta},                       IntEps};
+        const Operator OL2ps{g, CmL2psNC{teta},                      IntEps};
+        const Operator OL3ps{g, CmLa3psNC{actnf, teta, IMod, false}, IntEps};
         return 6 * ( OL3ps - lxi * ( OL1g * p1gq + OL2g * p0gq + OL2ps * p0qq - 2 * beta0 * OL2ps )
                      + lxi2 / 2 * ( OL1g * p0gg * p0gq + OL1g * p0qq * p0gq - 3 * beta0 * OL1g * p0gq ) );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1485,10 +1485,10 @@ namespace apfel
         const double teta = 1 / ( 1 + 4 / xi );
         const double lxi  = log(xi);
         const double lxi2 = lxi * lxi;
-        const Operator OL1g {g, CmL1gNC{teta},               IntEps};
-        const Operator OL2g {g, CmL2gNC{teta},               IntEps};
-        const Operator OL2ps{g, CmL2psNC{teta},              IntEps};
-        const Operator OL3g {g, CmLa3gNC{actnf, teta, IMod}, IntEps};
+        const Operator OL1g {g, CmL1gNC{teta},                      IntEps};
+        const Operator OL2g {g, CmL2gNC{teta},                      IntEps};
+        const Operator OL2ps{g, CmL2psNC{teta},                     IntEps};
+        const Operator OL3g {g, CmLa3gNC{actnf, teta, IMod, false}, IntEps};
         return OL3g - lxi * ( OL1g * p1gg - beta1 * OL1g + OL2ps * p0qg + OL2g * p0gg - 2 * beta0 * OL2g )
                + lxi2 / 2 * ( OL1g * p0gg * p0gg + OL1g * p0gq * p0qg - 3 * beta0 * OL1g * p0gg+ 2 * pow(beta0, 2) * OL1g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1630,7 +1630,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for F2 NC Massive Zero with " + std::to_string(actnf) + " active flavours... ");
     Timer t;
@@ -1859,7 +1859,7 @@ namespace apfel
         actnf++;
 
     // Initalise DGLAP objects need for scale variations
-    const auto PDFObj = InitializeDglapObjectsQCD(g, std::vector<double>(actnf, 0.));
+    const auto PDFObj = InitializeDglapObjectsQCDOme(g, std::vector<double>(actnf, 0.));
 
     report("Initializing StructureFunctionObjects for FL NC Massive Zero with " + std::to_string(actnf) + " active flavours... ");
     Timer t;

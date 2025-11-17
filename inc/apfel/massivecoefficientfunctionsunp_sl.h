@@ -458,7 +458,7 @@ namespace apfel
   class Cm2a3gNC: public Expression
   {
   public:
-    Cm2a3gNC(int const& nf, double const& eta, int const& imod = 0);
+    Cm2a3gNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double      const _eta;
@@ -485,7 +485,7 @@ namespace apfel
   class Cm2a3psNC: public Expression
   {
   public:
-    Cm2a3psNC(int const& nf, double const& eta, int const& imod = 0);
+    Cm2a3psNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double       const _eta;
@@ -511,7 +511,7 @@ namespace apfel
   class CmLa3gNC: public Expression
   {
   public:
-    CmLa3gNC(int const& nf, double const& eta, int const& imod = 0);
+    CmLa3gNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double      const _eta;
@@ -537,7 +537,7 @@ namespace apfel
   class CmLa3psNC: public Expression
   {
   public:
-    CmLa3psNC(int const& nf, double const& eta, int const& imod = 0);
+    CmLa3psNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double       const _eta;

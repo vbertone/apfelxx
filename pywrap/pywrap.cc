@@ -2,11 +2,13 @@
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
+
 #include <apfel/apfelxx.h>
 #include <apfel/betaqcd.h>
 #include <apfel/gammak.h>
 #include <apfel/gammaf.h>
 #include <apfel/kcs.h>
+#include <apfel/massivecoefficientfunctionsunp_sl.h>
 
 namespace py = pybind11;
 using namespace pybind11::literals;
@@ -1344,4 +1346,54 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeGpdObjects", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjects), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsPol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsPol), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsTrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsTrans), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+
+  // Wrappers of "massivecoefficientfunctionsunp_sl.h"
+  py::class_<apfel::Cm21gNC, apfel::Expression>(m, "Cm21gNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::Cm21gNC::Regular, "x"_a);
+  py::class_<apfel::CmL1gNC, apfel::Expression>(m, "CmL1gNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::CmL1gNC::Regular, "x"_a);
+  py::class_<apfel::Cm22gNC, apfel::Expression>(m, "Cm22gNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::Cm22gNC::Regular, "x"_a);
+  py::class_<apfel::CmL2gNC, apfel::Expression>(m, "CmL2gNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::CmL2gNC::Regular, "x"_a);
+  py::class_<apfel::Cm22psNC, apfel::Expression>(m, "Cm22psNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::Cm22psNC::Regular, "x"_a);
+  py::class_<apfel::CmL2psNC, apfel::Expression>(m, "CmL2psNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::CmL2psNC::Regular, "x"_a);
+  py::class_<apfel::Cm22nsNC, apfel::Expression>(m, "Cm22nsNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::Cm22nsNC::Regular, "x"_a);
+  py::class_<apfel::CmL2nsNC, apfel::Expression>(m, "CmL2nsNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::CmL2nsNC::Regular, "x"_a);
+  py::class_<apfel::Cm22bargNC, apfel::Expression>(m, "Cm22bargNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::Cm22bargNC::Regular, "x"_a);
+  py::class_<apfel::CmL2bargNC, apfel::Expression>(m, "CmL2bargNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::CmL2bargNC::Regular, "x"_a);
+  py::class_<apfel::Cm22barpsNC, apfel::Expression>(m, "Cm22barpsNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::Cm22barpsNC::Regular, "x"_a);
+  py::class_<apfel::CmL2barpsNC, apfel::Expression>(m, "CmL2barpsNC")
+  .def(py::init<double const&>(), "eta"_a)
+  .def("Regular", &apfel::CmL2barpsNC::Regular, "x"_a);
+  py::class_<apfel::Cm2a3gNC, apfel::Expression>(m, "Cm2a3gNC")
+  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
+  .def("Regular", &apfel::Cm2a3gNC::Regular, "x"_a);
+  py::class_<apfel::Cm2a3psNC, apfel::Expression>(m, "Cm2a3psNC")
+  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
+  .def("Regular", &apfel::Cm2a3psNC::Regular, "x"_a);
+  py::class_<apfel::CmLa3gNC, apfel::Expression>(m, "CmLa3gNC")
+  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
+  .def("Regular", &apfel::CmLa3gNC::Regular, "x"_a);
+  py::class_<apfel::CmLa3psNC, apfel::Expression>(m, "CmLa3psNC")
+  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
+  .def("Regular", &apfel::CmLa3psNC::Regular, "x"_a);
 }

@@ -1026,17 +1026,17 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, int const& imod):
+  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
     Expression(),
     _eta(eta),
     _imod(imod),
-    _cmth23g(Cmth23gNC{nf, eta, false}),
+    _cmth23g(Cmth23gNC{nf, eta, muterms}),
     _cm023g_c(Cm023gNC_c{nf}),
-    _cm023g_l(Cm023gNC_l{nf, false}),
-    _cm023g_l2(Cm023gNC_l2{nf, false}),
-    _cm023g_l3(Cm023gNC_l3{nf, false}),
-    _cmsx23g(Cmsx23gNC{nf, eta, false}),
-    _cm0sx23g(Cm0sx23gNC{nf, eta, false})
+    _cm023g_l(Cm023gNC_l{nf, muterms}),
+    _cm023g_l2(Cm023gNC_l2{nf, muterms}),
+    _cm023g_l3(Cm023gNC_l3{nf, muterms}),
+    _cmsx23g(Cmsx23gNC{nf, eta, muterms}),
+    _cm0sx23g(Cm0sx23gNC{nf, eta, muterms})
   {
     _cllsx    = _cmsx23g.CoefficientLL();
     _cllsx0   = _cm0sx23g.CoefficientLL();
@@ -1061,18 +1061,16 @@ namespace apfel
     const double dthr = _cmth23g.Delta(x);
     const double m0   = _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
-    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
-    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
 
     // Additive matching (central as in ADANI)
-    const double am  = fthr * thr + fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+    const double am = eta * ( m0 + sx - sx0 );
 
     // Modified multiplicative matching 1 (as in ADANI)
-    const double mm1 = fthr * ( thr - dthr ) + fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = fthr * ( thr + dthr ) + fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
 
     // Compute varations
     const double ratio = _cllsx / _cllsx0;
@@ -1081,24 +1079,24 @@ namespace apfel
 
     // Return approriate variation according to _imod
     if (_imod == 1)
-      return am - delta;
+      return fthr * ( thr - dthr ) + fasy * ( am - delta );
     else if (_imod == 2)
-      return am + delta;
+      return fthr * ( thr + dthr ) + fasy * ( am + delta );
     else
-      return am;
+      return fthr * thr + fasy * am;
   }
 
   //_________________________________________________________________________________
-  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, int const& imod):
+  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
     Expression(),
     _eta(eta),
     _imod(imod),
     _cm023ps_c(Cm023psNC_c{nf}),
-    _cm023ps_l(Cm023psNC_l{nf, false}),
-    _cm023ps_l2(Cm023psNC_l2{nf, false}),
-    _cm023ps_l3(Cm023psNC_l3{nf, false}),
-    _cmsx23ps(Cmsx23psNC{nf, eta, false}),
-    _cm0sx23ps(Cm0sx23psNC{nf, eta, false})
+    _cm023ps_l(Cm023psNC_l{nf, muterms}),
+    _cm023ps_l2(Cm023psNC_l2{nf, muterms}),
+    _cm023ps_l3(Cm023psNC_l3{nf, muterms}),
+    _cmsx23ps(Cmsx23psNC{nf, eta, muterms}),
+    _cm0sx23ps(Cm0sx23psNC{nf, eta, muterms})
   {
     _cllsx    = _cmsx23ps.CoefficientLL();
     _cllsx0   = _cm0sx23ps.CoefficientLL();
@@ -1121,18 +1119,16 @@ namespace apfel
     const double fasy = 1 - fthr;
     const double m0   = _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
-    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
-    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
 
     // Additive matching (central as in ADANI)
-    const double am  = fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+    const double am  = eta * ( m0 + sx - sx0 );
 
     // Modified multiplicative matching 1 (as in ADANI)
-    const double mm1 = fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
 
     // Compute varations
     const double ratio = _cllsx / _cllsx0;
@@ -1141,24 +1137,24 @@ namespace apfel
 
     // Return approriate variation according to _imod
     if (_imod == 1)
-      return am - delta;
+      return fasy * ( am - delta );
     else if (_imod == 2)
-      return am + delta;
+      return fasy * ( am + delta );
     else
-      return am;
+      return fasy * am;
   }
 
   //_________________________________________________________________________________
-  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, int const& imod):
+  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
     Expression(),
     _eta(eta),
     _imod(imod),
-    _cmthL3g(CmthL3gNC{nf, eta, false}),
+    _cmthL3g(CmthL3gNC{nf, eta, muterms}),
     _cm0L3g_c(Cm0L3gNC_c{nf}),
-    _cm0L3g_l(Cm0L3gNC_l{nf, false}),
-    _cm0L3g_l2(Cm0L3gNC_l2{nf, false}),
-    _cmsxL3g(CmsxL3gNC{nf, eta, false}),
-    _cm0sxL3g(Cm0sxL3gNC{nf, eta, false})
+    _cm0L3g_l(Cm0L3gNC_l{nf, muterms}),
+    _cm0L3g_l2(Cm0L3gNC_l2{nf, muterms}),
+    _cmsxL3g(CmsxL3gNC{nf, eta, muterms}),
+    _cm0sxL3g(Cm0sxL3gNC{nf, eta, muterms})
   {
     _cllsx    = _cmsxL3g.CoefficientLL();
     _cllsx0   = _cm0sxL3g.CoefficientLL();
@@ -1182,18 +1178,16 @@ namespace apfel
     const double dthr = _cmthL3g.Delta(x);
     const double m0   = _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
-    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
-    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
 
     // Additive matching
-    const double am  = fthr * ( thr - dthr ) + fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+    const double am  = eta * ( m0 + sx - sx0 );
 
     // Modified multiplicative matching 1 (central as in ADANI)
-    const double mm1 = fthr * thr + fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = fthr * ( thr + dthr ) + fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
 
     // Compute varations
     const double ratio = _cllsx / _cllsx0;
@@ -1202,23 +1196,23 @@ namespace apfel
 
     // Return approriate variation according to _imod
     if (_imod == 1)
-      return mm1 - delta;
+      return fthr * ( thr - dthr ) + fasy * ( mm1 - delta );
     else if (_imod == 2)
-      return mm1 + delta;
+      return fthr * ( thr + dthr ) + fasy * ( mm1 + delta );
     else
-      return mm1;
+      return fthr * thr + fasy * mm1;
   }
 
   //_________________________________________________________________________________
-  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, int const& imod):
+  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
     Expression(),
     _eta(eta),
     _imod(imod),
     _cm0L3ps_c(Cm0L3psNC_c{nf}),
-    _cm0L3ps_l(Cm0L3psNC_l{nf, false}),
-    _cm0L3ps_l2(Cm0L3psNC_l2{nf, false}),
-    _cmsxL3ps(CmsxL3psNC{nf, eta, false}),
-    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, false})
+    _cm0L3ps_l(Cm0L3psNC_l{nf, muterms}),
+    _cm0L3ps_l2(Cm0L3psNC_l2{nf, muterms}),
+    _cmsxL3ps(CmsxL3psNC{nf, eta, muterms}),
+    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, muterms})
   {
     _cllsx    = _cmsxL3ps.CoefficientLL();
     _cllsx0   = _cm0sxL3ps.CoefficientLL();
@@ -1240,18 +1234,16 @@ namespace apfel
     const double fasy = 1 - fthr;
     const double m0   = _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
-    const double dsx  = std::abs(_cnllcsx - _cnllvsx) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
-    const double dsx0 = std::abs(_cnllcsx0 - _cnllvsx0) / z;
 
     // Additive matching
-    const double am  = fasy * eta * ( m0 + sx - sx0 - dsx + dsx0 );
+    const double am  = eta * ( m0 + sx - sx0 );
 
     // Modified multiplicative matching 1 (as in ADANI)
-    const double mm1 = fasy * eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = fasy * eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z - dsx + dsx0 );
+    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
 
     // Compute varations
     const double ratio = _cllsx / _cllsx0;
@@ -1260,11 +1252,11 @@ namespace apfel
 
     // Return approriate variation according to _imod
     if (_imod == 1)
-      return mm1 - delta;
+      return fasy * ( mm1 - delta );
     else if (_imod == 2)
-      return mm1 + delta;
+      return fasy * ( mm1 + delta );
     else
-      return mm1;
+      return fasy * mm1;
   }
 
   //_________________________________________________________________________________
