@@ -2,13 +2,14 @@
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
-
+#include <apfel/ogataquadrature.h>
+#include <apfel/hardfactors.h>
+#include <apfel/tmdbuilder.h>
 #include <apfel/apfelxx.h>
 #include <apfel/betaqcd.h>
 #include <apfel/gammak.h>
 #include <apfel/gammaf.h>
 #include <apfel/kcs.h>
-#include <apfel/massivecoefficientfunctionsunp_sl.h>
 
 namespace py = pybind11;
 using namespace pybind11::literals;
@@ -41,6 +42,15 @@ PYBIND11_MODULE(apfelpy, m)
 
   // Collins-Soper kernel
   py::module_ _KCS = m.def_submodule("KCS", "Coefficients of the QCD Collins-Soper kernel");
+
+  // Hard factors
+  py::module_ _hardFactors = m.def_submodule("hardFactors", "Hard factors for TMD calculations");
+
+  // TMD evolution and matching functions
+  py::module_ _tmd = m.def_submodule("tmd", "TMD evolution and matching functions");  
+  
+  // Ogara quadrature
+  py::module_ _ogata = m.def_submodule("ogata", "Ogata quadrature for Hankel transforms");
 
   // Wrappers of "messages.h"
   m.def("SetVerbosityLevel", &apfel::SetVerbosityLevel, "vl"_a);
@@ -136,6 +146,19 @@ PYBIND11_MODULE(apfelpy, m)
   _utilities.def("LHToyPDFsPol", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
   _utilities.def("LHToyFFs", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
 
+  // Wrapper of "hardfactors.h"
+  _hardFactors.def("H1DY", &apfel::H1DY, "One-loop hard factor for Drell-Yan");
+  _hardFactors.def("H2DY", &apfel::H2DY, "nf"_a, "Two-loop hard factor for Drell-Yan");
+  _hardFactors.def("H3DY", &apfel::H3DY, "nf"_a, "Three-loop hard factor for Drell-Yan");
+
+  _hardFactors.def("H1SIDIS", &apfel::H1SIDIS, "One-loop hard factor for SIDIS");
+  _hardFactors.def("H2SIDIS", &apfel::H2SIDIS, "nf"_a, "Two-loop hard factor for SIDIS");
+  _hardFactors.def("H3SIDIS", &apfel::H3SIDIS, "nf"_a, "Three-loop hard factor for SIDIS");
+
+  _hardFactors.def("H3Ch", &apfel::H3Ch, "Three-loop hard factor for Higgs production");
+  _hardFactors.def("H1ggH", &apfel::H1ggH, "One-loop hard factor for gluon-gluon fusion Higgs production");
+  _hardFactors.def("H2ggH", &apfel::H2ggH, "nf"_a, "Two-loop hard factor for gluon-gluon fusion Higgs production");
+
   // Wrappers of "tools.h"
   py::enum_<apfel::QuarkFlavour>(_utilities, "QuarkFlavour")
   .value("TOTAL",   apfel::QuarkFlavour::TOTAL)
@@ -228,7 +251,6 @@ PYBIND11_MODULE(apfelpy, m)
   .def("Evaluate", py::overload_cast<double const&, int const&>(&apfel::Interpolator::Evaluate, py::const_), "x"_a, "ig"_a)
   .def("Derive", &apfel::Interpolator::Derive, "x"_a)
   .def("Integrate", &apfel::Interpolator::Integrate, "a"_a, "b"_a)
-  .def("Squash", &apfel::Interpolator::Squash)
   .def("InterpolantLog", &apfel::Interpolator::InterpolantLog, "beta"_a, "lnx"_a, "_asg"_a)
   .def("Interpolant", &apfel::Interpolator::Interpolant, "beta"_a, "x"_a, "sg"_a)
   .def("DerInterpolant", &apfel::Interpolator::DerInterpolant)
@@ -298,21 +320,9 @@ PYBIND11_MODULE(apfelpy, m)
     {
       PYBIND11_OVERRIDE(double, Expression, Local, x);
     };
-    double LocalPP(double const& x) const override
+    double LocalPV(double const& x) const override
     {
-      PYBIND11_OVERRIDE(double, Expression, LocalPP, x);
-    };
-    double SingularPV(double const& x) const override
-    {
-      PYBIND11_OVERRIDE(double, Expression, SingularPV, x);
-    };
-    double LocalPV() const override
-    {
-      PYBIND11_OVERRIDE(double, Expression, LocalPV);
-    };
-    double LocalLogPV(double const& x) const override
-    {
-      PYBIND11_OVERRIDE(double, Expression, LocalLogPV, x);
+      PYBIND11_OVERRIDE(double, Expression, LocalPV, x);
     };
   };
   py::class_<apfel::Expression, PyExpression>(m, "Expression")
@@ -320,10 +330,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def("Regular", &apfel::Expression::Regular)
   .def("Singular", &apfel::Expression::Singular)
   .def("Local", &apfel::Expression::Local)
-  .def("LocalPP", &apfel::Expression::LocalPP)
-  .def("SingularPV", &apfel::Expression::SingularPV)
   .def("LocalPV", &apfel::Expression::LocalPV)
-  .def("LocalLogPV", &apfel::Expression::LocalLogPV)
   .def("SetExternalVariable", &apfel::Expression::SetExternalVariable, "extvar"_a)
   .def("eta", &apfel::Expression::eta);
 
@@ -386,7 +393,6 @@ PYBIND11_MODULE(apfelpy, m)
   .def(py::init<apfel::Operator const&>(), "g"_a)
   //.def(py::init<apfel::Grid const&>(), "g"_a)
   .def(py::init<apfel::Grid const&, apfel::Expression const&, double const&>(), "g"_a, "expr"_a, "eps"_a = 1e-5)
-  .def("Evaluate", &apfel::Operator::Evaluate, "x"_a)
   .def("GetGrid", &apfel::Operator::GetGrid)
   .def("GetOperator", &apfel::Operator::GetOperator)
   .def("Print", &apfel::Operator::Print)
@@ -596,7 +602,11 @@ PYBIND11_MODULE(apfelpy, m)
   .def(std::map<int, double>() * py::self)
   .def(py::self / double())
   .def(py::self + py::self)
-  .def(py::self - py::self);
+  .def(py::self - py::self)
+  // For convenience, add __len__:
+  .def("__len__", [](const apfel::Set<apfel::Distribution>& self) {
+    return self.GetObjects().size(); // or use self.size() if available
+  });
 
   py::class_<apfel::Set<apfel::Operator>>(m, "SetO")
   .def(py::init<apfel::ConvolutionMap const&, std::map<int, apfel::Operator> const&>(), "Map"_a = apfel::ConvolutionMap{"UNDEFINED"}, "in"_a = std::map<int, apfel::Operator> {})
@@ -1187,7 +1197,7 @@ PYBIND11_MODULE(apfelpy, m)
 
   // Wrappers of "dglap.h"
   py::class_<apfel::Dglap<apfel::Distribution>, apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>>(m, "DglapD")
-  .def(py::init<std::function<apfel::Set<apfel::Operator>(int const&, double const&)> const&, std::function<apfel::Set<apfel::Operator>(bool const&, int const&)> const&, std::function<apfel::Set<apfel::Distribution>(int const&, double const&)> const&, apfel::Set<apfel::Distribution>, double const&, std::vector<double>const&, int const&>(), "SplittingFunctions"_a, "MatchingConditions"_a, "InhomogeneousTerms"_a, "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
+  .def(py::init<std::function<apfel::Set<apfel::Operator>(int const&, double const&)> const&, std::function<apfel::Set<apfel::Operator>(bool const&, int const&)> const&, apfel::Set<apfel::Distribution>, double const&, std::vector<double>const&, int const&>(), "SplittingFunctions"_a, "MatchingConditions"_a, "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
   .def("MatchObject", &apfel::Dglap<apfel::Distribution>::MatchObject, "Up"_a, "nf"_a, "sd"_a)
   .def("Derivative", &apfel::Dglap<apfel::Distribution>::Derivative, "nf"_a, "mu"_a, "f"_a)
   .def("SetInitialDistributions", py::overload_cast<std::function<double(int const&, double const&)> const&>(&apfel::Dglap<apfel::Distribution>::SetInitialDistributions), "InDistFunc"_a)
@@ -1195,7 +1205,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def("SetInitialDistributions", py::overload_cast<std::function<std::map<int, double>(double const&, double const&)> const&, double const&>(&apfel::Dglap<apfel::Distribution>::SetInitialDistributions), "InDistFunc"_a, "mu"_a);
 
   py::class_<apfel::Dglap<apfel::Operator>, apfel::MatchedEvolution<apfel::Set<apfel::Operator>>>(m, "DglapO")
-  .def(py::init<std::function<apfel::Set<apfel::Operator>(int const&, double const&)> const&, std::function<apfel::Set<apfel::Operator>(bool const&, int const&)> const&, std::function<apfel::Set<apfel::Operator>(int const&, double const&)> const&, apfel::Set<apfel::Operator>, double const&, std::vector<double>const&, int const&>(), "SplittingFunctions"_a, "MatchingConditions"_a, "InhomogeneousTerms"_a, "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
+  .def(py::init<std::function<apfel::Set<apfel::Operator>(int const&, double const&)> const&, std::function<apfel::Set<apfel::Operator>(bool const&, int const&)> const&, apfel::Set<apfel::Operator>, double const&, std::vector<double>const&, int const&>(), "SplittingFunctions"_a, "MatchingConditions"_a, "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
   .def("MatchObject", &apfel::Dglap<apfel::Operator>::MatchObject, "Up"_a, "nf"_a, "sd"_a)
   .def("Derivative", &apfel::Dglap<apfel::Operator>::Derivative, "nf"_a, "mu"_a, "f"_a);
 
@@ -1242,8 +1252,8 @@ PYBIND11_MODULE(apfelpy, m)
   _builders.def("BuildDglap", py::overload_cast<std::map<int, apfel::DglapObjects> const&, double const&, int const&, std::function<double(double const&)> const&, double const&, int const&>(&apfel::BuildDglap), "DglapObj"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "xi"_a = 1, "nsteps"_a = 10);
   _builders.def("BuildDglap", py::overload_cast<std::function<apfel::DglapObjects(double const&)> const&, std::vector<double> const&, std::function<std::map<int, double>(double const&, double const&)> const&, double const&, int const&, std::function<double(double const&)> const&, int const&>(&apfel::BuildDglap), "DglapObj"_a, "Thresholds"_a, "InDistFunc"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "nsteps"_a = 10);
 
-  _initializers.def("InitializeDglapObjectsQCD", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&, bool const&, std::vector<int> const&>(&apfel::InitializeDglapObjectsQCD), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5, "n3lo"_a = false, "IMod"_a = std::vector<int> {0, 0, 0, 0, 0, 0, 0});
-  _initializers.def("InitializeDglapObjectsQCD", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&, bool const&, std::vector<int> const&>(&apfel::InitializeDglapObjectsQCD), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5, "n3lo"_a = false, "IMod"_a = std::vector<int> {0, 0, 0, 0, 0, 0, 0});
+  _initializers.def("InitializeDglapObjectsQCD", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCD), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeDglapObjectsQCD", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCD), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeDglapObjectsQCDpol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDpol), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeDglapObjectsQCDpol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDpol), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeDglapObjectsQCDT", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDT), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
@@ -1337,8 +1347,8 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeF2NCObjectsZMT",     py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&>(&apfel::InitializeF2NCObjectsZMT),     "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5);
   _initializers.def("InitializeFLNCObjectsZMT",     py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&>(&apfel::InitializeFLNCObjectsZMT),     "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5);
   _initializers.def("InitializeF3NCObjectsZMT",     py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&>(&apfel::InitializeF3NCObjectsZMT),     "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5);
-  _initializers.def("InitializeF2NCObjectsMassive", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&, int const&>(&apfel::InitializeF2NCObjectsMassive), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005, "IMod"_a = 0);
-  _initializers.def("InitializeFLNCObjectsMassive", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&, int const&>(&apfel::InitializeFLNCObjectsMassive), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005, "IMod"_a = 0);
+  _initializers.def("InitializeF2NCObjectsMassive", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeF2NCObjectsMassive), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
+  _initializers.def("InitializeFLNCObjectsMassive", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeFLNCObjectsMassive), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
   _initializers.def("InitializeF2NCObjectsMassiveZero", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeF2NCObjectsMassiveZero), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
   _initializers.def("InitializeFLNCObjectsMassiveZero", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeFLNCObjectsMassiveZero), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
 
@@ -1347,53 +1357,62 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeGpdObjectsPol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsPol), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsTrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsTrans), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
 
-  // Wrappers of "massivecoefficientfunctionsunp_sl.h"
-  py::class_<apfel::Cm21gNC, apfel::Expression>(m, "Cm21gNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::Cm21gNC::Regular, "x"_a);
-  py::class_<apfel::CmL1gNC, apfel::Expression>(m, "CmL1gNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::CmL1gNC::Regular, "x"_a);
-  py::class_<apfel::Cm22gNC, apfel::Expression>(m, "Cm22gNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::Cm22gNC::Regular, "x"_a);
-  py::class_<apfel::CmL2gNC, apfel::Expression>(m, "CmL2gNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::CmL2gNC::Regular, "x"_a);
-  py::class_<apfel::Cm22psNC, apfel::Expression>(m, "Cm22psNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::Cm22psNC::Regular, "x"_a);
-  py::class_<apfel::CmL2psNC, apfel::Expression>(m, "CmL2psNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::CmL2psNC::Regular, "x"_a);
-  py::class_<apfel::Cm22nsNC, apfel::Expression>(m, "Cm22nsNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::Cm22nsNC::Regular, "x"_a);
-  py::class_<apfel::CmL2nsNC, apfel::Expression>(m, "CmL2nsNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::CmL2nsNC::Regular, "x"_a);
-  py::class_<apfel::Cm22bargNC, apfel::Expression>(m, "Cm22bargNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::Cm22bargNC::Regular, "x"_a);
-  py::class_<apfel::CmL2bargNC, apfel::Expression>(m, "CmL2bargNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::CmL2bargNC::Regular, "x"_a);
-  py::class_<apfel::Cm22barpsNC, apfel::Expression>(m, "Cm22barpsNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::Cm22barpsNC::Regular, "x"_a);
-  py::class_<apfel::CmL2barpsNC, apfel::Expression>(m, "CmL2barpsNC")
-  .def(py::init<double const&>(), "eta"_a)
-  .def("Regular", &apfel::CmL2barpsNC::Regular, "x"_a);
-  py::class_<apfel::Cm2a3gNC, apfel::Expression>(m, "Cm2a3gNC")
-  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
-  .def("Regular", &apfel::Cm2a3gNC::Regular, "x"_a);
-  py::class_<apfel::Cm2a3psNC, apfel::Expression>(m, "Cm2a3psNC")
-  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
-  .def("Regular", &apfel::Cm2a3psNC::Regular, "x"_a);
-  py::class_<apfel::CmLa3gNC, apfel::Expression>(m, "CmLa3gNC")
-  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
-  .def("Regular", &apfel::CmLa3gNC::Regular, "x"_a);
-  py::class_<apfel::CmLa3psNC, apfel::Expression>(m, "CmLa3psNC")
-  .def(py::init<int const&, double const&, int const&, bool const&>(), "nf"_a, "eta"_a, "imod"_a = 0, "muterms"_a = true)
-  .def("Regular", &apfel::CmLa3psNC::Regular, "x"_a);
+  // Wrappers of "tmdbuilder.h"
+  // Define the TmdObjects structure
+  py::class_<apfel::TmdObjects>(_tmd, "TmdObjects")
+  .def_readwrite("Threshold", &apfel::TmdObjects::Threshold)
+  .def_readwrite("Beta",      &apfel::TmdObjects::Beta)
+  .def_readwrite("GammaFq",   &apfel::TmdObjects::GammaFq)
+  .def_readwrite("GammaFg",   &apfel::TmdObjects::GammaFg)
+  .def_readwrite("GammaK",    &apfel::TmdObjects::GammaK)
+  .def_readwrite("KCS",       &apfel::TmdObjects::KCS)
+  .def_readwrite("MatchingFunctionsPDFs", &apfel::TmdObjects::MatchingFunctionsPDFs)
+  .def_readwrite("MatchingFunctionsFFs",  &apfel::TmdObjects::MatchingFunctionsFFs)
+  .def_readwrite("HardFactors", &apfel::TmdObjects::HardFactors);
+
+  // Add TMD object initializers
+  _tmd.def("InitializeTmdObjects",            &apfel::InitializeTmdObjects,            "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for evolution and matching of TMD PDFs and FFs");
+  _tmd.def("InitializeTmdObjectsDYResScheme", &apfel::InitializeTmdObjectsDYResScheme, "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects with resummation-scheme transformation");
+  _tmd.def("InitializeTmdObjectsBM",          &apfel::InitializeTmdObjectsBM,          "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for Boer-Mulders TMD PDF");
+  _tmd.def("InitializeTmdObjectsSivers",      &apfel::InitializeTmdObjectsSivers,      "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for Sivers TMD PDF");
+  _tmd.def("InitializeTmdObjectsg1",          &apfel::InitializeTmdObjectsg1,          "g"_a, "Thresholds"_a, "IntEps"_a = 1e-5, "Initialize TMD objects for g1 TMD PDFs");
+
+  // Add TMD builders
+  _tmd.def("BuildTmdPDFs", &apfel::BuildTmdPDFs, "TmdObj"_a, "CollPDFs"_a,          "Alphas"_a, "PerturbativeOrder"_a,             "Ci"_a = 1, "IntEps"_a = 1e-7, "Build matched and evolved TMD PDFs");
+  _tmd.def("BuildTmdFFs",  &apfel::BuildTmdFFs,  "TmdObj"_a, "CollFFs"_a,           "Alphas"_a, "PerturbativeOrder"_a,             "Ci"_a = 1, "IntEps"_a = 1e-7, "Build matched and evolved TMD FFs");
+  _tmd.def("BuildTmdJet",  &apfel::BuildTmdJet,  "TmdObj"_a, "JetAlgo"_a, "JetR"_a, "Alphas"_a, "PerturbativeOrder"_a, "CJ"_a = 1, "Ci"_a = 1, "IntEps"_a = 1e-7, "Build TMD of a jet in b-space");
+  _tmd.def("MatchTmdPDFs", &apfel::MatchTmdPDFs, "TmdObj"_a, "CollPDFs"_a,          "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1,                                "Match TMD PDFs in b-space");
+  _tmd.def("MatchTmdFFs",  &apfel::MatchTmdFFs,  "TmdObj"_a, "CollFFs"_a,           "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1,                                "Match TMD FFs in b-space");
+  _tmd.def("MatchTmdJet",  &apfel::MatchTmdJet,  "TmdObj"_a, "JetAlgo"_a,  "tR"_a,  "Alphas"_a, "PerturbativeOrder"_a, "CJ"_a = 1, "Ci"_a = 1, "IntEps"_a = 1e-7, "Match jet TMD in b-space at initial scale");
+  _tmd.def("MatchingFunctionsPDFs", &apfel::MatchingFunctionsPDFs, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "Get matching functions for TMD PDFs");
+  _tmd.def("MatchingFunctionsFFs",  &apfel::MatchingFunctionsFFs,  "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "Get matching functions for TMD FFs");
+
+  // Add evolution factor functions
+  _tmd.def("EvolutionFactors",       static_cast<std::function<std::vector<double>(double const&, double const&, double const&)>(*)(std::map<int, apfel::TmdObjects> const&, std::function<double(double const&)> const&, int const&, double const&, double const&)>(&apfel::EvolutionFactors), "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1.0, "IntEps"_a = 1e-7, "Return evolution factors for gluon and quarks as a function of (bT, mu, zeta).\n" "The returned callable accepts three doubles and returns a vector of doubles.\n" "Index 0: gluon factor, indices 1-12: quark factors."); 
+  _tmd.def("EvolutionFactorsK",      &apfel::EvolutionFactorsK, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factors for gluon and quarks with double logs isolated");
+  _tmd.def("QuarkEvolutionFactor",   static_cast<std::function<double(double const&, double const&, double const&)> (*)(std::map<int, apfel::TmdObjects> const&, std::function<double(double const&)> const&, int const&, double const&, double const&)>(&apfel::QuarkEvolutionFactor), "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factor for quarks");
+  _tmd.def("QuarkEvolutionFactorxi", &apfel::QuarkEvolutionFactorxi, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "xi"_a = 1, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factor for quarks with resummation-scale parameter");
+  _tmd.def("GluonEvolutionFactor",   static_cast<std::function<double(double const&, double const&, double const&)>(*)(std::map<int, apfel::TmdObjects> const&, std::function<double(double const&)> const&, int const&, double const&, double const&)>(&apfel::GluonEvolutionFactor), "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7, "Get evolution factor for gluon");  
+
+  // Add analytic evolution and kernel functions
+  _tmd.def("QuarkAnalyticEvolutionFactor", &apfel::QuarkAnalyticEvolutionFactor, "TmdObj"_a, "mu0"_a, "Alphas0"_a, "kappa"_a, "kappa0"_a, "PerturbativeOrder"_a, "Get analytic evolution factor for quark TMD");
+  _tmd.def("GluonAnalyticEvolutionFactor", &apfel::GluonAnalyticEvolutionFactor, "TmdObj"_a, "mu0"_a, "Alphas0"_a, "kappa"_a, "kappa0"_a, "PerturbativeOrder"_a, "Get analytic evolution factor for gluon TMD");
+  _tmd.def("CollinsSoperKernel",           &apfel::CollinsSoperKernel,           "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7,   "Get perturbative part of Collins-Soper kernel for quarks");
+  _tmd.def("HardFactor",                   &apfel::HardFactor,      "Process"_a, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Cf"_a = 1,                      "Get hard factor for specified process");
+
+  // Wrappers of "ogataquadradure.h"
+  py::class_<apfel::OgataQuadrature>(_ogata, "OgataQuadrature")
+  .def(py::init<int const&, double const&, double const&, int const&>(), "nu"_a = 0, "CutOff"_a = 1e-5, "h"_a = 0.001, "nZeroMax"_a = 1000, "The Integrator constructor.\n Parameters:\n nu: the order of the Bessel function (default: 0)\n CutOff: the accuracy computed as a cutoff on the size of the last computed term relative to the total (default: 10^-5)\n h: internal variable of the algorithm (default: 0.001)\n nZeroMax: maximum number of terms in the Ogata quadrature (default: 1000)")
+  
+  .def("InitialiseWeights", &apfel::OgataQuadrature::InitialiseWeights, "nZeroMax"_a, "Function that initialises the coordinates and the weights for the Ogata quadrature.")
+  // transform is a templated function in cpp. Here the tamplate instantiation is explicitly chosen to be double.
+  .def("transform", [](const apfel::OgataQuadrature &self, std::function<double(double const&)> const& func, double const& qT, bool const& Dynh, int const& nmax, int const& period) {return self.transform<double>(func, qT, Dynh, nmax, period);}, "func"_a, "qT"_a, "Dynh"_a = true, "nmax"_a = 1000, "period"_a = 10, "Function that transform the input function.\n" "Parameters:\n" "  func: function to be transformed\n" "  qT: value of qT in which to compute the transform\n" "  Dynh: switch to compute the step parameter _h dynamically (default: true)\n" "  nmax: maximum number of terms in the Ogata quadrature (default: 1000)\n" "  period: interval across which the integral is checked to determine where the sum is truncated (default: 10)")
+  .def("GetBesselOrder",    &apfel::OgataQuadrature::GetBesselOrder,    "Function that returns the Bessel order.")
+  .def("GetCutOff",         &apfel::OgataQuadrature::GetCutOff,         "Function that returns the Ogata cut-off parameter.")
+  .def("GetStepParameter",  &apfel::OgataQuadrature::GetStepParameter,  "Function that returns the Ogata step parameter.")
+  .def("GetCoordinates",    &apfel::OgataQuadrature::GetCoordinates,    "Function that returns the unscaled coordinates used in the Ogata quadrature.")
+  .def("GetWeights",        &apfel::OgataQuadrature::GetWeights,        "Function that returns the weights used in the Ogata quadrature.")
+  .def("SetStepParameter",  &apfel::OgataQuadrature::SetStepParameter,  "h"_a,  "Function that sets the Ogata step parameter.")
+  .def("JnuZerosGenerator", &apfel::OgataQuadrature::JnuZerosGenerator, "nu"_a, "Function that writes on screen the first 1000 zeros of the Bessel function J0.");
+
 }

@@ -100,3 +100,9 @@ build
 *.fls
 *.ilg
 *.ind
+
+# Mac
+*.DS_Store
+
+# VScode
+apfelxx.code-workspace
