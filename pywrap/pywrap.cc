@@ -2,6 +2,7 @@
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
+#include <apfel/ogataquadrature.h>
 #include <apfel/hardfactors.h>
 #include <apfel/tmdbuilder.h>
 #include <apfel/apfelxx.h>
@@ -46,7 +47,10 @@ PYBIND11_MODULE(apfelpy, m)
   py::module_ _hardFactors = m.def_submodule("hardFactors", "Hard factors for TMD calculations");
 
   // TMD evolution and matching functions
-  py::module_ _tmd = m.def_submodule("tmd", "TMD evolution and matching functions");
+  py::module_ _tmd = m.def_submodule("tmd", "TMD evolution and matching functions");  
+  
+  // Ogara quadrature
+  py::module_ _ogata = m.def_submodule("ogata", "Ogata quadrature for Hankel transforms");
 
   // Wrappers of "messages.h"
   m.def("SetVerbosityLevel", &apfel::SetVerbosityLevel, "vl"_a);
@@ -1395,5 +1399,20 @@ PYBIND11_MODULE(apfelpy, m)
   _tmd.def("GluonAnalyticEvolutionFactor", &apfel::GluonAnalyticEvolutionFactor, "TmdObj"_a, "mu0"_a, "Alphas0"_a, "kappa"_a, "kappa0"_a, "PerturbativeOrder"_a, "Get analytic evolution factor for gluon TMD");
   _tmd.def("CollinsSoperKernel",           &apfel::CollinsSoperKernel,           "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Ci"_a = 1, "IntEps"_a = 1e-7,   "Get perturbative part of Collins-Soper kernel for quarks");
   _tmd.def("HardFactor",                   &apfel::HardFactor,      "Process"_a, "TmdObj"_a, "Alphas"_a, "PerturbativeOrder"_a, "Cf"_a = 1,                      "Get hard factor for specified process");
+
+  // Wrappers of "ogataquadradure.h"
+  py::class_<apfel::OgataQuadrature>(_ogata, "OgataQuadrature")
+  .def(py::init<int const&, double const&, double const&, int const&>(), "nu"_a = 0, "CutOff"_a = 1e-5, "h"_a = 0.001, "nZeroMax"_a = 1000, "The Integrator constructor.\n Parameters:\n nu: the order of the Bessel function (default: 0)\n CutOff: the accuracy computed as a cutoff on the size of the last computed term relative to the total (default: 10^-5)\n h: internal variable of the algorithm (default: 0.001)\n nZeroMax: maximum number of terms in the Ogata quadrature (default: 1000)")
+  
+  .def("InitialiseWeights", &apfel::OgataQuadrature::InitialiseWeights, "nZeroMax"_a, "Function that initialises the coordinates and the weights for the Ogata quadrature.")
+  // transform is a templated function in cpp. Here the tamplate instantiation is explicitly chosen to be double.
+  .def("transform", [](const apfel::OgataQuadrature &self, std::function<double(double const&)> const& func, double const& qT, bool const& Dynh, int const& nmax, int const& period) {return self.transform<double>(func, qT, Dynh, nmax, period);}, "func"_a, "qT"_a, "Dynh"_a = true, "nmax"_a = 1000, "period"_a = 10, "Function that transform the input function.\n" "Parameters:\n" "  func: function to be transformed\n" "  qT: value of qT in which to compute the transform\n" "  Dynh: switch to compute the step parameter _h dynamically (default: true)\n" "  nmax: maximum number of terms in the Ogata quadrature (default: 1000)\n" "  period: interval across which the integral is checked to determine where the sum is truncated (default: 10)")
+  .def("GetBesselOrder",    &apfel::OgataQuadrature::GetBesselOrder,    "Function that returns the Bessel order.")
+  .def("GetCutOff",         &apfel::OgataQuadrature::GetCutOff,         "Function that returns the Ogata cut-off parameter.")
+  .def("GetStepParameter",  &apfel::OgataQuadrature::GetStepParameter,  "Function that returns the Ogata step parameter.")
+  .def("GetCoordinates",    &apfel::OgataQuadrature::GetCoordinates,    "Function that returns the unscaled coordinates used in the Ogata quadrature.")
+  .def("GetWeights",        &apfel::OgataQuadrature::GetWeights,        "Function that returns the weights used in the Ogata quadrature.")
+  .def("SetStepParameter",  &apfel::OgataQuadrature::SetStepParameter,  "h"_a,  "Function that sets the Ogata step parameter.")
+  .def("JnuZerosGenerator", &apfel::OgataQuadrature::JnuZerosGenerator, "nu"_a, "Function that writes on screen the first 1000 zeros of the Bessel function J0.");
 
 }
