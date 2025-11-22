@@ -1762,15 +1762,53 @@ upon integration in the following way:
 \,.
 \label{eq:pluplusprescription}
 \end{equation}
-However, differently from the $+$-distribution, the $++$-distribution
-does not regulate an otherwise divergent integral. It rather
-rearranges the integrand in such a way that it is finite over the
-integration range (the divergence at $y=1$ is no longer there) making
-it numerically treatable. We now need to devise a way to compute this
-integral within the interpolation framework. Indeed, the interpolation
-procedure produces integrals as this:
+Differently from the $+$-distribution, the $++$-distribution does not
+regulate an otherwise divergent integral. It rather rearranges the
+integrand in such a way that it is finite over the integration range
+(the divergence at $y=1$ is no longer there) making it numerically
+treatable.
+
+Let us prove Eq.~(\ref{eq:pluplusprescription}). To do so, we add and
+subtract the divergent term:
 \begin{equation}
-I_{\beta\alpha}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right) \,,
+f(1)\int_0^1\frac{dy}{1-y}\,,
+\end{equation}
+writing it in two different ways. In the first way, we make the change
+of variable $z=(1-y)^{-1}$, so that:
+\begin{equation}
+\int_0^1\frac{dy}{1-y}=\int_1^\infty\frac{dz}{z}\,.
+\end{equation}
+In the second way, we write:
+\begin{equation}
+\int_0^1\frac{dy}{1-y}=\int_1^\infty\frac{dz}{z}=\int_{-1}^{-\infty}\frac{dz}{z}\mathop{=}^{z=1-y}-\int_{2}^{\infty}\frac{dy}{1-y}=-\int_{0}^{\infty}\frac{dy}{1-y}\,,
+\end{equation}
+where in the last step we have used the fact that:
+\begin{equation}
+\int_{0}^{2}\frac{dy}{1-y} = 0\,,
+\end{equation}
+to be interpreted in the principal-value sense. Using these results,
+we have:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle\int_x^{\infty}dy\,f(y)\left(\frac{1}{1-y}\right)_{++}&=&\displaystyle\int_x^{\infty}dy\,\frac{f(y)}{1-y}-f(1)\int_1^\infty\frac{dy}{y}-f(1)\int_{0}^{\infty}\frac{dy}{1-y}\\
+    \\
+                                                    &=&\displaystyle\int_x^{\infty}dy\,\frac{f(y)}{1-y}-f(1)\int_x^\infty\frac{dy\,\theta(y-1)}{y}-f(1)\int_{x}^{\infty}\frac{dy}{1-y}-f(1)\int_{0}^{x}\frac{dy}{1-y}\\
+    \\
+                                                    &=&\displaystyle\int_x^{\infty}\frac{dy}{1-y}\left[f(y)-f(1)\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+f(1)\ln(1-x)\,,
+  \end{array}
+\end{equation}
+which produces Eq.~(\ref{eq:pluplusprescription}). This equality can
+alternatively be written as:
+\begin{equation}
+  \int_x^{\infty}dy\left(\frac{1}{1-y}\right)_{++}f(y)=\int_x^1dy\left(\frac{1}{1-y}\right)_+f(y)+\int_1^{\infty}\frac{dy}{1-y}\left(f(y)-\frac{f(1)}{y}\right)\,.
+\end{equation}
+
+
+We now need to devise a way to compute this integral within the
+interpolation framework. Indeed, the interpolation procedure produces
+integrals as this:
+\begin{equation}
+I_{\beta\alpha}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{1}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\,,
 \end{equation}
 that need to be treated with care due to the support region of the
 interpolation functions $w_\alpha$. In particular, we know that the
