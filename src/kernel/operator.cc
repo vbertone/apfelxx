@@ -478,7 +478,6 @@ namespace apfel
             j[beta] += _Operator[m.first](0, alpha - m.second) * dj[jsmap[m.first][alpha]];
         }
 
-
     // Compute the the distribution on the subgrids
     for (int ig = 0; ig < ng; ig++)
       {

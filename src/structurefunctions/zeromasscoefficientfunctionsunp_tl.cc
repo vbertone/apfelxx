@@ -17,15 +17,15 @@ namespace apfel
   }
   double C21Tns::Regular(double const& x) const
   {
-    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) + 2 * ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 5. / 2. - 3 * x / 2 );
+    return 2 * CF * ( - ( 1 + x ) * log(1 - x) + 2 * ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 5. / 2. - 3 * x / 2 );
   }
   double C21Tns::Singular(double const& x) const
   {
-    return 2 * CF * ( 2 * log( 1 - x ) - 3 / 2. ) / ( 1 - x );
+    return 2 * CF * ( 2 * log(1 - x) - 3 / 2. ) / ( 1 - x );
   }
   double C21Tns::Local(double const& x) const
   {
-    return 2 * CF * ( pow(log( 1 - x ), 2) - 3 * log( 1 - x ) / 2 + ( 4 * zeta2 - 9 / 2. ) );
+    return 2 * CF * ( pow(log(1 - x), 2) - 3 * log(1 - x) / 2 + ( 4 * zeta2 - 9 / 2. ) );
   }
 
   //_________________________________________________________________________________
@@ -35,7 +35,7 @@ namespace apfel
   }
   double C21Tg::Regular(double const& x) const
   {
-    return 4 * CF * ( ( 1 + pow(( 1 - x ), 2) ) * log( pow(x, 2) * ( 1 - x ) ) / x );
+    return 4 * CF * ( ( 1 + pow(1 - x, 2) ) * log(pow(x, 2) * ( 1 - x )) / x );
   }
 
   //_________________________________________________________________________________
@@ -71,7 +71,7 @@ namespace apfel
     const double dx2 = dx * dx;
     const double dm  = 1 / ( 1 - x );
     const double dp  = 1 / ( 1 + x );
-    const double dl1 = log( 1 - x );
+    const double dl1 = log(1 - x);
 
     // Allocate pointers for the harmonic polylogs
     double wx = x;
@@ -213,7 +213,7 @@ namespace apfel
   }
   double C22Tnsp::Singular(double const& x) const
   {
-    const double dl1 = log( 1 - x );
+    const double dl1 = log(1 - x);
     return ( pow(dl1, 3) * _a3 + pow(dl1, 2) * _a2 + dl1 * _a1 + _a0 ) / ( 1 - x );
   }
   double C22Tnsp::Local(double const& x) const
@@ -223,7 +223,7 @@ namespace apfel
                   - 49./5.*pow(zeta2, 2) )
       + CF*CF * ( 331./8. - 78.*zeta3 - 39.*zeta2 + 30.*pow(zeta2, 2) )
       + CF*_nf * ( 457./36. + 4./3.*zeta3 - 38./3.*zeta2 );
-    const double dl1 = log( 1 - x );
+    const double dl1 = log(1 - x);
     return pow(dl1, 4) * _a3 / 4 + pow(dl1, 3) * _a2 / 3 + pow(dl1, 2) * _a1 / 2 + dl1 * _a0 + c2delt;
   }
 
@@ -622,15 +622,15 @@ namespace apfel
   }
   double C31Tns::Regular(double const& x) const
   {
-    return 2 * CF * ( - ( 1 + x ) * log( 1 - x ) - 2 * ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 1. / 2. - x / 2 );
+    return 2 * CF * ( - ( 1 + x ) * log(1 - x) - 2 * ( 1 + pow(x, 2) ) * log(x) / ( 1 - x ) + 1. / 2. - x / 2 );
   }
   double C31Tns::Singular(double const& x) const
   {
-    return 2 * CF * ( 2 * log( 1 - x ) - 3 / 2. ) / ( 1 - x );
+    return 2 * CF * ( 2 * log(1 - x) - 3 / 2. ) / ( 1 - x );
   }
   double C31Tns::Local(double const& x) const
   {
-    return 2 * CF * ( pow(log( 1 - x ), 2) - 3 * log( 1 - x ) / 2 + ( 4 * zeta2 - 9 / 2. ) );
+    return 2 * CF * ( pow(log(1 - x), 2) - 3 * log(1 - x) / 2 + ( 4 * zeta2 - 9 / 2. ) );
   }
 
   //_________________________________________________________________________________
@@ -664,7 +664,7 @@ namespace apfel
     const double dx  = 1 / x;
     const double dm  = 1 / ( 1 - x );
     const double dp  = 1 / ( 1 + x );
-    const double dl1 = log( 1 - x );
+    const double dl1 = log(1 - x);
 
     // Allocate pointers for the harmonic polylogs
     double wx = x;
@@ -780,7 +780,7 @@ namespace apfel
   }
   double C32Tnsp::Singular(double const& x) const
   {
-    const double dl1 = log( 1 - x );
+    const double dl1 = log(1 - x);
     return ( pow(dl1, 3) * _a3 + pow(dl1, 2) * _a2 + dl1 * _a1 + _a0 ) / ( 1 - x );
   }
   double C32Tnsp::Local(double const& x) const
@@ -791,7 +791,7 @@ namespace apfel
       + CF * CF * ( 331./8. - 78.*zeta3 - 39.*zeta2 + 30.*pow(zeta2, 2) )
       + CF * _nf * ( 457./36. + 4./3.*zeta3 - 38./3.*zeta2 );
 
-    const double dl1 = log( 1 - x );
+    const double dl1 = log(1 - x);
     return pow(dl1, 4) * _a3/4. + pow(dl1, 3) * _a2/3. + pow(dl1, 2) * _a1/2. + dl1 * _a0 + c3delt;
   }
 }

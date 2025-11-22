@@ -69,6 +69,7 @@
 #include "apfel/structurefunctionbuilder.h"
 #include "apfel/tmdbuilder.h"
 #include "apfel/gpdbuilder.h"
+#include "apfel/cffbuilder.h"
 #include "apfel/gtmdbuilder.h"
 #include "apfel/alphaqcd.h"
 #include "apfel/alphaqcdg.h"
