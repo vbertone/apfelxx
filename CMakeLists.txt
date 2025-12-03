@@ -40,6 +40,12 @@ file(GLOB_RECURSE  source_files src/*)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 add_library(apfelxx SHARED ${source_files})
 
+target_include_directories(apfelxx
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+        $<INSTALL_INTERFACE:include>
+)
+
 # Define libraries to be linked
 target_link_libraries(apfelxx)
 
