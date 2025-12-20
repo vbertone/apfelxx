@@ -24,12 +24,12 @@ namespace apfel
 
     // Building log spaced grid in x. Number of points in x + 1 (bins)
     // + extra nodes for rhs interpolation.
-    _xsg.resize(_nx+_InterDegree+1, 0);
+    _xsg.resize(_nx + _InterDegree + 1, 0);
 
     _xsg[0] = _xMin;
     const double exps = exp(_Step);
     for (int ix = 1; ix < (int) _xsg.size(); ix++)
-      _xsg[ix] = _xsg[ix-1] * exps;
+      _xsg[ix] = _xsg[ix - 1] * exps;
     _xsg[_nx] = 1;
 
     _lxsg.resize(_xsg.size());
@@ -39,28 +39,28 @@ namespace apfel
 
   //_________________________________________________________________________________
   SubGrid::SubGrid(std::vector<double> const& xsg, int const& InterDegree):
-    _nx(xsg.size()-1),
+    _nx(xsg.size() - 1),
     _InterDegree(InterDegree),
     _xMin(xsg[0]),
     _xMax(1),
     _Step(0)
   {
-    _xsg.resize(_nx+InterDegree+1, 0);
+    _xsg.resize(_nx + InterDegree + 1, 0);
     copy(xsg.begin(), xsg.end(), _xsg.begin());
 
     // Check that the last point of the user-given grid is equal to
     // one.
-    if (std::abs(_xsg[_nx]-1) >= eps11)
+    if (std::abs(_xsg[_nx] - 1) >= eps11)
       throw std::runtime_error(error("SubGrid::SubGrid","The upper value of the external grid does not coincide with 1."));
     else
       _xsg[_nx] = 1;
 
     // Extend the grid for x > 1 for interpolation reasons using the
     // same width of the last bin in log scale.
-    const double step = - log( xsg[_nx-1] );
+    const double step = - log( xsg[_nx - 1] );
     const double exps = exp(step);
     for (int ix = _nx; ix < (int) _xsg.size(); ix++)
-      _xsg[ix] = _xsg[ix-1] * exps;
+      _xsg[ix] = _xsg[ix - 1] * exps;
 
     _lxsg.resize(_xsg.size());
     for (int ix = 0; ix < (int) _xsg.size(); ix++)
