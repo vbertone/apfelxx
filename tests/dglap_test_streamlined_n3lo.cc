@@ -51,7 +51,7 @@ int main()
             << "   s+sbar   "
             << "   c+cbar   "
             << "   b+bbar   "
-            << "    gluon   "
+            << "   gluon    "
             << std::endl;
   for (auto const& x : xlha)
     {
