@@ -23,10 +23,7 @@ namespace apfel
    * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) (and
    * O(&alpha;<SUB>s</SUB><SUP>4</SUP>) when available) ones is
    * used. See https://www.liverpool.ac.uk/~avogt/split.html for more
-   * details. Approximated O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
-   * splitting functions are taken from:
-   * https://github.com/MSHTPDF/N3LO_additions and best fit parameters
-   * taken from Table 8 of https://arxiv.org/pdf/2207.04739.pdf.
+   * details.
    */
   ///@{
   ///@}
@@ -381,7 +378,7 @@ namespace apfel
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet
    * unpolarised splitting function. Parameterisation determined in
-   * https://arxiv.org/pdf/2302.07593.pdf
+   * https://arxiv.org/pdf/2512.10783.pdf
    */
   class P3ps: public Expression
   {
@@ -411,7 +408,7 @@ namespace apfel
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) quark-gluon
    * unpolarised splitting function. Parameterisation determined in
-   * https://arxiv.org/pdf/2307.04158.pdf
+   * https://arxiv.org/pdf/2512.10783.pdf
    */
   class P3qg: public Expression
   {
@@ -440,7 +437,7 @@ namespace apfel
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-quark
    * unpolarised splitting function. Parameterisation determined in
-   * https://arxiv.org/pdf/2310.05744.pdf
+   * https://arxiv.org/pdf/2512.10783.pdf
    */
   class P3gq: public Expression
   {
@@ -487,7 +484,7 @@ namespace apfel
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) gluon-gluon
    * unpolarised splitting function. Parameterisation determined in
-   * https://arxiv.org/pdf/2410.08089.
+   * https://arxiv.org/pdf/2512.10783.pdf
    */
   class P3gg: public Expression
   {
