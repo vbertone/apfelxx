@@ -82,7 +82,12 @@ namespace apfel
    * @param InFFs: fragmentation functions as zD(z, Q), mapping flavour id to value
    * @param Alphas: strong coupling α<SUB>s</SUB>(Q)
    * @param Thresholds: heavy-quark thresholds (used to determine nf at each Q)
-   * @param PerturbativeOrder: 0 = LO, 1 = NLO, 2 = NNLO (default: 2)
+   * @param PerturbativeOrder: 0 = LO, 1 = NLO, 2 = NNLO (default: 2); only used when channel = -1
+   * @param channel: partonic channel selector (default: -1 = full sum controlled by PerturbativeOrder).
+   *   Individual channels follow the benchmark convention:
+   *   0 = LO ns; 1 = LO+NLO ns; 2 = NLO qg; 3 = NLO gq;
+   *   4 = ns+ps through NNLO; 5 = qg through NNLO; 6 = gq through NNLO;
+   *   7 = NNLO gg; 8 = NNLO qbq; 9 = NNLO qpq.
    * @return function Q → F<SUB>T</SUB> DoubleDistribution
    */
   std::function<DoubleDistribution(double const&)> BuildSidisUnpFT(
@@ -91,7 +96,8 @@ namespace apfel
       std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
       std::function<double(double const&)>                               const& Alphas,
       std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder = 2);
+      int                                                                const& PerturbativeOrder = 2,
+      int                                                                const& channel = -1);
 
   /**
    * @brief Builds the unpolarised longitudinal (F<SUB>L</SUB>) SIDIS
@@ -128,7 +134,8 @@ namespace apfel
    * @param InFFs: fragmentation functions as zD(z, Q)
    * @param Alphas: strong coupling α<SUB>s</SUB>(Q)
    * @param Thresholds: heavy-quark thresholds
-   * @param PerturbativeOrder: 0 = LO, 1 = NLO, 2 = NNLO (default: 2)
+   * @param PerturbativeOrder: 0 = LO, 1 = NLO, 2 = NNLO (default: 2); only used when channel = -1
+   * @param channel: partonic channel selector (default: -1 = full sum); see BuildSidisUnpFT for convention
    * @return function Q → G<SUB>1</SUB> DoubleDistribution
    */
   std::function<DoubleDistribution(double const&)> BuildSidisG1(
@@ -137,5 +144,6 @@ namespace apfel
       std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
       std::function<double(double const&)>                               const& Alphas,
       std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder = 2);
+      int                                                                const& PerturbativeOrder = 2,
+      int                                                                const& channel = -1);
 }

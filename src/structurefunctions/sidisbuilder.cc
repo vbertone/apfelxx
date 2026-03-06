@@ -188,7 +188,8 @@ namespace apfel
       std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
       std::function<double(double const&)>                               const& Alphas,
       std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder)
+      int                                                                const& PerturbativeOrder,
+      int                                                                const& channel)
   {
     return [=, &obj] (double const& Q) -> DoubleDistribution
       {
@@ -220,27 +221,73 @@ namespace apfel
         DoubleOperator Oqpq2 = OZero;
         DoubleOperator Oqpq3 = OZero;
 
-        if (PerturbativeOrder >= 0)
-          Ons += obj.FT.at("DoubleIdentity");
-
-        if (PerturbativeOrder >= 1)
+        if (channel == 0)
           {
-            Ons += coup * obj.FT.at("C1TQ2Q");
-            Ogq += coup * obj.FT.at("C1TQ2G");
+            Ons += obj.FT.at("DoubleIdentity");
+          }
+        else if (channel == 1)
+          {
+            Ons += obj.FT.at("DoubleIdentity") + coup * obj.FT.at("C1TQ2Q");
+          }
+        else if (channel == 2)
+          {
             Oqg += coup * obj.FT.at("C1TG2Q");
           }
-
-        if (PerturbativeOrder >= 2)
+        else if (channel == 3)
           {
-            Ons   += coup2 * obj.FT.at("C2TQ2QNS" + snf);
-            Ogq   += coup2 * obj.FT.at("C2TQ2G");
-            Oqg   += coup2 * obj.FT.at("C2TG2Q");
-            Ogg   += coup2 * obj.FT.at("C2TG2G");
-            Ops   += coup2 * obj.FT.at("C2TQ2QPS");
-            Oqbq  += coup2 * obj.FT.at("C2TQ2QB");
+            Ogq += coup * obj.FT.at("C1TQ2G");
+          }
+        else if (channel == 4)
+          {
+            Ons += obj.FT.at("DoubleIdentity") + coup * obj.FT.at("C1TQ2Q") + coup2 * obj.FT.at("C2TQ2QNS" + snf);
+            Ops += coup2 * obj.FT.at("C2TQ2QPS");
+          }
+        else if (channel == 5)
+          {
+            Oqg += coup * obj.FT.at("C1TG2Q") + coup2 * obj.FT.at("C2TG2Q");
+          }
+        else if (channel == 6)
+          {
+            Ogq += coup * obj.FT.at("C1TQ2G") + coup2 * obj.FT.at("C2TQ2G");
+          }
+        else if (channel == 7)
+          {
+            Ogg += coup2 * obj.FT.at("C2TG2G");
+          }
+        else if (channel == 8)
+          {
+            Oqbq += coup2 * obj.FT.at("C2TQ2QB");
+          }
+        else if (channel == 9)
+          {
             Oqpq1 += coup2 * obj.FT.at("C2TQ2QP1");
             Oqpq2 += coup2 * obj.FT.at("C2TQ2QP2");
             Oqpq3 += coup2 * obj.FT.at("C2TQ2QP3");
+          }
+        else // channel == -1: full sum controlled by PerturbativeOrder
+          {
+            if (PerturbativeOrder >= 0)
+              Ons += obj.FT.at("DoubleIdentity");
+
+            if (PerturbativeOrder >= 1)
+              {
+                Ons += coup * obj.FT.at("C1TQ2Q");
+                Ogq += coup * obj.FT.at("C1TQ2G");
+                Oqg += coup * obj.FT.at("C1TG2Q");
+              }
+
+            if (PerturbativeOrder >= 2)
+              {
+                Ons   += coup2 * obj.FT.at("C2TQ2QNS" + snf);
+                Ogq   += coup2 * obj.FT.at("C2TQ2G");
+                Oqg   += coup2 * obj.FT.at("C2TG2Q");
+                Ogg   += coup2 * obj.FT.at("C2TG2G");
+                Ops   += coup2 * obj.FT.at("C2TQ2QPS");
+                Oqbq  += coup2 * obj.FT.at("C2TQ2QB");
+                Oqpq1 += coup2 * obj.FT.at("C2TQ2QP1");
+                Oqpq2 += coup2 * obj.FT.at("C2TQ2QP2");
+                Oqpq3 += coup2 * obj.FT.at("C2TQ2QP3");
+              }
           }
 
         return ixz * (Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
@@ -326,7 +373,8 @@ namespace apfel
       std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
       std::function<double(double const&)>                               const& Alphas,
       std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder)
+      int                                                                const& PerturbativeOrder,
+      int                                                                const& channel)
   {
     return [=, &obj] (double const& Q) -> DoubleDistribution
       {
@@ -358,28 +406,75 @@ namespace apfel
         DoubleOperator Oqpq2 = OZero;
         DoubleOperator Oqpq3 = OZero;
 
-        if (PerturbativeOrder >= 0)
-          Ons += obj.G1.at("DoubleIdentity");
-
-        if (PerturbativeOrder >= 1)
+        if (channel == 0)
           {
-            Ons += coup * obj.G1.at("DC1Q2Q");
-            Ogq += coup * obj.G1.at("DC1Q2G");
+            Ons += obj.G1.at("DoubleIdentity");
+          }
+        else if (channel == 1)
+          {
+            Ons += obj.G1.at("DoubleIdentity") + coup * obj.G1.at("DC1Q2Q");
+          }
+        else if (channel == 2)
+          {
             Oqg += coup * obj.G1.at("DC1G2Q");
           }
-
-        if (PerturbativeOrder >= 2)
+        else if (channel == 3)
           {
-            // For G1: ns, gq, and qg are all nf-dependent
-            Ons   += coup2 * obj.G1.at("DC2Q2QNS" + snf);
-            Ogq   += coup2 * obj.G1.at("DC2Q2G"   + snf);
-            Oqg   += coup2 * obj.G1.at("DC2G2Q"   + snf);
-            Ogg   += coup2 * obj.G1.at("DC2G2G");
-            Ops   += coup2 * obj.G1.at("DC2Q2QPS");
-            Oqbq  += coup2 * obj.G1.at("DC2Q2QB");
+            Ogq += coup * obj.G1.at("DC1Q2G");
+          }
+        else if (channel == 4)
+          {
+            // G1: ns, gq, qg are nf-dependent at NNLO
+            Ons += obj.G1.at("DoubleIdentity") + coup * obj.G1.at("DC1Q2Q") + coup2 * obj.G1.at("DC2Q2QNS" + snf);
+            Ops += coup2 * obj.G1.at("DC2Q2QPS");
+          }
+        else if (channel == 5)
+          {
+            Oqg += coup * obj.G1.at("DC1G2Q") + coup2 * obj.G1.at("DC2G2Q" + snf);
+          }
+        else if (channel == 6)
+          {
+            Ogq += coup * obj.G1.at("DC1Q2G") + coup2 * obj.G1.at("DC2Q2G" + snf);
+          }
+        else if (channel == 7)
+          {
+            Ogg += coup2 * obj.G1.at("DC2G2G");
+          }
+        else if (channel == 8)
+          {
+            Oqbq += coup2 * obj.G1.at("DC2Q2QB");
+          }
+        else if (channel == 9)
+          {
             Oqpq1 += coup2 * obj.G1.at("DC2Q2QP1");
             Oqpq2 += coup2 * obj.G1.at("DC2Q2QP2");
             Oqpq3 += coup2 * obj.G1.at("DC2Q2QP3");
+          }
+        else // channel == -1: full sum controlled by PerturbativeOrder
+          {
+            if (PerturbativeOrder >= 0)
+              Ons += obj.G1.at("DoubleIdentity");
+
+            if (PerturbativeOrder >= 1)
+              {
+                Ons += coup * obj.G1.at("DC1Q2Q");
+                Ogq += coup * obj.G1.at("DC1Q2G");
+                Oqg += coup * obj.G1.at("DC1G2Q");
+              }
+
+            if (PerturbativeOrder >= 2)
+              {
+                // For G1: ns, gq, and qg are all nf-dependent
+                Ons   += coup2 * obj.G1.at("DC2Q2QNS" + snf);
+                Ogq   += coup2 * obj.G1.at("DC2Q2G"   + snf);
+                Oqg   += coup2 * obj.G1.at("DC2G2Q"   + snf);
+                Ogg   += coup2 * obj.G1.at("DC2G2G");
+                Ops   += coup2 * obj.G1.at("DC2Q2QPS");
+                Oqbq  += coup2 * obj.G1.at("DC2Q2QB");
+                Oqpq1 += coup2 * obj.G1.at("DC2Q2QP1");
+                Oqpq2 += coup2 * obj.G1.at("DC2Q2QP2");
+                Oqpq3 += coup2 * obj.G1.at("DC2Q2QP3");
+              }
           }
 
         return ixz * (Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
