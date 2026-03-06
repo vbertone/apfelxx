@@ -67,6 +67,7 @@
 #include "apfel/dglapbuilder.h"
 #include "apfel/dglapbuilderqcdqed.h"
 #include "apfel/structurefunctionbuilder.h"
+#include "apfel/sidisbuilder.h"
 #include "apfel/tmdbuilder.h"
 #include "apfel/gpdbuilder.h"
 #include "apfel/cffbuilder.h"
