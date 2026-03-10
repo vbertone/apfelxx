@@ -125,7 +125,7 @@ namespace apfel
 
         _JointToSubMap[ig].resize(nxg + 1 + id);
         for (int ix = 0; ix <= nxg; ix++)
-          for (int jx = 0; ix <= (int) xg_joint_vect.size(); jx++)
+          for (int jx = 0; jx <= (int) xg_joint_vect.size(); jx++)
             if (std::abs(xg_joint_vect[jx] / xg[ix] - 1) < eps12)
               {
                 _JointToSubMap[ig][ix] = jx;
