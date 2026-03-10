@@ -47,7 +47,7 @@ target_include_directories(apfelxx
 )
 
 # Define libraries to be linked
-target_link_libraries(apfelxx)
+target_link_libraries(apfelxx PUBLIC)
 
 # LHAPDF
 find_program(LHAPDF_CONFIG lhapdf-config)
@@ -60,33 +60,22 @@ if (LHAPDF_CONFIG)
    set(LHAPDF_CXX_FLAGS ${LHAPDF_CXX_FLAGS} CACHE STRING INTERNAL)
    set(LHAPDF_LIBRARIES ${LHAPDF_LIBRARIES} CACHE STRING INTERNAL)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LHAPDF_CXX_FLAGS}")
-   target_link_libraries(apfelxx ${LHAPDF_LIBRARIES})
+   target_link_libraries(apfelxx PUBLIC ${LHAPDF_LIBRARIES})
 else (LHAPDF_CONFIG)
-   set(WITH_LHAPDF 0)
    message ("-- LHAPDF not found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will not be built.")
 endif (LHAPDF_CONFIG)
 
-# pkg-config needed for possible dependecies
-find_package(PkgConfig QUIET)
 
-if (PkgConfig_FOUND)
-   message ("-- pkg-config found. Dependencies can be installed.")
+find_package(yaml-cpp QUIET)
+if (yaml-cpp_FOUND)
+   message ("   + yaml-cpp found. DoubleExpression objects can be exported to file.")
+   set(WITH_YAML_CPP 1)
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${YAML_CPP_CFLAGS}")
+   target_link_libraries(apfelxx PUBLIC yaml-cpp::yaml-cpp)
+else (yaml-cpp_FOUND)
+   message ("   + yaml-cpp not found. DoubleExpression objects cannot be exported to file.")
+endif (yaml-cpp_FOUND)
 
-   # Find yaml-cpp
-   pkg_search_module(YAML_CPP QUIET yaml-cpp)
-
-   if (YAML_CPP_FOUND)
-      message ("   + yaml-cpp found. DoubleExpression objects can be exported to file.")
-      set(WITH_YAML_CPP 1)
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${YAML_CPP_CFLAGS}")
-      target_link_libraries(apfelxx ${YAML_CPP_LINK_LIBRARIES})
-   else (YAML_CPP_FOUND)
-      message ("   + yaml-cpp not found. DoubleExpression objects cannot be exported to file.")
-      set(WITH_YAML_CPP 0)
-   endif (YAML_CPP_FOUND)
-else (PkgConfig_FOUND)
-   message ("-- pkg-config not found. Dependencies cannot be installed..")
-endif (PkgConfig_FOUND)
 
 # pybind11
 find_package(pybind11 QUIET)

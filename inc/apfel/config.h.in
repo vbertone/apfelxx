@@ -1,6 +1,6 @@
 #pragma once
 
 #define apfelxx_VERSION @apfelxx_VERSION@
-#define WITH_LHAPDF @WITH_LHAPDF@
-#define WITH_YAML_CPP @WITH_YAML_CPP@
+#cmakedefine WITH_LHAPDF
+#cmakedefine WITH_YAML_CPP
 #define pybind11_FOUND @pybind11_FOUND@

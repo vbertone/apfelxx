@@ -1,5 +1,13 @@
 @PACKAGE_INIT@
 
+set(apfelxx_WITH_YAML_CPP "@WITH_YAML_CPP@")
+include(CMakeFindDependencyMacro)
+
+if(NOT apfelxx_WITH_YAML_CPP STREQUAL "")
+   find_dependency(yaml-cpp CONFIG)
+endif()
+
+
 # Include exported targets
 include("${CMAKE_CURRENT_LIST_DIR}/apfelxxTargets.cmake")
 

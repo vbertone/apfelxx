@@ -17,7 +17,7 @@
 
 // Include yaml-cpp header only if it has been found at configuration
 // time.
-#if WITH_YAML_CPP == 1
+#ifdef WITH_YAML_CPP
 #include <yaml-cpp/yaml.h>
 #endif
 
@@ -60,7 +60,8 @@ namespace apfel
      */
     DoubleOperator(DoubleObject<Operator> const& DObj);
 
-#if WITH_YAML_CPP == 1
+// #if WITH_YAML_CPP == 1
+#ifdef WITH_YAML_CPP
     /**
      * @brief The DoubleOperator constructor.
      * @param Node: YAML Node where the DoubleOperator object is strored

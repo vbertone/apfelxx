@@ -281,7 +281,7 @@ namespace apfel
       }
   }
 
-#if WITH_YAML_CPP == 1
+#ifdef WITH_YAML_CPP
   //_________________________________________________________________________
   DoubleOperator::DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr):
     _grid1(gr1),

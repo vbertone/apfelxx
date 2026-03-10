@@ -8,7 +8,7 @@
 
 #include "apfel/config.h"
 
-#if WITH_LHAPDF == 1
+#ifdef WITH_LHAPDF
 
 #include "apfel/initialiseevolution.h"
 
