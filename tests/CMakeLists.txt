@@ -5,6 +5,5 @@ foreach(testsource ${testcodes})
   add_executable(${filename} ${filename}.cc)
   target_link_libraries(${filename} apfelxx)
   add_test(${filename} ${CMAKE_CURRENT_BINARY_DIR}/${filename})
-  # Run tests that read companion .dat files from the source directory
   set_tests_properties(${filename} PROPERTIES WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endforeach()
