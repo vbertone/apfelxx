@@ -5,7 +5,6 @@
 //
 
 #include "apfel/apfelxx.h"
-#include "apfel/sidiscoefficientfunctionsunp.h"
 
 #include <algorithm>
 
@@ -24,10 +23,7 @@ namespace apfel
     DoubleObject<Operator> CL1qq;
     DoubleObject<Operator> CL1gq;
     DoubleObject<Operator> CL1qg;
-    std::map<int, DoubleOperator>         C2Tns;
-    std::map<std::string, DoubleOperator> C2T;
-    std::map<int, DoubleOperator>         C2Lns;
-    std::map<std::string, DoubleOperator> C2L;
+    std::map<int, DoubleObject<Operator>> C22qq;
   };
 
   // Recurring expressions
@@ -293,7 +289,7 @@ namespace apfel
 
   // Functions that fills in the SIDIS hard cross sections on two
   // different grids.
-  SidisObjects InitializeSIDIS(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {}, double const& IntEps = 1e-3)
+  SidisObjects InitializeSIDIS(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
     report("Initializing SIDIS hard cross sections... ");
     Timer t;
@@ -411,34 +407,111 @@ namespace apfel
     if (std::find(exclude.begin(), exclude.end(), 22) == exclude.end()) SidisObj.CL1qg.AddTerm({K1Lqg, or11Lqgx, or12Lqgz});
 
     // ====================================================
-    // Exact NNLO corrections.
-    // Unpolarised FT and FL expressions from arXiv:2401.16281.
+    // Approximated NNLO corrections derived from threshold
+    // resummation. They only contribute to the qq channel of F2.
+    // Expressions taken from Appendix B of arXiv:2109.00847.
     // ====================================================
-    // NNLO FT: nf-independent channels
-    SidisObj.C2T.emplace("gq",   DoubleOperator{gx, gz, C2TQ2G{},   IntEps});
-    SidisObj.C2T.emplace("qg",   DoubleOperator{gx, gz, C2TG2Q{},   IntEps});
-    SidisObj.C2T.emplace("gg",   DoubleOperator{gx, gz, C2TG2G{},   IntEps});
-    SidisObj.C2T.emplace("ps",   DoubleOperator{gx, gz, C2TQ2QPS{}, IntEps});
-    SidisObj.C2T.emplace("qbq",  DoubleOperator{gx, gz, C2TQ2QB{},  IntEps});
-    SidisObj.C2T.emplace("qpq1", DoubleOperator{gx, gz, C2TQ2QP1{}, IntEps});
-    SidisObj.C2T.emplace("qpq2", DoubleOperator{gx, gz, C2TQ2QP2{}, IntEps});
-    SidisObj.C2T.emplace("qpq3", DoubleOperator{gx, gz, C2TQ2QP3{}, IntEps});
+    // Additional singular terms
+    const Operator oD2x{gx, DDn{2}};
+    const Operator oD3x{gx, DDn{3}};
+    const Operator oD2z{gz, DDn{2}};
+    const Operator oD3z{gz, DDn{3}};
 
-    // NNLO FL: nf-independent channels
-    SidisObj.C2L.emplace("gq",   DoubleOperator{gx, gz, C2LQ2G{},   IntEps});
-    SidisObj.C2L.emplace("qg",   DoubleOperator{gx, gz, C2LG2Q{},   IntEps});
-    SidisObj.C2L.emplace("gg",   DoubleOperator{gx, gz, C2LG2G{},   IntEps});
-    SidisObj.C2L.emplace("ps",   DoubleOperator{gx, gz, C2LQ2QPS{}, IntEps});
-    SidisObj.C2L.emplace("qbq",  DoubleOperator{gx, gz, C2LQ2QB{},  IntEps});
-    SidisObj.C2L.emplace("qpq1", DoubleOperator{gx, gz, C2LQ2QP1{}, IntEps});
-    SidisObj.C2L.emplace("qpq2", DoubleOperator{gx, gz, C2LQ2QP2{}, IntEps});
-    SidisObj.C2L.emplace("qpq3", DoubleOperator{gx, gz, C2LQ2QP3{}, IntEps});
+    // Non-singular (next-to-leading power) terms
+    const Operator ol1x{gx, ln{1}};
+    const Operator ol2x{gx, ln{2}};
+    const Operator ol3x{gx, ln{3}};
+    const Operator ol1z{gz, ln{1}};
+    const Operator ol2z{gz, ln{2}};
+    const Operator ol3z{gz, ln{3}};
 
-    // NNLO FT and FL: nf-dependent non-singlet
+    // Constant function
+    const Operator oonex{gx, one{}};
+    const Operator oonez{gz, one{}};
+
+    // Overall constant (16 = 4^2 due to the different normalisation
+    // of the expansion parameter).
+    const double ovc = 16. * CF;
+
+    // Loop over nf
     for (int nf = nfi; nf <= nff; nf++)
       {
-        SidisObj.C2Tns.emplace(nf, DoubleOperator{gx, gz, C2TQ2QNS{nf}, IntEps});
-        SidisObj.C2Lns.emplace(nf, DoubleOperator{gx, gz, C2LQ2QNS{nf}, IntEps});
+        DoubleObject<Operator> cnf{};
+
+        // CF and leading-power terms (Eq. (62))
+        const double c1 = ovc * CF / 2.;
+        if (std::find(exclude.begin(), exclude.end(), 23) == exclude.end()) cnf.AddTerm({c1, odeltax, oD3z});
+        if (std::find(exclude.begin(), exclude.end(), 24) == exclude.end()) cnf.AddTerm({c1, oD3x, odeltaz});
+
+        const double c2 = ovc * CF * 3. / 2.;
+        if (std::find(exclude.begin(), exclude.end(), 25) == exclude.end()) cnf.AddTerm({c2, oD0x, oD2z});
+        if (std::find(exclude.begin(), exclude.end(), 26) == exclude.end()) cnf.AddTerm({c2, oD2x, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 27) == exclude.end()) cnf.AddTerm({2 * c2, oD1x, oD1z});
+
+        const double c3 = - ovc * CF * ( 4. + Pi2 / 3. );
+        if (std::find(exclude.begin(), exclude.end(), 28) == exclude.end()) cnf.AddTerm({c3, oD0x, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 29) == exclude.end()) cnf.AddTerm({c3, odeltax, oD1z});
+        if (std::find(exclude.begin(), exclude.end(), 30) == exclude.end()) cnf.AddTerm({c3, oD1x, odeltaz});
+
+        const double c4 = ovc * CF * 2. * zeta3;
+        if (std::find(exclude.begin(), exclude.end(), 31) == exclude.end()) cnf.AddTerm({c4, odeltax, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 32) == exclude.end()) cnf.AddTerm({c4, oD0x, odeltaz});
+
+        const double c5 = ovc * CF * ( 511. / 64. - 15. * zeta3 / 4. + 29. * Pi2 / 48. - 7. * Pi2 * Pi2 / 360. );
+        if (std::find(exclude.begin(), exclude.end(), 33) == exclude.end()) cnf.AddTerm({c5, odeltax, odeltaz});
+
+        // CF and next-to-leading-power terms (Eq. (63))
+        const double c6 = - ovc * CF * 3. / 2.;
+        if (std::find(exclude.begin(), exclude.end(), 34) == exclude.end()) cnf.AddTerm({c6, oD2x, oonez});
+        if (std::find(exclude.begin(), exclude.end(), 35) == exclude.end()) cnf.AddTerm({c6, oonex, oD2z});
+        if (std::find(exclude.begin(), exclude.end(), 36) == exclude.end()) cnf.AddTerm({2 * c6, oD1x, ol1z});
+        if (std::find(exclude.begin(), exclude.end(), 37) == exclude.end()) cnf.AddTerm({2 * c6, ol1x, oD1z});
+        if (std::find(exclude.begin(), exclude.end(), 38) == exclude.end()) cnf.AddTerm({c6, oD0x, ol2z});
+        if (std::find(exclude.begin(), exclude.end(), 39) == exclude.end()) cnf.AddTerm({c6, ol2x, oD0z});
+
+        const double c7 = - ovc * CF / 2.;
+        if (std::find(exclude.begin(), exclude.end(), 40) == exclude.end()) cnf.AddTerm({c7, odeltax, ol3z});
+        if (std::find(exclude.begin(), exclude.end(), 41) == exclude.end()) cnf.AddTerm({c7, ol3x, odeltaz});
+
+        // CA terms (Eq. (64))
+        const double c8 = - ovc * CA * 11. / 24.;
+        if (std::find(exclude.begin(), exclude.end(), 42) == exclude.end()) cnf.AddTerm({c8, odeltax, oD2z});
+        if (std::find(exclude.begin(), exclude.end(), 43) == exclude.end()) cnf.AddTerm({c8, oD2x, odeltaz});
+        if (std::find(exclude.begin(), exclude.end(), 44) == exclude.end()) cnf.AddTerm({2 * c8, oD0x, oD1z});
+        if (std::find(exclude.begin(), exclude.end(), 45) == exclude.end()) cnf.AddTerm({2 * c8, oD1x, oD0z});
+
+        const double c9 = ovc * CA * ( 67. / 36. - Pi2 / 12. );
+        if (std::find(exclude.begin(), exclude.end(), 46) == exclude.end()) cnf.AddTerm({c9, oD0x, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 47) == exclude.end()) cnf.AddTerm({c9, odeltax, oD1z});
+        if (std::find(exclude.begin(), exclude.end(), 48) == exclude.end()) cnf.AddTerm({c9, oD1x, odeltaz});
+
+        const double c10 = ovc * CA * ( 7. * zeta3 / 4. + 11. * Pi2 / 72. - 101. / 54. );
+        if (std::find(exclude.begin(), exclude.end(), 49) == exclude.end()) cnf.AddTerm({c10, odeltax, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 50) == exclude.end()) cnf.AddTerm({c10, oD0x, odeltaz});
+
+        const double c11 = ovc * CA * ( 43. * zeta3 / 12. + 17. * Pi2 * Pi2 / 720. - 1535. / 192. - 269. * Pi2 / 432. );
+        if (std::find(exclude.begin(), exclude.end(), 51) == exclude.end()) cnf.AddTerm({c11, odeltax, odeltaz});
+
+        // nf terms (Eq. (65))
+        const double c12 = ovc * nf / 12.;
+        if (std::find(exclude.begin(), exclude.end(), 52) == exclude.end()) cnf.AddTerm({c12, odeltax, oD2z});
+        if (std::find(exclude.begin(), exclude.end(), 53) == exclude.end()) cnf.AddTerm({c12, oD2x, odeltaz});
+        if (std::find(exclude.begin(), exclude.end(), 54) == exclude.end()) cnf.AddTerm({2 * c12, oD0x, oD1z});
+        if (std::find(exclude.begin(), exclude.end(), 55) == exclude.end()) cnf.AddTerm({2 * c12, oD1x, oD0z});
+
+        const double c13 = - ovc * nf * 5. / 18.;
+        if (std::find(exclude.begin(), exclude.end(), 56) == exclude.end()) cnf.AddTerm({c13, oD0x, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 57) == exclude.end()) cnf.AddTerm({c13, odeltax, oD1z});
+        if (std::find(exclude.begin(), exclude.end(), 58) == exclude.end()) cnf.AddTerm({c13, oD1x, odeltaz});
+
+        const double c14 = ovc * nf * ( 7. / 27. - Pi2 / 36. );
+        if (std::find(exclude.begin(), exclude.end(), 59) == exclude.end()) cnf.AddTerm({c14, odeltax, oD0z});
+        if (std::find(exclude.begin(), exclude.end(), 60) == exclude.end()) cnf.AddTerm({c14, oD0x, odeltaz});
+
+        const double c15 = ovc * nf * ( zeta3 / 6. + 19. * Pi2 / 216. + 127. / 96. );
+        if (std::find(exclude.begin(), exclude.end(), 61) == exclude.end()) cnf.AddTerm({c15, odeltax, odeltaz});
+
+        SidisObj.C22qq.insert({nf, cnf});
       }
     t.stop();
 
@@ -447,8 +520,8 @@ namespace apfel
 
   // Functions that fills in the SIDIS hard cross sections on one
   // single grid and exchanges the last defaulted arguments.
-  SidisObjects InitializeSIDIS(Grid const& gx, std::vector<double> const& Thresholds, std::vector<int> exclude = {}, double const& IntEps = 1e-3)
+  SidisObjects InitializeSIDIS(Grid const& gx, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
-    return InitializeSIDIS(gx, gx, Thresholds, exclude, IntEps);
+    return InitializeSIDIS(gx, gx, Thresholds, exclude);
   }
 }
