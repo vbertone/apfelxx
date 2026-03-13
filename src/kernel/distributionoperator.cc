@@ -459,7 +459,7 @@ namespace apfel
   DistributionOperator& DistributionOperator::operator = (DistributionOperator const& o)
   {
     if (this != &o)
-      *this = o;
+      _dOperator = o._dOperator;
 
     return *this;
   }

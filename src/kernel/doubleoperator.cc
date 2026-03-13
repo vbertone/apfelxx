@@ -534,7 +534,7 @@ namespace apfel
   DoubleOperator& DoubleOperator::operator = (DoubleOperator const& o)
   {
     if (this != &o)
-      *this = o;
+      _dOperator = o._dOperator;
 
     return *this;
   }

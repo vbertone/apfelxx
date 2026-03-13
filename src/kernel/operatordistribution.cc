@@ -461,7 +461,7 @@ namespace apfel
   OperatorDistribution& OperatorDistribution::operator = (OperatorDistribution const& o)
   {
     if (this != &o)
-      *this = o;
+      _dOperator = o._dOperator;
 
     return *this;
   }
