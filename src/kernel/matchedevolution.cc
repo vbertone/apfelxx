@@ -14,6 +14,7 @@
 #include "apfel/doubleoperator.h"
 #include "apfel/distributionoperator.h"
 #include "apfel/operatordistribution.h"
+#include "apfel/tabulateobject.h"
 
 #include <algorithm>
 
@@ -133,4 +134,9 @@ namespace apfel
   template class MatchedEvolution<OperatorDistribution>;
   template class MatchedEvolution<Set<DistributionOperator>>;
   template class MatchedEvolution<Set<OperatorDistribution>>;
+  template class MatchedEvolution<TabulateObject<double>>;
+  template class MatchedEvolution<TabulateObject<Distribution>>;
+  template class MatchedEvolution<TabulateObject<Operator>>;
+  template class MatchedEvolution<TabulateObject<Set<Distribution>>>;
+  template class MatchedEvolution<TabulateObject<Set<Operator>>>;
 }

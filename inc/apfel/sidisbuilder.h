@@ -91,13 +91,13 @@ namespace apfel
    * @return function Q → F<SUB>T</SUB> DoubleDistribution
    */
   std::function<DoubleDistribution(double const&)> BuildSidisUnpFT(
-      SidisNNLOObjects                                                          const& obj,
-      std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
-      std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
-      std::function<double(double const&)>                               const& Alphas,
-      std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder = 2,
-      int                                                                const& channel = -1);
+    SidisNNLOObjects                                                          const& obj,
+    std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
+    std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
+    std::function<double(double const&)>                               const& Alphas,
+    std::vector<double>                                                const& Thresholds,
+    int                                                                const& PerturbativeOrder = 2,
+    int                                                                const& channel = -1);
 
   /**
    * @brief Builds the unpolarised longitudinal (F<SUB>L</SUB>) SIDIS
@@ -115,12 +115,12 @@ namespace apfel
    * @return function Q → F<SUB>L</SUB> DoubleDistribution
    */
   std::function<DoubleDistribution(double const&)> BuildSidisUnpFL(
-      SidisNNLOObjects                                                          const& obj,
-      std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
-      std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
-      std::function<double(double const&)>                               const& Alphas,
-      std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder = 2);
+    SidisNNLOObjects                                                          const& obj,
+    std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
+    std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
+    std::function<double(double const&)>                               const& Alphas,
+    std::vector<double>                                                const& Thresholds,
+    int                                                                const& PerturbativeOrder = 2);
 
   /**
    * @brief Builds the longitudinally polarised G<SUB>1</SUB> SIDIS
@@ -139,11 +139,11 @@ namespace apfel
    * @return function Q → G<SUB>1</SUB> DoubleDistribution
    */
   std::function<DoubleDistribution(double const&)> BuildSidisG1(
-      SidisNNLOObjects                                                          const& obj,
-      std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
-      std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
-      std::function<double(double const&)>                               const& Alphas,
-      std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder = 2,
-      int                                                                const& channel = -1);
+    SidisNNLOObjects                                                          const& obj,
+    std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
+    std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
+    std::function<double(double const&)>                               const& Alphas,
+    std::vector<double>                                                const& Thresholds,
+    int                                                                const& PerturbativeOrder = 2,
+    int                                                                const& channel = -1);
 }

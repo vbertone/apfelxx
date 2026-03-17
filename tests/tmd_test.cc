@@ -55,9 +55,9 @@ int main()
   // EW charges
   const std::vector<double> Bq = apfel::ElectroWeakCharges(Q, true);
 
-  // Get Evolved TMD PDFs at bmax. This is is subtracted off from the
+  // Get Evolved TMD PDFs at bmax. This is subtracted off from the
   // b-dependent luminosity to improve the convergence of the Hankel
-  // transform, especially at small qT.
+  // transform, particularly at small qT.
   const std::map<int,apfel::Distribution> xF = QCDEvToPhys(EvTMDPDFs(2 * exp( - apfel::emc), Q, Q * Q).GetObjects());
   double lumimax = 0;
   for (int i = 1; i <= nf; i++)
@@ -95,11 +95,19 @@ int main()
   const double qTmin = 0.01;
   const double qTmax = 30;
   const double qTstp = ( qTmax - qTmin ) / ( nqT - 1 );
+  std::cout << std::scientific;
+  std::cout << "\n     Q         "
+            << "       y        "
+            << "      qT        "
+            << " cross section  "
+            << " PS red. fact.  "
+            << "PV PS red. fact."
+            << std::endl;
   for (double qT = qTmin; qT <= qTmax; qT += qTstp)
-    std::cout << std::scientific << Q << "  " << y << "  " << qT << "  "
-              << apfel::ConvFact * qT * 8 * M_PI * pow(apfel::alphaem, 2) * hcs / pow(Q, 3) / 9 * DEObj.transform(TMDLumib, qT) << "  "
-              << ps.PhaseSpaceReduction(Q, y, qT) << "  "
-              << ps.ParityViolatingPhaseSpaceReduction(Q, y, qT) << "  "
+    std::cout << Q << "\t" << y << "\t" << qT << "\t"
+              << apfel::ConvFact * qT * 8 * M_PI * pow(apfel::alphaem, 2) * hcs / pow(Q, 3) / 9 * DEObj.transform(TMDLumib, qT) << "\t"
+              << ps.PhaseSpaceReduction(Q, y, qT) << "\t"
+              << ps.ParityViolatingPhaseSpaceReduction(Q, y, qT) << "\t"
               << std::endl;
   t.stop();
 

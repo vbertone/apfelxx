@@ -129,6 +129,22 @@ namespace apfel
     TabulateObject(std::vector<T>      const& Object,
                    std::vector<double> const& Qg,
                    int                 const& InterDegree);
+
+    /**
+     * @brief The TabulateObject copy constructor.
+     */
+    TabulateObject(const TabulateObject&) = default;
+    ///@}
+
+    /**
+     * @name Binary operators
+     */
+    ///@{
+    TabulateObject<T>& operator  = (TabulateObject<T> const& to);                         //!< this  = TabulateObject<T>
+    TabulateObject<T>& operator *= (double const& s);                                     //!< this *= Scalar
+    TabulateObject<T>& operator /= (double const& s);                                     //!< this /= Scalar
+    TabulateObject<T>& operator += (TabulateObject<T> const& to);                         //!< this += TabulateObject<T>
+    TabulateObject<T>& operator -= (TabulateObject<T> const& to);                         //!< this -= TabulateObject<T>
     ///@}
 
     /**
@@ -158,4 +174,20 @@ namespace apfel
     std::map<int, double> EvaluateMapxQ(double const& x, double const& Q) const;
     ///@}
   };
+
+  /**
+   * @name Ternary operators
+   */
+  ///@{
+  template<class T>
+  TabulateObject<T> operator * (double const& s, TabulateObject<T> rhs);                           //!< Scalar*TabulateObject<T>
+  template<class T>
+  TabulateObject<T> operator * (TabulateObject<T> lhs, double const& s);                           //!< TabulateObject<T>*Scalar
+  template<class T>
+  TabulateObject<T> operator / (TabulateObject<T> lhs, double const& s);                           //!< TabulateObject<T>/Scalar
+  template<class T>
+  TabulateObject<T> operator + (TabulateObject<T> lhs, TabulateObject<T> const& rhs);              //!< TabulateObject<T>+TabulateObject<T>
+  template<class T>
+  TabulateObject<T> operator - (TabulateObject<T> lhs, TabulateObject<T> const& rhs);              //!< TabulateObject<T>-TabulateObject<T>
+  ///@}
 }

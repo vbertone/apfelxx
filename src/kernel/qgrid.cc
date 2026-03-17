@@ -14,6 +14,9 @@
 #include "apfel/doubleoperator.h"
 #include "apfel/distributionoperator.h"
 #include "apfel/operatordistribution.h"
+#include "apfel/tabulateobject.h"
+
+#include <algorithm>
 
 namespace apfel
 {
@@ -141,6 +144,22 @@ namespace apfel
     _fQg(Qg),
     _nQg{0, _nQ}
   {
+  }
+
+  //_________________________________________________________________________________
+  template<class T>
+  QGrid<T>::QGrid(QGrid const& qg)
+  {
+    _nQ          = qg.nQ();
+    _QMin        = qg.QMin();
+    _QMax        = qg.QMax();
+    _InterDegree = qg.InterDegree();
+    _Thresholds  = qg.GetThresholds();
+    _TabFunc     = qg.TabFunc();
+    _Qg          = qg.GetQGrid();
+    _fQg         = qg.GetFQGrid();
+    _nQg         = qg.GetThesholdIndices();
+    _GridValues  = qg.GetQGridValues();
   }
 
   //_________________________________________________________________________________
@@ -413,6 +432,106 @@ namespace apfel
       return true;
   }
 
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T>& QGrid<T>::operator = (QGrid<T> const& qg)
+  {
+    _nQ          = qg.nQ();
+    _QMin        = qg.QMin();
+    _QMax        = qg.QMax();
+    _InterDegree = qg.InterDegree();
+    _Thresholds  = qg.GetThresholds();
+    _TabFunc     = qg.TabFunc();
+    _Qg          = qg.GetQGrid();
+    _fQg         = qg.GetFQGrid();
+    _nQg         = qg.GetThesholdIndices();
+    _GridValues  = qg.GetQGridValues();
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T>& QGrid<T>::operator *= (double const& s)
+  {
+    std::transform(_GridValues.begin(), _GridValues.end(), _GridValues.begin(), [s] (T const& x)
+    {
+      return s * x;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T>& QGrid<T>::operator /= (double const& s)
+  {
+    std::transform(_GridValues.begin(), _GridValues.end(), _GridValues.begin(), [s] (T const& x)
+    {
+      return x / s;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T>& QGrid<T>::operator += (QGrid<T> const& qg)
+  {
+    if (*this != qg)
+      throw std::runtime_error(error("QGrid::operator +=", "Grids do not match"));
+    std::transform(_GridValues.begin(), _GridValues.end(), qg.GetQGridValues().begin(), _GridValues.begin(), [](T const& a, T const& b)
+    {
+      return a + b;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T>& QGrid<T>::operator -= (QGrid<T> const& qg)
+  {
+    if (*this != qg)
+      throw std::runtime_error(error("QGrid::operator -=", "Grids do not match"));
+    std::transform(_GridValues.begin(), _GridValues.end(), qg.GetQGridValues().begin(), _GridValues.begin(), [](T const& a, T const& b)
+    {
+      return a - b;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T> operator * (double const& s, QGrid<T> rhs)
+  {
+    return rhs *= s;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T> operator * (QGrid<T> lhs, double const& s)
+  {
+    return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T> operator / (QGrid<T> lhs, double const& s)
+  {
+    return lhs /= s;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T> operator + (QGrid<T> lhs, QGrid<T> const& rhs)
+  {
+    return lhs += rhs;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  QGrid<T> operator - (QGrid<T> lhs, QGrid<T> const& rhs)
+  {
+    return lhs -= rhs;
+  }
+
   // Specialisations
   //_________________________________________________________________________________
   template class QGrid<double>;
@@ -433,4 +552,14 @@ namespace apfel
   template class QGrid<OperatorDistribution>;
   template class QGrid<Set<DistributionOperator>>;
   template class QGrid<Set<OperatorDistribution>>;
+  template class QGrid<QGrid<double>>;
+  template class QGrid<QGrid<Distribution>>;
+  template class QGrid<QGrid<Operator>>;
+  template class QGrid<QGrid<Set<Distribution>>>;
+  template class QGrid<QGrid<Set<Operator>>>;
+  template class QGrid<TabulateObject<double>>;
+  template class QGrid<TabulateObject<Distribution>>;
+  template class QGrid<TabulateObject<Operator>>;
+  template class QGrid<TabulateObject<Set<Distribution>>>;
+  template class QGrid<TabulateObject<Set<Operator>>>;
 }

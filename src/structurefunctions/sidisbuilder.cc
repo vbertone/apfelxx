@@ -112,9 +112,7 @@ namespace apfel
         // --- NNLO G1 quark-in-gluon (nf-dependent for polarised) ---
         obj.G1.emplace("DC2G2Q" + snf, DoubleOperator{gx, gz, DC2G2Q{nf}, IntEps});
       }
-
     t.stop();
-
     return obj;
   }
 
@@ -137,11 +135,11 @@ namespace apfel
       DoubleDistribution distqpq3;
     };
 
-    SidisChannels BuildChannels(Grid                             const& gx,
-                                Grid                             const& gz,
-                                std::map<int, Distribution>      const& dPDF,
-                                std::map<int, Distribution>      const& dFF,
-                                int                              const  nf)
+    SidisChannels BuildChannels(Grid                        const& gx,
+                                Grid                        const& gz,
+                                std::map<int, Distribution> const& dPDF,
+                                std::map<int, Distribution> const& dFF,
+                                int                         const  nf)
     {
       const double sumch2 = SumCh2[nf];
 
@@ -154,7 +152,8 @@ namespace apfel
           eq2FFs  += QCh2[std::abs(j) - 1] * dFF.at(j);
         }
 
-      SidisChannels ch{
+      SidisChannels ch
+      {
         {gx, gz}, {eq2PDFs, dFF.at(21)}, {dPDF.at(21), eq2FFs},
         {sumch2 * dPDF.at(21), dFF.at(21)},
         {gx, gz}, {gx, gz}, {gx, gz}, {gx, gz}, {gx, gz}
@@ -182,304 +181,300 @@ namespace apfel
   // ===========================================================================
   // BuildSidisUnpFT
   // ===========================================================================
-  std::function<DoubleDistribution(double const&)> BuildSidisUnpFT(
-      SidisNNLOObjects                                                          const& obj,
-      std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
-      std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
-      std::function<double(double const&)>                               const& Alphas,
-      std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder,
-      int                                                                const& channel)
+  std::function<DoubleDistribution(double const&)> BuildSidisUnpFT(SidisNNLOObjects                                                   const& obj,
+                                                                   std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
+                                                                   std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
+                                                                   std::function<double(double const&)>                               const& Alphas,
+                                                                   std::vector<double>                                                const& Thresholds,
+                                                                   int                                                                const& PerturbativeOrder,
+                                                                   int                                                                const& channel)
   {
     return [=, &obj] (double const& Q) -> DoubleDistribution
-      {
-        Grid const& gx = obj.FT.begin()->second.GetFirstGrid();
-        Grid const& gz = obj.FT.begin()->second.GetSecondGrid();
+    {
+      Grid const& gx = obj.FT.begin()->second.GetFirstGrid();
+      Grid const& gz = obj.FT.begin()->second.GetSecondGrid();
 
-        const std::function<double(double const&, double const&)> ixz =
-          [] (double const& x, double const& z) -> double { return 1. / x / z; };
+      const std::function<double(double const&, double const&)> ixz = [] (double const& x, double const& z) -> double { return 1. / x / z; };
 
-        const int    nf    = NF(Q, Thresholds);
-        const double coup  = Alphas(Q) / FourPi;
-        const double coup2 = coup * coup;
+      const int    nf    = NF(Q, Thresholds);
+      const double coup  = Alphas(Q) / FourPi;
+      const double coup2 = coup * coup;
 
-        const std::map<int, Distribution> dPDF = DistributionMap(gx, InPDFs, Q);
-        const std::map<int, Distribution> dFF  = DistributionMap(gz, InFFs,  Q);
+      const std::map<int, Distribution> dPDF = DistributionMap(gx, InPDFs, Q);
+      const std::map<int, Distribution> dFF  = DistributionMap(gz, InFFs,  Q);
 
-        const SidisChannels ch = BuildChannels(gx, gz, dPDF, dFF, nf);
+      const SidisChannels ch = BuildChannels(gx, gz, dPDF, dFF, nf);
 
-        const DoubleOperator OZero{gx, gz, DoubleNull{}};
-        const std::string    snf = "_nf" + std::to_string(nf);
+      const DoubleOperator OZero{gx, gz, DoubleNull{}};
+      const std::string snf = "_nf" + std::to_string(nf);
 
-        DoubleOperator Ons   = OZero;
-        DoubleOperator Ogq   = OZero;
-        DoubleOperator Oqg   = OZero;
-        DoubleOperator Ogg   = OZero;
-        DoubleOperator Ops   = OZero;
-        DoubleOperator Oqbq  = OZero;
-        DoubleOperator Oqpq1 = OZero;
-        DoubleOperator Oqpq2 = OZero;
-        DoubleOperator Oqpq3 = OZero;
+      DoubleOperator Ons   = OZero;
+      DoubleOperator Ogq   = OZero;
+      DoubleOperator Oqg   = OZero;
+      DoubleOperator Ogg   = OZero;
+      DoubleOperator Ops   = OZero;
+      DoubleOperator Oqbq  = OZero;
+      DoubleOperator Oqpq1 = OZero;
+      DoubleOperator Oqpq2 = OZero;
+      DoubleOperator Oqpq3 = OZero;
 
-        if (channel == 0)
-          {
+      if (channel == 0)
+        {
+          Ons += obj.FT.at("DoubleIdentity");
+        }
+      else if (channel == 1)
+        {
+          Ons += obj.FT.at("DoubleIdentity") + coup * obj.FT.at("C1TQ2Q");
+        }
+      else if (channel == 2)
+        {
+          Oqg += coup * obj.FT.at("C1TG2Q");
+        }
+      else if (channel == 3)
+        {
+          Ogq += coup * obj.FT.at("C1TQ2G");
+        }
+      else if (channel == 4)
+        {
+          Ons += obj.FT.at("DoubleIdentity") + coup * obj.FT.at("C1TQ2Q") + coup2 * obj.FT.at("C2TQ2QNS" + snf);
+          Ops += coup2 * obj.FT.at("C2TQ2QPS");
+        }
+      else if (channel == 5)
+        {
+          Oqg += coup * obj.FT.at("C1TG2Q") + coup2 * obj.FT.at("C2TG2Q");
+        }
+      else if (channel == 6)
+        {
+          Ogq += coup * obj.FT.at("C1TQ2G") + coup2 * obj.FT.at("C2TQ2G");
+        }
+      else if (channel == 7)
+        {
+          Ogg += coup2 * obj.FT.at("C2TG2G");
+        }
+      else if (channel == 8)
+        {
+          Oqbq += coup2 * obj.FT.at("C2TQ2QB");
+        }
+      else if (channel == 9)
+        {
+          Oqpq1 += coup2 * obj.FT.at("C2TQ2QP1");
+          Oqpq2 += coup2 * obj.FT.at("C2TQ2QP2");
+          Oqpq3 += coup2 * obj.FT.at("C2TQ2QP3");
+        }
+      else // channel == -1: full sum controlled by PerturbativeOrder
+        {
+          if (PerturbativeOrder >= 0)
             Ons += obj.FT.at("DoubleIdentity");
-          }
-        else if (channel == 1)
-          {
-            Ons += obj.FT.at("DoubleIdentity") + coup * obj.FT.at("C1TQ2Q");
-          }
-        else if (channel == 2)
-          {
-            Oqg += coup * obj.FT.at("C1TG2Q");
-          }
-        else if (channel == 3)
-          {
-            Ogq += coup * obj.FT.at("C1TQ2G");
-          }
-        else if (channel == 4)
-          {
-            Ons += obj.FT.at("DoubleIdentity") + coup * obj.FT.at("C1TQ2Q") + coup2 * obj.FT.at("C2TQ2QNS" + snf);
-            Ops += coup2 * obj.FT.at("C2TQ2QPS");
-          }
-        else if (channel == 5)
-          {
-            Oqg += coup * obj.FT.at("C1TG2Q") + coup2 * obj.FT.at("C2TG2Q");
-          }
-        else if (channel == 6)
-          {
-            Ogq += coup * obj.FT.at("C1TQ2G") + coup2 * obj.FT.at("C2TQ2G");
-          }
-        else if (channel == 7)
-          {
-            Ogg += coup2 * obj.FT.at("C2TG2G");
-          }
-        else if (channel == 8)
-          {
-            Oqbq += coup2 * obj.FT.at("C2TQ2QB");
-          }
-        else if (channel == 9)
-          {
-            Oqpq1 += coup2 * obj.FT.at("C2TQ2QP1");
-            Oqpq2 += coup2 * obj.FT.at("C2TQ2QP2");
-            Oqpq3 += coup2 * obj.FT.at("C2TQ2QP3");
-          }
-        else // channel == -1: full sum controlled by PerturbativeOrder
-          {
-            if (PerturbativeOrder >= 0)
-              Ons += obj.FT.at("DoubleIdentity");
 
-            if (PerturbativeOrder >= 1)
-              {
-                Ons += coup * obj.FT.at("C1TQ2Q");
-                Ogq += coup * obj.FT.at("C1TQ2G");
-                Oqg += coup * obj.FT.at("C1TG2Q");
-              }
+          if (PerturbativeOrder >= 1)
+            {
+              Ons += coup * obj.FT.at("C1TQ2Q");
+              Ogq += coup * obj.FT.at("C1TQ2G");
+              Oqg += coup * obj.FT.at("C1TG2Q");
+            }
 
-            if (PerturbativeOrder >= 2)
-              {
-                Ons   += coup2 * obj.FT.at("C2TQ2QNS" + snf);
-                Ogq   += coup2 * obj.FT.at("C2TQ2G");
-                Oqg   += coup2 * obj.FT.at("C2TG2Q");
-                Ogg   += coup2 * obj.FT.at("C2TG2G");
-                Ops   += coup2 * obj.FT.at("C2TQ2QPS");
-                Oqbq  += coup2 * obj.FT.at("C2TQ2QB");
-                Oqpq1 += coup2 * obj.FT.at("C2TQ2QP1");
-                Oqpq2 += coup2 * obj.FT.at("C2TQ2QP2");
-                Oqpq3 += coup2 * obj.FT.at("C2TQ2QP3");
-              }
-          }
+          if (PerturbativeOrder >= 2)
+            {
+              Ons   += coup2 * obj.FT.at("C2TQ2QNS" + snf);
+              Ogq   += coup2 * obj.FT.at("C2TQ2G");
+              Oqg   += coup2 * obj.FT.at("C2TG2Q");
+              Ogg   += coup2 * obj.FT.at("C2TG2G");
+              Ops   += coup2 * obj.FT.at("C2TQ2QPS");
+              Oqbq  += coup2 * obj.FT.at("C2TQ2QB");
+              Oqpq1 += coup2 * obj.FT.at("C2TQ2QP1");
+              Oqpq2 += coup2 * obj.FT.at("C2TQ2QP2");
+              Oqpq3 += coup2 * obj.FT.at("C2TQ2QP3");
+            }
+        }
 
-        return ixz * (Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
-                      Ogg   * ch.distgg   + Ops  * ch.distps  + Oqbq * ch.distqbq +
-                      Oqpq1 * ch.distqpq1 + Oqpq2 * ch.distqpq2 + Oqpq3 * ch.distqpq3);
-      };
+      return ixz * ( Ons   * ch.distns   + Ogq   * ch.distgq   + Oqg   * ch.distqg   +
+                     Ogg   * ch.distgg   + Ops   * ch.distps   + Oqbq  * ch.distqbq  +
+                     Oqpq1 * ch.distqpq1 + Oqpq2 * ch.distqpq2 + Oqpq3 * ch.distqpq3 );
+    };
   }
 
   // ===========================================================================
   // BuildSidisUnpFL
   // ===========================================================================
-  std::function<DoubleDistribution(double const&)> BuildSidisUnpFL(
-      SidisNNLOObjects                                                          const& obj,
-      std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
-      std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
-      std::function<double(double const&)>                               const& Alphas,
-      std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder)
+  std::function<DoubleDistribution(double const&)> BuildSidisUnpFL(SidisNNLOObjects                                                   const& obj,
+                                                                   std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
+                                                                   std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
+                                                                   std::function<double(double const&)>                               const& Alphas,
+                                                                   std::vector<double>                                                const& Thresholds,
+                                                                   int                                                                const& PerturbativeOrder)
   {
     return [=, &obj] (double const& Q) -> DoubleDistribution
-      {
-        Grid const& gx = obj.FL.begin()->second.GetFirstGrid();
-        Grid const& gz = obj.FL.begin()->second.GetSecondGrid();
+    {
+      Grid const& gx = obj.FL.begin()->second.GetFirstGrid();
+      Grid const& gz = obj.FL.begin()->second.GetSecondGrid();
 
-        const std::function<double(double const&, double const&)> ixz =
-          [] (double const& x, double const& z) -> double { return 1. / x / z; };
+      const std::function<double(double const&, double const&)> ixz =
+      [] (double const& x, double const& z) -> double { return 1. / x / z; };
 
-        const int    nf    = NF(Q, Thresholds);
-        const double coup  = Alphas(Q) / FourPi;
-        const double coup2 = coup * coup;
+      const int    nf    = NF(Q, Thresholds);
+      const double coup  = Alphas(Q) / FourPi;
+      const double coup2 = coup * coup;
 
-        const std::map<int, Distribution> dPDF = DistributionMap(gx, InPDFs, Q);
-        const std::map<int, Distribution> dFF  = DistributionMap(gz, InFFs,  Q);
+      const std::map<int, Distribution> dPDF = DistributionMap(gx, InPDFs, Q);
+      const std::map<int, Distribution> dFF  = DistributionMap(gz, InFFs,  Q);
 
-        const SidisChannels ch = BuildChannels(gx, gz, dPDF, dFF, nf);
+      const SidisChannels ch = BuildChannels(gx, gz, dPDF, dFF, nf);
 
-        const DoubleOperator OZero{gx, gz, DoubleNull{}};
-        const std::string    snf = "_nf" + std::to_string(nf);
+      const DoubleOperator OZero{gx, gz, DoubleNull{}};
+      const std::string    snf = "_nf" + std::to_string(nf);
 
-        DoubleOperator Ons   = OZero;
-        DoubleOperator Ogq   = OZero;
-        DoubleOperator Oqg   = OZero;
-        DoubleOperator Ogg   = OZero;
-        DoubleOperator Ops   = OZero;
-        DoubleOperator Oqbq  = OZero;
-        DoubleOperator Oqpq1 = OZero;
-        DoubleOperator Oqpq2 = OZero;
-        DoubleOperator Oqpq3 = OZero;
+      DoubleOperator Ons   = OZero;
+      DoubleOperator Ogq   = OZero;
+      DoubleOperator Oqg   = OZero;
+      DoubleOperator Ogg   = OZero;
+      DoubleOperator Ops   = OZero;
+      DoubleOperator Oqbq  = OZero;
+      DoubleOperator Oqpq1 = OZero;
+      DoubleOperator Oqpq2 = OZero;
+      DoubleOperator Oqpq3 = OZero;
 
-        // FL has no LO; NLO starts at O(αs)
-        if (PerturbativeOrder >= 1)
-          {
-            Ons += coup * obj.FL.at("C1LQ2Q");
-            Ogq += coup * obj.FL.at("C1LQ2G");
-            Oqg += coup * obj.FL.at("C1LG2Q");
-          }
+      // FL has no LO; NLO starts at O(αs)
+      if (PerturbativeOrder >= 1)
+        {
+          Ons += coup * obj.FL.at("C1LQ2Q");
+          Ogq += coup * obj.FL.at("C1LQ2G");
+          Oqg += coup * obj.FL.at("C1LG2Q");
+        }
 
-        if (PerturbativeOrder >= 2)
-          {
-            Ons   += coup2 * obj.FL.at("C2LQ2QNS" + snf);
-            Ogq   += coup2 * obj.FL.at("C2LQ2G");
-            Oqg   += coup2 * obj.FL.at("C2LG2Q");
-            Ogg   += coup2 * obj.FL.at("C2LG2G");
-            Ops   += coup2 * obj.FL.at("C2LQ2QPS");
-            Oqbq  += coup2 * obj.FL.at("C2LQ2QB");
-            Oqpq1 += coup2 * obj.FL.at("C2LQ2QP1");
-            Oqpq2 += coup2 * obj.FL.at("C2LQ2QP2");
-            Oqpq3 += coup2 * obj.FL.at("C2LQ2QP3");
-          }
+      if (PerturbativeOrder >= 2)
+        {
+          Ons   += coup2 * obj.FL.at("C2LQ2QNS" + snf);
+          Ogq   += coup2 * obj.FL.at("C2LQ2G");
+          Oqg   += coup2 * obj.FL.at("C2LG2Q");
+          Ogg   += coup2 * obj.FL.at("C2LG2G");
+          Ops   += coup2 * obj.FL.at("C2LQ2QPS");
+          Oqbq  += coup2 * obj.FL.at("C2LQ2QB");
+          Oqpq1 += coup2 * obj.FL.at("C2LQ2QP1");
+          Oqpq2 += coup2 * obj.FL.at("C2LQ2QP2");
+          Oqpq3 += coup2 * obj.FL.at("C2LQ2QP3");
+        }
 
-        return ixz * (Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
-                      Ogg   * ch.distgg   + Ops  * ch.distps  + Oqbq * ch.distqbq +
-                      Oqpq1 * ch.distqpq1 + Oqpq2 * ch.distqpq2 + Oqpq3 * ch.distqpq3);
-      };
+      return ixz * (Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
+                    Ogg   * ch.distgg   + Ops  * ch.distps  + Oqbq * ch.distqbq +
+                    Oqpq1 * ch.distqpq1 + Oqpq2 * ch.distqpq2 + Oqpq3 * ch.distqpq3);
+    };
   }
 
   // ===========================================================================
   // BuildSidisG1
   // ===========================================================================
-  std::function<DoubleDistribution(double const&)> BuildSidisG1(
-      SidisNNLOObjects                                                          const& obj,
-      std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
-      std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
-      std::function<double(double const&)>                               const& Alphas,
-      std::vector<double>                                                const& Thresholds,
-      int                                                                const& PerturbativeOrder,
-      int                                                                const& channel)
+  std::function<DoubleDistribution(double const&)> BuildSidisG1(SidisNNLOObjects                                                   const& obj,
+                                                                std::function<std::map<int, double>(double const&, double const&)> const& InPDFs,
+                                                                std::function<std::map<int, double>(double const&, double const&)> const& InFFs,
+                                                                std::function<double(double const&)>                               const& Alphas,
+                                                                std::vector<double>                                                const& Thresholds,
+                                                                int                                                                const& PerturbativeOrder,
+                                                                int                                                                const& channel)
   {
     return [=, &obj] (double const& Q) -> DoubleDistribution
-      {
-        Grid const& gx = obj.G1.begin()->second.GetFirstGrid();
-        Grid const& gz = obj.G1.begin()->second.GetSecondGrid();
+    {
+      Grid const& gx = obj.G1.begin()->second.GetFirstGrid();
+      Grid const& gz = obj.G1.begin()->second.GetSecondGrid();
 
-        const std::function<double(double const&, double const&)> ixz =
-          [] (double const& x, double const& z) -> double { return 1. / x / z; };
+      const std::function<double(double const&, double const&)> ixz =
+      [] (double const& x, double const& z) -> double { return 1. / x / z; };
 
-        const int    nf    = NF(Q, Thresholds);
-        const double coup  = Alphas(Q) / FourPi;
-        const double coup2 = coup * coup;
+      const int    nf    = NF(Q, Thresholds);
+      const double coup  = Alphas(Q) / FourPi;
+      const double coup2 = coup * coup;
 
-        const std::map<int, Distribution> dPDF = DistributionMap(gx, InPDFs, Q);
-        const std::map<int, Distribution> dFF  = DistributionMap(gz, InFFs,  Q);
+      const std::map<int, Distribution> dPDF = DistributionMap(gx, InPDFs, Q);
+      const std::map<int, Distribution> dFF  = DistributionMap(gz, InFFs,  Q);
 
-        const SidisChannels ch = BuildChannels(gx, gz, dPDF, dFF, nf);
+      const SidisChannels ch = BuildChannels(gx, gz, dPDF, dFF, nf);
 
-        const DoubleOperator OZero{gx, gz, DoubleNull{}};
-        const std::string    snf = "_nf" + std::to_string(nf);
+      const DoubleOperator OZero{gx, gz, DoubleNull{}};
+      const std::string    snf = "_nf" + std::to_string(nf);
 
-        DoubleOperator Ons   = OZero;
-        DoubleOperator Ogq   = OZero;
-        DoubleOperator Oqg   = OZero;
-        DoubleOperator Ogg   = OZero;
-        DoubleOperator Ops   = OZero;
-        DoubleOperator Oqbq  = OZero;
-        DoubleOperator Oqpq1 = OZero;
-        DoubleOperator Oqpq2 = OZero;
-        DoubleOperator Oqpq3 = OZero;
+      DoubleOperator Ons   = OZero;
+      DoubleOperator Ogq   = OZero;
+      DoubleOperator Oqg   = OZero;
+      DoubleOperator Ogg   = OZero;
+      DoubleOperator Ops   = OZero;
+      DoubleOperator Oqbq  = OZero;
+      DoubleOperator Oqpq1 = OZero;
+      DoubleOperator Oqpq2 = OZero;
+      DoubleOperator Oqpq3 = OZero;
 
-        if (channel == 0)
-          {
+      if (channel == 0)
+        {
+          Ons += obj.G1.at("DoubleIdentity");
+        }
+      else if (channel == 1)
+        {
+          Ons += obj.G1.at("DoubleIdentity") + coup * obj.G1.at("DC1Q2Q");
+        }
+      else if (channel == 2)
+        {
+          Oqg += coup * obj.G1.at("DC1G2Q");
+        }
+      else if (channel == 3)
+        {
+          Ogq += coup * obj.G1.at("DC1Q2G");
+        }
+      else if (channel == 4)
+        {
+          // G1: ns, gq, qg are nf-dependent at NNLO
+          Ons += obj.G1.at("DoubleIdentity") + coup * obj.G1.at("DC1Q2Q") + coup2 * obj.G1.at("DC2Q2QNS" + snf);
+          Ops += coup2 * obj.G1.at("DC2Q2QPS");
+        }
+      else if (channel == 5)
+        {
+          Oqg += coup * obj.G1.at("DC1G2Q") + coup2 * obj.G1.at("DC2G2Q" + snf);
+        }
+      else if (channel == 6)
+        {
+          Ogq += coup * obj.G1.at("DC1Q2G") + coup2 * obj.G1.at("DC2Q2G" + snf);
+        }
+      else if (channel == 7)
+        {
+          Ogg += coup2 * obj.G1.at("DC2G2G");
+        }
+      else if (channel == 8)
+        {
+          Oqbq += coup2 * obj.G1.at("DC2Q2QB");
+        }
+      else if (channel == 9)
+        {
+          Oqpq1 += coup2 * obj.G1.at("DC2Q2QP1");
+          Oqpq2 += coup2 * obj.G1.at("DC2Q2QP2");
+          Oqpq3 += coup2 * obj.G1.at("DC2Q2QP3");
+        }
+      else // channel == -1: full sum controlled by PerturbativeOrder
+        {
+          if (PerturbativeOrder >= 0)
             Ons += obj.G1.at("DoubleIdentity");
-          }
-        else if (channel == 1)
-          {
-            Ons += obj.G1.at("DoubleIdentity") + coup * obj.G1.at("DC1Q2Q");
-          }
-        else if (channel == 2)
-          {
-            Oqg += coup * obj.G1.at("DC1G2Q");
-          }
-        else if (channel == 3)
-          {
-            Ogq += coup * obj.G1.at("DC1Q2G");
-          }
-        else if (channel == 4)
-          {
-            // G1: ns, gq, qg are nf-dependent at NNLO
-            Ons += obj.G1.at("DoubleIdentity") + coup * obj.G1.at("DC1Q2Q") + coup2 * obj.G1.at("DC2Q2QNS" + snf);
-            Ops += coup2 * obj.G1.at("DC2Q2QPS");
-          }
-        else if (channel == 5)
-          {
-            Oqg += coup * obj.G1.at("DC1G2Q") + coup2 * obj.G1.at("DC2G2Q" + snf);
-          }
-        else if (channel == 6)
-          {
-            Ogq += coup * obj.G1.at("DC1Q2G") + coup2 * obj.G1.at("DC2Q2G" + snf);
-          }
-        else if (channel == 7)
-          {
-            Ogg += coup2 * obj.G1.at("DC2G2G");
-          }
-        else if (channel == 8)
-          {
-            Oqbq += coup2 * obj.G1.at("DC2Q2QB");
-          }
-        else if (channel == 9)
-          {
-            Oqpq1 += coup2 * obj.G1.at("DC2Q2QP1");
-            Oqpq2 += coup2 * obj.G1.at("DC2Q2QP2");
-            Oqpq3 += coup2 * obj.G1.at("DC2Q2QP3");
-          }
-        else // channel == -1: full sum controlled by PerturbativeOrder
-          {
-            if (PerturbativeOrder >= 0)
-              Ons += obj.G1.at("DoubleIdentity");
 
-            if (PerturbativeOrder >= 1)
-              {
-                Ons += coup * obj.G1.at("DC1Q2Q");
-                Ogq += coup * obj.G1.at("DC1Q2G");
-                Oqg += coup * obj.G1.at("DC1G2Q");
-              }
+          if (PerturbativeOrder >= 1)
+            {
+              Ons += coup * obj.G1.at("DC1Q2Q");
+              Ogq += coup * obj.G1.at("DC1Q2G");
+              Oqg += coup * obj.G1.at("DC1G2Q");
+            }
 
-            if (PerturbativeOrder >= 2)
-              {
-                // For G1: ns, gq, and qg are all nf-dependent
-                Ons   += coup2 * obj.G1.at("DC2Q2QNS" + snf);
-                Ogq   += coup2 * obj.G1.at("DC2Q2G"   + snf);
-                Oqg   += coup2 * obj.G1.at("DC2G2Q"   + snf);
-                Ogg   += coup2 * obj.G1.at("DC2G2G");
-                Ops   += coup2 * obj.G1.at("DC2Q2QPS");
-                Oqbq  += coup2 * obj.G1.at("DC2Q2QB");
-                Oqpq1 += coup2 * obj.G1.at("DC2Q2QP1");
-                Oqpq2 += coup2 * obj.G1.at("DC2Q2QP2");
-                Oqpq3 += coup2 * obj.G1.at("DC2Q2QP3");
-              }
-          }
+          if (PerturbativeOrder >= 2)
+            {
+              // For G1: ns, gq, and qg are all nf-dependent
+              Ons   += coup2 * obj.G1.at("DC2Q2QNS" + snf);
+              Ogq   += coup2 * obj.G1.at("DC2Q2G"   + snf);
+              Oqg   += coup2 * obj.G1.at("DC2G2Q"   + snf);
+              Ogg   += coup2 * obj.G1.at("DC2G2G");
+              Ops   += coup2 * obj.G1.at("DC2Q2QPS");
+              Oqbq  += coup2 * obj.G1.at("DC2Q2QB");
+              Oqpq1 += coup2 * obj.G1.at("DC2Q2QP1");
+              Oqpq2 += coup2 * obj.G1.at("DC2Q2QP2");
+              Oqpq3 += coup2 * obj.G1.at("DC2Q2QP3");
+            }
+        }
 
-        return ixz * (Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
-                      Ogg   * ch.distgg   + Ops  * ch.distps  + Oqbq * ch.distqbq +
-                      Oqpq1 * ch.distqpq1 + Oqpq2 * ch.distqpq2 + Oqpq3 * ch.distqpq3);
-      };
+      return ixz * ( Ons   * ch.distns   + Ogq  * ch.distgq  + Oqg  * ch.distqg +
+                     Ogg   * ch.distgg   + Ops  * ch.distps  + Oqbq * ch.distqbq +
+                     Oqpq1 * ch.distqpq1 + Oqpq2 * ch.distqpq2 + Oqpq3 * ch.distqpq3 );
+    };
   }
 }

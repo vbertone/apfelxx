@@ -224,6 +224,106 @@ namespace apfel
     t.stop();
   }
 
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T>& TabulateObject<T>::operator = (TabulateObject<T> const& to)
+  {
+    this->_nQ          = to.nQ();
+    this->_QMin        = to.QMin();
+    this->_QMax        = to.QMax();
+    this->_InterDegree = to.InterDegree();
+    this->_Thresholds  = to.GetThresholds();
+    this->_TabFunc     = to.TabFunc();
+    this->_Qg          = to.GetQGrid();
+    this->_fQg         = to.GetFQGrid();
+    this->_nQg         = to.GetThesholdIndices();
+    this->_GridValues  = to.GetQGridValues();
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T>& TabulateObject<T>::operator *= (double const& s)
+  {
+    std::transform(this->_GridValues.begin(), this->_GridValues.end(), this->_GridValues.begin(), [s] (T const& x)
+    {
+      return s * x;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T>& TabulateObject<T>::operator /= (double const& s)
+  {
+    std::transform(this->_GridValues.begin(), this->_GridValues.end(), this->_GridValues.begin(), [s] (T const& x)
+    {
+      return x / s;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T>& TabulateObject<T>::operator += (TabulateObject<T> const& to)
+  {
+    if (*this != to)
+      throw std::runtime_error(error("TabulateObject::operator +=", "Grids do not match"));
+    std::transform(this->_GridValues.begin(), this->_GridValues.end(), to.GetQGridValues().begin(), this->_GridValues.begin(), [](T const& a, T const& b)
+    {
+      return a + b;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T>& TabulateObject<T>::operator -= (TabulateObject<T> const& to)
+  {
+    if (*this != to)
+      throw std::runtime_error(error("TabulateObject::operator -=", "Grids do not match"));
+    std::transform(this->_GridValues.begin(), this->_GridValues.end(), to.GetQGridValues().begin(), this->_GridValues.begin(), [](T const& a, T const& b)
+    {
+      return a - b;
+    });
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T> operator * (double const& s, TabulateObject<T> rhs)
+  {
+    return rhs *= s;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T> operator * (TabulateObject<T> lhs, double const& s)
+  {
+    return lhs *= s;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T> operator / (TabulateObject<T> lhs, double const& s)
+  {
+    return lhs /= s;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T> operator + (TabulateObject<T> lhs, TabulateObject<T> const& rhs)
+  {
+    return lhs += rhs;
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  TabulateObject<T> operator - (TabulateObject<T> lhs, TabulateObject<T> const& rhs)
+  {
+    return lhs -= rhs;
+  }
+
   // Specialisations
   //_________________________________________________________________________________
   template class TabulateObject<double>;
@@ -244,6 +344,42 @@ namespace apfel
   template class TabulateObject<OperatorDistribution>;
   template class TabulateObject<Set<DistributionOperator>>;
   template class TabulateObject<Set<OperatorDistribution>>;
+  template class TabulateObject<TabulateObject<double>>;
+  template class TabulateObject<TabulateObject<Distribution>>;
+  template class TabulateObject<TabulateObject<Operator>>;
+  template class TabulateObject<TabulateObject<Set<Distribution>>>;
+  template class TabulateObject<TabulateObject<Set<Operator>>>;
+
+  //_________________________________________________________________________________
+  template apfel::TabulateObject<double> apfel::operator * (apfel::TabulateObject<double>, double const&);
+  template apfel::TabulateObject<double> apfel::operator * (double const&, apfel::TabulateObject<double>);
+  template apfel::TabulateObject<double> apfel::operator / (apfel::TabulateObject<double>, double const&);
+  template apfel::TabulateObject<double> apfel::operator + (apfel::TabulateObject<double>, apfel::TabulateObject<double> const&);
+  template apfel::TabulateObject<double> apfel::operator - (apfel::TabulateObject<double>, apfel::TabulateObject<double> const&);
+
+  template apfel::TabulateObject<Distribution> apfel::operator * (apfel::TabulateObject<Distribution>, double const&);
+  template apfel::TabulateObject<Distribution> apfel::operator * (double const&, apfel::TabulateObject<Distribution>);
+  template apfel::TabulateObject<Distribution> apfel::operator / (apfel::TabulateObject<Distribution>, double const&);
+  template apfel::TabulateObject<Distribution> apfel::operator + (apfel::TabulateObject<Distribution>, apfel::TabulateObject<Distribution> const&);
+  template apfel::TabulateObject<Distribution> apfel::operator - (apfel::TabulateObject<Distribution>, apfel::TabulateObject<Distribution> const&);
+
+  template apfel::TabulateObject<Operator> apfel::operator * (apfel::TabulateObject<Operator>, double const&);
+  template apfel::TabulateObject<Operator> apfel::operator * (double const&, apfel::TabulateObject<Operator>);
+  template apfel::TabulateObject<Operator> apfel::operator / (apfel::TabulateObject<Operator>, double const&);
+  template apfel::TabulateObject<Operator> apfel::operator + (apfel::TabulateObject<Operator>, apfel::TabulateObject<Operator> const&);
+  template apfel::TabulateObject<Operator> apfel::operator - (apfel::TabulateObject<Operator>, apfel::TabulateObject<Operator> const&);
+
+  template apfel::TabulateObject<Set<Distribution>> apfel::operator * (apfel::TabulateObject<Set<Distribution>>, double const&);
+  template apfel::TabulateObject<Set<Distribution>> apfel::operator * (double const&, apfel::TabulateObject<Set<Distribution>>);
+  template apfel::TabulateObject<Set<Distribution>> apfel::operator / (apfel::TabulateObject<Set<Distribution>>, double const&);
+  template apfel::TabulateObject<Set<Distribution>> apfel::operator + (apfel::TabulateObject<Set<Distribution>>, apfel::TabulateObject<Set<Distribution>> const&);
+  template apfel::TabulateObject<Set<Distribution>> apfel::operator - (apfel::TabulateObject<Set<Distribution>>, apfel::TabulateObject<Set<Distribution>> const&);
+
+  template apfel::TabulateObject<Set<Operator>> apfel::operator * (apfel::TabulateObject<Set<Operator>>, double const&);
+  template apfel::TabulateObject<Set<Operator>> apfel::operator * (double const&, apfel::TabulateObject<Set<Operator>>);
+  template apfel::TabulateObject<Set<Operator>> apfel::operator / (apfel::TabulateObject<Set<Operator>>, double const&);
+  template apfel::TabulateObject<Set<Operator>> apfel::operator + (apfel::TabulateObject<Set<Operator>>, apfel::TabulateObject<Set<Operator>> const&);
+  template apfel::TabulateObject<Set<Operator>> apfel::operator - (apfel::TabulateObject<Set<Operator>>, apfel::TabulateObject<Set<Operator>> const&);
 
   //_________________________________________________________________________________
   template<>

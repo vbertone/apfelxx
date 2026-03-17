@@ -74,6 +74,12 @@ namespace apfel
      */
     QGrid(std::vector<double> const& Qg,
           int                 const& InterDegree);
+
+    /**
+     * @brief The QGrid copy constructor.
+     * @param qg: the object to be copied
+     */
+    QGrid(QGrid const& qg);
     ///@}
 
     /**
@@ -105,6 +111,17 @@ namespace apfel
     ///@{
     bool operator == (QGrid const& sg) const;
     bool operator != (QGrid const& sg) const;
+    ///@}
+
+    /**
+     * @name Binary operators
+     */
+    ///@{
+    QGrid<T>& operator  = (QGrid<T> const& qg);                         //!< this  = QGrid<T>
+    QGrid<T>& operator *= (double const& s);                            //!< this *= Scalar
+    QGrid<T>& operator /= (double const& s);                            //!< this /= Scalar
+    QGrid<T>& operator += (QGrid<T> const& qg);                         //!< this += QGrid<T>
+    QGrid<T>& operator -= (QGrid<T> const& qg);                         //!< this -= QGrid<T>
     ///@}
 
     /**
@@ -179,6 +196,22 @@ namespace apfel
     template<class U>
     friend std::ostream& operator << (std::ostream& os, QGrid<U> const& dt);
   };
+
+  /**
+   * @name Ternary operators
+   */
+  ///@{
+  template<class T>
+  QGrid<T> operator * (double const& s, QGrid<T> rhs);                           //!< Scalar*QGrid<T>
+  template<class T>
+  QGrid<T> operator * (QGrid<T> lhs, double const& s);                           //!< QGrid<T>*Scalar
+  template<class T>
+  QGrid<T> operator / (QGrid<T> lhs, double const& s);                           //!< QGrid<T>/Scalar
+  template<class T>
+  QGrid<T> operator + (QGrid<T> lhs, QGrid<T> const& rhs);                       //!< QGrid<T>+QGrid<T>
+  template<class T>
+  QGrid<T> operator - (QGrid<T> lhs, QGrid<T> const& rhs);                       //!< QGrid<T>-QGrid<T>
+  ///@}
 
   /**
    * @brief Method that prints QGrid with cout <<.

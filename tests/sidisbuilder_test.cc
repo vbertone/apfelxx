@@ -26,12 +26,24 @@ int main()
   const double as_ref = 0.35;
   const double mu_ref = sqrt(2);
   apfel::AlphaQCD as_obj{as_ref, mu_ref, Thresholds, 1};
-  const auto as = [&] (double const& mu) { return as_obj.Evaluate(mu); };
+  const auto as = [&] (double const& mu)
+  {
+    return as_obj.Evaluate(mu);
+  };
 
   // Toy PDF / FF sets (at mu_ref)
-  const auto InPDFs  = [&] (double const& x, double const& Q) { return apfel::QCDEvToPhys(apfel::LHToyPDFs(x, Q)); };
-  const auto InpPDFs = [&] (double const& x, double const& Q) { return apfel::QCDEvToPhys(apfel::LHToyPDFsPol(x, Q)); };
-  const auto InFFs   = [&] (double const& x, double const& Q) { return apfel::QCDEvToPhys(apfel::LHToyFFs(x, Q)); };
+  const auto InPDFs  = [&] (double const& x, double const& Q)
+  {
+    return apfel::QCDEvToPhys(apfel::LHToyPDFs(x, Q));
+  };
+  const auto InpPDFs = [&] (double const& x, double const& Q)
+  {
+    return apfel::QCDEvToPhys(apfel::LHToyPDFsPol(x, Q));
+  };
+  const auto InFFs   = [&] (double const& x, double const& Q)
+  {
+    return apfel::QCDEvToPhys(apfel::LHToyFFs(x, Q));
+  };
 
   // Pre-compute all NNLO SIDIS operators (done once for all channels)
   const apfel::SidisNNLOObjects obj = apfel::InitializeSidisObjects(gx, gz, Thresholds, 1e-1);
