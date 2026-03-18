@@ -285,6 +285,7 @@ $F$ must be equal:
 \frac{\partial}{\partial \ln \mu} \frac{\partial \ln F}{\partial \ln
   \sqrt{\zeta}} = \frac{\partial}{\partial \ln \sqrt{\zeta}} \frac{\partial \ln F}{\partial \ln
   \mu}\,.
+\label{eq:crossderivatives}
 \end{equation}
 Using Eqs.~(\ref{eq:eveqs}) and (\ref{eq:CuspRGE}) leads to the
 following additional differential equation:
@@ -357,13 +358,62 @@ to connect the points $(\mu_0,\zeta_0)$ to the point $(\mu,\zeta)$:
     (\mu_0,\zeta_0)\right] \equiv R\left[(\mu,\zeta)\leftarrow
     (\mu_0,\zeta_0)\right]\,.
 \end{equation}
+The independence of the solution of the evolution equations from the
+path $\mathcal{P}$ can be proven in full generality by observing that
+the TMD $F$ can be interpreted as the scalar potential of a
+conservative vector field in a bidimensional space defined by the
+scales $\sqrt{\zeta}$ and $\mu$. Specifically, we define the 2D vector
+field $\overrightarrow{\mathcal{F}}$ as:
+\begin{equation}
+\overrightarrow{\mathcal{F}}=\frac{\partial\ln F}{\partial\ln\sqrt{\zeta}}\hat{i}_{\sqrt{\zeta}}+\frac{\partial\ln F}{\partial\ln\mu}\hat{i}_{\mu}\,,
+\end{equation}
+where $\hat{i}_{\sqrt{\zeta}}$ and $\hat{i}_{\mu}$ are the versors in
+the $\sqrt{\zeta}$ and $\mu$ directions, respectively. Relying on the
+equality of the cross derivarives in Eq.~(\ref{eq:crossderivatives}),
+one can prove that:
+\begin{equation}
+\overrightarrow{\mathcal{F}}=\overrightarrow{\nabla} F\,.
+\end{equation}
+This equation guarantees that the work to connect any two 2D points
+$(\mu_0,\zeta_0)$ and $(\mu,\zeta)$ does not depend of the path that
+connects them. This immediately implies that the solution of the
+evolution equations does not depend on $\mathcal{P}$. A more explicit
+prove of the independence from $\mathcal{P}$ can be obtained by
+solving the evolution equations using a different path from that used
+to obtain Eq.~(\ref{eq:solution2}) and checking that the result is the
+same. To this purpose, we first solve the evolution equation in $\mu$
+and then that in $\zeta$, \textit{i.e.} in the opposite order to that
+used to derive Eq.~(\ref{eq:solution2}).
+
+The evolution equation in $\mu$ reads:
+\begin{equation}
+\frac{\partial\ln F}{\partial\ln\mu}=\gamma_F(\alpha_s(\mu)) -\gamma_K(\alpha_s(\mu))\ln\frac{\sqrt{\zeta}}{\mu}\,.
+\end{equation}
+Solving this equation from $\mu_0$ to $\mu$ at a fixed value of
+$\zeta$, produces:
+\begin{equation}
+F(\mu,\zeta)=\exp\left[\int_{\mu_0}^\mu\frac{d\mu'}{\mu'}\gamma_F(\alpha_s(\mu')) -\gamma_K(\alpha_s(\mu'))\ln\frac{\sqrt{\zeta}}{\mu'}\right]F(\mu_0,\zeta)\,.
+\end{equation}
+Now, we evolve $F(\mu_0,\zeta)$ from $\zeta_0$ to $\zeta$ using
+Eq.~(\ref{eq:zetadir}):
+\begin{equation}
+F(\mu_0,\zeta) = \exp\left[K(\mu_0)\ln\frac{\sqrt{\zeta}}{\sqrt{\zeta_0}}\right]F(\mu_0,\zeta_0)\,,
+\end{equation}
+which combined with the equation above finally reproduces
+Eq.~(\ref{eq:solution2}), as expected. This is further evidence that
+that solution to the TMD evolution equations does not depend on the
+evolution path. However, we stress that this property relies on the
+equality of the cross derivative in
+Eq.~(\ref{eq:crossderivatives}). Therefore, if this equality is
+violated, the solution may acquire a dependence on the path.
 
 Another important piece of information comes from the fact that, for
 small values of $b_T$, the TMD $F$ can be matched onto the respective
 collinear distribution $f$ (a PDF or a FF) through the perturbative
 coefficients $C$(\footnote{A sum over flavours is understood. As a
   matter of fact, the matching function $C$ has to be regarded as a
-  matrix in flavour space multipling a vector of collinear PDFs/FFs.}):
+  matrix in flavour space multiplying a vector of collinear
+  PDFs/FFs.}):
 \begin{equation}
 F(\mu,\zeta) = C(\mu,\zeta) \otimes f(\mu)\,,
 \label{eq:matching}
@@ -3446,8 +3496,20 @@ The limit in Eq.~(\ref{eq:leadinglim}) can be written as:
 The aim of this section is to calculate the first contributions to the
 $\mathcal{O}(\varepsilon\ln\varepsilon)$ term: specifically we are
 after terms proportional to $\varepsilon\ln\varepsilon$ and
-$\varepsilon$. We start by considering the integral in
-Eq.~(\ref{eq:testint}) and write:
+$\varepsilon$. The relevance of this term is that it scales like
+$q_T^2\ln(q_T^2)$, so that when introduced in Eq.~(\ref{eq:FOxsecasy})
+for $F_{UU,2}$ which in turn scales like $q_T^{-2}$, it leaves
+$\ln(q_T^2)$. Therefore, when taking the difference between fixed
+order and its asymptote computed through Eq.~(\ref{eq:deltaexpansion})
+to compute the so-called $Y$-term, the reminder diverges
+logarithmically for $q_T^2\to0$, while remaining integrable. This
+observation is very important in view of the matching to the resummed
+calculation in that the $Y$-term may still produce a sizeable
+contribution also in the low-$q_T$ region.
+
+
+We start by considering the integral in Eq.~(\ref{eq:testint}) and
+write:
 \begin{equation}
 \begin{array}{rcl}
 \displaystyle J(\varepsilon) = I(\varepsilon)-\lim_{\varepsilon \rightarrow 0} I(\varepsilon) &=&\displaystyle  \int_{\sqrt{\varepsilon}}^1
