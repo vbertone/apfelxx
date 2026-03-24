@@ -16,7 +16,6 @@ namespace apfel
    * @note References: https://arxiv.org/pdf/hep-ph/9706511v2.pdf,
    * https://lib-extopc.kek.jp/preprints/PDF/2000/0032/0032201.pdf,
    * https://arxiv.org/pdf/hep-ph/9805295v1.pdf
-   *
    */
   ///@{
   ///@}

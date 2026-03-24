@@ -556,10 +556,12 @@ namespace apfel
   template class QGrid<QGrid<Distribution>>;
   template class QGrid<QGrid<Operator>>;
   template class QGrid<QGrid<Set<Distribution>>>;
+// *INDENT-OFF*
   template class QGrid<QGrid<Set<Operator>>>;
   template class QGrid<TabulateObject<double>>;
   template class QGrid<TabulateObject<Distribution>>;
   template class QGrid<TabulateObject<Operator>>;
   template class QGrid<TabulateObject<Set<Distribution>>>;
   template class QGrid<TabulateObject<Set<Operator>>>;
+// *INDENT-ON*
 }

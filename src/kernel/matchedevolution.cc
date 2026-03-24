@@ -138,5 +138,7 @@ namespace apfel
   template class MatchedEvolution<TabulateObject<Distribution>>;
   template class MatchedEvolution<TabulateObject<Operator>>;
   template class MatchedEvolution<TabulateObject<Set<Distribution>>>;
+// *INDENT-OFF*
   template class MatchedEvolution<TabulateObject<Set<Operator>>>;
+// *INDENT-ON*
 }

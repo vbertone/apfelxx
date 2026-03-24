@@ -348,6 +348,7 @@ namespace apfel
   template class TabulateObject<TabulateObject<Distribution>>;
   template class TabulateObject<TabulateObject<Operator>>;
   template class TabulateObject<TabulateObject<Set<Distribution>>>;
+// *INDENT-OFF*
   template class TabulateObject<TabulateObject<Set<Operator>>>;
 
   //_________________________________________________________________________________
@@ -384,6 +385,7 @@ namespace apfel
   //_________________________________________________________________________________
   template<>
   double TabulateObject<Distribution>::EvaluatexQ(double const& x, double const& Q) const
+// *INDENT-ON*
   {
     // Get summation bounds
     const std::tuple<int, int, int> bounds = SumBounds(Q);

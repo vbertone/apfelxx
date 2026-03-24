@@ -38,6 +38,17 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
+    // If xi happens to coincide with one of the nodes of the x-space
+    // grid, numerical instabilities may prevent the integrals from
+    // converging. In this eventuality, displace xi by a small amount.
+    double xid = xi;
+    for (double x : g.GetJointGrid().GetGrid())
+      if (std::abs(x - xi) > eps12)
+        {
+          xid += eps10;
+          break;
+        }
+
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -64,13 +75,13 @@ namespace apfel
     // ===============================================================
     // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
-    const Operator O0ns{g, Pgpd0ns{xi}, IntEps, true};
-    const Operator O0qq{g, Pgpd0qq{xi}, IntEps, true};
-    const Operator O0gq{g, Pgpd0gq{xi}, IntEps, true};
+    const Operator O0ns{g, Pgpd0ns{xid}, IntEps, true};
+    const Operator O0qq{g, Pgpd0qq{xid}, IntEps, true};
+    const Operator O0gq{g, Pgpd0gq{xid}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0qg{g, Pgpd0qg{nf, xi}, IntEps, true};
-        const Operator O0gg{g, Pgpd0gg{nf, xi}, IntEps, true};
+        const Operator O0qg{g, Pgpd0qg{nf, xid}, IntEps, true};
+        const Operator O0gg{g, Pgpd0gg{nf, xid}, IntEps, true};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0qq});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
@@ -131,6 +142,17 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
+    // If xi happens to coincide with one of the nodes of the x-space
+    // grid, numerical instabilities may prevent the integrals from
+    // converging. In this eventuality, displace xi by a small amount.
+    double xid = xi;
+    for (double x : g.GetJointGrid().GetGrid())
+      if (std::abs(x - xi) > eps12)
+        {
+          xid += eps10;
+          break;
+        }
+
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -157,13 +179,13 @@ namespace apfel
     // ===============================================================
     // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
-    const Operator O0ns{g, Pgpd0polns{xi}, IntEps, true};
-    const Operator O0qq{g, Pgpd0polqq{xi}, IntEps, true};
-    const Operator O0gq{g, Pgpd0polgq{xi}, IntEps, true};
+    const Operator O0ns{g, Pgpd0polns{xid}, IntEps, true};
+    const Operator O0qq{g, Pgpd0polqq{xid}, IntEps, true};
+    const Operator O0gq{g, Pgpd0polgq{xid}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0qg{g, Pgpd0polqg{nf, xi}, IntEps, true};
-        const Operator O0gg{g, Pgpd0polgg{nf, xi}, IntEps, true};
+        const Operator O0qg{g, Pgpd0polqg{nf, xid}, IntEps, true};
+        const Operator O0gg{g, Pgpd0polgg{nf, xid}, IntEps, true};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0qq});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
@@ -224,6 +246,17 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
+    // If xi happens to coincide with one of the nodes of the x-space
+    // grid, numerical instabilities may prevent the integrals from
+    // converging. In this eventuality, displace xi by a small amount.
+    double xid = xi;
+    for (double x : g.GetJointGrid().GetGrid())
+      if (std::abs(x - xi) > eps12)
+        {
+          xid += eps10;
+          break;
+        }
+
     // Allocate needed operators (matching conditions and splitting
     // functions). By now the code is fast enough to precompute
     // everything at all available perturbative orders and the current
@@ -250,11 +283,11 @@ namespace apfel
     // ===============================================================
     // LO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapLO;
-    const Operator O0ns{g, Pgpd0transns{xi}, IntEps, true};
-    const Operator O0qq{g, Pgpd0transqq{xi}, IntEps, true};
+    const Operator O0ns{g, Pgpd0transns{xid}, IntEps, true};
+    const Operator O0qq{g, Pgpd0transqq{xid}, IntEps, true};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O0gg{g, Pgpd0transgg{nf, xi}, IntEps, true};
+        const Operator O0gg{g, Pgpd0transgg{nf, xid}, IntEps, true};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCD::PNSP, O0qq});
         OM.insert({EvolutionBasisQCD::PNSM, O0ns});
