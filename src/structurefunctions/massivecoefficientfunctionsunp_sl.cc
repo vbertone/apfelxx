@@ -593,7 +593,7 @@ namespace apfel
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
     const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
-    const double bt0  = beta0qcd(_nf);
+    const double bt0  = 4 * beta0qcd(_nf);
     const double z    = sqrt(1 / ( 1 + 4 / xi ));
     const double L    = log(( 1 + z ) / ( 1 - z ));
 
@@ -727,7 +727,7 @@ namespace apfel
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
     const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
-    const double bt0  = beta0qcd(_nf);
+    const double bt0  = 4 * beta0qcd(_nf);
     const double z    = sqrt(1 / ( 1 + 4 / xi ));
     const double L    = log(( 1 + z ) / ( 1 - z ));
 
@@ -1062,20 +1062,20 @@ namespace apfel
     const double m0   = _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double A2   = 1.2;
+    const double R    = exp( - 2 * log(A2) / M_PI * atan( M_PI * ( _cllsx0 / _cllsx - 1 ) / 2 / log(A2) ) );
 
     // Additive matching (central as in ADANI)
     const double am = eta * ( m0 + sx - sx0 );
 
     // Modified multiplicative matching 1 (as in ADANI)
-    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
+    const double mm2 = eta * ( m0 + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Compute varations
-    const double ratio = _cllsx / _cllsx0;
-    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
-    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * lnll );
+    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2));
 
     // Return approriate variation according to _imod
     if (_imod == 1)
@@ -1120,20 +1120,20 @@ namespace apfel
     const double m0   = _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double A2   = 1.2;
+    const double R    = exp( - 2 * log(A2) / M_PI * atan( M_PI * ( _cllsx0 / _cllsx - 1 ) / 2 / log(A2) ) );
 
     // Additive matching (central as in ADANI)
     const double am  = eta * ( m0 + sx - sx0 );
 
     // Modified multiplicative matching 1 (as in ADANI)
-    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
+    const double mm2 = eta * ( m0 + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Compute varations
-    const double ratio = _cllsx / _cllsx0;
-    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
-    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2)) / ( 1 + 2 * lnll );
+    const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2));
 
     // Return approriate variation according to _imod
     if (_imod == 1)
@@ -1177,22 +1177,16 @@ namespace apfel
     const double thr  = _cmthL3g.Regular(x);
     const double dthr = _cmthL3g.Delta(x);
     const double m0   = _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z);
-    const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
-    const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
+    const double R    = _cllsx / _cllsx0;
 
-    // Additive matching
-    const double am  = eta * ( m0 + sx - sx0 );
-
-    // Modified multiplicative matching 1 (central as in ADANI)
-    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
+    // Modified multiplicative matching 1 (as in ADANI)
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
+    const double mm2 = eta * ( m0 + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Compute varations
-    const double ratio = _cllsx / _cllsx0;
-    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
-    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * lnll );
+    const double delta = std::abs(mm2 - mm1);
 
     // Return approriate variation according to _imod
     if (_imod == 1)
@@ -1233,22 +1227,16 @@ namespace apfel
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
     const double m0   = _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z);
-    const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
-    const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
-
-    // Additive matching
-    const double am  = eta * ( m0 + sx - sx0 );
+    const double R    = _cllsx / _cllsx0;
 
     // Modified multiplicative matching 1 (as in ADANI)
-    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z ) * _cllsx / _cllsx0;
+    const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Modified multiplicative matching 2 (as in ADANI)
-    const double mm2 = eta * ( m0 * _cllsx / _cllsx0 + ( _cnllcsx - _cnllcsx0 ) / z );
+    const double mm2 = eta * ( m0 + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
 
     // Compute varations
-    const double ratio = _cllsx / _cllsx0;
-    const double lnll  = (ratio >= 0 ? std::abs(log(ratio)) : sqrt(pow(log(- ratio), 2) + M_PI * M_PI));
-    const double delta = sqrt(pow(mm1 - am, 2) + pow(mm1 - mm2, 2)) / ( 1 + 2 * lnll );
+    const double delta = std::abs(mm2 - mm1);
 
     // Return approriate variation according to _imod
     if (_imod == 1)
