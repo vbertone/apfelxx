@@ -593,7 +593,7 @@ namespace apfel
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
     const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
-    const double bt0  = 4 * beta0qcd(_nf);
+    const double bt0  = beta0qcd(_nf) / 4;
     const double z    = sqrt(1 / ( 1 + 4 / xi ));
     const double L    = log(( 1 + z ) / ( 1 - z ));
 
@@ -727,7 +727,7 @@ namespace apfel
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
     const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
-    const double bt0  = 4 * beta0qcd(_nf);
+    const double bt0  = beta0qcd(_nf) / 4;
     const double z    = sqrt(1 / ( 1 + 4 / xi ));
     const double L    = log(( 1 + z ) / ( 1 - z ));
 
@@ -875,7 +875,7 @@ namespace apfel
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
     const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
-    const double bt0  = beta0qcd(_nf);
+    const double bt0  = beta0qcd(_nf) / 4;
 
     // Compute coefficients of LL and NLL contributions
     _cll = CA * CA * ( - 32 / 27. * ( - 71 + 18 * zeta2 ) * LQ - 208 / 9. * LQ2 + 32 / 9. * LQ3
@@ -962,7 +962,7 @@ namespace apfel
     const double a11  = CA;
     const double a21  = _nf * ( 26 * CF - 23 * CA ) / 36;
     const double a10  = - ( 11 * CA + 2 * _nf * ( 1 - 2 * CF / CA ) ) / 12;
-    const double bt0  = beta0qcd(_nf);
+    const double bt0  = beta0qcd(_nf) / 4;
 
     // Compute coefficients of LL and NLL contributions
     _cll = CA * CA * ( 32 / 27. * ( - 68 + 18 * zeta2 ) - 32 / 3. * Lmu2 - 64 / 9. * LQ
