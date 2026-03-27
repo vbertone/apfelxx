@@ -1127,7 +1127,9 @@ namespace apfel
                                                                                                                   double              const& ximax,
                                                                                                                   int                 const& intdeg,
                                                                                                                   double              const& lambda,
-                                                                                                                  int                 const& IMod)
+                                                                                                                  double              const& IModThr,
+                                                                                                                  double              const& IModAsy,
+                                                                                                                  double              const& DampPow)
   {
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
@@ -1231,7 +1233,7 @@ namespace apfel
         const Operator O21g {g, Cm21gNC{teta},                       IntEps};
         const Operator O22g {g, Cm22gNC{teta},                       IntEps};
         const Operator O22ps{g, Cm22psNC{teta},                      IntEps};
-        const Operator O23ps{g, Cm2a3psNC{actnf, teta, IMod, false}, IntEps};
+        const Operator O23ps{g, Cm2a3psNC{actnf, teta, IModAsy, DampPow, false}, IntEps};
         return 6 * ( O23ps - lxi * ( O21g * p1gq + O22g * p0gq + O22ps * p0qq - 2 * beta0 * O22ps )
                      + lxi2 / 2 * ( O21g * p0gg * p0gq + O21g * p0qq * p0gq - 3 * beta0 * O21g * p0gq ) );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1243,7 +1245,7 @@ namespace apfel
         const Operator O21g {g, Cm21gNC{teta},                      IntEps};
         const Operator O22g {g, Cm22gNC{teta},                      IntEps};
         const Operator O22ps{g, Cm22psNC{teta},                     IntEps};
-        const Operator O23g {g, Cm2a3gNC{actnf, teta, IMod, false}, IntEps};
+        const Operator O23g {g, Cm2a3gNC{actnf, teta, IModThr, IModAsy, DampPow, false}, IntEps};
         return O23g - lxi * ( O21g * p1gg - beta1 * O21g + O22ps * p0qg + O22g * p0gg - 2 * beta0 * O22g )
                + lxi2 / 2 * ( O21g * p0gg * p0gg + O21g * p0gq * p0qg - 3 * beta0 * O21g * p0gg + 2 * pow(beta0, 2) * O21g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1373,7 +1375,9 @@ namespace apfel
                                                                                                                   double              const& ximax,
                                                                                                                   int                 const& intdeg,
                                                                                                                   double              const& lambda,
-                                                                                                                  int                 const& IMod)
+                                                                                                                  double              const& IModThr,
+                                                                                                                  double              const& IModAsy,
+                                                                                                                  double              const& DampPow)
   {
     // Make sure that the vector of masses contains all the 6 masses.
     if (Masses.size() != 6)
@@ -1476,7 +1480,7 @@ namespace apfel
         const Operator OL1g {g, CmL1gNC{teta},                       IntEps};
         const Operator OL2g {g, CmL2gNC{teta},                       IntEps};
         const Operator OL2ps{g, CmL2psNC{teta},                      IntEps};
-        const Operator OL3ps{g, CmLa3psNC{actnf, teta, IMod, false}, IntEps};
+        const Operator OL3ps{g, CmLa3psNC{actnf, teta, IModAsy, DampPow, false}, IntEps};
         return 6 * ( OL3ps - lxi * ( OL1g * p1gq + OL2g * p0gq + OL2ps * p0qq - 2 * beta0 * OL2ps )
                      + lxi2 / 2 * ( OL1g * p0gg * p0gq + OL1g * p0qq * p0gq - 3 * beta0 * OL1g * p0gq ) );
       }, nxi, ximin, ximax, intdeg, {}, lambda};
@@ -1488,7 +1492,7 @@ namespace apfel
         const Operator OL1g {g, CmL1gNC{teta},                      IntEps};
         const Operator OL2g {g, CmL2gNC{teta},                      IntEps};
         const Operator OL2ps{g, CmL2psNC{teta},                     IntEps};
-        const Operator OL3g {g, CmLa3gNC{actnf, teta, IMod, false}, IntEps};
+        const Operator OL3g {g, CmLa3gNC{actnf, teta, IModThr, IModAsy, DampPow, false}, IntEps};
         return OL3g - lxi * ( OL1g * p1gg - beta1 * OL1g + OL2ps * p0qg + OL2g * p0gg - 2 * beta0 * OL2g )
                + lxi2 / 2 * ( OL1g * p0gg * p0gg + OL1g * p0gq * p0qg - 3 * beta0 * OL1g * p0gg+ 2 * pow(beta0, 2) * OL1g );
       }, nxi, ximin, ximax, intdeg, {}, lambda};

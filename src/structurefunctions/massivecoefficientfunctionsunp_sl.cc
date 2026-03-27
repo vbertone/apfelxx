@@ -1026,10 +1026,12 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
+  Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, double const& imodthr, double const& imodasy, double const& damppow, bool const& muterms):
     Expression(),
     _eta(eta),
-    _imod(imod),
+    _imodthr(imodthr),
+    _imodasy(imodasy),
+    _damppow(damppow),
     _cmth23g(Cmth23gNC{nf, eta, muterms}),
     _cm023g_c(Cm023gNC_c{nf}),
     _cm023g_l(Cm023gNC_l{nf, muterms}),
@@ -1064,6 +1066,7 @@ namespace apfel
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
     const double A2   = 1.2;
     const double R    = exp( - 2 * log(A2) / M_PI * atan( M_PI * ( _cllsx0 / _cllsx - 1 ) / 2 / log(A2) ) );
+    const double damp = 1 / pow(1 + 1 / xi, _damppow);
 
     // Additive matching (central as in ADANI)
     const double am = eta * ( m0 + sx - sx0 );
@@ -1077,20 +1080,16 @@ namespace apfel
     // Compute varations
     const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2));
 
-    // Return approriate variation according to _imod
-    if (_imod == 1)
-      return fthr * ( thr - dthr ) + fasy * ( am - delta );
-    else if (_imod == 2)
-      return fthr * ( thr + dthr ) + fasy * ( am + delta );
-    else
-      return fthr * thr + fasy * am;
+    // Return approriate variation
+    return damp * ( fthr * ( thr + _imodthr * dthr ) + fasy * ( am + _imodasy * delta ) );
   }
 
   //_________________________________________________________________________________
-  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
+  Cm2a3psNC::Cm2a3psNC(int const& nf, double const& eta, double const& imodasy, double const& damppow, bool const& muterms):
     Expression(),
     _eta(eta),
-    _imod(imod),
+    _imodasy(imodasy),
+    _damppow(damppow),
     _cm023ps_c(Cm023psNC_c{nf}),
     _cm023ps_l(Cm023psNC_l{nf, muterms}),
     _cm023ps_l2(Cm023psNC_l2{nf, muterms}),
@@ -1122,6 +1121,7 @@ namespace apfel
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
     const double A2   = 1.2;
     const double R    = exp( - 2 * log(A2) / M_PI * atan( M_PI * ( _cllsx0 / _cllsx - 1 ) / 2 / log(A2) ) );
+    const double damp = 1 / pow(1 + 1 / xi, _damppow);
 
     // Additive matching (central as in ADANI)
     const double am  = eta * ( m0 + sx - sx0 );
@@ -1135,20 +1135,17 @@ namespace apfel
     // Compute varations
     const double delta = sqrt(pow(am - mm1, 2) + pow(am - mm2, 2));
 
-    // Return approriate variation according to _imod
-    if (_imod == 1)
-      return fasy * ( am - delta );
-    else if (_imod == 2)
-      return fasy * ( am + delta );
-    else
-      return fasy * am;
+    // Return approriate variation
+    return damp * fasy * ( am + _imodasy * delta );
   }
 
   //_________________________________________________________________________________
-  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
+  CmLa3gNC::CmLa3gNC(int const& nf, double const& eta, double const& imodthr, double const& imodasy, double const& damppow, bool const& muterms):
     Expression(),
     _eta(eta),
-    _imod(imod),
+    _imodthr(imodthr),
+    _imodasy(imodasy),
+    _damppow(damppow),
     _cmthL3g(CmthL3gNC{nf, eta, muterms}),
     _cm0L3g_c(Cm0L3gNC_c{nf}),
     _cm0L3g_l(Cm0L3gNC_l{nf, muterms}),
@@ -1178,6 +1175,7 @@ namespace apfel
     const double dthr = _cmthL3g.Delta(x);
     const double m0   = _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z);
     const double R    = _cllsx / _cllsx0;
+    const double damp = 1 / pow(1 + 1 / xi, _damppow);
 
     // Modified multiplicative matching 1 (as in ADANI)
     const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
@@ -1188,20 +1186,16 @@ namespace apfel
     // Compute varations
     const double delta = std::abs(mm2 - mm1);
 
-    // Return approriate variation according to _imod
-    if (_imod == 1)
-      return fthr * ( thr - dthr ) + fasy * ( mm1 - delta );
-    else if (_imod == 2)
-      return fthr * ( thr + dthr ) + fasy * ( mm1 + delta );
-    else
-      return fthr * thr + fasy * mm1;
+    // Return approriate variation
+    return damp * ( fthr * ( thr + _imodthr * dthr ) + fasy * ( mm1 + _imodasy * delta ) );
   }
 
   //_________________________________________________________________________________
-  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, int const& imod, bool const& muterms):
+  CmLa3psNC::CmLa3psNC(int const& nf, double const& eta, double const& imodasy, double const& damppow, bool const& muterms):
     Expression(),
     _eta(eta),
-    _imod(imod),
+    _imodasy(imodasy),
+    _damppow(damppow),
     _cm0L3ps_c(Cm0L3psNC_c{nf}),
     _cm0L3ps_l(Cm0L3psNC_l{nf, muterms}),
     _cm0L3ps_l2(Cm0L3psNC_l2{nf, muterms}),
@@ -1228,6 +1222,7 @@ namespace apfel
     const double fasy = 1 - fthr;
     const double m0   = _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z);
     const double R    = _cllsx / _cllsx0;
+    const double damp = 1 / pow(1 + 1 / xi, _damppow);
 
     // Modified multiplicative matching 1 (as in ADANI)
     const double mm1 = eta * ( m0 + ( _cnllcsx - _cnllcsx0 ) / z + ( _cllsx / R - _cllsx0 ) * log(z) / z ) * R;
@@ -1238,13 +1233,8 @@ namespace apfel
     // Compute varations
     const double delta = std::abs(mm2 - mm1);
 
-    // Return approriate variation according to _imod
-    if (_imod == 1)
-      return fasy * ( mm1 - delta );
-    else if (_imod == 2)
-      return fasy * ( mm1 + delta );
-    else
-      return fasy * mm1;
+    // Return approriate variation
+    return damp * fasy * ( mm1 + _imodasy * delta );
   }
 
   //_________________________________________________________________________________

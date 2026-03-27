@@ -214,7 +214,9 @@ namespace apfel
    * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
-   * @param IMod: switch to vary the parameterisation of the approximated N3LO coefficient functions (default: zero)
+   * @param IModThr: parameter of the threshold part of the approximated N3LO coefficient functions (default: zero)
+   * @param IModAsy: parameter of the asymptotic part of the approximated N3LO coefficient functions (default: zero)
+   * @param DampPow: power of the damping factor of the approximated N3LO coefficient functions (default: one)
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeF2NCObjectsMassive(Grid                const& g,
@@ -225,7 +227,9 @@ namespace apfel
                                                                                                                   double              const& ximax  = 10000,
                                                                                                                   int                 const& intdeg = 3,
                                                                                                                   double              const& lambda = 0.0005,
-                                                                                                                  int                 const& IMod   = 0);
+                                                                                                                  double              const& IModThr = 0,
+                                                                                                                  double              const& IModAsy = 0,
+                                                                                                                  double              const& DampPow = 1);
 
   /**
    * @brief The InitializeFLNCObjectsMassive precomputes the
@@ -240,18 +244,22 @@ namespace apfel
    * @param ximax: the upper bound of the grid in &xi; (default: 10000)
    * @param intdeg: the interpolation degree on the grid in &xi; (default: 3)
    * @param lambda: the value of the parameter in the function ln(ln(&xi;/&Lambda;<SUP>2</SUP>)) used for the tabulation (default: 0.0005)
-   * @param IMod: switch to vary the parameterisation of the approximated N3LO coefficient functions (default: zero)
+   * @param IModThr: parameter of the threshold part of the approximated N3LO coefficient functions (default: zero)
+   * @param IModAsy: parameter of the asymptotic part of the approximated N3LO coefficient functions (default: zero)
+   * @param DampPow: power of the damping factor of the approximated N3LO coefficient functions (default: one)
    * @return A StructureFunctionObjects-valued function
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeFLNCObjectsMassive(Grid                const& g,
                                                                                                                   std::vector<double> const& Masses,
-                                                                                                                  double              const& IntEps = 1e-5,
-                                                                                                                  int                 const& nxi    = 150,
-                                                                                                                  double              const& ximin  = 0.05,
-                                                                                                                  double              const& ximax  = 10000,
-                                                                                                                  int                 const& intdeg = 3,
-                                                                                                                  double              const& lambda = 0.0005,
-                                                                                                                  int                 const& IMod   = 0);
+                                                                                                                  double              const& IntEps  = 1e-5,
+                                                                                                                  int                 const& nxi     = 150,
+                                                                                                                  double              const& ximin   = 0.05,
+                                                                                                                  double              const& ximax   = 10000,
+                                                                                                                  int                 const& intdeg  = 3,
+                                                                                                                  double              const& lambda  = 0.0005,
+                                                                                                                  double              const& IModThr = 0,
+                                                                                                                  double              const& IModAsy = 0,
+                                                                                                                  double              const& DampPow = 1);
 
   /**
    * @brief The InitializeF2NCObjectsMassiveZero precomputes the

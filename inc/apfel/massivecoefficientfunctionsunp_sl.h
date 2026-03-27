@@ -458,11 +458,13 @@ namespace apfel
   class Cm2a3gNC: public Expression
   {
   public:
-    Cm2a3gNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
+    Cm2a3gNC(int const& nf, double const& eta, double const& imodthr = 0, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double      const _eta;
-    int         const _imod;
+    double      const _imodthr;
+    double      const _imodasy;
+    double      const _damppow;
     Cmth23gNC   const _cmth23g;
     Cm023gNC_c  const _cm023g_c;
     Cm023gNC_l  const _cm023g_l;
@@ -485,11 +487,12 @@ namespace apfel
   class Cm2a3psNC: public Expression
   {
   public:
-    Cm2a3psNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
+    Cm2a3psNC(int const& nf, double const& eta, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double       const _eta;
-    int          const _imod;
+    double       const _imodasy;
+    double       const _damppow;
     Cm023psNC_c  const _cm023ps_c;
     Cm023psNC_l  const _cm023ps_l;
     Cm023psNC_l2 const _cm023ps_l2;
@@ -511,11 +514,13 @@ namespace apfel
   class CmLa3gNC: public Expression
   {
   public:
-    CmLa3gNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
+    CmLa3gNC(int const& nf, double const& eta, double const& imodthr = 0, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double      const _eta;
-    int         const _imod;
+    double      const _imodthr;
+    double      const _imodasy;
+    double      const _damppow;
     CmthL3gNC   const _cmthL3g;
     Cm0L3gNC_c  const _cm0L3g_c;
     Cm0L3gNC_l  const _cm0L3g_l;
@@ -537,11 +542,12 @@ namespace apfel
   class CmLa3psNC: public Expression
   {
   public:
-    CmLa3psNC(int const& nf, double const& eta, int const& imod = 0, bool const& muterms = true);
+    CmLa3psNC(int const& nf, double const& eta, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
     double       const _eta;
-    int          const _imod;
+    double       const _imodasy;
+    double       const _damppow;
     Cm0L3psNC_c  const _cm0L3ps_c;
     Cm0L3psNC_l  const _cm0L3ps_l;
     Cm0L3psNC_l2 const _cm0L3ps_l2;
