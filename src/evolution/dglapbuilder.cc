@@ -3321,8 +3321,9 @@ namespace apfel
     std::function<Set<Operator>(bool const&, int const&)>   MatchingConditions;
     if (PerturbativeOrder == 0)
       {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
+	  const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           return cp * DglapObj(mu).SplittingFunctions.at(0);
         };
@@ -3333,8 +3334,9 @@ namespace apfel
       }
     else if (PerturbativeOrder == 1)
       {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
+	  const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           const auto sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * sf.at(1) );
@@ -3348,8 +3350,9 @@ namespace apfel
       }
     else if (PerturbativeOrder == 2)
       {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
+	  const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           const auto sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
@@ -3363,8 +3366,9 @@ namespace apfel
       }
     else if (PerturbativeOrder == 3)
       {
-        SplittingFunctions = [=] (int const&, double const& mu) -> Set<Operator>
+        SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
+	  const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           const auto sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
