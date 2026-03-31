@@ -3323,7 +3323,7 @@ namespace apfel
       {
         SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
-	  const double mu = exp(t / 2);
+          const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           return cp * DglapObj(mu).SplittingFunctions.at(0);
         };
@@ -3336,7 +3336,7 @@ namespace apfel
       {
         SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
-	  const double mu = exp(t / 2);
+          const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           const auto sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * sf.at(1) );
@@ -3352,7 +3352,7 @@ namespace apfel
       {
         SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
-	  const double mu = exp(t / 2);
+          const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           const auto sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
@@ -3368,7 +3368,7 @@ namespace apfel
       {
         SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
         {
-	  const double mu = exp(t / 2);
+          const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
           const auto sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
@@ -3380,6 +3380,52 @@ namespace apfel
           return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
         };
       }
+
+    // Create set of initial distributions
+    const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
+                                   DistributionMap(DglapObj(MuRef).SplittingFunctions.at(0).at(0).GetGrid(), InDistFunc, MuRef)};
+
+    // Initialize DGLAP evolution
+    return std::unique_ptr<Dglap<Distribution>>(new Dglap<Distribution> {SplittingFunctions, MatchingConditions, nullptr, InPDFs, MuRef, Thresholds, nsteps});
+  }
+
+  //_____________________________________________________________________________
+  std::unique_ptr<Dglap<Distribution>> BuildDglap(std::function<DglapObjects(double const&)>                         const& DglapObj,
+                                                  std::vector<double>                                                const& Thresholds,
+                                                  std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
+                                                  double                                                             const& MuRef,
+                                                  std::function<double(double const&)>                               const& Alphas,
+                                                  int                                                                const& nsteps)
+  {
+    // Compute initial and final number of active flavours according
+    // to the vector of thresholds (it assumes that the threshold
+    // vector entries are ordered).
+    int nfi = 0;
+    int nff = Thresholds.size();
+    for (auto const& v : Thresholds)
+      if (v <= 0)
+        nfi++;
+
+    // Compute coupling above and below the thresholds
+    std::map<int, double> asThUp;
+    std::map<int, double> asThDown;
+    for (int nf = nfi + 1; nf <= nff; nf++)
+      {
+        asThDown.insert({nf, Alphas(Thresholds[nf-1]  * ( 1 - eps8 ) ) / FourPi});
+        asThUp.insert({nf, Alphas(Thresholds[nf-1] * ( 1 + eps8 ) ) / FourPi});
+      }
+
+    // Create splitting functions and matching conditions lambda
+    // functions.
+    const std::function<Set<Operator>(int const&, double const&)> SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
+    {
+      const double mu = exp(t / 2);
+      return DglapObj(mu).SplittingFunctions.at(0);
+    };
+    const std::function<Set<Operator>(bool const&, int const&)> MatchingConditions = [=] (bool const&, int const& nf) -> Set<Operator>
+    {
+      return DglapObj(Thresholds[nf-1] + eps6).MatchingConditions.at(0);
+    };
 
     // Create set of initial distributions
     const Set<Distribution> InPDFs{DglapObj(MuRef).SplittingFunctions.at(0).GetMap(),
