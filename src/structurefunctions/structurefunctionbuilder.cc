@@ -2488,6 +2488,43 @@ namespace apfel
 
   //_____________________________________________________________________________
   std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                 const& InDistFunc,
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings)
+  {
+    // Call FObj at energy 4 to use it for those quantities that do
+    // not depend on Q.
+    const StructureFunctionObjects FObjRef = FObj(4, Couplings(4));
+
+    // Get grid.
+    Grid const& g = FObjRef.C0.at(1).at(0).GetGrid();
+
+    // Get skip vector.
+    const std::vector<int> skip = FObjRef.skip;
+
+    // Cycle over the key of the convolution basis map.
+    std::map<int, Observable<>> F;
+    for (auto it = FObjRef.ConvBasis.begin(); it != FObjRef.ConvBasis.end(); ++it)
+      {
+        // Structure function index.
+        const int k = it->first;
+
+        // Allocate coefficient functions
+        const std::function<Set<Operator>(double const&)> Cf = [=] (double const& Q) -> Set<Operator> { return FObj(Q, Couplings(Q)).C0.at(k); };
+
+        // Define distribution functions
+        const auto DistF = [=, &g] (double const& Q) -> Set<Distribution>
+        {
+          return Set<Distribution>{FObj(Q, Couplings(Q)).ConvBasis.at(k), DistributionMap(g, InDistFunc, Q, skip)};
+        };
+
+        // Finally insert Observable
+        F.insert({k, Observable<>{Cf, DistF}});
+      }
+    return F;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
                                                       std::function<double(int const&, double const&, double const&)>                    const& InDistFunc,
                                                       int                                                                                const& PerturbativeOrder,
                                                       std::function<double(double const&)>                                               const& Alphas,

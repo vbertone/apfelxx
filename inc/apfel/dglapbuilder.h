@@ -568,15 +568,13 @@ namespace apfel
     * that performs the DGLAP evolution for distributions.
     * @param DglapObj: DglapObjects-valued function that returns the
     * structure with the perturbative objects as functions of the
-    * scale. In this function, the DglapObjects no longer admit a
+    * scale. In this function, the DglapObjects do not longer admit a
     * truncated perturbative expasion (as for example in
-    * resummation). Therefore, the perturbative order must have been
-    * decided when constructing this structure. The function are place
-    * in the key zero of the maps.
+    * resummation). The relevant objects are to be stored in the key
+    * zero of the map of DglapObjects.
     * @param Thresholds: the quark thresholds
     * @param InDistFunc: the distributions at the reference scale
     * @param MuRef: the reference scale
-    * @param Alphas: the function returning the strong coupling
     * @param nsteps: the number of steps of the ODE solver (default: 10).
     * @return A unique pointer to a Dglap object
     */
@@ -584,7 +582,6 @@ namespace apfel
                                                   std::vector<double>                                                const& Thresholds,
                                                   std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
                                                   double                                                             const& MuRef,
-                                                  std::function<double(double const&)>                               const& Alphas,
                                                   int                                                                const& nsteps = 10);
 
   /**

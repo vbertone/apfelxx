@@ -410,6 +410,23 @@ namespace apfel
                                                       double                                                                             const& xiF = 1);
 
   /**
+   * @brief The BuildStructureFunctions function constructs a map of
+   * "Observable" objects.
+   * @param FObj: the StructureFunctionObjects-valued for the
+   * structure function objects. In this function, the
+   * StructureFunctionObjects do not longer admit a truncated
+   * perturbative expasion (as for example in resummation). The
+   * relevant objects are to be stored in the C0 element of the
+   * structure.
+   * @param InDistFunc: the distribution to be convoluted with as a map<int,double>-valued function of x and Q
+   * @param Couplings: the vector-valued function of (non-QCD) couplings
+   * @return A map of "Observable" objects, one for number of active flavours
+   */
+  std::map<int, Observable<>> BuildStructureFunctions(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FObj,
+                                                      std::function<std::map<int, double>(double const&, double const&)>                 const& InDistFunc,
+                                                      std::function<std::vector<double>(double const&)>                                  const& Couplings);
+
+  /**
    * @brief The BuildStructureFunctions function constructs an
    * "Observable" object.
    * @param FObjQ: the StructureFunctionObjects at the scale Q

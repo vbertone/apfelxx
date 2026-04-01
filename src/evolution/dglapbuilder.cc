@@ -3394,27 +3394,8 @@ namespace apfel
                                                   std::vector<double>                                                const& Thresholds,
                                                   std::function<std::map<int, double>(double const&, double const&)> const& InDistFunc,
                                                   double                                                             const& MuRef,
-                                                  std::function<double(double const&)>                               const& Alphas,
                                                   int                                                                const& nsteps)
   {
-    // Compute initial and final number of active flavours according
-    // to the vector of thresholds (it assumes that the threshold
-    // vector entries are ordered).
-    int nfi = 0;
-    int nff = Thresholds.size();
-    for (auto const& v : Thresholds)
-      if (v <= 0)
-        nfi++;
-
-    // Compute coupling above and below the thresholds
-    std::map<int, double> asThUp;
-    std::map<int, double> asThDown;
-    for (int nf = nfi + 1; nf <= nff; nf++)
-      {
-        asThDown.insert({nf, Alphas(Thresholds[nf-1]  * ( 1 - eps8 ) ) / FourPi});
-        asThUp.insert({nf, Alphas(Thresholds[nf-1] * ( 1 + eps8 ) ) / FourPi});
-      }
-
     // Create splitting functions and matching conditions lambda
     // functions.
     const std::function<Set<Operator>(int const&, double const&)> SplittingFunctions = [=] (int const&, double const& t) -> Set<Operator>
