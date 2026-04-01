@@ -103,7 +103,6 @@ namespace apfel
    * 'DglapObjects' structure. This variant uses libome for the
    * matching condictions at threshold.
    * @param g: the x-space grid
-   * @param Masses: the quark masses
    * @param Thresholds: the quark thresholds
    * @param OpEvol: the switch for the computation of the evolution operator (default: false)
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)

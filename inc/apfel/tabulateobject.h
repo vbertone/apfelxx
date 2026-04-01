@@ -180,14 +180,14 @@ namespace apfel
    */
   ///@{
   template<class T>
-  TabulateObject<T> operator * (double const& s, TabulateObject<T> rhs);                           //!< Scalar*TabulateObject<T>
+  TabulateObject<T> operator * (double const& s, TabulateObject<T> rhs);                           //!< Scalar * TabulateObject<T>
   template<class T>
-  TabulateObject<T> operator * (TabulateObject<T> lhs, double const& s);                           //!< TabulateObject<T>*Scalar
+  TabulateObject<T> operator * (TabulateObject<T> lhs, double const& s);                           //!< TabulateObject<T> * Scalar
   template<class T>
-  TabulateObject<T> operator / (TabulateObject<T> lhs, double const& s);                           //!< TabulateObject<T>/Scalar
+  TabulateObject<T> operator / (TabulateObject<T> lhs, double const& s);                           //!< TabulateObject<T> / Scalar
   template<class T>
-  TabulateObject<T> operator + (TabulateObject<T> lhs, TabulateObject<T> const& rhs);              //!< TabulateObject<T>+TabulateObject<T>
+  TabulateObject<T> operator + (TabulateObject<T> lhs, TabulateObject<T> const& rhs);              //!< TabulateObject<T> + TabulateObject<T>
   template<class T>
-  TabulateObject<T> operator - (TabulateObject<T> lhs, TabulateObject<T> const& rhs);              //!< TabulateObject<T>-TabulateObject<T>
+  TabulateObject<T> operator - (TabulateObject<T> lhs, TabulateObject<T> const& rhs);              //!< TabulateObject<T> - TabulateObject<T>
   ///@}
 }

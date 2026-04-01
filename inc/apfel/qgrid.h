@@ -202,15 +202,15 @@ namespace apfel
    */
   ///@{
   template<class T>
-  QGrid<T> operator * (double const& s, QGrid<T> rhs);                           //!< Scalar*QGrid<T>
+  QGrid<T> operator * (double const& s, QGrid<T> rhs);                           //!< Scalar * QGrid<T>
   template<class T>
-  QGrid<T> operator * (QGrid<T> lhs, double const& s);                           //!< QGrid<T>*Scalar
+  QGrid<T> operator * (QGrid<T> lhs, double const& s);                           //!< QGrid<T> * Scalar
   template<class T>
-  QGrid<T> operator / (QGrid<T> lhs, double const& s);                           //!< QGrid<T>/Scalar
+  QGrid<T> operator / (QGrid<T> lhs, double const& s);                           //!< QGrid<T> / Scalar
   template<class T>
-  QGrid<T> operator + (QGrid<T> lhs, QGrid<T> const& rhs);                       //!< QGrid<T>+QGrid<T>
+  QGrid<T> operator + (QGrid<T> lhs, QGrid<T> const& rhs);                       //!< QGrid<T> + QGrid<T>
   template<class T>
-  QGrid<T> operator - (QGrid<T> lhs, QGrid<T> const& rhs);                       //!< QGrid<T>-QGrid<T>
+  QGrid<T> operator - (QGrid<T> lhs, QGrid<T> const& rhs);                       //!< QGrid<T> - QGrid<T>
   ///@}
 
   /**

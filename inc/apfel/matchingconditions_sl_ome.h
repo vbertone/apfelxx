@@ -11,9 +11,8 @@
 
 namespace apfel
 {
-
   /**
-   * @defgroup MatchCond Space-like matching conditions from libome
+   * @ingroup MatchCond
    * @note This is a set of classes whic wrap the functions of
    * libome. The original code can be found at:
    * https://gitlab.com/libome/libome and the reference publication
