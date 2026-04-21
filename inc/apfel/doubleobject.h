@@ -74,6 +74,15 @@ namespace apfel
     double Evaluate(double const& x, double const& z) const;
 
     /**
+     * @brief Function that evaluates the double distribution.
+     * @param i: index of the term to be evaluated
+     * @param x: value of the first variable
+     * @param z: value of the second variable
+     * @return The value of the double distribution in (x, z)
+     */
+    double Evaluate(int const& i, double const& x, double const& z) const;
+
+    /**
      * @brief Function that evaluates the double object in the first
      * variable leaving the second undetermined.
      * @param x: value of the first variable

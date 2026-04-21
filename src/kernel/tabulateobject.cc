@@ -433,6 +433,22 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
+  double TabulateObject<DoubleObject<Distribution>>::EvaluatexzQ(int const& i, double const& x, double const& z, double const& Q) const
+  {
+    // Get summation bounds
+    const std::tuple<int, int, int> bounds = SumBounds(Q);
+    const double                    fq     = _TabFunc(Q);
+
+    // Loop over the nodes
+    double result = 0;
+    for (int tau = std::get<1>(bounds); tau < std::get<2>(bounds); tau++)
+      result += Interpolant(std::get<0>(bounds), tau, fq) * this->_GridValues[tau].Evaluate(i, x, z);
+
+    return result;
+  }
+
+  //_________________________________________________________________________________
+  template<>
   std::map<int, double> TabulateObject<Set<Distribution>>::EvaluateMapxQ(double const& x, double const& Q) const
   {
     // Get summation bounds

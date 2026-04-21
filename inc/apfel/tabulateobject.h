@@ -168,6 +168,12 @@ namespace apfel
      */
     double EvaluatexzQ(double const& x, double const& z, double const& Q) const;
     /**
+     * @brief This function interpolates in x, z, and Q a specific entry of
+     * T = DoubleOject<Distribution>.
+     * @throw std::out_of_range if i is out of range of the DoubleObject
+     */
+    double EvaluatexzQ(int const& i, double const& x, double const& z, double const& Q) const;
+    /**
      * @brief This function interpolates in x and Q and returns a
      * map. It is used for T = Set<Distribution>.
      */

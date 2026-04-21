@@ -169,6 +169,21 @@ namespace apfel
 
   //_________________________________________________________________________________
   template<>
+  double DoubleObject<Distribution>::Evaluate(int const& i, double const& x, double const& z) const
+  {
+    if(i >= static_cast<int>(_terms.size()) || i < 0)
+      {
+         throw std::out_of_range("DoubleObject<Distribution>::Evaluate i out of range");
+      }
+    double result = 0;
+    auto const& t = _terms[i];
+    result += t.coefficient * t.object1.Evaluate(x) * t.object2.Evaluate(z);
+
+    return result;
+  }
+
+  //_________________________________________________________________________________
+  template<>
   Distribution DoubleObject<Distribution>::Evaluate1(double const& x) const
   {
     Distribution result = _terms[0].coefficient * _terms[0].object1.Evaluate(x) * _terms[0].object2;
