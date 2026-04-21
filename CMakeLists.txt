@@ -46,7 +46,7 @@ find_package(LHAPDF QUIET)
 if(LHAPDF_FOUND)
     message("-- LHAPDF found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will be built.")
     set(WITH_LHAPDF 1)
-    #target_link_libraries(apfelxx PUBLIC LHAPDF::LHAPDF)
+    target_link_libraries(apfelxx PUBLIC LHAPDF::LHAPDF)
     # No need to manually extract cflags/libs – CMake handles it.
 else()
     message("-- LHAPDF not found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will not be built.")
@@ -185,5 +185,9 @@ install(EXPORT apfelxxTargets
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfig.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfigVersion.cmake
+    DESTINATION lib/cmake/apfelxx
+)
+install(FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/FindLHAPDF.cmake
     DESTINATION lib/cmake/apfelxx
 )
