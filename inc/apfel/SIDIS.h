@@ -4,6 +4,8 @@
 // Author: Valerio Bertone: valerio.bertone@cern.ch
 //
 
+#pragma once
+
 #include "apfel/apfelxx.h"
 
 #include <algorithm>
@@ -289,7 +291,7 @@ namespace apfel
 
   // Functions that fills in the SIDIS hard cross sections on two
   // different grids.
-  SidisObjects InitializeSIDIS(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
+  inline SidisObjects InitializeSIDIS(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
     report("Initializing SIDIS hard cross sections... ");
     Timer t;
@@ -520,7 +522,7 @@ namespace apfel
 
   // Functions that fills in the SIDIS hard cross sections on one
   // single grid and exchanges the last defaulted arguments.
-  SidisObjects InitializeSIDIS(Grid const& gx, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
+  inline SidisObjects InitializeSIDIS(Grid const& gx, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
     return InitializeSIDIS(gx, gx, Thresholds, exclude);
   }
