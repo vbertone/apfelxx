@@ -203,11 +203,11 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T>
-  T Set<T>::Combine(std::vector<double> const& weigths) const
+  T Set<T>::Combine(std::vector<double> const& weights) const
   {
     // Check whether map of objects and vector of weights have the
     // same size.
-    if (_objects.size() != weigths.size())
+    if (_objects.size() != weights.size())
       throw std::runtime_error(error("Set::Combine", "Size of map of objects and vector of weights do not match"));
 
     // Initialize iterator on '_objects' and counter of the weights
@@ -215,30 +215,30 @@ namespace apfel
     int i;
 
     // In case the first weights are zero do not do the sum.
-    for (i = 0; i < (int) weigths.size(); i++)
-      if (weigths[i] != 0)
+    for (i = 0; i < (int) weights.size(); i++)
+      if (weights[i] != 0)
         break;
       else
         it++;
 
     // If the vector of weights is full of zeros just return the last
     // object multiplied by zero.
-    if (i == (int) weigths.size())
+    if (i == (int) weights.size())
       return 0 * (--it)->second;
 
     // Initialize 'CombObj' with the first object in '_objects'
-    T CombObj = weigths[i++] * it->second;
+    T CombObj = weights[i++] * it->second;
     it++;
 
     // Continue with the following objects of the vector of rules
     for (auto end = _objects.end(); it != end; it++)
       {
-        if (weigths[i] != 0)
+        if (weights[i] != 0)
           {
-            if (weigths[i] == 1)
+            if (weights[i] == 1)
               CombObj += it->second;
             else
-              CombObj += weigths[i] * it->second;
+              CombObj += weights[i] * it->second;
           }
         i++;
       }

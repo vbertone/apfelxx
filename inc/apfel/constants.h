@@ -37,7 +37,7 @@ namespace apfel
    * @ingroup NumericalConstants
    */
   ///@{
-  enum PartonSpecies: int {UNKNOWN = -1, GLUON = 0, DOWNTYPEQUARK = 1, UPTYPEQUARK = 2, PHOTON = 4, CHARGEDLEPTON = 4, NEUTRINO = 5};
+  enum PartonSpecies: int {UNKNOWN = -1, GLUON = 0, DOWNTYPEQUARK = 1, UPTYPEQUARK = 2, PHOTON = 3, CHARGEDLEPTON = 4, NEUTRINO = 5};
   ///@}
 
   /**
@@ -137,6 +137,7 @@ namespace apfel
   const double zeta4  = 1.0823232337111382; // Pi2 * Pi2 / 90;
   const double zeta5  = 1.0369277551433699;
   const double zeta6  = 1.0173430619844491; // Pi2 * Pi2 * Pi2 / 945
+  const double zeta7  = 1.0083492773819228;
   ///@}
 
   /**
@@ -245,7 +246,7 @@ namespace apfel
 
   /**
    * @name Fermi constant
-   * @brief Value of G<SUB>F</SUB> in GeV<SUP>-2</SUP> taken from:
+   * @brief Value of the electromagnetic fine-structure constant taken from:
    * https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf.
    */
   ///@{

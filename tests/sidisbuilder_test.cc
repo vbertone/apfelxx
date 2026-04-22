@@ -13,7 +13,7 @@
 
 int main()
 {
-  apfel::SetVerbosityLevel(1);
+  apfel::SetVerbosityLevel(apfel::verbosity::MEDIUM);
 
   // Use a very coarse grid for a fast test.
   const apfel::Grid gx{{apfel::SubGrid{5, 1e-3, 3}}};

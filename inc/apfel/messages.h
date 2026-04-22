@@ -15,6 +15,25 @@
 namespace apfel
 {
   /**
+   * @brief Verbosity enumerator
+   *
+   * LOW    = No informative and warning messages are displayed. Error messages are printed anyway.
+   * MEDIUM = No informative messages are displayed. Warning and error messages are printed.
+   * HIGH   = All messages are displayed.
+   */
+  enum verbosity: int {LOW = 0, MEDIUM = 1, HIGH = 2};
+
+  /**
+   * @brief Current Verbosity level
+   */
+  static int VerbosityLevel = HIGH;
+
+  /**
+   * @brief Colour codes
+   */
+  enum ColourCode {red = 31, green = 32, yellow = 33, blue = 34, normal = 39};
+
+  /**
    * @name Message functions
    * Collection of functions related to the verbosity of the code.
    */
@@ -22,10 +41,6 @@ namespace apfel
   /**
    * @brief Set Verbosity level
    * @param vl: verbosity level
-   * @note possible values of vl:
-   * LOW    = No informative and warning messages are displayed. Error messages are printed anyway
-   * MEDIUM = No informative messages are displayed. Warning and error messages are printed
-   * HIGH   = All messages are displayed
    */
   void SetVerbosityLevel(int const& vl);
 

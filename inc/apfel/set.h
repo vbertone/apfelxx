@@ -24,14 +24,14 @@ namespace apfel
   public:
     /**
      * @brief The Set constructor.
-     * @param Map: the convolution map (defualt: empty ConvolutionMap)
-     * @param in: a map of objects of type T (defualt: empty map of objects)
+     * @param Map: the convolution map (default: empty ConvolutionMap)
+     * @param in: a map of objects of type T (default: empty map of objects)
      */
     Set(ConvolutionMap const& Map = ConvolutionMap{"UNDEFINED"}, std::map<int, T> const& in = std::map<int, T> {});
 
     /**
      * @brief The Set constructor.
-     * @param in: a map of objects of type T (defualt: empty map of objects)
+     * @param in: a map of objects of type T (default: empty map of objects)
      * @note When invoking this constructor a diagonal convolution map
      * is automatically constructed.
      */
@@ -97,12 +97,12 @@ namespace apfel
     /**
      * @brief This function sums up all the objects of the set into
      * one using the components of input vector as weights.
-     * @param weigths: set of weights
+     * @param weights: set of weights
      */
-    T Combine(std::vector<double> const& weigths) const;
+    T Combine(std::vector<double> const& weights) const;
 
     /**
-     * @brief This function trasforms the set of objects (only
+     * @brief This function transforms the set of objects (only
      * Distributions) given a set of functions, one for each
      * distribution in the set. This function is diagonal in the sense
      * that each transforming function can only transform one single
@@ -112,7 +112,7 @@ namespace apfel
     Set<T> Transform(std::map<int, std::function<double(double const&)>> const& TranformationFuncs) const;
 
     /**
-     * @brief This function trasforms the set of objects (only
+     * @brief This function transforms the set of objects (only
      * Distributions) given a set of functions, one for each
      * distribution in the set. This function is not diagonal in the
      * sense that different distributions can mix upon transformation.
@@ -121,7 +121,7 @@ namespace apfel
     Set<T> Transform(std::map<int, std::map<int, std::function<double(double const&)>>> const& TranformationFuncs) const;
 
     /**
-     * @brief This function trasforms the set of objects (only
+     * @brief This function transforms the set of objects (only
      * Distributions) given a set of functions, one for each
      * distribution in the set. This function is not diagonal in the
      * sense that different distributions can mix upon transformation.

@@ -142,7 +142,7 @@ namespace apfel
     Distribution Derivative() const;
 
     /**
-     * @brief This function trasforms the the Distribution given a
+     * @brief This function transforms the the Distribution given a
      * functions.
      * @param TranformationFunc: set of transformation functions
      */
@@ -226,7 +226,7 @@ namespace apfel
   double Sum(Distribution const& InDist);
 
   /**
-   * @brief Function that computes the scalar product bewteen two
+   * @brief Function that computes the scalar product between two
    * Distribution objects. The product is computed using the joint
    * grids.
    * @param d1: the first input distribution

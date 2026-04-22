@@ -578,7 +578,7 @@ namespace apfel
 
     // Make sure that operators have the same extension
     if (_extended != o.IsExtended())
-      throw std::runtime_error(error("Operator::operator *=", "Operators do not have the same extension."));
+      throw std::runtime_error(error("Operator::operator +=", "Operators do not have the same extension."));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)
@@ -593,11 +593,11 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&_grid != &o.GetGrid())
-      throw std::runtime_error(error("Operator::operator +=", "Grids do not match."));
+      throw std::runtime_error(error("Operator::operator -=", "Grids do not match."));
 
     // Make sure that operators have the same extension
     if (_extended != o.IsExtended())
-      throw std::runtime_error(error("Operator::operator *=", "Operators do not have the same extension."));
+      throw std::runtime_error(error("Operator::operator -=", "Operators do not have the same extension."));
 
     for (int ig = 0; ig < (int) _Operator.size(); ig++)
       for (int alpha = 0; alpha < (int) _Operator[ig].size(0); alpha++)

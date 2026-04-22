@@ -56,7 +56,7 @@ namespace apfel
     const int nffi = NF(_QMax, _Thresholds);
 
     // Compute a temporary grid constant in '_TabFunc(Q)' without
-    // taking into account the threholds.
+    // taking into account the thresholds.
     std::vector<double> fq = {_TabFunc(_QMin)};
     double Step = ( _TabFunc(_QMax) - _TabFunc(_QMin) ) / _nQ;
     for (int iq = 1; iq <= _nQ; iq++)
