@@ -14,7 +14,7 @@ namespace apfel
 {
   /**
    * @brief This class defines the basic object Operator which
-   * essentially contains the convolution bewteen an "Expression"
+   * essentially contains the convolution between an "Expression"
    * object (e.g. a splitting function) and a set of interpolanting
    * functions defined on a grid.
    * @note Both the forward and the non-forward cases can be handled

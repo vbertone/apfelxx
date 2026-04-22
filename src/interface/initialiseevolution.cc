@@ -415,7 +415,7 @@ namespace apfel
     report += "- Quark masses:\n";
     for (int i = 0; i < (int) _setup.QuarkMasses.size(); i++)
       report += "  + " + Mq[i] + " = " + std::to_string(_setup.QuarkMasses[i]) + " GeV\n";
-    report += "- Quark threholds:\n";
+    report += "- Quark thresholds:\n";
     for (int i = 0; i < (int) _setup.QuarkThresholds.size(); i++)
       report += "  + " + Thq[i] + " = " + std::to_string(_setup.QuarkThresholds[i]) + " GeV\n";
 
@@ -423,7 +423,7 @@ namespace apfel
     if (_setup.Theory == EvolutionSetup::QCD_QED)
       {
         std::vector<std::string> Tlp{"me", "mmu", "mtau"};
-        report += "- Lepton threholds:\n";
+        report += "- Lepton thresholds:\n";
         for (int i = 0; i < (int) _setup.LeptonThresholds.size(); i++)
           report += "  + " + Tlp[i] + " = " + std::to_string(_setup.LeptonThresholds[i]) + " GeV\n";
       }

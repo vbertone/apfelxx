@@ -10,7 +10,7 @@
 
 int main()
 {
-  //SetVerbosityLevel(0);
+  //SetVerbosityLevel(apfel::verbosity::LOW);
   apfel::Banner();
 
   // x-space grid

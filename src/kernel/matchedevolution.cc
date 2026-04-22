@@ -45,9 +45,12 @@ namespace apfel
         _LogThresholds2.push_back(( th2 > 0 ? log(th2) : -100));
       }
 
-    // Sort the quark thresholds and thair logarithm
+    // Sort the quark thresholds
     if (_Thresholds2.size() > 1)
-      std::sort(_Thresholds2.begin(), _Thresholds2.end());
+      {
+	std::sort(_Thresholds2.begin(), _Thresholds2.end());
+	std::sort(_LogThresholds2.begin(), _LogThresholds2.end());
+      }
   }
 
   //_________________________________________________________________________________

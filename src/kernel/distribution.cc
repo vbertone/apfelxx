@@ -186,7 +186,7 @@ namespace apfel
   {
     // Fast method to check that we are using the same Grid
     if (&this->_grid != &d._grid)
-      throw std::runtime_error(error("Distribution::operator +=", "Distribution grids do not match"));
+      throw std::runtime_error(error("Distribution::operator =", "Distribution grids do not match"));
 
     _distributionSubGrid   = d.GetDistributionSubGrid();
     _distributionJointGrid = d.GetDistributionJointGrid();
