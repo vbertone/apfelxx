@@ -56,7 +56,7 @@ namespace apfel
                                                                  bool                const& OpEvol = false,
                                                                  double              const& IntEps = 1e-5,
                                                                  bool                const& n3lo = false,
-                                                                 std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
+                                                                 std::vector<int>    const& IMod = {0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsQCDQED function precomputes the
@@ -78,7 +78,7 @@ namespace apfel
                                                                     std::vector<double> const& LeptonThresholds,
                                                                     bool                const& OpEvol = false,
                                                                     double              const& IntEps = 1e-5,
-                                                                    std::vector<int>    const& IMod = {0, 0, 0, 0, 0, 0, 0});
+                                                                    std::vector<int>    const& IMod = {0, 0, 0, 0});
 
   /**
    * @brief The InitializeDglapObjectsPhoton function precomputes the

@@ -262,9 +262,9 @@ namespace apfel
       {
         // Copy the vector of switches to vary the parameterisation of the
         // approximated N3LO splitting functions and adjust it to match
-        // the correct number of switches (7). Issue a warning in case
+        // the correct number of switches (4). Issue a warning in case
         // the original vector is modified.
-        const int nvar = 7;
+        const int nvar = 4;
         std::vector<int> im = IMod;
         if (im.size() != nvar)
           {
@@ -304,13 +304,13 @@ namespace apfel
         // NNNLO splitting function operators
         for (int nf = nfi; nf <= nff; nf++)
           {
-            const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
-            const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
-            const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
-            const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
-            const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
-            const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
-            const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
+            const Operator O3nsp{g, P3nsp{nf},       IntEps};
+            const Operator O3nsm{g, P3nsm{nf},       IntEps};
+            const Operator O3nss{g, P3nss{nf},       IntEps};
+            const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+            const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
+            const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
+            const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
             const Operator O3qq  = O3nsp + O3ps;
             const Operator O3nsv = O3nsm + O3nss;
             std::map<int, Operator> OM;
@@ -625,9 +625,9 @@ namespace apfel
     // NNNLO corrections
     // Copy the vector of switches to vary the parameterisation of the
     // approximated N3LO splitting functions and adjust it to match
-    // the correct number of switches (7). Issue a warning in case
+    // the correct number of switches (4). Issue a warning in case
     // the original vector is modified.
-    const int nvar = 7;
+    const int nvar = 4;
     std::vector<int> im = IMod;
     if (im.size() != nvar)
       {
@@ -669,13 +669,16 @@ namespace apfel
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
-        const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
-        const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
-        const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
-        const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
-        const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
-        const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
+        //const Operator O3nsp{g, aP3nsp{nf},       IntEps};
+        //const Operator O3nsm{g, aP3nsm{nf},       IntEps};
+        //const Operator O3nss{g, aP3nss{nf},       IntEps};
+        const Operator O3nsp{g, P3nsp{nf},       IntEps};
+        const Operator O3nsm{g, P3nsm{nf},       IntEps};
+        const Operator O3nss{g, P3nss{nf},       IntEps};
+        const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+        const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
+        const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
+        const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
         const Operator O3qq  = O3nsp + O3ps;
         const Operator O3nsv = O3nsm + O3nss;
         std::map<int, Operator> OM;
@@ -977,9 +980,9 @@ namespace apfel
       {
         // Copy the vector of switches to vary the parameterisation of the
         // approximated N3LO splitting functions and adjust it to match
-        // the correct number of switches (7). Issue a warning in case
+        // the correct number of switches (4). Issue a warning in case
         // the original vector is modified.
-        const int nvar = 7;
+        const int nvar = 4;
         std::vector<int> im = IMod;
         if (im.size() != nvar)
           {
@@ -1019,13 +1022,13 @@ namespace apfel
         // NNNLO splitting function operators
         for (int nf = nfi; nf <= nff; nf++)
           {
-            const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
-            const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
-            const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
-            const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
-            const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
-            const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
-            const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
+            const Operator O3nsp{g, P3nsp{nf},       IntEps};
+            const Operator O3nsm{g, P3nsm{nf},       IntEps};
+            const Operator O3nss{g, P3nss{nf},       IntEps};
+            const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+            const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
+            const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
+            const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
             std::map<int, Operator> OM;
             OM.insert({PhysicalBasisQCD::PNV, O3nsm + O3nss / nf});
             OM.insert({PhysicalBasisQCD::PPV, O3nss / nf});
@@ -1335,9 +1338,9 @@ namespace apfel
     // NNNLO corrections
     // Copy the vector of switches to vary the parameterisation of the
     // approximated N3LO splitting functions and adjust it to match
-    // the correct number of switches (7). Issue a warning in case
+    // the correct number of switches (4). Issue a warning in case
     // the original vector is modified.
-    const int nvar = 7;
+    const int nvar = 4;
     std::vector<int> im = IMod;
     if (im.size() != nvar)
       {
@@ -1379,13 +1382,13 @@ namespace apfel
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator O3nsp{g, P3nsp{nf, im[0]}, IntEps};
-        const Operator O3nsm{g, P3nsm{nf, im[1]}, IntEps};
-        const Operator O3nss{g, P3nss{nf, im[2]}, IntEps};
-        const Operator O3ps {g, P3ps{nf,  im[3]}, IntEps};
-        const Operator O3qg {g, P3qg{nf,  im[4]}, IntEps};
-        const Operator O3gq {g, P3gq{nf,  im[5]}, IntEps};
-        const Operator O3gg {g, P3gg{nf,  im[6]}, IntEps};
+        const Operator O3nsp{g, P3nsp{nf},       IntEps};
+        const Operator O3nsm{g, P3nsm{nf},       IntEps};
+        const Operator O3nss{g, P3nss{nf},       IntEps};
+        const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+        const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
+        const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
+        const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({PhysicalBasisQCD::PNV, O3nsm + O3nss / nf});
         OM.insert({PhysicalBasisQCD::PPV, O3nss / nf});

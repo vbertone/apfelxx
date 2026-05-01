@@ -311,54 +311,106 @@ namespace apfel
   /* }; */
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * @brief Approximated space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
    * non-singlet-plus unpolarised splitting function. Parameterisation
    * determined in https://arxiv.org/pdf/1707.08315.pdf
    */
-  class P3nsp: public Expression
+  class aP3nsp: public Expression
   {
   public:
-    P3nsp(int const& nf, int const& imod = 0);
+    aP3nsp(int const& nf, int const& imod = 0);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
     int const _nf;
     int const _imod;
+  };
+
+  /**
+   * @brief Approximated space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * non-singlet-minus unpolarised splitting
+   * function. Parameterisation determined in
+   * https://arxiv.org/pdf/1707.08315.pdf
+   */
+  class aP3nsm: public Expression
+  {
+  public:
+    aP3nsm(int const& nf, int const& imod = 0);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int const _nf;
+    int const _imod;
+  };
+
+  /**
+   * @brief Approximated space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * non-singlet-valence unpolarised splitting
+   * function. Parameterisation determined in
+   * https://arxiv.org/pdf/1707.08315.pdf
+   */
+  class aP3nss: public Expression
+  {
+  public:
+    aP3nss(int const& nf, int const& imod = 0);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+    int const _imod;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * non-singlet-plus unpolarised splitting function. Parameterisation
+   * determined in https://arxiv.org/pdf/2604.09534v1
+   */
+  class P3nsp: public Expression
+  {
+  public:
+    P3nsp(int const& nf);
+    double Regular(double const& x)  const;
+    double Singular(double const& x) const;
+    double Local(double const& x)    const;
+  private:
+    int    const _nf;
+    double       _csing;
+    double       _cloc;
   };
 
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
    * non-singlet-minus unpolarised splitting
    * function. Parameterisation determined in
-   * https://arxiv.org/pdf/1707.08315.pdf
+   * https://arxiv.org/pdf/2604.09534v1
    */
   class P3nsm: public Expression
   {
   public:
-    P3nsm(int const& nf, int const& imod = 0);
+    P3nsm(int const& nf);
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
     double Local(double const& x)    const;
   private:
-    int const _nf;
-    int const _imod;
+    int    const _nf;
+    double       _csing;
+    double       _cloc;
   };
 
   /**
    * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
    * non-singlet-valence unpolarised splitting
    * function. Parameterisation determined in
-   * https://arxiv.org/pdf/1707.08315.pdf
+   * https://arxiv.org/pdf/2604.09534v1
    */
   class P3nss: public Expression
   {
   public:
-    P3nss(int const& nf, int const& imod = 0);
+    P3nss(int const& nf);
     double Regular(double const& x) const;
   private:
     int const _nf;
-    int const _imod;
   };
 
   /* /\** */

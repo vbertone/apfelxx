@@ -173,7 +173,7 @@ namespace apfel
   {
     if(i >= static_cast<int>(_terms.size()) || i < 0)
       {
-         throw std::out_of_range("DoubleObject<Distribution>::Evaluate i out of range");
+        throw std::out_of_range("DoubleObject<Distribution>::Evaluate i out of range");
       }
     double result = 0;
     auto const& t = _terms[i];

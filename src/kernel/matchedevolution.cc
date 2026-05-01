@@ -48,8 +48,8 @@ namespace apfel
     // Sort the quark thresholds
     if (_Thresholds2.size() > 1)
       {
-	std::sort(_Thresholds2.begin(), _Thresholds2.end());
-	std::sort(_LogThresholds2.begin(), _LogThresholds2.end());
+        std::sort(_Thresholds2.begin(), _Thresholds2.end());
+        std::sort(_LogThresholds2.begin(), _LogThresholds2.end());
       }
   }
 
