@@ -31,7 +31,7 @@ int main()
   const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Construct the DGLAP objects
-  const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds, false, apfel::eps5, (PerturbativeOrder < 3 ? false : true), {0, 0, 0, 0, 0, 0, 0}), apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
+  const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds, false, apfel::eps5, (PerturbativeOrder < 3 ? false : true), {0, 0, 0, 0}), apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 50, 1, 1000, 3};

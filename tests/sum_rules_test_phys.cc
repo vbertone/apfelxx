@@ -29,7 +29,7 @@ int main()
   const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Initialise DGLAP objects
-  const auto DglapObj = InitializeDglapObjectsQCDPhys(g, Thresholds, false, apfel::eps5, true, {0, 0, 0, 0, 0, 0, 0});
+  const auto DglapObj = InitializeDglapObjectsQCDPhys(g, Thresholds, false, apfel::eps5, true, {0, 0, 0, 0});
 
   // Construct the DGLAP objects
   const auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFsPlusMinus, mu0, PerturbativeOrder, as);
