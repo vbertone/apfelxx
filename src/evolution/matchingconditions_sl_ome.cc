@@ -5,8 +5,6 @@
 //
 
 #include "apfel/matchingconditions_sl_ome.h"
-#include "apfel/integrator.h"
-#include "apfel/constants.h"
 
 namespace apfel
 {
@@ -116,7 +114,7 @@ namespace apfel
   }
   double ANS2qqH_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -137,7 +135,7 @@ namespace apfel
   }
   double ANS2qqH_L_ome::Local(double const& x) const
   {
-    return Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) - _ome_l(0);
+    return _ome_s.eval_plus_int(0, x) - _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -158,7 +156,7 @@ namespace apfel
   }
   double ANS2qqH_L2_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -212,7 +210,7 @@ namespace apfel
   }
   double AS2ggH_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -233,7 +231,7 @@ namespace apfel
   }
   double AS2ggH_L_ome::Local(double const& x) const
   {
-    return Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) - _ome_l(0);
+    return _ome_s.eval_plus_int(0, x) - _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -254,7 +252,7 @@ namespace apfel
   }
   double AS2ggH_L2_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -300,7 +298,7 @@ namespace apfel
   }
   double ANS3qqH_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(_nf, y); }}.integrate(0, x, eps7) + _ome_l(_nf);
+    return - _ome_s.eval_plus_int(_nf, x) + _ome_l(_nf);
   }
 
   //_________________________________________________________________________________
@@ -322,7 +320,7 @@ namespace apfel
   }
   double ANS3qqHm_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(_nf, y); }}.integrate(0, x, eps7) + _ome_l(_nf);
+    return - _ome_s.eval_plus_int(_nf, x) + _ome_l(_nf);
   }
 
   //_________________________________________________________________________________
@@ -356,7 +354,7 @@ namespace apfel
   }
   double AS3ggH_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(_nf, y); }}.integrate(0, x, eps7) + _ome_l(_nf);
+    return - _ome_s.eval_plus_int(_nf, x) + _ome_l(_nf);
   }
 
   //_________________________________________________________________________________
@@ -489,7 +487,7 @@ namespace apfel
   }
   double ANS2polqqH_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -510,7 +508,7 @@ namespace apfel
   }
   double ANS2polqqH_L_ome::Local(double const& x) const
   {
-    return Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) - _ome_l(0);
+    return _ome_s.eval_plus_int(0, x) - _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -531,7 +529,7 @@ namespace apfel
   }
   double ANS2polqqH_L2_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -585,7 +583,7 @@ namespace apfel
   }
   double AS2polggH_0_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -606,7 +604,7 @@ namespace apfel
   }
   double AS2polggH_L_ome::Local(double const& x) const
   {
-    return Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) - _ome_l(0);
+    return _ome_s.eval_plus_int(0, x) - _ome_l(0);
   }
 
   //_________________________________________________________________________________
@@ -627,6 +625,6 @@ namespace apfel
   }
   double AS2polggH_L2_ome::Local(double const& x) const
   {
-    return - Integrator{[=] (double const& y) -> double{ return _ome_s(0, y); }}.integrate(0, x, eps7) + _ome_l(0);
+    return - _ome_s.eval_plus_int(0, x) + _ome_l(0);
   }
 }
