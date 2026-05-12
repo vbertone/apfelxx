@@ -22,19 +22,31 @@ namespace apfel
     // Compute grid
     _Step = log(_xMax / _xMin) / _nx;
 
+    // Number of entries of the grid vector
+    const int nv = _nx + _InterDegree + 1;
+
     // Building log spaced grid in x. Number of points in x + 1 (bins)
     // + extra nodes for rhs interpolation.
-    _xsg.resize(_nx + _InterDegree + 1, 0);
+    _xsg.resize(nv, 0);
 
+    // Build grid
     _xsg[0] = _xMin;
     const double exps = exp(_Step);
-    for (int ix = 1; ix < (int) _xsg.size(); ix++)
+    for (int ix = 1; ix < nv; ix++)
       _xsg[ix] = _xsg[ix - 1] * exps;
     _xsg[_nx] = 1;
 
+    // Build logarithm of grid
     _lxsg.resize(_xsg.size());
-    for (int ix = 0; ix < (int) _xsg.size(); ix++)
+    for (int ix = 0; ix < nv; ix++)
       _lxsg[ix] = log(_xsg[ix]);
+
+    // Build the inverse of _xsg[ix] - _xsg[ix] (useful for Lagrange
+    // interpolation).
+    _ixgij.resize(nv, std::vector<double>(nv, 0));
+    for (int ix = 0; ix < nv; ix++)
+      for (int jx = 0; jx < nv; jx++)
+        _ixgij[ix][jx] = 1 / ( _xsg[ix] - _xsg[jx] );
   }
 
   //_________________________________________________________________________________
@@ -45,7 +57,8 @@ namespace apfel
     _xMax(1),
     _Step(0)
   {
-    _xsg.resize(_nx + InterDegree + 1, 0);
+    const int nv = _nx + _InterDegree + 1;
+    _xsg.resize(nv, 0);
     copy(xsg.begin(), xsg.end(), _xsg.begin());
 
     // Check that the last point of the user-given grid is equal to
@@ -59,12 +72,20 @@ namespace apfel
     // same width of the last bin in log scale.
     const double step = - log( xsg[_nx - 1] );
     const double exps = exp(step);
-    for (int ix = _nx; ix < (int) _xsg.size(); ix++)
+    for (int ix = _nx; ix < nv; ix++)
       _xsg[ix] = _xsg[ix - 1] * exps;
 
+    // Build logarithm of grid
     _lxsg.resize(_xsg.size());
-    for (int ix = 0; ix < (int) _xsg.size(); ix++)
+    for (int ix = 0; ix < nv; ix++)
       _lxsg[ix] = log(_xsg[ix]);
+
+    // Build the inverse of _xsg[ix] - _xsg[ix] (useful for Lagrange
+    // interpolation).
+    _ixgij.resize(nv, std::vector<double>(nv, 0));
+    for (int ix = 0; ix < nv; ix++)
+      for (int jx = 0; jx < nv; jx++)
+        _ixgij[ix][jx] = 1 / ( _xsg[ix] - _xsg[jx] );
   }
 
   //_________________________________________________________________________________

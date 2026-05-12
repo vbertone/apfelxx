@@ -68,10 +68,12 @@ namespace apfel
         break;
 
     // Compute the interpolant
+    const double num = ix - beta;
     double w_int = 1;
-    for (int delta = beta - j; delta <= beta - j + id; delta++)
-      if (delta != beta)
-        w_int *= ( ix - delta ) / ( beta - delta );
+    for (int delta = beta - j; delta < beta; delta++)
+      w_int *= 1 + num / ( beta - delta );
+    for (int delta = beta + 1; delta <= beta - j + id; delta++)
+      w_int *= 1 + num / ( beta - delta );
 
     return w_int;
   }
@@ -97,7 +99,7 @@ namespace apfel
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
-    if (x < xg[bound] || x >= xg[beta+1])
+    if (x < xg[bound] || x >= xg[beta + 1])
       return 0;
 
     // Find the the neighbors of "x" on the grid
@@ -107,10 +109,14 @@ namespace apfel
         break;
 
     // Compute the interpolant
+    const double xgb = xg[beta];
+    const double num = x - xgb;
+    const std::vector<double>& ixgij = sg.GetInverseDelta()[beta];
     double w_int = 1;
-    for (int delta = beta - j; delta <= beta - j + id; delta++)
-      if (delta != beta)
-        w_int *= ( x - xg[delta] ) / ( xg[beta] - xg[delta] );
+    for (int delta = beta - j; delta < beta; delta++)
+      w_int *= 1 + num * ixgij[delta];
+    for (int delta = beta + 1; delta <= beta - j + id; delta++)
+      w_int *= 1 + num * ixgij[delta];
 
     return w_int;
   }
@@ -132,26 +138,29 @@ namespace apfel
     // called if "beta" and "x" are such that "Interpolant" is
     // identically zero. Use "SumBounds" to know where "beta" should
     // run over given "x".
-    if (x < xg[bound] || x >= xg[beta+1])
+    if (x < xg[bound] || x >= xg[beta + 1])
       return 0;
 
     // Find the the neighbors of "x" on the grid
     int j;
     for (j = 0; j <= beta - bound; j++)
-      if (x >= xg[beta-j])
+      if (x >= xg[beta - j])
         break;
 
     // Compute the interpolant
+    const double xgb = xg[beta];
+    const double num = x - xgb;
+    const std::vector<double>& ixgij = sg.GetInverseDelta()[beta];
     double dw_int = 0;
     for (int gamma = beta - j; gamma <= beta - j + id; gamma++)
       {
         double w = 1;
         for (int delta = beta - j; delta <= beta - j + id; delta++)
           if (delta != beta && delta != gamma)
-            w *= ( x - xg[delta] ) / ( xg[beta] - xg[delta] );
+            w *= 1 + num * ixgij[delta];
         if (gamma != beta)
           {
-            w /= xg[beta] - xg[gamma];
+            w /= xgb - xg[gamma];
             dw_int += w;
           }
       }
@@ -169,14 +178,15 @@ namespace apfel
 
     // Return 0 if "a" and "b" are outside the range in which the
     // interpolant is different from zero.
-    if (a > xg[beta+1] || b < xg[std::max(beta-k, 0)])
+    if (a > xg[beta + 1] || b < xg[std::max(beta - k, 0)])
       return 0;
 
     // Construct interpolant
+    const std::vector<double>& ixgij = sg.GetInverseDelta()[beta];
     double iw_int = 0;
     for (int i = 0; i <= std::min(k, beta); i++)
       {
-        if (xg[beta-i] > b || xg[beta-i+1] < a)
+        if (xg[beta - i] > b || xg[beta - i + 1] < a)
           continue;
 
         // Product of denominators
@@ -186,16 +196,16 @@ namespace apfel
         for (int m = 0; m <= k; m++)
           if(m != i)
             {
-              dp /= xg[beta] - xg[beta-i+m];
-              r[j++] = xg[beta-i+m];
+              dp *= ixgij[beta - i + m];
+              r[j++] = xg[beta - i + m];
             }
 
         // Expansion coefficients
         const std::vector<double> p = ProductExpansion(r);
 
         // Integration bounds
-        const double ab = std::max(a, xg[beta-i]);
-        const double bb = std::min(b, xg[beta-i+1]);
+        const double ab = std::max(a, xg[beta - i]);
+        const double bb = std::min(b, xg[beta - i + 1]);
 
         // Sum of the integrals
         double sum = 0;

@@ -46,23 +46,25 @@ namespace apfel
     bool operator != (SubGrid const& sg) const;
 
     // Getters
-    int                        nx()          const { return _nx; }                      //!< return the number of x points
-    int                        InterDegree() const { return _InterDegree; }             //!< return the interpolation degree
-    double                     xMin()        const { return _xMin; }                    //!< return the minimum node value
-    double                     xMax()        const { return _xMax; }                    //!< return the maximum node value
-    double                     Step()        const { return _Step; }                    //!< return the step size of the log grid
-    std::vector<double> const& GetGrid()     const { return _xsg; }                     //!< return the grid
-    std::vector<double> const& GetLogGrid()  const { return _lxsg; }                    //!< return the log-grid
-    void                       Print()       const { std::cout << *this << std::endl; } //!< print the SubGrid object
+    int                                     nx()              const { return _nx; }                      //!< return the number of x points
+    int                                     InterDegree()     const { return _InterDegree; }             //!< return the interpolation degree
+    double                                  xMin()            const { return _xMin; }                    //!< return the minimum node value
+    double                                  xMax()            const { return _xMax; }                    //!< return the maximum node value
+    double                                  Step()            const { return _Step; }                    //!< return the step size of the log grid
+    std::vector<double>              const& GetGrid()         const { return _xsg; }                     //!< return the grid
+    std::vector<double>              const& GetLogGrid()      const { return _lxsg; }                    //!< return the log-grid
+    std::vector<std::vector<double>> const& GetInverseDelta() const { return _ixgij; }                   //!< return the the inverse of _xsg[ix] - _xsg[ix]
+    void                                    Print()           const { std::cout << *this << std::endl; } //!< print the SubGrid object
 
   private:
-    int                 _nx;           //!< Number intervals
-    int                 _InterDegree;  //!< Interpolation degree
-    double              _xMin;         //!< Minumim value of x
-    double              _xMax;         //!< Maximum value of x (should always be 1)
-    double              _Step;         //!< Step of the logarthmically spaced grid
-    std::vector<double> _xsg;          //!< Actual grid
-    std::vector<double> _lxsg;         //!< The log of the grid
+    int                              _nx;           //!< Number intervals
+    int                              _InterDegree;  //!< Interpolation degree
+    double                           _xMin;         //!< Minumim value of x
+    double                           _xMax;         //!< Maximum value of x (should always be 1)
+    double                           _Step;         //!< Step of the logarthmically spaced grid
+    std::vector<double>              _xsg;          //!< Actual grid
+    std::vector<double>              _lxsg;         //!< The log of the grid
+    std::vector<std::vector<double>> _ixgij;        //!< The inverse of _xsg[ix] - _xsg[ix] (useful for Lagrange interpolation)
 
     friend std::ostream& operator << (std::ostream& os, SubGrid const& sg);
   };
