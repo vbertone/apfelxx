@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quarkflavour_0',['QuarkFlavour',['../namespaceapfel.html#a52f9641b9ca0b856fffcd7fdb42f575b',1,'apfel']]]
+  ['partonspecies_0',['PartonSpecies',['../group__PartonSpecies.html#gad4fc02426d8c8750bfd0d6bc7b15a6a6',1,'apfel']]]
 ];

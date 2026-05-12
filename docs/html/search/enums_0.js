@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['evolpolarisation_0',['EvolPolarisation',['../structapfel_1_1EvolutionSetup.html#a2231cecea101e46d2b8b5b1652e26792',1,'apfel::EvolutionSetup']]],
-  ['evolutiontheory_1',['EvolutionTheory',['../structapfel_1_1EvolutionSetup.html#a829586a1986a0a568bcd4d69eff7442e',1,'apfel::EvolutionSetup']]]
+  ['colourcode_0',['ColourCode',['../namespaceapfel.html#a5abc361a0b89cb5f37460089e23b3a1d',1,'apfel']]]
 ];

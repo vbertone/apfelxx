@@ -64,9 +64,10 @@ var searchData=
   ['nnnlo_20unpolarised_20matching_20conditions_61',['NNNLO unpolarised matching conditions',['../group__NNNLOMC.html',1,'']]],
   ['nnnlo_20unpolarised_20matching_20conditions_20from_20libome_62',['NNNLO unpolarised matching conditions from libome',['../group__NNNLOMCOME.html',1,'']]],
   ['nnnlo_20zero_20mass_20coefficient_20functions_63',['NNNLO zero-mass coefficient functions',['../group__NNNLOzm.html',1,'']]],
-  ['nq_64',['nQ',['../classapfel_1_1QGrid.html#a545c18a37669f843ea7874c5e9e8d23c',1,'apfel::QGrid']]],
-  ['nqg_65',['nQg',['../structapfel_1_1EvolutionSetup.html#aab9528d803850444afe8f68ac552338c',1,'apfel::EvolutionSetup']]],
-  ['null_66',['Null',['../classapfel_1_1Null.html',1,'apfel::Null'],['../classapfel_1_1Null.html#a0f74dde5cc4f104049878d17bd639248',1,'apfel::Null::Null()']]],
-  ['numerical_20constants_67',['Numerical constants',['../group__NumericalConstants.html',1,'']]],
-  ['nx_68',['nx',['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters::nx'],['../classapfel_1_1SubGrid.html#ac9c8d18ab6868c90679a2b66f5616c81',1,'apfel::SubGrid::nx()']]]
+  ['normal_64',['normal',['../namespaceapfel.html#a5abc361a0b89cb5f37460089e23b3a1dadce97be285c4428fbb37ca5872f69074',1,'apfel']]],
+  ['nq_65',['nQ',['../classapfel_1_1QGrid.html#a545c18a37669f843ea7874c5e9e8d23c',1,'apfel::QGrid']]],
+  ['nqg_66',['nQg',['../structapfel_1_1EvolutionSetup.html#aab9528d803850444afe8f68ac552338c',1,'apfel::EvolutionSetup']]],
+  ['null_67',['Null',['../classapfel_1_1Null.html',1,'apfel::Null'],['../classapfel_1_1Null.html#a0f74dde5cc4f104049878d17bd639248',1,'apfel::Null::Null()']]],
+  ['numerical_20constants_68',['Numerical constants',['../group__NumericalConstants.html',1,'']]],
+  ['nx_69',['nx',['../structapfel_1_1EvolutionSetup_1_1GridParameters.html#ac1ac2d643f29aa6045eb13e32ae0fd3b',1,'apfel::EvolutionSetup::GridParameters::nx'],['../classapfel_1_1SubGrid.html#ac9c8d18ab6868c90679a2b66f5616c81',1,'apfel::SubGrid::nx()']]]
 ];

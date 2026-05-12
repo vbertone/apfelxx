@@ -15,8 +15,9 @@ var searchData=
   ['heavy_20quark_20initiated_20coefficient_20functions_12',['NLO massive heavy-quark-initiated coefficient functions',['../group__NLOhq.html',1,'']]],
   ['helicity_20ffs_20g1_13',['NLO matching functions for the helicity FFs g1',['../group__NLOffg1.html',1,'']]],
   ['helicity_20pdfs_20g1_14',['NLO matching functions for helicity PDFs g1',['../group__NLOg1.html',1,'']]],
-  ['homebrew_20macos_15',['Homebrew (macOS)',['../index.html#autotoc_md1',1,'']]],
-  ['hplogmap_16',['HPLogMap',['../namespaceapfel.html#a4952d6daa86b59a050d8cdc3b49eb59b',1,'apfel']]],
-  ['hpoly_17',['hpoly',['../namespaceapfel.html#abde00ad78affecc4bbe4e4e5996b820a',1,'apfel']]],
-  ['hpolyweights_2eh_18',['hpolyweights.h',['../hpolyweights_8h.html',1,'']]]
+  ['high_15',['HIGH',['../namespaceapfel.html#a341d411b597ec06a665d22f5bb53b411ae4faabce9ac8b40fc820df46a23122b0',1,'apfel']]],
+  ['homebrew_20macos_16',['Homebrew (macOS)',['../index.html#autotoc_md1',1,'']]],
+  ['hplogmap_17',['HPLogMap',['../namespaceapfel.html#a4952d6daa86b59a050d8cdc3b49eb59b',1,'apfel']]],
+  ['hpoly_18',['hpoly',['../namespaceapfel.html#abde00ad78affecc4bbe4e4e5996b820a',1,'apfel']]],
+  ['hpolyweights_2eh_19',['hpolyweights.h',['../hpolyweights_8h.html',1,'']]]
 ];
