@@ -16,6 +16,7 @@
 #include "apfel/hardfactors.h"
 #include "apfel/tools.h"
 #include "apfel/integrator.h"
+#include "apfel/tmcoperator.h"
 
 namespace apfel
 {
@@ -1152,6 +1153,31 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFsWithTMCs(std::map<int, TmdObjects>                       const& TmdObj,
+                                                                                                     std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                                                                     std::function<double(double const&)>            const& Alphas,
+                                                                                                     int                                             const& PerturbativeOrder,
+                                                                                                     double                                          const& M,
+                                                                                                     double                                          const& Ci,
+                                                                                                     double                                          const& IntEps)
+  {
+    // Match TMDs onto collinear PDFs
+    const std::function<Set<Distribution>(double const&)> MatchedTmdPDFs = MatchTmdPDFsWithTMCs(TmdObj, CollPDFs, Alphas, PerturbativeOrder, M, Ci);
+
+    // Compute TMD evolution factors
+    const std::function<std::vector<double>(double const&, double const&, double const&)> EvolFactors = EvolutionFactors(TmdObj, Alphas, PerturbativeOrder, Ci, IntEps);
+
+    // Computed TMDPDFs at the final scale by multiplying the initial
+    // scale TMDPDFs by the evolution factor.
+    const auto EvolvedTMDs = [=] (double const& b, double const& muf, double const& zetaf) -> Set<Distribution>
+    {
+      return EvolFactors(b, muf, zetaf) * MatchedTmdPDFs(b);
+    };
+
+    return EvolvedTMDs;
+  }
+
+  //_____________________________________________________________________________
   std::function<Set<Distribution>(double const&)> MatchTmdPDFs(std::map<int, TmdObjects>                       const& TmdObj,
                                                                std::function<Set<Distribution>(double const&)> const& CollPDFs,
                                                                std::function<double(double const&)>            const& Alphas,
@@ -1197,6 +1223,32 @@ namespace apfel
       // Convolute matching functions with the collinear FFs and
       // return.
       return MatchFunc(mu0) * CollFFs(mu0);
+    };
+
+    return MatchedTMDs;
+  }
+
+  //_____________________________________________________________________________
+  std::function<Set<Distribution>(double const&)> MatchTmdPDFsWithTMCs(std::map<int, TmdObjects>                       const& TmdObj,
+                                                                       std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                                       std::function<double(double const&)>            const& Alphas,
+                                                                       int                                             const& PerturbativeOrder,
+                                                                       double                                          const& M,
+                                                                       double                                          const& Ci)
+  {
+    // Get matching functions
+    const std::function<Set<Operator>(double const&)> MatchFunc = MatchingFunctionsPDFs(TmdObj, Alphas, PerturbativeOrder, Ci);
+
+    // Construct function that returns the product of matching
+    // functions and collinear PDFs.
+    const auto MatchedTMDs = [=] (double const& b) -> Set<Distribution>
+    {
+      // Define lower scales
+      const double mu0 = Ci * 2 * exp(- emc) / b;
+
+      // Convolute TMC-corrected matching functions with the collinear
+      // PDFs and return.
+      return IncludeTMCsToTmdPdfs(M, b, MatchFunc(mu0)) * CollPDFs(mu0);
     };
 
     return MatchedTMDs;
@@ -2655,5 +2707,69 @@ namespace apfel
     };
 
     return HardFactor;
+  }
+
+  //_____________________________________________________________________________
+  Set<Operator> IncludeTMCsToTmdPdfs(double const& M, double const& b, Set<Operator> const& C)
+  {
+    // Get objects from input set of operators
+    const std::map<int, Operator> CObj = C.GetObjects();
+
+    // Get grid
+    const Grid& g = CObj.begin()->second.GetGrid();
+
+    // Get vector of subgrids
+    const std::vector<SubGrid>& sg = g.GetSubGrids();
+
+    // Get integration accuracy
+    const double IntEps = CObj.begin()->second.GetIntegrationAccuracy();
+
+    // Allocate contained for TMC corrected set of operators
+    std::map<int, std::vector<matrix<double>>> tmcops;
+    for (const auto& [key, value] : CObj)
+      tmcops.emplace(key, std::vector<matrix<double>>(sg.size()));
+
+    // Run over subgrids
+    for (int ig = 0; ig < (int) sg.size(); ig++)
+      {
+        // Get current grid
+        const std::vector<double>& csg = sg[ig].GetGrid();
+
+        // Size of current grid
+        const int nx = sg[ig].nx();
+
+        // Run over nodes of current subgrid and ompute TMC operator
+        // on all nodes.
+        std::vector<matrix<double>> D((size_t) nx);
+        for (int alpha = 0; alpha < nx; alpha++)
+          D[alpha] = Operator{g, TMCoperator{M, b, csg[alpha]}, IntEps}.GetOperator()[ig];
+
+        // Run over objects of the input set
+        for (auto const& O : CObj)
+          {
+            // Get operator of current object
+            const matrix<double> C = O.second.GetOperator()[ig];
+
+            // Allocate product matrix
+            matrix<double> CD{(size_t) nx, (size_t) nx};
+
+            // Perform multiplication
+            for (int alpha = 0; alpha < nx; alpha++)
+              for (int gamma = alpha; gamma < nx; gamma++)
+                for (int beta = gamma; beta < nx; beta++)
+                  CD(alpha, beta) = C(0, gamma - alpha) * D[alpha](0, beta - gamma);
+
+            // Store result
+            tmcops[O.first][ig] = CD;
+          }
+      }
+
+    // Finally rearrange and construct set of operators
+    std::map<int, Operator> OpMap;
+    for (const auto& [key, value] : tmcops)
+      OpMap.emplace(key, Operator{g, value});
+
+    // Construct and return set of TMC corrected operators
+    return Set<Operator> {C.GetMap(), OpMap};
   }
 }

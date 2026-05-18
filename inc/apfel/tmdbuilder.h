@@ -167,12 +167,35 @@ namespace apfel
                                                                                             double                                          const& IntEps = 1e-7);
 
   /**
+   * @brief Function that returns the matched and evolved TMD PDFs in
+   * b-space as functions of the final scale and rapidity and
+   * including target-mass corrections (TMCs).
+   * @param TmdObj: the TMD objects
+   * @param CollPDFs: the set of collinear PDFs to be matched
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the logarithmic perturbative order
+   * @param M: the target mass
+   * @param Ci: the initial-scale variation factor (default: 1)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-7</SUP>)
+   * @return Set<Distribution>-valued function of the impact parameter
+   * b<SUB>T</SUB>, the final renormalisation scale &mu;, and the
+   * final rapidity scale &zeta; representing the evolved TMD PDFs
+   */
+  std::function<Set<Distribution>(double const&, double const&, double const&)> BuildTmdPDFsWithTMCs(std::map<int, TmdObjects>                       const& TmdObj,
+                                                                                                     std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                                                                     std::function<double(double const&)>            const& Alphas,
+                                                                                                     int                                             const& PerturbativeOrder,
+                                                                                                     double                                          const& M,
+                                                                                                     double                                          const& Ci = 1,
+                                                                                                     double                                          const& IntEps = 1e-7);
+
+  /**
    * @brief Function that returns the matched TMD PDFs in b-space.
    * @param TmdObj: the TMD objects
    * @param CollPDFs: the set of collinear PDFs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the logarithmic perturbative order
-   * @param Ci: the initial-scale variation factor
+   * @param Ci: the initial-scale variation factor (default: 1)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD PDFs
    */
@@ -188,7 +211,7 @@ namespace apfel
    * @param CollFFs: the set of collinear FFs to be matched
    * @param Alphas: the strong coupling function
    * @param PerturbativeOrder: the logarithmic perturbative order
-   * @param Ci: the initial-scale variation factor
+   * @param Ci: the initial-scale variation factor (default: 1)
    * @return Set<Distribution>-valued function of the impact parameter
    * b<SUB>T</SUB> representing the matched TMD FFs
    */
@@ -197,6 +220,25 @@ namespace apfel
                                                               std::function<double(double const&)>            const& Alphas,
                                                               int                                             const& PerturbativeOrder,
                                                               double                                          const& Ci = 1);
+
+  /**
+   * @brief Function that returns the matched TMD PDFs in b-space
+   * including target-mass corrections (TMCs).
+   * @param TmdObj: the TMD objects
+   * @param CollPDFs: the set of collinear PDFs to be matched
+   * @param Alphas: the strong coupling function
+   * @param PerturbativeOrder: the logarithmic perturbative order
+   * @param M: the target mass
+   * @param Ci: the initial-scale variation factor (default: 1)
+   * @return Set<Distribution>-valued function of the impact parameter
+   * b<SUB>T</SUB> representing the matched TMD PDFs
+   */
+  std::function<Set<Distribution>(double const&)> MatchTmdPDFsWithTMCs(std::map<int, TmdObjects>                       const& TmdObj,
+                                                                       std::function<Set<Distribution>(double const&)> const& CollPDFs,
+                                                                       std::function<double(double const&)>            const& Alphas,
+                                                                       int                                             const& PerturbativeOrder,
+                                                                       double                                          const& M,
+                                                                       double                                          const& Ci = 1);
 
   /**
    * @brief Function that returns the mathing functions for the TMD PDFs.
@@ -392,5 +434,16 @@ namespace apfel
                                                   std::function<double(double const&)> const& Alphas,
                                                   int                                  const& PerturbativeOrder,
                                                   double                               const& Cf = 1);
+
+  /**
+   * @brief Function that returns target-mass corrections (TMDs) to
+   * TMD matching functions for PDFs.
+   * @param M: hadron mass in GeV
+   * @param b: impact parameter
+   * @param C: set of matching functions without TMDs.
+   * @return A set of operators which includes TMCs
+   * @note Based on https://arxiv.org/pdf/2605.07516.
+   */
+  Set<Operator> IncludeTMCsToTmdPdfs(double const& M, double const& b, Set<Operator> const& C);
   ///@}
 }
