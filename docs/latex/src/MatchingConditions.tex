@@ -1578,18 +1578,23 @@ conditions in Eq.~(\ref{eq:IntMatchingConds}) need to be generalised as follows:
   H^{+(n_f+1)} &=& H^{+(n_f)}\,,\\
 \\
   \displaystyle l^{-(n_f+1)}&=&\displaystyle [1+K_{ll}^-]l^{-(n_f)}\,,\\
+  \\
+  \displaystyle h^{-(n_f+1)}&=&\displaystyle K_{ll'}^-\sum_l
+                                l^{-(n_f)}\,,\\
+  H^{-(n_f+1)} &=& 0\,,
 \end{array}
 \label{eq:IntMatchingCondsN3LO}
 \end{equation}
-where the new matching functions $K_{ll'}$ and $K_{lg}$, which start
-at $\mathcal{O}(\alpha_s^3)$, are introduced and where we neglected a
-possible $K_{lh}$ that in principle exists but will not probably be
-computed in the next future. Also, we introduced the matching function
-$K_{ll}^-$ which differs from $K_{ll}$ starting from
+where the new matching functions $K_{ll'}$, $K_{ll'}^-$, and $K_{lg}$,
+which start at $\mathcal{O}(\alpha_s^3)$, are introduced and where we
+neglected a possible $K_{lh}$ that in principle exists but will
+probably not be computed in the next future. Also, we introduced the
+matching function $K_{ll}^-$ which differs from $K_{ll}$ starting from
 $\mathcal{O}(\alpha_s^3)$. With this modification, the matching
 algorithm in the evolution basis in Eq.~(\ref{eq:algorithmEv}) is more
-complicated. First we need to define two more combinations
-w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$ and $M_9$:
+complicated. First we need to define four more combinations
+w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$, $M_9$, $M_{10}$,
+and, $M_{11}$:
 \begin{equation}
   \begin{array}{lcl}
   M_1 &=& K_{gg}\,,\\
@@ -1601,12 +1606,13 @@ w.r.t. Eq.~(\ref{eq:Mcombs}), \textit{i.e.} $M_8$ and $M_9$:
   M_7 &=& K_{ll}\,,\\
   M_8 &=& K_{hg} -  K_{lg}\,,\\
   M_9 &=& K_{hh}+n_f(K_{hl}+K_{ll}-K_{ll'})\,,\\
-  M_{10} &=& K_{ll}^-\,,
+  M_{10} &=& K_{ll}^-\,,\\
+  M_{11} &=& K_{ll'}^-\,,\\
   \end{array}
   \label{eq:McombsN3LO}
 \end{equation}
 which are such that up to NNLO $M_8=M_4$, $M_9=M_5$, and
-$M_{10}=M_7$. With these at hand, we find:
+$M_{10}=M_{11}=M_7$. With these at hand, we find:
 \begin{equation}
 \footnotesize
 \left[T\mathbb{K}^{(n_f)}T^{-1}\right]_{ij} =
@@ -1655,6 +1661,8 @@ functions:
 \begin{array}{l}
 \displaystyle\int_0^1dy\,K_{ll}^{-,[n]}(y)=0\,,\\
 \\
+\displaystyle\int_0^1dy\,K_{ll'}^{-,[n]}(y)=0\,,\\
+\\
 \displaystyle\int_0^1dy\,y\left[K_{gg}^{[n]}(y)+n_fK_{lg}^{[n]}(y)+K_{hg}^{[n]}(y)\right]=0\,,\\
 \\
 \displaystyle\int_0^1dy\,y\left[K_{gl}^{[n]}(y)+K_{ll}^{[n]}(y)+n_fK_{ll'}^{[n]}(y)+K_{hl}^{[n]}(y)\right]=0\,,\\
@@ -1664,8 +1672,6 @@ functions:
 \label{eq:QCDmatchingSumeRules}
 \end{equation}
 valid at any give order $n$ in the strong coupling $\alpha_s$.
-
-
 
 \section{Evolution and matching in the physical basis}
 
@@ -1777,7 +1783,9 @@ Eq.~(\ref{eq:McombsN3LO}). Specifically we find:
 \\
 \displaystyle K_{hh}=\frac{M_5+n_fM_6}{n_f+1}\,,\\
 \\
-\displaystyle K_{ll}^-=M_{10}\,.
+\displaystyle K_{ll}^-=M_{10}\,,\\
+\\
+\displaystyle K_{ll'}^-=M_{11}\,.
 \end{array}
 \end{equation}
 
@@ -2120,9 +2128,9 @@ One explicitly has:
   \\
   l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}^-]l^{-,(n_T)}\,,\\
 \\
-  h^{-(n_T+1)} &=& h^{-(n_T)}\,,\\
+  h^{-(n_T+1)} &=& \displaystyle\mathcal{K}_{{\rm NS,s},l}^-\sum_{l'}{l'}^{-(n_T)}\,,\\
 \\
-  H^{-(n_T+1)} &=& H^{-(n_T)}\,,
+  H^{-(n_T+1)} &=& 0\,,
 \end{array}
 \end{equation}
 where, for brevity, we omitted the dependence of $\kappa_h$ of the
@@ -2159,9 +2167,9 @@ identically zero. This leads to:
   \\
   l^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},l}^-]l^{-,(n_T)}\,,\\
 \\
-  h^{-(n_T+1)} &=& h^{-(n_T)}\,,\\
+  h^{-(n_T+1)} &=& \displaystyle\mathcal{K}_{{\rm NS,s},l}^-\sum_{l'}{l'}^{-(n_T)}\,,\,,\\
 \\
-  H^{-(n_T+1)} &=& H^{-(n_T)}\,.
+  H^{-(n_T+1)} &=& 0\,.
 \end{array}
 \end{equation}
 
@@ -2190,7 +2198,9 @@ $f_i^{(n_T+1)}=f_i^{(n_T)}$ for all but:
 \\
    \gamma^{(n_T+1)}&=&\displaystyle[1+\mathcal{K}_{\gamma\gamma}^X]\gamma^{(n_T)}+\mathcal{K}_{\gamma X}X_i^{+(n_T)}\,,\\
   \\
-  q^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},q}^-]q^{-,(n_T)}\,,
+  q^{-(n_T+1)} &=& [1+\mathcal{K}_{{\rm NS},q}^-]q^{-,(n_T)}\,,\\
+\\
+  Q^{-(n_T+1)} &=&\displaystyle\mathcal{K}_{{\rm NS},s,q}^-\left(\sum_{j=1}^{n_D} D_j^{+(n_T)}+\sum_{j=1}^{n_U} U_j^{+(n_T)}\right)\,,\\
 \end{array}
 \label{eq:MatchingQuarks}
 \end{equation}
@@ -2439,10 +2449,10 @@ Eq.~(\ref{eq:MatchingQuarks}), staring fron NLO accuracy, we need
 specify the various functions $\mathcal{K}$. At each heavy-quark
 threshold, the functions $\mathcal{K}$ also depend on the ration
 $\kappa_X=\mu_X/m_X$, where $\mu_X$ and $m_X$ are the threshold and
-the mass of the quarks that is becoming active. We have a total of 12
+the mass of the quarks that is becoming active. We have a total of 13
 functions to determine:
 \begin{equation}
-\mathcal{K}_{Qg},\mathcal{K}_{X\gamma},\mathcal{K}_{Qq'},\mathcal{K}_{XX},\mathcal{K}_{qg},\mathcal{K}_{{\rm NS},q},\mathcal{K}_{qq'},\mathcal{K}_{gg},\mathcal{K}_{gq},\mathcal{K}_{gQ},\mathcal{K}_{\gamma\gamma}^X,\mathcal{K}_{\gamma X}\,,
+\mathcal{K}_{Qg},\mathcal{K}_{X\gamma},\mathcal{K}_{Qq'},\mathcal{K}_{XX},\mathcal{K}_{qg},\mathcal{K}_{{\rm NS},q},\mathcal{K}_{{\rm NS},s,q},\mathcal{K}_{qq'},\mathcal{K}_{gg},\mathcal{K}_{gq},\mathcal{K}_{gQ},\mathcal{K}_{\gamma\gamma}^X,\mathcal{K}_{\gamma X}\,,
 \end{equation}
 As already discussed above, if $X$ is a lepton ($X=L$), many of these
 vanish (see Eq.~(\ref{eq:IfLeptonMatching})). If instead $X$ is either
@@ -2510,10 +2520,16 @@ K_{gh}&\quad X=D,U\,,\\
 \displaystyle\mathcal{K}_{{\rm NS},q}^-&=&\displaystyle \left\{ 
 \begin{array}{ll}
 K_{ll}^-&\quad X=D,U\,,\\
-0 & \quad X=L\,.
+0 & \quad X=L\,,
 \end{array}
 \right.\\
 \\
+\displaystyle\mathcal{K}_{{\rm NS},s,q}^-&=&\displaystyle \left\{ 
+\begin{array}{ll}
+K_{ll'}^-&\quad X=D,U\,,\\
+0 & \quad X=L\,.
+\end{array}
+\right.
 \end{array}
 \end{equation}
 
@@ -2600,7 +2616,7 @@ Eq.~(\ref{eq:QCDmatchingSumeRules}). In the presence of QED
 corrections, we refer to the system in Eq.~(\ref{eq:MatchingQuarks})
 and from the valence sum rule we derive:
 \begin{equation}
-\int_0^1dy\, \mathcal{K}_{{\rm NS},q}^{-,[a,b]}(y)=0\,,
+\int_0^1dy\, \mathcal{K}_{{\rm NS},q}^{-,[a,b]}(y)=\int_0^1dy\, \mathcal{K}_{{\rm NS},s,q}^{-,[a,b]}(y)=0\,,
 \end{equation}
 while from the momentum sum rule we find:
 \begin{equation}
