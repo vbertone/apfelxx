@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Build evolved TMD PDFs</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> EvTMDPDFs = BuildTmdPDFs(TmdObj, CollPDFs, Alphas, <a id="_a10" name="_a10"></a><a class="code hl_enumvalue" href="group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a949a7f277ba11f30498415ab0951e8cc">apfel::LogAccuracy::NNNLL</a>);</div>
+<div class="line">  <span class="comment">//const auto EvTMDPDFs = BuildTmdPDFsWithTMCs(TmdObj, CollPDFs, Alphas, apfel::LogAccuracy::NNNLL, apfel::ProtonMass);</span></div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Get Drell-Yan hard-factor function</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> hcs = HardFactor(<span class="stringliteral">&quot;DY&quot;</span>, TmdObj, Alphas, <a class="code hl_enumvalue" href="group__PertOrds.html#gga8c509ac51bd27e1f97b8e5cb520df446a949a7f277ba11f30498415ab0951e8cc">apfel::LogAccuracy::NNNLL</a>)(Q);</div>

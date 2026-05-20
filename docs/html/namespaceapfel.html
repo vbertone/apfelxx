@@ -195,6 +195,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub><sup>3</sup>) constant term.  <a href="classapfel_1_1APS3Hq__0.html#details">More...</a><br /></td></tr>
 <tr class="memitem:APS3Hq_5F0_5Fome" id="r_APS3Hq_5F0_5Fome"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1APS3Hq__0__ome.html">APS3Hq_0_ome</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub><sup>3</sup>) constant term.  <a href="classapfel_1_1APS3Hq__0__ome.html#details">More...</a><br /></td></tr>
+<tr class="memitem:APS3Hqs_5F0_5Fome" id="r_APS3Hqs_5F0_5Fome"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1APS3Hqs__0__ome.html">APS3Hqs_0_ome</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub><sup>3</sup>) constant term.  <a href="classapfel_1_1APS3Hqs__0__ome.html#details">More...</a><br /></td></tr>
 <tr class="memitem:APS3qqQ_5F0" id="r_APS3qqQ_5F0"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1APS3qqQ__0.html">APS3qqQ_0</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">O(&alpha;<sub>s</sub><sup>3</sup>) constant term.  <a href="classapfel_1_1APS3qqQ__0.html#details">More...</a><br /></td></tr>
 <tr class="memitem:APS3qqQ_5F0_5Fome" id="r_APS3qqQ_5F0_5Fome"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1APS3qqQ__0__ome.html">APS3qqQ_0_ome</a></td></tr>
@@ -1282,6 +1284,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The term structure that contains all the objects of a single term of a double object.  <a href="structapfel_1_1term.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Timer" id="r_Timer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1Timer.html">Timer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Timer.html" title="The Timer class computes the time elapsed between start and stop.">Timer</a> class computes the time elapsed between start and stop.  <a href="classapfel_1_1Timer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:TMCoperator" id="r_TMCoperator"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1TMCoperator.html">TMCoperator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution between an &quot;E...">Operator</a> that implements target mass corrections to TMD matching functions.  <a href="classapfel_1_1TMCoperator.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TmdObjects" id="r_TmdObjects"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure that contains all precomputed quantities needed to perform the TMD evolution, matching to the collinear PDFs, and computation of cross sections, i.e. the perturbative coefficients of matching functions, all anomalous dimensions, and hard functions.  <a href="structapfel_1_1TmdObjects.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TwoBodyPhaseSpace" id="r_TwoBodyPhaseSpace"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classapfel_1_1TwoBodyPhaseSpace.html">TwoBodyPhaseSpace</a></td></tr>
@@ -2012,10 +2016,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:a193f579d25b4a494e70f996395641b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched and evolved TMD PDFs in b-space as functions of the final scale and rapidity.  <br /></td></tr>
 <tr class="memitem:a7b93600e0a3f8b46c1c50ad768af289c" id="r_a7b93600e0a3f8b46c1c50ad768af289c"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a7b93600e0a3f8b46c1c50ad768af289c">BuildTmdFFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollFFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
 <tr class="memdesc:a7b93600e0a3f8b46c1c50ad768af289c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched and evolved TMD FFs in b-space as functions of the final scale and rapidity.  <br /></td></tr>
+<tr class="memitem:a47275eba81e603289d761f54cb4a3725" id="r_a47275eba81e603289d761f54cb4a3725"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;, double const &amp;, double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a47275eba81e603289d761f54cb4a3725">BuildTmdPDFsWithTMCs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollPDFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;M, double const &amp;Ci=1, double const &amp;IntEps=1e-7)</td></tr>
+<tr class="memdesc:a47275eba81e603289d761f54cb4a3725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched and evolved TMD PDFs in b-space as functions of the final scale and rapidity and including target-mass corrections (TMCs).  <br /></td></tr>
 <tr class="memitem:a49344b8e01187276f0b247d170bc3b26" id="r_a49344b8e01187276f0b247d170bc3b26"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a49344b8e01187276f0b247d170bc3b26">MatchTmdPDFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollPDFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
 <tr class="memdesc:a49344b8e01187276f0b247d170bc3b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched TMD PDFs in b-space.  <br /></td></tr>
 <tr class="memitem:a439e7dcdb08932f7a2ca78cffda1af00" id="r_a439e7dcdb08932f7a2ca78cffda1af00"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a439e7dcdb08932f7a2ca78cffda1af00">MatchTmdFFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollFFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
 <tr class="memdesc:a439e7dcdb08932f7a2ca78cffda1af00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched TMD FFs in b-space.  <br /></td></tr>
+<tr class="memitem:a4080faa8b1d51faa59345f09e6693645" id="r_a4080faa8b1d51faa59345f09e6693645"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4080faa8b1d51faa59345f09e6693645">MatchTmdPDFsWithTMCs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;CollPDFs, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;M, double const &amp;Ci=1)</td></tr>
+<tr class="memdesc:a4080faa8b1d51faa59345f09e6693645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the matched TMD PDFs in b-space including target-mass corrections (TMCs).  <br /></td></tr>
 <tr class="memitem:a05c2fea27dd7ef345b9da22ce8a63a5d" id="r_a05c2fea27dd7ef345b9da22ce8a63a5d"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a05c2fea27dd7ef345b9da22ce8a63a5d">MatchingFunctionsPDFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
 <tr class="memdesc:a05c2fea27dd7ef345b9da22ce8a63a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the mathing functions for the TMD PDFs.  <br /></td></tr>
 <tr class="memitem:ad153699746a0c4dd12021c0bb949fad5" id="r_ad153699746a0c4dd12021c0bb949fad5"><td class="memItemLeft">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;(double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad153699746a0c4dd12021c0bb949fad5">MatchingFunctionsFFs</a> (std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Ci=1)</td></tr>
@@ -2038,6 +2046,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:ac05a7734973ff2e62fdee1441a22bba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the perturbative part of the Collins-Soper kernel for quarks.  <br /></td></tr>
 <tr class="memitem:a94e0774ab3a271603a3463715b61c1c2" id="r_a94e0774ab3a271603a3463715b61c1c2"><td class="memItemLeft">std::function&lt; double(double const &amp;)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a94e0774ab3a271603a3463715b61c1c2">HardFactor</a> (std::string const &amp;Process, std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;TmdObj, std::function&lt; double(double const &amp;)&gt; const &amp;Alphas, int const &amp;PerturbativeOrder, double const &amp;Cf=1)</td></tr>
 <tr class="memdesc:a94e0774ab3a271603a3463715b61c1c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the hard factor.  <br /></td></tr>
+<tr class="memitem:a32fdbb9069aa3161b710c0a2a84182a7" id="r_a32fdbb9069aa3161b710c0a2a84182a7"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a32fdbb9069aa3161b710c0a2a84182a7">IncludeTMCsToTmdPdfs</a> (double const &amp;M, double const &amp;b, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; const &amp;C)</td></tr>
+<tr class="memdesc:a32fdbb9069aa3161b710c0a2a84182a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns target-mass corrections (TMDs) to TMD matching functions for PDFs.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -3697,6 +3707,67 @@ Basis rotations</h2></td></tr>
 
 </div>
 </div>
+<a id="a47275eba81e603289d761f54cb4a3725" name="a47275eba81e603289d761f54cb4a3725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47275eba81e603289d761f54cb4a3725">&#9670;&#160;</a></span>BuildTmdPDFsWithTMCs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const  &amp;, double const  &amp;, double const  &amp;)&gt; apfel::BuildTmdPDFsWithTMCs </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>TmdObj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>CollPDFs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>Alphas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>PerturbativeOrder</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>M</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>Ci</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>IntEps</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1e-7</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the matched and evolved TMD PDFs in b-space as functions of the final scale and rapidity and including target-mass corrections (TMCs). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
+    <tr><td class="paramname">CollPDFs</td><td>the set of collinear PDFs to be matched </td></tr>
+    <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
+    <tr><td class="paramname">PerturbativeOrder</td><td>the logarithmic perturbative order </td></tr>
+    <tr><td class="paramname">M</td><td>the target mass </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
+    <tr><td class="paramname">IntEps</td><td>the integration accuracy (default: 10<sup>-7</sup>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classapfel_1_1Set.html">Set&lt;Distribution&gt;</a>-valued function of the impact parameter b<sub>T</sub>, the final renormalisation scale &mu;, and the final rapidity scale &zeta; representing the evolved TMD PDFs </dd></dl>
+
+</div>
+</div>
 <a id="ac05a7734973ff2e62fdee1441a22bba2" name="ac05a7734973ff2e62fdee1441a22bba2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac05a7734973ff2e62fdee1441a22bba2">&#9670;&#160;</a></span>CollinsSoperKernel()</h2>
 
@@ -5168,6 +5239,44 @@ template&lt;typename T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>C++ adaptation of the FORTRAN implementation discussed in <a href="https://arxiv.org/pdf/1809.07084.pdf">https://arxiv.org/pdf/1809.07084.pdf</a>. The argument x is limited to the interval [0, sqrt(2)-1]. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="polylog_test_8cc-example.html#a1">polylog_test.cc</a>.</dd>
 </dl>
+
+</div>
+</div>
+<a id="a32fdbb9069aa3161b710c0a2a84182a7" name="a32fdbb9069aa3161b710c0a2a84182a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32fdbb9069aa3161b710c0a2a84182a7">&#9670;&#160;</a></span>IncludeTMCsToTmdPdfs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; apfel::IncludeTMCsToTmdPdfs </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>M</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>C</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns target-mass corrections (TMDs) to TMD matching functions for PDFs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>hadron mass in GeV </td></tr>
+    <tr><td class="paramname">b</td><td>impact parameter </td></tr>
+    <tr><td class="paramname">C</td><td>set of matching functions without TMDs. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A set of operators which includes TMCs </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Based on <a href="https://arxiv.org/pdf/2605.07516">https://arxiv.org/pdf/2605.07516</a>. </dd></dl>
 
 </div>
 </div>
@@ -9024,7 +9133,7 @@ template&lt;typename T&gt; </div>
     <tr><td class="paramname">CollFFs</td><td>the set of collinear FFs to be matched </td></tr>
     <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the logarithmic perturbative order </td></tr>
-    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
   </table>
   </dd>
 </dl>
@@ -9073,7 +9182,62 @@ template&lt;typename T&gt; </div>
     <tr><td class="paramname">CollPDFs</td><td>the set of collinear PDFs to be matched </td></tr>
     <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
     <tr><td class="paramname">PerturbativeOrder</td><td>the logarithmic perturbative order </td></tr>
-    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classapfel_1_1Set.html">Set&lt;Distribution&gt;</a>-valued function of the impact parameter b<sub>T</sub> representing the matched TMD PDFs </dd></dl>
+
+</div>
+</div>
+<a id="a4080faa8b1d51faa59345f09e6693645" name="a4080faa8b1d51faa59345f09e6693645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4080faa8b1d51faa59345f09e6693645">&#9670;&#160;</a></span>MatchTmdPDFsWithTMCs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const  &amp;)&gt; apfel::MatchTmdPDFsWithTMCs </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; int, <a class="el" href="structapfel_1_1TmdObjects.html">TmdObjects</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>TmdObj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> &gt;(double const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>CollPDFs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; double(double const &amp;)&gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>Alphas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;</td>          <td class="paramname"><span class="paramname"><em>PerturbativeOrder</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>M</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>Ci</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the matched TMD PDFs in b-space including target-mass corrections (TMCs). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TmdObj</td><td>the TMD objects </td></tr>
+    <tr><td class="paramname">CollPDFs</td><td>the set of collinear PDFs to be matched </td></tr>
+    <tr><td class="paramname">Alphas</td><td>the strong coupling function </td></tr>
+    <tr><td class="paramname">PerturbativeOrder</td><td>the logarithmic perturbative order </td></tr>
+    <tr><td class="paramname">M</td><td>the target mass </td></tr>
+    <tr><td class="paramname">Ci</td><td>the initial-scale variation factor (default: 1) </td></tr>
   </table>
   </dd>
 </dl>
