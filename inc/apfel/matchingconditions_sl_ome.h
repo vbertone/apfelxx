@@ -296,6 +296,19 @@ namespace apfel
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
    */
+  class APS3Hqs_0_ome: public Expression
+  {
+  public:
+    APS3Hqs_0_ome(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+    ome::ome_nf<double> const& _ome_r;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) constant term.
+   */
   class AS3Hg_0_ome: public Expression
   {
   public:

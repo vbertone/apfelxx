@@ -71,6 +71,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M8,  Zero});
     MatchLO.insert({MatchingBasisQCD::M9,  Zero});
     MatchLO.insert({MatchingBasisQCD::M10, Zero});
+    MatchLO.insert({MatchingBasisQCD::M11, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -175,6 +176,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M8,  Zero});
     MatchLO.insert({MatchingBasisQCD::M9,  Zero});
     MatchLO.insert({MatchingBasisQCD::M10, Zero});
+    MatchLO.insert({MatchingBasisQCD::M11, Zero});
 
     // ===============================================================
     // LO splitting function operators
@@ -279,6 +281,7 @@ namespace apfel
     MatchLO.insert({MatchingBasisQCD::M8,  Zero});
     MatchLO.insert({MatchingBasisQCD::M9,  Zero});
     MatchLO.insert({MatchingBasisQCD::M10, Zero});
+    MatchLO.insert({MatchingBasisQCD::M11, Zero});
 
     // ===============================================================
     // LO splitting function operators

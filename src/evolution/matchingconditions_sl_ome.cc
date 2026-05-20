@@ -268,6 +268,18 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  APS3Hqs_0_ome::APS3Hqs_0_ome(int const& nf):
+    Expression(),
+    _nf(nf),
+    _ome_r(ome::AQqPSs_reg[3][0])
+  {
+  }
+  double APS3Hqs_0_ome::Regular(double const& x) const
+  {
+    return _ome_r(_nf, x);
+  }
+
+  //_________________________________________________________________________________
   AS3Hg_0_ome::AS3Hg_0_ome(int const& nf):
     Expression(),
     _nf(nf),

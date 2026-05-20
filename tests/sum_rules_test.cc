@@ -112,6 +112,7 @@ int main()
                                                                                      + nf * ( K.at(apfel::MatchingBasisQCD::M3) + K.at(apfel::MatchingBasisQCD::M6) ) ) * MSRDist).Evaluate(xmin) << std::endl;
       std::cout << "- Valence sum rule: " << std::endl;
       std::cout << "  * VSR1 = " << (K.at(apfel::MatchingBasisQCD::M10) * VSRDist).Evaluate(xmin) << std::endl;
+      std::cout << "  * VSR2 = " << (K.at(apfel::MatchingBasisQCD::M11) * VSRDist).Evaluate(xmin) << std::endl;
     }
 
   return 0;

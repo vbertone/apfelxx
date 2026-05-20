@@ -17,6 +17,11 @@ namespace apfel
     for (int i = Object::TAUP; i <= Object::TAUM; i++)
       _rules[i] = {{ONE, i, 1}};
 
+    // Return if nd + nu + nl = 9 because there is no threshold above
+    // top.
+    if (nd + nu + nl == 9)
+      return;
+
     // Helper vectors
     std::vector<int> LightQuarksPlus(nd + nu);
     std::vector<int> LightQuarksMinus(nd + nu);
@@ -70,6 +75,17 @@ namespace apfel
     // Light-quarks minus-type distributions
     for (int i : LightQuarksMinus)
       _rules[i].push_back({KNSqm, i, 1});
+
+    // Heavy-quarks minus-type distributions
+    int ihm = -1;
+    if (species == PartonSpecies::DOWNTYPEQUARK)
+      ihm = 11 + nd;
+    else if (species == PartonSpecies::UPTYPEQUARK)
+      ihm = 14 + nu;
+    else
+      return;
+    for (int i : LightQuarksMinus)
+      _rules[ihm].push_back({KNSsqm, i, 1});
   }
 
   //_________________________________________________________________________________

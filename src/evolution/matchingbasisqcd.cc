@@ -14,14 +14,22 @@ namespace apfel
   MatchingBasisQCD::MatchingBasisQCD(int const& nf):
     ConvolutionMap{"MatchingBasisQCD_" + std::to_string(nf)}
   {
-    // All valence-like distributions match multiplicatively through
-    // M7.
-    for (int k = 1; k <= 6; k++)
+    // Useful definitions
+    const int nf1 = nf + 1;
+    const int enf = 2 * nf1;
+    const int onf = enf - 1;
+
+    // Total valence distribution
+    _rules[2] = {{M0, 2, 1}, {M10, 2, 1}, {M11, 2, 1}};
+
+    // Light valence-like distributions
+    for (int k = 2; k <= nf; k++)
       _rules[2 * k] = {{M0, 2 * k, 1}, {M10, 2 * k, 1}};
 
-    // Now we consider singlet like distributions
-    const int nf1 = nf + 1;
-    const int onf = 2 * nf1 - 1;
+    // Heavy valence-like distributions
+    _rules[enf] = {{M0, 2, 1}, {M10, 2, 1}, {M11, 2, - static_cast<double>(nf)}};
+    for (int k = nf + 2; k <= 6; k++)
+      _rules[2 * k] = _rules[2];
 
     // Gluon
     _rules[0] = {{M0, 0, 1}, {M1, 0, 1}, {M2, 1, 1./6.}, {M3, onf, - 1. / nf1}};
@@ -99,6 +107,14 @@ namespace apfel
     // Leading-order matching
     for (int i = - 6 + 6; i <= 6 + 6; i++)
       _rules[i] = {{ONE, i, 1}};
+
+    // Return if nf = 6 because there is no threshold above top
+    if (nf == 6)
+      return;
+
+    // Heavy minus-type distribution
+    for (int i = - nf + 6; i <= - 1 + 6; i++)
+      _rules[- nf - 1 + 6].push_back({KLLPm, i, 1});
 
     // Light minus-type distributions
     for (int i = - nf + 6; i <= - 1 + 6; i++)

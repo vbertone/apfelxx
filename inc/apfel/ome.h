@@ -24,6 +24,7 @@
 #include "apfel/ome/AqqQNSEven.h"
 #include "apfel/ome/AqqQNSOdd.h"
 #include "apfel/ome/AQqPS.h"
+#include "apfel/ome/AQqPSs.h"
 #include "apfel/ome/AqqQPS.h"
 #include "apfel/ome/AqgQ.h"
 #include "apfel/ome/AgqQ.h"
