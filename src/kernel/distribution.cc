@@ -159,7 +159,7 @@ namespace apfel
   //_________________________________________________________________________
   Distribution Distribution::Derivative() const
   {
-    return Distribution{this->_grid, [=] (double const& x) -> double { return this->Derive(x - eps10); } };
+    return Distribution{this->_grid, [=, this] (double const& x) -> double { return this->Derive(x - eps10); } };
   }
 
   //_________________________________________________________________________

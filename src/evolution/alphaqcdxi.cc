@@ -25,7 +25,7 @@ namespace apfel
     _xi(xi)
   {
     // Beta function lambda function
-    _BetaFunction = [=] (int const& nf, double const& as)-> double
+    _BetaFunction = [=, this] (int const& nf, double const& as)-> double
     {
       const double lambda = - 2 * as * beta0qcd(nf) * log(_xi) / FourPi;
       double bt = 0;
@@ -39,7 +39,7 @@ namespace apfel
     };
 
     // Matching condition lambda function
-    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
+    _MatchingConditions = [=, this] (bool const& Up, int const& nf, double const& Coup) -> double
     {
       // Compute log of muth2 / m2
       double LogKth = 0;

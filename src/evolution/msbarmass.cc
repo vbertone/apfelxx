@@ -32,7 +32,7 @@ namespace apfel
         AlphasTh.insert({nf, std::pair<double, double>{Alphas(Masses[nf-1] * ( 1 - eps8 )), Alphas(Masses[nf-1] * ( 1 + eps8 ))}});
 
     // Anomalous-dimension lambda function
-    _AnomalousDimension = [=] (int const& nf, double const& as)-> double
+    _AnomalousDimension = [=, this] (int const& nf, double const& as)-> double
     {
       double ad = 0;
       for (int i = 0; i <= _pt; i++)
@@ -41,7 +41,7 @@ namespace apfel
     };
 
     // Matching condition lambda function
-    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& mass) -> double
+    _MatchingConditions = [=, this] (bool const& Up, int const& nf, double const& mass) -> double
     {
       // Get coupling above or below threshold as appropriate
       const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;

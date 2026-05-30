@@ -23,7 +23,7 @@ namespace apfel
     _kappa(kappa)
   {
     // Matching condition lambda function
-    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
+    _MatchingConditions = [=, this] (bool const& Up, int const& nf, double const& Coup) -> double
     {
       // Compute log of muth2 / m2
       double LogKth = 0;

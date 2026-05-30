@@ -27,7 +27,7 @@ namespace apfel
                    _pt(pt)
   {
     // Beta function lambda function
-    _BetaFunction = [=] (int const& nfl, matrix<double> const& a)-> matrix<double>
+    _BetaFunction = [=, this] (int const& nfl, matrix<double> const& a)-> matrix<double>
     {
       const std::pair<int, int> nf_nl = NFL(nfl);
       const int nf = nf_nl.first;
@@ -54,7 +54,7 @@ namespace apfel
     };
 
     // Matching condition lambda function (only acting on the QCD coupling)
-    _MatchingConditions = [=] (bool const& Up, int const& nf, double const& Coup) -> double
+    _MatchingConditions = [=, this] (bool const& Up, int const& nf, double const& Coup) -> double
     {
       const double sgn = (Up ? 1 : -1);
       const double ep  = Coup / FourPi;

@@ -23,7 +23,7 @@ namespace apfel
     _pt(pt)
   {
     // Beta function lambda function
-    _BetaFunction = [=] (int const& nfl, double const& a)-> double
+    _BetaFunction = [=, this] (int const& nfl, double const& a)-> double
     {
       const double Qr = this->_Thresholds[nfl-1] + eps8;
       const int nf = NF(Qr, QuarkThresholds);

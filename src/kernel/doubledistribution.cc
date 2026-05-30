@@ -602,7 +602,7 @@ namespace apfel
   //_________________________________________________________________________
   DoubleDistribution DoubleDistribution::Derivative() const
   {
-    return DoubleDistribution{this->_g1, this->_g2, [=] (double const& x1, double const& x2) -> double { return this->Derive(x1 - eps10, x2 - eps10); } };
+    return DoubleDistribution{this->_g1, this->_g2, [=, this] (double const& x1, double const& x2) -> double { return this->Derive(x1 - eps10, x2 - eps10); } };
   }
 
   //_________________________________________________________________________

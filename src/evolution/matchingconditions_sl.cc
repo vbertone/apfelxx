@@ -560,7 +560,7 @@ namespace apfel
     double nfr = _nf;
     double asr = 1;
     double LLr = 0;
-    const double Iansplu1 = Integrator{[=] (double const& y) -> double
+    const double Iansplu1 = Integrator{[=, this] (double const& y) -> double
       {
         double yr  = y;
         double nfr = _nf;
@@ -569,7 +569,7 @@ namespace apfel
         return ansplu1_(&yr, &nfr, &asr, &LLr);
       }
     }.integrate(0, x, eps5);
-    const double Iansplu2 = Integrator{[=] (double const& y) -> double
+    const double Iansplu2 = Integrator{[=, this] (double const& y) -> double
       {
         double yr  = y;
         double nfr = _nf;
@@ -608,7 +608,7 @@ namespace apfel
     double nfr = _nf;
     double asr = 1;
     double LLr = 0;
-    const double Ioplus1 = Integrator{[=] (double const& y) -> double
+    const double Ioplus1 = Integrator{[=, this] (double const& y) -> double
       {
         double yr  = y;
         double nfr = _nf;
@@ -617,7 +617,7 @@ namespace apfel
         return oplus1_(&asr, &LLr, &nfr, &yr);
       }
     }.integrate(0, x, eps5);
-    const double Ioplus2 = Integrator{[=] (double const& y) -> double
+    const double Ioplus2 = Integrator{[=, this] (double const& y) -> double
       {
         double yr  = y;
         double nfr = _nf;

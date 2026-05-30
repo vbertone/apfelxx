@@ -24,7 +24,7 @@ namespace apfel
   {
     // Function to compute LambdaQCD at nl = nf - 1 give LambdaQCD at
     // nf. Given Eq. (11) of https://arxiv.org/pdf/hep-ph/9706430.
-    const std::function<double(double const&, int const&)> LambdaQCDnl = [=] (double const& LambdaQCDnf, int const& nf) -> double
+    const std::function<double(double const&, int const&)> LambdaQCDnl = [=, this] (double const& LambdaQCDnf, int const& nf) -> double
     {
       // Useful definitions
       const double nl   = nf - 1;
@@ -68,7 +68,7 @@ namespace apfel
 
     // Function to compute LambdaQCD at nf = nl + 1 give LambdaQCD at
     // nl. Derived from Eq. (11) of https://arxiv.org/pdf/hep-ph/9706430.
-    const std::function<double(double const&, int const&)> LambdaQCDnf = [=] (double const& LambdaQCDnl, int const& nl) -> double
+    const std::function<double(double const&, int const&)> LambdaQCDnf = [=, this] (double const& LambdaQCDnl, int const& nl) -> double
     {
       // Useful definitions
       const double nf   = nl + 1;
@@ -181,7 +181,7 @@ namespace apfel
   double AlphaQCDLambda::EvaluateAPT(double const& mu, std::function<std::complex<double>(std::complex<double> const&)> const& f, double const& eps) const
   {
     const int nf = NF(mu, _Thresholds);
-    return apfel::Integrator{[=] (double const& z) -> double
+    return apfel::Integrator{[=, this] (double const& z) -> double
       {
         const double t = 1 / ( 1 - z ) - 1 / z;
         const double Jac = 1 / pow(1 - z, 2) + 1 / pow(z, 2);
