@@ -2534,7 +2534,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb}});
           }
-        DglapObj.insert({nf,obj});
+        DglapObj.insert({nf, obj});
       }
     t.stop();
 
@@ -2885,7 +2885,7 @@ namespace apfel
             obj.SplittingFunctions.insert({ 0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.MatchingConditions.insert({ 0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
           }
-        DglapObj.insert({nf,obj});
+        DglapObj.insert({nf, obj});
       }
     t.stop();
 
@@ -3026,7 +3026,7 @@ namespace apfel
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
           }
-        DglapObj.insert({nf,obj});
+        DglapObj.insert({nf, obj});
       }
     t.stop();
 
@@ -3164,7 +3164,7 @@ namespace apfel
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
             obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
           }
-        DglapObj.insert({nf,obj});
+        DglapObj.insert({nf, obj});
       }
     t.stop();
 
