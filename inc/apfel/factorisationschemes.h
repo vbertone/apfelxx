@@ -33,6 +33,96 @@ namespace apfel
                                                                                double              const& IntEps = 1e-5);
 
   /**
+   * @brief The InitializeSchemChangeKernelsPHYS function precomputes
+   * the perturbative coefficients of of the PHYS to MSbar
+   * scheme-change kernels and store them into a A map of maps of
+   * Set<Operator> objects.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of maps of Set<Operator> objects, one for each
+   * possible nf and perturbative order
+   */
+  std::map<int, std::map<int, Set<Operator>>> InitializeSchemeChangeKernelsPHYS(Grid                const& g,
+                                                                                std::vector<double> const& Thresholds,
+                                                                                double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeSchemChangeKernelsPOS function precomputes
+   * the perturbative coefficients of of the POS to MSbar
+   * scheme-change kernels and store them into a A map of maps of
+   * Set<Operator> objects.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of maps of Set<Operator> objects, one for each
+   * possible nf and perturbative order
+   */
+  std::map<int, std::map<int, Set<Operator>>> InitializeSchemeChangeKernelsPOS(Grid                const& g,
+                                                                               std::vector<double> const& Thresholds,
+                                                                               double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeSchemChangeKernelsMPOS function precomputes
+   * the perturbative coefficients of of the MPOS to MSbar
+   * scheme-change kernels and store them into a A map of maps of
+   * Set<Operator> objects.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of maps of Set<Operator> objects, one for each
+   * possible nf and perturbative order
+   */
+  std::map<int, std::map<int, Set<Operator>>> InitializeSchemeChangeKernelsMPOS(Grid                const& g,
+                                                                                std::vector<double> const& Thresholds,
+                                                                                double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeSchemChangeKernelsMPOSDelta function precomputes
+   * the perturbative coefficients of of the MPOSDelta to MSbar
+   * scheme-change kernels and store them into a A map of maps of
+   * Set<Operator> objects.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of maps of Set<Operator> objects, one for each
+   * possible nf and perturbative order
+   */
+  std::map<int, std::map<int, Set<Operator>>> InitializeSchemeChangeKernelsMPOSDelta(Grid                const& g,
+                                                                                     std::vector<double> const& Thresholds,
+                                                                                     double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeSchemChangeKernelsAversa function precomputes
+   * the perturbative coefficients of of the Aversa to MSbar
+   * scheme-change kernels and store them into a A map of maps of
+   * Set<Operator> objects.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of maps of Set<Operator> objects, one for each
+   * possible nf and perturbative order
+   */
+  std::map<int, std::map<int, Set<Operator>>> InitializeSchemeChangeKernelsAversa(Grid                const& g,
+                                                                                  std::vector<double> const& Thresholds,
+                                                                                  double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeSchemChangeKernelsDIS function precomputes
+   * the perturbative coefficients of of the DIS to MSbar
+   * scheme-change kernels and store them into a A map of maps of
+   * Set<Operator> objects.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of maps of Set<Operator> objects, one for each
+   * possible nf and perturbative order
+   */
+  std::map<int, std::map<int, Set<Operator>>> InitializeSchemeChangeKernelsDIS(Grid                const& g,
+                                                                               std::vector<double> const& Thresholds,
+                                                                               double              const& IntEps = 1e-5);
+
+  /**
    * @brief The ChangeFactorisationSchemeMSbarToK function changes the
    * factoristion scheme from MSbar to the scheme coded in the input
    * kernels K.

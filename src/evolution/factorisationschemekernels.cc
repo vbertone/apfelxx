@@ -21,9 +21,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return 2 * TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
-           + TR * ( -2 * x2 + 2 * x - 1 ) * lnx
-           + TR * ( -2 * x2 + 2 * x - 1 );
+    return 2 * ( 2 * TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
+                 + TR * ( -2 * x2 + 2 * x - 1 ) * lnx
+                 + TR * ( -2 * x2 + 2 * x - 1 ) );
   }
 
   //_________________________________________________________________________________
@@ -36,9 +36,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return 2 * CF * ( x2 - 2 * x + 2 ) / x * ln1mx
-           + CF * ( - x2 + 2 * x - 2 ) / x * lnx
-           + CF * ( - x2 + 2 * x - 2 ) / x;
+    return 2 * ( 2 * CF * ( x2 - 2 * x + 2 ) / x * ln1mx
+                 + CF * ( - x2 + 2 * x - 2 ) / x * lnx
+                 + CF * ( - x2 + 2 * x - 2 ) / x );
   }
 
   //_________________________________________________________________________________
@@ -49,7 +49,7 @@ namespace apfel
   double K1qqMPOS::Regular(double const& x) const
   {
     const double xm1 = x - 1;
-    return ( 350. / 3. ) * CF * x * x * xm1 * xm1;
+    return 2 * ( ( 350. / 3. ) * CF * x * x * xm1 * xm1 );
   }
 
   //_________________________________________________________________________________
@@ -81,7 +81,7 @@ namespace apfel
   double K1ggMPOS::Regular(double const& x) const
   {
     const double xm1 = x - 1;
-    return ( 475. / 3. ) * TR * _nf * x * x * xm1 * xm1;
+    return 2 * ( ( 475. / 3. ) * TR * _nf * x * x * xm1 * xm1 );
   }
 
   //_________________________________________________________________________________
@@ -91,7 +91,7 @@ namespace apfel
   }
   double K1qqMPOSDelta::Local(double const&) const
   {
-    return ( 35. / 18. ) * CF;
+    return 2 * ( ( 35. / 18. ) * CF );
   }
 
   //_________________________________________________________________________________
@@ -122,7 +122,7 @@ namespace apfel
   }
   double K1ggMPOSDelta::Local(double const&) const
   {
-    return ( 95. / 36. ) * TR * _nf;
+    return 2 * ( ( 95. / 36. ) * TR * _nf );
   }
 
   //_________________________________________________________________________________
@@ -217,18 +217,18 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return CF * ( - x - 1 ) * ln1mx
-           + CF * ( x2 + 1 ) / ( x - 1 ) * lnx
-           + CF * ( 2 * x + 3 );
+    return 2 * ( CF * ( - x - 1 ) * ln1mx
+                 + CF * ( x2 + 1 ) / ( x - 1 ) * lnx
+                 + CF * ( 2 * x + 3 ) );
   }
   double K1qqAversa::Singular(double const& x) const
   {
-    return ( -3. / 2. * CF + 2 * CF * log(1 - x) ) / ( 1 - x );
+    return 2 * ( ( -3. / 2. * CF + 2 * CF * log(1 - x) ) / ( 1 - x ) );
   }
   double K1qqAversa::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return - CF * ( Pi2 / 3 + 9. / 2. ) - 3. / 2. * CF * ln1mx + CF * ln1mx * ln1mx;
+    return 2 * ( - CF * ( Pi2 / 3 + 9. / 2. ) - 3. / 2. * CF * ln1mx + CF * ln1mx * ln1mx );
   }
 
   //_________________________________________________________________________________
@@ -241,8 +241,8 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
-           + TR * ( -2 * x2 + 2 * x - 1 ) * lnx;
+    return 2 * ( TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
+                 + TR * ( -2 * x2 + 2 * x - 1 ) * lnx );
   }
 
   //_________________________________________________________________________________
@@ -255,9 +255,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return CF * ( x2 - 2 * x + 2 ) / x * ln1mx
-           + CF * ( - x2 + 2 * x - 2 ) / x * lnx
-           - 4. / 3. * CF;
+    return 2 * ( CF * ( x2 - 2 * x + 2 ) / x * ln1mx
+                 + CF * ( - x2 + 2 * x - 2 ) / x * lnx
+                 - 4. / 3. * CF );
   }
 
   //_________________________________________________________________________________
@@ -270,16 +270,16 @@ namespace apfel
   {
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return -2 * CA * ln1mx + 2 * CA * x / ( x - 1 ) * lnx;
+    return 2 * ( - 2 * CA * ln1mx + 2 * CA * x / ( x - 1 ) * lnx );
   }
   double K1ggAversa::Singular(double const& x) const
   {
-    return 2 * CA * log(1 - x) / ( 1 - x );
+    return 2 * ( 2 * CA * log(1 - x) / ( 1 - x ) );
   }
   double K1ggAversa::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return - CA * ( 1 + Pi2 / 3 ) + 5. / 6. * TR * _nf + CA * ln1mx * ln1mx;
+    return 2 * ( - CA * ( 1 + Pi2 / 3 ) + 5. / 6. * TR * _nf + CA * ln1mx * ln1mx );
   }
 
   //_________________________________________________________________________________
@@ -310,9 +310,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
-           + TR * ( -2 * x2 + 2 * x - 1 ) * lnx
-           + TR * ( -8 * x2 + 8 * x - 1 );
+    return 2 * ( TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
+                 + TR * ( -2 * x2 + 2 * x - 1 ) * lnx
+                 + TR * ( -8 * x2 + 8 * x - 1 ) );
   }
 
   //_________________________________________________________________________________
@@ -325,18 +325,18 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return CF * ( x + 1 ) * ln1mx
-           + CF * ( - x2 - 1 ) / ( x - 1 ) * lnx
-           + CF * ( -2 * x - 3 );
+    return 2 * ( CF * ( x + 1 ) * ln1mx
+                 + CF * ( - x2 - 1 ) / ( x - 1 ) * lnx
+                 + CF * ( -2 * x - 3 ) );
   }
   double K1gqDIS::Singular(double const& x) const
   {
-    return ( 3. / 2. * CF - 2 * CF * log(1 - x) ) / ( 1 - x );
+    return 2 * ( ( 3. / 2. * CF - 2 * CF * log(1 - x) ) / ( 1 - x ) );
   }
   double K1gqDIS::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return CF * ( 9. / 2. + Pi2 / 3 ) + 3. / 2. * CF * ln1mx - CF * ln1mx * ln1mx;
+    return 2 * ( CF * ( 9. / 2. + Pi2 / 3 ) + 3. / 2. * CF * ln1mx - CF * ln1mx * ln1mx );
   }
 
   //_________________________________________________________________________________
@@ -350,9 +350,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return 2 * TR * _nf * ( -2 * x2 + 2 * x - 1 ) * ln1mx
-           + 2 * TR * _nf * (  2 * x2 - 2 * x + 1 ) * lnx
-           + 2 * TR * _nf * (  8 * x2 - 8 * x + 1 );
+    return 2 * ( 2 * TR * _nf * ( -2 * x2 + 2 * x - 1 ) * ln1mx
+                 + 2 * TR * _nf * (  2 * x2 - 2 * x + 1 ) * lnx
+                 + 2 * TR * _nf * (  8 * x2 - 8 * x + 1 ) );
   }
 
   //_________________________________________________________________________________
@@ -363,16 +363,16 @@ namespace apfel
   double K1qqPHYS::Regular(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return CF * ( - x - 1 ) * ln1mx + CF * ( 1 - x );
+    return 2 * ( CF * ( - x - 1 ) * ln1mx + CF * ( 1 - x ) );
   }
   double K1qqPHYS::Singular(double const& x) const
   {
-    return 2 * CF * log(1 - x) / ( 1 - x );
+    return 2 * ( 2 * CF * log(1 - x) / ( 1 - x ) );
   }
   double K1qqPHYS::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return -11. / 4. * CF + CF * ln1mx * ln1mx;
+    return 2 * ( - 11. / 4. * CF + CF * ln1mx * ln1mx );
   }
 
   //_________________________________________________________________________________
@@ -384,7 +384,7 @@ namespace apfel
   {
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
-    return TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx + 2 * TR * x * ( 1 - x );
+    return 2 * ( TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx + 2 * TR * x * ( 1 - x ) );
   }
 
   //_________________________________________________________________________________
@@ -396,7 +396,7 @@ namespace apfel
   {
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
-    return CF * ( x2 - 2 * x + 2 ) / x * ln1mx + CF * x;
+    return 2 * ( CF * ( x2 - 2 * x + 2 ) / x * ln1mx + CF * x );
   }
 
   //_________________________________________________________________________________
@@ -410,15 +410,15 @@ namespace apfel
     const double x2    = x * x;
     const double x3    = x * x2;
     const double ln1mx = log(1 - x);
-    return 2 * CA * ( - x3 + x2 - 2 * x + 1 ) / x * ln1mx;
+    return 2 * ( 2 * CA * ( - x3 + x2 - 2 * x + 1 ) / x * ln1mx );
   }
   double K1ggPHYS::Singular(double const& x) const
   {
-    return 2 * CA * log(1 - x) / ( 1 - x );
+    return 2 * ( 2 * CA * log(1 - x) / ( 1 - x ) );
   }
   double K1ggPHYS::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return - CA * ( 203. / 72. ) + ( 29. / 36. ) * TR * _nf + CA * ln1mx * ln1mx;
+    return 2 * ( - CA * ( 203. / 72. ) + ( 29. / 36. ) * TR * _nf + CA * ln1mx * ln1mx );
   }
 }

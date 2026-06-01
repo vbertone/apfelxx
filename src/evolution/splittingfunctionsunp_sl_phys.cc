@@ -147,7 +147,7 @@ namespace apfel
     const double ln1px = log(1 + x);
     const double pqg   = ( 1. - x ) * ( 1. - x ) + x2;
     const double pqgmx = x2 + ( 1. + x ) * ( 1. + x );
-    return 4. * (
+    return 2 * _nf * 4. * (
              // nf*TR^2 term
              - 29. * _nf * TR * TR * pqg / 36.
              // CF*TR terms
