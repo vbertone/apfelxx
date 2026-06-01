@@ -491,6 +491,40 @@ namespace apfel
                                                               std::vector<double> const& Thresholds,
                                                               bool                const& OpEvol = false,
                                                               double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeDglapObjectsQCD function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions in the Krk factorisation scheme
+   * and store them into a 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Masses: the quark masses
+   * @param Thresholds: the quark thresholds
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
+   */
+  std::map<int, DglapObjects> InitializeDglapObjectsQCDKrk(Grid                const& g,
+                                                           std::vector<double> const& Masses,
+                                                           std::vector<double> const& Thresholds,
+                                                           bool                const& OpEvol = false,
+                                                           double              const& IntEps = 1e-5);
+
+  /**
+   * @brief The InitializeDglapObjectsQCD function precomputes the
+   * perturbative coefficients of space-like unpolarised splitting
+   * functions and matching conditions in the Krk factorisation scheme
+   * and store them into a 'DglapObjects' structure.
+   * @param g: the x-space grid
+   * @param Thresholds: the quark thresholds
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @note This function assumes that masses and thresholds coincide.
+   */
+  std::map<int, DglapObjects> InitializeDglapObjectsQCDKrk(Grid                const& g,
+                                                           std::vector<double> const& Thresholds,
+                                                           bool                const& OpEvol = false,
+                                                           double              const& IntEps = 1e-5);
   ///@}
 
   /**

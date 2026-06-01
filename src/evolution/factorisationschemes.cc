@@ -45,7 +45,7 @@ namespace apfel
         OK.insert({EvolutionBasisQCD::PNSM, K1ns});
         OK.insert({EvolutionBasisQCD::PNSV, K1ns});
         OK.insert({EvolutionBasisQCD::PQQ,  K1ns});
-        OK.insert({EvolutionBasisQCD::PQG,  nf * K1qg});
+        OK.insert({EvolutionBasisQCD::PQG,  2 * nf * K1qg});
         OK.insert({EvolutionBasisQCD::PGQ,  K1gq});
         OK.insert({EvolutionBasisQCD::PGG,  K1gg});
         KNLO.insert({nf, OK});
@@ -78,7 +78,7 @@ namespace apfel
       {
         const int nf = Knf.first;
         const std::map<int, Operator> KnfNLO = Knf.second.at(1).GetObjects();
-        const std::map<int, Operator> PMSLO  = DOMSbar.at(nf).SplittingFunctions.at(0).GetObjects();
+        const std::map<int, Operator> PLO    = DOMSbar.at(nf).SplittingFunctions.at(0).GetObjects();
         const std::map<int, Operator> PMSNLO = DOMSbar.at(nf).SplittingFunctions.at(1).GetObjects();
         const std::map<int, Operator> MMSNLO = DOMSbar.at(nf).MatchingConditions.at(1).GetObjects();
 
@@ -87,21 +87,21 @@ namespace apfel
         PKNLO.insert({EvolutionBasisQCD::PNSP, PMSNLO.at(EvolutionBasisQCD::PNSP) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PNSP)});
         PKNLO.insert({EvolutionBasisQCD::PNSM, PMSNLO.at(EvolutionBasisQCD::PNSM) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PNSM)});
         PKNLO.insert({EvolutionBasisQCD::PNSV, PMSNLO.at(EvolutionBasisQCD::PNSV) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PNSV)});
-        PKNLO.insert({EvolutionBasisQCD::PQQ, PMSNLO.at(EvolutionBasisQCD::PQQ) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PQQ)
-                      + KnfNLO.at(EvolutionBasisQCD::PQQ) * PMSLO.at(EvolutionBasisQCD::PQQ) + KnfNLO.at(EvolutionBasisQCD::PQG) * PMSLO.at(EvolutionBasisQCD::PGQ)
-                      - PMSLO.at(EvolutionBasisQCD::PQQ) * KnfNLO.at(EvolutionBasisQCD::PQQ) + PMSLO.at(EvolutionBasisQCD::PQG) * KnfNLO.at(EvolutionBasisQCD::PGQ)});
-        PKNLO.insert({EvolutionBasisQCD::PQG, PMSNLO.at(EvolutionBasisQCD::PQG) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PQG)
-                      + KnfNLO.at(EvolutionBasisQCD::PQQ) * PMSLO.at(EvolutionBasisQCD::PQG) + KnfNLO.at(EvolutionBasisQCD::PQG) * PMSLO.at(EvolutionBasisQCD::PGG)
-                      - PMSLO.at(EvolutionBasisQCD::PQQ) * KnfNLO.at(EvolutionBasisQCD::PQG) + PMSLO.at(EvolutionBasisQCD::PQG) * KnfNLO.at(EvolutionBasisQCD::PGG)});
-        PKNLO.insert({EvolutionBasisQCD::PGQ, PMSNLO.at(EvolutionBasisQCD::PGQ) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PGQ)
-                      + KnfNLO.at(EvolutionBasisQCD::PGQ) * PMSLO.at(EvolutionBasisQCD::PQQ) + KnfNLO.at(EvolutionBasisQCD::PGG) * PMSLO.at(EvolutionBasisQCD::PGQ)
-                      - PMSLO.at(EvolutionBasisQCD::PGQ) * KnfNLO.at(EvolutionBasisQCD::PQQ) + PMSLO.at(EvolutionBasisQCD::PGG) * KnfNLO.at(EvolutionBasisQCD::PGQ)});
-        PKNLO.insert({EvolutionBasisQCD::PGG, PMSNLO.at(EvolutionBasisQCD::PGG) - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PGG)
-                      + KnfNLO.at(EvolutionBasisQCD::PGQ) * PMSLO.at(EvolutionBasisQCD::PQG) + KnfNLO.at(EvolutionBasisQCD::PGG) * PMSLO.at(EvolutionBasisQCD::PGG)
-                      - PMSLO.at(EvolutionBasisQCD::PGQ) * KnfNLO.at(EvolutionBasisQCD::PQG) + PMSLO.at(EvolutionBasisQCD::PGG) * KnfNLO.at(EvolutionBasisQCD::PGG)});
+        PKNLO.insert({EvolutionBasisQCD::PQQ,  PMSNLO.at(EvolutionBasisQCD::PQQ)  - ( beta0qcd(nf) / 2 ) * KnfNLO.at(EvolutionBasisQCD::PQQ)
+                      + KnfNLO.at(EvolutionBasisQCD::PQG) * PLO.at(EvolutionBasisQCD::PGQ)
+                      - ( 1. / 2 ) * PLO.at(EvolutionBasisQCD::PQG) * KnfNLO.at(EvolutionBasisQCD::PGQ)});
+        PKNLO.insert({EvolutionBasisQCD::PQG,  PMSNLO.at(EvolutionBasisQCD::PQG)  - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PQG)
+                      + KnfNLO.at(EvolutionBasisQCD::PQQ) * PLO.at(EvolutionBasisQCD::PQG) + KnfNLO.at(EvolutionBasisQCD::PQG) * PLO.at(EvolutionBasisQCD::PGG)
+                      - 2 * PLO.at(EvolutionBasisQCD::PQQ) * KnfNLO.at(EvolutionBasisQCD::PQG) - PLO.at(EvolutionBasisQCD::PQG) * KnfNLO.at(EvolutionBasisQCD::PGG)});
+        PKNLO.insert({EvolutionBasisQCD::PGQ,  PMSNLO.at(EvolutionBasisQCD::PGQ)  - ( beta0qcd(nf) / 2 ) * KnfNLO.at(EvolutionBasisQCD::PGQ)
+                      + KnfNLO.at(EvolutionBasisQCD::PGQ) * PLO.at(EvolutionBasisQCD::PQQ) + KnfNLO.at(EvolutionBasisQCD::PGG) * PLO.at(EvolutionBasisQCD::PGQ)
+                      - PLO.at(EvolutionBasisQCD::PGQ) * KnfNLO.at(EvolutionBasisQCD::PQQ) - ( 1. / 2 ) * PLO.at(EvolutionBasisQCD::PGG) * KnfNLO.at(EvolutionBasisQCD::PGQ)});
+        PKNLO.insert({EvolutionBasisQCD::PGG,  PMSNLO.at(EvolutionBasisQCD::PGG)  - beta0qcd(nf) * KnfNLO.at(EvolutionBasisQCD::PGG)
+                      + KnfNLO.at(EvolutionBasisQCD::PGQ) * PLO.at(EvolutionBasisQCD::PQG)
+                      - 2 * PLO.at(EvolutionBasisQCD::PGQ) * KnfNLO.at(EvolutionBasisQCD::PQG)});
 
         // Replace NLO splitting functions
-        DOK.at(nf).SplittingFunctions.at(1).SetObjects(PKNLO);
+        DOK[nf].SplittingFunctions[1].SetObjects(PKNLO);
 
         // NLO matching conditions tranformed
         std::map<int, Operator> MKNLO;
@@ -122,7 +122,7 @@ namespace apfel
           }
 
         // Replace NLO matching conditions
-        DOK.at(nf).MatchingConditions.at(1).SetObjects(MKNLO);
+        //DOK[nf].MatchingConditions[1].SetObjects(MKNLO);
       }
 
     return DOK;

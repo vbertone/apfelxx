@@ -86,7 +86,7 @@ namespace apfel
      * @brief This function (re)sets the map of objects.
      * @param objects: set of objects
      */
-    void SetObjects(std::map<int, T> const& objects) { _objects = objects; }
+    void SetObjects(std::map<int, T> const& objects) { _objects.clear(); _objects = objects; }
 
     /**
      * @brief This function sums up all the objects of the set into

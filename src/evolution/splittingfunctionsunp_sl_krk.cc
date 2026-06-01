@@ -150,7 +150,7 @@ namespace apfel
     const double ln1px = log(1 + x);
     const double pqg   = ( 1. - x ) * ( 1. - x ) + x2;
     const double pqgmx = x2 + ( 1. + x ) * ( 1. + x );
-    return 4. * (
+    return 2. * _nf * 4. * (
              // nf*TR^2 term
              - 59. * _nf * TR * TR * pqg / 36.
              // CF*TR terms
@@ -191,7 +191,7 @@ namespace apfel
     const double ln1mx = log(1 - x);
     const double ln1px = log(1 + x);
     const double pgq   = ( 1. + ( 1. - x ) * ( 1. - x ) ) / x;
-    const double pgqmx = ( 1. + ( 1. + x ) * ( 1. + x ) ) / x;
+    const double pgqmx = - ( 1. + ( 1. + x ) * ( 1. + x ) ) / x;
     return 4. * (
              // CF*nf*TR terms
              CF * _nf * TR * ( - 7. * pgq / 12.
@@ -209,8 +209,8 @@ namespace apfel
                            - pgq * ln1mx * ln1mx
                            + ( - 46. + 9. / x + 5. * x - 4. * x2 ) * lnx / 3.
                            + ( 2. + x ) * lnx2
-                           + 2. * pgqmx * lnx * ln1px
-                           + 2. * pgqmx * dilog(-x) )
+                           - 2. * pgqmx * lnx * ln1px
+                           - 2. * pgqmx * dilog(-x) )
            );
   }
 

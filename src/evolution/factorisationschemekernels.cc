@@ -135,18 +135,18 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return 2 * CF * ( - x - 1 ) * ln1mx
-           + CF * ( x2 + 1 ) / ( x - 1 ) * lnx
-           + CF * ( 1 - x );
+    return 2 * ( 2 * CF * ( - x - 1 ) * ln1mx
+                 + CF * ( x2 + 1 ) / ( x - 1 ) * lnx
+                 + CF * ( 1 - x ) );
   }
   double K1qqKrk::Singular(double const& x) const
   {
-    return 4 * CF * log(1 - x) / ( 1 - x );
+    return 2 * 4 * CF * log(1 - x) / ( 1 - x );
   }
   double K1qqKrk::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return - CF * ( Pi2 / 3 + 17. / 4. ) + 2 * CF * ln1mx * ln1mx;
+    return 2 * ( - CF * ( Pi2 / 3 + 17. / 4. ) + 2 * CF * ln1mx * ln1mx );
   }
 
   //_________________________________________________________________________________
@@ -159,9 +159,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return 2 * TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
-           + TR * ( -2 * x2 + 2 * x - 1 ) * lnx
-           + 2 * TR * x * ( 1 - x );
+    return 2 * ( 2 * TR * ( 2 * x2 - 2 * x + 1 ) * ln1mx
+                 + TR * ( -2 * x2 + 2 * x - 1 ) * lnx
+                 + 2 * TR * x * ( 1 - x ) );
   }
 
   //_________________________________________________________________________________
@@ -174,9 +174,9 @@ namespace apfel
     const double x2    = x * x;
     const double ln1mx = log(1 - x);
     const double lnx   = log(x);
-    return 2 * CF * ( x2 - 2 * x + 2 ) / x * ln1mx
-           + CF * ( - x2 + 2 * x - 2 ) / x * lnx
-           + CF * x;
+    return 2 * ( 2 * CF * ( x2 - 2 * x + 2 ) / x * ln1mx
+                 + CF * ( - x2 + 2 * x - 2 ) / x * lnx
+                 + CF * x );
   }
 
   //_________________________________________________________________________________
@@ -194,17 +194,17 @@ namespace apfel
     const double lnx   = log(x);
     const double b = 4 * CA * ( - x3 + x2 - 2 * x + 1 ) / x;
     const double c = 2 * CA * ( x * xm1 * ( x2 - x + 2 ) + 1 ) / ( x * xm1 );
-    return b * ln1mx + c * lnx;
+    return 2 * ( b * ln1mx + c * lnx );
   }
   double K1ggKrk::Singular(double const& x) const
   {
-    return 4 * CA * log(1 - x) / ( 1 - x );
+    return 2 * 4 * CA * log(1 - x) / ( 1 - x );
   }
   double K1ggKrk::Local(double const& x) const
   {
     const double ln1mx = log(1 - x);
-    return - CA * ( Pi2 / 3 + 341. / 72. ) + ( 59. / 36. ) * TR * _nf
-           + 2 * CA * ln1mx * ln1mx;
+    return 2 * ( - CA * ( Pi2 / 3 + 341. / 72. ) + ( 59. / 36. ) * TR * _nf
+                 + 2 * CA * ln1mx * ln1mx );
   }
 
   //_________________________________________________________________________________
