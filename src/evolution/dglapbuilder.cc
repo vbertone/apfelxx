@@ -20,6 +20,7 @@
 #include "apfel/matchingconditions_sl.h"
 #include "apfel/matchingconditions_sl_ome.h"
 #include "apfel/matchingconditions_tl.h"
+#include "apfel/factorisationschemekernels.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/physicalbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
@@ -3265,6 +3266,7 @@ namespace apfel
     const Operator AS1gHL {g, AS1gH_L{},  IntEps};
     const Operator AS1HH0 {g, AS1HH_0{},  IntEps};
     const Operator AS1HHL {g, AS1HH_L{},  IntEps};
+    const Operator K1qg   {g, K1qgKrk{},  IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
@@ -3276,11 +3278,11 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M1,  AS1ggH + ( 59. / 18. * TR ) * Id});
         OM.insert({MatchingBasisQCD::M2,  AS1gH});
         OM.insert({MatchingBasisQCD::M3,  AS1gH});
-        OM.insert({MatchingBasisQCD::M4,  AS1Hg});
+        OM.insert({MatchingBasisQCD::M4,  AS1Hg + 2 * K1qg});
         OM.insert({MatchingBasisQCD::M5,  AS1HH});
         OM.insert({MatchingBasisQCD::M6,  AS1HH});
         OM.insert({MatchingBasisQCD::M7,  Zero});
-        OM.insert({MatchingBasisQCD::M8,  AS1Hg});
+        OM.insert({MatchingBasisQCD::M8,  AS1Hg + 2 * K1qg});
         OM.insert({MatchingBasisQCD::M9,  AS1HH});
         OM.insert({MatchingBasisQCD::M10, Zero});
         OM.insert({MatchingBasisQCD::M11, Zero});
@@ -3438,6 +3440,7 @@ namespace apfel
     const Operator AS1gHL {g, AS1gH_L{},  IntEps};
     const Operator AS1HH0 {g, AS1HH_0{},  IntEps};
     const Operator AS1HHL {g, AS1HH_L{},  IntEps};
+    const Operator K1qg   {g, K1qgPHYS{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
         const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
@@ -3449,11 +3452,11 @@ namespace apfel
         OM.insert({MatchingBasisQCD::M1,  AS1ggH + ( 29. / 18. * TR ) * Id});
         OM.insert({MatchingBasisQCD::M2,  AS1gH});
         OM.insert({MatchingBasisQCD::M3,  AS1gH});
-        OM.insert({MatchingBasisQCD::M4,  AS1Hg});
+        OM.insert({MatchingBasisQCD::M4,  AS1Hg + 2 * K1qg});
         OM.insert({MatchingBasisQCD::M5,  AS1HH});
         OM.insert({MatchingBasisQCD::M6,  AS1HH});
         OM.insert({MatchingBasisQCD::M7,  Zero});
-        OM.insert({MatchingBasisQCD::M8,  AS1Hg});
+        OM.insert({MatchingBasisQCD::M8,  AS1Hg + 2 * K1qg});
         OM.insert({MatchingBasisQCD::M9,  AS1HH});
         OM.insert({MatchingBasisQCD::M10, Zero});
         OM.insert({MatchingBasisQCD::M11, Zero});

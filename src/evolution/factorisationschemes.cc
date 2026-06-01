@@ -143,6 +143,7 @@ namespace apfel
     const Operator K1gq{g, K1gqPOS{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
+        const Operator K1gg{g, K1ggPOS{nf}, IntEps};
         std::map<int, Operator> OK;
         OK.insert({EvolutionBasisQCD::PNSP, Zero});
         OK.insert({EvolutionBasisQCD::PNSM, Zero});
@@ -150,7 +151,7 @@ namespace apfel
         OK.insert({EvolutionBasisQCD::PQQ,  Zero});
         OK.insert({EvolutionBasisQCD::PQG,  2 * nf * K1qg});
         OK.insert({EvolutionBasisQCD::PGQ,  K1gq});
-        OK.insert({EvolutionBasisQCD::PGG,  Zero});
+        OK.insert({EvolutionBasisQCD::PGG,  K1gg});
         KNLO.insert({nf, OK});
       }
 
@@ -422,11 +423,11 @@ namespace apfel
             MKNLO.insert({MatchingBasisQCD::M1,  MMSNLO.at(MatchingBasisQCD::M1) + K.at(nf+1).at(1).at(EvolutionBasisQCD::PGG) - KnfNLO.at(EvolutionBasisQCD::PGG)});
             MKNLO.insert({MatchingBasisQCD::M2,  MMSNLO.at(MatchingBasisQCD::M2)});
             MKNLO.insert({MatchingBasisQCD::M3,  MMSNLO.at(MatchingBasisQCD::M3)});
-            MKNLO.insert({MatchingBasisQCD::M4,  MMSNLO.at(MatchingBasisQCD::M4)});
+            MKNLO.insert({MatchingBasisQCD::M4,  MMSNLO.at(MatchingBasisQCD::M4) + K.at(nf+1).at(1).at(EvolutionBasisQCD::PQG) - KnfNLO.at(EvolutionBasisQCD::PQG)});
             MKNLO.insert({MatchingBasisQCD::M5,  MMSNLO.at(MatchingBasisQCD::M5)});
             MKNLO.insert({MatchingBasisQCD::M6,  MMSNLO.at(MatchingBasisQCD::M6)});
             MKNLO.insert({MatchingBasisQCD::M7,  MMSNLO.at(MatchingBasisQCD::M7)});
-            MKNLO.insert({MatchingBasisQCD::M8,  MMSNLO.at(MatchingBasisQCD::M8)});
+            MKNLO.insert({MatchingBasisQCD::M8,  MMSNLO.at(MatchingBasisQCD::M8) + K.at(nf+1).at(1).at(EvolutionBasisQCD::PQG) - KnfNLO.at(EvolutionBasisQCD::PQG)});
             MKNLO.insert({MatchingBasisQCD::M9,  MMSNLO.at(MatchingBasisQCD::M9)});
             MKNLO.insert({MatchingBasisQCD::M10, MMSNLO.at(MatchingBasisQCD::M10)});
             MKNLO.insert({MatchingBasisQCD::M11, MMSNLO.at(MatchingBasisQCD::M11)});

@@ -22,13 +22,16 @@ int main()
   // Perturbative order
   const int PerturbativeOrder = 1;
 
+  // Lower integration limit
+  const double xmin = 1e-9;
+
   // Running coupling
   apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
   const apfel::TabulateObject<double> Alphas{a, 100, 0.9, 1001, 3};
   const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
 
   // x-space grid
-  const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
+  const apfel::Grid g{{apfel::SubGrid{200, 1e-9, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Get DGLAP objects in the Krk factorisation scheme
   const auto DglapObjNmKrk = ChangeFactorisationSchemeMSbarToK(InitializeDglapObjectsQCD(g, Thresholds), InitializeSchemeChangeKernelsKrk(g, Thresholds));
@@ -81,6 +84,13 @@ int main()
                 << std::endl;
     }
 
+  // Sum rules in the Krk scheme
+  const apfel::Set<apfel::Distribution> DistsKrk = TabulatedPDFsNmKrk.Evaluate(mu);
+  std::cout << "\nMomentum sum rule: " << DistsKrk.at(0).Integrate(xmin, 1) + DistsKrk.at(1).Integrate(xmin, 1) << std::endl;
+  std::cout << "Total valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * DistsKrk.at(2)).Integrate(xmin, 1) << std::endl;
+  std::cout << "V3 valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * DistsKrk.at(4)).Integrate(xmin, 1) << std::endl;
+  std::cout << "V8 valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * DistsKrk.at(6)).Integrate(xmin, 1) << std::endl;
+
   std::cout << "\nRatio numerical/analytic (PHYS):\n   x    "
             << "   u-ubar   "
             << "   d-dbar   "
@@ -102,6 +112,13 @@ int main()
                 << "  " << ( DistMapNmPHYS.at(0) ) / ( DistMapAnPHYS.at(0) )
                 << std::endl;
     }
+
+  // Sum rules in the PHYS scheme
+  const apfel::Set<apfel::Distribution> DistsPHYS = TabulatedPDFsNmPHYS.Evaluate(mu);
+  std::cout << "\nMomentum sum rule: " << DistsPHYS.at(0).Integrate(xmin, 1) + DistsPHYS.at(1).Integrate(xmin, 1) << std::endl;
+  std::cout << "Total valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * DistsPHYS.at(2)).Integrate(xmin, 1) << std::endl;
+  std::cout << "V3 valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * DistsPHYS.at(4)).Integrate(xmin, 1) << std::endl;
+  std::cout << "V8 valence sum rule: " << ([] (double const& x) -> double { return 1 / x; } * DistsPHYS.at(6)).Integrate(xmin, 1) << std::endl;
 
   return 0;
 }

@@ -47,6 +47,16 @@ namespace apfel
     K1gqPOS();
     double Regular(double const& x) const;
   };
+
+  /// @brief K^POS_{gg} at NLO
+  class K1ggPOS: public Expression
+  {
+  public:
+    K1ggPOS(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
   ///@}
 
   // ===========================================================================
