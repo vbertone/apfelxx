@@ -439,4 +439,36 @@ namespace apfel
 
     return DOK;
   }
+
+  //_____________________________________________________________________________
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> ChangeFactorisationSchemeMSbarToK(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FOMSbar,
+                                                                                                                       std::map<int, std::map<int, Set<Operator>>>                                        const& K)
+  {
+    // Define object of the structure containing the DglapObjects
+    const auto FOK = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
+    {
+      // Get structure function objectes at the current scale
+      StructureFunctionObjects FOKQ = FOMSbar(Q, Ch);
+
+      // Get scheme-change kernels at the current nf
+      const std::map<int, Operator> K1k = K.at(FOKQ.nf).at(1).GetObjects();
+
+      // Modify single structure function components
+      for (int k = 0; k <= 6; k++)
+        {
+          std::map<int, Operator> FOKQC0k = FOKQ.C0[k].GetObjects();
+          std::map<int, Operator> FOKQC1k = FOKQ.C1[k].GetObjects();
+          FOKQ.C1[k].SetObjects(std::map<int, Operator>
+          {
+            {DISNCBasis::CNS, FOKQC1k.at(DISNCBasis::CNS) - FOKQC0k.at(DISNCBasis::CNS) * K1k.at(EvolutionBasisQCD::PNSP)},
+            {DISNCBasis::CS,  FOKQC1k.at(DISNCBasis::CS) - FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQQ) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGQ)},
+            {DISNCBasis::CG,  FOKQC1k.at(DISNCBasis::CG) - ( 1. / FOKQ.nf ) * FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQG) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGG)}
+          });
+        }
+      return FOKQ;
+    };
+
+    // Return modified structure function object
+    return FOK;
+  }
 }

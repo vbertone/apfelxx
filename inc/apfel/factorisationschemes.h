@@ -7,6 +7,7 @@
 #pragma once
 
 #include "apfel/dglapbuilder.h"
+#include "apfel/structurefunctionbuilder.h"
 
 namespace apfel
 {
@@ -124,12 +125,22 @@ namespace apfel
 
   /**
    * @brief The ChangeFactorisationSchemeMSbarToK function changes the
-   * factoristion scheme from MSbar to the scheme coded in the input
-   * kernels K.
+   * factoristion scheme of DGLAP objects from MSbar to the scheme
+   * coded in the input kernels K.
    * @param DOMSbar: DGLAP objects in the MSbar scheme
    * @param K: scheme-change kernels
    */
   std::map<int, DglapObjects> ChangeFactorisationSchemeMSbarToK(std::map<int, DglapObjects>                 const& DOMSbar,
                                                                 std::map<int, std::map<int, Set<Operator>>> const& K);
+
+  /**
+   * @brief The ChangeFactorisationSchemeMSbarToK function changes the
+   * factoristion scheme od structure-functions objects from MSbar to
+   * the scheme coded in the input kernels K.
+   * @param DOMSbar: DGLAP objects in the MSbar scheme
+   * @param K: scheme-change kernels
+   */
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> ChangeFactorisationSchemeMSbarToK(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FOMSbar,
+                                                                                                                       std::map<int, std::map<int, Set<Operator>>>                                        const& K);
   ///@}
 }
