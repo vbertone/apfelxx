@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['recff10ns_0',['ReCFF10ns',['../classapfel_1_1ReCFF10ns.html',1,'apfel']]],
-  ['recff11g_1',['ReCFF11g',['../classapfel_1_1ReCFF11g.html',1,'apfel']]],
-  ['recff11ns_2',['ReCFF11ns',['../classapfel_1_1ReCFF11ns.html',1,'apfel']]],
-  ['rule_3',['rule',['../structapfel_1_1ConvolutionMap_1_1rule.html',1,'apfel::ConvolutionMap']]]
+  ['qgrid_0',['QGrid',['../classapfel_1_1QGrid.html',1,'apfel']]],
+  ['qgrid_3c_20apfel_3a_3aset_3c_20apfel_3a_3adistribution_20_3e_20_3e_1',['QGrid&lt; apfel::Set&lt; apfel::Distribution &gt; &gt;',['../classapfel_1_1QGrid.html',1,'apfel']]]
 ];

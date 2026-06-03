@@ -1,13 +1,21 @@
 /**
+ \example cff_test.cc
+ \example collins_soper_kernel_test.cc
  \example coupling_test.cc
  \example dglap_test.cc
+ \example dglap_test_backward.cc
+ \example dglap_test_factorisation_schemes.cc
+ \example dglap_test_photon.cc
  \example dglap_test_phys.cc
  \example dglap_test_streamlined.cc
+ \example dglap_test_streamlined_n3lo.cc
  \example dglapqcdqed_test.cc
  \example distribution_test.cc
  \example doubledistribution_test.cc
  \example doubleobjint_test.cc
  \example expansion_test.cc
+ \example extension_test.cc
+ \example generate_benchmarks.py
  \example gpd_test.cc
  \example grid_test.cc
  \example integrator_test.cc
@@ -20,17 +28,21 @@
  \example principal_value_test.cc
  \example qgrid_test.cc
  \example qgriddist_test.cc
+ \example regression.py
  \example set_test.cc
  \example siaxsec_test.cc
  \example sidis_test.cc
+ \example sidisbuilder_test.cc
  \example sidispol_test.cc
  \example structurefunction_cc_test.cc
  \example structurefunction_massive_test.cc
  \example structurefunction_nc_pol_test.cc
  \example structurefunction_nc_test.cc
+ \example structurefunction_test_factorisation_schemes.cc
  \example subgrid_test.cc
  \example sum_rules_test.cc
  \example sum_rules_test_phys.cc
  \example sum_rules_test_qcdqed.cc
+ \example tabulateobject_test.cc
  \example tmd_test.cc
- */
+*/

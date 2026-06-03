@@ -1,5 +1,30 @@
 var searchData=
 [
-  ['lagrangeinterpolator_0',['LagrangeInterpolator',['../classapfel_1_1LagrangeInterpolator.html',1,'apfel']]],
-  ['lhknotarray_1',['LHKnotArray',['../structapfel_1_1LHKnotArray.html',1,'apfel']]]
+  ['k1ggaversa_0',['K1ggAversa',['../classapfel_1_1K1ggAversa.html',1,'apfel']]],
+  ['k1ggdis_1',['K1ggDIS',['../classapfel_1_1K1ggDIS.html',1,'apfel']]],
+  ['k1ggkrk_2',['K1ggKrk',['../classapfel_1_1K1ggKrk.html',1,'apfel']]],
+  ['k1ggmpos_3',['K1ggMPOS',['../classapfel_1_1K1ggMPOS.html',1,'apfel']]],
+  ['k1ggmposdelta_4',['K1ggMPOSDelta',['../classapfel_1_1K1ggMPOSDelta.html',1,'apfel']]],
+  ['k1ggphys_5',['K1ggPHYS',['../classapfel_1_1K1ggPHYS.html',1,'apfel']]],
+  ['k1ggpos_6',['K1ggPOS',['../classapfel_1_1K1ggPOS.html',1,'apfel']]],
+  ['k1gqaversa_7',['K1gqAversa',['../classapfel_1_1K1gqAversa.html',1,'apfel']]],
+  ['k1gqdis_8',['K1gqDIS',['../classapfel_1_1K1gqDIS.html',1,'apfel']]],
+  ['k1gqkrk_9',['K1gqKrk',['../classapfel_1_1K1gqKrk.html',1,'apfel']]],
+  ['k1gqmpos_10',['K1gqMPOS',['../classapfel_1_1K1gqMPOS.html',1,'apfel']]],
+  ['k1gqmposdelta_11',['K1gqMPOSDelta',['../classapfel_1_1K1gqMPOSDelta.html',1,'apfel']]],
+  ['k1gqphys_12',['K1gqPHYS',['../classapfel_1_1K1gqPHYS.html',1,'apfel']]],
+  ['k1gqpos_13',['K1gqPOS',['../classapfel_1_1K1gqPOS.html',1,'apfel']]],
+  ['k1qgaversa_14',['K1qgAversa',['../classapfel_1_1K1qgAversa.html',1,'apfel']]],
+  ['k1qgdis_15',['K1qgDIS',['../classapfel_1_1K1qgDIS.html',1,'apfel']]],
+  ['k1qgkrk_16',['K1qgKrk',['../classapfel_1_1K1qgKrk.html',1,'apfel']]],
+  ['k1qgmpos_17',['K1qgMPOS',['../classapfel_1_1K1qgMPOS.html',1,'apfel']]],
+  ['k1qgmposdelta_18',['K1qgMPOSDelta',['../classapfel_1_1K1qgMPOSDelta.html',1,'apfel']]],
+  ['k1qgphys_19',['K1qgPHYS',['../classapfel_1_1K1qgPHYS.html',1,'apfel']]],
+  ['k1qgpos_20',['K1qgPOS',['../classapfel_1_1K1qgPOS.html',1,'apfel']]],
+  ['k1qqaversa_21',['K1qqAversa',['../classapfel_1_1K1qqAversa.html',1,'apfel']]],
+  ['k1qqdis_22',['K1qqDIS',['../classapfel_1_1K1qqDIS.html',1,'apfel']]],
+  ['k1qqkrk_23',['K1qqKrk',['../classapfel_1_1K1qqKrk.html',1,'apfel']]],
+  ['k1qqmpos_24',['K1qqMPOS',['../classapfel_1_1K1qqMPOS.html',1,'apfel']]],
+  ['k1qqmposdelta_25',['K1qqMPOSDelta',['../classapfel_1_1K1qqMPOSDelta.html',1,'apfel']]],
+  ['k1qqphys_26',['K1qqPHYS',['../classapfel_1_1K1qqPHYS.html',1,'apfel']]]
 ];

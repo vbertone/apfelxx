@@ -137,7 +137,7 @@ namespace apfel
    * @brief The ChangeFactorisationSchemeMSbarToK function changes the
    * factoristion scheme od structure-functions objects from MSbar to
    * the scheme coded in the input kernels K.
-   * @param DOMSbar: DGLAP objects in the MSbar scheme
+   * @param FOMSbar: DGLAP objects in the MSbar scheme
    * @param K: scheme-change kernels
    */
   std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> ChangeFactorisationSchemeMSbarToK(std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> const& FOMSbar,
