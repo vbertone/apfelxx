@@ -13,6 +13,7 @@
 #include "apfel/messages.h"
 
 #include <stdexcept>
+#include <utility>
 
 namespace apfel
 {
@@ -21,6 +22,14 @@ namespace apfel
   Set<T>::Set(ConvolutionMap const& Map, std::map<int, T> const& in):
     _map(Map),
     _objects(in)
+  {
+  }
+
+  //_________________________________________________________________________
+  template<class T>
+  Set<T>::Set(ConvolutionMap const& Map, std::map<int, T>&& in):
+    _map(Map),
+    _objects(std::move(in))
   {
   }
 
@@ -52,7 +61,7 @@ namespace apfel
         for (auto it = _map.GetRules().begin(); it != item; it++)
           if (it->second == item->second)
             {
-              mmap.insert({item->first, mmap.at(it->first)});
+              mmap.emplace(item->first, mmap.at(it->first));
               cycle = true;
               break;
             }
@@ -91,9 +100,9 @@ namespace apfel
             else
               result += _objects.at(o->operand) * dist.at(o->object);
           }
-        mmap.insert({item->first, result});
+        mmap.emplace(item->first, std::move(result));
       }
-    return Set<V> {d.GetMap(), mmap};
+    return Set<V> {d.GetMap(), std::move(mmap)};
   }
 
   //_________________________________________________________________________

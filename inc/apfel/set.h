@@ -30,6 +30,13 @@ namespace apfel
     Set(ConvolutionMap const& Map = ConvolutionMap{"UNDEFINED"}, std::map<int, T> const& in = std::map<int, T> {});
 
     /**
+     * @brief The Set constructor from an rvalue map of objects.
+     * @param Map: the convolution map
+     * @param in: a map of objects of type T to be moved in
+     */
+    Set(ConvolutionMap const& Map, std::map<int, T>&& in);
+
+    /**
      * @brief The Set constructor.
      * @param in: a map of objects of type T (default: empty map of objects)
      * @note When invoking this constructor a diagonal convolution map
