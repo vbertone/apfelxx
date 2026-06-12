@@ -1,0 +1,81 @@
+Tabulating object...
+Initializing DglapObjects for space-like QCD unpolarised evolution...
+Tabulating object...
+
+Checking sum rules at the level of PDFs...
+
+Momentum sum rule: 1
+Total valence sum rule: 3.00006
+V3 valence sum rule: 1
+V8 valence sum rule: 3.00001
+Up valence sum rule: 2.00002
+Down valence sum rule: 1.00001
+Strange valence sum rule: 1.14302e-05
+
+Checking sum rules at the level of splitting functions...
+
+order: 0
+- Momentum sum rules:
+  * MSR1 = 3.75379e-05
+  * MSR2 = 0.00016892
+- Valence sum rules:
+  * VSR1 = -2.80722e-09
+
+order: 1
+- Momentum sum rules:
+  * MSR1 = 0.000317853
+  * MSR2 = 0.00122867
+- Valence sum rules:
+  * VSR1 = -1.16392e-05
+
+order: 2
+- Momentum sum rules:
+  * MSR1 = -0.00222905
+  * MSR2 = 0.0158203
+- Valence sum rules:
+  * VSR1 = -0.00058101
+
+order: 3
+- Momentum sum rules:
+  * MSR1 = -0.0386444
+  * MSR2 = -0.00795858
+- Valence sum rules:
+  * VSR1 = 0.594316
+
+Checking sum rules at the level of matching functions...
+
+order: 0
+- Momentum sum rule:
+  * MSR1 = 0
+  * MSR2 = 0
+  * MSR3 (intrinsic heavy flavour) = 0
+- Valence sum rule: 
+  * VSR1 = 0
+  * VSR2 = 0
+
+order: 1
+- Momentum sum rule:
+  * MSR1 = 0
+  * MSR2 = 0
+  * MSR3 (intrinsic heavy flavour) = 0.000389798
+- Valence sum rule: 
+  * VSR1 = 0
+  * VSR2 = 0
+
+order: 2
+- Momentum sum rule:
+  * MSR1 = 0.000219601
+  * MSR2 = 7.29538e-05
+  * MSR3 (intrinsic heavy flavour) = 1.71082e-15
+- Valence sum rule: 
+  * VSR1 = -1.52829e-07
+  * VSR2 = 0
+
+order: 3
+- Momentum sum rule:
+  * MSR1 = -0.000202531
+  * MSR2 = -4.09236e-05
+  * MSR3 (intrinsic heavy flavour) = 1.75095e-15
+- Valence sum rule: 
+  * VSR1 = -7.51801e-05
+  * VSR2 = 0.00170422

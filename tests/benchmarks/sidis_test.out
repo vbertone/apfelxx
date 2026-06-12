@@ -1,0 +1,29 @@
+Tabulating object...
+[apfel::InitializeDglapObjectsQCD] Warning: N3LO corrections will not be initialised.
+Initializing DglapObjects for space-like QCD unpolarised evolution...
+Initializing DglapObjects for time-like QCD unpolarised evolution...
+Tabulating object...
+Tabulating object...
+Initializing SIDIS hard cross sections...
+Tabulating object...
+Tabulating object...
+Tabulating object...
+
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937459e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937462e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937520e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937576e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937576e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937576e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937579e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937637e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937637e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937637e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937576e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937576e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937576e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937579e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937637e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937637e-03
+Reduced SIDIS cross section (Q = 2.000000e+00 GeV, x = 1.000000e-02, z = 4.000000e-01): 2.937637e-03
+

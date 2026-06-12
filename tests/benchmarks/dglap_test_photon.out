@@ -1,0 +1,37 @@
+Tabulating object...
+Tabulating object...
+Initializing InitializeDglapObjectsPhoton for space-like unpolarised evolution of the photon...
+Initializing InitializeDglapObjectsPhoton for space-like unpolarised evolution of the photon...
+Tabulating object...
+Tabulating object...
+Direct evolution (4th order Runge-Kutta) from Q0 = 1.41421 GeV to Q = 100 GeV...
+Interpolation of the tabulated PDFs...
+Interpolation of the tabulated evolution operators...
+Tabulating object...
+
+AlphaQCD(Q) = 1.156047e-01
+AlphaQED(Q) = 7.682486e-03
+
+   x       u-ubar      d-dbar    2(ubr+dbr)    c+cbar       gluon   
+Interpolation on the PDF table (all x for each Q):
+1.0e-05  3.1957e-03  1.9548e-03  3.4747e+01  1.5882e+01  2.2024e+02
+1.0e-04  1.4045e-02  8.2813e-03  1.5627e+01  6.7290e+00  8.8877e+01
+1.0e-03  6.0122e-02  3.4546e-02  6.4228e+00  2.4522e+00  3.0446e+01
+1.0e-02  2.3299e-01  1.3014e-01  2.2806e+00  6.6942e-01  7.8137e+00
+1.0e-01  5.5287e-01  2.7109e-01  3.8607e-01  6.7811e-02  8.6234e-01
+3.0e-01  3.5180e-01  1.2972e-01  3.4818e-02  9.6987e-03  8.3324e-02
+5.0e-01  1.2678e-01  3.2836e-02  2.3933e-03  8.3737e-03  9.8901e-03
+7.0e-01  3.1000e-02  5.8685e-03  7.2108e-05  1.1530e-02  1.3850e-03
+9.0e-01  1.3389e-02  3.2804e-03  1.3407e-06  1.3055e-02  2.0135e-04
+
+Evolution through the evolution operator:
+1.0e-05  3.1957e-03  1.9548e-03  3.4746e+01  1.5881e+01  2.2023e+02
+1.0e-04  1.4045e-02  8.2813e-03  1.5626e+01  6.7288e+00  8.8873e+01
+1.0e-03  6.0122e-02  3.4546e-02  6.4225e+00  2.4521e+00  3.0444e+01
+1.0e-02  2.3299e-01  1.3013e-01  2.2805e+00  6.6935e-01  7.8126e+00
+1.0e-01  5.5286e-01  2.7109e-01  3.8600e-01  6.7755e-02  8.6168e-01
+3.0e-01  3.5180e-01  1.2972e-01  3.4816e-02  9.6953e-03  8.3299e-02
+5.0e-01  1.2677e-01  3.2833e-02  2.3923e-03  8.3645e-03  9.8696e-03
+7.0e-01  3.1006e-02  5.8699e-03  7.2138e-05  1.1535e-02  1.3860e-03
+9.0e-01  1.3394e-02  3.2815e-03  1.3414e-06  1.3059e-02  2.0146e-04
+

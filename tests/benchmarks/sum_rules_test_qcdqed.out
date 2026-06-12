@@ -1,0 +1,150 @@
+Tabulating object...
+Initializing DglapObjectsQCDQED for space-like QCDxQED unpolarised evolution...
+Tabulating object...
+
+Checking sum rules at the level of PDFs...
+
+Momentum sum rule: 1
+Total valence sum rule: 3.00006
+Up valence sum rule: 2.00002
+Down valence sum rule: 1.00001
+Strange valence sum rule: 1.14508e-05
+Electron valence sum rule: 0
+
+Checking sum rules at the level of splitting functions...
+
+order: [0, 1]
+- Momentum sum rules:
+  * MSR1 = 5.63068e-05
+  * MSR2 = 2.50253e-05
+  * MSR3 = 6.25631e-06
+  * MSR4 = 0
+  * MSR5 = 1.50785e-05
+- Valence sum rules:
+  * VSR1 = -2.33935e-10
+  * VSR2 = -9.35741e-10
+  * VSR3 = -2.10542e-09
+
+order: [0, 2]
+- Momentum sum rules:
+  * MSR1 = -0.000500164
+  * MSR2 = -0.000214594
+  * MSR3 = -5.25573e-05
+  * MSR4 = 0
+  * MSR5 = 1.98893e-05
+- Valence sum rules:
+  * VSR1 = -8.452e-09
+  * VSR2 = -1.22762e-07
+  * VSR3 = -3.68746e-07
+
+order: [1, 0]
+- Momentum sum rules:
+  * MSR1 = 0
+  * MSR2 = 7.50758e-05
+  * MSR3 = 7.50758e-05
+  * MSR4 = 0.00016892
+  * MSR5 = 0
+- Valence sum rules:
+  * VSR1 = -2.80722e-09
+  * VSR2 = -2.80722e-09
+  * VSR3 = 0
+
+order: [1, 1]
+- Momentum sum rules:
+  * MSR1 = 0
+  * MSR2 = -3.20173e-05
+  * MSR3 = -8.00431e-06
+  * MSR4 = 2.11435e-06
+  * MSR5 = 2.20508e-05
+- Valence sum rules:
+  * VSR1 = 9.39739e-07
+  * VSR2 = 3.75896e-06
+  * VSR3 = 0
+
+order: [2, 0]
+- Momentum sum rules:
+  * MSR1 = 0
+  * MSR2 = 0.000635707
+  * MSR3 = 0.000635707
+  * MSR4 = 0.0012313
+  * MSR5 = 0
+- Valence sum rules:
+  * VSR1 = -1.16392e-05
+  * VSR2 = -1.16392e-05
+  * VSR3 = 0
+
+order: [3, 0]
+- Momentum sum rules:
+  * MSR1 = 0
+  * MSR2 = -0.0044581
+  * MSR3 = -0.0044581
+  * MSR4 = 0.0158203
+  * MSR5 = 0
+- Valence sum rules:
+  * VSR1 = -0.00051157
+  * VSR2 = -0.00044213
+  * VSR3 = 0
+
+order: [4, 0]
+- Momentum sum rules:
+  * MSR1 = 0
+  * MSR2 = -0.0772887
+  * MSR3 = -0.0772887
+  * MSR4 = -0.00795858
+  * MSR5 = 0
+- Valence sum rules:
+  * VSR1 = 0.374791
+  * VSR2 = 0.155267
+  * VSR3 = 0
+
+Checking sum rules at the level of matching functions...
+
+order: [0, 0]
+- Momentum sum rule:
+  * MSR1 = 0
+  * MSR2 = 0
+  * MSR3 = 0
+  * MSR4 (intrinsic heavy flavour) = 0
+- Valence sum rule: 
+  * VSR1 = 0
+  * VSR2 = 0
+
+order: [0, 1]
+- Momentum sum rule:
+  * MSR1 = 0
+  * MSR2 = 0
+  * MSR3 = 0
+  * MSR4 (intrinsic heavy flavour) = 0
+- Valence sum rule: 
+  * VSR1 = 0
+  * VSR2 = 0
+
+order: [1, 0]
+- Momentum sum rule:
+  * MSR1 = 0
+  * MSR2 = 0
+  * MSR3 = 0
+  * MSR4 (intrinsic heavy flavour) = 0.000389798
+- Valence sum rule: 
+  * VSR1 = 0
+  * VSR2 = 0
+
+order: [2, 0]
+- Momentum sum rule:
+  * MSR1 = 0.000219601
+  * MSR2 = 0
+  * MSR3 = 7.29538e-05
+  * MSR4 (intrinsic heavy flavour) = 0
+- Valence sum rule: 
+  * VSR1 = -1.52829e-07
+  * VSR2 = 0
+
+order: [3, 0]
+- Momentum sum rule:
+  * MSR1 = -0.000202531
+  * MSR2 = 0
+  * MSR3 = -4.09236e-05
+  * MSR4 (intrinsic heavy flavour) = 0
+- Valence sum rule: 
+  * VSR1 = -7.51801e-05
+  * VSR2 = 0.00170422

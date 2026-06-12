@@ -1,0 +1,16 @@
+- 1D integration
+True value: -0.613706
+Gauss-Legendre: -0.613703  -0.613416  1.00047
+Gauss-Kronrod:  -0.613704  -0.613494  1.00034
+W/o and w/ fixed points: -0.613704  -0.613704  0.999999
+Integrating 10000 times with Gauss-Legendre...
+Integrating 10000 times with Gauss-Kronrod...
+
+- 2D integration
+True value: 0.376635
+Gauss-Legendre: 0.376631  0.376539  1.00024
+Gauss-Kronrod:  0.376633  0.376329  1.00081
+Nested:         0.376635  0.376481  1.00041
+Integrating 100 times with Gauss-Legendre...
+Integrating 100 times with Gauss-Kronrod...
+Integrating 100 times with nested function...

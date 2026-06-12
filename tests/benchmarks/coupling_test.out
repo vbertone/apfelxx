@@ -1,0 +1,51 @@
+
+Numerical evolution of the strong coupling:
+LO:     alpha_s(Mu = 1 GeV) = 0.360801
+NLO:    alpha_s(Mu = 1 GeV) = 0.450354 (NLO/LO       = 124.82%)
+NNLO:   alpha_s(Mu = 1 GeV) = 0.466294 (NNLO/NLO     = 103.539%)
+NNNLO:  alpha_s(Mu = 1 GeV) = 0.470765 (NNNLO/NNLO   = 100.959%)
+NNNNLO: alpha_s(Mu = 1 GeV) = 0.473536 (NNNNLO/NNNLO = 100.589%)
+
+Analytic evolution of the strong coupling:
+LO:    alpha_s(Mu = 1 GeV) = 0.360802
+NLO:   alpha_s(Mu = 1 GeV) = 0.441805 (NLO/LO     = 122.451%)
+NNLO:  alpha_s(Mu = 1 GeV) = 0.461391 (NNLO/NLO   = 104.433%)
+NNNLO: alpha_s(Mu = 1 GeV) = 0.466808 (NNNLO/NNLO = 101.174%)
+
+Numerical evolution of the strong coupling with resummation scale (xi = 1):
+LO:    alpha_s(Mu = 1 GeV) = 0.360801
+NLO:   alpha_s(Mu = 1 GeV) = 0.450354 (NLO/LO     = 124.82%)
+NNLO:  alpha_s(Mu = 1 GeV) = 0.466294 (NNLO/NLO   = 103.539%)
+NNNLO: alpha_s(Mu = 1 GeV) = 0.470765 (NNNLO/NNLO = 100.959%)
+
+Ratio between numerical and analytic solutions:
+LO:    99.9999%
+NLO:   101.935%
+NNLO:  101.063%
+NNNLO: 100.848%
+
+Analytic evolution of the strong coupling in terms of LambdaQCD:
+LO:     alpha_s(Mu = 1 GeV) = 0.592817
+NLO:    alpha_s(Mu = 1 GeV) = 0.455755 (NLO/LO     = 76.8796%)
+NNLO:   alpha_s(Mu = 1 GeV) = 0.468599 (NNLO/NLO   = 102.818%)
+NNNLO:  alpha_s(Mu = 1 GeV) = 0.478709 (NNNLO/NNLO = 102.157%)
+
+Numeric evolution of the electromagnetic coupling:
+LO:    alpha_em(Mu = 1e+10 GeV) = 0.0103353
+NLO:   alpha_em(Mu = 1e+10 GeV) = 0.0103397 (NLO/LO = 100.042%)
+
+Coupled numerical evolution of strong and electromagnetic couplings:
+LO:    alpha_s(Mu = 1 GeV)[coup]  = 0.360801, alpha_s(Mu = 1 GeV)[dec]    = 0.360801, (ratio = 1)
+LO:    alpha_em(Mu = 1 GeV)[coup] = 0.00745946, alpha_em(Mu = 1 GeV)[dec] = 0.00745946, (ratio = 1)
+NLO:   alpha_s(Mu = 1 GeV)[coup]  = 0.450127, alpha_s(Mu = 1 GeV)[dec]    = 0.450354, (ratio = 0.999496)
+NLO:   alpha_em(Mu = 1 GeV)[coup] = 0.00744751, alpha_em(Mu = 1 GeV)[dec] = 0.00745906, (ratio = 0.998452)
+NNLO:  alpha_s(Mu = 1 GeV)[coup]  = 0.466038, alpha_s(Mu = 1 GeV)[dec]    = 0.466294, (ratio = 0.999452)
+NNLO:  alpha_em(Mu = 1 GeV)[coup] = 0.00744745
+NNNLO: alpha_s(Mu = 1 GeV)[coup]  = 0.470497, alpha_s(Mu = 1 GeV)[dec]    = 0.470765, (ratio = 0.99943)
+NNNLO: alpha_em(Mu = 1 GeV)[coup] = 0.00744744
+
+Numerical evolution of the strong coupling with MSbar thresholds:
+LO:   alpha_s(Mu = 1 GeV) = 0.360801
+NLO:  alpha_s(Mu = 1 GeV) = 0.450354 (NLO/LO   = 124.82%)
+NNLO: alpha_s(Mu = 1 GeV) = 0.472722 (NNLO/NLO = 104.967%)
+
