@@ -26,6 +26,7 @@ namespace apfel
   public:
     Operator() = delete;
     Operator(Operator const&) = default;
+    Operator(Operator&&)      = default;
 
     /**
      * @brief The Operator constructor.
@@ -66,6 +67,7 @@ namespace apfel
     Distribution operator *= (Distribution const& d) const;         //!< this *= Distribution
     Operator& operator *= (Operator const& o);                      //!< this *= Operator
     Operator& operator  = (Operator const& o);                      //!< this  = Operator
+    Operator& operator  = (Operator&& o);                           //!< this  = Operator (move)
     Operator& operator *= (double const& s);                        //!< this *= Scalar
     Operator& operator *= (std::function<double(double const&)> f); //!< This *= Function
     Operator& operator /= (double const& s);                        //!< this /= Scalar

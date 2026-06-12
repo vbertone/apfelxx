@@ -37,6 +37,14 @@ namespace apfel
     matrix(matrix<T> const& m);
 
     /**
+     * @brief The matrix move constructor. Being noexcept, it also
+     * allows containers of matrices to move rather than copy their
+     * elements upon reallocation.
+     * @param m: matrix
+     */
+    matrix(matrix<T>&& m) = default;
+
+    /**
      * @brief Function that resizes object and set default value.
      * @param row: number of rows
      * @param col: number of columns
@@ -84,6 +92,7 @@ namespace apfel
     T&       operator () (size_t const& i, size_t const& j)       { return _data[i * _size[1] + j]; }
     T const& operator () (size_t const& i, size_t const& j) const { return _data[i * _size[1] + j]; }
     matrix<T>& operator  = (matrix<T> const& m);
+    matrix<T>& operator  = (matrix<T>&& m) = default;
     matrix<T>& operator += (matrix<T> const& m);
     matrix<T>& operator -= (matrix<T> const& m);
     matrix<T>& operator *= (double const& f);

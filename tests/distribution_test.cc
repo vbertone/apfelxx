@@ -6,6 +6,20 @@
 
 #include <apfel/apfelxx.h>
 
+#include <type_traits>
+
+// Compile-time checks that the core value types are noexcept-movable.
+// Plain "is_move_constructible" would also be satisfied by the copy
+// constructor, so the nothrow variant is used: only the genuine
+// (defaulted) move constructors are noexcept, since copying
+// allocates. These assertions fail if a future change accidentally
+// suppresses the move constructors again (e.g. by adding a
+// user-declared destructor or copy member without re-defaulting the
+// moves).
+static_assert(std::is_nothrow_move_constructible<apfel::Distribution>::value,   "apfel::Distribution must be noexcept-move-constructible");
+static_assert(std::is_nothrow_move_constructible<apfel::Operator>::value,       "apfel::Operator must be noexcept-move-constructible");
+static_assert(std::is_nothrow_move_constructible<apfel::matrix<double>>::value, "apfel::matrix<double> must be noexcept-move-constructible");
+
 // Class to define the analytical expression of LO splitting function P0qq
 class p0qq: public apfel::Expression
 {

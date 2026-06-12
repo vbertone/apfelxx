@@ -41,6 +41,14 @@ namespace apfel
     Distribution(Distribution const& obj);
 
     /**
+     * @brief The Distribution move constructor. It copies the grid
+     * reference and steals the distribution vectors leaving the input
+     * object in a valid but unspecified state.
+     * @param obj: the distribution to be moved
+     */
+    Distribution(Distribution&& obj) = default;
+
+    /**
      * @brief The Distribution constructor
      * @param obj: a reference distribution from wich the grid is extracted
      * @param distsubgrid: the vector of the distribution on the subgrids
@@ -153,6 +161,7 @@ namespace apfel
      */
     ///@{
     Distribution& operator  = (Distribution const& d);                         //!< this  = Distribution
+    Distribution& operator  = (Distribution&& d);                              //!< this  = Distribution (move)
     Distribution& operator *= (double const& s);                               //!< this *= Scalar
     Distribution& operator *= (std::function<double(double const&)> const& f); //!< this *= Function of the integration variable
     Distribution& operator /= (double const& s);                               //!< this /= Scalar

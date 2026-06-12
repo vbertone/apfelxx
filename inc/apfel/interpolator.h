@@ -24,6 +24,16 @@ namespace apfel
     virtual ~Interpolator() = default;
 
     /**
+     * @brief Defaulted copy and move constructors. The copy
+     * constructor has to be explicitly defaulted because declaring
+     * the move constructor would otherwise delete it. The move
+     * constructor copies the grid reference and steals the
+     * distribution vectors.
+     */
+    Interpolator(Interpolator const&) = default;
+    Interpolator(Interpolator&&)      = default;
+
+    /**
      * @brief The Interpolator constructor.
      * @param gr: the x-space grid object over which interpolation takes place
      */

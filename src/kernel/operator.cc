@@ -9,6 +9,7 @@
 #include "apfel/messages.h"
 
 #include <cmath>
+#include <utility>
 
 namespace apfel
 {
@@ -535,6 +536,22 @@ namespace apfel
       {
         _extended = o._extended;
         _Operator = o._Operator;
+      }
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  Operator& Operator::operator = (Operator&& o)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&_grid != &o.GetGrid())
+      throw std::runtime_error(error("Operator::operator =", "Grids do not match."));
+
+    if (this != &o)
+      {
+        _extended = o._extended;
+        _Operator = std::move(o._Operator);
       }
 
     return *this;

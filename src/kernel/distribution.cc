@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <numeric>
+#include <utility>
 
 namespace apfel
 {
@@ -190,6 +191,19 @@ namespace apfel
 
     _distributionSubGrid   = d.GetDistributionSubGrid();
     _distributionJointGrid = d.GetDistributionJointGrid();
+
+    return *this;
+  }
+
+  //_________________________________________________________________________
+  Distribution& Distribution::operator = (Distribution&& d)
+  {
+    // Fast method to check that we are using the same Grid
+    if (&this->_grid != &d._grid)
+      throw std::runtime_error(error("Distribution::operator =", "Distribution grids do not match"));
+
+    _distributionSubGrid   = std::move(d._distributionSubGrid);
+    _distributionJointGrid = std::move(d._distributionJointGrid);
 
     return *this;
   }
