@@ -527,8 +527,15 @@ namespace apfel
   //_________________________________________________________________________
   Operator& Operator::operator = (Operator const& o)
   {
+    // Fast method to check that we are using the same Grid
+    if (&_grid != &o.GetGrid())
+      throw std::runtime_error(error("Operator::operator =", "Grids do not match."));
+
     if (this != &o)
-      *this = o;
+      {
+        _extended = o._extended;
+        _Operator = o._Operator;
+      }
 
     return *this;
   }
