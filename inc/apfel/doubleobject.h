@@ -207,7 +207,7 @@ namespace apfel
    */
   ///@{
   template<class A, class B>
-  DoubleObject<B> operator * (DoubleObject<A> lhs, DoubleObject<B> const& rhs) { return lhs *= rhs; }
+  DoubleObject<B> operator * (DoubleObject<A> const& lhs, DoubleObject<B> const& rhs) { return lhs *= rhs; }
 
   template<class T, class U>
   DoubleObject<T, U> operator * (double const& s, DoubleObject<T, U> rhs) { rhs *= s; return rhs; }

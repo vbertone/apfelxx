@@ -151,7 +151,7 @@ namespace apfel
    * @name Ternary operators
    */
   ///@{
-  Distribution operator * (Operator lhs, Distribution const& rhs);                //!< Operator*Distribution
+  Distribution operator * (Operator const& lhs, Distribution const& rhs);         //!< Operator*Distribution
   Operator     operator * (Operator lhs, Operator const& rhs);                    //!< Operator*Operator
   Operator     operator * (double const& s, Operator rhs);                        //!< Scalar*Operator
   Operator     operator * (Operator lhs, double const& s);                        //!< Operator*Scalar

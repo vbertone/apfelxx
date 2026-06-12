@@ -162,7 +162,7 @@ namespace apfel
    */
   ///@{
   template<class A, class B>
-  Set<B> operator * (Set<A> lhs, Set<B> const& rhs) { return lhs *= rhs; }
+  Set<B> operator * (Set<A> const& lhs, Set<B> const& rhs) { return lhs *= rhs; }
 
   // other operators
   template<class T>
@@ -196,7 +196,7 @@ namespace apfel
   Set<T> operator / (Set<T> lhs, double const& s) { lhs /= s; return lhs; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs; }
+  Set<T> operator * (Set<T> const& lhs, Set<T> const& rhs) { return lhs *= rhs; }
 
   template<class T>
   Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { lhs += rhs; return lhs; }

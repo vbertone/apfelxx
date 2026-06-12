@@ -632,7 +632,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  Distribution operator * (Operator lhs, Distribution const& rhs)
+  Distribution operator * (Operator const& lhs, Distribution const& rhs)
   {
     return lhs *= rhs;
   }
