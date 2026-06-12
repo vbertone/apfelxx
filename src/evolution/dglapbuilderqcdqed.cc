@@ -1613,7 +1613,7 @@ namespace apfel
         const double cp20 = cp10 * cp10;
         const double cp11 = cp10 * cp01;
         const double cp02 = cp01 * cp01;
-        const auto sf = DglapObj.at(nt).SplittingFunctions;
+        const auto& sf = DglapObj.at(nt).SplittingFunctions;
         return cp10 * sf.at({1, 0}) + cp01 * sf.at({0, 1})
         + cp20 * sf.at({2, 0}) + cp11 * sf.at({1, 1}) + cp02 * sf.at({0, 2});
       };
@@ -1626,7 +1626,7 @@ namespace apfel
         const double cp11 = cp10 * cp01;
         const double cp02 = cp01 * cp01;
         const double cp30 = cp10 * cp20;
-        const auto sf = DglapObj.at(nt).SplittingFunctions;
+        const auto& sf = DglapObj.at(nt).SplittingFunctions;
         return cp10 * sf.at({1, 0}) + cp01 * sf.at({0, 1})
         + cp20 * sf.at({2, 0}) + cp11 * sf.at({1, 1}) + cp02 * sf.at({0, 2})
         + cp30 * sf.at({3, 0});
@@ -1641,7 +1641,7 @@ namespace apfel
         const double cp02 = cp01 * cp01;
         const double cp30 = cp10 * cp20;
         const double cp40 = cp10 * cp30;
-        const auto sf = DglapObj.at(nt).SplittingFunctions;
+        const auto& sf = DglapObj.at(nt).SplittingFunctions;
         return cp10 * sf.at({1, 0}) + cp01 * sf.at({0, 1})
         + cp20 * sf.at({2, 0}) + cp11 * sf.at({1, 1}) + cp02 * sf.at({0, 2})
         + cp30 * sf.at({3, 0})
@@ -1667,7 +1667,7 @@ namespace apfel
       {
         const double cp10 = (Up ? AlphasTh.at(nt+1).second  : AlphasTh.at(nt+1).first)  / FourPi;
         const double cp01 = (Up ? AlphaemTh.at(nt+1).second : AlphaemTh.at(nt+1).first) / FourPi;
-        const auto mc = DglapObj.at(nt).MatchingConditions;
+        const auto& mc = DglapObj.at(nt).MatchingConditions;
         return mc.at({0, 0})
         + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1});
       };
@@ -1677,7 +1677,7 @@ namespace apfel
         const double cp10 = (Up ? AlphasTh.at(nt+1).second  : AlphasTh.at(nt+1).first)  / FourPi;
         const double cp01 = (Up ? AlphaemTh.at(nt+1).second : AlphaemTh.at(nt+1).first) / FourPi;
         const double cp20 = cp10 * cp10;
-        const auto mc = DglapObj.at(nt).MatchingConditions;
+        const auto& mc = DglapObj.at(nt).MatchingConditions;
         return mc.at({0, 0})
         + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1})
         + (Up ? 1 : -1) * cp20 * ( mc.at({2, 0}) - (Up ? 0 : 1) * mc.at({-2, 0}) );
@@ -1689,7 +1689,7 @@ namespace apfel
         const double cp01 = (Up ? AlphaemTh.at(nt+1).second : AlphaemTh.at(nt+1).first) / FourPi;
         const double cp20 = cp10 * cp10;
         const double cp30 = cp10 * cp20;
-        const auto mc = DglapObj.at(nt).MatchingConditions;
+        const auto& mc = DglapObj.at(nt).MatchingConditions;
         return mc.at({0, 0})
         + (Up ? 1 : -1) * cp10 * mc.at({1, 0}) + (Up ? 1 : -1) * cp01 * mc.at({0, 1})
         + (Up ? 1 : -1) * cp20 * ( mc.at({2, 0}) - (Up ? 0 : 1) * mc.at({-2, 0}) )

@@ -3197,7 +3197,7 @@ namespace apfel
         const double cp  = Alphas(xi * exp(t / 2)) / FourPi;
         const double cp2 = cp * cp;
         const double blx = - 2 * beta0qcd(nf) * log(xi);
-        const auto sf = DglapObj.at(nf).SplittingFunctions;
+        const auto& sf = DglapObj.at(nf).SplittingFunctions;
         return cp2 * sf.at(1) + ( cp - cp2 * blx ) * sf.at(0);
       };
     else if (PerturbativeOrder == 2)
@@ -3209,7 +3209,7 @@ namespace apfel
         const double blx  = - 2 * beta0qcd(nf) * log(xi);
         const double blx2 = blx * blx;
         const double b1   = beta1qcd(nf) / beta0qcd(nf);
-        const auto sf = DglapObj.at(nf).SplittingFunctions;
+        const auto& sf = DglapObj.at(nf).SplittingFunctions;
         return cp3 * sf.at(2) + ( cp2 - 2 * cp3 * blx ) * sf.at(1) + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) ) * sf.at(0);
       };
     else if (PerturbativeOrder == 3)
@@ -3224,7 +3224,7 @@ namespace apfel
         const double blx3 = blx * blx2;
         const double b1   = beta1qcd(nf) / beta0qcd(nf);
         const double b2   = beta2qcd(nf) / beta0qcd(nf);
-        const auto sf = DglapObj.at(nf).SplittingFunctions;
+        const auto& sf = DglapObj.at(nf).SplittingFunctions;
         return cp4 * sf.at(3) + ( cp3 - 3 * cp4 * blx ) * sf.at(2) + ( cp2 - 2 * cp3 * blx + cp4 * ( - 2 * b1 * blx + 3 * blx2 ) ) * sf.at(1)
                        + ( cp - cp2 * blx + cp3 * ( - b1 * blx + blx2 ) + cp4 * ( - b2 * blx + 5 * b1 * blx2 / 2 - blx3 ) ) * sf.at(0);
       };
@@ -3246,21 +3246,21 @@ namespace apfel
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
         const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
-        const auto mc = DglapObj.at(nf).MatchingConditions;
+        const auto& mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * mc.at(1);
       };
     else if (PerturbativeOrder == 2)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
         const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
-        const auto mc = DglapObj.at(nf).MatchingConditions;
+        const auto& mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) );
       };
     else if (PerturbativeOrder == 3)
       return [=] (bool const& Up, int const& nf) -> Set<Operator>
       {
         const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
-        const auto mc = DglapObj.at(nf).MatchingConditions;
+        const auto& mc = DglapObj.at(nf).MatchingConditions;
         return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) + cp * mc.at(3) ) );
       };
     else
@@ -3385,13 +3385,13 @@ namespace apfel
         {
           const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
-          const auto sf = DglapObj(mu).SplittingFunctions;
+          const auto& sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * sf.at(1) );
         };
         MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
         {
           const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
-          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+          const auto& mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
           return mc.at(0) + (Up ? 1 : -1) * cp * mc.at(1);
         };
       }
@@ -3401,13 +3401,13 @@ namespace apfel
         {
           const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
-          const auto sf = DglapObj(mu).SplittingFunctions;
+          const auto& sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * sf.at(2) ) );
         };
         MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
         {
           const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
-          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+          const auto& mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
           return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
         };
       }
@@ -3417,13 +3417,13 @@ namespace apfel
         {
           const double mu = exp(t / 2);
           const double cp = Alphas(mu) / FourPi;
-          const auto sf = DglapObj(mu).SplittingFunctions;
+          const auto& sf = DglapObj(mu).SplittingFunctions;
           return cp * ( sf.at(0) + cp * ( sf.at(1) + cp * ( sf.at(2) + cp * sf.at(3) ) ) );
         };
         MatchingConditions = [=] (bool const& Up, int const& nf) -> Set<Operator>
         {
           const double cp = (Up ? asThUp.at(nf+1) : asThDown.at(nf+1));
-          const auto mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
+          const auto& mc = DglapObj(Thresholds[nf-1]).MatchingConditions;
           return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * mc.at(2) );
         };
       }
