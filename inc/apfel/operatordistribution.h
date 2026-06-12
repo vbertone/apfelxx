@@ -26,6 +26,7 @@ namespace apfel
   public:
     OperatorDistribution() = delete;
     OperatorDistribution(OperatorDistribution const&) = default;
+    OperatorDistribution(OperatorDistribution&&)      = default;
 
     /**
      * @brief The OperatorDistribution constructor.

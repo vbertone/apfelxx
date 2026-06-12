@@ -293,35 +293,40 @@ namespace apfel
   template<class T>
   TabulateObject<T> operator * (double const& s, TabulateObject<T> rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   TabulateObject<T> operator * (TabulateObject<T> lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   TabulateObject<T> operator / (TabulateObject<T> lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   TabulateObject<T> operator + (TabulateObject<T> lhs, TabulateObject<T> const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   TabulateObject<T> operator - (TabulateObject<T> lhs, TabulateObject<T> const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   // Specialisations

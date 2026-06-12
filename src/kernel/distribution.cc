@@ -320,49 +320,57 @@ namespace apfel
   //_________________________________________________________________________
   Distribution operator * (double const& s, Distribution rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   Distribution operator * (Distribution lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Distribution operator * (std::function<double(double const&)> const& f, Distribution rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   Distribution operator * (Distribution lhs, std::function<double(double const&)> const& f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Distribution operator / (Distribution lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Distribution operator + (Distribution lhs, Distribution const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Distribution operator - (Distribution lhs, Distribution const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Distribution operator * (Distribution lhs, Distribution const& rhs)
   {
-    return lhs *= rhs;
+    lhs *= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________

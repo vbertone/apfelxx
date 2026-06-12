@@ -45,6 +45,12 @@ namespace apfel
     DoubleDistribution(DoubleDistribution const& obj);
 
     /**
+     * @brief The DoubleDistribution move constructor
+     * @param obj: the object to be moved
+     */
+    DoubleDistribution(DoubleDistribution&& obj) = default;
+
+    /**
      * @brief The DoubleDistribution constructor
      * @param d1: the first single distribution
      * @param d2: the second single distribution

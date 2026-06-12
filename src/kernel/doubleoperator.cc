@@ -691,61 +691,71 @@ namespace apfel
   //_________________________________________________________________________
   DoubleOperator operator * (DoubleOperator lhs, DoubleOperator const& rhs)
   {
-    return lhs *= rhs;
+    lhs *= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator * (double const& s, DoubleOperator rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator * (DoubleOperator lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator * (std::function<double(double const&, double const&)> f, DoubleOperator rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator * (DoubleOperator lhs, std::function<double(double const&, double const&)> f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator * (std::function<double(double const&)> f, DoubleOperator rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator * (DoubleOperator lhs, std::function<double(double const&)> f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator / (DoubleOperator lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator + (DoubleOperator lhs, DoubleOperator const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleOperator operator - (DoubleOperator lhs, DoubleOperator const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________________

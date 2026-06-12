@@ -26,6 +26,7 @@ namespace apfel
   public:
     DistributionOperator() = delete;
     DistributionOperator(DistributionOperator const&) = default;
+    DistributionOperator(DistributionOperator&&)      = default;
 
     /**
      * @brief The DistributionOperator constructor.

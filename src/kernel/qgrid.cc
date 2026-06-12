@@ -501,35 +501,40 @@ namespace apfel
   template<class T>
   QGrid<T> operator * (double const& s, QGrid<T> rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   QGrid<T> operator * (QGrid<T> lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   QGrid<T> operator / (QGrid<T> lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   QGrid<T> operator + (QGrid<T> lhs, QGrid<T> const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<class T>
   QGrid<T> operator - (QGrid<T> lhs, QGrid<T> const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   // Specialisations

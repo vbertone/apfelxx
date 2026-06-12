@@ -37,6 +37,7 @@ namespace apfel
   public:
     DoubleOperator() = delete;
     DoubleOperator(DoubleOperator const&) = default;
+    DoubleOperator(DoubleOperator&&)      = default;
 
     /**
      * @brief The DoubleOperator constructor.

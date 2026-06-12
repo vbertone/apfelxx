@@ -166,42 +166,42 @@ namespace apfel
 
   // other operators
   template<class T>
-  Set<T> operator * (double const& s, Set<T> rhs) { return rhs *= s; }
+  Set<T> operator * (double const& s, Set<T> rhs) { rhs *= s; return rhs; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, double const& s) { return lhs *= s; }
+  Set<T> operator * (Set<T> lhs, double const& s) { lhs *= s; return lhs; }
 
   template<class T>
-  Set<T> operator * (std::function<double(double const&)> f, Set<T> rhs) { return rhs *= f; }
+  Set<T> operator * (std::function<double(double const&)> f, Set<T> rhs) { rhs *= f; return rhs; }
 
   template<class T>
-  Set<T> operator * (std::function<std::vector<double>(double const&)> f, Set<T> rhs) { return rhs *= f; }
+  Set<T> operator * (std::function<std::vector<double>(double const&)> f, Set<T> rhs) { rhs *= f; return rhs; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, std::function<double(double const&)> f) { return lhs *= f; }
+  Set<T> operator * (Set<T> lhs, std::function<double(double const&)> f) { lhs *= f; return lhs; }
 
   template<class T>
-  Set<T> operator * (std::vector<double> const& v, Set<T> rhs) { return rhs *= v; }
+  Set<T> operator * (std::vector<double> const& v, Set<T> rhs) { rhs *= v; return rhs; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, std::vector<double> const& v) { return lhs *= v; }
+  Set<T> operator * (Set<T> lhs, std::vector<double> const& v) { lhs *= v; return lhs; }
 
   template<class T>
-  Set<T> operator * (std::map<int, double> const& v, Set<T> rhs) { return rhs *= v; }
+  Set<T> operator * (std::map<int, double> const& v, Set<T> rhs) { rhs *= v; return rhs; }
 
   template<class T>
-  Set<T> operator * (Set<T> lhs, std::map<int, double> const& v) { return lhs *= v; }
+  Set<T> operator * (Set<T> lhs, std::map<int, double> const& v) { lhs *= v; return lhs; }
 
   template<class T>
-  Set<T> operator / (Set<T> lhs, double const& s) { return lhs /= s; }
+  Set<T> operator / (Set<T> lhs, double const& s) { lhs /= s; return lhs; }
 
   template<class T>
   Set<T> operator * (Set<T> lhs, Set<T> const& rhs) { return lhs *= rhs; }
 
   template<class T>
-  Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { return lhs += rhs; }
+  Set<T> operator + (Set<T> lhs, Set<T> const& rhs) { lhs += rhs; return lhs; }
 
   template<class T>
-  Set<T> operator - (Set<T> lhs, Set<T> const& rhs) { return lhs -= rhs; }
+  Set<T> operator - (Set<T> lhs, Set<T> const& rhs) { lhs -= rhs; return lhs; }
   ///@}
 }

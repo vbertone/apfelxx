@@ -210,22 +210,22 @@ namespace apfel
   DoubleObject<B> operator * (DoubleObject<A> lhs, DoubleObject<B> const& rhs) { return lhs *= rhs; }
 
   template<class T, class U>
-  DoubleObject<T, U> operator * (double const& s, DoubleObject<T, U> rhs) { return rhs *= s; }
+  DoubleObject<T, U> operator * (double const& s, DoubleObject<T, U> rhs) { rhs *= s; return rhs; }
 
   template<class T, class U>
-  DoubleObject<T, U> operator * (DoubleObject<T, U> lhs, double const& s) { return lhs *= s; }
+  DoubleObject<T, U> operator * (DoubleObject<T, U> lhs, double const& s) { lhs *= s; return lhs; }
 
   template<class T, class U>
-  DoubleObject<T, U> operator / (DoubleObject<T, U> lhs, double const& s) { return lhs /= s; }
+  DoubleObject<T, U> operator / (DoubleObject<T, U> lhs, double const& s) { lhs /= s; return lhs; }
 
   template<class T, class U>
-  DoubleObject<T, U> operator * (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { return lhs *= rhs; }
+  DoubleObject<T, U> operator * (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { lhs *= rhs; return lhs; }
 
   template<class T, class U>
-  DoubleObject<T, U> operator + (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { return lhs += rhs; }
+  DoubleObject<T, U> operator + (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { lhs += rhs; return lhs; }
 
   template<class T, class U>
-  DoubleObject<T, U> operator - (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { return lhs -= rhs; }
+  DoubleObject<T, U> operator - (DoubleObject<T, U> lhs, DoubleObject<T, U> const& rhs) { lhs -= rhs; return lhs; }
   ///@}
 
   /**

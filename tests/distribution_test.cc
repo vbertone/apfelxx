@@ -16,9 +16,21 @@
 // suppresses the move constructors again (e.g. by adding a
 // user-declared destructor or copy member without re-defaulting the
 // moves).
-static_assert(std::is_nothrow_move_constructible<apfel::Distribution>::value,   "apfel::Distribution must be noexcept-move-constructible");
-static_assert(std::is_nothrow_move_constructible<apfel::Operator>::value,       "apfel::Operator must be noexcept-move-constructible");
-static_assert(std::is_nothrow_move_constructible<apfel::matrix<double>>::value, "apfel::matrix<double> must be noexcept-move-constructible");
+static_assert(std::is_nothrow_move_constructible<apfel::Distribution>::value,             "apfel::Distribution must be noexcept-move-constructible");
+static_assert(std::is_nothrow_move_constructible<apfel::Operator>::value,                 "apfel::Operator must be noexcept-move-constructible");
+static_assert(std::is_nothrow_move_constructible<apfel::matrix<double>>::value,           "apfel::matrix<double> must be noexcept-move-constructible");
+static_assert(std::is_nothrow_move_constructible<apfel::QGrid<double>>::value,            "apfel::QGrid<double> must be noexcept-move-constructible");
+
+// The following types have defaulted move constructors that genuinely
+// move their heavy payloads (operator/distribution containers) but are
+// not noexcept, because small const members (LagrangeInterpolator,
+// std::string) or std::function members fall back to copy or have
+// non-noexcept moves. The plain (weaker) trait is asserted instead.
+static_assert(std::is_move_constructible<apfel::DoubleDistribution>::value,       "apfel::DoubleDistribution must be move-constructible");
+static_assert(std::is_move_constructible<apfel::DoubleOperator>::value,           "apfel::DoubleOperator must be move-constructible");
+static_assert(std::is_move_constructible<apfel::OperatorDistribution>::value,     "apfel::OperatorDistribution must be move-constructible");
+static_assert(std::is_move_constructible<apfel::DistributionOperator>::value,     "apfel::DistributionOperator must be move-constructible");
+static_assert(std::is_move_constructible<apfel::TabulateObject<double>>::value,   "apfel::TabulateObject<double> must be move-constructible");
 
 // Class to define the analytical expression of LO splitting function P0qq
 class p0qq: public apfel::Expression

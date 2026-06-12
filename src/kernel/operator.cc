@@ -640,49 +640,57 @@ namespace apfel
   //_________________________________________________________________________
   Operator operator * (Operator lhs, Operator const& rhs)
   {
-    return lhs *= rhs;
+    lhs *= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Operator operator * (double const& s, Operator rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   Operator operator * (Operator lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Operator operator * (std::function<double(double const&)> f, Operator rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   Operator operator * (Operator lhs, std::function<double(double const&)> f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Operator operator / (Operator lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Operator operator + (Operator lhs, Operator const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   Operator operator - (Operator lhs, Operator const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________________

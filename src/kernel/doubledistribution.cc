@@ -777,61 +777,71 @@ namespace apfel
   //_________________________________________________________________________
   DoubleDistribution operator * (double const& s, DoubleDistribution rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator * (DoubleDistribution lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator * (std::function<double(double const&, double const&)> const& f, DoubleDistribution rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&, double const&)> const& f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator * (std::function<double(double const&)> const& f, DoubleDistribution rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator * (DoubleDistribution lhs, std::function<double(double const&)> const& f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator / (DoubleDistribution lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator + (DoubleDistribution lhs, DoubleDistribution const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator - (DoubleDistribution lhs, DoubleDistribution const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   DoubleDistribution operator * (DoubleDistribution lhs, DoubleDistribution const& rhs)
   {
-    return lhs *= rhs;
+    lhs *= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________________

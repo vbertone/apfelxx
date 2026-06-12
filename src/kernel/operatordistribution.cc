@@ -475,61 +475,71 @@ namespace apfel
   //_________________________________________________________________________
   OperatorDistribution operator * (OperatorDistribution lhs, Operator const& rhs)
   {
-    return lhs *= rhs;
+    lhs *= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator * (double const& s, OperatorDistribution rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator * (OperatorDistribution lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator / (OperatorDistribution lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator + (OperatorDistribution lhs, OperatorDistribution const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator - (OperatorDistribution lhs, OperatorDistribution const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator * (std::function<double(double const&, double const&)> const& f, OperatorDistribution rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator * (OperatorDistribution lhs, std::function<double(double const&, double const&)> const& f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator * (std::function<double(double const&)> const& f, OperatorDistribution rhs)
   {
-    return rhs *= f;
+    rhs *= f;
+    return rhs;
   }
 
   //_________________________________________________________________________
   OperatorDistribution operator * (OperatorDistribution lhs, std::function<double(double const&)> const& f)
   {
-    return lhs *= f;
+    lhs *= f;
+    return lhs;
   }
 
   //_________________________________________________________________________________

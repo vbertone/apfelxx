@@ -132,41 +132,47 @@ namespace apfel
   template<>
   matrix<double> operator + (matrix<double> lhs, matrix<double> const& rhs)
   {
-    return lhs += rhs;
+    lhs += rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<>
   matrix<double> operator - (matrix<double> lhs, matrix<double> const& rhs)
   {
-    return lhs -= rhs;
+    lhs -= rhs;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<>
   matrix<double> operator * (double const& s, matrix<double> rhs)
   {
-    return rhs *= s;
+    rhs *= s;
+    return rhs;
   }
 
   //_________________________________________________________________________
   template<>
   matrix<double> operator * (matrix<double> lhs, double const& s)
   {
-    return lhs *= s;
+    lhs *= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<>
   matrix<double> operator / (matrix<double> lhs, double const& s)
   {
-    return lhs /= s;
+    lhs /= s;
+    return lhs;
   }
 
   //_________________________________________________________________________
   template<>
   matrix<double> operator * (matrix<double> lhs, matrix<double> const& rhs)
   {
-    return lhs *= rhs;
+    lhs *= rhs;
+    return lhs;
   }
 }

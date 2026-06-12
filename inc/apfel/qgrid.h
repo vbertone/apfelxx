@@ -80,6 +80,12 @@ namespace apfel
      * @param qg: the object to be copied
      */
     QGrid(QGrid const& qg);
+
+    /**
+     * @brief The QGrid move constructor.
+     * @param qg: the object to be moved
+     */
+    QGrid(QGrid&& qg) = default;
     ///@}
 
     /**
