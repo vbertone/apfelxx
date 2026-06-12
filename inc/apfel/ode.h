@@ -35,19 +35,14 @@ namespace apfel
   std::function<U(double const&, U const&, double const&)>
   rk4(std::function<U(double const& t, U const& Obj)> const& f)
   {
-    // *INDENT-OFF*
-    return
-      [       f            ] (double const& t, U const& y,  double const& dt) -> U{ return
-      [t,y,dt,f            ] (                 U const& dy1                 ) -> U{ return
-      [t,y,dt,f,dy1        ] (                 U const& dy2                 ) -> U{ return
-      [t,y,dt,f,dy1,dy2    ] (                 U const& dy3                 ) -> U{ return
-      [       f,dy1,dy2,dy3] (                 U const& dy4                 ) -> U{ return
-      ( dy1 + 2 * dy2 + 2 * dy3 + dy4 ) / 6  ;} (
-      dt * f( t + dt    , y + dy3     )     );} (
-      dt * f( t + dt / 2, y + dy2 / 2 )     );} (
-      dt * f( t + dt / 2, y + dy1 / 2 )     );} (
-      dt * f( t         , y           )     );} ;
-    // *INDENT-ON*
+    return [f] (double const& t, U const& y, double const& dt) -> U
+    {
+      const U dy1 = dt * f( t, y           );
+      const U dy2 = dt * f( t + dt / 2, y + dy1 / 2 );
+      const U dy3 = dt * f( t + dt / 2, y + dy2 / 2 );
+      const U dy4 = dt * f( t + dt, y + dy3     );
+      return ( dy1 + 2 * dy2 + 2 * dy3 + dy4 ) / 6;
+    };
   }
 
   /**
