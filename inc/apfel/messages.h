@@ -26,7 +26,7 @@ namespace apfel
   /**
    * @brief Current Verbosity level
    */
-  static int VerbosityLevel = HIGH;
+  [[maybe_unused]] static int VerbosityLevel = HIGH;
 
   /**
    * @brief Colour codes
