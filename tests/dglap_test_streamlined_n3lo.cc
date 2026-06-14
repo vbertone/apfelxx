@@ -45,7 +45,7 @@ int main()
   std::cout << "\n   x    "
             << "   u-ubar   "
             << "   d-dbar   "
-            << "  dbr-dbr   "
+            << "  dbr-ubr   "
             << " 2(ubr+dbr) "
             << "   s-sbar   "
             << "   s+sbar   "
