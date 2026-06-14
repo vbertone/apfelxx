@@ -1,0 +1,7 @@
+<map id="apfel::Observable&lt; T &gt;" name="apfel::Observable&lt; T &gt;">
+<area shape="rect" id="Node000001" title="The Observable class encapsulates sets of operators and sets of T&#45;type objects for an easy computatio..." alt="" coords="38,241,220,268"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,123,253,168"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,181,131,241,127,239,127,185"/>
+<area shape="rect" id="Node000003" href="$structapfel_1_1Observable_1_1ConvolutionPair.html" title="This structure contains a pair of sets of coefficient functions and of objects." alt="" coords="44,5,214,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="130,64,132,123,126,122,128,68"/>
+</map>

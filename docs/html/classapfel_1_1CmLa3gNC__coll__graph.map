@@ -1,0 +1,29 @@
+<map id="apfel::CmLa3gNC" name="apfel::CmLa3gNC">
+<area shape="rect" id="Node000001" title="Approximated O(αs3) gluon coefficient function for FL." alt="" coords="864,199,1013,226"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="5,184,150,212"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,168,104,135,128,97,159,62,198,36,245,16,287,6,325,3,362,5,439,18,535,31,624,34,695,33,728,37,763,45,800,59,841,81,874,107,901,140,934,199,929,198,896,143,870,111,839,85,798,64,761,50,727,42,694,39,624,39,534,37,438,23,361,10,325,8,288,11,247,21,200,40,163,66,132,101,109,138,93,170"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1CmthL3gNC.html" title="O(αs3) gluon coefficient function for FL near threshold. Reference: https://arxiv...." alt="" coords="565,83,718,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="93,169,135,116,164,89,198,69,251,50,307,41,364,38,420,41,522,58,602,81,597,83,521,63,419,47,364,44,308,46,253,56,200,74,168,93,139,119,97,172"/>
+<area shape="rect" id="Node000004" href="$classapfel_1_1CmL1gNC.html" title="O(αs) gluon coefficient function for FL." alt="" coords="199,83,339,110"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="105,172,136,148,172,126,218,109,214,113,175,131,139,153,109,176"/>
+<area shape="rect" id="Node000005" href="$classapfel_1_1Cm0L3gNC__c.html" title="O(αs3) constant term of gluon coefficient function for FL. Reference: https://arxiv...." alt="" coords="559,136,725,164"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="152,178,199,170,295,160,392,153,561,149,556,151,392,158,295,165,199,175,154,183"/>
+<area shape="rect" id="Node000006" href="$classapfel_1_1CL3g.html" title="O(αs3) gluon coefficient function for FL." alt="" coords="218,184,321,212"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="165,195,219,196,215,199,166,200"/>
+<area shape="rect" id="Node000007" href="$classapfel_1_1Cm0L3gNC__l.html" title="O(αs3) linear log term of gluon coefficient function for FL. Reference: https://arxiv...." alt="" coords="368,231,530,258"/>
+<area shape="poly" id="edge11_Node000007_Node000002" title=" " alt="" coords="154,213,199,221,369,238,365,242,199,226,156,218"/>
+<area shape="rect" id="Node000008" href="$classapfel_1_1Cm0L3gNC__l2.html" title="O(αs3) quadratic log term of gluon coefficient function for FL. Reference: https://arxiv...." alt="" coords="363,279,535,306"/>
+<area shape="poly" id="edge13_Node000008_Node000002" title=" " alt="" coords="126,215,200,241,283,261,365,279,360,280,282,266,198,246,126,220"/>
+<area shape="rect" id="Node000009" href="$classapfel_1_1CmsxL3gNC.html" title="O(αs3) gluon coefficient function for FL at small x. Reference: https://arxiv.org/pdf/1205...." alt="" coords="564,333,720,361"/>
+<area shape="poly" id="edge15_Node000009_Node000002" title=" " alt="" coords="107,219,150,250,200,278,246,296,294,310,392,330,485,341,566,347,561,348,485,346,392,336,293,315,244,301,198,283,147,255,107,224"/>
+<area shape="rect" id="Node000010" href="$classapfel_1_1Cm0sxL3gNC.html" title="O(αs3) gluon coefficient function for FL at Q &gt;&gt; m and small x. Reference: https://arxiv...." alt="" coords="366,392,532,420"/>
+<area shape="poly" id="edge17_Node000010_Node000002" title=" " alt="" coords="87,224,100,259,118,298,143,336,175,366,220,389,269,403,319,409,369,413,363,413,319,415,268,408,218,394,172,371,139,339,113,301,95,261,86,229"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="734,108,788,121,841,141,887,168,924,199,919,198,884,172,839,146,786,126,734,113"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="354,94,567,95,562,98,355,99"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="726,165,872,198,867,198,726,170"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="336,200,431,200,483,196,534,188,606,163,601,165,535,193,483,201,431,205,337,205"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="546,236,866,216,861,218,546,241"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="550,284,635,277,725,264,812,245,887,228,892,226,813,250,725,269,636,282,550,290"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="735,351,788,345,814,338,839,327,869,305,895,277,928,228,933,225,899,281,873,309,841,332,816,343,789,350,736,356"/>
+<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="547,417,617,419,694,413,733,405,770,393,806,377,838,356,870,324,897,288,929,228,934,225,901,291,874,328,842,360,808,382,772,398,734,410,695,418,617,424,547,422"/>
+</map>

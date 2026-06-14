@@ -1,0 +1,5 @@
+<map id="apfel::EvolBasisPlusMinus" name="apfel::EvolBasisPlusMinus">
+<area shape="rect" id="Node000001" title="The EvolBasisPlusMinus class is derives from ConvolutionMap and implements a basis in which plus (q+q..." alt="" coords="5,81,217,109"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="20,5,202,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,47,113,82,109,79,109,51"/>
+</map>

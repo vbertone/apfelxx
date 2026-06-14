@@ -1,0 +1,8 @@
+<map id="apfel::AS2Hg_MSbarMass_0" name="apfel::AS2Hg_MSbarMass_0">
+<area shape="rect" id="Node000001" title="O(αs2) constant term of Eq. (B.3) of https://arxiv.org/pdf/hep&#45;ph/9612398.pdf which includes the corr..." alt="" coords="5,183,234,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="42,5,186,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,47,122,183,116,182,113,50"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1AS2Hg__0.html" title="O(αs2) constant term of Eq (B.3) of https://arxiv.org/pdf/hep&#45;ph/9612398.pdf." alt="" coords="135,82,269,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="142,41,190,81,184,83,141,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="184,121,132,184,129,180,179,122"/>
+</map>

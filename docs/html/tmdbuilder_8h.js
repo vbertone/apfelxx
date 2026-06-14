@@ -1,0 +1,27 @@
+var tmdbuilder_8h =
+[
+    [ "apfel::TmdObjects", "structapfel_1_1TmdObjects.html", "structapfel_1_1TmdObjects" ],
+    [ "apfel::BuildTmdFFs", "namespaceapfel.html#a7b93600e0a3f8b46c1c50ad768af289c", null ],
+    [ "apfel::BuildTmdPDFs", "namespaceapfel.html#a193f579d25b4a494e70f996395641b3d", null ],
+    [ "apfel::BuildTmdPDFsWithTMCs", "namespaceapfel.html#a47275eba81e603289d761f54cb4a3725", null ],
+    [ "apfel::CollinsSoperKernel", "namespaceapfel.html#ac05a7734973ff2e62fdee1441a22bba2", null ],
+    [ "apfel::EvolutionFactors", "namespaceapfel.html#a3403b0fd4e423dc723bec51135f1186c", null ],
+    [ "apfel::EvolutionFactorsK", "namespaceapfel.html#a544c835527c9307281cf7bb828e4d36a", null ],
+    [ "apfel::GluonAnalyticEvolutionFactor", "namespaceapfel.html#a0314854b12a956e78b3cd97298b55f7e", null ],
+    [ "apfel::GluonEvolutionFactor", "namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f", null ],
+    [ "apfel::HardFactor", "namespaceapfel.html#a94e0774ab3a271603a3463715b61c1c2", null ],
+    [ "apfel::IncludeTMCsToTmdPdfs", "namespaceapfel.html#a32fdbb9069aa3161b710c0a2a84182a7", null ],
+    [ "apfel::InitializeTmdObjects", "namespaceapfel.html#ac99e7fbbdc1840f65f6698593bbe74ea", null ],
+    [ "apfel::InitializeTmdObjectsBM", "namespaceapfel.html#ad91496ffd92e4d6dffe6af4b7dcaa4dd", null ],
+    [ "apfel::InitializeTmdObjectsDYResScheme", "namespaceapfel.html#a05e72fdf41e41cc153dc4777589da9d9", null ],
+    [ "apfel::InitializeTmdObjectsg1", "namespaceapfel.html#acf3a5aacfe9bfcf00862ee7d4858e206", null ],
+    [ "apfel::InitializeTmdObjectsSivers", "namespaceapfel.html#a11867a6103809f39d610cf1690e27717", null ],
+    [ "apfel::MatchingFunctionsFFs", "namespaceapfel.html#ad153699746a0c4dd12021c0bb949fad5", null ],
+    [ "apfel::MatchingFunctionsPDFs", "namespaceapfel.html#a05c2fea27dd7ef345b9da22ce8a63a5d", null ],
+    [ "apfel::MatchTmdFFs", "namespaceapfel.html#a439e7dcdb08932f7a2ca78cffda1af00", null ],
+    [ "apfel::MatchTmdPDFs", "namespaceapfel.html#a49344b8e01187276f0b247d170bc3b26", null ],
+    [ "apfel::MatchTmdPDFsWithTMCs", "namespaceapfel.html#a4080faa8b1d51faa59345f09e6693645", null ],
+    [ "apfel::QuarkAnalyticEvolutionFactor", "namespaceapfel.html#aeab94641441d9b0677944defca3fc91f", null ],
+    [ "apfel::QuarkEvolutionFactor", "namespaceapfel.html#a38a26f2c8ec2ab9cf9c97836185a657f", null ],
+    [ "apfel::QuarkEvolutionFactorxi", "namespaceapfel.html#ac0a10f8afe02267c0410b5daffeca908", null ]
+];

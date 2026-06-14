@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: apfel::DoubleExpression Class Reference</title>
+<title>APFEL++: apfel::DoubleExpression Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -77,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
   </ul>
 </div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classapfel_1_1DoubleExpression.html','','classapfel_1_1DoubleExpression-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -98,16 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a href="namespaceapfel.html">apfel</a></li><li class="navelem"><a href="classapfel_1_1DoubleExpression.html">DoubleExpression</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classapfel_1_1DoubleExpression-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">apfel::DoubleExpression Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -116,106 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="doubleexpression_8h_source.html">doubleexpression.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for apfel::DoubleExpression:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classapfel_1_1DoubleExpression.png" usemap="#apfel_3A_3ADoubleExpression_map" alt=""/>
-  <map id="apfel_3A_3ADoubleExpression_map" name="apfel_3A_3ADoubleExpression_map">
-<area href="classapfel_1_1C1LG2Q.html" title="O(αs) quark-in-gluon coefficient function for FL." alt="apfel::C1LG2Q" shape="rect" coords="164,56,318,80"/>
-<area href="classapfel_1_1C1LQ2G.html" title="O(αs) gluon-in-quark coefficient function for FL." alt="apfel::C1LQ2G" shape="rect" coords="164,112,318,136"/>
-<area href="classapfel_1_1C1LQ2Q.html" title="O(αs) non-singlet quark-in-quark coefficient function for FL." alt="apfel::C1LQ2Q" shape="rect" coords="164,168,318,192"/>
-<area href="classapfel_1_1C1TG2Q.html" title="O(αs) quark-in-gluon coefficient function for FT." alt="apfel::C1TG2Q" shape="rect" coords="164,224,318,248"/>
-<area href="classapfel_1_1C1TQ2G.html" title="O(αs) gluon-in-quark coefficient function for FT." alt="apfel::C1TQ2G" shape="rect" coords="164,280,318,304"/>
-<area href="classapfel_1_1C1TQ2Q.html" title="O(αs) non-singlet quark-in-quark coefficient function for FT." alt="apfel::C1TQ2Q" shape="rect" coords="164,336,318,360"/>
-<area href="classapfel_1_1C2LG2G.html" title="O(αs2) gluon-in-gluon coefficient function for FL." alt="apfel::C2LG2G" shape="rect" coords="164,392,318,416"/>
-<area href="classapfel_1_1C2LG2Q.html" title="O(αs2) quark-in-gluon coefficient function for FL." alt="apfel::C2LG2Q" shape="rect" coords="164,448,318,472"/>
-<area href="classapfel_1_1C2LQ2G.html" title="O(αs2) gluon-in-quark coefficient function for FL." alt="apfel::C2LQ2G" shape="rect" coords="164,504,318,528"/>
-<area href="classapfel_1_1C2LQ2QB.html" title="O(αs2) pure-singlet antiquark-in-quark coefficient function for FL." alt="apfel::C2LQ2QB" shape="rect" coords="164,560,318,584"/>
-<area href="classapfel_1_1C2LQ2QNS.html" title="O(αs2) non-singlet quark-in-quark coefficient function for FL." alt="apfel::C2LQ2QNS" shape="rect" coords="164,616,318,640"/>
-<area href="classapfel_1_1C2LQ2QP1.html" title="O(αs2) pure-singlet quark(prime)-in-quark (1) coefficient function for FL." alt="apfel::C2LQ2QP1" shape="rect" coords="164,672,318,696"/>
-<area href="classapfel_1_1C2LQ2QP2.html" title="O(αs2) pure-singlet quark(prime)-in-quark (2) coefficient function for FL." alt="apfel::C2LQ2QP2" shape="rect" coords="164,728,318,752"/>
-<area href="classapfel_1_1C2LQ2QP3.html" title="O(αs2) pure-singlet quark(prime)-in-quark (1) coefficient function for FL." alt="apfel::C2LQ2QP3" shape="rect" coords="164,784,318,808"/>
-<area href="classapfel_1_1C2LQ2QPS.html" title="O(αs2) pure-singlet quark-in-quark coefficient function for FL." alt="apfel::C2LQ2QPS" shape="rect" coords="164,840,318,864"/>
-<area href="classapfel_1_1C2TG2G.html" title="O(αs2) gluon-in-gluon coefficient function for FT." alt="apfel::C2TG2G" shape="rect" coords="164,896,318,920"/>
-<area href="classapfel_1_1C2TG2Q.html" title="O(αs2) quark-in-gluon coefficient function for FT." alt="apfel::C2TG2Q" shape="rect" coords="164,952,318,976"/>
-<area href="classapfel_1_1C2TQ2G.html" title="O(αs2) gluon-in-quark coefficient function for FT." alt="apfel::C2TQ2G" shape="rect" coords="164,1008,318,1032"/>
-<area href="classapfel_1_1C2TQ2QB.html" title="O(αs2) pure-singlet antiquark-in-quark coefficient function for FT." alt="apfel::C2TQ2QB" shape="rect" coords="164,1064,318,1088"/>
-<area href="classapfel_1_1C2TQ2QNS.html" title="O(αs2) non-singlet quark-in-quark coefficient function for FT." alt="apfel::C2TQ2QNS" shape="rect" coords="164,1120,318,1144"/>
-<area href="classapfel_1_1C2TQ2QP1.html" title="O(αs2) pure-singlet quark(prime)-in-quark (1) coefficient function for FT." alt="apfel::C2TQ2QP1" shape="rect" coords="164,1176,318,1200"/>
-<area href="classapfel_1_1C2TQ2QP2.html" title="O(αs2) pure-singlet quark(prime)-in-quark (2) coefficient function for FT." alt="apfel::C2TQ2QP2" shape="rect" coords="164,1232,318,1256"/>
-<area href="classapfel_1_1C2TQ2QP3.html" title="O(αs2) pure-singlet quark(prime)-in-quark (1) coefficient function for FT." alt="apfel::C2TQ2QP3" shape="rect" coords="164,1288,318,1312"/>
-<area href="classapfel_1_1C2TQ2QPS.html" title="O(αs2) pure-singlet quark-in-quark coefficient function for FT." alt="apfel::C2TQ2QPS" shape="rect" coords="164,1344,318,1368"/>
-<area href="classapfel_1_1DC1G2Q.html" title="O(αs) quark-in-gluon coefficient function for G1." alt="apfel::DC1G2Q" shape="rect" coords="164,1400,318,1424"/>
-<area href="classapfel_1_1DC1Q2G.html" title="O(αs) gluon-in-quark coefficient function for G1." alt="apfel::DC1Q2G" shape="rect" coords="164,1456,318,1480"/>
-<area href="classapfel_1_1DC1Q2Q.html" title="O(αs) non-singlet quark-in-quark coefficient function for G1." alt="apfel::DC1Q2Q" shape="rect" coords="164,1512,318,1536"/>
-<area href="classapfel_1_1DC2G2G.html" title="O(αs2) gluon-in-gluon coefficient function for G1." alt="apfel::DC2G2G" shape="rect" coords="164,1568,318,1592"/>
-<area href="classapfel_1_1DC2G2Q.html" title="O(αs2) quark-in-gluon coefficient function for G1." alt="apfel::DC2G2Q" shape="rect" coords="164,1624,318,1648"/>
-<area href="classapfel_1_1DC2Q2G.html" title="O(αs2) gluon-in-quark coefficient function for G1." alt="apfel::DC2Q2G" shape="rect" coords="164,1680,318,1704"/>
-<area href="classapfel_1_1DC2Q2QB.html" title="O(αs2) pure-singlet antiquark-in-quark coefficient function for G1." alt="apfel::DC2Q2QB" shape="rect" coords="164,1736,318,1760"/>
-<area href="classapfel_1_1DC2Q2QNS.html" title="O(αs2) non-singlet quark-in-quark coefficient function for G1." alt="apfel::DC2Q2QNS" shape="rect" coords="164,1792,318,1816"/>
-<area href="classapfel_1_1DC2Q2QP1.html" title="O(αs2) pure-singlet quark(prime)-in-quark (1) coefficient function for G1." alt="apfel::DC2Q2QP1" shape="rect" coords="164,1848,318,1872"/>
-<area href="classapfel_1_1DC2Q2QP2.html" title="O(αs2) pure-singlet quark(prime)-in-quark (2) coefficient function for G1." alt="apfel::DC2Q2QP2" shape="rect" coords="164,1904,318,1928"/>
-<area href="classapfel_1_1DC2Q2QP3.html" title="O(αs2) pure-singlet quark(prime)-in-quark (1) coefficient function for G1." alt="apfel::DC2Q2QP3" shape="rect" coords="164,1960,318,1984"/>
-<area href="classapfel_1_1DC2Q2QPS.html" title="O(αs2) pure-singlet quark-in-quark coefficient function for G1." alt="apfel::DC2Q2QPS" shape="rect" coords="164,2016,318,2040"/>
-<area href="classapfel_1_1DoubleIdentity.html" title="Derived class from DoubleExpression to implement the double Identity operator (double delta function)..." alt="apfel::DoubleIdentity" shape="rect" coords="164,2072,318,2096"/>
-<area href="classapfel_1_1DoubleNull.html" title="Derived class from DoubleExpression to implement the double Null operator (double zero)." alt="apfel::DoubleNull" shape="rect" coords="164,2128,318,2152"/>
-<area href="classapfel_1_1F3C1g2qM.html" title="O(αs) g2qM coefficient function for F3." alt="apfel::F3C1g2qM" shape="rect" coords="164,2184,318,2208"/>
-<area href="classapfel_1_1F3C1q2gM.html" title="O(αs) q2gM coefficient function for F3." alt="apfel::F3C1q2gM" shape="rect" coords="164,2240,318,2264"/>
-<area href="classapfel_1_1F3C1q2qM.html" title="O(αs) q2qM coefficient function for F3." alt="apfel::F3C1q2qM" shape="rect" coords="164,2296,318,2320"/>
-<area href="classapfel_1_1F3C2g2qM.html" title="O(αs2) g2qM coefficient function for F3." alt="apfel::F3C2g2qM" shape="rect" coords="164,2352,318,2376"/>
-<area href="classapfel_1_1F3C2g2qMANoW.html" title="O(αs2) g2qMANoW coefficient function for F3." alt="apfel::F3C2g2qMANoW" shape="rect" coords="164,2408,318,2432"/>
-<area href="classapfel_1_1F3C2q2gM.html" title="O(αs2) q2gM coefficient function for F3." alt="apfel::F3C2q2gM" shape="rect" coords="164,2464,318,2488"/>
-<area href="classapfel_1_1F3C2q2gMANoW.html" title="O(αs2) q2gMANoW coefficient function for F3." alt="apfel::F3C2q2gMANoW" shape="rect" coords="164,2520,318,2544"/>
-<area href="classapfel_1_1F3C2q2qM.html" title="O(αs2) q2qM coefficient function for F3." alt="apfel::F3C2q2qM" shape="rect" coords="164,2576,318,2600"/>
-<area href="classapfel_1_1F3C2q2qMANoW.html" title="O(αs2) q2qMANoW coefficient function for F3." alt="apfel::F3C2q2qMANoW" shape="rect" coords="164,2632,318,2656"/>
-<area href="classapfel_1_1F3C2q2qMFcon1.html" title="O(αs2) q2qMFcon1 coefficient function for F3." alt="apfel::F3C2q2qMFcon1" shape="rect" coords="164,2688,318,2712"/>
-<area href="classapfel_1_1F3C2q2qbM.html" title="O(αs2) q2qbM coefficient function for F3." alt="apfel::F3C2q2qbM" shape="rect" coords="164,2744,318,2768"/>
-<area href="classapfel_1_1F3C2q2qbMFcon.html" title="O(αs2) q2qbMFcon coefficient function for F3." alt="apfel::F3C2q2qbMFcon" shape="rect" coords="164,2800,318,2824"/>
-<area href="classapfel_1_1F3C2q2qpM1.html" title="O(αs2) q2qpM1 coefficient function for F3." alt="apfel::F3C2q2qpM1" shape="rect" coords="164,2856,318,2880"/>
-<area href="classapfel_1_1F3C2q2qpM2.html" title="O(αs2) q2qpM2 coefficient function for F3." alt="apfel::F3C2q2qpM2" shape="rect" coords="164,2912,318,2936"/>
-<area href="classapfel_1_1F3C2q2qpMNoW3.html" title="O(αs2) q2qpMNoW3 coefficient function for F3." alt="apfel::F3C2q2qpMNoW3" shape="rect" coords="164,2968,318,2992"/>
-<area href="classapfel_1_1F3C2q2qpMNoW4.html" title="O(αs2) q2qpMNoW4 coefficient function for F3." alt="apfel::F3C2q2qpMNoW4" shape="rect" coords="164,3024,318,3048"/>
-<area href="classapfel_1_1FLC1g2qM.html" title="O(αs) g2qM coefficient function for FL." alt="apfel::FLC1g2qM" shape="rect" coords="164,3080,318,3104"/>
-<area href="classapfel_1_1FLC1q2gM.html" title="O(αs) q2gM coefficient function for FL." alt="apfel::FLC1q2gM" shape="rect" coords="164,3136,318,3160"/>
-<area href="classapfel_1_1FLC1q2qM.html" title="O(αs) q2qM coefficient function for FL." alt="apfel::FLC1q2qM" shape="rect" coords="164,3192,318,3216"/>
-<area href="classapfel_1_1FLC2g2gM.html" title="O(αs2) g2gM coefficient function for FL." alt="apfel::FLC2g2gM" shape="rect" coords="164,3248,318,3272"/>
-<area href="classapfel_1_1FLC2g2gMAANoW.html" title="O(αs2) g2gMAANoW coefficient function for FL." alt="apfel::FLC2g2gMAANoW" shape="rect" coords="164,3304,318,3328"/>
-<area href="classapfel_1_1FLC2g2qM.html" title="O(αs2) g2qM coefficient function for FL." alt="apfel::FLC2g2qM" shape="rect" coords="164,3360,318,3384"/>
-<area href="classapfel_1_1FLC2g2qMANoW.html" title="O(αs2) g2qMANoW coefficient function for FL." alt="apfel::FLC2g2qMANoW" shape="rect" coords="164,3416,318,3440"/>
-<area href="classapfel_1_1FLC2q2gM.html" title="O(αs2) q2gM coefficient function for FL." alt="apfel::FLC2q2gM" shape="rect" coords="164,3472,318,3496"/>
-<area href="classapfel_1_1FLC2q2gMANoW.html" title="O(αs2) q2gMANoW coefficient function for FL." alt="apfel::FLC2q2gMANoW" shape="rect" coords="164,3528,318,3552"/>
-<area href="classapfel_1_1FLC2q2qM.html" title="O(αs2) q2qM coefficient function for FL." alt="apfel::FLC2q2qM" shape="rect" coords="164,3584,318,3608"/>
-<area href="classapfel_1_1FLC2q2qMANoW.html" title="O(αs2) q2qMANoW coefficient function for FL." alt="apfel::FLC2q2qMANoW" shape="rect" coords="164,3640,318,3664"/>
-<area href="classapfel_1_1FLC2q2qMFcon1.html" title="O(αs2) q2qMFcon1 coefficient function for FL." alt="apfel::FLC2q2qMFcon1" shape="rect" coords="164,3696,318,3720"/>
-<area href="classapfel_1_1FLC2q2qMFcon2.html" title="O(αs2) q2qMFcon2 coefficient function for FL." alt="apfel::FLC2q2qMFcon2" shape="rect" coords="164,3752,318,3776"/>
-<area href="classapfel_1_1FLC2q2qbM.html" title="O(αs2) q2qbM coefficient function for FL." alt="apfel::FLC2q2qbM" shape="rect" coords="164,3808,318,3832"/>
-<area href="classapfel_1_1FLC2q2qbMFcon.html" title="O(αs2) q2qbMFcon coefficient function for FL." alt="apfel::FLC2q2qbMFcon" shape="rect" coords="164,3864,318,3888"/>
-<area href="classapfel_1_1FLC2q2qpM1.html" title="O(αs2) q2qpM1 coefficient function for FL." alt="apfel::FLC2q2qpM1" shape="rect" coords="164,3920,318,3944"/>
-<area href="classapfel_1_1FLC2q2qpM2.html" title="O(αs2) q2qpM2 coefficient function for FL." alt="apfel::FLC2q2qpM2" shape="rect" coords="164,3976,318,4000"/>
-<area href="classapfel_1_1FLC2q2qpMNoW3.html" title="O(αs2) q2qpMNoW3 coefficient function for FL." alt="apfel::FLC2q2qpMNoW3" shape="rect" coords="164,4032,318,4056"/>
-<area href="classapfel_1_1FLC2q2qpMNoW4.html" title="O(αs2) q2qpMNoW4 coefficient function for FL." alt="apfel::FLC2q2qpMNoW4" shape="rect" coords="164,4088,318,4112"/>
-<area href="classapfel_1_1FTC1g2qM.html" title="O(αs) g2qM coefficient function for FT." alt="apfel::FTC1g2qM" shape="rect" coords="164,4144,318,4168"/>
-<area href="classapfel_1_1FTC1q2gM.html" title="O(αs) q2gM coefficient function for FT." alt="apfel::FTC1q2gM" shape="rect" coords="164,4200,318,4224"/>
-<area href="classapfel_1_1FTC1q2qM.html" title="O(αs) q2qM coefficient function for FT." alt="apfel::FTC1q2qM" shape="rect" coords="164,4256,318,4280"/>
-<area href="classapfel_1_1FTC2g2gM.html" title="O(αs2) g2gM coefficient function for FT." alt="apfel::FTC2g2gM" shape="rect" coords="164,4312,318,4336"/>
-<area href="classapfel_1_1FTC2g2gMAANoW.html" title="O(αs2) g2gMAANoW coefficient function for FT." alt="apfel::FTC2g2gMAANoW" shape="rect" coords="164,4368,318,4392"/>
-<area href="classapfel_1_1FTC2g2qM.html" title="O(αs2) g2qM coefficient function for FT." alt="apfel::FTC2g2qM" shape="rect" coords="164,4424,318,4448"/>
-<area href="classapfel_1_1FTC2g2qMANoW.html" title="O(αs2) g2qMANoW coefficient function for FT." alt="apfel::FTC2g2qMANoW" shape="rect" coords="164,4480,318,4504"/>
-<area href="classapfel_1_1FTC2q2gM.html" title="O(αs2) q2gM coefficient function for FT." alt="apfel::FTC2q2gM" shape="rect" coords="164,4536,318,4560"/>
-<area href="classapfel_1_1FTC2q2gMANoW.html" title="O(αs2) q2gMANoW coefficient function for FT." alt="apfel::FTC2q2gMANoW" shape="rect" coords="164,4592,318,4616"/>
-<area href="classapfel_1_1FTC2q2qM.html" title="O(αs2) q2qM coefficient function for FT." alt="apfel::FTC2q2qM" shape="rect" coords="164,4648,318,4672"/>
-<area href="classapfel_1_1FTC2q2qMANoW.html" title="O(αs2) q2qMANoW coefficient function for FT." alt="apfel::FTC2q2qMANoW" shape="rect" coords="164,4704,318,4728"/>
-<area href="classapfel_1_1FTC2q2qMFcon1.html" title="O(αs2) q2qMFcon1 coefficient function for FT." alt="apfel::FTC2q2qMFcon1" shape="rect" coords="164,4760,318,4784"/>
-<area href="classapfel_1_1FTC2q2qMFcon2.html" title="O(αs2) q2qMFcon2 coefficient function for FT." alt="apfel::FTC2q2qMFcon2" shape="rect" coords="164,4816,318,4840"/>
-<area href="classapfel_1_1FTC2q2qbM.html" title="O(αs2) q2qbM coefficient function for FT." alt="apfel::FTC2q2qbM" shape="rect" coords="164,4872,318,4896"/>
-<area href="classapfel_1_1FTC2q2qbMFcon.html" title="O(αs2) q2qbMFcon coefficient function for FT." alt="apfel::FTC2q2qbMFcon" shape="rect" coords="164,4928,318,4952"/>
-<area href="classapfel_1_1FTC2q2qpM1.html" title="O(αs2) q2qpM1 coefficient function for FT." alt="apfel::FTC2q2qpM1" shape="rect" coords="164,4984,318,5008"/>
-<area href="classapfel_1_1FTC2q2qpM2.html" title="O(αs2) q2qpM2 coefficient function for FT." alt="apfel::FTC2q2qpM2" shape="rect" coords="164,5040,318,5064"/>
-<area href="classapfel_1_1FTC2q2qpMNoW3.html" title="O(αs2) q2qpMNoW3 coefficient function for FT." alt="apfel::FTC2q2qpMNoW3" shape="rect" coords="164,5096,318,5120"/>
-<area href="classapfel_1_1FTC2q2qpMNoW4.html" title="O(αs2) q2qpMNoW4 coefficient function for FT." alt="apfel::FTC2q2qpMNoW4" shape="rect" coords="164,5152,318,5176"/>
-  </map>
-</div></div>
+
+<p>Inherited by <a class="el" href="classapfel_1_1C1LG2Q.html">apfel::C1LG2Q</a>, <a class="el" href="classapfel_1_1C1LQ2G.html">apfel::C1LQ2G</a>, <a class="el" href="classapfel_1_1C1LQ2Q.html">apfel::C1LQ2Q</a>, <a class="el" href="classapfel_1_1C1TG2Q.html">apfel::C1TG2Q</a>, <a class="el" href="classapfel_1_1C1TQ2G.html">apfel::C1TQ2G</a>, <a class="el" href="classapfel_1_1C1TQ2Q.html">apfel::C1TQ2Q</a>, <a class="el" href="classapfel_1_1C2LG2G.html">apfel::C2LG2G</a>, <a class="el" href="classapfel_1_1C2LG2Q.html">apfel::C2LG2Q</a>, <a class="el" href="classapfel_1_1C2LQ2G.html">apfel::C2LQ2G</a>, <a class="el" href="classapfel_1_1C2LQ2QB.html">apfel::C2LQ2QB</a>, <a class="el" href="classapfel_1_1C2LQ2QNS.html">apfel::C2LQ2QNS</a>, <a class="el" href="classapfel_1_1C2LQ2QP1.html">apfel::C2LQ2QP1</a>, <a class="el" href="classapfel_1_1C2LQ2QP2.html">apfel::C2LQ2QP2</a>, <a class="el" href="classapfel_1_1C2LQ2QP3.html">apfel::C2LQ2QP3</a>, <a class="el" href="classapfel_1_1C2LQ2QPS.html">apfel::C2LQ2QPS</a>, <a class="el" href="classapfel_1_1C2TG2G.html">apfel::C2TG2G</a>, <a class="el" href="classapfel_1_1C2TG2Q.html">apfel::C2TG2Q</a>, <a class="el" href="classapfel_1_1C2TQ2G.html">apfel::C2TQ2G</a>, <a class="el" href="classapfel_1_1C2TQ2QB.html">apfel::C2TQ2QB</a>, <a class="el" href="classapfel_1_1C2TQ2QNS.html">apfel::C2TQ2QNS</a>, <a class="el" href="classapfel_1_1C2TQ2QP1.html">apfel::C2TQ2QP1</a>, <a class="el" href="classapfel_1_1C2TQ2QP2.html">apfel::C2TQ2QP2</a>, <a class="el" href="classapfel_1_1C2TQ2QP3.html">apfel::C2TQ2QP3</a>, <a class="el" href="classapfel_1_1C2TQ2QPS.html">apfel::C2TQ2QPS</a>, <a class="el" href="classapfel_1_1DC1G2Q.html">apfel::DC1G2Q</a>, <a class="el" href="classapfel_1_1DC1Q2G.html">apfel::DC1Q2G</a>, <a class="el" href="classapfel_1_1DC1Q2Q.html">apfel::DC1Q2Q</a>, <a class="el" href="classapfel_1_1DC2G2G.html">apfel::DC2G2G</a>, <a class="el" href="classapfel_1_1DC2G2Q.html">apfel::DC2G2Q</a>, <a class="el" href="classapfel_1_1DC2Q2G.html">apfel::DC2Q2G</a>, <a class="el" href="classapfel_1_1DC2Q2QB.html">apfel::DC2Q2QB</a>, <a class="el" href="classapfel_1_1DC2Q2QNS.html">apfel::DC2Q2QNS</a>, <a class="el" href="classapfel_1_1DC2Q2QP1.html">apfel::DC2Q2QP1</a>, <a class="el" href="classapfel_1_1DC2Q2QP2.html">apfel::DC2Q2QP2</a>, <a class="el" href="classapfel_1_1DC2Q2QP3.html">apfel::DC2Q2QP3</a>, <a class="el" href="classapfel_1_1DC2Q2QPS.html">apfel::DC2Q2QPS</a>, <a class="el" href="classapfel_1_1DoubleIdentity.html">apfel::DoubleIdentity</a>, <a class="el" href="classapfel_1_1DoubleNull.html">apfel::DoubleNull</a>, <a class="el" href="classapfel_1_1F3C1g2qM.html">apfel::F3C1g2qM</a>, <a class="el" href="classapfel_1_1F3C1q2gM.html">apfel::F3C1q2gM</a>, <a class="el" href="classapfel_1_1F3C1q2qM.html">apfel::F3C1q2qM</a>, <a class="el" href="classapfel_1_1F3C2g2qM.html">apfel::F3C2g2qM</a>, <a class="el" href="classapfel_1_1F3C2g2qMANoW.html">apfel::F3C2g2qMANoW</a>, <a class="el" href="classapfel_1_1F3C2q2gM.html">apfel::F3C2q2gM</a>, <a class="el" href="classapfel_1_1F3C2q2gMANoW.html">apfel::F3C2q2gMANoW</a>, <a class="el" href="classapfel_1_1F3C2q2qM.html">apfel::F3C2q2qM</a>, <a class="el" href="classapfel_1_1F3C2q2qMANoW.html">apfel::F3C2q2qMANoW</a>, <a class="el" href="classapfel_1_1F3C2q2qMFcon1.html">apfel::F3C2q2qMFcon1</a>, <a class="el" href="classapfel_1_1F3C2q2qbM.html">apfel::F3C2q2qbM</a>, <a class="el" href="classapfel_1_1F3C2q2qbMFcon.html">apfel::F3C2q2qbMFcon</a>, <a class="el" href="classapfel_1_1F3C2q2qpM1.html">apfel::F3C2q2qpM1</a>, <a class="el" href="classapfel_1_1F3C2q2qpM2.html">apfel::F3C2q2qpM2</a>, <a class="el" href="classapfel_1_1F3C2q2qpMNoW3.html">apfel::F3C2q2qpMNoW3</a>, <a class="el" href="classapfel_1_1F3C2q2qpMNoW4.html">apfel::F3C2q2qpMNoW4</a>, <a class="el" href="classapfel_1_1FLC1g2qM.html">apfel::FLC1g2qM</a>, <a class="el" href="classapfel_1_1FLC1q2gM.html">apfel::FLC1q2gM</a>, <a class="el" href="classapfel_1_1FLC1q2qM.html">apfel::FLC1q2qM</a>, <a class="el" href="classapfel_1_1FLC2g2gM.html">apfel::FLC2g2gM</a>, <a class="el" href="classapfel_1_1FLC2g2gMAANoW.html">apfel::FLC2g2gMAANoW</a>, <a class="el" href="classapfel_1_1FLC2g2qM.html">apfel::FLC2g2qM</a>, <a class="el" href="classapfel_1_1FLC2g2qMANoW.html">apfel::FLC2g2qMANoW</a>, <a class="el" href="classapfel_1_1FLC2q2gM.html">apfel::FLC2q2gM</a>, <a class="el" href="classapfel_1_1FLC2q2gMANoW.html">apfel::FLC2q2gMANoW</a>, <a class="el" href="classapfel_1_1FLC2q2qM.html">apfel::FLC2q2qM</a>, <a class="el" href="classapfel_1_1FLC2q2qMANoW.html">apfel::FLC2q2qMANoW</a>, <a class="el" href="classapfel_1_1FLC2q2qMFcon1.html">apfel::FLC2q2qMFcon1</a>, <a class="el" href="classapfel_1_1FLC2q2qMFcon2.html">apfel::FLC2q2qMFcon2</a>, <a class="el" href="classapfel_1_1FLC2q2qbM.html">apfel::FLC2q2qbM</a>, <a class="el" href="classapfel_1_1FLC2q2qbMFcon.html">apfel::FLC2q2qbMFcon</a>, <a class="el" href="classapfel_1_1FLC2q2qpM1.html">apfel::FLC2q2qpM1</a>, <a class="el" href="classapfel_1_1FLC2q2qpM2.html">apfel::FLC2q2qpM2</a>, <a class="el" href="classapfel_1_1FLC2q2qpMNoW3.html">apfel::FLC2q2qpMNoW3</a>, <a class="el" href="classapfel_1_1FLC2q2qpMNoW4.html">apfel::FLC2q2qpMNoW4</a>, <a class="el" href="classapfel_1_1FTC1g2qM.html">apfel::FTC1g2qM</a>, <a class="el" href="classapfel_1_1FTC1q2gM.html">apfel::FTC1q2gM</a>, <a class="el" href="classapfel_1_1FTC1q2qM.html">apfel::FTC1q2qM</a>, <a class="el" href="classapfel_1_1FTC2g2gM.html">apfel::FTC2g2gM</a>, <a class="el" href="classapfel_1_1FTC2g2gMAANoW.html">apfel::FTC2g2gMAANoW</a>, <a class="el" href="classapfel_1_1FTC2g2qM.html">apfel::FTC2g2qM</a>, <a class="el" href="classapfel_1_1FTC2g2qMANoW.html">apfel::FTC2g2qMANoW</a>, <a class="el" href="classapfel_1_1FTC2q2gM.html">apfel::FTC2q2gM</a>, <a class="el" href="classapfel_1_1FTC2q2gMANoW.html">apfel::FTC2q2gMANoW</a>, <a class="el" href="classapfel_1_1FTC2q2qM.html">apfel::FTC2q2qM</a>, <a class="el" href="classapfel_1_1FTC2q2qMANoW.html">apfel::FTC2q2qMANoW</a>, <a class="el" href="classapfel_1_1FTC2q2qMFcon1.html">apfel::FTC2q2qMFcon1</a>, <a class="el" href="classapfel_1_1FTC2q2qMFcon2.html">apfel::FTC2q2qMFcon2</a>, <a class="el" href="classapfel_1_1FTC2q2qbM.html">apfel::FTC2q2qbM</a>, <a class="el" href="classapfel_1_1FTC2q2qbMFcon.html">apfel::FTC2q2qbMFcon</a>, <a class="el" href="classapfel_1_1FTC2q2qpM1.html">apfel::FTC2q2qpM1</a>, <a class="el" href="classapfel_1_1FTC2q2qpM2.html">apfel::FTC2q2qpM2</a>, <a class="el" href="classapfel_1_1FTC2q2qpMNoW3.html">apfel::FTC2q2qpMNoW3</a>, and <a class="el" href="classapfel_1_1FTC2q2qpMNoW4.html">apfel::FTC2q2qpMNoW4</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -661,10 +575,21 @@ Public Member Functions</h2></td></tr>
 <li>/Users/vb262523/Codes/apfelxx/inc/apfel/<a class="el" href="doubleexpression_8h_source.html">doubleexpression.h</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceapfel.html">apfel</a></li><li class="navelem"><a href="classapfel_1_1DoubleExpression.html">DoubleExpression</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

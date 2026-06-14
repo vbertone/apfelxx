@@ -1,0 +1,8 @@
+<map id="apfel::AS2ggH_MSbarMass_L" name="apfel::AS2ggH_MSbarMass_L">
+<area shape="rect" id="Node000001" title="O(αs2) term propotional to ln(μ2/m2) of Eq. (B.7) of https://arxiv.org/pdf/hep&#45;ph/9612398...." alt="" coords="5,183,243,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="46,5,191,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,47,126,183,121,182,117,50"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1AS2ggH__L.html" title="O(αs2) term propotional to ln(μ2/m2) of Eq. (B.7) of https://arxiv.org/pdf/hep&#45;ph/9612398...." alt="" coords="140,82,284,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="147,40,199,81,193,83,146,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,121,138,184,134,180,188,122"/>
+</map>

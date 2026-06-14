@@ -1,0 +1,8 @@
+<map id="apfel::Cmth23gNC" name="apfel::Cmth23gNC">
+<area shape="rect" id="Node000001" title="O(αs3) gluon coefficient function for F2 near threshold. Reference: https://arxiv...." alt="" coords="6,183,160,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="5,5,150,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,48,85,183,80,182,76,50"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1Cm21gNC.html" title="O(αs) gluon coefficient function for F2. See eq. (53) of https://arxiv.org/pdf/1001...." alt="" coords="99,82,240,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="106,40,156,81,151,83,105,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="151,122,96,184,93,180,145,122"/>
+</map>

@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: Member List</title>
+<title>APFEL++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -77,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
   </ul>
 </div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classapfel_1_1Distribution.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -98,12 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a href="namespaceapfel.html">apfel</a></li><li class="navelem"><a href="classapfel_1_1Distribution.html">Distribution</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">apfel::Distribution Member List</div></div>
 </div><!--header-->
@@ -120,32 +135,36 @@ document.addEventListener('DOMContentLoaded', () => {
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#af477a2ffcc422a241a5860ea2caf3949">Distribution</a>()=delete</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a6eb5114b3ddb2cf00222226108c04d07">Distribution</a>(Grid const &amp;g)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#ae7861e19dabd709fc1be93903d8aca44">Distribution</a>(Distribution const &amp;obj)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a6300b05332bb55353559e7c4b757c19a">Distribution</a>(Distribution const &amp;obj, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a3153cf485c2670f24971f55809c76178">Distribution</a>(Grid const &amp;g, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a6ac74270d05fc0abce79222c8ebde08d">Distribution</a>(Grid const &amp;g, std::function&lt; double(double const &amp;)&gt; const &amp;InDistFunc)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#ae658dd249c93fabd3a98f631d90f1b61">Distribution</a>(Grid const &amp;g, std::function&lt; double(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;Q)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a139249bbd4e1fcadb4da31b97deb64f6">Distribution</a>(Grid const &amp;g, std::function&lt; double(int const &amp;, double const &amp;)&gt; const &amp;InDistFunc, int const &amp;ipdf)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a3ca72558f6ecae515ae8e1b7552392b3">Distribution</a>(Grid const &amp;g, std::function&lt; double(int const &amp;, double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, int const &amp;ipdf, double const &amp;Q)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#aaa04fd13b61de9eca4bce12c4afd8e97">Evaluate</a>(double const &amp;x) const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a0a02b02f3a9b75647af7b64da7057c4a">Evaluate</a>(double const &amp;x, int const &amp;ig) const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a078f10bda759e56e8bbcd58109a1b212">GetDistributionJointGrid</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#afc4830a08ec67c046b3d98237a271e76">GetDistributionSubGrid</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#ae8b3566a6d33d4df59d6acc91a3b7e58">GetGrid</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#afabd876ece0e971616bbc0f950419156">Integrate</a>(double const &amp;a, double const &amp;b) const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#ab5f774f33176ece373a77a814c914b73">Interpolant</a>(int const &amp;beta, double const &amp;x, SubGrid const &amp;sg) const</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#aa27376e2b20c645a57df5e808270bd13">InterpolantLog</a>(int const &amp;beta, double const &amp;lnx, SubGrid const &amp;sg) const</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a829c8b174a5e9a12b20b927bb46a7279">Interpolator</a>(Grid const &amp;gr)</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a1e048b687d8dbd1e69cc46cb83c102a7">Interpolator</a>(Grid const &amp;gr, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#ac685eca21fc99696b8fb8dee1f5248c5">IntInterpolant</a>(int const &amp;beta, double const &amp;a, double const &amp;b, SubGrid const &amp;sg) const</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#a4a76db9cfe06212cbd316b42f8d9091e">LagrangeInterpolator</a>(Grid const &amp;gr)</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#a352147f255856b4f4da1857e2e5486ed">LagrangeInterpolator</a>(Grid const &amp;gr, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a1e1f011442a368a53fa8fd70cb0eea50">operator*=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a920c03ca776cfa960377ea993371725f">operator*=</a>(std::function&lt; double(double const &amp;)&gt; const &amp;f)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#ab58315951469007616218d73be88c8da">operator*=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a2706446c09f95ca09b096190c1182d0c">operator+=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#abb0d09bc6765f08bdf997124bf197662">operator-=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#acf0e62e2562df47ae29eea636c301490">operator/=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a88283bb797f9e28684116d8d44f11ba4">operator=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a4bd5fb46cf387bfa61a2d1a5baef3ae9">Distribution</a>(Distribution &amp;&amp;obj)=default</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a6300b05332bb55353559e7c4b757c19a">Distribution</a>(Distribution const &amp;obj, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a3153cf485c2670f24971f55809c76178">Distribution</a>(Grid const &amp;g, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a6ac74270d05fc0abce79222c8ebde08d">Distribution</a>(Grid const &amp;g, std::function&lt; double(double const &amp;)&gt; const &amp;InDistFunc)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#ae658dd249c93fabd3a98f631d90f1b61">Distribution</a>(Grid const &amp;g, std::function&lt; double(double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, double const &amp;Q)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a139249bbd4e1fcadb4da31b97deb64f6">Distribution</a>(Grid const &amp;g, std::function&lt; double(int const &amp;, double const &amp;)&gt; const &amp;InDistFunc, int const &amp;ipdf)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a3ca72558f6ecae515ae8e1b7552392b3">Distribution</a>(Grid const &amp;g, std::function&lt; double(int const &amp;, double const &amp;, double const &amp;)&gt; const &amp;InDistFunc, int const &amp;ipdf, double const &amp;Q)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#aaa04fd13b61de9eca4bce12c4afd8e97">Evaluate</a>(double const &amp;x) const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a0a02b02f3a9b75647af7b64da7057c4a">Evaluate</a>(double const &amp;x, int const &amp;ig) const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a078f10bda759e56e8bbcd58109a1b212">GetDistributionJointGrid</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#afc4830a08ec67c046b3d98237a271e76">GetDistributionSubGrid</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#ae8b3566a6d33d4df59d6acc91a3b7e58">GetGrid</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#afabd876ece0e971616bbc0f950419156">Integrate</a>(double const &amp;a, double const &amp;b) const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#ab5f774f33176ece373a77a814c914b73">Interpolant</a>(int const &amp;beta, double const &amp;x, SubGrid const &amp;sg) const</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#aa27376e2b20c645a57df5e808270bd13">InterpolantLog</a>(int const &amp;beta, double const &amp;lnx, SubGrid const &amp;sg) const</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#afa970ad6cb6481aa2e0eebf51991b9f5">Interpolator</a>(Interpolator const &amp;)=default</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a711acb86769f466aaa5c93889a51e2d3">Interpolator</a>(Interpolator &amp;&amp;)=default</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a829c8b174a5e9a12b20b927bb46a7279">Interpolator</a>(Grid const &amp;gr)</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a1e048b687d8dbd1e69cc46cb83c102a7">Interpolator</a>(Grid const &amp;gr, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#ac685eca21fc99696b8fb8dee1f5248c5">IntInterpolant</a>(int const &amp;beta, double const &amp;a, double const &amp;b, SubGrid const &amp;sg) const</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#a4a76db9cfe06212cbd316b42f8d9091e">LagrangeInterpolator</a>(Grid const &amp;gr)</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html#a352147f255856b4f4da1857e2e5486ed">LagrangeInterpolator</a>(Grid const &amp;gr, std::vector&lt; std::vector&lt; double &gt; &gt; const &amp;distsubgrid, std::vector&lt; double &gt; const &amp;distjointgrid)</td><td class="entry"><a class="el" href="classapfel_1_1LagrangeInterpolator.html">apfel::LagrangeInterpolator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a1e1f011442a368a53fa8fd70cb0eea50">operator*=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a920c03ca776cfa960377ea993371725f">operator*=</a>(std::function&lt; double(double const &amp;)&gt; const &amp;f)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#ab58315951469007616218d73be88c8da">operator*=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a2706446c09f95ca09b096190c1182d0c">operator+=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#abb0d09bc6765f08bdf997124bf197662">operator-=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#acf0e62e2562df47ae29eea636c301490">operator/=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a88283bb797f9e28684116d8d44f11ba4">operator=</a>(Distribution const &amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#aadd0591adba64cae4c283d77dd813b6f">operator=</a>(Distribution &amp;&amp;d)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#a04f62235b2a617b9dc76d8d375b9ee00">Print</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a66c033d0c916523ea0f75f16c09985f8">SetJointGrid</a>(int const &amp;ix, double const &amp;x)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a75dfd87939e990985bbabdd68d4333d8">SetJointGrid</a>(std::vector&lt; double &gt; const &amp;jg)</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
@@ -157,10 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
   <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Distribution.html#a7a98be01c64f72df7f3c5c5f5d68b8e0">Transform</a>(std::function&lt; double(double const &amp;)&gt; const &amp;TranformationFunc) const</td><td class="entry"><a class="el" href="classapfel_1_1Distribution.html">apfel::Distribution</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html#abcf14478694c9385f568a4fd69a0fe67">~Interpolator</a>()=default</td><td class="entry"><a class="el" href="classapfel_1_1Interpolator.html">apfel::Interpolator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

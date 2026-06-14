@@ -43,7 +43,7 @@ var searchData=
   ['ap3nsp_40',['aP3nsp',['../classapfel_1_1aP3nsp.html',1,'apfel::aP3nsp'],['../classapfel_1_1aP3nsp.html#ab866fb47d22c740464be71dd20856f2c',1,'apfel::aP3nsp::aP3nsp()']]],
   ['ap3nss_41',['aP3nss',['../classapfel_1_1aP3nss.html',1,'apfel::aP3nss'],['../classapfel_1_1aP3nss.html#acc396cdc23881cd3a38bf35693993b87',1,'apfel::aP3nss::aP3nss()']]],
   ['apf_5fhplog_5f_42',['apf_hplog_',['../namespaceapfel.html#aa1685c13685dacd7387aa325c786678b',1,'apfel']]],
-  ['apfel_43',['APFEL',['../index.html',1,'']]],
+  ['apfel_43',['APFEL++',['../index.html',1,'']]],
   ['apfel_44',['apfel',['../namespaceapfel.html',1,'']]],
   ['apfelxx_2eh_45',['apfelxx.h',['../apfelxx_8h.html',1,'']]],
   ['apfelxx_5fversion_46',['apfelxx_VERSION',['../config_8h.html#ac308f5ce41b54b877f5c0fc95c18e8ab',1,'config.h']]],

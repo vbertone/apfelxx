@@ -1,0 +1,35 @@
+<map id="/Users/vb262523/Codes/apfelxx/inc/apfel/operator.h" name="/Users/vb262523/Codes/apfelxx/inc/apfel/operator.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="196,5,412,50"/>
+<area shape="rect" id="Node000002" href="$expression_8h.html" title=" " alt="" coords="52,98,204,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,53,172,93,168,89,259,49"/>
+<area shape="rect" id="Node000003" href="$distribution_8h.html" title=" " alt="" coords="228,98,380,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="305,48,307,83,302,82,303,53"/>
+<area shape="rect" id="Node000014" href="$matrix_8h.html" title=" " alt="" coords="370,249,486,277"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="339,48,369,70,394,96,417,132,428,173,432,205,432,235,428,233,427,205,423,174,412,134,390,100,365,74,340,53"/>
+<area shape="rect" id="Node000004" href="$lagrangeinterpolator_8h.html" title=" " alt="" coords="5,174,222,201"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="268,128,163,170,160,166,272,124"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="246,174,298,201"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="300,124,286,161,282,158,297,128"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="323,174,413,201"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="316,124,349,162,344,162,315,129"/>
+<area shape="rect" id="Node000005" href="$interpolator_8h.html" title=" " alt="" coords="82,249,236,277"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="122,199,145,236,140,236,122,205"/>
+<area shape="rect" id="Node000006" href="$grid_8h.html" title=" " alt="" coords="109,325,209,353"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="160,275,161,310,156,309,158,280"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="249,325,306,353"/>
+<area shape="poly" id="edge10_Node000005_Node000011" title=" " alt="" coords="180,275,246,316,241,318,180,280"/>
+<area shape="rect" id="Node000007" href="$subgrid_8h.html" title=" " alt="" coords="86,401,213,428"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="159,351,155,386,151,384,156,355"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="237,401,315,428"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="180,351,245,392,240,393,179,356"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="267,476,331,504"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="177,426,261,469,256,470,176,431"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="108,476,191,504"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="151,427,152,462,147,459,148,431"/>
+<area shape="poly" id="edge14_Node000014_Node000008" title=" " alt="" coords="418,276,380,326,313,464,309,461,375,324,414,279"/>
+<area shape="poly" id="edge15_Node000014_Node000011" title=" " alt="" coords="399,279,319,320,317,316,404,276"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="390,325,467,353"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="430,275,430,311,426,308,427,280"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="491,325,563,353"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="446,275,500,316,495,316,445,280"/>
+</map>

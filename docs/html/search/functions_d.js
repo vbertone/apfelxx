@@ -14,7 +14,7 @@ var searchData=
   ['matchtmdffs_11',['MatchTmdFFs',['../namespaceapfel.html#a439e7dcdb08932f7a2ca78cffda1af00',1,'apfel']]],
   ['matchtmdpdfs_12',['MatchTmdPDFs',['../namespaceapfel.html#a49344b8e01187276f0b247d170bc3b26',1,'apfel']]],
   ['matchtmdpdfswithtmcs_13',['MatchTmdPDFsWithTMCs',['../namespaceapfel.html#a4080faa8b1d51faa59345f09e6693645',1,'apfel']]],
-  ['matrix_14',['matrix',['../classapfel_1_1matrix.html#a2863c1d3841857b42133f8beb544dfb3',1,'apfel::matrix::matrix(size_t const &amp;row=0, size_t const &amp;col=0, std::vector&lt; T &gt; const &amp;d={})'],['../classapfel_1_1matrix.html#ac38917d17f4e2af036afd02fa98886d2',1,'apfel::matrix::matrix(matrix&lt; T &gt; const &amp;m)']]],
+  ['matrix_14',['matrix',['../classapfel_1_1matrix.html#a2863c1d3841857b42133f8beb544dfb3',1,'apfel::matrix::matrix(size_t const &amp;row=0, size_t const &amp;col=0, std::vector&lt; T &gt; const &amp;d={})'],['../classapfel_1_1matrix.html#ac38917d17f4e2af036afd02fa98886d2',1,'apfel::matrix::matrix(matrix&lt; T &gt; const &amp;m)'],['../classapfel_1_1matrix.html#a3fad6473783523be5c880f94f9792f31',1,'apfel::matrix::matrix(matrix&lt; T &gt; &amp;&amp;m)=default']]],
   ['max_15',['max',['../classapfel_1_1ExtendedVector.html#a3535622f96f490c0192557945e02daf6',1,'apfel::ExtendedVector']]],
   ['method_16',['Method',['../classapfel_1_1Integrator.html#ad43e4272eef0c1dbdac807aee547ec17',1,'apfel::Integrator']]],
   ['min_17',['min',['../classapfel_1_1ExtendedVector.html#af591d865e71439884f65bf0b13007dce',1,'apfel::ExtendedVector']]],

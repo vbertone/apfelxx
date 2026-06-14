@@ -1,0 +1,41 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="5,533,187,561"/>
+<area shape="rect" id="Node000001" href="$classapfel_1_1DISCCBasis.html" title="The DISCCBasis class is a derived of ConvolutionMap specialised for the computation of the CC DIS str..." alt="" coords="291,5,446,33"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="99,517,115,412,144,270,162,198,183,133,207,80,233,44,259,27,292,18,288,22,262,32,236,48,211,82,188,135,167,199,149,271,121,413,104,518"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1DISNCBasis.html" title="The DISNCBasis class is a derived of ConvolutionMap specialised for the computation of the NC DIS str..." alt="" coords="291,57,446,85"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="94,517,98,434,105,379,116,319,133,258,158,199,191,144,233,96,260,79,292,71,288,75,262,84,236,100,195,147,163,201,138,260,121,321,110,380,103,434,99,518"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1DiagonalBasis.html" title="The DiagonalBasis class is the simplest derivation of ConvolutionMap meant to essentially perform a s..." alt="" coords="284,109,453,137"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="95,518,102,443,123,342,140,289,164,237,194,189,233,148,256,133,285,125,282,129,259,138,236,152,199,193,169,240,145,291,128,344,108,443,101,518"/>
+<area shape="rect" id="Node000004" href="$classapfel_1_1EvolBasisPlusMinus.html" title="The EvolBasisPlusMinus class is derives from ConvolutionMap and implements a basis in which plus (q+q..." alt="" coords="263,161,474,189"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="97,517,107,451,130,365,148,319,170,275,199,235,233,200,264,183,261,188,236,204,203,238,175,278,153,322,135,367,113,452,102,518"/>
+<area shape="rect" id="Node000005" href="$classapfel_1_1EvolutionBasisQCD.html" title="The EvolutionBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution of dis..." alt="" coords="265,213,472,241"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="100,517,113,460,138,388,155,350,177,314,203,280,233,252,266,236,262,240,236,256,207,284,181,317,160,353,143,390,118,462,105,518"/>
+<area shape="rect" id="Node000006" href="$classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ..." alt="" coords="247,265,490,293"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="102,517,119,469,145,411,183,352,206,325,233,302,256,291,253,295,236,307,210,329,187,355,150,413,124,471,108,519"/>
+<area shape="rect" id="Node000007" href="$classapfel_1_1EvolutionOperatorBasisQCD.html" title="The EvolutionOperatorBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolutio..." alt="" coords="272,317,465,362"/>
+<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="109,519,129,485,157,445,192,405,233,372,273,354,270,358,236,376,196,409,162,448,134,487,114,521"/>
+<area shape="rect" id="Node000008" href="$classapfel_1_1EvolutionOperatorBasisQCDQED.html" title="The EvolutionOperatorBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP QCDxQ..." alt="" coords="272,386,465,431"/>
+<area shape="poly" id="edge8_Node000000_Node000008" title=" " alt="" coords="121,521,171,480,233,441,273,427,269,431,236,446,174,484,125,524"/>
+<area shape="rect" id="Node000009" href="$classapfel_1_1EvolveDistributionsBasisQCD.html" title="The EvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a set of ev..." alt="" coords="267,456,470,500"/>
+<area shape="poly" id="edge9_Node000000_Node000009" title=" " alt="" coords="166,527,279,499,276,503,169,531"/>
+<area shape="rect" id="Node000010" href="$classapfel_1_1EvolveDistributionsBasisQCDQED.html" title="The EvolveDistributionsBasisQCDQED class is a derived of ConvolutionMap specialised to match a set of..." alt="" coords="267,525,470,570"/>
+<area shape="poly" id="edge10_Node000000_Node000010" title=" " alt="" coords="201,545,269,546,265,549,204,549"/>
+<area shape="rect" id="Node000011" href="$classapfel_1_1MatchingBasisQCD.html" title="The MatchingBasisQCD class is a derived of ConvolutionMap specialised for the matching of distributio..." alt="" coords="266,593,471,621"/>
+<area shape="poly" id="edge11_Node000000_Node000011" title=" " alt="" coords="165,563,235,579,290,591,285,594,234,584,167,568"/>
+<area shape="rect" id="Node000012" href="$classapfel_1_1MatchingBasisQCDQED.html" title="The MatchingBasisQCDQED class is a derived of ConvolutionMap specialised for the matching of distribu..." alt="" coords="248,645,488,673"/>
+<area shape="poly" id="edge12_Node000000_Node000012" title=" " alt="" coords="127,568,178,601,236,630,276,644,271,646,234,635,175,605,129,573"/>
+<area shape="rect" id="Node000013" href="$classapfel_1_1MatchingOperatorBasisQCD.html" title="The MatchingOperatorBasisQCD class is a derived of ConvolutionMap specialised for the matching of the..." alt="" coords="235,697,502,725"/>
+<area shape="poly" id="edge13_Node000000_Node000013" title=" " alt="" coords="116,571,167,629,200,658,236,682,267,696,262,698,233,687,196,662,163,633,116,576"/>
+<area shape="rect" id="Node000014" href="$classapfel_1_1MatchingOperatorBasisQCDQED.html" title="The MatchingOperatorBasisQCDQED class is a derived of ConvolutionMap specialised for the matching of ..." alt="" coords="253,749,484,794"/>
+<area shape="poly" id="edge14_Node000000_Node000014" title=" " alt="" coords="110,573,132,611,159,654,194,698,236,734,259,748,254,749,233,739,190,701,155,657,127,614,110,578"/>
+<area shape="rect" id="Node000015" href="$classapfel_1_1PhysicalBasisQCD.html" title="The PhysicalBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution of dist..." alt="" coords="268,817,469,845"/>
+<area shape="poly" id="edge15_Node000000_Node000015" title=" " alt="" coords="104,573,122,626,147,688,185,751,209,780,236,804,270,822,265,823,233,808,205,783,181,754,142,691,117,627,104,579"/>
+<area shape="rect" id="Node000016" href="$classapfel_1_1PhysicalEvolveDistributionsBasisQCD.html" title="The PhysicalEvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a s..." alt="" coords="237,869,500,914"/>
+<area shape="poly" id="edge16_Node000000_Node000016" title=" " alt="" coords="102,574,117,635,142,710,159,750,180,788,206,824,236,854,254,868,249,869,233,859,202,827,176,791,154,752,137,712,112,636,102,579"/>
+<area shape="rect" id="Node000017" href="$classapfel_1_1PhysicalMatchingBasisQCD.html" title="The PhysicalMatchingBasisQCD class is a derived of ConvolutionMap specialised for the matching of dis..." alt="" coords="235,937,502,965"/>
+<area shape="poly" id="edge17_Node000000_Node000017" title=" " alt="" coords="99,574,109,648,130,743,148,793,171,841,200,886,236,924,254,937,248,937,233,928,196,889,166,844,143,795,125,744,104,649,98,579"/>
+<area shape="rect" id="Node000018" href="$classapfel_1_1PhysicalMatchingOperatorBasisQCD.html" title="The MatchingOperatorBasisQCD class is a derived of ConvolutionMap specialised for the matching of the..." alt="" coords="242,989,494,1034"/>
+<area shape="poly" id="edge18_Node000000_Node000018" title=" " alt="" coords="98,574,106,656,114,708,126,763,143,821,167,877,197,929,236,975,253,989,248,988,233,978,193,932,162,879,138,823,120,765,108,709,101,657,97,579"/>
+<area shape="rect" id="Node000019" href="$classapfel_1_1PhysicalOperatorBasisQCD.html" title="The PhysicalOperatorBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution..." alt="" coords="237,1057,500,1085"/>
+<area shape="poly" id="edge19_Node000000_Node000019" title=" " alt="" coords="102,574,121,681,149,822,167,893,188,957,211,1009,237,1044,253,1057,247,1056,233,1048,207,1012,183,959,162,895,144,823,115,682,101,579"/>
+</map>

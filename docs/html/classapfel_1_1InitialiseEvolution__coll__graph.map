@@ -1,0 +1,112 @@
+<map id="apfel::InitialiseEvolution" name="apfel::InitialiseEvolution">
+<area shape="rect" id="Node000001" title="The InitialiseEvolution performs all the operations to initialise a DGLAP evolution using an Evolutio..." alt="" coords="5023,773,5213,801"/>
+<area shape="rect" id="Node000002" href="$structapfel_1_1EvolutionSetup.html" title="The EvolutionSetup structure is a collection of all possible evolution parameters." alt="" coords="2803,937,2976,965"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2991,932,3077,922,3167,918,4715,918,4796,918,4860,914,4922,902,4998,874,5029,858,5058,837,5101,802,5106,800,5061,842,5032,862,5000,879,4924,907,4861,920,4797,923,4715,923,3167,923,3077,927,2992,937"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="2450,836,2540,864"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="2555,848,3022,852,3683,855,4715,855,4813,849,4910,835,4998,816,5065,802,5070,801,4999,822,4911,840,4814,854,4715,860,3683,860,3022,857,2555,853"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="2555,862,2631,883,2655,891,2830,937,2825,936,2654,896,2630,888,2554,867"/>
+<area shape="rect" id="Node000022" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="2799,656,2980,684"/>
+<area shape="poly" id="edge30_Node000022_Node000003" title=" " alt="" coords="2540,827,2854,685,2859,683,2542,832"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="1978,827,2124,872"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="2139,847,2453,849,2447,850,2139,852"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="2359,898,2631,943"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="2623,943,2655,947,2730,951,2805,954,2800,954,2730,956,2654,952,2623,948"/>
+<area shape="rect" id="Node000006" href="$structapfel_1_1EvolutionSetup_1_1GridParameters.html" title="Structure for the subgrid parameters." alt="" coords="1964,898,2138,943"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="2153,918,2361,920,2356,920,2153,923"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="7,537,175,565"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="95,578,114,705,133,788,160,873,198,952,221,987,247,1018,277,1044,310,1064,347,1076,388,1080,2496,1080,2551,1077,2606,1067,2660,1052,2711,1035,2800,996,2861,966,2866,965,2803,1001,2713,1040,2662,1057,2607,1072,2552,1082,2496,1086,387,1086,346,1081,308,1068,274,1048,243,1022,217,990,193,955,155,874,128,789,109,706,94,583"/>
+<area shape="rect" id="Node000016" href="$classapfel_1_1SubGrid.html" title="Class for the x&#45;space interpolation SubGrids." alt="" coords="612,425,735,453"/>
+<area shape="poly" id="edge18_Node000016_Node000007" title=" " alt="" coords="131,528,200,500,312,473,425,455,529,444,614,440,609,442,529,449,426,460,313,478,201,506,135,532"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="300,498,478,543"/>
+<area shape="poly" id="edge20_Node000017_Node000007" title=" " alt="" coords="190,538,301,528,297,531,192,543"/>
+<area shape="rect" id="Node000029" href="$classapfel_1_1matrix.html" title=" " alt="" coords="298,789,480,817"/>
+<area shape="poly" id="edge37_Node000029_Node000007" title=" " alt="" coords="121,573,373,787,368,790,120,578"/>
+<area shape="rect" id="Node000040" href="$classapfel_1_1Interpolator.html" title="The Interpolator class is a mother class for the x&#45;space interpolationand requires the implementation..." alt="" coords="1556,504,1701,532"/>
+<area shape="poly" id="edge57_Node000040_Node000007" title=" " alt="" coords="189,564,286,574,388,579,1379,579,1439,574,1498,561,1596,531,1591,533,1499,566,1440,579,1379,584,387,584,285,580,191,569"/>
+<area shape="rect" id="Node000044" href="$classapfel_1_1QGrid.html" title=" " alt="" coords="3800,109,4016,153"/>
+<area shape="poly" id="edge62_Node000044_Node000007" title=" " alt="" coords="93,521,116,408,137,334,166,258,204,188,227,156,253,128,282,105,314,88,349,76,387,72,3471,72,3557,76,3645,84,3802,109,3796,110,3644,89,3557,81,3471,78,388,78,350,81,316,92,285,110,257,132,231,159,209,190,170,261,142,336,121,409,99,522"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="2394,966,2596,1045"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="2612,999,2692,993,2774,981,2843,966,2849,965,2775,987,2693,998,2612,1005"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1743,290,1921,335"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="1922,283,1994,265,2077,248,2167,235,2257,230,4715,230,4765,235,4811,250,4854,273,4893,303,4928,338,4960,379,4988,423,5013,469,5055,563,5085,651,5116,774,5112,771,5080,652,5050,565,5009,471,4983,425,4955,382,4924,342,4889,307,4851,277,4809,254,4764,240,4715,235,2257,235,2167,240,2078,253,1995,270,1923,288"/>
+<area shape="rect" id="Node000010" href="$classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo..." alt="" coords="1330,378,1425,406"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="1439,379,1745,327,1740,329,1441,384"/>
+<area shape="rect" id="Node000027" href="$classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution between an &quot;E..." alt="" coords="1566,696,1692,724"/>
+<area shape="poly" id="edge33_Node000027_Node000010" title=" " alt="" coords="1387,419,1407,476,1438,547,1482,620,1509,653,1540,682,1568,699,1562,699,1536,686,1505,657,1477,623,1433,550,1402,478,1385,424"/>
+<area shape="poly" id="edge55_Node000040_Node000010" title=" " alt="" coords="1421,411,1601,503,1596,503,1420,416"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="963,619,1125,664"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="1089,608,1283,466,1357,408,1362,405,1287,470,1092,612"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="601,688,746,716"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="761,682,770,680,965,652,960,654,771,686,763,687"/>
+<area shape="rect" id="Node000034" title=" " alt="" coords="3371,458,3568,519"/>
+<area shape="poly" id="edge45_Node000034_Node000012" title=" " alt="" coords="761,694,1133,674,1192,673,1244,678,1332,690,1374,692,1416,688,1462,675,1512,650,1520,642,1523,633,1527,622,1537,613,1591,605,1715,595,2083,570,2631,538,2673,537,2706,539,2738,536,2773,520,2781,511,2784,501,2787,489,2797,479,2868,447,2944,427,3022,417,3101,415,3177,420,3249,430,3373,458,3368,458,3248,435,3176,425,3100,420,3023,422,2945,432,2870,452,2800,484,2792,492,2789,502,2786,513,2776,524,2739,541,2707,545,2673,542,2631,543,2083,576,1716,600,1592,610,1539,617,1532,625,1529,635,1525,645,1516,654,1464,680,1417,694,1374,698,1332,695,1243,683,1192,679,1133,679,762,700"/>
+<area shape="rect" id="Node000035" title=" " alt="" coords="3361,616,3578,678"/>
+<area shape="poly" id="edge48_Node000035_Node000012" title=" " alt="" coords="758,716,771,718,972,744,1130,760,1288,768,1491,770,2496,770,2617,767,2740,759,2980,732,3195,699,3358,670,3364,670,3195,704,2981,737,2740,764,2617,772,2496,775,1491,775,1287,773,1129,765,972,749,770,723,759,721"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="955,287,1133,332"/>
+<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="1148,321,1217,334,1286,351,1349,378,1344,378,1284,356,1216,339,1149,326"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="606,194,742,222"/>
+<area shape="poly" id="edge15_Node000010_Node000014" title=" " alt="" coords="757,211,889,221,1042,238,1185,261,1243,276,1286,293,1313,311,1337,334,1370,378,1365,377,1333,337,1310,315,1284,297,1242,281,1184,266,1041,243,888,226,758,216"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="699,231,732,258,771,280,817,295,864,304,957,312,952,314,863,309,815,300,769,285,729,262,699,236"/>
+<area shape="rect" id="Node000033" href="$structapfel_1_1DglapObjectsQCDQED.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution in QCDxQ..." alt="" coords="3792,554,4024,582"/>
+<area shape="poly" id="edge42_Node000033_Node000014" title=" " alt="" coords="756,200,770,199,1255,183,1632,177,2494,179,3039,179,3191,175,3256,181,3338,200,3411,225,3470,251,3520,278,3565,307,3655,374,3769,460,3892,555,3886,553,3766,464,3652,379,3562,311,3518,282,3468,255,3409,230,3337,206,3255,186,3190,180,3039,184,2494,184,1632,183,1255,188,770,204,758,205"/>
+<area shape="poly" id="edge63_Node000044_Node000014" title=" " alt="" coords="708,184,737,168,769,155,844,135,904,125,965,123,1043,123,3471,123,3802,129,3796,129,3471,128,1042,128,965,128,905,131,845,140,771,160,740,173,711,188"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="973,426,1114,471"/>
+<area shape="poly" id="edge16_Node000010_Node000015" title=" " alt="" coords="1129,439,1205,429,1284,416,1334,406,1329,408,1286,421,1206,435,1131,444"/>
+<area shape="poly" id="edge17_Node000015_Node000016" title=" " alt="" coords="750,438,975,445,971,448,751,444"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="957,357,1131,401"/>
+<area shape="poly" id="edge22_Node000018_Node000016" title=" " alt="" coords="735,418,770,410,866,394,959,385,954,387,867,399,771,415,737,423"/>
+<area shape="poly" id="edge19_Node000016_Node000017" title=" " alt="" coords="491,495,576,472,639,452,635,455,578,477,494,500"/>
+<area shape="poly" id="edge56_Node000040_Node000017" title=" " alt="" coords="493,518,672,518,1379,518,1559,518,1554,519,1379,523,672,523,494,523"/>
+<area shape="poly" id="edge21_Node000010_Node000018" title=" " alt="" coords="1146,380,1332,390,1327,391,1147,386"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="4368,765,4523,809"/>
+<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="4538,784,5025,787,5020,787,4538,790"/>
+<area shape="rect" id="Node000020" href="$structapfel_1_1DglapObjects.html" title="Structure that contains all the precomputed quantities needed to perform the DGLAP evolution,..." alt="" coords="3827,773,3988,801"/>
+<area shape="poly" id="edge24_Node000019_Node000020" title=" " alt="" coords="4003,784,4370,787,4365,787,4004,790"/>
+<area shape="rect" id="Node000021" href="$classapfel_1_1Set.html" title=" " alt="" coords="3096,614,3240,659"/>
+<area shape="poly" id="edge25_Node000020_Node000021" title=" " alt="" coords="3228,663,3292,690,3362,712,3423,724,3474,730,3564,731,3654,730,3707,734,3768,743,3820,755,3869,773,3864,772,3819,761,3767,748,3706,739,3654,735,3564,736,3474,735,3422,729,3361,717,3290,695,3228,668"/>
+<area shape="rect" id="Node000031" title=" " alt="" coords="3371,775,3568,820"/>
+<area shape="poly" id="edge39_Node000031_Node000021" title=" " alt="" coords="3186,670,3218,723,3240,748,3266,768,3290,781,3317,789,3373,801,3368,801,3315,794,3288,785,3263,773,3236,752,3214,727,3184,675"/>
+<area shape="poly" id="edge43_Node000033_Node000021" title=" " alt="" coords="3255,618,3361,602,3590,581,3794,572,3789,573,3591,586,3362,607,3256,623"/>
+<area shape="poly" id="edge46_Node000034_Node000021" title=" " alt="" coords="3224,604,3263,585,3300,570,3336,554,3360,535,3392,521,3397,519,3363,540,3339,558,3302,575,3265,589,3226,609"/>
+<area shape="poly" id="edge26_Node000021_Node000022" title=" " alt="" coords="2995,665,3072,657,3093,656,3098,655,3072,663,2996,670"/>
+<area shape="rect" id="Node000036" href="$classapfel_1_1Set.html" title=" " alt="" coords="3096,509,3240,553"/>
+<area shape="poly" id="edge50_Node000036_Node000022" title=" " alt="" coords="2932,646,3119,555,3124,553,2933,651"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="2388,654,2602,715"/>
+<area shape="poly" id="edge27_Node000022_Node000023" title=" " alt="" coords="2617,677,2801,673,2796,673,2618,682"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="1954,627,2148,672"/>
+<area shape="poly" id="edge28_Node000023_Node000024" title=" " alt="" coords="2164,656,2390,676,2385,676,2164,661"/>
+<area shape="rect" id="Node000025" href="$structapfel_1_1ConvolutionMap_1_1rule.html" title="This structure contains the attribute of a single rule." alt="" coords="1538,627,1719,672"/>
+<area shape="poly" id="edge29_Node000024_Node000025" title=" " alt="" coords="1735,647,1956,649,1950,650,1736,652"/>
+<area shape="rect" id="Node000026" title=" " alt="" coords="2181,686,2335,731"/>
+<area shape="poly" id="edge31_Node000021_Node000026" title=" " alt="" coords="2333,675,2333,674,2341,666,2344,657,2349,648,2358,639,2385,628,2417,620,2493,610,2581,608,2676,611,2861,624,3004,632,3072,632,3098,635,3093,635,3072,638,3004,638,2860,630,2675,616,2581,613,2494,615,2418,625,2387,633,2361,644,2353,651,2349,659,2345,669,2337,678,2336,679"/>
+<area shape="poly" id="edge32_Node000026_Node000027" title=" " alt="" coords="1707,707,2183,708,2178,709,1708,712"/>
+<area shape="rect" id="Node000028" title=" " alt="" coords="770,781,931,825"/>
+<area shape="poly" id="edge34_Node000027_Node000028" title=" " alt="" coords="946,789,1568,716,1563,718,947,794"/>
+<area shape="poly" id="edge35_Node000028_Node000029" title=" " alt="" coords="495,800,772,802,768,804,496,806"/>
+<area shape="rect" id="Node000030" title=" " alt="" coords="5,1114,177,1142"/>
+<area shape="poly" id="edge36_Node000029_Node000030" title=" " alt="" coords="114,1101,372,816,377,819,117,1105"/>
+<area shape="poly" id="edge38_Node000020_Node000031" title=" " alt="" coords="3584,794,3768,790,3830,791,3824,791,3768,796,3584,799"/>
+<area shape="rect" id="Node000032" title=" " alt="" coords="4340,662,4551,707"/>
+<area shape="poly" id="edge40_Node000001_Node000032" title=" " alt="" coords="4566,700,4999,766,5029,773,5023,772,4999,771,4566,705"/>
+<area shape="poly" id="edge41_Node000032_Node000033" title=" " alt="" coords="3990,583,4342,662,4337,662,3990,589"/>
+<area shape="poly" id="edge44_Node000033_Node000034" title=" " alt="" coords="3584,506,3830,554,3825,554,3584,512"/>
+<area shape="poly" id="edge47_Node000033_Node000035" title=" " alt="" coords="3593,635,3679,625,3767,609,3865,583,3870,582,3768,615,3680,630,3594,640"/>
+<area shape="poly" id="edge49_Node000035_Node000036" title=" " alt="" coords="3201,562,3231,588,3265,610,3312,627,3363,640,3358,639,3311,632,3263,614,3228,592,3199,567"/>
+<area shape="rect" id="Node000045" title=" " alt="" coords="3361,354,3578,399"/>
+<area shape="poly" id="edge65_Node000045_Node000036" title=" " alt="" coords="3226,499,3421,400,3426,398,3228,504"/>
+<area shape="rect" id="Node000037" title=" " alt="" coords="2812,494,2966,539"/>
+<area shape="poly" id="edge51_Node000036_Node000037" title=" " alt="" coords="2982,519,3098,527,3093,527,2982,524"/>
+<area shape="rect" id="Node000038" href="$classapfel_1_1Distribution.html" title="The Distribution class defines one of the basic objects of APFEL++ that provides a discretisation of ..." alt="" coords="2422,501,2568,529"/>
+<area shape="poly" id="edge52_Node000037_Node000038" title=" " alt="" coords="2583,513,2814,516,2809,516,2583,518"/>
+<area shape="rect" id="Node000039" href="$classapfel_1_1LagrangeInterpolator.html" title="The LagrangeInterpolator class is a specialization of the Interpolator class using the lagrange inter..." alt="" coords="1945,501,2157,529"/>
+<area shape="poly" id="edge53_Node000038_Node000039" title=" " alt="" coords="2172,512,2424,515,2419,515,2173,518"/>
+<area shape="poly" id="edge54_Node000039_Node000040" title=" " alt="" coords="1716,514,1947,515,1941,516,1716,520"/>
+<area shape="rect" id="Node000041" title=" " alt="" coords="4584,958,4843,1003"/>
+<area shape="poly" id="edge58_Node000001_Node000041" title=" " alt="" coords="4858,994,4930,986,4965,977,4998,962,5020,946,5041,926,5073,880,5096,835,5110,803,5114,800,5101,837,5078,883,5045,929,5024,950,5000,966,4967,982,4931,992,4859,1000"/>
+<area shape="rect" id="Node000042" title=" " alt="" coords="4575,134,4852,195"/>
+<area shape="poly" id="edge59_Node000001_Node000042" title=" " alt="" coords="4867,156,4904,162,4939,173,4972,189,5001,212,5016,231,5030,257,5055,323,5074,405,5090,493,5110,663,5118,775,5114,771,5105,664,5085,494,5069,406,5049,325,5025,259,5012,234,4997,216,4969,194,4937,178,4902,168,4867,161"/>
+<area shape="rect" id="Node000043" href="$classapfel_1_1TabulateObject.html" title=" " alt="" coords="4145,115,4316,176"/>
+<area shape="poly" id="edge60_Node000042_Node000043" title=" " alt="" coords="4332,147,4577,159,4571,159,4332,152"/>
+<area shape="poly" id="edge61_Node000043_Node000044" title=" " alt="" coords="4031,134,4147,142,4142,142,4031,139"/>
+<area shape="poly" id="edge64_Node000044_Node000045" title=" " alt="" coords="3523,344,3863,155,3868,153,3525,349"/>
+</map>

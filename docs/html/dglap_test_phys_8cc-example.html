@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: dglap_test_phys.cc</title>
+<title>APFEL++: dglap_test_phys.cc</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -78,6 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
   </ul>
 </div><!-- main-nav -->
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('dglap_test_phys_8cc-example.html','',''); });
+</script>
+<div id="container">
 <div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -285,8 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="ttc" id="aclassapfel_1_1QGrid_html_ac2e13c956b563254deb9d6c677feff9d"><div class="ttname"><a href="classapfel_1_1QGrid.html#ac2e13c956b563254deb9d6c677feff9d">apfel::QGrid::Evaluate</a></div><div class="ttdeci">T Evaluate(double const &amp;Q) const</div><div class="ttdoc">Function that interpolates on the grid in Q.</div></div>
 <div class="ttc" id="aclassapfel_1_1Set_html"><div class="ttname"><a href="classapfel_1_1Set.html">apfel::Set</a></div><div class="ttdoc">The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...</div><div class="ttdef"><b>Definition</b> set.h:23</div></div>
 <div class="ttc" id="aclassapfel_1_1Set_html_a0f48cac1df954d00a7e7edfd85a4b996"><div class="ttname"><a href="classapfel_1_1Set.html#a0f48cac1df954d00a7e7edfd85a4b996">apfel::Set::Evaluate</a></div><div class="ttdeci">Set&lt; Distribution &gt; Evaluate(double const &amp;x) const</div><div class="ttdoc">This function interpolates the single objects of the set (only Operators) over the first index and re...</div></div>
-<div class="ttc" id="aclassapfel_1_1Set_html_ac2b7cfa13e427b34727d36c9ba28feb1"><div class="ttname"><a href="classapfel_1_1Set.html#ac2b7cfa13e427b34727d36c9ba28feb1">apfel::Set::SetMap</a></div><div class="ttdeci">void SetMap(ConvolutionMap const &amp;map)</div><div class="ttdoc">This function (re)sets the convolution map.</div><div class="ttdef"><b>Definition</b> set.h:83</div></div>
-<div class="ttc" id="aclassapfel_1_1Set_html_acbd7260c0273ba3f63a1b89ab43ef067"><div class="ttname"><a href="classapfel_1_1Set.html#acbd7260c0273ba3f63a1b89ab43ef067">apfel::Set::GetObjects</a></div><div class="ttdeci">std::map&lt; int, T &gt; const &amp; GetObjects() const</div><div class="ttdoc">This returns the full map of objects.</div><div class="ttdef"><b>Definition</b> set.h:77</div></div>
+<div class="ttc" id="aclassapfel_1_1Set_html_ac2b7cfa13e427b34727d36c9ba28feb1"><div class="ttname"><a href="classapfel_1_1Set.html#ac2b7cfa13e427b34727d36c9ba28feb1">apfel::Set::SetMap</a></div><div class="ttdeci">void SetMap(ConvolutionMap const &amp;map)</div><div class="ttdoc">This function (re)sets the convolution map.</div><div class="ttdef"><b>Definition</b> set.h:90</div></div>
+<div class="ttc" id="aclassapfel_1_1Set_html_acbd7260c0273ba3f63a1b89ab43ef067"><div class="ttname"><a href="classapfel_1_1Set.html#acbd7260c0273ba3f63a1b89ab43ef067">apfel::Set::GetObjects</a></div><div class="ttdeci">std::map&lt; int, T &gt; const &amp; GetObjects() const</div><div class="ttdoc">This returns the full map of objects.</div><div class="ttdef"><b>Definition</b> set.h:84</div></div>
 <div class="ttc" id="aclassapfel_1_1SubGrid_html"><div class="ttname"><a href="classapfel_1_1SubGrid.html">apfel::SubGrid</a></div><div class="ttdoc">Class for the x-space interpolation SubGrids.</div><div class="ttdef"><b>Definition</b> subgrid.h:23</div></div>
 <div class="ttc" id="aclassapfel_1_1TabulateObject_html"><div class="ttname"><a href="classapfel_1_1TabulateObject.html">apfel::TabulateObject</a></div><div class="ttdoc">The template TabulateObject class is a derived of the QGrid class that tabulates on object of type T ...</div><div class="ttdef"><b>Definition</b> tabulateobject.h:26</div></div>
 <div class="ttc" id="aclassapfel_1_1TabulateObject_html_a1206af95488cd367d86f9eefd51ff96e"><div class="ttname"><a href="classapfel_1_1TabulateObject.html#a1206af95488cd367d86f9eefd51ff96e">apfel::TabulateObject::EvaluatexQ</a></div><div class="ttdeci">double EvaluatexQ(double const &amp;x, double const &amp;Q) const</div><div class="ttdoc">This function interpolates in x and Q. It is used for T = Distribution.</div></div>
@@ -296,10 +315,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="ttc" id="aclassapfel_1_1Timer_html_a8b8ffd3f8ceb45b50ecd2d7b00f84ccb"><div class="ttname"><a href="classapfel_1_1Timer.html#a8b8ffd3f8ceb45b50ecd2d7b00f84ccb">apfel::Timer::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">This function starts the timer.</div><div class="ttdef"><b>Definition</b> timer.h:30</div></div>
 <div class="ttc" id="anamespaceapfel_html_a636d7223aabd93278ee87749277490b2"><div class="ttname"><a href="namespaceapfel.html#a636d7223aabd93278ee87749277490b2">apfel::PlusMinusToPhys</a></div><div class="ttdeci">std::map&lt; int, double &gt; PlusMinusToPhys(std::map&lt; int, double &gt; const &amp;PlusMinusMap)</div><div class="ttdoc">Rotation from to the PlusMinus basis to the physical basis.</div></div>
 </div><!-- fragment --> </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

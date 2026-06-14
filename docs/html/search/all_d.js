@@ -77,7 +77,7 @@ var searchData=
   ['matchtmdpdfs_74',['MatchTmdPDFs',['../namespaceapfel.html#a49344b8e01187276f0b247d170bc3b26',1,'apfel']]],
   ['matchtmdpdfswithtmcs_75',['MatchTmdPDFsWithTMCs',['../namespaceapfel.html#a4080faa8b1d51faa59345f09e6693645',1,'apfel']]],
   ['mathematical_20constants_76',['Mathematical constants',['../group__MathConstants.html',1,'']]],
-  ['matrix_77',['matrix',['../classapfel_1_1matrix.html',1,'apfel::matrix&lt; T &gt;'],['../classapfel_1_1matrix.html#a2863c1d3841857b42133f8beb544dfb3',1,'apfel::matrix::matrix(size_t const &amp;row=0, size_t const &amp;col=0, std::vector&lt; T &gt; const &amp;d={})'],['../classapfel_1_1matrix.html#ac38917d17f4e2af036afd02fa98886d2',1,'apfel::matrix::matrix(matrix&lt; T &gt; const &amp;m)']]],
+  ['matrix_77',['matrix',['../classapfel_1_1matrix.html',1,'apfel::matrix&lt; T &gt;'],['../classapfel_1_1matrix.html#a2863c1d3841857b42133f8beb544dfb3',1,'apfel::matrix::matrix(size_t const &amp;row=0, size_t const &amp;col=0, std::vector&lt; T &gt; const &amp;d={})'],['../classapfel_1_1matrix.html#ac38917d17f4e2af036afd02fa98886d2',1,'apfel::matrix::matrix(matrix&lt; T &gt; const &amp;m)'],['../classapfel_1_1matrix.html#a3fad6473783523be5c880f94f9792f31',1,'apfel::matrix::matrix(matrix&lt; T &gt; &amp;&amp;m)=default']]],
   ['matrix_2eh_78',['matrix.h',['../matrix_8h.html',1,'']]],
   ['matrix_3c_20double_20_3e_79',['matrix&lt; double &gt;',['../classapfel_1_1matrix.html',1,'apfel']]],
   ['max_80',['max',['../classapfel_1_1ExtendedVector.html#a3535622f96f490c0192557945e02daf6',1,'apfel::ExtendedVector']]],

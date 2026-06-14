@@ -1,0 +1,7 @@
+<map id="apfel::AlphaQCDMSbarMass" name="apfel::AlphaQCDMSbarMass">
+<area shape="rect" id="Node000001" title="The AlphaQCDMSbarMass is a specialization class of the MatchedEvolution class for the computation of ..." alt="" coords="5,245,233,272"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1MatchedEvolution.html" title=" " alt="" coords="23,151,215,195"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,209,121,245,117,243,117,213"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="35,5,203,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,47,122,151,116,150,117,51"/>
+</map>

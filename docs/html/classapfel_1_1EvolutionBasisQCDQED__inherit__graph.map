@@ -1,0 +1,5 @@
+<map id="apfel::EvolutionBasisQCDQED" name="apfel::EvolutionBasisQCDQED">
+<area shape="rect" id="Node000001" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ..." alt="" coords="5,81,248,109"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="36,5,217,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,47,129,82,124,79,125,51"/>
+</map>

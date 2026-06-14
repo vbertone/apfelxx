@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: apfel Namespace Reference</title>
+<title>APFEL++: apfel Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -77,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
   </ul>
 </div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespaceapfel.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -98,14 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">apfel Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -1382,32 +1396,32 @@ Functions</h2></td></tr>
 <tr class="memitem:af121b1ac08ec4b1345d8eafed77b07a5" id="r_af121b1ac08ec4b1345d8eafed77b07a5"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af121b1ac08ec4b1345d8eafed77b07a5">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> const &amp;sg)</td></tr>
 <tr class="memdesc:af121b1ac08ec4b1345d8eafed77b07a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method which prints <a class="el" href="classapfel_1_1SubGrid.html" title="Class for the x-space interpolation SubGrids.">SubGrid</a> with cout &lt;&lt;.  <br /></td></tr>
 <tr id="func-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">QCD beta function</div></td></tr>
-<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. Reference: <a href="https://arxiv.org/pdf/1701.01404.pdf">https://arxiv.org/pdf/1701.01404.pdf</a> </p>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. Reference: <a href="https://arxiv.org/pdf/1701.01404.pdf">https://arxiv.org/pdf/1701.01404.pdf</a> </p>
 </div></td></tr>
 <tr class="memitem:aec59defd4efa5b0cab6b297994a81d13" id="r_aec59defd4efa5b0cab6b297994a81d13"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aec59defd4efa5b0cab6b297994a81d13">beta0qcd</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:aec59defd4efa5b0cab6b297994a81d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">LO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:aec59defd4efa5b0cab6b297994a81d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">LO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr class="memitem:a4a86e6e6ee467f4315ec98163bf1c483" id="r_a4a86e6e6ee467f4315ec98163bf1c483"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a4a86e6e6ee467f4315ec98163bf1c483">beta1qcd</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:a4a86e6e6ee467f4315ec98163bf1c483"><td class="mdescLeft">&#160;</td><td class="mdescRight">NLO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:a4a86e6e6ee467f4315ec98163bf1c483"><td class="mdescLeft">&#160;</td><td class="mdescRight">NLO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr class="memitem:a246c7375cddb32ed53ee4f1a79836569" id="r_a246c7375cddb32ed53ee4f1a79836569"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a246c7375cddb32ed53ee4f1a79836569">beta2qcd</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:a246c7375cddb32ed53ee4f1a79836569"><td class="mdescLeft">&#160;</td><td class="mdescRight">NNLO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:a246c7375cddb32ed53ee4f1a79836569"><td class="mdescLeft">&#160;</td><td class="mdescRight">NNLO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr class="memitem:a780121c6acabc585bf2f16d992ec6dab" id="r_a780121c6acabc585bf2f16d992ec6dab"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a780121c6acabc585bf2f16d992ec6dab">beta3qcd</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:a780121c6acabc585bf2f16d992ec6dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">NNNLO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:a780121c6acabc585bf2f16d992ec6dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">NNNLO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr class="memitem:ac20154649fd09846e9c9889bb9d94466" id="r_ac20154649fd09846e9c9889bb9d94466"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ac20154649fd09846e9c9889bb9d94466">beta4qcd</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:ac20154649fd09846e9c9889bb9d94466"><td class="mdescLeft">&#160;</td><td class="mdescRight">N4LO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:ac20154649fd09846e9c9889bb9d94466"><td class="mdescLeft">&#160;</td><td class="mdescRight">N4LO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr id="func-members-1" class="groupHeader"><td colspan="2"><div class="groupHeader">QCDxQED mixed beta function</div></td></tr>
-<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the QCDxQED mixed <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. Reference: <a href="https://arxiv.org/pdf/hep-ph/9803211.pdf">https://arxiv.org/pdf/hep-ph/9803211.pdf</a> </p>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the QCDxQED mixed <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. Reference: <a href="https://arxiv.org/pdf/hep-ph/9803211.pdf">https://arxiv.org/pdf/hep-ph/9803211.pdf</a> </p>
 </div></td></tr>
 <tr class="memitem:ac77dea1f4031ceb302759804ac99dcf5" id="r_ac77dea1f4031ceb302759804ac99dcf5"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ac77dea1f4031ceb302759804ac99dcf5">beta1qcdqed</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:ac77dea1f4031ceb302759804ac99dcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><picture><source srcset="form_14_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$O(\alpha_s\alpha)$" src="form_14.png" width="48" height="17"/></picture> coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:ac77dea1f4031ceb302759804ac99dcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$O(\alpha_s\alpha)$" src="form_7.png" width="48" height="17"/> coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr class="memitem:a93ea292c3fe1f21f7de6e5dc852cfee3" id="r_a93ea292c3fe1f21f7de6e5dc852cfee3"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a93ea292c3fe1f21f7de6e5dc852cfee3">beta1qedqcd</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:a93ea292c3fe1f21f7de6e5dc852cfee3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><picture><source srcset="form_16_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$O(\alpha\alpha_s)$" src="form_16.png" width="48" height="17"/></picture> coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:a93ea292c3fe1f21f7de6e5dc852cfee3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><img class="formulaInl" alt="$O(\alpha\alpha_s)$" src="form_9.png" width="48" height="17"/> coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr id="func-members-2" class="groupHeader"><td colspan="2"><div class="groupHeader">QED beta function</div></td></tr>
-<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the QED <picture><source srcset="form_6_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_{QED}$" src="form_6.png" width="39" height="17"/></picture> function. </p>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the QED <img class="formulaInl" alt="$\beta_{QED}$" src="form_11.png" width="39" height="17"/> function. </p>
 </div></td></tr>
 <tr class="memitem:ae95ebb55b1718733aa14d879062e362f" id="r_ae95ebb55b1718733aa14d879062e362f"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ae95ebb55b1718733aa14d879062e362f">beta0qed</a> (int const &amp;nf, int const &amp;nl)</td></tr>
-<tr class="memdesc:ae95ebb55b1718733aa14d879062e362f"><td class="mdescLeft">&#160;</td><td class="mdescRight">LO coefficient of the QED <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:ae95ebb55b1718733aa14d879062e362f"><td class="mdescLeft">&#160;</td><td class="mdescRight">LO coefficient of the QED <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr class="memitem:aed080a12594e6a5af37ae5a07912df5e" id="r_aed080a12594e6a5af37ae5a07912df5e"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aed080a12594e6a5af37ae5a07912df5e">beta1qed</a> (int const &amp;nf, int const &amp;nl)</td></tr>
-<tr class="memdesc:aed080a12594e6a5af37ae5a07912df5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">NLO coefficient of the QED <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:aed080a12594e6a5af37ae5a07912df5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">NLO coefficient of the QED <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function.  <br /></td></tr>
 <tr id="func-members-3" class="groupHeader"><td colspan="2"><div class="groupHeader">Compton-form-factor object initializers</div></td></tr>
 <tr><td colspan="2" class="ititle"><div class="groupText"><p>Collection of functions that initialise <a class="el" href="structapfel_1_1StructureFunctionObjects.html" title="Structure that contains all the precomputed quantities needed to compute the DIS structure functions,...">StructureFunctionObjects</a> structure for the different kinds of Compton form factors available. </p>
 </div></td></tr>
@@ -1569,8 +1583,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:aed4e63fe188a49282b468aa1cd89a688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribution-Distribution.  <br /></td></tr>
 <tr class="memitem:ad705cb806c1448444c3dc28c3db8819e" id="r_ad705cb806c1448444c3dc28c3db8819e"><td class="memItemLeft"><a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad705cb806c1448444c3dc28c3db8819e">operator*</a> (<a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> lhs, <a class="el" href="classapfel_1_1DoubleDistribution.html">DoubleDistribution</a> const &amp;rhs)</td></tr>
 <tr class="memdesc:ad705cb806c1448444c3dc28c3db8819e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribution*Distribution.  <br /></td></tr>
-<tr class="memitem:ac66f2492083955a2440bbec3c6552a11" id="r_ac66f2492083955a2440bbec3c6552a11"><td class="memTemplParams" colspan="2">template&lt;class A, class B&gt; </td></tr>
-<tr class="memitem:ac66f2492083955a2440bbec3c6552a11 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; B &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac66f2492083955a2440bbec3c6552a11">operator*</a> (<a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; A &gt; lhs, <a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; B &gt; const &amp;rhs)</td></tr>
+<tr class="memitem:a3235f6fab57987ed43241c080cea4d9c" id="r_a3235f6fab57987ed43241c080cea4d9c"><td class="memTemplParams" colspan="2">template&lt;class A, class B&gt; </td></tr>
+<tr class="memitem:a3235f6fab57987ed43241c080cea4d9c template"><td class="memItemLeft"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; B &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3235f6fab57987ed43241c080cea4d9c">operator*</a> (<a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; A &gt; const &amp;lhs, <a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; B &gt; const &amp;rhs)</td></tr>
 <tr class="memitem:a3ab1174a906bee20aa6a545850698df5" id="r_a3ab1174a906bee20aa6a545850698df5"><td class="memTemplParams" colspan="2">template&lt;class T, class U&gt; </td></tr>
 <tr class="memitem:a3ab1174a906bee20aa6a545850698df5 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; T, U &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3ab1174a906bee20aa6a545850698df5">operator*</a> (double const &amp;s, <a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; T, U &gt; rhs)</td></tr>
 <tr class="memitem:a583795cfed3a9e34e180d119452f8a43" id="r_a583795cfed3a9e34e180d119452f8a43"><td class="memTemplParams" colspan="2">template&lt;class T, class U&gt; </td></tr>
@@ -1627,8 +1641,8 @@ Functions</h2></td></tr>
 <tr class="memitem:abace1199b569ea0a2744fe2b6e5f72a1" id="r_abace1199b569ea0a2744fe2b6e5f72a1"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:abace1199b569ea0a2744fe2b6e5f72a1 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abace1199b569ea0a2744fe2b6e5f72a1">operator*</a> (<a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; lhs, <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; T &gt; const &amp;rhs)</td></tr>
 <tr class="memdesc:abace1199b569ea0a2744fe2b6e5f72a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">matrix*matrix  <br /></td></tr>
-<tr class="memitem:aaa133b64918aa6b61b5ca8ae3ee9342d" id="r_aaa133b64918aa6b61b5ca8ae3ee9342d"><td class="memItemLeft"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaa133b64918aa6b61b5ca8ae3ee9342d">operator*</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> lhs, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:aaa133b64918aa6b61b5ca8ae3ee9342d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator*Distribution.  <br /></td></tr>
+<tr class="memitem:af7853659925503367dd29984e13475d2" id="r_af7853659925503367dd29984e13475d2"><td class="memItemLeft"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a>&#160;</td><td class="memItemRight"><a class="el" href="#af7853659925503367dd29984e13475d2">operator*</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;lhs, <a class="el" href="classapfel_1_1Distribution.html">Distribution</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:af7853659925503367dd29984e13475d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator*Distribution.  <br /></td></tr>
 <tr class="memitem:a746fded2cc1fe941688f62fb393d7759" id="r_a746fded2cc1fe941688f62fb393d7759"><td class="memItemLeft"><a class="el" href="classapfel_1_1Operator.html">Operator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a746fded2cc1fe941688f62fb393d7759">operator*</a> (<a class="el" href="classapfel_1_1Operator.html">Operator</a> lhs, <a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;rhs)</td></tr>
 <tr class="memdesc:a746fded2cc1fe941688f62fb393d7759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator*Operator.  <br /></td></tr>
 <tr class="memitem:a04160710a953a30dfc9d57a635d3c9cc" id="r_a04160710a953a30dfc9d57a635d3c9cc"><td class="memItemLeft"><a class="el" href="classapfel_1_1Operator.html">Operator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a04160710a953a30dfc9d57a635d3c9cc">operator*</a> (double const &amp;s, <a class="el" href="classapfel_1_1Operator.html">Operator</a> rhs)</td></tr>
@@ -1682,8 +1696,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a33e05cb2ad91a982e5d000a8a944a863" id="r_a33e05cb2ad91a982e5d000a8a944a863"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:a33e05cb2ad91a982e5d000a8a944a863 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1QGrid.html">QGrid</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a33e05cb2ad91a982e5d000a8a944a863">operator-</a> (<a class="el" href="classapfel_1_1QGrid.html">QGrid</a>&lt; T &gt; lhs, <a class="el" href="classapfel_1_1QGrid.html">QGrid</a>&lt; T &gt; const &amp;rhs)</td></tr>
 <tr class="memdesc:a33e05cb2ad91a982e5d000a8a944a863"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1QGrid.html" title="The template class QGrids is a mother class for the interpolation in Q. This class also implements me...">QGrid&lt;T&gt;</a> - <a class="el" href="classapfel_1_1QGrid.html" title="The template class QGrids is a mother class for the interpolation in Q. This class also implements me...">QGrid&lt;T&gt;</a>.  <br /></td></tr>
-<tr class="memitem:a4d75cd4c1c006b97e728e56f65b4aa3a" id="r_a4d75cd4c1c006b97e728e56f65b4aa3a"><td class="memTemplParams" colspan="2">template&lt;class A, class B&gt; </td></tr>
-<tr class="memitem:a4d75cd4c1c006b97e728e56f65b4aa3a template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; B &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4d75cd4c1c006b97e728e56f65b4aa3a">operator*</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; A &gt; lhs, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; B &gt; const &amp;rhs)</td></tr>
+<tr class="memitem:af6582ec08339d86be5555136fb870e18" id="r_af6582ec08339d86be5555136fb870e18"><td class="memTemplParams" colspan="2">template&lt;class A, class B&gt; </td></tr>
+<tr class="memitem:af6582ec08339d86be5555136fb870e18 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; B &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af6582ec08339d86be5555136fb870e18">operator*</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; A &gt; const &amp;lhs, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; B &gt; const &amp;rhs)</td></tr>
 <tr class="memitem:a5b492e7fd96c1e21c73f46e9711623ba" id="r_a5b492e7fd96c1e21c73f46e9711623ba"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:a5b492e7fd96c1e21c73f46e9711623ba template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5b492e7fd96c1e21c73f46e9711623ba">operator*</a> (double const &amp;s, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; rhs)</td></tr>
 <tr class="memitem:a2e1794019907d9c2eb3382682a3d4e72" id="r_a2e1794019907d9c2eb3382682a3d4e72"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
@@ -1704,8 +1718,8 @@ Functions</h2></td></tr>
 <tr class="memitem:aceedb3a82763b5f0b175af347885260e template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aceedb3a82763b5f0b175af347885260e">operator*</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; lhs, std::map&lt; int, double &gt; const &amp;v)</td></tr>
 <tr class="memitem:afa631121fcfee23815e72797b8f85ef4" id="r_afa631121fcfee23815e72797b8f85ef4"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:afa631121fcfee23815e72797b8f85ef4 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afa631121fcfee23815e72797b8f85ef4">operator/</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; lhs, double const &amp;s)</td></tr>
-<tr class="memitem:a5430c8cb64fb2ac8ef6ae63ab2827c18" id="r_a5430c8cb64fb2ac8ef6ae63ab2827c18"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:a5430c8cb64fb2ac8ef6ae63ab2827c18 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5430c8cb64fb2ac8ef6ae63ab2827c18">operator*</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; lhs, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;rhs)</td></tr>
+<tr class="memitem:a917fe9ff2806a3bd1dfab2c59dc56261" id="r_a917fe9ff2806a3bd1dfab2c59dc56261"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a917fe9ff2806a3bd1dfab2c59dc56261 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a917fe9ff2806a3bd1dfab2c59dc56261">operator*</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;lhs, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;rhs)</td></tr>
 <tr class="memitem:a72910b1a149e3969101edad406cb5e78" id="r_a72910b1a149e3969101edad406cb5e78"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:a72910b1a149e3969101edad406cb5e78 template"><td class="memItemLeft"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a72910b1a149e3969101edad406cb5e78">operator+</a> (<a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; lhs, <a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;rhs)</td></tr>
 <tr class="memitem:a9db0735bbe647ee8fafe22a9b7bd2c50" id="r_a9db0735bbe647ee8fafe22a9b7bd2c50"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
@@ -1764,14 +1778,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:ab31f2c0a87feb4000e21747196348c85"><td class="mdescLeft">&#160;</td><td class="mdescRight">&alpha;<sub>s</sub><sup>4</sup> term  <br /></td></tr>
 <tr class="memitem:ad5e5001f329b08d4beee52ad6e438574" id="r_ad5e5001f329b08d4beee52ad6e438574"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ad5e5001f329b08d4beee52ad6e438574">gammaK3gmq</a> (int const &amp;nf)</td></tr>
 <tr id="func-members-13" class="groupHeader"><td colspan="2"><div class="groupHeader">MSbar mass anomalous dimension</div></td></tr>
-<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the <picture><source srcset="form_20_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\gamma_m$" src="form_20.png" width="20" height="11"/></picture> function. Reference: <a href="https://arxiv.org/pdf/hep-ph/9910332">https://arxiv.org/pdf/hep-ph/9910332</a> </p>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>Coefficients of the <img class="formulaInl" alt="$\gamma_m$" src="form_14.png" width="20" height="11"/> function. Reference: <a href="https://arxiv.org/pdf/hep-ph/9910332">https://arxiv.org/pdf/hep-ph/9910332</a> </p>
 </div></td></tr>
 <tr class="memitem:a5e3d85771cdc1e0d45283ad3f96c5f72" id="r_a5e3d85771cdc1e0d45283ad3f96c5f72"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a5e3d85771cdc1e0d45283ad3f96c5f72">gammam0</a> ()</td></tr>
-<tr class="memdesc:a5e3d85771cdc1e0d45283ad3f96c5f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">LO coefficient of the <picture><source srcset="form_20_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\gamma_m$" src="form_20.png" width="20" height="11"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:a5e3d85771cdc1e0d45283ad3f96c5f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">LO coefficient of the <img class="formulaInl" alt="$\gamma_m$" src="form_14.png" width="20" height="11"/> function.  <br /></td></tr>
 <tr class="memitem:af3051532c4b6aeec71efc27ac7760140" id="r_af3051532c4b6aeec71efc27ac7760140"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#af3051532c4b6aeec71efc27ac7760140">gammam1</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:af3051532c4b6aeec71efc27ac7760140"><td class="mdescLeft">&#160;</td><td class="mdescRight">NLO coefficient of the <picture><source srcset="form_22_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\\gamma_m$" src="form_22.png" width="62" height="11"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:af3051532c4b6aeec71efc27ac7760140"><td class="mdescLeft">&#160;</td><td class="mdescRight">NLO coefficient of the <img class="formulaInl" alt="$\\gamma_m$" src="form_16.png" width="62" height="11"/> function.  <br /></td></tr>
 <tr class="memitem:ad06b1634e1cde93771cc3e1ab04decb5" id="r_ad06b1634e1cde93771cc3e1ab04decb5"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ad06b1634e1cde93771cc3e1ab04decb5">gammam2</a> (int const &amp;nf)</td></tr>
-<tr class="memdesc:ad06b1634e1cde93771cc3e1ab04decb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">NNLO coefficient of the <picture><source srcset="form_22_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\\gamma_m$" src="form_22.png" width="62" height="11"/></picture> function.  <br /></td></tr>
+<tr class="memdesc:ad06b1634e1cde93771cc3e1ab04decb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">NNLO coefficient of the <img class="formulaInl" alt="$\\gamma_m$" src="form_16.png" width="62" height="11"/> function.  <br /></td></tr>
 <tr id="func-members-14" class="groupHeader"><td colspan="2"><div class="groupHeader">g-functions beta.</div></td></tr>
 <tr><td colspan="2" class="ititle"><div class="groupText"><p>g-functions used for the analytic evolution of the strong coupling. </p>
 </div></td></tr>
@@ -1926,9 +1940,9 @@ Functions</h2></td></tr>
 <tr><td colspan="2" class="ititle"><div class="groupText"><p>Collection of special functions needed in the evaluation of some expressions. </p>
 </div></td></tr>
 <tr class="memitem:a892a0ab473cc1c2933458ae7b02909f4" id="r_a892a0ab473cc1c2933458ae7b02909f4"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a892a0ab473cc1c2933458ae7b02909f4">dilog</a> (double const &amp;x)</td></tr>
-<tr class="memdesc:a892a0ab473cc1c2933458ae7b02909f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real dilogarithm <picture><source srcset="form_18_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{Li}_2(x)$" src="form_18.png" width="41" height="17"/></picture>.  <br /></td></tr>
+<tr class="memdesc:a892a0ab473cc1c2933458ae7b02909f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real dilogarithm <img class="formulaInl" alt="$\mathrm{Li}_2(x)$" src="form_20.png" width="41" height="17"/>.  <br /></td></tr>
 <tr class="memitem:acf522e8ab3245092ac4472d9d6de7090" id="r_acf522e8ab3245092ac4472d9d6de7090"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#acf522e8ab3245092ac4472d9d6de7090">trilog</a> (double const &amp;x)</td></tr>
-<tr class="memdesc:acf522e8ab3245092ac4472d9d6de7090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real trilogarithm <picture><source srcset="form_19_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{Li}_3(x)$" src="form_19.png" width="41" height="17"/></picture>.  <br /></td></tr>
+<tr class="memdesc:acf522e8ab3245092ac4472d9d6de7090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real trilogarithm <img class="formulaInl" alt="$\mathrm{Li}_3(x)$" src="form_21.png" width="41" height="17"/>.  <br /></td></tr>
 <tr class="memitem:ae07fc6dc7c2b19aaeae0957f7afa9ccc" id="r_ae07fc6dc7c2b19aaeae0957f7afa9ccc"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ae07fc6dc7c2b19aaeae0957f7afa9ccc">wgplg</a> (int const &amp;n, int const &amp;p, double const &amp;x)</td></tr>
 <tr class="memdesc:ae07fc6dc7c2b19aaeae0957f7afa9ccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the computation of the Nielsen's generalized dilogs.  <br /></td></tr>
 <tr class="memitem:abde00ad78affecc4bbe4e4e5996b820a" id="r_abde00ad78affecc4bbe4e4e5996b820a"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#abde00ad78affecc4bbe4e4e5996b820a">hpoly</a> (std::vector&lt; int &gt; const &amp;w, double const &amp;x)</td></tr>
@@ -2439,14 +2453,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>LO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>LO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_0(n_f)$" src="form_2.png" width="44" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_0(n_f)$" src="form_2.png" width="44" height="17"/> </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="massiveCF_test_8cc-example.html#a41">massiveCF_test.cc</a>.</dd>
 </dl>
 
@@ -2471,7 +2485,7 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>LO coefficient of the QED <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>LO coefficient of the QED <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active quark flavours </td></tr>
@@ -2479,7 +2493,7 @@ Basis rotations</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_7_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_0(n_f, n_l)$" src="form_7.png" width="65" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_0(n_f, n_l)$" src="form_12.png" width="65" height="17"/> </dd></dl>
 
 </div>
 </div>
@@ -2498,14 +2512,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>NLO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>NLO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_3_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_1(n_f)$" src="form_3.png" width="44" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_1(n_f)$" src="form_3.png" width="44" height="17"/> </dd></dl>
 
 </div>
 </div>
@@ -2524,14 +2538,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><picture><source srcset="form_14_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$O(\alpha_s\alpha)$" src="form_14.png" width="48" height="17"/></picture> coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p><img class="formulaInl" alt="$O(\alpha_s\alpha)$" src="form_7.png" width="48" height="17"/> coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_15_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta^{(\alpha_s\alpha)}(n_f)$" src="form_15.png" width="69" height="20"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta^{(\alpha_s\alpha)}(n_f)$" src="form_8.png" width="69" height="20"/> </dd></dl>
 
 </div>
 </div>
@@ -2554,7 +2568,7 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>NLO coefficient of the QED <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>NLO coefficient of the QED <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
@@ -2562,7 +2576,7 @@ Basis rotations</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_8_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_1(n_f, n_l)$" src="form_8.png" width="65" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_1(n_f, n_l)$" src="form_13.png" width="65" height="17"/> </dd></dl>
 
 </div>
 </div>
@@ -2581,14 +2595,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><picture><source srcset="form_16_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$O(\alpha\alpha_s)$" src="form_16.png" width="48" height="17"/></picture> coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p><img class="formulaInl" alt="$O(\alpha\alpha_s)$" src="form_9.png" width="48" height="17"/> coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_17_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta^{(\alpha\alpha_s)}(n_f)$" src="form_17.png" width="69" height="20"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta^{(\alpha\alpha_s)}(n_f)$" src="form_10.png" width="69" height="20"/> </dd></dl>
 
 </div>
 </div>
@@ -2607,14 +2621,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>NNLO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>NNLO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_2(n_f)$" src="form_4.png" width="44" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_2(n_f)$" src="form_4.png" width="44" height="17"/> </dd></dl>
 
 </div>
 </div>
@@ -2633,14 +2647,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>NNNLO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>NNNLO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_3(n_f)$" src="form_5.png" width="44" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_3(n_f)$" src="form_5.png" width="44" height="17"/> </dd></dl>
 
 </div>
 </div>
@@ -2659,14 +2673,14 @@ Basis rotations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>N4LO coefficient of the QCD <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/></picture> function. </p>
+<p>N4LO coefficient of the QCD <img class="formulaInl" alt="$\beta$" src="form_1.png" width="11" height="15"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_13_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\beta_4(n_f)$" src="form_13.png" width="44" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\beta_4(n_f)$" src="form_6.png" width="44" height="17"/> </dd></dl>
 
 </div>
 </div>
@@ -3955,14 +3969,14 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Real dilogarithm <picture><source srcset="form_18_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{Li}_2(x)$" src="form_18.png" width="41" height="17"/></picture>. </p>
+<p>Real dilogarithm <img class="formulaInl" alt="$\mathrm{Li}_2(x)$" src="form_20.png" width="41" height="17"/>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>the real argument </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_18_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{Li}_2(x)$" src="form_18.png" width="41" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\mathrm{Li}_2(x)$" src="form_20.png" width="41" height="17"/> </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Implementation translated by R.Brun from CERNLIB DILOG function C332. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="polylog_test_8cc-example.html#a6">polylog_test.cc</a>.</dd>
 </dl>
@@ -4718,8 +4732,8 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>LO coefficient of the <picture><source srcset="form_20_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\gamma_m$" src="form_20.png" width="20" height="11"/></picture> function. </p>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_21_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\gamma_m^{[0]}$" src="form_21.png" width="21" height="21"/></picture> </dd></dl>
+<p>LO coefficient of the <img class="formulaInl" alt="$\gamma_m$" src="form_14.png" width="20" height="11"/> function. </p>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\gamma_m^{[0]}$" src="form_15.png" width="21" height="21"/> </dd></dl>
 
 </div>
 </div>
@@ -4738,14 +4752,14 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>NLO coefficient of the <picture><source srcset="form_22_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\\gamma_m$" src="form_22.png" width="62" height="11"/></picture> function. </p>
+<p>NLO coefficient of the <img class="formulaInl" alt="$\\gamma_m$" src="form_16.png" width="62" height="11"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_23_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\gamma_m^{[1]}(n_f)$" src="form_23.png" width="51" height="23"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\gamma_m^{[1]}(n_f)$" src="form_17.png" width="51" height="23"/> </dd></dl>
 
 </div>
 </div>
@@ -4764,14 +4778,14 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>NNLO coefficient of the <picture><source srcset="form_22_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\\gamma_m$" src="form_22.png" width="62" height="11"/></picture> function. </p>
+<p>NNLO coefficient of the <img class="formulaInl" alt="$\\gamma_m$" src="form_16.png" width="62" height="11"/> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nf</td><td>the number of active flavours </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_24_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\gamma_m^{[2]}(n_f)$" src="form_24.png" width="51" height="23"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\gamma_m^{[2]}(n_f)$" src="form_18.png" width="51" height="23"/> </dd></dl>
 
 </div>
 </div>
@@ -5235,7 +5249,7 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_12_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{H}(\{w\},x)$" src="form_12.png" width="65" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\mathrm{H}(\{w\},x)$" src="form_23.png" width="65" height="17"/> </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>C++ adaptation of the FORTRAN implementation discussed in <a href="https://arxiv.org/pdf/1809.07084.pdf">https://arxiv.org/pdf/1809.07084.pdf</a>. The argument x is limited to the interval [0, sqrt(2)-1]. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="polylog_test_8cc-example.html#a1">polylog_test.cc</a>.</dd>
 </dl>
@@ -9927,8 +9941,8 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<a id="ac66f2492083955a2440bbec3c6552a11" name="ac66f2492083955a2440bbec3c6552a11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac66f2492083955a2440bbec3c6552a11">&#9670;&#160;</a></span>operator*() <span class="overload">[28/70]</span></h2>
+<a id="a3235f6fab57987ed43241c080cea4d9c" name="a3235f6fab57987ed43241c080cea4d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3235f6fab57987ed43241c080cea4d9c">&#9670;&#160;</a></span>operator*() <span class="overload">[28/70]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -9938,7 +9952,7 @@ template&lt;class A, class B&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; B &gt; apfel::operator* </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; A &gt;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; A &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -10184,8 +10198,8 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<a id="aaa133b64918aa6b61b5ca8ae3ee9342d" name="aaa133b64918aa6b61b5ca8ae3ee9342d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa133b64918aa6b61b5ca8ae3ee9342d">&#9670;&#160;</a></span>operator*() <span class="overload">[39/70]</span></h2>
+<a id="af7853659925503367dd29984e13475d2" name="af7853659925503367dd29984e13475d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7853659925503367dd29984e13475d2">&#9670;&#160;</a></span>operator*() <span class="overload">[39/70]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -10193,7 +10207,7 @@ template&lt;class T&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classapfel_1_1Distribution.html">Distribution</a> apfel::operator* </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classapfel_1_1Operator.html">Operator</a></td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Operator.html">Operator</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -10416,8 +10430,8 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<a id="a4d75cd4c1c006b97e728e56f65b4aa3a" name="a4d75cd4c1c006b97e728e56f65b4aa3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d75cd4c1c006b97e728e56f65b4aa3a">&#9670;&#160;</a></span>operator*() <span class="overload">[49/70]</span></h2>
+<a id="af6582ec08339d86be5555136fb870e18" name="af6582ec08339d86be5555136fb870e18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6582ec08339d86be5555136fb870e18">&#9670;&#160;</a></span>operator*() <span class="overload">[49/70]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -10427,7 +10441,7 @@ template&lt;class A, class B&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; B &gt; apfel::operator* </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; A &gt;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; A &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -10439,8 +10453,31 @@ template&lt;class A, class B&gt; </div>
 
 </div>
 </div>
+<a id="a917fe9ff2806a3bd1dfab2c59dc56261" name="a917fe9ff2806a3bd1dfab2c59dc56261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917fe9ff2806a3bd1dfab2c59dc56261">&#9670;&#160;</a></span>operator*() <span class="overload">[50/70]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; apfel::operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2e1794019907d9c2eb3382682a3d4e72" name="a2e1794019907d9c2eb3382682a3d4e72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e1794019907d9c2eb3382682a3d4e72">&#9670;&#160;</a></span>operator*() <span class="overload">[50/70]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e1794019907d9c2eb3382682a3d4e72">&#9670;&#160;</a></span>operator*() <span class="overload">[51/70]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -10456,29 +10493,6 @@ template&lt;class T&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5430c8cb64fb2ac8ef6ae63ab2827c18" name="a5430c8cb64fb2ac8ef6ae63ab2827c18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5430c8cb64fb2ac8ef6ae63ab2827c18">&#9670;&#160;</a></span>operator*() <span class="overload">[51/70]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; apfel::operator* </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classapfel_1_1Set.html">Set</a>&lt; T &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -12868,14 +12882,14 @@ template&lt;class U&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Real trilogarithm <picture><source srcset="form_19_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{Li}_3(x)$" src="form_19.png" width="41" height="17"/></picture>. </p>
+<p>Real trilogarithm <img class="formulaInl" alt="$\mathrm{Li}_3(x)$" src="form_21.png" width="41" height="17"/>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>the real argument </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_19_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{Li}_3(x)$" src="form_19.png" width="41" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\mathrm{Li}_3(x)$" src="form_21.png" width="41" height="17"/> </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Speacial case of wgplg. </dd></dl>
 
 </div>
@@ -12968,7 +12982,7 @@ template&lt;class U&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><picture><source srcset="form_11_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$\mathrm{S}_{n,p}(x)$" src="form_11.png" width="45" height="17"/></picture> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><img class="formulaInl" alt="$\mathrm{S}_{n,p}(x)$" src="form_22.png" width="45" height="17"/> </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Implementation translated from CERNLIB WGPLG. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="polylog_test_8cc-example.html#a7">polylog_test.cc</a>.</dd>
 </dl>
@@ -13346,10 +13360,21 @@ template&lt;class U&gt; </div>
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceapfel.html">apfel</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

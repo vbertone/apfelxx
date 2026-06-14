@@ -1,0 +1,26 @@
+var rotations_8h =
+[
+    [ "apfel::PhysToPlusMinus", "namespaceapfel.html#a2e948e5c48733ac8cce2df704c947a28", null ],
+    [ "apfel::PhysToPlusMinus", "namespaceapfel.html#adc87c4c8ff8b1a762b739d701e170e30", null ],
+    [ "apfel::PhysToPlusMinusQCDQED", "namespaceapfel.html#aaec0cc96a9dd006703922e0d0cdedddb", null ],
+    [ "apfel::PhysToPlusMinusQCDQED", "namespaceapfel.html#a2cf0d54268eca7c47766054a8cfc6b45", null ],
+    [ "apfel::PhysToQCDEv", "namespaceapfel.html#a39a3573db9b1f9e3d84d33844e3c3a2a", null ],
+    [ "apfel::PhysToQCDEv", "namespaceapfel.html#aaa143c84270da58c3d53ea5b70f2515f", null ],
+    [ "apfel::PhysToQCDEv", "namespaceapfel.html#ad2d17f62518d6be09b46863a5faad5fd", null ],
+    [ "apfel::PhysToQCDEv", "namespaceapfel.html#a13ee23ca5d17408d12b687be58f0f723", null ],
+    [ "apfel::PlusMinusQCDQEDToPhys", "namespaceapfel.html#a16d9449df8fdd12dbe5d68b32bed701d", null ],
+    [ "apfel::PlusMinusQCDQEDToPhys", "namespaceapfel.html#a89a71d768bc0cc2f4da0444857efc9e8", null ],
+    [ "apfel::PlusMinusToPhys", "namespaceapfel.html#aea5e4660baf863d2e2148f2118290455", null ],
+    [ "apfel::PlusMinusToPhys", "namespaceapfel.html#a636d7223aabd93278ee87749277490b2", null ],
+    [ "apfel::QCDEvToPhys", "namespaceapfel.html#a59550cba5f55a63558dc2d3a2a12e10a", null ],
+    [ "apfel::QCDEvToPhys", "namespaceapfel.html#a6fbb69d0eeaff6ae57ba41cc0bbc4248", null ],
+    [ "apfel::QCDEvToPhys", "namespaceapfel.html#ac9a76e61db0f6f99ff98c50a87580540", null ],
+    [ "apfel::RotPhysToPlusMinus", "namespaceapfel.html#a8d827b627c935acb62d0247307ee0dc1", null ],
+    [ "apfel::RotPhysToPlusMinusQCDQED", "namespaceapfel.html#a3903a3db418dd75ab4b408625a80a960", null ],
+    [ "apfel::RotPhysToQCDEv", "namespaceapfel.html#a6418419e3f1b9d048265a8dd89bc323b", null ],
+    [ "apfel::RotPhysToQCDEvFull", "namespaceapfel.html#a8a795b13251f5b660156b521f5ad6cf5", null ],
+    [ "apfel::RotPlusMinusQCDQEDToPhys", "namespaceapfel.html#a90b1e57c98c2a6313a5e55294c2c41be", null ],
+    [ "apfel::RotPlusMinusToPhys", "namespaceapfel.html#a7ffd239625ebeec42ec0dafef6fd7beb", null ],
+    [ "apfel::RotQCDEvToPhys", "namespaceapfel.html#ac8d9079ba80f60896850b527fee1c74b", null ],
+    [ "apfel::RotQCDEvToPhysFull", "namespaceapfel.html#a762f84c466d2a6e299d13d0ac7847eeb", null ]
+];

@@ -1,0 +1,8 @@
+<map id="apfel::Cm0sxL3psNC" name="apfel::Cm0sxL3psNC">
+<area shape="rect" id="Node000001" title="O(αs3) pure&#45;singlet coefficient function for FL at Q &gt;&gt; m and small x. Reference: https://arxiv...." alt="" coords="5,183,179,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="14,5,159,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,48,94,183,89,182,85,50"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1Cm0sxL3gNC.html" title="O(αs3) gluon coefficient function for FL at Q &gt;&gt; m and small x. Reference: https://arxiv...." alt="" coords="108,82,273,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="117,40,175,81,170,83,117,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,121,107,184,104,180,165,121"/>
+</map>

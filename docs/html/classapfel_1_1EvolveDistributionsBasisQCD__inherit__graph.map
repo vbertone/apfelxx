@@ -1,0 +1,5 @@
+<map id="apfel::EvolveDistributionsBasisQCD" name="apfel::EvolveDistributionsBasisQCD">
+<area shape="rect" id="Node000001" title="The EvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a set of ev..." alt="" coords="5,81,208,126"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="16,5,197,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,47,109,81,104,79,105,51"/>
+</map>

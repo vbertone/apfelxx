@@ -1,20 +1,73 @@
-body, table, div, p, dl {
-	font: 400 18px/19px Roboto,sans-serif;
-    line-height: 140%;
+/* ============================================================
+   APFEL++ — custom overrides layered on top of doxygen-awesome
+   (sidebar-only layout). Loaded last in HTML_EXTRA_STYLESHEET.
+
+   The project logo (resources/logo.png) is a wide 500x101
+   wordmark. By default doxygen lays the title area out as a
+   table with the logo BESIDE the name/brief, which overflows
+   the fixed-width side navigation. We stack it vertically and
+   scale the logo to the sidebar width instead.
+
+   In the sidebar-only layout the whole header (logo + name +
+   brief + the search box) lives inside "#top", which the theme
+   clips to "--top-height" with overflow:hidden. So --top-height
+   must be tall enough to also contain the search box, otherwise
+   the search box (the last child) gets cut off.
+   ============================================================ */
+
+html {
+    /* Height of the sidebar header (#top): it holds the stacked
+       logo (~61px) + version + brief + the search box. The nav
+       tree below starts exactly at --top-height, so this must be
+       a bit MORE than the header content height to leave a clean
+       gap between the search box and the first tree item. */
+    --top-height: 188px;
 }
 
-table {
-    max-width: 75em;
+/* Stack the logo above the text block instead of side-by-side. */
+#titlearea table,
+#titlearea tbody,
+#titlearea #projectrow {
+    display: block;
 }
 
-p, li, .todo, dl {
-    max-width: 65em;
+#projectlogo,
+#projectalign {
+    display: block;
+    padding: 0;
+    text-align: left;
 }
 
-h1 {
-    font-size: 1.4em;
+/* Scale the wide wordmark logo to the side-navigation width.
+   (Overrides the theme's small max-height, which is meant for a
+   square logo, but keep a cap so it can never blow up the header.) */
+#projectlogo img {
+    max-width: 100%;
+    max-height: 70px;
+    height: auto;
+    margin: 0;
 }
 
-h2 {
-    font-size: 1.1em;
+/* The logo already spells out "APFEL++", so hide the duplicate
+   text name while keeping the version number and the brief. */
+#projectname {
+    font-size: 0;
+    margin-top: var(--spacing-small);
+}
+#projectname #projectnumber {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+#projectbrief {
+    font-size: 0.85rem;
+    color: var(--page-secondary-foreground-color);
+}
+
+/* Keep the main content near the top of its column: the theme ties
+   the content's top padding to --top-height, which we enlarged for
+   the sidebar header only. */
+@media screen and (min-width: 768px) {
+    #doc-content {
+        padding-top: var(--spacing-large) !important;
+    }
 }

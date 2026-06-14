@@ -1,0 +1,7 @@
+<map id="apfel::P1transnsp" name="apfel::P1transnsp">
+<area shape="rect" id="Node000001" title="Space&#45;like O(αs2) non&#45;singlet&#45;plus transversely polarised splitting function." alt="" coords="7,81,153,109"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1P1transnsm.html" title="Space&#45;like O(αs2) non&#45;singlet&#45;minus transversely polarised splitting function." alt="" coords="5,157,155,184"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="82,123,83,157,77,155,78,126"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="8,5,152,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,83,81,77,80,79,51"/>
+</map>

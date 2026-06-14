@@ -1,0 +1,5 @@
+<map id="apfel::PhysicalBasisQCD" name="apfel::PhysicalBasisQCD">
+<area shape="rect" id="Node000001" title="The PhysicalBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution of dist..." alt="" coords="5,81,207,109"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="15,5,197,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,47,108,82,104,79,104,51"/>
+</map>

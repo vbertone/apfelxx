@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: apfel::ConvolutionMap Class Reference</title>
+<title>APFEL++: apfel::ConvolutionMap Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -77,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
   </ul>
 </div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classapfel_1_1ConvolutionMap.html','','classapfel_1_1ConvolutionMap-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -98,19 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a href="namespaceapfel.html">apfel</a></li><li class="navelem"><a href="classapfel_1_1ConvolutionMap.html">ConvolutionMap</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="classapfel_1_1ConvolutionMap-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">apfel::ConvolutionMap Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -122,30 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="dynheader">
 Inheritance diagram for apfel::ConvolutionMap:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classapfel_1_1ConvolutionMap.png" usemap="#apfel_3A_3AConvolutionMap_map" alt=""/>
-  <map id="apfel_3A_3AConvolutionMap_map" name="apfel_3A_3AConvolutionMap_map">
-<area href="classapfel_1_1DISCCBasis.html" title="The DISCCBasis class is a derived of ConvolutionMap specialised for the computation of the CC DIS str..." alt="apfel::DISCCBasis" shape="rect" coords="270,56,530,80"/>
-<area href="classapfel_1_1DISNCBasis.html" title="The DISNCBasis class is a derived of ConvolutionMap specialised for the computation of the NC DIS str..." alt="apfel::DISNCBasis" shape="rect" coords="270,112,530,136"/>
-<area href="classapfel_1_1DiagonalBasis.html" title="The DiagonalBasis class is the simplest derivation of ConvolutionMap meant to essentially perform a s..." alt="apfel::DiagonalBasis" shape="rect" coords="270,168,530,192"/>
-<area href="classapfel_1_1EvolBasisPlusMinus.html" title="The EvolBasisPlusMinus class is derives from ConvolutionMap and implements a basis in which plus (q+q..." alt="apfel::EvolBasisPlusMinus" shape="rect" coords="270,224,530,248"/>
-<area href="classapfel_1_1EvolutionBasisQCD.html" title="The EvolutionBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution of dis..." alt="apfel::EvolutionBasisQCD" shape="rect" coords="270,280,530,304"/>
-<area href="classapfel_1_1EvolutionBasisQCDQED.html" title="The EvolutionBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP evolution of ..." alt="apfel::EvolutionBasisQCDQED" shape="rect" coords="270,336,530,360"/>
-<area href="classapfel_1_1EvolutionOperatorBasisQCD.html" title="The EvolutionOperatorBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolutio..." alt="apfel::EvolutionOperatorBasisQCD" shape="rect" coords="270,392,530,416"/>
-<area href="classapfel_1_1EvolutionOperatorBasisQCDQED.html" title="The EvolutionOperatorBasisQCDQED class is a derived of ConvolutionMap specialised for the DGLAP QCDxQ..." alt="apfel::EvolutionOperatorBasisQCDQED" shape="rect" coords="270,448,530,472"/>
-<area href="classapfel_1_1EvolveDistributionsBasisQCD.html" title="The EvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a set of ev..." alt="apfel::EvolveDistributionsBasisQCD" shape="rect" coords="270,504,530,528"/>
-<area href="classapfel_1_1EvolveDistributionsBasisQCDQED.html" title="The EvolveDistributionsBasisQCDQED class is a derived of ConvolutionMap specialised to match a set of..." alt="apfel::EvolveDistributionsBasisQCDQED" shape="rect" coords="270,560,530,584"/>
-<area href="classapfel_1_1MatchingBasisQCD.html" title="The MatchingBasisQCD class is a derived of ConvolutionMap specialised for the matching of distributio..." alt="apfel::MatchingBasisQCD" shape="rect" coords="270,616,530,640"/>
-<area href="classapfel_1_1MatchingBasisQCDQED.html" title="The MatchingBasisQCDQED class is a derived of ConvolutionMap specialised for the matching of distribu..." alt="apfel::MatchingBasisQCDQED" shape="rect" coords="270,672,530,696"/>
-<area href="classapfel_1_1MatchingOperatorBasisQCD.html" title="The MatchingOperatorBasisQCD class is a derived of ConvolutionMap specialised for the matching of the..." alt="apfel::MatchingOperatorBasisQCD" shape="rect" coords="270,728,530,752"/>
-<area href="classapfel_1_1MatchingOperatorBasisQCDQED.html" title="The MatchingOperatorBasisQCDQED class is a derived of ConvolutionMap specialised for the matching of ..." alt="apfel::MatchingOperatorBasisQCDQED" shape="rect" coords="270,784,530,808"/>
-<area href="classapfel_1_1PhysicalBasisQCD.html" title="The PhysicalBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution of dist..." alt="apfel::PhysicalBasisQCD" shape="rect" coords="270,840,530,864"/>
-<area href="classapfel_1_1PhysicalEvolveDistributionsBasisQCD.html" title="The PhysicalEvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a s..." alt="apfel::PhysicalEvolveDistributionsBasisQCD" shape="rect" coords="270,896,530,920"/>
-<area href="classapfel_1_1PhysicalMatchingBasisQCD.html" title="The PhysicalMatchingBasisQCD class is a derived of ConvolutionMap specialised for the matching of dis..." alt="apfel::PhysicalMatchingBasisQCD" shape="rect" coords="270,952,530,976"/>
-<area href="classapfel_1_1PhysicalMatchingOperatorBasisQCD.html" title="The MatchingOperatorBasisQCD class is a derived of ConvolutionMap specialised for the matching of the..." alt="apfel::PhysicalMatchingOperatorBasisQCD" shape="rect" coords="270,1008,530,1032"/>
-<area href="classapfel_1_1PhysicalOperatorBasisQCD.html" title="The PhysicalOperatorBasisQCD class is a derived of ConvolutionMap specialised for the DGLAP evolution..." alt="apfel::PhysicalOperatorBasisQCD" shape="rect" coords="270,1064,530,1088"/>
-  </map>
-</div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classapfel_1_1ConvolutionMap__inherit__graph.svg" width="508" height="1091"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for apfel::ConvolutionMap:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classapfel_1_1ConvolutionMap__coll__graph.svg" width="374" height="408"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -451,10 +443,21 @@ Friends</h2></td></tr>
 <li>/Users/vb262523/Codes/apfelxx/inc/apfel/<a class="el" href="convolutionmap_8h_source.html">convolutionmap.h</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceapfel.html">apfel</a></li><li class="navelem"><a href="classapfel_1_1ConvolutionMap.html">ConvolutionMap</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

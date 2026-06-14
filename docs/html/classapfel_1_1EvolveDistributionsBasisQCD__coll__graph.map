@@ -1,0 +1,15 @@
+<map id="apfel::EvolveDistributionsBasisQCD" name="apfel::EvolveDistributionsBasisQCD">
+<area shape="rect" id="Node000001" title="The EvolveDistributionsBasisQCD class is a derived of ConvolutionMap specialised to match a set of ev..." alt="" coords="100,452,302,497"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="110,375,292,403"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,416,203,453,199,450,199,420"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="6,241,220,302"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="146,312,194,375,189,375,144,317"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,123,200,168"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="106,180,113,240,108,240,105,186"/>
+<area shape="rect" id="Node000005" href="$structapfel_1_1ConvolutionMap_1_1rule.html" title="This structure contains the attribute of a single rule." alt="" coords="12,5,193,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="103,63,105,123,100,122,102,69"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="248,258,338,285"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="276,296,233,353,213,377,210,373,228,350,272,299"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="223,123,368,168"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="296,181,296,258,291,256,294,186"/>
+</map>

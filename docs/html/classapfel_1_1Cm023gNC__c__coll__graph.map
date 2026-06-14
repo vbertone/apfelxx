@@ -1,0 +1,11 @@
+<map id="apfel::Cm023gNC_c" name="apfel::Cm023gNC_c">
+<area shape="rect" id="Node000001" title="O(αs3) constant term of gluon coefficient function for F2. Reference: https://arxiv...." alt="" coords="5,183,172,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="16,5,161,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,45,40,62,27,83,24,96,27,109,37,130,49,150,77,182,72,183,45,153,32,133,22,111,19,96,22,81,36,59,57,40"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1C23g.html" title="O(αs3) gluon coefficient function for F2." alt="" coords="37,82,140,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="89,46,91,83,86,82,88,51"/>
+<area shape="rect" id="Node000004" href="$classapfel_1_1C21g.html" title="O(αs) gluon coefficient function for F2." alt="" coords="165,82,268,110"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="124,38,196,81,192,83,124,44"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="91,124,91,183,86,182,86,127"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="194,119,147,161,112,185,110,180,144,157,189,122"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="apfel::Set&lt; T &gt;" name="apfel::Set&lt; T &gt;">
+<area shape="rect" id="Node000001" title="The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi..." alt="" coords="252,476,375,504"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="130,375,312,403"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,412,304,476,298,475,242,417"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="6,241,220,302"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="152,311,188,350,211,375,206,375,185,353,151,317"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,123,200,168"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="106,180,113,240,108,240,105,186"/>
+<area shape="rect" id="Node000005" href="$structapfel_1_1ConvolutionMap_1_1rule.html" title="This structure contains the attribute of a single rule." alt="" coords="12,5,193,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="103,63,105,123,100,122,102,69"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="248,258,338,285"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="280,296,231,376,227,373,275,300"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="223,123,368,168"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="296,181,296,258,291,256,294,186"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="336,375,477,403"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="386,413,327,478,324,473,381,415"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="387,258,426,285"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="408,299,409,376,404,373,405,303"/>
+</map>

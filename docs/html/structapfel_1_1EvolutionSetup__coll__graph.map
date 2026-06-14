@@ -1,0 +1,15 @@
+<map id="apfel::EvolutionSetup" name="apfel::EvolutionSetup">
+<area shape="rect" id="Node000001" title="The EvolutionSetup structure is a collection of all possible evolution parameters." alt="" coords="756,131,929,159"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="391,15,480,43"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="495,30,608,43,671,57,733,76,784,101,825,131,820,130,781,106,731,81,670,62,607,49,496,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="19,5,165,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="180,25,392,27,389,31,181,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="300,73,571,118"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="586,104,732,121,775,130,770,131,732,126,587,110"/>
+<area shape="rect" id="Node000005" href="$structapfel_1_1EvolutionSetup_1_1GridParameters.html" title="Structure for the subgrid parameters." alt="" coords="5,75,179,119"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="194,94,302,95,297,98,195,99"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="351,180,520,208"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="535,205,631,208,682,204,731,196,779,179,817,160,822,158,781,183,733,201,683,210,631,213,535,210"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="334,232,536,311"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="552,273,642,264,687,254,731,238,761,221,788,199,828,161,832,158,792,203,764,225,733,243,689,259,643,269,552,278"/>
+</map>

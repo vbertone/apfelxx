@@ -1,0 +1,29 @@
+<map id="apfel::CmLa3psNC" name="apfel::CmLa3psNC">
+<area shape="rect" id="Node000001" title="Approximated O(αs3) pure&#45;singlet coefficient function for FL." alt="" coords="913,166,1070,194"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="5,190,150,218"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,174,104,141,128,103,159,66,198,38,224,26,248,19,290,17,334,23,388,25,533,14,648,3,703,4,759,13,821,33,890,64,922,86,949,114,985,166,980,165,945,117,918,90,888,69,819,38,758,19,702,10,648,9,533,19,388,31,333,28,290,23,248,24,226,31,200,42,163,70,132,106,109,144,93,177"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1Cm0L3psNC__c.html" title="O(αs3) constant term of pure&#45;single coefficient function for FL. Reference: https://arxiv...." alt="" coords="592,66,766,94"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="93,175,135,122,164,95,198,75,253,55,311,43,371,37,429,37,538,47,625,65,620,66,537,52,429,42,371,43,312,48,255,60,200,80,168,99,139,125,97,178"/>
+<area shape="rect" id="Node000004" href="$classapfel_1_1CL3ps.html" title="O(αs3) pure&#45;singlet coefficient function for FL." alt="" coords="226,89,337,116"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="104,179,136,154,173,132,228,113,224,117,175,137,139,159,108,182"/>
+<area shape="rect" id="Node000005" href="$classapfel_1_1Cm0L3psNC__l.html" title="O(αs3) linear log of pure&#45;single coefficient function for FL. Reference: https://arxiv...." alt="" coords="393,135,563,163"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="164,186,173,184,394,156,391,161,174,189,167,190"/>
+<area shape="rect" id="Node000006" href="$classapfel_1_1Cm0L3psNC__l2.html" title="O(αs3) quadratic log of pure&#45;single coefficient function for FL. Reference: https://arxiv...." alt="" coords="388,195,568,223"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="165,202,389,206,386,210,166,208"/>
+<area shape="rect" id="Node000007" href="$classapfel_1_1CmsxL3psNC.html" title="O(αs3) pure&#45;singlet coefficient function for FL at small x. Reference: https://arxiv...." alt="" coords="597,263,761,291"/>
+<area shape="poly" id="edge11_Node000007_Node000002" title=" " alt="" coords="165,212,597,265,595,270,165,217"/>
+<area shape="rect" id="Node000008" href="$classapfel_1_1CmsxL3gNC.html" title="O(αs3) gluon coefficient function for FL at small x. Reference: https://arxiv.org/pdf/1205...." alt="" coords="204,291,360,319"/>
+<area shape="poly" id="edge13_Node000008_Node000002" title=" " alt="" coords="106,225,139,249,175,271,222,290,217,292,172,276,136,254,106,230"/>
+<area shape="rect" id="Node000009" href="$classapfel_1_1Cm0sxL3psNC.html" title="O(αs3) pure&#45;singlet coefficient function for FL at Q &gt;&gt; m and small x. Reference: https://arxiv...." alt="" coords="592,342,766,370"/>
+<area shape="poly" id="edge15_Node000009_Node000002" title=" " alt="" coords="96,228,139,282,168,308,200,328,231,338,273,346,376,355,490,357,594,359,589,359,490,363,376,360,272,351,230,343,198,333,164,312,135,286,95,233"/>
+<area shape="rect" id="Node000010" href="$classapfel_1_1Cm0sxL3gNC.html" title="O(αs3) gluon coefficient function for FL at Q &gt;&gt; m and small x. Reference: https://arxiv...." alt="" coords="199,393,364,420"/>
+<area shape="poly" id="edge17_Node000010_Node000002" title=" " alt="" coords="88,230,102,265,120,303,144,340,175,372,208,392,203,392,172,377,140,344,115,305,97,267,87,235"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="781,92,836,105,890,121,934,142,971,166,966,165,931,146,888,126,835,110,781,98"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="352,101,454,99,567,93,594,92,589,94,568,98,455,104,354,106"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="579,152,889,171,916,174,910,175,889,176,579,158"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="582,203,766,194,915,186,910,187,766,200,583,208"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="776,278,833,272,888,257,914,244,939,226,975,195,980,193,942,231,917,248,890,262,834,277,777,283"/>
+<area shape="poly" id="edge12_Node000007_Node000008" title=" " alt="" coords="375,304,468,302,567,296,614,291,609,292,568,301,468,308,376,309"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="780,346,836,332,888,308,920,282,946,250,981,196,986,193,951,253,923,285,890,313,837,337,781,351"/>
+<area shape="poly" id="edge16_Node000009_Node000010" title=" " alt="" coords="380,410,471,409,567,397,610,384,647,371,652,370,612,389,568,402,472,414,380,415"/>
+</map>

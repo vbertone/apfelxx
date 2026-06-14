@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: /Users/vb262523/Codes/apfelxx/inc/apfel/ode.h Source File</title>
+<title>APFEL++: /Users/vb262523/Codes/apfelxx/inc/apfel/ode.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -77,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
   </ul>
 </div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('ode_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -98,12 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a href="dir_8781ce16908ca35f1db85e36798fb747.html">apfel</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">ode.h</div></div>
 </div><!--header-->
@@ -124,40 +139,39 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespaceapfel.html#a3283b319bc3fe07f57228602dc2e3f32">   36</a></span>  <a class="code hl_function" href="namespaceapfel.html#a3283b319bc3fe07f57228602dc2e3f32">rk4</a>(std::function&lt;U(<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; Obj)&gt; <span class="keyword">const</span>&amp; f)</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// *INDENT-OFF*</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">return</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      [       f            ] (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; y,  <span class="keywordtype">double</span> <span class="keyword">const</span>&amp; dt) -&gt; U{ <span class="keywordflow">return</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      [t,y,dt,f            ] (                 U <span class="keyword">const</span>&amp; dy1                 ) -&gt; U{ <span class="keywordflow">return</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      [t,y,dt,f,dy1        ] (                 U <span class="keyword">const</span>&amp; dy2                 ) -&gt; U{ <span class="keywordflow">return</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      [t,y,dt,f,dy1,dy2    ] (                 U <span class="keyword">const</span>&amp; dy3                 ) -&gt; U{ <span class="keywordflow">return</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      [       f,dy1,dy2,dy3] (                 U <span class="keyword">const</span>&amp; dy4                 ) -&gt; U{ <span class="keywordflow">return</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      ( dy1 + 2 * dy2 + 2 * dy3 + dy4 ) / 6  ;} (</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      dt * f( t + dt    , y + dy3     )     );} (</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      dt * f( t + dt / 2, y + dy2 / 2 )     );} (</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      dt * f( t + dt / 2, y + dy1 / 2 )     );} (</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      dt * f( t         , y           )     );} ;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="comment">// *INDENT-ON*</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> [f] (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; y, <span class="keywordtype">double</span> <span class="keyword">const</span>&amp; dt) -&gt; U</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      <span class="keyword">const</span> U dy1 = dt * f( t, y           );</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <span class="keyword">const</span> U dy2 = dt * f( t + dt / 2, y + dy1 / 2 );</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      <span class="keyword">const</span> U dy3 = dt * f( t + dt / 2, y + dy2 / 2 );</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keyword">const</span> U dy4 = dt * f( t + dt, y + dy3     );</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      <span class="keywordflow">return</span> ( dy1 + 2 * dy2 + 2 * dy3 + dy4 ) / 6;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    };</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
 </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keyword">template</span>&lt;<span class="keyword">class</span> U&gt;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  std::function&lt;U(<span class="keywordtype">double</span> <span class="keyword">const</span>&amp;, U <span class="keyword">const</span>&amp;, <span class="keywordtype">double</span> <span class="keyword">const</span>&amp;)&gt;</div>
-<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespaceapfel.html#aa14c7938eed2c422aec2f0f3dd321ff4">   61</a></span>  <a class="code hl_function" href="namespaceapfel.html#aa14c7938eed2c422aec2f0f3dd321ff4">rk1</a>(std::function&lt;U(<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; Obj)&gt; <span class="keyword">const</span>&amp; f)</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">return</span> [f] (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; y,  <span class="keywordtype">double</span> <span class="keyword">const</span>&amp; dt) -&gt; U{ <span class="keywordflow">return</span> dt * f(t, y); } ;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">template</span>&lt;<span class="keyword">class</span> U&gt;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  std::function&lt;U(<span class="keywordtype">double</span> <span class="keyword">const</span>&amp;, U <span class="keyword">const</span>&amp;, <span class="keywordtype">double</span> <span class="keyword">const</span>&amp;)&gt;</div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespaceapfel.html#aa14c7938eed2c422aec2f0f3dd321ff4">   56</a></span>  <a class="code hl_function" href="namespaceapfel.html#aa14c7938eed2c422aec2f0f3dd321ff4">rk1</a>(std::function&lt;U(<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; Obj)&gt; <span class="keyword">const</span>&amp; f)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">return</span> [f] (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; t, U <span class="keyword">const</span>&amp; y,  <span class="keywordtype">double</span> <span class="keyword">const</span>&amp; dt) -&gt; U{ <span class="keywordflow">return</span> dt * f(t, y); } ;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  }</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
 <div class="ttc" id="anamespaceapfel_html"><div class="ttname"><a href="namespaceapfel.html">apfel</a></div><div class="ttdoc">Namespace for all APFEL++ functions and classes.</div><div class="ttdef"><b>Definition</b> alphaqcd.h:14</div></div>
 <div class="ttc" id="anamespaceapfel_html_a3283b319bc3fe07f57228602dc2e3f32"><div class="ttname"><a href="namespaceapfel.html#a3283b319bc3fe07f57228602dc2e3f32">apfel::rk4</a></div><div class="ttdeci">std::function&lt; U(double const &amp;, U const &amp;, double const &amp;)&gt; rk4(std::function&lt; U(double const &amp;t, U const &amp;Obj)&gt; const &amp;f)</div><div class="ttdoc">Template function that implements the fourth order RK algorithm.</div><div class="ttdef"><b>Definition</b> ode.h:36</div></div>
-<div class="ttc" id="anamespaceapfel_html_aa14c7938eed2c422aec2f0f3dd321ff4"><div class="ttname"><a href="namespaceapfel.html#aa14c7938eed2c422aec2f0f3dd321ff4">apfel::rk1</a></div><div class="ttdeci">std::function&lt; U(double const &amp;, U const &amp;, double const &amp;)&gt; rk1(std::function&lt; U(double const &amp;t, U const &amp;Obj)&gt; const &amp;f)</div><div class="ttdoc">Template function that implements the first order RK algorithm.</div><div class="ttdef"><b>Definition</b> ode.h:61</div></div>
+<div class="ttc" id="anamespaceapfel_html_aa14c7938eed2c422aec2f0f3dd321ff4"><div class="ttname"><a href="namespaceapfel.html#aa14c7938eed2c422aec2f0f3dd321ff4">apfel::rk1</a></div><div class="ttdeci">std::function&lt; U(double const &amp;, U const &amp;, double const &amp;)&gt; rk1(std::function&lt; U(double const &amp;t, U const &amp;Obj)&gt; const &amp;f)</div><div class="ttdoc">Template function that implements the first order RK algorithm.</div><div class="ttdef"><b>Definition</b> ode.h:56</div></div>
 </div><!-- fragment --></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a href="dir_8781ce16908ca35f1db85e36798fb747.html">apfel</a></li><li class="navelem"><a href="ode_8h.html">ode.h</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

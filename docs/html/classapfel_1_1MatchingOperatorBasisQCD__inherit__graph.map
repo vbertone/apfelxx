@@ -1,0 +1,5 @@
+<map id="apfel::MatchingOperatorBasisQCD" name="apfel::MatchingOperatorBasisQCD">
+<area shape="rect" id="Node000001" title="The MatchingOperatorBasisQCD class is a derived of ConvolutionMap specialised for the matching of the..." alt="" coords="5,81,273,109"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="48,5,230,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,47,141,82,137,79,137,51"/>
+</map>

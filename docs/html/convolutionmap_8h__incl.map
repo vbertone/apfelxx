@@ -1,0 +1,19 @@
+<map id="/Users/vb262523/Codes/apfelxx/inc/apfel/convolutionmap.h" name="/Users/vb262523/Codes/apfelxx/inc/apfel/convolutionmap.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="181,5,451,50"/>
+<area shape="rect" id="Node000002" href="$matrix_8h.html" title=" " alt="" coords="110,98,226,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,52,207,92,204,88,279,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="250,98,302,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="308,49,291,86,287,82,304,52"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="326,98,386,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="328,48,346,85,341,83,326,53"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="411,98,493,126"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="353,48,420,90,415,90,352,53"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,174,70,201"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,128,75,168,73,163,143,124"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="94,174,152,201"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="162,125,141,162,137,158,158,128"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="176,174,254,201"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="178,124,201,161,196,160,175,129"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="277,174,350,201"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="195,124,277,166,271,167,194,129"/>
+</map>

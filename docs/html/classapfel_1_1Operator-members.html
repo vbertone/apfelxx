@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: Member List</title>
+<title>APFEL++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -77,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
   </ul>
 </div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classapfel_1_1Operator.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -98,12 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a href="namespaceapfel.html">apfel</a></li><li class="navelem"><a href="classapfel_1_1Operator.html">Operator</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">apfel::Operator Member List</div></div>
 </div><!--header-->
@@ -128,25 +143,30 @@ document.addEventListener('DOMContentLoaded', () => {
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a55048afd5d8c9310649edeafdcf10d7e">IsGPD</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#abed3b7be91a5e75cea637a87fb4fa5d0">Operator</a>()=delete</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#aa1690288a30f134b8f3a90e1a1aefc71">Operator</a>(Operator const &amp;)=default</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a526dd287cb07771f21c2608788297a67">Operator</a>(Grid const &amp;gr, Expression const &amp;expr, double const &amp;eps=1e-5, bool const &amp;gpd=false, bool const &amp;extended=false)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a11d3a5572ecdbabcfd56d29fdaa7115b">Operator</a>(Grid const &amp;gr, std::vector&lt; matrix&lt; double &gt; &gt; const &amp;op, bool const &amp;gpd=false)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a2c8461c0ae74457189cd1ac334bdf748">Operator</a>(Operator const &amp;op, double const &amp;eta)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#ac1cb0fe68195da6906fda8962c7b6b30">operator*=</a>(Distribution const &amp;d) const</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a8fc5543a4cf6c8fede1bba2841f74d7a">operator*=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a3159c9828f3d70ed188e63280b9e0e57">operator*=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#aaa309cec78ff38f7f1cecafe584ca4aa">operator*=</a>(std::function&lt; double(double const &amp;)&gt; f)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a1fa7df6d22db3e0df845763ece3a0791">operator+=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a4fcf28e958de9cdbd81ac72526c95646">operator-=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a8af6c2c8c0a043c7df36b4aad3cd655a">operator/=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a3a91d4372bda8aba8371743c05c385fd">operator&lt;&lt;</a>(std::ostream &amp;os, Operator const &amp;op)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a249a7b6ca0c526de9b8d5f070485d391">operator=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a015e747ea24c2c25c06e051a09333fac">Operator</a>(Operator &amp;&amp;)=default</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a526dd287cb07771f21c2608788297a67">Operator</a>(Grid const &amp;gr, Expression const &amp;expr, double const &amp;eps=1e-5, bool const &amp;gpd=false, bool const &amp;extended=false)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a11d3a5572ecdbabcfd56d29fdaa7115b">Operator</a>(Grid const &amp;gr, std::vector&lt; matrix&lt; double &gt; &gt; const &amp;op, bool const &amp;gpd=false)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a2c8461c0ae74457189cd1ac334bdf748">Operator</a>(Operator const &amp;op, double const &amp;eta)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#ac1cb0fe68195da6906fda8962c7b6b30">operator*=</a>(Distribution const &amp;d) const</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a8fc5543a4cf6c8fede1bba2841f74d7a">operator*=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a3159c9828f3d70ed188e63280b9e0e57">operator*=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#aaa309cec78ff38f7f1cecafe584ca4aa">operator*=</a>(std::function&lt; double(double const &amp;)&gt; f)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a1fa7df6d22db3e0df845763ece3a0791">operator+=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a4fcf28e958de9cdbd81ac72526c95646">operator-=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a8af6c2c8c0a043c7df36b4aad3cd655a">operator/=</a>(double const &amp;s)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a3a91d4372bda8aba8371743c05c385fd">operator&lt;&lt;</a>(std::ostream &amp;os, Operator const &amp;op)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a249a7b6ca0c526de9b8d5f070485d391">operator=</a>(Operator const &amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a45d182d9806bef35a4cafbeb19206538">operator=</a>(Operator &amp;&amp;o)</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a085a308c830454e5a451b3b157e374b0">Print</a>() const</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classapfel_1_1Operator.html#a33282323f21457b098ee90b2356af978">~Operator</a>()</td><td class="entry"><a class="el" href="classapfel_1_1Operator.html">apfel::Operator</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

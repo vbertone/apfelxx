@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classapfel_1_1MatchedEvolution.html" title=" " alt="" coords="5,128,198,172"/>
+<area shape="rect" id="Node000001" href="$classapfel_1_1AlphaQCD.html" title="The AlphaQCD is a specialization class of the MatchedEvolution class for the computation of the QCD c..." alt="" coords="288,5,430,33"/>
+<area shape="poly" id="edge544_Node000000_Node000001" title=" " alt="" coords="137,115,186,77,245,43,290,30,285,33,247,48,189,82,141,119"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1AlphaQCDMSbarMass.html" title="The AlphaQCDMSbarMass is a specialization class of the MatchedEvolution class for the computation of ..." alt="" coords="246,57,473,85"/>
+<area shape="poly" id="edge545_Node000000_Node000002" title=" " alt="" coords="174,119,245,95,294,84,289,87,246,100,177,124"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1AlphaQCDg.html" title="The AlphaQCDg is a specialization class of the MatchedEvolution class for the computation of the QCD ..." alt="" coords="284,109,435,137"/>
+<area shape="poly" id="edge546_Node000000_Node000003" title=" " alt="" coords="212,136,285,130,281,132,214,141"/>
+<area shape="rect" id="Node000004" href="$classapfel_1_1AlphaQCDxi.html" title="The AlphaQCDxi is a specialization class of the MatchedEvolution class for the computation of the QCD..." alt="" coords="282,161,436,189"/>
+<area shape="poly" id="edge547_Node000000_Node000004" title=" " alt="" coords="213,158,284,167,279,169,214,163"/>
+<area shape="rect" id="Node000005" href="$classapfel_1_1AlphaQED.html" title="The AlphaQED is a specialization class of the MatchedEvolution class for the computation of the QED c..." alt="" coords="289,213,430,241"/>
+<area shape="poly" id="edge548_Node000000_Node000005" title=" " alt="" coords="177,175,246,198,294,212,289,213,245,203,177,180"/>
+<area shape="rect" id="Node000006" href="$classapfel_1_1MSbarMass.html" title="The MSbarMass is a specialization class of the MatchedEvolution class for the evolution of masses ren..." alt="" coords="285,265,434,293"/>
+<area shape="poly" id="edge549_Node000000_Node000006" title=" " alt="" coords="140,179,189,217,247,250,287,266,281,266,245,255,186,221,138,185"/>
+</map>

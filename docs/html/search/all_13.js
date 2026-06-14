@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['set_0',['Set',['../classapfel_1_1Set.html',1,'apfel::Set&lt; T &gt;'],['../classapfel_1_1Set.html#a306c665cf4ed9b77a9633ffd877aeaa3',1,'apfel::Set::Set(ConvolutionMap const &amp;Map=ConvolutionMap{&quot;UNDEFINED&quot;}, std::map&lt; int, T &gt; const &amp;in=std::map&lt; int, T &gt; {})'],['../classapfel_1_1Set.html#a952533c20a412c1946f0e5090f7eccf0',1,'apfel::Set::Set(std::map&lt; int, T &gt; const &amp;in)']]],
+  ['set_0',['Set',['../classapfel_1_1Set.html',1,'apfel::Set&lt; T &gt;'],['../classapfel_1_1Set.html#a306c665cf4ed9b77a9633ffd877aeaa3',1,'apfel::Set::Set(ConvolutionMap const &amp;Map=ConvolutionMap{&quot;UNDEFINED&quot;}, std::map&lt; int, T &gt; const &amp;in=std::map&lt; int, T &gt; {})'],['../classapfel_1_1Set.html#abdcd2ca47a3a722fe8f89c6a6ff346fe',1,'apfel::Set::Set(ConvolutionMap const &amp;Map, std::map&lt; int, T &gt; &amp;&amp;in)'],['../classapfel_1_1Set.html#a952533c20a412c1946f0e5090f7eccf0',1,'apfel::Set::Set(std::map&lt; int, T &gt; const &amp;in)']]],
   ['set_1',['set',['../classapfel_1_1matrix.html#ac2473df393b19193fddf91c40bfdfaba',1,'apfel::matrix']]],
   ['set_2eh_2',['set.h',['../set_8h.html',1,'']]],
   ['set_3c_20apfel_3a_3adistribution_20_3e_3',['Set&lt; apfel::Distribution &gt;',['../classapfel_1_1Set.html',1,'apfel']]],

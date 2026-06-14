@@ -1,0 +1,5 @@
+<map id="apfel::DISCCBasis" name="apfel::DISCCBasis">
+<area shape="rect" id="Node000001" title="The DISCCBasis class is a derived of ConvolutionMap specialised for the computation of the CC DIS str..." alt="" coords="18,81,174,109"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1ConvolutionMap.html" title="The ConvolutionMap class encapsulates the set of rules to multiply a sets of operators with a set of ..." alt="" coords="5,5,187,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,47,98,82,94,80,94,51"/>
+</map>

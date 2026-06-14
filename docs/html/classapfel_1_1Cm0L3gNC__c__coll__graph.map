@@ -1,0 +1,8 @@
+<map id="apfel::Cm0L3gNC_c" name="apfel::Cm0L3gNC_c">
+<area shape="rect" id="Node000001" title="O(αs3) constant term of gluon coefficient function for FL. Reference: https://arxiv...." alt="" coords="5,183,172,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="11,5,155,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,48,91,183,85,182,82,50"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1CL3g.html" title="O(αs3) gluon coefficient function for FL." alt="" coords="105,82,208,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="107,41,146,81,141,83,106,47"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,122,100,184,96,181,136,123"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="apfel::Cm0L3psNC_c" name="apfel::Cm0L3psNC_c">
+<area shape="rect" id="Node000001" title="O(αs3) constant term of pure&#45;single coefficient function for FL. Reference: https://arxiv...." alt="" coords="5,183,180,211"/>
+<area shape="rect" id="Node000002" href="$classapfel_1_1Expression.html" title="The Expression class encapsulates in a proper form a given analytic expression in such a way that it ..." alt="" coords="15,5,159,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,48,95,183,89,182,86,50"/>
+<area shape="rect" id="Node000003" href="$classapfel_1_1CL3ps.html" title="O(αs3) pure&#45;singlet coefficient function for FL." alt="" coords="109,82,220,110"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="112,41,154,81,149,83,111,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,122,104,184,100,181,144,123"/>
+</map>

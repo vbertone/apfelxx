@@ -1,0 +1,8 @@
+<map id="apfel::SubGrid" name="apfel::SubGrid">
+<area shape="rect" id="Node000001" title="Class for the x&#45;space interpolation SubGrids." alt="" coords="28,226,151,254"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,174,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,45,82,106,82,153,90,226,85,226,77,153,77,106,84,50"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="138,107,316,152"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="118,40,202,106,197,108,117,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,162,108,228,105,224,185,161"/>
+</map>
