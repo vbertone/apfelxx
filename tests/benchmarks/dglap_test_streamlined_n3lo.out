@@ -14,7 +14,7 @@ Tabulating object...
 
 AlphaQCD(Q) = 1.156341e-01
 
-   x       u-ubar      d-dbar     dbr-dbr    2(ubr+dbr)    s-sbar      s+sbar      c+cbar      b+bbar      gluon    
+   x       u-ubar      d-dbar     dbr-ubr    2(ubr+dbr)    s-sbar      s+sbar      c+cbar      b+bbar      gluon    
 1.0e-07  9.9350e-05  4.0969e-05  7.8679e-06  1.6300e+02 -4.0008e-05  8.0430e+01  7.7537e+01  6.5530e+01  1.1286e+03
 1.0e-06  5.9044e-04  3.1742e-04  3.1663e-05  7.6953e+01 -6.1229e-05  3.7627e+01  3.5919e+01  2.9957e+01  5.1280e+02
 1.0e-05  3.0264e-03  1.7531e-03  1.2589e-04  3.5459e+01 -7.6108e-06  1.7056e+01  1.6117e+01  1.3152e+01  2.2243e+02
