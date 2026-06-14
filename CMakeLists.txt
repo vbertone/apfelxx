@@ -15,6 +15,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Enable position independent code globally
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# Optional code-coverage instrumentation (gcov / llvm-cov). Default OFF, so a
+# normal build is completely unaffected. When ON, instrument every C++ target
+# (library, tests and the python wrapper) so that inline code from the headers
+# in inc/ is measured as well. The -O0 -g flags come after the per-target -O3
+# below and, since the last flag wins, correctly disable optimisation in
+# coverage builds only. See tests/coverage.sh for the report-generation step.
+option(APFEL_COVERAGE "Build with code-coverage instrumentation (gcov/llvm-cov)" OFF)
+if(APFEL_COVERAGE)
+    message("-- Code coverage enabled (instrumented build: --coverage -O0 -g).")
+    add_compile_options(
+        $<$<COMPILE_LANGUAGE:CXX>:--coverage>
+        $<$<COMPILE_LANGUAGE:CXX>:-O0>
+        $<$<COMPILE_LANGUAGE:CXX>:-g>
+        $<$<COMPILE_LANGUAGE:CXX>:-fprofile-update=atomic>)
+    add_link_options(--coverage)
+endif()
+
 # ============================
 # MAIN
 # ============================
