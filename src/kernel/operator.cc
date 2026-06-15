@@ -281,6 +281,38 @@ namespace apfel
     // Number of sub-grids
     const int ng = _grid.nGrids();
 
+    // GPD operators are stored as a single full matrix defined on the
+    // joint grid (see BuildOperatorGPD) and thus require a dedicated
+    // treatment: the generic per-subgrid loop below would access
+    // _Operator[ig] for ig > 0, which does not exist.
+    if (_gpd)
+      {
+        const SubGrid& jgd = _grid.GetJointGrid();
+        const int nx = jgd.nx();
+
+        // Reconstruct the operator at the external point "x" as a
+        // distribution over the second (joint-grid) index.
+        std::vector<double> djg(jgd.GetGrid().size(), 0.);
+        const std::array<int, 2> bounds = d.SumBounds(x, jgd);
+        for (int alpha = 0; alpha < nx; alpha++)
+          for (int beta = std::max(0, bounds[0]); beta < std::min(bounds[1], nx); beta++)
+            djg[alpha] += d.Interpolant(beta, x, jgd) * _Operator[0](beta, alpha);
+
+        // Map the joint-grid distribution onto the sub-grids.
+        std::vector<std::vector<double>> dsgg(ng);
+        for (int ig = 0; ig < ng; ig++)
+          {
+            const std::vector<int>& jsmap = _grid.JointToSubMap()[ig];
+            dsgg[ig].resize(_grid.GetSubGrid(ig).GetGrid().size(), 0.);
+            for (int alpha = 0; alpha < (int) jsmap.size(); alpha++)
+              dsgg[ig][alpha] = djg[jsmap[alpha]];
+          }
+
+        d.SetSubGrids(dsgg);
+        d.SetJointGrid(djg);
+        return d;
+      }
+
     // Initialise vector of vectors containing the distribution on the
     // sub-grids.
     std::vector<std::vector<double>> dsg(ng);

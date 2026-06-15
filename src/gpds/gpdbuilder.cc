@@ -43,7 +43,7 @@ namespace apfel
     // converging. In this eventuality, displace xi by a small amount.
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) > eps12)
+      if (std::abs(x - xi) < eps12)
         {
           xid += eps10;
           break;
@@ -148,7 +148,7 @@ namespace apfel
     // converging. In this eventuality, displace xi by a small amount.
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) > eps12)
+      if (std::abs(x - xi) < eps12)
         {
           xid += eps10;
           break;
@@ -253,7 +253,7 @@ namespace apfel
     // converging. In this eventuality, displace xi by a small amount.
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) > eps12)
+      if (std::abs(x - xi) < eps12)
         {
           xid += eps10;
           break;
