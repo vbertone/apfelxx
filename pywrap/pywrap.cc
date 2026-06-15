@@ -134,7 +134,7 @@ PYBIND11_MODULE(apfelpy, m)
   _utilities.def("LHToyPDFs", &apfel::LHToyPDFs, "x"_a, "Q"_a);
   _utilities.def("LHToyPDFsPhys", &apfel::LHToyPDFsPhys, "x"_a, "Q"_a);
   _utilities.def("LHToyPDFsPol", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
-  _utilities.def("LHToyFFs", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
+  _utilities.def("LHToyFFs", &apfel::LHToyFFs, "x"_a, "Q"_a);
 
   // Wrappers of "tools.h"
   py::enum_<apfel::QuarkFlavour>(_utilities, "QuarkFlavour")
