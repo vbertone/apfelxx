@@ -1,0 +1,10 @@
+shape consistent       : yes
+elements               : 598
+bit differences (mem)  : 0
+bit differences (file) : 0
+bit differences (self) : 0
+self-contained grids   : yes
+owning copy/move ok    : yes
+eps match              : yes
+name match             : yes
+ROUND-TRIP PASS (bit-exact)

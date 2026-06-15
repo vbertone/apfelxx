@@ -48,6 +48,24 @@ namespace apfel
     Grid(SubGrid const& mgr, std::vector<SubGridPars> const& sgpars);
 
     /**
+     * @brief Tag type selecting the "already locked" Grid constructor
+     * below.
+     */
+    struct Prelocked {};
+
+    /**
+     * @brief Constructor that assembles a Grid from subgrids that are
+     * already locked (i.e. each subgrid's lower bound already sits on a
+     * node of the previous one), skipping the locking step performed by
+     * the standard constructor. This is used to rebuild a Grid exactly
+     * from the descriptors returned by GetSubGrids(): those are the
+     * post-locking subgrids, and re-locking them (as the standard
+     * constructor would) is not idempotent and would shift the grid.
+     * @param grs: vector of already-locked subgrids
+     */
+    Grid(std::vector<SubGrid> const& grs, Prelocked);
+
+    /**
      * @name Getters
      */
     ///@{
@@ -105,9 +123,13 @@ namespace apfel
     /**
      * @brief Fill in the joint grid object with the appropriate grid
      * nodes.
+     * @param lock: whether to lock the subgrids (snap each subgrid's
+     * lower bound onto a node of the previous one). Set to false when
+     * the subgrids are already locked, e.g. when rebuilding a Grid from
+     * GetSubGrids() descriptors.
      * @return the joint grid
      */
-    SubGrid CreateJointGrid();
+    SubGrid CreateJointGrid(bool lock = true);
 
     /**
      * @brief Fill in the joint grid object with the appropriate grid

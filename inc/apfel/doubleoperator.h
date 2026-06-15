@@ -15,11 +15,8 @@
 #include "apfel/operatordistribution.h"
 #include "apfel/config.h"
 
-// Include yaml-cpp header only if it has been found at configuration
-// time.
-#ifdef WITH_YAML_CPP
-#include <yaml-cpp/yaml.h>
-#endif
+#include <iosfwd>
+#include <memory>
 
 namespace apfel
 {
@@ -61,23 +58,66 @@ namespace apfel
      */
     DoubleOperator(DoubleObject<Operator> const& DObj);
 
-// #if WITH_YAML_CPP == 1
-#ifdef WITH_YAML_CPP
     /**
-     * @brief The DoubleOperator constructor.
-     * @param Node: YAML Node where the DoubleOperator object is strored
-     * @param gr1: the Grid object for the first variable
-     * @param gr2: the Grid object for the second variable
-     * @param dexpr: the double expression to be convoluted needed to compare names
+     * @brief Function that dumps the DoubleOperator object onto an
+     * output stream in cereal portable-binary format. Only the
+     * integration accuracy, the DoubleExpression name, the grid
+     * descriptors (for a consistency check on reload) and the operator
+     * container are stored; the grids themselves are supplied again at
+     * load time.
+     * @param os: the output stream the object is written to
      */
-    DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr);
+    void EmitDoubleOperatorBinary(std::ostream& os) const;
 
     /**
-     * @brief Function the encapsulate a DoubleOperator object in a
-     * YAML::Emitter objects such that it can be written on file.
+     * @brief Convenience overload that dumps the DoubleOperator object
+     * to a file in cereal portable-binary format.
+     * @param filename: the path of the file the object is written to
      */
-    std::string EmitDoubleOperator() const;
-#endif
+    void EmitDoubleOperatorBinary(std::string const& filename) const;
+
+    /**
+     * @brief Function that reconstructs a DoubleOperator object from an
+     * input stream produced by EmitDoubleOperatorBinary.
+     * @param is: the input stream the object is read from
+     * @param gr1: the Grid object for the first variable
+     * @param gr2: the Grid object for the second variable
+     * @param dexpr: the double expression, needed to compare names
+     * @return the reconstructed DoubleOperator object
+     */
+    static DoubleOperator ReadBinary(std::istream& is, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr);
+
+    /**
+     * @brief Convenience overload that reconstructs a DoubleOperator
+     * object from a file produced by EmitDoubleOperatorBinary.
+     * @param filename: the path of the file the object is read from
+     * @param gr1: the Grid object for the first variable
+     * @param gr2: the Grid object for the second variable
+     * @param dexpr: the double expression, needed to compare names
+     * @return the reconstructed DoubleOperator object
+     */
+    static DoubleOperator ReadBinary(std::string const& filename, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr);
+
+    /**
+     * @brief Self-contained reader that reconstructs a DoubleOperator
+     * from an input stream produced by EmitDoubleOperatorBinary without
+     * any external information: the grids are rebuilt from the stored
+     * descriptors and owned by the returned object. Use this when the
+     * original grids are not available (e.g. reading the operator in a
+     * different program). The grids can then be retrieved through
+     * GetFirstGrid()/GetSecondGrid().
+     * @param is: the input stream the object is read from
+     * @return the reconstructed, self-contained DoubleOperator object
+     */
+    static DoubleOperator ReadBinary(std::istream& is);
+
+    /**
+     * @brief Convenience overload of the self-contained reader taking a
+     * file path.
+     * @param filename: the path of the file the object is read from
+     * @return the reconstructed, self-contained DoubleOperator object
+     */
+    static DoubleOperator ReadBinary(std::string const& filename);
 
     /**
      * @brief The Operator virtual destructor.
@@ -134,7 +174,27 @@ namespace apfel
      */
     void Print() const { std::cout << *this << std::endl; }
 
+  private:
+    /**
+     * @brief Private all-arguments constructor used by the external-grid
+     * ReadBinary to initialise the const and reference members directly
+     * from the deserialised data, sidestepping the lack of a default
+     * constructor. The grids are external (not owned).
+     */
+    DoubleOperator(Grid const& gr1, Grid const& gr2, double const& eps, std::string const& dexprName,
+                   std::vector<std::vector<matrix<matrix<double>>>> dOperator);
+
+    /**
+     * @brief Private all-arguments constructor used by the
+     * self-contained ReadBinary: the object takes shared ownership of
+     * the rebuilt grids and binds its grid references to them.
+     */
+    DoubleOperator(std::shared_ptr<const Grid> grid1, std::shared_ptr<const Grid> grid2, double const& eps,
+                   std::string const& dexprName, std::vector<std::vector<matrix<matrix<double>>>> dOperator);
+
   protected:
+    std::shared_ptr<const Grid>                      _grid1Owned; //!< Owns _grid1 for self-contained operators (null otherwise)
+    std::shared_ptr<const Grid>                      _grid2Owned; //!< Owns _grid2 for self-contained operators (null otherwise)
     Grid                                      const& _grid1;      //!< First grid on which to compute the operator
     Grid                                      const& _grid2;      //!< Second grid on which to compute the operator
     double                                    const  _eps;        //!< Integration accuracy

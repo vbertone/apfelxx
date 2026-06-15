@@ -33,6 +33,16 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  Grid::Grid(std::vector<SubGrid> const& grs, Prelocked):
+  // *INDENT-OFF*
+    _JointToSubMap({{}}),
+    _GlobalGrid(grs),
+    _JointGrid(new SubGrid{CreateJointGrid(false)})
+  // *INDENT-ON*
+  {
+  }
+
+  //_________________________________________________________________________________
   bool ComparexMin(SubGrid const& sg1, SubGrid const& sg2)
   {
     if (sg1.xMin() == sg2.xMin())
@@ -42,7 +52,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  SubGrid Grid::CreateJointGrid()
+  SubGrid Grid::CreateJointGrid(bool lock)
   {
     // Number of grids
     const int ng = (int) _GlobalGrid.size();
@@ -55,38 +65,40 @@ namespace apfel
 
     // Lock the subgrids, i.e. find the point of the "(ig-1)"-th
     // SubGrid such that "x[ig-1][ix] < xMin[ig] < x[ig-1][ix+1]", and
-    // replace "xMin[ig]" with "x[ig-1][ix]".
-    for (int ig = 1; ig < ng; ig++)
-      {
-        const int nxg     = _GlobalGrid[ig-1].nx();
-        const double xmin = _GlobalGrid[ig].xMin();
+    // replace "xMin[ig]" with "x[ig-1][ix]". This is skipped when the
+    // subgrids are already locked (lock = false).
+    if (lock)
+      for (int ig = 1; ig < ng; ig++)
+        {
+          const int nxg     = _GlobalGrid[ig-1].nx();
+          const double xmin = _GlobalGrid[ig].xMin();
 
-        // Parameters of the adjusted grid
-        int nx_new = -1;
-        double xmin_new = -1;
-        const int id_new = _GlobalGrid[ig].InterDegree();
-        const std::vector<double> xg = _GlobalGrid[ig-1].GetGrid();
+          // Parameters of the adjusted grid
+          int nx_new = -1;
+          double xmin_new = -1;
+          const int id_new = _GlobalGrid[ig].InterDegree();
+          const std::vector<double> xg = _GlobalGrid[ig-1].GetGrid();
 
-        for (int ix = 0; ix < nxg; ix++)
-          if (xg[ix] > xmin)
-            {
-              xmin_new = xg[ix];
-              nx_new = nxg - ix;
-              break;
-            }
+          for (int ix = 0; ix < nxg; ix++)
+            if (xg[ix] > xmin)
+              {
+                xmin_new = xg[ix];
+                nx_new = nxg - ix;
+                break;
+              }
 
-        if (nx_new < 0 || xmin_new < 0)
-          throw std::runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
+          if (nx_new < 0 || xmin_new < 0)
+            throw std::runtime_error(error("Grid::CreateJointGrid", "SubGrids do not overlap."));
 
-        // Find the closest multiple of "nx - ix + 1" to "nx",
-        // i.e. "DensityFactor", and replace "nx" accordingly.
-        const int DensityFactor = _GlobalGrid[ig].nx() / nx_new;
-        nx_new *= DensityFactor;
+          // Find the closest multiple of "nx - ix + 1" to "nx",
+          // i.e. "DensityFactor", and replace "nx" accordingly.
+          const int DensityFactor = _GlobalGrid[ig].nx() / nx_new;
+          nx_new *= DensityFactor;
 
-        // Compute the new SubGrid and replace it in the global
-        // grid.
-        _GlobalGrid[ig] = SubGrid{nx_new, xmin_new, id_new};
-      }
+          // Compute the new SubGrid and replace it in the global
+          // grid.
+          _GlobalGrid[ig] = SubGrid{nx_new, xmin_new, id_new};
+        }
 
     // Compute the joint grid. Use the interpolation degree of the
     // first grid.

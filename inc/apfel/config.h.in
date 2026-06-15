@@ -2,5 +2,4 @@
 
 #define apfelxx_VERSION @apfelxx_VERSION@
 #cmakedefine WITH_LHAPDF
-#cmakedefine WITH_YAML_CPP
 #define pybind11_FOUND @pybind11_FOUND@

@@ -69,15 +69,8 @@ else()
     message("-- LHAPDF not found. The 'LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const&)' function will not be built.")
 endif()
 
-# yaml-cpp
-find_package(yaml-cpp QUIET)
-if(yaml-cpp_FOUND)
-    message("-- yaml-cpp found. DoubleExpression objects can be exported to file.")
-    set(WITH_YAML_CPP 1)
-    target_link_libraries(apfelxx PUBLIC yaml-cpp::yaml-cpp)
-else()
-    message("-- yaml-cpp not found. DoubleExpression objects cannot be exported to file.")
-endif()
+# cereal: header-only and bundled under inc/apfel/cereal, so DoubleOperator
+# binary (de)serialisation is always available with no external dependency.
 
 # pybind11
 set(PYBIND11_FINDPYTHON ON)
@@ -132,18 +125,6 @@ if(LHAPDF_FOUND)
     endif()
     if(LHAPDF_LINK_LIBRARIES)
         set(ldflags "${ldflags} ${LHAPDF_LINK_LIBRARIES}")
-    endif()
-endif()
-
-if(yaml-cpp_FOUND)
-    get_target_property(YAML_INCLUDE_DIRS yaml-cpp::yaml-cpp INTERFACE_INCLUDE_DIRECTORIES)
-    get_target_property(YAML_LINK_LIBRARIES yaml-cpp::yaml-cpp INTERFACE_LINK_LIBRARIES)
-    if(YAML_INCLUDE_DIRS)
-        string(REPLACE ";" " " YAML_CXX_FLAGS "-I${YAML_INCLUDE_DIRS}")
-        set(cflags "${cflags} ${YAML_CXX_FLAGS}")
-    endif()
-    if(YAML_LINK_LIBRARIES)
-        set(ldflags "${ldflags} ${YAML_LINK_LIBRARIES}")
     endif()
 endif()
 

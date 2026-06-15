@@ -12,6 +12,13 @@
 
 #include <cmath>
 
+#include "apfel/cereal_support.h"
+#include "apfel/cereal/archives/portable_binary.hpp"
+#include "apfel/cereal/types/string.hpp"
+#include <ostream>
+#include <istream>
+#include <fstream>
+
 namespace apfel
 {
   //_________________________________________________________________________
@@ -281,100 +288,135 @@ namespace apfel
       }
   }
 
-#ifdef WITH_YAML_CPP
   //_________________________________________________________________________
-  DoubleOperator::DoubleOperator(YAML::Node const& Node, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr):
+  DoubleOperator::DoubleOperator(Grid const& gr1, Grid const& gr2, double const& eps, std::string const& dexprName,
+                                 std::vector<std::vector<matrix<matrix<double>>>> dOperator):
     _grid1(gr1),
     _grid2(gr2),
-    _eps(Node["Integration accuracy"].as<double>()),
-    _dexprName(dexpr.GetName())
+    _eps(eps),
+    _dexprName(dexprName),
+    _dOperator(std::move(dOperator))
   {
-    // Check that the DoubleExpression stored in the node matches with
-    // the input one by checking the names.
-    if (_dexprName != Node["DoubleExpression"].as<std::string>())
-      throw std::runtime_error(error("DoubleOperator::DoubleOperator", "Input DoubleExpression and DoubleExpression name stored in YAML::Node do not match."));
-
-    // First construct interpolation grids using the parameters give
-    // in the node ...
-    std::vector<apfel::SubGrid> vsg1;
-    for (auto const &sg1 : Node["FirstGrid"])
-      vsg1.push_back({sg1[0].as<int>(), sg1[1].as<double>(), sg1[2].as<int>()});
-    std::vector<apfel::SubGrid> vsg2;
-    for (auto const &sg2 : Node["SecondGrid"])
-      vsg2.push_back({sg2[0].as<int>(), sg2[1].as<double>(), sg2[2].as<int>()});
-    const apfel::Grid g1{vsg1};
-    const apfel::Grid g2{vsg2};
-
-    // ... then check that they match with those given as input.
-    if (g1 != _grid1 || g2 != _grid2)
-      throw std::runtime_error(error("DoubleOperator::DoubleOperator", "Input grids and grids stored in YAML::Node do not match."));
-
-    // Get double operator values from the node
-    const std::vector<std::vector<std::vector<std::vector<double>>>> NodeOperator = Node["DoubleOperator"].as<std::vector<std::vector<std::vector<std::vector<double>>>>>();
-
-    // Get number of subgrids
-    const int ng1 = _grid1.nGrids();
-    const int ng2 = _grid2.nGrids();
-
-    // Resize matrix and set it to zero
-    _dOperator.resize(ng1, std::vector<matrix<matrix<double>>>(ng2));
-    for (int ig1 = 0; ig1 < ng1; ig1++)
-      for (int ig2 = 0; ig2 < ng2; ig2++)
-        {
-          const int nx1 = _grid1.GetSubGrid(ig1).nx();
-          const int nx2 = _grid2.GetSubGrid(ig2).nx();
-          _dOperator[ig1][ig2].resize(1, nx1);
-          for (int alpha = 0; alpha < nx1; alpha++)
-            _dOperator[ig1][ig2](0, alpha) = matrix<double> {1, (size_t) nx2, NodeOperator[ig1][ig2][alpha]};
-        }
   }
 
   //_________________________________________________________________________
-  std::string DoubleOperator::EmitDoubleOperator() const
+  DoubleOperator::DoubleOperator(std::shared_ptr<const Grid> grid1, std::shared_ptr<const Grid> grid2, double const& eps,
+                                 std::string const& dexprName, std::vector<std::vector<matrix<matrix<double>>>> dOperator):
+    _grid1Owned(grid1),
+    _grid2Owned(grid2),
+    _grid1(*_grid1Owned),
+    _grid2(*_grid2Owned),
+    _eps(eps),
+    _dexprName(dexprName),
+    _dOperator(std::move(dOperator))
   {
-    YAML::Emitter DOTab;
-
-    // Dump DoubleOperator object on a YAML::Emitter object
-    DOTab.SetDoublePrecision(8);
-    DOTab << YAML::BeginMap;
-    DOTab << YAML::Key << "DoubleExpression" << YAML::Value << _dexprName;
-    DOTab << YAML::Key << "Integration accuracy" << YAML::Value << _eps;
-    DOTab << YAML::Key << "FirstGrid";
-    DOTab << YAML::Value << YAML::BeginSeq;
-    for (auto const& sg1 : _grid1.GetSubGrids())
-      DOTab << YAML::Flow << YAML::BeginSeq << sg1.nx() << sg1.xMin() << sg1.InterDegree() << YAML::EndSeq;
-    DOTab << YAML::EndSeq;
-    DOTab << YAML::Key << "SecondGrid";
-    DOTab << YAML::Value << YAML::BeginSeq;
-    for (auto const& sg2 : _grid2.GetSubGrids())
-      DOTab << YAML::Flow << YAML::BeginSeq << sg2.nx() << sg2.xMin() << sg2.InterDegree() << YAML::EndSeq;
-    DOTab << YAML::EndSeq;
-    DOTab << YAML::Key << "DoubleOperator";
-    DOTab << YAML::Value << YAML::Flow << YAML::BeginSeq;
-    for (auto const& og1 : _dOperator)
-      {
-        DOTab << YAML::Flow << YAML::BeginSeq;
-        for (auto const& og2 : og1)
-          {
-            DOTab << YAML::Flow << YAML::BeginSeq;
-            for (auto const& m1 : og2.data())
-              {
-                DOTab << YAML::Flow << YAML::BeginSeq;
-                for (auto const& m2 : m1.data())
-                  DOTab << YAML::Flow << m2;
-                DOTab << YAML::EndSeq;
-              }
-            DOTab << YAML::EndSeq;
-          }
-        DOTab << YAML::EndSeq;
-      }
-    DOTab << YAML::EndSeq;
-    DOTab << YAML::EndMap;
-
-    // Return DoubleOperator as a string
-    return DOTab.c_str();
   }
-#endif
+
+  //_________________________________________________________________________
+  void DoubleOperator::EmitDoubleOperatorBinary(std::ostream& os) const
+  {
+    cereal::PortableBinaryOutputArchive ar(os);
+
+    // Store the grid descriptors (nx, xMin, interpolation degree per
+    // subgrid) so that the consistency of the grids supplied on reload
+    // can be checked.
+    std::vector<std::vector<double>> g1, g2;
+    for (auto const& sg : _grid1.GetSubGrids())
+      g1.push_back({(double) sg.nx(), sg.xMin(), (double) sg.InterDegree()});
+    for (auto const& sg : _grid2.GetSubGrids())
+      g2.push_back({(double) sg.nx(), sg.xMin(), (double) sg.InterDegree()});
+
+    ar(_dexprName, _eps, g1, g2, _dOperator);
+  }
+
+  //_________________________________________________________________________
+  void DoubleOperator::EmitDoubleOperatorBinary(std::string const& filename) const
+  {
+    std::ofstream ofs(filename, std::ios::binary);
+    if (!ofs)
+      throw std::runtime_error(error("DoubleOperator::EmitDoubleOperatorBinary", "Cannot open file '" + filename + "' for writing."));
+    EmitDoubleOperatorBinary(ofs);
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator DoubleOperator::ReadBinary(std::istream& is, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr)
+  {
+    cereal::PortableBinaryInputArchive ar(is);
+
+    std::string dexprName;
+    double eps;
+    std::vector<std::vector<double>> g1, g2;
+    std::vector<std::vector<matrix<matrix<double>>>> dOperator;
+    ar(dexprName, eps, g1, g2, dOperator);
+
+    // Check that the DoubleExpression stored in the stream matches the
+    // input one by comparing the names.
+    if (dexprName != dexpr.GetName())
+      throw std::runtime_error(error("DoubleOperator::ReadBinary", "Input DoubleExpression and DoubleExpression name stored in the stream do not match."));
+
+    // Check that the grids supplied as input are consistent with the
+    // ones the operator was built on. The descriptors are compared
+    // directly (rather than rebuilding a Grid and comparing) because
+    // the Grid constructor adjusts overlapping subgrids in place, so a
+    // rebuild-and-compare would spuriously fail: GetSubGrids() already
+    // returns the post-adjustment descriptors.
+    const auto Descriptors = [] (Grid const& gr) -> std::vector<std::vector<double>>
+    {
+      std::vector<std::vector<double>> d;
+      for (auto const& sg : gr.GetSubGrids())
+        d.push_back({(double) sg.nx(), sg.xMin(), (double) sg.InterDegree()});
+      return d;
+    };
+    if (g1 != Descriptors(gr1) || g2 != Descriptors(gr2))
+      throw std::runtime_error(error("DoubleOperator::ReadBinary", "Input grids and grids stored in the stream do not match."));
+
+    return DoubleOperator{gr1, gr2, eps, dexprName, std::move(dOperator)};
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator DoubleOperator::ReadBinary(std::string const& filename, Grid const& gr1, Grid const& gr2, DoubleExpression const& dexpr)
+  {
+    std::ifstream ifs(filename, std::ios::binary);
+    if (!ifs)
+      throw std::runtime_error(error("DoubleOperator::ReadBinary", "Cannot open file '" + filename + "' for reading."));
+    return ReadBinary(ifs, gr1, gr2, dexpr);
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator DoubleOperator::ReadBinary(std::istream& is)
+  {
+    cereal::PortableBinaryInputArchive ar(is);
+
+    std::string dexprName;
+    double eps;
+    std::vector<std::vector<double>> g1, g2;
+    std::vector<std::vector<matrix<matrix<double>>>> dOperator;
+    ar(dexprName, eps, g1, g2, dOperator);
+
+    // Rebuild both grids from the stored descriptors. These are the
+    // post-locking subgrids, so they are reassembled through the
+    // "Prelocked" Grid constructor, which skips the (non-idempotent)
+    // locking step and reproduces the original grids exactly. The
+    // grids are heap-allocated and shared-owned by the returned object.
+    const auto MakeGrid = [] (std::vector<std::vector<double>> const& d) -> std::shared_ptr<const Grid>
+    {
+      std::vector<SubGrid> sgs;
+      for (auto const& sg : d)
+        sgs.push_back({(int) sg[0], sg[1], (int) sg[2]});
+      return std::make_shared<const Grid>(sgs, Grid::Prelocked{});
+    };
+
+    return DoubleOperator{MakeGrid(g1), MakeGrid(g2), eps, dexprName, std::move(dOperator)};
+  }
+
+  //_________________________________________________________________________
+  DoubleOperator DoubleOperator::ReadBinary(std::string const& filename)
+  {
+    std::ifstream ifs(filename, std::ios::binary);
+    if (!ifs)
+      throw std::runtime_error(error("DoubleOperator::ReadBinary", "Cannot open file '" + filename + "' for reading."));
+    return ReadBinary(ifs);
+  }
 
   //_________________________________________________________________________
   DoubleDistribution DoubleOperator::operator *= (DoubleDistribution const& d) const
